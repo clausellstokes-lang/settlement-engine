@@ -2508,4 +2508,69 @@ describe('reader shape resolver provenance', () => {
     expect(result.findings.filter((finding) => finding.key === '__afterSevenReturns')).toHaveLength(7);
     expect(result.stats.indexedCallSites).toBeGreaterThanOrEqual(43);
   });
+
+  // ── NEGATIVE CONTROLS FOR THE ONE CANONICAL DEPENDENCY-STATE IDENTITY ──────
+  // Both fail if the frame-cell coordinate ever collapses — if two invocations
+  // of one function share a cache entry, each of these unions a second origin
+  // in. They are the counterweight to the identity's whole purpose (memoizing
+  // ACROSS repeat visits at the SAME dependency state), and they are the two
+  // controls the S12-OSR-FP resume order names at step 5.
+
+  test('exact-origin non-crossing: a later invocation never reaches an earlier product', () => {
+    // Mirror of "isolates effects on invocation-owned fresh receivers", read
+    // through the FIRST invocation instead of the second. The allocation is an
+    // empty shell, so both invocations share one base local token and ONLY the
+    // frame cell distinguishes them; a collapsed cell leaks `root/save`
+    // backwards into the earlier product.
+    const result = scan(`
+      function make(value) {
+        const owned = {};
+        owned.holder = value;
+        return owned;
+      }
+      function wrap(value) { return make(value); }
+      export function probe(worldState, save) {
+        const first = wrap(worldState);
+        wrap(save);
+        return first.holder.__exactOriginNonCrossing;
+      }
+    `);
+
+    expect(result.findings
+      .filter(({ key }) => key === '__exactOriginNonCrossing')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__exactOriginNonCrossing', origins: ['root/worldState'] },
+    ]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
+  test('captured-mutable: a closed-over binding keeps each call site its own version', () => {
+    // The captured `latest` is written through a helper, so its writes are
+    // ordered by INVOCATION SITE rather than by lexical position — the version
+    // the second reader sees is a different binding version from the first's.
+    // `read` takes its receiver as a PARAMETER, so the answer also depends on
+    // `resolveParam`, whose approximation is keyed on the raw binding and whose
+    // ONLY execution-context discriminator is the dependency state.
+    const result = scan(`
+      let latest;
+      function stash(value) { latest = value; }
+      function held() { return { carried: latest }; }
+      function read(box) { return box.carried; }
+      export function probe(worldState, save) {
+        stash(worldState);
+        const early = held();
+        stash(save);
+        const late = held();
+        read(early);
+        return read(late).__capturedMutable;
+      }
+    `);
+
+    expect(result.findings
+      .filter(({ key }) => key === '__capturedMutable')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__capturedMutable', origins: ['root/save'] },
+    ]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
 });

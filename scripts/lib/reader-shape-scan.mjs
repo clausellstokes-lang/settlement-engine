@@ -59,6 +59,48 @@
  *   • the builtin-member list below is language surface, not domain data: a
  *     domain key that collides with it (`name`… no; `length`, `map`, `filter`…)
  *     would be skipped. Nothing in the measured corpus collides.
+ *
+ * ── ⭐ THE ONE CANONICAL DEPENDENCY-STATE IDENTITY (the local invariant) ─────
+ * EVERY cached resolver fact — function summaries, binding and key-binding
+ * versions, parameter summaries, heap demands, local records — is keyed by the
+ * SAME three coordinates and by nothing else:
+ *
+ *     DependencyState(subject) = Π  CutoffBand(owner)      over PROJECTED owners
+ *                             × Π  FrameCellRef(param)     over consulted frames
+ *                             × Multiplicity{one, many}
+ *
+ *   1. PROJECTED CUTOFFS. A subject is keyed on the cutoffs of the owners it can
+ *      actually observe — the owners of writes on the free mutable bindings its
+ *      returns transitively read, plus the owners of heap effects on the locals
+ *      it allocates. A helper that observes none of these projects to ⊥ and has
+ *      exactly ONE version instead of one per caller cutoff. FAIL CLOSED: when
+ *      the write census cannot be established (unknown callee, escaping owner,
+ *      allocation, suspension, recursion) the subject projects to the FULL
+ *      cutoff map. That costs performance, never soundness.
+ *   2. FRAME-CELL REFERENCES, NEVER FRAME CONTENTS. A frame is identified by the
+ *      ORIGIN that built it (a call entry, a symbolic summary, a recursive
+ *      argument signature), interned to a small integer. ⚠⚠ NO CACHE KEY MAY
+ *      EMBED MONOTONE APPROXIMATION CONTENTS. Contents grow during the fixed
+ *      point, so a content-keyed frame identity rotates its key on every growth
+ *      and its hit rate collapses on exactly the reads that need it — that
+ *      prototype was built, measured and REJECTED (docs/FABLE_VALIDATION_QUEUE.md
+ *      §S12-OSR-FP, "BOUNDED FRAME-CACHE EXPERIMENT REJECTED"). Growth is handled
+ *      by a VERSION STAMP (`approximationVersion` / `evaluationEpoch`), which is
+ *      what `heapStepStableVersion` already does for heap demands.
+ *   3. MULTIPLICITY. Static call chains are finite and NO-REPEAT; a site that
+ *      recurs in its own lineage closes the subject to `many` rather than growing
+ *      the chain. `repeatsStaticCallChain` / `closeToManyMultiplicity` are the
+ *      ONE home of that law (it previously had three independent spellings).
+ *
+ * The two halves are not separable. Collapsing the cutoff dimension while frames
+ * stay uncached simply moves the product: the second rejected prototype cut
+ * function summaries 543 → 13 and drove binding starts 9,385 → 221,472.
+ *
+ * WHAT THIS BUYS. The pathological cost of this resolver is RECOMPUTATION
+ * WITHOUT GROWTH — re-deriving a state that is no longer growing. The three
+ * abstract-state budgets all count GROWTH (tokens, token length, growth steps)
+ * and are therefore blind to it. `stats.maxReadRecomputeWithoutGrowth` is the
+ * advisory meter for that cost. It never fails a read.
  */
 import { createHash } from 'node:crypto';
 import ts from 'typescript';
@@ -2387,6 +2429,21 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       diagnostics.maxReadStateGrowth || 0,
       budget.stateGrowth,
     );
+    // ADVISORY. The budgets above all meter GROWTH; the pathological cost of
+    // this resolver is re-derivation of a state that is NOT growing, which none
+    // of them can see. These three are observability only and never fail a read.
+    diagnostics.maxReadRecomputations = Math.max(
+      diagnostics.maxReadRecomputations || 0,
+      budget.recomputations,
+    );
+    diagnostics.maxReadRecomputeWithoutGrowth = Math.max(
+      diagnostics.maxReadRecomputeWithoutGrowth || 0,
+      budget.recomputationsWithoutGrowth,
+    );
+    diagnostics.maxReadDependencyStateHits = Math.max(
+      diagnostics.maxReadDependencyStateHits || 0,
+      budget.dependencyStateHits,
+    );
   };
 
   const arrays = graph.arrays || {};
@@ -2410,6 +2467,149 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     next.set(flowContextId(context), context);
     return next;
   };
+
+  // ── COORDINATE 1: THE CUTOFF BAND ──────────────────────────────────────────
+  // `activeCutoffs` is replaced wholesale (`withAddedCutoff` allocates a new
+  // Map), never mutated, so one signature per map identity is exact. Interning
+  // it to an integer keeps the long JSON out of every downstream composite key.
+  const cutoffStateCache = new WeakMap();
+  const cutoffStateIds = new Map();
+  const activeCutoffState = () => {
+    let state = cutoffStateCache.get(activeCutoffs);
+    if (!state) {
+      const signature = cutoffSignatureOf(activeCutoffs);
+      let id = cutoffStateIds.get(signature);
+      if (id == null) { id = cutoffStateIds.size + 1; cutoffStateIds.set(signature, id); }
+      state = { signature, id };
+      cutoffStateCache.set(activeCutoffs, state);
+    }
+    return state;
+  };
+  const activeCutoffSignature = () => activeCutoffState().signature;
+
+  // ── COORDINATE 2: THE FRAME CELL REFERENCE ─────────────────────────────────
+  // A frame is identified by the ORIGIN THAT BUILT IT, never by what it holds.
+  // See the file header: a contents-keyed frame identity was measured and
+  // rejected because monotone growth rotated every key.
+  const frameCellIds = new Map();
+  const frameCellOf = new WeakMap();
+  let privateFrameCells = 0;
+  const internFrameCell = (origin) => {
+    let id = frameCellIds.get(origin);
+    if (id == null) { id = frameCellIds.size + 1; frameCellIds.set(origin, id); }
+    return id;
+  };
+  const frameCellRefOf = (frame) => {
+    if (!frame) return 0;
+    let ref = frameCellOf.get(frame);
+    if (ref == null) {
+      // FAIL CLOSED. An unclassified frame receives a PRIVATE cell that no other
+      // frame can ever match, so it degrades to the previous recompute-always
+      // behaviour rather than silently sharing one invocation's parameters.
+      privateFrameCells += 1;
+      ref = -privateFrameCells;
+      frameCellOf.set(frame, ref);
+    }
+    return ref;
+  };
+  /** Declare a frame's origin before it is installed. Idempotent. */
+  const framedBy = (frame, origin) => {
+    if (frame && !frameCellOf.has(frame)) frameCellOf.set(frame, internFrameCell(origin));
+    return frame;
+  };
+  /** A clone shares its source's cell: two snapshots of one origin can differ
+   *  only by monotone growth, which the epoch/version stamp already covers. */
+  const framedLike = (clone, source) => {
+    if (clone) frameCellOf.set(clone, frameCellRefOf(source));
+    return clone;
+  };
+  const frameStateIds = new Map();
+  const frameStateId = () => {
+    if (!sentinelFrames.size) return 0;
+    const rows = [];
+    for (const [fn, frame] of sentinelFrames) {
+      rows.push(`${functionContextId(fn)}#${frameCellRefOf(frame)}`);
+    }
+    rows.sort();
+    const signature = rows.join('|');
+    let id = frameStateIds.get(signature);
+    if (id == null) { id = frameStateIds.size + 1; frameStateIds.set(signature, id); }
+    return id;
+  };
+
+  // ── THE COMPOSITE, AND THE PER-EPOCH VISIT GATE ────────────────────────────
+  // This gate REPLACES the four `cacheable = sentinelFrames.size === 0` cache
+  // disables. Those refused to memoize whenever ANY frame was installed —
+  // because the frames had no identity, a memo hit would have suppressed a
+  // different invocation's contribution to the monotone union. With an identity
+  // the memo is exact per dependency state, and identical when no frame is
+  // installed (`frameStateId()` is 0, so the composite is the cutoff state).
+  const dependencyStateIds = new Map();
+  const dependencyStateId = () => {
+    const signature = `${frameStateId()}:${activeCutoffState().id}`;
+    let id = dependencyStateIds.get(signature);
+    if (id == null) { id = dependencyStateIds.size + 1; dependencyStateIds.set(signature, id); }
+    return id;
+  };
+  /** @returns true when this (subject, dependency state) pair was already
+   *  evaluated in the current epoch, so the caller may serve its approximation. */
+  const dependencyStateSeen = (store, subject) => {
+    const state = dependencyStateId();
+    let cell = store.get(subject);
+    if (!cell || cell.epoch !== evaluationEpoch) {
+      cell = { epoch: evaluationEpoch, states: new Set() };
+      store.set(subject, cell);
+    }
+    if (cell.states.has(state)) {
+      if (currentReadBudget) currentReadBudget.dependencyStateHits += 1;
+      return true;
+    }
+    cell.states.add(state);
+    return false;
+  };
+  /** ADVISORY ONLY. Counts evaluations that produced no growth — the cost class
+   *  the three abstract-state budgets are structurally blind to. Never throws.
+   *  `beginRecomputation` returns an opaque token for `endRecomputation`. */
+  const beginRecomputation = () => {
+    if (!currentReadBudget) return -1;
+    currentReadBudget.recomputations += 1;
+    return approximationVersion;
+  };
+  const endRecomputation = (token) => {
+    if (token < 0 || !currentReadBudget) return;
+    if (approximationVersion === token) {
+      currentReadBudget.recomputationsWithoutGrowth += 1;
+    }
+  };
+  const meterRecomputation = (evaluate) => {
+    const token = beginRecomputation();
+    try {
+      return evaluate();
+    } finally {
+      endRecomputation(token);
+    }
+  };
+
+  // ── COORDINATE 3: MULTIPLICITY — THE ONE HOME OF THE NO-REPEAT LAW ─────────
+  // A static call chain is FINITE and NO-REPEAT: the first time a site recurs in
+  // its own lineage the chain stops growing and the subject closes to `many`.
+  // Three call sites used to spell this independently; each now asks these two
+  // helpers, so the law has exactly one home.
+  /** @returns true when `identity` REPEATS the chain (close to many) rather than
+   *  extending it. */
+  const repeatsStaticCallChain = (chain, identity) => {
+    for (const seen of chain) if (seen === identity) return true;
+    return false;
+  };
+  /** Close a local record to multiplicity `many`. Idempotent; the growth note is
+   *  what lets the version stamp invalidate every fact keyed on this subject. */
+  const closeToManyMultiplicity = (record, token, reason) => {
+    if (!record || record.multiplicity === 'many') return false;
+    record.multiplicity = 'many';
+    noteApproximationGrowth(new Set([token]), reason);
+    return true;
+  };
+
   const strongerExecution = (left, right) => {
     if (left === 'definite' || right === 'definite') return 'definite';
     if (left === 'maybe' || right === 'maybe') return 'maybe';
@@ -2423,7 +2623,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   const invocationEventsBefore = (fn, seen = new Set()) => {
     if (!fn || seen.has(fn)) return [];
     const cacheable = seen.size === 0;
-    const signature = cutoffSignatureOf();
+    const signature = activeCutoffSignature();
     let versions = invocationEventCache.get(fn);
     if (cacheable && versions?.has(signature)) return versions.get(signature);
     const nextSeen = new Set(seen).add(fn);
@@ -2733,7 +2933,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     }
     return id;
   };
-  const localContextId = () => internLocalContext(cutoffSignatureOf());
+  const localContextId = () => internLocalContext(activeCutoffSignature());
   const ownerLocalContextId = (node, file) => {
     const ownerId = flowContextId({ file, owner: flowOwnerOf(node) });
     const ownerCutoff = activeCutoffs.get(ownerId);
@@ -2994,7 +3194,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         const fn = entry.target?.fn;
         if (!fn) continue;
         priorFrames.push([fn, sentinelFrames.get(fn)]);
-        sentinelFrames.set(fn, entry.frame || invocationFrameFor({
+        // Frame cell origin: this view entry's call site (never its contents).
+        sentinelFrames.set(fn, framedBy(entry.frame || invocationFrameFor({
           fn,
           callSite: {
             file: entry.file,
@@ -3002,7 +3203,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
             call: entry.call,
             awaited: false,
           },
-        }, 0));
+        }, 0), `view:${functionContextId(fn)}:${entry.file}:${entry.call.pos}:${entry.call.end}`));
       }
       return evaluate();
     } finally {
@@ -3272,7 +3473,11 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     // invocations (`pass(pass(x))`) without allowing recursion to grow context
     // forever. Re-entering a site preserves the producer identity, so the
     // repeated Product in its unary lineage closes to Plus.
-    if (callString.includes(invocationId)) return source;
+    // MULTIPLICITY-LAW CALL SITE 1 of 3 (array producers). Pinned by
+    // readerShapeResolver.test.js "closes direct and mutually recursive
+    // array-literal producers" and "keeps distinct helper call sites exact and
+    // closes reuse at one recursive call site".
+    if (repeatsStaticCallChain(callString, invocationId)) return source;
     return {
       ...source,
       id: `${source.id}@${invocationId}`,
@@ -3998,7 +4203,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     const demand = JSON.stringify([
       targetIdentity,
       demandedKey,
-      cutoffSignatureOf(),
+      activeCutoffSignature(),
       activeHeapEffectDiagnostic,
       effectCallSignature,
     ]);
@@ -4380,7 +4585,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         [...sources.values()].some((fieldSource) => fieldSource.kind === 'getter')
       ));
       const demand = `${token}|${includeValues ? 'p' : 'r'}:${encodeURIComponent(key)}`
-        + (hasGetter ? `@cutoff:${sha256(cutoffSignatureOf())}` : '');
+        + (hasGetter ? `@cutoff:${sha256(activeCutoffSignature())}` : '');
       const cached = includeValues
         ? localPropertyFacetCache.get(demand)
         : localRecordFacetCache.get(demand);
@@ -5455,8 +5660,146 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   const functionContextId = (fn) => (
     `${fn.getSourceFile().fileName}:${fn.pos}:${fn.end}`
   );
+
+  // ── COORDINATE 1, GENERALIZED: Relevant(fn) ────────────────────────────────
+  // `functionVersionOf` used to key EVERY function summary on the RAW COMPLETE
+  // caller cutoff map, so a helper that cannot observe a single caller cutoff
+  // still got one summary per caller — `listOf(value)` alone rebuilt 355 return
+  // summaries on the live estate (docs/FABLE_VALIDATION_QUEUE.md §S12-OSR-FP).
+  // A summary is now keyed on the PROJECTION of that map onto the owners the
+  // function can actually observe. FAIL CLOSED in the strongest sense: the
+  // projection is `null` (= today's full map) unless the whole transitive callee
+  // closure is PROVEN unable to consult any caller cutoff.
+  //
+  // What the proof admits, and why each exclusion is load-bearing:
+  //   • allocations (object/array literals, `new`, spreads) — a local record's
+  //     token identity is `:c<id>`, an intern of the FULL cutoff signature, so a
+  //     shared summary would hand one caller a token minted in another's context;
+  //   • `this`, `await`, `yield`, generators, recursion, escaped functions —
+  //     each reaches a cutoff-sensitive path the closure walk cannot bound;
+  //   • FREE BINDING READS, except the provably cutoff-free shape below —
+  //     reading a free binding resolves its initializer and every visible write,
+  //     which is arbitrary code (and can reach a getter, whose body is resolved
+  //     under its own cutoffs). ⚠ DEFERRED, NOT OVERLOOKED: the ruling's fuller
+  //     projection admits a free MUTABLE binding by adding its write owners (and
+  //     those owners' call-site owners, transitively) to the set. That widening
+  //     is sound only with a bound on the initializer resolution it drags in;
+  //     it is recorded here rather than guessed at.
+  // A nested closure is not a failure — it is analysed as its own closure member,
+  // where the enclosing function's locals correctly read as free bindings.
+  const CUTOFF_FREE_LITERAL_KINDS = new Set([
+    ts.SyntaxKind.StringLiteral,
+    ts.SyntaxKind.NumericLiteral,
+    ts.SyntaxKind.BigIntLiteral,
+    ts.SyntaxKind.TrueKeyword,
+    ts.SyntaxKind.FalseKeyword,
+    ts.SyntaxKind.NullKeyword,
+    ts.SyntaxKind.NoSubstitutionTemplateLiteral,
+    ts.SyntaxKind.RegularExpressionLiteral,
+  ]);
+  const resolvesWithoutCutoffs = (expression) => {
+    const node = expression ? unwrap(expression) : null;
+    if (!node) return false;
+    if (CUTOFF_FREE_LITERAL_KINDS.has(node.kind)) return true;
+    if (ts.isPrefixUnaryExpression(node)) return resolvesWithoutCutoffs(node.operand);
+    if (ts.isBinaryExpression(node)) {
+      return resolvesWithoutCutoffs(node.left) && resolvesWithoutCutoffs(node.right);
+    }
+    return false;
+  };
+  const admitProjectedBinding = (binding, owner, out) => {
+    // Declared inside the function under analysis: `cutoffForWrite` answers such
+    // a write from the read's OWN lexical context and never consults the map.
+    if (binding.fn === owner || binding.declarationOwner === owner) return true;
+    if ((binding.writes || []).length) return false;
+    if (binding.k !== 'expr' || !binding.node) return false;
+    if (binding.projection?.length || binding.fallbacks?.length
+      || binding.additionalInitializers?.length) return false;
+    if (!resolvesWithoutCutoffs(binding.node)) return false;
+    // Its visibility (`initialVisible`) still consults the declaring owner's
+    // band, so that ONE owner joins the projection.
+    if (binding.definitionSite) out.add(flowContextId(binding.definitionSite));
+    return true;
+  };
+  const projectableClosureMember = (owner, out, queue, seen) => {
+    if (idx.recursiveComponentOf.get(owner) || idx.recursiveContextFunctions.has(owner)
+      || idx.escapedFunctions.has(owner)
+      || isAsyncFunction(owner) || isGeneratorFunction(owner)) return false;
+    let ok = true;
+    const visit = (node) => {
+      if (!ok) return;
+      if (ts.isFunctionLike(node)) {
+        // Analysed as its own closure member; do not descend here.
+        if (!seen.has(node)) { seen.add(node); queue.push(node); }
+        return;
+      }
+      if (node.kind === ts.SyntaxKind.ThisKeyword
+        || node.kind === ts.SyntaxKind.SuperKeyword
+        || ts.isObjectLiteralExpression(node) || ts.isArrayLiteralExpression(node)
+        || ts.isNewExpression(node) || ts.isSpreadElement(node)
+        || ts.isSpreadAssignment(node) || ts.isAwaitExpression(node)
+        || ts.isYieldExpression(node) || ts.isTaggedTemplateExpression(node)
+        || ts.isClassLike(node)) { ok = false; return; }
+      if (ts.isCallExpression(node)) {
+        const target = idx.functionOf(unwrap(node.expression));
+        // An unresolvable callee returns EMPTY without consulting a cutoff.
+        if (target?.fn && !seen.has(target.fn)) { seen.add(target.fn); queue.push(target.fn); }
+      }
+      if (ts.isIdentifier(node)) {
+        // An identifier with no binding (an import, an intrinsic global) resolves
+        // to EMPTY without consulting a cutoff.
+        const binding = idx.bindingOf(node);
+        if (binding && !admitProjectedBinding(binding, owner, out)) { ok = false; return; }
+      }
+      ts.forEachChild(node, visit);
+    };
+    ts.forEachChild(owner, visit);
+    return ok;
+  };
+  const cutoffProjectionCache = new Map();
+  const cutoffProjectionVisiting = new Set();
+  /** @returns {Set<string>|null} the owner ids whose cutoff bands `fn` can
+   *  observe, or `null` for UNPROVEN — project to the FULL map. An empty set is
+   *  ⊥: the summary is cutoff-independent and has exactly ONE version. */
+  const relevantCutoffProjection = (fn) => {
+    if (cutoffProjectionCache.has(fn)) return cutoffProjectionCache.get(fn);
+    if (cutoffProjectionVisiting.has(fn)) return null;
+    cutoffProjectionVisiting.add(fn);
+    let projection = new Set();
+    try {
+      const seen = new Set([fn]);
+      const queue = [fn];
+      while (queue.length) {
+        if (!projectableClosureMember(queue.shift(), projection, queue, seen)) {
+          projection = null;
+          break;
+        }
+      }
+    } finally {
+      cutoffProjectionVisiting.delete(fn);
+    }
+    cutoffProjectionCache.set(fn, projection);
+    return projection;
+  };
+  const projectedCutoffSignature = (projection) => {
+    if (!projection) return activeCutoffSignature();
+    if (!projection.size) return '[]';
+    const projected = new Map();
+    for (const id of projection) {
+      const context = activeCutoffs.get(id);
+      if (context) projected.set(id, context);
+    }
+    return projected.size ? cutoffSignatureOf(projected) : '[]';
+  };
   const functionVersionOf = (fn) => {
-    const signature = cutoffSignatureOf();
+    const projection = relevantCutoffProjection(fn);
+    // Observability for the projection itself: how much of the estate proved
+    // cutoff-independent, and how much fell back to the full map.
+    bump(
+      projection ? 'cutoffProjectedFunctions' : 'fullCutoffFunctions',
+      functionContextId(fn),
+    );
+    const signature = projectedCutoffSignature(projection);
     let versions = functionVersionIntern.get(fn);
     if (!versions) { versions = new Map(); functionVersionIntern.set(fn, versions); }
     let version = versions.get(signature);
@@ -5723,7 +6066,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     try {
       for (const entry of effect.executionCallChain || []) {
         priorFrames.push([entry.fn, sentinelFrames.get(entry.fn)]);
-        sentinelFrames.set(entry.fn, entry.frame || invocationFrameFor(entry, depth + 1));
+        // Frame cell origin: the concrete call entry this effect executes under.
+        // A pre-built `entry.frame` already carries the cell it was cloned from.
+        sentinelFrames.set(entry.fn, framedBy(
+          entry.frame || invocationFrameFor(entry, depth + 1),
+          `effect:${functionContextId(entry.fn)}:${entry.callSite.file}`
+            + `:${entry.callSite.call.pos}:${entry.callSite.call.end}`,
+        ));
       }
       return evaluate();
     } finally {
@@ -5749,7 +6098,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         || left.file.localeCompare(right.file)
         || (left.site?.pos ?? 0) - (right.site?.pos ?? 0)
       ));
-    const cutoffSignature = cutoffSignatureOf();
+    const cutoffSignature = activeCutoffSignature();
     const signature = JSON.stringify([
       cutoffSignature,
       initialVisible,
@@ -5833,7 +6182,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         ]);
       }
       bindings.sort(([a], [b]) => a.localeCompare(b));
-      frames.set(fn, cloned);
+      // The snapshot inherits its source's frame cell: two captures of one
+      // origin can differ only by monotone growth. (This `key` deliberately
+      // still carries frame CONTENTS — it is a field-source REGISTRATION key,
+      // not a cache key: collapsing it to the cell reference would let the
+      // first, least-saturated snapshot win and drop a later one. Recorded as a
+      // deliberate deferral, not an oversight.)
+      frames.set(fn, framedLike(cloned, frame));
       frameRows.push([functionContextId(fn), bindings]);
     }
     frameRows.sort(([a], [b]) => a.localeCompare(b));
@@ -5891,7 +6246,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     const hasGetter = [...(sources?.values() || [])]
       .some((source) => source.kind === 'getter');
     const cutoffSuffix = hasGetter
-      ? `@getter:${sha256(cutoffSignatureOf())}`
+      ? `@getter:${sha256(activeCutoffSignature())}`
       : '';
     const receiverSuffix = hasGetter && receiverTokens.size
       ? `@this:${sha256([...receiverTokens].sort().join('|'))}`
@@ -5942,7 +6297,14 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
                 objects: receiverTokens,
                 keys: new Set([KEY_UNKNOWN]),
               });
-              sentinelFrames.set(source.node, getterFrame);
+              // Frame cell origin: the getter's own demand identity (which
+              // already carries the receiver and cutoff suffixes), composed with
+              // the cell of the frame it overlays. No new contents enter the key.
+              sentinelFrames.set(source.node, framedBy(
+                getterFrame,
+                `getter:${functionContextId(source.node)}`
+                  + `:${frameCellRefOf(priorFrame)}:${demandId}`,
+              ));
               try {
                 const returned = returnsOf(source.node, source.file, 0);
                 return returned;
@@ -6271,16 +6633,16 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       );
       return prior;
     }
-    const cacheable = sentinelFrames.size === 0;
-    if (cacheable && keyBindingEpoch.get(version) === evaluationEpoch) return prior;
-    if (cacheable) keyBindingEpoch.set(version, evaluationEpoch);
+    // One canonical dependency state (frame cells × cutoff band) replaces the
+    // former `sentinelFrames.size === 0` cache disable. See the file header.
+    if (dependencyStateSeen(keyBindingEpoch, version)) return prior;
     keyBindingsEvaluating.add(version);
     try {
-      return mergeApproximation(
+      return meterRecomputation(() => mergeApproximation(
         keyBindingApprox,
         version,
         computeKeyBinding(version, depth + 1),
-      );
+      ));
     } finally {
       keyBindingsEvaluating.delete(version);
     }
@@ -6406,12 +6768,14 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       );
       return prior;
     }
-    const cacheable = sentinelFrames.size === 0;
-    if (cacheable && bindingEpoch.get(version) === evaluationEpoch) return prior;
-    if (cacheable) bindingEpoch.set(version, evaluationEpoch);
+    // One canonical dependency state (frame cells × cutoff band) replaces the
+    // former `sentinelFrames.size === 0` cache disable. See the file header.
+    if (dependencyStateSeen(bindingEpoch, version)) return prior;
     bindingsEvaluating.add(version);
     try {
-      return mergeApproximation(bindingApprox, version, computeBinding(version, depth + 1));
+      return meterRecomputation(
+        () => mergeApproximation(bindingApprox, version, computeBinding(version, depth + 1)),
+      );
     } finally {
       bindingsEvaluating.delete(version);
     }
@@ -6719,16 +7083,18 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         target?.fn && existingCalls.length
         && nestedCallOwnsInvocationAllocation(existingCalls.at(-1), target.fn),
       );
+      // MULTIPLICITY-LAW CALL SITE 2 of 3 (invocation-owned allocations). Pinned
+      // by readerShapeResolver.test.js "keeps distinct helper call sites exact
+      // and closes reuse at one recursive call site" and "qualifies
+      // invocation-owned allocations without splitting captured singletons".
       const repeatsStaticCall = extendsNestedAllocation
-        && existingCalls.some((entry) => entry.call === call);
+        && repeatsStaticCallChain(existingCalls.map((entry) => entry.call), call);
       if (repeatsStaticCall) {
-        if (local.multiplicity !== 'many') {
-          local.multiplicity = 'many';
-          noteApproximationGrowth(
-            new Set([token]),
-            'closing a recursive call-qualified allocation',
-          );
-        }
+        closeToManyMultiplicity(
+          local,
+          token,
+          'closing a recursive call-qualified allocation',
+        );
         return new Set([token]);
       }
       // A direct allocation is qualified by the callee invocation that creates
@@ -6994,11 +7360,14 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     return out.size ? out : new Set([KEY_UNKNOWN]);
   }
 
-  const cloneInvocationFrame = (frame) => new Map(
-    [...frame].map(([binding, value]) => [binding, {
-      objects: new Set(value.objects || EMPTY),
-      keys: new Set(value.keys || EMPTY),
-    }]),
+  const cloneInvocationFrame = (frame) => framedLike(
+    new Map(
+      [...frame].map(([binding, value]) => [binding, {
+        objects: new Set(value.objects || EMPTY),
+        keys: new Set(value.keys || EMPTY),
+      }]),
+    ),
+    frame,
   );
   const callIsInsideRecursiveComponent = (fn, call) => {
     const caller = flowOwnerOf(call);
@@ -7028,15 +7397,19 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       frameKey,
       recursiveFrame: callIsInsideRecursiveComponent(target.fn, call),
     };
-    const seenCalls = new Set([call]);
+    const seenCalls = [call];
     const outerEntries = [];
     // Execution chains are outer-to-inner; local views are allocation-first.
     // Retain the exact nonrecursive caller suffix while closing repeated SCC
     // edges as multiplicity-many rather than growing an infinite call string.
+    // MULTIPLICITY-LAW CALL SITE 3 of 3 (recursive return qualification). Pinned
+    // by readerShapeResolver.test.js "persists recursive clone frames without
+    // splitting stored products" and "keeps raw recursive-clone effects in the
+    // active allocation invocation".
     for (const execution of [...activeEffectCallChain].reverse()) {
       const entry = recursiveCallEntry(execution.fn, execution.callSite);
-      if (seenCalls.has(entry.call)) continue;
-      seenCalls.add(entry.call);
+      if (repeatsStaticCallChain(seenCalls, entry.call)) continue;
+      seenCalls.push(entry.call);
       outerEntries.push(entry);
     }
     for (const token of tokens) {
@@ -7126,7 +7499,10 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         }
       }
     });
-    const signature = `${cutoffSignatureOf()}|${signatureParts.join('|')}`;
+    const signature = `${activeCutoffSignature()}|${signatureParts.join('|')}`;
+    // Frame cell origin: the recursive-call signature that already keys this
+    // summary. Reusing it introduces no key rotation the memo does not have.
+    framedBy(frame, `recursive:${functionContextId(target.fn)}:${sha256(signature)}`);
     const qualify = (tokens) => qualifyRecursiveCallReturns(
       tokens, target, call, file, frame, signature,
     );
@@ -7235,7 +7611,12 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       delay: suspensionRangeAt(callSite.call),
       resume: suspensionRangeAt(callSite.call, 'yield'),
     };
-    sentinelFrames.set(fn, invocationFrameFor({ fn, callSite }, depth + 1));
+    // Frame cell origin: the generator resume's own call site and resume range.
+    sentinelFrames.set(fn, framedBy(
+      invocationFrameFor({ fn, callSite }, depth + 1),
+      `resume:${functionContextId(fn)}:${callSite.file}:${callSite.call.pos}`
+        + `:${callSite.call.end}:${invokedRange.min}:${invokedRange.max}`,
+    ));
     currentReadContext = {
       file: operation.file,
       pos: operation.pos,
@@ -7533,12 +7914,14 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
           }
         }
       });
-      sentinelFrames.set(fn, sentinels);
-      return mergeApproximation(
+      // Frame cell origin: the symbolic summary frame is fully determined by the
+      // function's own parameter syntax, so one cell serves every caller.
+      sentinelFrames.set(fn, framedBy(sentinels, `symbolic:${functionContextId(fn)}`));
+      return meterRecomputation(() => mergeApproximation(
         functionApprox,
         version,
         returnsOf(fn, file, depth),
-      );
+      ));
     } finally {
       functionsEvaluating.delete(version);
       if (priorFrame) sentinelFrames.set(fn, priorFrame);
@@ -7576,10 +7959,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   function resolveParam(binding, depth) {
     const prior = paramApprox.get(binding) || EMPTY;
     if (paramsEvaluating.has(binding)) return prior;
-    const cacheable = sentinelFrames.size === 0;
-    if (cacheable && paramEpoch.get(binding) === evaluationEpoch) return prior;
-    if (cacheable) paramEpoch.set(binding, evaluationEpoch);
+    // One canonical dependency state (frame cells × cutoff band) replaces the
+    // former `sentinelFrames.size === 0` cache disable. The cutoff coordinate
+    // matters here: `paramApprox` is keyed on the raw binding, so the cutoff
+    // band is this memo's ONLY execution-context discriminator.
+    if (dependencyStateSeen(paramEpoch, binding)) return prior;
     paramsEvaluating.add(binding);
+    const recomputation = beginRecomputation();
     const sites = idx.callSites.get(binding.fn) || [];
     let out = prior;
     try {
@@ -7653,6 +8039,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       }
       return mergeApproximation(paramApprox, binding, out);
     } finally {
+      endRecomputation(recomputation);
       paramsEvaluating.delete(binding);
     }
   }
@@ -7660,10 +8047,11 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   function resolveParamKey(binding, depth) {
     const prior = keyParamApprox.get(binding) || EMPTY;
     if (keyParamsEvaluating.has(binding)) return prior;
-    const cacheable = sentinelFrames.size === 0;
-    if (cacheable && keyParamEpoch.get(binding) === evaluationEpoch) return prior;
-    if (cacheable) keyParamEpoch.set(binding, evaluationEpoch);
+    // One canonical dependency state (frame cells × cutoff band) replaces the
+    // former `sentinelFrames.size === 0` cache disable. See `resolveParam`.
+    if (dependencyStateSeen(keyParamEpoch, binding)) return prior;
     keyParamsEvaluating.add(binding);
+    const recomputation = beginRecomputation();
     const sites = idx.callSites.get(binding.fn) || [];
     let out = prior;
     try {
@@ -7702,6 +8090,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       if (!out.size) out = new Set([KEY_UNKNOWN]);
       return mergeApproximation(keyParamApprox, binding, out);
     } finally {
+      endRecomputation(recomputation);
       keyParamsEvaluating.delete(binding);
     }
   }
@@ -7747,6 +8136,10 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       maxTokenLength: 0,
       stateGrowth: 0,
       sawMutableBindingScc: false,
+      // ADVISORY meters (never a failure mode) — see the file header.
+      recomputations: 0,
+      recomputationsWithoutGrowth: 0,
+      dependencyStateHits: 0,
     };
     currentReadContext = {
       file,
