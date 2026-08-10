@@ -75,8 +75,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(194);
-    expect(plan.pendingCount).toBe(73);
+    expect(plan.repoHead).toBe(195);
+    expect(plan.pendingCount).toBe(74);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -91,17 +91,18 @@ describe('bounded migration rehearsal plan', () => {
       [191, 192],
       [193, 193],
       [194, 194],
+      [195, 195],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 73 }, (_, index) => 122 + index),
+      Array.from({ length: 74 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
-    expect(plan.waves.at(-3)).toMatchObject({
+    expect(plan.waves.at(-4)).toMatchObject({
       id: 'surveyor-probe-and-tier-price',
       from: 191,
       to: 192,
@@ -113,7 +114,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'spend_credits',
       }],
     });
-    expect(plan.waves.at(-2)).toMatchObject({
+    expect(plan.waves.at(-3)).toMatchObject({
       id: 'bilateral-user-route-command',
       from: 193,
       to: 193,
@@ -125,7 +126,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'assert_create_route_half',
       }],
     });
-    expect(plan.waves.at(-1)).toMatchObject({
+    expect(plan.waves.at(-2)).toMatchObject({
       id: 'operator-messages-consent-and-courier',
       from: 194,
       to: 194,
@@ -147,6 +148,24 @@ describe('bounded migration rehearsal plan', () => {
       }, {
         kind: 'function',
         name: 'list_my_operator_messages',
+      }],
+    });
+    expect(plan.waves.at(-1)).toMatchObject({
+      id: 'civility-guard-and-public-identity',
+      from: 195,
+      to: 195,
+      expectedObjects: [{
+        kind: 'table',
+        name: 'public.civility_terms',
+      }, {
+        kind: 'table',
+        name: 'public.civility_allow',
+      }, {
+        kind: 'function',
+        name: 'civility_normalize',
+      }, {
+        kind: 'function',
+        name: 'civility_blocked',
       }],
     });
   });
@@ -197,6 +216,20 @@ describe('bounded migration rehearsal plan', () => {
     expect(reviewedSupplyChainPersistence.rollback.note).toMatch(
       /reviewed revisions.*durable evidence/i,
     );
+
+    // ⭐ 195 is the FIRST migration inside the train to resolve through a DOWN SCRIPT
+    // rather than through an annotation or the wave policy, so that branch of
+    // classifyRollback is pinned here instead of being carried as an untested arm.
+    // Delete supabase/rollback/195_*.down.sql and this reds, next to the rollback
+    // discipline walker that owns the same fact from the other side.
+    const civilityGuard = plan.waves
+      .flatMap((wave) => wave.migrations)
+      .find((migration) => migration.number === 195);
+    expect(civilityGuard.rollback).toMatchObject({
+      mode: 'data-safe-down-script',
+      source: 'down-script',
+      path: 'supabase/rollback/195_civility_guard_and_public_identity.down.sql',
+    });
   });
 
   it('uses only expected objects touched inside each bounded wave', () => {
@@ -224,8 +257,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 194,
-      migrationCount: 194,
+      repoHead: 195,
+      migrationCount: 195,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -343,7 +376,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: MIGRATION_TRAIN_BASE_HEAD,
-      repoHead: 194,
+      repoHead: 195,
     });
   });
 });

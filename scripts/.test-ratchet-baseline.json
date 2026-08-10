@@ -4,14 +4,7 @@
   "totalTests": 27292,
   "totalFiles": 2350,
   "skippedCeiling": 105,
-  "uncollectedSuites": {
-    "tests/ops/migrationRehearsal.test.js": {
-      "subsystem": "migrations / rehearsal wave train (OWNER-GATED)",
-      "cause": "OWNER-GATED migration debt, and a COLLECTION failure: the module throws at import time — \"The wave manifest ends at 194, but the repository head is 195. Extend and review the final bounded wave.\" MIGRATION_TRAIN_REPO_HEAD is 194 in scripts/ops/migrationRehearsalCore.mjs while migration 195 has landed, so the whole suite collects ZERO tests. Extending the wave train is an owner-gated migration act — do NOT repair this in a build lane.",
-      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
-      "class": "owner-gated"
-    }
-  },
+  "uncollectedSuites": {},
   "entries": {
     "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
       "file": "tests/copy/voiceMechanics.test.js",
@@ -53,14 +46,6 @@
       "introducedAt": "531a84887b81177cbb493463541de46864cb554f",
       "class": "debt"
     },
-    "tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file": {
-      "file": "tests/docs/deployRunbookFreshness.test.js",
-      "test": "DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file",
-      "subsystem": "migrations / deploy runbook (OWNER-GATED)",
-      "cause": "OWNER-GATED migration debt. ⭐ THE CURE LANDED 2026-08-10 and this test now PASSES: docs/DEPLOY.md names 195_civility_guard_and_public_identity.sql as the head. The row is deliberately LEFT IN PLACE, so the runner reports it as a RATCHET DOWN win, never as an unattributed regression. It is NOT removed because the pin '⚠ the three migration reds are marked OWNER-GATED' (tests/lint/testRatchet.test.js) asserts at least one owner-gated row survives in `entries`, and rewriting that pin to accept zero is the exact act it exists to prevent. Retire this row together with its migrationRollbackDiscipline twin and their two WALKER_ROWS_OWED entries, dropping OWED_CEILING 13 → 11 in the same change, once the owner clears it.",
-      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
-      "class": "owner-gated"
-    },
     "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
       "file": "tests/docs/enforcement-claims.test.js",
       "test": "enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target",
@@ -68,14 +53,6 @@
       "cause": "A completeness claim in docs/FABLE_VALIDATION_QUEUE.md:179 (the R-BLD-10 chair ruling row) carries no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds.",
       "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
       "class": "debt"
-    },
-    "tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note": {
-      "file": "tests/docs/migrationRollbackDiscipline.test.js",
-      "test": "migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note",
-      "subsystem": "migrations / rollback discipline (OWNER-GATED)",
-      "cause": "OWNER-GATED migration debt. ⭐ THE CURE LANDED 2026-08-10 and this test now PASSES: 195 ships supabase/rollback/195_civility_guard_and_public_identity.down.sql AND an inline `-- @rollback:` note. (The old cause claimed 'the whole tree carries ZERO .down.sql beside the migrations' — that was WRONG when written: 087, 097, 103, 107 and 108 all had one.) The row is deliberately LEFT IN PLACE so the runner reports a RATCHET DOWN win, never an unattributed regression. It is NOT removed because the pin '⚠ the three migration reds are marked OWNER-GATED' (tests/lint/testRatchet.test.js) asserts at least one owner-gated row survives in `entries`. Retire it with its deployRunbookFreshness twin and both WALKER_ROWS_OWED entries, dropping OWED_CEILING 13 → 11, once the owner clears it.",
-      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
-      "class": "owner-gated"
     },
     "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
       "file": "tests/domain/metronomeCooldownLint.test.js",

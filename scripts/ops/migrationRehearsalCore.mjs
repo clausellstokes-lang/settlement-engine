@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 194;
+export const MIGRATION_TRAIN_REPO_HEAD = 195;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -319,6 +319,40 @@ export const MIGRATION_WAVES = Object.freeze([
         kind: 'function',
         name: 'list_my_operator_messages',
       }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'civility-guard-and-public-identity',
+    from: 195,
+    to: 195,
+    purpose: 'The civility guard\'s server mirror — blocklist and allowlist as data, the '
+      + 'normalize/blocked verdict pair, and the display-name and gallery-comment writers '
+      + 'that consult it — plus the public display identity\'s consent column and its '
+      + 'avatars storage bucket.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        // ⚠ THIS WAVE POLICY IS THE FALLBACK, NOT 195's CLASSIFICATION. 195 ships
+        // supabase/rollback/195_civility_guard_and_public_identity.down.sql, so
+        // classifyRollback resolves it to `data-safe-down-script` and never reads this
+        // reason. It is written for the wave's SUCCESSORS, and it states the half the
+        // down script deliberately does not cover.
+        FORWARD_ONLY_REASON,
+        'The 195 down script is PARTIAL by design: it drops the avatars policies, restores '
+        + 'add_gallery_comment and update_display_name to their prior bodies, and drops the '
+        + 'four civility functions.',
+        'It deliberately does NOT drop profiles.public_identity_opt_in (recorded consent), '
+        + 'the operator-curated civility term/allow tables, their RLS tightening, or the '
+        + 'avatars bucket row — those are data and security reversals.',
+        'Revert the client in the same window: an account that already opted in would '
+        + 'otherwise stay published with no server-side guard behind it.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'table', name: 'public.civility_terms' }),
+      Object.freeze({ kind: 'table', name: 'public.civility_allow' }),
+      Object.freeze({ kind: 'function', name: 'civility_normalize' }),
+      Object.freeze({ kind: 'function', name: 'civility_blocked' }),
     ]),
   }),
 ]);

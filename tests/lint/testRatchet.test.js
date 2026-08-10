@@ -26,7 +26,9 @@
  * TEST_RATCHET_OUTPUT_FILE — the same seam the real `vitest --outputFile=` uses
  * — so these drive the genuine parse/compare code, never a re-implementation.
  */
-import { mkdtempSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import {
+  mkdtempSync, readFileSync, readdirSync, writeFileSync, existsSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -38,6 +40,10 @@ import { describe, expect, test } from 'vitest';
 import {
   DEBT_CLASSES, identityOf, normalizePath, rowsOf, uncollectedOf, SCOPE_FLOOR_RATIO,
 } from '../../scripts/check-test-ratchet.mjs';
+// DERIVED, never restated: the discharge below asserts that the rehearsal train still
+// reaches the migration whose cure retired the owner-gated rows. A literal here would go
+// stale silently the moment the train moved.
+import { MIGRATION_TRAIN_REPO_HEAD } from '../../scripts/ops/migrationRehearsalCore.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SCRIPT = join(ROOT, 'scripts/check-test-ratchet.mjs');
@@ -104,7 +110,61 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // module count; generosityReactions now carries an exact per-file runtime-fold inventory.
 // spatialLedgerCoverage now classifies both missed writers and emits the tracked one.
 // migrationRollbackDiscipline remains owner-gated and stays in the census + OWED ledger.
-const CEILING = 27;
+//
+// RATCHETED 27 → 25 on 2026-08-10, and the UNCOLLECTED allowlist 1 → 0 with it. This is the
+// migration-debt retirement, and it is the one cut in this file's history that required a
+// PIN to change, so read why before repeating the shape:
+//   • The cure landed first, at 1ac94af8 and in the train extension beside it — 195 ships a
+//     .down.sql and an inline `-- @rollback:` note, DEPLOY.md names 195 as the head, and
+//     MIGRATION_TRAIN_REPO_HEAD reaches 195, so tests/ops/migrationRehearsal.test.js
+//     COLLECTS again and all three rows PASS. Nothing was frozen, relabelled, or forgiven.
+//   • The gate the rows sat behind was NOT the cure — it was authority. A lane attempted
+//     this retirement on 2026-08-09 with the cure already in hand; the pin '⚠ the three
+//     migration reds are marked OWNER-GATED' REFUSED it and the change was reverted, which
+//     is the pin working exactly as designed. The owner's 2026-08-10 full delegation grant
+//     is what discharged it, and the discharge is RECORDED (OWNER_GATED_DISCHARGE below),
+//     never deleted — "the class emptied" and "a grant emptied the class" must stay
+//     distinguishable long after everyone in the room has forgotten which happened.
+const CEILING = 25;
+
+// ── ⭐ THE OWNER-GATED DISCHARGE (2026-08-10) ─────────────────────────────────
+//
+// `owner-gated` is the census class for debt a build lane may not repair on its own
+// authority — migrations, schema shape, deploys. The pin below used to defend that with
+// `gated.length > 0`: the class could never empty, because emptying it is precisely what
+// an unauthorised "fix" looks like from the outside.
+//
+// That defence was correct and it was HONORED (see the RATCHETED 27 → 25 note above). It
+// is discharged now, and the discharge is a RECORD rather than a deletion, because the
+// assertion has to survive the retirement it permits. So the pin no longer asks whether
+// the class is populated. It asks three narrower questions that stay meaningful forever:
+// does every surviving owner-gated row say why it is gated; is every row that LEFT the
+// class named here against a grant and a landed commit; and is the cure those rows were
+// waiting on STILL IN THE TREE.
+//
+// ⛔ THAT LAST ARM IS THE POINT. Without it a discharge is a comment: revert the rollback
+// story and the owner-gated class stays empty because a constant in a test file says a
+// grant happened once. Delete supabase/rollback/195_*.down.sql, strip 195's inline
+// `-- @rollback:` note, un-name 195 in docs/DEPLOY.md, or walk the rehearsal train back
+// behind 195, and this file reds — which is the difference between a discharge and an
+// amnesty.
+const MIGRATION_REHEARSAL_SUITE = 'tests/ops/migrationRehearsal.test.js';
+const OWNER_GATED_DISCHARGE = Object.freeze({
+  grant: 'the 2026-08-10 full delegation grant — owner, in chat, verbatim: "i give you all'
+    + ' my permissions and leave all remaining judgement to you. keep going until this is'
+    + ' all done!" Recorded on the ledger branch in docs/OWNER_DECISION_QUEUE.md under'
+    + ' "FULL DELEGATION GRANT (owner, 2026-08-10)", which names migration-195 rollback'
+    + ' authoring and the DEPLOY.md head fix as released repair work. The DEPLOY itself is'
+    + ' NOT released and is not claimed here: these three rows were debt about the'
+    + ' REPOSITORY\'s rollback story, never about applying 195 to a database.',
+  landedAt: '1ac94af85de9874a6758086f16dd346091ebf5fa',
+  migration: 195,
+  retired: Object.freeze([
+    'tests/docs/migrationRollbackDiscipline.test.js',
+    'tests/docs/deployRunbookFreshness.test.js',
+    MIGRATION_REHEARSAL_SUITE,
+  ]),
+});
 
 describe('per-test suite ratchet — static pins', () => {
   test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {
@@ -199,14 +259,77 @@ describe('per-test suite ratchet — static pins', () => {
     expect(runsBareTest, 'ci.yml still runs the bare `npm run test` — CI would stay dark').toBe(false);
   });
 
-  test('⚠ the three migration reds are marked OWNER-GATED, so nobody "fixes" them', () => {
-    // Migrations are an owner-gated class. These three share ONE cause and must
-    // not be repaired by a build lane acting on its own authority.
-    const gated = Object.values(baseline.entries).filter((r) => r.class === 'owner-gated');
-    expect(gated.length, 'the owner-gated migration debt vanished from the census').toBeGreaterThan(0);
-    for (const r of gated) {
-      expect(r.cause, `${r.file}: an owner-gated row must say WHY it is gated`).toMatch(/owner|gated|migration|deploy/i);
+  test('⚠ an OWNER-GATED row leaves the census only against a NAMED GRANT', () => {
+    // Migrations are an owner-gated class: a build lane may not repair one on its own
+    // authority. Until 2026-08-10 that was enforced by requiring the class to be
+    // NON-EMPTY — the three migration rows could not leave, because leaving is what an
+    // unauthorised repair looks like. The three arms below replace that count with the
+    // question it was a proxy for. See OWNER_GATED_DISCHARGE above for why.
+
+    // ARM 1 — every surviving owner-gated row still says WHY it is gated. Unchanged, and
+    // it now covers the uncollected allowlist too: a collection failure that is gated is
+    // gated on the same terms as a failing test.
+    const gatedRows = [
+      ...Object.entries(baseline.entries).map(([id, r]) => [id, r, r.file]),
+      ...Object.entries(baseline.uncollectedSuites || {}).map(([file, r]) => [file, r, file]),
+    ].filter(([, r]) => r.class === 'owner-gated');
+    for (const [id, r] of gatedRows) {
+      expect(r.cause, `${id}: an owner-gated row must say WHY it is gated`).toMatch(/owner|gated|migration|deploy/i);
     }
+
+    // ARM 2 — the discharge is a real record, and every row it retired is really gone
+    // from the gated class while its FILE is still on disk. Deleting the test is not a
+    // repair, and a retirement nobody wrote down is indistinguishable from an erasure.
+    expect(
+      OWNER_GATED_DISCHARGE.grant.length,
+      'the discharge names no grant — an owner-gated row cannot leave on a lane\'s word',
+    ).toBeGreaterThan(120);
+    expect(
+      OWNER_GATED_DISCHARGE.landedAt,
+      'the discharge must cite the 40-hex commit that landed the cure',
+    ).toMatch(/^[0-9a-f]{40}$/);
+    expect(
+      OWNER_GATED_DISCHARGE.retired.length,
+      'a discharge that retires nothing explains nothing',
+    ).toBeGreaterThan(0);
+    const gatedFiles = new Set(gatedRows.map(([, , file]) => file));
+    for (const file of OWNER_GATED_DISCHARGE.retired) {
+      expect(
+        existsSync(join(ROOT, file)),
+        `${file}: discharged by DELETING the test, which is an erasure, not a repair`,
+      ).toBe(true);
+      expect(
+        gatedFiles.has(file),
+        `${file}: named as retired but still carries an owner-gated row`,
+      ).toBe(false);
+    }
+
+    // ARM 3 — ⛔ THE ANTI-AMNESTY ARM. The three retired rows each asserted one fact about
+    // migration 195's rollback story. Those facts are re-checked here, from the
+    // filesystem, so reverting the cure reds the discharge as well as the walker that
+    // owns it. A citation nobody can falsify is not evidence.
+    const { migration } = OWNER_GATED_DISCHARGE;
+    const migrationFile = readdirSync(join(ROOT, 'supabase/migrations'))
+      .find((name) => name.startsWith(`${migration}_`) && name.endsWith('.sql'));
+    expect(migrationFile, `migration ${migration} is not on disk`).toBeTruthy();
+    expect(
+      readFileSync(join(ROOT, 'supabase/migrations', migrationFile), 'utf8'),
+      `${migration} lost its inline \`-- @rollback:\` note`,
+    ).toMatch(/--\s*@rollback:/i);
+    expect(
+      readdirSync(join(ROOT, 'supabase/rollback'))
+        .filter((name) => name.startsWith(`${migration}_`) && name.endsWith('.down.sql')),
+      `${migration} lost its .down.sql — the rollback story the discharge cites is gone`,
+    ).not.toEqual([]);
+    expect(
+      readFileSync(join(ROOT, 'docs/DEPLOY.md'), 'utf8'),
+      `docs/DEPLOY.md no longer names ${migrationFile} as the migration head`,
+    ).toContain(migrationFile);
+    expect(
+      MIGRATION_TRAIN_REPO_HEAD,
+      `the rehearsal wave train walked back behind ${migration}: ${MIGRATION_REHEARSAL_SUITE}`
+      + ' throws at collection again and its allowlist row was retired',
+    ).toBeGreaterThanOrEqual(migration);
   });
 
   test('⛔ every ALLOWLISTED UNCOLLECTED suite is attributed too (a collection failure is debt)', () => {
@@ -214,7 +337,19 @@ describe('per-test suite ratchet — static pins', () => {
     // never appear as rows at all. That hole is the most dangerous kind of debt,
     // so it carries the same attribution discipline as a failing test.
     const rows = Object.entries(baseline.uncollectedSuites || {});
-    expect(rows.length, 'the uncollected allowlist vanished — the sentinel would now red on it').toBeGreaterThan(0);
+    // ⭐ 2026-08-10: this floor used to be `> 0`, and the single row it stood over was
+    // tests/ops/migrationRehearsal.test.js — the suite that threw at import because the
+    // wave train ended at 194 while 195 was on disk. The train reaches 195, the suite
+    // COLLECTS, and its allowlist row is retired, so an EMPTY allowlist is now the
+    // strongest state this pin can report (zero tolerated collection holes), not a
+    // vacuous one. The floor is therefore the DISCHARGE rather than a count: the list may
+    // be empty only because a named grant retired the last row. What refuses the NEXT
+    // hole is not this pin at all — it is the scope sentinel, executed below in 'a suite
+    // that FAILED TO COLLECT reds', which reds on any uncollected suite absent from here.
+    expect(
+      rows.length > 0 || OWNER_GATED_DISCHARGE.retired.includes(MIGRATION_REHEARSAL_SUITE),
+      'the uncollected allowlist emptied with no discharge naming the suite that left it',
+    ).toBe(true);
     for (const [file, row] of rows) {
       expect(existsSync(join(ROOT, file)), `${file}: allowlisted but not on disk`).toBe(true);
       expect(row.subsystem, `${file}: no owning subsystem`).toBeTruthy();
@@ -225,9 +360,12 @@ describe('per-test suite ratchet — static pins', () => {
   });
 
   test('the uncollected allowlist never grows past its frozen size', () => {
-    // Same monotone-down law as the entry census: a literal, not a self-derived
-    // figure. One suite (tests/ops/migrationRehearsal.test.js) fails to collect.
-    expect(Object.keys(baseline.uncollectedSuites || {}).length).toBeLessThanOrEqual(1);
+    // Same monotone-down law as the entry census: a literal, not a self-derived figure.
+    // RATCHETED 1 → 0 on 2026-08-10. NO suite in the estate is allowed to fail collection
+    // any more; the last one (tests/ops/migrationRehearsal.test.js) collects again now the
+    // wave train reaches 195. At zero the pin is at its floor: the next collection hole
+    // cannot be allowlisted without raising this ceiling in the same commit that admits it.
+    expect(Object.keys(baseline.uncollectedSuites || {}).length).toBeLessThanOrEqual(0);
   });
 
   test('⚠ the observedShapeReaders walker is NOT in the census (a timeout is not debt)', () => {
@@ -482,19 +620,17 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // an OPEN, tree-derived population, so its failing verdict is byte-identical however
   // many more violations land. They are named here so the debt is VISIBLE and CANNOT
   // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
-  // an outstanding bill, and the honest reading of it is "thirteen guards are switched
-  // off; two of those wait on owner-gated work".
+  // an outstanding bill, and the honest reading of it is "eleven guards are switched off".
   //
-  // ⭐ 2026-08-10 — THE TWO OWNER-GATED ROWS ARE CURED BUT NOT YET RETIRED. Both now
-  // PASS (195 ships a .down.sql and an inline `-- @rollback:` note; DEPLOY.md names 195
-  // as the head), so the runner reports them as RATCHET DOWN wins. They stay listed
-  // because deleting their census rows empties the owner-gated class and reds the pin
-  // '⚠ the three migration reds are marked OWNER-GATED' above, and rewriting THAT pin is
-  // the one move a lane may not make on its own authority. Retiring them is a four-part
-  // single change — both census rows, both entries here, and OWED_CEILING 13 → 11.
+  // ⭐ 2026-08-10 — THE TWO OWNER-GATED ROWS ARE RETIRED, 13 → 11. Both walkers PASS (195
+  // ships supabase/rollback/195_civility_guard_and_public_identity.down.sql and an inline
+  // `-- @rollback:` note; docs/DEPLOY.md names 195 as the head), so they were never
+  // disabled guards any more — they were CURED guards held in place by an authority gate.
+  // The owner's full delegation grant discharged that gate, and the retirement landed as
+  // one change: both census rows, both entries here, this ceiling, and the census CEILING.
+  // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
+  // where the pin that used to refuse it now checks the cure is still in the tree.
   const WALKER_ROWS_OWED = Object.freeze({
-    'tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note':
-      'CURED 2026-08-10, RETIREMENT OWNER-GATED. 195 now ships supabase/rollback/195_civility_guard_and_public_identity.down.sql and an inline `-- @rollback:` note, and the walker is GREEN. The row survives only because emptying the owner-gated class reds the pin above; retire it with its deployRunbookFreshness twin and drop this ceiling to 11.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
       'NOT FREED — needs a re-freeze of the voice ratchet fixture at a measured sha (string-literal debt 1369 against a budget of 670, from Lane P-3 generated corpora). Own wave: the re-freeze is large and the corpora are machine-generated.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
@@ -505,8 +641,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'NOT FREED — the per-file JSX arm of the same ratchet; same re-freeze, same wave.',
     'tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)':
       'NOT FREED — a one-line ceiling re-freeze (164 against 163), but the kill-list is a design wave whose ceilings are meant to be driven to zero; raising one is a design call, not a ratchet-repair call.',
-    'tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file':
-      'CURED 2026-08-10, RETIREMENT OWNER-GATED. docs/DEPLOY.md now names 195_civility_guard_and_public_identity.sql as the migration head and the freshness walker is GREEN. The row survives only because emptying the owner-gated class reds the pin above; retire it with its migrationRollbackDiscipline twin and drop this ceiling to 11.',
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
     'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':
@@ -528,7 +662,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // derived from its own list proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn them; you may never pad them.
   const ADMITTED_CEILING = 4;
-  const OWED_CEILING = 13;
+  const OWED_CEILING = 11;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
@@ -625,6 +759,13 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'tests/domain/generosityReactions.test.js',
       // owner-held spatial classification landed, then passed from its committed archive
       'tests/lib/spatialLedgerCoverage.walker.test.js',
+      // the 2026-08-10 migration-debt retirement: both were CURED (not merely relocated)
+      // before their rows left, and both must still classify — otherwise a future census
+      // could take an owner-gated guard back in with nothing to refuse it. Note the arms
+      // differ: migrationRollbackDiscipline carries the A5 @enforcement-walker marker,
+      // deployRunbookFreshness is caught by A2 because its header title line says "walker".
+      'tests/docs/migrationRollbackDiscipline.test.js',
+      'tests/docs/deployRunbookFreshness.test.js',
     ]) {
       expect(isEnforcementWalker(file), `${file}: freed by this lane and no longer classified as a walker`).toBe(true);
     }
