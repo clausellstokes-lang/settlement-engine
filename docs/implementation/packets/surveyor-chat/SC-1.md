@@ -1,6 +1,7 @@
 # Surveyor Chat / SC-1A+B — ephemeral text shell and typed proposal card
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `455a29b5` (2026-08-10 — first lane died at the session limit; the continuation lane completed the packet and corrected its three failed-open prevention guards; receipts in the commit body and the continuation report)
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `2c810d167d016302e641fc9cfe74fff57475b14e`
 - **Last revalidated:** 2026-08-09 at the verified base

@@ -24,7 +24,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
 | READY-1 | [`TC-3`](./packets/town-cartography/TC-3.md) | **READY** at the verified base | Adds named wards, parcels, and a bounded binding seam over landed TC-0..2 | TC-4..8, buildings, promotion, 3D defaulting, visual soak |
-| READY-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **READY** at the verified base | Ephemeral text-intent shell and existing typed-op card extraction only | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |
+| LANDED-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **LANDED** at `455a29b5`; do not redispatch | Ephemeral text-intent shell and typed-op card extraction landed; SC-2+ remain excluded | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |
 | BLOCKED | [`GR-3b`](./packets/foreign-policy/GR-3B.md) | **BLOCKED** — producer eligibility and ladder selection are unruled | Would finish the already-split producer half of GR-3 | GR-4+, later grammar, tuning, lighting |
 | BLOCKED | [`IN-0c`](./packets/foreign-policy/IN-0C.md) | **BLOCKED** — same-tick signing credit conflicts with pipeline order | Would finish the sole missing IN-0 slice | IN-1+, broader disclosure redesign |
 
