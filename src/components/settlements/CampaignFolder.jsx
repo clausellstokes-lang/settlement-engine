@@ -102,8 +102,10 @@ export function CampaignFolder({
   // also no-ops a re-entrant advance, but greying the button stops the double-click
   // from queuing a second intent + gives the DM visible feedback the tick is busy.
   const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
+  // Bare, exactly like isAdvanceInFlight above: this folder is only live below
+  // AppViews' campaignLazy gate, and the entry slice always installs the name.
   const settlementDeletionInFlight = useStore(
-    s => s.isCampaignMutationLocked?.(campaign?.id) || false,
+    s => s.isCampaignMutationLocked(campaign?.id) || false,
   );
   const advanceBlocked = advanceInFlight || settlementDeletionInFlight;
   // ITEM 1 (owner order 2026-07-22: "there should be an autoresolver in the library

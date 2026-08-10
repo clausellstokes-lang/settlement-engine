@@ -186,7 +186,11 @@ function deleteCampaignWithConfirmedPersistence({
     return Promise.resolve({ ok: true, campaignId, alreadyAbsent: true });
   }
 
-  const blocked = state.getCampaignMutationBlock?.(campaign.id);
+  // Bare: getCampaignMutationBlock is defined in THIS slice body (below), so any
+  // store that can reach this helper has already composed it. Cross-slice reads of
+  // campaign actions elsewhere in the store layer keep their `?.` — those hosts do
+  // compose without the campaign slice.
+  const blocked = state.getCampaignMutationBlock(campaign.id);
   if (blocked) {
     return Promise.reject(Object.assign(
       new Error('Wait for the current campaign operation to finish before deleting this campaign.'),

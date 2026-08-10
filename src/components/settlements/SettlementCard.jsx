@@ -78,12 +78,15 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const mutationBlocks = useMemo(() => {
     // The version string is a cheap subscription trigger; the actual guarded
     // actions are read fresh so this card never closes over stale store methods.
+    // Called bare: this card is only live below AppViews' campaignLazy gate,
+    // which awaits the runtime preload, and the entry slice always installs
+    // these three. A `?.` here would not short-circuit — it would still throw.
     void campaignMutationVersion;
     const state = useStore.getState();
     return {
-      deletion: !!state.getSettlementDeletionBlock?.([s.id]),
-      removal: !!(currentCampaignId && state.getCampaignMutationBlock?.(currentCampaignId)),
-      target: campaignId => !!state.getCampaignMembershipBlock?.(campaignId, s.id),
+      deletion: !!state.getSettlementDeletionBlock([s.id]),
+      removal: !!(currentCampaignId && state.getCampaignMutationBlock(currentCampaignId)),
+      target: campaignId => !!state.getCampaignMembershipBlock(campaignId, s.id),
     };
   }, [campaignMutationVersion, currentCampaignId, s.id]);
 

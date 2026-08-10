@@ -323,7 +323,7 @@ export default function MapShareEditor({
       const newSlug = await shareMap(campaignId, buildShareOpts());
       setSlug(newSlug);
       setIsPublic(true);
-      try { updateSavedCampaign?.(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug }, { kindWritten: true })); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug }, { kindWritten: true })); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Map share failed');
     } finally {
@@ -361,7 +361,7 @@ export default function MapShareEditor({
         }),
         ...(facets ? facets : {}),
       });
-      try { updateSavedCampaign?.(campaignId, cachePatch()); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, cachePatch()); } catch { /* non-fatal */ }
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
       onSaved?.();
@@ -377,7 +377,7 @@ export default function MapShareEditor({
     try {
       await unshareMap(campaignId);
       setIsPublic(false);
-      try { updateSavedCampaign?.(campaignId, { isPublic: false }); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, { isPublic: false }); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Map unshare failed');
     } finally {

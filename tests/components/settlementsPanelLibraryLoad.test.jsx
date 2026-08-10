@@ -77,6 +77,7 @@ function baseStore(user = null) {
     applyAllQueuedRegionalImpacts: vi.fn(),
     ignoreAllQueuedRegionalImpacts: vi.fn(),
     getCampaignMembershipBlock: vi.fn(() => null),
+    getCampaignMutationBlock: vi.fn(() => null),
     getSettlementDeletionBlock: vi.fn(() => null),
     isAdvanceInFlight: vi.fn(() => false),
     isCampaignMutationLocked: vi.fn(() => false),

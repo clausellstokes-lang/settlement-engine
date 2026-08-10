@@ -19,12 +19,19 @@ import { render, screen, cleanup, renderHook, act, fireEvent } from '@testing-li
 
 afterEach(cleanup);
 
-// Store mock — only CampaignFolder (isAdvanceInFlight) + SettlementCard
-// (isSettlementClockBound) read the store in this file. Both return benign
-// defaults so the components render deterministically.
+// Store mock — CampaignFolder reads isAdvanceInFlight + isCampaignMutationLocked;
+// SettlementCard reads isSettlementClockBound plus the three campaign block
+// readers. All return benign defaults so the components render deterministically.
+// The block readers are listed even though nothing here asserts on them: the real
+// store always installs them (campaignSliceEntry's stable delegates), so a mock
+// that omits them would only pass while the call sites carried a vestigial `?.`.
 const storeState = {
   isAdvanceInFlight: () => false,
+  isCampaignMutationLocked: () => false,
   isSettlementClockBound: () => false,
+  getSettlementDeletionBlock: () => null,
+  getCampaignMutationBlock: () => null,
+  getCampaignMembershipBlock: () => null,
 };
 vi.mock('../../src/store/index.js', () => {
   function useStore(selector) { return selector(storeState); }

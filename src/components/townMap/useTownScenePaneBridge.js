@@ -49,7 +49,7 @@ export function useTownScenePaneBridge({
   const heraldCampaignId = useStore((state) => (
     authoringSaveId == null
       ? null
-      : state.getCampaignForSettlement?.(authoringSaveId)?.id ?? null
+      : state.getCampaignForSettlement(authoringSaveId)?.id ?? null
   ));
   const heraldSessionId = heraldCampaignId == null
     ? null
@@ -101,7 +101,7 @@ export function useTownScenePaneBridge({
         provenance: selection?.provenance || [],
       },
     });
-    store.setActiveCampaign?.(heraldCampaignId);
+    store.setActiveCampaign(heraldCampaignId);
     navigate('realm');
   }, [authoringSaveId, heraldCampaignId, heraldSessionId]);
 

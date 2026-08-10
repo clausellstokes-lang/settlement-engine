@@ -12,7 +12,11 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
-  const state = { isAdvanceInFlight: () => false, isSettlementClockBound: () => false };
+  const state = {
+    isAdvanceInFlight: () => false,
+    isCampaignMutationLocked: () => false,
+    isSettlementClockBound: () => false,
+  };
   const useStore = (sel) => sel(state);
   useStore.getState = () => state;
   return { useStore };
