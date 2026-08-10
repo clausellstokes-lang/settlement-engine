@@ -97,7 +97,7 @@ import {
 import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
-import { PEACE_TERMS_TUNING, TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
+import { PEACE_TERMS_TUNING, TERM_CATALOG, orderTermsByAsk, termLabel } from './peaceTermsCatalog.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
 import {
   RELATIONSHIP_DEFAULTS, appendRelationshipTurningPoint, normalizeRelationshipType,
@@ -143,22 +143,49 @@ export const PACT_FORMATION_TUNING = Object.freeze({
 const F = PACT_FORMATION_TUNING;
 
 /**
- * THE DRAFT LENS — which term type each occasion may write, TODAY.
+ * THE DRAFT LENS — a RUNG LADDER per occasion, and how far up it the evidence reached.
  *
- * Two rows are deliberately EMPTY and they are a TOMBSTONE, not an oversight: faith and
- * population terms are GR-3's catalog rows, and `renewal` is GR-5's. A trigger with no
- * draftable family scores, crosses, and is then refused at the draft with
- * `no_draftable_family` in its own receipt — visible, never silent. THIS IS A TRIPWIRE: the
- * day GR-3 mints those rows the pin below it reds and demands this table be widened in the
- * same commit, which is the direction the recorded orphan-vocabulary law wants.
- * @type {Readonly<Record<string, string>>}
+ * An occasion does not name one clause; it names a SET its family can offer, and the
+ * crossing's own score decides which rung of that set gets written. A faint faith
+ * communion writes a shared rite; a strong one writes restitution. Each rung is
+ * `{min, terms}` where `min` is an INCLUSIVE lower bound on the clamped score, and a rung
+ * is NON-CUMULATIVE: its list is the whole output, never an addition to the rungs below
+ * it. Every produced ladder starts at `min: 0`, which is what preserves the GR-2 promise
+ * that a crossed trigger always drafts something.
+ *
+ * `renewal` is the ONE empty ladder left, and it is a TOMBSTONE rather than an oversight:
+ * its family is GR-5's. A trigger with no draftable family scores, crosses, and is then
+ * refused at the draft with `no_draftable_family` in its own receipt — visible, never
+ * silent — which is the direction the recorded orphan-vocabulary law wants.
+ *
+ * ⚠ THE SIX BOUNDS ARE AUTHORED LITERALS AND THEY ARE UNSOAKED, exactly like every band
+ * in `PACT_FORMATION_TUNING`. They are NOT derived from catalog weights and no code may
+ * compute them from `TERM_CATALOG`: the ask ORDER is the catalog's price, the rung
+ * THRESHOLD is a tuning decision, and collapsing the two would silently retune the world
+ * every time a clause was repriced. The owner signs them at the soak redo under THE
+ * PROMISE; this file does not tune them.
+ * @type {Readonly<Record<string, ReadonlyArray<{min: number, terms: ReadonlyArray<string>}>>>}
  */
 export const PACT_DRAFT_LENS = Object.freeze({
-  faith_communion: '',
-  migration_pressure: '',
-  renewal: '',
-  shared_threat: 'non_aggression',
-  trade_demand: 'resource_share',
+  faith_communion: Object.freeze([
+    Object.freeze({ min: 0, terms: Object.freeze(['shared_rite']) }),
+    Object.freeze({ min: 0.45, terms: Object.freeze(['pilgrimage_right', 'tolerance_guarantee']) }),
+    Object.freeze({ min: 0.7, terms: Object.freeze(['missionary_access']) }),
+    Object.freeze({ min: 0.9, terms: Object.freeze(['temple_restitution']) }),
+  ]),
+  migration_pressure: Object.freeze([
+    Object.freeze({ min: 0, terms: Object.freeze(['migration_right']) }),
+    Object.freeze({ min: 0.6, terms: Object.freeze(['labor_compact']) }),
+    Object.freeze({ min: 0.85, terms: Object.freeze(['settlement_provision']) }),
+  ]),
+  shared_threat: Object.freeze([
+    Object.freeze({ min: 0, terms: Object.freeze(['non_aggression']) }),
+    Object.freeze({ min: 0.75, terms: Object.freeze(['non_aggression', 'mutual_defense']) }),
+  ]),
+  trade_demand: Object.freeze([
+    Object.freeze({ min: 0, terms: Object.freeze(['resource_share']) }),
+  ]),
+  renewal: Object.freeze([]),
 });
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
@@ -235,43 +262,89 @@ function crossingsFor({ worldState, rows, fromId, toId, self, strengthFor, threa
 }
 
 /**
- * DRAFT THE SHEET. One term per crossing side, keyed family × beneficiary, so a reciprocal
- * grain-for-ore bargain is two economic terms with OPPOSED beneficiaries on ONE instrument
- * and a symmetric non-aggression clause is one term beneficiary `both`.
- * @param {{trigger: string, fromId: string, toId: string, reciprocal: boolean, tick: number}} input
+ * WHICH RUNG THIS OCCASION REACHED, ask-ordered.
+ *
+ * The HIGHEST rung whose `min` is at or below the clamped score wins, and its list is the
+ * whole answer. The reduce picks the greatest qualifying `min` rather than trusting the
+ * table's authoring order, so a ladder that is ever re-sorted cannot silently select a
+ * lower rung. Ties are impossible — every `min` in a ladder is a distinct literal — so no
+ * tie-break is authored, because authoring one would be unreachable code.
+ *
+ * ⚠ THERE IS NO SECOND CLAMP HERE. `clamp01`'s standing policy is
+ * `Number.isFinite(x) ? … : 0`, so a `NaN`, an `Infinity` and a word all land on rung
+ * zero, and an out-of-range number lands at the nearest end, out of the ONE primitive.
+ *
+ * @param {string} trigger a `PACT_TRIGGERS` member
+ * @param {unknown} score01 the crossing's own score
+ * @returns {ReadonlyArray<string>} the rung's term list, ask-ordered; `[]` when none
+ */
+function rungTermsFor(trigger, score01) {
+  const s = clamp01(Number(score01));
+  const ladder = PACT_DRAFT_LENS[trigger] || [];
+  const reached = ladder.reduce(
+    (best, rung) => (rung.min <= s && (!best || rung.min > best.min) ? rung : best),
+    /** @type {{min: number, terms: ReadonlyArray<string>} | null} */ (null),
+  );
+  // THE ASK LADDER'S INTENDED CONSUMER (GR-3a shipped it exported and consumed by
+  // nothing). It also DROPS any type the catalog does not carry, which is what makes the
+  // spec read below total — a phantom rung would draft a clause nothing can execute.
+  return orderTermsByAsk(reached ? reached.terms : []);
+}
+
+/**
+ * DRAFT THE SHEET. The rung's terms, each expanded over its OWN beneficiaries and keyed
+ * family × beneficiary, so a reciprocal grain-for-ore bargain is two economic terms with
+ * OPPOSED beneficiaries on ONE instrument and a symmetric non-aggression clause is one
+ * term beneficiary `both`.
+ *
+ * ⚠ EXPANSION IS PER TERM AND IT HAPPENS AFTER SELECTION, and the order of those two acts
+ * is load-bearing: one rung can carry clauses of different symmetry, so a `symmetric`
+ * computed once for the whole sheet would give every clause the first one's direction.
+ *
+ * ⚠ THE BENEFICIARY IS THE OBLIGATION AXIS, not a label. The party a clause runs TO is
+ * OWED it; the OTHER party promised it, and therefore pays it, is watched on it, and is
+ * named if it defaults. That is what the receipt below says in words, and what
+ * `grantTermFor` and `termObligationOf` read. Inverting this expansion would quietly
+ * reverse every negotiated clause in the world, so it is never "tidied".
+ *
+ * @param {{trigger: string, fromId: string, toId: string, reciprocal: boolean,
+ *   tick: number, score01?: unknown}} input
  * @returns {{terms: Array<Record<string, unknown>>, refusal: string}}
  */
-export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick }) {
-  const type = PACT_DRAFT_LENS[trigger] || '';
-  if (!type) return { terms: [], refusal: 'no_draftable_family' };
-  const spec = TERM_CATALOG[type];
-  if (!spec) return { terms: [], refusal: 'no_draftable_family' };
-  const symmetric = spec.family === 'security';
-  const beneficiaries = symmetric ? ['both'] : reciprocal ? [fromId, toId] : [fromId];
-  const terms = beneficiaries.map((beneficiary) => {
-    /** @type {Record<string, unknown>} */
-    const term = {
-      type,
-      family: spec.family,
-      magnitude: round4(spec.baseMag * F.PEACETIME_MAGNITUDE01),
-      mintedTick: tick,
-      expiresTick: tick + Math.round(spec.baseYears * PEACE_TERMS_TUNING.TICKS_PER_YEAR),
-      weightSpent: spec.weight,
-      complianceState: 'honored',
-      trueState: 'honored',
-      burden01: 0,
-      // T4, drop-when-absent: this key exists ONLY on a negotiated term, so every treaty the
-      // engine has ever minted stays byte-identical and the war door's family-only stacking
-      // cell is unchanged.
-      beneficiary,
-      receipt: beneficiary === 'both'
-        ? `${fromId} and ${toId} promise ${termLabel(type)} to each other for ${spec.baseYears} years.`
-        : `${beneficiary === fromId ? toId : fromId} promises ${termLabel(type)} to ${beneficiary}`
-          + ` for ${spec.baseYears} years.`,
-    };
-    if (spec.stream) { term.deliveredToVictor = 0; term.extractedFromLoser = 0; }
-    if (spec.executor === 'seam') term.seam = true;
-    return term;
+export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick, score01 }) {
+  const types = rungTermsFor(trigger, score01);
+  if (!types.length) return { terms: [], refusal: 'no_draftable_family' };
+  const terms = types.flatMap((type) => {
+    const spec = TERM_CATALOG[type];
+    // SYMMETRIC means MUTUAL — both courts hold it and nothing is handed over — and it is
+    // a different fact from RECIPROCAL, which is two opposed one-sided promises.
+    const symmetric = spec.family === 'security';
+    const beneficiaries = symmetric ? ['both'] : reciprocal ? [fromId, toId] : [fromId];
+    return beneficiaries.map((beneficiary) => {
+      /** @type {Record<string, unknown>} */
+      const term = {
+        type,
+        family: spec.family,
+        magnitude: round4(spec.baseMag * F.PEACETIME_MAGNITUDE01),
+        mintedTick: tick,
+        expiresTick: tick + Math.round(spec.baseYears * PEACE_TERMS_TUNING.TICKS_PER_YEAR),
+        weightSpent: spec.weight,
+        complianceState: 'honored',
+        trueState: 'honored',
+        burden01: 0,
+        // T4, drop-when-absent: this key exists ONLY on a negotiated term, so every treaty
+        // the engine has ever minted stays byte-identical and the war door's family-only
+        // stacking cell is unchanged.
+        beneficiary,
+        receipt: beneficiary === 'both'
+          ? `${fromId} and ${toId} promise ${termLabel(type)} to each other for ${spec.baseYears} years.`
+          : `${beneficiary === fromId ? toId : fromId} promises ${termLabel(type)} to ${beneficiary}`
+            + ` for ${spec.baseYears} years.`,
+      };
+      if (spec.stream) { term.deliveredToVictor = 0; term.extractedFromLoser = 0; }
+      if (spec.executor === 'seam') term.seam = true;
+      return term;
+    });
   });
   return { terms, refusal: '' };
 }
@@ -652,7 +725,9 @@ export function advancePeacetimePacts({
         worldState: state, rows, fromId: toId, toId: fromId,
         self: selfBandsOf(settlementOf(toId)), strengthFor: strength, threatId: '',
       }).some((back) => back.trigger === best.trigger);
-      const sheet = draftPactSheet({ trigger: best.trigger, fromId, toId, reciprocal, tick });
+      const sheet = draftPactSheet({
+        trigger: best.trigger, fromId, toId, reciprocal, tick, score01: best.score01,
+      });
       if (sheet.refusal) {
         receipts.push({
           kind: 'pact_not_drafted', tick, fromId, toId, trigger: best.trigger,

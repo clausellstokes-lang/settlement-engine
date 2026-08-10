@@ -25,16 +25,20 @@
  * DELETED so the win is banked, and the count is frozen so it cannot grow while
  * individual rows churn. A tenth owed row is a chair conversation, not an edit.
  *
- * ── WHAT THIS WAVE DELIBERATELY DID NOT BUILD, STATED HERE SO IT IS NOT RE-FOUND ──
+ * ── WHAT GR-3 DEFERRED, AND WHAT GR-3b THEN DISCHARGED ──────────────────────────
  *
- * The nine faith/population/security rows have NO producer in this commit, and that is a
- * measured stop rather than an oversight. Their producer is the peacetime draft lens in
- * `pactFormation.js`, and a second build lane held that file under uncommitted
- * strict-typing work for the whole of this wave; editing it would have meant committing
- * another lane's unfinished change to land this one. The ladder PRIMITIVE they need
- * (`orderTermsByAsk`) ships here, exported and consumed by nothing — the GR-0
- * `treatiesPricedDuring` handoff idiom — and section E pins that unconsumed state so it
- * reds the day GR-3b wires it.
+ * The nine faith/population/security rows had NO producer in GR-3's own commit, and that
+ * was a measured stop rather than an oversight: their producer is the peacetime draft lens
+ * in `pactFormation.js`, and a second build lane held that file under uncommitted
+ * strict-typing work for the whole of that wave. The ladder PRIMITIVE they needed
+ * (`orderTermsByAsk`) shipped here exported and consumed by nothing — the GR-0
+ * `treatiesPricedDuring` handoff idiom — with section E pinning that unconsumed state so
+ * it would red the day GR-3b wired it.
+ *
+ * GR-3b HAS LANDED. The lens is a per-trigger RUNG LADDER, all nine rows have a real
+ * producer, their owed entries are DELETED rather than annotated, and section E's pin is
+ * inverted: it now asserts the consumer EXISTS. One owed row survives — `reparations`,
+ * which this law found already orphaned on its first run and which no wave ever owed.
  *
  * @enforced-by itself
  */
@@ -124,19 +128,35 @@ function wartime(terms) {
 
 // ── A) NO PRODUCER-LESS TERM — the D4 lesson made law ───────────────────────────
 
-/** Every term type an engine path can actually reach TODAY. Two producers exist: the
- *  war door's asset→term map, and the peacetime draft lens. Both are read LIVE. */
+/**
+ * Every term type an engine path can actually reach TODAY. Two producers exist: the war
+ * door's asset→term map, and the peacetime draft lens. Both are read LIVE.
+ *
+ * ⚠ THE FLATTEN IS LOAD-BEARING, and reading it as anything simpler breaks the census
+ * SILENTLY. GR-3b turned the draft lens from trigger→type into trigger→RUNG LADDER, so the
+ * old `Object.values(...).map(String)` now stringifies each ladder ARRAY and yields
+ * `"[object Object],[object Object]"` tokens: every assertion below would still run, no
+ * assertion would name the lens, and every real producer it holds would read as absent.
+ * The walk goes all the way down to each rung's `terms`, and the ladder-reach assertion in
+ * section A is what keeps this honest rather than merely written.
+ */
 function producedTypes() {
   return new Set([
     ...Object.values(CLASS_TERM).map(String),
-    ...Object.values(PACT_DRAFT_LENS).map(String).filter(Boolean),
+    ...Object.values(PACT_DRAFT_LENS)
+      .flatMap((ladder) => ladder.flatMap((rung) => rung.terms)).map(String),
   ]);
 }
 
 /**
- * THE FROZEN, SHRINK-ONLY OWED REGISTER. Nine rows, each naming the wave that owes it a
- * producer. TO COMPLY: when the producer lands, DELETE the entry — the exactness test
- * below reds until it is gone, so the win is banked and cannot be quietly re-borrowed.
+ * THE FROZEN, SHRINK-ONLY OWED REGISTER. One row, naming the wave that owes it a producer.
+ * TO COMPLY: when the producer lands, DELETE the entry — the exactness test below reds
+ * until it is gone, so the win is banked and cannot be quietly re-borrowed.
+ *
+ * ⚠ IT WAS TEN, AND NINE HAVE BEEN DISCHARGED. GR-3b's rung ladders gave the five faith,
+ * three population and one security rows a real producer, so their entries are DELETED
+ * rather than annotated — deleting is what banks the win. What survives is the row this
+ * law found already orphaned on its very first run, which no wave ever owed.
  */
 const PRODUCER_OWED = Object.freeze([
   // ⚠⚠ THE LAW'S FIRST RUN FOUND ONE NOBODY HAD DECLARED, AND IT PRE-DATES THIS WAVE.
@@ -153,15 +173,6 @@ const PRODUCER_OWED = Object.freeze([
   // executor. Either is a chair ruling. Recorded where it will be found, owed to the
   // chair, and counted — which is the whole point of a register that cannot grow silently.
   Object.freeze({ type: 'reparations', owingWave: 'CHAIR', producer: 'an asset class in CLASS_TERM, or a seam declaration retiring it — PRE-EXISTING, found by this law on its first run' }),
-  Object.freeze({ type: 'missionary_access', owingWave: 'GR-3b', producer: 'the faith rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'pilgrimage_right', owingWave: 'GR-3b', producer: 'the faith rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'shared_rite', owingWave: 'GR-3b', producer: 'the faith rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'temple_restitution', owingWave: 'GR-3b', producer: 'the faith rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'tolerance_guarantee', owingWave: 'GR-3b', producer: 'the faith rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'labor_compact', owingWave: 'GR-3b', producer: 'the population rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'migration_right', owingWave: 'GR-3b', producer: 'the population rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'settlement_provision', owingWave: 'GR-3b', producer: 'the population rung of PACT_DRAFT_LENS' }),
-  Object.freeze({ type: 'mutual_defense', owingWave: 'GR-3b', producer: 'the security rung of PACT_DRAFT_LENS' }),
 ]);
 
 /** The three buckets a catalog row may sit in, and a row sits in EXACTLY one.
@@ -183,6 +194,14 @@ describe('GR-3 A — NO PRODUCER-LESS TERM (the D4 tombstone made law)', () => {
     expect(Object.keys(CLASS_TERM).length).toBeGreaterThanOrEqual(9);
     expect(Object.keys(PACT_DRAFT_LENS).length).toBeGreaterThanOrEqual(5);
     expect(producedTypes().size).toBeGreaterThanOrEqual(9);
+    // ⚠ THE LADDER-REACH ASSERTION, and it is what stops the census going vacuous. The
+    // lens is now a ladder of rungs, so a walk that stopped at the ladder — or at the rung
+    // — would still produce a comfortably large set from CLASS_TERM alone while naming not
+    // one peacetime clause. These four sit at four different depths of the real table:
+    // a rung-0 term, a mid rung, and the two top rungs of two different families.
+    for (const type of ['shared_rite', 'missionary_access', 'temple_restitution', 'settlement_provision']) {
+      expect(producedTypes().has(type), `${type} is unreachable through the draft lens`).toBe(true);
+    }
   });
 
   test('EVERY catalog row is produced, or a documented seam, or on the owed register', () => {
@@ -205,7 +224,11 @@ describe('GR-3 A — NO PRODUCER-LESS TERM (the D4 tombstone made law)', () => {
     // ...and the three real buckets each genuinely catch their own member.
     expect(bucketOf('tribute', producedTypes(), TERM_CATALOG)).toEqual(['produced']);
     expect(bucketOf('non_intervention', producedTypes(), TERM_CATALOG)).toEqual(['seam']);
-    expect(bucketOf('missionary_access', producedTypes(), TERM_CATALOG)).toEqual(['owed']);
+    // `reparations` is the owed exemplar now that GR-3b has banked the other nine — and
+    // `missionary_access`, which used to stand here, has MOVED buckets rather than
+    // vanished, which is the discharge stated as a measurement.
+    expect(bucketOf('reparations', producedTypes(), TERM_CATALOG)).toEqual(['owed']);
+    expect(bucketOf('missionary_access', producedTypes(), TERM_CATALOG)).toEqual(['produced']);
   });
 
   test('the owed register is EXACT: every entry real, none already produced, count frozen', () => {
@@ -227,16 +250,23 @@ describe('GR-3 A — NO PRODUCER-LESS TERM (the D4 tombstone made law)', () => {
       expect(entry.producer.length, `${entry.type} names no producer`).toBeGreaterThan(10);
     }
     expect(stale).toEqual([]);
-    // Frozen: the register cannot grow silently while individual rows churn. TEN, not
-    // nine — the tenth is `reparations`, which this law found already orphaned on its
-    // first run and which is owed to the chair rather than to a wave.
-    expect(PRODUCER_OWED).toHaveLength(10);
+    // Frozen: the register cannot grow silently while individual rows churn. ONE, down
+    // from ten — and the one is `reparations`, which this law found already orphaned on
+    // its first run and which is owed to the chair rather than to a wave.
+    expect(PRODUCER_OWED).toHaveLength(1);
     expect(new Set(PRODUCER_OWED.map((row) => row.type)).size).toBe(PRODUCER_OWED.length);
-    // The pre-existing orphan is called out BY NAME so it cannot be quietly absorbed into
-    // GR-3's own debt and closed by GR-3b along with the rest.
+    // The pre-existing orphan is called out BY NAME so it could not be quietly absorbed
+    // into GR-3's own debt and closed by GR-3b along with the rest. It was not.
     expect(PRODUCER_OWED.filter((row) => row.owingWave === 'CHAIR').map((row) => row.type))
       .toEqual(['reparations']);
-    expect(PRODUCER_OWED.filter((row) => row.owingWave === 'GR-3b')).toHaveLength(9);
+    // GR-3b's nine are DISCHARGED, and the discharge is asserted from both ends: no row
+    // still names the wave, and every type it owed is reachable through a real producer.
+    expect(PRODUCER_OWED.filter((row) => row.owingWave === 'GR-3b')).toHaveLength(0);
+    for (const type of ['missionary_access', 'pilgrimage_right', 'shared_rite',
+      'temple_restitution', 'tolerance_guarantee', 'labor_compact', 'migration_right',
+      'settlement_provision', 'mutual_defense']) {
+      expect(produced.has(type), `${type} was discharged without a producer`).toBe(true);
+    }
   });
 
   test('the three trade-rights rows are SEAMS and stay producer-less (seam-2 tripwire)', () => {
@@ -575,17 +605,20 @@ describe('GR-3 E — orderTermsByAsk: the ordering primitive GR-3b consumes', ()
     expect([...orderTermsByAsk(['shared_rite', 'shared_rite'])]).toEqual(['shared_rite']);
   });
 
-  test('THE HANDOFF SIGNAL: it is exported and consumed by NOTHING in src/', () => {
-    // The GR-0 `treatiesPricedDuring` idiom. GR-3b wires the peacetime draft ladder to
-    // this primitive; the day it does, this reds — and that red is the instruction to
-    // delete this test and the owed register above together.
+  test('THE HANDOFF IS DISCHARGED: the peacetime draft lens is its ONE consumer', () => {
+    // ⚠ THIS PIN IS THE INVERSION OF THE ONE IT REPLACES. GR-3 shipped this primitive
+    // exported and consumed by nothing — the GR-0 `treatiesPricedDuring` idiom — and
+    // pinned that emptiness so it would red the day GR-3b wired it. GR-3b wired it, so
+    // the signal is retired and the claim now runs the other way: the consumer EXISTS,
+    // and unwiring it reds here. The ORDER it produces is pinned behaviourally in
+    // pactFormation.test.js by driving the primitive, never by restating its output.
     const consumers = DEFENSIVE_PACT_READERS.concat([
       'src/domain/worldPulse/pactFormation.js',
       'src/domain/worldPulse/pactTriggers.js',
       'src/domain/worldPulse/peaceTermsDrafting.js',
       'src/domain/worldPulse/peaceTermsSale.js',
     ]).filter((rel) => code(rel).includes('orderTermsByAsk'));
-    expect(consumers).toEqual([]);
+    expect(consumers).toEqual(['src/domain/worldPulse/pactFormation.js']);
     // Guard-the-guard: it really is exported under that name.
     expect(code('src/domain/worldPulse/peaceTermsCatalog.js')).toContain('export function orderTermsByAsk');
   });

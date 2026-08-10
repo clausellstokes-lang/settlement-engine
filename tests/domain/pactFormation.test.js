@@ -24,11 +24,12 @@ import {
   reserveFor,
 } from '../../src/domain/worldPulse/pactFormation.js';
 import { pactProposalsOf } from '../../src/domain/worldPulse/pactProposals.js';
-import { lineageOf, provenanceOf } from '../../src/domain/worldPulse/pactAmendment.js';
+import { lineageOf, provenanceOf, termIdOf } from '../../src/domain/worldPulse/pactAmendment.js';
 import { treatyBlocksWar, treatyLedgerOf } from '../../src/domain/worldPulse/treatyEnforcement.js';
 import { mintSovereigntySaleTreaties } from '../../src/domain/worldPulse/peaceTermsSale.js';
 import { repudiableTreatyPairs } from '../../src/domain/worldPulse/treatyBreach.js';
 import { PACT_TRIGGERS_PRODUCED } from '../../src/domain/worldPulse/pactTriggers.js';
+import { TERM_CATALOG, orderTermsByAsk } from '../../src/domain/worldPulse/peaceTermsCatalog.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { hopWeeks } from '../../src/domain/spatial/distanceRead.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -248,14 +249,23 @@ describe('THE STANDALONE NAP — the sentence the survey said could not be writt
     },
   });
 
-  test('a shared threat drafts ONE symmetric non-aggression clause', () => {
+  test('a shared threat drafts SYMMETRIC security clauses, and the rung says how many', () => {
+    // ⚠ AN INTENDED LIT-PATH SHIFT, MEASURED. This fixture's web reads `decisive` and its
+    // crossing scores well above the 0.75 rung, so the occasion now earns the composable
+    // pair rather than the bare NAP it drafted when the lens held one type per trigger.
+    // Both clauses are SECURITY, so both are `both` — mutual, with nothing handed over.
     const { first } = openThenAnswer(threatWorld(), pactSnapshot({ withThreat: true }));
     const nap = pactProposalsOf(first.worldState).find((p) => p.trigger === 'shared_threat');
     expect(nap).toBeTruthy();
-    expect(nap.sheet.terms).toHaveLength(1);
-    expect(nap.sheet.terms[0]).toMatchObject({
-      type: 'non_aggression', family: 'security', beneficiary: 'both',
-    });
+    expect(nap.sheet.terms.map((t) => t.type)).toEqual(['non_aggression', 'mutual_defense']);
+    for (const term of nap.sheet.terms) {
+      expect(term).toMatchObject({ family: 'security', beneficiary: 'both' });
+    }
+    // …and the LOWER rung is still reachable from this same drafter, so the pair above is
+    // the score's doing rather than a ladder that lost its first step.
+    expect(draftPactSheet({
+      trigger: 'shared_threat', fromId: 'A', toId: 'B', reciprocal: false, tick: 10, score01: 0.5,
+    }).terms.map((t) => t.type)).toEqual(['non_aggression']);
   });
 
   test('NAP SYMMETRY: a peacetime pact blocks BOTH openers and stays repudiable at cost', () => {
@@ -291,29 +301,144 @@ describe('THE STANDALONE NAP — the sentence the survey said could not be writt
   });
 });
 
-describe('THE DRAFT LENS — and the tombstone tripwire under it', () => {
-  test('every PRODUCED trigger is in the lens, and two rows are deliberately empty', () => {
+describe('THE DRAFT LENS — the rung ladders, and what an occasion has earned', () => {
+  /** One sheet, drafted through the REAL producer. Everything below reads the emitted
+   *  rows rather than the table, so the ladder and the selection are pinned jointly. */
+  const draft = (trigger, score01, reciprocal = false) => draftPactSheet({
+    trigger, fromId: 'A', toId: 'B', reciprocal, tick: 10, score01,
+  });
+  const typesOf = (sheet) => sheet.terms.map((term) => String(term.type));
+
+  test('every PRODUCED trigger is in the lens, and every ladder is frozen authored data', () => {
+    // The tombstone this block replaces said faith, population and renewal were EMPTY
+    // until their families landed. Three of those four rows are now producers; `renewal`
+    // stays empty and is GR-5's, so the tripwire survives as a single named row rather
+    // than as a paragraph — the orphan-vocabulary law is what it still enforces.
     expect(Object.keys(PACT_DRAFT_LENS).sort()).toEqual([
       'faith_communion', 'migration_pressure', 'renewal', 'shared_threat', 'trade_demand',
     ]);
-    expect(PACT_DRAFT_LENS.trade_demand).toBe('resource_share');
-    expect(PACT_DRAFT_LENS.shared_threat).toBe('non_aggression');
+    expect(PACT_DRAFT_LENS.renewal).toEqual([]);
+    for (const [trigger, ladder] of Object.entries(PACT_DRAFT_LENS)) {
+      expect(Object.isFrozen(ladder), trigger).toBe(true);
+      for (const rung of ladder) {
+        expect(Object.isFrozen(rung), trigger).toBe(true);
+        expect(Object.isFrozen(rung.terms), trigger).toBe(true);
+        expect(typeof rung.min, trigger).toBe('number');
+      }
+      // Every produced ladder starts at zero, which is what preserves "a crossed trigger
+      // always drafts" — the behaviour this file has asserted since GR-2.
+      if (ladder.length) expect(ladder[0].min, trigger).toBe(0);
+    }
   });
 
-  test('⚠ TRIPWIRE — faith and population rows are EMPTY until GR-3 mints their families', () => {
-    // THIS TEST IS AN INSTRUCTION, and it reds by recorded design the day GR-3 lands. When
-    // it does: widen PACT_DRAFT_LENS in the SAME commit as the catalog rows, and move the
-    // reachability obligation for those two triggers onto that commit. Do not delete this
-    // block without doing that — the orphan-vocabulary law is what it enforces.
-    expect(PACT_DRAFT_LENS.faith_communion).toBe('');
-    expect(PACT_DRAFT_LENS.migration_pressure).toBe('');
-    expect(PACT_DRAFT_LENS.renewal).toBe('');
-    // A trigger with no draftable family is REFUSED VISIBLY, never silently dropped.
-    const drafted = draftPactSheet({
-      trigger: 'faith_communion', fromId: 'A', toId: 'B', reciprocal: false, tick: 10,
-    });
-    expect(drafted.terms).toHaveLength(0);
-    expect(drafted.refusal).toBe('no_draftable_family');
+  test('A1 — at score ZERO each produced ladder writes its lightest term, and refuses nothing', () => {
+    expect(typesOf(draft('faith_communion', 0))).toEqual(['shared_rite']);
+    expect(typesOf(draft('migration_pressure', 0))).toEqual(['migration_right']);
+    expect(typesOf(draft('shared_threat', 0))).toEqual(['non_aggression']);
+    expect(typesOf(draft('trade_demand', 0))).toEqual(['resource_share']);
+    for (const trigger of ['faith_communion', 'migration_pressure', 'shared_threat', 'trade_demand']) {
+      expect(draft(trigger, 0).refusal, trigger).toBe('');
+    }
+  });
+
+  test('A2 — THE BOUNDARY TABLE exactly: inclusive at `min`, highest rung wins, never a union', () => {
+    /** @type {Array<[string, number, string[]]>} */
+    const TABLE = [
+      ['faith_communion', 0, ['shared_rite']],
+      ['faith_communion', 0.44999, ['shared_rite']],
+      ['faith_communion', 0.45, ['pilgrimage_right', 'tolerance_guarantee']],
+      ['faith_communion', 0.7, ['missionary_access']],
+      ['faith_communion', 0.9, ['temple_restitution']],
+      ['faith_communion', 1, ['temple_restitution']],
+      ['migration_pressure', 0, ['migration_right']],
+      ['migration_pressure', 0.6, ['labor_compact']],
+      ['migration_pressure', 0.85, ['settlement_provision']],
+      ['shared_threat', 0.74999, ['non_aggression']],
+      ['shared_threat', 0.75, ['non_aggression', 'mutual_defense']],
+      ['trade_demand', 0, ['resource_share']],
+      ['trade_demand', 1, ['resource_share']],
+    ];
+    for (const [trigger, score01, expected] of TABLE) {
+      expect(typesOf(draft(trigger, score01)), `${trigger} @ ${score01}`).toEqual(expected);
+    }
+    // NON-CUMULATIVE is the load-bearing half of the selection: a rung's list is the WHOLE
+    // output. An accumulating ladder would give the top faith rung all five faith terms.
+    expect(draft('faith_communion', 1).terms).toHaveLength(1);
+    // `renewal` is GR-5's empty ladder, and the refusal it produces is PRESERVED, not
+    // removed — a trigger with no draftable family is still refused VISIBLY.
+    expect(draft('renewal', 1).terms).toEqual([]);
+    expect(draft('renewal', 1).refusal).toBe('no_draftable_family');
+    // …and so is a trigger the lens never heard of.
+    expect(draft('a_trigger_that_never_landed', 1).refusal).toBe('no_draftable_family');
+  });
+
+  test('A4 — a malformed score is rung ZERO and an out-of-range one clamps; nothing throws', () => {
+    for (const score01 of [NaN, Infinity, -Infinity, undefined, null, 'x', {}, -5]) {
+      expect(typesOf(draft('faith_communion', score01)), String(score01)).toEqual(['shared_rite']);
+    }
+    // Above the ladder it clamps to 1 rather than falling off the top rung.
+    expect(typesOf(draft('faith_communion', 5))).toEqual(['temple_restitution']);
+    // ANTI-VACUITY: the same drafter really does move off rung 0 for a live score, so the
+    // eight rows above are a measurement rather than a function that always answers first.
+    expect(typesOf(draft('faith_communion', 0.7))).toEqual(['missionary_access']);
+  });
+
+  test('A6 — beneficiary expansion is PER TERM after selection, and it sets the direction', () => {
+    // Non-security, one-sided: the PROPOSER is the beneficiary of what it asks for.
+    expect(draft('faith_communion', 0.45).terms.map((t) => [t.type, t.beneficiary])).toEqual([
+      ['pilgrimage_right', 'A'], ['tolerance_guarantee', 'A'],
+    ]);
+    // Reciprocal is TWO one-sided terms per type, mirrored — never one symmetric term.
+    expect(draft('faith_communion', 0.45, true).terms.map((t) => [t.type, t.beneficiary])).toEqual([
+      ['pilgrimage_right', 'A'], ['pilgrimage_right', 'B'],
+      ['tolerance_guarantee', 'A'], ['tolerance_guarantee', 'B'],
+    ]);
+    // Security is SYMMETRIC — `both` — and that is MUTUAL, which is a different fact from
+    // reciprocal: both courts hold it and nothing is handed over. Reciprocity cannot
+    // change it, so the same rung answers identically with `reciprocal` either way.
+    for (const reciprocal of [false, true]) {
+      expect(draft('shared_threat', 0.75, reciprocal).terms.map((t) => [t.type, t.beneficiary]))
+        .toEqual([['non_aggression', 'both'], ['mutual_defense', 'both']]);
+    }
+    // Term identity stays unique across the expansion — the reciprocal-id defect's pin.
+    expect(new Set(draft('faith_communion', 0.45, true).terms.map(termIdOf)).size).toBe(4);
+    // §6.7 THE DIRECTION, read off the EMITTED rows and never restated from the ruling:
+    // the party a clause runs TO is owed it, and the OTHER party is the one promising.
+    for (const term of draft('faith_communion', 0.45, true).terms) {
+      const promiser = term.beneficiary === 'A' ? 'B' : 'A';
+      expect(String(term.receipt), String(term.type)).toContain(`${promiser} promises `);
+      expect(String(term.receipt), String(term.type)).toContain(` to ${term.beneficiary} for `);
+    }
+    // NEITHER transfer term is ever emitted symmetric, which is what makes the ruling
+    // total over everything these frozen ladders can emit: a mutual clause has no
+    // transfer direction to lose, and no `executor: 'transfer'` row can reach `both`.
+    const transfers = [draft('faith_communion', 0.9, true), draft('migration_pressure', 0.85, true)];
+    for (const sheet of transfers) {
+      expect(sheet.terms.length).toBeGreaterThan(0);
+      for (const term of sheet.terms) {
+        expect(TERM_CATALOG[String(term.type)].executor, String(term.type)).toBe('transfer');
+        expect(term.beneficiary, String(term.type)).not.toBe('both');
+      }
+    }
+  });
+
+  test('A7 — the drafted order IS `orderTermsByAsk`\'s own output, derived and never restated', () => {
+    // GR-3a shipped this primitive exported and consumed by nothing. This is its intended
+    // consumer, and the pin drives the PRIMITIVE rather than repeating the order it
+    // produces, so a catalog retune moves the draft and this assertion together.
+    const drafted = (trigger, score01) => [...new Set(
+      draft(trigger, score01).terms.map((term) => String(term.type)),
+    )];
+    expect(drafted('faith_communion', 0.45))
+      .toEqual([...orderTermsByAsk(['tolerance_guarantee', 'pilgrimage_right'])]);
+    expect(drafted('shared_threat', 0.75))
+      .toEqual([...orderTermsByAsk(['mutual_defense', 'non_aggression'])]);
+    // ANTI-VACUITY: both inputs above are handed to the primitive in the WRONG order, so
+    // a draft that never consulted it would disagree here rather than coincide.
+    expect([...orderTermsByAsk(['tolerance_guarantee', 'pilgrimage_right'])])
+      .toEqual(['pilgrimage_right', 'tolerance_guarantee']);
+    expect([...orderTermsByAsk(['mutual_defense', 'non_aggression'])])
+      .toEqual(['non_aggression', 'mutual_defense']);
   });
 
   test('FOUR-TRIGGER REACHABILITY: every produced trigger has a live scorer', () => {

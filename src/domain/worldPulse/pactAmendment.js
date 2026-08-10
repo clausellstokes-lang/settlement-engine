@@ -72,6 +72,15 @@ export const PACT_ENDINGS = Object.freeze([
 /** The closed provenance vocabulary. Legacy-absent resolves to `dictated` AT READ. */
 export const PACT_PROVENANCE = Object.freeze(['converted', 'dictated', 'negotiated', 'renewed']);
 
+/**
+ * THE ONE COMPOSABLE SECURITY PAIR. Frozen, exactly two members, and the only exception
+ * `amendPactInstrument` grants to §13 stacking. NEVER a general stacking rule: promising
+ * not to attack and promising to fight beside are the one pair a court can hold at once,
+ * and a third security clause in the same cell is refused exactly as it always was.
+ * @type {readonly string[]}
+ */
+export const COMPOSABLE_SECURITY_PAIR = Object.freeze(['mutual_defense', 'non_aggression']);
+
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function recordOf(value) {
   return value && typeof value === 'object' && !Array.isArray(value)
@@ -145,6 +154,37 @@ export function stackingCellOf(term) {
   return `${text(row.family)}|${text(row.beneficiary)}`;
 }
 
+/** The live set of types in one cell, minted on first ask so a caller can record into it.
+ *  @param {Map<string, Set<string>>} held @param {string} cell @returns {Set<string>} */
+function occupantsOf(held, cell) {
+  const seen = held.get(cell) || new Set();
+  held.set(cell, seen);
+  return seen;
+}
+
+/**
+ * THE ONE EXCEPTION §13 STACKING GRANTS — and it is a PAIR, not a family.
+ *
+ * An occupied cell admits the arriving term only when that term is a
+ * `COMPOSABLE_SECURITY_PAIR` member AND every clause already sitting in that exact cell —
+ * standing on the instrument or admitted earlier in this same call — is the OTHER member.
+ * With exactly two members that single condition also forbids a duplicate of the arriving
+ * term's own type, so no separate duplicate check is written: it would be an arm no input
+ * could reach.
+ *
+ * ⚠ THE WAR DOOR COSTS NOTHING BY CONSTRUCTION. `CLASS_TERM` maps the security asset class
+ * to `non_aggression` and to nothing else, so a war-end sheet can never carry the second
+ * member and the bare `security|` cell can never hold a composable pair. Two war-end
+ * security clauses still collide exactly as they did before this exception existed.
+ *
+ * @param {string} type @param {ReadonlySet<string>} occupants @returns {boolean}
+ */
+function composesWithOccupants(type, occupants) {
+  if (!COMPOSABLE_SECURITY_PAIR.includes(type)) return false;
+  const sibling = COMPOSABLE_SECURITY_PAIR.find((member) => member !== type);
+  return [...occupants].every((occupant) => occupant === sibling);
+}
+
 /**
  * APPEND ONE LINEAGE ACT. Returns a NEW treaty record — this family never mutates a record
  * a caller still holds a reference to.
@@ -179,14 +219,19 @@ export function appendLineage(treaty, { act, tick, termIds = [], ending = '' }) 
  */
 export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
   const live = termsOf(treaty).filter((term) => Number(term.expiresTick) > tick);
-  const occupied = new Set(live.map(stackingCellOf));
+  // WHICH TYPES occupy each cell, not merely THAT one does: the composable exception has
+  // to ask what is already there, and a bare cell set cannot answer that question.
+  /** @type {Map<string, Set<string>>} */
+  const held = new Map();
+  for (const term of live) occupantsOf(held, stackingCellOf(term)).add(text(term.type));
   /** @type {Array<Record<string, unknown>>} */
   const added = [];
   /** @type {Array<{cell: string, type: string, receipt: string}>} */
   const refused = [];
   for (const term of terms) {
     const cell = stackingCellOf(term);
-    if (occupied.has(cell)) {
+    const occupants = occupantsOf(held, cell);
+    if (occupants.size > 0 && !composesWithOccupants(text(term.type), occupants)) {
       refused.push({
         cell,
         type: text(term.type),
@@ -195,7 +240,7 @@ export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
       });
       continue;
     }
-    occupied.add(cell);
+    occupants.add(text(term.type));
     added.push(term);
   }
   if (added.length === 0) return { treaty, added, refused };

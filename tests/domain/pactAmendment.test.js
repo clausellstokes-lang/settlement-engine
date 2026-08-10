@@ -14,6 +14,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  COMPOSABLE_SECURITY_PAIR,
   PACT_ENDINGS,
   PACT_LINEAGE_ACTS,
   PACT_PROVENANCE,
@@ -110,6 +111,103 @@ describe('THE STACKING CELL — and the war door is measurably unchanged', () =>
   test('a peacetime term never collides with a war-end term of the same family', () => {
     expect(stackingCellOf(pactTerm('resource_share', 'economic', 'A')))
       .not.toBe(stackingCellOf(warTerm('tribute', 'economic')));
+  });
+});
+
+describe('A5 — THE COMPOSABLE SECURITY PAIR: one exception, closed at eight rows', () => {
+  const security = (type, beneficiary, over = {}) => pactTerm(type, 'security', beneficiary, over);
+  /** One amendment against a standing instrument holding `held`, offering `offered`. */
+  const amend = (held, offered) => amendPactInstrument({
+    treaty: legacyTreaty(held), terms: offered, tick: 40,
+  });
+
+  test('the pair is frozen, has EXACTLY two members, and both of them are security rows', () => {
+    expect(COMPOSABLE_SECURITY_PAIR).toEqual(['mutual_defense', 'non_aggression']);
+    expect(Object.isFrozen(COMPOSABLE_SECURITY_PAIR)).toBe(true);
+    // Two, and never a third: this is a PAIR, not a family-wide composability rule.
+    expect(COMPOSABLE_SECURITY_PAIR).toHaveLength(2);
+  });
+
+  test('THE CLOSED TABLE — every row\'s exact admit/refuse verdict', () => {
+    // ROW 1 — `non_aggression` standing, `mutual_defense` arrives: ADMITTED.
+    const forward = amend([security('non_aggression', 'both')], [security('mutual_defense', 'both')]);
+    expect(forward.added).toHaveLength(1);
+    expect(forward.refused).toHaveLength(0);
+    expect(forward.treaty.terms).toHaveLength(2);
+
+    // ROW 2 — the OTHER order, which is the half a one-directional exception would miss.
+    const back = amend([security('mutual_defense', 'both')], [security('non_aggression', 'both')]);
+    expect(back.added).toHaveLength(1);
+    expect(back.refused).toHaveLength(0);
+
+    // ROW 3 — both arrive in ONE draft onto an empty cell: BOTH admitted. The second is
+    // not refused against the sibling admitted moments earlier in the same call.
+    const together = amend([], [security('non_aggression', 'both'), security('mutual_defense', 'both')]);
+    expect(together.added).toHaveLength(2);
+    expect(together.refused).toHaveLength(0);
+
+    // ROWS 4 and 5 — a DUPLICATE of either member is refused. Existing law, unchanged,
+    // and the refusal still names its cell rather than dropping the clause silently.
+    for (const type of ['non_aggression', 'mutual_defense']) {
+      const duplicate = amend([security(type, 'both')], [security(type, 'both')]);
+      expect(duplicate.added, type).toHaveLength(0);
+      expect(duplicate.refused, type).toHaveLength(1);
+      expect(duplicate.refused[0].cell, type).toBe('security|both');
+      expect(duplicate.refused[0].type, type).toBe(type);
+      expect(duplicate.refused[0].receipt, type).toContain('term_refused_stacking');
+    }
+
+    // ROW 6 — a THIRD security term on an occupied security cell is REFUSED, against a
+    // lone member of EITHER polarity and against the completed pair. No general rule.
+    //
+    // ⚠ THE `mutual_defense`-ALONE CASE IS THE ONE THAT PROVES THE MEMBERSHIP GUARD, and
+    // leaving it out was a MEASURED blind spot: an executed mutant that deleted the
+    // `COMPOSABLE_SECURITY_PAIR.includes(type)` check SURVIVED the other three rows. The
+    // sibling lookup answers `mutual_defense` for any non-member type, so a cell holding
+    // only `mutual_defense` is the single configuration where the deleted guard is the
+    // only thing refusing — a conjunction the other fixtures could not reach.
+    for (const standing of ['non_aggression', 'mutual_defense']) {
+      const third = amend([security(standing, 'both')], [security('demilitarization', 'both')]);
+      expect(third.added, standing).toHaveLength(0);
+      expect(third.refused[0].type, standing).toBe('demilitarization');
+      expect(third.refused[0].cell, standing).toBe('security|both');
+    }
+    const afterPair = amend(
+      [security('non_aggression', 'both'), security('mutual_defense', 'both')],
+      [security('demilitarization', 'both')],
+    );
+    expect(afterPair.added).toHaveLength(0);
+    expect(afterPair.refused[0].cell).toBe('security|both');
+
+    // ROW 7 — any NON-security family collision is untouched by the exception.
+    const economic = amend(
+      [pactTerm('resource_share', 'economic', 'A')], [pactTerm('resource_share', 'economic', 'A')],
+    );
+    expect(economic.added).toHaveLength(0);
+    expect(economic.refused[0].cell).toBe('economic|A');
+
+    // ROW 8 — THE WAR DOOR IS UNCHANGED. A war-end term carries no beneficiary, so its
+    // cell is the bare `security|` it always was, and two war-end security clauses still
+    // collide exactly as they did before the exception existed.
+    expect(stackingCellOf(warTerm('non_aggression', 'security'))).toBe('security|');
+    const war = amend([warTerm('non_aggression', 'security')], [warTerm('demilitarization', 'security')]);
+    expect(war.added).toHaveLength(0);
+    expect(war.refused[0].cell).toBe('security|');
+  });
+
+  test('the exception is CELL-LOCAL: a pair member still needs its own cell free', () => {
+    // The pair composes within ONE `family|beneficiary` cell. A member arriving at a cell
+    // its own type already occupies is refused even though its sibling sits elsewhere —
+    // otherwise the exception would quietly become a licence to stack security clauses.
+    const crowded = amend(
+      [security('non_aggression', 'both'), security('mutual_defense', 'A')],
+      [security('non_aggression', 'both')],
+    );
+    expect(crowded.added).toHaveLength(0);
+    expect(crowded.refused[0].cell).toBe('security|both');
+    // …and the sibling in the OTHER cell is genuinely there, so the refusal above is a
+    // measurement of cell locality rather than of an empty fixture.
+    expect(stackingCellOf(security('mutual_defense', 'A'))).toBe('security|A');
   });
 });
 
