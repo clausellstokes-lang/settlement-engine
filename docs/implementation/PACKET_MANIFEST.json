@@ -148,17 +148,39 @@
     },
     {
       "id": "GR-3B",
-      "status": "BLOCKED",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-3B.md",
-      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
-      "changeManifest": [],
+      "verifiedBase": "0f78d9c8402b177d0786b7da6e9ead533d7af42d",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactFormation.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "TEST", "path": "tests/domain/pactFormation.test.js" },
+        { "action": "TEST", "path": "tests/domain/pactAmendment.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTermsGrantTerms.test.js" }
+      ],
       "requiredSymbols": [
         { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "PACT_DRAFT_LENS" },
-        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "orderTermsByAsk" },
-        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" }
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "draftPactSheet" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "advancePeacetimePacts" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "amendPactInstrument" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "orderTermsByAsk" }
       ],
-      "acceptanceCases": [],
-      "checks": []
+      "acceptanceCases": [
+        { "id": "A1", "case": "each trigger drafts its rung-zero terms" },
+        { "id": "A2", "case": "the full boundary table selects exactly" },
+        { "id": "A3", "case": "absent, false, and truthy-non-true stay dormant" },
+        { "id": "A4", "case": "malformed score01 clamps and drafts rung zero" },
+        { "id": "A5", "case": "the eight-row composable-pair closed table" },
+        { "id": "A6", "case": "beneficiary expansion after selection sets the direction" },
+        { "id": "A7", "case": "orderTermsByAsk consumed over the multi-term rungs" },
+        { "id": "A8", "case": "the nine PRODUCER_OWED rows discharge; reparations stays" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/pactFormation.test.js",
+          "tests/domain/pactAmendment.test.js",
+          "tests/domain/peaceTermsGrantTerms.test.js"]
+      ]
     },
     {
       "id": "IN-0C",
