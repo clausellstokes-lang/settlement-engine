@@ -41,7 +41,33 @@ export function coalitionCallIdFor({ callerId, partyId, enemyId, callerDeploymen
     .map(String).join('.');
 }
 
-/** Strictly sanitize the one closed join anchor. */
+/**
+ * Strictly sanitize the one closed join anchor.
+ *
+ * The three optional arguments carry the OWNING DEPLOYMENT's identity so the anchor
+ * can be cross-checked against the row that holds it. Each is read only behind an
+ * explicit `!= null` gate and only through `String()` / `Number()`, so the body
+ * demands nothing of them — the annotations below record what CALLERS hand in.
+ * Measured over every call site on 2026-08-10:
+ *   • deploymentPartyId  — `string` at all three outside callers (worldState's
+ *     normalizeDeployments passes the deployment KEY; peaceTermsCoalition passes an
+ *     explicitText-validated departingId / memberId), and `joinAnchorOf` forwards
+ *     its own defaulted party id.
+ *   • deploymentTargetId — `joinAnchorOf` forwards `row.targetId` off a
+ *     `Record<string, unknown>`, so this genuinely arrives UNKNOWN at the boundary;
+ *     the peaceTermsCoalition pair pass a validated enemyId.
+ *   • deploymentSinceTick — likewise `row.sinceTick` and `rawAnchor.joinedTick`,
+ *     both unknown off sanitized records.
+ * ⚠ WHY THIS ANNOTATION IS LOAD-BEARING: with the tags absent, tsc infers each
+ * parameter's type from its `= null` DEFAULT ALONE — `null | undefined` — so every
+ * caller passing a real id or tick reddened the strict domain check against a
+ * signature nobody wrote. That inference was the whole of worldState.js's strict
+ * debt, and three more rows besides.
+ *
+ * @param {string|null} deploymentPartyId
+ * @param {unknown} deploymentTargetId
+ * @param {unknown} deploymentSinceTick
+ */
 export function normalizeJoinAnchor(raw, deploymentPartyId = null, deploymentTargetId = null, deploymentSinceTick = null) {
   const row = asObject(raw);
   const strings = {};

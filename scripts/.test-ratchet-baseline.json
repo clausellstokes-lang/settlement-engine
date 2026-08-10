@@ -110,22 +110,6 @@
       "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
       "class": "debt"
     },
-    "tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer": {
-      "file": "tests/joins/crisisTripleSync.test.js",
-      "test": "source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer",
-      "subsystem": "joins / crisis twin-directive lifecycle",
-      "cause": "The source scan finds 7 references to the twin actions where the lifecycle allows 6, and the `twinDirectiveForEvent(` wiring probe now reads an empty/blank source region — the consumer moved or was renamed, so the pin reads a file that no longer carries the call.",
-      "introducedAt": "unbisectable: a source-address pin whose target moved; the first-match/line-address rot class. Burn-down lane must re-point the pin at the live consumer rather than bisect the move.",
-      "class": "debt"
-    },
-    "tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty": {
-      "file": "tests/joins/crisisTripleSync.test.js",
-      "test": "source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty",
-      "subsystem": "joins / crisis twin-directive lifecycle",
-      "cause": "The source scan finds 7 references to the twin actions where the lifecycle allows 6, and the `twinDirectiveForEvent(` wiring probe now reads an empty/blank source region — the consumer moved or was renamed, so the pin reads a file that no longer carries the call.",
-      "introducedAt": "unbisectable: a source-address pin whose target moved; the first-match/line-address rot class. Burn-down lane must re-point the pin at the live consumer rather than bisect the move.",
-      "class": "debt"
-    },
     "tests/lib/accountContentPortability.test.js :: account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive": {
       "file": "tests/lib/accountContentPortability.test.js",
       "test": "account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive",

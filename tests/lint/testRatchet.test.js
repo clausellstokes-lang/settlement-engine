@@ -125,7 +125,23 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 //     is what discharged it, and the discharge is RECORDED (OWNER_GATED_DISCHARGE below),
 //     never deleted — "the class emptied" and "a grant emptied the class" must stay
 //     distinguishable long after everyone in the room has forgotten which happened.
-const CEILING = 25;
+//
+// RATCHETED 25 → 23 on 2026-08-10 by the F-SURVEY-1 micro-lane, which RE-POINTED the two
+// crisisTripleSync source-scan rows rather than re-freezing them. Both were the first-match/
+// line-address rot class recorded in their own `introducedAt`: the trio's FORWARD directive
+// consumer left settlementSlice.js for settlementLifecycleHelpers.js at 947799f0 (the
+// decomposition wave moved applyEvent's world half out of the slice literal verbatim), and
+// the cold-slice split at 6e7acc4d added campaignRegionalSliceEntry.js as a second name-site.
+// So the scan was reading a file that no longer carried the call, against an allowlist short
+// by two live seams.
+// ⛔ THE DISTINCTION THAT MATTERS HERE: re-baselining those rows would have banked a WRONG
+// ADDRESS. A pin that reads where the code used to be is not a weak guard, it is no guard,
+// and freezing it makes the vacuity permanent and invisible. Both re-pointed pins were
+// proven live by MUTANT at their NEW addresses — a hand-rolled twin bridge planted outside
+// the lifecycle reds the allowlist arm, and severing the twinDirective read inside
+// rippleEventThroughWorld reds the wiring arm AND two behavioural matrix tests, which is
+// what makes it a synchronization guard rather than a text probe.
+const CEILING = 23;
 
 // ── ⭐ THE OWNER-GATED DISCHARGE (2026-08-10) ─────────────────────────────────
 //
@@ -645,10 +661,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
     'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':
       'NOT FREED — razingExecution.js stamps a metronome-EXEMPT outcome source naming no cooldown mechanism. Re-freezing would bank a flood-class bypass; the right cure is to give it a mechanism, which is a worldPulse change outside this lane.',
-    'tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer':
-      'NOT FREED — the pin reads a source region its consumer has moved out of (the first-match/line-address rot class). The cure is to RE-POINT the pin at the live consumer, and a mis-pointed pin must not be re-frozen at its wrong address.',
-    'tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty':
-      'NOT FREED — the anti-vacuity arm of the same mis-pointed scan; it must be re-pointed with its sibling, never frozen.',
     'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
       'NOT FREED — 73 local clamp definitions against a baseline of 62. Re-freezing banks 11 forks of a shared primitive; the cure is to route them, which is its own sweep.',
     'tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline':
@@ -662,7 +674,12 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // derived from its own list proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn them; you may never pad them.
   const ADMITTED_CEILING = 4;
-  const OWED_CEILING = 11;
+  // 11 → 9 on 2026-08-10: the two crisisTripleSync rows were FREED, not forgiven. Both were
+  // mis-pointed source-address pins; re-pointing them at the live consumer
+  // (settlementLifecycleHelpers.js / campaignRegionalSliceEntry.js) turned the walker green
+  // with its invariant intact, proven by mutant at the new addresses. See the RATCHETED
+  // 25 → 23 note at the top of this file.
+  const OWED_CEILING = 9;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
