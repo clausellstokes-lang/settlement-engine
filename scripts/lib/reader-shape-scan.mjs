@@ -8442,13 +8442,50 @@ function semanticSiteOf(node, key, kind, sourceFile) {
 }
 
 /**
+ * ⚠⚠ EXCLUDED READ SCOPES EXCLUDE READ SITES, NEVER INDEX INPUTS.
+ *
+ * The whole `files` set still enters `buildIndex`, so every read OUTSIDE an
+ * excluded scope resolves against exactly the same program it always did — a
+ * call site, an export or a heap effect living in an excluded file is real
+ * provenance for a domain read and stays visible. Filtering the INDEX instead
+ * would silently change how domain reads resolve, and would also break the
+ * governed `stats.files === scanTree.entries.length` binding that
+ * observed-shape-governance.mjs asserts over every artifact and baseline.
+ *
+ * FAIL-CLOSED VALIDATION. A scope is a REPOSITORY-RELATIVE POSIX directory
+ * prefix ending in `/`. An absolute prefix is REFUSED on purpose: an
+ * absolute-path prefix test matches on the CHECKOUT'S OWN directory name, a
+ * recorded class that has produced real-looking fake reds before. `..`,
+ * backslashes and drive letters are refused for the same reason.
+ */
+function excludedReadScopesOf(excludedReadScopes) {
+  if (!Array.isArray(excludedReadScopes)) {
+    throw new TypeError('reader-shape excludedReadScopes must be an array of repository-relative directory prefixes');
+  }
+  for (const scope of excludedReadScopes) {
+    if (typeof scope !== 'string' || !scope.length) {
+      throw new TypeError(`reader-shape excluded read scope must be a nonempty string; received ${JSON.stringify(scope)}`);
+    }
+    if (!scope.endsWith('/') || scope.startsWith('/') || scope.includes('\\')
+      || scope.split('/').includes('..') || /^[A-Za-z]:/.test(scope)) {
+      throw new TypeError('reader-shape excluded read scope must be a repository-relative POSIX directory'
+        + ` prefix ending in "/"; received ${JSON.stringify(scope)}`);
+    }
+  }
+  return [...new Set(excludedReadScopes)].sort();
+}
+
+/**
  * Scan every property read in `files` against the executed corpus.
  * @returns {{ findings: object[], stats: object }}
  */
-export function scanReaders({ files, graph, minRows = 8, root, onReadStart = null }) {
+export function scanReaders({
+  files, graph, minRows = 8, root, onReadStart = null, excludedReadScopes = [],
+}) {
   if (onReadStart != null && typeof onReadStart !== 'function') {
     throw new TypeError('reader-shape onReadStart must be a function when provided');
   }
+  const excludedScopes = excludedReadScopesOf(excludedReadScopes);
   const idx = buildIndex(files);
   const diagnostics = {
     computedRecordUnknown: 0,
@@ -8474,9 +8511,16 @@ export function scanReaders({ files, graph, minRows = 8, root, onReadStart = nul
   let reads = 0;
   let resolved = 0;
   let resolvedOrigins = 0;
+  let excludedReadFiles = 0;
 
   for (const [file, sf] of idx.sources) {
     const rel = file.startsWith(root) ? file.slice(root.length + 1).split('\\').join('/') : file;
+    // Declared scope exclusion — the file stays INDEXED above; only its own
+    // reads go un-inspected. See `excludedReadScopesOf`.
+    if (excludedScopes.some((scope) => rel.startsWith(scope))) {
+      excludedReadFiles += 1;
+      continue;
+    }
     const inspectRead = (node, receiver, key, keyNode, kind) => {
       if (BUILTIN_MEMBERS.has(key) || isWriteTarget(node)) return;
       reads += 1;
@@ -8552,7 +8596,12 @@ export function scanReaders({ files, graph, minRows = 8, root, onReadStart = nul
   return {
     findings,
     stats: {
+      // `files` counts INDEXED files and must keep matching the governed scan
+      // manifest; `excludedReadFiles` is how many of them had their read sites
+      // excluded, so no artifact can claim whole-tree resolution it did not do.
       files: idx.sources.size,
+      excludedReadScopes: excludedScopes,
+      excludedReadFiles,
       reads,
       resolved,
       resolvedOrigins,

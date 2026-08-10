@@ -153,6 +153,79 @@ export const isObservedShapeScanPath = (path) => (
 
 export const isObservedShapeSubjectPath = (path) => /\.(js|jsx|json)$/.test(path);
 
+/**
+ * ⭐⭐ CR-OSR-SCOPE-1 (Fable chair, 2026-08-09, vetoable) — THE DECLARED UI-LAYER
+ * EXCLUSION FROM **EXACT** RESOLUTION. Verbatim from the ruling:
+ *
+ *   "The exact scanner's mission is guarding domain generation shapes; UI
+ *    components (src/components/**) are downstream projections of those shapes,
+ *    still covered by the heuristic leg. After three measured walls (the
+ *    original never-terminating read, P1/P2 both rejected, and now a
+ *    genuine-growth budget failure at a UI read), the marginal value of exact
+ *    resolution inside the UI layer does not justify a fourth analyzer round.
+ *    The exclusion must be DECLARED MACHINERY, never silent."
+ *
+ * The third wall is `src/components/SettlementsPanel.jsx:359`
+ * (`updatedSaves.filter(...).map(s => s.id)` through the 959-line
+ * `factionRename.js`): a BOUNDED verdict in ~145 s that fails the 16,384
+ * abstract-state growth budget. `budgetFailure` THROWS, and nothing catches it
+ * in the scan loop, so that one UI read aborts the WHOLE full-tree exact scan.
+ *
+ * WHY THIS IS MACHINERY AND NOT A COMMENT:
+ *   · SCOPE PREFIX, never a per-file list — a per-file list rots the moment a
+ *     component is renamed and then silently excludes nothing (or something
+ *     else). One prefix cannot rot.
+ *   · EXACT IDENTITY + SHRINK-ONLY — the frozen ceiling for this list is pinned
+ *     in tests/lint/readerShapeResolver.test.js as a SUBSET check, so ADDING any
+ *     entry reds. Shrinking (returning a scope to exact resolution) is legal.
+ *   · UI-ONLY, ASSERTED AT DECLARATION — `assertExactScanExcludedScope` runs at
+ *     module load, so a `src/domain/**` entry cannot be quietly added: it throws
+ *     before any scan, gate, or write can begin. The predicate is TOTAL
+ *     (every entry must start with an allowed UI root), never an enumeration of
+ *     forbidden roots, which would fail open on the root nobody listed.
+ *   · REPOSITORY-RELATIVE — never matched against an absolute path, because an
+ *     absolute prefix test matches the CHECKOUT'S OWN directory name.
+ *   · READ SITES ONLY — excluded files still enter the program index, so domain
+ *     reads whose provenance passes through a component resolve unchanged.
+ *   · RECORDED IN EVERY SCAN — `stats.excludedReadScopes` / `excludedReadFiles`
+ *     travel into every artifact, and `--progress` emits them on `scan-start`.
+ *
+ * ⚠ THE HEURISTIC LEG IS THE OTHER HALF OF THIS RULING. `scanLegacyReaders` is
+ * handed the UNFILTERED `before.files` below and MUST STAY UNFILTERED; the live
+ * schema-2 baseline it produced carries 88 `src/components/` files / 250
+ * identities, which is the coverage this exclusion leans on.
+ */
+export const EXACT_SCAN_EXCLUDED_SCOPE = Object.freeze(['src/components/']);
+
+/** The UI roots an exclusion may name. TOTAL positive predicate: an entry that
+ *  is not under one of these is refused, so no unlisted root fails open. */
+const EXACT_SCAN_EXCLUDABLE_UI_ROOTS = Object.freeze(['src/components/']);
+
+/** Fail-closed at declaration: a DOMAIN scope cannot be quietly added. */
+export function assertExactScanExcludedScope(scopes = EXACT_SCAN_EXCLUDED_SCOPE) {
+  if (!Array.isArray(scopes)) {
+    throw new Error('observed-shape EXACT_SCAN_EXCLUDED_SCOPE must be an array of scope prefixes');
+  }
+  for (const scope of scopes) {
+    if (typeof scope !== 'string' || !scope.endsWith('/') || scope.startsWith('/')) {
+      throw new Error(`observed-shape excluded scope must be a repository-relative directory prefix ending in "/"; received ${JSON.stringify(scope)}`);
+    }
+    if (!EXACT_SCAN_EXCLUDABLE_UI_ROOTS.some((root) => scope.startsWith(root))) {
+      throw new Error(`observed-shape excluded scope ${JSON.stringify(scope)} is outside the UI layer.`
+        + ` CR-OSR-SCOPE-1 excludes ONLY downstream UI projections (${EXACT_SCAN_EXCLUDABLE_UI_ROOTS.join(', ')});`
+        + ' a domain scope would remove exact coverage from the shapes this instrument exists to guard.');
+    }
+  }
+  return scopes;
+}
+assertExactScanExcludedScope();
+
+/** True when a REPOSITORY-RELATIVE forward-slash path is excluded from exact
+ *  resolution. Never pass an absolute path: see the note above. */
+export const isExactScanExcludedReadPath = (relativePath) => (
+  EXACT_SCAN_EXCLUDED_SCOPE.some((scope) => String(relativePath).startsWith(scope))
+);
+
 export function sourceFiles(root = ROOT) {
   const out = [];
   (function walk(d) {
@@ -235,6 +308,16 @@ export function ratchetMessage(file, rows) {
     + '  TO SHRINK: fixed a site? LOWER this file\'s number for that identity in\n'
     + '    scripts/.observed-shape-readers-baseline.json (delete the row when it reaches 0).\n'
     + '    Never raise a number, never add a file, never add an identity.';
+}
+
+/** Say the scope reduction out loud on every human-facing run. A silent
+ *  exclusion is the failure mode CR-OSR-SCOPE-1 exists to prevent. */
+export function excludedScopeNotice(scopes, stats) {
+  if (!scopes?.length) return 'exact scan scope: the WHOLE scanned tree (no declared exclusion).';
+  return `⚠ DECLARED SCOPE EXCLUSION (CR-OSR-SCOPE-1): read sites under ${scopes.join(', ')}`
+    + ` were NOT exactly resolved — ${stats?.excludedReadFiles ?? 0} of ${stats?.files ?? 0} indexed`
+    + ' file(s). They remain in the program index and are covered by the heuristic'
+    + ' (legacy-leaf) detector, which is handed the unfiltered file list.';
 }
 
 /** The measurement that makes every green here mean something. */
@@ -951,7 +1034,17 @@ export async function run(argv = [], overrides = {}) {
     origins: Object.keys(corpus.graph?.origins || {}).length,
   });
 
-  emitProgress?.({ phase: 'scan-start', scanMode: command.scanMode, files: before.files.length });
+  // The heuristic (legacy-leaf) leg is deliberately handed the UNFILTERED file
+  // list: it is the coverage CR-OSR-SCOPE-1's UI exclusion leans on.
+  const excludedReadScopes = command.scanMode === 'legacy-leaf'
+    ? []
+    : assertExactScanExcludedScope();
+  emitProgress?.({
+    phase: 'scan-start',
+    scanMode: command.scanMode,
+    files: before.files.length,
+    excludedReadScopes,
+  });
   const scan = command.scanMode === 'legacy-leaf'
     ? runtime.scanLegacyReaders({
       files: before.files,
@@ -967,6 +1060,7 @@ export async function run(argv = [], overrides = {}) {
       graph: corpus.graph,
       minRows: ORIGIN_MIN_ROWS,
       root: ROOT,
+      excludedReadScopes,
       onReadStart: emitProgress
         ? (read) => emitProgress({ phase: 'read-start', ...read })
         : null,
@@ -976,6 +1070,7 @@ export async function run(argv = [], overrides = {}) {
     scanMode: command.scanMode,
     findings: scan.findings.length,
     reads: scan.stats.reads,
+    excludedReadFiles: scan.stats.excludedReadFiles ?? 0,
   });
   runtime.assertFindingSourceEvidence(scan.findings, before);
   const sentinel = scanSentinelOf(command.scanMode, corpus, scan.stats, SCAN_CONFIG);
@@ -1001,6 +1096,7 @@ export async function run(argv = [], overrides = {}) {
     }));
     runtime.writeArtifact(outputPlan, artifact);
     console.log(`observed-shape ${command.scanMode} artifact: ${scan.findings.length} finding(s) written to ${command.jsonPath}`);
+    console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
     return 0;
   }
 
@@ -1066,6 +1162,7 @@ export async function run(argv = [], overrides = {}) {
       console.log(`${finding.file}:${finding.line}  ${finding.key}  on ${finding.shapes.join('|')}   ${finding.text}`);
     }
     console.log(`\n${scan.findings.length} finding(s); scan reached ${scan.stats.resolved}/${scan.stats.reads} reads across ${scan.stats.files} files`);
+    console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
   }
   if (!violations.length && !stale.length && !vacuity.length) {
     console.log(`observed-shape readers: ${scan.findings.length} finding(s), exactly matching the frozen inventory.`);

@@ -1,9 +1,16 @@
-import { mkdtempSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { describe, expect, test } from 'vitest';
 
 import { scanReaders } from '../../scripts/lib/reader-shape-scan.mjs';
+import {
+  EXACT_SCAN_EXCLUDED_SCOPE,
+  assertExactScanExcludedScope,
+  isExactScanExcludedReadPath,
+  sourceFiles,
+} from '../../scripts/check-observed-shape-readers.mjs';
 
 const rows = 16;
 const record = (origins) => ({ kind: 'record', origins });
@@ -2572,5 +2579,149 @@ describe('reader shape resolver provenance', () => {
       { key: '__capturedMutable', origins: ['root/save'] },
     ]);
     expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
+});
+
+/**
+ * ── CR-OSR-SCOPE-1 — THE DECLARED UI-LAYER EXCLUSION ────────────────────────
+ *
+ * The chair ruled the scope-reduction fallback after three measured walls, the
+ * third being a genuine abstract-state growth budget failure at
+ * `src/components/SettlementsPanel.jsx:359`. `budgetFailure` THROWS and nothing
+ * catches it in the scan loop, so ONE unresolvable UI read aborts the whole
+ * full-tree exact scan. The ruling's own words: the exclusion "must be DECLARED
+ * MACHINERY, never silent", with "a control proving an excluded read still gets
+ * heuristic coverage, and a control proving a DOMAIN read cannot be quietly
+ * added to the exclusion."
+ *
+ * ⚠ WHAT MAKES THESE CONTROLS NON-VACUOUS. Every behavioral pin below is driven
+ * in BOTH directions off ONE tree: the same planted read is silent WITH the
+ * declared scope and REPORTED without it. A one-directional pin would pass just
+ * as well against a scanner that had stopped reporting anything at all.
+ */
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/**
+ * The SHRINK-ONLY ceiling for the declared exclusion. This is the reviewed
+ * maximum, not a restatement of the live list: the pin below is a SUBSET check,
+ * so ADDING an entry (a domain scope above all) reds, while shrinking — handing
+ * a scope back to exact resolution — is legal and needs no edit here.
+ */
+const EXCLUDED_SCOPE_CEILING = Object.freeze(['src/components/']);
+
+function scanScopeTree(entries, excludedReadScopes = []) {
+  const dir = mkdtempSync(join(tmpdir(), 'reader-shape-scope-'));
+  const files = entries.map(([relativePath, body]) => {
+    const file = join(dir, relativePath);
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, body);
+    return file;
+  });
+  return scanReaders({
+    files, graph: GRAPH, minRows: 8, root: dir, excludedReadScopes,
+  });
+}
+
+/**
+ * One tree, two reads, and the domain read's ONLY provenance is a call site
+ * INSIDE the excluded component file. That is deliberate: it is the pin that
+ * catches an "optimization" that filters excluded files out of `buildIndex`
+ * instead of out of the read loop, which would silently change what domain
+ * reads resolve to.
+ */
+const SCOPE_TREE = [
+  ['src/domain/inspectSave.js', 'export function inspectSave(box) { return box.__throughComponent; }\n'],
+  ['src/components/SavesPanel.jsx',
+    "import { inspectSave } from '../domain/inspectSave.js';\n"
+    + 'export function render(save) { return inspectSave(save); }\n'
+    + 'export function direct(save) { return save.__uiGhost; }\n'],
+];
+
+describe('CR-OSR-SCOPE-1: the declared UI-layer exclusion from exact resolution', () => {
+  test('THE EXCLUSION BITES: a src/components read is not exactly resolved', () => {
+    const result = scanScopeTree(SCOPE_TREE, EXACT_SCAN_EXCLUDED_SCOPE);
+
+    expect(result.findings.map(({ file, key }) => ({ file, key }))).toEqual([
+      { file: 'src/domain/inspectSave.js', key: '__throughComponent' },
+    ]);
+    expect(result.stats.excludedReadFiles).toBe(1);
+    expect(result.stats.excludedReadScopes).toEqual(['src/components/']);
+  });
+
+  test('THE MUTANT, OTHER DIRECTION: with NO declared scope the same UI read IS reported', () => {
+    const result = scanScopeTree(SCOPE_TREE, []);
+
+    expect(result.findings.map(({ file, key }) => ({ file, key }))).toEqual([
+      { file: 'src/components/SavesPanel.jsx', key: '__uiGhost' },
+      { file: 'src/domain/inspectSave.js', key: '__throughComponent' },
+    ]);
+    expect(result.stats.excludedReadFiles).toBe(0);
+  });
+
+  test('⚠⚠ READ SITES ONLY: the excluded file stays INDEXED, so the domain read still resolves', () => {
+    const excluded = scanScopeTree(SCOPE_TREE, EXACT_SCAN_EXCLUDED_SCOPE);
+    const whole = scanScopeTree(SCOPE_TREE, []);
+
+    // `inspectSave`'s parameter is bound ONLY by the call inside the excluded
+    // component. Dropping that file from the index would leave the receiver
+    // ungrounded and this finding would vanish — the exact silent soundness
+    // loss this arrangement refuses.
+    expect(excluded.findings.filter(({ key }) => key === '__throughComponent')
+      .map(({ origins }) => origins)).toEqual([['root/save']]);
+    // `stats.files` counts INDEXED files and is the number the governed
+    // artifact binds to its scan manifest; it must not move with the scope.
+    expect(excluded.stats.files).toBe(whole.stats.files);
+    expect(excluded.stats.files).toBe(2);
+  });
+
+  test('⚠ FAIL-CLOSED: a DOMAIN scope cannot be quietly added to the exclusion', () => {
+    expect(() => assertExactScanExcludedScope(['src/domain/']))
+      .toThrow(/is outside the UI layer/);
+    expect(() => assertExactScanExcludedScope(['src/components/', 'src/domain/worldPulse/']))
+      .toThrow(/is outside the UI layer/);
+    expect(() => assertExactScanExcludedScope(['src/']))
+      .toThrow(/is outside the UI layer/);
+    // The live declaration is what actually runs, and it passes its own law.
+    expect(assertExactScanExcludedScope()).toBe(EXACT_SCAN_EXCLUDED_SCOPE);
+  });
+
+  test('⚠ SHRINK-ONLY + TOTAL PREDICATE: the declared list is frozen, bounded, and UI-only', () => {
+    expect(Object.isFrozen(EXACT_SCAN_EXCLUDED_SCOPE)).toBe(true);
+    // SUBSET, not equality: growth reds, a shrink does not need this file edited.
+    expect(EXACT_SCAN_EXCLUDED_SCOPE
+      .filter((scope) => !EXCLUDED_SCOPE_CEILING.includes(scope))).toEqual([]);
+    // TOTAL positive predicate — every entry must be under the UI root. An
+    // enumeration of FORBIDDEN roots would fail open on the root nobody listed.
+    expect(EXACT_SCAN_EXCLUDED_SCOPE
+      .filter((scope) => !scope.startsWith('src/components/'))).toEqual([]);
+    expect(new Set(EXACT_SCAN_EXCLUDED_SCOPE).size).toBe(EXACT_SCAN_EXCLUDED_SCOPE.length);
+  });
+
+  test('⚠⚠ RELATIVE PREFIXES ONLY: an absolute or traversing scope is refused', () => {
+    // An absolute-path prefix test matches the CHECKOUT'S OWN directory name —
+    // a recorded class that has produced real-looking fake reds before.
+    for (const scope of ['/src/components/', 'src/components', '../components/',
+      'src\\components\\', 'C:/src/components/']) {
+      expect(() => scanScopeTree(SCOPE_TREE, [scope]), scope)
+        .toThrow(/repository-relative POSIX directory/);
+    }
+    expect(() => scanScopeTree(SCOPE_TREE, [''])).toThrow(/nonempty string/);
+    expect(() => scanScopeTree(SCOPE_TREE, 'src/components/')).toThrow(/must be an array/);
+  });
+
+  test('THE BLOCKED READ IS OUT OF EXACT SCOPE, and rulingPower.js is not', () => {
+    const estate = sourceFiles(REPO_ROOT)
+      .map((file) => relative(REPO_ROOT, file).split('\\').join('/'));
+
+    // The wall that motivated the ruling is a REAL scanned file, still walked
+    // and still indexed — and now outside exact READ resolution.
+    expect(estate).toContain('src/components/SettlementsPanel.jsx');
+    expect(isExactScanExcludedReadPath('src/components/SettlementsPanel.jsx')).toBe(true);
+    // The domain shapes this instrument exists to guard are untouched.
+    expect(estate).toContain('src/domain/rulingPower.js');
+    expect(isExactScanExcludedReadPath('src/domain/rulingPower.js')).toBe(false);
+    expect(estate.filter(isExactScanExcludedReadPath).length).toBeGreaterThan(0);
+    expect(estate.filter((path) => path.startsWith('src/domain/'))
+      .filter(isExactScanExcludedReadPath)).toEqual([]);
   });
 });

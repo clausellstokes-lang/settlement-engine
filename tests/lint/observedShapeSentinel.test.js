@@ -5,6 +5,7 @@ import {
   commandOf,
   compare,
   corpusPayloadOf,
+  EXACT_SCAN_EXCLUDED_SCOPE,
   identityOf,
   isObservedShapeScanPath,
   isObservedShapeSubjectPath,
@@ -400,6 +401,90 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       }),
     ]));
     expect(events.every(({ at }) => /^\d{4}-\d{2}-\d{2}T/.test(at))).toBe(true);
+  });
+
+  /**
+   * ── CR-OSR-SCOPE-1 — THE TWO LEGS, WIRED THE OPPOSITE WAY ON PURPOSE ──────
+   *
+   * The chair's scope ruling rests entirely on a premise about wiring: exact
+   * resolution skips the UI layer BECAUSE the heuristic (legacy-leaf) leg still
+   * covers it. That premise is only true while the file census stays UNFILTERED
+   * and the exclusion travels as a declared parameter to the exact leg alone.
+   * Pre-filtering `sourceFiles()` instead would quietly take the UI layer away
+   * from BOTH detectors — and from the governed scan manifest with it.
+   *
+   * Both tests below drive the REAL `run()` and read what each leg was handed.
+   */
+  test('CR-OSR-SCOPE-1: the EXACT leg is handed the declared exclusion, over an unfiltered census', async () => {
+    const scanPath = 'src/components/Probe.jsx';
+    const findings = [findingOf({ file: scanPath })];
+    const runtime = scanRuntime({ findings });
+    runtime.overrides.committedInputManifestsFor = () => treeSetFor(scanPath);
+    let seen = null;
+    runtime.overrides.scanReaders = (options) => {
+      seen = options;
+      return { findings, stats: healthyStats({ excludedReadFiles: 1 }) };
+    };
+
+    await expect(run(
+      ['--scan-only', '--json=/virtual/scope-exact.json'],
+      runtime.overrides,
+    )).resolves.toBe(0);
+
+    expect(seen.excludedReadScopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
+    expect(seen.excludedReadScopes).toEqual(['src/components/']);
+    // THE CENSUS IS NOT PRE-FILTERED: the one UI file in the tree is still
+    // walked, still indexed, and still bound into the governed scan manifest.
+    expect(seen.files).toEqual([`/repo/${scanPath}`]);
+    expect(runtime.writes[0].artifact.scanTree.entries.map(({ path }) => path))
+      .toEqual([scanPath]);
+    expect(runtime.writes[0].artifact.stats.excludedReadFiles).toBe(1);
+  });
+
+  test('CR-OSR-SCOPE-1: the HEURISTIC leg is handed NO exclusion and the same unfiltered census', async () => {
+    const scanPath = 'src/components/Probe.jsx';
+    const corpus = healthyCorpus();
+    const stats = healthyStats();
+    const trees = treeSetFor(scanPath);
+    const corpusArtifact = createScanArtifact({
+      scanMode: 'exact-origin',
+      baselineSchema: 3,
+      subjectSha: SUBJECT_SHA,
+      scannerSha: SUBJECT_SHA,
+      ...trees,
+      scanConfig: SCAN_CONFIG,
+      corpus,
+      findings: [findingOf({ file: scanPath })],
+      stats,
+      sentinel: sentinelOf(corpus, stats),
+      inventory: artifactInventoryOf('exact-origin', [findingOf({ file: scanPath })]),
+    });
+    const legacyFindings = [{
+      file: scanPath, line: 1, pos: 10, key: 'ghost', shapes: ['record'], text: 'row.ghost',
+    }];
+    const legacyStats = { files: 1, reads: 2, resolved: 1, unresolved: 1 };
+    const runtime = scanRuntime({ corpus, findings: [findingOf({ file: scanPath })], stats });
+    runtime.overrides.committedInputManifestsFor = () => trees;
+    runtime.overrides.readJson = () => corpusArtifact;
+    let seenLegacy = null;
+    runtime.overrides.scanLegacyReaders = (options) => {
+      seenLegacy = options;
+      return { findings: legacyFindings, stats: legacyStats };
+    };
+    runtime.overrides.scanReaders = () => {
+      throw new Error('the legacy leg must not invoke the exact resolver');
+    };
+
+    await expect(run([
+      '--scan-only', '--scan-mode=legacy-leaf',
+      '--corpus-artifact=/virtual/scope-exact.json', '--json=/virtual/scope-legacy.json',
+    ], runtime.overrides)).resolves.toBe(0);
+
+    // The UI file the exact leg skips is exactly the file the heuristic leg
+    // still reads — and it carries no scope parameter at all.
+    expect(seenLegacy.files).toEqual([`/repo/${scanPath}`]);
+    expect(seenLegacy.excludedReadScopes).toBeUndefined();
+    expect(runtime.writes[0].artifact.findings.map(({ file }) => file)).toEqual([scanPath]);
   });
 
   test('scan-only mode is admitted before corpus execution only with a JSON target', async () => {

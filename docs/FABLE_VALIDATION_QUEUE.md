@@ -7298,3 +7298,42 @@ Feed multiplier by observed compliance: honored = 1.0; strained = `RELAY_KEEP` B
 (0.95 — semantic law: a strained compelled feed degrades to ally-relay fidelity, never a
 second spelling); defaulted/lapsed = feed stops. Multiply then clamp [0,1]; no rounding.
 Merge = the existing strongest-confidence precedent UNCHANGED; no third merge law.
+
+---
+
+## S12-OSR-SCOPE — CR-OSR-SCOPE-1 lands, and the wall moves into src/data (2026-08-10, Opus implement / Fable chair)
+
+**✅ FABLE-MANAGED AND VALIDATED (F-S1 era).** The declared shrink-only exclusion of
+`src/components/**` from the EXACT scanner is machinery: a module-load total-positive
+predicate (a domain scope cannot even load — mutant A reds at import), read-site
+skipping AFTER buildIndex (excluded files stay indexed so domain reads keep their
+provenance — mutant D proves filtering the census collapses a domain read's origins),
+the heuristic leg deliberately unfiltered (mutant E), shrink-only subset ceiling, and
+relative-prefix validation. Suites 92→99 + 13→15 = **114/114**, five mutants killed,
+chair re-earned the green before this commit. Chair RATIFIES both lane judgments
+(read-sites-not-index; exclusion rides stats not SCAN_CONFIG — instrument-schema
+changes belong to the freeze ruling).
+
+**⚠⚠ THE RULING'S PREMISE IS REFUTED BY MEASUREMENT: the UI was not the only wall.**
+With 606 UI files out of exact scope the governed-shape full run (non-authoritative
+harness; nothing published) died at `src/data/constants.js:56` — `prosperityRank`'s
+`prosperity?.tier` parameter read — abstract-state growth 16,385 > 16,384 at 4.16 min
+(12 GB heap). CONFIRMED previously-masked, not introduced: `src/components/` occupies
+census indices 17–622, `src/data/` starts at 639; the old block was read 3,169.
+`src/data` is inside the scanner's mission and NOT excludable under this law.
+**⚠ At the DEFAULT heap the growth budget cannot fire — the process OOMs first**
+(4,055 MB at 4.26 min). Any full-tree run needs an explicit `--max-old-space-size`
+or the budget is decorative.
+
+**THE FREEZE-RULING DOCKET (step 7 of the recorded resume order; owner/Fable, not a
+lane's):** (1) the full-tree exact scan remains blocked — decide between the
+initializer-bounding research direction (now with a small clean specimen:
+`prosperityRank` is pure and ubiquitous), a principled demand-level bound for
+ubiquitous pure helpers, or accepting the exact scanner as a targeted instrument with
+the heuristic leg as the full-tree gate; (2) post-freeze, excluded UI files have NO
+per-gate coverage unless the freeze lane adds the legacy leg to the gate — decide in
+writing; (3) wire `observedShapeReaders.walker.test.js`'s `scanEstateWith` to
+`EXACT_SCAN_EXCLUDED_SCOPE` in the same change as the schema-3 migration (the one
+guard/gate divergence this landing introduces — named, not hidden; that walker is
+independently red at HEAD on schema 2-vs-3). Traces preserved under the session
+scratchpad's `osrscope-` prefix.
