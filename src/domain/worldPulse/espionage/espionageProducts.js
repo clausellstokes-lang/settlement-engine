@@ -38,18 +38,28 @@
  *     target's own belief row is not an option either way — self-belief is never written
  *     (HZ10), so `beliefRecord(x, x)` is a slot the estate has by design left empty.
  *
- * ── ⛔ ONE LEG THIS WAVE COULD NOT FILL, MEASURED RATHER THAN ASSUMED (STOP-ES3-1) ──────
- * `ENVOY_COVERT_LEG_REFS` admits `exports`, and §3.6 says exports knowledge "lands as the
- * belief-side fill that peaceTermsAppraisal's truth-read of loserExports was built to be
- * replaced by". THERE IS NO SUCH SLOT. Measured at build: `conditionsBands` carries exactly
- * `pullBand / routePositionBand / storesBand / tierBand`, `scarcityBands` is keyed by GOOD
- * CATEGORY, and the string `exports` appears nowhere in `beliefAxisSubjects.js`;
- * `loserExports` is a TRUTH read inside `peaceTermsAppraisal`. Minting a belief slot for it
- * is a NEW persisted key family, which §1's zero-new-keys fight forbids and CR-ES-5's
- * precedent routes to the owner. So an ACQUIRE naming `exports` REPORTS IT UNFILLED, by
- * name, on every product — `legsUnfilled` — rather than quietly landing three of four legs
- * and grading itself `met`. That is the dead-vocabulary-member shape the `pullBand`
- * exclusion exists to prevent, one member later; it is declared here, not papered over.
+ * ── ⛔ STOP-ES3-1 IS CLOSED, AND IT CLOSED BY A CUT RATHER THAN A DECLARATION (EP-r) ────
+ * ES-3 measured that `ENVOY_COVERT_LEG_REFS` admitted `exports` while THERE WAS NO SUCH
+ * SLOT: `conditionsBands` carries exactly `pullBand / routePositionBand / storesBand /
+ * tierBand`, `scarcityBands` is keyed by GOOD CATEGORY, the string `exports` appears
+ * nowhere in `beliefAxisSubjects.js`, and `loserExports` is a TRUTH read inside
+ * `peaceTermsAppraisal`. Minting the slot is a NEW persisted key family, which §1's
+ * zero-new-keys fight forbids, so ES-3 DECLARED the dead member here instead —
+ * `LEG_SLOTS.exports` was `null` and an ACQUIRE naming it reported the leg in
+ * `legsUnfilled` rather than landing three of four and grading itself `met`.
+ *
+ * EP-r CUT THE MEMBER, on the argument that the declaration was the workaround. This same
+ * vocabulary already excluded `pullBand` BY RULE, one member earlier, for the IDENTICAL
+ * property — no espionage product can ever fill it. Two members with the same property
+ * treated two different ways is the defect, not the cure. `exports` is now absent from the
+ * vocabulary, so the mint and the persist side both REFUSE it by name (`invalid_leg_refs`)
+ * instead of accepting a word that could only ever come home empty.
+ *
+ * ⚠ THE `legsUnfilled` MACHINERY AND THE GRADE CAP ARE KEPT, AND THEY ARE NOT VESTIGIAL.
+ * Two live arms still drive them: a leg whose belief FAMILY is dark is unfillable for a
+ * second and entirely legitimate reason (`conditionsLit !== true`), and a CORE leg whose
+ * slot the observed read never carried is a third. What the cut removed is only the leg
+ * that could never be filled in ANY world.
  *
  * PURE: no Date, no Math.random, no store, no React, no I/O, no mutation of an input.
  *
@@ -87,15 +97,21 @@ export const PRODUCT_TUNING = Object.freeze({
 });
 
 /**
- * WHICH APPRAISAL LEG MAPS ONTO WHICH BELIEF SLOT. Closed, and total over the six members
- * of `ENVOY_COVERT_LEG_REFS` — `exports` is present and maps to NOTHING, which is the
- * declaration STOP-ES3-1 is made of. A leg with no slot must be VISIBLE in the table, not
- * missing from it: a table that simply omitted it would read as an unrecognised word and
- * the mission would grade itself as though nobody had asked.
+ * WHICH APPRAISAL LEG MAPS ONTO WHICH BELIEF SLOT. Closed, and TOTAL over the five members
+ * of `ENVOY_COVERT_LEG_REFS`. EVERY MEMBER NOW MAPS TO A REAL SLOT, because EP-r cut the
+ * one member that mapped to NOTHING (the header records the argument). Totality remains the
+ * law and the pin still measures it both ways: a leg the table OMITTED would read as an
+ * unrecognised word and the mission would grade itself as though nobody had asked.
+ *
+ * ⚠ THE `null` ARM OF THIS TYPE SURVIVES THE CUT ON PURPOSE, and EP-r pins it rather than
+ * leaving it unreachable. `productGroundTruth` looks a ref up in this table WITHOUT
+ * re-validating it against `COVERT_LEG_REF_SET`, so a ref from outside the vocabulary has
+ * to report UNFILLED rather than dereference `undefined` and throw. That arm is now driven
+ * by a NON-VOCABULARY ref in the pin, which is the only way it can be reached at all once
+ * no lawful member maps to null.
  * @type {Readonly<Record<string, {slot: string, family: 'core'|'conditions'}|null>>}
  */
 export const LEG_SLOTS = Object.freeze({
-  exports: null,
   readiness: Object.freeze({ slot: 'readiness', family: /** @type {'core'} */ ('core') }),
   routePositionBand: Object.freeze({ slot: 'routePositionBand', family: /** @type {'conditions'} */ ('conditions') }),
   storesBand: Object.freeze({ slot: 'storesBand', family: /** @type {'conditions'} */ ('conditions') }),

@@ -1337,8 +1337,8 @@ under J-WR-10-B as borrow-checked: nothing existing matched).
 **ES-1 — THE MISSION (⚠ RIDES `espionageEnabled`; DOES NOT MINT IT — see §2's
 correction and the FLAG-ATTRIBUTION NOTE in `DESIGN_FP_ARCHITECTURE.md` §3;
 needs SP-D).** Charter: the covert arm in SP-D's `errandMint.js` (mint
-validation: itinerary ≤ 3, closed products + demand bands + the six-member
-legRefs set with pullBand refused ⟨F5⟩, dispatch-refusal seams,
+validation: itinerary ≤ 3, closed products + demand bands + the five-member
+legRefs set (EP-r cut 'exports' 2026-08-10) with pullBand refused ⟨F5⟩, dispatch-refusal seams,
 concurrency cap) + `normalizeErrand` taught the `covert` sub-record (same
 commit — the columnOf precedent) + the `covert_envoy` franchise members in
 `routeNetworkConsumers.js` (519) + the one-word kind fork at

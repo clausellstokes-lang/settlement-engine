@@ -35,7 +35,8 @@ import { couplingRow } from './couplingRegistrySchema.js';
  * is the spine's own door: it names, by reason, every covert cargo the mint will not
  * write — a class that is not covert, a row it cannot give a public face to, an itinerary
  * past the cap, a product or demand outside the closed sets, and a `legRefs` naming
- * `pullBand`, the appraisal leg no espionage product can ever fill. The espionage layer
+ * `pullBand` or `exports`, the two appraisal legs no espionage product can ever fill (EP-r
+ * cut the second one out of the vocabulary; ES-1 had admitted it). The espionage layer
  * cannot talk its way past any of them, because the validation it would have to defeat is
  * the same one the PERSIST side runs on the way back out of a save file.
  *

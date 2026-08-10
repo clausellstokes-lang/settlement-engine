@@ -84,11 +84,13 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
   'src/domain/worldPulse/envoyErrandVocabulary.js':
     'FP ES-1, and it is the only speller here that WRITES none of them. ⟨F5⟩ closes the'
     + ' covert mission\'s ACQUIRE target list — the appraisal legs a spy may be sent to fill'
-    + ' — as a closed six-member set, and three of the six ARE these field names, because'
+    + ' — as a closed five-member set, and three of the five ARE these field names, because'
     + ' the whole point of the product is that it lands on SP-B\'s own slots rather than on'
     + ' a parallel espionage surface. It is a POINTER, spelled exactly: the mint refuses a'
-    + ' legRef outside the six, and it refuses `pullBand` specifically because SP-B\'s own'
-    + ' populations road feeds that one and no espionage product can. Renaming a field here'
+    + ' legRef outside the five, and it refuses `pullBand` and `exports` specifically'
+    + ' because no espionage product can fill either — SP-B\'s own populations road feeds'
+    + ' the first, and the second has no belief slot at all (admitted at ES-1, declared dead'
+    + ' at ES-3, cut at EP-r). Renaming a field here'
     + ' would not invent a fourth surface, it would break the join this list exists to make,'
     + ' which is why the spelling is argued rather than indirected',
   'src/domain/worldPulse/espionage/espionageProducts.js':

@@ -214,20 +214,35 @@ describe('ES-1 vocabulary — one mint, closed, ordered, and shared with the ari
     }
   });
 
-  test('⟨F5⟩ the legRefs set is the SIX, and pullBand is refused BY ABSENCE', () => {
+  test('⟨F5⟩ the legRefs set is the FIVE, and BOTH dead legs are refused BY ABSENCE', () => {
+    // EP-r: the row that used to read SIX. `exports` was admitted at ES-1, measured
+    // slotless and declared dead at ES-3 (STOP-ES3-1), and CUT here — so this list is the
+    // cut itself, not a weakened pin.
     expect([...ENVOY_COVERT_LEG_REFS]).toEqual([
-      'exports', 'readiness', 'routePositionBand', 'storesBand', 'strength', 'tierBand',
+      'readiness', 'routePositionBand', 'storesBand', 'strength', 'tierBand',
     ]);
-    // The dead-band law, stated as a negative: SP-B's conditionsBands carries a FOURTH
-    // key, and no espionage product can fill it, so admitting it would mint a vocabulary
-    // member nobody could ever satisfy. This is the whole content of ⟨F5⟩ and it reds if
-    // a later lane "completes" the set for symmetry.
-    // anchored: the six members are asserted by exact list two lines above, so this
-    // absence is a statement about a PROVEN-POPULATED set and not about an empty one.
-    expect(ENVOY_COVERT_LEG_REFS).not.toContain('pullBand'); // anchored: the six members are asserted by exact list two lines above, so the set is proven populated
+    // The dead-band law, stated as a negative, and now stated TWICE because the two words
+    // share one property: no espionage product can fill either, so admitting either would
+    // mint a vocabulary member nobody could ever satisfy. This is the whole content of
+    // ⟨F5⟩ and it reds if a later lane "completes" the set for symmetry.
+    // anchored: the five members are asserted by exact list two lines above, so these
+    // absences are statements about a PROVEN-POPULATED set and not about an empty one.
+    expect(ENVOY_COVERT_LEG_REFS).not.toContain('pullBand'); // anchored: the five members are asserted by exact list two lines above, so the set is proven populated
+    expect(ENVOY_COVERT_LEG_REFS).not.toContain('exports'); // anchored: the five members are asserted by exact list five lines above, so the set is proven populated
+    // AND BOTH REFUSE AT THE PERSIST SEAM, which is what makes the cut a REJECTING
+    // narrowing rather than a deletion: a forged import naming either is turned away by
+    // name, exactly as a mint carrying it would be.
     expect(normalizeCovertMission(mission({
       product: 'acquire', legRefs: ['tierBand', 'pullBand'],
     })).reason).toBe('invalid_leg_refs');
+    expect(normalizeCovertMission(mission({
+      product: 'acquire', legRefs: ['tierBand', 'exports'],
+    })).reason).toBe('invalid_leg_refs');
+    // ...and the POSITIVE CONTROL, so the two refusals above measure the excluded words
+    // and not a reader that rejects every leg list it is handed.
+    expect(normalizeCovertMission(mission({
+      product: 'acquire', legRefs: ['tierBand', 'storesBand'],
+    })).reason).toBe('covert');
   });
 
   test('the arithmetic BORROWS the row vocabulary rather than authoring a second copy', () => {
@@ -259,14 +274,18 @@ describe('ES-1 vocabulary — one mint, closed, ordered, and shared with the ari
 
 describe('ES-1 the sub-record normalizer — one validation, two answers, total on garbage', () => {
   test('a lawful mission normalizes, sorts its legRefs, and drops nothing it was given', () => {
+    // EP-r: the sort witness used to be `['tierBand', 'exports'] → ['exports', 'tierBand']`.
+    // `exports` is CUT, so the pair is now two LAWFUL members that are still out of
+    // codepoint order on the way in — the claim (the normalizer sorts, and drops nothing)
+    // is unchanged and the input is still genuinely unsorted.
     const read = normalizeCovertMission(mission({
-      product: 'acquire', legRefs: ['tierBand', 'exports'],
+      product: 'acquire', legRefs: ['tierBand', 'readiness'],
     }));
     expect(read.reason).toBe('covert');
     expect(read.covert).toEqual({
       demand: 'confirm',
       itinerary: [{ face: 'declared', settlementId: 'irontown', stayTicks: 2 }],
-      legRefs: ['exports', 'tierBand'],
+      legRefs: ['readiness', 'tierBand'],
       product: 'acquire',
       subjectId: 'irontown',
     });
@@ -445,6 +464,9 @@ describe('ES-1 the mint — named refusals, and a face a covert row cannot go wi
     expect(refuse({}, mission({ demand: 'absolutely' }))).toBe('invalid_demand');
     expect(refuse({}, mission({ subjectId: '' }))).toBe('invalid_subject');
     expect(refuse({}, mission({ product: 'acquire', legRefs: ['pullBand'] }))).toBe('invalid_leg_refs');
+    // EP-r: the cut leg refuses at the MINT too, not only at the persist seam — the same
+    // two-door symmetry pullBand has carried since ES-1.
+    expect(refuse({}, mission({ product: 'acquire', legRefs: ['exports'] }))).toBe('invalid_leg_refs');
     expect(refuse({}, mission({ escort: true }))).toBe('invalid_covert_keys');
     // ES-3's two taught keys refuse BY THEIR OWN NAME at the mint too — the persist side
     // heals a malformed sub-record to absent, and the mint side must say what was wrong.

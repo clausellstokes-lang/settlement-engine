@@ -2026,7 +2026,7 @@ reds instead of vanishing. **A scan whose miss looks identical to a clean pass i
 instrument; the count assertion is what makes it one.**
 
 ⚠ `SOAK_COUPLINGS` is a
-closed six-member vocabulary; a habit band would need a SEVENTH member and therefore a
+closed six-member vocabulary; a habit band would need a SEVENTH member and therefore a ⏱ (EP-r cut 'exports' 2026-08-10: doctrine now lands as the SIXTH member, and the mint's refusal test gains its row against a FIVE-member base — the arithmetic below shifts by one.)
 `SOAK_BAND_MANIFEST_VERSION` bump 2 → 3 — **which does not happen until the owner signs
 at the soak redo.** Until then every value here is raw-authored in `HABIT_TUNING` and
 nothing enters the manifest.

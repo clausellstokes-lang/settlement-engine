@@ -576,17 +576,22 @@ describe('ES-4 — SP-B2\'s totality and degraded arms, re-run against espionage
     expect(priceOf(walkOneMission().after, FAR).appraisal.known).toBe(true);
   });
 
-  it('THE `exports` LEG STILL HAS NO SLOT (STOP-ES3-1), and it costs the appraisal a price', () => {
-    // ⛔ The one lawful legRef with no belief slot, carried all the way to the market: a
-    // mission sent for it comes home having filled nothing, says so by name, and the
-    // holding stays unpriced. Recorded here rather than left as a leaf-level fact, because
-    // the market is where the cost of that stop is actually paid.
-    const walked = walkOneMission({ legRefs: ['exports'] });
-    expect(walked.landing.legsUnfilled).toEqual(['exports']);
-    expect(walked.landing.legsFilled).toEqual([]);
-    expect(LEG_SLOTS.exports, 'the leg grew a slot — STOP-ES3-1 is closed and this pin'
-      + ' should become a positive').toBeNull();
-    expect(priceOf(walked.after, FAR).appraisal.known).toBe(false);
+  it('THE `exports` LEG IS GONE FROM THE VOCABULARY (STOP-ES3-1 closed by EP-r), so the mission never mints', () => {
+    // ⛔ THIS PIN INVERTED, AND THE INVERSION IS THE POINT. It used to walk a mission sent
+    // for `exports` — the one lawful legRef with no belief slot — all the way to the market
+    // to show it came home having filled nothing and left the holding unpriced. EP-r CUT the
+    // member instead of declaring it, so there is no longer a mission to walk: the leg is
+    // refused at the mint, by name, before any road is priced. That is a strictly stronger
+    // statement than the old one — the cost is not paid at the market, it is never incurred.
+    expect(LEG_SLOTS.exports, 'the cut leg came back into the table — EP-r was reverted and'
+      + ' this pin should return to walking an unfilled mission').toBeUndefined();
+    expect(ENVOY_COVERT_LEG_REFS, 'the cut leg came back into the vocabulary')
+      .not.toContain('exports'); // anchored: the vocabulary's five live members are asserted by exact list in tests/domain/espionageMission.test.js ⟨F5⟩, and the positive control below proves this walker still mints
+    // THE POSITIVE CONTROL, so the absence above measures the CUT and not a walker that
+    // stopped minting anything: the same helper with lawful legs still lands and prices.
+    const lawful = walkOneMission();
+    expect(lawful.landing.legsFilled).toEqual([...CONDITION_LEG_REFS]);
+    expect(priceOf(lawful.after, FAR).appraisal.known).toBe(true);
   });
 
   it('A FOLLOWING CONFIRM ON THE SAME DISTANT PAIR KEEPS THE PRICE — the class\'s own verb, executed', () => {
@@ -727,7 +732,8 @@ describe('ES-4 — seam 5: the axis vocabulary flows ONE WAY, from SP-B into the
   });
 
   it('THE LEG VOCABULARY IS A JOIN, both sides measured: every conditions legRef reaches a real appraisal key', () => {
-    // ⟨F5⟩'s closed six-member set, `LEG_SLOTS`'s total table, `CONDITIONS_KEYS` and the
+    // ⟨F5⟩'s closed five-member set (EP-r cut the sixth), `LEG_SLOTS`'s total table,
+    // `CONDITIONS_KEYS` and the
     // appraisal's own evidence shape are FOUR live tables, and this is the one place they
     // are asked to agree. A leg that named a slot the belief side does not own, or a slot
     // the appraisal never reads, would be a dead vocabulary member.

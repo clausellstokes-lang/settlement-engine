@@ -177,15 +177,34 @@ export const ENVOY_COVERT_DEMANDS = Object.freeze(['certain', 'confirm', 'corrob
 export const ENVOY_COVERT_FACES = Object.freeze(['covert', 'declared']);
 
 /**
- * ⟨F5⟩ THE SIX APPRAISAL LEGS AN ACQUIRE MAY TARGET, ENUMERATED EXACTLY — and the
- * enumeration is the point. SP-B's `conditionsBands` carries a FOURTH key, `pullBand`,
- * and it is EXCLUDED HERE BY RULE: pullBand is fed by SP-B's own populations road and no
- * espionage product can fill it, so admitting it would mint a vocabulary member no writer
- * can ever satisfy — the dead-band law's exact shape. A mint carrying `pullBand` is
- * REFUSED, and that refusal is pinned rather than assumed.
+ * ⟨F5⟩ THE FIVE APPRAISAL LEGS AN ACQUIRE MAY TARGET, ENUMERATED EXACTLY — and the
+ * enumeration is the point. TWO words a reader might expect here are EXCLUDED BY RULE, and
+ * they are excluded for ONE shared property: no espionage product can ever fill them, so
+ * admitting either would mint a vocabulary member no writer can ever satisfy — the
+ * dead-band law's exact shape. A mint carrying either is REFUSED, and both refusals are
+ * pinned rather than assumed.
+ *
+ *   `pullBand` — SP-B's `conditionsBands` carries it as a FOURTH key, fed by SP-B's own
+ *     populations road. Excluded at ES-1, in the commit that minted this list.
+ *   `exports`  — EP-r. ADMITTED AT ES-1 AND CUT HERE, one member later, for the IDENTICAL
+ *     property. ES-3 measured the gap at build: `conditionsBands` carries exactly
+ *     `pullBand / routePositionBand / storesBand / tierBand`, `scarcityBands` is keyed by
+ *     GOOD CATEGORY, the string `exports` appears nowhere in `beliefAxisSubjects.js`, and
+ *     `loserExports` is a TRUTH read inside `peaceTermsAppraisal`. There is no belief slot
+ *     for it, and minting one is a NEW PERSISTED KEY FAMILY that §1's zero-new-keys fight
+ *     forbids. ES-3 could therefore only DECLARE the dead member (`LEG_SLOTS.exports =
+ *     null`, reported as `legsUnfilled`); the declaration was honest, but it left two
+ *     members with the same property treated two different ways, and that asymmetry is
+ *     itself the defect the `pullBand` rule exists to prevent.
+ *
+ * ⚠ THE CUT IS A REJECTING NARROWING AND IT ASKS FOR NO MIGRATION. `mintCovertMission` is
+ * the ONLY producer of this field, and it had NO production caller when EP-r ran: the only
+ * two mentions of it under `src/` are its own definition and a certification row's address
+ * STRING, and nothing under `src/` imports `espionageMissions.js` at all. No world can
+ * therefore have written `legRefs: ['exports']`, so no save file can carry it and the
+ * narrowed `COVERT_LEG_REF_SET` rejects nothing that exists.
  */
 export const ENVOY_COVERT_LEG_REFS = Object.freeze([
-  'exports',
   'readiness',
   'routePositionBand',
   'storesBand',

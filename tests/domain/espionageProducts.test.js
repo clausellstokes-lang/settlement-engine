@@ -449,19 +449,25 @@ describe('ES-3 the three products — what each one crosses, and what it refuses
 
   test('THE LEG TABLE IS TOTAL over the vocabulary — a new leg cannot land unmapped', () => {
     // A leg the table simply OMITTED would read as an unrecognised word and the mission
-    // would grade itself as though nobody had asked for it. Totality is what makes
-    // STOP-ES3-1's `exports: null` a DECLARATION rather than a gap.
+    // would grade itself as though nobody had asked for it.
     expect(Object.keys(LEG_SLOTS).sort()).toEqual([...ENVOY_COVERT_LEG_REFS].sort());
-    // ...and every mapped slot names a real belief-record field or a real conditions key.
+    // EP-r: and totality is now a STRONGER claim than it was. ES-3 kept `exports: null` in
+    // this table as a DECLARATION that one lawful leg had no slot; the leg was cut, so
+    // every remaining member maps to a real one and no lawful ref can come home unfillable
+    // for want of a slot. This loop reds if a later lane re-admits a slotless member.
     for (const [leg, mapping] of Object.entries(LEG_SLOTS)) {
-      if (!mapping) continue;
+      expect(mapping, `${leg} maps to NOTHING — a slotless leg is the dead member EP-r cut`)
+        .not.toBeNull();
       expect(mapping.family === 'core' || CONDITIONS_KEYS.includes(mapping.slot), leg).toBe(true);
     }
-    // `pullBand` is not a leg at all — SP-B's own populations road fills it and no ES
-    // product can, which is the dead-vocabulary-member rule the leg set was minted under.
+    // NEITHER excluded word is a leg. `pullBand` is SP-B's own populations road and
+    // `exports` has no belief slot at all, which is the one dead-vocabulary-member rule
+    // both exclusions are made of.
     expect(CONDITIONS_KEYS).toContain('pullBand');
-    // anchored: the exact-set assertion three lines up proves LEG_SLOTS is populated
+    // anchored: the exact-set assertion above proves LEG_SLOTS is populated
     expect(Object.keys(LEG_SLOTS)).not.toContain('pullBand');
+    // anchored: the exact-set assertion above proves LEG_SLOTS is populated
+    expect(Object.keys(LEG_SLOTS)).not.toContain('exports');
   });
 
   test('CONFIRM crosses NOTHING — it asserts the value the court already holds', () => {
@@ -472,18 +478,27 @@ describe('ES-3 the three products — what each one crosses, and what it refuses
   });
 
   test('ACQUIRE crosses ONLY the legs it names, and NAMES the leg it cannot fill', () => {
+    // EP-r: this pin used to drive the unfillable arm with `exports`, the lawful-but-
+    // slotless member. That member is CUT, so the arm is driven by a ref from OUTSIDE the
+    // vocabulary instead — which is the only way `LEG_SLOTS`'s null arm can be reached now
+    // that every lawful member maps to a real slot. The claim is unchanged and the arm is
+    // the same one; what changed is that the ref is no longer one the mint would accept.
+    // `productGroundTruth` is pure and does NOT re-validate against COVERT_LEG_REF_SET, so
+    // an unrecognised ref must report UNFILLED rather than throw on `undefined.slot`.
     const out = productGroundTruth({
       product: 'acquire',
       prior: HOME_PRIOR,
       read,
-      legRefs: ['storesBand', 'strength', 'exports'],
+      legRefs: ['storesBand', 'strength', 'pullBand'],
       conditionsLit: true,
     });
     expect(out.legsFilled).toEqual(['storesBand', 'strength']);
-    // ⛔ STOP-ES3-1, executed: `exports` is a lawful legRef with NO belief slot, and the
-    // product says so rather than reporting three of three.
-    expect(out.legsUnfilled).toEqual(['exports']);
-    expect(LEG_SLOTS.exports).toBeNull();
+    expect(out.legsUnfilled).toEqual(['pullBand']);
+    // anchored: the two filled legs one line above prove the table resolves real members,
+    // so this undefined is an ABSENT ROW and not a table that resolves nothing.
+    expect(LEG_SLOTS.pullBand).toBeUndefined();
+    // ...and the cut leg is gone from the table entirely rather than mapping to null.
+    expect(LEG_SLOTS.exports).toBeUndefined();
     expect(out.groundTruth.strengthBand).toBe(3);
     expect(out.groundTruth.conditionsBands).toEqual({ storesBand: 'deep' });
     // The legs it did NOT name are untouched: no opinion about the garrison's readiness.
@@ -605,18 +620,22 @@ describe('ES-3 the grade and the two landing worlds', () => {
     ]);
     expect([...grades].sort()).toEqual([...MISSION_GRADES]);
     // THE CAP: a mission that landed a high confidence while leaving a leg it was SENT for
-    // unfillable did not do what it was asked. Without this, STOP-ES3-1's dead leg would
-    // report success.
+    // unfillable did not do what it was asked.
+    // EP-r: the cap is KEPT and the witness leg is now a LIVE one. These examples used to
+    // name `exports`, the leg that could never be filled in any world; that member is cut,
+    // and the cap survives because a leg whose belief FAMILY is dark is unfillable for a
+    // second and entirely legitimate reason (the degraded-arm pin above drives exactly
+    // this with `storesBand` and conditions unlit).
     const uncapped = freshMissionGradeFor({ demand: 'confirm', landedConfidence01: 1 });
     const capped = freshMissionGradeFor({
-      demand: 'confirm', landedConfidence01: 1, legsUnfilled: ['exports'],
+      demand: 'confirm', landedConfidence01: 1, legsUnfilled: ['storesBand'],
     });
     expect(uncapped.grade).toBe('exceeded');
     expect(capped.grade).toBe('partial');
     expect(capped.capped).toBe(true);
     // A grade already below the bar is NOT re-graded by the cap.
     expect(freshMissionGradeFor({
-      demand: 'certain', landedConfidence01: 0.1, legsUnfilled: ['exports'],
+      demand: 'certain', landedConfidence01: 0.1, legsUnfilled: ['storesBand'],
     })).toEqual({ grade: 'partial', bestConfidence01: 0.1, capped: false });
   });
 
@@ -976,7 +995,11 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
       demand: 'confirm',
       product: 'acquire',
       subjectId: 'irontown',
-      legRefs: ['exports', 'storesBand', 'tierBand'],
+      // EP-r: this mission used to name `exports` alongside the two real legs. The member
+      // is CUT, and this fixture mints through the REAL `mintEnvoyErrand`, so naming it
+      // here would now be refused `invalid_leg_refs` and the row would never exist — which
+      // is the cut proving itself at the writer rather than a pin being relaxed.
+      legRefs: ['storesBand', 'tierBand'],
       itinerary: [
         { face: 'covert', settlementId: 'westmarch', stayTicks: 2 },
         { face: 'declared', settlementId: 'irontown', stayTicks: 2 },
@@ -987,7 +1010,8 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
       worldState, tick: 13, snapshot: MAGIC_SNAPSHOT, regionalGraph: FRIENDLY_GRAPH,
     });
     expect(out.landings[0].legsFilled).toEqual(['storesBand', 'tierBand']);
-    expect(out.landings[0].legsUnfilled).toEqual(['exports']);
+    // Every leg it was sent for came home filled, now that no lawful leg is slotless.
+    expect(out.landings[0].legsUnfilled).toEqual([]);
     // The court now believes what WESTMARCH believes about Irontown's granary — not the
     // truth, the host's opinion. That is the epistemic constitution, landed.
     const record = beliefRecord(out.worldState, 'ashford', 'irontown');

@@ -1251,7 +1251,7 @@ precedent.
 **ES-1 — THE MISSION** (⚠ **RIDES `espionageEnabled`; DOES NOT MINT IT** — see
 the flag-attribution note below; needs #6 SP-D; ES §4). Charter: the covert arm in SP-D's
 `errandMint.js` (mint validation: itinerary <= 3, closed products + demand
-bands + the six-member legRefs set with pullBand refused, dispatch-refusal
+bands + the five-member legRefs set (EP-r cut 'exports' 2026-08-10; 'pullBand' was already excluded by rule) with pullBand refused, dispatch-refusal
 seams, concurrency cap) + `normalizeErrand` taught the `covert` sub-record in
 the SAME commit (the columnOf precedent) + the `covert_envoy` franchise
 members in `routeNetworkConsumers.js` + the one-word kind fork at
