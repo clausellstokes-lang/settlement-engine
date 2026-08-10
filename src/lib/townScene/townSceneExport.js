@@ -13,6 +13,7 @@ import {
   encodeTownSceneGlb,
   encodeTownScenePortraitPng,
 } from '../../domain/townScene/index.js';
+import { townCartographyActive } from '../../domain/townScene/cartographyContract.js';
 import { slugify } from '../../kernel/slugify.js';
 import { downloadBlob } from '../townMapExport.js';
 
@@ -154,13 +155,15 @@ export async function downloadTownSceneArtifact({
   height = 1200,
 }) {
   const definition = artifactDefinition(format);
-  const manifest = compileTownSceneManifest({
-    settlement,
-    mapEdits,
-    worldState,
-    regionalGraph,
-    audience,
-  });
+  // CR-TC3A-1: read the flag through the SAME predicate the prepare seam uses, so the
+  // two cannot disagree, and fetch the naming pools only on the lit path.
+  const namingPools = townCartographyActive(worldState?.simulationRules)
+    ? (await import('../../data/namingData.js')).NAMING_DATA
+    : null;
+  const manifest = compileTownSceneManifest(
+    { settlement, mapEdits, worldState, regionalGraph, audience },
+    { namingPools },
+  );
   const artifact = await requestTownSceneArtifact(manifest, {
     format: definition.format,
     width,

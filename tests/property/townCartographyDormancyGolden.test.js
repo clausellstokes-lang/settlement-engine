@@ -42,6 +42,7 @@ import {
   stableSceneStringify,
   validateTownSceneManifest,
 } from '../../src/domain/townScene/index.js';
+import { NAMING_DATA } from '../../src/data/namingData.js';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -170,17 +171,29 @@ describe('town cartography — the gate arms (the teeth that bite at TC-1)', () 
 
   it('TC-2 lights exactly one additive, valid block while every pre-existing scene byte stays fixed', () => {
     const dark = compileTownSceneManifest({ settlement, mapEdits: null, audience: 'dm' });
-    const lit = compileTownSceneManifest({
-      settlement,
-      mapEdits: null,
-      audience: 'dm',
-      worldState: { simulationRules: { townCartographyEnabled: true } },
-    });
+    // CR-TC3A-1: a lit compile takes the naming pools by injection. The DARK compile
+    // above deliberately does not, which is half the dormancy claim.
+    const lit = compileTownSceneManifest(
+      {
+        settlement,
+        mapEdits: null,
+        audience: 'dm',
+        worldState: { simulationRules: { townCartographyEnabled: true } },
+      },
+      { namingPools: NAMING_DATA },
+    );
     expect(Object.prototype.hasOwnProperty.call(dark, 'cartography')).toBe(false);
     expect(validateTownSceneManifest(lit)).toEqual({ ok: true, errors: [] });
     expect(lit.cartography.streets.arterials.length).toBeGreaterThan(0);
     expect(lit.cartography.streets.lanes.length).toBeGreaterThan(0);
-    expect(lit.cartography.wards).toEqual([]);
+    // A6: TC-3a fills the ward layer, and ONLY inside the additive block. The dark
+    // corpus above is what proves this growth never reached the base bytes.
+    expect(lit.cartography.schemaVersion).toBe(2);
+    expect(lit.cartography.wards.length).toBe(dark.districts.length);
+    expect(lit.cartography.wards.length).toBeGreaterThan(0);
+    for (const ward of lit.cartography.wards) expect(ward.name.length, ward.id).toBeGreaterThan(0);
+    // TC-3b owns parcels and TC-4 owns buildings; either appearing here means the
+    // wave grew past the slice this packet was scoped to.
     expect(lit.cartography.parcels).toEqual([]);
     expect(lit.cartography.buildings).toEqual([]);
 

@@ -257,8 +257,9 @@ function buildWalls(substrate, gates, planUnitCm, provenanceRefsFor) {
  * worldState or regionalGraph campaign carriers.
  *
  * @param {import('./sceneCompileInput.js').TownSceneCompileInput} input
+ * @param {{ namingPools?: unknown }} [options]
  */
-function compileAuthorizedTownSceneManifest(input) {
+function compileAuthorizedTownSceneManifest(input, options = {}) {
   const settlement = input.settlement;
   const mapEdits = input.mapEdits;
   const audience = input.audience;
@@ -500,8 +501,20 @@ function compileAuthorizedTownSceneManifest(input) {
   // this already-compiled manifest: its terrain and roads are the field boundary,
   // and its walls/gates/bridges remain the sole infrastructure truth. The additive
   // block carries street geometry plus references, never duplicate infrastructure.
+  //
+  // CR-TC3A-1: the naming pools are INJECTED across the async edge above this
+  // synchronous compiler rather than imported by it, so the bounded worker/compiler
+  // chunk pair never carries the naming table. A lit compile without them is a
+  // caller-contract breach at this seam, and it fails loudly here rather than as an
+  // obscure validation error three layers down.
+  if (input.cartography?.enabled === true && options.namingPools == null) {
+    throw new TypeError(
+      'townScene compile premise: cartography is lit but namingPools was not injected; '
+      + 'the caller above the lazy boundary must supply NAMING_DATA from src/data/namingData.js',
+    );
+  }
   const cartography = input.cartography?.enabled === true
-    ? compileTownCartography(baseManifest, settlement)
+    ? compileTownCartography(baseManifest, settlement, { namingPools: options.namingPools })
     : null;
   const manifest = attachTownCartographyLayers(baseManifest, cartography);
   assertTownSceneManifest(manifest);
@@ -514,10 +527,11 @@ function compileAuthorizedTownSceneManifest(input) {
  * Compile the live worker's bounded, already-authorized envelope.
  *
  * @param {import('./sceneCompileInput.js').TownSceneCompileInput} input
+ * @param {{ namingPools?: unknown }} [options] CR-TC3A-1: required when lit
  */
-export function compileTownSceneManifestFromAuthorizedInput(input) {
+export function compileTownSceneManifestFromAuthorizedInput(input, options = {}) {
   assertTownSceneCompileInput(input);
-  return compileAuthorizedTownSceneManifest(input);
+  return compileAuthorizedTownSceneManifest(input, options);
 }
 
 /**
@@ -532,9 +546,11 @@ export function compileTownSceneManifestFromAuthorizedInput(input) {
  *   regionalGraph?: unknown,
  *   audience?: 'dm'|'player'|'public'|string,
  * }} [input]
+ * @param {{ namingPools?: unknown }} [options] CR-TC3A-1: required when lit
  */
-export function compileTownSceneManifest(input = {}) {
+export function compileTownSceneManifest(input = {}, options = {}) {
   return compileAuthorizedTownSceneManifest(
     prepareTownSceneCompileInputForSynchronousCompiler(input),
+    options,
   );
 }

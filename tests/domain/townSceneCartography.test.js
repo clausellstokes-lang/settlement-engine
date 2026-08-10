@@ -49,6 +49,7 @@ import {
   bindCanonicalInfrastructureRefs,
   synthesizeTownSkeleton,
 } from '../../src/domain/townCartography/cartographySynthesis.js';
+import { NAMING_DATA } from '../../src/data/namingData.js';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -76,12 +77,17 @@ function baseManifest() {
 }
 
 function compiledCartographyManifest(audience = 'dm') {
-  return compileTownSceneManifest({
-    settlement: GOLDEN_CONFIGS[BOUND_INFRASTRUCTURE].settlement,
-    mapEdits: null,
-    audience,
-    worldState: { simulationRules: { [TOWN_CARTOGRAPHY_RULE_KEY]: true } },
-  });
+  // CR-TC3A-1: the naming pools cross the lazy boundary as an argument, so every LIT
+  // compile — in production and here — injects them.
+  return compileTownSceneManifest(
+    {
+      settlement: GOLDEN_CONFIGS[BOUND_INFRASTRUCTURE].settlement,
+      mapEdits: null,
+      audience,
+      worldState: { simulationRules: { [TOWN_CARTOGRAPHY_RULE_KEY]: true } },
+    },
+    { namingPools: NAMING_DATA },
+  );
 }
 
 const provenance = (kind = 'generated', ref = null) => ({ kind, ref });
@@ -102,6 +108,7 @@ function wellFormedBlock(manifest) {
       arterials: [{
         id: 'street:arterial:a',
         classKind: 'arterial',
+        name: 'Steinbach Way',
         polyline: [[100, 100], [400, 220], [700, 480]],
         widthPlan: 14,
         provenance: provenance(),
@@ -110,6 +117,7 @@ function wellFormedBlock(manifest) {
       lanes: [{
         id: 'street:lane:a',
         classKind: 'lane',
+        name: 'Waldheim Lane',
         polyline: [[400, 220], [430, 300]],
         widthPlan: 5,
         provenance: provenance('user_edit', 'anchor:district:market'),
@@ -122,6 +130,7 @@ function wellFormedBlock(manifest) {
       {
         id: 'ward:a',
         kind: 'merchant',
+        name: 'Steinbach Ward',
         polygon: [[100, 100], [400, 100], [400, 400], [100, 400]],
         tonePermille: 620,
         districtId: 'district:market',
@@ -132,6 +141,7 @@ function wellFormedBlock(manifest) {
       {
         id: 'ward:b',
         kind: 'religious',
+        name: 'Waldheim Ward',
         polygon: [[420, 100], [700, 100], [700, 380]],
         tonePermille: 310,
         districtId: null,
@@ -216,7 +226,7 @@ describe('TC-2 compiler mount — the skeleton crosses the TC-1 contract, not be
     expect(block.streets.lanes.length).toBeGreaterThan(0);
 
     const expectedStreetKeys = [
-      'classKind', 'decidedBy', 'id', 'polyline', 'provenance', 'widthPlan',
+      'classKind', 'decidedBy', 'id', 'name', 'polyline', 'provenance', 'widthPlan',
     ];
     for (const [classKind, rows] of [
       ['arterial', block.streets.arterials],
@@ -250,9 +260,29 @@ describe('TC-2 compiler mount — the skeleton crosses the TC-1 contract, not be
     for (const duplicate of ['walls', 'gates', 'bridges']) {
       expect(Object.prototype.hasOwnProperty.call(block, duplicate)).toBe(false);
     }
-    expect(block.wards).toEqual([]);
+    // A1: TC-3a fills the ward layer from the SAME manifest's districts, in the
+    // manifest's own district order.
+    expect(block.schemaVersion).toBe(2);
+    expect(manifest.districts.length).toBeGreaterThan(0);
+    expect(block.wards.map((ward) => ward.districtId))
+      .toEqual(manifest.districts.map((district) => district.id));
+    expect(block.wards.map((ward) => ward.id))
+      .toEqual(manifest.districts.map((district) => `ward:${district.id}`));
+    // TC-3b owns parcels and TC-4 owns buildings; TC-3a must not start either.
     expect(block.parcels).toEqual([]);
     expect(block.buildings).toEqual([]);
+    // The naming layer is REQUIRED at v2 and never leaks into an id or a polygon.
+    for (const row of [...block.streets.arterials, ...block.streets.lanes, ...block.wards]) {
+      expect(typeof row.name, row.id).toBe('string');
+      expect(row.name.trim(), row.id).toBe(row.name);
+      expect(row.name.length, row.id).toBeGreaterThan(0);
+      expect(row.id.includes(row.name), row.id).toBe(false);
+    }
+    // The family tail is the class read aloud; a repeated draw is disambiguated with
+    // a trailing ordinal rather than by re-rolling, so the tail may carry " 2", " 3"...
+    for (const arterial of block.streets.arterials) expect(arterial.name, arterial.id).toMatch(/ Way( \d+)?$/);
+    for (const lane of block.streets.lanes) expect(lane.name, lane.id).toMatch(/ Lane( \d+)?$/);
+    for (const ward of block.wards) expect(ward.name, ward.id).toMatch(/ Ward( \d+)?$/);
   });
 
   it('the real compiler is deterministic for every audience and the block is not a DM-only accident', () => {
@@ -361,12 +391,61 @@ describe('TC-1 the additive schema — an old manifest loads unchanged, a new on
     expect(validateWith(manifest, wellFormedBlock(manifest))).toMatchObject({ ok: true });
   });
 
-  it('NEGATIVE CONTROL: a wrong block schemaVersion reds', () => {
+  it('NEGATIVE CONTROL: a wrong block schemaVersion reds, and v1 is no longer accepted', () => {
     const manifest = baseManifest();
-    const block = { ...wellFormedBlock(manifest), schemaVersion: 2 };
-    const result = validateWith(manifest, block);
-    expect(result.ok).toBe(false);
-    expect(result.errors.join('\n')).toContain('cartography.schemaVersion must be 1');
+    expect(TOWN_CARTOGRAPHY_SCHEMA_VERSION).toBe(2);
+    for (const version of [1, 3, '2', null]) {
+      const block = { ...wellFormedBlock(manifest), schemaVersion: version };
+      const result = validateWith(manifest, block);
+      expect(result.ok, String(version)).toBe(false);
+      expect(result.errors.join('\n'), String(version)).toContain('cartography.schemaVersion must be 2');
+    }
+    // RESTORE: the untouched v2 block passes, so the reds above measured the version.
+    expect(validateWith(manifest, wellFormedBlock(manifest))).toMatchObject({ ok: true, errors: [] });
+  });
+
+  it('A2 NEGATIVE CONTROL: a missing, blank, control-bearing or overlong name reds on streets AND wards', () => {
+    const manifest = baseManifest();
+    /** @type {Array<[string, unknown]>} */
+    const badNames = [
+      ['missing', undefined],
+      ['blank', ''],
+      ['whitespace only', '   '],
+      ['untrimmed', ' Steinbach Way'],
+      ['trailing space', 'Steinbach Way '],
+      ['C0 control', 'Stein\u0007bach Way'],
+      ['newline', 'Steinbach\nWay'],
+      ['DEL', 'Steinbach\u007FWay'],
+      ['overlong', `${'a'.repeat(121)} Way`],
+      ['non-string', 42],
+    ];
+    /** @type {Array<[string, (block: Record<string, unknown>, name: unknown) => void, string]>} */
+    const homes = [
+      ['arterial', (b, name) => {
+        if (name === undefined) delete b.streets.arterials[0].name;
+        else b.streets.arterials[0].name = name;
+      }, 'cartography.streets.arterials[0].name'],
+      ['lane', (b, name) => {
+        if (name === undefined) delete b.streets.lanes[0].name;
+        else b.streets.lanes[0].name = name;
+      }, 'cartography.streets.lanes[0].name'],
+      ['ward', (b, name) => {
+        if (name === undefined) delete b.wards[0].name;
+        else b.wards[0].name = name;
+      }, 'cartography.wards[0].name'],
+    ];
+    for (const [home, breakIt, path] of homes) {
+      for (const [label, name] of badNames) {
+        const block = wellFormedBlock(manifest);
+        breakIt(block, name);
+        const result = validateWith(manifest, block);
+        expect(result.ok, `${home} ${label}`).toBe(false);
+        expect(result.errors.join('\n'), `${home} ${label}`)
+          .toContain(`${path} must be a trimmed 1..120 character display name`);
+      }
+    }
+    // RESTORE: with every name well formed the same shape passes.
+    expect(validateWith(manifest, wellFormedBlock(manifest))).toMatchObject({ ok: true, errors: [] });
   });
 });
 

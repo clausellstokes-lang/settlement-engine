@@ -62,6 +62,7 @@ import {
   CARTOGRAPHY_TIERS,
   maximumSynthesisWork,
 } from './cartographyTuning.js';
+import { compileTownWardLayers } from './cartographyWards.js';
 
 const T = TOWN_CARTOGRAPHY_TUNING;
 
@@ -307,18 +308,21 @@ function manifestStreet(street, classKind, tier) {
  *
  * @param {Record<string, unknown>} manifest the current base TownSceneManifest
  * @param {unknown} settlement the already audience-projected compiler settlement
+ * @param {{ namingPools?: unknown }} [options] the pools injected from above the
+ *   lazy boundary (CR-TC3A-1); no other key is read
  * @returns {Record<string, unknown>}
  */
-export function compileTownCartography(manifest, settlement) {
+export function compileTownCartography(manifest, settlement, options = {}) {
   const base = record(manifest);
   const source = record(base.source);
+  const digest = typeof source.mapModelDigest === 'string'
+    ? source.mapModelDigest
+    : sceneDigest(base);
   const synthesis = synthesizeTownSkeleton({
     terrain: base.terrain,
     roads: base.roads,
     settlement,
-    digest: typeof source.mapModelDigest === 'string'
-      ? source.mapModelDigest
-      : sceneDigest(base),
+    digest,
   });
   const tier = synthesis.receipts.tier;
   const wallIds = new Set(
@@ -341,25 +345,40 @@ export function compileTownCartography(manifest, settlement) {
     return left < right ? -1 : left > right ? 1 : 0;
   };
 
+  const streets = {
+    arterials: synthesis.streets.arterials
+      .map((street) => manifestStreet(street, 'arterial', tier))
+      .sort(byId),
+    lanes: synthesis.streets.lanes
+      .map((street) => manifestStreet(street, 'lane', tier))
+      .sort(byId),
+    gateRefs: bindCanonicalInfrastructureRefs(
+      synthesis.infrastructureCandidates.gates,
+      canonicalGates,
+    ),
+    bridgeRefs: bindCanonicalInfrastructureRefs(
+      synthesis.infrastructureCandidates.bridges,
+      base.bridges,
+    ),
+  };
+
+  // TC-3a: the SAME manifest's canonical districts become wards, and every street and
+  // ward gains a name. The leaf is called ONCE, from here, because this adapter is the
+  // only place allowed to cross into the manifest. The naming pools ride the options
+  // object rather than an import, so the bounded compiler chunk never carries them.
+  const layers = compileTownWardLayers({
+    districts: base.districts,
+    streets,
+    settlement,
+    digest,
+    tier,
+    namingPools: options.namingPools,
+  });
+
   return {
     schemaVersion: TOWN_CARTOGRAPHY_SCHEMA_VERSION,
-    streets: {
-      arterials: synthesis.streets.arterials
-        .map((street) => manifestStreet(street, 'arterial', tier))
-        .sort(byId),
-      lanes: synthesis.streets.lanes
-        .map((street) => manifestStreet(street, 'lane', tier))
-        .sort(byId),
-      gateRefs: bindCanonicalInfrastructureRefs(
-        synthesis.infrastructureCandidates.gates,
-        canonicalGates,
-      ),
-      bridgeRefs: bindCanonicalInfrastructureRefs(
-        synthesis.infrastructureCandidates.bridges,
-        base.bridges,
-      ),
-    },
-    wards: [],
+    streets: layers.streets,
+    wards: layers.wards,
     parcels: [],
     buildings: [],
   };

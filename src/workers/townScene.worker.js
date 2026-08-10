@@ -30,6 +30,18 @@ function loadManifestCompiler() {
   return manifestCompilerPromise;
 }
 
+let namingPoolsPromise = null;
+
+/**
+ * CR-TC3A-1. The naming pools are a separate chunk, fetched only when cartography is
+ * lit, so the dark path never pays for them and the bounded manifest-compiler chunk
+ * never contains them. Memoized exactly as the compiler promise above is.
+ */
+function loadNamingPools() {
+  namingPoolsPromise ||= import('../data/namingData.js');
+  return namingPoolsPromise;
+}
+
 const current = (generationId) => (
   generationId === newestGeneration && !cancelled.has(generationId)
 );
@@ -48,9 +60,12 @@ self.onmessage = async (event) => {
     const {
       compileTownSceneManifestFromAuthorizedInput,
     } = await loadManifestCompiler();
+    const namingPools = packet.compileInput?.cartography?.enabled === true
+      ? (await loadNamingPools()).NAMING_DATA : null;
     if (!current(generationId)) return;
     const manifest = compileTownSceneManifestFromAuthorizedInput(
       packet.compileInput,
+      { namingPools },
     );
     if (!current(generationId)) return;
     const manifestDigest = sceneDigest(manifest);

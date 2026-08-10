@@ -67,6 +67,10 @@ describe('TC-2 determinism: the seed family is total', () => {
   test('the package actually has sources to scan (the scan is not vacuous)', () => {
     expect(SOURCES.length).toBeGreaterThanOrEqual(5);
     expect(SOURCES).toContain('cartographySynthesis.js');
+    // TC-3a's two leaves travel every package scan below; naming them here means a
+    // rename or a relocation reds HERE rather than silently emptying the coverage.
+    expect(SOURCES).toContain('cartographyPlan.js');
+    expect(SOURCES).toContain('cartographyWards.js');
   });
 
   test('every seed in the family synthesizes byte-identically twice', () => {
@@ -163,6 +167,49 @@ describe('TC-2 determinism: the draw ledger', () => {
     // anchored: the four labels above are the live subject; this asserts none of
     // them spells '::', which would alias a fork CHAIN (kernel/prng.js contract).
     for (const label of labels) expect(label.includes('::')).toBe(false);
+  });
+
+  test('TC-3a adds exactly two naming fork families, both single-colon', () => {
+    const source = withoutComments(readSource('cartographyWards.js'));
+    const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+    expect(labels.sort()).toEqual(['carto:names:street', 'carto:names:ward']);
+    // anchored: the two labels above are the live subject; this asserts neither of
+    // them spells '::', which would alias a fork CHAIN (kernel/prng.js contract).
+    for (const label of labels) expect(label.includes('::')).toBe(false);
+    // The shared narrowing kernel owns NO stream at all: an entropy label appearing
+    // there would be a second naming home the ward layer could silently disagree with.
+    expect(withoutComments(readSource('cartographyPlan.js'))).not.toMatch(/'carto:/);
+  });
+
+  test('TC-3a lowers with bounded FOR loops only — no retry, no while, no do/while', () => {
+    // The lowering is a total pass over a narrowed district list, not the output of a
+    // rejection loop. A `while` appearing here would mean someone reintroduced the
+    // "try again with a smaller box" repair the design explicitly does not own.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js']) {
+      const code = codeOnly(readSource(name));
+      expect(/\bwhile\s*\(/.test(code), name).toBe(false);
+      expect(/\bdo\s*\{/.test(code), name).toBe(false);
+      // anchored: the two negatives are measured against a live source whose bounded
+      // loops the positive below proves are actually present.
+      expect(/\bfor\s*\(/.test(code), name).toBe(true);
+    }
+  });
+
+  test('TC-3a takes the naming pools as an ARGUMENT and imports no parcel-side geometry', () => {
+    // CR-TC3A-1 is a bundle contract before it is a code contract: a static import of
+    // the naming table here drags 68,656 bytes into the bounded compiler chunk, and
+    // sceneDigest/scenePolygonArea are TC-3b's tools, not this wave's.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js']) {
+      const code = withoutComments(readSource(name));
+      expect(code, name).not.toMatch(/namingData\.js/);
+      expect(code, name).not.toMatch(/\bsceneDigest\b/);
+      expect(code, name).not.toMatch(/\bscenePolygonArea\b/);
+    }
+    // anchored: the negatives above are measured against a live ward leaf whose own
+    // injected parameter and geometry predicate the positives below prove are present.
+    const wards = withoutComments(readSource('cartographyWards.js'));
+    expect(wards).toContain('input.namingPools');
+    expect(wards).toContain('scenePointInPolygon');
   });
 });
 

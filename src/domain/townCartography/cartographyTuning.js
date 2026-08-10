@@ -195,6 +195,21 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   STREETS_LAYER_MAX_BYTES: Object.freeze({
     thorp: 6000, hamlet: 8000, village: 12000, town: 28000, city: 56000, metropolis: 90000,
   }),
+
+  // ── TC-3a WARDS (design §3, A-5) ─────────────────────────────────────────────
+  // A ward is a district drawn in ink, so the ward cap is a cap on the CANONICAL
+  // district count this stage is willing to lower. Exceeding it is a premise error
+  // rather than a truncation: silently dropping a canonical district would make the
+  // map disagree with the dossier, which is the exact fork the ONE LAW forbids.
+  // The parcel-side rows (edge divisions, per-ward counts, institution bindings,
+  // prominence bands, the TC-3 byte band) are TC-3b's and are deliberately absent:
+  // a constant with no reader is dead tuning.
+  MAXIMUM_WARDS: Object.freeze({
+    thorp: 8, hamlet: 10, village: 12, town: 16, city: 24, metropolis: 48,
+  }),
+  // The lowering copies a district footprint verbatim, so this is a cap on the
+  // SOURCE polygon, not a simplification target.
+  MAXIMUM_WARD_VERTICES: 8,
 });
 
 const T = TOWN_CARTOGRAPHY_TUNING;

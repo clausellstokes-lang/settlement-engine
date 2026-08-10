@@ -54,8 +54,15 @@
  *   tests/property/townCartographyDormancyGolden.test.js
  */
 
-/** Bumped only on a breaking change to the cartography block's shape. */
-export const TOWN_CARTOGRAPHY_SCHEMA_VERSION = 1;
+/**
+ * Bumped only on a breaking change to the cartography block's shape. v2 (TC-3) made
+ * `name` REQUIRED on every street and ward row. There is deliberately NO v1
+ * compatibility path: a TownSceneManifest is a DERIVED artifact, rebuilt from the
+ * settlement on every compile, so a v1 block can only come from a stale cache that
+ * must be recompiled rather than migrated. Accepting both versions would create the
+ * second schema key the ONE LAW forbids.
+ */
+export const TOWN_CARTOGRAPHY_SCHEMA_VERSION = 2;
 
 /** The virtual simulation-rule key the whole program ships behind (design §8). */
 export const TOWN_CARTOGRAPHY_RULE_KEY = 'townCartographyEnabled';
@@ -174,6 +181,7 @@ export const TOWN_CARTOGRAPHY_VOCABULARIES = Object.freeze({
  * @typedef {{
  *   id: string,
  *   classKind: string,
+ *   name: string,
  *   polyline: Array<[number, number]>,
  *   widthPlan: number,
  *   provenance: CartographyProvenance,
@@ -183,6 +191,7 @@ export const TOWN_CARTOGRAPHY_VOCABULARIES = Object.freeze({
  * @typedef {{
  *   id: string,
  *   kind: string,
+ *   name: string,
  *   polygon: Array<[number, number]>,
  *   tonePermille: number,
  *   districtId: string|null,
@@ -279,6 +288,39 @@ function hasExactKeys(value, expected) {
 function requireMember(value, vocabulary, path, errors) {
   if (typeof value !== 'string' || !vocabulary.includes(value)) {
     errors.push(`${path} must be one of: ${vocabulary.join(', ')}`);
+  }
+}
+
+/**
+ * A C0 control or DEL anywhere in a display name. Tested by code unit rather than by
+ * a control-class regex so the rule reads the same in source as it does in review.
+ * @param {string} value
+ * @returns {boolean}
+ */
+function hasControlCharacter(value) {
+  for (let index = 0; index < value.length; index++) {
+    const code = value.charCodeAt(index);
+    if (code < 32 || code === 127) return true;
+  }
+  return false;
+}
+
+/**
+ * A-5 DISPLAY NAME (schema v2). A street or ward the DM can say out loud: a trimmed,
+ * bounded, control-free string. It is NOT a token — names carry the settlement's own
+ * culture, so casing and non-ASCII letters are the point — and it never enters an id
+ * or a geometry, which is what keeps naming out of the digest's identity.
+ * @param {unknown} value
+ * @param {string} path
+ * @param {string[]} errors
+ */
+function requireDisplayName(value, path, errors) {
+  if (typeof value !== 'string'
+    || value.trim() !== value
+    || value.length < 1
+    || value.length > 120
+    || hasControlCharacter(value)) {
+    errors.push(`${path} must be a trimmed 1..120 character display name`);
   }
 }
 
@@ -420,6 +462,7 @@ function validateStreetRows(rows, path, expectedClass, errors, extent) {
     const row = rows[index];
     const at = `${path}[${index}]`;
     if (row.classKind !== expectedClass) errors.push(`${at}.classKind must be ${expectedClass}`);
+    requireDisplayName(row.name, `${at}.name`, errors);
     requirePointList(row.polyline, `${at}.polyline`, errors, extent, 2);
     if (!isInteger(row.widthPlan) || Number(row.widthPlan) <= 0) {
       errors.push(`${at}.widthPlan must be a positive integer`);
@@ -501,6 +544,7 @@ export function validateTownCartography(value, context) {
     const at = `cartography.wards[${index}]`;
     if (typeof ward.id === 'string') wardIds.add(ward.id);
     requireMember(ward.kind, TOWN_CARTOGRAPHY_WARD_KINDS, `${at}.kind`, errors);
+    requireDisplayName(ward.name, `${at}.name`, errors);
     requirePointList(ward.polygon, `${at}.polygon`, errors, extent, 3);
     requirePermille(ward.tonePermille, `${at}.tonePermille`, errors);
     if (ward.districtId !== null) requireToken(ward.districtId, `${at}.districtId`, errors);
