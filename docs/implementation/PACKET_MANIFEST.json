@@ -303,7 +303,7 @@
     },
     {
       "id": "IA-2",
-      "status": "READY",
+      "status": "STALE",
       "packetPath": "docs/implementation/packets/infrastructure/IA-2.md",
       "verifiedBase": "f1895e6004eb512a5c7b4c9b4caaf79604bccea6",
       "changeManifest": [

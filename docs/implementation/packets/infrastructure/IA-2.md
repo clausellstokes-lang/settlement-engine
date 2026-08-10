@@ -1,6 +1,12 @@
 # Implementation Acceleration / IA-2 — sealed dispatch and resumable proof
 
-- **Status:** READY
+- **Status:** STALE
+- **Stale (measured, 2026-08-10):** its own dispatcher refused — nine declared substrate
+  files changed since the `f1895e60` base (the packet predates the sealed-sessions
+  commit and tonight's INDEX/manifest churn). Coordinator revalidation required; fold
+  the IA-3 docket at the same pass: the coupling walker joins layered-leaf packets'
+  focused checks (sealed-loop blind spot, demonstrated live twice), and the seal learns
+  expected-dirty raw-material preflights (the TC-3A waiver).
 - **Verified base:** `claude/composite-r4` at `f1895e6004eb512a5c7b4c9b4caaf79604bccea6`
 - **Owner authority:** 2026-08-09 request to build the bounded dispatch, seal,
   scope-guard, receipt, resume, and heartbeat follow-up
