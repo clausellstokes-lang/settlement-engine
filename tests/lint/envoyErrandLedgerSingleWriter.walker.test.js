@@ -52,6 +52,20 @@
  * worlds. Neither layer authors a row, and the strict DTO family stays out of the
  * first-paint graph.
  *
+ * QUOTED DATA IS NOT CODE. `ledgerOwnershipManifest.js` is certification-only
+ * metadata — it imports and executes nothing, no runtime writer reads it, and it
+ * stores the writer's own body as EVIDENCE TOKENS ('delete
+ * out[ENVOY_ERRAND_LEDGER_KEY]', 'return { ...state, [ENVOY_ERRAND_LEDGER_KEY]:
+ * next }'). A textual scan that reads those quoted rows as offences convicts the
+ * manifest of being the second writer it exists to deny, which is the same
+ * mistake the comment-stripping above already guards against one layer down: a
+ * document ABOUT the law is not a breach of it. So the scan masks the contents of
+ * string literals before matching — except the key's own spelling, because
+ * `out['envoyErrands'] = rows` is a real write whose key merely happens to be
+ * quoted, and masking that away would blind the exact set. Measured at the time
+ * of the fix: of 2,086 scanned files, masking changes the verdict on exactly one
+ * — the manifest.
+ *
  * KNOWN BLIND SPOT (deliberate, and the same one the provenance walker declares).
  * The scan is textual, so a write through a fully computed key held in a local
  * (`const k = 'envoy' + 'Errands'; out[k] = rows`) is invisible. Nothing in the
@@ -110,10 +124,26 @@ const WRITE_FORMS = Object.freeze({
 /** Any mention of the key at all — the denominator the write forms sit inside. */
 const MENTION = new RegExp(KEY_TOKEN);
 
+/**
+ * String literals emptied of their contents, so QUOTED DATA cannot read as code
+ * (see the header). The key's own literal survives — `out['envoyErrands'] = rows`
+ * is a genuine write. Newlines survive too: the scan below is per-line, and a
+ * masker that swallowed them could fuse two lines into a shape neither one has.
+ * The `\n` exclusion in the quote classes bounds any unpaired apostrophe left by
+ * a trailing comment to its own line.
+ */
+const STRING_LITERAL = /'(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`(?:[^`\\]|\\.)*`/g;
+const maskQuotedData = (code) => code.replace(STRING_LITERAL, (literal) => {
+  const body = literal.slice(1, -1);
+  if (body === 'envoyErrands') return literal;
+  return literal[0] + body.replace(/[^\n]/g, '') + literal[0];
+});
+
 /** True when any write form appears in the given executable source text. */
 function writeFormsIn(code) {
+  const scanned = maskQuotedData(code);
   return Object.entries(WRITE_FORMS)
-    .filter(([, re]) => code.split('\n').some((line) => re.test(line)))
+    .filter(([, re]) => scanned.split('\n').some((line) => re.test(line)))
     .map(([name]) => name)
     .sort();
 }
@@ -175,8 +205,20 @@ describe('worldState.envoyErrands — one writer, one function (WR-7a / R-BLD-4)
     expect(writeFormsIn('return { ...state, [ENVOY_ERRAND_LEDGER_KEY]: next };')).toEqual(['object-property write']);
     expect(writeFormsIn('  envoyErrands: rows,')).toEqual(['object-property write']);
     expect(writeFormsIn('world.envoyErrands = rows;')).toEqual(['member assignment']);
+    // Doubles as the masking control: a real write whose KEY is quoted must
+    // survive the string masking, or the exact set would go blind.
     expect(writeFormsIn("out['envoyErrands'] = rows;")).toEqual(['member assignment']);
     expect(writeFormsIn('delete out[ENVOY_ERRAND_LEDGER_KEY];')).toEqual(['key deletion']);
+
+    // Quoted DATA — a manifest row that QUOTES a write form describes it, and a
+    // scan that convicts the description is reading prose, not code.
+    expect(writeFormsIn(
+      "      'delete out[ENVOY_ERRAND_LEDGER_KEY]', 'return { ...state, [ENVOY_ERRAND_LEDGER_KEY]: next }',",
+    )).toEqual([]);
+    expect(writeFormsIn("    storage: 'worldState.envoyErrands',")).toEqual([]);
+    // …but the masking is CONTENT-only: a write form is never hidden by merely
+    // sharing a line with a string.
+    expect(writeFormsIn("out[ENVOY_ERRAND_LEDGER_KEY] = rows; // 'noise'")).toEqual(['member assignment']);
 
     // Negative controls — the reader idioms this family is BUILT on must never
     // read as writes, or the exact-set assertion below would be unfalsifiable.
@@ -197,6 +239,24 @@ describe('worldState.envoyErrands — one writer, one function (WR-7a / R-BLD-4)
       + 'golden, or an undo that resurrects a returned legate. Route the write through '
       + '`writeErrands` instead of widening this list.\n',
     ).toEqual([LEDGER_LEAF]);
+  });
+
+  test('CERTIFICATION DATA: the ownership manifest names the key without writing it', () => {
+    const rel = 'src/domain/worldPulse/ledgerOwnershipManifest.js';
+    const code = executable(read(rel));
+    // Still a MENTIONER — a manifest that stopped naming the ledger it certifies
+    // would have quietly stopped certifying it.
+    expect(mentioners, `${rel} must still name the ledger it certifies`).toContain(rel);
+    expect(writeFormsIn(code), `${rel} is certification metadata, not a writer`).toEqual([]);
+    // The narrowing is only honest while the quoted evidence is still THERE. If
+    // these rows vanish, the masking above is guarding nothing and this walker
+    // would be carrying a blind spot it no longer needs.
+    expect(code).toContain("'delete out[ENVOY_ERRAND_LEDGER_KEY]'");
+    expect(code).toContain("'return { ...state, [ENVOY_ERRAND_LEDGER_KEY]: next }'");
+    // MUTANT: a REAL write in this same file is still caught — the mask empties
+    // string CONTENTS, it does not exempt the file.
+    expect(writeFormsIn(`${code}\nexport const rogue = { [ENVOY_ERRAND_LEDGER_KEY]: [] };\n`))
+      .toEqual(['object-property write']);
   });
 
   test('FUNCTION SCOPE: every write inside the ledger leaf sits inside writeErrands', () => {
