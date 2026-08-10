@@ -108,6 +108,15 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
     ['counterpart', 'term', 'band', 'settlement'], ['settlement'],
     ['counterpart', 'settlement'], ['band'],
   ]),
+  // IN-0C — the compelled books opening. A treaty lifecycle beat, so it takes the treaty
+  // desk exactly as `treaty_lapsed` does (CR-IN0C-2-R1: the row MIRRORS that one's
+  // section/desk/audience/significance). Its pool declares NO contexts: every family is
+  // honest at a signing, because the signing is the only moment this kind speaks.
+  grammarKindRow('treaty_disclosure_opened', 'notable', 'public', 'trade', [
+    ['counterpart', 'settlement', 'term'], ['settlement', 'counterpart'], [],
+    ['counterpart'], ['band', 'counterpart'],
+    ['route', 'settlement', 'counterpart'], [],
+  ]),
   grammarKindRow('treaty_age_line', 'n/a', 'public', null, [
     ['band'], [], ['settlement', 'counterpart'], [], [], [], [], ['counterpart'],
   ], [

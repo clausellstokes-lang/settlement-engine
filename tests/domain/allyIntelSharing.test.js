@@ -19,6 +19,7 @@ import {
   applyAllyIntelSharing, advanceBeliefMaps, settlementCompromised,
   ALLY_INTEL_TUNING, GOVERNING_SEAT_KEY,
 } from '../../src/domain/worldPulse/beliefMap.js';
+import { disclosureFidelityFor } from '../../src/domain/worldPulse/informationStatecraft.js';
 
 const belief = (over = {}) => ({
   readiness: 0.25, strengthBand: 2, allianceLabel: 'neutral', faithLabel: null,
@@ -153,5 +154,34 @@ describe('ally-intel — OPT-IN byte-identity via advanceBeliefMaps', () => {
     });
     // 'a' believes 'b' an ally and knows 'c' confidently ⇒ b now holds a belief about c.
     expect(on.next.b?.[GOVERNING_SEAT_KEY]?.c).toBeTruthy();
+  });
+});
+
+// ── IN-0C — THE COMPELLED FEED'S FIDELITY LADDER ─────────────────────────────
+// The ladder lives beside ALLY_INTEL_TUNING's own port (chair ruling CR-IN0C-OPT2);
+// its case is here because THIS file is the relay-fidelity law's home suite.
+describe('IN-0C — the compelled disclosure feed runs at the obligor\'s observed fidelity', () => {
+  it('A3 — honored feeds whole, strained degrades to ALLY-RELAY fidelity, defaulted/expired stop it', () => {
+    expect(disclosureFidelityFor('honored')).toBe(1);
+    // BY IMPORT, NEVER THE LITERAL 0.95. The semantic law is that a strained compelled
+    // channel is worth exactly what a relayed one is worth; a second spelling would let
+    // the two drift apart silently.
+    expect(disclosureFidelityFor('strained')).toBe(ALLY_INTEL_TUNING.RELAY_KEEP);
+    expect(disclosureFidelityFor('defaulted')).toBe(0);
+    // The fourth live compliance word is `expired` — NOT 'lapsed'.
+    expect(disclosureFidelityFor('expired')).toBe(0);
+    // ABSENCE NEVER MEANS "TRUST FULLY" — an unknown or absent word stops the feed.
+    expect(disclosureFidelityFor('lapsed')).toBe(0);
+    expect(disclosureFidelityFor(undefined)).toBe(0);
+    expect(disclosureFidelityFor(null)).toBe(0);
+    // Clamped to [0,1] and UNROUNDED.
+    for (const word of ['honored', 'strained', 'defaulted', 'expired']) {
+      expect(disclosureFidelityFor(word)).toBeGreaterThanOrEqual(0);
+      expect(disclosureFidelityFor(word)).toBeLessThanOrEqual(1);
+    }
+    // NON-VACUITY: the strained rung sits strictly between the two ends, so this is a
+    // real ladder rather than a two-valued gate wearing four words.
+    expect(disclosureFidelityFor('strained')).toBeGreaterThan(0);
+    expect(disclosureFidelityFor('strained')).toBeLessThan(1);
   });
 });

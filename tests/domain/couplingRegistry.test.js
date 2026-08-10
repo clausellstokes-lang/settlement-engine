@@ -53,6 +53,7 @@ import {
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
+  IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
   IN_INFORMATION_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
@@ -571,20 +572,22 @@ describe('CW-0 coupling registry', () => {
         IN0A_PLANT_HANDOFF_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
-    // ES-1's two mission rows are the SECOND and THIRD reads on this direction and the
-    // first owned by ESPIONAGE; ES-2's gauntlet pair are the FOURTH and FIFTH — the stage
-    // reads the errand ledger to find who is standing still, and borrows the family's one
-    // schedule cursor rather than deriving a second position fraction. Registration order
-    // is the legacy first-row tiebreak and WR-7's silence inference keeps that seat, which
-    // the line below re-asserts across two more waves.
+    // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by
+    // INFORMATION — the INFO volume composes ahead of ESPIONAGE, so it takes that seat and
+    // shifts the mission rows down one. ES-1's two are the THIRD and FOURTH; ES-2's gauntlet
+    // pair the FIFTH and SIXTH — the stage reads the errand ledger to find who is standing
+    // still, and borrows the family's one schedule cursor rather than deriving a second
+    // position fraction. Registration order is the legacy first-row tiebreak and WR-7's
+    // silence inference keeps that seat, which the line below re-asserts across three waves.
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
       .toEqual([
         WR7_SILENCE_INFERENCE_COUPLING,
+        IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
         ES1_COVERT_MISSION_MINT_COUPLING,
         ES1_MISSION_VOCABULARY_COUPLING,
         ES2_GAUNTLET_DWELL_READ_COUPLING,
         ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
-        // ES-3 is the SIXTH, and the first of them that WRITES: the gradient amender puts
+        // ES-3 is the SEVENTH, and the first of them that WRITES: the gradient amender puts
         // `covert.{gathered,standoff}` on the errand row through `writeErrands`. Every row
         // above it is a read, which is why the direction's row list is worth reading in
         // order rather than as a set.

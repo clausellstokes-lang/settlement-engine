@@ -140,6 +140,17 @@ AUDIENCE: public
 6. A factor down from {counterpart} was asked at the {settlement} table why the wagons ran light, and had no answer ready.
 7. Each season the shortfall was small enough to overlook; taken together, {band} of them would not be.
 
+### treaty_disclosure_opened (GR-0) — Herald (trade desk) / chronicle — significance: notable
+SLOTS: {settlement} {counterpart} {band} {term} {route}
+AUDIENCE: public
+1. The article is plain: what {counterpart} learns, {settlement} is told, for as long as the {term} stands. `[exemplar, slotted]`
+2. {settlement}'s clerks sit in {counterpart}'s muster hall by treaty right, and the doors were not {counterpart}'s to shut.
+3. They signed away the closed door along with the border, and the second cost more.
+4. At {counterpart} they call it the open article, and they do not say it kindly.
+5. For {band} years nothing {counterpart} learns will be its own for long.
+6. Down the {route} the sealed copies travel to {settlement}, and {counterpart}'s clerks make no error the article can catch.
+7. The gate keeps its hours; what passes through it in writing is no longer anyone's secret.
+
 ### treaty_age_line (GR-0) — dossier: WarFaithTab / TreatyPanel / PDF — significance: n/a (dossier line)
 SLOTS: {settlement} {counterpart} {band}
 AUDIENCE: public

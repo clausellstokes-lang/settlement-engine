@@ -62,6 +62,7 @@ export {
 // this file the one place a row exists but cannot be named.
 export {
   IN0A_PLANT_HANDOFF_COUPLING,
+  IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
   IN_INFORMATION_COUPLINGS,
 } from './couplingRegistryInfo.js';
 

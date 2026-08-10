@@ -123,7 +123,7 @@ import { stampSworn } from './oathHolder.js';
 // the prune that retires a spent instrument, and the tick a court's OBSERVED compliance
 // first crosses out of honored. Composition lives entirely in the leaf, so the head pays
 // four effective lines for the whole wave and the beats stay unit-testable without it.
-import { treatyDefaultDetectedBeats, treatyLapsedBeats, treatyLifecycleVoiceActive } from './treatyLifecycleVoice.js';
+import { treatyDefaultDetectedBeats, treatyDisclosureOpenedBeats, treatyLapsedBeats, treatyLifecycleVoiceActive } from './treatyLifecycleVoice.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefRelationship } from './beliefMap.js';
@@ -585,6 +585,9 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     workingState = conveyed.worldState;
     workingSettlementUpdates = conveyed.settlementUpdates;
     newsEntries.push(mint.signingBeat);
+    // GR-0 × IN-0C — THE OPEN ARTICLE, spoken ONCE at the signing. Composition lives
+    // entirely in the voice leaf; the head pays one effective line for the whole wave.
+    if (lifecycleVoiceLit) newsEntries.push(...treatyDisclosureOpenedBeats({ treaty: mint.treaty, terms: /** @type {TermRecord[]} */ (mint.treaty.terms), tick, orientation: treatyOrientationOf(mint.treaty) }));
     if (mint.treaty.mediator) {
       // A mediation that actually lands is a resolved diplomatic outcome for the
       // broker. Qualification alone teaches nothing; the signed sheet teaches once.

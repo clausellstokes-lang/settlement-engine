@@ -85,7 +85,65 @@ export const IN0A_PLANT_HANDOFF_COUPLING = couplingRow({
   kinds: Object.freeze(['plant_took']),
 });
 
+/**
+ * IN-0c / GRAMMAR→INFO. THE COMPELLED BOOKS CREDIT THE COURT THAT OPENED THEM.
+ *
+ * ⚠ THE WAVE SUFFIX IS LOWERCASE HERE AND UPPERCASE IN THE PACKET TITLE (IN-0C). That is
+ * the registry's own convention, not a typo: COUPLING_ID_SHAPE admits `-\d+[a-z]?`, the
+ * IN-0a row beside this one spells it lowercase, and the content annex heads the section
+ * `## IN-0c`. An uppercase suffix REDS the shape pin.
+ *
+ * A disclosure clause is signed at `T-1`; at `T` the information layer credits the court
+ * that now owes its books, because a promise kept where keeping it costs something is the
+ * cheapest credibility a court can buy. The read is one line: the statecraft mover's
+ * `provenTrue` DEFAULT calls `disclosureSigningCredits`, a pure GRAMMAR-side predicate over
+ * the persisted treaty ledger.
+ *
+ * WHY THE EDGE EXISTS AT ALL, stated because CW-0w keys on the (importer, imported) PAIR
+ * and not on reachability: the credit is INFORMATION's own state, the instrument that earns
+ * it is GRAMMAR's, and no arrangement of the two functions removes the port crossing —
+ * moving the predicate into this layer only inverts the direction, because it would then
+ * read the term catalog and the treaty orientation instead. The edge is designed, so it
+ * takes a row rather than a baseline line.
+ *
+ * NOTHING IS PERSISTED BY THE COUPLING ITSELF. The predicate deposits no marker: it is pure
+ * over persisted treaty state, which is what makes it exactly-once by construction under
+ * replay. The RECEIPT it leaves behind is the credibility stock the fold writes.
+ *
+ * THE COUNTERFORCE IS THE EXPLICIT-WINS SEAM. Any caller that passes `provenTrue` — even
+ * `[]` — suppresses the derivation entirely and this coupling does not run; only an omitted
+ * (or non-array) argument reaches it. That is a real refusal at the read address, and it is
+ * pinned by acceptance case A8.
+ * ⚠ CHAIR — RATIFY AT LANDING: an equally defensible counterforce is the leaf's own obligor
+ * guard (`peaceTermsDisclosure.js#disclosureSigningCredits` — a treaty that cannot resolve
+ * an obligor credits nobody), which would match the ES-1 idiom of siting the counterforce
+ * on the OTHER side of the port. The explicit-wins seam is used here per the chair's
+ * instruction; ratify one at landing.
+ *
+ * DARK ⇒ NOTHING: `advanceInformationStatecraft` returns at its first line when
+ * `infoStatecraftActive` is false, so the derivation is unreachable; and with the peace
+ * engine dark there is no treaty ledger to read, so it returns `[]` regardless.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.IN-0c.disclosure_signing_credit',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/informationStatecraft.js#advanceInformationStatecraft',
+  receiptField: 'spatialLedgers.credibility[].{score,lastUpdateTick,holder}',
+  counterforce: 'src/domain/worldPulse/informationStatecraft.js#advanceInformationStatecraft',
+  flags: Object.freeze([
+    'infoStatecraftEnabled',
+    'peaceEngineEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-0c',
+  intendedDesk: 'trade',
+  kinds: Object.freeze(['treaty_disclosure_opened']),
+});
+
 /** Every INFORMATION row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const IN_INFORMATION_COUPLINGS = Object.freeze([
   IN0A_PLANT_HANDOFF_COUPLING,
+  IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
 ]);

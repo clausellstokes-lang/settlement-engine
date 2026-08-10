@@ -45,6 +45,8 @@ import {
 } from '../../src/domain/worldPulse/treatyOrientation.js';
 import { draftPactSheet, signPactProposal } from '../../src/domain/worldPulse/pactFormation.js';
 import { lineageOf } from '../../src/domain/worldPulse/pactAmendment.js';
+import { disclosureSigningCredits } from '../../src/domain/worldPulse/peaceTermsDisclosure.js';
+import { treatyDisclosureOpenedBeats } from '../../src/domain/worldPulse/treatyLifecycleVoice.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -993,5 +995,125 @@ describe('GR-3B-ORIENT — a negotiated clause knows which court owes it', () =>
     // negotiated pacts into nine consumers that have never bound one.
     expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
     expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
+  });
+});
+
+// ── G) IN-0C — THE OPEN ARTICLE, SPOKEN AT THE SIGNING ──────────────────────
+
+const VOICE = { ...LIT, treatyLifecycleVoiceEnabled: true };
+
+/** A canonical carried sheet whose single clause is the disclosure article. The carried
+ *  road re-appraises nothing, so it is the DETERMINISTIC way to drive a real PASS 1 mint
+ *  of a named term — the `oathHolderGr1` door-2 idiom. */
+function disclosureSheet(agreedTick) {
+  const clause = {
+    type: 'disclosure', family: 'informational', magnitude: 1,
+    durationTicks: 3 * CURRENT_TREATY_TICKS_PER_YEAR, weightSpent: 0.6, burden01: 0,
+    // `disclosure` is an executor:'seam' term, and normalizeCarriedClause's biconditional
+    // refuses the whole sheet without the flag — consumed whole or refused whole.
+    seam: true,
+  };
+  return {
+    schemaVersion: 1,
+    id: 'sheet.errand.in0c', errandId: 'errand.in0c', encounterId: 'encounter.in0c',
+    episodeKey: 'episode.in0c', relationshipKey: 'edge.iron.weak',
+    parties: ['iron', 'weak'], proposerId: 'iron', responderId: 'weak',
+    victorId: 'iron', loserId: 'weak', agreedTick,
+    pictureIds: { proposer: 'picture.iron', responder: 'picture.weak' },
+    clauses: [clause],
+    budgetSpent: clause.weightSpent,
+    valuations: [
+      { partyId: 'iron', pictureId: 'picture.iron', role: 'proposer', decision: 'accept' },
+      { partyId: 'weak', pictureId: 'picture.weak', role: 'responder', decision: 'accept' },
+    ],
+  };
+}
+
+/** Drive the REAL PASS 1 mint through the carried-sheet door. */
+function mintDisclosure(tick = 5, rules = VOICE) {
+  const ws = suingWorld('iron', 'weak', tick, { simulationRules: { ...rules } });
+  ws.relationshipStates['edge.iron.weak'].recentIncidents[0].carriedTermSheet = disclosureSheet(tick - 2);
+  return advance(ws, IW, IW_EDGES, tick);
+}
+
+describe('IN-0C — the open article is minted ONCE, at the signing', () => {
+  it('A7 — the real PASS 1 mint speaks treaty_disclosure_opened exactly once, beside the signing', () => {
+    const out = mintDisclosure(5);
+    const opened = out.newsEntries.filter((entry) => entry.kind === 'treaty_disclosure_opened');
+    expect(opened, 'the open article was not spoken at the signing').toHaveLength(1);
+    // It rides BESIDE the signing beat, never instead of it.
+    expect(out.newsEntries.some((entry) => entry.kind === 'treaty_signed')).toBe(true);
+    expect(opened[0].section).toBe('trade');
+    expect(opened[0].audience).toBe('public');
+    expect(opened[0].impactKind).toBe('treaty_disclosure_opened');
+    expect(opened[0].parties).toEqual(['iron', 'weak']);
+    const prose = [opened[0].headline, opened[0].summary, ...opened[0].reasons].join(' ');
+    expect(prose.length, 'the beat rendered no prose at all').toBeGreaterThan(40);
+    // anchored: the length floor on this same string one line up proves it is a real sentence.
+    expect(prose).not.toMatch(/\{|\}|\bundefined\b|\bNaN\b|_/);
+    // anchored: same non-empty `prose` string, pinned by the length floor three lines up.
+    expect(prose).not.toMatch(/\d/);
+  });
+
+  it('A7 — honored stays QUIET: the article is not re-spoken on a later tick', () => {
+    const first = mintDisclosure(5);
+    // Advance the SAME persisted ledger a tick on. PASS 1 is idempotent inside the window,
+    // so the instrument is already in the ledger and no second article may be minted.
+    const later = advance({ ...first.worldState, tick: 6 }, IW, IW_EDGES, 6);
+    expect(later.newsEntries.filter((entry) => entry.kind === 'treaty_disclosure_opened')).toEqual([]);
+  });
+
+  it('A7 — expiry speaks treaty_lapsed ALONE: no disclosure_expired kind exists', () => {
+    const expiring = treatyOf([term('disclosure', { mintedTick: 0, expiresTick: 10 })],
+      { victorName: 'Ironhold', loserName: 'Weatherby' });
+    const out = advance(ledgerWorld(expiring, { simulationRules: { ...VOICE } }), IW, IW_EDGES, 10);
+    const kinds = out.newsEntries.map((entry) => entry.kind);
+    expect(kinds).toContain('treaty_lapsed');
+    // anchored: the toContain on this same collection one line up proves `kinds` is populated.
+    expect(kinds).not.toContain('disclosure_expired');
+    // anchored: same live `kinds` collection, pinned non-empty by the toContain above.
+    expect(kinds).not.toContain('treaty_disclosure_opened');
+  });
+
+  it('A7 — the beat fails CLOSED on an unresolved orientation', () => {
+    const unresolved = { obligeeId: '', obligorId: '', obligeeName: '', obligorName: '', resolved: false };
+    expect(treatyDisclosureOpenedBeats({
+      treaty: {}, terms: [term('disclosure')], tick: 5, orientation: unresolved,
+    })).toEqual([]);
+    // NON-VACUITY: the same call with a RESOLVED orientation does mint, so the absence
+    // above is the guard firing rather than the composer being inert.
+    const named = { victorName: 'Ironhold', loserName: 'Weatherby' };
+    const resolved = treatyOrientationOf(treatyOf([term('disclosure')], named));
+    expect(treatyDisclosureOpenedBeats({
+      treaty: treatyOf([term('disclosure')], named), terms: [term('disclosure')], tick: 5, orientation: resolved,
+    })).toHaveLength(1);
+    // …and a treaty carrying NO informational clause stays silent.
+    expect(treatyDisclosureOpenedBeats({
+      treaty: treatyOf([term('tribute')], named), terms: [term('tribute')], tick: 5, orientation: resolved,
+    })).toEqual([]);
+  });
+
+  it('A5 — every reachable mint door stamps a TERM-LEVEL mintedTick, and the credit fires once', () => {
+    const TICK = 5;
+    // DOOR: the carried sheet, driven through the real mover.
+    const minted = getSpatialLedger(mintDisclosure(TICK).worldState, 'treaties')[treatyPairKey('iron', 'weak')];
+    for (const t of minted.terms) expect(Number.isFinite(Number(t.mintedTick)), `${t.type}: no numeric mintedTick`).toBe(true);
+    expect(minted.terms.find((t) => t.type === 'disclosure').mintedTick).toBe(TICK);
+    // DOOR: the war door's live appraisal — every drafted term carries its own stamp.
+    const ranked = appraiseLoserPortfolio({
+      victorId: 'iron', loserId: 'weak', worldState: { simulationRules: { ...LIT } },
+      victorItem: item('iron', { category: 'merchant' }), loserItem: item('weak', { exports: [{ name: 'Silver' }] }),
+      victorPressure: { food: 0.6, economy: 0.6, trade: 0.2 },
+      victorThreat01: 0.6, loserTruthStrength: 0.4, loserAllyStrength01: 0.4,
+    });
+    const { terms: drafted } = draftTerms({ ranked, budget: 4, margin01: 0.8, press: 1.2, tick: TICK });
+    expect(drafted.length, 'the war door drafted nothing to stamp').toBeGreaterThan(0);
+    for (const t of drafted) expect(Number(t.mintedTick), `${t.type}: war-door stamp`).toBe(TICK);
+    // THE CREDIT WINDOW, through the door's own persisted output: once at T+1, never at T,
+    // never at T+2 — the predicate needs no marker to be exactly-once.
+    const ws = { spatialLedgers: { treaties: { [treatyPairKey('iron', 'weak')]: minted } } };
+    expect(disclosureSigningCredits(ws, TICK)).toEqual([]);
+    expect(disclosureSigningCredits(ws, TICK + 1)).toEqual([{ id: 'weak', kind: 'proven_true' }]);
+    expect(disclosureSigningCredits(ws, TICK + 2)).toEqual([]);
   });
 });

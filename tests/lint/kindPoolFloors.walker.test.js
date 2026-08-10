@@ -147,8 +147,11 @@ const FIXED_FIVE = 5;
 const LEGACY_UNVOICED_TOKENS = 274;
 
 /** The routed-token and registered-kind censuses at this commit, asserted rather than quoted. */
-const ROUTED_TOKENS = 374;
-const REGISTERED_KIND_COUNT = 106;
+// +1 at IN-0C: `treaty_disclosure_opened` takes an EXACT_SECTION row of its own so the
+// compelled-books beat files the treaty cohort's trade desk by its OWN token.
+const ROUTED_TOKENS = 375;
+// +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
+const REGISTERED_KIND_COUNT = 107;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

@@ -10,6 +10,20 @@
 - **Verified base:** `claude/composite-r4` at `e6d963430046f07b2ebac4dd06ce4eddd386343c`
 - **Base note:** restamped at promotion (ORIENT landed d56d944c; peaceTerms.js measured 793/800 — the +4 cap leaves it at most 797; the packet's own preflight re-measures)
 - **Last revalidated:** `2026-08-10` at `820ed989`
+- **Amended (chair, 2026-08-10, three rulings during implementation):** CR-IN0C-OPT2 —
+  `disclosureFidelityFor` lives in `informationStatecraft.js` (INFO-domain semantics
+  beside its future feed consumer; the orderTermsByAsk deliberately-unconsumed precedent
+  applies). CR-IN0C-CPL — the intrinsic GRAMMAR→INFO pair is licensed by a minted
+  `couplingRegistryInfo.js` row (field values proposed by precedent, ratified at this
+  landing; the lowercase `IN-0c` couplingId suffix is machine-forced by
+  COUPLING_ID_SHAPE). CR-IN0C-ANNEX — content follows registry: the 6-variant pool
+  relocated from the INFORMATION annex to RECEIPT_POOLS_GRAMMAR.md, re-slotted AND
+  re-voiced (the draft's {settlement} binding named the wrong court — the
+  treaty_true_state_chip hazard class), desk heading corrected to 'trade'. Four
+  consequential files beyond the sealed manifest ratified: the registry head re-export,
+  its companion test pins, and kindPoolFloors' two exact censuses (+1 kind, +1 token).
+  §6.2's "no module edge opens" reachability argument is REFUTED for the record — CW-0w
+  keys on (importer, imported) pairs, third demonstration.
 - **Depends on:** `NONE beyond the verified base` — landed IN-0a/0b/0d do not settle
   IN-0C ordering
 - **Collision group:** `GR-3B-ORIENT` — **both packets modify

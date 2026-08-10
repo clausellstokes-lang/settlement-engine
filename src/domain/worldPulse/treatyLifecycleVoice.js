@@ -44,7 +44,7 @@
  *   + tests/property/treatyLifecycleVoiceDormancyFence.test.js
  */
 
-import { termLabel } from './peaceTermsCatalog.js';
+import { TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
 import { grammarReceipt, grammarSlotRoles } from './grammarNews.js';
@@ -295,6 +295,76 @@ export function treatyLapsedBeats({ treaty, terms, tick, observedWorst, orientat
     // carried on this entry: a news record has no per-key ground-truth projection, so a
     // quiet hollowing riding a public beat would leak exactly what the fog exists to hide.
     // The value is returned by pactEndingOf for the surfaces that may see it.
+  }];
+}
+
+/**
+ * THE OPEN-ARTICLE BEAT (IN-0C). A court compelled to open its books says so ONCE, at the
+ * signing, and never again: this is a MINT-MOMENT beat like the signing itself, not a
+ * per-tick level like the detection crossing below. Expiry is already spoken by
+ * `treatyLapsedBeats` — there is deliberately no `disclosure_expired` kind (CR-IN0C-2).
+ *
+ * THE FAMILY, NOT THE WORD: the clause is recognised by its catalog family
+ * `informational`, so a future informational term speaks through this beat the day it
+ * lands rather than the day someone widens a list.
+ *
+ * NO FABRICATED BAND, and no fabricated route (WR-10's law, inherited from the detection
+ * beat verbatim). At a signing the treaty's AGE is zero and the honest duration band is
+ * the TERM's, which this composer is not handed; `{route}` it never holds at all. Both
+ * slots are therefore simply not supplied, and the two families that ask for them stay
+ * ineligible on every real beat rather than being handed an invented ladder.
+ *
+ * ⚠ THE CALLER PASSES `treaty` AND THIS COMPOSER DELIBERATELY DOES NOT READ IT. The input
+ * shape mirrors `treatyLapsedBeats` so both mint sites hand the voice the same object, but
+ * the only thing the lapse beat reads a treaty FOR is its age clock — and at a signing that
+ * age is zero, which is precisely the band this beat may not fabricate. It is left out of
+ * the destructure rather than bound and ignored, so the unread input is visible here.
+ *
+ * @param {{ treaty?: Record<string, unknown>, terms: TermRecord[], tick: number,
+ *   orientation: { obligeeId:string, obligorId:string, obligeeName:string,
+ *   obligorName:string, resolved:boolean } }} input
+ * @returns {Array<Record<string, unknown>>}
+ */
+export function treatyDisclosureOpenedBeats({ terms, tick, orientation }) {
+  // A treaty that cannot say who owes it cannot announce whose books opened.
+  if (!orientation?.resolved) return [];
+  const opened = (Array.isArray(terms) ? terms : [])
+    .filter((term) => TERM_CATALOG[String(term?.type)]?.family === 'informational')
+    .sort((a, b) => (String(a.type) < String(b.type) ? -1 : String(a.type) > String(b.type) ? 1 : 0));
+  if (opened.length === 0) return [];
+  const obligeeName = readerName(orientation.obligeeId, orientation.obligeeName);
+  const obligorName = readerName(orientation.obligorId, orientation.obligorName);
+  const names = { obligeeName, obligorName };
+  const interp = interpFor('treaty_disclosure_opened', names, { term: termLabel(String(opened[0].type)) });
+  if (!interp) return [];
+  const sourceEventId = `${orientation.obligeeId}.${orientation.obligorId}.${tick}`;
+  const receipt = grammarReceipt('treaty_disclosure_opened', sourceEventId, interp);
+  if (!receipt) return [];
+  const weight = presentationWeight(receipt.significance);
+  return [{
+    id: `wizard_news.${tick}.treaty_disclosure_opened.${stablePart(orientation.obligeeId)}.${stablePart(orientation.obligorId)}`,
+    kind: 'treaty_disclosure_opened',
+    // ITS OWN impactKind, never `diplomacy`: the Herald's SINGLE_PRODUCER_KEYS walker pins
+    // that token to the one treaty signing beat, and a second producer would inherit its
+    // desk in silence — the treatyLapsedBeats note, and the same trap.
+    impactKind: 'treaty_disclosure_opened',
+    significance: receipt.significance,
+    severity: weight.severity,
+    score: weight.score,
+    tick,
+    scope: 'regional',
+    headline: `${obligorName} must open its books to ${obligeeName}`,
+    summary: receipt.line,
+    reasons: [
+      'A disclosure article was signed into the settlement, and it binds for the term\'s life rather than for a season.',
+    ],
+    settlementIds: [orientation.obligeeId, orientation.obligorId],
+    settlementNames: [obligeeName, obligorName],
+    parties: [orientation.obligeeId, orientation.obligorId],
+    familyId: receipt.familyId,
+    audience: receipt.audience,
+    section: receipt.section,
+    tags: ['world_pulse', 'pact_grammar', 'lifecycle'],
   }];
 }
 

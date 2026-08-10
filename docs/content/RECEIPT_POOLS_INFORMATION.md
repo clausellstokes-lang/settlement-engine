@@ -184,15 +184,7 @@ AUDIENCE: public
 
 ## IN-0c — THE DISCLOSURE EXECUTOR (compelled intel)
 
-### treaty_disclosure_opened (IN-0c) — Herald knowledge desk / the treaty document — significance: notable
-SLOTS: {settlement}, {counterpart}, {place}, {reason}
-AUDIENCE: public
-1. The court at {settlement} stands open to {counterpart}'s eyes, by the terms signed at {place}.
-2. {counterpart}'s clerks sit in {settlement}'s muster hall by treaty right; the doors were not {settlement}'s to shut.
-3. The article is plain: what {settlement} knows, {counterpart} is told, for the term's life, on {reason}.
-4. They signed away the closed door along with the border, and the second cost more.
-5. At {settlement} they call it the open article, and they do not say it kindly.
-6. For the term's life, nothing {settlement} learns will be its own for long.
+**`treaty_disclosure_opened` → pool lives in `RECEIPT_POOLS_GRAMMAR.md` under `# GR-0 — THE LIFECYCLE VOICE`.** Relocated by IN-0C under chair ruling CR-IN0C-ANNEX (CONTENT FOLLOWS REGISTRY): the kind registers in `GRAMMAR_KIND_REGISTRY`, whose walker reads the GRAMMAR volume, so the pool moved to the volume that owns its registry row. It was re-slotted to that walker's fixture slots and re-voiced to the GRAMMAR default party binding (`{settlement}` = the court OWED, `{counterpart}` = the court whose books open) — the IN-0c draft below bound them the other way round, which would have named the wrong court. Its desk is the ruled **trade** desk (CR-IN0C-2-R1), not a knowledge desk.
 
 ### disclosure_feed (IN-0c) `[POOL HANDLE]` — the victor's DM intelligence block — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}, {season}

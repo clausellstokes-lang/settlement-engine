@@ -230,6 +230,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // before kind, and the SINGLE_PRODUCER_KEYS walker pins `diplomacy` to the one signing
   // beat, so a second producer of that token would inherit this desk silently.
   treaty_lapsed: 'trade', treaty_default_detected: 'trade',
+  // IN-0C — the compelled books opening is the same treaty cohort, so it takes the
+  // same desk by its OWN token rather than by a registry authority.
+  treaty_disclosure_opened: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)
@@ -571,6 +574,10 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // diplomacy and treaty_breached. The whole treaty cohort keeps one desk.
   treaty_lapsed: 'trade',
   treaty_default_detected: 'trade',
+  // IN-0C, and the divergence has the same reason the two above do: the letter files a
+  // compelled disclosure under `courts` with the oathbreaking, while the Herald files it
+  // beside the terms it was signed with (JUDGMENT, vetoable — the cohort keeps one desk).
+  treaty_disclosure_opened: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.

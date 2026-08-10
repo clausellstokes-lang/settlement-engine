@@ -36,6 +36,8 @@ import {
   LIE_TUNING,
   SIGHT_TUNING,
 } from '../../src/domain/worldPulse/informationStatecraft.js';
+import { disclosureSigningCredits } from '../../src/domain/worldPulse/peaceTermsDisclosure.js';
+import { TERM_CATALOG } from '../../src/domain/worldPulse/peaceTermsCatalog.js';
 import { intelSalePrice } from '../../src/domain/spatial/generosityEV.js';
 import { decayedConfidence, reconcileBelief } from '../../src/domain/worldPulse/beliefMap.js';
 import { scoreBeliefConvergence } from '../../src/domain/worldPulse/peaceReasons.js';
@@ -394,5 +396,99 @@ describe('W-DOCTRINE-2b — the LIE edge-grievance pin', () => {
     expect(Object.values(states).some((s) => Number(s.resentment) > 0.2)).toBe(true);
     // And the exposure news receipt rode along.
     expect(res.newsEntries.some((e) => e.kind === 'infowar_lie_exposed')).toBe(true);
+  });
+});
+
+// ── IN-0C — THE DISCLOSURE SIGNING CREDIT ────────────────────────────────────
+// FIRST COVERAGE OF THE `provenTrue` SEAM (packet §4 note 1): `grep -rn 'provenTrue'
+// tests/` returned zero hits across the whole corpus before these cases, so every
+// assertion below proves substrate rather than extending a precedent.
+
+/** A wartime treaty whose OBLIGOR is the loser 'L'. @param {unknown[]} terms */
+const discloseWorld = (terms, over = {}) => litWorld({
+  treaties: { 'V|L': { victorId: 'V', loserId: 'L', terms, ...over } },
+});
+const advanceInfo = (/** @type {unknown} */ ws, /** @type {number} */ tick, extra = {}) => (
+  advanceInformationStatecraft({
+    snapshot: { byId: new Map(), settlements: [] }, worldState: ws, tick, strengthOf: () => 0.5, ...extra,
+  }));
+
+describe('IN-0C — the disclosure signing credit (the provenTrue default seam)', () => {
+  it('A1 — a disclosure minted at T-1 credits its obligor once at T, with NO provenTrue passed', () => {
+    const ws = discloseWorld([{ type: 'disclosure', mintedTick: 4 }]);
+    expect(disclosureSigningCredits(ws, 5)).toEqual([{ id: 'L', kind: 'proven_true' }]);
+    // …and it reaches the real fold: the obligor's credibility stock RISES.
+    const after = advanceInfo(ws, 5);
+    expect(credibilityScoreOf(after.worldState, 'L', 5)).toBeGreaterThan(0);
+  });
+
+  it('A2 — re-advancing the SAME tick from the SAME persisted state credits identically', () => {
+    const ws = discloseWorld([{ type: 'disclosure', mintedTick: 4 }]);
+    const first = advanceInfo(ws, 5);
+    const second = advanceInfo(ws, 5);
+    expect(credibilityScoreOf(second.worldState, 'L', 5))
+      .toBe(credibilityScoreOf(first.worldState, 'L', 5));
+    // THE PURITY PROOF, and it is what makes exactly-once structural rather than
+    // bookkept: no stage of this mover writes the treaty ledger, so the predicate
+    // reads nothing it writes and the derivation is unchanged after the advance.
+    expect(disclosureSigningCredits(first.worldState, 5)).toEqual(disclosureSigningCredits(ws, 5));
+    // …and the term falls out of the window on its own at T+1 — no marker required.
+    expect(disclosureSigningCredits(ws, 6)).toEqual([]);
+  });
+
+  it('A4 — every malformed shape fails CLOSED: no delta, no throw, never an "undefined" id', () => {
+    const noObligor = litWorld({ treaties: { t: { terms: [{ type: 'disclosure', mintedTick: 4 }] } } });
+    expect(disclosureSigningCredits(noObligor, 5)).toEqual([]);
+    expect(disclosureSigningCredits(litWorld({ treaties: { t: null } }), 5)).toEqual([]);
+    expect(disclosureSigningCredits(discloseWorld([{ type: 'disclosure', mintedTick: 'soon' }]), 5)).toEqual([]);
+    expect(disclosureSigningCredits(litWorld({}), 5)).toEqual([]);
+    expect(disclosureSigningCredits(null, 5)).toEqual([]);
+    expect(() => disclosureSigningCredits(discloseWorld([null, 7, 'x']), 5)).not.toThrow();
+    // anchored: A1 above proves this exact fixture shape DOES mint a delta, so the
+    // absence assertions here cannot be passing because nothing ever qualifies.
+    expect(disclosureSigningCredits(discloseWorld([{ type: 'disclosure', mintedTick: 4 }]), 5)).toHaveLength(1);
+    for (const delta of disclosureSigningCredits(noObligor, 5)) expect(delta.id).not.toBe('undefined');
+  });
+
+  it('A5 — only the T-1 INFORMATIONAL mint credits, and the family is DERIVED not restated', () => {
+    // THE FOUR NEGATIVES.
+    expect(disclosureSigningCredits(discloseWorld([{ type: 'disclosure', mintedTick: 3 }]), 5)).toEqual([]);
+    expect(disclosureSigningCredits(discloseWorld([{ type: 'disclosure', mintedTick: 5 }]), 5)).toEqual([]);
+    expect(disclosureSigningCredits(discloseWorld([{ type: 'tribute', mintedTick: 4 }]), 5)).toEqual([]);
+    expect(disclosureSigningCredits(litWorld({ treaties: {} }), 5)).toEqual([]);
+    // THE POSITIVE, DERIVED FROM THE CATALOG. `informational` is the catalog's SINGLETON
+    // family today; pinning it here makes any widening a visible, deliberate act instead
+    // of a silent one, and the credit is driven through the derived name rather than the
+    // literal 'disclosure'.
+    const informational = Object.keys(TERM_CATALOG)
+      .filter((type) => TERM_CATALOG[type].family === 'informational');
+    expect(informational).toEqual(['disclosure']);
+    expect(disclosureSigningCredits(discloseWorld([{ type: informational[0], mintedTick: 4 }]), 5))
+      .toEqual([{ id: 'L', kind: 'proven_true' }]);
+  });
+
+  it('A8 — an EXPLICIT provenTrue always wins, and the three cases must DIFFER', () => {
+    const ws = discloseWorld([{ type: 'disclosure', mintedTick: 4 }]);
+    const omitted = advanceInfo(ws, 5);
+    const explicitEmpty = advanceInfo(ws, 5, { provenTrue: [] });
+    const explicitOther = advanceInfo(ws, 5, { provenTrue: [{ id: 'X', kind: 'proven_true' }] });
+    expect(credibilityScoreOf(omitted.worldState, 'L', 5)).toBeGreaterThan(0);
+    // An explicit [] is still an array and still WINS — it credits NOTHING.
+    expect(credibilityScoreOf(explicitEmpty.worldState, 'L', 5)).toBe(0);
+    // An explicit array is used verbatim, and the derivation does not ride along with it.
+    expect(credibilityScoreOf(explicitOther.worldState, 'X', 5)).toBeGreaterThan(0);
+    expect(credibilityScoreOf(explicitOther.worldState, 'L', 5)).toBe(0);
+    // THE LOAD-BEARING CONTRAST: a case that only OMITS the argument cannot tell the old
+    // `provenTrue = []` default from the new derivation, and would pass unchanged against
+    // the unmodified file. These two must not be equal.
+    expect(credibilityScoreOf(omitted.worldState, 'L', 5))
+      .not.toBe(credibilityScoreOf(explicitEmpty.worldState, 'L', 5));
+  });
+
+  it('A6 — dark ⇒ the derivation is unreachable and the mover is a no-op', () => {
+    const dark = { spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' }, spatialLedgers: { treaties: { 'V|L': { victorId: 'V', loserId: 'L', terms: [{ type: 'disclosure', mintedTick: 4 }] } } } };
+    const after = advanceInfo(dark, 5);
+    expect(after.changed).toBe(false);
+    expect(after.worldState).toBe(dark);
   });
 });

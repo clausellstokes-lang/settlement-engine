@@ -65,7 +65,10 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
-import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
+import { ALLY_INTEL_TUNING, beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
+// IN-0C — THE DISCLOSURE SIGNING CREDIT. A pure GRAMMAR-side read of persisted treaty
+// state; this file owns the DEFAULT that consumes it (see advanceInformationStatecraft).
+import { disclosureSigningCredits } from './peaceTermsDisclosure.js';
 import { intelTradeActive, intelInjectionBelief, resolveIntelSale, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
@@ -1134,6 +1137,35 @@ export function intelSaleNpcCredibilityDeltas(sales) {
   return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)) || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
 }
 
+/**
+ * IN-0C — THE COMPELLED FEED'S FIDELITY, by the obligor's OBSERVED compliance.
+ *
+ * A strained compelled channel degrades to ALLY-RELAY fidelity, and `RELAY_KEEP` is
+ * consumed BY IMPORT rather than spelled: the semantic law is that a grudging compelled
+ * feed is worth exactly what a relayed one is worth, and a second spelling of the number
+ * would let the two drift apart in silence. `defaulted` and `expired` — the live fourth
+ * compliance word, NOT 'lapsed' — stop the feed outright, and so does an unknown or
+ * absent word. ABSENCE NEVER MEANS "TRUST FULLY"; this table fails closed.
+ *
+ * ⚠ IT LIVES HERE, NOT IN THE peaceTermsDisclosure LEAF, BY CHAIR RULING CR-IN0C-OPT2.
+ * The ladder reads INFORMATION's own tuning, and a GRAMMAR-side leaf importing it would
+ * open a new unlicensed cross-layer pair under CW-0w — which keys on the (importer,
+ * imported) pair, not on reachability. Same port, same file, no coupling.
+ *
+ * ⚠ SHIPPED DELIBERATELY UNCONSUMED, exactly as `orderTermsByAsk` was: the feed wave that
+ * calls this has not landed, so its only reader today is its acceptance case. That is a
+ * recorded deferral, NOT dead code — do not re-derive it as one and do not delete it.
+ */
+/** @type {Readonly<Record<string, number>>} */
+const DISCLOSURE_FIDELITY = Object.freeze({
+  honored: 1, strained: ALLY_INTEL_TUNING.RELAY_KEEP, defaulted: 0, expired: 0,
+});
+
+/** @param {string} observed a `complianceState` member @returns {number} 0..1 */
+export function disclosureFidelityFor(observed) {
+  return clamp01(DISCLOSURE_FIDELITY[String(observed)] ?? 0);
+}
+
 // The shared spatialLedgers key of the D-4→D-2 bluff-exposure deposit: the LADDER writes +
 // prunes it (its own sanctioned deposit record, design §8 write-list), this mover only READS it.
 // A string literal on the write side (npcLadderKernel) so the spatialUsage coverage walker
@@ -1227,7 +1259,13 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
  * @param {(id: string) => number} args.strengthOf  ground-truth 0..1 strength
  * @param {(id: string) => { malice01: number, lawfulness01: number }} [args.alignmentOf]  derived alignment
  * @param {(id: string) => string} [args.nameFor]
- * @param {CredibilityDelta[]} [args.provenTrue]  proven-true rises + resolved intel sales (SHARE-SELL self-policing)
+ * @param {CredibilityDelta[]|null} [args.provenTrue]  proven-true rises + resolved intel sales
+ *   (SHARE-SELL self-policing). OMITTED (or non-array) ⇒ this mover DERIVES its own from
+ *   persisted treaty state via `disclosureSigningCredits` (IN-0C). An explicit array ALWAYS
+ *   WINS — including `[]`, which credits nothing. The default is `null` rather than `[]`
+ *   precisely so "the caller passed none" stays distinguishable from "the caller passed an
+ *   empty array"; with an `[]` default the two are the same value and the derivation would
+ *   be unreachable.
  * @param {import('./npcCredibility.js').NpcCredibilityDelta[]} [args.npcProvenTrue]  D-2/D-3: per-NPC proven-true rises (a mouthpiece's sale/warning proved out)
  * @param {unknown[]} [args.commissionedPlants] paid plant envelopes consumed by the lie writer
  * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>>, envoyPicturePatches: Array<Record<string, unknown>> }}
@@ -1242,7 +1280,7 @@ export function advanceInformationStatecraft({
   strengthOf,
   alignmentOf,
   nameFor,
-  provenTrue = [],
+  provenTrue = null,
   npcProvenTrue = [],
   commissionedPlants = [],
 }) {
@@ -1400,7 +1438,7 @@ export function advanceInformationStatecraft({
     ...sightRes.deltas,
     ...lie.deltas,
     ...intelSaleCredibilityDeltas(resolvedSales),
-    ...(Array.isArray(provenTrue) ? provenTrue : []),
+    ...(Array.isArray(provenTrue) ? provenTrue : disclosureSigningCredits(state, tick)),
   ];
   const cred = advanceCredibility({ worldState: state, tick, deltas });
   if (cred.changed) { state = /** @type {Record<string, unknown>} */ (cred.worldState); changed = true; }

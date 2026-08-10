@@ -73,6 +73,15 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `A factor down from ${x.counterpart} was asked at the ${x.settlement} table why the wagons ran light, and had no answer ready.`,
     (x) => `Each season the shortfall was small enough to overlook; taken together, ${x.band} of them would not be.`,
   ],
+  treaty_disclosure_opened: [
+    (x) => `The article is plain: what ${x.counterpart} learns, ${x.settlement} is told, for as long as the ${x.term} stands.`,
+    (x) => `${x.settlement}'s clerks sit in ${x.counterpart}'s muster hall by treaty right, and the doors were not ${x.counterpart}'s to shut.`,
+    'They signed away the closed door along with the border, and the second cost more.',
+    (x) => `At ${x.counterpart} they call it the open article, and they do not say it kindly.`,
+    (x) => `For ${x.band} years nothing ${x.counterpart} learns will be its own for long.`,
+    (x) => `Down the ${x.route} the sealed copies travel to ${x.settlement}, and ${x.counterpart}'s clerks make no error the article can catch.`,
+    'The gate keeps its hours; what passes through it in writing is no longer anyone\'s secret.',
+  ],
   treaty_age_line: [
     (x) => `${x.band} years this peace has held.`,
     'Signed before most of the traders in the market were born, and still in force.',

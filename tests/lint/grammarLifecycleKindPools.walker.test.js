@@ -1,9 +1,9 @@
 /**
  * grammarLifecycleKindPools.walker.test.js — GR-0's phrased-kind walker.
  *
- * The census of the pact grammar's lifecycle voice: the exact seven wired pools, their
+ * The census of the pact grammar's lifecycle voice: the exact eight wired pools, their
  * frequency-scaled depth, their annex-verbatim text, the per-pool slot roles (one of them
- * INVERTED), the two Herald kinds' five joins, and the two pools this wave deliberately
+ * INVERTED), the three Herald kinds' five joins, and the two pools this wave deliberately
  * did NOT wire. It certifies presentation width only; it is not behavioural soak evidence.
  *
  * THE READER IS THE SHARED ONE. tests/helpers/receiptAnnex.js was EXTENDED with the
@@ -41,6 +41,7 @@ const EXPECTED = Object.freeze([
   ['treaty_lapsed', 'notable', 'public', 'trade', 7],
   ['treaty_lapsed.road_open', 'n/a', 'public', null, 7],
   ['treaty_default_detected', 'notable', 'public', 'trade', 7],
+  ['treaty_disclosure_opened', 'notable', 'public', 'trade', 7],
   ['treaty_age_line', 'n/a', 'public', null, 8],
   ['treaty_true_state_chip', 'n/a', 'dm-only', null, 8],
   ['ran_its_term', 'routine', 'public', null, 8],
@@ -84,9 +85,9 @@ function annexPool(kind) {
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the seven-pool census and every registry field are exact', () => {
+  test('the eight-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(7);
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(8);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -135,7 +136,7 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('every pool address resolves in the GRAMMAR volume, not a legacy forward', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
-    expect(address).toHaveLength(7);
+    expect(address).toHaveLength(8);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
@@ -188,7 +189,8 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
   });
 
   test('THE FIVE JOINS: both Herald kinds are phrased, routed, filed and desk-consistent', () => {
-    expect([...GRAMMAR_HERALD_KINDS]).toEqual(['treaty_lapsed', 'treaty_default_detected']);
+    expect([...GRAMMAR_HERALD_KINDS])
+      .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened']);
     for (const kind of GRAMMAR_HERALD_KINDS) {
       // JOIN 3 — the world phrase, so no projection can fall back to an engine token.
       expect(WHAT_PHRASES[kind], `${kind}: missing WHAT_PHRASES`).toBeTruthy();

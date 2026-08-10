@@ -96,6 +96,7 @@ export const KIND_SECTION = Object.freeze({
   // between crowns, so the letter files them where it files the oathbreaking. The
   // Herald's own desk for them diverges to trade, recorded in KIND_SECTION_DIVERGENCES.
   treaty_lapsed: 'courts', treaty_default_detected: 'courts',
+  treaty_disclosure_opened: 'courts',
   vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
   commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
   npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',
