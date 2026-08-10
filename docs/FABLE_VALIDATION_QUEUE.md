@@ -7346,3 +7346,69 @@ writing; (3) wire `observedShapeReaders.walker.test.js`'s `scanEstateWith` to
 guard/gate divergence this landing introduces — named, not hidden; that walker is
 independently red at HEAD on schema 2-vs-3). Traces preserved under the session
 scratchpad's `osrscope-` prefix.
+
+---
+
+# ⛔⛔ FABLE-EXHAUSTION BOUNDARY — 2026-08-10 ~21:00 (OWNER ORDER, this session)
+
+**Owner order, verbatim intent:** switch every process to Opus 5 now (Fable is about
+to run out); mark everything from here on out that was NOT Fable-validated as
+something Fable has to validate, in a handoff, wherever it is utilized — whether on
+this account or another.
+
+**Everything ABOVE this line is FABLE-VALIDATED** (the F-SURVEY-1 pass @ `2340497d`
+cleared all 30 owed markers; every chair ruling through this boundary — CR-OSR-*,
+CR-TRFZ-1..4, CR-TC4-*, CR-GR3B-*, CR-IN0C-*, CR-TC3A/3B-* — was issued by the Fable
+chair and needs no re-validation. Fable-issued rulings that were later
+EXECUTION-REFUTED by a lane are already recorded with their refutations in place;
+that history stands as written.)
+
+**Everything BELOW this line is OPUS-ERA and carries validation debt by default.**
+
+## The marking law (binding on every successor session, this account or another)
+
+1. **A row is owed for every judgment-density act** listed in THE PROTOCOL above
+   (acceptance judgments, new architecture beyond the frozen design corpus, golden-
+   shift adjudications, soak verdict interpretations, tuning-band ratifications,
+   deferral/block dispositions with product consequences). Mechanical green gates,
+   verified receipts, and plain implementation of an already-Fable-ruled packet do
+   NOT need rows — a packet built to a Fable-issued ruling inherits that validation.
+2. **The marker is `⏳ OPUS-ERA — FABLE VALIDATION OWED`**, placed at the TOP of every
+   artifact the judgment touches: the queue row here, the commit body, the packet or
+   design-doc section, and `docs/RESUME_STATE.md`'s hand note. Three verbs, one
+   marker — the recorded opus-era-marking law: ALL THREE of a judgment's homes carry
+   it, and **the marker NEVER gates progress** (it records debt; work proceeds).
+3. **Where it is UTILIZED, it is marked.** If an Opus-era judgment is consumed by a
+   later wave, that wave's document repeats the marker with a pointer to this row —
+   a successor reading only the downstream doc must still see the debt.
+4. **A Fable-capable account clears a row** by the RE-VALIDATION PROTOCOL above:
+   re-derive from the cited evidence, then CONFIRM (flip to
+   `✅ OPUS-ERA — FABLE-VALIDATED <date>`), ADJUST (new entry + fix forward; never
+   rewrite the Opus-era row), or ESCALATE if owner-gated. Flipping a marker requires
+   re-derivation from evidence — never a reading of the row's own claim.
+5. **The count is the debt metric.** `grep -c '⏳ OPUS-ERA — FABLE VALIDATION OWED'`
+   across the repo is the live figure a successor reports. (⚠ Commit MESSAGES are
+   immutable and will keep matching forever — count DOCUMENT markers only, exactly as
+   the F-SURVEY-1 pass established.)
+6. **Standing authority is unchanged and immediate:** an Opus 5 successor holds FULL
+   chair authority (the 2026-07-18 continuity order, updated to Opus 5, plus the
+   2026-08-10 full delegation grant) and performs BOTH chairs. The owner's four
+   carve-outs survive every delegation and every era: external legal sign-off, the V5
+   aesthetic cull (offer, never assume), THE TUNING SIGNATURE at soak, and EACH
+   push/deploy confirmed by the owner. No remote/Supabase CLI contact, ever;
+   migrations are authoring-only.
+
+## Live work crossing the boundary (state at the cutover)
+
+| item | state at cutover | validation posture |
+|---|---|---|
+| TC-4 implementation lane | in flight; all §9 cases green pre-gate, wave-end gate running | Packet + every §12b/O-item + CR-TC4-O2-R1/O5-R1/BAND-1 are **Fable-ruled** — the build inherits that validation. A row is owed ONLY for judgments the Opus chair adds at landing (attribution calls on any gate red, any deviation accepted). |
+| Schema-4 OSR lane | in flight; docket is CR-OSR-FREEZE-3-R1..R3 + CR-TRFZ-4 | Rulings are **Fable-issued**. Rows owed for: the M6 sibling-slice proposal's ACCEPTANCE (an identity-definition change is new architecture), the genesis commit's acceptance judgment, and any refusal-triggered re-ruling. |
+| The 23 reader-without-writer repairs (task #14) | not started | Each repair's writer-side-vs-reader-side call is **new architecture** → row owed per finding cluster. The prominentRelationship 8 are user-visible and product-shaped: highest re-validation priority. |
+| Census re-freeze (CR-TRFZ-1..3) | deferred behind schema-4 | The 105→111 attributed raise is **Fable-approved**; executing it needs no row. A row IS owed if the measured figure differs from 111 and the successor re-authors it. |
+| ES tail, remaining corpus, endgame tail | queued | Every wave acceptance is judgment-density → row owed per wave. The endgame's fixed order and its owner gates are Fable-ruled and unchanged. |
+
+## ⏳ OPUS-ERA ROWS BEGIN BELOW THIS LINE
+
+| date | item | Opus decision | evidence | what Fable should re-examine |
+|---|---|---|---|---|
