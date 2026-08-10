@@ -243,10 +243,10 @@
           "tests/edgeFunctions/analyticsEventsBundle.freshness.test.js"
         ],
         "inChain": true,
-        "note": "⚠ THREE freshness rows are BASELINED RED under subsystem 'edge bundles / built artifacts', so a fourth staleness cannot redden anything new."
+        "note": "⭐ 2026-08-10: the three baselined freshness rows are BURNED DOWN (F-S1-E7 — one rebuild of all five bundles from a clean committed tree). All five freshness suites now PASS in-chain, so a fresh staleness DOES redden. Status stays PARTIAL because the enforcer is still gate-time only: nothing forces a lane that edits a bundled input to run the gate before committing. The MACHINERY precondition named in upgradePath is now MET — the flip is a chair call, not a lane call."
       },
       "instances": 4,
-      "instanceEvidence": "⚠ MEASURED DOWNGRADE: three freshness assertions sit in scripts/.test-ratchet-baseline.json. Bites: three bundles stale as of 2026-08-03; fix-c4-platform-shipped.md 'Bit again here' (generatedAt churn); hazard-conversion-law.md — 'the chair broke it by reading \"touching bundled inputs\" as not covering a pure git mv.'",
+      "instanceEvidence": "⭐ RECOVERED 2026-08-10: the three freshness assertions that sat in scripts/.test-ratchet-baseline.json were burned down, verified green EXECUTING (127/127 across the five bundle suites) and proven live by a staleness MUTANT — appending one line to src/data/entityTags.js reddened the charter and grounding freshness rows without rebuilding. HISTORICAL bites, retained: three bundles stale as of 2026-08-03; fix-c4-platform-shipped.md 'Bit again here' (generatedAt churn); hazard-conversion-law.md — 'the chair broke it by reading \"touching bundled inputs\" as not covering a pure git mv.'",
       "triggers": [
         "any change under supabase/functions/_shared/ or its transitive source inputs",
         "any `git mv` or rename of a file reachable from an edge bundle's input closure",
@@ -330,9 +330,9 @@
       "status": "PARTIAL",
       "acceptedReason": null,
       "memory": ["dirty-tree-build-artifact-class.md"],
-      "enforcer": { "paths": ["tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"], "inChain": true, "note": "⚠ THREE of its assertions are BASELINED RED under subsystem 'edge bundles / dirty-build class'. The cure was built EXACTLY RIGHT — it hashes the git INDEX, not the worktree — and is currently tolerated failing." },
+      "enforcer": { "paths": ["tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"], "inChain": true, "note": "⭐ 2026-08-10: the three tolerated failures are BURNED DOWN (F-S1-E7). The cure was built EXACTLY RIGHT — it hashes the git INDEX, not the worktree — and it is now PASSING rather than tolerated failing. Its orthogonality to freshness was demonstrated live: a staleness mutant left UNSTAGED reddens the freshness rows and correctly leaves this pin green, because the index is unchanged. Status stays PARTIAL because the enforcer is gate-time only; the MACHINERY precondition in upgradePath is now MET and the flip is a chair call." },
       "instances": 3,
-      "instanceEvidence": "MEASURED at bd5e49f6: the aiCharterBundle, aiGrounding and aiOutputSchema rows 'the recorded sourceHash equals the builder hash over INDEX content' all sit in scripts/.test-ratchet-baseline.json, cause 'THE DIRTY-BUILD CLASS … computed over content that is neither committed nor staged, so no checkout can reproduce the bundle.'",
+      "instanceEvidence": "MEASURED at bd5e49f6: the aiCharterBundle, aiGrounding and aiOutputSchema rows 'the recorded sourceHash equals the builder hash over INDEX content' all sat in scripts/.test-ratchet-baseline.json, cause 'THE DIRTY-BUILD CLASS … computed over content that is neither committed nor staged, so no checkout can reproduce the bundle.' ⭐ RETIRED 2026-08-10 by one rebuild from a clean committed tree, exactly as upgradePath prescribed; all three now pass.",
       "triggers": [
         "any run of build:edge-shared, gen:compendium-data, gen:dossier-prose or gen:analytics-dictionary while `git status --porcelain` is non-empty for its inputs"
       ],

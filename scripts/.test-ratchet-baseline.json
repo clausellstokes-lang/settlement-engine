@@ -62,54 +62,6 @@
       "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
       "class": "debt"
     },
-    "tests/edgeFunctions/aiCharterBundle.freshness.test.js :: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
-      "file": "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
-      "test": "aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
-      "subsystem": "edge bundles / built artifacts",
-      "cause": "THE BUILT-ARTIFACT HAZARD: supabase/functions/_shared/aiCharterBundle is stale against its inputs. Edge bundles are BUILT artifacts and a lane touching a bundled input must rebuild edge-shared IN the same commit; later lanes changed inputs without rebuilding. Last clean rebuild was f2c10742.",
-      "introducedAt": "unbisectable: the bundles were last rebuilt clean at f2c1074266fc3243f73cc05a11feb6f33004ca07; every later commit touching a bundled input without running npm run build:edge-shared contributed. No single introducing commit. Cure is one rebuild of all five bundles from a clean committed tree.",
-      "class": "debt"
-    },
-    "tests/edgeFunctions/aiGroundingBundle.freshness.test.js :: Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
-      "file": "tests/edgeFunctions/aiGroundingBundle.freshness.test.js",
-      "test": "Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
-      "subsystem": "edge bundles / built artifacts",
-      "cause": "THE BUILT-ARTIFACT HAZARD: aiGroundingBundle is stale — src/data/constants.js, entityTags.js, institutionalCatalog.js, npcTraitWeights.js, powerData.js and the stressor spine phrases all changed since the bundle was built.",
-      "introducedAt": "unbisectable: same accumulation as aiCharterBundle — last clean rebuild f2c1074266fc3243f73cc05a11feb6f33004ca07, then many input-touching lanes. Cure is one rebuild of all five bundles.",
-      "class": "debt"
-    },
-    "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js :: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
-      "file": "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
-      "test": "aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
-      "subsystem": "edge bundles / built artifacts",
-      "cause": "THE BUILT-ARTIFACT HAZARD: aiOutputSchemaBundle is stale against its recorded input hash.",
-      "introducedAt": "unbisectable: same accumulation as aiCharterBundle — last clean rebuild f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild of all five bundles.",
-      "class": "debt"
-    },
-    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
-      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
-      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
-      "subsystem": "edge bundles / dirty-build class",
-      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
-      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
-      "class": "debt"
-    },
-    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
-      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
-      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
-      "subsystem": "edge bundles / dirty-build class",
-      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
-      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
-      "class": "debt"
-    },
-    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
-      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
-      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
-      "subsystem": "edge bundles / dirty-build class",
-      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
-      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
-      "class": "debt"
-    },
     "tests/lib/accountContentPortability.test.js :: account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive": {
       "file": "tests/lib/accountContentPortability.test.js",
       "test": "account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive",

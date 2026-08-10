@@ -141,7 +141,40 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // the lifecycle reds the allowlist arm, and severing the twinDirective read inside
 // rippleEventThroughWorld reds the wiring arm AND two behavioural matrix tests, which is
 // what makes it a synchronization guard rather than a text probe.
-const CEILING = 23;
+// RATCHETED 23 → 17 on 2026-08-10 by the F-SURVEY-1 E7 micro-lane. Six built-artifact rows
+// left — three edge-bundle FRESHNESS rows and the three edgeSharedBundleReproducibility
+// INDEX-hash rows — and they left because THE DEBT WAS PAID, not because the guards moved.
+//
+// ⛔ READ THIS BEFORE REPEATING THE SHAPE — THE ORDERED CURE WAS PROVEN A NO-OP.
+// F-S1-E7 ordered these six relocated to a POST-BUILD gate step, on the premise that they
+// "assert dist state and step 12 runs before the build step". Measured, the premise does not
+// hold, in three independent ways:
+//   (1) the four suites contain ZERO references to `dist` or VERIFY_DIST — they read
+//       supabase/functions/_shared/*, src/*, and the git INDEX, and nothing else;
+//   (2) `npm run build` is `vite build`, which emits to dist/ and never regenerates an edge
+//       bundle, so NO post-build phase can change these six verdicts;
+//   (3) the census runs the WHOLE `vitest run`, so tests/build/ is already inside it —
+//       moving a file by DIRECTORY removes nothing. The only thing that removes a test from
+//       the census is SKIPPING it, and six new skips against the frozen skippedCeiling of
+//       105 is precisely the skip-to-green move check-test-ratchet.mjs exists to refuse.
+// The control that settles it: analyticsEventsBundle and intentAtlasBundle are the same
+// shape, in the same suite, in the same pre-build phase — and they were GREEN throughout.
+// The three reds were never build-phase ordering. They were three STALE artifacts.
+// So the cure was the one the repo had already written down in scripts/hazard-registry.json
+// (HZ-DIRTYBUILD upgradePath, verbatim): "one rebuild from a clean committed tree".
+// `npm run build:edge-shared` at a clean tree regenerated all five bundles in one window,
+// byte-identical across two consecutive runs, and all six assertions went green EXECUTING.
+//
+// ⚠ THE ONE PIN THAT HAD TO CHANGE, AND WHY — the ORDINARY_TEST_CONTROL floor, 5 → 3.
+// That control names the census's ordinary (non-walker) debt files, and its anti-padding arm
+// requires every member to carry a LIVE census row. Of the 23 rows, 13 were ledgered walkers
+// and exactly 10 were ordinary debt, held by the control's 7 files. This cut retires 4 of
+// those 7. The list CANNOT be refilled: every remaining census file is a ledgered walker, and
+// naming one here would re-commit the 2026-08-07 error of certifying a walker as ordinary.
+// The floor is therefore BOUNDED ABOVE by the ordinary-debt population it controls, so a
+// floor held at 5 would forbid burning the census below 5 ordinary-debt files — a control's
+// sample size vetoing the burn-down it exists to observe. It steps down WITH the population.
+const CEILING = 17;
 
 // ── ⭐ THE OWNER-GATED DISCHARGE (2026-08-10) ─────────────────────────────────
 //
@@ -805,11 +838,13 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // structurally unable to qualify, and the freed-walker pin above independently requires
   // the two ex-members to classify as walkers. A future author who re-adds a walker here
   // reds three pins, not zero.
+  //
+  // ⚠ 2026-08-10 — THE FOUR edgeFunctions NAMES LEFT, and they left the RIGHT way: their
+  // debt was burned down (one clean rebuild of all five edge-shared bundles), so they no
+  // longer carry census rows and the self-cleaning arm below evicts them. They were NOT
+  // removed to make anything green. See the RATCHETED 23 → 17 note at the top of this file
+  // for why the ordered relocation was refused and the rebuild done instead.
   const ORDINARY_TEST_CONTROL = Object.freeze([
-    'tests/edgeFunctions/aiCharterBundle.freshness.test.js',
-    'tests/edgeFunctions/aiGroundingBundle.freshness.test.js',
-    'tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js',
-    'tests/edgeFunctions/edgeSharedBundleReproducibility.test.js',
     'tests/lib/accountContentPortability.test.js',
     'tests/security/mapSnapshotImport.contract.test.js',
     'tests/store/customContentSlice.race.test.js',
@@ -851,10 +886,15 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     ).toEqual([]);
     // anchored: the membership check above proves the list was compared against a populated
     // census, so the floor below is a floor on a real list rather than on an empty one.
+    // 5 → 3 on 2026-08-10. NOT a weakening of the classifier: this floor is bounded above by
+    // the number of ORDINARY-debt files left in the census, so it must fall as that debt is
+    // paid or it becomes a veto on the burn-down (the reasoning is written out in full at the
+    // RATCHETED 23 → 17 note). It is still a LITERAL, never `ORDINARY_TEST_CONTROL.length`,
+    // which would prove list == list. It may fall with the population; it may never be padded.
     expect(
       ORDINARY_TEST_CONTROL.length,
       'the control emptied — the false-positive half of this block is no longer being tested',
-    ).toBeGreaterThanOrEqual(5);
+    ).toBeGreaterThanOrEqual(3);
   });
 
 

@@ -7023,6 +7023,15 @@ prose too), and EVERY row must name its own landing SHA (three rows didn't).
   dist state and step 12 runs before the build step). The honest cure is STRUCTURAL and is
   ORDERED: relocate the edge-bundle freshness/reproducibility guards to a post-build gate
   step, THEN bank the six census rows. Micro-packet.
+  ⏱ **AMENDED 2026-08-10 — THE PREMISE WAS EXECUTION-REFUTED AND THE ORDER SUPERSEDED.**
+  The six rows never read dist/VERIFY_DIST (they read supabase/functions/_shared + the
+  git index); vite build never regenerates an edge bundle; and the census runs the whole
+  vitest, so the only 'relocation' mechanism is the forbidden skip-to-green. The control:
+  two same-shape bundles were green throughout — the reds were three STALE ARTIFACTS,
+  cured exactly as HZ-DIRTYBUILD's own upgradePath prescribed: ONE rebuild from a clean
+  committed tree (all five bundles, determinism proven byte-identical twice). Six rows
+  banked, census 23→17. The chair's phase-ordering premise is struck; the refusing lane's
+  proof is the record.
 
 **Amendments accepted (all 8), with the machinery each is owed (hazard-conversion law):**
 - **M1** test-title-census lane serialization (row 3777) → a hazard-registry row + a line
