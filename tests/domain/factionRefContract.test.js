@@ -29,6 +29,11 @@ const religiousSeat = (extra = {}) => ({
 describe('FactionRef production', () => {
   test('the shared helper stays a zero-import leaf', () => {
     const source = readFileSync(path.join(process.cwd(), 'src/domain/factionRefs.js'), 'utf8');
+    // LIVENESS ANCHOR: the subject is file TEXT and nothing else here reads it, so a
+    // moved or emptied leaf would satisfy "no imports" perfectly. Pin the leaf by an
+    // export it must carry before asking what it does NOT carry.
+    expect(source).toContain('export function factionRefOf');
+    // anchored: the leaf is proven live by its own factionRefOf export above
     expect(source).not.toMatch(/^\s*import\s/m);
   });
 

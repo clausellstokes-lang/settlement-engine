@@ -353,7 +353,10 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/eventProse.test.js': 2,
   'tests/domain/events/forceReconsiderationComposite.test.js': 1,
   'tests/domain/events/realmCoverage.walker.test.js': 1,
-  'tests/domain/events/restoreFoodAnchorScope.test.js': 2,
+  // LOWERED 2 → 1 on 2026-08-10 (step-15 reconciliation): 93e7ed50 replaced the
+  // removed-faction test wholesale, taking its `not.toContain('e_disband')` with it. // anchored: PROSE — this note NAMES a matcher it does not assert (the KNOWN EDGES "matcher inside a comment" case); there is no collection here that could drift
+  // The surviving site is line 151. Banked because the inventory only shrinks.
+  'tests/domain/events/restoreFoodAnchorScope.test.js': 1,
   'tests/domain/events/restoreScope.test.js': 2,
   'tests/domain/events/targetFirstIndex.test.js': 3,
   'tests/domain/events/wave2Producers.test.js': 4,

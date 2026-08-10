@@ -143,18 +143,33 @@ describe('campaign runtime capsule source boundary', () => {
       'src/store/campaignWorldPulseSlice.js',
       'src/domain/worldPulse/worldState.js',
       'src/domain/worldPulse/simulationRules.js',
+      // An empty closure reds in the four-module positive loop above, not here.
+      // anchored: the same `closure` is proven live and correctly keyed by that loop
     ]) expect(closure).not.toContain(module);
   });
 
   test('the bridge has one dynamic capsule edge and no static implementation edge', () => {
     const bridge = readFileSync(join(SRC, 'store/campaignRuntimeBridge.js'), 'utf8');
     expect(bridge).toContain("import('./campaignRuntime.js')");
-    expect(staticSpecifiers(bridge)).not.toEqual(expect.arrayContaining([
+    // The previous form here — not.toEqual(arrayContaining([all four])) — asserted
+    // NOTHING. `staticSpecifiers(bridge)` is legitimately [] at head, and
+    // `expect([]).not.toEqual(expect.arrayContaining([...]))` passes; worse,
+    // arrayContaining is ALL-OR-NOTHING, so it only fires when all four specifiers are
+    // present at once. A bridge with the ONE static implementation edge this test is
+    // named for shipped green. Per-specifier absences fire on any single edge.
+    //
+    // LIVENESS CONTROL. No same-subject positive is possible, because the correct
+    // answer for this bridge really is the empty list. So drive the parser over this
+    // bridge's OWN text with one static edge spliced in: a parser whose regex rotted
+    // and returned [] for every input reds here instead of greening every absence.
+    expect(staticSpecifiers(`import './__probe__.js';\n${bridge}`)).toContain('./__probe__.js');
+    for (const specifier of [
       './campaignRuntime.js',
       './campaignSlice.js',
       './campaignRegionalSlice.js',
       './campaignWorldPulseSlice.js',
-    ]));
+      // anchored: the parser is proven live on this exact bridge text by the probe above
+    ]) expect(staticSpecifiers(bridge)).not.toContain(specifier);
   });
 
   test('the runtime fingerprint has exactly one source owner', () => {
@@ -167,8 +182,13 @@ describe('campaign runtime capsule source boundary', () => {
   test('the runtime static source closure owns every implementation body and sentinel', () => {
     const runtimeClosure = sourceStaticClosure('src/store/campaignRuntime.js');
     const mainClosure = sourceStaticClosure('src/main.jsx');
+    // LIVENESS ANCHOR for the mainClosure negative in the loop. The positive beside it
+    // measures runtimeClosure — a DIFFERENT collection — so a main.jsx walk that
+    // silently returned [] would satisfy every absence below without reding anything.
+    expect(mainClosure).toContain('src/store/campaignRuntimeBridge.js');
     for (const [module, sentinel] of Object.entries(BODY_SENTINELS)) {
       expect(runtimeClosure).toContain(module);
+      // anchored: mainClosure is proven live by the bridge module pinned above
       expect(mainClosure).not.toContain(module);
       const carriers = walkSource(SRC)
         .filter(candidate => readFileSync(candidate, 'utf8').includes(sentinel))
@@ -209,6 +229,10 @@ describe.runIf(REQUIRE_DIST && DIST_EXISTS)('built campaign runtime capsule boun
   test('the runtime fingerprint survives in a non-worker lazy chunk', () => {
     const carriers = chunksContaining(RUNTIME_SENTINEL);
     expect(carriers).toHaveLength(1);
+    // The length pin proves the ARRAY holds one element; this proves that element is a
+    // real chunk FILENAME, which is what the absence below actually questions.
+    expect(carriers[0]).toMatch(/\.js$/);
+    // anchored: carriers[0] is pinned to exactly one real .js chunk name above
     expect(carriers[0]).not.toContain('.worker-');
   });
 

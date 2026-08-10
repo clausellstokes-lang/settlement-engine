@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test, vi } from 'vitest';
 import { loadCampaignRuntimeView } from '../../src/store/campaignRuntimeView.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = relative => readFileSync(join(ROOT, relative), 'utf8');
@@ -131,8 +132,15 @@ describe('campaign runtime view gate', () => {
       'legal/TermsPage.jsx',
       'auth/SignInPage.jsx',
     ]) {
-      expect(appViews).toContain(`lazy(() => import('./components/${module}'))`);
-      expect(appViews).not.toContain(`campaignLazy(() => import('./components/${module}'))`);
+      // The plain spelling is a SUBSTRING of the campaignLazy one, so its presence
+      // proves this route is still registered at all — the exclusion below then
+      // measures the gate choice rather than a route that simply vanished.
+      expectAbsentWithAnchor(
+        appViews,
+        `campaignLazy(() => import('./components/${module}'))`,
+        `lazy(() => import('./components/${module}'))`,
+        `ungated route ${module}`,
+      );
     }
 
     const workshop = read('src/components/surveyor/SurveyorWorkshop.jsx');

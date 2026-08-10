@@ -13,6 +13,7 @@
  *         surfaces, where the earlier pdf-4 fix had instead shrunk the PDF to 6.
  */
 import { describe, test, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { noteText, label, hookText } from '../../src/pdf/lib/format.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
@@ -142,7 +143,10 @@ describe('PDF/Foundry defense fields come from real producers', () => {
   test('the view model derives guard prose and normalized defense vulnerabilities', () => {
     expect(vm.defense.guardAssessment).toBe(guardAssessment);
     expect(vm.defense.vulnerabilities).toEqual([wallVulnerability]);
+    // A defense block that vanished reds in the two positives above, not here.
+    // anchored: those pin vm.defense's own guardAssessment and vulnerabilities
     expect(vm.defense).not.toHaveProperty('publicOrder');
+    // anchored: same live vm.defense pinned by the two positives above
     expect(vm.defense).not.toHaveProperty('lawEnforcement');
   });
 
@@ -150,7 +154,6 @@ describe('PDF/Foundry defense fields come from real producers', () => {
     const page = buildJournalPages(vm, { variant: 'canon_dossier' })
       .find((candidate) => candidate.name === 'Defense & Security');
     expect(page).toBeTruthy();
-    expect(page.markdown).toContain(wallVulnerability);
-    expect(page.markdown).not.toContain('POISONED');
+    expectAbsentWithAnchor(page.markdown, 'POISONED', wallVulnerability, 'defense journal page');
   });
 });

@@ -130,6 +130,11 @@ describe('persisted world hydration versus hot world normalization', () => {
     expect(hot.envoyErrands[0].nested.labels).not.toBe(forged.nested.labels);
 
     const hydrated = hydratePersistedWorldState({ envoyErrands: [forged] }, CAMPAIGN);
+    // LIVENESS ANCHOR: every positive above measures the HOT world. A strict hydration
+    // that returned undefined or {} would satisfy the absence below while admitting
+    // nothing at all, so pin that a real world state came back first.
+    expect(hydrated).toHaveProperty('schemaVersion');
+    // anchored: `hydrated` is proven to be a materialized world state by the pin above
     expect(hydrated).not.toHaveProperty('envoyErrands');
   });
 
@@ -181,7 +186,14 @@ describe('persisted world hydration versus hot world normalization', () => {
     const raw = { envoyErrands: [row] };
 
     expect(ensureWorldState(raw, CAMPAIGN)).toHaveProperty('envoyErrands');
-    expect(hydratePersistedWorldState(raw, CAMPAIGN)).not.toHaveProperty('envoyErrands');
+    // The hot path above proves this fixture really carries the key. That alone anchors
+    // the INPUT, not the SUBJECT: a strict path regressed to returning {} or undefined
+    // would satisfy the absence below in all three cases. Bind the result and pin it.
+    const strict = hydratePersistedWorldState(raw, CAMPAIGN);
+    expect(strict).toHaveProperty('schemaVersion');
+    // anchored: `strict` is proven a materialized world by the pin above, and the hot
+    // anchored: path proves this same `raw` carries the key — a present-then-absent pair
+    expect(strict).not.toHaveProperty('envoyErrands');
   });
 
   test('strict persistence de-duplicates by id with the last valid row winning', () => {

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { foldCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function rootRecord(corpus, name) {
   const descriptor = corpus.graph.roots[name].find((entry) => entry.kind === 'record');
@@ -67,10 +68,8 @@ describe('observed shape corpus: path-qualified container graph', () => {
 
     expect(flat.id).not.toBe(nested.id);
     expect(arrayElement.id).not.toBe(bracketLiteral.id);
-    expect(flat.keys).toContain('flatOnly');
-    expect(flat.keys).not.toContain('nestedOnly');
-    expect(bracketLiteral.keys).toContain('literalOnly');
-    expect(bracketLiteral.keys).not.toContain('arrayOnly');
+    expectAbsentWithAnchor(flat.keys, 'nestedOnly', 'flatOnly', 'flat separator path');
+    expectAbsentWithAnchor(bracketLiteral.keys, 'arrayOnly', 'literalOnly', 'bracket literal path');
     expect(corpus.graph.pathEncoding).toBe('typed-uri-v1');
   });
 
@@ -88,13 +87,10 @@ describe('observed shape corpus: path-qualified container graph', () => {
 
     expect(root.keys).toEqual(['a', 'b', 'summary']);
     expect(left.id).not.toBe(right.id);
-    expect(left.keys).toContain('leftOnly');
-    expect(left.keys).not.toContain('rightOnly');
-    expect(right.keys).toContain('rightOnly');
-    expect(right.keys).not.toContain('leftOnly');
+    expectAbsentWithAnchor(left.keys, 'rightOnly', 'leftOnly', 'exact-id left record');
+    expectAbsentWithAnchor(right.keys, 'leftOnly', 'rightOnly', 'exact-id right record');
     expect(dynamic.keys).toEqual(expect.arrayContaining(['leftOnly', 'rightOnly']));
-    expect(dynamic.keys).toContain('entityOnly');
-    expect(dynamic.keys).not.toContain('summaryOnly');
+    expectAbsentWithAnchor(dynamic.keys, 'summaryOnly', 'entityOnly', 'dynamic-value facet');
     expect(summary.keys).toContain('summaryOnly');
     expect(summary.id).not.toBe(dynamic.id);
   });

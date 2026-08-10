@@ -297,7 +297,11 @@ describe('worldState.envoyErrands — one writer, one function (WR-7a / R-BLD-4)
     // The eager branch may only invoke the injected/structural normalizer. A
     // direct records import would pull the strict family back into first paint.
     expect(code).toMatch(/key === 'envoyErrands'[\s\S]{0,120}normalizeEnvoyRows\s*\(/);
+    // An emptied read of the persistence layer reds the normalizeEnvoyRows match above
+    // and the cloneAdmittedEnvoyErrands match below before it can reach this line.
+    // anchored: `code` is proven live by those two structural matches
     expect(code).not.toContain("from './envoyErrandRecords.js'");
+    // anchored: same live `code`, pinned by the matches above and below
     expect(code).not.toContain('normalizeEnvoyErrands');
     expect(code).toMatch(/function\s+cloneAdmittedEnvoyErrands[\s\S]*deepClone\s*\(value\)/);
 

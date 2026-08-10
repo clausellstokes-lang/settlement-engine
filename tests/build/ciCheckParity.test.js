@@ -200,9 +200,14 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
 
   it('every setup-node use reads the repository runtime pin', () => {
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-    expect(ci).not.toMatch(/node-version:\s*['"]?\d/);
     const setupCount = (ci.match(/uses:\s*actions\/setup-node@/g) || []).length;
     const pinCount = (ci.match(/node-version-file:\s*['"]?\.nvmrc/g) || []).length;
+    // LIVENESS ANCHOR. Both the absence below and the equality at the end are satisfied
+    // by an EMPTY workflow (no literal versions, and 0 === 0), so the whole test would
+    // survive ci.yml being renamed away. Prove the file really sets Node up first.
+    expect(setupCount).toBeGreaterThan(0);
+    // anchored: the workflow is proven live and setup-node-bearing by the count above
+    expect(ci).not.toMatch(/node-version:\s*['"]?\d/);
     expect(pinCount).toBe(setupCount);
   });
 });

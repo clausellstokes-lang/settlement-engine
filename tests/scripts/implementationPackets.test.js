@@ -306,6 +306,10 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     const exactPacketText = packetMarkdown('P-1', 'READY');
     const exactPacketBytes = Buffer.from(exactPacketText, 'utf8');
     expect(JSON.stringify(second)).toBe(JSON.stringify(first));
+    // The toMatchObject immediately below pins `first` field by field (schemaVersion,
+    // id, packetMarkdown bytes, changeManifest…), so this serialization cannot be the
+    // empty or undefined string the absence would otherwise accept.
+    // anchored: `first` is pinned field-by-field by the toMatchObject below
     expect(JSON.stringify(first)).not.toMatch(/timestamp|generatedAt|createdAt/i);
     expect(first).toMatchObject({
       schemaVersion: 1,

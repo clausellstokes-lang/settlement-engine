@@ -375,6 +375,9 @@ describe('TC-3a A5 — CR-TC3A-1: the naming pools are injected, never imported'
     expect(closure.length).toBeGreaterThan(20);
     expect(closure).toContain('src/domain/townCartography/cartographyWards.js');
     expect(closure).toContain('src/domain/townCartography/cartographyPlan.js');
+    // The anti-vacuity note above says this explicitly: the walk is real and already
+    // reaches both cartography leaves.
+    // anchored: `closure` is pinned as a real, populated walk by the three positives above
     expect(closure).not.toContain('src/data/namingData.js');
     const importers = closure.filter((path) => (
       /from\s+'[^']*namingData\.js'/.test(withoutComments(readRepoFile(path)))

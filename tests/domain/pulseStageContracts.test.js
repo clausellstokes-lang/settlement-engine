@@ -297,9 +297,20 @@ describe('declarative pulse substage contracts', () => {
   it('is metadata only: no mover imports, dynamic imports, or execution wiring', () => {
     const manifest = read('src/domain/worldPulse/pulseStageManifest.js');
     const kernel = read('src/domain/worldPulse/pulseKernel.js');
+    // LIVENESS ANCHORS for the four negatives below. Both subjects are file TEXT: a
+    // rename, a move or a read that quietly returned '' would satisfy every absence
+    // claim here. Pin each file by a token only that file carries — the manifest by
+    // the very export whose absence from the kernel is asserted, the kernel by its
+    // entry symbol — so a drifted read reds here instead of passing silently.
+    expect(manifest).toContain('export const PULSE_SUBSTAGE_CONTRACTS');
+    expect(kernel).toContain('simulateCampaignWorldPulse');
+    // anchored: the manifest is proven live by its own PULSE_SUBSTAGE_CONTRACTS export above
     expect(manifest).not.toMatch(/^\s*import\s/m);
+    // anchored: same live manifest text as the export assertion above
     expect(manifest).not.toContain('import(');
+    // anchored: the kernel is proven live by its simulateCampaignWorldPulse entry symbol above
     expect(kernel).not.toContain('PULSE_SUBSTAGE_CONTRACTS');
+    // anchored: same live kernel text as the entry-symbol assertion above
     expect(kernel).not.toContain('normalizePulseStageResult');
     for (const row of PULSE_SUBSTAGE_CONTRACTS) {
       expect(typeof row.call.symbol).toBe('string');
@@ -367,8 +378,16 @@ describe('ledger ownership certification manifest', () => {
   it('is independent certification data and cannot drive a runtime writer', () => {
     const manifest = read('src/domain/worldPulse/ledgerOwnershipManifest.js');
     const kernel = read('src/domain/worldPulse/pulseKernel.js');
+    // LIVENESS ANCHORS for the three negatives below — see the sibling contract test:
+    // both subjects are file TEXT, so a rename or an empty read would satisfy every
+    // absence claim. Pin each file by a token only it carries.
+    expect(manifest).toContain('export const LEDGER_OWNERSHIP_MANIFEST');
+    expect(kernel).toContain('simulateCampaignWorldPulse');
+    // anchored: the manifest is proven live by its own LEDGER_OWNERSHIP_MANIFEST export above
     expect(manifest).not.toMatch(/^\s*import\s/m);
+    // anchored: same live manifest text as the export assertion above
     expect(manifest).not.toContain('import(');
+    // anchored: the kernel is proven live by its simulateCampaignWorldPulse entry symbol above
     expect(kernel).not.toContain('LEDGER_OWNERSHIP_MANIFEST');
     for (const row of LEDGER_OWNERSHIP_MANIFEST) {
       expect(row.writers.every((writer) => typeof writer.symbol === 'string')).toBe(true);

@@ -296,6 +296,8 @@ describe('per-test suite ratchet — static pins', () => {
     // The ratchet reports a verdict; a burn-down lane needs the unfiltered
     // reporter output. Atomic ownership changes concurrency, not the denominator.
     expect(pkg.scripts.test).toBe('sh scripts/gate-mutex.sh --run -- npx vitest run');
+    // The subject cannot have drifted away or gone undefined by the time this runs.
+    // anchored: the line above pins this script to one EXACT string
     expect(pkg.scripts.test).not.toMatch(/--exclude|--changed|--related|--passWithNoTests/);
   });
 

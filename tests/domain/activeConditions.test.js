@@ -161,6 +161,12 @@ describe('deriveActiveCondition()', () => {
       anchorKeys: ['anchor.two'],
     };
     const c = deriveActiveCondition({ archetype: 'abandonment', ...aliases });
+    // LIVENESS ANCHOR: deriveActiveCondition returns null for input it rejects, and a
+    // negative property assertion against null passes — so without these pins the loop
+    // below would read a total rejection as a successful alias strip.
+    expect(c).toMatchObject({ archetype: 'abandonment' });
+    expect(c).toHaveProperty('severityBand');
+    // anchored: `c` is proven to be a derived canonical condition by the two pins above
     for (const key of Object.keys(aliases)) expect(c).not.toHaveProperty(key);
   });
 

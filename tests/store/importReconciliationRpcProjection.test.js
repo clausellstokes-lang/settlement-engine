@@ -236,6 +236,9 @@ describe('structured-import RPC projection', () => {
       accessState: 'active',
       updatedAt: APPLIED_AT,
     });
+    // Measured against a live, correctly-shaped world rather than one that never
+    // arrived: the toMatchObject above pins this very worldState by `pendingEvents: []`.
+    // anchored: that toMatchObject pins this worldState's own pendingEvents
     expect(projectedCampaign.worldState).not.toHaveProperty('envoyErrands');
     expect(projectedCampaign).not.toHaveProperty('map_data');
     expect(projectedCampaign).not.toHaveProperty('user_id');

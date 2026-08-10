@@ -180,7 +180,12 @@ describe('TC-2 determinism: the draw ledger', () => {
     for (const label of labels) expect(label.includes('::')).toBe(false);
     // The shared narrowing kernel owns NO stream at all: an entropy label appearing
     // there would be a second naming home the ward layer could silently disagree with.
-    expect(withoutComments(readSource('cartographyPlan.js'))).not.toMatch(/'carto:/);
+    // The positives above pin the WARD leaf; this negative's subject is the PLAN leaf,
+    // which nothing here had proven was still on disk — pin it by its own export first.
+    const plan = withoutComments(readSource('cartographyPlan.js'));
+    expect(plan).toContain('export function planPoint');
+    // anchored: the plan leaf is proven live by its own planPoint export above
+    expect(plan).not.toMatch(/'carto:/);
   });
 
   test('TC-3b adds ONE label — a digest DOMAIN, not a fork — and roots no stream', () => {
@@ -195,10 +200,11 @@ describe('TC-2 determinism: the draw ledger', () => {
     // choice it makes is a digest of named inputs, and a draw appearing here would be
     // entropy no draw ledger counts.
     const code = codeOnly(readSource('cartographyParcels.js'));
+    // An emptied read would red the sceneDigest positive below, not this line.
+    // anchored: measured against a live source whose digest call that positive proves
     expect(code).not.toMatch(/\bcreatePRNG\b/);
+    // anchored: same live source text, same sceneDigest positive below
     expect(code).not.toMatch(/\.fork\s*\(/);
-    // anchored: the two negatives above are measured against a live source whose own
-    // digest call the positive below proves is present.
     expect(code).toMatch(/\bsceneDigest\s*\(/);
   });
 
@@ -223,12 +229,18 @@ describe('TC-2 determinism: the draw ledger', () => {
     // sceneDigest/scenePolygonArea are TC-3b's tools, not this wave's.
     for (const name of ['cartographyPlan.js', 'cartographyWards.js']) {
       const code = withoutComments(readSource(name));
+      // LIVENESS ANCHOR, per iteration. The ward-side positives after this loop prove
+      // only the WARD leaf; the loop also reads the PLAN leaf, and a renamed or emptied
+      // plan file would satisfy all three absences below without anything reding.
+      expect(code, name).toMatch(/^export function /m);
+      // anchored: this iteration's leaf is proven live by its own export pin above
       expect(code, name).not.toMatch(/namingData\.js/);
+      // anchored: same live source text as this iteration's export pin above
       expect(code, name).not.toMatch(/\bsceneDigest\b/);
+      // anchored: same live source text as this iteration's export pin above
       expect(code, name).not.toMatch(/\bscenePolygonArea\b/);
     }
-    // anchored: the negatives above are measured against a live ward leaf whose own
-    // injected parameter and geometry predicate the positives below prove are present.
+    // The ward leaf additionally carries the injected parameter and geometry predicate.
     const wards = withoutComments(readSource('cartographyWards.js'));
     expect(wards).toContain('input.namingPools');
     expect(wards).toContain('scenePointInPolygon');

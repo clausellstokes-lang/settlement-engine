@@ -369,6 +369,12 @@ describe('campaignSlice deletion reconciliation', () => {
 
     expect(store.getState().campaigns.map(campaign => campaign.id)).toEqual([UUID_Y, UUID_X]);
     for (const campaign of store.getState().campaigns) {
+      // LIVENESS ANCHOR: the id pin above proves both ROWS survived, but says nothing
+      // about their worldState. A negative property assertion against `undefined`
+      // passes, so a hydration that dropped worldState entirely would otherwise read
+      // as a successful strip.
+      expect(campaign.worldState).toHaveProperty('schemaVersion');
+      // anchored: worldState is proven to be a materialized world by the pin above
       expect(campaign.worldState).not.toHaveProperty('envoyErrands');
     }
   });
@@ -391,6 +397,9 @@ describe('campaignSlice deletion reconciliation', () => {
         expect.objectContaining({ id: UUID_X, name: 'Offline fallback' }),
       ]);
       expect(store.getState().campaignsLoaded).toBe(true);
+      // LIVENESS ANCHOR — a dropped worldState would satisfy the absence below.
+      expect(store.getState().campaigns[0].worldState).toHaveProperty('schemaVersion');
+      // anchored: worldState is proven to be a materialized world by the pin above
       expect(store.getState().campaigns[0].worldState).not.toHaveProperty('envoyErrands');
       expect(warn).toHaveBeenCalledWith(
         '[campaignSlice] campaign cloud load failed',

@@ -130,8 +130,18 @@ describe('persisted envoy hydration stays outside first paint', () => {
     expect(closure.length).toBeGreaterThan(100);
     expect(closure).toContain('src/store/campaignSliceEntry.js');
     expect(closure).toContain('src/store/campaignRuntimeBridge.js');
+    // These absences measure coldness rather than an empty walk.
+    // anchored: the three positives above pin `closure` as live, populated (>100)
     expect(closure).not.toContain('src/domain/worldPulse/worldState.js');
+    // anchored: same live `closure` pinned by the length and entry-module positives above
     expect(closure).not.toContain('src/store/campaignSlice.js');
+    // The live-`closure` pins above do NOT cover this loop's own two vacuity paths: an
+    // emptied COLD_MODULES runs ZERO assertions and still reads green, and a renamed cold
+    // module makes its absence trivially true forever. Pin arity and real addresses.
+    expect(COLD_MODULES.length).toBeGreaterThanOrEqual(6);
+    for (const module of COLD_MODULES) expect(existsSync(join(ROOT, module))).toBe(true);
+    // anchored: COLD_MODULES pinned non-empty at on-disk addresses immediately above, and
+    // anchored: `closure` pinned live by the length and entry-module positives at 130-132
     for (const module of COLD_MODULES) expect(closure).not.toContain(module);
   });
 

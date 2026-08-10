@@ -13,6 +13,14 @@ describe('persisted campaign hydration', () => {
       worldState: { envoyErrands: [{ id: 'forged-row' }] },
     };
     const migrateCampaign = vi.fn((campaign, inferred) => {
+      // LIVENESS ANCHOR: a hydration that dropped worldState altogether would satisfy
+      // the absence below, because a negative property assertion against `undefined`
+      // passes. The toHaveBeenCalledTimes(1) after the call proves this body RAN; the
+      // pin here proves it was handed a materialized world when it did.
+      expect(campaign.worldState).toHaveProperty('schemaVersion');
+      // The raw input is proven to have carried the key by the last assertion in this
+      // test, so the pair is a genuine present-then-absent across the admission seam.
+      // anchored: worldState is proven to be a materialized world by the pin above
       expect(campaign.worldState).not.toHaveProperty('envoyErrands');
       expect(inferred).toEqual({ cultures: [{ name: 'Pinned culture' }] });
       return { ...campaign, migrated: true };

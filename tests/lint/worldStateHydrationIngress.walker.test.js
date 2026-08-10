@@ -88,6 +88,8 @@ describe('persisted world hydration — production ingress contracts', () => {
     const hot = executable(read('src/domain/worldPulse/worldState.js'));
     const cold = executable(read('src/domain/worldPulse/worldStateHydration.js'));
 
+    // An emptied or renamed worldState.js reds the two structural matches below first.
+    // anchored: `hot` is proven live by those two matches immediately below
     expect(hot).not.toContain("from './envoyErrandRecords.js'");
     expect(hot).toMatch(/key === 'envoyErrands'[\s\S]{0,120}normalizeEnvoyRows\s*\(/);
     expect(hot).toMatch(
@@ -105,6 +107,8 @@ describe('persisted world hydration — production ingress contracts', () => {
     // The cold admission chunk is reached through a lazy factory, never a static
     // import — that is what keeps the strict DTO family out of first paint.
     expect(ingress).toContain("import('./campaignHydration.js')");
+    // This measures the DYNAMIC-vs-STATIC spelling, not an empty read.
+    // anchored: the positive above proves `ingress` still names campaignHydration.js
     expect(ingress).not.toMatch(/from\s+['"][^'"]*campaignHydration\.js['"]/);
     expect(ingress).toMatch(/loadHydration\s*=\s*loadCampaignHydration/);
     expect(ingress).toMatch(

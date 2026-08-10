@@ -9,6 +9,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { EventEmitter } from 'node:events';
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   aggregateExit,
   checkStepsFromPackage,
@@ -124,7 +125,14 @@ describe('implementation gate planning', () => {
     expect(plan.find((item) => item.id === 'lint-manifest').argv).toContain(
       'scripts/implementation-gate.mjs',
     );
-    expect(logicBearingPaths(packet.changeManifest)).not.toContain('not-created-yet.js');
+    // The gate-script path IS logic-bearing and DOES exist, so it proves the filter ran
+    // and kept real entries; `not-created-yet.js` is the one dropped for not existing.
+    expectAbsentWithAnchor(
+      logicBearingPaths(packet.changeManifest),
+      'not-created-yet.js',
+      'scripts/implementation-gate.mjs',
+      'logic-bearing change-manifest paths',
+    );
     expect(() => packetPlan({ ...packet, status: 'BLOCKED' })).toThrow(/not READY/);
   });
 

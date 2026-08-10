@@ -31,6 +31,8 @@ describe('legacy observed-shape reader detector', () => {
     const enrichedCount = source.split(POSITION_ENRICHED_EMISSION).length - 1;
 
     expect(enrichedCount).toBe(1);
+    // An emptied read reds the count above first.
+    // anchored: that count proves `source` carries the enriched emission EXACTLY once
     expect(source).not.toContain(ORIGINAL_EMISSION);
 
     const restored = source.replace(POSITION_ENRICHED_EMISSION, ORIGINAL_EMISSION);
