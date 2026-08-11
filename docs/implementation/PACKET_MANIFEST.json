@@ -604,7 +604,7 @@
     },
     {
       "id": "TC-5B-I",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-5B-I.md",
       "verifiedBase": "e1e9fd6a62b851dcce92a2fb4f84d9d76d1b238d",
       "changeManifest": [

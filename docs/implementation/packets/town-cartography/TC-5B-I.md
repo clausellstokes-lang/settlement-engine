@@ -1,6 +1,10 @@
 # Town Cartography / TC-5b-i — the cartography manifest seam (headless producer)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `9183d52c`, 2026-08-11; flipped by the chair after verification (5 files
+  by diff-tree, C1–C8 21/21, four mutation controls, census folded in-change per
+  CR-TC5BI-6, byte-identical bundle pair, gate red = the owner's golden alone). Do not
+  redispatch.
 - **Status note:** promoted by the chair 2026-08-11 (chair session `c42c8924`), from Lane F's
   reconciled draft. §12's four open items are CLOSED below by **CR-TC5BI-1..5**, and §12d's
   six draft-lane judgments are **FABLE-VALIDATED at this promotion**. TC-5b was REFUSED as one
