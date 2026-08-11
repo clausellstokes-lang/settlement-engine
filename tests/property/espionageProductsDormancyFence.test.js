@@ -309,8 +309,16 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
     // read, BEFORE it touches a world object: the ladder calls it once per adjacent rung pair
     // per faction per settlement per tick, so a gate placed any later would cost a dark world
     // real work AND stop it being byte-identical. It gates first and reads second.
+    // ⏱ ES-5d ADDS ONE MORE, AND IT IS THE FIRST GATED LEAF THAT **WRITES**. Every member
+    // above refuses at the door to stay byte-identical while computing nothing; this one
+    // refuses to keep from MINTING A LEDGER KEY. `espionageCareerCredit.js` deposits the
+    // career credit, so an ungated pass would leave a `spatialLedgers` key in a dark world and
+    // every dormancy golden in this file would move. It refuses on `espionageActive` before it
+    // touches a world object, exactly like its siblings, and then on the LADDER's flag as
+    // well — the chair's O5 ruling is that a dark ladder must mint no key either, because a
+    // ledger that accumulates while nothing consumes it is a leak wearing a receipt.
     expect(gated).toEqual([
-      'espionageCareer.js',
+      'espionageCareer.js', 'espionageCareerCredit.js',
       'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
       'espionageMissions.js', 'espionagePresence.js', 'espionageProductStage.js',
     ]);

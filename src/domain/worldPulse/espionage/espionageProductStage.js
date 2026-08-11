@@ -106,6 +106,7 @@ import { envoyErrandsOf } from '../envoyErrandRecords.js';
 import { errandIndex, writeErrands } from '../envoyErrandLedger.js';
 import { magicWorksAt } from '../magicWorksAt.js';
 import { settlementAlignment } from '../settlementAlignment.js';
+import { depositMissionCredits } from './espionageCareerCredit.js';
 import { espionageActive } from './espionageGate.js';
 import {
   GAUNTLET_TUNING,
@@ -698,6 +699,12 @@ export function advanceEspionageProducts({
   };
   let state = worldState;
   let changed = false;
+  // ES-5d: the operative behind each errand, keyed by errand id, so the credit writer can
+  // reach the man without reaching for a roster. The landing receipt carries the home and the
+  // grade but NOT the traveller, and `npcFor` takes an ERRAND — so the join has to be made
+  // here, where both are in hand, rather than reconstructed downstream from a composite id.
+  /** @type {Map<string, unknown>} */
+  const operatives = new Map();
   for (const raw of envoyErrandsOf(worldState)) {
     const errand = recordOf(raw);
     const mission = recordOf(errand.covert);
@@ -718,6 +725,7 @@ export function advanceEspionageProducts({
       homeItem: ctx.byId.get(homeId) || null,
       npc: typeof npcFor === 'function' ? npcFor(errand) : null,
     };
+    if (walk.npc) operatives.set(walk.errandId, walk.npc);
     const gatherStep = gatherArm(state, walk, ctx);
     state = gatherStep.worldState;
     changed = changed || gatherStep.changed;
@@ -731,6 +739,14 @@ export function advanceEspionageProducts({
     landings.push(...homeStep.landings);
     skipped.push(...homeStep.skipped);
   }
+  // ES-5d §3.14 — THE CAREER CREDIT DEPOSIT. Runs UNCONDITIONALLY once per pass, including on
+  // a tick that credits nobody, because the same call is what PRUNES the prior tick's records:
+  // the deposit lives exactly one tick, and a ledger that only ever grew would be a leak the
+  // strict-tick reader would keep hiding. The writer owns its own dormancy (espionage AND
+  // ladder, both `=== true`), so a dark world mints no key here and pays two flag reads.
+  const credited = depositMissionCredits({ worldState: state, tick: now, landings, operatives });
+  state = credited.worldState;
+  changed = changed || credited.changed;
   return { worldState: state, changed, gatherings, landings, skipped };
 }
 

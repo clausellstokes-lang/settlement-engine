@@ -88,6 +88,7 @@ import {
   designateHeir, swapIntoSeat, inheritSeatMemory,
 } from './npcLadderState.js';
 import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
+import { readMissionCreditEvents } from './espionage/espionageCareerCredit.js';
 import { readGratitudeBondEvents, governingLadderFkeyOf, rulingSeatNidOf } from './gratitudeBonds.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
@@ -363,6 +364,24 @@ function applyGoalLifecycle(st, ctx) {
   return { st: { ...st, stock: round4(stock), goal }, outcome };
 }
 
+/**
+ * ES-5d §3.14 — THE MISSION CREDIT TERMINUS, and it is the ladder's OWN writer.
+ *
+ * Espionage only ever DEPOSITS; the standing is written here, in the ladder's own file, in the
+ * shape `applyGoalLifecycle` above already uses for the goal's deposit — `clamp` into
+ * `[0, STAND_MAX]` then `round4`, so the persisted record cannot pick up a byte instability.
+ *
+ * ⭐ DELIBERATELY NOT FOLDED INTO `applyGoalLifecycle`. That function is the GOAL lifecycle and
+ * its deposit is the goal's own attribution-weighted progress; folding an unrelated external
+ * credit into it would give one function two reasons to move `stock` and would put an
+ * espionage term inside the goal's receipt. This sits beside the two `mintBond` folds instead,
+ * which is the file's own layering: internal derivation first, external deposits after.
+ * @param {LadderStanding} st @param {{ credit: number }} mc @returns {LadderStanding}
+ */
+function applyMissionCredit(st, mc) {
+  return { ...st, stock: round4(clamp(num(st.stock, 0) + num(mc.credit, 0), 0, LADDER_TUNING.STAND_MAX)) };
+}
+
 // ── The advance ───────────────────────────────────────────────────────────────
 /**
  * @typedef {Object} NpcLadderAdvanceResult
@@ -442,6 +461,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // tick). The receiving COURT is grateful: its ruling-seat NPC bonds toward the GIVER's
   // ruling-seat NPC (cross-border ⇒ foreignSid = giver sid), through mintBond only.
   const gratitudeBondEvents = memWeave ? readGratitudeBondEvents(worldState, now2) : new Map();
+  // ES-5d §3.14: a graded covert mission credits its operative's standing. The espionage pass
+  // deposits EARLIER IN THIS SAME PULSE (pulseKernel.js runs it before this chain, on the same
+  // tick), so this is the SAME-TICK twin above it, not the roads deposit's one-tick lag — and
+  // it is hoisted ONCE per advance beside them rather than read per rung. Absent ⇒ empty ⇒
+  // byte-neutral. Espionage-dark and ladder-dark both mint no key, so no flag read is owed here.
+  const missionCredits = readMissionCreditEvents(worldState, now2);
   // D-4→D-2 THE BLUFF CHARGE rides BOTH flags (contestedGoals ∧ npcCredibility): the ladder
   // deposits a contradicted-bluff exposure into the bluffExposures sidecar ONLY when the credibility
   // system that consumes it is lit. Dark ⇒ no deposit, no sidecar key, byte-identical (a bluff that
@@ -648,6 +673,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           npc: npcObj, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
         });
         npcs[nid] = gl.st;
+        // ES-5d §3.14: a graded covert mission this operative closed credits his standing. The
+        // credit is minted through the ladder's OWN writer; espionage only deposited the event.
+        if (missionCredits.size) {
+          const mc = missionCredits.get(nid);
+          if (mc) npcs[nid] = applyMissionCredit(npcs[nid], mc);
+        }
         // D-5 §9: a friend's ransom forms a gratitude bond toward the payer's NPC (the ladder is
         // the bonds writer; roads only deposited the event). Cross-border ⇒ foreignSid = payer sid.
         if (roadsBondEvents.size) {

@@ -52,6 +52,7 @@ import {
   ES3_GRADIENT_AMENDER_COUPLING,
   ES5B_ABSENCE_BENCH_COUPLING,
   ES5C_CAREER_LADDER_COUPLING,
+  ES5D_CAREER_CREDIT_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
@@ -607,8 +608,12 @@ describe('CW-0 coupling registry', () => {
     // It needs its own row rather than ES-5b's because `licensingRows` joins on the IMPORTER
     // module, and the two rows name different importers — so this pair is licensed here or
     // it is not licensed at all.
+    // ES-5d is the THIRD, and the SECOND touching the ladder. It needs its own row for the
+    // same mechanical reason and no other: the importer is `npcLadderKernel.js`, which neither
+    // sibling names, and `licensingRows` joins on the importer module. Three rows on one
+    // pair+direction is the shape this lookup exists to keep honest.
     expect(couplingRowsFor('CPL-20', 'INFO→INTERIOR'))
-      .toEqual([ES5B_ABSENCE_BENCH_COUPLING, ES5C_CAREER_LADDER_COUPLING]);
+      .toEqual([ES5B_ABSENCE_BENCH_COUPLING, ES5C_CAREER_LADDER_COUPLING, ES5D_CAREER_CREDIT_COUPLING]);
     // ES-5 OPENS A DIRECTION on a pair that was already busy the other way: WR-4 and WR-6
     // both read INFO→WAR across CPL-4, and the doctrine stage is the first read back the
     // other way — the espionage doctrine spelling its moral axis with the estate's ONE
@@ -630,6 +635,9 @@ describe('CW-0 coupling registry', () => {
       ES5B_ABSENCE_BENCH_COUPLING,
       // ES-5c appends the career register — the FIRST espionage→ladder edge in the repo.
       ES5C_CAREER_LADDER_COUPLING,
+      // ES-5d appends the career CREDIT — the same direction's first HANDOFF rather than a
+      // derived read: espionage deposits, the ladder's own writer spends.
+      ES5D_CAREER_CREDIT_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

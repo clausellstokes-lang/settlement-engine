@@ -164,6 +164,11 @@ export function extractSpatialUsage(worldState) {
     // — and it is left as recCount on purpose: do NOT "fix" it to `.length` and fork the
     // one reader idiom every other ledger here is read through.
     pacts_awaiting_answer: recCount(L.pactProposals),
+    // ES-5d THE CAREER CREDIT DEPOSITS. One row per operative whose covert mission graded at or
+    // above the bar it was sent to clear, written by espionage and folded into that NPC's ladder
+    // standing the same tick. The ledger is one-tick and drop-when-empty, so a nonzero count
+    // means graded missions genuinely landed on THIS tick rather than that a lane is lit.
+    mission_credits: recCount(L.missionCreditEvents),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -196,6 +201,7 @@ export function extractSpatialUsage(worldState) {
     ['route_network', counts.route_edges],           // W-J lived route network
     ['demographic_plans', counts.demographic_plans], // wave P3 the overflow valves
     ['pact_formation', counts.pacts_awaiting_answer], // GR-2 peacetime offers afoot
+    ['mission_credit', counts.mission_credits],       // ES-5d graded covert missions crediting careers
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -271,6 +277,25 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   // mover will report them as live forever. That is the one path on which the ledger
   // does not drain.
   'pactProposals',
+  // ES-5d THE CAREER CREDIT DEPOSITS (espionageCareerCredit.js, its ONE writer). TRACKED on
+  // routeNetwork's and pactProposals' footing, and the exemption's conjunction fails in BOTH
+  // halves. NO TRACKED FLAG: the lane needs `espionageEnabled` AND `npcLadderEnabled`, and both
+  // are virtual flags lit in no preset, so neither is in TRACKED_FLAGS. NO TRACKED MOVER: the
+  // deposit's whole effect is a number folded into `npcLadder`, which is itself EXEMPT as an
+  // annotation/state sidecar, so nothing else in this list can see the lane fire.
+  //
+  // AND POSITIVELY, which is what separates it from the reason-annotation exemptions: this is a
+  // DEPOSIT, not a re-derivation. It is written at a tick, persists across the pulse, and is
+  // consumed by a different subsystem's writer — the armyTransit / spatialArrivals shape, and
+  // those are TRACKED. Prop hygiene is satisfied by the same distinction the vengeanceLicenses
+  // and warIntents rows draw: the keys are NPC identities, and we emit the key COUNT and never
+  // a key.
+  //
+  // ⚠ THE HONEST LIMIT ON WHAT THE COUNT MEANS: the ledger lives exactly one tick and is
+  // replaced by its own writer every pass, so this reads MISSIONS GRADED ON THIS TICK — never a
+  // career total, and never a backlog. Zero is the ordinary reading in a lit world on a tick
+  // where nobody's mission came home, which is most ticks.
+  'missionCreditEvents',
 ]);
 
 /**

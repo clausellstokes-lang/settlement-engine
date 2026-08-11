@@ -473,6 +473,72 @@ export const ES5C_CAREER_LADDER_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-5d §3.14 — THE MISSION CREDIT, and the SECOND espionage→ladder edge in the repo. ES-5c's
+ * row above opened the direction with a DERIVED read; this one carries a HANDOFF: espionage
+ * deposits a per-operative credit into its own one-tick ledger and the ladder's own maintenance
+ * road folds it into that standing's `stock` through the ladder's own writer.
+ *
+ * ⚠⚠ `ES5C_CAREER_LADDER_COUPLING` DOES NOT LICENSE THIS PAIR, and its own docstring says so
+ * in as many words. `licensingRows` joins a row to a live pair on the IMPORTER module, and that
+ * row's `read` names `npcLadderChallenge.js#defenseScore`. The importer here is
+ * `npcLadderKernel.js`, which is a different module — so this row exists rather than leaning on
+ * a sibling that looks close enough. `read` below is the exact string the join reads.
+ *
+ * ⚠ THE THIRD `INFO→INTERIOR` ROW UNDER CPL-20 AND THE SECOND TOUCHING THE LADDER. `pairId`
+ * stays CPL-20 — the volume's own INFO × INTERIOR anchor — because a wave never mints a
+ * twenty-third anchor where a canonical one fits.
+ *
+ * ⛔ NOTHING IN THE ESPIONAGE SET WRITES LADDER STATE, and the boundary is machinery rather
+ * than a sentence: the repaired scan in tests/domain/espionageProducts.test.js source-scans
+ * this whole directory for the ladder's REAL persistence spelling, and the credit leaf is
+ * picked up by it the day it lands. The espionage side owns exactly one key — its own credit
+ * deposit — and the ladder side owns `stock`. One writer each, per state.
+ *
+ * ⚠⚠ THE HANDOFF IS SAME-TICK, MEASURED, NOT ONE-TICK-LAGGED (ES-5d deviation D7).
+ * `simulateCampaignWorldPulse` calls the espionage product pass and the ladder chain
+ * unconditionally in that order, in one function, on the same `worldState.tick` — so the
+ * depositor runs EARLIER IN THE SAME PULSE than the consumer, which is the `gratitudeBondEvents`
+ * shape rather than the `roadsBondEvents` one. A one-tick window here would be silently dead:
+ * the deposit pass prunes the prior tick's records before the ladder could ever look for them.
+ *
+ * DARK ⇒ NOTHING: the deposit writer returns on two flag reads before touching a world object,
+ * and drop-when-empty means a dark or credit-free tick mints NO ledger key at all — so a dark
+ * world is BYTE-IDENTICAL and no dormancy golden moves. The LIT shift is a DISCLOSED one-time
+ * ladder-outcome move under ⟨F6⟩, declared in the wave's commit and fenced by its own golden
+ * pair, never a silent re-record.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES5D_CAREER_CREDIT_COUPLING = couplingRow({
+  couplingId: 'CPL-20.INFO_TO_INTERIOR.ES-5d.career_credit',
+  pairId: 'CPL-20',
+  direction: 'INFO→INTERIOR',
+  read: 'src/domain/worldPulse/npcLadderKernel.js#advanceNpcLadder',
+  // DERIVED, NOT HAND-KEYED (the address-rot class), and derived to the SAME address as ES-5c's
+  // row because the two grains push on the same observable from opposite sides.
+  //
+  // ⚠⚠ NO PERSISTED ESPIONAGE RECEIPT EXISTS, AND NONE IS MINTED HERE. The credit is a number
+  // folded into a standing; the grade continues to ride the in-memory landing receipt exactly
+  // as it did before this wave, and ES-7 owns the receipted voice. What SURVIVES the tick is
+  // what the credited standing CAUSED: the ladder's own succession beat, which `ladderBeat`
+  // stamps `impactKind: 'npc_ladder'` and which `compactImpactDigest` carries into the
+  // persisted pulse record. Addressing the credit itself would name a surface no reader can
+  // reach; addressing the deposit ledger would name a record pruned before any reader runs.
+  //
+  // Naming no Herald kind is deliberate — the desk walker's `kind=` scan therefore makes no
+  // routing join — on ES-5b's and ES-5c's own precedent.
+  receiptField: 'pulseRecord.impactDigest[].{headline,summary,severity,score}',
+  counterforce: 'src/domain/worldPulse/espionage/espionageCareerCredit.js#readMissionCreditEvents',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+    'npcLadderEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-5d',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -485,4 +551,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES5B_ABSENCE_BENCH_COUPLING,
   ES5C_CAREER_LADDER_COUPLING,
+  ES5D_CAREER_CREDIT_COUPLING,
 ]);

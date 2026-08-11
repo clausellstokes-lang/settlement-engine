@@ -3578,7 +3578,47 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // would not balance. This change also EDITS two existing test files
     // (espionageGauntlet.test.js, espionageProducts.test.js) and it adds assertions to their
     // EXISTING tests rather than new `test(` blocks, which is why they contribute zero here.
-    files: 2389, parked: 364, credited: 2025, titles: 19610, suiteTitles: 5543,
+    // ── ES-5d RE-RECORD (2026-08-11): ALL FIVE RE-DERIVED IN ONE RUN, AND THE DELTA IS
+    // ── ATTRIBUTED TO THREE SEPARATE CAUSES, TWO OF WHICH ARE NOT THIS LANE'S ───────────
+    //   files       2389 -> 2392  (+3)   parked 364 -> 365 (+1)   credited 2025 -> 2027 (+2)
+    //   titles     19610 -> 19656 (+46)  suiteTitles 5543 -> 5552 (+9)
+    //
+    // ⚠⚠ THE FROZEN ROW WAS ALREADY WRONG IN THREE OF ITS FIVE FIGURES BEFORE THIS WAVE
+    // TOUCHED ANYTHING, AND THE SEQUENCING IS WHY NOBODY SAW IT. Measured on ISOLATED
+    // ARCHIVE TREES of committed shas (`git archive <sha>`, integrity-counted in and out),
+    // never over this live shared tree, which was carrying a second lane's uncommitted work
+    // for most of this round:
+    //     0f85ced0  2389 / 365 / 2024 / 19610 / 5542
+    //     73f00920  2390 / 365 / 2025 / 19622 / 5544
+    // At 0f85ced0 `files` still MATCHED the frozen 2389, so the run got past arm 1 and died
+    // on `parked` — and the three figures behind it had been drifting unwatched. CAUSE: the
+    // owner-approved generation repair at 0f85ced0 rewrote tests/lib/roadNetworkIndex.test.js
+    // to use `test.each()`, which trips this walker's own TEST_CONTEXT_PARAM park rule. That
+    // file flipped CREDITED -> PARKED (parked +1, credited -1, suiteTitles -1, titles +0 —
+    // it never contributed a live title, because `test.each()` is not one). Nobody banked it.
+    // Then 73f00920 (the concurrent locks/map lane) added tests/components/
+    // factionLockCoupShield.test.jsx (+1 file, +1 credited, +5 titles, +2 suite) and edited
+    // seven already-credited test files, which quietly moved titles a further +7. Neither
+    // commit re-recorded here.
+    //
+    // ⭐ THIS LANE'S OWN CONTRIBUTION, MEASURED PER FILE AND CLOSING EXACTLY:
+    //   +19 titles, +4 suite … tests/domain/espionageCareerCredit.test.js          (A1/A3/A4/A6)
+    //   +15 titles, +4 suite … tests/property/espionageCareerCreditDormancy.test.js (A2/A5/A7/A8)
+    //   = +2 files, +0 parked, +2 credited, +34 titles, +8 suite. BOTH ARE CREDITED (neither
+    //   trips a park rule), which is why `parked` does not move for this wave at all.
+    //
+    // ⭐⭐ THE NEGATIVE CONTROL, AND IT IS WHAT MAKES THIS RE-RECORD A MEASUREMENT RATHER
+    // THAN A RE-WORDING. The five figures were derived TWICE, independently: once by probing
+    // this live tree, and once as `archive(73f00920) + this lane's measured per-file delta`.
+    // The two agree on all five, exactly — 2390+2, 365+0, 2025+2, 19622+34, 5544+8 — and
+    // 365 + 2027 = 2392 closes the file arithmetic. Had any other file drifted a pin inside
+    // this window, the live reading would have exceeded the archive-plus-delta and the two
+    // derivations would have disagreed. The recorded hazard here is exactly that (a previous
+    // cut predicted +23 and measured +39 because five already-credited files had quietly
+    // gained pins) — this time that drift is +7 titles, and it is NAMED above rather than
+    // absorbed. ⛔ Whoever re-records next must re-derive all five the same way: while any
+    // arm is red this census STOPS MEASURING, so the arms behind it may be anything at all.
+    files: 2392, parked: 365, credited: 2027, titles: 19656, suiteTitles: 5552,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

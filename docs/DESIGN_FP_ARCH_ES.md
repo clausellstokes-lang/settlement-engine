@@ -1254,6 +1254,35 @@ owner's "mission = an NPC goal with benefits on success" without touching
 the grammar. Say "veto" to model missions as LadderGoals; the cost is a
 persisted-schema version bump and a migration.
 
+⭐ **AMENDED IN PLACE BY ES-5d (BUILT), and the amendments are three NARROWINGS
+of the prose above, each measured rather than argued.**
+**D1 — the maintenance road is real and the wave joins it, but it had NO `stock`
+terminus and ES-5d adds one.** The road's three existing external folds all
+terminate elsewhere: `freshLieExposureFor` → `maintainMarks` → stigma, and both
+bond reads → `mintBond` → bonds. Its only `stock` writer, `applyGoalLifecycle`,
+takes purely ladder-internal input. "The exact template §3.5 already uses" is a
+template for MARKS; the credit needed a ladder-owned `stock` writer of its own
+(`applyMissionCredit`, module-private to `npcLadderKernel.js`).
+**D2 — the carrier is the one-tick DEPOSIT idiom, not the `freshLieExposureFor`
+mirror this section names.** `freshLieExposureFor` is O(1) only because the
+credibility ledger is already nid-keyed; an errand ledger is not, so copying it
+literally would have put an O(errands) scan inside the per-rung loop. The
+deposit Map is hoisted ONCE per advance beside the two the file already hoists.
+**⚠⚠ D7 — "ONE TICK LATER" IS MEASURABLY WRONG FOR THIS PAIR, AND THE HANDOFF
+IS SAME-TICK.** `simulateCampaignWorldPulse` calls the espionage product pass
+and the ladder chain unconditionally in that order, in ONE function, on the SAME
+`worldState.tick` — so the depositor runs EARLIER IN THE SAME PULSE than the
+consumer. That makes this the `gratitudeBondEvents` twin ("generosity ran
+earlier THIS tick"), not the `roadsBondEvents` one, whose one-tick lag exists
+only because ROADS runs LAST, strictly after the ladder. ⛔ A `tick - 1` window
+here would be SILENTLY DEAD: the deposit pass prunes the prior tick's records
+before the ladder could ever look for them, so the fold would never fire on any
+world while every unit pin around it stayed green. Consume-once is unaffected —
+it comes from the pass replacing the whole record set each pulse, not from the
+lag. **Say "veto" to restore the one-tick reading; the cost is a dead feature.**
+**D3 — credit only, no debit** (§3.14's sentence is about success), and **D4 —
+`stock` only: `momentum` does not exist** and the wave credits the field that does.
+
 **The register.** `promotionRiskOf(npc, tick)` — a DERIVED read (never a
 stock): away-weeks (from the active errand row's departure, the
 ransomDwellRead precedent) × the operative's rung exposure (contested rungs
@@ -1312,6 +1341,13 @@ outside the ladder family, and the mission grade is never persisted, so
 nothing of it survives a tick boundary. ES-5d must BUILD a persisted
 carrier, an identity bridge, a ladder-owned stock writer, and a coupling
 row — a wave, not a composition.
+⭐ **ES-5d IS BUILT, and "BUILD four things" measured as TWO builds and TWO
+reuses.** The espionage set already owned a persistence road, and the identity
+bridge's three hops all existed as parts (`errand.from` → `rosterPersonById` →
+`npcId`) with only the composition missing — so the genuinely new construction
+was the deposit family and the ladder's `stock` terminus. The carrier is a
+one-tick, drop-when-empty `missionCreditEvents` deposit classified TRACKED, and
+the fold is SAME-TICK rather than one-tick-lagged (deviation D7 above).
 
 ---
 
