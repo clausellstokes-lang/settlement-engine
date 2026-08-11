@@ -67,6 +67,106 @@ a52499a4 2026-08-11 Handoff: ES-5c built and gating; the stopped-lane pattern ba
 
 ## HAND-MAINTAINED — everything below is written by the chair, not derived
 
+# ⭐⭐⭐ HANDOFF TO A NEW ACCOUNT — 2026-08-11, written at the owner's request. READ THIS FIRST.
+
+**You are inheriting a live program mid-flight. Nothing is broken; two lanes are working
+and two things need your first attention. Start here, then read the Live board below.**
+
+## 1. FIRST FIVE MINUTES — orient before touching anything
+
+- **Two trees.** The BUILD branch `claude/composite-r4` lives in
+  `.claude/worktrees/minifold` and is where ALL work happens. The LEDGER branch
+  `review-fixes-2026-07-08` is the main `~/Desktop/settlement-engine` checkout and holds
+  this file, `OWNER_DECISION_QUEUE.md`, and `START_HERE.md`. ⚠ A successful `git show` does
+  NOT prove a file is on your branch.
+- **⚠⚠ THE MAIN WORKTREE'S FILES MATCH NO BRANCH** — 4,537 differ from its own HEAD
+  (OWNER_DECISION_QUEUE §13, unresolved and the owner's call). **Consequence: in that tree
+  `git status` is NOT a safety check and `git commit -a` would commit thousands.**
+- **⛔ COMMIT ONLY BY PRIVATE INDEX**, always, in both trees:
+  `IDX=$(mktemp); export GIT_INDEX_FILE=$IDX; git read-tree HEAD; git add -- <explicit paths>;
+  TREE=$(git write-tree); git commit-tree $TREE -p HEAD -F msg; git update-ref refs/heads/<branch> $NEW $OLD`
+  then `rm -f $IDX; unset GIT_INDEX_FILE; git restore --staged .`. It starts from
+  `read-tree HEAD`, so it is immune to whatever the shared index holds. **Verify every
+  commit with `git diff-tree --no-commit-id --name-only -r HEAD | wc -l`.**
+  ⚠ Chain plumbing with `&&`, never `;` — a failed `add` still commits (one empty commit
+  `333fbf49` exists because of this).
+- **Dispatch surface:** `docs/implementation/INDEX.md` + `PACKET_MANIFEST.json`. Only a
+  **READY** row may be dispatched. Run `npm run validate:packets` before and after any
+  packet edit. Currently **14 packets, 0 READY**.
+- **Memory:** `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/`,
+  indexed by `MEMORY.md`. ⚠⚠ **TWO COMPACTION SESSIONS ARE RUNNING ON IT RIGHT NOW**
+  (see §3). A pre-compaction snapshot is saved beside it as
+  `MEMORY.pre-compaction-snapshot-2026-08-11.md` (18,375 B, 98 links, all resolving).
+
+## 2. THE TWO LANES IN FLIGHT — collect these, do not re-dispatch
+
+Both were alive at handoff (11 processes). **A background run cannot wake a stopped lane** —
+if a lane reports "waiting", verify liveness with `ps aux | grep vitest` and resume it with
+an explicit "collect it yourself" order rather than re-dispatching, which burns its context.
+
+- **SCHEMA-5 MINT** (`tasks/a177c284ce931e4b1.output`) — **the act that greens the gate.**
+  Five consolidated items. Expect a **COMMIT PAIR**, the first deliberately gate-red (the
+  schema-4 precedent: `894325ff` then `2a7fb033`). ⛔ Never hand-edit the baseline JSON.
+- **ES-7 COMPILE** (`tasks/a08b2dfcbfebb03a3.output`) — draft-only, scratchpad `es7-`.
+
+## 3. ⚠⚠ THE ONE ACTIVE RISK: two concurrent MEMORY.md compactions
+
+The owner started **both** `task_6a8ff815` and `task_5208ea2d` against the same index.
+**They can lost-update each other.** If the index comes back short or with broken links,
+restore from the snapshot named above and redo ONE compaction. ⚠ The recorded rule:
+**grep every hook's sha/path across the directory BEFORE trimming** — a past compaction
+destroyed two shas that lived only in the index. ⭐ Prefer LOSSLESS FOLDING into archive
+files over trimming, and finish with a broken-link check.
+
+## 4. THE GATE IS RED ON EXACTLY TWO THINGS, both understood
+
+1. **`generatorGoldenMaster`** — owner-approved SHIFT-2, **registered not re-recorded**,
+   awaiting the owner's batched `UPDATE_GOLDEN`. A one-command cure the OWNER owns.
+2. **`observedShapeReaders.walker`** — the schema-5 mint is clearing it. `--write`
+   correctly REFUSES because the change is a SWAP, not a shrink.
+⛔ **Do not let any lane chase either.** Tell every lane at dispatch which reds are
+pre-existing — a lane lost a full context rediscovering one.
+
+## 5. FOUR THINGS WAIT ON THE OWNER (none blocking)
+
+`OWNER_DECISION_QUEUE.md` §14, §15, §15b: the batched `UPDATE_GOLDEN`; four absurd
+faction links (`/council|court|hall|government/` matches any "…hall", so a Lord Mayor links
+to "Gambling halls") recommended to ride the SAME golden update so the seed line moves
+once; the **lock copy** drafted for veto; and a taste call on whether a stated absence
+beats an absent section.
+
+## 6. THE FIVE LAWS THAT COST THE MOST TO RELEARN
+
+1. **Trust no exit status you did not capture yourself** — not a pipe's, not a wrapper's,
+   and **not the harness's**: it reported RED gates as "exit code 0" **five times today**.
+   Use `scripts/gate-tail.sh` or `...; echo $? > /tmp/x`.
+2. **A lag belongs to a WRITER/READER PAIR, never a file or volume.** ES-5d shipped a
+   `tick-1` window that could never fire while every unit pin stayed green.
+3. **A mutant going red is not a working pin** — read WHICH ARM fired and confirm the
+   message names the real cause.
+4. **A new test file reds TWO censuses**, and **tests registered in `for` loops or
+   `test.each()` mint NO title** — the file lands PARKED with zero counted coverage while
+   the arithmetic still closes and nothing reds.
+5. **Design prose is a hypothesis.** This program's lanes refused a chair instruction on
+   measurement **sixteen times** and were right every time — including against me. Reward
+   it; a refusal with a measurement is the most valuable report you can get.
+
+## 7. WHAT IS LEFT
+
+ES-7 → CW-3 · TC-5b/c/d (mount, PNG goldens, skins) · ES-6b (blocked: its dispatcher wave
+is unchartered) · the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence,
+slums, CV/TB/XW, first-paint) · IA-2 revalidation · **then the endgame in fixed order**:
+dark-complete → diagnostic soak → repairs → the owner's walk → light flags + THE ONE REGEN
+→ terminal soak → **THE TUNING SIGNATURE** → owner-confirmed pushes.
+⛔ **The four owner carve-outs survive every delegation and every era:** external legal
+sign-off, the V5 aesthetic cull (offer, never assume), THE TUNING SIGNATURE at soak, and
+EACH push/deploy. **No remote or Supabase CLI contact, ever; migrations are authoring-only.**
+⚠ Everything after the `33aeea35` boundary carries `⏳ OPUS-ERA — FABLE VALIDATION OWED`
+markers — see the tail of `docs/FABLE_VALIDATION_QUEUE.md` for the marking law.
+
+---
+
+
 <!-- resume-state.sh preserves everything below this line verbatim. Update it at every
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
