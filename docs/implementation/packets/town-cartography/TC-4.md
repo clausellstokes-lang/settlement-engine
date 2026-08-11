@@ -1,6 +1,7 @@
 # Town Cartography / TC-4 — buildings, multiplicity, and the footprint packing
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `5a6f76fe` (2026-08-10) — see §12c for the four Opus-era rows.
 - **Status note:** flipped DRAFT→READY by the chair 2026-08-10; the author lane could execute
   no test or gate command (a long run held the gate mutex), so every normally-measured
   baseline below is **AUTHOR-TIME-UNMEASURED** with the exact command the implementer runs

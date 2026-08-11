@@ -360,7 +360,7 @@
     },
     {
       "id": "TC-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-4.md",
       "verifiedBase": "7699e367d9fc2fb87bfd5f8b72142969ec52c36e",
       "changeManifest": [

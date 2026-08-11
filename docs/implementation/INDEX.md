@@ -30,7 +30,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-3 | [`GR-3B-ORIENT`](./packets/foreign-policy/GR-3B-ORIENT.md) | **LANDED** at `d56d944c`; do not redispatch | Adds the per-term obligation reader (CR-GR3B-3-R1) that GR-3b and IN-0c's transfer semantics consume | GR-3b producers, IN-0c, any persisted-shape change, treatyOrientationOf edits |
 | LANDED-5 | [`GR-3b`](./packets/foreign-policy/GR-3B.md) | **LANDED** at `40afbdd6`; do not redispatch | Finishes the producer half of GR-3: the frozen rung ladders, selection function, and the composable-pair exception | GR-4+, later grammar, tuning, lighting, orientation edits |
 | LANDED-4 | [`IN-0c`](./packets/foreign-policy/IN-0C.md) | **LANDED** at `29e2dc3c`; do not redispatch | Finishes the sole missing IN-0 slice: next-tick derived signing credit through the provenTrue seam | IN-1+, broader disclosure redesign, pulseKernel edits, any new persisted family |
-| READY-7 | [`TC-4`](./packets/town-cartography/TC-4.md) | **READY** | Fills the reserved v2 buildings layer: A-8 multiplicity, footprint packing inside parcels, dwelling fill, and dress — dark path byte-identical | any schema/contract change, per-class cohesion, TC-5..8, painter/labels, persistence, lit-surface tuning, soak |
+| LANDED-7 | [`TC-4`](./packets/town-cartography/TC-4.md) | **LANDED** at `5a6f76fe`; do not redispatch | Fills the reserved v2 buildings layer: A-8 multiplicity, footprint packing inside parcels, dwelling fill, and dress — dark path byte-identical | any schema/contract change, per-class cohesion, TC-5..8, painter/labels, persistence, lit-surface tuning, soak |
 
 ## Authorized implementation infrastructure
 
@@ -77,8 +77,9 @@ live symbols were checked at the measured SHA.
   are blocked on the explicit decisions above.
 - **Town Cartography:** TC-0 through TC-2 are landed, and TC-3a plus TC-3b have
   now landed in order (TC-3 itself stays SUPERSEDED; its preserved implementation
-  was their raw material). TC-4 is compiled and dispatchable per the row above.
-  TC-5 through TC-8 remain designed but intentionally uncompiled until TC-4 lands.
+  was their raw material). TC-4 has LANDED at `5a6f76fe` — the buildings layer is
+  filled at schema v2. TC-5 through TC-8 remain designed but intentionally
+  uncompiled; TC-5 is the next compile candidate when a coordinator re-derives.
 - **Surveyor Chat:** the old Workshop presentation is superseded. SC-1 is the
   next bounded surface packet; later ingestion and migration stages are excluded.
 
