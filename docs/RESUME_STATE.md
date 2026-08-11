@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 18:28:37 EDT
+**Generated:** 2026-08-11 18:32:09 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `63c62822` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `c5901a3e` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `f10d7fbc` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 64140: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 32Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T182656` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T183106` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T182656
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T183106
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -56,12 +56,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
 c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
 3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
 33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
 df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
-40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -171,10 +171,26 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    returns to the chair). Q9 = module-local frozen `SUCCESSION_TUNING`, zero new keys,
    values ride the endgame signature. Draft: scratchpad `laneP-GR-4-draft.md`.
    Transcript: session dir `subagents/agent-a77b180fe2a58e737.jsonl`.
-5. **Lane R (read-only draft, Opus) — SITE-COHERENCE WAVE 0 PACKET DRAFT**, dispatched
-   ~18:25 per CR-NEXT-1 (the parallel candidate: zero src files, disjoint family).
-   Output: scratchpad `laneR-SC-W0-draft.md`. Transcript: session dir
+5. **Lane R — ✅ COLLECTED (~18:45): SC WAVE 0 drafted and ruled CR-SCW0-1..6.**
+   Compilable, zero src files, honestly re-measured as a SIX-path wave (the plan missed
+   two mandatory enforcer registrations: hazard-registry + mutation-coverage-manifest).
+   Census sequencing CONFIRMED MECHANICALLY: two new test files → the walker (TC-5B-I's
+   reservation, and READY reserves per implementation-packets.mjs:43) → **promotion holds
+   at DRAFT until TC-5B-i flips LANDED.** Rulings: `SCW-0` naming under
+   packets/site-coherence/; baseline lives in tests/lint/ (preserves Wave 2's porcelain
+   exit criterion); mutation rows under BOTH arms (kind:"mutation" ratchet + rationale
+   census); the 120s corpus-cost STOP is a preflight probe; **CD-6: the exit criterion is
+   RE-DERIVE-AND-REPORT-AGAINST the audit baseline, never reproduce-exactly** (five
+   generation commits landed since the audit HEAD incl. a same-seed correction). Four
+   plan-vs-code corrections recorded in its §4c incl. a FOURTH export-token predicate
+   the plan missed. Draft: scratchpad `laneR-SC-W0-draft.md`. Transcript: session dir
    `subagents/agent-a4a4b7e7596a1186d.jsonl`.
+
+⚠ **BOARD SHAPE NOTE (deliberate):** three promotion-ready drafts (GR-4a, ES-Da, SCW-0)
+now queue behind Lane M's landing because ALL of them fold the estate census — the
+serialization law makes the walker the single-file bottleneck BY DESIGN. Forcing more
+parallel drafts now would be waste; the constraint is landing throughput, not draft
+supply. The chair holds one live lane (M) + the sequenced queue until the slot frees.
 6. **Lane Q — ✅ COLLECTED (~18:30): ES-Da is COMPILABLE, ruled CR-ESDA-1..5.** One leaf
    (~110 lines, `espionage/espionageRider.js`) + ≤15 diplomacy-file lines with 47 lines
    of MEASURED headroom (the zero-headroom hazard belongs to the pulse MOUTHS, untouched
