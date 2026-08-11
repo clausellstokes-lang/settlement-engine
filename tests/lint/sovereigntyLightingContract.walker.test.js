@@ -3377,7 +3377,35 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // So the instrument did not move and every delta above is the ESTATE moving. This
     // walker is byte-identical at 0f7424f7 and at HEAD, which is why one instrument can
     // legitimately read both ends.
-    files: 2383, parked: 364, credited: 2019, titles: 19539, suiteTitles: 5517,
+    //
+    // ── RE-MEASURED 2026-08-11 at c74048e4 (the census re-freeze lane, QUIET tree) ───
+    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. c74048e4 ("the prominent-relationship callout
+    // renders its real prose for the first time") adds NO test file and moves the
+    // evidence layer only. ⚠⚠ ALL FIVE FIGURES RE-DERIVED IN ONE RUN, NONE PATCHED —
+    // the sequence hazard has now fired three times by someone moving one figure and
+    // leaving four stale, and this census STOPS at its first red figure, so a per-figure
+    // re-run would re-measure the estate once per figure and bank whichever moved first.
+    //   files      2383 -> 2383  ( 0)  no file added, renamed or deleted
+    //   parked      364 ->  364  ( 0)  no file changed park state in either direction
+    //   credited   2019 -> 2019  ( 0)  364 + 2019 = 2383 closes the file arithmetic
+    //   titles    19539 -> 19545 (+6)
+    //   suiteTitles 5517 -> 5519 (+2)
+    // Decomposed to the unit, both ends read by THIS walker's own parkReasonsFor /
+    // liveTitlesIn / liveSuiteTitlesIn, and the whole movement is TWO ALREADY-CREDITED
+    // files — no new file, so the "one file landed, add its pins" reading has nothing to
+    // stand on here at all:
+    //   +4 titles, +1 suite … tests/pdf/pdfParityFixes.test.js            12 -> 16
+    //   +2 titles, +1 suite … tests/generators/generationAuthoredIntent.test.js  7 -> 9
+    //   4+2 = 6 and 1+1 = 2, which is the whole movement, closed.
+    // ⭐ THE BASE END IS AGAIN A CONTROL: the tests/ tree of 2a7fb033 (the commit that
+    // recorded the five figures this row replaces) was materialised outside the repo and
+    // re-measured by the CURRENT instrument, and it read back 2383/364/2019/19539/5517 —
+    // the previous row exactly. So the classifier did not move and both deltas are the
+    // estate. The measuring probe read THIS file's own committed bytes rather than the
+    // probe-edited ones, so the instrument could not weigh itself; this file is CREDITED
+    // (33 titles, 4 suite titles), which is exactly why that substitution is required and
+    // why the note you are reading adds no pin of its own.
+    files: 2383, parked: 364, credited: 2019, titles: 19545, suiteTitles: 5519,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

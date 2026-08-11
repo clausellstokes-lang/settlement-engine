@@ -1,9 +1,9 @@
 {
   "_doc": "PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "36e50c73ac3e0b3f2771f8f3a9eb310c8db8708a",
-  "totalTests": 27292,
-  "totalFiles": 2350,
-  "skippedCeiling": 105,
+  "measuredAtSha": "c74048e4c9048d8c8048816bf6217f751e2bcb48",
+  "totalTests": 27926,
+  "totalFiles": 2383,
+  "skippedCeiling": 111,
   "uncollectedSuites": {},
   "entries": {
     "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
