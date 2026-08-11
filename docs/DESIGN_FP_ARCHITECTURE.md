@@ -670,6 +670,12 @@ docs/DESIGN_FP_ARCH_WY.md §2a IS the request). F9 `supplyCargo` is UNSIGNED
 at this fold — no wave mints it until the owner signs its row; every field is
 drop-when-absent and flag-gated, so an unsigned row stalls exactly one wave,
 never the program.
+⚠ F9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (`docs/SOL_QUEUE.md`
+header), which applies the owner's blanket queue sign-off granted 2026-08-05 and recorded
+in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue position; this older
+spelling is superseded** (noted 2026-08-11 per chair order, session `c42c8924`).
+This file's own WC-10 charter already carries the reconciled reading: "F9
+`supplyCargo` is owner-SIGNED under the blanket sign-off but UNBUILT".
 
 **THE 2026-08-07 FOLD ADDS SIX SUB-KEYS AND STILL ZERO TOP-LEVEL KEYS.** HB
 one, WC four, EP one — each conditionally materialized, each with exactly ONE

@@ -5923,7 +5923,12 @@ had moved to ELEVEN. Marked as HISTORY, with the reader pointed at
 **⛔ WHAT REMAINS OWNER-GATED AND IS NOT DISCHARGED BY THIS FOLD.** CR-WC-9 (WC's
 persisted field batch — blocks WC-6 onward, never blocked the fold); WY F9
 `supplyCargo` UNSIGNED, on which WC-10 HARD-GATES; EP's FOUR §7a parked rows; HB Q1's
-two owner-gated persisted fields. **AND THE THREE VOLUMES ARE NOT SEALED BY LANDING:**
+two owner-gated persisted fields.
+⚠ F9 and CR-WC-9: status governed by the SOL_QUEUE reconciliation of 2026-08-09
+(`docs/SOL_QUEUE.md` header), which applies the owner's blanket queue sign-off granted
+2026-08-05 and recorded in THIS file — **SIGNED, released at its queue position; this
+older spelling is superseded** (noted 2026-08-11 per chair order, session `c42c8924`).
+The grant's own RELEASED-TO-BUILD list above names "the F9 `supplyCargo` sign-off row". **AND THE THREE VOLUMES ARE NOT SEALED BY LANDING:**
 EP is a DRAFT AT ROUND SEVEN with four revision-6 rulings confirmed by nobody; HB's
 round four has NO RECORDED CLOSE; WC is ARCHITECTED, NOT STARTED. Each says so in its
 own header. **A reader who reads "landed" as "sealed" is wrong, and was warned.**

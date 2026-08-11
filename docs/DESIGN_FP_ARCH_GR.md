@@ -480,13 +480,23 @@ finder, no new relationship vocabulary.
   world). SP-4 court reads must NOT be spelled `riskToleranceOf` (R-5's
   collision).
 
-> **Current implementation handoff (reconciled 2026-08-09):** GR-3a is landed;
-> GR-3b is owed but **BLOCKED**, not dispatchable from this design. The only
-> coding contract is
-> [`implementation/packets/foreign-policy/GR-3B.md`](./implementation/packets/foreign-policy/GR-3B.md).
-> Do not infer its unresolved producer-selection rules from the prose below.
+> **Current implementation handoff (reconciled 2026-08-09; CORRECTED 2026-08-11 per
+> chair order, session `c42c8924`):** GR-3a is landed, and ⭐ **GR-3b IS LANDED TOO, at
+> `40afbdd6`** — "GR-3b: the nine owed producers draft at last — rung ladders, the exact
+> boundary, and the pair that may share a cell", 2026-08-10. The producer half ships as
+> `PACT_DRAFT_LENS` in `src/domain/worldPulse/pactFormation.js:169`, is consumed at
+> `:283`, and is pinned in `tests/domain/pactFormation.test.js` and
+> `tests/domain/peaceTermsGrantTerms.test.js` (whose `PRODUCER_OWED` register asserts zero
+> rows still owing to GR-3b).
+> **The superseded wording, retained as history only: "GR-3b is owed but BLOCKED, not
+> dispatchable from this design."** It must not be read as build state. Its coding
+> contract
+> [`implementation/packets/foreign-policy/GR-3B.md`](./implementation/packets/foreign-policy/GR-3B.md)
+> is terminal in `docs/implementation/INDEX.md` (row LANDED-5, `40afbdd6`) — do not
+> redispatch it. The producer-selection prose below pre-dates the landing; read the code
+> and its pins, not the prose.
 
-### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b OWED/BLOCKED**
+### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b LANDED 2026-08-10 at `40afbdd6`** <!-- heading corrected 2026-08-11 per chair order, session c42c8924; it read "GR-3b OWED/BLOCKED" -->
 <!-- Build state is not maintained per-file; docs/implementation/INDEX.md controls current
      dispatch and FP §5 retains dated corroboration only. What
      follows is the SCOPE SPLIT, which is not build state but a change to what this wave IS.

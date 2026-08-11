@@ -200,6 +200,11 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
   OF THEM BLOCKED THE FOLD:** WY F9 `supplyCargo` (UNSIGNED — and WC-10 HARD-GATES
   on it), WC CR-WC-9 (the persisted field batch, blocking WC-6 onward), and EP's
   four §7a parked rows.
+  ⚠ F9 and CR-WC-9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (this
+  file's header), which applies the owner's blanket queue sign-off granted 2026-08-05 and
+  recorded in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue position;
+  this older spelling is superseded** (noted 2026-08-11 per chair order, session
+  `c42c8924`).
 - EVERYTHING BUILDS DARK. Sol never lights a flag, runs a soak, ratifies a
   band, re-records a golden without a recorded ruling, or pushes — see §4.
   ⭐ **EP's dark-state claim is defined PER ADVANCE PATH (EP §2.4) and is
@@ -342,6 +347,12 @@ volumes corrected @ 36862650 + fdf43790):
     table gates the field-minting waves one row at a time — an unsigned row
     stalls exactly one wave, never the program, and **F9 (`supplyCargo`) is
     UNSIGNED: no build until the owner signs it.**
+    ⚠ F9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (this file's
+    header), which applies the owner's blanket queue sign-off granted 2026-08-05 and
+    recorded in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue
+    position; this older spelling is superseded** (noted 2026-08-11 per chair order,
+    session `c42c8924`). Row 18c of this file states the reconciled reading: "F9
+    `supplyCargo` is owner-SIGNED but UNBUILT and rides §2 LANE B".
     ⚠️ **THE PREFIX ADMISSION (both volumes).** ES joins
     `CHARTERED_VOLUME_PREFIXES` as the TENTH prefix and WY as the ELEVENTH, each
     in the SAME commit as its own first cross-layer registry row.
