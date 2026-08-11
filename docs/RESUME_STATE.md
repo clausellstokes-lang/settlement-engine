@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 07:08:45 EDT
+**Generated:** 2026-08-11 14:23:31 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `4a9b6cf4` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `08563a7f` | **0** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ffc85a90` | **5** |
+| ledger (main) | `review-fixes-2026-07-08` | `005d8cdf` | **4601** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 40Gi free (80% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 68927: sh scripts/gate-mutex.sh --run -- npx vitest run --reporter=json --outputFile=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/scratchpad/laneA-results-baseline.json
+**Disk:** 37Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T070842` — build 1 file(s), ledger 0 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T142154` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T070842
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T142154
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,36 +28,44 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
- M docs/FABLE_VALIDATION_QUEUE.md
+ M tests/security/fraudCharterSession.pglite.test.js
+ M tests/security/galleryCommentModeration.pglite.test.js
+ M tests/security/ingestCheckRate.pglite.test.js
+ M tests/security/singleSessionBelt.pglite.test.js
+ M tests/security/supportTickets.pglite.test.js
 ```
 ```
-  +2      -0      docs/FABLE_VALIDATION_QUEUE.md
+  +7      -1      tests/security/fraudCharterSession.pglite.test.js
+  +7      -1      tests/security/galleryCommentModeration.pglite.test.js
+  +7      -1      tests/security/ingestCheckRate.pglite.test.js
+  +6      -2      tests/security/singleSessionBelt.pglite.test.js
+  +7      -1      tests/security/supportTickets.pglite.test.js
 ```
 ## Last 12 build commits
 
 ```
-4a9b6cf4 2026-08-11 ES-5d promoted READY, and PACKET_STANDARD is sharpened so handoff waves can ship
-857e3a1a 2026-08-11 Record: ES-5c LANDED; ES-5d is next and must BUILD its substrate
-4b0b0fdc 2026-08-11 The dormancy fence admits espionageCareer.js, with the reason it must gate first
-c0447b8f 2026-08-11 ES-5c: an absent officer's standing weakens, and the guard that watches it works
-ca94438d 2026-08-11 ES-5c compiled and promoted READY: the career register, and the guard it repairs
-241e6a58 2026-08-11 INDEX: retire the ES-5b blocker sentence it outlived
-868aca1a 2026-08-11 Record: ES-5b LANDED at 6c0238ad; the espionage tail advances to ES-5c
-6c0238ad 2026-08-11 ES-5b: an absent faction weighs less, at the council table and in the contest
-4fc1d0c7 2026-08-11 The lighting census re-derives whole, and the FULL GATE IS GREEN at exit 0
-5afe9b2e 2026-08-11 The observed-shape baseline shrinks to 2164: seven more dead reads retired
-1c295eca 2026-08-11 Nine dead read-arms deleted, and two clusters refused for better reasons
-31409e36 2026-08-11 Anchor the four negatives I landed unanchored, and name a second vacuity mode
+ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it cannot mean
+36159389 2026-08-11 Schema 5 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
+133e300f 2026-08-11 Record: ES-6a LANDED; the espionage tail advances to ES-7
+53d538b4 2026-08-11 ES-6a: the double agent leaks, and the leak's boundary is proven on both sides
+744de227 2026-08-11 Record: TC-5a LANDED; the cartography painter has a headless half
+41b39220 2026-08-11 TC-5a: the painter's headless half, and it costs the bundle exactly nothing
+9892eda1 2026-08-11 ES-6 refused as three; ES-6a promoted, and the volume builds doors before traffic
+8738f5ea 2026-08-11 TC-5 refused as four packets; TC-5a promoted, and a UI addition that was secretly persistence
+58436804 2026-08-11 The road labels I designed cannot exist: three of four cases refused, with measurement
+0dc40691 2026-08-11 INDEX: flip ES-5d's status token to LANDED, keeping its D7 note
+53fb10da 2026-08-11 Record: ES-5d LANDED; the ES-5 amendment is complete across four waves
+954592c0 2026-08-11 ES-5d: a graded mission credits the ladder — and the window it was specified with was dead
 ```
 ## Last 6 ledger commits
 
 ```
-08563a7f 2026-08-11 Owner ruled all four; locks split on a measurement that corrected the framing
-2fbee146 2026-08-11 Handoff: ES-5d promoted READY; the packet standard sharpened for handoff waves
-ad869045 2026-08-11 Handoff: no stalls; ES-5d compiling and the M6 follow-on freeze building
-6012733d 2026-08-11 Handoff: ES-5c LANDED with zero moved goldens; the harness greenwash banked
-a52499a4 2026-08-11 Handoff: ES-5c built and gating; the stopped-lane pattern banked after its fourth firing
-8f26b4c8 2026-08-11 Handoff: ES-5c promoted READY at ca94438d and dispatched
+005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
+738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
+7d31c983 2026-08-11 Handoff corrected: the gate is NOT green, and the harness lied about it again
+9eefd902 2026-08-11 Handoff: schema 5 is landed and the observed-shape gate is GREEN
+049b8f65 2026-08-11 Handoff final: the mint lane's WIP is vaulted; ES-7's refusal is recorded
+165937d6 2026-08-11 Handoff corrected: ES-7 refused, and the dispatcher is the gate
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -67,10 +75,75 @@ a52499a4 2026-08-11 Handoff: ES-5c built and gating; the stopped-lane pattern ba
 
 ## HAND-MAINTAINED — everything below is written by the chair, not derived
 
-# ⭐⭐⭐ HANDOFF TO A NEW ACCOUNT — 2026-08-11, written at the owner's request. READ THIS FIRST.
+<!-- resume-state.sh preserves everything below this line verbatim. Update it at every
+     dispatch and every phase boundary: what is in flight, who owns which dirty file,
+     and what the next action is. This is the ONLY part a script cannot know. -->
 
-**You are inheriting a live program mid-flight. Nothing is broken; two lanes are working
-and two things need your first attention. Start here, then read the Live board below.**
+# ⭐⭐⭐ RESUMED 2026-08-11 ~14:30 EDT — the pause is LIFTED by owner order ("Continue the pending work!")
+
+**The chair is FABLE again** (session `c42c8924-7331-45ab-a096-c5f1bc35f7d3`, this machine).
+Consequence of the `33aeea35` marking law: work architected/managed/validated by THIS
+session's chair carries **no ⏳ marker**; the accumulated post-boundary debt (72 document
+markers) is being cleared by survey — see Lane B below. Lanes still build on Opus.
+
+⚠⚠ **THE OWNER'S STANDING CONDITION (2026-08-11, verbatim intent): "i will occasionally
+run out of 5 hour window usage. prepare for that."** Every dispatch below therefore carries
+its collection pointers, and this note is rewritten at EVERY event (seamless-resume
+directive). A successor's job on any lane is COLLECT — survey git + dirty files + the
+transcript tail, re-verify independently — never re-dispatch while WIP exists.
+
+## The live board — FOUR operations dispatched ~14:20 EDT
+
+1. **Lane A (build, Opus) — collect+finish the PGLITE CONTENTION CURE.** Owns the 5 dirty
+   `tests/security/*.pglite.test.js` files (the dead prior lane's probe WIP, snapshot
+   `20260811T140748`). Brief: measure CONTENDED hook cost, cure by budget-sized-for-
+   contention or serialization, ⛔ never by skip-ceiling/allowlist; strip-or-keep probes is
+   its recorded JUDGMENT; lands by private-index plumbing; deliverable = full gate at
+   **exit 1 with EXACTLY ONE red outside the frozen census (the owner's golden)**.
+   Transcript: session dir `subagents/agent-a1c43cda617f681d8.jsonl`.
+2. **Lane B (read-only workflow `wf_5618aec5-d46`) — FABLE SURVEY COLLECTION.** Fans out
+   over every post-`33aeea35` `⏳ FABLE VALIDATION OWED` row (72 in FABLE_VALIDATION_QUEUE.md,
+   5 in TC-4.md, 1 in SOL_QUEUE.md), receipt-checks each against HEAD, and writes the
+   rulable digest to scratchpad `laneB-fable-survey-digest.md`. **The RULINGS are the Fable
+   chair's, on the beats after the digest lands** — the workflow only collects. Resume:
+   `Workflow({scriptPath: <session workflows/scripts/fable-survey-collection-wf_5618aec5-d46.js>, resumeFromRunId: 'wf_5618aec5-d46'})`.
+3. **Lane C (build, Opus) — the 21 remaining READER-WITHOUT-WRITER repairs** (23 class-(a)
+   true positives, 2 repaired; precedent `c74048e4`). Reader-side only; writer-side/persisted-
+   shape items STOP-and-report as CHAIR-OWED; focused tests only (Lane A owns the gate);
+   worklist re-derived from the schema-5 baseline where it disagrees with memory.
+   Transcript: session dir `subagents/agent-a9144e987bca3f3f3.jsonl`.
+4. **Lane D (read-only, Opus) — the UNREVIEWED-UI cohort per-row triage** (the schema-5
+   genesis banked it; memory's three-way-agreed figure is 51 files / 128 identities / 193
+   reads filtered — the lane re-derives from the baseline at HEAD). Output: scratchpad
+   `laneD-ui-cohort-triage.md` + a disposition table for chair rulings.
+   Transcript: session dir `subagents/agent-a429dc1bcbd926628.jsonl`.
+
+Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
+(task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
+`/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/scratchpad`.
+
+**Heartbeat: a 20-minute in-session wakeup loop** (owner-ordered this session; ScheduleWakeup,
+not a cron — it dies with the session and the successor restarts it). Each beat: stall check
+(`ps` before believing any "waiting"), collect finished lanes, land, re-dispatch to keep 3-4
+parallel, rewrite this note, ledger-commit.
+
+**Queue after these lanes (chair order, unchanged):** chair rules on Lane B digest → marker
+clearing; chair rules on Lane D table → repair wave; TC-5b packet compile (NON-PRESENTATION
+tab seat); M6 follow-on freeze (CR-OSR-FREEZE-6-R1 — tool + negative control built);
+the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence 9 waves, slums,
+CV/TB/XW, first-paint JS reclaim); IA-2 revalidation folding the IA-3 docket.
+
+**Full delegation grant stands** (memory/full-delegation-grant-2026-08-10.md): carve-outs by
+nature only — legal sign-off, the V5 cull offer, THE TUNING SIGNATURE, each push/deploy. No
+remote/Supabase contact ever; migrations authoring-only.
+
+**Preserved/scratch:** `refs/preserved/tc3-original-stop-work` @ 789b3770 (vault — never
+merge); scratchpad tc4-*/osrfreeze*/TRFZ (evidence); Desktop "Settlement Forge template
+review/repo-extracted-2026-08-10/" (⚠ 118 findings still owed re-triage).
+
+---
+
+# The zero-context handoff (from the pause block at `005d8cdf`, updated at resume)
 
 ## 1. FIRST FIVE MINUTES — orient before touching anything
 
@@ -85,81 +158,58 @@ and two things need your first attention. Start here, then read the Live board b
 - **⛔ COMMIT ONLY BY PRIVATE INDEX**, always, in both trees:
   `IDX=$(mktemp); export GIT_INDEX_FILE=$IDX; git read-tree HEAD; git add -- <explicit paths>;
   TREE=$(git write-tree); git commit-tree $TREE -p HEAD -F msg; git update-ref refs/heads/<branch> $NEW $OLD`
-  then `rm -f $IDX; unset GIT_INDEX_FILE; git restore --staged .`. It starts from
-  `read-tree HEAD`, so it is immune to whatever the shared index holds. **Verify every
-  commit with `git diff-tree --no-commit-id --name-only -r HEAD | wc -l`.**
+  then `rm -f $IDX; unset GIT_INDEX_FILE`. It starts from `read-tree HEAD`, so it is immune
+  to whatever the shared index holds. **Verify every commit with
+  `git diff-tree --no-commit-id --name-only -r HEAD | wc -l`.**
   ⚠ Chain plumbing with `&&`, never `;` — a failed `add` still commits (one empty commit
   `333fbf49` exists because of this).
 - **Dispatch surface:** `docs/implementation/INDEX.md` + `PACKET_MANIFEST.json`. Only a
   **READY** row may be dispatched. Run `npm run validate:packets` before and after any
   packet edit. Currently **14 packets, 0 READY**.
 - **Memory:** `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/`,
-  indexed by `MEMORY.md`. ⚠⚠ **TWO COMPACTION SESSIONS ARE RUNNING ON IT RIGHT NOW**
-  (see §3). A pre-compaction snapshot is saved beside it as
-  `MEMORY.pre-compaction-snapshot-2026-08-11.md` (18,375 B, 98 links, all resolving).
+  indexed by `MEMORY.md`. The index was READ COHERENT at resume (2026-08-11 ~14:10); the
+  pre-compaction snapshot `MEMORY.pre-compaction-snapshot-2026-08-11.md` remains beside it
+  if a concurrent compaction ever lost-updates it.
 
-## 2. ⏸ PAUSED AT THE OWNER'S REQUEST — one lane still running, nothing dispatched after
-
-**The owner paused the run to switch accounts.** No new work was dispatched after that
-instruction. State at pause:
-
-- **⏳ PGLITE CONTENTION CURE — STILL RUNNING** (`tasks/a132c38c986b6be53.output`). It is
-  removing the last known obstacle to a green gate: five `tests/security/*.pglite.test.js`
-  suites whose `beforeAll` collapses under contention (`supportTickets` passes **19/19 in
-  ISOLATION**). ⛔ It is under standing orders NOT to cure this by raising the skip ceiling
-  or allowlisting — a collapsed suite is not a skip, and absorbing it would destroy the
-  sentinel on its first real outing. **Collect it; do not re-dispatch.** Expected endstate
-  after it lands: exit 1 with EXACTLY ONE failing test outside the frozen census — the
-  owner's golden.
-- **⛔⛔ ES-D REFUSED — see §7 and OWNER_DECISION_QUEUE §16.** The espionage product intent
-  is **not deliverable at this HEAD by any packet**. This is now an OWNER decision, not a
-  chair one.
-
-## 3. ⚠⚠ THE ONE ACTIVE RISK: two concurrent MEMORY.md compactions
-
-The owner started **both** `task_6a8ff815` and `task_5208ea2d` against the same index.
-**They can lost-update each other.** If the index comes back short or with broken links,
-restore from the snapshot named above and redo ONE compaction. ⚠ The recorded rule:
-**grep every hook's sha/path across the directory BEFORE trimming** — a past compaction
-destroyed two shas that lived only in the index. ⭐ Prefer LOSSLESS FOLDING into archive
-files over trimming, and finish with a broken-link check.
-
-## 4. THE GATE IS RED ON EXACTLY TWO THINGS, both understood
+## 2. THE GATE IS RED ON EXACTLY TWO THINGS, both understood (updated at resume)
 
 1. **`generatorGoldenMaster`** — owner-approved SHIFT-2, **registered not re-recorded**,
    awaiting the owner's batched `UPDATE_GOLDEN`. A one-command cure the OWNER owns.
-2. **`observedShapeReaders.walker`** — the schema-5 mint is clearing it. `--write`
-   correctly REFUSES because the change is a SWAP, not a shrink.
-⛔ **Do not let any lane chase either.** Tell every lane at dispatch which reds are
+2. **The five pglite security suites under contention** — Lane A's deliverable (above).
+~~`observedShapeReaders.walker`~~ — **CURED**: the schema-5 mint landed as `36159389` +
+`ffc85a90`; the observed-shape gate is GREEN at that HEAD.
+⛔ **Do not let any lane chase the golden.** Tell every lane at dispatch which reds are
 pre-existing — a lane lost a full context rediscovering one.
 
-## 5. FOUR THINGS WAIT ON THE OWNER (none blocking)
+## 3. FOUR THINGS WAIT ON THE OWNER (none blocking)
 
 `OWNER_DECISION_QUEUE.md` §14, §15, §15b: the batched `UPDATE_GOLDEN`; four absurd
 faction links (`/council|court|hall|government/` matches any "…hall", so a Lord Mayor links
 to "Gambling halls") recommended to ride the SAME golden update so the seed line moves
 once; the **lock copy** drafted for veto; and a taste call on whether a stated absence
-beats an absent section.
+beats an absent section. **Plus §16: ES-Da (below).**
 
-## 6. THE FIVE LAWS THAT COST THE MOST TO RELEARN
+## 4. THE FIVE LAWS THAT COST THE MOST TO RELEARN
 
 1. **Trust no exit status you did not capture yourself** — not a pipe's, not a wrapper's,
-   and **not the harness's**: it reported RED gates as "exit code 0" **five times today**.
-   Use `scripts/gate-tail.sh` or `...; echo $? > /tmp/x`.
-2. **A lag belongs to a WRITER/READER PAIR, never a file or volume.** ES-5d shipped a
-   `tick-1` window that could never fire while every unit pin stayed green.
+   and **not the harness's**: it reported RED gates as "exit code 0" **five times in one
+   day**. Use `scripts/gate-tail.sh` or `...; echo $? > /tmp/x`.
+2. **A lag belongs to a WRITER/READER PAIR, never a file or volume** — re-derive it from
+   pulse CALL ORDER. (ES-5d's spec specified a `tick-1` window that was provably dead;
+   the lane caught it BEFORE landing — the landed code is same-tick. ⚠ The earlier claim
+   that it "shipped" was wrong; corrected at `005d8cdf`.)
 3. **A mutant going red is not a working pin** — read WHICH ARM fired and confirm the
    message names the real cause.
 4. **A new test file reds TWO censuses**, and **tests registered in `for` loops or
    `test.each()` mint NO title** — the file lands PARKED with zero counted coverage while
    the arithmetic still closes and nothing reds.
 5. **Design prose is a hypothesis.** This program's lanes refused a chair instruction on
-   measurement **sixteen times** and were right every time — including against me. Reward
-   it; a refusal with a measurement is the most valuable report you can get.
+   measurement **sixteen times** and were right every time — including against the chair.
+   Reward it; a refusal with a measurement is the most valuable report you can get.
 
-## 7. WHAT IS LEFT
+## 5. WHAT IS LEFT
 
-⛔⛔⛔ **AND ES-D IS REFUSED TOO — THE PRODUCT INTENT IS UNDELIVERABLE.**
+⛔⛔⛔ **ES-D IS REFUSED — THE ESPIONAGE PRODUCT INTENT IS UNDELIVERABLE AT THIS HEAD.**
 `envoyErrandRecords.js:590` forces `payload.offererId === from && payload.targetId === to`,
 so **A COURT CAN ONLY SPY ON THE COURT IT IS SUING FOR PEACE WITH.** There is no seam for
 an autonomous dispatcher: the only road to a persisted covert row is an accepted PEACE
@@ -168,16 +218,10 @@ DECISION. Six more refutations behind it — `mintCovertMission`'s fields have *
 producer, the casting helper is unusable, `volunteerBandsFor` has zero producers (**ES-6b
 is NOT unblocked either**), and both pulse mouths are at EXACT zero headroom with no stage
 registry. **The only compilable slice — ES-Da, covert cargo on an accepted peace envoy — is
-OWNER-GATED on three grounds and is now queue §16.**
-⚠⚠ **A CORRECTION TO MY OWN RECORD: ES-5d NEVER SHIPPED THE DEAD WINDOW.** Verified at
-`954592c0` — the landed code is same-tick and the leaf's own header says a `tick-1` window
-"would be PROVABLY DEAD". **The dead window lived in the SPEC and the lane caught it before
-landing.** I said it shipped, in a brief and a commit message. It did not. **A hazard
-write-up is itself a claim and needs the same receipt as any other.**
-⚠⚠ **AND I HAD THE COUPLING DIRECTION BACKWARDS:** `direction = depLayer→importerLayer`, so
-a GRAMMAR file importing an INFO leaf is `INFO→GRAMMAR` — the opposite of every existing
-espionage row. ⚠⚠ **Nothing cross-checks the id's arrow against `direction`, so a wrong one
-SHIPS GREEN.**
+OWNER-GATED on three grounds and sits at OWNER_DECISION_QUEUE §16.**
+⚠⚠ **THE COUPLING DIRECTION LAW:** `direction = depLayer→importerLayer`, so a GRAMMAR file
+importing an INFO leaf is `INFO→GRAMMAR`. ⚠⚠ **Nothing cross-checks the id's arrow against
+`direction`, so a wrong one SHIPS GREEN.**
 
 ⛔⛔ **ES-7 IS REFUSED — AND THE ESPIONAGE TAIL CANNOT PROCEED BY PICKING THE NEXT NUMBER**
 (memory/es7-refused-the-dispatcher-is-the-gate.md). **FIVE OF ITS SIX HERALD KINDS HAVE NO
@@ -185,8 +229,6 @@ REACHABLE PRODUCER.** The volume built ES-5a/b/c/d and ES-6a — **five waves of
 on a declared build-doors-before-traffic shape, and **the DISPATCHER that would make any of
 them fire was never chartered.** `castCovertOperative`/`mintCovertMission` have ZERO call
 sites; `espionageMissions.js:13-20` says *"NOTHING UNDER src/ CALLS THIS FILE."*
-⭐ **ES-D — THE DISPATCHER — is the only espionage slice compilable at this HEAD, and
-everything else in the volume waits on it.** Charter it first.
 ⚠ Also refused within ES-7: the KNOWLEDGE desk does not exist (IN-5 never landed — route to
 `events`, never grow `HERALD_SECTIONS`); the certification conversion is impossible and a
 live pin forbids a partial one; the envelopes are a SOAK PROGRAM (a forbidden dispatch
@@ -203,211 +245,24 @@ dark-complete → diagnostic soak → repairs → the owner's walk → light fla
 sign-off, the V5 aesthetic cull (offer, never assume), THE TUNING SIGNATURE at soak, and
 EACH push/deploy. **No remote or Supabase CLI contact, ever; migrations are authoring-only.**
 ⚠ Everything after the `33aeea35` boundary carries `⏳ OPUS-ERA — FABLE VALIDATION OWED`
-markers — see the tail of `docs/FABLE_VALIDATION_QUEUE.md` for the marking law.
-
----
-
-
-<!-- resume-state.sh preserves everything below this line verbatim. Update it at every
-     dispatch and every phase boundary: what is in flight, who owns which dirty file,
-     and what the next action is. This is the ONLY part a script cannot know. -->
-
-### In flight (rewritten 2026-08-10 ~18:50 by the Fable chair, session 0e891b2f)
-
-**Everything before `7699e367` is LANDED and recorded.** The Aug-9/10 landing train
-(F-SURVEY-1 `2340497d`; the TC-3 split whole `5066c34b`→`a45c969d`; the FP serial chain
-`d56d944c`→`29e2dc3c`→`40afbdd6`; EP-q `218aa5ff` / EP-r `f495d69a`; migration-195
-rollback `1ac94af8` + retirement `01a81a1e`; lighting census `d67e2532`; classifier
-census `0f7424f7`; ratchet bankings `e4a21360`; the E7 refutation batch `9df7e428`;
-the extraction `0ac348e6`/`6e9dd76b`; the 51-identity drift reconciliation `7699e367`)
-lives in git log + the memory index — this note no longer restates it. **The full
-17-step gate ran clean end to end at `7699e367`** (step 15: 17 known of 27,856,
-ceiling 17 — the first green step 15 since `36e50c73`).
-
-**⛔⛔ FABLE-EXHAUSTION BOUNDARY LANDED @ `33aeea35`** (build branch, tail of
-docs/FABLE_VALIDATION_QUEUE.md; memory/fable-exhaustion-boundary-2026-08-10.md).
-Owner order 2026-08-10 ~21:00: ALL processes → Opus 5. Everything ABOVE the boundary
-is Fable-validated (incl. EVERY CR-* ruling through it — TC-4's whole ruling set and
-CR-OSR-FREEZE-1..8). Below it, judgment-density acts carry
-`⏳ OPUS-ERA — FABLE VALIDATION OWED` in ALL THREE homes AND wherever UTILIZED;
-⚠⚠ the marker NEVER gates progress, and a packet built to a Fable ruling INHERITS
-its validation. ⚠ count DOCUMENT markers only — commit messages are immutable.
-Both live lanes were notified of the law mid-flight.
-
-**⭐ OWNER, 2026-08-11: worked toward a Sol 5.6 pivot, then TOOK IT BACK — the
-standing order is again "work all the way through the current weekly usage limit."
-The Sol handoff was landed anyway on its own merit (`46357c94`): SOL_QUEUE.md had
-gone 42 commits stale and now carries the delta, the open work in chair order, the
-implementer-specific hazards, and — the part that outlives the pivot — the ruling
-that the `33aeea35` marking law binds ANY post-boundary implementer, not only Opus
-("read OPUS-ERA as post-boundary"), and that building to an existing Fable-issued
-CR ruling INHERITS its validation and costs no row.**
-
-**⚠⚠ CHAIR ERROR, OWNED: I LANDED TWO REDS AT `78d136a1`** and a lane paid a full
-context discovering them (memory/a-new-test-file-reds-two-censuses-at-landing.md).
-That commit carried a NEW test file, `tests/ui/uiCohortDisplayReaderRepairs.test.jsx`,
-and **a new test file reds TWO censuses at once**: the lighting `files` pin (2384 vs
-frozen 2383) and the anchor walker (4 un-anchored negatives against a ceiling of **0**
-— every new file starts at zero). **I re-earned the FOCUSED suites and stopped there;
-neither census is reachable from a focused run. A manager re-earn is NOT a gate.**
-⭐ THE RULE: a commit that ADDS a test file must, IN THE SAME COMMIT, re-derive the
-lighting census WHOLE and anchor every negative in the new file. The tell is one
-command: `??` under `tests/` in `git status`. ⚠ A lane's "I did not re-derive the
-census" is a HANDOFF, not a disclaimer — ask, don't wait to be told.
-
-**⚠⚠ A STANDING PATTERN, NOW BANKED — FIRED FOUR TIMES TODAY**
-(memory/a-background-gate-cannot-wake-a-stopped-lane.md): **a lane that yields "waiting
-for the gate" is DEAD to that gate.** No monitor, background task, or "waiter" re-invokes
-a STOPPED agent — the harness re-invokes only while it has live background children of
-its own, and a detached gate process is not one. ⚠ **"Two independent waiters armed" is
-not redundancy; it is two things that cannot wake it.** The failure is SILENT and
-expensive: the work is done, verified, and simply never reported, so **a board that looks
-busy is actually idle.** Lane rule: OUTLAST the run inside your own turn, polling in your
-own shell. Chair rule: verify liveness by `ps` before assuming anything, then RESUME
-rather than re-dispatch (a resume keeps the context a re-dispatch would burn) — and ask
-whether any edit landed AFTER the run began, because **a green bound to a vanished tree
-is not a verdict.**
-
-**⭐⭐ THE OWNER RULED ALL FOUR OPEN ITEMS (2026-08-11) — `08563a7f`, queue §12.**
-1. **CAPITAL: "Nothing intrinsically makes a settlement a capital. The closest in-system
-   analog is an OVERLORD."** Definitive — **the concept does not exist in the world
-   model**, so `capital`/`isCapital` are DELETED reader-side, never wired. ⚠ I am
-   deliberately NOT building an overlord visual off the hint; it is recorded as the NAMED
-   PATH, its own scoped capability with its own copy, **offered not assumed.**
-2. **THE TWO GENERATION-SIDE DEFECTS: APPROVED.** ⚠⚠ Both change SAME-SEED OUTPUT —
-   [[the-promise-ratified]] territory — so they land as a ONE-TIME, DATED, DECLARED
-   correction with before/after measured. **Lane in flight.**
-3. **EXIT-ROAD LABELS: APPROVED, on for every existing settlement.** A shipped-dark
-   surface goes live by owner order.
-4. **LOCKS: left to my judgment — and I SPLIT them, on a measurement that CORRECTED THE
-   EARLIER FRAMING.** ⭐ "Writer-side is new capability" was WRONG: `setLock` is
-   **GENERIC and already works** (`LockControls.jsx:113` calls it for every `WORLD_LOCKS`
-   key), the coup shield's reader is **already built and tested** (`coup.js:64`, `:181`),
-   and `locksPreservation.js` DOCUMENTS the behavior. **The gap is ONE MISSING ROW in a
-   UI list — unfinished wiring, not absent capability.** So: `locks.institutions`
-   **DELETED** (zero readers, zero writers, no UI entry — dead on every end);
-   `locks.factions` **KEPT AND WIRED**, because leaving it means leaving a tested guard
-   permanently unreachable. ⚠ **The COPY is the owner's** — the lane drafts the
-   lock/unlock line in the existing rows' voice and the owner vetoes or rewrites it; the
-   wiring proceeds either way.
-
-⚠⚠ **THE GATE IS RED BY DESIGN AND IT IS NOT ANY LANE'S.**
-`tests/property/generatorGoldenMaster.test.js` fails on **25 of 525 rows** because the
-owner-approved same-seed correction landed at `0f85ced0` with the golden **REGISTERED,
-NOT RE-RECORDED** (SHIFT-2 in `GOLDEN_SHIFT_LEDGER_MAIN.md`, all 25 hashes recorded),
-pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, investigate
-it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
-until proven otherwise. Both live lanes were told this explicitly at dispatch.
-
-**⛔⛔ THE FULL GATE IS RED AND WILL STAY RED UNTIL THE SCHEMA-5 MINT — attributed, not
-debt to re-find.** Two reds, both understood:
-1. **`generatorGoldenMaster`** — owner-approved SHIFT-2, **registered not re-recorded**,
-   awaiting the owner's batched `UPDATE_GOLDEN`. A one-command cure the owner owns.
-2. **`observedShapeReaders.walker`** — ⚠⚠ **`--write` REFUSES, and correctly.** The
-   display repair is not a shrink but a **SWAP**: `neighbors on settlement` (2 reads) out,
-   `neighbourNetwork on settlement` (2 reads) in. The instrument's own words: *"the
-   inventory is addressed by finding IDENTITY, not by count, so a swap cannot hide"* —
-   and shrink-only maintenance cannot bank growth.
-   ⭐ **BUT THE "NEW" IDENTITY IS A FALSE POSITIVE — banked as M9, M8's cousin.**
-   `neighbourNetwork` has a real writer at **`src/lib/saves.js:158`** and **25 FILES
-   ALREADY BANK IT**. The corpus walks **GENERATION ONLY**, so a key minted at **SAVE
-   TIME** is invisible to it — same root cause as M8, different writer (M8 = the USER
-   writes it; **M9 = the SAVE PATH writes it**).
-   ⚠ **A repair that swaps one read for a better one is GROWTH to this instrument even
-   when the file's total is unchanged.** Growth needs a MIGRATION, so this joins the mint.
-**⭐ THE CONSOLIDATED SCHEMA-5 MINT NOW CARRIES FIVE ITEMS** — M6's family-union filter
-(vaulted, applies clean), the two write-shape blindnesses, the M8 router, and this growth
-row **plus a SAVE-TIME-WRITER EXEMPTION**. Each was individually not worth a mint; together
-they plainly are, which is exactly what CR-OSR-FREEZE-6-R2's deferral was betting on.
-**✅ DONE — landed as `36159389` + `ffc85a90`; the observed-shape gate is green.**
-
-**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `133e300f`, mutex
-free, zero processes):**
-
-1. **⭐ SCHEMA-5 MINT LANE (Opus) — in flight, and it is THE act that greens the gate.**
-   Carries all five consolidated items: M6's vaulted family-union filter (θ=0.80, 122
-   cleared, ZERO class-(a)/(b) erased), the two write-shape blindnesses, the M8 five-gate
-   router, **the `neighbourNetwork` row that currently blocks the gate**, and **the M9
-   save-time-writer exemption** so that row is banked BY RULE rather than by hand.
-   ⚠ Expect the schema-4 shape: a **COMMIT PAIR**, the first deliberately gate-red, because
-   `validateBaselineHistory` needs the subject commit to carry new CODE beside the OLD
-   baseline. ⛔ The detector stays BYTE-FROZEN; ⛔ the baseline is NEVER hand-edited.
-   Deliverable is a plain statement of whether `check` reaches exit 0 with only the golden
-   remaining, plus the exact two-commit sequence for me.
-   Report: tasks/a177c284ce931e4b1.output.
-2. **ES-7 AUTHOR LANE (Opus, draft-only) — in flight.** The espionage tail's next compile,
-   **absorbing ES-6c's retroactive Herald clause** — which ES-6's compile already refuted
-   TWICE (zero matches repo-wide; `corruptionWeb` returns `newsEntries: []` on EVERY path;
-   `pulseKernel:1773-1776` DROPS `patronId` from the persisted log, so naming who was
-   betrayed is a persisted-shape question and **owner-gated**). ⚠⚠ Told the volume's prose
-   has now been wrong FIVE COMPILES RUNNING, each differently, and to verify every claim.
-   ⚠ Carries the registration TEMPLATE GAP (two files beyond the manifest or the row
-   imports as `undefined`) and the census-reservation rule. Report:
-   tasks/a08b2dfcbfebb03a3.output.
-   **TC-5b is next in the queue behind these**, seated as a NON-PRESENTATION tab so it
-   never touches the persisted vocabulary.
-
-**Ruled and sequenced (not blocked):**
-
-- **⭐ THE OSR PROGRAM'S REMAINING TAIL, now all unblocked by the genesis:** the 23
-  class-(a) true positives (task #14 — the prominentRelationship 8 are USER-VISIBLE
-  in the PDF callout); the **162-identity UNREVIEWED-UI cohort's** per-row triage
-  (⚠ the ruling's 250 was the schema-2 slice — the genesis banks 53 files / 162
-  identities / 260 reads); **M6 as the follow-on freeze** (CR-OSR-FREEZE-6-R1 — the
-  re-key tool + its negative control are built and waiting); and **CR-TRFZ-1..3's
-  105→111 attributed raise + the census re-freeze**, whose blocker was exactly this
-  genesis.
-
-- **CR-TRFZ-1..4** (memory/step12-test-ratchet-landed.md + archive-census-node-modules-leg.md
-  tails): the census re-freeze at `7699e367` was correctly REFUSED (135 skips > 105;
-  fail-closed proven; baseline byte-identical) and is DEFERRED behind schema-4 — 24 of
-  the skips are the OSR walker collapsing on the exact wall (the lane blamed mutex
-  contention; its own quoted error refutes that). skippedCeiling 105→111 approved as
-  an ATTRIBUTED HAND EDIT riding the post-schema-4 re-freeze (campaignRuntimeLazy +3,
-  envoyPersistenceHydrationLazy +2, vendorPdfLazy +1 — all VERIFY_DIST-gated; step 16
-  runs them). ⚠ Archive procedure amended: re-freeze archives need REAL HISTORY
-  (`git clone --local` at the sha), never bare `git init` — two phantom introducedAt
-  reds measured behind the scope sentinel. TRFZ evidence: scratchpad/TRFZ/.
-- **Queue after the lanes:** schema-4 lane → genesis → census re-freeze; the ES tail
-  (ES-5b insertion reconciliation → ES-6 → ES-7 → CW-3); then the remaining corpus
-  (GR-4..7, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence 9 waves, slums 11,
-  CV/TB/XW, first-paint JS reclaim); IA-2 revalidation folds the IA-3 docket
-  (couplingInclusion.walker in focused checks; the seal's expected-dirty gap).
-- **20-minute heartbeat live (cron 3e80d420):** stall check + land/dispatch + this
-  cadence every beat. Seamless-resume directive stands: after EVERY event —
-  resume-state.sh, this note, ledger commit (memory/seamless-resume-directive.md).
-- **Full delegation grant stands** (memory/full-delegation-grant-2026-08-10.md):
-  carve-outs by nature only — legal sign-off, the V5 cull offer, THE TUNING SIGNATURE,
-  each push/deploy. No remote/supabase contact ever; migrations = authoring only.
-
-**Preserved/scratch:** `refs/preserved/tc3-original-stop-work` @ 789b3770 (vault —
-never merge); scratchpad: tc4-* (superseded by the landed packet), osrfreeze/out +
-osrfreeze2-* + TRFZ/ (evidence); Desktop "Settlement Forge template review/
-repo-extracted-2026-08-10/" (the extracted docs; ⚠ 118 findings still owed re-triage —
-recorded in START_HERE.md + RISK_REGISTER).
+markers — see the tail of `docs/FABLE_VALIDATION_QUEUE.md` for the marking law; Lane B is
+clearing that debt under the Fable chair.
 
 ### Where the gate stands
 
-**FULL 17-STEP GATE CLEAN at committed build HEAD `7699e367`** (2026-08-10): step 15's
-census 17 known of 27,856 (ceiling 17), zero unattributed reds anywhere. `b52223d7`
-(TC-4 promotion) is docs-only on top. Known long pole: step 15 runs ~27-62 min under
-load — the sharding/affected-test investment (excluded from IA-2) remains the next
-infrastructure packet candidate. The first-paint JS reclaim (static closure + gzip
-budgets) remains an open recorded program (`f52a7b75` cured the CSS overage; the
-5-family cut ledger is designed, no budget moves).
+**FULL 17-STEP GATE CLEAN at `7699e367`** (2026-08-10). Since then: schema-5 pair
+`36159389`+`ffc85a90` re-greened the observed-shape step; the known reds at resume are the
+owner's golden (SHIFT-2) and the pglite contention family (Lane A). Known long pole: step
+15 runs ~27-62 min under load — the sharding/affected-test investment remains the next
+infrastructure packet candidate. The first-paint JS reclaim (static closure + gzip budgets)
+remains an open recorded program (`f52a7b75` cured the CSS overage; the 5-family cut ledger
+is designed, no budget moves).
 
 ### ⛔ Owner-gated, never self-ruled
 
 - **Migration 195 DEPLOY** — the owner's train, unchanged as a gate. The repo side is
   DONE: rollback authored + proven on pglite (`1ac94af8`), train head 194→195 +
   rehearsal + retirement landed (`01a81a1e`). No `db push` ever from this program.
-- ~~`docs/PRICING_MARGIN_SHEET.md` + `docs/REVIEW_FINDINGS.md` should leave the repo~~ —
-  **DONE 2026-08-10** under the owner's delegation grant, plus the `docs/.review_findings.json`
-  sidecar (tracked on the ledger branch only). Preserved byte-exact out-of-repo under
-  `repo-extracted-2026-08-10/`. ⚠ The "9 OPEN markers" figure was a grep artifact: **118
-  findings carry no remediation status**, and their in-code state is still UNVERIFIED —
-  see `START_HERE.md`.
 - `foundingTier` satellite-mint widening — unchanged.
-- ~~EP-q / EP-r~~ — **BOTH LANDED 2026-08-10** (`218aa5ff` / `f495d69a`) under the
-  owner's blanket sign-off + delegation grant; EP-s rides GR-3b's landed R1 law
-  (active-with-veto). OWNER_DECISION_QUEUE.md rows retained as history.
+- **ES-Da** (OWNER_DECISION_QUEUE §16) — the espionage product decision.
+- The batched `UPDATE_GOLDEN` (§14) + the lock copy veto (§15) + the taste call (§15b).
