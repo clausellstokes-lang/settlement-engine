@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 19:29:54 EDT
+**Generated:** 2026-08-11 19:56:57 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `da31d170` | **24** |
-| ledger (main) | `review-fixes-2026-07-08` | `1abc0ee2` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `33487c77` | **1** |
+| ledger (main) | `review-fixes-2026-07-08` | `a6f700f7` | **4601** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 32Gi free (84% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 2144: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Disk:** 35Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T192914` — build 20 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T195510` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T192914
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T195510
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,43 +28,15 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
-MM docs/FABLE_VALIDATION_QUEUE.md
- M docs/GOLDEN_SHIFT_LEDGER_MAIN.md
-MM docs/implementation/INDEX.md
-MM docs/implementation/PACKET_MANIFEST.json
-MM docs/implementation/packets/town-cartography/TC-5B-I.md
-MM src/components/OutputContainer.jsx
-D  src/components/townMap/useTownCartographyBlock.js
-MM src/domain/dossier/settlementWorldChronicle.js
- M src/generators/factionRoles.js
-D  src/lib/townScene/townCartographyBlock.js
-MM src/store/aiChronicleContext.js
-MM src/store/aiSlice.js
-MM tests/domain/disposition.test.js
-MM tests/domain/townCartographyPaint.test.js
- M tests/fixtures/generator-golden-master.json
-D  tests/hooks/useTownCartographyBlock.test.jsx
-D  tests/lib/townCartographyBlock.test.js
-MM tests/lint/observedShapeReaders.walker.test.js
-MM tests/lint/sovereigntyLightingContract.walker.test.js
-MM tests/store/aiSliceHelpers.test.js
-?? src/components/townMap/useTownCartographyBlock.js
-?? src/lib/townScene/townCartographyBlock.js
-?? tests/hooks/useTownCartographyBlock.test.jsx
-?? tests/lib/townCartographyBlock.test.js
+MM scripts/.observed-shape-readers-baseline.json
 ```
 ```
-  +160    -3      docs/GOLDEN_SHIFT_LEDGER_MAIN.md
-  +0      -141    src/components/townMap/useTownCartographyBlock.js
-  +40     -1      src/generators/factionRoles.js
-  +0      -89     src/lib/townScene/townCartographyBlock.js
-  +25     -25     tests/fixtures/generator-golden-master.json
-  +0      -289    tests/hooks/useTownCartographyBlock.test.jsx
-  +0      -331    tests/lib/townCartographyBlock.test.js
 ```
 ## Last 12 build commits
 
 ```
+33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
+b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-hall link, discharge SHIFT-2, re-record the golden master
 da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
 e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated ledger row lands
 9183d52c 2026-08-11 TC-5b-i: a compiled cartography block becomes reachable without a canvas
@@ -75,18 +47,16 @@ c8931c03 2026-08-11 explanation.test.js was the seventh fixture manufacturing th
 ebc4f90e 2026-08-11 The aiGrounding edge bundle is rebuilt at the tree that produced it, and four sibling metas ride the same build window
 e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is checked, and the TC-5A fiction is corrected
 195113e4 2026-08-11 The chair flips R3 and R6, and the hook-family repair takes its validated row
-73f5be96 2026-08-11 The Fable survey clears 67 of 70: the serialization law, and the markers come down
-904b7bb0 2026-08-11 The observed-shape baseline shrinks to 1977: seventeen dead reader rows are gone for good
 ```
 ## Last 6 ledger commits
 
 ```
+a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
 f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
 c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
 3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
-33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -157,11 +127,21 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    judgments RATIFIED (one drop mechanism — its own mutant proved the flag disabled the
    guard; render-time stale-state discard — no painted frame may report a dark world
    available). **TC-5B-ii is UNBLOCKED** (promotion + A-4 copy draft queued).
-1. **Lane S (build, Opus) — THE GOLDEN BATCH (task #16, §17.1)**, dispatched ~18:40: the
-   Lord-Mayor regex narrowing + UPDATE_GOLDEN absorbing SHIFT-2, one commit, one
-   seed-line move, ledger discharge entry — **deliverable: the FULL GATE AT TRUE EXIT 0,
-   the first fully green gate of the era.** Transcript: session dir
-   `subagents/agent-a1e3cc5e8658cced8.jsonl`.
+1. **✅ Lane S LANDED THE GOLDEN BATCH at `b0912f7f` (~19:45)** — the narrowing is a
+   PROVEN STRICT SUBSET over the closed 276-name corpus (15→10 matched, 0 newly matched),
+   curing the CLASS of 5 (the probe's 3 + 2 unhit siblings), every mis-link falling
+   through to the real Town hall; the golden moved 25 of 525 with 0 added/removed,
+   triple-cross-checked (20 of 25 hashes reproduce SHIFT-2's weeks-old ledger exactly).
+   **The full gate reached TRUE_EXIT=0 on an isolated worktree of exactly its content**;
+   the branch tip's one red (OSR stale:2) was INDEPENDENTLY re-attributed by the lane
+   (byte-identical failure without its commit). All three judgments RATIFIED. It also
+   dodged a line-number-pinned hazard (arcaneClassifierCensus pins factionRoles.js:58).
+   **CHAIR STEPS EXECUTED (~19:50): the OSR re-freeze landed at `33487c77`** (plain
+   shrink, 1977→1975 / 1396→1394 — EXACTLY the two retired recentEvents rows, WRITE_EXIT
+   0, one file) **and the FINAL FULL-GATE PROOF is running in background at that HEAD —
+   expected TRUE_EXIT=0, the first fully green 17-step gate of the era** (log:
+   scratchpad `chair-FINAL-gate-33487c77.log`). MEMORY.md folded back under its ceiling
+   (18,505→17,374 B, three rows verbatim to the 08-11 archive, zero broken links).
 1b. **✅ Lane T LANDED the micro-act batch at `da31d170` (~19:10)** — all four ruled acts,
    one whole census fold (2397/365/2032/**19763/5578**, +10 titles/+2 suites, all live-
    verified). **The validation debt is at its FLOOR: owed count = 2, both permanent
