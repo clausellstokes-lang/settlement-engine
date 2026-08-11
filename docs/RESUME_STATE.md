@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:22:33 EDT
+**Generated:** 2026-08-11 15:36:33 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `904b7bb0` | **4** |
-| ledger (main) | `review-fixes-2026-07-08` | `982cbf37` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e1e9fd6a` | **14** |
+| ledger (main) | `review-fixes-2026-07-08` | `b080343b` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T152158` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T153545` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T152158
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T153545
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,20 +28,29 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
- M docs/FABLE_VALIDATION_QUEUE.md
- M docs/SOL_QUEUE.md
- M docs/implementation/packets/town-cartography/TC-4.md
- M tests/lint/sovereigntyLightingContract.walker.test.js
+MM docs/DESIGN_FP_ARCH_ES.md
+MM docs/FABLE_VALIDATION_QUEUE.md
+MM docs/SOL_QUEUE.md
+MM docs/implementation/PACKET_MANIFEST.json
+MM docs/implementation/packets/foreign-policy/ES-5B.md
+MM docs/implementation/packets/foreign-policy/ES-5D.md
+MM docs/implementation/packets/foreign-policy/ES-6A.md
+MM docs/implementation/packets/town-cartography/TC-4.md
+MM docs/implementation/packets/town-cartography/TC-5A.md
+MM scripts/implementation-packets.mjs
+MM src/components/dossier/LockControls.jsx
+MM src/domain/locksPreservation.js
+MM tests/lint/sovereigntyLightingContract.walker.test.js
+MM tests/scripts/implementationPackets.test.js
 ```
 ```
-  +197    -70     docs/FABLE_VALIDATION_QUEUE.md
-  +13     -3      docs/SOL_QUEUE.md
-  +13     -5      docs/implementation/packets/town-cartography/TC-4.md
-  +10     -5      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
 ```
+e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is checked, and the TC-5A fiction is corrected
+195113e4 2026-08-11 The chair flips R3 and R6, and the hook-family repair takes its validated row
+73f5be96 2026-08-11 The Fable survey clears 67 of 70: the serialization law, and the markers come down
 904b7bb0 2026-08-11 The observed-shape baseline shrinks to 1977: seventeen dead reader rows are gone for good
 aed0fc0e 2026-08-11 The World Book's hook chapter, the campaign PDF's hook line and two fingerprints stop reading keys nothing writes
 aa585167 2026-08-11 The pglite contention cure is a REFUTATION: the five suites never collapsed
@@ -51,19 +60,16 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 53d538b4 2026-08-11 ES-6a: the double agent leaks, and the leak's boundary is proven on both sides
 744de227 2026-08-11 Record: TC-5a LANDED; the cartography painter has a headless half
 41b39220 2026-08-11 TC-5a: the painter's headless half, and it costs the bundle exactly nothing
-9892eda1 2026-08-11 ES-6 refused as three; ES-6a promoted, and the volume builds doors before traffic
-8738f5ea 2026-08-11 TC-5 refused as four packets; TC-5a promoted, and a UI addition that was secretly persistence
-58436804 2026-08-11 The road labels I designed cannot exist: three of four cases refused, with measurement
 ```
 ## Last 6 ledger commits
 
 ```
+b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
-1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -119,10 +125,14 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    RETIRED; protocol amended to TWO required homes. **Lane G (build slot 2, Opus) is
    executing the clearing + corrections** (67 queue markers down, 5 walker + 5 TC-4
    clears, SOL_QUEUE protocol amendment, the setLock/LockControls comment cures, the
-   ES-6A/ES-5B/ES-5D doc rewordings, the R3 re-drive). Expected queue marker count after
-   its commit: **5** (2 legend + R3/R6/R8). Transcript: session dir
-   `subagents/agent-ae454e3e9b0596a55.jsonl`. DEFERRED behind Lane C's landing: R8's C2
-   case (+whole census fold) and H9's both-sites recentEvents cleanup.
+   ES-6A/ES-5B/ES-5D doc rewordings, the R3 re-drive). **✅ LANE G LANDED `73f5be96`**
+   (10 files, +317/−98; counts chair-verified: queue 72→5, walker 5→0, TC-4 5→0; R3
+   re-drive 23/23 TRUE exit 0; two correct deviations RATIFIED — the TC-4 owning-document
+   wording, and R6 left for the chair flip). **CHAIR FLIPS LANDED `195113e4`**: R3
+   accepted (re-drive = replacement receipt; 267 denominator struck, landing commit
+   authoritative) + R6 confirmed + Lane C's Fable-validated ledger row appended. **The
+   owed count now reads 3 = 2 permanent legend + R8** (deferred behind its own census
+   fold). H9's both-sites recentEvents cleanup rides the same future micro-act.
    ⚠ METHOD (banked): a workflow synthesis stage fed inline JSON can silently truncate —
    always check the digest's population against the SOURCE count (this one self-verified).
 3. **Lane C — ✅ COLLECTED (~15:50), chair-verified: 5 of the 7 LIVE class-(a) defects
@@ -188,13 +198,41 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    first production importer at 5b-ii). Reservations: four paths, ZERO intersection with
    the 5b-ii set — the halves meet through a symbol, never a file. **Promotion + dispatch
    = task #9, after Lane G lands.**
-7. **Lane H (build, Opus) — the PACKET-MACHINERY batch (task #8)**, dispatched ~16:00:
-   `validate:packets` gains a CREATE-row existence check (a landed packet's manifest
-   fiction currently never reds — disabled guard → machinery), the TC-5A manifest row is
-   corrected from `41b39220`'s real paths, and TC-5A.md's stale census figures + expired
-   free-attribution notes are corrected. Proof protocol: three captured exits
-   (before / guard-live-red on the fiction / after = 0). Paths disjoint from Lane G.
-   Transcript: session dir `subagents/agent-a3c65b1607f12ae71.jsonl`.
+7. **Lane H — ✅ COLLECTED (~16:20), chair-verified: `validate:packets` stops believing
+   CREATE rows.** Landed `e1e9fd6a` (4 files, +76/−10; chair-verified by diff-tree).
+   Three-stage proof captured in-shell: exit 0 (fiction invisible) → exit 1 naming
+   EXACTLY TC-5A's three phantom paths and nothing else → exit 0 after the row
+   correction. The real paths (from `41b39220 --diff-filter=A`):
+   `src/domain/townCartography/cartographyPaint.js` + `cartographyPaintRoles.js` +
+   `tests/domain/townCartographyPaint.test.js`. Its own guard MUTANT-tested (exactly one
+   test red, its own). **ZERO test titles added — proven** (13 registrations before and
+   after, empty title diff, walker green 33/33 at unchanged figures) so no census fold
+   owed. Both judgment calls RATIFIED (the `checks` argv carried the same phantom; the
+   no-retitle choice). Deferred-recorded: the inverse guard (nonterminal CREATE paths
+   must NOT pre-exist) needs its own design. ⚠ Address-rot demonstrated live: the census
+   row moved `:3676`→`:3681` mid-task — locate it by its `files:` key, never by line.
+   **Chair-owed memory (next beat): the new validate:packets rule + the MEMORY.md FOLD
+   (over its ~17KB ceiling — fold, never trim, grep hooks first).**
+8. **Lane K (gate runner, Opus) — THE FULL-GATE RECEIPT**, dispatched ~16:25 on the
+   effectively-clean tree at `e1e9fd6a` (non-MM dirty = 0; MM entries are the stale
+   shared-index artifact, `git diff HEAD` empty). Expected: TRUE exit 1 with the test
+   step showing EXACTLY 17 census + the owner's golden and nothing else. Fix-nothing
+   brief; outlasts the run in its own turn. **The TC-5B PROMOTION (task #9) is
+   deliberately SEQUENCED BEHIND this receipt** — its target `PACKET_MANIFEST.json` is
+   READ BY a gate test mid-run, so landing it during the gate would poison the receipt.
+   Transcript: session dir `subagents/agent-a53d9a1c623c91ba1.jsonl`.
+8. **Lane I (read-only draft, Opus) — the SCHEMA-6 MINT CHARTER**, dispatched ~16:10:
+   one consolidated charter for the accumulated detector docket (globals exclusion ·
+   `toLocaleString` in BUILTIN_MEMBERS · the M9 why-string naming a nonexistent function ·
+   M6 docstring mechanism correction · cohortNotice wording · **M10 the AUTHORED-INPUT
+   exemption class (H14)** · the H26 bank-vs-clear design question · the `factions on
+   locks` reclassification (writer = the dynamic key row since `73f00920`) · the
+   aiOverlayVerifier fence question · the sibling-ladder equality pin), PLUS measured
+   proposals for the three open Lane D rulings (`stresses` alias · `worldPulse.events`
+   provisional-(a) · the `eventLog` merging-vs-container question, 35 rows). Output:
+   scratchpad `laneI-SCHEMA6-charter.md`. The chair rules on its proposals; the mint
+   itself is a later two-commit pair. Transcript: session dir
+   `subagents/agent-a8951b72d20578f74.jsonl`.
 
 Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
 (task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
