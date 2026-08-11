@@ -603,3 +603,47 @@ the four odd links for now, that is also coherent — they are visible, not corr
 fallback · three stale references to a test file that does not exist ·
 `deriveRegionalState.js`'s dead `tradeRouteAccess on save` read · five duplicated
 `instId()` minters that disagree with the canonical join.
+
+---
+
+## §15 · TWO THINGS FROM THE DISPLAY CLUSTER (2026-08-11, landed `73f00920`)
+
+### 1. ⚠ YOUR EXIT-ROAD ORDER IS ONLY HALF CARRIED OUT, AND I WANT YOU TO KNOW WHY
+
+You said the labels should switch on "for every existing settlement." They now do —
+**for LINKED settlements**: 4 labels on a crossroads, 3 on road and port, 2 on river,
+1 on isolated, reading `→ Ashford` on the map with `trade partner` beneath it.
+
+**But a freshly generated settlement still shows no roads**, because the field the repair
+reads (`neighbourNetwork`) is filled by a DM's manual link or by `saves.js` at save time,
+and the import-side field has no writer at all. So the surface is lit wherever a
+neighbour binding exists, and generated worlds have none.
+
+**Lighting it for generated settlements is a different change** — it means binding
+neighbours during generation, which is same-seed territory and a genuine capability
+question, not a repair. **Say the word and I will scope it**; I did not assume it, because
+"switch on the labels" and "make generation bind neighbours" are not the same order.
+
+### 2. THE LOCK COPY — DRAFT FOR YOUR VETO
+
+The faction lock is wired and works. These four strings are the lane's draft, in the voice
+of the existing rows; **keep, rewrite, or replace freely** — the wiring is independent.
+
+| field | draft |
+|---|---|
+| `locked` | Locked. The ruling faction keeps the seat — a coup needs your approval first. |
+| `open` | A coup can take the seat from the ruling faction. |
+| `lockCta` | Keep them in power |
+| `unlockCta` | Allow a coup |
+
+Two register notes worth your eye: the other lock rows say *"a new roll"* because they
+guard the **dice**; this one guards the **seat**, so borrowing that phrasing would have
+been false. And the faction's name is deliberately **not** interpolated — the file's own
+header requires every string be vetoable as a whole sentence, so the row is instead
+**hidden** when no faction holds the seat.
+
+⭐ Worth knowing what this nearly shipped as: I had framed the fix as "one missing row",
+which was right about scope and **wrong about shape**. `coup.js` opens with an
+`Array.isArray` check, so a boolean row would have rendered "Locked", persisted, and
+**still let the coup auto-apply** — the exact lying surface the change exists to remove.
+The lane caught it and proved it with a mutant.
