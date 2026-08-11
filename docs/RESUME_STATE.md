@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 17:47:15 EDT
+**Generated:** 2026-08-11 17:59:30 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **4** |
-| ledger (main) | `review-fixes-2026-07-08` | `107e55f9` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `63c62822` | **5** |
+| ledger (main) | `review-fixes-2026-07-08` | `df146f5c` | **4601** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 33Gi free (83% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 97186: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Disk:** 33Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T174632` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T175733` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T174632
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T175733
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,16 +28,19 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
+ M tests/lint/sovereigntyLightingContract.walker.test.js
 ?? src/components/townMap/useTownCartographyBlock.js
 ?? src/lib/townScene/townCartographyBlock.js
 ?? tests/hooks/useTownCartographyBlock.test.jsx
 ?? tests/lib/townCartographyBlock.test.js
 ```
 ```
+  +24     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
 ```
+63c62822 2026-08-11 docs: four measured corrections — the espionage park, GR-3b's landing, the schema-2 Wave-1 literal, and F9's signature
 a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer folds the census
 56310497 2026-08-11 TC-5B promoted as the ruled split: the seam is READY, the mount waits on it
 c8931c03 2026-08-11 explanation.test.js was the seventh fixture manufacturing the settlement-root hook shape, and the sweep that retired six missed it
@@ -49,17 +52,16 @@ e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is c
 aed0fc0e 2026-08-11 The World Book's hook chapter, the campaign PDF's hook line and two fingerprints stop reading keys nothing writes
 aa585167 2026-08-11 The pglite contention cure is a REFUTATION: the five suites never collapsed
 ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it cannot mean
-36159389 2026-08-11 Schema 5 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
 ```
 ## Last 6 ledger commits
 
 ```
+df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
 40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
-72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -131,9 +133,17 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    schema-2-era STALE (Wave 0 unaffected), + the F9 four-doc contradiction (resolved per
    SOL_QUEUE's recorded reconciliation — the blanket grant governs). Recon:
    scratchpad `laneN-next-compile-recon.md` (405 lines).
-3. **Lane O (build, Opus) — the DOCS-DIVERGENCE BATCH (task #14)**, dispatched ~17:55:
-   the five corrections above, one commit, validate:packets held at 0. Transcript:
-   session dir `subagents/agent-a9554306d87e512af.jsonl`.
+3. **Lane O — ✅ COLLECTED (~18:00): four of five corrections landed** (`63c628228`,
+   6 files, +47/−10, chair-verified; validate:packets 0 before/after/committed). The
+   INDEX's ES-6a cell now records the owner-gate park in full so a build-branch-only
+   reader cannot conclude espionage is live; the GR doc carries GR-3b's landing sha; the
+   site-coherence Wave-1 literal is marked DO-NOT-APPLY with re-derive-at-compile; FOUR
+   (not three) stale F9 UNSIGNED spellings got pointers — ⚠ with a date correction the
+   chair adopts: the blanket GRANT is 2026-08-05, the SOL_QUEUE RECONCILIATION is
+   2026-08-09; the brief conflated them. Item 5 SKIPPED on a correctly-failed premise:
+   the slums mentions live on the LEDGER branch (this file, :163/:271 — the chair's own
+   restated lists) — **struck by the chair in this same edit.** Lane O's no-memory-race
+   JUDGMENT is RATIFIED. Transcript: session dir `subagents/agent-a9554306d87e512af.jsonl`.
 4. **Lane P (read-only draft, Opus) — the GR-4 PACKET DRAFT (task #15)**, dispatched
    ~17:55 per CR-NEXT-1. Output: scratchpad `laneP-GR-4-draft.md`; the chair reviews and
    promotes when a build slot frees. Transcript: session dir
@@ -160,7 +170,7 @@ parallel, rewrite this note, ledger-commit.
 **Queue after these lanes (chair order, unchanged):** chair rules on Lane B digest → marker
 clearing; chair rules on Lane D table → repair wave; TC-5b packet compile (NON-PRESENTATION
 tab seat); M6 follow-on freeze (CR-OSR-FREEZE-6-R1 — tool + negative control built);
-the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence 9 waves, slums,
+the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence 9 waves, ~~slums~~ (STRUCK — phantom),
 CV/TB/XW, first-paint JS reclaim); IA-2 revalidation folding the IA-3 docket.
 
 **Full delegation grant stands** (memory/full-delegation-grant-2026-08-10.md): carve-outs by
@@ -268,7 +278,7 @@ ES as a corruption-volume wave** — the ousted prune deletes the state in the S
 
 TC-5b/c/d (mount, PNG goldens, skins) · ES-6b (blocked: its dispatcher wave
 is unchartered) · the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence,
-slums, CV/TB/XW, first-paint) · IA-2 revalidation · **then the endgame in fixed order**:
+~~slums~~ (STRUCK 2026-08-11 — a phantom; zero docs, zero commits), CV/TB/XW, first-paint) · IA-2 revalidation · **then the endgame in fixed order**:
 dark-complete → diagnostic soak → repairs → the owner's walk → light flags + THE ONE REGEN
 → terminal soak → **THE TUNING SIGNATURE** → owner-confirmed pushes.
 ⛔ **The four owner carve-outs survive every delegation and every era:** external legal
