@@ -4,7 +4,8 @@
  * The JSON manifest is an instruction index, never proof that implementation
  * exists. Validation therefore closes the joins back to the human packet, the
  * implementation index, and the live source symbols before a READY packet can
- * produce a capsule.
+ * produce a capsule — and, once a packet is LANDED, back to the very files its
+ * CREATE rows claim to have produced.
  */
 
 import { createHash } from 'node:crypto';
@@ -455,6 +456,15 @@ export function validatePacketManifest(manifest, options = {}) {
       }
       if (row.action !== 'CREATE' && !fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist for ${String(row.action)}: ${row.path}`);
+      }
+      // A CREATE row is a promise; LANDED is the claim that the promise was kept. Before a
+      // packet lands the file must NOT exist — preflight asserts exactly that — and a
+      // SUPERSEDED packet may have been replaced before it ever built anything. LANDED is
+      // therefore the only status under which existence is assertable, and so the only status
+      // under which a fictional CREATE row is catchable. Without this arm a landed packet can
+      // name files that were never written, forever, and validation still reports `valid`.
+      if (row.action === 'CREATE' && status === 'LANDED' && !fileExists(rootDir, row.path)) {
+        addError(errors, `${at}.path does not exist for LANDED CREATE: ${row.path}`);
       }
     }
 

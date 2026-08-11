@@ -188,8 +188,21 @@ measurements; those are marked **MEASURED** with their receipt. The test-suite f
 | B3 | Dormancy golden green at base | included in B1 | **AUTHOR-TIME-UNMEASURED** — green |
 | B4 | Typecheck posture | `npm run typecheck:ratchet && npm run typecheck:domain:strict` | **AUTHOR-TIME-UNMEASURED** — exit 0 both configs, named separately (two-typechecker receipt law) |
 | B5 | Effective-line ceilings | `npx eslint --rule '{"max-lines":["error",{"max":1,"skipBlankLines":true,"skipComments":true}]}' <file>` | **MEASURED** — see §4b |
-| B6 | Sovereignty lighting census row | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` | **MEASURED (by read, not by run):** frozen row at `sovereigntyLightingContract.walker.test.js:3621` is `files: 2392, parked: 365, credited: 2027, titles: 19659, suiteTitles: 5552`. ⚠ `INDEX.md`'s ES-5d row states `19656` — **stale; the file is authority** |
+| B6 | Sovereignty lighting census row | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` | **CORRECTED 2026-08-11 per chair order; the census row in the walker is the source of truth.** Current row: `files: 2395, parked: 365, credited: 2030, titles: 19732, suiteTitles: 5568`. ⚠ The as-authored figure below was **two re-records stale**. ⚠ `INDEX.md`'s ES-5d row states `19656` — **stale; the file is authority** |
 | B7 | Render-blocking CSS headroom | `npm run build` then measure the one `index.html`-referenced stylesheet | **MEASURED at `58436804`: `dist/assets/index-CiMob2Ip.css` = `19,795 B` against `CSS_BUDGET_BYTES = 19_800` (`tests/build/firstPaintNonJs.test.js:37`) — `5 bytes` of headroom.** TC-5a's expected delta is `0` (no stylesheet, no component) |
+
+> **⛔ B6 CENSUS CORRECTION (2026-08-11, per chair order).** As authored at `58436804` this
+> row read `files: 2392, parked: 365, credited: 2027, titles: 19659, suiteTitles: 5552`, and
+> that figure went **two re-records stale**: TC-5a's own landing (`41b39220`) moved it to
+> `2393 / 365 / 2028 / 19696 / 5560`, and the ES-6a fold moved it to the current
+> `2395 / 365 / 2030 / 19732 / 5568`. **The census row in the walker is the source of
+> truth** — never this packet, and never `INDEX.md`. ⚠ Locate that row by its `files:` key
+> inside the `CENSUS` constant of
+> `tests/lint/sovereigntyLightingContract.walker.test.js`, **not by line number.** That is not
+> a stylistic preference: the row sat at `:3676` at `904b7bb0` and moved to `:3681` at
+> `73f5be96` **while this very correction was being written**, because a concurrent lane
+> committed five net lines above it. The five figures did not move; only the address did. A
+> hand-keyed address rots on the next commit above it, and the key does not.
 
 A red B1/B3 at base means the substrate drifted: STOP, this packet is `STALE`.
 
@@ -430,9 +443,12 @@ Generated artifacts: `NONE`. Do not edit `tests/fixtures/town-cartography-dorman
 
 - The one new test file moves the sovereignty lighting census. The implementer **re-derives
   all five figures in ONE run and re-records them whole** — never patching `files` alone
-  (the sequence hazard has fired three times). Current row, read at
-  `tests/lint/sovereigntyLightingContract.walker.test.js:3621`:
-  `2392 / 365 / 2027 / 19659 / 5552`. ⭐ Measure by adding a temporary `console.log` **inside
+  (the sequence hazard has fired three times). ⛔ **CORRECTED 2026-08-11 per chair order; the
+  census row in the walker is the source of truth.** Current row:
+  `2395 / 365 / 2030 / 19732 / 5568`. The as-authored `2392 / 365 / 2027 / 19659 / 5552` (read
+  at `:3621`) was **two re-records stale** — see the B6 correction in §4 for the two moves and
+  for why this row must be located by its `files:` key rather than by line number.
+  ⭐ Measure by adding a temporary `console.log` **inside
   the existing census test, before its first assertion**, so the probe mints no title and
   cannot move what it measures.
   ⛔ If a concurrent lane has uncommitted `it(`/`describe(` titles in the tree, re-deriving
@@ -502,10 +518,20 @@ pair can actually move. The matrix does not pretend otherwise.
 > ⚠ The **only** figures permitted to move are the five sovereignty-lighting-census numbers,
 > and only because §7 mandates one new test file. Their new values are recorded whole, in one
 > run, with the cause stated (§7).
-> ⚠ Two gate reds are **pre-existing at this base and are NOT this packet's**:
+> ⚠ Two gate reds were **pre-existing at this base and are NOT this packet's**:
 > `generatorGoldenMaster` (owner-approved SHIFT-2, registered not re-recorded) and
 > `observedShapeReaders.walker` (violations 1, stale 4). Attribute them; never chase them.
 > A third red is this packet's until proven otherwise against a committed-base run.
+>
+> **⛔ CORRECTED 2026-08-11 per chair order — THE SECOND ATTRIBUTION HAS EXPIRED, and a free
+> red that outlives its cause is how a live finding gets waved through.** The
+> `observedShapeReaders.walker` red stopped being pre-existing at the **schema-5 genesis**
+> (`ffc85a90`), which re-froze the instrument so it no longer reports what it cannot mean;
+> the baseline then re-froze **again at `904b7bb0`**, where the observed-shape baseline shrank
+> to `1977` as seventeen dead reader rows were removed for good. **Only `generatorGoldenMaster`
+> remains pre-existing.** An `observedShapeReaders` red observed at or after `ffc85a90` is a
+> LIVE finding belonging to whoever holds the lane — attribute nothing to this list without
+> re-deriving it against a committed base first.
 
 ---
 

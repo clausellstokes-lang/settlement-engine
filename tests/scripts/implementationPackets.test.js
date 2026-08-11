@@ -211,6 +211,36 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'STALE'));
     expect(errorText(validatePacketManifest(reused, { rootDir: root })))
       .toContain('duplicate change path across packets: src/alpha.js (P-1, P-2)');
+
+    // ── AND A LANDED PACKET'S `CREATE` ROWS MUST NAME FILES THAT REALLY EXIST ──────────
+    // `CREATE` used to be exempt from every existence check at EVERY status, so a landed
+    // packet's manifest row could name a file nobody ever wrote and validation still
+    // reported `valid` — a disabled guard, and the one that let TC-5A carry three fictional
+    // paths from its landing onward. LANDED is the only status at which existence is
+    // assertable, which is why this lives beside the terminal-status cases above rather than
+    // beside the path checks: a nonterminal packet's CREATE target is REQUIRED to be absent,
+    // and a SUPERSEDED packet may have been replaced before it ever built anything. Both
+    // controls are asserted, so the arm cannot quietly widen to a status where reddening it
+    // would break every ordinary pre-landing dispatch.
+    const created = clone(manifest);
+    created.packets[0].changeManifest.push({ action: 'CREATE', path: 'src/never-written.js' });
+    write(root, 'docs/implementation/packets/P-2.md', packetMarkdown('P-2', 'BLOCKED'));
+    /** @param {string} status */
+    const validateAtStatus = (status) => {
+      created.packets[0].status = status;
+      write(root, INDEX_PATH, [
+        '| Packet | Status |',
+        '|---|---|',
+        `| [P-1](./packets/P-1.md) | ${status} |`,
+        '| [P-2](./packets/P-2.md) | BLOCKED |',
+      ].join('\n'));
+      write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', status));
+      return validatePacketManifest(created, { rootDir: root });
+    };
+    expect(errorText(validateAtStatus('LANDED')))
+      .toContain('changeManifest[1].path does not exist for LANDED CREATE: src/never-written.js');
+    expect(validateAtStatus('SUPERSEDED')).toEqual({ ok: true, errors: [] });
+    expect(validateAtStatus('READY')).toEqual({ ok: true, errors: [] });
   });
 
   it('rejects index, packet status, heading, and verified-base disagreement', () => {
