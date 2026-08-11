@@ -179,6 +179,20 @@ is not a verdict.**
    step. Ready-made tooling from the deferral round is reused, not rebuilt.
    Report: tasks/a85a19d3459834398.output.
 
+⚠⚠ **THE MAIN WORKTREE MATCHES NO BRANCH — reported as OWNER_DECISION_QUEUE §13
+(`158624de`), NOT repaired** (memory/main-worktree-matches-no-branch.md). The Desktop tree
+is on the ledger branch but differs from its own HEAD by **4,537 files**, from the build
+branch by 4,538, from master by 2,255 — closest to master, identical to nothing. Cause and
+date unknown. ⚠⚠ **In that tree `git status` is NOT a safety check and `git commit -a`
+would commit thousands.** The private-index method is what makes ledger commits safe and is
+NOT optional — it starts from `read-tree HEAD`, so it is immune to the default index; every
+ledger commit this session lands exactly 1 file, verified. ⚠ DISCLOSED: the default index
+was FULLY staged (~5,350 paths) and I reset it to HEAD — no content touched, one
+`git add -A` to reproduce, but said out loud in case it was deliberate. ⚠ A harmless EMPTY
+commit `333fbf49` shares the real one's message: **chain plumbing with `&&`, not `;`, or a
+failed `add` still commits.** ⛔ Do NOT "fix" the tree — the build worktree is clean and is
+where all work happens.
+
 **Ruled and sequenced (not blocked):**
 
 - **⭐ THE OSR PROGRAM'S REMAINING TAIL, now all unblocked by the genesis:** the 23
