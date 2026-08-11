@@ -158,85 +158,45 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (TWO lanes out; build tree at `73f00920`):**
+**Live board (BOTH slots FREE; build tree CLEAN at `58436804`):**
 
-1. **✅✅ ES-5d IS LANDED @ `954592c0` + records `53fb10da`/`0dc40691` — THE ES-5
-   AMENDMENT IS COMPLETE ACROSS FOUR WAVES** (5a doctrine, 5b bench, 5c register, 5d
-   credit). validate:packets **12 packets / 0 READY**. Zero moved goldens (enumerated
-   list EMPTY, five dormancy goldens green); 20 files / 228 tests exit 0; both
-   typecheckers at exact floors with ZERO debt added; the anchor walker gains NO NEW ROWS
-   because both new test files use zero scanned negative matchers.
-   ⚠⚠ **THE PACKET'S HANDOFF WINDOW WAS PROVABLY DEAD — AND I RULED IT IN** (deviation
-   D7; memory/a-handoff-window-can-be-provably-dead.md). §5/§5b/§6.1, case A5 AND the
-   design volume all mandated `depositTick === tick - 1`. But
-   `simulateCampaignWorldPulse` calls the depositing pass and the consuming chain
-   **unconditionally, in that order, in ONE function body, both handed the SAME tick** —
-   so a `tick-1` window prunes T−1's records before the consumer at T ever looks. **THE
-   FOLD NEVER FIRES ON ANY WORLD WHILE EVERY UNIT PIN STAYS GREEN.** A feature that
-   ships, passes, and does nothing.
-   ⭐ **How the error was inherited, and the lesson: the packet TRANSFERRED a REAL lag
-   from a DIFFERENT writer/reader PAIR** (the whereabouts mirror, written by
-   `advanceRoads` LAST). **A lag is a property of a PAIR, never of a file or a volume.**
-   Cure was machinery, not vigilance: copy the same-tick twin that already sat ONE LINE
-   ABOVE (`readGratitudeBondEvents` — "generosity ran earlier THIS tick"), and **A5 now
-   ASSERTS THE PULSE CALL ORDER AT SOURCE** so a reorder REDS instead of silently killing
-   the feature.
-   ⭐ **THE CLASSIFICATION MUTANTS PROVED THE FAILS-OPEN HAZARD LIVE:** dropping the
-   TRACKED key reds the coverage walker — but dropping the `counts` entry or the
-   `MOVER_PRESENCE` row leaves **the walker GREEN** and only the behavioral pin bites.
-   Exactly why CR-ES5D-O4 demanded a behavioral pin with two mutants.
-   ⭐ Lifecycle DRIVEN not reasoned; the prune arm is pinned — after a credit-free pass
-   the key is gone AND THE NAMESPACE WITH IT. End-to-end on a REAL minted mission:
-   `{"ashford:npc.reeve":{"credit":0.15,"depositTick":13,"grade":"met"}}`.
-   ⭐⭐ **AND ITS CENSUS RE-DERIVATION NAMED THE FILE NOBODY COULD IDENTIFY** —
-   `tests/lib/roadNetworkIndex.test.js`, parked via `test.each()` by MY `0f85ced0`
-   landing and never banked. **That closes my open census question.** New row
-   `2392/365/2027/19656/5552`, derived TWICE independently (live probe + archive-plus-
-   delta) — and **that agreement IS the negative control**.
-2. **EXIT-ROAD LABELLING LANE (Opus) — dispatched.** ⭐ **THE OWNER APPROVED THE
-   RECOMMENDATION: generation will NOT bind neighbours** (queue §15a, `951662de`).
-   **The reasoning, so it is not re-litigated:** neighbours are a CAMPAIGN-LAYER concept
-   (`regionalGraph.js` holds the real ones) and `neighborRelationship` is an **INPUT** to
-   generation (`config.neighborRelationship`, consumed by `historyGenerator.js:343`,
-   `priorityHelpers.js:373`, `institutionProbability.js:266`), **not an output**. A lone
-   settlement has no neighbours **because nothing has said it does** — the model being
-   honest, not a gap. Binding them would **mint named places with no data behind them —
-   the PRODUCT-LEVEL form of the reader-with-no-writer class this program has spent
-   itself eliminating** — and would change same-seed output for every world ever made, in
-   exchange for a cosmetic label. A poor trade against [[the-promise-ratified]].
-   **What ships instead — labels degrade HONESTLY:** a linked neighbour keeps its name;
-   no link but a configured relationship shows the relationship WITHOUT a place (from its
-   real closed vocabulary, never invented); neither shows the road's OWN facts
-   (direction / terrain / road type); and **no exit roads at all HIDES the section**,
-   because an absent section is honest while an empty heading implies missing data.
-   ⚠⚠ **The pin that matters most: nothing downstream may treat a label as an ENTITY** —
-   the moment something joins on that string the bug is rebuilt, so a mutant-driven guard
-   asserts a label never mints, joins on, or persists a settlement identity.
-   ⭐ **THE FLIP CONDITION IS RECORDED:** if the product moves toward regions as
-   first-class, binding neighbours at generation becomes CORRECT and this ruling should be
-   REVISITED, not worked around. The question was never "should roads have labels" — it is
-   **"does a generated settlement exist in a place, or by itself?"**
-   ⚠ The label copy is the owner's: drafted in the surrounding voice, presented as a DRAFT
-   FOR VETO; the mechanism lands either way. Report: tasks/a049c0a9338ad10ad.output.
+**✅ ES-5d LANDED @ `954592c0` — THE ES-5 AMENDMENT IS COMPLETE ACROSS FOUR WAVES.**
+⚠⚠ Its packet's handoff window was PROVABLY DEAD and I ruled it in: a `tick-1` window
+between two passes that run **in the same pulse, in that order, on the same tick**, so
+**the fold never fires while every unit pin stays green.** The error came from
+transferring a REAL lag off a DIFFERENT writer/reader pair — **a lag belongs to a PAIR,
+never a file or a volume.** Cure is machinery: A5 now ASSERTS THE PULSE CALL ORDER AT
+SOURCE. (memory/a-handoff-window-can-be-provably-dead.md)
 
-**⛔⛔ TWO THINGS BLOCK THE NEXT OSR RE-FREEZE — the first is MINE:**
-- **THE LIGHTING CENSUS IS ALREADY RED AT PRISTINE `0f85ced0`, before any lane edited.**
-  Base measures `2389/365/2024/19610/5542` vs the pinned `2389/364/2025/19610/5543` — ONE
-  FILE FLIPPED credited→parked carrying exactly one suite title. **I landed `0f85ced0`
-  without re-deriving the census — the same class of error as `78d136a1`, second
-  occurrence.** ⭐ The lane REFUSED to re-record it, correctly: that would launder an
-  unexplained foreign change into its own commit. Its own delta closes exactly
-  (+1 file / +0 parked / +1 credited / +12 titles / +2 suiteTitles).
-  **NEXT ACT: identify the flipped file (needs a parked-set diff over a ~1,944-file
-  window), then re-derive all five.**
-- **The observed-shape change is NOT a pure shrink:** stale 4 **plus violations 1** — a
-  NEW `neighbourNetwork on settlement` identity that is already baselined in 20+ files
-  INCLUDING ITS OWN WRITER, because the detector's corpus walks only GENERATION while the
-  key is minted at SAVE TIME. Net effect is a size-neutral row swap, but the walker's rule
-  says "never add an identity", so **`--write` may REFUSE**.
-⚠ The never-census-a-live-shared-tree law fired AGAIN: the lane's first reading was
-contaminated by the concurrent lane writing three files mid-measurement; it re-measured on
-isolated archive trees. ⚠ The harness greenwash fired a **THIRD** time today.
+**✅ THE EXIT-ROAD WORK IS FINISHED @ `58436804` — BY REFUSAL, and my design was wrong on
+THREE OF FOUR CASES** (queue §15b, `5665e04d`). I told the lane to refuse forward if the
+fields I assumed did not exist. **They do not.** No `src/` file changed; what landed is
+the evidence plus three pins and the entity guard.
+- **A road is `{id, from, to, weight}` and nothing else** — probed across 8 configurations;
+  `weight` is ONE settlement-wide value (zero per-edge information), `id` a positional
+  index. No direction, type, name or destination exists anywhere.
+- ⚠⚠ **THE BEARING IS A LAYOUT ARTIFACT: gate offsets come from THE PLANNER'S RETRY
+  COUNTER** (the source comment says so). The same settlement's first road leaves due
+  north under v2 and NNE under v1. **Labelling it "north" would publish a retry counter as
+  a compass bearing.**
+- ⭐ **THE RELATIONSHIP CASE WAS UNREACHABLE, and this is the sharpest catch of the run:
+  the branch I specified would have been A READER WITH NO WRITER, BUILT TO SATISFY A
+  RULING AGAINST BUILDING READERS WITH NO WRITERS** — its only independent input is
+  WRITER-LESS BY DESIGN since R-5b retired its picker.
+- **Hiding the empty section was ALREADY CORRECT**; my premise was wrong twice (it never
+  rendered empty — it rendered nothing) and the walker was GREEN at base, not red.
+⭐ The mutants caught the lane's OWN draft lying twice: anchoring on the NAME is wrong
+because the name is what an id-leak corrupts, and **`toContain` over an ARRAY is
+exact-element equality**, so a smuggled id passed clean.
+⚠ **ONE TASTE CALL LEFT FOR THE OWNER:** whether "Roads out — Three approaches. No
+neighbour is recorded yet." beats an absent section. It REVERSES hide-when-empty. My lean
+is recorded (leave it absent); the decision is the owner's.
+
+⚠⚠⚠ **`MEMORY.md` HAD SILENTLY OVERFLOWED ITS READ LIMIT** (~26KB vs ~17.1KB), so **its
+TAIL — the NEWEST hazards — was already invisible to every session.** Repaired by LOSSLESS
+folding into four archive files, verified line-by-line: **zero lines lost, 17,080 bytes,
+zero broken links.** ⚠ Treat ~17KB as a HARD ceiling and fold BEFORE appending near it —
+an index that overflows does not degrade gracefully, **it truncates the future.**
 
 **Ruled and sequenced (not blocked):**
 
