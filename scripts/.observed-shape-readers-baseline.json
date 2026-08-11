@@ -27,15 +27,15 @@
  },
  "digests": {
   "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "d327bf1ec937e9a16424c1d828ea0aac61ebba811c5790f3a24b4c9631d1538a",
-  "manifests": "1a1d5ccbc7aaa4c6d7dcb4da8b5aee23003b04dd5a8e423e43dfc48d4c386db1",
+  "inventory": "0d0b018c1d9d7fbe3991fb51ba42301de0fa9cac8a065f324e8ccb7be1c1e6f0",
+  "manifests": "88a80ee376fec767a00b3bfbc4331c19e328427ce24621f9ea9d3c5d17fa917a",
   "migrationReview": "5bb503d489e4c8240d4973323c11cabee058b41f7ae86ffcfcf9b9d69cd02a3f",
-  "scanStats": "04bd233fd3d6a0efc1bee58b3d5f62ef46a587fdd0433b139c040fd1eec79b38",
-  "sentinel": "2e2d344ff23807acd3321645c17c142f158e5f94fa98aa8969bf72679dfbfdce"
+  "scanStats": "c2d7df08cde5cb6f357612cdf3e17c848eebaa1abd3463dfff460ee0b5634e45",
+  "sentinel": "4ea28074d8414e3b917c7b525a0f6a3dcfdcdd838d8b8b003c4076825e3a2b41"
  },
  "frozen": "2026-08-11",
- "frozenAtSha": "aed0fc0e4a060d076c3e6e68b199fc22aa7aa06a",
- "identities": 1396,
+ "frozenAtSha": "b0912f7f13eb4cdadda472d4800d1c065213ba3a",
+ "identities": 1394,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -46,7 +46,6 @@
   "src/components/OutputContainer.jsx": {
    "canonizedAt on campaignState": 1,
    "primaryDeitySnapshot on config": 2,
-   "recentEvents on settlement": 1,
    "startedAt on campaignState": 1,
    "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
@@ -2122,7 +2121,6 @@
   },
   "src/store/aiChronicleContext.js": {
    "canonizedAt on campaignState": 1,
-   "recentEvents on settlement": 1,
    "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
   },
@@ -2290,7 +2288,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "5790efdef9817bf0bde095533ff9092660a2fc0812ca6098bb4785d37f9d8778",
+   "digest": "a210dc6c9f52d3bb91d58e2f7450e39f742a5bfd9030f75d6df524ee1730d50e",
    "entries": [
     {
      "mode": "100644",
@@ -2687,8 +2685,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "972a3bf949c19bac18226c3881daac0ba8d28e07de9b5fbf1135f79cce543ebb",
-     "size": 63991,
+     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
+     "size": 64377,
      "type": "file"
     },
     {
@@ -3590,8 +3588,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
-     "size": 10323,
+     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
+     "size": 10554,
      "type": "file"
     },
     {
@@ -6725,6 +6723,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/townMap/useTownCartographyBlock.js",
+     "sha256": "8a7f235c7485c2d47a3035e9886809fc3bce217ba53ff8e0003d4629fa2b1be6",
+     "size": 7235,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/townMap/useTownMapPresentation.js",
      "sha256": "0dd63dec94cbfd17ee29588d2378d6161675d9e3dc23457051f27890525bd618",
      "size": 9606,
@@ -8924,8 +8929,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/settlementWorldChronicle.js",
-     "sha256": "d42b3e9c099b1c4125f8ef4278b4ad3400997d7446282f480829bfb7f846e21b",
-     "size": 7778,
+     "sha256": "9dea11e808ff42ce059a7003de19ebc9f05dabc8d7cdf4ce70654080bc442176",
+     "size": 7965,
      "type": "file"
     },
     {
@@ -9379,8 +9384,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
-     "size": 16141,
+     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
+     "size": 16477,
      "type": "file"
     },
     {
@@ -13894,8 +13899,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
-     "size": 15303,
+     "sha256": "d75e1bf465d0e5ea57b1eb9d31b9f036e38b1630edd0658131beb63fd31b4ee5",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -15972,6 +15977,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/lib/townScene/townCartographyBlock.js",
+     "sha256": "92d88f8e1cc73063dc8e84ba4048750dfdd032b2994cf24f5fbde42611a27a44",
+     "size": 4583,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/lib/townScene/townSceneExport.js",
      "sha256": "c1ca95bc615c3e7eaca797058320dc5d29f1430da8e0eb30bc8eee2206009687",
      "size": 5807,
@@ -16414,8 +16426,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiChronicleContext.js",
-     "sha256": "cadf1369509b457d81adb1020c2e5dfb29c2632fee29a14c65070c55d9bb579e",
-     "size": 1180,
+     "sha256": "316a7e1c844c1a0cea3780173639dc248cec15647be0fa85e383d39a1333b1cb",
+     "size": 3122,
      "type": "file"
     },
     {
@@ -16449,8 +16461,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiSlice.js",
-     "sha256": "0f3272c93fd39b903f6c6b85da128eeb2aa09fb1ffdfebd508d538fad7fefb4c",
-     "size": 51974,
+     "sha256": "a285d22e398f268f5c4b492767740936646cd73be050dc686938d3256a9f6253",
+     "size": 52795,
      "type": "file"
     },
     {
@@ -17087,7 +17099,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "5016cebf779030bace4f2948bd8e92f8cb498e940b822a74f3778f82cb8ecbab",
+   "digest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
    "entries": [
     {
      "mode": "100644",
@@ -17414,8 +17426,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "972a3bf949c19bac18226c3881daac0ba8d28e07de9b5fbf1135f79cce543ebb",
-     "size": 63991,
+     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
+     "size": 64377,
      "type": "file"
     },
     {
@@ -18317,8 +18329,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
-     "size": 10323,
+     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
+     "size": 10554,
      "type": "file"
     },
     {
@@ -21452,6 +21464,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/townMap/useTownCartographyBlock.js",
+     "sha256": "8a7f235c7485c2d47a3035e9886809fc3bce217ba53ff8e0003d4629fa2b1be6",
+     "size": 7235,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/townMap/useTownMapPresentation.js",
      "sha256": "0dd63dec94cbfd17ee29588d2378d6161675d9e3dc23457051f27890525bd618",
      "size": 9606,
@@ -23560,8 +23579,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/settlementWorldChronicle.js",
-     "sha256": "d42b3e9c099b1c4125f8ef4278b4ad3400997d7446282f480829bfb7f846e21b",
-     "size": 7778,
+     "sha256": "9dea11e808ff42ce059a7003de19ebc9f05dabc8d7cdf4ce70654080bc442176",
+     "size": 7965,
      "type": "file"
     },
     {
@@ -24015,8 +24034,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
-     "size": 16141,
+     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
+     "size": 16477,
      "type": "file"
     },
     {
@@ -28530,8 +28549,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
-     "size": 15303,
+     "sha256": "d75e1bf465d0e5ea57b1eb9d31b9f036e38b1630edd0658131beb63fd31b4ee5",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -30608,6 +30627,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/lib/townScene/townCartographyBlock.js",
+     "sha256": "92d88f8e1cc73063dc8e84ba4048750dfdd032b2994cf24f5fbde42611a27a44",
+     "size": 4583,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/lib/townScene/townSceneExport.js",
      "sha256": "c1ca95bc615c3e7eaca797058320dc5d29f1430da8e0eb30bc8eee2206009687",
      "size": 5807,
@@ -31050,8 +31076,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiChronicleContext.js",
-     "sha256": "cadf1369509b457d81adb1020c2e5dfb29c2632fee29a14c65070c55d9bb579e",
-     "size": 1180,
+     "sha256": "316a7e1c844c1a0cea3780173639dc248cec15647be0fa85e383d39a1333b1cb",
+     "size": 3122,
      "type": "file"
     },
     {
@@ -31085,8 +31111,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiSlice.js",
-     "sha256": "0f3272c93fd39b903f6c6b85da128eeb2aa09fb1ffdfebd508d538fad7fefb4c",
-     "size": 51974,
+     "sha256": "a285d22e398f268f5c4b492767740936646cd73be050dc686938d3256a9f6253",
+     "size": 52795,
      "type": "file"
     },
     {
@@ -31716,7 +31742,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "3432cf2d9e8b176f2cf631570f532f83a7cf3de549eecb47655c4cd09b81dd44",
+   "digest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
    "entries": [
     {
      "mode": "100644",
@@ -32043,8 +32069,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "972a3bf949c19bac18226c3881daac0ba8d28e07de9b5fbf1135f79cce543ebb",
-     "size": 63991,
+     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
+     "size": 64377,
      "type": "file"
     },
     {
@@ -32946,8 +32972,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
-     "size": 10323,
+     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
+     "size": 10554,
      "type": "file"
     },
     {
@@ -36077,6 +36103,13 @@
      "path": "src/components/townMap/useMapLayerAnalytics.js",
      "sha256": "8fd6ee06ab5a162dbf56a1eb03afde9efba1588697b69e46a26473e6ddfd882c",
      "size": 2088,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/townMap/useTownCartographyBlock.js",
+     "sha256": "8a7f235c7485c2d47a3035e9886809fc3bce217ba53ff8e0003d4629fa2b1be6",
+     "size": 7235,
      "type": "file"
     },
     {
@@ -38280,8 +38313,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/settlementWorldChronicle.js",
-     "sha256": "d42b3e9c099b1c4125f8ef4278b4ad3400997d7446282f480829bfb7f846e21b",
-     "size": 7778,
+     "sha256": "9dea11e808ff42ce059a7003de19ebc9f05dabc8d7cdf4ce70654080bc442176",
+     "size": 7965,
      "type": "file"
     },
     {
@@ -38735,8 +38768,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
-     "size": 16141,
+     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
+     "size": 16477,
      "type": "file"
     },
     {
@@ -43250,8 +43283,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
-     "size": 15303,
+     "sha256": "d75e1bf465d0e5ea57b1eb9d31b9f036e38b1630edd0658131beb63fd31b4ee5",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -45328,6 +45361,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/lib/townScene/townCartographyBlock.js",
+     "sha256": "92d88f8e1cc73063dc8e84ba4048750dfdd032b2994cf24f5fbde42611a27a44",
+     "size": 4583,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/lib/townScene/townSceneExport.js",
      "sha256": "c1ca95bc615c3e7eaca797058320dc5d29f1430da8e0eb30bc8eee2206009687",
      "size": 5807,
@@ -45770,8 +45810,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiChronicleContext.js",
-     "sha256": "cadf1369509b457d81adb1020c2e5dfb29c2632fee29a14c65070c55d9bb579e",
-     "size": 1180,
+     "sha256": "316a7e1c844c1a0cea3780173639dc248cec15647be0fa85e383d39a1333b1cb",
+     "size": 3122,
      "type": "file"
     },
     {
@@ -45805,8 +45845,8 @@
     {
      "mode": "100644",
      "path": "src/store/aiSlice.js",
-     "sha256": "0f3272c93fd39b903f6c6b85da128eeb2aa09fb1ffdfebd508d538fad7fefb4c",
-     "size": 51974,
+     "sha256": "a285d22e398f268f5c4b492767740936646cd73be050dc686938d3256a9f6253",
+     "size": 52795,
      "type": "file"
     },
     {
@@ -46464,23 +46504,23 @@
  "minRows": 40,
  "originMinRows": 8,
  "scanStats": {
-  "files": 2089,
-  "reads": 120556,
-  "resolved": 9231,
-  "unresolved": 111325
+  "files": 2091,
+  "reads": 120589,
+  "resolved": 9230,
+  "unresolved": 111359
  },
  "scannerProvenance": {
   "detectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
-  "executionTreeDigest": "5790efdef9817bf0bde095533ff9092660a2fc0812ca6098bb4785d37f9d8778",
-  "scanTreeDigest": "5016cebf779030bace4f2948bd8e92f8cb498e940b822a74f3778f82cb8ecbab",
-  "sourceTreeDigest": "3432cf2d9e8b176f2cf631570f532f83a7cf3de549eecb47655c4cd09b81dd44",
+  "executionTreeDigest": "a210dc6c9f52d3bb91d58e2f7450e39f742a5bfd9030f75d6df524ee1730d50e",
+  "scanTreeDigest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
+  "sourceTreeDigest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
  "schema": 5,
  "sentinel": {
-  "resolvedReads": 9231,
+  "resolvedReads": 9230,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 1977
+ "total": 1975
 }
