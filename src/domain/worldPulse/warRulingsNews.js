@@ -246,7 +246,11 @@ function weight(significance) {
 export function warRulingNewsEntry({ evidence = null, snapshot = null, now = null } = {}) {
   const row = flattenEvidence(evidence);
   const kind = text(row.kind);
-  const sourceEventId = text(row.sourceEventId || row.evidenceId || row.id);
+  // The `evidenceId` arm was deleted as writerless: the plural `evidenceIds` (an
+  // array, on negotiation-picture and provisioning-record shapes) is the only
+  // spelling any writer produces, and `git log -S "evidenceId:"` finds no assignment
+  // of the singular on any branch. All four ruling-evidence producers write `id`.
+  const sourceEventId = text(row.sourceEventId || row.id);
   const tick = wholeTick(row.tick);
   if (!KIND_SET.has(kind) || !sourceEventId || tick == null || !interestAllows(kind, row)) return null;
 

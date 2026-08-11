@@ -77,7 +77,10 @@ export function normalizeWarCoalitionEvidence(evidence, fallback = {}) {
   const kind = KIND_SET.has(directKind) ? directKind : text(receipt.kind);
   if (!KIND_SET.has(kind)) return null;
 
-  const id = text(merged.id || merged.sourceEventId || merged.evidenceId || fallback.sourceId);
+  // The `evidenceId` arm was deleted as writerless (only the plural `evidenceIds`
+  // array is ever written, and never on this shape). The other three arms are live:
+  // producers write `id`, the relationship graph writes `sourceEventId`.
+  const id = text(merged.id || merged.sourceEventId || fallback.sourceId);
   const tick = wholeTick(merged.tick ?? fallback.tick);
   const settlementId = text(merged.settlementId || merged.actorId || merged.attackerId);
   const callerId = text(merged.callerId);

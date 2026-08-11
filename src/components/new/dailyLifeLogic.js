@@ -137,7 +137,13 @@ export function extractSettlementContext(s) {
     // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
     // generateConflicts) — description/type exist only on legacy/edge shapes.
     conflicts: conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
-    tensions: tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
+    // Unlike the conflicts line above, `t.title` was NOT a legacy-shape tolerance: a
+    // currentTensions entry carries exactly {type, description, factions,
+    // lastingEffects, plotHooks, severity} (historyData.HISTORICAL_EVENTS_DATA), the
+    // user-edit allowlist admits only `description`, and the AI merge writes only
+    // `description`. `title` is not even among the import-tolerance spellings
+    // historyBeats declares (label/name/text), so the arm was deleted as writerless.
+    tensions: tensions.slice(0, 3).map(t => t.type).filter(Boolean),
     foodDeficit,
     foodSurplus,
     safetyScore,

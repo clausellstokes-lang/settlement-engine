@@ -381,7 +381,9 @@ export function sovereigntyNewsEntry({ evidence = null, snapshot = null, now = n
   // The writer mints no receipt id — the conveyance IS the treaty's, not the feed's — so
   // the source ref is DERIVED from the fact's own address when none travels with it.
   // Same parties, same asset, same tick ⇒ same id, which is what folds a duplicate.
-  const sourceEventId = text(row.sourceEventId || row.evidenceId || row.id)
+  // (The `evidenceId` arm was deleted as writerless — only the plural `evidenceIds`
+  // array is ever written, and never on a sovereignty seed or beat.)
+  const sourceEventId = text(row.sourceEventId || row.id)
     || [kind, assetId, sellerId, buyerId, tick].filter(Boolean).map(String).join('.');
   if (!sourceEventId || !assetId) return null;
 

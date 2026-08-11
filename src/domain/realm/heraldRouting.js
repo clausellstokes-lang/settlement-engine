@@ -476,22 +476,49 @@ export function routingKeyOf(record = {}) {
   );
 }
 
+/**
+ * ⚠ THE `__adjudicationPending` / `__resolution` / `__forecast` MARKER ARMS WERE
+ * DELETED, NOT DISABLED (2026-08-11). Same finding shape as heraldFeed's `decreed`
+ * arm, and the same verdict for a stronger reason.
+ *
+ * All three had ZERO writers between them — not production, not test, not fixture,
+ * and `git log -S` finds none on any branch: they were born as reads. But unwritten
+ * alone would not settle it, because a `__`-prefixed marker is precisely the kind of
+ * key a caller attaches to a WRAPPER object at the call site, with nothing persisted
+ * and no shape widened. The decisive evidence is that the caller which would have
+ * used them exists, was written, and chose the structural path instead:
+ * heraldFeed.js `buildHeraldFeed` builds exactly such wrapper records for stressors
+ * (`{ ...stressor, stressor, headline }`) and files emerging ones to divination —
+ * through `lifecycleStage`, never through `__forecast`. The capability these markers
+ * offered is therefore not missing; it ships through the structural `status` /
+ * `lifecycleStage` fields, and a second redundant spelling of it was dead weight
+ * inviting two sources of truth for one routing decision.
+ *
+ * `isPendingDecision` lost its whole second disjunct rather than one conjunct: every
+ * term in it was gated behind `__adjudicationPending === true`, so the surviving
+ * `proposalPayload` / non-terminal-status guard was unreachable and keeping a guard
+ * that can never run would misrepresent it as live. A pending proposal still routes
+ * to adjudication through `status === 'pending'`, which is what every producer writes.
+ *
+ * @enforced-by tests/domain/deadReaderRepairs.test.js (a negative control feeds ONLY
+ *   the dead marker spelling, so re-adding any of these as an extra OR-arm reds).
+ */
+
 /** @param {Record<string, unknown>} r @returns {boolean} a pending decision awaiting the DM. */
 function isPendingDecision(r) {
-  return tokenStr(r.status) === 'pending'
-    || (!!r.proposalPayload && tokenStr(r.status) !== 'applied' && tokenStr(r.status) !== 'dismissed' && tokenStr(r.status) !== 'resolved' && r.__adjudicationPending === true);
+  return tokenStr(r.status) === 'pending';
 }
 
 /** @param {Record<string, unknown>} r @returns {boolean} a resolved ruling (manual or autoresolve) for the decisions log. */
 function isResolution(r) {
   const s = tokenStr(r.status);
-  return s === 'resolved' || s === 'applied_by_dm' || r.__resolution === true;
+  return s === 'resolved' || s === 'applied_by_dm';
 }
 
 /** @param {Record<string, unknown>} r @returns {boolean} an emerging-stage stressor / rising-pressure signal. */
 function isEmergingForecast(r) {
   const stressor = /** @type {Record<string, unknown>} */ (r.stressor && typeof r.stressor === 'object' ? r.stressor : r);
-  return tokenStr(stressor.lifecycleStage) === 'emerging' || r.__forecast === true;
+  return tokenStr(stressor.lifecycleStage) === 'emerging';
 }
 
 /**
@@ -503,9 +530,11 @@ function isEmergingForecast(r) {
  *   4. an authored Wizard News receipt with a valid governed `section` keeps it.
  *   5. otherwise → SECTION_OF(routingKeyOf(record)) — filed by content.
  *
- * The `__adjudicationPending` / `__resolution` / `__forecast` markers let a caller
- * that already knows a record's role tag it explicitly; without them the status /
- * lifecycleStage fields decide.
+ * The status / lifecycleStage fields decide steps 1-3 on their own. A caller that
+ * already knows a record's role does NOT tag it with a marker key — the three
+ * `__`-prefixed marker arms that once offered that were deleted as writerless (see
+ * the note above isPendingDecision); heraldFeed pins a section by passing
+ * `toHeraldItem`'s `forced` argument, which never touches the record's own shape.
  *
  * @param {Record<string, unknown>} [record]
  * @returns {HeraldSection}

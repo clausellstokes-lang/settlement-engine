@@ -391,7 +391,14 @@ function significanceOf(semantic) {
   return 0.35;
 }
 
-/** @param {Record<string, unknown>} semantic @returns {TemporalPhase|null} */
+/**
+ * ⚠ The `__forecast` marker arm was DELETED here as writerless, together with this
+ * file's `__resolution` arm (resolutionStateOf) and the three sibling arms in
+ * heraldRouting.js — see the note above `isPendingDecision` there for the full
+ * reasoning. The three structural stage spellings below are the live discriminator.
+ *
+ * @param {Record<string, unknown>} semantic @returns {TemporalPhase|null}
+ */
 function explicitEmergingPhase(semantic) {
   for (const candidate of nestedSemanticRecords(semantic)) {
     const stage = textOf(
@@ -399,7 +406,7 @@ function explicitEmergingPhase(semantic) {
       ?? candidate.phase
       ?? candidate.temporalPhase,
     );
-    if (stage === 'emerging' || candidate.__forecast === true) return 'emerging';
+    if (stage === 'emerging') return 'emerging';
   }
   return null;
 }
@@ -440,10 +447,9 @@ function resolutionStateOf(semantic) {
     return 'dismissed';
   }
   if (status === 'superseded' || status === 'expired') return 'superseded';
-  if (
-    ['applied', 'applied_by_dm', 'refused', 'resolved', 'completed'].includes(status)
-    || semantic.__resolution === true
-  ) {
+  // The `__resolution` marker arm was deleted here as writerless (see
+  // explicitEmergingPhase above); this status allowlist is the live discriminator.
+  if (['applied', 'applied_by_dm', 'refused', 'resolved', 'completed'].includes(status)) {
     return 'resolved';
   }
   return 'unresolved';

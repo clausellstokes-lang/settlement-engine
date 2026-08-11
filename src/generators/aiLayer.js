@@ -172,7 +172,10 @@ export function extractFullContext(s) {
     // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
     // generateConflicts) — description/type exist only on legacy/edge shapes.
     conflicts:    conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
-    tensions:     tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
+    // `t.title` deleted as writerless — see dailyLifeLogic.js for the key-set proof.
+    // Byte-identical prompt output: a tension has never carried `title`, so this
+    // expression already evaluated to `t.type` on every record the engine can build.
+    tensions:     tensions.slice(0, 3).map(t => t.type).filter(Boolean),
 
     // NPCs
     npcsCount:    npcs.length,

@@ -354,10 +354,22 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * as rows are triaged and cured, which is the direction the ratchet exists to
    * permit; the frozen inventory's matching nine rows are deleted by the
    * `--write` re-freeze, which only runs from a committed tree.
+   *
+   * ⭐ MOVED AGAIN 2026-08-11 BY THE DOMAIN-SIDE REPAIR, SAME DIRECTION:
+   * 53/153/249 → 53/152/248. Exactly ONE cohort row went, and it is the only one
+   * that COULD: of the seven identities that lane deleted, six live outside
+   * `src/components/` (`__adjudicationPending`/`__forecast`/`__resolution on
+   * stressors` in domain/realm/heraldRouting.js, `evidenceId on outcome` in
+   * domain/worldPulse/warCoalitionEvidence.js, and `title on currentTensions` in
+   * generators/aiLayer.js and generators/narrative/siegeCapability.js). The
+   * seventh, `title on currentTensions` in components/new/dailyLifeLogic.js, is
+   * the cohort member: one identity, one read, hence −1/−1. `files` holds at 53
+   * because dailyLifeLogic keeps its other three rows — the whole-file drop in
+   * this repair was siegeCapability.js, which is not a cohort path.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 53, identities: 153, counts: 249 });
+    expect(cohort).toMatchObject({ files: 53, identities: 152, counts: 248 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 

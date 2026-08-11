@@ -37,11 +37,14 @@ export const generateSiegeCapability = (
   const tensionList = Array.isArray(currentTensions)
     ? currentTensions
     : [currentTensions];
+  // The `tension?.title` arm was deleted as writerless (see dailyLifeLogic.js for the
+  // key-set proof); `description` is the authored prose and `type` the token, both
+  // written unconditionally, so the prose this picks is unchanged for every record.
   const primaryTension = tensionList
     .map(tension =>
       typeof tension === 'string'
         ? tension
-        : tension?.title || tension?.description || tension?.type
+        : tension?.description || tension?.type
     )
     .find(Boolean);
   const eventName = String(recentEvent.name).replace(
