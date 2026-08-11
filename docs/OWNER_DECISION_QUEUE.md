@@ -647,3 +647,38 @@ which was right about scope and **wrong about shape**. `coup.js` opens with an
 `Array.isArray` check, so a boolean row would have rendered "Locked", persisted, and
 **still let the coup auto-apply** — the exact lying surface the change exists to remove.
 The lane caught it and proved it with a mutant.
+
+### §15a · RULED AND DISPATCHED (2026-08-11) — roads are labelled, neighbours are not invented
+
+The owner approved the recommendation. **Generation will NOT bind neighbours.**
+
+**The reasoning, recorded so it is not re-litigated:** neighbours are a CAMPAIGN-LAYER
+concept — `regionalGraph.js` holds the real ones, and `neighborRelationship` is an INPUT
+to generation (`config.neighborRelationship`, consumed by `historyGenerator.js:343`,
+`priorityHelpers.js:373`, `institutionProbability.js:266`), not an output. A lone
+generated settlement has no neighbours **because nothing has said it does**, and that is
+the model being honest rather than a gap. Binding them would mint named places with no
+data behind them — the product-level form of the reader-with-no-writer class this program
+has spent itself eliminating — and would change same-seed output for every world ever
+generated, in exchange for a cosmetic label. A poor trade against THE PROMISE.
+
+**What ships instead — labels degrade honestly, using only what generation truly knows:**
+1. a linked neighbour with a real name → unchanged (`→ Ashford` / `trade partner`);
+2. no link but a configured relationship → the relationship without a place
+   (`→ a trade partner`), drawn from its real closed vocabulary, never invented;
+3. neither → the road's own facts (direction / terrain / road type);
+4. no exit roads at all → **the section is HIDDEN**, because an absent section is honest
+   while an empty heading implies missing data.
+
+⚠⚠ **The pin that matters most:** nothing downstream may treat a label as an ENTITY. The
+moment something joins on that string, the bug is rebuilt — so a mutant-driven guard
+asserts a label never mints, joins on, or persists a settlement identity.
+
+**⭐ WHERE THIS FLIPS, recorded for later:** if the product moves toward regions as
+first-class — generating a settlement means generating or claiming its place in a
+neighbourhood — then binding neighbours at generation becomes correct and this ruling
+should be revisited, not worked around. The question was never "should roads have
+labels"; it is **"does a generated settlement exist in a place, or by itself?"**
+
+⚠ The label copy is the owner's: the lane drafts in the surrounding voice and presents it
+as a DRAFT FOR VETO. The mechanism lands either way.
