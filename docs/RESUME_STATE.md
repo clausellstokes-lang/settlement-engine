@@ -158,83 +158,54 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `9892eda1`, mutex
-free, zero processes. ⚠ The heartbeat prompt's queue text is long stale; dispatch comes
-from THIS note.):**
+**⛔⛔ THE FULL GATE IS RED AND WILL STAY RED UNTIL THE SCHEMA-5 MINT — attributed, not
+debt to re-find.** Two reds, both understood:
+1. **`generatorGoldenMaster`** — owner-approved SHIFT-2, **registered not re-recorded**,
+   awaiting the owner's batched `UPDATE_GOLDEN`. A one-command cure the owner owns.
+2. **`observedShapeReaders.walker`** — ⚠⚠ **`--write` REFUSES, and correctly.** The
+   display repair is not a shrink but a **SWAP**: `neighbors on settlement` (2 reads) out,
+   `neighbourNetwork on settlement` (2 reads) in. The instrument's own words: *"the
+   inventory is addressed by finding IDENTITY, not by count, so a swap cannot hide"* —
+   and shrink-only maintenance cannot bank growth.
+   ⭐ **BUT THE "NEW" IDENTITY IS A FALSE POSITIVE — banked as M9, M8's cousin.**
+   `neighbourNetwork` has a real writer at **`src/lib/saves.js:158`** and **25 FILES
+   ALREADY BANK IT**. The corpus walks **GENERATION ONLY**, so a key minted at **SAVE
+   TIME** is invisible to it — same root cause as M8, different writer (M8 = the USER
+   writes it; **M9 = the SAVE PATH writes it**).
+   ⚠ **A repair that swaps one read for a better one is GROWTH to this instrument even
+   when the file's total is unchanged.** Growth needs a MIGRATION, so this joins the mint.
+**⭐ THE CONSOLIDATED SCHEMA-5 MINT NOW CARRIES FIVE ITEMS** — M6's family-union filter
+(vaulted, applies clean), the two write-shape blindnesses, the M8 router, and this growth
+row **plus a SAVE-TIME-WRITER EXEMPTION**. Each was individually not worth a mint; together
+they plainly are, which is exactly what CR-OSR-FREEZE-6-R2's deferral was betting on.
+**It is now the highest-value queued act** — it is the only thing standing between the
+board and a green gate.
 
-1. **✅✅ TC-5a IS LANDED @ `41b39220` + record `744de227` — DEVIATIONS: NONE.**
-   validate:packets **14 / 1 READY**. The painter's headless half: a lit block compiles to
-   a complete draw list with palette ROLES and no colour anywhere.
-   ⭐ **THE BUNDLE COST IS EXACTLY ZERO, measured both ways:** the pair is **385,137 before
-   and after**, the closure holds at **107 members**, and `buildCartographyDrawList`
-   appears in **NO dist chunk at all** — tree-shaken, zero importers. That is the whole
-   point of building the painter headless first.
-   ⭐ **C7 IS A LIVE GUARD, MUTANT-PROVEN:** one added edge takes the closure 107 → **110**
-   and flips the exclusion red while the anchor stays present — and the mutant ran against
-   a SYNTHETIC ENTRY OUTSIDE THE REPO, so the forbidden compiler file was never edited to
-   prove a point about not editing it.
-   ⚠⚠ **NEW HAZARD BANKED — LOOP-REGISTERED TESTS ARE INVISIBLE TO THE CENSUS**
-   (memory/loop-registered-tests-are-invisible-to-the-census.md). The new suite came back
-   **PARKED with ZERO live titles against 34 real passing tests**, because four `describe`
-   blocks registered inside `for` loops and the classifier counts LITERAL `it(`/`describe(`
-   text. ⚠⚠ **`parked` and `credited` both feed `files`, so the arithmetic still CLOSES and
-   NOTHING REDS** — the suite just silently stops contributing coverage the census believes
-   it has. Cure: hoist the loop to module scope (count unchanged at 34, file moved to
-   `credited`). ⭐ `test.each()` parks a file the same way — that is how
-   `roadNetworkIndex.test.js` flipped under an unrelated landing.
-   ⭐ **C4 EXTRACTS THE CONTRACT'S `RAW_COLOUR` REGEX FROM SOURCE TEXT** — it is `const`,
-   unexported, and the contract is a forbidden edit, so it can be neither imported nor
-   exported and restating it would mint the rival spelling §6.3 forbids. **The guard then
-   FIRED FOR REAL** when the lane's own docblock prose spelled a colour notation: the
-   comment-convicts-itself trap, this time as the guard working.
-   ⚠ A §13 STOP fired mid-session (ES-6a added test files) and was **dispositioned, not
-   obeyed blindly**: the census row is base-plus-TC-5a-only, derived INDEPENDENTLY of the
-   live tree, so foreign WIP cannot be frozen into it — it EXCLUDES their file rather than
-   absorbing it, and reverting would have left the census PARTIAL a second time. It
-   measured their delta for me: **+1/+0/+1/+10/+4**, closing with nothing left over.
-   Census folded to this lane only: **`2393/365/2028/19696/5560`**.
-   ⚠ The harness misreported exit 0 for two runs whose captured value was 1 — 4th and 5th
-   sightings. ⚠ A validator run against a tree another lane is EDITING gave a transient
-   FALSE `index=BLOCKED`; a re-run at a settled moment read READY.
+**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `133e300f`, mutex
+free, zero processes):**
 
-2. **✅✅ ES-6a IS LANDED @ `53d538b4` + record `133e300f`.** validate:packets **14 / 0
-   READY** — board clear. The double agent leaks while the mission succeeds silently.
-   ⭐ **A4's BOUNDARY IS PROVEN ON BOTH SIDES, exactly where I derived it:** the crossing is
-   `0.6/0.7 = 0.857142`, so a home read of **0.9 leaks 0.63 and the patron ADOPTS
-   `hostile`**, while **0.8 leaks 0.56 and the patron KEEPS `allied`** with only confidence
-   moving. The value's meaning now lives in a test, not in prose.
-   ⭐ **A7 IS A TRUE DIFFERENTIAL:** clean and leashed runs are byte-identical across the
-   ENTIRE WORLD minus the patron slice, and the plant proves it live — a falsified report
-   landed against the HOME observer through the real writer executes and reds it. A token
-   scan would have passed while the leak was absent for the wrong reason. A3 derives the
-   leaking-kind set from `resolveLeash`'s OWN betrayal-seed output, so a new leash kind
-   cannot silently escape.
-   **ZERO goldens moved**, every Dormancy golden unmoved, and exactly ONE test moved across
-   28,107 — the census, folded here to **`2395/365/2030/19719/5568`** (the lane REPORTED its
-   delta per the reservation ruling and measured it by setting its own untracked files
-   aside and restoring them md5-exact). First-paint chunk **561.61 kB unmoved**, both
-   typecheckers at exact floors with zero new errors.
-   ⚠ **THREE RECORDED, NOT SMOOTHED:** the `sourceId` spellings DIVERGE (`<home>#<roster>`
-   vs the errand's `durableId || rosterId`) — inert today, but **a future wave passing a
-   credibility closure must reconcile first or O9 breaks**; A7(iii) as worded is
-   UNREACHABLE (arm 2 is a CONFIRM and takes the honesty refusal) so it is pinned in its
-   reachable form; and **two files beyond the manifest were required for the registration —
-   as they were for ES-5b, 5c and 5d, which makes it a TEMPLATE GAP, not four oversights**
-   (banked in memory/implementation-packet-dispatch-system.md).
-   ⚠⚠ **I MISDIAGNOSED THE VALIDATOR FAILURE.** I called it a mid-write race and "confirmed"
-   it by re-running — but the lane had genuinely broken `validate:packets` by putting prose
-   containing **BLOCKED** in an INDEX status cell, and had quietly fixed it before my
-   re-run. **The re-run appeared to support a false diagnosis.** The recorded trap is now
-   twice-proven: a status cell carries EXACTLY ONE status token. **When a validator fails
-   against a shared tree, check whether a lane FIXED it before concluding it was
-   transient.**
-
-**NEXT: ES-7** is the espionage tail's next compile candidate (it absorbs ES-6c's
-retroactive Herald clause). ⚠ **ES-6b is BLOCKED on a DISPATCHER wave nobody has
-chartered** — its only consumer has zero production callers, the volume's declared
-build-doors-before-traffic shape. Also queued: **TC-5b** (mount + colour binding +
-degraded states), the consolidated **schema-5 mint** (M6 filter + the two write-shape
-blindnesses + the M8 router), and **IA-2** revalidation.
+1. **⭐ SCHEMA-5 MINT LANE (Opus) — in flight, and it is THE act that greens the gate.**
+   Carries all five consolidated items: M6's vaulted family-union filter (θ=0.80, 122
+   cleared, ZERO class-(a)/(b) erased), the two write-shape blindnesses, the M8 five-gate
+   router, **the `neighbourNetwork` row that currently blocks the gate**, and **the M9
+   save-time-writer exemption** so that row is banked BY RULE rather than by hand.
+   ⚠ Expect the schema-4 shape: a **COMMIT PAIR**, the first deliberately gate-red, because
+   `validateBaselineHistory` needs the subject commit to carry new CODE beside the OLD
+   baseline. ⛔ The detector stays BYTE-FROZEN; ⛔ the baseline is NEVER hand-edited.
+   Deliverable is a plain statement of whether `check` reaches exit 0 with only the golden
+   remaining, plus the exact two-commit sequence for me.
+   Report: tasks/a177c284ce931e4b1.output.
+2. **ES-7 AUTHOR LANE (Opus, draft-only) — in flight.** The espionage tail's next compile,
+   **absorbing ES-6c's retroactive Herald clause** — which ES-6's compile already refuted
+   TWICE (zero matches repo-wide; `corruptionWeb` returns `newsEntries: []` on EVERY path;
+   `pulseKernel:1773-1776` DROPS `patronId` from the persisted log, so naming who was
+   betrayed is a persisted-shape question and **owner-gated**). ⚠⚠ Told the volume's prose
+   has now been wrong FIVE COMPILES RUNNING, each differently, and to verify every claim.
+   ⚠ Carries the registration TEMPLATE GAP (two files beyond the manifest or the row
+   imports as `undefined`) and the census-reservation rule. Report:
+   tasks/a08b2dfcbfebb03a3.output.
+   **TC-5b is next in the queue behind these**, seated as a NON-PRESENTATION tab so it
+   never touches the persisted vocabulary.
 
 **Ruled and sequenced (not blocked):**
 
