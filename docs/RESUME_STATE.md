@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 18:10:48 EDT
+**Generated:** 2026-08-11 18:16:51 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `63c62822` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `33b3ba1c` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `3a0337eb` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 97186: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
-**Disk:** 33Gi free (84% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 64140: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Disk:** 33Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T180923` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T181541` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T180923
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T181541
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -56,12 +56,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
 33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
 df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
 40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
-0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -154,10 +154,27 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    the slums mentions live on the LEDGER branch (this file, :163/:271 — the chair's own
    restated lists) — **struck by the chair in this same edit.** Lane O's no-memory-race
    JUDGMENT is RATIFIED. Transcript: session dir `subagents/agent-a9554306d87e512af.jsonl`.
-4. **Lane P (read-only draft, Opus) — the GR-4 PACKET DRAFT (task #15)**, dispatched
-   ~17:55 per CR-NEXT-1. Output: scratchpad `laneP-GR-4-draft.md`; the chair reviews and
-   promotes when a build slot frees. Transcript: session dir
-   `subagents/agent-a77b180fe2a58e737.jsonl`.
+4. **Lane P — ✅ COLLECTED (~18:20): GR-4 REFUSED-AND-SPLIT, ruled CR-GR4-1..6.** As
+   chartered it is 2-3× over the hard scope budget (6-9 logic files vs 3; two behavior
+   families) → split GR-4a (dark answer at the event) → 4b (voice) → 4c (credibility
+   charge) → 4d (lit queue); the RENEGOTIATE arm is absent (no `treatyRenewalEnabled`
+   in src). **GR-4a is SEQUENCED behind TC-5B-i's landing** (the walker reservation +
+   serialization law). Three design defects found: the trigger premise is FALSE (WR-5's
+   D re-read never touches seatTransitions — the event list belongs to H; only 2 of 6
+   named power-change paths write rows); **`breachType` is an unvalidated open string
+   whose two literal-comparing consumers would mint `treaty_held` "wins" for BOTH
+   parties of a torn-up treaty** — the cures are ruled IN-SCOPE for GR-4a (CR-GR4-6);
+   and `fractureCredibilityDeltas`' tick window is PLAUSIBLY dead in production (the
+   ES-5d lag class) — assigned to GR-4c's preflight as a mandatory call-order
+   re-derivation. Q1 mount = `advanceTreaties`, CONDITIONAL on the peaceTerms.js size
+   measurement (near the 800 ceiling, no baseline entry, adding one forbidden — fails →
+   returns to the chair). Q9 = module-local frozen `SUCCESSION_TUNING`, zero new keys,
+   values ride the endgame signature. Draft: scratchpad `laneP-GR-4-draft.md`.
+   Transcript: session dir `subagents/agent-a77b180fe2a58e737.jsonl`.
+5. **Lane R (read-only draft, Opus) — SITE-COHERENCE WAVE 0 PACKET DRAFT**, dispatched
+   ~18:25 per CR-NEXT-1 (the parallel candidate: zero src files, disjoint family).
+   Output: scratchpad `laneR-SC-W0-draft.md`. Transcript: session dir
+   `subagents/agent-a4a4b7e7596a1186d.jsonl`.
 
 **CHAIR QUEUE (sequenced):** after Lane M lands → chair-verify + ledger row → task #10
 (the census-folding micro-act batch: R8 C2 case + H9 recentEvents + the ladder pin + the
