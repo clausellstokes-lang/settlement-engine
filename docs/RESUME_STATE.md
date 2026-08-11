@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:56:10 EDT
+**Generated:** 2026-08-11 16:22:05 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e1e9fd6a` | **14** |
-| ledger (main) | `review-fixes-2026-07-08` | `0bb6055d` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **26** |
+| ledger (main) | `review-fixes-2026-07-08` | `52138eef` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T155533` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T162130` — build 24 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T155533
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T162130
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -31,23 +31,41 @@ staged set BY NAME AND COUNT.
 MM docs/DESIGN_FP_ARCH_ES.md
 MM docs/FABLE_VALIDATION_QUEUE.md
 MM docs/SOL_QUEUE.md
+MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/foreign-policy/ES-5B.md
 MM docs/implementation/packets/foreign-policy/ES-5D.md
 MM docs/implementation/packets/foreign-policy/ES-6A.md
 MM docs/implementation/packets/town-cartography/TC-4.md
 MM docs/implementation/packets/town-cartography/TC-5A.md
+D  docs/implementation/packets/town-cartography/TC-5B-I.md
+D  docs/implementation/packets/town-cartography/TC-5B-II.md
 MM scripts/implementation-packets.mjs
 MM src/components/dossier/LockControls.jsx
 MM src/domain/locksPreservation.js
+MM supabase/functions/_shared/aiCharterBundle.meta.json
+MM supabase/functions/_shared/aiGroundingBundle.js
+MM supabase/functions/_shared/aiGroundingBundle.meta.json
+MM supabase/functions/_shared/aiOutputSchemaBundle.meta.json
+MM supabase/functions/_shared/analyticsEventsBundle.meta.json
+MM supabase/functions/_shared/intentAtlasBundle.meta.json
+MM tests/domain/explanation.test.js
 MM tests/lint/sovereigntyLightingContract.walker.test.js
 MM tests/scripts/implementationPackets.test.js
+?? docs/implementation/packets/town-cartography/TC-5B-I.md
+?? docs/implementation/packets/town-cartography/TC-5B-II.md
 ```
 ```
+  +0      -1008   docs/implementation/packets/town-cartography/TC-5B-I.md
+  +0      -990    docs/implementation/packets/town-cartography/TC-5B-II.md
 ```
 ## Last 12 build commits
 
 ```
+a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer folds the census
+56310497 2026-08-11 TC-5B promoted as the ruled split: the seam is READY, the mount waits on it
+c8931c03 2026-08-11 explanation.test.js was the seventh fixture manufacturing the settlement-root hook shape, and the sweep that retired six missed it
+ebc4f90e 2026-08-11 The aiGrounding edge bundle is rebuilt at the tree that produced it, and four sibling metas ride the same build window
 e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is checked, and the TC-5A fiction is corrected
 195113e4 2026-08-11 The chair flips R3 and R6, and the hook-family repair takes its validated row
 73f5be96 2026-08-11 The Fable survey clears 67 of 70: the serialization law, and the markers come down
@@ -56,20 +74,16 @@ aed0fc0e 2026-08-11 The World Book's hook chapter, the campaign PDF's hook line 
 aa585167 2026-08-11 The pglite contention cure is a REFUTATION: the five suites never collapsed
 ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it cannot mean
 36159389 2026-08-11 Schema 5 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
-133e300f 2026-08-11 Record: ES-6a LANDED; the espionage tail advances to ES-7
-53d538b4 2026-08-11 ES-6a: the double agent leaks, and the leak's boundary is proven on both sides
-744de227 2026-08-11 Record: TC-5a LANDED; the cartography painter has a headless half
-41b39220 2026-08-11 TC-5a: the painter's headless half, and it costs the bundle exactly nothing
 ```
 ## Last 6 ledger commits
 
 ```
+52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
-f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -96,185 +110,42 @@ its collection pointers, and this note is rewritten at EVERY event (seamless-res
 directive). A successor's job on any lane is COLLECT — survey git + dirty files + the
 transcript tail, re-verify independently — never re-dispatch while WIP exists.
 
-## The live board — FOUR operations dispatched ~14:20 EDT
+## The live board — rewritten ~17:20 EDT (the chair compacts; git carries the detail)
 
-1. **Lane A — ✅ COLLECTED (~15:30), chair-verified: THE CURE IS A REFUTATION.** The
-   five-suite pglite collapse is a PHANTOM: 51/51 pass inside a real parallel gate run at
-   load ~200 with **13–57× beforeAll headroom; the measured contention multiplier is ~4×,
-   not the 60× the budget hypothesis needed.** Probes stripped; NO budget changed (the
-   ratchet's never-tune-to-a-boot law stands); one landed edit replaces a DISPROVEN
-   rationale beside the ingestCheckRate guard. Commit `aa585167` (chair-verified: exactly
-   1 file vs `ffc85a90`). Memory banked in test-timeout-flake-and-phantom-census-class.md
-   (+ the killed-worker hypothesis and its settling experiment). **Clean-tree endstate
-   PROVEN: 18 test reds = 17 census + the owner's golden, exactly.** ⚠ The live-tree full
-   gate is currently red on Lane C's mid-flight WIP (typecheck `pendingEditsPreview.js`
-   +1 over baseline, 6 foreign test reds — proven by before/after execution) — correctly
-   refused, not chased. **CHAIR POST-LANDING STEP: after Lane C lands, run the full gate
-   on the clean tree and record the exit-1-golden-only endstate.**
-2. **Lane B — ✅ THE FABLE SURVEY IS RULED (~15:45); the clearing lane is executing.**
-   The completed digest (scratchpad `laneB-fable-survey-digest.md`, all 70 post-boundary
-   acts, receipt-checked) was read WHOLE by the Fable chair and ruled in
-   **`laneB-CHAIR-RULINGS.md`** (same scratchpad — the vetoable record). Headlines:
-   **61 RATIFIED · R1 stands-with-struck-rebuttal · R2 closed SUPERSEDED · R4/R5/R7/R9
-   excused under the new SERIALIZATION LAW · R3/R6/R8 pending ordered cures.** The
-   SERIALIZATION LAW (the digest's highest-leverage hand-up, raised by five rows): a
-   shared census re-derives WHOLE in the change that moves it; serialize rather than land
-   a red walker; the one exception is already-red-at-pristine-base (escalate, never
-   re-record); no lane ever quantifies a foreign lane's uncommitted delta; file-placement
-   does not exempt (titles pin estate-wide). Marker discipline: in-code walker home
-   RETIRED; protocol amended to TWO required homes. **Lane G (build slot 2, Opus) is
-   executing the clearing + corrections** (67 queue markers down, 5 walker + 5 TC-4
-   clears, SOL_QUEUE protocol amendment, the setLock/LockControls comment cures, the
-   ES-6A/ES-5B/ES-5D doc rewordings, the R3 re-drive). **✅ LANE G LANDED `73f5be96`**
-   (10 files, +317/−98; counts chair-verified: queue 72→5, walker 5→0, TC-4 5→0; R3
-   re-drive 23/23 TRUE exit 0; two correct deviations RATIFIED — the TC-4 owning-document
-   wording, and R6 left for the chair flip). **CHAIR FLIPS LANDED `195113e4`**: R3
-   accepted (re-drive = replacement receipt; 267 denominator struck, landing commit
-   authoritative) + R6 confirmed + Lane C's Fable-validated ledger row appended. **The
-   owed count now reads 3 = 2 permanent legend + R8** (deferred behind its own census
-   fold). H9's both-sites recentEvents cleanup rides the same future micro-act.
-   ⚠ METHOD (banked): a workflow synthesis stage fed inline JSON can silently truncate —
-   always check the digest's population against the SOURCE count (this one self-verified).
-3. **Lane C — ✅ COLLECTED (~15:50), chair-verified: 5 of the 7 LIVE class-(a) defects
-   repaired; the worklist was 7, not 21.** The baseline at HEAD wins: 14 of the briefed 21
-   were already repaired (`c74048e4`/`e429a4e8`/`5afe9b2e`), and absence can ONLY mean
-   repair (a class-(a) erasure is a scan refusal). Landed `aed0fc0e` (18 files — the
-   settlement-root hook family routed through `collectPlotHooks`, the npc dots/notability
-   dead rungs deleted; THREE were user-visible: the World Book hooks chapter was EMPTY for
-   every export ever, the campaign PDF hook line NEVER printed, both fingerprints always
-   zero) + `904b7bb0` (plain-shrink re-freeze **2003→1977 / 1413→1396, frozenAtSha
-   aed0fc0e** — chair-verified from the committed baseline). Focused 29 files/474 tests
-   exit 0; guards 7/171 exit 0; ratchets at exact floors; sizeBaseline DOWN 833→830.
-   **DECLARED one-time output discontinuity** (World Book/PDF hooks now print; telemetry+
-   fingerprint series step at `aed0fc0e`) — no generator touched, no golden moved.
-   ⚠ CHAIR CORRECTION on its record: the "zero setLock calls naming factions" evidence is
-   a GREP ARTIFACT — the factions lock writer exists via the DYNAMIC key row at
-   `LockControls.jsx:95`/`:162` since `73f00920`; the refusal-to-touch was right, the
-   evidence wrong. `factions on locks` is now writer-backed → reclassification joins the
-   schema-6 docket. **Chair queue (after Lane G lands):** land C's ledger row
-   (Fable-validated, NO ⏳ marker — chair-managed work), with the grep-artifact correction
-   folded in; fear-rung lighting → owner queue (same-seed prose shift); the
-   aiOverlayVerifier fence re-point question → schema-6 docket. ⚠ MEMORY.md is at the
-   ~17KB fold ceiling (17,309 B) — chair owes a FOLD (never trim) at next memory touch.
-4. **Lane D — ✅ COMPLETE (~14:45).** The UNREVIEWED-UI cohort per-row triage, delivered
-   as an ADVERSARIAL RE-DERIVATION of the earlier same-day triage: cohort at HEAD is
-   **128 rows** (162 was schema-4; accounting closes exactly), verdicts **34 (a) / 54 (b)
-   / 40 (c) / 0 (d)** vs the prior lane's 20 (a) — the whole delta is the "detector
-   artifact" habit (mis-binding explains the FIRING, not the KEY). Full table: scratchpad
-   `laneD-ui-cohort-triage.md`; memory `ui-cohort-triaged-31-true-positives.md` updated.
-   **CHAIR DOCKET OPENED (task #6):** 3 rulings (`stresses` alias · `worldPulse.events` —
-   provisional (a) · `eventLog` merging, 35 rows) + ONE governed schema-6 detector mint
-   (globals exclusion, `toLocaleString`, the M9 why-string names a NONEXISTENT function,
-   M6 docstring, cohortNotice) sequenced AFTER Lanes A/C land + reconcile Lane C's 21-row
-   worklist against the 34 (a) before any UI repair wave. ⛔ `ancientRuin` cure is
-   OWNER-GATED (enables a capability). ⚠ `docs/SOL_QUEUE.md:91`'s 162 figure is stale.
-5. **Lane E — ✅ COMPLETE (~15:10): TC-5b REFUSED-AND-SPLIT, and the chair RATIFIED it.**
-   The seat is SAFE (a live non-presentation door exists: `MAP_SUB_TAB_IDS` carries
-   `player` outside the persisted `TOWN_MAP_VIEW_IDS`; the persisted sub-tab id is
-   shape-guarded on four measured facts). The BLOCKER: a compiled `TownSceneManifest` is
-   unreachable from the Map tab (zero React-reachable compile path; worker client has no
-   manifest-only mode; sceneCache holds geometry only) — a painter built first would
-   repeat the ES-7 consumer-before-producer shape. **Chair rulings CR-TC5B-1..4 (Fable,
-   vetoable):** split RATIFIED producer-first (TC-5b-i seam → TC-5b-ii mount);
-   token entry = `subtabs/cartographyColours.js` importing `design/tokens.js`;
-   presence oracle = the BLOCK; A-4 notice copy deferred to TC-5b-ii promotion (chair
-   drafts, owner may veto). Draft (TC-5b-ii ready, status BLOCKED): scratchpad
-   `laneE-TC-5B-draft.md`. **O-4 → maintenance task:** `validate:packets` never
-   existence-checks CREATE rows, so PACKET_MANIFEST's TC-5A row is fiction (three
-   declared paths do not exist) — machinery fix + row correction + TC-5A.md stale-prose
-   corrections batched for the next free build slot (task #8).
-6. **Lane F — ✅ COMPLETE (~15:55): TC-5B-i is COMPILABLE and DRAFT-complete** (scratchpad
-   `laneF-TC-5B-I-draft.md`, 911 lines). Four seam shapes measured; the brief's two both
-   REJECTED on live code (worker `manifestOnly` = new protocol inside a bounded-artifact
-   ceiling; abort-after-onManifest = success read out of an AbortError; sceneCache =
-   STRUCTURALLY IMPOSSIBLE, the key derives from the manifest it would store). **Chair
-   rulings CR-TC5BI-1..5 (Fable, vetoable):** the lazily-imported main-thread compile
-   module RATIFIED (the `townSceneExport.js:147-166` precedent); homes as recommended;
-   the 600 ms B6 compile-cost STOP accepted as a PREFLIGHT PROBE never a test assertion;
-   the ~30-line walker duplication accepted this wave (extract only after both halves
-   land); manifest row authored from real paths behind Lane H's existence-check. Two
-   TC-5B-ii corrections recorded (planExtent arrives as a RESOLVED NUMBER, not a manifest
-   prop — one-line §7 amendment; the split table overstates 5b-i, TC-5a's leaf gains its
-   first production importer at 5b-ii). Reservations: four paths, ZERO intersection with
-   the 5b-ii set — the halves meet through a symbol, never a file. **Promotion + dispatch
-   = task #9, after Lane G lands.**
-7. **Lane H — ✅ COLLECTED (~16:20), chair-verified: `validate:packets` stops believing
-   CREATE rows.** Landed `e1e9fd6a` (4 files, +76/−10; chair-verified by diff-tree).
-   Three-stage proof captured in-shell: exit 0 (fiction invisible) → exit 1 naming
-   EXACTLY TC-5A's three phantom paths and nothing else → exit 0 after the row
-   correction. The real paths (from `41b39220 --diff-filter=A`):
-   `src/domain/townCartography/cartographyPaint.js` + `cartographyPaintRoles.js` +
-   `tests/domain/townCartographyPaint.test.js`. Its own guard MUTANT-tested (exactly one
-   test red, its own). **ZERO test titles added — proven** (13 registrations before and
-   after, empty title diff, walker green 33/33 at unchanged figures) so no census fold
-   owed. Both judgment calls RATIFIED (the `checks` argv carried the same phantom; the
-   no-retitle choice). Deferred-recorded: the inverse guard (nonterminal CREATE paths
-   must NOT pre-exist) needs its own design. ⚠ Address-rot demonstrated live: the census
-   row moved `:3676`→`:3681` mid-task — locate it by its `files:` key, never by line.
-   **Chair-owed memory (next beat): the new validate:packets rule + the MEMORY.md FOLD
-   (over its ~17KB ceiling — fold, never trim, grep hooks first).**
-8. **Lane K — ✅ THE FULL-GATE RECEIPT IS IN (~16:55) AND IT IS NOT THE CLEAN ENDSTATE.**
-   TRUE exit 1 at step 15 of 17 (`test:ratchet`), steps 1-14 all green, wall clock
-   14m50s, HEAD identical at both ends, zero tracked-file movement under the run, mutex
-   sole-held. **SIX non-census reds, not one**: the owner's golden (expected) + FIVE
-   live: the `aiGroundingBundle` freshness+reproducibility PAIR (the recorded
-   dirty-edge-bundle class — `aed0fc0e` touched `src/generators/aiLayer.js` without
-   rebuilding edge-shared in-commit) and THREE `tests/domain/explanation.test.js` reds
-   (the explanation layer is a hook-family consumer outside Lane C's OSR-baseline
-   denominator). ⚠ The harness reported the background job "exit code 0" — the
-   wrapper-lie again; the in-shell TRUE_EXIT and gate-tail both say 1. Log:
-   scratchpad `laneK-fullgate-e1e9fd6a.log`. ⚠ PLAUSIBLE (unchased): the branch's
-   test-ratchet baseline header (27929/2383 @ 46357c94) may be stale vs later recorded
-   re-derivations — low-priority chair check at the next census act. The yield-death
-   pattern fired a FIFTH time mid-run and the recorded rule cured it (ps → resume with
-   the outlast order). Transcript: session dir `subagents/agent-a53d9a1c623c91ba1.jsonl`.
-9. **Lane L (build, Opus) — CURE THE FIVE NON-GOLDEN REDS (task #12)**, dispatched
-   ~17:00: (1) rebuild edge-shared (the builder rebuilds FIVE bundles; commit what
-   changed, attributed) — deploy stays the owner's; (2) diagnose-then-repair the
-   explanation-layer trio (reader-side per precedent; fixture-mirrors-deriver suspected;
-   any output change is downstream of the already-declared `aed0fc0e` discontinuity).
-   Deliverable: the ratchet names EXACTLY ONE non-census red — the golden. Transcript:
-   session dir `subagents/agent-ac9c44b8b5a34f25e.jsonl`.
-10. **Lane J (build, Opus) — THE TC-5B PROMOTION (task #9)**, dispatched ~17:00 in
-   parallel (paths fully disjoint from Lane L): authors TC-5B-I.md (READY, rulings
-   CR-TC5B-1..4 + CR-TC5BI-1..5 applied, §12d judgments Fable-validated at promotion)
-   + TC-5B-II.md (BLOCKED, planExtent + split-table corrections), INDEX + manifest rows,
-   validate:packets before/after + the focused manifest suite through the mutex, one
-   commit. The chair dispatches the TC-5B-i implementer after it lands. Transcript:
-   session dir `subagents/agent-a018337f81b633c22.jsonl`.
-9. **Chair memory pass DONE (~16:40):** the validate:packets CREATE-row rule banked
-   (`validate-packets-existence-checks-landed-create-rows.md` + index line), and the
-   MEMORY.md FOLD executed lawfully — the ES-5d two-bullet block moved VERBATIM to
-   archive-2026-08-11-index-fold-2.md with a pointer left; index now 17,167 B (under the
-   ~17KB ceiling), zero broken links (verified by script).
-8. **Lane I — ✅ COMPLETE (~16:50): the SCHEMA-6 CHARTER is drafted and RULED
-   (CR-S6-1..9).** The mint = items 1-5+8 with the globals/`toLocaleString` items built
-   as POST-FILTERS M11/M12 (the detector is byte-frozen — a BUILTIN_MEMBERS edit is
-   impossible), inserted into the walker's hand-composed chain IN THE SAME COMMIT.
-   **M10 = SATISFIED-BY-M8** (its exemplars were repaired at `aed0fc0e` — vacuity caught
-   before machinery); the **verifier fence re-point REFUSED** (three source refutations);
-   the **ladder pin → micro-act** (module-private symbols + census fold vs a gate-red
-   commit). Ruling A: granted by the existing gate-3 alias clause, corrected figures.
-   Ruling B: chair's provisional (a) REFUTED → class (b)/M9, **GATED on filing the
-   `aiChronicleContext.js:21` live bug first** (AI-Chronicle world lane permanently
-   empty). Ruling C: eventLog = leaf-name CROSS-HOME substitution (26/33/47, corpus
-   hardcodes `eventLog: []` at :613); joins NO bucket — the corpus-coverage mint is its
-   own later act. **H26: bank-by-rule = the STANDING DESIGN at schema 7,** never mixed
-   into this shrink. Projected: PURE SHRINK 1977→1956 / 1396→1383 / 385→381, zero new.
-   Charter: scratchpad `laneI-SCHEMA6-charter.md` (956 lines). Execution = task #11
-   (after promotion); micro-act batch = task #10 (after the gate receipt).
-   (Original brief for the record:) dispatched ~16:10:
-   one consolidated charter for the accumulated detector docket (globals exclusion ·
-   `toLocaleString` in BUILTIN_MEMBERS · the M9 why-string naming a nonexistent function ·
-   M6 docstring mechanism correction · cohortNotice wording · **M10 the AUTHORED-INPUT
-   exemption class (H14)** · the H26 bank-vs-clear design question · the `factions on
-   locks` reclassification (writer = the dynamic key row since `73f00920`) · the
-   aiOverlayVerifier fence question · the sibling-ladder equality pin), PLUS measured
-   proposals for the three open Lane D rulings (`stresses` alias · `worldPulse.events`
-   provisional-(a) · the `eventLog` merging-vs-container question, 35 rows). Output:
-   scratchpad `laneI-SCHEMA6-charter.md`. The chair rules on its proposals; the mint
-   itself is a later two-commit pair. Transcript: session dir
-   `subagents/agent-a8951b72d20578f74.jsonl`.
+**COLLECTED, CHAIR-VERIFIED, LEDGER-COMMITTED (see the ledger commits + each lane's
+transcript for detail):** Lane A pglite-phantom refutation (`aa585167`) · Lane B/G the
+Fable survey ruled + cleared (`73f5be96`, `195113e4`; owed count 3 = 2 legend + R8) ·
+Lane C hook-family repairs + shrink re-freeze (`aed0fc0e`+`904b7bb0`) · Lane D UI-cohort
+re-triage (34 of 128 class-(a); table in scratchpad) · Lanes E/F the TC-5B split drafts ·
+Lane H the validate:packets CREATE-row guard (`e1e9fd6a`) · Lane I the schema-6 charter
+(ruled CR-S6-1..9) · Lane K the full-gate receipt at `e1e9fd6a` (honest red: 5 non-golden
+reds found) · Lane L their cure (`ebc4f90e`+`c8931c03` — bundle inputs were
+hookEscalation+simulationSpine, NOT aiLayer; the SEVENTH missed fixture; **the ratchet
+now names EXACTLY ONE non-census red: the owner's golden — the clean endstate is
+CONFIRMED at `c8931c03`**) · Lane J the TC-5B promotion (`56310497`, 16 packets/1 READY,
+11 markers Fable-validated at promotion) · chair rulings CR-TC5BI-6 / O-5 (`a75c76c2`:
+the census re-record is IN-CHANGE, walker = fifth reserved path).
+
+**LIVE (two lanes + the chair):**
+1. **Lane M (build, Opus) — IMPLEMENTING TC-5B-i** (the manifest seam) per the READY
+   packet at base `a75c76c2`, incl. the in-change census re-record (CR-TC5BI-6) and the
+   600 ms B6 preflight probe. Landing unblocks TC-5B-ii. Transcript: session dir
+   `subagents/agent-abbadc0742fd6f096.jsonl`.
+2. **Lane N (read-only, Opus) — NEXT-COMPILE RECON**: ranks the 2-3 corpus candidates
+   beyond the TC lane (GR-4+/IN-1+/TR/WF/POP/INT/WY/HB/WC/EP/site-coherence/slums/
+   CV-TB-XW/first-paint) with landed-state evidence, so a compile starts the moment a
+   build slot frees. Espionage stays parked (owner-gated §16). Output: scratchpad
+   `laneN-next-compile-recon.md`. Transcript: session dir
+   `subagents/agent-aebfdf9c61ab9b3b6.jsonl`.
+
+**CHAIR QUEUE (sequenced):** after Lane M lands → chair-verify + ledger row → task #10
+(the census-folding micro-act batch: R8 C2 case + H9 recentEvents + the ladder pin + the
+aiChronicleContext.js:21 repair — ONE census fold) → task #11 (the schema-6 mint
+two-commit pair per the ruled charter; the M9 worldPulse exemption is GATED on the
+aiChronicleContext repair landing first) → TC-5B-ii promotion (the A-4 copy is drafted
+for owner veto at that promotion, CR-TC5B-4) → the next corpus compile per Lane N.
+⚠ Lane K's PLAUSIBLE test-ratchet-baseline staleness question rides the next census act.
+⚠ MEMORY.md was folded back under its ceiling (17,167 B, zero broken links).
 
 Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
 (task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
