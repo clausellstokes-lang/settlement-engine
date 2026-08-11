@@ -83,9 +83,16 @@ already in the tree.
 ## SHIFT-2 — `generator-golden-master` — the faction structural-NPC institution link (ENGINE BYTES)
 
 - **Wave:** owner-approved generation-side repair. **Date:** 2026-08-11. **Status:**
-  NOT RE-RECORDED — manifest left byte-identical, pending the owner's batched
-  `UPDATE_GOLDEN` sign-off. `generatorGoldenMaster` therefore reads **RED BY
-  DESIGN** on the drift test until that sign-off.
+  ✅ **DISCHARGED 2026-08-11** by THE GOLDEN BATCH (SHIFT-3 below), under the owner
+  grant at `OWNER_DECISION_QUEUE` §17.1. The manifest is re-recorded and
+  `generatorGoldenMaster` is GREEN. Twenty of the twenty-five "after" hashes below
+  were reproduced EXACTLY by the discharge run — an independent confirmation of
+  this entry's measurement, taken weeks later on a different lane. The remaining
+  five were superseded in the same batch by SHIFT-3's narrowing and are re-tabled
+  there; they are the five rows this entry's ⚠ note predicted would need it.
+  *(Historical status, retained: NOT RE-RECORDED — manifest left byte-identical,
+  pending the owner's batched `UPDATE_GOLDEN` sign-off; `generatorGoldenMaster`
+  therefore read RED BY DESIGN on the drift test until that sign-off.)*
 - **Class:** ⚠ **ENGINE BYTES — CHANGED.** This is the FIRST entry in this ledger
   that is not harness-fidelity. The owner explicitly approved the underlying repair
   after being shown that it moves same-seed output (`OWNER_DECISION_QUEUE` §12).
@@ -163,3 +170,153 @@ Run this ONCE, at the owner's batched golden sign-off, to write the 'after' hash
 into `tests/fixtures/generator-golden-master.json`. The engine fix is already in
 the tree. `src/lib/roadNetwork.js` — the other half of the same approved repair —
 moves NO golden: it is map-render code, outside the generation pipeline.
+
+**RUN 2026-08-11.** Executed exactly once, under the gate mutex, as part of THE
+GOLDEN BATCH. See SHIFT-3.
+
+---
+
+## SHIFT-3 — `generator-golden-master` — the Lord Mayor's civic-hall narrowing (ENGINE BYTES)
+
+- **Wave:** THE GOLDEN BATCH. **Date:** 2026-08-11. **Status:** ✅ **RE-RECORDED
+  AND LANDED.** Authorized under `OWNER_DECISION_QUEUE` §17.1 (the 2026-08-11
+  owner grant), which licenses **one seed-line move** for this batch. SHIFT-2 and
+  SHIFT-3 ride that single move together; the manifest is re-recorded once.
+- **Class:** ⚠ **ENGINE BYTES — CHANGED.** The second such entry in this ledger.
+- **Discipline note:** this file's standing NO-GOLDEN-SHIFT rule is *record, then
+  re-record only under an owner gate*. That gate is §17.1, and this entry is the
+  record. The rule is not suspended; it is satisfied.
+
+### What changed and why it legitimately shifts
+
+`FACTION_ROLES.noble`'s `linkToInst` was `/council|court|hall|government/`. The bare
+`hall` alternative matched ANY institution whose name merely ends in "hall", so the
+Lord Mayor — the settlement's civic head — was linked to gambling dens and mercenary
+hiring halls. SHIFT-2 declared this as a known imperfection it deliberately did not
+fix (4 wrong links of 20 across a 120-seed probe). §17.1 authorizes the fix.
+
+The pattern is now:
+
+```js
+/council|court|government|\b(?:town|city)\s?halls?\b/
+```
+
+### The derivation — from the CLOSED corpus, not from guesswork
+
+Institution names are never templated: every push site copies a literal key out of
+`src/data/institutionalCatalog.js`, and `nativeSemanticName` returns `''` for
+custom/DM content, so the set of strings this pattern can ever see is closed and
+enumerable — **276 unique names over 6 tiers**. (Independently confirmed by a
+1200-run pipeline sweep: 263 names observed, **zero** outside the catalog.)
+
+Enumerated against that catalog at HEAD `e7774ff2`:
+
+| | old pattern | new pattern |
+|---|---|---|
+| catalog names matched | 15 of 276 | 10 of 276 |
+| names matched by NEW but not OLD | — | **0 (a strict subset)** |
+
+The five names dropped are the ENTIRE non-civic-hall class — not merely the three
+the 120-seed probe happened to name:
+
+| dropped name | catalog category | provenance |
+|---|---|---|
+| `Adventurers' charter hall` | Magic / Adventuring | probe-named in SHIFT-2 |
+| `Free company hall` | Defense | probe-named in SHIFT-2 |
+| `Gambling halls` | Entertainment | probe-named in SHIFT-2 |
+| `Hireling hall` | Adventuring | same class, unhit by the probe |
+| `Carriers' hiring hall` | Economy | same class, unhit by the probe |
+
+The ten that survive are every governmental/civic name the catalog contains —
+`Town hall`, `City hall`, `Courthouse`, `Multiple courthouses`,
+`Multiple court buildings`, `Mayor and council`, `Town council`,
+`Elder Grove Council`, `City-state government`, `Palace/government complex`.
+
+`council`, `court` and `government` are deliberately left BARE: they have zero false
+friends in the closed corpus, so narrowing them would be unmeasured same-seed
+movement bought for no defect. `court` in particular must stay un-anchored — a
+`\bcourt\b` would stop matching `Courthouse` and `Multiple courthouses`.
+
+### The cured links — before → after, measured on the real pipeline
+
+Every mis-link falls through to the settlement's REAL civic seat rather than to
+nothing, so **no settlement loses a link; five gain the correct one.**
+
+| golden row | BEFORE | AFTER |
+|---|---|---|
+| `town\|germanic\|auto\|random_trade\|civilized\|gm-seed-a` | Free company hall | **Town hall** |
+| `town\|germanic\|mountain\|random_trade\|civilized\|gm-seed-a` | Free company hall | **Town hall** |
+| `town\|germanic\|mountain\|random_trade\|civilized\|gm-seed-c` | Adventurers' charter hall | **Town hall** |
+| `town\|germanic\|plains\|none\|civilized\|golden-master-v3` | Hireling hall | **Town hall** |
+| `town\|germanic\|plains\|road\|civilized\|gm-seed-a` | Free company hall | **Town hall** |
+
+The full structural-NPC link census over the 525-row corpus, before and after —
+**the correct pairings all survive, and the total link count is unchanged at 25**:
+
+| link | before | after |
+|---|---|---|
+| Lord Mayor → Town hall | 10 | **15** |
+| Lord Mayor → Mayor and council | 7 | 7 |
+| Lord Mayor → Elder Grove Council | 1 | 1 |
+| Lord Mayor → Free company hall | 3 | **0** |
+| Lord Mayor → Adventurers' charter hall | 1 | **0** |
+| Lord Mayor → Hireling hall | 1 | **0** |
+| Archmagister → Bardic college | 2 | 2 |
+| **total** | **25** | **25** |
+
+### Blast radius — MEASURED
+
+**5 of 525 rows move on top of SHIFT-2, and they are a strict SUBSET of SHIFT-2's
+25.** The combined re-record therefore moves **25 of 525 rows — 0 added, 0 removed,
+key set unchanged.** The confinement is structural, not asserted: the narrowing can
+only alter a row that carried a noble link in the first place, and only 25 rows
+carry any structural link at all (independently measured — the link set and
+SHIFT-2's drift set are the SAME 25 keys). No RNG is drawn at the match site.
+
+| key | before (SHIFT-2 'after') | after (this batch) |
+|-----|--------|-------|
+| `town\|germanic\|auto\|random_trade\|civilized\|gm-seed-a` | `0ead97b24084…` | `2f8e8a12401d…` |
+| `town\|germanic\|mountain\|random_trade\|civilized\|gm-seed-a` | `8beee2b8a6d1…` | `cb2a7a9d523b…` |
+| `town\|germanic\|mountain\|random_trade\|civilized\|gm-seed-c` | `01d392a3f7a0…` | `69f344041f89…` |
+| `town\|germanic\|plains\|none\|civilized\|golden-master-v3` | `1aab7172a953…` | `6a32a994a896…` |
+| `town\|germanic\|plains\|road\|civilized\|gm-seed-a` | `3b79b0e112c7…` | `c479c85d8bcc…` |
+
+The other twenty rows carry SHIFT-2's tabled 'after' hash UNCHANGED.
+
+### Cross-checks executed before the re-record was trusted
+
+1. The manifest was computed INDEPENDENTLY of the test harness, by a separate
+   script driving the same pipeline; the `UPDATE_GOLDEN` output and the independent
+   computation are **equal on all 525 rows**.
+2. Twenty of the twenty-five re-recorded hashes reproduce SHIFT-2's tabled 'after'
+   values EXACTLY — hashes written down weeks earlier, on another lane, from a
+   different tree. The five that differ are exactly the five rows measured as
+   regex-moved.
+3. An in-process A/B (old pattern vs new, same process, same corpus) reproduced the
+   pre-edit and post-edit manifests exactly on all 525 rows each — proving the two
+   passes were uncontaminated and the link diff above is real.
+
+### Capture command (executed once, under the gate mutex)
+
+```
+UPDATE_GOLDEN=1 sh scripts/gate-mutex.sh --run -- npx vitest run tests/property/generatorGoldenMaster.test.js
+```
+
+### JUDGMENT calls — vetoable
+
+- **Cured the class (5 names), not merely the 3 the probe named.** `Hireling hall`
+  and `Carriers' hiring hall` are the same defect — a non-civic "…hall" capturing
+  the civic head — and cannot coherently be correct while `Free company hall` is
+  wrong. Leaving them would bank a known-broken sibling. Say "veto" to restrict the
+  cure to the three probe-named strings.
+- **Narrowed the name pattern rather than making `linkToInst` category-aware.** The
+  catalog's own `Government` / `Infrastructure` / `Entertainment` categories are a
+  cleaner signal, but consuming them changes the `linkToInst` contract for all six
+  role families — a schema change well outside the one-seed-line move §17.1
+  authorizes. Recorded as the better long-term shape.
+- **Added no speculative civic-hall spellings** (`moot hall`, `village hall`,
+  `guildhall`). The corpus is closed, so an alternative matching nothing in it is
+  unfalsifiable pattern surface. A future civic hall added to the catalog must be
+  added to this pattern too — the same maintenance the merchant row's `trade hall`
+  already carries. Note `guildhall` would additionally collide with the merchant
+  family, which already claims the `guild` token.

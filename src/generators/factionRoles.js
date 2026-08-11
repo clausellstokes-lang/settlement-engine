@@ -52,12 +52,51 @@ export const FACTION_ROLES = {
     { role: 'Lieutenant',     importance: 'key' },
   ],
   noble: [
-    { role: 'Lord Mayor',     importance: 'pillar', linkToInst: /council|court|hall|government/ },
+    { role: 'Lord Mayor',     importance: 'pillar', linkToInst: /council|court|government|\b(?:town|city)\s?halls?\b/ },
   ],
   arcane: [
     { role: 'Archmagister',   importance: 'pillar', linkToInst: /tower|academy|college|magisterium/ },
   ],
 };
+
+// ── THE LORD MAYOR'S CIVIC-HALL NARROWING, 2026-08-11 (owner-approved, ────────
+// OWNER_DECISION_QUEUE §17.1) ────────────────────────────────────────────────
+// The noble pattern's bare `hall` alternative matched ANY institution whose name
+// merely ends in "hall", so the Lord Mayor — the settlement's civic head — was
+// linked to gambling dens and mercenary hiring halls. Declared as a known
+// imperfection when the institution-link repair landed (GOLDEN_SHIFT_LEDGER_MAIN
+// SHIFT-2, 0f85ced0), which measured 4 wrong links of 20 across a 120-seed probe:
+// 'Gambling halls' x2, 'Free company hall', "Adventurers' charter hall".
+//
+// DERIVED FROM THE CLOSED CORPUS, NOT FROM GUESSWORK. Institution names are never
+// templated: every push site copies a literal key out of `data/institutionalCatalog`
+// (276 unique names over 6 tiers), and `nativeSemanticName` returns '' for
+// custom/DM content, so the set of strings this pattern can ever see is closed and
+// enumerable. Enumerated at HEAD e7774ff2, the OLD pattern matched 15 of the 276;
+// the new one matches 10 — a STRICT SUBSET (zero names newly matched). The five it
+// drops are the entire non-civic-hall class, not just the three the probe named:
+//     "Adventurers' charter hall"  (Magic / Adventuring)   ← probe-named
+//     'Free company hall'          (Defense)               ← probe-named
+//     'Gambling halls'             (Entertainment)         ← probe-named
+//     'Hireling hall'              (Adventuring)           ← same class, unhit by the probe
+//     "Carriers' hiring hall"      (Economy)               ← same class, unhit by the probe
+// The ten that survive are every governmental/civic name in the catalog:
+//     'Town hall'  'City hall'  'Courthouse'  'Multiple courthouses'
+//     'Multiple court buildings'  'Mayor and council'  'Town council'
+//     'Elder Grove Council'  'City-state government'  'Palace/government complex'
+//
+// `council`, `court` and `government` are DELIBERATELY LEFT BARE: they have zero
+// false friends in the closed corpus, and narrowing them would be unmeasured
+// same-seed movement bought for no defect. `court` must stay un-anchored — a
+// `\bcourt\b` would stop matching 'Courthouse' and 'Multiple courthouses'.
+// No speculative civic-hall spellings ('moot hall', 'village hall', 'guildhall')
+// were added: the corpus is closed, so an alternative matching nothing in it is
+// unfalsifiable pattern surface. A future civic hall added to the catalog must be
+// added here too — the same maintenance the merchant row's 'trade hall' carries.
+//
+// ⚠ DECLARED SHIFT: a settlement whose only `hall` was a non-civic one now links
+// nothing (or falls through to a real civic seat later in the roster). No RNG is
+// drawn at the match site, so no downstream draw moves.
 
 // Canonical archetype → factionRoles' structural-role key. Only these six imply
 // structural NPCs; every other canonical archetype → null (no synthesis), as before.
