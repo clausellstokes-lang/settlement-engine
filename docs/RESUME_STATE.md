@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 14:42:53 EDT
+**Generated:** 2026-08-11 14:56:00 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ffc85a90` | **16** |
-| ledger (main) | `review-fixes-2026-07-08` | `96124a60` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **16** |
+| ledger (main) | `review-fixes-2026-07-08` | `1dd531f7` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 20329: sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/observedShapeReaders.walker.test.js tests/lint/observedShapeBaseline.test.js tests/lint/observedShapeSentinel.test.js tests/lint/sovereigntyLightingContract.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js tests/lint/sizeBaseline.test.js
-**Disk:** 37Gi free (82% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 30498: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T144211` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T145419` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T144211
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T145419
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,7 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
+ M scripts/.size-baseline.json
  M src/domain/hookEscalation.js
  M src/domain/pendingEditsPreview.js
  M src/domain/simulationSpine.js
@@ -43,9 +44,9 @@ staged set BY NAME AND COUNT.
  M tests/lib/generationTelemetry.test.js
  M tests/lib/structuralFingerprint.test.js
  M tests/pdf/worldBook.test.js
- M tests/security/ingestCheckRate.pglite.test.js
 ```
 ```
+  +1      -1      scripts/.size-baseline.json
   +12     -5      src/domain/hookEscalation.js
   +5      -3      src/domain/pendingEditsPreview.js
   +13     -4      src/domain/simulationSpine.js
@@ -53,7 +54,7 @@ staged set BY NAME AND COUNT.
   +8      -3      src/domain/worldPulse/npcAgency.js
   +12     -4      src/domain/worldPulse/npcLadderState.js
   +8      -3      src/generators/aiLayer.js
-  +34     -2      src/lib/generationTelemetry.js
+  +39     -2      src/lib/generationTelemetry.js
   +7      -1      src/lib/structuralFingerprint.js
   +12     -3      src/utils/generateCampaignPDF.js
   +16     -4      src/utils/generateWorldBook.js
@@ -61,11 +62,11 @@ staged set BY NAME AND COUNT.
   +10     -3      tests/lib/generationTelemetry.test.js
   +9      -1      tests/lib/structuralFingerprint.test.js
   +17     -3      tests/pdf/worldBook.test.js
-  +17     -2      tests/security/ingestCheckRate.pglite.test.js
 ```
 ## Last 12 build commits
 
 ```
+aa585167 2026-08-11 The pglite contention cure is a REFUTATION: the five suites never collapsed
 ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it cannot mean
 36159389 2026-08-11 Schema 5 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
 133e300f 2026-08-11 Record: ES-6a LANDED; the espionage tail advances to ES-7
@@ -77,17 +78,16 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 58436804 2026-08-11 The road labels I designed cannot exist: three of four cases refused, with measurement
 0dc40691 2026-08-11 INDEX: flip ES-5d's status token to LANDED, keeping its D7 note
 53fb10da 2026-08-11 Record: ES-5d LANDED; the ES-5 amendment is complete across four waves
-954592c0 2026-08-11 ES-5d: a graded mission credits the ladder — and the window it was specified with was dead
 ```
 ## Last 6 ledger commits
 
 ```
+1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
 738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
 7d31c983 2026-08-11 Handoff corrected: the gate is NOT green, and the harness lied about it again
 9eefd902 2026-08-11 Handoff: schema 5 is landed and the observed-shape gate is GREEN
-049b8f65 2026-08-11 Handoff final: the mint lane's WIP is vaulted; ES-7's refusal is recorded
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -123,12 +123,23 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    its recorded JUDGMENT; lands by private-index plumbing; deliverable = full gate at
    **exit 1 with EXACTLY ONE red outside the frozen census (the owner's golden)**.
    Transcript: session dir `subagents/agent-a1c43cda617f681d8.jsonl`.
-2. **Lane B (read-only workflow `wf_5618aec5-d46`) — FABLE SURVEY COLLECTION.** Fans out
-   over every post-`33aeea35` `⏳ FABLE VALIDATION OWED` row (72 in FABLE_VALIDATION_QUEUE.md,
-   5 in TC-4.md, 1 in SOL_QUEUE.md), receipt-checks each against HEAD, and writes the
-   rulable digest to scratchpad `laneB-fable-survey-digest.md`. **The RULINGS are the Fable
-   chair's, on the beats after the digest lands** — the workflow only collects. Resume:
-   `Workflow({scriptPath: <session workflows/scripts/fable-survey-collection-wf_5618aec5-d46.js>, resumeFromRunId: 'wf_5618aec5-d46'})`.
+2. **Lane B — COLLECTION DONE (~15:00), digest COMPLETING.** The survey workflow
+   (`wf_5618aec5-d46`, 14 agents) extracted all post-boundary acts and receipt-checked
+   them; its own verification caught that the SYNTHESIS input arrived TRUNCATED, so the
+   first digest covers 44 of the true **70** act rows (queue lines 7415–7484; 72 grep
+   hits − 2 protocol lines; the dispatch's "72 markers = the debt" framing was off — the
+   marker map is **83 instances / 4 files / 79 clearable**, and SOL_QUEUE's 1 is the
+   PROTOCOL definition, not an act). All 71 extracted acts were recovered from the
+   workflow journal into scratchpad `laneB-items-full.json`, and a completion agent is
+   merging the missing 26 into `laneB-fable-survey-digest.md` (transcript: session dir
+   `subagents/agent-a79043b489f97b15a.jsonl`). Partial counts (44 rulable): 39 RATIFY /
+   **5 RE-EXAMINE**, 27 HIGH-density. ⚠ Chair-flagged for first reading: the two schema-5
+   constitutional rows (7481/7482), the anti-vacuity-floor rebuttal (may have fed
+   CR-OSR-FREEZE-9), the never-applied M6 re-key (close SUPERSEDED?), the census-titles
+   contradiction, the two-incompatible-walker-rules item, and veto-points H2/H3/H10 +
+   the H6 brief-authoring pattern. **RULINGS = the Fable chair, next beats.**
+   ⚠ METHOD: a workflow synthesis stage fed inline JSON can silently truncate — always
+   check the digest's population against the SOURCE count (this one self-verified).
 3. **Lane C (build, Opus) — the 21 remaining READER-WITHOUT-WRITER repairs** (23 class-(a)
    true positives, 2 repaired; precedent `c74048e4`). Reader-side only; writer-side/persisted-
    shape items STOP-and-report as CHAIR-OWED; focused tests only (Lane A owns the gate);
