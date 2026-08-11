@@ -19,13 +19,24 @@ import {
 
 // ── Sample settlements ──────────────────────────────────────────────────
 
+// ⚠ THIS FIXTURE USED TO CARRY A SETTLEMENT-ROOT `plotHooks` ARRAY, and it was
+// the only reason collectAllHooks' `aggregate` arm ever produced anything. No
+// writer in this repo puts `plotHooks` on a settlement root, so the fixture was
+// manufacturing a shape the corpus never emits and greening a dead read with it.
+// The two entries now sit at LIVE addresses — an npc and the power structure —
+// so the count is unchanged at 5 and every source label is one a real settlement
+// can actually produce.
 function settlementWithHooks() {
   return {
     name: 'Greycairn',
-    plotHooks: [
-      'The reeve is suspected of taking bribes.',
-      { category: 'Survival', hook: 'Bandits target food caravans on the southern road.', severity: 'high' },
+    npcs: [
+      { name: 'Reeve Halden', plotHooks: ['The reeve is suspected of taking bribes.'] },
     ],
+    powerStructure: {
+      plotHooks: [
+        { category: 'Survival', hook: 'Bandits target food caravans on the southern road.', severity: 'high' },
+      ],
+    },
     economicViability: {
       plotHooks: [
         { category: 'Trade Monopoly', hook: 'A single merchant guild controls grain imports.', severity: 'high' },
@@ -98,14 +109,18 @@ function settlementWithContestedLegitimacy() {
 describe('collectAllHooks()', () => {
   it('aggregates hooks from every documented surface', () => {
     const hooks = collectAllHooks(settlementWithHooks());
-    // 2 from plotHooks, 1 from economicViability, 1 from defenseProfile,
-    // 1 from history events = 5 total.
+    // 1 from npcs, 1 from powerStructure, 1 from economicViability,
+    // 1 from defenseProfile, 1 from history events = 5 total.
     expect(hooks.length).toBe(5);
     const sources = new Set(hooks.map(h => h.source));
-    expect(sources.has('aggregate')).toBe(true);
+    expect(sources.has('npc')).toBe(true);
+    expect(sources.has('power')).toBe(true);
     expect(sources.has('economic')).toBe(true);
     expect(sources.has('defense')).toBe(true);
     expect(sources.has('history')).toBe(true);
+    // anchored: the five live sources above are asserted present on this same
+    // collection, so a collector that stopped walking would red them first.
+    expect(sources.has('aggregate')).toBe(false);
   });
 
   it('returns [] on empty / nullish input', () => {

@@ -553,10 +553,19 @@ function derivePeopleFear(s) {
   // The fear rung therefore speaks only from the typed stressor vocabulary
   // and the defense roster. A settlement with neither has no shared dread to
   // report, and says so.
-
-  if (asList(s.plotHooks).length) {
-    return 'the things this place has not told anyone yet';
-  }
+  //
+  // ⚠ AND A THIRD ARM WAS DELETED HERE, NOT DISABLED (2026-08-11). It read
+  // `if (asList(s.plotHooks).length) return 'the things this place has not told
+  // anyone yet';`. `settlement.plotHooks` is writerless — the live hooks hang off
+  // npcs[], economicViability, history.historicalEvents[] and so on — so the arm
+  // had NEVER fired and this rung has only ever had two live sources. It was
+  // deleted rather than re-pointed at the canonical collector on purpose: the
+  // paragraph above states this rung's contract as the TYPED stressor vocabulary
+  // plus the defense roster, and a plot hook is authored PROSE, which is exactly
+  // the noun-slot-fed-by-a-clause defect that shipped "People fear a return of the
+  // settlement is under active siege." Re-pointing would have re-opened it under a
+  // new address. Lighting a hook-derived fear rung is a prose decision with a
+  // same-seed shift across every settlement, and it belongs to the chair.
 
   return 'nothing they will say out loud';
 }

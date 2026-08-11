@@ -26,6 +26,7 @@ import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import { liveSieges, warExhaustionStandings, dispositionStandings } from '../domain/display/warStatus.js';
 import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../domain/display/realmArcSummary.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 function durationBand(ms) {
@@ -613,10 +614,18 @@ function buildDigest(d, campaignName, settlements, pageN) {
       ly += 3;
     }
 
-    // Adventure hook (one-liner)
-    const hooks = st_.plotHooks || st_.hooks || [];
+    // Adventure hook (one-liner).
+    //
+    // ⚠ THIS LINE NEVER PRINTED. The read was `st_.plotHooks || st_.hooks`, and
+    // no writer produces either key on a settlement ROOT, so the HOOK slot on
+    // every settlement card was blank. `collectPlotHooks` is the canonical
+    // collector (src/domain/dossier/plotHooks.js) the on-screen tabs and the
+    // react-pdf lane already share, and it returns hooks sorted by priority —
+    // so hooks[0] here is now the settlement's STRONGEST hook rather than
+    // whichever one happened to sit first in an array nothing filled.
+    const hooks = collectPlotHooks(st_);
     if (hooks.length > 0) {
-      const hook = typeof hooks[0] === 'string' ? hooks[0] : (hooks[0].hook || hooks[0].text || hooks[0].title || '');
+      const hook = hooks[0].text || '';
       if (hook) {
         d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
         d.text('HOOK', L_X, ly + 2);

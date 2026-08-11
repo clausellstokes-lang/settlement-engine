@@ -130,11 +130,17 @@ describe('pendingEdits — queue ops', () => {
 });
 
 describe('pendingEdits — cascade preview', () => {
+  // ⚠ THE THREE HOOKS MOVED OFF THE SETTLEMENT ROOT (2026-08-11). They were
+  // `settlement.plotHooks`, an address no writer in this repo produces — so
+  // `downstreamCounts.hooks` was 0 for every real user and this fixture was the
+  // only shape in which it was not. They now sit at live addresses the canonical
+  // collector (domain/dossier/plotHooks.js) walks, so the count below is
+  // unchanged at 3 and is now reachable from a generated settlement.
   const baseSettlement = {
     name: 'Hightower',
-    npcs: [{ name: 'A' }, { name: 'B' }],
+    npcs: [{ name: 'A', plotHooks: [{ text: 'H1' }, { text: 'H2' }] }, { name: 'B' }],
     factions: [{ name: 'F1' }],
-    plotHooks: [{ title: 'H1' }, { title: 'H2' }, { title: 'H3' }],
+    economicViability: { plotHooks: [{ hook: 'H3' }] },
   };
 
   it('empty queue → empty preview', () => {

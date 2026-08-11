@@ -217,12 +217,17 @@ export function extractFullContext(s) {
     // settlement.plotHooks is never written — the live hooks are
     // economicViability.plotHooks ({ category, hook, severity } objects) and
     // the per-event history.historicalEvents[].plotHooks (strings). Merge
-    // both (top-level kept as a legacy fallback), normalize to plain text,
-    // dedupe, and cap at 4 to keep the prompt budget where it was.
+    // both, normalize to plain text, dedupe, and cap at 4 to keep the prompt
+    // budget where it was.
+    //
+    // ⚠ THE `...(s.plotHooks || [])` SPREAD WAS DELETED, NOT DISABLED
+    // (2026-08-11). This comment already recorded that the root key is never
+    // written, and it was kept anyway "as a legacy fallback" — a fallback that
+    // can never fall back. Deleting it is byte-identical on every settlement the
+    // pipeline produces. Do not re-add it.
     plotHooks:    [...new Set([
       ...(via.plotHooks || []),
       ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []),
-      ...(s.plotHooks || []),
     ].map(normalizePlotHook).filter(Boolean))].slice(0, 4),
 
     // Spatial

@@ -36,6 +36,38 @@ export const GENERATION_SPINE_VERSION = 1;
 const arr = (v) => (Array.isArray(v) ? v : []);
 const str = (v) => (typeof v === 'string' && v.length <= 48 ? v : undefined);
 
+/**
+ * ⚠ `has_hooks` AND `has_supply_chains` WERE FALSE ON EVERY GENERATION EVER FIRED.
+ *
+ * The fingerprint read `s.plotHooks || s.hooks` and `s.supplyChains` — three keys
+ * that NO writer in this repo produces on a settlement ROOT. So `hook_count_band`
+ * and `chain_count_band` were pinned at the zero band and both coherence booleans
+ * were pinned false, for every settlement, in every milestone event.
+ *
+ * ⚠ WHY THIS COUNTS THE ADDRESSES INLINE INSTEAD OF CALLING THE CANONICAL
+ * COLLECTOR. `domain/dossier/plotHooks.collectPlotHooks` is the canonical hook
+ * surface and every other repaired reader now calls it — but this module's
+ * contract, stated in its own header, is "dependency-light: imports only
+ * analytics.js … so it can be dynamic-imported at each store waypoint without
+ * cold-start cost", and the collector pulls the traditions prose, the hook-theme
+ * vocabulary, the prose seams and the retention layer behind it. A telemetry BAND
+ * does not need canonical dedupe or priority ordering, only an honest count, so
+ * the invariant wins. The address list below is the collector's own settlement-
+ * scope list; if a hook address is added there, add it here too.
+ *
+ * @param {Record<string, any>} s
+ * @returns {number}
+ */
+function liveHookCount(s) {
+  let n = arr(s.economicViability?.plotHooks).length
+    + arr(s.economicState?.safetyProfile?.plotHooks).length;
+  for (const npc of arr(s.npcs)) n += arr(npc?.plotHooks).length;
+  for (const conflict of arr(s.conflicts)) n += arr(conflict?.plotHooks).length;
+  for (const tension of arr(s.history?.currentTensions)) n += arr(tension?.plotHooks).length;
+  for (const event of arr(s.history?.historicalEvents)) n += arr(event?.plotHooks).length;
+  return n;
+}
+
 /** Coarse count → band. Keeps hook/chain counts non-identifying and cell-friendly. */
 export function countBand(n) {
   const x = Number(n) || 0;
@@ -94,8 +126,13 @@ export function generationFingerprint(settlement) {
   const cfg = s.config || {};
   const power = s.powerStructure || {};
   const types = stressTypes(s);
-  const hooks = arr(s.plotHooks || s.hooks).length;
-  const chains = arr(s.supplyChains).length;
+  const hooks = liveHookCount(s);
+  // ⚠ NO `|| s.economy?.activeChains` FALLBACK. deriveAllSupplyChainStates carries
+  // one, but `settlement.economy` is ITSELF a writerless root key (banked in the
+  // observed-shape inventory for four other files), so copying that precedence
+  // chain here would have traded one dead read for another — which the reader
+  // ratchet caught as growth. `economicState.activeChains` is the live address.
+  const chains = arr(s.economicState?.activeChains).length;
   const neighbours = arr(s.neighbourNetwork).length + arr(s.neighbours).length;
   return {
     tier: str(s.tier),

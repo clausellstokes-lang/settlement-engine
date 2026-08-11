@@ -7,7 +7,11 @@
  *   settlement.history.events[].plotHooks       — historical event hooks
  *   settlement.defenseProfile.plotHooks         — defense / threat hooks
  *   settlement.powerStructure.plotHooks         — faction-level hooks
- *   settlement.plotHooks                        — aggregated top-level hooks
+ *   settlement.npcs[].plotHooks                 — per-figure hooks
+ *
+ * ⚠ `settlement.plotHooks` IS NOT ONE OF THEM. This list used to name an
+ * "aggregated top-level" address; nothing has ever written it. See the deleted
+ * arm in collectAllHooks below.
  *
  * The shapes differ (some are strings, some are { category, hook,
  * severity } objects, some carry hidden context). This module presents
@@ -46,10 +50,13 @@ export function collectAllHooks(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
   const out = [];
 
-  // Top-level aggregated list (sometimes populated by post-processing).
-  if (Array.isArray(settlement.plotHooks)) {
-    for (const h of settlement.plotHooks) out.push({ source: 'aggregate', raw: h });
-  }
+  // ⚠ THE 'aggregate' ARM WAS DELETED, NOT DISABLED (2026-08-11). It read
+  // `settlement.plotHooks` — "sometimes populated by post-processing", which was
+  // never true: no writer in this repo produces `plotHooks` on a settlement ROOT,
+  // and the header's claim that hooks live at `settlement.plotHooks` was aspiration
+  // rather than observation. Every live address is walked below, so deleting the
+  // arm removes a dead read and loses no hook. Do not re-add it — a genuinely new
+  // aggregate address belongs in this walk under its own source label.
 
   // Economic viability hooks.
   const econ = settlement.economicViability;

@@ -80,17 +80,30 @@ function govBaselineFor(archetype) {
 }
 
 // Importance → weight (mirrors npcAgency.notability so the agency layer and the
-// disposition read the same authored-importance ladder). Authored importance
-// strings dominate; falls back to dots/notability; an unranked NPC still counts
-// at a small floor so a town of minor NPCs isn't silently weightless.
+// disposition read the same authored-importance ladder). An unranked NPC still
+// counts at a small floor so a town of minor NPCs isn't silently weightless.
+//
+// ⚠ THREE RUNGS WERE DELETED HERE, NOT DISABLED (2026-08-11). Between the
+// `notable` rung and the floor sat a SECOND ladder keyed on `npc.notability` and
+// `npc.dots` (0.9 / 0.68 / 0.48). NO writer in this repo produces either field on
+// an NPC: the generator roster writes `influence` and `power`, `createNpc` writes
+// thirteen fields with neither among them, no import/migration/normalizer sets
+// them, and the only dynamic field-list that names them
+// (npcVerdictApply.RELINQUISHED_FIELDS) is a hasOwnProperty-guarded STRIP that
+// cannot mint a field. They are declared in the SimNpc typedef only because that
+// typedef was derived by grepping READS. So the three rungs never fired on a real
+// roster and this function has only ever had four live outcomes.
+//
+// ⚠ THE DELETION IS BEHAVIOUR-PRESERVING BY CONSTRUCTION, not merely in practice:
+// the `importance` arms above short-circuit, so a rung below them can only change
+// an answer for an NPC that has a dots/notability value AND no importance string —
+// a shape nothing produces. Do not re-add them; if a dots ladder is ever wanted,
+// it needs a writer first.
 /** @param {import('../settlement.schema.js').SimNpc} npc @returns {number} */
 function importanceWeight(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
   if (npc.importance === 'notable') return 0.62;
-  if (npc.notability === 3 || npc.dots === 3) return 0.9;
-  if (npc.notability === 2 || npc.dots === 2) return 0.68;
-  if (npc.notability === 1 || npc.dots === 1) return 0.48;
   return 0.38;
 }
 

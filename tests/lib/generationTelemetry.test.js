@@ -21,11 +21,18 @@ import {
 const sampleSettlement = () => ({
   tier: 'town',
   config: { terrainType: 'coastal' },
-  economicState: { prosperity: 'struggling' },
   stressors: [{ type: 'banditry' }, { type: 'famine' }, { type: 'banditry' }],
   activeConditions: [{ archetype: 'plague' }],
-  plotHooks: [{}, {}, {}, {}],
-  supplyChains: [{}, {}],
+  // ⚠ THE ROOT `plotHooks` / `supplyChains` ARRAYS THIS FIXTURE CARRIED WERE A
+  // SHAPE THE CORPUS NEVER EMITS. Nothing writes either key on a settlement root,
+  // so the fingerprint's hook and chain bands were pinned at zero and both
+  // coherence booleans at false on every real generation — and this fixture was
+  // the only thing hiding it. Four hooks and two chains now sit at the addresses
+  // generation actually writes, so the expected bands below are unchanged.
+  npcs: [{ name: 'A', plotHooks: [{}, {}] }],
+  economicViability: { plotHooks: [{}] },
+  history: { historicalEvents: [{ plotHooks: [{}] }] },
+  economicState: { prosperity: 'struggling', activeChains: [{}, {}] },
   powerStructure: { factions: [{}], conflicts: [{}, {}] },
   neighbourNetwork: [{}],
 });

@@ -29,6 +29,7 @@ import { autoLayout } from './graphLayout.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { tickCalendarLabel } from '../domain/display/humanizeEngineTokens.js';
 import { collectRealmSummary } from './generateCampaignPDF.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { slugify } from '../kernel/slugify.js';
 
 // ── Page geometry + palette (mirrors the campaign PDF) ───────────────────────────
@@ -106,10 +107,21 @@ function buildDossierEntry(save, st_, player) {
   const npcs = Array.isArray(st_.npcs) ? st_.npcs : [];
   const hist = st_.history || {};
   const overview = hist.historicalCharacter || hist.arrivalScene || hist.pressureSentence || '';
-  // Plot hooks are DM content — present only in DM mode (toPublicSafe drops them,
-  // but guard here too so the collector is honest without depending on the projector).
-  const rawHooks = Array.isArray(st_.plotHooks) ? st_.plotHooks : (Array.isArray(st_.hooks) ? st_.hooks : []);
-  const hooks = player ? [] : rawHooks.map(h => (typeof h === 'string' ? h : h?.text || h?.title || '')).filter(Boolean);
+  // Plot hooks are DM content — present only in DM mode (toPublicSafe drops the
+  // npc-borne ones at src/domain/display/publicSafe.js, but guard here too so the
+  // collector is honest without depending on the projector).
+  //
+  // ⚠ THE SETTLEMENT-ROOT ADDRESS IS DEAD, AND THIS SECTION WAS ALWAYS EMPTY.
+  // This read was `st_.plotHooks ?? st_.hooks`. No writer in this repo produces
+  // either key on a settlement ROOT — the live hooks hang off npcs[], conflicts[],
+  // history.currentTensions[], relationships[], economicViability, economicState
+  // .safetyProfile, history.historicalEvents[] and traditions[] — so the World
+  // Book's "HOOKS (DM)" chapter printed nothing for every generated settlement
+  // while the hooks themselves rendered fine on screen. `collectPlotHooks` is the
+  // canonical collector the settlement tabs, the react-pdf view model, Session
+  // Mode and tonight-at-the-table already share; the jsPDF lane simply never
+  // adopted it. Do not re-add a root fallback — add the address to the collector.
+  const hooks = player ? [] : collectPlotHooks(st_).map(h => h.text).filter(Boolean);
   return {
     id: save.id,
     name: st_.name || save.name || 'Unnamed',

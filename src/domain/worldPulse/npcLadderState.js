@@ -176,16 +176,24 @@ function structuralRankScore(npc) {
 /**
  * The ladder-eligible members of a faction, ORDERED top-rung first, derived from the
  * settlement's roster + existing structural-position indicators (deterministic; no
- * stored migration). Order key (descending): importance weight, dots, structural rank,
+ * stored migration). Order key (descending): importance weight, structural rank,
  * then npcId codepoint (byte-stable tiebreak). Stasis NPCs and below-floor extras are
  * excluded. Returns [{ npcId, name }].
+ *
+ * ⚠ A `dots` TIEBREAK WAS DELETED FROM THIS ORDER, NOT DISABLED (2026-08-11). It
+ * sat second, as `num(n.dots, 0)` on the row and `(b.dots - a.dots)` in the
+ * comparator. Nothing in this repo writes `npc.dots`, so the term was uniformly 0
+ * on every real roster — a constant second key, which is no key at all — and this
+ * docblock advertised a four-key order that behaved as three. See
+ * disposition.importanceWeight for the writer census. Do not re-add it; a dots
+ * ordering needs a writer first.
  * @param {string} sid @param {{ npcs?: unknown }} settlement @param {{ id?: unknown, name?: unknown }} faction
  * @param {string} fkey @param {{excludeDead?:boolean}} [options]
  * @returns {Array<{ npcId: string, name: string }>}
  */
 export function eligibleMembersOf(sid, settlement, faction, fkey, { excludeDead = false } = {}) {
   const npcs = Array.isArray(asObject(settlement).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).npcs) : [];
-  /** @type {Array<{ npcId: string, name: string, w: number, dots: number, rank: number }>} */
+  /** @type {Array<{ npcId: string, name: string, w: number, rank: number }>} */
   const rows = [];
   npcs.forEach((npc, index) => {
     const n = asObject(npc);
@@ -199,9 +207,9 @@ export function eligibleMembersOf(sid, settlement, faction, fkey, { excludeDead 
     const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
     if (w < LADDER_TUNING.RUNG_ELIGIBLE_FLOOR) return;
     const nid = npcId(sid, n, index);
-    rows.push({ npcId: nid, name: String(n.name || n.label || nid), w, dots: num(n.dots, 0), rank: structuralRankScore(n) });
+    rows.push({ npcId: nid, name: String(n.name || n.label || nid), w, rank: structuralRankScore(n) });
   });
-  rows.sort((a, b) => (b.w - a.w) || (b.dots - a.dots) || (b.rank - a.rank) || compareCodepoint(a.npcId, b.npcId));
+  rows.sort((a, b) => (b.w - a.w) || (b.rank - a.rank) || compareCodepoint(a.npcId, b.npcId));
   return rows.map((r) => ({ npcId: r.npcId, name: r.name }));
 }
 

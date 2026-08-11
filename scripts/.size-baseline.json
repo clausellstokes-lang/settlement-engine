@@ -7,7 +7,7 @@
   "src/App.jsx": 650,
   "src/domain/explanation.js": 827,
   "src/domain/worldPulse/applyWorldPulse.js": 941,
-  "src/domain/worldPulse/npcAgency.js": 833,
+  "src/domain/worldPulse/npcAgency.js": 830,
   "src/domain/worldPulse/pulseKernel.js": 1580,
   "src/domain/worldPulse/roadsKernel.js": 838,
   "src/domain/worldPulse/settlementStrategy.js": 812,

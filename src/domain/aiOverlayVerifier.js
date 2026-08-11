@@ -483,6 +483,22 @@ export function verifyAiOverlay(original, refined) {
   // Entity arrays — institutions, factions, npcs, ROOT hooks, chains,
   // conditions. `dmCompass.hooks` is intentionally a different nested address:
   // AI-authored compass prompts never enter this root entity contract.
+  //
+  // ⚠ `hooks` AND `supplyChains` ARE DELIBERATELY KEPT, AND THIS IS A RECORDED
+  // NON-REPAIR (2026-08-11), not an oversight. Both are settlement-ROOT keys no
+  // writer produces, and the observed-shape inventory banks them here as
+  // reader-with-no-writer rows — every other reader of those two keys was
+  // repaired in the same change that added this note. These two stay because
+  // this is not a display read, it is a FENCE: compareEntityArrays reports
+  // `invented_entity` for any key present in `refined` and absent from
+  // `original`, so an undefined-vs-populated comparison is exactly the case it
+  // exists to catch. The edge refiner already emits a top-level `hooks` array in
+  // its JSON contract (supabase/functions/generate-narrative/prompts.ts) which
+  // the applier nests under `dmCompass`; if that applier ever wrote it to the
+  // root instead, THIS is the line that would notice. Deleting it would remove
+  // a working anti-hallucination guard to satisfy a census — the same reasoning
+  // that stopped the `locks` cluster. Deliberately deferred, documented, not a
+  // bug to re-find.
   violations.push(...compareEntityArrays('institutions', original.institutions, refined.institutions));
   violations.push(...compareEntityArrays(
     'powerStructure.factions',

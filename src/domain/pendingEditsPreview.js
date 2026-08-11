@@ -7,6 +7,7 @@
  */
 
 import { activeEdits } from './pendingEdits.js';
+import { collectPlotHooks } from './dossier/plotHooks.js';
 
 const PROSE_EDITS_BEFORE_PROGRESSION_SUGGESTION = 2;
 const INSTITUTION_REMOVALS_BEFORE_ANCHOR_WARNING = 2;
@@ -64,8 +65,6 @@ const STRUCTURAL_DELTA_SPEC = Object.freeze({
  * @typedef {{
  *   npcs?: PreviewNpc[],
  *   factions?: unknown[],
- *   plotHooks?: unknown[],
- *   hooks?: unknown[],
  *   _narrative?: unknown,
  *   aiSettlement?: unknown,
  *   narrativeNotes?: unknown,
@@ -423,9 +422,14 @@ export function previewCascade(settlement, queue) {
   preview.downstreamCounts.factions = Array.isArray(settlement.factions)
     ? settlement.factions.length
     : 0;
-  preview.downstreamCounts.hooks = Array.isArray(settlement.plotHooks)
-    ? settlement.plotHooks.length
-    : (Array.isArray(settlement.hooks) ? settlement.hooks.length : 0);
+  // ⚠ WAS ALWAYS ZERO. Both root addresses (`settlement.plotHooks`,
+  // `settlement.hooks`) are writerless, so the preview told every user that an
+  // edit touched 0 hooks. Counted through the canonical collector instead.
+  // The cast is the module's usual idiom: PreviewSettlement is this file's own
+  // narrow read-shape, not the collector's, and the collector tolerates any shape.
+  preview.downstreamCounts.hooks = collectPlotHooks(
+    /** @type {Parameters<typeof collectPlotHooks>[0]} */ (/** @type {unknown} */ (settlement)),
+  ).length;
   preview.downstreamCounts.npcChanges = npcChanges;
 
   const isNarrated = Boolean(

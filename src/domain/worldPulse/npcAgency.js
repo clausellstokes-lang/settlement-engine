@@ -242,14 +242,19 @@ function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
+// ⚠ THREE RUNGS WERE DELETED HERE, NOT DISABLED (2026-08-11) — the same three,
+// for the same reason, as disposition.importanceWeight, whose comment carries the
+// full census. This function and that one are DELIBERATE MIRRORS ("mirrors
+// npcAgency.notability so the agency layer and the disposition read the same
+// authored-importance ladder"), so they are repaired together or they drift.
+// `npc.notability` and `npc.dots` have no writer anywhere in this repo; the
+// `importance` arms short-circuit above them, so the deletion cannot change an
+// answer for any shape the estate produces.
 /** @param {import('../settlement.schema.js').SimNpc} npc */
 function notability(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
   if (npc.importance === 'notable') return 0.62;
-  if (npc.notability === 3 || npc.dots === 3) return 0.9;
-  if (npc.notability === 2 || npc.dots === 2) return 0.68;
-  if (npc.notability === 1 || npc.dots === 1) return 0.48;
   return 0.38;
 }
 

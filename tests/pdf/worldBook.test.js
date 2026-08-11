@@ -19,9 +19,21 @@ function fixtureCampaign() {
       name: 'Ashford', tier: 'town', population: 1800, culture: 'Hillfolk',
       history: { historicalCharacter: 'A grain town that outlasted a hard famine.' },
       institutions: [{ name: 'The Granary Guild' }, { name: 'Ashford Watch' }],
-      npcs: [{ name: 'Mayor Elda', role: 'Mayor', influence: 8, goal: 'COVERTGOAL betray the guild', secret: 'COVERTSECRET' }],
+      // ⚠ THE HOOK MOVED OFF THE SETTLEMENT ROOT (2026-08-11). It used to be
+      // `settlement.plotHooks`, an address NO writer in this repo produces — so
+      // this fixture was the only reason the World Book's HOOKS (DM) chapter ever
+      // had content, and the chapter was empty for every real settlement. It now
+      // hangs off the NPC, one of the live addresses the canonical collector
+      // (domain/dossier/plotHooks.js) walks, and the player-face pin below is
+      // STRONGER for it: publicSafe.js strips `npcs[].plotHooks` by name, so the
+      // covert string is now dropped by the projector AND by the collector's own
+      // player guard, where the root key was only ever dropped by the guard.
+      npcs: [{
+        name: 'Mayor Elda', role: 'Mayor', influence: 8,
+        goal: 'COVERTGOAL betray the guild', secret: 'COVERTSECRET',
+        plotHooks: ['COVERTHOOK the mayor is secretly a smuggler'],
+      }],
       neighbourNetwork: [{ id: 'brightwater', relationshipType: 'trade_partner' }],
-      plotHooks: ['COVERTHOOK the mayor is secretly a smuggler'],
       dmNotes: 'COVERTNOTE only the DM should see this',
     },
   };
@@ -33,7 +45,9 @@ function fixtureCampaign() {
       institutions: [{ name: 'The Ferry Company' }],
       npcs: [{ name: 'Captain Ros', role: 'Ferrymaster', influence: 5 }],
       neighbourNetwork: [{ id: 'ashford', relationshipType: 'trade_partner' }],
-      plotHooks: [],
+      // Deliberately hook-free: the second settlement proves an empty HOOKS
+      // chapter still binds. The root `plotHooks: []` it used to carry was the
+      // same writerless address as Ashford's and said nothing either way.
     },
   };
   const campaign = {
