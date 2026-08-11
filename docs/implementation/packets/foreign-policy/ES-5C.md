@@ -1,6 +1,7 @@
 # `ESPIONAGE / ES-5c` — implementation contract (DRAFT, rev 1)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `c0447b8f` + `4b0b0fdc` (2026-08-11) — zero moved goldens, full gate exit 0
 - **Status note:** promoted by the chair 2026-08-11; §13's seven open items are CLOSED in §13b below (CR-ES5C-1..6 plus the two authored values). O2's hard blocker is discharged.
 - **Compiled:** 2026-08-11 by the ES-5c author/recon lane.
 - **Verified base:** `claude/composite-r4` at `868aca1a8c602c0d50c3b35180156e17c6941a44`
