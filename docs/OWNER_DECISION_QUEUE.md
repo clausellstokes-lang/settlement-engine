@@ -721,3 +721,44 @@ model rather than expressing it — but this is taste, and taste is yours.
 
 ⛔ Not offered: real bearings from the map's placement coordinates. That is a new
 capability on a gated surface, and the war layer already ruled against exactly that once.
+
+---
+
+## §16 · ⛔⛔ THE ESPIONAGE PRODUCT INTENT IS NOT DELIVERABLE AS DESIGNED (2026-08-11)
+
+**This is the largest finding of the run and it is yours to rule.** It is not a bug and
+nothing is broken — the volume is coherent — but its stated product intent cannot be built
+at this HEAD by any packet.
+
+**The measurement.** `envoyErrandRecords.js:590` forces
+`payload.offererId === from && payload.targetId === to`, and `:568/:580` force the errand
+id. Consequence: **a court can only spy on the court it is suing for peace with.** There is
+no seam at which an autonomous per-tick stage can mint a covert mission — the only road to
+a persisted covert row runs through an accepted PEACE DECISION. Six further refutations
+stand behind it: the mission-minting function's fields have no writer anywhere (the "door"
+ES-1 built is a validated dead end); only two purposes mint at all; multi-stop covert
+itineraries have no route producer; the casting helper is unusable because the site already
+casts by diplomatic law; the vetting band has zero producers, so **ES-6b is not unblocked
+either**; and both pulse mouths sit at EXACT zero line headroom with no stage registry.
+
+**What this means in plain terms.** Five espionage waves have landed and work — ES-5a
+through 5d and ES-6a — and **nothing calls any of them**, by deliberate design ("ES-1 builds
+the DOOR, not the traffic through it"). The traffic cannot now be built as specified.
+
+**The only compilable slice is ES-Da: covert cargo riding an already-accepted peace
+envoy** — one new leaf, ≤15 lines into the diplomacy file, zero new tuning values. **I am
+NOT authorising it, because it is owner-gated on three independent grounds:**
+1. it **lights five landed-dark waves at once** — new capability, not repair;
+2. **every accepted peace envoy becomes a potential spy** — that is war-lane product
+   behaviour and a real change to how your world reads;
+3. the design's own §3.12 carve-out sits close enough that the precedent where I misread a
+   carve-out's scope earlier today applies directly.
+
+**My recommendation:** take ES-Da, but as a **deliberate product decision about what
+espionage IS in this world** — peace embassies carrying spies — rather than as a wave. The
+alternative (a dark gatherer) I recommend against: it would be a sixth dark wave on a volume
+already diagnosed as all consumers and no producer.
+
+⚠ If you'd rather the espionage surface stay dark until the design is revisited, that is
+entirely coherent and costs nothing — the five landed waves are byte-identical while dark.
+Full evidence: `memory/es-d-refused-the-product-intent-is-undeliverable.md`.

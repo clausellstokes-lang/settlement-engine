@@ -98,33 +98,22 @@ and two things need your first attention. Start here, then read the Live board b
   (see §3). A pre-compaction snapshot is saved beside it as
   `MEMORY.pre-compaction-snapshot-2026-08-11.md` (18,375 B, 98 links, all resolving).
 
-## 2. THE TWO LANES IN FLIGHT — collect these, do not re-dispatch
+## 2. ⏸ PAUSED AT THE OWNER'S REQUEST — one lane still running, nothing dispatched after
 
-Both dispatched 2026-08-11 after a clean stall check (tree clean at `ffc85a90`, mutex
-free, zero processes). **A background run cannot wake a stopped lane** — if one reports
-"waiting", verify liveness with `ps aux | grep vitest` and resume it with an explicit
-"collect it yourself" order rather than re-dispatching, which burns its context.
+**The owner paused the run to switch accounts.** No new work was dispatched after that
+instruction. State at pause:
 
-- **⭐ PGLITE CONTENTION CURE** (`tasks/a132c38c986b6be53.output`) — **its deliverable is a
-  genuinely green gate.** The five `tests/security/*.pglite.test.js` suites collapse under
-  contention (`supportTickets` passes **19/19 in ISOLATION** at this commit), and the cure
-  is to size their `beforeAll` budgets for CONTENTION with the arithmetic stated in-file —
-  the model is the schema-5 mint's own cure (corpus build **251,002 ms contended vs a 300 s
-  budget sized on the 47 s SOLO figure**). ⛔ **NEVER cure it by raising the SKIP CEILING or
-  allowlisting** — a collapsed suite is not a skip, and absorbing it would destroy the
-  sentinel on its first real outing. ⚠ It may REFUSE FORWARD if the true cause is a
-  collection error, an OOM, or pglite instances contending on a shared resource — in which
-  case the fix is serialisation, not time. **Expected endstate afterwards: exit 1 with
-  EXACTLY ONE failing test outside the frozen census — the owner's golden.**
-- **⭐ ES-D CHARTER + COMPILE** (`tasks/a7cde91f2c451a746.output`) — draft-only, scratchpad
-  `esd-`. **The dispatcher is the espionage volume's real gate**: five waves of consumers
-  were built on a declared doors-before-traffic shape and nothing calls them. Its first
-  question is whether `mintCovertMission`'s returned `fields` have a lawful writer (the
-  ES-7 lane flagged it PLAUSIBLE-not-confirmed and named it "ES-D's first question").
-  ⚠⚠ It is told to **flag anything that is genuinely NEW CAPABILITY rather than repair
-  explicitly rather than design around it** — a dispatcher that makes five dormant waves
-  fire is a large product change, and that judgment is the chair's and possibly the
-  owner's, not a lane's.
+- **⏳ PGLITE CONTENTION CURE — STILL RUNNING** (`tasks/a132c38c986b6be53.output`). It is
+  removing the last known obstacle to a green gate: five `tests/security/*.pglite.test.js`
+  suites whose `beforeAll` collapses under contention (`supportTickets` passes **19/19 in
+  ISOLATION**). ⛔ It is under standing orders NOT to cure this by raising the skip ceiling
+  or allowlisting — a collapsed suite is not a skip, and absorbing it would destroy the
+  sentinel on its first real outing. **Collect it; do not re-dispatch.** Expected endstate
+  after it lands: exit 1 with EXACTLY ONE failing test outside the frozen census — the
+  owner's golden.
+- **⛔⛔ ES-D REFUSED — see §7 and OWNER_DECISION_QUEUE §16.** The espionage product intent
+  is **not deliverable at this HEAD by any packet**. This is now an OWNER decision, not a
+  chair one.
 
 ## 3. ⚠⚠ THE ONE ACTIVE RISK: two concurrent MEMORY.md compactions
 
@@ -169,6 +158,26 @@ beats an absent section.
    it; a refusal with a measurement is the most valuable report you can get.
 
 ## 7. WHAT IS LEFT
+
+⛔⛔⛔ **AND ES-D IS REFUSED TOO — THE PRODUCT INTENT IS UNDELIVERABLE.**
+`envoyErrandRecords.js:590` forces `payload.offererId === from && payload.targetId === to`,
+so **A COURT CAN ONLY SPY ON THE COURT IT IS SUING FOR PEACE WITH.** There is no seam for
+an autonomous dispatcher: the only road to a persisted covert row is an accepted PEACE
+DECISION. Six more refutations behind it — `mintCovertMission`'s fields have **NO WRITER**
+(the ES-1 "door" is a **validated dead end**), only two purposes mint, no multi-stop route
+producer, the casting helper is unusable, `volunteerBandsFor` has zero producers (**ES-6b
+is NOT unblocked either**), and both pulse mouths are at EXACT zero headroom with no stage
+registry. **The only compilable slice — ES-Da, covert cargo on an accepted peace envoy — is
+OWNER-GATED on three grounds and is now queue §16.**
+⚠⚠ **A CORRECTION TO MY OWN RECORD: ES-5d NEVER SHIPPED THE DEAD WINDOW.** Verified at
+`954592c0` — the landed code is same-tick and the leaf's own header says a `tick-1` window
+"would be PROVABLY DEAD". **The dead window lived in the SPEC and the lane caught it before
+landing.** I said it shipped, in a brief and a commit message. It did not. **A hazard
+write-up is itself a claim and needs the same receipt as any other.**
+⚠⚠ **AND I HAD THE COUPLING DIRECTION BACKWARDS:** `direction = depLayer→importerLayer`, so
+a GRAMMAR file importing an INFO leaf is `INFO→GRAMMAR` — the opposite of every existing
+espionage row. ⚠⚠ **Nothing cross-checks the id's arrow against `direction`, so a wrong one
+SHIPS GREEN.**
 
 ⛔⛔ **ES-7 IS REFUSED — AND THE ESPIONAGE TAIL CANNOT PROCEED BY PICKING THE NEXT NUMBER**
 (memory/es7-refused-the-dispatcher-is-the-gate.md). **FIVE OF ITS SIX HERALD KINDS HAVE NO
