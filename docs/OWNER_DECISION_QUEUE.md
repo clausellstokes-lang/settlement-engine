@@ -682,3 +682,42 @@ labels"; it is **"does a generated settlement exist in a place, or by itself?"**
 
 ⚠ The label copy is the owner's: the lane drafts in the surrounding voice and presents it
 as a DRAFT FOR VETO. The mechanism lands either way.
+
+### §15b · THE ROAD LABELS CANNOT EXIST — my design was refused with measurement (landed `58436804`)
+
+I recommended labelling exit roads with "what generation genuinely knows" — direction,
+terrain, road type — and told the lane to refuse forward if those fields did not exist.
+**They do not.** No `src/` file changed; what landed is the evidence and three pins.
+
+- **A road is `{id, from, to, weight}` and nothing else.** Probed across eight
+  configurations: every road, every time. `weight` is ONE settlement-wide value, identical
+  on every road — zero per-edge information. `id` is a positional index.
+- ⚠⚠ **The bearing is a LAYOUT ARTIFACT, not geography.** Gate offsets come from **the
+  planner's retry counter** — the source comment says so. The same settlement's first road
+  leaves due north under one layout law and NNE under the other. Labelling it "north"
+  would have published a retry counter as a compass bearing.
+- **The relationship case was UNREACHABLE, not empty** — and this is the one I most want
+  you to see. The only independent relationship input is **writer-less by design** since
+  R-5b retired its picker. **The branch I specified would have been a reader with no
+  writer, built to satisfy a ruling against building readers with no writers.**
+- **Hiding the empty section was already correct** — and my premise was wrong twice: it
+  never rendered empty, it rendered nothing, and the code already hides it.
+
+**So the exit-road work is now genuinely finished at what `73f00920` shipped:** labels
+where a neighbour is actually linked, and silence where none is. The silence is the model
+being honest, and there is no truthful thing to put in its place.
+
+### ⚠ ONE THING STILL OPEN FOR YOU, and it is a taste call
+
+If you want *something* on a settlement with no linked neighbour, the only honest line
+uses settlement-level facts and names no place and no direction:
+
+> **Roads out** — *Three approaches. No neighbour is recorded yet.*
+
+The count is real. But shipping it **reverses the hide-when-empty behaviour**, so it needs
+your ruling that **a stated absence beats an absent section**. I lean toward leaving it
+absent — a section that exists only to say it has nothing is a surface apologising for the
+model rather than expressing it — but this is taste, and taste is yours.
+
+⛔ Not offered: real bearings from the map's placement coordinates. That is a new
+capability on a gated surface, and the war layer already ruled against exactly that once.
