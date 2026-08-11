@@ -302,7 +302,15 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
     // visibility predicate does — its `presenceSharesFor` composer must refuse at the ONE
     // door itself, before it touches a world object, or a dark world stops being
     // byte-identical. That is exactly why it gates and the counting leaf beside it does not.
+    // ⏱ ES-5c ADDS ONE MORE, FOR THE SAME REASON AND ONE STRONGER. `espionageCareer.js` is
+    // read by `npcLadderChallenge.js` — the FIRST espionage→ladder import edge in the repo —
+    // so it too has a production importer outside the family and can inherit nobody's
+    // dormancy. Its `careerRiskFor` refuses at the ONE door, on a single `espionageActive`
+    // read, BEFORE it touches a world object: the ladder calls it once per adjacent rung pair
+    // per faction per settlement per tick, so a gate placed any later would cost a dark world
+    // real work AND stop it being byte-identical. It gates first and reads second.
     expect(gated).toEqual([
+      'espionageCareer.js',
       'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
       'espionageMissions.js', 'espionagePresence.js', 'espionageProductStage.js',
     ]);
