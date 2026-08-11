@@ -3342,7 +3342,42 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // have re-measured the estate five times and banked whichever figure happened to
       // move first. The added file was also parked out of the tree and the walker re-run
       // to prove it was the sole cause: without it this census is GREEN at the old five.
-      files: 2382, parked: 364, credited: 2018, titles: 19500, suiteTitles: 5511,
+      //
+    // ── RE-MEASURED 2026-08-11 (the schema-4 OSR genesis lane, on a QUIET tree) ──────
+    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. This row was DEFERRED once, deliberately: the
+    // TC-4 lane measured `files` 2382 -> 2383 while the schema-4 lane held two lint files
+    // DIRTY, and re-deriving then would have frozen another lane's uncommitted work into
+    // the estate. Both lanes have since LANDED (TC-4 at 5a6f76fe, the schema-4 code half
+    // at 894325ff), so this is the quiet-tree re-derivation that deferral was waiting for.
+    // ⚠⚠ ALL FIVE FIGURES WERE RE-DERIVED, NONE PATCHED — the recorded sequence hazard has
+    // fired three times by someone moving `files` alone and leaving four stale figures.
+    //   files      2382 -> 2383  (+1)
+    //   parked      364 ->  364  ( 0)  no file changed park state in either direction
+    //   credited   2018 -> 2019  (+1)  so the whole file-layer delta lands in credit, and
+    //                                  364 + 2019 = 2383 closes the file arithmetic
+    //   titles    19500 -> 19539 (+39) NOT the +23 the added file alone would give
+    //   suiteTitles 5511 -> 5517 ( +6)
+    // ⚠ THE TITLE DELTA IS NOT THE ADDED FILE. A census read as "one file landed, so add
+    // its pins" would have recorded 19523/5516 and been WRONG BY 16 TITLES, because five
+    // ALREADY-CREDITED files gained pins in the same window. Decomposed to the unit, both
+    // ends measured by THIS walker's own parkReasonsFor/liveTitlesIn/liveSuiteTitlesIn in
+    // ONE run (the census is SEQUENCED and stops at its first red figure, so five separate
+    // runs would have re-measured the estate five times):
+    //   +23 titles, +5 suite … tests/domain/townCartographyBuildings.test.js, TC-4's one
+    //                          new file, credited
+    //    +8 titles, +1 suite … tests/lint/observedShapeMigration.test.js  14 -> 22
+    //    +3 titles           … tests/lint/testRatchet.test.js             58 -> 61
+    //    +2 titles           … tests/lint/observedShapeReaders.walker.test.js 24 -> 26
+    //    +2 titles           … tests/lint/observedShapeSentinel.test.js   15 -> 17
+    //    +1 title            … tests/domain/townCartographyDeterminism.test.js 20 -> 21
+    //   23+8+3+2+2+1 = 39 and 5+1 = 6, which is the whole movement, closed.
+    // ⭐ THE BASE END IS A CONTROL, NOT AN INHERITANCE: the tests/ tree of 0f7424f7 (the
+    // commit that recorded the five figures below) was materialised and re-measured by the
+    // CURRENT instrument, and it read back 2382/364/2018/19500/5511 — the old row exactly.
+    // So the instrument did not move and every delta above is the ESTATE moving. This
+    // walker is byte-identical at 0f7424f7 and at HEAD, which is why one instrument can
+    // legitimately read both ends.
+    files: 2383, parked: 364, credited: 2019, titles: 19539, suiteTitles: 5517,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
