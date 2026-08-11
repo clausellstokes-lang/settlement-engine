@@ -601,6 +601,90 @@
           "tests/domain/espionageProducts.test.js",
           "tests/lint/couplingInclusion.walker.test.js"]
       ]
+    },
+    {
+      "id": "TC-5B-I",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-5B-I.md",
+      "verifiedBase": "e1e9fd6a62b851dcce92a2fb4f84d9d76d1b238d",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/lib/townScene/townCartographyBlock.js" },
+        { "action": "CREATE", "path": "src/components/townMap/useTownCartographyBlock.js" },
+        { "action": "CREATE", "path": "tests/lib/townCartographyBlock.test.js" },
+        { "action": "CREATE", "path": "tests/hooks/useTownCartographyBlock.test.jsx" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/compileTownSceneManifest.js", "symbol": "compileTownSceneManifest" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "townCartographyActive" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_MANIFEST_KEY" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_BLOCK_KEYS" },
+        { "path": "src/domain/townScene/sceneProjection.js", "symbol": "normalizeSceneAudience" },
+        { "path": "src/domain/townScene/manifestContract.js", "symbol": "TOWN_SCENE_PLAN_EXTENT" },
+        { "path": "src/domain/townCartography/cartographyPaint.js", "symbol": "buildCartographyDrawList" },
+        { "path": "src/lib/townScene/townSceneExport.js", "symbol": "downloadTownSceneArtifact" },
+        { "path": "src/data/namingData.js", "symbol": "NAMING_DATA" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "a lit settlement yields a ready block with its planExtent; three dark shapes yield unavailable" },
+        { "id": "C2", "case": "dark settles on idle and the transport module is never imported" },
+        { "id": "C3", "case": "the producer-consumer proof: the real block satisfies TC-5a's length identity" },
+        { "id": "C4", "case": "failure is owned once, never rethrown, and no error text reaches a returned value" },
+        { "id": "C5", "case": "the CR-TC3A-1 naming-pool injection is real, with a live throwing control" },
+        { "id": "C6", "case": "lifecycle idempotence, generation-guarded supersession, and unmount safety" },
+        { "id": "C7", "case": "the prevention guard: the compiler graph stays out of the hook's static closure" },
+        { "id": "C8", "case": "the seam declares no audience default and widens no projection" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lib/townCartographyBlock.test.js",
+          "tests/hooks/useTownCartographyBlock.test.jsx",
+          "tests/build/townScene3dLazy.test.js",
+          "tests/build/mapTabShellLazy.test.js"]
+      ]
+    },
+    {
+      "id": "TC-5B-II",
+      "status": "BLOCKED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-5B-II.md",
+      "verifiedBase": "ffc85a90368e3cdb16018dd5e25ef5ec0bceedc5",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/components/townMap/subtabs/cartographyColours.js" },
+        { "action": "CREATE", "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx" },
+        { "action": "MODIFY", "path": "src/lib/mapSubTabs.js" },
+        { "action": "MODIFY", "path": "src/components/townMap/MapTabShell.jsx" },
+        { "action": "REGISTER", "path": "src/design/boundBook.js" },
+        { "action": "CREATE", "path": "tests/ui/mapCartographySubTab.test.jsx" },
+        { "action": "TEST", "path": "tests/lib/mapSubTabs.test.js" },
+        { "action": "TEST", "path": "tests/ui/mapTabShell.test.jsx" },
+        { "action": "TEST", "path": "tests/build/mapTabShellLazy.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographyPaint.js", "symbol": "buildCartographyDrawList" },
+        { "path": "src/domain/townCartography/cartographyPaintRoles.js", "symbol": "CARTOGRAPHY_PAINT_ROLES" },
+        { "path": "src/lib/mapSubTabs.js", "symbol": "MAP_SUB_TAB_IDS" },
+        { "path": "src/lib/mapSubTabs.js", "symbol": "resolveMapSubTabs" },
+        { "path": "src/lib/lastMapView.js", "symbol": "TOWN_MAP_VIEW_IDS" },
+        { "path": "src/domain/townScene/manifestContract.js", "symbol": "TOWN_SCENE_PLAN_EXTENT" },
+        { "path": "src/design/boundBook.js", "symbol": "ARTWORK_SURFACE_MANIFEST" },
+        { "path": "src/design/tokens.js", "symbol": "semantic" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "lit with a block available the sub-tab renders one svg from the resolved planExtent" },
+        { "id": "C2", "case": "dark or block-unavailable means the tab is ABSENT, never present-and-disabled" },
+        { "id": "C3", "case": "the role binding is derived and total over all ten roles, with a throwing control" },
+        { "id": "C4", "case": "no colour smuggled: no raw literal and no local hex const, anchored" },
+        { "id": "C5", "case": "the A-4 degraded state, and an empty draw list is a different case" },
+        { "id": "C6", "case": "determinism of the rendered surface; the component never re-sorts" },
+        { "id": "C7", "case": "the seat guard: the persisted vocabulary is untouched and records nothing" },
+        { "id": "C8", "case": "the leaf rides its own lazy chunk and the shell never names it statically" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/ui/mapCartographySubTab.test.jsx",
+          "tests/lib/mapSubTabs.test.js",
+          "tests/ui/mapTabShell.test.jsx",
+          "tests/build/mapTabShellLazy.test.js"]
+      ]
     }
   ]
 }

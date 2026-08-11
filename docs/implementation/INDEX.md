@@ -3,8 +3,10 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `7699e367d9fc2fb87bfd5f8b72142969ec52c36e`
-- **Measured:** 2026-08-10
+  `e1e9fd6a62b851dcce92a2fb4f84d9d76d1b238d`
+- **Measured:** 2026-08-11 — re-derived at the TC-5b promotion. ⚠ The header had carried
+  `7699e367` while the body listed landings through `ES-6a`; TC-5A.md's base note recorded
+  that staleness and asked the coordinator to re-derive it at the next flip. Done here.
 - **Packet law:** [`PACKET_STANDARD.md`](./PACKET_STANDARD.md)
 
 ## Dispatch rule
@@ -36,6 +38,8 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-10 | [`ES-5d`](./packets/foreign-policy/ES-5D.md) | **LANDED** at `954592c0`; do not redispatch. ⚠ Deviation **D7**: the handoff is SAME-TICK, not one-tick-lagged — measured at `pulseKernel.js`, where the espionage pass and the ladder chain run unconditionally in that order, in one function, on one `worldState.tick`, so a `tick - 1` window would be silently dead. The sovereignty lighting census was re-derived WHOLE and re-recorded to `2392/365/2027/19659/5552 (19656 at that landing, +3 folded at `58436804`)`, repairing two pre-existing foreign deltas it had been red on | The career CREDIT: a graded mission deposits into the ladder's maintenance road via a one-tick ledger | architecture α, a persisted consume-once marker, ladder-dark writes, debits, tuning MISSION_CREDIT_MET, ES-6/7 |
 | LANDED-11 | [`TC-5a`](./packets/town-cartography/TC-5A.md) | **LANDED** at `41b39220`; do not redispatch | The cartography painter's headless half: a pure draw-list plus palette ROLES, no colour, no mount | colour binding + the sub-tab (TC-5b), PNG goldens (TC-5c), skins (TC-5d), AI controls, the lynch-rubric gate (its own synthesis slice) |
 | LANDED-12 | [`ES-6a`](./packets/foreign-policy/ES-6A.md) | **LANDED** at `53d538b4`; do not redispatch | The double agent's leak: a compromised operative's mission reaches the enemy court while succeeding silently. ⚠ **ES-6 was refused as chartered and split three ways** — ES-6a (this) is the leak; ES-6b (vetting quality) waits on a DISPATCHER wave nobody has chartered, because its only consumer has zero production callers; ES-6c (the retroactive Herald clause) folds into ES-7. ⛔ **The sovereignty lighting census is NOT folded by this packet**: TC-5a holds that file's reservation as first claimant, so ES-6a's re-derivation is a CHAIR POST-LANDING STEP — the implementer reports all five figures and its isolated delta and never touches the walker. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | vetting quality (ES-6b, rides the dispatcher), the retroactive Herald clause (folds into ES-7), any new belief key, rumor-reach predicates, the lighting census file |
+| READY-13 | [`TC-5b-i`](./packets/town-cartography/TC-5B-I.md) | **READY** | The producer half of the ruled TC-5b split: one lazily-imported main-thread transport plus one lifecycle hook that compile a settlement's cartography block headlessly and answer presence — no mount, no render, zero production importers, expected bundle delta ZERO. ⚠ Its one open item is **O-5**, which the chair rules at dispatch: the four reserved paths do not include the lighting-census walker that §7c item 2 tells the implementer to re-record, so absent a ruling the implementer measures, reports, and does not edit it. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the painter component, the sub-tab seat, the shell mount, the ROLE→colour binding and the A-4 notice (all TC-5b-ii), PNG goldens (TC-5c), skins (TC-5d), any worker-protocol or cache change, any persisted change, the TC-5a leaves, `mapTabShellLazy.test.js` and the rest of TC-5b-ii's nine reserved paths |
+| BLOCKED-14 | [`TC-5b-ii`](./packets/town-cartography/TC-5B-II.md) | **BLOCKED** | The painter's mount: the `cartography` sub-tab seat, the token→colour binding, the SVG render and the A-4 degraded state — the first production importer of TC-5a's leaf and the only user-facing surface of the TC-5 lane. It consumes TC-5b-i's seam and cannot dispatch until that seam is in history. ⚠ Its own open item is the A-4 notice copy, deferred by CR-TC5B-4 to this packet's promotion; the mount/seat question is settled and is NOT owner-gated. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the manifest seam (TC-5b-i, whose four reserved paths are forbidden here), PNG goldens (TC-5c), skins (TC-5d), AI editing controls, the lynch-rubric gate (TC-2r), `TOWN_MAP_VIEW_IDS` / `PRESENTATION_SUB_TAB_IDS` / `displayPrefsSlice.js`, `townScene3dLazy.test.js`, any colour literal or entitlement-bearing import |
 
 ## Authorized implementation infrastructure
 
@@ -83,8 +87,10 @@ live symbols were checked at the measured SHA.
 - **Town Cartography:** TC-0 through TC-2 are landed, and TC-3a plus TC-3b have
   now landed in order (TC-3 itself stays SUPERSEDED; its preserved implementation
   was their raw material). TC-4 has LANDED at `5a6f76fe` — the buildings layer is
-  filled at schema v2. TC-5 through TC-8 remain designed but intentionally
-  uncompiled; TC-5 is the next compile candidate when a coordinator re-derives.
+  filled at schema v2. TC-5 was refused as one packet and split four ways; TC-5a has
+  LANDED at `41b39220`, and TC-5b was itself refused and split producer-first at
+  CR-TC5B-1 into TC-5b-i (the manifest seam) and TC-5b-ii (the painter mount). TC-5c,
+  TC-5d and TC-6 through TC-8 remain designed but intentionally uncompiled.
 - **Surveyor Chat:** the old Workshop presentation is superseded. SC-1 is the
   next bounded surface packet; later ingestion and migration stages are excluded.
 
