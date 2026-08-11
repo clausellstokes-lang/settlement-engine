@@ -317,10 +317,20 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
     // touches a world object, exactly like its siblings, and then on the LADDER's flag as
     // well — the chair's O5 ruling is that a dark ladder must mint no key either, because a
     // ledger that accumulates while nothing consumes it is a leak wearing a receipt.
+    // ⏱ ES-6a ADDS ONE MORE, AND IT IS THE SECOND GATED LEAF THAT **WRITES** — but it writes
+    // into a ledger that ALREADY EXISTS rather than minting one, which changes what the gate
+    // is protecting. `espionageLeak.js` hands a foreign patron a discounted copy of a landed
+    // product, so an ungated pass would put a WHOLE NEW OBSERVER KEY into `beliefMaps` in a
+    // dark world — not a new ledger, but a new court inside an old one, which moves every
+    // dormancy golden here just as surely. It refuses on `espionageActive` before it touches a
+    // world object, and then on the CORRUPTION WEB's gate as well, spelled inside its leash
+    // read: that second door is not redundancy, because the leash resolver is NOT web-gated
+    // and a betrayal-seeded foreign patron survives in a world that never lit the web.
     expect(gated).toEqual([
       'espionageCareer.js', 'espionageCareerCredit.js',
       'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
-      'espionageMissions.js', 'espionagePresence.js', 'espionageProductStage.js',
+      'espionageLeak.js', 'espionageMissions.js', 'espionagePresence.js',
+      'espionageProductStage.js',
     ]);
     // The visibility predicate is a REAL module in the family that deliberately carries no
     // gate, so its exclusion is anchored by a gating sibling that travels the same scan.

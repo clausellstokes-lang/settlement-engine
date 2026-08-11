@@ -539,6 +539,54 @@ export const ES5D_CAREER_CREDIT_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-6a — THE DOUBLE AGENT'S LEAK: an INFO leaf conditioning on the CORRUPTION WEB's own
+ * lighting, and handing a foreign court a discounted copy of what its agent told home.
+ *
+ * ⚠⚠ THIS ROW EXISTS BECAUSE THE WALKER CANNOT SEE THE EDGE — FAIL-OPEN INVISIBILITY, NOT
+ * ABSENCE. `espionageLeak.js` imports `corruptionWebActive` from `corruptionWeb.js`, and that
+ * file matches NO entry in the inclusion walker's layer table: it is UNLAYERED, sitting in the
+ * walker's own unlayered baseline, so the scan reaches `if (!depLayer) continue` and MINTS NO
+ * PAIR AT ALL. The leaf's other corruption dependency, the leash resolver, is worse than
+ * unlayered — it lives one directory ABOVE the walker's census scope and is never even
+ * visited. So neither edge would red, neither edge would be licensed, and neither edge would
+ * be recorded anywhere. CR-ES5B-4 binds exactly here: record what the walker cannot see.
+ *
+ * ⛔ WHY THE DIRECTION IS `INFO→INFO` RATHER THAN A PORT THE DEPENDENCY DOES NOT HOLD. The
+ * corruption family is INTERIOR's subject matter in everything except its layer-table entry —
+ * but it HAS no entry, so naming `INTERIOR→INFO` would assert a port the estate has never
+ * assigned and would make this row's join uncheckable. The row therefore names the layer both
+ * ends actually carry, and the docstring carries the truth the direction cannot. `pairId`
+ * stays CPL-20, the volume's own anchor, because a wave never mints a pair merely to hold its
+ * own row. ⭐ THE GENUINELY BETTER REPAIR IS A DIFFERENT PACKET: widening the layer table to
+ * claim the corruption family would make this edge VISIBLE rather than merely recorded — and
+ * it would re-census every existing corruption import in the estate, which is why it is not a
+ * clause of this one.
+ *
+ * ⚠ NO PERSISTED ESPIONAGE RECEIPT EXISTS AND NONE IS MINTED. The leak writes no ledger of its
+ * own, no news, no Herald kind and no home-visible field — silent success is the behavior. The
+ * only thing that SURVIVES the tick is the patron court's own belief row, written through the
+ * espionage set's one belief writer into the existing map, so that is the address named below.
+ * Naming no Herald kind is deliberate, on ES-5b/5c/5d's precedent: the desk walker's kind scan
+ * therefore makes no routing join, and the voice belongs to ES-7.
+ */
+export const ES6A_DOUBLE_AGENT_LEAK_COUPLING = couplingRow({
+  couplingId: 'CPL-20.INFO_TO_INFO.ES-6a.double_agent_leak',
+  pairId: 'CPL-20',
+  direction: 'INFO→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageLeak.js#deliverMissionLeaks',
+  receiptField: 'spatialLedgers.beliefMaps[patronId].seat[subjectId].{allianceLabel,confidence01}',
+  counterforce: 'src/domain/worldPulse/espionage/espionageLeak.js#leakTargetFor',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+    'corruptionWebEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-6a',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -552,4 +600,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES5B_ABSENCE_BENCH_COUPLING,
   ES5C_CAREER_LADDER_COUPLING,
   ES5D_CAREER_CREDIT_COUPLING,
+  ES6A_DOUBLE_AGENT_LEAK_COUPLING,
 ]);

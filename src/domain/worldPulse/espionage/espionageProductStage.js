@@ -108,6 +108,7 @@ import { magicWorksAt } from '../magicWorksAt.js';
 import { settlementAlignment } from '../settlementAlignment.js';
 import { depositMissionCredits } from './espionageCareerCredit.js';
 import { espionageActive } from './espionageGate.js';
+import { deliverMissionLeaks } from './espionageLeak.js';
 import {
   GAUNTLET_TUNING,
   covertDwellRead,
@@ -656,7 +657,7 @@ function homeMouthArm(worldState, walk, ctx) {
  *   credibilityOf?: ((sourceId: string) => number)|null}} [args]
  * @returns {{worldState: unknown, changed: boolean,
  *   gatherings: Array<Record<string, unknown>>, landings: Array<Record<string, unknown>>,
- *   skipped: Array<Record<string, unknown>>}}
+ *   skipped: Array<Record<string, unknown>>, leaks: Array<Record<string, unknown>>}}
  */
 export function advanceEspionageProducts({
   worldState,
@@ -676,7 +677,9 @@ export function advanceEspionageProducts({
   const skipped = [];
   const now = Number.isInteger(tick) && Number(tick) >= 0 ? Number(tick) : null;
   if (now == null || !espionageActive(worldState)) {
-    return { worldState, changed: false, gatherings, landings, skipped };
+    // The dark return carries the SAME shape as the lit one — an absent `leaks` here would
+    // make the field's presence a gate read, and a caller would learn the flag from a key.
+    return { worldState, changed: false, gatherings, landings, skipped, leaks: [] };
   }
   const gates = subjectAxesActive(
     /** @type {Parameters<typeof subjectAxesActive>[0]} */ (worldState),
@@ -747,7 +750,19 @@ export function advanceEspionageProducts({
   const credited = depositMissionCredits({ worldState: state, tick: now, landings, operatives });
   state = credited.worldState;
   changed = changed || credited.changed;
-  return { worldState: state, changed, gatherings, landings, skipped };
+  // ES-6a §3.13 — THE DOUBLE AGENT'S COPY. Runs ONCE per pass, post-loop, over the landings
+  // this pass produced, for the reason the leaf's header states at length: a landing already
+  // encodes the magic/mundane world rule, so leaking on landings buys per-stop streaming and
+  // close-of-mission delivery from one call site with no new timing code. The leaf owns its
+  // own dormancy (espionage AND the corruption web, both `=== true`), so a dark world pays
+  // two flag reads and writes nothing. ⛔ The home court's outcome above is already final
+  // here — this call may only add writes addressed to a FOREIGN observer.
+  const leaked = deliverMissionLeaks({
+    worldState: state, tick: now, landings, operatives, byId: ctx.byId,
+  });
+  state = leaked.worldState;
+  changed = changed || leaked.changed;
+  return { worldState: state, changed, gatherings, landings, skipped, leaks: leaked.leaks };
 }
 
 /**

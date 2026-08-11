@@ -54,6 +54,7 @@ import {
   ES5C_CAREER_LADDER_COUPLING,
   ES5D_CAREER_CREDIT_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
+  ES6A_DOUBLE_AGENT_LEAK_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
@@ -638,7 +639,16 @@ describe('CW-0 coupling registry', () => {
       // ES-5d appends the career CREDIT — the same direction's first HANDOFF rather than a
       // derived read: espionage deposits, the ladder's own writer spends.
       ES5D_CAREER_CREDIT_COUPLING,
+      // ES-6a appends the double agent's leak. It is the volume's first row whose edge the
+      // inclusion walker CANNOT SEE — the dependency it records is unlayered — so the row is
+      // pure record under CR-ES5B-4 rather than a licence for a pair that would otherwise red.
+      ES6A_DOUBLE_AGENT_LEAK_COUPLING,
     ]);
+    // ES-6a OPENS A DIRECTION on the volume's own anchor, and it is the first SAME-LAYER
+    // direction in the espionage set: both ends of the recorded edge carry INFO, because the
+    // corruption dependency it names holds no layer at all and naming it a port it does not
+    // hold would be an unfalsifiable claim. The row's docstring carries what the arrow cannot.
+    expect(couplingRowsFor('CPL-20', 'INFO→INFO')).toEqual([ES6A_DOUBLE_AGENT_LEAK_COUPLING]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);
     expect(couplingRowFor('CPL-21', 'INTERIOR→GRAMMAR')).toBe(WR5_SEAT_ACCEPTANCE_COUPLING);

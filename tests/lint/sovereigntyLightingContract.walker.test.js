@@ -3673,7 +3673,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // reuse the snapshot above, do not re-derive from a dirty live tree, and do not "fix"
     // this row by absorbing another lane's WIP. Until that fold lands, this arm reds in the
     // shared working tree for a FOREIGN reason, not for this packet's.
-    files: 2393, parked: 365, credited: 2028, titles: 19696, suiteTitles: 5560,
+    files: 2395, parked: 365, credited: 2030, titles: 19719, suiteTitles: 5568,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

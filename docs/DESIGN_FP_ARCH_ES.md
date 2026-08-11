@@ -1225,6 +1225,56 @@ attribution) LEAKS to that enemy, whether or not it is the target:
   to info-statecraft disinfo if the owner ever wants it. Say "veto" to
   widen; the cost is REFUTE's honesty guarantee.
 
+> ⏱ **AMENDED IN PLACE, 2026-08-11 (ES-6a compilation + landing).** Every clause
+> above was re-measured against live code. **Four were REFUTED and two were
+> partial**, and the refutations are what split the wave. The prose is kept as the
+> record of the intent; what follows is what the tree can actually hold.
+>
+> - **C1 — "the leash read AT DISPATCH" is REFUTED: THERE IS NO DISPATCH SITE.**
+>   `espionageMissions.js` says of itself that nothing under `src/` calls it, and
+>   the cadence leaf declares the same absence. ES-1 built the door, not the
+>   traffic. The read is therefore sited at the PRODUCT STAGE — the one live seam
+>   holding the operative, the errand and the errand id together — and the
+>   errand-id keying survives verbatim.
+> - **C2 — "magic two-address sends" is REFUTED.** The belief writer takes ONE
+>   `observerId` and refuses `observer === subject` generically; a second address
+>   is a second call site, never a parameter widening.
+> - **C3 — "mundane leaks travel by enemy reach" is REFUTED.** NO reach predicate
+>   exists anywhere in `src/`: rumor propagation is a relay simulation with a hop
+>   BUDGET, and only continuous hop PRICING is queryable. The mundane leak rides
+>   the mission's own landing instead — the agent reports to both masters when he
+>   gets home. Any design clause phrased as "within X's rumor range" is
+>   unbuildable today.
+> - **C4 — meta-intelligence "landing on existing slots, zero new surfaces" is
+>   REFUTED AS SPECIFIED.** `BeliefRecord` is strictly TWO-PARTY: its label is
+>   observer↔subject and its truth side reads the direct edge between exactly
+>   those two ids. "A believes B's stance toward C" is not expressible in any
+>   field. The narrowing that IS expressible — and that shipped — is a two-party
+>   EXISTENCE leak, `(observer = patron, subject = the HOME court)`, CONFIRM-shaped.
+>   It is mandatory rather than decorative: when the patron IS the mission's
+>   subject, the intel arm is refused generically, so without it the case this
+>   section names by name ("whether or not it is the target") would write nothing.
+> - **C5 — the retroactive Herald clause is REFUTED TWICE.** `espionage_exposed`
+>   exists nowhere in the repo, the six kinds belong to ES-7 by §4, and the
+>   exposure event it would attach to emits an EMPTY news list on every path while
+>   the persisted log has already dropped the leash. Folded into ES-7.
+> - **C6 — vetting quality is PARTIAL.** Every part exists; the SHAPE does not.
+>   The quality vocabulary is a two-member closed set, so a continuous product
+>   must be thresholded to one of two words — a tuning decision no code answers —
+>   and its only consumer has no production caller. Deferred to ES-6b.
+> - **C7 — "web dark ⇒ no leash resolution" is PARTIAL and the leaf must spell
+>   it.** `resolveLeash` is NOT web-gated; a betrayal-seeded foreign patron
+>   survives in a world that never lit the web. The estate's idiom is to gate the
+>   CALL, and the shipped leaf copies it.
+>
+> **THE SPLIT (chair-ratified):** **ES-6a — THE LEAK** (this, LANDED); **ES-6b —
+> THE VETTING QUALITY**, which rides the DISPATCHER wave because its consumer is
+> dead-headed; **ES-6c — THE RETROACTIVE CLAUSE**, folded into ES-7.
+>
+> ⚠ **THE TIMING FACT THIS SECTION NEVER STATED:** espionage reads the corruption
+> web **SAME TICK**, in one pulse body, always in that order. A `tick - 1` window
+> here would be provably dead. The pulse order is pinned at source.
+
 ### 3.14 THE CAREER ECONOMY — graded missions, the promotion-risk register (owner addition G)
 
 **The grade.** At mission close (`markEnvoyHome`, or the magic arm's last
@@ -1645,6 +1695,35 @@ both real, per the built vocabulary); leak timing both world arms. Dormancy:
 web dark ⇒ no leash resolution ⇒ leaf no-ops. Req 13: employment strictness
 consumed; req 14: engine-only.
 
+> ⏱ **AMENDED IN PLACE, 2026-08-11 — ES-6 AS CHARTERED WAS REFUSED AND SPLIT
+> INTO THREE.** The arithmetic: four behavior families against a cap of one, and
+> **five modified production files against a cap of three**, plus a NEW belief key
+> (owner-gated persistence shape and a breach of the zero-new-keys law), plus a
+> Herald kind §4 gives to ES-7, plus a news producer that would have to be built
+> inside another volume's file. Three of the six chartered mechanisms have no
+> substrate in `src/` at all (§3.13's C1/C3/C5).
+>
+> - **ES-6a — THE LEAK. LANDED.** The leash read re-sited to the product stage,
+>   the delivery through the existing product road with `observerId` = the patron
+>   court, BOTH world arms bought from the landing's own `world` field at one
+>   post-loop call site, the two-party existence leak, and the silent-success
+>   negative as a DIFFERENTIAL rather than a token scan. **One behavior family,
+>   ZERO new persisted families, ZERO new keys, ONE modified production file.**
+>   `LEAK_TUNING.FIDELITY_W = 0.7`, chair-authored and DERIVED: at that discount
+>   an enemy's copy clears the categorical-adoption threshold only when the home
+>   read was above ~0.857 — a clear look leaks a conclusion, a partial look leaks
+>   only that something happened. Both sides of that boundary are pinned.
+> - **ES-6b — THE VETTING QUALITY.** A pure derivation plus its one consumer.
+>   BLOCKED on the dispatcher, not on any lane: its consumer has no production
+>   caller, so it should ride the wave that builds one.
+> - **ES-6c — THE RETROACTIVE CLAUSE.** Folded into ES-7 outright.
+>
+> ⚠ Budgets: `espionageLeak.js` ≤ 200 held — it landed at **136 effective lines**.
+> The "leak-only scan" pin above was ruled a DIFFERENTIAL rather than a source
+> scan: a scan for a falsified report has no honest token to match on, so it would
+> pass when the leak was absent for the wrong reason and would convict the very
+> headers that state the law.
+
 **ES-7 — THE VOICE + THE MEASURE (final slice; after IN-5 for the knowledge
 desk; converts the certification pending).** Charter: the six Herald kinds
 with the FIVE JOINS each in their mint commit (annex-verbatim pool rows in
@@ -1672,7 +1751,12 @@ names the doctrine words each kind may speak; req 14: THE EDIT-VERB WAVE —
 the one player/DM surface, named. Collision: heraldRouting (525) +
 compendium regen (additive).
 
-**Wave count: 9.** Dependency spine: ES-0 (free) → ES-1 (SP-D) → ES-2 →
+**Wave count: 9**, and ⏱ **AMENDED 2026-08-11: ES-6 IS NOW THREE SLICES**, the same
+budget split ES-5 took and for the same reason. The spine's `→ ES-6 →` reads
+`→ ES-6a → ES-7` today: **ES-6b** carries no place in the spine because it is
+blocked on a DISPATCHER wave nobody has chartered (its consumer has zero
+production callers), and **ES-6c** has been folded into ES-7 rather than counted.
+As with the ES-5 split, this is BUDGET and never scope. Dependency spine: ES-0 (free) → ES-1 (SP-D) → ES-2 →
 ES-3 (SP-B for the full arm) → ES-4 (SP-B2; the discharge) → ES-5a → ES-5b
 (Q1) → ES-6 → ES-7 (IN-5). ES-5 was ONE wave when this count was written; the
 a/b split was taken inside ES-5a's landing commit `41ddeae0` for BUDGET (both

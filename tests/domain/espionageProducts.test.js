@@ -318,6 +318,40 @@ describe('ES-3 the writer boundary — the products ride reconcileBelief, never 
     const plantedSecond = { ...sources, [`${ESPIONAGE_DIR}/espionageGauntlet.js`]: 'writeErrands(w, r);' };
     expect(amendersOf(plantedSecond)).toHaveLength(2);
   });
+
+  // ⭐ ES-6a's ONE PREVENTION GUARD — the LEAK-ONLY law, made mechanical.
+  //
+  // ⚠⚠ THIS IS THE CHEAP HALF, AND IT IS DELIBERATELY NOT THE WHOLE GUARD. A source scan for
+  // "a falsified report sent home" has no honest token to match on: the offence is a VALUE at
+  // a call site, not a spelling, so a scan for it would pass whenever the leak was absent for
+  // the wrong reason and would convict the very headers that state the law. The REAL guard is
+  // therefore a DIFFERENTIAL that drives one fixture twice — clean operative against leashed
+  // operative — and asserts the HOME court's own outcome is byte-identical, with an EXECUTED
+  // plant proving it reds (tests/property/espionageLeakDormancy.test.js, case A7). What rides
+  // here is the structural complement: WHO may land a belief at all, and WHOM the leak leaf is
+  // allowed to name as the observer. Both arms are driven as mutants, because a scan that
+  // cannot be reddened is not a guard.
+  test('the belief-writer census is closed, and the leak leaf names ONLY its patron', () => {
+    const sources = espionageSources();
+    // The DEFINITION is not a call: without the lookbehind this census convicts the module
+    // that declares the writer, and the roster stops meaning "who lands a product".
+    const landersOf = (set) => Object.entries(set)
+      .filter(([, source]) => /(?<!function\s)\blandEspionageProduct\s*\(/.test(stripComments(source)))
+      .map(([file]) => file)
+      .sort();
+    expect(landersOf(sources))
+      .toEqual([`${ESPIONAGE_DIR}/espionageLeak.js`, `${ESPIONAGE_DIR}/espionageProductStage.js`]);
+    const planted = { ...sources, [`${ESPIONAGE_DIR}/espionageGauntlet.js`]: 'landEspionageProduct({});' };
+    expect(landersOf(planted)).toHaveLength(3);
+    const commented = { ...sources, [`${ESPIONAGE_DIR}/espionageGauntlet.js`]: '// landEspionageProduct({});' };
+    expect(landersOf(commented)).toHaveLength(2);
+    // THE LEAK-ONLY ARM: every observer the leak addresses is the PATRON, never the home court.
+    const observersIn = (source) => [...new Set(
+      [...stripComments(source).matchAll(/\bobserverId:\s*([A-Za-z0-9_$.]+)/g)].map((hit) => hit[1]),
+    )].sort();
+    expect(observersIn(sources[`${ESPIONAGE_DIR}/espionageLeak.js`])).toEqual(['patronId']);
+    expect(observersIn('landEspionageProduct({ observerId: homeId, subjectId });')).toEqual(['homeId']);
+  });
 });
 
 // ── 2. THE TAP LADDER (owner addition H, J-ES-16) ──────────────────────────────
