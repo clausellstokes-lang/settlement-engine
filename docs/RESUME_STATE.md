@@ -3,73 +3,33 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:09:44 EDT
+**Generated:** 2026-08-11 15:14:59 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **18** |
-| ledger (main) | `review-fixes-2026-07-08` | `9df1e966` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `904b7bb0` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `b7ae330f` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T150909` — build 18 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T151424` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T150909
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T151424
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
 staged set BY NAME AND COUNT.
 
-### Uncommitted in the build tree — attribute before touching
-
-```
- M scripts/.size-baseline.json
- M src/domain/aiOverlayVerifier.js
- M src/domain/hookEscalation.js
- M src/domain/pendingEditsPreview.js
- M src/domain/simulationSpine.js
- M src/domain/worldPulse/disposition.js
- M src/domain/worldPulse/npcAgency.js
- M src/domain/worldPulse/npcLadderState.js
- M src/generators/aiLayer.js
- M src/lib/generationTelemetry.js
- M src/lib/structuralFingerprint.js
- M src/utils/generateCampaignPDF.js
- M src/utils/generateWorldBook.js
- M tests/domain/hookEscalation.test.js
- M tests/domain/pendingEdits.test.js
- M tests/lib/generationTelemetry.test.js
- M tests/lib/structuralFingerprint.test.js
- M tests/pdf/worldBook.test.js
-```
-```
-  +1      -1      scripts/.size-baseline.json
-  +16     -0      src/domain/aiOverlayVerifier.js
-  +12     -5      src/domain/hookEscalation.js
-  +9      -5      src/domain/pendingEditsPreview.js
-  +13     -4      src/domain/simulationSpine.js
-  +19     -6      src/domain/worldPulse/disposition.js
-  +8      -3      src/domain/worldPulse/npcAgency.js
-  +12     -4      src/domain/worldPulse/npcLadderState.js
-  +8      -3      src/generators/aiLayer.js
-  +39     -2      src/lib/generationTelemetry.js
-  +7      -1      src/lib/structuralFingerprint.js
-  +12     -3      src/utils/generateCampaignPDF.js
-  +16     -4      src/utils/generateWorldBook.js
-  +21     -6      tests/domain/hookEscalation.test.js
-  +8      -2      tests/domain/pendingEdits.test.js
-  +10     -3      tests/lib/generationTelemetry.test.js
-  +9      -1      tests/lib/structuralFingerprint.test.js
-  +17     -3      tests/pdf/worldBook.test.js
-```
 ## Last 12 build commits
 
 ```
+904b7bb0 2026-08-11 The observed-shape baseline shrinks to 1977: seventeen dead reader rows are gone for good
+aed0fc0e 2026-08-11 The World Book's hook chapter, the campaign PDF's hook line and two fingerprints stop reading keys nothing writes
 aa585167 2026-08-11 The pglite contention cure is a REFUTATION: the five suites never collapsed
 ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it cannot mean
 36159389 2026-08-11 Schema 5 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
@@ -80,18 +40,16 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 9892eda1 2026-08-11 ES-6 refused as three; ES-6a promoted, and the volume builds doors before traffic
 8738f5ea 2026-08-11 TC-5 refused as four packets; TC-5a promoted, and a UI addition that was secretly persistence
 58436804 2026-08-11 The road labels I designed cannot exist: three of four cases refused, with measurement
-0dc40691 2026-08-11 INDEX: flip ES-5d's status token to LANDED, keeping its D7 note
-53fb10da 2026-08-11 Record: ES-5d LANDED; the ES-5 amendment is complete across four waves
 ```
 ## Last 6 ledger commits
 
 ```
+b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
-738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -133,23 +91,26 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    +1 over baseline, 6 foreign test reds — proven by before/after execution) — correctly
    refused, not chased. **CHAIR POST-LANDING STEP: after Lane C lands, run the full gate
    on the clean tree and record the exit-1-golden-only endstate.**
-2. **Lane B — COLLECTION DONE (~15:00), digest COMPLETING.** The survey workflow
-   (`wf_5618aec5-d46`, 14 agents) extracted all post-boundary acts and receipt-checked
-   them; its own verification caught that the SYNTHESIS input arrived TRUNCATED, so the
-   first digest covers 44 of the true **70** act rows (queue lines 7415–7484; 72 grep
-   hits − 2 protocol lines; the dispatch's "72 markers = the debt" framing was off — the
-   marker map is **83 instances / 4 files / 79 clearable**, and SOL_QUEUE's 1 is the
-   PROTOCOL definition, not an act). All 71 extracted acts were recovered from the
-   workflow journal into scratchpad `laneB-items-full.json`, and a completion agent is
-   merging the missing 26 into `laneB-fable-survey-digest.md` (transcript: session dir
-   `subagents/agent-a79043b489f97b15a.jsonl`). Partial counts (44 rulable): 39 RATIFY /
-   **5 RE-EXAMINE**, 27 HIGH-density. ⚠ Chair-flagged for first reading: the two schema-5
-   constitutional rows (7481/7482), the anti-vacuity-floor rebuttal (may have fed
-   CR-OSR-FREEZE-9), the never-applied M6 re-key (close SUPERSEDED?), the census-titles
-   contradiction, the two-incompatible-walker-rules item, and veto-points H2/H3/H10 +
-   the H6 brief-authoring pattern. **RULINGS = the Fable chair, next beats.**
-   ⚠ METHOD: a workflow synthesis stage fed inline JSON can silently truncate — always
-   check the digest's population against the SOURCE count (this one self-verified).
+2. **Lane B — ✅ THE FABLE SURVEY IS RULED (~15:45); the clearing lane is executing.**
+   The completed digest (scratchpad `laneB-fable-survey-digest.md`, all 70 post-boundary
+   acts, receipt-checked) was read WHOLE by the Fable chair and ruled in
+   **`laneB-CHAIR-RULINGS.md`** (same scratchpad — the vetoable record). Headlines:
+   **61 RATIFIED · R1 stands-with-struck-rebuttal · R2 closed SUPERSEDED · R4/R5/R7/R9
+   excused under the new SERIALIZATION LAW · R3/R6/R8 pending ordered cures.** The
+   SERIALIZATION LAW (the digest's highest-leverage hand-up, raised by five rows): a
+   shared census re-derives WHOLE in the change that moves it; serialize rather than land
+   a red walker; the one exception is already-red-at-pristine-base (escalate, never
+   re-record); no lane ever quantifies a foreign lane's uncommitted delta; file-placement
+   does not exempt (titles pin estate-wide). Marker discipline: in-code walker home
+   RETIRED; protocol amended to TWO required homes. **Lane G (build slot 2, Opus) is
+   executing the clearing + corrections** (67 queue markers down, 5 walker + 5 TC-4
+   clears, SOL_QUEUE protocol amendment, the setLock/LockControls comment cures, the
+   ES-6A/ES-5B/ES-5D doc rewordings, the R3 re-drive). Expected queue marker count after
+   its commit: **5** (2 legend + R3/R6/R8). Transcript: session dir
+   `subagents/agent-ae454e3e9b0596a55.jsonl`. DEFERRED behind Lane C's landing: R8's C2
+   case (+whole census fold) and H9's both-sites recentEvents cleanup.
+   ⚠ METHOD (banked): a workflow synthesis stage fed inline JSON can silently truncate —
+   always check the digest's population against the SOURCE count (this one self-verified).
 3. **Lane C (build, Opus) — the 21 remaining READER-WITHOUT-WRITER repairs** (23 class-(a)
    true positives, 2 repaired; precedent `c74048e4`). Reader-side only; writer-side/persisted-
    shape items STOP-and-report as CHAIR-OWED; focused tests only (Lane A owns the gate);
