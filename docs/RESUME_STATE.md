@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 17:59:30 EDT
+**Generated:** 2026-08-11 18:10:48 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `63c62822` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `df146f5c` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `33b3ba1c` | **4601** |
 
 **Gate slot:** gate-mutex: HELD by atomic lock PID 97186: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 **Disk:** 33Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T175733` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T180923` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T175733
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T180923
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -56,12 +56,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
 df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
 40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
-a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -87,6 +87,16 @@ run out of 5 hour window usage. prepare for that."** Every dispatch below theref
 its collection pointers, and this note is rewritten at EVERY event (seamless-resume
 directive). A successor's job on any lane is COLLECT — survey git + dirty files + the
 transcript tail, re-verify independently — never re-dispatch while WIP exists.
+
+⭐⭐ **THE 2026-08-11 REFRESHED GRANT (~18:05): every pending owner-gated QUEUE item is
+released to chair judgment** — dispositions recorded at OWNER_DECISION_QUEUE §17 (the
+veto surface): the golden batch EXECUTES (task #16 — UPDATE_GOLDEN + the Lord-Mayor
+regex, one seed-line move, deliverable = FULL GATE EXIT 0); the lock copy is ADOPTED;
+§15b RULED (stated absence wins); the REL_LABEL descriptors are chair-authored (task
+#17); **ES-Da is AUTHORIZED dark-built with mandatory dark-path byte-identity** (Lane Q
+drafting the packet; the owner's walk + soaks remain the review gates before lighting).
+The four BY-NATURE carve-outs are UNCHANGED: legal · the V5 cull · THE TUNING
+SIGNATURE · each push/deploy; no remote contact ever; the walk is the owner's eye.
 
 ## The live board — rewritten ~17:20 EDT (the chair compacts; git carries the detail)
 

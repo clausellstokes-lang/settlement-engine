@@ -762,3 +762,47 @@ already diagnosed as all consumers and no producer.
 ⚠ If you'd rather the espionage surface stay dark until the design is revisited, that is
 entirely coherent and costs nothing — the five landed waves are byte-identical while dark.
 Full evidence: `memory/es-d-refused-the-product-intent-is-undeliverable.md`.
+
+---
+
+## §17 · ⭐⭐ THE 2026-08-11 REFRESHED GRANT, AND THE CHAIR'S DISPOSITIONS (vetoable)
+
+**Owner, verbatim (~18:05 ET):** "for what is pending and anything in the future that
+would require it. I give my permission freeely and leave best judgemetns to you in
+accordance to what we have already established as standard."
+
+**Chair reading:** every pending-and-future owner-gated QUEUE item releases to chair
+judgment at its queue position, per the 08-05/08-10 blanket-grant pattern. The four
+BY-NATURE carve-outs are untouched and untouchable by blanket wording: external legal
+sign-off · the V5 aesthetic cull (offered, never assumed) · THE TUNING SIGNATURE · each
+push/deploy (incl. migration-195's deploy). No remote/Supabase contact ever. The owner's
+walk remains the owner's eye.
+
+**Dispositions under the grant:**
+1. **§14 the batched UPDATE_GOLDEN — EXECUTING.** One batch, one seed-line move: the
+   golden re-record absorbing the registered SHIFT-2, PLUS the Lord-Mayor
+   `/council|court|hall|government/` narrowing (§15's four absurd links) landing in the
+   same commit. The fear-rung lighting does NOT ride (bigger prose-shift question;
+   deferred-recorded to a future declared batch). Sequenced right after the TC-5B-i seam
+   lands; deliverable: THE FULL GATE AT EXIT 0 — the first fully green gate of the era.
+2. **§15 the lock copy — ADOPTED as landed** (the draft-for-veto strings become final;
+   this section remains the veto surface).
+3. **§15b stated-absence vs absent-section — RULED: a STATED absence wins**, consistent
+   with the honesty doctrine and the news address law (a surface that says "none" is
+   honest; a missing section is ambiguous).
+4. **The four REL_LABEL relationship descriptors — chair AUTHORS them** in the existing
+   rows' voice (display-only, non-golden-bearing, confirmed render-time); this section
+   is the veto surface.
+5. **§16 ES-Da — AUTHORIZED UNDER THE GRANT, with conditions.** The espionage tail
+   re-enters through the composite rider (covert cargo on an already-accepted peace
+   envoy), built DARK with MANDATORY dark-path byte-identity; zero new tuning keys
+   preferred; the product behavior (an accepted peace envoy can carry a spy) manifests
+   only when flags light at the endgame — so the owner's walk and both soaks remain
+   review gates before any world changes. Packet draft dispatched; compile follows the
+   packet law.
+6. **foundingTier satellite-mint widening — RELEASED at its queue position** (not near
+   the head; unchanged in sequence).
+7. **The A-4 notice copy** at TC-5B-ii promotion — chair drafts; that promotion is the
+   veto surface.
+
+— Fable chair, session c42c8924, 2026-08-11.
