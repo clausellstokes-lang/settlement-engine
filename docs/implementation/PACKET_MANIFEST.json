@@ -568,7 +568,7 @@
     },
     {
       "id": "ES-6A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/ES-6A.md",
       "verifiedBase": "58436804982b41944478db6c728e579ac9853122",
       "changeManifest": [

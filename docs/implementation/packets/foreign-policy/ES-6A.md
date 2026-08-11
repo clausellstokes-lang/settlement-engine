@@ -1,6 +1,7 @@
 # `ESPIONAGE / ES-6` — compilation verdict and the ES-6a contract (DRAFT, rev 1)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `53d538b4` (2026-08-11) — A4's boundary proven both sides, A7 a true differential, zero moved goldens
 - **Status note:** promoted by the chair 2026-08-11; §13's ten open items are CLOSED below, INCLUDING O4's hard blocker. ES-6 as chartered was REFUSED as three packets; this is the first.
 - **Verdict on ES-6 as chartered:** ⛔ **REFUSE FORWARD.** ES-6 as written at
   `docs/DESIGN_FP_ARCH_ES.md:1633-1646` is **four behavior families against a cap of one**, and
