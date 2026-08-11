@@ -193,6 +193,37 @@ commit `333fbf49` shares the real one's message: **chain plumbing with `&&`, not
 failed `add` still commits.** ⛔ Do NOT "fix" the tree — the build worktree is clean and is
 where all work happens.
 
+⭐ **THE SAME-SEED BLAST-RADIUS CENSUS IS DONE** (the generation lane's own child —
+memory/same-seed-blast-radius-census-method.md; ⚠ I mistook the quiet parent for a stalled
+lane and sent a status demand, then withdrew it: **a parent working through a child looks
+identical to a stopped one**, so check for CHILDREN before demanding status).
+⭐ **THE STRUCTURAL INSIGHT: nearly every determinism suite CANNOT MOVE** — they generate
+TWICE AT RUNTIME and compare the two results, so a deterministic change shifts both sides
+identically. Their real job is proving no NEW nondeterminism (an insertion-ordered
+`Set`/`Map` walk is the only way they can red).
+⚠⚠ **THE ONE COMMITTED HASH OVER A GENERATED SETTLEMENT is
+`generator-golden-master.json` (525 rows)** — it WILL move, expected and approved.
+Repo-wide there are only TWO snapshot assertions and ONE `.snap`. The scary-looking
+fingerprint modules are all safe: one has NO committed golden, one never sees a
+settlement, one reads NPCs only as counts.
+⚠ The exact committed COUNT pins are `generation.test.js`'s inline snapshot and
+`goldenViewModel.test.js.snap` — ⭐ `GOLDEN_SHIFT_LEDGER.md:910` records a past shift
+moving "exactly one value, headcounts.npcs 10 → 11", so that snapshot IS npc-count
+sensitive and is the CANARY that this fix adds no NPCs.
+⚠⚠ **THE RESIDUAL NOBODY ASKED ABOUT, and the sharpest find:
+`settlement.generationCoherenceReceipt` is a PERSISTED IN-PIPELINE surface minted at
+`assembleSettlement.js:248` — the very NEXT STATEMENT after the fix's call site at `:237`.**
+`collectStrings` RECURSES INTO ARRAYS, so a newly-non-empty `linkedInstitutionIds[0]`
+becomes a new generated string through four scanners. Judged safe BY READING, not
+execution — the lane is ordered to DRIVE it. Two tail risks: a finding appended at a new
+path while the same verdict already fires elsewhere (persisted bytes move, `status` does
+not), and the finding lists **`break` at >= 25** so an inserted finding can EVICT a later
+one — both only on settlements already at `needs_review`.
+⚠ ONE GENUINELY UNCERTAIN GATE remains: `observedShapeReaders.walker` — whether
+`linkedInst` still grounds and re-mints `id on institutions` was REASONED, not executed,
+and that baseline is EXACT and BIDIRECTIONAL (a row that GOES reds as `stale` exactly like
+one that appears). Ordered run ALONE, first.
+
 **Ruled and sequenced (not blocked):**
 
 - **⭐ THE OSR PROGRAM'S REMAINING TAIL, now all unblocked by the genesis:** the 23
