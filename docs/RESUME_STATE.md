@@ -100,60 +100,31 @@ and two things need your first attention. Start here, then read the Live board b
 
 ## 2. THE TWO LANES IN FLIGHT — collect these, do not re-dispatch
 
-Both were alive at handoff (11 processes). **A background run cannot wake a stopped lane** —
-if a lane reports "waiting", verify liveness with `ps aux | grep vitest` and resume it with
-an explicit "collect it yourself" order rather than re-dispatching, which burns its context.
+Both dispatched 2026-08-11 after a clean stall check (tree clean at `ffc85a90`, mutex
+free, zero processes). **A background run cannot wake a stopped lane** — if one reports
+"waiting", verify liveness with `ps aux | grep vitest` and resume it with an explicit
+"collect it yourself" order rather than re-dispatching, which burns its context.
 
-- **✅✅ SCHEMA-5 IS MINTED AND LANDED — `36159389` (code, deliberately red) + `ffc85a90`
-  (genesis). THE OBSERVED-SHAPE GATE IS GREEN, exit 0.** The chair ran the full governed
-  pipeline between the two commits exactly as the runbook specified — artifact, 4→5 report,
-  ledger fill (1,499 decisions, ZERO issues), bundle, and the genesis write — **every step
-  exit 0, each captured with its own `$?`**. Result: **2,164/1,499/395 → 2,003/1,413/385**,
-  reconciling **1,413 same / 86 gone / 0 new / 0 increased / 0 decreased — a PURE SHRINK.**
-  ⭐ **The anti-vacuity floor did NOT move** (resolvedReads 9,238→9,240; totalKeys and
-  usableShapes unchanged): unlike the 2→4 mint this changes what is **REPORTED**, not what
-  is **RESOLVED** — the instrument did not get weaker, it stopped reporting rows it could
-  not mean. ⭐ Both filters **REFUSE OUTRIGHT** if they would ever clear a class-(a) row,
-  so the debt surface cannot be eroded by retuning; and because they live inside
-  `scannerToolFiles()` they sit inside `detectorTreeDigest`, so **retuning θ or adding an
-  exemption REDS THE GATE by the mechanism that already governs the detector — the guard
-  guards itself.**
-  ⚠⚠ **THE FULL GATE RAN AND IT IS NOT GREEN — TRUE EXIT 1, and NOT on the golden.**
-  ⛔⛔ **THE HARNESS REPORTED THIS RUN AS "exit code 0". THE CAPTURED `$?` WAS 1. SIXTH
-  SIGHTING TODAY — trust no exit status you did not capture yourself.**
-  **The red is the SCOPE-COLLAPSE SENTINEL, and it is the sentinel WORKING:** five
-  `tests/security/*.pglite.test.js` suites **FAILED WITHOUT A MEASURABLE TEST** — their
-  `beforeAll` threw, so every test they own left the census.
-  ⭐ **ATTRIBUTED, NOT A REGRESSION:** `supportTickets.pglite` then passed **19/19, exit 0,
-  IN ISOLATION** — same code, same commit; the only difference is CONTENTION. It is the
-  same sizing error the mint itself hit and cured hours earlier (the OSR corpus build
-  measures **251,002 ms contended against a 300 s budget sized on the 47 s SOLO figure**).
-  **Same disease, five more patients** (memory/heavy-beforeall-hooks-collapse-under-contention.md).
-  ⭐⭐ **AND THIS IS EXACTLY WHY ES-5c BUILT THAT SENTINEL:** before it, these five would
-  have been counted as SKIPS and the ceiling could have absorbed them — coverage silently
-  gone. Its first real full-gate run caught five suites.
-  ⚠ **The census is SEQUENCED and ABORTS before per-test reporting**, so this run CANNOT
-  tell you whether the golden or anything else is red behind it.
-  **→ NEXT ACT FOR THE SUCCESSOR: size those five hooks for CONTENTION (not solo), re-run
-  the gate, THEN read the endstate.** ⛔ Never cure it by raising the SKIP CEILING — a
-  collapsed suite is not a skip, which is the sentinel's entire point.
-  ⚠ Superseded note (kept for provenance): the vault `refs/preserved/schema5-mint-wip`
-  (`697b5862`) was insurance taken while the lane looked stopped; its content is now
-  LANDED and the ref is redundant.
-- ~~**SCHEMA-5 MINT** — the act that greens the gate.~~ **DONE, see above.**
-  Five consolidated items. Expect a **COMMIT PAIR**, the first deliberately gate-red (the
-  schema-4 precedent: `894325ff` then `2a7fb033`). ⛔ Never hand-edit the baseline JSON.
-  ⚠ **AT HANDOFF IT SHOWED ZERO LIVE PROCESSES WITH FOUR FILES DIRTY** — between runs, or
-  stopped without reporting (the recorded pattern). **Its WIP IS VAULTED at
-  `refs/preserved/schema5-mint-wip` (`697b5862`)** — `check-observed-shape-readers.mjs`,
-  `lib/observed-shape-baseline.mjs`, `migrate-observed-shape-readers.mjs`,
-  `observedShapeSentinel.test.js`. Recover any of them with
-  `git show refs/preserved/schema5-mint-wip:<path> > <path>`. ⛔ Never merge that ref.
-  **FIRST ACTION: send it a status demand** ("collect your own gate result; a background
-  run cannot wake you") before assuming anything about its state.
-- **ES-7 COMPILE** — ✅ **REPORTED AND REFUSED.** See §7: ES-7 is not dispatchable and
-  **ES-D (the dispatcher) is the only compilable espionage slice.** Draft at scratchpad
-  `es7-packet-draft-ES-7.md` with ten open items, each with a recommendation.
+- **⭐ PGLITE CONTENTION CURE** (`tasks/a132c38c986b6be53.output`) — **its deliverable is a
+  genuinely green gate.** The five `tests/security/*.pglite.test.js` suites collapse under
+  contention (`supportTickets` passes **19/19 in ISOLATION** at this commit), and the cure
+  is to size their `beforeAll` budgets for CONTENTION with the arithmetic stated in-file —
+  the model is the schema-5 mint's own cure (corpus build **251,002 ms contended vs a 300 s
+  budget sized on the 47 s SOLO figure**). ⛔ **NEVER cure it by raising the SKIP CEILING or
+  allowlisting** — a collapsed suite is not a skip, and absorbing it would destroy the
+  sentinel on its first real outing. ⚠ It may REFUSE FORWARD if the true cause is a
+  collection error, an OOM, or pglite instances contending on a shared resource — in which
+  case the fix is serialisation, not time. **Expected endstate afterwards: exit 1 with
+  EXACTLY ONE failing test outside the frozen census — the owner's golden.**
+- **⭐ ES-D CHARTER + COMPILE** (`tasks/a7cde91f2c451a746.output`) — draft-only, scratchpad
+  `esd-`. **The dispatcher is the espionage volume's real gate**: five waves of consumers
+  were built on a declared doors-before-traffic shape and nothing calls them. Its first
+  question is whether `mintCovertMission`'s returned `fields` have a lawful writer (the
+  ES-7 lane flagged it PLAUSIBLE-not-confirmed and named it "ES-D's first question").
+  ⚠⚠ It is told to **flag anything that is genuinely NEW CAPABILITY rather than repair
+  explicitly rather than design around it** — a dispatcher that makes five dormant waves
+  fire is a large product change, and that judgment is the chair's and possibly the
+  owner's, not a lane's.
 
 ## 3. ⚠⚠ THE ONE ACTIVE RISK: two concurrent MEMORY.md compactions
 
