@@ -21,15 +21,15 @@
  },
  "digests": {
   "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "6f6031118139193efbafdce159e0b7626178cf1ac8755bb31df5ab5c5845cb87",
-  "manifests": "cb7a64ff6036df495969e54a5ae4379f283d6ef42eefb81b18ca42ba5d292fb3",
+  "inventory": "1edb0a70525e319c4d0a24b0f5f7db3cb1b429bc94e6a631e0996db040076a6c",
+  "manifests": "427e44beb1652637b797e26280c9079236333f96399ac75f95c65d7dd78e9112",
   "migrationReview": "b6261a3edfc0954f54bf76c3635e8a83782b0eb04625724987b6f9c86ad4d22e",
-  "scanStats": "3e6f1fc4f9df420c4fe4ff6c1327efe4d0fc4dd71f19d0feb249567dd9157424",
-  "sentinel": "6ab24787cfcab52eb5f12fa0a49f3fa82bf0a9d4329290670778b8a3a4c3dc3c"
+  "scanStats": "c3db215009693a7608b75624a7ab083dd93872eab84040f23331ef42cdc3b5bc",
+  "sentinel": "8348ac8c3ee35437b6a017b7dcf1df5b39b21bf1d6fc66b71b39942f6b367451"
  },
  "frozen": "2026-08-11",
- "frozenAtSha": "46357c94b2257d1f5947bc849b8f506451784450",
- "identities": 1515,
+ "frozenAtSha": "78d136a1b4360d3defb5ba2a03579a8e53b90e4a",
+ "identities": 1506,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -114,10 +114,7 @@
    "primaryDeitySnapshot on config": 2
   },
   "src/components/map/PlacementDetailCard.jsx": {
-   "culture on settlement": 1,
-   "cultureName on settlement": 1,
-   "settlement on settlement": 1,
-   "terrain on settlement": 1
+   "settlement on settlement": 1
   },
   "src/components/map/PlacementsLayer.jsx": {
    "ancientRuin on history": 2,
@@ -125,9 +122,7 @@
    "isCapital on settlement": 1,
    "lifecycleStatus on config": 2,
    "lifecycleStatus on settlement": 1,
-   "port on settlement": 1,
-   "settlement on settlement": 3,
-   "tradeRouteAccess on settlement": 1
+   "settlement on settlement": 3
   },
   "src/components/map/QuickInspector.jsx": {
    "tier on save": 1
@@ -164,7 +159,6 @@
    "applyMode on stressors": 1,
    "candidateType on stressors": 2,
    "covert on stressors": 2,
-   "decreed on stressors": 2,
    "headline on stressors": 2,
    "impactKind on stressors": 2,
    "kind on stressors": 2,
@@ -172,10 +166,8 @@
    "reasons on stressors": 4,
    "score on stressors": 2,
    "significance on stressors": 2,
-   "source on stressors": 1,
    "stressor on stressors": 2,
-   "tick on stressors": 5,
-   "visibility on stressors": 1
+   "tick on stressors": 5
   },
   "src/components/map/heraldRegister.js": {
    "campaignEventId on historicalEvents": 2,
@@ -244,7 +236,6 @@
    "aiData on save": 2
   },
   "src/components/settlement/ProvenanceBlock.jsx": {
-   "campaignId on save": 2,
    "savedAt on save": 1
   },
   "src/components/settlement/SuccessorPrompt.jsx": {
@@ -2425,7 +2416,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4ce6c6bb7755ae93db85f8d51285ff314d6d6a55ac33e387bf5207d0811215be",
+   "digest": "39c2fab6137ba01cba3aa6eff01c7206c18544954478c7b7fcd5d4bb31ff6988",
    "entries": [
     {
      "mode": "100644",
@@ -4719,15 +4710,15 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementDetailCard.jsx",
-     "sha256": "a11a1c7d2f478568a94d2465f9dab88357956aa41aa83f272fba54504725b1a8",
-     "size": 5166,
+     "sha256": "4ef05b2b68b58c2c3d3c1792d8563e692e0a4abf7d16d243f09a0cf444f0bb0f",
+     "size": 5886,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "9a6370459af73a4b086824a1eb008e2052a9f4fe1cf0c0474b5317abfee7afdd",
-     "size": 17856,
+     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
+     "size": 19035,
      "type": "file"
     },
     {
@@ -5055,8 +5046,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "a5af0705308812f1ae73704200770ba44b5152a603d4b000fa8c0454d1f2a561",
-     "size": 9565,
+     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
+     "size": 10734,
      "type": "file"
     },
     {
@@ -5965,8 +5956,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/ProvenanceBlock.jsx",
-     "sha256": "422ebbcceed3323f5c5f2200594e980d97b21c8b827fd865a9b3fd4a8ba1c58f",
-     "size": 2931,
+     "sha256": "373281190ca09df78e853732ae30e0ab454f2815ddae507d38ad9aeb27572778",
+     "size": 3692,
      "type": "file"
     },
     {
@@ -17180,7 +17171,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ef8247928035e8757b1a2d0f5e0b3351468c4ed42fbb19f0f86fd64bc7434dcc",
+   "digest": "ba33966646c85a5e35eb7ec1ccc789af55ed6a5a516bbde8c7038f68ff42f2b7",
    "entries": [
     {
      "mode": "100644",
@@ -19404,15 +19395,15 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementDetailCard.jsx",
-     "sha256": "a11a1c7d2f478568a94d2465f9dab88357956aa41aa83f272fba54504725b1a8",
-     "size": 5166,
+     "sha256": "4ef05b2b68b58c2c3d3c1792d8563e692e0a4abf7d16d243f09a0cf444f0bb0f",
+     "size": 5886,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "9a6370459af73a4b086824a1eb008e2052a9f4fe1cf0c0474b5317abfee7afdd",
-     "size": 17856,
+     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
+     "size": 19035,
      "type": "file"
     },
     {
@@ -19740,8 +19731,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "a5af0705308812f1ae73704200770ba44b5152a603d4b000fa8c0454d1f2a561",
-     "size": 9565,
+     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
+     "size": 10734,
      "type": "file"
     },
     {
@@ -20650,8 +20641,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/ProvenanceBlock.jsx",
-     "sha256": "422ebbcceed3323f5c5f2200594e980d97b21c8b827fd865a9b3fd4a8ba1c58f",
-     "size": 2931,
+     "sha256": "373281190ca09df78e853732ae30e0ab454f2815ddae507d38ad9aeb27572778",
+     "size": 3692,
      "type": "file"
     },
     {
@@ -31767,7 +31758,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "12d9935a700dfc85f89826158afd6a3f9ba1f6aa736333f00ed6c02183fe6bf1",
+   "digest": "05c81ed727c74a3df29fc83e7364a1483d57a989275e90664d1fd87024a0e451",
    "entries": [
     {
      "mode": "100644",
@@ -33991,15 +33982,15 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementDetailCard.jsx",
-     "sha256": "a11a1c7d2f478568a94d2465f9dab88357956aa41aa83f272fba54504725b1a8",
-     "size": 5166,
+     "sha256": "4ef05b2b68b58c2c3d3c1792d8563e692e0a4abf7d16d243f09a0cf444f0bb0f",
+     "size": 5886,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "9a6370459af73a4b086824a1eb008e2052a9f4fe1cf0c0474b5317abfee7afdd",
-     "size": 17856,
+     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
+     "size": 19035,
      "type": "file"
     },
     {
@@ -34327,8 +34318,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "a5af0705308812f1ae73704200770ba44b5152a603d4b000fa8c0454d1f2a561",
-     "size": 9565,
+     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
+     "size": 10734,
      "type": "file"
     },
     {
@@ -35237,8 +35228,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/ProvenanceBlock.jsx",
-     "sha256": "422ebbcceed3323f5c5f2200594e980d97b21c8b827fd865a9b3fd4a8ba1c58f",
-     "size": 2931,
+     "sha256": "373281190ca09df78e853732ae30e0ab454f2815ddae507d38ad9aeb27572778",
+     "size": 3692,
      "type": "file"
     },
     {
@@ -46474,22 +46465,22 @@
  "originMinRows": 8,
  "scanStats": {
   "files": 2083,
-  "reads": 120427,
-  "resolved": 9255,
+  "reads": 120421,
+  "resolved": 9249,
   "unresolved": 111172
  },
  "scannerProvenance": {
   "detectorDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "executionTreeDigest": "4ce6c6bb7755ae93db85f8d51285ff314d6d6a55ac33e387bf5207d0811215be",
-  "scanTreeDigest": "ef8247928035e8757b1a2d0f5e0b3351468c4ed42fbb19f0f86fd64bc7434dcc",
-  "sourceTreeDigest": "12d9935a700dfc85f89826158afd6a3f9ba1f6aa736333f00ed6c02183fe6bf1",
+  "executionTreeDigest": "39c2fab6137ba01cba3aa6eff01c7206c18544954478c7b7fcd5d4bb31ff6988",
+  "scanTreeDigest": "ba33966646c85a5e35eb7ec1ccc789af55ed6a5a516bbde8c7038f68ff42f2b7",
+  "sourceTreeDigest": "05c81ed727c74a3df29fc83e7364a1483d57a989275e90664d1fd87024a0e451",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
  "schema": 4,
  "sentinel": {
-  "resolvedReads": 9255,
+  "resolvedReads": 9249,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 2182
+ "total": 2171
 }
