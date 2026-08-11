@@ -12,8 +12,10 @@ import {
   governedLegacyDetectorSha256,
 } from '../../scripts/lib/observed-shape-governance.mjs';
 import {
+  FILTERED_TARGET_SCHEMA,
   HEURISTIC_TARGET_SCHEMA,
   heuristicMigrationReport,
+  LEAF_MIGRATION_PREDECESSOR,
   migrationBundleOf,
   migrationReport,
   migrationReportDigest,
@@ -236,7 +238,7 @@ function acceptedReview(report) {
 
 describe('observed-shape schema migration governance', () => {
   test('requires an explicit schema-2 predecessor CLI input', () => {
-    expect(() => runMigration([])).toThrow(/--predecessor=<schema-2-baseline\.json>/);
+    expect(() => runMigration([])).toThrow(/--predecessor=<predecessor-baseline\.json>/);
     expect(() => runMigration(['--unknown'])).toThrow(/unknown governed CLI argument/);
     expect(() => runMigration([
       '--predecessor=a', '--predecessor=b', '--legacy=c', '--current=d',
@@ -720,6 +722,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     predecessor,
     legacy,
     predecessorText(predecessor),
+    HEURISTIC_TARGET_SCHEMA,
   );
 
   test('the target IS the heuristic inventory, and there are NO site-migration rows', () => {
@@ -790,12 +793,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(canonicalJson(first)).toBe(canonicalJson(second));
     expect(validateHeuristicMigrationReport(
       first, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+      HEURISTIC_TARGET_SCHEMA,
     )).toBe(first);
 
     const tampered = structuredClone(first);
     tampered.target.inventoryDigest = 'f'.repeat(64);
     expect(() => validateHeuristicMigrationReport(
       tampered, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+      HEURISTIC_TARGET_SCHEMA,
     )).toThrow(/not the canonical report/);
 
     // A smuggled site-migration row is refused by conservation, not merely
@@ -804,6 +809,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     smuggled.rows = [{ rowId: 'osr-migration-row-v1:forged' }];
     expect(() => validateHeuristicMigrationReport(
       smuggled, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+      HEURISTIC_TARGET_SCHEMA,
     )).toThrow(/not the canonical report/);
   });
 
@@ -812,12 +818,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     const exact = currentArtifact([newFinding(10, 100, 'held', 'row', 'root/row')]);
     expect(() => heuristicMigrationReport(
       fixture.predecessor, exact, predecessorText(fixture.predecessor),
+      HEURISTIC_TARGET_SCHEMA,
     )).toThrow(/validated legacy-leaf\/schema-2 scan artifact/);
 
     const counterfeit = structuredClone(fixture.legacy);
     counterfeit.legacyAlgorithm.baseSha = 'd'.repeat(40);
     expect(() => heuristicMigrationReport(
       fixture.predecessor, counterfeit, predecessorText(fixture.predecessor),
+      HEURISTIC_TARGET_SCHEMA,
     )).toThrow(/governed detector/);
   });
 
@@ -830,6 +838,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       { ...fixture.predecessor, corpusMeta: { ...fixture.predecessor.corpusMeta, generations: 17 } },
       fixture.legacy,
       predecessorText({ ...fixture.predecessor, corpusMeta: { ...fixture.predecessor.corpusMeta, generations: 17 } }),
+      HEURISTIC_TARGET_SCHEMA,
     )).toThrow(/corpus configuration generations/);
   });
 
@@ -900,25 +909,73 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
         newFinding(10, 100, 'held', 'row', 'root/row'),
       ])));
 
-      // No `--current` and no flag: the live heuristic target, and the exact
-      // artifact is never even read.
+      // The RETIRED heuristic target, named explicitly. The exact artifact is
+      // never even read on this path.
       const report = runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, `--json=${reportPath}`,
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
+        `--target-schema=${HEURISTIC_TARGET_SCHEMA}`, `--json=${reportPath}`,
       ]);
       expect(report.target.baselineSchema).toBe(HEURISTIC_TARGET_SCHEMA);
       expect(report.rows).toEqual([]);
+
+      // ⭐ THE BARE CLI NOW MEANS THE LIVE TARGET, WHICH IS 5 — and a schema-2
+      // predecessor cannot reach it, because `LEAF_MIGRATION_PREDECESSOR` pairs
+      // 5 with a schema-4 predecessor and 4 with a schema-2 one. The refusal is
+      // the pin: nothing silently re-runs the retired migration.
+      expect(() => runMigration([
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
+      ])).toThrow(/predecessor baseline must be a schema-4 object/);
 
       expect(() => runMigration([
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
         `--current=${currentPath}`, `--target-schema=${HEURISTIC_TARGET_SCHEMA}`,
       ])).toThrow(/--current is only valid for the retired/);
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=5',
-      ])).toThrow(/--target-schema must be 4/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=6',
+      ])).toThrow(/--target-schema must be 5/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+
+  /**
+   * ⭐⭐ THE SCHEMA-4 -> SCHEMA-5 TARGET (CR-OSR-FREEZE-6-R2, the consolidated mint).
+   *
+   * Schema 5 did NOT move the alphabet — it is schema 4's `<key> on <shape>`
+   * identity with the byte-frozen detector's output narrowed by two declared
+   * post-filters — so the whole review is once more `predecessorRows` and the
+   * report builder is genuinely the same argument rather than a copy of it.
+   *
+   * ⚠⚠ WHAT MUST NEVER BE CONFUSABLE IS WHICH PREDECESSOR PAIRS WITH WHICH
+   * TARGET, so the pairing is a TABLE that every entry point reads, and both
+   * halves of the refusal are driven here. A migration that accepted a schema-2
+   * predecessor for a schema-5 target would silently re-bank the 2026-08-10
+   * genesis inventory as if the two filters had never run.
+   */
+  test('the schema-4 -> schema-5 target pairs by TABLE, and a schema-2 predecessor cannot reach it', () => {
+    expect(FILTERED_TARGET_SCHEMA).toBe(5);
+    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4 });
+    // The kind is DERIVED from the table, so a target can never name a migration
+    // it did not perform.
+    expect(heuristicReportOf(heuristicFixture()).kind)
+      .toBe('observed-shape-schema-2-to-4-migration');
+
+    const fixture = heuristicFixture();
+    const text = predecessorText(fixture.predecessor);
+    // ── THE PAIRING REFUSAL, BOTH DIRECTIONS ─────────────────────────────────
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, fixture.legacy, text, FILTERED_TARGET_SCHEMA,
+    )).toThrow(/predecessor baseline must be a schema-4 object/);
+    // …and a target outside the table is refused by a TOTAL predicate rather
+    // than by an enumeration of the numbers somebody thought to forbid.
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 6))
+      .toThrow(/leaf migration target must be 4 or 5/);
+    // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
+    // a defaulted target is the one input in this chain a caller could get wrong
+    // silently, and it would decide which migration ran.
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
+      .toThrow(/leaf migration target must be 4 or 5/);
   });
 });

@@ -2,21 +2,37 @@ import { createHash } from 'node:crypto';
 import { describe, expect, test } from 'vitest';
 
 import {
+  applyExplainedWriterFilter,
+  applyShapeFamilyFilter,
+  assertExplainedWriterEvidence,
+  assertExplainedWriterExemptions,
+  assertShapeFamilyDebtPreserved,
+  authoredInputHistoryCommits,
   BASELINE_SCAN_MODE,
   BASELINE_SCHEMA,
+  CLASS_A_PROTECTED_IDENTITIES,
   cohortOf,
   commandOf,
   compare,
   corpusPayloadOf,
   EXACT_SCAN_EXCLUDED_SCOPE,
+  EXPLAINED_WRITER_EXEMPTIONS,
   identityOf,
   isObservedShapeScanPath,
   isObservedShapeSubjectPath,
+  RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   run,
   SCAN_CONFIG,
   sentinelFailures,
   sentinelOf,
+  shapeFamilyUnionOf,
+  WRITE_SHAPE_SPELLINGS,
+  writeShapesIn,
 } from '../../scripts/check-observed-shape-readers.mjs';
+import {
+  validateSchema4Baseline,
+  validateSchema5Baseline,
+} from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
   artifactIdentityOf,
@@ -433,12 +449,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
 
     expect(commandOf(['--scan-only', '--json=/tmp/scan.json', '--progress']).progress)
       .toBe(true);
+    // ⚠ `family-filter-complete` (CR-OSR-FREEZE-6) and
+    // `explained-writer-filter-complete` (M8/M9) are DELIBERATE additions, and
+    // this pin caught both — which is the pin working. Each is emitted on EVERY
+    // scan, including this exact-origin probe where neither filter applies, so a
+    // reader of `--progress` can never mistake "filter absent" for "phase absent".
     expect(events.map(({ phase }) => phase)).toEqual([
       'corpus-start',
       'corpus-complete',
       'scan-start',
       'read-start',
       'scan-complete',
+      'family-filter-complete',
+      'explained-writer-filter-complete',
     ]);
     expect(events).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -541,6 +564,366 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   });
 
   /**
+   * ⭐⭐ CR-OSR-FREEZE-6 — THE SHAPE-FAMILY RELATION. The union is the whole point:
+   * an INTERSECTION would narrow the accepted key set and MINT findings, which is
+   * why the assertions below pin the union EXACTLY rather than testing that it
+   * merely contains something.
+   */
+  test('CR-OSR-FREEZE-6: the shape family unions containing siblings, above a size guard', () => {
+    const keysOf = (n, extra = []) => [...Array.from({ length: n }, (_, i) => `k${i + 1}`), ...extra];
+    // `subject` has 10 own keys. `joins` covers 8 of them (0.80, exactly theta);
+    // `misses` covers 7 (0.70). Only the first may contribute.
+    const shapes = {
+      subject: { rows: 500, keys: keysOf(10) },
+      joins: { rows: 500, keys: [...keysOf(8), 'fromJoiner'] },
+      misses: { rows: 500, keys: [...keysOf(7), 'fromMisser'] },
+    };
+    expect([...shapeFamilyUnionOf('subject', shapes)].sort())
+      .toEqual([...keysOf(10), 'fromJoiner'].sort());
+
+    // THE SIZE GUARD IS A BOUNDARY, PINNED ON BOTH SIDES: the same perfect
+    // superset contributes nothing to a 7-key shape and everything to an 8-key
+    // one, so the guard cannot be quietly dropped or quietly widened.
+    const guardShapes = (n) => ({
+      thin: { rows: 500, keys: keysOf(n) },
+      fat: { rows: 500, keys: [...keysOf(n), 'fromFat'] },
+    });
+    expect([...shapeFamilyUnionOf('thin', guardShapes(7))].sort()).toEqual(keysOf(7).sort());
+    expect([...shapeFamilyUnionOf('thin', guardShapes(8))].sort())
+      .toEqual([...keysOf(8), 'fromFat'].sort());
+
+    // Ignorance fails SAFE — an unknown shape unions to nothing, so its findings
+    // all survive. The filter may only ever remove what it can justify.
+    expect([...shapeFamilyUnionOf('absent', shapes)]).toEqual([]);
+  });
+
+  /**
+   * ⭐⭐ CR-OSR-FREEZE-6 — WHY THIS IS A POST-FILTER AND NOT A DETECTOR EDIT.
+   * `legacy-reader-shape-scan.mjs` is byte-frozen to blob 0310fa9f, so the filter
+   * consumes the detector's output and returns a SUBSET. The property that makes
+   * that safe is that `stats` is the SAME OBJECT — the anti-vacuity sentinel keeps
+   * measuring the DETECTOR's reach, so no threshold here can hide a corpus that
+   * stopped observing.
+   */
+  test('CR-OSR-FREEZE-6: the filter subsets findings and passes detector stats through by identity', () => {
+    const shapes = {
+      outcome: { rows: 756, keys: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] },
+      selected: { rows: 400, keys: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'carriedBySibling'] },
+    };
+    const stats = leafStats();
+    const rows = [
+      leafFindingOf({ key: 'carriedBySibling', shapes: ['outcome'] }),
+      leafFindingOf({ key: 'nobodyHasThis', shapes: ['outcome'] }),
+    ];
+    const filtered = applyShapeFamilyFilter({
+      scanMode: BASELINE_SCAN_MODE, corpus: { shapes }, scan: { findings: rows, stats },
+    });
+
+    expect(filtered.findings.map(({ key }) => key)).toEqual(['nobodyHasThis']);
+    expect(filtered.familyFilter)
+      .toEqual({ applied: true, cleared: 1, clearedIdentities: ['carriedBySibling on outcome'] });
+    // BY IDENTITY, not by value: `toBe` is the assertion that makes it structurally
+    // impossible for this filter to move the vacuity floor.
+    expect(filtered.stats).toBe(stats);
+
+    // The EXACT leg is addressed by executed origin, where "the same record under
+    // another name" is not expressible — so it keeps the raw detector output.
+    const exact = applyShapeFamilyFilter({
+      scanMode: 'exact-origin', corpus: { shapes }, scan: { findings: rows, stats },
+    });
+    expect(exact.findings).toBe(rows);
+    expect(exact.familyFilter.applied).toBe(false);
+  });
+
+  /**
+   * ⭐⭐⭐ THE CONTROL CR-OSR-FREEZE-6 REQUIRES. The filter was adopted ONLY on the
+   * measured property that it erases zero class-(a) true positives, so that
+   * property is machinery here, not a measurement that happened once.
+   *
+   * ⚠ THE PAIRED NEGATIVE CONTROL IS THE POINT. Both halves below run the SAME
+   * corpus through the SAME clearing mechanism and differ only in whether the
+   * cleared identity is class-(a). Without the pair, a pin that threw on ANY
+   * clearing would look identical to this one and would be wrong — it would
+   * refuse the 122 rows the filter exists to clear.
+   */
+  test('CR-OSR-FREEZE-6: clearing a class-(a) TRUE POSITIVE refuses the scan; clearing anything else does not', () => {
+    // `coalitionEvidence on outcome` is a LIVE class-(a) row sitting on `outcome`,
+    // the very shape whose union grows 48 -> 141 keys under the real filter.
+    const guarded = 'coalitionEvidence on outcome';
+    expect(CLASS_A_PROTECTED_IDENTITIES).toContain(guarded);
+
+    const own = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const shapes = {
+      outcome: { rows: 756, keys: own },
+      selected: { rows: 400, keys: [...own, 'coalitionEvidence', 'settlementId'] },
+    };
+    const clearOf = (key) => applyShapeFamilyFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: { shapes },
+      scan: { findings: [leafFindingOf({ key, shapes: ['outcome'] })], stats: leafStats() },
+    });
+
+    // ── THE MUTANT: the filter genuinely clears a class-(a) row ───────────────
+    let raised = null;
+    try {
+      clearOf('coalitionEvidence');
+    } catch (error) {
+      raised = error;
+    }
+    expect(raised, 'the filter cleared a class-(a) row and the control did not fire').toBeInstanceOf(Error);
+    // THE MESSAGE MUST NAME THE ACTUAL CAUSE. A pin that reds for the right reason
+    // with the wrong message costs the next lane exactly the time it exists to save.
+    expect(raised.message).toContain(guarded);
+    expect(raised.message).toContain('class-(a)');
+    expect(raised.message).toContain('CR-OSR-FREEZE-6');
+    expect(raised.message).toContain('theta=0.8');
+    expect(raised.message).toMatch(/cleared 1 CR-OSR-FREEZE-3-R2 class-\(a\)/);
+
+    // ── THE NEGATIVE CONTROL: same corpus, same clearing, unguarded identity ──
+    const lawful = clearOf('settlementId');
+    expect(lawful.familyFilter)
+      .toEqual({ applied: true, cleared: 1, clearedIdentities: ['settlementId on outcome'] });
+
+    // …and the guard is a pure function of what was cleared, so it can be driven
+    // directly: the same identity refused above passes through untouched when it
+    // is NOT in the cleared set.
+    expect(() => assertShapeFamilyDebtPreserved(['settlementId on outcome'])).not.toThrow();
+    // anchored: the throwing case is asserted immediately above on the same helper
+    expect(assertShapeFamilyDebtPreserved([])).toEqual([]);
+    expect(() => assertShapeFamilyDebtPreserved([guarded])).toThrow(/class-\(a\)/);
+  });
+
+  /**
+   * The refusal is not confined to the helper: it reaches the gate, because the
+   * filter sits in `run()` between the scan and the inventory.
+   */
+  test('CR-OSR-FREEZE-6: the class-(a) refusal propagates out of the gate itself', async () => {
+    const own = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const corpus = {
+      ...healthyCorpus(),
+      shapes: {
+        outcome: { rows: 756, keys: own },
+        selected: { rows: 400, keys: [...own, 'coalitionEvidence'] },
+      },
+    };
+    const rows = [leafFindingOf({ key: 'coalitionEvidence', shapes: ['outcome'] })];
+    const runtime = maintenanceRuntime({ current: rows, frozen: rows });
+    runtime.overrides.corpusFor = async () => corpus;
+    runtime.overrides.scanLegacyReaders = () => ({ findings: rows, stats: leafStats() });
+
+    await expect(run([], runtime.overrides)).rejects.toThrow(/class-\(a\)[\s\S]*coalitionEvidence on outcome/);
+  });
+
+  /**
+   * ⭐⭐ M8/M9 GATE 0 — THE WIDENED WRITE-SHAPE PROBE. Two of these four spellings
+   * were MEASURED defeating the quoted-string scan that was this discipline's
+   * best manual check, and both are real writes in the live estate. The pin
+   * drives each spelling in isolation so a regression names which one broke.
+   */
+  test('M8/M9: the write-shape probe sees all four spellings, including the two that beat the quoted scan', () => {
+    expect(WRITE_SHAPE_SPELLINGS)
+      .toEqual(['property', 'quoted', 'shorthand', 'token-in-string-literal']);
+
+    expect(writeShapesIn('const out = { ancientRuin: true };', 'ancientRuin')).toEqual(['property']);
+    expect(writeShapesIn("const KEYS = ['ancientRuin'];", 'ancientRuin')).toEqual(['quoted']);
+    // ⚠ BLINDNESS ONE — shorthand inside a CONDITIONAL SPREAD. This is the exact
+    // shape of src/generators/historyGenerator.js:888, where neither
+    // `ancientRuin:` nor `'ancientRuin'` occurs anywhere in the estate.
+    expect(writeShapesIn('return { ...base, ...(ancientRuin ? { ancientRuin } : {}) };', 'ancientRuin'))
+      .toEqual(['shorthand']);
+    // ⚠ BLINDNESS TWO — a bare token inside a space-joined string literal. This
+    // is the shape of src/store/configSlice.js:82; the quoted scan returns ZERO.
+    expect(writeShapesIn("const FIELDS = ('deityCount latentPantheon pantheon').split(' ');", 'latentPantheon'))
+      .toEqual(['token-in-string-literal']);
+
+    // ── THE NEGATIVE CONTROLS, which are what make the probe mean anything ────
+    // A member READ is not a write, and a longer identifier that merely CONTAINS
+    // the key is not the key. Without these the probe would "find" a writer for
+    // every key in the estate and the exemption evidence would be vacuous.
+    expect(writeShapesIn('const v = settlement.ancientRuin;', 'ancientRuin')).toEqual([]);
+    expect(writeShapesIn('const notAncientRuin = 1; foo.ancientRuin;', 'ancientRuin')).toEqual([]);
+    expect(writeShapesIn('const x = { ancientRuins: 1 };', 'ancientRuin')).toEqual([]);
+    // A whitespace-bearing "key" cannot be probed at all — it is not an identity.
+    expect(() => writeShapesIn('anything', 'two words')).toThrow(/whitespace-free key/);
+  });
+
+  /**
+   * ⭐⭐⭐ M8/M9 — THE EXPLAINED-WRITER EXEMPTION IS A DECLARED, SHRINK-ONLY SET.
+   *
+   * The exact-equality pin is the shrink-only property: ADDING an entry reds
+   * here, and removing one (returning an identity to enforcement) is lawful.
+   * Beside it, the three refusals that make the declaration a law rather than a
+   * list — an undeclared mechanism, a class-(a) TRUE POSITIVE, and gate 4's
+   * open-spread tolerance, which admits every key generically and so names none.
+   */
+  test('M8/M9: the explained-writer exemption is an exact declared set, and gate 4 is REFUSED as a basis', () => {
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity))
+      .toEqual(['neighbourNetwork on settlement']);
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ mechanism }) => mechanism))
+      .toEqual(['save-time-writer']);
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual(['src/lib/saves.js']);
+    expect(assertExplainedWriterExemptions()).toBe(EXPLAINED_WRITER_EXEMPTIONS);
+
+    const entryOf = (overrides) => [{
+      identity: 'someKey on someShape',
+      mechanism: 'save-time-writer',
+      writer: 'src/lib/saves.js',
+      ruling: 'test',
+      why: 'a reason long enough to satisfy the substantive-reason floor on this entry',
+      ...overrides,
+    }];
+    // ⛔ GATE 4. `{ ...settlement }` tolerates ANY key, so admitting on it would
+    // retire every settlement-root row and mean nothing. The predicate is TOTAL:
+    // an unlisted mechanism is refused rather than an enumerated set of bad ones.
+    expect(() => assertExplainedWriterExemptions(entryOf({ mechanism: 'open-spread' })))
+      .toThrow(/undeclared mechanism[\s\S]*OPEN-SPREAD tolerance is REFUSED/);
+    // ⛔ A row banked as a real defect can never be exempted as "explained".
+    expect(() => assertExplainedWriterExemptions(entryOf({ identity: CLASS_A_PROTECTED_IDENTITIES[0] })))
+      .toThrow(/class-\(a\)[\s\S]*re-triage/);
+    expect(() => assertExplainedWriterExemptions(entryOf({ identity: 'notAnIdentity' })))
+      .toThrow(/must be "<key> on <shape>"/);
+    expect(() => assertExplainedWriterExemptions(entryOf({ why: 'too short' })))
+      .toThrow(/lacks a ruling and a substantive reason/);
+    expect(() => assertExplainedWriterExemptions(entryOf({ writer: 'scripts/lib/saves.js' })))
+      .toThrow(/repository-relative src\/ writer/);
+  });
+
+  /**
+   * ⭐⭐ GATE 0, EXECUTED — the half that cannot rot. The declaration above is an
+   * ARGUMENT; this is the machinery that turns a writer which was deleted,
+   * renamed or refactored away into a RED scan instead of a silent hole in the
+   * enforcement surface.
+   */
+  test('M8/M9: a named writer that stopped writing the key makes the exemption STALE and reds', () => {
+    // The live estate satisfies gate 0 today, and it says WHICH spelling proved it.
+    const evidence = assertExplainedWriterEvidence();
+    expect(evidence.map(({ identity }) => identity)).toEqual(['neighbourNetwork on settlement']);
+    expect(evidence[0].key).toBe('neighbourNetwork');
+    expect(evidence[0].spellings.length).toBeGreaterThan(0);
+
+    // ── THE MUTANT: the named writer no longer mentions the key at all ────────
+    let raised = null;
+    try {
+      assertExplainedWriterEvidence(undefined, { readSource: () => 'export const nothing = 1;\n' });
+    } catch (error) {
+      raised = error;
+    }
+    expect(raised, 'the writer stopped writing the key and gate 0 did not fire').toBeInstanceOf(Error);
+    // THE MESSAGE MUST NAME THE ACTUAL CAUSE — the identity, the file, and the
+    // choice between re-pointing and DELETING, because those are different acts.
+    expect(raised.message).toContain('neighbourNetwork on settlement');
+    expect(raised.message).toContain('src/lib/saves.js');
+    expect(raised.message).toContain('STALE');
+    expect(raised.message).toMatch(/must be DELETED, not repaired/);
+
+    // …and a writer that cannot be read at all is a distinct, named failure.
+    expect(() => assertExplainedWriterEvidence(undefined, {
+      readSource: () => { throw new Error('ENOENT'); },
+    })).toThrow(/names a writer that cannot be read/);
+  });
+
+  /**
+   * ⭐⭐ THE FILTER ITSELF. Same contract as the shape-family filter: it returns a
+   * SUBSET and passes `stats` through BY IDENTITY, which is what makes it
+   * structurally impossible for an exemption to move the anti-vacuity floor.
+   */
+  test('M8/M9: the exemption clears its identity, passes stats through by identity, and leaves the exact leg raw', () => {
+    const stats = leafStats();
+    const rows = [
+      leafFindingOf({ key: 'neighbourNetwork', shapes: ['settlement'] }),
+      leafFindingOf({ key: 'neighbourNetwork', shapes: ['somethingElse'], pos: 20 }),
+      leafFindingOf({ key: 'genuinelyDead', shapes: ['settlement'], pos: 30 }),
+    ];
+    const filtered = applyExplainedWriterFilter({
+      scanMode: BASELINE_SCAN_MODE, scan: { findings: rows, stats },
+    });
+    // ⚠ THE EXEMPTION IS SHAPE-QUALIFIED, not key-qualified: the same key on a
+    // DIFFERENT shape is untouched, because the declared writer wrote it onto
+    // one record and says nothing about any other.
+    expect(filtered.findings.map(identityOf))
+      .toEqual(['neighbourNetwork on somethingElse', 'genuinelyDead on settlement']);
+    expect(filtered.explainedWriters.cleared).toBe(1);
+    expect(filtered.explainedWriters.clearedIdentities).toEqual(['neighbourNetwork on settlement']);
+    // BY IDENTITY, not by value.
+    expect(filtered.stats).toBe(stats);
+
+    const exact = applyExplainedWriterFilter({
+      scanMode: 'exact-origin', scan: { findings: rows, stats },
+    });
+    expect(exact.findings).toBe(rows);
+    expect(exact.explainedWriters.applied).toBe(false);
+  });
+
+  /**
+   * ⭐⭐⭐ THE MEASURED CASE THAT FORCED THIS MINT, DRIVEN THROUGH THE WHOLE GATE.
+   * `src/components/townMap/edgeAnnotations.js` moved off the genuinely dead
+   * `settlement.neighbors` onto the real `settlement.neighbourNetwork`, and the
+   * instrument correctly refused the maintenance write because an identity SWAP
+   * is GROWTH. The exemption banks it BY RULE, so the NEXT save-time read costs
+   * nobody a migration — and the paired negative control proves the gate still
+   * reds on a new identity that no declared writer explains.
+   */
+  test('M8/M9: an exempted identity passes the gate as a new row; an unexplained one still REDS', async () => {
+    // ⚠ A REAL FILE, because gate mode's stale-row arm asks the FILESYSTEM
+    // whether a frozen row's file still exists. `src/probe.js` — the fixture path
+    // every other test here uses — is fictional, so it reads as "deleted or
+    // moved" and reds for a reason that has nothing to do with the exemption.
+    const file = 'src/lib/saves.js';
+    const held = leafFindingOf({ file, key: 'ghost', shapes: ['record'] });
+    const exempted = leafFindingOf({ file, key: 'neighbourNetwork', shapes: ['settlement'], pos: 40 });
+    const unexplained = leafFindingOf({ file, key: 'neighbourNetworks', shapes: ['settlement'], pos: 40 });
+
+    const exemptRun = maintenanceRuntime({ current: [held, exempted], frozen: [held] });
+    expect(await run([], exemptRun.overrides)).toBe(0);
+
+    // ── THE NEGATIVE CONTROL: same file, same shape, same position, one letter
+    // different — so the ONLY thing that changed is membership of the declared
+    // exemption. Without this pair, a gate that passed everything would look
+    // identical to this one.
+    const unexplainedRun = maintenanceRuntime({ current: [held, unexplained], frozen: [held] });
+    expect(await run([], unexplainedRun.overrides)).toBe(1);
+  });
+
+  /**
+   * GATE 1 — `git log --all -S"<key>:" -- src/` returning ZERO means no human
+   * ever supplied the field, so an authored-input (M8) story is IMPOSSIBLE. It
+   * can only CLOSE the hypothesis, never open it, which is why it is a
+   * triage-lane obligation and deliberately not a per-run gate check: history is
+   * the one input in this instrument that no manifest content-addresses.
+   */
+  test('M8/M9: gate 1 — the authored-input history probe separates a written key from an invented one', () => {
+    expect(authoredInputHistoryCommits('neighbourNetwork').length).toBeGreaterThan(0);
+    // The paired control. A key nobody ever wrote returns the empty history that
+    // makes the M8 hypothesis impossible — the same answer the M8 re-audit got
+    // for `notability`, which is how its founding case was refuted.
+    expect(authoredInputHistoryCommits('zzzNoSuchObservedShapeKeyEverzzz')).toEqual([]);
+    expect(() => authoredInputHistoryCommits('two words')).toThrow(/whitespace-free key/);
+  });
+
+  /**
+   * ⭐⭐ THE SCHEMA-4 / SCHEMA-5 SPLIT. One envelope law, two numbers. Sharing the
+   * law is right here and wrong for schema 3 (see observed-shape-baseline.mjs's
+   * header): 4 and 5 have the IDENTICAL envelope and differ only in the finding-set
+   * PRODUCER, so two copies would be one live law with two homes. What must never
+   * be shared is the NUMBER — pinned here in BOTH directions.
+   */
+  test('schema 4 and schema 5 are one envelope law with two numbers, and each refuses the other\'s', () => {
+    expect(BASELINE_SCHEMA).toBe(5);
+    expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
+
+    const corpus = healthyCorpus();
+    const stats = leafStats();
+    const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
+    expect(live.schema).toBe(BASELINE_SCHEMA);
+    expect(validateSchema5Baseline(live)).toBe(live);
+    expect(() => validateSchema4Baseline(live)).toThrow(/is not schema 4/);
+
+    const retired = { ...live, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema4Baseline(retired)).toBe(retired);
+    expect(() => validateSchema5Baseline(retired)).toThrow(/is not schema 5/);
+  });
+
+  /**
    * ⭐⭐ CR-OSR-FREEZE-4-R1's step-1 blocker, cured: the heuristic leg can execute
    * its OWN corpus. `--scan-mode=legacy-leaf` used to demand
    * `--corpus-artifact=<validated exact-origin artifact>` — an input that can no
@@ -584,7 +967,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(4);
+    expect(BASELINE_SCHEMA).toBe(5);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

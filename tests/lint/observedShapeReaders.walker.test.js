@@ -122,6 +122,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { buildObservedCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
 import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
 import {
+  applyExplainedWriterFilter, applyShapeFamilyFilter,
   BASELINE_SCAN_MODE, BASELINE_SCHEMA, cohortOf, compare, EXACT_SCAN_EXCLUDED_SCOPE,
   identityOf, inventoryOf, isExactScanExcludedReadPath, MIN_ROWS, ORIGIN_MIN_ROWS,
   ratchetMessage, rowOf, sentinelFailures, sentinelOf, sourceFiles, UNREVIEWED_UI_COHORT,
@@ -156,18 +157,56 @@ let estate = null;
  * it silently invalidates every census taken through it.
  *
  * The cure was the one the cost demanded: cut the work, do not buy headroom. The
- * scans happen TWICE, both inside `beforeAll` hooks with explicit 300s HOOK
- * timeouts, and `scansRun` is pinned below so re-introducing a per-test scan reds
- * instead of flaking. The heuristic detector is far cheaper (~3.3 s MEASURED),
- * but the budget stays: the corpus build alone is ~47 s, the discipline is what
- * kept this file honest, and a cheap scan multiplied by twenty is not cheap.
+ * scans happen TWICE, both inside `beforeAll` hooks, and `scansRun` is pinned
+ * below so re-introducing a per-test scan reds instead of flaking. The heuristic
+ * detector is far cheaper (~3.3 s MEASURED), but the discipline stays: a cheap
+ * scan multiplied by twenty is not cheap.
+ *
+ * ── ⚠⚠ THE HOOK BUDGET WAS SIZED AGAINST THE SOLO FIGURE AND WAS A LATENT FLAKE
+ * The budget was 300 s because this header believed "the corpus build alone is
+ * ~47 s". That 47 s is the SOLO cost. MEASURED 2026-08-11 with the full suite
+ * running in parallel, which is the only condition the gate ever runs this in:
+ *
+ *     buildObservedCorpus()   251,002 ms      ← 84% of the old 300 s budget
+ *     the detector scan        11,675 ms
+ *     the two schema-5 filters    108 ms      ← 0.04% of the total
+ *     ────────────────────────────────────
+ *     top-level beforeAll     ~263,700 ms
+ *
+ * A 300 s budget over a 264 s job is a 1.14x margin — the same shape as the 1.26x
+ * margin recorded above, which "did not hold" — and it duly did not hold here
+ * either: the hook timed out at 306,759 ms in a full `npm run check`, taking all
+ * 27 tests out of the census as SKIPS, which the test ratchet's scope sentinel
+ * correctly refuses as vacuous.
+ *
+ * ⚠ THIS IS A RE-SIZING AGAINST A MEASUREMENT, NOT HEADROOM-BUYING, and the
+ * distinction is the whole reason the numbers are above rather than described.
+ * There is no work left to cut: the corpus build IS this walker's premise, the
+ * scan count is already pinned at two, and the filters that were ADDED in the
+ * same change are 0.04% of the cost — arithmetically incapable of being what
+ * tipped it. 900 s is 3.4x the measured contended cost, so a genuine collapse
+ * (a corpus that stops terminating) still reds rather than hanging the gate.
  */
 let scansRun = 0;
 
-/** The one place the detector is called. `extraFiles` are planted probes. */
+/**
+ * The one place the detector is called. `extraFiles` are planted probes.
+ *
+ * ⭐⭐ THE WALKER MUST MEASURE WHAT THE GATE MEASURES — the walker-census law. Under
+ * schema 5 the frozen inventory is the detector's output NARROWED by two declared
+ * post-filters, so a walker that compared the RAW detector output against it would
+ * report every filtered row as a violation and stay red forever, and whoever
+ * silenced it would have disabled the guard rather than fixed the walker. The two
+ * filters are therefore applied HERE, in the same order `run()` applies them.
+ *
+ * ⚠ `stats` passes through both filters BY IDENTITY, so `live.stats` is still the
+ * DETECTOR's reach and the anti-vacuity arm below keeps measuring the detector
+ * rather than the filters. That is the property that stops a threshold from ever
+ * being tuned into hiding a corpus that stopped observing.
+ */
 function scanEstateWith(extraFiles = []) {
   scansRun += 1;
-  return scanLegacyReaders({
+  const raw = scanLegacyReaders({
     files: extraFiles.length ? [...estate, ...extraFiles] : estate,
     shapes: corpus.shapes,
     arrayShapes: corpus.arrayShapes,
@@ -176,18 +215,25 @@ function scanEstateWith(extraFiles = []) {
     minRows: MIN_ROWS,
     root: ROOT,
   });
+  const family = applyShapeFamilyFilter({ scanMode: BASELINE_SCAN_MODE, corpus, scan: raw });
+  return {
+    ...applyExplainedWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: family }),
+    raw,
+  };
 }
 
 beforeAll(async () => {
   corpus = await buildObservedCorpus();
   estate = sourceFiles(ROOT);
   live = scanEstateWith();
-}, 300_000);
+}, 900_000);
 
 describe('reader-with-no-writer ratchet: the frozen inventory', () => {
   test('the baseline is CONTENT-ADDRESSED, internally consistent, and every row is a real file', () => {
     expect(baseline.schema, 'schema 1 was the count-only form — blind to an identity swap;'
-      + ' schema 3 was the RETIRED exact per-site form, which no full-tree scan can produce')
+      + ' schema 3 was the RETIRED exact per-site form, which no full-tree scan can produce;'
+      + ' schema 4 was the RETIRED UNFILTERED leaf form, whose rows include the reads the two'
+      + ' declared schema-5 post-filters explain')
       .toBe(BASELINE_SCHEMA);
     const rows = Object.entries(baseline.inventory);
     expect(rows.length).toBeGreaterThan(0);
@@ -327,6 +373,54 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
   test('ANTI-VACUITY: the corpus and the resolver have not collapsed', () => {
     expect(sentinelFailures(sentinelOf(corpus, live.stats, BASELINE_SCAN_MODE), baseline.sentinel))
       .toEqual([]);
+    // ⚠⚠ THE SENTINEL IS BUILT FROM THE DETECTOR'S OWN STATS, NOT THE FILTERED
+    // SCAN'S. Both schema-5 post-filters pass `stats` through BY IDENTITY, and
+    // that is the property being asserted: if a filter ever recomputed stats from
+    // its own output, every clearing would lower the anti-vacuity floor and the
+    // floor would stop meaning "the corpus is still observing".
+    expect(live.stats).toBe(live.raw.stats);
+  });
+
+  /**
+   * ⭐⭐⭐ THE TWO SCHEMA-5 POST-FILTERS ARE NON-VACUOUS ON THE LIVE ESTATE.
+   *
+   * A filter that clears nothing is indistinguishable from a filter that is not
+   * wired in — and the whole of schema 5 is the claim that these two narrow the
+   * detector's output. So the narrowing is asserted against the REAL tree, in
+   * both directions: the filtered set is strictly smaller than the raw one, the
+   * gap is exactly the two filters' own reported clearings, and the identity the
+   * explained-writer exemption exists for is genuinely absent afterwards.
+   */
+  test('the schema-5 post-filters NARROW the live scan, and by exactly what they report', () => {
+    expect(live.familyFilter.applied).toBe(true);
+    expect(live.explainedWriters.applied).toBe(true);
+    expect(live.findings.length).toBeLessThan(live.raw.findings.length);
+    // The arithmetic closes with nothing left over: raw − family − writer = live.
+    expect(live.raw.findings.length - live.familyFilter.cleared - live.explainedWriters.cleared)
+      .toBe(live.findings.length);
+    expect(live.familyFilter.cleared).toBeGreaterThan(0);
+    expect(live.explainedWriters.cleared).toBeGreaterThan(0);
+
+    // ⭐ THE MEASURED CASE THAT FORCED THE MINT. `settlement.neighbourNetwork` is
+    // written at SAVE time by src/lib/saves.js, which the GENERATION corpus never
+    // runs — so the detector reports every read of it and 23 files banked the
+    // identity under schema 4. The exemption clears it, and the paired positive
+    // control is the raw scan, where it is emphatically present.
+    const exempted = 'neighbourNetwork on settlement';
+    expect(live.raw.findings.some((finding) => identityOf(finding) === exempted)).toBe(true);
+    expect(live.findings.some((finding) => identityOf(finding) === exempted)).toBe(false);
+    expect(live.explainedWriters.clearedIdentities).toEqual([exempted]);
+    // …and the M6 family filter is the other half, clearing a DIFFERENT set.
+    // ⚠ SAID AS DISJOINTNESS RATHER THAN AS A BARE EXCLUSION. An unanchored
+    // exclusion here would pass just as happily if the family filter had drifted
+    // to clearing NOTHING — it would outlive the very regression it is written to
+    // catch. The non-emptiness assertion is its liveness anchor, and disjointness
+    // is the stronger claim anyway: two filters that both claim an identity mean
+    // one of them is redundant and the reported arithmetic stops being additive.
+    expect(live.familyFilter.clearedIdentities.length).toBeGreaterThan(0);
+    expect(live.familyFilter.clearedIdentities
+      .filter((identity) => live.explainedWriters.clearedIdentities.includes(identity)),
+    'the two schema-5 filters both claim the same identity').toEqual([]);
   });
 
   /**
@@ -383,10 +477,32 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * size-tier token absent, so the flag sense and the tier sense could never
    * cross-wire. The frozen inventory's matching two rows are deleted by the
    * `--write` re-freeze, which only runs from a committed tree.
+   *
+   * ⭐⭐ MOVED BY THE SCHEMA-5 MINT (2026-08-11), AND THIS TIME BY THE INSTRUMENT
+   * RATHER THAN BY A REPAIR: 53/150/246 → 51/128/193. `live` is now the FILTERED
+   * scan, because schema 5's inventory is the filtered set and a walker measuring
+   * something else is not a walker. ⚠ THE RAW READING IS UNCHANGED at 53/150/246 —
+   * asserted directly below on `live.raw`, so the delta is provably the filters
+   * and provably not drift in the estate.
+   *
+   * ⭐ DERIVED TWICE, INDEPENDENTLY, AND THE TWO AGREE EXACTLY. Once by taking
+   * `cohortOf` of the filtered inventory (51/128/193), and once by summing the
+   * CLEARED reads that sit under a cohort path straight off the finding arrays:
+   * 53 reads over 22 (file, identity) addresses, spanning `neighbourNetwork on
+   * settlement` plus seventeen `… on stressors` family rows. 150 − 22 = 128 and
+   * 246 − 53 = 193 close on the nose, and `files` drops 53 → 51 because exactly
+   * two cohort files lost ALL of their rows. Had anything else moved in this
+   * window the two derivations would have disagreed.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 53, identities: 150, counts: 246 });
+    expect(cohort).toMatchObject({ files: 51, identities: 128, counts: 193 });
+    // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
+    // cohort figure could fall for two completely different reasons — the filters
+    // clearing more, or the estate genuinely shrinking — and a single number
+    // cannot tell them apart. Pinning both makes the delta attributable.
+    expect(cohortOf(inventoryOf(live.raw.findings)))
+      .toMatchObject({ files: 53, identities: 150, counts: 246 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 
@@ -473,7 +589,7 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     const out = scanEstateWith(Object.values(basenames).map((b) => join(dir, b)));
     planted = Object.fromEntries(Object.keys(PROBES)
       .map((name) => [name, out.findings.filter((f) => f.file.endsWith(basenames[name]))]));
-  }, 300_000);
+  }, 900_000);
 
   test('THE PARTITION HOLDS: each probe was planted and is addressed by its own file', () => {
     // Without this, a basename typo would hand every mutant an EMPTY array and

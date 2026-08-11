@@ -85,7 +85,8 @@ import {
   MIN_ROWS,
   ORIGIN_MIN_ROWS,
   RETIRED_EXACT_BASELINE_SCHEMA,
-  validateSchema4Baseline,
+  RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
+  validateSchema5Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -117,9 +118,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 1 = one COUNT per file (retired: blind to identity swap).
  * 2 = per leaf-name identity, ungoverned envelope (the migration predecessor).
  * 3 = per path-qualified executed origin identity (RETIRED — see below).
- * 4 = per leaf-name identity in the GOVERNED envelope. THE LIVE AUTHORITY.
+ * 4 = per leaf-name identity in the GOVERNED envelope, RAW detector output (RETIRED).
+ * 5 = the same identity, EXPLAINED-WRITER FILTERED. THE LIVE AUTHORITY.
  */
-export { BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS, RETIRED_EXACT_BASELINE_SCHEMA };
+export {
+  BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
+  RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
+};
 
 /**
  * ⭐⭐ CR-OSR-FREEZE-1/2/3-R1 — THE GATE AUTHORITY IS THE HEURISTIC LEG.
@@ -261,6 +266,503 @@ assertExactScanExcludedScope();
 export const isExactScanExcludedReadPath = (relativePath) => (
   EXACT_SCAN_EXCLUDED_SCOPE.some((scope) => String(relativePath).startsWith(scope))
 );
+
+/**
+ * ⭐⭐ CR-OSR-FREEZE-6 (Fable chair, 2026-08-10) / CR-OSR-FREEZE-6-R1 — THE
+ * SHAPE-FAMILY POST-FILTER, "M6". Sibling machinery to the exclusion above, and
+ * declared the same way: in source, measured, and controlled.
+ *
+ * THE DEFECT IT REMOVES — SIBLING-SLICE POVERTY. The corpus observes one shape
+ * per leaf NAME. When one pipeline record is observed at several stages under
+ * several names, the corpus binds the THINNEST member and the detector then
+ * convicts every read of a key only the fatter siblings happened to expose.
+ * Measured at HEAD (857e3a1a), the two shapes this reaches:
+ *   outcome    48 keys / 756 rows, family {selected 121k, candidates 101k,
+ *              autoApplied 111k}                       → union 141 keys
+ *   stressors  33 keys / 162 rows, family {selected, candidates, autoApplied,
+ *              resolvedStressors 27k, stressor 27k}    → union 146 keys
+ * `src/domain/worldPulse/applyWorldPulse.js` reading `outcome.populationDeltas`,
+ * `outcome.tierChange`, `outcome.resourcePatch` is the shape of every row this
+ * clears: real code reading a real field of its own record.
+ *
+ * THE RULE. A shape T joins S's family when T covers at least THETA of S's OWN
+ * keys; S is then judged against keys(S) UNION keys(family(S)). ⚠ UNION, NEVER
+ * INTERSECTION — the standing law for this instrument; an intersection would
+ * narrow the accepted key set and INVENT findings.
+ *
+ * WHY A POST-FILTER AND NOT A DETECTOR CHANGE. `legacy-reader-shape-scan.mjs` is
+ * BYTE-FROZEN to blob 0310fa9f (mutant-proven: appending one comment is refused
+ * by `assertGovernedLegacyDetectorSource`). So this cannot be, and is not, an
+ * edit to the detector: it consumes the detector's returned findings array and
+ * returns a SUBSET. `scan.stats` is passed through by identity, so the
+ * anti-vacuity sentinel still measures the DETECTOR's reach and this filter
+ * cannot mask a detector that stopped observing.
+ *
+ * WHY THESE NUMBERS. Measured at HEAD over the committed schema-4 baseline's
+ * 2,164 findings — theta 1.00 clears 36, 0.90 clears 50, 0.80 clears 122
+ * (5.6%), 0.70 clears the same 122. 0.80 is where the `stressors` family
+ * appears and below it nothing further is gained. The >=8-key guard keeps thin
+ * shapes out of the relation entirely: a 2-key shape is covered by almost
+ * anything, so without the guard containment is noise (theta 1.00 with no guard
+ * clears rows on 10 shapes instead of 2).
+ *
+ * ⭐ THE ADOPTION BASIS IS ZERO ERASURE, AND IT IS MACHINERY BELOW, NOT A
+ * MEASUREMENT THAT HAPPENED ONCE. See `CLASS_A_PROTECTED_IDENTITIES`.
+ */
+export const SHAPE_FAMILY_FILTER = Object.freeze({
+  theta: 0.8,
+  minKeys: 8,
+});
+
+/**
+ * ⭐⭐ THE CR-OSR-FREEZE-6 CONTROL. Every identity the chair's CR-OSR-FREEZE-3-R2
+ * triage classed **(a) — TRUE POSITIVE, banked pending repair**. The filter may
+ * never clear one; `assertShapeFamilyDebtPreserved` throws if it does.
+ *
+ * PROVENANCE, so this is auditable rather than asserted: the ledger's 2,326
+ * decisions are keyed by an opaque `osr-predecessor-row-v1:<digest>` whose
+ * pre-image is {address, predecessorCount, legacyCount, delta, reconciliation}.
+ * The addresses were recovered by REPRODUCING the row set from the schema-2
+ * predecessor inventory and joining on rowId — a join proven total, 2,326 of
+ * 2,326, because a partial join would silently drop protected rows. Selecting
+ * the STRUCTURED tag `[CR-OSR-FREEZE-3-R2 triage a]` yields exactly 23
+ * addresses over 21 distinct identities. ⚠ The structured tag is the debt
+ * surface, never the prose phrase, which matches only 12 of 23 (CR-OSR-FREEZE-5).
+ *
+ * WHY IDENTITIES AND NOT ADDRESSES. The filter's decision is a pure function of
+ * (shape, key) — it clears an IDENTITY everywhere or nowhere, so the identity is
+ * exactly its decision granularity. Keying the guard on file paths would also
+ * import the hand-keyed-address rot this program has already been bitten by;
+ * a `<key> on <shape>` identity survives any file move.
+ *
+ * ⚠ 8 of these 21 are still live at HEAD; the other 13 were REPAIRED between
+ * the genesis and HEAD (the baseline shrank 2,196 → 2,171 → 2,164). They stay
+ * listed: the guard is against the FILTER, not a claim about what is currently
+ * outstanding, and a regressed repair must not become silently clearable.
+ * ⭐ The guard is not vacuous — `coalitionEvidence on outcome` is live and sits
+ * on `outcome`, whose union grows 48 → 141 keys under this very filter.
+ */
+export const CLASS_A_PROTECTED_IDENTITIES = Object.freeze([
+  '__adjudicationPending on stressors',
+  '__forecast on stressors',
+  '__resolution on stressors',
+  'authored on institutions',
+  'coalitionEvidence on outcome',
+  'decreed on stressors',
+  'description on prominentRelationship',
+  'dots on npcs',
+  'evidenceId on outcome',
+  'factions on locks',
+  'flavor on prominentRelationship',
+  'flavour on prominentRelationship',
+  'hooks on settlement',
+  'institutions on locks',
+  'notability on npcs',
+  'otherSettlement on prominentRelationship',
+  'plotHooks on settlement',
+  'relationshipType on prominentRelationship',
+  'summary on prominentRelationship',
+  'supplyChains on settlement',
+  'title on currentTensions',
+]);
+
+/** Key sets once per scan; the containment test is O(shapes) per bound shape. */
+function shapeKeySetsOf(shapes) {
+  const sets = new Map();
+  for (const [name, shape] of Object.entries(shapes || {})) {
+    sets.set(name, new Set(Array.isArray(shape?.keys) ? shape.keys : []));
+  }
+  return sets;
+}
+
+/**
+ * keys(S) UNION keys(T) for every T covering >= theta of S's own keys.
+ *
+ * FAIL-SAFE IN BOTH DIRECTIONS OF IGNORANCE: a shape absent from the corpus, or
+ * one below the size guard, yields only its own keys (possibly none) — so an
+ * unknown shape clears NOTHING and the finding survives. The filter can only
+ * ever remove findings it can affirmatively justify.
+ */
+export function shapeFamilyUnionOf(shapeName, shapes, keySets = shapeKeySetsOf(shapes)) {
+  const own = keySets.get(shapeName);
+  if (!own || own.size < SHAPE_FAMILY_FILTER.minKeys) return new Set(own || []);
+  const union = new Set(own);
+  for (const [name, keys] of keySets) {
+    if (name === shapeName || keys.size === 0) continue;
+    let covered = 0;
+    for (const key of own) if (keys.has(key)) covered += 1;
+    if (covered / own.size >= SHAPE_FAMILY_FILTER.theta) for (const key of keys) union.add(key);
+  }
+  return union;
+}
+
+/**
+ * ⭐⭐ THE CONTROL CR-OSR-FREEZE-6 REQUIRES. Zero true-positive erasure is the
+ * WHOLE basis on which the filter was adopted, so it is enforced on every scan
+ * rather than remembered from the adoption measurement.
+ */
+export function assertShapeFamilyDebtPreserved(clearedIdentities) {
+  const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
+  const erased = [...clearedIdentities].filter((identity) => guarded.has(identity));
+  if (erased.length) {
+    throw new Error(`observed-shape shape-family filter (CR-OSR-FREEZE-6, theta=${SHAPE_FAMILY_FILTER.theta},`
+      + ` >=${SHAPE_FAMILY_FILTER.minKeys} keys) cleared ${erased.length} CR-OSR-FREEZE-3-R2 class-(a)`
+      + ` TRUE-POSITIVE row(s): ${erased.join('; ')}.`
+      + ' The filter was adopted ONLY on the measured property that it erases zero true positives, so this'
+      + ' is not a threshold to retune: the scan is refused until the chair re-triages the row(s).');
+  }
+  return erased;
+}
+
+/**
+ * Post-scan, PRE-INVENTORY. Everything downstream — the artifact, `compare`, the
+ * cohort notice and the frozen inventory — consumes the returned findings, and
+ * `stats` is the SAME OBJECT the detector returned, so no arrangement of this
+ * code can let the filter move the anti-vacuity floor.
+ *
+ * ⚠ HEURISTIC LEG ONLY. The family relation is defined over the leaf-name shape
+ * vocabulary; exact-origin findings are addressed by executed origin, where
+ * "the same record under another name" is not expressible. Targeted exact
+ * probes therefore keep the detector's raw output.
+ */
+export function applyShapeFamilyFilter({ scanMode, corpus, scan }) {
+  if (scanMode !== BASELINE_SCAN_MODE) {
+    return { ...scan, familyFilter: { applied: false, cleared: 0, clearedIdentities: [] } };
+  }
+  const shapes = corpus?.shapes || {};
+  const keySets = shapeKeySetsOf(shapes);
+  const unions = new Map();
+  const unionFor = (name) => {
+    if (!unions.has(name)) unions.set(name, shapeFamilyUnionOf(name, shapes, keySets));
+    return unions.get(name);
+  };
+  const cleared = new Set();
+  const findings = scan.findings.filter((finding) => {
+    if (!unionFor(finding.shapes.join('|')).has(finding.key)) return true;
+    cleared.add(identityOf(finding));
+    return false;
+  });
+  const clearedIdentities = [...cleared].sort();
+  assertShapeFamilyDebtPreserved(clearedIdentities);
+  return {
+    findings,
+    stats: scan.stats,
+    familyFilter: {
+      applied: true,
+      cleared: scan.findings.length - findings.length,
+      clearedIdentities,
+    },
+  };
+}
+
+/** Recorded on every scan, the way the excluded scope is — a narrowing nobody
+ *  has to read the source to discover. */
+export function shapeFamilyNotice(familyFilter) {
+  if (!familyFilter?.applied) {
+    return 'CR-OSR-FREEZE-6 shape-family filter: NOT APPLIED (exact-origin probe keeps the raw detector output).';
+  }
+  return `CR-OSR-FREEZE-6 shape-family filter (theta=${SHAPE_FAMILY_FILTER.theta},`
+    + ` >=${SHAPE_FAMILY_FILTER.minKeys} keys): cleared ${familyFilter.cleared} read(s)`
+    + ` across ${familyFilter.clearedIdentities.length} identit(ies) whose key is carried by a sibling`
+    + ' shape in the same family. Zero CR-OSR-FREEZE-3-R2 class-(a) rows may be cleared; the scan refuses if one is.';
+}
+
+/**
+ * ⭐⭐ THE WRITE-SHAPE PROBE — four spellings, because two of them were MEASURED
+ * defeating the quoted-string scan that was this discipline's best manual check.
+ *
+ * A triage lane asking "does anything write this key?" grepped `<key>:` and
+ * `'<key>'`. The M8 re-audit (2026-08-11) found two write shapes that BOTH
+ * return zero hits for either query and are nonetheless real writes:
+ *
+ *   SHORTHAND INSIDE A CONDITIONAL SPREAD
+ *     `src/generators/historyGenerator.js:888` — `...(ancientRuin ? { ancientRuin } : {})`.
+ *     Neither `ancientRuin:` nor `'ancientRuin'` exists anywhere in the estate.
+ *   BARE TOKEN INSIDE A SPACE-JOINED STRING LITERAL
+ *     `src/store/configSlice.js:82` — `latentPantheon` sits inside a
+ *     `('… latentPantheon …').split(' ')` key list. The quoted scan returns ZERO.
+ *
+ * ⚠ THE CONCEPT ALREADY EXISTED AND WAS PER-ROW: `src/domain/fieldManifest.js`
+ * carries a hand-written `writeProbe` regex on exactly one row
+ * (`resilienceScore`) because its author hit the shorthand case once. This
+ * GENERALISES that — one probe builder, four spellings, derived from the key —
+ * so the next lane does not have to notice the blindness for itself. A per-row
+ * hand-written regex is a fix; a probe that knows the shapes is machinery.
+ *
+ * ⚠⚠ HONEST LIMIT, STATED SO NOBODY READS THIS AS A WRITER ORACLE. This is a
+ * TEXTUAL probe: it proves a spelling is PRESENT, never that the write reaches
+ * the shape under test, and it cannot see a computed key (`obj[name] = …`) at
+ * all. It is used here for exactly one job — refusing an exemption entry whose
+ * named writer no longer mentions the key — which is the direction where a false
+ * NEGATIVE reds (safe) and a false positive merely fails to red an entry a human
+ * already argued for.
+ */
+export const WRITE_SHAPE_SPELLINGS = Object.freeze([
+  'property', 'quoted', 'shorthand', 'token-in-string-literal',
+]);
+
+const escapeForRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** The four probes for one key, in `WRITE_SHAPE_SPELLINGS` order. */
+export function writeShapeProbesOf(key) {
+  if (typeof key !== 'string' || !key || /\s/.test(key)) {
+    throw new Error(`observed-shape write-shape probe requires a whitespace-free key; received ${JSON.stringify(key)}`);
+  }
+  const k = escapeForRegExp(key);
+  return [
+    // `key: value` — the ordinary property write, never a member read (`x.key:`)
+    // and never a longer identifier ending in the key.
+    { spelling: 'property', pattern: new RegExp(`(?<![.\\w$])${k}\\s*:`) },
+    // `'key'` / `"key"` / backtick — the quoted spelling a computed field list uses.
+    { spelling: 'quoted', pattern: new RegExp(`['"\`]${k}['"\`]`) },
+    // `{ key }` and `{ key, }` — shorthand, INCLUDING inside a conditional
+    // spread, which is the case that defeated the quoted scan.
+    { spelling: 'shorthand', pattern: new RegExp(`(?<![.\\w$])${k}\\s*(?:,|\\})`) },
+    // A bare token inside a string literal that is later SPLIT ON WHITESPACE.
+    // ⚠ The whitespace adjacency is load-bearing, not decoration: without it
+    // this probe also matches a plain `'key'`, and the two spellings stop being
+    // distinguishable — which would make the report say "token in a joined list"
+    // about an ordinary quoted key and hide the blindness this exists to name.
+    {
+      spelling: 'token-in-string-literal',
+      pattern: new RegExp(`['"\`][^'"\`\\n]*(?:\\s${k}(?![\\w$])|(?<![\\w$])${k}\\s)[^'"\`\\n]*['"\`]`),
+    },
+  ];
+}
+
+/** Every spelling of `key` present in `source`, in declaration order. */
+export function writeShapesIn(source, key) {
+  const text = String(source ?? '');
+  return writeShapeProbesOf(key)
+    .filter(({ pattern }) => pattern.test(text))
+    .map(({ spelling }) => spelling);
+}
+
+/**
+ * ⭐⭐⭐ M8 / M9 — THE EXPLAINED-WRITER EXEMPTION. THE STRUCTURAL POINT OF THIS
+ * MINT, and the reason the previous four items were worth carrying with it.
+ *
+ * THE DEFECT IT REMOVES. `observed-shape-corpus.mjs` executes GENERATION and
+ * only generation. So "no writer in the corpus" and "no writer" are different
+ * claims, and the gap between them is precisely the surface a person or a
+ * lifecycle path outside generation fills in. Two writers live in that gap:
+ *
+ *   M8 — THE USER writes it (authored input, importer admission lists).
+ *   M9 — THE SAVE PATH writes it (a key minted when a world is persisted,
+ *        linked, or re-hydrated, which the generation corpus never runs).
+ *
+ * They are ONE CLASS with two writers, and the question that separates a real
+ * finding from either of them is always the same: **"who writes this, and does
+ * the corpus RUN that writer?"**
+ *
+ * THE MEASURED INSTANCE THAT FORCED IT. `neighbourNetwork on settlement` — 23
+ * files already bank it in the schema-4 inventory, `src/lib/saves.js` writes it
+ * (`deriveOwnNeighbourEntry`, and the link/undo/import paths beside it), and the
+ * corpus runs none of them. A display repair then moved
+ * `src/components/townMap/edgeAnnotations.js` off the genuinely-dead
+ * `settlement.neighbors` onto the real `settlement.neighbourNetwork`, and the
+ * instrument correctly refused the maintenance write: an identity SWAP is
+ * GROWTH, not a shrink, so only a migration can express it. That refusal is the
+ * instrument working. Banking that one row BY HAND would have left the next
+ * save-time read to red the gate all over again — so the row is banked BY RULE.
+ *
+ * ── THE ADMISSION LAW (the M8 five-gate router, as machinery) ────────────────
+ * An entry may be admitted on exactly these grounds, and `mechanism` names which:
+ *   gate 0  the WIDENED write-shape probe above finds the key in the named
+ *           writer. MACHINE-CHECKED on every scan by
+ *           `assertExplainedWriterEvidence` — a stale entry REDS.
+ *   gate 1  `git log --all -S"<key>:" -- src/` returning ZERO means an
+ *           authored-input explanation is IMPOSSIBLE. This is a REFUSAL gate: it
+ *           can only close the M8 hypothesis, never open it, so it is a
+ *           triage-lane obligation (`assertAuthoredInputHistoryPossible` below
+ *           runs it on demand) and deliberately NOT a per-run gate check —
+ *           `git log --all` is a HISTORY query, and history is the one input in
+ *           this instrument that no manifest content-addresses.
+ *   gate 2  a CLOSED ingest shape (the save envelope is closed on both doors:
+ *           `saves.js` and `accountImport.js` each enumerate their keys), so
+ *           what the door admits is decidable.
+ *   gate 3  the key is named by a CLOSED admission list — `isAllowedConfigKey`,
+ *           `FIELD_ALIASES` values, `EDITABLE_FIELDS` paths, importer lists —
+ *           SHAPE-QUALIFIED, and excluding `*_not_imported` exclusion rows.
+ *   gate 4  ⛔ REFUSED AS A BASIS. An OPEN-SPREAD shape (`{ ...settlement }`)
+ *           tolerates ANY key generically, so admitting on it would retire every
+ *           settlement-root row and mean nothing. Evidence must come from a
+ *           CLOSED list that NAMES the key.
+ *
+ * ⚠ SHRINK-ONLY, PINNED AS AN EXACT SET in tests/lint/observedShapeSentinel.test.js:
+ * adding an entry REDS, removing one (returning an identity to enforcement) is
+ * lawful. And no entry may name a CR-OSR-FREEZE-3-R2 class-(a) identity — the
+ * same guard set M6 is held to, asserted at module load below.
+ */
+export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
+  Object.freeze({
+    identity: 'neighbourNetwork on settlement',
+    mechanism: 'save-time-writer',
+    writer: 'src/lib/saves.js',
+    ruling: 'CR-OSR-FREEZE-6-R2 / M9',
+    why: 'The persisted neighbour graph is minted when a world is SAVED, LINKED or'
+      + ' IMPORTED — never during generation, which is the only thing the corpus executes.'
+      + ' saves.js derives the settlement\'s own entry and the link/undo/import paths rewrite'
+      + ' it; 23 files banked the identity under schema 4 for exactly this reason.',
+  }),
+]);
+
+/** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
+ *  mechanism is refused, so a new one cannot fail open on the value nobody
+ *  thought to forbid. `open-spread` is absent BY RULING (gate 4). */
+const EXPLAINED_WRITER_MECHANISMS = Object.freeze([
+  'save-time-writer', 'closed-ingest', 'admission-list',
+]);
+
+/** Fail-closed at declaration: shape, grammar, and the class-(a) overlap. */
+export function assertExplainedWriterExemptions(entries = EXPLAINED_WRITER_EXEMPTIONS) {
+  if (!Array.isArray(entries)) {
+    throw new Error('observed-shape EXPLAINED_WRITER_EXEMPTIONS must be an array of declared entries');
+  }
+  const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
+  const seen = new Set();
+  for (const entry of entries) {
+    const fields = Object.keys(entry || {}).sort().join(',');
+    if (fields !== 'identity,mechanism,ruling,why,writer') {
+      throw new Error(`observed-shape explained-writer exemption has noncanonical fields: ${JSON.stringify(entry)}`);
+    }
+    if (!/^\S+ on \S+$/.test(entry.identity)) {
+      throw new Error(`observed-shape explained-writer exemption identity must be "<key> on <shape>"; received ${JSON.stringify(entry.identity)}`);
+    }
+    if (seen.has(entry.identity)) {
+      throw new Error(`observed-shape explained-writer exemption repeats ${JSON.stringify(entry.identity)}`);
+    }
+    seen.add(entry.identity);
+    if (!EXPLAINED_WRITER_MECHANISMS.includes(entry.mechanism)) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} claims an undeclared mechanism`
+        + ` ${JSON.stringify(entry.mechanism)}; the admitted grounds are ${EXPLAINED_WRITER_MECHANISMS.join(', ')}.`
+        + ' An OPEN-SPREAD tolerance is REFUSED as a basis (gate 4): it admits every key generically and so names none.');
+    }
+    if (!/^src\//.test(entry.writer) || !/\.(js|jsx)$/.test(entry.writer)) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} must name a repository-relative src/ writer; received ${JSON.stringify(entry.writer)}`);
+    }
+    if (typeof entry.why !== 'string' || entry.why.trim().length < 40
+      || typeof entry.ruling !== 'string' || !entry.ruling.trim()) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} lacks a ruling and a substantive reason`);
+    }
+    if (guarded.has(entry.identity)) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} is a CR-OSR-FREEZE-3-R2 class-(a)`
+        + ' TRUE POSITIVE. A row banked as a real defect cannot be exempted as explained; re-triage it instead.');
+    }
+  }
+  return entries;
+}
+assertExplainedWriterExemptions();
+
+/**
+ * ⭐⭐ GATE 0, EXECUTED. The declaration above is an ARGUMENT; this is the part
+ * that cannot rot. Every entry's key must still be written, in one of the four
+ * measured spellings, by the file it names — so a writer that is deleted,
+ * renamed, or refactored away turns the exemption RED instead of leaving a
+ * silent hole in the enforcement surface.
+ *
+ * ⚠ This reads the writer from the SCANNED TREE, which is content-addressed by
+ * `scanTree`, so the evidence is bound to the same commit as the findings.
+ */
+export function assertExplainedWriterEvidence(
+  entries = EXPLAINED_WRITER_EXEMPTIONS,
+  { root = ROOT, readSource = (path) => readFileSync(join(root, path), 'utf8') } = {},
+) {
+  const evidence = [];
+  for (const entry of entries) {
+    const key = entry.identity.slice(0, entry.identity.indexOf(' on '));
+    let source;
+    try {
+      source = readSource(entry.writer);
+    } catch (error) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} names a writer that cannot be read: ${entry.writer}`, { cause: error });
+    }
+    const spellings = writeShapesIn(source, key);
+    if (!spellings.length) {
+      throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} is STALE:`
+        + ` ${entry.writer} no longer writes ${JSON.stringify(key)} in any of the ${WRITE_SHAPE_SPELLINGS.length} measured`
+        + ` write shapes (${WRITE_SHAPE_SPELLINGS.join(', ')}).`
+        + ' Either the writer moved — re-point the entry — or the key genuinely lost its writer, in which'
+        + ' case the reads are real findings again and the exemption must be DELETED, not repaired.');
+    }
+    evidence.push({ identity: entry.identity, key, writer: entry.writer, spellings });
+  }
+  return evidence;
+}
+
+/**
+ * GATE 1, on demand. Zero commits touching `<key>:` anywhere in history means no
+ * human ever could have supplied the field, so an authored-input (M8) story is
+ * IMPOSSIBLE and the row must be triaged some other way. Exported for triage
+ * lanes and pinned by a test; deliberately NOT wired into `run()` — see the
+ * admission law above.
+ */
+export function authoredInputHistoryCommits(key, { root = ROOT } = {}) {
+  if (typeof key !== 'string' || !key || /\s/.test(key)) {
+    throw new Error(`observed-shape authored-input history probe requires a whitespace-free key; received ${JSON.stringify(key)}`);
+  }
+  return execFileSync('git', ['log', '--all', '--format=%H', `-S${key}:`, '--', 'src'], {
+    cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024,
+  }).trim().split('\n').filter(Boolean);
+}
+
+/**
+ * Post-scan, PRE-INVENTORY, and downstream of the shape-family filter. Same
+ * contract as `applyShapeFamilyFilter`: `stats` passes through BY IDENTITY, so
+ * the anti-vacuity floor keeps measuring the DETECTOR's reach and no exemption
+ * can be added to hide a corpus that stopped observing.
+ *
+ * ⚠ HEURISTIC LEG ONLY, for the same reason the family filter is: the exemption
+ * is keyed on the leaf-name identity, which the exact leg does not speak.
+ */
+export function applyExplainedWriterFilter({
+  scanMode, scan, entries = EXPLAINED_WRITER_EXEMPTIONS, evidence,
+}) {
+  if (scanMode !== BASELINE_SCAN_MODE) {
+    return { ...scan, explainedWriters: { applied: false, cleared: 0, clearedIdentities: [] } };
+  }
+  const exempt = new Map(entries.map((entry) => [entry.identity, entry]));
+  // ⚠ THE KEY PRE-FILTER IS NOT A SECOND SPELLING OF THE IDENTITY — the decision
+  // still goes through `identityOf`, the one home for that spelling. It exists so
+  // the canonical minter is invoked ONLY on findings that could possibly be
+  // cleared, exactly as the shape-family filter does. That matters beyond speed:
+  // `identityOf` asserts a canonical repository-relative path, so minting one for
+  // EVERY finding would throw on a planted probe living outside the tree — which
+  // is a legitimate thing for a mutant harness to scan and not something a filter
+  // should get an opinion about.
+  const exemptKeys = new Set([...exempt.keys()].map((identity) => identity.slice(0, identity.indexOf(' on '))));
+  const cleared = new Set();
+  const findings = scan.findings.filter((finding) => {
+    if (!exemptKeys.has(finding.key)) return true;
+    const identity = identityOf(finding);
+    if (!exempt.has(identity)) return true;
+    cleared.add(identity);
+    return false;
+  });
+  return {
+    ...scan,
+    findings,
+    stats: scan.stats,
+    explainedWriters: {
+      applied: true,
+      cleared: scan.findings.length - findings.length,
+      clearedIdentities: [...cleared].sort(),
+      evidence: evidence || [],
+    },
+  };
+}
+
+/** Said out loud on every human-facing run, the way the scope exclusion is. */
+export function explainedWriterNotice(explainedWriters, entries = EXPLAINED_WRITER_EXEMPTIONS) {
+  if (!explainedWriters?.applied) {
+    return 'M8/M9 explained-writer exemption: NOT APPLIED (exact-origin probe keeps the raw detector output).';
+  }
+  return `M8/M9 explained-writer exemption (CR-OSR-FREEZE-6-R2): ${entries.length} declared identit(ies)`
+    + ` whose writer the GENERATION corpus never runs; cleared ${explainedWriters.cleared} read(s)`
+    + ` across ${explainedWriters.clearedIdentities.length} of them on this scan.`
+    + ' Each entry names its writer and its key must still be written there, in one of the four measured'
+    + ' write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.';
+}
 
 export function sourceFiles(root = ROOT) {
   const out = [];
@@ -856,6 +1358,12 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
       'The line number is excluded so unrelated line churn does not rewrite the governed identity.',
       'Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
+      'SCHEMA 5 = the same identity, EXPLAINED-WRITER FILTERED. The byte-frozen detector is unchanged;',
+      'its output is narrowed by two DECLARED post-filters in check-observed-shape-readers.mjs —',
+      'CR-OSR-FREEZE-6 shape-family union (M6) and the M8/M9 explained-writer exemption. Both are inside',
+      'the detectorTree digest this envelope binds, so retuning either reds the gate and needs a new mint.',
+      'A row here therefore means: a guarded read of a key NO writer the corpus runs produces, and no',
+      'declared out-of-corpus writer explains. Schema 4 is the RETIRED unfiltered predecessor.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -886,7 +1394,7 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
       migrationReview: digestOf(migrationReview),
     },
   };
-  validateSchema4Baseline(baseline);
+  validateSchema5Baseline(baseline);
   return baseline;
 }
 
@@ -1014,10 +1522,11 @@ export async function run(argv = [], overrides = {}) {
     repositoryHeadFor,
     dirtyInputsFor,
     assertHealthyScanProvenance,
+    assertExplainedWriterEvidence: () => assertExplainedWriterEvidence(),
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema4Baseline,
+    validateBaseline: validateSchema5Baseline,
     validateBaselineHistory,
     committedInputManifestsFor,
     validateMigrationBundle,
@@ -1139,7 +1648,7 @@ export async function run(argv = [], overrides = {}) {
     files: before.files.length,
     excludedReadScopes,
   });
-  const scan = command.scanMode === 'legacy-leaf'
+  const rawScan = command.scanMode === 'legacy-leaf'
     ? runtime.scanLegacyReaders({
       files: before.files,
       shapes: corpus.shapes,
@@ -1162,18 +1671,45 @@ export async function run(argv = [], overrides = {}) {
   emitProgress?.({
     phase: 'scan-complete',
     scanMode: command.scanMode,
-    findings: scan.findings.length,
-    reads: scan.stats.reads,
-    excludedReadFiles: scan.stats.excludedReadFiles ?? 0,
+    findings: rawScan.findings.length,
+    reads: rawScan.stats.reads,
+    excludedReadFiles: rawScan.stats.excludedReadFiles ?? 0,
   });
-  runtime.assertFindingSourceEvidence(scan.findings, before);
-  const sentinel = scanSentinelOf(command.scanMode, corpus, scan.stats, SCAN_CONFIG);
+  // ⚠ EVIDENCE AND VACUITY ARE MEASURED ON THE DETECTOR'S WHOLE OUTPUT, BEFORE
+  // THE FILTER EXISTS IN THIS DATA FLOW. Source evidence is proven for every row
+  // the detector emitted (a filtered row cannot escape the check by being
+  // dropped), and the sentinel is built from the detector's own `stats` — so the
+  // anti-vacuity floor keeps measuring the DETECTOR's reach and no shape-family
+  // threshold can ever be tuned into hiding a corpus that stopped observing.
+  runtime.assertFindingSourceEvidence(rawScan.findings, before);
+  const sentinel = scanSentinelOf(command.scanMode, corpus, rawScan.stats, SCAN_CONFIG);
   runtime.assertHealthyScanProvenance({
     scanMode: command.scanMode,
     corpus,
-    stats: scan.stats,
+    stats: rawScan.stats,
     sentinel,
     scanConfig: SCAN_CONFIG,
+  });
+  // CR-OSR-FREEZE-6 — post-scan, pre-inventory. Everything below reads `scan`.
+  const familyScan = applyShapeFamilyFilter({ scanMode: command.scanMode, corpus, scan: rawScan });
+  emitProgress?.({
+    phase: 'family-filter-complete',
+    scanMode: command.scanMode,
+    findings: familyScan.findings.length,
+    cleared: familyScan.familyFilter.cleared,
+  });
+  // ⭐ M8/M9 — the explained-writer exemption, downstream of the family filter and
+  // still upstream of every inventory. `assertExplainedWriterEvidence` runs FIRST:
+  // a stale entry must red the scan, never quietly exempt nothing.
+  const explainedWriterEvidence = runtime.assertExplainedWriterEvidence();
+  const scan = applyExplainedWriterFilter({
+    scanMode: command.scanMode, scan: familyScan, evidence: explainedWriterEvidence,
+  });
+  emitProgress?.({
+    phase: 'explained-writer-filter-complete',
+    scanMode: command.scanMode,
+    findings: scan.findings.length,
+    cleared: scan.explainedWriters.cleared,
   });
   const after = inputSnapshot(runtime);
   assertStableSnapshot(before, after, { requireClean: command.mode === 'scan-only' || command.write });
@@ -1191,6 +1727,8 @@ export async function run(argv = [], overrides = {}) {
     runtime.writeArtifact(outputPlan, artifact);
     console.log(`observed-shape ${command.scanMode} artifact: ${scan.findings.length} finding(s) written to ${command.jsonPath}`);
     console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
+    console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(explainedWriterNotice(scan.explainedWriters));
     return 0;
   }
 
@@ -1253,10 +1791,14 @@ export async function run(argv = [], overrides = {}) {
     }
     console.log(`\n${scan.findings.length} finding(s); scan reached ${scan.stats.resolved}/${scan.stats.reads} reads across ${scan.stats.files} files`);
     console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
+    console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(explainedWriterNotice(scan.explainedWriters));
     console.log(cohortNotice(inventoryOf(scan.findings)));
   }
   if (!violations.length && !stale.length && !vacuity.length) {
     console.log(`observed-shape readers: ${scan.findings.length} finding(s), exactly matching the frozen inventory.`);
+    console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(explainedWriterNotice(scan.explainedWriters));
     console.log(cohortNotice(baseline.inventory));
     return 0;
   }

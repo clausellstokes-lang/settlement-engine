@@ -8,13 +8,23 @@
  *     detector against the EXACT detector site-by-site, so the target inventory
  *     is a NEW alphabet and every paired site needs its own reviewed row.
  *
- *   schema 2 -> 4  (LIVE)    `heuristicMigrationReport`. CR-OSR-FREEZE-3-R1: the
+ *   schema 2 -> 4  (RETIRED) `heuristicMigrationReport`. CR-OSR-FREEZE-3-R1: the
  *     heuristic leaf identity becomes its own schema, so the target inventory is
  *     the heuristic artifact's OWN inventory — the SAME alphabet the schema-2
  *     predecessor is spelled in. There is no cross-detector pairing to review,
  *     and therefore no `rows`: the whole reconciliation is the predecessorRows
  *     ledger that already exists. It needs NO exact artifact, which is the point
  *     — the exact detector cannot complete a full-tree scan.
+ *
+ *   schema 4 -> 5  (LIVE)    the SAME function with a different target. The
+ *     alphabet did not move again — schema 5 is schema 4's identity with the
+ *     detector's output NARROWED by two declared post-filters — so the whole
+ *     review is once more `predecessorRows`, and the code path is genuinely the
+ *     same argument rather than a copy of it. The only two things that differ
+ *     are which schema the predecessor envelope must be, and which number the
+ *     target claims; both are parameters, and `LEAF_MIGRATION_PREDECESSOR`
+ *     is the one table that binds them so no caller can pair 5 with a schema-2
+ *     predecessor or 4 with a schema-4 one.
  *
  * In both, the predecessor schema-2 baseline and every scan artifact are
  * canonical, content-addressed inputs sharing one committed source, execution
@@ -42,6 +52,10 @@ import {
   LEGACY_ALGORITHM_ENRICHMENT,
   validateScanArtifact,
 } from './lib/observed-shape-governance.mjs';
+import {
+  RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
+  validateSchema4Baseline,
+} from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
 export const MIGRATION_REVIEW_SCHEMA = 2;
@@ -51,10 +65,29 @@ export const MIGRATION_BUNDLE_SCHEMA = 2;
  *  schemas can never be confused at a call site, and so a reader grepping for
  *  "3" finds a definition instead of a literal. */
 export const RETIRED_EXACT_TARGET_SCHEMA = 3;
-/** The LIVE heuristic-leaf target. */
+/** The RETIRED UNFILTERED heuristic-leaf target. */
 export const HEURISTIC_TARGET_SCHEMA = 4;
+/** The LIVE EXPLAINED-WRITER-FILTERED heuristic-leaf target. */
+export const FILTERED_TARGET_SCHEMA = 5;
+
+/**
+ * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
+ *
+ * Both leaf migrations run the same reconciliation, so the only way to keep them
+ * from being confusable is to make the pairing DATA that every entry point reads
+ * — never two hand-written literals at two call sites. A caller cannot migrate a
+ * schema-2 baseline to schema 5, nor re-run the retired 2→4 against a schema-4
+ * predecessor, because neither pairing exists here.
+ */
+export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
+  [HEURISTIC_TARGET_SCHEMA]: 2,
+  [FILTERED_TARGET_SCHEMA]: HEURISTIC_TARGET_SCHEMA,
+});
+
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
-const HEURISTIC_MIGRATION_KIND = `observed-shape-schema-2-to-${HEURISTIC_TARGET_SCHEMA}-migration`;
+const leafMigrationKindOf = (targetSchema) => (
+  `observed-shape-schema-${LEAF_MIGRATION_PREDECESSOR[targetSchema]}-to-${targetSchema}-migration`
+);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -89,9 +122,18 @@ function nonNegativeSafeInteger(value, label) {
   return value;
 }
 
-function canonicalPredecessorBaseline(predecessorBaseline) {
-  if (!isRecord(predecessorBaseline) || predecessorBaseline.schema !== 2) {
-    throw new Error('observed-shape predecessor baseline must be a schema-2 object');
+function canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema = 2) {
+  if (!isRecord(predecessorBaseline) || predecessorBaseline.schema !== predecessorSchema) {
+    throw new Error(`observed-shape predecessor baseline must be a schema-${predecessorSchema} object`);
+  }
+  // ⭐ A SCHEMA-4 PREDECESSOR IS VALIDATED BY ITS OWN GOVERNED ENVELOPE LAW, not
+  // by the loose structural checks below, which exist because the schema-2
+  // predecessor was UNGOVERNED and had no validator of its own. Re-deriving a
+  // second, weaker definition of an envelope that already has a governed one is
+  // the doubled-law shape; this defers to the real law and then continues with
+  // the shared structural checks, which the governed envelope also satisfies.
+  if (predecessorSchema === RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA) {
+    validateSchema4Baseline(predecessorBaseline);
   }
   // Canonicalization is itself part of validation: it refuses cycles,
   // undefined values and non-finite numbers before any digest is authoritative.
@@ -175,12 +217,12 @@ function canonicalPredecessorBaseline(predecessorBaseline) {
   return canonical;
 }
 
-export function validatePredecessorBaseline(predecessorBaseline) {
-  return canonicalPredecessorBaseline(predecessorBaseline);
+export function validatePredecessorBaseline(predecessorBaseline, predecessorSchema = 2) {
+  return canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema);
 }
 
-function predecessorInputOf(predecessorBaseline, predecessorBaselineText) {
-  const predecessor = canonicalPredecessorBaseline(predecessorBaseline);
+function predecessorInputOf(predecessorBaseline, predecessorBaselineText, predecessorSchema = 2) {
+  const predecessor = canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema);
   if (typeof predecessorBaselineText !== 'string' || !predecessorBaselineText) {
     throw new Error('observed-shape migration requires the exact predecessor baseline text');
   }
@@ -193,7 +235,7 @@ function predecessorInputOf(predecessorBaseline, predecessorBaselineText) {
       { cause: error },
     );
   }
-  const parsedPredecessor = canonicalPredecessorBaseline(parsed);
+  const parsedPredecessor = canonicalPredecessorBaseline(parsed, predecessorSchema);
   if (canonicalJson(parsedPredecessor) !== canonicalJson(predecessor)) {
     throw new Error('observed-shape predecessor baseline object does not match its exact input text');
   }
@@ -676,7 +718,7 @@ export function validateMigrationReport(
 function assertHeuristicConservation(report) {
   const c = report.conservation;
   if (report.rows.length !== 0) {
-    throw new Error('observed-shape heuristic migration carries site-migration rows; the schema-4 target is'
+    throw new Error(`observed-shape heuristic migration carries site-migration rows; the schema-${report.target?.baselineSchema} target is`
       + ' the heuristic inventory itself and has no cross-detector pairing to review');
   }
   if (c.predecessorIdentitiesCovered !== c.predecessorIdentities
@@ -695,16 +737,25 @@ function assertHeuristicConservation(report) {
   }
 }
 
-/** Build the canonical schema-2 -> schema-4 report. ONE artifact, validated
- *  before any reconciliation, and it must be the governed heuristic detector's. */
+/** Build the canonical leaf migration report — schema 2 -> 4 (retired) or
+ *  schema 4 -> 5 (live), chosen by `targetSchema`, which is REQUIRED so no
+ *  caller can fall into the wrong migration by omission. ONE artifact,
+ *  validated before any reconciliation, and it must be the governed detector's. */
 export function heuristicMigrationReport(
   predecessorBaseline,
   legacyArtifact,
   predecessorBaselineText,
+  targetSchema,
 ) {
+  const predecessorSchema = LEAF_MIGRATION_PREDECESSOR[targetSchema];
+  if (predecessorSchema === undefined) {
+    throw new Error(`observed-shape leaf migration target must be ${Object.keys(LEAF_MIGRATION_PREDECESSOR).join(' or ')};`
+      + ` received ${JSON.stringify(targetSchema)}`);
+  }
   const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
     predecessorBaseline,
     predecessorBaselineText,
+    predecessorSchema,
   );
   assertGovernedLegacyArtifact(legacyArtifact);
   const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
@@ -733,7 +784,7 @@ export function heuristicMigrationReport(
     }));
   const report = {
     reportSchema: MIGRATION_REPORT_SCHEMA,
-    kind: HEURISTIC_MIGRATION_KIND,
+    kind: leafMigrationKindOf(targetSchema),
     inputs: {
       subjectSha: legacyArtifact.provenance.subjectSha,
       predecessorBaselineDigest: digestOf(predecessor),
@@ -763,7 +814,7 @@ export function heuristicMigrationReport(
       currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
     },
     target: {
-      baselineSchema: HEURISTIC_TARGET_SCHEMA,
+      baselineSchema: targetSchema,
       inventoryDigest: legacyArtifact.digests.inventory,
       findingsDigest: legacyArtifact.digests.findings,
     },
@@ -806,11 +857,13 @@ export function validateHeuristicMigrationReport(
   predecessorBaseline,
   legacyArtifact,
   predecessorBaselineText,
+  targetSchema,
 ) {
   const expected = heuristicMigrationReport(
     predecessorBaseline,
     legacyArtifact,
     predecessorBaselineText,
+    targetSchema,
   );
   if (canonicalJson(report) !== canonicalJson(expected)) {
     throw new Error('observed-shape migration report is not the canonical report for its bound inputs');
@@ -829,18 +882,20 @@ function validateGovernedHeuristicMigration({
   currentArtifact,
   report,
   review,
+  targetSchema,
 }) {
   const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
     predecessorBaseline,
     predecessorBaselineText,
+    LEAF_MIGRATION_PREDECESSOR[targetSchema],
   );
-  // ⛔ A schema-4 bundle that carries a DIFFERENT "current" artifact is refused
+  // ⛔ A leaf bundle that carries a DIFFERENT "current" artifact is refused
   // outright rather than quietly ignored: the bundle keeps both fields so the
   // consumer needs no branch, and this is what stops that convenience from
   // becoming a hole through which an unreviewed second artifact travels.
   if (currentArtifact !== undefined
     && canonicalJson(currentArtifact) !== canonicalJson(legacyArtifact)) {
-    throw new Error('observed-shape schema-4 migration bundle carries a current artifact that is not'
+    throw new Error(`observed-shape schema-${targetSchema} migration bundle carries a current artifact that is not`
       + ' the governed heuristic artifact itself');
   }
   validateHeuristicMigrationReport(
@@ -848,6 +903,7 @@ function validateGovernedHeuristicMigration({
     predecessor,
     legacyArtifact,
     predecessorBaselineText,
+    targetSchema,
   );
   return {
     ...validateReviewLedger(review, report),
@@ -992,7 +1048,7 @@ export function validateGovernedMigration({
   report,
   review,
 }) {
-  if (report?.target?.baselineSchema === HEURISTIC_TARGET_SCHEMA) {
+  if (LEAF_MIGRATION_PREDECESSOR[report?.target?.baselineSchema] !== undefined) {
     return validateGovernedHeuristicMigration({
       predecessorBaseline,
       predecessorBaselineText,
@@ -1000,6 +1056,7 @@ export function validateGovernedMigration({
       currentArtifact,
       report,
       review,
+      targetSchema: report.target.baselineSchema,
     });
   }
   const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
@@ -1043,6 +1100,7 @@ export function migrationBundleOf({
   const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
     predecessorBaseline,
     predecessorBaselineText,
+    LEAF_MIGRATION_PREDECESSOR[report?.target?.baselineSchema] ?? 2,
   );
   validateGovernedMigration({
     predecessorBaseline: predecessor,
@@ -1108,18 +1166,20 @@ export function run(argv = process.argv.slice(2)) {
   // and turns any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : HEURISTIC_TARGET_SCHEMA);
-  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${HEURISTIC_TARGET_SCHEMA} (live heuristic)`
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FILTERED_TARGET_SCHEMA);
+  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA]
+    .includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${FILTERED_TARGET_SCHEMA} (live filtered leaf),`
+      + ` ${HEURISTIC_TARGET_SCHEMA} (retired unfiltered leaf)`
       + ` or ${RETIRED_EXACT_TARGET_SCHEMA} (retired exact); received ${JSON.stringify(command.targetSchema)}`);
   }
-  const heuristicTarget = targetSchema === HEURISTIC_TARGET_SCHEMA;
+  const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
   if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<schema-2-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=4] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=5] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
   }
   if (heuristicTarget && currentPath) {
     throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`
-      + ` the schema-${HEURISTIC_TARGET_SCHEMA} target IS the governed heuristic artifact`);
+      + ` the schema-${targetSchema} target IS the governed heuristic artifact`);
   }
   if (command.bundlePath && !command.reviewPath) {
     throw new Error('--bundle requires a completed --review ledger');
@@ -1150,7 +1210,7 @@ export function run(argv = process.argv.slice(2)) {
   // authority, so it fills both roles rather than a second artifact being read.
   const current = currentPath ? JSON.parse(readFileSync(currentPath, 'utf8')) : legacy;
   const report = heuristicTarget
-    ? heuristicMigrationReport(predecessorBaseline, legacy, predecessorBaselineText)
+    ? heuristicMigrationReport(predecessorBaseline, legacy, predecessorBaselineText, targetSchema)
     : migrationReport(predecessorBaseline, legacy, current, predecessorBaselineText);
   const template = command.templatePath ? reviewTemplateOf(report) : null;
   const review = command.reviewPath
