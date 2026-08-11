@@ -33,9 +33,11 @@ import { useStore } from '../../store/index.js';
 // `nameOf(governingFactionOf(settlement))` (rulingPowerCoup.coupContenders builds
 // `incumbent.name` that way), so a local four-line lookalike that ever disagreed
 // would write a lock naming the WRONG faction — a control that says it protects
-// the seat while protecting nobody. A sibling in this same folder
-// (dossier/EngineSections.jsx) already imports this module statically, so the
-// edge is not new.
+// the seat while protecting nobody. The edge is not new: SettlementDetail.jsx:36
+// statically imports ChroniclePanel.jsx, which imports rulingPower.js at its
+// line 26 — a LIVE chain. (Re-pointed 2026-08-11 per chair ruling R6; this cited
+// dossier/EngineSections.jsx, which imports rulingPowerCoup.js rather than this
+// module AND has no production importer at all, so it proved nothing.)
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { sans, FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';

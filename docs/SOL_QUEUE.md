@@ -35,9 +35,19 @@ judgment-density act after the boundary carries a marker until a Fable-capable
 account re-derives it.** It was written naming the Opus era; **it binds you
 identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
 
-- **Marker:** `⏳ OPUS-ERA — FABLE VALIDATION OWED`, placed in ALL THREE homes —
-  the queue row, the commit body, and the document where the judgment lives — and
-  repeated in any downstream doc that CONSUMES the judgment, with a pointer back.
+- **Marker:** `⏳ OPUS-ERA — FABLE VALIDATION OWED`, placed in **TWO REQUIRED homes —
+  the queue row and the document where the judgment lives** — and repeated in any
+  downstream doc that CONSUMES the judgment, with a pointer back. The **commit-body**
+  marker is **RECOMMENDED, not required.**
+  ⚠ **AMENDED 2026-08-11 by chair ruling (session `c42c8924`, the 70-act Fable
+  validation survey; full block at the tail of `docs/FABLE_VALIDATION_QUEUE.md`).**
+  This bullet formerly demanded ALL THREE homes including the commit body. Practice
+  already matched two, and **an unmeetable requirement teaches non-compliance** — a
+  commit body is immutable, so a marker placed there can never be cleared and inflates
+  the debt metric forever. The same ruling **RETIRES the in-code walker marker home**
+  for census acts: the queue row plus the walker's own dated census comments are the
+  record, because **a partial in-code marker set that reads as complete is worse than
+  none.**
 - **What owes a row:** wave/slice acceptance judgments, new architecture beyond the
   frozen design corpus, golden-shift adjudications, soak verdict interpretations,
   tuning-band ratifications, and deferrals with product consequences.
@@ -47,6 +57,13 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
   Building to it costs you nothing; deviating from it owes a row.
 - ⚠ **The marker NEVER gates progress.** It records debt; the work proceeds.
 - ⚠ Count DOCUMENT markers only. Commit messages are immutable and match forever.
+- ⛔ **BRIEF RULE (chair ruling H6, 2026-08-11): a brief may prescribe the GENESIS
+  pipeline only when the detector/schema ITSELF moved; a shrink re-freeze is plain
+  `--write`.** Written into this protocol because the same defect produced the era's
+  SIXTH execution-refutation: a brief named `--migrate-schema=N` for an operation that
+  moved no detector, the genesis had already landed, the pipeline threw at an
+  already-schema-N baseline, and the lane had to substitute the ordinary maintenance
+  instrument mid-session. **Check which one moved BEFORE naming a pipeline in a brief.**
 - **Authority is immediate and full** for whoever holds the chair, with four owner
   carve-outs that survive every era and every delegation: external legal sign-off,
   the V5 aesthetic cull (offer it, never assume it), THE TUNING SIGNATURE at soak,
@@ -88,8 +105,16 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
 3. **The `locks` cluster is OWNER-GATED, not yours or the chair's** — `locks.factions`
    /`locks.institutions` reach a coup shield that can never arm FROM THE UI; the fix
    is either deleting a working capability or adding a new one. Ask; do not choose.
-4. **The 162-identity UNREVIEWED-UI cohort** banked in the genesis, awaiting per-row
-   triage.
+4. **The UNREVIEWED-UI cohort** banked in the genesis, awaiting per-row triage.
+   ⚠ **FIGURE CORRECTED 2026-08-11 (chair session `c42c8924`): the HEAD reality is
+   51 files / 128 identities / 193 reads**, the FILTERED schema-5 cohort. This line
+   formerly read "162-identity", a schema-4-era figure that is now doubly stale — the
+   schema-5 mint re-authored the cohort 53/150/246 → 51/128/193 because the walker's
+   `live` reading is now the FILTERED scan, with the RAW reading pinned beside it at its
+   unchanged 53/150/246 so the delta is attributable to the filters rather than to estate
+   drift. Both pins are at `tests/lint/observedShapeReaders.walker.test.js` (`:499`
+   filtered, `:505` raw). ⚠ Do not quote a cohort figure without naming which reading
+   it is.
 5. **M6 as a follow-on freeze** (CR-OSR-FREEZE-6-R1) — the re-key tool and its
    negative control are already built and waiting.
 6. **The ES tail** (ES-5b insertion reconciliation → ES-6 → ES-7 → CW-3), then the

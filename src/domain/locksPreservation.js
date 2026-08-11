@@ -54,8 +54,12 @@
  *
  * ⛔ THERE IS NO INSTITUTIONS LOCK, AND ITS ABSENCE IS THE FINDING. This module
  * used to normalize a third name-keyed array beside `factions`. It was dead on
- * EVERY end simultaneously: no UI ever offered it (setLock is only ever called
- * with identity/geography/npcs/history), so no writer could exist; and nothing
+ * EVERY end simultaneously: no UI ever offered it (setLock is called with exactly
+ * FIVE keys — identity, geography, factions, npcs, history — and NEVER with
+ * institutions. ⚠ Corrected 2026-08-11 per chair ruling H28/H29: this clause
+ * enumerated only the first four, which was true when written and became false
+ * when the `factions` writer landed at 73f00920. The argument is unaffected —
+ * institutions is absent from the list either way), so no writer could exist; and nothing
  * anywhere consumed the normalized field, so no reader existed either — the
  * clause above once claimed two name-keyed arrays while naming, correctly, only
  * ONE consumer. Deleted 2026-08-11 by owner ruling. ⚠ The RAW key, if some old

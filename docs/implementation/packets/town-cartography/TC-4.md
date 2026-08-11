@@ -730,7 +730,7 @@ Every §12 item is CLOSED; the implementer reopens none of them.
   is the receipt; if it refuses, the flip reverts to the deferred-shared-rows pattern rather
   than weakening the validator.
 
-## 12c. Opus-era landing judgments — ⏳ OPUS-ERA — FABLE VALIDATION OWED
+## 12c. Opus-era landing judgments — ✅ FABLE-VALIDATED 2026-08-11 (chair session c42c8924)
 
 The packet itself, every §12b/O-item ruling, and CR-TC4-O2-R1 / CR-TC4-O5-R1 /
 CR-TC4-BAND-1 are **Fable-issued**: the implementation INHERITS that validation and owes
@@ -739,24 +739,32 @@ landing and each carries the marker. Full rows, with evidence, are appended unde
 `docs/FABLE_VALIDATION_QUEUE.md`'s `⏳ OPUS-ERA ROWS BEGIN BELOW THIS LINE`. The marker
 records debt; it never gates progress.
 
-1. **⏳ OPUS-ERA — FABLE VALIDATION OWED — gate-red attribution.** The wave-end gate is
+✅ **CLEARED 2026-08-11 by the Fable chair, session `c42c8924`.** All four judgments below
+were surveyed and RATIFIED as part of the 70-act Fable validation survey; they are queue rows
+7415–7418 and all four cleared. Judgment 4's record carries one chair correction, recorded on its
+queue row. ⚠ This §12c section REMAINS the owning-document home: the chair's 2026-08-11
+marker-discipline ruling amended the three-homes protocol to TWO REQUIRED homes — the queue row and
+the owning document — retiring only the in-code walker home and making the commit-body marker
+RECOMMENDED rather than required. The full ruling block sits at the tail of the validation queue.
+
+1. **✅ FABLE-VALIDATED 2026-08-11 (chair session c42c8924) — gate-red attribution.** The wave-end gate is
    red with 4 failures outside the frozen census (ceiling 17). Attributed: 1 MINE
    (`townCartographyDeterminism.test.js:230` un-anchored negative — CURED), 2 FOREIGN
    (the schema-4 lane's dirty `tests/lint/testRatchet.test.js` and
    `tests/lint/observedShapeMigration.test.js`), 1 CROSS-LANE (item 2). TC-4 declared
    landable on that attribution rather than owning the red.
-2. **⏳ OPUS-ERA — FABLE VALIDATION OWED — lighting census DEFERRED.** §7's mandated new
+2. **✅ FABLE-VALIDATED 2026-08-11 (chair session c42c8924) — lighting census DEFERRED.** §7's mandated new
    test file legitimately moves the sovereignty lighting census `files` 2382→2383. The
    five figures were deliberately NOT re-derived: the schema-4 lane has 4 added
    `it(`/`describe(` titles sitting UNCOMMITTED, so re-deriving `titles`/`suiteTitles`
    now would freeze foreign WIP into a frozen census ("never census a live shared tree";
    "re-derive ALL FIVE figures, never patch `files`"). Sequencing item for the chair.
-3. **⏳ OPUS-ERA — FABLE VALIDATION OWED — accepted deviation, outside §7.**
+3. **✅ FABLE-VALIDATED 2026-08-11 (chair session c42c8924) — accepted deviation, outside §7.**
    `tests/domain/townCartographyParcels.test.js` (not in §7's manifest) carried a blanket
    `"institutionRef"`-absence assertion authored when `buildings: []`. TC-4 fills the
    layer and `institutionRef` is a schema-sanctioned v2 key, so the line was NARROWED to
    its original claim — the binding RECEIPT does not reach the block — not weakened.
-4. **⏳ OPUS-ERA — FABLE VALIDATION OWED — accepted deviation, §7 C6.** The bounded-loop
+4. **✅ FABLE-VALIDATED 2026-08-11 (chair session c42c8924) — accepted deviation, §7 C6.** The bounded-loop
    scan could not take `cartographyMultiplicity.js` on §7's literal terms: the resolver is
    closed-form arithmetic with no loop, so a `for (` liveness anchor there would be FALSE.
    The scan was split — both leaves keep the no-`while`/no-`do` negatives under an

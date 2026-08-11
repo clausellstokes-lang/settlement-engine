@@ -366,6 +366,20 @@ numbers quoted here** — this volume has had two address rots):
   (`depositTick === tick - 1`), matching `readRoadsBondEvents` and the lag
   `espionagePresence.js:17-31` declares by name for this consumer class. Reordering the pulse is
   forbidden (L1). Restate it in the leaf's header and pin it (case A5).
+  ⛔ **CORRECTED IN EXECUTION — DEVIATION D7, landed `954592c0`; RATIFIED by chair ruling H32,
+  2026-08-11.** This bullet is left as written because it is the record of what was specified;
+  **it is not what shipped, and a successor must not build to it.** The one-tick lag above is
+  MEASURABLY WRONG FOR THIS PAIR. `simulateCampaignWorldPulse` calls the espionage product pass
+  (`pulseKernel.js:2031`) and the ladder chain (`:2563`) unconditionally, in that order, in ONE
+  function body, both handed `tick: worldState.tick` — **so the depositor runs EARLIER IN THE SAME
+  PULSE than the consumer.** A `tick - 1` window would prune tick T−1's records before the ladder
+  at T ever looked, **making the fold never fire on any world while every unit pin around it
+  stayed green.** The packet transferred its lag claim from `espionagePresence.js`, a DIFFERENT
+  writer/reader pair whose one-tick lag is real only because ROADS runs LAST, strictly after the
+  ladder. **⚠⚠ THE STANDING LESSON: a lag belongs to a WRITER/READER PAIR and must be re-derived
+  from pulse CALL ORDER, never inherited.** What shipped is the same-tick handoff on the
+  `readGratitudeBondEvents` template, with the pulse call ORDER pinned at source so a future
+  reorder reds loudly rather than silently killing the feature.
 - **Direct readers this packet adds:** `advanceLitLadder` (`npcLadderKernel.js`). **One.**
 - **Absence rule:** espionage dark / ladder dark / errand spine dark / no graded mission this
   tick / an operative whose roster npc cannot be resolved / a grade outside the credited set ⇒
@@ -403,11 +417,11 @@ numbers quoted here** — this volume has had two address rots):
 | Path | What must happen | Measured basis |
 |---|---|---|
 | **create** | Written once per pulse by the leaf's deposit function, called from `advanceEspionageProducts` after `landOne` returns. Key = the ladder nid; value = `{ depositTick, grade }` (or `{ depositTick, credit }` — **O3**). ⛔ The `setSpatialLedger` call must spell the ledger key as a **string literal at the call site** (`thirdPartyRansom.js:358-359`). | `espionageProducts.js:509-511` is the family's existing literal-key write |
-| **read** | `readMissionCreditEvents(worldState, tick)` → `Map<nid, {...}>`, filtering `depositTick === tick - 1`, codepoint-sorted iteration. Hoisted ONCE per advance beside `npcLadderKernel.js:439`/`:444`, never called per rung. | `thirdPartyRansom.js:332-346` |
+| **read** | `readMissionCreditEvents(worldState, tick)` → `Map<nid, {...}>`, filtering `depositTick === tick - 1`, codepoint-sorted iteration. Hoisted ONCE per advance beside `npcLadderKernel.js:439`/`:444`, never called per rung. ⛔ **CORRECTED IN EXECUTION — D7, landed `954592c0`; RATIFIED by chair ruling H32, 2026-08-11: the shipped filter is the SAME-TICK strict equality `if (Math.floor(Number(row.depositTick)) !== now) continue;`, NOT `tick - 1`.** The depositor runs earlier in the SAME pulse, so a `tick - 1` window would never fire. The hoist is real and structurally adjacent as specified — `npcLadderKernel.js` hoists `readRoadsBondEvents`, `readGratitudeBondEvents` and `readMissionCreditEvents` in one block — but the TEMPLATE is the `gratitudeBondEvents` twin ("generosity ran earlier THIS tick"), not the roads one. | `thirdPartyRansom.js:332-346` |
 | **persist** | `setSpatialLedger` writes into `worldState.spatialLedgers`; sorted keys, **drop-when-empty** so a dark world mints **no key at all** and dormancy goldens do not move. | `thirdPartyRansom.js:363-369` `diffLedger` |
 | **prune** | ⛔ **MANDATORY AND EASY TO FORGET.** Prior records are dropped every pulse — the deposit lives exactly one tick. Without the prune the ledger grows without bound AND the strict-window read silently keeps working, so the bug is invisible until a save bloats. **Pin it (case A6).** | `thirdPartyRansom.js:371-372` |
 | **regenerate** | A world regen re-derives settlements; the deposit is per-tick and is not re-derived. ⚠ **AUTHOR-TIME-UNMEASURED:** the implementer must confirm that a regen does not resurrect a stale deposit, by running the regen path with a deposit present and asserting the credit does not double-fire. |  |
-| **undo** | ⚠ **AUTHOR-TIME-UNMEASURED.** If undo snapshots `worldState.spatialLedgers`, an undo across the consume boundary could re-present a consumed deposit. The strict `depositTick === tick - 1` window makes this safe **only if the tick also rewinds**. The implementer measures it and states the answer. |  |
+| **undo** | ⚠ **AUTHOR-TIME-UNMEASURED.** If undo snapshots `worldState.spatialLedgers`, an undo across the consume boundary could re-present a consumed deposit. The strict `depositTick === tick - 1` window makes this safe **only if the tick also rewinds**. The implementer measures it and states the answer. ⛔ **CORRECTED IN EXECUTION — D7, landed `954592c0`; RATIFIED by chair ruling H32, 2026-08-11: the shipped window is SAME-TICK, not `tick - 1`.** The safety argument is unchanged in shape and still binds on the same condition (it holds only if the tick rewinds with the ledger), but it must be re-read against same-tick equality. **Consume-once does NOT come from the lag** — it comes from the deposit pass replacing the whole record set every pulse (prune-by-construction, drop-when-empty), so the correction does not weaken it. |  |
 | **migrate** | A legacy save carries no key ⇒ `asObject(undefined)` ⇒ `{}` ⇒ an empty Map ⇒ zero credits. Additive-optional by construction. | `readRoadsBondEvents` reads through `asObject` |
 | **classify** | ⛔ `tests/lib/spatialLedgerCoverage.walker.test.js` **REDS on any `setSpatialLedger` key not classified** in `src/lib/spatialUsage.js`. This is a DEPOSIT that persists across a tick boundary ⇒ **TRACKED** by the recorded axis. ⚠⚠ **A TRACKED row FAILS OPEN** — adding the key to `TRACKED_LEDGER_KEYS` alone greens the walker while emitting zero telemetry, so it **must** ship with a behavioral pin driving the extractor, run as two mutants (drop the `counts` entry; drop the `MOVER_PRESENCE` row) — both must red. ⚠ Never import the key constant into `spatialUsage.js` (it drags `distanceRead.js` onto first paint); use the bare string literal as all ~37 other entries do. | `spatialUsage.js:171`, `:227`, `:282` |
 
@@ -452,6 +466,16 @@ into the ladder:
 **`readMissionCreditEvents`** — the pure consumer read, `readRoadsBondEvents` verbatim in shape:
 codepoint-sorted key iteration, `depositTick === tick - 1` or skip, returns a `Map` keyed by nid.
 Returns an **empty Map** when the ledger is absent.
+
+⛔ **CORRECTED IN EXECUTION — DEVIATION D7, landed `954592c0`; RATIFIED by chair ruling H32,
+2026-08-11.** The specified `depositTick === tick - 1` filter is **provably dead for this pair** and
+was NOT built. What shipped is the SAME-TICK strict equality — `if (Math.floor(Number(row.depositTick))
+!== now) continue;` — and the shape template is **`readGratitudeBondEvents`, not
+`readRoadsBondEvents`.** The two idioms are identical except for the window, and the window is the
+whole question: the depositor runs earlier in the SAME pulse body, so a one-tick read would prune
+before the consumer ever looked. The sentence above is preserved as the record of what was specified.
+
+
 
 ⛔ The leaf must **never** import `npcLadderChallenge.js`, `npcLadderKernel.js`, or any
 `npcLadder*` file — that closes the loop and drags the whole family (the `barrel-hop` hazard).
@@ -650,7 +674,7 @@ adjacent defect.
 | A2 | Absent / disabled — FOUR fences | On one fixture: (a) espionage dark ⇒ **no ledger key minted** and `stock` byte-identical; (b) ladder dark ⇒ the deposit is written but `advanceNpcLadder` no-ops, ladder state byte-identical; (c) `errandSpineEnabled` false ⇒ no covert errands ⇒ no landings ⇒ no key; (d) roads dark ⇒ no journeys ⇒ no key. **Drop-when-empty proven in every arm: `spatialLedgers` must not gain the key at all.** |
 | A3 | Counterforce / negative (anchored) | A landing whose grade is NOT in the credited set deposits **nothing**, and its operative's `stock` is byte-identical. Anchored against a live positive control **in the same test** (a credited grade on the same fixture DOES deposit and DOES move stock), so the negative cannot fail open. The credited set is asserted **derived from the frozen `MISSION_GRADES` export**, never re-typed, so a fifth grade cannot silently escape. |
 | A4 | Sparse / malformed-but-supported | No landings · a landing with no resolvable roster npc · an id-less operative · an operative on no rung · a landing whose `observerId` names no live settlement ⇒ zero credit, zero `NaN`, zero negative delta, and the id-less arm is **declared** with a reason rather than silently keyed (**O8**). |
-| A5 | Ordering — THE DECLARED ONE-TICK LAG | Drive the REAL pulse: close a graded mission, assert the credit lands on the tick **AFTER** the deposit is written, not the same tick — and assert that on the same-tick advance `stock` is unchanged. The uniform lag this wave inherits. |
+| A5 | Ordering — THE DECLARED ONE-TICK LAG | Drive the REAL pulse: close a graded mission, assert the credit lands on the tick **AFTER** the deposit is written, not the same tick — and assert that on the same-tick advance `stock` is unchanged. The uniform lag this wave inherits. ⛔ **CASE CORRECTED IN EXECUTION — DEVIATION D7, landed `954592c0`; RATIFIED by chair ruling H32, 2026-08-11.** As written this case asserts the DEAD window and **a conforming implementation would have shipped a feature that never fires.** The case as built asserts the opposite and pins the reason structurally: `espionageCareerCreditDormancy.test.js:232-251` reads `pulseKernel.js` **at source** and asserts that `advanceEnvoyDiplomacyPulse` (`:2031`) precedes the ladder chain (`:2563`) inside one `simulateCampaignWorldPulse` body with `tick: worldState.tick` co-occurring, carrying a ⛔ note that **flipping the call order must flip the window.** That is structural prevention, not a comment: a future reorder reds loudly instead of silently killing the fold. The credit lands on the SAME tick as the deposit. |
 | A6 | ⭐ LIFECYCLE ROUND TRIP + IDEMPOTENCY (state is written) | **The full deposit lifecycle in one case:** write → persist → read → fold → **prune**. Advance twice with no new mission and assert (i) the ledger key is GONE after the consuming tick, (ii) `stock` did not move a second time, and (iii) a hand-planted deposit carrying a stale `depositTick` is never consumed. **The prune arm is the one that fails silently if forgotten** (§5b). |
 | A7 | ⭐ Real writer-to-reader integration | Through `advanceEspionageProducts` and `advanceNpcLadder` on a real world: the espionage writer deposits, the ladder's own writer folds, and a SOURCE SCAN proves the espionage set wrote no ladder state and no second module routed `writeErrands` (ES-5c's two pins, re-run against the new leaf). |
 | A8 | ⭐ THE DISCLOSED SHIFT — the golden pair | The ⟨F6⟩ pair: (i) a **dark** golden asserting byte-identity with the pre-change output on the same seed; (ii) a **lit** golden recording the NEW ladder output, whose header names the shift, its cause, and this packet. The lit golden is recorded ONCE, in this commit, with the cause stated (§9b) — never re-recorded silently. **The `spatialUsage` TRACKED behavioral pin rides here**, run as its two mutants (§5b). |

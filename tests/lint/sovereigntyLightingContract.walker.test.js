@@ -3344,7 +3344,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // to prove it was the sole cause: without it this census is GREEN at the old five.
       //
     // ── RE-MEASURED 2026-08-11 (the schema-4 OSR genesis lane, on a QUIET tree) ──────
-    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. This row was DEFERRED once, deliberately: the
+    // ✅ FABLE-VALIDATED 2026-08-11 — in-code marker home retired; record lives in FABLE_VALIDATION_QUEUE.md.
+    // This row was DEFERRED once, deliberately: the
     // TC-4 lane measured `files` 2382 -> 2383 while the schema-4 lane held two lint files
     // DIRTY, and re-deriving then would have frozen another lane's uncommitted work into
     // the estate. Both lanes have since LANDED (TC-4 at 5a6f76fe, the schema-4 code half
@@ -3379,7 +3380,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // legitimately read both ends.
     //
     // ── RE-MEASURED 2026-08-11 at c74048e4 (the census re-freeze lane, QUIET tree) ───
-    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. c74048e4 ("the prominent-relationship callout
+    // ✅ FABLE-VALIDATED 2026-08-11 — in-code marker home retired; record lives in FABLE_VALIDATION_QUEUE.md.
+    // c74048e4 ("the prominent-relationship callout
     // renders its real prose for the first time") adds NO test file and moves the
     // evidence layer only. ⚠⚠ ALL FIVE FIGURES RE-DERIVED IN ONE RUN, NONE PATCHED —
     // the sequence hazard has now fired three times by someone moving one figure and
@@ -3421,7 +3423,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // are reached only when every earlier one is already right.
     //
     // ── RE-DERIVED 2026-08-11 BY THE OPUS LIGHTING-CENSUS LANE, AT 5afe9b2e ─────────
-    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2383/364/2019/19548/5519 →
+    // ✅ FABLE-VALIDATED 2026-08-11 — in-code marker home retired; record lives in FABLE_VALIDATION_QUEUE.md.
+    // 2383/364/2019/19548/5519 →
     // 2385/364/2021/19577/5527. FOUR LANDINGS moved this census and it is re-derived
     // ONCE across all four rather than four times: 78d136a1 (a new UI test file),
     // 31409e36 (anchor repairs), 1c295eca (a new domain pin suite) and 5afe9b2e. Four
@@ -3491,7 +3494,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // rather than assumed away.
     //
     // ── RE-DERIVED 2026-08-11 BY THE OPUS ES-5b LANE, AT 4fc1d0c7 + ES-5b's OWN EDIT ──
-    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2385/364/2021/19577/5527 →
+    // ✅ FABLE-VALIDATED 2026-08-11 — in-code marker home retired; record lives in FABLE_VALIDATION_QUEUE.md.
+    // 2385/364/2021/19577/5527 →
     // 2387/364/2023/19594/5535. ONE landing moved it — ES-5b, which mints the two test
     // files its packet's manifest items 6 and 7 mandate — and the census is re-derived
     // IN THE SAME CHANGE that moves it, because a new test file reds this walker
@@ -3546,7 +3550,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // That is the opposite of the previous re-derivation's situation and it is stated
     // rather than assumed away.
     // ── RE-DERIVED 2026-08-11 BY THE OPUS ES-5c LANE, AT ca94438d + ES-5c's OWN EDIT ──
-    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2387/364/2023/19594/5535 →
+    // ✅ FABLE-VALIDATED 2026-08-11 — in-code marker home retired; record lives in FABLE_VALIDATION_QUEUE.md.
+    // 2387/364/2023/19594/5535 →
     // 2389/364/2025/19610/5543. ONE landing moved it — ES-5c, which mints the two test files
     // its packet's manifest items 5 and 6 mandate — and the census is re-derived IN THE SAME
     // CHANGE that moves it, because a new test file reds this walker immediately and a red

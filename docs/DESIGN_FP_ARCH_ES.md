@@ -1329,7 +1329,16 @@ here would be SILENTLY DEAD: the deposit pass prunes the prior tick's records
 before the ladder could ever look for them, so the fold would never fire on any
 world while every unit pin around it stayed green. Consume-once is unaffected —
 it comes from the pass replacing the whole record set each pulse, not from the
-lag. **Say "veto" to restore the one-tick reading; the cost is a dead feature.**
+lag. ✅ **RATIFIED by chair ruling H32, 2026-08-11 (Fable chair, session `c42c8924`).** This
+amendment was landed by the ES-5d lane marked vetoable — *"say 'veto' to restore the one-tick
+reading; the cost is a dead feature"* — and the chair has now RULED rather than vetoed: **the
+amendment STANDS and its provisionality is spent.** The dead-window proof is executable at source
+and is pinned so it cannot rot silently (`espionageCareerCreditDormancy.test.js:232-251` asserts the
+pulse call order and notes that flipping it must flip the window). The same finding is stated
+independently for a different espionage pair at §3.14's own `:1274-1276`. All three artifacts that
+carried the wrong claim — this section, the ES-5d packet's §5/§5b/§6.1, and acceptance case A5 —
+were corrected together in the same change, because a correction reaching only the doc the lane
+could touch would have left the contradiction alive in the two a builder actually reads.
 **D3 — credit only, no debit** (§3.14's sentence is about success), and **D4 —
 `stock` only: `momentum` does not exist** and the wave credits the field that does.
 
