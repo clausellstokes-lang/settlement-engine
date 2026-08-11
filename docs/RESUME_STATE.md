@@ -153,7 +153,22 @@ beats an absent section.
 
 ## 7. WHAT IS LEFT
 
-ES-7 → CW-3 · TC-5b/c/d (mount, PNG goldens, skins) · ES-6b (blocked: its dispatcher wave
+⛔⛔ **ES-7 IS REFUSED — AND THE ESPIONAGE TAIL CANNOT PROCEED BY PICKING THE NEXT NUMBER**
+(memory/es7-refused-the-dispatcher-is-the-gate.md). **FIVE OF ITS SIX HERALD KINDS HAVE NO
+REACHABLE PRODUCER.** The volume built ES-5a/b/c/d and ES-6a — **five waves of CONSUMERS** —
+on a declared build-doors-before-traffic shape, and **the DISPATCHER that would make any of
+them fire was never chartered.** `castCovertOperative`/`mintCovertMission` have ZERO call
+sites; `espionageMissions.js:13-20` says *"NOTHING UNDER src/ CALLS THIS FILE."*
+⭐ **ES-D — THE DISPATCHER — is the only espionage slice compilable at this HEAD, and
+everything else in the volume waits on it.** Charter it first.
+⚠ Also refused within ES-7: the KNOWLEDGE desk does not exist (IN-5 never landed — route to
+`events`, never grow `HERALD_SECTIONS`); the certification conversion is impossible and a
+live pin forbids a partial one; the envelopes are a SOAK PROGRAM (a forbidden dispatch
+unit); the DM verb is its own multi-thousand-line packet. **ES-6c should be re-filed OUT of
+ES as a corruption-volume wave** — the ousted prune deletes the state in the SAME TICK, so
+"retroactive" is unbuildable, and the leak carries no mission identity to name.
+
+TC-5b/c/d (mount, PNG goldens, skins) · ES-6b (blocked: its dispatcher wave
 is unchartered) · the corpus (GR-4+, IN-1+, TR/WF/POP/INT, WY, HB, WC, EP, site-coherence,
 slums, CV/TB/XW, first-paint) · IA-2 revalidation · **then the endgame in fixed order**:
 dark-complete → diagnostic soak → repairs → the owner's walk → light flags + THE ONE REGEN
