@@ -488,6 +488,47 @@
           "tests/domain/couplingRegistry.test.js",
           "tests/lint/couplingInclusion.walker.test.js"]
       ]
+    },
+    {
+      "id": "ES-5D",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5D.md",
+      "verifiedBase": "857e3a1ac6e5580bb1016fb644dab00f77038a34",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageProductStage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "REGISTER", "path": "src/lib/spatialUsage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageCareerCredit.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageCareerCreditDormancy.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "advanceLitLadder" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "applyGoalLifecycle" },
+        { "path": "src/domain/worldPulse/espionage/espionageProductStage.js", "symbol": "amendCovert" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a graded mission deposits and the ladder consumes it once" },
+        { "id": "A2", "case": "four dormancy fences including ladder-dark writing nothing" },
+        { "id": "A3", "case": "the one-tick window closes; a stale deposit is pruned unread" },
+        { "id": "A4", "case": "the grade map: exceeded 2x, met 1x, partial and empty zero, no debit" },
+        { "id": "A5", "case": "an id-less operative resolves to no credit without throwing" },
+        { "id": "A6", "case": "the identity bridge joins ladder nid to errand npcId" },
+        { "id": "A7", "case": "the spatial-ledger classification pin, two mutants" },
+        { "id": "A8", "case": "determinism and the hoisted-Map hot-path shape" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageCareerCredit.test.js",
+          "tests/property/espionageCareerCreditDormancy.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/lint/spatialLedgerCoverage.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
     }
   ]
 }

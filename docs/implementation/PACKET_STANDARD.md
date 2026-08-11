@@ -122,7 +122,8 @@ dispatch, all of these limits bind:
 
 - one behavior family;
 - at most one new persisted record family;
-- exactly one named writer for any state that changes;
+- exactly one named writer for any ONE state that changes (PER STATE, not per packet —
+  a handoff wave legitimately writes one state while reading another's);
 - at most one feature flag;
 - at most one user-facing surface;
 - at most two direct production consumers;

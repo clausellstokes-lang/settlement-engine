@@ -33,6 +33,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-7 | [`TC-4`](./packets/town-cartography/TC-4.md) | **LANDED** at `5a6f76fe`; do not redispatch | Fills the reserved v2 buildings layer: A-8 multiplicity, footprint packing inside parcels, dwelling fill, and dress — dark path byte-identical | any schema/contract change, per-class cohesion, TC-5..8, painter/labels, persistence, lit-surface tuning, soak |
 | LANDED-8 | [`ES-5b`](./packets/foreign-policy/ES-5B.md) | **LANDED** at `6c0238ad`; do not redispatch | Espionage absence discounts a faction's council weight and contest power — the bench grain, with its disclosed one-time bloc-math shift | the career grain (ES-5c), ES-6/7, chooser edits, a second bloc-weight spelling, tuning of ABSENT_W, any receipt or audience surface |
 | LANDED-9 | [`ES-5c`](./packets/foreign-policy/ES-5C.md) | **LANDED** at `c0447b8f`; do not redispatch | The espionage career register: absence discounts a defender's ladder standing, plus the vacuous ladder-writer guard it repairs | arm B (split to ES-5d), ES-6/7, contest-margin edits, `challengeScore`, tuning DEFENSE_WHEN_ABSENT, any ladder state write |
+| READY-10 | [`ES-5d`](./packets/foreign-policy/ES-5D.md) | **READY** | The career CREDIT: a graded mission deposits into the ladder's maintenance road via a one-tick ledger | architecture α, a persisted consume-once marker, ladder-dark writes, debits, tuning MISSION_CREDIT_MET, ES-6/7 |
 
 ## Authorized implementation infrastructure
 
