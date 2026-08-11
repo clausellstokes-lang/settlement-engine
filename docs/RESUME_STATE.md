@@ -158,56 +158,51 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `58436804`, mutex
-free, zero processes. ⚠ The heartbeat prompt's queue text is long stale; dispatch comes
-from THIS note.):**
+**Live board (BOTH slots FREE; build tree CLEAN at `9892eda1`; TWO packets READY).**
 
-1. **ES-6 AUTHOR LANE (Opus, draft-only) — in flight.** Unblocked because the ENTIRE ES-5
-   family landed today (5a doctrine, 5b `6c0238ad`, 5c `c0447b8f`, 5d `954592c0`), so every
-   sibling's "excluded: ES-6/7" fence has cleared.
-   ⚠⚠ **It carries the volume's four-in-a-row record of wrong design prose, each wrong
-   DIFFERENTLY**, and is told to treat every claim as a hypothesis: §3.11's reach did not
-   exist and had to be BUILT; §3.14 NAMED THE WRONG FILE; `rungExposure01` had NO SOURCE
-   while carrying half its term; and ES-5d's `tick-1` window was PROVABLY DEAD because both
-   passes run in one pulse — **a lag belongs to a PAIR, never to a file or a volume.**
-   ⚠ Told that "ES-6 has no charter of its own" is a COMPLETE result (ES-5b existed only in
-   a commit message). Report: tasks/a8eec8a7a4f1c4e03.output.
-2. **✅ TC-5 REFUSED AS FOUR PACKETS; TC-5a PROMOTED READY @ `8738f5ea`**
-   (validate:packets **13 / 1 READY**; memory/tc5-refused-as-four-and-the-hidden-persistence-gate.md).
-   Calibration was decisive, not argued: the EXISTING emitter `townMapDraw.js` is **264
-   effective lines alone** with no palette, variant, PNG or sub-tab. Split **5a** headless
-   draw-list + palette ROLES → **5b** mount + colour + degraded → **5c** PNG goldens →
-   **5d** skins, each just-in-time.
-   ⚠⚠ **THE SHARPEST FINDING — A UI ADDITION THAT WAS SECRETLY PERSISTENCE.**
-   `mapSubTabs.js`'s OWN DOCUMENTED extension point is `TOWN_MAP_VIEW_IDS`, **which IS the
-   persisted localStorage vocabulary**. Following the design's stated plan would have
-   turned a UI addition into a **PERSISTENCE-SHAPE change — owner-gated — discovered only
-   after landing.** ⭐ Cure: seat the painter as a **NON-PRESENTATION sub-tab like
-   `player`** — same outcome, no persisted vocabulary touched. **Take the door that is not
-   a gate.** ⭐ Lesson: **a documented extension point can be a gate in disguise; ask what
-   its list IS, not what it is called.**
-   ⚠⚠ **`illustrated` IS ALREADY TAKEN** (`src/design/townMapStyles.js:74` — a LIVE
-   PICKABLE lens with a paid `LENS_COUNT`, painting the LEGACY model). Two pictures called
-   "Illustrated" is the second-truth mode the design's own §1 forbids → id is `cartography`.
-   ⭐ **THE BUNDLE CEILING IS NOT THE BINDING CONSTRAINT** (measured): pair **385,137 of a
-   strict 400,000**, closure exactly 107 — but **every painter module is OUTSIDE the
-   compiler closure** and the contract already rules "NO COLOUR, EVER" with a live
-   validator. ⚠ The CSS margin is **FIVE BYTES** (19,795/19,800), not 4.5KB — and ⚠
-   **`stats.html` does not exist in this repo**; measure from the dist artifact.
-   ⚠⚠ **TWO CORRECTIONS TO LANDED DOCS, recorded not rewritten:** TC-4 §6.6 calls
-   `institutionalCatalog.js` forbidden-and-outside-the-closure — **it is already IN**, via
-   `institutionClassify.js:26`; sound hygiene, never byte protection, so **re-derive
-   forbidden lists FROM THE MEASURED CLOSURE**. And **my own brief was wrong twice** — I
-   cited §13b/§9b for TC-4 (it has §12b/§6.6) and sent the lane to a `stats.html` that
-   does not exist.
-   ⭐ TC-4's two-inconsistent-tables class was killed STRUCTURALLY: every vocabulary map
-   DERIVES its key set exact-set-both-ways with a THROWING accessor, and the draw-op
-   ceiling is an IDENTITY over the block's own counts — nothing that can drift.
-   **NEXT: dispatch TC-5a's implementation.**
+**✅ TC-5a READY @ `8738f5ea`** — see the prior entry: the painter's mount point was the
+PERSISTED localStorage vocabulary (a UI addition that was secretly owner-gated), and
+`illustrated` is already a live paid lens.
 
-Both carry the standing landing discipline IN THEIR OWN MANIFESTS (whole-census
-re-derivation + anchors for any new test file), the census-probe method that cannot move
-what it measures, and the two pre-existing gate reds to attribute rather than chase.
+**✅ ES-6 REFUSED AS THREE; ES-6a PROMOTED READY @ `9892eda1`** (validate:packets **14 / 2
+READY**). Four behavior families against a cap of one, 5 modified files against 3, a new
+belief key (owner-gated AND a breach of §1's zero-new-keys law), a Herald kind ES-7 owns,
+and a news producer inside another volume's file. Split: **6a** the leak now · **6b**
+vetting quality rides the DISPATCHER wave (its consumer is dead-headed) · **6c** the
+retroactive clause folds into ES-7.
+⭐ **THE FINDING THAT REFRAMES THE VOLUME — AND IT IS NOT A DEFECT: the charter reads the
+leash AT DISPATCH, and NO DISPATCH SITE EXISTS.** `espionageMissions.js:14-20` states
+outright *"NOTHING UNDER src/ CALLS THIS FILE"* and that this is the WR-10 dark-instrument
+shape ES-0 landed under, **deliberately preserved** — *"ES-1 builds the DOOR, not the
+traffic through it."* The dispatcher is a later wave's. So re-siting to the product stage
+is **the only live seam that exists**, not a workaround.
+⭐ **SEVEN design claims refuted** with file:line: no magic two-address sends
+(`landEspionageProduct` refuses `observer === subject`); no enemy-rumor-reach predicate
+exists at all; `BeliefRecord` is strictly two-party so "zero new surfaces" was impossible;
+the `espionage_exposed` clause refuted TWICE (zero matches, and `corruptionWeb` returns an
+empty news list on every path); `foreign_faction`/`foreign_org` leashes have ZERO writers.
+⛔ **THE HARD BLOCKER IS DISCHARGED AND DERIVED: `LEAK_TUNING.FIDELITY_W = 0.7`.** The
+sharp edge is `CAT_ADOPT_ACCURACY = 0.6`; at 0.7 the enemy's copy crosses it only when the
+home read was above ~0.857 — **a clear look leaks a conclusion the enemy can act on, a
+partial look leaks only that something happened**, which is exactly §3.13's "leak-only,
+silent success". ⚠⚠ A pin must prove BOTH SIDES of that boundary.
+⭐ **O8 is the sharpest of the ten: the leak-only guard MUST be a DIFFERENTIAL, never a
+token scan** — a token scan is the comment-convicts-itself trap in another costume. Assert
+that THE SUBJECT'S OWN OUTCOME IS BYTE-IDENTICAL with and without the leak. And **O2**:
+include the two-party existence leak, or **the patron-is-target case writes NOTHING.**
+⚠⚠ **THE VALIDATOR EXPOSED A REAL CONFLICT IN MY OWN LANDING DISCIPLINE**
+(memory/landing-discipline-collides-with-path-reservation.md): *"every packet adding a test
+file re-derives the census IN ITS OWN CHANGE"* is **unsatisfiable once TWO packets are
+READY** — the census file is one exact-pinned artifact and non-terminal packets reserve
+paths EXCLUSIVELY. **Ruled: first claimant (TC-5A) keeps it; later packets REPORT their
+five figures and the chair folds.** ⭐ A discipline every packet must satisfy on a SHARED
+artifact is a CHAIR obligation in packet's clothing.
+⚠ Two of my stale figures fixed here (the walker's derivation comment and INDEX both read
+19656; both now 19659 with the fold recorded). ⚠ And I broke a recorded law en route — a
+JSON round-trip reformatted the manifest (1,339 insertions against a real change of 36);
+restored from HEAD and redone as a string splice. **The law earned itself again.**
+
+**NEXT: dispatch TC-5a and ES-6a implementations** (both READY, non-overlapping file sets).
 
 **Ruled and sequenced (not blocked):**
 
