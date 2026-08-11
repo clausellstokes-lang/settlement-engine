@@ -107,7 +107,17 @@ an explicit "collect it yourself" order rather than re-dispatching, which burns 
 - **SCHEMA-5 MINT** (`tasks/a177c284ce931e4b1.output`) — **the act that greens the gate.**
   Five consolidated items. Expect a **COMMIT PAIR**, the first deliberately gate-red (the
   schema-4 precedent: `894325ff` then `2a7fb033`). ⛔ Never hand-edit the baseline JSON.
-- **ES-7 COMPILE** (`tasks/a08b2dfcbfebb03a3.output`) — draft-only, scratchpad `es7-`.
+  ⚠ **AT HANDOFF IT SHOWED ZERO LIVE PROCESSES WITH FOUR FILES DIRTY** — between runs, or
+  stopped without reporting (the recorded pattern). **Its WIP IS VAULTED at
+  `refs/preserved/schema5-mint-wip` (`697b5862`)** — `check-observed-shape-readers.mjs`,
+  `lib/observed-shape-baseline.mjs`, `migrate-observed-shape-readers.mjs`,
+  `observedShapeSentinel.test.js`. Recover any of them with
+  `git show refs/preserved/schema5-mint-wip:<path> > <path>`. ⛔ Never merge that ref.
+  **FIRST ACTION: send it a status demand** ("collect your own gate result; a background
+  run cannot wake you") before assuming anything about its state.
+- **ES-7 COMPILE** — ✅ **REPORTED AND REFUSED.** See §7: ES-7 is not dispatchable and
+  **ES-D (the dispatcher) is the only compilable espionage slice.** Draft at scratchpad
+  `es7-packet-draft-ES-7.md` with ten open items, each with a recommendation.
 
 ## 3. ⚠⚠ THE ONE ACTIVE RISK: two concurrent MEMORY.md compactions
 
