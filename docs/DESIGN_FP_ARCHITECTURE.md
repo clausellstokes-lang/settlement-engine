@@ -1396,6 +1396,24 @@ BUILT on the contest weight it actually has. The CAREER grain (§3.14's
 promotion-risk register into the ladder contest) is split to **ES-5c**, which
 compiles only after ES-5b lands (CR-ES5B-7) and is NOT re-gated.
 
+**ES-5c — THE ABSENCE AMENDMENT, THE CAREER GRAIN** (fourth slice, third half;
+rides the SAME CR-ES-1 signature, CR-ES5B-3, and is NOT separately owner-gated;
+ES §3.14). Charter: the PROMOTION-RISK REGISTER goes live — a rung-holder who
+is abroad, on a rung with windows open, with a live rivalry around him, defends
+his seat WEAKER. ⛔ §3.14's "the ladder CONTEST math … no new contest code" is
+FALSE as measured and names the WRONG FILE (the third such refuted reach claim
+in this volume): `npcLadderContest.js` has no defense term at all, so the
+composition lands at `npcLadderChallenge.js#defenseScore`, which already
+carries the exact multiplicative-weakening idiom and drives three live
+decisions. ES-5c writes NO state, mints NO persisted record, and takes ZERO
+edits in `npcLadderContest.js`. It also opens the FIRST espionage→ladder import
+edge in the repo, licensed by a new CPL-20 row — and repairs, as its one
+prevention guard, the scan that was supposed to police exactly that boundary
+and was measured VACUOUS (it forbade three identifiers that exist nowhere in
+`src/` while the real ladder writer went unguarded). The CREDIT grain
+(`freshMissionGradeFor` into the maintenance road) is split again, to
+**ES-5d**, whose substrate is fiction today.
+
 **ES-6 — THE DOUBLE AGENT** (fifth slice; degraded-dark when the corruption
 web is dark; ES §4). Charter: the leash read at dispatch (deterministic,
 keyed on the minted errand id) + the leak delivery (magic two-address sends;

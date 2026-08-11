@@ -264,11 +264,47 @@ describe('ES-3 the writer boundary — the products ride reconcileBelief, never 
   test('the ES module set writes NO ladder state, and only ONE of them writes the ledger', () => {
     const sources = espionageSources();
     // §3.14's ladder handoff is a READ consumed by the ladder's own maintenance; the ES set
-    // writes none of it. A scan for the ladder's writer names is the cheap, total form.
-    const ladderWriters = Object.entries(sources)
-      .filter(([, source]) => /\b(?:writeNpcLadder|setLadderState|npcLadderState\s*=)/.test(source))
-      .map(([file]) => file);
-    expect(ladderWriters).toEqual([]);
+    // writes none of it.
+    //
+    // ⭐ ES-5c REPAIRED THIS SCAN, AND THE REPAIR IS THIS PACKET'S ONE PREVENTION GUARD.
+    // As shipped it forbade `writeNpcLadder`, `setLadderState` and `npcLadderState =` —
+    // MEASURED: all three exist NOWHERE in src/, and the third could not even match the
+    // module's own import line because it requires an `=` after the token. Meanwhile the
+    // ladder's REAL persistence spelling went entirely unguarded, so an espionage leaf
+    // writing ladder state the way the ladder actually writes it left this assertion GREEN.
+    // ES-3's registry docstring cites this pin as PROOF of the boundary, and ES-5c opens the
+    // first espionage→ladder import direction in the repo — the guard stops being theoretical
+    // in exactly the commit that makes it matter, so it is made real here rather than later.
+    // Comments are stripped for the same reason the sibling scans strip them: the headers of
+    // this boundary STATE the law in words, and a raw scan would read the law as the offence.
+    const LADDER_WRITE_RE = new RegExp(
+      // the real writer/remover, keyed on the ledger name it addresses
+      String.raw`\b(?:set|drop)SpatialLedger\s*\([^;]{0,160}?['"]npcLadder['"]`
+      // …and a direct mutation of the ledger slot, which would bypass the writer entirely
+      + String.raw`|\bspatialLedgers\s*(?:\.\s*npcLadder\b|\[\s*['"]npcLadder['"]\s*\])\s*=`,
+    );
+    const ladderWritersOf = (set) => Object.entries(set)
+      .filter(([, source]) => LADDER_WRITE_RE.test(stripComments(source)))
+      .map(([file]) => file)
+      .sort();
+    expect(ladderWritersOf(sources)).toEqual([]);
+    // NON-VACUITY, ARM BY ARM — a guard that cannot be reddened is not a guard, and an
+    // alternative no plant reaches is an UNPINNED alternative. Each planted source carries
+    // one real way to write the ladder's ledger, and each must be named.
+    for (const [label, plant] of [
+      ['the writer', "setSpatialLedger(worldState, 'npcLadder', next);"],
+      ['the remover', "dropSpatialLedger(worldState, 'npcLadder');"],
+      ['a direct slot mutation', "worldState.spatialLedgers.npcLadder = next;"],
+      ['a computed slot mutation', "worldState.spatialLedgers['npcLadder'] = next;"],
+    ]) {
+      const planted = { ...sources, [`${ESPIONAGE_DIR}/espionageCareer.js`]: plant };
+      expect(ladderWritersOf(planted), `the scan is blind to ${label}`)
+        .toEqual([`${ESPIONAGE_DIR}/espionageCareer.js`]);
+    }
+    // …and the stripping really is what lets the honest headers stand: the SAME text inside a
+    // comment must NOT convict, or every module that documents the boundary indicts itself.
+    const commented = { ...sources, [`${ESPIONAGE_DIR}/espionageCareer.js`]: "// setSpatialLedger(worldState, 'npcLadder', next);" };
+    expect(ladderWritersOf(commented), 'a comment naming the writer was read as a write').toEqual([]);
     // §1's single-amender census: exactly one espionage module routes the errand ledger's
     // own writer, and it is the product stage. A second amender is a second answer to what
     // a mission learned.

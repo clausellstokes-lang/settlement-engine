@@ -3545,7 +3545,40 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // NOT the same read, and the difference between them IS the thing being measured.
     // That is the opposite of the previous re-derivation's situation and it is stated
     // rather than assumed away.
-    files: 2387, parked: 364, credited: 2023, titles: 19594, suiteTitles: 5535,
+    // ── RE-DERIVED 2026-08-11 BY THE OPUS ES-5c LANE, AT ca94438d + ES-5c's OWN EDIT ──
+    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2387/364/2023/19594/5535 →
+    // 2389/364/2025/19610/5543. ONE landing moved it — ES-5c, which mints the two test files
+    // its packet's manifest items 5 and 6 mandate — and the census is re-derived IN THE SAME
+    // CHANGE that moves it, because a new test file reds this walker immediately and a red
+    // walker is a DISABLED GUARD, not debt to hand on.
+    // ⚠⚠ ALL FIVE FIGURES RE-DERIVED IN ONE RUN, NONE PATCHED. The probe printed all five
+    // from THIS walker's own TEST_FILES scan and classifier, inside the existing census test
+    // and before its first assertion, so the sequence hazard — which stops the census at its
+    // first red figure and has now fired three recorded times — could not hide the other four
+    // behind `files`. The probe was a console.log only: it minted no title, and it is gone.
+    //   files      2387 -> 2389  (+2)
+    //   parked      364 ->  364  ( 0)  unchanged BY IDENTITY, not merely by count: this change
+    //                                  DELETES no test file and both files it adds are
+    //                                  CREDITED (credited moved +2, the same +2), so no file
+    //                                  parked and none unparked — an identity swap at constant
+    //                                  count is excluded by construction rather than by a
+    //                                  count check that could not see it
+    //   credited   2023 -> 2025  (+2)  the whole file-layer delta lands in credit, and
+    //                                  364 + 2025 = 2389 closes the file arithmetic
+    //   titles    19594 -> 19610 (+16)
+    //   suiteTitles 5535 -> 5543 (+8)
+    // ⭐ THE DELTA IS FULLY ATTRIBUTED, WHICH IS THE CONTROL THAT MATTERS. The recorded hazard
+    // here is that the title delta is NOT the added file — a previous cut predicted +23 and
+    // measured +39 because five already-credited files had quietly gained pins. Decomposed:
+    //   +7 titles, +5 suite … tests/domain/espionageCareer.test.js            (A1/A3/A4/A6 + the span pin)
+    //   +9 titles, +3 suite … tests/property/espionageCareerDormancy.test.js  (A2/A5/A7)
+    //   7+9 = 16 and 5+3 = 8, which is the WHOLE movement, closed with nothing left over.
+    // That exact closure IS the negative control: had any other file drifted a pin in this
+    // window, the aggregate would exceed the two files' own counts and the arithmetic above
+    // would not balance. This change also EDITS two existing test files
+    // (espionageGauntlet.test.js, espionageProducts.test.js) and it adds assertions to their
+    // EXISTING tests rather than new `test(` blocks, which is why they contribute zero here.
+    files: 2389, parked: 364, credited: 2025, titles: 19610, suiteTitles: 5543,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -406,6 +406,73 @@ export const ES5B_ABSENCE_BENCH_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-5c §3.14 — THE PROMOTION-RISK REGISTER, and ⭐ THE FIRST ESPIONAGE→LADDER EDGE IN THE
+ * REPO. At ES-5b's landing the ladder family held ZERO espionage references and the
+ * espionage family held zero ladder references (measured across all six files); this row
+ * licenses the direction opening for the first time. A rung-holder who is abroad, on a rung
+ * with windows open, with a live rivalry around him, defends his seat weaker — through
+ * `npcLadderChallenge.js`'s OWN defense score, in the same multiplicative shape the file
+ * already uses for the §11.4 three-body strain.
+ *
+ * ⚠⚠ ES-5b's `ES5B_ABSENCE_BENCH_COUPLING` DOES NOT LICENSE THIS PAIR, and the reason is
+ * mechanical rather than editorial: `licensingRows` joins a row to a live pair on the
+ * IMPORTER module, and that row's `read` names `factionCompetition.js#topFactionEntries`.
+ * A different importer needs its own row, so this one exists rather than leaning on a
+ * sibling that looks close enough. `read` below is the exact string the join reads.
+ *
+ * ⚠ THE DIRECTION IS THE SECOND `INFO→INTERIOR` UNDER CPL-20 AND THE FIRST TOUCHING THE
+ * LADDER. ES-3's `ES3_FLAW_DISTORTION_COUPLING` above already anchors CPL-20 in the
+ * OPPOSITE direction (`INTERIOR→INFO`, espionageTap reading npcLadderGoals). `pairId` stays
+ * CPL-20 — the volume's own INFO × INTERIOR anchor — because a wave never mints a
+ * twenty-third anchor where a canonical one fits.
+ *
+ * ⛔ NOTHING HERE WRITES LADDER STATE. The register is a DERIVED read and the espionage
+ * module set writes none of the ladder's own state — and as of ES-5c that claim is finally
+ * a FACT rather than a sentence: the scan in tests/domain/espionageProducts.test.js used to
+ * forbid three identifiers that exist NOWHERE in src/ while the real writer went unguarded,
+ * and ES-5c repairs it to match the real spelling and anchors it with a plant, in the very
+ * commit that first makes the boundary load-bearing.
+ *
+ * DARK ⇒ NOTHING: `careerRiskFor` returns 0 on one `espionageActive` read before it touches
+ * a world object, and the ladder gate is already the caller's, so a dark world — espionage-
+ * dark, ladder-dark or roads-dark — computes `defenseScore` BYTE-IDENTICALLY. The LIT shift
+ * is a DISCLOSED one-time ladder-outcome move under ⟨F6⟩, declared in the wave's commit and
+ * fenced by its own golden pair — never a silent re-record.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES5C_CAREER_LADDER_COUPLING = couplingRow({
+  couplingId: 'CPL-20.INFO_TO_INTERIOR.ES-5c.career_register',
+  pairId: 'CPL-20',
+  direction: 'INFO→INTERIOR',
+  read: 'src/domain/worldPulse/npcLadderChallenge.js#defenseScore',
+  // DERIVED, NOT HAND-KEYED (the address-rot class). The address names the COUPLING'S
+  // OBSERVABLE CONSEQUENCE, not its intermediate arithmetic — the same trade ES-5b's row
+  // makes when it names `selectedOutcomes` rather than the raw presence share.
+  //
+  // ⚠⚠ `absenceDecay` ITSELF IS NEVER PERSISTED, AND NO ESPIONAGE RECEIPT IS MINTED HERE.
+  // It is computed inside `defenseScore`, handed out on the returned `ChallengeEvent`, read
+  // once, and dropped. What survives the tick is what the discounted defense CAUSED: the
+  // ladder's own succession beat, which `ladderBeat` stamps with `impactKind: 'npc_ladder'`
+  // and the moved `dScore` folded into its severity and reason sentence, and which
+  // `compactImpactDigest` carries into the persisted pulse record. Addressing the in-memory
+  // receipt instead would name a surface no reader can ever reach. ES-7 owns the receipted
+  // voice; this wave mints no surface of its own.
+  //
+  // Naming no Herald kind is deliberate — the desk walker's `kind=` scan therefore makes no
+  // routing join — on ES-5b's own precedent.
+  receiptField: 'pulseRecord.impactDigest[].{headline,summary,severity,score}',
+  counterforce: 'src/domain/worldPulse/espionage/espionageGauntlet.js#gatherOrGovernRead',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+    'npcLadderEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-5c',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -417,4 +484,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES3_FLAW_DISTORTION_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES5B_ABSENCE_BENCH_COUPLING,
+  ES5C_CAREER_LADDER_COUPLING,
 ]);

@@ -22,6 +22,10 @@ import { acquiredTraitsOf, oppositionOf } from './npcGrowthKernel.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { num, asObject, round4, compareCodepoint, LADDER_TUNING } from './npcLadderState.js';
+// ES-5c §3.14 — the espionage career register, as an INFO leaf this INTERIOR file reads.
+// The edge is one-directional and licensed by the CPL-20 row ES5C_CAREER_LADDER_COUPLING;
+// ⛔ that leaf must never import back (the barrel-hop hazard closes the loop).
+import { careerRiskFor } from './espionage/espionageCareer.js';
 
 // ── Tuning (JUDGMENT — say "veto" to retune; the CADENCE dial is soak-certified) ──
 export const CHALLENGE_TUNING = Object.freeze({
@@ -50,6 +54,22 @@ export const CHALLENGE_TUNING = Object.freeze({
   POWER_TRAJECTORY_EPS: 0.5,
   // (§11.4) mounting a challenge weakens your own defense to this fraction for the advance.
   DEFENSE_WHEN_CHALLENGING: 0.6,
+  // (ES-5c §3.14) THE ABSENCE DISCOUNT: how much of a defense the promotion-risk register
+  // can take off a rung-holder who is abroad. Ruled from its own SIBLING, not from
+  // espionage: DEFENSE_WHEN_CHALLENGING is 0.6 for a defender merely DIVIDED by challenging
+  // elsewhere, and physical absence must weaken defense STRICTLY MORE than divided
+  // attention — you cannot work a room you are not in — so this sits one step below it on
+  // the family's own grid. ⚠ It reaches 0.5 by a DIFFERENT route than the espionage
+  // family's ABSENT_W; the coincidence is not a transfer and neither may be tuned to match
+  // the other. ⛔ CHAIR-AUTHORED DARK TUNING — an implementer may not retune it.
+  DEFENSE_WHEN_ABSENT: 0.5,
+  // (ES-5c §3.14) The span the register's rung-exposure term is normalised over: the number
+  // of DISTINCT reasons `openWindows` can push. It lives here, beside the window list it
+  // counts, so the divisor and the vocabulary can never drift apart — and
+  // tests/domain/espionageCareer.test.js DERIVES that count from `openWindows` itself and
+  // asserts equality, so a ninth window reason is a VISIBLE red instead of a silently
+  // compressed exposure. ⛔ CHAIR-SET; not a tuning dial.
+  RUNG_EXPOSURE_WINDOW_SPAN: 8,
   // Trait weights (§4d): tenacious aids challenge; cautious aids defense.
   TENACIOUS_BONUS: 1.2,
   CAUTIOUS_BONUS: 1.2,
@@ -99,7 +119,8 @@ export function clashOf(npc, faction) {
 }
 
 /** @typedef {{ nid: string, npc: Record<string, unknown>, standing: number, stigma: boolean,
- *   grudgeVsDefender: number, isChallenging: boolean, rungIndex: number, rungCount: number }} Combatant */
+ *   grudgeVsDefender: number, isChallenging: boolean, rungIndex: number, rungCount: number,
+ *   promotionRisk01: number }} Combatant */
 /** @typedef {{ faction: unknown, factionRising: boolean, factionFalling: boolean,
  *   worldState: Record<string, unknown> }} ChallengeCtx */
 
@@ -145,6 +166,13 @@ export function defenseScore(d, ctx) {
   // §11.4 THE THREE-BODY: a defender who is itself straining upward defends weakened.
   receipt.threeBodyPenalty = d.isChallenging ? -round4(Math.max(0, score) * (1 - T.DEFENSE_WHEN_CHALLENGING)) : 0;
   if (d.isChallenging) score *= T.DEFENSE_WHEN_CHALLENGING;
+  // ES-5c §3.14 THE PROMOTION-RISK REGISTER: a holder who is ABROAD defends weaker, in the
+  // same multiplicative shape as the three-body strain above. 0 unless espionage AND the
+  // ladder are both lit and the holder is really away, so a dark world computes this line
+  // to exactly 0 and the score is byte-identical.
+  receipt.absenceDecay = d.promotionRisk01 > 0
+    ? -round4(Math.max(0, score) * T.DEFENSE_WHEN_ABSENT * d.promotionRisk01) : 0;
+  score -= Math.max(0, -receipt.absenceDecay);
   return { score: round4(Math.max(0, score)), receipt };
 }
 
@@ -262,6 +290,7 @@ export function resolveFactionChallenges(a) {
     return /** @type {Combatant} */ ({
       nid, npc: npcByNid.get(nid) || {}, standing: num(npcs[nid]?.stock, 0),
       stigma: !!npcs[nid]?.stigma, rungIndex: i, rungCount, grudgeVsDefender: 0, isChallenging: false,
+      promotionRisk01: 0, // ES-5c: stamped after openWindows, exactly as isChallenging is stamped
     });
   };
 
@@ -294,6 +323,12 @@ export function resolveFactionChallenges(a) {
     );
     const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid), freshLieExposed.has(defender.nid), contestedGoal, factionCaptured, blocBacked);
     if (!windows.length) continue;
+    // ES-5c §3.14: the register, stamped on the record `defenseScore` already receives (the
+    // file's own post-mk() idiom, as isChallenging is stamped above) rather than widening an
+    // exported signature. The exposure term is the ladder's OWN vulnerability vocabulary —
+    // the window list built one line up — normalised over the span that counts it.
+    defender.promotionRisk01 = careerRiskFor(worldState, defender.npc, defender.nid, weeks,
+      clamp01(windows.length / T.RUNG_EXPOSURE_WINDOW_SPAN));
     const challenger = mk(i);
     challenger.grudgeVsDefender = grudgeSevOf(npcs[challenger.nid], defender.nid);
     const cEval = challengeScore(challenger, ctx);

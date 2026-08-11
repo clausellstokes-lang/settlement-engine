@@ -754,6 +754,42 @@ describe('ES-2 — gather or govern, and the captor', () => {
     });
     expect(read.dwellRisk01).toBe(catchChance01({ ...factors, intervalIdx: 2 }));
     expect(read.termsAbsent).toEqual(['promotionRisk']);
+
+    // ── ES-5c ARM C — THE CARRIER-CONDITIONAL FLIP, BOTH ARMS ON ONE FIXTURE ────────────
+    // CR-ES5B-7 required this term to be flipped. It is flipped CONDITIONALLY, because the
+    // function still has no production caller: an unconditional flip would leave the
+    // parameter permanently `undefined ⇒ 0`, minting exactly the silent zero the docblock
+    // forbids. So the term is ABSENT until a carrier really supplies it, and PRESENT the
+    // moment one does — which is the honest reading of both states.
+    const carried = gatherOrGovernRead({
+      dwell: { intervalIdx: 1 }, appetite01: 1, demandMet: false, factors, promotionRisk01: 0.4,
+    });
+    expect(carried.termsAbsent).toEqual([]);
+    // THE NEGATIVE CONTROL, so the empty list is a SUPPLIED term rather than a drifted
+    // producer: the SAME fixture with the carrier omitted still declares the absence, and it
+    // is re-read here rather than trusted from four lines up.
+    expect(gatherOrGovernRead({
+      dwell: { intervalIdx: 1 }, appetite01: 1, demandMet: false, factors,
+    }).termsAbsent).toEqual(['promotionRisk']);
+    // ⭐ THE FLIP IS ON CARRIAGE, NOT ON MAGNITUDE. A carrier of exactly ZERO is still a
+    // carrier — the term is declared PRESENT — and it changes no number, which is what
+    // separates "declared absent" from "folded as zero" in one assertion.
+    const carriedZero = gatherOrGovernRead({
+      dwell: { intervalIdx: 1 }, appetite01: 1, demandMet: false, factors, promotionRisk01: 0,
+    });
+    expect(carriedZero.termsAbsent).toEqual([]);
+    expect(carriedZero.dwellRisk01).toBe(read.dwellRisk01);
+    // The folded term RAISES the risk weighed against appetite, never lowers it.
+    expect(carried.dwellRisk01).toBeGreaterThan(read.dwellRisk01);
+    // …and it moves the DECISION, which is the claim: at an appetite between the two risks
+    // the same spy gathers without the carrier and governs with it. A man about to lose his
+    // rung at home goes home.
+    const between = (read.dwellRisk01 + carried.dwellRisk01) / 2;
+    const at = (extra) => gatherOrGovernRead({
+      dwell: { intervalIdx: 1 }, appetite01: between, demandMet: false, factors, ...extra,
+    }).choice;
+    expect(at({})).toBe('gather');
+    expect(at({ promotionRisk01: 0.4 })).toBe('govern');
   });
 
   test('a met demand and the hard cap are both first-class reasons', () => {

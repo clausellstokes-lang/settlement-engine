@@ -51,6 +51,7 @@ import {
   ES3_FLAW_DISTORTION_COUPLING,
   ES3_GRADIENT_AMENDER_COUPLING,
   ES5B_ABSENCE_BENCH_COUPLING,
+  ES5C_CAREER_LADDER_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
@@ -602,6 +603,12 @@ describe('CW-0 coupling registry', () => {
     // minting a twenty-second pair: the standoff's flaw distortion extends the ladder's
     // `riskAppetiteOf` instead of re-parsing personality words.
     expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([ES3_FLAW_DISTORTION_COUPLING]);
+    // ES-5c is the SECOND INFO→INTERIOR row under CPL-20 and the FIRST touching the ladder.
+    // It needs its own row rather than ES-5b's because `licensingRows` joins on the IMPORTER
+    // module, and the two rows name different importers — so this pair is licensed here or
+    // it is not licensed at all.
+    expect(couplingRowsFor('CPL-20', 'INFO→INTERIOR'))
+      .toEqual([ES5B_ABSENCE_BENCH_COUPLING, ES5C_CAREER_LADDER_COUPLING]);
     // ES-5 OPENS A DIRECTION on a pair that was already busy the other way: WR-4 and WR-6
     // both read INFO→WAR across CPL-4, and the doctrine stage is the first read back the
     // other way — the espionage doctrine spelling its moral axis with the estate's ONE
@@ -621,6 +628,8 @@ describe('CW-0 coupling registry', () => {
       // ES-5b appends in wave order (the array is wave-ordered, not alphabetical), so the
       // bench row lands after ES-5's doctrine row rather than beside its ES5-prefixed name.
       ES5B_ABSENCE_BENCH_COUPLING,
+      // ES-5c appends the career register — the FIRST espionage→ladder edge in the repo.
+      ES5C_CAREER_LADDER_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

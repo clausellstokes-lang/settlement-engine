@@ -1273,6 +1273,46 @@ machinery delivers).
 Dark worlds byte-identical; the lit shift disclosed under the same golden
 pair discipline as §3.11 (⟨F6⟩ the seam-row-6 precedent, not L9).
 
+⛔ AMENDED IN PLACE BY ES-5c (2026-08-11) — "NO NEW CONTEST CODE" ABOVE IS
+FALSE AS MEASURED, AND IT NAMES THE WRONG FILE. This is the THIRD reach
+claim in this volume measured false at source (§3.11 was refuted on both
+halves at ES-5b), and the correction is recorded rather than quietly
+routed around. `npcLadderContest.js` has NO defense term, no
+holder/challenger asymmetry, and no rung defense of any kind: its
+`contestMargin` is a single SYMMETRIC function applied identically to both
+sides, its only consumer is the `tieBreak` on the `convergent` +
+both-goals-fired branch, and the entire OPPOSED family — where the words
+"holder" and "raiser" actually live — never reads the margin at all.
+Composing there would have meant a four-surface signature cascade to
+deliver a term that fires only when two rivals' goals fire the same week.
+⭐ THE MACHINERY DOES EXIST, IN A FILE THIS SECTION NEVER NAMES:
+`npcLadderChallenge.js#defenseScore` already carries the exact
+multiplicative-weakening idiom for §11.4's three-body strain ("a defender
+who is itself straining upward defends weakened"), already holds the npc
+record and the worldState with ZERO signature change, and drives THREE
+live decisions rather than one tie-break — whether a challenge is
+hopeless, the attempt RATE, and whether it clears the sustained margin.
+ES-5c therefore lands the register at `defenseScore`, as a field STAMPED
+on the Combatant record the function already receives (the file's own
+post-construction idiom, exactly as `isChallenging` is stamped), and
+`npcLadderContest.js` takes ZERO edits. Only the DEFENSE is discounted;
+`challengeScore` is untouched, because this section's sentence is about
+defending and discounting the challenge too would be a second behaviour
+nothing asks for.
+⭐ THE CAREER GRAIN SPLITS IN TWO, and only the first half is ES-5c's.
+"Rung exposure" had NO SOURCE anywhere in `src/` — the chair authored it
+as `clamp01(openWindows(...).length / RUNG_EXPOSURE_WINDOW_SPAN)`, stated
+in the ladder's own vulnerability vocabulary, with the span pinned to its
+producer by a test that DERIVES the window-reason count instead of
+restating it. The CREDIT half ("success writes standing/momentum credit"
+through the maintenance road) is split to **ES-5d**: its substrate is
+fiction today — `momentum` does not exist on `LadderStanding` at all,
+`maintainMarks` never writes `stock`, no `stock` writer accepts input from
+outside the ladder family, and the mission grade is never persisted, so
+nothing of it survives a tick boundary. ES-5d must BUILD a persisted
+carrier, an identity bridge, a ladder-owned stock writer, and a coupling
+row — a wave, not a composition.
+
 ---
 
 ## §4 THE WAVES — ES-0..ES-7, dependency-ordered, every one DARK
@@ -1500,9 +1540,17 @@ ratifies the slice rather than rewriting the reasoning. The mapping, binding:
 **ES-5a** = the doctrine STAGE + the dispatch cadence + `wariness01` + the IN-3
 handshake — **LANDED at `41ddeae0`**. **ES-5b** = `presentShare01` and the bench
 grain (§3.11): the council-weight discount at `rulingBlocOf` AND the contest
-weight at `topFactionEntries`. **ES-5c** = THE CAREER CONSUMERS (§3.14) below —
-NOT compiled, and it inherits the naming drift `promotionRiskOf` →
-`promotionRisk01Core`. ⛔ "BOTH GRAINS … IN THE SAME COMMIT" below is the ES-5a
+weight at `topFactionEntries`. **ES-5c** = THE CAREER REGISTER (§3.14's arms A
+and C) — compiled, promoted READY 2026-08-11, and BUILT: `careerRiskFor` in the
+new `espionageCareer.js` INFO leaf, consumed by
+`npcLadderChallenge.js#defenseScore` (NOT `npcLadderContest.js` — see the
+amendment under §3.14) and by `espionageGauntlet.js#gatherOrGovernRead`, whose
+declared-absent promotion term now flips CARRIER-CONDITIONALLY. It inherits the
+naming drift `promotionRiskOf` → `promotionRisk01Core`. **ES-5d** = THE CAREER
+CREDIT (§3.14's arm B, `freshMissionGradeFor` into the maintenance road) —
+split out because it is a second behaviour family needing a named state writer
+the register does not, and because its substrate does not exist yet; compile it
+just-in-time after ES-5c lands. ⛔ "BOTH GRAINS … IN THE SAME COMMIT" below is the ES-5a
 draft's sentence and is SUPERSEDED: the grains ship in two commits, under ONE
 CR-ES-1 signature (CR-ES5B-3). ⛔ And §3.11's "with no further code" claim is
 FALSE as measured — `factionCompetition.js` holds no bloc read at all, so ES-5b

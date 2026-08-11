@@ -105,6 +105,7 @@ import {
   catchChance01,
   covertCompetence01,
   dwellRamp,
+  round4,
   wariness01Core,
 } from './espionageMath.js';
 // ES-5 — THE TELL'S OTHER HALF. The predicate arrives from a leaf with no imports at all,
@@ -121,6 +122,16 @@ import { observerClusterIds, overdueForeignNotables } from './espionageWariness.
  * honest. Seam row 3's one-spelling clause.
  */
 export const COVERT_HOLD_CAUSE = FOREIGN_GUEST_HOLD_COVERT_CAUSE;
+
+// ES-5c §3.4b — the two declared-absence states of `gatherOrGovernRead`, frozen at MODULE
+// level so the read returns the SAME array identity every call and cannot be mutated by a
+// consumer. Which one is returned is decided by whether a carrier really supplied the term.
+// ⚠ BOTH ARE ANNOTATED: an un-annotated `Object.freeze([])` infers `readonly never[]`, which
+// the domain-strict checker refuses as an implicit `any[]` (TS7005/TS4104).
+/** @type {ReadonlyArray<string>} */
+const PROMOTION_ABSENT = Object.freeze(['promotionRisk']);
+/** @type {ReadonlyArray<string>} */
+const EMPTY_TERMS = Object.freeze([]);
 
 /**
  * ES-2's own constants. Kept OUT of `ESPIONAGE_TUNING` deliberately: that export is ES-0's
@@ -386,18 +397,32 @@ export function stayDetectionRoll({ errandId, factors, dwell } = {}) {
  * operative's temperament, and it is fixed while the risk climbs monotonically, so every
  * rooted stay terminates BY CONSTRUCTION rather than by a cap.
  *
- * ⚠ THE PROMOTION TERM IS DECLARED ABSENT, NOT FOLDED AS ZERO. §3.14's register is the
- * "govern" half of this trade and its ladder-contest consumer is Q1-gated to ES-5. Folding a
- * silent zero would narrate a risk no machinery delivers; naming it keeps the arm honest and
- * makes the day it arrives a visible change.
+ * ⚠ THE PROMOTION TERM IS DECLARED ABSENT WHENEVER NO CARRIER SUPPLIES IT — NEVER FOLDED AS
+ * A SILENT ZERO (ES-5c, CR-ES5B-7, the EP-q carrier-conditional precedent). §3.14's register
+ * is the "govern" half of this trade, and ES-5c built it: a rung-holder abroad on a contested
+ * rung really does weigh a career risk against his appetite for one more week of listening.
+ * But this function still has NO PRODUCTION CALLER — wiring it without also RE-TIMING the
+ * spy's departure is route surgery on a live journey, declared out of scope at
+ * espionageProductStage.js. So an UNCONDITIONAL flip would leave the parameter permanently
+ * `undefined` ⇒ folded as 0, which is exactly the silent zero this paragraph used to forbid,
+ * dressed as progress. The term is therefore declared PRESENT only when a finite carrier
+ * really arrives, and ABSENT otherwise — the honest reading of both states, and the day the
+ * arm is wired is still a visible change.
  *
- * @param {{dwell?: unknown, appetite01?: unknown, demandMet?: unknown, factors?: unknown}} args
+ * The folded term RAISES the risk weighed against appetite (probabilistic-or, so it is
+ * monotone and cannot exceed 1), which makes `govern` strictly more likely and never less:
+ * a man about to lose his rung at home goes home.
+ *
+ * @param {{dwell?: unknown, appetite01?: unknown, demandMet?: unknown, factors?: unknown,
+ *   promotionRisk01?: unknown}} args
  * @returns {{choice: 'gather'|'govern', dwellRisk01: number, termsAbsent: ReadonlyArray<string>,
  *   reason: string}}
  */
-export function gatherOrGovernRead({ dwell, appetite01, demandMet, factors } = {}) {
+export function gatherOrGovernRead({ dwell, appetite01, demandMet, factors, promotionRisk01 } = {}) {
   const stop = recordOf(dwell);
-  const absent = Object.freeze(['promotionRisk']);
+  const carriedRisk = Number(promotionRisk01);
+  const carried01 = Number.isFinite(carriedRisk) ? Math.max(0, Math.min(1, carriedRisk)) : null;
+  const absent = carried01 === null ? PROMOTION_ABSENT : EMPTY_TERMS;
   if (demandMet === true) {
     return { choice: 'govern', dwellRisk01: 0, termsAbsent: absent, reason: 'demand_met' };
   }
@@ -427,9 +452,14 @@ export function gatherOrGovernRead({ dwell, appetite01, demandMet, factors } = {
   });
   const appetite = Number(appetite01);
   const bar = Number.isFinite(appetite) ? Math.max(0, Math.min(1, appetite)) : 0;
-  return dwellRisk01 < bar
-    ? { choice: 'gather', dwellRisk01, termsAbsent: absent, reason: 'risk_under_appetite' }
-    : { choice: 'govern', dwellRisk01, termsAbsent: absent, reason: 'risk_over_appetite' };
+  // The career term folds in as a probabilistic OR, so the weighed risk is monotone in both
+  // arms, never leaves 0..1, and is EXACTLY `dwellRisk01` when no carrier arrives (or when
+  // the carrier reads 0) — which is what keeps the no-carrier path byte-identical to base.
+  const weighed = carried01 === null ? dwellRisk01
+    : round4(dwellRisk01 + (1 - dwellRisk01) * carried01);
+  return weighed < bar
+    ? { choice: 'gather', dwellRisk01: weighed, termsAbsent: absent, reason: 'risk_under_appetite' }
+    : { choice: 'govern', dwellRisk01: weighed, termsAbsent: absent, reason: 'risk_over_appetite' };
 }
 
 /**
