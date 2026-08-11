@@ -150,36 +150,38 @@ is not a verdict.**
    lock/unlock line in the existing rows' voice and the owner vetoes or rewrites it; the
    wiring proceeds either way.
 
-**Live board (BOTH slots FREE; build tree clean at `0f85ced0`):**
+⚠⚠ **THE GATE IS RED BY DESIGN AND IT IS NOT ANY LANE'S.**
+`tests/property/generatorGoldenMaster.test.js` fails on **25 of 525 rows** because the
+owner-approved same-seed correction landed at `0f85ced0` with the golden **REGISTERED,
+NOT RE-RECORDED** (SHIFT-2 in `GOLDEN_SHIFT_LEDGER_MAIN.md`, all 25 hashes recorded),
+pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, investigate
+it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
+until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**✅✅ THE OWNER-APPROVED SAME-SEED CORRECTION IS LANDED @ `0f85ced0`.** Ports now
-generate (2 of 2 port-to-port road edges correctly prefer sea) and 20 of 80 structural
-officers carry an institution link where none ever did.
-⭐ **`linkedInstitutionIds` was THE WRONG IDENTITY, not a late binding** — measured
-**3632 of 3632 institutions carry NO `id`**. The join law is `i?.id || i?.name`
-(`propagate.js:478`; `EventComposer.jsx:332` builds the DM picker identically), so a
-GENERATED link and a DM-AUTHORED link are now **the same string**.
-⭐⭐ **THE FORCED-FIELD TECHNIQUE PROVED CONFINEMENT rather than asserting it:** re-hash
-every settlement with the new field forced back to `[]` and require the OLD manifest to
-reproduce — **525/525 rows, 0 unexplained**. Exactly one golden file moves, 25 of 525
-rows. Use this for every future same-seed change.
-⚠ **THE GOLDEN IS REGISTERED, NOT RE-RECORDED** (this tree's own
-`GOLDEN_SHIFT_LEDGER_MAIN.md` discipline): manifest byte-identical, `generatorGoldenMaster`
-**RED BY DESIGN** pending the owner's batched `UPDATE_GOLDEN`, SHIFT-2 appended with all
-25 before→after hashes. **A registered red with a one-command cure is neither debt nor a
-regression.** The `headcounts.npcs` canary held — no NPCs added.
-⭐ The `generationCoherenceReceipt` residual is CLOSED BY DRIVING, not reading: bytes
-identical on all six probed, findings 0 (far from the 25 cap). OSR shrink ZERO, confirmed.
-⚠⚠ **FOUR OF THE TWENTY NEW LINKS ARE ABSURD — and the repair only made it VISIBLE.**
-`/council|court|hall|government/` matches any "…hall", so a **Lord Mayor links to
-"Gambling halls"**. A PRE-EXISTING `FACTION_ROLES` defect; the lane REFUSED to narrow it,
-correctly — that would be **a second, unapproved same-seed shift beside an approved one.**
-**OWNER_DECISION_QUEUE §14 recommends fixing it under the SAME `UPDATE_GOLDEN` so the seed
-line moves ONCE.**
-⚠ Recorded untouched, each its own lane: `magicFormsPractitioner.js:125,243` (same defect
-class, no name fallback) · three stale refs to a nonexistent test file ·
-`deriveRegionalState.js`'s dead `tradeRouteAccess on save` · five duplicated `instId()`
-minters disagreeing with the canonical join.
+**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `0f85ced0`, mutex
+free, zero processes):**
+
+1. **ES-5d IMPLEMENTATION LANE (Opus) — in flight.** The READY packet (`4a9b6cf4`) with
+   §13b's nine rulings closed. ⚠⚠ **This wave BUILDS STATE, so the lifecycle IS the
+   risk** — the one-tick deposit's **PRUNE is the path that fails silently if forgotten**
+   (a ledger accumulating while nothing consumes it is a leak wearing a receipt), and
+   every path must be DRIVEN, not reasoned. ⛔ `MISSION_CREDIT_MET = 0.15` and the grade
+   map (exceeded 2× / met 1× / partial+empty ZERO / no debit) are chair-set and untunable.
+   ⚠⚠ The classification pin must be BEHAVIORAL with TWO mutants because
+   `spatialLedgerCoverage` reds on an unclassified key but a TRACKED classification
+   **FAILS OPEN**. Report: tasks/ac07e514ba7187d83.output.
+2. **OWNER-RULED DISPLAY CLUSTER (Opus) — in flight.** All three from queue §12:
+   **DELETE** the `capital`/`isCapital` reads (the concept does not exist in the world
+   model; ⛔ no overlord visual — uncommissioned; ⚠ every quoted `'capital'` is the
+   SIZE-TIER token meaning Metropolis and must survive); **SWITCH ON** the exit-road
+   labels for every existing settlement, with a measured report of exactly what now
+   renders; and **THE LOCKS SPLIT** — `locks.institutions` DELETED (dead on every end,
+   but the lane must VERIFY the zero-reader claim itself, since a prior lane got a
+   verdict wrong by name-grep alone and dynamic writes are invisible to it), and
+   `locks.factions` **KEPT AND WIRED** so a locked governing faction can actually resist
+   a coup. ⚠⚠ **THE LOCK COPY IS THE OWNER'S** — the lane drafts the four strings in the
+   existing rows' voice and presents them as a **DRAFT FOR VETO**; the wiring lands
+   either way. Report: tasks/a6b34099a0ed00c5f.output.
 
 **Ruled and sequenced (not blocked):**
 
