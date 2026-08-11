@@ -160,10 +160,39 @@ until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
 **Live board (TWO lanes out; build tree at `73f00920`):**
 
-1. **ES-5d IMPLEMENTATION LANE (Opus) — still building**, 10 files dirty and reserved.
-   ⚠⚠ Its risk is the LIFECYCLE: the one-tick deposit's **PRUNE is the path that fails
-   silently** — a ledger accumulating while nothing consumes it is a leak wearing a
-   receipt. Report: tasks/ac07e514ba7187d83.output.
+1. **✅✅ ES-5d IS LANDED @ `954592c0` + records `53fb10da`/`0dc40691` — THE ES-5
+   AMENDMENT IS COMPLETE ACROSS FOUR WAVES** (5a doctrine, 5b bench, 5c register, 5d
+   credit). validate:packets **12 packets / 0 READY**. Zero moved goldens (enumerated
+   list EMPTY, five dormancy goldens green); 20 files / 228 tests exit 0; both
+   typecheckers at exact floors with ZERO debt added; the anchor walker gains NO NEW ROWS
+   because both new test files use zero scanned negative matchers.
+   ⚠⚠ **THE PACKET'S HANDOFF WINDOW WAS PROVABLY DEAD — AND I RULED IT IN** (deviation
+   D7; memory/a-handoff-window-can-be-provably-dead.md). §5/§5b/§6.1, case A5 AND the
+   design volume all mandated `depositTick === tick - 1`. But
+   `simulateCampaignWorldPulse` calls the depositing pass and the consuming chain
+   **unconditionally, in that order, in ONE function body, both handed the SAME tick** —
+   so a `tick-1` window prunes T−1's records before the consumer at T ever looks. **THE
+   FOLD NEVER FIRES ON ANY WORLD WHILE EVERY UNIT PIN STAYS GREEN.** A feature that
+   ships, passes, and does nothing.
+   ⭐ **How the error was inherited, and the lesson: the packet TRANSFERRED a REAL lag
+   from a DIFFERENT writer/reader PAIR** (the whereabouts mirror, written by
+   `advanceRoads` LAST). **A lag is a property of a PAIR, never of a file or a volume.**
+   Cure was machinery, not vigilance: copy the same-tick twin that already sat ONE LINE
+   ABOVE (`readGratitudeBondEvents` — "generosity ran earlier THIS tick"), and **A5 now
+   ASSERTS THE PULSE CALL ORDER AT SOURCE** so a reorder REDS instead of silently killing
+   the feature.
+   ⭐ **THE CLASSIFICATION MUTANTS PROVED THE FAILS-OPEN HAZARD LIVE:** dropping the
+   TRACKED key reds the coverage walker — but dropping the `counts` entry or the
+   `MOVER_PRESENCE` row leaves **the walker GREEN** and only the behavioral pin bites.
+   Exactly why CR-ES5D-O4 demanded a behavioral pin with two mutants.
+   ⭐ Lifecycle DRIVEN not reasoned; the prune arm is pinned — after a credit-free pass
+   the key is gone AND THE NAMESPACE WITH IT. End-to-end on a REAL minted mission:
+   `{"ashford:npc.reeve":{"credit":0.15,"depositTick":13,"grade":"met"}}`.
+   ⭐⭐ **AND ITS CENSUS RE-DERIVATION NAMED THE FILE NOBODY COULD IDENTIFY** —
+   `tests/lib/roadNetworkIndex.test.js`, parked via `test.each()` by MY `0f85ced0`
+   landing and never banked. **That closes my open census question.** New row
+   `2392/365/2027/19656/5552`, derived TWICE independently (live probe + archive-plus-
+   delta) — and **that agreement IS the negative control**.
 2. **EXIT-ROAD LABELLING LANE (Opus) — dispatched.** ⭐ **THE OWNER APPROVED THE
    RECOMMENDATION: generation will NOT bind neighbours** (queue §15a, `951662de`).
    **The reasoning, so it is not re-litigated:** neighbours are a CAMPAIGN-LAYER concept
