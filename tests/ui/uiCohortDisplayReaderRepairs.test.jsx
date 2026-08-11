@@ -26,9 +26,22 @@
  * A pin that only asserts the NEW depth works would stay green if someone
  * re-added the old dead leg as an extra OR-arm — which is exactly how this class
  * regenerates. So every positive here is paired with a NEGATIVE CONTROL that
- * feeds ONLY the dead spelling and asserts the affordance stays DARK. The pair
- * is the pin: the positive catches the read being deleted, the negative catches
- * it being widened back to the never-written key.
+ * feeds the dead spelling and asserts the affordance stays DARK. The pair is the
+ * pin: the positive catches the read being deleted, the negative catches it
+ * being widened back to the never-written key.
+ *
+ * ── ⚠⚠ AND WHY EVERY DENIAL CARRIES A LIVENESS ANCHOR ────────────────────────
+ * A denial against a RENDERED SURFACE has a second way to pass that has nothing
+ * to do with the defect: the surface may not have rendered at all. An unmounted
+ * card, a card whose selection lookup missed, a block gated off — each yields an
+ * empty string that satisfies every absence question ever asked of it. That is
+ * the drift-neutered class (tests/lint/negativeAssertionAnchor.walker.test.js),
+ * and it is especially sharp HERE, because these pins exist to prove a dead read
+ * stays dead: a dead read and a dead RENDERER are indistinguishable from the
+ * outside. So each denial runs through tests/helpers/anchoredNegatives.js with a
+ * live positive control that travels the SAME path as the thing being denied —
+ * a member render for the campaign row, a live sibling ROW inside the very block
+ * whose other row must stay dark. Break the renderer and the anchor reds first.
  *
  * SCOPE NOTE (pin 1): the membership scan itself — String-normalized, active-
  * campaign-only — is already pinned in tests/store/campaignMembershipIdNormalization.js.
@@ -39,6 +52,7 @@
 
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const { useStore, ctx } = vi.hoisted(() => {
   const state = {
@@ -125,13 +139,30 @@ describe('ProvenanceBlock — the Campaign row resolves through membership, not 
   test('NEGATIVE CONTROL: a save.campaignId pointing at a campaign it is not a MEMBER of shows nothing', () => {
     // The old reader trusted this field and would print the name. Membership is
     // the only truth: 's9' is in no campaign's settlementIds, so the row is empty.
-    const { container } = render(<ProvenanceBlock save={{ id: 's9', campaignId: 'c1' }} />);
-    expect(container.textContent).not.toContain('The Iron Marches');
+    //
+    // ANCHOR: the control render is a genuine MEMBER driven through this same
+    // component and this same selector, so it prints the name. Without it, a
+    // ProvenanceBlock that rendered no Campaign row at all — or a mocked selector
+    // that stopped resolving — would satisfy the denial while the defect this pin
+    // guards (trusting save.campaignId again) sat wide open.
+    const memberRender = render(<ProvenanceBlock save={{ id: 's1' }} />).container.textContent;
+    const campaignIdOnly = render(<ProvenanceBlock save={{ id: 's9', campaignId: 'c1' }} />).container.textContent;
+    expectPresentThenAbsent(
+      memberRender, campaignIdOnly, 'The Iron Marches',
+      'campaign row: member render, then a non-member carrying the dead campaignId field',
+    );
   });
 
   test('a non-member save leaves the row empty rather than naming a campaign', () => {
-    const { container } = render(<ProvenanceBlock save={{ id: 's2' }} />);
-    expect(container.textContent).not.toContain('The Iron Marches');
+    // ANCHOR as above, and for the same reason: the member render proves the name
+    // is reachable through this component at all, so the empty row for 's2'
+    // measures NON-MEMBERSHIP rather than a Campaign row that no longer renders.
+    const memberRender = render(<ProvenanceBlock save={{ id: 's1' }} />).container.textContent;
+    const nonMemberRender = render(<ProvenanceBlock save={{ id: 's2' }} />).container.textContent;
+    expectPresentThenAbsent(
+      memberRender, nonMemberRender, 'The Iron Marches',
+      'campaign row: member render, then a save belonging to no campaign',
+    );
   });
 });
 
@@ -222,19 +253,40 @@ describe('PlacementDetailCard — the Culture/Terrain block MOUNTS off the resol
     // reading a bare `s.terrain`: the resolver guards every leg with
     // terrainOrNull, so the sentinel resolves to null. The old raw read would
     // have printed the word "auto" to the user.
+    //
+    // ANCHOR: the fixture also carries config.culture, so the block still MOUNTS
+    // (it is gated on `culture || terrain`) and its Culture row renders off the
+    // same resolved-config read the terrain leg uses. The dark Terrain row is
+    // therefore the sentinel being REFUSED — not the card failing to select, not
+    // the block gating itself off, which is exactly how a denial against this
+    // surface goes vacuous. Both sentinel legs are fed at once: the top-level
+    // `terrain` an imported dossier can carry, and config.terrainOverride, the
+    // one leg the engine itself writes verbatim.
     ctx.state.savedSettlements = [{
       id: 's1',
       name: 'Aldermoor',
-      settlement: { name: 'Aldermoor', tier: 'town', terrain: 'auto', config: { terrainOverride: 'auto' } },
+      settlement: {
+        name: 'Aldermoor', tier: 'town', terrain: 'auto',
+        config: { culture: 'germanic', terrainOverride: 'auto' },
+      },
     }];
-    expect(render(<PlacementDetailCard />).container.textContent).not.toContain('Terrain:');
+    expectAbsentWithAnchor(
+      render(<PlacementDetailCard />).container.textContent,
+      'Terrain:', 'Culture:', "the 'auto' sentinel resolves to null inside a MOUNTED block",
+    );
   });
 
-  test('NEGATIVE CONTROL: the never-written CULTURE spellings must NOT mount the block', () => {
+  test('NEGATIVE CONTROL: the never-written CULTURE spellings must NOT light the Culture row', () => {
     // `culture` and `cultureName` have no writer at settlement ROOT — the engine
     // persists the resolved culture at config.culture (resolveConfig.js). A red
     // here means a dead leg was re-added and the row is mounting on a key the
     // engine cannot produce.
+    //
+    // ANCHOR: the fixture carries config.terrainType — the engine-written terrain
+    // spelling — so the block MOUNTS and its Terrain row renders. The denial is
+    // therefore about the CULTURE row specifically staying dark INSIDE a live
+    // block, which is a strictly sharper claim than the one this test made when
+    // an unmounted block (or an unrendered card) would have satisfied it too.
     //
     // ⚠ TERRAIN IS DELIBERATELY NOT ASSERTED DARK HERE. A top-level `terrain` is
     // a leg resolveSettlementTerrain OWNS on purpose (its docstring: "the legacy
@@ -245,9 +297,15 @@ describe('PlacementDetailCard — the Culture/Terrain block MOUNTS off the resol
     ctx.state.savedSettlements = [{
       id: 's1',
       name: 'Aldermoor',
-      settlement: { name: 'Aldermoor', tier: 'town', culture: 'nordic', cultureName: 'Nordic' },
+      settlement: {
+        name: 'Aldermoor', tier: 'town', culture: 'nordic', cultureName: 'Nordic',
+        config: { terrainType: 'riverside' },
+      },
     }];
-    expect(render(<PlacementDetailCard />).container.textContent).not.toContain('Culture:');
+    expectAbsentWithAnchor(
+      render(<PlacementDetailCard />).container.textContent,
+      'Culture:', 'Terrain:', 'root-level culture spellings have no writer',
+    );
   });
 });
 
