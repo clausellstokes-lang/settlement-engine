@@ -158,51 +158,39 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (BOTH slots FREE; build tree CLEAN at `9892eda1`; TWO packets READY).**
+**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `9892eda1`, mutex
+free, zero processes. ⚠ The heartbeat prompt's queue text is long stale; dispatch comes
+from THIS note.):**
 
-**✅ TC-5a READY @ `8738f5ea`** — see the prior entry: the painter's mount point was the
-PERSISTED localStorage vocabulary (a UI addition that was secretly owner-gated), and
-`illustrated` is already a live paid lens.
+1. **TC-5a IMPLEMENTATION LANE (Opus) — in flight.** The painter's HEADLESS half: a pure
+   draw-list plus palette ROLES. Capsule `866b97bc`. ⭐ **It HOLDS the census reservation**,
+   so the whole-census re-derivation is its own to satisfy in-change.
+   ⚠⚠ Its two hazards: ⛔ **NO COLOUR, EVER** — the contract rules it and a live
+   `rejectRawColour` validator enforces it, so a colour literal is a hard validation error,
+   not a lint warning; and ⚠⚠ **KEEP OUT OF THE BOUNDED CLOSURE** — the pair sits at
+   **385,137 of a strict 400,000** with the closure at exactly **107 members**, and every
+   painter module is currently OUTSIDE it, which is the entire reason this packet is cheap.
+   **One careless import drags a family in.** C7 proves zero new transitive edges.
+   ⭐ Its structural cure carries: every vocabulary map DERIVES its key set exact-set-both-
+   ways with a THROWING accessor, and the draw-op ceiling is an IDENTITY over real counts —
+   nothing hand-maintained, nothing that can drift.
+   Report: tasks/a0642cb5a04234802.output.
+2. **ES-6a IMPLEMENTATION LANE (Opus) — in flight.** The double agent's leak.
+   ⛔ **It does NOT hold the census reservation** — it MEASURES and REPORTS its five figures
+   and I fold them, per the collision ruling.
+   ⚠⚠ Its four hazards: ⛔ `FIDELITY_W = 0.7` is chair-set and untunable, and **A4 must
+   prove BOTH SIDES of the adoption boundary**; ⭐ **A6's silent-success guard MUST be a
+   DIFFERENTIAL, never a token scan** (a token scan passes when the leak is absent for the
+   wrong reason and convicts prose) — assert the subject's own outcome is BYTE-IDENTICAL
+   with and without the leak; ⭐ **A3's two-party existence leak is mandatory or the
+   patron-is-target case WRITES NOTHING**; and ⚠⚠ the corruption-web→products pair is
+   **SAME TICK**, so a `tick-1` window would be dead exactly as ES-5d's was — **a lag
+   belongs to a PAIR, never a file.** ⛔ No new belief key (owner-gated + a §1 breach).
+   Report: tasks/a89881302de45a7b0.output.
 
-**✅ ES-6 REFUSED AS THREE; ES-6a PROMOTED READY @ `9892eda1`** (validate:packets **14 / 2
-READY**). Four behavior families against a cap of one, 5 modified files against 3, a new
-belief key (owner-gated AND a breach of §1's zero-new-keys law), a Herald kind ES-7 owns,
-and a news producer inside another volume's file. Split: **6a** the leak now · **6b**
-vetting quality rides the DISPATCHER wave (its consumer is dead-headed) · **6c** the
-retroactive clause folds into ES-7.
-⭐ **THE FINDING THAT REFRAMES THE VOLUME — AND IT IS NOT A DEFECT: the charter reads the
-leash AT DISPATCH, and NO DISPATCH SITE EXISTS.** `espionageMissions.js:14-20` states
-outright *"NOTHING UNDER src/ CALLS THIS FILE"* and that this is the WR-10 dark-instrument
-shape ES-0 landed under, **deliberately preserved** — *"ES-1 builds the DOOR, not the
-traffic through it."* The dispatcher is a later wave's. So re-siting to the product stage
-is **the only live seam that exists**, not a workaround.
-⭐ **SEVEN design claims refuted** with file:line: no magic two-address sends
-(`landEspionageProduct` refuses `observer === subject`); no enemy-rumor-reach predicate
-exists at all; `BeliefRecord` is strictly two-party so "zero new surfaces" was impossible;
-the `espionage_exposed` clause refuted TWICE (zero matches, and `corruptionWeb` returns an
-empty news list on every path); `foreign_faction`/`foreign_org` leashes have ZERO writers.
-⛔ **THE HARD BLOCKER IS DISCHARGED AND DERIVED: `LEAK_TUNING.FIDELITY_W = 0.7`.** The
-sharp edge is `CAT_ADOPT_ACCURACY = 0.6`; at 0.7 the enemy's copy crosses it only when the
-home read was above ~0.857 — **a clear look leaks a conclusion the enemy can act on, a
-partial look leaks only that something happened**, which is exactly §3.13's "leak-only,
-silent success". ⚠⚠ A pin must prove BOTH SIDES of that boundary.
-⭐ **O8 is the sharpest of the ten: the leak-only guard MUST be a DIFFERENTIAL, never a
-token scan** — a token scan is the comment-convicts-itself trap in another costume. Assert
-that THE SUBJECT'S OWN OUTCOME IS BYTE-IDENTICAL with and without the leak. And **O2**:
-include the two-party existence leak, or **the patron-is-target case writes NOTHING.**
-⚠⚠ **THE VALIDATOR EXPOSED A REAL CONFLICT IN MY OWN LANDING DISCIPLINE**
-(memory/landing-discipline-collides-with-path-reservation.md): *"every packet adding a test
-file re-derives the census IN ITS OWN CHANGE"* is **unsatisfiable once TWO packets are
-READY** — the census file is one exact-pinned artifact and non-terminal packets reserve
-paths EXCLUSIVELY. **Ruled: first claimant (TC-5A) keeps it; later packets REPORT their
-five figures and the chair folds.** ⭐ A discipline every packet must satisfy on a SHARED
-artifact is a CHAIR obligation in packet's clothing.
-⚠ Two of my stale figures fixed here (the walker's derivation comment and INDEX both read
-19656; both now 19659 with the fold recorded). ⚠ And I broke a recorded law en route — a
-JSON round-trip reformatted the manifest (1,339 insertions against a real change of 36);
-restored from HEAD and redone as a string splice. **The law earned itself again.**
-
-**NEXT: dispatch TC-5a and ES-6a implementations** (both READY, non-overlapping file sets).
+Both know the two pre-existing gate reds to attribute rather than chase, that no exit
+status is trusted unless they captured it themselves, and that a background run cannot
+wake a stopped lane.
 
 **Ruled and sequenced (not blocked):**
 
