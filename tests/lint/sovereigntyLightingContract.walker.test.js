@@ -3678,7 +3678,30 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // reuse the snapshot above, do not re-derive from a dirty live tree, and do not "fix"
     // this row by absorbing another lane's WIP. Until that fold lands, this arm reds in the
     // shared working tree for a FOREIGN reason, not for this packet's.
-    files: 2395, parked: 365, credited: 2030, titles: 19732, suiteTitles: 5568,
+    // ⭐ TC-5b-i FOLD (2026-08-11) — RE-DERIVED AND RE-RECORDED WHOLE, in the same
+    // change that moves it (CR-TC5BI-6 ruled shape (a): the lane that moves a shared
+    // census folds it in the commit that moves it). CAUSE: TC-5b-i adds exactly two
+    // test files, and nothing else in this packet can move a census figure — it ships
+    // two production leaves with ZERO production importers, so no existing suite
+    // changed and the built bundle is byte-identical.
+    //   +13 titles, +5 suite … tests/lib/townCartographyBlock.test.js      (C1/C3/C5/C7/C8)
+    //   + 8 titles, +3 suite … tests/hooks/useTownCartographyBlock.test.jsx (C2/C4/C6)
+    // Both files are CREDITED, not parked: every test is registered straight-line, the
+    // only loops sit inside an `it` or in a module-scope helper, and there is no
+    // `.each()`. That is asserted by `credited` moving +2 in step with `files` — the
+    // check that would have caught TC-5a's parked-file incident.
+    // ⭐ THE NEGATIVE CONTROL, derived twice and agreeing on all five exactly: a probe
+    // INSIDE this test before its first assertion (so it minted no title and could not
+    // move what it measures) read 2397/365/2032/19753/5576, and `frozen row + this
+    // lane's measured per-file delta` gives 2395+2 / 365+0 / 2030+2 / 19732+21 /
+    // 5568+8 — the same five, with NOTHING left over. Had a foreign lane drifted a
+    // title inside this window, the live reading would have exceeded the derivation.
+    // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time the tree
+    // carried four foreign modified files (docs/DESIGN_FP_ARCH_GR.md,
+    // docs/SITE_COHERENCE_PLAN.md, docs/SOL_QUEUE.md, docs/implementation/INDEX.md) and
+    // ZERO foreign test files, tracked or untracked — so no other lane's uncommitted
+    // titles are frozen into this row.
+    files: 2397, parked: 365, credited: 2032, titles: 19753, suiteTitles: 5576,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
