@@ -3619,7 +3619,61 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // gained pins) — this time that drift is +7 titles, and it is NAMED above rather than
     // absorbed. ⛔ Whoever re-records next must re-derive all five the same way: while any
     // arm is red this census STOPS MEASURING, so the arms behind it may be anything at all.
-    files: 2392, parked: 365, credited: 2027, titles: 19659, suiteTitles: 5552,
+    // ── TC-5a RE-RECORD (2026-08-11): ALL FIVE RE-DERIVED IN ONE RUN, AND THE WHOLE
+    // ── DELTA IS THIS LANE'S — MEASURED PER FILE, CLOSING WITH NOTHING LEFT OVER ────────
+    //   files      2392 -> 2393  (+1)   parked 365 -> 365 (+0)   credited 2027 -> 2028 (+1)
+    //   titles    19659 -> 19696 (+37)  suiteTitles 5552 -> 5560 (+8)
+    //   +34 titles, +7 suite … tests/domain/townCartographyPaint.test.js   (NEW: C1-C6, C8)
+    //   + 3 titles, +1 suite … tests/domain/townCartographyDeterminism.test.js (C7 + the
+    //                          two paint leaves' correct positive; an ALREADY-CREDITED
+    //                          file, so it moves titles without moving `files`)
+    //   34+3 = 37 and 7+1 = 8, which is the WHOLE movement. 365 + 2028 = 2393 closes the
+    //   file arithmetic, and `parked` does not move because the new file is CREDITED.
+    //
+    // ⚠ THE NEW FILE WAS PARKED ON ITS FIRST CUT, AND THAT IS WORTH KEEPING. It scored
+    // 0 live titles against its 34 tests — `TEST_UNREGISTERED:it` x16 plus
+    // `SUITE_NOT_STRAIGHT_LINE:describe` x4 — because four of its suites registered their
+    // tests from inside a `for` loop. A loop in a describe BODY is not straight-line
+    // registration, so every test under it is unregistered and the whole file drops out of
+    // the evidence layer, silently and while passing. It was the only parked file among the
+    // nine domain/townCartography suites, which is how the outlier was spotted. The cure was
+    // to hoist each loop into a module-scope helper and register every test straight-line;
+    // the suite count is unchanged at 34. ⛔ Whoever adds a table-driven suite here must
+    // re-measure rather than assume it lands in credit.
+    //
+    // ⭐⭐ THE NEGATIVE CONTROL, and it is what makes this a MEASUREMENT rather than a
+    // re-wording. The five figures were derived TWICE, independently: once by probing this
+    // live tree (a `console.log` INSIDE this test, before its first assertion, so the probe
+    // minted no title and could not move what it measured), and once as
+    // `frozen row + this lane's measured per-file delta`. The two agree on all five exactly
+    // — 2392+1, 365+0, 2027+1, 19659+37, 5552+8. Had any other file drifted a pin inside
+    // this window, the live reading would have EXCEEDED the frozen-plus-delta derivation
+    // and the two would have disagreed.
+    // ⚠ A CONCURRENT LANE (ES-6a) HELD UNCOMMITTED WORK IN THIS TREE AT MEASUREMENT TIME,
+    // and it was checked rather than assumed harmless: its edit to
+    // tests/domain/couplingRegistry.test.js is +10 lines that touch ZERO registration
+    // lines, with `it(`/`test(` steady at 12 and `describe(` steady at 2 between HEAD and
+    // the working copy. So it contributes zero to all five figures, and it is NOT the
+    // constant-count identity swap that hazard warns about — the counts are equal AND no
+    // registration line moved.
+    // ⛔⛔ THEN, MID-SESSION, THAT LANE BEGAN ADDING ITS OWN TEST FILES AS UNTRACKED WORK,
+    // and this row deliberately DOES NOT include them. The row above is
+    // `committed base + TC-5a ONLY`, which is the correct fold for THIS packet's commit.
+    // The live working tree therefore reads HIGHER than this row, and the excess was
+    // measured and attributed rather than absorbed: at the moment TC-5a measured, the only
+    // foreign test file was tests/domain/espionageLeak.test.js, the live reading was
+    // 2394 / 365 / 2029 / 19706 / 5564, and the excess over this row was exactly +1 file,
+    // +0 parked, +1 credited, +10 titles, +4 suite — which is precisely what that one file
+    // carries by itself (10 titles, 4 suite titles, no park reason), closing with NOTHING
+    // left over.
+    // ⚠⚠ THOSE LIVE FIGURES ARE A SNAPSHOT AND ARE ALREADY STALE: tests/property/
+    // espionageLeakDormancy.test.js appeared afterwards, and both foreign files were still
+    // mid-write (the test ratchet's SCOPE SENTINEL caught them producing no measurable
+    // test). So whoever folds ES-6a must RE-MEASURE that lane's delta and ADD it — do not
+    // reuse the snapshot above, do not re-derive from a dirty live tree, and do not "fix"
+    // this row by absorbing another lane's WIP. Until that fold lands, this arm reds in the
+    // shared working tree for a FOREIGN reason, not for this packet's.
+    files: 2393, parked: 365, credited: 2028, titles: 19696, suiteTitles: 5560,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

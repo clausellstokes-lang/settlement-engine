@@ -27,9 +27,9 @@
  *
  * @enforced-by this file
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -63,18 +63,62 @@ function codeOnly(source) {
     .replace(/`(?:[^`\\]|\\.)*`/g, '``');
 }
 
+/**
+ * Resolve one relative specifier the way the bundler would, for the closure walk.
+ * @param {string} fromFile @param {string} spec @returns {string|null}
+ */
+function resolveRelative(fromFile, spec) {
+  if (!spec.startsWith('.')) return null;
+  const base = resolve(dirname(fromFile), spec);
+  for (const candidate of [base, `${base}.js`, `${base}.jsx`,
+    join(base, 'index.js'), join(base, 'index.jsx')]) {
+    if (existsSync(candidate) && statSync(candidate).isFile()) return candidate;
+  }
+  return null;
+}
+
+/**
+ * The transitive STATIC import closure of a source file, repo-relative. Copied from
+ * tests/build/mapTabShellLazy.test.js's walk so C7 proves the bundle exclusion WITHOUT
+ * needing a build: a one-hop "does the compiler import the painter" check is satisfiable
+ * through any innocent intermediary, and only the whole graph answers the real question.
+ * @param {string} entryFile @returns {string[]}
+ */
+function sourceClosure(entryFile) {
+  const seen = new Set([entryFile]);
+  const queue = [entryFile];
+  while (queue.length) {
+    const file = queue.shift();
+    const code = withoutComments(readFileSync(file, 'utf-8'));
+    const specs = new Set();
+    for (const m of code.matchAll(/(?:^|[^.\w])import\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) {
+      specs.add(m[1]);
+    }
+    for (const spec of specs) {
+      const resolved = resolveRelative(file, spec);
+      if (resolved && !seen.has(resolved)) { seen.add(resolved); queue.push(resolved); }
+    }
+  }
+  return [...seen].map((p) => relative(ROOT, p).replace(/\\/g, '/'));
+}
+
 describe('TC-2 determinism: the seed family is total', () => {
   test('the package actually has sources to scan (the scan is not vacuous)', () => {
     expect(SOURCES.length).toBeGreaterThanOrEqual(5);
     expect(SOURCES).toContain('cartographySynthesis.js');
-    // TC-3a's two leaves, TC-3b's one and TC-4's two travel every package scan below;
-    // naming them here means a rename or a relocation reds HERE rather than silently
-    // emptying the coverage.
+    // TC-3a's two leaves, TC-3b's one, TC-4's two and TC-5a's two travel every package
+    // scan below; naming them here means a rename or a relocation reds HERE rather than
+    // silently emptying the coverage.
     expect(SOURCES).toContain('cartographyPlan.js');
     expect(SOURCES).toContain('cartographyWards.js');
     expect(SOURCES).toContain('cartographyParcels.js');
     expect(SOURCES).toContain('cartographyMultiplicity.js');
     expect(SOURCES).toContain('cartographyBuildings.js');
+    expect(SOURCES).toContain('cartographyPaint.js');
+    expect(SOURCES).toContain('cartographyPaintRoles.js');
   });
 
   test('every seed in the family synthesizes byte-identically twice', () => {
@@ -241,7 +285,8 @@ describe('TC-2 determinism: the draw ledger', () => {
     // box" repair the design explicitly does not own. TC-4's packing joins the list:
     // its shrink ladder is a FIXED three-rung `for`, never a retry.
     for (const name of ['cartographyPlan.js', 'cartographyWards.js', 'cartographyParcels.js',
-      'cartographyMultiplicity.js', 'cartographyBuildings.js']) {
+      'cartographyMultiplicity.js', 'cartographyBuildings.js',
+      'cartographyPaint.js', 'cartographyPaintRoles.js']) {
       const code = codeOnly(readSource(name));
       expect(/\bwhile\s*\(/.test(code), name).toBe(false);
       expect(/\bdo\s*\{/.test(code), name).toBe(false);
@@ -253,8 +298,11 @@ describe('TC-2 determinism: the draw ledger', () => {
     // multiplicity resolver is deliberately ABSENT from this second list: it is
     // closed-form arithmetic carrying no loop at all, and demanding a `for` there
     // would be a false anchor — it would red the day the file got simpler.
+    // TC-5a's ROLE leaf is absent for exactly the same reason: it is a data table,
+    // and its one loop is table CONSTRUCTION that a simpler spelling would remove.
+    // Only the paint leaf, which walks the block's rows, genuinely owes a `for`.
     for (const name of ['cartographyPlan.js', 'cartographyWards.js',
-      'cartographyParcels.js', 'cartographyBuildings.js']) {
+      'cartographyParcels.js', 'cartographyBuildings.js', 'cartographyPaint.js']) {
       expect(/\bfor\s*\(/.test(codeOnly(readSource(name))), name).toBe(true);
     }
   });
@@ -280,6 +328,68 @@ describe('TC-2 determinism: the draw ledger', () => {
     const wards = withoutComments(readSource('cartographyWards.js'));
     expect(wards).toContain('input.namingPools');
     expect(wards).toContain('scenePointInPolygon');
+  });
+});
+
+describe('TC-5a: the paint leaves are pure adapters the compiler cannot reach', () => {
+  const PAINT_LEAVES = ['cartographyPaint.js', 'cartographyPaintRoles.js'];
+
+  test('neither paint leaf mints a fork label or digests anything', () => {
+    // THE CORRECT POSITIVE for these two, in place of the two scans they must NOT
+    // join. Both are presentation adapters: they mint NO fork label and digest
+    // NOTHING, so adding them to the `carto:` label scan or the sceneDigest positive
+    // would force an invented label and a digest call that exist only to satisfy a
+    // test — new entropy, for nothing. The TC-4 leaf carries BOTH, so it anchors both
+    // negatives and proves each scan is live rather than empty.
+    const anchorLabels = withoutComments(readSource('cartographyBuildings.js'));
+    const anchorCode = codeOnly(readSource('cartographyBuildings.js'));
+    expect(anchorLabels).toMatch(/'carto:[^']*'/);
+    expect(anchorCode).toMatch(/\bsceneDigest\s*\(/);
+    for (const name of PAINT_LEAVES) {
+      const source = withoutComments(readSource(name));
+      // Per-iteration liveness: an emptied or renamed leaf would satisfy both
+      // absences below without anything reding.
+      expect(source, name).toMatch(/^export function /m);
+      // anchored: cartographyBuildings.js matches this exact pattern above, so the scan is live
+      expect(source, name).not.toMatch(/'carto:[^']*'/);
+      // anchored: cartographyBuildings.js matches this exact pattern above, so the scan is live
+      expect(codeOnly(readSource(name)), name).not.toMatch(/\bsceneDigest\s*\(/);
+    }
+  });
+
+  test('C7 — neither leaf is in the manifest compiler\'s transitive static closure', () => {
+    // CR-TC3B-BYTES, proved at the SOURCE layer so it runs on every gate with no build.
+    // The danger was never the painter's size — it is any edge that drags it INTO the
+    // bounded worker/compiler pair. The anchor is the TC-4 leaf, which IS in this
+    // closure: it travels the same walk, so a resolver that silently found nothing
+    // reds on the anchor instead of passing every exclusion vacuously.
+    const closure = sourceClosure(join(ROOT, 'src/domain/townScene/compileTownSceneManifest.js'));
+    expect(closure.length).toBeGreaterThan(50);
+    for (const leaf of PAINT_LEAVES) {
+      expectAbsentWithAnchor(
+        closure,
+        `src/domain/townCartography/${leaf}`,
+        'src/domain/townCartography/cartographyBuildings.js',
+        'compileTownSceneManifest transitive static closure',
+      );
+    }
+  });
+
+  test('the paint leaves import nothing outside their permitted sets', () => {
+    // THE COUPLING-PAIR TRAP: a new module is always a new importer, and one careless
+    // edge is what would put these leaves inside the closure the test above excludes
+    // them from. The permitted sets are the packet's §6.1/§6.2 enumerations.
+    const permitted = {
+      'cartographyPaintRoles.js': ['../townScene/cartographyContract.js', './cartographyPlan.js'],
+      'cartographyPaint.js': ['./cartographyPaintRoles.js', './cartographyPlan.js',
+        '../townScene/cartographyContract.js'],
+    };
+    for (const name of PAINT_LEAVES) {
+      const code = withoutComments(readSource(name));
+      const specifiers = [...code.matchAll(/from\s+'([^']+)'/g)].map((match) => match[1]);
+      expect(specifiers.length, name).toBeGreaterThan(0);
+      expect(specifiers.filter((spec) => !permitted[name].includes(spec)), name).toEqual([]);
+    }
   });
 });
 
