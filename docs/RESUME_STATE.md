@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:42:14 EDT
+**Generated:** 2026-08-11 15:51:12 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e1e9fd6a` | **14** |
-| ledger (main) | `review-fixes-2026-07-08` | `72750864` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `a2b3c97b` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 58200: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T154045` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T155020` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T154045
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T155020
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -64,12 +64,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
-9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -230,7 +230,23 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    MEMORY.md FOLD executed lawfully — the ES-5d two-bullet block moved VERBATIM to
    archive-2026-08-11-index-fold-2.md with a pointer left; index now 17,167 B (under the
    ~17KB ceiling), zero broken links (verified by script).
-8. **Lane I (read-only draft, Opus) — the SCHEMA-6 MINT CHARTER**, dispatched ~16:10:
+8. **Lane I — ✅ COMPLETE (~16:50): the SCHEMA-6 CHARTER is drafted and RULED
+   (CR-S6-1..9).** The mint = items 1-5+8 with the globals/`toLocaleString` items built
+   as POST-FILTERS M11/M12 (the detector is byte-frozen — a BUILTIN_MEMBERS edit is
+   impossible), inserted into the walker's hand-composed chain IN THE SAME COMMIT.
+   **M10 = SATISFIED-BY-M8** (its exemplars were repaired at `aed0fc0e` — vacuity caught
+   before machinery); the **verifier fence re-point REFUSED** (three source refutations);
+   the **ladder pin → micro-act** (module-private symbols + census fold vs a gate-red
+   commit). Ruling A: granted by the existing gate-3 alias clause, corrected figures.
+   Ruling B: chair's provisional (a) REFUTED → class (b)/M9, **GATED on filing the
+   `aiChronicleContext.js:21` live bug first** (AI-Chronicle world lane permanently
+   empty). Ruling C: eventLog = leaf-name CROSS-HOME substitution (26/33/47, corpus
+   hardcodes `eventLog: []` at :613); joins NO bucket — the corpus-coverage mint is its
+   own later act. **H26: bank-by-rule = the STANDING DESIGN at schema 7,** never mixed
+   into this shrink. Projected: PURE SHRINK 1977→1956 / 1396→1383 / 385→381, zero new.
+   Charter: scratchpad `laneI-SCHEMA6-charter.md` (956 lines). Execution = task #11
+   (after promotion); micro-act batch = task #10 (after the gate receipt).
+   (Original brief for the record:) dispatched ~16:10:
    one consolidated charter for the accumulated detector docket (globals exclusion ·
    `toLocaleString` in BUILTIN_MEMBERS · the M9 why-string naming a nonexistent function ·
    M6 docstring mechanism correction · cohortNotice wording · **M10 the AUTHORED-INPUT
