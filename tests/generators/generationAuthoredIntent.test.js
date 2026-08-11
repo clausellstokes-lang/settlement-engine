@@ -274,3 +274,34 @@ describe('authored intent survives the complete generation pipeline', () => {
     ]));
   });
 });
+
+/**
+ * osr-authored-spelling — the provenance predicates read only spellings a
+ * writer produces.
+ *
+ * Both predicates carried an `|| record.authored === true` disjunct. No writer
+ * in this repo has ever produced a bare `authored` key on a generation entity:
+ * `src/domain/userEdits.js` writes `_authored`, and the `source: 'authored'`
+ * spelling is recognised by the AUTHORED_SOURCES arm. A quoted-string sweep of
+ * src/ finds the bare key only inside a compendium archetype COUNT block, which
+ * is not a generation entity. The dead disjunct was removed; these pins freeze
+ * that as a DECISION, so re-adding the spelling has to be argued rather than
+ * slipped back in, and the two live spellings cannot silently stop working.
+ */
+describe('osr-authored-spelling — only the written provenance keys are recognised', () => {
+  it('recognises `_authored` and `source: "authored"`, and NOT a bare `authored`', () => {
+    // Positives first: these prove the predicate is live and correctly keyed, so
+    // the negative below measures exclusion rather than a dead accessor.
+    expect(isAuthoredGenerationEntity({ _authored: true })).toBe(true);
+    expect(isAuthoredGenerationEntity({ source: 'authored' })).toBe(true);
+    // anchored: the two positives above drive the same predicate on the same shape
+    expect(isAuthoredGenerationEntity({ authored: true })).toBe(false);
+  });
+
+  it('the subsumption shield reads the same spellings', () => {
+    expect(isProtectedFromCustomSubsumption({ _authored: true })).toBe(true);
+    expect(isProtectedFromCustomSubsumption({ source: 'authored' })).toBe(true);
+    // anchored: the two positives above drive the same predicate on the same shape
+    expect(isProtectedFromCustomSubsumption({ authored: true })).toBe(false);
+  });
+});

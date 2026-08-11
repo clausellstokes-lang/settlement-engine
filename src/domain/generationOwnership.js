@@ -78,10 +78,15 @@ export function isAuthoredGenerationEntity(entity) {
     && record.forcedByToggle !== true
     && sourceOf(record) === 'forced'
   ) return false;
+  // ⚠ There is no bare `authored` key. The live spellings are `_authored`
+  // (userEdits.js is its only writer) and `source: 'authored'`, which the
+  // AUTHORED_SOURCES arm above already recognises. A `record.authored` disjunct
+  // sat here reading a key no writer in this repo has ever produced; it was
+  // removed rather than left as a dead credit-side arm. Do not re-add it —
+  // add the spelling to AUTHORED_SOURCES or write `_authored` instead.
   return Boolean(
     AUTHORED_SOURCES.has(sourceOf(record))
     || record._authored === true
-    || record.authored === true
     || record.custom === true
     || record.isCustom === true
     || record.forced === true
@@ -228,7 +233,7 @@ export function isProtectedFromCustomSubsumption(
     || record.forcedByToggle === true
     || record.forcedByIsolation === true
     || record._authored === true
-    || record.authored === true
+    // (no bare `authored` key — see isAuthoredGenerationEntity above)
     || record.createdByEventId
     || record.addedByEventId
     || record.locked === true

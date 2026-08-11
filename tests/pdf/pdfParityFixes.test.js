@@ -14,9 +14,12 @@
  */
 import { describe, test, expect } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { noteText, label, hookText } from '../../src/pdf/lib/format.js';
+import {
+  noteText, label, hookText, prominentPair, prominentType, prominentProse,
+} from '../../src/pdf/lib/format.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 
@@ -155,5 +158,88 @@ describe('PDF/Foundry defense fields come from real producers', () => {
       .find((candidate) => candidate.name === 'Defense & Security');
     expect(page).toBeTruthy();
     expectAbsentWithAnchor(page.markdown, 'POISONED', wallVulnerability, 'defense journal page');
+  });
+});
+
+/**
+ * osr-prominent-relationship — the export readers must read the keys the ONE
+ * writer actually writes.
+ *
+ * THE DEFECT (schema-4 observed-shape-reader triage, 8 growth rows): every
+ * export surface read `otherSettlement`, `relationshipType`, `description`,
+ * `summary`, `flavour` and `flavor` off `settlement.prominentRelationship`.
+ * `genRelNarrative` — its sole writer — produces none of them, and
+ * `otherSettlement` has never appeared under src/generators/ in the project's
+ * history. So the PDF's PROMINENT RELATIONSHIP callout always rendered
+ * "Neighbour · linked" over an EMPTY body, the Overview chapter's NOTABLE
+ * CONNECTION printed no prose at all, and the Foundry journal fell through to a
+ * bare " — " template, while `phrasing`/`full`/`tension` held the real text.
+ *
+ * These pins are two-sided so the pair cannot drift apart again: the WRITER's
+ * exact key set is frozen, and the READER contract is proved to ignore every
+ * never-written key. Break either side and this suite reds.
+ */
+describe('osr-prominent-relationship — writer/reader key parity', () => {
+  const NEVER_WRITTEN = Object.freeze({
+    otherSettlement: 'Ashford', relationshipType: 'rival', description: 'D',
+    summary: 'S', flavour: 'F', flavor: 'F2',
+  });
+  const WRITTEN = Object.freeze({
+    npc1: 'Halda Brenn', npc2: 'Wei Li', type: 'Quiet Rivalry',
+    phrasing: 'The reeve owes the smith more than coin.',
+    full: 'Halda Brenn and Wei Li are bound by an unpaid debt.',
+    tension: 'Neither will say the number aloud.',
+  });
+
+  test('the WRITER ships exactly six keys — a rename here must update the readers', () => {
+    const settlement = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
+      null,
+      { seed: 'osr-prominent-rel-pin', customContent: {} },
+    );
+    const pr = settlement.prominentRelationship;
+    // Liveness: the fixture seed must actually produce the record (genRelNarrative
+    // returns null ~40% of the time), otherwise every assertion below is vacuous.
+    expect(pr, 'seed no longer produces a prominentRelationship — repick the seed, do not delete the pin').toBeTruthy();
+    expect(Object.keys(pr).sort()).toEqual(['full', 'npc1', 'npc2', 'phrasing', 'tension', 'type']);
+    expect(typeof pr.phrasing).toBe('string');
+    expect(pr.phrasing.trim().length).toBeGreaterThan(0);
+  });
+
+  test('the READER contract ignores every key no writer produces', () => {
+    // A record carrying ONLY the six never-written keys must yield nothing at all.
+    expect(prominentPair(NEVER_WRITTEN)).toBe('');
+    expect(prominentType(NEVER_WRITTEN)).toBe('');
+    expect(prominentProse(NEVER_WRITTEN)).toBe('');
+    // Negative control: the SAME accessors are live on the written shape, so the
+    // three empties above measure exclusion, not a dead accessor.
+    expect(prominentPair(WRITTEN)).toBe('Halda Brenn & Wei Li');
+    expect(prominentType(WRITTEN)).toBe('Quiet Rivalry');
+    expect(prominentProse(WRITTEN)).toBe(WRITTEN.phrasing);
+  });
+
+  test('prose prefers `phrasing` so a user edit and the AI refinement reach the export', () => {
+    // prominentRelationship.phrasing is a registered editable prose path
+    // (src/domain/userEdits.js) and the key the narrative refiner rewrites.
+    // Preferring `full` would silently drop the user's own wording.
+    expect(prominentProse({ ...WRITTEN, phrasing: 'THE USER WROTE THIS' })).toBe('THE USER WROTE THIS');
+    // …and it still degrades in the writer's own order when phrasing is absent.
+    expect(prominentProse({ ...WRITTEN, phrasing: '' })).toBe(WRITTEN.full);
+    expect(prominentProse({ ...WRITTEN, phrasing: '', full: '' })).toBe(WRITTEN.tension);
+  });
+
+  test('the Foundry journal prints the pair, the type and the prose — not a bare dash', () => {
+    const vm = buildViewModel({ settlement: { name: 'Pinhold', tier: 'town', prominentRelationship: { ...WRITTEN } } });
+    const page = buildJournalPages(vm, { variant: 'canon_dossier' })
+      .find((candidate) => candidate.name === 'Relationships & Neighbours');
+    expect(page, 'the relationships journal page vanished').toBeTruthy();
+    expect(page.markdown).toContain('## Prominent relationship');
+    expect(page.markdown).toContain('Halda Brenn');
+    expect(page.markdown).toContain('Wei Li');
+    expect(page.markdown).toContain(WRITTEN.phrasing);
+    // The dead template read `${otherSettlement || ''} — ${type || ''}`, which
+    // rendered a leading em-dash over an empty name. Anchored by the three
+    // positives above, which can only hold while this page is live.
+    expectAbsentWithAnchor(page.markdown, 'Neighbour ·', WRITTEN.phrasing, 'prominent relationship journal section');
   });
 });

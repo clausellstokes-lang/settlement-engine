@@ -216,4 +216,60 @@ export function upper(s) {
   return stripZwnj(s).toUpperCase();
 }
 
-export default { cap, num, pct, smart, plural, label, humanize, hookText, sentence, truncate, noLig, safe, finite, safePct, stripZwnj, upper };
+/**
+ * prominentPair / prominentType / prominentProse — THE reader contract for
+ * `settlement.prominentRelationship`, in one place so the PDF Overview chapter,
+ * the PDF Relationships chapter and the Foundry journal cannot drift apart.
+ *
+ * The record has exactly ONE writer, `genRelNarrative()`
+ * (src/generators/power/settlementNarrative.js), and it carries exactly six
+ * keys: `{ npc1, npc2, type, phrasing, full, tension }`. It describes an
+ * NPC-TO-NPC edge INSIDE the settlement, not a link to another settlement:
+ * `npc1`/`npc2` are canonical NPC names (pinned by
+ * tests/generators/generationCertificationCorpus.test.js), `type` is the
+ * archetype's human LABEL (`topRel.typeName`, e.g. "Quiet Rivalry"), `full` is
+ * the archetype's description of the pair, `phrasing` the rumour sentence and
+ * `tension` the friction line.
+ *
+ * ⚠ WHY THIS EXISTS. Every export reader used to read `otherSettlement`,
+ * `relationshipType`, `description`, `summary`, `flavour` and `flavor` — six
+ * keys no writer in this repo has ever produced (`otherSettlement` has never
+ * once appeared under src/generators/ in the project's history). So all three
+ * exports rendered the record as its bare fallback — "Neighbour · linked" with
+ * an EMPTY body — while the real prose sat unread one key away. Reading the
+ * keys that are actually written is the entire repair: generation is untouched.
+ *
+ * ⚠ `prominentProse` reads `phrasing` FIRST on purpose.
+ * `prominentRelationship.phrasing` is a registered user-editable prose path
+ * (src/domain/userEdits.js, src/store/settlementPendingEdits.js) and the field
+ * the AI narrative refiner rewrites (supabase/functions/generate-narrative).
+ * Preferring `full` would silently drop a user's own edit from their export.
+ *
+ * ⚠ Never humanize() an NPC name — humanize splits at an inner capital, so
+ * "McTavish" would render "Mc Tavish". Names ship verbatim, exactly as every
+ * other NPC surface in the app renders them.
+ */
+export function prominentPair(pr) {
+  const a = typeof pr?.npc1 === 'string' ? pr.npc1.trim() : '';
+  const b = typeof pr?.npc2 === 'string' ? pr.npc2.trim() : '';
+  if (a && b) return `${a} & ${b}`;
+  return a || b || '';
+}
+
+export function prominentType(pr) {
+  const t = typeof pr?.type === 'string' ? pr.type.trim() : '';
+  return t ? cap(t) : '';
+}
+
+export function prominentProse(pr) {
+  for (const key of ['phrasing', 'full', 'tension']) {
+    const v = pr?.[key];
+    if (typeof v === 'string' && v.trim()) return v.trim();
+  }
+  return '';
+}
+
+export default {
+  cap, num, pct, smart, plural, label, humanize, hookText, sentence, truncate, noLig, safe,
+  finite, safePct, stripZwnj, upper, prominentPair, prominentType, prominentProse,
+};

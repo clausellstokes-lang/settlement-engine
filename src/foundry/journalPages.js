@@ -24,7 +24,10 @@
 // and must stay self-contained, so the dependency runs app → module.
 import { escapeMarkdown } from '../../foundry-module/scripts/markdownEscape.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
-import { cap, humanize, hookText, label, stripZwnj } from '../pdf/lib/format.js';
+import {
+  cap, humanize, hookText, label, stripZwnj,
+  prominentPair, prominentType, prominentProse,
+} from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -328,12 +331,19 @@ function viabilityPage(vm) {
 function relationshipsPage(vm) {
   const r = vm.relationships;
   const pr = r.prominentRelationship;
+  // The record is an NPC-to-NPC edge, so it is read through THE shared reader
+  // contract the PDF chapters use (pdf/lib/format.js) rather than the
+  // never-written otherSettlement/description/summary keys this page used to
+  // reach for. Emit the section only when a key actually carries something.
+  const prHeading = [prominentPair(pr), prominentType(pr)].filter(Boolean).join(' — ');
+  const prProse = prominentProse(pr);
   return md(
     lede(relationshipsHeadline(r)),
     (r.neighbours || []).length ? md('', '## Neighbours', r.neighbours.map(n =>
       `- **${esc(n.name)}**${n.type ? ` *(${esc(humanize(n.type))})*` : ''}${n.description ? ` — ${esc(n.description)}` : ''}`)) : null,
-    pr ? md('', '## Prominent relationship',
-      esc(pr.description || pr.summary || `${pr.otherSettlement || ''} — ${pr.type || ''}`)) : null,
+    pr && (prHeading || prProse)
+      ? md('', '## Prominent relationship', bullet(prHeading), prProse ? esc(prProse) : null)
+      : null,
   ) || null;
 }
 

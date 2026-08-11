@@ -26,7 +26,10 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, smart, label, noteText, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
+import {
+  cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
+  prominentPair, prominentType, prominentProse,
+} from '../lib/format.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 
 export function Overview({ settlement, narrativeMode, vm }) {
@@ -328,13 +331,13 @@ export function Overview({ settlement, narrativeMode, vm }) {
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
             <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginRight: 4 }}>
-              {label(o.prominentRelationship.otherSettlement) || 'Neighbour'}
+              {prominentPair(o.prominentRelationship) || 'Notable pair'}
             </Text>
-            <Pill tone="cool">{cap(o.prominentRelationship.relationshipType || o.prominentRelationship.type) || 'linked'}</Pill>
+            <Pill tone="cool">{prominentType(o.prominentRelationship) || 'linked'}</Pill>
           </View>
-          {o.prominentRelationship.description && (
+          {prominentProse(o.prominentRelationship) && (
             <Text style={{ ...type.body, fontSize: pt['9'] }}>
-              {o.prominentRelationship.description}
+              {prominentProse(o.prominentRelationship)}
             </Text>
           )}
         </View>
