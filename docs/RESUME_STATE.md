@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 16:22:05 EDT
+**Generated:** 2026-08-11 17:34:28 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **26** |
-| ledger (main) | `review-fixes-2026-07-08` | `52138eef` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **1** |
+| ledger (main) | `review-fixes-2026-07-08` | `40aaa305` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 36Gi free (82% used)
+**Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T162130` — build 24 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T173339` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T162130
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T173339
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,36 +28,9 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
-MM docs/DESIGN_FP_ARCH_ES.md
-MM docs/FABLE_VALIDATION_QUEUE.md
-MM docs/SOL_QUEUE.md
-MM docs/implementation/INDEX.md
-MM docs/implementation/PACKET_MANIFEST.json
-MM docs/implementation/packets/foreign-policy/ES-5B.md
-MM docs/implementation/packets/foreign-policy/ES-5D.md
-MM docs/implementation/packets/foreign-policy/ES-6A.md
-MM docs/implementation/packets/town-cartography/TC-4.md
-MM docs/implementation/packets/town-cartography/TC-5A.md
-D  docs/implementation/packets/town-cartography/TC-5B-I.md
-D  docs/implementation/packets/town-cartography/TC-5B-II.md
-MM scripts/implementation-packets.mjs
-MM src/components/dossier/LockControls.jsx
-MM src/domain/locksPreservation.js
-MM supabase/functions/_shared/aiCharterBundle.meta.json
-MM supabase/functions/_shared/aiGroundingBundle.js
-MM supabase/functions/_shared/aiGroundingBundle.meta.json
-MM supabase/functions/_shared/aiOutputSchemaBundle.meta.json
-MM supabase/functions/_shared/analyticsEventsBundle.meta.json
-MM supabase/functions/_shared/intentAtlasBundle.meta.json
-MM tests/domain/explanation.test.js
-MM tests/lint/sovereigntyLightingContract.walker.test.js
-MM tests/scripts/implementationPackets.test.js
-?? docs/implementation/packets/town-cartography/TC-5B-I.md
-?? docs/implementation/packets/town-cartography/TC-5B-II.md
+?? tests/lib/townCartographyBlock.test.js
 ```
 ```
-  +0      -1008   docs/implementation/packets/town-cartography/TC-5B-I.md
-  +0      -990    docs/implementation/packets/town-cartography/TC-5B-II.md
 ```
 ## Last 12 build commits
 
@@ -78,12 +51,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
-982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -125,6 +98,15 @@ now names EXACTLY ONE non-census red: the owner's golden — the clean endstate 
 CONFIRMED at `c8931c03`**) · Lane J the TC-5B promotion (`56310497`, 16 packets/1 READY,
 11 markers Fable-validated at promotion) · chair rulings CR-TC5BI-6 / O-5 (`a75c76c2`:
 the census re-record is IN-CHANGE, walker = fifth reserved path).
+
+⚡ **THE 5-HOUR WINDOW EXHAUSTED ~16:45 AND THE PREPARATION HELD.** Lanes M and N (and
+N's two sub-agents) were killed by the session limit (reset 17:10). Chair recovery at
+17:31: surveyed (Lane M's sole WIP = 48-line `tests/lib/townCartographyBlock.test.js`,
+snapshotted `20260811T173154`; packet files disk==HEAD by `cmp`; zero orphan processes;
+mutex free), RESET the stale shared index to HEAD (status now reads honestly — the MM/D
+noise is gone), and RESUMED both lanes from their transcripts with re-verify orders
+(pre-death measurements must be RE-RUN, never reused). Zero landed work lost; total cost
+two partial lane turns. Banked to seamless-resume-directive.md as the live-fire proof.
 
 **LIVE (two lanes + the chair):**
 1. **Lane M (build, Opus) — IMPLEMENTING TC-5B-i** (the manifest seam) per the READY
