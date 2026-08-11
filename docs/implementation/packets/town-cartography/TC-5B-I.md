@@ -5,7 +5,8 @@
   reconciled draft. §12's four open items are CLOSED below by **CR-TC5BI-1..5**, and §12d's
   six draft-lane judgments are **FABLE-VALIDATED at this promotion**. TC-5b was REFUSED as one
   packet and split producer-first at **CR-TC5B-1**; this is slice (i).
-  ⏸ **One item is deliberately left for the chair at dispatch: O-5 (§7, §12).**
+  ✅ **O-5 RULED at dispatch-prep (CR-TC5BI-6): shape (a) — the census re-record is
+  IN-CHANGE, and the walker is the packet's FIFTH reserved path (§7, §12).**
 - **Packet version:** `1`
 - **Drafted by:** Lane F (read-only compile lane), 2026-08-11, Opus-era — see §12d.
   Promoted by Lane J under the Fable chair, 2026-08-11.
@@ -629,27 +630,22 @@ Generated artifacts: `NONE`. Do not edit `scripts/.size-baseline.json`,
 `tests/build/townScene3dLazy.test.js`, `tests/build/mapTabShellLazy.test.js`,
 `eslint.config.js`, or any file in §7b's reservation list.
 
-⭐ **These four paths, and only these four, are the packet's reserved change paths.** The
-`PACKET_MANIFEST.json` row authored at this promotion (CR-TC5BI-5) carries exactly them, as
-four `CREATE` rows, spelled identically. ⚠ Per §4c item 3 the spelling is now load-bearing at
-the LANDED flip.
+⭐ **These four CREATE paths plus one TEST reservation are the packet's reserved change
+paths.** The `PACKET_MANIFEST.json` row carries exactly them (CR-TC5BI-5): four `CREATE`
+rows spelled identically, plus `TEST tests/lint/sovereigntyLightingContract.walker.test.js`
+added at CR-TC5BI-6. ⚠ Per §4c item 3 the CREATE spellings are load-bearing at the LANDED
+flip.
 
-> ⏸ **O-5 — OPEN AT PROMOTION, FOR THE CHAIR AT DISPATCH. The lighting-census file is NOT a
-> reserved change path, and §7c item 2 tells the implementer to edit it.**
-> §7's manifest — and the `PACKET_MANIFEST.json` row derived from it — reserve exactly the
-> four paths above. §7c item 2 and §8 step 8 nonetheless instruct the implementer to
-> re-derive and re-record `tests/lint/sovereigntyLightingContract.walker.test.js`, which is
-> outside that set. **The promoting lane did not resolve this: which lane re-records a shared
-> census is a decision, not a transcription.** ⛔ **Until the chair rules, the implementer
-> STOPS at §8 step 8 and reports** the five re-derived figures and this packet's isolated
-> delta rather than choosing.
-> The two lawful shapes, both with precedent: **(a)** add a fifth reserved row
-> (`TEST`, that path) and re-record IN THE SAME CHANGE — the serialization law's default,
-> and what TC-5a did; **(b)** a **CHAIR POST-LANDING re-record** on the ES-6a precedent
-> (`9892eda1`), where the implementer reports figures and delta and never touches the walker.
-> ⚠ Shape (a) requires the manifest row to gain the path before dispatch; shape (b) requires
-> nothing. Both are consistent with the serialization law ruled at `73f5be96`, which forbids
-> only landing a red walker as debt and quantifying a foreign lane's uncommitted delta.
+> ✅ **O-5 — RULED (CR-TC5BI-6, Fable chair, 2026-08-11, at dispatch-prep): SHAPE (a).**
+> The implementer re-derives AND re-records
+> `tests/lint/sovereigntyLightingContract.walker.test.js` — all five figures WHOLE, with the
+> cause stated — IN THE SAME CHANGE that adds this packet's two test files, and the walker is
+> the packet's fifth reserved path. Ground: the serialization law ruled at `73f5be96` makes
+> in-change re-derivation the default; the chair-post-landing shape (ES-6a, `9892eda1`)
+> existed only because a path-reservation collision held the walker file, and no such
+> collision exists here. The §13 STOP still binds: if a FOREIGN lane holds uncommitted test
+> titles at re-record time, report and do not re-record — never census a live shared tree,
+> and never quantify the foreign lane's delta.
 
 ### 7b. Reservations and collisions — CONFIRMED CLEAR at promotion
 
@@ -717,9 +713,9 @@ a shared helper is its own tiny slice once both halves have landed (§12 O-3).
    foreign dirt.** Re-verify at preflight; **if a foreign `it(`/`describe(` title has appeared,
    STOP and report** rather than freezing foreign WIP into a frozen census. Never census a
    live shared tree.
-   ⏸ **AND SEE O-5 (§7): who performs this re-record is OPEN until the chair rules at
-   dispatch.** The measurement and the report are owed either way; the *edit* is not,
-   until ruled.
+   ✅ **O-5 IS RULED (CR-TC5BI-6, §7): the implementer performs this re-record IN-CHANGE.**
+   The measurement, the report, AND the edit are all owed — subject only to the foreign-title
+   STOP above.
 3. ⚠ **THE MUTATION-COVERAGE NAMING TRAP — both new names were chosen to avoid it.**
    `tests/lint/mutationCoverage.shared.mjs:27-39` requires a manifest row for any test under
    `tests/{lint,design,docs,data,copy,security,edgeFunctions}` **or** whose basename matches
@@ -762,10 +758,9 @@ fixture, and the bounded pair.
 6. Add the §6.4 closure guard (C7) — straight-line, anchored.
 7. Remove the B6 probe. Run §10 focused checks; then `npm run build && npm run verify:dist`
    and confirm the bounded pair is **unchanged**.
-8. Re-derive the lighting census WHOLE (§7c item 2). ⏸ **Whether you also RE-RECORD it is
-   O-5, open for the chair at dispatch** — absent a ruling, report all five figures and this
-   packet's isolated delta and do not touch the walker; STOP per §7c item 2's condition if a
-   foreign title has appeared.
+8. Re-derive the lighting census WHOLE (§7c item 2). ✅ **RULED (CR-TC5BI-6): you also
+   RE-RECORD it in the same change** — all five figures, cause stated; STOP per §7c item 2's
+   condition if a foreign title has appeared.
 9. Run the wave-end gate. Report exact deltas, counts, the pair against B2, the B6 number,
    the census row, and `deviations: NONE` or a STOP.
 
@@ -803,7 +798,7 @@ Do not add a ninth case or a speculative cross-product.
 > `manifestCompilers` chunk count still exactly `1`.
 > ⚠ The **only** figures permitted to move are the five sovereignty-lighting-census numbers,
 > because §7 mandates two new test files. Recorded whole, in one run, with the cause stated —
-> ⏸ subject to O-5 on who performs the record.
+> ✅ per CR-TC5BI-6 the implementer performs the record in-change.
 > ⚠ **The ONLY pre-existing red to attribute is the owner-approved `generatorGoldenMaster`
 > golden.** ⛔ `observedShapeReaders.walker` is **NO LONGER** a free attribution (§4c item 2);
 > if it reds here it is this packet's until proven otherwise against a committed-base run.
@@ -835,7 +830,7 @@ npm run typecheck:domain:strict
 npm run build
 npm run verify:dist
 
-# Census re-derivation (§7c item 2 — see O-5), then the landing gate.
+# Census re-derivation + re-record (§7c item 2, CR-TC5BI-6), then the landing gate.
 npm run check:tail
 ```
 
@@ -948,14 +943,12 @@ below the rulings, because a successor needs the reasoning and not only the verd
   CREATE paths remain lawful at READY/BLOCKED, by design: before a packet lands the file must
   NOT exist. ⛔ The live obligation this creates for this packet is §4c item 3.
 
-- **⏸ O-5 — WHO RE-RECORDS THE LIGHTING CENSUS. OPEN — FOR THE CHAIR AT DISPATCH.**
-  §7's reserved path set has four members and does not include
-  `tests/lint/sovereigntyLightingContract.walker.test.js`, yet §7c item 2 and §8 step 8
-  instruct the implementer to re-record it. The promoting lane declined to resolve this,
-  because which lane edits a shared census is a decision rather than a transcription. The two
-  lawful shapes, with precedent, are set out in §7's O-5 block. ⛔ **Absent a ruling the
-  implementer measures, reports, and does not edit.** This does not block dispatch of the
-  code work; it decides one step of it.
+- **✅ O-5 — WHO RE-RECORDS THE LIGHTING CENSUS. CLOSED at CR-TC5BI-6 (Fable chair,
+  2026-08-11): SHAPE (a), the implementer, in-change.** The walker is the packet's fifth
+  reserved path (added to §7 and the manifest row in the same ruling commit). The promoting
+  lane's refusal to transcribe this decision was correct — it was the chair's — and the
+  ruling ground is the serialization law: the lane that moves a shared census folds it whole
+  in the change that moves it. The §13 foreign-title STOP still binds.
 
 ---
 
@@ -1010,6 +1003,6 @@ In addition to `PACKET_STANDARD.md`, stop if:
   `manifestCompilers` stops being exactly `1`.
 - A concurrent lane holds uncommitted test titles at census-re-record time (§7c item 2) —
   report, do not re-record, do not census a live shared tree.
-- **⏸ §8 step 8 is reached and O-5 is still unruled** — measure, report, and stop short of
-  the walker edit.
+- ~~§8 step 8 is reached and O-5 is still unruled~~ — RETIRED: O-5 was ruled at CR-TC5BI-6
+  before dispatch; step 8's re-record is in-scope.
 - Any packet premise here is refuted by live code. **The code wins; the packet stops.**
