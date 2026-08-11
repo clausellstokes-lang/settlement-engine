@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:51:12 EDT
+**Generated:** 2026-08-11 15:56:10 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e1e9fd6a` | **14** |
-| ledger (main) | `review-fixes-2026-07-08` | `a2b3c97b` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `0bb6055d` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T155020` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T155533` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T155020
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T155533
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -64,12 +64,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
-b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -213,18 +213,35 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    row moved `:3676`→`:3681` mid-task — locate it by its `files:` key, never by line.
    **Chair-owed memory (next beat): the new validate:packets rule + the MEMORY.md FOLD
    (over its ~17KB ceiling — fold, never trim, grep hooks first).**
-8. **Lane K (gate runner, Opus) — THE FULL-GATE RECEIPT**, dispatched ~16:25 on the
-   effectively-clean tree at `e1e9fd6a` (non-MM dirty = 0; MM entries are the stale
-   shared-index artifact, `git diff HEAD` empty). Expected: TRUE exit 1 with the test
-   step showing EXACTLY 17 census + the owner's golden and nothing else. Fix-nothing
-   brief. ⚠ **THE YIELD-DEATH PATTERN FIRED A FIFTH TIME**: the lane stopped at ~15:39
-   with "holding for the test step" — dead to its own gate. The chair applied the
-   recorded rule within a minute: ps PROVED the detached run alive (workers since 15:37,
-   log `laneK-fullgate-e1e9fd6a.log` being written), and the lane was RESUMED (not
-   re-dispatched) with the outlast-in-your-own-turn order. **The TC-5B PROMOTION
-   (task #9) stays SEQUENCED BEHIND this receipt** — its target `PACKET_MANIFEST.json`
-   is READ BY a gate test mid-run. Transcript: session dir
-   `subagents/agent-a53d9a1c623c91ba1.jsonl`.
+8. **Lane K — ✅ THE FULL-GATE RECEIPT IS IN (~16:55) AND IT IS NOT THE CLEAN ENDSTATE.**
+   TRUE exit 1 at step 15 of 17 (`test:ratchet`), steps 1-14 all green, wall clock
+   14m50s, HEAD identical at both ends, zero tracked-file movement under the run, mutex
+   sole-held. **SIX non-census reds, not one**: the owner's golden (expected) + FIVE
+   live: the `aiGroundingBundle` freshness+reproducibility PAIR (the recorded
+   dirty-edge-bundle class — `aed0fc0e` touched `src/generators/aiLayer.js` without
+   rebuilding edge-shared in-commit) and THREE `tests/domain/explanation.test.js` reds
+   (the explanation layer is a hook-family consumer outside Lane C's OSR-baseline
+   denominator). ⚠ The harness reported the background job "exit code 0" — the
+   wrapper-lie again; the in-shell TRUE_EXIT and gate-tail both say 1. Log:
+   scratchpad `laneK-fullgate-e1e9fd6a.log`. ⚠ PLAUSIBLE (unchased): the branch's
+   test-ratchet baseline header (27929/2383 @ 46357c94) may be stale vs later recorded
+   re-derivations — low-priority chair check at the next census act. The yield-death
+   pattern fired a FIFTH time mid-run and the recorded rule cured it (ps → resume with
+   the outlast order). Transcript: session dir `subagents/agent-a53d9a1c623c91ba1.jsonl`.
+9. **Lane L (build, Opus) — CURE THE FIVE NON-GOLDEN REDS (task #12)**, dispatched
+   ~17:00: (1) rebuild edge-shared (the builder rebuilds FIVE bundles; commit what
+   changed, attributed) — deploy stays the owner's; (2) diagnose-then-repair the
+   explanation-layer trio (reader-side per precedent; fixture-mirrors-deriver suspected;
+   any output change is downstream of the already-declared `aed0fc0e` discontinuity).
+   Deliverable: the ratchet names EXACTLY ONE non-census red — the golden. Transcript:
+   session dir `subagents/agent-ac9c44b8b5a34f25e.jsonl`.
+10. **Lane J (build, Opus) — THE TC-5B PROMOTION (task #9)**, dispatched ~17:00 in
+   parallel (paths fully disjoint from Lane L): authors TC-5B-I.md (READY, rulings
+   CR-TC5B-1..4 + CR-TC5BI-1..5 applied, §12d judgments Fable-validated at promotion)
+   + TC-5B-II.md (BLOCKED, planExtent + split-table corrections), INDEX + manifest rows,
+   validate:packets before/after + the focused manifest suite through the mutex, one
+   commit. The chair dispatches the TC-5B-i implementer after it lands. Transcript:
+   session dir `subagents/agent-a018337f81b633c22.jsonl`.
 9. **Chair memory pass DONE (~16:40):** the validate:packets CREATE-row rule banked
    (`validate-packets-existence-checks-landed-create-rows.md` + index line), and the
    MEMORY.md FOLD executed lawfully — the ES-5d two-bullet block moved VERBATIM to
