@@ -6,7 +6,13 @@
   "identity in an already-listed file reds exactly as a new file does, even at constant count.",
   "The line number is excluded so unrelated line churn does not rewrite the governed identity.",
   "Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.",
-  "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file."
+  "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
+  "SCHEMA 5 = the same identity, EXPLAINED-WRITER FILTERED. The byte-frozen detector is unchanged;",
+  "its output is narrowed by two DECLARED post-filters in check-observed-shape-readers.mjs —",
+  "CR-OSR-FREEZE-6 shape-family union (M6) and the M8/M9 explained-writer exemption. Both are inside",
+  "the detectorTree digest this envelope binds, so retuning either reds the gate and needs a new mint.",
+  "A row here therefore means: a guarded read of a key NO writer the corpus runs produces, and no",
+  "declared out-of-corpus writer explains. Schema 4 is the RETIRED unfiltered predecessor."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -21,15 +27,15 @@
  },
  "digests": {
   "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "b3611bd5e5f572ae82dc4f66d443e1197cd522bf6f1c249362681de92c8dc133",
-  "manifests": "27eabd43a123da54a8d4cda2fdd28d936cc2f0866a382373ff3c2edaa67beebd",
-  "migrationReview": "b6261a3edfc0954f54bf76c3635e8a83782b0eb04625724987b6f9c86ad4d22e",
-  "scanStats": "cbdb24c93e5ac29f098b3a1ef72deea61cdbd5b8b689639d2814a3e25c020652",
-  "sentinel": "27cdcd94e34ca58d0316d481ddc809f98c9392a0bfb26aeba4e65082b6958f50"
+  "inventory": "feeee115111379183981330eb51cb4f282b014868d616fafbeb24cc696e81d76",
+  "manifests": "3c9456fd4686c32e21f744303753ce0fe594da3e13d6be738c5a9d7db8d283cc",
+  "migrationReview": "5bb503d489e4c8240d4973323c11cabee058b41f7ae86ffcfcf9b9d69cd02a3f",
+  "scanStats": "9cfef8704952c66ac45b4617bdb9e8ad9b444676ec8e9874ff44e68307e604d7",
+  "sentinel": "f334afb81bb10b6f358cca396a0ee59a48f115b724bc31445894d50edc847d21"
  },
  "frozen": "2026-08-11",
- "frozenAtSha": "1c295ecae88423bbe127ec6275aada8b82d64608",
- "identities": 1499,
+ "frozenAtSha": "361593898672aaead0c216d98ea40037e66147cb",
+ "identities": 1413,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -46,8 +52,7 @@
    "worldState on campaignState": 2
   },
   "src/components/SettlementsPanel.jsx": {
-   "interSettlementRelationships on settlement": 2,
-   "neighbourNetwork on settlement": 2
+   "interSettlementRelationships on settlement": 2
   },
   "src/components/ShareToGallery.jsx": {
    "primaryDeitySnapshot on config": 1
@@ -118,8 +123,6 @@
   },
   "src/components/map/PlacementsLayer.jsx": {
    "ancientRuin on history": 2,
-   "capital on settlement": 1,
-   "isCapital on settlement": 1,
    "lifecycleStatus on config": 2,
    "lifecycleStatus on settlement": 1,
    "settlement on settlement": 3
@@ -130,8 +133,7 @@
   "src/components/map/RelationshipEdges.jsx": {
    "neighbourLinks on save": 1,
    "neighbourLinks on settlement": 1,
-   "neighbourNetwork on save": 1,
-   "neighbourNetwork on settlement": 1
+   "neighbourNetwork on save": 1
   },
   "src/components/map/SettlementPalette.jsx": {
    "tier on save": 1
@@ -141,33 +143,16 @@
   },
   "src/components/map/WorldPulseData.js": {
    "cause on proposalPayload": 1,
-   "factionId on stressors": 2,
-   "factionName on stressors": 4,
    "institutionName on proposalPayload": 1,
    "institutionName on stressors": 2,
-   "metadata on stressors": 2,
-   "npcId on stressors": 4,
    "outcome on stressors": 4,
-   "populationDeltas on stressors": 1,
-   "proposalPayload on stressors": 5,
-   "saveId on stressors": 2,
-   "settlementId on stressors": 3,
-   "settlementIds on stressors": 1,
-   "targetSaveId on stressors": 3
+   "settlementIds on stressors": 1
   },
   "src/components/map/heraldFeed.js": {
-   "applyMode on stressors": 1,
-   "candidateType on stressors": 2,
    "covert on stressors": 2,
-   "headline on stressors": 2,
    "impactKind on stressors": 2,
-   "kind on stressors": 2,
    "outcome on stressors": 5,
-   "reasons on stressors": 4,
-   "score on stressors": 2,
-   "significance on stressors": 2,
-   "stressor on stressors": 2,
-   "tick on stressors": 5
+   "significance on stressors": 2
   },
   "src/components/map/heraldRegister.js": {
    "campaignEventId on historicalEvents": 2,
@@ -255,9 +240,6 @@
    "primaryDeityRef on config": 1,
    "primaryDeitySnapshot on config": 3
   },
-  "src/components/settlement/eventComposer/EventComposerLinkNeighbourField.jsx": {
-   "neighbourNetwork on settlement": 1
-  },
   "src/components/settlement/eventComposer/buildEvent.js": {
    "id on institutions": 1
   },
@@ -276,8 +258,7 @@
    "timestamp on save": 2
   },
   "src/components/settlements/libraryDeleteHandlers.js": {
-   "interSettlementRelationships on settlement": 1,
-   "neighbourNetwork on settlement": 1
+   "interSettlementRelationships on settlement": 1
   },
   "src/components/settlements/livingWorldSignals.js": {
    "primaryDeitySnapshot on config": 1
@@ -285,9 +266,6 @@
   "src/components/surveyor/InterpretApplyPanel.jsx": {
    "editedAt on campaignState": 1,
    "timestamp on save": 1
-  },
-  "src/components/townMap/edgeAnnotations.js": {
-   "neighbors on settlement": 2
   },
   "src/data/npcTraitWeights.js": {
    "acquiredTraits on npcs": 1
@@ -635,7 +613,6 @@
    "name on goal": 1,
    "name on raw": 2,
    "neighbourName on raw": 1,
-   "neighbourNetwork on settlement": 1,
    "primaryDeity on settlement": 2,
    "primaryDeitySnapshot on config": 3,
    "text on goal": 1
@@ -650,7 +627,6 @@
    "cultDeitySnapshots on config": 2,
    "id on factions": 3,
    "neighbourLinks on settlement": 1,
-   "neighbourNetwork on settlement": 1,
    "primaryDeitySnapshot on config": 1,
    "resources on settlement": 1
   },
@@ -662,7 +638,6 @@
    "id on factions": 1,
    "id on institutions": 1,
    "name on economicState": 1,
-   "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
   },
   "src/domain/events/drainQueuedEvents.js": {
@@ -682,9 +657,6 @@
   "src/domain/events/mutateHelpers.js": {
    "__mutationVeto on settlement": 1
   },
-  "src/domain/events/mutateUserRoute.js": {
-   "neighbourNetwork on settlement": 2
-  },
   "src/domain/events/mutateWorld.js": {
    "_cutRoutes on config": 2,
    "_raidHistory on config": 2,
@@ -703,7 +675,6 @@
   },
   "src/domain/events/targetRosters.js": {
    "neighbourLinks on settlement": 1,
-   "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
   },
   "src/domain/events/undoEvent.js": {
@@ -713,8 +684,7 @@
    "createdByEventId on institutions": 1,
    "createdByEventId on npcs": 1,
    "destroyedByEventId on settlement": 1,
-   "eventId on causes": 2,
-   "neighbourNetwork on settlement": 3
+   "eventId on causes": 2
   },
   "src/domain/explanation.js": {
    "condition on raw": 3,
@@ -796,7 +766,6 @@
    "geography on locks": 1,
    "history on locks": 1,
    "identity on locks": 1,
-   "institutions on locks": 1,
    "npcs on locks": 3
   },
   "src/domain/magicFilter.js": {
@@ -821,9 +790,6 @@
    "roadAccess on config": 1,
    "trade_connectivity on scores": 2
   },
-  "src/domain/normalizeSettlement.js": {
-   "neighbourNetwork on settlement": 1
-  },
   "src/domain/npc/npcOps.js": {
    "long on civic": 1,
    "short on civic": 2,
@@ -842,24 +808,15 @@
    "plotHooks on settlement": 2
   },
   "src/domain/realm/heraldRouting.js": {
-   "candidateType on stressors": 2,
    "impactKind on stressors": 2,
-   "kind on stressors": 2,
    "outcome on stressors": 3,
-   "proposalPayload on stressors": 6,
    "section on stressors": 1,
-   "sectionAuthority on stressors": 4,
-   "stressor on stressors": 9
-  },
-  "src/domain/realm/realmItemInventory.js": {
-   "tick on stressors": 1
+   "sectionAuthority on stressors": 4
   },
   "src/domain/realm/realmItemReadModel.js": {
    "causeReceiptId on metadata": 1,
    "causedBy on metadata": 1,
-   "payload on outcome": 1,
-   "stressor on outcome": 1,
-   "tick on outcome": 1
+   "payload on outcome": 1
   },
   "src/domain/regenerationMode.js": {
    "id on factions": 1,
@@ -893,18 +850,13 @@
   },
   "src/domain/regionalGraph.js": {
    "neighborNetwork on settlement": 2,
-   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2
   },
   "src/domain/relationships/canonicalRelationship.js": {
    "tier on save": 1
   },
-  "src/domain/relationships/effectiveNeighbours.js": {
-   "neighbourNetwork on settlement": 1
-  },
   "src/domain/relationships/neighbourBackLink.js": {
-   "interSettlementRelationships on settlement": 1,
-   "neighbourNetwork on settlement": 1
+   "interSettlementRelationships on settlement": 1
   },
   "src/domain/resolveTerrain.js": {
    "geography on settlement": 1,
@@ -917,9 +869,6 @@
   },
   "src/domain/roads/thirdPartyRansom.js": {
    "archetype on factions": 1
-  },
-  "src/domain/roads/userRoutes.js": {
-   "neighbourNetwork on settlement": 2
   },
   "src/domain/roles/roleCatalog.js": {
    "id on institutions": 1
@@ -954,13 +903,10 @@
   },
   "src/domain/state/deriveSystemState.js": {
    "neighbourLinks on settlement": 1,
-   "neighbourNetwork on settlement": 1,
    "safetyProfile on settlement": 1
   },
   "src/domain/stressorPicker.js": {
-   "description on stressors": 1,
-   "localUid on stressors": 1,
-   "name on stressors": 4
+   "localUid on stressors": 1
   },
   "src/domain/summary/settlementQuickGuide.js": {
    "culture on settlement": 1,
@@ -984,7 +930,6 @@
    "id on raw": 3,
    "label on raw": 2,
    "name on raw": 2,
-   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2,
    "severity on raw": 2,
    "source on raw": 1,
@@ -1062,7 +1007,6 @@
   "src/domain/townScene/sceneSemantics.js": {
    "neighborNetwork on settlement": 2,
    "neighbors on settlement": 2,
-   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2
   },
   "src/domain/traditions/genesis.js": {
@@ -1089,15 +1033,10 @@
    "deployment on proposalPayload": 2,
    "envoyTransportReturn on metadata": 1,
    "foodStockpileDeltas on outcome": 2,
-   "institutionPatch on outcome": 1,
    "lifecyclePatch on outcome": 1,
-   "populationDeltas on outcome": 1,
    "powerTransfer on outcome": 10,
    "recallTargetId on metadata": 2,
    "resourceMembership on outcome": 1,
-   "resourcePatch on outcome": 1,
-   "stressor on outcome": 9,
-   "tierChange on outcome": 1,
    "warDecisionId on proposalPayload": 3,
    "warDemand on proposalPayload": 1,
    "warFront on proposalPayload": 2
@@ -1115,16 +1054,11 @@
   "src/domain/worldPulse/applyWorldPulsePrimitives.js": {
    "deityReembed on outcome": 1,
    "foodStockpileDeltas on outcome": 1,
-   "institutionPatch on outcome": 1,
    "lifecyclePatch on outcome": 1,
-   "populationDeltas on outcome": 1,
-   "powerTransfer on outcome": 1,
-   "resourcePatch on outcome": 1,
-   "tierChange on outcome": 1
+   "powerTransfer on outcome": 1
   },
   "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js": {
-   "coalitionEnemyRelationship on metadata": 1,
-   "tick on outcome": 1
+   "coalitionEnemyRelationship on metadata": 1
   },
   "src/domain/worldPulse/armyTransitKernel.js": {
    "economic_capacity on scores": 1
@@ -1300,7 +1234,6 @@
    "controlledInstitutions on factions": 2,
    "id on chains": 4,
    "institutionHistory on settlement": 3,
-   "institutionPatch on outcome": 1,
    "label on chains": 2,
    "minTier on chains": 1,
    "name on inst": 7,
@@ -1430,10 +1363,6 @@
    "faithProfile on config": 1,
    "primaryDeitySnapshot on config": 1
   },
-  "src/domain/worldPulse/populationDynamics.js": {
-   "populationDeltas on outcome": 1,
-   "tick on outcome": 1
-  },
   "src/domain/worldPulse/pressureModel.js": {
    "criminal_opportunity on scores": 2,
    "defense_readiness on scores": 2,
@@ -1447,13 +1376,8 @@
   },
   "src/domain/worldPulse/proposalAdmission.js": {
    "args on proposalPayload": 1,
-   "saveId on outcome": 1,
-   "settlementId on outcome": 1,
    "targetId on outcome": 1,
    "targetSaveId on proposalPayload": 1
-  },
-  "src/domain/worldPulse/pulseHelpers.js": {
-   "recordMode on outcome": 2
   },
   "src/domain/worldPulse/pulseKernel.js": {
    "seed on save": 1
@@ -1620,8 +1544,6 @@
   },
   "src/domain/worldPulse/tierOutcomeApply.js": {
    "institutionHistory on settlement": 2,
-   "tick on outcome": 1,
-   "tierChange on outcome": 2,
    "tierHistory on settlement": 2
   },
   "src/domain/worldPulse/tierResourceDynamics.js": {
@@ -1631,8 +1553,6 @@
    "nearbyResourcesDepleted on settlement": 2,
    "outputs on chains": 1,
    "rawInputs on chains": 1,
-   "resourcePatch on outcome": 1,
-   "tierChange on outcome": 2,
    "tradeRoute on settlement": 1
   },
   "src/domain/worldPulse/tradeSalience.js": {
@@ -1661,15 +1581,12 @@
    "coalitionEvidence on outcome": 1,
    "counterpartId on outcome": 1,
    "enemyId on outcome": 1,
-   "kind on outcome": 3,
    "opponentId on outcome": 1,
    "receipt on outcome": 1,
    "refusalCause on outcome": 1,
-   "settlementId on outcome": 1,
    "sourceEventId on outcome": 2,
    "targetId on outcome": 1,
-   "thirdPartyId on outcome": 1,
-   "tick on outcome": 2
+   "thirdPartyId on outcome": 1
   },
   "src/domain/worldPulse/warDeployment.js": {
    "wealthIndex on economicState": 1
@@ -1680,8 +1597,7 @@
   "src/domain/worldPulse/warPeaceDecision.js": {
    "id on factions": 2,
    "relationshipType on relationshipPatch": 1,
-   "seatTransitions on npcLadder": 2,
-   "tick on outcome": 1
+   "seatTransitions on npcLadder": 2
   },
   "src/domain/worldPulse/warPoliticalLoop.js": {
    "label on factions": 1,
@@ -1703,16 +1619,10 @@
    "id on factions": 6
   },
   "src/domain/worldPulse/worldPulseFeedCuration.js": {
-   "affectedSettlementIds on outcome": 3,
    "curationClass on outcome": 1,
-   "institutionPatch on outcome": 1,
    "lifecyclePatch on outcome": 1,
    "partySourced on outcome": 1,
-   "populationDeltas on outcome": 1,
-   "powerTransfer on outcome": 1,
-   "resourcePatch on outcome": 1,
-   "stressor on outcome": 1,
-   "tierChange on outcome": 1
+   "powerTransfer on outcome": 1
   },
   "src/domain/worldPulse/worldSnapshot.js": {
    "npcs on save": 1,
@@ -1923,9 +1833,7 @@
    "primaryDeitySnapshot on config": 1
   },
   "src/lib/generationTelemetry.js": {
-   "archetype on stressors": 1,
    "hooks on settlement": 1,
-   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1,
    "plotHooks on settlement": 1,
    "supplyChains on settlement": 1
@@ -1946,10 +1854,6 @@
   "src/lib/proseSeams.js": {
    "text on plotHooks": 2
   },
-  "src/lib/pulseFingerprint.js": {
-   "stressor on outcome": 1,
-   "tierChange on outcome": 1
-  },
   "src/lib/relationshipGraph.js": {
    "config on save": 1,
    "tier on save": 1
@@ -1969,8 +1873,7 @@
    "_seed on config": 1
   },
   "src/lib/saves.js": {
-   "_seed on config": 1,
-   "neighbourNetwork on settlement": 2
+   "_seed on config": 1
   },
   "src/lib/shareImage.js": {
    "governmentType on powerStructure": 1
@@ -1998,7 +1901,6 @@
    "importedNeighbour on config": 1,
    "institutionToggles on config": 1,
    "nearbyResourcesRandom on config": 2,
-   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1,
    "plotHooks on settlement": 1,
    "selectedStresses on config": 2,
@@ -2067,7 +1969,6 @@
    "modifiers on factions": 1,
    "motivation on npcs": 1,
    "nearbyResources on resourceAnalysis": 1,
-   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1,
    "npcRelationships on settlement": 2,
    "origin on founding": 2,
@@ -2310,7 +2211,6 @@
    "culture on settlement": 2,
    "hooks on settlement": 1,
    "interSettlementRelationships on settlement": 1,
-   "neighbourNetwork on settlement": 3,
    "plotHooks on settlement": 1
   },
   "src/utils/generateWorldBook.js": {
@@ -2324,7 +2224,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
+   "digest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
    "entries": [
     {
      "mode": "100644",
@@ -2343,8 +2243,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "15b2e61edd1d9a0f6d2a6e1f7678f61c33cecb8094dbe7efb106bc033f1e9a6e",
-     "size": 58693,
+     "sha256": "5e6e81756875114f4ea1271f2e163610ecc60facb2c5c3494fd9db58a8262669",
+     "size": 87472,
      "type": "file"
     },
     {
@@ -2364,8 +2264,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "19101b1438004d7745fb66fa75808048a1cc14b0bf8ec4fa132b614368c292fb",
-     "size": 29820,
+     "sha256": "7ba1fce9a0c1f5a660d7b2d63a3cabf18aa12d274293a8498fd238fe9cf81910",
+     "size": 33917,
      "type": "file"
     },
     {
@@ -2392,8 +2292,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "6cc891c09aacc3660de9ea1a3fe5cec8200f9b23917e2d00049efd6d9283c7b9",
-     "size": 52592,
+     "sha256": "aa613eb0638c243b8e8cf8bac8755777f2c3669687ee7d1be150fffe9556aef7",
+     "size": 55832,
      "type": "file"
     },
     {
@@ -2407,7 +2307,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1f3058152c2a0073ee8c5546aebe6d3eeda7e33bc0ae4236cf3e582862237eb5",
+   "digest": "0cb9d4befc1877440bf7c5bec81a7d0545c87bdab8abca4acac30c7c734e18a6",
    "entries": [
     {
      "mode": "100644",
@@ -2426,8 +2326,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "15b2e61edd1d9a0f6d2a6e1f7678f61c33cecb8094dbe7efb106bc033f1e9a6e",
-     "size": 58693,
+     "sha256": "5e6e81756875114f4ea1271f2e163610ecc60facb2c5c3494fd9db58a8262669",
+     "size": 87472,
      "type": "file"
     },
     {
@@ -2447,8 +2347,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "19101b1438004d7745fb66fa75808048a1cc14b0bf8ec4fa132b614368c292fb",
-     "size": 29820,
+     "sha256": "7ba1fce9a0c1f5a660d7b2d63a3cabf18aa12d274293a8498fd238fe9cf81910",
+     "size": 33917,
      "type": "file"
     },
     {
@@ -2475,8 +2375,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "6cc891c09aacc3660de9ea1a3fe5cec8200f9b23917e2d00049efd6d9283c7b9",
-     "size": 52592,
+     "sha256": "aa613eb0638c243b8e8cf8bac8755777f2c3669687ee7d1be150fffe9556aef7",
+     "size": 55832,
      "type": "file"
     },
     {
@@ -3707,8 +3607,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "d378423030e68f84255b05adaf3bb7ef27a10ddb3129fe74f034e7ac8c8954aa",
-     "size": 6825,
+     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
+     "size": 10323,
      "type": "file"
     },
     {
@@ -4708,8 +4608,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
-     "size": 19035,
+     "sha256": "6ed4690a7ac366d9e86a6a96acc55701973cc6846651fba8d6c730f86278fdc1",
+     "size": 19891,
      "type": "file"
     },
     {
@@ -4855,8 +4755,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TierIcon.jsx",
-     "sha256": "48ed71d755c83e6dc0250b63cd75f22c2f4f539ac760efa44b0ee2fce1a638b4",
-     "size": 6317,
+     "sha256": "48cc776396de7fe71972d526912a92288c6b02e07797367e09eb16b9d390c785",
+     "size": 6727,
      "type": "file"
     },
     {
@@ -6626,8 +6526,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "c1b6f3ba7cb44b7dc9e7bf946e85ee599c4ff6def6aac13a6f963c73887b9098",
-     "size": 4565,
+     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
+     "size": 7884,
      "type": "file"
     },
     {
@@ -7746,15 +7646,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "cf180099d3d53420364a16c8d0de1a9964e3c396cb77f76c3223961916252e95",
-     "size": 6518,
+     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
+     "size": 6646,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "8b9fe5662a504adf631dc54b2a29314ec7d2e744d6bf3e3963adb7f09bcef182",
-     "size": 18518,
+     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
+     "size": 34382,
      "type": "file"
     },
     {
@@ -9496,8 +9396,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "f3713dbe3fbdc2fa66abbf1e6333ba580bc2c3227c0f1de203532d0a4689347a",
-     "size": 15405,
+     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
+     "size": 16141,
      "type": "file"
     },
     {
@@ -10349,6 +10249,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaint.js",
+     "sha256": "adb788914ef8ef72cff0cb3d1083643b61950dd92e06d643293646beb4246383",
+     "size": 11146,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaintRoles.js",
+     "sha256": "0caa6a84ebf069ee979d29a3e4efd2169b543ca5f2c44f14089572d3f73f07d5",
+     "size": 6940,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townCartography/cartographyParcels.js",
      "sha256": "eb0c3face46f1f8e62d9edcc1e8222e4d1aa77b70555806bb1a96355dc51daaf",
      "size": 15186,
@@ -11085,8 +10999,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "43b6063d9cdacb1944caf2cdf6d29d9467908eb4a67f2cf0c94cbccbdb7804e7",
-     "size": 10531,
+     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
+     "size": 10894,
      "type": "file"
     },
     {
@@ -11861,6 +11775,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareer.js",
+     "sha256": "00d6ca98d508af6f7678071100ca760f4ed3d1081dd4693cc78cb0e93e75a7a9",
+     "size": 10584,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js",
+     "sha256": "d96811eeb6b9c83e43ca0251f4c5b2ecdfb9e6bd4d0f8a9dfcbc2d27003ddd5e",
+     "size": 15196,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageDoctrine.js",
      "sha256": "5d59a7f15a84adb8d46069a5bcb31a71b4f0f3915bb5720a8022c3a47dc2a64e",
      "size": 9939,
@@ -11883,15 +11811,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageGauntlet.js",
-     "sha256": "8718d65a1736967b0232ea86e5ead1669bdec8d37ee5f44ed44aa7becd0aab2a",
-     "size": 28701,
+     "sha256": "287c5f4d923448fbd19de54227d25b6191d35df926215938cefcf6432f348b1e",
+     "size": 30828,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageLeak.js",
+     "sha256": "292a9d31a638ca9ed75d774419b3fcf0c936c433132a72f532280aca5ac326d3",
+     "size": 16844,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageMath.js",
-     "sha256": "1f7ee378d67f15496fe610d16cb0af71ffc5e640e3bfe5c1ac79b10cbfbb3a56",
-     "size": 22633,
+     "sha256": "510e9c4d4a3b4811ced27cab6e3ffcccf6e01b812d8e9ca9e4cfa74b5f4c33db",
+     "size": 24006,
      "type": "file"
     },
     {
@@ -11903,9 +11838,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionagePresence.js",
+     "sha256": "efbb378e60eb1b1b62485304ca153a3db26cbd235df1e87cea47ac18f2af9c93",
+     "size": 9914,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageProductStage.js",
-     "sha256": "323e2b07f19322ed786df3d22ee3e0669496cb36aa8906f9cb26f40d9f1efca7",
-     "size": 36973,
+     "sha256": "cdadfe7e5dbee5368f041e4351f59b17d94c636cdd34e65d69edf71f25f67f75",
+     "size": 39320,
      "type": "file"
     },
     {
@@ -11946,8 +11888,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "51a0f2555f4b5b69cb472f9e51a29cebfab5ce2e8cd481d505f62dd2e88119c5",
-     "size": 46392,
+     "sha256": "c3040fa5c266ca4a4fc4b130e0ae9a96723dfeddbae7e9e00570ec188d5bd3c2",
+     "size": 48713,
      "type": "file"
     },
     {
@@ -12436,8 +12378,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderChallenge.js",
-     "sha256": "36b2d64007375eb30192916c0212f0d412c869fef478b122b5916b3b76f55507",
-     "size": 23239,
+     "sha256": "29917fefd7ac9e0cdee8d9c0e3d6c653167c3bfb06807d7ab9d1528ab6860755",
+     "size": 25992,
      "type": "file"
     },
     {
@@ -12464,8 +12406,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderKernel.js",
-     "sha256": "5ada1f7b71af0a1af42422abce33019347b68833a8c9f17689e3e0bd7571501d",
-     "size": 71479,
+     "sha256": "597f4ef0b6255a4d2b553a61e4b1e47a4fc85e804dc5e579eb8dbef8bed849fa",
+     "size": 73537,
      "type": "file"
     },
     {
@@ -13185,8 +13127,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "16821270399789d3fec6b0c0f48549201fd997daae206eed47f6ed117703d4a8",
-     "size": 59239,
+     "sha256": "b7103520712a9fc487c8f660f3277da9a585bcb361378cdfc9239a80d10e1597",
+     "size": 61008,
      "type": "file"
     },
     {
@@ -13969,8 +13911,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "4b498aea1f45e6cd1ced209eeb7c348b7b9d8d8c26144eef389057281419b3aa",
-     "size": 13409,
+     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
+     "size": 15303,
      "type": "file"
     },
     {
@@ -15810,8 +15752,8 @@
     {
      "mode": "100644",
      "path": "src/lib/roadNetwork.js",
-     "sha256": "256227dd4653906069fcb8a2d3390db74317022c23bf511d408c5c123896e2e8",
-     "size": 15012,
+     "sha256": "b32e7b19d58d88df34b850cc2b6fd7e0dcdcdfc608fc9f0d81ac08518b3801d0",
+     "size": 16290,
      "type": "file"
     },
     {
@@ -15950,8 +15892,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialUsage.js",
-     "sha256": "e804eeea264389c8fa82622197e20f329e008c3fe94270df913fefc830ba2f75",
-     "size": 37933,
+     "sha256": "73fa7c758b1051bd0d9f479a7e7e987213b6a58c0753f6d8ba7c8d3431035177",
+     "size": 39899,
      "type": "file"
     },
     {
@@ -17162,7 +17104,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "568f843e347a77e29bbc5360c5f77d268267df6fd3dc0ed009ba19f460f3301f",
+   "digest": "e939ae2aa7cd81e2a32919d259e031e0c4b883d019c3fcb7b3e18c8cfad0b96c",
    "entries": [
     {
      "mode": "100644",
@@ -18392,8 +18334,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "d378423030e68f84255b05adaf3bb7ef27a10ddb3129fe74f034e7ac8c8954aa",
-     "size": 6825,
+     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
+     "size": 10323,
      "type": "file"
     },
     {
@@ -19393,8 +19335,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
-     "size": 19035,
+     "sha256": "6ed4690a7ac366d9e86a6a96acc55701973cc6846651fba8d6c730f86278fdc1",
+     "size": 19891,
      "type": "file"
     },
     {
@@ -19540,8 +19482,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TierIcon.jsx",
-     "sha256": "48ed71d755c83e6dc0250b63cd75f22c2f4f539ac760efa44b0ee2fce1a638b4",
-     "size": 6317,
+     "sha256": "48cc776396de7fe71972d526912a92288c6b02e07797367e09eb16b9d390c785",
+     "size": 6727,
      "type": "file"
     },
     {
@@ -21311,8 +21253,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "c1b6f3ba7cb44b7dc9e7bf946e85ee599c4ff6def6aac13a6f963c73887b9098",
-     "size": 4565,
+     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
+     "size": 7884,
      "type": "file"
     },
     {
@@ -22368,15 +22310,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "cf180099d3d53420364a16c8d0de1a9964e3c396cb77f76c3223961916252e95",
-     "size": 6518,
+     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
+     "size": 6646,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "8b9fe5662a504adf631dc54b2a29314ec7d2e744d6bf3e3963adb7f09bcef182",
-     "size": 18518,
+     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
+     "size": 34382,
      "type": "file"
     },
     {
@@ -24090,8 +24032,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "f3713dbe3fbdc2fa66abbf1e6333ba580bc2c3227c0f1de203532d0a4689347a",
-     "size": 15405,
+     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
+     "size": 16141,
      "type": "file"
     },
     {
@@ -24943,6 +24885,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaint.js",
+     "sha256": "adb788914ef8ef72cff0cb3d1083643b61950dd92e06d643293646beb4246383",
+     "size": 11146,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaintRoles.js",
+     "sha256": "0caa6a84ebf069ee979d29a3e4efd2169b543ca5f2c44f14089572d3f73f07d5",
+     "size": 6940,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townCartography/cartographyParcels.js",
      "sha256": "eb0c3face46f1f8e62d9edcc1e8222e4d1aa77b70555806bb1a96355dc51daaf",
      "size": 15186,
@@ -25679,8 +25635,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "43b6063d9cdacb1944caf2cdf6d29d9467908eb4a67f2cf0c94cbccbdb7804e7",
-     "size": 10531,
+     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
+     "size": 10894,
      "type": "file"
     },
     {
@@ -26455,6 +26411,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareer.js",
+     "sha256": "00d6ca98d508af6f7678071100ca760f4ed3d1081dd4693cc78cb0e93e75a7a9",
+     "size": 10584,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js",
+     "sha256": "d96811eeb6b9c83e43ca0251f4c5b2ecdfb9e6bd4d0f8a9dfcbc2d27003ddd5e",
+     "size": 15196,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageDoctrine.js",
      "sha256": "5d59a7f15a84adb8d46069a5bcb31a71b4f0f3915bb5720a8022c3a47dc2a64e",
      "size": 9939,
@@ -26477,15 +26447,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageGauntlet.js",
-     "sha256": "8718d65a1736967b0232ea86e5ead1669bdec8d37ee5f44ed44aa7becd0aab2a",
-     "size": 28701,
+     "sha256": "287c5f4d923448fbd19de54227d25b6191d35df926215938cefcf6432f348b1e",
+     "size": 30828,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageLeak.js",
+     "sha256": "292a9d31a638ca9ed75d774419b3fcf0c936c433132a72f532280aca5ac326d3",
+     "size": 16844,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageMath.js",
-     "sha256": "1f7ee378d67f15496fe610d16cb0af71ffc5e640e3bfe5c1ac79b10cbfbb3a56",
-     "size": 22633,
+     "sha256": "510e9c4d4a3b4811ced27cab6e3ffcccf6e01b812d8e9ca9e4cfa74b5f4c33db",
+     "size": 24006,
      "type": "file"
     },
     {
@@ -26497,9 +26474,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionagePresence.js",
+     "sha256": "efbb378e60eb1b1b62485304ca153a3db26cbd235df1e87cea47ac18f2af9c93",
+     "size": 9914,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageProductStage.js",
-     "sha256": "323e2b07f19322ed786df3d22ee3e0669496cb36aa8906f9cb26f40d9f1efca7",
-     "size": 36973,
+     "sha256": "cdadfe7e5dbee5368f041e4351f59b17d94c636cdd34e65d69edf71f25f67f75",
+     "size": 39320,
      "type": "file"
     },
     {
@@ -26540,8 +26524,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "51a0f2555f4b5b69cb472f9e51a29cebfab5ce2e8cd481d505f62dd2e88119c5",
-     "size": 46392,
+     "sha256": "c3040fa5c266ca4a4fc4b130e0ae9a96723dfeddbae7e9e00570ec188d5bd3c2",
+     "size": 48713,
      "type": "file"
     },
     {
@@ -27030,8 +27014,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderChallenge.js",
-     "sha256": "36b2d64007375eb30192916c0212f0d412c869fef478b122b5916b3b76f55507",
-     "size": 23239,
+     "sha256": "29917fefd7ac9e0cdee8d9c0e3d6c653167c3bfb06807d7ab9d1528ab6860755",
+     "size": 25992,
      "type": "file"
     },
     {
@@ -27058,8 +27042,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderKernel.js",
-     "sha256": "5ada1f7b71af0a1af42422abce33019347b68833a8c9f17689e3e0bd7571501d",
-     "size": 71479,
+     "sha256": "597f4ef0b6255a4d2b553a61e4b1e47a4fc85e804dc5e579eb8dbef8bed849fa",
+     "size": 73537,
      "type": "file"
     },
     {
@@ -27779,8 +27763,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "16821270399789d3fec6b0c0f48549201fd997daae206eed47f6ed117703d4a8",
-     "size": 59239,
+     "sha256": "b7103520712a9fc487c8f660f3277da9a585bcb361378cdfc9239a80d10e1597",
+     "size": 61008,
      "type": "file"
     },
     {
@@ -28563,8 +28547,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "4b498aea1f45e6cd1ced209eeb7c348b7b9d8d8c26144eef389057281419b3aa",
-     "size": 13409,
+     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
+     "size": 15303,
      "type": "file"
     },
     {
@@ -30404,8 +30388,8 @@
     {
      "mode": "100644",
      "path": "src/lib/roadNetwork.js",
-     "sha256": "256227dd4653906069fcb8a2d3390db74317022c23bf511d408c5c123896e2e8",
-     "size": 15012,
+     "sha256": "b32e7b19d58d88df34b850cc2b6fd7e0dcdcdfc608fc9f0d81ac08518b3801d0",
+     "size": 16290,
      "type": "file"
     },
     {
@@ -30544,8 +30528,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialUsage.js",
-     "sha256": "e804eeea264389c8fa82622197e20f329e008c3fe94270df913fefc830ba2f75",
-     "size": 37933,
+     "sha256": "73fa7c758b1051bd0d9f479a7e7e987213b6a58c0753f6d8ba7c8d3431035177",
+     "size": 39899,
      "type": "file"
     },
     {
@@ -31749,7 +31733,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bf6f978ef068732e8b7350c2cafec468030f47d2616a35993535100a1f4d3dc9",
+   "digest": "0c215f274fdda69c8dee7703d17aef85fc697e3018139857d854b2b2d2484e01",
    "entries": [
     {
      "mode": "100644",
@@ -32979,8 +32963,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "d378423030e68f84255b05adaf3bb7ef27a10ddb3129fe74f034e7ac8c8954aa",
-     "size": 6825,
+     "sha256": "928d5d29d9f46c48880802a85da80351f9374d0b329379d045dcdd84c34893a1",
+     "size": 10323,
      "type": "file"
     },
     {
@@ -33980,8 +33964,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/PlacementsLayer.jsx",
-     "sha256": "2272a4f56c3abab3f56c4a7f246dc49a4783e2563aee165e92da92d565c5300c",
-     "size": 19035,
+     "sha256": "6ed4690a7ac366d9e86a6a96acc55701973cc6846651fba8d6c730f86278fdc1",
+     "size": 19891,
      "type": "file"
     },
     {
@@ -34127,8 +34111,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TierIcon.jsx",
-     "sha256": "48ed71d755c83e6dc0250b63cd75f22c2f4f539ac760efa44b0ee2fce1a638b4",
-     "size": 6317,
+     "sha256": "48cc776396de7fe71972d526912a92288c6b02e07797367e09eb16b9d390c785",
+     "size": 6727,
      "type": "file"
     },
     {
@@ -35898,8 +35882,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "c1b6f3ba7cb44b7dc9e7bf946e85ee599c4ff6def6aac13a6f963c73887b9098",
-     "size": 4565,
+     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
+     "size": 7884,
      "type": "file"
     },
     {
@@ -37018,15 +37002,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "cf180099d3d53420364a16c8d0de1a9964e3c396cb77f76c3223961916252e95",
-     "size": 6518,
+     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
+     "size": 6646,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "8b9fe5662a504adf631dc54b2a29314ec7d2e744d6bf3e3963adb7f09bcef182",
-     "size": 18518,
+     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
+     "size": 34382,
      "type": "file"
     },
     {
@@ -38768,8 +38752,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "f3713dbe3fbdc2fa66abbf1e6333ba580bc2c3227c0f1de203532d0a4689347a",
-     "size": 15405,
+     "sha256": "c7de76ae5397458a8b3628fe7d332865c6e3b87948599ba6ef3a7be544ed3520",
+     "size": 16141,
      "type": "file"
     },
     {
@@ -39621,6 +39605,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaint.js",
+     "sha256": "adb788914ef8ef72cff0cb3d1083643b61950dd92e06d643293646beb4246383",
+     "size": 11146,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townCartography/cartographyPaintRoles.js",
+     "sha256": "0caa6a84ebf069ee979d29a3e4efd2169b543ca5f2c44f14089572d3f73f07d5",
+     "size": 6940,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townCartography/cartographyParcels.js",
      "sha256": "eb0c3face46f1f8e62d9edcc1e8222e4d1aa77b70555806bb1a96355dc51daaf",
      "size": 15186,
@@ -40357,8 +40355,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "43b6063d9cdacb1944caf2cdf6d29d9467908eb4a67f2cf0c94cbccbdb7804e7",
-     "size": 10531,
+     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
+     "size": 10894,
      "type": "file"
     },
     {
@@ -41133,6 +41131,20 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareer.js",
+     "sha256": "00d6ca98d508af6f7678071100ca760f4ed3d1081dd4693cc78cb0e93e75a7a9",
+     "size": 10584,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js",
+     "sha256": "d96811eeb6b9c83e43ca0251f4c5b2ecdfb9e6bd4d0f8a9dfcbc2d27003ddd5e",
+     "size": 15196,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageDoctrine.js",
      "sha256": "5d59a7f15a84adb8d46069a5bcb31a71b4f0f3915bb5720a8022c3a47dc2a64e",
      "size": 9939,
@@ -41155,15 +41167,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageGauntlet.js",
-     "sha256": "8718d65a1736967b0232ea86e5ead1669bdec8d37ee5f44ed44aa7becd0aab2a",
-     "size": 28701,
+     "sha256": "287c5f4d923448fbd19de54227d25b6191d35df926215938cefcf6432f348b1e",
+     "size": 30828,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageLeak.js",
+     "sha256": "292a9d31a638ca9ed75d774419b3fcf0c936c433132a72f532280aca5ac326d3",
+     "size": 16844,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageMath.js",
-     "sha256": "1f7ee378d67f15496fe610d16cb0af71ffc5e640e3bfe5c1ac79b10cbfbb3a56",
-     "size": 22633,
+     "sha256": "510e9c4d4a3b4811ced27cab6e3ffcccf6e01b812d8e9ca9e4cfa74b5f4c33db",
+     "size": 24006,
      "type": "file"
     },
     {
@@ -41175,9 +41194,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionagePresence.js",
+     "sha256": "efbb378e60eb1b1b62485304ca153a3db26cbd235df1e87cea47ac18f2af9c93",
+     "size": 9914,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageProductStage.js",
-     "sha256": "323e2b07f19322ed786df3d22ee3e0669496cb36aa8906f9cb26f40d9f1efca7",
-     "size": 36973,
+     "sha256": "cdadfe7e5dbee5368f041e4351f59b17d94c636cdd34e65d69edf71f25f67f75",
+     "size": 39320,
      "type": "file"
     },
     {
@@ -41218,8 +41244,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "51a0f2555f4b5b69cb472f9e51a29cebfab5ce2e8cd481d505f62dd2e88119c5",
-     "size": 46392,
+     "sha256": "c3040fa5c266ca4a4fc4b130e0ae9a96723dfeddbae7e9e00570ec188d5bd3c2",
+     "size": 48713,
      "type": "file"
     },
     {
@@ -41708,8 +41734,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderChallenge.js",
-     "sha256": "36b2d64007375eb30192916c0212f0d412c869fef478b122b5916b3b76f55507",
-     "size": 23239,
+     "sha256": "29917fefd7ac9e0cdee8d9c0e3d6c653167c3bfb06807d7ab9d1528ab6860755",
+     "size": 25992,
      "type": "file"
     },
     {
@@ -41736,8 +41762,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcLadderKernel.js",
-     "sha256": "5ada1f7b71af0a1af42422abce33019347b68833a8c9f17689e3e0bd7571501d",
-     "size": 71479,
+     "sha256": "597f4ef0b6255a4d2b553a61e4b1e47a4fc85e804dc5e579eb8dbef8bed849fa",
+     "size": 73537,
      "type": "file"
     },
     {
@@ -42457,8 +42483,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "16821270399789d3fec6b0c0f48549201fd997daae206eed47f6ed117703d4a8",
-     "size": 59239,
+     "sha256": "b7103520712a9fc487c8f660f3277da9a585bcb361378cdfc9239a80d10e1597",
+     "size": 61008,
      "type": "file"
     },
     {
@@ -43241,8 +43267,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "4b498aea1f45e6cd1ced209eeb7c348b7b9d8d8c26144eef389057281419b3aa",
-     "size": 13409,
+     "sha256": "f51e961a2ce9066e06814ce23abd54f143640de36e62a25efeda3500dfac3a11",
+     "size": 15303,
      "type": "file"
     },
     {
@@ -45082,8 +45108,8 @@
     {
      "mode": "100644",
      "path": "src/lib/roadNetwork.js",
-     "sha256": "256227dd4653906069fcb8a2d3390db74317022c23bf511d408c5c123896e2e8",
-     "size": 15012,
+     "sha256": "b32e7b19d58d88df34b850cc2b6fd7e0dcdcdfc608fc9f0d81ac08518b3801d0",
+     "size": 16290,
      "type": "file"
     },
     {
@@ -45222,8 +45248,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialUsage.js",
-     "sha256": "e804eeea264389c8fa82622197e20f329e008c3fe94270df913fefc830ba2f75",
-     "size": 37933,
+     "sha256": "73fa7c758b1051bd0d9f479a7e7e987213b6a58c0753f6d8ba7c8d3431035177",
+     "size": 39899,
      "type": "file"
     },
     {
@@ -46427,51 +46453,51 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "bc166743a94104d234308ea5c331cef52724a0317821f33948d595b693461770",
-  "corpusDigest": "134a1b72ae3c7db3acd3fb90eda95ef5d4005ae72b1e14e5db0ce797ce48b8ec",
-  "currentArtifactDigest": "6cec48e5c520bf501b5c271f0d9b44b4a88cf77d0e0824496be2f6be601094cd",
-  "currentDetectorDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "currentFindingsDigest": "6aa8e5b89153d2dfa1f5957247bfe07cba139e28fcaeb8a938522bd847b27ff4",
-  "currentScannerSha": "894325ff81455e39b4a24c06cc29366e273111cb",
-  "currentScannerToolDigest": "cfef37b337bb65e8e20cfd994d64a1a431b77242f82eed234042d24fa4a567a1",
-  "detectorTreeDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "executionTreeDigest": "235ae9640ce288afa79dad794de7c8e15c505e0cf61d794c53c8a5fe1c2764ad",
+  "bundleDigest": "e7ff37dfa2b386ca0a562abca46afcb892a4fbc32fad382a4df90400ebcf0ea4",
+  "corpusDigest": "86fae1a6e032f7cbb6b61474467b2be25f8a0bb306d71d7a60e5e9770b697649",
+  "currentArtifactDigest": "98206a500bd4cdf58b96f41dab68e666f6e9899ecb57afc7ebad50c2567c3797",
+  "currentDetectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
+  "currentFindingsDigest": "c82951f8796c585d48f95b6b839b68ebe326305a59b11d3dddcdbee9c383dd26",
+  "currentScannerSha": "361593898672aaead0c216d98ea40037e66147cb",
+  "currentScannerToolDigest": "06632bd622f768a3a5510a55a810b5dead111ca9777840e97d0ae3a1f3452586",
+  "detectorTreeDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
+  "executionTreeDigest": "0cb9d4befc1877440bf7c5bec81a7d0545c87bdab8abca4acac30c7c734e18a6",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "6cec48e5c520bf501b5c271f0d9b44b4a88cf77d0e0824496be2f6be601094cd",
-  "legacyDetectorDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "legacyScannerSha": "894325ff81455e39b4a24c06cc29366e273111cb",
-  "legacyScannerToolDigest": "cfef37b337bb65e8e20cfd994d64a1a431b77242f82eed234042d24fa4a567a1",
-  "predecessorBaselineDigest": "e6f43d7ce449cb291554f810684bfeb46873b8159a17b418c011d0c6ce203d45",
-  "predecessorBaselineTextSha256": "88e04d4d12a31f3375d13e2f758507c6c240b3b118ab3be3e8c9ae58b5c010b6",
-  "predecessorInventoryDigest": "8888550911dabecc564262e6f7759b7046d3f6e2f1d7cb4304826bafe28e0377",
-  "reportDigest": "546d1bd67769cadf768325d0d1f42d365e66d2dd5edfad84256e44c28a7b0532",
-  "reviewDigest": "a978d134c02ba2d45c32f2564e0e692118d8259809e0f84e186d42ba6a2e2daf",
+  "legacyArtifactDigest": "98206a500bd4cdf58b96f41dab68e666f6e9899ecb57afc7ebad50c2567c3797",
+  "legacyDetectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
+  "legacyScannerSha": "361593898672aaead0c216d98ea40037e66147cb",
+  "legacyScannerToolDigest": "06632bd622f768a3a5510a55a810b5dead111ca9777840e97d0ae3a1f3452586",
+  "predecessorBaselineDigest": "3148c19fa8313ba214e7683d05a55e68bbd92979261316e5b1e42857901b7163",
+  "predecessorBaselineTextSha256": "020b9fc26c5648eb2e5157e25ebd135106902d20cb710d34aea6f49305beb054",
+  "predecessorInventoryDigest": "b3611bd5e5f572ae82dc4f66d443e1197cd522bf6f1c249362681de92c8dc133",
+  "reportDigest": "3ac2e4332212476125bf09f0624a4a806a18e524284d2ebe210e270aeff73efd",
+  "reviewDigest": "ddb799419b8c63a0598f6162980a0f8eeb05cd2d9b4b294f5a0dcc777ff2ea04",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "d662c2182d1343e388249056e364daf425d9b42ee75eb0fdb43e7989207eed3a",
-  "sourceTreeDigest": "ed027a139959d24263e4d6ffbaf8df1e9dc82df8d9921b44269a21540700704c",
-  "subjectSha": "894325ff81455e39b4a24c06cc29366e273111cb",
-  "targetInventoryDigest": "4e868f79fb0920d12754553246caa6d36b21697efc9a27d7dc12da645729ce45"
+  "scanTreeDigest": "e939ae2aa7cd81e2a32919d259e031e0c4b883d019c3fcb7b3e18c8cfad0b96c",
+  "sourceTreeDigest": "0c215f274fdda69c8dee7703d17aef85fc697e3018139857d854b2b2d2484e01",
+  "subjectSha": "361593898672aaead0c216d98ea40037e66147cb",
+  "targetInventoryDigest": "feeee115111379183981330eb51cb4f282b014868d616fafbeb24cc696e81d76"
  },
  "minRows": 40,
  "originMinRows": 8,
  "scanStats": {
-  "files": 2083,
-  "reads": 120407,
-  "resolved": 9238,
-  "unresolved": 111169
+  "files": 2089,
+  "reads": 120581,
+  "resolved": 9240,
+  "unresolved": 111341
  },
  "scannerProvenance": {
-  "detectorDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "executionTreeDigest": "1f3058152c2a0073ee8c5546aebe6d3eeda7e33bc0ae4236cf3e582862237eb5",
-  "scanTreeDigest": "568f843e347a77e29bbc5360c5f77d268267df6fd3dc0ed009ba19f460f3301f",
-  "sourceTreeDigest": "bf6f978ef068732e8b7350c2cafec468030f47d2616a35993535100a1f4d3dc9",
+  "detectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
+  "executionTreeDigest": "0cb9d4befc1877440bf7c5bec81a7d0545c87bdab8abca4acac30c7c734e18a6",
+  "scanTreeDigest": "e939ae2aa7cd81e2a32919d259e031e0c4b883d019c3fcb7b3e18c8cfad0b96c",
+  "sourceTreeDigest": "0c215f274fdda69c8dee7703d17aef85fc697e3018139857d854b2b2d2484e01",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
- "schema": 4,
+ "schema": 5,
  "sentinel": {
-  "resolvedReads": 9238,
+  "resolvedReads": 9240,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 2164
+ "total": 2003
 }
