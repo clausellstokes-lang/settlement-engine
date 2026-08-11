@@ -14,7 +14,8 @@ import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
-import { settlementSizeLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { settlementSizeLabel, humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
+import { resolveSettlementTerrain } from '../../domain/resolveTerrain.js';
 import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -50,8 +51,16 @@ export default function PlacementDetailCard({ onOpenDetail }) {
   const name  = s.name || settlement.name || 'Untitled';
   const size  = settlementSizeLabel(s.tier || settlement.tier, EMPTY_VALUE);
   const pop   = s.population || 0;
-  const culture = s.culture || s.cultureName || '';
-  const terrain = s.terrain || '';
+  // Culture and terrain are persisted on the RESOLVED config, never at the top
+  // level of a settlement: resolveConfig.js rolls the `random_culture` / 'auto'
+  // sentinels away and writes `culture` + `terrainType` into effectiveConfig.
+  // `s.culture` / `s.cultureName` / `s.terrain` have no writer at all, so this
+  // whole block was gated on two permanently empty strings and never MOUNTED.
+  // resolveSettlementTerrain is the ONE terrain read (domain/resolveTerrain.js)
+  // — re-deriving the config chain here is exactly the drift that enforcer
+  // exists to prevent.
+  const culture = humanizeToken(s.config?.culture || '');
+  const terrain = humanizeToken(resolveSettlementTerrain(settlement) || '');
 
   function handleClose() {
     clearSettlement();

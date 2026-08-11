@@ -110,6 +110,23 @@ export default function PlacementsLayer({ transformRef }) {
       const ancientRuin = settlement?.history?.ancientRuin
         || settlement?.settlement?.history?.ancientRuin
         || null;
+      // Trade-route access is persisted on the CONFIG, never at the top level
+      // of a save row: `tradeRouteAccess`/`port` have no writer there at all, so
+      // the old `settlement?.tradeRouteAccess === 'port' || settlement?.port`
+      // read was one level too shallow and PortBadge could NEVER appear.
+      // The value here is always the RESOLVED route — resolveConfig.js records
+      // the 'random_trade' sentinel separately as `_routeIntent` and writes the
+      // rolled route into effectiveConfig, so no sentinel can reach this read.
+      //
+      // ⚠ DELIBERATELY NOT a `settlement?.settlement?.config` fallback: that
+      // wrapper hop would be a FOURTH `settlement on settlement` read against a
+      // frozen ceiling of 3 (scripts/.observed-shape-readers-baseline.json), and
+      // that ratchet is shrink-only. The save-row `config` column carries the
+      // resolved route in every save-museum fixture, so the hop buys nothing
+      // measurable here; if a wrapper-only shape ever turns up, the honest fix
+      // is to hoist ONE unwrap for all four reads in this loop, not to add a
+      // fifth.
+      const tradeRouteAccess = settlement?.config?.tradeRouteAccess || '';
       const sid = p.settlementId != null ? String(p.settlementId) : null;
       const steadingsMap = (sid && satellitesLedger && satellitesLedger[sid]?.steadings) || null;
       const steadings = steadingsMap
@@ -121,7 +138,7 @@ export default function PlacementsLayer({ transformRef }) {
         x: p.x, y: p.y,
         tier,
         name: settlement?.name || p.name || '',
-        port:    !!(settlement?.tradeRouteAccess === 'port' || settlement?.port),
+        port:    tradeRouteAccess === 'port',
         capital: !!(settlement?.capital || settlement?.isCapital),
         lifecycleStatus,
         ancientRuin,

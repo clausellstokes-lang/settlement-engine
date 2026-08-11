@@ -334,18 +334,30 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    *
    * Making the heuristic leg the gate authority pulls `src/components/` into
    * direct enforcement. The literal below is the MEASURED figure for the live
-   * scan (53 files / 162 identities / 260 reads), not a transcription from the
-   * ruling — CR-OSR-FREEZE-4-R1 records that the ruling's "88 files / 250
-   * identities" was the SCHEMA-2 predecessor's slice, produced by a DIFFERENT
-   * detector, and a pin written to it would red on first measurement.
+   * scan, not a transcription from the ruling — CR-OSR-FREEZE-4-R1 records that
+   * the ruling's "88 files / 250 identities" was the SCHEMA-2 predecessor's
+   * slice, produced by a DIFFERENT detector, and a pin written to it would red
+   * on first measurement.
    *
    * It is pinned against the LIVE SCAN rather than the frozen baseline on
    * purpose: it is then green immediately and stays green across the genesis,
    * so it never becomes a second number a freeze has to remember to move.
+   *
+   * ⭐ MOVED 2026-08-11 BY REPAIR, NOT BY DRIFT: 53/162/260 → 53/153/249. The
+   * UI-cohort triage's display repairs deleted NINE reader identities that no
+   * writer had ever produced — `campaignId on save` (ProvenanceBlock, 2 reads),
+   * `port`/`tradeRouteAccess on settlement` (PlacementsLayer, 1 each),
+   * `culture`/`cultureName`/`terrain on settlement` (PlacementDetailCard, 1
+   * each) and `decreed`(2)/`source`(1)/`visibility`(1) `on stressors`
+   * (heraldFeed) — eleven reads across nine identities. The file count is
+   * unchanged because no file lost ALL of its rows. This is the cohort SHRINKING
+   * as rows are triaged and cured, which is the direction the ratchet exists to
+   * permit; the frozen inventory's matching nine rows are deleted by the
+   * `--write` re-freeze, which only runs from a committed tree.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 53, identities: 162, counts: 260 });
+    expect(cohort).toMatchObject({ files: 53, identities: 153, counts: 249 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 

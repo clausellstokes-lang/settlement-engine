@@ -26,10 +26,21 @@ export default function ProvenanceBlock({ save }) {
   const editedAt     = useStore(s => s.editedAt);
   const canonizedAt  = useStore(s => s.canonizedAt);
   const lastExportAt = useStore(s => s.lastExportAt);
-  const campaigns    = useStore(s => s.campaigns);
-  const campaignName = save?.campaignId
-    ? (campaigns.find(c => c.id === save.campaignId)?.name || null)
-    : null;
+  // Campaign membership runs from the CAMPAIGN to the settlement
+  // (campaign.settlementIds), never the other way: no `campaignId` column was
+  // ever created on a save (migration 104) and no writer has ever put one on a
+  // save record. Reading `save.campaignId` therefore made this row an em-dash
+  // for EVERY settlement, including genuine campaign members — it did not fail
+  // to inform, it actively misinformed. `getCampaignForSettlement` is the
+  // store's one spelling of that membership scan (String-normalized, active-
+  // campaign only); OutputContainer and useTownScenePaneBridge already consume
+  // it, so this is the third consumer of one derivation, not a third
+  // derivation.
+  const campaignName = useStore((s) => {
+    const saveId = save?.id;
+    if (saveId == null || typeof s.getCampaignForSettlement !== 'function') return null;
+    return s.getCampaignForSettlement(saveId)?.name || null;
+  });
 
   return (
     <Card kicker="Provenance" compact>

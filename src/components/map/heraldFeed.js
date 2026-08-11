@@ -39,7 +39,7 @@ import {
  * @property {string[]} affectedIds
  * @property {string} kind            the routing token (impactKind/candidateType/type)
  * @property {string|null} rootId     the receipt id the ARTICLE (cause walk) opens on
- * @property {'canon'|'amendable'|'covert'|'decreed'} provenance
+ * @property {'canon'|'amendable'|'covert'} provenance
  * @property {Record<string, unknown>} record   the source record (for the article + actions)
  */
 
@@ -66,12 +66,32 @@ function labelOf(record) {
   return typeof label === 'string' && label.trim() ? label.trim() : null;
 }
 
-/** The provenance chip a record carries (non-canonical only shows). */
+/**
+ * The provenance chip a record carries (non-canonical only shows).
+ *
+ * ⚠ THE 'decreed' ARM WAS DELETED, NOT DISABLED. Its three disjuncts
+ * (`o.decreed`, `record.decreed`, `o.source === 'dm'`) had ZERO writers between
+ * them — not production, not test, not fixture. Stronger than unwritten:
+ * `normalizeStressor` (domain/worldPulse/stressorsCore.js) is a closed
+ * whitelist constructor that does not spread its input, so a stressor CANNOT
+ * carry any of them; and no producer writes a top-level `source` on an outcome,
+ * digest entry or news entry at all (every engine `source:` is nested inside a
+ * causes[]/evidence[] receipt). The DM-authored stressor path does ship
+ * (EventComposer APPLY_STRESSOR → crisisLifecycle twinDirectiveForEvent →
+ * injectCampaignStressor) but deliberately mints provenance-free records, so
+ * wiring a writer would mean widening the persisted stressor shape — a
+ * golden-shifting change for a chip `needsAttention` (heraldFilter.js) does not
+ * even consult. Reader-side deletion is the honest repair.
+ *
+ * `o.visibility === 'covert'` went with it for the same reason: the domain
+ * spells covert as `covert: true` or `visibility: 'gm'`, never `'covert'`. Its
+ * two siblings on that line DO have writers (pulseHelpers, warRulingsNews,
+ * npcVerdictPulse, corruptionLeash) and are untouched.
+ */
 function provenanceOf(record) {
   const o = record?.outcome || record || {};
   if (o.applyMode === 'proposal' || record?.status === 'pending') return 'amendable';
-  if (o.covert || record?.covert || o.visibility === 'covert') return 'covert';
-  if (o.decreed || record?.decreed || o.source === 'dm') return 'decreed';
+  if (o.covert || record?.covert) return 'covert';
   return 'canon';
 }
 
