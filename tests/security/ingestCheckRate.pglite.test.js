@@ -62,8 +62,23 @@ describe.runIf(have)('ingest_check_rate — fixed-window counter (pglite, 036)',
       );
     `);
     await db.exec(extractFn(readFileSync(MIG_036, 'utf-8'), 'ingest_check_rate'));
-  }, 60000); // generous: PGlite WASM cold-start can exceed the 10s default when
-  // this file runs alone (in the full suite an earlier pglite test warms it).
+  }, 60000); // DEADLOCK GUARD, not a perf budget — never tune it to a measured
+  // boot (see tests/security/pgliteHookTimeoutRatchet.test.js).
+  //
+  // ⚠ CORRECTED 2026-08-11. This budget previously carried the claim that "in the
+  // full suite an earlier pglite test warms it". That is FALSE and it is the kind
+  // of false premise that talks the next reader into LOWERING the guard: vitest's
+  // forks pool runs each test file in its own isolated process, so no earlier
+  // pglite suite can warm anything and this file pays a full cold WASM boot in
+  // EVERY run. MEASURED at HEAD ffc85a90, both figures captured by this lane:
+  // inside a real full-suite PARALLEL gate run (machine load average peaking near
+  // 200, 4.5 GB of swap in use) this hook cost 4484 ms, and it was the SLOWEST of
+  // the five pglite suites probed — the opposite of what warming would produce;
+  // SERIALIZED (--no-file-parallelism) the whole file, boot included, took 1054 ms.
+  // So contention costs this hook roughly 4x, and 4484 ms still sits ~13x inside
+  // this guard. The guard is therefore not the constraint on this suite; it exists
+  // only to turn a genuine deadlock into a bounded failure instead of a hung
+  // worker, which is why it must never be re-derived from either number above.
 
   beforeEach(async () => {
     await db.exec('truncate public.ingest_rate_buckets;');
