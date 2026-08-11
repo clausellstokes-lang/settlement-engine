@@ -104,7 +104,7 @@ A missing progress note in one of those design files does not reopen it.
 
 ### Designed but not dispatchable now
 
-- **FP:** ES-5b waits on insertion/order reconciliation. HB and EP lack a
+- **FP:** ES-5b LANDED at `6c0238ad` (its blocker was three claims; one dissolved, the other two were closed by CR-ES5B-1..7). ES-5c is compiled as a DRAFT and awaits chair rulings; ES-5d is a newly-named split. HB and EP lack a
   sealed close/attestation. WC's old gate wording must be reconciled with the
   later owner grant. WY, WF, POP, INT, late CW, and later TR/GR/IN waves remain
   dependency-ordered behind nearer work.
