@@ -172,18 +172,38 @@ from THIS note.):**
    passes run in one pulse — **a lag belongs to a PAIR, never to a file or a volume.**
    ⚠ Told that "ES-6 has no charter of its own" is a COMPLETE result (ES-5b existed only in
    a commit message). Report: tasks/a8eec8a7a4f1c4e03.output.
-2. **TC-5 AUTHOR LANE (Opus, draft-only) — in flight.** The next town-cartography compile
-   candidate per INDEX:84-85, expected to be the RENDERING half (painter / labels / palette
-   / PNG) consuming the layers TC-3a/3b/TC-4 built.
-   ⚠⚠ **CR-TC3B-BYTES is the hazard that governs it, and a painter is exactly where it
-   bites**: the invariant is IMPORT-EDGE-TRACKED, and the bounded pair sits at **385,137 of
-   a hard 400,000 — roughly 14,863 bytes of headroom.** One rendering library or palette
-   table could blow it in a single import. ⛔ Never raise a literal, never edit the lazy
-   bundle test, never add a `manualChunks` rule.
-   ⚠ Told to check TC-5's numbers for the failure TC-4's compile found: **two
-   independently-authored tables that must agree WILL eventually disagree** (TC-4's byte
-   bands and count caps were mutually inconsistent — no cap-bound city row could ever have
-   fit) — **derive one from the other.** Report: tasks/ab287fbc0cad095ec.output.
+2. **✅ TC-5 REFUSED AS FOUR PACKETS; TC-5a PROMOTED READY @ `8738f5ea`**
+   (validate:packets **13 / 1 READY**; memory/tc5-refused-as-four-and-the-hidden-persistence-gate.md).
+   Calibration was decisive, not argued: the EXISTING emitter `townMapDraw.js` is **264
+   effective lines alone** with no palette, variant, PNG or sub-tab. Split **5a** headless
+   draw-list + palette ROLES → **5b** mount + colour + degraded → **5c** PNG goldens →
+   **5d** skins, each just-in-time.
+   ⚠⚠ **THE SHARPEST FINDING — A UI ADDITION THAT WAS SECRETLY PERSISTENCE.**
+   `mapSubTabs.js`'s OWN DOCUMENTED extension point is `TOWN_MAP_VIEW_IDS`, **which IS the
+   persisted localStorage vocabulary**. Following the design's stated plan would have
+   turned a UI addition into a **PERSISTENCE-SHAPE change — owner-gated — discovered only
+   after landing.** ⭐ Cure: seat the painter as a **NON-PRESENTATION sub-tab like
+   `player`** — same outcome, no persisted vocabulary touched. **Take the door that is not
+   a gate.** ⭐ Lesson: **a documented extension point can be a gate in disguise; ask what
+   its list IS, not what it is called.**
+   ⚠⚠ **`illustrated` IS ALREADY TAKEN** (`src/design/townMapStyles.js:74` — a LIVE
+   PICKABLE lens with a paid `LENS_COUNT`, painting the LEGACY model). Two pictures called
+   "Illustrated" is the second-truth mode the design's own §1 forbids → id is `cartography`.
+   ⭐ **THE BUNDLE CEILING IS NOT THE BINDING CONSTRAINT** (measured): pair **385,137 of a
+   strict 400,000**, closure exactly 107 — but **every painter module is OUTSIDE the
+   compiler closure** and the contract already rules "NO COLOUR, EVER" with a live
+   validator. ⚠ The CSS margin is **FIVE BYTES** (19,795/19,800), not 4.5KB — and ⚠
+   **`stats.html` does not exist in this repo**; measure from the dist artifact.
+   ⚠⚠ **TWO CORRECTIONS TO LANDED DOCS, recorded not rewritten:** TC-4 §6.6 calls
+   `institutionalCatalog.js` forbidden-and-outside-the-closure — **it is already IN**, via
+   `institutionClassify.js:26`; sound hygiene, never byte protection, so **re-derive
+   forbidden lists FROM THE MEASURED CLOSURE**. And **my own brief was wrong twice** — I
+   cited §13b/§9b for TC-4 (it has §12b/§6.6) and sent the lane to a `stats.html` that
+   does not exist.
+   ⭐ TC-4's two-inconsistent-tables class was killed STRUCTURALLY: every vocabulary map
+   DERIVES its key set exact-set-both-ways with a THROWING accessor, and the draw-op
+   ceiling is an IDENTITY over the block's own counts — nothing that can drift.
+   **NEXT: dispatch TC-5a's implementation.**
 
 Both carry the standing landing discipline IN THEIR OWN MANIFESTS (whole-census
 re-derivation + anchors for any new test file), the census-probe method that cannot move
