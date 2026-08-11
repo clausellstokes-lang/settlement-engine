@@ -158,45 +158,36 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (BOTH slots FREE; build tree CLEAN at `58436804`):**
+**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `58436804`, mutex
+free, zero processes. ⚠ The heartbeat prompt's queue text is long stale; dispatch comes
+from THIS note.):**
 
-**✅ ES-5d LANDED @ `954592c0` — THE ES-5 AMENDMENT IS COMPLETE ACROSS FOUR WAVES.**
-⚠⚠ Its packet's handoff window was PROVABLY DEAD and I ruled it in: a `tick-1` window
-between two passes that run **in the same pulse, in that order, on the same tick**, so
-**the fold never fires while every unit pin stays green.** The error came from
-transferring a REAL lag off a DIFFERENT writer/reader pair — **a lag belongs to a PAIR,
-never a file or a volume.** Cure is machinery: A5 now ASSERTS THE PULSE CALL ORDER AT
-SOURCE. (memory/a-handoff-window-can-be-provably-dead.md)
+1. **ES-6 AUTHOR LANE (Opus, draft-only) — in flight.** Unblocked because the ENTIRE ES-5
+   family landed today (5a doctrine, 5b `6c0238ad`, 5c `c0447b8f`, 5d `954592c0`), so every
+   sibling's "excluded: ES-6/7" fence has cleared.
+   ⚠⚠ **It carries the volume's four-in-a-row record of wrong design prose, each wrong
+   DIFFERENTLY**, and is told to treat every claim as a hypothesis: §3.11's reach did not
+   exist and had to be BUILT; §3.14 NAMED THE WRONG FILE; `rungExposure01` had NO SOURCE
+   while carrying half its term; and ES-5d's `tick-1` window was PROVABLY DEAD because both
+   passes run in one pulse — **a lag belongs to a PAIR, never to a file or a volume.**
+   ⚠ Told that "ES-6 has no charter of its own" is a COMPLETE result (ES-5b existed only in
+   a commit message). Report: tasks/a8eec8a7a4f1c4e03.output.
+2. **TC-5 AUTHOR LANE (Opus, draft-only) — in flight.** The next town-cartography compile
+   candidate per INDEX:84-85, expected to be the RENDERING half (painter / labels / palette
+   / PNG) consuming the layers TC-3a/3b/TC-4 built.
+   ⚠⚠ **CR-TC3B-BYTES is the hazard that governs it, and a painter is exactly where it
+   bites**: the invariant is IMPORT-EDGE-TRACKED, and the bounded pair sits at **385,137 of
+   a hard 400,000 — roughly 14,863 bytes of headroom.** One rendering library or palette
+   table could blow it in a single import. ⛔ Never raise a literal, never edit the lazy
+   bundle test, never add a `manualChunks` rule.
+   ⚠ Told to check TC-5's numbers for the failure TC-4's compile found: **two
+   independently-authored tables that must agree WILL eventually disagree** (TC-4's byte
+   bands and count caps were mutually inconsistent — no cap-bound city row could ever have
+   fit) — **derive one from the other.** Report: tasks/ab287fbc0cad095ec.output.
 
-**✅ THE EXIT-ROAD WORK IS FINISHED @ `58436804` — BY REFUSAL, and my design was wrong on
-THREE OF FOUR CASES** (queue §15b, `5665e04d`). I told the lane to refuse forward if the
-fields I assumed did not exist. **They do not.** No `src/` file changed; what landed is
-the evidence plus three pins and the entity guard.
-- **A road is `{id, from, to, weight}` and nothing else** — probed across 8 configurations;
-  `weight` is ONE settlement-wide value (zero per-edge information), `id` a positional
-  index. No direction, type, name or destination exists anywhere.
-- ⚠⚠ **THE BEARING IS A LAYOUT ARTIFACT: gate offsets come from THE PLANNER'S RETRY
-  COUNTER** (the source comment says so). The same settlement's first road leaves due
-  north under v2 and NNE under v1. **Labelling it "north" would publish a retry counter as
-  a compass bearing.**
-- ⭐ **THE RELATIONSHIP CASE WAS UNREACHABLE, and this is the sharpest catch of the run:
-  the branch I specified would have been A READER WITH NO WRITER, BUILT TO SATISFY A
-  RULING AGAINST BUILDING READERS WITH NO WRITERS** — its only independent input is
-  WRITER-LESS BY DESIGN since R-5b retired its picker.
-- **Hiding the empty section was ALREADY CORRECT**; my premise was wrong twice (it never
-  rendered empty — it rendered nothing) and the walker was GREEN at base, not red.
-⭐ The mutants caught the lane's OWN draft lying twice: anchoring on the NAME is wrong
-because the name is what an id-leak corrupts, and **`toContain` over an ARRAY is
-exact-element equality**, so a smuggled id passed clean.
-⚠ **ONE TASTE CALL LEFT FOR THE OWNER:** whether "Roads out — Three approaches. No
-neighbour is recorded yet." beats an absent section. It REVERSES hide-when-empty. My lean
-is recorded (leave it absent); the decision is the owner's.
-
-⚠⚠⚠ **`MEMORY.md` HAD SILENTLY OVERFLOWED ITS READ LIMIT** (~26KB vs ~17.1KB), so **its
-TAIL — the NEWEST hazards — was already invisible to every session.** Repaired by LOSSLESS
-folding into four archive files, verified line-by-line: **zero lines lost, 17,080 bytes,
-zero broken links.** ⚠ Treat ~17KB as a HARD ceiling and fold BEFORE appending near it —
-an index that overflows does not degrade gracefully, **it truncates the future.**
+Both carry the standing landing discipline IN THEIR OWN MANIFESTS (whole-census
+re-derivation + anchors for any new test file), the census-probe method that cannot move
+what it measures, and the two pre-existing gate reds to attribute rather than chase.
 
 **Ruled and sequenced (not blocked):**
 
