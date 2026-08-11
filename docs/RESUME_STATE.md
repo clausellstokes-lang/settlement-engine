@@ -3,28 +3,42 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:18:36 EDT
+**Generated:** 2026-08-11 15:22:33 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `904b7bb0` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `f0af52be` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `904b7bb0` | **4** |
+| ledger (main) | `review-fixes-2026-07-08` | `982cbf37` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T151800` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T152158` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T151800
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T152158
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
 staged set BY NAME AND COUNT.
 
+### Uncommitted in the build tree — attribute before touching
+
+```
+ M docs/FABLE_VALIDATION_QUEUE.md
+ M docs/SOL_QUEUE.md
+ M docs/implementation/packets/town-cartography/TC-4.md
+ M tests/lint/sovereigntyLightingContract.walker.test.js
+```
+```
+  +197    -70     docs/FABLE_VALIDATION_QUEUE.md
+  +13     -3      docs/SOL_QUEUE.md
+  +13     -5      docs/implementation/packets/town-cartography/TC-4.md
+  +10     -5      tests/lint/sovereigntyLightingContract.walker.test.js
+```
 ## Last 12 build commits
 
 ```
@@ -44,12 +58,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
-96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -159,10 +173,28 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    existence-checks CREATE rows, so PACKET_MANIFEST's TC-5A row is fiction (three
    declared paths do not exist) — machinery fix + row correction + TC-5A.md stale-prose
    corrections batched for the next free build slot (task #8).
-6. **Lane F (read-only draft, Opus) — TC-5B-i PACKET COMPILE**, dispatched ~15:12: the
-   manifest seam, headless producer, presence-oracle per CR-TC5B-3; two candidate seam
-   shapes with rejections required. Output: scratchpad `laneF-TC-5B-I-draft.md`.
-   Transcript: session dir `subagents/agent-a32cc2bb49252d63f.jsonl`.
+6. **Lane F — ✅ COMPLETE (~15:55): TC-5B-i is COMPILABLE and DRAFT-complete** (scratchpad
+   `laneF-TC-5B-I-draft.md`, 911 lines). Four seam shapes measured; the brief's two both
+   REJECTED on live code (worker `manifestOnly` = new protocol inside a bounded-artifact
+   ceiling; abort-after-onManifest = success read out of an AbortError; sceneCache =
+   STRUCTURALLY IMPOSSIBLE, the key derives from the manifest it would store). **Chair
+   rulings CR-TC5BI-1..5 (Fable, vetoable):** the lazily-imported main-thread compile
+   module RATIFIED (the `townSceneExport.js:147-166` precedent); homes as recommended;
+   the 600 ms B6 compile-cost STOP accepted as a PREFLIGHT PROBE never a test assertion;
+   the ~30-line walker duplication accepted this wave (extract only after both halves
+   land); manifest row authored from real paths behind Lane H's existence-check. Two
+   TC-5B-ii corrections recorded (planExtent arrives as a RESOLVED NUMBER, not a manifest
+   prop — one-line §7 amendment; the split table overstates 5b-i, TC-5a's leaf gains its
+   first production importer at 5b-ii). Reservations: four paths, ZERO intersection with
+   the 5b-ii set — the halves meet through a symbol, never a file. **Promotion + dispatch
+   = task #9, after Lane G lands.**
+7. **Lane H (build, Opus) — the PACKET-MACHINERY batch (task #8)**, dispatched ~16:00:
+   `validate:packets` gains a CREATE-row existence check (a landed packet's manifest
+   fiction currently never reds — disabled guard → machinery), the TC-5A manifest row is
+   corrected from `41b39220`'s real paths, and TC-5A.md's stale census figures + expired
+   free-attribution notes are corrected. Proof protocol: three captured exits
+   (before / guard-live-red on the fiction / after = 0). Paths disjoint from Lane G.
+   Transcript: session dir `subagents/agent-a3c65b1607f12ae71.jsonl`.
 
 Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
 (task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
