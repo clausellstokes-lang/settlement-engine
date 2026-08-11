@@ -118,11 +118,25 @@ an explicit "collect it yourself" order rather than re-dispatching, which burns 
   `scannerToolFiles()` they sit inside `detectorTreeDigest`, so **retuning θ or adding an
   exemption REDS THE GATE by the mechanism that already governs the detector — the guard
   guards itself.**
-  ⚠ **The full 17-step gate is RUNNING** at this handoff (background task `b6s2lt41d`,
-  output in `tasks/b6s2lt41d.output`). The mint's measured endstate is **exit 1 with
-  EXACTLY ONE failing test outside the frozen census — `generatorGoldenMaster`, the
-  owner-approved SHIFT-2 red.** **If the successor sees that and nothing else, the board is
-  as green as it can be without the owner's `UPDATE_GOLDEN`.**
+  ⚠⚠ **THE FULL GATE RAN AND IT IS NOT GREEN — TRUE EXIT 1, and NOT on the golden.**
+  ⛔⛔ **THE HARNESS REPORTED THIS RUN AS "exit code 0". THE CAPTURED `$?` WAS 1. SIXTH
+  SIGHTING TODAY — trust no exit status you did not capture yourself.**
+  **The red is the SCOPE-COLLAPSE SENTINEL, and it is the sentinel WORKING:** five
+  `tests/security/*.pglite.test.js` suites **FAILED WITHOUT A MEASURABLE TEST** — their
+  `beforeAll` threw, so every test they own left the census.
+  ⭐ **ATTRIBUTED, NOT A REGRESSION:** `supportTickets.pglite` then passed **19/19, exit 0,
+  IN ISOLATION** — same code, same commit; the only difference is CONTENTION. It is the
+  same sizing error the mint itself hit and cured hours earlier (the OSR corpus build
+  measures **251,002 ms contended against a 300 s budget sized on the 47 s SOLO figure**).
+  **Same disease, five more patients** (memory/heavy-beforeall-hooks-collapse-under-contention.md).
+  ⭐⭐ **AND THIS IS EXACTLY WHY ES-5c BUILT THAT SENTINEL:** before it, these five would
+  have been counted as SKIPS and the ceiling could have absorbed them — coverage silently
+  gone. Its first real full-gate run caught five suites.
+  ⚠ **The census is SEQUENCED and ABORTS before per-test reporting**, so this run CANNOT
+  tell you whether the golden or anything else is red behind it.
+  **→ NEXT ACT FOR THE SUCCESSOR: size those five hooks for CONTENTION (not solo), re-run
+  the gate, THEN read the endstate.** ⛔ Never cure it by raising the SKIP CEILING — a
+  collapsed suite is not a skip, which is the sentinel's entire point.
   ⚠ Superseded note (kept for provenance): the vault `refs/preserved/schema5-mint-wip`
   (`697b5862`) was insurance taken while the lane looked stopped; its content is now
   LANDED and the ref is redundant.
