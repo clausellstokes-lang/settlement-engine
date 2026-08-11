@@ -574,7 +574,12 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lint/namedPersonTransitTotality.walker.test.js': 1,
   'tests/lint/premiumGateSingleSource.test.js': 1,
   'tests/lint/significanceMigration.census.test.js': 4,
-  'tests/lint/testRatchet.test.js': 2,
+  // LOWERED 2 → 1 on 2026-08-10. 894325ff (the schema-4 code half) both DELETED one of
+  // the two frozen sites — the `/failed to COLLECT/i` denial, replaced wholesale by the
+  // CR-TRFZ-4 rewrite — and authored four new ones, which this lane anchored. Exactly one
+  // frozen site survives (the `/:: a\b/` denial at line 1077), so the row banks down to it.
+  // Identity diffed by LINE TEXT against the 36e50c73 freeze, never by line number.
+  'tests/lint/testRatchet.test.js': 1,
   'tests/lint/vocabularyTotality.walker.test.js': 1,
   'tests/lint/warCoalitionKindPools.walker.test.js': 3,
   'tests/lint/warCostKindPools.walker.test.js': 6,

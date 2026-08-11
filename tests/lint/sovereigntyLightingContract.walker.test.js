@@ -3405,7 +3405,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // probe-edited ones, so the instrument could not weigh itself; this file is CREDITED
     // (33 titles, 4 suite titles), which is exactly why that substitution is required and
     // why the note you are reading adds no pin of its own.
-    files: 2383, parked: 364, credited: 2019, titles: 19545, suiteTitles: 5519,
+    //
+    // ── RE-RECORDED 2026-08-10 BY THE SENTINEL-HARDENING LANE, WITH ITS CAUSE STATED ──
+    // 2383/364/2019/19545/5519 → 2383/364/2019/19548/5519. THE CAUSE IS THREE NEW TEST
+    // TITLES IN ONE ALREADY-CREDITED FILE and nothing else: tests/lint/testRatchet.test.js
+    // gains the three pins that drive the new scope-collapse discriminators in
+    // scripts/check-test-ratchet.mjs. All three were added INSIDE the existing scope
+    // sentinel suite, so no suite title is minted and `suiteTitles` holds at 5519.
+    // ⭐ THE ARITHMETIC CLOSES AS A DERIVATION, NOT AN ASSUMPTION: a file that PARKED would
+    // have withdrawn its ENTIRE title layer in one movement, so a delta of exactly +3
+    // proves testRatchet.test.js is still credited and gained exactly its three new pins;
+    // no file was added, renamed or deleted, so `files` holds at 2383 and 364 + 2019 = 2383
+    // still closes the file arithmetic. All five figures are re-proven BY EXECUTION rather
+    // than by patching one: this census stops at its first red figure, so the later arms
+    // are reached only when every earlier one is already right.
+    files: 2383, parked: 364, credited: 2019, titles: 19548, suiteTitles: 5519,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

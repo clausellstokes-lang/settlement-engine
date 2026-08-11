@@ -1191,8 +1191,12 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/SCOPE SENTINEL/);
       expect(r.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
-      expect(r.out, 'the skip ceiling must not be the thing that reds — it was set to 50')
-        .not.toMatch(/skipped tests grew/);
+      // The two assertions above pin `r.out` as a live SCOPE SENTINEL report that names
+      // the uncollected suite, so what follows is arm ATTRIBUTION, not a test against an
+      // empty string: the ceiling was set to 50 precisely so it cannot be what reddens,
+      // and a hit here would mean the skip arm fired while the discriminator stayed quiet.
+      // anchored: the /SCOPE SENTINEL/ and /FAILED WITHOUT A MEASURABLE TEST/ assertions two lines up prove the subject is a live, fully-printed failure report, so this denial can only be read as "the OTHER arm did not fire"
+      expect(r.out, 'the skip ceiling must not be the thing that reds — it was set to 50').not.toMatch(/skipped tests grew/);
     });
 
     test('⚠⚠ CR-TRFZ-4 NEGATIVE CONTROL: a DELIBERATELY skipped suite is still just skips', () => {
@@ -1211,6 +1215,10 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         skippedCeiling: 50,
       });
       expect(skipOnly.status, skipOnly.out).toBe(0);
+      // LIVENESS ANCHOR: exit 0 on its own would still be satisfied by a gate that
+      // printed NOTHING, so pin the success verdict itself before denying anything.
+      expect(skipOnly.out).toMatch(/OK — no test regressions/);
+      // anchored: the success verdict pinned on the line above proves this is a live, fully-printed report, so the denial states that the discriminator declined to reclassify a deliberate describe.skip — it cannot pass by the output having drifted away
       expect(skipOnly.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
 
       // A suite that failed BECAUSE a test failed is an ordinary failure: the
@@ -1223,6 +1231,12 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         ],
         skippedCeiling: 50,
       });
+      // LIVENESS ANCHOR: this run carried NO verdict assertion at all, so the denial
+      // below was satisfied by any output whatsoever — including none. `entries` is
+      // empty, so the failing test IS an ordinary regression; pin that verdict first.
+      expect(realFailure.status, realFailure.out).not.toBe(0);
+      expect(realFailure.out).toMatch(/TEST REGRESSIONS/);
+      // anchored: the regression verdict pinned directly above proves this output is the ordinary per-test failure report, so the denial asserts a CLASSIFICATION — measurable failure, not a hole — rather than an absent string
       expect(realFailure.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
     });
 
@@ -1235,6 +1249,10 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         suites: [{ file: REAL, tests: [T('a', 'passed')] }, { file: REAL2, tests: [] }],
       });
       expect(r.status, r.out).toBe(0);
+      // LIVENESS ANCHOR: without this, a gate that exited 0 having printed nothing
+      // would satisfy the denial below just as well as the tolerance being real.
+      expect(r.out).toMatch(/OK — no test regressions/);
+      // anchored: the success verdict pinned on the line above proves the report is live and complete, so the denial states that an ALLOWLISTED uncollected suite was tolerated SILENTLY — the banner was withheld, not merely absent from an empty string
       expect(r.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
     });
 
@@ -1248,6 +1266,166 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.status, r.out).toBe(0);
       expect(r.out).toMatch(/RATCHET DOWN/);
       expect(r.out).toMatch(/now COLLECT/);
+    });
+
+    // ── ⚠⚠ THE SCOPE-COLLAPSE DISGUISE ───────────────────────────────────────
+    // A dead worker's tests are serialised as `pending`, which `NON_RUN_STATUSES`
+    // counts as non-run rows — so a COLLAPSE used to surface as `skipped tests grew`,
+    // sending the reader to the deferral list instead of to the tests that never ran.
+    // These pins drive the two discriminators the report already carries.
+    /** A report where REAL2 never started: its clock never left the run's own stamp. */
+    const collapsedReport = ({ runStart = 1_700_000_000_000, deadRows = 3, declaredPending = 0 } = {}) => ({
+      startTime: runStart,
+      numPendingTests: declaredPending,
+      numTodoTests: 0,
+      testResults: [
+        {
+          name: join(ROOT, REAL),
+          status: 'passed',
+          startTime: runStart + 500,
+          endTime: runStart + 700,
+          assertionResults: [{ fullName: 'a', title: 'a', ancestorTitles: [], status: 'passed' }],
+        },
+        {
+          name: join(ROOT, REAL2),
+          status: 'passed',
+          startTime: runStart,
+          endTime: runStart,
+          assertionResults: Array.from({ length: deadRows }, (_, i) => ({
+            fullName: `dead${i}`, title: `dead${i}`, ancestorTitles: [], status: 'pending',
+          })),
+        },
+      ],
+    });
+
+    test('⚠⚠ a COLLAPSED suite reds AS a collapse, and is NAMED', () => {
+      // Both discriminators fire here: vitest declared 0 pending while the census
+      // counted 3 non-run rows, and REAL2's clock never left the run's start stamp.
+      const r = run({ entries: {}, skippedCeiling: 0, report: collapsedReport() });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/SCOPE COLLAPSE/);
+      expect(r.out).toMatch(/NEVER STARTED/);
+      expect(r.out, 'the offending suite must be named, not merely counted').toMatch(/check-test-ratchet\.mjs/);
+      expect(r.out, 'the count disagreement is the detecting arm').toMatch(/gap of 3 row\(s\)/);
+
+      // THE GAP ARM ALONE: same collapse, but the clock is honest, so no suite can be
+      // named. The disagreement between vitest's own counter and the census still refuses.
+      const gapOnly = run({
+        entries: {},
+        skippedCeiling: 50, // generous: the ceiling must NOT be what reds here
+        report: (() => {
+          const base = collapsedReport();
+          base.testResults[1].startTime = base.startTime + 900;
+          base.testResults[1].endTime = base.startTime + 950;
+          return base;
+        })(),
+      });
+      expect(gapOnly.status, gapOnly.out).not.toBe(0);
+      expect(gapOnly.out).toMatch(/SCOPE COLLAPSE/);
+      expect(gapOnly.out).toMatch(/no suite could be NAMED/);
+    });
+
+    test('⚠⚠ a collapse is NEVER reported as skip-ceiling growth', () => {
+      // THE MISDIRECTION THIS EXISTS TO END. With a ceiling of 0 and 3 non-run rows the
+      // OLD spelling said `skipped tests grew: 3 > ceiling 0` and named no suite at all.
+      const r = run({ entries: {}, skippedCeiling: 0, report: collapsedReport() });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/SCOPE COLLAPSE/);
+      // anchored: the collapse verdict pinned on the line above proves this output is a live, fully-printed refusal, so the denial states that the collapsed rows were SUBTRACTED before the ceiling was judged — it cannot pass by the report having drifted away
+      expect(r.out).not.toMatch(/skipped tests grew/);
+
+      // …and a ceiling genuinely breached ON TOP of a collapse still reds, on the
+      // ADJUSTED figure: 5 non-run rows, 3 of them collapsed, ceiling 1 → 2 > 1.
+      const alsoSkips = run({
+        entries: {},
+        skippedCeiling: 1,
+        report: (() => {
+          const base = collapsedReport({ declaredPending: 2 });
+          base.testResults[0].assertionResults.push(
+            { fullName: 's1', title: 's1', ancestorTitles: [], status: 'pending' },
+            { fullName: 's2', title: 's2', ancestorTitles: [], status: 'pending' },
+          );
+          return base;
+        })(),
+      });
+      expect(alsoSkips.status, alsoSkips.out).not.toBe(0);
+      expect(alsoSkips.out).toMatch(/SCOPE COLLAPSE/);
+      expect(alsoSkips.out).toMatch(/skipped tests grew: 2 > ceiling 1/);
+      expect(alsoSkips.out).toMatch(/subtracting 3 collapsed non-run row\(s\)/);
+    });
+
+    test('NEGATIVE CONTROL: an honest run with real skips and todos still passes', () => {
+      // The arms must not tax legitimate deferral. vitest counts todos in their OWN
+      // field, so a census that compared against `numPendingTests` alone would forge a
+      // gap out of ordinary `test.todo` rows and red every healthy run that has one.
+      const runStart = 1_700_000_000_000;
+      const r = run({
+        entries: {},
+        skippedCeiling: 3,
+        report: {
+          startTime: runStart,
+          numPendingTests: 2,
+          numTodoTests: 1,
+          testResults: [{
+            name: join(ROOT, REAL),
+            status: 'passed',
+            startTime: runStart + 400,
+            endTime: runStart + 900,
+            assertionResults: [
+              { fullName: 'a', title: 'a', ancestorTitles: [], status: 'passed' },
+              { fullName: 'b', title: 'b', ancestorTitles: [], status: 'pending' },
+              { fullName: 'c', title: 'c', ancestorTitles: [], status: 'pending' },
+              { fullName: 'd', title: 'd', ancestorTitles: [], status: 'todo' },
+            ],
+          }],
+        },
+      });
+      expect(r.status, r.out).toBe(0);
+      expect(r.out).toMatch(/OK — no test regressions/);
+      // anchored: the success verdict pinned on the line above proves the report is live and complete, so this denial asserts that three legitimately deferred rows did NOT trip the collapse arms
+      expect(r.out).not.toMatch(/SCOPE COLLAPSE/);
+
+      // ⚠⚠ THE CASE THE REAL CORPUS TAUGHT, and the reason the clock may never refuse
+      // alone. `tests/security/customContentLockOrder.postgres.test.js` is
+      // `ROOT_DATABASE_URL ? describe : describe.skip`, so with no local PostgreSQL the
+      // whole suite is a DELIBERATE skip: it never starts, so its clock is degenerate BY
+      // CONSTRUCTION — identical to a dead worker's — while vitest counts its row in
+      // `numPendingTests`, so the counts AGREE. An earlier spelling let the clock refuse
+      // on its own and this suite reddened the real re-freeze.
+      const runStart2 = 1_700_000_000_000;
+      /** A `describe.skip` suite: never started (degenerate clock) but honestly counted. */
+      const deliberateSkipReport = () => ({
+        startTime: runStart2,
+        numPendingTests: 1,
+        numTodoTests: 0,
+        testResults: [
+          {
+            name: join(ROOT, REAL),
+            status: 'passed',
+            startTime: runStart2 + 400,
+            endTime: runStart2 + 900,
+            assertionResults: [{ fullName: 'a', title: 'a', ancestorTitles: [], status: 'passed' }],
+          },
+          {
+            // Never started, so startTime === endTime === report.startTime — and yet HONEST.
+            name: join(ROOT, REAL2),
+            status: 'passed',
+            startTime: runStart2,
+            endTime: runStart2,
+            assertionResults: [{ fullName: 'pg', title: 'pg', ancestorTitles: [], status: 'pending' }],
+          },
+        ],
+      });
+      const deliberateSkip = run({ entries: {}, skippedCeiling: 1, report: deliberateSkipReport() });
+      expect(deliberateSkip.status, deliberateSkip.out).toBe(0);
+      expect(deliberateSkip.out).toMatch(/OK — no test regressions/);
+      // anchored: the success verdict pinned on the line above proves the report is live and complete, so this denial asserts that a degenerate CLOCK with AGREEING counts is read as the honest describe.skip it is
+      expect(deliberateSkip.out).not.toMatch(/SCOPE COLLAPSE/);
+      // …and its row must still be CHARGED to the skip ceiling, never subtracted away:
+      // ceiling 1 with 1 skip passes here, but ceiling 0 must red on that same row.
+      const chargedToCeiling = run({ entries: {}, skippedCeiling: 0, report: deliberateSkipReport() });
+      expect(chargedToCeiling.status, chargedToCeiling.out).not.toBe(0);
+      expect(chargedToCeiling.out).toMatch(/skipped tests grew: 1 > ceiling 0/);
     });
 
     test('a baselined test whose file is on disk but did NOT run reds', () => {

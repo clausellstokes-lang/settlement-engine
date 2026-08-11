@@ -160,6 +160,76 @@ export function uncollectedOf(report, root = ROOT) {
     .map((s) => normalizePath(s.name || s.file || '(unnamed suite)', root));
 }
 
+/**
+ * ⚠⚠ THE SCOPE-COLLAPSE DISGUISE — a run that DIES wears the skip ceiling's clothes.
+ *
+ * MEASURED 2026-08-10: when four suites' workers died mid-run, vitest's json reporter
+ * serialised every one of their result-less tests as `"pending"`. `NON_RUN_STATUSES`
+ * counts `pending` as a non-run row, so 71 tests that NEVER RAN surfaced as
+ * `skipped tests grew: 182 > ceiling 105`. That message is not merely unhelpful, it is
+ * MISDIRECTING: it points the reader at deferred skips (here, the VERIFY_DIST
+ * deferrals) while the actual event was the collapse of the run itself. And it is not
+ * caught by `uncollectedOf`, because those suites were never marked `status: "failed"` —
+ * nothing failed; the worker simply stopped existing.
+ *
+ * TWO DISCRIMINATORS, both already present in the SAME report and both free:
+ *
+ *   1. THE COUNT DISAGREEMENT. vitest's own `numPendingTests`/`numTodoTests` count the
+ *      tests it DELIBERATELY pended; the per-row census counts every row carrying a
+ *      non-run status. On a healthy run the two AGREE (measured: 111 = 111). A
+ *      result-less row inflates the row count without moving vitest's counters, so a
+ *      POSITIVE GAP is direct evidence of rows serialised as pending rather than pended.
+ *   2. THE DEGENERATE CLOCK. A suite that never ran never gets its own start stamp: it
+ *      reports `startTime === endTime === report.startTime`. MEASURED on a healthy run,
+ *      a suite's clock sits hundreds of ms after the report's (549 ms in the probe that
+ *      settled this), so the three-way equality is not something a fast suite reproduces.
+ *
+ * ⚠⚠ ARM 1 DETECTS AND ARM 2 ONLY NAMES — THE CLOCK MAY NEVER REFUSE ON ITS OWN.
+ * An earlier spelling let either arm refuse, on the reasoning that a collapse only one
+ * arm can see is still a collapse. THE REAL CORPUS REFUTED IT ON THE FIRST FULL RUN:
+ * `tests/security/customContentLockOrder.postgres.test.js` is `ROOT_DATABASE_URL ?
+ * describe : describe.skip`, so with no local PostgreSQL the whole suite is a
+ * DELIBERATE `describe.skip` — it never starts, and therefore carries the degenerate
+ * clock BY CONSTRUCTION while being a perfectly honest skip. vitest counted its row in
+ * `numPendingTests`, so arm 1 correctly stayed silent and arm 1 alone was right.
+ * A skipped suite and a dead suite are indistinguishable BY CLOCK; only the count
+ * disagreement separates them. So the gap is the gate, and the clock list is the
+ * naming aid — including for the ceiling subtraction below, which must never fire on
+ * a legitimate skip or it would quietly weaken the skip ceiling by that suite's rows.
+ *
+ * ⚠ Compared against `numPendingTests + numTodoTests`, never `numPendingTests` alone:
+ * vitest counts todos in their own field while `NON_RUN_STATUSES` includes `todo`, so
+ * the narrower comparison would forge a gap out of ordinary `test.todo` rows.
+ */
+export function collapsedSuitesOf(report, root = ROOT) {
+  const runStart = report?.startTime;
+  if (typeof runStart !== 'number') return [];
+  const suites = Array.isArray(report?.testResults) ? report.testResults : [];
+  return suites
+    .filter((s) => {
+      const results = s.assertionResults || [];
+      // The zero-row case belongs to `uncollectedOf`; this arm is for suites that
+      // ENUMERATED their tests and then ran none of them.
+      if (results.length === 0) return false;
+      if (!results.every((a) => NON_RUN_STATUSES.includes(a.status))) return false;
+      return s.startTime === runStart && s.endTime === runStart;
+    })
+    .map((s) => ({
+      file: normalizePath(s.name || s.file || '(unnamed suite)', root),
+      rows: (s.assertionResults || []).length,
+    }));
+}
+
+/** The count disagreement described above. Returns null when the report cannot be asked. */
+export function pendingGapOf(report, countedNonRun) {
+  const pending = report?.numPendingTests;
+  const todo = report?.numTodoTests;
+  if (typeof pending !== 'number') return null;
+  const declared = pending + (typeof todo === 'number' ? todo : 0);
+  const gap = countedNonRun - declared;
+  return gap > 0 ? { declared, counted: countedNonRun, gap } : null;
+}
+
 const BOOTSTRAP_DOC = 'PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT'
   + ' from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution'
   + ' — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it.'
@@ -354,15 +424,51 @@ export async function run(argv = []) {
     );
   }
 
-  // (3) SKIP CEILING: ⛔ THE TESTS MUST RUN. The cheapest way to green a
+  // (3) SCOPE COLLAPSE — judged BEFORE the skip ceiling, because a collapse that
+  // reaches the ceiling arm is reported as the wrong event entirely (header note).
+  // THE GAP IS THE GATE. The clock is consulted only once the gap has established that
+  // a collapse exists — see the header: a `describe.skip` suite has the degenerate clock
+  // by construction, so naming on the clock alone refuses honest skips.
+  const pendingGap = pendingGapOf(report, skipped.length);
+  const collapsed = pendingGap ? collapsedSuitesOf(report) : [];
+  const collapsedRows = collapsed.reduce((n, s) => n + s.rows, 0);
+  if (pendingGap) {
+    scopeFailures.push(
+      '  SCOPE COLLAPSE: tests did NOT RUN and were serialised as non-run rows. This is NOT a',
+      '    skip — nothing was deferred, a run died. Naming it here rather than letting it reach',
+      '    the skip ceiling, which would report the wrong cause:',
+      ...(pendingGap ? [
+        `      vitest declared ${pendingGap.declared} pending/todo test(s), but the per-test census`
+        + ` counted ${pendingGap.counted} non-run row(s) — a gap of ${pendingGap.gap} row(s) that were`,
+        '        never pended by anyone: they simply carry no result.',
+      ] : []),
+      ...(collapsed.length ? [
+        `      ${collapsed.length} suite(s) NEVER STARTED (clock never left the run's own start stamp):`,
+        ...collapsed.map((s) => `        ${s.file} (${s.rows} row(s) that never ran)`),
+      ] : [
+        '      no suite could be NAMED by the clock discriminator — investigate the gap above;',
+        '        the rows are real whether or not their suite admits to never starting.',
+      ]),
+    );
+  }
+
+  // (4) SKIP CEILING: ⛔ THE TESTS MUST RUN. The cheapest way to green a
   // per-test ratchet is to `.skip` the failing tests, converting measured debt
   // into an invisible hole while the ratchet reports a win. The suite-wide skip
   // count is therefore frozen and may only shrink.
-  if (baseline.skippedCeiling !== undefined && skipped.length > baseline.skippedCeiling) {
-    scopeFailures.push(
-      `  skipped tests grew: ${skipped.length} > ceiling ${baseline.skippedCeiling}`,
-      '    A skipped test is not debt, it is a HOLE. Run it, or burn it down — do not skip it.',
-    );
+  //
+  // ⚠ Collapsed rows are SUBTRACTED first: they are not skips, and charging them to
+  // this ceiling is exactly the misdirection arm (3) exists to end. A skip ceiling
+  // genuinely breached on top of a collapse still reds, on the ADJUSTED figure.
+  if (baseline.skippedCeiling !== undefined) {
+    const realSkips = skipped.length - collapsedRows;
+    if (realSkips > baseline.skippedCeiling) {
+      scopeFailures.push(
+        `  skipped tests grew: ${realSkips} > ceiling ${baseline.skippedCeiling}`
+        + (collapsedRows ? ` (after subtracting ${collapsedRows} collapsed non-run row(s))` : ''),
+        '    A skipped test is not debt, it is a HOLE. Run it, or burn it down — do not skip it.',
+      );
+    }
   }
 
   if (scopeFailures.length) {
