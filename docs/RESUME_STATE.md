@@ -104,7 +104,29 @@ Both were alive at handoff (11 processes). **A background run cannot wake a stop
 if a lane reports "waiting", verify liveness with `ps aux | grep vitest` and resume it with
 an explicit "collect it yourself" order rather than re-dispatching, which burns its context.
 
-- **SCHEMA-5 MINT** (`tasks/a177c284ce931e4b1.output`) — **the act that greens the gate.**
+- **✅✅ SCHEMA-5 IS MINTED AND LANDED — `36159389` (code, deliberately red) + `ffc85a90`
+  (genesis). THE OBSERVED-SHAPE GATE IS GREEN, exit 0.** The chair ran the full governed
+  pipeline between the two commits exactly as the runbook specified — artifact, 4→5 report,
+  ledger fill (1,499 decisions, ZERO issues), bundle, and the genesis write — **every step
+  exit 0, each captured with its own `$?`**. Result: **2,164/1,499/395 → 2,003/1,413/385**,
+  reconciling **1,413 same / 86 gone / 0 new / 0 increased / 0 decreased — a PURE SHRINK.**
+  ⭐ **The anti-vacuity floor did NOT move** (resolvedReads 9,238→9,240; totalKeys and
+  usableShapes unchanged): unlike the 2→4 mint this changes what is **REPORTED**, not what
+  is **RESOLVED** — the instrument did not get weaker, it stopped reporting rows it could
+  not mean. ⭐ Both filters **REFUSE OUTRIGHT** if they would ever clear a class-(a) row,
+  so the debt surface cannot be eroded by retuning; and because they live inside
+  `scannerToolFiles()` they sit inside `detectorTreeDigest`, so **retuning θ or adding an
+  exemption REDS THE GATE by the mechanism that already governs the detector — the guard
+  guards itself.**
+  ⚠ **The full 17-step gate is RUNNING** at this handoff (background task `b6s2lt41d`,
+  output in `tasks/b6s2lt41d.output`). The mint's measured endstate is **exit 1 with
+  EXACTLY ONE failing test outside the frozen census — `generatorGoldenMaster`, the
+  owner-approved SHIFT-2 red.** **If the successor sees that and nothing else, the board is
+  as green as it can be without the owner's `UPDATE_GOLDEN`.**
+  ⚠ Superseded note (kept for provenance): the vault `refs/preserved/schema5-mint-wip`
+  (`697b5862`) was insurance taken while the lane looked stopped; its content is now
+  LANDED and the ref is redundant.
+- ~~**SCHEMA-5 MINT** — the act that greens the gate.~~ **DONE, see above.**
   Five consolidated items. Expect a **COMMIT PAIR**, the first deliberately gate-red (the
   schema-4 precedent: `894325ff` then `2a7fb033`). ⛔ Never hand-edit the baseline JSON.
   ⚠ **AT HANDOFF IT SHOWED ZERO LIVE PROCESSES WITH FOUR FILES DIRTY** — between runs, or
@@ -303,8 +325,7 @@ debt to re-find.** Two reds, both understood:
 (vaulted, applies clean), the two write-shape blindnesses, the M8 router, and this growth
 row **plus a SAVE-TIME-WRITER EXEMPTION**. Each was individually not worth a mint; together
 they plainly are, which is exactly what CR-OSR-FREEZE-6-R2's deferral was betting on.
-**It is now the highest-value queued act** — it is the only thing standing between the
-board and a green gate.
+**✅ DONE — landed as `36159389` + `ffc85a90`; the observed-shape gate is green.**
 
 **Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `133e300f`, mutex
 free, zero processes):**
