@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 14:56:00 EDT
+**Generated:** 2026-08-11 15:03:29 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **16** |
-| ledger (main) | `review-fixes-2026-07-08` | `1dd531f7` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **17** |
+| ledger (main) | `review-fixes-2026-07-08` | `b87b81dd` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 30498: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Gate slot:** gate-mutex: HELD by atomic lock PID 59867: sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/observedShapeReaders.walker.test.js tests/lint/sizeBaseline.test.js tests/lint/sovereigntyLightingContract.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T145419` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T150214` — build 17 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T145419
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T150214
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -29,6 +29,7 @@ staged set BY NAME AND COUNT.
 
 ```
  M scripts/.size-baseline.json
+ M src/domain/aiOverlayVerifier.js
  M src/domain/hookEscalation.js
  M src/domain/pendingEditsPreview.js
  M src/domain/simulationSpine.js
@@ -47,8 +48,9 @@ staged set BY NAME AND COUNT.
 ```
 ```
   +1      -1      scripts/.size-baseline.json
+  +16     -0      src/domain/aiOverlayVerifier.js
   +12     -5      src/domain/hookEscalation.js
-  +5      -3      src/domain/pendingEditsPreview.js
+  +9      -5      src/domain/pendingEditsPreview.js
   +13     -4      src/domain/simulationSpine.js
   +19     -6      src/domain/worldPulse/disposition.js
   +8      -3      src/domain/worldPulse/npcAgency.js
@@ -82,12 +84,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
 738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
 7d31c983 2026-08-11 Handoff corrected: the gate is NOT green, and the harness lied about it again
-9eefd902 2026-08-11 Handoff: schema 5 is landed and the observed-shape gate is GREEN
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -157,11 +159,25 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    M6 docstring, cohortNotice) sequenced AFTER Lanes A/C land + reconcile Lane C's 21-row
    worklist against the 34 (a) before any UI repair wave. ⛔ `ancientRuin` cure is
    OWNER-GATED (enables a capability). ⚠ `docs/SOL_QUEUE.md:91`'s 162 figure is stale.
-5. **Lane E (read-only draft, Opus) — TC-5B PACKET COMPILE**, dispatched ~14:50. Drafts
-   the colour-binding + sub-tab packet under the NON-PRESENTATION seat ruling (the mount
-   must never touch the persisted vocabulary — measured, not assumed). Output: scratchpad
-   `laneE-TC-5B-draft.md`. The chair reviews, lands the packet, and dispatches only when a
-   build slot frees. Transcript: session dir `subagents/agent-a83b216435482ba3c.jsonl`.
+5. **Lane E — ✅ COMPLETE (~15:10): TC-5b REFUSED-AND-SPLIT, and the chair RATIFIED it.**
+   The seat is SAFE (a live non-presentation door exists: `MAP_SUB_TAB_IDS` carries
+   `player` outside the persisted `TOWN_MAP_VIEW_IDS`; the persisted sub-tab id is
+   shape-guarded on four measured facts). The BLOCKER: a compiled `TownSceneManifest` is
+   unreachable from the Map tab (zero React-reachable compile path; worker client has no
+   manifest-only mode; sceneCache holds geometry only) — a painter built first would
+   repeat the ES-7 consumer-before-producer shape. **Chair rulings CR-TC5B-1..4 (Fable,
+   vetoable):** split RATIFIED producer-first (TC-5b-i seam → TC-5b-ii mount);
+   token entry = `subtabs/cartographyColours.js` importing `design/tokens.js`;
+   presence oracle = the BLOCK; A-4 notice copy deferred to TC-5b-ii promotion (chair
+   drafts, owner may veto). Draft (TC-5b-ii ready, status BLOCKED): scratchpad
+   `laneE-TC-5B-draft.md`. **O-4 → maintenance task:** `validate:packets` never
+   existence-checks CREATE rows, so PACKET_MANIFEST's TC-5A row is fiction (three
+   declared paths do not exist) — machinery fix + row correction + TC-5A.md stale-prose
+   corrections batched for the next free build slot (task #8).
+6. **Lane F (read-only draft, Opus) — TC-5B-i PACKET COMPILE**, dispatched ~15:12: the
+   manifest seam, headless producer, presence-oracle per CR-TC5B-3; two candidate seam
+   shapes with rejections required. Output: scratchpad `laneF-TC-5B-I-draft.md`.
+   Transcript: session dir `subagents/agent-a32cc2bb49252d63f.jsonl`.
 
 Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
 (task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
