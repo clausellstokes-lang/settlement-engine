@@ -271,7 +271,7 @@ describe('TC-2 compiler mount — the skeleton crosses the TC-1 contract, not be
     // B1: TC-3b fills the parcel layer by carving INSIDE the wards above, so every
     // parcel names a ward that exists in this same block — the containment is a
     // theorem about a convex fan, and a parcel referencing elsewhere would mean the
-    // carve found a second town. TC-4 still owns buildings, so that layer stays empty.
+    // carve found a second town.
     const litWardIds = new Set(block.wards.map((ward) => ward.id));
     expect(block.parcels.length).toBeGreaterThan(0);
     for (const parcel of block.parcels) {
@@ -279,7 +279,36 @@ describe('TC-2 compiler mount — the skeleton crosses the TC-1 contract, not be
       expect(parcel.polygon.length, parcel.id).toBe(3);
       expect(parcel.provenance, parcel.id).toEqual({ kind: 'generated', ref: null });
     }
-    expect(block.buildings).toEqual([]);
+    // C1: TC-4 fills the buildings layer, and it is a PROJECTION of canonical facts —
+    // every row stands in a parcel THIS block carved, and every institution resolves
+    // through the SAME manifest's semantics table. A row whose reference resolved
+    // nowhere would be the map/dossier fork the ONE LAW exists to prevent.
+    const litParcelIds = new Set(block.parcels.map((parcel) => parcel.id));
+    const litSemanticIds = new Set(manifest.semantics.map((row) => row.sceneId));
+    expect(block.buildings.length).toBeGreaterThan(0);
+    for (const building of block.buildings) {
+      expect(litParcelIds.has(building.parcelId), building.id).toBe(true);
+      expect(['dwelling', 'institution'], building.id).toContain(building.role);
+      expect(building.provenance, building.id).toEqual({ kind: 'generated', ref: null });
+      if (building.role === 'institution') {
+        expect(litSemanticIds.has(building.institutionRef), building.id).toBe(true);
+      }
+    }
+    // EXACTLY ONE FLAGSHIP per TC-3b binding. The binding receipt is synthesis-local,
+    // so the observable form of "one per binding" is: one `:i01` row per canonical
+    // (non-fabric) institution the manifest projected, no more and no fewer.
+    const canonicalInstitutions = manifest.buildings.filter((row) => row.generatedFabric !== true);
+    const flagships = block.buildings.filter((row) => row.id.endsWith(':i01'));
+    expect(canonicalInstitutions.length).toBeGreaterThan(0);
+    expect(flagships.length).toBe(canonicalInstitutions.length);
+    expect(new Set(flagships.map((row) => row.institutionRef)).size).toBe(flagships.length);
+    // ...and the three EARLIER layers are untouched by the new one: a second compile
+    // reproduces them byte for byte, so TC-4's arrival perturbed no TC-3a/3b geometry.
+    const recompiled = compiledCartographyManifest().cartography;
+    for (const layer of ['streets', 'wards', 'parcels']) {
+      expect(stableSceneStringify(recompiled[layer]), layer)
+        .toBe(stableSceneStringify(block[layer]));
+    }
     // The naming layer is REQUIRED at v2 and never leaks into an id or a polygon.
     for (const row of [...block.streets.arterials, ...block.streets.lanes, ...block.wards]) {
       expect(typeof row.name, row.id).toBe('string');

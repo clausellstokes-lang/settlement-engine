@@ -67,12 +67,14 @@ describe('TC-2 determinism: the seed family is total', () => {
   test('the package actually has sources to scan (the scan is not vacuous)', () => {
     expect(SOURCES.length).toBeGreaterThanOrEqual(5);
     expect(SOURCES).toContain('cartographySynthesis.js');
-    // TC-3a's two leaves and TC-3b's one travel every package scan below; naming them
-    // here means a rename or a relocation reds HERE rather than silently emptying the
-    // coverage.
+    // TC-3a's two leaves, TC-3b's one and TC-4's two travel every package scan below;
+    // naming them here means a rename or a relocation reds HERE rather than silently
+    // emptying the coverage.
     expect(SOURCES).toContain('cartographyPlan.js');
     expect(SOURCES).toContain('cartographyWards.js');
     expect(SOURCES).toContain('cartographyParcels.js');
+    expect(SOURCES).toContain('cartographyMultiplicity.js');
+    expect(SOURCES).toContain('cartographyBuildings.js');
   });
 
   test('every seed in the family synthesizes byte-identically twice', () => {
@@ -208,18 +210,52 @@ describe('TC-2 determinism: the draw ledger', () => {
     expect(code).toMatch(/\bsceneDigest\s*\(/);
   });
 
+  test('TC-4 adds ONE label per leaf — digest DOMAINS, not forks — and roots no stream', () => {
+    // Same instrument as TC-3b's row, applied to this wave's two leaves. A count is
+    // decided by a digest of the anchor and a footprint by a digest of the subject;
+    // a PRNG draw appearing in either would be entropy that no draw ledger counts.
+    for (const [name, expected] of [
+      ['cartographyMultiplicity.js', 'carto:multiplicity'],
+      ['cartographyBuildings.js', 'carto:building-dress'],
+    ]) {
+      const source = withoutComments(readSource(name));
+      const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+      expect(labels, name).toEqual([expected]);
+      // anchored: the label above is the live subject; this asserts it never spells
+      // '::', which would alias a fork CHAIN (kernel/prng.js's delimiter contract).
+      for (const label of labels) expect(label.includes('::'), name).toBe(false);
+      const code = codeOnly(readSource(name));
+      // An emptied or renamed read would red the sceneDigest positive below first.
+      // anchored: measured against a live source whose sceneDigest call that positive proves
+      expect(code, name).not.toMatch(/\bcreatePRNG\b/);
+      // anchored: same live source text, same sceneDigest positive below
+      expect(code, name).not.toMatch(/\.fork\s*\(/);
+      expect(code, name).toMatch(/\bsceneDigest\s*\(/);
+    }
+  });
+
   test('TC-3 lowers and carves with bounded FOR loops only — no retry, no while, no do/while', () => {
     // The lowering is a total pass over a narrowed district list and the carve is a
     // fan bounded by vertex count, not the output of a rejection loop. A `while`
     // appearing here would mean someone reintroduced the "try again with a smaller
-    // box" repair the design explicitly does not own.
-    for (const name of ['cartographyPlan.js', 'cartographyWards.js', 'cartographyParcels.js']) {
+    // box" repair the design explicitly does not own. TC-4's packing joins the list:
+    // its shrink ladder is a FIXED three-rung `for`, never a retry.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js', 'cartographyParcels.js',
+      'cartographyMultiplicity.js', 'cartographyBuildings.js']) {
       const code = codeOnly(readSource(name));
       expect(/\bwhile\s*\(/.test(code), name).toBe(false);
       expect(/\bdo\s*\{/.test(code), name).toBe(false);
-      // anchored: the two negatives are measured against a live source whose bounded
-      // loops the positive below proves are actually present.
-      expect(/\bfor\s*\(/.test(code), name).toBe(true);
+      // anchored: the two negatives are measured against a live source whose own
+      // export the positive below proves is actually present.
+      expect(/\bexport function /.test(code), name).toBe(true);
+    }
+    // The stages that actually ITERATE do so with bounded `for` loops. The
+    // multiplicity resolver is deliberately ABSENT from this second list: it is
+    // closed-form arithmetic carrying no loop at all, and demanding a `for` there
+    // would be a false anchor — it would red the day the file got simpler.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js',
+      'cartographyParcels.js', 'cartographyBuildings.js']) {
+      expect(/\bfor\s*\(/.test(codeOnly(readSource(name))), name).toBe(true);
     }
   });
 

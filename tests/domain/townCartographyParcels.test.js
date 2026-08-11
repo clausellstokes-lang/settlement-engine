@@ -450,11 +450,24 @@ describe('TC-3b B4 — the institution binding is total, prominent, and unpersis
     expectAbsentWithAnchor(Object.keys(block), 'institutionBindings', 'parcels', 'lit cartography block');
     const serialized = stableSceneStringify(block);
     expect(serialized.includes('"anchorKey"')).toBe(false);
-    expect(serialized.includes('"institutionRef"')).toBe(false);
-    // anchored: the two negatives above are measured against the SAME serialization,
-    // which the positive below proves is a real, populated block rather than an empty
+    // anchored: the negative above is measured against the SAME serialization, which
+    // the positive below proves is a real, populated block rather than an empty
     // string that would satisfy any absence claim.
     expect(serialized.includes('"parcels"')).toBe(true);
+    // NARROWED AT TC-4 (was a blanket `"institutionRef"` absence). The BINDING is
+    // still not a record — no `institutionBindings` key, no `anchorKey`, no
+    // `decidedBy: 'prominence'` receipt row above. But `institutionRef` is a
+    // SCHEMA-SANCTIONED key on a v2 building row (present iff institution), so TC-4
+    // filling the buildings layer legitimately puts it in the block. The claim this
+    // line has always made — the receipt does not reach the block — is asserted here
+    // in its exact form: every occurrence belongs to an institution BUILDING row.
+    const referencing = block.buildings.filter(
+      (row) => Object.prototype.hasOwnProperty.call(row, 'institutionRef'),
+    );
+    expect(referencing.length).toBeGreaterThan(0);
+    for (const row of referencing) expect(row.role, row.id).toBe('institution');
+    expect(referencing.length)
+      .toBe(block.buildings.filter((row) => row.role === 'institution').length);
   });
 });
 

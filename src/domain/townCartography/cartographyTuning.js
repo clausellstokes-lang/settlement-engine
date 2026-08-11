@@ -240,6 +240,73 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
     thorp: 8000, hamlet: 12000, village: 18000,
     town: 32000, city: 52000, metropolis: 80000,
   }),
+
+  // ── TC-4 BUILDINGS (design §3, §4.5, A-8 §11b) ──────────────────────────────
+  // A-8's multiplicity: the catalog range is a RANGE, and the settlement's own
+  // population-within-tier and prosperity decide where inside it the canonical
+  // count falls. v1 is presentation-canonical and engine-inert: a resolved count
+  // never feeds economy, services or any other engine math.
+  MULTIPLICITY: Object.freeze({
+    POPULATION_WEIGHT: 0.6,
+    PROSPERITY_WEIGHT: 0.4,
+    JITTER_STEPS: 3,                      // stamp % 3 − 1  ->  −1 | 0 | +1 count steps
+    // THE TOWNSCENE LADDER, RE-DECLARED (the CARTOGRAPHY_TIERS precedent). The
+    // producer is buildingProfiles.js's UNEXPORTED PROSPERITY_RANK, so importing it
+    // is impossible without exporting townScene internals; C2 asserts this table
+    // equals its producer exact-set-both-ways instead, which is how the ward-kind
+    // vocabulary is already guarded against drift.
+    PROSPERITY_RANK: Object.freeze({
+      subsistence: 0, struggling: 1, poor: 2, moderate: 3, modest: 3,
+      comfortable: 4, prosperous: 5, wealthy: 6, opulent: 6,
+    }),
+    PROSPERITY_RANK_SPAN: 6,
+    // POPULATION_RANGES, RE-DECLARED. Importing src/data/constants.js here would
+    // drag a foreign payload into the bounded compiler closure (CR-TC3B-BYTES), so
+    // the mirror is guarded by C2's producer-equality assertion rather than by an
+    // import edge. Drift reds a test; it never silently re-bands a town.
+    POPULATION_SPAN: Object.freeze({
+      thorp: Object.freeze([8, 60]), hamlet: Object.freeze([61, 400]),
+      village: Object.freeze([401, 900]), town: Object.freeze([901, 5000]),
+      city: Object.freeze([5001, 25000]), metropolis: Object.freeze([25001, 100000]),
+    }),
+  }),
+  // <= 4 ALWAYS: a parcel is a triangle and its medial subdivision has exactly four
+  // subcells, so a fifth building per parcel has nowhere to stand (§6.3c's theorem).
+  BUILDINGS_PER_PARCEL: Object.freeze({
+    thorp: 1, hamlet: 2, village: 2, town: 3, city: 4, metropolis: 4,
+  }),
+  MAXIMUM_CARTOGRAPHY_BUILDINGS: Object.freeze({
+    thorp: 12, hamlet: 24, village: 48, town: 96, city: 176, metropolis: 240,
+  }),
+  DWELLING_TARGET: Object.freeze({
+    thorp: 8, hamlet: 16, village: 32, town: 64, city: 120, metropolis: 160,
+  }),
+  DWELLING_HEIGHT_PERMILLE: Object.freeze({
+    thorp: 100, hamlet: 120, village: 140, town: 180, city: 220, metropolis: 260,
+  }),
+  FOOTPRINT_SHRINK_PERMILLE: Object.freeze({ large: 660, medium: 540, small: 420, dwelling: 300 }),
+  FOOTPRINT_SHRINK_STEP: 160,             // the fixed 3-entry ladder: p, p−160, p−320
+  FOOTPRINT_SHRINK_FLOOR: 120,
+  HEIGHT_PLAN_CEILING: 60,                // buildingProfiles' heightPlan clamp maximum
+  // The condition ladder's first-match thresholds. ORDER IS LOAD-BEARING in the
+  // chain that reads them (§6.3e); these are the floors, not the order.
+  CONDITION_THRESHOLDS: Object.freeze({
+    RUINED_ABANDONMENT_FLOOR: 720, BURNED_WAR_FLOOR: 720, DAMAGED_WAR_FLOOR: 450,
+    WORN_NEGLECT_FLOOR: 500, WORN_AGE_FLOOR: 700,
+    PRISTINE_RENEWAL_FLOOR: 600, PRISTINE_NEGLECT_CEILING: 250,
+  }),
+  // ── BYTE BUDGET (A-3), DERIVED — CR-TC4-BAND-1 ───────────────────────────────
+  // DELIBERATELY NOT a second per-tier table. A hand-authored byte table and the
+  // count cap above are two independent numbers describing the SAME output, and the
+  // first authoring of them contradicted itself: the city and metropolis byte bands
+  // sat BELOW what their own count caps must produce, so no row at those tiers could
+  // ever fit. The budget is therefore DERIVED — MAXIMUM_CARTOGRAPHY_BUILDINGS[tier]
+  // times this — which makes band-versus-cap consistency definitional instead of a
+  // pin somebody has to remember to write. This is the one authored number: the
+  // per-row UTF-8 ceiling, against a measured worst case of 374 B/row at thorp. The
+  // identity slug caps at 90 characters, so observed ids are already near-worst.
+  // It still fires exactly when it should — per-row bloat beyond 400 B.
+  TC4_ROW_BYTES_BAND: 400,
 });
 
 const T = TOWN_CARTOGRAPHY_TUNING;

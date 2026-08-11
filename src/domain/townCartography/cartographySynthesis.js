@@ -47,6 +47,7 @@
 import { createPRNG } from '../../kernel/prng.js';
 import { TOWN_CARTOGRAPHY_SCHEMA_VERSION } from '../townScene/cartographyContract.js';
 import { sceneDigest, stableSceneStringify } from '../townScene/stableScene.js';
+import { compileTownBuildingLayers } from './cartographyBuildings.js';
 import { buildCartographyField } from './cartographyField.js';
 import {
   buildBridges,
@@ -391,11 +392,29 @@ export function compileTownCartography(manifest, settlement, options = {}) {
     placement: synthesis.morphology.placement,
   });
 
+  // TC-4: the footprints pack INSIDE the parcels the line above just carved, from the
+  // SAME manifest's buildings and semantics. Called ONCE, after the parcel leaf, and
+  // it consumes TC-3b's binding receipt VERBATIM rather than re-deriving a second
+  // binding that could disagree. `receipts` — including the canonical multiplicity
+  // counts — stays synthesis-local, so no new key reaches the block.
+  const buildingLayers = compileTownBuildingLayers({
+    buildings: base.buildings,
+    semantics: base.semantics,
+    wards: layers.wards,
+    parcels: parcelLayers.parcels,
+    institutionBindings: parcelLayers.institutionBindings,
+    settlement,
+    digest,
+    tier,
+    placement: synthesis.morphology.placement,
+    fabricAccumulation01: synthesis.morphology.evidence.fabricAccumulation01,
+  });
+
   return {
     schemaVersion: TOWN_CARTOGRAPHY_SCHEMA_VERSION,
     streets: layers.streets,
     wards: layers.wards,
     parcels: parcelLayers.parcels,
-    buildings: [],
+    buildings: buildingLayers.buildings,
   };
 }

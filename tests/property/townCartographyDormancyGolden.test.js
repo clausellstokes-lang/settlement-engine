@@ -192,14 +192,25 @@ describe('town cartography — the gate arms (the teeth that bite at TC-1)', () 
     expect(lit.cartography.wards.length).toBe(dark.districts.length);
     expect(lit.cartography.wards.length).toBeGreaterThan(0);
     for (const ward of lit.cartography.wards) expect(ward.name.length, ward.id).toBeGreaterThan(0);
-    // B6: TC-3b fills the parcel layer, and ONLY that layer newly appears. TC-4 owns
-    // buildings, so a row there would mean the wave grew past the slice it was scoped
-    // to — and the dark corpus above is what proves neither growth reached base bytes.
+    // B6: TC-3b fills the parcel layer, and ONLY that layer newly appears.
     expect(lit.cartography.parcels.length).toBeGreaterThan(0);
     for (const parcel of lit.cartography.parcels) {
       expect(parcel.wardId.startsWith('ward:'), parcel.id).toBe(true);
     }
-    expect(lit.cartography.buildings).toEqual([]);
+    // C7: TC-4 fills the buildings layer, and ONLY the buildings layer newly appears.
+    // The block's key set is unchanged (no receipt, no multiplicity count, no binding
+    // reached it), every row stands in a parcel this same block carved, and the dark
+    // corpus above is what proves this growth never reached the BASE bytes.
+    const litParcelIds = new Set(lit.cartography.parcels.map((parcel) => parcel.id));
+    expect(lit.cartography.buildings.length).toBeGreaterThan(0);
+    for (const building of lit.cartography.buildings) {
+      expect(litParcelIds.has(building.parcelId), building.id).toBe(true);
+    }
+    expect(Object.keys(lit.cartography).sort())
+      .toEqual(['buildings', 'parcels', 'schemaVersion', 'streets', 'wards']);
+    // ADDITIVE-ONLY is asserted below, where stripping `cartography` off the lit
+    // manifest is shown to recover the dark manifest byte for byte — that same line
+    // is what proves TC-4's growth never reached the base scene.
 
     // ONE infrastructure truth: the block references the manifest's records and
     // never copies wall, gate or bridge geometry under a second key.
