@@ -806,3 +806,19 @@ walk remains the owner's eye.
    veto surface.
 
 — Fable chair, session c42c8924, 2026-08-11.
+
+### §17a · ES-Da compile findings carried back (2026-08-11 ~18:30)
+
+The compile recon CONFIRMS §16's sizing (one leaf ~110 lines; ≤15 diplomacy-file lines
+with 47 lines of measured headroom — the zero-headroom hazard is real but belongs to the
+pulse MOUTHS, which ES-Da never touches) and NARROWS the §16 premise: **ES-5b and ES-5c
+were never covert-gated** — they read whereabouts/faction state and will move bloc math
+and ladder defense the moment `espionageEnabled` lights, WITH OR WITHOUT ES-Da. What
+ES-Da actually gates is ES-5a (both halves, incl. the orphaned doctrine stage waking at
+zero cost), ES-2, ES-3, ES-5d and ES-6a. Chair rulings CR-ESDA-1..5: promotion SERIALIZES
+behind TC-5b-i (the census reservation); the decision function is doctrine + own draw;
+`stayTicks: 1` is DERIVED-not-tuning (a structural constant, not a band); the
+string-literal `purposeClass: 'covert'` spelling is a STOP-level instruction (the
+one-reader walker is one character wide); the INFO→GRAMMAR coupling arrow is recorded
+with its derivation (the first ES row where espionage is the dependency). Draft:
+session scratchpad `laneQ-ES-Da-draft.md`.

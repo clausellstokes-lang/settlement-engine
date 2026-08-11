@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 18:16:51 EDT
+**Generated:** 2026-08-11 18:28:37 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `63c62822` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `3a0337eb` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `c5901a3e` | **4601** |
 
 **Gate slot:** gate-mutex: HELD by atomic lock PID 64140: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
-**Disk:** 33Gi free (83% used)
+**Disk:** 32Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T181541` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T182656` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T181541
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T182656
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -56,12 +56,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
 3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
 33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
 df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
 40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
-52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -175,6 +175,19 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    ~18:25 per CR-NEXT-1 (the parallel candidate: zero src files, disjoint family).
    Output: scratchpad `laneR-SC-W0-draft.md`. Transcript: session dir
    `subagents/agent-a4a4b7e7596a1186d.jsonl`.
+6. **Lane Q — ✅ COLLECTED (~18:30): ES-Da is COMPILABLE, ruled CR-ESDA-1..5.** One leaf
+   (~110 lines, `espionage/espionageRider.js`) + ≤15 diplomacy-file lines with 47 lines
+   of MEASURED headroom (the zero-headroom hazard belongs to the pulse MOUTHS, untouched
+   — the composition point is `dispatchAcceptedPeaceEnvoy`'s single `mintEnvoyErrand`
+   call, an existing pulse path). **Dark-path byte-identity BY CONSTRUCTION** (declined
+   rider = empty spread = identical argument object). Three ship-green hazards caught:
+   the one-reader walker is ONE CHARACTER wide (string-literal `purposeClass: 'covert'`
+   is a STOP instruction); the minter set is exact-equality (no ERRAND_CONSUMERS row);
+   the coupling arrow INVERTS (INFO→GRAMMAR, first of its kind). Bonus: the orphaned
+   `espionageDoctrineStage.js` wakes at zero cost. **§16 premise narrowed and carried
+   back at §17a**: ES-5b/5c light regardless of ES-Da. Promotion SERIALIZES behind
+   TC-5b-i (D7, the census reservation). Draft: scratchpad `laneQ-ES-Da-draft.md`.
+   Transcript: session dir `subagents/agent-a9bd3222766990330.jsonl`.
 
 **CHAIR QUEUE (sequenced):** after Lane M lands → chair-verify + ledger row → task #10
 (the census-folding micro-act batch: R8 C2 case + H9 recentEvents + the ladder pin + the
