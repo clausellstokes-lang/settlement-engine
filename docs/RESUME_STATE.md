@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 17:34:28 EDT
+**Generated:** 2026-08-11 17:47:15 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `40aaa305` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a75c76c2` | **4** |
+| ledger (main) | `review-fixes-2026-07-08` | `107e55f9` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 34Gi free (83% used)
+**Disk:** 33Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T173339` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T174632` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T173339
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T174632
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,9 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
+?? src/components/townMap/useTownCartographyBlock.js
+?? src/lib/townScene/townCartographyBlock.js
+?? tests/hooks/useTownCartographyBlock.test.jsx
 ?? tests/lib/townCartographyBlock.test.js
 ```
 ```
@@ -51,12 +54,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+107e55f9 2026-08-11 The window death came and the preparation held: both lanes resumed in minutes
 40aaa305 2026-08-11 The gate is at its clean endstate; the seam is building; the board is compacted
 52138eef 2026-08-11 The gate receipt is honest and red: five reds beyond the golden, two classes
 0bb6055d 2026-08-11 Lane I collected: the schema-6 charter is ruled, and three chair framings fell
 a2b3c97b 2026-08-11 The yield-death pattern fired a fifth time and the rule caught it; memory folded
 72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
-b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -113,12 +116,28 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    packet at base `a75c76c2`, incl. the in-change census re-record (CR-TC5BI-6) and the
    600 ms B6 preflight probe. Landing unblocks TC-5B-ii. Transcript: session dir
    `subagents/agent-abbadc0742fd6f096.jsonl`.
-2. **Lane N (read-only, Opus) — NEXT-COMPILE RECON**: ranks the 2-3 corpus candidates
-   beyond the TC lane (GR-4+/IN-1+/TR/WF/POP/INT/WY/HB/WC/EP/site-coherence/slums/
-   CV-TB-XW/first-paint) with landed-state evidence, so a compile starts the moment a
-   build slot frees. Espionage stays parked (owner-gated §16). Output: scratchpad
-   `laneN-next-compile-recon.md`. Transcript: session dir
-   `subagents/agent-aebfdf9c61ab9b3b6.jsonl`.
+2. **Lane N — ✅ COLLECTED (~17:50): the forward pipeline is RULED (CR-NEXT-1).** Ranked:
+   **GR-4** (the succession question, DESIGN_FP_GRAMMAR.md:1005 — no new flag, second
+   slice of `oathHolderEnabled`, closes the deliberately-open `disavowal` seam at
+   `pactFormation.js:364`) → **SITE-COHERENCE Wave 0** (zero src files, owner-signed
+   9-wave program, disjoint family — best parallel) → **IN-1** (pure module + a CQ5 flag
+   mint). NOT proposed, with evidence: espionage (owner-parked), HB/EP/WC (CQ2 early
+   motion unauthorized + unsealed), CV/TB/XW (gated on LIT war flags), first-paint
+   (unauthorized), and **the 'slums' program is a PHANTOM — zero docs, zero commits;
+   STRUCK from every restated list.** Three divergences found and dispatched to Lane O:
+   the INDEX still advertises ES-7 as next (a build-branch-only reader concludes
+   espionage is live — the exact cross-branch failure mode), the GR doc still says GR-3b
+   is BLOCKED (landed `40afbdd6`), SITE_COHERENCE Wave 1's literal baseline edit is
+   schema-2-era STALE (Wave 0 unaffected), + the F9 four-doc contradiction (resolved per
+   SOL_QUEUE's recorded reconciliation — the blanket grant governs). Recon:
+   scratchpad `laneN-next-compile-recon.md` (405 lines).
+3. **Lane O (build, Opus) — the DOCS-DIVERGENCE BATCH (task #14)**, dispatched ~17:55:
+   the five corrections above, one commit, validate:packets held at 0. Transcript:
+   session dir `subagents/agent-a9554306d87e512af.jsonl`.
+4. **Lane P (read-only draft, Opus) — the GR-4 PACKET DRAFT (task #15)**, dispatched
+   ~17:55 per CR-NEXT-1. Output: scratchpad `laneP-GR-4-draft.md`; the chair reviews and
+   promotes when a build slot frees. Transcript: session dir
+   `subagents/agent-a77b180fe2a58e737.jsonl`.
 
 **CHAIR QUEUE (sequenced):** after Lane M lands → chair-verify + ledger row → task #10
 (the census-folding micro-act batch: R8 C2 case + H9 recentEvents + the ladder pin + the
