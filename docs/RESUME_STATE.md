@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 14:23:31 EDT
+**Generated:** 2026-08-11 14:42:53 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ffc85a90` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `005d8cdf` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ffc85a90` | **16** |
+| ledger (main) | `review-fixes-2026-07-08` | `96124a60` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 68927: sh scripts/gate-mutex.sh --run -- npx vitest run --reporter=json --outputFile=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/scratchpad/laneA-results-baseline.json
+**Gate slot:** gate-mutex: HELD by atomic lock PID 20329: sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/observedShapeReaders.walker.test.js tests/lint/observedShapeBaseline.test.js tests/lint/observedShapeSentinel.test.js tests/lint/sovereigntyLightingContract.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js tests/lint/sizeBaseline.test.js
 **Disk:** 37Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T142154` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T144211` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T142154
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T144211
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,18 +28,40 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
- M tests/security/fraudCharterSession.pglite.test.js
- M tests/security/galleryCommentModeration.pglite.test.js
+ M src/domain/hookEscalation.js
+ M src/domain/pendingEditsPreview.js
+ M src/domain/simulationSpine.js
+ M src/domain/worldPulse/disposition.js
+ M src/domain/worldPulse/npcAgency.js
+ M src/domain/worldPulse/npcLadderState.js
+ M src/generators/aiLayer.js
+ M src/lib/generationTelemetry.js
+ M src/lib/structuralFingerprint.js
+ M src/utils/generateCampaignPDF.js
+ M src/utils/generateWorldBook.js
+ M tests/domain/hookEscalation.test.js
+ M tests/lib/generationTelemetry.test.js
+ M tests/lib/structuralFingerprint.test.js
+ M tests/pdf/worldBook.test.js
  M tests/security/ingestCheckRate.pglite.test.js
- M tests/security/singleSessionBelt.pglite.test.js
- M tests/security/supportTickets.pglite.test.js
 ```
 ```
-  +7      -1      tests/security/fraudCharterSession.pglite.test.js
-  +7      -1      tests/security/galleryCommentModeration.pglite.test.js
-  +7      -1      tests/security/ingestCheckRate.pglite.test.js
-  +6      -2      tests/security/singleSessionBelt.pglite.test.js
-  +7      -1      tests/security/supportTickets.pglite.test.js
+  +12     -5      src/domain/hookEscalation.js
+  +5      -3      src/domain/pendingEditsPreview.js
+  +13     -4      src/domain/simulationSpine.js
+  +19     -6      src/domain/worldPulse/disposition.js
+  +8      -3      src/domain/worldPulse/npcAgency.js
+  +12     -4      src/domain/worldPulse/npcLadderState.js
+  +8      -3      src/generators/aiLayer.js
+  +34     -2      src/lib/generationTelemetry.js
+  +7      -1      src/lib/structuralFingerprint.js
+  +12     -3      src/utils/generateCampaignPDF.js
+  +16     -4      src/utils/generateWorldBook.js
+  +21     -6      tests/domain/hookEscalation.test.js
+  +10     -3      tests/lib/generationTelemetry.test.js
+  +9      -1      tests/lib/structuralFingerprint.test.js
+  +17     -3      tests/pdf/worldBook.test.js
+  +17     -2      tests/security/ingestCheckRate.pglite.test.js
 ```
 ## Last 12 build commits
 
@@ -60,12 +82,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
 738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
 7d31c983 2026-08-11 Handoff corrected: the gate is NOT green, and the harness lied about it again
 9eefd902 2026-08-11 Handoff: schema 5 is landed and the observed-shape gate is GREEN
 049b8f65 2026-08-11 Handoff final: the mint lane's WIP is vaulted; ES-7's refusal is recorded
-165937d6 2026-08-11 Handoff corrected: ES-7 refused, and the dispatcher is the gate
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -112,11 +134,23 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    shape items STOP-and-report as CHAIR-OWED; focused tests only (Lane A owns the gate);
    worklist re-derived from the schema-5 baseline where it disagrees with memory.
    Transcript: session dir `subagents/agent-a9144e987bca3f3f3.jsonl`.
-4. **Lane D (read-only, Opus) — the UNREVIEWED-UI cohort per-row triage** (the schema-5
-   genesis banked it; memory's three-way-agreed figure is 51 files / 128 identities / 193
-   reads filtered — the lane re-derives from the baseline at HEAD). Output: scratchpad
-   `laneD-ui-cohort-triage.md` + a disposition table for chair rulings.
-   Transcript: session dir `subagents/agent-a429dc1bcbd926628.jsonl`.
+4. **Lane D — ✅ COMPLETE (~14:45).** The UNREVIEWED-UI cohort per-row triage, delivered
+   as an ADVERSARIAL RE-DERIVATION of the earlier same-day triage: cohort at HEAD is
+   **128 rows** (162 was schema-4; accounting closes exactly), verdicts **34 (a) / 54 (b)
+   / 40 (c) / 0 (d)** vs the prior lane's 20 (a) — the whole delta is the "detector
+   artifact" habit (mis-binding explains the FIRING, not the KEY). Full table: scratchpad
+   `laneD-ui-cohort-triage.md`; memory `ui-cohort-triaged-31-true-positives.md` updated.
+   **CHAIR DOCKET OPENED (task #6):** 3 rulings (`stresses` alias · `worldPulse.events` —
+   provisional (a) · `eventLog` merging, 35 rows) + ONE governed schema-6 detector mint
+   (globals exclusion, `toLocaleString`, the M9 why-string names a NONEXISTENT function,
+   M6 docstring, cohortNotice) sequenced AFTER Lanes A/C land + reconcile Lane C's 21-row
+   worklist against the 34 (a) before any UI repair wave. ⛔ `ancientRuin` cure is
+   OWNER-GATED (enables a capability). ⚠ `docs/SOL_QUEUE.md:91`'s 162 figure is stale.
+5. **Lane E (read-only draft, Opus) — TC-5B PACKET COMPILE**, dispatched ~14:50. Drafts
+   the colour-binding + sub-tab packet under the NON-PRESENTATION seat ruling (the mount
+   must never touch the persisted vocabulary — measured, not assumed). Output: scratchpad
+   `laneE-TC-5B-draft.md`. The chair reviews, lands the packet, and dispatches only when a
+   build slot frees. Transcript: session dir `subagents/agent-a83b216435482ba3c.jsonl`.
 
 Session dir = `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/`
 (task outputs under the matching `/private/tmp/claude-502/...` tasks/ dir). Scratchpad =
