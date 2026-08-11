@@ -1,6 +1,7 @@
 # Town Cartography / TC-5a — the cartography paint leaf (draw list + palette program)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `41b39220` (2026-08-11) — deviations NONE; bounded pair delta ZERO; C7 mutant-proven
 - **Status note:** promoted by the chair 2026-08-11; §13's six open items are CLOSED below. TC-5 as designed was REFUSED as four packets; this is the first.
 - **Packet version:** `0` (draft)
 - **Verified base:** `claude/composite-r4` at `58436804982b41944478db6c728e579ac9853122`

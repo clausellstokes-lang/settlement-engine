@@ -532,7 +532,7 @@
     },
     {
       "id": "TC-5A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-5A.md",
       "verifiedBase": "58436804982b41944478db6c728e579ac9853122",
       "changeManifest": [
