@@ -101,6 +101,61 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     expect(synth).toHaveLength(0);
   });
 
+  /**
+   * REGRESSION PIN for the ONE-TIME CORRECTION of 2026-08-11 (owner-approved).
+   *
+   * `linkedInstitutionIds` was built from a bare `?.id`, but a GENERATED
+   * institution carries no `id` at all (measured at HEAD 4a9b6cf4: 3632 of 3632
+   * institutions across 120 seeded generations had none), so the array was
+   * unconditionally empty for every faction structural NPC. The identity the
+   * consumers join on is `domain/entities/propagate.js`'s
+   * `instId = (i) => i.id || i.name`.
+   *
+   * PROBE B above feeds an institution that DOES carry an `id` — a shape the
+   * generator never produces — so it passed throughout the defect. This pin feeds
+   * the id-less PRODUCTION shape, which is exactly the negative control: restoring
+   * the bare `?.id` read makes the expected array empty and reds this test.
+   */
+  it('links an id-less institution by NAME — the production shape', () => {
+    const out = ensureFactionStructuralNpcs({
+      tier: 'town',
+      institutions: [{ name: 'Grand Temple', category: 'Religious' }],
+      powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
+      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+    });
+    const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
+    expect(priest).toBeTruthy();
+    expect(priest.linkedInstitutionIds).toEqual(['Grand Temple']);
+  });
+
+  it('an id-BEARING institution is still linked by its id, never downgraded to its name', () => {
+    const out = ensureFactionStructuralNpcs({
+      tier: 'town',
+      institutions: [{ id: 'inst_temple', name: 'Grand Temple', category: 'Religious' }],
+      powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
+      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+    });
+    const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
+    expect(priest.linkedInstitutionIds).toEqual(['inst_temple']);
+  });
+
+  it('a role whose linkToInst matches nothing present still links nothing', () => {
+    // The temple seat is the anchor: the same call synthesizes its High Priestess
+    // and, when a matching institution IS present, links it (pinned directly
+    // above). With only a smithy on the roster there is nothing for the temple
+    // pattern to match, so an empty array here is the matcher declining rather
+    // than the linking step having disappeared.
+    const out = ensureFactionStructuralNpcs({
+      tier: 'town',
+      institutions: [{ name: 'Village smithy', category: 'Crafts' }],
+      powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
+      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+    });
+    const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
+    expect(priest).toBeTruthy();
+    expect(priest.linkedInstitutionIds).toEqual([]);
+  });
+
   it('idempotent — a second pass adds nothing (placeholders cover their own office)', () => {
     const base = {
       tier: 'town',

@@ -147,11 +147,37 @@ export function generateFactionStructuralNpcs(
   const factionKey = factionRefOf(faction);
   const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
   return defs.map((def, i) => {
-    const linkedInstId = def.linkToInst
+    // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ────────────────────
+    // The bare `?.id` read the WRONG IDENTITY: a generated institution carries no
+    // `id` property at all (measured at HEAD 4a9b6cf4 — 3632 institutions across
+    // 120 seeded generations, ZERO with an `id`), so this expression was
+    // unconditionally `undefined` and `linkedInstitutionIds` was unconditionally
+    // EMPTY for every faction structural NPC ever generated. That silently broke
+    // pillar-NPC ripple (entities/npcs.killNpc), impairment propagation
+    // (entities/propagate), successor ranking (entities/successors), and the
+    // SuccessorPrompt institution dropdown.
+    //
+    // The fix is to read the identity the CONSUMERS actually join on, not to mint
+    // a new one: `domain/entities/propagate.js` defines the join as
+    // `instId = (i) => i?.id || i?.name`, so an institution's identity is its id
+    // when it has one and its NAME otherwise. `id ||` is kept rather than
+    // simplified to `name` so an id-bearing institution is never downgraded to a
+    // rename-sensitive label — the same precedence the rest of the domain uses
+    // (counterfactual.js, contradictions.js, dailyLife.js, districtProfile.js).
+    // NOT `catalogId`: no consumer of `linkedInstitutionIds` joins on it, and
+    // custom/DM institutions carry none.
+    //
+    // ⚠ DECLARED SHIFT: structural NPCs whose `linkToInst` pattern matches a
+    // present institution now carry one institution id where they carried an empty
+    // array before. No RNG is drawn here, so no downstream draw moves; the change
+    // is confined to this one field. A settlement regenerated from the same seed
+    // across this date boundary is expected to differ in exactly that way.
+    const linkedInst = def.linkToInst
       ? institutions.find(inst => def.linkToInst.test(
         nativeSemanticName(inst).toLowerCase(),
-      ))?.id
+      ))
       : null;
+    const linkedInstId = linkedInst ? (linkedInst.id || linkedInst.name) : null;
     return {
       id: `npc.${slug(factionName)}_${slug(def.role)}_${i}`,
       name: nameTemplateFor(def.role),
