@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 18:40:33 EDT
+**Generated:** 2026-08-11 19:29:54 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e7774ff2` | **13** |
-| ledger (main) | `review-fixes-2026-07-08` | `6c5ba02a` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `da31d170` | **24** |
+| ledger (main) | `review-fixes-2026-07-08` | `1abc0ee2` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 33Gi free (84% used)
+**Disk:** 32Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T183957` — build 9 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T192914` — build 20 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T183957
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T192914
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -29,28 +29,43 @@ staged set BY NAME AND COUNT.
 
 ```
 MM docs/FABLE_VALIDATION_QUEUE.md
+ M docs/GOLDEN_SHIFT_LEDGER_MAIN.md
 MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/town-cartography/TC-5B-I.md
+MM src/components/OutputContainer.jsx
 D  src/components/townMap/useTownCartographyBlock.js
+MM src/domain/dossier/settlementWorldChronicle.js
+ M src/generators/factionRoles.js
 D  src/lib/townScene/townCartographyBlock.js
+MM src/store/aiChronicleContext.js
+MM src/store/aiSlice.js
+MM tests/domain/disposition.test.js
+MM tests/domain/townCartographyPaint.test.js
+ M tests/fixtures/generator-golden-master.json
 D  tests/hooks/useTownCartographyBlock.test.jsx
 D  tests/lib/townCartographyBlock.test.js
+MM tests/lint/observedShapeReaders.walker.test.js
 MM tests/lint/sovereigntyLightingContract.walker.test.js
+MM tests/store/aiSliceHelpers.test.js
 ?? src/components/townMap/useTownCartographyBlock.js
 ?? src/lib/townScene/townCartographyBlock.js
 ?? tests/hooks/useTownCartographyBlock.test.jsx
 ?? tests/lib/townCartographyBlock.test.js
 ```
 ```
+  +160    -3      docs/GOLDEN_SHIFT_LEDGER_MAIN.md
   +0      -141    src/components/townMap/useTownCartographyBlock.js
+  +40     -1      src/generators/factionRoles.js
   +0      -89     src/lib/townScene/townCartographyBlock.js
+  +25     -25     tests/fixtures/generator-golden-master.json
   +0      -289    tests/hooks/useTownCartographyBlock.test.jsx
   +0      -331    tests/lib/townCartographyBlock.test.js
 ```
 ## Last 12 build commits
 
 ```
+da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
 e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated ledger row lands
 9183d52c 2026-08-11 TC-5b-i: a compiled cartography block becomes reachable without a canvas
 63c62822 2026-08-11 docs: four measured corrections — the espionage park, GR-3b's landing, the schema-2 Wave-1 literal, and F9's signature
@@ -62,17 +77,16 @@ e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is c
 195113e4 2026-08-11 The chair flips R3 and R6, and the hook-family repair takes its validated row
 73f5be96 2026-08-11 The Fable survey clears 67 of 70: the serialization law, and the markers come down
 904b7bb0 2026-08-11 The observed-shape baseline shrinks to 1977: seventeen dead reader rows are gone for good
-aed0fc0e 2026-08-11 The World Book's hook chapter, the campaign PDF's hook line and two fingerprints stop reading keys nothing writes
 ```
 ## Last 6 ledger commits
 
 ```
+1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
 f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
 c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
 3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
 33b3ba1c 2026-08-11 Lane O collected: the cross-branch divergences are cured on both branches
-df146f5c 2026-08-11 Lane N collected: the forward pipeline is ruled, and a phantom program is struck
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -148,16 +162,26 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
    seed-line move, ledger discharge entry — **deliverable: the FULL GATE AT TRUE EXIT 0,
    the first fully green gate of the era.** Transcript: session dir
    `subagents/agent-a1e3cc5e8658cced8.jsonl`.
-1b. **Lane T (build, Opus) — THE CENSUS MICRO-ACT BATCH (task #10)**, dispatched ~18:40
-   in parallel (disjoint paths): R8's C2 case (clears the LAST ⏳ marker → owed count 2,
-   the floor) + H9's both-sites recentEvents deletion + the sibling-ladder source-text
-   pin + the aiChronicleContext.js:21 reader repair (unblocks the schema-6 M9
-   exemption) — ONE whole census fold, foreign-title STOP armed. Transcript: session
-   dir `subagents/agent-a3309a5681f3ccb89.jsonl`.
-   ⚠ Known coordination edge: if Lane S must change any test title it also folds the
-   census — T's foreign-title STOP is the safety; the chair sequences at collection if
-   it fires. Memory: the index was re-compressed under its ceiling (17,366 B) with the
-   ES-Da authorization folded into its topic file.
+1b. **✅ Lane T LANDED the micro-act batch at `da31d170` (~19:10)** — all four ruled acts,
+   one whole census fold (2397/365/2032/**19763/5578**, +10 titles/+2 suites, all live-
+   verified). **The validation debt is at its FLOOR: owed count = 2, both permanent
+   legend lines, grep-verified.** The aiChronicleContext bug was REAL and is repaired
+   reader-side onto pulseHistory (traced: prompt-text only, no golden risk) — **the
+   schema-6 M9 exemption's gate is CLEARED.** Judgments RATIFIED: the worldPulse.events
+   fallback kept (the M9 exemption handles its row); landing despite the OSR stale-red
+   (precedented thrice in the walker's own comments).
+   ⚠⚠ **INCIDENT (owned, cured, banked by the lane):** it planted two mutants in the
+   SHARED tree 18:54–19:04 while Lane S's ratchet ran — files restored cmp-identical, but
+   **any Lane S run overlapping that window is contaminated**; Lane S was ordered
+   (~19:15) to discard and re-run. New law banked: NEVER plant a shared-tree mutant
+   while any foreign run is live — use in-suite spliced controls.
+   ⛔ **STOPPED-AND-TRANSFERRED TO THE CHAIR: the OSR baseline re-freeze.** The
+   recentEvents deletion leaves the shrink-only walker at `stale: 2`; `--write` needs a
+   CLEAN tree and Lane S's factionRoles.js is dirty. **Chair sequence: Lane S lands →
+   chair runs `check-observed-shape-readers.mjs --write` + baseline-only commit → chair
+   captures the FINAL TRUE_EXIT=0 full-gate proof.** Lane S's success criteria were
+   AMENDED accordingly (golden green; every step green EXCEPT the attributed OSR
+   stale-red). Transcript: session dir `subagents/agent-a3309a5681f3ccb89.jsonl`.
 2. **Lane N — ✅ COLLECTED (~17:50): the forward pipeline is RULED (CR-NEXT-1).** Ranked:
    **GR-4** (the succession question, DESIGN_FP_GRAMMAR.md:1005 — no new flag, second
    slice of `oathHolderEnabled`, closes the deliberately-open `disavowal` seam at
