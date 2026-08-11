@@ -3581,7 +3581,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ── ES-5d RE-RECORD (2026-08-11): ALL FIVE RE-DERIVED IN ONE RUN, AND THE DELTA IS
     // ── ATTRIBUTED TO THREE SEPARATE CAUSES, TWO OF WHICH ARE NOT THIS LANE'S ───────────
     //   files       2389 -> 2392  (+3)   parked 364 -> 365 (+1)   credited 2025 -> 2027 (+2)
-    //   titles     19610 -> 19656 (+46)  suiteTitles 5543 -> 5552 (+9)
+    //   titles     19610 -> 19659 (+49)  suiteTitles 5543 -> 5552 (+9)
+    //   (+46 at ES-5d's re-derivation, then +3 folded at 58436804 for the road pins)
     //
     // ⚠⚠ THE FROZEN ROW WAS ALREADY WRONG IN THREE OF ITS FIVE FIGURES BEFORE THIS WAVE
     // TOUCHED ANYTHING, AND THE SEQUENCING IS WHY NOBODY SAW IT. Measured on ISOLATED

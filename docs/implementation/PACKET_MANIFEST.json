@@ -565,6 +565,42 @@
           "tests/domain/townSceneCartography.test.js",
           "tests/build/townScene3dLazy.test.js"]
       ]
+    },
+    {
+      "id": "ES-6A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-6A.md",
+      "verifiedBase": "58436804982b41944478db6c728e579ac9853122",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageLeak.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageProductStage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageLeak.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageLeakDormancy.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/espionage/espionageProductStage.js", "symbol": "amendCovert" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "reconcileBelief" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a compromised operative leaks to the enemy court" },
+        { "id": "A2", "case": "four dormancy fences including a dark corruption web" },
+        { "id": "A3", "case": "the two-party existence leak fires where observer equals subject" },
+        { "id": "A4", "case": "FIDELITY_W boundary proven BOTH sides: clear look adopts, partial does not" },
+        { "id": "A5", "case": "the same-tick pulse order pinned at source" },
+        { "id": "A6", "case": "silent success as a DIFFERENTIAL: the subject's outcome is byte-identical" },
+        { "id": "A7", "case": "an uncompromised operative leaks nothing, with a live control" },
+        { "id": "A8", "case": "determinism and first-ever belief entry creation" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageLeak.test.js",
+          "tests/property/espionageLeakDormancy.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
     }
   ]
 }
