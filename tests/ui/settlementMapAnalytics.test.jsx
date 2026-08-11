@@ -34,7 +34,9 @@ const featuresFired = () => trackSpy.mock.calls
 const v2WithNeighbors = () => ({
   ...makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'mla-ui' }),
   mapEdits: { layoutLawVersion: 2 },
-  neighbors: [{ name: 'Ashford', relationshipType: 'trade_partner' }],
+  // The PERSISTED neighbour shape — `neighbors[]` has no writer anywhere in the
+  // estate, so a fixture built on it fired no edge-label analytics in the app.
+  neighbourNetwork: [{ name: 'Ashford', relationshipType: 'trade_partner' }],
 });
 
 beforeEach(() => { trackSpy.mockClear(); stubMatchMedia(true); });

@@ -28,6 +28,15 @@
  */
 
 import { useStore } from '../../store/index.js';
+// The CANONICAL governing-faction accessors, deliberately imported rather than
+// re-implemented. The coup shield matches the locked name against
+// `nameOf(governingFactionOf(settlement))` (rulingPowerCoup.coupContenders builds
+// `incumbent.name` that way), so a local four-line lookalike that ever disagreed
+// would write a lock naming the WRONG faction — a control that says it protects
+// the seat while protecting nobody. A sibling in this same folder
+// (dossier/EngineSections.jsx) already imports this module statically, so the
+// edge is not new.
+import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { sans, FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
@@ -56,9 +65,34 @@ const SECTIONS = {
   },
 };
 
+/**
+ * ⚠⚠ TWO ROW SHAPES, AND THE DIFFERENCE IS LOAD-BEARING — NOT COSMETIC.
+ *
+ * `identity` and `geography` are BOOLEAN locks: `setLock(key, true)`, read back as
+ * `locks[key] === true`. `factions` is NAME-KEYED and cannot be either of those
+ * things. Its reader is worldPulse/coup.js `lockedGoverningFaction`, which opens
+ * with `if (!Array.isArray(locked) || !locked.length …) return false` and then
+ * matches `stablePart()` of each entry against the incumbent's name. So a boolean
+ * written under this key ARMS NOTHING: the control would light up "Locked", the
+ * save would carry `factions: true`, and the coup would still auto-apply. That is
+ * precisely the lying surface this row exists to remove, so the row carries
+ * `nameKeyed` and the render below writes the governing faction's NAME.
+ *
+ * ⛔ NO RUNTIME STRING ASSEMBLY, including the faction's own name: every string
+ * here is vetoable as a whole sentence (see the header). The row is HIDDEN when
+ * there is no governing faction to name, which is honest — there is nothing to
+ * keep in power — rather than offering a toggle that would write an empty lock.
+ */
 const WORLD_LOCKS = [
   { key: 'identity', locked: 'Locked. A new roll keeps the name.', open: 'A new roll can rename the settlement.', lockCta: 'Keep the name', unlockCta: 'Allow a new name' },
   { key: 'geography', locked: 'Locked. A new roll keeps the same ground.', open: 'A new roll can move it to different ground.', lockCta: 'Keep this ground', unlockCta: 'Allow new ground' },
+  // ⏳ COPY IS A DRAFT FOR OWNER VETO. The wiring is the ruled part; these four
+  // sentences are this lane's best reading of the house voice (say what SURVIVES,
+  // plain words, never mechanism) and the owner keeps or rewrites them freely.
+  // Note these speak about a COUP rather than "a new roll", because that is what
+  // the lock actually governs — the other two rows guard the dice, this one
+  // guards the seat.
+  { key: 'factions', nameKeyed: true, locked: 'Locked. The ruling faction keeps the seat — a coup needs your approval first.', open: 'A coup can take the seat from the ruling faction.', lockCta: 'Keep them in power', unlockCta: 'Allow a coup' },
 ];
 
 // `sans` is a font-family STRING, not a style object — spreading it would scatter
@@ -95,6 +129,10 @@ export default function LockControls({ scope, onReroll = null, style }) {
   const locks = useStore(s => s.locks);
   const setLock = useStore(s => s.setLock);
   const clearLocks = useStore(s => s.clearLocks);
+  // The name a `factions` lock has to write. Selected narrowly (the faction entry,
+  // not the whole settlement) so this control re-renders on a seat change and not
+  // on every unrelated settlement edit.
+  const governingName = useStore(s => nameOf(governingFactionOf(s.settlement)));
 
   if (scope === 'world') {
     // `locks` is sparse: an absent key means "not locked", which is why every
@@ -102,15 +140,26 @@ export default function LockControls({ scope, onReroll = null, style }) {
     const anyLock = !!locks && Object.keys(locks).length > 0;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        {WORLD_LOCKS.map(({ key, locked, open, lockCta, unlockCta }) => {
-          const on = locks?.[key] === true;
+        {WORLD_LOCKS.map(({ key, nameKeyed, locked, open, lockCta, unlockCta }) => {
+          const current = locks?.[key];
+          // A name-keyed lock is ON when it names anybody; a boolean lock is ON
+          // only at exactly `true` (the sparse-map rule the header states).
+          const on = nameKeyed
+            ? Array.isArray(current) && current.length > 0
+            : current === true;
+          // Nothing to keep in power ⇒ no row at all, rather than a control that
+          // would write a lock naming nobody.
+          if (nameKeyed && !governingName) return null;
           return (
             <LockRow
               key={key}
               note={on ? locked : open}
               cta={on ? unlockCta : lockCta}
               on={on}
-              onToggle={() => setLock(key, !on)}
+              // Unlocking writes `[]`, which setLock treats as DELETE the key —
+              // the same erasure `false` performs for a boolean row, so an
+              // unlocked faction leaves no residue for `anyLock` to count.
+              onToggle={() => setLock(key, nameKeyed ? (on ? [] : [governingName]) : !on)}
             />
           );
         })}

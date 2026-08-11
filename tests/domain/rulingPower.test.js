@@ -360,6 +360,36 @@ describe('coupVerdictOutcomes', () => {
     expect(outcomes[0].applyMode).toBe('proposal');
   });
 
+  test('the factions lock is NAME-KEYED: a boolean arms nothing, an array arms the shield', () => {
+    // ⚠⚠ THIS IS THE TRAP THE UI WIRING HAD TO AVOID, PINNED AT THE READER.
+    // Every OTHER world lock (identity, geography) is a boolean written by
+    // `setLock(key, true)`. `factions` cannot be: `lockedGoverningFaction` opens with
+    // `Array.isArray(locked)`, so `factions: true` sails through the type-tolerant
+    // lock map, persists, renders as "Locked" anywhere that tests truthiness — and
+    // leaves the coup on `auto`. A control that wrote a boolean here would claim to
+    // protect the seat while protecting nobody.
+    const run = (locks) => coupVerdictOutcomes({
+      resolved: [resolvedCoup()],
+      snapshot: snapshotFor(settlementFixture(), { campaignState: { locks } }),
+      rng: rngOf(0.5, 0.0),
+      tick: 9,
+    })[0].applyMode;
+
+    // THE LIVE ANCHOR: the array form really does arm this exact fixture, so the
+    // refusal below measures the SHAPE being rejected and not a shield that is
+    // simply dead, a fixture that stopped falling, or a renamed incumbent.
+    expect(run({ factions: ['Town Council'] })).toBe('proposal');
+    // …and the bare NAME works, not merely the `faction.`-prefixed slug the test
+    // above uses — both spellings collapse through stablePart().
+    expect(run({ factions: ['faction.town_council'] })).toBe('proposal');
+
+    // THE REFUSALS: neither boolean nor an empty array is a lock.
+    expect(run({ factions: true })).toBe('auto');
+    expect(run({ factions: [] })).toBe('auto');
+    // …and a name that is not the incumbent's does not shield the incumbent.
+    expect(run({ factions: ['Some Other Guild'] })).toBe('auto');
+  });
+
   test('a held seat emits coup_suppressed; party resolutions skip the verdict', () => {
     const s = settlementFixture();
     s.powerStructure.publicLegitimacy = { score: 50, label: 'Tolerated', govMultiplier: 1.0, crimMultiplier: 1.0 };

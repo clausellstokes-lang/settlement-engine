@@ -86,9 +86,14 @@ describe('SM-5 — the change view (deliverable 2)', () => {
 describe('SM-5 — edge annotations (deliverable 3)', () => {
   test('named neighbours appear as on-map exit labels and in the Roads out section', () => {
     stubMatchMedia(true);
+    // ⚠ THE PERSISTED SHAPE, not the writer-less `neighbors[]` this fixture used to
+    // build. Reading that dead spelling made buildEdgeAnnotations return [] for every
+    // real settlement, so this very test passed against a surface the app never
+    // rendered — the fixture and the reader agreed with each other and with nothing
+    // else. `neighbourNetwork` is what a saved settlement actually carries.
     const settlement = {
       ...v2Fixture(),
-      neighbors: [
+      neighbourNetwork: [
         { name: 'Ashford', relationshipType: 'trade_partner' },
         { name: 'Zephyr Hold', relationshipType: 'rival' },
       ],

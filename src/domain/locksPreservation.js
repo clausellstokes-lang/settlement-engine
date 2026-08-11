@@ -44,14 +44,25 @@
  *     strangers, so a locked id is meaningless unless the carry tells us which
  *     fresh slot its subject landed on. Remapped by the preservation report;
  *     an id the report does not mention is DROPPED.
- *   • `factions` and `institutions` are NAME-keyed — power factions and
- *     institutions carry no id at all, and the one consumer that exists
- *     (worldPulse/coup.js `lockedGoverningFaction`) matches on the stable part of
- *     the NAME, tolerating a `faction.` prefix. A name cannot misbind across a
- *     roll: it either names a same-named entity in the new town or it names
- *     nothing. So they are KEPT VERBATIM as standing intent. Dropping them, which
- *     is what this function used to do, silently disarmed the coup shield on
- *     every full regenerate.
+ *   • `factions` is NAME-keyed — power factions carry no id at all, and the one
+ *     consumer that exists (worldPulse/coup.js `lockedGoverningFaction`) matches
+ *     on the stable part of the NAME, tolerating a `faction.` prefix. A name
+ *     cannot misbind across a roll: it either names a same-named entity in the
+ *     new town or it names nothing. So it is KEPT VERBATIM as standing intent.
+ *     Dropping it, which is what this function used to do, silently disarmed the
+ *     coup shield on every full regenerate.
+ *
+ * ⛔ THERE IS NO INSTITUTIONS LOCK, AND ITS ABSENCE IS THE FINDING. This module
+ * used to normalize a third name-keyed array beside `factions`. It was dead on
+ * EVERY end simultaneously: no UI ever offered it (setLock is only ever called
+ * with identity/geography/npcs/history), so no writer could exist; and nothing
+ * anywhere consumed the normalized field, so no reader existed either — the
+ * clause above once claimed two name-keyed arrays while naming, correctly, only
+ * ONE consumer. Deleted 2026-08-11 by owner ruling. ⚠ The RAW key, if some old
+ * save still carries one, is untouched and still rides through persistence and
+ * `locksAfterFullGenerate`'s spread: this map is key-agnostic at every boundary
+ * by design, and PRUNING a persisted key would be a migration, which is
+ * owner-gated and deliberately not done here.
  *
  * ── THE STALE-ID DROP, and why it diverges from remapNpcLocks ───────────────
  *
@@ -70,9 +81,9 @@
  *  1. `npcs: true`, the WHOLE-SECTION boolean, is kept but not enforced on a full
  *     generate. Carrying an entire roster through a full roll would nullify the
  *     roll; making it mean that is an owner call, not this lane's.
- *  2. Faction / institution OBJECT carry — substituting the locked faction itself
- *     into the fresh town — is a new capability, owner-gated. The arrays survive
- *     as intent; the objects do not.
+ *  2. Faction OBJECT carry — substituting the locked faction itself into the
+ *     fresh town — is a new capability, owner-gated. The array survives as
+ *     intent; the object does not.
  *  3. Canon and authored NPCs that are not locked still do not survive a full
  *     generate. That is the pre-Phase-B baseline, held deliberately: the carry
  *     runs under `lockedIdsOnly`, so it performs the lock map and nothing else.
@@ -111,8 +122,7 @@ function idArray(value) {
  * @property {boolean} history      whole-section lock on the history reroll
  * @property {boolean} npcsSection  `npcs: true` — the whole roster is frozen
  * @property {string[]} npcs        specific NPC ids to carry through a roster reroll
- * @property {string[]} factions
- * @property {string[]} institutions
+ * @property {string[]} factions    NAME-keyed; the coup shield's standing intent
  */
 
 /**
@@ -136,7 +146,6 @@ export function normalizeLocks(locks) {
     npcsSection:  l.npcs === true,
     npcs:         idArray(l.npcs),
     factions:     idArray(l.factions),
-    institutions: idArray(l.institutions),
   };
 }
 
@@ -275,8 +284,8 @@ export function remapNpcLocks(locks, preservedEntries) {
  *
  * The booleans are statements about the settlement — its identity, its ground,
  * its past — and remain meaningful across a fresh roll, so they are untouched.
- * The name-keyed `factions` / `institutions` arrays are statements about names and
- * are kept verbatim. Only `npcs` needs work, because only `npcs` is keyed on ids a
+ * The name-keyed `factions` array is a statement about names and is kept
+ * verbatim. Only `npcs` needs work, because only `npcs` is keyed on ids a
  * full roll has just reissued: each locked id becomes the id its subject INHERITED
  * in the new town, and a locked id the carry did not preserve is dropped. The
  * header explains why that drop diverges from remapNpcLocks' leave-it-alone rule.

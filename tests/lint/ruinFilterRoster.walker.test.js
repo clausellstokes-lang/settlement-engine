@@ -88,14 +88,17 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/entities/propagate.js': 'name-lookup + mutation — impairment propagation graph',
   'src/domain/regenerationMode.js': 'name-lookup — single institution by id for canon-tag preservation',
   'src/domain/districtProfile.js': 'display/list — name-overlap match to a quarter',
-  // ── lock-map id-set: the roster word names a LOCK KEY, not a settlement roster ───
-  // locksPreservation reads `l.institutions` off the USER LOCK MAP (the ids the user
-  // froze), never off a settlement — there is no roster here to filter. It is also
-  // ruin-agnostic on purpose: a lock is a standing do-not-reroll instruction that must
-  // OUTLIVE its subject being ruined, so liveness-filtering it would silently discard
-  // the very edit-preservation it exists to perform the moment a calamity flattened
-  // the locked institution.
-  'src/domain/locksPreservation.js': 'lock-map id-set — `l.institutions` names the ids the USER froze, not a settlement roster; a lock must outlive its subject being ruined, so ruin-filtering here would discard the preservation it exists to perform',
+  // ── lock-map id-set: RETIRED 2026-08-11, THE READ ITSELF IS GONE ────────────────
+  // locksPreservation.js used to hold the estate's one LOCK-KEY-sense reader of this
+  // word — an id-set off the USER LOCK MAP rather than off any settlement roster, and
+  // exempted here because a lock must OUTLIVE its subject being ruined. The owner
+  // ruled that lock dead (no UI ever offered it, so it had no writer; and nothing
+  // consumed the normalized field, so it had no reader either) and it was deleted, so
+  // the file no longer matches this walker's scan at all. Its exempt row is deleted
+  // with it — the honesty arm below REQUIRES that, and it is the arm that told us so:
+  // "no longer reads .institutions (moved/renamed/cleaned) — delete its exempt row".
+  // ⚠ Do NOT re-add the row "just in case": an exempt entry for a non-reader is
+  // exactly the stale state that arm exists to forbid.
   // ── facet-scalar: reads a precomputed number, not the roster ─────────────────────
   'src/domain/worldPulse/attrition.js': 'facet-scalar — reads precomputed facets.institutions, not the roster',
   'src/domain/worldPulse/warDeployment.js': 'facet-scalar — reads precomputed facets.institutions (commandQuality)',

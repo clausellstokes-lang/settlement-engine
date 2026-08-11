@@ -2,7 +2,7 @@
  * PlacementsLayer — renders one TierIcon per settlement placement.
  *
  * Reads `mapState.placements` and looks up each settlement in
- * `savedSettlements` to determine tier, port, and capital flags.
+ * `savedSettlements` to determine tier and port.
  * Click selects the burg via `setSelectedBurgId`.
  *
  * Subscribes only to placements + saves + selection + viewport scale.
@@ -139,7 +139,19 @@ export default function PlacementsLayer({ transformRef }) {
         tier,
         name: settlement?.name || p.name || '',
         port:    tradeRouteAccess === 'port',
-        capital: !!(settlement?.capital || settlement?.isCapital),
+        // ⛔ NO `capital` KEY, BY OWNER RULING: nothing intrinsically makes a
+        // settlement a capital (the closest in-system analog is an overlord), so
+        // the concept is absent from the world model rather than unwired. The
+        // deleted read tested the two flag spellings (bare and is-prefixed) off
+        // the save row — ⚠ deliberately NOT re-spelled here as a dotted access,
+        // because the observed-shape walker scans SOURCE TEXT and a comment
+        // quoting the read would convict this file of still performing it.
+        // Neither spelling ever had a writer: the only producers are the two FMG
+        // bridges and
+        // mapSlice drops the burg's flag on the floor (its placement record is
+        // {settlementId,x,y,cellId,placedAt} and burgToConfig returns
+        // {settType,population,tradeRouteAccess,customName}). Do NOT re-add it as
+        // an overlord flag — that is a separate, uncommissioned capability.
         lifecycleStatus,
         ancientRuin,
         steadings,
@@ -342,7 +354,6 @@ export default function PlacementsLayer({ transformRef }) {
                   y={y}
                   tier={it.tier}
                   port={it.port}
-                  capital={it.capital}
                   selected={isSelected}
                   scale={scale}
                   label={it.lifecycleStatus

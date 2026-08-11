@@ -366,10 +366,27 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * the cohort member: one identity, one read, hence −1/−1. `files` holds at 53
    * because dailyLifeLogic keeps its other three rows — the whole-file drop in
    * this repair was siegeCapability.js, which is not a cohort path.
+   *
+   * ⭐ MOVED AGAIN 2026-08-11 BY THE OWNER-RULED DISPLAY LANE, SAME DIRECTION:
+   * 53/152/248 → 53/150/246. The owner ruled that NOTHING INTRINSICALLY MAKES A
+   * SETTLEMENT A CAPITAL — the closest in-system analog is an overlord — so the
+   * two `capital on settlement` / `isCapital on settlement` rows in
+   * components/map/PlacementsLayer.jsx are not an unwired feature but a concept
+   * ABSENT FROM THE WORLD MODEL, and both were deleted. One read each, hence
+   * −2 identities / −2 counts, and BOTH are cohort members because
+   * PlacementsLayer.jsx is a `src/components/` path. `files` holds at 53 because
+   * that file keeps its other four rows (`ancientRuin on history` 2,
+   * `lifecycleStatus on config` 2, `lifecycleStatus on settlement` 1,
+   * `settlement on settlement` 3) — this repair dropped no file entirely.
+   * ⚠ THE TWO DELETIONS WERE ALSO DEAD A SECOND, INDEPENDENT TIME: TierIcon's
+   * gold fill was unreachable AND its `tierFor` allowlists six tiers with the
+   * size-tier token absent, so the flag sense and the tier sense could never
+   * cross-wire. The frozen inventory's matching two rows are deleted by the
+   * `--write` re-freeze, which only runs from a committed tree.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 53, identities: 152, counts: 248 });
+    expect(cohort).toMatchObject({ files: 53, identities: 150, counts: 246 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 

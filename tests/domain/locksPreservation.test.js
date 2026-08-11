@@ -40,8 +40,36 @@ describe('normalizeLocks — tolerant read of a map every app version has writte
       expect(n.npcsSection).toBe(false);
       expect(n.npcs).toEqual([]);
       expect(n.factions).toEqual([]);
-      expect(n.institutions).toEqual([]);
     }
+  });
+
+  test('the dead institutions lock is GONE from the normalized shape, beside a live sibling', () => {
+    // ⚠⚠ THE ANCHOR IS THE POINT. `expect(n.institutions).toBeUndefined()` alone is
+    // true both when the field was correctly deleted AND when normalizeLocks broke
+    // outright, returned {}, or was renamed — so it is asserted BESIDE `factions`,
+    // the sibling that travels the identical `idArray(l.<key>)` path and must still
+    // come back populated. If the normalizer drifts, the anchor reds first and names
+    // the real cause; only while the anchor holds does the absence mean anything.
+    //
+    // WHY THE FIELD WENT: it was dead on BOTH ends at once. No UI could write it —
+    // setLock is only ever reached with identity/geography/npcs/history — and nothing
+    // anywhere consumed the normalized value, unlike `factions`, whose raw form the
+    // coup shield really does read. The realistic regression is a well-meaning
+    // "restore the symmetry" edit that adds the key back beside factions.
+    const n = normalizeLocks({ factions: ['the-guild'], institutions: ['the-mint'] });
+    expect(n.factions).toEqual(['the-guild']);
+    expect(Object.prototype.hasOwnProperty.call(n, 'institutions')).toBe(false);
+  });
+
+  test('an unknown institutions key still round-trips VERBATIM through a full generate', () => {
+    // The normalized VIEW dropped the concept; the persisted MAP is key-agnostic and
+    // deliberately still is. Pruning a key an old save carries would be a migration,
+    // which is owner-gated — so this pins that deleting the reader did NOT quietly
+    // become a data deletion.
+    const locks = { institutions: ['the-mint'], history: true };
+    expect(locksAfterFullGenerate(locks, [])).toBe(locks);
+    expect(locksAfterFullGenerate({ npcs: ['npc_4'], institutions: ['the-mint'] }, [{ id: 'npc_2', fromId: 'npc_4' }]))
+      .toEqual({ npcs: ['npc_2'], institutions: ['the-mint'] });
   });
 
   test('booleans only count when they are literally true', () => {

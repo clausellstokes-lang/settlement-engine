@@ -77,8 +77,13 @@
  *  @property {boolean=} identity      name, founding lore
  *  @property {boolean=} geography     terrain, trade access, regional placement
  *  @property {boolean=} history       the history section — rerolling it refuses
- *  @property {string[]=} factions     faction identifiers to preserve (Phase B on a full generate)
- *  @property {string[]=} institutions institution identifiers to preserve (Phase B on a full generate)
+ *  @property {string[]=} factions     faction NAMES to preserve (Phase B on a full
+ *                                     generate). Also the coup shield: a locked
+ *                                     governing faction downgrades a successful
+ *                                     coup from auto-applied to a proposal.
+ *                                     ⚠ ARRAY-VALUED, never `true` — the reader
+ *                                     in worldPulse/coup.js is an Array.isArray
+ *                                     guard, so a boolean here arms nothing.
  *  @property {(boolean|string[])=} npcs  `true` freezes the whole roster section
  *                                     (its reroll refuses); an array names the
  *                                     individuals a roster reroll must carry
