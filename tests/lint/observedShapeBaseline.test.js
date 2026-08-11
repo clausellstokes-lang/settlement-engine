@@ -7,7 +7,12 @@ import { join } from 'node:path';
 
 import { run } from '../../scripts/check-observed-shape-readers.mjs';
 import {
+  assertBaselineRow,
+  BASELINE_SCHEMA,
+  parseLeafBaselineIdentity,
+  RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
+  validateSchema4Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -234,8 +239,225 @@ describe('observed-shape schema-3 baseline envelope', () => {
     expect(() => validateSchema3Baseline(baseline)).toThrow(/migrationReview digest mismatch/);
   });
 
-  test('gate and maintenance write reject malformed schema 3 before corpus execution', async () => {
-    const malformed = mutateBaseline((baseline) => { delete baseline.migrationReview; });
+  test('the RETIRED exact definition still names schema 3, and refuses schema 4', () => {
+    expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
+    expect(BASELINE_SCHEMA).toBe(4);
+    // ⚠⚠ A RETIRED DEFINITION THAT THE LIVE ONE CAN MOVE IS NOT RETIRED. If the
+    // schema-3 validator ever picked up `BASELINE_SCHEMA` again, every recorded
+    // schema-3 reference would silently start meaning something else.
+    const promoted = mutateBaseline((baseline) => { baseline.schema = BASELINE_SCHEMA; });
+    expect(() => validateSchema3Baseline(promoted)).toThrow(/not schema 3/);
+  });
+});
+
+/* ══ SCHEMA 4 — THE LIVE HEURISTIC-LEAF ENVELOPE ═══════════════════════════ */
+
+const LEAF_IDENTITY = 'ghost on record';
+
+function validSchema4Baseline() {
+  const scanTree = manifest(['src/probe.js']);
+  const sourceTree = manifest(['src/probe.js']);
+  const detectorTree = manifest([
+    'scripts/lib/legacy-reader-shape-scan.mjs',
+    'scripts/scanner.mjs',
+  ]);
+  const executionTree = manifest([
+    'scripts/lib/legacy-reader-shape-scan.mjs',
+    'scripts/scanner.mjs',
+    'src/probe.js',
+  ]);
+  const manifests = { scanTree, sourceTree, detectorTree, executionTree };
+  // MULTIPLICITY 3 on purpose: schema 3's `count === 1` law must be visibly gone,
+  // and a fixture stuck at 1 could not tell the two laws apart.
+  const inventory = { 'src/probe.js': { [LEAF_IDENTITY]: 3 } };
+  const scanStats = { files: 1, reads: 5, resolved: 3, unresolved: 2 };
+  const sentinel = { usableShapes: 1, totalKeys: 1, resolvedReads: 3 };
+  const corpusMeta = { generations: 1 };
+  const legacyAlgorithm = governedLegacyAlgorithmOf(detectorTree);
+  const legacyScannerToolDigest = scannerToolDigestOf({
+    scannerSha: SHA,
+    detectorTreeDigest: detectorTree.digest,
+    legacyAlgorithm,
+  });
+  const migrationReview = {
+    bundleDigest: '1'.repeat(64),
+    reportDigest: '2'.repeat(64),
+    reviewDigest: '3'.repeat(64),
+    predecessorBaselineDigest: '4'.repeat(64),
+    predecessorBaselineTextSha256: '5'.repeat(64),
+    predecessorInventoryDigest: 'e'.repeat(64),
+    legacyArtifactDigest: '6'.repeat(64),
+    currentArtifactDigest: '6'.repeat(64),
+    subjectSha: SHA,
+    sourceTreeDigest: sourceTree.digest,
+    scanTreeDigest: scanTree.digest,
+    executionTreeDigest: executionTree.digest,
+    detectorTreeDigest: detectorTree.digest,
+    corpusDigest: 'f'.repeat(64),
+    scanConfigDigest: digestOf({ corpusGraphSchema: 2, minRows: 40, originMinRows: 8 }),
+    targetInventoryDigest: digestOf(inventory),
+    currentFindingsDigest: '8'.repeat(64),
+    legacyScannerSha: SHA,
+    legacyAlgorithmBaseSha: '6e7acc4dd88a43cb608f40bc77db3b2130a1e2de',
+    legacyDetectorDigest: detectorTree.digest,
+    legacyScannerToolDigest,
+    currentScannerSha: SHA,
+    currentDetectorDigest: detectorTree.digest,
+    currentScannerToolDigest: legacyScannerToolDigest,
+  };
+  return {
+    _doc: ['test fixture'],
+    schema: BASELINE_SCHEMA,
+    frozen: '2026-08-10',
+    frozenAtSha: SHA,
+    minRows: 40,
+    originMinRows: 8,
+    corpusMeta,
+    scanStats,
+    sentinel,
+    total: 3,
+    identities: 1,
+    inventory,
+    migrationReview,
+    manifests,
+    scannerProvenance: {
+      scanTreeDigest: scanTree.digest,
+      sourceTreeDigest: sourceTree.digest,
+      detectorDigest: detectorTree.digest,
+      executionTreeDigest: executionTree.digest,
+      unscannedInputDigest: digestOf([]),
+    },
+    digests: {
+      corpusMeta: digestOf(corpusMeta),
+      scanStats: digestOf(scanStats),
+      sentinel: digestOf(sentinel),
+      inventory: digestOf(inventory),
+      manifests: digestOf(manifests),
+      migrationReview: digestOf(migrationReview),
+    },
+  };
+}
+
+function mutateSchema4(mutator) {
+  const baseline = validSchema4Baseline();
+  mutator(baseline);
+  baseline.digests.inventory = digestOf(baseline.inventory);
+  baseline.digests.sentinel = digestOf(baseline.sentinel);
+  baseline.digests.scanStats = digestOf(baseline.scanStats);
+  baseline.digests.manifests = digestOf(baseline.manifests);
+  if (baseline.migrationReview) {
+    baseline.digests.migrationReview = digestOf(baseline.migrationReview);
+  }
+  return baseline;
+}
+
+describe('observed-shape schema-4 baseline envelope', () => {
+  test('accepts one canonical, governed, heuristic-leaf inventory WITH multiplicity', () => {
+    const baseline = validSchema4Baseline();
+    expect(validateSchema4Baseline(baseline)).toBe(baseline);
+    // The count law genuinely moved: schema 3 would refuse this exact row.
+    expect(baseline.inventory['src/probe.js'][LEAF_IDENTITY]).toBe(3);
+    expect(baseline.total).not.toBe(baseline.identities);
+  });
+
+  test('⭐ CR-OSR-FREEZE-8: ONE row law, and both consumers reach the same home', () => {
+    // `assertBaselineRow` is the single definition; `rowOf` in the gate script
+    // delegates to it, and the envelope validator calls it per file. A change
+    // here therefore cannot leave a stale twin behind.
+    expect(assertBaselineRow({ [LEAF_IDENTITY]: 4 }, 'src/x.js')).toEqual({ [LEAF_IDENTITY]: 4 });
+    expect(() => assertBaselineRow(10, 'src/x.js')).toThrow(/RETIRED count-only form/);
+    expect(() => assertBaselineRow([], 'src/x.js')).toThrow(/RETIRED count-only form/);
+    expect(() => assertBaselineRow({}, 'src/x.js')).toThrow(/is empty/);
+    expect(() => assertBaselineRow({ [LEAF_IDENTITY]: 0 }, 'src/x.js'))
+      .toThrow(/positive safe integer/);
+    expect(() => assertBaselineRow({ [LEAF_IDENTITY]: 1.5 }, 'src/x.js'))
+      .toThrow(/positive safe integer/);
+    expect(() => assertBaselineRow({ [LEAF_IDENTITY]: '2' }, 'src/x.js'))
+      .toThrow(/positive safe integer/);
+  });
+
+  test('⚠⚠ the RETIRED exact spelling is refused STRUCTURALLY, not by a blocklist', () => {
+    expect(parseLeafBaselineIdentity(LEAF_IDENTITY)).toEqual({ key: 'ghost', shape: 'record' });
+    expect(parseLeafBaselineIdentity('id on factions|steadings'))
+      .toEqual({ key: 'id', shape: 'factions|steadings' });
+    // The exact identity carries interior spaces, so `\S+ on \S+` cannot match
+    // it — no list of forbidden substrings is consulted, and none can be
+    // forgotten. This is the pin that stops a schema-3 row being read as a leaf
+    // row whose "shape" is a truncated origin.
+    expect(() => parseLeafBaselineIdentity(IDENTITY)).toThrow(/heuristic identity is malformed/);
+    expect(() => parseLeafBaselineIdentity('ghost on record @ root/record'))
+      .toThrow(/heuristic identity is malformed/);
+    expect(() => parseLeafBaselineIdentity('ghost on')).toThrow(/heuristic identity is malformed/);
+    expect(() => parseLeafBaselineIdentity('ghost')).toThrow(/heuristic identity is malformed/);
+    expect(() => parseLeafBaselineIdentity('')).toThrow(/nonempty string/);
+    expect(() => validateSchema4Baseline(mutateSchema4((baseline) => {
+      baseline.inventory['src/probe.js'] = { [IDENTITY]: 1 };
+    }))).toThrow(/heuristic identity is malformed/);
+  });
+
+  test.each([
+    ['a schema-3 envelope', (baseline) => { baseline.schema = RETIRED_EXACT_BASELINE_SCHEMA; }],
+    ['missing migration genesis', (baseline) => { delete baseline.migrationReview; }],
+    ['string count', (baseline) => { baseline.inventory['src/probe.js'][LEAF_IDENTITY] = '1'; }],
+    ['zero count', (baseline) => { baseline.inventory['src/probe.js'][LEAF_IDENTITY] = 0; }],
+    ['empty row', (baseline) => { baseline.inventory['src/probe.js'] = {}; }],
+    ['traversal file', (baseline) => {
+      baseline.inventory['src/../probe.js'] = baseline.inventory['src/probe.js'];
+      delete baseline.inventory['src/probe.js'];
+    }],
+    ['unscanned inventory file', (baseline) => {
+      baseline.inventory['src/never-scanned.js'] = { [LEAF_IDENTITY]: 1 };
+    }],
+    ['inconsistent total', (baseline) => { baseline.total = 2; }],
+    ['inconsistent identities', (baseline) => { baseline.identities = 2; }],
+    ['zero sentinel floor', (baseline) => { baseline.sentinel.usableShapes = 0; }],
+    // ⚠⚠ MODE MIX-UP: an EXACT-origin sentinel/stats record in a schema-4
+    // envelope. The key sets are checked EXACTLY, so extra fields fail closed
+    // rather than validating on the subset they share.
+    ['an exact-origin sentinel record', (baseline) => {
+      baseline.sentinel = {
+        ...baseline.sentinel, usableOrigins: 1, originKeys: 1, transitions: 1, resolvedOrigins: 1,
+      };
+    }],
+    ['an exact-origin scanStats record', (baseline) => {
+      baseline.scanStats = { ...baseline.scanStats, resolvedOrigins: 3, depthTruncations: 0 };
+    }],
+    ['stats that do not conserve reads', (baseline) => { baseline.scanStats.unresolved = 1; }],
+    ['stats disagreeing with the scan tree', (baseline) => { baseline.scanStats.files = 2; }],
+    ['short frozen SHA', (baseline) => { baseline.frozenAtSha = 'abcdef1'; }],
+    // ⚠⚠ TWO DETECTORS. A schema-4 receipt naming an EXACT-detector tool digest
+    // as "current" claims provenance from an instrument that cannot complete a
+    // full-tree scan — the exact failure the mint exists to make impossible.
+    ['a second (exact) current scanner tool', (baseline) => {
+      baseline.migrationReview.currentScannerToolDigest = scannerToolDigestOf({
+        scannerSha: SHA,
+        detectorTreeDigest: baseline.manifests.detectorTree.digest,
+      });
+    }],
+    ['a second current artifact', (baseline) => {
+      baseline.migrationReview.currentArtifactDigest = '7'.repeat(64);
+    }],
+    ['scan-config receipt drift', (baseline) => {
+      baseline.migrationReview.scanConfigDigest = 'f'.repeat(64);
+    }],
+    ['genesis source-tree receipt drift', (baseline) => {
+      baseline.migrationReview.sourceTreeDigest = 'f'.repeat(64);
+    }],
+    ['genesis target-inventory receipt drift', (baseline) => {
+      baseline.migrationReview.targetInventoryDigest = 'f'.repeat(64);
+    }],
+  ])('fails closed on %s', (_label, mutator) => {
+    expect(() => validateSchema4Baseline(mutateSchema4(mutator))).toThrow();
+  });
+
+  test('integrity-binds every persisted migration receipt field', () => {
+    const baseline = validSchema4Baseline();
+    baseline.migrationReview.reviewDigest = 'f'.repeat(64);
+    expect(() => validateSchema4Baseline(baseline)).toThrow(/migrationReview digest mismatch/);
+  });
+
+  test('gate and maintenance write reject a malformed baseline before corpus execution', async () => {
+    const malformed = mutateSchema4((baseline) => { delete baseline.migrationReview; });
     let corpusCalls = 0;
     const overrides = {
       baselineExists: () => true,

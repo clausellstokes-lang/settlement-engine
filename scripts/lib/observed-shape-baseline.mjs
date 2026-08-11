@@ -1,9 +1,36 @@
 /**
- * Fail-closed schema-3 baseline envelope for the observed-shape ratchet.
+ * Fail-closed baseline envelopes for the observed-shape ratchet.
  *
  * The baseline is an executable governance input, not a bag of ceilings.  A
  * malformed row, missing migration genesis, disabled sentinel, or unbound scan
  * path must stop the gate before the expensive producer corpus executes.
+ *
+ * ── ⭐⭐ TWO IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ────
+ *
+ * `BASELINE_SCHEMA` is **4**: the HEURISTIC-LEAF identity (`<key> on <shape>`),
+ * produced by the governed `legacy-reader-shape-scan.mjs` detector, with a
+ * per-identity MULTIPLICITY. It is the full-tree gate authority.
+ *
+ * `RETIRED_EXACT_BASELINE_SCHEMA` is **3**: the exact per-site identity
+ * (`<key> on <shape> @ <origin> # <semantic-site>`), always singular. It is
+ * RETIRED, never redefined and never deleted — CR-OSR-FREEZE-1 keeps the exact
+ * scanner a TARGETED INSTRUMENT, and redefining schema 3 in place would falsify
+ * every recorded reference to it (the no-history-rewriting ethos).
+ *
+ * ⚠ `validateSchema3Baseline` and its `validateMigrationReceipt` are therefore
+ * DELIBERATELY NOT SHARED with the schema-4 pair below. The duplication is the
+ * point: a retired definition that a live definition can move is not retired.
+ * This is not the doubled-law shape CR-OSR-FREEZE-8 refuses — that was one LIVE
+ * law with two homes and one test. Here the live row law has exactly ONE home
+ * (`assertBaselineRow`, consumed by both the envelope validator and the gate's
+ * `rowOf`), and each definition carries its own executed pins.
+ *
+ * ⚠⚠ WHY SCHEMA 4 EXISTS AT ALL (CR-OSR-FREEZE-3-R1, measured): schema 3 IS the
+ * exact per-site identity by definition, so its validator refuses 2168/2168
+ * heuristic rows, and the exact detector cannot complete a full-tree scan (it
+ * walls at `src/data/constants.js:56`, abstract-state growth 16385 > 16384).
+ * Minting a fourth schema is what lets the heuristic leg become the authority
+ * without either weakening schema 3 or shipping a scan that cannot finish.
  */
 import {
   FULL_GIT_SHA,
@@ -18,7 +45,9 @@ import {
   scannerToolDigestOf,
 } from './observed-shape-governance.mjs';
 
-export const BASELINE_SCHEMA = 3;
+export const BASELINE_SCHEMA = 4;
+/** The RETIRED exact per-site definition. Never redefined, never deleted. */
+export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 export const MIN_ROWS = 40;
 export const ORIGIN_MIN_ROWS = 8;
 
@@ -111,6 +140,77 @@ export function parseExactBaselineIdentity(identity) {
     throw new Error(`observed-shape baseline identity is noncanonical: ${JSON.stringify(identity)}`);
   }
   return parsed;
+}
+
+/**
+ * ⭐ THE SCHEMA-4 IDENTITY: `<key> on <shape>`, exactly one ` on ` separator and
+ * no interior whitespace on either side. Both halves are minted by
+ * `artifactIdentityOf('legacy-leaf', …)` as `${key} on ${shapes.join('|')}`,
+ * and `assertLegacyFinding` already pins `shapes.length === 1`, so a `|` can
+ * only reach a row through a spelling this module does not mint. MEASURED over
+ * both real inventories (the schema-2 predecessor's 1,296 distinct identities
+ * and the live heuristic scan's 840): every one matches, none carries `|`.
+ *
+ * ⚠ The exact schema-3 spelling is REFUSED here, structurally rather than by a
+ * blocklist: `<key> on <shape> @ <origin> # <site>` carries interior spaces, so
+ * `\S+ on \S+` cannot match it. A schema-3 row hand-pasted into a schema-4
+ * baseline therefore fails closed instead of being read as a leaf identity
+ * whose "shape" is a truncated origin.
+ */
+const LEAF_IDENTITY = /^(\S+) on (\S+)$/;
+
+export function parseLeafBaselineIdentity(identity) {
+  if (typeof identity !== 'string' || !identity) {
+    throw new Error('observed-shape baseline identity must be a nonempty string');
+  }
+  const match = LEAF_IDENTITY.exec(identity);
+  if (!match) {
+    throw new Error(`observed-shape baseline heuristic identity is malformed: ${JSON.stringify(identity)}.`
+      + ' Schema-4 rows are "<key> on <shape>". The exact'
+      + ' "<key> on <shape> @ <executed-origin> # <semantic-site>" spelling belongs to the'
+      + ` RETIRED schema-${RETIRED_EXACT_BASELINE_SCHEMA} exact definition and cannot be frozen here.`);
+  }
+  const parsed = { key: match[1], shape: match[2] };
+  if (`${parsed.key} on ${parsed.shape}` !== identity) {
+    throw new Error(`observed-shape baseline identity is noncanonical: ${JSON.stringify(identity)}`);
+  }
+  return parsed;
+}
+
+/**
+ * ⭐⭐ CR-OSR-FREEZE-8 — THE ONE HOME OF THE LIVE ROW LAW.
+ *
+ * Two copies of the `count` law used to exist — one inside this module's
+ * inventory validation and one inside the gate's `rowOf` — and only the first
+ * was tested. An untested twin is the recorded unreachable-arm shape: it can
+ * drift arbitrarily far from its sibling and nothing reds. The gate's `rowOf`
+ * now DELEGATES here, so there is exactly one live definition and both callers
+ * exercise it.
+ *
+ * ⚠ THE LAW ITSELF CHANGED WITH THE SCHEMA, AND THAT IS NOT A WEAKENING. Schema
+ * 3's law was `count === 1`, because an exact per-SITE identity is singular by
+ * construction. A heuristic leaf identity is a MULTIPLICITY — one `<key> on
+ * <shape>` legitimately covers several reads in one file (MEASURED: up to 24 in
+ * the schema-2 predecessor, up to 10 in the live heuristic scan). So schema 4
+ * pins a positive safe integer, and the anti-swap property is carried by the
+ * IDENTITY being frozen per file rather than by the count being 1.
+ */
+export function assertBaselineRow(row, file = '') {
+  if (!row || typeof row !== 'object' || Array.isArray(row)) {
+    throw new Error(`observed-shape baseline: row for "${file}" is the RETIRED count-only form (${JSON.stringify(row)}).`
+      + ' Rows are now {"<key> on <shape>": multiplicity} so an identity SWAP at constant count reds.'
+      + ' Re-freeze with `node scripts/check-observed-shape-readers.mjs --write`.');
+  }
+  const entries = Object.entries(row);
+  if (!entries.length) throw new Error(`observed-shape baseline: row for "${file}" is empty.`);
+  for (const [identity, count] of entries) {
+    parseLeafBaselineIdentity(identity);
+    if (!Number.isSafeInteger(count) || count < 1) {
+      throw new Error(`observed-shape baseline: multiplicity for "${file}" / ${JSON.stringify(identity)}`
+        + ` must be a positive safe integer; received ${JSON.stringify(count)}.`);
+    }
+  }
+  return row;
 }
 
 function validateMigrationReceipt(receipt, baseline) {
@@ -233,13 +333,19 @@ function validateInventory(inventory, scanTree) {
   return identities;
 }
 
+/**
+ * ⛔ RETIRED — the exact per-site definition. Kept executable so historical
+ * schema-3 envelopes and the exact instrument's targeted receipts stay
+ * verifiable; NEVER redefined in place. The live authority is
+ * `validateSchema4Baseline` below.
+ */
 export function validateSchema3Baseline(baseline) {
   assertExactKeys(baseline, 'schema-3 envelope', [
     '_doc', 'corpusMeta', 'digests', 'frozen', 'frozenAtSha', 'identities',
     'inventory', 'manifests', 'migrationReview', 'minRows', 'originMinRows',
     'scanStats', 'scannerProvenance', 'schema', 'sentinel', 'total',
   ]);
-  if (baseline.schema !== BASELINE_SCHEMA) throw new Error('observed-shape baseline is not schema 3');
+  if (baseline.schema !== RETIRED_EXACT_BASELINE_SCHEMA) throw new Error('observed-shape baseline is not schema 3');
   if (!Array.isArray(baseline._doc) || !baseline._doc.length
     || baseline._doc.some((line) => typeof line !== 'string' || !line)) {
     throw new Error('observed-shape baseline documentation is malformed');
@@ -264,6 +370,211 @@ export function validateSchema3Baseline(baseline) {
     throw new Error(`observed-shape baseline totals are inconsistent: total=${baseline.total}, identities=${baseline.identities}, rows=${identities}`);
   }
   const receipt = validateMigrationReceipt(baseline.migrationReview, baseline);
+  assertExactKeys(baseline.scannerProvenance, 'scannerProvenance', [
+    'detectorDigest', 'executionTreeDigest', 'scanTreeDigest', 'sourceTreeDigest',
+    'unscannedInputDigest',
+  ]);
+  const scannedPaths = new Set(baseline.manifests.scanTree.entries.map((entry) => entry.path));
+  const expectedProvenance = {
+    detectorDigest: baseline.manifests.detectorTree.digest,
+    executionTreeDigest: baseline.manifests.executionTree.digest,
+    scanTreeDigest: baseline.manifests.scanTree.digest,
+    sourceTreeDigest: baseline.manifests.sourceTree.digest,
+    unscannedInputDigest: digestOf(baseline.manifests.sourceTree.entries
+      .filter((entry) => !scannedPaths.has(entry.path))),
+  };
+  if (canonicalJson(baseline.scannerProvenance) !== canonicalJson(expectedProvenance)
+    || receipt.currentDetectorDigest !== expectedProvenance.detectorDigest) {
+    throw new Error('observed-shape baseline scanner provenance disagrees with its manifests or migration genesis');
+  }
+  assertExactKeys(baseline.digests, 'digests', [
+    'corpusMeta', 'inventory', 'manifests', 'migrationReview', 'scanStats', 'sentinel',
+  ]);
+  for (const [name, value] of Object.entries({
+    corpusMeta: baseline.corpusMeta,
+    inventory: baseline.inventory,
+    manifests: baseline.manifests,
+    migrationReview: baseline.migrationReview,
+    scanStats: baseline.scanStats,
+    sentinel: baseline.sentinel,
+  })) {
+    if (!SHA256.test(baseline.digests[name] || '') || baseline.digests[name] !== digestOf(value)) {
+      throw new Error(`observed-shape baseline ${name} digest mismatch`);
+    }
+  }
+  return baseline;
+}
+
+/* ══ SCHEMA 4 — THE LIVE HEURISTIC-LEAF AUTHORITY ══════════════════════════ */
+
+/** The heuristic detector emits exactly these four telemetry fields. Requiring
+ *  the key set EXACTLY (a total positive predicate, never a blocklist of
+ *  exact-only fields) means a mode mix-up — an exact-origin stats record pasted
+ *  into a schema-4 envelope — fails closed instead of validating on a subset. */
+const HEURISTIC_STATS_KEYS = ['files', 'reads', 'resolved', 'unresolved'];
+/** `scanSentinelOf('legacy-leaf', …)` returns exactly these three. */
+const HEURISTIC_SENTINEL_KEYS = ['usableShapes', 'totalKeys', 'resolvedReads'];
+
+function validateHeuristicSentinel(sentinel) {
+  assertExactKeys(sentinel, 'sentinel', HEURISTIC_SENTINEL_KEYS);
+  for (const key of HEURISTIC_SENTINEL_KEYS) positiveSafeInteger(sentinel[key], `sentinel.${key}`);
+  return sentinel;
+}
+
+function validateHeuristicStats(stats, scanTree, sentinel) {
+  assertExactKeys(stats, 'scanStats', HEURISTIC_STATS_KEYS);
+  for (const key of ['files', 'reads', 'resolved']) {
+    positiveSafeInteger(stats[key], `scanStats.${key}`);
+  }
+  nonNegativeSafeInteger(stats.unresolved, 'scanStats.unresolved');
+  if (stats.files !== scanTree.entries.length
+    || stats.reads !== stats.resolved + stats.unresolved
+    || stats.resolved !== sentinel.resolvedReads) {
+    throw new Error('observed-shape baseline scanStats disagree with its scan tree or sentinel');
+  }
+  return stats;
+}
+
+function validateHeuristicInventory(inventory, scanTree) {
+  assertObject(inventory, 'inventory');
+  const files = Object.keys(inventory);
+  if (!files.length) throw new Error('observed-shape baseline inventory must not be empty');
+  const scanPaths = new Set(scanTree.entries.map((entry) => entry.path));
+  let identities = 0;
+  let total = 0;
+  for (const file of files) {
+    if (!CANONICAL_SRC_PATH.test(file) || !scanPaths.has(file)) {
+      throw new Error(`observed-shape baseline inventory file is not a canonical scanned source: ${JSON.stringify(file)}`);
+    }
+    for (const count of Object.values(assertBaselineRow(inventory[file], file))) {
+      identities += 1;
+      total += count;
+      if (!Number.isSafeInteger(total)) {
+        throw new Error('observed-shape baseline inventory totals exceed safe integer range');
+      }
+    }
+  }
+  return { identities, total };
+}
+
+/**
+ * ⭐⭐ THE SCHEMA-4 MIGRATION RECEIPT — ONE GOVERNED HEURISTIC DETECTOR.
+ *
+ * Deliberately NOT the schema-3 receipt validator with a flag: see the module
+ * header. The key set is identical (so the receipt stays one shape across both
+ * definitions and `validateGovernedMigration` needs no new assembly), but the
+ * EQUALITIES are stronger, and they say what schema 4 actually claims:
+ *
+ *   schema 3  "current" = the exact detector, "legacy" = the governed heuristic
+ *             detector; the two tool digests DIFFER (only the legacy one folds
+ *             in `legacyAlgorithm`).
+ *   schema 4  there is no second detector. The heuristic leg IS the current
+ *             authority, so current* === legacy* in EVERY field — including the
+ *             artifact digest and the scanner-tool digest, which must both
+ *             reconstruct from the FROZEN legacy algorithm. A receipt naming an
+ *             exact-detector tool digest as "current" is refused: that would be
+ *             a schema-4 baseline claiming provenance from an instrument that
+ *             cannot complete a full-tree scan.
+ */
+function validateHeuristicMigrationReceipt(receipt, baseline) {
+  assertObject(receipt, 'migrationReview');
+  assertExactKeys(receipt, 'migrationReview', [
+    ...REQUIRED_RECEIPT_DIGESTS, ...REQUIRED_RECEIPT_SHAS,
+  ]);
+  for (const key of REQUIRED_RECEIPT_DIGESTS) {
+    if (!SHA256.test(receipt[key] || '')) {
+      throw new Error(`observed-shape baseline migrationReview.${key} must be a SHA-256 digest`);
+    }
+  }
+  for (const key of REQUIRED_RECEIPT_SHAS) {
+    if (!FULL_GIT_SHA.test(receipt[key] || '')) {
+      throw new Error(`observed-shape baseline migrationReview.${key} must be a full Git SHA`);
+    }
+  }
+  if (receipt.legacyAlgorithmBaseSha !== LEGACY_ALGORITHM_BASE_SHA) {
+    throw new Error('observed-shape baseline migration receipt names an ungoverned legacy algorithm');
+  }
+  if (receipt.subjectSha !== receipt.currentScannerSha
+    || receipt.subjectSha !== receipt.legacyScannerSha
+    || receipt.detectorTreeDigest !== receipt.currentDetectorDigest
+    || receipt.detectorTreeDigest !== receipt.legacyDetectorDigest) {
+    throw new Error('observed-shape baseline migration receipt does not bind one committed detector execution');
+  }
+  if (receipt.currentArtifactDigest !== receipt.legacyArtifactDigest
+    || receipt.currentScannerToolDigest !== receipt.legacyScannerToolDigest) {
+    throw new Error('observed-shape schema-4 migration receipt does not bind ONE heuristic authority:'
+      + ' the current artifact and scanner tool must be the governed legacy-leaf detector itself');
+  }
+  const legacyAlgorithm = governedLegacyAlgorithmOf(baseline.manifests.detectorTree);
+  const expectedLegacyToolDigest = scannerToolDigestOf({
+    scannerSha: receipt.legacyScannerSha,
+    detectorTreeDigest: receipt.legacyDetectorDigest,
+    legacyAlgorithm,
+  });
+  const expectedScanConfigDigest = digestOf({
+    corpusGraphSchema: 2,
+    minRows: baseline.minRows,
+    originMinRows: baseline.originMinRows,
+  });
+  if (receipt.legacyScannerToolDigest !== expectedLegacyToolDigest
+    || receipt.scanConfigDigest !== expectedScanConfigDigest) {
+    throw new Error('observed-shape baseline migration receipt has unreconstructable scanner-tool or scan-config provenance');
+  }
+
+  // At migration genesis the baseline is frozen against the subject commit
+  // itself. Later shrink-only maintenance advances frozenAtSha while the
+  // immutable migration receipt remains unchanged, so only the genesis envelope
+  // can (and must) prove these artifact-to-baseline relations directly.
+  if (baseline.frozenAtSha === receipt.subjectSha) {
+    if (receipt.scanTreeDigest !== baseline.manifests.scanTree.digest
+      || receipt.sourceTreeDigest !== baseline.manifests.sourceTree.digest
+      || receipt.detectorTreeDigest !== baseline.manifests.detectorTree.digest
+      || receipt.executionTreeDigest !== baseline.manifests.executionTree.digest
+      || receipt.targetInventoryDigest !== digestOf(baseline.inventory)) {
+      throw new Error('observed-shape migration-genesis receipt disagrees with its frozen manifests or target inventory');
+    }
+  }
+  return receipt;
+}
+
+/** The LIVE authority. Same 16-key envelope as schema 3; leaf identities with
+ *  multiplicity, heuristic telemetry, and a one-detector migration receipt. */
+export function validateSchema4Baseline(baseline) {
+  assertExactKeys(baseline, 'schema-4 envelope', [
+    '_doc', 'corpusMeta', 'digests', 'frozen', 'frozenAtSha', 'identities',
+    'inventory', 'manifests', 'migrationReview', 'minRows', 'originMinRows',
+    'scanStats', 'scannerProvenance', 'schema', 'sentinel', 'total',
+  ]);
+  if (baseline.schema !== BASELINE_SCHEMA) {
+    throw new Error(`observed-shape baseline is not schema ${BASELINE_SCHEMA}`);
+  }
+  if (!Array.isArray(baseline._doc) || !baseline._doc.length
+    || baseline._doc.some((line) => typeof line !== 'string' || !line)) {
+    throw new Error('observed-shape baseline documentation is malformed');
+  }
+  if (!DATE.test(baseline.frozen || '') || !FULL_GIT_SHA.test(baseline.frozenAtSha || '')) {
+    throw new Error('observed-shape baseline freeze provenance is malformed');
+  }
+  if (baseline.minRows !== MIN_ROWS || baseline.originMinRows !== ORIGIN_MIN_ROWS) {
+    throw new Error('observed-shape baseline threshold constants drifted');
+  }
+  assertObject(baseline.corpusMeta, 'corpusMeta');
+  if (!Object.keys(baseline.corpusMeta).length) throw new Error('observed-shape baseline corpusMeta is empty');
+  assertExactKeys(baseline.manifests, 'manifests', [
+    'detectorTree', 'executionTree', 'scanTree', 'sourceTree',
+  ]);
+  for (const [name, manifest] of Object.entries(baseline.manifests)) assertManifest(manifest, name);
+  assertTreeRelations(baseline.manifests);
+  const sentinel = validateHeuristicSentinel(baseline.sentinel);
+  validateHeuristicStats(baseline.scanStats, baseline.manifests.scanTree, sentinel);
+  const { identities, total } = validateHeuristicInventory(
+    baseline.inventory,
+    baseline.manifests.scanTree,
+  );
+  if (baseline.total !== total || baseline.identities !== identities) {
+    throw new Error(`observed-shape baseline totals are inconsistent: total=${baseline.total}, identities=${baseline.identities}, rows=${identities}, counts=${total}`);
+  }
+  const receipt = validateHeuristicMigrationReceipt(baseline.migrationReview, baseline);
   assertExactKeys(baseline.scannerProvenance, 'scannerProvenance', [
     'detectorDigest', 'executionTreeDigest', 'scanTreeDigest', 'sourceTreeDigest',
     'unscannedInputDigest',

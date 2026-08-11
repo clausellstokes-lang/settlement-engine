@@ -120,11 +120,43 @@ export function rowsOf(report, root = ROOT) {
   return rows;
 }
 
-/** Suites that produced ZERO tests — an import error, a top-level throw, a collection timeout. */
+/**
+ * Suites whose FAILURE IS INVISIBLE TO THE PER-TEST CENSUS — the class this
+ * ratchet cannot measure and must therefore refuse.
+ *
+ * ⚠⚠ CR-TRFZ-4. The first spelling caught only suites with ZERO
+ * `assertionResults`, and that is not the whole class. MEASURED against the real
+ * vitest JSON reporter on 2026-08-10 (isolated four-case probe, one run):
+ *
+ *   case                      suite.status  suite.message  assertionResults
+ *   module-load throw         "failed"      NON-EMPTY      0                  ← caught by length===0
+ *   ⚠ beforeAll hook throw    "failed"      **EMPTY**      2, BOTH "skipped"  ← THE GAP
+ *   afterAll hook throw       "failed"      non-empty      1 passed           ← also invisible
+ *   describe.skip (2 tests)   "passed"      empty          2 "skipped"        ← legitimate
+ *   test.todo + test.skip     "passed"      empty          2                  ← legitimate
+ *   one genuinely failing test "failed"     empty          1 failed + 1 skip  ← ordinary failure
+ *
+ * The beforeAll row is the one that bit: the suite FAILED, yet it enumerated its
+ * tests as SKIPS, so the census counted N skips, `numFailedTests` read 0, and the
+ * whole suite's coverage evaporated into the skip ceiling. The observed-shape
+ * readers walker did exactly this — 24 tests, all "skipped", after its corpus
+ * hook threw.
+ *
+ * ⚠⚠ THE DISCRIMINATOR CANNOT BE THE SUITE MESSAGE: it is EMPTY on precisely the
+ * beforeAll case that motivates this, so a message-keyed guard fails open on its
+ * own motivating instance. The discriminator is `status === 'failed'` with NO
+ * failing assertion row — the exact condition under which a suite-level failure
+ * leaves no per-test trace. The three legitimate rows above report
+ * `status: 'passed'` or carry a failing row, so none of them is caught.
+ */
 export function uncollectedOf(report, root = ROOT) {
   const suites = Array.isArray(report?.testResults) ? report.testResults : [];
   return suites
-    .filter((s) => (s.assertionResults || []).length === 0)
+    .filter((s) => {
+      const results = s.assertionResults || [];
+      if (results.length === 0) return true;
+      return s.status === 'failed' && !results.some((a) => a.status === 'failed');
+    })
     .map((s) => normalizePath(s.name || s.file || '(unnamed suite)', root));
 }
 
@@ -277,8 +309,10 @@ export async function run(argv = []) {
   const newUncollected = uncollected.filter((f) => !allowedUncollected[f]);
   if (newUncollected.length) {
     scopeFailures.push(
-      `  ${newUncollected.length} suite(s) produced ZERO tests — they failed to COLLECT, so every test`,
-      '    they own vanished from the census instead of being measured:',
+      `  ${newUncollected.length} suite(s) FAILED WITHOUT A MEASURABLE TEST — they either produced ZERO`,
+      '    tests (a collection error) or failed as a whole while every test they enumerated was a',
+      '    SKIP (a `beforeAll`/`afterAll` that threw). Either way every test they own left the',
+      '    census instead of being measured, and a skip ceiling cannot see the difference:',
       ...newUncollected.map((f) => `      ${f}`),
     );
   }

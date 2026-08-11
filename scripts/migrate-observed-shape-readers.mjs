@@ -1,14 +1,28 @@
 #!/usr/bin/env node
 /**
- * Governed schema-2 -> schema-3 observed-reader migration.
+ * Governed observed-reader baseline migrations.
  *
- * The predecessor schema-2 baseline and both versioned scan artifacts are
- * canonical, content-addressed inputs. Legacy and exact scans must share the
- * same committed source, complete execution tree, executed corpus and scan
- * configuration. The legacy detector is the governed 6e7acc4d algorithm with
- * one semantic-neutral addition: `pos: node.name.getStart(sf)`. That lets this
- * tool pair by an exact source address; text and nearest-line guesses are
- * deliberately forbidden because repeated reads make either ambiguous.
+ * TWO TARGETS LIVE HERE, and they are different arguments:
+ *
+ *   schema 2 -> 3  (RETIRED) `migrationReport`. Pairs the governed heuristic
+ *     detector against the EXACT detector site-by-site, so the target inventory
+ *     is a NEW alphabet and every paired site needs its own reviewed row.
+ *
+ *   schema 2 -> 4  (LIVE)    `heuristicMigrationReport`. CR-OSR-FREEZE-3-R1: the
+ *     heuristic leaf identity becomes its own schema, so the target inventory is
+ *     the heuristic artifact's OWN inventory — the SAME alphabet the schema-2
+ *     predecessor is spelled in. There is no cross-detector pairing to review,
+ *     and therefore no `rows`: the whole reconciliation is the predecessorRows
+ *     ledger that already exists. It needs NO exact artifact, which is the point
+ *     — the exact detector cannot complete a full-tree scan.
+ *
+ * In both, the predecessor schema-2 baseline and every scan artifact are
+ * canonical, content-addressed inputs sharing one committed source, execution
+ * tree, executed corpus and scan configuration. The legacy detector is the
+ * governed 6e7acc4d algorithm with one semantic-neutral addition:
+ * `pos: node.name.getStart(sf)`. That lets the retired path pair by an exact
+ * source address; text and nearest-line guesses are deliberately forbidden
+ * because repeated reads make either ambiguous.
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -32,6 +46,15 @@ import {
 export const MIGRATION_REPORT_SCHEMA = 2;
 export const MIGRATION_REVIEW_SCHEMA = 2;
 export const MIGRATION_BUNDLE_SCHEMA = 2;
+
+/** The RETIRED exact target. Named rather than hand-keyed so the two target
+ *  schemas can never be confused at a call site, and so a reader grepping for
+ *  "3" finds a definition instead of a literal. */
+export const RETIRED_EXACT_TARGET_SCHEMA = 3;
+/** The LIVE heuristic-leaf target. */
+export const HEURISTIC_TARGET_SCHEMA = 4;
+const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
+const HEURISTIC_MIGRATION_KIND = `observed-shape-schema-2-to-${HEURISTIC_TARGET_SCHEMA}-migration`;
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -195,9 +218,14 @@ function assertLegacyFinding(finding) {
   }
 }
 
-function assertArtifactPair(legacy, current) {
+/**
+ * ONE HOME for "this is the governed heuristic detector's own artifact". Both
+ * migration targets need exactly this claim — the retired path as the LEGACY
+ * half of a pair, the live path as the WHOLE authority — and a second copy of a
+ * detector-governance check is the doubled-law shape.
+ */
+function assertGovernedLegacyArtifact(legacy) {
   validateScanArtifact(legacy);
-  validateScanArtifact(current);
   if (legacy.scanMode !== 'legacy-leaf' || legacy.baselineSchema !== 2) {
     throw new Error('legacy migration input must be a validated legacy-leaf/schema-2 scan artifact');
   }
@@ -210,7 +238,15 @@ function assertArtifactPair(legacy, current) {
     || legacy.legacyAlgorithm?.modulePath !== 'scripts/lib/legacy-reader-shape-scan.mjs') {
     throw new Error('legacy migration input is not the governed 6e7acc4d detector with the sole node-name-start-v1 enrichment');
   }
-  if (current.scanMode !== 'exact-origin' || current.baselineSchema !== 3) {
+  for (const finding of legacy.findings) assertLegacyFinding(finding);
+  return legacy;
+}
+
+function assertArtifactPair(legacy, current) {
+  assertGovernedLegacyArtifact(legacy);
+  validateScanArtifact(current);
+  if (current.scanMode !== 'exact-origin'
+    || current.baselineSchema !== RETIRED_EXACT_TARGET_SCHEMA) {
     throw new Error('current migration input must be a validated exact-origin/schema-3 scan artifact');
   }
   if (legacy.provenance.subjectSha !== current.provenance.subjectSha) {
@@ -239,18 +275,73 @@ function assertArtifactPair(legacy, current) {
   if (canonicalJson(legacy.scanConfig) !== canonicalJson(current.scanConfig)) {
     throw new Error('migration artifacts do not bind the exact same thresholds and scan configuration');
   }
-  for (const finding of legacy.findings) assertLegacyFinding(finding);
+}
+
+/**
+ * The corpus keys that define the EXPERIMENT. A change here means the two sides
+ * observed different worlds, so no reconciliation between them is meaningful.
+ */
+const CORPUS_EXECUTION_KEYS = ['seeds', 'configs', 'generations', 'pulseIntervals'];
+
+/**
+ * The corpus keys that describe WHAT THE EXPERIMENT SAW. These legitimately move
+ * when the corpus BUILDER gains reach without the corpus DEFINITION changing —
+ * which is exactly what happened, and exactly what nothing recorded.
+ */
+const CORPUS_OBSERVATION_KEYS = ['simulationFlagsLit', 'steadingsMinted', 'shapeCount'];
+
+/**
+ * ⚠⚠ THE CORPUS DEFINITION MOVED UNDER THE RECONCILIATION AND NOTHING SAW IT.
+ * The first spelling compared four keys — seeds/configs/generations/pulseIntervals
+ * — and never `shapeCount`. Between the schema-2 freeze and HEAD the corpus
+ * builder gained the graph-schema-2 origins and `shapeCount` went 305 -> 1,321,
+ * which grows `known`/`singleHome`/`rootShapes` and therefore re-grounds receivers
+ * that previously resolved to nothing. That is the measured driver of the growth
+ * rows the freeze had to review, and the compatibility check was BLIND to it.
+ *
+ * ⚠ AND THE HOLE WAS WORSE THAN AN OMITTED KEY: nothing validates an artifact's
+ * `corpus.meta` at all, so a key that is simply ABSENT compared `undefined` and
+ * the migration accepted a corpus that never declared its own definition. Presence
+ * is now REQUIRED for every key on both sides.
+ *
+ * Execution keys must MATCH. Observation keys are RECORDED, not refused — a
+ * genesis is entitled to bank a corpus that saw more, but never silently.
+ */
+function corpusCompatibilityOf(predecessor, legacyArtifact) {
+  const current = legacyArtifact.corpus?.meta;
+  if (!isRecord(current)) {
+    throw new Error('observed-shape migration artifact corpus does not declare its executed meta record');
+  }
+  const keys = {};
+  for (const key of [...CORPUS_EXECUTION_KEYS, ...CORPUS_OBSERVATION_KEYS]) {
+    const before = predecessor.corpusMeta[key];
+    const after = current[key];
+    nonNegativeSafeInteger(before, `corpusMeta.${key}`);
+    if (!Number.isSafeInteger(after) || after < 0) {
+      throw new Error(`observed-shape migration artifact corpus meta ${key} is missing or not a non-negative safe integer; received ${JSON.stringify(after)}`);
+    }
+    keys[key] = { predecessor: before, current: after, moved: before !== after };
+  }
+  for (const key of CORPUS_EXECUTION_KEYS) {
+    if (keys[key].moved) {
+      throw new Error(`schema-2 predecessor corpus configuration ${key} does not match the legacy artifact`);
+    }
+  }
+  return {
+    executionKeys: [...CORPUS_EXECUTION_KEYS],
+    observationKeys: [...CORPUS_OBSERVATION_KEYS],
+    keys,
+    moved: Object.entries(keys)
+      .filter(([, value]) => value.moved)
+      .map(([key, value]) => `${key}: ${value.predecessor} -> ${value.current}`),
+  };
 }
 
 function assertPredecessorExecutionCompatibility(predecessor, legacyArtifact) {
   if (predecessor.minRows !== legacyArtifact.scanConfig.minRows) {
     throw new Error(`schema-2 predecessor minRows ${predecessor.minRows} does not match the legacy artifact threshold ${legacyArtifact.scanConfig.minRows}`);
   }
-  for (const key of ['seeds', 'configs', 'generations', 'pulseIntervals']) {
-    if (predecessor.corpusMeta[key] !== legacyArtifact.corpus.meta?.[key]) {
-      throw new Error(`schema-2 predecessor corpus configuration ${key} does not match the legacy artifact`);
-    }
-  }
+  return corpusCompatibilityOf(predecessor, legacyArtifact);
 }
 
 function legacySitesOf(findings) {
@@ -416,7 +507,7 @@ export function migrationReport(
     predecessorBaselineText,
   );
   assertArtifactPair(legacyArtifact, currentArtifact);
-  assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
+  const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
   const legacySites = legacySitesOf(legacyArtifact.findings);
   const currentSites = currentSitesOf(currentArtifact.findings);
   const addresses = sortedUnique([...legacySites.keys(), ...currentSites.keys()])
@@ -438,13 +529,29 @@ export function migrationReport(
     .reduce((n, row) => n + Object.keys(row).length, 0);
   const legacyInventoryCount = Object.values(legacyArtifact.inventory)
     .reduce((n, row) => n + Object.values(row).reduce((sum, value) => sum + value, 0), 0);
+  // ⚠⚠ AN ISSUE CARRIES ITS ROW ID BECAUSE AN ISSUE IS DISCHARGEABLE BY REVIEW.
+  // The first spelling emitted bare strings, and `validateReviewLedger` threw on
+  // any of them BEFORE reading a single decision (the check sat above the
+  // decisions loop). That made the review ledger unable to mean what the freeze
+  // ruling assumed it meant: a COMPLETE, fully-accepted ledger with a real note on
+  // every row still threw while any growth row existed — control-proven, both
+  // directions, by the refusal lane. Carrying `rowId` lets the SAME issue be
+  // discharged by the SAME row's reviewed decision, and by nothing else.
   const predecessorIssues = predecessorRows
     .filter((row) => row.reconciliation === 'new' || row.reconciliation === 'increased')
-    .map((row) => `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
-      + ` against the schema-2 predecessor (${row.predecessorCount} -> ${row.legacyCount})`);
+    .map((row) => ({
+      rowId: row.rowId,
+      file: row.address.file,
+      identity: row.address.identity,
+      reconciliation: row.reconciliation,
+      predecessorCount: row.predecessorCount,
+      legacyCount: row.legacyCount,
+      message: `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
+        + ` against the schema-2 predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
+    }));
   const report = {
     reportSchema: MIGRATION_REPORT_SCHEMA,
-    kind: 'observed-shape-schema-2-to-3-migration',
+    kind: RETIRED_EXACT_MIGRATION_KIND,
     inputs: {
       subjectSha: currentArtifact.provenance.subjectSha,
       predecessorBaselineDigest: digestOf(predecessor),
@@ -471,7 +578,7 @@ export function migrationReport(
       currentScannerToolDigest: currentArtifact.provenance.scannerToolDigest,
     },
     target: {
-      baselineSchema: 3,
+      baselineSchema: RETIRED_EXACT_TARGET_SCHEMA,
       inventoryDigest: currentArtifact.digests.inventory,
       findingsDigest: currentArtifact.digests.findings,
     },
@@ -515,6 +622,7 @@ export function migrationReport(
       legacyOnly: count('presence', 'legacy-only'),
       currentOnly: count('presence', 'current-only'),
     },
+    corpusCompatibility,
     issues: predecessorIssues,
   };
   assertConservation(report);
@@ -543,6 +651,220 @@ export function validateMigrationReport(
   }
   assertConservation(report);
   return report;
+}
+
+/* ══ SCHEMA 2 -> 4 — THE LIVE HEURISTIC MIGRATION ══════════════════════════ */
+
+/**
+ * ⚠⚠ THE SCHEMA-4 REPORT CARRIES NO SITE-MIGRATION ROWS, AND THAT IS THE WHOLE
+ * SHAPE OF THE ARGUMENT — not an omission.
+ *
+ * `rows` exists in the retired 2->3 report because that migration RE-SPELLS every
+ * finding: a legacy leaf identity becomes an exact per-site identity, so each
+ * pairing is a fresh claim a reviewer has to accept. Schema 4 does not re-spell
+ * anything. The target inventory IS the heuristic artifact's own inventory, in
+ * the SAME alphabet the schema-2 predecessor is written in, so the only thing
+ * that moved is which reads the detector found — which is exactly what
+ * `predecessorRows` reconciles, row by row, with `new`/`increased` rows raised as
+ * `issues` that a reviewed decision must discharge.
+ *
+ * `assertHeuristicConservation` therefore PINS `rows.length === 0` rather than
+ * leaving it implied: an empty array that nobody asserts is empty is one refactor
+ * away from becoming an unreviewed row set, and `validateReviewLedger` derives
+ * its expected row list from `predecessorRows.concat(rows)`.
+ */
+function assertHeuristicConservation(report) {
+  const c = report.conservation;
+  if (report.rows.length !== 0) {
+    throw new Error('observed-shape heuristic migration carries site-migration rows; the schema-4 target is'
+      + ' the heuristic inventory itself and has no cross-detector pairing to review');
+  }
+  if (c.predecessorIdentitiesCovered !== c.predecessorIdentities
+    || c.predecessorCountsCovered !== c.predecessorCount
+    || c.legacyInventoryIdentitiesCovered !== c.legacyInventoryIdentities
+    || c.legacyInventoryCountsCovered !== c.legacyInventoryCount
+    || c.legacyInventoryCount !== c.legacyFindings
+    || c.targetIdentities !== c.legacyInventoryIdentities
+    || c.targetCount !== c.legacyInventoryCount
+    || c.predecessorRows !== report.predecessorRows.length) {
+    throw new Error(`observed-shape heuristic migration conservation failed: ${JSON.stringify(c)}`);
+  }
+  const rowIds = new Set(report.predecessorRows.map((row) => row.rowId));
+  if (rowIds.size !== report.predecessorRows.length) {
+    throw new Error('observed-shape migration produced duplicate row IDs');
+  }
+}
+
+/** Build the canonical schema-2 -> schema-4 report. ONE artifact, validated
+ *  before any reconciliation, and it must be the governed heuristic detector's. */
+export function heuristicMigrationReport(
+  predecessorBaseline,
+  legacyArtifact,
+  predecessorBaselineText,
+) {
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+  );
+  assertGovernedLegacyArtifact(legacyArtifact);
+  const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
+  const predecessorRows = predecessorRowsOf(predecessor, legacyArtifact.inventory);
+  const predecessorCount = (value) => predecessorRows
+    .filter((row) => row.reconciliation === value).length;
+  const legacyInventoryIdentities = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.keys(row).length, 0);
+  const legacyInventoryCount = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.values(row).reduce((sum, value) => sum + value, 0), 0);
+  const artifactDigest = digestOf(legacyArtifact);
+  // An issue carries its row id because an issue is DISCHARGEABLE BY REVIEW —
+  // see the identical note on the retired path; the mechanism is shared because
+  // the ledger it feeds is shared.
+  const predecessorIssues = predecessorRows
+    .filter((row) => row.reconciliation === 'new' || row.reconciliation === 'increased')
+    .map((row) => ({
+      rowId: row.rowId,
+      file: row.address.file,
+      identity: row.address.identity,
+      reconciliation: row.reconciliation,
+      predecessorCount: row.predecessorCount,
+      legacyCount: row.legacyCount,
+      message: `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
+        + ` against the schema-2 predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
+    }));
+  const report = {
+    reportSchema: MIGRATION_REPORT_SCHEMA,
+    kind: HEURISTIC_MIGRATION_KIND,
+    inputs: {
+      subjectSha: legacyArtifact.provenance.subjectSha,
+      predecessorBaselineDigest: digestOf(predecessor),
+      predecessorBaselineTextSha256,
+      predecessorInventoryDigest: digestOf(predecessor.inventory),
+      predecessorFrozenAtSha: predecessor.frozenAtSha,
+      sourceTreeDigest: legacyArtifact.provenance.sourceTreeDigest,
+      scanTreeDigest: legacyArtifact.scanTree.digest,
+      detectorTreeDigest: legacyArtifact.detectorTree.digest,
+      executionTreeDigest: legacyArtifact.executionTree.digest,
+      corpusDigest: legacyArtifact.digests.corpus,
+      scanConfigDigest: digestOf(legacyArtifact.scanConfig),
+      legacyArtifactDigest: artifactDigest,
+      legacyAlgorithm: legacyArtifact.legacyAlgorithm,
+      legacyAlgorithmDigest: digestOf(legacyArtifact.legacyAlgorithm),
+      // ⭐ current* === legacy* THROUGHOUT. Schema 4 has one detector, and the
+      // receipt says so in every field rather than leaving "current" undefined —
+      // an absent binding cannot be checked, an equal one can.
+      currentArtifactDigest: artifactDigest,
+      legacyFindingsDigest: legacyArtifact.digests.findings,
+      currentFindingsDigest: legacyArtifact.digests.findings,
+      legacyScannerSha: legacyArtifact.provenance.scannerSha,
+      legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+      legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      currentScannerSha: legacyArtifact.provenance.scannerSha,
+      currentDetectorDigest: legacyArtifact.provenance.detectorDigest,
+      currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+    },
+    target: {
+      baselineSchema: HEURISTIC_TARGET_SCHEMA,
+      inventoryDigest: legacyArtifact.digests.inventory,
+      findingsDigest: legacyArtifact.digests.findings,
+    },
+    predecessorRows,
+    rows: [],
+    summary: {
+      predecessorSame: predecessorCount('same'),
+      predecessorDecreased: predecessorCount('decreased'),
+      predecessorGone: predecessorCount('gone'),
+      predecessorIncreased: predecessorCount('increased'),
+      predecessorNew: predecessorCount('new'),
+    },
+    conservation: {
+      predecessorIdentities: predecessor.identities,
+      predecessorCount: predecessor.total,
+      legacyInventoryIdentities,
+      legacyInventoryCount,
+      targetIdentities: legacyInventoryIdentities,
+      targetCount: legacyInventoryCount,
+      predecessorRows: predecessorRows.length,
+      predecessorIdentitiesCovered: predecessorRows
+        .filter((row) => row.predecessorCount > 0).length,
+      predecessorCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.predecessorCount, 0),
+      legacyInventoryIdentitiesCovered: predecessorRows
+        .filter((row) => row.legacyCount > 0).length,
+      legacyInventoryCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.legacyCount, 0),
+      legacyFindings: legacyArtifact.findings.length,
+    },
+    corpusCompatibility,
+    issues: predecessorIssues,
+  };
+  assertHeuristicConservation(report);
+  return report;
+}
+
+export function validateHeuristicMigrationReport(
+  report,
+  predecessorBaseline,
+  legacyArtifact,
+  predecessorBaselineText,
+) {
+  const expected = heuristicMigrationReport(
+    predecessorBaseline,
+    legacyArtifact,
+    predecessorBaselineText,
+  );
+  if (canonicalJson(report) !== canonicalJson(expected)) {
+    throw new Error('observed-shape migration report is not the canonical report for its bound inputs');
+  }
+  assertHeuristicConservation(report);
+  return report;
+}
+
+/** The schema-4 authorization. Same receipt KEY SET as the retired path so the
+ *  baseline envelope needs no new shape; every `current*` field is bound to the
+ *  one governed heuristic artifact. */
+function validateGovernedHeuristicMigration({
+  predecessorBaseline,
+  predecessorBaselineText,
+  legacyArtifact,
+  currentArtifact,
+  report,
+  review,
+}) {
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+  );
+  // ⛔ A schema-4 bundle that carries a DIFFERENT "current" artifact is refused
+  // outright rather than quietly ignored: the bundle keeps both fields so the
+  // consumer needs no branch, and this is what stops that convenience from
+  // becoming a hole through which an unreviewed second artifact travels.
+  if (currentArtifact !== undefined
+    && canonicalJson(currentArtifact) !== canonicalJson(legacyArtifact)) {
+    throw new Error('observed-shape schema-4 migration bundle carries a current artifact that is not'
+      + ' the governed heuristic artifact itself');
+  }
+  validateHeuristicMigrationReport(
+    report,
+    predecessor,
+    legacyArtifact,
+    predecessorBaselineText,
+  );
+  return {
+    ...validateReviewLedger(review, report),
+    predecessorBaselineDigest: digestOf(predecessor),
+    predecessorBaselineTextSha256,
+    predecessorInventoryDigest: digestOf(predecessor.inventory),
+    legacyArtifactDigest: report.inputs.legacyArtifactDigest,
+    currentArtifactDigest: report.inputs.currentArtifactDigest,
+    legacyScannerSha: legacyArtifact.provenance.scannerSha,
+    legacyAlgorithmBaseSha: legacyArtifact.legacyAlgorithm.baseSha,
+    legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+    legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+    currentFindingsDigest: legacyArtifact.digests.findings,
+    currentScannerSha: legacyArtifact.provenance.scannerSha,
+    currentDetectorDigest: legacyArtifact.provenance.detectorDigest,
+    currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+  };
 }
 
 export function reviewTemplateOf(report) {
@@ -593,9 +915,6 @@ export function validateReviewLedger(review, report) {
   if (canonicalJson(review.bindings) !== canonicalJson(expectedBindings)) {
     throw new Error('observed-shape migration review is not bound to this report and target inventory');
   }
-  if (report.issues?.length) {
-    throw new Error(`observed-shape migration report has unresolved issues: ${report.issues.join('; ')}`);
-  }
   if (!Array.isArray(review.decisions)) throw new Error('observed-shape migration review decisions are missing');
   const expectedRows = [
     ...report.predecessorRows.map((row) => [row.rowId, 'predecessor-reconciliation']),
@@ -621,6 +940,25 @@ export function validateReviewLedger(review, report) {
   }
   const missing = [...expectedIds.keys()].filter((rowId) => !seen.has(rowId));
   if (missing.length) throw new Error(`observed-shape migration review is missing ${missing.length} row(s)`);
+
+  // ⚠⚠ THE ISSUE GATE RUNS *AFTER* THE DECISIONS, AND THAT ORDER IS THE FIX.
+  // `issues` used to mean "the reconciliation is not CLEAN"; it now means "the
+  // reconciliation is not REVIEWED". Say that out loud rather than let a later
+  // reader conclude the gate weakened by accident: it did not weaken, it moved
+  // its authority from a mechanical filter over the reconciliation to the
+  // reviewed disposition of the SAME rows. Every growth row must still be
+  // dispositioned by an ACCEPTED decision carrying a note; an issue whose row is
+  // missing, pending, or rejected still FAILS CLOSED here — and the loop above
+  // has already refused any decision that is not `accept` with a real note, so
+  // reaching this line at all means every enumerated row was reviewed.
+  const accepted = new Set(review.decisions
+    .filter((decision) => decision.decision === 'accept')
+    .map((decision) => decision.rowId));
+  const undispositioned = (report.issues || []).filter((issue) => !accepted.has(issue?.rowId));
+  if (undispositioned.length) {
+    throw new Error('observed-shape migration report has unresolved issues: '
+      + undispositioned.map((issue) => issue?.message || JSON.stringify(issue)).join('; '));
+  }
   return {
     reportDigest: expectedBindings.reportDigest,
     reviewDigest: digestOf(review),
@@ -638,7 +976,14 @@ export function validateReviewLedger(review, report) {
   };
 }
 
-/** The check gate consumes this authorization before writing a schema-3 baseline. */
+/**
+ * The check gate consumes this authorization before writing a governed baseline.
+ *
+ * ⚠ THE TARGET SCHEMA IS READ FROM THE REPORT, NEVER FROM A FLAG THE CALLER
+ * PASSES. The report is the digest-bound artifact; a caller-supplied target
+ * would be the one input in this whole chain nothing content-addresses, and it
+ * would decide which validator runs.
+ */
 export function validateGovernedMigration({
   predecessorBaseline,
   predecessorBaselineText,
@@ -647,6 +992,16 @@ export function validateGovernedMigration({
   report,
   review,
 }) {
+  if (report?.target?.baselineSchema === HEURISTIC_TARGET_SCHEMA) {
+    return validateGovernedHeuristicMigration({
+      predecessorBaseline,
+      predecessorBaselineText,
+      legacyArtifact,
+      currentArtifact,
+      report,
+      review,
+    });
+  }
   const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
     predecessorBaseline,
     predecessorBaselineText,
@@ -740,14 +1095,31 @@ export function run(argv = process.argv.slice(2)) {
     '--predecessor': { kind: 'value', name: 'predecessorPath' },
     '--legacy': { kind: 'value', name: 'legacyPath' },
     '--current': { kind: 'value', name: 'currentPath' },
+    '--target-schema': { kind: 'value', name: 'targetSchema' },
     '--json': { kind: 'value', name: 'jsonPath' },
     '--review-template': { kind: 'value', name: 'templatePath' },
     '--review': { kind: 'value', name: 'reviewPath' },
     '--bundle': { kind: 'value', name: 'bundlePath' },
   });
   const { predecessorPath, legacyPath, currentPath } = command;
-  if (!predecessorPath || !legacyPath || !currentPath) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<schema-2-baseline.json> --legacy=<legacy-artifact.json> --current=<exact-artifact.json> [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+  // The target is DERIVED FROM THE INPUTS unless stated: an exact `--current`
+  // artifact can only mean the retired 2->3 pairing, and its absence can only
+  // mean the live heuristic 2->4 re-freeze. `--target-schema` makes it explicit
+  // and turns any mismatch into a refusal rather than a silent mode switch.
+  const targetSchema = command.targetSchema
+    ? Number(command.targetSchema)
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : HEURISTIC_TARGET_SCHEMA);
+  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${HEURISTIC_TARGET_SCHEMA} (live heuristic)`
+      + ` or ${RETIRED_EXACT_TARGET_SCHEMA} (retired exact); received ${JSON.stringify(command.targetSchema)}`);
+  }
+  const heuristicTarget = targetSchema === HEURISTIC_TARGET_SCHEMA;
+  if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<schema-2-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=4] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+  }
+  if (heuristicTarget && currentPath) {
+    throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`
+      + ` the schema-${HEURISTIC_TARGET_SCHEMA} target IS the governed heuristic artifact`);
   }
   if (command.bundlePath && !command.reviewPath) {
     throw new Error('--bundle requires a completed --review ledger');
@@ -766,7 +1138,7 @@ export function run(argv = process.argv.slice(2)) {
     inputs: [
       predecessorPath,
       legacyPath,
-      currentPath,
+      ...(currentPath ? [currentPath] : []),
       ...(command.reviewPath ? [command.reviewPath] : []),
     ],
   }) : [];
@@ -774,13 +1146,12 @@ export function run(argv = process.argv.slice(2)) {
   const predecessorBaselineText = readFileSync(predecessorPath, 'utf8');
   const predecessorBaseline = JSON.parse(predecessorBaselineText);
   const legacy = JSON.parse(readFileSync(legacyPath, 'utf8'));
-  const current = JSON.parse(readFileSync(currentPath, 'utf8'));
-  const report = migrationReport(
-    predecessorBaseline,
-    legacy,
-    current,
-    predecessorBaselineText,
-  );
+  // Under the heuristic target the governed heuristic artifact IS the current
+  // authority, so it fills both roles rather than a second artifact being read.
+  const current = currentPath ? JSON.parse(readFileSync(currentPath, 'utf8')) : legacy;
+  const report = heuristicTarget
+    ? heuristicMigrationReport(predecessorBaseline, legacy, predecessorBaselineText)
+    : migrationReport(predecessorBaseline, legacy, current, predecessorBaselineText);
   const template = command.templatePath ? reviewTemplateOf(report) : null;
   const review = command.reviewPath
     ? JSON.parse(readFileSync(command.reviewPath, 'utf8'))

@@ -12,12 +12,16 @@ import {
   governedLegacyDetectorSha256,
 } from '../../scripts/lib/observed-shape-governance.mjs';
 import {
+  HEURISTIC_TARGET_SCHEMA,
+  heuristicMigrationReport,
   migrationBundleOf,
   migrationReport,
   migrationReportDigest,
+  RETIRED_EXACT_TARGET_SCHEMA,
   reviewTemplateOf,
   run as runMigration,
   validateGovernedMigration,
+  validateHeuristicMigrationReport,
   validateMigrationBundle,
   validateMigrationReport,
   validatePredecessorBaseline,
@@ -92,7 +96,19 @@ const currentCorpus = {
     roots: { row: [{ kind: 'record', origins: ['root/row'] }] },
     meta: { transitions: 1, depthTruncations: 0, cycleCuts: 0 },
   },
-  meta: { seeds: 4, configs: 4, generations: 16, pulseIntervals: 12 },
+  // ⚠ THIS FIXTURE USED TO OMIT simulationFlagsLit/steadingsMinted/shapeCount, and
+  // the migration accepted it — an ABSENT corpus-definition key compared `undefined`
+  // and passed. `shapeCount` deliberately DIFFERS from the predecessor's 305 so the
+  // recorded-move path is exercised rather than assumed.
+  meta: {
+    seeds: 4,
+    configs: 4,
+    generations: 16,
+    pulseIntervals: 12,
+    simulationFlagsLit: 73,
+    steadingsMinted: 12,
+    shapeCount: 1321,
+  },
 };
 const currentStats = {
   files: 1, reads: 8, resolved: 4, resolvedOrigins: 4, unresolved: 4,
@@ -394,7 +410,37 @@ describe('observed-shape schema migration governance', () => {
     const report = reportOf(missingIdentity, legacy, current);
     expect(report.summary.predecessorNew).toBe(1);
     expect(report.issues).toHaveLength(1);
-    expect(() => validateReviewLedger(acceptedReview(report), report))
+
+    // ⚠⚠ `issues` MEANS "NOT REVIEWED", NOT "NOT CLEAN" — and the difference is a
+    // governance change, stated here so nobody later reads it as an accidental
+    // weakening. It was measured, both directions, that the old spelling threw on
+    // any growth row BEFORE it read a single decision, so a complete, fully
+    // accepted 2,326-row ledger could never authorize a migration. An issue is now
+    // DISCHARGEABLE by the reviewed disposition of the SAME row, and by nothing
+    // else — so the issue carries that row's id and must join to it.
+    const growthRow = report.predecessorRows.find((row) => row.reconciliation === 'new');
+    expect(report.issues[0].rowId, 'an issue that does not name its row cannot be discharged by review')
+      .toBe(growthRow.rowId);
+
+    // POSITIVE: a reviewed growth row authorizes.
+    expect(() => validateReviewLedger(acceptedReview(report), report)).not.toThrow();
+
+    // NEGATIVE: the SAME report with the SAME ledger, differing in exactly one
+    // field — that row's decision — still fails closed.
+    const pending = acceptedReview(report);
+    pending.decisions = pending.decisions.map((decision) => (decision.rowId === growthRow.rowId
+      ? { ...decision, decision: 'pending' }
+      : decision));
+    expect(() => validateReviewLedger(pending, report)).toThrow(/not accepted/);
+
+    // NEGATIVE, THE ARM'S OWN: an issue naming a row the report does not carry is
+    // invisible to the decisions loop, so ONLY the issues gate can refuse it. This
+    // is what keeps that gate from being dead code once the loop demands `accept`.
+    const forged = structuredClone(report);
+    forged.issues = [{ ...report.issues[0], rowId: 'osr-predecessor-row-v1:not-a-real-row' }];
+    // The ledger is rebuilt FROM the forged report, so its bindings match and the
+    // issues gate — not the bindings check — is what refuses it.
+    expect(() => validateReviewLedger(acceptedReview(forged), forged))
       .toThrow(/unresolved issues/);
   });
 
@@ -427,6 +473,36 @@ describe('observed-shape schema migration governance', () => {
       ...predecessor,
       corpusMeta: { ...predecessor.corpusMeta, pulseIntervals: 13 },
     }, legacy, current)).toThrow(/corpus configuration pulseIntervals/);
+
+    // ⚠⚠ THE CORPUS DEFINITION IS RECORDED, NOT MERELY COMPARED. The live
+    // 305 -> 1,321 `shapeCount` move re-grounded receivers across the estate and
+    // drove the growth rows the freeze had to review — and the four-key check was
+    // structurally blind to it. Execution keys must match; observation keys are
+    // BANKED with both sides visible, so a genesis can never absorb a corpus-
+    // definition move in silence.
+    const recorded = reportOf(predecessor, legacy, current).corpusCompatibility;
+    expect(recorded.keys.shapeCount).toEqual({ predecessor: 305, current: 1321, moved: true });
+    expect(recorded.moved).toContain('shapeCount: 305 -> 1321');
+    expect(recorded.keys.pulseIntervals.moved, 'an execution key can never be recorded as moved —'
+      + ' it throws instead').toBe(false);
+    expect(recorded.executionKeys).toEqual(['seeds', 'configs', 'generations', 'pulseIntervals']);
+
+    // …and an ABSENT corpus-definition key is refused rather than compared against
+    // `undefined`. This is the hole the old fixture sat in: it declared only the
+    // four execution keys and the migration accepted it.
+    // BOTH artifacts carry it, or `assertArtifactPair`'s same-corpus law throws
+    // first and this would assert the wrong refusal.
+    const undeclared = {
+      ...currentCorpus,
+      meta: {
+        seeds: 4, configs: 4, generations: 16, pulseIntervals: 12,
+      },
+    };
+    expect(() => reportOf(
+      predecessor,
+      legacyArtifact(legacy.findings, { corpus: undeclared }),
+      currentArtifact(current.findings, { corpus: undeclared }),
+    )).toThrow(/corpus meta simulationFlagsLit is missing/);
 
     const differentCorpus = currentArtifact(current.findings, {
       corpus: {
@@ -616,5 +692,233 @@ describe('observed-shape schema migration governance', () => {
     });
     bundle.currentArtifact.inventory['src/probe.js'] = {};
     expect(() => validateMigrationBundle(bundle)).toThrow(/unsupported schema/);
+  });
+});
+
+/* ══ SCHEMA 2 -> 4 — THE LIVE HEURISTIC MIGRATION ══════════════════════════ */
+
+describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
+  /** The predecessor is missing one identity the heuristic scan finds, so the
+   *  reconciliation carries a `new` row — the only kind that raises an issue and
+   *  therefore the only kind whose review discharge can be proven. */
+  function heuristicFixture() {
+    const legacy = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(20, 200, 'held', 'row', 'row.held'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ]);
+    const predecessor = predecessorBaseline(legacy);
+    // Remove the `arrived` identity from the predecessor: heuristic scan finds
+    // it, the schema-2 freeze did not, so it reconciles as `new`.
+    delete predecessor.inventory['src/probe.js']['arrived on row'];
+    predecessor.total = 2;
+    predecessor.identities = 1;
+    return { predecessor, legacy };
+  }
+
+  const heuristicReportOf = ({ predecessor, legacy }) => heuristicMigrationReport(
+    predecessor,
+    legacy,
+    predecessorText(predecessor),
+  );
+
+  test('the target IS the heuristic inventory, and there are NO site-migration rows', () => {
+    const fixture = heuristicFixture();
+    const report = heuristicReportOf(fixture);
+
+    expect(report.kind).toBe('observed-shape-schema-2-to-4-migration');
+    expect(report.target).toEqual({
+      baselineSchema: HEURISTIC_TARGET_SCHEMA,
+      inventoryDigest: fixture.legacy.digests.inventory,
+      findingsDigest: fixture.legacy.digests.findings,
+    });
+    expect(HEURISTIC_TARGET_SCHEMA).toBe(4);
+    expect(RETIRED_EXACT_TARGET_SCHEMA).toBe(3);
+
+    // ⚠⚠ THE EMPTY `rows` IS THE ARGUMENT, NOT AN OMISSION. Schema 4 re-spells
+    // nothing, so there is no cross-detector pairing for a reviewer to accept;
+    // the whole reconciliation is `predecessorRows`. Asserting it is EMPTY (and
+    // that the ledger's expected row set is exactly the predecessor rows) is
+    // what stops a later refactor from smuggling unreviewed rows through.
+    expect(report.rows).toEqual([]);
+    expect(report.predecessorRows).toHaveLength(2);
+    expect(reviewTemplateOf(report).decisions).toHaveLength(report.predecessorRows.length);
+    expect(reviewTemplateOf(report).decisions.every((d) => d.subject === 'predecessor-reconciliation'))
+      .toBe(true);
+    expect(report.summary).toEqual({
+      predecessorSame: 1,
+      predecessorDecreased: 0,
+      predecessorGone: 0,
+      predecessorIncreased: 0,
+      predecessorNew: 1,
+    });
+    // Multiplicity travels: `held` is TWO reads on one leaf identity.
+    expect(report.conservation).toMatchObject({
+      predecessorIdentities: 1,
+      predecessorCount: 2,
+      legacyInventoryIdentities: 2,
+      legacyInventoryCount: 3,
+      targetIdentities: 2,
+      targetCount: 3,
+      legacyFindings: 3,
+      predecessorRows: 2,
+    });
+  });
+
+  test('every current* binding names the ONE governed heuristic artifact', () => {
+    const fixture = heuristicFixture();
+    const report = heuristicReportOf(fixture);
+    const artifactDigest = digestOf(fixture.legacy);
+    expect(report.inputs).toMatchObject({
+      legacyArtifactDigest: artifactDigest,
+      currentArtifactDigest: artifactDigest,
+      legacyFindingsDigest: fixture.legacy.digests.findings,
+      currentFindingsDigest: fixture.legacy.digests.findings,
+      legacyScannerSha: SCANNER_SHA,
+      currentScannerSha: SCANNER_SHA,
+      legacyDetectorDigest: fixture.legacy.provenance.detectorDigest,
+      currentDetectorDigest: fixture.legacy.provenance.detectorDigest,
+      legacyScannerToolDigest: fixture.legacy.provenance.scannerToolDigest,
+      currentScannerToolDigest: fixture.legacy.provenance.scannerToolDigest,
+    });
+  });
+
+  test('is canonical and deterministic, and refuses a non-canonical replay', () => {
+    const fixture = heuristicFixture();
+    const first = heuristicReportOf(fixture);
+    const second = heuristicReportOf(fixture);
+    expect(canonicalJson(first)).toBe(canonicalJson(second));
+    expect(validateHeuristicMigrationReport(
+      first, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+    )).toBe(first);
+
+    const tampered = structuredClone(first);
+    tampered.target.inventoryDigest = 'f'.repeat(64);
+    expect(() => validateHeuristicMigrationReport(
+      tampered, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+    )).toThrow(/not the canonical report/);
+
+    // A smuggled site-migration row is refused by conservation, not merely
+    // ignored — `validateReviewLedger` would otherwise demand decisions for it.
+    const smuggled = structuredClone(first);
+    smuggled.rows = [{ rowId: 'osr-migration-row-v1:forged' }];
+    expect(() => validateHeuristicMigrationReport(
+      smuggled, fixture.predecessor, fixture.legacy, predecessorText(fixture.predecessor),
+    )).toThrow(/not the canonical report/);
+  });
+
+  test('an EXACT artifact cannot stand in for the governed heuristic detector', () => {
+    const fixture = heuristicFixture();
+    const exact = currentArtifact([newFinding(10, 100, 'held', 'row', 'root/row')]);
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, exact, predecessorText(fixture.predecessor),
+    )).toThrow(/validated legacy-leaf\/schema-2 scan artifact/);
+
+    const counterfeit = structuredClone(fixture.legacy);
+    counterfeit.legacyAlgorithm.baseSha = 'd'.repeat(40);
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, counterfeit, predecessorText(fixture.predecessor),
+    )).toThrow(/governed detector/);
+  });
+
+  test('the corpus definition is still recorded and execution keys still refuse a move', () => {
+    const fixture = heuristicFixture();
+    const recorded = heuristicReportOf(fixture).corpusCompatibility;
+    expect(recorded.keys.shapeCount).toEqual({ predecessor: 305, current: 1321, moved: true });
+    expect(recorded.moved).toContain('shapeCount: 305 -> 1321');
+    expect(() => heuristicMigrationReport(
+      { ...fixture.predecessor, corpusMeta: { ...fixture.predecessor.corpusMeta, generations: 17 } },
+      fixture.legacy,
+      predecessorText({ ...fixture.predecessor, corpusMeta: { ...fixture.predecessor.corpusMeta, generations: 17 } }),
+    )).toThrow(/corpus configuration generations/);
+  });
+
+  test('a growth row must be dispositioned by an accepted, noted decision', () => {
+    const fixture = heuristicFixture();
+    const report = heuristicReportOf(fixture);
+    const growthRow = report.predecessorRows.find((row) => row.reconciliation === 'new');
+    expect(report.issues).toHaveLength(1);
+    expect(report.issues[0].rowId).toBe(growthRow.rowId);
+
+    expect(() => validateReviewLedger(acceptedReview(report), report)).not.toThrow();
+
+    const pending = acceptedReview(report);
+    pending.decisions = pending.decisions.map((decision) => (decision.rowId === growthRow.rowId
+      ? { ...decision, decision: 'pending' }
+      : decision));
+    expect(() => validateReviewLedger(pending, report)).toThrow(/not accepted/);
+  });
+
+  test('the bundle authorizes, round-trips, and refuses a second current artifact', () => {
+    const fixture = heuristicFixture();
+    const report = heuristicReportOf(fixture);
+    const review = acceptedReview(report);
+    const shared = {
+      predecessorBaseline: fixture.predecessor,
+      predecessorBaselineText: predecessorText(fixture.predecessor),
+      legacyArtifact: fixture.legacy,
+      currentArtifact: fixture.legacy,
+      report,
+      review,
+    };
+    const authorization = validateGovernedMigration(shared);
+    expect(authorization).toMatchObject({
+      targetInventoryDigest: fixture.legacy.digests.inventory,
+      subjectSha: SUBJECT_SHA,
+      legacyArtifactDigest: digestOf(fixture.legacy),
+      currentArtifactDigest: digestOf(fixture.legacy),
+      currentScannerToolDigest: fixture.legacy.provenance.scannerToolDigest,
+      legacyScannerToolDigest: fixture.legacy.provenance.scannerToolDigest,
+      legacyAlgorithmBaseSha: '6e7acc4dd88a43cb608f40bc77db3b2130a1e2de',
+    });
+
+    const bundle = migrationBundleOf(shared);
+    expect(validateMigrationBundle(bundle)).toEqual({
+      ...authorization,
+      bundleDigest: bundle.bundleDigest,
+    });
+
+    // ⛔ NEGATIVE CONTROL — the bundle keeps a `currentArtifact` slot only so no
+    // consumer needs a branch. A DIFFERENT artifact in that slot is refused, or
+    // the convenience would be a hole an unreviewed artifact travels through.
+    const exact = currentArtifact([newFinding(10, 100, 'held', 'row', 'root/row')]);
+    expect(() => validateGovernedMigration({ ...shared, currentArtifact: exact }))
+      .toThrow(/not the governed heuristic artifact itself/);
+  });
+
+  test('the CLI derives its target from the inputs and refuses a contradictory pair', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'osr-heuristic-cli-'));
+    const fixture = heuristicFixture();
+    const predecessorPath = join(dir, 'predecessor.json');
+    const legacyPath = join(dir, 'legacy.json');
+    const currentPath = join(dir, 'current.json');
+    const reportPath = join(dir, 'report.json');
+    try {
+      writeFileSync(predecessorPath, predecessorText(fixture.predecessor));
+      writeFileSync(legacyPath, JSON.stringify(fixture.legacy));
+      writeFileSync(currentPath, JSON.stringify(currentArtifact([
+        newFinding(10, 100, 'held', 'row', 'root/row'),
+      ])));
+
+      // No `--current` and no flag: the live heuristic target, and the exact
+      // artifact is never even read.
+      const report = runMigration([
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, `--json=${reportPath}`,
+      ]);
+      expect(report.target.baselineSchema).toBe(HEURISTIC_TARGET_SCHEMA);
+      expect(report.rows).toEqual([]);
+
+      expect(() => runMigration([
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
+        `--current=${currentPath}`, `--target-schema=${HEURISTIC_TARGET_SCHEMA}`,
+      ])).toThrow(/--current is only valid for the retired/);
+      expect(() => runMigration([
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=5',
+      ])).toThrow(/--target-schema must be 4/);
+      expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
+        .toThrow(/usage:/);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

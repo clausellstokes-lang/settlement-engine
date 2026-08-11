@@ -962,11 +962,14 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   const REAL2 = 'scripts/check-test-ratchet.mjs';
   const T = (name, status = 'failed') => ({ name, status });
 
-  /** Build a jest/vitest-shaped report. Absolute suite paths also pin normalization. */
+  /** Build a jest/vitest-shaped report. Absolute suite paths also pin normalization.
+   *  `suiteStatus` carries the SUITE-level verdict vitest emits beside the rows —
+   *  the only signal that separates a `beforeAll` explosion from a deliberate skip. */
   function reportOf(suites) {
     return {
       testResults: suites.map((s) => ({
         name: s.absolute === false ? s.file : join(ROOT, s.file),
+        ...(s.suiteStatus ? { status: s.suiteStatus } : {}),
         assertionResults: (s.tests || []).map((t) => ({
           fullName: t.name, title: t.name, ancestorTitles: [], status: t.status,
         })),
@@ -1165,7 +1168,62 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/SCOPE SENTINEL/);
-      expect(r.out).toMatch(/failed to COLLECT/i);
+      expect(r.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+    });
+
+    test('⚠⚠ CR-TRFZ-4: a suite that FAILED while enumerating only SKIPS reds too', () => {
+      // THE GAP THE FIRST SPELLING LEFT OPEN. `uncollectedOf` used to catch only
+      // suites with ZERO assertionResults. A `beforeAll` that throws does NOT
+      // produce zero rows — MEASURED against the real vitest JSON reporter on
+      // 2026-08-10: the suite reports `status: "failed"` while enumerating every
+      // test it owns as `"skipped"`, and `numFailedTests` reads 0. The whole
+      // suite's coverage then drains into the SKIP CEILING, where a big enough
+      // ceiling swallows it in silence. The observed-shape readers walker did
+      // exactly this with 24 tests.
+      const r = run({
+        entries: {},
+        suites: [
+          { file: REAL, tests: [T('a', 'passed')] },
+          { file: REAL2, suiteStatus: 'failed', tests: [T('x', 'skipped'), T('y', 'skipped')] },
+        ],
+        skippedCeiling: 50, // deliberately generous: the skip ceiling must NOT be what catches this
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/SCOPE SENTINEL/);
+      expect(r.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+      expect(r.out, 'the skip ceiling must not be the thing that reds — it was set to 50')
+        .not.toMatch(/skipped tests grew/);
+    });
+
+    test('⚠⚠ CR-TRFZ-4 NEGATIVE CONTROL: a DELIBERATELY skipped suite is still just skips', () => {
+      // The discriminator must not swallow legitimate skips. MEASURED: a
+      // `describe.skip` suite reports `status: "passed"` with skipped rows, and a
+      // suite holding a genuinely FAILING test reports `status: "failed"` WITH a
+      // failed row. Neither may be reclassified as uncollected, or every ordinary
+      // red in the estate would be relabelled and the allowlist would become the
+      // only way to hold known debt.
+      const skipOnly = run({
+        entries: {},
+        suites: [
+          { file: REAL, tests: [T('a', 'passed')] },
+          { file: REAL2, suiteStatus: 'passed', tests: [T('x', 'skipped'), T('y', 'skipped')] },
+        ],
+        skippedCeiling: 50,
+      });
+      expect(skipOnly.status, skipOnly.out).toBe(0);
+      expect(skipOnly.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+
+      // A suite that failed BECAUSE a test failed is an ordinary failure: the
+      // census can see it, so it must stay in `entries`-land, not become a hole.
+      const realFailure = run({
+        entries: {},
+        suites: [
+          { file: REAL, tests: [T('a', 'passed')] },
+          { file: REAL2, suiteStatus: 'failed', tests: [T('x', 'failed'), T('y', 'skipped')] },
+        ],
+        skippedCeiling: 50,
+      });
+      expect(realFailure.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
     });
 
     test('an ALLOWLISTED uncollected suite is tolerated (attributed collection debt)', () => {
@@ -1177,7 +1235,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         suites: [{ file: REAL, tests: [T('a', 'passed')] }, { file: REAL2, tests: [] }],
       });
       expect(r.status, r.out).toBe(0);
-      expect(r.out).not.toMatch(/failed to COLLECT/i);
+      expect(r.out).not.toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
     });
 
     test('an allowlisted suite that COLLECTS again prints RATCHET DOWN', () => {
@@ -1358,13 +1416,60 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       }]);
     });
 
-    test('uncollectedOf names exactly the suites that produced no tests', () => {
+    test('uncollectedOf names every suite whose failure the PER-TEST census cannot see', () => {
+      // The six rows below are the MEASURED vitest report shapes (2026-08-10,
+      // isolated probe): the classification is derived from that measurement, not
+      // from a reading of the reporter's docs.
       expect(uncollectedOf({
         testResults: [
-          { name: 'tests/a.test.js', assertionResults: [{ fullName: 'x', status: 'passed' }] },
-          { name: 'tests/b.test.js', assertionResults: [] },
+          // ordinary passing suite — visible, not a hole
+          { name: 'tests/a.test.js', status: 'passed', assertionResults: [{ fullName: 'x', status: 'passed' }] },
+          // module-load throw — zero rows (the case the first spelling caught)
+          { name: 'tests/b.test.js', status: 'failed', message: 'boom', assertionResults: [] },
+          // ⚠ beforeAll throw — FAILED, but every row is a skip and `message` is EMPTY
+          {
+            name: 'tests/c.test.js',
+            status: 'failed',
+            message: '',
+            assertionResults: [{ fullName: 'x', status: 'skipped' }, { fullName: 'y', status: 'skipped' }],
+          },
+          // deliberate describe.skip — suite PASSED, so the skips are honest debt
+          {
+            name: 'tests/d.test.js',
+            status: 'passed',
+            assertionResults: [{ fullName: 'x', status: 'skipped' }],
+          },
+          // an ordinary failing test — the census sees it, so it is not a hole
+          {
+            name: 'tests/e.test.js',
+            status: 'failed',
+            assertionResults: [{ fullName: 'x', status: 'failed' }, { fullName: 'y', status: 'skipped' }],
+          },
+          // afterAll throw — a passing test beside a suite-level failure nothing else reports
+          {
+            name: 'tests/f.test.js',
+            status: 'failed',
+            message: 'teardown blew up',
+            assertionResults: [{ fullName: 'x', status: 'passed' }],
+          },
         ],
-      }, ROOT)).toEqual(['tests/b.test.js']);
+      }, ROOT)).toEqual(['tests/b.test.js', 'tests/c.test.js', 'tests/f.test.js']);
+    });
+
+    test('⚠⚠ the suite MESSAGE is not the discriminator — it is empty on the motivating case', () => {
+      // MEASURED: a `beforeAll` explosion carries `message: ""`. A guard keyed on
+      // "the suite reported a message" would therefore fail OPEN on precisely the
+      // case CR-TRFZ-4 exists for, while still looking correct against the
+      // module-load throw. This pin drives that exact mutant: a suite that failed
+      // with NO message and only skips must STILL be named.
+      expect(uncollectedOf({
+        testResults: [{
+          name: 'tests/only.test.js',
+          status: 'failed',
+          message: '',
+          assertionResults: [{ fullName: 'x', status: 'skipped' }],
+        }],
+      }, ROOT)).toEqual(['tests/only.test.js']);
     });
 
     test('the scope floor ratio is a real fraction below 1 (a ratio of 0 disables the guard)', () => {

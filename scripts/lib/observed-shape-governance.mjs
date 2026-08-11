@@ -45,6 +45,23 @@ export function isFindingSite(value) {
   return typeof value === 'string' && FINDING_SITE_PATTERN.test(value);
 }
 
+/**
+ * The ARTIFACT schema a scan mode emits — never the BASELINE schema in force.
+ *
+ * ⚠⚠ These two numbers are not the same thing and were briefly conflated. The
+ * scan artifact's `baselineSchema` names the IDENTITY SPELLING its findings
+ * carry (`legacy-leaf` → 2, `exact-origin` → 3) and is pinned by
+ * `createScanArtifact`. The gate's `BASELINE_SCHEMA` names the ENVELOPE in
+ * force, now 4. Deriving the artifact number from this table instead of writing
+ * it beside `BASELINE_SCHEMA` is what stops a schema bump from silently minting
+ * `baselineSchema: 4` exact artifacts that the mode table refuses.
+ */
+export function artifactBaselineSchemaOf(scanMode) {
+  const mode = MODE[scanMode];
+  if (!mode) throw new Error(`observed-shape scan mode is unsupported: ${JSON.stringify(scanMode)}`);
+  return mode.baselineSchema;
+}
+
 function canonicalValue(value, stack = new Set()) {
   if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
   if (typeof value === 'number') {
