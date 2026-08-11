@@ -25,6 +25,8 @@
  */
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 import { heraldSectionOfRecord } from '../../src/domain/realm/heraldRouting.js';
 import { buildRealmItemReadModel } from '../../src/domain/realm/realmItemReadModel.js';
 import { warRulingNewsEntry } from '../../src/domain/worldPulse/warRulingsNews.js';
@@ -210,10 +212,38 @@ describe('currentTensions.title: the arm is deleted at all three readers', () =>
     expect(String(live)).toContain('the levy still rankles');
 
     const dead = generateSiegeCapability(events, [DEAD_ONLY], 100);
-    expect(String(dead)).not.toContain('A Title No Writer Produces');
-    // Anti-vacuity: the generator did run and produced its authored fallback clause,
-    // so the assertion above is about the title being ignored — not about the whole
-    // branch having been skipped.
+    // THE ANTI-VACUITY CONTROL IS NOW A PRECONDITION OF THE DENIAL RATHER THAN AN
+    // ADJACENT LINE, which is the ratified preference: routed through the helper, the
+    // control is an EXECUTED assertion coupled to the exclusion instead of a second
+    // statement a later edit could delete out from under it.
+    //
+    // ⚠⚠ THE ANCHOR IS THE SENTENCE FRAME, NOT THE TENSION CLAUSE, AND THAT CHOICE WAS
+    // MADE BY MUTANT RATHER THAN BY TASTE. The obvious anchor is the fallback clause
+    // `'its effects shape current decisions'`, because siegeCapability.js builds
+    // `tensionClause` as `primaryTension || <fallback>` and so the fallback and the
+    // refused title are MUTUALLY EXCLUSIVE OCCUPANTS OF ONE SLOT. Measured: with the
+    // deleted `tension?.title` OR-arm spliced back in, that version DOES red — but on
+    // the helper's LIVENESS arm, whose message reads "the anchor sibling is missing …
+    // cannot distinguish correctly-excluded from the whole collection drifted away".
+    // That sends the next reader hunting a drifted collection when the truth is the
+    // opposite: the collection is perfectly live and the dead title got IN and evicted
+    // the clause. A pin that reds for the right reason with the wrong message costs the
+    // next lane the debugging time the pin was supposed to save.
+    // ⭐ THE FRAME SURVIVES THAT REGRESSION AND DIES OF EVERY OTHER ONE, which is exactly
+    // the ordering wanted: it is emitted by the same `return` statement, so it vanishes
+    // if the generator short-circuits (each early return hands back the raw array, which
+    // carries no frame at all) — but it is untouched by which tension wins the slot. So
+    // the exclusion arm is the one that fires, and it names the real cause.
+    expectAbsentWithAnchor(
+      String(dead),
+      'A Title No Writer Produces',
+      'is still present in living memory',
+      'siegeCapability ignores a tension carrying only the dead `title` spelling',
+    );
+    // …and the same-slot fact is kept, asserted POSITIVELY rather than as the vacuity
+    // control: the tension slot must have resolved to the authored fallback. Under the
+    // restored-arm regression this reds ALONGSIDE the exclusion above, so the pair names
+    // both halves — the dead spelling got in, and the fallback it displaced is gone.
     expect(String(dead)).toContain('its effects shape current decisions');
   });
 });

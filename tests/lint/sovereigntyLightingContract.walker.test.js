@@ -3419,7 +3419,77 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // still closes the file arithmetic. All five figures are re-proven BY EXECUTION rather
     // than by patching one: this census stops at its first red figure, so the later arms
     // are reached only when every earlier one is already right.
-    files: 2383, parked: 364, credited: 2019, titles: 19548, suiteTitles: 5519,
+    //
+    // ── RE-DERIVED 2026-08-11 BY THE OPUS LIGHTING-CENSUS LANE, AT 5afe9b2e ─────────
+    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2383/364/2019/19548/5519 →
+    // 2385/364/2021/19577/5527. FOUR LANDINGS moved this census and it is re-derived
+    // ONCE across all four rather than four times: 78d136a1 (a new UI test file),
+    // 31409e36 (anchor repairs), 1c295eca (a new domain pin suite) and 5afe9b2e. Four
+    // sequential re-derivations would each have cost a full estate read AND each would
+    // have invalidated the one before it, so the standing sequence is: let everything
+    // land, then derive once.
+    // ⚠⚠ ALL FIVE FIGURES RE-DERIVED IN ONE RUN, NONE PATCHED. The sequence hazard has
+    // now fired three recorded times by someone moving `files` alone; this census stops
+    // at its first red figure, so a patched `files` silently leaves four stale figures
+    // standing behind it and re-greens a census that is measuring nothing.
+    //   files      2383 -> 2385  (+2)
+    //   parked      364 ->  364  ( 0)  compared BY IDENTITY, never by count: ZERO files
+    //                                  newly park and ZERO unpark, so this constant holds
+    //                                  because the SET holds — an identity swap at
+    //                                  constant count would pass a count check
+    //   credited   2019 -> 2021  (+2)  the whole file-layer delta lands in credit, and
+    //                                  364 + 2021 = 2385 closes the file arithmetic
+    //   titles    19548 -> 19577 (+29)
+    //   suiteTitles 5519 -> 5527  (+8)
+    //
+    // ── THE DECOMPOSITION, FILE BY FILE, SO THE ARITHMETIC CLOSES AS A DERIVATION ──
+    // Per-file liveTitlesIn/liveSuiteTitlesIn were dumped for EVERY credited file at BOTH
+    // ends and diffed, so the aggregates above are a second reading rather than a
+    // restatement of the first. The whole movement is TWO NEW FILES and nothing else:
+    //   +13 titles, +4 suite … tests/domain/deadReaderRepairs.test.js         (1c295eca)
+    //   +16 titles, +4 suite … tests/ui/uiCohortDisplayReaderRepairs.test.jsx  (78d136a1)
+    //   13+16 = 29 and 4+4 = 8, which is the whole movement, closed.
+    // Per sha, printed only where the count MOVED (the recorded method — one commit at a
+    // time, never one subtraction across a range): 78d136a1 2384 (+1) and 1c295eca 2385
+    // (+1). 7a3c13b1, e429a4e8, 31409e36 and 5afe9b2e each add ZERO test files.
+    //
+    // ⭐ ZERO ALREADY-CREDITED FILES WERE AMENDED, AND THAT IS MEASURED RATHER THAN
+    // ASSUMED — it is the exact opposite of the previous re-derivation, which predicted
+    // +3 and measured +39 because five already-credited files had quietly gained pins in
+    // the same window. The lesson recorded there was "derive, do not extrapolate from the
+    // new-file list", and it holds in BOTH directions: extrapolating a repeat of that
+    // surprise would have been just as wrong here. The one already-credited file MODIFIED
+    // in this window, tests/lint/observedShapeReaders.walker.test.js, reads 26 titles /
+    // 4 suite titles at BOTH ends — its change is prose plus one numeric literal inside an
+    // existing pin, so a modified file can contribute exactly nothing. And 31409e36's four
+    // anchor repairs landed INSIDE tests/ui/uiCohortDisplayReaderRepairs.test.jsx, one of
+    // the two new files, so they are already counted inside its 16 rather than being an
+    // amendment stacked on top of it.
+    //
+    // ⭐ THE TITLE FIGURES ARE READ TWICE, BY TWO INSTRUMENTS THAT SHARE NO CODE. Beside
+    // this file's parser, `vitest list` over the two new files — the real runner
+    // registering the real tests — enumerates 13 and 16 rows and 4 and 4 distinct suite
+    // paths. That is the classifier's +29 and +8 confirmed from outside the classifier.
+    //
+    // ⭐ THE NEGATIVE CONTROL, WHICH IS THE THING THAT SEPARATES AN ESTATE MOVE FROM AN
+    // INSTRUMENT MOVE: the tests/ tree of 2d420dfa — the commit that recorded the five
+    // figures this row replaces — was materialised OUTSIDE the repo (2,486 tracked paths
+    // in, 2,486 files out) and re-measured by the CURRENT classifier. It read back
+    // 2383/364/2019/19548/5519, the previous row EXACTLY, so the classifier did not move
+    // and every delta above is the estate. A structural control agrees with it: `git diff
+    // 2d420dfa 5afe9b2e --` over THIS file, tests/helpers/anchoredNegatives.js,
+    // src/domain/certification/warConvergenceContract.js and
+    // src/domain/worldPulse/simulationRules.js is EMPTY — no rule widened or narrowed.
+    // ⚠⚠ SELF-REFERENCE, AND IT IS WHY THE PROBE WAS BUILT THE WAY IT WAS: this walker is
+    // itself CREDITED (33 titles / 4 suite titles, at both ends), so a probe appended to
+    // it can weigh itself. This measurement ran the classifier half OUTSIDE the runner
+    // over an UNMODIFIED tree and added no registration anywhere in tests/; the note you
+    // are reading is comment text and mints no title of its own.
+    // ⚠ WHICH BYTES: `git status` was empty and `git diff HEAD -- tests/` was empty at
+    // measurement time, so the live read and the committed read of 5afe9b2e are the same
+    // read — the distinction that has bitten before does not arise here, and it is stated
+    // rather than assumed away.
+    files: 2385, parked: 364, credited: 2021, titles: 19577, suiteTitles: 5527,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
