@@ -1,6 +1,7 @@
 # `ESPIONAGE / ES-5b` — implementation contract (REVISION 2)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `6c0238ad` (2026-08-11) — four recorded deviations, zero moved goldens, full gate exit 0
 - **Status note:** promoted from rev 2 by the chair 2026-08-11 (supersedes
   `es5b-packet-draft-ES-5B.md`, rev 1 at `46357c94`). Rev 1's seven open items were
   closed in-text by CR-ES5B-1..7 and CR-ES5B-5-R2; §13b closes the last two.

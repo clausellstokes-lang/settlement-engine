@@ -403,7 +403,7 @@
     },
     {
       "id": "ES-5B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/ES-5B.md",
       "verifiedBase": "2d420dfafd9e8f92db5deca124cc2353c0073588",
       "changeManifest": [
