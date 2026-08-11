@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:03:29 EDT
+**Generated:** 2026-08-11 15:09:44 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **17** |
-| ledger (main) | `review-fixes-2026-07-08` | `b87b81dd` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `aa585167` | **18** |
+| ledger (main) | `review-fixes-2026-07-08` | `9df1e966` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 59867: sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/observedShapeReaders.walker.test.js tests/lint/sizeBaseline.test.js tests/lint/sovereigntyLightingContract.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js
+**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T150214` — build 17 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T150909` — build 18 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T150214
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T150909
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -42,6 +42,7 @@ staged set BY NAME AND COUNT.
  M src/utils/generateCampaignPDF.js
  M src/utils/generateWorldBook.js
  M tests/domain/hookEscalation.test.js
+ M tests/domain/pendingEdits.test.js
  M tests/lib/generationTelemetry.test.js
  M tests/lib/structuralFingerprint.test.js
  M tests/pdf/worldBook.test.js
@@ -61,6 +62,7 @@ staged set BY NAME AND COUNT.
   +12     -3      src/utils/generateCampaignPDF.js
   +16     -4      src/utils/generateWorldBook.js
   +21     -6      tests/domain/hookEscalation.test.js
+  +8      -2      tests/domain/pendingEdits.test.js
   +10     -3      tests/lib/generationTelemetry.test.js
   +9      -1      tests/lib/structuralFingerprint.test.js
   +17     -3      tests/pdf/worldBook.test.js
@@ -84,12 +86,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
 005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
 738b1c06 2026-08-11 Handoff: no stalls; the gate cure and the espionage volume's real gate are out
-7d31c983 2026-08-11 Handoff corrected: the gate is NOT green, and the harness lied about it again
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -118,13 +120,19 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
 
 ## The live board — FOUR operations dispatched ~14:20 EDT
 
-1. **Lane A (build, Opus) — collect+finish the PGLITE CONTENTION CURE.** Owns the 5 dirty
-   `tests/security/*.pglite.test.js` files (the dead prior lane's probe WIP, snapshot
-   `20260811T140748`). Brief: measure CONTENDED hook cost, cure by budget-sized-for-
-   contention or serialization, ⛔ never by skip-ceiling/allowlist; strip-or-keep probes is
-   its recorded JUDGMENT; lands by private-index plumbing; deliverable = full gate at
-   **exit 1 with EXACTLY ONE red outside the frozen census (the owner's golden)**.
-   Transcript: session dir `subagents/agent-a1c43cda617f681d8.jsonl`.
+1. **Lane A — ✅ COLLECTED (~15:30), chair-verified: THE CURE IS A REFUTATION.** The
+   five-suite pglite collapse is a PHANTOM: 51/51 pass inside a real parallel gate run at
+   load ~200 with **13–57× beforeAll headroom; the measured contention multiplier is ~4×,
+   not the 60× the budget hypothesis needed.** Probes stripped; NO budget changed (the
+   ratchet's never-tune-to-a-boot law stands); one landed edit replaces a DISPROVEN
+   rationale beside the ingestCheckRate guard. Commit `aa585167` (chair-verified: exactly
+   1 file vs `ffc85a90`). Memory banked in test-timeout-flake-and-phantom-census-class.md
+   (+ the killed-worker hypothesis and its settling experiment). **Clean-tree endstate
+   PROVEN: 18 test reds = 17 census + the owner's golden, exactly.** ⚠ The live-tree full
+   gate is currently red on Lane C's mid-flight WIP (typecheck `pendingEditsPreview.js`
+   +1 over baseline, 6 foreign test reds — proven by before/after execution) — correctly
+   refused, not chased. **CHAIR POST-LANDING STEP: after Lane C lands, run the full gate
+   on the clean tree and record the exit-1-golden-only endstate.**
 2. **Lane B — COLLECTION DONE (~15:00), digest COMPLETING.** The survey workflow
    (`wf_5618aec5-d46`, 14 agents) extracted all post-boundary acts and receipt-checked
    them; its own verification caught that the SYNTHESIS input arrived TRUNCATED, so the
