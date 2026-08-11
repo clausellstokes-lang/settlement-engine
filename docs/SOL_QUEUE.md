@@ -7,6 +7,128 @@
 > coding assignment. [`implementation/INDEX.md`](./implementation/INDEX.md) is
 > the only current dispatch surface.
 
+---
+
+# ⭐⭐ HANDOFF TO SOL 5.6 — written 2026-08-11 by the Fable chair, read this FIRST
+
+You are the external implementer. This block exists because the queue below was
+compiled 2026-08-02 and **42 commits have landed since**, under a Fable/Opus chair
+that is now handing you the build. Nothing below this block was rewritten; this is
+the delta and the law you inherit.
+
+## 1. Where dispatch actually lives (unchanged, and it is not this file)
+
+`docs/implementation/INDEX.md` is the ONLY dispatch surface, governed by
+`PACKET_STANDARD.md` and `PACKET_MANIFEST.json`. **Only a row marked READY may be
+dispatched.** A design doc, a queue row here, a commit subject, or an old brief is
+NOT a coding assignment. Run `npm run validate:packets` before and after touching
+any packet; it reserves change paths exclusively across non-terminal packets, so a
+path collision is a refusal, not a suggestion. At this handoff the index reads
+**9 packets, 0 READY** — every compiled packet has landed, so your first act on any
+new work is a packet compile, not an edit.
+
+## 2. ⛔⛔ THE VALIDATION-MARKING LAW BINDS YOU (owner order, 2026-08-10)
+
+The full law is at the tail of `docs/FABLE_VALIDATION_QUEUE.md`, landed at
+`33aeea35`. In one line: **Fable's validation chair is exhausted, so every
+judgment-density act after the boundary carries a marker until a Fable-capable
+account re-derives it.** It was written naming the Opus era; **it binds you
+identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
+
+- **Marker:** `⏳ OPUS-ERA — FABLE VALIDATION OWED`, placed in ALL THREE homes —
+  the queue row, the commit body, and the document where the judgment lives — and
+  repeated in any downstream doc that CONSUMES the judgment, with a pointer back.
+- **What owes a row:** wave/slice acceptance judgments, new architecture beyond the
+  frozen design corpus, golden-shift adjudications, soak verdict interpretations,
+  tuning-band ratifications, and deferrals with product consequences.
+- **What does NOT:** mechanical green gates, verified receipts, and — importantly for
+  you — **implementing a packet built to a Fable-issued ruling, which INHERITS that
+  validation.** Every `CR-*` ruling that exists at this handoff is Fable-issued.
+  Building to it costs you nothing; deviating from it owes a row.
+- ⚠ **The marker NEVER gates progress.** It records debt; the work proceeds.
+- ⚠ Count DOCUMENT markers only. Commit messages are immutable and match forever.
+- **Authority is immediate and full** for whoever holds the chair, with four owner
+  carve-outs that survive every era and every delegation: external legal sign-off,
+  the V5 aesthetic cull (offer it, never assume it), THE TUNING SIGNATURE at soak,
+  and EACH push/deploy confirmed by the owner. **No remote or Supabase CLI contact,
+  ever; migrations are authoring-only.**
+
+## 3. What landed since this queue was compiled (git is the authority; this orients)
+
+- **Town Cartography is at TC-4.** TC-3a `5066c34b` (named streets/wards, naming
+  pools moved off the bounded chunk by injection), TC-3b `a45c969d` (parcels +
+  the institution-binding receipt), TC-4 `5a6f76fe` (the buildings layer: A-8
+  multiplicity, footprint packing, dwelling fill, dress). Schema stayed v2 — filling
+  a reserved-and-validated layer is additive. **TC-5 is the next compile candidate.**
+- **The foreign-policy serial chain closed whole:** GR-3B-ORIENT `d56d944c` →
+  IN-0c `29e2dc3c` → GR-3b `40afbdd6`. Three packets through one shared hot file by
+  explicit sequencing, zero collisions, zero raised ceilings.
+- **SC-1 `455a29b5`** (surveyor text-intent shell + typed-op cards).
+- **The migration debt is retired** (`1ac94af8` + `01a81a1e`): rollback authored and
+  proven on pglite, train head 194→195. The DEPLOY remains the owner's.
+- **The observed-shape instrument re-founded on schema 4** — a deliberately-red code
+  commit `894325ff` followed by the genesis `2a7fb033` (the pair is atomic by ruling;
+  read `894325ff`'s body before ever judging it broken). The walker that used to burn
+  730 seconds and skip all 24 of its tests now runs 26/26.
+- **A user-visible defect repaired `c74048e4`:** the PDF/journal prominent-relationship
+  callout was printing placeholder text over real generated prose.
+- **The test census re-froze `7981fa10`:** totalTests 27926, totalFiles 2383,
+  skippedCeiling 111, entries 17 byte-unchanged.
+
+## 4. Open work, in the order the chair would take it
+
+1. **In flight at handoff:** a lane closing the census — anchoring the un-anchored
+   negatives in `tests/lint/testRatchet.test.js` (a TWO-file cure; the walker also
+   reds on a row offending BELOW its ceiling), re-freezing the OSR baseline for a
+   LAWFUL 12-row shrink, and hardening the ratchet against the scope-collapse
+   disguise. Its work may be sitting uncommitted — check `git status` first.
+2. **The 21 remaining reader-without-writer defects** the schema-4 triage confirmed
+   (2 of 23 repaired). Each writer-side-vs-reader-side call is new architecture and
+   owes a row. See `memory/osr-171-growth-rows-triaged.md`.
+3. **The `locks` cluster is OWNER-GATED, not yours or the chair's** — `locks.factions`
+   /`locks.institutions` reach a coup shield that can never arm FROM THE UI; the fix
+   is either deleting a working capability or adding a new one. Ask; do not choose.
+4. **The 162-identity UNREVIEWED-UI cohort** banked in the genesis, awaiting per-row
+   triage.
+5. **M6 as a follow-on freeze** (CR-OSR-FREEZE-6-R1) — the re-key tool and its
+   negative control are already built and waiting.
+6. **The ES tail** (ES-5b insertion reconciliation → ES-6 → ES-7 → CW-3), then the
+   remaining corpus in this queue's own dependency order.
+7. **THE TERMINAL PHASE IS NOT YOURS AND NOT THE CHAIR'S** — §4 below stands
+   verbatim: soaks, lighting, tuning and pushes are the owner's, and THE TUNING
+   SIGNATURE is a specific owner act at soak.
+
+## 5. The hazards that will bite YOU specifically (each has drawn blood here)
+
+- **Never read a gate through a pipe.** `npm run check | tail` reports the PIPE's
+  status and has greenwashed red gates twice. Use `npm run check:tail` or
+  `sh scripts/gate-tail.sh <cmd...>`. Vitest runs ONLY through
+  `sh scripts/gate-mutex.sh --run -- npx vitest run <files>`.
+- **This is a SHARED, LIVE tree.** Never `git add -A`/`-u`/`.`; stage explicit
+  paths, verify every staged hunk is yours, and re-check `git status` before
+  believing anything you remember. `git stash` is FORBIDDEN by owner order.
+  Foreign dirt is someone else's work — preserve it.
+- ⚠⚠ **A cross-lane `pkill -f` by vitest argv kills the OTHER lane's run**, because
+  an archive's symlinked node_modules makes both lanes' workers advertise the same
+  path. Kill by recorded PID only.
+- ⚠⚠ **A dead suite arrives dressed as SKIPS**, because a never-run test serialises
+  as `pending` and the ratchet counts `pending` as skipped. Check `numPendingTests`
+  against the row count before believing any skip-ceiling red.
+- **A failing test is debt; a failing WALKER is a disabled guard.** Never allowlist,
+  raise a ceiling, or skip to green. Ceilings are monotone-down.
+- **Never census a live shared tree**, and when a census row moves, RE-DERIVE ALL
+  FIVE figures — a patched `files` leaves four stale ones, and the census stops
+  measuring at its first red figure.
+- **Report outcome-first with CONFIRMED / PLAUSIBLE labels**, failures verbatim, and
+  STOP-and-report on a measured contradiction rather than improvising. **Seven lanes
+  refused a chair instruction on measurement during this program and every one of
+  them was right.** That is the behavior this program rewards.
+- Deep background for any of the above: the memory directory at
+  `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/`, indexed by
+  `MEMORY.md`; and `docs/RESUME_STATE.md` on the ledger branch for the live board.
+
+---
+
 ## For the external implementer (Sol), zero session context assumed. Compiled by
 ## the Fable chair under full owner delegation; owner orders embedded verbatim
 ## where they bind. Every pointer below is to a committed, AUDITED document in
