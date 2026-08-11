@@ -170,18 +170,45 @@ free, zero processes):**
    ⚠⚠ The classification pin must be BEHAVIORAL with TWO mutants because
    `spatialLedgerCoverage` reds on an unclassified key but a TRACKED classification
    **FAILS OPEN**. Report: tasks/ac07e514ba7187d83.output.
-2. **OWNER-RULED DISPLAY CLUSTER (Opus) — in flight.** All three from queue §12:
-   **DELETE** the `capital`/`isCapital` reads (the concept does not exist in the world
-   model; ⛔ no overlord visual — uncommissioned; ⚠ every quoted `'capital'` is the
-   SIZE-TIER token meaning Metropolis and must survive); **SWITCH ON** the exit-road
-   labels for every existing settlement, with a measured report of exactly what now
-   renders; and **THE LOCKS SPLIT** — `locks.institutions` DELETED (dead on every end,
-   but the lane must VERIFY the zero-reader claim itself, since a prior lane got a
-   verdict wrong by name-grep alone and dynamic writes are invisible to it), and
-   `locks.factions` **KEPT AND WIRED** so a locked governing faction can actually resist
-   a coup. ⚠⚠ **THE LOCK COPY IS THE OWNER'S** — the lane drafts the four strings in the
-   existing rows' voice and presents them as a **DRAFT FOR VETO**; the wiring lands
-   either way. Report: tasks/a6b34099a0ed00c5f.output.
+2. **✅ THE OWNER-RULED DISPLAY CLUSTER LANDED @ `73f00920`** (15 files; ES-5d's 10
+   reserved and untouched). Capital DELETED — dead twice independently, and no overlord
+   visual built. Exit roads LIT and measured (4 labels on a crossroads, 3 on road/port,
+   2 on river, 1 on isolated; `→ Ashford` / `trade partner`).
+   ⚠⚠ **THE LOCK WIRING WAS NOT A BOOLEAN, AND A BOOLEAN WOULD HAVE LIED.** My "one
+   missing row" framing was right about SCOPE and **WRONG ABOUT SHAPE**: `coup.js:64`
+   opens with `Array.isArray(locked)`, so a boolean row would have rendered "Locked",
+   persisted, and **STILL LET THE COUP AUTO-APPLY** — precisely the lying surface the
+   change exists to remove. The row writes `[nameOf(governingFactionOf(settlement))]`;
+   the mutant proves it (`expected 'auto' to be 'proposal'`).
+   ⭐ A SECOND correction of mine: `locks.institutions` DID have a reader
+   (`normalizeLocks`) — nothing consumed what it normalised. So the dead READ died and
+   **the PERSISTED KEY DID NOT**: pruning that is a migration, and a dead-reader deletion
+   must never quietly become a data deletion.
+   ⚠ **OWNER ITEMS @ `7e9e6306` (queue §15):** the exit-road order is **HALF CARRIED
+   OUT** — labels light for LINKED settlements, but a freshly generated one binds no
+   neighbour, so lighting it there means binding neighbours during GENERATION (same-seed
+   territory, a capability question, offered not assumed); and the **LOCK COPY awaits
+   veto** (4 drafted strings; the other rows say "a new roll" because they guard the
+   DICE, this one guards the SEAT).
+
+**⛔⛔ TWO THINGS BLOCK THE NEXT OSR RE-FREEZE — the first is MINE:**
+- **THE LIGHTING CENSUS IS ALREADY RED AT PRISTINE `0f85ced0`, before any lane edited.**
+  Base measures `2389/365/2024/19610/5542` vs the pinned `2389/364/2025/19610/5543` — ONE
+  FILE FLIPPED credited→parked carrying exactly one suite title. **I landed `0f85ced0`
+  without re-deriving the census — the same class of error as `78d136a1`, second
+  occurrence.** ⭐ The lane REFUSED to re-record it, correctly: that would launder an
+  unexplained foreign change into its own commit. Its own delta closes exactly
+  (+1 file / +0 parked / +1 credited / +12 titles / +2 suiteTitles).
+  **NEXT ACT: identify the flipped file (needs a parked-set diff over a ~1,944-file
+  window), then re-derive all five.**
+- **The observed-shape change is NOT a pure shrink:** stale 4 **plus violations 1** — a
+  NEW `neighbourNetwork on settlement` identity that is already baselined in 20+ files
+  INCLUDING ITS OWN WRITER, because the detector's corpus walks only GENERATION while the
+  key is minted at SAVE TIME. Net effect is a size-neutral row swap, but the walker's rule
+  says "never add an identity", so **`--write` may REFUSE**.
+⚠ The never-census-a-live-shared-tree law fired AGAIN: the lane's first reading was
+contaminated by the concurrent lane writing three files mid-measurement; it re-measured on
+isolated archive trees. ⚠ The harness greenwash fired a **THIRD** time today.
 
 **Ruled and sequenced (not blocked):**
 
