@@ -21,15 +21,15 @@
  },
  "digests": {
   "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "1edb0a70525e319c4d0a24b0f5f7db3cb1b429bc94e6a631e0996db040076a6c",
-  "manifests": "427e44beb1652637b797e26280c9079236333f96399ac75f95c65d7dd78e9112",
+  "inventory": "b3611bd5e5f572ae82dc4f66d443e1197cd522bf6f1c249362681de92c8dc133",
+  "manifests": "27eabd43a123da54a8d4cda2fdd28d936cc2f0866a382373ff3c2edaa67beebd",
   "migrationReview": "b6261a3edfc0954f54bf76c3635e8a83782b0eb04625724987b6f9c86ad4d22e",
-  "scanStats": "c3db215009693a7608b75624a7ab083dd93872eab84040f23331ef42cdc3b5bc",
-  "sentinel": "8348ac8c3ee35437b6a017b7dcf1df5b39b21bf1d6fc66b71b39942f6b367451"
+  "scanStats": "cbdb24c93e5ac29f098b3a1ef72deea61cdbd5b8b689639d2814a3e25c020652",
+  "sentinel": "27cdcd94e34ca58d0316d481ddc809f98c9392a0bfb26aeba4e65082b6958f50"
  },
  "frozen": "2026-08-11",
- "frozenAtSha": "78d136a1b4360d3defb5ba2a03579a8e53b90e4a",
- "identities": 1506,
+ "frozenAtSha": "1c295ecae88423bbe127ec6275aada8b82d64608",
+ "identities": 1499,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -184,7 +184,6 @@
   "src/components/new/dailyLifeLogic.js": {
    "description on conflicts": 1,
    "incomeSources on economicViability": 1,
-   "title on currentTensions": 1,
    "type on conflicts": 1
   },
   "src/components/new/neighbourComponents.jsx": {
@@ -843,9 +842,6 @@
    "plotHooks on settlement": 2
   },
   "src/domain/realm/heraldRouting.js": {
-   "__adjudicationPending on stressors": 1,
-   "__forecast on stressors": 1,
-   "__resolution on stressors": 1,
    "candidateType on stressors": 2,
    "impactKind on stressors": 2,
    "kind on stressors": 2,
@@ -1665,7 +1661,6 @@
    "coalitionEvidence on outcome": 1,
    "counterpartId on outcome": 1,
    "enemyId on outcome": 1,
-   "evidenceId on outcome": 1,
    "kind on outcome": 3,
    "opponentId on outcome": 1,
    "receipt on outcome": 1,
@@ -1742,7 +1737,6 @@
    "incomeSources on economicViability": 1,
    "nearbyResources on resourceAnalysis": 1,
    "plotHooks on settlement": 1,
-   "title on currentTensions": 1,
    "type on conflicts": 1
   },
   "src/generators/cascadeGenerator.js": {
@@ -1802,9 +1796,6 @@
   },
   "src/generators/isolationSupport.js": {
    "magicExists on config": 1
-  },
-  "src/generators/narrative/siegeCapability.js": {
-   "title on currentTensions": 1
   },
   "src/generators/narrativeGenerator.js": {
    "need on foodBalance": 1
@@ -2416,7 +2407,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "39c2fab6137ba01cba3aa6eff01c7206c18544954478c7b7fcd5d4bb31ff6988",
+   "digest": "1f3058152c2a0073ee8c5546aebe6d3eeda7e33bc0ae4236cf3e582862237eb5",
    "entries": [
     {
      "mode": "100644",
@@ -5228,8 +5219,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/dailyLifeLogic.js",
-     "sha256": "4429fcab3627419d00a2abe15032e9a39c5b7c6fe05c238737419459b13925bc",
-     "size": 13548,
+     "sha256": "7d63cffcd35811a50b364e1255f4c67224c492deaf13fd9f6f26a1fc909ec1ce",
+     "size": 14032,
      "type": "file"
     },
     {
@@ -9659,8 +9650,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "184277c760baf1054721bd1eac94a07f67e0227c74702a56d3fa55b62ece9852",
-     "size": 37088,
+     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
+     "size": 38875,
      "type": "file"
     },
     {
@@ -9708,8 +9699,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/realmItemReadModel.js",
-     "sha256": "42966dacc93492a93c6d5443684f5e2bd4fdccf692deadad90128b7cc43ae867",
-     "size": 39776,
+     "sha256": "14386caac8079028d7119bc64a2acce9a7266e22a92f48752c91e488e664e2a5",
+     "size": 40191,
      "type": "file"
     },
     {
@@ -13257,8 +13248,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/sovereigntyNews.js",
-     "sha256": "1db8804e0ab9c1dcd609d679ba4b3ad6d22c7b5dadb329a9a918ca3ccae871e6",
-     "size": 24478,
+     "sha256": "3cc756e8737ec231b7d2ba1ca08f4225f73a2c445fdcf8ca06e92527e6932b57",
+     "size": 24617,
      "type": "file"
     },
     {
@@ -13565,8 +13556,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warCoalitionEvidence.js",
-     "sha256": "a6fa3ccf36a2eec34252c45ce5b476fcaade661f3dfb729140b1ff559a46e82a",
-     "size": 6655,
+     "sha256": "3dff04806f1fb6b12b6bb177197cdb5922d7a534bb450218dc43beb5f8cebc2e",
+     "size": 6876,
      "type": "file"
     },
     {
@@ -13726,8 +13717,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warRulingsNews.js",
-     "sha256": "2ce8ccde691256bf0fcfb04647861e19980600d91a5744039ce00d1a16e26b54",
-     "size": 16689,
+     "sha256": "d33d97ea3975f39a1deb0c30fcc20e96ea1d7c7ccfba9ba79302c0ce275afd52",
+     "size": 17001,
      "type": "file"
     },
     {
@@ -13824,8 +13815,8 @@
     {
      "mode": "100644",
      "path": "src/generators/aiLayer.js",
-     "sha256": "912557b834bf60422c10a05cd08d1dc1a60703caea119b34a5ff46be8059e5a7",
-     "size": 24810,
+     "sha256": "4907b08bc7260b7e31b1584830651e17a17fb2f38e50bfee209f3e095d9b5fda",
+     "size": 25055,
      "type": "file"
     },
     {
@@ -14118,8 +14109,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/siegeCapability.js",
-     "sha256": "0a3a609a0ad4b6413075bc855f16f800f18c18e96dc6ccd122bdc033e8c602d5",
-     "size": 2039,
+     "sha256": "4329da4165e5fe9eec48aeb7ae3c24b3e7f2f1d3460ae09ee81a1aa664f8b601",
+     "size": 2277,
      "type": "file"
     },
     {
@@ -17171,7 +17162,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ba33966646c85a5e35eb7ec1ccc789af55ed6a5a516bbde8c7038f68ff42f2b7",
+   "digest": "568f843e347a77e29bbc5360c5f77d268267df6fd3dc0ed009ba19f460f3301f",
    "entries": [
     {
      "mode": "100644",
@@ -19913,8 +19904,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/dailyLifeLogic.js",
-     "sha256": "4429fcab3627419d00a2abe15032e9a39c5b7c6fe05c238737419459b13925bc",
-     "size": 13548,
+     "sha256": "7d63cffcd35811a50b364e1255f4c67224c492deaf13fd9f6f26a1fc909ec1ce",
+     "size": 14032,
      "type": "file"
     },
     {
@@ -24253,8 +24244,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "184277c760baf1054721bd1eac94a07f67e0227c74702a56d3fa55b62ece9852",
-     "size": 37088,
+     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
+     "size": 38875,
      "type": "file"
     },
     {
@@ -24302,8 +24293,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/realmItemReadModel.js",
-     "sha256": "42966dacc93492a93c6d5443684f5e2bd4fdccf692deadad90128b7cc43ae867",
-     "size": 39776,
+     "sha256": "14386caac8079028d7119bc64a2acce9a7266e22a92f48752c91e488e664e2a5",
+     "size": 40191,
      "type": "file"
     },
     {
@@ -27851,8 +27842,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/sovereigntyNews.js",
-     "sha256": "1db8804e0ab9c1dcd609d679ba4b3ad6d22c7b5dadb329a9a918ca3ccae871e6",
-     "size": 24478,
+     "sha256": "3cc756e8737ec231b7d2ba1ca08f4225f73a2c445fdcf8ca06e92527e6932b57",
+     "size": 24617,
      "type": "file"
     },
     {
@@ -28159,8 +28150,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warCoalitionEvidence.js",
-     "sha256": "a6fa3ccf36a2eec34252c45ce5b476fcaade661f3dfb729140b1ff559a46e82a",
-     "size": 6655,
+     "sha256": "3dff04806f1fb6b12b6bb177197cdb5922d7a534bb450218dc43beb5f8cebc2e",
+     "size": 6876,
      "type": "file"
     },
     {
@@ -28320,8 +28311,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warRulingsNews.js",
-     "sha256": "2ce8ccde691256bf0fcfb04647861e19980600d91a5744039ce00d1a16e26b54",
-     "size": 16689,
+     "sha256": "d33d97ea3975f39a1deb0c30fcc20e96ea1d7c7ccfba9ba79302c0ce275afd52",
+     "size": 17001,
      "type": "file"
     },
     {
@@ -28418,8 +28409,8 @@
     {
      "mode": "100644",
      "path": "src/generators/aiLayer.js",
-     "sha256": "912557b834bf60422c10a05cd08d1dc1a60703caea119b34a5ff46be8059e5a7",
-     "size": 24810,
+     "sha256": "4907b08bc7260b7e31b1584830651e17a17fb2f38e50bfee209f3e095d9b5fda",
+     "size": 25055,
      "type": "file"
     },
     {
@@ -28712,8 +28703,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/siegeCapability.js",
-     "sha256": "0a3a609a0ad4b6413075bc855f16f800f18c18e96dc6ccd122bdc033e8c602d5",
-     "size": 2039,
+     "sha256": "4329da4165e5fe9eec48aeb7ae3c24b3e7f2f1d3460ae09ee81a1aa664f8b601",
+     "size": 2277,
      "type": "file"
     },
     {
@@ -31758,7 +31749,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "05c81ed727c74a3df29fc83e7364a1483d57a989275e90664d1fd87024a0e451",
+   "digest": "bf6f978ef068732e8b7350c2cafec468030f47d2616a35993535100a1f4d3dc9",
    "entries": [
     {
      "mode": "100644",
@@ -34500,8 +34491,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/dailyLifeLogic.js",
-     "sha256": "4429fcab3627419d00a2abe15032e9a39c5b7c6fe05c238737419459b13925bc",
-     "size": 13548,
+     "sha256": "7d63cffcd35811a50b364e1255f4c67224c492deaf13fd9f6f26a1fc909ec1ce",
+     "size": 14032,
      "type": "file"
     },
     {
@@ -38931,8 +38922,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "184277c760baf1054721bd1eac94a07f67e0227c74702a56d3fa55b62ece9852",
-     "size": 37088,
+     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
+     "size": 38875,
      "type": "file"
     },
     {
@@ -38980,8 +38971,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/realmItemReadModel.js",
-     "sha256": "42966dacc93492a93c6d5443684f5e2bd4fdccf692deadad90128b7cc43ae867",
-     "size": 39776,
+     "sha256": "14386caac8079028d7119bc64a2acce9a7266e22a92f48752c91e488e664e2a5",
+     "size": 40191,
      "type": "file"
     },
     {
@@ -42529,8 +42520,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/sovereigntyNews.js",
-     "sha256": "1db8804e0ab9c1dcd609d679ba4b3ad6d22c7b5dadb329a9a918ca3ccae871e6",
-     "size": 24478,
+     "sha256": "3cc756e8737ec231b7d2ba1ca08f4225f73a2c445fdcf8ca06e92527e6932b57",
+     "size": 24617,
      "type": "file"
     },
     {
@@ -42837,8 +42828,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warCoalitionEvidence.js",
-     "sha256": "a6fa3ccf36a2eec34252c45ce5b476fcaade661f3dfb729140b1ff559a46e82a",
-     "size": 6655,
+     "sha256": "3dff04806f1fb6b12b6bb177197cdb5922d7a534bb450218dc43beb5f8cebc2e",
+     "size": 6876,
      "type": "file"
     },
     {
@@ -42998,8 +42989,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/warRulingsNews.js",
-     "sha256": "2ce8ccde691256bf0fcfb04647861e19980600d91a5744039ce00d1a16e26b54",
-     "size": 16689,
+     "sha256": "d33d97ea3975f39a1deb0c30fcc20e96ea1d7c7ccfba9ba79302c0ce275afd52",
+     "size": 17001,
      "type": "file"
     },
     {
@@ -43096,8 +43087,8 @@
     {
      "mode": "100644",
      "path": "src/generators/aiLayer.js",
-     "sha256": "912557b834bf60422c10a05cd08d1dc1a60703caea119b34a5ff46be8059e5a7",
-     "size": 24810,
+     "sha256": "4907b08bc7260b7e31b1584830651e17a17fb2f38e50bfee209f3e095d9b5fda",
+     "size": 25055,
      "type": "file"
     },
     {
@@ -43390,8 +43381,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/siegeCapability.js",
-     "sha256": "0a3a609a0ad4b6413075bc855f16f800f18c18e96dc6ccd122bdc033e8c602d5",
-     "size": 2039,
+     "sha256": "4329da4165e5fe9eec48aeb7ae3c24b3e7f2f1d3460ae09ee81a1aa664f8b601",
+     "size": 2277,
      "type": "file"
     },
     {
@@ -46465,22 +46456,22 @@
  "originMinRows": 8,
  "scanStats": {
   "files": 2083,
-  "reads": 120421,
-  "resolved": 9249,
-  "unresolved": 111172
+  "reads": 120407,
+  "resolved": 9238,
+  "unresolved": 111169
  },
  "scannerProvenance": {
   "detectorDigest": "6de7b9a252b5279be7246c3edbcaac60bd10a66d1261e4d5557a8ea53914f837",
-  "executionTreeDigest": "39c2fab6137ba01cba3aa6eff01c7206c18544954478c7b7fcd5d4bb31ff6988",
-  "scanTreeDigest": "ba33966646c85a5e35eb7ec1ccc789af55ed6a5a516bbde8c7038f68ff42f2b7",
-  "sourceTreeDigest": "05c81ed727c74a3df29fc83e7364a1483d57a989275e90664d1fd87024a0e451",
+  "executionTreeDigest": "1f3058152c2a0073ee8c5546aebe6d3eeda7e33bc0ae4236cf3e582862237eb5",
+  "scanTreeDigest": "568f843e347a77e29bbc5360c5f77d268267df6fd3dc0ed009ba19f460f3301f",
+  "sourceTreeDigest": "bf6f978ef068732e8b7350c2cafec468030f47d2616a35993535100a1f4d3dc9",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
  "schema": 4,
  "sentinel": {
-  "resolvedReads": 9249,
+  "resolvedReads": 9238,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 2171
+ "total": 2164
 }
