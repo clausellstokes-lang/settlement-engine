@@ -560,3 +560,46 @@ checkout) — that is not a call I should make unilaterally on 4,537 files. If i
 scratch tree you keep deliberately divergent, tell me and I will record it so no future
 session "fixes" it. **Nothing is blocked either way** — the build worktree at
 `.claude/worktrees/minifold` is clean and all real work happens there.
+
+---
+
+## §14 · ⚠ TWO THINGS THE SAME-SEED REPAIR LEAVES FOR YOU (2026-08-11, landed `0f85ced0`)
+
+Both defects are repaired, measured over 120 fixed seeds, and landed. Ports now generate
+(2 of 2 port-to-port road edges correctly prefer sea) and 20 of 80 structural officers now
+carry an institution link where none ever did. **Blast radius proven confined**: exactly
+one golden file moves, 25 of its 525 rows, verified by re-hashing every settlement with
+the new field forced empty and reproducing the old manifest on 525/525.
+
+### 1. THE GOLDEN IS REGISTERED, NOT RE-RECORDED — it wants your `UPDATE_GOLDEN`
+
+Per this tree's own `GOLDEN_SHIFT_LEDGER_MAIN.md` discipline, the manifest is left
+**byte-identical** and `generatorGoldenMaster` reads **RED BY DESIGN** until you run the
+batched update. SHIFT-2 is appended with all 25 before→after hashes. **This is a
+registered, documented red with a one-command cure — not debt and not a regression.**
+
+### 2. ⚠⚠ FOUR OF THE TWENTY NEW LINKS ARE WRONG, and the repair only made it visible
+
+The noble role's `linkToInst` pattern is `/council|court|hall|government/`, which matches
+any "…hall". So a **Lord Mayor now links to "Gambling halls" (×2), "Free company hall",
+and "Adventurers' charter hall".** Sixteen of the twenty links are correct; these four are
+absurd on their face.
+
+**This is a PRE-EXISTING defect in the `FACTION_ROLES` table, not a consequence of the
+fix** — the links were always going to be wrong; until now they were simply never created.
+The lane deliberately did **not** narrow the pattern, and I agree with that restraint: it
+would have been a second, unapproved same-seed shift smuggled in beside an approved one.
+
+**My recommendation: fix it, and ride the SAME `UPDATE_GOLDEN` so the seed line moves
+ONCE rather than twice.** Narrowing the pattern to exclude gambling/company/charter halls
+is a small, bounded change; the cost of doing it separately is a second golden shift on
+the same settlements, which is exactly the churn THE PROMISE's discipline exists to avoid.
+
+**Say the word and I will scope it before you run the update.** If you would rather ship
+the four odd links for now, that is also coherent — they are visible, not corrupting.
+
+### Recorded, untouched, available as their own lanes
+`magicFormsPractitioner.js:125,243` carries the same id-only defect class with no name
+fallback · three stale references to a test file that does not exist ·
+`deriveRegionalState.js`'s dead `tradeRouteAccess on save` read · five duplicated
+`instId()` minters that disagree with the canonical join.
