@@ -3618,7 +3618,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // gained pins) — this time that drift is +7 titles, and it is NAMED above rather than
     // absorbed. ⛔ Whoever re-records next must re-derive all five the same way: while any
     // arm is red this census STOPS MEASURING, so the arms behind it may be anything at all.
-    files: 2392, parked: 365, credited: 2027, titles: 19656, suiteTitles: 5552,
+    files: 2392, parked: 365, credited: 2027, titles: 19659, suiteTitles: 5552,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

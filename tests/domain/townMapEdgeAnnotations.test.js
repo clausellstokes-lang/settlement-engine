@@ -124,6 +124,67 @@ describe('edge annotations — named neighbours on the exits', () => {
     expect(ann[0].relationshipLabel).toBe('an uneasy peace');
   });
 
+  it('A LABEL IS A DISPLAY STRING, NEVER AN ENTITY — no identity survives onto an annotation', () => {
+    // ⭐ THE RULING THIS PIN ENFORCES (owner, 2026-08-11): an exit-road label may only
+    // ever say what generation GENUINELY KNOWS. The moment anything JOINS ON that
+    // string — mints a settlement from it, links it, looks it up, persists it as a
+    // reference — we have rebuilt the reader-with-no-writer defect at the PRODUCT
+    // level, which is the exact class this program spent itself eliminating.
+    //
+    // The subject is chosen so the refusal MEASURES something: a persisted
+    // `neighbourNetwork` row genuinely CARRIES an identity (saves.js writes
+    // `{ id, name, neighbourName, neighbourTier, tier, relationshipType, … }`), so the
+    // id below is real input the producer must DROP rather than a straw value that was
+    // never there. The realistic regression is someone making the label clickable —
+    // "link the road to the neighbour's dossier" — which propagates `id` onto the
+    // annotation and is precisely the moment the label becomes an entity.
+    const ann = buildEdgeAnnotations(model(), withNetwork([
+      { id: 'save-7f3a', name: 'Ashford', relationshipType: 'trade_partner' },
+    ]));
+
+    // (0) LIVENESS FIRST, so a dead producer names ITSELF. Without this the key-set
+    // arm below reads `ann[0]` of an empty array and the suite reports a bare
+    // "TypeError: Cannot convert undefined or null to object" — a true failure with a
+    // message that points at the test instead of at the producer that went dark.
+    expect(ann.length, 'the producer emitted no annotation at all — fix it, not this pin').toBe(1);
+
+    // (1) THE TOTAL POSITIVE PREDICATE. An enumeration of forbidden keys fails open —
+    // it only refuses the identities someone thought to list. Exact key-set equality
+    // refuses EVERY key that is not display, including ones not invented yet.
+    expect(Object.keys(ann[0]).sort()).toEqual([
+      'align', 'neighborName', 'relationshipLabel', 'roadId', 'travelLabel', 'x', 'y',
+    ]);
+
+    // (2) …and the NAMED-CAUSE arm beside it. Two construction details were MEASURED
+    // by mutant, not reasoned — the obvious spelling of each was wrong:
+    //
+    //  • THE COLLECTION IS THE JOINED VALUE TEXT, NOT THE VALUE ARRAY. `toContain` over
+    //    an array is exact-ELEMENT equality, so an id SMUGGLED INTO an existing field
+    //    (`neighborName: name + id`) slips straight through an array form — the key set
+    //    is untouched and no element equals the id. Joining first restores substring
+    //    semantics, which is what "the identity must not reach the label" actually means.
+    //    Mapping over ALL annotations (not `ann[0]`) also means a producer that returns
+    //    [] yields '' rather than throwing, so the failure arrives as the helper's
+    //    message instead of a TypeError.
+    //
+    //  • THE ANCHOR IS THE RELATIONSHIP LABEL, NOT THE NAME. `neighborName` fails the
+    //    recorded anchor rule: the name is exactly what an id-leak CORRUPTS, so the
+    //    id-embedding mutant made the anchor itself vanish and the helper reported
+    //    "the whole collection drifted away" — the OPPOSITE of the truth, sending the
+    //    next reader hunting a dead producer while the real defect was a live producer
+    //    admitting an identity. `relationshipLabel` travels the SAME neighbour path (it
+    //    is derived from `nb.relationshipType` in the same push), so it dies of every
+    //    drift that would fake this green, yet is untouched by which string wins the
+    //    name slot — so the EXCLUSION arm fires and names the true cause.
+    const labelText = ann.map((a) => Object.values(a).map(String).join(' | ')).join(' || ');
+    expectAbsentWithAnchor(
+      labelText,
+      'save-7f3a',
+      'trade partner',
+      'a road label carries the neighbour NAME as display text and never its identity',
+    );
+  });
+
   it('NEGATIVE — the dead `neighbors` spelling labels nothing, beside a live neighbour that does', () => {
     // ⚠⚠ THE ANCHOR IS THE POINT, AND IT IS A LIVE SIBLING IN THE SAME RESULT rather
     // than a bare `toEqual([])`. A negative against a rendered/derived surface has a

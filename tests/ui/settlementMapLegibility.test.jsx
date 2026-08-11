@@ -12,6 +12,8 @@
 import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, within } from '@testing-library/react';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 import SettlementMapPane from '../../src/components/townMap/SettlementMapPane.jsx';
 import { makeTownFixture, makeFabricMirror } from '../fixtures/townMapFixtures.js';
 
@@ -114,6 +116,67 @@ describe('SM-5 — edge annotations (deliverable 3)', () => {
     stubMatchMedia(true);
     const { container } = render(<SettlementMapPane settlement={v2Fixture()} canEdit={false} saveId={null} />);
     expect(container.querySelectorAll('[data-town-edge-label]').length).toBe(0);
+  });
+
+  test('a neighbour-less town HIDES the Roads out section rather than heading an empty one', () => {
+    // ⭐ THE RULING (owner, 2026-08-11): a freshly generated settlement binds no
+    // neighbour — `neighbourNetwork` is written only by a DM's manual link or by
+    // saves.js — and generation must NOT invent a destination to fill the gap. An
+    // ABSENT section is honest; an empty heading implies data went missing.
+    //
+    // ⚠⚠ THIS NEGATIVE HAS THE RENDERED-SURFACE VACUITY: "the drawer does not say
+    // 'Roads out'" is equally true when the section is correctly absent AND when the
+    // drawer never mounted, the pane threw, or the toggle stopped selecting. So the
+    // refusal is anchored on a LIVE SIBLING SECTION INSIDE THE SAME DRAWER — the
+    // surveyor's read, which this v2 fixture legitimately lights. The anchor dies of
+    // every drift that would fake this green, and survives the regression actually
+    // being guarded (a RoadsSection that renders its heading on an empty list), so
+    // the EXCLUSION arm is the one that fires and it names the true cause.
+    stubMatchMedia(true);
+    const { container } = render(<SettlementMapPane settlement={v2Fixture()} canEdit={false} saveId={null} />);
+    fireEvent.click(container.querySelector('[data-town-notes-toggle]'));
+    const drawer = container.querySelector('[data-town-notes]');
+    expect(drawer).toBeTruthy();
+    expectAbsentWithAnchor(
+      drawer.textContent,
+      'Roads out',
+      'The surveyor',
+      'an exit-road section with nothing honest to say is absent, not empty',
+    );
+  });
+
+  test('a rendered road label is inert text — it never becomes a link to a settlement', () => {
+    // ⭐ THE PIN THAT MATTERS MOST, at the CONSUMER end. `buildEdgeAnnotations` is
+    // pinned to emit no identity (tests/domain/townMapEdgeAnnotations.test.js); this
+    // is the other half — nothing downstream may TREAT the label as an entity. The
+    // moment a road label becomes a link, a lookup, or a stored reference, the name
+    // has been promoted to a settlement identity and the defect is rebuilt.
+    //
+    // The liveness anchor here is STRUCTURAL and executed: `getByText` THROWS when the
+    // label is missing, so every assertion below is reached only on a surface that
+    // genuinely rendered the label.
+    stubMatchMedia(true);
+    const settlement = {
+      ...v2Fixture(),
+      neighbourNetwork: [{ id: 'save-7f3a', name: 'Ashford', relationshipType: 'trade_partner' }],
+    };
+    const { container } = render(<SettlementMapPane settlement={settlement} canEdit={false} saveId={null} />);
+    fireEvent.click(container.querySelector('[data-town-notes-toggle]'));
+    const drawer = container.querySelector('[data-town-notes]');
+    const row = within(drawer).getByText(/→ Ashford/);
+
+    // it is plain text: not an anchor, not a button, carrying no navigation target
+    expect(row.closest('a')).toBeNull();
+    expect(row.closest('button')).toBeNull();
+    expect(row.closest('[role="link"]')).toBeNull();
+    expect(row.closest('[role="button"]')).toBeNull();
+    // …and the persisted row's identity reached no rendered attribute anywhere in the
+    // drawer or on the map — the label travelled as a STRING, alone.
+    expect(drawer.querySelector('[data-settlement-id],[data-neighbour-id],[data-neighbor-id],[data-save-id]')).toBeNull();
+    expect(drawer.innerHTML.includes('save-7f3a')).toBe(false);
+    expect(container.querySelector('[data-town-edge-labels]').innerHTML.includes('save-7f3a')).toBe(false);
+    // the on-map sign is non-interactive by construction, so it cannot become a target
+    expect(container.querySelector('[data-town-edge-labels]').style.pointerEvents).toBe('none');
   });
 });
 
