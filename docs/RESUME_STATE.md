@@ -197,22 +197,44 @@ from THIS note.):**
    sightings. ⚠ A validator run against a tree another lane is EDITING gave a transient
    FALSE `index=BLOCKED`; a re-run at a settled moment read READY.
 
-2. **ES-6a IMPLEMENTATION LANE (Opus) — in flight.** The double agent's leak.
-   ⛔ **It does NOT hold the census reservation** — it MEASURES and REPORTS its five figures
-   and I fold them, per the collision ruling.
-   ⚠⚠ Its four hazards: ⛔ `FIDELITY_W = 0.7` is chair-set and untunable, and **A4 must
-   prove BOTH SIDES of the adoption boundary**; ⭐ **A6's silent-success guard MUST be a
-   DIFFERENTIAL, never a token scan** (a token scan passes when the leak is absent for the
-   wrong reason and convicts prose) — assert the subject's own outcome is BYTE-IDENTICAL
-   with and without the leak; ⭐ **A3's two-party existence leak is mandatory or the
-   patron-is-target case WRITES NOTHING**; and ⚠⚠ the corruption-web→products pair is
-   **SAME TICK**, so a `tick-1` window would be dead exactly as ES-5d's was — **a lag
-   belongs to a PAIR, never a file.** ⛔ No new belief key (owner-gated + a §1 breach).
-   Report: tasks/a89881302de45a7b0.output.
+2. **✅✅ ES-6a IS LANDED @ `53d538b4` + record `133e300f`.** validate:packets **14 / 0
+   READY** — board clear. The double agent leaks while the mission succeeds silently.
+   ⭐ **A4's BOUNDARY IS PROVEN ON BOTH SIDES, exactly where I derived it:** the crossing is
+   `0.6/0.7 = 0.857142`, so a home read of **0.9 leaks 0.63 and the patron ADOPTS
+   `hostile`**, while **0.8 leaks 0.56 and the patron KEEPS `allied`** with only confidence
+   moving. The value's meaning now lives in a test, not in prose.
+   ⭐ **A7 IS A TRUE DIFFERENTIAL:** clean and leashed runs are byte-identical across the
+   ENTIRE WORLD minus the patron slice, and the plant proves it live — a falsified report
+   landed against the HOME observer through the real writer executes and reds it. A token
+   scan would have passed while the leak was absent for the wrong reason. A3 derives the
+   leaking-kind set from `resolveLeash`'s OWN betrayal-seed output, so a new leash kind
+   cannot silently escape.
+   **ZERO goldens moved**, every Dormancy golden unmoved, and exactly ONE test moved across
+   28,107 — the census, folded here to **`2395/365/2030/19719/5568`** (the lane REPORTED its
+   delta per the reservation ruling and measured it by setting its own untracked files
+   aside and restoring them md5-exact). First-paint chunk **561.61 kB unmoved**, both
+   typecheckers at exact floors with zero new errors.
+   ⚠ **THREE RECORDED, NOT SMOOTHED:** the `sourceId` spellings DIVERGE (`<home>#<roster>`
+   vs the errand's `durableId || rosterId`) — inert today, but **a future wave passing a
+   credibility closure must reconcile first or O9 breaks**; A7(iii) as worded is
+   UNREACHABLE (arm 2 is a CONFIRM and takes the honesty refusal) so it is pinned in its
+   reachable form; and **two files beyond the manifest were required for the registration —
+   as they were for ES-5b, 5c and 5d, which makes it a TEMPLATE GAP, not four oversights**
+   (banked in memory/implementation-packet-dispatch-system.md).
+   ⚠⚠ **I MISDIAGNOSED THE VALIDATOR FAILURE.** I called it a mid-write race and "confirmed"
+   it by re-running — but the lane had genuinely broken `validate:packets` by putting prose
+   containing **BLOCKED** in an INDEX status cell, and had quietly fixed it before my
+   re-run. **The re-run appeared to support a false diagnosis.** The recorded trap is now
+   twice-proven: a status cell carries EXACTLY ONE status token. **When a validator fails
+   against a shared tree, check whether a lane FIXED it before concluding it was
+   transient.**
 
-Both know the two pre-existing gate reds to attribute rather than chase, that no exit
-status is trusted unless they captured it themselves, and that a background run cannot
-wake a stopped lane.
+**NEXT: ES-7** is the espionage tail's next compile candidate (it absorbs ES-6c's
+retroactive Herald clause). ⚠ **ES-6b is BLOCKED on a DISPATCHER wave nobody has
+chartered** — its only consumer has zero production callers, the volume's declared
+build-doors-before-traffic shape. Also queued: **TC-5b** (mount + colour binding +
+degraded states), the consolidated **schema-5 mint** (M6 filter + the two write-shape
+blindnesses + the M8 router), and **IA-2** revalidation.
 
 **Ruled and sequenced (not blocked):**
 
