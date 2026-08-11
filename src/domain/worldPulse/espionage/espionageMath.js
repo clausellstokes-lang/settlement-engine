@@ -76,8 +76,16 @@ function n01(value) {
   return number < 0 ? 0 : number > 1 ? 1 : number;
 }
 
-/** @param {number} value @returns {number} */
-function round4(value) {
+/**
+ * ES-5b EXPORTED, ONE WORD, ZERO BEHAVIOR CHANGE. `round4` is not in kernel/math.js
+ * (measured: only `clamp01` is), and the estate's two other exported `round4`s live in
+ * npcLadderState.js (INTERIOR) and peaceTermsPrimitives.js (GRAMMAR) — importing either
+ * from an INFO leaf would mint a cross-layer pair FOR A ROUNDING HELPER. The espionage
+ * family already defines its own; exporting it keeps the borrow INFO→INFO and mints no
+ * second spelling.
+ * @param {number} value @returns {number}
+ */
+export function round4(value) {
   return Math.round(value * 10000) / 10000;
 }
 
@@ -179,6 +187,18 @@ export const ESPIONAGE_TUNING = Object.freeze({
   TELL_CAP: 3,
   CAUGHT_CAP: 2,
   MISS_GRACE_TICKS: 6,
+
+  // §3.11 THE ABSENCE COST. A LONE weight on a SINGLE ratio (away members over roster),
+  // so `presentShare01 ∈ [0.5, 1]`: a faction whose entire roster is abroad loses HALF
+  // its council and contest weight, never all of it. Set BY PARITY under CR-ES5B-6 —
+  // seven of the family's ten `*_W` keys are exactly 0.5, and the three that are not are
+  // split-term weights apportioning inside a multi-term sum, which this is not. Its
+  // structural twins are NOTOR_W, WARINESS_W and both weights of §3.14 below — §3.14 is
+  // THE OTHER GRAIN OF THIS SAME AMENDMENT, so any other value here would be the anomaly.
+  // ⛔ CHAIR-AUTHORED DARK TUNING. Individually vetoable, engine-inert while the flag is
+  // dark, and re-ratified under the owner's tuning signature at soak. It is NOT tuned to
+  // make a test pass, and never to dodge a consolidation-floor crossing.
+  ABSENT_W: 0.5,
 
   // §3.12 DELIBERATION.
   DELIBERATION_CONF_FLOOR: 0.5,

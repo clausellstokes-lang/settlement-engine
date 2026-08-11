@@ -92,6 +92,18 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/corruptionImpair.js',
     'src/domain/worldPulse/corruptionWeb.js',
     'src/domain/worldPulse/disposition.js',
+    // ES-5b §3.11 THE ABSENCE COST: a RAW roster read, and it is the ONE disposition in
+    // this table where the gate would not merely be unnecessary but would INVERT the
+    // feature. `presenceSharesFor` indexes `settlement.npcs` to ask, of each faction
+    // member, whether they are traveling/visiting/returning — i.e. it exists precisely to
+    // find the people the participation view removes. Read through the gate, every away
+    // member would be absent from the index, score ZERO away under the leaf's own
+    // absent-is-not-away rule, and the discount would report a full court forever while
+    // looking perfectly healthy. Participation-INDEPENDENT by construction, and hostages
+    // are excluded on the leaf's own terms (§3.11 excludes them BY NAME — they are already
+    // off-stage and are not fined twice) rather than by inheriting isOffStage. Dark by
+    // default: `espionageActive` refuses before the roster is touched at all.
+    'src/domain/worldPulse/espionage/espionagePresence.js',
     'src/domain/worldPulse/factionCapture.js',
     // D-7e clause (i) (round-3 F3): seatGratitudeSevToward reads the persisted LADDER
     // record's `.npcs` STANDINGS map (priorLedger[sid].npcs — ladder state, never the

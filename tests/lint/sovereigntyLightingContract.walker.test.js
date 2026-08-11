@@ -3489,7 +3489,63 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // measurement time, so the live read and the committed read of 5afe9b2e are the same
     // read — the distinction that has bitten before does not arise here, and it is stated
     // rather than assumed away.
-    files: 2385, parked: 364, credited: 2021, titles: 19577, suiteTitles: 5527,
+    //
+    // ── RE-DERIVED 2026-08-11 BY THE OPUS ES-5b LANE, AT 4fc1d0c7 + ES-5b's OWN EDIT ──
+    // ⏳ OPUS-ERA — FABLE VALIDATION OWED. 2385/364/2021/19577/5527 →
+    // 2387/364/2023/19594/5535. ONE landing moved it — ES-5b, which mints the two test
+    // files its packet's manifest items 6 and 7 mandate — and the census is re-derived
+    // IN THE SAME CHANGE that moves it, because a new test file reds this walker
+    // immediately and a red walker is a DISABLED GUARD, not debt to hand on.
+    // ⚠⚠ ALL FIVE FIGURES RE-DERIVED IN ONE RUN, NONE PATCHED. The sequence hazard has
+    // now fired three recorded times by someone moving `files` alone; this census stops
+    // at its first red figure, so a patched `files` silently leaves four stale figures
+    // standing behind it and re-greens a census that is measuring nothing.
+    //   files      2385 -> 2387  (+2)
+    //   parked      364 ->  364  ( 0)  compared BY IDENTITY, not by count: the sorted
+    //                                  parked-path list hashes to f027e46184463eb0 at
+    //                                  BOTH ends, so ZERO files park and ZERO unpark —
+    //                                  an identity swap at constant count would pass a
+    //                                  count check and is excluded here by construction
+    //   credited   2021 -> 2023  (+2)  the whole file-layer delta lands in credit, and
+    //                                  364 + 2023 = 2387 closes the file arithmetic
+    //   titles    19577 -> 19594 (+17)
+    //   suiteTitles 5527 -> 5535  (+8)
+    //
+    // ── THE DECOMPOSITION, FILE BY FILE, SO THE ARITHMETIC CLOSES AS A DERIVATION ──
+    // Per-file liveTitlesIn/liveSuiteTitlesIn were dumped for EVERY credited file at BOTH
+    // ends and diffed, so the aggregates above are a second reading rather than a
+    // restatement of the first. The whole movement is TWO NEW FILES and nothing else:
+    //   +8 titles, +5 suite … tests/domain/espionagePresence.test.js      (A1/A3/A4/A6/A7)
+    //   +9 titles, +3 suite … tests/property/espionageAbsenceDormancy.test.js (A2/A5/A8)
+    //   8+9 = 17 and 5+3 = 8, which is the whole movement, closed.
+    //
+    // ⭐ ZERO ALREADY-CREDITED FILES WERE AMENDED, MEASURED RATHER THAN ASSUMED — and this
+    // wave DID edit three existing test files, which is exactly when that assumption goes
+    // wrong. tests/domain/couplingRegistry.test.js (one import + one array row),
+    // tests/property/espionageProductsDormancyFence.test.js (one array member) and
+    // tests/domain/roadsParticipation.test.js (one census row) each read IDENTICALLY at
+    // both ends: their edits add array members and comments, and neither mints a title.
+    // The per-file diff above is what proves it — the ONLY two rows it reports are the
+    // two new files.
+    //
+    // ⭐ THE TITLE FIGURES ARE READ TWICE, BY TWO INSTRUMENTS THAT SHARE NO CODE. Beside
+    // this file's parser, `vitest list` over the two new files — the real runner
+    // registering the real tests — enumerates 8 and 9 rows and 5 and 3 distinct suite
+    // paths. That is the classifier's +17 and +8 confirmed from outside the classifier.
+    //
+    // ⭐ THE NEGATIVE CONTROL, WHICH IS WHAT SEPARATES AN ESTATE MOVE FROM AN INSTRUMENT
+    // MOVE: the whole tree of committed 4fc1d0c7 — the commit that recorded the five
+    // figures this row replaces — was materialised OUTSIDE the repo (6,281 tracked paths
+    // in, 6,281 files out) and re-measured by the CURRENT classifier, with only its ROOT
+    // redirected. It read back 2385/364/2021/19577/5527, the previous row EXACTLY, and
+    // its parked set hashed to the SAME f027e46184463eb0. So no rule widened or narrowed
+    // and every delta above is the estate.
+    // ⚠ WHICH BYTES: the live half of that comparison is an UNCOMMITTED working tree —
+    // this wave's own edit, measured before it landed — so the two reads are deliberately
+    // NOT the same read, and the difference between them IS the thing being measured.
+    // That is the opposite of the previous re-derivation's situation and it is stated
+    // rather than assumed away.
+    files: 2387, parked: 364, credited: 2023, titles: 19594, suiteTitles: 5535,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

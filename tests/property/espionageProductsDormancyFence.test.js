@@ -296,9 +296,15 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
     // visibility predicate does NOT, because it is a counting function over rows its caller
     // already holds and its dormancy is the gauntlet's. That distinction is asserted rather
     // than left to be inferred from a list nobody reads twice.
+    // ⏱ ES-5b ADDS ONE MEMBER, AND IT IS THE FIRST GATED LEAF WITH PRODUCTION IMPORTERS
+    // OUTSIDE THE FAMILY. `espionagePresence.js` is read by settlementPolitics.js and
+    // factionCompetition.js, so it cannot inherit anybody's dormancy the way the
+    // visibility predicate does — its `presenceSharesFor` composer must refuse at the ONE
+    // door itself, before it touches a world object, or a dark world stops being
+    // byte-identical. That is exactly why it gates and the counting leaf beside it does not.
     expect(gated).toEqual([
       'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
-      'espionageMissions.js', 'espionageProductStage.js',
+      'espionageMissions.js', 'espionagePresence.js', 'espionageProductStage.js',
     ]);
     // The visibility predicate is a REAL module in the family that deliberately carries no
     // gate, so its exclusion is anchored by a gating sibling that travels the same scan.

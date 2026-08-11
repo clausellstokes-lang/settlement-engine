@@ -50,6 +50,7 @@ import {
   ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
   ES3_FLAW_DISTORTION_COUPLING,
   ES3_GRADIENT_AMENDER_COUPLING,
+  ES5B_ABSENCE_BENCH_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
@@ -617,6 +618,9 @@ describe('CW-0 coupling registry', () => {
       ES3_GRADIENT_AMENDER_COUPLING,
       ES3_FLAW_DISTORTION_COUPLING,
       ES5_DOCTRINE_MORAL_LADDER_COUPLING,
+      // ES-5b appends in wave order (the array is wave-ordered, not alphabetical), so the
+      // bench row lands after ES-5's doctrine row rather than beside its ES5-prefixed name.
+      ES5B_ABSENCE_BENCH_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

@@ -1493,7 +1493,21 @@ and `sovereigntyTradeEnabled`'s green condition cites all three wave ids.
 Req 13: declared-empty (wiring); req 14: engine-only.
 
 **ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT (fourth slice; needs
-Q1 signed for the absence arm).** Charter: the doctrine STAGE
+Q1 signed for the absence arm).**
+⚠⚠ **THIS CHARTER IS SPLIT ACROSS THREE WAVES AND NO LONGER DESCRIBES ANY ONE OF
+THEM. It is kept whole because it is the amendment's argument** — CR-ES5B-1
+ratifies the slice rather than rewriting the reasoning. The mapping, binding:
+**ES-5a** = the doctrine STAGE + the dispatch cadence + `wariness01` + the IN-3
+handshake — **LANDED at `41ddeae0`**. **ES-5b** = `presentShare01` and the bench
+grain (§3.11): the council-weight discount at `rulingBlocOf` AND the contest
+weight at `topFactionEntries`. **ES-5c** = THE CAREER CONSUMERS (§3.14) below —
+NOT compiled, and it inherits the naming drift `promotionRiskOf` →
+`promotionRisk01Core`. ⛔ "BOTH GRAINS … IN THE SAME COMMIT" below is the ES-5a
+draft's sentence and is SUPERSEDED: the grains ship in two commits, under ONE
+CR-ES-1 signature (CR-ES5B-3). ⛔ And §3.11's "with no further code" claim is
+FALSE as measured — `factionCompetition.js` holds no bloc read at all, so ES-5b
+BUILDS the reach on that file's real contest weight (`entry.power`) rather than
+inheriting one. Charter: the doctrine STAGE
 (`espionageDoctrineStage.js` — gathers words off worldState/snapshot,
 returns null when dark; the conquestDoctrineStage split) + autonomous
 dispatch cadence (doctrine frequency01 × the deliberation read × candidate
@@ -1574,9 +1588,14 @@ names the doctrine words each kind may speak; req 14: THE EDIT-VERB WAVE —
 the one player/DM surface, named. Collision: heraldRouting (525) +
 compendium regen (additive).
 
-**Wave count: 8.** Dependency spine: ES-0 (free) → ES-1 (SP-D) → ES-2 →
-ES-3 (SP-B for the full arm) → ES-4 (SP-B2; the discharge) → ES-5 (Q1) →
-ES-6 → ES-7 (IN-5). No wave edits pulseKernel.js or applyWorldPulse.js
+**Wave count: 9.** Dependency spine: ES-0 (free) → ES-1 (SP-D) → ES-2 →
+ES-3 (SP-B for the full arm) → ES-4 (SP-B2; the discharge) → ES-5a → ES-5b
+(Q1) → ES-6 → ES-7 (IN-5). ES-5 was ONE wave when this count was written; the
+a/b split was taken inside ES-5a's landing commit `41ddeae0` for BUDGET (both
+grains modify five logic-bearing production files against a limit of three) and
+RATIFIED by CR-ES5B-1. ⚠ The CAREER grain is **ES-5c** and is not in this count:
+it compiles only after ES-5b lands (CR-ES5B-7). One CR-ES-1 signature covers
+ES-5b and ES-5c both (CR-ES5B-3) — the split is budget, never scope. No wave edits pulseKernel.js or applyWorldPulse.js
 (banked, zero headroom — L1); every mount is the errand advance's own stage
 walk or the lifecycle host.
 
@@ -1647,10 +1666,12 @@ section. It is written to be landed verbatim:
    PHASE 3 (INFORMATION) immediately after #19 IN-3 (so the suspicionOf
    handshake lands one-sided-then-joined); ES-4 lands directly after ES-3
    **and is the third member of the CR-WR10-H discharge** (see 5 below);
-   ES-5/ES-6 follow; ES-7 lands after #21 IN-5 (the knowledge desk exists).
+   ES-5a/ES-5b/ES-6 follow; ES-7 lands after #21 IN-5 (the knowledge desk
+   exists).
    The phase-3 header amends from "SOL_QUEUE row 13; IN §4" to "SOL_QUEUE
    row 13; IN §4 + the ES owner-amendment family (this volume)". The wave
-   count amends 60 → 68.
+   count amends 60 → 69 (68 at the fold; ES-5 split into ES-5a/ES-5b —
+   CR-ES5B-1).
 4. **§9 THE SEAM MATRIX — rows 46-58:** the THIRTEEN rows of §5 above join
    the matrix under prefix ES; the matrix count amends 45 → 58.
 5. **THE WR-10 LIGHTING CONVERGENCE ⟨F9⟩ (amends FP §3's closing paragraph

@@ -824,7 +824,7 @@ payload builder returns through veilPublicPayload (standing law).
 
 ---
 
-## §5 THE WAVES (108 waves, dependency-ordered ACROSS programs; each: one
+## §5 THE WAVES (109 waves, dependency-ordered ACROSS programs; each: one
 ## commit per wave/slice, focused gates per slice, full gate at wave end
 ## through check:tail / gate-tail.sh, ledger row; every flagged wave DARK per
 ## §3; the per-program architecture file carries the full spec — the block
@@ -837,8 +837,11 @@ wave's block names sanctioned parallelism.
 
 THE FOLDED WAVES CARRY THEIR VOLUME IDS, NOT COMPILED NUMBERS (JUDGMENT,
 vetoable — recorded here rather than taken silently). The 2026-08-05
-owner-amendment fold inserts eight ES waves and seven WY engine waves into
-this order: 60 + 8 + 7 = **75**. They are inserted AT the position each
+owner-amendment fold inserts nine ES waves and seven WY engine waves into
+this order: 60 + 9 + 7 = **76**. (Eight at the fold; ES-5 split into ES-5a and
+ES-5b — CR-ES5B-1, 2026-08-11, which RATIFIES the a/b slice taken inside the
+ES-5a landing commit `41ddeae0` and amends every count it moved. The slice is a
+BUDGET boundary, not a scope change: one CR-ES-1 signature still covers both.) They are inserted AT the position each
 volume's queue clause names and are read in document order like every other
 wave, but they keep their `ES-`/`WY-` ids rather than renumbering #1..#60 —
 renumbering would rot every live cross-reference to a numbered wave
@@ -1369,18 +1372,29 @@ OWNER-QUEUE ROWS (EP §7a rows 1 and 2); §7a carries FOUR parked rows in total 
 the figure is pinned at four by chair ruling P4 and an implementer inheriting
 two is reading a superseded revision.
 
-**ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT** (fourth slice; the
-absence arm rides CR-ES-1, SIGNED; ES §4). Charter: the doctrine STAGE
+**ES-5a — DOCTRINE ENGAGED** (fourth slice, first half; **LANDED at
+`41ddeae0`**; ES §4). Charter: the doctrine STAGE
 (`espionageDoctrineStage.js` — gathers words off worldState/snapshot, returns
 null when dark; the conquestDoctrineStage split) + the autonomous dispatch
 cadence (doctrine frequency01 x the deliberation read x candidate
 availability — the court decides to spy, keyed-hash, receipted in doctrine
 words, setting the mission DEMAND) + `wariness01` wired into the gauntlet +
 the IN-3 `suspicionOf` handshake (ONE derivation; ES consumes it lit, derives
-minimally dark). THE ROADS LAW-5 AMENDMENT (CR-ES-1): a flag-gated GRADED
-COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first consumer; `isOffStage`
-UNTOUCHED; dark worlds byte-identical; the lit shift disclosed. The literal
-full-off-stage reading is REFUSED as implementation.
+minimally dark).
+
+**ES-5b — THE ABSENCE AMENDMENT, THE BENCH GRAIN** (fourth slice, second half;
+the absence arm rides CR-ES-1, SIGNED — ONE signature covers ES-5b and ES-5c,
+CR-ES5B-3; ES §4). Charter: THE ROADS LAW-5 AMENDMENT (CR-ES-1): a flag-gated
+GRADED COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first consumer;
+`isOffStage` UNTOUCHED; dark worlds byte-identical; the lit shift disclosed.
+The literal full-off-stage reading is REFUSED as implementation. The discount
+lands at BOTH places §3.11 names — `rulingBlocOf`'s power sum (the bench) and
+`topFactionEntries`'s contest weight (the contest math) — because §3.11's
+"factionCompetition read[s] the same bloc weights … with no further code" is
+FALSE as measured: that file holds no bloc read of any kind, so the reach is
+BUILT on the contest weight it actually has. The CAREER grain (§3.14's
+promotion-risk register into the ladder contest) is split to **ES-5c**, which
+compiles only after ES-5b lands (CR-ES5B-7) and is NOT re-gated.
 
 **ES-6 — THE DOUBLE AGENT** (fifth slice; degraded-dark when the corruption
 web is dark; ES §4). Charter: the leash read at dispatch (deterministic,
@@ -2991,7 +3005,7 @@ docs/DESIGN_FP_ARCH_WY.md (WAYFARE), and — folded 2026-08-07 — the three
 further owner-amendment volumes docs/DESIGN_FP_ARCH_HB.md (HABIT),
 docs/DESIGN_FP_ARCH_WC.md (WAR CIRCULATION) and docs/DESIGN_FP_ARCH_EP.md
 (ADVANCE EPOCH), each normative where this volume
-compresses it. 45 refuted premises bound, 108 waves ordered, 63 flags
+compresses it. 45 refuted premises bound, 109 waves ordered, 63 flags
 manifested, 14 new sub-ledgers priced, 112 seams pinned (45 here, ES 46-58, WY
 59-66, HB 67-79, WC 80-102, EP 103-112 — per-row in the five volumes). Where
 this volume compresses, the

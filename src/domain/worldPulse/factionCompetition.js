@@ -11,6 +11,9 @@ import { governingCoalition } from './beliefMap.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { governingFactionOf } from '../rulingPower.js';
+// ES-5b — a REAL cross-layer pair (INFO→INTERIOR), TAKEN rather than avoided, and
+// licensed in this same commit by CPL-20 `ES5B_ABSENCE_BENCH_COUPLING`. Never baselined.
+import { presenceSharesFor } from './espionage/espionagePresence.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -167,17 +170,50 @@ function standingInstitutionFor(item, target) {
   return target;
 }
 
-/** @param {any} item */
-function topFactionEntries(item) {
+/**
+ * The top three factions and their CONTEST WEIGHT — the one producer of `entry.power`,
+ * which four candidate rules read as a severity term and `candidateBase` records as
+ * `metadata.power`.
+ *
+ * ES-5b — §3.11 THE ABSENCE COST. Under `espionageActive` a faction's contest weight is
+ * discounted by the share of its roster that is abroad; `presenceSharesFor` returns null
+ * in a dark world, so every existing world takes the identical branch and is
+ * byte-identical. The arm is gated TWICE: candidateEvents.js admits `evaluateFactionRules`
+ * only when `factionCompetitionEnabled` is true, and the leaf refuses unless espionage is
+ * lit.
+ *
+ * ⭐ SELECTION STAYS ON RAW POWER, AND THAT IS THE LOAD-BEARING JUDGMENT (D8, chair
+ * CONFIRMED at §13b). This function does two jobs in one expression: it computes a
+ * WEIGHT and it SELECTS which three factions are evaluated at all. Discounting the sort
+ * key too would let a lightened faction fall OUT of the evaluated set and silence all
+ * four of its rules — a coverage cliff, and the opposite of the amendment's intent, which
+ * is that an absent faction WEIGHS less, not that it DISAPPEARS. `rawPower` is carried
+ * solely for the sort; nothing else reads it, and it equals the pre-change `power`
+ * exactly, so the candidate SET is byte-stable in every world.
+ *
+ * ⚠ THE DECLARED ONE-TICK LAG (§0.2, CR-ES5B-2). The share reads a whereabouts mirror
+ * `advanceRoads` does not write until the consequence_fold stage, LATER in this same
+ * tick, so this consumer — like the two bloc consumers — sees LAST tick's whereabouts.
+ * The lag is uniform at exactly one tick, it is forced (L1 banks pulseKernel.js), and it
+ * is pinned rather than left to be rediscovered. See espionagePresence.js's header.
+ * @param {any} item @param {unknown} [worldState]
+ */
+function topFactionEntries(item, worldState = null) {
+  const shares = presenceSharesFor(worldState, item);
   return settlementFactions(item)
-    .map((/** @type {any} */ faction, /** @type {any} */ index) => ({
-      faction,
-      index,
-      id: factionId(item.id, faction, index),
-      power: factionPower(faction, index),
-      archetype: inferFactionArchetype(faction),
-    }))
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.power - a.power)
+    .map((/** @type {any} */ faction, /** @type {any} */ index) => {
+      const id = factionId(item.id, faction, index);
+      const rawPower = factionPower(faction, index);
+      return {
+        faction,
+        index,
+        id,
+        rawPower,
+        power: shares ? clamp01(rawPower * (shares.byFactionId.get(id) ?? 1)) : rawPower,
+        archetype: inferFactionArchetype(faction),
+      };
+    })
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.rawPower - a.rawPower)
     .slice(0, 3);
 }
 
@@ -915,7 +951,7 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
     const crime = pressure(pressureIdx, item.id, 'crime');
     const food = pressure(pressureIdx, item.id, 'food');
     const disease = pressure(pressureIdx, item.id, 'disease');
-    const entries = topFactionEntries(item);
+    const entries = topFactionEntries(item, snapshot.worldState);
 
     for (const entry of entries) {
       const state = snapshot.worldState.factionStates?.[entry.id];

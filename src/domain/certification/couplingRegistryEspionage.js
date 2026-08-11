@@ -337,6 +337,75 @@ export const ES5_DOCTRINE_MORAL_LADDER_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-5b / INFO→INTERIOR. AN ABSENT FACTION WEIGHS LESS IN THE COURT DECIDING WITHOUT IT.
+ *
+ * §3.11 (J-ES-9) discounts a faction's weight by the share of its roster that is abroad,
+ * at BOTH of the places the volume names: the council bench (`rulingBlocOf`'s power sum,
+ * the chokepoint feeding `coalitionConsolidation01`, `blocDecisionFactor` and the ladder's
+ * `blocBacked` boolean) and the contest math (`topFactionEntries`'s per-faction weight,
+ * which feeds all four faction-rule severities). The INTERIOR contest reader importing the
+ * INFO leaf is a REAL cross-layer pair, and this row is the license that lets it land
+ * VISIBLY. It was the alternative to the wrong cure: rev 1 avoided the pair by dropping
+ * the edit, which deleted §3.11's entire named reach while keeping its whole disclosed
+ * cost. The registry exists precisely so a designed coupling can be recorded rather than
+ * abandoned.
+ *
+ * ⚠⚠ THE SECOND EDGE IS REAL AND THE RATCHET CANNOT SEE IT — CR-ES5B-4, RECORDED HERE
+ * BECAUSE NOTHING ELSE CAN RECORD IT. `settlementPolitics.js` reads the SAME leaf, and
+ * that read is just as cross-layer as this one. It mints NO pair key only because
+ * `scanCrossLayerPairs` iterates LAYERED importers and `settlementPolitics.js` matches no
+ * LAYER_PATTERNS entry — it is UNLAYERED debt, present in the unlayered baseline and not
+ * in ARGUED_UNLAYERED. That is FAIL-OPEN INVISIBILITY, not absence: the day that module
+ * acquires a layer home the edge appears from nowhere, and a reader who trusted the
+ * walker's silence would read it as new. It is ONE row rather than two because
+ * `licensingRows` joins per-`read`-module, so a second row with an unjoinable direction
+ * would assert nothing at all. The `ES5_DOCTRINE_MORAL_LADDER_COUPLING` precedent above is
+ * the same shape: a row recording its own asymmetry instead of letting it look consistent.
+ *
+ * THE COUNTERFORCE IS THE BENCH ITSELF, and it is a counterforce rather than a twin.
+ * `rulingBlocOf` divides a bloc's discounted power by the court's discounted total, so the
+ * discount reaches numerator and denominator together and a COURT-WIDE absence cancels
+ * exactly — only a faction that is MORE absent than its rivals loses ground. It also holds
+ * the floor: below `RULING_CONSOLIDATION_FLOOR` the read returns null, every decision
+ * factor collapses to exactly 1, and the discount stops being able to load anything at all.
+ *
+ * ⚠ NO RECEIPT IS MINTED ON THE BENCH SIDE, AND THE ADDRESS BELOW SAYS SO BY WHAT IT
+ * OMITS. The Herald voice is ES-7's; this wave writes no state and persists no receipt of
+ * its own. The one OBSERVABLE the discount leaves in the durable record is the contest
+ * side: a discounted `entry.power` reaches `candidateBase`'s `metadata.power` and the
+ * severities it feeds, and `compactOutcomeForHistory` carries both `severity` and
+ * `metadata` onto `pulseRecord.selectedOutcomes[]`. The address is therefore the CONTEST
+ * observable alone — measured, never hand-keyed from a line number.
+ *
+ * DARK ⇒ NOTHING: `presenceSharesFor` returns null on one `espionageActive` read before it
+ * touches a world object, so a dark world — including a roads-lit, espionage-dark one — is
+ * BYTE-IDENTICAL. The contest arm is gated twice over: `factionCompetitionEnabled` admits
+ * the rule family at all. The LIT shift is a DISCLOSED one-time bloc-math move under ⟨F6⟩,
+ * declared in the wave's commit and fenced by its own golden pair — never a silent
+ * re-record.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES5B_ABSENCE_BENCH_COUPLING = couplingRow({
+  // CPL-20 is the volume's own anchor for INFO × INTERIOR (DESIGN_FP_COUPLINGS §4), and
+  // ES-3's flaw-distortion row above already points at it in the OTHER direction. A wave
+  // never mints a twenty-third anchor where a canonical one fits.
+  couplingId: 'CPL-20.INFO_TO_INTERIOR.ES-5b.absence_bench',
+  pairId: 'CPL-20',
+  direction: 'INFO→INTERIOR',
+  read: 'src/domain/worldPulse/factionCompetition.js#topFactionEntries',
+  receiptField: 'pulseRecord.selectedOutcomes[].{severity,metadata.power}',
+  counterforce: 'src/domain/worldPulse/settlementPolitics.js#rulingBlocOf',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+    'factionCompetitionEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-5b',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -347,4 +416,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES3_GRADIENT_AMENDER_COUPLING,
   ES3_FLAW_DISTORTION_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
+  ES5B_ABSENCE_BENCH_COUPLING,
 ]);
