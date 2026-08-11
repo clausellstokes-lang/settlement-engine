@@ -150,79 +150,36 @@ is not a verdict.**
    lock/unlock line in the existing rows' voice and the owner vetoes or rewrites it; the
    wiring proceeds either way.
 
-**Live board (TWO lanes out):**
+**Live board (BOTH slots FREE; build tree clean at `0f85ced0`):**
 
-1. **GENERATION-DEFECT REPAIR LANE (Opus) — in flight, the most careful class of change
-   in this program.** `isPort` (one level too shallow, so **no settlement has ever been
-   generated as a port**) and `linkedInstitutionIds` (a bare `?.id` reading institutions
-   BEFORE they have ids, so it is unconditionally empty for every faction structural NPC —
-   breaking pillar-NPC ripple, successor ranking and the SuccessorPrompt dropdown).
-   Ordered: measure same-seed output before/after on fixed seeds and CHARACTERIZE the
-   change; enumerate EVERY moved golden with its cause (this wave legitimately WILL move
-   them — approved, but each must be named); stamp the one-time correction WITH ITS DATE
-   at each fix site so a future divergence report is explicable rather than alarming; and
-   ⛔ improve NOTHING adjacent, because an unapproved change riding an approved one
-   contaminates the shift. **STOP-and-report if the blast radius exceeds what the owner
-   was shown.** Report: tasks/aeda2de60d4eccfb1.output.
-
-2. **M6 FOLLOW-ON FREEZE LANE (Opus) — in flight.** CR-OSR-FREEZE-6-R1's deferral pays
-   off exactly as intended: M6 now arrives as an ORDINARY migration against a COMMITTED
-   baseline rather than a hand-supplied JSON. ⚠ **The 122-cleared figure is STALE** — the
-   baseline has shrunk twice since (2,164/1,499/395), so θ=0.80 is re-measured at HEAD.
-   ⛔ The detector stays BYTE-FROZEN at blob `0310fa9f` (mutant-proven to refuse even an
-   appended comment) — this is a POST-FILTER, never an edit. ⭐ CR-OSR-FREEZE-6's
-   **control pin is mandatory**: it must RED if the filter ever clears a class-(a) row
-   (⚠ keyed on the STRUCTURED tag, never the prose phrase which matches only 12 of 23),
-   driven as a mutant — and the lane is warned that **a mutant going red is not
-   automatically a pin that works; read WHICH ARM fired and confirm the message names the
-   actual cause.** The mechanical `--write` re-freeze is left as the CHAIR's post-commit
-   step. Ready-made tooling from the deferral round is reused, not rebuilt.
-   Report: tasks/a85a19d3459834398.output.
-
-⚠⚠ **THE MAIN WORKTREE MATCHES NO BRANCH — reported as OWNER_DECISION_QUEUE §13
-(`158624de`), NOT repaired** (memory/main-worktree-matches-no-branch.md). The Desktop tree
-is on the ledger branch but differs from its own HEAD by **4,537 files**, from the build
-branch by 4,538, from master by 2,255 — closest to master, identical to nothing. Cause and
-date unknown. ⚠⚠ **In that tree `git status` is NOT a safety check and `git commit -a`
-would commit thousands.** The private-index method is what makes ledger commits safe and is
-NOT optional — it starts from `read-tree HEAD`, so it is immune to the default index; every
-ledger commit this session lands exactly 1 file, verified. ⚠ DISCLOSED: the default index
-was FULLY staged (~5,350 paths) and I reset it to HEAD — no content touched, one
-`git add -A` to reproduce, but said out loud in case it was deliberate. ⚠ A harmless EMPTY
-commit `333fbf49` shares the real one's message: **chain plumbing with `&&`, not `;`, or a
-failed `add` still commits.** ⛔ Do NOT "fix" the tree — the build worktree is clean and is
-where all work happens.
-
-⭐ **THE SAME-SEED BLAST-RADIUS CENSUS IS DONE** (the generation lane's own child —
-memory/same-seed-blast-radius-census-method.md; ⚠ I mistook the quiet parent for a stalled
-lane and sent a status demand, then withdrew it: **a parent working through a child looks
-identical to a stopped one**, so check for CHILDREN before demanding status).
-⭐ **THE STRUCTURAL INSIGHT: nearly every determinism suite CANNOT MOVE** — they generate
-TWICE AT RUNTIME and compare the two results, so a deterministic change shifts both sides
-identically. Their real job is proving no NEW nondeterminism (an insertion-ordered
-`Set`/`Map` walk is the only way they can red).
-⚠⚠ **THE ONE COMMITTED HASH OVER A GENERATED SETTLEMENT is
-`generator-golden-master.json` (525 rows)** — it WILL move, expected and approved.
-Repo-wide there are only TWO snapshot assertions and ONE `.snap`. The scary-looking
-fingerprint modules are all safe: one has NO committed golden, one never sees a
-settlement, one reads NPCs only as counts.
-⚠ The exact committed COUNT pins are `generation.test.js`'s inline snapshot and
-`goldenViewModel.test.js.snap` — ⭐ `GOLDEN_SHIFT_LEDGER.md:910` records a past shift
-moving "exactly one value, headcounts.npcs 10 → 11", so that snapshot IS npc-count
-sensitive and is the CANARY that this fix adds no NPCs.
-⚠⚠ **THE RESIDUAL NOBODY ASKED ABOUT, and the sharpest find:
-`settlement.generationCoherenceReceipt` is a PERSISTED IN-PIPELINE surface minted at
-`assembleSettlement.js:248` — the very NEXT STATEMENT after the fix's call site at `:237`.**
-`collectStrings` RECURSES INTO ARRAYS, so a newly-non-empty `linkedInstitutionIds[0]`
-becomes a new generated string through four scanners. Judged safe BY READING, not
-execution — the lane is ordered to DRIVE it. Two tail risks: a finding appended at a new
-path while the same verdict already fires elsewhere (persisted bytes move, `status` does
-not), and the finding lists **`break` at >= 25** so an inserted finding can EVICT a later
-one — both only on settlements already at `needs_review`.
-⚠ ONE GENUINELY UNCERTAIN GATE remains: `observedShapeReaders.walker` — whether
-`linkedInst` still grounds and re-mints `id on institutions` was REASONED, not executed,
-and that baseline is EXACT and BIDIRECTIONAL (a row that GOES reds as `stale` exactly like
-one that appears). Ordered run ALONE, first.
+**✅✅ THE OWNER-APPROVED SAME-SEED CORRECTION IS LANDED @ `0f85ced0`.** Ports now
+generate (2 of 2 port-to-port road edges correctly prefer sea) and 20 of 80 structural
+officers carry an institution link where none ever did.
+⭐ **`linkedInstitutionIds` was THE WRONG IDENTITY, not a late binding** — measured
+**3632 of 3632 institutions carry NO `id`**. The join law is `i?.id || i?.name`
+(`propagate.js:478`; `EventComposer.jsx:332` builds the DM picker identically), so a
+GENERATED link and a DM-AUTHORED link are now **the same string**.
+⭐⭐ **THE FORCED-FIELD TECHNIQUE PROVED CONFINEMENT rather than asserting it:** re-hash
+every settlement with the new field forced back to `[]` and require the OLD manifest to
+reproduce — **525/525 rows, 0 unexplained**. Exactly one golden file moves, 25 of 525
+rows. Use this for every future same-seed change.
+⚠ **THE GOLDEN IS REGISTERED, NOT RE-RECORDED** (this tree's own
+`GOLDEN_SHIFT_LEDGER_MAIN.md` discipline): manifest byte-identical, `generatorGoldenMaster`
+**RED BY DESIGN** pending the owner's batched `UPDATE_GOLDEN`, SHIFT-2 appended with all
+25 before→after hashes. **A registered red with a one-command cure is neither debt nor a
+regression.** The `headcounts.npcs` canary held — no NPCs added.
+⭐ The `generationCoherenceReceipt` residual is CLOSED BY DRIVING, not reading: bytes
+identical on all six probed, findings 0 (far from the 25 cap). OSR shrink ZERO, confirmed.
+⚠⚠ **FOUR OF THE TWENTY NEW LINKS ARE ABSURD — and the repair only made it VISIBLE.**
+`/council|court|hall|government/` matches any "…hall", so a **Lord Mayor links to
+"Gambling halls"**. A PRE-EXISTING `FACTION_ROLES` defect; the lane REFUSED to narrow it,
+correctly — that would be **a second, unapproved same-seed shift beside an approved one.**
+**OWNER_DECISION_QUEUE §14 recommends fixing it under the SAME `UPDATE_GOLDEN` so the seed
+line moves ONCE.**
+⚠ Recorded untouched, each its own lane: `magicFormsPractitioner.js:125,243` (same defect
+class, no name fallback) · three stale refs to a nonexistent test file ·
+`deriveRegionalState.js`'s dead `tradeRouteAccess on save` · five duplicated `instId()`
+minters disagreeing with the canonical join.
 
 **Ruled and sequenced (not blocked):**
 
