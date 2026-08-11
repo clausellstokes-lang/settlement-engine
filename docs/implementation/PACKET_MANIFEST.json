@@ -400,6 +400,48 @@
           "tests/domain/townCartographyDeterminism.test.js",
           "tests/property/townCartographyDormancyGolden.test.js"]
       ]
+    },
+    {
+      "id": "ES-5B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5B.md",
+      "verifiedBase": "2d420dfafd9e8f92db5deca124cc2353c0073588",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionagePresence.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageMath.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/factionCompetition.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionagePresence.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageAbsenceDormancy.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCHITECTURE.md" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/settlementPolitics.js", "symbol": "rulingBlocOf" },
+        { "path": "src/domain/worldPulse/factionCompetition.js", "symbol": "topFactionEntries" },
+        { "path": "src/domain/worldPulse/espionage/espionageMath.js", "symbol": "ESPIONAGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/roads/state.js", "symbol": "WHEREABOUTS_STATES" },
+        { "path": "src/domain/worldPulse/npcAgency.js", "symbol": "npcId" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main reachable behavior at BOTH consumption sites" },
+        { "id": "A2", "case": "four dormancy fences including roads-lit espionage-dark" },
+        { "id": "A3", "case": "hostage counterforce anchored against a live positive control" },
+        { "id": "A4", "case": "sparse and malformed-but-supported inputs resolve to share 1" },
+        { "id": "A5", "case": "the declared one-tick lag, uniform across both consumers" },
+        { "id": "A6", "case": "determinism and member-order independence" },
+        { "id": "A7", "case": "the key mirror joins both derivations, failing to share 1" },
+        { "id": "A8", "case": "the disclosed shift recorded as a dark/lit golden pair" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionagePresence.test.js",
+          "tests/property/espionageAbsenceDormancy.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
     }
   ]
 }
