@@ -1,6 +1,7 @@
 # `ESPIONAGE / ES-5d` — implementation contract (DRAFT, rev 1)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `954592c0` (2026-08-11) — one packet-level correction (D7: the tick-1 window was provably dead), zero moved goldens, 228 tests green
 - **Status note:** promoted by the chair 2026-08-11; §13's nine open items are CLOSED in §13b below.
 - **Compiled:** 2026-08-11 by the ES-5d author/recon lane.
 - **Verified base:** `claude/composite-r4` at `857e3a1ac6e5580bb1016fb644dab00f77038a34`

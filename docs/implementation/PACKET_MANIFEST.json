@@ -491,7 +491,7 @@
     },
     {
       "id": "ES-5D",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/ES-5D.md",
       "verifiedBase": "857e3a1ac6e5580bb1016fb644dab00f77038a34",
       "changeManifest": [
