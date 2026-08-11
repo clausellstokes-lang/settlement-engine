@@ -162,19 +162,41 @@ until proven otherwise. Both live lanes were told this explicitly at dispatch.
 free, zero processes. ⚠ The heartbeat prompt's queue text is long stale; dispatch comes
 from THIS note.):**
 
-1. **TC-5a IMPLEMENTATION LANE (Opus) — in flight.** The painter's HEADLESS half: a pure
-   draw-list plus palette ROLES. Capsule `866b97bc`. ⭐ **It HOLDS the census reservation**,
-   so the whole-census re-derivation is its own to satisfy in-change.
-   ⚠⚠ Its two hazards: ⛔ **NO COLOUR, EVER** — the contract rules it and a live
-   `rejectRawColour` validator enforces it, so a colour literal is a hard validation error,
-   not a lint warning; and ⚠⚠ **KEEP OUT OF THE BOUNDED CLOSURE** — the pair sits at
-   **385,137 of a strict 400,000** with the closure at exactly **107 members**, and every
-   painter module is currently OUTSIDE it, which is the entire reason this packet is cheap.
-   **One careless import drags a family in.** C7 proves zero new transitive edges.
-   ⭐ Its structural cure carries: every vocabulary map DERIVES its key set exact-set-both-
-   ways with a THROWING accessor, and the draw-op ceiling is an IDENTITY over real counts —
-   nothing hand-maintained, nothing that can drift.
-   Report: tasks/a0642cb5a04234802.output.
+1. **✅✅ TC-5a IS LANDED @ `41b39220` + record `744de227` — DEVIATIONS: NONE.**
+   validate:packets **14 / 1 READY**. The painter's headless half: a lit block compiles to
+   a complete draw list with palette ROLES and no colour anywhere.
+   ⭐ **THE BUNDLE COST IS EXACTLY ZERO, measured both ways:** the pair is **385,137 before
+   and after**, the closure holds at **107 members**, and `buildCartographyDrawList`
+   appears in **NO dist chunk at all** — tree-shaken, zero importers. That is the whole
+   point of building the painter headless first.
+   ⭐ **C7 IS A LIVE GUARD, MUTANT-PROVEN:** one added edge takes the closure 107 → **110**
+   and flips the exclusion red while the anchor stays present — and the mutant ran against
+   a SYNTHETIC ENTRY OUTSIDE THE REPO, so the forbidden compiler file was never edited to
+   prove a point about not editing it.
+   ⚠⚠ **NEW HAZARD BANKED — LOOP-REGISTERED TESTS ARE INVISIBLE TO THE CENSUS**
+   (memory/loop-registered-tests-are-invisible-to-the-census.md). The new suite came back
+   **PARKED with ZERO live titles against 34 real passing tests**, because four `describe`
+   blocks registered inside `for` loops and the classifier counts LITERAL `it(`/`describe(`
+   text. ⚠⚠ **`parked` and `credited` both feed `files`, so the arithmetic still CLOSES and
+   NOTHING REDS** — the suite just silently stops contributing coverage the census believes
+   it has. Cure: hoist the loop to module scope (count unchanged at 34, file moved to
+   `credited`). ⭐ `test.each()` parks a file the same way — that is how
+   `roadNetworkIndex.test.js` flipped under an unrelated landing.
+   ⭐ **C4 EXTRACTS THE CONTRACT'S `RAW_COLOUR` REGEX FROM SOURCE TEXT** — it is `const`,
+   unexported, and the contract is a forbidden edit, so it can be neither imported nor
+   exported and restating it would mint the rival spelling §6.3 forbids. **The guard then
+   FIRED FOR REAL** when the lane's own docblock prose spelled a colour notation: the
+   comment-convicts-itself trap, this time as the guard working.
+   ⚠ A §13 STOP fired mid-session (ES-6a added test files) and was **dispositioned, not
+   obeyed blindly**: the census row is base-plus-TC-5a-only, derived INDEPENDENTLY of the
+   live tree, so foreign WIP cannot be frozen into it — it EXCLUDES their file rather than
+   absorbing it, and reverting would have left the census PARTIAL a second time. It
+   measured their delta for me: **+1/+0/+1/+10/+4**, closing with nothing left over.
+   Census folded to this lane only: **`2393/365/2028/19696/5560`**.
+   ⚠ The harness misreported exit 0 for two runs whose captured value was 1 — 4th and 5th
+   sightings. ⚠ A validator run against a tree another lane is EDITING gave a transient
+   FALSE `index=BLOCKED`; a re-run at a settled moment read READY.
+
 2. **ES-6a IMPLEMENTATION LANE (Opus) — in flight.** The double agent's leak.
    ⛔ **It does NOT hold the census reservation** — it MEASURES and REPORTS its five figures
    and I fold them, per the collision ruling.
