@@ -158,38 +158,37 @@ pending the owner's batched `UPDATE_GOLDEN`. ⛔ **No lane may re-record it, inv
 it, or count it as a regression** — attribute and move on. Every OTHER red is the lane's
 until proven otherwise. Both live lanes were told this explicitly at dispatch.
 
-**Live board (TWO lanes out; heartbeat found NO stalls — tree clean at `0f85ced0`, mutex
-free, zero processes):**
+**Live board (TWO lanes out; build tree at `73f00920`):**
 
-1. **ES-5d IMPLEMENTATION LANE (Opus) — in flight.** The READY packet (`4a9b6cf4`) with
-   §13b's nine rulings closed. ⚠⚠ **This wave BUILDS STATE, so the lifecycle IS the
-   risk** — the one-tick deposit's **PRUNE is the path that fails silently if forgotten**
-   (a ledger accumulating while nothing consumes it is a leak wearing a receipt), and
-   every path must be DRIVEN, not reasoned. ⛔ `MISSION_CREDIT_MET = 0.15` and the grade
-   map (exceeded 2× / met 1× / partial+empty ZERO / no debit) are chair-set and untunable.
-   ⚠⚠ The classification pin must be BEHAVIORAL with TWO mutants because
-   `spatialLedgerCoverage` reds on an unclassified key but a TRACKED classification
-   **FAILS OPEN**. Report: tasks/ac07e514ba7187d83.output.
-2. **✅ THE OWNER-RULED DISPLAY CLUSTER LANDED @ `73f00920`** (15 files; ES-5d's 10
-   reserved and untouched). Capital DELETED — dead twice independently, and no overlord
-   visual built. Exit roads LIT and measured (4 labels on a crossroads, 3 on road/port,
-   2 on river, 1 on isolated; `→ Ashford` / `trade partner`).
-   ⚠⚠ **THE LOCK WIRING WAS NOT A BOOLEAN, AND A BOOLEAN WOULD HAVE LIED.** My "one
-   missing row" framing was right about SCOPE and **WRONG ABOUT SHAPE**: `coup.js:64`
-   opens with `Array.isArray(locked)`, so a boolean row would have rendered "Locked",
-   persisted, and **STILL LET THE COUP AUTO-APPLY** — precisely the lying surface the
-   change exists to remove. The row writes `[nameOf(governingFactionOf(settlement))]`;
-   the mutant proves it (`expected 'auto' to be 'proposal'`).
-   ⭐ A SECOND correction of mine: `locks.institutions` DID have a reader
-   (`normalizeLocks`) — nothing consumed what it normalised. So the dead READ died and
-   **the PERSISTED KEY DID NOT**: pruning that is a migration, and a dead-reader deletion
-   must never quietly become a data deletion.
-   ⚠ **OWNER ITEMS @ `7e9e6306` (queue §15):** the exit-road order is **HALF CARRIED
-   OUT** — labels light for LINKED settlements, but a freshly generated one binds no
-   neighbour, so lighting it there means binding neighbours during GENERATION (same-seed
-   territory, a capability question, offered not assumed); and the **LOCK COPY awaits
-   veto** (4 drafted strings; the other rows say "a new roll" because they guard the
-   DICE, this one guards the SEAT).
+1. **ES-5d IMPLEMENTATION LANE (Opus) — still building**, 10 files dirty and reserved.
+   ⚠⚠ Its risk is the LIFECYCLE: the one-tick deposit's **PRUNE is the path that fails
+   silently** — a ledger accumulating while nothing consumes it is a leak wearing a
+   receipt. Report: tasks/ac07e514ba7187d83.output.
+2. **EXIT-ROAD LABELLING LANE (Opus) — dispatched.** ⭐ **THE OWNER APPROVED THE
+   RECOMMENDATION: generation will NOT bind neighbours** (queue §15a, `951662de`).
+   **The reasoning, so it is not re-litigated:** neighbours are a CAMPAIGN-LAYER concept
+   (`regionalGraph.js` holds the real ones) and `neighborRelationship` is an **INPUT** to
+   generation (`config.neighborRelationship`, consumed by `historyGenerator.js:343`,
+   `priorityHelpers.js:373`, `institutionProbability.js:266`), **not an output**. A lone
+   settlement has no neighbours **because nothing has said it does** — the model being
+   honest, not a gap. Binding them would **mint named places with no data behind them —
+   the PRODUCT-LEVEL form of the reader-with-no-writer class this program has spent
+   itself eliminating** — and would change same-seed output for every world ever made, in
+   exchange for a cosmetic label. A poor trade against [[the-promise-ratified]].
+   **What ships instead — labels degrade HONESTLY:** a linked neighbour keeps its name;
+   no link but a configured relationship shows the relationship WITHOUT a place (from its
+   real closed vocabulary, never invented); neither shows the road's OWN facts
+   (direction / terrain / road type); and **no exit roads at all HIDES the section**,
+   because an absent section is honest while an empty heading implies missing data.
+   ⚠⚠ **The pin that matters most: nothing downstream may treat a label as an ENTITY** —
+   the moment something joins on that string the bug is rebuilt, so a mutant-driven guard
+   asserts a label never mints, joins on, or persists a settlement identity.
+   ⭐ **THE FLIP CONDITION IS RECORDED:** if the product moves toward regions as
+   first-class, binding neighbours at generation becomes CORRECT and this ruling should be
+   REVISITED, not worked around. The question was never "should roads have labels" — it is
+   **"does a generated settlement exist in a place, or by itself?"**
+   ⚠ The label copy is the owner's: drafted in the surrounding voice, presented as a DRAFT
+   FOR VETO; the mechanism lands either way. Report: tasks/a049c0a9338ad10ad.output.
 
 **⛔⛔ TWO THINGS BLOCK THE NEXT OSR RE-FREEZE — the first is MINE:**
 - **THE LIGHTING CENSUS IS ALREADY RED AT PRISTINE `0f85ced0`, before any lane edited.**
