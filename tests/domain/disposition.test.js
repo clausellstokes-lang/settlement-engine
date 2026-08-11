@@ -11,6 +11,9 @@ import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
 import { evaluateTradeWar } from '../../src/domain/worldPulse/tradeWar.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature C (C1) — disposition scoreFor + the read/write ratchet wiring.
@@ -294,5 +297,101 @@ describe('disposition — OFF byte-identity (the gating rule)', () => {
     for (const [id, sev] of on) if (off.has(id) && off.get(id) !== sev) changed += 1;
     // The aggressive govBaseline + NPC personality boosted at least one escalation candidate.
     expect(changed).toBeGreaterThan(0);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// H14 / CR-S6-4 — THE SIBLING NOTABILITY LADDERS ARE PINNED EQUAL.
+//
+// `disposition.importanceWeight` and `worldPulse/npcAgency.notability` are
+// DELIBERATE MIRRORS: importanceWeight's own header says it "mirrors
+// npcAgency.notability so the agency layer and the disposition read the same
+// authored-importance ladder", and the 2026-08-11 three-rung deletion was applied
+// to BOTH for one reason, recorded in both comments. Nothing enforced that. A
+// later edit to one rung would have drifted the two silently — the agency layer
+// ranking an NPC one way while the disposition weighted it another, with no test
+// anywhere able to see it.
+//
+// ⚠ BOTH FUNCTIONS ARE MODULE-PRIVATE and neither module is willing to export
+// them (each is an internal of a leaf under a size ceiling). So the ladders are
+// lifted OFF DISK, the way townCartographyPaint.test.js lifts the contract's own
+// colour regex when the const it needs is `const`-not-`export`. The extractor is
+// proven live against a spliced control below, so an extraction that silently
+// stopped matching cannot pass this file as agreement.
+// ─────────────────────────────────────────────────────────────────────────────
+const LADDER_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const NPC_AGENCY_SRC = 'src/domain/worldPulse/npcAgency.js';
+const DISPOSITION_SRC = 'src/domain/worldPulse/disposition.js';
+
+/**
+ * The ordered importance ladder of one module-private function, read from source:
+ * every `if (npc.importance === '<rung>') return <n>;` in order, plus the trailing
+ * unranked floor. Returns null when the function is not found at all.
+ */
+function ladderFromSource(source, fnName) {
+  const body = new RegExp(`function ${fnName}\\(npc = \\{\\}\\) \\{([\\s\\S]*?)\\n\\}`).exec(source);
+  if (!body) return null;
+  const rungs = [...body[1].matchAll(/if \(npc\.importance === '([a-z]+)'\) return ([\d.]+);/g)]
+    .map((match) => [match[1], Number(match[2])]);
+  const floor = /return ([\d.]+);\s*$/.exec(body[1].trimEnd());
+  return { rungs, floor: floor ? Number(floor[1]) : null };
+}
+
+const ladderOf = (rel, fnName) =>
+  ladderFromSource(readFileSync(join(LADDER_ROOT, rel), 'utf8'), fnName);
+
+describe('H14 — the notability ladder is IDENTICAL in npcAgency and disposition', () => {
+  test('THE LIVENESS ANCHOR — the extractor finds a real ladder in both leaves', () => {
+    // Without this, "the two agree" would hold just as well of two nulls, of two
+    // empty rung lists, or of a rename that quietly stopped matching either file.
+    const agency = ladderOf(NPC_AGENCY_SRC, 'notability');
+    const dispo = ladderOf(DISPOSITION_SRC, 'importanceWeight');
+    expect(agency, `${NPC_AGENCY_SRC} notability()`).not.toBeNull();
+    expect(dispo, `${DISPOSITION_SRC} importanceWeight()`).not.toBeNull();
+    expect(agency.rungs.length).toBeGreaterThan(2);
+    expect(dispo.rungs.length).toBeGreaterThan(2);
+    expect(Number.isFinite(agency.floor)).toBe(true);
+    expect(Number.isFinite(dispo.floor)).toBe(true);
+    // The rungs are DESCENDING and the floor sits under the last one, so the values
+    // extracted are a ladder rather than an arbitrary bag of numbers that happens to
+    // be equal on both sides.
+    const values = agency.rungs.map(([, weight]) => weight);
+    expect(values.every((weight, at) => at === 0 || values[at - 1] > weight)).toBe(true);
+    expect(agency.floor).toBeLessThan(values[values.length - 1]);
+  });
+
+  test('THE SPLICED CONTROL — the extractor DOES report a drifted rung', () => {
+    // The whole pin rests on the extractor being able to see a difference. Splice one
+    // rung of the real agency source and confirm the reading moves; a matcher that had
+    // decayed into returning the same thing for every input would fail here first.
+    const real = readFileSync(join(LADDER_ROOT, NPC_AGENCY_SRC), 'utf8');
+    const drifted = real.replace(
+      "if (npc.importance === 'key') return 0.82;",
+      "if (npc.importance === 'key') return 0.5;",
+    );
+    expect(drifted).not.toBe(real); // the splice actually applied
+    const before = ladderFromSource(real, 'notability');
+    const after = ladderFromSource(drifted, 'notability');
+    expect(after).not.toEqual(before);
+    expect(Object.fromEntries(after.rungs).key).toBe(0.5);
+    expect(Object.fromEntries(before.rungs).key).toBe(0.82);
+  });
+
+  test('the two ladders are EQUAL rung for rung, in order, floor included', () => {
+    const agency = ladderOf(NPC_AGENCY_SRC, 'notability');
+    const dispo = ladderOf(DISPOSITION_SRC, 'importanceWeight');
+    // Order matters as much as membership: these are short-circuiting `if` chains, so
+    // two ladders with the same pairs in a different order are two different functions.
+    expect(dispo.rungs).toEqual(agency.rungs);
+    expect(dispo.floor).toBe(agency.floor);
+  });
+
+  test('the mirroring is DECLARED in both leaves, so the coupling is discoverable', () => {
+    // A future editor reaching either function must be told the other exists. The pin
+    // above catches a drift after the fact; this one keeps the reason at the site.
+    const agency = readFileSync(join(LADDER_ROOT, NPC_AGENCY_SRC), 'utf8');
+    const dispo = readFileSync(join(LADDER_ROOT, DISPOSITION_SRC), 'utf8');
+    expect(agency).toMatch(/DELIBERATE MIRRORS/);
+    expect(dispo).toMatch(/mirrors npcAgency\.notability/);
   });
 });

@@ -91,6 +91,22 @@ const loadAiChronicleContext = () => {
   return _aiChronicleContextPromise;
 };
 
+/**
+ * The OWNING campaign's raw worldState plus the saves roster, for the AI grounding
+ * Chronicle's world lane (CR-S6-6, 2026-08-11). Read HERE rather than inside the
+ * lazy module so that module stays a pure function of its arguments and the store
+ * shape has exactly one reader. Mirrors the dossier Chronicle's seam in
+ * components/OutputContainer.jsx: the world events live on the owning campaign's
+ * worldState.pulseHistory, never on the per-save campaignState.
+ */
+function chronicleWorldFor(state, saveId) {
+  const campaign = state.getCampaignForSettlement?.(saveId);
+  return {
+    campaignWorldState: campaign?.worldState || null,
+    savedSettlements: state.savedSettlements || [],
+  };
+}
+
 async function buildDailyLifeRelationshipMemory(state, saveId) {
   try {
     const campaign = state.getCampaignForSettlement?.(saveId);
@@ -387,7 +403,9 @@ export const createAiSlice = (set, get) => ({
           aiGuidance,
           modelPreference,
           signal: controller.signal,
-          chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
+          chronicleContext: buildChronicleContextFromSave(
+            saveEntry, settlement, chronicleWorldFor(get(), saveId),
+          ),
           onRefundFailure(notice) {
             // F1 \u2014 surface UNCONDITIONALLY. This is about the user's money (a
             // failed paid run whose auto-refund also failed), not about which
@@ -642,7 +660,9 @@ export const createAiSlice = (set, get) => ({
         modelPreference,
         relationshipMemoryContext,
         signal: controller.signal,
-        chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
+        chronicleContext: buildChronicleContextFromSave(
+          saveEntry, settlement, chronicleWorldFor(get(), saveId),
+        ),
         onRefundFailure(notice) {
           set(state => { state.aiRefundNotice = notice; });
         },

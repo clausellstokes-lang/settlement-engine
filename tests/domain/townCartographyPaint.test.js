@@ -288,6 +288,36 @@ describe('TC-5a C2 — absence returns a frozen empty list; malformation throws'
     expect(() => buildCartographyDrawList({ ...block, buildings: [orphan] }))
       .toThrow(PREMISE_PREFIX);
   });
+
+  it('a building whose parcel names a ward outside the block throws rather than painting a guess', () => {
+    // THE SIBLING ARM, ordered by the chair's R8 ruling. The case above breaks the
+    // building→parcel hop; this one lets that hop RESOLVE and breaks the parcel→ward
+    // hop instead, which is the only way to reach cartographyPaint.js's second
+    // referential throw. The corpus cannot drive it — all twenty lit rows measure
+    // referentially total — and `parcelOf` is called with a ward the fixture supplies
+    // at every other site in this file, so without this case the arm is driven by
+    // nothing and its vacuity is invisible.
+    const dangling = blockOf({
+      wards: [wardOf('ward:a', 'civic', 500)],
+      parcels: [parcelOf('parcel:a', 'ward:nowhere')],
+      buildings: [buildingOf('building:a', 'parcel:a', 'sound')],
+    });
+    // The SAME fixture with the parcel pointed back at the real ward paints cleanly
+    // (two ops — the parcel itself draws nothing), so the throw below is attributable
+    // to the dangling wardId rather than to anything else in the block.
+    expect(buildCartographyDrawList(toneChain(500, 'sound'))).toHaveLength(2);
+    expect(() => buildCartographyDrawList(dangling)).toThrow(PREMISE_PREFIX);
+    // …and it is THIS arm, not the parcel-orphan one above: the two throws are
+    // distinguishable only by their message, so pin the ward clause. A regression
+    // that collapsed both arms into one error would pass the prefix assertion alone.
+    expect(() => buildCartographyDrawList(dangling))
+      .toThrow(/whose ward 'ward:nowhere' is not in this block/);
+    // The parcel-orphan arm reports the OTHER message on the other fixture, so the
+    // clause above is discriminating rather than merely present in every premise error.
+    const parcelOrphan = { ...dangling, buildings: [{ ...dangling.buildings[0], parcelId: 'parcel:nowhere' }] };
+    expect(() => buildCartographyDrawList(parcelOrphan))
+      .toThrow(/which no parcel in this block declares/);
+  });
 });
 
 describe('TC-5a C3 — every vocabulary map DERIVES its key set from the frozen contract', () => {

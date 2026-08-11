@@ -3701,7 +3701,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // docs/SITE_COHERENCE_PLAN.md, docs/SOL_QUEUE.md, docs/implementation/INDEX.md) and
     // ZERO foreign test files, tracked or untracked — so no other lane's uncommitted
     // titles are frozen into this row.
-    files: 2397, parked: 365, credited: 2032, titles: 19753, suiteTitles: 5576,
+    // ⭐ CENSUS MICRO-ACT BATCH FOLD (2026-08-11) — RE-DERIVED AND RE-RECORDED WHOLE
+    // in the same commit that moves it (the same CR-TC5BI-6 shape (a) rule the fold
+    // above followed: the lane that moves a shared census folds it in the commit that
+    // moves it). CAUSE: four ruled micro-acts add TEN test titles across THREE
+    // ALREADY-CENSUSED files and create no test file, so `files`, `parked` and
+    // `credited` cannot move and did not. Per file, counted from a verbose run in
+    // which all ten titles reported live:
+    //   + 1 title, +0 suite … tests/domain/townCartographyPaint.test.js
+    //       (R8's ordered C2 case for the `wardId`-orphan arm, added INSIDE the
+    //        existing C2 describe, hence no new suite title)
+    //   + 5 titles, +1 suite … tests/store/aiSliceHelpers.test.js
+    //       (CR-S6-6's AI-chronicle world-lane repair + H9's `recent`-slot deletion,
+    //        in one new describe)
+    //   + 4 titles, +1 suite … tests/domain/disposition.test.js
+    //       (H14/CR-S6-4's sibling-ladder equality pin, in one new describe)
+    // 1 + 5 + 4 = 10 and 0 + 1 + 1 = 2, which is exactly 19753 → 19763 and
+    // 5576 → 5578 with NOTHING left over.
+    // ⚠ THE FOUR SOURCE EDITS IN THIS BATCH CANNOT MOVE A FIGURE and were checked
+    // rather than assumed: they are reader-side deletions and one reader repair in
+    // src/, plus a doc marker flip — no test file gained, lost, parked or unparked a
+    // registration line.
+    // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time the tree
+    // carried a sibling lane's uncommitted work in src/generators/factionRoles.js,
+    // tests/fixtures/generator-golden-master.json and docs/GOLDEN_SHIFT_LEDGER_MAIN.md
+    // — a source leaf, a FIXTURE and a doc, with ZERO foreign test files and zero
+    // foreign registration lines, tracked or untracked. So no other lane's
+    // uncommitted titles are frozen into this row.
+    files: 2397, parked: 365, credited: 2032, titles: 19763, suiteTitles: 5578,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

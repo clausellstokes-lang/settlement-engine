@@ -13,8 +13,10 @@
  *
  * FIRST-PAINT ISOLATION: kept in its OWN module (not chronicleFeed.js) because
  * chronicleFeed is pulled into the eager store closure via aiSlice, and its budget has
- * ~zero headroom. This module is imported ONLY by the lazy OutputContainer, so its
- * bytes land in the deferred dossier chunk, never first paint.
+ * ~zero headroom. This module is imported ONLY from LAZY sites, so its bytes land in
+ * deferred chunks and never in first paint: the dossier's OutputContainer, and (since
+ * CR-S6-6, 2026-08-11) store/aiChronicleContext.js, which aiSlice dynamic-imports only
+ * after a narrative or daily-life request already owns the request lock.
  *
  * @enforced-by tests/domain/dossier/settlementWorldChronicle.test.js
  */

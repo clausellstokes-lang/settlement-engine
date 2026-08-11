@@ -493,16 +493,41 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * 246 − 53 = 193 close on the nose, and `files` drops 53 → 51 because exactly
    * two cohort files lost ALL of their rows. Had anything else moved in this
    * window the two derivations would have disagreed.
+   *
+   * ⭐ MOVED AGAIN 2026-08-11 BY THE H9 REPAIR, SAME DIRECTION, BOTH READINGS:
+   * filtered 51/128/193 → 51/127/192 and raw 53/150/246 → 53/149/245. `recentEvents
+   * on settlement` was deleted at BOTH of its reader sites in one change —
+   * components/OutputContainer.jsx (the cohort member, 1 read) and
+   * store/aiChronicleContext.js (1 read, outside `src/components/` and so invisible
+   * to these two figures). ONE identity, ONE read, hence −1/−1 on each reading, and
+   * `files` holds at 51 because OutputContainer keeps its other five rows
+   * (`canonizedAt on campaignState` 1, `primaryDeitySnapshot on config` 2,
+   * `startedAt on campaignState` 1, `worldPulse on campaignState` 1, `worldState on
+   * campaignState` 2). BOTH readings move by the same −1/−1, which is the property
+   * this pair exists to expose: the drop is the estate genuinely shrinking, not the
+   * filters clearing more.
+   * ⚠ THE SAME CHANGE REPAIRED aiChronicleContext's world lane (CR-S6-6) by pointing
+   * it at the campaign's worldState.pulseHistory, and that added ZERO identities —
+   * measured, not assumed: the run that produced the two figures above reported
+   * `violations: 0`. The new reads are spelled the way the already-clean sibling
+   * spells them (a call-result receiver, which the name prior does not ground).
+   * ⚠⚠ `worldPulse on campaignState` DELIBERATELY SURVIVES in both files. It is the
+   * legacy per-save fallback the dossier Chronicle also kept, so the repair does not
+   * silently narrow behaviour for a save that happens to carry the old shape.
+   * ⛔ THE FROZEN INVENTORY STILL CARRIES THE TWO DELETED ROWS, so SHRINK-ONLY reads
+   * `stale: 2` until a `--write` re-freeze — which only runs from a committed tree
+   * with a clean `src/`, and was BLOCKED at this commit by a concurrent lane's
+   * uncommitted src/generators/factionRoles.js. Owed, not forgotten.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 51, identities: 128, counts: 193 });
+    expect(cohort).toMatchObject({ files: 51, identities: 127, counts: 192 });
     // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
     // cohort figure could fall for two completely different reasons — the filters
     // clearing more, or the estate genuinely shrinking — and a single number
     // cannot tell them apart. Pinning both makes the delta attributable.
     expect(cohortOf(inventoryOf(live.raw.findings)))
-      .toMatchObject({ files: 53, identities: 150, counts: 246 });
+      .toMatchObject({ files: 53, identities: 149, counts: 245 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 

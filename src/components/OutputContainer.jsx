@@ -184,7 +184,11 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null, 
     manual:     saveEntry ? saveEntry.campaignState?.eventLog : publicChronicle,
     worldPulse: worldEntries.length ? worldEntries : saveEntry?.campaignState?.worldPulse?.events,
     worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
-    recent:     settlement?.recentEvents,
+    // H9 (2026-08-11): the `recent` slot is GONE, here and at the sibling read in
+    // store/aiChronicleContext.js. `settlement.recentEvents` has NO writer anywhere
+    // in this repo — no generator, no import, no migration, no normalizer produces
+    // it — so the slot could only ever hand buildChronicleFeed `undefined`. Deleted
+    // at BOTH sites together, because curing one leaves the class alive at the other.
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
   // Re-attach THE NEWS ADDRESS LAW block to the world rows. buildChronicleFeed's
   // normalizer keeps the byte-minimal common shape (no address passthrough — that
