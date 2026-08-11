@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:36:33 EDT
+**Generated:** 2026-08-11 15:42:14 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `e1e9fd6a` | **14** |
-| ledger (main) | `review-fixes-2026-07-08` | `b080343b` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `72750864` | **4601** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
+**Gate slot:** gate-mutex: HELD by atomic lock PID 58200: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T153545` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T154045` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T153545
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T154045
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -64,12 +64,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+72750864 2026-08-11 Lane H collected: the packet validator guard is live; the gate receipt is running
 b080343b 2026-08-11 Lane F collected: TC-5B-i is compilable; CR-TC5BI-1..5 ruled; Lane H is out
 982cbf37 2026-08-11 Lane C collected: five live dead-reader defects repaired; the worklist was 7
 f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
-b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -217,10 +217,19 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    effectively-clean tree at `e1e9fd6a` (non-MM dirty = 0; MM entries are the stale
    shared-index artifact, `git diff HEAD` empty). Expected: TRUE exit 1 with the test
    step showing EXACTLY 17 census + the owner's golden and nothing else. Fix-nothing
-   brief; outlasts the run in its own turn. **The TC-5B PROMOTION (task #9) is
-   deliberately SEQUENCED BEHIND this receipt** — its target `PACKET_MANIFEST.json` is
-   READ BY a gate test mid-run, so landing it during the gate would poison the receipt.
-   Transcript: session dir `subagents/agent-a53d9a1c623c91ba1.jsonl`.
+   brief. ⚠ **THE YIELD-DEATH PATTERN FIRED A FIFTH TIME**: the lane stopped at ~15:39
+   with "holding for the test step" — dead to its own gate. The chair applied the
+   recorded rule within a minute: ps PROVED the detached run alive (workers since 15:37,
+   log `laneK-fullgate-e1e9fd6a.log` being written), and the lane was RESUMED (not
+   re-dispatched) with the outlast-in-your-own-turn order. **The TC-5B PROMOTION
+   (task #9) stays SEQUENCED BEHIND this receipt** — its target `PACKET_MANIFEST.json`
+   is READ BY a gate test mid-run. Transcript: session dir
+   `subagents/agent-a53d9a1c623c91ba1.jsonl`.
+9. **Chair memory pass DONE (~16:40):** the validate:packets CREATE-row rule banked
+   (`validate-packets-existence-checks-landed-create-rows.md` + index line), and the
+   MEMORY.md FOLD executed lawfully — the ES-5d two-bullet block moved VERBATIM to
+   archive-2026-08-11-index-fold-2.md with a pointer left; index now 17,167 B (under the
+   ~17KB ceiling), zero broken links (verified by script).
 8. **Lane I (read-only draft, Opus) — the SCHEMA-6 MINT CHARTER**, dispatched ~16:10:
    one consolidated charter for the accumulated detector docket (globals exclusion ·
    `toLocaleString` in BUILTIN_MEMBERS · the M9 why-string naming a nonexistent function ·
