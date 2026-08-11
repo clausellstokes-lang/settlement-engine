@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 15:14:59 EDT
+**Generated:** 2026-08-11 15:18:36 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `904b7bb0` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `b7ae330f` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `f0af52be` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T151424` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T151800` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T151424
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T151800
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -44,12 +44,12 @@ ffc85a90 2026-08-11 The schema-5 GENESIS: the instrument stops reporting what it
 ## Last 6 ledger commits
 
 ```
+f0af52be 2026-08-11 The Fable survey is RULED: 61 ratified, the serialization law minted
 b7ae330f 2026-08-11 Lane A collected and chair-verified: the pglite collapse was a phantom
 9df1e966 2026-08-11 Lane E collected: TC-5b refused-and-split on measurement; CR-TC5B-1..4 ruled
 b87b81dd 2026-08-11 Lane B collected: the survey extraction is whole; the digest is completing
 1dd531f7 2026-08-11 Lane D collected: the UI cohort re-triaged at HEAD -- 34 true defects of 128
 96124a60 2026-08-11 RESUMED by owner order; the Fable chair is back and four lanes are out
-005d8cdf 2026-08-11 PAUSED at the owner's request; ES-D refused and the espionage intent is undeliverable
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -111,11 +111,27 @@ transcript tail, re-verify independently — never re-dispatch while WIP exists.
    case (+whole census fold) and H9's both-sites recentEvents cleanup.
    ⚠ METHOD (banked): a workflow synthesis stage fed inline JSON can silently truncate —
    always check the digest's population against the SOURCE count (this one self-verified).
-3. **Lane C (build, Opus) — the 21 remaining READER-WITHOUT-WRITER repairs** (23 class-(a)
-   true positives, 2 repaired; precedent `c74048e4`). Reader-side only; writer-side/persisted-
-   shape items STOP-and-report as CHAIR-OWED; focused tests only (Lane A owns the gate);
-   worklist re-derived from the schema-5 baseline where it disagrees with memory.
-   Transcript: session dir `subagents/agent-a9144e987bca3f3f3.jsonl`.
+3. **Lane C — ✅ COLLECTED (~15:50), chair-verified: 5 of the 7 LIVE class-(a) defects
+   repaired; the worklist was 7, not 21.** The baseline at HEAD wins: 14 of the briefed 21
+   were already repaired (`c74048e4`/`e429a4e8`/`5afe9b2e`), and absence can ONLY mean
+   repair (a class-(a) erasure is a scan refusal). Landed `aed0fc0e` (18 files — the
+   settlement-root hook family routed through `collectPlotHooks`, the npc dots/notability
+   dead rungs deleted; THREE were user-visible: the World Book hooks chapter was EMPTY for
+   every export ever, the campaign PDF hook line NEVER printed, both fingerprints always
+   zero) + `904b7bb0` (plain-shrink re-freeze **2003→1977 / 1413→1396, frozenAtSha
+   aed0fc0e** — chair-verified from the committed baseline). Focused 29 files/474 tests
+   exit 0; guards 7/171 exit 0; ratchets at exact floors; sizeBaseline DOWN 833→830.
+   **DECLARED one-time output discontinuity** (World Book/PDF hooks now print; telemetry+
+   fingerprint series step at `aed0fc0e`) — no generator touched, no golden moved.
+   ⚠ CHAIR CORRECTION on its record: the "zero setLock calls naming factions" evidence is
+   a GREP ARTIFACT — the factions lock writer exists via the DYNAMIC key row at
+   `LockControls.jsx:95`/`:162` since `73f00920`; the refusal-to-touch was right, the
+   evidence wrong. `factions on locks` is now writer-backed → reclassification joins the
+   schema-6 docket. **Chair queue (after Lane G lands):** land C's ledger row
+   (Fable-validated, NO ⏳ marker — chair-managed work), with the grep-artifact correction
+   folded in; fear-rung lighting → owner queue (same-seed prose shift); the
+   aiOverlayVerifier fence re-point question → schema-6 docket. ⚠ MEMORY.md is at the
+   ~17KB fold ceiling (17,309 B) — chair owes a FOLD (never trim) at next memory touch.
 4. **Lane D — ✅ COMPLETE (~14:45).** The UNREVIEWED-UI cohort per-row triage, delivered
    as an ADVERSARIAL RE-DERIVATION of the earlier same-day triage: cohort at HEAD is
    **128 rows** (162 was schema-4; accounting closes exactly), verdicts **34 (a) / 54 (b)
