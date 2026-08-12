@@ -1,6 +1,7 @@
 # Foreign Policy / IN-1b — THE STANDING LINE (`secondOrderBeliefEnabled`, no new flag)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `af3d93c8`, 2026-08-12; flipped by the chair after verification (all seven acceptance cases executed green; B13 read 599 BOTH times — the container edit is two one-for-one line replacements, zero effective delta; the census re-derived WHOLE `2408/365/2043/19945/5628` with both new files CREDITED; the full 17-step gate GREEN from the committed tree, `FINAL_GATE_TRUE_EXIT=0`, ratchet 16/16 exact; CREATE spellings reconciled against the landing's `--diff-filter=A`). Do not redispatch. ⚠ TWO CHAIR CURES rode the landing commit: **CR-IN1B-8** (the `title=` walker's fifth reasoned raise, 484 → 485 — the packet's preflight never measured that walker; compilers must) and **CR-IN1B-9** (`requiredSymbols[10]` re-pointed to the successor invariant — the validator's existence check is status-blind, so a symbol-retiring packet must name its SUCCESSOR, never the retiree; general machinery fix chartered, not built). ⭐ IN-1a's orphan window is DISCHARGED — the mirror has its first production consumer.
 - **Packet version:** `1` (promoted, versioned and dispatchable by the chair)
 - **Verified base:** `claude/composite-r4` at `b17d32d2abc7a1a18e07f10f661421a0ce8d601b`
 - **Compiled by:** Lane AK (read-only compile lane), 2026-08-12, Opus-era — §15.
