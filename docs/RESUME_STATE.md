@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 01:08:24 EDT
+**Generated:** 2026-08-12 02:18:25 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `d0af9b35` | **4** |
-| ledger (main) | `review-fixes-2026-07-08` | `5fc141a1` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `caa6094a` | **5** |
+| ledger (main) | `review-fixes-2026-07-08` | `3aed3008` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 37Gi free (81% used)
+**Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T010747` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T021749` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T010747
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T021749
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -31,6 +31,7 @@ staged set BY NAME AND COUNT.
 MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/foreign-policy/GR-4A.md
+MM docs/implementation/packets/site-coherence/SCW-0.md
 MM docs/implementation/packets/town-cartography/TC-5B-II.md
 ```
 ```
@@ -38,6 +39,8 @@ MM docs/implementation/packets/town-cartography/TC-5B-II.md
 ## Last 12 build commits
 
 ```
+caa6094a 2026-08-12 SCW-0 flips LANDED with the seed-dependence finding on the record; ES-Da is the last reservation holder
+d648e788 2026-08-12 SCW-0: the site-coherence enforcement layer — the nine waves get a number they cannot drift
 d0af9b35 2026-08-12 TC-5b-ii flips LANDED with the §6.5 correction; the reservation moves to SCW-0
 c82cc859 2026-08-12 TC-5b-ii: the painter's mount — a settlement's Map tab draws its surveyor's sheet
 df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the painter's mount
@@ -48,18 +51,16 @@ ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17
 2fe94f77 2026-08-11 Schema 6 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
 5853732a 2026-08-11 Four packets promoted: the painter's mount unblocks, and GR-4a, SCW-0 and ES-Da compile READY
 33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
-b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-hall link, discharge SHIFT-2, re-record the golden master
-da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
 ```
 ## Last 6 ledger commits
 
 ```
+3aed3008 2026-08-12 The painter's mount is collected and flipped; the site-coherence opener begins
 5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
 5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
-37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -188,11 +189,24 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   refuted-premise correction + the widened build test's tenth manifest entry; the
   census reservation moved to SCW-0 (validator 19/2 READY). Memory row added for the
   Vite-worker chunk law. Transcript: session dir `subagents/agent-a908b637c360b5496.jsonl`.
-- **Lane Z (build, Opus) — IMPLEMENTING SCW-0** (the site-coherence opener, Wave 0 of
-  9), dispatched ~01:15 at base `d0af9b35`; sole census holder; the 120s corpus-cost
-  probe is a STOP; derived-not-transcribed alternatives; re-derive-and-report-against
-  exit criterion. Then ES-Da takes the reservation last. Transcript: session dir
+- **✅ Lane Z LANDED SCW-0 at `d648e788` (~01:35), chair-flipped at `caa6094a`.** The
+  site-coherence program OPENS: the 43-row identity-keyed contradiction baseline is
+  frozen, 66 derived predicate alternatives (22 quarantined), the B7 probe at 7,595 ms
+  vs the 120s STOP, gate TRUE_EXIT=0 at HEAD. **THE HEADLINE FINDING: the audit's
+  80/33/23/0/103 figures are SEED-DEPENDENT and reproducible at NO head** — the corpus
+  spec never pinned seed literals; rotating seeds spreads far wider than the gap while
+  culture rotation leaves figures identical; the frozen baseline SUPERSEDES the audit as
+  reference. One RATIFIED deviation: the SEVENTH path (`premortem-triggers.mjs`, forced
+  by gate step 2 — a REAL predicate, never an exemption lie; CR-SCW0-2 corrected on the
+  record). C7 caught a stale audit figure (`/barge/` is LIVE now). Census folded to
+  **2401/365/2036/19835/5594**. Transcript: session dir
   `subagents/agent-a4a558bea88a3606f.jsonl`.
+- **Lane AA (build, Opus) — IMPLEMENTING ES-Da** (the espionage rider, DARK — the
+  authorized re-entry, LAST of the four promoted packets), dispatched ~01:50 at base
+  `caa6094a`; sole census holder; byte-identity by construction, the string-literal
+  STOP, zero pulse-mouth lines, the `.npcs` comment conviction law. Landing makes
+  ES-5a/2/3/5d/6a reachable (still flag-dark until the endgame). Transcript: session
+  dir `subagents/agent-af30d0d9e08251373.jsonl`.
 - **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
   B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
   rows folded verbatim to the 08-11 archive with compact operative hooks kept).
