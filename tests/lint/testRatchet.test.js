@@ -690,8 +690,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'NOT FREED — the JSX arm of the same ratchet (18 against a budget of 6); same re-freeze, same wave.',
     'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
       'NOT FREED — the per-file JSX arm of the same ratchet; same re-freeze, same wave.',
-    'tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)':
-      'NOT FREED — a one-line ceiling re-freeze (164 against 163), but the kill-list is a design wave whose ceilings are meant to be driven to zero; raising one is a design call, not a ratchet-repair call.',
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
     'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':

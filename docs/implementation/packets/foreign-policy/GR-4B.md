@@ -1,6 +1,7 @@
 # Foreign Policy / GR-4b — the succession road speaks, once, where it acted
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `dd457b9a` (as GR-4b-α per CR-GR4B-8), 2026-08-12; flipped by the chair after verification (15 files by diff-tree, peaceTerms 797→797 effective AND 1264→1264 raw — Shape A exact on both metrics, A1–A7 green, census folded whole, the one gate red proven foreign and cured by the chair micro-act). Do not redispatch.
 - **Status note:** ✅ **PROMOTED 2026-08-12 by the Fable chair (session `c42c8924`, Lane AD),
   compiled from Lane AC's read-only draft and the seven rulings CR-GR4B-1..7 (§12a).**
   Lane AC carried GR-4b as DRAFT blocked on exactly two causes — the packet's SHAPE (a Herald
