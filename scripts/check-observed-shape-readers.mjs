@@ -85,8 +85,9 @@ import {
   MIN_ROWS,
   ORIGIN_MIN_ROWS,
   RETIRED_EXACT_BASELINE_SCHEMA,
+  RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema5Baseline,
+  validateSchema6Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -119,11 +120,14 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 2 = per leaf-name identity, ungoverned envelope (the migration predecessor).
  * 3 = per path-qualified executed origin identity (RETIRED — see below).
  * 4 = per leaf-name identity in the GOVERNED envelope, RAW detector output (RETIRED).
- * 5 = the same identity, EXPLAINED-WRITER FILTERED. THE LIVE AUTHORITY.
+ * 5 = the same identity narrowed by M6 + M8/M9 alone (RETIRED).
+ * 6 = the same identity narrowed by ALL FOUR declared post-filters — M6, M11,
+ *     M12 and M8/M9. THE LIVE AUTHORITY.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
-  RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
 };
 
 /**
@@ -272,10 +276,29 @@ export const isExactScanExcludedReadPath = (relativePath) => (
  * SHAPE-FAMILY POST-FILTER, "M6". Sibling machinery to the exclusion above, and
  * declared the same way: in source, measured, and controlled.
  *
- * THE DEFECT IT REMOVES — SIBLING-SLICE POVERTY. The corpus observes one shape
- * per leaf NAME. When one pipeline record is observed at several stages under
- * several names, the corpus binds the THINNEST member and the detector then
- * convicts every read of a key only the fatter siblings happened to expose.
+ * THE DEFECT IT REMOVES — SIBLING-SLICE POVERTY. In the leaf-name view this leg
+ * consumes, a shape's NAME is the container key it was walked under
+ * (`shapeNameOf`), so one pipeline record observed at several stages under
+ * several sibling keys becomes several SEPARATE shapes, each holding only the
+ * keys its own stage exposed. The resolver then binds a reader to whichever of
+ * those names its evidence path happens to spell — for `outcome` reads, the
+ * grounded property-access rule firing on `proposal.outcome`, whose only walked
+ * home is the proposal's stored clone (`applyWorldPulse.js`, `outcome:
+ * clone(outcome)`) and never the enriched applied record. The detector convicts
+ * every read of a key only the fatter siblings happened to carry, while reads of
+ * keys NO sibling carries still red — which is why this filter is per-KEY and
+ * not per-binding.
+ * ⚠ NOT POLYMORPHIC MIS-BINDING, AND THE READING HAS NOW BEEN PROPOSED TWICE.
+ * `scanReaders` refuses to emit a finding unless the receiver resolves to
+ * EXACTLY ONE shape (`legacy-reader-shape-scan.mjs`, the `objects.length === 1`
+ * guard), so a receiver that genuinely bound to several shapes produces no
+ * finding at all and no such row ever reaches this filter. The executed
+ * corroboration is in the committed inventory: from the SAME `outcome` parameter
+ * of the SAME function, `deityReembed`, `foodStockpileDeltas`, `lifecyclePatch`,
+ * `powerTransfer` and `resourceMembership` survive while `populationDeltas`,
+ * `tierChange` and `resourcePatch` clear. Identical binding, identical receiver,
+ * identical function; the split is purely per-KEY, which a binding-level defect
+ * cannot produce.
  * Measured at HEAD (857e3a1a), the two shapes this reaches:
  *   outcome    48 keys / 756 rows, family {selected 121k, candidates 101k,
  *              autoApplied 111k}                       → union 141 keys
@@ -335,12 +358,28 @@ export const SHAPE_FAMILY_FILTER = Object.freeze({
  * import the hand-keyed-address rot this program has already been bitten by;
  * a `<key> on <shape>` identity survives any file move.
  *
- * ⚠ 8 of these 21 are still live at HEAD; the other 13 were REPAIRED between
- * the genesis and HEAD (the baseline shrank 2,196 → 2,171 → 2,164). They stay
- * listed: the guard is against the FILTER, not a claim about what is currently
- * outstanding, and a regressed repair must not become silently clearable.
+ * ⚠ 8 of these were still live at the schema-5 genesis; the others were REPAIRED
+ * between the genesis and then (the baseline shrank 2,196 → 2,171 → 2,164). They
+ * stay listed: the guard is against the FILTER, not a claim about what is
+ * currently outstanding, and a regressed repair must not become silently
+ * clearable.
  * ⭐ The guard is not vacuous — `coalitionEvidence on outcome` is live and sits
  * on `outcome`, whose union grows 48 → 141 keys under this very filter.
+ *
+ * ⚠⚠ ONE ROW HAS BEEN RE-TRIAGED OUT, AND THIS IS THE ONLY DIRECTION THAT
+ * REDUCES ENFORCEMENT, SO IT CARRIES ITS REASON. `factions on locks` was banked
+ * class-(a) on the evidence that no `setLock` call names `factions`. That
+ * evidence was a GREP ARTIFACT: the writer is the DYNAMIC key row at
+ * `src/components/dossier/LockControls.jsx` — a `WORLD_LOCKS` entry spelling
+ * `key: 'factions'` and a `setLock(key, …)` call that resolves it at run time —
+ * and it has existed since `73f00920`. The refusal to touch the row was right;
+ * its stated reason was wrong. The chair therefore re-triaged it under
+ * CR-OSR-SCHEMA-6 and it moves to `EXPLAINED_WRITER_EXEMPTIONS` as an M8
+ * admission-list entry, which is the remedy the error message below already
+ * named: *"a row banked as a real defect cannot be exempted as explained;
+ * re-triage it instead."* The two acts are one commit BY NECESSITY —
+ * `assertExplainedWriterExemptions` throws at module load if a class-(a)
+ * identity is exempted, so the removal and the entry cannot be separated.
  */
 export const CLASS_A_PROTECTED_IDENTITIES = Object.freeze([
   '__adjudicationPending on stressors',
@@ -352,7 +391,6 @@ export const CLASS_A_PROTECTED_IDENTITIES = Object.freeze([
   'description on prominentRelationship',
   'dots on npcs',
   'evidenceId on outcome',
-  'factions on locks',
   'flavor on prominentRelationship',
   'flavour on prominentRelationship',
   'hooks on settlement',
@@ -397,21 +435,39 @@ export function shapeFamilyUnionOf(shapeName, shapes, keySets = shapeKeySetsOf(s
 }
 
 /**
+ * ⭐⭐ THE ONE HOME OF THE CLASS-(a) EROSION LAW, shared by every post-filter.
+ *
+ * ⚠ WHY THIS IS ONE FUNCTION AND NOT ONE PER FILTER (CR-OSR-FREEZE-8's shape).
+ * Four declared filters now narrow this instrument, and every one of them is
+ * adopted on the same measured property: it erases zero rows the chair banked as
+ * TRUE POSITIVES. Four copies of that check would be one live law with four
+ * homes, and the copy nobody tested would drift. The set intersection and the
+ * refusal live here exactly once; only the PROSE differs per filter, because a
+ * message that cannot say which instrument fired costs the next lane the time it
+ * exists to save.
+ */
+function assertClassADebtPreserved(clearedIdentities, { instrument, remedy }) {
+  const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
+  const erased = [...clearedIdentities].filter((identity) => guarded.has(identity));
+  if (erased.length) {
+    throw new Error(`${instrument} cleared ${erased.length} CR-OSR-FREEZE-3-R2 class-(a)`
+      + ` TRUE-POSITIVE row(s): ${erased.join('; ')}.${remedy}`);
+  }
+  return erased;
+}
+
+/**
  * ⭐⭐ THE CONTROL CR-OSR-FREEZE-6 REQUIRES. Zero true-positive erasure is the
  * WHOLE basis on which the filter was adopted, so it is enforced on every scan
  * rather than remembered from the adoption measurement.
  */
 export function assertShapeFamilyDebtPreserved(clearedIdentities) {
-  const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
-  const erased = [...clearedIdentities].filter((identity) => guarded.has(identity));
-  if (erased.length) {
-    throw new Error(`observed-shape shape-family filter (CR-OSR-FREEZE-6, theta=${SHAPE_FAMILY_FILTER.theta},`
-      + ` >=${SHAPE_FAMILY_FILTER.minKeys} keys) cleared ${erased.length} CR-OSR-FREEZE-3-R2 class-(a)`
-      + ` TRUE-POSITIVE row(s): ${erased.join('; ')}.`
-      + ' The filter was adopted ONLY on the measured property that it erases zero true positives, so this'
-      + ' is not a threshold to retune: the scan is refused until the chair re-triages the row(s).');
-  }
-  return erased;
+  return assertClassADebtPreserved(clearedIdentities, {
+    instrument: `observed-shape shape-family filter (CR-OSR-FREEZE-6, theta=${SHAPE_FAMILY_FILTER.theta},`
+      + ` >=${SHAPE_FAMILY_FILTER.minKeys} keys)`,
+    remedy: ' The filter was adopted ONLY on the measured property that it erases zero true positives, so this'
+      + ' is not a threshold to retune: the scan is refused until the chair re-triages the row(s).',
+  });
 }
 
 /**
@@ -465,6 +521,311 @@ export function shapeFamilyNotice(familyFilter) {
     + ` >=${SHAPE_FAMILY_FILTER.minKeys} keys): cleared ${familyFilter.cleared} read(s)`
     + ` across ${familyFilter.clearedIdentities.length} identit(ies) whose key is carried by a sibling`
     + ' shape in the same family. Zero CR-OSR-FREEZE-3-R2 class-(a) rows may be cleared; the scan refuses if one is.';
+}
+
+/**
+ * ⭐⭐ CR-OSR-SCHEMA-6 / M11 — THE DOM-GLOBAL RECEIVER EXCLUSION.
+ *
+ * THE DEFECT IT REMOVES. The ROOT NAME PRIOR in the byte-frozen detector is
+ * deliberately narrow, and its own comment names the reason: widening it "binds
+ * `window`, `raw`, `plan` and `outcome` to unrelated shapes". So a bare `window`
+ * grounds to NOTHING. But the next hop does not stop there: in
+ * `window.history.replaceState`, the receiver `window.history` resolves empty,
+ * which drops into the UNGROUNDED SINGLE-HOME rule — a name with exactly one
+ * home in the corpus binds. `history` has exactly one home, the settlement
+ * history container, so `window.history` binds to it and every member read on
+ * the browser History API becomes a finding against a domain record it has
+ * nothing to do with. MEASURED at HEAD: 11 reads across 3 identities and 3
+ * files, every one of them literally `window.history.*`.
+ *
+ * ⚠⚠ IT KEYS ON THE RECEIVER TEXT, NEVER ON THE KEY NAME, AND THAT IS THE WHOLE
+ * DESIGN. A key-name exclusion listing `state`, `replaceState`, `pushState`
+ * would suppress those keys on EVERY shape forever, and `state` is an entirely
+ * plausible domain key. The finding record already carries what is needed:
+ * `text`, the read expression as written. A finding clears only when its
+ * expression BEGINS with a declared host-global receiver, which is total,
+ * narrow, and structurally incapable of failing open on a domain key.
+ *
+ * ⚠ OPTIONAL CHAINING IS MATCHED TOO (`window?.history`), because a codebase
+ * that adopts it must not silently lose the exclusion — and a receiver root is
+ * the one position where `?.` changes nothing about what is being read.
+ *
+ * ⭐ WHY A POST-FILTER: the same reason M6 is one. `BUILTIN_MEMBERS` and the
+ * root prior both live inside `legacy-reader-shape-scan.mjs`, byte-frozen to
+ * blob 0310fa9f, so this consumes the detector's findings array and returns a
+ * SUBSET; `stats` passes through by identity and the anti-vacuity floor keeps
+ * measuring the DETECTOR.
+ */
+export const DOM_GLOBAL_RECEIVER_ROOTS = Object.freeze([
+  'document', 'globalThis', 'window',
+]);
+
+/**
+ * The host-global names an exclusion MAY name. TOTAL positive predicate, the
+ * same shape as `EXACT_SCAN_EXCLUDABLE_UI_ROOTS`: a root that is not one of
+ * these is refused, so no unlisted name fails open.
+ *
+ * ⚠ `self` IS ADMISSIBLE AND DELIBERATELY NOT DECLARED. It is a genuine host
+ * global, which is why it belongs in the vocabulary — and it is also an
+ * entirely plausible domain identifier (`const self = …`), which is why adding
+ * it to the live set would be a real risk and must be a deliberate act rather
+ * than a token nobody notices. Recorded here so the omission is not read as an
+ * oversight and re-"fixed".
+ */
+const DOM_GLOBAL_RECEIVER_VOCABULARY = Object.freeze([
+  'document', 'globalThis', 'self', 'window',
+]);
+
+/** A read expression's receiver root, or null. `?.` is accepted at the root. */
+const RECEIVER_ROOT = /^([A-Za-z_$][\w$]*)\??\./;
+
+/** Fail-closed at declaration: a DOMAIN receiver cannot be quietly added. */
+export function assertDomGlobalReceiverRoots(roots = DOM_GLOBAL_RECEIVER_ROOTS) {
+  if (!Array.isArray(roots) || !roots.length) {
+    throw new Error('observed-shape DOM_GLOBAL_RECEIVER_ROOTS must be a nonempty array of host-global receiver names');
+  }
+  for (const root of roots) {
+    if (typeof root !== 'string' || !/^[A-Za-z_$][\w$]*$/.test(root)) {
+      throw new Error(`observed-shape DOM-global receiver root must be a bare identifier; received ${JSON.stringify(root)}`);
+    }
+    if (!DOM_GLOBAL_RECEIVER_VOCABULARY.includes(root)) {
+      throw new Error(`observed-shape DOM-global receiver root ${JSON.stringify(root)} is not a declared host global`
+        + ` (${DOM_GLOBAL_RECEIVER_VOCABULARY.join(', ')}). M11 excludes reads whose RECEIVER is browser/runtime`
+        + ' surface; a domain receiver here would clear every read of a real record and blind the instrument.');
+    }
+  }
+  return roots;
+}
+assertDomGlobalReceiverRoots();
+
+/** The declared host-global receiver a finding's expression opens with, or null. */
+export function domGlobalReceiverOf(text, roots = DOM_GLOBAL_RECEIVER_ROOTS) {
+  const match = RECEIVER_ROOT.exec(String(text ?? ''));
+  return match && roots.includes(match[1]) ? match[1] : null;
+}
+
+/**
+ * ⭐⭐ THE CORPUS-DERIVED HALF OF THE GUARD, and it is the one that cannot rot.
+ * The vocabulary above is a literal and a literal can be widened; this is not.
+ * A declared root may never be one of the corpus's own WALK ROOTS — the exact
+ * names the detector's root prior grounds (`settlement`, `save`, `campaign`,
+ * `worldState`, …) — because clearing every read whose expression opens with one
+ * of those would retire most of the instrument in a single token.
+ *
+ * ⚠ IT IS DELIBERATELY *NOT* "the root must not be an observed shape". MEASURED
+ * at HEAD: `window` IS an observed corpus shape name, while being nothing the
+ * root prior can ground. That check would therefore have thrown on the very
+ * exclusion this filter exists to make — a guard written from reasoning instead
+ * of from a measurement.
+ */
+export function assertDomGlobalRootsAreNotCorpusRoots(roots, corpus) {
+  const walkRoots = new Set(corpus?.rootShapes || []);
+  const collisions = roots.filter((root) => walkRoots.has(root));
+  if (collisions.length) {
+    throw new Error(`observed-shape DOM-global receiver root(s) ${collisions.join(', ')} name a CORPUS WALK ROOT.`
+      + ' The detector grounds those names through its root prior, so excluding them would clear reads of real'
+      + ' records rather than of browser surface. The scan is refused.');
+  }
+  return roots;
+}
+
+/**
+ * Post-scan, PRE-INVENTORY, and downstream of the shape-family filter. Same
+ * contract as every filter here: a SUBSET, `stats` by identity, heuristic leg
+ * only — the exact leg addresses findings by executed origin, where a receiver
+ * root is not part of the address.
+ */
+export function applyDomGlobalReceiverFilter({
+  scanMode, corpus, scan, roots = DOM_GLOBAL_RECEIVER_ROOTS,
+}) {
+  if (scanMode !== BASELINE_SCAN_MODE) {
+    return { ...scan, domGlobals: { applied: false, cleared: 0, clearedIdentities: [] } };
+  }
+  assertDomGlobalReceiverRoots(roots);
+  assertDomGlobalRootsAreNotCorpusRoots(roots, corpus);
+  const cleared = new Set();
+  const receivers = new Set();
+  const findings = scan.findings.filter((finding) => {
+    const receiver = domGlobalReceiverOf(finding.text, roots);
+    if (!receiver) return true;
+    receivers.add(receiver);
+    cleared.add(identityOf(finding));
+    return false;
+  });
+  const clearedIdentities = [...cleared].sort();
+  assertClassADebtPreserved(clearedIdentities, {
+    instrument: `observed-shape DOM-global receiver filter (CR-OSR-SCHEMA-6 / M11, roots ${roots.join(', ')})`,
+    remedy: ' A row the chair banked as a REAL defect cannot be dismissed as browser surface: either the'
+      + ' triage was wrong and the chair must re-triage it, or this filter is reaching further than its'
+      + ' declared receivers. The scan is refused until one of those is settled.',
+  });
+  return {
+    ...scan,
+    findings,
+    stats: scan.stats,
+    domGlobals: {
+      applied: true,
+      cleared: scan.findings.length - findings.length,
+      clearedIdentities,
+      receivers: [...receivers].sort(),
+    },
+  };
+}
+
+/** Recorded on every human-facing run, the way the scope exclusion is. */
+export function domGlobalReceiverNotice(domGlobals, roots = DOM_GLOBAL_RECEIVER_ROOTS) {
+  if (!domGlobals?.applied) {
+    return 'CR-OSR-SCHEMA-6 M11 DOM-global receiver filter: NOT APPLIED (exact-origin probe keeps the raw detector output).';
+  }
+  return `CR-OSR-SCHEMA-6 M11 DOM-global receiver filter (${roots.join(', ')}): cleared`
+    + ` ${domGlobals.cleared} read(s) across ${domGlobals.clearedIdentities.length} identit(ies) whose read`
+    + ' EXPRESSION begins with a host global, so the shape the ungrounded single-home rule bound them to is not'
+    + ' the record being read. Keyed on the RECEIVER, never on the key name. No class-(a) TRUE POSITIVE may be cleared.';
+}
+
+/**
+ * ⭐⭐ CR-OSR-SCHEMA-6 / M12 — THE LANGUAGE-SURFACE RESIDUAL.
+ *
+ * THE DEFECT IT REMOVES. The frozen detector skips language surface through its
+ * own `BUILTIN_MEMBERS` set, and its header states the premise that set rests
+ * on: "a domain key that collides with it would be skipped. Nothing in the
+ * measured corpus collides." The set is a hand-written enumeration inside a
+ * BYTE-FROZEN module, so any member it omits is a permanent hole — and it omits
+ * `toLocaleString`, which `Object.prototype` has carried since ES1. MEASURED at
+ * HEAD: `popFirst.toLocaleString()` and `popLast.toLocaleString()` on population
+ * NUMBERS drawn out of a history array, reported as reads of a key the history
+ * container never writes. 2 reads, 1 identity, 1 file, and a pure artefact.
+ *
+ * ⚠ THIS IS AN EXACT FROZEN KEY SET, NEVER A PATTERN, AND THE MEASUREMENT SAYS
+ * WHY. A tempting `/^to[A-Z]/` rule would also have cleared `toType on history`
+ * (`src/domain/worldPulse/stressorDynamics.js`), which is a genuine domain key
+ * on a genuine record. One character of pattern would have silently deleted a
+ * real finding; an enumerated set cannot.
+ *
+ * ⚠ `test on test` (`src/domain/hookEscalation.js`, `rule.test.test(text)` where
+ * `rule.test` is a RegExp) is language surface by the same argument and is
+ * DELIBERATELY LEFT IN THE INVENTORY — deliberately deferred, documented, not a
+ * bug to re-find. Two independent reasons: `test` is far more plausible as a
+ * domain key than `toLocaleString` is, and the corpus MEASURABLY carries `test`
+ * as a real key on a real shape, which the declaration guard below refuses
+ * outright. Clearing one read is not worth a permanent blind spot.
+ */
+export const LANGUAGE_SURFACE_RESIDUAL_KEYS = Object.freeze(['toLocaleString']);
+
+/**
+ * The prototypes a declared residual key must actually live on. EXECUTED, not
+ * enumerated: `'toLocaleString' in Object.prototype` is asked of the running
+ * engine, so this predicate cannot rot and cannot be satisfied by a domain key.
+ *
+ * ⚠ `RegExp.prototype` and `Function.prototype` are ABSENT ON PURPOSE. They
+ * would admit `source`, `flags`, `lastIndex`, `test` and `name` — and `source`
+ * is already an observed domain key on four shapes in this very estate, while
+ * `name` is the most common domain key there is. A vocabulary that admits them
+ * is a door, not a guard.
+ */
+const LANGUAGE_SURFACE_PROTOTYPES = Object.freeze([
+  Object.prototype, Array.prototype, String.prototype,
+  Number.prototype, Boolean.prototype, Date.prototype,
+]);
+
+/** Fail-closed at declaration: a key that is not on a builtin prototype is refused. */
+export function assertLanguageSurfaceResidualKeys(keys = LANGUAGE_SURFACE_RESIDUAL_KEYS) {
+  if (!Array.isArray(keys) || !keys.length) {
+    throw new Error('observed-shape LANGUAGE_SURFACE_RESIDUAL_KEYS must be a nonempty array of builtin member names');
+  }
+  for (const key of keys) {
+    if (typeof key !== 'string' || !/^[A-Za-z_$][\w$]*$/.test(key)) {
+      throw new Error(`observed-shape language-surface residual key must be a bare identifier; received ${JSON.stringify(key)}`);
+    }
+    if (!LANGUAGE_SURFACE_PROTOTYPES.some((proto) => key in proto)) {
+      throw new Error(`observed-shape language-surface residual key ${JSON.stringify(key)} is not a member of any`
+        + ' declared builtin prototype (Object, Array, String, Number, Boolean, Date). M12 exists only to finish the'
+        + ' frozen detector\'s BUILTIN_MEMBERS list; a key that is not language surface is a DOMAIN key and clearing'
+        + ' it would delete a real finding.');
+    }
+  }
+  return keys;
+}
+assertLanguageSurfaceResidualKeys();
+
+/**
+ * ⭐⭐ THE CORPUS-DERIVED HALF, and the reason `test` cannot be smuggled in.
+ * The frozen detector's own header rests on "nothing in the measured corpus
+ * collides" — so this ASKS the corpus instead of trusting the sentence. A
+ * declared residual key that any observed shape genuinely carries is refused,
+ * because on that shape the read is real and clearing it would be a deletion.
+ * MEASURED at HEAD: `toLocaleString` is carried by ZERO shapes; `test` is
+ * carried by one.
+ */
+export function assertLanguageSurfaceKeysAreNotObserved(keys, corpus) {
+  const collisions = [];
+  for (const [name, shape] of Object.entries(corpus?.shapes || {})) {
+    for (const key of keys) {
+      if (Array.isArray(shape?.keys) && shape.keys.includes(key)) collisions.push(`${key} on ${name}`);
+    }
+  }
+  if (collisions.length) {
+    throw new Error(`observed-shape language-surface residual key(s) are OBSERVED DOMAIN KEYS: ${collisions.sort().join('; ')}.`
+      + ' A key a producer actually writes is not language surface, and clearing it would delete real findings.'
+      + ' The scan is refused.');
+  }
+  return keys;
+}
+
+/**
+ * Post-scan, PRE-INVENTORY. Same contract as its three siblings: a SUBSET,
+ * `stats` by identity, heuristic leg only.
+ *
+ * ⚠ SHAPE-BLIND ON PURPOSE, and this is the ONE filter here that is. M6, M11 and
+ * M8/M9 are all qualified — by family, by receiver, by identity. Language
+ * surface is the one thing that genuinely IS on every object, so qualifying by
+ * shape would mean re-declaring the same key for each shape it appears on and
+ * getting a permanent hole on the shape nobody listed. The declaration guards
+ * above are what make shape-blindness safe: the key must be on a builtin
+ * prototype AND absent from every observed shape.
+ */
+export function applyLanguageSurfaceFilter({
+  scanMode, corpus, scan, keys = LANGUAGE_SURFACE_RESIDUAL_KEYS,
+}) {
+  if (scanMode !== BASELINE_SCAN_MODE) {
+    return { ...scan, languageSurface: { applied: false, cleared: 0, clearedIdentities: [] } };
+  }
+  assertLanguageSurfaceResidualKeys(keys);
+  assertLanguageSurfaceKeysAreNotObserved(keys, corpus);
+  const residual = new Set(keys);
+  const cleared = new Set();
+  const findings = scan.findings.filter((finding) => {
+    if (!residual.has(finding.key)) return true;
+    cleared.add(identityOf(finding));
+    return false;
+  });
+  const clearedIdentities = [...cleared].sort();
+  assertClassADebtPreserved(clearedIdentities, {
+    instrument: `observed-shape language-surface filter (CR-OSR-SCHEMA-6 / M12, keys ${keys.join(', ')})`,
+    remedy: ' A row the chair banked as a REAL defect cannot be dismissed as language surface. The scan is'
+      + ' refused until the chair re-triages the row or the declared key set is narrowed.',
+  });
+  return {
+    ...scan,
+    findings,
+    stats: scan.stats,
+    languageSurface: {
+      applied: true,
+      cleared: scan.findings.length - findings.length,
+      clearedIdentities,
+    },
+  };
+}
+
+/** Recorded on every human-facing run, the way the scope exclusion is. */
+export function languageSurfaceNotice(languageSurface, keys = LANGUAGE_SURFACE_RESIDUAL_KEYS) {
+  if (!languageSurface?.applied) {
+    return 'CR-OSR-SCHEMA-6 M12 language-surface filter: NOT APPLIED (exact-origin probe keeps the raw detector output).';
+  }
+  return `CR-OSR-SCHEMA-6 M12 language-surface filter (${keys.join(', ')}): cleared`
+    + ` ${languageSurface.cleared} read(s) across ${languageSurface.clearedIdentities.length} identit(ies) of a`
+    + ' builtin prototype member the byte-frozen detector\'s BUILTIN_MEMBERS list predates. Each declared key must'
+    + ' live on a builtin prototype AND be absent from every observed shape, or the scan refuses.';
 }
 
 /**
@@ -557,8 +918,15 @@ export function writeShapesIn(source, key) {
  *
  * THE MEASURED INSTANCE THAT FORCED IT. `neighbourNetwork on settlement` — 23
  * files already bank it in the schema-4 inventory, `src/lib/saves.js` writes it
- * (`deriveOwnNeighbourEntry`, and the link/undo/import paths beside it), and the
- * corpus runs none of them. A display repair then moved
+ * (`withNeighbourNetworkFromRelationship`, and the link/undo/import paths beside
+ * it), and the corpus runs none of them.
+ * ⚠ THAT FUNCTION NAME WAS WRONG UNTIL CR-OSR-SCHEMA-6 and the correction is
+ * worth recording: this line used to say `deriveOwnNeighbourEntry`, a function
+ * that has never existed anywhere in the estate — a single grep returned exactly
+ * one hit, this comment itself. The invented name almost certainly came from the
+ * real function's own docstring verb ("Derive the settlement's own
+ * neighbourNetwork entry…"). Prose inside a governed file is not machine-checked
+ * the way `entry.writer` below is, which is precisely why it could rot unnoticed. A display repair then moved
  * `src/components/townMap/edgeAnnotations.js` off the genuinely-dead
  * `settlement.neighbors` onto the real `settlement.neighbourNetwork`, and the
  * instrument correctly refused the maintenance write: an identity SWAP is
@@ -593,8 +961,34 @@ export function writeShapesIn(source, key) {
  * adding an entry REDS, removing one (returning an identity to enforcement) is
  * lawful. And no entry may name a CR-OSR-FREEZE-3-R2 class-(a) identity — the
  * same guard set M6 is held to, asserted at module load below.
+ *
+ * ⚠⚠ H26 — GATE 0 PROBES THE CONTAINER KEY, NOT THE SUB-KEY, AND THE CHAIR HAS
+ * ACCEPTED THAT BLIND SPOT WITH A WRITTEN REASON. `worldPulse on campaignState`
+ * is the second live instance and states the shape plainly: the writer emits
+ * `{lastTick, lastInterval, updatedAt}`, both readers ask for `.events`, and
+ * gate 0 — a textual probe for the key `worldPulse` — passes on the container
+ * while saying nothing about the sub-key. An exemption here would have made a
+ * genuinely broken read invisible, so the exemption was gated on the repair
+ * landing first: `src/store/aiChronicleContext.js` now sources the AI
+ * Chronicle's world lane from the campaign's `worldState.pulseHistory`
+ * (CR-S6-6, landed `da31d170`), and the surviving `campaignState.worldPulse`
+ * read is the deliberate legacy per-save FALLBACK the sibling dossier surface
+ * also kept. ⭐ The standing cure the chair has ruled for the class is
+ * BANK-BY-RULE — an exempted row stays visible in the inventory as a ceiling
+ * instead of vanishing — and it is chartered as its own mint, because
+ * re-admitting rows is a SET-GROWING change and this genesis is a pure shrink.
  */
 export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
+  Object.freeze({
+    identity: 'factions on locks',
+    mechanism: 'admission-list',
+    writer: 'src/components/dossier/LockControls.jsx',
+    ruling: 'CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)',
+    why: 'A USER-ACTION writer the generation corpus never runs. WORLD_LOCKS is a closed,'
+      + ' shape-qualified admission list naming the key (`key: \'factions\'`), and the toggle'
+      + ' resolves it through a DYNAMIC `setLock(key, …)` call — which is why a grep for'
+      + ' "setLock naming factions" returned nothing and the row was mis-banked class (a).',
+  }),
   Object.freeze({
     identity: 'neighbourNetwork on settlement',
     mechanism: 'save-time-writer',
@@ -604,6 +998,27 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' IMPORTED — never during generation, which is the only thing the corpus executes.'
       + ' saves.js derives the settlement\'s own entry and the link/undo/import paths rewrite'
       + ' it; 23 files banked the identity under schema 4 for exactly this reason.',
+  }),
+  Object.freeze({
+    identity: 'stresses on settlement',
+    mechanism: 'admission-list',
+    writer: 'src/domain/settlement.schema.js',
+    ruling: 'CR-OSR-SCHEMA-6 / M8 — registered alias',
+    why: 'A DECLARED historical alias in FIELD_ALIASES. normalizeSettlement reads from any'
+      + ' alias and writes ONLY the canonical key, so nothing emits `stresses` BY DESIGN;'
+      + ' the reads are inbound compatibility for saves authored before the rename. Gate 3'
+      + ' admits FIELD_ALIASES values by name, and the entry names the DECLARATION rather'
+      + ' than the adapter because the declaration IS the admission list.',
+  }),
+  Object.freeze({
+    identity: 'worldPulse on campaignState',
+    mechanism: 'save-time-writer',
+    writer: 'src/store/campaignPulseHelpers.js',
+    ruling: 'CR-OSR-SCHEMA-6 / M9',
+    why: 'campaignStateForWorldPulse installs the key onto a real campaignState when a pulse'
+      + ' is PERSISTED. The corpus executes generation plus the DOMAIN pulse and seeds'
+      + ' campaignState itself, so the STORE-layer writer is never run — one lifecycle step'
+      + ' further out than saves.js and the same class.',
   }),
 ]);
 
@@ -707,10 +1122,10 @@ export function authoredInputHistoryCommits(key, { root = ROOT } = {}) {
 }
 
 /**
- * Post-scan, PRE-INVENTORY, and downstream of the shape-family filter. Same
- * contract as `applyShapeFamilyFilter`: `stats` passes through BY IDENTITY, so
- * the anti-vacuity floor keeps measuring the DETECTOR's reach and no exemption
- * can be added to hide a corpus that stopped observing.
+ * Post-scan, PRE-INVENTORY, and LAST in the declared chain — downstream of M6,
+ * M11 and M12. Same contract as all three: `stats` passes through BY IDENTITY,
+ * so the anti-vacuity floor keeps measuring the DETECTOR's reach and no
+ * exemption can be added to hide a corpus that stopped observing.
  *
  * ⚠ HEURISTIC LEG ONLY, for the same reason the family filter is: the exemption
  * is keyed on the leaf-name identity, which the exact leg does not speak.
@@ -862,7 +1277,8 @@ export function cohortNotice(inventory, cohort = UNREVIEWED_UI_COHORT) {
   const { files, identities, counts } = cohortOf(inventory, cohort.scopes);
   return `${cohort.ruling} ${cohort.tag} cohort (${cohort.scopes.join(', ')}):`
     + ` ${files} file(s) / ${identities} identit(ies) / ${counts} read(s), banked in the`
-    + ' frozen inventory and awaiting per-row triage. These are ENFORCED, not excluded:'
+    + ' frozen inventory and PER-ROW TRIAGED under CR-OSR-FREEZE-7 (the dispositions live in the'
+    + ' chair\'s record, not here). These are ENFORCED, not excluded:'
     + ' CR-OSR-SCOPE-1 removes them from EXACT resolution only.';
 }
 
@@ -1358,12 +1774,14 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
       'The line number is excluded so unrelated line churn does not rewrite the governed identity.',
       'Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 5 = the same identity, EXPLAINED-WRITER FILTERED. The byte-frozen detector is unchanged;',
-      'its output is narrowed by two DECLARED post-filters in check-observed-shape-readers.mjs —',
-      'CR-OSR-FREEZE-6 shape-family union (M6) and the M8/M9 explained-writer exemption. Both are inside',
-      'the detectorTree digest this envelope binds, so retuning either reds the gate and needs a new mint.',
-      'A row here therefore means: a guarded read of a key NO writer the corpus runs produces, and no',
-      'declared out-of-corpus writer explains. Schema 4 is the RETIRED unfiltered predecessor.',
+      'SCHEMA 6 = the same identity, NON-DOMAIN-SURFACE FILTERED. The byte-frozen detector is unchanged;',
+      'its output is narrowed by FOUR DECLARED post-filters in check-observed-shape-readers.mjs —',
+      'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
+      'language-surface residual, and the M8/M9 explained-writer exemption. All four are inside',
+      'the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.',
+      'A row here therefore means: a guarded read, of a real record rather than of browser or language',
+      'surface, of a key NO writer the corpus runs produces and no declared out-of-corpus writer explains.',
+      'Schema 4 (raw) and schema 5 (M6 + M8/M9 only) are the RETIRED predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -1394,7 +1812,7 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
       migrationReview: digestOf(migrationReview),
     },
   };
-  validateSchema5Baseline(baseline);
+  validateSchema6Baseline(baseline);
   return baseline;
 }
 
@@ -1526,7 +1944,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema5Baseline,
+    validateBaseline: validateSchema6Baseline,
     validateBaselineHistory,
     committedInputManifestsFor,
     validateMigrationBundle,
@@ -1690,7 +2108,15 @@ export async function run(argv = [], overrides = {}) {
     sentinel,
     scanConfig: SCAN_CONFIG,
   });
-  // CR-OSR-FREEZE-6 — post-scan, pre-inventory. Everything below reads `scan`.
+  // ⭐⭐ THE DECLARED POST-FILTER CHAIN — post-scan, pre-inventory, and the ONE
+  // place its order is fixed. Four filters narrow the byte-frozen detector's
+  // output, and they are applied in DECLARATION ORDER (M6, M11, M12, M8/M9),
+  // which the walker's own composition must match or it measures a different
+  // instrument than the gate. ⚠ ORDER IS IMMATERIAL TO THE RESULT AND THAT IS
+  // MEASURED, NOT ASSUMED: the four are DISJOINT on the live estate — no read is
+  // claimed by two — so no permutation moves a figure. The order is fixed anyway,
+  // because "whatever order it happens to run in" is not a specification.
+  // CR-OSR-FREEZE-6 — the shape-family union.
   const familyScan = applyShapeFamilyFilter({ scanMode: command.scanMode, corpus, scan: rawScan });
   emitProgress?.({
     phase: 'family-filter-complete',
@@ -1698,12 +2124,33 @@ export async function run(argv = [], overrides = {}) {
     findings: familyScan.findings.length,
     cleared: familyScan.familyFilter.cleared,
   });
-  // ⭐ M8/M9 — the explained-writer exemption, downstream of the family filter and
-  // still upstream of every inventory. `assertExplainedWriterEvidence` runs FIRST:
-  // a stale entry must red the scan, never quietly exempt nothing.
+  // ⭐ M11 — reads whose RECEIVER is a host global, never the record they bound to.
+  const domGlobalScan = applyDomGlobalReceiverFilter({
+    scanMode: command.scanMode, corpus, scan: familyScan,
+  });
+  emitProgress?.({
+    phase: 'dom-global-filter-complete',
+    scanMode: command.scanMode,
+    findings: domGlobalScan.findings.length,
+    cleared: domGlobalScan.domGlobals.cleared,
+  });
+  // ⭐ M12 — the builtin prototype members the frozen BUILTIN_MEMBERS list predates.
+  const languageScan = applyLanguageSurfaceFilter({
+    scanMode: command.scanMode, corpus, scan: domGlobalScan,
+  });
+  emitProgress?.({
+    phase: 'language-surface-filter-complete',
+    scanMode: command.scanMode,
+    findings: languageScan.findings.length,
+    cleared: languageScan.languageSurface.cleared,
+  });
+  // ⭐ M8/M9 — the explained-writer exemption, last and still upstream of every
+  // inventory, so its `cleared` count reports only rows nothing else explained.
+  // `assertExplainedWriterEvidence` runs FIRST: a stale entry must red the scan,
+  // never quietly exempt nothing.
   const explainedWriterEvidence = runtime.assertExplainedWriterEvidence();
   const scan = applyExplainedWriterFilter({
-    scanMode: command.scanMode, scan: familyScan, evidence: explainedWriterEvidence,
+    scanMode: command.scanMode, scan: languageScan, evidence: explainedWriterEvidence,
   });
   emitProgress?.({
     phase: 'explained-writer-filter-complete',
@@ -1728,6 +2175,8 @@ export async function run(argv = [], overrides = {}) {
     console.log(`observed-shape ${command.scanMode} artifact: ${scan.findings.length} finding(s) written to ${command.jsonPath}`);
     console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
     console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(domGlobalReceiverNotice(scan.domGlobals));
+    console.log(languageSurfaceNotice(scan.languageSurface));
     console.log(explainedWriterNotice(scan.explainedWriters));
     return 0;
   }
@@ -1792,12 +2241,16 @@ export async function run(argv = [], overrides = {}) {
     console.log(`\n${scan.findings.length} finding(s); scan reached ${scan.stats.resolved}/${scan.stats.reads} reads across ${scan.stats.files} files`);
     console.log(excludedScopeNotice(excludedReadScopes, scan.stats));
     console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(domGlobalReceiverNotice(scan.domGlobals));
+    console.log(languageSurfaceNotice(scan.languageSurface));
     console.log(explainedWriterNotice(scan.explainedWriters));
     console.log(cohortNotice(inventoryOf(scan.findings)));
   }
   if (!violations.length && !stale.length && !vacuity.length) {
     console.log(`observed-shape readers: ${scan.findings.length} finding(s), exactly matching the frozen inventory.`);
     console.log(shapeFamilyNotice(scan.familyFilter));
+    console.log(domGlobalReceiverNotice(scan.domGlobals));
+    console.log(languageSurfaceNotice(scan.languageSurface));
     console.log(explainedWriterNotice(scan.explainedWriters));
     console.log(cohortNotice(baseline.inventory));
     return 0;

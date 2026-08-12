@@ -16,7 +16,7 @@
  *     ledger that already exists. It needs NO exact artifact, which is the point
  *     — the exact detector cannot complete a full-tree scan.
  *
- *   schema 4 -> 5  (LIVE)    the SAME function with a different target. The
+ *   schema 4 -> 5  (RETIRED) the SAME function with a different target. The
  *     alphabet did not move again — schema 5 is schema 4's identity with the
  *     detector's output NARROWED by two declared post-filters — so the whole
  *     review is once more `predecessorRows`, and the code path is genuinely the
@@ -25,6 +25,14 @@
  *     target claims; both are parameters, and `LEAF_MIGRATION_PREDECESSOR`
  *     is the one table that binds them so no caller can pair 5 with a schema-2
  *     predecessor or 4 with a schema-4 one.
+ *
+ *   schema 5 -> 6  (LIVE)    the same function, a third target, and NOT ONE new
+ *     branch. Schema 6 adds two further post-filters (M11 DOM-global receiver,
+ *     M12 language-surface residual) to the same byte-frozen detector, so the
+ *     alphabet is unchanged for the third time running and the reconciliation
+ *     is once more `predecessorRows`. That this migration needed only a row in
+ *     `LEAF_MIGRATION_PREDECESSOR` and an entry in the predecessor-validator
+ *     table is the evidence that the 4→5 generalisation was the right shape.
  *
  * In both, the predecessor schema-2 baseline and every scan artifact are
  * canonical, content-addressed inputs sharing one committed source, execution
@@ -53,8 +61,10 @@ import {
   validateScanArtifact,
 } from './lib/observed-shape-governance.mjs';
 import {
+  RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   validateSchema4Baseline,
+  validateSchema5Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -67,21 +77,41 @@ export const MIGRATION_BUNDLE_SCHEMA = 2;
 export const RETIRED_EXACT_TARGET_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf target. */
 export const HEURISTIC_TARGET_SCHEMA = 4;
-/** The LIVE EXPLAINED-WRITER-FILTERED heuristic-leaf target. */
+/** The RETIRED M6-and-M8/M9-only filtered heuristic-leaf target. */
 export const FILTERED_TARGET_SCHEMA = 5;
+/** The LIVE NON-DOMAIN-SURFACE-FILTERED heuristic-leaf target (M6 + M11 + M12
+ *  + M8/M9). */
+export const SURFACE_FILTERED_TARGET_SCHEMA = 6;
 
 /**
  * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
  *
- * Both leaf migrations run the same reconciliation, so the only way to keep them
- * from being confusable is to make the pairing DATA that every entry point reads
- * — never two hand-written literals at two call sites. A caller cannot migrate a
- * schema-2 baseline to schema 5, nor re-run the retired 2→4 against a schema-4
- * predecessor, because neither pairing exists here.
+ * All three leaf migrations run the same reconciliation, so the only way to keep
+ * them from being confusable is to make the pairing DATA that every entry point
+ * reads — never hand-written literals at separate call sites. A caller cannot
+ * migrate a schema-2 baseline to schema 6, nor re-run a retired pairing against
+ * the wrong predecessor, because no such pairing exists here.
+ *
+ * ⚠ THE CHAIN IS STRICT AND SINGLE-STEP BY CONSTRUCTION: each target's value is
+ * written as the CONSTANT for its predecessor rather than as a literal, so a
+ * skipped rung (2 → 6) is not expressible.
  */
 export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [HEURISTIC_TARGET_SCHEMA]: 2,
   [FILTERED_TARGET_SCHEMA]: HEURISTIC_TARGET_SCHEMA,
+  [SURFACE_FILTERED_TARGET_SCHEMA]: FILTERED_TARGET_SCHEMA,
+});
+
+/**
+ * ⭐ THE ONE TABLE THAT NAMES EACH LEAF PREDECESSOR'S GOVERNED ENVELOPE LAW.
+ * Sibling to the pairing above and kept beside it for the same reason: a
+ * `if (schema === 4) … else if (schema === 5) …` chain is two places to forget
+ * a rung. Schema 2 has no entry because it is the UNGOVERNED predecessor and
+ * has no validator of its own — the structural checks below are its law.
+ */
+const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
+  [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA]: validateSchema4Baseline,
+  [RETIRED_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema5Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -126,15 +156,13 @@ function canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema = 2
   if (!isRecord(predecessorBaseline) || predecessorBaseline.schema !== predecessorSchema) {
     throw new Error(`observed-shape predecessor baseline must be a schema-${predecessorSchema} object`);
   }
-  // ⭐ A SCHEMA-4 PREDECESSOR IS VALIDATED BY ITS OWN GOVERNED ENVELOPE LAW, not
-  // by the loose structural checks below, which exist because the schema-2
+  // ⭐ A LEAF PREDECESSOR IS VALIDATED BY ITS OWN GOVERNED ENVELOPE LAW, not by
+  // the loose structural checks below, which exist because the schema-2
   // predecessor was UNGOVERNED and had no validator of its own. Re-deriving a
   // second, weaker definition of an envelope that already has a governed one is
   // the doubled-law shape; this defers to the real law and then continues with
   // the shared structural checks, which the governed envelope also satisfies.
-  if (predecessorSchema === RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA) {
-    validateSchema4Baseline(predecessorBaseline);
-  }
+  LEAF_PREDECESSOR_VALIDATOR[predecessorSchema]?.(predecessorBaseline);
   // Canonicalization is itself part of validation: it refuses cycles,
   // undefined values and non-finite numbers before any digest is authoritative.
   const canonical = JSON.parse(canonicalJson(predecessorBaseline));
@@ -1162,20 +1190,21 @@ export function run(argv = process.argv.slice(2)) {
   const { predecessorPath, legacyPath, currentPath } = command;
   // The target is DERIVED FROM THE INPUTS unless stated: an exact `--current`
   // artifact can only mean the retired 2->3 pairing, and its absence can only
-  // mean the live heuristic 2->4 re-freeze. `--target-schema` makes it explicit
-  // and turns any mismatch into a refusal rather than a silent mode switch.
+  // mean the LIVE leaf re-freeze. `--target-schema` makes it explicit and turns
+  // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FILTERED_TARGET_SCHEMA);
-  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA]
-    .includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${FILTERED_TARGET_SCHEMA} (live filtered leaf),`
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : SURFACE_FILTERED_TARGET_SCHEMA);
+  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
+    SURFACE_FILTERED_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${SURFACE_FILTERED_TARGET_SCHEMA} (live surface-filtered leaf),`
+      + ` ${FILTERED_TARGET_SCHEMA} (retired M6/M8-only filtered leaf),`
       + ` ${HEURISTIC_TARGET_SCHEMA} (retired unfiltered leaf)`
       + ` or ${RETIRED_EXACT_TARGET_SCHEMA} (retired exact); received ${JSON.stringify(command.targetSchema)}`);
   }
   const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
   if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=5] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=6] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
   }
   if (heuristicTarget && currentPath) {
     throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`

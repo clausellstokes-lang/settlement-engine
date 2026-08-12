@@ -12,9 +12,11 @@ import {
   parseLeafBaselineIdentity,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
+  RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   validateSchema4Baseline,
   validateSchema5Baseline,
+  validateSchema6Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -243,8 +245,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(5);
+    expect(BASELINE_SCHEMA).toBe(6);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
+    expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
     // ⚠⚠ A RETIRED DEFINITION THAT THE LIVE ONE CAN MOVE IS NOT RETIRED. If the
     // schema-3 validator ever picked up `BASELINE_SCHEMA` again, every recorded
     // schema-3 reference would silently start meaning something else.
@@ -253,7 +256,7 @@ describe('observed-shape schema-3 baseline envelope', () => {
   });
 });
 
-/* ══ SCHEMA 5 — THE LIVE HEURISTIC-LEAF ENVELOPE ═══════════════════════════ */
+/* ══ SCHEMA 6 — THE LIVE HEURISTIC-LEAF ENVELOPE ═══════════════════════════ */
 
 const LEAF_IDENTITY = 'ghost on record';
 
@@ -354,23 +357,29 @@ function mutateSchema4(mutator) {
   return baseline;
 }
 
-describe('observed-shape schema-5 baseline envelope', () => {
+describe('observed-shape schema-6 baseline envelope', () => {
   test('accepts one canonical, governed, heuristic-leaf inventory WITH multiplicity', () => {
     const baseline = validSchema4Baseline();
-    expect(validateSchema5Baseline(baseline)).toBe(baseline);
+    expect(validateSchema6Baseline(baseline)).toBe(baseline);
     // The count law genuinely moved: schema 3 would refuse this exact row.
     expect(baseline.inventory['src/probe.js'][LEAF_IDENTITY]).toBe(3);
     expect(baseline.total).not.toBe(baseline.identities);
-    // ⚠⚠ SCHEMA 4 AND 5 SHARE THIS ENVELOPE LAW AND NOTHING ELSE. They are the
-    // same 16 keys, the same identity grammar and the same receipt — only the
-    // finding-set PRODUCER differs — so one validator serves both and the NUMBER
-    // is the argument. That is exactly why the number must be pinned in BOTH
-    // directions: a shared law with an unpinned number is a schema that can drift
-    // into meaning its predecessor.
+    // ⚠⚠ SCHEMAS 4, 5 AND 6 SHARE THIS ENVELOPE LAW AND NOTHING ELSE. They are
+    // the same 16 keys, the same identity grammar and the same receipt — only the
+    // finding-set PRODUCER differs — so one validator serves all three and the
+    // NUMBER is the argument. That is exactly why the number must be pinned in
+    // EVERY direction: a shared law with an unpinned number is a schema that can
+    // drift into meaning one of its predecessors.
     expect(() => validateSchema4Baseline(baseline)).toThrow(/is not schema 4/);
-    const retired = { ...baseline, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
-    expect(validateSchema4Baseline(retired)).toBe(retired);
-    expect(() => validateSchema5Baseline(retired)).toThrow(/is not schema 5/);
+    expect(() => validateSchema5Baseline(baseline)).toThrow(/is not schema 5/);
+    const unfiltered = { ...baseline, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
+    expect(() => validateSchema5Baseline(unfiltered)).toThrow(/is not schema 5/);
+    expect(() => validateSchema6Baseline(unfiltered)).toThrow(/is not schema 6/);
+    const filtered = { ...baseline, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema5Baseline(filtered)).toBe(filtered);
+    expect(() => validateSchema4Baseline(filtered)).toThrow(/is not schema 4/);
+    expect(() => validateSchema6Baseline(filtered)).toThrow(/is not schema 6/);
   });
 
   test('⭐ CR-OSR-FREEZE-8: ONE row law, and both consumers reach the same home', () => {
@@ -403,7 +412,7 @@ describe('observed-shape schema-5 baseline envelope', () => {
     expect(() => parseLeafBaselineIdentity('ghost on')).toThrow(/heuristic identity is malformed/);
     expect(() => parseLeafBaselineIdentity('ghost')).toThrow(/heuristic identity is malformed/);
     expect(() => parseLeafBaselineIdentity('')).toThrow(/nonempty string/);
-    expect(() => validateSchema5Baseline(mutateSchema4((baseline) => {
+    expect(() => validateSchema6Baseline(mutateSchema4((baseline) => {
       baseline.inventory['src/probe.js'] = { [IDENTITY]: 1 };
     }))).toThrow(/heuristic identity is malformed/);
   });
@@ -460,13 +469,13 @@ describe('observed-shape schema-5 baseline envelope', () => {
       baseline.migrationReview.targetInventoryDigest = 'f'.repeat(64);
     }],
   ])('fails closed on %s', (_label, mutator) => {
-    expect(() => validateSchema5Baseline(mutateSchema4(mutator))).toThrow();
+    expect(() => validateSchema6Baseline(mutateSchema4(mutator))).toThrow();
   });
 
   test('integrity-binds every persisted migration receipt field', () => {
     const baseline = validSchema4Baseline();
     baseline.migrationReview.reviewDigest = 'f'.repeat(64);
-    expect(() => validateSchema5Baseline(baseline)).toThrow(/migrationReview digest mismatch/);
+    expect(() => validateSchema6Baseline(baseline)).toThrow(/migrationReview digest mismatch/);
   });
 
   test('gate and maintenance write reject a malformed baseline before corpus execution', async () => {

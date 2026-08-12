@@ -2,10 +2,14 @@ import { createHash } from 'node:crypto';
 import { describe, expect, test } from 'vitest';
 
 import {
+  applyDomGlobalReceiverFilter,
   applyExplainedWriterFilter,
+  applyLanguageSurfaceFilter,
   applyShapeFamilyFilter,
+  assertDomGlobalReceiverRoots,
   assertExplainedWriterEvidence,
   assertExplainedWriterExemptions,
+  assertLanguageSurfaceResidualKeys,
   assertShapeFamilyDebtPreserved,
   authoredInputHistoryCommits,
   BASELINE_SCAN_MODE,
@@ -15,11 +19,15 @@ import {
   commandOf,
   compare,
   corpusPayloadOf,
+  DOM_GLOBAL_RECEIVER_ROOTS,
+  domGlobalReceiverOf,
   EXACT_SCAN_EXCLUDED_SCOPE,
   EXPLAINED_WRITER_EXEMPTIONS,
   identityOf,
   isObservedShapeScanPath,
   isObservedShapeSubjectPath,
+  LANGUAGE_SURFACE_RESIDUAL_KEYS,
+  RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   run,
   SCAN_CONFIG,
@@ -32,6 +40,7 @@ import {
 import {
   validateSchema4Baseline,
   validateSchema5Baseline,
+  validateSchema6Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -449,11 +458,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
 
     expect(commandOf(['--scan-only', '--json=/tmp/scan.json', '--progress']).progress)
       .toBe(true);
-    // ⚠ `family-filter-complete` (CR-OSR-FREEZE-6) and
-    // `explained-writer-filter-complete` (M8/M9) are DELIBERATE additions, and
-    // this pin caught both — which is the pin working. Each is emitted on EVERY
-    // scan, including this exact-origin probe where neither filter applies, so a
-    // reader of `--progress` can never mistake "filter absent" for "phase absent".
+    // ⚠ ONE PHASE PER DECLARED FILTER, IN CHAIN ORDER, and every addition to the
+    // chain has been caught here first — `family-filter-complete` and
+    // `explained-writer-filter-complete` at the schema-5 mint, then
+    // `dom-global-filter-complete` and `language-surface-filter-complete` at the
+    // schema-6 mint. That is the pin working, and it is why the order is asserted
+    // as a sequence rather than as a set. Each is emitted on EVERY scan, including
+    // this exact-origin probe where NO filter applies, so a reader of `--progress`
+    // can never mistake "filter absent" for "phase absent".
     expect(events.map(({ phase }) => phase)).toEqual([
       'corpus-start',
       'corpus-complete',
@@ -461,6 +473,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'read-start',
       'scan-complete',
       'family-filter-complete',
+      'dom-global-filter-complete',
+      'language-surface-filter-complete',
       'explained-writer-filter-complete',
     ]);
     expect(events).toEqual(expect.arrayContaining([
@@ -715,6 +729,208 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   });
 
   /**
+   * ⭐⭐⭐ CR-OSR-SCHEMA-6 / M11 — THE DOM-GLOBAL RECEIVER EXCLUSION, PAIRED.
+   *
+   * ⚠ THE PAIR IS THE WHOLE TEST. A filter that cleared EVERY `history` read
+   * would look identical to this one from the positive half alone, and it would
+   * be catastrophically wrong: `history` is a real settlement container. So each
+   * declared receiver is driven clearing a read, and the SAME key on the SAME
+   * shape is driven NOT clearing when its receiver is a domain object.
+   */
+  test('M11: a host-global receiver clears; the same key on a domain receiver does NOT', () => {
+    expect(DOM_GLOBAL_RECEIVER_ROOTS).toEqual(['document', 'globalThis', 'window']);
+    const stats = leafStats();
+    const rowOfText = (text, pos) => leafFindingOf({ key: 'replaceState', shapes: ['history'], text, pos });
+    const clearedBy = (text) => applyDomGlobalReceiverFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: healthyCorpus(),
+      scan: { findings: [rowOfText(text, 10)], stats },
+    });
+
+    // ── THE POSITIVE HALF: every DECLARED root clears, so none is vacuous ─────
+    for (const root of DOM_GLOBAL_RECEIVER_ROOTS) {
+      const out = clearedBy(`${root}.history.replaceState`);
+      expect(out.findings, `${root} is declared but cleared nothing`).toEqual([]);
+      expect(out.domGlobals.clearedIdentities).toEqual(['replaceState on history']);
+      expect(out.domGlobals.receivers).toEqual([root]);
+    }
+    // Optional chaining at the root is the same read and must not escape.
+    expect(clearedBy('window?.history.replaceState').findings).toEqual([]);
+
+    // ── THE NEGATIVE HALF: identical key, identical shape, domain receiver ────
+    for (const text of [
+      'settlement.history.replaceState',
+      'save?.history.replaceState',
+      'self.history.replaceState',        // a host global NOT declared (see the source note)
+      'myWindow.history.replaceState',    // a longer identifier merely CONTAINING a root
+      'replaceState',                     // no receiver at all
+    ]) {
+      const out = clearedBy(text);
+      expect(out.findings.length, `${text} was cleared and must not have been`).toBe(1);
+      expect(out.domGlobals.cleared).toBe(0);
+      expect(domGlobalReceiverOf(text)).toBe(null);
+    }
+    // The extractor IS the decision, so it is pinned directly beside the filter.
+    expect(domGlobalReceiverOf('window.history.replaceState')).toBe('window');
+    expect(domGlobalReceiverOf('window?.history.state')).toBe('window');
+
+    // BY IDENTITY, not by value: the anti-vacuity floor cannot move.
+    expect(clearedBy('window.history.replaceState').stats).toBe(stats);
+    // The EXACT leg is addressed by executed origin, where a receiver root is
+    // not part of the address, so it keeps the raw detector output.
+    const rows = [rowOfText('window.history.replaceState', 10)];
+    const exact = applyDomGlobalReceiverFilter({
+      scanMode: 'exact-origin', corpus: healthyCorpus(), scan: { findings: rows, stats },
+    });
+    expect(exact.findings).toBe(rows);
+    expect(exact.domGlobals.applied).toBe(false);
+  });
+
+  /**
+   * ⭐⭐ M11's TWO DECLARATION GUARDS, and they refuse DIFFERENT mistakes: the
+   * vocabulary refuses a name that is not a host global at all, and the
+   * corpus-derived guard refuses a name the detector's ROOT PRIOR grounds — the
+   * one addition that would clear reads of real records wholesale.
+   */
+  test('M11: a domain receiver is refused by the vocabulary, and a CORPUS WALK ROOT by the corpus', () => {
+    expect(assertDomGlobalReceiverRoots()).toBe(DOM_GLOBAL_RECEIVER_ROOTS);
+    expect(() => assertDomGlobalReceiverRoots(['settlement']))
+      .toThrow(/not a declared host global[\s\S]*blind the instrument/);
+    expect(() => assertDomGlobalReceiverRoots(['window.'])).toThrow(/must be a bare identifier/);
+    expect(() => assertDomGlobalReceiverRoots([])).toThrow(/nonempty array/);
+
+    // ⚠⚠ THE MEASURED REASON THE CORPUS GUARD IS SPELLED THIS WAY. `window` IS an
+    // observed corpus SHAPE name at this sha, so a guard reading "a root may not
+    // be an observed shape" would have refused the very exclusion M11 exists to
+    // make. The guard is on the WALK ROOTS instead — the names the root prior
+    // actually grounds — and this pin drives both directions.
+    const walkRootCorpus = { ...healthyCorpus(), rootShapes: ['settlement', 'window'] };
+    expect(() => applyDomGlobalReceiverFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: walkRootCorpus,
+      scan: { findings: [leafFindingOf()], stats: leafStats() },
+    })).toThrow(/name a CORPUS WALK ROOT/);
+    const shapeOnlyCorpus = {
+      ...healthyCorpus(),
+      shapes: { ...healthyCorpus().shapes, window: { rows: 40, keys: ['history'] } },
+      rootShapes: ['settlement'],
+    };
+    expect(applyDomGlobalReceiverFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: shapeOnlyCorpus,
+      scan: { findings: [leafFindingOf()], stats: leafStats() },
+    }).domGlobals.applied).toBe(true);
+  });
+
+  /**
+   * ⭐⭐ M11 INHERITS THE CLASS-(a) REFUSAL. Four filters now narrow this
+   * instrument and every one of them is held to the same law, from the same
+   * single home — so a future widening of the root set cannot quietly erase a
+   * row the chair banked as a real defect.
+   */
+  test('M11: clearing a class-(a) TRUE POSITIVE refuses the scan; clearing anything else does not', () => {
+    const guarded = 'hooks on settlement';
+    expect(CLASS_A_PROTECTED_IDENTITIES).toContain(guarded);
+    const clearOf = (key) => applyDomGlobalReceiverFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: healthyCorpus(),
+      scan: {
+        findings: [leafFindingOf({ key, shapes: ['settlement'], text: `window.thing.${key}` })],
+        stats: leafStats(),
+      },
+    });
+    expect(() => clearOf('hooks'))
+      .toThrow(/DOM-global receiver filter[\s\S]*class-\(a\)[\s\S]*hooks on settlement/);
+    // THE NEGATIVE CONTROL: same receiver, same clearing, unguarded identity.
+    expect(clearOf('notGuardedAnywhere').domGlobals.clearedIdentities)
+      .toEqual(['notGuardedAnywhere on settlement']);
+  });
+
+  /**
+   * ⭐⭐⭐ CR-OSR-SCHEMA-6 / M12 — THE LANGUAGE-SURFACE RESIDUAL, PAIRED.
+   *
+   * ⚠ THE NEGATIVE HALF IS A MEASURED NEAR-MISS, not an invented one. `toType on
+   * history` is a REAL row in the live inventory on the REAL `history` shape, and
+   * the tempting `/^to[A-Z]/` spelling of this filter would have deleted it. An
+   * exact frozen key set cannot.
+   */
+  test('M12: a builtin prototype member clears; a domain key that merely looks like one does NOT', () => {
+    expect(LANGUAGE_SURFACE_RESIDUAL_KEYS).toEqual(['toLocaleString']);
+    const stats = leafStats();
+    const filtered = applyLanguageSurfaceFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: healthyCorpus(),
+      scan: {
+        findings: [
+          leafFindingOf({ key: 'toLocaleString', shapes: ['history'], text: 'popFirst.toLocaleString' }),
+          leafFindingOf({ key: 'toType', shapes: ['history'], text: 'entry?.toType', pos: 20 }),
+          leafFindingOf({ key: 'toString', shapes: ['history'], text: 'entry.toString', pos: 30 }),
+        ],
+        stats,
+      },
+    });
+    expect(filtered.findings.map(identityOf)).toEqual(['toType on history', 'toString on history']);
+    expect(filtered.languageSurface.cleared).toBe(1);
+    expect(filtered.languageSurface.clearedIdentities).toEqual(['toLocaleString on history']);
+    // BY IDENTITY, not by value.
+    expect(filtered.stats).toBe(stats);
+
+    const rows = [leafFindingOf({ key: 'toLocaleString', shapes: ['history'] })];
+    const exact = applyLanguageSurfaceFilter({
+      scanMode: 'exact-origin', corpus: healthyCorpus(), scan: { findings: rows, stats },
+    });
+    expect(exact.findings).toBe(rows);
+    expect(exact.languageSurface.applied).toBe(false);
+  });
+
+  /**
+   * ⭐⭐ M12's TWO GUARDS, and together they are why this filter may be SHAPE-BLIND.
+   * A declared key must live on a builtin prototype (asked of the running engine,
+   * so it cannot rot) AND be absent from every observed shape (asked of the
+   * corpus, so the frozen detector's "nothing in the measured corpus collides"
+   * premise is verified rather than trusted).
+   */
+  test('M12: a domain key is refused by the prototype guard, and an OBSERVED key by the corpus', () => {
+    expect(assertLanguageSurfaceResidualKeys()).toBe(LANGUAGE_SURFACE_RESIDUAL_KEYS);
+    expect(() => assertLanguageSurfaceResidualKeys(['stresses']))
+      .toThrow(/not a member of any declared builtin prototype/);
+    // ⚠ `test` IS language surface — on RegExp.prototype — and is DELIBERATELY
+    // inadmissible: RegExp and Function prototypes are outside the declared
+    // vocabulary because they would also admit `source`, `flags` and `name`,
+    // which are ordinary domain keys. This is the executed form of that ruling.
+    expect(() => assertLanguageSurfaceResidualKeys(['test']))
+      .toThrow(/not a member of any declared builtin prototype/);
+    expect(() => assertLanguageSurfaceResidualKeys(['name']))
+      .toThrow(/not a member of any declared builtin prototype/);
+    expect(() => assertLanguageSurfaceResidualKeys(['to Locale'])).toThrow(/bare identifier/);
+    expect(() => assertLanguageSurfaceResidualKeys([])).toThrow(/nonempty array/);
+
+    // THE CORPUS GUARD: a producer that starts writing the key makes it a domain
+    // key again, and clearing it would then be a deletion rather than a filter.
+    const collidingCorpus = {
+      ...healthyCorpus(),
+      shapes: { record: { rows: 40, keys: ['id', 'toLocaleString'] } },
+    };
+    expect(() => applyLanguageSurfaceFilter({
+      scanMode: BASELINE_SCAN_MODE,
+      corpus: collidingCorpus,
+      scan: { findings: [leafFindingOf()], stats: leafStats() },
+    })).toThrow(/OBSERVED DOMAIN KEYS: toLocaleString on record/);
+
+    // ⭐⭐ AND M12 CANNOT REACH A CLASS-(a) ROW AT ALL — which is stronger than a
+    // refusal control and is why it has none. Every banked true positive is a
+    // DOMAIN key, so the prototype guard above refuses each of them outright:
+    // the erasure the other three filters must be policed against is not
+    // expressible here. Driven over the whole guard set rather than argued.
+    for (const identity of CLASS_A_PROTECTED_IDENTITIES) {
+      const key = identity.slice(0, identity.indexOf(' on '));
+      expect(() => assertLanguageSurfaceResidualKeys([key]),
+        `${key} is a banked class-(a) key and M12 would admit it as language surface`)
+        .toThrow(/not a member of any declared builtin prototype/);
+    }
+  });
+
+  /**
    * ⭐⭐ M8/M9 GATE 0 — THE WIDENED WRITE-SHAPE PROBE. Two of these four spellings
    * were MEASURED defeating the quoted-string scan that was this discipline's
    * best manual check, and both are real writes in the live estate. The pin
@@ -757,11 +973,29 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * open-spread tolerance, which admits every key generically and so names none.
    */
   test('M8/M9: the explained-writer exemption is an exact declared set, and gate 4 is REFUSED as a basis', () => {
-    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity))
-      .toEqual(['neighbourNetwork on settlement']);
-    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ mechanism }) => mechanism))
-      .toEqual(['save-time-writer']);
-    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual(['src/lib/saves.js']);
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity)).toEqual([
+      'factions on locks',
+      'neighbourNetwork on settlement',
+      'stresses on settlement',
+      'worldPulse on campaignState',
+    ]);
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ mechanism }) => mechanism)).toEqual([
+      'admission-list', 'save-time-writer', 'admission-list', 'save-time-writer',
+    ]);
+    expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
+      'src/components/dossier/LockControls.jsx',
+      'src/lib/saves.js',
+      'src/domain/settlement.schema.js',
+      'src/store/campaignPulseHelpers.js',
+    ]);
+    // ⚠⚠ THE ONE ROW RE-TRIAGED OUT OF CLASS (a), PINNED IN BOTH DIRECTIONS.
+    // `factions on locks` was banked as a true positive on evidence that turned
+    // out to be a grep artifact, and the two acts — removing it from the guard
+    // set and declaring it here — cannot be separated: the declaration below
+    // throws at module load while the identity is still guarded. Pinning both
+    // halves is what stops a later lane from restoring one without the other.
+    expect(CLASS_A_PROTECTED_IDENTITIES).not.toContain('factions on locks');
+    expect(CLASS_A_PROTECTED_IDENTITIES).toContain('institutions on locks');
     expect(assertExplainedWriterExemptions()).toBe(EXPLAINED_WRITER_EXEMPTIONS);
 
     const entryOf = (overrides) => [{
@@ -797,14 +1031,29 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   test('M8/M9: a named writer that stopped writing the key makes the exemption STALE and reds', () => {
     // The live estate satisfies gate 0 today, and it says WHICH spelling proved it.
     const evidence = assertExplainedWriterEvidence();
-    expect(evidence.map(({ identity }) => identity)).toEqual(['neighbourNetwork on settlement']);
-    expect(evidence[0].key).toBe('neighbourNetwork');
-    expect(evidence[0].spellings.length).toBeGreaterThan(0);
+    expect(evidence.map(({ identity }) => identity)).toEqual([
+      'factions on locks',
+      'neighbourNetwork on settlement',
+      'stresses on settlement',
+      'worldPulse on campaignState',
+    ]);
+    expect(evidence.map(({ key }) => key))
+      .toEqual(['factions', 'neighbourNetwork', 'stresses', 'worldPulse']);
+    // ⚠ EVERY entry, not just the first: an evidence array where one row proved
+    // itself and three were never probed is the shape this loop exists to refuse.
+    expect(evidence.filter(({ spellings }) => !spellings.length)).toEqual([]);
 
     // ── THE MUTANT: the named writer no longer mentions the key at all ────────
+    // ⚠ DRIVEN ON ONE NAMED ENTRY rather than on the whole set, so the message
+    // pins below stay bound to a KNOWN subject. Blanking every writer would red
+    // on whichever entry sorts first, and the assertions would then be pinning
+    // the sort order instead of the staleness.
+    const only = (identity) => EXPLAINED_WRITER_EXEMPTIONS.filter((e) => e.identity === identity);
     let raised = null;
     try {
-      assertExplainedWriterEvidence(undefined, { readSource: () => 'export const nothing = 1;\n' });
+      assertExplainedWriterEvidence(only('neighbourNetwork on settlement'), {
+        readSource: () => 'export const nothing = 1;\n',
+      });
     } catch (error) {
       raised = error;
     }
@@ -815,6 +1064,17 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(raised.message).toContain('src/lib/saves.js');
     expect(raised.message).toContain('STALE');
     expect(raised.message).toMatch(/must be DELETED, not repaired/);
+
+    // ⚠⚠ AND EVERY OTHER ENTRY IS REACHED BY THE SAME LOOP, driven one at a
+    // time. Without this, three of the four exemptions could have an unprobed
+    // writer and the pin above would still be green — the exact vacuity that
+    // makes a four-entry set riskier than the one-entry set it replaced.
+    for (const { identity, writer } of EXPLAINED_WRITER_EXEMPTIONS) {
+      expect(() => assertExplainedWriterEvidence(only(identity), {
+        readSource: () => 'export const nothing = 1;\n',
+      }), `${identity} did not go STALE when ${writer} stopped writing its key`)
+        .toThrow(/is STALE/);
+    }
 
     // …and a writer that cannot be read at all is a distinct, named failure.
     expect(() => assertExplainedWriterEvidence(undefined, {
@@ -907,20 +1167,26 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * PRODUCER, so two copies would be one live law with two homes. What must never
    * be shared is the NUMBER — pinned here in BOTH directions.
    */
-  test('schema 4 and schema 5 are one envelope law with two numbers, and each refuses the other\'s', () => {
-    expect(BASELINE_SCHEMA).toBe(5);
+  test('the three leaf schemas are one envelope law with three numbers, and each refuses the others\'', () => {
+    expect(BASELINE_SCHEMA).toBe(6);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
+    expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
 
     const corpus = healthyCorpus();
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema5Baseline(live)).toBe(live);
+    expect(validateSchema6Baseline(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/is not schema 4/);
+    expect(() => validateSchema5Baseline(live)).toThrow(/is not schema 5/);
 
-    const retired = { ...live, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
-    expect(validateSchema4Baseline(retired)).toBe(retired);
-    expect(() => validateSchema5Baseline(retired)).toThrow(/is not schema 5/);
+    const unfiltered = { ...live, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
+    expect(() => validateSchema6Baseline(unfiltered)).toThrow(/is not schema 6/);
+
+    const filtered = { ...live, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema5Baseline(filtered)).toBe(filtered);
+    expect(() => validateSchema6Baseline(filtered)).toThrow(/is not schema 6/);
   });
 
   /**
@@ -962,12 +1228,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       baselineSchema: artifactBaselineSchemaOf('legacy-leaf'),
       siteSchema: 'source-position-v1',
     });
-    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 4. They are
+    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 6. They are
     // different numbers naming different things, and conflating them is what
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(5);
+    expect(BASELINE_SCHEMA).toBe(6);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

@@ -122,7 +122,8 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { buildObservedCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
 import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
 import {
-  applyExplainedWriterFilter, applyShapeFamilyFilter,
+  applyDomGlobalReceiverFilter, applyExplainedWriterFilter, applyLanguageSurfaceFilter,
+  applyShapeFamilyFilter,
   BASELINE_SCAN_MODE, BASELINE_SCHEMA, cohortOf, compare, EXACT_SCAN_EXCLUDED_SCOPE,
   identityOf, inventoryOf, isExactScanExcludedReadPath, MIN_ROWS, ORIGIN_MIN_ROWS,
   ratchetMessage, rowOf, sentinelFailures, sentinelOf, sourceFiles, UNREVIEWED_UI_COHORT,
@@ -193,14 +194,20 @@ let scansRun = 0;
  * The one place the detector is called. `extraFiles` are planted probes.
  *
  * ⭐⭐ THE WALKER MUST MEASURE WHAT THE GATE MEASURES — the walker-census law. Under
- * schema 5 the frozen inventory is the detector's output NARROWED by two declared
+ * schema 6 the frozen inventory is the detector's output NARROWED by FOUR declared
  * post-filters, so a walker that compared the RAW detector output against it would
  * report every filtered row as a violation and stay red forever, and whoever
- * silenced it would have disabled the guard rather than fixed the walker. The two
+ * silenced it would have disabled the guard rather than fixed the walker. All four
  * filters are therefore applied HERE, in the same order `run()` applies them.
  *
- * ⚠ `stats` passes through both filters BY IDENTITY, so `live.stats` is still the
- * DETECTOR's reach and the anti-vacuity arm below keeps measuring the detector
+ * ⛔ THE STANDING HAZARD THIS COMPOSITION IS: it is COMPOSED BY HAND, so a mint
+ * that adds a filter to `run()` and not to this line leaves a walker that greens
+ * on rows the gate clears — a disabled guard that reports success. Any change to
+ * the chain in `run()` is a change HERE, in the SAME commit, and the arithmetic
+ * pin below is what turns a forgotten one into a red instead of a silent pass.
+ *
+ * ⚠ `stats` passes through all four filters BY IDENTITY, so `live.stats` is still
+ * the DETECTOR's reach and the anti-vacuity arm below keeps measuring the detector
  * rather than the filters. That is the property that stops a threshold from ever
  * being tuned into hiding a corpus that stopped observing.
  */
@@ -216,8 +223,14 @@ function scanEstateWith(extraFiles = []) {
     root: ROOT,
   });
   const family = applyShapeFamilyFilter({ scanMode: BASELINE_SCAN_MODE, corpus, scan: raw });
+  const domGlobals = applyDomGlobalReceiverFilter({
+    scanMode: BASELINE_SCAN_MODE, corpus, scan: family,
+  });
+  const language = applyLanguageSurfaceFilter({
+    scanMode: BASELINE_SCAN_MODE, corpus, scan: domGlobals,
+  });
   return {
-    ...applyExplainedWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: family }),
+    ...applyExplainedWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: language }),
     raw,
   };
 }
@@ -232,8 +245,9 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
   test('the baseline is CONTENT-ADDRESSED, internally consistent, and every row is a real file', () => {
     expect(baseline.schema, 'schema 1 was the count-only form — blind to an identity swap;'
       + ' schema 3 was the RETIRED exact per-site form, which no full-tree scan can produce;'
-      + ' schema 4 was the RETIRED UNFILTERED leaf form, whose rows include the reads the two'
-      + ' declared schema-5 post-filters explain')
+      + ' schema 4 was the RETIRED UNFILTERED leaf form; schema 5 was the RETIRED leaf form'
+      + ' narrowed by M6 and M8/M9 alone, whose rows still include the browser-surface and'
+      + ' language-surface reads the declared M11 and M12 post-filters explain')
       .toBe(BASELINE_SCHEMA);
     const rows = Object.entries(baseline.inventory);
     expect(rows.length).toBeGreaterThan(0);
@@ -382,45 +396,80 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
   });
 
   /**
-   * ⭐⭐⭐ THE TWO SCHEMA-5 POST-FILTERS ARE NON-VACUOUS ON THE LIVE ESTATE.
+   * ⭐⭐⭐ ALL FOUR SCHEMA-6 POST-FILTERS ARE NON-VACUOUS ON THE LIVE ESTATE.
    *
    * A filter that clears nothing is indistinguishable from a filter that is not
-   * wired in — and the whole of schema 5 is the claim that these two narrow the
+   * wired in — and the whole of schema 6 is the claim that these four narrow the
    * detector's output. So the narrowing is asserted against the REAL tree, in
    * both directions: the filtered set is strictly smaller than the raw one, the
-   * gap is exactly the two filters' own reported clearings, and the identity the
-   * explained-writer exemption exists for is genuinely absent afterwards.
+   * gap is exactly the four filters' own reported clearings, and each filter's
+   * own founding case is shown present in the raw scan and absent afterwards.
+   *
+   * ⛔ THE ARITHMETIC LINE IS THE GUARD ON THE HAND-COMPOSED CHAIN ABOVE. If a
+   * later mint adds a fifth filter to `run()` and forgets this file, the walker
+   * measures a LARGER set than the gate, the sum stops closing, and this reds —
+   * which is the only reason a hand-composed chain is tolerable at all.
    */
-  test('the schema-5 post-filters NARROW the live scan, and by exactly what they report', () => {
+  test('the schema-6 post-filters NARROW the live scan, and by exactly what they report', () => {
     expect(live.familyFilter.applied).toBe(true);
+    expect(live.domGlobals.applied).toBe(true);
+    expect(live.languageSurface.applied).toBe(true);
     expect(live.explainedWriters.applied).toBe(true);
     expect(live.findings.length).toBeLessThan(live.raw.findings.length);
-    // The arithmetic closes with nothing left over: raw − family − writer = live.
-    expect(live.raw.findings.length - live.familyFilter.cleared - live.explainedWriters.cleared)
-      .toBe(live.findings.length);
+    // The arithmetic closes with nothing left over: raw − each filter = live.
+    const clearedTotal = live.familyFilter.cleared + live.domGlobals.cleared
+      + live.languageSurface.cleared + live.explainedWriters.cleared;
+    expect(live.raw.findings.length - clearedTotal).toBe(live.findings.length);
+    // Each is independently NON-VACUOUS — a zero here is a filter that is not
+    // reaching the estate, which the sum above cannot distinguish from absence.
     expect(live.familyFilter.cleared).toBeGreaterThan(0);
+    expect(live.domGlobals.cleared).toBeGreaterThan(0);
+    expect(live.languageSurface.cleared).toBeGreaterThan(0);
     expect(live.explainedWriters.cleared).toBeGreaterThan(0);
 
-    // ⭐ THE MEASURED CASE THAT FORCED THE MINT. `settlement.neighbourNetwork` is
-    // written at SAVE time by src/lib/saves.js, which the GENERATION corpus never
-    // runs — so the detector reports every read of it and 23 files banked the
-    // identity under schema 4. The exemption clears it, and the paired positive
-    // control is the raw scan, where it is emphatically present.
-    const exempted = 'neighbourNetwork on settlement';
-    expect(live.raw.findings.some((finding) => identityOf(finding) === exempted)).toBe(true);
-    expect(live.findings.some((finding) => identityOf(finding) === exempted)).toBe(false);
-    expect(live.explainedWriters.clearedIdentities).toEqual([exempted]);
-    // …and the M6 family filter is the other half, clearing a DIFFERENT set.
-    // ⚠ SAID AS DISJOINTNESS RATHER THAN AS A BARE EXCLUSION. An unanchored
-    // exclusion here would pass just as happily if the family filter had drifted
-    // to clearing NOTHING — it would outlive the very regression it is written to
-    // catch. The non-emptiness assertion is its liveness anchor, and disjointness
-    // is the stronger claim anyway: two filters that both claim an identity mean
-    // one of them is redundant and the reported arithmetic stops being additive.
-    expect(live.familyFilter.clearedIdentities.length).toBeGreaterThan(0);
-    expect(live.familyFilter.clearedIdentities
-      .filter((identity) => live.explainedWriters.clearedIdentities.includes(identity)),
-    'the two schema-5 filters both claim the same identity').toEqual([]);
+    // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
+    // the raw half these are "the identity is not in the set", which is also
+    // true of every identity that never existed.
+    const founding = {
+      familyFilter: 'populationDeltas on outcome',
+      domGlobals: 'replaceState on history',
+      languageSurface: 'toLocaleString on history',
+      explainedWriters: 'neighbourNetwork on settlement',
+    };
+    for (const [filter, identity] of Object.entries(founding)) {
+      expect(live.raw.findings.some((f) => identityOf(f) === identity),
+        `${identity} is absent from the RAW scan — ${filter}'s control is vacuous`).toBe(true);
+      expect(live.findings.some((f) => identityOf(f) === identity),
+        `${identity} survived ${filter}`).toBe(false);
+      expect(live[filter].clearedIdentities).toContain(identity);
+    }
+    // The explained-writer set is EXACT, because it is the one filter whose
+    // membership is hand-declared rather than derived from a rule.
+    expect([...live.explainedWriters.clearedIdentities].sort()).toEqual([
+      'factions on locks',
+      'neighbourNetwork on settlement',
+      'stresses on settlement',
+      'worldPulse on campaignState',
+    ]);
+    // M11 names the receiver it fired on, so a filter that started matching
+    // something other than a host global would be visible rather than merely
+    // arithmetically larger.
+    expect(live.domGlobals.receivers).toEqual(['window']);
+    expect(live.languageSurface.clearedIdentities).toEqual(['toLocaleString on history']);
+
+    // ⚠ SAID AS DISJOINTNESS RATHER THAN AS BARE EXCLUSIONS. An unanchored
+    // exclusion would pass just as happily if a filter had drifted to clearing
+    // NOTHING — it would outlive the very regression it is written to catch. The
+    // non-emptiness assertions above are the liveness anchor, and disjointness is
+    // the stronger claim anyway: two filters that both claim an identity mean one
+    // is redundant and the reported arithmetic stops being additive. It is also
+    // the measured property that makes the chain ORDER immaterial.
+    const claimed = [
+      live.familyFilter.clearedIdentities, live.domGlobals.clearedIdentities,
+      live.languageSurface.clearedIdentities, live.explainedWriters.clearedIdentities,
+    ].flat();
+    expect(claimed.length, 'two schema-6 filters both claim the same identity')
+      .toBe(new Set(claimed).size);
   });
 
   /**
@@ -517,11 +566,24 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * ⛔ THE FROZEN INVENTORY STILL CARRIES THE TWO DELETED ROWS, so SHRINK-ONLY reads
    * `stale: 2` until a `--write` re-freeze — which only runs from a committed tree
    * with a clean `src/`, and was BLOCKED at this commit by a concurrent lane's
-   * uncommitted src/generators/factionRoles.js. Owed, not forgotten.
+   * uncommitted src/generators/factionRoles.js. Owed, not forgotten. (Discharged at
+   * `33487c77`, the re-freeze that deleted exactly those two rows.)
+   *
+   * ⭐⭐ MOVED BY THE SCHEMA-6 MINT (2026-08-11), BY THE INSTRUMENT AGAIN AND NOT BY
+   * A REPAIR: filtered 51/127/192 → 49/123/185, raw UNCHANGED at 53/149/245. The two
+   * new post-filters and the three new explained-writer entries clear FOUR cohort
+   * identities and SEVEN cohort reads between them — `replaceState on history` in
+   * CompendiumPanel.jsx (2 reads, M11), `toLocaleString on history` in
+   * WhatChangedPanel.jsx (2, M12), `stresses on settlement` in EventComposer.jsx (2,
+   * M8) and `worldPulse on campaignState` in OutputContainer.jsx (1, M9). `files`
+   * drops by exactly 2 because CompendiumPanel and WhatChangedPanel lose ALL of
+   * their rows while EventComposer and OutputContainer keep others.
+   * ⚠ THE RAW READING HOLDING STILL AT 53/149/245 IS THE POINT OF PINNING BOTH: it
+   * proves the estate did not move and the delta is provably the instrument.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 51, identities: 127, counts: 192 });
+    expect(cohort).toMatchObject({ files: 49, identities: 123, counts: 185 });
     // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
     // cohort figure could fall for two completely different reasons — the filters
     // clearing more, or the estate genuinely shrinking — and a single number

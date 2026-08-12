@@ -5,15 +5,21 @@
  * malformed row, missing migration genesis, disabled sentinel, or unbound scan
  * path must stop the gate before the expensive producer corpus executes.
  *
- * ── ⭐⭐ THREE IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
+ * ── ⭐⭐ FOUR IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
  *
- * `BASELINE_SCHEMA` is **5**: the EXPLAINED-WRITER-FILTERED heuristic-leaf
- * identity. Same SPELLING as schema 4 (`<key> on <shape>` with a per-identity
- * MULTIPLICITY) and the same byte-frozen `legacy-reader-shape-scan.mjs`
- * detector, but the finding set is the detector's output NARROWED by the two
- * declared, controlled post-filters in `check-observed-shape-readers.mjs`:
- * CR-OSR-FREEZE-6's shape-family union (M6) and the EXPLAINED-WRITER exemption
- * (M8/M9). It is the full-tree gate authority.
+ * `BASELINE_SCHEMA` is **6**: the NON-DOMAIN-SURFACE-FILTERED heuristic-leaf
+ * identity. Same SPELLING as schemas 4 and 5 (`<key> on <shape>` with a
+ * per-identity MULTIPLICITY) and the same byte-frozen
+ * `legacy-reader-shape-scan.mjs` detector, but the finding set is the
+ * detector's output NARROWED by FOUR declared, controlled post-filters in
+ * `check-observed-shape-readers.mjs`: CR-OSR-FREEZE-6's shape-family union
+ * (M6), the DOM-GLOBAL RECEIVER exclusion (M11), the LANGUAGE-SURFACE RESIDUAL
+ * (M12), and the EXPLAINED-WRITER exemption (M8/M9). It is the full-tree gate
+ * authority.
+ *
+ * `RETIRED_FILTERED_LEAF_BASELINE_SCHEMA` is **5**: the same spelling narrowed
+ * by only M6 and M8/M9 — schema 6's predecessor. Retired, never redefined,
+ * never deleted.
  *
  * `RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA` is **4**: the SAME spelling with the
  * detector's RAW output. Retired, never redefined, never deleted.
@@ -32,16 +38,16 @@
  * (`assertBaselineRow`, consumed by both the envelope validator and the gate's
  * `rowOf`), and each definition carries its own executed pins.
  *
- * ⚠⚠ SCHEMAS 4 AND 5 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE OPPOSITE
- * CALL FOR THE OPPOSITE REASON. Schema 3's shape genuinely differs (exact
- * identity, thirteen-field sentinel, `count === 1`), so a shared validator would
- * have had to be a parameterised superset of two different laws. Schemas 4 and 5
- * have the IDENTICAL envelope, identity grammar, telemetry record and receipt —
- * only the finding-set PRODUCER differs — so two copies would be one live law
- * with two homes, which is exactly the CR-OSR-FREEZE-8 shape. The one thing that
- * must not be shared is the schema NUMBER, so `validateLeafBaseline` takes it as
- * an argument and each entry point pins its own; a pin proves each refuses the
- * other's number.
+ * ⚠⚠ SCHEMAS 4, 5 AND 6 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE
+ * OPPOSITE CALL FOR THE OPPOSITE REASON. Schema 3's shape genuinely differs
+ * (exact identity, thirteen-field sentinel, `count === 1`), so a shared
+ * validator would have had to be a parameterised superset of two different
+ * laws. The three leaf schemas have the IDENTICAL envelope, identity grammar,
+ * telemetry record and receipt — only the finding-set PRODUCER differs — so
+ * three copies would be one live law with three homes, which is exactly the
+ * CR-OSR-FREEZE-8 shape. The one thing that must not be shared is the schema
+ * NUMBER, so `validateLeafBaseline` takes it as an argument and each entry
+ * point pins its own; a pin proves each refuses the others' numbers.
  *
  * ⚠⚠ WHY SCHEMA 4 EXISTED AT ALL (CR-OSR-FREEZE-3-R1, measured): schema 3 IS the
  * exact per-site identity by definition, so its validator refuses 2168/2168
@@ -50,14 +56,28 @@
  * Minting a fourth schema is what let the heuristic leg become the authority
  * without either weakening schema 3 or shipping a scan that cannot finish.
  *
- * ⚠⚠ WHY SCHEMA 5 EXISTS (CR-OSR-FREEZE-6-R2, measured): a detector change is
+ * ⚠⚠ WHY SCHEMA 5 EXISTED (CR-OSR-FREEZE-6-R2, measured): a detector change is
  * not lane-executable. `check-observed-shape-readers.mjs` refuses any run whose
  * live detectorTree digest differs from the frozen one, `--write` THROWS on a
  * clean committed tree, and `--migrate-schema=<live>` is refused as ordinary
  * maintenance. Every governed scanner path is inside that digest, so the ONLY
  * lawful way to change what the detector reports is to mint a new schema. Five
  * pending changes were each individually not worth a mint and together plainly
- * were; this is that consolidated mint.
+ * were; that was the first consolidated mint.
+ *
+ * ⚠⚠ WHY SCHEMA 6 EXISTS (CR-OSR-SCHEMA-6, measured): the same forcing
+ * mechanism, a second time, and for a class the first mint did not reach. The
+ * byte-frozen detector predates two surfaces that are not domain data at all —
+ * a DOM-GLOBAL RECEIVER (`window.history.replaceState`, where `window`
+ * grounds to nothing and the ungrounded single-home rule then binds `history`
+ * to the settlement history container) and a LANGUAGE-SURFACE member the
+ * frozen `BUILTIN_MEMBERS` set does not list (`toLocaleString`). Neither can
+ * be cured in the detector, which is byte-frozen to blob 0310fa9f, so both
+ * land as post-filters — M11 and M12 — exactly as M6 did. Batched behind them,
+ * three EXPLAINED-WRITER entries and three prose corrections that could never
+ * have justified a mint of their own ride for free. The genesis is a PURE
+ * SHRINK: no identity is added, so the migration ledger carries no contested
+ * row.
  */
 import {
   FULL_GIT_SHA,
@@ -72,12 +92,16 @@ import {
   scannerToolDigestOf,
 } from './observed-shape-governance.mjs';
 
-export const BASELINE_SCHEMA = 5;
+export const BASELINE_SCHEMA = 6;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
  *  Same identity grammar, raw detector output. Never redefined, never deleted. */
 export const RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA = 4;
+/** The RETIRED M6-and-M8/M9-only filtered definition — schema 6's predecessor.
+ *  Same identity grammar, two post-filters instead of four. Never redefined,
+ *  never deleted. */
+export const RETIRED_FILTERED_LEAF_BASELINE_SCHEMA = 5;
 export const MIN_ROWS = 40;
 export const ORIGIN_MIN_ROWS = 8;
 
@@ -187,11 +211,12 @@ export function parseExactBaselineIdentity(identity) {
  * baseline therefore fails closed instead of being read as a leaf identity
  * whose "shape" is a truncated origin.
  *
- * ⚠⚠ SCHEMA 5 DID NOT CHANGE THIS GRAMMAR, AND THAT IS WHY THE 4→5 MIGRATION IS
- * A RECONCILIATION RATHER THAN A RE-SPELLING: the alphabet is identical, so the
- * predecessor's rows and the target's rows are directly comparable and the whole
- * review is `predecessorRows`. What schema 5 changed is which findings the
- * instrument EMITS, not how any of them is addressed.
+ * ⚠⚠ NEITHER SCHEMA 5 NOR SCHEMA 6 CHANGED THIS GRAMMAR, AND THAT IS WHY BOTH
+ * THE 4→5 AND 5→6 MIGRATIONS ARE RECONCILIATIONS RATHER THAN RE-SPELLINGS: the
+ * alphabet is identical, so the predecessor's rows and the target's rows are
+ * directly comparable and the whole review is `predecessorRows`. What each
+ * schema changed is which findings the instrument EMITS, not how any of them is
+ * addressed.
  */
 const LEAF_IDENTITY = /^(\S+) on (\S+)$/;
 
@@ -441,7 +466,7 @@ export function validateSchema3Baseline(baseline) {
   return baseline;
 }
 
-/* ══ THE HEURISTIC-LEAF ENVELOPE — schema 4 (retired) and 5 (live) ═════════ */
+/* ══ THE HEURISTIC-LEAF ENVELOPE — 4 and 5 (retired), 6 (live) ═════════════ */
 
 /**
  * ⛔ RETIRED — the UNFILTERED heuristic-leaf definition (CR-OSR-FREEZE-3-R1).
@@ -453,8 +478,20 @@ export function validateSchema4Baseline(baseline) {
   return validateLeafBaseline(baseline, RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA);
 }
 
-/** The LIVE authority — the EXPLAINED-WRITER-FILTERED heuristic-leaf definition. */
+/**
+ * ⛔ RETIRED — the M6-and-M8/M9-only filtered definition (CR-OSR-FREEZE-6-R2).
+ * Kept executable for the same two reasons schema 4's validator is: the
+ * committed schema-5 genesis stays verifiable, and the schema-5 → schema-6
+ * migration validates its own predecessor envelope with the governed law rather
+ * than an ad-hoc one. NEVER redefined in place.
+ */
 export function validateSchema5Baseline(baseline) {
+  return validateLeafBaseline(baseline, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA);
+}
+
+/** The LIVE authority — the NON-DOMAIN-SURFACE-FILTERED heuristic-leaf
+ *  definition, narrowed by all four declared post-filters. */
+export function validateSchema6Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA);
 }
 
@@ -520,7 +557,7 @@ function validateHeuristicInventory(inventory, scanTree) {
  *   schema 3    "current" = the exact detector, "legacy" = the governed heuristic
  *               detector; the two tool digests DIFFER (only the legacy one folds
  *               in `legacyAlgorithm`).
- *   schema 4/5  there is no second detector. The heuristic leg IS the current
+ *   schema 4/5/6 there is no second detector. The heuristic leg IS the current
  *               authority, so current* === legacy* in EVERY field — including the
  *               artifact digest and the scanner-tool digest, which must both
  *               reconstruct from the FROZEN legacy algorithm. A receipt naming an
@@ -528,15 +565,16 @@ function validateHeuristicInventory(inventory, scanTree) {
  *               a leaf baseline claiming provenance from an instrument that
  *               cannot complete a full-tree scan.
  *
- * ⭐ WHERE SCHEMA 5's POST-FILTERS ARE CONTENT-ADDRESSED, since they are not a
- * field of their own: `SHAPE_FAMILY_FILTER`, `CLASS_A_PROTECTED_IDENTITIES` and
+ * ⭐ WHERE THE LEAF POST-FILTERS ARE CONTENT-ADDRESSED, since they are not a
+ * field of their own: `SHAPE_FAMILY_FILTER`, `CLASS_A_PROTECTED_IDENTITIES`,
+ * `DOM_GLOBAL_RECEIVER_ROOTS`, `LANGUAGE_SURFACE_RESIDUAL_KEYS` and
  * `EXPLAINED_WRITER_EXEMPTIONS` all live in `check-observed-shape-readers.mjs`,
  * which is one of the eleven governed `scannerToolFiles()` paths and therefore
  * inside `detectorTreeDigest` — a field this receipt binds and the gate compares
- * against the live tree on every run. Retuning a threshold or adding an
- * exemption MOVES that digest and reds the gate, exactly as editing the detector
- * does. The filters are governed by the same mechanism as the detector, not by a
- * second one.
+ * against the live tree on every run. Retuning a threshold, widening a declared
+ * root set or adding an exemption MOVES that digest and reds the gate, exactly
+ * as editing the detector does. The filters are governed by the same mechanism
+ * as the detector, not by a second one.
  */
 function validateHeuristicMigrationReceipt(receipt, baseline) {
   assertObject(receipt, 'migrationReview');
@@ -603,11 +641,11 @@ function validateHeuristicMigrationReceipt(receipt, baseline) {
  * The heuristic-leaf envelope. Same 16 keys as schema 3; leaf identities with
  * multiplicity, heuristic telemetry, and a one-detector migration receipt.
  *
- * ⚠ `schema` IS AN ARGUMENT, NOT A CONSTANT READ FROM MODULE SCOPE. Schemas 4
- * and 5 share this law exactly (see the module header for why sharing is right
- * here and wrong for schema 3); what must never be shared is WHICH number each
- * accepts, so each entry point below supplies its own and a pin drives both
- * directions of the refusal.
+ * ⚠ `schema` IS AN ARGUMENT, NOT A CONSTANT READ FROM MODULE SCOPE. Schemas 4,
+ * 5 and 6 share this law exactly (see the module header for why sharing is
+ * right here and wrong for schema 3); what must never be shared is WHICH number
+ * each accepts, so each entry point below supplies its own and a pin drives
+ * every direction of the refusal.
  */
 function validateLeafBaseline(baseline, schema) {
   assertExactKeys(baseline, `schema-${schema} envelope`, [

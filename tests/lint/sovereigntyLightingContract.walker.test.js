@@ -3728,7 +3728,35 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // — a source leaf, a FIXTURE and a doc, with ZERO foreign test files and zero
     // foreign registration lines, tracked or untracked. So no other lane's
     // uncommitted titles are frozen into this row.
-    files: 2397, parked: 365, credited: 2032, titles: 19763, suiteTitles: 5578,
+    // ⭐⭐ SCHEMA-6 MINT FOLD (2026-08-11) — RE-DERIVED AND RE-RECORDED WHOLE in the
+    // CODE-HALF commit that moves it, which is the same commit that adds the titles.
+    // CAUSE: the M11 and M12 post-filters arrive with FIVE paired controls, all five
+    // added INSIDE existing describe blocks of ONE already-censused file
+    // (tests/lint/observedShapeSentinel.test.js) — three M11 arms (the receiver pair,
+    // the two declaration guards, the class-(a) refusal) and two M12 arms (the
+    // prototype pair, the two guards). No test file is created and no describe is
+    // added, so `files`, `parked`, `credited` and `suiteTitles` cannot move and did
+    // not: 19763 → 19768, +5, with the other four figures unchanged.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE EXACTLY. (a) The LIVE reading from this arm
+    // before the fold reported 19768. (b) The diff's own net title delta is
+    // +8 − 3 = +5 (three of the eight are RENAMES of existing tests — the leaf-schema
+    // envelope pin, the leaf-target pairing pin and the schema-split pin — each a
+    // paired removal and addition), and 19763 + 5 = 19768 with nothing left over.
+    // ⚠⚠ THE SEQUENCED-CENSUS TRAP WAS AVOIDED DELIBERATELY. This arm asserts
+    // `titles` BEFORE `suiteTitles`, so the pre-fold run reddened on `titles` and
+    // NEVER EVALUATED `suiteTitles` — 5578 is therefore NOT a live reading from that
+    // run and was not treated as one. It is carried unchanged because the diff
+    // contains exactly ONE describe motion and it is a RENAME (schema-5 → schema-6
+    // baseline envelope), which cannot move a count; the post-fold run is what
+    // confirms it live. The three FILE figures, by contrast, are genuine live
+    // readings: they are asserted BEFORE `titles` and all three passed.
+    // ⚠ THE THREE SCRIPT EDITS IN THIS COMMIT CANNOT MOVE A FIGURE and were checked
+    // rather than assumed: they are scripts/, not tests/, so no test file gained,
+    // lost, parked or unparked a registration line.
+    // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time the only
+    // other lane in this tree was docs-only (docs/implementation/**), with ZERO
+    // foreign test files and zero foreign registration lines, tracked or untracked.
+    files: 2397, parked: 365, credited: 2032, titles: 19768, suiteTitles: 5578,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

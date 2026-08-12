@@ -22,6 +22,7 @@ import {
   RETIRED_EXACT_TARGET_SCHEMA,
   reviewTemplateOf,
   run as runMigration,
+  SURFACE_FILTERED_TARGET_SCHEMA,
   validateGovernedMigration,
   validateHeuristicMigrationReport,
   validateMigrationBundle,
@@ -918,12 +919,19 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       expect(report.target.baselineSchema).toBe(HEURISTIC_TARGET_SCHEMA);
       expect(report.rows).toEqual([]);
 
-      // ⭐ THE BARE CLI NOW MEANS THE LIVE TARGET, WHICH IS 5 — and a schema-2
-      // predecessor cannot reach it, because `LEAF_MIGRATION_PREDECESSOR` pairs
-      // 5 with a schema-4 predecessor and 4 with a schema-2 one. The refusal is
-      // the pin: nothing silently re-runs the retired migration.
+      // ⭐ THE BARE CLI ALWAYS MEANS THE LIVE TARGET, WHICH IS NOW 6 — and a
+      // schema-2 predecessor cannot reach it, because `LEAF_MIGRATION_PREDECESSOR`
+      // pairs each target with exactly its own predecessor. The refusal is the
+      // pin: nothing silently re-runs a retired migration, and the default moving
+      // with the live schema is what makes the bare CLI mean the current mint.
       expect(() => runMigration([
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
+      ])).toThrow(/predecessor baseline must be a schema-5 object/);
+      // …and the RETIRED live target of the previous mint is still reachable by
+      // name, still refusing the same schema-2 predecessor for its own reason.
+      expect(() => runMigration([
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
+        `--target-schema=${FILTERED_TARGET_SCHEMA}`,
       ])).toThrow(/predecessor baseline must be a schema-4 object/);
 
       expect(() => runMigration([
@@ -931,8 +939,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
         `--current=${currentPath}`, `--target-schema=${HEURISTIC_TARGET_SCHEMA}`,
       ])).toThrow(/--current is only valid for the retired/);
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=6',
-      ])).toThrow(/--target-schema must be 5/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=7',
+      ])).toThrow(/--target-schema must be 6/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -954,9 +962,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
    * predecessor for a schema-5 target would silently re-bank the 2026-08-10
    * genesis inventory as if the two filters had never run.
    */
-  test('the schema-4 -> schema-5 target pairs by TABLE, and a schema-2 predecessor cannot reach it', () => {
+  test('every leaf target pairs by TABLE, and a schema-2 predecessor cannot reach the live one', () => {
     expect(FILTERED_TARGET_SCHEMA).toBe(5);
-    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4 });
+    expect(SURFACE_FILTERED_TARGET_SCHEMA).toBe(6);
+    // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
+    // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
+    // had run — is not expressible, because no such pairing exists.
+    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4, 6: 5 });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
     expect(heuristicReportOf(heuristicFixture()).kind)
@@ -964,18 +976,21 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
 
     const fixture = heuristicFixture();
     const text = predecessorText(fixture.predecessor);
-    // ── THE PAIRING REFUSAL, BOTH DIRECTIONS ─────────────────────────────────
+    // ── THE PAIRING REFUSAL, EVERY DIRECTION ─────────────────────────────────
     expect(() => heuristicMigrationReport(
       fixture.predecessor, fixture.legacy, text, FILTERED_TARGET_SCHEMA,
     )).toThrow(/predecessor baseline must be a schema-4 object/);
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, fixture.legacy, text, SURFACE_FILTERED_TARGET_SCHEMA,
+    )).toThrow(/predecessor baseline must be a schema-5 object/);
     // …and a target outside the table is refused by a TOTAL predicate rather
     // than by an enumeration of the numbers somebody thought to forbid.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 6))
-      .toThrow(/leaf migration target must be 4 or 5/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 7))
+      .toThrow(/leaf migration target must be 4 or 5 or 6;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6;/);
   });
 });
