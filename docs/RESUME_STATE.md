@@ -77,7 +77,39 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐ CURRENT (2026-08-12 ~17:45 EDT) — IN-1b BUILT AND GREEN; landing under CR-IN1B-8/9
+# ⭐ CURRENT (2026-08-12 ~19:30 EDT) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
+
+**IN-1b is DONE end-to-end.** Landed at `af3d93c8` (20 paths, one plumbing commit; the
+two chair cures CR-IN1B-8/9 rode it — the `title=` walker's fifth reasoned raise 484→485
+and the requiredSymbols re-point to the successor invariant). **The full 17-step gate is
+GREEN from the committed tree: FINAL_GATE_TRUE_EXIT=0, ratchet 16/16 exact.** Chair
+flipped all three homes at `0b98626f` after verification (CREATE spellings reconciled
+against --diff-filter=A; validate:packets 22 packets / 0 READY TRUE_EXIT=0; focused
+implementation suites 34/34 TRUE_EXIT=0 — ⚠ they live at tests/scripts/, NOT tests/lint/).
+**IN-1a's orphan window is DISCHARGED** (the mirror has its first production consumer;
+the both-states byte-identity ended legitimately in the landing commit, driven by the
+2,323-byte sha-pinned dark golden). **The census-holder row is FREE** (fourth restamp in
+one day — landing releases the row; next dispatch takes it). Porcelain ZERO both trees.
+AM's process note carried: the main-worktree false-deletion signal fired again (cwd
+reset mid-pass; harmless, cd explicitly — the recorded hazard).
+
+**LIVE: TWO read-only draft lanes (Opus), dispatched ~19:30, NO tree writes:**
+- **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
+  PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
+  dead-window re-derivation from pulse call order; carries the B13 law (executed vs
+  delegated figures), the hot-file list, the title= walker check (485 now), the
+  successor-symbol rule. May return REFUSED-IN-PART on the GR-4b precedent.
+- **Lane AO — corpus-coverage mint charter** (transcript `a8d5e62ff4402ef63`): the
+  eventLog cross-home-substitution family; SCW-1b's parked scope folded in, cited to
+  its parking record; must decide OSR-schema-extension vs standalone machinery from how
+  the machinery actually works; an EMPTY threat model with receipts is a valid refusal.
+Collection: chair-verify each draft → rulings → promotion lane(s) per the census-holder
+rule (ONE non-terminal holder; the chair moves the walker row at dispatch). Behind them:
+the schema-7 prose batch (+ hot-file rule → PACKET_STANDARD, §5b/B12 omission note) and
+the NEW machinery batch (status-aware requiredSymbols / retiredSymbols — chartered at
+CR-IN1B-9). Owner veto surfaces standing: §17.7 · §17.4 · §17b.
+
+# (superseded ~19:30) — IN-1b BUILT AND GREEN; landing under CR-IN1B-8/9
 
 **Lane AM built the whole packet and STOPPED correctly at landing** (nothing committed;
 HEAD still `6ad9f8dd`; the 18 verified paths sit in the working tree — a successor
