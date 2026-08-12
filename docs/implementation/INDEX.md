@@ -180,10 +180,12 @@ live symbols were checked at the measured SHA.
   compilable espionage slice at this HEAD**, authorized under the owner's refreshed grant and
   compiled READY here. ES-6b stays blocked on a dispatcher nobody has chartered; ES-6c re-files
   out of espionage entirely as a corruption-volume wave.
-- **Site Coherence:** the plan is owner-signed for Waves 0–8 (Wave 9 separately), and the
-  program is **0-of-9 landed**. **SCW-0, the instrument wave, is compiled and READY**; every
-  later wave's exit criterion is a number SCW-0 mints, so nothing after it is dispatchable
-  until it lands. ⚠ `SC-` was already taken by the LANDED surveyor-chat packet, hence `SCW-`.
+- **Site Coherence:** the plan is owner-signed for Waves 0–8 (Wave 9 separately). State
+  corrected 2026-08-12 (chair, matching row LANDED-18): **SCW-0 LANDED at `d648e788`** —
+  the frozen 43-row baseline is the program's reference — and **Wave 1 is DISCHARGED**
+  (achieved by the schema-4 genesis `2a7fb033`; recorded SUPERSEDED in the plan), so the
+  program reads **1 landed, 1 discharged, 7 open**, each re-verifying its premises at
+  compile. ⚠ `SC-` was already taken by the LANDED surveyor-chat packet, hence `SCW-`.
 
 ### Complete; do not create greenfield packets
 
