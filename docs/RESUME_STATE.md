@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 12:59:54 EDT
+**Generated:** 2026-08-12 13:25:34 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a2222fee` | **16** |
-| ledger (main) | `review-fixes-2026-07-08` | `a9b6b61f` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `b5442c07` | **5** |
+| ledger (main) | `review-fixes-2026-07-08` | `cdad78b7` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 36Gi free (82% used)
+**Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T125916` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T132450` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T125916
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T132450
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,41 +28,19 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
- M docs/implementation/packets/foreign-policy/GR-4B.md
+MM docs/implementation/INDEX.md
+MM docs/implementation/PACKET_MANIFEST.json
+MM docs/implementation/packets/foreign-policy/GR-4B.md
 MM scripts/.test-ratchet-baseline.json
- M src/domain/display/chroniclersLetter.js
- M src/domain/display/settlementRumors.js
- M src/domain/realm/heraldRouting.js
- M src/domain/worldPulse/grammarNews.js
- M src/domain/worldPulse/grammarReceiptPools.js
- M src/domain/worldPulse/peaceTerms.js
- M src/domain/worldPulse/treatyBreach.js
- M tests/domain/impactKindWalkers.test.js
- M tests/domain/successionQuestion.test.js
- M tests/lint/grammarLifecycleKindPools.walker.test.js
- M tests/lint/kindPoolFloors.walker.test.js
- M tests/lint/sovereigntyLightingContract.walker.test.js
-?? src/domain/worldPulse/treatySuccessionVoice.js
-?? tests/domain/treatySuccessionVoice.test.js
+MM tests/lint/testRatchet.test.js
 ```
 ```
-  +122    -39     docs/implementation/packets/foreign-policy/GR-4B.md
-  +4      -0      src/domain/display/chroniclersLetter.js
-  +1      -0      src/domain/display/settlementRumors.js
-  +7      -0      src/domain/realm/heraldRouting.js
-  +15     -2      src/domain/worldPulse/grammarNews.js
-  +18     -0      src/domain/worldPulse/grammarReceiptPools.js
-  +2      -2      src/domain/worldPulse/peaceTerms.js
-  +22     -5      src/domain/worldPulse/treatyBreach.js
-  +9      -0      tests/domain/impactKindWalkers.test.js
-  +10     -3      tests/domain/successionQuestion.test.js
-  +39     -5      tests/lint/grammarLifecycleKindPools.walker.test.js
-  +7      -2      tests/lint/kindPoolFloors.walker.test.js
-  +31     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
 ```
+b5442c07 2026-08-12 GR-4b-alpha flips LANDED, and the chair discharges its own stale ledger row
+dd457b9a 2026-08-12 GR-4b-alpha: the succession road speaks, once, where it acted
 a2222fee 2026-08-12 GR-4b promoted READY: the succession road gets a voice, and the annex stops naming a man the engine cannot name
 5f687277 2026-08-12 The frozen census SHRINKS: 17 rows become 16, by cure not by adjustment
 32f4e520 2026-08-12 Three recorded micro-acts: the 164th callout cured, the seventh claim exposed, SCW-0's mutant planted
@@ -73,18 +51,16 @@ d648e788 2026-08-12 SCW-0: the site-coherence enforcement layer — the nine wav
 d0af9b35 2026-08-12 TC-5b-ii flips LANDED with the §6.5 correction; the reservation moves to SCW-0
 c82cc859 2026-08-12 TC-5b-ii: the painter's mount — a settlement's Map tab draws its surveyor's sheet
 df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the painter's mount
-a53ef7c6 2026-08-11 GR-4a: the succession answer lands dark, and both breach-vocabulary literals are cured
-a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ```
 ## Last 6 ledger commits
 
 ```
+cdad78b7 2026-08-12 RESUMED at the owner's continue; the voice lane picks up where the limit killed it
 a9b6b61f 2026-08-12 PAUSED at the owner's order; resume at 8:12 AM
 2fa34a57 2026-08-12 GR-4b stopped on a false mute-road premise; the alpha scope is ruled
 b35320d5 2026-08-12 GR-4b promotes clean and its implementer goes out
 531e57fc 2026-08-12 The frozen census shrinks to sixteen; the day's debt arc closes downward
 78e5e90c 2026-08-12 Micro-act batch two collected: the 164th callout was real and is cured
-7795bbf1 2026-08-12 GR-4b is drafted and pre-ruled: the voice pays zero lines and refuses false headlines
 ```
 ## Fable-survey debt (derived, not transcribed)
 
