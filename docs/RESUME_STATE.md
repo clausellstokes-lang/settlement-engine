@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 19:56:57 EDT
+**Generated:** 2026-08-11 20:10:46 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `33487c77` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `a6f700f7` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `d7698bc6` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 2144: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
-**Disk:** 35Gi free (83% used)
+**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
+**Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T195510` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T201011` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T195510
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T201011
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -51,12 +51,12 @@ e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is c
 ## Last 6 ledger commits
 
 ```
+d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
 f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
 c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
-3a0337eb 2026-08-11 The refreshed grant is recorded and executing: the golden batch, the copy items, and ES-Da authorized dark
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -379,6 +379,17 @@ markers — see the tail of `docs/FABLE_VALIDATION_QUEUE.md` for the marking law
 clearing that debt under the Fable chair.
 
 ### Where the gate stands
+
+⭐⭐⭐ **FULL 17-STEP GATE — TRUE_EXIT=0 at `33487c77` (2026-08-11 ~20:10), captured
+in-shell by the chair with gate-tail independently agreeing, HEAD unmoved and the tree
+clean across the run. THE FIRST FULLY GREEN GATE OF THE ERA — zero attributed reds of any
+kind remain: the golden is DISCHARGED (SHIFT-2+3, one seed-line move under §17.1), the
+OSR baseline is CURRENT (1975/1394), the lighting census is TRUE (2397/365/2032/19763/
+5578), the validation debt is at its FLOOR (2 permanent legend lines). From this commit
+forward, ANY gate red is a real regression.** Two non-blocking advisories observed in the
+log, recorded not chased: the VENDOR-MANIFEST empty-libs supply-chain warning and an E2E
+anti-vacuity usage message — both pre-existing, neither moved the gate's own exit.
+(Superseded record below kept for history:)
 
 **FULL 17-STEP GATE CLEAN at `7699e367`** (2026-08-10). Since then: schema-5 pair
 `36159389`+`ffc85a90` re-greened the observed-shape step; the known reds at resume are the
