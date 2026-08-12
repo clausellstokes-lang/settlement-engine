@@ -142,14 +142,29 @@ receipts all green: B1–B3, both typecheckers, coupling walker at base, validat
 implementation suites 34/34 — every TRUE_EXIT=0. Stale walker comment at :649 goes to
 the prose batch, not this packet.
 
-**LIVE: Lane AP resumed (~20:55) authoring the promotion** with CR-GR4C-1..8 folded
-in: GR-4C.md READY + INDEX row + census-holder FIFTH restamp (the walker row moves to
-GR-4C) + CR-GR4C-6 header restamp + manifest entry now carrying the registration path
-and every moving pin; validate 23 packets / 1 READY; ONE plumbing commit; porcelain
-zero. Collection: transcript `a2d5437810b3358c9`; on READY → chair-verify → dispatch
-the GR-4c implementer (census holder). Behind it: the AO-1 micro-act (lock-the-win
-floors, CR-AO-5), AO-0's schema-7 mint packet, the schema-7 prose batch (+ the :649
-stale note), the machinery batch.
+**⭐ GR-4C PROMOTED READY at `d7b7d225` (~21:25), CHAIR-VERIFIED** (23 packets /
+1 READY TRUE_EXIT=0 re-run by the chair; porcelain ZERO; AP's judgments 4–6 ratified —
+the paraphrase over an unresolvable @enforced-by tag, coordinator surfaces riding the
+same commit on the TC-5B/IN-1B precedent, E8 recorded not fixed). The coupling
+registration carries the FULL template (row + head re-export + exact-list pin all in
+the manifest — the template gap did NOT claim a fifth victim); desk walker and
+receipt-sample suites measured NOT to move (a red there is a STOP, not a fix); the
+licensing door proven open in scratch with the row present.
+
+**LIVE (2026-08-12 ~21:30): TWO lanes:**
+- **Lane AQ (Opus) implements GR-4c** (task transcript `ad6baea434bd51134`): the
+  pure banded-charge leaf + the ≤12-line mount + the coupling
+  registration + FENCE 3 with the MANDATORY both-lit control + C1–C7 + the census
+  re-record WHOLE (GR-4C holds the walker row, fifth restamp). ⛔ SEALED SESSION:
+  NOTHING else lands on the build branch until AQ lands. On landing → chair-verify
+  (C5's 0.140→0.278→saturated arithmetic; both B13-a figures; the census five-tuple) →
+  three-home flip → then AO-1 lands.
+- **Lane AR (Opus, READ-ONLY) drafts two batches** (task `ad4f25c1707e0d5d8`): the
+  machinery batch (status-aware requiredSymbols per CR-IN1B-9, design options weighed
+  against the validator's pins) and the prose-batch worklist (7 items with live quotes
+  + gate exposure + the mint-trigger verdict). Lands NOTHING; report to chair.
+Queue after: AO-1 micro-act → AO-0 schema-7 mint packet → machinery batch → prose
+batch → AO-2..6 → GR-4e (named micro-act) → the wider corpus per CR-NEXT-1.
 - **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
   PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
   dead-window re-derivation from pulse call order; carries the B13 law (executed vs
