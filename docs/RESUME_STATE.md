@@ -3,54 +3,34 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 20:54:47 EDT
+**Generated:** 2026-08-11 21:28:41 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `5853732a` | **9** |
-| ledger (main) | `review-fixes-2026-07-08` | `37585538` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ec3680d0` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `a4091799` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 33Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T205406` — build 9 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T212800` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T205406
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T212800
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
 staged set BY NAME AND COUNT.
 
-### Uncommitted in the build tree — attribute before touching
-
-```
-MM scripts/.observed-shape-readers-baseline.json
- M scripts/check-observed-shape-readers.mjs
- M scripts/lib/observed-shape-baseline.mjs
- M scripts/migrate-observed-shape-readers.mjs
- M tests/lint/observedShapeBaseline.test.js
- M tests/lint/observedShapeMigration.test.js
- M tests/lint/observedShapeReaders.walker.test.js
- M tests/lint/observedShapeSentinel.test.js
- M tests/lint/sovereigntyLightingContract.walker.test.js
-```
-```
-  +494    -41     scripts/check-observed-shape-readers.mjs
-  +78     -40     scripts/lib/observed-shape-baseline.mjs
-  +48     -19     scripts/migrate-observed-shape-readers.mjs
-  +25     -16     tests/lint/observedShapeBaseline.test.js
-  +27     -12     tests/lint/observedShapeMigration.test.js
-  +100    -38     tests/lint/observedShapeReaders.walker.test.js
-  +288    -22     tests/lint/observedShapeSentinel.test.js
-  +29     -1      tests/lint/sovereigntyLightingContract.walker.test.js
-```
 ## Last 12 build commits
 
 ```
+ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17.2/§17.3 are recorded
+2b59122d 2026-08-11 The schema-6 GENESIS: the instrument stops reporting browser and language surface
+2fe94f77 2026-08-11 Schema 6 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
 5853732a 2026-08-11 Four packets promoted: the painter's mount unblocks, and GR-4a, SCW-0 and ES-Da compile READY
 33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
 b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-hall link, discharge SHIFT-2, re-record the golden master
@@ -60,19 +40,16 @@ e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated l
 63c62822 2026-08-11 docs: four measured corrections — the espionage park, GR-3b's landing, the schema-2 Wave-1 literal, and F9's signature
 a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer folds the census
 56310497 2026-08-11 TC-5B promoted as the ruled split: the seam is READY, the mount waits on it
-c8931c03 2026-08-11 explanation.test.js was the seventh fixture manufacturing the settlement-root hook shape, and the sweep that retired six missed it
-ebc4f90e 2026-08-11 The aiGrounding edge bundle is rebuilt at the tree that produced it, and four sibling metas ride the same build window
-e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is checked, and the TC-5A fiction is corrected
 ```
 ## Last 6 ledger commits
 
 ```
+a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
-6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -148,12 +125,29 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   seventh — ⚠ noted for a future micro-act: that baseline row is per-TEST identity, so
   new naked claims widen it SILENTLY. Transcript: session dir
   `subagents/agent-ab475d05eaad421a7.jsonl`.
-- **Lane W (build, Opus) — THE COPY BATCH (task #17)**, dispatched ~20:45: the four
-  REL_LABEL descriptors (chair-authored, owner veto §17.4), the §17.2 lock-copy adoption
-  note, the §17.3 stated-absence note — display-only, zero census movement (Lane V holds
-  the census). Transcript: session dir `subagents/agent-ad9ce3889c8156c7a.jsonl`.
-- **Chair sequence:** Lane V lands (the mint + gate back at exit 0) → GR-4a implementer
-  (takes the census walker row per the holder rule) → TC-5B-ii → SCW-0 → ES-Da.
+- **✅ Lane W LANDED THE COPY BATCH at `ec3680d0` (~21:00)** — the four descriptors
+  (patron/client = "bound by patronage", vassal = "bound by fealty", criminal_network =
+  "a shadow trade"; veto surface §17.4) with the load-bearing find that the canonical
+  edge is DIRECTION-FREE (directional copy would coin-flip who owes whom —
+  `directionalRelationshipLabel()` exists if the owner ever wants sides, a data-path
+  change). Set proven CLOSED (PROPAGATION_MATRIX = 10; 0 producible types now lack a
+  descriptor). 3 files/23 tests TRUE_EXIT=0; confinement re-verified; census unmoved.
+  All three judgments RATIFIED. ⚠ **§17.3 SURFACED A REAL CONFLICT** — a same-day
+  OWNER-ATTRIBUTED pin (settlementMapLegibility.test.jsx:121, "an ABSENT section is
+  honest") opposes the ruling; the chair holds §17.3 IN ABEYANCE for that one surface
+  and put the pick on the owner's queue at **§17b**. ⚠ Its report also caught Lane V's
+  gate exit 3 as a MUTEX SELF-DEADLOCK (ancestry detection through the npm chain) —
+  Lane V was warned (~21:05) with fresh-shell re-run guidance before chasing a phantom.
+  ⚠ Path erratum in the chair's own brief recorded: edgeAnnotations lives under
+  src/components/townMap/, not src/domain/townMap/.
+  Transcript: session dir `subagents/agent-ad9ce3889c8156c7a.jsonl`.
+- **Lane V's mint pair is LANDED as commits `2fe94f77` + `2b59122d`** (verified intact
+  ancestors; the freeze verified clean of sibling WIP) — its REPORT is pending its
+  fresh-shell gate re-run. **Chair sequence after its report:** move the census-walker
+  reservation to GR-4A (the holder rule) → GR-4a implementer → TC-5B-ii → SCW-0 →
+  ES-Da, one census holder at a time. **Chair-owed next beat:** the memory fold (index
+  17,675 B, over ceiling) + two durable facts from Lane W (the direction-free
+  relationshipType hazard; manifests-are-provenance-only).
 - **Lane V (build, Opus) — THE SCHEMA-6 MINT (task #11)**: the ruled two-commit pair
   (code half deliberately gate-red → genesis), items 1-5+8 + exemptions A and B (B's
   gate discharged at `da31d170`), M11/M12 into the walker's hand-composed chain in the

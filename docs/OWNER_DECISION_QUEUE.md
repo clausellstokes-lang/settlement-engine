@@ -822,3 +822,15 @@ string-literal `purposeClass: 'covert'` spelling is a STOP-level instruction (th
 one-reader walker is one character wide); the INFO→GRAMMAR coupling arrow is recorded
 with its derivation (the first ES row where espionage is the dependency). Draft:
 session scratchpad `laneQ-ES-Da-draft.md`.
+
+### §17b · ⚠ A RULING CONFLICT SURFACED — §17.3 held in ABEYANCE for one surface (2026-08-11 ~21:00)
+
+Executing §17.3 ("a stated absence wins") surfaced a genuine collision: the town-map
+notes gate (`SettlementMapNotes.jsx` hasRoads) is pinned by
+`tests/ui/settlementMapLegibility.test.jsx:121` carrying a dated note ATTRIBUTED TO THE
+OWNER, also 2026-08-11, reading "an ABSENT section is honest." Two same-day owner-side
+positions collide, and the chair does NOT override an owner-attributed pin with a
+grant-derived ruling. Disposition: the §17.3 ruling stands as the DEFAULT for future
+surfaces; for THIS surface it is held in abeyance, recorded in-component
+(ruled-but-not-built, the contradiction named) — **the owner picks: stated absence
+("No roads out") or absent section, for the town-map notes.** One line settles it.
