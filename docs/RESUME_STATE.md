@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 05:07:29 EDT
+**Generated:** 2026-08-12 05:29:03 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a2222fee` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `531e57fc` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `b35320d5` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T050650` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T052823` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T050650
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T052823
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -51,12 +51,12 @@ a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ## Last 6 ledger commits
 
 ```
+b35320d5 2026-08-12 GR-4b promotes clean and its implementer goes out
 531e57fc 2026-08-12 The frozen census shrinks to sixteen; the day's debt arc closes downward
 78e5e90c 2026-08-12 Micro-act batch two collected: the 164th callout was real and is cured
 7795bbf1 2026-08-12 GR-4b is drafted and pre-ruled: the voice pays zero lines and refuses false headlines
 eb658359 2026-08-12 The chain closes: all four promoted packets are landed and terminal
 1234721a 2026-08-12 The rider stopped on the chair's own rulings, and both cures are ruled
-675929ab 2026-08-12 The site-coherence program opens on a superseded audit; the rider goes last
 ```
 ## Fable-survey debt (derived, not transcribed)
 
