@@ -1,6 +1,7 @@
 # Foreign Policy / GR-4a — the succession question, answered at the event
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `a53ef7c6`, 2026-08-11; flipped by the chair after verification (11 files by diff-tree, 23 acceptance cases, census folded in-change, gate TRUE_EXIT=0 at HEAD; six deviations ratified incl. the treatySuccession.js rename and the third severity cure). Do not redispatch.
 - **Status note:** ✅ **PROMOTED READY 2026-08-11 by the Fable chair (session `c42c8924`,
   Lane U), compiled from Lane P's read-only draft and the six rulings CR-GR4-1..6 (§12).**
   Lane P's draft carried GR-4a as BLOCKED on exactly one cause — the lighting-census walker
