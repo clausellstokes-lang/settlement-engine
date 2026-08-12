@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 21:28:41 EDT
+**Generated:** 2026-08-11 22:04:17 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ec3680d0` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `a4091799` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a9a10e6d` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `9391c3b8` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 33Gi free (84% used)
+**Disk:** 32Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T212800` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T220342` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T212800
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T220342
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,7 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17.2/§17.3 are recorded
 2b59122d 2026-08-11 The schema-6 GENESIS: the instrument stops reporting browser and language surface
 2fe94f77 2026-08-11 Schema 6 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
@@ -39,17 +40,16 @@ e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated l
 9183d52c 2026-08-11 TC-5b-i: a compiled cartography block becomes reachable without a canvas
 63c62822 2026-08-11 docs: four measured corrections — the espionage park, GR-3b's landing, the schema-2 Wave-1 literal, and F9's signature
 a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer folds the census
-56310497 2026-08-11 TC-5B promoted as the ruled split: the seam is READY, the mount waits on it
 ```
 ## Last 6 ledger commits
 
 ```
+9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
-1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -141,13 +141,30 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   ⚠ Path erratum in the chair's own brief recorded: edgeAnnotations lives under
   src/components/townMap/, not src/domain/townMap/.
   Transcript: session dir `subagents/agent-ad9ce3889c8156c7a.jsonl`.
-- **Lane V's mint pair is LANDED as commits `2fe94f77` + `2b59122d`** (verified intact
-  ancestors; the freeze verified clean of sibling WIP) — its REPORT is pending its
-  fresh-shell gate re-run. **Chair sequence after its report:** move the census-walker
-  reservation to GR-4A (the holder rule) → GR-4a implementer → TC-5B-ii → SCW-0 →
-  ES-Da, one census holder at a time. **Chair-owed next beat:** the memory fold (index
-  17,675 B, over ceiling) + two durable facts from Lane W (the direction-free
-  relationshipType hazard; manifests-are-provenance-only).
+- **✅ Lane V COLLECTED (~21:50): THE SCHEMA-6 MINT IS LANDED AND THE GATE IS HANDED
+  BACK GREEN.** Three commits (`2fe94f77` code half → `2b59122d` genesis → `a9a10e6d`
+  anchor cure, forced by a live walker convicting correctly): **PURE SHRINK 1381 same /
+  13 gone / 0 new**, envelope 1975/1394/385 → **1954/1381/381**, four files leave
+  entirely; UI cohort → 49/123/185. Filter-chain M11/M12 MUTANT-PROVEN; census folded
+  +5 (the paired controls) with an honest suiteTitles caveat; **final gate TRUE_EXIT=0
+  in-shell at `a9a10e6d`**. Two designs refuted by measurement mid-build (`window` IS a
+  corpus root shape; `test` is a real key). Two NEW hazards banked to memory: the
+  private-index protocol leaves the shared index stale and `dirtyInputsFor()` reads git
+  status (cure: surgical `update-index --cacheinfo` after verifying the displaced blob
+  reachable); and ⚠⚠ NEVER wrap `npm run check*` in gate-mutex.sh (self-deadlock, exit
+  3 = the mutex giving up — cost 20 min, confirmed independently by Lane W). One prose
+  debt DEFERRED-RECORDED to the schema-7 batch (the four→twelve comment — one byte
+  there reds the gate until a mint). All judgments RATIFIED. ⚠ The harness misreported
+  two more exits (running total: nine today).
+- **Lane X (build, Opus) — IMPLEMENTING GR-4a**, dispatched ~21:55 at base `a9a10e6d`
+  (validator 19/4 READY green; GR-4A holds the walker reservation; sole census holder).
+  Conditional mount (peaceTerms.js size measurement = STOP condition), both breach-
+  vocabulary consumer cures in-scope, dark-path byte-identity proven not asserted, gate
+  owed back at TRUE_EXIT=0. Then TC-5B-ii → SCW-0 → ES-Da, one census holder at a time.
+  Transcript: session dir `subagents/agent-a68fdaea1d6779d46.jsonl`.
+- **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
+  B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
+  rows folded verbatim to the 08-11 archive with compact operative hooks kept).
 - **Lane V (build, Opus) — THE SCHEMA-6 MINT (task #11)**: the ruled two-commit pair
   (code half deliberately gate-red → genesis), items 1-5+8 + exemptions A and B (B's
   gate discharged at `da31d170`), M11/M12 into the walker's hand-composed chain in the
