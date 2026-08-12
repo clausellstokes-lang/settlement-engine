@@ -3,12 +3,16 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `33487c77b0d9290db157f08330840558e17902bf`
-- **Measured:** 2026-08-11 — **re-derived at the four-packet promotion** (TC-5b-ii READY,
-  plus GR-4a, SCW-0 and ES-Da compiled and promoted). The previous header carried `e1e9fd6a`
-  from the TC-5b split; five commits have landed since, including TC-5b-i itself
-  (`9183d52c`) and a census re-record (`da31d170`). ⚠ **Every packet promoted in this change
-  is based at `33487c77`, the fully-green-gate commit.**
+  `32f4e520e71774a233a0f8627cffa90a31674357`
+- **Measured:** 2026-08-12 — **re-derived at the GR-4b promotion.** The previous header
+  carried `33487c77` from the four-packet promotion; all four of those packets have since
+  landed (`c82cc859`, `a53ef7c6`, `d648e788`, `6dbb76c2`), the flip commits followed, and a
+  micro-act lane landed `32f4e520` and then `5f687277`. ⚠ **GR-4b is based at `32f4e520`, and
+  its own base was restamped from `0e5881b6` mid-promotion when that lane landed** — its
+  census-walker edits were uncommitted foreign dirt at the draft's last reading and are now in
+  history. ⚠ `5f687277` (the test-ratchet re-freeze, 17 rows to 16 by cure) landed after that
+  and touches one file; it is an **admissible unchanged descendant** for GR-4b, whose substrate
+  is untouched across it.
 - **Packet law:** [`PACKET_STANDARD.md`](./PACKET_STANDARD.md)
 
 ## Dispatch rule
@@ -45,6 +49,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-16 | [`GR-4a`](./packets/foreign-policy/GR-4A.md) | **LANDED** at `a53ef7c6`; do not redispatch | The succession question, answered at the event, in the dark: a legitimate-power change answers the oaths the fallen holder swore — HONOR silently by scoring, or DISAVOW past a band through a factored shared shell. ⚠ **GR-4 was refused as one packet and split four ways at CR-GR4-1**; this is slice (a) alone, and GR-4b (the voice), GR-4c (the credibility charge) and GR-4d (the lit-mode queue) are named but NOT released by its landing. It gives `swornPartiesOf` its first production consumer and cures the two hardcoded `'repudiation'` literals whose absence would reward both courts for a treaty one of them tore up. ⭐ It holds the estate-wide lighting-census walker's reservation for all four packets promoted here — see the census-holder rule below. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the Herald/chronicle beats and the dossier `succession_question_open` line (GR-4b), any credibility delta (GR-4c), the `routineMajorApproval` queue and per-type terminal (GR-4d), the RENEGOTIATE arm (GR-5, and `treatyRenewalEnabled` does not exist), any change to `isRepudiableTreaty` / `repudiableTreatyPairs` output, any new tuning key, `pulseKernel.js`, `informationStatecraft.js`, `actorMajorApproval.js` |
 | LANDED-18 | [`SCW-0`](./packets/site-coherence/SCW-0.md) | **LANDED** at `d648e788`; do not redispatch | Site Coherence Wave 0 — the enforcement layer, **instruments only**: the identity-keyed `(terrain, siteKind, decisive-token)` contradiction ratchet over the frozen 462-settlement corpus, the export-predicate liveness census with its `KNOWN_INERT` quarantine, and the hazard registry's repair plus a new `HZ-SITECOHERENCE` MACHINERY class. ⭐ It touches **zero `src/` files** and mints no output; its whole deliverable is the ability to state Waves 1–9 as numbers the repository re-derives. ⚠ Its exit criterion was changed at CR-SCW0-6 from *reproduce the audit exactly* to **re-derive and report against**, because five generation-touching commits — one a declared same-seed correction — have landed since the audit's HEAD. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | every correctness assertion (Wave 8), Waves 1–9 entire, `scripts/.observed-shape-readers-baseline.json` (Wave 1), `exportSemantics.js` (Wave 2), all of `src/**`, `scripts/mutation-sweep.sh`, every golden and every ceiling raise |
 | LANDED-19 | [`ES-Da`](./packets/foreign-policy/ES-DA.md) | **LANDED** at `6dbb76c2`; do not redispatch | The composite rider: covert cargo on an already-accepted peace envoy — one pure leaf plus a ≤15-line composition, so a lawful `covert` sub-record rides the errand row the war lane was already minting. Nothing new travels, nothing new is scheduled, no stage is added. ⭐ **The only compilable espionage slice at this HEAD**, and the argued split out of the ES-7 and ES-D refusals, both of which stay refused. It is the first production caller of the orphaned `espionageDoctrineStage.js`, so it wakes ES-5a's doctrine half at zero extra cost. ⛔ Built DARK; the dark path is byte-identical **by construction**, and any motion in that golden is a STOP. ⚠ Authority is `OWNER_DECISION_QUEUE.md` §17 disposition 5 on the **ledger** branch, which a build-branch reader cannot open — the conditions are restated in full inside the packet. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any dispatcher (ES-7 stays refused), any Herald kind or routing row, the vetting band (ES-6b has no producer and is not released), multi-stop routes, `mintCovertMission` and `castCovertOperative` (both stay dead), any new persisted key or ledger, lighting the flag |
+| READY-20 | [`GR-4b`](./packets/foreign-policy/GR-4B.md) | **READY** | The succession road's voice: one pure GRAMMAR leaf plus a widened return on GR-4a's own applier, so a torn-up oath is spoken once by the road that broke it — naming both courts, the hand that swore, and the recorded reason. ⭐ **`peaceTerms.js` pays ZERO net effective and ZERO net raw lines**: both edit sites are one-line-for-one-line replacements, which is what makes a mount possible in a file sitting at 797 of a ceiling of 800 with no baseline entry and no door. ⚠ **GR-4b as chartered was refused in part and split three ways:** of the five authored voice surfaces, only the disavowal has an honest producer at this base; `succession_question_opened`, `honored_by_silence` and the dossier line `succession_question_open` all describe a question standing open across ticks, which GR-4a answers inside a single expression, so their authored prose would be untrue the instant it minted — all three plus `reaffirmed` re-file behind GR-4d. ⛔ **Two budget rows carry an explicit pre-dispatch override (CR-GR4B-2)** — registration-only production files 3 → 5 and handwritten files 12 → 14 — because a Herald DESK kind costs five mechanical registration rows and that cost is per-desk, not per-kind. ✅ **CR-GR4B-3's annex correction is discharged in the promotion commit**, not owed: the `disavowed_by_succession` exemplar's `{npc}` is re-slotted to the fallen holder (the successor's name is on no surface the treaty stage can read) and `repudiated`'s unfillable `{reason}` is struck; `docs/content/RECEIPT_POOLS_GRAMMAR.md` is a forbidden file for the implementer. ⭐ It is the sole in-flight holder of the estate-wide lighting-census walker. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the three open-question kinds and `reaffirmed` (GR-4d, then GR-4b-ii / GR-4b-iii), any credibility delta or the `credibility_charge` pool and the fracture-charge dead-window re-derivation (all GR-4c), the lit-mode queue and its per-type terminal (GR-4d), any dossier line or `treatyDocument.js` edit, any treaty-ledger write or new persisted key, a tenth kind registry, `treatyLifecycleVoice.js`, `treatySuccession.js`, `pactAmendment.js`, `oathHolder.js`, `scripts/.size-baseline.json`, and any further edit to the receipt-pool annex |
 
 ## Authorized implementation infrastructure
 
@@ -56,22 +61,29 @@ re-derives that lane and decides whether to compile its immediate dependent.
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — four READY packets, one shared census
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-12: ONE holder, and it is `GR-4b`
 
-`GR-4a`, `SCW-0`, `ES-Da` and `TC-5b-ii` all add test titles, so all four move the
-estate-wide lighting census, and the serialization law ruled at `73f5be96` re-derives that
-census WHOLE in the change that moves any figure. The validator forbids two non-terminal
-packets naming one change path, so the reservation cannot be written four times.
+The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
+whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
+WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
+one change path, so exactly one packet may hold the reservation.
 
-**RULED (chair, 2026-08-11): `GR-4a` holds
-`tests/lint/sovereigntyLightingContract.walker.test.js` as its `TEST` row, because it is the
-packet the chair dispatches first. The chair MOVES that row — a one-line
-`PACKET_MANIFEST.json` edit — into whichever packet it dispatches next. ONLY ONE of the four
-may have an implementer in flight at a time.**
+⚠ **DATED CORRECTION.** The rule this section used to state — four packets sharing the census
+behind `GR-4a`'s row, the chair moving it between dispatches — is **HISTORY.** All four of those
+packets have landed, and a terminal packet reserves nothing
+(`scripts/implementation-packets.mjs:43`).
+
+**RULED (chair, 2026-08-12): `GR-4b` holds
+`tests/lint/sovereigntyLightingContract.walker.test.js` as its `TEST` row and is the sole
+in-flight census holder.** The moment a second non-terminal packet is promoted, this rule
+re-applies in full: the chair MOVES the row — a one-line `PACKET_MANIFEST.json` edit — into
+whichever packet it dispatches next, and only one implementer is in flight across the holders.
 
 ⛔ An implementer whose packet does not carry the row must **not** re-record the census
 anyway: that is an unreserved edit to a shared enforcer and it defeats the reservation system
-it routes around. Report and stop.
+it routes around. Report and stop. ⛔ **And a manifest reservation is not the same fact as a
+clean working file** — a foreign lane holding that walker dirty at dispatch is its own STOP,
+which is exactly the condition `GR-4b` was drafted under before `32f4e520` landed it.
 
 ### Minimum decisions needed to unblock
 
@@ -92,20 +104,18 @@ current packet set is waiting on a decision.**
 
 ## Reserved foreign work
 
-⚠ **RESTAMPED 2026-08-11 at the four-packet promotion.** The two paths this section used to
-name (`scripts/lib/reader-shape-scan.mjs`, `tests/lint/readerShapeResolver.test.js`) were
-**already clean** and the claim was stale. At the measured SHA the shared build tree has
-unrelated changes in the **observed-shape-reader instrument family**, held by a sibling lane:
+⚠ **RESTAMPED 2026-08-12 at the GR-4b promotion: THE TREE IS CLEAN AND THIS SECTION NAMES
+NOTHING.** `git status --porcelain` at `32f4e520` returned **zero entries** — no foreign dirt,
+no stale-index residue. The observed-shape-reader instrument family this section used to name
+(`scripts/check-observed-shape-readers.mjs`, `scripts/lib/observed-shape-baseline.mjs`,
+`scripts/migrate-observed-shape-readers.mjs`, `scripts/.observed-shape-readers-baseline.json`)
+is committed and clean, and the micro-act lane that held the census walker and
+`src/components/map/TreatyPanel.jsx` landed at `32f4e520`.
 
-- `scripts/check-observed-shape-readers.mjs`
-- `scripts/lib/observed-shape-baseline.mjs`
-- `scripts/migrate-observed-shape-readers.mjs`
-- `scripts/.observed-shape-readers-baseline.json`
-
-No packet in this set may touch, stage, restore, or attribute those files — and all four are
-independently forbidden edits in every packet promoted here. **The list is a snapshot, not
-permission to ignore new dirt: every dispatch re-runs `git status` and reserves all foreign
-changes.**
+⛔ **An empty list is a snapshot, never permission.** Every dispatch re-runs `git status`,
+reserves whatever foreign changes it finds, and stops rather than staging, restoring, or
+attributing them. All four observed-shape files remain independently forbidden edits in every
+packet in this set.
 
 ## Reconciled program state
 
@@ -129,9 +139,14 @@ live symbols were checked at the measured SHA.
   next bounded surface packet; later ingestion and migration stages are excluded.
 - **Foreign-policy grammar, GR-4:** ⚠ **REFUSED as one packet and split four ways at
   CR-GR4-1** — it needed six-to-nine existing production files against a budget of three, two
-  behavior families, two flag conjunctions and three writers. **GR-4a (the dark answer at the
-  event) is compiled and READY**; GR-4b/4c/4d are named, dependency-ordered behind it, and
-  compiled just-in-time. GR-5 is untouched and `treatyRenewalEnabled` does not exist.
+  behavior families, two flag conjunctions and three writers. GR-4a (the dark answer at the
+  event) is in history at `a53ef7c6`. ⚠ **GR-4b was then refused IN PART and split three ways
+  at CR-GR4B-2:** of the five authored voice surfaces only the disavowal has an honest producer,
+  so **GR-4b is the breach voice alone** — compiled here — while GR-4b-ii (`reaffirmed`,
+  `honored_by_silence`) and GR-4b-iii (the two open-question surfaces) sit behind **GR-4d**,
+  whose own substrate was already measured as weaker than the design assumes. GR-4c (the
+  credibility charge) is unchanged and compiled just-in-time. GR-5 is untouched and
+  `treatyRenewalEnabled` does not exist.
 - **Espionage:** ⛔ **the tail remains PARKED.** ES-7 is refused (five of six Herald kinds have
   no reachable producer) and ES-D is refused (a covert row's endpoints are forced to the peace
   offer's own). **ES-Da — the composite rider — is the single argued split and the only

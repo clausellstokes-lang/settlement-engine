@@ -841,6 +841,77 @@
           "tests/domain/subsystemRowsVirtual.test.js",
           "tests/property/espionageProductsDormancyFence.test.js"]
       ]
+    },
+    {
+      "id": "GR-4B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B.md",
+      "verifiedBase": "32f4e520e71774a233a0f8627cffa90a31674357",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionVoice.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/successionQuestion.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/impactKindWalkers.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "answerSuccessionQuestions" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "defaultAllLiveTerms" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_DISAVOWAL_RECEIPT" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "OPEN_REPUDIATION_RECEIPT" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "successionQuestionsForTick" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "isSuccessionDisavowable" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "GRAMMAR_KIND_REGISTRY" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "grammarReceipt" },
+        { "path": "src/domain/worldPulse/grammarReceiptPools.js", "symbol": "GRAMMAR_RECEIPTS" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "swornPartiesOf" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "PACT_ENDINGS" },
+        { "path": "src/domain/realm/heraldRouting.js", "symbol": "EXACT_SECTION" },
+        { "path": "src/domain/display/chroniclersLetter.js", "symbol": "KIND_SECTION" },
+        { "path": "src/domain/display/chroniclersLetter.js", "symbol": "KIND_SECTION_DIVERGENCES" },
+        { "path": "src/domain/display/settlementRumors.js", "symbol": "WHAT_PHRASES" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "named historical regression: the widened return is a no-op on state and keeps the caller's own reference" },
+        { "id": "A2", "case": "main reachable behavior: the disavowal speaks once, addressed and reasoned" },
+        { "id": "A3", "case": "the silence-honors negative extended to the feed: an honored succession puts nothing in newsEntries" },
+        { "id": "A4", "case": "the news address law asserted part by part, because no walker asserts the recorded reason" },
+        { "id": "A5", "case": "the refused-write negative: two disavow questions on one treaty in one tick mint exactly one beat" },
+        { "id": "A6", "case": "absent and explicit-false dormancy with the succession read counters at zero and a lit mutant control" },
+        { "id": "A7", "case": "the open repudiation road plus idempotence and same-seed byte stability" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/property/treatyLifecycleVoiceDormancyFence.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/wizardNewsAuthoring.walker.test.js",
+          "tests/domain/impactKindWalkers.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/sizeBaseline.test.js"]
+      ]
     }
   ]
 }

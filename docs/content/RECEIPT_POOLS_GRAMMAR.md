@@ -600,6 +600,31 @@ AUDIENCE: public
 
 # GR-4 — THE SUCCESSION QUESTION (rides `oathHolderEnabled`, second slice)
 
+⛔⛔ **CORRECTED 2026-08-12 (CR-GR4B-3, at GR-4b's promotion) — TWO AUTHORED SLOTS IN THIS
+SECTION NAMED FACTS THE ENGINE CANNOT SUPPLY, AND THE CODE WINS BOTH.** Recorded here rather
+than changed in silence, because a successor who meets the old wording in a diff needs to know
+why it moved. Ruled at **A-20** in the register at the tail of this file, on the A-11 and A-15
+precedents.
+
+- **The disavowal exemplar's `{npc}` was the SUCCESSOR.** It read as the new seat tearing up
+  what its predecessor had sworn — and the successor's name is on no surface the treaty stage
+  can read: the seat-transition row carries a ruler id and no name, the ladder record's
+  standings are keyed by id, and the roster that holds names sits behind an exact-set
+  `grep '\.npcs'` census that convicts a new world-pulse leaf for the token even inside a
+  comment. **`{npc}` in `disavowed_by_succession` now binds to the FALLEN HOLDER** — the hand
+  that swore — whose name IS persisted, on the treaty's own `sworn` stamp. It is the voice the
+  landed engine receipt had already chosen: *the oath was sworn by a hand now gone, and the
+  seat that followed would not own it.*
+- **`repudiated`'s third variant spoke `{reason}`.** The DM repudiation verb records no
+  free-text reason — its receipt is one fixed authored sentence — so the slot could never be
+  filled, and an unfillable slot makes the whole family unreachable against a `major` floor of
+  four. The variant is re-authored to the same angle without the slot, and `{reason}` leaves
+  that pool's `SLOTS:` line under A-15.
+
+Compiled evidence and the full measurement live in
+[`../implementation/packets/foreign-policy/GR-4B.md`](../implementation/packets/foreign-policy/GR-4B.md)
+§3.4 and §12a.
+
 ### succession_question_opened (GR-4) — Herald / chronicle — significance: notable
 SLOTS: {settlement} {counterpart} {npc} {band}
 AUDIENCE: public
@@ -637,18 +662,18 @@ AUDIENCE: public
 ### disavowed_by_succession (GR-4) — pact ending; Herald — significance: major
 SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
-1. {npc} has torn up the treaty his predecessor swore, and the world understands — and does not forgive. `[exemplar, slotted]`
+1. The oath {npc} swore has been torn up by the seat that followed him, and the world understands — and does not forgive. `[exemplar, slotted + re-slotted]`
 2. {settlement}'s new seat has cast off the oath; every term under it is broken from this week, and the parchment is kept only as evidence.
 3. In {counterpart} they had expected it, and it landed hard regardless.
 4. The seat that swore is gone, and the word went out of the door with it.
 5. It was cheap to do, and it will be dear to have done.
 
 ### repudiated (WR-0c producer) — pact ending; Herald — significance: major
-SLOTS: {settlement} {counterpart} {reason}
+SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. Openly repudiated: {settlement} has renounced the pact with {counterpart} before the whole court and defaulted every term in it.
 2. The herald read it out in the square, and the clerks defaulted the terms the same hour.
-3. No pretence of a lapse and no quiet shortfall — {settlement} broke it in the open, and said {reason}.
+3. No pretence of a lapse and no quiet shortfall — {settlement} broke it in the open, and left {counterpart} nothing to misread.
 4. They chose the loud way. The cost of the loud way is entered where such costs are entered.
 
 ### credibility_charge (GR-4) — Herald / receipt (the oathbreaker's price) — significance: notable
@@ -992,3 +1017,4 @@ token similarity with their slots blanked (the family rule, measured).
 | A-17 | The deepening needed angles the original five-angle palette does not carry — a pool of eight cannot be built from five angles without restating one | Palette WIDENED by three, recorded in constraint (6): the traveller's report, the season's frame, the small human detail. Chosen because each is a genuinely different narrator (an outsider on the road, the year itself, one named-less person) rather than a different sentence shape for the same narrator, which is what the family rule actually polices. |
 | A-18 | Several natural deepening lines wanted a count the pools do not declare (`twice`, `one page apart`, `three courts`, `the first caravan`) | The no-digits law (constraint 1 + A-4 + A-10) wins every time, and the fix is never a `{band}` bolted onto a pool that has no band to fill it. Ordinals of SEQUENCE survive (`the first caravan`, `a first offer`, `the second draft` — these order events, they do not count state); counts of STATE were rewritten to the bilateral form (`the same promise in both`), to a position (`on facing pages`), or to the countless form (`every court in the matter`). No pool's `SLOTS:` line was widened to buy a sentence. |
 | A-19 | `treaty_lapsed` variant 1 exceeds the twenty-six-word convention, and the deepening pass was the first to measure it | Left as written and FLAGGED in the coverage ledger, not fixed. The append-only mandate is the stronger rule, and the line is doubly load-bearing — it is the volume's exemplar (A-1) and the Law One rewrite (A-2). A pass authorized to add variants is not authorized to reword the one sentence the volume quotes. Vetoable: if the chair wants it trimmed, it is a one-line edit with an A-1/A-2 re-check. |
+| A-20 | GR-4's `disavowed_by_succession` exemplar slotted `{npc}` to the SUCCESSOR, and `repudiated`'s third variant slotted `{reason}` — neither fact is on a surface the treaty stage can read (2026-08-12, CR-GR4B-3) | **Reachability wins, on the A-11 and A-15 precedents** — a causal claim the record does not carry is struck, and a slot no variant can fill is a defect rather than a courtesy. `{npc}` re-slots to the **fallen holder**, whose name IS persisted on the treaty's own `sworn` stamp and whom the landed engine receipt already names; `{reason}` is struck from `repudiated`'s `SLOTS:` line and its third variant re-authored to the same angle without it, keeping that pool at its `major` floor of four. ⚠ **This pass is authorized to reword an exemplar and A-19's pass was not**, and the difference is the point: A-19 protects a sentence a variant-adding pass had no cause to touch, whereas an unfillable slot renders the whole family unreachable, so the alternative here was not a thinner corpus but a pool no wave could wire. The dated note at the head of the `# GR-4` section carries the measurement. |
