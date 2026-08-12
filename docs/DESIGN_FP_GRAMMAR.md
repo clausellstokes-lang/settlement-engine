@@ -1013,6 +1013,35 @@ revolution, and priced the disavowal differently.
   for that settlement names the FALLEN holder opens THE QUESTION. Legacy
   unstamped treaties open NO question (seat-voice treaties bind the seat —
   the provenance rule's teeth).
+  - ⛔⛔ **CORRECTED 2026-08-11 (CR-GR4-5, at GR-4a's promotion) — THE SENTENCE
+    ABOVE IS FALSE IN TWO PLACES, AND THE CODE WINS BOTH.** Kept rather than
+    rewritten because the intent is still right and the correction is the part a
+    successor needs.
+    **(1) The shared-surface claim is wrong.** WR-5's **D** re-read is a *string
+    diff of a computed authority signature* — `momentumBroken =
+    !!priorAuthoritySignature && priorAuthoritySignature !==
+    books.authoritySignature` (`warTermination.js:633-642`, over
+    `authoritySignatureFor`, `warSeatBooks.js:370-380`). **It never touches
+    `seatTransitions` and cannot learn from whom, to whom, or by what kind.** The
+    event-list consumer is WR-5 **H** — `inheritedWarDemandFor`
+    (`warPeaceDecision.js:79-152`). GR-4a reads `seatTransitions` by symbol.
+    **(2) The trigger list over-claims by a wide margin.** Only **two** producers
+    write a `seatTransitions` row: the applied `government_change`
+    (`applyWorldPulse.js:953-1027`) and organic ladder succession
+    (`npcLadderKernel.js:805-829`). ⛔ **A coup verdict, a conquest, a DM
+    `CHANGE_RULING_POWER`, an H2 verdict removal, DM KILL/ASSIGN and underworld
+    faction capture all change or vacate the seat and write NO ROW**
+    (`DESIGN_WAR_RULINGS_ARCHITECTURE.md:1581`: *"KILL/ASSIGN/H2 are not ruler
+    transfers"*). GR-4a's trigger is therefore **exactly what `seatTransitions`
+    records** — the gap is named, not silently widened. Minting succession records
+    at the other six sites is a larger wave nobody has chartered.
+    ⚠ Also: three `cause` vocabularies exist and none is a registry
+    (`'government_change'`; `coup|challenge|succession|vacancy`; and
+    `RULING_POWER_CAUSES`, which `transferRulingPower` applies and neither writer
+    uses). **Any grading over `cause` needs a default arm.**
+    Compiled evidence and the full measurement live in
+    [`packets/foreign-policy/GR-4A.md`](implementation/packets/foreign-policy/GR-4A.md)
+    §3.1 and §13 D1/D2.
 - **The three answers**, run through the new seat's character + books (WR-5's
   machinery where lit; existing legitimacy/alignment reads where dark) + posture
   (SP-4):

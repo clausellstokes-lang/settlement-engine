@@ -1,41 +1,52 @@
 # Town Cartography / TC-5b-ii — the painter's mount (colour binding + the sub-tab)
 
-- **Status:** BLOCKED
-- **Status note:** ⛔ **BLOCKED ON TC-5b-i LANDING — and on nothing else.** The §-1 refusal
-  that produced this status is DISCHARGED as a refusal: **CR-TC5B-1 ratified the two-way
-  producer-first split**, and the producer is `TC-5B-I.md`, promoted READY at this same
-  documentation change. This document is written for slice (ii) and is otherwise reconciled;
-  it flips READY when TC-5b-i lands, its base is re-derived at that SHA, and **CR-TC5B-4's
-  deferred item (O-2, the A-4 notice copy) is ruled at that promotion.**
+- **Status:** READY
+- **Status note:** ✅ **PROMOTED READY 2026-08-11 by the Fable chair (session `c42c8924`,
+  Lane U).** The single blocking dependency is DISCHARGED: **TC-5b-i LANDED at `9183d52c`**
+  and flipped LANDED in all three homes at `e7774ff2`. The §-1 refusal that produced the old
+  BLOCKED status is DISCHARGED as a refusal — **CR-TC5B-1 ratified the two-way producer-first
+  split**, and both halves now exist. ⭐ **The last open item is CLOSED: CR-TC5B-4's deferred
+  O-2 (the A-4 notice copy) is RULED at this promotion.** The exact two-line copy is
+  chair-authored and is written into §6.2 and §12 O-2; **the owner's veto surface is
+  `docs/OWNER_DECISION_QUEUE.md` §17.7.** Nothing in this packet is owner-gated.
 - **What is NOT the blocker:** the mount/seat question. That one is **SETTLED, measured,
   and NOT owner-gated** (§2b). The chair's `8738f5ea` ruling holds and is safe to keep.
-- **Packet version:** `1`
+- **Packet version:** `2`
 - **Drafted by:** Lane E (read-only compile lane), 2026-08-11, Opus-era — see §12d.
   Reconciled against TC-5b-i and recorded by Lane J under the Fable chair, 2026-08-11.
-- **Verified base:** `claude/composite-r4` at `ffc85a90368e3cdb16018dd5e25ef5ec0bceedc5`
-- **Base note:** CONFIRMED at draft time — branch `claude/composite-r4`, HEAD `ffc85a90`.
-  TC-5a's landing `41b39220` is an ancestor (`git merge-base --is-ancestor` exit 0). Four
-  commits sat between; **none touched this packet's substrate** —
-  `git log 41b39220..ffc85a90 -- src/lib/mapSubTabs.js src/lib/lastMapView.js
-  src/components/townMap/ src/domain/townCartography/ src/design/` returns EMPTY.
-  ⭐ **FORWARD-VERIFIED AT TC-5b-i's PROMOTION (2026-08-11, Lane J).** HEAD has since moved to
-  `e1e9fd6a`. `git log --oneline 904b7bb0..e1e9fd6a -- <the same substrate + townScene>`
-  returns exactly one commit, `73f5be96`, and it touches only
-  `tests/lint/sovereigntyLightingContract.walker.test.js`, **comment-only** — the census
-  figures did not move; the row moved from `:3676` to `:3681` (§4b B6). ⛔ **The base above is
-  deliberately NOT restamped to `e1e9fd6a`:** a BLOCKED packet keeps the base it was measured
-  at, and the coordinator re-derives it whole at the READY flip against TC-5b-i's landing SHA.
-- **⚠ The tree is DIRTY with FOREIGN work.** At draft time: 16 modified, 0 untracked.
-  At TC-5b-i's promotion: **7 modified, 0 untracked** (six `supabase/functions/_shared/*`
-  edge-bundle artifacts plus `tests/domain/explanation.test.js`). CONFIRMED disjoint from
-  every path named here (§7b) on both measurements. Reserved and untouched.
-- **Depends on:** ⛔ **TC-5b-i (the manifest seam) — the blocking dependency, not yet landed.**
+  Promoted READY by Lane U under the Fable chair, 2026-08-11.
+- **Verified base:** `claude/composite-r4` at `33487c77b0d9290db157f08330840558e17902bf`
+- **Base note:** ⭐ **RE-DERIVED WHOLE AT THIS PROMOTION, exactly as the old note promised.**
+  CONFIRMED at `33487c77` — *"The observed-shape baseline shrinks by exactly the two rows the
+  repair retired"*, the fully-green-gate commit. **TC-5b-i's landing `9183d52c` is an ancestor**
+  (`git merge-base --is-ancestor 9183d52c HEAD`, exit 0), and so are TC-5a's `41b39220`,
+  TC-4's `5a6f76fe`, TC-3b's `a45c969d` and TC-3a's `5066c34b`. Four commits sit between
+  `9183d52c` and this base: `e7774ff2` (docs only), `da31d170` (the census micro-act batch),
+  `b0912f7f` (the golden batch), `33487c77` (the OSR baseline shrink).
+  ⛔ **The one that matters here is the census — `da31d170` re-recorded the lighting row, so
+  §4b B6 is restamped below and BOTH earlier figure sets are dead.** Draft-time provenance is
+  kept for the record only: first measured at `ffc85a90`, forward-verified at `e1e9fd6a`.
+- **⚠ The tree is a LIVE SHARED WORKTREE.** At this promotion: **one porcelain entry,
+  `MM scripts/.observed-shape-readers-baseline.json`**, which is stale-index residue of
+  `33487c77` itself rather than foreign WIP. A sibling lane owns the OSR instrument files
+  (`scripts/check-observed-shape-readers.mjs`, `scripts/lib/observed-shape-*`,
+  `tests/lint/observedShapeReaders.walker.test.js`, and that baseline). CONFIRMED disjoint
+  from every path named here (§7b). ⛔ **Reserved and untouched; the preflight re-measures.**
+- **Depends on:** ✅ **TC-5b-i (the manifest seam) — LANDED at `9183d52c`.**
   Then TC-5a at `41b39220`; TC-4 at `5a6f76fe`; TC-3b at `a45c969d`;
   TC-3a at `5066c34b`; TC-0..TC-2 at `6e96e259` + `0dcc3b9d`
 - **Collision group:** `town-cartography-contract-and-compiler` **plus a new
   `map-tab-shell` group** (§7b) — serialize against every other TC wave AND against any
   lane touching the Map tab shell.
-- **Commit authority:** to be stated by the chair at the READY flip.
+- ⚠⚠ **CENSUS-HOLDER RULE (chair, 2026-08-11).** `GR-4a`, `SCW-0` and `ES-Da` were promoted
+  READY alongside this packet and all three fold the one estate-wide lighting census.
+  **Only ONE of the four packets may have an implementer in flight at a time; the chair
+  sequences.** ⛔ This packet does **not** reserve
+  `tests/lint/sovereigntyLightingContract.walker.test.js` — GR-4a holds that reservation at
+  promotion (§7b), and the chair MOVES it, as a one-row manifest edit, into whichever packet
+  it dispatches.
+- **Commit authority:** to be stated by the chair in the dispatch message. Absent explicit
+  authority, the coding agent leaves its changes unstaged and uncommitted.
 
 ---
 
@@ -140,8 +151,10 @@ dark, the sub-tab is ABSENT; the dark path stays byte-identical.
    **CR-TC5B-2** rules the token entry — the binding lives at
    `src/components/townMap/subtabs/cartographyColours.js` and imports `src/design/tokens.js`
    directly (§6.1, §12 O-1); **CR-TC5B-3** rules that the presence oracle is **the BLOCK**,
-   not the flag (§6.3 edit 4, §12 O-3); **CR-TC5B-4** DEFERS the A-4 notice's exact copy to
-   **this packet's own promotion** (§12 O-2 — still OPEN, deliberately).
+   not the flag (§6.3 edit 4, §12 O-3); **CR-TC5B-4** deferred the A-4 notice's exact copy to
+   **this packet's own promotion, and that promotion has now happened** — the copy is RULED
+   and literal at §6.2 and §12 O-2. ⭐ **All four CR-TC5B rulings are CLOSED; the packet
+   carries no open item.**
 7. **`TC-5B-I.md` outranks this document on the seam's shape.** It is the producer's contract;
    §6.2 and §7 below are written to what it actually exposes.
 
@@ -286,10 +299,10 @@ The two shared-file deltas are the binding constraints — not any byte ceiling.
 git status --short --branch
 git rev-parse HEAD
 git merge-base --is-ancestor 41b39220 HEAD     # TC-5a
-git merge-base --is-ancestor <TC-5b-i SHA> HEAD # the manifest seam — MUST exist
+git merge-base --is-ancestor 9183d52c HEAD     # TC-5b-i, the manifest seam — LANDED
 
 # Substrate untouched.
-git log --oneline <TC-5b-i SHA>..HEAD -- \
+git log --oneline 33487c77..HEAD -- \
   src/lib/mapSubTabs.js src/lib/lastMapView.js src/components/townMap/ \
   src/domain/townCartography/ src/design/                      # expect EMPTY
 
@@ -336,13 +349,16 @@ gate mutex was not its to take). Rows are **AUTHOR-TIME-UNMEASURED** unless mark
 | B3 | Bounded pair | `npm run build && npm run verify:dist` | **UNMEASURED** — TC-5a landed it at `385,137`. Expected delta **`0`** (§6.5) |
 | B4 | Typecheck posture | `npm run typecheck:ratchet && npm run typecheck:domain:strict` | **UNMEASURED** — exit 0 both, named separately. ⚠ An unbaselined new file's error allowance is **ZERO** |
 | B5 | Effective-line ceilings | see §3 | **MEASURED** |
-| B6 | ⭐ Lighting census row | read `tests/lint/sovereigntyLightingContract.walker.test.js` | **MEASURED BY READ at `e1e9fd6a`: line `:3681` = `files: 2395, parked: 365, credited: 2030, titles: 19732, suiteTitles: 5568`.** ⚠ The draft measured the same five figures at `:3676`; `73f5be96` moved the line number only. ⛔ See §4c — TC-5A.md's figures are TWO re-records stale, and **TC-5b-i will move this row again** |
+| B6 | ⭐ Lighting census row | read `tests/lint/sovereigntyLightingContract.walker.test.js` | ⭐ **RESTAMPED AT THIS PROMOTION. MEASURED BY READ at the verified base `33487c77`: line `:3731` = `files: 2397, parked: 365, credited: 2032, titles: 19763, suiteTitles: 5578`.** ⚠ Both earlier figure sets in this document are DEAD: `2392/365/2027/19659/5552` at `:3621` (TC-5A-era) and `2395/365/2030/19732/5568` at `:3681` (`e1e9fd6a`). TC-5b-i's two new files and `da31d170`'s census micro-act batch both landed between. ⛔ **Re-derive from the FILE at preflight anyway — never from this row** |
 | B7 | Render-blocking CSS | `npm run build`, then the one linked stylesheet | **MEASURED: `19,795 B` vs `CSS_BUDGET_BYTES = 19_800`.** ⭐ **NOT BINDING here — §6.6** |
 | B8 | Forked-colour baseline | `cat scripts/.forked-color-baseline.json` | **MEASURED: `[]` — EMPTY.** Zero grandfathering |
 | B9 | Pre-existing gate reds | committed-base run | **⚠ CORRECTED — see §4c.** Only `generatorGoldenMaster` remains |
 
-⛔ **B6 will be stale at the READY flip by construction.** TC-5b-i mints two new test files
-and moves all five figures. **Re-derive from the FILE at the flip, never from this row.**
+⛔ **B6 was stale at the READY flip by construction, and has been re-derived above.** The
+obligation does not retire: this packet mints one new test file and moves all five figures
+again, and three sibling packets (`GR-4a`, `SCW-0`, `ES-Da`) were promoted READY in the same
+documentation change. **Re-derive from the FILE at dispatch, never from this row**, and honour
+the census-holder rule in the header before touching the walker at all.
 
 ### 4c. ⚠⚠ TWO CORRECTIONS TO LANDED PACKET DOCUMENTS — do not inherit either
 
@@ -350,8 +366,9 @@ Both would mislead an implementer, and both are measured.
 
 1. **THE CENSUS FIGURES AND LINE NUMBER IN `TC-5A.md` ARE STALE — by two re-records.**
    TC-5A.md `:191` and `:434` cite line `:3621` and `2392 / 365 / 2027 / 19659 / 5552`.
-   **CONFIRMED the row is line `:3681` at `e1e9fd6a` and reads
-   `2395 / 365 / 2030 / 19732 / 5568`.** Provenance by `git log -S`:
+   ⭐ **RE-MEASURED AT THIS PROMOTION: the row is line `:3731` at `33487c77` and reads
+   `2397 / 365 / 2032 / 19763 / 5578`.** (It read `2395 / 365 / 2030 / 19732 / 5568` at
+   `:3681` at `e1e9fd6a`, which is itself now history.) Provenance by `git log -S`:
    `41b39220` (TC-5a) → `2393/365/2028/19696/5560`; `53d538b4` (ES-6a) →
    `2395/365/2030/19719/5568`; `36159389` (schema-5 code half) → `…/19732/…`.
    ⛔ **Re-derive from the FILE at preflight. Never from a packet, never from `INDEX.md`.**
@@ -480,8 +497,41 @@ malformed block (`cartographyPaint.js:75-116`). The component MUST catch it and 
 **visible, honest notice** — never a blank panel, never a silent fallback, and **never the
 raw error text** (legibility law). A legitimately **EMPTY** draw list (the frozen `[]`)
 renders the leaf's own narrated empty state — a **different** case, tested separately (C5).
-⏸ **The exact copy is CR-TC5B-4's deferred item and is ruled at this packet's promotion
-(§12 O-2). ⛔ The packet must not ship placeholder wording.**
+⭐⭐ **THE COPY IS RULED — CR-TC5B-4, chair-authored at this promotion (2026-08-11). Ship it
+verbatim; it is not a suggestion and the implementer may not reword it.** Two lines, in the
+register the shell already speaks:
+
+> **The surveyor&rsquo;s sheet could not be drawn for this settlement.**
+>
+> The Plan view holds the same ground, and remains the precision fallback.
+
+Exact rendering rules, so the string that ships is the string that was ruled:
+
+- **Two elements, in this order** — the first line is the heading-weight line (the
+  `MapTabShell.jsx:96` `fontWeight: 800` / `color: INK` idiom); the second is the muted
+  explanatory line (`:97`'s idiom, `color: MUTED`).
+- **The apostrophe is the `&rsquo;` entity**, matching `MapTabShell.jsx:96` verbatim —
+  `react/no-unescaped-entities` is live and a bare `'` in JSX text is a lint error.
+- **`role="status"`, `aria-live="polite"`, and NO `aria-busy`** — this is a terminal state,
+  not a wait. (`aria-busy="true"` belongs to the narrated Suspense fallback, which is a
+  different element and a different case.)
+- ⛔ **The raw `premise` string goes to `console` only and MUST NOT reach the DOM** —
+  asserted by C5.
+- ⛔ **No placeholder, no "something went wrong", no error code, no retry affordance.** A
+  retry would need a lifecycle this packet does not own (the seam is TC-5b-i's).
+
+**Why this wording and no other, recorded so a reviewer need not re-derive it:** the shell's
+own loading line is *"Unfolding the surveyor&rsquo;s sheets&hellip;"* (`MapTabShell.jsx:96`),
+so the failure line answers the sentence the reader was just shown, in the same voice and
+about the same object. The second line copies the shipped fallback idiom at
+`SettlementScene3D.jsx:601` (*"The Plan view remains the precision and accessibility
+fallback."*) and `:332` (*"The 3D portrait could not be prepared. The settlement plan remains
+available."*), so the degraded-state grammar of the Map tab is now one grammar rather than
+two. ⛔ **The word `cartographer` is deliberately avoided: `TIERS.cartographer`
+(`src/config/pricingDisplay.js:63`) is a paid tier name, and a failure notice must not read
+as an entitlement message.** ⏱ **Owner veto surface: `docs/OWNER_DECISION_QUEUE.md` §17.7.**
+The copy is chair-authored under the delegation grant, is not a paid-surface or legal string,
+and ships unless the owner strikes it.
 
 ⚠ **`fallback={null}` IS FORBIDDEN.** `tests/lint/loadingNarrationRatchet.test.js` pins
 `NULL_FALLBACK_PIN = 40` and `BARE_LOADING_PIN = 33` at **exact equality**; a new silent
@@ -578,7 +628,7 @@ stylesheet. This is not that packet.
 | Action | File | Symbol/region | Max delta | Instruction |
 |---|---|---|---:|---|
 | `CREATE` | `src/components/townMap/subtabs/cartographyColours.js` | `resolveRoleFill` + built role map | `90` | §6.1. Exhaustive both ways over all **10** roles; values from `src/design/tokens.js` **directly** (CR-TC5B-2); unknown role throws. |
-| `CREATE` | `src/components/townMap/subtabs/MapCartographySubTab.jsx` | default export + sentinel | `240` | §6.2. SVG in emitted order; ⭐ **props are `block` and `planExtent` — a RESOLVED NUMBER, never a `manifest`**; A-4 notice (copy per §12 O-2); narrated fallback; **mint and STAMP a unique sentinel**. |
+| `CREATE` | `src/components/townMap/subtabs/MapCartographySubTab.jsx` | default export + sentinel | `240` | §6.2. SVG in emitted order; ⭐ **props are `block` and `planExtent` — a RESOLVED NUMBER, never a `manifest`**; the A-4 notice **verbatim per §6.2 / §12 O-2 — RULED, not paraphrasable**; narrated fallback; **mint and STAMP a unique sentinel**. |
 | `MODIFY` | `src/lib/mapSubTabs.js` | §6.3's four edits | `15` | ⛔ `PRESENTATION_SUB_TAB_IDS` untouched; rewrite the stale docblock; the presence fact is the BLOCK's availability. |
 | `MODIFY` | `src/components/townMap/MapTabShell.jsx` | lazy const, panel arm, presence fact | `15` | ⛔ Do not touch `setMapSubTab` at `:151`. Thread `block` + `planExtent`, never a manifest. |
 | `REGISTER` | `src/design/boundBook.js` | `ARTWORK_SURFACE_MANIFEST` | `3` | One `artwork(...)` row for the new leaf — §7c item 5. |
@@ -597,12 +647,33 @@ third note the spelling of the three `CREATE` rows becomes load-bearing at the L
 
 ### 7b. Reservations and collisions — CONFIRMED CLEAR
 
-- **Packet-manifest reservations.** Only non-terminal packets reserve change paths
-  (`scripts/implementation-packets.mjs:429-456`). At TC-5b-i's promotion the non-terminal
-  reservers are **IA-2 [STALE]** — all `scripts/implementation-*`, `tests/scripts/*`,
-  `package.json`, `docs/implementation/*` — plus **TC-5B-I** and this packet. **ZERO overlap**
-  in all three directions; `validate:packets` ran green with all three rows present, which is
-  the mechanical proof rather than a reading.
+- **Packet-manifest reservations — RE-DERIVED AT THIS PROMOTION.** Only non-terminal packets
+  reserve change paths (`scripts/implementation-packets.mjs:429-456`;
+  `TERMINAL_PACKET_STATUSES = {LANDED, SUPERSEDED}` at `:43`). **TC-5B-I is now LANDED and
+  reserves nothing** — its five paths, including the lighting-census walker, are free.
+  The non-terminal reservers at this promotion are: **IA-2 [STALE]** (all
+  `scripts/implementation-*`, `tests/scripts/*`, `package.json`, `docs/implementation/*`),
+  **this packet [READY]**, and the three siblings promoted in the same documentation change —
+  **GR-4A [READY]**, **SCW-0 [READY]** and **ES-DA [READY]**. **ZERO overlap in all ten
+  pairwise directions**, and `validate:packets` exits 0 with every row present, which is the
+  mechanical proof rather than a reading.
+- ⚠⚠ **THE ONE CONTESTED ARTIFACT, AND HOW IT WAS RESOLVED.**
+  `tests/lint/sovereigntyLightingContract.walker.test.js` is wanted by GR-4a, SCW-0, ES-Da
+  **and** this packet, because all four move estate-wide `titles`/`suiteTitles` and the
+  serialization law re-derives the census WHOLE in the change that moves any figure. The
+  validator forbids two non-terminal packets naming one path, so the reservation cannot be
+  written four times. **RULED (chair, 2026-08-11): GR-4a holds it at promotion — it is the
+  packet the chair dispatches first — and the chair MOVES the row, as a one-line manifest
+  edit, into whichever packet it dispatches next.** The census-holder rule in the header is
+  the operating consequence: **one implementer in flight at a time.** ⛔ This is a chair
+  obligation, not an implementer's licence to edit an unreserved enforcer.
+- ⭐ **Disjointness against the three siblings, pairwise and measured.** GR-4a is entirely
+  under `src/domain/worldPulse/`, `tests/domain/` and `tests/property/`; SCW-0 is entirely
+  under `tests/lint/` and `scripts/`; ES-Da is entirely under `src/domain/worldPulse/`,
+  `src/domain/certification/`, `tests/domain/` and `tests/property/`. **This packet touches
+  none of those directories** — its nine paths are under `src/components/townMap/`,
+  `src/lib/`, `src/design/`, `tests/ui/`, `tests/lib/` and `tests/build/`. Zero intersection
+  beyond the census walker resolved above.
 - ⭐ **Disjointness against TC-5b-i, pairwise.** TC-5b-i reserves
   `src/lib/townScene/townCartographyBlock.js`,
   `src/components/townMap/useTownCartographyBlock.js`,
@@ -635,8 +706,13 @@ third note the spelling of the three `CREATE` rows becomes load-bearing at the L
    straight-line, and verify `credited` moved — not just `files`.
 2. ⭐ **THE LIGHTING CENSUS.** Re-derive **all five figures in ONE run and re-record them
    whole** — never patch `files` alone. ⛔ **The base to fold onto is NOT the row below.**
-   `2395 / 365 / 2030 / 19732 / 5568` at `:3681` is the figure as of `e1e9fd6a`, **before
-   TC-5b-i's two new test files**; re-derive from the FILE at the READY flip. All five arms
+   `2397 / 365 / 2032 / 19763 / 5578` at `:3731` is the figure as of the verified base
+   `33487c77`, and it is a **snapshot, not a fold base**; re-derive from the FILE at dispatch.
+   ⚠⚠ **AND HONOUR THE CENSUS-HOLDER RULE FIRST** (header): three sibling packets promoted in
+   the same change also fold this row, and `GR-4a` — not this packet — holds the manifest
+   reservation on the walker at promotion. If the chair has not moved the reservation into
+   this packet's manifest row at dispatch, **touching the walker is out of manifest and is a
+   STOP.** All five arms
    are `.toBe(...)` — **exact equality** — plus a `parked + credited === files` cross-check
    (`:3682-3705` at the draft-time line numbering).
    ⚠ **The sequence hazard is live:** while any arm is red the census **stops measuring**,
@@ -691,8 +767,8 @@ Attribute carefully — but per §4c item 2, its old excuse has expired.
 
 ## 8. Ordered coding sequence
 
-0. Run §4 preflight and record every baseline. Stop on mismatch. ⛔ **`<TC-5b-i SHA>` must be
-   a real landed SHA; if TC-5b-i has not landed, this packet is not dispatchable.**
+0. Run §4 preflight and record every baseline. Stop on mismatch. ✅ **TC-5b-i LANDED at
+   `9183d52c` and the ancestry check is now an assertion, not a wait.**
 1. Capture pre-wiring evidence: the dark-path goldens and the bounded pair (B3).
 2. Add the smallest failing focused test — C3's role-coverage case — **before** the palette
    exists.
@@ -851,8 +927,10 @@ trips the test ratchet's skip sentinel — a cascade that looks like a defect an
 ## 12. Open items for the chair
 
 **None is owner-gated.** The one genuinely owner-gated question — the persisted vocabulary —
-was measured OUT (§2b). O-0, O-1, O-3 and O-4 are CLOSED; **O-2 is OPEN by the chair's own
-deferral and is ruled at this packet's promotion.**
+was measured OUT (§2b). ⭐ **ALL FIVE ITEMS ARE NOW CLOSED.** O-0, O-1, O-3 and O-4 closed at
+TC-5b-i's promotion; **O-2 closed at THIS promotion (2026-08-11), which is exactly where
+CR-TC5B-4 deferred it.** A READY packet with an open item is a contradiction, and this packet
+has none.
 
 - **O-0 — RATIFY THE SPLIT (§-1). ✅ CLOSED — CR-TC5B-1.**
   **RULED: the two-way split, PRODUCER FIRST** — `TC-5b-i` (the manifest seam, headless),
@@ -886,15 +964,33 @@ deferral and is ruled at this packet's promotion.**
   a `src/domain/` home (contradicts TC-5a's docblock and puts colour in the layer whose
   contract is "NO COLOUR, EVER").
 
-- **⏸ O-2 — THE A-4 NOTICE'S EXACT COPY. OPEN — DEFERRED TO THIS PACKET'S PROMOTION BY
-  CR-TC5B-4.**
-  **Evidence:** the shell's existing wait-state copy (`MapTabShell.jsx:96-97`) and
-  `MapPlayerSubTab.jsx:129` set the register — narrated, in the surveyor's voice, never
-  technical. The legibility law forbids leaking a raw `premise` string to a reader.
-  **RECOMMENDATION carried forward: a two-line notice in that register — one line naming that
-  the sheet could not be drawn, one pointing to Plan as the permanent fallback — with the raw
-  error to `console` only.** ⛔ **The wording is the chair's, and the packet must not ship
-  placeholder copy.** This is the one item that must close before the READY flip.
+- **✅ O-2 — THE A-4 NOTICE'S EXACT COPY. CLOSED — CR-TC5B-4, RULED AT THIS PROMOTION
+  (2026-08-11, chair session `c42c8924`).**
+  **RULED — the copy is these two lines, verbatim:**
+
+  > **The surveyor&rsquo;s sheet could not be drawn for this settlement.**
+  >
+  > The Plan view holds the same ground, and remains the precision fallback.
+
+  Full rendering rules — element order, the `&rsquo;` entity, `role="status"` /
+  `aria-live="polite"` with **no** `aria-busy`, and the raw `premise` to `console` only —
+  are at §6.2 and are part of the ruling, not commentary.
+  **Evidence:** the shell's own wait-state copy (`MapTabShell.jsx:96-97` — *"Unfolding the
+  surveyor&rsquo;s sheets&hellip;" / "The streets are inked before the roofs."*),
+  `MapPlayerSubTab.jsx:129` (*"This settlement has no drawable map yet."*), and the shipped
+  3D degraded states (`SettlementScene3D.jsx:332`, `:443`, `:447`, `:601`) set one register:
+  narrated, concrete, non-technical, and always naming the surviving road. The legibility law
+  forbids leaking a raw `premise` string to a reader, and the game-grade-UX doctrine forbids a
+  notice that states a failure without stating what still works.
+  **Rejected:** *"Cartography is unavailable."* (states a system state, not a reader's
+  situation, and gives no road); anything containing the word **cartographer** (collides with
+  the paid tier `TIERS.cartographer`, `src/config/pricingDisplay.js:63`); a one-line notice
+  (the second line is the whole point — the permanent fallback is the product answer, and A-4
+  exists so the reader is never stranded); a retry affordance (needs a lifecycle this packet
+  does not own — the seam is TC-5b-i's, and a retry button would be a second behavior family).
+  ⏱ **OWNER VETO SURFACE: `docs/OWNER_DECISION_QUEUE.md` §17.7.** This is chair-authored copy
+  on a free, non-legal surface; it ships unless the owner strikes it, and a strike is a
+  one-string edit that invalidates nothing else in the packet.
 
 - **O-3 — DOES PRESENCE GATE ON THE FLAG, OR ON THE BLOCK? ✅ CLOSED — CR-TC5B-3.**
   **RULED: gate on the BLOCK's availability, not the flag.** "PRESENCE, NEVER A DISABLED TAB"
@@ -960,9 +1056,15 @@ resolved-`planExtent` prop (§6.2, §7, D-6) and the split-table correction (§-
 
 In addition to `PACKET_STANDARD.md`, stop if:
 
-- **⛔ The TC-5b-i manifest seam is not landed.** This packet has no producer without it
-  (§-1) and must not grow one.
-- **⛔ O-2's A-4 copy has not been ruled.** The packet must not ship placeholder wording.
+- **⛔ The TC-5b-i manifest seam is missing from history, or either of its two production
+  files is absent or materially different.** This packet has no producer without it (§-1) and
+  must not grow one. (It LANDED at `9183d52c`; the preflight asserts it.)
+- **⛔ The A-4 copy would ship as anything other than §6.2's two ruled lines.** No paraphrase,
+  no placeholder, no added error code. Wanting different wording is a chair question, not an
+  implementer edit.
+- **⛔ The chair has not moved the lighting-census walker's manifest reservation into this
+  packet** at dispatch, and the census nonetheless needs folding. Report; do not edit an
+  unreserved shared enforcer (header census-holder rule, §7c item 2).
 - **⛔ The component would need a `manifest` prop**, or would read `manifest?.space?.planExtent`
   rather than the resolved `planExtent` number (§6.2, D-6).
 - **⛔ Any edit would reach `TOWN_MAP_VIEW_IDS`, `PRESENTATION_SUB_TAB_IDS`,

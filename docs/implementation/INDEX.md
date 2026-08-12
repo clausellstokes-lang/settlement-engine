@@ -3,10 +3,12 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `e1e9fd6a62b851dcce92a2fb4f84d9d76d1b238d`
-- **Measured:** 2026-08-11 — re-derived at the TC-5b promotion. ⚠ The header had carried
-  `7699e367` while the body listed landings through `ES-6a`; TC-5A.md's base note recorded
-  that staleness and asked the coordinator to re-derive it at the next flip. Done here.
+  `33487c77b0d9290db157f08330840558e17902bf`
+- **Measured:** 2026-08-11 — **re-derived at the four-packet promotion** (TC-5b-ii READY,
+  plus GR-4a, SCW-0 and ES-Da compiled and promoted). The previous header carried `e1e9fd6a`
+  from the TC-5b split; five commits have landed since, including TC-5b-i itself
+  (`9183d52c`) and a census re-record (`da31d170`). ⚠ **Every packet promoted in this change
+  is based at `33487c77`, the fully-green-gate commit.**
 - **Packet law:** [`PACKET_STANDARD.md`](./PACKET_STANDARD.md)
 
 ## Dispatch rule
@@ -39,7 +41,10 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-11 | [`TC-5a`](./packets/town-cartography/TC-5A.md) | **LANDED** at `41b39220`; do not redispatch | The cartography painter's headless half: a pure draw-list plus palette ROLES, no colour, no mount | colour binding + the sub-tab (TC-5b), PNG goldens (TC-5c), skins (TC-5d), AI controls, the lynch-rubric gate (its own synthesis slice) |
 | LANDED-12 | [`ES-6a`](./packets/foreign-policy/ES-6A.md) | **LANDED** at `53d538b4`; do not redispatch | The double agent's leak: a compromised operative's mission reaches the enemy court while succeeding silently. ⚠ **ES-6 was refused as chartered and split three ways** — ES-6a (this) is the leak; ES-6b (vetting quality) waits on a DISPATCHER wave nobody has chartered, because its only consumer has zero production callers; ES-6c (the retroactive Herald clause) folds into ES-7. ⛔⛔ **CORRECTED 2026-08-11 per chair order, session `c42c8924` — THE ESPIONAGE TAIL IS PARKED BY OWNER GATE, and the two forward pointers in this cell are HISTORY, not dispatch.** ES-7 was REFUSED on measurement: five of the six espionage Herald kinds have no reachable producer, because the DISPATCHER that would fire them was never chartered. The dispatcher slice ES-D was then REFUSED too — `envoyErrandRecords.js:590` forces a covert row's endpoints to the peace offer's own, so a court can only spy on the court it is suing, and no autonomous per-tick stage can mint a covert mission. The one compilable slice, **ES-Da** (covert cargo riding an already-accepted peace envoy), is OWNER-GATED at `docs/OWNER_DECISION_QUEUE.md` §16 — **which lives on the LEDGER branch `review-fixes-2026-07-08` and is NOT present on this build branch**. ES-6b is not released by any of this: its vetting band still has zero producers. ES-6c re-files OUT of espionage entirely, as a corruption-volume same-tick wave. **A build-branch-only reader must not read "folds into ES-7" or "rides the dispatcher" as live work — there is no dispatchable espionage row at this HEAD.** ⛔ **The sovereignty lighting census is NOT folded by this packet**: TC-5a holds that file's reservation as first claimant, so ES-6a's re-derivation is a CHAIR POST-LANDING STEP — the implementer reports all five figures and its isolated delta and never touches the walker. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | vetting quality (ES-6b, rides the dispatcher), the retroactive Herald clause (folds into ES-7), any new belief key, rumor-reach predicates, the lighting census file |
 | LANDED-15 | [`TC-5b-i`](./packets/town-cartography/TC-5B-I.md) | **LANDED** at `9183d52c`; do not redispatch | The producer half of the ruled TC-5b split: one lazily-imported main-thread transport plus one lifecycle hook that compile a settlement's cartography block headlessly and answer presence — no mount, no render, zero production importers, expected bundle delta ZERO. ✅ O-5 is RULED (CR-TC5BI-6): the lighting-census walker is the packet's FIFTH reserved path and the implementer re-records the census in-change per the serialization law, subject to the foreign-title STOP. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the painter component, the sub-tab seat, the shell mount, the ROLE→colour binding and the A-4 notice (all TC-5b-ii), PNG goldens (TC-5c), skins (TC-5d), any worker-protocol or cache change, any persisted change, the TC-5a leaves, `mapTabShellLazy.test.js` and the rest of TC-5b-ii's nine reserved paths |
-| BLOCKED-14 | [`TC-5b-ii`](./packets/town-cartography/TC-5B-II.md) | **BLOCKED** | The painter's mount: the `cartography` sub-tab seat, the token→colour binding, the SVG render and the A-4 degraded state — the first production importer of TC-5a's leaf and the only user-facing surface of the TC-5 lane. It consumes TC-5b-i's seam and cannot dispatch until that seam is in history. ⚠ Its own open item is the A-4 notice copy, deferred by CR-TC5B-4 to this packet's promotion; the mount/seat question is settled and is NOT owner-gated. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the manifest seam (TC-5b-i, whose four reserved paths are forbidden here), PNG goldens (TC-5c), skins (TC-5d), AI editing controls, the lynch-rubric gate (TC-2r), `TOWN_MAP_VIEW_IDS` / `PRESENTATION_SUB_TAB_IDS` / `displayPrefsSlice.js`, `townScene3dLazy.test.js`, any colour literal or entitlement-bearing import |
+| READY-14 | [`TC-5b-ii`](./packets/town-cartography/TC-5B-II.md) | **READY** | The painter's mount: the `cartography` sub-tab seat, the token→colour binding, the SVG render and the A-4 degraded state — the first production importer of TC-5a's leaf and the only user-facing surface of the TC-5 lane. ✅ Its blocking dependency is discharged (the seam is in history at `9183d52c`) and its last open item is closed: **CR-TC5B-4's A-4 notice copy was ruled at this promotion**, chair-authored, with the owner's veto surface at `OWNER_DECISION_QUEUE.md` §17.7. The mount/seat question was already settled and is NOT owner-gated. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the manifest seam (TC-5b-i, whose four reserved paths are forbidden here), PNG goldens (TC-5c), skins (TC-5d), AI editing controls, the lynch-rubric gate (TC-2r), `TOWN_MAP_VIEW_IDS` / `PRESENTATION_SUB_TAB_IDS` / `displayPrefsSlice.js`, `townScene3dLazy.test.js`, any colour literal or entitlement-bearing import |
+| READY-16 | [`GR-4a`](./packets/foreign-policy/GR-4A.md) | **READY** | The succession question, answered at the event, in the dark: a legitimate-power change answers the oaths the fallen holder swore — HONOR silently by scoring, or DISAVOW past a band through a factored shared shell. ⚠ **GR-4 was refused as one packet and split four ways at CR-GR4-1**; this is slice (a) alone, and GR-4b (the voice), GR-4c (the credibility charge) and GR-4d (the lit-mode queue) are named but NOT released by its landing. It gives `swornPartiesOf` its first production consumer and cures the two hardcoded `'repudiation'` literals whose absence would reward both courts for a treaty one of them tore up. ⭐ It holds the estate-wide lighting-census walker's reservation for all four packets promoted here — see the census-holder rule below. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the Herald/chronicle beats and the dossier `succession_question_open` line (GR-4b), any credibility delta (GR-4c), the `routineMajorApproval` queue and per-type terminal (GR-4d), the RENEGOTIATE arm (GR-5, and `treatyRenewalEnabled` does not exist), any change to `isRepudiableTreaty` / `repudiableTreatyPairs` output, any new tuning key, `pulseKernel.js`, `informationStatecraft.js`, `actorMajorApproval.js` |
+| READY-17 | [`SCW-0`](./packets/site-coherence/SCW-0.md) | **READY** | Site Coherence Wave 0 — the enforcement layer, **instruments only**: the identity-keyed `(terrain, siteKind, decisive-token)` contradiction ratchet over the frozen 462-settlement corpus, the export-predicate liveness census with its `KNOWN_INERT` quarantine, and the hazard registry's repair plus a new `HZ-SITECOHERENCE` MACHINERY class. ⭐ It touches **zero `src/` files** and mints no output; its whole deliverable is the ability to state Waves 1–9 as numbers the repository re-derives. ⚠ Its exit criterion was changed at CR-SCW0-6 from *reproduce the audit exactly* to **re-derive and report against**, because five generation-touching commits — one a declared same-seed correction — have landed since the audit's HEAD. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | every correctness assertion (Wave 8), Waves 1–9 entire, `scripts/.observed-shape-readers-baseline.json` (Wave 1), `exportSemantics.js` (Wave 2), all of `src/**`, `scripts/mutation-sweep.sh`, every golden and every ceiling raise |
+| READY-18 | [`ES-Da`](./packets/foreign-policy/ES-DA.md) | **READY** | The composite rider: covert cargo on an already-accepted peace envoy — one pure leaf plus a ≤15-line composition, so a lawful `covert` sub-record rides the errand row the war lane was already minting. Nothing new travels, nothing new is scheduled, no stage is added. ⭐ **The only compilable espionage slice at this HEAD**, and the argued split out of the ES-7 and ES-D refusals, both of which stay refused. It is the first production caller of the orphaned `espionageDoctrineStage.js`, so it wakes ES-5a's doctrine half at zero extra cost. ⛔ Built DARK; the dark path is byte-identical **by construction**, and any motion in that golden is a STOP. ⚠ Authority is `OWNER_DECISION_QUEUE.md` §17 disposition 5 on the **ledger** branch, which a build-branch reader cannot open — the conditions are restated in full inside the packet. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any dispatcher (ES-7 stays refused), any Herald kind or routing row, the vetting band (ES-6b has no producer and is not released), multi-stop routes, `mintCovertMission` and `castCovertOperative` (both stay dead), any new persisted key or ledger, lighting the flag |
 
 ## Authorized implementation infrastructure
 
@@ -51,7 +56,30 @@ re-derives that lane and decides whether to compile its immediate dependent.
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
+### ⚠⚠ CENSUS-HOLDER RULE — four READY packets, one shared census
+
+`GR-4a`, `SCW-0`, `ES-Da` and `TC-5b-ii` all add test titles, so all four move the
+estate-wide lighting census, and the serialization law ruled at `73f5be96` re-derives that
+census WHOLE in the change that moves any figure. The validator forbids two non-terminal
+packets naming one change path, so the reservation cannot be written four times.
+
+**RULED (chair, 2026-08-11): `GR-4a` holds
+`tests/lint/sovereigntyLightingContract.walker.test.js` as its `TEST` row, because it is the
+packet the chair dispatches first. The chair MOVES that row — a one-line
+`PACKET_MANIFEST.json` edit — into whichever packet it dispatches next. ONLY ONE of the four
+may have an implementer in flight at a time.**
+
+⛔ An implementer whose packet does not carry the row must **not** re-record the census
+anyway: that is an unreserved edit to a shared enforcer and it defeats the reservation system
+it routes around. Report and stop.
+
 ### Minimum decisions needed to unblock
+
+⚠ **DATED CORRECTION, 2026-08-11:** both rows below are **HISTORY, not open work.** GR-3b
+LANDED at `40afbdd6` and IN-0c LANDED at `29e2dc3c`; their decisions were made and are
+recorded in the packets themselves. The rows are kept because they document what a blocking
+decision looks like, and because GR-4a builds directly on GR-3b's producers. **No row in the
+current packet set is waiting on a decision.**
 
 - **GR-3b:** provide the exact trigger candidate sets, crossing-score selection
   function/cardinality, negotiated obligor/obligee and transfer direction, and
@@ -64,14 +92,20 @@ means the less permissive status wins.
 
 ## Reserved foreign work
 
-At the measured SHA the shared build tree had unrelated changes in:
+⚠ **RESTAMPED 2026-08-11 at the four-packet promotion.** The two paths this section used to
+name (`scripts/lib/reader-shape-scan.mjs`, `tests/lint/readerShapeResolver.test.js`) were
+**already clean** and the claim was stale. At the measured SHA the shared build tree has
+unrelated changes in the **observed-shape-reader instrument family**, held by a sibling lane:
 
-- `scripts/lib/reader-shape-scan.mjs`
-- `tests/lint/readerShapeResolver.test.js`
+- `scripts/check-observed-shape-readers.mjs`
+- `scripts/lib/observed-shape-baseline.mjs`
+- `scripts/migrate-observed-shape-readers.mjs`
+- `scripts/.observed-shape-readers-baseline.json`
 
-No packet in this set may touch, stage, restore, or attribute those files. The
-list is a snapshot, not permission to ignore new dirt: every dispatch re-runs
-`git status` and reserves all foreign changes.
+No packet in this set may touch, stage, restore, or attribute those files — and all four are
+independently forbidden edits in every packet promoted here. **The list is a snapshot, not
+permission to ignore new dirt: every dispatch re-runs `git status` and reserves all foreign
+changes.**
 
 ## Reconciled program state
 
@@ -93,6 +127,21 @@ live symbols were checked at the measured SHA.
   TC-5d and TC-6 through TC-8 remain designed but intentionally uncompiled.
 - **Surveyor Chat:** the old Workshop presentation is superseded. SC-1 is the
   next bounded surface packet; later ingestion and migration stages are excluded.
+- **Foreign-policy grammar, GR-4:** ⚠ **REFUSED as one packet and split four ways at
+  CR-GR4-1** — it needed six-to-nine existing production files against a budget of three, two
+  behavior families, two flag conjunctions and three writers. **GR-4a (the dark answer at the
+  event) is compiled and READY**; GR-4b/4c/4d are named, dependency-ordered behind it, and
+  compiled just-in-time. GR-5 is untouched and `treatyRenewalEnabled` does not exist.
+- **Espionage:** ⛔ **the tail remains PARKED.** ES-7 is refused (five of six Herald kinds have
+  no reachable producer) and ES-D is refused (a covert row's endpoints are forced to the peace
+  offer's own). **ES-Da — the composite rider — is the single argued split and the only
+  compilable espionage slice at this HEAD**, authorized under the owner's refreshed grant and
+  compiled READY here. ES-6b stays blocked on a dispatcher nobody has chartered; ES-6c re-files
+  out of espionage entirely as a corruption-volume wave.
+- **Site Coherence:** the plan is owner-signed for Waves 0–8 (Wave 9 separately), and the
+  program is **0-of-9 landed**. **SCW-0, the instrument wave, is compiled and READY**; every
+  later wave's exit criterion is a number SCW-0 mints, so nothing after it is dispatchable
+  until it lands. ⚠ `SC-` was already taken by the LANDED surveyor-chat packet, hence `SCW-`.
 
 ### Complete; do not create greenfield packets
 

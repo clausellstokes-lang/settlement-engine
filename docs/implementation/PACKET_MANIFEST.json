@@ -645,9 +645,9 @@
     },
     {
       "id": "TC-5B-II",
-      "status": "BLOCKED",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/TC-5B-II.md",
-      "verifiedBase": "ffc85a90368e3cdb16018dd5e25ef5ec0bceedc5",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
       "changeManifest": [
         { "action": "CREATE", "path": "src/components/townMap/subtabs/cartographyColours.js" },
         { "action": "CREATE", "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx" },
@@ -685,6 +685,156 @@
           "tests/lib/mapSubTabs.test.js",
           "tests/ui/mapTabShell.test.jsx",
           "tests/build/mapTabShellLazy.test.js"]
+      ]
+    },
+    {
+      "id": "GR-4A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4A.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyBreachTypes.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/successionQuestion.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyDisposition.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "CREATE", "path": "tests/domain/successionQuestion.test.js" },
+        { "action": "TEST", "path": "tests/domain/pactAmendment.test.js" },
+        { "action": "TEST", "path": "tests/property/oathHolderDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "swornPartiesOf" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "appendNpcLadderSeatTransition" },
+        { "path": "src/domain/worldPulse/npcLadderState.js", "symbol": "normalizeSeatTransitions" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "TREATY_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiableTreatyPairs" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/treatyDisposition.js", "symbol": "treatyDispositionDeltas" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "PACT_ENDINGS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "the refactor is a no-op: defaultAllLiveTerms is byte-identical to today's repudiateTreaty" },
+        { "id": "C2", "case": "the main reachable behavior: a coup-born seat disavows past the band" },
+        { "id": "C3", "case": "the silence-honors negative: below the band the treaty ledger is byte-identical" },
+        { "id": "C4", "case": "absent and explicit-false dormancy with the swornPartiesOf counter at zero" },
+        { "id": "C5", "case": "the tribute-only disavowal proves the two gates separate" },
+        { "id": "C6", "case": "writer-to-reader integration and the inherited dossier round trip" },
+        { "id": "C7", "case": "idempotence and the succession shell's lifecycle round trip" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/pactAmendment.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/treatyOrientationWr10g.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/domain/pulseStageContracts.test.js"]
+      ]
+    },
+    {
+      "id": "SCW-0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/site-coherence/SCW-0.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "CREATE", "path": "tests/lint/siteCoherenceRatchet.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.site-coherence-baseline.json" },
+        { "action": "CREATE", "path": "tests/lint/exportTokenCoverage.test.js" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "generateSite" },
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "WATER_ECONOMY_RE" },
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "DRY_BIOME_RE" },
+        { "path": "src/domain/townMap/asymmetrySources.js", "symbol": "EXPORT_RULES" },
+        { "path": "src/domain/canonicalAccessors.js", "symbol": "canonExports" },
+        { "path": "src/generators/generateSettlementPipeline.js", "symbol": "generateSettlementPipeline" },
+        { "path": "src/data/cultureProfiles.js", "symbol": "CULTURE_PROFILE_KEYS" },
+        { "path": "src/data/constants.js", "symbol": "TIER_ORDER" },
+        { "path": "src/generators/steps/resolveConfig.js", "symbol": "TERRAIN_WEIGHTS" },
+        { "path": "scripts/hazard-registry.json", "symbol": "HZ-READERNOWRITER" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "the 462-corpus classifies with zero errors and equals the frozen row set both ways" },
+        { "id": "C2", "case": "the mutant: deleting the coal alternative moves a row and reds the ratchet only" },
+        { "id": "C3", "case": "an exportless settlement contributes only biome-sentinel rows, anchored" },
+        { "id": "C4", "case": "sparse and malformed exports classify without throwing; auto is excluded" },
+        { "id": "C5", "case": "determinism twice in one run, and the print-only regenerator exits non-zero" },
+        { "id": "C6", "case": "the only-shrinks contract: new, grown, shrunk and vanished keys each red" },
+        { "id": "C7", "case": "the derived denominator covers all four predicate sites, with KNOWN_INERT membership-checked" },
+        { "id": "C8", "case": "the hazard registry tells the truth and no floor moves" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/siteCoherenceRatchet.test.js",
+          "tests/lint/exportTokenCoverage.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npm", "run", "validate:hazard-registry"]
+      ]
+    },
+    {
+      "id": "ES-DA",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-DA.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageRider.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/envoyDiplomacy.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/property/espionageRiderDormancyFence.test.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageRider.test.js" },
+        { "action": "TEST", "path": "tests/property/espionageProductsDormancyFence.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/envoyDiplomacy.js", "symbol": "dispatchAcceptedPeaceEnvoy" },
+        { "path": "src/domain/worldPulse/envoyErrand.js", "symbol": "mintEnvoyErrand" },
+        { "path": "src/domain/worldPulse/envoyErrand.js", "symbol": "advanceEnvoyErrands" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "mintErrandSpine" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "covertMissionRefusal" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "normalizeCovertMission" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "errandSpineBlock" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/worldPulse/espionage/espionageDoctrineStage.js", "symbol": "espionageDoctrineFor" },
+        { "path": "src/domain/worldPulse/espionage/espionageDoctrineStage.js", "symbol": "dispatchDemandFor" },
+        { "path": "src/domain/worldPulse/espionage/espionageGauntlet.js", "symbol": "covertDwellRead" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "COVERT_KEYS" },
+        { "path": "src/domain/region/contestMath.js", "symbol": "hash01" },
+        { "path": "src/domain/certification/couplingRegistryEspionage.js", "symbol": "ES_ESPIONAGE_COUPLINGS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "a drawing court's accepted peace offer mints a lawful one-stop covert sub-record" },
+        { "id": "C2", "case": "the mandatory dark-path byte-identity receipt across four non-true flag spellings" },
+        { "id": "C3", "case": "the declined draw and the unreadable doctrine each yield their own reason" },
+        { "id": "C4", "case": "an unresolvable court and the invalid lighting order stay dark safely" },
+        { "id": "C5", "case": "duplicate_episode precedes the rider, and the keyed draw is stable" },
+        { "id": "C6", "case": "lifecycle round trip: persist, reload, corrupt-import heal-to-absent, undo" },
+        { "id": "C7", "case": "the traffic-flows proof: covertDwellRead dwells and products accrue a partial" },
+        { "id": "C8", "case": "the one-reader law and the minter census both stay exactly as they were" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageRider.test.js",
+          "tests/property/espionageRiderDormancyFence.test.js",
+          "tests/domain/envoyErrand.test.js",
+          "tests/domain/envoyErrandSpineLifecycle.test.js",
+          "tests/domain/espionageMission.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/errandConsumerRegistry.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/property/espionageProductsDormancyFence.test.js"]
       ]
     }
   ]
