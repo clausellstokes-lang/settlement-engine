@@ -77,7 +77,35 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐ CURRENT (2026-08-12, after the B13 STOP) — IN-1b promoting on the props-only shape
+# ⭐ CURRENT (2026-08-12 ~16:40 EDT) — IN-1B READY at `6ad9f8dd`; Lane AM implements
+
+**The promotion LANDED and is CHAIR-VERIFIED:** build HEAD `6ad9f8dd` (three files:
+IN-1B.md at packets/foreign-policy/ — note the folder, NOT packets/information/ —
+INDEX.md, PACKET_MANIFEST.json). Chair re-ran validate:packets from the minifold tree:
+**22 packets / 1 READY, TRUE_EXIT=0.** The packet carries everything CR-IN1B-7 ruled:
+§3.11 the HOT-FILE LIST (OutputContainer 599/600 budget ZERO + peaceTerms 797/800),
+B13 as an EXECUTED receipt with the measure-twice order (599 before AND after, else
+STOP), B15 RelationshipsTab 238/600, §6.3 props-only on BOTH container cases. Lane AL
+also re-proved the walker reservation FREE (only non-terminal row = IA-2 STALE, zero
+path intersection) and restamped the census holder to IN-1b.
+
+**⭐ THE BUILD-TREE PORCELAIN IS CLEAN — ZERO entries, `git diff HEAD` empty.** The
+chair blob-identity-checked every residue path (all IDENTICAL to HEAD — the "foreign
+residue" was pure stale-index noise from plumbing commits, never real dirt) and cured
+each with `git update-index`. First clean porcelain of the era. Lanes are ordered to
+LEAVE it clean (post-landing update-index per path).
+
+**LIVE: Lane AM (Opus) implements IN-1b** — dispatched ~16:40 with the packet as sole
+authority + the chair's hard constraints (B13 measure-twice; props-inline on both
+cases; orphan-pin grep before wiring the mirror; census by files: key; plumbing+CAS
+landing; NO flip — the chair flips after verification; no push). Collection: task
+transcript `a006da811e4f917e7`; on landing → chair-verify (both B13 figures 599, gate
+receipts, acceptance cases) → the three-home flip → ledger commit → next in queue:
+GR-4c draft (preflight owns the fractureCredibilityDeltas dead-window re-derivation) →
+corpus-coverage mint charter (SCW-1b parked) → schema-7 prose batch (+ hot-file rule
+propagation to PACKET_STANDARD). Owner veto surfaces standing: §17.7 · §17.4 · §17b.
+
+# (superseded ~16:40) the B13 STOP block — history, kept verbatim
 
 **The B13 upgrade fired and paid for itself:** Lane AL EXECUTED the OutputContainer.jsx
 headroom measurement at promotion and got **599 effective lines against the hard 600** —
