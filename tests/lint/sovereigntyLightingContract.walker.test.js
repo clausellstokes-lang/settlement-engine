@@ -3918,7 +3918,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // (`git diff HEAD --name-only` lists none of the six, so their worktree content is byte-identical
     // to HEAD and only the shared index is behind). ZERO foreign test files, and therefore zero
     // foreign titles.
-    files: 2403, parked: 365, credited: 2038, titles: 19862, suiteTitles: 5602,
+    // ── RE-RECORDED WHOLE at FP GR-4b-α (2026-08-12), cause stated ──────────────────────
+    // 2403/365/2038/19862/5602 → 2404/365/2039/19880/5609. ⭐ THE WHOLE DELTA IS ONE NEW
+    // FILE: tests/domain/treatySuccessionVoice.test.js, the succession-disavowal voice's
+    // acceptance battery (A1–A7). +1 files, +1 credited, +18 titles, +7 suiteTitles, +0
+    // parked. All five were re-derived in ONE run and re-recorded together — never patched
+    // one at a time, because a sequenced census STOPS MEASURING at its first red figure and
+    // the later arms would then be read off a run that never evaluated them.
+    // ⭐ THE NEW FILE IS CREDITED, NOT PARKED, AND THAT WAS MEASURED RATHER THAN ASSUMED: a
+    // temporary probe placed INSIDE this test BEFORE its first assertion (so it minted no
+    // title and could not move what it measures) printed `park: []` for it BY NAME, with
+    // titles 18 and suites 7. Had it parked, `titles` would not have moved at all and
+    // `parked + credited === files` would still have closed — on a lie.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE ON ALL FIVE. (a) the live probe above; (b) frozen row
+    // + this lane's per-file delta = 2403+1 / 365+0 / 2038+1 / 19862+18 / 5602+7. The file's
+    // own structure is the third witness: seven `describe`s and eighteen `it`s, counted by hand.
+    // ⚠ THE OTHER THIRTEEN PATHS IN THIS CHANGE CANNOT MOVE A FIGURE, and were checked rather
+    // than assumed. Eight are under src/ and are not test files at all. Of the five under
+    // tests/: successionQuestion.test.js was re-addressed INSIDE its existing `it`s and the
+    // probe confirmed it unchanged at 23 titles / 7 suites; kindPoolFloors.walker.test.js and
+    // impactKindWalkers.test.js gained frozen numerals and a manifest row, no titles; THIS
+    // file gains only this comment. ⭐ And grammarLifecycleKindPools.walker.test.js — which
+    // GR-4b EXTENDED with a ninth registry row, a second annex window and two new anchors —
+    // is PARKED (`TEST_TABLE_UNPROVEN:test.each()` ×3) and contributes 0 titles and 0 suite
+    // titles, MEASURED by the same probe. That is precisely why CR-GR4B-7 ruled the walker be
+    // extended rather than a new one authored: extending it moves NO title figure at all.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time
+    // `git status --porcelain` carried EXACTLY this lane's own fourteen reserved paths (twelve
+    // modified, two untracked CREATEs) plus the chair-authorised packet amendment, and the
+    // pre-existing `scripts/.test-ratchet-baseline.json` stale-index residue whose
+    // `git diff HEAD` is EMPTY. ZERO foreign test files, and therefore zero foreign titles.
+    files: 2404, parked: 365, credited: 2039, titles: 19880, suiteTitles: 5609,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

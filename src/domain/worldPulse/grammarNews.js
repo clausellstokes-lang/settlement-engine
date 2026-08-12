@@ -51,7 +51,7 @@ import { GRAMMAR_RECEIPTS } from './grammarReceiptPools.js';
 /** @typedef {import('./eventProse.js').ProseVariant} ProseVariant */
 
 /**
- * @typedef {{kind:string, significance:'notable'|'routine'|'n/a',
+ * @typedef {{kind:string, significance:'notable'|'routine'|'major'|'n/a',
  *   audience:'public'|'dm-only', section:'trade'|null,
  *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>,
  *   contexts:ReadonlyArray<readonly string[]|null>}} GrammarRegistryEntry
@@ -59,7 +59,9 @@ import { GRAMMAR_RECEIPTS } from './grammarReceiptPools.js';
 
 /**
  * @param {string} kind
- * @param {'notable'|'routine'|'n/a'} significance
+ * @param {'notable'|'routine'|'major'|'n/a'} significance ⭐ `major` widened in at GR-4b
+ *   (CR-GR4B-6): `FLOOR_BY_SIGNIFICANCE` has carried a `major: 4` arm since SP-6, so the
+ *   union here was the surface that disagreed with the floors rather than the other way up.
  * @param {'public'|'dm-only'} audience
  * @param {'trade'|null} section
  * @param {ReadonlyArray<readonly string[]>} requiredSlots
@@ -136,6 +138,17 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
   grammarKindRow('hollowed_detected', 'notable', 'public', null, [
     ['term'], ['counterpart', 'settlement'], [], [], [],
     ['term', 'settlement'], ['counterpart', 'settlement'],
+  ]),
+  // GR-4b-α — THE SUCCESSION DISAVOWAL. A treaty lifecycle beat, so it takes the treaty
+  // cohort's trade desk exactly as `treaty_lapsed` does. `major` is the annex's own class and
+  // the first row in this registry to use it — the floors table has had the arm all along.
+  // It declares NO contexts: every family is honest at a disavowal, because the disavowal is
+  // the only moment this kind speaks. ⭐ Its `{settlement}`/`{counterpart}` are the BREAKER
+  // and the other court, NOT the obligee/obligor axis the rest of this file binds — the
+  // composer therefore never routes it through `grammarSlotRoles`, and the reason is written
+  // out in `treatySuccessionVoice.js`.
+  grammarKindRow('disavowed_by_succession', 'major', 'public', 'trade', [
+    ['npc'], ['settlement'], ['counterpart'], [], [],
   ]),
 ]);
 

@@ -273,7 +273,12 @@ describe('C3 — below the band the world is byte-identical to one that never as
 
   it('the answer returns the caller\'s own state reference when nothing is disavowed', () => {
     const below = world({ rules: LIT, burden01: 0.2 });
-    expect(answerSuccessionQuestions(below, TICK)).toBe(below);
+    // GR-4b widened this return to { worldState, newsEntries }. The identity claim is
+    // RE-ADDRESSED, not weakened: it is still `toBe` against the caller's own object.
+    const answered = answerSuccessionQuestions(below, TICK);
+    expect(answered.worldState).toBe(below);
+    // …and the silence now reaches the FEED as well as the ledger.
+    expect(answered.newsEntries).toEqual([]);
   });
 });
 
@@ -286,7 +291,7 @@ describe('C4 — absent and explicit-false are one answer, and the fence can see
       ledgerJson(dark), 'succession_repudiation', KEY,
       'dark, the instrument stands untouched over a fixture the lit control does break',
     );
-    expect(answerSuccessionQuestions(world({ burden01: 0.9 }), TICK)).toBeTruthy();
+    expect(answerSuccessionQuestions(world({ burden01: 0.9 }), TICK).worldState).toBeTruthy();
   });
 
   it('ABSENT and EXPLICIT FALSE are byte-identical over the whole ledger', () => {
@@ -312,7 +317,9 @@ describe('C4 — absent and explicit-false are one answer, and the fence can see
     // call-path proof lives in the dormancy fence's swornPartiesOf counter; this is its
     // state-side twin.
     const dark = world({ burden01: 0.9 });
-    expect(answerSuccessionQuestions(dark, TICK)).toBe(dark);
+    const answered = answerSuccessionQuestions(dark, TICK);
+    expect(answered.worldState).toBe(dark);
+    expect(answered.newsEntries).toEqual([]);
     expect(successionQuestionsForTick(dark, TICK)).toHaveLength(1);
   });
 });

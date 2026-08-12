@@ -233,6 +233,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // IN-0C — the compelled books opening is the same treaty cohort, so it takes the
   // same desk by its OWN token rather than by a registry authority.
   treaty_disclosure_opened: 'trade',
+  // GR-4b — an heir's disavowal ends the same terms a signing created, so it files the
+  // cohort's one desk by its OWN token, like its three siblings above.
+  disavowed_by_succession: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)
@@ -607,6 +610,10 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // compelled disclosure under `courts` with the oathbreaking, while the Herald files it
   // beside the terms it was signed with (JUDGMENT, vetoable — the cohort keeps one desk).
   treaty_disclosure_opened: 'trade',
+  // GR-4b, and the same divergence for the same reason: the letter files a torn-up oath
+  // under `courts` beside the oathbreaking it plainly is, while the Herald files it beside
+  // the terms and tribute it extinguishes (JUDGMENT, vetoable — one desk for the cohort).
+  disavowed_by_succession: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.

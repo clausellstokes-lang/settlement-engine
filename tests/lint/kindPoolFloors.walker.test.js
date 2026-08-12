@@ -149,9 +149,14 @@ const LEGACY_UNVOICED_TOKENS = 274;
 /** The routed-token and registered-kind censuses at this commit, asserted rather than quoted. */
 // +1 at IN-0C: `treaty_disclosure_opened` takes an EXACT_SECTION row of its own so the
 // compelled-books beat files the treaty cohort's trade desk by its OWN token.
-const ROUTED_TOKENS = 375;
+// +1 at GR-4b: `disavowed_by_succession`, on the same reading and the same desk.
+const ROUTED_TOKENS = 376;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
-const REGISTERED_KIND_COUNT = 107;
+// +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
+// ⚠ THE TWO MOVE TOGETHER OR THE −6 IDENTITY BELOW BREAKS: a kind registered without an
+// EXACT_SECTION row (or routed without a registry row) shifts the unrouted-registered
+// difference off 6, which is the arithmetic that keeps this census honest.
+const REGISTERED_KIND_COUNT = 108;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

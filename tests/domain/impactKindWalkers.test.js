@@ -156,6 +156,15 @@ const EXPECTED_VOICE = {
   // No crier register fits a transparency clause, so it stays deliberately unvoiced,
   // which is what newsVoiceCategory already returns (JUDGMENT, vetoable).
   treaty_disclosure_opened: null,
+  // GR-4b's succession disavowal (treatySuccessionVoice.js) is the same cohort and the same
+  // shape again: an AUTHORED headline naming both courts over a pact-grammar summary that
+  // names the hand which swore, with its own recorded reason read back off the instrument.
+  // It must NOT borrow the trade crier merely because it shares that cohort's trade DESK —
+  // the desk FILES a beat and the crier VOICES one, and a market-shortage line beneath a
+  // torn-up oath is the exact mis-route the set-but-unclassified guard exists to stop. No
+  // crier register fits an oathbreaking, so it stays deliberately unvoiced (JUDGMENT,
+  // vetoable — the treaty_lapsed / treaty_disclosure_opened precedent exactly).
+  disavowed_by_succession: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

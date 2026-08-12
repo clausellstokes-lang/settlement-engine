@@ -17,6 +17,7 @@ import { peaceCausalActive } from './warReasons.js';
 import { oathHolderActive } from './oathHolder.js';
 import { appendLineage } from './pactAmendment.js';
 import { isSuccessionDisavowable, successionQuestionsForTick } from './treatySuccession.js';
+import { successionDisavowalBeat } from './treatySuccessionVoice.js';
 
 /** @typedef {Record<string, unknown>} Mut */
 /** @typedef {Record<string, Mut>} TreatyLedger */
@@ -266,22 +267,38 @@ export function repudiateTreaty(worldState, { fromId, toId, tick, succession = n
  * `=== true` read of the flag, so no new gate spelling enters the source tree.
  *
  * HONOR WRITES NOTHING. Only a disavowal reaches the ledger; a tick of questions that
- * are all honored is byte-identical to a tick where none was asked.
+ * are all honored is byte-identical to a tick where none was asked — and after GR-4b that
+ * holds in the FEED as well: `newsEntries` comes back empty, so an honored succession is
+ * silent in both registers rather than only in the ledger.
+ *
+ * ⭐ GR-4b — THE VOICE IS COMPOSED HERE, INSIDE THE `ok` ARM, AND ONLY THERE. That arm is
+ * the one place that knows a write was not refused, so the beat narrates the ACT rather than
+ * the intent: two questions resolving to disavow on one instrument in one tick produce one
+ * breach and one sentence. Composing at the sink instead would have to re-derive the
+ * question, and the derivation leaf is ungated by design — a production call to it outside
+ * this gate reds the landed call-path dormancy fence.
  *
  * @param {Record<string, unknown>} worldState
  * @param {unknown} tick
- * @returns {Record<string, unknown>} the same reference when nothing is disavowed
+ * @returns {{ worldState: Record<string, unknown>, newsEntries: Array<Record<string, unknown>> }}
+ *   `worldState` is the same reference when nothing is disavowed; `newsEntries` a fresh []
  */
 export function answerSuccessionQuestions(worldState, tick) {
-  if (!oathHolderActive(worldState)) return worldState;
+  if (!oathHolderActive(worldState)) return { worldState, newsEntries: [] };
   let out = worldState;
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
+  const nowTick = Math.max(0, Math.floor(Number.isFinite(Number(tick)) ? Number(tick) : 0));
   for (const question of successionQuestionsForTick(worldState, tick)) {
     if (question.answer !== 'disavow') continue;
     // Re-read per application: the questions were derived against one ledger, and each
     // answer rewrites it. The predicate runs again inside, so a treaty already broken by
     // an earlier answer this same tick is refused rather than broken twice.
     const applied = repudiateTreaty(out, { tick, succession: question });
-    if (applied.ok) out = applied.worldState;
+    if (!applied.ok) continue;
+    out = applied.worldState;
+    const broken = asObject(asObject(getSpatialLedger(out, 'treaties'))[question.treatyKey]);
+    newsEntries.push(...successionDisavowalBeat({ treaty: broken, question, tick: nowTick }));
   }
-  return out;
+  return { worldState: out, newsEntries };
 }

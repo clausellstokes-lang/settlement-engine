@@ -112,6 +112,24 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `The last delivery under the ${x.term} went out in autumn, and after that there was simply nothing owed.`,
     (x) => `Neither court marked the day; in ${x.counterpart} the season's work went on exactly as before.`,
   ],
+  // GR-4b-α — THE SUCCESSION DISAVOWAL, the one `# GR-4` ending whose producer is landed,
+  // persisted AND reachable from a mount this wave owns. Its five siblings stay authored and
+  // unwired: three assert a question standing OPEN ACROSS TICKS, which the answer leaf
+  // resolves inside a single expression, so their prose would be untrue the instant it minted
+  // (GR-4d); `reaffirmed` is GR-4b-ii's and `credibility_charge` is GR-4c's. ⛔ `repudiated`
+  // is authored here too and deliberately NOT wired — CR-GR4B-8: the open road already speaks
+  // a fully-addressed `treaty_breached` beat, so a second desk kind would double-voice it.
+  //
+  // ⭐ `{npc}` BINDS TO THE FALLEN HOLDER — the hand that swore, named on the parchment's own
+  // oath stamp. The heir's name is on no surface this stage can read, which is why the ANNEX
+  // was corrected rather than the slot filled (CR-GR4B-3).
+  disavowed_by_succession: [
+    (x) => `The oath ${x.npc} swore has been torn up by the seat that followed him, and the world understands — and does not forgive.`,
+    (x) => `${x.settlement}'s new seat has cast off the oath; every term under it is broken from this week, and the parchment is kept only as evidence.`,
+    (x) => `In ${x.counterpart} they had expected it, and it landed hard regardless.`,
+    'The seat that swore is gone, and the word went out of the door with it.',
+    'It was cheap to do, and it will be dear to have done.',
+  ],
   hollowed_detected: [
     (x) => `Hollowed and found out: the ${x.term} was kept on parchment and nowhere else.`,
     (x) => `${x.counterpart} let it fail by inches until ${x.settlement} weighed the difference and named it default.`,

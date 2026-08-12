@@ -46,6 +46,10 @@ const EXPECTED = Object.freeze([
   ['treaty_true_state_chip', 'n/a', 'dm-only', null, 8],
   ['ran_its_term', 'routine', 'public', null, 8],
   ['hollowed_detected', 'notable', 'public', null, 7],
+  // GR-4b-α — the succession disavowal, and the first `major` row this registry has carried.
+  // Its pool is authored in the volume's `# GR-4` section rather than `# GR-0`, which is why
+  // the reader below takes a PER-KIND window instead of one file-wide slice.
+  ['disavowed_by_succession', 'major', 'public', 'trade', 5],
 ]);
 
 /** SP-6's frequency-scaled floor. The `n/a` class is a DECLARED floor of six: a dossier
@@ -58,6 +62,9 @@ const INTERP = Object.freeze({
   band: 'a great many',
   term: 'tribute',
   route: 'North Road',
+  // GR-4b — the FALLEN oath holder, the only person any of these pools names. The annex's
+  // `{npc}` was re-slotted to him at CR-GR4B-3 precisely because the heir is unnameable.
+  npc: 'Aldric',
 });
 
 const ANNEX_SOURCE = readFileSync(GRAMMAR_ANNEX_URL, 'utf8');
@@ -78,16 +85,38 @@ function seedReaching(row, templateIndex, context) {
 }
 const SECTION = '# GR-0';
 const UNTIL = '# GR-1';
+/**
+ * GR-4b's ONE annex window, added rather than a second walker (CR-GR4B-7): a new
+ * `*.walker.test.js` basename becomes an automatic mutation-coverage invariant owing a
+ * manifest entry against a pinned exact count, so extending here moves the fewest figures and
+ * keeps ONE census over ONE vocabulary.
+ *
+ * ⚠ THE WINDOW IS NARROW ON PURPOSE. `# GR-4` also contains `### repudiated (WR-0c
+ * producer)` and four other authored-but-unwired kinds; only the kinds actually in
+ * GRAMMAR_KINDS are ever read, so widening the slice picks up nothing by accident. Both
+ * anchors are asserted single by the first-match test below — the correction note CR-GR4B-3
+ * added sits between the `# GR-4` heading and the first `### ` heading, so it lies outside
+ * every kind block the shared reader carves.
+ */
+const GR4_SECTION = '# GR-4';
+const GR4_UNTIL = '# GR-5';
+const GR4_KINDS = new Set(['disavowed_by_succession']);
 
 function annexPool(kind) {
-  return receiptAnnexPool(kind, { source: ANNEX_SOURCE, section: SECTION, until: UNTIL, interp: INTERP });
+  const inGr4 = GR4_KINDS.has(kind);
+  return receiptAnnexPool(kind, {
+    source: ANNEX_SOURCE,
+    section: inGr4 ? GR4_SECTION : SECTION,
+    until: inGr4 ? GR4_UNTIL : UNTIL,
+    interp: INTERP,
+  });
 }
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the eight-pool census and every registry field are exact', () => {
+  test('the nine-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(8);
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(9);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -136,7 +165,7 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('every pool address resolves in the GRAMMAR volume, not a legacy forward', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
-    expect(address).toHaveLength(8);
+    expect(address).toHaveLength(9);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
@@ -146,6 +175,10 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
     // headings are asserted single here, and the mutants below prove the guard fires.
     expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-0(?=[ \n])/gm, 'GR-0 section')).not.toThrow();
     expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-1(?=[ \n])/gm, 'terminator')).not.toThrow();
+    // GR-4b's second window rides the same law: the correction note CR-GR4B-3 wrote into
+    // this section must never introduce a second line opening `# GR-4 ` or `# GR-5 `.
+    expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-4(?=[ \n])/gm, 'GR-4 section')).not.toThrow();
+    expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-5(?=[ \n])/gm, 'GR-4 terminator')).not.toThrow();
     for (const kind of GRAMMAR_KINDS) {
       const escaped = kind.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       expect([...ANNEX_SOURCE.matchAll(new RegExp(`^### ${escaped}(?= )`, 'gm'))], `${kind}: heading count`)
@@ -190,7 +223,8 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('THE FIVE JOINS: both Herald kinds are phrased, routed, filed and desk-consistent', () => {
     expect([...GRAMMAR_HERALD_KINDS])
-      .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened']);
+      .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened',
+        'disavowed_by_succession']);
     for (const kind of GRAMMAR_HERALD_KINDS) {
       // JOIN 3 — the world phrase, so no projection can fall back to an engine token.
       expect(WHAT_PHRASES[kind], `${kind}: missing WHAT_PHRASES`).toBeTruthy();

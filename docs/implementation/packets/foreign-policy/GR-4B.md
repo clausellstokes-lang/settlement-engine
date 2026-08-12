@@ -11,7 +11,41 @@
   correction is a chair act, never an implementer edit).
 - **What this packet is NOT:** GR-4b as chartered. **The charter's five voice surfaces do not
   all have honest producers** (§-1); three of five, plus `reaffirmed`, re-file behind **GR-4d**
-  and are excluded here by name. This packet is the BREACH VOICE alone.
+  and are excluded here by name. This packet is the BREACH VOICE alone — **and after
+  CR-GR4B-8, the SUCCESSION DISAVOWAL alone within it.**
+- ⛔⛔ **AMENDED 2026-08-12 — CR-GR4B-8: THE α RE-SCOPE. `repudiated` IS OUT, AND
+  CR-GR4B-4 IS VACATED.** Lane AE STOPPED at preflight before writing anything and reported
+  three independent refutations of the `repudiated` half; the chair ruled the STOP correct and
+  authorised this amendment (the CR-TC5BII-1 shape — a chair-ordered edit executed by the
+  lane, recorded). ⭐ **The evidence, all measured at `a2222fee`:**
+  1. **NO MOUNT.** `repudiateTreaty` has exactly TWO call sites in `src/`:
+     `treatyBreach.js:283`, which is *unconditionally* succession-bearing
+     (`{ tick, succession: question }`, so its verdict is always
+     `SUCCESSION_REPUDIATION_TYPE` and it can never mint `repudiated`), and
+     `realmVerbExecution.js:360`, the DM verb road — **a file this packet's own
+     `PACKET_MANIFEST.json` does not reserve**, so reaching it is the FIFTEENTH handwritten
+     file and STOP #15. The sink cannot see it either: `peaceTerms.js:670-684`'s
+     `if (isRepudiationBreach(treaty)) { … continue; }` returns before EVERY
+     `newsEntries.push` in `advanceTreaties` (`:603`, `:606`, `:754`, `:764`).
+  2. ⛔ **THE OPEN ROAD WAS NEVER MUTE — §-1 row 5 and §0 are REFUTED BY A LANDED GREEN
+     TEST.** `realmManifest.js:291` gives the verb `candidateType: 'treaty_breached'` and
+     `worldPulseFeedCuration.js:80` stamps `impactKind: outcome.candidateType`, so
+     `tests/domain/realmVerbExecution.test.js:212-221` asserts an applied DM repudiation
+     mints **exactly one** `treaty_breached` beat carrying both party ids, both court NAMES
+     in the summary and a recorded `reasons[]` — the whole NEWS ADDRESS LAW, today.
+     **EXECUTED at pristine `a2222fee`: TRUE_EXIT=0, 26/26 passed.** That kind already holds
+     `EXACT_SECTION 'trade'`, `KIND_SECTION 'courts'` and a `WHAT_PHRASES` row — the SAME
+     desk and section §6.3 would have given `repudiated`. **A second desk kind there is a
+     DOUBLE VOICE for one act.**
+  3. **A PRODUCERLESS REGISTRATION WOULD BE ORPHAN VOCABULARY.**
+     `impactKindWalkers.test.js`'s `MINT_RE` is a RAW-TEXT scan of `src/domain/**` and its
+     `EXPECTED_VOICE` check is **two-way exact** — a key with no minted literal reds as
+     stale — so the kind cannot be registered ahead of its producer. Doing it anyway is the
+     ES-7 mistake §-1 exists to refuse.
+  ⇒ **CR-GR4B-4's stated ground ("it costs ZERO additional files") is false.** The β option
+  is RECORDED in §12c as a product option, not scheduled. ⛔ **Every "two kinds / two rows"
+  instruction below now reads ONE.** The handwritten-file total is **FOURTEEN, measured** —
+  unchanged, because α touches the same fourteen paths and only the ROW CONTENT shrinks.
 - **Packet version:** `1`
 - **Drafted by:** Lane AC (read-only compile lane), 2026-08-12, Opus-era — see §12b. Compiled
   to packet standard and promoted by Lane AD under the Fable chair, 2026-08-12.
@@ -77,7 +111,7 @@ The corpus is **already authored** — `docs/content/RECEIPT_POOLS_GRAMMAR.md`,
 | 2 | `honored_by_silence` | routine | 8 | the **expiry of an unanswered queue entry** | ⛔ **NONE.** §-1a |
 | 3 | `reaffirmed` | notable | 7 | the **explicit** honor answer | ⚠ **DESCRIPTOR ONLY.** §3.3 |
 | 4 | **`disavowed_by_succession`** | **major** | 5 | the seat that followed tears up the oath | ✅ **REACHABLE AND PERSISTED.** §3.2 |
-| 5 | `repudiated` *(WR-0c producer)* | major | 4 | the DM verb's open repudiation | ✅ **REACHABLE AND PERSISTED**, and mute since WR-0c |
+| 5 | `repudiated` *(WR-0c producer)* | major | 4 | the DM verb's open repudiation | ⛔ **REFUTED — CR-GR4B-8.** The BREACH is persisted, but the kind has **no reachable mount** in this packet's fourteen paths, and the ACT was **never mute**: it already speaks a fully-addressed `treaty_breached` beat (executed green). **Excluded; β in §12c** |
 | 6 | `credibility_charge` | notable | 6 | the oathbreaker's price | ⛔ **GR-4c's**, excluded by name |
 | 7 | `succession_question_open` | n/a (dossier) | 8 | the seat has not yet answered | ⛔ **NONE.** `GR-4A.md:164` excludes it by name for this reason |
 
@@ -106,7 +140,8 @@ consumers against a dispatcher nobody chartered. **Producer first, again.**
 
 | Slice | What it is | Blocked on |
 |---|---|---|
-| **GR-4b** | **THE BREACH VOICE.** The two kinds with persisted producers — `disavowed_by_succession` and `repudiated`. **This packet.** | nothing; dispatchable |
+| **GR-4b** (α) | **THE SUCCESSION DISAVOWAL VOICE.** The ONE kind with a persisted producer AND a reachable mount — `disavowed_by_succession`. **This packet, as amended at CR-GR4B-8.** | nothing; dispatchable |
+| **GR-4b-β** | **THE OPEN ROAD.** `repudiated`'s authored line. ⛔ Not a desk kind — the act already speaks as `treaty_breached`. | a ruling on double-voicing + a fifteenth path (§12c) |
 | **GR-4b-ii** | **THE HONOR VOICE.** `reaffirmed` + `honored_by_silence`, and the noise question they raise. | **GR-4d** |
 | **GR-4b-iii** | **THE OPEN-QUESTION SURFACE.** `succession_question_opened` (Herald) + `succession_question_open` (dossier). | **GR-4d** |
 
@@ -130,6 +165,12 @@ without a lapse beat, so **no landed news beat can speak either repudiation road
 consequence at `tests/domain/successionQuestion.test.js`, where a succession disavowal speaks
 the generic economic-family line about wagons and tribute. **A torn-up oath and a missed grain
 delivery are today spoken with identical words.**
+
+⛔ **CR-GR4B-8 CORRECTION.** The sentence above claiming *"no landed news beat can speak
+EITHER repudiation road"* is **true of the succession road only**. The OPEN road already
+speaks: an applied DM `REPUDIATE_TREATY` mints exactly one fully-addressed `treaty_breached`
+beat, asserted by a landed green test (head note, evidence 2). **This packet's subject is the
+SUCCESSION road, and only it.**
 
 **Observable result:** with `oathHolderEnabled` lit, the tick a new seat tears up its
 predecessor's oath, the world says so — naming both courts, the hand that swore, and the
@@ -171,8 +212,9 @@ CR-GR4B-2 and CR-GR4B-3, and CR-GR4B-3 is discharged in this promotion commit.
 
 **A broken oath is spoken once, by the road that broke it.** The succession road
 (`breachType: 'succession_repudiation'`) gains a voice gated by **`oathHolderActive` alone**
-(CR-GR4B-5); WR-0c's open road (`breachType: 'repudiation'`) gains its authored ending line
-gated by **`peaceCausalActive` alone** (CR-GR4B-4).
+(CR-GR4B-5). ⛔ **CR-GR4B-8: WR-0c's open road is OUT** — it has no mount here and is not
+mute; `peaceCausalActive` gates nothing this packet adds, and **GR-4b-α mints exactly ONE
+kind.**
 
 ### 2.2 Explicit non-goals
 
@@ -180,6 +222,7 @@ gated by **`peaceCausalActive` alone** (CR-GR4B-4).
 |---|---|---|
 | `succession_question_opened`, `honored_by_silence`, `succession_question_open` | **no producer, and the authored prose would be untrue at mint time** — §-1a | GR-4b-iii / GR-4b-ii, both behind **GR-4d** |
 | `reaffirmed` | a descriptor exists, but its semantics are the queue's, and minting on every honored succession is a second, noisier family | GR-4b-ii |
+| ⛔ **`repudiated`** — **EXCLUDED AT CR-GR4B-8** | **no reachable mount** in the fourteen paths (both `repudiateTreaty` call sites enumerated; the sink `continue`s before every beat), and the act is **already spoken** by a fully-addressed `treaty_breached` beat, so a desk kind would DOUBLE-VOICE it | **GR-4b-β**, §12c — recorded, not scheduled |
 | Any credibility delta or `credibility_charge` pool | second writer, second flag conjunction | **GR-4c** |
 | Any repair or re-derivation of the fracture-charge dead window | **GR-4c's preflight owns it**; the ES-5d lag law requires it be **re-derived, not inherited** | GR-4c |
 | The lit-mode queue and its terminal-HONOR divergence | second writer (`worldState.proposals`), second flag | **GR-4d** |
@@ -390,8 +433,10 @@ Precedent: TC-3 (`+45`) and TC-3b (`+18/+15`) both landed under recorded larger 
    an existing table — a pool, a registry row, a routing section, a chronicler section, a
    rumor phrase. That is the estate's mechanical kind-registration protocol, which is exactly
    what the registration-only category exists to describe.
-2. **The cost is per-DESK, not per-kind.** Splitting the two kinds across two packets doubles
-   every fixed cost (the leaf, the walker edits, the census fold) and buys back nothing.
+2. **The cost is per-DESK, not per-kind.** ⭐ **CR-GR4B-8 makes this ground LOAD-BEARING
+   rather than merely economical:** α registers ONE kind and still pays all five files,
+   because it is the DESK that is expensive. **Row 1 of the override therefore stands
+   verbatim at 3 → 5.**
 3. **The alternative delivers something the design did not ask for.** A `section: null` dossier
    line fits with no override, but it leaves the disavowal absent from the feed, needs its own
    annex re-class plus **one more authored variant** (the `n/a` floor is 6 against 5 authored),
@@ -410,7 +455,14 @@ census walker, which GR-4a counted in its own §4 (ten rows, ten files). ⛔ The
 recorded against the **measured** number; a packet that recorded 13 and then touched 14 would
 be the quiet renegotiation the standard forbids.
 
-⛔ **A fifteenth handwritten file, a sixth registration file, a third kind, a dossier line, a
+⭐ **RE-MEASURED AT CR-GR4B-8 AND UNCHANGED: FOURTEEN.** Dropping `repudiated` removes no
+FILE — α touches the same fourteen paths and only the ROW CONTENT shrinks (one pool, one
+registry row, one routing row, one chronicler pair, one phrase). **Both override rows stand
+verbatim: registration-only production files 3 → 5, handwritten files total 12 → 14.**
+⛔ A fifteenth file remains a STOP, and `realmVerbExecution.js` is precisely the fifteenth
+that CR-GR4B-8 refused.
+
+⛔ **A fifteenth handwritten file, a sixth registration file, a SECOND kind (⛔ CR-GR4B-8: α mints exactly ONE), a dossier line, a
 persisted key, a new flag or a new stage is a STOP, not a further override.**
 
 ---
@@ -529,8 +581,12 @@ answerSuccessionQuestions(worldState, tick)
 - ⛔ **`treatyBreach.js` composes nothing itself** — it calls the leaf, and stays the ledger's
   declared rewriter.
 - ⚠ **`repudiateTreaty`'s signature and return shape do not change** — WR-0c's DM lane and the
-  realm-verb apply path both read it. The `repudiated` beat is composed from its `ok` result at
-  the same call site.
+  realm-verb apply path both read it. ⛔ **CR-GR4B-8 STRIKES the second half of this bullet.**
+  It read *"the `repudiated` beat is composed from its `ok` result at the same call site"*,
+  and that call site is `treatyBreach.js:283`, which **always** passes `succession`, so it can
+  only ever mint `succession_repudiation`. The open road's only call site is
+  `realmVerbExecution.js:360`, outside the manifest. **α composes exactly one beat, inside
+  `answerSuccessionQuestions`' `ok` arm.**
 
 ### 6.2 The new leaf
 
@@ -538,8 +594,11 @@ answerSuccessionQuestions(worldState, tick)
 
 ```js
 successionDisavowalBeat(input) -> Array<Record<string, unknown>>   // 0 or 1
-openRepudiationBeat(input)     -> Array<Record<string, unknown>>   // 0 or 1
 ```
+
+⛔ **CR-GR4B-8: `openRepudiationBeat` IS NOT BUILT.** An exported composer with no `src/`
+consumer is the reader-without-a-writer shape this estate refuses, and its kind cannot be
+registered ahead of a producer (head note, evidence 3). **The leaf exports ONE beat.**
 
 - ⛔ **The name is MEASURED, not preferred.** `couplingInclusion.walker.test.js`'s
   `LAYER_PATTERNS` claims a GRAMMAR prefix set — `treaty…`, `peaceTerms…`, `peaceReasons…`,
@@ -569,18 +628,21 @@ openRepudiationBeat(input)     -> Array<Record<string, unknown>>   // 0 or 1
   `setSpatialLedger(<x>, 'treaties',` (`oathStampTotality.walker.test.js`) nor the dotted token
   `.npcs` (`roadsParticipation.test.js`). **Reword the comment; never widen either scan.**
 
-### 6.3 The two kinds — registry rows
+### 6.3 The ONE kind — its registry row (⛔ was "the two kinds"; CR-GR4B-8)
 
-| | `disavowed_by_succession` | `repudiated` |
-|---|---|---|
-| Annex | the `# GR-4` section, as corrected at this promotion | same |
-| Depth authored | 5 | 4 |
-| Significance | `major` (floor 4) | `major` (floor 4) — **exactly at floor** |
-| Audience | `public` | `public` |
-| Desk (`section`) | `'trade'` — the treaty cohort keeps one desk | `'trade'` |
-| Chronicler section | `'courts'` with a `'trade'` divergence — the cohort's landed idiom | same |
-| Gate | `oathHolderActive` | `peaceCausalActive` |
-| `{npc}` binds to | ⭐ **the FALLEN holder**, `treaty.sworn[defaultedBy].name` | *(slot not used)* |
+| | `disavowed_by_succession` |
+|---|---|
+| Annex | the `# GR-4` section, as corrected at this promotion |
+| Depth authored | 5 |
+| Significance | `major` (floor 4) |
+| Audience | `public` |
+| Desk (`section`) | `'trade'` — the treaty cohort keeps one desk |
+| Chronicler section | `'courts'` with a `'trade'` divergence — the cohort's landed idiom |
+| Gate | `oathHolderActive` **alone** |
+| `{npc}` binds to | ⭐ **the FALLEN holder**, `treaty.sworn[defaultedBy].name` |
+
+⛔ **`repudiated`'s row is DELETED, not deferred quietly** — see the head note. Its authored
+pool stays in the annex unwired, exactly as its three GR-4d siblings do.
 
 ⚠ **`'major'` significance: three surfaces disagree, and CR-GR4B-6 rules the cure.**
 `grammarKindRow`'s `@param` union is `'notable'|'routine'|'n/a'` and has **no `'major'` arm**,
@@ -648,19 +710,19 @@ carries same-seed risk.
 
 | Action | File | Symbol / region | Max Δ | Instruction |
 |---|---|---|---:|---|
-| `CREATE` | `src/domain/worldPulse/treatySuccessionVoice.js` | `successionDisavowalBeat`, `openRepudiationBeat`, a module-local `presentationWeight` | `120` | §6.2. **PURE.** ⛔ Contains neither `setSpatialLedger(<x>, 'treaties',` nor `.npcs`, including in comments. |
+| `CREATE` | `src/domain/worldPulse/treatySuccessionVoice.js` | `successionDisavowalBeat`, a module-local `presentationWeight` (⛔ **no `openRepudiationBeat` — CR-GR4B-8**) | `120` | §6.2. **PURE.** ⛔ Contains neither `setSpatialLedger(<x>, 'treaties',` nor `.npcs`, including in comments. |
 | `MODIFY` | `src/domain/worldPulse/treatyBreach.js` | `answerSuccessionQuestions`; the `repudiateTreaty` call sites | `15` | §6.1. ⛔ Beats only inside the `ok` arm. ⛔ No new exported ledger-writing symbol; the `module#symbol` writer set does not move. |
 | `MODIFY` | `src/domain/worldPulse/peaceTerms.js` | the `answerSuccessionQuestions` call + the `newsEntries` initialiser | **`3`** | §6.4. ⛔ **Target 0; 800 effective lines is a STOP.** |
-| `REGISTER` | `src/domain/worldPulse/grammarReceiptPools.js` | `GRAMMAR_RECEIPTS` | `20` | Two pools, **mechanically extracted** (P3), from the CORRECTED annex text. Pure data. |
-| `REGISTER` | `src/domain/worldPulse/grammarNews.js` | `GRAMMAR_KIND_REGISTRY` | `12` | Two `grammarKindRow` rows, plus the `'major'` JSDoc-union widening — §6.3, CR-GR4B-6. |
-| `REGISTER` | `src/domain/realm/heraldRouting.js` | `EXACT_SECTION` | `6` | Two rows, `'trade'` — the treaty cohort's desk. ⛔ Do **not** mint a new `sectionAuthority`: `wizardNews.js#normalizeEntry` allowlists only three and would strip it on persist. |
-| `REGISTER` | `src/domain/display/chroniclersLetter.js` | `KIND_SECTION`, `KIND_SECTION_DIVERGENCES` | `6` | Two rows each, `'courts'` with the `'trade'` divergence — the cohort's landed idiom. |
-| `REGISTER` | `src/domain/display/settlementRumors.js` | `WHAT_PHRASES` | `4` | Two in-world phrases. ⛔ **Required for a desk kind; forbidden for a `section: null` kind.** |
+| `REGISTER` | `src/domain/worldPulse/grammarReceiptPools.js` | `GRAMMAR_RECEIPTS` | `20` | **ONE pool** (`disavowed_by_succession`; ⛔ was two — CR-GR4B-8), **mechanically extracted** (P3), from the CORRECTED annex text. Pure data. |
+| `REGISTER` | `src/domain/worldPulse/grammarNews.js` | `GRAMMAR_KIND_REGISTRY` | `12` | **ONE** `grammarKindRow` row (⛔ was two — CR-GR4B-8), plus the `'major'` JSDoc-union widening — §6.3, CR-GR4B-6. |
+| `REGISTER` | `src/domain/realm/heraldRouting.js` | `EXACT_SECTION` | `6` | **ONE row**, `'trade'` (⛔ was two — CR-GR4B-8) — the treaty cohort's desk. ⛔ Do **not** mint a new `sectionAuthority`: `wizardNews.js#normalizeEntry` allowlists only three and would strip it on persist. |
+| `REGISTER` | `src/domain/display/chroniclersLetter.js` | `KIND_SECTION`, `KIND_SECTION_DIVERGENCES` | `6` | **ONE row each** (⛔ was two — CR-GR4B-8), `'courts'` with the `'trade'` divergence — the cohort's landed idiom. |
+| `REGISTER` | `src/domain/display/settlementRumors.js` | `WHAT_PHRASES` | `4` | **ONE in-world phrase** (⛔ was two — CR-GR4B-8). ⛔ **Required for a desk kind; forbidden for a `section: null` kind.** |
 | `CREATE` | `tests/domain/treatySuccessionVoice.test.js` | A1–A7 | `n/a` | ⚠ **Name and site it exactly as given** (§8 item 2). Straight-line registration only (§8 item 1). |
 | `TEST` | `tests/domain/successionQuestion.test.js` | the two identity arms | `n/a` | Re-address to `.worldState`, **without weakening the assertion**. |
 | `TEST` | `tests/lint/grammarLifecycleKindPools.walker.test.js` | `EXPECTED`, the length pin, `INTERP`, the annex `SECTION`/`UNTIL` bounds, the `GRAMMAR_HERALD_KINDS` array | `n/a` | ⭐ **EXTEND this walker; do not author a new one** — CR-GR4B-7. Add a second annex window `'# GR-4'`/`'# GR-5'`; §3.4 carries the structural constraint on that window. |
 | `TEST` | `tests/lint/kindPoolFloors.walker.test.js` | `REGISTERED_KIND_COUNT`, `ROUTED_TOKENS`, both arithmetic identities | `n/a` | Re-measure WHOLE (P4). ⛔ `REGISTRIES` stays `9`. |
-| `TEST` | `tests/domain/impactKindWalkers.test.js` | `EXPECTED_VOICE` | `n/a` | Two rows. The treaty cohort is deliberately **`null`** (unvoiced) — follow it, with the reason. |
+| `TEST` | `tests/domain/impactKindWalkers.test.js` | `EXPECTED_VOICE` | `n/a` | **ONE row** (⛔ was two — CR-GR4B-8; `EXPECTED_VOICE` is TWO-WAY EXACT, so a `repudiated` key with no minted literal reds as stale). The treaty cohort is deliberately **`null`** (unvoiced) — follow it, with the reason. |
 | `TEST` | `tests/lint/sovereigntyLightingContract.walker.test.js` | the `CENSUS` row + a dated comment | `n/a` | Re-derive all five figures WHOLE in ONE run and re-record whole, cause stated (§8 item 3). |
 
 **These fourteen paths are GR-4b's complete reserved change set**, and `PACKET_MANIFEST.json`
@@ -753,7 +815,7 @@ consequence beat registers nothing there); `scripts/.size-baseline.json` (⛔ **
 | **A4** | ⭐ **THE NEWS ADDRESS LAW, asserted part by part — because no walker asserts part 4** | On A2's entry: (1) `settlementIds`/`settlementNames` name both courts **and** the summary names the hand that swore; (2) `kind`/`impactKind` are frozen-vocabulary tokens; (3) `parties` equals `treaty.parties`; (4) `reasons[]` is **non-empty** and contains the **recorded** receipt, not an invented one. ⚠ Part 4 has no census (§3.6), and an empty `reasons` also makes sibling beats collide under `isMetronomeRepeat`. |
 | **A5** | ⭐ **THE REFUSED-WRITE NEGATIVE** | Two questions resolving to `disavow` on **one** treaty in **one** tick: the second `repudiateTreaty` is refused by the `isRepudiationBreach` guard, the ledger carries **one** breach, and the feed carries **exactly one** beat. ⛔ The voice narrates the ACT, never the intent. |
 | **A6** | **Dark / disabled — the dormancy fences, both** | `oathHolderEnabled` absent, and separately explicit `false`: over a fixture whose lit control **does** break, the ledger is byte-identical **and `newsEntries` is empty**; `oathHolderDormancyFence`'s `successionDarkReads` / `successionFalseReads` counters read **0** with the lit anchor above 0. ⭐ Plus the LIT-MUTANT control, so the fence is shown to be able to SEE. |
-| **A7** | **The open road + duplicate/idempotent + determinism** | A DM `REPUDIATE_TREATY` under `peaceCausalEnabled` mints exactly one `repudiated` beat with its ending token; re-running the same tick mints nothing further; and both beats' `familyId`/`summary` are **byte-stable across two runs at the same seed**. |
+| **A7** | **Duplicate/idempotent + determinism** (⛔ **the open-road clause is STRUCK — CR-GR4B-8**) | Re-running the same tick over an already-disavowed ledger mints **nothing further** (the shell is refused by the predicate that broke it); and the beat's `familyId`/`summary` are **byte-stable across two runs at the same seed**. |
 
 **A8 (privacy boundary) is OMITTED, not replaced.** Both kinds are `audience: 'public'` in the
 annex as authored, and the disavowal is a public court act by the design's own belief posture.
@@ -765,10 +827,12 @@ annex as authored, and the disavowal is a public court act by the design's own b
 > from `DEFAULT_SIMULATION_RULES` and from every preset, so the succession voice's **act**
 > cannot occur in any default world.
 >
-> ⚠ **`peaceCausalEnabled` lit: the `repudiated` beat is a DECLARED lit-path behavior
-> addition.** A DM repudiation that minted no beat now mints one — the WR-0c path's disclosed
-> addition, the same class `DESIGN_FP_GRAMMAR.md:1092` declares for the credibility charge.
-> ⭐ **This is the substantive thing CR-GR4B-4 signs.**
+> ⛔ **CR-GR4B-8 WITHDRAWS THE `peaceCausalEnabled` LIT-PATH ADDITION ENTIRELY.** The
+> paragraph here claimed *"a DM repudiation that minted no beat now mints one"* — its premise
+> was false (it already mints a `treaty_breached` beat) and its road had no mount. **GR-4b-α
+> adds NO lit-path behavior on `peaceCausalEnabled`, so the goldens on that road may not move
+> at all.** ⭐ The only declared behavior addition left is the `oathHolderEnabled` one, and
+> that flag is absent from `DEFAULT_SIMULATION_RULES` and from every preset.
 > ⛔ **If any committed golden moves at all, that is a STOP and a report — never a re-record.**
 > The implementer runs the peace/belief/rumor goldens and the dormancy golden and quotes them
 > unchanged.
@@ -882,13 +946,22 @@ test ratchet's skip sentinel — a cascade that looks like a defect and is not.
   the `.npcs` exact-set census structurally forbids a new `worldPulse` leaf); deleting the
   defective variants (reachability is asserted at `pool.length`, and `repudiated` would fall
   under its floor of 4).
-- **CR-GR4B-4 — `repudiated` IS IN.** Its producer is landed and mute; it costs **zero
+- ⛔⛔ **CR-GR4B-4 — VACATED AT CR-GR4B-8 (2026-08-12).** Struck on a refuted ground: its
+  producer is landed but has **no mount in this packet's fourteen paths**, and the act is
+  **not mute** — it already speaks a fully-addressed `treaty_breached` beat (executed green,
+  TRUE_EXIT=0). The ruling's own premise, *"it costs zero additional files"*, is false: it
+  costs a fifteenth. Preserved verbatim below, struck, so the reasoning that produced it stays
+  legible to a successor rather than vanishing from the record.
+  ~~**CR-GR4B-4 — `repudiated` IS IN.** Its producer is landed and mute; it costs **zero
   additional files** (rows only, in the surfaces CR-GR4B-2 already opens); and it is the
   negative control proving the succession beat is keyed on the **road** rather than on "any
   broken treaty". ⚠ Its cost is the declared lit-path addition at §9b, and that is the
-  substantive thing this ruling signs.
-- **CR-GR4B-5 — `oathHolderActive` ALONE; NO CONJUNCTION.** The open road gates on
-  `peaceCausalActive` alone. Grounds: the treaty **signing** beat is pushed ungated in
+  substantive thing this ruling signs.~~
+- **CR-GR4B-5 — `oathHolderActive` ALONE; NO CONJUNCTION.** ⛔ **CR-GR4B-8 strikes this
+  ruling's second sentence** (*"The open road gates on `peaceCausalActive` alone"*) — there is
+  no open road in α. The operative half stands and is the one α needs: **the succession voice
+  gates on `oathHolderActive` ALONE, with no conjunction.** Grounds: the treaty **signing**
+  beat is pushed ungated in
   `advanceTreaties` while the lapse and detection beats are gated, so an ungated treaty beat is
   house precedent; and a conjunction would mint the second flag the budget forbids and that
   GR-4 was refused for carrying. ⚠ **It means a world running the lifecycle voice dark still
@@ -941,6 +1014,7 @@ promotion is authored below the Fable-exhaustion boundary.
 | The credibility charge and any credibility delta | **GR-4c** | Second writer, second flag conjunction |
 | The fracture-charge dead-window re-derivation | **GR-4c's preflight** | The ES-5d lag law requires it be re-derived from pulse call order, never inherited |
 | A `peaceTerms.js` decomposition micro-act | chair, before GR-4c/GR-4d if either reaches that mover | A same-file refactor of a hot mover carries same-seed risk and must land alone (§6.4) |
+| ⭐ **GR-4b-β — the open road's authored line** (**RECORDED AT CR-GR4B-8 AS A PRODUCT OPTION; NOT SCHEDULED, NOT AN IMPLEMENTER ROW**) | chair / product | The act already speaks a fully-addressed `treaty_breached` beat, so a second DESK KIND would double-voice it. The honest shape, if ever wanted, is the **`treatyLapsedBeats` idiom**: register `repudiated` `section: null` and hand its authored line to the EXISTING beat's `reasons[]`, minting no second kind and taking no `WHAT_PHRASES` row (⛔ which that walker FORBIDS for a `section: null` kind). ⚠ It still needs `realmVerbExecution.js`, a fifteenth path, so it is a chartering act and not a widening of this packet |
 | ~~The `tintedCallouts` census re-freeze reported at `32f4e520`~~ | ✅ **DISCHARGED at `5f687277`** | Landed mid-promotion by a sibling lane, by cure rather than by adjustment; recorded here so the row is not re-found as open (§5b B7) |
 
 ---
@@ -956,6 +1030,8 @@ promotion is authored below the Fable-exhaustion boundary.
 | **D5** | `repudiated`'s third variant spoke `{reason}` | the DM verb records no free-text reason; the receipt is a fixed sentence | **Code wins.** Same chair pass — CR-GR4B-3. |
 | **D6** | *"Casting: the fallen holder, the heir, the installing faction — all existing planes"* (`:1103`) | only the **fallen holder** is on a plane the treaty stage reads; the heir is an id, the installing faction an optional ladder-row field this leaf does not reach | **Code wins.** The casting is one name deep, and the packet says so rather than fabricating two. |
 | **D7** | *"the question hold window = the actor-major hold band"* (`:1106`) | there is no hold window; GR-4d's substrate has **no per-type terminal seam** | **Deferred to GR-4d**, whose substrate is already measured (`GR-4A.md` §3.5). |
+| **D9** | §7 files `KIND_SECTION_DIVERGENCES` under `src/domain/display/chroniclersLetter.js` | that table is **exported from `src/domain/realm/heraldRouting.js`**; `chroniclersLetter.js` exports `KIND_SECTION` only, and the kind-pool walker imports each from its real home | **Code wins.** The divergence row went to `heraldRouting.js` and the section row to `chroniclersLetter.js`. ⚠ **No file-count effect** — both files were already reserved, so the manifest and the override are untouched. Recorded because a successor reading §7 alone would look for the table in the wrong file. |
+| **D10** | §6.2 lists the beat's fields without constraining how the kind token is spelled | ⛔ `tests/domain/impactKindWalkers.test.js` discovers minted kinds with a RAW TEXT scan, `/impactKind:\s*['"]([a-z][a-z0-9_]*)['"]/` — a kind minted through a **constant** is INVISIBLE to it | **Measured, not theorised: the leaf failed that walker until the literal went in** (it reported the new registration rows as `stale`). `kind`, `impactKind` and `ending` are therefore spelled as string LITERALS and the reason is written at the constant's declaration. ⭐ The general hazard: a constant-minted kind silently loses its `WHAT_PHRASES` + `EXPECTED_VOICE` enforcement, so it could ship with no phrase and no voice decision at all. |
 | **D8** | *"through the existing pools/pacing machinery"* (`GR-4A.md:82`) | the pools machinery exists and the corpus is authored, but a desk kind costs **five** registration files, and `narrativeTempo.js` — the obvious "pacing" reading — throttles **spontaneity, never causality** and takes no consequence beat | **Corrected.** The real pacing obligation is SP-6's frequency-scaled **pool depth**, which both kinds satisfy as corrected. |
 
 ---
@@ -992,7 +1068,7 @@ repairing — when:
 14. ⛔ **A foreign lane holds uncommitted test titles at census re-record time**, or holds the
     census walker dirty at dispatch, or the chair has not confirmed this packet is the in-flight
     census holder.
-15. ⛔ **A fifteenth handwritten file, a sixth registration file, a third kind, a dossier line, a
+15. ⛔ **A fifteenth handwritten file, a sixth registration file, a SECOND kind (⛔ CR-GR4B-8: α mints exactly ONE), a dossier line, a
     persisted key, a new flag, a new stage, a new kind registry, a PRNG draw or a clock read
     would be needed.**
 16. ⛔ **A ratchet, baseline, budget, timeout or ceiling would need raising** beyond the two rows
@@ -1007,6 +1083,13 @@ split. It contains **no speculative repair.**
 ---
 
 ## 15. What a successor needs in one paragraph
+
+⛔⛔ **READ THE CR-GR4B-8 HEAD NOTE FIRST.** This paragraph was written for the TWO-kind
+packet. **α mints exactly one kind, `disavowed_by_succession`.** Everything below about
+`repudiated` is superseded: it has no mount in the fourteen reserved paths, and the open road
+it calls mute already speaks a fully-addressed `treaty_breached` beat (executed green). The
+per-DESK cost argument is the part that survives intact and is now load-bearing — α registers
+ONE kind and still pays all FIVE registration files, so the override stands verbatim.
 
 GR-4a gave the succession road an act; GR-4b gives it a sentence, and the two things everyone
 assumes about that job are both wrong. **`peaceTerms.js` is not the problem:** it sits at 797 of

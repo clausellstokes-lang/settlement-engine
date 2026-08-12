@@ -97,6 +97,10 @@ export const KIND_SECTION = Object.freeze({
   // Herald's own desk for them diverges to trade, recorded in KIND_SECTION_DIVERGENCES.
   treaty_lapsed: 'courts', treaty_default_detected: 'courts',
   treaty_disclosure_opened: 'courts',
+  // GR-4b — a seat tearing up its predecessor's oath is a court act before it is a trade
+  // one, so the letter files it here beside the oathbreaking; the Herald's own desk for it
+  // diverges to trade with the cohort, recorded in KIND_SECTION_DIVERGENCES.
+  disavowed_by_succession: 'courts',
   vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
   commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
   npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',

@@ -315,7 +315,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   // caller's untouched state. A disavowal writes through the family's declared rewriter, so
   // `prevLedger` (pre-answer) and the seed below (post-answer) differ and `changed` is true
   // — which matters, because the pulse discards this mover's state when it says otherwise.
-  let workingState = answerSuccessionQuestions(worldState, tick);
+  let { worldState: workingState, newsEntries: successionBeats } = answerSuccessionQuestions(worldState, tick);
   const liveLedger = treatyLedgerOf(workingState) || {};
   const edges = (graph?.edges && Array.isArray(graph.edges) ? graph.edges : null)
     || (Array.isArray(snapshot?.regionalGraph?.edges) ? snapshot.regionalGraph.edges : []);
@@ -339,7 +339,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   for (const key of Object.keys(liveLedger)) nextLedger[key] = deepClone(/** @type {TreatyRecord} */(liveLedger[key]));
 
   /** @type {Array<Record<string, unknown>>} */
-  const newsEntries = [];
+  const newsEntries = [...successionBeats];
   const coalitionLit = coalitionLedgerActive(worldState);
   /** @type {Array<Record<string, unknown>>} */
   const coalitionEvidence = [];
