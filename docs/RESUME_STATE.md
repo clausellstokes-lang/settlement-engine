@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 16:13:25 EDT
+**Generated:** 2026-08-12 16:21:58 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `b17d32d2` | **8** |
-| ledger (main) | `review-fixes-2026-07-08` | `d000bd67` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `ce4dad7b` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T161249` — build 8 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T162122` — build 8 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T161249
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T162122
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -58,12 +58,12 @@ a2222fee 2026-08-12 GR-4b promoted READY: the succession road gets a voice, and 
 ## Last 6 ledger commits
 
 ```
+ce4dad7b 2026-08-12 IN-1b ruled and promoting: the standing line escapes both hazard classes
 d000bd67 2026-08-12 The mirror is flipped; IN-1b drafts to close the orphan window
 48d517c5 2026-08-12 Lane AH collected green; the INDEX contradiction is cured; memory is linked
 62fdbce5 2026-08-12 IN-1a promotes clean at the moved base; the mirror implements
 b439bf09 2026-08-12 IN-1 splits three ways, and the mirror finds its substrate already waiting
 cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already did its work
-812b07f6 2026-08-12 The gate is green at the voice's HEAD; the corpus advances to Wave 1 and the mirror
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -76,6 +76,38 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
 <!-- resume-state.sh preserves everything below this line verbatim. Update it at every
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
+
+# ⭐ CURRENT (2026-08-12, after the B13 STOP) — IN-1b promoting on the props-only shape
+
+**The B13 upgrade fired and paid for itself:** Lane AL EXECUTED the OutputContainer.jsx
+headroom measurement at promotion and got **599 effective lines against the hard 600** —
+the draft's delegated "~582/≈18 headroom" was wrong by SEVENTEEN LINES in the dangerous
+direction (its §15 had flagged exactly this figure as unverified). AL STOPPED, wrote
+nothing; two receipts (standalone Linter + repo-config eslint agree at 599); it also
+pre-measured both cures in scratch (drafted §6.3 edit = +1 → exactly 600, zero headroom;
+props-only variant = 599 → 599, the landed RumorsTab idiom at :739) and found a TDZ
+defect in the draft's siting (`publicDossier` declares at :448, not :262).
+
+**CR-IN1B-7 (chair, vetoable):** the props-only variant is ADOPTED — CR-IN1B-2 amends
+from letter to purpose (zero new exemption rows, authority derived upstream) at zero net
+cost; spending the last line was declined. TDZ siting corrected. **HOT-FILE LIST minted:
+OutputContainer.jsx (599/600) joins peaceTerms.js (797/800)** — any packet touching
+either opens with an EXECUTED headroom measurement and a zero-net shape requirement
+(propagates to PACKET_STANDARD at the next prose batch). AL's memory judgment ratified
+(hazard recorded in `hot-files-at-max-lines-ceiling.md`, no index edit — the index sits
+at its ceiling).
+
+**LIVE: Lane AL resumed (~16:15 EDT)** authoring the READY promotion with the CR-IN1B-7
+deltas (props-only §6.3 with the no-new-premium-comparison receipt; TDZ fix; the 599/600
+receipt + re-measure-at-dispatch + hot-file rule in the preflight; CR-IN1B-1..6
+unchanged). Collection: validate:packets must read 22 packets / 1 READY exit 0; ONE
+plumbing commit with CAS; transcript task `a895753f037333bba`. On READY: dispatch the
+IN-1b implementer (SOLE census holder — the walker TEST reservation is FREE, all seven
+naming packets LANDED; the eleven-pin orphan-closure disposition; D-A's corrected
+adapter `belief.strengthBand`; three STOP doors). Behind it, unchanged queue: GR-4c
+draft (its preflight owns the fractureCredibilityDeltas dead-window re-derivation) →
+corpus-coverage mint charter (SCW-1b parked inside) → schema-7 prose batch (+ the
+hot-file rule propagation). Owner veto surfaces standing: §17.7 · §17.4 · §17b.
 
 # ▶ RESUMED 2026-08-12 ~12:57 EDT at the owner's "continue!" (the pause block below is history)
 
