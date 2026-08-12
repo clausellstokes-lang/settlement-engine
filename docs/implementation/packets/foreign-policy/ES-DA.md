@@ -1,6 +1,7 @@
 # Espionage / ES-Da — the composite rider: covert cargo on an already-accepted peace envoy
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `6dbb76c2`, 2026-08-12; flipped by the chair after verification (12 files by diff-tree, dark-path byte-identity proven BY EXECUTION against the pre-feature commit with the hash frozen as PRE_ESDA_DARK_LEDGER_HASH, census folded whole, gate TRUE_EXIT=0 at HEAD). Do not redispatch. CR-ESDA-6 (letter-wave id shape) and CR-ESDA-7 (the JSDoc cure) executed; two further ratified deviations: the barrel re-export and the ES-5 orphan-pin narrowing (the lesson: a "fully orphaned" file's emptiness is pinned somewhere — grep before wiring).
 - **Status note:** ✅ **PROMOTED READY 2026-08-11 by the Fable chair (session `c42c8924`,
   Lane U), compiled from Lane Q's read-only draft and the five rulings CR-ESDA-1..5 (§12).**
   ⭐ **ES-Da is the ONLY dispatchable espionage slice at this HEAD.** ES-7 was REFUSED (five of
