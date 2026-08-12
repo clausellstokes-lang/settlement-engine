@@ -158,6 +158,20 @@ function realKeys(obj) {
   return obj && typeof obj === 'object' ? Object.keys(obj).filter((k) => !k.startsWith('_')) : [];
 }
 
+/** The files whose change moves the frozen (terrain, siteKind, decisiveToken) inventory:
+ *  the two export-predicate homes, the export accessor the site reads through, the call
+ *  site that assembles the site's inputs, and the table that authors the trade goods both
+ *  predicates match against. AUTHORED (hence `hybrid`) because it is a dependency closure
+ *  no committed artifact spells; the POPULATION beside it is derived from the live
+ *  baseline, so a quietly emptied inventory reddens the self-check's anti-vacuity arm. */
+const SITE_COHERENCE_SUBSTRATE = [
+  'src/domain/townMap/siteGenesis.js',
+  'src/domain/townMap/asymmetrySources.js',
+  'src/domain/townMap/townLayoutV2.js',
+  'src/domain/canonicalAccessors.js',
+  'src/data/resourceData.js',
+];
+
 const EDGE_SHARED_DIR = 'supabase/functions/_shared';
 
 /** Every bundle meta under the edge _shared dir — GLOBBED, never listed. */
@@ -489,6 +503,35 @@ export const PREDICATES = [
       const k = realKeys(j && j.inventory)[0];
       return k ? { changes: [{ status: 'M', path: k, oldPath: null }] } : null;
     },
+  },
+  {
+    id: 'site-coherence-substrate-touched',
+    classIds: ['HZ-SITECOHERENCE'],
+    derivation: 'hybrid',
+    sources: ['tests/lint/.site-coherence-baseline.json'],
+    what: 'a file that FEEDS the frozen (terrain, siteKind, decisiveToken) contradiction inventory changed — the site-coherence ratchet will move, and the movement must be BANKED in the same change rather than re-baselined',
+    population: (ctx) => {
+      const j = ctx.json('tests/lint/.site-coherence-baseline.json');
+      return { label: 'frozen site-coherence contradiction rows', items: realKeys(j && j.rows) };
+    },
+    run(ctx, cs) {
+      const j = ctx.json('tests/lint/.site-coherence-baseline.json');
+      const rows = realKeys(j && j.rows);
+      if (rows.length === 0) return [];
+      const out = [];
+      for (const ch of cs.changes) {
+        for (const p of touched(ch)) {
+          if (!SITE_COHERENCE_SUBSTRATE.includes(p)) continue;
+          out.push({
+            severity: 'note',
+            message: `${p} feeds the site-coherence inventory (${rows.length} frozen rows over the 462-settlement corpus). Expect tests/lint/siteCoherenceRatchet.test.js to move. A FALLEN or VANISHED row is a WIN and reds until you LOWER or REMOVE it in tests/lint/.site-coherence-baseline.json in THIS change; a NEW key is a regression. Never regenerate the baseline to green it — the regenerator is print-only and always exits non-zero on purpose.`,
+            evidence: ['npx vitest run tests/lint/siteCoherenceRatchet.test.js tests/lint/exportTokenCoverage.test.js'],
+          });
+        }
+      }
+      return out;
+    },
+    synthetic: () => ({ changes: [{ status: 'M', path: SITE_COHERENCE_SUBSTRATE[0], oldPath: null }] }),
   },
   {
     id: 'test-ratchet-red-file',

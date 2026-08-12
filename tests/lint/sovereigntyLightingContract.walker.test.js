@@ -3827,7 +3827,39 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // three docs/implementation entries that are STALE-INDEX RESIDUE of the chair's own
     // `df15a68a` (worktree content is byte-identical to HEAD; only the shared git index is
     // behind). ZERO foreign test files, tracked or untracked, and zero foreign titles.
-    files: 2399, parked: 365, credited: 2034, titles: 19821, suiteTitles: 5592,
+    // ⭐ SCW-0 FOLD (2026-08-12) — RE-DERIVED AND RE-RECORDED WHOLE, in the same change that
+    // moves it. 2,399/365/2,034/19,821/5,592 → 2,401/365/2,036/19,835/5,594.
+    // THE CAUSE IS TWO NEW TEST FILES AND NOTHING ELSE. SCW-0 is an INSTRUMENT-ONLY packet: it
+    // touches ZERO files under src/, so no existing suite changed shape and no bundle moved. Its
+    // other three paths cannot move a figure — tests/lint/.site-coherence-baseline.json is JSON,
+    // and this walker's TEST_FILES filter is /\.test\.(js|jsx)$/, so a fixture under tests/ is
+    // invisible to all five arms; scripts/hazard-registry.json and
+    // scripts/mutation-coverage-manifest.json are not under tests/ at all.
+    //   + 9 titles, +1 suite … tests/lint/siteCoherenceRatchet.test.js  (the contradiction ratchet)
+    //   + 5 titles, +1 suite … tests/lint/exportTokenCoverage.test.js   (the liveness census)
+    // 9 + 5 = 14 and 1 + 1 = 2, which is exactly 19,821 → 19,835 and 5,592 → 5,594 with NOTHING
+    // left over, and `parked` did not move because neither file gained a park reason.
+    // ⭐ BOTH FILES ARE CREDITED, NOT PARKED, AND THAT WAS MEASURED RATHER THAN ASSUMED:
+    // `credited` rose by exactly two and the probe printed `parked=[]` for each file by name.
+    // That is the TC-5a trap, and it is the whole reason the ratchet's 462-settlement corpus loop
+    // lives INSIDE a single `it` instead of generating one test per settlement — the shape that
+    // scored TC-5a's paint suite 0 live titles against 34 real tests. There is no `.each()` in
+    // either file and every `it` is registered straight-line in one describe.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE ON ALL FIVE. (a) A temporary probe placed INSIDE this
+    // test BEFORE its first assertion (so it minted no title and could not move what it measured,
+    // and so the sequenced-census trap could not fire — this run DID red on `files`, and had the
+    // figures come from the assertions the later four would never have been evaluated) read
+    // 2401/365/2036/19835/5594 live. (b) `frozen row + this lane's measured per-file delta` gives
+    // 2399+2 / 365+0 / 2034+2 / 19821+14 / 5592+2 — the same five. A third derivation agrees: the
+    // two files' own focused vitest run reports 14 passing tests across them.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time `git status --porcelain`
+    // carried EXACTLY this packet's own paths — two modified (scripts/hazard-registry.json,
+    // scripts/mutation-coverage-manifest.json) and three untracked (the two test files and the
+    // baseline) — plus four docs/implementation entries that are STALE-INDEX RESIDUE of the
+    // chair's own promotion commits (`git diff HEAD --name-only` lists none of the four, so their
+    // worktree content is byte-identical to HEAD and only the shared index is behind). ZERO
+    // foreign test files, tracked or untracked, and therefore zero foreign titles.
+    files: 2401, parked: 365, credited: 2036, titles: 19835, suiteTitles: 5594,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
