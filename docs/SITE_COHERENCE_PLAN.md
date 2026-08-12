@@ -1,6 +1,9 @@
 # Site Coherence & Walker Banking — Plan
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - 2026-08-12 — **Program state: 1 of 9 LANDED (Wave 0), 1 of 9 DISCHARGED (Wave 1), 7 open.**
+> - 2026-08-12 — **Wave 1 DISCHARGED — not landed, not deferred, and nothing is owed.** Its deliverable had no subject at `b5442c07`: the row it was chartered to delete left the baseline at the schema-4 genesis `2a7fb033` (2026-08-10), the `bankable` channel the wave depended on no longer exists, and the schema-6 pair `2fe94f77` (code half) / `2b59122d` (genesis) re-froze the instrument so a fallen row now reds the walker by itself. Seven refutations, each re-derived at `b5442c07`, are recorded in the wave's own block. The one surviving clause — `M14`'s incomplete shrink instruction — landed as a message-only micro-act in `tests/lint/observedShapeReaders.walker.test.js`; its CLI half is PARKED as `SCW-1b`.
+> - 2026-08-12 — **Wave 0 LANDED at `d648e788`** (packet `SCW-0`), minting the enforcement layer the later waves are graded against.
 > - 2026-08-07 — **Wave 9 SIGNED by the owner** ("I permit it"); blocker `B4` cleared. All 9 waves are now authorized. Still **0 of 9 landed** — every wave remains blocked on `B1`/`B3` (the shared worktree and the single vitest slot).
 > - 2026-08-07 — program opened at HEAD `2c1ec70f` (branch `claude/composite-r4`), plan+audit committed at `2e6d872f`. 22 confirmed findings across 5 lenses. 0 of 9 waves landed.
 
@@ -31,6 +34,11 @@
 > stay green. That is wrong and is superseded by finding `M12`. TCD-1/TCD-2/TCD-3 were
 > already banked by the `ec525a59` re-freeze; **only TCD-4's row is stale** (measured:
 > HEAD scans `violations 0 stale 0 bankable 1`). Wave 1's scope is one row, not four.
+>
+> ⛔ **AND THAT CORRECTION IS ITSELF SUPERSEDED, 2026-08-12.** TCD-4's row is not stale
+> either — it left the baseline at `2a7fb033`, and the `bankable` reading quoted above
+> cannot be reproduced because the channel no longer exists. Wave 1's scope is **zero**
+> rows and it is DISCHARGED. Read the Wave 1 block, not this paragraph.
 - **Commits** — TCD-1 `9ecec2a2` · TCD-2 `b19038ec` · TCD-3 `3800bcb6` · walker freeze `1d3cdf73` · re-freeze `ec525a59`/`bd5e49f6` · **TCD-4 `2c1ec70f`** (the trigger) · pre-TCD-4 tree `94962c17`.
 - **Reusable probes** (outside the repo, read-only) — `/tmp/sca-probes/lens1-*.mjs` (predicate collisions, 1008-settlement blast), `lens2-*.mjs` (462-settlement corpus + attribution + cure simulation), `lens3_*.mjs` (law surface, resource compatibility, option A/B/C/D measurement), `lens4-*.mjs` (substrate, scene, fixtures), `lens5/scan-head.mjs` + `lens5/bank-sim.mjs` with saved scans `out.json` / `out-head.json` / `out-pre.json`.
 - **Governing text** — `docs/DESIGN_SETTLEMENT_MAP.md:356-361` (§12b, the REALM-COHERENCE law and the `mines⇒slopes / fisheries⇒water / peat⇒marsh / salt⇒flats` licence) · `docs/DESIGN_TOWN_CARTOGRAPHY.md:29-31` · `src/domain/townMap/siteGenesis.js:8-11`. Repo-wide grep for `realm-coherence` returns **7 hits in 3 files** — that is the entire declared law surface.
@@ -82,30 +90,68 @@
 - **Golden churn** none (new fixture minted, no existing manifest touched).
 - **Risk** low. The corpus build costs wall-clock inside vitest; if it exceeds the per-test budget, dump the corpus once to a fixture and read it (the pattern `OSR_CORPUS` already uses).
 
-## Wave 1 — Bank the stale reader-walker row (ITEM A) — **BLOCKED**
+## Wave 1 — Bank the stale reader-walker row (ITEM A) — ⛔ **DISCHARGED 2026-08-12, NOT LANDED**
 
-**Purpose** Close the revert door that `M11` proves is open.
+**DISCHARGED-BY `2a7fb033`** (the schema-4 genesis, 2026-08-10), with the closure re-frozen by the
+schema-6 pair **`2fe94f77`** (code half) / **`2b59122d`** (genesis). Terminal status **`SUPERSEDED`**;
+the nine-wave numbering is unchanged. **Nothing landed for this wave and nothing is owed.** The
+2026-08-11 correction to the old deliverable (now struck, see below) ordered every figure re-derived
+at compile time; a lane did exactly that at `b5442c07` on 2026-08-12, and **the re-derivation
+returned the empty set** — including that correction's own surviving clause, *"re-confirm the row is
+still the only bankable one before editing"*, which is the clause that refuses the wave.
 
-- **Findings** `M11`, `M12`, `M13`, `M14`, `M16`.
-- **Deliverable** A **three-value hand edit of `scripts/.observed-shape-readers-baseline.json` only.** No `--write`, no other file:
-  1. `:1356` — delete the line `"exports on economicState": 2,` (the row becomes `{"biome on config": 2, "severity on scars": 2}`; both are still live).
-  2. `:38` — `"total": 3261` → `3259`.
-  3. `:39` — `"identities": 2168` → `2167`.
+**Purpose (historic)** Close the revert door that `M11` proved open. That door is closed, and the
+closure is now carried by the walker itself rather than by anything this wave would have done.
 
-  ⛔⛔ **THE THREE LITERAL ADDRESSES AND FIGURES ABOVE ARE STALE — corrected 2026-08-11 per chair order, session `c42c8924`. DO NOT APPLY THEM.** They are SCHEMA-2-era values. The live baseline at this HEAD is `"schema": 5`, `"total": 1977`, `"identities": 1396`, `"frozen": "2026-08-11"`, `"frozenAtSha": "aed0fc0e4a060d076c3e6e68b199fc22aa7aa06a"` — measured in `scripts/.observed-shape-readers-baseline.json` — and every line address above has rotted with the schema-3/4/5 mints. Applying the literals would corrupt the envelope and red the walker.
-  ⭐ **A Wave-1 lane MUST RE-DERIVE the row address, the row's multiplicity, and both totals from the live file AT COMPILE TIME.** Only the SHAPE of the edit survives: delete the one bankable identity row; decrement `total` by exactly that row's multiplicity; decrement `identities` by exactly one; leave `schema`, `frozen`, `frozenAtSha`, `minRows`, `corpusMeta`, `scanStats` and `sentinel` untouched. Re-confirm the row is still the only bankable one before editing — the sentinel and drift figures below are schema-2 measurements too and must be re-measured, not inherited.
-  ⭐ **Wave 0 is UNAFFECTED by this correction.** Its deliverables (`tests/lint/siteCoherenceRatchet.test.js`, `tests/fixtures/.site-coherence-baseline.json`, `tests/lint/exportTokenCoverage.test.js`, `scripts/hazard-registry.json`) carry no observed-shape figure, so its exit criteria stand exactly as written.
+**The seven refutations — each re-derived at `b5442c07`, 2026-08-12:**
 
-  Leave `schema`, `frozen` (`"2026-08-07"`), `frozenAtSha` (`"ec525a59"`), `minRows`, `corpusMeta`, `scanStats` and `sentinel` **untouched**. The sentinel's 90% floors absorb the `resolvedReads` drift (12433 frozen vs 12429 at HEAD; floor 11189). ⚠ *(This sentence's parenthesised values are the schema-2 measurement superseded by the correction above.)*
-  Also: add the two missing sentences to `check-observed-shape-readers.mjs:144-146` and the baseline `_doc` — that a shrink requires adjusting `total` and `identities`, and that `--write` requires `OSR_FREEZE_SHA` or it writes `frozenAtSha: null` and reds the walker.
-- **⛔ Do NOT run `--write`.** On this worktree it would add 2 files and 3 identities belonging to other lanes, re-baseline the anti-vacuity sentinel, and rewrite the freeze provenance (`M13`).
-- **Gate** fast (`npx vitest run tests/lint/observedShapeReaders.walker.test.js`) — **only after the blocker clears**, see the ledger. Then full.
-- **Verify (the mutant, both directions)**
-  - Materialized HEAD `2c1ec70f`: `node scripts/check-observed-shape-readers.mjs` → `violations 0 stale 0 bankable 0`.
-  - Materialized `94962c17` (pre-TCD-4) against the banked baseline: exit 1 naming `NEW exports on economicState — 2 read(s); this file has no frozen row for it (ceiling 0)`.
-- **Exit criteria** Both scans above produce exactly those strings, quoted verbatim in the wave report. A `git revert 2c1ec70f` on a materialized tree **reds** the walker where today it is green.
-- **Golden churn** none.
-- **Risk** low, but note: `node scripts/check-observed-shape-readers.mjs` on the *live* tree will still exit 1 on the three foreign-lane violations (`M15`). That is **not** this edit. The clean receipt is a materialized-tree scan.
+1. **The deliverable has no subject.** `src/domain/townMap/townLayoutV2.js`'s whole frozen row is
+   `{"biome on config": 2}`; `"exports on economicState"` left the file at `2a7fb033`. Traced across
+   all ten re-freezes from `2c1ec70f` (schema 2, total 3261 / identities 2168 / 551 files) to HEAD
+   (schema 6, total 1954 / identities 1381 / 381 files). The edit's *shape* is well-formed and has
+   no argument.
+2. **The `bankable` channel — the reason the wave exists — is gone.** `grep -c bankable
+   scripts/check-observed-shape-readers.mjs` → **0**. Schema 4 replaced the report-only arm with a
+   refusal: a row whose file vanished or whose multiplicity fell is a `STALE ROW`, and `run()`
+   returns **1**. There is no channel left in which a row can sit unbanked.
+3. **The revert door is closed, and the walker holds it closed.** `compare()` reads an absent row as
+   `ceiling 0`, so a restored read arrives as `NEW … (ceiling 0)` — growth, not a shrink — and the
+   walker asserts `{violations: 0, stale: 0}`. The identity is still inventoried in five other files,
+   so it survives all four schema-6 post-filters and no filter can hide it.
+4. **Owner-queue row #4 is discharged structurally** and must not be implemented — see that row.
+5. **`M16` is dead.** `OSR_FREEZE_SHA` occurs **nowhere** in `scripts/` or `tests/`. The freeze sha is
+   derived from the subject sha, and `--write` additionally requires a clean input snapshot over
+   `src`, the baseline and all eleven governed scanner paths.
+6. **`M13` is half-dead.** `--write` is no longer a whole-tree amnesty: growth and identity swaps
+   throw, a detector-digest change throws, and a schema mismatch throws unless `--migrate-schema` is
+   passed with a reviewed migration bundle. Its only residual truth is that no `--bank` helper exists.
+7. **`M15`'s blocker `B2` is moot at this tree** — neither foreign file carries uncommitted work; see
+   the blocked-on ledger, where `B1` and `B2` are both CLEARED.
+
+**What survived, and where it went.** `M14` alone, and at HEAD it is sharper than the audit recorded:
+the incomplete shrink instruction now leads into a **hard throw in `validateLeafBaseline`**
+(`scripts/lib/observed-shape-baseline.mjs`), not a walker static-test red, so every consumer of the
+baseline dies and the CLI cannot reach the scan to explain itself. Its **gate-facing half is CURED**
+— the SHRINK-ONLY assertion message in `tests/lint/observedShapeReaders.walker.test.js` now carries
+the whole legal act: a lawful shrink is the governed `--write` re-freeze on a clean tree, which
+re-derives `inventory`, `total` and `identities` from one scan together, **never** a hand-edit of
+individual rows. Its **CLI half is PARKED as `SCW-1b`** — see Deferred.
+
+**⛔ STRUCK — do not apply, do not re-chase:**
+
+- The **three-value hand edit** of `scripts/.observed-shape-readers-baseline.json` — both the
+  schema-2 literals (`:1356` / `:38` / `:39`) and the 2026-08-11 re-derive-at-compile-time shape that
+  replaced them. There is no row to delete, and under schema 6 **the baseline is not to be hand-edited
+  at all**: the governed `--write` re-freeze is the only lawful path.
+- The **two materialized-tree exit criteria** (`2c1ec70f` and `94962c17`). They name schema-2 shas
+  whose trees carry the schema-2 scanner *and* the schema-2 baseline, so the recipe is no longer
+  coherent at any schema this repo runs.
+- The **`--write` / `OSR_FREEZE_SHA` documentation sentence** (refutation 5) — it would document a
+  variable that does not exist.
+- ⭐ **Wave 0 was UNAFFECTED** by any of this and LANDED at `d648e788`; its deliverables carry no
+  observed-shape figure.
+- `M11`, `M12`, `M13` and `M16` are annotated **SUPERSEDED** in `docs/SITE_COHERENCE_AUDIT.md`;
+  `M14` stays live there with the validator-throw note.
 
 ## Wave 2 — Single-writer export semantics (data layer; byte-identical)
 
@@ -205,8 +251,16 @@
 
 ## Sequencing rationale
 
-1. **Wave 0 first** because every later exit criterion is a *number*, and there is no instrument today. The audit measured the baseline with throwaway probes outside the repo; that evidence dies with the session unless it is banked as a ratchet.
-2. **Wave 1 early** because it is independent of everything else, is a three-value JSON edit, and closes a door that is provably open right now — a `git revert 2c1ec70f` is green on today's gate.
+⚠⚠ **EVERY WAVE BELOW RE-VERIFIES ITS OWN PREMISES AT COMPILE TIME — WAVE 1'S WERE DEAD.** This plan
+was written at `2c1ec70f` (2026-08-07). Wave 1 was discharged on 2026-08-12 because four of its five
+findings had gone dead underneath it while the plan still read as open work, and its deliverable had
+no subject at all. Waves 2–8 carry the same exposure: every line address, figure, token list and
+"today it does X" claim below is a `2c1ec70f`-era measurement. A compiling lane re-derives them from
+live code and **reports the delta before writing a line of the change** — where this document and the
+code disagree, the code wins.
+
+1. **Wave 0 first** because every later exit criterion is a *number*, and there is no instrument today. The audit measured the baseline with throwaway probes outside the repo; that evidence dies with the session unless it is banked as a ratchet. ✅ **LANDED `d648e788`.**
+2. ~~**Wave 1 early** because it is independent of everything else, is a three-value JSON edit, and closes a door that is provably open right now — a `git revert 2c1ec70f` is green on today's gate.~~ ⛔ **STRUCK 2026-08-12.** The door was closed by `2a7fb033` and a revert is no longer green; there is no JSON edit and no sequencing claim left to make. Wave 1 is DISCHARGED — see its block.
 3. **Data before consumers**: Wave 2 (the vocabulary module) precedes Waves 3–5 (its consumers), which precede Waves 6–7 (consumers of the *site*), which precede Wave 8 (the assertions about all of it).
 4. **Wave 3 before Wave 4 — this is the non-obvious one.** `EXPORT_RULES` and the site arms are **first-match chains**. Measured: narrowing the water predicate alone moved 9/168 settlements `river → mountain-flank`, and Option B as a whole made flank-on-flat **worse** (15 → 19), because suppressing an earlier arm makes a later arm reachable. Land the guard first and the redistribution has nowhere incoherent to go.
 5. **Correctness assertions last (Wave 8)** per the program rule. An assertion written before the behaviour is right is an assertion written to the wrong shape, and the pin-vacuity family in this estate is entirely populated by pins authored ahead of their subject.
@@ -216,8 +270,8 @@
 
 | # | Wave | Blocked on | Exact check that clears it |
 |---|---|---|---|
-| B1 | **Wave 1** | The concurrent lane editing `tests/lint/observedShapeReaders.walker.test.js` (currently `M`, +129/−51, a scan-budget refactor that adds `expect(scansRun).toBe(2)`). Wave 1 touches only the JSON so there is no textual collision, but the walker must not be run under vitest while that lane is live. | `git status --porcelain tests/lint/observedShapeReaders.walker.test.js` returns **empty** **AND** `git log --oneline -1 -- tests/lint/observedShapeReaders.walker.test.js` names a commit newer than `2c1ec70f`. Then re-scan a materialized tree and confirm `townLayoutV2.js "exports on economicState"` is still the **only** bankable row before editing. |
-| B2 | **Wave 1 verification** (not the edit) | Foreign lanes holding `src/domain/worldPulse/commercialReasons.js` (`M` +11/−1) and `src/lib/spatialUsage.js` (`M` +43) — they produce 3 walker violations on the live tree (`M15`). | `node scripts/check-observed-shape-readers.mjs` on the **live** tree prints `violations 0`. Until then the only valid receipt is a materialized-tree scan (`/tmp/sca-probes/lens5/scan-head.mjs`, edit the `R` constant). Do **not** interpret the live red as your own. |
+| ~~B1~~ | ~~**Wave 1**~~ | ~~The concurrent lane editing `tests/lint/observedShapeReaders.walker.test.js`.~~ | ✅ **CLEARED 2026-08-12.** The file is clean and its newest commit `2fe94f77` is far newer than `2c1ec70f`; the scan-budget refactor it waited on has landed (`expect(scansRun).toBe(2)`). Moot in any case — Wave 1 is DISCHARGED. |
+| ~~B2~~ | ~~**Wave 1 verification** (not the edit)~~ | ~~Foreign lanes holding `src/domain/worldPulse/commercialReasons.js` and `src/lib/spatialUsage.js` (`M15`).~~ | ✅ **CLEARED 2026-08-12.** `git status --porcelain` names neither file; the tree carries no `src/` dirt, so a live-tree scan *is* a HEAD scan and the materialized-tree caveat is discharged. Moot in any case — Wave 1 is DISCHARGED. |
 | B3 | **Every wave's `quick`/`full` gate** | The single vitest slot. | `sh scripts/gate-mutex.sh` exits 0, `&&`-chained to the run in the same command. Never spell the check by hand — the `ps aux \| grep -c '[v]itest'` idiom self-matches and burns up to 40 minutes per gate. |
 | ~~B4~~ | ~~**Wave 9**~~ | ~~Owner signature (queue #1).~~ | ✅ **CLEARED 2026-08-07** — signed explicitly ("I permit it") in direct answer to the wave being put as the single open call. No blanket-sign-off carve-out reasoning was needed or used. Wave 9 remains blocked by `B1`/`B3` like every other wave. |
 
@@ -227,7 +281,9 @@
 - **Latent-but-unfired fragments in `asymmetrySources`** — `/ale/` (whALE, wholesALE, scALE), `/hop/` (sHOP, bisHOP), `/hide/`, `/meat/`, `/ore/`. Unfired against the stock 158-string vocabulary but **armed by `customTradeEndpointIntegration.js`**, which pushes arbitrary user strings into `primaryExports`. Covered by Wave 4/5's anchoring; the custom-content path itself was exercised by no probe in this audit. Recorded as an open question, not a finding.
 - **`townLayoutV2.js:269` tests `tradeAccess === 'coastal'`**, but `ConfigurationPanel.jsx:310-316` offers only `random_trade/road/river/port/crossroads/isolated/mountain_pass` — no UI path writes `'coastal'`, so the disjunct never fires for wizard-generated settlements. Dead-value observation, out of scope, deliberately not fixed here.
 - **Every v1-driven golden is structurally blind to this surface** — `buildTownMapModel(x, null)` never reaches `generateSite`. Not a defect; recorded so nobody expects `town-map-golden.json`, `town-map-style-golden.json`, `age-overlay-golden.json`, `town-cartography-dormancy-golden.json` or `spatial-consequence-dormancy-golden.json` to move in any wave.
-- **`bankable` is a report-only channel** (`check-observed-shape-readers.mjs:275`): the CLI prints *"1 row(s) bankable"* and returns **0**. This is why TCD-4's row sat unbanked. The structural cure is queued (owner queue #4); until it is signed, this is the ACCEPTED-with-a-reason status, and the reason is the one written in the source at `:193-197` — a ratchet that reds because another lane's fix landed is a ratchet people delete.
+- ~~**`bankable` is a report-only channel** (`check-observed-shape-readers.mjs:275`): the CLI prints *"1 row(s) bankable"* and returns **0**. This is why TCD-4's row sat unbanked. The structural cure is queued (owner queue #4); until it is signed, this is the ACCEPTED-with-a-reason status.~~ ⛔ **DISCHARGED by the schema-4 genesis `2a7fb033` (2026-08-10); re-verified at `b5442c07` on 2026-08-12.** The word `bankable` occurs **zero** times in the scanner. A row whose file vanished or whose multiplicity fell is now a `STALE ROW` and the CLI returns **1**, so there is no report-only channel and no unbanked state to accept.
+- ⏸ **`SCW-1b` — the CLI half of `M14`, PARKED with a named home: ride the next schema mint, never mint for prose.** The corrected shrink instruction still needs to reach `ratchetMessage`, the two `stale.push` STALE-ROW strings, and the generated `_doc` literal in `baselineOf` — all four inside `scripts/check-observed-shape-readers.mjs`, which is governed scanner path #3 of 11, so a byte there reds the OSR gate and costs a full schema mint (two commits, a corpus rebuild, a reviewed migration bundle). ⛔ Do not mint a schema for two sentences: fold these four edits into **the next mint that happens for a substantive detector reason**, where the genesis is paid for anyway. ⚠ Navigate by symbol (`ratchetMessage`, the two `stale.push` calls, the `_doc` literal in `baselineOf`) — line addresses rot with every mint. ⚠ The baseline's `_doc` is **generated, not authored**: a hand-edit of that array validates and is silently overwritten at the next mint.
+- **`M12`'s wider claim — do NOT re-chase it, and do NOT assume it survived** (chair decision CD-6, 2026-08-12). The audit's "31 `id on factions` reads across 15 files are live pre-existing debt, not TCD-1 residue" was measured at schema **2**, against a 551-file / 2,168-identity inventory. At schema 6 the inventory is 381 files / 1,381 identities — roughly 40% of what it was — and four post-filters now narrow the detector's output. The claim is neither confirmed nor refuted here; it is an open question for whoever next touches the OSR programme, and it is out of this program's scope in either direction. See the `M12` annotation in `docs/SITE_COHERENCE_AUDIT.md`.
 - **Option D (bounded local features)** — millpond/spring/cistern/wadi instead of a realm-scale river; quarry scar instead of a mountain flank. Genuinely new capability, requiring new mark vocabulary in `generateLandform` (`:109-198`). Queued, not deferred (owner queue #2).
 
 ## Owner-decision queue
@@ -239,5 +295,5 @@ Recorded per the judgment-ledger rule: each row carries a recommendation so a ve
 | 1 ✅ | **Wave 9** — gate `marshlands` and `coal_deposits` by terrain. **SIGNED 2026-08-07.** | Changed every future seed's economy (dossier, PDF, journal, economics tab), un-revertable for campaigns generated in the window. | ~~SIGN.~~ **ACCEPTED by the owner.** Measured 47→30 alone, 47→13 with Wave 4; the only fix that makes the *dossier* coherent, not just the map, reusing the `fishing_grounds` machinery. Now an execution item, no longer a question. |
 | 2 | **Option D** — export-implied water becomes a bounded local feature (millpond/spring/cistern/wadi); export-implied slope becomes a quarry scar; provenance names the export that justified it. | New capability, not repair. | **DEFER to after the tail.** It is the only option that preserves the design's actual intent ("the economy should be visible in the stone") while keeping the site a zoom-in of the realm — but it is a feature, and TUNING IS LAST. |
 | 3 | **The `coast` arm** — `sm1-8` (town/hills) and `sm1-17` (town/forest) resolve `siteKind='coast'` on non-coastal biomes via `water:true` + `tradeRouteAccess:'coastal'`. A guard here would move 2/20 golden configs and re-mint five manifests. | Golden churn on the shared v2 corpus + a judgment about whether a trade lane may override a biome. | **ACCEPT as-is.** A declared coastal trade lane is a dossier fact, not an export accident; the realm-coherence law licenses lane-derived water. Record the acceptance so it is not re-found. |
-| 4 | **Make `bankable` fail the gate** (or assert `bankable` is empty in the walker test). | Machinery-vs-document call under the hazard-conversion law; changes gate behaviour for every lane. | **SIGN.** Today a landed fix's ceiling stands forever while the gate prints the words and returns 0 — this is exactly the PARTIAL status that hides. Pair it with a `--bank` flag so the cure does not push people toward `--write`. |
+| 4 ✅ | ~~**Make `bankable` fail the gate** (or assert `bankable` is empty in the walker test).~~ **DISCHARGED 2026-08-12 — already true, do not implement.** | Machinery-vs-document call under the hazard-conversion law; changes gate behaviour for every lane. | ⛔ **CLOSED AS DISCHARGED, not built.** Both halves of the ask are already true at `b5442c07`: the CLI returns **1** on a stale row (the report-only arm was replaced at `2a7fb033`), and the walker asserts `stale` is empty. The `--bank` rider is **DECLINED** — a flag would become an eleventh governed scanner path, a byte in which reds the OSR gate and needs a schema mint, for an act the governed `--write` re-freeze already performs. ⚠ Owner-visible: this closes a row the owner signed, recorded as a discharge rather than a silent removal, so a veto is a one-word answer. |
 | 5 | **FYI, not a gate** — Wave 6 extends `substrateSignatureOf` rather than bumping `SUBSTRATE_VERSION`. One-time re-derivation of every canonized campaign's persisted substrate; revertable in both directions. The version-bump alternative is **not** revertable (reverted code would reuse rows written under the bumped sig). | Persisted `worldState`. | **Proceed with the signature extension.** Flagging the one-time shift per the behaviour-shift rule. |

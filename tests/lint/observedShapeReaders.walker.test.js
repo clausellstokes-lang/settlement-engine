@@ -376,9 +376,15 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     const { violations, stale } = compare(live.findings, baseline);
     // The counts assert FIRST so a red here is readable: the arrays hold whole
     // multi-line ratchet messages and their diff is unreadable at scale.
+    // ⛔ THE CURE FOR A RED HERE IS THE GOVERNED RE-FREEZE, NEVER A HAND-EDIT: `baselineOf` derives
+    // `inventory`, `total` and `identities` from ONE scan, together. The message carries the rest.
     expect(
       { violations: violations.length, stale: stale.length },
-      'the live heuristic inventory must exactly match the frozen one',
+      'the live heuristic inventory must exactly match the frozen one. A lawful shrink is'
+      + ' `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives'
+      + ' inventory, total and identities together and refuses anything that is not a shrink.'
+      + ' NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent"'
+      + ' out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).',
     ).toEqual({ violations: 0, stale: 0 });
     expect(violations).toEqual([]);
     expect(stale).toEqual([]);
