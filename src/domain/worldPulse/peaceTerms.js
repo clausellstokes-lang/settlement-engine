@@ -119,6 +119,15 @@ import { executeTreatyConveyances } from './sovereigntyTransfer.js';
 // GR-1 — THE SIGNATURE LINE. The one writer of `sworn`, stamped at the mint loop where
 // both roads meet. Dark ⇒ the record gains no key (drop-when-absent, T4).
 import { stampSworn } from './oathHolder.js';
+// GR-4a — THE SUCCESSION ANSWER, and the frozen breach vocabulary its shell guard now
+// asks against. The answer runs at the HEAD of this mover, which is the only position in
+// the pulse that sees BOTH seat-transition writers: the applied government-change fold at
+// pulse 1429 and the ladder mover at 2563 both land before this stage at 2580. Any earlier
+// mount is half-blind — it would see government changes and miss every organic
+// coup/challenge/succession/vacancy. Dark ⇒ the same reference back, so the compare below
+// is untouched and the mover returns its caller's own state.
+import { answerSuccessionQuestions } from './treatyBreach.js';
+import { isRepudiationBreach } from './treatyBreachTypes.js';
 // GR-0 — THE LIFECYCLE VOICE. The two moments this mover has always executed in silence:
 // the prune that retires a spent instrument, and the tick a court's OBSERVED compliance
 // first crosses out of honored. Composition lives entirely in the leaf, so the head pays
@@ -300,6 +309,14 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   }
 
   const prevLedger = treatyLedgerOf(worldState);
+  // GR-4a — THE SUCCESSION ANSWER, before this tick's own passes read the ledger. Dark, or
+  // lit with every heir keeping the word, this is the SAME reference and `prevLedger` is
+  // also the live one, so the serialize-compare at the foot of this mover still returns the
+  // caller's untouched state. A disavowal writes through the family's declared rewriter, so
+  // `prevLedger` (pre-answer) and the seed below (post-answer) differ and `changed` is true
+  // — which matters, because the pulse discards this mover's state when it says otherwise.
+  let workingState = answerSuccessionQuestions(worldState, tick);
+  const liveLedger = treatyLedgerOf(workingState) || {};
   const edges = (graph?.edges && Array.isArray(graph.edges) ? graph.edges : null)
     || (Array.isArray(snapshot?.regionalGraph?.edges) ? snapshot.regionalGraph.edges : []);
   const threatByCid = buildThreatByCid(snapshot, worldState);
@@ -319,7 +336,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
 
   /** @type {TreatyLedger} */
   const nextLedger = {};
-  for (const key of Object.keys(prevLedger || {})) nextLedger[key] = deepClone(/** @type {TreatyRecord} */((prevLedger || {})[key]));
+  for (const key of Object.keys(liveLedger)) nextLedger[key] = deepClone(/** @type {TreatyRecord} */(liveLedger[key]));
 
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
@@ -331,7 +348,6 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   /** @type {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} */
   const dispositionDeltas = []; const dispositionChannelsActive = dispositionTreatyLearningActive(worldState);
   const lifecycleVoiceLit = treatyLifecycleVoiceActive(worldState);
-  let workingState = worldState;
   let workingSettlementUpdates = settlementUpdates;
   // The tick's conserved granary movements, accumulated across every stream term and
   // folded onto settlementUpdates ONCE at the end (the generosity mover's idiom): a
@@ -651,12 +667,17 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // until the terms' ORIGINAL horizon so treatiesForPair can feed the standing
     // treaty_default casus, then prune it as spent history. Never restore honored,
     // execute installments, or accrue ordinary payment strain on this branch.
-    if (String(treaty.breachType || '') === 'repudiation') {
+    if (isRepudiationBreach(treaty)) {
       const horizon = Number(treaty.breachExpiresTick);
       if (!Number.isFinite(horizon) || Number(tick) >= horizon) delete nextLedger[key];
       else {
         treaty.complianceState = 'defaulted';
-        treaty.defaultSeverity01 = 1;
+        // The BREACH's own recorded weight, not a re-assertion of 1. WR-0c's open
+        // repudiation always writes 1, so this is byte-identical for every record a world
+        // could hold before GR-4a; a succession disavowal is banded below 1 and graded by
+        // the kind of succession, and re-stamping it here would silently erase the grade
+        // that scoreTreatyDefault is meant to read.
+        treaty.defaultSeverity01 = Number(treaty.defaultSeverity01) || 1;
         treaty.terms = terms;
       }
       continue;

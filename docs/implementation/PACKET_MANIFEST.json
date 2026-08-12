@@ -694,7 +694,7 @@
       "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
       "changeManifest": [
         { "action": "CREATE", "path": "src/domain/worldPulse/treatyBreachTypes.js" },
-        { "action": "CREATE", "path": "src/domain/worldPulse/successionQuestion.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccession.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/treatyDisposition.js" },

@@ -3756,7 +3756,42 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time the only
     // other lane in this tree was docs-only (docs/implementation/**), with ZERO
     // foreign test files and zero foreign registration lines, tracked or untracked.
-    files: 2397, parked: 365, credited: 2032, titles: 19768, suiteTitles: 5578,
+    // ⭐⭐ GR-4a FOLD (2026-08-11) — RE-DERIVED AND RE-RECORDED WHOLE in the same commit
+    // that moves it, per the serialization law's rule 1 and CR-GR4-6. GR-4a holds this
+    // walker as its own TEST reservation; the chair confirmed it is the in-flight census
+    // holder of the four READY packets that all fold this one census.
+    // 2,397/365/2,032/19,768/5,578 → 2,398/365/2,033/19,793/5,585.
+    // CAUSE, DECOMPOSED — ONE new test file plus TWO new cases inside existing describes:
+    //   + 1 file, +1 credited, +23 titles, +7 suites … tests/domain/successionQuestion.test.js
+    //       (GR-4a's C1–C7 battery: seven describes, twenty-three straight-line cases)
+    //   + 0 files, +2 titles, +0 suites … tests/property/oathHolderDormancyFence.test.js
+    //       (FENCE 1 gains the succession fixture's dark-footprint arm and FENCE 3 the
+    //        `swornPartiesOf` counter — BOTH added INSIDE the existing FENCE 1 / FENCE 3
+    //        describes, which is why the suite layer cannot move and did not)
+    //   + 0 anything … tests/domain/pactAmendment.test.js (the two frozen-list arrays in an
+    //        EXISTING case gain a member each; no registration line was added or removed)
+    // 23 + 2 = 25 and 7 + 0 = 7, which is exactly 19,768 → 19,793 and 5,578 → 5,585 with
+    // NOTHING left over, and `parked` cannot move because no file gained or lost a park
+    // reason. ⭐ THE NEW FILE IS CREDITED, NOT PARKED, AND THAT WAS CHECKED RATHER THAN
+    // ASSUMED: its measured park reasons are `[]` and it contributes all 23 of its titles.
+    // That is the TC-5a trap (townCartographyPaint scored 0 live titles against 34 real
+    // tests on its first cut), and it is why every case in the new file registers
+    // straight-line with its loops INSIDE an `it` rather than around one.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE. (a) All five figures are LIVE readings from ONE
+    // run, printed by a temporary probe placed INSIDE this test BEFORE its first assertion
+    // — so the sequenced-census trap could not fire (the run did red on `files`, and had
+    // the figures come from the assertions the later three would never have been
+    // evaluated). (b) The new file's own vitest run reports exactly 23 passing tests, and
+    // its describes number 7; the fence's diff adds exactly two `it(` lines and no
+    // `describe(`. The two derivations agree on every figure.
+    // ⚠ THE SIX PRODUCTION EDITS IN THIS COMMIT CANNOT MOVE A FIGURE and were checked
+    // rather than assumed: they are src/, not tests/, so no test file gained, lost, parked
+    // or unparked a registration line.
+    // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time `git status`
+    // carried EXACTLY this packet's nine paths — six modified, three untracked — and ZERO
+    // foreign files of any kind, tracked or untracked. No other lane's uncommitted titles
+    // are frozen into this row.
+    files: 2398, parked: 365, credited: 2033, titles: 19793, suiteTitles: 5585,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

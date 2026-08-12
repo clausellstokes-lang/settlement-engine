@@ -44,9 +44,15 @@ const legacyTreaty = (terms) => ({
 
 describe('the closed vocabularies', () => {
   test('acts, endings and provenance are frozen and codepoint-ordered', () => {
-    expect(PACT_LINEAGE_ACTS).toEqual(['amended', 'broken_by_war', 'formed', 'war_ended']);
+    // GR-4a joins `disavowed_by_succession` to BOTH lists — an act because the heir's
+    // refusal is a thing the instrument had done to it, and an ending because it closes
+    // the instrument. Its producer is treatyBreach.js#repudiateTreaty's succession road.
+    expect(PACT_LINEAGE_ACTS).toEqual([
+      'amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'war_ended',
+    ]);
     expect(PACT_ENDINGS).toEqual([
-      'broken_by_war', 'expired_unanswered', 'no_overlap', 'refused', 'signed',
+      'broken_by_war', 'disavowed_by_succession', 'expired_unanswered', 'no_overlap',
+      'refused', 'signed',
     ]);
     expect(PACT_PROVENANCE).toEqual(['converted', 'dictated', 'negotiated', 'renewed']);
     for (const list of [PACT_LINEAGE_ACTS, PACT_ENDINGS, PACT_PROVENANCE]) {

@@ -6,6 +6,7 @@
  * an agreement reaching its horizon intact, or an oathbreaker first entering
  * default. It never infers a winner from somebody else's broken promise.
  */
+import { isRepudiationBreach } from './treatyBreachTypes.js';
 
 /** @typedef {{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number,
  *   sourceKind:'treaty_held'|'treaty_default'|'mediation_landed'}} TreatyDispositionDelta */
@@ -34,7 +35,10 @@ export function treatyDispositionDeltas(input) {
       sourceKind: 'treaty_default',
     }];
   }
-  if (input.outcome !== 'held' || String(input.treaty?.breachType || '') === 'repudiation') return [];
+  // A BROKEN shell reaching its horizon is not a treaty HELD, by either road: rewarding
+  // both courts for an instrument one of them tore up is the defect the frozen breach
+  // vocabulary exists to close. Strict superset of the literal this replaced.
+  if (input.outcome !== 'held' || isRepudiationBreach(input.treaty)) return [];
   const parties = [...new Set((Array.isArray(input.treaty?.parties)
     ? input.treaty.parties
     : [input.victorId, input.loserId]).map(String).filter(Boolean))].sort();

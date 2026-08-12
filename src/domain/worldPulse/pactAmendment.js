@@ -56,17 +56,21 @@ import { pactFormationActive } from './pactProposals.js';
  * awareness. GR-5's `renewed`/`converted` join this list in their own wave.
  * @type {readonly string[]}
  */
-export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'formed', 'war_ended']);
+export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'war_ended']);
 
 /**
  * THE CLOSED FORMATION ENDINGS (§GR-7's vocabulary). Every member has a producer in this
  * wave and the reachability pin names which: `signed` and `no_overlap` at the answer,
  * `refused` at a court's refusal, `expired_unanswered` at the dwell's end, `broken_by_war`
- * at the closure below.
+ * at the closure below. GR-4a adds `disavowed_by_succession`, produced by
+ * `treatyBreach.js#repudiateTreaty`'s succession road — the instrument's LINEAGE vocabulary,
+ * written by the ending act, which is why it joins this list and not the disjoint
+ * observation endings `treatyLifecycleVoice.js` exports under the same name.
  * @type {readonly string[]}
  */
 export const PACT_ENDINGS = Object.freeze([
-  'broken_by_war', 'expired_unanswered', 'no_overlap', 'refused', 'signed',
+  'broken_by_war', 'disavowed_by_succession', 'expired_unanswered', 'no_overlap',
+  'refused', 'signed',
 ]);
 
 /** The closed provenance vocabulary. Legacy-absent resolves to `dictated` AT READ. */

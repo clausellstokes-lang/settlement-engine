@@ -57,7 +57,7 @@ import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treat
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 
 /** FENCE 3's recorder. Hoisted, because `vi.mock` factories hoist above the imports. */
-const calls = vi.hoisted(() => ({ stampWriter: 0, seatReads: 0, durableLookups: 0 }));
+const calls = vi.hoisted(() => ({ stampWriter: 0, seatReads: 0, durableLookups: 0, swornReads: 0 }));
 
 vi.mock('../../src/domain/worldPulse/oathHolder.js', async (importOriginal) => {
   const actual = /** @type {Record<string, any>} */ (await importOriginal());
@@ -66,6 +66,13 @@ vi.mock('../../src/domain/worldPulse/oathHolder.js', async (importOriginal) => {
     stampSworn: (/** @type {any[]} */ ...args) => {
       calls.stampWriter += 1;
       return actual.stampSworn(...args);
+    },
+    // GR-4a's READ edge. Unlike `oathHolderOf`, this one really does cross a module
+    // boundary — the succession derivation lives in treatySuccession.js — so replacing
+    // the export here genuinely severs the call and the counter cannot read a false zero.
+    swornPartiesOf: (/** @type {any[]} */ ...args) => {
+      calls.swornReads += 1;
+      return actual.swornPartiesOf(...args);
     },
   };
 });
@@ -174,6 +181,75 @@ const darkCounters = { ...calls };
 const LIT = drive({ ...WAR, [FLAG]: true });
 const litCounters = { seatReads: calls.seatReads - darkCounters.seatReads, durableLookups: calls.durableLookups - darkCounters.durableLookups };
 
+// ── GR-4a — THE SECOND ROAD INTO THIS FLAG, AND ITS OWN DARK FOOTPRINT ────────
+//
+// The mint fixture above cannot fence the succession answer: the answer runs at the HEAD
+// of the treaty mover, before PASS 1 has minted anything, so on that drive there is no
+// parchment to read and a `swornPartiesOf` counter would read zero for the wrong reason —
+// the vacuous green this file exists to refuse. The second fixture below is adversarial in
+// the same way the first is: an ALREADY-STANDING stamped treaty whose signatory's seat
+// changes hands THIS tick, heavy enough that a lit world really does tear it up.
+const SUCCESSION_TICK = 44;
+const SUCCESSION_KEY = 'crown>march';
+
+/** @param {Record<string, unknown>} rules */
+function successionDrive(rules) {
+  const items = ITEMS();
+  const edges = EDGES();
+  const out = advanceTreaties({
+    snapshot: { settlements: items, byId: new Map(items.map((i) => [String(i.id), i])), regionalGraph: { edges } },
+    worldState: {
+      tick: SUCCESSION_TICK,
+      rngSeed: 'seed-gr4a-fence',
+      simulationRules: rules,
+      calendar: { elapsedWeeks: 34 },
+      deployments: {},
+      relationshipStates: {},
+      spatialLedgers: {
+        treaties: {
+          [SUCCESSION_KEY]: {
+            parties: ['crown', 'march'], victorId: 'crown', loserId: 'march', mintedTick: 0,
+            believedMarginAtSignature: 0.35, budgetGranted: 3, budgetSpent: 1,
+            complianceState: 'honored',
+            terms: [{
+              type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 0,
+              expiresTick: SUCCESSION_TICK + CURRENT_TREATY_TICKS_PER_YEAR, weightSpent: 1,
+              complianceState: 'honored', trueState: 'honored', burden01: 0.9,
+              receipt: 'tribute term', deliveredToVictor: 0, extractedFromLoser: 0,
+            }],
+            receipts: ['pin'],
+            sworn: { march: { npcId: 'npc_1', name: 'march the younger', swornTick: 4 } },
+          },
+        },
+        npcLadder: {
+          march: {
+            factions: {},
+            npcs: {},
+            seatTransitions: [{
+              id: 'st.march.gr4a', fromRulerId: 'npc_1', toRulerId: 'npc_2',
+              cause: 'coup', tick: SUCCESSION_TICK,
+            }],
+          },
+        },
+      },
+    },
+    settlementUpdates: [],
+    graph: { edges },
+    pIndex: null,
+    tick: SUCCESSION_TICK,
+    now: '2026-01-01T00:00:00.000Z',
+  });
+  return getSpatialLedger(out.worldState, 'treaties') || {};
+}
+
+const successionBaseReads = calls.swornReads;
+const SUCCESSION_ABSENT = successionDrive({ ...WAR });
+const successionDarkReads = calls.swornReads - successionBaseReads;
+const SUCCESSION_EXPLICIT_FALSE = successionDrive({ ...WAR, [FLAG]: false });
+const successionFalseReads = calls.swornReads - successionBaseReads - successionDarkReads;
+const SUCCESSION_LIT = successionDrive({ ...WAR, [FLAG]: true });
+const successionLitReads = calls.swornReads - successionBaseReads - successionDarkReads - successionFalseReads;
+
 describe('GR-1 dormancy — the fixture is adversarial', () => {
   it('the drive really mints, and really stamps when lit', () => {
     // Every fence below is worthless on a fixture that mints nothing. This is the anchor.
@@ -204,6 +280,21 @@ describe('GR-1 FENCE 1 — own-footprint invariant', () => {
     // anchored: the LIT serialization of this same drive is asserted to CONTAIN 'sworn' in the lit-mutant control below, so this token absence is measured against a projection proven able to carry it.
     expect(JSON.stringify(ABSENT)).not.toContain('sworn');
   });
+
+  it('GR-4a: the succession fixture is adversarial, and dark it answers nothing', () => {
+    // THE ANCHOR FIRST — lit, this exact drive really does tear the instrument up, so the
+    // three absences below measure the flag rather than a fixture nothing could move.
+    const lit = Object.values(SUCCESSION_LIT)[0];
+    expect(lit.breachType).toBe('succession_repudiation');
+    expect(lit.defaultSeverity01).toBeLessThan(1);
+    const dark = Object.values(SUCCESSION_ABSENT)[0];
+    expect(dark.complianceState).not.toBe('defaulted');
+    // anchored: the lit run of this same drive is asserted immediately above to carry breachType 'succession_repudiation', so the projection is proven able to hold this token.
+    expect(JSON.stringify(SUCCESSION_ABSENT)).not.toContain('succession_repudiation');
+    // anchored: the same lit run above is asserted to break the instrument, which is what appends the ending; the dark projection is the identical shape minus GR-4a's own act.
+    expect(JSON.stringify(SUCCESSION_ABSENT)).not.toContain('disavowed_by_succession');
+    expect(JSON.stringify(SUCCESSION_EXPLICIT_FALSE)).toBe(JSON.stringify(SUCCESSION_ABSENT));
+  });
 });
 
 describe('GR-1 FENCE 2 — absent vs explicit false', () => {
@@ -231,6 +322,18 @@ describe('GR-1 FENCE 3 — call-path dormancy', () => {
     // is the assertion that catches the recorded mock-interception trap.
     expect(litCounters.seatReads).toBeGreaterThan(0);
     expect(litCounters.durableLookups).toBeGreaterThan(0);
+  });
+
+  it('GR-4a: a dark tick never READS a stamp — swornPartiesOf is not called at all', () => {
+    // The state pins cannot see a feature that ran, read every parchment in the realm and
+    // happened to decide against writing. This can: the gate sits at the writer, ahead of
+    // the derivation, so dark the reader is never entered. Absent and explicit-false are
+    // counted separately, because "dark-never-permissive" is a claim about both.
+    expect(successionDarkReads).toBe(0);
+    expect(successionFalseReads).toBe(0);
+    // THE PAIRED NON-VACUITY ANCHOR — lit, the same drive really does read the parchment,
+    // so the two zeros above are dormancy rather than a spy that never intercepted.
+    expect(successionLitReads).toBeGreaterThan(0);
   });
 });
 
