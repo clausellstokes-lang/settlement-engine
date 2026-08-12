@@ -3,15 +3,20 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `ba219802c4f8c32c9e5cf13140e4b3911bd9728b`
-- **Measured:** 2026-08-12 — **re-derived at the IN-1a promotion.** The previous header
-  carried `32f4e520` from the GR-4b promotion, and was stale by event: `5f687277` (the
-  test-ratchet re-freeze, 17 rows to 16 by cure), `dd457b9a` (GR-4b-alpha), `b5442c07` (its
-  flip) and `ba219802` (SCW-1 DISCHARGED) all landed after it. ⚠ **IN-1a's own base moved
-  mid-promotion:** it was compiled at `b5442c07` and is pinned at `ba219802`, admitted as an
-  **unchanged descendant** by an executed `git log b5442c07..HEAD` over every substrate path
-  in its §3 and §7, which returned empty. **The index header is stamped by event; git is the
-  existence authority.**
+  `b17d32d2abc7a1a18e07f10f661421a0ce8d601b`
+- **Measured:** 2026-08-12 — **re-derived at the IN-1b promotion.** The previous header
+  carried `ba219802` from the IN-1a promotion and was stale by event: IN-1a LANDED at
+  `5bf06481` and its flip landed `b17d32d2`. IN-1b was compiled at `b17d32d2` and is pinned
+  there — **no mid-promotion base move this time**, proved by an executed `git rev-parse` and
+  an empty `git diff HEAD` at both the measurement and the landing.
+  ⭐⭐ **ONE PROMOTION-TIME MEASUREMENT CHANGED A PACKET, AND IT IS THE THING TO CARRY
+  FORWARD.** IN-1b's draft carried a DELEGATED figure of *"~582 effective lines, roughly
+  eighteen of headroom"* for `src/components/OutputContainer.jsx` and budgeted a six-line edit
+  against it. The chair ordered the measurement EXECUTED at promotion; it reads **599 of a hard
+  600 — one line of headroom, wrong by seventeen in the dangerous direction**. The promotion
+  STOPPED, and CR-IN1B-7 re-shaped the wiring to cost **zero** effective lines. **The index
+  header is stamped by event; git is the existence authority; and a delegated line count is not
+  a measurement.**
 - **Packet law:** [`PACKET_STANDARD.md`](./PACKET_STANDARD.md)
 
 ## Dispatch rule
@@ -49,7 +54,8 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-18 | [`SCW-0`](./packets/site-coherence/SCW-0.md) | **LANDED** at `d648e788`; do not redispatch | Site Coherence Wave 0 — the enforcement layer, **instruments only**: the identity-keyed `(terrain, siteKind, decisive-token)` contradiction ratchet over the frozen 462-settlement corpus, the export-predicate liveness census with its `KNOWN_INERT` quarantine, and the hazard registry's repair plus a new `HZ-SITECOHERENCE` MACHINERY class. ⭐ It touches **zero `src/` files** and mints no output; its whole deliverable is the ability to state Waves 1–9 as numbers the repository re-derives. ⚠ Its exit criterion was changed at CR-SCW0-6 from *reproduce the audit exactly* to **re-derive and report against**, because five generation-touching commits — one a declared same-seed correction — have landed since the audit's HEAD. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | every correctness assertion (Wave 8), Waves 1–9 entire, `scripts/.observed-shape-readers-baseline.json` (Wave 1), `exportSemantics.js` (Wave 2), all of `src/**`, `scripts/mutation-sweep.sh`, every golden and every ceiling raise |
 | LANDED-19 | [`ES-Da`](./packets/foreign-policy/ES-DA.md) | **LANDED** at `6dbb76c2`; do not redispatch | The composite rider: covert cargo on an already-accepted peace envoy — one pure leaf plus a ≤15-line composition, so a lawful `covert` sub-record rides the errand row the war lane was already minting. Nothing new travels, nothing new is scheduled, no stage is added. ⭐ **The only compilable espionage slice at this HEAD**, and the argued split out of the ES-7 and ES-D refusals, both of which stay refused. It is the first production caller of the orphaned `espionageDoctrineStage.js`, so it wakes ES-5a's doctrine half at zero extra cost. ⛔ Built DARK; the dark path is byte-identical **by construction**, and any motion in that golden is a STOP. ⚠ Authority is `OWNER_DECISION_QUEUE.md` §17 disposition 5 on the **ledger** branch, which a build-branch reader cannot open — the conditions are restated in full inside the packet. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any dispatcher (ES-7 stays refused), any Herald kind or routing row, the vetting band (ES-6b has no producer and is not released), multi-stop routes, `mintCovertMission` and `castCovertOperative` (both stay dead), any new persisted key or ledger, lighting the flag |
 | LANDED-20 | [`GR-4b`](./packets/foreign-policy/GR-4B.md) | **LANDED** at `dd457b9a` (α scope per CR-GR4B-8); do not redispatch | The succession road's voice: one pure GRAMMAR leaf plus a widened return on GR-4a's own applier, so a torn-up oath is spoken once by the road that broke it — naming both courts, the hand that swore, and the recorded reason. ⭐ **`peaceTerms.js` pays ZERO net effective and ZERO net raw lines**: both edit sites are one-line-for-one-line replacements, which is what makes a mount possible in a file sitting at 797 of a ceiling of 800 with no baseline entry and no door. ⚠ **GR-4b as chartered was refused in part and split three ways:** of the five authored voice surfaces, only the disavowal has an honest producer at this base; `succession_question_opened`, `honored_by_silence` and the dossier line `succession_question_open` all describe a question standing open across ticks, which GR-4a answers inside a single expression, so their authored prose would be untrue the instant it minted — all three plus `reaffirmed` re-file behind GR-4d. ⛔ **Two budget rows carry an explicit pre-dispatch override (CR-GR4B-2)** — registration-only production files 3 → 5 and handwritten files 12 → 14 — because a Herald DESK kind costs five mechanical registration rows and that cost is per-desk, not per-kind. ✅ **CR-GR4B-3's annex correction is discharged in the promotion commit**, not owed: the `disavowed_by_succession` exemplar's `{npc}` is re-slotted to the fallen holder (the successor's name is on no surface the treaty stage can read) and `repudiated`'s unfillable `{reason}` is struck; `docs/content/RECEIPT_POOLS_GRAMMAR.md` is a forbidden file for the implementer. ⭐ It **was** the sole in-flight holder of the estate-wide lighting-census walker; ⚠ **DATED CORRECTION 2026-08-12 — that clause is HISTORY**: this packet is terminal, a terminal packet reserves nothing, and `IN-1a` holds the row now. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the three open-question kinds and `reaffirmed` (GR-4d, then GR-4b-ii / GR-4b-iii), any credibility delta or the `credibility_charge` pool and the fracture-charge dead-window re-derivation (all GR-4c), the lit-mode queue and its per-type terminal (GR-4d), any dossier line or `treatyDocument.js` edit, any treaty-ledger write or new persisted key, a tenth kind registry, `treatyLifecycleVoice.js`, `treatySuccession.js`, `pactAmendment.js`, `oathHolder.js`, `scripts/.size-baseline.json`, and any further edit to the receipt-pool annex |
-| LANDED-21 | [`IN-1a`](./packets/foreign-policy/IN-1A.md) | **LANDED** at `5bf06481`; do not redispatch | The mirror itself: one pure, flag-gated leaf answering *"what does our own durable record say that court has been shown of us?"* — a frozen closed banded shape whose confidence degrades on our own first-person evidence that they know things we never showed them. ⭐ **It composes SP-B's landed `outboundImpression.js` (`4c0f2f38`) and re-derives not one line of it**; no IN design document named that leaf, so a lane reading only the IN volume would have hand-rolled a second derivation, and the dated correction lands with this promotion. ⚠ **IN-1 was refused as chartered and split three ways at CR-IN1-1** — it carries three behavior families against a budget of one, its receipt half is headed for a Herald knowledge desk that does not exist (`HERALD_SECTIONS` is still the frozen six), and three of its seven input families have no durable record; IN-1b (the dossier standing line) and IN-1c (the hums) are named, dependency-ordered behind it, and compiled just-in-time. ⭐ **Producer-first, on the ES-7 precedent**: after this packet the mirror has ZERO production callers, so the dark path is byte-identical **by construction** in BOTH flag states. ⛔ The K3 fence is STRUCTURAL, not an allow-list: the legal and forbidden belief reads are one function with swapped arguments, so the derivation never receives `worldState` at all. ⭐ **It is the sole in-flight holder of the estate-wide lighting-census walker** — measured free at promotion, since every other packet is terminal. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the dossier standing line, its DM expansion and the RENDERED-surface phrase scan (IN-1b); `mirror_shift` / `mirror_confidence_degraded`, the interim-desk declaration and the INFORMATION kind registry / receipt-pool module / annex URL (IN-1c); the seventh input family, WR-7b's negotiation pictures (deferred at CR-IN1-2); any durable outbound-transfer record (a new persisted family, refused at CR-IN1-7); any new tuning key (CR-IN1-4); `informationStatecraft.js`, `outboundImpression.js`, `pulseKernel.js`, `applyWorldPulse.js`, `heraldRouting.js`, every baseline and every ceiling raise |
+| LANDED-21 | [`IN-1a`](./packets/foreign-policy/IN-1A.md) | **LANDED** at `5bf06481`; do not redispatch | The mirror itself: one pure, flag-gated leaf answering *"what does our own durable record say that court has been shown of us?"* — a frozen closed banded shape whose confidence degrades on our own first-person evidence that they know things we never showed them. ⭐ **It composes SP-B's landed `outboundImpression.js` (`4c0f2f38`) and re-derives not one line of it**; no IN design document named that leaf, so a lane reading only the IN volume would have hand-rolled a second derivation, and the dated correction lands with this promotion. ⚠ **IN-1 was refused as chartered and split three ways at CR-IN1-1** — it carries three behavior families against a budget of one, its receipt half is headed for a Herald knowledge desk that does not exist (`HERALD_SECTIONS` is still the frozen six), and three of its seven input families have no durable record; IN-1b (the dossier standing line) and IN-1c (the hums) are named, dependency-ordered behind it, and compiled just-in-time. ⭐ **Producer-first, on the ES-7 precedent**: after this packet the mirror has ZERO production callers, so the dark path is byte-identical **by construction** in BOTH flag states. ⛔ The K3 fence is STRUCTURAL, not an allow-list: the legal and forbidden belief reads are one function with swapped arguments, so the derivation never receives `worldState` at all. ⭐ It **was** the sole in-flight holder of the estate-wide lighting-census walker; ⚠ **DATED CORRECTION 2026-08-12 — that clause is HISTORY**: this packet is terminal, a terminal packet reserves nothing, and `IN-1b` holds the row now. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the dossier standing line, its DM expansion and the RENDERED-surface phrase scan (IN-1b); `mirror_shift` / `mirror_confidence_degraded`, the interim-desk declaration and the INFORMATION kind registry / receipt-pool module / annex URL (IN-1c); the seventh input family, WR-7b's negotiation pictures (deferred at CR-IN1-2); any durable outbound-transfer record (a new persisted family, refused at CR-IN1-7); any new tuning key (CR-IN1-4); `informationStatecraft.js`, `outboundImpression.js`, `pulseKernel.js`, `applyWorldPulse.js`, `heraldRouting.js`, every baseline and every ceiling raise |
+| READY-22 | [`IN-1b`](./packets/foreign-policy/IN-1B.md) | **READY** | The dossier standing line: the mirror's first production consumer, and the act that closes the orphan window IN-1a deliberately opened. One pure read-model under `src/domain/display/` composes `mirrorInputsAt` + `secondOrderMirrorOf` into one row per counterpart, and the Relationships / Neighbours surface gains a block under *"What the neighbours have been shown"* — band words in record voice, never a perception verb, with a DM-only `<details>` expansion to the deriving record. ⭐ **It ends IN-1a's both-states byte-identity LEGITIMATELY, in the same commit that ends it**: three live dormancy assertions are NARROWED rather than deleted, on the ES-3 template, and the surviving claim is driven by a rendered-surface dark golden rather than asserted. ⭐ **The read-model's home is ruled and it costs nothing**: `src/domain/display/` sits outside the coupling census's scope regex, so the leaf mints no layer claim, no cross-layer pair and no registry row, and the unlayered baseline at exactly 179 is untouched. ⛔⛔ **`src/components/OutputContainer.jsx` MEASURES 599 OF A HARD 600 — one effective line of headroom, EXECUTED at promotion against a delegated draft figure of ~582 that was wrong by seventeen lines.** The drafted six-line edit did not fit; the promotion STOPPED and **CR-IN1B-7 re-shaped the wiring to PROPS-ONLY at ZERO effective lines**, on the landed `'rumors'` shape one switch case above. That file now joins `peaceTerms.js` on the **HOT-FILE LIST** (packet §3.11): any packet naming either one opens with an executed headroom measurement and a net-zero edit shape. ⚠ Six draft-open items are closed by **CR-IN1B-1..7** — band-word composition with the authored pool deferred to IN-1c, the DM gate composed inside the tab from props with no new premium comparison, the British sentence-cased heading, the line on both views with the whole block suppressed on a public dossier, the replacement invariant name, and the seventh input family deferred again. ⭐ It is the sole in-flight holder of the estate-wide lighting-census walker — re-measured free at promotion, since IN-1a landed and every other packet is terminal. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | `mirror_shift` / `mirror_confidence_degraded`, the Herald beats, the interim-desk declaration and the INFORMATION kind registry / receipt-pool module / annex URL (all IN-1c); projecting `mirror_standing_line` into a runtime corpus (IN-1c); the seventh input family, WR-7b's negotiation pictures (deferred again at CR-IN1B-6); any durable outbound-transfer record or new persisted family (refused at CR-IN1-7); any ninth `MirrorRecord` key, new band member or new `basis` token; any new tab id, kind registration or dossier corpus block; any new raw premium comparison or `EXEMPTIONS` row; **any new effective line in `OutputContainer.jsx`**; `outboundImpression.js`, `secondOrderBelief.js`'s code, `pulseKernel.js`, `applyWorldPulse.js`, `informationStatecraft.js`, `couplingInclusion.walker.test.js`, the dossier prose corpus, every baseline and every ceiling raise |
 
 ## Authorized implementation infrastructure
 
@@ -61,25 +67,28 @@ re-derives that lane and decides whether to compile its immediate dependent.
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-12 at the IN-1a promotion: the holder is `IN-1a`
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-12 at the IN-1b promotion: the holder is `IN-1b`
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so exactly one packet may hold the reservation.
 
-⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated an hour ago — `GR-4b` holding
-the row — is **HISTORY.** `GR-4b` LANDED at `dd457b9a` and a terminal packet reserves nothing
-(`scripts/implementation-packets.mjs:43`). The rule before that one — four packets sharing the
-census behind `GR-4a`'s row — is older history for the same reason.
+⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
+the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing
+(`scripts/implementation-packets.mjs:43`). The rules before it — `GR-4b` holding the row, and
+before that four packets sharing the census behind `GR-4a`'s row — are older history for the same
+reason. **This section has now restamped three times in one day for one recurring reason: the
+holder is whichever packet is non-terminal, and landing releases the row.**
 
-**RULED (chair, 2026-08-12): `IN-1a` holds
+**RULED (chair, 2026-08-12): `IN-1b` holds
 `tests/lint/sovereigntyLightingContract.walker.test.js` as its `TEST` row and is the sole
-in-flight census holder.** The reservation was **measured free at promotion**, not inherited:
-every row in `PACKET_MANIFEST.json` except `IA-2` is terminal, and `IA-2`'s twelve reserved
-paths do not include the walker. The moment a second non-terminal packet is promoted, this rule
-re-applies in full: the chair MOVES the row — a one-line `PACKET_MANIFEST.json` edit — into
-whichever packet it dispatches next, and only one implementer is in flight across the holders.
+in-flight census holder.** The reservation was **re-measured free at promotion**, not inherited:
+`PACKET_MANIFEST.json` carries 21 packets, the only non-terminal row is `IA-2`, its twelve
+reserved paths do not include the walker, and the walker is named only by terminal packets. The
+moment a second non-terminal packet is promoted, this rule re-applies in full: the chair MOVES the
+row — a one-line `PACKET_MANIFEST.json` edit — into whichever packet it dispatches next, and only
+one implementer is in flight across the holders.
 
 ⛔ An implementer whose packet does not carry the row must **not** re-record the census
 anyway: that is an unreserved edit to a shared enforcer and it defeats the reservation system
@@ -106,22 +115,23 @@ current packet set is waiting on a decision.**
 
 ## Reserved foreign work
 
-⚠⚠ **RESTAMPED 2026-08-12 at the IN-1a promotion: THE WORKING TREE IS CLEAN, BUT THE
-PORCELAIN LIES — AND THAT IS THE THING TO CARRY FORWARD.** At `ba219802`
-`git status --porcelain` showed **five `MM` entries** (`docs/implementation/INDEX.md`,
-`docs/implementation/PACKET_MANIFEST.json`,
-`docs/implementation/packets/foreign-policy/GR-4B.md`, `scripts/.test-ratchet-baseline.json`,
-`tests/lint/testRatchet.test.js`) while **`git diff HEAD` was EMPTY and `git diff --cached`
-was not**. ⇒ **the working tree matches HEAD exactly and the shared index holds a
-pre-`5f687277` snapshot. That is stale-index residue, not foreign WIP** — and a dispatch that
-read only the letters would have reserved five paths that hold nothing.
+⚠⚠ **RESTAMPED 2026-08-12 at the IN-1b promotion: THE WORKING TREE IS CLEAN, BUT THE
+PORCELAIN LIES — AND IT NOW LIES WIDER.** At `b17d32d2` `git status --porcelain` showed
+**EIGHT `MM` entries** (`docs/DESIGN_FP_ARCH_IN.md`, `docs/DESIGN_FP_INFORMATION.md`,
+`docs/implementation/INDEX.md`, `docs/implementation/PACKET_MANIFEST.json`,
+`docs/implementation/packets/foreign-policy/GR-4B.md`,
+`docs/implementation/packets/foreign-policy/IN-1A.md`, `scripts/.test-ratchet-baseline.json`,
+`tests/lint/testRatchet.test.js`) while **`git diff HEAD` was EMPTY**. ⇒ **the working tree
+matches HEAD exactly and the shared index holds a pre-`b17d32d2` snapshot. That is stale-index
+residue, not foreign WIP** — and a dispatch that read only the letters would have reserved eight
+paths that hold nothing. **The residue set GREW by three across one landing, which is what a
+stale index does: it accumulates every path a landing touched.**
 
 ⛔ The residue is still RESERVED: no packet stages, restores, resets or attributes any of
-those five paths, and **a commit into this tree goes through a private-index plumbing write**,
-because a plain `git add` would attribute another lane's residue. The observed-shape-reader
-instrument family this section used to name is committed and clean; the sibling lane that held
-`tests/lint/observedShapeReaders.walker.test.js` and the site-coherence documents landed at
-`ba219802` mid-promotion, which is also why IN-1a's base was restamped.
+those eight paths, and **a commit into this tree goes through a private-index plumbing write**,
+because a plain `git add` would attribute another lane's residue. ⛔ **`git diff HEAD` is the
+diagnostic, never `git status --porcelain`** — three consecutive promotions have now had to say
+so, and each one measured a different-sized set of letters over the same empty diff.
 
 ⛔ **An empty list is a snapshot, never permission.** Every dispatch re-runs `git status`,
 reserves whatever foreign changes it finds, and stops rather than staging, restoring, or
@@ -162,9 +172,14 @@ live symbols were checked at the measured SHA.
   CR-IN1-1** — it carries three behavior families against a budget of one, its receipt half is
   headed for a Herald knowledge desk that does not exist (`HERALD_SECTIONS` is still the frozen
   six, and IN-5 mints the seventh), and three of its seven input families have no durable
-  record to derive from. **IN-1a — the mirror itself, the pure leaf — is compiled and READY**;
-  IN-1b (the dossier standing line) and IN-1c (the hums, with their five-file kind
-  registration) are named, dependency-ordered behind it, and compiled just-in-time. ⭐ Its raw
+  record to derive from. **IN-1a — the mirror itself, the pure leaf — LANDED at `5bf06481`, and
+  IN-1b — the dossier standing line, the mirror's first production consumer — is compiled and
+  READY**, which discharges the orphan window IN-1a opened under the just-in-time rule. IN-1c
+  (the hums, with their five-file kind registration) is named and compiled just-in-time; it also
+  inherits three deferrals IN-1b measured and recorded rather than took — the authored
+  `mirror_standing_line` pool (unreachable: no INFORMATION kind registry, no receipt-pool module,
+  no annex URL, and the dossier prose corpus that does have a projection is unmounted), the
+  INFORMATION kind registry itself, and the seventh input family. ⭐ Its raw
   material was already in the tree and no design document named it: **SP-B landed
   `src/domain/worldPulse/outboundImpression.js` at `4c0f2f38`** with zero production consumers
   and a header naming this wave as its one intended consumer, so IN-1a **composes** it and the

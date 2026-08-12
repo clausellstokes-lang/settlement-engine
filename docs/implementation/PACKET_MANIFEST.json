@@ -973,6 +973,80 @@
           "tests/property/mechanismLitCoverage.test.js",
           "tests/lint/sizeBaseline.test.js"]
       ]
+    },
+    {
+      "id": "IN-1B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-1B.md",
+      "verifiedBase": "b17d32d2abc7a1a18e07f10f661421a0ce8d601b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/display/neighbourMirror.js" },
+        { "action": "MODIFY", "path": "src/components/new/tabs/RelationshipsTab.jsx" },
+        { "action": "MODIFY", "path": "src/components/OutputContainer.jsx" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "DOC", "path": "src/domain/worldPulse/secondOrderBelief.js" },
+        { "action": "DOC", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "CREATE", "path": "tests/domain/neighbourMirror.test.js" },
+        { "action": "CREATE", "path": "tests/ui/neighbourMirrorLine.test.js" },
+        { "action": "TEST", "path": "tests/property/secondOrderBeliefDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "secondOrderBeliefActive" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "mirrorInputsAt" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "secondOrderMirrorOf" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_BANDS" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_STALENESS_BANDS" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_UNKNOWN" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_PERCEPTION_BANNED" },
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "outboundImpressionOf" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "dormancy_is_total_in_both_flag_states" },
+        { "path": "src/components/new/tabs/RelationshipsTab.jsx", "symbol": "export function RelationshipsTab" },
+        { "path": "src/components/new/tabs/RumorsTab.jsx", "symbol": "includeGroundTruth" },
+        { "path": "src/components/OutputContainer.jsx", "symbol": "viewerIsPremium" },
+        { "path": "src/components/OutputContainer.jsx", "symbol": "publicDossier" },
+        { "path": "src/domain/deterministicSort.js", "symbol": "compareCodepoint" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "treatyAgeLine" },
+        { "path": "tests/helpers/anchoredNegatives.js", "symbol": "expectAbsentWithAnchor" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: a lit campaign world with one durable disinfo row yields exactly one frozen row per shown counterpart, carrying the display name, the mirror's strengthShown band, a staleness band derived from the tick delta, and a record-voice sentence" },
+        { "id": "C2", "case": "the absence rule with its seeded sibling: a counterpart with zero outbound rows produces no row at all rather than an unknown row, asserted in the same call that produces a present row, and the dark flag state returns an empty array for both" },
+        { "id": "C3", "case": "sparse and malformed-but-supported plus the D-A adapter inheritance: a live-tick transfer row produces a row through the renamed reading, a prior-tick one produces none because the ledger prunes, and null or garbage world, id, counterpart list, tick and name lookup each answer an empty array without throwing" },
+        { "id": "C4", "case": "the driven dark golden: the tab rendered with the flag absent, false, and lit with no outbound record produces output byte-identical to the pre-edit baseline and to itself in all three states" },
+        { "id": "C5", "case": "the rendered-surface phrase scan with its presence pin and mutant control: the rendered text contains the heading and a band phrase above a length floor, that same text carries no banned perception phrase, and the identical scanner does flag a literal containing one" },
+        { "id": "C6", "case": "determinism and the privacy boundary: identical inputs are byte-identical with codepoint-stable order under a shuffled counterpart list, the DM-only fields are null without ground truth and populated with it, and a public dossier renders the whole block not at all" },
+        { "id": "C7", "case": "the narrowed-claim pin: the certification row names the replacement invariant and, on an anchored negative standing on that positive, no longer names the retired one, with the retirement re-measured against live source by finding the read-model importing the leaf and the tab importing the read-model" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/neighbourMirror.test.js",
+          "tests/ui/neighbourMirrorLine.test.js",
+          "tests/property/secondOrderBeliefDormancyFence.test.js",
+          "tests/domain/secondOrderBelief.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/domain/subsystemCertificationCorpus.test.js"],
+        ["npx", "vitest", "run",
+          "tests/ui/relationshipsTab.determinism.test.js",
+          "tests/ui/tabs.smoke.test.js",
+          "tests/ui/dossierTabGroups.walker.test.js",
+          "tests/data/dossierStateProseProjection.contract.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/premiumGateSingleSource.test.js",
+          "tests/lint/significanceMigration.census.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/subsystemCertificationTotality.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/property/mechanismLitCoverage.test.js"],
+        ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/components/OutputContainer.jsx"]
+      ]
     }
   ]
 }
