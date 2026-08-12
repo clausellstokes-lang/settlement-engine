@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 import {
   applyDomGlobalReceiverFilter,
   applyExplainedWriterFilter,
@@ -994,8 +996,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // set and declaring it here — cannot be separated: the declaration below
     // throws at module load while the identity is still guarded. Pinning both
     // halves is what stops a later lane from restoring one without the other.
-    expect(CLASS_A_PROTECTED_IDENTITIES).not.toContain('factions on locks');
-    expect(CLASS_A_PROTECTED_IDENTITIES).toContain('institutions on locks');
+    // ⚠ ANCHORED, and the anchor is chosen to travel the SAME path: a bare
+    // `not.toContain` would pass just as happily if the whole guard set drifted
+    // away, so `institutions on locks` — the sibling row on the SAME `locks`
+    // shape, which must still be guarded — is what proves the set is live.
+    expectAbsentWithAnchor(
+      CLASS_A_PROTECTED_IDENTITIES, 'factions on locks', 'institutions on locks',
+      'CR-OSR-SCHEMA-6 re-triage',
+    );
     expect(assertExplainedWriterExemptions()).toBe(EXPLAINED_WRITER_EXEMPTIONS);
 
     const entryOf = (overrides) => [{
