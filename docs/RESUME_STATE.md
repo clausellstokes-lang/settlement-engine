@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 14:54:39 EDT
+**Generated:** 2026-08-12 14:57:05 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `803ebd48` | **7** |
-| ledger (main) | `review-fixes-2026-07-08` | `b439bf09` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `4e5ddf9a` | **7** |
+| ledger (main) | `review-fixes-2026-07-08` | `62fdbce5` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T145403` — build 7 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T145626` — build 7 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T145403
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T145626
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -41,6 +41,7 @@ MM tests/lint/testRatchet.test.js
 ## Last 12 build commits
 
 ```
+4e5ddf9a 2026-08-12 INDEX: the site-coherence program state stops contradicting its own rows
 803ebd48 2026-08-12 IN-1a promoted READY: the mirror composes a leaf that was already in the tree
 ba219802 2026-08-12 SCW-1 is DISCHARGED: its row left the baseline before the wave could ever be dispatched
 b5442c07 2026-08-12 GR-4b-alpha flips LANDED, and the chair discharges its own stale ledger row
@@ -52,17 +53,16 @@ a2222fee 2026-08-12 GR-4b promoted READY: the succession road gets a voice, and 
 6dbb76c2 2026-08-12 ES-Da: the espionage rider — covert cargo on an already-accepted peace envoy
 caa6094a 2026-08-12 SCW-0 flips LANDED with the seed-dependence finding on the record; ES-Da is the last reservation holder
 d648e788 2026-08-12 SCW-0: the site-coherence enforcement layer — the nine waves get a number they cannot drift
-d0af9b35 2026-08-12 TC-5b-ii flips LANDED with the §6.5 correction; the reservation moves to SCW-0
 ```
 ## Last 6 ledger commits
 
 ```
+62fdbce5 2026-08-12 IN-1a promotes clean at the moved base; the mirror implements
 b439bf09 2026-08-12 IN-1 splits three ways, and the mirror finds its substrate already waiting
 cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already did its work
 812b07f6 2026-08-12 The gate is green at the voice's HEAD; the corpus advances to Wave 1 and the mirror
 28569d17 2026-08-12 The succession voice is collected and flipped; the gate receipt runs
 cdad78b7 2026-08-12 RESUMED at the owner's continue; the voice lane picks up where the limit killed it
-a9b6b61f 2026-08-12 PAUSED at the owner's order; resume at 8:12 AM
 ```
 ## Fable-survey debt (derived, not transcribed)
 
