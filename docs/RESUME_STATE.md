@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 04:44:16 EDT
+**Generated:** 2026-08-12 04:57:52 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `32f4e520` | **3** |
-| ledger (main) | `review-fixes-2026-07-08` | `7795bbf1` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `5f687277` | **5** |
+| ledger (main) | `review-fixes-2026-07-08` | `78e5e90c` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 72289: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
+**Gate slot:** gate-mutex: HELD by atomic lock PID 5776: sh scripts/gate-mutex.sh --run -- npx vitest run tests/scripts/implementationPackets.test.js tests/scripts/implementationGate.test.js tests/lint/grammarLifecycleKindPools.walker.test.js tests/docs/enforcement-claims.test.js
 **Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T044230` — build 3 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T045710` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T044230
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T045710
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -30,15 +30,19 @@ staged set BY NAME AND COUNT.
 ```
  M docs/content/RECEIPT_POOLS_GRAMMAR.md
  M docs/implementation/INDEX.md
+ M docs/implementation/PACKET_MANIFEST.json
+MM scripts/.test-ratchet-baseline.json
 ?? docs/implementation/packets/foreign-policy/GR-4B.md
 ```
 ```
   +29     -3      docs/content/RECEIPT_POOLS_GRAMMAR.md
-  +8      -6      docs/implementation/INDEX.md
+  +45     -33     docs/implementation/INDEX.md
+  +71     -0      docs/implementation/PACKET_MANIFEST.json
 ```
 ## Last 12 build commits
 
 ```
+5f687277 2026-08-12 The frozen census SHRINKS: 17 rows become 16, by cure not by adjustment
 32f4e520 2026-08-12 Three recorded micro-acts: the 164th callout cured, the seventh claim exposed, SCW-0's mutant planted
 0e5881b6 2026-08-12 ES-Da flips LANDED: the four-packet chain is complete, nineteen packets all terminal
 6dbb76c2 2026-08-12 ES-Da: the espionage rider — covert cargo on an already-accepted peace envoy
@@ -50,17 +54,16 @@ df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the pain
 a53ef7c6 2026-08-11 GR-4a: the succession answer lands dark, and both breach-vocabulary literals are cured
 a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17.2/§17.3 are recorded
-2b59122d 2026-08-11 The schema-6 GENESIS: the instrument stops reporting browser and language surface
 ```
 ## Last 6 ledger commits
 
 ```
+78e5e90c 2026-08-12 Micro-act batch two collected: the 164th callout was real and is cured
 7795bbf1 2026-08-12 GR-4b is drafted and pre-ruled: the voice pays zero lines and refuses false headlines
 eb658359 2026-08-12 The chain closes: all four promoted packets are landed and terminal
 1234721a 2026-08-12 The rider stopped on the chair's own rulings, and both cures are ruled
 675929ab 2026-08-12 The site-coherence program opens on a superseded audit; the rider goes last
 3aed3008 2026-08-12 The painter's mount is collected and flipped; the site-coherence opener begins
-5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 ```
 ## Fable-survey debt (derived, not transcribed)
 
