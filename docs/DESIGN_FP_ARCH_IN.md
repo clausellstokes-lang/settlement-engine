@@ -395,6 +395,70 @@ lit-mutant for the flag; manifest join commit 1. Spine 13: declared-empty with
 reason (the mirror reads records, not souls). Spine 14: read-only surface,
 recorded engine-only.
 
+⛔⛔ **[CORRECTED 2026-08-12 AT THE IN-1a PROMOTION — CR-IN1-1..7.** The wave above
+was REFUSED as chartered and split three ways; four of its clauses are measured
+false or unbuildable at HEAD. The compiled instruction is
+`docs/implementation/packets/foreign-policy/IN-1A.md`, which is authority for
+building; this block is the dated reconciliation so a later reader is not
+re-misled.]
+
+1. ⭐ **THE DERIVATION CORE IS ALREADY BUILT, AND NO IN DOCUMENT NAMED IT
+   (CR-IN1, D5).** SP-B landed `src/domain/worldPulse/outboundImpression.js` at
+   `4c0f2f38` — pure, zero-import by pinned contract, unit-tested, and with
+   **zero production consumers**. Its own header names *this* wave as the one
+   consumer it was built for. A lane reading only this volume would have
+   hand-rolled a second derivation, which is the second-spelling drift that
+   leaf's header says the estate has counted fourteen instances of. ⇒ **IN-1a
+   COMPOSES `outboundImpressionOf` and re-derives not one line of it**, supplying
+   only the row adaptation, the banding, the staleness clock, the confidence, the
+   degradation arm and the frozen closed shape. ⛔ `outboundImpression.js` itself
+   is a forbidden edit: its zero-import contract is pinned.
+2. ⛔ **THE EXPORT IS `secondOrderMirrorOf`, NOT `mirrorOf` (CR-IN1-3).**
+   `npcLadderState.js` already exports `mirrorOf`, consumed by
+   `npcLadderKernel.js`, and `urbanFabricKernel.js` holds a module-private third.
+   CR-C4-1 adjudicated this exact class at SP-C and overruled "module scoping
+   disambiguates," because a disambiguation living in the reader's head is not
+   enforcement. `DESIGN_FP_ARCHITECTURE.md` §9 coupling row 14 pins the SHAPE and
+   not the spelling, so the rename costs nothing; that file's three `mirrorOf`
+   spellings were outside the promotion's authorized scope and the correction is
+   recorded as OWED at IN-1A.md §13 D3.
+3. ⛔ **THE SEVENTH FAMILY (J-INA-5) IS DEFERRED, AND THE FENCE IS THREE-ARMED
+   (CR-IN1-2).** The J-INA-5 addition above is not free: all three negotiation-
+   picture modules sit in the GRAMMAR layer, so importing any of them mints a
+   `GRAMMAR→INFO` cross-layer pair whose coupling-registry row must declare a
+   receipt address IN-1a does not write — the exact defect
+   `IN0A_PLANT_HANDOFF_COUPLING`'s own repair note records. ⇒ **the seventh
+   family is deferred to IN-1b/IN-1c with its measurement written down**, and
+   IN-1a's import fence is closed at three modules that are all INFO or argued-
+   unlayered, so the leaf mints ZERO cross-layer pairs and owes ZERO registry
+   rows (verified at promotion against the walker's own layer map). ⚠ And the
+   allow-list ALONE cannot enforce K3: the legal and forbidden belief reads are
+   one function with swapped arguments, so the fence adds a **structural** arm
+   (the derivation never receives `worldState`) and an **argument-order source
+   scan**. Guard-the-guard still points at `beliefMap.js`.
+4. ⛔ **THREE OF THE SEVEN INPUT FAMILIES HAVE NO DURABLE RECORD (CR-IN1-7).**
+   `intelTransfers` is pruned every tick, ally shares are never ledgered, and
+   exposure receipts are one-shot news with a module-private sidecar drained the
+   next tick — so the volume's *"each input already ledgered, already decaying"*
+   is false where the staleness clock rests on it. RULED: derive from the DURABLE
+   families only (plants, the HIDE posture, disclosure terms); the transfer
+   channel is live but memoryless; the share channel is empty with its reason
+   recorded; degradation leg (a) is deferred with its measurement. ⛔ Opening a
+   durable outbound-transfer record is a NEW PERSISTED FAMILY and is refused at
+   IN-1a — a later wave may take it to the owner. The full measurement is in
+   `DESIGN_FP_INFORMATION.md`'s IN-1 block.
+5. ⚠ **THE WAVE IS THREE BEHAVIOR FAMILIES AGAINST A BUDGET OF ONE (CR-IN1-1).**
+   A pure module cannot mint `mirror_shift` — a band-crossing hum needs a writer
+   at pulse time, and the only home is the one statecraft fold — and all three
+   IN-1 receipt pools are headed for a Herald knowledge desk that does not exist,
+   since `HERALD_SECTIONS` is still the frozen six and IN-5 mints the seventh.
+   ⇒ **IN-1a** is the pure leaf alone, producer-first on the ES-7 precedent;
+   **IN-1b** is the dossier standing line and the rendered-surface phrase scan;
+   **IN-1c** is the hums with their kind registry, receipt-pool module, annex URL
+   and interim-desk declaration. ⚠ The rendered-surface phrase scan belongs to
+   IN-1b deliberately: such a negative passes when the surface never rendered,
+   and IN-1a renders nothing.
+
 ### IN-2 — THE LURE (`infoLureEnabled`)
 > ROUTED AT THE QUEUE FOLD (WY §5b item 8, 32cc17f7): the severity-durable
 > rumor-FIDELITY amendment (per-hop weathering, one multiplier) lives at

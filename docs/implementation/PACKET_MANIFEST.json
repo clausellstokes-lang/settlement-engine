@@ -912,6 +912,67 @@
           "tests/lint/oathStampTotality.walker.test.js",
           "tests/lint/sizeBaseline.test.js"]
       ]
+    },
+    {
+      "id": "IN-1A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-1A.md",
+      "verifiedBase": "ba219802c4f8c32c9e5cf13140e4b3911bd9728b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/secondOrderBelief.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/domain/secondOrderBelief.test.js" },
+        { "action": "CREATE", "path": "tests/property/secondOrderBeliefDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "TEST", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "outboundImpressionOf" },
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "OUTBOUND_CHANNELS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "HALF_LIFE_BANDS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "HALF_LIFE_WEEKS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "halfLifeWeeksOf" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "decayTowardNeutral" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "beliefRecord" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "applyAllyIntelSharing" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_PENDING_RULE_KEYS" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/generosityKernel.js", "symbol": "depositTick" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "envoyErrandsOf" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "envoy_intercepted" },
+        { "path": "src/domain/worldPulse/negotiationPictures.js", "symbol": "NEGOTIATION_SUBJECT_BANDS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: a lit world with one durable plant row yields a banded strengthShown, its seededTick as lastShownTick, a derived staleness band and a basis naming the channel" },
+        { "id": "C2", "case": "the empty-record negative with its seeded non-empty sibling: no outbound record answers MIRROR_UNKNOWN at the zero band, never a fabricated one" },
+        { "id": "C3", "case": "the reversal pin: on a real fixture each degradation leg independently drives confidence measurably down, and the inverted intercept direction does not" },
+        { "id": "C4", "case": "frozen closed shape: exact sorted Object.keys equality over the eight keys, frozen record and basis, every band a member of its declared ladder" },
+        { "id": "C5", "case": "the adapter contract plus totality: a live-tick transfer row is renamed into the leaf's spelling, a prior-tick one is absent because the ledger prunes, and malformed input answers MIRROR_UNKNOWN without throwing" },
+        { "id": "C6", "case": "determinism and lifecycle round trip: identical inputs are byte-identical, and a JSON save/load round trip yields an identical derived mirror" },
+        { "id": "C7", "case": "the K3 privacy boundary and guard-the-guard: no worldState in the derivation, the import allow-list equal to its reviewed set, exactly one beliefRecord call in self-observer order, and the observer-slot scan flagging beliefMap.js" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/secondOrderBelief.test.js",
+          "tests/property/secondOrderBeliefDormancyFence.test.js",
+          "tests/domain/outboundImpression.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/property/believedWorldAxesDormancyFence.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/subsystemCertificationTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/property/mechanismLitCoverage.test.js",
+          "tests/lint/sizeBaseline.test.js"]
+      ]
     }
   ]
 }

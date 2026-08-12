@@ -646,6 +646,43 @@ had been shown.
   OUR record of what we did), ally shares along their edges, disclosure terms,
   and our own HIDE spans (a sealed season lowers confidence — they've seen
   nothing new). Each input already ledgered, already decaying.
+  - ⛔ **[CORRECTED 2026-08-12 (CR-IN1-3, at the IN-1a promotion)] THE EXPORT
+    IS `secondOrderMirrorOf`, NOT `mirrorOf`.** The name is already taken:
+    `npcLadderState.js` exports a `mirrorOf` that `npcLadderKernel.js`
+    consumes, and `urbanFabricKernel.js` holds a module-private third. This is
+    the class CR-C4-1 already adjudicated at SP-C — two exports of one name in
+    one domain tree is a defect with no runtime symptom, and "module scoping
+    disambiguates" was overruled there because a disambiguation living in the
+    reader's head is not enforcement. The rename is cheap because
+    `DESIGN_FP_ARCHITECTURE.md` §9 coupling row 14 pins the SHAPE, not the
+    spelling. ⚠ That architecture file still spells `mirrorOf` in three places
+    (§5 flag table, §7 pin list, §9 row 14); correcting it was outside the
+    IN-1a promotion's authorized scope and is recorded as OWED in
+    `docs/implementation/packets/foreign-policy/IN-1A.md` §13 D3.
+  - ⛔ **[CORRECTED 2026-08-12 (CR-IN1-7, at the IN-1a promotion)] "EACH INPUT
+    ALREADY LEDGERED, ALREADY DECAYING" IS FALSE FOR THREE OF THE SEVEN, AND
+    THE STALENESS CLOCK RESTS ON IT.** Measured against live code: (1)
+    `spatialLedgers.intelTransfers` is **pruned every tick** —
+    `generosityKernel.js` drops any row whose `depositTick` precedes the
+    current tick, so it is a hand-off ledger, not a durable outbound record,
+    and at any tick it holds at most that tick's transfers; (2) ally shares are
+    **never ledgered at all** — `applyAllyIntelSharing` builds a transient
+    injections Map and persists nothing, so the outbound `share` channel has no
+    source in `worldState`; (3) our exposure receipts are **one-shot news
+    entries**, and their only sidecar ledger is module-private and drained the
+    following tick. ⇒ **RULED: the mirror derives `lastShownTick` and
+    `staleness` from the DURABLE families only** — plants (`seededTick`), the
+    HIDE posture (`enteredTick`), and treaty disclosure terms (`mintedTick`).
+    The transfer channel is **live but memoryless**: it may contribute to this
+    tick's picture and contributes nothing beyond it. The share channel is
+    empty with its reason recorded, and degradation leg (a) is deferred with
+    this measurement attached. ⛔ **The alternative — opening a durable
+    outbound-transfer record — is REFUSED at IN-1a**: it is a new persisted
+    family, an owner-gated persistence-shape act and a change to the D-3
+    single-writer contract. A later wave may take it to the owner. ⚠ IN-1b,
+    IN-1c, IN-3's mirror-gap arm and GRAMMAR's negotiation-posture consumer are
+    all being designed against the sentence above; they consume this correction,
+    not that sentence.
 - **Law / force / counterforce:** the force is self-knowledge — a court that
   knows what it has shown can bluff, lure, and negotiate deliberately. The
   NAMED counterforce, scoring off the SAME record: THE MIRROR LIES BY
@@ -707,6 +744,23 @@ had been shown.
   rule); THE PHRASE SCAN — the mirror's rendered strings contain no
   perception verb (no "believes", no "in their eyes"; the band vocabulary
   enforced, not stated); dormancy golden.
+  - ⛔ **[CORRECTED 2026-08-12 (CR-IN1-2, at the IN-1a promotion)] AN
+    ALLOW-LIST ALONE CANNOT ENFORCE THE FENCE, AND THE FENCE IS THEREFORE
+    THREE-ARMED.** The legal read `beliefRecord(worldState, US, THEM)` and the
+    forbidden read `beliefRecord(worldState, THEM, US)` are the same function
+    with its arguments swapped — the discriminator is an ARGUMENT, and no
+    import list can see an argument. RULED: (1) ⭐ the **structural** arm, which
+    is the strongest and costs nothing — the derivation function never receives
+    `worldState` at all, so a function with no world cannot reach a belief
+    ledger, by construction and forever; (2) the **allow-list equality** arm on
+    the leaf's own imports, closed at exactly three modules, with an
+    anti-vacuity floor asserted before the exclusion; and (3) the
+    **argument-order source scan**, which asserts the leaf holds exactly one
+    `beliefRecord(` call site and that our own id sits in the observer slot.
+    The guard-the-guard positive control still points at `beliefMap.js` and
+    must convict it. ⚠ Scan comment-stripped source: the leaf's own header
+    names the forbidden call in prose, and a raw scan would count that refusal
+    as the offence.
 - **Lifecycle line:** NO persisted state — nothing to regen, undo, or migrate;
   the pin is that a save/load round-trip yields an identical derived mirror
   (pure function of persisted inputs).
