@@ -3,31 +3,42 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 22:04:17 EDT
+**Generated:** 2026-08-11 23:18:51 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a9a10e6d` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `9391c3b8` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `df15a68a` | **3** |
+| ledger (main) | `review-fixes-2026-07-08` | `5c87b476` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 32Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T220342` — build 0 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T231816` — build 3 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T220342
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T231816
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
 staged set BY NAME AND COUNT.
 
+### Uncommitted in the build tree — attribute before touching
+
+```
+MM docs/implementation/INDEX.md
+MM docs/implementation/PACKET_MANIFEST.json
+MM docs/implementation/packets/foreign-policy/GR-4A.md
+```
+```
+```
 ## Last 12 build commits
 
 ```
+df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the painter's mount
+a53ef7c6 2026-08-11 GR-4a: the succession answer lands dark, and both breach-vocabulary literals are cured
 a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17.2/§17.3 are recorded
 2b59122d 2026-08-11 The schema-6 GENESIS: the instrument stops reporting browser and language surface
@@ -38,18 +49,16 @@ b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-h
 da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
 e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated ledger row lands
 9183d52c 2026-08-11 TC-5b-i: a compiled cartography block becomes reachable without a canvas
-63c62822 2026-08-11 docs: four measured corrections — the espionage park, GR-3b's landing, the schema-2 Wave-1 literal, and F9's signature
-a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer folds the census
 ```
 ## Last 6 ledger commits
 
 ```
+5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
-a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -156,12 +165,23 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   debt DEFERRED-RECORDED to the schema-7 batch (the four→twelve comment — one byte
   there reds the gate until a mint). All judgments RATIFIED. ⚠ The harness misreported
   two more exits (running total: nine today).
-- **Lane X (build, Opus) — IMPLEMENTING GR-4a**, dispatched ~21:55 at base `a9a10e6d`
-  (validator 19/4 READY green; GR-4A holds the walker reservation; sole census holder).
-  Conditional mount (peaceTerms.js size measurement = STOP condition), both breach-
-  vocabulary consumer cures in-scope, dark-path byte-identity proven not asserted, gate
-  owed back at TRUE_EXIT=0. Then TC-5B-ii → SCW-0 → ES-Da, one census holder at a time.
-  Transcript: session dir `subagents/agent-a68fdaea1d6779d46.jsonl`.
+- **✅ Lane X LANDED GR-4a at `a53ef7c6` (~22:20), chair-flipped LANDED at `df15a68a`**
+  (11 files; 23 acceptance cases; both preflight measurements PASSED — peaceTerms.js
+  794→797 vs the 800 ceiling, **3 lines of headroom = a recorded GR-4b pressure point**;
+  OSR byte-identical; census folded whole to **2398/365/2033/19793/5585** with a
+  probe-before-first-assertion; **gate TRUE_EXIT=0 at HEAD**). A THIRD unanticipated
+  cure landed inside the declared region (a hardcoded severity that erased the grade the
+  scorer reads — negative-control proven). Six deviations ALL RATIFIED, sharpest: the
+  leaf is `treatySuccession.js` (the unlayered-census walker shut every alternative to
+  an implementer — manifest row reconciled by the lane) and Q10's lawfulness colour
+  correctly STOPPED (§14). GR-4b/c/d are NOT released. Transcript: session dir
+  `subagents/agent-a68fdaea1d6779d46.jsonl`.
+- **Lane Y (build, Opus) — IMPLEMENTING TC-5B-ii (the painter's mount)**, dispatched
+  ~22:30 at base `df15a68a` (the walker reservation MOVED to TC-5B-II per the holder
+  rule, validator 19/3 READY green; sole census holder). The first user-visible
+  cartography surface; the ADOPTED A-4 copy ships verbatim; planExtent as a resolved
+  number; the forked-colour walker at `[]` makes one hex literal a hard error. Then
+  SCW-0 → ES-Da. Transcript: session dir `subagents/agent-a908b637c360b5496.jsonl`.
 - **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
   B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
   rows folded verbatim to the 08-11 archive with compact operative hooks kept).
