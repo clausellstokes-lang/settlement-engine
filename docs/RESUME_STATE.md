@@ -77,7 +77,47 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐ CURRENT (2026-08-12 ~16:40 EDT) — IN-1B READY at `6ad9f8dd`; Lane AM implements
+# ⭐ CURRENT (2026-08-12 ~17:45 EDT) — IN-1b BUILT AND GREEN; landing under CR-IN1B-8/9
+
+**Lane AM built the whole packet and STOPPED correctly at landing** (nothing committed;
+HEAD still `6ad9f8dd`; the 18 verified paths sit in the working tree — a successor
+COLLECTS, never re-dispatches). Receipts: 123 tests green across the focused suites;
+all SEVEN acceptance cases executed; **B13 = 599 BOTH times** (the container edit is
+two one-for-one line replacements); B15 = 238→252 of ≤15 budget; walker census
+re-derived WHOLE `2406/365/2041/19923/5621 → 2408/365/2043/19945/5628`, both new files
+CREDITED not parked; both typecheckers at exact ceilings (173/173, 1134/1134); build +
+verify:dist exit 0. C4's dark golden: captured from the UNMODIFIED component pre-edit,
+byte-pinned (2,323 B, sha256 7887e8db…), three dark states byte-identical + lit control.
+
+**The two STOPs, both cured by ruling:**
+- **CR-IN1B-8:** the estate-wide `title=` walker (guidanceRegistry.walker.test.js,
+  TITLE_BASELINE shrink-only, counts component props across src/**) sat at EXACTLY
+  484/484; the packet's one ordered `<Section title>` makes 485. Raise 484→485
+  AUTHORIZED with written reason (the estate's fifth reasoned raise); the walker file
+  joins AM's manifest for that one edit. The packet never measured this walker — banked
+  to memory as the third exact-ceiling family member; compilers must preflight it.
+- **CR-IN1B-9:** validate:packets' requiredSymbols check is STATUS-BLIND, and IN-1B's
+  row demanded the very symbol the packet RETIRES (dormancy_is_total_in_both_flag_states
+  → C7 pins its absence). Re-point to dormancy_rests_on_the_gate_and_on_the_absence_rule
+  AUTHORIZED (one row, no other packet's rows). ⚠ General machinery defect CHARTERED,
+  not built: a symbol-retiring packet can never be gate-green until its row names the
+  successor (banked to memory; goes in the machinery batch with the hot-file rule).
+- AM's four judgment calls ALL RATIFIED (stop-without-landing · DM basis-phrases-no-
+  numeral per §3.9 · hoisted sid for the React Compiler · hash-pinned golden not a
+  2.3KB literal). Known non-blockers: proseNumerics is banked pre-existing (413→413
+  byte-identical, §5b/B12 omits it — prose-batch item); 2 edge dirty-build rows PROVEN
+  to clear on commit (sourceHash recomputed over tree content matches).
+
+**LIVE: Lane AM resumed (~17:45) to land** — the two authorized cures + its 18 paths +
+these 2 = ONE plumbing commit with CAS; post-commit test:ratchet from the committed
+tree (must red ONLY the banked set); porcelain back to ZERO via per-path update-index;
+NO flip (the chair flips). Collection: transcript `a006da811e4f917e7`; on landing →
+chair-verify → three-home flip → the queue: GR-4c draft → corpus-coverage mint charter
+(SCW-1b parked) → schema-7 prose batch (+ hot-file rule + §5b/B12 omission) → the new
+MACHINERY batch (status-aware requiredSymbols / retiredSymbols support). Owner veto
+surfaces standing: §17.7 · §17.4 · §17b.
+
+# (superseded ~17:45) — IN-1B READY at `6ad9f8dd`; Lane AM implements
 
 **The promotion LANDED and is CHAIR-VERIFIED:** build HEAD `6ad9f8dd` (three files:
 IN-1B.md at packets/foreign-policy/ — note the folder, NOT packets/information/ —
