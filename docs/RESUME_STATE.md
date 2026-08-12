@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 20:12:52 EDT
+**Generated:** 2026-08-11 20:54:47 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `33487c77` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `9542b886` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `5853732a` | **9** |
+| ledger (main) | `review-fixes-2026-07-08` | `37585538` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 34Gi free (83% used)
+**Disk:** 33Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T201217` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T205406` — build 9 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T201217
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T205406
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -29,12 +29,29 @@ staged set BY NAME AND COUNT.
 
 ```
 MM scripts/.observed-shape-readers-baseline.json
+ M scripts/check-observed-shape-readers.mjs
+ M scripts/lib/observed-shape-baseline.mjs
+ M scripts/migrate-observed-shape-readers.mjs
+ M tests/lint/observedShapeBaseline.test.js
+ M tests/lint/observedShapeMigration.test.js
+ M tests/lint/observedShapeReaders.walker.test.js
+ M tests/lint/observedShapeSentinel.test.js
+ M tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ```
+  +494    -41     scripts/check-observed-shape-readers.mjs
+  +78     -40     scripts/lib/observed-shape-baseline.mjs
+  +48     -19     scripts/migrate-observed-shape-readers.mjs
+  +25     -16     tests/lint/observedShapeBaseline.test.js
+  +27     -12     tests/lint/observedShapeMigration.test.js
+  +100    -38     tests/lint/observedShapeReaders.walker.test.js
+  +288    -22     tests/lint/observedShapeSentinel.test.js
+  +29     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
 ```
+5853732a 2026-08-11 Four packets promoted: the painter's mount unblocks, and GR-4a, SCW-0 and ES-Da compile READY
 33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
 b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-hall link, discharge SHIFT-2, re-record the golden master
 da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
@@ -46,17 +63,16 @@ a75c76c2 2026-08-11 CR-TC5BI-6: O-5 is ruled shape (a) -- the seam's implementer
 c8931c03 2026-08-11 explanation.test.js was the seventh fixture manufacturing the settlement-root hook shape, and the sweep that retired six missed it
 ebc4f90e 2026-08-11 The aiGrounding edge bundle is rebuilt at the tree that produced it, and four sibling metas ride the same build window
 e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is checked, and the TC-5A fiction is corrected
-195113e4 2026-08-11 The chair flips R3 and R6, and the hook-family repair takes its validated row
 ```
 ## Last 6 ledger commits
 
 ```
+37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
-f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -118,13 +134,26 @@ noise is gone), and RESUMED both lanes from their transcripts with re-verify ord
 (pre-death measurements must be RE-RUN, never reused). Zero landed work lost; total cost
 two partial lane turns. Banked to seamless-resume-directive.md as the live-fire proof.
 
-**LIVE as of ~20:15 (two lanes + the chair, relaunched on the GREEN gate):**
-- **Lane U (build, Opus) — THE FOUR-PACKET PROMOTION** (one docs commit): TC-5B-ii →
-  READY with the chair-authored A-4 copy (owner veto surface §17.7) · GR-4a per
-  CR-GR4-1..6 (incl. the GR design-doc trigger-premise correction) · SCW-0 per
-  CR-SCW0-1..6 · ES-Da per CR-ESDA-1..5. The shared walker TEST reservation is the known
-  serialization point — validate:packets governs; census-holder rule written in.
-  Transcript: session dir `subagents/agent-ab475d05eaad421a7.jsonl`.
+**LIVE as of ~20:45 (two lanes + the chair, on the GREEN gate):**
+- **✅ Lane U LANDED THE FOUR-PACKET PROMOTION at `5853732a`** (7 files, +3200/−76,
+  chair-verified; one transient connection-death mid-run, resumed from transcript at
+  ~20:25 with zero loss). **19 packets / 4 READY** (TC-5B-ii · GR-4A · SCW-0 · ES-DA),
+  validator 0 at all three points, manifest suite 24/24, all ten pairwise reservations
+  disjoint. Judgments RATIFIED: the CENSUS-HOLDER RULE (GR-4a holds the walker row; the
+  chair MOVES it at each dispatch; the other three carry explicit STOPs) · the SCW-0
+  derived kinds (mutation row = follow-up micro-act) · ES-Da's authority restated
+  in-packet (the ledger branch is unreadable from the build tree). The A-4 copy is
+  ADOPTED (veto surface §17.7). Its enforcement-claims chase correctly refused a false
+  attribution (the 6 naked claims are a banked test-ratchet entry) and fixed its own
+  seventh — ⚠ noted for a future micro-act: that baseline row is per-TEST identity, so
+  new naked claims widen it SILENTLY. Transcript: session dir
+  `subagents/agent-ab475d05eaad421a7.jsonl`.
+- **Lane W (build, Opus) — THE COPY BATCH (task #17)**, dispatched ~20:45: the four
+  REL_LABEL descriptors (chair-authored, owner veto §17.4), the §17.2 lock-copy adoption
+  note, the §17.3 stated-absence note — display-only, zero census movement (Lane V holds
+  the census). Transcript: session dir `subagents/agent-ad9ce3889c8156c7a.jsonl`.
+- **Chair sequence:** Lane V lands (the mint + gate back at exit 0) → GR-4a implementer
+  (takes the census walker row per the holder rule) → TC-5B-ii → SCW-0 → ES-Da.
 - **Lane V (build, Opus) — THE SCHEMA-6 MINT (task #11)**: the ruled two-commit pair
   (code half deliberately gate-red → genesis), items 1-5+8 + exemptions A and B (B's
   gate discharged at `da31d170`), M11/M12 into the walker's hand-composed chain in the
