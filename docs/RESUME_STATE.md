@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 05:51:48 EDT
+**Generated:** 2026-08-12 12:59:54 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a2222fee` | **16** |
-| ledger (main) | `review-fixes-2026-07-08` | `2fa34a57` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `a9b6b61f` | **4601** |
 
-**Gate slot:** gate-mutex: HELD by atomic lock PID 50472: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T055003` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T125916` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T055003
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T125916
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -79,12 +79,12 @@ a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ## Last 6 ledger commits
 
 ```
+a9b6b61f 2026-08-12 PAUSED at the owner's order; resume at 8:12 AM
 2fa34a57 2026-08-12 GR-4b stopped on a false mute-road premise; the alpha scope is ruled
 b35320d5 2026-08-12 GR-4b promotes clean and its implementer goes out
 531e57fc 2026-08-12 The frozen census shrinks to sixteen; the day's debt arc closes downward
 78e5e90c 2026-08-12 Micro-act batch two collected: the 164th callout was real and is cured
 7795bbf1 2026-08-12 GR-4b is drafted and pre-ruled: the voice pays zero lines and refuses false headlines
-eb658359 2026-08-12 The chain closes: all four promoted packets are landed and terminal
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -97,6 +97,19 @@ eb658359 2026-08-12 The chain closes: all four promoted packets are landed and t
 <!-- resume-state.sh preserves everything below this line verbatim. Update it at every
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
+
+# ▶ RESUMED 2026-08-12 ~12:57 EDT at the owner's "continue!" (the pause block below is history)
+
+The pause window ran long past 8:12 (the session limit that killed Lane AE reset at
+8:10; the owner's continue arrived ~12:57). Resume protocol executed: snapshot
+`20260812T125738` (16 build files); **the MEMORY.md hook-survival check PASSED** (the
+two concurrent pause-window folds did no damage — 16,995 B, zero broken links, every
+index sha backed by a topic file); **Lane AE resumed from transcript** with
+re-verify-your-own-WIP orders — its full GR-4b-α implementation (15 files) survived
+uncommitted and it died at/near completion ("Final state clean. Recording the durable
+findings"). At its landing: chair-verify (peaceTerms ≤797), the flip appending
+CR-GR4B-8, then the queue — SCW-1 + IN-1 drafts, GR-4c draft, the corpus-coverage mint
+charter, the schema-7 prose batch — on the heartbeat cadence.
 
 # ⏸ PAUSED AT THE OWNER'S ORDER, 2026-08-12 05:49 EDT — RESUME AT 8:12 AM
 
