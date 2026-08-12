@@ -1,6 +1,7 @@
 # Foreign Policy / IN-1a — THE MIRROR (`secondOrderBeliefEnabled`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `5bf06481`, 2026-08-12; flipped by the chair after verification (the eight-step CQ5 choreography receipted in order, four fence mutants killed incl. the K3 structural arm, composition proven — SP-B's substrate consumed not duplicated, census folded whole, gate TRUE_EXIT=0 at HEAD). Do not redispatch. Deviations D-A..D-D RATIFIED — ⚠ D-A is load-bearing: the literal `belief → strengthBand` reading ships a DEAD channel; IN-1b/IN-1c INHERIT the corrected adapter reading (`belief.strengthBand`). ⚠ ORPHAN WINDOW OPEN: the mirror has zero production callers until IN-1b — discharge by compiling IN-1b next.
 - **Packet version:** `1` (promoted, versioned and dispatchable by the chair)
 - **Verified base:** `claude/composite-r4` at `ba219802c4f8c32c9e5cf13140e4b3911bd9728b`
 - **Compiled by:** Lane AG (read-only compile lane), 2026-08-12, Opus-era — §15.
