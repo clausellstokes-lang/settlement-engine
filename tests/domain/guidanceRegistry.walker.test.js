@@ -324,7 +324,25 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // elsewhere (a 182-row frozen census, exact identity both directions). It is a
   // separate wave: it changes what this walker reads, and this lane's business is
   // the census row, not the guard's grain.
-  const TITLE_BASELINE = 484;
+  //
+  // FP IN-1b — THE NEIGHBOUR-MIRROR STANDING LINE: +1 React component PROP, in the
+  // same Section-prop class the regex cannot distinguish from a native tooltip, and
+  // NOT an OS tooltip. IN-1b's standing line mounts one `<Section title=…>` in
+  // RelationshipsTab.jsx per packet §6.2 ("What the neighbours have been shown");
+  // Section's ONLY heading API is that prop (new/Primitives.jsx), so the mount the
+  // packet rules cannot be expressed without it. Authorized at CR-IN1B-8 after the
+  // implementing lane STOPPED on this ratchet rather than raising it unbidden.
+  // 484 → 485.
+  // ⛔ AND IT IS NOT THE RELOCATION THE BLOCK ABOVE WARNS ABOUT. That entry raised
+  // the ceiling to take a TOLERATED walker row out of scripts/.test-ratchet-baseline.json,
+  // where its verdict had gone byte-identical however much worse the tree got. This
+  // row is NOT in that census and never was: it reddened `npm run check` honestly,
+  // in the landing change, which is the guard doing precisely its job. Shrink-only
+  // resumes from 485.
+  // MEASURED WHOLE, NEVER TRANSCRIBED: countTitles() over the landing tree reads 485,
+  // against 484 measured the same way at the packet's verified base 6ad9f8dd — a
+  // per-file delta of exactly +1, in RelationshipsTab.jsx, and nothing else moved.
+  const TITLE_BASELINE = 485;
 
   function countTitles() {
     let n = 0;

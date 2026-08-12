@@ -398,6 +398,45 @@ describe('engine-gated virtual rows — TRACE against live source', () => {
     )).toBe(true);
   });
 
+  test('C7 — THE MIRROR ROW\'S DORMANCY CLAIM IS THE NARROWED ONE, and the old one is FALSE', () => {
+    // ⚠⚠ WHY THIS PIN EXISTS, and it is the ES-3 lesson applied before the bill arrives.
+    // Through IN-1a the mirror row carried the strongest dormancy sentence in this cohort:
+    // the read had no production caller at all, so lighting the key moved no byte anywhere.
+    // IN-1b mounted the standing line and made that false. The narrowing is pinned by NAME
+    // and by ABSENCE — and then RE-MEASURED against live source, because without that half
+    // these assertions would only prove that some words were deleted.
+    const row = rowFor(MIRROR);
+    expect(row.module.split(',')).toContain('src/domain/display/neighbourMirror.js');
+
+    const names = row.invariants.map((invariant) => invariant.name);
+    expect(names).toContain('dormancy_rests_on_the_gate_and_on_the_absence_rule');
+    // anchored: the positive one line up proves `names` is populated and spellable, so this absence is the retirement of a name and not an empty list
+    expect(names).not.toContain('dormancy_is_total_in_both_flag_states');
+
+    const prose = [
+      row.aliveness.other,
+      ...row.invariants.map((invariant) => `${invariant.description} ${invariant.check}`),
+    ].join(' ');
+    // The subject is a real, populated string — the non-vacuity control both absences
+    // below stand on, and the reason neither can pass by measuring nothing.
+    expect(prose.length).toBeGreaterThan(2000);
+    // anchored: the length control one line up proves `prose` is populated, so this measures a DELETED claim rather than an empty subject
+    expect(prose).not.toContain('no user-facing surface');
+    // anchored: the same length control governs this line, and the live-source re-measurement below proves the sentence went because it is FALSE
+    expect(prose).not.toContain('THE OBSERVATION NEEDED is a per-field mirror census once a consumer exists');
+
+    // …and the sentences are gone because they are FALSE, RE-MEASURED here against live
+    // source rather than taken on the wave's word: the read-model really imports the leaf,
+    // and the rendered surface really imports the read-model.
+    const readModel = sourceFiles.find(({ rel }) => rel === 'src/domain/display/neighbourMirror.js');
+    expect(readModel, 'the read-model named by the row does not exist on disk').toBeTruthy();
+    expect(/from\s+'[^']*secondOrderBelief\.js'/.test(readModel.src)).toBe(true);
+    expect(/export function neighbourMirrorLines\s*\(/.test(readModel.src)).toBe(true);
+    const surface = sourceFiles.find(({ rel }) => rel === 'src/components/new/tabs/RelationshipsTab.jsx');
+    expect(surface, 'the mount point named by the narrowed claim does not exist on disk').toBeTruthy();
+    expect(/from\s+'[^']*display\/neighbourMirror\.js'/.test(surface.src)).toBe(true);
+  });
+
   test('the conquest row single-writer claim holds: one file writes the license ledger', () => {
     const writers = [...(ledgerWriters.get(VENGEANCE_LICENSE_LEDGER_KEY) || [])].sort();
     expect(writers).toEqual(['src/domain/worldPulse/vengeanceLicense.js']);

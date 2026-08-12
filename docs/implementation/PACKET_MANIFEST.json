@@ -1003,7 +1003,7 @@
         { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "outboundImpressionOf" },
         { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS" },
         { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_SUBSYSTEM_ROWS" },
-        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "dormancy_is_total_in_both_flag_states" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "dormancy_rests_on_the_gate_and_on_the_absence_rule" },
         { "path": "src/components/new/tabs/RelationshipsTab.jsx", "symbol": "export function RelationshipsTab" },
         { "path": "src/components/new/tabs/RumorsTab.jsx", "symbol": "includeGroundTruth" },
         { "path": "src/components/OutputContainer.jsx", "symbol": "viewerIsPremium" },

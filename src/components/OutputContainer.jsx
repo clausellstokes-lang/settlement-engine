@@ -748,8 +748,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
-      case 'neighbours':    return <RelationshipsTab settlement={s} narrativeNote={null} neighboursOnly={true} />;
-      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} />;
+      case 'neighbours':    return <RelationshipsTab settlement={s} narrativeNote={null} neighboursOnly={true} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
+      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
       default:           return <div />;
     }
   };

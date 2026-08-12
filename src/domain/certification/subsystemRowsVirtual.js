@@ -296,29 +296,30 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
   }),
   // ── THE SECOND-ORDER MIRROR (FP IN-1a, docs/DESIGN_FP_ARCH_IN.md §IN-1) ────
   //
-  // A SEVENTH ZERO-KEY CASE, and the only row in the lane whose emptiness is a CALLER
-  // fact rather than a shape or mount fact. The mirror is a pure derivation with no
-  // ledger, no writer and no receipt, and at this HEAD it has ZERO production callers by
-  // design: IN-1a ships the producer first so the read exists before anything reads it,
-  // on the ES-7 precedent where five waves of consumers were built against a producer
-  // nobody had chartered. Declaring any channel here would grade an unmounted subsystem
-  // SILENT, which reads as broken rather than as deliberately un-consumed.
+  // A SEVENTH ZERO-KEY CASE, and the only row in the lane whose emptiness is a WRITER
+  // fact and nothing else. The mirror is a pure derivation with no ledger, no writer and
+  // no receipt. IN-1a shipped the producer first — the ES-7 precedent, where five waves of
+  // consumers were built against a producer nobody had chartered — and IN-1b closed that
+  // window with the standing line, so the read now has exactly ONE caller and it is a
+  // render-time read-model. The channels stay empty because the subsystem still mints no
+  // event, no mover family and no state key, NOT because nothing reads it; declaring one
+  // would grade a subsystem that writes nothing SILENT, which reads as broken.
   Object.freeze({
     rule: 'secondOrderBeliefEnabled',
     title: 'The mirror (what our own record says a court has been shown of us)',
-    module: 'src/domain/worldPulse/secondOrderBelief.js,src/domain/worldPulse/outboundImpression.js,src/domain/worldPulse/bandedStock.js',
+    module: 'src/domain/worldPulse/secondOrderBelief.js,src/domain/worldPulse/outboundImpression.js,src/domain/worldPulse/bandedStock.js,src/domain/display/neighbourMirror.js',
     aliveness: Object.freeze({
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'A DERIVED READ THAT STORES NOTHING, AND THE EMPTINESS IS THE DESIGN. ONE GATE: secondOrderBeliefActive is the single strict === true by-name read of this key in the tree, and it stands at the COLLECTOR, so a dark world cannot even assemble the input. WHAT IT DOES: it answers what our OWN durable ledgers say we have shown a named court about ourselves, banded onto a closed ascending ladder, dated by the newest durable act, aged against the estate one half-life vocabulary, and carrying a confidence that DEGRADES on our own first-person evidence that they know things we never showed them. IT COMPOSES SP-B OUTBOUND HEURISTIC AND RE-DERIVES NOT ONE LINE OF IT: outboundImpressionOf already owns the strength and label derivation, and this leaf supplies only the row adaptation, the banding, the staleness clock, the confidence and the frozen closed shape. WHAT IT NEVER DOES: it never reads the counterpart own record of us. That is Law One, and the fence is STRUCTURAL rather than a scan, because the legal read and the forbidden one are the same function with its arguments swapped: the derivation half never receives worldState at all, so it cannot reach a belief partition by construction. IT ALSO NEVER WRITES: no ledger key, no news kind, no receipt, no user-facing surface. DURABLE FAMILIES ONLY (CR-IN1-7): plants and our own concealment posture carry the clock; the handover ledger is live but memoryless because it prunes every prior-tick row; ally shares have no persisted source at this HEAD; and our exposure receipts are one-shot news, so that degradation leg is a recorded deferral rather than a half-built arm. THE OBSERVATION NEEDED is a per-field mirror census once a consumer exists. Until then: tests/domain/secondOrderBelief.test.js and tests/property/secondOrderBeliefDormancyFence.test.js.',
+      other: 'A DERIVED READ THAT STORES NOTHING, AND THE EMPTINESS IS THE DESIGN. ONE GATE: secondOrderBeliefActive is the single strict === true by-name read of this key in the tree, and it stands at the COLLECTOR, so a dark world cannot even assemble the input. WHAT IT DOES: it answers what our OWN durable ledgers say we have shown a named court about ourselves, banded onto a closed ascending ladder, dated by the newest durable act, aged against the estate one half-life vocabulary, and carrying a confidence that DEGRADES on our own first-person evidence that they know things we never showed them. IT COMPOSES SP-B OUTBOUND HEURISTIC AND RE-DERIVES NOT ONE LINE OF IT: outboundImpressionOf already owns the strength and label derivation, and this leaf supplies only the row adaptation, the banding, the staleness clock, the confidence and the frozen closed shape. WHAT IT NEVER DOES: it never reads the counterpart own record of us. That is Law One, and the fence is STRUCTURAL rather than a scan, because the legal read and the forbidden one are the same function with its arguments swapped: the derivation half never receives worldState at all, so it cannot reach a belief partition by construction. IT ALSO NEVER WRITES: no ledger key, no news kind, no receipt. DURABLE FAMILIES ONLY (CR-IN1-7): plants and our own concealment posture carry the clock; the handover ledger is live but memoryless because it prunes every prior-tick row; ally shares have no persisted source at this HEAD; and our exposure receipts are one-shot news, so that degradation leg is a recorded deferral rather than a half-built arm. IT NOW HAS EXACTLY ONE CONSUMER, AND IT RENDERS: IN-1b mounted the standing line on the Relationships and Neighbours surface through src/domain/display/neighbourMirror.js, a pure render-time read-model that composes the collector and the derivation and re-derives neither. That consumer writes nothing either, so every channel above stays empty on the merits. DORMANCY NOW RESTS ON TWO MECHANISMS RATHER THAN ON HAVING NO CALLER: the strict gate at the collector, and the read-model identity check against the frozen unknown that yields an empty list without ever branching on the key. Pinned in tests/domain/secondOrderBelief.test.js, tests/property/secondOrderBeliefDormancyFence.test.js, tests/domain/neighbourMirror.test.js, and a driven rendered-surface golden in tests/ui/neighbourMirrorLine.test.js.',
     }),
     expectedTempo: 'reactive',
     invariants: Object.freeze([
       Object.freeze({
-        name: 'dormancy_is_total_in_both_flag_states',
-        description: 'The mirror has no production caller at this HEAD, so lighting the flag moves no world byte anywhere. That is a stronger claim than ordinary dormancy and it is the one this wave can honestly make; IN-1b legitimately ends it by bringing the first consumer.',
-        check: 'NOT expressible from a receipt, because the subsystem mints none. Pinned in tests/property/secondOrderBeliefDormancyFence.test.js, whose four fences cover the inert read, the differential across every truthy imposter, the call path into the composed leaf, and the exact gate-polarity census.',
+        name: 'dormancy_rests_on_the_gate_and_on_the_absence_rule',
+        description: 'A world that never lights the key is unchanged everywhere, and two mechanisms hold that rather than one. THE GATE: the single strict === true by-name read stands at the collector, so a dark world cannot assemble the input at all. THE ABSENCE RULE: dark, the collector returns its inert input and the derivation the frozen unknown, both BY IDENTITY, so the one consumer answers an empty list and renders no section without ever branching on the key. IN-1a could claim more only because nothing called it; IN-1b brought the first consumer and narrowed the claim in the same commit that made the wider one false.',
+        check: 'NOT expressible from a receipt, because the subsystem mints none. Pinned in tests/property/secondOrderBeliefDormancyFence.test.js, whose fences cover the inert read, the differential across every truthy imposter, the call path into the composed leaf, the exact gate-polarity census, and the one-caller claim measured against live source. The surface half is a DRIVEN byte-identity golden in tests/ui/neighbourMirrorLine.test.js: the tab rendered with the key absent, explicitly false, and lit over a world carrying no outbound record, all three byte-identical to the surface as it stood before this wave existed.',
       }),
       Object.freeze({
         name: 'the_derivation_never_receives_the_world',

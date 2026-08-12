@@ -3948,37 +3948,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // modified, two untracked CREATEs) plus the chair-authorised packet amendment, and the
     // pre-existing `scripts/.test-ratchet-baseline.json` stale-index residue whose
     // `git diff HEAD` is EMPTY. ZERO foreign test files, and therefore zero foreign titles.
-    // ── RE-RECORDED WHOLE at FP IN-1a (2026-08-12), cause stated ───────────────────────
-    // 2404/365/2039/19880/5609 → 2406/365/2041/19923/5621. ⭐ THE WHOLE DELTA IS TWO NEW
-    // FILES: tests/domain/secondOrderBelief.test.js (the mirror's acceptance battery,
-    // C1–C7) at 30 titles / 7 suites, and tests/property/secondOrderBeliefDormancyFence.test.js
-    // (the four-fence dormancy set + lit-mutant) at 13 titles / 5 suites. +2 files,
-    // +2 credited, +43 titles, +12 suiteTitles, +0 parked. All five were re-derived in ONE
-    // run and re-recorded together — never patched one at a time, because a sequenced census
-    // STOPS MEASURING at its first red figure and the later arms would then be read off a run
-    // that never evaluated them.
-    // ⭐ BOTH NEW FILES ARE CREDITED, NOT PARKED, AND THAT WAS MEASURED RATHER THAN ASSUMED: a
-    // temporary probe placed INSIDE this test BEFORE its first assertion (so it minted no title
-    // and could not move what it measures) printed `park: []` for each BY NAME with their exact
-    // title and suite counts. Had either parked, `titles` would not have moved by its share and
-    // `parked + credited === files` would still have closed — on a lie. Every case in both files
-    // is registered STRAIGHT-LINE for exactly this reason.
-    // ⭐ DERIVED THREE TIMES AND ALL THREE AGREE ON ALL FIVE. (a) the live probe above;
-    // (b) frozen row + this lane's per-file delta = 2404+2 / 365+0 / 2039+2 / 19880+43 / 5609+12;
-    // (c) the two focused vitest runs, which reported 30 tests for the battery (42 alongside
-    // outboundImpression's 12) and 13 for the fence (43 alongside the battery's 30).
-    // ⚠ THE OTHER SIX PATHS IN THIS CHANGE CANNOT MOVE A FIGURE, and were checked rather than
-    // assumed. Two are under src/ and are not test files at all; seven are generated edge
-    // bundles. Of the two under tests/: subsystemRowsVirtual.test.js gained a named const, one
-    // array member and one map entry — no `it` and no `describe`; couplingInclusion.walker.test.js
-    // gained one regex and its written reason inside an existing frozen table. THIS file gains
-    // only this comment.
-    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time `git status --porcelain`
-    // carried EXACTLY this lane's own reserved paths (four modified, three untracked CREATEs, seven
-    // generated bundle artifacts) plus the pre-existing stale-index residue of the chair's own
-    // promotion commits, whose `git diff HEAD` is EMPTY for every one of the seven. ZERO foreign
-    // test files, and therefore zero foreign titles.
-    files: 2406, parked: 365, credited: 2041, titles: 19923, suiteTitles: 5621,
+    // ── RE-RECORDED WHOLE at FP IN-1b (2026-08-12), cause stated ───────────────────────
+    // 2406/365/2041/19923/5621 → 2408/365/2043/19945/5628. THE DELTA IS TWO NEW FILES PLUS
+    // TWO NEW CASES IN EXISTING ONES: tests/domain/neighbourMirror.test.js (the standing
+    // line's read-model — C1, C2, C3, C6) at 12 titles / 4 suites, and
+    // tests/ui/neighbourMirrorLine.test.js (the RENDERED-surface half — C4's driven dark
+    // golden and C5's phrase scan with its presence pin and mutant) at 8 titles / 3 suites;
+    // then one narrowed-claim case added inside an EXISTING describe in each of
+    // secondOrderBeliefDormancyFence.test.js and subsystemRowsVirtual.test.js. +2 files,
+    // +2 credited, +22 titles, +7 suiteTitles, +0 parked. The two added cases move `titles`
+    // without moving `files`, `credited` or `suiteTitles`, because they join describes that
+    // already existed — which is exactly why the evidence layer is counted separately.
+    // All five were re-derived in ONE run and re-recorded together — never patched one at a
+    // time, because a sequenced census STOPS MEASURING at its first red figure and the later
+    // arms would then be read off a run that never evaluated them.
+    // ⭐ DERIVED THREE TIMES AND ALL THREE AGREE ON ALL FIVE. (a) a temporary probe placed
+    // INSIDE this test BEFORE its first assertion (so it minted no title and could not move
+    // what it measures), which printed the five-tuple and `park: []` for BOTH new files BY
+    // NAME with their exact title and suite counts — had either PARKED, `titles` would have
+    // moved by less than its share while `parked + credited === files` still closed, on a
+    // lie; (b) frozen row + this lane's per-file delta = 2406+2 / 365+0 / 2041+2 / 19923+22 /
+    // 5621+7; (c) the focused vitest runs, which reported 20 tests across the two new files
+    // (12 + 8), 14 for the fence against 13 at the committed base, and 39 across the four
+    // certification suites against 38 at that same base. Every case in both new files is
+    // registered STRAIGHT-LINE, and neither uses `.each()`, for exactly this reason.
+    // ⚠ THE OTHER NINE PATHS IN THIS CHANGE CANNOT MOVE A FIGURE, and were checked rather
+    // than assumed. Five are under src/ and are not test files at all (three of them
+    // comment-only); seven are generated edge-bundle artifacts. THIS file gains only this
+    // comment and the row below it.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time
+    // `git status --porcelain` carried EXACTLY this lane's own seventeen reserved paths — five
+    // modified under src/, seven generated bundles, two modified tests and three untracked
+    // CREATEs — and NOTHING ELSE. Unlike the three promotions before it, this dispatch found
+    // no stale-index residue at all: `git diff HEAD` and `git diff --cached` were BOTH empty
+    // at preflight. ZERO foreign test files, and therefore zero foreign titles.
+    files: 2408, parked: 365, credited: 2043, titles: 19945, suiteTitles: 5628,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

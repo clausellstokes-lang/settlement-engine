@@ -6,8 +6,10 @@ import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
+import { useStore } from '../../../store/index.js';
+import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 
-export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
+export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
   // Conflicts: from saved links + live-generated for unsaved settlements.
@@ -33,6 +35,30 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
     } catch(e) { return []; }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [r?._seed, r?.id, r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
+
+  // ── IN-1b: THE STANDING LINE ───────────────────────────────────────────────
+  // What our OWN durable record says each counterpart has been shown of us. The
+  // one gate stands a layer down at the collector, so nothing here reads it:
+  // dark, the read-model answers an empty list by identity and no Section
+  // renders at all. The DM seam is composed HERE from props the container
+  // already had (the landed RumorsTab convention), so no second premium
+  // comparison is minted anywhere on this surface.
+  const campaigns = useStore(s => s.campaigns);
+  const savedSettlements = useStore(s => s.savedSettlements);
+  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  // `sid` is derived OUTSIDE the memo deliberately: it keeps `r` out of the memo
+  // body entirely, so the inferred dependency is this one string rather than the
+  // whole settlement object that re-allocates on unrelated state changes.
+  const sid = saveId != null ? String(saveId) : (r?.id != null ? String(r.id) : '');
+  // Hooks-order: this memo sits ABOVE the `!r` early return, for exactly the
+  // reason recorded in the note on the memo above it.
+  // A shared/public dossier carries no campaign world, and must never carry a
+  // court's own ledger of its concealments even if one were reachable.
+  const mirrorLines = useMemo(() => {
+    const campaign = publicDossier || !sid || !Array.isArray(campaigns) ? null : campaigns.find(c => (c.settlementIds || []).map(String).includes(sid) && c.worldState?.spatialLedgers);
+    const byId = new Map((savedSettlements || []).map(x => [String(x?.id ?? x?.settlement?.id ?? ''), x?.settlement?.name || x?.name || '']));
+    return campaign ? neighbourMirrorLines({ worldState: campaign.worldState, settlementId: sid, counterpartIds: (campaign.settlementIds || []).map(String).filter(i => i !== sid), tick: campaign.worldState?.tick, nameFor: id => byId.get(String(id)) || String(id), includeGroundTruth }) : [];
+  }, [sid, campaigns, savedSettlements, includeGroundTruth, publicDossier]);
 
   if (!r) return null;
 
@@ -121,6 +147,10 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
   return (
     <div>
+
+      {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
+        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:FS.xxs,color:MUTED}}>DM truth</summary><div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
+      </Section>}
 
       {/* Neighbour Network */}
       {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>

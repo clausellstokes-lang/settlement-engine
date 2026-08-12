@@ -2,11 +2,22 @@
  * secondOrderBeliefDormancyFence.test.js — IN-1a's FOUR-FENCE dormancy set, with the
  * lit-mutant control and each guard door pinned individually.
  *
- * `secondOrderBeliefEnabled` is built DARK, and this lane makes a STRONGER dormancy claim
- * than any of its siblings: the mirror is a pure leaf with ZERO production callers, so the
- * world is byte-identical in BOTH flag states. IN-1b legitimately ends that when it brings
- * the first consumer; until then the claim is asserted rather than assumed, because "no
- * caller" is exactly the sort of fact that rots silently the day someone adds one.
+ * `secondOrderBeliefEnabled` is built DARK, and through IN-1a this lane made the strongest
+ * dormancy claim of any of its siblings — the mirror was a pure leaf with no production
+ * caller at all. ⚠⚠ IN-1b ENDED THAT LEGITIMATELY, in the commit that ended it, and the
+ * claim here is NARROWED rather than deleted: a deleted fence and a narrowed one look
+ * identical in a diff and are opposite acts.
+ *
+ * WHAT SURVIVES, AND IT IS STILL STRONG. In a world that never lights the key NOTHING MOVES
+ * ANYWHERE, and three mechanisms hold it: the GATE (the single strict `=== true` by-name
+ * read, standing at the collector, so a dark world cannot assemble the input at all); the
+ * IDENTITY ABSENCE RULE (dark, the collector returns its inert input and the derivation the
+ * frozen unknown, both BY IDENTITY, so the consuming read-model answers an empty list
+ * without ever branching on the flag); and the RENDER RULE (an empty list renders no
+ * section). The leaf still writes nothing in either state — that half never depended on
+ * having no caller — but the claim that now MATTERS is about the SURFACE, and it is DRIVEN
+ * against real rendered output in tests/ui/neighbourMirrorLine.test.js rather than asserted
+ * here. FENCE 3 below pins the one reachable caller by name against live source.
  *
  *   FENCE 1 — OWN-FOOTPRINT INVARIANT, CARRYING NO STORED HASH. There is no golden file
  *     here and nothing to re-record: the collector hands back its ONE frozen inert input
@@ -67,6 +78,21 @@ const {
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FLAG = 'secondOrderBeliefEnabled';
 const hash = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+// The source census, hoisted to module scope so FENCE 3's narrowed caller claim and
+// FENCE 4's gate-polarity census read the same tree through the same comment strip.
+const walk = (dir, out = []) => {
+  for (const entry of readdirSync(dir)) {
+    const p = join(dir, entry);
+    if (statSync(p).isDirectory()) walk(p, out);
+    else if (/\.(js|jsx)$/.test(p)) out.push(p);
+  }
+  return out;
+};
+const SRC = walk(join(ROOT, 'src')).map((p) => relative(ROOT, p).replace(/\\/g, '/')).sort();
+const codeOf = (rel) => readFileSync(join(ROOT, rel), 'utf8')
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '');
 
 /**
  * THE ADVERSARIAL WORLD. Every durable family the mirror reads is populated and both
@@ -158,22 +184,50 @@ describe('FENCE 3 — call-path dormancy, on a spy the leaf really goes through'
     // intercepting and every absence above would be proving nothing.
     expect(calls.impression).toBe(1);
   });
+
+  test('THE NARROWED CLAIM: no engine path reaches the mirror, and its ONE caller renders', () => {
+    // ⚠⚠ WHY THIS TEST EXISTS. Through IN-1a this file claimed the mirror had NO production
+    // caller at all, so lighting the key moved no byte anywhere. IN-1b brought the first
+    // consumer and made that sentence false. It is REPLACED here, in the commit that made
+    // it false, on the ES-3 template — because the estate has already paid once for a wave
+    // that broke a certification claim it did not touch.
+    const importers = SRC.filter((rel) => rel !== 'src/domain/worldPulse/secondOrderBelief.js'
+      && /from\s+'[^']*secondOrderBelief\.js'/.test(codeOf(rel)));
+    // EXACTLY ONE, named: a second caller — especially a pulse stage — is the regression
+    // this fence now exists to catch, and an EMPTY list would mean the scan broke.
+    expect(importers).toEqual(['src/domain/display/neighbourMirror.js']);
+
+    // …and it is a RENDER-TIME read-model, not an engine path. The two properties that
+    // make it one are measured rather than asserted: it never names the key (so it adds no
+    // second gate), and it holds the identity check that yields nothing when dark.
+    const consumer = codeOf('src/domain/display/neighbourMirror.js');
+    expect(consumer, 'the read-model read as an empty or comment-only file').toContain('export function neighbourMirrorLines');
+    expect(consumer).toContain('MIRROR_UNKNOWN');
+    // anchored: the two positives immediately above prove this exact subject is live source, so this absence is a measurement
+    expect(consumer, 'the consumer must not mint a second door on the flag').not.toMatch(new RegExp(`\\b${FLAG}\\b`));
+
+    // THE RETIRED SENTENCES ARE PINNED ABSENT FROM THIS FILE'S OWN HEADER, so a later wave
+    // cannot restore the wider claim by copying an older version of it back.
+    //
+    // ⚠ THE SUBJECT IS THE HEADER BLOCK ALONE, AND THAT IS LOAD-BEARING RATHER THAN TIDY.
+    // Scanning the whole file would be self-referential: the needles below are themselves
+    // literals in this test body, so a whole-file scan could never go green however
+    // thoroughly the header was rewritten. The header is where the retired claim lived and
+    // the only place a copy-back would put it.
+    const self = readFileSync(fileURLToPath(import.meta.url), 'utf8');
+    const header = self.slice(0, self.indexOf('*/') + 2);
+    // The non-vacuity control both absences below stand on: a header that failed to slice
+    // would be an empty string, and empty strings contain nothing at all.
+    expect(header.length).toBeGreaterThan(1000);
+    expect(header, 'the sliced header is not this file\'s header').toContain('secondOrderBeliefDormancyFence');
+    // anchored: the length and identity controls immediately above prove this subject is the real populated header, so this measures a DELETED claim
+    expect(header).not.toContain('ZERO production callers');
+    // anchored: the same two controls govern this line, and the importer census above proves the sentence was retired because it is FALSE
+    expect(header).not.toContain('byte-identical in BOTH flag states');
+  });
 });
 
 describe('FENCE 4 — the gate-polarity census over the real source tree', () => {
-  const walk = (dir, out = []) => {
-    for (const entry of readdirSync(dir)) {
-      const p = join(dir, entry);
-      if (statSync(p).isDirectory()) walk(p, out);
-      else if (/\.(js|jsx)$/.test(p)) out.push(p);
-    }
-    return out;
-  };
-  const SRC = walk(join(ROOT, 'src')).map((p) => relative(ROOT, p).replace(/\\/g, '/')).sort();
-  const codeOf = (rel) => readFileSync(join(ROOT, rel), 'utf8')
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/^\s*\/\/.*$/gm, '');
-
   test('the scanned set is real, so every absence below is real', () => {
     expect(SRC.length).toBeGreaterThan(500);
     expect(SRC).toContain('src/domain/worldPulse/secondOrderBelief.js');

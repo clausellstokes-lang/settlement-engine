@@ -37,8 +37,18 @@
  * that record is wrong: a court that has been fed a lie should be less sure of its
  * mirror, not more. It is not a defect to repair.
  *
- * PURE: no state, no writer, no RNG, no clock, no mutation of any argument. Zero
- * production callers at this HEAD, so the dark path is byte-identical BY CONSTRUCTION.
+ * PURE: no state, no writer, no RNG, no clock, no mutation of any argument.
+ *
+ * ── THE DARK PATH, AND WHAT NOW HOLDS IT (IN-1b) ──────────────────────────────────
+ *
+ * IN-1a shipped this leaf with no caller at all, which made the dark path byte-identical
+ * for a reason that has since expired: IN-1b mounted the standing line, and the ONE caller
+ * is now `src/domain/display/neighbourMirror.js`, a render-time read-model. The dark path
+ * is still byte-identical, on two mechanisms that are properties of this file rather than
+ * of who imports it: the GATE stands at the collector, so a dark world never assembles an
+ * input; and both inert answers — `EMPTY_INPUT` and `MIRROR_UNKNOWN` — are handed back BY
+ * IDENTITY, so a consumer can detect "nothing to say" with a reference check and render
+ * nothing, without a second read of the key anywhere above this layer.
  */
 import { HALF_LIFE_BANDS, halfLifeWeeksOf } from './bandedStock.js';
 import { beliefRecord } from './beliefMap.js';

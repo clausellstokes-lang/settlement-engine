@@ -242,10 +242,13 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // Joined 2026-08-12 by FP wave IN-1a under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (secondOrderBelief.secondOrderBeliefActive, the ONE `=== true` by-name read of this
-  // key in the tree) and its AUTHORED certification row — never a pending entry. THE
-  // RAREST DORMANCY POSTURE IN THE LANE: the mirror is a pure leaf with ZERO production
-  // callers at this HEAD, so the world is byte-identical in BOTH flag states and the gate
-  // is what keeps the collector inert until IN-1b brings the first consumer.
+  // key in the tree) and its AUTHORED certification row — never a pending entry. ⚠ ITS
+  // DORMANCY POSTURE NARROWED WHEN IN-1b LANDED THE STANDING LINE: the mirror is no longer
+  // a leaf without callers, and the world is still unmoved in both flag states because the
+  // subsystem writes nothing at all. What a dark world now rests on is the gate at the
+  // collector plus the identity absence rule, which together let the one consumer — the
+  // render-time read-model src/domain/display/neighbourMirror.js — answer an empty list and
+  // render no section without ever reading this key itself.
   'secondOrderBeliefEnabled',
   // Joined 2026-08-04 by lane WW-A under CR-WR10-C item 4, in the SAME commit as its
   // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
