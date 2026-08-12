@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 00:23:39 EDT
+**Generated:** 2026-08-12 01:08:24 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `df15a68a` | **12** |
-| ledger (main) | `review-fixes-2026-07-08` | `9856aa10` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `d0af9b35` | **4** |
+| ledger (main) | `review-fixes-2026-07-08` | `5fc141a1` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 37Gi free (81% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T002303` — build 12 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T010747` — build 4 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T002303
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T010747
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -31,27 +31,15 @@ staged set BY NAME AND COUNT.
 MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/foreign-policy/GR-4A.md
- M src/components/townMap/MapTabShell.jsx
- M src/design/boundBook.js
- M src/lib/mapSubTabs.js
- M tests/build/mapTabShellLazy.test.js
- M tests/lib/mapSubTabs.test.js
- M tests/lint/sovereigntyLightingContract.walker.test.js
-?? src/components/townMap/subtabs/MapCartographySubTab.jsx
-?? src/components/townMap/subtabs/cartographyColours.js
-?? tests/ui/mapCartographySubTab.test.jsx
+MM docs/implementation/packets/town-cartography/TC-5B-II.md
 ```
 ```
-  +18     -2      src/components/townMap/MapTabShell.jsx
-  +1      -0      src/design/boundBook.js
-  +36     -5      src/lib/mapSubTabs.js
-  +22     -3      tests/build/mapTabShellLazy.test.js
-  +53     -2      tests/lib/mapSubTabs.test.js
-  +37     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
 ```
+d0af9b35 2026-08-12 TC-5b-ii flips LANDED with the §6.5 correction; the reservation moves to SCW-0
+c82cc859 2026-08-12 TC-5b-ii: the painter's mount — a settlement's Map tab draws its surveyor's sheet
 df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the painter's mount
 a53ef7c6 2026-08-11 GR-4a: the succession answer lands dark, and both breach-vocabulary literals are cured
 a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
@@ -62,18 +50,16 @@ ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17
 33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
 b0912f7f 2026-08-11 golden: THE GOLDEN BATCH — narrow the Lord Mayor's civic-hall link, discharge SHIFT-2, re-record the golden master
 da31d170 2026-08-11 Census micro-act batch: four ruled acts, one whole census fold
-e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated ledger row lands
-9183d52c 2026-08-11 TC-5b-i: a compiled cartography block becomes reachable without a canvas
 ```
 ## Last 6 ledger commits
 
 ```
+5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
 5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
-9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -191,23 +177,22 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   an implementer — manifest row reconciled by the lane) and Q10's lawfulness colour
   correctly STOPPED (§14). GR-4b/c/d are NOT released. Transcript: session dir
   `subagents/agent-a68fdaea1d6779d46.jsonl`.
-- **Lane Y (build, Opus) — TC-5B-ii: STOPPED CORRECTLY, RULED, RESUMED (~23:45).** All
-  eight acceptance cases PASS (25 straight-line tests + 5 mutants killed); the sole gate
-  red was `manifestCompilers` 1→2 — and the lane PROVED the packet's §6.5 premise false
-  BY CONSTRUCTION (a Vite worker is a separate Rollup build; a main-thread compile can
-  never share its chunk; the count died when the seam gained its first production
-  importer). **CR-TC5BII-1 (chair, vetoable): option (a)** — the arm widens to the
-  STRONGER invariant (exactly 2 chunks: one worker-only-imported, one lazy-only never in
-  the eager graph, each byte-budgeted 10k–100k vs the measured 64,307 B) and the chair
-  AUTHORIZED the one edit to the run-never-edit `townScene3dLazy.test.js`. Option (b)
-  was declined — it would abandon a ratified measured rejection to save a literal.
-  D-11..D-14 RATIFIED (STREET_TONE_PERMILLE=0 — a street is one ink; the FOURTH palette
-  fence caught its own borrowed-semantics true positive). ⚠ Its finding recorded:
-  `tintedCallouts` sits 164 vs ceiling 163 INSIDE the frozen census at 16+ commits —
-  pre-existing, a future micro-act; "only the golden remains" was imprecise. Lane Y is
-  landing everything + the authorized cure; gate owed back TRUE_EXIT=0. The §6.5 packet
-  correction is the chair's at the flip. Then SCW-0 → ES-Da. Transcript: session dir
-  `subagents/agent-a908b637c360b5496.jsonl`.
+- **✅ Lane Y LANDED TC-5B-ii at `c82cc859` (~01:05), chair-flipped at `d0af9b35`.** The
+  painter's mount — THE FIRST USER-VISIBLE CARTOGRAPHY SURFACE — with the CR-TC5BII-1
+  widened guard proven live by three mutants (incl. the counter-intuitive finds: the
+  worker reaches its own compiler DYNAMICALLY — classify by references; the eager
+  closure is 8 chunks — anchor on vendor-react). The lane SELF-CORRECTED its earlier
+  first-paint-zero over-claim (was inference; now proven by the closure walk). Census
+  folded to **2399/365/2034/19821/5592**; gate TRUE_EXIT=0 at HEAD; shared index cured
+  for all ten paths; tree handed back byte-identical. The flip carried the §6.5
+  refuted-premise correction + the widened build test's tenth manifest entry; the
+  census reservation moved to SCW-0 (validator 19/2 READY). Memory row added for the
+  Vite-worker chunk law. Transcript: session dir `subagents/agent-a908b637c360b5496.jsonl`.
+- **Lane Z (build, Opus) — IMPLEMENTING SCW-0** (the site-coherence opener, Wave 0 of
+  9), dispatched ~01:15 at base `d0af9b35`; sole census holder; the 120s corpus-cost
+  probe is a STOP; derived-not-transcribed alternatives; re-derive-and-report-against
+  exit criterion. Then ES-Da takes the reservation last. Transcript: session dir
+  `subagents/agent-a4a558bea88a3606f.jsonl`.
 - **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
   B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
   rows folded verbatim to the 08-11 archive with compact operative hooks kept).
