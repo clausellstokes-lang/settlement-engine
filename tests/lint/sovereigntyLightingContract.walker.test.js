@@ -3791,7 +3791,43 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // carried EXACTLY this packet's nine paths — six modified, three untracked — and ZERO
     // foreign files of any kind, tracked or untracked. No other lane's uncommitted titles
     // are frozen into this row.
-    files: 2398, parked: 365, credited: 2033, titles: 19793, suiteTitles: 5585,
+    // ⭐⭐ TC-5b-ii FOLD (2026-08-12) — RE-DERIVED AND RE-RECORDED WHOLE, per the same
+    // serialization law. The chair moved this walker's manifest reservation OUT of GR-4a
+    // (now LANDED, therefore terminal and reserving nothing) and INTO TC-5b-ii at
+    // `df15a68a`, so the census-holder rule is satisfied and this edit is in-manifest.
+    // 2,398/365/2,033/19,793/5,585 → 2,399/365/2,034/19,821/5,592.
+    // CAUSE, DECOMPOSED — ONE new test file plus THREE new cases inside existing describes:
+    //   + 1 file, +1 credited, +25 titles, +7 suites … tests/ui/mapCartographySubTab.test.jsx
+    //       (the painter's C1–C7 battery: seven describes, twenty-five straight-line cases)
+    //   + 0 files, +3 titles, +0 suites … tests/lib/mapSubTabs.test.js (the seat guard, the
+    //       block-availability presence arm and the deep-link/label arm — all three added
+    //       INSIDE the two EXISTING describes, which is why the suite layer cannot move)
+    //   + 0 anything … tests/build/mapTabShellLazy.test.js. Its `BODIES` array gains a third
+    //       row, and the two `it(`s it drives are registered INSIDE a `for` loop — so that
+    //       file was ALREADY parked and stays parked, and a row added to a parked file's
+    //       data table can move no figure. Checked rather than assumed: `parked` held.
+    // 25 + 3 = 28 and 7 + 0 = 7, which is exactly 19,793 → 19,821 and 5,585 → 5,592 with
+    // NOTHING left over, and `parked` did not move because no file gained or lost a park
+    // reason. ⭐ THE NEW FILE IS CREDITED, NOT PARKED, AND THAT WAS CHECKED RATHER THAN
+    // ASSUMED: `credited` rose by exactly one and all 25 of its titles landed in `titles`.
+    // That is the TC-5a trap again, and it is why every case in the new file registers
+    // straight-line with its loops INSIDE a `test` rather than around one.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE. (a) All five figures are LIVE readings from ONE
+    // run, printed by a temporary probe placed INSIDE this test BEFORE its first assertion,
+    // so the sequenced-census trap could not fire (the run did red on `files`; had the
+    // figures come from the assertions, the later three would never have been evaluated).
+    // (b) The new file's own verbose vitest run reports exactly 25 passing tests and none
+    // skipped, and its describes number 7; the mapSubTabs diff adds exactly three `test(`
+    // lines and no `describe(`. The two derivations agree on every figure.
+    // ⚠ THE FIVE PRODUCTION EDITS IN THIS CHANGE CANNOT MOVE A FIGURE and were checked
+    // rather than assumed: they are src/, not tests/, so no test file gained, lost, parked
+    // or unparked a registration line.
+    // ⚠ FOREIGN-TITLE STOP, checked rather than assumed: at re-record time `git status`
+    // carried EXACTLY this packet's own paths — five modified, three untracked — plus the
+    // three docs/implementation entries that are STALE-INDEX RESIDUE of the chair's own
+    // `df15a68a` (worktree content is byte-identical to HEAD; only the shared git index is
+    // behind). ZERO foreign test files, tracked or untracked, and zero foreign titles.
+    files: 2399, parked: 365, credited: 2034, titles: 19821, suiteTitles: 5592,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

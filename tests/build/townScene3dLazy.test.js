@@ -654,13 +654,87 @@ describe.runIf(DIST_EXISTS)('town-scene 3D production lazy boundary', () => {
       const exportWorkers = assets.filter((file) => EXPORT_WORKER_RE.test(file));
       expect(threeChunks).toHaveLength(1);
       expect(sceneWorkers).toHaveLength(1);
-      expect(manifestCompilers).toHaveLength(1);
+      // ⭐⭐ WIDENED AT CR-TC5BII-1 (chair, 2026-08-12), FROM `toHaveLength(1)`.
+      // THE OLD COUNT'S PREMISE EXPIRED, AND SAYING SO IS THE POINT. "Exactly one
+      // compiler chunk" was true only while the compiler existed solely inside the
+      // worker build. TC-5b-i put a SYNCHRONOUS MAIN-THREAD compile behind
+      // lib/townScene/townCartographyBlock.js, and TC-5b-ii gave that seam its first
+      // production importer — so a second chunk now exists BY CONSTRUCTION.
+      // ⛔ TC-5B-II.md §6.5's mitigation is REFUTED and must not be re-attempted:
+      // it expected one chunk because TC-5b-i "imports the compiler through the SAME
+      // direct specifier the worker uses". A Vite worker is a SEPARATE ROLLUP BUILD,
+      // so a main-thread importer can never share the worker's chunk no matter how
+      // the specifier is spelled. MEASURED: with the seam edge, 2 chunks; with it
+      // removed, 1 — and the worker pair byte-identical either way.
+      // The replacement is STRONGER than the count it replaces: two chunks, each
+      // identified BY GRAPH rather than by name or size, each byte-budgeted, and the
+      // main-thread one proved unreachable without a dynamic import.
+      expect(manifestCompilers).toHaveLength(2);
       expect(exportWorkers).toHaveLength(1);
+
+      // WHICH IS WHICH IS DECIDED BY THE GRAPH. Sorting by filename or size would
+      // re-point these budgets silently the first time a hash or a byte count moved.
+      // ⚠ MEASURED, and it is why this asks about REFERENCES rather than STATIC
+      // imports: the worker reaches its own compiler through a DYNAMIC
+      // `import("./compileTownSceneManifest-*.js")`, so a static-specifier scan finds
+      // it ZERO importers and would mis-classify it. The main-thread copy, by
+      // contrast, is a plain static `from "./compileTownSceneManifest-*.js"`.
+      const referencesTo = (chunk) => assets
+        .filter((file) => file.endsWith('.js') && file !== chunk)
+        .filter((file) => (
+          readFileSync(join(ASSETS_ROOT, file), 'utf8').includes(chunk)
+        ));
+      const workerOwned = manifestCompilers.filter((chunk) => {
+        const refs = referencesTo(chunk);
+        // `length > 0` is load-bearing: `.every` over an EMPTY list is vacuously
+        // true, so an orphaned chunk would otherwise pass as the worker's.
+        return refs.length > 0 && refs.every((ref) => SCENE_WORKER_RE.test(ref));
+      });
+      expect(
+        workerOwned,
+        'exactly one compiler chunk must be reachable ONLY from the scene worker',
+      ).toHaveLength(1);
+      const workerCompiler = workerOwned[0];
+      const mainThreadCompiler = manifestCompilers.find(
+        (chunk) => chunk !== workerCompiler,
+      );
+      expect(mainThreadCompiler, 'the second compiler chunk is the main-thread one')
+        .toBeDefined();
+
+      // THE MAIN-THREAD COMPILER IS LAZY OR IT IS A REGRESSION. A second copy that
+      // reaches first paint is 64 KB every reader pays for a sub-tab most never open;
+      // behind the seam's `await import(...)` it costs an unlit reader nothing. This
+      // is the invariant that replaces the retired count, and it is the one that
+      // actually protects the budget.
+      const eagerGraph = entryStaticClosure();
+      // LIVENESS ANCHOR, not a size guess. The first-paint graph is deliberately
+      // TINY (8 chunks as measured here), so a count floor would be both fragile and
+      // weak. Anchor instead on a chunk that can only be present if the walk really
+      // resolved the entry's dependencies: a React SPA cannot paint without its React
+      // vendor chunk, and that chunk is reached by exactly the same edges the
+      // exclusions below rely on.
+      expect(
+        eagerGraph.filter((file) => /^vendor-react-[A-Za-z0-9_-]+\.js$/.test(file)),
+        'the entry closure walk resolved nothing recognisable — every exclusion below'
+        + ' would pass vacuously; fix the walk, never the assertion',
+      ).toHaveLength(1);
+      expect(
+        eagerGraph.filter((file) => file === mainThreadCompiler),
+        'the main-thread manifest compiler entered the first-paint static closure —'
+        + ' the cartography seam lost its dynamic import()',
+      ).toEqual([]);
+      expect(
+        eagerGraph.filter((file) => file === workerCompiler),
+        'the worker manifest compiler entered the first-paint static closure',
+      ).toEqual([]);
 
       const threeBytes = statSync(join(ASSETS_ROOT, threeChunks[0])).size;
       const workerBytes = statSync(join(ASSETS_ROOT, sceneWorkers[0])).size;
       const manifestCompilerBytes = statSync(
-        join(ASSETS_ROOT, manifestCompilers[0]),
+        join(ASSETS_ROOT, workerCompiler),
+      ).size;
+      const mainThreadCompilerBytes = statSync(
+        join(ASSETS_ROOT, mainThreadCompiler),
       ).size;
       const exportWorkerBytes = statSync(
         join(ASSETS_ROOT, exportWorkers[0]),
@@ -674,7 +748,16 @@ describe.runIf(DIST_EXISTS)('town-scene 3D production lazy boundary', () => {
       expect(workerBytes).toBeLessThan(300_000);
       expect(manifestCompilerBytes).toBeGreaterThan(10_000);
       expect(manifestCompilerBytes).toBeLessThan(350_000);
+      // THE BOUNDED PAIR IS UNCHANGED and still means what it always meant: it is
+      // the WORKER's payload, now named by graph rather than by array position.
+      // MEASURED at TC-5b-ii: 77,455 + 307,682 = 385,137, byte-identical to the
+      // figure TC-5a recorded, with and without the cartography seam edge.
       expect(workerBytes + manifestCompilerBytes).toBeLessThan(400_000);
+      // CR-TC5BII-1: the main-thread copy's OWN budget, against 64,307 B measured at
+      // TC-5b-ii. Room to grow, but a doubling reds — because the reason this chunk
+      // is tolerable is that it is small AND lazy, and both halves must stay true.
+      expect(mainThreadCompilerBytes).toBeGreaterThan(10_000);
+      expect(mainThreadCompilerBytes).toBeLessThan(100_000);
       expect(exportWorkerBytes).toBeGreaterThan(5_000);
       expect(exportWorkerBytes).toBeLessThan(1_500_000);
     },

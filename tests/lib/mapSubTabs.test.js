@@ -14,7 +14,9 @@
 
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
+  MAP_SUB_TAB_CARTOGRAPHY,
   MAP_SUB_TAB_IDS,
   MAP_SUB_TAB_PARAM,
   MAP_SUB_TAB_PLAYER,
@@ -39,9 +41,32 @@ describe('TC-0 — the sub-tab vocabulary is the pane vocabulary, extended by on
     expect([...PRESENTATION_SUB_TAB_IDS]).toEqual(['plan', 'panorama', 'portrait3d']);
   });
 
-  test('the whole vocabulary is the presentations plus the player projection', () => {
-    expect([...MAP_SUB_TAB_IDS]).toEqual(['plan', 'panorama', 'portrait3d', 'player']);
+  test('the whole vocabulary is the presentations plus the two non-projections', () => {
+    expect([...MAP_SUB_TAB_IDS]).toEqual(['plan', 'panorama', 'portrait3d', 'player', 'cartography']);
     expect(MAP_SUB_TAB_PLAYER).toBe('player');
+    expect(MAP_SUB_TAB_CARTOGRAPHY).toBe('cartography');
+  });
+
+  test('TC-5b-ii THE SEAT GUARD — the painter joins NO persisted vocabulary', () => {
+    // The owner-gated surface this packet exists to avoid. PRESENTATION_SUB_TAB_IDS
+    // IS TOWN_MAP_VIEW_IDS by direct alias — a closed, migration-bearing,
+    // device-persisted list whose docblock forbids renaming an id in place. Both
+    // negatives are anchored on `panorama`, which travels the identical path.
+    expectAbsentWithAnchor(
+      [...TOWN_MAP_VIEW_IDS], MAP_SUB_TAB_CARTOGRAPHY, 'panorama',
+      'the persisted town-map view vocabulary',
+    );
+    expectAbsentWithAnchor(
+      [...PRESENTATION_SUB_TAB_IDS], MAP_SUB_TAB_CARTOGRAPHY, 'panorama',
+      'the presentation sub-tab ids',
+    );
+    // ...and it IS in the sub-tab vocabulary, so the two absences above measure a
+    // seat decision rather than an id that was never declared at all.
+    expect([...MAP_SUB_TAB_IDS]).toContain(MAP_SUB_TAB_CARTOGRAPHY);
+    expect(isPresentationSubTab(MAP_SUB_TAB_CARTOGRAPHY)).toBe(false);
+    expect(presentationViewFor(MAP_SUB_TAB_CARTOGRAPHY)).toBe(null);
+    // The anchor for that null: a real presentation still answers with its view.
+    expect(presentationViewFor('panorama')).toBe('panorama');
   });
 
   test('every declared id carries a reader-facing label and an unknown id carries none', () => {
@@ -95,6 +120,32 @@ describe('TC-0 — PRESENCE, never a disabled tab (the ai_notes lesson)', () => 
     expect(idsOf(tabs)).toEqual(['plan', 'panorama']);
     expect(Object.isFrozen(tabs)).toBe(true);
     expect(Object.isFrozen(tabs[0])).toBe(true);
+  });
+
+  test('TC-5b-ii — cartography is present only when the BLOCK is, and it sits LAST', () => {
+    // CR-TC5B-3: the fact is the block's availability, never the flag. A lit world
+    // whose compile produced nothing has no sheet, and a tab whose content cannot
+    // exist is ABSENT rather than present and inert.
+    expect(idsOf(resolveMapSubTabs({
+      audience: 'dm', sceneAvailable: true, savedMap: true, cartographyAvailable: true,
+    }))).toEqual(['plan', 'panorama', 'portrait3d', 'player', 'cartography']);
+    expect(idsOf(resolveMapSubTabs({
+      audience: 'dm', sceneAvailable: true, savedMap: true, cartographyAvailable: false,
+    }))).toEqual(['plan', 'panorama', 'portrait3d', 'player']);
+    // The gate is independent of every other gate: a visitor on a dark machine with
+    // no save still gets the sheet when there IS one.
+    expect(idsOf(resolveMapSubTabs({ audience: 'public', cartographyAvailable: true })))
+      .toEqual(['plan', 'panorama', 'cartography']);
+    // ...and an omitted input defaults to absent, so no existing caller gains a tab.
+    expect(idsOf(resolveMapSubTabs({ audience: 'dm', savedMap: true })))
+      .toEqual(['plan', 'panorama', 'player']);
+  });
+
+  test('TC-5b-ii — a deep link may address the sheet, and its label is chrome', () => {
+    expect(readMapSubTabParam('?mapview=cartography')).toBe('cartography');
+    expect(mapSubTabLabel('cartography')).toBe('Cartography');
+    // D-2's live bonus: `illustrated` is a paid-adjacent LENS id, never this tab's.
+    expect(readMapSubTabParam('?mapview=illustrated')).toBe(null);
   });
 });
 

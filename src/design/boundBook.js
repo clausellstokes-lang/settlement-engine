@@ -118,6 +118,7 @@ export const ARTWORK_SURFACE_MANIFEST = Object.freeze([
   artwork('town-map.card-thumb', 'src/components/townMap/SettlementCardMapThumb.jsx', 'SettlementCardMapThumb', 'plate'),
   artwork('town-map.fog-player', 'src/components/townMap/fog/FogPlayerView.jsx', 'FogPlayerView', 'plate'),
   artwork('town-map.player-subtab', 'src/components/townMap/subtabs/MapPlayerSubTab.jsx', 'MapPlayerSubTab', 'plate'),
+  artwork('town-map.cartography-subtab', 'src/components/townMap/subtabs/MapCartographySubTab.jsx', 'MapCartographySubTab', 'plate'),
 ]);
 
 const reader = (id, ownerPath, ownerSelector, surfaceRegister, motion = 'none', staticComposition = 'present') => Object.freeze({

@@ -50,7 +50,9 @@ import { useStore } from '../../store/index.js';
 import { useFlag } from '../../lib/flags.js';
 import { detectTownSceneCapability } from '../../lib/townScene/viewPolicy.js';
 import { readLastMapView, writeLastMapView } from '../../lib/lastMapView.js';
+import { useTownCartographyBlock } from './useTownCartographyBlock.js';
 import {
+  MAP_SUB_TAB_CARTOGRAPHY,
   MAP_SUB_TAB_PLAYER,
   normalizeMapSubTab,
   presentationViewFor,
@@ -66,6 +68,7 @@ import {
 // the camera, the pinned card, or the fog session.
 const SettlementMapPane = lazy(() => import('./SettlementMapPane.jsx'));
 const MapPlayerSubTab = lazy(() => import('./subtabs/MapPlayerSubTab.jsx'));
+const MapCartographySubTab = lazy(() => import('./subtabs/MapCartographySubTab.jsx'));
 
 const ID_PREFIX = 'sfmap';
 
@@ -126,9 +129,20 @@ export default function MapTabShell({
   const [sceneCapability] = useState(() => detectTownSceneCapability());
   const sceneAvailable = townSceneSelectable(sceneFlagOn, sceneCapability);
 
+  // Cartography PRESENCE is the BLOCK's availability, never the flag (CR-TC5B-3):
+  // a lit world whose compile produced nothing has no sheet to offer, and this
+  // shell's law is presence, never a disabled tab. Dark, the seam never imports
+  // the transport at all, so an unlit reader pays nothing for the question.
+  const cartography = useTownCartographyBlock({
+    settlement, worldState, regionalGraph, audience,
+  });
+
   const present = useMemo(
-    () => resolveMapSubTabs({ audience, sceneAvailable, savedMap: saveId != null }),
-    [audience, sceneAvailable, saveId],
+    () => resolveMapSubTabs({
+      audience, sceneAvailable, savedMap: saveId != null,
+      cartographyAvailable: cartography.available,
+    }),
+    [audience, sceneAvailable, saveId, cartography.available],
   );
 
   const persistedSubTab = useStore((s) => s.displayPrefs?.mapSubTab);
@@ -194,6 +208,8 @@ export default function MapTabShell({
         <Suspense fallback={<MapSubTabWaiting />}>
           {selected === MAP_SUB_TAB_PLAYER ? (
             <MapPlayerSubTab settlement={settlement} />
+          ) : selected === MAP_SUB_TAB_CARTOGRAPHY ? (
+            <MapCartographySubTab block={cartography.block} planExtent={cartography.planExtent} />
           ) : (
             <SettlementMapPane
               settlement={settlement}

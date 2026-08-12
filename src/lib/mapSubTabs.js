@@ -27,11 +27,23 @@
  * nothing to draw. Gating them on a model read would drag the town-map model into
  * the shell's chunk, which is the very edge the TC-0 lazy pin forbids.
  *
- * EXTENSION POINT (deliberately NOT taken here): §12 seats `Illustrated` — the
- * TC-5 cartography painter — as a fourth presentation. Its id joins
- * PRESENTATION_SUB_TAB_IDS the day the TC-1 manifest flag exists; declaring it
- * now would ship a vocabulary entry that can never be present, which is exactly
- * the vacuous-pin shape this file is built to avoid.
+ * ⭐ THE EXTENSION POINT, TAKEN — AND NOT WHERE THE DESIGN SAID (TC-5b-ii).
+ * §12 seated the TC-5 cartography painter as a fourth PRESENTATION, and this
+ * comment used to repeat that plan. ⛔ It was wrong, and the wrong plan is worth
+ * naming so no later reader re-plants it: PRESENTATION_SUB_TAB_IDS *is*
+ * TOWN_MAP_VIEW_IDS by direct alias — a closed, migration-bearing,
+ * device-persisted vocabulary whose own docblock forbids renaming an id in
+ * place. Joining THAT is an owner-gated persistence change for a surface that
+ * needs none of it.
+ *
+ * So `cartography` takes the seat `player` already proved: a member of
+ * MAP_SUB_TAB_IDS and of nothing else. It is not a projection of the plan, the
+ * pane never receives it, presentationViewFor() answers null for it, and the
+ * living-backdrop sidecar records nothing when it is chosen. The only persisted
+ * trace is displayPrefs.mapSubTab, whose setter is SHAPE-guarded rather than
+ * vocabulary-guarded and whose reader re-normalizes against PRESENCE every
+ * render — so an unknown, retired or gated-off value opens Plan. Ruled at
+ * `8738f5ea`; measured whole at TC-5B-II.md §2b.
  */
 
 import { TOWN_MAP_VIEW_IDS, normalizeTownMapView } from './lastMapView.js';
@@ -49,6 +61,14 @@ export const MAP_SUB_TAB_PARAM = 'mapview';
 export const MAP_SUB_TAB_PLAYER = 'player';
 
 /**
+ * The illustrated surveyor's sheet (TC-5b-ii). ⚠ The id is `cartography` and
+ * never `illustrated`: ILLUSTRATED_STYLE_ID is a live, pickable, paid-adjacent
+ * LENS over the legacy town-map model, and re-using its spelling here would
+ * collide two vocabularies that mean different things.
+ */
+export const MAP_SUB_TAB_CARTOGRAPHY = 'cartography';
+
+/**
  * The presentation ids — the pane's own persisted projection vocabulary, in its
  * own order. Plan is first and is the permanent default (§1, §12).
  * @type {ReadonlyArray<'plan'|'panorama'|'portrait3d'>}
@@ -61,6 +81,7 @@ export const PRESENTATION_SUB_TAB_IDS = /** @type {ReadonlyArray<
 export const MAP_SUB_TAB_IDS = Object.freeze([
   ...PRESENTATION_SUB_TAB_IDS,
   MAP_SUB_TAB_PLAYER,
+  MAP_SUB_TAB_CARTOGRAPHY,
 ]);
 
 /** Reader-facing labels. A label is chrome; the id is the contract. */
@@ -69,6 +90,7 @@ const LABELS = Object.freeze({
   panorama: 'Panorama',
   portrait3d: '3D Portrait',
   player: 'Player View',
+  cartography: 'Cartography',
 });
 
 /**
@@ -112,10 +134,17 @@ export function townSceneSelectable(sceneEnabled, capability) {
  * order. Pure: every input is a resolved fact, so a pin can drive the gate
  * directly.
  *
+ * ⭐ `cartographyAvailable` is THE BLOCK'S availability, never the flag
+ * (CR-TC5B-3). A lit flag whose compile produced nothing is a tab whose content
+ * CANNOT exist, and the law above says such a tab is ABSENT — offering it would
+ * make the A-4 notice its normal state. The one spelling of that fact is
+ * useTownCartographyBlock(...).available, which is `status === 'ready'`.
+ *
  * @param {{
  *   audience?: 'dm'|'player'|'public',
  *   sceneAvailable?: boolean,
  *   savedMap?: boolean,
+ *   cartographyAvailable?: boolean,
  * }} [input]
  * @returns {ReadonlyArray<{ id: string, label: string }>}
  */
@@ -124,10 +153,12 @@ export function resolveMapSubTabs(input = {}) {
     audience = 'dm',
     sceneAvailable = false,
     savedMap = false,
+    cartographyAvailable = false,
   } = input;
   const ids = ['plan', 'panorama'];
   if (sceneAvailable) ids.push('portrait3d');
   if (audience === 'dm' && savedMap) ids.push(MAP_SUB_TAB_PLAYER);
+  if (cartographyAvailable) ids.push(MAP_SUB_TAB_CARTOGRAPHY);
   return Object.freeze(ids.map((id) => Object.freeze({ id, label: LABELS[id] })));
 }
 

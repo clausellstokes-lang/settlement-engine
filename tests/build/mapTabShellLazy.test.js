@@ -66,16 +66,35 @@ const DOSSIER_SRC = resolve(ROOT, 'src/components/OutputContainer.jsx');
 const SHELL_SENTINEL = 'settlementforge:map-tab-shell:lazy-v1';
 const PLAYER_SENTINEL = 'settlementforge:map-player-subtab:lazy-v1';
 const PANE_SENTINEL = 'settlementforge:town-map-pane:lazy-v1';
+const CARTOGRAPHY_SENTINEL = 'settlementforge:map-cartography-subtab:lazy-v1';
+
+/** Every minted fingerprint, so the uniqueness and dist arms stay total. */
+const SENTINELS = Object.freeze([SHELL_SENTINEL, PLAYER_SENTINEL, PANE_SENTINEL, CARTOGRAPHY_SENTINEL]);
 
 const BODIES = Object.freeze([
   { module: './SettlementMapPane.jsx', fingerprint: PANE_SENTINEL, what: 'the town-map pane' },
   { module: './subtabs/MapPlayerSubTab.jsx', fingerprint: PLAYER_SENTINEL, what: 'the player-view leaf' },
+  { module: './subtabs/MapCartographySubTab.jsx', fingerprint: CARTOGRAPHY_SENTINEL, what: 'the cartography painter leaf' },
 ]);
 
-/** Modules the CHROME must never be able to reach without a dynamic import. */
+/** Modules the CHROME must never be able to reach without a dynamic import.
+ *
+ *  ⭐ TC-5b-ii adds the painter and the two modules it drags. The PALETTE is
+ *  forbidden as well as the component: it is the leaf's own dependency, and a
+ *  static edge to it would be an edge to the paint-role vocabulary and thence to
+ *  the cartography contract. ⚠ Deliberately NOT forbidden: `cartographyContract.js`
+ *  itself and `design/tokens.js`. The shell reaches BOTH legitimately — the
+ *  contract through TC-5b-i's presence hook (it holds zero imports, which is the
+ *  whole reason that hook may read the dark gate statically) and the tokens
+ *  through the theme shim the shell has always imported. Forbidding either would
+ *  red on a real, intended edge. */
 const FORBIDDEN_IN_SHELL_CLOSURE = Object.freeze([
   'src/components/townMap/SettlementMapPane.jsx',
   'src/components/townMap/subtabs/MapPlayerSubTab.jsx',
+  'src/components/townMap/subtabs/MapCartographySubTab.jsx',
+  'src/components/townMap/subtabs/cartographyColours.js',
+  'src/domain/townCartography/cartographyPaint.js',
+  'src/domain/townCartography/cartographyPaintRoles.js',
   'src/domain/townMap/townMapModel.js',
   'src/lib/townMapExport.js',
 ]);
@@ -198,7 +217,7 @@ describe('TC-0 — the Map sub-tab bodies are lazy leaves (source contract)', ()
       }
     };
     walk(resolve(ROOT, 'src'));
-    for (const fingerprint of [SHELL_SENTINEL, PLAYER_SENTINEL, PANE_SENTINEL]) {
+    for (const fingerprint of SENTINELS) {
       const hits = files.filter((f) => readFileSync(f, 'utf-8').includes(fingerprint));
       expect(hits.map((f) => relative(ROOT, f)), `the fingerprint "${fingerprint}"`).toHaveLength(1);
     }
@@ -248,7 +267,7 @@ describe.runIf(distExists)('TC-0 — the Map sub-tab bodies are lazy leaves (dis
   });
 
   it.skipIf(!REQUIRE_DIST)('anti-vacuity — every fingerprint DOES exist in a lazy chunk', () => {
-    for (const fingerprint of [SHELL_SENTINEL, PLAYER_SENTINEL, PANE_SENTINEL]) {
+    for (const fingerprint of SENTINELS) {
       expect(
         chunksContaining(fingerprint).length,
         `the fingerprint "${fingerprint}" is in NO dist chunk — did the module change or the build skip it?`,
