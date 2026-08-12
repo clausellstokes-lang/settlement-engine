@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 05:29:03 EDT
+**Generated:** 2026-08-12 05:51:48 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a2222fee` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `b35320d5` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a2222fee` | **16** |
+| ledger (main) | `review-fixes-2026-07-08` | `2fa34a57` | **4601** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 35Gi free (82% used)
+**Gate slot:** gate-mutex: HELD by atomic lock PID 50472: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+**Disk:** 36Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T052823` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T055003` — build 16 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T052823
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T055003
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,9 +28,37 @@ staged set BY NAME AND COUNT.
 ### Uncommitted in the build tree — attribute before touching
 
 ```
+ M docs/implementation/packets/foreign-policy/GR-4B.md
 MM scripts/.test-ratchet-baseline.json
+ M src/domain/display/chroniclersLetter.js
+ M src/domain/display/settlementRumors.js
+ M src/domain/realm/heraldRouting.js
+ M src/domain/worldPulse/grammarNews.js
+ M src/domain/worldPulse/grammarReceiptPools.js
+ M src/domain/worldPulse/peaceTerms.js
+ M src/domain/worldPulse/treatyBreach.js
+ M tests/domain/impactKindWalkers.test.js
+ M tests/domain/successionQuestion.test.js
+ M tests/lint/grammarLifecycleKindPools.walker.test.js
+ M tests/lint/kindPoolFloors.walker.test.js
+ M tests/lint/sovereigntyLightingContract.walker.test.js
+?? src/domain/worldPulse/treatySuccessionVoice.js
+?? tests/domain/treatySuccessionVoice.test.js
 ```
 ```
+  +122    -39     docs/implementation/packets/foreign-policy/GR-4B.md
+  +4      -0      src/domain/display/chroniclersLetter.js
+  +1      -0      src/domain/display/settlementRumors.js
+  +7      -0      src/domain/realm/heraldRouting.js
+  +15     -2      src/domain/worldPulse/grammarNews.js
+  +18     -0      src/domain/worldPulse/grammarReceiptPools.js
+  +2      -2      src/domain/worldPulse/peaceTerms.js
+  +22     -5      src/domain/worldPulse/treatyBreach.js
+  +9      -0      tests/domain/impactKindWalkers.test.js
+  +10     -3      tests/domain/successionQuestion.test.js
+  +39     -5      tests/lint/grammarLifecycleKindPools.walker.test.js
+  +7      -2      tests/lint/kindPoolFloors.walker.test.js
+  +31     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
@@ -51,12 +79,12 @@ a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ## Last 6 ledger commits
 
 ```
+2fa34a57 2026-08-12 GR-4b stopped on a false mute-road premise; the alpha scope is ruled
 b35320d5 2026-08-12 GR-4b promotes clean and its implementer goes out
 531e57fc 2026-08-12 The frozen census shrinks to sixteen; the day's debt arc closes downward
 78e5e90c 2026-08-12 Micro-act batch two collected: the 164th callout was real and is cured
 7795bbf1 2026-08-12 GR-4b is drafted and pre-ruled: the voice pays zero lines and refuses false headlines
 eb658359 2026-08-12 The chain closes: all four promoted packets are landed and terminal
-1234721a 2026-08-12 The rider stopped on the chair's own rulings, and both cures are ruled
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -69,6 +97,26 @@ eb658359 2026-08-12 The chain closes: all four promoted packets are landed and t
 <!-- resume-state.sh preserves everything below this line verbatim. Update it at every
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
+
+# ⏸ PAUSED AT THE OWNER'S ORDER, 2026-08-12 05:49 EDT — RESUME AT 8:12 AM
+
+**Nothing dispatches after this line until 8:12 AM.** State at pause:
+- **ONE LANE LIVE, recorded for collection: Lane AE** (GR-4b-α — amending the packet per
+  CR-GR4B-8 then building the disavowal voice; sole census holder; gate owed back
+  TRUE_EXIT=0; transcript session dir `subagents/agent-a6af0c49600b4c4f6.jsonl`). If it
+  reports during the pause the chair RECORDS the outcome only; verification, flip, and
+  any dispatch wait for 8:12. If it dies, the standard survey/snapshot/resume applies AT
+  8:12, not before.
+- **⚠ TWO CONCURRENT MEMORY-INDEX FOLD SESSIONS ran and ended during this window** (the
+  recorded lost-update hazard class). Integrity snapshot at pause: 16,995 B, zero broken
+  links, 61 lines — LOOKS healthy; a hook-survival grep is OWED AT RESUME before any
+  index write (grep every hook across the dir; the pre-compaction snapshots are beside
+  the index if repair is needed).
+- The build branch stands at `a2222fee` + Lane AE's in-flight work; the ledger at this
+  commit; the gate GREEN; census 16; 20 packets (GR-4B mid-amendment to α).
+- **At 8:12: (1) hook-survival check on MEMORY.md; (2) collect/verify Lane AE + flip;
+  (3) resume the queue** — SCW-1 + IN-1 drafts, GR-4c draft, the corpus-coverage mint
+  charter, the schema-7 prose batch — per the standing orders and the heartbeat cadence.
 
 # ⭐⭐⭐ RESUMED 2026-08-11 ~14:30 EDT — the pause is LIFTED by owner order ("Continue the pending work!")
 
