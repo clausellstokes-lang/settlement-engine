@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 23:18:51 EDT
+**Generated:** 2026-08-12 00:23:39 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `df15a68a` | **3** |
-| ledger (main) | `review-fixes-2026-07-08` | `5c87b476` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `df15a68a` | **12** |
+| ledger (main) | `review-fixes-2026-07-08` | `9856aa10` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 32Gi free (84% used)
+**Disk:** 37Gi free (81% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T231816` — build 3 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T002303` — build 12 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T231816
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T002303
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -31,8 +31,23 @@ staged set BY NAME AND COUNT.
 MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/foreign-policy/GR-4A.md
+ M src/components/townMap/MapTabShell.jsx
+ M src/design/boundBook.js
+ M src/lib/mapSubTabs.js
+ M tests/build/mapTabShellLazy.test.js
+ M tests/lib/mapSubTabs.test.js
+ M tests/lint/sovereigntyLightingContract.walker.test.js
+?? src/components/townMap/subtabs/MapCartographySubTab.jsx
+?? src/components/townMap/subtabs/cartographyColours.js
+?? tests/ui/mapCartographySubTab.test.jsx
 ```
 ```
+  +18     -2      src/components/townMap/MapTabShell.jsx
+  +1      -0      src/design/boundBook.js
+  +36     -5      src/lib/mapSubTabs.js
+  +22     -3      tests/build/mapTabShellLazy.test.js
+  +53     -2      tests/lib/mapSubTabs.test.js
+  +37     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
@@ -53,12 +68,12 @@ e7774ff2 2026-08-11 TC-5b-i flips LANDED in all three homes, and its validated l
 ## Last 6 ledger commits
 
 ```
+9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
 5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 37585538 2026-08-11 The pipeline relaunches on the green gate: four promotions and the mint out
 9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
-d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -176,12 +191,23 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   an implementer — manifest row reconciled by the lane) and Q10's lawfulness colour
   correctly STOPPED (§14). GR-4b/c/d are NOT released. Transcript: session dir
   `subagents/agent-a68fdaea1d6779d46.jsonl`.
-- **Lane Y (build, Opus) — IMPLEMENTING TC-5B-ii (the painter's mount)**, dispatched
-  ~22:30 at base `df15a68a` (the walker reservation MOVED to TC-5B-II per the holder
-  rule, validator 19/3 READY green; sole census holder). The first user-visible
-  cartography surface; the ADOPTED A-4 copy ships verbatim; planExtent as a resolved
-  number; the forked-colour walker at `[]` makes one hex literal a hard error. Then
-  SCW-0 → ES-Da. Transcript: session dir `subagents/agent-a908b637c360b5496.jsonl`.
+- **Lane Y (build, Opus) — TC-5B-ii: STOPPED CORRECTLY, RULED, RESUMED (~23:45).** All
+  eight acceptance cases PASS (25 straight-line tests + 5 mutants killed); the sole gate
+  red was `manifestCompilers` 1→2 — and the lane PROVED the packet's §6.5 premise false
+  BY CONSTRUCTION (a Vite worker is a separate Rollup build; a main-thread compile can
+  never share its chunk; the count died when the seam gained its first production
+  importer). **CR-TC5BII-1 (chair, vetoable): option (a)** — the arm widens to the
+  STRONGER invariant (exactly 2 chunks: one worker-only-imported, one lazy-only never in
+  the eager graph, each byte-budgeted 10k–100k vs the measured 64,307 B) and the chair
+  AUTHORIZED the one edit to the run-never-edit `townScene3dLazy.test.js`. Option (b)
+  was declined — it would abandon a ratified measured rejection to save a literal.
+  D-11..D-14 RATIFIED (STREET_TONE_PERMILLE=0 — a street is one ink; the FOURTH palette
+  fence caught its own borrowed-semantics true positive). ⚠ Its finding recorded:
+  `tintedCallouts` sits 164 vs ceiling 163 INSIDE the frozen census at 16+ commits —
+  pre-existing, a future micro-act; "only the golden remains" was imprecise. Lane Y is
+  landing everything + the authorized cure; gate owed back TRUE_EXIT=0. The §6.5 packet
+  correction is the chair's at the flip. Then SCW-0 → ES-Da. Transcript: session dir
+  `subagents/agent-a908b637c360b5496.jsonl`.
 - **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
   B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
   rows folded verbatim to the 08-11 archive with compact operative hooks kept).
