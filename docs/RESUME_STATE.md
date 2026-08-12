@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 15:50:42 EDT
+**Generated:** 2026-08-12 16:13:25 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `b17d32d2` | **8** |
-| ledger (main) | `review-fixes-2026-07-08` | `48d517c5` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `d000bd67` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T155005` — build 8 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T161249` — build 8 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T155005
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T161249
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -58,12 +58,12 @@ a2222fee 2026-08-12 GR-4b promoted READY: the succession road gets a voice, and 
 ## Last 6 ledger commits
 
 ```
+d000bd67 2026-08-12 The mirror is flipped; IN-1b drafts to close the orphan window
 48d517c5 2026-08-12 Lane AH collected green; the INDEX contradiction is cured; memory is linked
 62fdbce5 2026-08-12 IN-1a promotes clean at the moved base; the mirror implements
 b439bf09 2026-08-12 IN-1 splits three ways, and the mirror finds its substrate already waiting
 cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already did its work
 812b07f6 2026-08-12 The gate is green at the voice's HEAD; the corpus advances to Wave 1 and the mirror
-28569d17 2026-08-12 The succession voice is collected and flipped; the gate receipt runs
 ```
 ## Fable-survey debt (derived, not transcribed)
 
