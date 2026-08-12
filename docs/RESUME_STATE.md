@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 02:18:25 EDT
+**Generated:** 2026-08-12 03:07:45 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `caa6094a` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `3aed3008` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `caa6094a` | **14** |
+| ledger (main) | `review-fixes-2026-07-08` | `675929ab` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 35Gi free (82% used)
+**Disk:** 37Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T021749` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T030707` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T021749
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T030707
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -33,8 +33,23 @@ MM docs/implementation/PACKET_MANIFEST.json
 MM docs/implementation/packets/foreign-policy/GR-4A.md
 MM docs/implementation/packets/site-coherence/SCW-0.md
 MM docs/implementation/packets/town-cartography/TC-5B-II.md
+ M src/domain/certification/couplingRegistryEspionage.js
+ M src/domain/certification/subsystemRowsVirtual.js
+ M src/domain/worldPulse/envoyDiplomacy.js
+ M src/domain/worldPulse/envoyErrand.js
+ M tests/domain/couplingRegistry.test.js
+ M tests/property/espionageProductsDormancyFence.test.js
+?? src/domain/worldPulse/espionage/espionageRider.js
+?? tests/domain/espionageRider.test.js
+?? tests/property/espionageRiderDormancyFence.test.js
 ```
 ```
+  +51     -0      src/domain/certification/couplingRegistryEspionage.js
+  +2      -2      src/domain/certification/subsystemRowsVirtual.js
+  +13     -0      src/domain/worldPulse/envoyDiplomacy.js
+  +8      -1      src/domain/worldPulse/envoyErrand.js
+  +19     -1      tests/domain/couplingRegistry.test.js
+  +9      -1      tests/property/espionageProductsDormancyFence.test.js
 ```
 ## Last 12 build commits
 
@@ -55,12 +70,12 @@ ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17
 ## Last 6 ledger commits
 
 ```
+675929ab 2026-08-12 The site-coherence program opens on a superseded audit; the rider goes last
 3aed3008 2026-08-12 The painter's mount is collected and flipped; the site-coherence opener begins
 5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
 5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
-a4091799 2026-08-11 Four packets promote in one landing; the survey task closes at its floor
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -201,12 +216,27 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   record). C7 caught a stale audit figure (`/barge/` is LIVE now). Census folded to
   **2401/365/2036/19835/5594**. Transcript: session dir
   `subagents/agent-a4a558bea88a3606f.jsonl`.
-- **Lane AA (build, Opus) — IMPLEMENTING ES-Da** (the espionage rider, DARK — the
-  authorized re-entry, LAST of the four promoted packets), dispatched ~01:50 at base
-  `caa6094a`; sole census holder; byte-identity by construction, the string-literal
-  STOP, zero pulse-mouth lines, the `.npcs` comment conviction law. Landing makes
-  ES-5a/2/3/5d/6a reachable (still flag-dark until the endgame). Transcript: session
-  dir `subagents/agent-af30d0d9e08251373.jsonl`.
+- **Lane AA — ES-Da STOPPED CORRECTLY (~02:50), RULED CR-ESDA-6/7, RESUMED.** The rider
+  is complete and green on 7 of 8 manifest rows with the dark-path byte-identity proven
+  AGAINST THE PRE-FEATURE COMMIT (identical 10-tick ledger hashes) — but two of the
+  chair's own rulings were unimplementable at HEAD, both proven: **the coupling id
+  shape refuses ANY letter-named wave** (`-\d+[a-z]?` requires digits; ES-Da has none;
+  the naming space legitimately grew via refusal-splits) and a stale flag-era JSDoc
+  (`covert?:boolean|null`) rejects the record the layer below already accepts.
+  **CR-ESDA-6**: the shape widens to `-(?:\d+[a-z]?|[A-Z][a-z]?)` (a map that cannot
+  name a chartered wave is incomplete where it matters most; rename DECLINED — it
+  erases refusal-record provenance); the row lands as documentation with the
+  pair-already-licensed finding in its rationale. **CR-ESDA-7**: the one-word JSDoc
+  cure authorized (executed-and-reverted measurement = the receipt). Door-3's honest
+  fail-closed labeling RATIFIED. The lane is landing with both cures + the whole
+  census fold; gate owed back TRUE_EXIT=0; the two new reserved paths join the
+  manifest row at the flip. Consumer receipts so far: ES-5a CONFIRMED (first
+  production caller of the orphaned doctrine stage), ES-2/3 CONFIRMED lit, ES-5d/6a
+  PLAUSIBLE (need their own flags). Transcript: session dir
+  `subagents/agent-af30d0d9e08251373.jsonl`.
+- **Chair memory pass (~03:05):** the index folded to **17,047 B** (under ceiling,
+  zero broken links; the schema-6 and lane-census rows folded verbatim with sharpest
+  hooks restored; the letter-wave finding hooked at the ES-7 row).
 - **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
   B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
   rows folded verbatim to the 08-11 archive with compact operative hooks kept).
