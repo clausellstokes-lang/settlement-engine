@@ -151,6 +151,18 @@ the manifest — the template gap did NOT claim a fifth victim); desk walker and
 receipt-sample suites measured NOT to move (a red there is a STOP, not a fix); the
 licensing door proven open in scratch with the row present.
 
+**⚠ ~22:20: AQ reported ALL implementation + local verification COMPLETE and YIELDED
+while its full gate still ran** (the outlast-the-gate hazard — its "armed waiters"
+died with the yield). All locals green with captured exits: B13-a 163→169 of 12
+budget, B15 OSR byte-identical 1954 no mint, B16 title walker unmoved 485, C1–C7 13
+tests exit 0 (C1 proven red first), coupling desk walker + receipt sample UNMOVED,
+census re-recorded whole, both typecheckers 0. One measured refinement RATIFIED: the
+oath-lit-only run ENTERS the fence block and still writes nothing (advanceCredibility
+self-gates) — a strictly stronger fence than §3.5 sketched; the both-lit control
+lands a real −0.14 charge regardless. **Chair resumed AQ (~22:20) with the collect
+order: hold the gate's TRUE_EXIT in its own turn, land via the prepared CAS only on
+green, STOP on red.** Still sealed; nothing else lands.
+
 **LIVE (2026-08-12 ~21:30): TWO lanes:**
 - **Lane AQ (Opus) implements GR-4c** (task transcript `ad6baea434bd51134`): the
   pure banded-charge leaf + the ≤12-line mount + the coupling
