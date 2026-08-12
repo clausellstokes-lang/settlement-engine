@@ -127,15 +127,29 @@ roads on oathHolderActive (oddity deferred to GR-7); no coupling row PENDING the
 promotion's measurement (STOP if owed); informationStatecraft.js (780/800) joins the
 HOT-FILE LIST; the INDEX header restamps at promotion (stale residue note cleared).
 
-**LIVE: Lane AP (GR-4C promotion, transcript `a2d5437810b3358c9`), Opus, docs-only:**
-executes the draft's §15 NOT-MEASURED list before authoring (B1–B4 with TRUE_EXIT,
-the D-4 coupling mechanism + walker run, chunk pins, anchor allowance at HEAD, the
-FENCE 1/2 fixture-flag read), folds the rulings in, claims the census walker row at
-dispatch (FIFTH restamp), validates 23 packets / 1 READY, ONE plumbing commit,
-porcelain zero. Collection: on READY → chair-verify → dispatch the GR-4c implementer
-(census holder). Behind it: the AO-1 micro-act (lock-the-win floors, CR-AO-5 — no new
-files, no census contact; runs as second lane once the promotion lands), then AO-0's
-schema-7 mint packet, the schema-7 prose batch, the machinery batch.
+**⭐ AP STOPPED ONCE (~20:45) ON D-4 AND THE CHAIR RULED (~20:50, CR-GR4C-7/8, §19a):**
+the coupling walker's layers are FROZEN MODULE SETS by regex, NOT directories —
+treatyBreach=GRAMMAR, informationStatecraft=INFO, so the mount mints an unlicensed
+INFO→GRAMMAR pair (executed probe, 152/152 committed directions reproduced, walker's
+own positive control green). **CR-GR4C-7: the row is MINTED** (read treatyBreach.js,
+counterforce pactFormation.js#reserveFor, flags = the oath×info conjunction; the
+template-gap law binds — head re-export + exact-list pin join the manifest if the row
+flows through them; all four pin consumers enumerated; the licensing predicate proven
+open in scratch before authoring). **CR-GR4C-8: the both-lit control is MANDATORY**
+(the fence never lights the info flag — the drafted counter reads 0 in both runs,
+the redundant-guard-vacuity class; C3 must prove the counter CAN count). AP's base
+receipts all green: B1–B3, both typecheckers, coupling walker at base, validate 22/0,
+implementation suites 34/34 — every TRUE_EXIT=0. Stale walker comment at :649 goes to
+the prose batch, not this packet.
+
+**LIVE: Lane AP resumed (~20:55) authoring the promotion** with CR-GR4C-1..8 folded
+in: GR-4C.md READY + INDEX row + census-holder FIFTH restamp (the walker row moves to
+GR-4C) + CR-GR4C-6 header restamp + manifest entry now carrying the registration path
+and every moving pin; validate 23 packets / 1 READY; ONE plumbing commit; porcelain
+zero. Collection: transcript `a2d5437810b3358c9`; on READY → chair-verify → dispatch
+the GR-4c implementer (census holder). Behind it: the AO-1 micro-act (lock-the-win
+floors, CR-AO-5), AO-0's schema-7 mint packet, the schema-7 prose batch (+ the :649
+stale note), the machinery batch.
 - **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
   PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
   dead-window re-derivation from pulse call order; carries the B13 law (executed vs

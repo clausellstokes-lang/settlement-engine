@@ -936,3 +936,29 @@ rulings adopting the lane's recommendations:
 
 Promotion lane dispatched with the draft + these rulings; the census-holder row MOVES
 to GR-4C at that dispatch (the walker row was FREE since the IN-1b landing).
+
+### §19a · THE PROMOTION STOPPED ONCE, ON THE COUPLING QUESTION, AND THE ROW IS MINTED
+### (2026-08-12 ~20:50, CR-GR4C-7/8 — vetoable)
+
+Lane AP executed everything and STOPPED exactly where CR-GR4C-4 told it to: the
+coupling walker's layers are FROZEN MODULE SETS resolved by regex, not directories —
+`treatyBreach.js` is GRAMMAR, `informationStatecraft.js` is INFO, so the mount mints a
+NEW `INFO→GRAMMAR` pair that no baseline key, no owed row, and no licensing row covers
+(executed probe against the live registry; the lane's hand-copied patterns reproduce
+all 152 committed directions with zero mismatches, and the walker's own positive
+control proves the scan can see licensed reads). The draft's "same directory = same
+layer" premise was simply false, and the anticipated CPL-19 row licenses the READ
+direction at `pactFormation.js`, not this write-side import.
+
+**CR-GR4C-7:** the row is MINTED — the coupling is real (a breach charges the
+credibility stock) and declaring it is what the registry is FOR. Direction
+`INFO→GRAMMAR`, read `treatyBreach.js`, counterforce `pactFormation.js#reserveFor`,
+flags = the oath × information conjunction. The promotion carries the recorded
+template-gap law (the head re-export + the exact-list pin join the manifest if the row
+flows through them) and enumerates all four pin consumers before authoring.
+**CR-GR4C-8:** the both-lit control is MANDATORY — the dormancy fence never lights the
+information flag, so the new counter would read zero in both existing runs (the
+redundant-guard-vacuity class); C3 must prove the counter can COUNT.
+
+Every base measurement passed: B1–B3 suites, both typecheck windows, the coupling
+walker green at base, validate 22/0, implementation suites 34/34 — all TRUE_EXIT=0.
