@@ -1,9 +1,9 @@
 {
   "_doc": "PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "46357c94b2257d1f5947bc849b8f506451784450",
-  "totalTests": 27929,
-  "totalFiles": 2383,
-  "skippedCeiling": 111,
+  "measuredAtSha": "32f4e520e71774a233a0f8627cffa90a31674357",
+  "totalTests": 28258,
+  "totalFiles": 2403,
+  "skippedCeiling": 62,
   "uncollectedSuites": {},
   "entries": {
     "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
@@ -36,14 +36,6 @@
       "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
       "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
       "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
-      "class": "debt"
-    },
-    "tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)": {
-      "file": "tests/design/deepCraftKillList.test.js",
-      "test": "THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)",
-      "subsystem": "design / deep-craft kill list",
-      "cause": "tintedCallouts census is 164 against a frozen ceiling of 163 — the Founders' Hall page added one more tinted callout structure.",
-      "introducedAt": "531a84887b81177cbb493463541de46864cb554f",
       "class": "debt"
     },
     "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
