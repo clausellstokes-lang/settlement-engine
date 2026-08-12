@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-11 20:10:46 EDT
+**Generated:** 2026-08-11 20:12:52 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `33487c77` | **1** |
-| ledger (main) | `review-fixes-2026-07-08` | `d7698bc6` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `9542b886` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260811T201011` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260811T201217` — build 1 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T201011
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260811T201217
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -51,12 +51,12 @@ e1e9fd6a 2026-08-11 validate:packets stops believing CREATE rows: existence is c
 ## Last 6 ledger commits
 
 ```
+9542b886 2026-08-11 THE GATE IS FULLY GREEN: TRUE_EXIT=0 at 33487c77 — the first of the era
 d7698bc6 2026-08-11 The golden batch landed proven-subset-tight; the re-freeze cured the last red
 a6f700f7 2026-08-11 Lane T lands the micro-acts; the validation debt reaches its floor of two
 1abc0ee2 2026-08-11 TC-5b-i is landed and flipped; the golden batch and the micro-acts are out
 6c5ba02a 2026-08-11 Lane R collected: Wave 0 ruled, and the board deliberately narrows to one lane
 f10d7fbc 2026-08-11 Lane Q collected: ES-Da is compilable, byte-identical dark by construction
-c5901a3e 2026-08-11 Lane P collected: GR-4 refused-and-split, and the split found a double-win bug
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -118,7 +118,23 @@ noise is gone), and RESUMED both lanes from their transcripts with re-verify ord
 (pre-death measurements must be RE-RUN, never reused). Zero landed work lost; total cost
 two partial lane turns. Banked to seamless-resume-directive.md as the live-fire proof.
 
-**LIVE (two lanes + the chair):**
+**LIVE as of ~20:15 (two lanes + the chair, relaunched on the GREEN gate):**
+- **Lane U (build, Opus) — THE FOUR-PACKET PROMOTION** (one docs commit): TC-5B-ii →
+  READY with the chair-authored A-4 copy (owner veto surface §17.7) · GR-4a per
+  CR-GR4-1..6 (incl. the GR design-doc trigger-premise correction) · SCW-0 per
+  CR-SCW0-1..6 · ES-Da per CR-ESDA-1..5. The shared walker TEST reservation is the known
+  serialization point — validate:packets governs; census-holder rule written in.
+  Transcript: session dir `subagents/agent-ab475d05eaad421a7.jsonl`.
+- **Lane V (build, Opus) — THE SCHEMA-6 MINT (task #11)**: the ruled two-commit pair
+  (code half deliberately gate-red → genesis), items 1-5+8 + exemptions A and B (B's
+  gate discharged at `da31d170`), M11/M12 into the walker's hand-composed chain in the
+  SAME commit, throwaway-detached proof first, PURE SHRINK expected, final receipt =
+  the gate handed back at TRUE_EXIT=0. Lane V is the census holder this window.
+  Transcript: session dir `subagents/agent-a93343baa4193717f.jsonl`.
+- Chair queue after these: implementer dispatches in census-holder order (GR-4a first),
+  the copy batch (task #17), then the corpus per CR-NEXT-1.
+
+**Earlier this board (collected):**
 0. **✅ Lane M LANDED TC-5B-i at `9183d52c` (~18:35) and the chair FLIPPED IT LANDED at
    `e7774ff2`** (packet + INDEX + manifest, validator 16/0 clean with the existence check
    live; ledger row in FABLE_VALIDATION_QUEUE). B6 152 ms vs the 600 ms STOP; C1–C8
