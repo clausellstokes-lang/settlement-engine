@@ -88,6 +88,13 @@ const CASUS = 'casusCommerciiEnabled';
 const SCARCITY = 'believedScarcityEnabled';
 const CONDITIONS = 'believedConditionsEnabled';
 const DEVOTION = 'believedDevotionEnabled';
+// Joined 2026-08-12 by FP wave IN-1a, with its manifest entry and its first by-name gate
+// read in one commit. A SEVENTH zero-key case, and the only one whose emptiness is a
+// CALLER fact: the mirror is a pure derivation with no ledger and no writer, and IN-1a
+// ships it PRODUCER-FIRST, so at this HEAD nothing in production calls it at all. That is
+// deliberate rather than unfinished — the ES-7 refusal is what the estate paid for the
+// other order — and it is why every channel is empty and the row declares unobserved.
+const MIRROR = 'secondOrderBeliefEnabled';
 // Joined 2026-08-05 by FP wave ES-0, with its manifest entry and its first by-name gate
 // read in one commit. A FIFTH zero-key case, and the only one whose emptiness is neither
 // a shape fact nor a mount fact but a BUILD fact: ES-0 lands the gate and the pure leaves
@@ -120,7 +127,7 @@ const PACTS = 'pactFormationEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
-  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, POSTURE, SPINE,
+  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
   CONQUEST, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
 ]);
 
@@ -150,6 +157,13 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/espionage/espionageDoctrine.js',
     'src/domain/worldPulse/espionage/espionageMath.js',
   ],
+  // The mirror's own leaf, and it is the ONLY member of this map with exactly one entry
+  // because the lane is exactly one file: the gate, the collector and the derivation all
+  // live in it. The two modules it composes (outboundImpression, bandedStock) are named in
+  // the row's wider `module` list but deliberately NOT here — they are SP's files, and
+  // tracing this lane's claims through them would measure the substrate layer's vocabulary
+  // instead of this one's.
+  [MIRROR]: ['src/domain/worldPulse/secondOrderBelief.js'],
   // The posture lane's own leaves: the door where the flag is read together with the
   // composition it feeds, and the ledger that owns the facet. Both are the lane's, and
   // the row's `module` list is the same pair — unusually narrow here and deliberately

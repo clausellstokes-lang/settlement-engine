@@ -151,6 +151,18 @@ const LAYER_PATTERNS = Object.freeze({
     // precisely what will force FP-TRADE's coming consumer of `secrecyTradeFactorOf` to
     // register its coupling instead of reading across a port in silence.
     /^src\/domain\/worldPulse\/secrecy[A-Z]/,
+    // IN-1: the second-order mirror. "What our own record says they have been shown" is
+    // INFORMATION's own subject — the layer mints the outbound acts, owns their decay, and
+    // owns the belief partition the mirror is forbidden to cross — so the leaf takes INFO
+    // whatever noun it is named after, on exactly the reading that gave secrecyTradeFactor
+    // INFO and beliefAxisSubjects INFO: the distinction is SUBJECT, not program. It is NOT
+    // an ARGUED_UNLAYERED case: the argued roster is for modules that own no subject and are
+    // spoken by every port, and this one owns second-order belief outright. Giving it a
+    // family is precisely what will force GRAMMAR's coming negotiation-posture consumer to
+    // register its coupling instead of reading across a port in silence.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `second[A-Z]` PREFIX: a prefix would claim files nobody
+    // has designed and silently widen a frozen family.
+    /^src\/domain\/worldPulse\/secondOrderBelief\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
   ],
   GRAMMAR: [
