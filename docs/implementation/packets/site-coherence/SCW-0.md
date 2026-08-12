@@ -1,6 +1,7 @@
 # Site Coherence / SCW-0 — the enforcement layer (measuring instruments only)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `d648e788`, 2026-08-12; flipped by the chair after verification (all 8 acceptance cases, the C2 sweep mutant executed, census folded in-change, gate TRUE_EXIT=0 at HEAD). Do not redispatch. ⚠ CR-SCW0-2 CORRECTED: the wave is SEVEN paths — `scripts/lib/premortem-triggers.mjs` is forced by gate step 2 for any new hazard-registry class (deviation ratified: a real predicate, never an exemption lie). ⚠ The audit baseline `80/33/23/0/103` is SEED-DEPENDENT and reproducible at no HEAD — the frozen 43-row identity-keyed baseline at `d648e788` supersedes it as the program’s reference.
 - **Status note:** ✅ **PROMOTED READY 2026-08-11 by the Fable chair (session `c42c8924`,
   Lane U), compiled from Lane R's read-only draft and the six rulings CR-SCW0-1..6 (§12).**
   Lane R held the packet at DRAFT for one mechanical reason — CD-2: the estate-wide lighting
