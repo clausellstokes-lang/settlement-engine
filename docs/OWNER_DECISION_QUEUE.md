@@ -845,3 +845,52 @@ longer exists (zero occurrences), a restored dead read is a NEW identity against
 governed path. Site-coherence Wave 1 is recorded DISCHARGED-BY that same genesis; its
 six-line instruction-text residue lands as a micro-act; its CLI half is parked in the
 corpus-coverage mint charter.
+
+## §18 · THE CORPUS-COVERAGE MINT CHARTER IS RULED (2026-08-12 ~19:55, CR-AO-1..7 — vetoable)
+
+Lane AO's charter came back with a LIVE threat model, not a hypothesis: the chair
+independently re-read the three load-bearing sites and they verify. One seam
+(`worldPulseFeedCuration.js`) mints two news homes from one prose object and corrects
+the HEADLINE's voice between them while passing `summary` and `reasons` through raw —
+the lane's executed probe (272 entries, 53 homes) caught **48 proposal-voice summaries
+shipping under the applied/outcome home** ("…can advance through exploit" describing an
+act that already happened), 24 reason strings appearing under 2–7 homes each, and one
+queued headline no rewrite row covers. Every existing guard is a source scan; none joins
+a string to the home it was OBSERVED under. Seven rulings, all vetoable:
+
+1. **CR-AO-1 — the program STANDS ALONE as an instrument; its Wave AO-0 rides a
+   schema-7 mint of the shared corpus builder.** The OSR cannot host it (it discards
+   every string by construction; identity space, governance direction and volume all
+   differ) — but widening the observation harness edits governed path #7, which IS the
+   substantive mint SCW-1b's parking record demanded. SCW-1b finally has its host.
+2. **CR-AO-2 — SCW-1b's folded scope is FIVE sites plus one stale comment, not four.**
+   The parking record undercounted the hand-edit `stale.push` at `:1378` (chair
+   re-read it — same defect as the counted `ratchetMessage`). Correction recorded here;
+   the parking record is amended at AO-0, not before.
+3. **CR-AO-3 — ⚠ OWNER-VISIBLE — the queued/applied summary reuse is ruled a DEFECT,
+   cured at the view-time seam (Wave AO-3), which MOVES SAME-SEED NEWS PROSE for the 48
+   observed entries.** Grounds: the estate already corrects the headline between the
+   two homes (a half-applied rule), and the NEWS ADDRESS LAW requires the typed action
+   to be honest. The persisted record does NOT change — this is the SCW program's safe
+   class (view-time projection). Declared behavior shift, golden re-records with stated
+   cause. **Veto here stops AO-3 before it dispatches; AO-0/1/2 spend nothing on it.**
+4. **CR-AO-4 — baseline posture: only-shrinks BOTH directions** (the site-coherence
+   idiom) — a program whose purpose is closing a class must not absorb a win as slack.
+5. **CR-AO-5 — Wave AO-1 (lock-the-win) is authorized**: the news-authoring census
+   floors 760/84/83/46 re-point to measured (998/99/98/58 at the wave's own re-derive).
+   Re-point, not raise; the 19-row EXACT baseline is untouched.
+6. **CR-AO-6 — ⚠ OWNER-VISIBLE — `HZ-CROSSHOME` lands as a NEW MACHINERY hazard class
+   with its own premortem trigger predicate** (gate STEP 2 behavior changes for every
+   future lane; the trigger must fire against its own synthetic changeset). DOCUMENT is
+   at ceiling 6/6 and folding into HZ-SINGLEWRITER would spend the last OWED slot —
+   MACHINERY is the only honest status.
+7. **CR-AO-7 — contract before cure**: AO-2's voice contract lands FIRST and REDS on
+   arrival (the retro-detection receipt); AO-3 burns the ledger to zero after. The
+   estate's pin-vacuity family is entirely pins authored ahead of their subject.
+
+Wave order adopted: **AO-1 (cheapest, zero new files) → AO-0 (the schema-7 mint;
+SCW-1b's five sites ride the genesis) → AO-2 → AO-3 → AO-4 → AO-5 → AO-6.** The
+charter's §15 ledger is honest about delegated figures; every wave re-derives its own
+premises at compile. The charter text lives in the Lane AO transcript and the chair's
+board — it does NOT land as a repo doc while the per-claim naked-claim law stands;
+each wave's packet carries only its own measured slice.

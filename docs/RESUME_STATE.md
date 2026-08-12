@@ -93,7 +93,23 @@ one day — landing releases the row; next dispatch takes it). Porcelain ZERO bo
 AM's process note carried: the main-worktree false-deletion signal fired again (cwd
 reset mid-pass; harmless, cd explicitly — the recorded hazard).
 
-**LIVE: TWO read-only draft lanes (Opus), dispatched ~19:30, NO tree writes:**
+**⭐ COLLECTED ~19:55: Lane AO's corpus-coverage charter — RULED CR-AO-1..7 (§18 on the
+owner queue, the veto surface).** The threat model is LIVE and chair-re-verified at the
+three load-bearing sites: the curation seam corrects the headline's voice between the
+queued/applied homes but passes summary+reasons raw (48 proposal-voice summaries under
+the outcome home, executed probe, 272 entries/53 homes); the OSR discards every string
+at its scalar gate so it can never host this; SCW-1b's real scope is FIVE sites (+1
+stale comment), and its host is AO-0's schema-7 mint of governed path #7. Rulings:
+stands-alone instrument (only-shrinks both directions; the executed corpus, never a
+source scan); AO-1 lock-the-win authorized; ⚠ OWNER-VISIBLE pair — CR-AO-3 (the summary
+reuse is a DEFECT; the AO-3 cure MOVES SAME-SEED NEWS PROSE, declared shift, veto stops
+AO-3 only) and CR-AO-6 (HZ-CROSSHOME as new MACHINERY class + premortem trigger).
+Wave order AO-1 → AO-0 → AO-2..6; contract before cure; the charter text stays in the
+transcript + board (no repo doc under the per-claim law). Probes retained in scratchpad
+(laneAO-ask-corpus*.mjs, ~90s each). Next dispatch decision (AO-1 vs GR-4c first) waits
+on Lane AN's draft — the census row is FREE and moves at that dispatch.
+
+**LIVE: Lane AN (GR-4c draft, transcript `ac50facb0e78f639f`), read-only, Opus:**
 - **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
   PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
   dead-window re-derivation from pulse call order; carries the B13 law (executed vs
