@@ -55,6 +55,7 @@ import {
   ES5D_CAREER_CREDIT_COUPLING,
   ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES6A_DOUBLE_AGENT_LEAK_COUPLING,
+  ESDA_COVERT_RIDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
@@ -92,9 +93,21 @@ const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 
  * `CPL-<pair>.<DIRECTION>.<VOLUME>-<wave>[letter].<facet>`, built FROM the list
  * above so the closed set has exactly one spelling. A hand-copied alternation
  * beside the list would be one edit away from disagreeing with it silently.
+ *
+ * ⏱ CR-ESDA-6 (chair, 2026-08-12) — THE WAVE SEGMENT NOW ADMITS A LETTER-NAMED WAVE.
+ * The segment was `-\d+[a-z]?`, which requires a wave to START WITH DIGITS: `ES-1`,
+ * `ES-5b` and `ES-6a` pass and `ES-Da` cannot, because `Da` carries no digit. That was
+ * discovered by lane AA when ES-Da — a wave chartered through the OWNER_DECISION_QUEUE
+ * §16/§17 refusal-split lineage — turned out to have NO LEGAL COUPLING ID AT ALL, so the
+ * one map of cross-layer reads could not name a chartered wave. The naming space
+ * legitimately grew when refusal-splits began minting letter waves; a map that cannot
+ * name a chartered wave is incomplete exactly where completeness matters most. RENAME WAS
+ * DECLINED: rewriting a chartered name across the refusal-record lineage is churn that
+ * erases provenance. `[A-Z][a-z]?` is deliberately NARROW — one capital, one optional
+ * lower — so this admits `ES-Da` without opening the segment to free text.
  */
 const COUPLING_ID_SHAPE = new RegExp(
-  `^CPL-\\d+\\.[A-Z_]+\\.(?:${CHARTERED_VOLUME_PREFIXES.join('|')})-\\d+[a-z]?\\.[a-z_]+$`,
+  `^CPL-\\d+\\.[A-Z_]+\\.(?:${CHARTERED_VOLUME_PREFIXES.join('|')})-(?:\\d+[a-z]?|[A-Z][a-z]?)\\.[a-z_]+$`,
 );
 
 describe('CW-0 coupling registry', () => {
@@ -568,12 +581,17 @@ describe('CW-0 coupling registry', () => {
     expect(couplingRowsFor('CPL-17', 'GRAMMAR→POP')).toEqual([GR3_POPULATION_GRANT_COUPLING]);
     // IN-0a's handoff is the FOURTH independently-owned read on this direction and the
     // first owned by INFORMATION; the legacy first-row tiebreak below is unmoved by it.
+    // ⏱ ES-Da's covert rider is the FIFTH read on this direction, and the FIRST time the
+    // ESPIONAGE family is the DEPENDENCY rather than the importer — every earlier ES row
+    // reads GRAMMAR→INFO because espionage was always the one doing the importing. The
+    // legacy first-row tiebreak below is unmoved by it.
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
       .toEqual([
         WR7_MOVING_PICTURE_COUPLING,
         WR7_ENVOY_PLANT_COUPLING,
         GR2_BELIEVED_DEMAND_COUPLING,
         IN0A_PLANT_HANDOFF_COUPLING,
+        ESDA_COVERT_RIDER_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by
@@ -643,6 +661,11 @@ describe('CW-0 coupling registry', () => {
       // inclusion walker CANNOT SEE — the dependency it records is unlayered — so the row is
       // pure record under CR-ES5B-4 rather than a licence for a pair that would otherwise red.
       ES6A_DOUBLE_AGENT_LEAK_COUPLING,
+      // ES-Da appends the covert rider, and it FLIPS THE VOLUME'S ARROW: it is the first row
+      // where the espionage family is the DEPENDENCY rather than the importer, so it reads
+      // INFO→GRAMMAR where every ES row before it reads GRAMMAR→INFO. It is also the volume's
+      // first LETTER-NAMED wave, which is why CR-ESDA-6 had to widen the id shape above.
+      ESDA_COVERT_RIDER_COUPLING,
     ]);
     // ES-6a OPENS A DIRECTION on the volume's own anchor, and it is the first SAME-LAYER
     // direction in the espionage set: both ends of the recorded edge carry INFO, because the

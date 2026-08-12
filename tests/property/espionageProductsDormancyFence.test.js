@@ -326,11 +326,19 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
     // world object, and then on the CORRUPTION WEB's gate as well, spelled inside its leash
     // read: that second door is not redundancy, because the leash resolver is NOT web-gated
     // and a betrayal-seeded foreign patron survives in a world that never lit the web.
+    // ⏱ ES-Da ADDS ONE MORE, AND IT IS THE FIRST GATED LEAF WHOSE IMPORTER IS THE WAR LANE
+    // ITSELF. `espionageRider.js` is read by `envoyDiplomacy.js` — a GRAMMAR-layer file on
+    // the live accepted-peace dispatch path — so it has a production importer outside the
+    // family and can inherit nobody's dormancy. Its `covertRiderFor` refuses at the ONE door
+    // on a single `espionageActive` read BEFORE it touches a world object, and that placement
+    // is the whole wave's central invariant rather than a habit: a declining rider must
+    // contribute an EMPTY SPREAD to the mint's argument list, so a gate placed any later
+    // would stop a dark world being byte-identical to the world before this wave existed.
     expect(gated).toEqual([
       'espionageCareer.js', 'espionageCareerCredit.js',
       'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
       'espionageLeak.js', 'espionageMissions.js', 'espionagePresence.js',
-      'espionageProductStage.js',
+      'espionageProductStage.js', 'espionageRider.js',
     ]);
     // The visibility predicate is a REAL module in the family that deliberately carries no
     // gate, so its exclusion is anchored by a gating sibling that travels the same scan.

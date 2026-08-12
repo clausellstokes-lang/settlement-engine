@@ -467,13 +467,25 @@ describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides'
 });
 
 describe('ES-5 — the cadence is a DECLARED dark instrument, and the declaration is scanned', () => {
-  test('no production module imports the doctrine stage, and the scan reds on a plant', () => {
+  test('EXACTLY ONE production module imports the doctrine stage, and the scan reds on a plant', () => {
     // THE HEADER MAKES A CLAIM AND THIS IS ITS PIN — a comment is not a pin, and the wave
     // that shipped this leaf could have wired it and deliberately did not (R-ES1-1: the
     // errand ledger's ONE writer still refuses without the six war flags and a peace offer,
     // so a free-standing spy row does not exist to be minted). The day a caller appears,
     // this reds and the header's residual block must be revisited rather than quietly
     // outliving its fact — the same treatment ES-3 gave `insideAssetAt`'s producer census.
+    //
+    // ⏱ ES-Da (2026-08-12) — THE DAY ARRIVED, AND THIS PIN IS DOING EXACTLY WHAT IT WAS
+    // BUILT FOR. The census was `[]` through ES-6a; the composite rider is the doctrine
+    // stage's FIRST production caller, so the leaf is no longer orphaned and the empty
+    // expectation is no longer true. It is NARROWED to name the one caller rather than
+    // deleted: the claim that still matters is that the doctrine stage has exactly ONE
+    // production reader, so a second one — which would mean two places deciding what a
+    // court's espionage temperament is — still reds here. `espionageRider.js` reaches it
+    // for `espionageDoctrineFor` and `dispatchDemandFor`, both behind the rider's own
+    // `espionageActive` door, so the leaf stays dark in a dark world exactly as before.
+    // ⚠ The stage's own module header was checked at this landing and asserts no orphan
+    // status in prose, so there is no residual block left to revise.
     const walk = (dir, out = []) => {
       for (const entry of readdirSync(dir)) {
         const p = join(dir, entry);
@@ -486,7 +498,7 @@ describe('ES-5 — the cadence is a DECLARED dark instrument, and the declaratio
       .filter((p) => /espionageDoctrineStage\.js['"]/.test(readFileSync(p, 'utf8')))
       .map((p) => relative(ROOT, p).replace(/\\/g, '/'))
       .sort();
-    expect(importers).toEqual([]);
+    expect(importers).toEqual(['src/domain/worldPulse/espionage/espionageRider.js']);
     // POSITIVE CONTROL: the detector really detects, proven by a planted source rather than
     // assumed. Without it the emptiness above could be a regex that stopped matching.
     const planted = "import { dispatchCadenceFor } from './espionage/espionageDoctrineStage.js';";

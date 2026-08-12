@@ -587,6 +587,65 @@ export const ES6A_DOUBLE_AGENT_LEAK_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-Da / INFO→GRAMMAR. THE EMBASSY THE COURT WAS ALREADY SENDING ALSO CARRIES A WATCHER.
+ *
+ * The accepted-peace dispatch asks the espionage family one question before it mints the
+ * errand the war lane was already about to mint — does this court slip a man aboard, and
+ * what is he being sent to settle — and spreads the answer into the existing argument list.
+ * Nothing new travels: the traveller, the route, the speed, the concurrency cap and the
+ * persistence are all the peace embassy's, unchanged.
+ *
+ * ⭐⭐ THE ARROW IS THE OPPOSITE OF EVERY OTHER ES ROW, AND IT IS DERIVED RATHER THAN COPIED.
+ * `direction` is `depLayer→importerLayer`. Measured against `LAYER_PATTERNS` in
+ * tests/lint/couplingInclusion.walker.test.js: the dependency
+ * `espionage/espionageRider.js` matches the espionage DIRECTORY pattern ⇒ **INFO**, and the
+ * importer `envoyDiplomacy.js` matches the `envoy` prefix ⇒ **GRAMMAR**. Every earlier ES
+ * row reads GRAMMAR→INFO because espionage was always the IMPORTER; this is the first row
+ * where the espionage family is the DEPENDENCY, so the arrow flips. `read` names the
+ * IMPORTER, on the `ES1_HIDDEN_FRANCHISE_COUPLING` precedent above. `pairId` stays CPL-19,
+ * the volume's GRAMMAR × INFO anchor, on the CPL-20 both-directions-share-one-anchor
+ * precedent.
+ * ⛔ NOTHING CROSS-CHECKS THE ID'S ARROW AGAINST `direction`, SO A WRONG ONE SHIPS GREEN —
+ * which is why the derivation is written out here for a reviewer to RE-RUN rather than
+ * trust. The coupling-direction hazard has bitten this program before.
+ *
+ * ⭐ THIS ROW IS DOCUMENTATION RATHER THAN ENFORCEMENT, AND THAT IS MEASURED, NOT ASSUMED.
+ * `tests/lint/couplingInclusion.walker.test.js` is GREEN WITHOUT this row (executed at
+ * lane AA's preflight: 16/16, exit 0), because `envoyDiplomacy.js` already imports
+ * `beliefMap.js` and the walker licenses at LAYER-PAIR granularity rather than per file
+ * edge — so the INFO→GRAMMAR pair was already covered. The row lands anyway: the registry's
+ * purpose is to be the one readable MAP of cross-layer reads, and a real read that no row
+ * names is invisible to every human who consults it. Recorded so a later lane does not
+ * "discover" the row is unenforced and retire it.
+ *
+ * THE COUNTERFORCE is the mint's own named refusal. The rider composes cargo and has no
+ * authority to write it: `covertMissionRefusal` re-validates the sub-record at the spine and
+ * refuses a malformed mission BY NAME rather than dropping it, so a rider that ever composed
+ * an unlawful itinerary would fail the dispatch loudly instead of writing a forged row.
+ *
+ * DARK ⇒ NOTHING: the rider gates on `espionageActive` before touching any world object and
+ * returns `covert: null`, which the call site spreads as `{}` — so the argument object is
+ * byte-for-byte the one that existed before this wave. Executed over a ten-tick lifecycle
+ * against the pre-feature commit in tests/property/espionageRiderDormancyFence.test.js.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ESDA_COVERT_RIDER_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.ES-Da.covert_rider',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/envoyDiplomacy.js#dispatchAcceptedPeaceEnvoy',
+  receiptField: 'worldState.envoyErrands[].covert.{demand,itinerary,product,subjectId}',
+  counterforce: 'src/domain/worldPulse/errandMint.js#covertMissionRefusal',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-Da',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -601,4 +660,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES5C_CAREER_LADDER_COUPLING,
   ES5D_CAREER_CREDIT_COUPLING,
   ES6A_DOUBLE_AGENT_LEAK_COUPLING,
+  ESDA_COVERT_RIDER_COUPLING,
 ]);

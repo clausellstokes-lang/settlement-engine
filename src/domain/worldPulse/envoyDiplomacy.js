@@ -38,6 +38,7 @@ import {
   moveNpcRecord,
   npcLedgerOf,
 } from './npcLedger.js';
+import { covertRiderFor } from './espionage/espionageRider.js';
 import { COVERT_ENVOY_KIND } from './routeNetworkConsumers.js';
 import { livedHopToward, livedLegTicks } from './routeNetworkConsumersTransit.js';
 import {
@@ -473,6 +474,17 @@ export function dispatchAcceptedPeaceEnvoy({
   if (!graduated.wnpcId) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'no_durable_envoy' };
   }
+  // ES-Da — DOES THIS EMBASSY ALSO CARRY A WATCHER? The rider composes cargo only; it
+  // mints nothing, casts nobody and schedules no stage. Dark, it returns `covert: null`
+  // and the spread below contributes `{}`, so the argument object is byte-for-byte the
+  // one this function built before the espionage rider existed.
+  const rider = covertRiderFor({
+    worldState: graduated.worldState,
+    item: fromItem,
+    fromId,
+    toId,
+    errandId,
+  });
   const acceptance = {
     ...asObject(decision),
     offererInheritedDemand: asObject(outcome).metadata
@@ -491,6 +503,7 @@ export function dispatchAcceptedPeaceEnvoy({
     negotiationPicture,
     targetCourtPicture,
     purpose,
+    ...(rider.covert ? { purposeClass: 'covert', covert: rider.covert } : {}),
     routePlan,
     tick: atTick,
   });

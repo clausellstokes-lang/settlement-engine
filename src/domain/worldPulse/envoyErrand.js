@@ -131,6 +131,13 @@ export {
  * empty, so a war errand minted through this head is byte-identical to the one WR-7a
  * minted before the spine existed.
  *
+ * ⏱ CR-ESDA-7 (chair, 2026-08-12) — `covert` WAS ANNOTATED `boolean|null` AND IS A RECORD.
+ * A stale flag-era annotation that no production caller ever exercised: until ES-Da nothing
+ * passed covert cargo through THIS head — `espionageMissions.js` calls `mintErrandSpine`
+ * directly — so the wrong type was never typechecked against a real argument. The spine head
+ * one layer down already declared it `unknown`, which is what this now matches. Documentation
+ * only; not one byte of behavior moves.
+ *
  * ES-1 adds `covert` on exactly the same terms, and the addition is two lines because the
  * SP-D shape was built to take it: the sub-record is ACCEPTED here and READ nowhere here.
  * Its closed vocabulary, its itinerary cap, its named refusals and its heal-to-absent
@@ -143,7 +150,7 @@ export {
  * @param {{worldState?:Record<string,unknown>, outcome?:unknown, acceptance?:unknown,
  *   npcId?:unknown, npcName?:string, fromName?:string, toName?:string, snapshot?:unknown,
  *   negotiationPicture?:unknown, targetCourtPicture?:unknown, purpose?:string,
- *   purposeClass?:unknown, declaredPurpose?:unknown, truePurpose?:unknown, covert?:boolean|null,
+ *   purposeClass?:unknown, declaredPurpose?:unknown, truePurpose?:unknown, covert?:unknown,
  *   routePlan?:unknown, tick?:number}} [args]
  */
 export function mintEnvoyErrand({

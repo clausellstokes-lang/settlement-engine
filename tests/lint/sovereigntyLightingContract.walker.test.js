@@ -3859,7 +3859,36 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // chair's own promotion commits (`git diff HEAD --name-only` lists none of the four, so their
     // worktree content is byte-identical to HEAD and only the shared index is behind). ZERO
     // foreign test files, tracked or untracked, and therefore zero foreign titles.
-    files: 2401, parked: 365, credited: 2036, titles: 19835, suiteTitles: 5594,
+    // ⏱ RE-MEASURED WHOLE AT ES-Da (2026-08-12), which adds TWO test files and no other
+    // estate change. Per-file delta, attributed IN ISOLATION against committed caa6094a:
+    //   +17 titles, +5 suites … tests/domain/espionageRider.test.js            (the five doors)
+    //   + 9 titles, +3 suites … tests/property/espionageRiderDormancyFence.test.js (the fence)
+    // 17 + 9 = 26 and 5 + 3 = 8, which is exactly 19,835 → 19,861 and 5,594 → 5,602 with NOTHING
+    // left over, and `parked` did not move because neither file gained a park reason.
+    // ⭐ BOTH FILES ARE CREDITED, NOT PARKED, AND THAT WAS MEASURED RATHER THAN ASSUMED: the
+    // probe printed `park: []` for each file BY NAME and `credited` rose by exactly two. That is
+    // the loop-registration trap — a `test()` inside a loop, a non-straight-line `describe`, or a
+    // `.each()` parks the WHOLE file and loses every title in it while `files` still rises, so the
+    // arithmetic would still close and nothing would red. Neither file contains `.each()` and
+    // every `test` in both is registered straight-line inside a plain `describe`.
+    // ⚠ ES-Da also edits three OTHER test files (couplingRegistry.test.js under CR-ESDA-6,
+    // espionageProductsDormancyFence.test.js for the gated census, and this file). NONE of the
+    // three gains a `test()` or `describe()`, which is why `titles` moved by exactly the two new
+    // files' 26 and not by more — comments and array members are not titles.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE ON ALL FIVE. (a) A temporary probe placed INSIDE this
+    // test BEFORE its first assertion (so it minted no title and could not move what it measured,
+    // and so the sequenced-census trap could not fire — had the figures come from the assertions,
+    // the first red on `files` would have left the later four never evaluated) read
+    // 2403/365/2038/19861/5602 live. (b) `frozen row + this lane's measured per-file delta` gives
+    // 2401+2 / 365+0 / 2036+2 / 19835+26 / 5594+8 — the same five. A third derivation agrees: the
+    // two files' own focused vitest run reports 26 passing tests across them.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time `git status --porcelain`
+    // carried EXACTLY this packet's own paths — eight modified and three untracked — plus five
+    // docs/implementation entries that are STALE-INDEX RESIDUE of the chair's own promotion
+    // commits (`git diff HEAD --name-only` lists none of the five, so their worktree content is
+    // byte-identical to HEAD and only the shared index is behind). ZERO foreign test files,
+    // tracked or untracked, and therefore zero foreign titles.
+    files: 2403, parked: 365, credited: 2038, titles: 19861, suiteTitles: 5602,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
