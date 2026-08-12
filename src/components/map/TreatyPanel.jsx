@@ -124,9 +124,13 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
         <div data-testid="treaty-age-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.ageLine}</div>
       )}
       {/* GR-0 the DM true-state chip: what the ledger knows and the owed court does not.
-          Rendered ONLY for a ground-truth viewer, and only where the truth diverges. */}
+          Rendered ONLY for a ground-truth viewer, and only where the truth diverges.
+          NO WASH (kill-list cure, lane AB): it is named for a stamp but renders an authored
+          SENTENCE, so a tinted background made it the tinted callout box the deep-craft
+          ratchet hunts. The amber RULE and the amber INK carry the DM-only signal on their
+          own — the WorldMapToolbar ResumeChip cure (C5-a·iii), applied to a prose plate. */}
       {trueStateChip && (
-        <div data-testid="treaty-true-state-chip" style={{ color: AMBER, background: AMBER_BG, border: `1px solid ${AMBER}`, fontFamily: sans, fontSize: FS.pico, fontWeight: 700, padding: '3px 7px' }}>{trueStateChip}</div>
+        <div data-testid="treaty-true-state-chip" style={{ color: AMBER, border: `1px solid ${AMBER}`, fontFamily: sans, fontSize: FS.pico, fontWeight: 700, padding: '3px 7px' }}>{trueStateChip}</div>
       )}
       {/* ambition-fit-1: the dramatic-irony Reasons lane — the war reasons pressing
           this pair apart and the peace reasons pulling them back, receipt by receipt.

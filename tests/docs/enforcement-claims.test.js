@@ -468,6 +468,66 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
     expect(naked, `\nClaims with no resolvable @enforced-by tag:\n${naked.join('\n')}\n`).toEqual([]);
   });
 
+  // ── THE SEVENTH CLAIM CANNOT HIDE INSIDE THE SIXTH ─────────────────────────
+  // MEASURED 2026-08-12 (lane AB). The pin directly above is BANKED DEBT in
+  // scripts/.test-ratchet-baseline.json, and that census keys on TEST IDENTITY —
+  // `<file> :: <full test name>` — never on what the assertion actually found. The six
+  // naked claims below already red it, so a SEVENTH reds it in precisely the same way:
+  // same file, same title, same verdict. Not one bit of the gate would move. A lane's
+  // own new untagged claim would be absorbed into a failure somebody else banked, which
+  // is the widening-under-a-banked-failure class, and it is not hypothetical — it was
+  // caught on 2026-08-11 with a lane's own seventh claim already written.
+  //
+  // So the debt is frozen PER CLAIM in a test that PASSES today and is therefore NOT in
+  // the census. A seventh claim reds a GREEN test — a regression the ratchet refuses to
+  // absorb — and the message names it by file, line and matched vocabulary.
+  //
+  // THE IDENTITY IS (file :: matched vocabulary) WITH AN EXACT COUNT, DELIBERATELY NOT
+  // file:line. These are living documents whose line numbers move on almost every edit,
+  // and a guard that reds on unrelated prose churn is a guard that gets deleted instead
+  // of obeyed. The count is what carries the second and third rows in the same file.
+  //
+  // ⚠ THE SIX STAY DEBT. This freezes their SHAPE; it does not bless them. Burning one
+  // down reds the shrink arm, which demands the row be lowered or removed — the same
+  // lock-the-win idiom the sizeBaseline and kill-list ratchets use. And the shrink arm
+  // is this pin's anti-vacuity control too: if the claim regex or the corpus walk ever
+  // broke and `claims` came back empty, all four rows would red rather than pass.
+  const FROZEN_NAKED = Object.freeze({
+    'docs/FABLE_VALIDATION_QUEUE.md :: machine-enforced': 1,
+    'docs/FABLE_VALIDATION_QUEUE.md :: 0 problems': 3,
+    'docs/GOLDEN_SHIFT_LEDGER.md :: machine-enforced': 1,
+    'docs/implementation/packets/foreign-policy/IN-0C.md :: machine-enforced': 1,
+  });
+
+  it('the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it', () => {
+    const naked = claims.filter((c) => !c.tagged || c.targets.length === 0);
+    const live = new Map();
+    for (const c of naked) {
+      const key = `${c.file} :: ${c.match}`;
+      live.set(key, [...(live.get(key) || []), c]);
+    }
+    const grew = [];
+    for (const [key, rows] of [...live.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+      const frozen = FROZEN_NAKED[key] ?? 0;
+      if (rows.length > frozen) {
+        grew.push(`  ${key}: frozen ${frozen}, now ${rows.length} — the claims under this key:`);
+        grew.push(...rows.map((c) => `    ${c.file}:${c.line}  "${c.text}"`));
+      }
+    }
+    expect(grew, '\nA NEW completeness claim landed carrying no resolvable @enforced-by tag.'
+      + ' It does NOT show up in the pin above, because that pin is banked debt: it was'
+      + ' already red on six claims and a seventh reds it identically. Tag the claim with'
+      + ` the enforcer that actually proves it, or delete the claim:\n${grew.join('\n')}\n`)
+      .toEqual([]);
+    const shrank = Object.entries(FROZEN_NAKED)
+      .filter(([key, n]) => (live.get(key)?.length ?? 0) < n)
+      .map(([key, n]) => `  ${key}: frozen ${n}, now ${live.get(key)?.length ?? 0}`);
+    expect(shrank, '\nBanked naked-claim debt was BURNED DOWN (or the scan broke and found'
+      + ' nothing). Lower or remove these rows in FROZEN_NAKED to lock the win — the six are'
+      + ` debt, never a budget to spend:\n${shrank.join('\n')}\n`)
+      .toEqual([]);
+  });
+
   it('every @enforced-by target resolves to a live enforcer reachable from the gate', () => {
     const failures = [];
     for (const c of claims) {

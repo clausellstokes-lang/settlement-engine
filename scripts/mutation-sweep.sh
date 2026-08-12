@@ -96,6 +96,7 @@ MUTATED_FILES=(
   src/domain/certification/couplingRegistryWar.js
   src/domain/spatial/spatialLedgerAccess.js
   src/domain/worldPulse/brokeragePlantHandoff.js
+  src/domain/townMap/siteGenesis.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -806,6 +807,19 @@ check_caught "info/plant handoff reads the OLDEST pulse record instead of the ne
 #     carried on every later tick of its life instead of exactly one.
 perl -0pi -e 's/if \(wholeTick\(record\.tick\) !== now - PLANT_HANDOFF_LAG_TICKS\) return \[\];/if (!(Number(record.tick) <= now - PLANT_HANDOFF_LAG_TICKS)) return [];/' src/domain/worldPulse/brokeragePlantHandoff.js
 check_caught "info/plant handoff record door relaxed from exact age to a lower bound" src/domain/worldPulse/brokeragePlantHandoff.js "npx vitest run tests/domain/brokeragePlantHandoffPins.test.js --no-file-parallelism"
+
+# 75. SCW-0 — THE SITE-COHERENCE CONTRADICTION RATCHET, upgraded from a rationale to a
+#     STANDING PLANT. Delete the `coal` alternative from the mountain arm's export test:
+#     every settlement that reached mountain-flank BECAUSE it exports coal silently falls
+#     through to the biome default, so three frozen (terrain, siteKind, decisiveToken) rows
+#     VANISH and the same settlements reappear under three grown biome rows. The ratchet's
+#     identity-keyed bidirectional comparison must red on both halves at once. The liveness
+#     census (tests/lint/exportTokenCoverage.test.js) stays GREEN through this same mutant —
+#     `coal` is still spelled elsewhere in the source it derives from — which is the
+#     liveness/identity split working as designed and the reason that sibling keeps its
+#     rationale while this one does not.
+perl -0pi -e 's{/ore\|iron\|stone\|mine\|silver\|gold\|coal/i}{/ore|iron|stone|mine|silver|gold/i}' src/domain/townMap/siteGenesis.js
+check_caught "site-coherence/coal dropped from the mountain-flank export arm" src/domain/townMap/siteGenesis.js "npx vitest run tests/lint/siteCoherenceRatchet.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

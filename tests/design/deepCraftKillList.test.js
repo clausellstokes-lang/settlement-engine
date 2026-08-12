@@ -249,6 +249,24 @@ const CEILINGS = Object.freeze({
   // doubling. The genuinely load-bearing radii found in the same census — the
   // circular avatar (PublicAvatar) and the circular-crop previews (ImageCropper),
   // where '50%' IS the feature — were left alone and reported to the chair.
+  // LANE AB (2026-08-12) — THE 164TH TINTED CALLOUT, CURED RATHER THAN LEGITIMISED.
+  // tintedCallouts had sat at 164 against this ceiling of 163 for eight days, banked as
+  // debt inside check-test-ratchet's frozen census. TWO THINGS WERE MEASURED, not assumed:
+  //   · WHICH CHANGE. The count was walked over all 500 commits from 531a8488 to HEAD with
+  //     the ratchet's own pattern; there is EXACTLY ONE transition, 163 → 164 at b441bca5
+  //     (GR-0 THE LIFECYCLE VOICE, 2026-08-04), whose src/components diff adds exactly one
+  //     matching line. ⚠ The census row's recorded `introducedAt` — 531a8488, the Founders'
+  //     Hall — is a MISATTRIBUTION: the count is 163 at that commit AND at its parent.
+  //   · WHETHER IT IS A VIOLATION. It is. TreatyPanel's DM true-state "chip" is named for a
+  //     stamp but renders an authored SENTENCE (grammarReceiptPools.treaty_true_state_chip
+  //     is a pool of one- and two-sentence lines), inside a <div> carrying a full AMBER_BG
+  //     wash — the tinted callout BOX this row was written to hunt, and the exact structure
+  //     ClerkNote.jsx's header names as the SaaS tell ("a colored wash … Tone lives in the
+  //     rubric's words, not in a background color").
+  // THE CURE IS THE RATCHET'S OWN: the wash is struck and the amber RULE plus amber INK keep
+  // the DM-only signal, which is C5-a·iii's ResumeChip cure applied to a prose plate. AMBER_BG
+  // stays imported and stays counted once, on TONE_COLOR.warn, which StateChip still uses.
+  // So the ceiling DOES NOT MOVE — nothing was raised, and the surface came back to it.
   borderRadius: 85,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the

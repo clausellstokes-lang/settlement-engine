@@ -3888,7 +3888,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // commits (`git diff HEAD --name-only` lists none of the five, so their worktree content is
     // byte-identical to HEAD and only the shared index is behind). ZERO foreign test files,
     // tracked or untracked, and therefore zero foreign titles.
-    files: 2403, parked: 365, credited: 2038, titles: 19861, suiteTitles: 5602,
+    // ⏱ RE-MEASURED WHOLE AT LANE AB (2026-08-12), a three-act micro-change that adds NO test
+    // file and exactly ONE test title. 2,403/365/2,038/19,861/5,602 → 2,403/365/2,038/19,862/5,602.
+    // THE CAUSE IS ONE NEW `it` IN AN EXISTING CREDITED FILE AND NOTHING ELSE:
+    //   + 1 title, +0 suites … tests/docs/enforcement-claims.test.js (the per-claim naked-claim
+    //     freeze, which stops a SEVENTH untagged completeness claim hiding inside the banked
+    //     failure of the pin above it — that census keys on test identity, not on contents).
+    // ⚠ THE OTHER FOUR PATHS IN THIS CHANGE CANNOT MOVE A FIGURE, and were checked rather than
+    // assumed. src/components/map/TreatyPanel.jsx and scripts/mutation-sweep.sh and
+    // scripts/mutation-coverage-manifest.json are not under tests/ at all. The fifth,
+    // tests/design/deepCraftKillList.test.js, gains COMMENTS ONLY — and it could not contribute a
+    // title even if it gained one, because its four `it`s are registered from a `for` loop over
+    // CEILINGS, which parks the whole file (the loop-registration trap).
+    // ⭐ THE MOVED FILE IS CREDITED, NOT PARKED, AND THAT WAS MEASURED RATHER THAN ASSUMED: the
+    // probe printed `ecPark: []` for tests/docs/enforcement-claims.test.js BY NAME, its own title
+    // count as 21, and its suite-title count as 4 (unchanged — the new `it` joins the existing
+    // top-level describe and opens none of its own). Had the file been parked, `titles` would not
+    // have moved at all and the arithmetic would still have closed on a lie.
+    // ⭐ DERIVED TWICE AND THE TWO AGREE ON ALL FIVE. (a) A temporary probe placed INSIDE this test
+    // BEFORE its first assertion (so it minted no title and could not move what it measured, and so
+    // the sequenced-census trap could not fire — this run DID red on `titles`, and had the figures
+    // come from the assertions the later arms would never have been evaluated) read
+    // 2403/365/2038/19862/5602 live. (b) `frozen row + this lane's measured per-file delta` gives
+    // 2403+0 / 365+0 / 2038+0 / 19861+1 / 5602+0 — the same five. A third derivation agrees: the
+    // file's own focused vitest run reported 20 tests before the edit and 21 after it.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time `git status --porcelain`
+    // carried EXACTLY this lane's own five modified paths and ZERO untracked files, plus six
+    // docs/implementation entries that are STALE-INDEX RESIDUE of the chair's own promotion commits
+    // (`git diff HEAD --name-only` lists none of the six, so their worktree content is byte-identical
+    // to HEAD and only the shared index is behind). ZERO foreign test files, and therefore zero
+    // foreign titles.
+    files: 2403, parked: 365, credited: 2038, titles: 19862, suiteTitles: 5602,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
