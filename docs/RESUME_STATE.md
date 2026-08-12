@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 03:54:37 EDT
+**Generated:** 2026-08-12 04:28:27 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `0e5881b6` | **6** |
-| ledger (main) | `review-fixes-2026-07-08` | `1234721a` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `0e5881b6` | **12** |
+| ledger (main) | `review-fixes-2026-07-08` | `eb658359` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T035401` — build 6 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T042752` — build 12 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T035401
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T042752
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -34,8 +34,20 @@ MM docs/implementation/packets/foreign-policy/ES-DA.md
 MM docs/implementation/packets/foreign-policy/GR-4A.md
 MM docs/implementation/packets/site-coherence/SCW-0.md
 MM docs/implementation/packets/town-cartography/TC-5B-II.md
+ M scripts/mutation-coverage-manifest.json
+ M scripts/mutation-sweep.sh
+ M src/components/map/TreatyPanel.jsx
+ M tests/design/deepCraftKillList.test.js
+ M tests/docs/enforcement-claims.test.js
+ M tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ```
+  +5      -3      scripts/mutation-coverage-manifest.json
+  +14     -0      scripts/mutation-sweep.sh
+  +6      -2      src/components/map/TreatyPanel.jsx
+  +18     -0      tests/design/deepCraftKillList.test.js
+  +60     -0      tests/docs/enforcement-claims.test.js
+  +31     -1      tests/lint/sovereigntyLightingContract.walker.test.js
 ```
 ## Last 12 build commits
 
@@ -56,12 +68,12 @@ ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17
 ## Last 6 ledger commits
 
 ```
+eb658359 2026-08-12 The chain closes: all four promoted packets are landed and terminal
 1234721a 2026-08-12 The rider stopped on the chair's own rulings, and both cures are ruled
 675929ab 2026-08-12 The site-coherence program opens on a superseded audit; the rider goes last
 3aed3008 2026-08-12 The painter's mount is collected and flipped; the site-coherence opener begins
 5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
-5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -215,26 +227,17 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   across Bash calls in an agent thread — it verified no work reached the main tree.
   Transcript: session dir `subagents/agent-af30d0d9e08251373.jsonl`.
 
-**THE QUEUE NOW (chair, ~03:30):** read-only drafts for the next compiles — GR-4b
-(needs the chair pre-ruling on the peaceTerms.js factoring at 797/800 first), SCW-1
-(Wave-1 literal re-derived), IN-1 — plus the chartered instruments (corpus-coverage
-mint charter; schema-7 prose batch) and the micro-act batch (tintedCallouts 164v163 ·
-enforcement-claims per-identity · SCW-0's mutation-kind upgrade). Espionage stays DARK
-until the endgame; the walk/soaks/tuning/pushes remain the owner's.
-- **Chair memory pass (~03:05):** the index folded to **17,047 B** (under ceiling,
-  zero broken links; the schema-6 and lane-census rows folded verbatim with sharpest
-  hooks restored; the letter-wave finding hooked at the ES-7 row).
-- **Chair memory pass DONE (~21:55):** the index folded twice more (17,936 → **17,060
-  B**, under ceiling with margin, zero broken links; the main-worktree and self-deadlock
-  rows folded verbatim to the 08-11 archive with compact operative hooks kept).
-- **Lane V (build, Opus) — THE SCHEMA-6 MINT (task #11)**: the ruled two-commit pair
-  (code half deliberately gate-red → genesis), items 1-5+8 + exemptions A and B (B's
-  gate discharged at `da31d170`), M11/M12 into the walker's hand-composed chain in the
-  SAME commit, throwaway-detached proof first, PURE SHRINK expected, final receipt =
-  the gate handed back at TRUE_EXIT=0. Lane V is the census holder this window.
-  Transcript: session dir `subagents/agent-a93343baa4193717f.jsonl`.
-- Chair queue after these: implementer dispatches in census-holder order (GR-4a first),
-  the copy batch (task #17), then the corpus per CR-NEXT-1.
+**LIVE (~04:15):** Lane AB (build — micro-act batch 2: the tintedCallouts disposition,
+the enforcement-claims count pin, SCW-0's mutation upgrade; its WIP spans the census
+walker + TreatyPanel.jsx, consistent with the 164th-callout cure) · Lane AD (docs —
+promoting GR-4B per **CR-GR4B-1..7**: Shape A factoring at ZERO net peaceTerms lines;
+Shape H with an explicit recorded budget override; the annex correction pass re-slotting
+{npc} to the FALLEN HOLDER; three open-question kinds re-filed to GR-4d on the
+honest-producer refusal — "nothing has been confirmed either" would be false the instant
+it mints). Lane AC's draft: scratchpad `laneAC-GR-4B-draft.md`; transcripts:
+`agent-a4ec31549c3da83f2.jsonl` (AB), `agent-acaa3aea4b9aa4082.jsonl` (AD).
+**Queue:** AB lands → chair-verify → GR-4b implementer (takes the walker) → SCW-1 +
+IN-1 drafts → the corpus-coverage mint charter + schema-7 prose batch.
 
 **Earlier this board (collected):**
 0. **✅ Lane M LANDED TC-5B-i at `9183d52c` (~18:35) and the chair FLIPPED IT LANDED at
