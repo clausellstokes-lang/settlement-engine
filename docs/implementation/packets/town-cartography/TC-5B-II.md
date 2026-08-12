@@ -1,6 +1,7 @@
 # Town Cartography / TC-5b-ii — the painter's mount (colour binding + the sub-tab)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `c82cc859`, 2026-08-12; flipped by the chair after verification (10 files by diff-tree, all 8 acceptance cases, 3 mutants proving the widened arm live, census folded in-change, gate TRUE_EXIT=0 at HEAD). Do not redispatch. ⚠ §6.5 CORRECTED per CR-TC5BII-1: its mitigation premise is REFUTED — a Vite worker is a separate Rollup build, so a main-thread compile can never share the worker chunk; the count identity was replaced by the four-part graph-shaped invariant in townScene3dLazy.test.js (exactly 2 compiler chunks: worker-referenced + lazy-only, each byte-budgeted).
 - **Status note:** ✅ **PROMOTED READY 2026-08-11 by the Fable chair (session `c42c8924`,
   Lane U).** The single blocking dependency is DISCHARGED: **TC-5b-i LANDED at `9183d52c`**
   and flipped LANDED in all three homes at `e7774ff2`. The §-1 refusal that produced the old
