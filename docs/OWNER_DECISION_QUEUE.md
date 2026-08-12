@@ -834,3 +834,14 @@ grant-derived ruling. Disposition: the §17.3 ruling stands as the DEFAULT for f
 surfaces; for THIS surface it is held in abeyance, recorded in-component
 (ruled-but-not-built, the contradiction named) — **the owner picks: stated absence
 ("No roads out") or absent section, for the town-map notes.** One line settles it.
+
+### §17c · Owner-queue #4 CLOSED AS DISCHARGED (2026-08-12 ~14:10, CR-SCW1-3)
+
+The "make `bankable` fail the gate" ask is TRUE at HEAD, both halves, achieved by the
+schema-4 genesis (`2a7fb033`) as a side effect of the OSR mint chain: `bankable` no
+longer exists (zero occurrences), a restored dead read is a NEW identity against ceiling
+0, and the walker asserts `{violations: 0, stale: 0}` — chair-captured green at
+`b5442c07` (27/27, TRUE exit 0). The `--bank` rider is DECLINED: it would create an 11th
+governed path. Site-coherence Wave 1 is recorded DISCHARGED-BY that same genesis; its
+six-line instruction-text residue lands as a micro-act; its CLI half is parked in the
+corpus-coverage mint charter.

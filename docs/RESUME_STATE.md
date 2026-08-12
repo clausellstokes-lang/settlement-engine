@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 13:44:16 EDT
+**Generated:** 2026-08-12 14:03:26 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `b5442c07` | **5** |
-| ledger (main) | `review-fixes-2026-07-08` | `28569d17` | **4601** |
+| ledger (main) | `review-fixes-2026-07-08` | `812b07f6` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T134340` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T140247` — build 5 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T134340
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T140247
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -55,12 +55,12 @@ df15a68a 2026-08-11 GR-4a flips LANDED; the census reservation moves to the pain
 ## Last 6 ledger commits
 
 ```
+812b07f6 2026-08-12 The gate is green at the voice's HEAD; the corpus advances to Wave 1 and the mirror
 28569d17 2026-08-12 The succession voice is collected and flipped; the gate receipt runs
 cdad78b7 2026-08-12 RESUMED at the owner's continue; the voice lane picks up where the limit killed it
 a9b6b61f 2026-08-12 PAUSED at the owner's order; resume at 8:12 AM
 2fa34a57 2026-08-12 GR-4b stopped on a false mute-road premise; the alpha scope is ruled
 b35320d5 2026-08-12 GR-4b promotes clean and its implementer goes out
-531e57fc 2026-08-12 The frozen census shrinks to sixteen; the day's debt arc closes downward
 ```
 ## Fable-survey debt (derived, not transcribed)
 
