@@ -7,12 +7,14 @@
   "The line number is excluded so unrelated line churn does not rewrite the governed identity.",
   "Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 5 = the same identity, EXPLAINED-WRITER FILTERED. The byte-frozen detector is unchanged;",
-  "its output is narrowed by two DECLARED post-filters in check-observed-shape-readers.mjs —",
-  "CR-OSR-FREEZE-6 shape-family union (M6) and the M8/M9 explained-writer exemption. Both are inside",
-  "the detectorTree digest this envelope binds, so retuning either reds the gate and needs a new mint.",
-  "A row here therefore means: a guarded read of a key NO writer the corpus runs produces, and no",
-  "declared out-of-corpus writer explains. Schema 4 is the RETIRED unfiltered predecessor."
+  "SCHEMA 6 = the same identity, NON-DOMAIN-SURFACE FILTERED. The byte-frozen detector is unchanged;",
+  "its output is narrowed by FOUR DECLARED post-filters in check-observed-shape-readers.mjs —",
+  "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
+  "language-surface residual, and the M8/M9 explained-writer exemption. All four are inside",
+  "the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.",
+  "A row here therefore means: a guarded read, of a real record rather than of browser or language",
+  "surface, of a key NO writer the corpus runs produces and no declared out-of-corpus writer explains.",
+  "Schema 4 (raw) and schema 5 (M6 + M8/M9 only) are the RETIRED predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -27,27 +29,23 @@
  },
  "digests": {
   "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "0d0b018c1d9d7fbe3991fb51ba42301de0fa9cac8a065f324e8ccb7be1c1e6f0",
-  "manifests": "88a80ee376fec767a00b3bfbc4331c19e328427ce24621f9ea9d3c5d17fa917a",
-  "migrationReview": "5bb503d489e4c8240d4973323c11cabee058b41f7ae86ffcfcf9b9d69cd02a3f",
+  "inventory": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d",
+  "manifests": "b990763f188a3bcd470e683f63eecb4ac8d457e9446729079d16637ffd0010e7",
+  "migrationReview": "f7d389cff8a558b0cf0d691d86d20f8e310c165dfab887acd02c08be0837ca83",
   "scanStats": "c2d7df08cde5cb6f357612cdf3e17c848eebaa1abd3463dfff460ee0b5634e45",
   "sentinel": "4ea28074d8414e3b917c7b525a0f6a3dcfdcdd838d8b8b003c4076825e3a2b41"
  },
- "frozen": "2026-08-11",
- "frozenAtSha": "b0912f7f13eb4cdadda472d4800d1c065213ba3a",
- "identities": 1394,
+ "frozen": "2026-08-12",
+ "frozenAtSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
+ "identities": 1381,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
-  },
-  "src/components/CompendiumPanel.jsx": {
-   "replaceState on history": 2
   },
   "src/components/OutputContainer.jsx": {
    "canonizedAt on campaignState": 1,
    "primaryDeitySnapshot on config": 2,
    "startedAt on campaignState": 1,
-   "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
   },
   "src/components/SettlementsPanel.jsx": {
@@ -206,8 +204,7 @@
    "primaryDeitySnapshot on config": 1
   },
   "src/components/settlement/EventComposer.jsx": {
-   "id on institutions": 3,
-   "stresses on settlement": 2
+   "id on institutions": 3
   },
   "src/components/settlement/NarrativeArchivePanel.jsx": {
    "aiData on save": 2,
@@ -230,9 +227,6 @@
    "lastExportAt on campaignState": 2,
    "savedAt on save": 4,
    "versionHistory on save": 2
-  },
-  "src/components/settlement/WhatChangedPanel.jsx": {
-   "toLocaleString on history": 2
   },
   "src/components/settlement/eventComposer/EventComposerDeityField.jsx": {
    "cultDeitySnapshots on config": 2,
@@ -310,8 +304,7 @@
   },
   "src/domain/canonicalAccessors.js": {
    "exports on economicState": 3,
-   "imports on economicState": 2,
-   "stresses on settlement": 1
+   "imports on economicState": 2
   },
   "src/domain/capacityModel.js": {
    "id on chains": 3,
@@ -348,8 +341,7 @@
   },
   "src/domain/content/contentSampleCategoryFixtures.js": {
    "primaryDeityRef on config": 1,
-   "primaryDeitySnapshot on config": 1,
-   "stresses on settlement": 1
+   "primaryDeitySnapshot on config": 1
   },
   "src/domain/content/customContentUsage.js": {
    "availableServices on save": 1,
@@ -760,7 +752,6 @@
    "faithProfile on config": 1
   },
   "src/domain/locksPreservation.js": {
-   "factions on locks": 1,
    "geography on locks": 1,
    "history on locks": 1,
    "identity on locks": 1,
@@ -1113,7 +1104,6 @@
   },
   "src/domain/worldPulse/coup.js": {
    "economic_capacity on scores": 1,
-   "factions on locks": 1,
    "ruling_authority on scores": 1
   },
   "src/domain/worldPulse/decisionTier.js": {
@@ -1793,11 +1783,6 @@
   "src/hooks/useReturnVisit.js": {
    "editedAt on campaignState": 1
   },
-  "src/hooks/useRoute.js": {
-   "pushState on history": 2,
-   "replaceState on history": 3,
-   "state on history": 3
-  },
   "src/lib/accountContentPortability.js": {
    "bindingHash on history": 1
   },
@@ -1868,9 +1853,6 @@
   },
   "src/lib/spatialSubstrateDerive.js": {
    "mapEdits on settlement": 1
-  },
-  "src/lib/stripe.js": {
-   "replaceState on history": 1
   },
   "src/lib/structuralFingerprint.js": {
    "_categoryToggles on config": 1,
@@ -2121,7 +2103,6 @@
   },
   "src/store/aiChronicleContext.js": {
    "canonizedAt on campaignState": 1,
-   "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
   },
   "src/store/campaignCanonRelationshipSession.js": {
@@ -2205,7 +2186,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
+   "digest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
    "entries": [
     {
      "mode": "100644",
@@ -2224,8 +2205,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "5e6e81756875114f4ea1271f2e163610ecc60facb2c5c3494fd9db58a8262669",
-     "size": 87472,
+     "sha256": "c4e2698c4eaff9b5fdada81d2826f32077881fe85cdafb12be00c7a6b9b5b69c",
+     "size": 112115,
      "type": "file"
     },
     {
@@ -2245,8 +2226,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7ba1fce9a0c1f5a660d7b2d63a3cabf18aa12d274293a8498fd238fe9cf81910",
-     "size": 33917,
+     "sha256": "b0bd7cfe3fc5377ed2a542353c06e53d2ca558148eca77d85543c841fe01790b",
+     "size": 36090,
      "type": "file"
     },
     {
@@ -2273,8 +2254,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "aa613eb0638c243b8e8cf8bac8755777f2c3669687ee7d1be150fffe9556aef7",
-     "size": 55832,
+     "sha256": "cd25582bf8e8e23e22b6fa9d18f47ae19bb7511649b169edcd4f96f70ac96fcb",
+     "size": 57538,
      "type": "file"
     },
     {
@@ -2288,7 +2269,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a210dc6c9f52d3bb91d58e2f7450e39f742a5bfd9030f75d6df524ee1730d50e",
+   "digest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
    "entries": [
     {
      "mode": "100644",
@@ -2307,8 +2288,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "5e6e81756875114f4ea1271f2e163610ecc60facb2c5c3494fd9db58a8262669",
-     "size": 87472,
+     "sha256": "c4e2698c4eaff9b5fdada81d2826f32077881fe85cdafb12be00c7a6b9b5b69c",
+     "size": 112115,
      "type": "file"
     },
     {
@@ -2328,8 +2309,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7ba1fce9a0c1f5a660d7b2d63a3cabf18aa12d274293a8498fd238fe9cf81910",
-     "size": 33917,
+     "sha256": "b0bd7cfe3fc5377ed2a542353c06e53d2ca558148eca77d85543c841fe01790b",
+     "size": 36090,
      "type": "file"
     },
     {
@@ -2356,8 +2337,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "aa613eb0638c243b8e8cf8bac8755777f2c3669687ee7d1be150fffe9556aef7",
-     "size": 55832,
+     "sha256": "cd25582bf8e8e23e22b6fa9d18f47ae19bb7511649b169edcd4f96f70ac96fcb",
+     "size": 57538,
      "type": "file"
     },
     {
@@ -46476,30 +46457,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "e7ff37dfa2b386ca0a562abca46afcb892a4fbc32fad382a4df90400ebcf0ea4",
+  "bundleDigest": "5e0ab509f4f84c461db56473f0b6ee2105b186f40905e41749e7e4633b524ba0",
   "corpusDigest": "86fae1a6e032f7cbb6b61474467b2be25f8a0bb306d71d7a60e5e9770b697649",
-  "currentArtifactDigest": "98206a500bd4cdf58b96f41dab68e666f6e9899ecb57afc7ebad50c2567c3797",
-  "currentDetectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
-  "currentFindingsDigest": "c82951f8796c585d48f95b6b839b68ebe326305a59b11d3dddcdbee9c383dd26",
-  "currentScannerSha": "361593898672aaead0c216d98ea40037e66147cb",
-  "currentScannerToolDigest": "06632bd622f768a3a5510a55a810b5dead111ca9777840e97d0ae3a1f3452586",
-  "detectorTreeDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
-  "executionTreeDigest": "0cb9d4befc1877440bf7c5bec81a7d0545c87bdab8abca4acac30c7c734e18a6",
+  "currentArtifactDigest": "12f5f802fd5d2b7c09ca4cdfad164e9a7e3d36d8130d5303db223b39dd32440a",
+  "currentDetectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
+  "currentFindingsDigest": "6a9f53ce926ac3baf1f06d18b5c6a102dd1830a9756187265d9a81b0e88aeff5",
+  "currentScannerSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
+  "currentScannerToolDigest": "20bd4034ce32f0c853cfca5b69d8f82f51bc1d0879accb7ca6fa5e53d94dbe7c",
+  "detectorTreeDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
+  "executionTreeDigest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "98206a500bd4cdf58b96f41dab68e666f6e9899ecb57afc7ebad50c2567c3797",
-  "legacyDetectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
-  "legacyScannerSha": "361593898672aaead0c216d98ea40037e66147cb",
-  "legacyScannerToolDigest": "06632bd622f768a3a5510a55a810b5dead111ca9777840e97d0ae3a1f3452586",
-  "predecessorBaselineDigest": "3148c19fa8313ba214e7683d05a55e68bbd92979261316e5b1e42857901b7163",
-  "predecessorBaselineTextSha256": "020b9fc26c5648eb2e5157e25ebd135106902d20cb710d34aea6f49305beb054",
-  "predecessorInventoryDigest": "b3611bd5e5f572ae82dc4f66d443e1197cd522bf6f1c249362681de92c8dc133",
-  "reportDigest": "3ac2e4332212476125bf09f0624a4a806a18e524284d2ebe210e270aeff73efd",
-  "reviewDigest": "ddb799419b8c63a0598f6162980a0f8eeb05cd2d9b4b294f5a0dcc777ff2ea04",
+  "legacyArtifactDigest": "12f5f802fd5d2b7c09ca4cdfad164e9a7e3d36d8130d5303db223b39dd32440a",
+  "legacyDetectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
+  "legacyScannerSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
+  "legacyScannerToolDigest": "20bd4034ce32f0c853cfca5b69d8f82f51bc1d0879accb7ca6fa5e53d94dbe7c",
+  "predecessorBaselineDigest": "73bfc46ff8d304b43fd08ec7021a3c0086eb1e4053fd6476e3aa517c20642f99",
+  "predecessorBaselineTextSha256": "1f793128f0dd62a75ce9dbdf4ac74ad1c735689a81a41fe1a5456a0093d6b1ee",
+  "predecessorInventoryDigest": "0d0b018c1d9d7fbe3991fb51ba42301de0fa9cac8a065f324e8ccb7be1c1e6f0",
+  "reportDigest": "7bd7971e501c4e741de7f1c5d5288d0f30b066b7e4c699e8732bfa362777b35d",
+  "reviewDigest": "39305b73fbd6496690a4aef34800f4ff8b7fed41f0773b8b464ade22011d4c54",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "e939ae2aa7cd81e2a32919d259e031e0c4b883d019c3fcb7b3e18c8cfad0b96c",
-  "sourceTreeDigest": "0c215f274fdda69c8dee7703d17aef85fc697e3018139857d854b2b2d2484e01",
-  "subjectSha": "361593898672aaead0c216d98ea40037e66147cb",
-  "targetInventoryDigest": "feeee115111379183981330eb51cb4f282b014868d616fafbeb24cc696e81d76"
+  "scanTreeDigest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
+  "sourceTreeDigest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
+  "subjectSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
+  "targetInventoryDigest": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -46510,17 +46491,17 @@
   "unresolved": 111359
  },
  "scannerProvenance": {
-  "detectorDigest": "4d581932569e540d890585de88bfb9877115d3434ebbaf115805b4be38ebfda8",
-  "executionTreeDigest": "a210dc6c9f52d3bb91d58e2f7450e39f742a5bfd9030f75d6df524ee1730d50e",
+  "detectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
+  "executionTreeDigest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
   "scanTreeDigest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
   "sourceTreeDigest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
- "schema": 5,
+ "schema": 6,
  "sentinel": {
   "resolvedReads": 9230,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 1975
+ "total": 1954
 }
