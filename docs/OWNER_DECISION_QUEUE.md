@@ -962,3 +962,46 @@ redundant-guard-vacuity class); C3 must prove the counter can COUNT.
 
 Every base measurement passed: B1–B3 suites, both typecheck windows, the coupling
 walker green at base, validate 22/0, implementation suites 34/34 — all TRUE_EXIT=0.
+
+## §20 · THE MACHINERY + PROSE BATCHES ARE RULED (2026-08-12 ~21:55, CR-AR-1..9 — vetoable)
+
+Lane AR (read-only) compiled both batches with executed evidence; nine rulings, all
+adopting the lane's recommendations, NOTHING landing until the sealed GR-4c session
+closes:
+
+1. **CR-AR-1 — ⚠ OWNER-VISIBLE — IA-2 is re-statused SUPERSEDED** (a coordinator act at
+   the next flip window). Grounds: it sits STALE at `f1895e60`, eleven commits behind;
+   its CREATE row names a file that already exists (the sealed-session machinery was
+   built); and as a NON-terminal status it still reserves TWELVE paths — the lane
+   PROVED by simulation that the machinery fix collides with seven of them on arrival.
+   SUPERSEDED releases the reservation honestly; LANDED would red its own CREATE rows.
+2. **CR-AR-2 — the machinery fix is PACKETED, not a micro-act** — it edits the dispatch
+   surface itself; that is the last place the seal should be waived.
+3. **CR-AR-3 — the design is the `retiredSymbols` field** (the lane's Option B):
+   absence binds only at LANDED, mirroring the landed-CREATE arm's own argument with
+   the sign flipped; a disjointness arm catches the both-lists defect mechanically;
+   92.5% of existing symbol rows keep their protection (the rejected status-skip
+   option would have switched off 161 of 174). Successor-naming prose (Option C) rides
+   as the authoring rule. Capsule: always-present `[]`, both authority projections
+   move in ONE edit (a single-sided edit makes every dispatch throw).
+4. **CR-AR-4 — substrate widening: YES** — a retirement target that moved between base
+   and HEAD invalidates the packet; declared as the packet's behavior shift.
+5. **CR-AR-5 — Batch 2 SPLITS**: items (b)–(g) land as a plain prose batch after
+   GR-4c; item (a) — the one governed-path touch, whose comment edit moves the
+   byte-digest — moves to the schema-7 mint docket where it costs nothing extra.
+6. **CR-AR-6 — the B9 item is IN-1B.md:587** (the strict-window include clause is
+   mis-spelled and the config naming was deferred against the receipt law); GR-4C's
+   B9 verified exact and is UNTOUCHABLE mid-flight regardless.
+7. **CR-AR-7 — the proseNumerics omission is recorded in the INDEX row**, not by
+   annotating the terminal packet (the annex rule does not cleanly cover a §5b table
+   row; the INDEX row is the reader's entry point and carries dated corrections
+   already; the parser-safety check was executed).
+8. **CR-AR-8 — item (a)'s replacement figure derives AT the mint** (the corpus is
+   scan-time-only; landing an unmeasured number would be the exact sin the batch
+   corrects).
+9. **CR-AR-9 — the hot-file section (g) rides the machinery packet** (both edits want
+   PACKET_STANDARD.md; one reviewable change, one reservation).
+
+Sequencing after the GR-4c landing: chair-verify + flip → AO-1 micro-act → IA-2
+re-status → the machinery packet (with (g)) → the prose batch (b)–(f) → AO-0's
+schema-7 mint (carrying (a), SCW-1b's five sites, and the deferred figure).

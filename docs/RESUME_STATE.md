@@ -159,12 +159,20 @@ licensing door proven open in scratch with the row present.
   NOTHING else lands on the build branch until AQ lands. On landing → chair-verify
   (C5's 0.140→0.278→saturated arithmetic; both B13-a figures; the census five-tuple) →
   three-home flip → then AO-1 lands.
-- **Lane AR (Opus, READ-ONLY) drafts two batches** (task `ad4f25c1707e0d5d8`): the
-  machinery batch (status-aware requiredSymbols per CR-IN1B-9, design options weighed
-  against the validator's pins) and the prose-batch worklist (7 items with live quotes
-  + gate exposure + the mint-trigger verdict). Lands NOTHING; report to chair.
-Queue after: AO-1 micro-act → AO-0 schema-7 mint packet → machinery batch → prose
-batch → AO-2..6 → GR-4e (named micro-act) → the wider corpus per CR-NEXT-1.
+- **⭐ Lane AR COLLECTED (~21:55) and RULED CR-AR-1..9 (§20 on the owner queue).**
+  Machinery fix = the `retiredSymbols` field (absence binds only at LANDED, mirroring
+  the landed-CREATE arm; disjointness arm; capsule both-projections-in-one-edit;
+  substrate widening declared) — PACKETED, carrying the hot-file PACKET_STANDARD
+  section (g). ⚠ **IA-2 re-statuses SUPERSEDED** (proved: as STALE it reserves 12
+  paths and the fix collides with 7). Prose batch SPLITS: (b)–(f) plain, item (a) is
+  a MINT TRIGGER (governed path 3, byte digest — comment edits move it) → rides the
+  schema-7 mint docket with its figure derived there. B9 = IN-1B.md:587; the
+  proseNumerics omission → the INDEX row. Full drafts + verbatim replacement prose in
+  scratchpad `laneAR-drafted-prose.md` (CLAIM_RE = 0 hits, executed). NOTHING lands
+  until the sealed GR-4c session closes.
+Queue after AQ lands: chair-verify + flip → AO-1 micro-act → IA-2 re-status → the
+machinery packet → the prose batch (b)–(f) → AO-0 schema-7 mint (item (a) + SCW-1b's
+five sites) → AO-2..6 → GR-4e → the wider corpus per CR-NEXT-1.
 - **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
   PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
   dead-window re-derivation from pulse call order; carries the B13 law (executed vs
