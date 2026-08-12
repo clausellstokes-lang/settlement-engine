@@ -894,3 +894,45 @@ charter's §15 ledger is honest about delegated figures; every wave re-derives i
 premises at compile. The charter text lives in the Lane AO transcript and the chair's
 board — it does NOT land as a repo doc while the per-claim naked-claim law stands;
 each wave's packet carries only its own measured slice.
+
+## §19 · GR-4c IS RULED COMPILABLE AND PROMOTING (2026-08-12 ~20:20, CR-GR4C-1..6 — vetoable)
+
+Lane AN's draft came back a FIFTH the size the design implied: one pure ~60-line leaf
+plus a 12-line gated block in a file with 637 lines of headroom, no new flag, no new
+surface, no hot file named. Two design premises failed re-verification and were rebuilt
+rather than obeyed; the chair re-read both load-bearing sites and they verify. Six
+rulings adopting the lane's recommendations:
+
+1. **CR-GR4C-1 — the dead window is REAL, EXECUTED, and NOT GR-4c's to repair.** The
+   fracture-credibility fold reads `fracture.tick === now` at a pulse position 507
+   lines BEFORE the only writer stamps that tick — its own comment says "charge once,
+   at mint" and the call order forecloses it; it has returned `[]` on every production
+   tick since it landed. GR-4c charges at the BREACH SITE instead (the established
+   pattern — three of four existing credibility callers already write at their own
+   act). ⚠ **The repair is minted as a NAMED future micro-act, GR-4e** — it lights a
+   charge in information-only worlds (four goldens occupy that flag state), so it
+   carries its own declared shift and its own review. Three lanes have independently
+   re-derived this window; it is now recorded, not folklore.
+2. **CR-GR4C-2 — ⚠ OWNER-VISIBLE — the chair authors ONE number: `CHARGE_BASE = 0.05`,
+   module-local and frozen, marked UNSOAKED, riding the endgame TUNING SIGNATURE.**
+   Derived by executed table against the real writer and the real consumer: 0.05 is
+   the only band where the design's headline holds — the open-repudiation door closes
+   on the THIRD breach (0.140 → 0.278 → saturated), a lineal heir's disavowal closes
+   it on the fourth, a coup-born seat never closes it in four ("the world understands
+   a revolution"), and the belief economy barely notices (weight ≥ 0.90 throughout).
+   Zero new tuning keys; the kind rides the landed 'fracture' constant and is not
+   persisted. Your signature at the tail covers this number; veto now re-opens it.
+3. **CR-GR4C-3 — both roads gate on `oathHolderActive`** (the design's instruction; it
+   also keeps landed lit-information assertions still). The semantic oddity — an open
+   repudiation is not an oath-holder fact — is recorded as a named deferral for GR-7.
+4. **CR-GR4C-4 — no coupling-registry row, PENDING the measurement**: the promotion
+   lane executes the coupling walkers; if any moves or a row proves owed, STOP back to
+   the chair. The grammar registry already declares the biting direction by name.
+5. **CR-GR4C-5 — `informationStatecraft.js` (780/800 effective, first measured by this
+   draft) joins the standing HOT-FILE LIST** beside OutputContainer (599/600) and
+   peaceTerms (797/800).
+6. **CR-GR4C-6 — the INDEX header restamps at promotion** (it still cites `b17d32d2`
+   and eight stale-index residue entries that cleared at the IN-1b flip).
+
+Promotion lane dispatched with the draft + these rulings; the census-holder row MOVES
+to GR-4C at that dispatch (the walker row was FREE since the IN-1b landing).

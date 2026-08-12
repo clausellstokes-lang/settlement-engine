@@ -109,7 +109,33 @@ transcript + board (no repo doc under the per-claim law). Probes retained in scr
 (laneAO-ask-corpus*.mjs, ~90s each). Next dispatch decision (AO-1 vs GR-4c first) waits
 on Lane AN's draft — the census row is FREE and moves at that dispatch.
 
-**LIVE: Lane AN (GR-4c draft, transcript `ac50facb0e78f639f`), read-only, Opus:**
+**⭐ COLLECTED ~20:20: Lane AN's GR-4c draft — COMPILABLE, RULED CR-GR4C-1..6 (§19 on
+the owner queue).** The draft is a FIFTH the design's implied size: one pure ~60-line
+leaf (`treatyBreachCredibility.js`, primitives in / one delta out, no worldState, no
+tick) + a ≤12-line gated block in `repudiateTreaty` (637 lines of headroom), 0 new
+flags, 0 new surfaces, neither hot file named. Chair re-verified both load-bearing
+sites: **the fractureCredibilityDeltas window is DEAD at 0b98626f** (strict `=== now`
+at a pulse position 507 lines before the only writer stamps that tick — its own
+comment "charge once, at mint" assumed a visibility the call order forecloses;
+executed probe A1/A2/A3), and the pact consumer saturates at score −1 exactly as the
+band table assumed. Rulings: no repair here (GR-4e MINTED as the named future
+micro-act — it shifts information-only worlds, own declared shift); ⚠ OWNER-VISIBLE
+CR-GR4C-2 — the chair authored **CHARGE_BASE = 0.05** (module-local frozen, UNSOAKED,
+rides the tuning signature; executed band: open repudiation closes the door on the
+THIRD, lineal on the fourth, coup-born never in four, belief weight ≥ 0.90); both
+roads on oathHolderActive (oddity deferred to GR-7); no coupling row PENDING the
+promotion's measurement (STOP if owed); informationStatecraft.js (780/800) joins the
+HOT-FILE LIST; the INDEX header restamps at promotion (stale residue note cleared).
+
+**LIVE: Lane AP (GR-4C promotion, transcript `a2d5437810b3358c9`), Opus, docs-only:**
+executes the draft's §15 NOT-MEASURED list before authoring (B1–B4 with TRUE_EXIT,
+the D-4 coupling mechanism + walker run, chunk pins, anchor allowance at HEAD, the
+FENCE 1/2 fixture-flag read), folds the rulings in, claims the census walker row at
+dispatch (FIFTH restamp), validates 23 packets / 1 READY, ONE plumbing commit,
+porcelain zero. Collection: on READY → chair-verify → dispatch the GR-4c implementer
+(census holder). Behind it: the AO-1 micro-act (lock-the-win floors, CR-AO-5 — no new
+files, no census contact; runs as second lane once the promotion lands), then AO-0's
+schema-7 mint packet, the schema-7 prose batch, the machinery batch.
 - **Lane AN — GR-4c draft** (transcript `ac50facb0e78f639f`): compiles the packet per
   PACKET_STANDARD at `0b98626f`; its preflight EXECUTES the fractureCredibilityDeltas
   dead-window re-derivation from pulse call order; carries the B13 law (executed vs
