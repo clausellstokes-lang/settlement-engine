@@ -1047,6 +1047,74 @@
           "tests/property/mechanismLitCoverage.test.js"],
         ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/components/OutputContainer.jsx"]
       ]
+    },
+    {
+      "id": "GR-4C",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4C.md",
+      "verifiedBase": "0b98626fae7cda5cce55659865d58250f976ce7b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyBreachCredibility.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryGrammar.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "CREATE", "path": "tests/domain/treatyBreachCredibility.test.js" },
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "TEST", "path": "tests/property/oathHolderDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceCredibility" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "infoStatecraftActive" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "CREDIBILITY_TUNING" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "credibilityScoreOf" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "TREATY_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreachTypes.js", "symbol": "isRepudiationBreach" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "OATHBREAKER_PENALTY" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: both flags lit, a DM REPUDIATE_TREATY on a live NAP drives spatialLedgers.credibility[breaker].score to exactly -0.4 with holder people_held and lastUpdateTick at the breach tick, and the charge is present in the value repudiateTreaty itself returns, proving it is written at the act rather than by a later fold" },
+        { "id": "C2", "case": "boundary, the grading is carried rather than re-authored: on the succession road a coup-born disavowal charges strictly less than a lineal one and both strictly less than an open repudiation, on one fixture in one assertion chain, at exactly CHARGE_BASE times 0.35, 0.75 and 1" },
+        { "id": "C3", "case": "absent or disabled on two axes with the mandatory lit-mutant control: oathHolderEnabled absent and separately explicit false leaves no credibility key at all on either road with the new fence counter at zero, oathHolderEnabled lit with infoStatecraftEnabled dark gives the same result by the writer's own gate, and a both-lit run proves the counter can increment because the fence fixture lights neither belief flag today" },
+        { "id": "C4", "case": "duplicate and idempotent with order independence: re-running the same breach is refused by the eligibility predicates and writes nothing further, and two disavowals on two instruments in one tick both fold to a ledger identical under either application order" },
+        { "id": "C5", "case": "writer to reader integration, the design's headline claim as arithmetic: three successive open repudiations across ticks drive the consumer term to 0.140, 0.278 and saturation, so the oathbreaker penalty reaches its full value only at the third and a counterparty that would have signed at one refuses at three" },
+        { "id": "C6", "case": "counterforce, the mark is not a ratchet: the charge halves after the half-life, reads zero past the lookback and prunes below the epsilon so a reformed lineage is pactable again, and the belief economy is undistorted with credibilityWeight at or above 0.90 after three open repudiations" },
+        { "id": "C7", "case": "lifecycle round trip: a charged credibility entry survives a JSON round trip with its score, lastUpdateTick and holder, re-decays correctly against a later tick, and a world whose treaty shell was pruned at breachExpiresTick retains the charge so the stock outlives the instrument" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/domain/pactFormation.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/domain/couplingReceiptSample.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/intelSelfPolicing.test.js",
+          "tests/domain/politicsCredibilityRead.test.js",
+          "tests/domain/realmVerbExecution.test.js",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/peaceTerms.test.js"],
+        ["npx", "vitest", "run",
+          "tests/property/informationStatecraftDormancyGolden.test.js",
+          "tests/property/npcCredibilityDormancyGolden.test.js",
+          "tests/property/intelTradeDormancyGolden.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/pulseStageContracts.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/domain/guidanceRegistry.walker.test.js"],
+        ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/domain/worldPulse/treatyBreach.js", "src/domain/worldPulse/informationStatecraft.js"]
+      ]
     }
   ]
 }
