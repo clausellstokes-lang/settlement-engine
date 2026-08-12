@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 03:07:45 EDT
+**Generated:** 2026-08-12 03:54:37 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `caa6094a` | **14** |
-| ledger (main) | `review-fixes-2026-07-08` | `675929ab` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `0e5881b6` | **6** |
+| ledger (main) | `review-fixes-2026-07-08` | `1234721a` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 37Gi free (82% used)
+**Disk:** 35Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T030707` — build 14 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T035401` — build 6 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T030707
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T035401
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -30,30 +30,18 @@ staged set BY NAME AND COUNT.
 ```
 MM docs/implementation/INDEX.md
 MM docs/implementation/PACKET_MANIFEST.json
+MM docs/implementation/packets/foreign-policy/ES-DA.md
 MM docs/implementation/packets/foreign-policy/GR-4A.md
 MM docs/implementation/packets/site-coherence/SCW-0.md
 MM docs/implementation/packets/town-cartography/TC-5B-II.md
- M src/domain/certification/couplingRegistryEspionage.js
- M src/domain/certification/subsystemRowsVirtual.js
- M src/domain/worldPulse/envoyDiplomacy.js
- M src/domain/worldPulse/envoyErrand.js
- M tests/domain/couplingRegistry.test.js
- M tests/property/espionageProductsDormancyFence.test.js
-?? src/domain/worldPulse/espionage/espionageRider.js
-?? tests/domain/espionageRider.test.js
-?? tests/property/espionageRiderDormancyFence.test.js
 ```
 ```
-  +51     -0      src/domain/certification/couplingRegistryEspionage.js
-  +2      -2      src/domain/certification/subsystemRowsVirtual.js
-  +13     -0      src/domain/worldPulse/envoyDiplomacy.js
-  +8      -1      src/domain/worldPulse/envoyErrand.js
-  +19     -1      tests/domain/couplingRegistry.test.js
-  +9      -1      tests/property/espionageProductsDormancyFence.test.js
 ```
 ## Last 12 build commits
 
 ```
+0e5881b6 2026-08-12 ES-Da flips LANDED: the four-packet chain is complete, nineteen packets all terminal
+6dbb76c2 2026-08-12 ES-Da: the espionage rider — covert cargo on an already-accepted peace envoy
 caa6094a 2026-08-12 SCW-0 flips LANDED with the seed-dependence finding on the record; ES-Da is the last reservation holder
 d648e788 2026-08-12 SCW-0: the site-coherence enforcement layer — the nine waves get a number they cannot drift
 d0af9b35 2026-08-12 TC-5b-ii flips LANDED with the §6.5 correction; the reservation moves to SCW-0
@@ -64,18 +52,16 @@ a9a10e6d 2026-08-11 The schema-6 re-triage pin gains its liveness anchor
 ec3680d0 2026-08-11 Display-copy batch: the four road descriptors land, and §17.2/§17.3 are recorded
 2b59122d 2026-08-11 The schema-6 GENESIS: the instrument stops reporting browser and language surface
 2fe94f77 2026-08-11 Schema 6 minted (CODE HALF) -- DELIBERATELY GATE-RED until the genesis lands
-5853732a 2026-08-11 Four packets promoted: the painter's mount unblocks, and GR-4a, SCW-0 and ES-Da compile READY
-33487c77 2026-08-11 The observed-shape baseline shrinks by exactly the two rows the repair retired
 ```
 ## Last 6 ledger commits
 
 ```
+1234721a 2026-08-12 The rider stopped on the chair's own rulings, and both cures are ruled
 675929ab 2026-08-12 The site-coherence program opens on a superseded audit; the rider goes last
 3aed3008 2026-08-12 The painter's mount is collected and flipped; the site-coherence opener begins
 5fc141a1 2026-08-12 The painter's mount stopped on a dead premise; the chair ruled the stronger guard
 9856aa10 2026-08-11 GR-4a is collected and flipped; the painter's mount implements
 5c87b476 2026-08-11 The schema-6 mint is collected green; GR-4a implements; the index is folded
-9391c3b8 2026-08-11 The copy batch lands direction-free, and a same-day ruling conflict goes to the owner
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -216,24 +202,25 @@ two partial lane turns. Banked to seamless-resume-directive.md as the live-fire 
   record). C7 caught a stale audit figure (`/barge/` is LIVE now). Census folded to
   **2401/365/2036/19835/5594**. Transcript: session dir
   `subagents/agent-a4a558bea88a3606f.jsonl`.
-- **Lane AA — ES-Da STOPPED CORRECTLY (~02:50), RULED CR-ESDA-6/7, RESUMED.** The rider
-  is complete and green on 7 of 8 manifest rows with the dark-path byte-identity proven
-  AGAINST THE PRE-FEATURE COMMIT (identical 10-tick ledger hashes) — but two of the
-  chair's own rulings were unimplementable at HEAD, both proven: **the coupling id
-  shape refuses ANY letter-named wave** (`-\d+[a-z]?` requires digits; ES-Da has none;
-  the naming space legitimately grew via refusal-splits) and a stale flag-era JSDoc
-  (`covert?:boolean|null`) rejects the record the layer below already accepts.
-  **CR-ESDA-6**: the shape widens to `-(?:\d+[a-z]?|[A-Z][a-z]?)` (a map that cannot
-  name a chartered wave is incomplete where it matters most; rename DECLINED — it
-  erases refusal-record provenance); the row lands as documentation with the
-  pair-already-licensed finding in its rationale. **CR-ESDA-7**: the one-word JSDoc
-  cure authorized (executed-and-reverted measurement = the receipt). Door-3's honest
-  fail-closed labeling RATIFIED. The lane is landing with both cures + the whole
-  census fold; gate owed back TRUE_EXIT=0; the two new reserved paths join the
-  manifest row at the flip. Consumer receipts so far: ES-5a CONFIRMED (first
-  production caller of the orphaned doctrine stage), ES-2/3 CONFIRMED lit, ES-5d/6a
-  PLAUSIBLE (need their own flags). Transcript: session dir
-  `subagents/agent-af30d0d9e08251373.jsonl`.
+- **✅ Lane AA LANDED ES-Da at `6dbb76c2` (~03:15), chair-flipped at `0e5881b6` — THE
+  FOUR-PACKET CHAIN IS COMPLETE; 19 packets, 0 READY, ALL TERMINAL.** The rider: one
+  pure leaf + one conditional spread, zero tuning/persisted/stage additions, dark-path
+  byte-identity PROVEN BY EXECUTION against the pre-feature commit (hash frozen as
+  PRE_ESDA_DARK_LEDGER_HASH); reaches ES-5a (first caller of the orphaned doctrine
+  stage), ES-2/3 (measured lit), ES-5d/6a (plausible, own flags). CR-ESDA-6/7 executed;
+  TWO further ratified deviations (the barrel re-export; the ES-5 orphan-pin narrowing
+  — ⭐ LESSON: a "fully orphaned" file's emptiness is PINNED somewhere, grep before
+  wiring). Census folded whole to **2403/365/2038/19861/5602**; envoyDiplomacy 762/800;
+  pulse mouths untouched; gate TRUE_EXIT=0. ⚠ Lane hazard propagated: cwd is NOT stable
+  across Bash calls in an agent thread — it verified no work reached the main tree.
+  Transcript: session dir `subagents/agent-af30d0d9e08251373.jsonl`.
+
+**THE QUEUE NOW (chair, ~03:30):** read-only drafts for the next compiles — GR-4b
+(needs the chair pre-ruling on the peaceTerms.js factoring at 797/800 first), SCW-1
+(Wave-1 literal re-derived), IN-1 — plus the chartered instruments (corpus-coverage
+mint charter; schema-7 prose batch) and the micro-act batch (tintedCallouts 164v163 ·
+enforcement-claims per-identity · SCW-0's mutation-kind upgrade). Espionage stays DARK
+until the endgame; the walk/soaks/tuning/pushes remain the owner's.
 - **Chair memory pass (~03:05):** the index folded to **17,047 B** (under ceiling,
   zero broken links; the schema-6 and lane-census rows folded verbatim with sharpest
   hooks restored; the letter-wave finding hooked at the ES-7 row).
