@@ -88,9 +88,11 @@ const SECTIONS = {
 const WORLD_LOCKS = [
   { key: 'identity', locked: 'Locked. A new roll keeps the name.', open: 'A new roll can rename the settlement.', lockCta: 'Keep the name', unlockCta: 'Allow a new name' },
   { key: 'geography', locked: 'Locked. A new roll keeps the same ground.', open: 'A new roll can move it to different ground.', lockCta: 'Keep this ground', unlockCta: 'Allow new ground' },
-  // ⏳ COPY IS A DRAFT FOR OWNER VETO. The wiring is the ruled part; these four
-  // sentences are this lane's best reading of the house voice (say what SURVIVES,
-  // plain words, never mechanism) and the owner keeps or rewrites them freely.
+  // ⭐ ADOPTED 2026-08-11 (OWNER_DECISION_QUEUE §17.2) — these four sentences
+  // shipped as a DRAFT FOR OWNER VETO and are now FINAL. Adoption changed no
+  // string here and narrowed nothing: §15 remains the veto surface, and the
+  // owner keeps or rewrites them freely at any time. They are this lane's
+  // reading of the house voice (say what SURVIVES, plain words, never mechanism).
   // Note these speak about a COUP rather than "a new roll", because that is what
   // the lock actually governs — the other two rows guard the dice, this one
   // guards the seat.

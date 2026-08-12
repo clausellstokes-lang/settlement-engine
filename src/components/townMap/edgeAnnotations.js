@@ -40,7 +40,30 @@
  *     weeks, the label carries "≈N weeks away"; absent it, no number is invented.
  */
 
-/** relationshipType → an honest relative descriptor (empty ⇒ no descriptor shown). */
+/** relationshipType → an honest relative descriptor (empty ⇒ no descriptor shown).
+ *
+ * The four hierarchical/covert rows were authored 2026-08-11 under
+ * OWNER_DECISION_QUEUE §17.4 (display-only, render-time, non-golden-bearing);
+ * that section is the veto surface for this wording. Denominator, so the set is
+ * closed and not a guess: lib/relationshipGraph.PROPAGATION_MATRIX is the ten
+ * relationshipType values any writer can produce, this map covered six of them,
+ * and these are the other four. (`tense` below is a legacy save spelling with no
+ * matrix row; it is kept because old saves still carry it.)
+ *
+ * ⚠⚠ THE ASYMMETRIC ROWS ARE DELIBERATELY DIRECTION-FREE, AND THAT IS THE WHOLE
+ * POINT OF THEIR WORDING — not vagueness. `relationshipType` is the CANONICAL
+ * EDGE type, which carries no side: relationshipDefinition() writes `patron` for
+ * BOTH `patron_of` and `client_of`, and `vassal` for BOTH `overlord_of` and
+ * `vassal_of`. Which end THIS settlement occupies lives in
+ * `localRelationshipRole` — a field this reader deliberately does not consult
+ * (the honesty boundary above; reading it would be a new data path, not copy).
+ * So a row reading "a patron" would be a coin flip about who owes whom, on a
+ * surface whose whole charter is not inventing what it does not know.
+ * `bound by patronage` and `bound by fealty` are true from either end.
+ * `client` shares the patronage wording because ONLY the legacy raw spelling
+ * ever produces it (canonicalRelationship.canonicalEdgeForLink still resolves
+ * that shape); the canonical writer never emits it.
+ */
 const REL_LABEL = Object.freeze({
   allied: 'allied',
   trade_partner: 'trade partner',
@@ -48,6 +71,10 @@ const REL_LABEL = Object.freeze({
   hostile: 'hostile',
   cold_war: 'an uneasy peace',
   tense: 'tense',
+  patron: 'bound by patronage',
+  client: 'bound by patronage',
+  vassal: 'bound by fealty',
+  criminal_network: 'a shadow trade',
   neutral: '',
 });
 

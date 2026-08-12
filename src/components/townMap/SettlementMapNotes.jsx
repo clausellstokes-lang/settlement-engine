@@ -70,6 +70,20 @@ export default function SettlementMapNotes({ settlement, story = null, changes =
   // map). But once the drawer is open for ANY reason, the change section renders —
   // showing the dark-fabric whisper in place of content.
   const hasRealChanges = !!changes && changes.hasAny;
+  // ⏳ RULED BUT NOT YET IMPLEMENTED — OWNER_DECISION_QUEUE §17.3 (chair,
+  // 2026-08-11): on the §15b taste call, a STATED absence WINS over an absent
+  // section (a surface that says "none" is honest; a missing section is
+  // ambiguous). `hasRoads` below is the gate that ruling reverses — the honest
+  // line §15b proposes is "Roads out — Three approaches. No neighbour is
+  // recorded yet.", whose count comes from the exit roads, which exist
+  // independently of neighbours.
+  // ⛔ DELIBERATELY NOT BUILT HERE. That is a BEHAVIOUR change, and the batch
+  // recording this ruling is display-copy only; it needs its own packet.
+  // ⚠⚠ IT ALSO CONTRADICTS A LIVE GREEN PIN that is still the stated authority:
+  // tests/ui/settlementMapLegibility.test.jsx:121 asserts the hide-when-empty
+  // behaviour and carries its own dated note reading "an ABSENT section is
+  // honest". Whoever implements §17.3 must move that pin and its rationale in
+  // the same commit — until then the CODE, not this note, is what ships.
   const hasRoads = Array.isArray(roads) && roads.length > 0;
   if (!hasStory && !hasRealChanges && !hasRoads) return null;
 
