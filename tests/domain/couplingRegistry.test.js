@@ -43,6 +43,8 @@ import {
   GR3_MUTUAL_DEFENSE_COUPLING,
   GR3_POPULATION_GRANT_COUPLING,
   GR3_TERM_FAMILY_COUPLINGS,
+  GR4C_BREACH_CREDIBILITY_COUPLING,
+  GR4_BREACH_CREDIBILITY_COUPLINGS,
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
@@ -137,6 +139,11 @@ describe('CW-0 coupling registry', () => {
       // producer/consumer law forbids shipping a right with its consumer side merely
       // unmentioned, which is `non_intervention`'s recorded lesson.
       ...GR3_TERM_FAMILY_COUPLINGS,
+      // FP GR-4c (2026-08-12): the GRAMMAR leaf's THIRD set. One row — the credibility
+      // charge a torn-up oath finally costs its breaker — and the PRODUCER half of the
+      // INFO→GRAMMAR read GR-2's own row pre-declared. The pair is cross-layer despite
+      // both modules sharing a directory: layers are frozen module sets, not folders.
+      ...GR4_BREACH_CREDIBILITY_COUPLINGS,
       // FP IN-0a (2026-08-06): the FOURTH volume leaf. One row — the paid plant's handoff
       // into the envoy-picture stage — and INFORMATION's first cross-layer read.
       ...IN_INFORMATION_COUPLINGS,
@@ -585,11 +592,19 @@ describe('CW-0 coupling registry', () => {
     // ESPIONAGE family is the DEPENDENCY rather than the importer — every earlier ES row
     // reads GRAMMAR→INFO because espionage was always the one doing the importing. The
     // legacy first-row tiebreak below is unmoved by it.
+    // ⏱ GR-4c's breach credibility charge (2026-08-12) is the SIXTH read on this direction
+    // and the SECOND owned by GRAMMAR — it takes its seat between GR-2's and IN-0a's,
+    // because registration order follows COUPLING_REGISTRY's composition and the GRAMMAR
+    // leaf composes ahead of INFORMATION. This is a SECOND exact list the one new row
+    // moves: the pairId is reused deliberately (schema v2 permits several independently-
+    // owned reads on one directional pair), so the row lands in BOTH lists or neither.
+    // The legacy first-row tiebreak below is unmoved by it.
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
       .toEqual([
         WR7_MOVING_PICTURE_COUPLING,
         WR7_ENVOY_PLANT_COUPLING,
         GR2_BELIEVED_DEMAND_COUPLING,
+        GR4C_BREACH_CREDIBILITY_COUPLING,
         IN0A_PLANT_HANDOFF_COUPLING,
         ESDA_COVERT_RIDER_COUPLING,
       ]);

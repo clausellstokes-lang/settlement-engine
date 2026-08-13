@@ -15,6 +15,12 @@ import { peaceCausalActive } from './warReasons.js';
 // reaches the treaty ledger stays in this module, which is the family's declared
 // rewriter, so the ownership certification's writer set does not move.
 import { oathHolderActive } from './oathHolder.js';
+// GR-4c — THE CREDIBILITY CHARGE. `advanceCredibility` is the estate's SOLE writer of
+// spatialLedgers.credibility and self-gates on infoStatecraftActive; this module supplies
+// only the fifth CALLER, so the ownership certification's writer set does not move. The
+// edge into the INFO layer is declared at CPL-19 in the coupling registry.
+import { advanceCredibility } from './informationStatecraft.js';
+import { breachCredibilityDeltas } from './treatyBreachCredibility.js';
 import { appendLineage } from './pactAmendment.js';
 import { isSuccessionDisavowable, successionQuestionsForTick } from './treatySuccession.js';
 import { successionDisavowalBeat } from './treatySuccessionVoice.js';
@@ -224,6 +230,15 @@ export function repudiateTreaty(worldState, { fromId, toId, tick, succession = n
       : broken;
   }
   let nextWorldState = setSpatialLedger(worldState, 'treaties', next);
+  // GR-4c — THE OATH FINALLY COSTS SOMETHING. Both roads end here, so both charge here:
+  // one delta, banded by the verdict GR-4a already graded. `advanceCredibility` is the
+  // estate's sole credibility writer and self-gates on infoStatecraftActive, so this is a
+  // conjunction of two landed gates and no new flag. Charged at the ACT, not at a later
+  // fold — the tick-windowed fold idiom cannot see a record written after it runs.
+  if (oathHolderActive(worldState)) {
+    const charged = advanceCredibility({ worldState: nextWorldState, tick: nowTick, deltas: breachCredibilityDeltas(verdict) });
+    if (charged.changed) nextWorldState = /** @type {Record<string, unknown>} */ (charged.worldState);
+  }
   /** @type {DispositionTransition[]} */
   let dispositionTransitions = [];
   const simulationRules = asObject(worldState.simulationRules);

@@ -251,3 +251,39 @@ export const GR3_TERM_FAMILY_COUPLINGS = Object.freeze([
   GR3_POPULATION_GRANT_COUPLING,
   GR3_MUTUAL_DEFENSE_COUPLING,
 ]);
+
+/**
+ * GR-4c / INFORMATION→GRAMMAR (CPL-19). THE OATH THAT FINALLY COSTS SOMETHING — and the
+ * row GR-2's own leaf pre-declared above, in as many words: the proposer's oathbreaker
+ * credibility "read through the estate's one credibility reader so GR-4's charge bites
+ * here the day it lands." This is that day. A torn-up oath — the DM's open repudiation or
+ * an heir's disavowal — now CHARGES the breaking court's credibility stock at the act,
+ * banded by the severity GR-4a already graded, closing a seam where the reader chain had
+ * waited since GR-2 with no producer on the other side.
+ *
+ * ⚠ THE PAIR IS CROSS-LAYER EVEN THOUGH BOTH MODULES SHARE A DIRECTORY, and that is
+ * exactly why this row exists. The inclusion walker resolves layers from frozen module
+ * SETS matched by regex, never from directories: `treatyBreach.js` is GRAMMAR and
+ * `informationStatecraft.js` is INFO. A compile draft argued the import was same-layer and
+ * owed nothing; the measurement refuted it. A directory is not a layer.
+ *
+ * THE COUNTERFORCE is where the charge is actually spent: `reserveFor` prices a proposer's
+ * disavowal history into the reserve a peacetime pact must clear, so the same number that
+ * records the breach is the number a future counterparty refuses on. Force and
+ * counterforce read one stock from opposite ends, which is what this column is for.
+ */
+export const GR4C_BREACH_CREDIBILITY_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.GR-4c.breach_credibility',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/treatyBreach.js#repudiateTreaty',
+  receiptField: 'spatialLedgers.credibility[].{score,lastUpdateTick,holder}',
+  counterforce: 'src/domain/worldPulse/pactFormation.js#reserveFor',
+  flags: Object.freeze(['oathHolderEnabled', 'infoStatecraftEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-4c',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR4_BREACH_CREDIBILITY_COUPLINGS = Object.freeze([GR4C_BREACH_CREDIBILITY_COUPLING]);

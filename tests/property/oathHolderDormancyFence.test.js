@@ -57,7 +57,24 @@ import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treat
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 
 /** FENCE 3's recorder. Hoisted, because `vi.mock` factories hoist above the imports. */
-const calls = vi.hoisted(() => ({ stampWriter: 0, seatReads: 0, durableLookups: 0, swornReads: 0 }));
+const calls = vi.hoisted(() => ({
+  stampWriter: 0, seatReads: 0, durableLookups: 0, swornReads: 0, credibilityCharges: 0,
+}));
+
+// GR-4c's WRITE edge. `treatyBreach.js` now calls the estate's sole credibility writer
+// from inside `repudiateTreaty`, behind `oathHolderActive`. Like `swornPartiesOf` and
+// unlike `oathHolderOf`, this call genuinely crosses a module boundary, so replacing the
+// export really does sever it and the counter cannot read a false zero.
+vi.mock('../../src/domain/worldPulse/informationStatecraft.js', async (importOriginal) => {
+  const actual = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...actual,
+    advanceCredibility: (/** @type {any[]} */ ...args) => {
+      calls.credibilityCharges += 1;
+      return actual.advanceCredibility(...args);
+    },
+  };
+});
 
 vi.mock('../../src/domain/worldPulse/oathHolder.js', async (importOriginal) => {
   const actual = /** @type {Record<string, any>} */ (await importOriginal());
@@ -192,8 +209,14 @@ const litCounters = { seatReads: calls.seatReads - darkCounters.seatReads, durab
 const SUCCESSION_TICK = 44;
 const SUCCESSION_KEY = 'crown>march';
 
-/** @param {Record<string, unknown>} rules */
-function successionDrive(rules) {
+/**
+ * The raw succession drive, returning the whole world. Split out of `successionDrive`
+ * so GR-4c's both-lit control can read the CREDIBILITY ledger the treaty ledger hides.
+ * @param {Record<string, unknown>} rules
+ * @param {Record<string, unknown>} [worldPatch] extra worldState keys (GR-4c lights the
+ *   belief layer, which needs a `spatialCanonVersion` marker no other run here carries)
+ */
+function successionRun(rules, worldPatch = {}) {
   const items = ITEMS();
   const edges = EDGES();
   const out = advanceTreaties({
@@ -232,6 +255,7 @@ function successionDrive(rules) {
           },
         },
       },
+      ...worldPatch,
     },
     settlementUpdates: [],
     graph: { edges },
@@ -239,16 +263,58 @@ function successionDrive(rules) {
     tick: SUCCESSION_TICK,
     now: '2026-01-01T00:00:00.000Z',
   });
-  return getSpatialLedger(out.worldState, 'treaties') || {};
+  return out.worldState;
 }
+
+/** @param {Record<string, unknown>} rules */
+function successionDrive(rules) {
+  return getSpatialLedger(successionRun(rules), 'treaties') || {};
+}
+
+/** The credibility-edge calls made since this was last asked. */
+let chargeCursor = 0;
+function chargesSinceLastCall() {
+  const delta = calls.credibilityCharges - chargeCursor;
+  chargeCursor = calls.credibilityCharges;
+  return delta;
+}
+
+/** The three MINT drives above break no instrument, so no charge road is entered there. */
+const mintCharges = chargesSinceLastCall();
 
 const successionBaseReads = calls.swornReads;
 const SUCCESSION_ABSENT = successionDrive({ ...WAR });
 const successionDarkReads = calls.swornReads - successionBaseReads;
+const successionDarkCharges = chargesSinceLastCall();
 const SUCCESSION_EXPLICIT_FALSE = successionDrive({ ...WAR, [FLAG]: false });
 const successionFalseReads = calls.swornReads - successionBaseReads - successionDarkReads;
-const SUCCESSION_LIT = successionDrive({ ...WAR, [FLAG]: true });
+const successionFalseCharges = chargesSinceLastCall();
+// The lit run keeps its whole world, because GR-4c's control below has to prove that a
+// run which ENTERED the charge block still wrote no credibility key.
+const SUCCESSION_LIT_STATE = successionRun({ ...WAR, [FLAG]: true });
+const SUCCESSION_LIT = getSpatialLedger(SUCCESSION_LIT_STATE, 'treaties') || {};
 const successionLitReads = calls.swornReads - successionBaseReads - successionDarkReads - successionFalseReads;
+const successionLitCharges = chargesSinceLastCall();
+
+// ── GR-4c — ⛔⛔ THE BOTH-LIT CONTROL (CR-GR4C-8), AND IT IS MANDATORY ──────────
+//
+// Every run above leaves `infoStatecraftEnabled` DARK — the rule set this file has always
+// driven is `{warLayerEnabled, peaceEngineEnabled}` plus the one flag under test — so
+// `advanceCredibility` self-gates and NO run above can materialize a credibility key.
+// A counter whose only readings come from those runs would be measuring a road that
+// could never light, which is the recorded redundant-guard vacuity class: a counter that
+// cannot count proves nothing about the zeros it reports.
+//
+// This run lights BOTH gates on the same adversarial fixture, so the counter is proven
+// able to INCREMENT and the write it guards is proven able to LAND. `spatialCanonVersion`
+// is not decoration: `beliefsActive` requires the marker, and `infoMode` must not be the
+// default `'omniscient'`, or the second gate stays shut and this control would certify
+// the same nothing the runs above do.
+const SUCCESSION_BOTH_LIT = successionRun(
+  { ...WAR, [FLAG]: true, infoStatecraftEnabled: true, infoMode: 'unreliable' },
+  { spatialCanonVersion: 1 },
+);
+const successionBothLitCharges = chargesSinceLastCall();
 
 describe('GR-1 dormancy — the fixture is adversarial', () => {
   it('the drive really mints, and really stamps when lit', () => {
@@ -334,6 +400,36 @@ describe('GR-1 FENCE 3 — call-path dormancy', () => {
     // THE PAIRED NON-VACUITY ANCHOR — lit, the same drive really does read the parchment,
     // so the two zeros above are dormancy rather than a spy that never intercepted.
     expect(successionLitReads).toBeGreaterThan(0);
+  });
+
+  it('GR-4c: a dark tick never CHARGES — advanceCredibility is not called at all', () => {
+    // The credibility charge sits behind `oathHolderActive` inside `repudiateTreaty`, so
+    // dark the block is never entered and the estate's sole credibility writer is never
+    // reached from this road. Absent and explicit-false are counted separately, because
+    // "dark-never-permissive" is a claim about both. The mint drives are counted too:
+    // they break no instrument, so they may not touch this road either.
+    expect(mintCharges).toBe(0);
+    expect(successionDarkCharges).toBe(0);
+    expect(successionFalseCharges).toBe(0);
+    // THE PAIRED NON-VACUITY ANCHOR: lit, the same drive really does enter the block.
+    expect(successionLitCharges).toBeGreaterThan(0);
+  });
+
+  it('GR-4c: the counter CAN count and the charge CAN land — the both-lit control', () => {
+    // ⛔⛔ CR-GR4C-8. Without this the counter's zeros would be unfalsifiable: every other
+    // run in this file leaves the information layer dark, so the guarded write could never
+    // have happened in any of them and the counter would be reporting on a road that does
+    // not exist. Here both gates are open on the SAME adversarial fixture.
+    expect(successionBothLitCharges).toBeGreaterThan(0);
+    // …and the write the counter guards really lands, which is what makes the dark zeros
+    // above measure DORMANCY rather than a feature that is simply inert everywhere.
+    const charged = getSpatialLedger(SUCCESSION_BOTH_LIT, 'credibility') || {};
+    expect(charged.march)
+      .toEqual({ score: -0.14, lastUpdateTick: SUCCESSION_TICK, holder: 'people_held' });
+    // THE SECOND GATE IS REAL AND IS PROVEN HERE, not assumed: the oath-lit-only run
+    // above ENTERED the block (its counter moved) and still wrote nothing, because
+    // `advanceCredibility` refuses at its own first line. Two gates, both load-bearing.
+    expect(getSpatialLedger(SUCCESSION_LIT_STATE, 'credibility')).toBeUndefined();
   });
 });
 

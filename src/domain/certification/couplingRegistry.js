@@ -33,7 +33,7 @@ import {
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
 import { TR1_CASUS_COMMERCII_COUPLINGS } from './couplingRegistryTrade.js';
-import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS } from './couplingRegistryGrammar.js';
+import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS } from './couplingRegistryGrammar.js';
 import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
 // the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
@@ -54,6 +54,8 @@ export {
   GR3_POPULATION_GRANT_COUPLING,
   GR3_MUTUAL_DEFENSE_COUPLING,
   GR3_TERM_FAMILY_COUPLINGS,
+  GR4C_BREACH_CREDIBILITY_COUPLING,
+  GR4_BREACH_CREDIBILITY_COUPLINGS,
 } from './couplingRegistryGrammar.js';
 
 // The INFORMATION leaf (FP wave IN-0a). Re-exported by name like every other volume's:
@@ -126,6 +128,10 @@ export const COUPLING_REGISTRY = Object.freeze([
   ...TR1_CASUS_COMMERCII_COUPLINGS,
   ...GR2_PACT_FORMATION_COUPLINGS,
   ...GR3_TERM_FAMILY_COUPLINGS,
+  // FP GR-4c (2026-08-12): the GRAMMAR leaf's THIRD set, appended in wave order beside
+  // its siblings. One row — the credibility charge a torn-up oath finally costs its
+  // breaker — and the producer half of the INFO→GRAMMAR read GR-2's row pre-declared.
+  ...GR4_BREACH_CREDIBILITY_COUPLINGS,
   ...IN_INFORMATION_COUPLINGS,
   // FP ES-1 (2026-08-06): the FIFTH volume in this registry, and the first ESPIONAGE
   // rows. Three: the covert mission minting through the estate's one errand spine, the

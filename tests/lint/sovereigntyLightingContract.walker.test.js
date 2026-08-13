@@ -3982,7 +3982,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // CREATEs — and NOTHING ELSE. Unlike the three promotions before it, this dispatch found
     // no stale-index residue at all: `git diff HEAD` and `git diff --cached` were BOTH empty
     // at preflight. ZERO foreign test files, and therefore zero foreign titles.
-    files: 2408, parked: 365, credited: 2043, titles: 19945, suiteTitles: 5628,
+    // ⏱ GR-4c, 2026-08-12 — THE BREACH CREDIBILITY CHARGE. Re-derived WHOLE in this same
+    // change, per the serialization law: all five figures came from ONE run, never patched
+    // one at a time, because a sequenced census STOPS MEASURING at its first red figure and
+    // the later arms would then be read off a run that never evaluated them.
+    // 2408/365/2043/19945/5628 → 2409/365/2044/19960/5635.
+    // ⭐ DERIVED AND CROSS-CHECKED, AND THE ARITHMETIC CLOSES ON BOTH SIDES. (a) A temporary
+    // probe placed INSIDE this test BEFORE its first assertion — so it minted no title and
+    // could not move what it measures — printed the five-tuple and `park: []` for BOTH
+    // touched files BY NAME with their exact title and suite counts. (b) That per-file
+    // decomposition reconciles the totals exactly: `files` and `credited` each move +1 for
+    // the ONE new file, `parked` is UNCHANGED, and the +15 titles are 13 from
+    // tests/domain/treatyBreachCredibility.test.js plus 2 from the extended dormancy fence,
+    // while all +7 suite titles are the new file's seven acceptance describes and the fence
+    // contributes ZERO — its two new cases were registered INSIDE the existing FENCE 3
+    // describe, which is precisely why GR-4c extended that fence instead of authoring a new
+    // fence FILE (a new file would have moved `files` and `credited` on top of these two).
+    // ⚠ HAD THE NEW FILE PARKED, `titles` would have moved by less than its share while
+    // `parked + credited === files` still closed, on a lie — so `credited` was checked to
+    // have moved WITH `files` rather than inferred from the sum. Every case in the new file
+    // is registered STRAIGHT-LINE and it uses no `.each()`, for exactly that reason.
+    // ⚠ FOREIGN-TITLE STOP, CHECKED RATHER THAN ASSUMED: at re-record time
+    // `git status --porcelain` carried EXACTLY this lane's own reserved paths — five
+    // modified and two untracked CREATEs — and NOTHING ELSE, over a `git diff HEAD` that
+    // named only those same files. ZERO foreign test files, and therefore zero foreign
+    // titles. ⚠ THE OTHER SEVEN PATHS IN THIS CHANGE WERE CHECKED RATHER THAN ASSUMED, and
+    // only two of them can move a figure: FOUR are under src/ and are not test files at
+    // all; tests/domain/couplingRegistry.test.js gains an import name, one aggregate spread
+    // inside two assertions that already existed, and comments — minting NO title; and the
+    // remaining two test files are the ones decomposed above. This file gains only this
+    // comment and the row below it.
+    files: 2409, parked: 365, credited: 2044, titles: 19960, suiteTitles: 5635,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
