@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 12:57:04 EDT
+**Generated:** 2026-08-13 15:27:05 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ee6934e9` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `e30401aa` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `5a49d187` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `1fec79aa` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 33Gi free (84% used)
+**Disk:** 30Gi free (85% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T125548` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260813T152617` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T125548
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T152617
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,10 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+5a49d187 2026-08-13 docs: record AO-6 landing
+0facf170 2026-08-13 test: close AO corpus mutation battery
+eff62d6b 2026-08-13 docs: amend AO-6 after immutable sweep stop
+0ff79e6b 2026-08-13 docs(implementation): promote AO-6 correctness closure
 ee6934e9 2026-08-13 AO-5: record prose-family contract landing
 72b7a87b 2026-08-13 AO-5: freeze remaining prose-family contracts
 8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
@@ -36,20 +40,16 @@ cb48cc08 2026-08-13 AO-5: admit premortem-union compatibility pin
 972066af 2026-08-13 AO-4: record headline totality landing
 09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
 4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
-2859bae9 2026-08-13 AO-4: promote headline totality and inert quarantine
-ba6a2913 2026-08-13 AO-2+3: record atomic voice contract-cure landing
-f0c272e8 2026-08-13 AO-3: bank the seven vanished voice-debt identities
-d4f213d0 2026-08-13 AO-3: cure applied Wizard News summary voice (deliberate red)
 ```
 ## Last 6 ledger commits
 
 ```
+1fec79aa 2026-08-13 Record AO-5 prose-family contract landing
 e30401aa 2026-08-13 Record AO-4 headline totality landing
 2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
 e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
 a1578fcc 2026-08-13 Record AO-0 schema-8 landing
 9747d127 2026-08-13 Record GTR and H26 atomic landings
-1ed18d27 2026-08-13 Record universal standing authorization and the pre-soak boundary
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,57 @@ a1578fcc 2026-08-13 Record AO-0 schema-8 landing
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~13:00 EDT) — AO-5 is terminal; build clean at `ee6934e9`
+# ⭐⭐ CURRENT (2026-08-13 ~15:30 EDT) — AO-6 is terminal; build clean at `5a49d187`
+
+**AO-6 IS DONE END-TO-END.** Just-in-time promotion
+`0ff79e6b6c75d77a2396703c07f982615d9f31f9` first produced immutable candidate
+`b02bc709c81d3d7c3b30d13aa9126a5cbac04b27`. Its disposable whole-sweep proof
+correctly **STOPPED** at true exit **4**, **77 CAUGHT / 1 CLEAR / 4 gaps**, log
+SHA-256 `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`;
+that candidate never reached the shared ref. Governed amendment
+`eff62d6b2c698ff33089d9dfd296b87ec2d4c455` authorized only the four measured
+legacy-drift repairs. Fresh dispatch from that parent sealed at
+`6bd0e1174e62c3a990fd52f26eb7dcffa633501c65a868478ae2b0684e4d93d6`, capsule
+`e7fe66aeb0ac70017d1832675fca58bb45538032245ed761e8a0502722f072c6`.
+The exact four-path green implementation is
+`0facf170320e12ccfc7fc4cf2fa8bc60605621dd`; one old-value CAS exposed only that
+green child. Terminal flip `5a49d187` records the landing. The shared index and
+build worktree are clean.
+
+The mutation estate closes at **541** invariant rows split **71 mutation / 272
+rationale / 198 uncovered**, plus **10** meta mutations; **81** unique claims and
+labels; **70** in-place calls; **56** unique guarded targets and **56** unique
+`MUTATED_FILES` rows; uncovered baseline **198**. The final clean disposable sweep
+exited **0** at **81 CAUGHT / 1 CLEAR / 0 gaps**, log SHA-256
+`c4e5fb08dc6cfe550db945a69e3c78fa02d172bac0fa6857258504aefcf81249`, with
+every target restored byte-identically and no proof-tree residue. The six-file
+focused battery passed **98/98**; typecheck ratchets passed **173/173** and
+**1,134/1,134**; observed-shape validation remained green at **1,998 reads**.
+Bare `npm run check:tail` exited **0**; strict dist discovered **50 files** and
+passed **403/403**, full-gate log SHA-256
+`53f62e286def95a2f3399a9fcfaa665334afd5d33235403fb54605091f9a6c4d`.
+Product code/output, persisted shape, titles, goldens, flags, tuning, dependencies,
+hazard/pre-mortem substrate, corpus baselines, OSR artifact, unrelated baselines,
+and the lighting census did not move. The census remains
+**2412/365/2047/19984/5638** and its reservation is free. A1-A8 passed;
+deviations beyond the governed stopped-proof amendment: **NONE**; judgment calls:
+**NONE**.
+
+**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at full HEAD
+`5a49d187`; `validate:packets` reports **31 packets / 0 READY, exit 0**. GTR-1,
+H26, AO-0, AO-2+3, AO-4, AO-5, and AO-6 are terminal; the corpus-coverage program
+is closed, the census reservation is free, and there is no live implementation lane
+to collect. The universal standing authorization remains durable at ledger
+`1ed18d27`; it does not waive technical READY/STOP, evidence, substrate, or ordering
+law.
+
+**NEXT:** compile **GR-4e** fresh, just in time, from `5a49d187`: the named
+fracture-credibility dead-window micro-act must repair prior-tick visibility under its
+own declared information-only-world shift and review. Do not redispatch AO-6 and do
+not skip ahead to CR-NEXT-1. No diagnostic-soak worktree exists and D-1/L0 has not
+started; the requested terminal remains immediately before that first soak.
+
+# (superseded ~15:30) — AO-5 is terminal; build clean at `ee6934e9`
 
 **AO-5 IS DONE END-TO-END.** Just-in-time promotion
 `92d606575baa1c454c96ac5cb2ea80b2f53f6dfb`, compatibility amendment

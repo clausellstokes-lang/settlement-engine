@@ -6,11 +6,15 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `ee6934e9`
-- Commits: 3218
+- HEAD: `5a49d187`
+- Commits: 3222
 - Working tree at refresh: 0 dirty entries
 
 ```
+5a49d187 2026-08-13 docs: record AO-6 landing
+0facf170 2026-08-13 test: close AO corpus mutation battery
+eff62d6b 2026-08-13 docs: amend AO-6 after immutable sweep stop
+0ff79e6b 2026-08-13 docs(implementation): promote AO-6 correctness closure
 ee6934e9 2026-08-13 AO-5: record prose-family contract landing
 72b7a87b 2026-08-13 AO-5: freeze remaining prose-family contracts
 8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
@@ -407,8 +411,4 @@ ff7052f0 2026-08-03 Lane WD-5: the refusal aftermath leaves the head, and warDep
 027992b2 2026-08-03 Lane WD-4: what the war costs the home leaves the head, WITH the two functions that undo it — 1140 → 846
 e69f9d6b 2026-08-03 Lane WD-3: the siege contest becomes a leaf that decides nothing it can also write — 1289 → 1140
 0f436ef4 2026-08-03 Lane MD piece 4b: the re-record — one row of 525, and the one path-template that is the whole of what moved
-c86ad53a 2026-08-03 Lane WD-1: the war layer's pure reads leave the writer — 1412 → 1289, and four strict holes close rather than move
-5dcad538 2026-08-03 Lane MD piece 4a: the list's end becomes visible — one authored body, and the rule that keeps the next one honest
-4cc3d712 2026-08-03 Lane PB: register the lane's two new invariant files in the E-A manifest
-5ebc7b11 2026-08-03 Lane MD piece 3: the RR record's arithmetic, the count that becomes a guard, and the guard that was catching lexicons
 ```
