@@ -11,6 +11,8 @@ import {
   assertDomGlobalReceiverRoots,
   assertExplainedWriterEvidence,
   assertExplainedWriterExemptions,
+  assertExplainedWriterRowTags,
+  assertExplainedWriterTagTransition,
   assertLanguageSurfaceResidualKeys,
   assertShapeFamilyDebtPreserved,
   authoredInputHistoryCommits,
@@ -30,6 +32,7 @@ import {
   isObservedShapeSubjectPath,
   LANGUAGE_SURFACE_RESIDUAL_KEYS,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   run,
   SCAN_CONFIG,
@@ -43,6 +46,7 @@ import {
   validateSchema4Baseline,
   validateSchema5Baseline,
   validateSchema6Baseline,
+  validateSchema7Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -273,6 +277,20 @@ const validBaseline = ({ corpus, stats, frozen }) => {
   const migrationReview = heuristicReceiptFor(trees, digestOf(inventory));
   const identities = Object.values(inventory)
     .reduce((n, row) => n + Object.keys(row).length, 0);
+  const declarations = new Map(EXPLAINED_WRITER_EXEMPTIONS
+    .map((entry) => [entry.identity, entry]));
+  const rowTags = {};
+  for (const [file, row] of Object.entries(inventory)) {
+    for (const identity of Object.keys(row)) {
+      const declaration = declarations.get(identity);
+      if (!declaration) continue;
+      if (!rowTags[file]) rowTags[file] = {};
+      rowTags[file][identity] = {
+        reason: declaration.ruling,
+        rule: 'explained-writer',
+      };
+    }
+  }
   return {
     _doc: ['governed test fixture'],
     schema: BASELINE_SCHEMA,
@@ -286,6 +304,7 @@ const validBaseline = ({ corpus, stats, frozen }) => {
     total: frozen.length,
     identities,
     inventory,
+    rowTags,
     migrationReview,
     manifests,
     scannerProvenance: {
@@ -300,6 +319,7 @@ const validBaseline = ({ corpus, stats, frozen }) => {
       scanStats: digestOf(stats),
       sentinel: digestOf(sentinel),
       inventory: digestOf(inventory),
+      rowTags: digestOf(rowTags),
       manifests: digestOf(manifests),
       migrationReview: digestOf(migrationReview),
     },
@@ -320,7 +340,7 @@ const maintenanceRuntime = ({ current, frozen }) => {
   const baseline = validBaseline({ corpus, stats, frozen });
   Object.assign(runtime.overrides, {
     scanReaders: () => {
-      throw new Error('the schema-4 gate must not invoke the exact resolver');
+      throw new Error('the schema-7 gate must not invoke the exact resolver');
     },
     scanLegacyReaders: () => { runtime.calls.push('legacy-reader'); return { findings: current, stats }; },
     baselineExists: () => true,
@@ -825,10 +845,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   });
 
   /**
-   * ⭐⭐ M11 INHERITS THE CLASS-(a) REFUSAL. Four filters now narrow this
-   * instrument and every one of them is held to the same law, from the same
-   * single home — so a future widening of the root set cannot quietly erase a
-   * row the chair banked as a real defect.
+   * ⭐⭐ M11 INHERITS THE CLASS-(a) REFUSAL. Three filters narrow this instrument
+   * and M8/M9 banks its matches; all four stages inherit the same class-(a) law
+   * from one home, so widening a rule cannot erase a chaired real defect.
    */
   test('M11: clearing a class-(a) TRUE POSITIVE refuses the scan; clearing anything else does not', () => {
     const guarded = 'hooks on settlement';
@@ -966,10 +985,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   });
 
   /**
-   * ⭐⭐⭐ M8/M9 — THE EXPLAINED-WRITER EXEMPTION IS A DECLARED, SHRINK-ONLY SET.
+   * ⭐⭐⭐ M8/M9 — THE EXPLAINED-WRITER BANK IS A DECLARED, FROZEN SET.
    *
-   * The exact-equality pin is the shrink-only property: ADDING an entry reds
-   * here, and removing one (returning an identity to enforcement) is lawful.
+   * The exact-equality pin is authenticity: membership or ruling movement
+   * requires a governed instrument mint rather than ordinary maintenance.
    * Beside it, the three refusals that make the declaration a law rather than a
    * list — an undeclared mechanism, a class-(a) TRUE POSITIVE, and gate 4's
    * open-spread tolerance, which admits every key generically and so names none.
@@ -1095,7 +1114,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * SUBSET and passes `stats` through BY IDENTITY, which is what makes it
    * structurally impossible for an exemption to move the anti-vacuity floor.
    */
-  test('M8/M9: the exemption clears its identity, passes stats through by identity, and leaves the exact leg raw', () => {
+  test('M8/M9: the explained-writer exemption is an exact declared set and banks findings by reference', () => {
     const stats = leafStats();
     const rows = [
       leafFindingOf({ key: 'neighbourNetwork', shapes: ['settlement'] }),
@@ -1108,10 +1127,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⚠ THE EXEMPTION IS SHAPE-QUALIFIED, not key-qualified: the same key on a
     // DIFFERENT shape is untouched, because the declared writer wrote it onto
     // one record and says nothing about any other.
-    expect(filtered.findings.map(identityOf))
-      .toEqual(['neighbourNetwork on somethingElse', 'genuinelyDead on settlement']);
-    expect(filtered.explainedWriters.cleared).toBe(1);
-    expect(filtered.explainedWriters.clearedIdentities).toEqual(['neighbourNetwork on settlement']);
+    expect(filtered.findings).toBe(rows);
+    expect(filtered.findings.map(identityOf)).toEqual([
+      'neighbourNetwork on settlement',
+      'neighbourNetwork on somethingElse',
+      'genuinelyDead on settlement',
+    ]);
+    expect(filtered.explainedWriters.banked).toBe(1);
+    expect(filtered.explainedWriters.bankedIdentities).toEqual(['neighbourNetwork on settlement']);
     // BY IDENTITY, not by value.
     expect(filtered.stats).toBe(stats);
 
@@ -1131,7 +1154,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * nobody a migration — and the paired negative control proves the gate still
    * reds on a new identity that no declared writer explains.
    */
-  test('M8/M9: an exempted identity passes the gate as a new row; an unexplained one still REDS', async () => {
+  test('A3/A4: banked growth stays red ordinarily and only a reasoned tagged write can raise it', async () => {
     // ⚠ A REAL FILE, because gate mode's stale-row arm asks the FILESYSTEM
     // whether a frozen row's file still exists. `src/probe.js` — the fixture path
     // every other test here uses — is fictional, so it reads as "deleted or
@@ -1142,14 +1165,39 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const unexplained = leafFindingOf({ file, key: 'neighbourNetworks', shapes: ['settlement'], pos: 40 });
 
     const exemptRun = maintenanceRuntime({ current: [held, exempted], frozen: [held] });
-    expect(await run([], exemptRun.overrides)).toBe(0);
+    expect(await run([], exemptRun.overrides)).toBe(1);
+    const ordinaryWrite = maintenanceRuntime({ current: [held, exempted], frozen: [held] });
+    await expect(run(['--write'], ordinaryWrite.overrides)).rejects.toThrow(/shrink-only/);
+
+    const reasoned = maintenanceRuntime({ current: [held, exempted], frozen: [held] });
+    await expect(run([
+      '--write', '--raise-explained-writer=CR-H26 focused maintenance',
+    ], reasoned.overrides)).resolves.toBe(0);
+    expect(reasoned.baselineWrites).toHaveLength(1);
+    expect(reasoned.baselineWrites[0].rowTags[file]['neighbourNetwork on settlement'])
+      .toEqual({ reason: 'CR-H26 focused maintenance', rule: 'explained-writer' });
 
     // ── THE NEGATIVE CONTROL: same file, same shape, same position, one letter
     // different — so the ONLY thing that changed is membership of the declared
     // exemption. Without this pair, a gate that passed everything would look
     // identical to this one.
     const unexplainedRun = maintenanceRuntime({ current: [held, unexplained], frozen: [held] });
-    expect(await run([], unexplainedRun.overrides)).toBe(1);
+    await expect(run([
+      '--write', '--raise-explained-writer=CR-H26 focused maintenance',
+    ], unexplainedRun.overrides)).rejects.toThrow(/only tagged explained-writer rows/);
+
+    const noOp = maintenanceRuntime({ current: [held], frozen: [held] });
+    await expect(run([
+      '--write', '--raise-explained-writer=CR-H26 focused maintenance',
+    ], noOp.overrides)).rejects.toThrow(/requires at least one actual/);
+    expect(() => commandOf(['--raise-explained-writer=reason']))
+      .toThrow(/only with ordinary --write/);
+    expect(() => commandOf(['--write', '--raise-explained-writer= first']))
+      .toThrow(/trimmed single-line/);
+    expect(() => commandOf(['--write', `--raise-explained-writer=${'x'.repeat(241)}`]))
+      .toThrow(/1-240/);
+    expect(() => commandOf(['--write', '--raise-explained-writer=first\nsecond']))
+      .toThrow(/single-line/);
   });
 
   /**
@@ -1175,26 +1223,71 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * PRODUCER, so two copies would be one live law with two homes. What must never
    * be shared is the NUMBER — pinned here in BOTH directions.
    */
-  test('the three leaf schemas are one envelope law with three numbers, and each refuses the others\'', () => {
-    expect(BASELINE_SCHEMA).toBe(6);
+  test('A5: schemas 4-6 retain the numeric law and schema 7 adds authenticated row tags', () => {
+    expect(BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
     expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
+    expect(RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA).toBe(6);
 
     const corpus = healthyCorpus();
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema6Baseline(live)).toBe(live);
-    expect(() => validateSchema4Baseline(live)).toThrow(/is not schema 4/);
-    expect(() => validateSchema5Baseline(live)).toThrow(/is not schema 5/);
+    expect(validateSchema7Baseline(live)).toBe(live);
+    expect(assertExplainedWriterRowTags(live)).toBe(live);
+    expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
 
-    const unfiltered = { ...live, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
+    const numeric = structuredClone(live);
+    delete numeric.rowTags;
+    delete numeric.digests.rowTags;
+    const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema6Baseline(unfiltered)).toThrow(/is not schema 6/);
+    expect(() => validateSchema7Baseline(unfiltered)).toThrow();
 
-    const filtered = { ...live, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
+    const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema6Baseline(filtered)).toThrow(/is not schema 6/);
+    expect(() => validateSchema7Baseline(filtered)).toThrow();
+
+    const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
+    expect(validateSchema6Baseline(surface)).toBe(surface);
+    expect(() => validateSchema7Baseline(surface)).toThrow(/noncanonical fields/);
+
+    const missing = structuredClone(live);
+    const declared = leafFindingOf({
+      file: 'src/lib/saves.js', key: 'neighbourNetwork', shapes: ['settlement'],
+    });
+    const declaredBaseline = validBaseline({ corpus, stats, frozen: [declared] });
+    delete declaredBaseline.rowTags['src/lib/saves.js']['neighbourNetwork on settlement'];
+    delete declaredBaseline.rowTags['src/lib/saves.js'];
+    declaredBaseline.digests.rowTags = digestOf(declaredBaseline.rowTags);
+    expect(() => assertExplainedWriterRowTags(declaredBaseline)).toThrow(/lacks its row tag/);
+    missing.rowTags['src/probe.js'] = {
+      'ghost on record': { reason: 'forged', rule: 'explained-writer' },
+    };
+    missing.digests.rowTags = digestOf(missing.rowTags);
+    expect(() => assertExplainedWriterRowTags(missing)).toThrow(/forged/);
+
+    const wrongGenesisReason = validBaseline({ corpus, stats, frozen: [declared] });
+    wrongGenesisReason.rowTags['src/lib/saves.js']['neighbourNetwork on settlement'].reason = 'forged genesis reason';
+    wrongGenesisReason.digests.rowTags = digestOf(wrongGenesisReason.rowTags);
+    expect(() => assertExplainedWriterRowTags(wrongGenesisReason))
+      .toThrow(/migration-genesis tag reason disagrees/);
+
+    const later = validBaseline({ corpus, stats, frozen: [declared] });
+    later.frozenAtSha = MAINTENANCE_SHA;
+    later.rowTags['src/lib/saves.js']['neighbourNetwork on settlement'].reason = 'valid later reason';
+    later.digests.rowTags = digestOf(later.rowTags);
+    const forgedSameCount = structuredClone(later);
+    forgedSameCount.rowTags['src/lib/saves.js']['neighbourNetwork on settlement'].reason = 'forged without growth';
+    forgedSameCount.digests.rowTags = digestOf(forgedSameCount.rowTags);
+    expect(() => assertExplainedWriterTagTransition(later, forgedSameCount))
+      .toThrow(/changed without numeric growth/);
+    const grown = structuredClone(forgedSameCount);
+    grown.inventory['src/lib/saves.js']['neighbourNetwork on settlement'] += 1;
+    grown.total += 1;
+    grown.digests.inventory = digestOf(grown.inventory);
+    expect(assertExplainedWriterTagTransition(later, grown)).toBe(grown);
   });
 
   /**
@@ -1241,7 +1334,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(6);
+    expect(BASELINE_SCHEMA).toBe(7);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
@@ -1498,7 +1591,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(exact.stale).toEqual([]);
     const lowered = compare([], { inventory: { [finding.file]: { [identity]: 1 } } });
     expect(lowered.stale).toEqual([
-      expect.stringContaining('schema 4 permits no dormant headroom'),
+      expect.stringContaining(`schema ${BASELINE_SCHEMA} permits no dormant headroom`),
     ]);
 
     // MULTIPLICITY IS REAL, and it is still exact: two reads of the same leaf
@@ -1512,7 +1605,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       .toHaveLength(1);
   });
 
-  test('the schema-4 write admits only pure decreases, never growth or an identity swap', async () => {
+  test('the schema-7 ordinary write admits only pure decreases, never growth or an identity swap', async () => {
     const held = leafFindingOf({ file: 'src/App.jsx', key: 'held', text: 'row.held' });
     const departed = leafFindingOf({
       file: 'src/App.jsx', line: 2, pos: 20, key: 'departed', text: 'row.departed',
@@ -1526,12 +1619,44 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(decrease.baselineWrites).toHaveLength(1);
     expect(decrease.baselineWrites[0].inventory)
       .toEqual(artifactInventoryOf(BASELINE_SCAN_MODE, [held]));
+    expect(decrease.baselineWrites[0].rowTags).toEqual({});
     // The gate drove the HEURISTIC leg — not merely "some" leg.
     expect(decrease.calls).toContain('legacy-reader');
 
     const growth = maintenanceRuntime({ current: [held, arrived], frozen: [held] });
     await expect(run(['--write'], growth.overrides)).rejects.toThrow(/shrink-only/);
     expect(growth.baselineWrites).toEqual([]);
+
+    const tagged = leafFindingOf({
+      file: 'src/App.jsx', key: 'neighbourNetwork', shapes: ['settlement'],
+    });
+    const taggedSame = maintenanceRuntime({ current: [tagged], frozen: [tagged] });
+    taggedSame.baseline.rowTags['src/App.jsx']['neighbourNetwork on settlement'].reason = 'preserved later reason';
+    taggedSame.baseline.frozenAtSha = MAINTENANCE_SHA;
+    taggedSame.baseline.digests.rowTags = digestOf(taggedSame.baseline.rowTags);
+    await expect(run(['--write'], taggedSame.overrides)).resolves.toBe(0);
+    expect(taggedSame.baselineWrites[0].rowTags['src/App.jsx']['neighbourNetwork on settlement'].reason)
+      .toBe('preserved later reason');
+
+    const taggedDuplicate = leafFindingOf({
+      file: 'src/App.jsx', key: 'neighbourNetwork', shapes: ['settlement'], pos: 20,
+    });
+    const taggedShrink = maintenanceRuntime({
+      current: [tagged], frozen: [tagged, taggedDuplicate],
+    });
+    taggedShrink.baseline.rowTags['src/App.jsx']['neighbourNetwork on settlement'].reason = 'preserved through shrink';
+    taggedShrink.baseline.frozenAtSha = MAINTENANCE_SHA;
+    taggedShrink.baseline.digests.rowTags = digestOf(taggedShrink.baseline.rowTags);
+    await expect(run(['--write'], taggedShrink.overrides)).resolves.toBe(0);
+    expect(taggedShrink.baselineWrites[0].rowTags['src/App.jsx']['neighbourNetwork on settlement'].reason)
+      .toBe('preserved through shrink');
+
+    const taggedGone = maintenanceRuntime({ current: [held], frozen: [held, tagged] });
+    taggedGone.baseline.rowTags['src/App.jsx']['neighbourNetwork on settlement'].reason = 'preserved until gone';
+    taggedGone.baseline.frozenAtSha = MAINTENANCE_SHA;
+    taggedGone.baseline.digests.rowTags = digestOf(taggedGone.baseline.rowTags);
+    await expect(run(['--write'], taggedGone.overrides)).resolves.toBe(0);
+    expect(taggedGone.baselineWrites[0].rowTags).toEqual({});
 
     const swap = maintenanceRuntime({ current: [held, arrived], frozen: [held, departed] });
     await expect(run(['--write'], swap.overrides)).rejects.toThrow(/identity swap/);
@@ -1540,6 +1665,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const drift = maintenanceRuntime({ current: [held], frozen: [held] });
     drift.baseline.scannerProvenance.detectorDigest = 'f'.repeat(64);
     drift.overrides.validateBaseline = () => drift.baseline;
+    drift.overrides.assertExplainedWriterRowTags = () => drift.baseline;
     await expect(run(['--write'], drift.overrides)).rejects.toThrow(/detector or unscanned/);
     await expect(run([], drift.overrides)).resolves.toBe(1);
     expect(drift.baselineWrites).toEqual([]);

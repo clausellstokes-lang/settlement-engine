@@ -40,7 +40,7 @@
  * add a different one, and the count is unchanged — so a FRESH reader-without-a-
  * writer lands GREEN behind a ratchet that reports nothing. A per-file count is
  * blind to IDENTITY SWAP by construction. The inventory therefore freezes the
- * finding IDENTITY — under schema 4, `<key> on <shape>` with its multiplicity.
+ * finding IDENTITY — under the governed leaf schemas, `<key> on <shape>` with its multiplicity.
  * A NEW identity in an already-listed file has ceiling 0 and REDS even when the
  * file's TOTAL does not move, exactly as a new file does.
  *
@@ -48,8 +48,9 @@
  * unrelated edit above them; a line-keyed baseline would red on whitespace and
  * be deleted within a week.
  *
- * A file over any of its numbers fails, a file with no row has ceiling 0, and a
- * fixed site is banked by LOWERING or DELETING its identity row. Never raise one.
+ * A file over any ordinary ceiling fails, a file with no row has ceiling 0, and a
+ * fixed site is banked by LOWERING or DELETING its identity row. Only the governed
+ * reasoned write may raise a tagged explained-writer ceiling; never hand-raise one.
  *
  * USAGE
  *   node scripts/check-observed-shape-readers.mjs            gate (exit 1 on growth)
@@ -57,8 +58,8 @@
  *   node scripts/check-observed-shape-readers.mjs --write    re-freeze (deliberate)
  *   node scripts/check-observed-shape-readers.mjs --scan-only
  *     --scan-mode=legacy-leaf --json=<external-p>
- *                        write the governed HEURISTIC artifact (the schema-4
- *                        authority; executes the corpus fresh)
+ *                        write the governed HEURISTIC artifact (the live detector
+ *                        leg; executes the corpus fresh)
  *   node scripts/check-observed-shape-readers.mjs --scan-only --json=<external-p>
  *                        write a TARGETED exact governed artifact
  *   node scripts/check-observed-shape-readers.mjs --scan-only
@@ -86,8 +87,9 @@ import {
   ORIGIN_MIN_ROWS,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema6Baseline,
+  validateSchema7Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -121,12 +123,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 3 = per path-qualified executed origin identity (RETIRED — see below).
  * 4 = per leaf-name identity in the GOVERNED envelope, RAW detector output (RETIRED).
  * 5 = the same identity narrowed by M6 + M8/M9 alone (RETIRED).
- * 6 = the same identity narrowed by ALL FOUR declared post-filters — M6, M11,
- *     M12 and M8/M9. THE LIVE AUTHORITY.
+ * 6 = the same identity narrowed by M6, M11, M12 and clear-outright M8/M9 (retired).
+ * 7 = schema 6's numeric set with M8/M9 rows re-admitted and tagged. THE LIVE AUTHORITY.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
 };
 
@@ -900,10 +903,10 @@ export function writeShapesIn(source, key) {
 }
 
 /**
- * ⭐⭐⭐ M8 / M9 — THE EXPLAINED-WRITER EXEMPTION. THE STRUCTURAL POINT OF THIS
+ * ⭐⭐⭐ M8 / M9 — THE EXPLAINED-WRITER BANK. THE STRUCTURAL POINT OF THIS
  * MINT, and the reason the previous four items were worth carrying with it.
  *
- * THE DEFECT IT REMOVES. `observed-shape-corpus.mjs` executes GENERATION and
+ * THE DISTINCTION IT GOVERNS. `observed-shape-corpus.mjs` executes GENERATION and
  * only generation. So "no writer in the corpus" and "no writer" are different
  * claims, and the gap between them is precisely the surface a person or a
  * lifecycle path outside generation fills in. Two writers live in that gap:
@@ -957,10 +960,10 @@ export function writeShapesIn(source, key) {
  *           settlement-root row and mean nothing. Evidence must come from a
  *           CLOSED list that NAMES the key.
  *
- * ⚠ SHRINK-ONLY, PINNED AS AN EXACT SET in tests/lint/observedShapeSentinel.test.js:
- * adding an entry REDS, removing one (returning an identity to enforcement) is
- * lawful. And no entry may name a CR-OSR-FREEZE-3-R2 class-(a) identity — the
- * same guard set M6 is held to, asserted at module load below.
+ * ⚠ EXACT AND FROZEN, pinned in tests/lint/observedShapeSentinel.test.js. A
+ * declaration membership or ruling change alters tag authenticity and requires
+ * a governed instrument migration; it is not ordinary maintenance. No entry may
+ * name a CR-OSR-FREEZE-3-R2 class-(a) identity — the same guard M6 is held to.
  *
  * ⚠⚠ H26 — GATE 0 PROBES THE CONTAINER KEY, NOT THE SUB-KEY, AND THE CHAIR HAS
  * ACCEPTED THAT BLIND SPOT WITH A WRITTEN REASON. `worldPulse on campaignState`
@@ -974,9 +977,9 @@ export function writeShapesIn(source, key) {
  * (CR-S6-6, landed `da31d170`), and the surviving `campaignState.worldPulse`
  * read is the deliberate legacy per-save FALLBACK the sibling dossier surface
  * also kept. ⭐ The standing cure the chair has ruled for the class is
- * BANK-BY-RULE — an exempted row stays visible in the inventory as a ceiling
- * instead of vanishing — and it is chartered as its own mint, because
- * re-admitting rows is a SET-GROWING change and this genesis is a pure shrink.
+ * BANK-BY-RULE — an explained row stays visible in the inventory as a ceiling
+ * instead of vanishing. The schema-6 genesis was a pure shrink; H26 is the
+ * separately governed set-growing mint that re-admits those rows.
  */
 export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
   Object.freeze({
@@ -1029,6 +1032,18 @@ const EXPLAINED_WRITER_MECHANISMS = Object.freeze([
   'save-time-writer', 'closed-ingest', 'admission-list',
 ]);
 
+export function assertExplainedWriterReason(reason, label = 'reason') {
+  if (typeof reason !== 'string' || reason !== reason.trim()
+    || reason.length < 1 || reason.length > 240
+    || [...reason].some((character) => {
+      const code = character.charCodeAt(0);
+      return code <= 31 || code === 127;
+    })) {
+    throw new Error(`observed-shape explained-writer ${label} must be a 1-240 character trimmed single-line string`);
+  }
+  return reason;
+}
+
 /** Fail-closed at declaration: shape, grammar, and the class-(a) overlap. */
 export function assertExplainedWriterExemptions(entries = EXPLAINED_WRITER_EXEMPTIONS) {
   if (!Array.isArray(entries)) {
@@ -1056,10 +1071,10 @@ export function assertExplainedWriterExemptions(entries = EXPLAINED_WRITER_EXEMP
     if (!/^src\//.test(entry.writer) || !/\.(js|jsx)$/.test(entry.writer)) {
       throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} must name a repository-relative src/ writer; received ${JSON.stringify(entry.writer)}`);
     }
-    if (typeof entry.why !== 'string' || entry.why.trim().length < 40
-      || typeof entry.ruling !== 'string' || !entry.ruling.trim()) {
+    if (typeof entry.why !== 'string' || entry.why.trim().length < 40) {
       throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} lacks a ruling and a substantive reason`);
     }
+    assertExplainedWriterReason(entry.ruling, `ruling for ${JSON.stringify(entry.identity)}`);
     if (guarded.has(entry.identity)) {
       throw new Error(`observed-shape explained-writer exemption ${JSON.stringify(entry.identity)} is a CR-OSR-FREEZE-3-R2 class-(a)`
         + ' TRUE POSITIVE. A row banked as a real defect cannot be exempted as explained; re-triage it instead.');
@@ -1105,6 +1120,65 @@ export function assertExplainedWriterEvidence(
   return evidence;
 }
 
+/** Prove that schema 7's sparse tag map is exactly the declared explained-writer
+ *  address set present in the numeric inventory. Envelope validation proves tag
+ *  grammar; this helper binds those tags to the governed declarations. */
+export function assertExplainedWriterRowTags(
+  baseline,
+  entries = EXPLAINED_WRITER_EXEMPTIONS,
+) {
+  validateSchema7Baseline(baseline);
+  assertExplainedWriterExemptions(entries);
+  const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
+  const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
+  for (const [file, row] of Object.entries(baseline.inventory)) {
+    for (const identity of Object.keys(row)) {
+      const declaration = declarations.get(identity);
+      const tag = baseline.rowTags[file]?.[identity];
+      if (declaration && !tag) {
+        throw new Error(`observed-shape explained-writer inventory address lacks its row tag: ${file} / ${identity}`);
+      }
+      if (!declaration && tag) {
+        throw new Error(`observed-shape undeclared inventory address carries a forged explained-writer row tag: ${file} / ${identity}`);
+      }
+      if (tag && genesis && tag.reason !== declaration.ruling) {
+        throw new Error(`observed-shape schema-${BASELINE_SCHEMA} migration-genesis tag reason disagrees with its declaration: ${file} / ${identity}`);
+      }
+    }
+  }
+  for (const [file, row] of Object.entries(baseline.rowTags)) {
+    for (const identity of Object.keys(row)) {
+      if (!Object.hasOwn(baseline.inventory[file] || {}, identity)) {
+        throw new Error(`observed-shape explained-writer row tag is orphaned: ${file} / ${identity}`);
+      }
+      if (!declarations.has(identity)) {
+        throw new Error(`observed-shape explained-writer row tag names an undeclared identity: ${file} / ${identity}`);
+      }
+    }
+  }
+  return baseline;
+}
+
+/** A tag reason is append-only unless its exact numeric address grows. Same
+ * count, shrink, and disappearance may preserve or prune metadata but cannot
+ * rewrite the surviving reason. */
+export function assertExplainedWriterTagTransition(previous, next) {
+  assertExplainedWriterRowTags(previous);
+  assertExplainedWriterRowTags(next);
+  for (const [file, row] of Object.entries(next.rowTags)) {
+    for (const [identity, tag] of Object.entries(row)) {
+      const prior = previous.rowTags?.[file]?.[identity];
+      if (!prior) continue;
+      const priorCount = previous.inventory[file][identity];
+      const nextCount = next.inventory[file][identity];
+      if (nextCount <= priorCount && tag.reason !== prior.reason) {
+        throw new Error(`observed-shape explained-writer tag reason changed without numeric growth: ${file} / ${identity}`);
+      }
+    }
+  }
+  return next;
+}
+
 /**
  * GATE 1, on demand. Zero commits touching `<key>:` anywhere in history means no
  * human ever could have supplied the field, so an authored-input (M8) story is
@@ -1133,35 +1207,45 @@ export function authoredInputHistoryCommits(key, { root = ROOT } = {}) {
 export function applyExplainedWriterFilter({
   scanMode, scan, entries = EXPLAINED_WRITER_EXEMPTIONS, evidence,
 }) {
+  assertExplainedWriterExemptions(entries);
   if (scanMode !== BASELINE_SCAN_MODE) {
-    return { ...scan, explainedWriters: { applied: false, cleared: 0, clearedIdentities: [] } };
+    return {
+      ...scan,
+      findings: scan.findings,
+      stats: scan.stats,
+      explainedWriters: {
+        applied: false, banked: 0, bankedIdentities: [], evidence: evidence || [],
+      },
+    };
   }
   const exempt = new Map(entries.map((entry) => [entry.identity, entry]));
   // ⚠ THE KEY PRE-FILTER IS NOT A SECOND SPELLING OF THE IDENTITY — the decision
   // still goes through `identityOf`, the one home for that spelling. It exists so
   // the canonical minter is invoked ONLY on findings that could possibly be
-  // cleared, exactly as the shape-family filter does. That matters beyond speed:
+  // banked, exactly as the shape-family filter does. That matters beyond speed:
   // `identityOf` asserts a canonical repository-relative path, so minting one for
   // EVERY finding would throw on a planted probe living outside the tree — which
   // is a legitimate thing for a mutant harness to scan and not something a filter
   // should get an opinion about.
   const exemptKeys = new Set([...exempt.keys()].map((identity) => identity.slice(0, identity.indexOf(' on '))));
-  const cleared = new Set();
-  const findings = scan.findings.filter((finding) => {
-    if (!exemptKeys.has(finding.key)) return true;
+  const banked = new Set();
+  let bankedCount = 0;
+  for (const finding of scan.findings) {
+    if (!exemptKeys.has(finding.key)) continue;
     const identity = identityOf(finding);
-    if (!exempt.has(identity)) return true;
-    cleared.add(identity);
-    return false;
-  });
+    if (exempt.has(identity)) {
+      banked.add(identity);
+      bankedCount += 1;
+    }
+  }
   return {
     ...scan,
-    findings,
+    findings: scan.findings,
     stats: scan.stats,
     explainedWriters: {
       applied: true,
-      cleared: scan.findings.length - findings.length,
-      clearedIdentities: [...cleared].sort(),
+      banked: bankedCount,
+      bankedIdentities: [...banked].sort(),
       evidence: evidence || [],
     },
   };
@@ -1170,11 +1254,11 @@ export function applyExplainedWriterFilter({
 /** Said out loud on every human-facing run, the way the scope exclusion is. */
 export function explainedWriterNotice(explainedWriters, entries = EXPLAINED_WRITER_EXEMPTIONS) {
   if (!explainedWriters?.applied) {
-    return 'M8/M9 explained-writer exemption: NOT APPLIED (exact-origin probe keeps the raw detector output).';
+    return 'M8/M9 explained-writer bank: NOT APPLIED (exact-origin probe keeps the raw detector output).';
   }
-  return `M8/M9 explained-writer exemption (CR-OSR-FREEZE-6-R2): ${entries.length} declared identit(ies)`
-    + ` whose writer the GENERATION corpus never runs; cleared ${explainedWriters.cleared} read(s)`
-    + ` across ${explainedWriters.clearedIdentities.length} of them on this scan.`
+  return `M8/M9 explained-writer bank (H26 / CR-OSR-FREEZE-6-R2): ${entries.length} declared identit(ies)`
+    + ` whose writer the GENERATION corpus never runs; banked and enforced ${explainedWriters.banked} read(s)`
+    + ` across ${explainedWriters.bankedIdentities.length} of them on this scan.`
     + ' Each entry names its writer and its key must still be written there, in one of the four measured'
     + ' write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.';
 }
@@ -1359,19 +1443,27 @@ export function sentinelFailures(sentinel, frozen) {
 export function compare(findings, baseline) {
   const inv = inventoryOf(findings);
   const violations = [];
+  const growth = [];
+  const explainedIdentities = new Set(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity));
+  const explainedGrowth = [];
   for (const [file, ids] of Object.entries(inv)) {
     const frozen = file in baseline.inventory ? rowOf(baseline.inventory[file], file) : {};
     const over = [];
     for (const [identity, count] of Object.entries(ids)) {
       const ceiling = frozen[identity] ?? 0;
-      if (count > ceiling) over.push({ identity, count, ceiling });
+      if (count > ceiling) {
+        const entry = { file, identity, count, ceiling };
+        over.push(entry);
+        growth.push(entry);
+        if (explainedIdentities.has(identity)) explainedGrowth.push(entry);
+      }
     }
     if (over.length) violations.push(ratchetMessage(file, over));
   }
-  // Schema 3 is an exact inventory, not a ceiling with dormant headroom. A row
-  // whose file vanished OR whose multiplicity fell is stale and must be removed
-  // in the same reviewed maintenance change; otherwise a later identity swap can
-  // spend the abandoned count while appearing to remain under the old ceiling.
+  // The live generated inventory records exact current counts, not dormant
+  // headroom. A vanished file or lower multiplicity is stale and must be folded
+  // into the same generated maintenance write; otherwise a later identity swap
+  // could spend an abandoned count while appearing under the old ceiling.
   const stale = [];
   for (const [file, row] of Object.entries(baseline.inventory)) {
     if (!existsSync(join(ROOT, file))) {
@@ -1382,13 +1474,13 @@ export function compare(findings, baseline) {
     for (const [identity, ceiling] of Object.entries(rowOf(row, file))) {
       const count = now[identity] || 0;
       if (count === 0 && ceiling !== 0) {
-        stale.push(`${file}: "${identity}" is GONE against a frozen count of ${ceiling} — delete the row now; schema 4 permits no dormant headroom.`);
+        stale.push(`${file}: "${identity}" is GONE against a frozen count of ${ceiling} — delete the row now; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
       } else if (count < ceiling) {
-        stale.push(`${file}: "${identity}" is ${count} against a frozen count of ${ceiling} — lower the row now; schema 4 permits no dormant headroom.`);
+        stale.push(`${file}: "${identity}" is ${count} against a frozen count of ${ceiling} — lower the row now; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
       }
     }
   }
-  return { inventory: inv, violations, stale };
+  return { inventory: inv, violations, stale, growth, explainedGrowth };
 }
 
 export function corpusPayloadOf(parsed) {
@@ -1577,6 +1669,7 @@ function validateBaselineHistory(baseline) {
     'rev-list', '--reverse', '--ancestry-path', `${subjectSha}..HEAD`, '--', baselinePath,
   ], { cwd: ROOT, encoding: 'utf8' }).trim().split('\n').filter(Boolean);
   let committedGenesisReceipt = null;
+  let previousSchema7 = null;
   for (const commit of receiptCommits) {
     let candidate;
     try {
@@ -1592,14 +1685,19 @@ function validateBaselineHistory(baseline) {
     if (candidate.migrationReview?.subjectSha !== subjectSha) {
       throw new Error(`observed-shape first schema-${BASELINE_SCHEMA} baseline has a different migration genesis`);
     }
-    committedGenesisReceipt = candidate.migrationReview;
-    break;
+    assertExplainedWriterRowTags(candidate);
+    if (previousSchema7) assertExplainedWriterTagTransition(previousSchema7, candidate);
+    previousSchema7 = candidate;
+    committedGenesisReceipt ||= candidate.migrationReview;
   }
   if (!committedGenesisReceipt) {
     throw new Error(`observed-shape migration receipt has no committed schema-${BASELINE_SCHEMA} genesis descendant`);
   }
   if (canonicalJson(committedGenesisReceipt) !== canonicalJson(baseline.migrationReview)) {
     throw new Error(`observed-shape migration receipt changed after its committed schema-${BASELINE_SCHEMA} genesis`);
+  }
+  if (previousSchema7 && canonicalJson(previousSchema7) !== canonicalJson(baseline)) {
+    assertExplainedWriterTagTransition(previousSchema7, baseline);
   }
   return baseline;
 }
@@ -1757,8 +1855,33 @@ function unscannedInputDigestOf(snapshot) {
   return digestOf(snapshot.sourceTree.entries.filter((entry) => !scanned.has(entry.path)));
 }
 
-function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migrationReview }) {
+function rowTagsOf(inventory, predecessorBaseline, raiseReason) {
+  const declarations = new Map(EXPLAINED_WRITER_EXEMPTIONS
+    .map((entry) => [entry.identity, entry]));
+  const genesis = predecessorBaseline?.schema === RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA;
+  const rowTags = {};
+  for (const [file, row] of Object.entries(inventory)) {
+    for (const [identity, count] of Object.entries(row)) {
+      const declaration = declarations.get(identity);
+      if (!declaration) continue;
+      const priorCount = predecessorBaseline?.inventory?.[file]?.[identity] || 0;
+      const priorReason = predecessorBaseline?.rowTags?.[file]?.[identity]?.reason;
+      const reason = genesis
+        ? declaration.ruling
+        : (count > priorCount ? raiseReason : priorReason);
+      if (!rowTags[file]) rowTags[file] = {};
+      rowTags[file][identity] = { reason, rule: 'explained-writer' };
+    }
+  }
+  return rowTags;
+}
+
+export function baselineOf({
+  snapshot, headSha, corpus, stats, sentinel, findings, migrationReview,
+  predecessorBaseline, raiseReason = null,
+}) {
   const inventory = inventoryOf(findings);
+  const rowTags = rowTagsOf(inventory, predecessorBaseline, raiseReason);
   const manifests = {
     scanTree: snapshot.scanTree,
     sourceTree: snapshot.sourceTree,
@@ -1767,21 +1890,23 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
   };
   const baseline = {
     _doc: [
-      'READER-WITH-NO-WRITER INVENTORY — per-file HEURISTIC-LEAF identities, SHRINK-ONLY.',
+      'READER-WITH-NO-WRITER INVENTORY — per-file HEURISTIC-LEAF identities and governed ceilings.',
       'A row is "<key> on <shape>": multiplicity, produced by the governed legacy-leaf detector.',
       'Content-addressed per identity: dormant headroom and identity swaps are refused, so a NEW',
       'identity in an already-listed file reds exactly as a new file does, even at constant count.',
       'The line number is excluded so unrelated line churn does not rewrite the governed identity.',
-      'Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.',
+      'Ordinary maintenance may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
+      'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 6 = the same identity, NON-DOMAIN-SURFACE FILTERED. The byte-frozen detector is unchanged;',
-      'its output is narrowed by FOUR DECLARED post-filters in check-observed-shape-readers.mjs —',
+      'SCHEMA 7 = the same numeric identity, with explained-writer rows BANKED BY RULE.',
+      'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
-      'language-surface residual, and the M8/M9 explained-writer exemption. All four are inside',
+      'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
       'the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.',
-      'A row here therefore means: a guarded read, of a real record rather than of browser or language',
-      'surface, of a key NO writer the corpus runs produces and no declared out-of-corpus writer explains.',
-      'Schema 4 (raw) and schema 5 (M6 + M8/M9 only) are the RETIRED predecessors.',
+      'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
+      'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
+      'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
+      'Schemas 4–6 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -1794,6 +1919,7 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
     total: findings.length,
     identities: Object.values(inventory).reduce((sum, row) => sum + Object.keys(row).length, 0),
     inventory,
+    rowTags,
     migrationReview,
     manifests,
     scannerProvenance: {
@@ -1808,11 +1934,12 @@ function baselineOf({ snapshot, headSha, corpus, stats, sentinel, findings, migr
       scanStats: digestOf(stats),
       sentinel: digestOf(sentinel),
       inventory: digestOf(inventory),
+      rowTags: digestOf(rowTags),
       manifests: digestOf(manifests),
       migrationReview: digestOf(migrationReview),
     },
   };
-  validateSchema6Baseline(baseline);
+  assertExplainedWriterRowTags(baseline);
   return baseline;
 }
 
@@ -1875,6 +2002,7 @@ export function commandOf(argv = []) {
     '--report': { kind: 'flag', name: 'report' },
     '--progress': { kind: 'flag', name: 'progress' },
     '--write': { kind: 'flag', name: 'write' },
+    '--raise-explained-writer': { kind: 'value', name: 'raiseReason' },
     [`--migrate-schema=${BASELINE_SCHEMA}`]: { kind: 'flag', name: 'migrationFlag' },
     '--migration-review': { kind: 'value', name: 'migrationReviewPath' },
   });
@@ -1895,7 +2023,7 @@ export function commandOf(argv = []) {
     throw new Error('observed-shape --json, --scan-mode, and --corpus-artifact are only valid with --scan-only');
   }
   if (parsed.scanOnly && (parsed.write || parsed.report
-    || parsed.migrationFlag || parsed.migrationReviewPath)) {
+    || parsed.migrationFlag || parsed.migrationReviewPath || parsed.raiseReason)) {
     throw new Error('observed-shape --scan-only cannot be combined with baseline/report modes');
   }
   // ⚠⚠ THE LEGACY LEG CAN EXECUTE ITS OWN CORPUS. It used to REQUIRE
@@ -1916,6 +2044,13 @@ export function commandOf(argv = []) {
     throw new Error('observed-shape --migration-review is only valid for an explicit schema migration write');
   }
   if (parsed.write && parsed.report) throw new Error('observed-shape --write and --report are conflicting modes');
+  if (parsed.raiseReason !== null) {
+    assertExplainedWriterReason(parsed.raiseReason, '--raise-explained-writer reason');
+    if (!parsed.write || parsed.scanOnly || parsed.report
+      || parsed.migrationFlag || parsed.migrationReviewPath) {
+      throw new Error('observed-shape --raise-explained-writer is legal only with ordinary --write');
+    }
+  }
   return {
     ...parsed,
     mode: parsed.scanOnly ? 'scan-only' : 'gate',
@@ -1944,7 +2079,8 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema6Baseline,
+    validateBaseline: validateSchema7Baseline,
+    assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,
     validateMigrationBundle,
@@ -2002,6 +2138,7 @@ export async function run(argv = [], overrides = {}) {
       return 1;
     } else {
       runtime.validateBaseline(baseline);
+      runtime.assertExplainedWriterRowTags(baseline);
       runtime.validateBaselineHistory(baseline);
     }
   }
@@ -2108,13 +2245,14 @@ export async function run(argv = [], overrides = {}) {
     sentinel,
     scanConfig: SCAN_CONFIG,
   });
-  // ⭐⭐ THE DECLARED POST-FILTER CHAIN — post-scan, pre-inventory, and the ONE
-  // place its order is fixed. Four filters narrow the byte-frozen detector's
-  // output, and they are applied in DECLARATION ORDER (M6, M11, M12, M8/M9),
+  // ⭐⭐ THE DECLARED POST-SCAN CHAIN — pre-inventory, and the ONE place its order
+  // is fixed. Three filters narrow the byte-frozen detector; M8/M9 then banks
+  // matching rows without clearing them. The stages run in declaration order
+  // (M6, M11, M12, M8/M9),
   // which the walker's own composition must match or it measures a different
   // instrument than the gate. ⚠ ORDER IS IMMATERIAL TO THE RESULT AND THAT IS
-  // MEASURED, NOT ASSUMED: the four are DISJOINT on the live estate — no read is
-  // claimed by two — so no permutation moves a figure. The order is fixed anyway,
+  // MEASURED, NOT ASSUMED: the four stage claims are DISJOINT on the live estate —
+  // no read is claimed by two — so no permutation moves a figure. The order is fixed anyway,
   // because "whatever order it happens to run in" is not a specification.
   // CR-OSR-FREEZE-6 — the shape-family union.
   const familyScan = applyShapeFamilyFilter({ scanMode: command.scanMode, corpus, scan: rawScan });
@@ -2144,8 +2282,8 @@ export async function run(argv = [], overrides = {}) {
     findings: languageScan.findings.length,
     cleared: languageScan.languageSurface.cleared,
   });
-  // ⭐ M8/M9 — the explained-writer exemption, last and still upstream of every
-  // inventory, so its `cleared` count reports only rows nothing else explained.
+  // ⭐ M8/M9 — the explained-writer bank, last and upstream of every inventory.
+  // It reports matching rows but preserves the findings by reference.
   // `assertExplainedWriterEvidence` runs FIRST: a stale entry must red the scan,
   // never quietly exempt nothing.
   const explainedWriterEvidence = runtime.assertExplainedWriterEvidence();
@@ -2156,7 +2294,7 @@ export async function run(argv = [], overrides = {}) {
     phase: 'explained-writer-filter-complete',
     scanMode: command.scanMode,
     findings: scan.findings.length,
-    cleared: scan.explainedWriters.cleared,
+    banked: scan.explainedWriters.banked,
   });
   const after = inputSnapshot(runtime);
   assertStableSnapshot(before, after, { requireClean: command.mode === 'scan-only' || command.write });
@@ -2206,7 +2344,22 @@ export async function run(argv = [], overrides = {}) {
       }
     } else {
       const maintenance = compare(scan.findings, baseline);
-      if (maintenance.violations.length) {
+      if (command.raiseReason !== null) {
+        if (!maintenance.growth.length) {
+          throw new Error('observed-shape --raise-explained-writer requires at least one actual new or increased tagged row');
+        }
+        if (maintenance.explainedGrowth.length !== maintenance.growth.length) {
+          const refused = maintenance.growth
+            .filter((row) => !maintenance.explainedGrowth.some((candidate) => (
+              candidate.file === row.file && candidate.identity === row.identity
+            )))
+            .map(({ file, identity, count, ceiling }) => (
+              `${file} / ${identity}: ${count} > ${ceiling}`
+            ));
+          throw new Error('observed-shape reasoned maintenance refused ordinary growth; only tagged explained-writer rows may use this path:\n'
+            + refused.join('\n'));
+        }
+      } else if (maintenance.violations.length) {
         throw new Error(`observed-shape schema-${BASELINE_SCHEMA} maintenance is shrink-only; growth or an identity swap cannot be re-frozen:\n`
           + maintenance.violations.join('\n'));
       }
@@ -2226,6 +2379,8 @@ export async function run(argv = [], overrides = {}) {
       sentinel,
       findings: scan.findings,
       migrationReview: migrationReceipt,
+      predecessorBaseline: baseline,
+      raiseReason: command.raiseReason,
     });
     runtime.writeBaseline(next, baselineText);
     console.log(`froze ${scan.findings.length} finding(s) / ${next.identities} identit(ies) across ${Object.keys(next.inventory).length} file(s)`);

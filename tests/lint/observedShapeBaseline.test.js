@@ -13,10 +13,12 @@ import {
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   validateSchema4Baseline,
   validateSchema5Baseline,
   validateSchema6Baseline,
+  validateSchema7Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -245,7 +247,7 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(6);
+    expect(BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
     expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
     // ⚠⚠ A RETIRED DEFINITION THAT THE LIVE ONE CAN MOVE IS NOT RETIRED. If the
@@ -256,7 +258,7 @@ describe('observed-shape schema-3 baseline envelope', () => {
   });
 });
 
-/* ══ SCHEMA 6 — THE LIVE HEURISTIC-LEAF ENVELOPE ═══════════════════════════ */
+/* ══ SCHEMA 6 — THE RETIRED NUMERIC HEURISTIC-LEAF ENVELOPE ═══════════════ */
 
 const LEAF_IDENTITY = 'ghost on record';
 
@@ -313,7 +315,7 @@ function validSchema4Baseline() {
   };
   return {
     _doc: ['test fixture'],
-    schema: BASELINE_SCHEMA,
+    schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
     frozen: '2026-08-10',
     frozenAtSha: SHA,
     minRows: 40,
@@ -348,6 +350,33 @@ function mutateSchema4(mutator) {
   const baseline = validSchema4Baseline();
   mutator(baseline);
   baseline.digests.inventory = digestOf(baseline.inventory);
+  baseline.digests.sentinel = digestOf(baseline.sentinel);
+  baseline.digests.scanStats = digestOf(baseline.scanStats);
+  baseline.digests.manifests = digestOf(baseline.manifests);
+  if (baseline.migrationReview) {
+    baseline.digests.migrationReview = digestOf(baseline.migrationReview);
+  }
+  if (baseline.rowTags) baseline.digests.rowTags = digestOf(baseline.rowTags);
+  return baseline;
+}
+
+function validSchema7Baseline() {
+  const baseline = validSchema4Baseline();
+  baseline.schema = BASELINE_SCHEMA;
+  baseline.rowTags = {
+    'src/probe.js': {
+      [LEAF_IDENTITY]: { reason: 'CR-H26 test ruling', rule: 'explained-writer' },
+    },
+  };
+  baseline.digests.rowTags = digestOf(baseline.rowTags);
+  return baseline;
+}
+
+function mutateSchema7(mutator) {
+  const baseline = validSchema7Baseline();
+  mutator(baseline);
+  baseline.digests.inventory = digestOf(baseline.inventory);
+  baseline.digests.rowTags = digestOf(baseline.rowTags);
   baseline.digests.sentinel = digestOf(baseline.sentinel);
   baseline.digests.scanStats = digestOf(baseline.scanStats);
   baseline.digests.manifests = digestOf(baseline.manifests);
@@ -479,7 +508,7 @@ describe('observed-shape schema-6 baseline envelope', () => {
   });
 
   test('gate and maintenance write reject a malformed baseline before corpus execution', async () => {
-    const malformed = mutateSchema4((baseline) => { delete baseline.migrationReview; });
+    const malformed = mutateSchema7((baseline) => { delete baseline.migrationReview; });
     let corpusCalls = 0;
     const overrides = {
       baselineExists: () => true,
@@ -489,5 +518,54 @@ describe('observed-shape schema-6 baseline envelope', () => {
     await expect(run([], overrides)).rejects.toThrow(/noncanonical fields/);
     await expect(run(['--write'], overrides)).rejects.toThrow(/noncanonical fields/);
     expect(corpusCalls).toBe(0);
+  });
+});
+
+describe('observed-shape schema-7 bank-by-rule envelope', () => {
+  test('A5: schemas 4-6 keep numeric inventory and only schema 7 admits sparse rowTags', () => {
+    const baseline = validSchema7Baseline();
+    expect(validateSchema7Baseline(baseline)).toBe(baseline);
+    expect(typeof baseline.inventory['src/probe.js'][LEAF_IDENTITY]).toBe('number');
+    for (const [schema, validate] of [
+      [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA, validateSchema4Baseline],
+      [RETIRED_FILTERED_LEAF_BASELINE_SCHEMA, validateSchema5Baseline],
+      [RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA, validateSchema6Baseline],
+    ]) {
+      expect(() => validate({ ...baseline, schema })).toThrow(/noncanonical fields/);
+    }
+  });
+
+  test.each([
+    ['missing rowTags', (baseline) => { delete baseline.rowTags; }],
+    ['empty per-file row', (baseline) => { baseline.rowTags['src/probe.js'] = {}; }],
+    ['orphan identity', (baseline) => {
+      baseline.rowTags['src/probe.js']['other on record'] = baseline.rowTags['src/probe.js'][LEAF_IDENTITY];
+    }],
+    ['orphan file', (baseline) => {
+      baseline.rowTags['src/other.js'] = baseline.rowTags['src/probe.js'];
+    }],
+    ['bad rule', (baseline) => {
+      baseline.rowTags['src/probe.js'][LEAF_IDENTITY].rule = 'exempt';
+    }],
+    ['blank reason', (baseline) => {
+      baseline.rowTags['src/probe.js'][LEAF_IDENTITY].reason = ' ';
+    }],
+    ['multiline reason', (baseline) => {
+      baseline.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'first\nsecond';
+    }],
+    ['too-long reason', (baseline) => {
+      baseline.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'x'.repeat(241);
+    }],
+    ['extra tag field', (baseline) => {
+      baseline.rowTags['src/probe.js'][LEAF_IDENTITY].extra = true;
+    }],
+  ])('A5 fails closed on %s', (_label, mutator) => {
+    expect(() => validateSchema7Baseline(mutateSchema7(mutator))).toThrow();
+  });
+
+  test('A5 independently integrity-binds the sparse tag map', () => {
+    const baseline = validSchema7Baseline();
+    baseline.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
+    expect(() => validateSchema7Baseline(baseline)).toThrow(/rowTags digest mismatch/);
   });
 });

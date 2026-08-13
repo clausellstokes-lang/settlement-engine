@@ -4012,6 +4012,10 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // inside two assertions that already existed, and comments — minting NO title; and the
     // remaining two test files are the ones decomposed above. This file gains only this
     // comment and the row below it.
+    // ⏱ H26, 2026-08-12 — RE-DERIVED WHOLE after the schema-7 bank-by-rule tests.
+    // The tuple is unchanged: H26 rewrites existing credited titles in place, while its new
+    // schema-envelope cases live in the already parked observedShapeBaseline file. This
+    // comment adds no registration. One live measurement reconfirmed all five figures.
     files: 2409, parked: 365, credited: 2044, titles: 19960, suiteTitles: 5635,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);

@@ -2,7 +2,7 @@
 /**
  * Governed observed-reader baseline migrations.
  *
- * TWO TARGETS LIVE HERE, and they are different arguments:
+ * TWO MIGRATION FAMILIES LIVE HERE, and their target rungs are explicit:
  *
  *   schema 2 -> 3  (RETIRED) `migrationReport`. Pairs the governed heuristic
  *     detector against the EXACT detector site-by-site, so the target inventory
@@ -26,7 +26,7 @@
  *     is the one table that binds them so no caller can pair 5 with a schema-2
  *     predecessor or 4 with a schema-4 one.
  *
- *   schema 5 -> 6  (LIVE)    the same function, a third target, and NOT ONE new
+ *   schema 5 -> 6  (RETIRED) the same function, a third target, and NOT ONE new
  *     branch. Schema 6 adds two further post-filters (M11 DOM-global receiver,
  *     M12 language-surface residual) to the same byte-frozen detector, so the
  *     alphabet is unchanged for the third time running and the reconciliation
@@ -34,7 +34,10 @@
  *     `LEAF_MIGRATION_PREDECESSOR` and an entry in the predecessor-validator
  *     table is the evidence that the 4→5 generalisation was the right shape.
  *
- * In both, the predecessor schema-2 baseline and every scan artifact are
+ *   schema 6 -> 7  (LIVE)    the same numeric reconciliation, now re-admitting
+ *     explained-writer rows and binding their governance in sparse rowTags.
+ *
+ * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
  * governed 6e7acc4d algorithm with one semantic-neutral addition:
@@ -62,9 +65,12 @@ import {
 } from './lib/observed-shape-governance.mjs';
 import {
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
   validateSchema4Baseline,
   validateSchema5Baseline,
+  validateSchema6Baseline,
+  validateSchema7Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -79,14 +85,49 @@ export const RETIRED_EXACT_TARGET_SCHEMA = 3;
 export const HEURISTIC_TARGET_SCHEMA = 4;
 /** The RETIRED M6-and-M8/M9-only filtered heuristic-leaf target. */
 export const FILTERED_TARGET_SCHEMA = 5;
-/** The LIVE NON-DOMAIN-SURFACE-FILTERED heuristic-leaf target (M6 + M11 + M12
- *  + M8/M9). */
+/** The RETIRED surface-filtered heuristic-leaf target (M6 + M11 + M12 plus
+ *  clear-outright M8/M9). Schema 7 is the live target. */
 export const SURFACE_FILTERED_TARGET_SCHEMA = 6;
+/** The LIVE target: schema 6's numeric inventory plus BANK-BY-RULE metadata. */
+export const BANKED_EXPLAINED_WRITER_TARGET_SCHEMA = 7;
+
+/**
+ * The complete, reviewed detector transition admitted by the live 6→7 mint.
+ *
+ * `package.json` is inherited from GTR-1; the other three paths are H26's own
+ * scanner implementation. Keeping the set as exported data makes the packet's
+ * provenance ruling executable and gives the review ledger one closed subject
+ * to accept. A fifth path, or one of these four remaining byte-identical, is a
+ * different migration and therefore fails closed.
+ */
+export const BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
+  'package-lock.json',
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/governed-artifact-io.mjs',
+  'scripts/lib/legacy-reader-shape-scan.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/lib/observed-shape-governance.mjs',
+  'scripts/lib/reader-shape-scan.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+  'tests/fixtures/spatialPackFixtures.js',
+]);
+
+const BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY =
+  'schema-6-to-7-exact-scanner-transition-v1';
 
 /**
  * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
  *
- * All three leaf migrations run the same reconciliation, so the only way to keep
+ * All four leaf migrations run the same reconciliation, so the only way to keep
  * them from being confusable is to make the pairing DATA that every entry point
  * reads — never hand-written literals at separate call sites. A caller cannot
  * migrate a schema-2 baseline to schema 6, nor re-run a retired pairing against
@@ -100,6 +141,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [HEURISTIC_TARGET_SCHEMA]: 2,
   [FILTERED_TARGET_SCHEMA]: HEURISTIC_TARGET_SCHEMA,
   [SURFACE_FILTERED_TARGET_SCHEMA]: FILTERED_TARGET_SCHEMA,
+  [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA]: SURFACE_FILTERED_TARGET_SCHEMA,
 });
 
 /**
@@ -112,6 +154,8 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
 const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA]: validateSchema4Baseline,
   [RETIRED_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema5Baseline,
+  [RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema6Baseline,
+  [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA]: validateSchema7Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -413,6 +457,108 @@ function assertPredecessorExecutionCompatibility(predecessor, legacyArtifact) {
   }
   return corpusCompatibilityOf(predecessor, legacyArtifact);
 }
+
+const manifestEntriesByPath = (manifest) => new Map(
+  manifest.entries.map((entry) => [entry.path, entry]),
+);
+
+function unscannedInputDigestOf({ sourceTree, scanTree }) {
+  const scannedPaths = new Set(scanTree.entries.map((entry) => entry.path));
+  return digestOf(sourceTree.entries.filter((entry) => !scannedPaths.has(entry.path)));
+}
+
+/**
+ * The schema-6 predecessor and schema-7 artifact are produced by different
+ * committed scanner trees. Inventory reconciliation alone cannot distinguish a
+ * ruled scanner edit from an arbitrary detector rewrite, so the live rung binds
+ * and reviews the transition itself.
+ */
+function bankedExplainedWriterScannerTransitionOf(predecessor, legacyArtifact) {
+  if (predecessor.frozenAtSha !== predecessor.migrationReview.subjectSha) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition requires the immutable schema-6 migration genesis as predecessor');
+  }
+  const beforeByPath = manifestEntriesByPath(predecessor.manifests.detectorTree);
+  const afterByPath = manifestEntriesByPath(legacyArtifact.detectorTree);
+  const beforePaths = [...beforeByPath.keys()].sort();
+  const afterPaths = [...afterByPath.keys()].sort();
+  if (!equalArrays(beforePaths, BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS)
+    || !equalArrays(afterPaths, BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS)) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition must bind the exact governed 11-input detector universe:'
+      + ` predecessor=${JSON.stringify(beforePaths)} current=${JSON.stringify(afterPaths)}`);
+  }
+  const addedPaths = afterPaths.filter((path) => !beforeByPath.has(path));
+  const removedPaths = beforePaths.filter((path) => !afterByPath.has(path));
+  if (addedPaths.length || removedPaths.length) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition changes the governed detector path set:'
+      + ` added=${JSON.stringify(addedPaths)} removed=${JSON.stringify(removedPaths)}`);
+  }
+
+  const modifiedPaths = beforePaths.filter((path) => (
+    canonicalJson(beforeByPath.get(path)) !== canonicalJson(afterByPath.get(path))
+  ));
+  if (!equalArrays(modifiedPaths, BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS)) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition must modify exactly '
+      + `${JSON.stringify(BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS)}; received ${JSON.stringify(modifiedPaths)}`);
+  }
+
+  const changes = modifiedPaths.map((path) => {
+    const predecessorEntry = beforeByPath.get(path);
+    const currentEntry = afterByPath.get(path);
+    if (predecessorEntry.type !== currentEntry.type
+      || predecessorEntry.mode !== currentEntry.mode) {
+      throw new Error(`observed-shape schema-6 to schema-7 scanner transition changes file type or mode at ${path}`);
+    }
+    if (predecessorEntry.sha256 === currentEntry.sha256) {
+      throw new Error(`observed-shape schema-6 to schema-7 scanner transition does not change content at ${path}`);
+    }
+    return { path, predecessor: predecessorEntry, current: currentEntry };
+  });
+  const unchangedPaths = beforePaths.filter((path) => !modifiedPaths.includes(path));
+  if (unchangedPaths.length !== 7) {
+    throw new Error(`observed-shape schema-6 to schema-7 scanner transition must retain exactly seven byte-identical detector inputs; received ${unchangedPaths.length}`);
+  }
+
+  const predecessorUnscannedInputDigest = predecessor.scannerProvenance.unscannedInputDigest;
+  const currentUnscannedInputDigest = unscannedInputDigestOf(legacyArtifact);
+  if (predecessorUnscannedInputDigest !== currentUnscannedInputDigest) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition changes unscanned governed source inputs:'
+      + ` ${predecessorUnscannedInputDigest} != ${currentUnscannedInputDigest}`);
+  }
+  if (predecessor.migrationReview.scanConfigDigest !== legacyArtifact.digests.scanConfig) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition changes the governed scan configuration');
+  }
+  if (legacyArtifact.provenance.subjectSha !== legacyArtifact.provenance.scannerSha) {
+    throw new Error('observed-shape schema-7 migration artifact subject and scanner SHAs must name one committed code half');
+  }
+  if (legacyArtifact.provenance.scannerSha === predecessor.migrationReview.currentScannerSha) {
+    throw new Error('observed-shape schema-6 to schema-7 scanner transition must advance to a fresh committed scanner SHA');
+  }
+
+  return {
+    policy: BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY,
+    predecessorSchema: SURFACE_FILTERED_TARGET_SCHEMA,
+    targetSchema: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+    predecessor: {
+      scannerSha: predecessor.migrationReview.currentScannerSha,
+      detectorTreeDigest: predecessor.manifests.detectorTree.digest,
+      scannerToolDigest: predecessor.migrationReview.currentScannerToolDigest,
+      unscannedInputDigest: predecessorUnscannedInputDigest,
+    },
+    current: {
+      scannerSha: legacyArtifact.provenance.scannerSha,
+      detectorTreeDigest: legacyArtifact.detectorTree.digest,
+      scannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      unscannedInputDigest: currentUnscannedInputDigest,
+    },
+    modifiedPaths,
+    unchangedPaths,
+    changes,
+  };
+}
+
+const scannerTransitionRowIdOf = (scannerTransition) => (
+  `osr-scanner-transition-v1:${digestOf(scannerTransition)}`
+);
 
 function legacySitesOf(findings) {
   const sites = new Map();
@@ -759,16 +905,21 @@ function assertHeuristicConservation(report) {
     || c.predecessorRows !== report.predecessorRows.length) {
     throw new Error(`observed-shape heuristic migration conservation failed: ${JSON.stringify(c)}`);
   }
-  const rowIds = new Set(report.predecessorRows.map((row) => row.rowId));
-  if (rowIds.size !== report.predecessorRows.length) {
+  const governedRows = [
+    ...report.predecessorRows,
+    ...(report.scannerTransition
+      ? [{ rowId: scannerTransitionRowIdOf(report.scannerTransition) }]
+      : []),
+  ];
+  const rowIds = new Set(governedRows.map((row) => row.rowId));
+  if (rowIds.size !== governedRows.length) {
     throw new Error('observed-shape migration produced duplicate row IDs');
   }
 }
 
-/** Build the canonical leaf migration report — schema 2 -> 4 (retired) or
- *  schema 4 -> 5 (live), chosen by `targetSchema`, which is REQUIRED so no
- *  caller can fall into the wrong migration by omission. ONE artifact,
- *  validated before any reconciliation, and it must be the governed detector's. */
+/** Build the canonical leaf migration report — retired 2→4, 4→5 and 5→6, or
+ *  live 6→7 — chosen by required `targetSchema` so no caller can fall into the
+ *  wrong rung by omission. ONE artifact is validated before reconciliation. */
 export function heuristicMigrationReport(
   predecessorBaseline,
   legacyArtifact,
@@ -787,6 +938,9 @@ export function heuristicMigrationReport(
   );
   assertGovernedLegacyArtifact(legacyArtifact);
   const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
+  const scannerTransition = targetSchema === BANKED_EXPLAINED_WRITER_TARGET_SCHEMA
+    ? bankedExplainedWriterScannerTransitionOf(predecessor, legacyArtifact)
+    : null;
   const predecessorRows = predecessorRowsOf(predecessor, legacyArtifact.inventory);
   const predecessorCount = (value) => predecessorRows
     .filter((row) => row.reconciliation === value).length;
@@ -808,7 +962,7 @@ export function heuristicMigrationReport(
       predecessorCount: row.predecessorCount,
       legacyCount: row.legacyCount,
       message: `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
-        + ` against the schema-2 predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
+        + ` against the schema-${predecessorSchema} predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
     }));
   const report = {
     reportSchema: MIGRATION_REPORT_SCHEMA,
@@ -840,6 +994,7 @@ export function heuristicMigrationReport(
       currentScannerSha: legacyArtifact.provenance.scannerSha,
       currentDetectorDigest: legacyArtifact.provenance.detectorDigest,
       currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      ...(scannerTransition ? { scannerTransitionDigest: digestOf(scannerTransition) } : {}),
     },
     target: {
       baselineSchema: targetSchema,
@@ -874,7 +1029,17 @@ export function heuristicMigrationReport(
       legacyFindings: legacyArtifact.findings.length,
     },
     corpusCompatibility,
-    issues: predecessorIssues,
+    ...(scannerTransition ? { scannerTransition } : {}),
+    issues: [
+      ...predecessorIssues,
+      ...(scannerTransition ? [{
+        rowId: scannerTransitionRowIdOf(scannerTransition),
+        reconciliation: 'scanner-transition',
+        modifiedPaths: scannerTransition.modifiedPaths,
+        message: 'schema-6 to schema-7 governed scanner transition requires one accepted review decision: '
+          + scannerTransition.modifiedPaths.join(', '),
+      }] : []),
+    ],
   };
   assertHeuristicConservation(report);
   return report;
@@ -972,6 +1137,9 @@ export function reviewTemplateOf(report) {
       corpusDigest: report.inputs.corpusDigest,
       scanConfigDigest: report.inputs.scanConfigDigest,
       targetInventoryDigest: report.target.inventoryDigest,
+      ...(report.scannerTransition
+        ? { scannerTransitionDigest: report.inputs.scannerTransitionDigest }
+        : {}),
     },
     decisions: [
       ...report.predecessorRows.map((row) => ({
@@ -986,6 +1154,12 @@ export function reviewTemplateOf(report) {
         decision: 'pending',
         note: '',
       })),
+      ...(report.scannerTransition ? [{
+        rowId: scannerTransitionRowIdOf(report.scannerTransition),
+        subject: 'scanner-transition',
+        decision: 'pending',
+        note: '',
+      }] : []),
     ],
   };
 }
@@ -1003,6 +1177,9 @@ export function validateReviewLedger(review, report) {
   const expectedRows = [
     ...report.predecessorRows.map((row) => [row.rowId, 'predecessor-reconciliation']),
     ...report.rows.map((row) => [row.rowId, 'site-migration']),
+    ...(report.scannerTransition
+      ? [[scannerTransitionRowIdOf(report.scannerTransition), 'scanner-transition']]
+      : []),
   ];
   const expectedIds = new Map(expectedRows);
   const seen = new Set();
@@ -1194,17 +1371,18 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : SURFACE_FILTERED_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : BANKED_EXPLAINED_WRITER_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
-    SURFACE_FILTERED_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${SURFACE_FILTERED_TARGET_SCHEMA} (live surface-filtered leaf),`
+    SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${BANKED_EXPLAINED_WRITER_TARGET_SCHEMA} (live banked explained-writer leaf),`
+      + ` ${SURFACE_FILTERED_TARGET_SCHEMA} (retired surface-filtered leaf),`
       + ` ${FILTERED_TARGET_SCHEMA} (retired M6/M8-only filtered leaf),`
       + ` ${HEURISTIC_TARGET_SCHEMA} (retired unfiltered leaf)`
       + ` or ${RETIRED_EXACT_TARGET_SCHEMA} (retired exact); received ${JSON.stringify(command.targetSchema)}`);
   }
   const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
   if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=6] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=7] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
   }
   if (heuristicTarget && currentPath) {
     throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`

@@ -5,17 +5,16 @@
  * malformed row, missing migration genesis, disabled sentinel, or unbound scan
  * path must stop the gate before the expensive producer corpus executes.
  *
- * ── ⭐⭐ FOUR IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
+ * ── ⭐⭐ FIVE IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
  *
- * `BASELINE_SCHEMA` is **6**: the NON-DOMAIN-SURFACE-FILTERED heuristic-leaf
- * identity. Same SPELLING as schemas 4 and 5 (`<key> on <shape>` with a
- * per-identity MULTIPLICITY) and the same byte-frozen
- * `legacy-reader-shape-scan.mjs` detector, but the finding set is the
- * detector's output NARROWED by FOUR declared, controlled post-filters in
- * `check-observed-shape-readers.mjs`: CR-OSR-FREEZE-6's shape-family union
- * (M6), the DOM-GLOBAL RECEIVER exclusion (M11), the LANGUAGE-SURFACE RESIDUAL
- * (M12), and the EXPLAINED-WRITER exemption (M8/M9). It is the full-tree gate
- * authority.
+ * `BASELINE_SCHEMA` is **7**: schema 6's numeric heuristic-leaf inventory with
+ * explained-writer findings re-admitted and BANKED BY RULE in sparse `rowTags`.
+ * The numeric identity remains `<key> on <shape>` with per-file multiplicity;
+ * tags add governance metadata without changing that alphabet.
+ *
+ * `RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA` is **6**: the same numeric
+ * identity after M6, M11, M12 and the retired clear-outright M8/M9 behavior.
+ * Retired, never redefined, never deleted.
  *
  * `RETIRED_FILTERED_LEAF_BASELINE_SCHEMA` is **5**: the same spelling narrowed
  * by only M6 and M8/M9 — schema 6's predecessor. Retired, never redefined,
@@ -92,7 +91,7 @@ import {
   scannerToolDigestOf,
 } from './observed-shape-governance.mjs';
 
-export const BASELINE_SCHEMA = 6;
+export const BASELINE_SCHEMA = 7;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -102,6 +101,9 @@ export const RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA = 4;
  *  Same identity grammar, two post-filters instead of four. Never redefined,
  *  never deleted. */
 export const RETIRED_FILTERED_LEAF_BASELINE_SCHEMA = 5;
+/** The RETIRED surface-filtered definition. Schema 7 keeps its numeric inventory
+ *  and adds sparse BANK-BY-RULE metadata beside it. Never redefined. */
+export const RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA = 6;
 export const MIN_ROWS = 40;
 export const ORIGIN_MIN_ROWS = 8;
 
@@ -398,7 +400,7 @@ function validateInventory(inventory, scanTree) {
  * ⛔ RETIRED — the exact per-site definition. Kept executable so historical
  * schema-3 envelopes and the exact instrument's targeted receipts stay
  * verifiable; NEVER redefined in place. The live authority is
- * `validateSchema4Baseline` below.
+ * `validateSchema7Baseline` below.
  */
 export function validateSchema3Baseline(baseline) {
   assertExactKeys(baseline, 'schema-3 envelope', [
@@ -466,7 +468,7 @@ export function validateSchema3Baseline(baseline) {
   return baseline;
 }
 
-/* ══ THE HEURISTIC-LEAF ENVELOPE — 4 and 5 (retired), 6 (live) ═════════════ */
+/* ══ HEURISTIC-LEAF ENVELOPES — 4–6 retired, 7 live ════════════════════════ */
 
 /**
  * ⛔ RETIRED — the UNFILTERED heuristic-leaf definition (CR-OSR-FREEZE-3-R1).
@@ -489,10 +491,15 @@ export function validateSchema5Baseline(baseline) {
   return validateLeafBaseline(baseline, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA);
 }
 
-/** The LIVE authority — the NON-DOMAIN-SURFACE-FILTERED heuristic-leaf
- *  definition, narrowed by all four declared post-filters. */
+/** ⛔ RETIRED — the surface-filtered numeric heuristic-leaf definition. */
 export function validateSchema6Baseline(baseline) {
-  return validateLeafBaseline(baseline, BASELINE_SCHEMA);
+  return validateLeafBaseline(baseline, RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA);
+}
+
+/** The LIVE authority — schema 6's 1,381 numeric rows plus the 31 re-admitted
+ *  explained-writer numeric rows, with sparse content-addressed row tags. */
+export function validateSchema7Baseline(baseline) {
+  return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
 /** The heuristic detector emits exactly these four telemetry fields. Requiring
@@ -647,10 +654,45 @@ function validateHeuristicMigrationReceipt(receipt, baseline) {
  * each accepts, so each entry point below supplies its own and a pin drives
  * every direction of the refusal.
  */
-function validateLeafBaseline(baseline, schema) {
+function validateRowTags(rowTags, inventory) {
+  assertObject(rowTags, 'rowTags');
+  for (const [file, row] of Object.entries(rowTags)) {
+    if (!CANONICAL_SRC_PATH.test(file) || !Object.hasOwn(inventory, file)) {
+      throw new Error(`observed-shape baseline rowTags file has no matching inventory row: ${JSON.stringify(file)}`);
+    }
+    assertObject(row, `rowTags row ${file}`);
+    if (!Object.keys(row).length) {
+      throw new Error(`observed-shape baseline rowTags row is empty: ${file}`);
+    }
+    for (const [identity, tag] of Object.entries(row)) {
+      parseLeafBaselineIdentity(identity);
+      if (!Object.hasOwn(inventory[file], identity)) {
+        throw new Error(`observed-shape baseline rowTags address has no matching inventory identity: ${file} / ${identity}`);
+      }
+      assertExactKeys(tag, `rowTags[${JSON.stringify(file)}][${JSON.stringify(identity)}]`, [
+        'reason', 'rule',
+      ]);
+      if (tag.rule !== 'explained-writer') {
+        throw new Error(`observed-shape baseline rowTags rule must be "explained-writer": ${file} / ${identity}`);
+      }
+      if (typeof tag.reason !== 'string' || tag.reason !== tag.reason.trim()
+        || tag.reason.length < 1 || tag.reason.length > 240
+        || [...tag.reason].some((character) => {
+          const code = character.charCodeAt(0);
+          return code <= 31 || code === 127;
+        })) {
+        throw new Error(`observed-shape baseline rowTags reason must be a 1-240 character trimmed single-line string: ${file} / ${identity}`);
+      }
+    }
+  }
+  return rowTags;
+}
+
+function validateLeafBaseline(baseline, schema, { tagged = false } = {}) {
   assertExactKeys(baseline, `schema-${schema} envelope`, [
     '_doc', 'corpusMeta', 'digests', 'frozen', 'frozenAtSha', 'identities',
     'inventory', 'manifests', 'migrationReview', 'minRows', 'originMinRows',
+    ...(tagged ? ['rowTags'] : []),
     'scanStats', 'scannerProvenance', 'schema', 'sentinel', 'total',
   ]);
   if (baseline.schema !== schema) {
@@ -679,6 +721,7 @@ function validateLeafBaseline(baseline, schema) {
     baseline.inventory,
     baseline.manifests.scanTree,
   );
+  if (tagged) validateRowTags(baseline.rowTags, baseline.inventory);
   if (baseline.total !== total || baseline.identities !== identities) {
     throw new Error(`observed-shape baseline totals are inconsistent: total=${baseline.total}, identities=${baseline.identities}, rows=${identities}, counts=${total}`);
   }
@@ -701,13 +744,15 @@ function validateLeafBaseline(baseline, schema) {
     throw new Error('observed-shape baseline scanner provenance disagrees with its manifests or migration genesis');
   }
   assertExactKeys(baseline.digests, 'digests', [
-    'corpusMeta', 'inventory', 'manifests', 'migrationReview', 'scanStats', 'sentinel',
+    'corpusMeta', 'inventory', 'manifests', 'migrationReview',
+    ...(tagged ? ['rowTags'] : []), 'scanStats', 'sentinel',
   ]);
   for (const [name, value] of Object.entries({
     corpusMeta: baseline.corpusMeta,
     inventory: baseline.inventory,
     manifests: baseline.manifests,
     migrationReview: baseline.migrationReview,
+    ...(tagged ? { rowTags: baseline.rowTags } : {}),
     scanStats: baseline.scanStats,
     sentinel: baseline.sentinel,
   })) {

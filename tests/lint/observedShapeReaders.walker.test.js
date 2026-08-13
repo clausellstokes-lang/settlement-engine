@@ -124,7 +124,9 @@ import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reade
 import {
   applyDomGlobalReceiverFilter, applyExplainedWriterFilter, applyLanguageSurfaceFilter,
   applyShapeFamilyFilter,
+  assertExplainedWriterRowTags,
   BASELINE_SCAN_MODE, BASELINE_SCHEMA, cohortOf, compare, EXACT_SCAN_EXCLUDED_SCOPE,
+  EXPLAINED_WRITER_EXEMPTIONS,
   identityOf, inventoryOf, isExactScanExcludedReadPath, MIN_ROWS, ORIGIN_MIN_ROWS,
   ratchetMessage, rowOf, sentinelFailures, sentinelOf, sourceFiles, UNREVIEWED_UI_COHORT,
 } from '../../scripts/check-observed-shape-readers.mjs';
@@ -194,8 +196,8 @@ let scansRun = 0;
  * The one place the detector is called. `extraFiles` are planted probes.
  *
  * ⭐⭐ THE WALKER MUST MEASURE WHAT THE GATE MEASURES — the walker-census law. Under
- * schema 6 the frozen inventory is the detector's output NARROWED by FOUR declared
- * post-filters, so a walker that compared the RAW detector output against it would
+ * schema 7 the frozen numeric inventory is narrowed by THREE clearing filters and
+ * keeps M8/M9 rows banked, so a walker that compared RAW output against it would
  * report every filtered row as a violation and stay red forever, and whoever
  * silenced it would have disabled the guard rather than fixed the walker. All four
  * filters are therefore applied HERE, in the same order `run()` applies them.
@@ -206,7 +208,7 @@ let scansRun = 0;
  * the chain in `run()` is a change HERE, in the SAME commit, and the arithmetic
  * pin below is what turns a forgotten one into a red instead of a silent pass.
  *
- * ⚠ `stats` passes through all four filters BY IDENTITY, so `live.stats` is still
+ * ⚠ `stats` passes through all four stages BY IDENTITY, so `live.stats` is still
  * the DETECTOR's reach and the anti-vacuity arm below keeps measuring the detector
  * rather than the filters. That is the property that stops a threshold from ever
  * being tuned into hiding a corpus that stopped observing.
@@ -249,6 +251,28 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       + ' narrowed by M6 and M8/M9 alone, whose rows still include the browser-surface and'
       + ' language-surface reads the declared M11 and M12 post-filters explain')
       .toBe(BASELINE_SCHEMA);
+    expect(assertExplainedWriterRowTags(baseline)).toBe(baseline);
+    const persistedTags = Object.entries(baseline.rowTags).flatMap(([file, row]) => (
+      Object.keys(row).map((identity) => ({
+        file, identity, count: baseline.inventory[file][identity],
+      }))
+    ));
+    expect({
+      reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
+      addresses: persistedTags.length,
+    }).toEqual({ reads: 44, addresses: 31 });
+    expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
+      const matches = persistedTags.filter((row) => row.identity === identity);
+      return [identity, {
+        reads: matches.reduce((sum, row) => sum + row.count, 0),
+        addresses: matches.length,
+      }];
+    }))).toEqual({
+      'factions on locks': { reads: 2, addresses: 2 },
+      'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
+      'stresses on settlement': { reads: 4, addresses: 3 },
+      'worldPulse on campaignState': { reads: 2, addresses: 2 },
+    });
     const rows = Object.entries(baseline.inventory);
     expect(rows.length).toBeGreaterThan(0);
     // Every row is an identity map, never a bare count. This is the pin that
@@ -402,21 +426,18 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
   });
 
   /**
-   * ⭐⭐⭐ ALL FOUR SCHEMA-6 POST-FILTERS ARE NON-VACUOUS ON THE LIVE ESTATE.
+   * ⭐⭐⭐ ALL THREE CLEARING FILTERS AND THE SCHEMA-7 BANK ARE NON-VACUOUS.
    *
    * A filter that clears nothing is indistinguishable from a filter that is not
-   * wired in — and the whole of schema 6 is the claim that these four narrow the
-   * detector's output. So the narrowing is asserted against the REAL tree, in
-   * both directions: the filtered set is strictly smaller than the raw one, the
-   * gap is exactly the four filters' own reported clearings, and each filter's
-   * own founding case is shown present in the raw scan and absent afterwards.
+   * wired in. The three filters narrow the detector; the fourth stage banks its
+   * matches without removing them. Both behaviors are asserted against the tree.
    *
    * ⛔ THE ARITHMETIC LINE IS THE GUARD ON THE HAND-COMPOSED CHAIN ABOVE. If a
    * later mint adds a fifth filter to `run()` and forgets this file, the walker
    * measures a LARGER set than the gate, the sum stops closing, and this reds —
    * which is the only reason a hand-composed chain is tolerable at all.
    */
-  test('the schema-6 post-filters NARROW the live scan, and by exactly what they report', () => {
+  test('A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live', () => {
     expect(live.familyFilter.applied).toBe(true);
     expect(live.domGlobals.applied).toBe(true);
     expect(live.languageSurface.applied).toBe(true);
@@ -424,14 +445,14 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     expect(live.findings.length).toBeLessThan(live.raw.findings.length);
     // The arithmetic closes with nothing left over: raw − each filter = live.
     const clearedTotal = live.familyFilter.cleared + live.domGlobals.cleared
-      + live.languageSurface.cleared + live.explainedWriters.cleared;
+      + live.languageSurface.cleared;
     expect(live.raw.findings.length - clearedTotal).toBe(live.findings.length);
     // Each is independently NON-VACUOUS — a zero here is a filter that is not
     // reaching the estate, which the sum above cannot distinguish from absence.
     expect(live.familyFilter.cleared).toBeGreaterThan(0);
     expect(live.domGlobals.cleared).toBeGreaterThan(0);
     expect(live.languageSurface.cleared).toBeGreaterThan(0);
-    expect(live.explainedWriters.cleared).toBeGreaterThan(0);
+    expect(live.explainedWriters.banked).toBe(44);
 
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
     // the raw half these are "the identity is not in the set", which is also
@@ -445,13 +466,18 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     for (const [filter, identity] of Object.entries(founding)) {
       expect(live.raw.findings.some((f) => identityOf(f) === identity),
         `${identity} is absent from the RAW scan — ${filter}'s control is vacuous`).toBe(true);
-      expect(live.findings.some((f) => identityOf(f) === identity),
-        `${identity} survived ${filter}`).toBe(false);
-      expect(live[filter].clearedIdentities).toContain(identity);
+      const survives = live.findings.some((f) => identityOf(f) === identity);
+      if (filter === 'explainedWriters') {
+        expect(survives, `${identity} was cleared instead of banked`).toBe(true);
+        expect(live[filter].bankedIdentities).toContain(identity);
+      } else {
+        expect(survives, `${identity} survived ${filter}`).toBe(false);
+        expect(live[filter].clearedIdentities).toContain(identity);
+      }
     }
     // The explained-writer set is EXACT, because it is the one filter whose
     // membership is hand-declared rather than derived from a rule.
-    expect([...live.explainedWriters.clearedIdentities].sort()).toEqual([
+    expect([...live.explainedWriters.bankedIdentities].sort()).toEqual([
       'factions on locks',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -472,10 +498,44 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // the measured property that makes the chain ORDER immaterial.
     const claimed = [
       live.familyFilter.clearedIdentities, live.domGlobals.clearedIdentities,
-      live.languageSurface.clearedIdentities, live.explainedWriters.clearedIdentities,
+      live.languageSurface.clearedIdentities, live.explainedWriters.bankedIdentities,
     ].flat();
-    expect(claimed.length, 'two schema-6 filters both claim the same identity')
+    expect(claimed.length, 'two schema-7 filter stages both claim the same identity')
       .toBe(new Set(claimed).size);
+
+    const liveInventory = inventoryOf(live.findings);
+    const taggedAddresses = Object.entries(liveInventory).flatMap(([file, row]) => (
+      Object.entries(row)
+        .filter(([identity]) => EXPLAINED_WRITER_EXEMPTIONS
+          .some((entry) => entry.identity === identity))
+        .map(([identity, count]) => ({ file, identity, count }))
+    ));
+    expect({
+      reads: live.findings.length,
+      identities: Object.values(liveInventory).reduce((sum, row) => sum + Object.keys(row).length, 0),
+      files: Object.keys(liveInventory).length,
+      bankedReads: taggedAddresses.reduce((sum, row) => sum + row.count, 0),
+      taggedRows: taggedAddresses.length,
+    }).toEqual({ reads: 1998, identities: 1412, files: 387, bankedReads: 44, taggedRows: 31 });
+    expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
+      const rows = taggedAddresses.filter((row) => row.identity === identity);
+      return [identity, {
+        reads: rows.reduce((sum, row) => sum + row.count, 0),
+        addresses: rows.length,
+      }];
+    }))).toEqual({
+      'factions on locks': { reads: 2, addresses: 2 },
+      'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
+      'stresses on settlement': { reads: 4, addresses: 3 },
+      'worldPulse on campaignState': { reads: 2, addresses: 2 },
+    });
+
+    // A7 guard mutant: the retired clear-outright behavior loses exactly the
+    // bank and therefore cannot satisfy the live count asserted above.
+    const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
+    const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
+    expect(clearOutright).toHaveLength(live.findings.length - 44);
+    expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
   /**
@@ -589,7 +649,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 49, identities: 123, counts: 185 });
+    expect(cohort).toMatchObject({ files: 51, identities: 130, counts: 195 });
     // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
     // cohort figure could fall for two completely different reasons — the filters
     // clearing more, or the estate genuinely shrinking — and a single number
@@ -781,6 +841,26 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     const overcount = compare(duplicated, frozen);
     expect(overcount.violations).toHaveLength(1);
     expect(overcount.violations[0]).toContain(`frozen ceiling is ${subject.count}`);
+
+    // A2: a SAME-IDENTITY explained-writer read is not exempt from the numeric
+    // ceiling. It is reported structurally and names the exact address/count.
+    const explained = Object.entries(frozen.inventory)
+      .flatMap(([file, row]) => Object.entries(row).map(([id, count]) => ({ file, id, count })))
+      .find(({ id }) => EXPLAINED_WRITER_EXEMPTIONS.some((entry) => entry.identity === id));
+    const taggedOverage = compare([
+      ...live.findings,
+      leafFinding(explained.file, 10_000_003, explained.id.split(' on ')[0], explained.id.split(' on ')[1]),
+    ], frozen);
+    expect(taggedOverage.explainedGrowth).toEqual([{
+      file: explained.file,
+      identity: explained.id,
+      count: explained.count + 1,
+      ceiling: explained.count,
+    }]);
+    expect(taggedOverage.violations[0]).toContain(explained.file);
+    expect(taggedOverage.violations[0]).toContain(explained.id);
+    expect(taggedOverage.violations[0]).toContain(`${explained.count + 1} read(s)`);
+    expect(taggedOverage.violations[0]).toContain(`frozen ceiling is ${explained.count}`);
   });
 
   test('RATCHET FAILURE PATHS: growth, a vanished row, and a collapsed corpus each red', () => {
@@ -801,7 +881,7 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     // (d) a row whose file is gone is fatal, not merely bankable
     expect(compare([], { inventory: { 'src/does/not/exist.js': { [leafIdentity('k', 's')]: 1 } } }).stale)
       .toHaveLength(1);
-    // (e) an unbanked shrink is stale: the schema-4 inventory has no headroom.
+    // (e) an unbanked shrink is stale: the live inventory has no headroom.
     const shrunk = compare([findings[0]], { inventory });
     expect(shrunk.violations).toEqual([]);
     expect(shrunk.stale).toHaveLength(1);
