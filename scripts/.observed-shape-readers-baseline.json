@@ -1,20 +1,22 @@
 {
  "_doc": [
-  "READER-WITH-NO-WRITER INVENTORY — per-file HEURISTIC-LEAF identities, SHRINK-ONLY.",
+  "READER-WITH-NO-WRITER INVENTORY — per-file HEURISTIC-LEAF identities and governed ceilings.",
   "A row is \"<key> on <shape>\": multiplicity, produced by the governed legacy-leaf detector.",
   "Content-addressed per identity: dormant headroom and identity swaps are refused, so a NEW",
   "identity in an already-listed file reds exactly as a new file does, even at constant count.",
   "The line number is excluded so unrelated line churn does not rewrite the governed identity.",
-  "Fixes may only lower or delete rows. Detector changes require a new governed instrument migration.",
+  "Ordinary maintenance may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
+  "Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 6 = the same identity, NON-DOMAIN-SURFACE FILTERED. The byte-frozen detector is unchanged;",
-  "its output is narrowed by FOUR DECLARED post-filters in check-observed-shape-readers.mjs —",
+  "SCHEMA 7 = the same numeric identity, with explained-writer rows BANKED BY RULE.",
+  "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
-  "language-surface residual, and the M8/M9 explained-writer exemption. All four are inside",
+  "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
   "the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.",
-  "A row here therefore means: a guarded read, of a real record rather than of browser or language",
-  "surface, of a key NO writer the corpus runs produces and no declared out-of-corpus writer explains.",
-  "Schema 4 (raw) and schema 5 (M6 + M8/M9 only) are the RETIRED predecessors."
+  "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
+  "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
+  "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
+  "Schemas 4–6 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -23,21 +25,22 @@
   "pulseIntervals": 12,
   "seeds": 4,
   "shapeCount": 1321,
-  "simulationFlagsLit": 73,
+  "simulationFlagsLit": 74,
   "steadingsMinted": 12,
   "transitionCount": 14650
  },
  "digests": {
-  "corpusMeta": "b72880d1bdc277ae987f6c190523aec08d4f71e73b5defdbbc231c99e2e675b0",
-  "inventory": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d",
-  "manifests": "b990763f188a3bcd470e683f63eecb4ac8d457e9446729079d16637ffd0010e7",
-  "migrationReview": "f7d389cff8a558b0cf0d691d86d20f8e310c165dfab887acd02c08be0837ca83",
-  "scanStats": "c2d7df08cde5cb6f357612cdf3e17c848eebaa1abd3463dfff460ee0b5634e45",
+  "corpusMeta": "7516885940ede24fffe5c04bb9feeb09c1705ebdf2c783de288ae2dbf3885b80",
+  "inventory": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
+  "manifests": "f66b657a63f78ca7c45ec478136e40479dcfe868899b055af09b68dffd9be756",
+  "migrationReview": "7566179483f27409f0f0a0b1c608414f2a5a4351cc3f137facee494e41ae7dbf",
+  "rowTags": "0ee11caa3e62debb834b4787f8d1e93360e1d18487d4cf61d40c9692c78d00c5",
+  "scanStats": "979f92ca168f26ddd08398c1c8c412b016d12d4b9785e50ef998f49d923381ff",
   "sentinel": "4ea28074d8414e3b917c7b525a0f6a3dcfdcdd838d8b8b003c4076825e3a2b41"
  },
- "frozen": "2026-08-12",
- "frozenAtSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
- "identities": 1381,
+ "frozen": "2026-08-13",
+ "frozenAtSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+ "identities": 1412,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -46,10 +49,12 @@
    "canonizedAt on campaignState": 1,
    "primaryDeitySnapshot on config": 2,
    "startedAt on campaignState": 1,
+   "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
   },
   "src/components/SettlementsPanel.jsx": {
-   "interSettlementRelationships on settlement": 2
+   "interSettlementRelationships on settlement": 2,
+   "neighbourNetwork on settlement": 2
   },
   "src/components/ShareToGallery.jsx": {
    "primaryDeitySnapshot on config": 1
@@ -130,7 +135,8 @@
   "src/components/map/RelationshipEdges.jsx": {
    "neighbourLinks on save": 1,
    "neighbourLinks on settlement": 1,
-   "neighbourNetwork on save": 1
+   "neighbourNetwork on save": 1,
+   "neighbourNetwork on settlement": 1
   },
   "src/components/map/SettlementPalette.jsx": {
    "tier on save": 1
@@ -204,7 +210,8 @@
    "primaryDeitySnapshot on config": 1
   },
   "src/components/settlement/EventComposer.jsx": {
-   "id on institutions": 3
+   "id on institutions": 3,
+   "stresses on settlement": 2
   },
   "src/components/settlement/NarrativeArchivePanel.jsx": {
    "aiData on save": 2,
@@ -233,6 +240,9 @@
    "primaryDeityRef on config": 1,
    "primaryDeitySnapshot on config": 3
   },
+  "src/components/settlement/eventComposer/EventComposerLinkNeighbourField.jsx": {
+   "neighbourNetwork on settlement": 1
+  },
   "src/components/settlement/eventComposer/buildEvent.js": {
    "id on institutions": 1
   },
@@ -251,7 +261,8 @@
    "timestamp on save": 2
   },
   "src/components/settlements/libraryDeleteHandlers.js": {
-   "interSettlementRelationships on settlement": 1
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 1
   },
   "src/components/settlements/livingWorldSignals.js": {
    "primaryDeitySnapshot on config": 1
@@ -259,6 +270,9 @@
   "src/components/surveyor/InterpretApplyPanel.jsx": {
    "editedAt on campaignState": 1,
    "timestamp on save": 1
+  },
+  "src/components/townMap/edgeAnnotations.js": {
+   "neighbourNetwork on settlement": 2
   },
   "src/data/npcTraitWeights.js": {
    "acquiredTraits on npcs": 1
@@ -304,7 +318,8 @@
   },
   "src/domain/canonicalAccessors.js": {
    "exports on economicState": 3,
-   "imports on economicState": 2
+   "imports on economicState": 2,
+   "stresses on settlement": 1
   },
   "src/domain/capacityModel.js": {
    "id on chains": 3,
@@ -341,7 +356,8 @@
   },
   "src/domain/content/contentSampleCategoryFixtures.js": {
    "primaryDeityRef on config": 1,
-   "primaryDeitySnapshot on config": 1
+   "primaryDeitySnapshot on config": 1,
+   "stresses on settlement": 1
   },
   "src/domain/content/customContentUsage.js": {
    "availableServices on save": 1,
@@ -604,6 +620,7 @@
    "name on goal": 1,
    "name on raw": 2,
    "neighbourName on raw": 1,
+   "neighbourNetwork on settlement": 1,
    "primaryDeity on settlement": 2,
    "primaryDeitySnapshot on config": 3,
    "text on goal": 1
@@ -618,6 +635,7 @@
    "cultDeitySnapshots on config": 2,
    "id on factions": 3,
    "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
    "primaryDeitySnapshot on config": 1,
    "resources on settlement": 1
   },
@@ -629,6 +647,7 @@
    "id on factions": 1,
    "id on institutions": 1,
    "name on economicState": 1,
+   "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
   },
   "src/domain/events/drainQueuedEvents.js": {
@@ -648,6 +667,9 @@
   "src/domain/events/mutateHelpers.js": {
    "__mutationVeto on settlement": 1
   },
+  "src/domain/events/mutateUserRoute.js": {
+   "neighbourNetwork on settlement": 2
+  },
   "src/domain/events/mutateWorld.js": {
    "_cutRoutes on config": 2,
    "_raidHistory on config": 2,
@@ -666,6 +688,7 @@
   },
   "src/domain/events/targetRosters.js": {
    "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
   },
   "src/domain/events/undoEvent.js": {
@@ -675,7 +698,8 @@
    "createdByEventId on institutions": 1,
    "createdByEventId on npcs": 1,
    "destroyedByEventId on settlement": 1,
-   "eventId on causes": 2
+   "eventId on causes": 2,
+   "neighbourNetwork on settlement": 3
   },
   "src/domain/explanation.js": {
    "condition on raw": 3,
@@ -752,6 +776,7 @@
    "faithProfile on config": 1
   },
   "src/domain/locksPreservation.js": {
+   "factions on locks": 1,
    "geography on locks": 1,
    "history on locks": 1,
    "identity on locks": 1,
@@ -778,6 +803,9 @@
    "road on config": 1,
    "roadAccess on config": 1,
    "trade_connectivity on scores": 2
+  },
+  "src/domain/normalizeSettlement.js": {
+   "neighbourNetwork on settlement": 1
   },
   "src/domain/npc/npcOps.js": {
    "long on civic": 1,
@@ -837,13 +865,18 @@
   },
   "src/domain/regionalGraph.js": {
    "neighborNetwork on settlement": 2,
+   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2
   },
   "src/domain/relationships/canonicalRelationship.js": {
    "tier on save": 1
   },
+  "src/domain/relationships/effectiveNeighbours.js": {
+   "neighbourNetwork on settlement": 1
+  },
   "src/domain/relationships/neighbourBackLink.js": {
-   "interSettlementRelationships on settlement": 1
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 1
   },
   "src/domain/resolveTerrain.js": {
    "geography on settlement": 1,
@@ -856,6 +889,9 @@
   },
   "src/domain/roads/thirdPartyRansom.js": {
    "archetype on factions": 1
+  },
+  "src/domain/roads/userRoutes.js": {
+   "neighbourNetwork on settlement": 2
   },
   "src/domain/roles/roleCatalog.js": {
    "id on institutions": 1
@@ -889,6 +925,7 @@
   },
   "src/domain/state/deriveSystemState.js": {
    "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
    "safetyProfile on settlement": 1
   },
   "src/domain/stressorPicker.js": {
@@ -916,6 +953,7 @@
    "id on raw": 3,
    "label on raw": 2,
    "name on raw": 2,
+   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2,
    "severity on raw": 2,
    "source on raw": 1,
@@ -993,6 +1031,7 @@
   "src/domain/townScene/sceneSemantics.js": {
    "neighborNetwork on settlement": 2,
    "neighbors on settlement": 2,
+   "neighbourNetwork on settlement": 2,
    "neighbours on settlement": 2
   },
   "src/domain/traditions/genesis.js": {
@@ -1104,6 +1143,7 @@
   },
   "src/domain/worldPulse/coup.js": {
    "economic_capacity on scores": 1,
+   "factions on locks": 1,
    "ruling_authority on scores": 1
   },
   "src/domain/worldPulse/decisionTier.js": {
@@ -1809,6 +1849,7 @@
    "primaryDeitySnapshot on config": 1
   },
   "src/lib/generationTelemetry.js": {
+   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1
   },
   "src/lib/importReconciliationAdmission.js": {
@@ -1846,7 +1887,8 @@
    "_seed on config": 1
   },
   "src/lib/saves.js": {
-   "_seed on config": 1
+   "_seed on config": 1,
+   "neighbourNetwork on settlement": 2
   },
   "src/lib/shareImage.js": {
    "governmentType on powerStructure": 1
@@ -1870,6 +1912,7 @@
    "importedNeighbour on config": 1,
    "institutionToggles on config": 1,
    "nearbyResourcesRandom on config": 2,
+   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1,
    "selectedStresses on config": 2,
    "selectedStressesRandom on config": 1,
@@ -1937,6 +1980,7 @@
    "modifiers on factions": 1,
    "motivation on npcs": 1,
    "nearbyResources on resourceAnalysis": 1,
+   "neighbourNetwork on settlement": 1,
    "neighbours on settlement": 1,
    "npcRelationships on settlement": 2,
    "origin on founding": 2,
@@ -2103,6 +2147,7 @@
   },
   "src/store/aiChronicleContext.js": {
    "canonizedAt on campaignState": 1,
+   "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
   },
   "src/store/campaignCanonRelationshipSession.js": {
@@ -2175,7 +2220,8 @@
   },
   "src/utils/generateCampaignPDF.js": {
    "culture on settlement": 2,
-   "interSettlementRelationships on settlement": 1
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 3
   },
   "src/utils/generateWorldBook.js": {
    "arrivalScene on history": 1,
@@ -2186,7 +2232,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
+   "digest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
    "entries": [
     {
      "mode": "100644",
@@ -2198,15 +2244,15 @@
     {
      "mode": "100644",
      "path": "package.json",
-     "sha256": "13b91553ae6713900daa1cd640277c585d6eb59f1d7b4f4f4b14eab7773e684f",
-     "size": 7533,
+     "sha256": "58512ddafb08256ceed2700a39ae65b400a3cc055bbe4944e36fa582a563818f",
+     "size": 7541,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "c4e2698c4eaff9b5fdada81d2826f32077881fe85cdafb12be00c7a6b9b5b69c",
-     "size": 112115,
+     "sha256": "1dbae889637f1afafc50ff69c4e38681341363f066c5598043a8bb0809f8e260",
+     "size": 119237,
      "type": "file"
     },
     {
@@ -2226,8 +2272,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "b0bd7cfe3fc5377ed2a542353c06e53d2ca558148eca77d85543c841fe01790b",
-     "size": 36090,
+     "sha256": "062f562a9bd13aaf1cba81b770cffc64b189e0b851a2f9b4580363ee8f3c9603",
+     "size": 38290,
      "type": "file"
     },
     {
@@ -2254,8 +2300,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "cd25582bf8e8e23e22b6fa9d18f47ae19bb7511649b169edcd4f96f70ac96fcb",
-     "size": 57538,
+     "sha256": "ed79af5cce3b0094315e3d20332a6073d584da30ff4582c371768c7a5f5e99d5",
+     "size": 66390,
      "type": "file"
     },
     {
@@ -2269,7 +2315,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
+   "digest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
    "entries": [
     {
      "mode": "100644",
@@ -2281,15 +2327,15 @@
     {
      "mode": "100644",
      "path": "package.json",
-     "sha256": "13b91553ae6713900daa1cd640277c585d6eb59f1d7b4f4f4b14eab7773e684f",
-     "size": 7533,
+     "sha256": "58512ddafb08256ceed2700a39ae65b400a3cc055bbe4944e36fa582a563818f",
+     "size": 7541,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "c4e2698c4eaff9b5fdada81d2826f32077881fe85cdafb12be00c7a6b9b5b69c",
-     "size": 112115,
+     "sha256": "1dbae889637f1afafc50ff69c4e38681341363f066c5598043a8bb0809f8e260",
+     "size": 119237,
      "type": "file"
     },
     {
@@ -2309,8 +2355,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "b0bd7cfe3fc5377ed2a542353c06e53d2ca558148eca77d85543c841fe01790b",
-     "size": 36090,
+     "sha256": "062f562a9bd13aaf1cba81b770cffc64b189e0b851a2f9b4580363ee8f3c9603",
+     "size": 38290,
      "type": "file"
     },
     {
@@ -2337,8 +2383,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "cd25582bf8e8e23e22b6fa9d18f47ae19bb7511649b169edcd4f96f70ac96fcb",
-     "size": 57538,
+     "sha256": "ed79af5cce3b0094315e3d20332a6073d584da30ff4582c371768c7a5f5e99d5",
+     "size": 66390,
      "type": "file"
     },
     {
@@ -2666,8 +2712,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
-     "size": 64377,
+     "sha256": "044909c17ecd52d0eb34b70fe080cb97179ba070c0d6f20409c366ef9bd4bf10",
+     "size": 64585,
      "type": "file"
     },
     {
@@ -3569,8 +3615,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
-     "size": 10554,
+     "sha256": "a0e4bb1867cce2a4820ca406c802e9febc42dce516b1fd5aecf33144435a6d5e",
+     "size": 10706,
      "type": "file"
     },
     {
@@ -4745,8 +4791,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TreatyPanel.jsx",
-     "sha256": "e735806e09658c0be3a38b5ac262061fcbc49e57bec38ec7a703015269158da2",
-     "size": 8928,
+     "sha256": "8c2f19fb60011e3fbf7b9f4e73412f120948edf45dc223ca3aa27e9ff4a25b17",
+     "size": 9273,
      "type": "file"
     },
     {
@@ -5221,8 +5267,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "f003d4b28f7e8af2631bbca5f57397c8dfba43abef483625aacd961c832e3cd5",
-     "size": 16313,
+     "sha256": "6e012fb96bbf00b2474e97997ec21d93e0c6446a4d9f58c717e4ec527f7fb5c0",
+     "size": 19207,
      "type": "file"
     },
     {
@@ -6369,8 +6415,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/MapTabShell.jsx",
-     "sha256": "79897cb4fff4a9c0a40ae1e59fb9fdc16d6bcf3d7dab866d1b9aea3371778958",
-     "size": 9483,
+     "sha256": "de782b9dd29cfb9d91aaaaeba6cb9178733decf8333bb3af991fd0294f0c1c10",
+     "size": 10337,
      "type": "file"
     },
     {
@@ -6453,8 +6499,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/SettlementMapNotes.jsx",
-     "sha256": "29870bdfba5ac719ba3a3a010804031881ab00f69eb7c572f696b463bced03c2",
-     "size": 11858,
+     "sha256": "341282f01f1694356f6d5a09dc2da3fa5f94be9346e58bee6a6df2e3c4a47662",
+     "size": 12905,
      "type": "file"
     },
     {
@@ -6488,8 +6534,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
-     "size": 7884,
+     "sha256": "14930138df1742942eafc7670a27a7f78c294c3cd2e89c6372f2d5afdc98632d",
+     "size": 9531,
      "type": "file"
     },
     {
@@ -6655,9 +6701,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx",
+     "sha256": "451d5952e0b611e02145c6f175d92c9604c5a82545e2ee4ce1afb045fd13de8a",
+     "size": 7603,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/townMap/subtabs/MapPlayerSubTab.jsx",
      "sha256": "9110d11d0e3c443226649cf1ea36dfcaff3d429106184a6e99f0efbcf4099b6b",
      "size": 6303,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/townMap/subtabs/cartographyColours.js",
+     "sha256": "ab1ee6aed2b4f3c21de71ae3ba6d4b40f2f0be91bec2d4597ad5dd7c1041af35",
+     "size": 10254,
      "type": "file"
     },
     {
@@ -7202,8 +7262,8 @@
     {
      "mode": "100644",
      "path": "src/design/boundBook.js",
-     "sha256": "7c9814be8b4aff90b4ec2a9c9cbf49aa346f006ca31df38aad91bb7dd1057458",
-     "size": 7067,
+     "sha256": "9b1fe357c6676d05636914256b0306e785e24ae47cebb0d9ce29d16f3dc758f8",
+     "size": 7201,
      "type": "file"
     },
     {
@@ -7615,22 +7675,22 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
-     "size": 6646,
+     "sha256": "ffe9f73b1ec6e7d494770634610aa788278742d26f15d9de22adc2b08b05ec36",
+     "size": 7087,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
-     "size": 34382,
+     "sha256": "dfebb4f8b6eac2077931bba3709c91f641d7e5ba68392f8994ae9230f7fd0943",
+     "size": 38033,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "e9fc570f22185fde401d958e2676ea7383e81f5479de9bf46bc21acba8a799e4",
-     "size": 13538,
+     "sha256": "c17c85bf771bea394d696e659d21e535fcfd36dca16d3fb8a31ede97167609c0",
+     "size": 15628,
      "type": "file"
     },
     {
@@ -7720,8 +7780,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "ca37ff7c3744383c04961a871270be967ec8f11b97eaf0da7fec60bafd5d1fec",
-     "size": 105181,
+     "sha256": "ff34962a94bc1ac61953aa44033f6fb138e5876d9d0086277f52548dd1144b3d",
+     "size": 112967,
      "type": "file"
     },
     {
@@ -8371,8 +8431,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/chroniclersLetter.js",
-     "sha256": "44f6cd0f181e4196616e6ec1d320332068a6808e02e7da05f148637b13466770",
-     "size": 21288,
+     "sha256": "4fcf5340580e90e00089447ddc91955402665f56b9f510dae35693b531d82bc9",
+     "size": 21587,
      "type": "file"
     },
     {
@@ -8580,6 +8640,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/neighbourMirror.js",
+     "sha256": "af31018ffb8089237535f86e6da793ae726a00613bf4696ad07caf6ef6b33a0f",
+     "size": 8726,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/newsBody.js",
      "sha256": "b52ad597e0763a13a67c0f07bd832fdbb7c6de91f17cf03ab3367873f1d9d3b2",
      "size": 11138,
@@ -8721,8 +8788,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "2b1d0098fd3787c9021fb359ead4efc23eda65be3d6cc998fce19e6bf2d3619e",
-     "size": 46640,
+     "sha256": "05cbca1c8840043e50f0612cae333a9c37a59d46579671cfd902a452e6be2eab",
+     "size": 46717,
      "type": "file"
     },
     {
@@ -9519,8 +9586,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
-     "size": 38875,
+     "sha256": "f318d2f67e50b0983dd89d834d01210a85803576d9f558786830b63b23a36421",
+     "size": 39383,
      "type": "file"
     },
     {
@@ -11605,8 +11672,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyDiplomacy.js",
-     "sha256": "3ac810c5eb8dbf5d9d84f7b078edb61b40d3f0c944a80ea7dd3e29c78437aa8b",
-     "size": 38277,
+     "sha256": "a3a032413c1a9852aba7398e16d4405d17775ecb9657853f5f752ea8f67ebf05",
+     "size": 38884,
      "type": "file"
     },
     {
@@ -11619,8 +11686,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrand.js",
-     "sha256": "ea5711aa36cf25cb09f61252c4a52eb0ab091bca6e25b3188f87a7b6ddb4638f",
-     "size": 39688,
+     "sha256": "ca4e9a86413e37e9cc4b6f5098d8e0f832c632e3819a05e255bfee79c4a38033",
+     "size": 40199,
      "type": "file"
     },
     {
@@ -11828,6 +11895,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageRider.js",
+     "sha256": "539232a70ec967747865a537f7a3c67515c7dc9613aeae92ba3ba897227d2215",
+     "size": 9099,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageTap.js",
      "sha256": "5b508e46ef0aa6adac005bdd21026ff5ec582bbdefbfe28283d99d37ac892a3d",
      "size": 14556,
@@ -11948,15 +12022,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarNews.js",
-     "sha256": "cbe0422f7f569e6be6946b37e37628360c7a47021472c64ad3e9ac4813fc175f",
-     "size": 11564,
+     "sha256": "fcc8f0c0fa6fd072ad1b6269c2bad94a630f4f8cfe4b11d730e9314b541fcf08",
+     "size": 12623,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarReceiptPools.js",
-     "sha256": "f4831ced0c4215f9814ed7a245246494ca4ed4bb3096f4846e99b9de48326dc2",
-     "size": 9940,
+     "sha256": "0dc5a834b631a8240d7f19fd205ff721e272f62abb2b36830d9462991607a0e1",
+     "size": 11405,
      "type": "file"
     },
     {
@@ -12494,8 +12568,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "e1a24983056ac3b48ec237785bc179873069f94a29c29c4ff9a2e27feceee0e8",
-     "size": 16678,
+     "sha256": "bc53b31997239ad089cf21f39a351c89d3b4b15a3e0e756cf75fa2c64c1fbd55",
+     "size": 17041,
      "type": "file"
     },
     {
@@ -12557,8 +12631,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTerms.js",
-     "sha256": "2b685f0296dd52dcf063cc53c141224f139f1ecad893393f4787b276b9b261a2",
-     "size": 66331,
+     "sha256": "3ba30d63f14bfcf1235d6ba5c681b1d7d4144d5d5d2b0598a42b309551508dfd",
+     "size": 68174,
      "type": "file"
     },
     {
@@ -13060,6 +13134,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/secondOrderBelief.js",
+     "sha256": "e2e6599c41dd8efd99da39973bf47299121ddaf8d53d39807df31012b9d95178",
+     "size": 14167,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/secrecyTradeFactor.js",
      "sha256": "f2c2d32b24799369656d763bcd0315871d737e442b8e4717207995fe956b235b",
      "size": 12476,
@@ -13117,8 +13198,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "a4fb44b21a11cfd76ddf6c268e4e319e38dfbd5df79cfc57f9d1fec65eeac964",
-     "size": 57616,
+     "sha256": "16f2dc7b6383df8356c34b4a84086cc385533f14a456f0c0d938fb88469f45b3",
+     "size": 58500,
      "type": "file"
     },
     {
@@ -13355,8 +13436,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyBreach.js",
-     "sha256": "4339f5cb42b1e5df0b9bfe6ea3f36e680326c791c07cd25e102556b22f0bb25b",
-     "size": 7693,
+     "sha256": "928a91f3241f2dcdfbcf996ce37346ac323dd1a382d74052f5890607d7f91f30",
+     "size": 16195,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachCredibility.js",
+     "sha256": "3ed73a9adfbf000e578fd98895fa8b67aaabb2b1afb5d7007d7abc18af333712",
+     "size": 5356,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachTypes.js",
+     "sha256": "0f76660bfb6c3a32fee7ff9aab3a2b55b8fb8d1a5b85ce473a1df56f8c7425a1",
+     "size": 4014,
      "type": "file"
     },
     {
@@ -13369,8 +13464,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyDisposition.js",
-     "sha256": "3c67728bcecc40fc15b2346daf4f45072a7117c6a419561bebd06f4483735cc0",
-     "size": 5231,
+     "sha256": "bd5682ddf3d4a39b626cc2d175d0c14bc3659406fe4d9e09d48f02acc693ee20",
+     "size": 5525,
      "type": "file"
     },
     {
@@ -13392,6 +13487,20 @@
      "path": "src/domain/worldPulse/treatyOrientation.js",
      "sha256": "5d48a8b434a78739ce5954468f2446cd0d4f4be034d44d18978781016b58567e",
      "size": 12183,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccession.js",
+     "sha256": "d4e30e8349b56ada7844af46a5167f03e496f517930dc281dc861eeee2ef3615",
+     "size": 15514,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccessionVoice.js",
+     "sha256": "1cf685802bedb8128adc57b37d84c1332922f15585bf56e0624321f4320649ff",
+     "size": 12075,
      "type": "file"
     },
     {
@@ -15574,8 +15683,8 @@
     {
      "mode": "100644",
      "path": "src/lib/mapSubTabs.js",
-     "sha256": "55828fa54c9e26bba190bfdcad4c4f1760410b6739530df8a9d3c3277ac13c1f",
-     "size": 7893,
+     "sha256": "ec6f2f7d6bc01b2a902700c3add61ba27555c206fd4df3d98ca244eb804f18dc",
+     "size": 9617,
      "type": "file"
     },
     {
@@ -17080,7 +17189,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
+   "digest": "bc752b5bf9c957570831badc37bc1e398b0105cc885ace0f2d89800446075df5",
    "entries": [
     {
      "mode": "100644",
@@ -17407,8 +17516,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
-     "size": 64377,
+     "sha256": "044909c17ecd52d0eb34b70fe080cb97179ba070c0d6f20409c366ef9bd4bf10",
+     "size": 64585,
      "type": "file"
     },
     {
@@ -18310,8 +18419,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
-     "size": 10554,
+     "sha256": "a0e4bb1867cce2a4820ca406c802e9febc42dce516b1fd5aecf33144435a6d5e",
+     "size": 10706,
      "type": "file"
     },
     {
@@ -19486,8 +19595,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TreatyPanel.jsx",
-     "sha256": "e735806e09658c0be3a38b5ac262061fcbc49e57bec38ec7a703015269158da2",
-     "size": 8928,
+     "sha256": "8c2f19fb60011e3fbf7b9f4e73412f120948edf45dc223ca3aa27e9ff4a25b17",
+     "size": 9273,
      "type": "file"
     },
     {
@@ -19962,8 +20071,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "f003d4b28f7e8af2631bbca5f57397c8dfba43abef483625aacd961c832e3cd5",
-     "size": 16313,
+     "sha256": "6e012fb96bbf00b2474e97997ec21d93e0c6446a4d9f58c717e4ec527f7fb5c0",
+     "size": 19207,
      "type": "file"
     },
     {
@@ -21110,8 +21219,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/MapTabShell.jsx",
-     "sha256": "79897cb4fff4a9c0a40ae1e59fb9fdc16d6bcf3d7dab866d1b9aea3371778958",
-     "size": 9483,
+     "sha256": "de782b9dd29cfb9d91aaaaeba6cb9178733decf8333bb3af991fd0294f0c1c10",
+     "size": 10337,
      "type": "file"
     },
     {
@@ -21194,8 +21303,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/SettlementMapNotes.jsx",
-     "sha256": "29870bdfba5ac719ba3a3a010804031881ab00f69eb7c572f696b463bced03c2",
-     "size": 11858,
+     "sha256": "341282f01f1694356f6d5a09dc2da3fa5f94be9346e58bee6a6df2e3c4a47662",
+     "size": 12905,
      "type": "file"
     },
     {
@@ -21229,8 +21338,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
-     "size": 7884,
+     "sha256": "14930138df1742942eafc7670a27a7f78c294c3cd2e89c6372f2d5afdc98632d",
+     "size": 9531,
      "type": "file"
     },
     {
@@ -21396,9 +21505,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx",
+     "sha256": "451d5952e0b611e02145c6f175d92c9604c5a82545e2ee4ce1afb045fd13de8a",
+     "size": 7603,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/townMap/subtabs/MapPlayerSubTab.jsx",
      "sha256": "9110d11d0e3c443226649cf1ea36dfcaff3d429106184a6e99f0efbcf4099b6b",
      "size": 6303,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/townMap/subtabs/cartographyColours.js",
+     "sha256": "ab1ee6aed2b4f3c21de71ae3ba6d4b40f2f0be91bec2d4597ad5dd7c1041af35",
+     "size": 10254,
      "type": "file"
     },
     {
@@ -21880,8 +22003,8 @@
     {
      "mode": "100644",
      "path": "src/design/boundBook.js",
-     "sha256": "7c9814be8b4aff90b4ec2a9c9cbf49aa346f006ca31df38aad91bb7dd1057458",
-     "size": 7067,
+     "sha256": "9b1fe357c6676d05636914256b0306e785e24ae47cebb0d9ce29d16f3dc758f8",
+     "size": 7201,
      "type": "file"
     },
     {
@@ -22293,22 +22416,22 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
-     "size": 6646,
+     "sha256": "ffe9f73b1ec6e7d494770634610aa788278742d26f15d9de22adc2b08b05ec36",
+     "size": 7087,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
-     "size": 34382,
+     "sha256": "dfebb4f8b6eac2077931bba3709c91f641d7e5ba68392f8994ae9230f7fd0943",
+     "size": 38033,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "e9fc570f22185fde401d958e2676ea7383e81f5479de9bf46bc21acba8a799e4",
-     "size": 13538,
+     "sha256": "c17c85bf771bea394d696e659d21e535fcfd36dca16d3fb8a31ede97167609c0",
+     "size": 15628,
      "type": "file"
     },
     {
@@ -22398,8 +22521,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "ca37ff7c3744383c04961a871270be967ec8f11b97eaf0da7fec60bafd5d1fec",
-     "size": 105181,
+     "sha256": "ff34962a94bc1ac61953aa44033f6fb138e5876d9d0086277f52548dd1144b3d",
+     "size": 112967,
      "type": "file"
     },
     {
@@ -23021,8 +23144,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/chroniclersLetter.js",
-     "sha256": "44f6cd0f181e4196616e6ec1d320332068a6808e02e7da05f148637b13466770",
-     "size": 21288,
+     "sha256": "4fcf5340580e90e00089447ddc91955402665f56b9f510dae35693b531d82bc9",
+     "size": 21587,
      "type": "file"
     },
     {
@@ -23230,6 +23353,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/neighbourMirror.js",
+     "sha256": "af31018ffb8089237535f86e6da793ae726a00613bf4696ad07caf6ef6b33a0f",
+     "size": 8726,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/newsBody.js",
      "sha256": "b52ad597e0763a13a67c0f07bd832fdbb7c6de91f17cf03ab3367873f1d9d3b2",
      "size": 11138,
@@ -23371,8 +23501,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "2b1d0098fd3787c9021fb359ead4efc23eda65be3d6cc998fce19e6bf2d3619e",
-     "size": 46640,
+     "sha256": "05cbca1c8840043e50f0612cae333a9c37a59d46579671cfd902a452e6be2eab",
+     "size": 46717,
      "type": "file"
     },
     {
@@ -24169,8 +24299,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
-     "size": 38875,
+     "sha256": "f318d2f67e50b0983dd89d834d01210a85803576d9f558786830b63b23a36421",
+     "size": 39383,
      "type": "file"
     },
     {
@@ -26255,8 +26385,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyDiplomacy.js",
-     "sha256": "3ac810c5eb8dbf5d9d84f7b078edb61b40d3f0c944a80ea7dd3e29c78437aa8b",
-     "size": 38277,
+     "sha256": "a3a032413c1a9852aba7398e16d4405d17775ecb9657853f5f752ea8f67ebf05",
+     "size": 38884,
      "type": "file"
     },
     {
@@ -26269,8 +26399,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrand.js",
-     "sha256": "ea5711aa36cf25cb09f61252c4a52eb0ab091bca6e25b3188f87a7b6ddb4638f",
-     "size": 39688,
+     "sha256": "ca4e9a86413e37e9cc4b6f5098d8e0f832c632e3819a05e255bfee79c4a38033",
+     "size": 40199,
      "type": "file"
     },
     {
@@ -26478,6 +26608,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageRider.js",
+     "sha256": "539232a70ec967747865a537f7a3c67515c7dc9613aeae92ba3ba897227d2215",
+     "size": 9099,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageTap.js",
      "sha256": "5b508e46ef0aa6adac005bdd21026ff5ec582bbdefbfe28283d99d37ac892a3d",
      "size": 14556,
@@ -26598,15 +26735,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarNews.js",
-     "sha256": "cbe0422f7f569e6be6946b37e37628360c7a47021472c64ad3e9ac4813fc175f",
-     "size": 11564,
+     "sha256": "fcc8f0c0fa6fd072ad1b6269c2bad94a630f4f8cfe4b11d730e9314b541fcf08",
+     "size": 12623,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarReceiptPools.js",
-     "sha256": "f4831ced0c4215f9814ed7a245246494ca4ed4bb3096f4846e99b9de48326dc2",
-     "size": 9940,
+     "sha256": "0dc5a834b631a8240d7f19fd205ff721e272f62abb2b36830d9462991607a0e1",
+     "size": 11405,
      "type": "file"
     },
     {
@@ -27144,8 +27281,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "e1a24983056ac3b48ec237785bc179873069f94a29c29c4ff9a2e27feceee0e8",
-     "size": 16678,
+     "sha256": "bc53b31997239ad089cf21f39a351c89d3b4b15a3e0e756cf75fa2c64c1fbd55",
+     "size": 17041,
      "type": "file"
     },
     {
@@ -27207,8 +27344,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTerms.js",
-     "sha256": "2b685f0296dd52dcf063cc53c141224f139f1ecad893393f4787b276b9b261a2",
-     "size": 66331,
+     "sha256": "3ba30d63f14bfcf1235d6ba5c681b1d7d4144d5d5d2b0598a42b309551508dfd",
+     "size": 68174,
      "type": "file"
     },
     {
@@ -27710,6 +27847,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/secondOrderBelief.js",
+     "sha256": "e2e6599c41dd8efd99da39973bf47299121ddaf8d53d39807df31012b9d95178",
+     "size": 14167,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/secrecyTradeFactor.js",
      "sha256": "f2c2d32b24799369656d763bcd0315871d737e442b8e4717207995fe956b235b",
      "size": 12476,
@@ -27767,8 +27911,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "a4fb44b21a11cfd76ddf6c268e4e319e38dfbd5df79cfc57f9d1fec65eeac964",
-     "size": 57616,
+     "sha256": "16f2dc7b6383df8356c34b4a84086cc385533f14a456f0c0d938fb88469f45b3",
+     "size": 58500,
      "type": "file"
     },
     {
@@ -28005,8 +28149,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyBreach.js",
-     "sha256": "4339f5cb42b1e5df0b9bfe6ea3f36e680326c791c07cd25e102556b22f0bb25b",
-     "size": 7693,
+     "sha256": "928a91f3241f2dcdfbcf996ce37346ac323dd1a382d74052f5890607d7f91f30",
+     "size": 16195,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachCredibility.js",
+     "sha256": "3ed73a9adfbf000e578fd98895fa8b67aaabb2b1afb5d7007d7abc18af333712",
+     "size": 5356,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachTypes.js",
+     "sha256": "0f76660bfb6c3a32fee7ff9aab3a2b55b8fb8d1a5b85ce473a1df56f8c7425a1",
+     "size": 4014,
      "type": "file"
     },
     {
@@ -28019,8 +28177,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyDisposition.js",
-     "sha256": "3c67728bcecc40fc15b2346daf4f45072a7117c6a419561bebd06f4483735cc0",
-     "size": 5231,
+     "sha256": "bd5682ddf3d4a39b626cc2d175d0c14bc3659406fe4d9e09d48f02acc693ee20",
+     "size": 5525,
      "type": "file"
     },
     {
@@ -28042,6 +28200,20 @@
      "path": "src/domain/worldPulse/treatyOrientation.js",
      "sha256": "5d48a8b434a78739ce5954468f2446cd0d4f4be034d44d18978781016b58567e",
      "size": 12183,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccession.js",
+     "sha256": "d4e30e8349b56ada7844af46a5167f03e496f517930dc281dc861eeee2ef3615",
+     "size": 15514,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccessionVoice.js",
+     "sha256": "1cf685802bedb8128adc57b37d84c1332922f15585bf56e0624321f4320649ff",
+     "size": 12075,
      "type": "file"
     },
     {
@@ -30224,8 +30396,8 @@
     {
      "mode": "100644",
      "path": "src/lib/mapSubTabs.js",
-     "sha256": "55828fa54c9e26bba190bfdcad4c4f1760410b6739530df8a9d3c3277ac13c1f",
-     "size": 7893,
+     "sha256": "ec6f2f7d6bc01b2a902700c3add61ba27555c206fd4df3d98ca244eb804f18dc",
+     "size": 9617,
      "type": "file"
     },
     {
@@ -31723,7 +31895,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
+   "digest": "c0835dd4f1c0cae4ee601d1034dfcb931f6bbd64d76f6b51e2e476593b584329",
    "entries": [
     {
      "mode": "100644",
@@ -32050,8 +32222,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "f42eea415718dd4895fa94de6685a9e5a4ccd9da4b901d9022f82ba343cf8d31",
-     "size": 64377,
+     "sha256": "044909c17ecd52d0eb34b70fe080cb97179ba070c0d6f20409c366ef9bd4bf10",
+     "size": 64585,
      "type": "file"
     },
     {
@@ -32953,8 +33125,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "18a0ddcf58bbd37a7620b920e27105ebb77aa79b374c4bdaa0bf46b8b2301c7f",
-     "size": 10554,
+     "sha256": "a0e4bb1867cce2a4820ca406c802e9febc42dce516b1fd5aecf33144435a6d5e",
+     "size": 10706,
      "type": "file"
     },
     {
@@ -34129,8 +34301,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/TreatyPanel.jsx",
-     "sha256": "e735806e09658c0be3a38b5ac262061fcbc49e57bec38ec7a703015269158da2",
-     "size": 8928,
+     "sha256": "8c2f19fb60011e3fbf7b9f4e73412f120948edf45dc223ca3aa27e9ff4a25b17",
+     "size": 9273,
      "type": "file"
     },
     {
@@ -34605,8 +34777,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "f003d4b28f7e8af2631bbca5f57397c8dfba43abef483625aacd961c832e3cd5",
-     "size": 16313,
+     "sha256": "6e012fb96bbf00b2474e97997ec21d93e0c6446a4d9f58c717e4ec527f7fb5c0",
+     "size": 19207,
      "type": "file"
     },
     {
@@ -35753,8 +35925,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/MapTabShell.jsx",
-     "sha256": "79897cb4fff4a9c0a40ae1e59fb9fdc16d6bcf3d7dab866d1b9aea3371778958",
-     "size": 9483,
+     "sha256": "de782b9dd29cfb9d91aaaaeba6cb9178733decf8333bb3af991fd0294f0c1c10",
+     "size": 10337,
      "type": "file"
     },
     {
@@ -35837,8 +36009,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/SettlementMapNotes.jsx",
-     "sha256": "29870bdfba5ac719ba3a3a010804031881ab00f69eb7c572f696b463bced03c2",
-     "size": 11858,
+     "sha256": "341282f01f1694356f6d5a09dc2da3fa5f94be9346e58bee6a6df2e3c4a47662",
+     "size": 12905,
      "type": "file"
     },
     {
@@ -35872,8 +36044,8 @@
     {
      "mode": "100644",
      "path": "src/components/townMap/edgeAnnotations.js",
-     "sha256": "4fd253a9e276b8642ecf9b0a4b969aa652e36e2eca3f7eeff924e2cae23089c9",
-     "size": 7884,
+     "sha256": "14930138df1742942eafc7670a27a7f78c294c3cd2e89c6372f2d5afdc98632d",
+     "size": 9531,
      "type": "file"
     },
     {
@@ -36039,9 +36211,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx",
+     "sha256": "451d5952e0b611e02145c6f175d92c9604c5a82545e2ee4ce1afb045fd13de8a",
+     "size": 7603,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/townMap/subtabs/MapPlayerSubTab.jsx",
      "sha256": "9110d11d0e3c443226649cf1ea36dfcaff3d429106184a6e99f0efbcf4099b6b",
      "size": 6303,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/townMap/subtabs/cartographyColours.js",
+     "sha256": "ab1ee6aed2b4f3c21de71ae3ba6d4b40f2f0be91bec2d4597ad5dd7c1041af35",
+     "size": 10254,
      "type": "file"
     },
     {
@@ -36586,8 +36772,8 @@
     {
      "mode": "100644",
      "path": "src/design/boundBook.js",
-     "sha256": "7c9814be8b4aff90b4ec2a9c9cbf49aa346f006ca31df38aad91bb7dd1057458",
-     "size": 7067,
+     "sha256": "9b1fe357c6676d05636914256b0306e785e24ae47cebb0d9ce29d16f3dc758f8",
+     "size": 7201,
      "type": "file"
     },
     {
@@ -36999,22 +37185,22 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "68bc8aa5071cc724188c576c41f94135979d2ce3d0033e82c535fd80122f2e7d",
-     "size": 6646,
+     "sha256": "ffe9f73b1ec6e7d494770634610aa788278742d26f15d9de22adc2b08b05ec36",
+     "size": 7087,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryEspionage.js",
-     "sha256": "34ec18c29dc2dc8c27945dea05fef1be8032ff5fa2fbd1f0bbdeaeefe169f060",
-     "size": 34382,
+     "sha256": "dfebb4f8b6eac2077931bba3709c91f641d7e5ba68392f8994ae9230f7fd0943",
+     "size": 38033,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "e9fc570f22185fde401d958e2676ea7383e81f5479de9bf46bc21acba8a799e4",
-     "size": 13538,
+     "sha256": "c17c85bf771bea394d696e659d21e535fcfd36dca16d3fb8a31ede97167609c0",
+     "size": 15628,
      "type": "file"
     },
     {
@@ -37104,8 +37290,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "ca37ff7c3744383c04961a871270be967ec8f11b97eaf0da7fec60bafd5d1fec",
-     "size": 105181,
+     "sha256": "ff34962a94bc1ac61953aa44033f6fb138e5876d9d0086277f52548dd1144b3d",
+     "size": 112967,
      "type": "file"
     },
     {
@@ -37755,8 +37941,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/chroniclersLetter.js",
-     "sha256": "44f6cd0f181e4196616e6ec1d320332068a6808e02e7da05f148637b13466770",
-     "size": 21288,
+     "sha256": "4fcf5340580e90e00089447ddc91955402665f56b9f510dae35693b531d82bc9",
+     "size": 21587,
      "type": "file"
     },
     {
@@ -37964,6 +38150,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/neighbourMirror.js",
+     "sha256": "af31018ffb8089237535f86e6da793ae726a00613bf4696ad07caf6ef6b33a0f",
+     "size": 8726,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/newsBody.js",
      "sha256": "b52ad597e0763a13a67c0f07bd832fdbb7c6de91f17cf03ab3367873f1d9d3b2",
      "size": 11138,
@@ -38105,8 +38298,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "2b1d0098fd3787c9021fb359ead4efc23eda65be3d6cc998fce19e6bf2d3619e",
-     "size": 46640,
+     "sha256": "05cbca1c8840043e50f0612cae333a9c37a59d46579671cfd902a452e6be2eab",
+     "size": 46717,
      "type": "file"
     },
     {
@@ -38903,8 +39096,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "6373e5843fa3eac36ae022375d3419f3a31f99bf1435257f3819ba0bb7ae1008",
-     "size": 38875,
+     "sha256": "f318d2f67e50b0983dd89d834d01210a85803576d9f558786830b63b23a36421",
+     "size": 39383,
      "type": "file"
     },
     {
@@ -40989,8 +41182,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyDiplomacy.js",
-     "sha256": "3ac810c5eb8dbf5d9d84f7b078edb61b40d3f0c944a80ea7dd3e29c78437aa8b",
-     "size": 38277,
+     "sha256": "a3a032413c1a9852aba7398e16d4405d17775ecb9657853f5f752ea8f67ebf05",
+     "size": 38884,
      "type": "file"
     },
     {
@@ -41003,8 +41196,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrand.js",
-     "sha256": "ea5711aa36cf25cb09f61252c4a52eb0ab091bca6e25b3188f87a7b6ddb4638f",
-     "size": 39688,
+     "sha256": "ca4e9a86413e37e9cc4b6f5098d8e0f832c632e3819a05e255bfee79c4a38033",
+     "size": 40199,
      "type": "file"
     },
     {
@@ -41212,6 +41405,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/espionage/espionageRider.js",
+     "sha256": "539232a70ec967747865a537f7a3c67515c7dc9613aeae92ba3ba897227d2215",
+     "size": 9099,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/espionage/espionageTap.js",
      "sha256": "5b508e46ef0aa6adac005bdd21026ff5ec582bbdefbfe28283d99d37ac892a3d",
      "size": 14556,
@@ -41332,15 +41532,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarNews.js",
-     "sha256": "cbe0422f7f569e6be6946b37e37628360c7a47021472c64ad3e9ac4813fc175f",
-     "size": 11564,
+     "sha256": "fcc8f0c0fa6fd072ad1b6269c2bad94a630f4f8cfe4b11d730e9314b541fcf08",
+     "size": 12623,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/grammarReceiptPools.js",
-     "sha256": "f4831ced0c4215f9814ed7a245246494ca4ed4bb3096f4846e99b9de48326dc2",
-     "size": 9940,
+     "sha256": "0dc5a834b631a8240d7f19fd205ff721e272f62abb2b36830d9462991607a0e1",
+     "size": 11405,
      "type": "file"
     },
     {
@@ -41878,8 +42078,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "e1a24983056ac3b48ec237785bc179873069f94a29c29c4ff9a2e27feceee0e8",
-     "size": 16678,
+     "sha256": "bc53b31997239ad089cf21f39a351c89d3b4b15a3e0e756cf75fa2c64c1fbd55",
+     "size": 17041,
      "type": "file"
     },
     {
@@ -41941,8 +42141,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTerms.js",
-     "sha256": "2b685f0296dd52dcf063cc53c141224f139f1ecad893393f4787b276b9b261a2",
-     "size": 66331,
+     "sha256": "3ba30d63f14bfcf1235d6ba5c681b1d7d4144d5d5d2b0598a42b309551508dfd",
+     "size": 68174,
      "type": "file"
     },
     {
@@ -42444,6 +42644,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/secondOrderBelief.js",
+     "sha256": "e2e6599c41dd8efd99da39973bf47299121ddaf8d53d39807df31012b9d95178",
+     "size": 14167,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/secrecyTradeFactor.js",
      "sha256": "f2c2d32b24799369656d763bcd0315871d737e442b8e4717207995fe956b235b",
      "size": 12476,
@@ -42501,8 +42708,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "a4fb44b21a11cfd76ddf6c268e4e319e38dfbd5df79cfc57f9d1fec65eeac964",
-     "size": 57616,
+     "sha256": "16f2dc7b6383df8356c34b4a84086cc385533f14a456f0c0d938fb88469f45b3",
+     "size": 58500,
      "type": "file"
     },
     {
@@ -42739,8 +42946,22 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyBreach.js",
-     "sha256": "4339f5cb42b1e5df0b9bfe6ea3f36e680326c791c07cd25e102556b22f0bb25b",
-     "size": 7693,
+     "sha256": "928a91f3241f2dcdfbcf996ce37346ac323dd1a382d74052f5890607d7f91f30",
+     "size": 16195,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachCredibility.js",
+     "sha256": "3ed73a9adfbf000e578fd98895fa8b67aaabb2b1afb5d7007d7abc18af333712",
+     "size": 5356,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatyBreachTypes.js",
+     "sha256": "0f76660bfb6c3a32fee7ff9aab3a2b55b8fb8d1a5b85ce473a1df56f8c7425a1",
+     "size": 4014,
      "type": "file"
     },
     {
@@ -42753,8 +42974,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/treatyDisposition.js",
-     "sha256": "3c67728bcecc40fc15b2346daf4f45072a7117c6a419561bebd06f4483735cc0",
-     "size": 5231,
+     "sha256": "bd5682ddf3d4a39b626cc2d175d0c14bc3659406fe4d9e09d48f02acc693ee20",
+     "size": 5525,
      "type": "file"
     },
     {
@@ -42776,6 +42997,20 @@
      "path": "src/domain/worldPulse/treatyOrientation.js",
      "sha256": "5d48a8b434a78739ce5954468f2446cd0d4f4be034d44d18978781016b58567e",
      "size": 12183,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccession.js",
+     "sha256": "d4e30e8349b56ada7844af46a5167f03e496f517930dc281dc861eeee2ef3615",
+     "size": 15514,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/treatySuccessionVoice.js",
+     "sha256": "1cf685802bedb8128adc57b37d84c1332922f15585bf56e0624321f4320649ff",
+     "size": 12075,
      "type": "file"
     },
     {
@@ -44958,8 +45193,8 @@
     {
      "mode": "100644",
      "path": "src/lib/mapSubTabs.js",
-     "sha256": "55828fa54c9e26bba190bfdcad4c4f1760410b6739530df8a9d3c3277ac13c1f",
-     "size": 7893,
+     "sha256": "ec6f2f7d6bc01b2a902700c3add61ba27555c206fd4df3d98ca244eb804f18dc",
+     "size": 9617,
      "type": "file"
     },
     {
@@ -46457,51 +46692,239 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "5e0ab509f4f84c461db56473f0b6ee2105b186f40905e41749e7e4633b524ba0",
-  "corpusDigest": "86fae1a6e032f7cbb6b61474467b2be25f8a0bb306d71d7a60e5e9770b697649",
-  "currentArtifactDigest": "12f5f802fd5d2b7c09ca4cdfad164e9a7e3d36d8130d5303db223b39dd32440a",
-  "currentDetectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
-  "currentFindingsDigest": "6a9f53ce926ac3baf1f06d18b5c6a102dd1830a9756187265d9a81b0e88aeff5",
-  "currentScannerSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
-  "currentScannerToolDigest": "20bd4034ce32f0c853cfca5b69d8f82f51bc1d0879accb7ca6fa5e53d94dbe7c",
-  "detectorTreeDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
-  "executionTreeDigest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
+  "bundleDigest": "0e62d6d5d9492acfb46799027311852389ed0f94177b7ee4dbbd824ac9056344",
+  "corpusDigest": "f778811c1fe4d8098aeb96482f3dd65e56658162b14e786d51c896247ebdee01",
+  "currentArtifactDigest": "6dc7388a552f98ac889e1321eca22ca1dd379be40eea254279e73809c39110d0",
+  "currentDetectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+  "currentFindingsDigest": "140f399a6c7e0935179730b50cdfe38300668a15e91bbbd047beca302f78f9d1",
+  "currentScannerSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+  "currentScannerToolDigest": "a8341dd4d36195c9d567f167dd45c39dfba56ef5b18e6ee1b5159b2493958f75",
+  "detectorTreeDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+  "executionTreeDigest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "12f5f802fd5d2b7c09ca4cdfad164e9a7e3d36d8130d5303db223b39dd32440a",
-  "legacyDetectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
-  "legacyScannerSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
-  "legacyScannerToolDigest": "20bd4034ce32f0c853cfca5b69d8f82f51bc1d0879accb7ca6fa5e53d94dbe7c",
-  "predecessorBaselineDigest": "73bfc46ff8d304b43fd08ec7021a3c0086eb1e4053fd6476e3aa517c20642f99",
-  "predecessorBaselineTextSha256": "1f793128f0dd62a75ce9dbdf4ac74ad1c735689a81a41fe1a5456a0093d6b1ee",
-  "predecessorInventoryDigest": "0d0b018c1d9d7fbe3991fb51ba42301de0fa9cac8a065f324e8ccb7be1c1e6f0",
-  "reportDigest": "7bd7971e501c4e741de7f1c5d5288d0f30b066b7e4c699e8732bfa362777b35d",
-  "reviewDigest": "39305b73fbd6496690a4aef34800f4ff8b7fed41f0773b8b464ade22011d4c54",
+  "legacyArtifactDigest": "6dc7388a552f98ac889e1321eca22ca1dd379be40eea254279e73809c39110d0",
+  "legacyDetectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+  "legacyScannerSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+  "legacyScannerToolDigest": "a8341dd4d36195c9d567f167dd45c39dfba56ef5b18e6ee1b5159b2493958f75",
+  "predecessorBaselineDigest": "0053c6c521b4a5160577250f6b2700a12905090739b35734ea3a49c61456183e",
+  "predecessorBaselineTextSha256": "1c3a0d9216e4055e913e2a41de4638b3fc9eefb2a55d10dac596fb7b72e70054",
+  "predecessorInventoryDigest": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d",
+  "reportDigest": "db757c06ba095613e35bbe5373240d17b6f34b8dfb0be960dae878ec181d7079",
+  "reviewDigest": "62d008827054074adfd2befafbf0848817ac6597fa1f11f493ee0ca7513fd871",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
-  "sourceTreeDigest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
-  "subjectSha": "2fe94f775148eb253ce10800a0617b7ac021910d",
-  "targetInventoryDigest": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d"
+  "scanTreeDigest": "bc752b5bf9c957570831badc37bc1e398b0105cc885ace0f2d89800446075df5",
+  "sourceTreeDigest": "c0835dd4f1c0cae4ee601d1034dfcb931f6bbd64d76f6b51e2e476593b584329",
+  "subjectSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+  "targetInventoryDigest": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f"
  },
  "minRows": 40,
  "originMinRows": 8,
+ "rowTags": {
+  "src/components/OutputContainer.jsx": {
+   "worldPulse on campaignState": {
+    "reason": "CR-OSR-SCHEMA-6 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/SettlementsPanel.jsx": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/map/RelationshipEdges.jsx": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/settlement/EventComposer.jsx": {
+   "stresses on settlement": {
+    "reason": "CR-OSR-SCHEMA-6 / M8 — registered alias",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/settlement/eventComposer/EventComposerLinkNeighbourField.jsx": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/settlements/libraryDeleteHandlers.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/townMap/edgeAnnotations.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/canonicalAccessors.js": {
+   "stresses on settlement": {
+    "reason": "CR-OSR-SCHEMA-6 / M8 — registered alias",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/content/contentSampleCategoryFixtures.js": {
+   "stresses on settlement": {
+    "reason": "CR-OSR-SCHEMA-6 / M8 — registered alias",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/dossier/entityLinks.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/events/affordanceManifest.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/events/batch.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/events/mutateUserRoute.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/events/targetRosters.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/events/undoEvent.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/locksPreservation.js": {
+   "factions on locks": {
+    "reason": "CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/normalizeSettlement.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/regionalGraph.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/relationships/effectiveNeighbours.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/relationships/neighbourBackLink.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/roads/userRoutes.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/state/deriveSystemState.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/threatProfile.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/townScene/sceneSemantics.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/worldPulse/coup.js": {
+   "factions on locks": {
+    "reason": "CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)",
+    "rule": "explained-writer"
+   }
+  },
+  "src/lib/generationTelemetry.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/lib/saves.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/lib/structuralFingerprint.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/pdf/lib/viewModel.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/store/aiChronicleContext.js": {
+   "worldPulse on campaignState": {
+    "reason": "CR-OSR-SCHEMA-6 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/utils/generateCampaignPDF.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  }
+ },
  "scanStats": {
-  "files": 2091,
-  "reads": 120589,
+  "files": 2100,
+  "reads": 120875,
   "resolved": 9230,
-  "unresolved": 111359
+  "unresolved": 111645
  },
  "scannerProvenance": {
-  "detectorDigest": "469e94ef50391ad42d5a71372cc648383fd0020a5604cd2b4c9cd9b0a40c4c18",
-  "executionTreeDigest": "85588d46d27887e972089201049ce4c83def2eba08b4c34d0d3abe935bf89f3e",
-  "scanTreeDigest": "cf8da727c903abe68c9dfcd5d1b57ec555d6bd339aa1163306d1f134dae6efb5",
-  "sourceTreeDigest": "06f389752b9056fd48153c5695f54b85bdfe3c4d54bb6b77e32e6dac0ad32924",
+  "detectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+  "executionTreeDigest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
+  "scanTreeDigest": "bc752b5bf9c957570831badc37bc1e398b0105cc885ace0f2d89800446075df5",
+  "sourceTreeDigest": "c0835dd4f1c0cae4ee601d1034dfcb931f6bbd64d76f6b51e2e476593b584329",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
- "schema": 6,
+ "schema": 7,
  "sentinel": {
   "resolvedReads": 9230,
   "totalKeys": 6584,
   "usableShapes": 338
  },
- "total": 1954
+ "total": 1998
 }
