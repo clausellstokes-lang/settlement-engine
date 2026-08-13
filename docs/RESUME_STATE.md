@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 15:27:05 EDT
+**Generated:** 2026-08-13 16:31:32 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `5a49d187` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `1fec79aa` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `7958cd33` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `5b0cc5fa` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 30Gi free (85% used)
+**Disk:** 29Gi free (86% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T152617` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260813T163037` — build 0 file(s), ledger 2179 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T152617
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T163037
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,9 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+7958cd33 2026-08-13 docs: record GR-4e landing
+c5ef5c19 2026-08-13 fix: consume treaty fractures on next pulse
+3339188b 2026-08-13 docs: promote GR-4e treaty fracture handoff
 5a49d187 2026-08-13 docs: record AO-6 landing
 0facf170 2026-08-13 test: close AO corpus mutation battery
 eff62d6b 2026-08-13 docs: amend AO-6 after immutable sweep stop
@@ -37,19 +40,16 @@ ee6934e9 2026-08-13 AO-5: record prose-family contract landing
 8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
 cb48cc08 2026-08-13 AO-5: admit premortem-union compatibility pin
 92d60657 2026-08-13 AO-5: promote remaining prose-family contracts
-972066af 2026-08-13 AO-4: record headline totality landing
-09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
-4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
 ```
 ## Last 6 ledger commits
 
 ```
+5b0cc5fa 2026-08-13 docs: refresh ledger after AO-6
 1fec79aa 2026-08-13 Record AO-5 prose-family contract landing
 e30401aa 2026-08-13 Record AO-4 headline totality landing
 2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
 e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
 a1578fcc 2026-08-13 Record AO-0 schema-8 landing
-9747d127 2026-08-13 Record GTR and H26 atomic landings
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,64 @@ a1578fcc 2026-08-13 Record AO-0 schema-8 landing
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~15:30 EDT) — AO-6 is terminal; build clean at `5a49d187`
+# ⭐⭐ CURRENT (2026-08-13 ~16:35 EDT) — GR-4e is terminal; build clean at `7958cd33`
+
+**GR-4e IS DONE END-TO-END.** Just-in-time promotion
+`3339188bb13ce46acd2a31e1f293327f64f56879` compiled the fracture-credibility
+dead-window repair from terminal AO-6. Dispatch sealed at
+`b995d8c9a3b41619dcda3a56466892f398b62a7ff62db7a19e6522600b85b3fd`, with
+capsule `a31af4e2ce0eea9f1b22acdceebdd6435db34fb3a197ccf7f114adab68ffbf8a`.
+The exact five-path green implementation is
+`c5ef5c19daac462827e10b466932c284818cf737`; one old-value CAS exposed only
+that direct child. Terminal flip
+`7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1` records the landing. The shared
+index and build worktree are clean.
+
+The implementation changed only the three named product paths and two named test
+paths, **+36/-20** total. `informationStatecraft.js` remains exactly **780/800**
+effective lines. A treaty fracture stamped at tick `T` now contributes its recorded
+credibility charge at the existing information-statecraft fold in `T + 1`, exactly
+once; tick `T`, `T + 2`, genesis, missing, negative, and non-finite stamps remain
+ineligible. No second fold, pulse reorder, writer change, consume marker, persisted
+shape, flag, tuning, golden, registry, baseline, ceiling, hazard, pre-mortem, or
+census path moved. Exactly one existing test title was renamed and none was added
+or deleted.
+
+Both disposable counterforces were caught and restored byte-identically. The old-
+window mutant exited **1** at **64 passed / 3 failed**, including
+`reads the prior-tick fracture record and charges the deserter exactly once`, log
+SHA-256 `1b5356594042b3c7dc9503aae73d05b6e3384bc97baf84b9a182a2eb1c1dd43b`.
+The detached-deriver mutant exited **1** at **66 passed / 1 failed**: the pure
+predecessor case stayed green while
+`a charged fracture debits the deserter's credibility stock` failed, log SHA-256
+`b6208ee2ea2ad74afedfc586be362668a3f707a34dd9b23ab5d48b11a49c43ca`.
+The restored direct battery passed **67/67** (log SHA-256
+`854c3049751801421d4b081c5f06e1565ceb76715e77f48534f82ca5889c42f8`), and
+the direct-plus-dormancy battery passed **100/100** (log SHA-256
+`d10ddf379113c189bf69c520ac8931fff4ab0f02074a3b983e9ab21d8d44ed71`).
+Packet, hazard, pre-mortem, and eslint validation passed; typecheck ratchets held
+**173/173** and **1,134/1,134**; observed-shape validation remained exact at
+**1,998 reads**. Bare `npm run check:tail` exited **0**; strict dist discovered
+**50 files** and passed **403/403**, full-gate log SHA-256
+`d5771a94b64d17630561805e26cae429f9b164e0424dec73e849d6c88216f7a8`.
+A1-A7 passed; deviations and judgment calls: **NONE**.
+
+**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at full HEAD
+`7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1`; `validate:packets` reports
+**32 packets / 0 READY, exit 0**. GTR-1, H26, AO-0, AO-2+3, AO-4, AO-5, AO-6,
+and GR-4e are terminal. The whole census remains
+**2412/365/2047/19984/5638**, its reservation is free, and there is no live
+implementation lane to collect. The universal standing authorization remains
+durable at ledger `1ed18d27`; it does not waive technical READY/STOP, evidence,
+substrate, or ordering law.
+
+**NEXT:** run the live **CR-NEXT-1** census from terminal `7958cd33`; this is the
+next governed act and remains count-only until its evidence permits anything more.
+Do not redispatch GR-4e. No diagnostic-soak worktree has been created, and neither
+D-1 nor L0 has started; the requested terminal remains immediately before the
+first soak.
+
+# (superseded ~16:35) — AO-6 is terminal; build clean at `5a49d187`
 
 **AO-6 IS DONE END-TO-END.** Just-in-time promotion
 `0ff79e6b6c75d77a2396703c07f982615d9f31f9` first produced immutable candidate

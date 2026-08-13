@@ -6,11 +6,14 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `5a49d187`
-- Commits: 3222
+- HEAD: `7958cd33`
+- Commits: 3225
 - Working tree at refresh: 0 dirty entries
 
 ```
+7958cd33 2026-08-13 docs: record GR-4e landing
+c5ef5c19 2026-08-13 fix: consume treaty fractures on next pulse
+3339188b 2026-08-13 docs: promote GR-4e treaty fracture handoff
 5a49d187 2026-08-13 docs: record AO-6 landing
 0facf170 2026-08-13 test: close AO corpus mutation battery
 eff62d6b 2026-08-13 docs: amend AO-6 after immutable sweep stop
@@ -408,7 +411,4 @@ ea5771cc 2026-08-03 Lane FS piece 1: the band stops being corrugated metal — t
 f444cf8b 2026-08-03 Lane WD-7: W8-D's two tails — a capability anyone could spend, and a law that was only true above a line nobody had drawn
 560c9120 2026-08-03 Lane WD-2: the army record and the sack leave the head — 724 → 658 — and THREE REGISTRATION GUARDS ARE REPAIRED, one of which had been red for four commits
 ff7052f0 2026-08-03 Lane WD-5: the refusal aftermath leaves the head, and warDeployment.js CROSSES UNDER ITS CEILING — 846 → 724, baseline entry DELETED
-027992b2 2026-08-03 Lane WD-4: what the war costs the home leaves the head, WITH the two functions that undo it — 1140 → 846
-e69f9d6b 2026-08-03 Lane WD-3: the siege contest becomes a leaf that decides nothing it can also write — 1289 → 1140
-0f436ef4 2026-08-03 Lane MD piece 4b: the re-record — one row of 525, and the one path-template that is the whole of what moved
 ```
