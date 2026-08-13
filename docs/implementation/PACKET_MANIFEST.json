@@ -315,7 +315,7 @@
     },
     {
       "id": "IA-2",
-      "status": "STALE",
+      "status": "SUPERSEDED",
       "packetPath": "docs/implementation/packets/infrastructure/IA-2.md",
       "verifiedBase": "f1895e6004eb512a5c7b4c9b4caaf79604bccea6",
       "changeManifest": [
@@ -1050,7 +1050,7 @@
     },
     {
       "id": "GR-4C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-4C.md",
       "verifiedBase": "0b98626fae7cda5cce55659865d58250f976ce7b",
       "changeManifest": [

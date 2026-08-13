@@ -1,6 +1,7 @@
 # Implementation Acceleration / IA-2 — sealed dispatch and resumable proof
 
-- **Status:** STALE
+- **Status:** SUPERSEDED
+- **Superseded (chair, 2026-08-12, CR-AR-1):** re-statused terminal at the GR-4c flip window. Grounds: eleven commits behind its `f1895e60` base; its CREATE row names machinery that already exists in the tree (the sealed-sessions commit landed after this packet was written); and its former non-terminal state reserved TWELVE paths, seven of which collide with the chartered machinery packet (proved by simulation). Its live content folds into the IA-3 docket when that is chartered. The earlier drift note is kept below verbatim.
 - **Stale (measured, 2026-08-10):** its own dispatcher refused — nine declared substrate
   files changed since the `f1895e60` base (the packet predates the sealed-sessions
   commit and tonight's INDEX/manifest churn). Coordinator revalidation required; fold

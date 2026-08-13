@@ -1,6 +1,7 @@
 # Foreign Policy / GR-4c — the oath that finally costs something
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** at `cd2ab894`, 2026-08-12; flipped by the chair after verification (all seven acceptance cases executed — C5's arithmetic 0.1400 → 0.2781 → 0.3500 saturated, the door closing on the third; C3's both-lit control landing a real −0.14 charge; B13-a 163 → 169 of budget 12; B15 OSR byte-identical, no mint; B16 the title walker unmoved at 485; census re-derived WHOLE 2409/365/2044/19960/5635, credited moved with files, zero parking; the coupling row minted through all THREE registration edits with desk walker and receipt sample UNMOVED; the full 17-step gate GREEN from the committed tree, ratchet 16/16). Do not redispatch. ⚠ Six implementer judgments RATIFIED at collection, including the SECOND exact-list pin §3.9 did not enumerate (`couplingRowsFor('CPL-19','INFO→GRAMMAR')` — same obligation, second home, cured in-manifest) and the measured fence refinement (the oath-lit-only run ENTERS the block and still writes nothing — a strictly stronger fence than §3.5 sketched). ⚠ One pre-existing red proven foreign at base by integrity-counted archive: the pglite TTL-lapse flake (unbanked, ~20–40% per run) — chartered as the named micro-act PG-1, not this packet's.
 - **Packet version:** `1`
 - **Compiled by:** Lane AN (read-only compile lane) 2026-08-12; **promoted by Lane AP** 2026-08-12 with every §15 figure executed — see §15.
 - **Verified base:** `claude/composite-r4` at `0b98626fae7cda5cce55659865d58250f976ce7b`
