@@ -77,8 +77,10 @@
     2026-08-02 under full owner delegation — vetoable; the corpus's "twelve
     requirements" phrases refer to the ratified core above, and waves pick
     13–14 up at build]:** the settlement's alignment is a DERIVED two-axis
-    read — `alignmentOf(id) → { lawfulness01, malice01 }` (beliefMap.js:915,
-    informationStatecraft.js:584) — composed from its people; it is never a
+    read — `settlementAlignment(item, worldState) → { lawfulness01, malice01 }`
+    (`src/domain/worldPulse/settlementAlignment.js`, navigated by symbol; the
+    earlier `alignmentOf(id)` citation named an injected port, and both of its
+    line addresses have rotted) — composed from its people; it is never a
     stored settlement stock and gains NO writer (never-store-a-derivable).
     Every mechanism names its READ engagement — which axes colour it
     (quadrant reads, contraband/conscience gates, the extremity and

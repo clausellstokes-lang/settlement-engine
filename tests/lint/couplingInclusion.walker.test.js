@@ -646,10 +646,15 @@ const UNLAYERED_BASELINE = JSON.parse(readFileSync(UNLAYERED_BASELINE_PATH, 'utf
  * register carries its measured disagreements.
  *
  * WHOSE RULING: minting a registry row declares a coupling's direction, desk, flags
- * and receipt address, and the GRAMMAR row additionally needs a registry LEAF that
- * does not exist yet plus a widening of the owningVolume set pin. That is a chair
- * declaration, not a walker repair, so this lane measured and froze it rather than
- * improvising it.
+ * and receipt address. That is a chair declaration, not a walker repair, so this
+ * lane measured and froze it rather than improvising it.
+ *
+ * ⚠ DATED CORRECTION 2026-08-12: this note formerly said a GRAMMAR row also
+ * needed "a registry LEAF that does not exist yet plus a widening of the
+ * owningVolume set pin." Both infrastructure clauses were stale.
+ * `couplingRegistryGrammar.js` exists and exports the live GRAMMAR coupling
+ * aggregates, and `CHARTERED_VOLUME_PREFIXES` already contains `GR`. Only the
+ * chair's declaration of the particular coupling remains owed.
  *
  * TO COMPLY: when a row lands, DELETE the entry — the licensing join then covers the
  * pair and the exactness test below reds until the entry is gone, so the win is

@@ -469,7 +469,7 @@ lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
 | 8 | `pactFormationEnabled` | GR-2/GR-3 | proposal ledger, triggers, two-sided drafting, standalone NAP, new term families' producers |
 | 9 | `treatyRenewalEnabled` | GR-5 | renewal window, renegotiation, conversion, worstObservedEver writer |
 | 10 | `mediationGeneralizedEnabled` | GR-6 | intent-stage pressure, fraying-pact pass, temple arm |
-| 11 | `secondOrderBeliefEnabled` | IN-1 | mirrorOf + every consumer |
+| 11 | `secondOrderBeliefEnabled` | IN-1 | `secondOrderMirrorOf` + every consumer |
 | 12 | `infoLureEnabled` | IN-2 | axis-typed plant subjects + bait receipts |
 | 13 | `counterIntelEnabled` | IN-3 | sweep/vet/send-two/hide-as-answer + suspicionOf + house exposure producer |
 | 14 | `reputationRaceEnabled` | IN-4 | race-at-arrivals + who-knew-first outcome keys |
@@ -1193,7 +1193,7 @@ the WR-7b negotiation pictures we handed across a table (J-INA-5); allow-list
 import fence; K3 exclusion of the counterpart's beliefMap unchanged;
 EMPTY-RECORD = UNKNOWN at zero confidence (seeded non-empty sibling); THE
 REVERSAL PIN; the phrase scan ("the record suggests", never "they believe");
-mirrorOf's returned shape FROZEN with a shape pin (GRAMMAR consumes by that
+`secondOrderMirrorOf`'s returned shape FROZEN with a shape pin (GRAMMAR consumes by that
 pin — one reader shape, two programs).
 
 **#18 IN-2 — THE LURE** (flag `infoLureEnabled`). The §4 axis model + the
@@ -2629,7 +2629,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 11 | secrecyTradeFactorOf | IN-0d -> TR | PRE-PIN: identity-1.0-outside-HIDE + band/cap both sides; secrecyTradeContractChangedSinceIn0d() |
 | 12 | Axis families census | IN-2 <-> SP-B | PRE-PIN: axisFamiliesGrewSinceIn2() authored against the at-build set (J-FP-5) |
 | 13 | Courier retirement | IN-4 <-> SP-D | PRE-PIN: dark arm byte-identical + lit-arm errand contract; the retirement pin reads errandSpineEnabled BY NAME |
-| 14 | mirrorOf shape | IN-1 -> GR negotiation posture | PRE-PIN: frozen return shape (closed keys, banded) — one reader shape, two programs |
+| 14 | `secondOrderMirrorOf` shape | IN-1 -> GR negotiation posture | PRE-PIN: frozen return shape (closed keys, banded) — one reader shape, two programs |
 | 15 | Knowledge desk | IN-5 <-> every volume's knowledge kinds | PRE-PIN: mint-time registration only; IN-6's earned-classification walker is the standing tripwire |
 | 16 | Testimony ladder | IN-3 <-> WR-7c | HONORED: TESTIMONY_LADDER == RELIABILITY_LADDER equality pin; vet composes, never re-spells |
 | 17 | Divergence reader | IN-3 <-> WR-7d | HONORED: sendTwoDivergence one home; source scan reds a fork |
