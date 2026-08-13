@@ -5,10 +5,11 @@
   "Content-addressed per identity: dormant headroom and identity swaps are refused, so a NEW",
   "identity in an already-listed file reds exactly as a new file does, even at constant count.",
   "The line number is excluded so unrelated line churn does not rewrite the governed identity.",
-  "Ordinary maintenance may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
+  "Ordinary shrink maintenance is a governed --write re-freeze on a clean committed tree; never hand-edit rows.",
+  "That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
   "Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 7 = the same numeric identity, with explained-writer rows BANKED BY RULE.",
+  "SCHEMA 8 = schema 7 BANK-BY-RULE topology plus the governed opt-in scalar second consumer.",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -16,7 +17,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–6 are the RETIRED numeric predecessors."
+  "Schemas 4–7 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -32,14 +33,14 @@
  "digests": {
   "corpusMeta": "7516885940ede24fffe5c04bb9feeb09c1705ebdf2c783de288ae2dbf3885b80",
   "inventory": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
-  "manifests": "f66b657a63f78ca7c45ec478136e40479dcfe868899b055af09b68dffd9be756",
-  "migrationReview": "7566179483f27409f0f0a0b1c608414f2a5a4351cc3f137facee494e41ae7dbf",
+  "manifests": "1cd48bbf1e35e99b44df914589c175807e37a5c626f1212ed0dbf0444f26643a",
+  "migrationReview": "2d368b93babf56af63327d6e64f0bc530df02fdd6e54983b60be18ac40d3ef51",
   "rowTags": "0ee11caa3e62debb834b4787f8d1e93360e1d18487d4cf61d40c9692c78d00c5",
   "scanStats": "979f92ca168f26ddd08398c1c8c412b016d12d4b9785e50ef998f49d923381ff",
   "sentinel": "4ea28074d8414e3b917c7b525a0f6a3dcfdcdd838d8b8b003c4076825e3a2b41"
  },
  "frozen": "2026-08-13",
- "frozenAtSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+ "frozenAtSha": "3df85a3aa33b60be5983ebede63375d8d0fae8f5",
  "identities": 1412,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2232,7 +2233,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+   "digest": "e00387407d19d87b89c3e3abcd09216346684c05f18c0a2a6cacf254736172b1",
    "entries": [
     {
      "mode": "100644",
@@ -2251,8 +2252,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "1dbae889637f1afafc50ff69c4e38681341363f066c5598043a8bb0809f8e260",
-     "size": 119237,
+     "sha256": "49330432683075ced50523f176dc546543f8a7b9fd4a2fd987db24fd75edfd31",
+     "size": 120107,
      "type": "file"
     },
     {
@@ -2272,15 +2273,15 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "062f562a9bd13aaf1cba81b770cffc64b189e0b851a2f9b4580363ee8f3c9603",
-     "size": 38290,
+     "sha256": "08f7e2dd27ec4e4d8ccdd56e4f091cfb9c8e00ba21ea4a0b0e4502193ba248c7",
+     "size": 39073,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-corpus.mjs",
-     "sha256": "27ff3cc67a216fa192ec0358844963918668260299de776d4a147e98459c2dba",
-     "size": 30044,
+     "sha256": "bdd9fc017f53a3ca2d0bdd33f8e1847eea7915672fd85ef66ac1142eb73bf052",
+     "size": 39417,
      "type": "file"
     },
     {
@@ -2300,8 +2301,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "ed79af5cce3b0094315e3d20332a6073d584da30ff4582c371768c7a5f5e99d5",
-     "size": 66390,
+     "sha256": "59a6160678d3a3d4cfb6f424dc6c23bc65aa1aadcaf7c848d5bf29059577e0b9",
+     "size": 69699,
      "type": "file"
     },
     {
@@ -2315,7 +2316,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
+   "digest": "5ea2bb0c51f595015c18aab8e5ed9bffd62091f27b13d25bfdb61c7ab6c6097f",
    "entries": [
     {
      "mode": "100644",
@@ -2334,8 +2335,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "1dbae889637f1afafc50ff69c4e38681341363f066c5598043a8bb0809f8e260",
-     "size": 119237,
+     "sha256": "49330432683075ced50523f176dc546543f8a7b9fd4a2fd987db24fd75edfd31",
+     "size": 120107,
      "type": "file"
     },
     {
@@ -2355,15 +2356,15 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "062f562a9bd13aaf1cba81b770cffc64b189e0b851a2f9b4580363ee8f3c9603",
-     "size": 38290,
+     "sha256": "08f7e2dd27ec4e4d8ccdd56e4f091cfb9c8e00ba21ea4a0b0e4502193ba248c7",
+     "size": 39073,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-corpus.mjs",
-     "sha256": "27ff3cc67a216fa192ec0358844963918668260299de776d4a147e98459c2dba",
-     "size": 30044,
+     "sha256": "bdd9fc017f53a3ca2d0bdd33f8e1847eea7915672fd85ef66ac1142eb73bf052",
+     "size": 39417,
      "type": "file"
     },
     {
@@ -2383,8 +2384,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "ed79af5cce3b0094315e3d20332a6073d584da30ff4582c371768c7a5f5e99d5",
-     "size": 66390,
+     "sha256": "59a6160678d3a3d4cfb6f424dc6c23bc65aa1aadcaf7c848d5bf29059577e0b9",
+     "size": 69699,
      "type": "file"
     },
     {
@@ -46692,29 +46693,29 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "0e62d6d5d9492acfb46799027311852389ed0f94177b7ee4dbbd824ac9056344",
+  "bundleDigest": "fc5acbb55c80d393e3c1e32dc182bde89c5286b50d082dc34085493dc4eae9bf",
   "corpusDigest": "f778811c1fe4d8098aeb96482f3dd65e56658162b14e786d51c896247ebdee01",
-  "currentArtifactDigest": "6dc7388a552f98ac889e1321eca22ca1dd379be40eea254279e73809c39110d0",
-  "currentDetectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
+  "currentArtifactDigest": "51de033c575251b034b47e00f2457020c8079b6bec608e9f91953d41fadb40cb",
+  "currentDetectorDigest": "e00387407d19d87b89c3e3abcd09216346684c05f18c0a2a6cacf254736172b1",
   "currentFindingsDigest": "140f399a6c7e0935179730b50cdfe38300668a15e91bbbd047beca302f78f9d1",
-  "currentScannerSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
-  "currentScannerToolDigest": "a8341dd4d36195c9d567f167dd45c39dfba56ef5b18e6ee1b5159b2493958f75",
-  "detectorTreeDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
-  "executionTreeDigest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
+  "currentScannerSha": "3df85a3aa33b60be5983ebede63375d8d0fae8f5",
+  "currentScannerToolDigest": "674eca6b2504983bbe87fbfd768dad73cea0cb82f89fa03ce8f14e9cca60e1f4",
+  "detectorTreeDigest": "e00387407d19d87b89c3e3abcd09216346684c05f18c0a2a6cacf254736172b1",
+  "executionTreeDigest": "5ea2bb0c51f595015c18aab8e5ed9bffd62091f27b13d25bfdb61c7ab6c6097f",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "6dc7388a552f98ac889e1321eca22ca1dd379be40eea254279e73809c39110d0",
-  "legacyDetectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
-  "legacyScannerSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
-  "legacyScannerToolDigest": "a8341dd4d36195c9d567f167dd45c39dfba56ef5b18e6ee1b5159b2493958f75",
-  "predecessorBaselineDigest": "0053c6c521b4a5160577250f6b2700a12905090739b35734ea3a49c61456183e",
-  "predecessorBaselineTextSha256": "1c3a0d9216e4055e913e2a41de4638b3fc9eefb2a55d10dac596fb7b72e70054",
-  "predecessorInventoryDigest": "f599063a4ee277ad9a0cbb7e78e25970fc1f5e42cab02d385bf4a506863c0b0d",
-  "reportDigest": "db757c06ba095613e35bbe5373240d17b6f34b8dfb0be960dae878ec181d7079",
-  "reviewDigest": "62d008827054074adfd2befafbf0848817ac6597fa1f11f493ee0ca7513fd871",
+  "legacyArtifactDigest": "51de033c575251b034b47e00f2457020c8079b6bec608e9f91953d41fadb40cb",
+  "legacyDetectorDigest": "e00387407d19d87b89c3e3abcd09216346684c05f18c0a2a6cacf254736172b1",
+  "legacyScannerSha": "3df85a3aa33b60be5983ebede63375d8d0fae8f5",
+  "legacyScannerToolDigest": "674eca6b2504983bbe87fbfd768dad73cea0cb82f89fa03ce8f14e9cca60e1f4",
+  "predecessorBaselineDigest": "1469b5803013fd65d46c2b5231dbfc540397be93b5669512097c7ebb55585024",
+  "predecessorBaselineTextSha256": "15e638092639814eb637076b762e7acb86464bb7a52fa44c1ecf81b0c20b77c0",
+  "predecessorInventoryDigest": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
+  "reportDigest": "53da69540b68d3985dd0ab8982472958526832520bf4ff4091c4bea099221629",
+  "reviewDigest": "78f475448981d455e066fbc017a1942029375e97235e554a9885d243baa3fada",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
   "scanTreeDigest": "bc752b5bf9c957570831badc37bc1e398b0105cc885ace0f2d89800446075df5",
   "sourceTreeDigest": "c0835dd4f1c0cae4ee601d1034dfcb931f6bbd64d76f6b51e2e476593b584329",
-  "subjectSha": "d081feee29288af58ec3eaf6cf513c0904c15b65",
+  "subjectSha": "3df85a3aa33b60be5983ebede63375d8d0fae8f5",
   "targetInventoryDigest": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f"
  },
  "minRows": 40,
@@ -46914,13 +46915,13 @@
   "unresolved": 111645
  },
  "scannerProvenance": {
-  "detectorDigest": "ba7562ec65eccdbc40b542dd711015b9b82857bb9ae0b1437920fa12c42d3099",
-  "executionTreeDigest": "29583f62024809513ca4ed956bd472a12812cac3f1f5e59d419b5726fd9ddee6",
+  "detectorDigest": "e00387407d19d87b89c3e3abcd09216346684c05f18c0a2a6cacf254736172b1",
+  "executionTreeDigest": "5ea2bb0c51f595015c18aab8e5ed9bffd62091f27b13d25bfdb61c7ab6c6097f",
   "scanTreeDigest": "bc752b5bf9c957570831badc37bc1e398b0105cc885ace0f2d89800446075df5",
   "sourceTreeDigest": "c0835dd4f1c0cae4ee601d1034dfcb931f6bbd64d76f6b51e2e476593b584329",
   "unscannedInputDigest": "3d85bdee459303acb1201b2c4bd887da1a907c38f23ef5368416affc8ac9ccdc"
  },
- "schema": 7,
+ "schema": 8,
  "sentinel": {
   "resolvedReads": 9230,
   "totalKeys": 6584,
