@@ -77,7 +77,43 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐ CURRENT (2026-08-12 ~19:30 EDT) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
+# ⭐⭐ CURRENT (2026-08-12 ~23:40 EDT) — GR-4c LANDED + FLIPPED at `c73c17ef`; two lanes on
+
+**GR-4c IS DONE END-TO-END.** Landed `cd2ab894` (the oath finally costs something: one
+pure leaf + a gated block in repudiateTreaty; C5's arithmetic proves the design's
+headline — the pact door closes on the THIRD open repudiation, 0.1400 → 0.2781 →
+saturated; the both-lit control lands a real −0.14; the coupling row CPL-19.INFO_TO_
+GRAMMAR.GR-4c.breach_credibility minted through all THREE registration edits, desk
+walker + receipt sample UNMOVED; census whole 2409/365/2044/19960/5635; full 17-step
+gate GREEN, ratchet 16/16). Six implementer judgments RATIFIED incl. the SECOND
+exact-list pin the packet missed (couplingRowsFor — same obligation, second home) and
+the stronger-fence refinement. **Flipped at `c73c17ef` with IA-2 → SUPERSEDED riding
+the same window (CR-AR-1): ZERO non-terminal packets, the census row FREE (sixth
+restamp), twelve reserved paths released.** ⚠ The status-cell trap fired a THIRD time
+during the flip (the chair's own cell prose carried a stale status word) — cured
+pre-landing; the cell law is now: ONE token in the status cell, grounds go in the
+description column. ⚠ The pglite TTL-lapse flake is REAL at base (~20–40%/run,
+unbanked) — chartered as micro-act **PG-1** (deterministic-ize the claim test), queued
+behind the machinery packet. Post-flip receipts: validate 23 packets / 0 READY
+TRUE_EXIT=0; implementation suites 34/34 TRUE_EXIT=0; porcelain ZERO.
+
+**LIVE (~23:40): TWO lanes, disjoint paths, CAS-rebase orders:**
+- **Lane AS (Opus) — AO-1 micro-act** (task `a616a56ddebf0c0e8`): re-points the four
+  wizard-news census floors to ITS OWN executed figures (recorded 760/84/83/46, ~998/
+  99/98/58 at last read); lock-the-win only, zero titles, the 19-row EXACT baseline
+  untouched; lands ONE commit.
+- **Lane AT (Opus) — MX-1 promotion** (task `adc79700ffdc0c671`): authors the
+  machinery packet READY from AR's Option-B design (retiredSymbols; LANDED-absence
+  arm; disjointness; capsule both-projections-in-one-edit; substrate widening
+  declared; the hot-file PACKET_STANDARD section rides per CR-AR-9); zero new test
+  titles (the census row stays FREE for AO-0); expect 24 packets / 1 READY.
+Collection: on each landing → chair-verify → (AS: done; AT: dispatch the MX-1
+implementer). Queue after: PG-1 micro-act → prose batch (b)–(f) from laneAR-drafted-
+prose.md (re-anchor citations by symbol against the landings) → AO-0 schema-7 mint
+packet (item (a) + SCW-1b's five sites + the deferred figure) → AO-2..6 → GR-4e →
+CR-NEXT-1's wider corpus. Owner veto surfaces: §17.7 · §17.4 · §17b · §18 · §19 · §20.
+
+# (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
 **IN-1b is DONE end-to-end.** Landed at `af3d93c8` (20 paths, one plumbing commit; the
 two chair cures CR-IN1B-8/9 rode it — the `title=` walker's fifth reasoned raise 484→485
