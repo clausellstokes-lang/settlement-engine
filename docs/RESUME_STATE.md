@@ -97,11 +97,16 @@ unbanked) — chartered as micro-act **PG-1** (deterministic-ize the claim test)
 behind the machinery packet. Post-flip receipts: validate 23 packets / 0 READY
 TRUE_EXIT=0; implementation suites 34/34 TRUE_EXIT=0; porcelain ZERO.
 
-**LIVE (~23:40): TWO lanes, disjoint paths, CAS-rebase orders:**
-- **Lane AS (Opus) — AO-1 micro-act** (task `a616a56ddebf0c0e8`): re-points the four
-  wizard-news census floors to ITS OWN executed figures (recorded 760/84/83/46, ~998/
-  99/98/58 at last read); lock-the-win only, zero titles, the 19-row EXACT baseline
-  untouched; lands ONE commit.
+**⭐ AO-1 LANDED at `41732a51` and is COLLECTED (~23:55, chair-verified):** the four
+floors re-pointed 760/84/83/46 → **999/99/98/58** (the lane's OWN executed figures —
+the delegated ~998 was off by one, again proving the executed-figures law), with BOTH
+negative controls run (planted floors red exactly as they should, then reverted
+blob-identical), the lighting census green and unmoved (9 title lines before and
+after), validate 23/0 green, porcelain zero. JUDGMENT RATIFIED: floors pinned at
+exactly-measured ZERO SLACK (the ratchet discipline — a legitimate consolidation reds
+until re-measured; veto if headroom preferred).
+
+**LIVE: ONE lane:**
 - **Lane AT (Opus) — MX-1 promotion** (task `adc79700ffdc0c671`): authors the
   machinery packet READY from AR's Option-B design (retiredSymbols; LANDED-absence
   arm; disjointness; capsule both-projections-in-one-edit; substrate widening
