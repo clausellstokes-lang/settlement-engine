@@ -422,11 +422,12 @@ helper, and baseline to enforcers, and generalize note/triggers. The regional 10
 54 new historical prose defects. Hazard class count, status floors, and predicate count do not
 move.
 
-AO-4's existing `newsHeadlineContract.walker.test.js` compatibility assertion currently pins
-that predicate population to the News-only array. Amend that assertion in place—without a
-title, file, or census change—to import `PROSE_FAMILY_PROTECTED_SUBSTRATE`, form the same
-codepoint-sorted duplicate-free union, and require the predicate population to equal that
-union. This is a compatibility pin for the already-required union, not a ninth acceptance case.
+AO-4's existing `newsHeadlineContract.walker.test.js` A7 compatibility case currently pins
+both that predicate population to the News-only array and the pre-AO-5 census tuple. Amend
+those two assertions in place—without a title, file, or additional census change—to import
+`PROSE_FAMILY_PROTECTED_SUBSTRATE`, require the same codepoint-sorted duplicate-free union,
+and require the exact AO-5 tuple `2412/365/2047/19984/5638`. These are compatibility pins for
+already-required AO-5 movement, not a ninth acceptance case.
 
 Add one `kind:"rationale"` mutation-manifest entry for the eight ordinary AO-5 controls.
 AO-6 owns standing source mutants; do not touch `mutation-sweep.sh` or `uncoveredBaseline`.
@@ -472,7 +473,7 @@ or surfaces. No other default budget is widened.
 | MODIFY | `scripts/lib/premortem-triggers.mjs` | protected-substrate parser and existing predicate only | 15 effective | Derive the exact two-export union and make population/warning/evidence/synthetic accurate; no new predicate. |
 | MODIFY | `scripts/mutation-coverage-manifest.json` | AO-5 walker invariant | one row | Add one rationale; do not reserialize or move `uncoveredBaseline`. |
 | TEST | `tests/lint/sovereigntyLightingContract.walker.test.js` | `CENSUS` plus dated cause | five values | Re-derive whole; record only the exact movement execution returns. |
-| TEST | `tests/lint/newsHeadlineContract.walker.test.js` | existing A7 pre-mortem population assertion only | zero titles | Replace the News-only equality with the exact codepoint-sorted two-export union; no other case or assertion moves. |
+| TEST | `tests/lint/newsHeadlineContract.walker.test.js` | existing A7 pre-mortem population and census assertions only | zero titles | Replace the News-only equality with the exact codepoint-sorted two-export union and restamp its census literal to `2412/365/2047/19984/5638`; no other case or assertion moves. |
 
 Generated artifacts: **NONE**. No other file may be edited. A ninth implementation path or
 ninth test case is a STOP and split.
@@ -487,8 +488,8 @@ ninth test case is a STOP and split.
 3. Create the pure helper and exact baseline; create the eight-case walker with one expensive
    `beforeAll`, one corpus build, and two pure reconstructions.
 4. Extend `HZ-CROSSHOME`; generalize the existing pre-mortem parser/predicate to the union;
-   amend AO-4's existing A7 population assertion to that exact union; add the mutation
-   rationale; re-derive and record the whole census.
+   amend AO-4's existing A7 population assertion to that exact union and its census assertion
+   to the re-derived AO-5 tuple; add the mutation rationale; re-derive and record the whole census.
 5. Run all focused checks and leave exactly eight paths unstaged and uncommitted for the
    coordinator. Do not create an authored red commit.
 
@@ -506,7 +507,7 @@ contract is one ordinary green implementation commit.
 | A5 | Pulse history is exactly records `0..11` and 50/1,286/5,665; selected headlines are 151/80, mechanical 77/24, and consequence 240/81, with consequence explicitly pinned as a path-local compatibility alias rather than a third AO-4 liveness lane. |
 | A6 | Regional log reaches 12 pulse roots and 109/109 audit rows, closes at 2/7/201, pins 92/6 changes kinds plus 109/1 source types, and has exactly zero selected prose-field identities without inventing prose. |
 | A7 | Chronicle is exactly one pure create-and-append row and 7/7/7 with fixed mode/reason/thesis/summary/trigger values; ID/time are absent and `campaign.chronicles[]` is not selected. |
-| A8 | Baseline fail-closed polarities, unchanged HZ-CROSSHOME identity/count/status, two-export pre-mortem union plus the amended AO-4 compatibility assertion and synthetic fire, mutation rationale, exact census, exact eight paths, focused checks, both typechecks, observed-shape guard, and bare full gate all reconcile at one clean immutable implementation commit. |
+| A8 | Baseline fail-closed polarities, unchanged HZ-CROSSHOME identity/count/status, two-export pre-mortem union plus both amended AO-4 A7 compatibility assertions and synthetic fire, mutation rationale, exact census, exact eight paths, focused checks, both typechecks, observed-shape guard, and bare full gate all reconcile at one clean immutable implementation commit. |
 
 No ninth case is investigated. An adjacent finding is reported without repair unless it
 invalidates A1–A8, in which case stop.
