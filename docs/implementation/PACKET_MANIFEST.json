@@ -41,9 +41,9 @@
     },
     {
       "id": "H26",
-      "status": "STALE",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/infrastructure/H26.md",
-      "verifiedBase": "9d001545ef15f522b94bd0eed766ec2c169bcfa1",
+      "verifiedBase": "b96fae4256daf2d295e294f47655468b2168d208",
       "changeManifest": [
         { "action": "MODIFY", "path": "scripts/check-observed-shape-readers.mjs" },
         { "action": "MODIFY", "path": "scripts/lib/observed-shape-baseline.mjs" },
