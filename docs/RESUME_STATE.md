@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 21:50:34 EDT
+**Generated:** 2026-08-12 22:20:38 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a0adeeda` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `354a942a` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `6ae70b19` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `99b5e621` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 38Gi free (81% used)
+**Disk:** 37Gi free (81% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T214951` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T221955` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T214951
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T221955
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,7 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+6ae70b19 2026-08-12 PG-1: the lapsed claim test stops racing the database clock
 a0adeeda 2026-08-12 MX-1 flips LANDED: retirement is machine-visible
 3c61f42f 2026-08-12 MX-1: retirement becomes machine-visible
 e46bbd91 2026-08-12 MX-1 promoted READY: retirement becomes machine-visible, and a mirror pair is not one site
@@ -39,17 +40,16 @@ d7b7d225 2026-08-12 GR-4c promoted READY: the breach credibility charge, and the
 af3d93c8 2026-08-12 IN-1b: the dossier standing line, the mirror's first production consumer
 6ad9f8dd 2026-08-12 IN-1b promoted READY: the standing line, and the measurement that re-shaped it
 b17d32d2 2026-08-12 IN-1a flips LANDED: the mirror exists, and the orphan window is named
-5bf06481 2026-08-12 IN-1a: the mirror lands, composing a leaf that already named the wave coming for it
 ```
 ## Last 6 ledger commits
 
 ```
+99b5e621 2026-08-12 MX-1 closes whole: the ledger records machine-visible retirement
 354a942a 2026-08-12 MX-1 READY at e46bbd91; the two-site instruction was a four-site coupling
 ce57cdfe 2026-08-12 AO-1 landed at 41732a51 with both negative controls executed
 5a77b7d9 2026-08-12 GR-4c is done end-to-end; the flip carries IA-2's supersede; two lanes on
 3c6c0c6a 2026-08-12 AQ's locals are all green and it yielded mid-gate; resumed with collect order
 a11645ea 2026-08-12 Both batches ruled CR-AR-1..9; IA-2 will supersede; the mint docket grows
-efa079d5 2026-08-12 GR-4C READY at d7b7d225 verified; AQ builds sealed, AR drafts the batches
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,7 @@ efa079d5 2026-08-12 GR-4C READY at d7b7d225 verified; AQ builds sealed, AR draft
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-12 ~21:45 EDT) — MX-1 LANDED + FLIPPED at `a0adeeda`; build clean
+# ⭐⭐ CURRENT (2026-08-12 ~22:20 EDT) — PG-1 LANDED at `6ae70b19`; MX-1 remains whole; build clean
 
 **MX-1 IS DONE END-TO-END.** The five-file implementation landed at `3c61f42f`:
 `retiredSymbols` is now an optional, opposite-signed declaration beside
@@ -90,12 +90,24 @@ figure. No live build lane remains. The missing sealed-session artifact on the o
 lane did not erase the independently retained pre-edit receipt; the packet's recursive
 STOP door was therefore discharged by evidence rather than recreated after the fact.
 
-**NEXT, in the recorded order:** PG-1 micro-act (deterministicize the pglite claim test)
-→ plain prose batch items (b)–(f) from `laneAR-drafted-prose.md`, re-anchored by symbol
-→ promote/dispatch AO-0 schema-7 mint (item (a) + SCW-1b's five sites + the deferred
-figure; AO-0 takes the FREE census row) → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 → GR-4e →
-CR-NEXT-1's wider corpus. AO-3 remains the owner-visible same-seed news-prose shift;
-owner veto surfaces remain §17.7 · §17.4 · §17b · §18 · §19 · §20.
+**PG-1 IS LANDED at `6ae70b19`, one test file and no production motion.** The old
+TTL-lapse probe passed `-1`, but migration 119 clamps every negative TTL to zero and
+then compares `created_at < now()` strictly; real PGlite measurement reproduced the
+timestamp race at **52 fresh / 48 false duplicates**. The repaired existing test
+backdates its real claim to 181 seconds old and reclaims with the real positive
+180-second TTL; the control measured **100 fresh / 0 duplicates**, then the landed
+shape passed **10 isolated runs**, the focused suite **6/6**, the PGlite pair **24/24**,
+ESLint, and the lighting walker **33/33** with its five-tuple still
+**2409/365/2044/19960/5635**. The full 17-step gate is green from that exact one-file
+tree: `PG1_FULL_GATE_TRUE_EXIT=0`, both typecheck ratchets **173/173** and **1134/1134**,
+test ratchet **16 known failures of 28,359 at ceiling 16**, build green, dist **403/403**.
+
+**NEXT, in the recorded order:** plain prose batch items (b)–(f) from
+`laneAR-drafted-prose.md`, re-anchored by symbol and corrected against the live GR-4c
+registry → promote/dispatch AO-0 schema-7 mint (item (a) + SCW-1b's five sites + the
+deferred figure; AO-0 takes the FREE census row) → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 →
+GR-4e → CR-NEXT-1's wider corpus. AO-3 remains the owner-visible same-seed news-prose
+shift; owner veto surfaces remain §17.7 · §17.4 · §17b · §18 · §19 · §20.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
