@@ -3,8 +3,45 @@
   "indexPath": "docs/implementation/INDEX.md",
   "packets": [
     {
-      "id": "H26",
+      "id": "GTR-1",
       "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GTR-1.md",
+      "verifiedBase": "357e7778e6318895c2ecb06dd5c7caed4dfe8863",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/check-test-ratchet.mjs" },
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "TEST", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "TEST", "path": "tests/build/ciCheckParity.test.js" },
+        { "action": "MODIFY", "path": "scripts/.test-ratchet-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "export async function run" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "rowsOf" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "uncollectedOf" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "NON_RUN_STATUSES" },
+        { "path": "package.json", "symbol": "test:ratchet" },
+        { "path": "package.json", "symbol": "verify:dist" },
+        { "path": "tests/lint/testRatchet.test.js", "symbol": "per-test suite ratchet" },
+        { "path": "tests/build/ciCheckParity.test.js", "symbol": "npm run check ↔ parallel ci.yml gate parity" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "source mode excludes tests/build while raw npm test stays unfiltered and every frozen failure remains source-owned" },
+        { "id": "A2", "case": "strict dist mode discovers the on-disk build-test set and accepts only an exactly equal nonempty all-passed report" },
+        { "id": "A3", "case": "missing extra out-of-scope failed uncollected collapsed skipped pending and todo dist fixtures each fail for their named cause" },
+        { "id": "A4", "case": "verify-dist refuses update or bootstrap combinations and owns exact VERIFY_DIST plus build-test argv without nested mutex" },
+        { "id": "A5", "case": "local and CI topology keep source ratchet before build and strict dist after build with aggregate step parity exact" },
+        { "id": "A6", "case": "source results and skip count are identical with dist absent or present and post-build reports every discovered build test passed" },
+        { "id": "A7", "case": "remove-only genesis binds the code-half SHA preserves or shrinks attributed entries and derives skip ceiling at most one" },
+        { "id": "A8", "case": "exact four-path code and one-path genesis commits pass a clean-checkout 17-step gate before one old-value CAS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/lint/testRatchet.test.js", "tests/build/ciCheckParity.test.js"],
+        ["npx", "eslint", "scripts/check-test-ratchet.mjs", "tests/lint/testRatchet.test.js", "tests/build/ciCheckParity.test.js"]
+      ]
+    },
+    {
+      "id": "H26",
+      "status": "BLOCKED",
       "packetPath": "docs/implementation/packets/infrastructure/H26.md",
       "verifiedBase": "9d001545ef15f522b94bd0eed766ec2c169bcfa1",
       "changeManifest": [
