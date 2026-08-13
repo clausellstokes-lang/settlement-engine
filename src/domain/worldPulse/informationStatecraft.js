@@ -388,11 +388,11 @@ export function advanceCredibility({ worldState, tick, deltas = [] }) {
 }
 
 /**
- * The fracture-credibilityHit deltas for THIS tick (design §4 + peaceTerms §7 — the
- * recorded-not-enforced seam). Scans the treaties ledger for coalition-betrayal
- * fractures minted this tick (fracture.tick === now, so each is charged exactly once —
- * idempotent), and returns a sharp deception-class charge against each deserter, scaled
- * by the recorded credibilityHit. Empty when no fracture minted this tick ⇒ byte-neutral.
+ * The prior-tick fracture-credibilityHit deltas (design §4 + peaceTerms §7). Scans the
+ * treaties ledger for coalition-betrayal fractures minted on the preceding tick, so each
+ * is charged exactly once at the next information-statecraft pulse, and returns a sharp
+ * deception-class charge against each deserter, scaled by the recorded credibilityHit.
+ * Empty when no fracture was minted on the prior tick ⇒ byte-neutral.
  * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  * @param {number} tick
  * @returns {CredibilityDelta[]}
@@ -406,7 +406,7 @@ export function fractureCredibilityDeltas(worldState, tick) {
     const treaty = asObject(treaties[key]);
     const fracture = asObject(treaty.fracture);
     if (!fracture || Object.keys(fracture).length === 0) continue;
-    if (Math.floor(finiteNumber(fracture.tick, -1)) !== now) continue; // charge once, at mint
+    if (now < 1 || Math.floor(finiteNumber(fracture.tick, Number.NaN)) !== now - 1) continue;
     const deserter = fracture.deserter != null ? String(fracture.deserter) : '';
     if (!deserter) continue;
     out.push({ id: deserter, kind: 'fracture', magnitude01: clamp01(finiteNumber(fracture.credibilityHit, 0)) });
@@ -1431,7 +1431,7 @@ export function advanceInformationStatecraft({
     if (withGrievance !== state) { state = withGrievance; changed = true; }
   }
 
-  // (5) CREDIBILITY: fold fractures (recorded-not-enforced seam) + exposed lies + exposed
+  // (5) CREDIBILITY: fold prior-tick fractures at the next pulse + exposed lies + exposed
   //     spies + proven-true (incl. resolved intel sales, D-3 self-policing) into the stock.
   const deltas = [
     ...fractureCredibilityDeltas(state, tick),

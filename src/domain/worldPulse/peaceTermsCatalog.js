@@ -69,7 +69,7 @@ export const PEACE_TERMS_TUNING = Object.freeze({
    *  deserter (bounded; typed 'coalition_betrayal' ⇒ the §5 revanchism clock reads it). */
   BETRAYAL_RESENTMENT_W: 0.35,
   /** §7 the reliability discount a deserter carries in FUTURE table-strength sums —
-   *  RECORDED on the fracture (the W-DOCTRINE-2 credibility seam), not yet enforced. */
+   *  recorded on the fracture and consumed by fractureCredibilityDeltas next tick. */
   CREDIBILITY_HIT: 0.3,
   /** How many ticks a fracture record stays live for the coalition_fracture peace
    *  reason to consume (the peel is legible for a window after it is signed). */

@@ -32,6 +32,7 @@ import {
 } from '../../src/domain/display/treatyDocument.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { migrateDispositionStats } from '../../src/domain/worldPulse/dispositionLedger.js';
+import { fractureCredibilityDeltas } from '../../src/domain/worldPulse/informationStatecraft.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -218,6 +219,12 @@ describe('W-PEACE-3 coalition mode — the §H-loaded joint-vs-peel read (determ
     expect(treaty.fracture.abandoned).toEqual(['ally']);
     expect(treaty.fracture.coalitionSize).toBe(2);
     expect(treaty.fracture.credibilityHit).toBeCloseTo(PEACE_TERMS_TUNING.CREDIBILITY_HIT, 4);
+    expect(treaty.fracture.tick).toBe(5);
+    expect(fractureCredibilityDeltas(out.worldState, 5)).toEqual([]);
+    expect(fractureCredibilityDeltas(out.worldState, 6)).toEqual([
+      { id: 'iron', kind: 'fracture', magnitude01: PEACE_TERMS_TUNING.CREDIBILITY_HIT },
+    ]);
+    expect(fractureCredibilityDeltas(out.worldState, 7)).toEqual([]);
 
     // A LIGHTER solo bargain than the joint peace would have imposed.
     expect(treaty.budgetGranted).toBeCloseTo(jointBudget * PEACE_TERMS_TUNING.SEPARATE_EXIT_BUDGET, 4);

@@ -19,23 +19,24 @@
  *
  * ⛔⛔ CR-GR4C-1 — WHY THE FRACTURE-FOLD IDIOM WAS NOT COPIED, AND WHY THIS TAKES NO
  * `worldState` AND NO TICK. The design routed this charge through
- * `fractureCredibilityDeltas`, which scans the treaties ledger for records stamped
- * `fracture.tick === now`. THAT WINDOW IS DEAD, and it was measured rather than
+ * `fractureCredibilityDeltas`, which then scanned the treaties ledger for records stamped
+ * `fracture.tick === now`. THAT WINDOW WAS DEAD, and it was measured rather than
  * reasoned: the reader runs inside `advanceInformationStatecraft` (one production call
  * site, from `pulseKernel.js`), the only writers of `treaty.fracture` are in
  * `peaceTerms.js`, and both sit inside the SAME `simulateCampaignWorldPulse` call with
  * the reader ~507 lines AHEAD of the writer. So in tick T no fracture can yet carry
  * `fracture.tick === T`; at T+1 the reader asks for T+1 while the record still holds T,
  * and the treaty advance carries `fracture` forward verbatim, so the two never become
- * equal again. A charge mounted there would be born dead.
+ * equal again. A charge mounted there would have been born dead.
  *
  * ⛔ THEREFORE: the charge is taken at the ACT, in `repudiateTreaty`, and this leaf is
  * shaped so the dead idiom CANNOT re-enter it — no `worldState` parameter, no tick
  * parameter, no ledger read, and nothing here to scan. If a later lane feels the urge to
  * "restore consistency" by re-adding a tick predicate, that urge is the defect. The
  * repair of the fracture window itself is a SECOND behavior family behind a DIFFERENT
- * flag (`infoStatecraftEnabled` alone, with no oath gate), and it is the named future
- * micro-act **GR-4e** — not this one's to take.
+ * flag (`infoStatecraftEnabled` alone, with no oath gate), and was not this one's to take.
+ * The named micro-act **GR-4e** completed that repair on 2026-08-13: the existing fold
+ * at T+1 now reads a treaty fracture stamped T, while GR-4c's oath charge stays act-local.
  *
  * @enforced-by tests/domain/treatyBreachCredibility.test.js
  */

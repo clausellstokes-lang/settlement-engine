@@ -127,18 +127,26 @@ describe('W-DOCTRINE-2 — credibility ASYMMETRY (slow build, fast fall)', () =>
 });
 
 describe('W-DOCTRINE-2 — the fracture-credibilityHit CONSUMPTION pin', () => {
-  it('reads a this-tick fracture record and charges the deserter (the recorded-not-enforced seam)', () => {
+  it('reads the prior-tick fracture record and charges the deserter exactly once', () => {
     const treaties = { 't1': { fracture: { deserter: 'd', credibilityHit: 0.3, tick: 5 } } };
-    const deltas = fractureCredibilityDeltas(litWorld({ treaties }), 5);
-    expect(deltas).toEqual([{ id: 'd', kind: 'fracture', magnitude01: 0.3 }]);
-    // idempotent: NOT charged on later ticks (only at the mint tick).
-    expect(fractureCredibilityDeltas(litWorld({ treaties }), 6)).toEqual([]);
+    expect(fractureCredibilityDeltas(litWorld({ treaties }), 5)).toEqual([]);
+    expect(fractureCredibilityDeltas(litWorld({ treaties }), 6))
+      .toEqual([{ id: 'd', kind: 'fracture', magnitude01: 0.3 }]);
+    expect(fractureCredibilityDeltas(litWorld({ treaties }), 7)).toEqual([]);
+
+    const genesisTreaties = {
+      negative: { fracture: { deserter: 'negative', credibilityHit: 0.3, tick: -1 } },
+      missing: { fracture: { deserter: 'missing', credibilityHit: 0.3 } },
+      malformed: { fracture: { deserter: 'malformed', credibilityHit: 0.3, tick: 'not-a-tick' } },
+      nonFinite: { fracture: { deserter: 'nonfinite', credibilityHit: 0.3, tick: Number.NaN } },
+    };
+    expect(fractureCredibilityDeltas(litWorld({ treaties: genesisTreaties }), 0)).toEqual([]);
   });
   it('a charged fracture debits the deserter\'s credibility stock', () => {
     const treaties = { 't1': { fracture: { deserter: 'd', credibilityHit: 0.5, tick: 5 } } };
     const ws = litWorld({ treaties });
-    const after = advanceInformationStatecraft({ snapshot: { byId: new Map(), settlements: [] }, worldState: ws, tick: 5, strengthOf: () => 0.5 });
-    expect(credibilityScoreOf(after.worldState, 'd', 5)).toBeLessThan(0);
+    const after = advanceInformationStatecraft({ snapshot: { byId: new Map(), settlements: [] }, worldState: ws, tick: 6, strengthOf: () => 0.5 });
+    expect(credibilityScoreOf(after.worldState, 'd', 6)).toBeLessThan(0);
   });
 });
 
