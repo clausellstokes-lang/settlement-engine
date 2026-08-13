@@ -3,67 +3,53 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 16:21:58 EDT
+**Generated:** 2026-08-12 21:50:34 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `b17d32d2` | **8** |
-| ledger (main) | `review-fixes-2026-07-08` | `ce4dad7b` | **4601** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `a0adeeda` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `354a942a` | **4601** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 34Gi free (83% used)
+**Disk:** 38Gi free (81% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T162122` — build 8 file(s), ledger 2081 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T214951` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T162122
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T214951
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
 staged set BY NAME AND COUNT.
 
-### Uncommitted in the build tree — attribute before touching
-
-```
-MM docs/DESIGN_FP_ARCH_IN.md
-MM docs/DESIGN_FP_INFORMATION.md
-MM docs/implementation/INDEX.md
-MM docs/implementation/PACKET_MANIFEST.json
-MM docs/implementation/packets/foreign-policy/GR-4B.md
-MM docs/implementation/packets/foreign-policy/IN-1A.md
-MM scripts/.test-ratchet-baseline.json
-MM tests/lint/testRatchet.test.js
-```
-```
-```
 ## Last 12 build commits
 
 ```
+a0adeeda 2026-08-12 MX-1 flips LANDED: retirement is machine-visible
+3c61f42f 2026-08-12 MX-1: retirement becomes machine-visible
+e46bbd91 2026-08-12 MX-1 promoted READY: retirement becomes machine-visible, and a mirror pair is not one site
+41732a51 2026-08-12 AO-1 lock-the-win: the Wizard News authoring floors re-pointed to measured reality
+c73c17ef 2026-08-12 GR-4c flips LANDED and IA-2 supersedes; the census row is FREE with zero holders
+cd2ab894 2026-08-12 GR-4c: the oath that finally costs something — a torn-up treaty charges its breaker
+d7b7d225 2026-08-12 GR-4c promoted READY: the breach credibility charge, and the coupling row the draft argued away
+0b98626f 2026-08-12 IN-1b flips LANDED, the orphan window is discharged, and the census row is FREE
+af3d93c8 2026-08-12 IN-1b: the dossier standing line, the mirror's first production consumer
+6ad9f8dd 2026-08-12 IN-1b promoted READY: the standing line, and the measurement that re-shaped it
 b17d32d2 2026-08-12 IN-1a flips LANDED: the mirror exists, and the orphan window is named
 5bf06481 2026-08-12 IN-1a: the mirror lands, composing a leaf that already named the wave coming for it
-4e5ddf9a 2026-08-12 INDEX: the site-coherence program state stops contradicting its own rows
-803ebd48 2026-08-12 IN-1a promoted READY: the mirror composes a leaf that was already in the tree
-ba219802 2026-08-12 SCW-1 is DISCHARGED: its row left the baseline before the wave could ever be dispatched
-b5442c07 2026-08-12 GR-4b-alpha flips LANDED, and the chair discharges its own stale ledger row
-dd457b9a 2026-08-12 GR-4b-alpha: the succession road speaks, once, where it acted
-a2222fee 2026-08-12 GR-4b promoted READY: the succession road gets a voice, and the annex stops naming a man the engine cannot name
-5f687277 2026-08-12 The frozen census SHRINKS: 17 rows become 16, by cure not by adjustment
-32f4e520 2026-08-12 Three recorded micro-acts: the 164th callout cured, the seventh claim exposed, SCW-0's mutant planted
-0e5881b6 2026-08-12 ES-Da flips LANDED: the four-packet chain is complete, nineteen packets all terminal
-6dbb76c2 2026-08-12 ES-Da: the espionage rider — covert cargo on an already-accepted peace envoy
 ```
 ## Last 6 ledger commits
 
 ```
-ce4dad7b 2026-08-12 IN-1b ruled and promoting: the standing line escapes both hazard classes
-d000bd67 2026-08-12 The mirror is flipped; IN-1b drafts to close the orphan window
-48d517c5 2026-08-12 Lane AH collected green; the INDEX contradiction is cured; memory is linked
-62fdbce5 2026-08-12 IN-1a promotes clean at the moved base; the mirror implements
-b439bf09 2026-08-12 IN-1 splits three ways, and the mirror finds its substrate already waiting
-cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already did its work
+354a942a 2026-08-12 MX-1 READY at e46bbd91; the two-site instruction was a four-site coupling
+ce57cdfe 2026-08-12 AO-1 landed at 41732a51 with both negative controls executed
+5a77b7d9 2026-08-12 GR-4c is done end-to-end; the flip carries IA-2's supersede; two lanes on
+3c6c0c6a 2026-08-12 AQ's locals are all green and it yielded mid-gate; resumed with collect order
+a11645ea 2026-08-12 Both batches ruled CR-AR-1..9; IA-2 will supersede; the mint docket grows
+efa079d5 2026-08-12 GR-4C READY at d7b7d225 verified; AQ builds sealed, AR drafts the batches
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -77,57 +63,39 @@ cf18e44b 2026-08-12 SCW-1 is discharged, not refused: another program already di
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-12 ~23:40 EDT) — GR-4c LANDED + FLIPPED at `c73c17ef`; two lanes on
+# ⭐⭐ CURRENT (2026-08-12 ~21:45 EDT) — MX-1 LANDED + FLIPPED at `a0adeeda`; build clean
 
-**GR-4c IS DONE END-TO-END.** Landed `cd2ab894` (the oath finally costs something: one
-pure leaf + a gated block in repudiateTreaty; C5's arithmetic proves the design's
-headline — the pact door closes on the THIRD open repudiation, 0.1400 → 0.2781 →
-saturated; the both-lit control lands a real −0.14; the coupling row CPL-19.INFO_TO_
-GRAMMAR.GR-4c.breach_credibility minted through all THREE registration edits, desk
-walker + receipt sample UNMOVED; census whole 2409/365/2044/19960/5635; full 17-step
-gate GREEN, ratchet 16/16). Six implementer judgments RATIFIED incl. the SECOND
-exact-list pin the packet missed (couplingRowsFor — same obligation, second home) and
-the stronger-fence refinement. **Flipped at `c73c17ef` with IA-2 → SUPERSEDED riding
-the same window (CR-AR-1): ZERO non-terminal packets, the census row FREE (sixth
-restamp), twelve reserved paths released.** ⚠ The status-cell trap fired a THIRD time
-during the flip (the chair's own cell prose carried a stale status word) — cured
-pre-landing; the cell law is now: ONE token in the status cell, grounds go in the
-description column. ⚠ The pglite TTL-lapse flake is REAL at base (~20–40%/run,
-unbanked) — chartered as micro-act **PG-1** (deterministic-ize the claim test), queued
-behind the machinery packet. Post-flip receipts: validate 23 packets / 0 READY
-TRUE_EXIT=0; implementation suites 34/34 TRUE_EXIT=0; porcelain ZERO.
+**MX-1 IS DONE END-TO-END.** The five-file implementation landed at `3c61f42f`:
+`retiredSymbols` is now an optional, opposite-signed declaration beside
+`requiredSymbols`; a LANDED row must actually be absent, every non-terminal row must
+still be present, and SUPERSEDED asserts neither direction. The field travels through
+the coding capsule, both authority projections, both `filePaths` projections and the
+descendant-substrate check — the four-site coupling the promotion measured. A1–A8 all
+run inside the three pre-existing test titles; the mandatory guard mutant flipped the
+READY-present assertion and was restored; the lighting census stayed
+**2409/365/2044/19960/5635** with zero title movement. Production effective deltas:
+**+41/+55** (`implementation-packets.mjs`) and **+4/+12**
+(`implementation-session.mjs`). Recursive validator receipts both green: pre-edit and
+post-edit **24 packets / 1 READY, exit 0**. Both typecheck windows green at their exact
+ceilings (**173/173** full, **1134/1134** domain-strict). The full 17-step gate ran
+through build and `verify:dist`: **FINAL_GATE_TRUE_EXIT=0**, ratchet **16 known failures
+of 28,359 tests at ceiling 16**, dist **403/403**.
 
-**⭐ AO-1 LANDED at `41732a51` and is COLLECTED (~23:55, chair-verified):** the four
-floors re-pointed 760/84/83/46 → **999/99/98/58** (the lane's OWN executed figures —
-the delegated ~998 was off by one, again proving the executed-figures law), with BOTH
-negative controls run (planted floors red exactly as they should, then reverted
-blob-identical), the lighting census green and unmoved (9 title lines before and
-after), validate 23/0 green, porcelain zero. JUDGMENT RATIFIED: floors pinned at
-exactly-measured ZERO SLACK (the ratchet discipline — a legitimate consolidation reds
-until re-measured; veto if headroom preferred).
+**Coordinator flip `a0adeeda` is committed and verified:** packet, manifest and index
+agree terminal; `validate:packets` reports **24 packets / 0 READY, exit 0**; focused
+implementation suites **34/34, exit 0**; build porcelain zero. The implementation and
+flip were each private-index commits with old-value CAS; exact path sets were proved
+before moving the branch. **The census row remains FREE** because MX-1 could not move a
+figure. No live build lane remains. The missing sealed-session artifact on the orphaned
+lane did not erase the independently retained pre-edit receipt; the packet's recursive
+STOP door was therefore discharged by evidence rather than recreated after the fact.
 
-**⭐ MX-1 PROMOTED READY at `e46bbd91` and COLLECTED (~00:15, chair-verified: 24
-packets / 1 READY TRUE_EXIT=0, porcelain zero).** The promotion handled the era's
-FIRST mid-promotion foreign base move correctly (AO-1 landed under it; it re-pinned to
-`41732a51` and RE-EXECUTED every figure rather than inheriting — substrate diff empty,
-census unmoved). All seven deviations RATIFIED, the big one: **AR's two-site capsule
-instruction was WRONG — the substrate widening is a FOUR-site coupling** (derived
-filePaths vs hand-built filePaths, byte-compared, plus the fileHashes assertion); the
-two-site edit would have shipped a throwing dispatch. Banked to memory (the packet-
-system topic file). Also ratified: extended test titles pinned as requiredSymbols rows
-(machine-visible zero-new-titles), the census-holder rule SHARPENED (the holder is
-whichever non-terminal packet CAN MOVE a census figure — MX-1 cannot, takes no
-reservation, the row stays FREE for AO-0), 8/8 acceptance with the mutant + SUPERSEDED
-controls, and Option A's refusal now 174/174 (100%).
-
-**LIVE: Lane AU (Opus) implements MX-1** (task `adb87a4d5ebe2f0af`): the retiredSymbols
-arms, the FOUR-site capsule widening traced by execution, zero new titles, the
-recursive both-exits receipt, the hot-file PACKET_STANDARD section. ⛔ SEALED: nothing
-else lands until AU does. On landing → chair-verify → flip → then: PG-1 micro-act →
-prose batch (b)–(f) from laneAR-drafted-prose.md (re-anchor by symbol) → AO-0 schema-7
-mint packet (item (a) + SCW-1b's five sites + the deferred figure; takes the FREE
-census row) → AO-2..6 → GR-4e → CR-NEXT-1's wider corpus. Owner veto surfaces: §17.7 ·
-§17.4 · §17b · §18 · §19 · §20.
+**NEXT, in the recorded order:** PG-1 micro-act (deterministicize the pglite claim test)
+→ plain prose batch items (b)–(f) from `laneAR-drafted-prose.md`, re-anchored by symbol
+→ promote/dispatch AO-0 schema-7 mint (item (a) + SCW-1b's five sites + the deferred
+figure; AO-0 takes the FREE census row) → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 → GR-4e →
+CR-NEXT-1's wider corpus. AO-3 remains the owner-visible same-seed news-prose shift;
+owner veto surfaces remain §17.7 · §17.4 · §17b · §18 · §19 · §20.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
