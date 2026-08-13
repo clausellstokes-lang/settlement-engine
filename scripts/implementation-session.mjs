@@ -185,6 +185,7 @@ function assertAncestorAndSubstrate(rootDir, packet, capsule, head) {
   const substrate = [...new Set([
     ...packet.changeManifest.filter((row) => row.action !== 'CREATE').map((row) => row.path),
     ...packet.requiredSymbols.map((row) => row.path),
+    ...(packet.retiredSymbols ?? []).map((row) => row.path),
   ])].sort();
   if (!substrate.length) return;
   const changed = gitBuffer(rootDir, [
@@ -224,6 +225,7 @@ function capsuleAuthority(capsule) {
     packetMarkdown: capsule.packetMarkdown,
     changeManifest: capsule.changeManifest,
     requiredSymbols: capsule.requiredSymbols.map(({ path, symbol }) => ({ path, symbol })),
+    retiredSymbols: capsule.retiredSymbols.map(({ path, symbol }) => ({ path, symbol })),
     acceptanceCases: capsule.acceptanceCases,
     checks: capsule.checks,
     filePaths: capsule.fileHashes.map((row) => row.path).sort(),
@@ -245,6 +247,7 @@ function manifestAuthority(manifest, packet, packetText) {
     },
     changeManifest: packet.changeManifest.map(({ action, path }) => ({ action, path })),
     requiredSymbols: packet.requiredSymbols.map(({ path, symbol }) => ({ path, symbol })),
+    retiredSymbols: (packet.retiredSymbols ?? []).map(({ path, symbol }) => ({ path, symbol })),
     acceptanceCases: packet.acceptanceCases.map(({ id, case: caseText }) => ({ id, case: caseText })),
     checks: packet.checks.map((argv) => [...argv]),
     filePaths: [...new Set([
@@ -252,6 +255,7 @@ function manifestAuthority(manifest, packet, packetText) {
       packet.packetPath,
       ...packet.changeManifest.map((row) => row.path),
       ...packet.requiredSymbols.map((row) => row.path),
+      ...(packet.retiredSymbols ?? []).map((row) => row.path),
     ])].sort(),
   };
 }

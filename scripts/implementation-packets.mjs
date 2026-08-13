@@ -495,6 +495,51 @@ export function validatePacketManifest(manifest, options = {}) {
       }
     }
 
+    const retiredSymbols = rawPacket.retiredSymbols;
+    if (retiredSymbols !== undefined && !Array.isArray(retiredSymbols)) {
+      addError(errors, `${idLabel}.retiredSymbols must be an array when present`);
+    }
+    const retired = Array.isArray(retiredSymbols) ? retiredSymbols : [];
+    const retiredKeys = new Set();
+    for (let index = 0; index < retired.length; index += 1) {
+      const row = retired[index];
+      const at = `${idLabel}.retiredSymbols[${index}]`;
+      if (!isRecord(row)) {
+        addError(errors, `${at} must be an object`);
+        continue;
+      }
+      const problem = packetPathProblem(row.path);
+      if (problem) addError(errors, `${at}.path ${problem}`);
+      if (typeof row.symbol !== 'string' || row.symbol.trim().length === 0) {
+        addError(errors, `${at}.symbol must be a non-blank string`);
+      }
+      if (problem || typeof row.symbol !== 'string' || row.symbol.trim().length === 0) continue;
+      const key = `${row.path}\0${row.symbol}`;
+      if (retiredKeys.has(key)) addError(errors, `${idLabel} contains duplicate retired symbol: ${row.path} :: ${row.symbol}`);
+      retiredKeys.add(key);
+      // THE ARM CR-IN1B-9 CURED BY HAND: a symbol cannot be both preserved and retired.
+      if (symbolKeys.has(key)) {
+        addError(errors, `${idLabel} names ${row.path} :: ${row.symbol} as BOTH required and retired`);
+        continue;
+      }
+      // The mirror of the LANDED CREATE arm above, and for the same reason. Before a packet
+      // lands the retiree MUST still be present — the packet is written against it. A
+      // SUPERSEDED packet may have been replaced before it retired anything. LANDED is
+      // therefore the only status under which absence is assertable, and so the only status
+      // under which a fictional retirement is catchable.
+      const exists = fileExists(rootDir, row.path);
+      if (status === 'LANDED') {
+        if (exists && readRepositoryFile(rootDir, row.path).includes(row.symbol)) {
+          addError(errors, `${at}.symbol survives in ${row.path} for LANDED retirement: ${row.symbol}`);
+        }
+      } else if (!TERMINAL_PACKET_STATUSES.has(String(status))) {
+        if (!exists) addError(errors, `${at}.path does not exist: ${row.path}`);
+        else if (!readRepositoryFile(rootDir, row.path).includes(row.symbol)) {
+          addError(errors, `${at}.symbol is already absent from ${row.path} before ${String(status)}: ${row.symbol}`);
+        }
+      }
+    }
+
     const caseIds = new Set();
     for (let index = 0; index < cases.length; index += 1) {
       const row = cases[index];
@@ -601,11 +646,13 @@ export function buildCodingCapsule(manifest, packetId, options = {}) {
 
   const changeManifest = /** @type {Array<{action:string,path:string}>} */ (packet.changeManifest);
   const requiredSymbols = /** @type {Array<{path:string,symbol:string}>} */ (packet.requiredSymbols);
+  const retiredSymbols = Array.isArray(packet.retiredSymbols) ? packet.retiredSymbols : [];
   const filePaths = new Set([
     /** @type {string} */ (manifest.indexPath),
     /** @type {string} */ (packet.packetPath),
     ...changeManifest.map((row) => row.path),
     ...requiredSymbols.map((row) => row.path),
+    ...retiredSymbols.map((row) => row.path),
   ]);
   const fileHashes = [...filePaths].sort(compareCodepoint).map((repositoryPath) => {
     const exists = fileExists(rootDir, repositoryPath);
@@ -640,6 +687,7 @@ export function buildCodingCapsule(manifest, packetId, options = {}) {
     },
     fileHashes,
     requiredSymbols: symbolEvidence,
+    retiredSymbols: retiredSymbols.map(({ path, symbol }) => ({ path, symbol })),
     changeManifest: changeManifest.map((row) => ({ action: row.action, path: row.path })),
     acceptanceCases: /** @type {Array<{id:string,case:string}>} */ (packet.acceptanceCases)
       .map((row) => ({ id: row.id, case: row.case })),

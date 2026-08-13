@@ -5,7 +5,7 @@
 **Scope:** instructions compiled for coding agents from SettlementForge design law
 
 **Measured tree:** `claude/composite-r4` at
-`f1895e6004eb512a5c7b4c9b4caaf79604bccea6` on 2026-08-09
+`e46bbd9189424a0146a70c812a12cfc8cbab9c88` on 2026-08-12
 
 ## Purpose
 
@@ -144,6 +144,26 @@ If the work cannot fit, the agent stops and proposes the smallest split. The
 agent may not quietly renegotiate the budget or convert a registration file
 into a second logic home.
 
+## Hot files
+
+A hot file sits within a handful of effective lines of a ceiling that will not be raised, carries no `scripts/.size-baseline.json` entry, and has no door. The standing list, every figure executed under eslint `max-lines` with `skipBlankLines` and `skipComments`:
+
+| File | Effective | Ceiling | Headroom |
+|---|---:|---:|---:|
+| `src/components/OutputContainer.jsx` | 599 | 600 | 1 |
+| `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |
+| `src/domain/worldPulse/informationStatecraft.js` | 780 | 800 | 20 |
+
+Three rules bind every packet:
+
+1. A packet whose change manifest names a hot file **opens with an executed headroom measurement** of that file, taken at the packet's verified base with eslint's own `Linter` or `npx eslint --rule` under `max-lines` with `skipBlankLines` and `skipComments`. Never `wc -l`, never an inherited figure, never a delegated one.
+2. The edit into a hot file is **shaped to net zero effective lines** — props inline on an existing line, one-line-for-one-line replacement, or an offsetting combine. A packet that cannot express its edit at net zero STOPS and returns to the coordinator.
+3. Never add a size-baseline entry for a hot file, never raise its ceiling, and never decompose it to make room for a feature.
+
+Adding a file to this list is a coordinator act with an executed measurement behind it. A row leaves the list only when the file's measured headroom grows.
+
+This rule exists because a delegated effective-line figure for `OutputContainer.jsx` was wrong by seventeen lines in the dangerous direction and would have authorized a six-line edit into one line of room.
+
 ## Edge-case budget
 
 The acceptance matrix is a closed denominator, not a starting point for an
@@ -216,6 +236,8 @@ Every handwritten file appears in the packet before dispatch with:
 Broad fences such as `src/domain/**`, `src/components/**`, or `tests/**` are not
 allowed. A target outside the manifest is out of scope even when the full gate
 finds an adjacent defect.
+
+A `requiredSymbols` row names a symbol the packet's deliverable preserves or creates, never one it retires. A retirement is recorded as a `retiredSymbols` row naming the retiree, and the packet's `requiredSymbols` names the **successor** instead. A packet that names one symbol in both lists is refused.
 
 ## Mandatory implementation order
 

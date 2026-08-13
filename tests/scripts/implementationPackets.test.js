@@ -154,6 +154,24 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     );
     expect([...index.statuses]).toEqual([['docs/implementation/packets/P-1.md', 'READY']]);
     expect(index.duplicates).toEqual([]);
+
+    // ── THE OMITTED-FIELD CONTROL FOR `retiredSymbols` ────────────────────────────────
+    // The field is optional, and its ABSENCE is what keeps every already-landed manifest
+    // row valid — none of them declares a retirement, and none of them ever will. The
+    // canonical fixture names no retirement at all, so it must stay clean at a terminal
+    // status exactly as it does at READY. This row is the backward-compatibility proof.
+    expect(Object.hasOwn(manifest.packets[0], 'retiredSymbols')).toBe(false);
+    const landedWithoutRetirements = clone(manifest);
+    landedWithoutRetirements.packets[0].status = 'LANDED';
+    write(root, INDEX_PATH, [
+      '| Packet | Status |',
+      '|---|---|',
+      '| [P-1](./packets/P-1.md) | LANDED |',
+      '| [P-2](./packets/P-2.md) | BLOCKED |',
+    ].join('\n'));
+    write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'LANDED'));
+    expect(validatePacketManifest(landedWithoutRetirements, { rootDir: root }))
+      .toEqual({ ok: true, errors: [] });
   });
 
   it('rejects an indexed packet omitted from the manifest', () => {
@@ -327,6 +345,108 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     whitespaceSymbol.packets[0].requiredSymbols[0].symbol = '   ';
     expect(errorText(validatePacketManifest(whitespaceSymbol, { rootDir: root })))
       .toContain('symbol must be a non-blank string');
+
+    // ── AND A PACKET MAY DECLARE WHAT ITS DELIVERABLE RETIRES ─────────────────────────
+    // The `requiredSymbols` check above is total and status-blind, which is correct: a
+    // required symbol must exist at every status, and that is what catches a typo the day
+    // it is written. But it left the manifest with no way to say "this packet retired X",
+    // so a packet that retired a symbol and honestly named the retiree reddened from its
+    // landing onward — the defect CR-IN1B-9 had to cure by hand, by re-pointing a row at a
+    // successor. `retiredSymbols` is the opposite-signed declaration, asserted at the one
+    // status where absence is assertable, exactly as the LANDED CREATE arm is. Both
+    // controls travel with it: SUPERSEDED asserts in NEITHER direction, and a non-terminal
+    // packet's retiree MUST still be present, because the packet is written against it.
+    const retireePath = 'src/retiree.js';
+    const retireeSymbol = 'export const retireMe';
+    const retireeSource = `${retireeSymbol} = true;\n`;
+    /** @param {ReturnType<typeof canonicalManifest>} candidate @param {string} status */
+    const retireAtStatus = (candidate, status) => {
+      candidate.packets[0].status = status;
+      write(root, INDEX_PATH, [
+        '| Packet | Status |',
+        '|---|---|',
+        `| [P-1](./packets/P-1.md) | ${status} |`,
+        '| [P-2](./packets/P-2.md) | BLOCKED |',
+      ].join('\n'));
+      write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', status));
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    const retiring = clone(manifest);
+    retiring.packets[0].retiredSymbols = [{ path: retireePath, symbol: retireeSymbol }];
+    write(root, retireePath, retireeSource);
+    expect(errorText(retireAtStatus(retiring, 'LANDED'))).toContain(
+      `retiredSymbols[0].symbol survives in ${retireePath} for LANDED retirement: ${retireeSymbol}`,
+    );
+    write(root, retireePath, 'export const successor = true;\n');
+    expect(retireAtStatus(retiring, 'LANDED')).toEqual({ ok: true, errors: [] });
+    rmSync(join(root, retireePath));
+    expect(retireAtStatus(retiring, 'LANDED')).toEqual({ ok: true, errors: [] });
+
+    // Before landing, the sign reverses: the retiree must still be there. These READY
+    // assertions are also the mutant control for the LANDED guard — widening that arm
+    // makes the surviving-symbol observation below flip from green to red.
+    write(root, retireePath, retireeSource);
+    expect(retireAtStatus(retiring, 'READY')).toEqual({ ok: true, errors: [] });
+    write(root, retireePath, 'export const successor = true;\n');
+    expect(errorText(retireAtStatus(retiring, 'READY'))).toContain(
+      `retiredSymbols[0].symbol is already absent from ${retireePath} before READY: ${retireeSymbol}`,
+    );
+    rmSync(join(root, retireePath));
+    expect(errorText(retireAtStatus(retiring, 'READY'))).toContain(
+      `retiredSymbols[0].path does not exist: ${retireePath}`,
+    );
+
+    // SUPERSEDED asserts in neither direction: the replacement may have removed the
+    // symbol, preserved it, or deleted its entire file before this packet did anything.
+    write(root, retireePath, retireeSource);
+    expect(retireAtStatus(retiring, 'SUPERSEDED')).toEqual({ ok: true, errors: [] });
+    write(root, retireePath, 'export const successor = true;\n');
+    expect(retireAtStatus(retiring, 'SUPERSEDED')).toEqual({ ok: true, errors: [] });
+    rmSync(join(root, retireePath));
+    expect(retireAtStatus(retiring, 'SUPERSEDED')).toEqual({ ok: true, errors: [] });
+
+    // Malformed declarations report once and never throw or cascade into a status check.
+    const malformedRows = [
+      ['not-an-array', 'P-1.retiredSymbols must be an array when present'],
+      [[null], 'P-1.retiredSymbols[0] must be an object'],
+      [[{ path: 'src/*.js', symbol: retireeSymbol }],
+        'P-1.retiredSymbols[0].path must not contain glob or NUL characters'],
+      [[{ path: '/tmp/retiree.js', symbol: retireeSymbol }],
+        'P-1.retiredSymbols[0].path must be repository-relative'],
+      [[{ path: retireePath, symbol: '   ' }],
+        'P-1.retiredSymbols[0].symbol must be a non-blank string'],
+      [[{ path: retireePath, symbol: 7 }],
+        'P-1.retiredSymbols[0].symbol must be a non-blank string'],
+    ];
+    for (const [rows, expectedError] of malformedRows) {
+      const malformed = clone(manifest);
+      malformed.packets[0].retiredSymbols = rows;
+      expect(retireAtStatus(malformed, 'READY').errors).toEqual([expectedError]);
+    }
+
+    write(root, retireePath, retireeSource);
+    const duplicate = clone(manifest);
+    duplicate.packets[0].retiredSymbols = [
+      { path: retireePath, symbol: retireeSymbol },
+      { path: retireePath, symbol: retireeSymbol },
+    ];
+    expect(retireAtStatus(duplicate, 'READY').errors).toEqual([
+      `P-1 contains duplicate retired symbol: ${retireePath} :: ${retireeSymbol}`,
+    ]);
+
+    // The two declarations are disjoint at every status, and the contradiction is the
+    // row's sole error because it is not then also evaluated as a retirement assertion.
+    const contradictory = clone(manifest);
+    contradictory.packets[0].retiredSymbols = [{
+      path: 'src/alpha.js',
+      symbol: 'alphaFeature',
+    }];
+    for (const status of ['DRAFT', 'READY', 'BLOCKED', 'LANDED', 'STALE', 'SUPERSEDED']) {
+      expect(retireAtStatus(contradictory, status).errors).toEqual([
+        'P-1 names src/alpha.js :: alphaFeature as BOTH required and retired',
+      ]);
+    }
   });
 
   it('emits a deterministic hash-bearing READY capsule with exact symbol evidence', () => {
@@ -373,6 +493,7 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       endLine: 4,
     });
     expect(first.requiredSymbols[0].text).toContain('export function alphaFeature');
+    expect(first.retiredSymbols).toEqual([]);
     const { capsuleDigest, ...digestFree } = first;
     expect(capsuleDigest).toBe(
       createHash('sha256').update(canonicalSerialize(digestFree)).digest('hex'),

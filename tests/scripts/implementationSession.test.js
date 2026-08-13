@@ -14,7 +14,12 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { canonicalSerialize, sha256 } from '../../scripts/implementation-packets.mjs';
+import {
+  canonicalSerialize,
+  capsuleDigestOf,
+  sha256,
+  verifyCodingCapsule,
+} from '../../scripts/implementation-packets.mjs';
 import {
   acquireSessionRunLock,
   allocateSessionRun,
@@ -197,7 +202,11 @@ describe('IA-2 implementation sessions', () => {
 
   it('accepts an unchanged descendant but rejects descendant substrate changes', () => {
     const unchanged = makeRepo();
-    expect(() => create(unchanged)).not.toThrow();
+    const unchangedSession = create(unchanged);
+    expect(unchangedSession.dispatch.capsule.retiredSymbols).toEqual([]);
+    expect(verifyCodingCapsule(unchangedSession.dispatch.capsule)).toBe(true);
+    expect(capsuleDigestOf(unchangedSession.dispatch.capsule))
+      .toBe(unchangedSession.dispatch.capsule.capsuleDigest);
 
     const changed = makeRepo();
     write(changed.root, 'scripts/substrate.mjs', [
@@ -208,6 +217,41 @@ describe('IA-2 implementation sessions', () => {
     git(changed.root, ['add', 'scripts/substrate.mjs']);
     git(changed.root, ['commit', '-q', '-m', 'change verified substrate']);
     expect(() => create(changed)).toThrow(/descendant changed declared substrate.*substrate/);
+
+    // A real dispatch carries a non-empty retirement row through the capsule, its digest,
+    // the authority comparison and fileHashes. The target is already in the fixture's base.
+    const retirement = makeRepo();
+    retirement.manifest.packets[0].retiredSymbols = [{
+      path: 'foreign/staged.txt',
+      symbol: 'staged-base',
+    }];
+    writeAuthority(retirement);
+    git(retirement.root, ['add', INDEX_PATH, PACKET_PATH, MANIFEST_PATH]);
+    git(retirement.root, ['commit', '-q', '-m', 'declare retirement target']);
+    const retirementSession = create(retirement);
+    expect(retirementSession.dispatch.capsule.retiredSymbols).toEqual([
+      { path: 'foreign/staged.txt', symbol: 'staged-base' },
+    ]);
+    expect(retirementSession.dispatch.capsule.fileHashes
+      .find(({ path }) => path === 'foreign/staged.txt'))
+      .toMatchObject({ path: 'foreign/staged.txt', exists: true });
+    expect(verifyCodingCapsule(retirementSession.dispatch.capsule)).toBe(true);
+    expect(capsuleDigestOf(retirementSession.dispatch.capsule))
+      .toBe(retirementSession.dispatch.capsule.capsuleDigest);
+
+    const retiredChanged = makeRepo();
+    retiredChanged.manifest.packets[0].retiredSymbols = [{
+      path: 'foreign/staged.txt',
+      symbol: 'staged-base',
+    }];
+    writeAuthority(retiredChanged);
+    git(retiredChanged.root, ['add', INDEX_PATH, PACKET_PATH, MANIFEST_PATH]);
+    git(retiredChanged.root, ['commit', '-q', '-m', 'declare retirement target']);
+    write(retiredChanged.root, 'foreign/staged.txt', 'staged-base\nchanged after verification\n');
+    git(retiredChanged.root, ['add', 'foreign/staged.txt']);
+    git(retiredChanged.root, ['commit', '-q', '-m', 'change verified retirement target']);
+    expect(() => create(retiredChanged))
+      .toThrow(/descendant changed declared substrate.*foreign\/staged/);
   });
 
   it('seals foreign staged/unstaged/untracked dirt while allowing only target edits', () => {
