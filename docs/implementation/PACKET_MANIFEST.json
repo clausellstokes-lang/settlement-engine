@@ -170,6 +170,60 @@
       ]
     },
     {
+      "id": "AO-2+3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-2-3.md",
+      "verifiedBase": "481c7e0aaa46bad968d1d0ad4b984294d15c7bf6",
+      "changeManifest": [
+        { "action": "CREATE", "path": "scripts/lib/news-voice-contract.mjs" },
+        { "action": "CREATE", "path": "tests/lint/newsVoiceContract.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.news-voice-baseline.json" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/lib/premortem-triggers.mjs" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/worldPulseFeedCuration.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export function scalarObservationsOf" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export function newsEntryForOutcome" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/npcAgency.js", "symbol": "goal can advance through" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"classes\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "export const PREDICATES" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\"" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical pure reconstructions that select each positive signature delta's lowest current indexes and close at 272 introductions minus 32 cap removals equals 240 final rows and 53 homes, with seven exact debt rows totaling 48 distinct values and 53 occurrences" },
+        { "id": "A2", "case": "one ordered completion test identity owns both intermediate reds: at C1 live debt matches current and production aligns before only the final zero assertion fails, while at C2 comparison fails first on exactly seven vanished identities and C3 passes all three ordered steps" },
+        { "id": "A3", "case": "the cure changes only the exact seven address-gated applied summaries from can advance through to advances through while paired proposal rows, reasons, headlines, underlying outcome and proposal inputs, keys, order, ids and every non-summary feed field remain unchanged, and the changed summary is retained in persisted Wizard News" },
+        { "id": "A4", "case": "per-pulse positive multiset differencing over complete visible signatures including reasons and tags preserves the five duplicate occurrences without classifying or rewriting reasons" },
+        { "id": "A5", "case": "canonical sorted row arrays reject duplicates and new grown shrunk and vanished debt by identity and count, current outstanding is an exact subset of immutable retro rows, and the zero bank preserves the exact corpus and historical denominator" },
+        { "id": "A6", "case": "the exact seven owned addresses are indicative after cure, unowned or nonmatching applied summaries pass through, and blank or malformed owned values fail closed" },
+        { "id": "A7", "case": "HZ-CROSSHOME validates as in-chain MACHINERY with a derived nonempty pre-mortem population whose synthetic fires, plus one valid mutation rationale and one whole census rerecord" },
+        { "id": "A8", "case": "the exact seven-path contract commit then one-path cure then one-path zero-bank lineage passes focused checks and the bare full gate before one old-value CAS with no unrelated movement" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/domain/worldPulseNewsCuration.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/lib/news-voice-contract.mjs",
+          "scripts/lib/premortem-triggers.mjs",
+          "src/domain/worldPulse/worldPulseFeedCuration.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"]
+      ]
+    },
+    {
       "id": "TC-3A",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
