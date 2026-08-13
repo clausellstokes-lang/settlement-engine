@@ -125,11 +125,24 @@ producer seams; exhaustive flat-event and `campaign.chronicles[]` coverage is de
 because the latter has no pure non-network producer. The scalar stream stays opt-in and
 cannot alter the OSR fold or baseline.
 
-**NEXT, in the corrected order:** compile/promote H26 schema 7 (it takes the FREE census
-row) → land its coordinator-owned code/genesis pair → re-derive AO-0 against the clean
-schema-7 genesis and promote it as schema 8 → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 →
-GR-4e → CR-NEXT-1's wider corpus. AO-3 remains the owner-visible same-seed news-prose
-shift; owner veto surfaces remain §17.7 · §17.4 · §17b · §18 · §19 · §20 · §21.
+**H26 IS STOPPED BEFORE BRANCH MOVEMENT, exactly as its packet requires.** Its detached
+schema-7 code/genesis pair reproduced every H26 acceptance figure, but the genesis full
+gate exposed a clean-checkout invariant defect: pre-build `test:ratchet` observes 51
+additional `tests/build/**` deferrals when untracked `dist/` is absent. The current
+ceiling was mechanically frozen in a warmed checkout, so the same committed source is
+gate-red in a clean checkout. This is not an H26 failure and may not be hidden by a
+ceiling raise or a preparatory build. A separate gate-integrity precursor must make the
+source-test and post-build-dist phases explicit, land green from a clean checkout, then
+H26 is revalidated, resealed, regenerated, and rerun against that descendant.
+
+**NEXT, in the corrected order:** gate-integrity precursor → H26 schema 7 pair → AO-0
+schema 8 → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 → GR-4e → CR-NEXT-1's wider corpus.
+The owner granted universal standing authorization on 2026-08-13 (OWNER_DECISION_QUEUE
+§22): permission, approval, veto, confirmation, and signature re-asks are cleared, but
+packet status, mandatory STOPs, evidence, clean gates, live substrate, and the endgame
+sequence remain binding. The current terminal is a clean, green, ledger-current
+build-complete-dark SHA, immediately before creation of the disposable diagnostic-soak
+worktree; do not begin D-1/L0.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 

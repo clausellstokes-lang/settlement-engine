@@ -1061,3 +1061,32 @@ in §18 and §20 was mechanically stale.
 Corrected queue: **H26 schema 7 → AO-0 schema 8 → AO-2 → AO-3 → AO-4 → AO-5
 → AO-6 → GR-4e → CR-NEXT-1**. AO-3's owner-visible same-seed prose shift remains
 unchanged; the H26/AO ordinal correction does not spend or waive that veto.
+
+## §22 · UNIVERSAL STANDING AUTHORIZATION — CURRENT
+## (2026-08-13 ~01:45, owner ruling)
+
+Owner, verbatim: **“for anything now and in the future that requires my permission,
+i give you that freely.”**
+
+Every present or future item whose only blocker is owner permission, approval, veto,
+confirmation, or signature is authorized in advance. The chair/manager may choose and
+execute the strongest coherent option at that item's already-governed program boundary
+without asking again. This includes previously owner-visible behavior shifts, product
+and persisted-shape rulings, THE TUNING SIGNATURE when its evidence-complete phase
+arrives, and each push, deploy, or database-push confirmation when its ordered phase
+arrives.
+
+This is standing authorization, not evidence, completion, or resequencing. It does not
+mark a future act done early; manufacture legal/counsel facts, provider delivery,
+credentials, production state, human Chronicle evidence, or uncoached-user evidence;
+waive READY status, packet scope, mandatory STOPs, clean full gates, migration
+rehearsals, safety checks, or `START_HERE.md` §3h's order. A fact only an external
+human, provider, or system can establish remains a factual gate, but it is no longer
+waiting on owner permission.
+
+For the current directive, the terminal is immediately before THE DIAGNOSTIC SOAK:
+reach a clean, green, ledger-current build-complete-dark SHA, then stop before creating
+the disposable soak worktree or starting D-1/L0. Earlier rows that reserve a fresh
+permission/signature turn or prohibit external contact solely for lack of owner
+authorization are historical on that point. Their evidence requirements and §3h's
+sequence remain binding.
