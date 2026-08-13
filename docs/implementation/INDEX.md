@@ -3,8 +3,14 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `481c7e0aaa46bad968d1d0ad4b984294d15c7bf6`
-- **Measured:** 2026-08-13 — **AO-2+3 promoted just in time.** CR-AO-11 compiles the
+  `f0c272e894f3f4d4edbd7fd1dac4c65580f87e52`
+- **Measured:** 2026-08-13 — **AO-2+3 landed as the ruled atomic train.** The exact
+  immutable lineage is contract C1 `c825af92` → cure C2 `d4f213d0` → zero-bank
+  C3 `f0c272e8`; only green C3 reached the shared ref. The focused proof closed at
+  97/97, the bare full gate exited zero, strict dist passed 403/403, and the whole
+  lighting census is `2410/365/2045/19968/5636`. The live manifest has 28 rows and
+  zero dispatchable packets. AO-2+3 is terminal and its census reservation is free.
+- **Historical measurement:** 2026-08-13 — **AO-2+3 promoted just in time.** CR-AO-11 compiled the
   contract and ruled cure as one coordinator-owned three-commit train: seven-path
   contract, one-path address-gated summary cure, one-path zero bank, then one old-value
   CAS. The live manifest has 28 rows and exactly one dispatchable packet. The scalar
@@ -150,24 +156,23 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-GTR1 | [`GTR-1`](./packets/infrastructure/GTR-1.md) | **LANDED** at `cd404948`; code half `5f7e7051`; do not redispatch | Assigns source tests and post-build artifact tests to disjoint, exhaustive phases; the clean 17-step gate proves the source census and strict 403/403 dist phase | any product source, dependency, new test title/file, raw-test filtering, duplicate CI build, skip-ceiling raise, product golden, tuning, flag, timeout, budget, census or non-test baseline |
 | LANDED-H26 | [`H26`](./packets/infrastructure/H26.md) | **LANDED** at `98729f79`; code half `d081feee`; do not redispatch | Schema 7 BANK-BY-RULE: 44 reads / 31 tagged rows, target 1,998 / 1,412 / 387, exact reviewed four-entry scanner transition and clean 17-step gate. Reservations are free for post-H26 re-derivation. | AO-0 and every scalar/corpus producer seam; SCW-1b and item (a); any `src/**` edit; a fifth declaration; scan/corpus/sentinel movement; any other scanner drift; hand-edited JSON; untagged raises; every golden, tuning value, budget, timeout, floor and unrelated baseline |
 | LANDED-AO0 | [`AO-0`](./packets/corpus-coverage/AO-0.md) | **LANDED** at `e71beb84`; code half `3df85a3a`; do not redispatch | Schema 8 adds a second-consumer-only typed scalar projection over five authoritative shipped seams while preserving `foldCorpus`, default topology, OSR artifact, and inventory byte-for-byte. The strict 7→8 proof binds an exact four-entry scanner transition and 1,412 same rows with zero motion. | AO-2..6, prose cures, HZ-CROSSHOME, every `src/**` edit, flat flavor events, `campaign.chronicles[]`, volatile ID/time fields, scalar data in the default artifact, dependency, golden, flag, tuning, timeout, floor, ceiling or unrelated baseline movement |
-| AO-23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **READY** at `481c7e0a`; CR-AO-11 atomic train | Contract-before-cure without exposing a red branch tip: reconstruct 272 introductions / 53 homes from AO-0's scalar stream, freeze 48 distinct / 53 occurrence debt across seven applied-summary addresses, prove the retro-detection red, cure only those addresses at the view-time seam, then bank the seven vanished identities to zero. The exact train is 7-path contract → 1-path cure → 1-path bank; only the final green child reaches the shared ref. This packet holds the census row. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
+| LANDED-AO23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **LANDED** at `f0c272e8`; contract `c825af92`, cure `d4f213d0`; do not redispatch | Contract-before-cure without exposing a red branch tip: 272 introductions / 53 homes froze 48 distinct / 53 occurrence debt across seven applied-summary addresses, C1 proved the final-zero red, C2 cured only those addresses and proved exactly seven vanished identities, and C3 banked them to zero. The exact 7-path → 1-path → 1-path train passed 97/97 and only its green final child reached the shared ref. The census row is free. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-2+3 PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-2+3 LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: AO-2+3.** The live manifest has 28 rows and exactly one dispatchable
-packet. AO-0 is terminal and released the row at `2409/365/2044/19960/5635`. AO-2+3 adds
-one test file carrying exactly eight `it` titles and one `describe` title, so its isolated
-anticipated tuple is `2410/365/2045/19968/5636`; that arithmetic is a reservation, not a
-measurement, and the contract commit must re-derive all five values whole. Landing releases
-the row.
+⭐ **CURRENT HOLDER: FREE.** The live manifest has 28 rows and zero dispatchable packets.
+AO-2+3 is terminal; its contract commit added one test file carrying exactly eight `it`
+titles and one `describe` title, and the executed whole re-derivation is
+`2410/365/2045/19968/5636`. Landing released the row for the next promotion that can move
+a census figure.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

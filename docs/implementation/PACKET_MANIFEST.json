@@ -171,7 +171,7 @@
     },
     {
       "id": "AO-2+3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/corpus-coverage/AO-2-3.md",
       "verifiedBase": "481c7e0aaa46bad968d1d0ad4b984294d15c7bf6",
       "changeManifest": [
