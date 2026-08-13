@@ -6,11 +6,15 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `ba6a2913`
-- Commits: 3209
+- HEAD: `972066af`
+- Commits: 3213
 - Working tree at refresh: 0 dirty entries
 
 ```
+972066af 2026-08-13 AO-4: record headline totality landing
+09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
+4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
+2859bae9 2026-08-13 AO-4: promote headline totality and inert quarantine
 ba6a2913 2026-08-13 AO-2+3: record atomic voice contract-cure landing
 f0c272e8 2026-08-13 AO-3: bank the seven vanished voice-debt identities
 d4f213d0 2026-08-13 AO-3: cure applied Wizard News summary voice (deliberate red)
@@ -407,8 +411,4 @@ c86ad53a 2026-08-03 Lane WD-1: the war layer's pure reads leave the writer — 1
 d716b37e 2026-08-03 Lane MD piece 1: the mirror dies — historyBeats stops re-deriving the likely future and consumes the spine's own
 9a926344 2026-08-03 Lane PB piece 3: the maker's plate and the wax seal — the mark is riveted to the shaft, and one letter of the name becomes wax
 201cd0a8 2026-08-03 Lane PB piece 2: the shaft becomes a thin stick — 48 → 38, measured against the type it must seat, and the hang deepens for free
-7e9479b3 2026-08-03 Queue: lane W8-D's two slices, the two reds it inherited, and the process failure it committed itself
-9e6ac0bf 2026-08-03 WR-8 slice 5 (R2): the license is a durable world fact, and a forged save arms nobody
-ae547044 2026-08-03 Lane PB piece 1: the band turns around — the shingle now ascends INTO Realm, and the cells become the parallelograms the mockup asked for
-eaecafdc 2026-08-03 Queue: lane RR's two commits, the gate that was named rather than assumed, and the field that was never dead
 ```

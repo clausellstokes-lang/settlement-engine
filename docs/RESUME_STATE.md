@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 08:46:53 EDT
+**Generated:** 2026-08-13 10:21:17 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ba6a2913` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `e7d66cce` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `972066af` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `2e826756` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 35Gi free (83% used)
+**Disk:** 34Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T084601` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260813T102025` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T084601
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T102025
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,10 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+972066af 2026-08-13 AO-4: record headline totality landing
+09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
+4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
+2859bae9 2026-08-13 AO-4: promote headline totality and inert quarantine
 ba6a2913 2026-08-13 AO-2+3: record atomic voice contract-cure landing
 f0c272e8 2026-08-13 AO-3: bank the seven vanished voice-debt identities
 d4f213d0 2026-08-13 AO-3: cure applied Wizard News summary voice (deliberate red)
@@ -36,20 +40,16 @@ c5fd3638 2026-08-13 AO-2+3: promote atomic voice contract-cure train
 481c7e0a 2026-08-13 AO-0: record schema-8 landing
 e71beb84 2026-08-13 AO-0: freeze schema-8 corpus-coverage baseline
 3df85a3a 2026-08-13 AO-0: add opt-in scalar observation corpus
-91f68277 2026-08-13 AO-0: promote schema-8 scalar observation mint
-7f231662 2026-08-13 H26: record schema-7 landing
-98729f79 2026-08-13 H26: freeze schema-7 explained-writer baseline
-d081feee 2026-08-13 H26: bank explained-writer reads by rule
 ```
 ## Last 6 ledger commits
 
 ```
+2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
 e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
 a1578fcc 2026-08-13 Record AO-0 schema-8 landing
 9747d127 2026-08-13 Record GTR and H26 atomic landings
 1ed18d27 2026-08-13 Record universal standing authorization and the pre-soak boundary
 c38e9e24 2026-08-12 H26 keeps schema 7; AO-0 moves to schema 8
-31a34aa5 2026-08-12 The five prose debts are closed; AO-0 is next
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,53 @@ c38e9e24 2026-08-12 H26 keeps schema 7; AO-0 moves to schema 8
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~08:47 EDT) — AO-2+3 is terminal; build clean at `ba6a2913`
+# ⭐⭐ CURRENT (2026-08-13 ~10:22 EDT) — AO-4 is terminal; build clean at `972066af`
+
+**AO-4 IS DONE END-TO-END.** Just-in-time promotion
+`2859bae9de98fa19d602111702eb9fe5b7085d71` and nullable-home amendment
+`4f9932d696a8c1ed10c4cbbb23e1611595a1880f` produced the dispatch parent, sealed
+at digest `3c71a8c2b33597142c668ae12fd340455c188ae6f4aa8e3d4e6ec18d961c4c64`.
+The exact eight-path green implementation is
+`09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`; one old-value CAS exposed only
+that green child. Terminal flip
+`972066affb82b002f197de7ce40ba3441dcd3220` changes only INDEX, manifest, and
+the AO-4 packet. The shared index and build worktree are clean.
+
+The pre-cure proof found exactly one uncovered and zero-overlap live witness,
+`Military/Guard may press a challenge to the government`. The final registry is
+**26 rules = 17 active + 9 exact written inert**, covering **168 occurrences / 69
+distinct prospective values** exactly once, with zero gap, overlap, or indicative
+match. The single corpus build closed at **12 pulse roots / 272 introductions / 32
+retirements / 240 final entries / 53 homes**. Complete headline+summary totality is
+**106 identities / 400 distinct values / 544 occurrences / 14 prospective / 92
+indicative**, with zero blank or mixed identities. Its canonical serialization is
+**12,242 bytes**, SHA-256
+`82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694`.
+Selected raw outcomes close at **151/80/95/66**, mechanical outcomes at
+**77/24/73/23**, and their occurrence-disjoint union at **228/83/168/69**.
+
+A1–A8 and the focused proof passed **134/134**. The hazard registry validates at
+**29 classes (M12/P11/D6)** and the pre-mortem registry at **28 predicates**. Both
+typecheck ratchets pass at **173/173** and **1,134/1,134**; plain observed-shape
+validation remains green at **1,998 reads**. The lighting census was re-derived whole
+at **2411/365/2046/19976/5637**. Bare `npm run check:tail` exited 0; strict dist
+discovered the same 50 files and passed **403/403** tests. No golden, default corpus,
+observed-shape artifact, flag, tuning, dependency, timeout, floor, ceiling, persisted
+shape, hazard count/status, mutation uncovered count, unrelated baseline, or ninth
+implementation path moved. Deviations and judgment calls: **NONE**.
+
+**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at full HEAD
+`972066affb82b002f197de7ce40ba3441dcd3220`; `validate:packets` reports **29
+packets / 0 READY, exit 0**. GTR-1, H26, AO-0, AO-2+3, and AO-4 are terminal; the
+census reservation is free and there is no live implementation lane to collect. The
+universal standing authorization remains durable at ledger `1ed18d27`; it does not
+waive technical READY/STOP, evidence, substrate, or ordering law.
+
+**NEXT:** compile AO-5 fresh, just in time, from `972066af`; do not redispatch AO-4.
+No diagnostic-soak worktree exists and D-1/L0 has not started; the requested terminal
+remains immediately before that first soak.
+
+# (superseded ~10:22) — AO-2+3 is terminal; build clean at `ba6a2913`
 
 **AO-2+3 IS DONE END-TO-END.** Promotion HEAD
 `c5fd3638586c39d50a10f4cf64b7fa1408fbaaf1` was sealed with digest
