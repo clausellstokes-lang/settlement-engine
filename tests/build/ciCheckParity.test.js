@@ -109,15 +109,34 @@ function npmRunStepsFromJob(job) {
   return names;
 }
 
+/** Direct phase commands bypass package-script ownership and are never allowed in gate jobs. */
+function directGateCommandsFromJob(job) {
+  const escapes = [];
+  for (const command of runCommands(job)) {
+    const runnable = command
+      .split('\n')
+      .map((line) => (/^\s*#/.test(line) ? '' : line.replace(/\s+#.*$/, '')))
+      .join('\n');
+    for (const segment of runnable.split(/&&|\|\||;|\n|\|/)) {
+      const direct = segment.trim();
+      if (
+        /^(?:(?:npx|npm\s+exec)\s+)?vitest\b/.test(direct)
+        || /^(?:(?:npx|npm\s+exec)\s+)?vite\s+build\b/.test(direct)
+        || /^node\s+scripts\/check-test-ratchet\.mjs\b/.test(direct)
+      ) escapes.push(direct);
+    }
+  }
+  return escapes;
+}
+
 /**
  * The `npm run <step>` names invoked by the parallel CI gate groups.
  *
  * A step's `run:` may chain commands, and CI runs MORE than `npm run` steps in
- * the check job (e.g. `npm ci`, `npm audit …`, and the post-build
- * `npx vitest …` anti-vacuity step). We pull only the `npm run <step>` tokens,
+ * the check job (e.g. `npm ci` and `npm audit …`). We pull only the
+ * `npm run <step>` tokens,
  * matching what the package.json `check` script chains — `npm ci` / `npm audit`
- * are intentionally excluded (they are `npm ci`/`npm audit`, not `npm run <x>`),
- * as is the `npx vitest` post-build step, which is CI-only by design.
+ * are intentionally excluded (they are `npm ci`/`npm audit`, not `npm run <x>`).
  */
 function ciCheckJobSteps() {
   const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
@@ -141,6 +160,29 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
         `local gate step "npm run ${step}" must occur exactly once in parallel CI`,
       ).toHaveLength(1);
     }
+
+    const sourceIndex = scriptSteps.indexOf('test:ratchet');
+    const buildIndex = scriptSteps.indexOf('build');
+    const distIndex = scriptSteps.indexOf('verify:dist');
+    expect(sourceIndex, 'local source-test phase must be present').toBeGreaterThanOrEqual(0);
+    expect(sourceIndex, 'local source tests must run before artifact construction').toBeLessThan(buildIndex);
+    expect(buildIndex, 'local build must run before strict dist verification').toBeLessThan(distIndex);
+
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const testsSteps = npmRunStepsFromJob(jobBody(ci, 'check-tests'));
+    const buildSteps = npmRunStepsFromJob(jobBody(ci, 'check-build'));
+    expect(testsSteps.filter((step) => ['test', 'test:ratchet', 'build', 'verify:dist'].includes(step)))
+      .toEqual(['test:ratchet']);
+    expect(buildSteps.filter((step) => ['test', 'test:ratchet', 'build', 'verify:dist'].includes(step)))
+      .toEqual(['build', 'verify:dist']);
+    expect(
+      directGateCommandsFromJob(jobBody(ci, 'check-tests')),
+      'check-tests must not bypass source-phase ownership with a raw/direct runner or build',
+    ).toEqual([]);
+    expect(
+      directGateCommandsFromJob(jobBody(ci, 'check-build')),
+      'check-build must reach build and strict dist only through their package scripts',
+    ).toEqual([]);
   });
 
   it('every parallel gate step is part of the local check script', () => {
@@ -190,6 +232,18 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
       '          npm run real-two && npm run real-three',
     ].join('\n');
     expect(npmRunStepsFromJob(synthetic)).toEqual(['real-one', 'real-two', 'real-three']);
+
+    const directEscapes = [
+      '    steps:',
+      '      - run: npx vitest run tests/build/',
+      '      - run: vite build',
+      '      - run: node scripts/check-test-ratchet.mjs --verify-dist',
+    ].join('\n');
+    expect(directGateCommandsFromJob(directEscapes)).toEqual([
+      'npx vitest run tests/build/',
+      'vite build',
+      'node scripts/check-test-ratchet.mjs --verify-dist',
+    ]);
   });
 
   it('gives the measured full-suite ratchet enough CI timeout headroom', () => {

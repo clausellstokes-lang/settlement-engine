@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 /**
- * check-test-ratchet.mjs — the PER-TEST suite ratchet (gate restoration, step 12).
+ * check-test-ratchet.mjs — the PER-TEST suite ratchet (gate restoration, step 15).
  *
  * ── WHY THIS FILE EXISTS ────────────────────────────────────────────────────
- * `npm run test` (`vitest run`) is a BOOLEAN gate at zero failures, and it is
- * step 12 of the 14-step `&&` chain in `npm run check`. It is red. Because the
- * chain is `&&`, everything BEHIND it stopped running with it:
+ * `npm run test` (`vitest run`) was a BOOLEAN gate at zero failures. Its red
+ * stopped everything behind it; the current 17-step chain replaces it with
+ * `test:ratchet` at step 15, followed by `build` 16 and `verify:dist` 17:
  *
- *     … && lint && test && build && verify:dist
- *                  ^^^^ red   ^^^^^   ^^^^^^^^^^^  <-- BOTH DARK since 2026-08-02
+ *     … && lint && test:ratchet && build && verify:dist
+ *                  ^^^^^^^^^^^    ^^^^^   ^^^^^^^^^^^
  *
  * So the outage was never "some tests fail". It was that the production BUILD
  * and `verify:dist` — the dist-contract ratchet — had not run as part of the
  * gate for months. That matters more than it sounds: there is a recorded hazard
  * ("DIST WAS UN-BOOTABLE — chunk-cycle TDZ") in which `build` EXITS 0 while the
  * emitted `dist` cannot boot, and `verify:dist` plus `smoke:boot` are the only
- * guards for exactly that. A red step 12 was hiding the guard against shipping
+ * guards for exactly that. The former red test phase was hiding the guard against shipping
  * an un-bootable bundle.
  *
- * This is the SAME architectural move that repaired step 9
- * (scripts/check-full-typecheck.mjs), applied one step later, and it carries
- * step 9's hard-won hardenings: an anti-vacuity sentinel, a scope sentinel,
+ * This is the SAME architectural move that repaired step 12
+ * (scripts/check-full-typecheck.mjs), applied three steps later, and it carries
+ * that gate's hard-won hardenings: an anti-vacuity sentinel, a scope sentinel,
  * env-var testability seams, and a fail-closed meta-test that drives every
  * failure path with an INJECTED FAKE RUNNER instead of merely asserting it.
  *
@@ -38,11 +38,11 @@
  *      test name>`. A FILE-level allowlist would hide every OTHER test in that
  *      file — including ones that break tomorrow — which is the whole reason
  *      this is not a skip-list.
- *   2. THE TESTS ARE RUN. This ratchet reads RESULTS; it never suppresses
- *      execution, never passes `--exclude`, and never marks anything `.skip`.
- *      A skipped test is not debt, it is a hole — so a baselined test that
- *      turns up SKIPPED reds the gate, and the suite-wide skip count has its
- *      own frozen ceiling.
+ *   2. EVERY TEST HAS ONE AUTHORITATIVE PHASE. The source-debt ratchet runs
+ *      everything except `tests/build/**`; the strict post-build mode runs the
+ *      exact recursively discovered build-test set after `dist/` exists. No
+ *      test is suppressed: a skipped test is a hole, so source skips remain
+ *      ceiling-bound and any build-test non-run is an unconditional failure.
  *   3. SHRINK-ONLY, with BELOW-DEMANDS-RATCHET-DOWN: a baselined test that
  *      starts passing prints a RATCHET DOWN notice naming the re-freeze command,
  *      because a silent pass lets the ceiling drift permanently above the truth,
@@ -58,6 +58,7 @@
  * ── USAGE ───────────────────────────────────────────────────────────────────
  *   npm run test:ratchet          # the gate step (wired into `npm run check`)
  *   npm run test:ratchet:update   # re-freeze after a burn-down (REMOVES only)
+ *   npm run verify:dist           # strict all-passed tests/build/** phase
  *   npm run test                  # UNFILTERED vitest — what burn lanes read
  *
  * `npm run test` stays a raw command on purpose: a burn lane needs the whole
@@ -90,6 +91,10 @@ export const SCOPE_FLOOR_RATIO = 0.9;
 export const DEBT_CLASSES = ['owner-gated', 'debt'];
 /** The statuses that mean "this test did not actually execute". */
 export const NON_RUN_STATUSES = ['pending', 'skipped', 'todo'];
+/** The source phase's one and only exclusion. */
+export const SOURCE_TEST_EXCLUDE = 'tests/build/**';
+/** Vitest's supported test/spec filename family, used for exact dist discovery. */
+const BUILD_TEST_FILE = /\.(?:test|spec)\.(?:[cm]?[jt]sx?)$/;
 
 /** Identity spelling — exported so the meta-test pins the SAME function the gate uses. */
 export const identityOf = (file, fullName) => `${file} :: ${fullName}`;
@@ -99,7 +104,55 @@ export function normalizePath(raw, root = ROOT) {
   const prefix = `${root.split('\\').join('/').replace(/\/+$/, '')}/`;
   let p = String(raw).split('\\').join('/');
   if (p.startsWith(prefix)) p = p.slice(prefix.length);
-  return p.replace(/^\.\//, '');
+  return path.posix.normalize(p.replace(/^\.\//, ''));
+}
+
+/** Whether a normalized report path belongs to the post-build authority. */
+export function isBuildTestPath(raw, root = ROOT) {
+  const file = normalizePath(raw, root);
+  return file.startsWith('tests/build/');
+}
+
+/**
+ * Recursively discover the exact post-build test corpus from disk. The result
+ * is repo-relative, POSIX, sorted, and independent of `dist/` contents.
+ */
+export function discoverBuildTestFiles(root = ROOT) {
+  const buildRoot = path.join(root, 'tests', 'build');
+  const files = [];
+  if (fs.existsSync(buildRoot) && fs.lstatSync(buildRoot).isSymbolicLink()) {
+    throw new Error(`symbolic link is the strict build-test root: ${normalizePath(buildRoot, root)}`);
+  }
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const absolute = path.join(dir, entry.name);
+      // Vitest follows symlinks. Reject them explicitly instead of silently
+      // discovering a smaller authority set than the runner can report.
+      if (entry.isSymbolicLink()) {
+        throw new Error(`symbolic link in strict build-test corpus: ${normalizePath(absolute, root)}`);
+      }
+      if (entry.isDirectory()) walk(absolute);
+      else if (entry.isFile() && BUILD_TEST_FILE.test(entry.name)) {
+        files.push(normalizePath(absolute, root));
+      }
+    }
+  };
+  walk(buildRoot);
+  return files.sort();
+}
+
+/** Normalized suite files named by the runner report, including zero-row suites. */
+export function reportFilesOf(report, root = ROOT) {
+  const suites = Array.isArray(report?.testResults) ? report.testResults : [];
+  return suites.map((suite) => normalizePath(suite.name || suite.file || '', root));
+}
+
+/** The exact command used by each phase; exported so the meta-gate pins live bytes. */
+export function runnerCommandOf({ verifyDist = false, outputFile }) {
+  const output = JSON.stringify(outputFile);
+  if (verifyDist) return `npx vitest run tests/build/ --reporter=json --outputFile=${output}`;
+  return `npx vitest run --exclude=${JSON.stringify(SOURCE_TEST_EXCLUDE)} --reporter=json --outputFile=${output}`;
 }
 
 /**
@@ -230,7 +283,8 @@ export function pendingGapOf(report, countedNonRun) {
   return gap > 0 ? { declared, counted: countedNonRun, gap } : null;
 }
 
-const BOOTSTRAP_DOC = 'PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT'
+const BOOTSTRAP_DOC = 'PER-TEST failure census for the source phase (all tests except tests/build/**).'
+  + ' SHRINK-ONLY. A failing test ABSENT'
   + ' from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution'
   + ' — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it.'
   + ' `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit.'
@@ -242,9 +296,43 @@ const BOOTSTRAP_DOC = 'PER-TEST failure census for `vitest run`. SHRINK-ONLY. A 
  */
 export async function run(argv = []) {
   const BASELINE = baselinePath();
-  const UPDATE = argv.includes('--update');
-  const BOOTSTRAP = argv.includes('--bootstrap');
   const fail = (lines) => { console.error(lines.join('\n')); return 1; };
+  const allowedModes = new Set(['--update', '--bootstrap', '--verify-dist']);
+  const unknown = argv.filter((arg) => !allowedModes.has(arg));
+  const selectedModes = argv.filter((arg) => allowedModes.has(arg));
+  if (unknown.length) {
+    return fail([
+      `[test-ratchet] unknown argument(s): ${unknown.join(', ')}`,
+      '  Allowed modes: default source gate, --update, --bootstrap, or --verify-dist.',
+    ]);
+  }
+  if (selectedModes.length > 1) {
+    return fail([
+      '[test-ratchet] mode flags are mutually exclusive; --verify-dist is incompatible with',
+      '  --update/--bootstrap, and source update/bootstrap cannot be combined with each other.',
+    ]);
+  }
+  const UPDATE = selectedModes[0] === '--update';
+  const BOOTSTRAP = selectedModes[0] === '--bootstrap';
+  const VERIFY_DIST = selectedModes[0] === '--verify-dist';
+
+  let discoveredBuildFiles = [];
+  if (VERIFY_DIST) {
+    try {
+      discoveredBuildFiles = discoverBuildTestFiles();
+    } catch (error) {
+      return fail([
+        `[test-ratchet] STRICT DIST discovery refused: ${error.message}`,
+        '  The runner corpus and the on-disk authority must be unambiguous.',
+      ]);
+    }
+  }
+  if (VERIFY_DIST && discoveredBuildFiles.length === 0) {
+    return fail([
+      '[test-ratchet] STRICT DIST discovered ZERO build test files — failing closed.',
+      '  Expected a nonempty recursively discovered tests/build/**/*.{test,spec} corpus.',
+    ]);
+  }
 
   // ── Run the suite ─────────────────────────────────────────────────────────
   // vitest exits non-zero when tests fail; that is the NORMAL path here, so do
@@ -254,17 +342,20 @@ export async function run(argv = []) {
   const OUT = path.join(TMP, 'results.json');
   let runnerExitedNonZero = false;
   let runnerOutput;
+  const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
+  if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
+  else delete runnerEnv.VERIFY_DIST;
   try {
     runnerOutput = execSync(
       process.env.TEST_RATCHET_RUN_CMD
-        || `npx vitest run --reporter=json --outputFile=${JSON.stringify(OUT)}`,
+        || runnerCommandOf({ verifyDist: VERIFY_DIST, outputFile: OUT }),
       {
         cwd: ROOT,
         encoding: 'utf8',
         stdio: ['ignore', 'pipe', 'pipe'],
         maxBuffer: 256 * 1024 * 1024,
         // The seam hands a fake runner the very path the real one writes.
-        env: { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT },
+        env: runnerEnv,
       },
     );
   } catch (e) {
@@ -301,8 +392,21 @@ export async function run(argv = []) {
     ]);
   }
 
+  const reportedFiles = reportFilesOf(report);
   const rows = rowsOf(report);
   const uncollected = uncollectedOf(report);
+
+  if (!VERIFY_DIST) {
+    const leakedBuildFiles = [...new Set(reportedFiles.filter((file) => isBuildTestPath(file)))].sort();
+    if (leakedBuildFiles.length) {
+      return fail([
+        '[test-ratchet] SOURCE PHASE included tests/build/** even though that corpus belongs',
+        '  exclusively to strict post-build verification. The runner ignored the one exclusion:',
+        ...leakedBuildFiles.map((file) => `    ${file}`),
+      ]);
+    }
+  }
+
   if (rows.length === 0) {
     return fail([
       '[test-ratchet] the report contains ZERO TESTS — failing closed.',
@@ -320,6 +424,130 @@ export async function run(argv = []) {
   const shaOf = () => process.env.TEST_RATCHET_SHA || (() => {
     try { return execSync('git rev-parse HEAD', { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { return 'unknown'; }
   })();
+
+  // ── Strict post-build authority ──────────────────────────────────────
+  // There is no baseline and no debt concept here. Once the artifact exists,
+  // every on-disk build contract must appear exactly once and pass whole.
+  if (VERIFY_DIST) {
+    const failures = [];
+    const suites = Array.isArray(report?.testResults) ? report.testResults : [];
+    const discovered = new Set(discoveredBuildFiles);
+    const reported = new Set(reportedFiles);
+    const fileCounts = new Map();
+    for (const file of reportedFiles) fileCounts.set(file, (fileCounts.get(file) || 0) + 1);
+    const duplicateFiles = [...fileCounts].filter(([, count]) => count > 1).map(([file]) => file).sort();
+    const outside = [...reported].filter((file) => !isBuildTestPath(file)).sort();
+    const missing = discoveredBuildFiles.filter((file) => !reported.has(file));
+    const extra = [...reported].filter((file) => !discovered.has(file)).sort();
+
+    if (runnerExitedNonZero) failures.push('  runner exited NON-ZERO; strict dist never banks a runner failure.');
+    if (report?.success !== true) {
+      failures.push('  report.success is not TRUE; strict dist requires an explicit successful report.');
+    }
+    const nonPassedSuites = suites
+      .filter((suite) => suite.status !== 'passed')
+      .map((suite) => `${normalizePath(suite.name || suite.file || '(unnamed suite)')} [${String(suite.status)}]`)
+      .sort();
+    if (nonPassedSuites.length) {
+      failures.push(
+        '  suite status was not PASSED:',
+        ...nonPassedSuites.map((suite) => `    ${suite}`),
+      );
+    }
+    if (duplicateFiles.length) {
+      failures.push(
+        '  DUPLICATE reported build-test file(s):',
+        ...duplicateFiles.map((file) => `    ${file}`),
+      );
+    }
+    if (outside.length) {
+      failures.push(
+        '  OUT-OF-SCOPE file(s) escaped tests/build/**:',
+        ...outside.map((file) => `    ${file}`),
+      );
+    }
+    if (missing.length) {
+      failures.push(
+        '  MISSING discovered build-test file(s) from the report:',
+        ...missing.map((file) => `    ${file}`),
+      );
+    }
+    if (extra.length) {
+      failures.push(
+        '  EXTRA reported file(s) absent from recursive on-disk discovery:',
+        ...extra.map((file) => `    ${file}`),
+      );
+    }
+    if (uncollected.length) {
+      failures.push(
+        '  UNCOLLECTED build-test suite(s) produced no measurable failing row:',
+        ...uncollected.map((file) => `    ${file}`),
+      );
+    }
+
+    const duplicateRows = [];
+    const rowCounts = new Map();
+    for (const row of rows) rowCounts.set(row.id, (rowCounts.get(row.id) || 0) + 1);
+    for (const [id, count] of rowCounts) if (count > 1) duplicateRows.push(id);
+    if (duplicateRows.length) {
+      failures.push(
+        '  DUPLICATE build-test row identity/identities:',
+        ...duplicateRows.sort().map((id) => `    ${id}`),
+      );
+    }
+
+    const collapsed = collapsedSuitesOf(report);
+    if (collapsed.length) {
+      failures.push(
+        '  COLLAPSED build-test suite(s) never started:',
+        ...collapsed.map((suite) => `    ${suite.file} (${suite.rows} non-run row(s))`),
+      );
+    }
+    const incomplete = rows.filter((row) => !row.file || !row.fullName || row.status !== 'passed');
+    for (const status of ['failed', ...NON_RUN_STATUSES]) {
+      const matches = incomplete.filter((row) => row.status === status);
+      if (matches.length) {
+        failures.push(
+          `  ${status.toUpperCase()} build-test row(s):`,
+          ...matches.map((row) => `    ${row.id}`),
+        );
+      }
+    }
+    const unknown = incomplete.filter((row) => !['failed', ...NON_RUN_STATUSES].includes(row.status));
+    if (unknown.length) {
+      failures.push(
+        '  UNKNOWN/INCOMPLETE build-test result row(s):',
+        ...unknown.map((row) => `    ${row.id} [${String(row.status)}]`),
+      );
+    }
+
+    const passedRows = rows.filter((row) => row.status === 'passed').length;
+    const failedRows = rows.filter((row) => row.status === 'failed').length;
+    const pendingRows = rows.filter((row) => row.status === 'pending' || row.status === 'skipped').length;
+    const todoRows = rows.filter((row) => row.status === 'todo').length;
+    const counters = [
+      ['numTotalTests', rows.length],
+      ['numPassedTests', passedRows],
+      ['numFailedTests', failedRows],
+      ['numPendingTests', pendingRows],
+      ['numTodoTests', todoRows],
+    ];
+    for (const [field, measured] of counters) {
+      if (!Number.isInteger(report?.[field]) || report[field] !== measured) {
+        failures.push(`  report counter ${field}=${String(report?.[field])} disagrees with ${measured} row(s).`);
+      }
+    }
+
+    if (failures.length) {
+      return fail([
+        '[test-ratchet] STRICT DIST REFUSED: every discovered build test must run exactly once and pass.',
+        ...failures,
+      ]);
+    }
+    console.log(`[test-ratchet] STRICT DIST OK — ${discoveredBuildFiles.length} discovered/reported file(s), `
+      + `${rows.length} test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.`);
+    return 0;
+  }
 
   // ── --bootstrap: mint a census a human must then ATTRIBUTE ────────────────
   if (BOOTSTRAP) {
@@ -360,6 +588,19 @@ export async function run(argv = []) {
   }
   const baseline = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
   const entries = baseline.entries || {};
+  const frozenBuildPaths = [
+    ...Object.entries(entries)
+      .filter(([, row]) => isBuildTestPath(row.file))
+      .map(([id]) => id),
+    ...Object.keys(baseline.uncollectedSuites || {}).filter((file) => isBuildTestPath(file)),
+  ].sort();
+  if (frozenBuildPaths.length) {
+    return fail([
+      '[test-ratchet] SOURCE BASELINE contains tests/build/** debt owned by strict dist:',
+      ...frozenBuildPaths.map((id) => `    ${id}`),
+      '  Build-test failures are never debt-bankable; remove them through the remove-only re-freeze.',
+    ]);
+  }
 
   // ── Scope sentinel — "the SUITE that ran is the suite we froze" ───────────
   // The guard above proves a suite RAN; it cannot prove the SAME suite ran.
@@ -507,6 +748,7 @@ export async function run(argv = []) {
     }
     fs.writeFileSync(BASELINE, `${JSON.stringify({
       ...baseline,
+      _doc: BOOTSTRAP_DOC,
       measuredAtSha: shaOf(),
       totalTests: rows.length,
       totalFiles,

@@ -54,7 +54,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "verify:dist": "VERIFY_DIST=1 sh scripts/gate-mutex.sh --run -- npx vitest run tests/build/",
+    "verify:dist": "sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist",
     "smoke:boot": "node --max-old-space-size=6144 scripts/boot-smoke.mjs",
     "check": "npm run validate:hazard-registry && npm run validate:premortem && npm run validate:packets && npm run validate:data && npm run validate:custom-content-manifest && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run validate:tuning-bands && npm run validate:foundry-module && npm run validate:mcp-server && npm run typecheck:ratchet && npm run typecheck:domain:strict && npm run lint && npm run test:ratchet && npm run build && npm run verify:dist",
     "check:quick": "node scripts/implementation-gate.mjs quick",

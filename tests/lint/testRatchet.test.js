@@ -1,10 +1,10 @@
 /**
  * testRatchet.test.js — the PER-TEST suite ratchet, pinned and PROVEN.
  *
- * scripts/check-test-ratchet.mjs restores the TAIL of `npm run check`. `npm run
- * test` (`vitest run`) is a BOOLEAN gate at zero failures and step 12 of the
- * 14-step `&&` chain; it is red, so `build` (step 13) and `verify:dist` (step 14)
- * — every step BEHIND it — had not run as part of the gate since 2026-08-02.
+ * scripts/check-test-ratchet.mjs restores the TAIL of `npm run check`. The old
+ * bare `npm run test` boolean gate was red and stopped everything behind it.
+ * The current 17-step chain puts `test:ratchet` at 15, `build` at 16, and
+ * `verify:dist` at 17, with one authoritative phase for every test.
  * The ratchet replaces the boolean with a truthful, ATTRIBUTED, per-test census
  * that only shrinks, which lets the dark tail run again while still redding on
  * the next regression.
@@ -27,7 +27,7 @@
  * — so these drive the genuine parse/compare code, never a re-implementation.
  */
 import {
-  mkdtempSync, readFileSync, readdirSync, writeFileSync, existsSync,
+  existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, symlinkSync, writeFileSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -38,7 +38,8 @@ import {
 import { describe, expect, test } from 'vitest';
 
 import {
-  DEBT_CLASSES, identityOf, normalizePath, rowsOf, uncollectedOf, SCOPE_FLOOR_RATIO,
+  DEBT_CLASSES, discoverBuildTestFiles, identityOf, normalizePath, rowsOf,
+  runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -153,10 +154,11 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 //       supabase/functions/_shared/*, src/*, and the git INDEX, and nothing else;
 //   (2) `npm run build` is `vite build`, which emits to dist/ and never regenerates an edge
 //       bundle, so NO post-build phase can change these six verdicts;
-//   (3) the census runs the WHOLE `vitest run`, so tests/build/ is already inside it —
-//       moving a file by DIRECTORY removes nothing. The only thing that removes a test from
-//       the census is SKIPPING it, and six new skips against the frozen skippedCeiling of
-//       105 is precisely the skip-to-green move check-test-ratchet.mjs exists to refuse.
+//   (3) at that time the census ran the WHOLE `vitest run`, so tests/build/ was already
+//       inside it — moving a file by DIRECTORY removed nothing. GTR-1 later split only the
+//       genuinely artifact-dependent `tests/build/**` corpus into an exact, all-passed
+//       post-build authority; these source/index readers are not in that corpus, so the
+//       historical conclusion remains unchanged.
 // The control that settles it: analyticsEventsBundle and intentAtlasBundle are the same
 // shape, in the same suite, in the same pre-build phase — and they were GREEN throughout.
 // The three reds were never build-phase ordering. They were three STALE artifacts.
@@ -231,6 +233,10 @@ describe('per-test suite ratchet — static pins', () => {
     }
     const missing = rows.filter(([, r]) => !existsSync(join(ROOT, r.file))).map(([id]) => id);
     expect(missing, `deleted/moved file(s) — run \`npm run test:ratchet:update\`: ${missing.join(', ')}`).toEqual([]);
+    expect(
+      rows.filter(([, row]) => row.file.startsWith('tests/build/')).map(([id]) => id),
+      'build-test debt belongs to strict post-build verification, never the source census',
+    ).toEqual([]);
   });
 
   test('⛔ EVERY ENTRY IS ATTRIBUTED — an unattributed row is a defect laundered into debt', () => {
@@ -271,6 +277,10 @@ describe('per-test suite ratchet — static pins', () => {
     expect(pkg.scripts['test:ratchet']).toContain('check-test-ratchet.mjs');
     expect(pkg.scripts['test:ratchet:update']).toContain('--update');
     expect(pkg.scripts.check).toContain('test:ratchet');
+    expect(pkg.scripts['verify:dist']).toBe(
+      'sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist',
+    );
+    expect(pkg.scripts['verify:dist'].match(/gate-mutex\.sh/g)).toHaveLength(1);
   });
 
   test('the check chain no longer runs the BARE boolean test step (that is what went dark)', () => {
@@ -290,6 +300,20 @@ describe('per-test suite ratchet — static pins', () => {
     expect(steps).toContain('verify:dist');
     expect(steps.indexOf('test:ratchet')).toBeLessThan(steps.indexOf('build'));
     expect(steps.indexOf('build')).toBeLessThan(steps.indexOf('verify:dist'));
+
+    const source = runnerCommandOf({ outputFile: '/tmp/source-results.json' });
+    const dist = runnerCommandOf({ verifyDist: true, outputFile: '/tmp/dist-results.json' });
+    expect(source).toBe(
+      'npx vitest run --exclude="tests/build/**" --reporter=json --outputFile="/tmp/source-results.json"',
+    );
+    expect(source.match(/--exclude=/g)).toHaveLength(1);
+    expect(source).toContain(`--exclude="${SOURCE_TEST_EXCLUDE}"`);
+    expect(dist).toBe(
+      'npx vitest run tests/build/ --reporter=json --outputFile="/tmp/dist-results.json"',
+    );
+    // The exact nonempty dist command is asserted immediately above.
+    // anchored: this denies a phase-grammar leak, not a command that vanished or was never constructed
+    expect(dist).not.toContain('--exclude');
   });
 
   test('`npm run test` keeps the raw unfiltered reporter inside the held lock', () => {
@@ -302,8 +326,8 @@ describe('per-test suite ratchet — static pins', () => {
   });
 
   test('CI runs the ratchet too (the local gate and CI must not diverge)', () => {
-    // CI steps are sequential and a failed step ends the job, so CI's Build and
-    // Verify steps were dark for exactly the same reason.
+    // CI keeps source tests in its test group and build -> strict dist in the
+    // independent build group; ciCheckParity pins the exact ownership/order.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     expect(ci, 'ci.yml must run the per-test ratchet').toContain('npm run test:ratchet');
     const runsBareTest = ci.split('\n').some((l) => l.trim() === 'run: npm run test');
@@ -943,6 +967,9 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     + 'const [, , src, code] = process.argv;\n'
     + 'const out = process.env.TEST_RATCHET_OUTPUT_FILE;\n'
     + 'if (src !== "-") fs.writeFileSync(out, fs.readFileSync(src, "utf8"));\n'
+    + 'if (process.env.TEST_RATCHET_CAPTURE_FILE) fs.writeFileSync('
+    + 'process.env.TEST_RATCHET_CAPTURE_FILE, JSON.stringify({ '
+    + 'verifyDist: process.env.VERIFY_DIST || null }));\n'
     + 'process.exit(Number(code));\n',
   );
 
@@ -975,6 +1002,35 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     };
   }
 
+  const BUILD_FILES = discoverBuildTestFiles(ROOT);
+  /** A strict-mode report with one passed row per recursively discovered build-test file. */
+  function strictReport(edit) {
+    const runStart = 1_700_000_000_000;
+    const report = {
+      startTime: runStart,
+      numPendingTests: 0,
+      numTodoTests: 0,
+      numTotalTests: BUILD_FILES.length,
+      numPassedTests: BUILD_FILES.length,
+      numFailedTests: 0,
+      success: true,
+      testResults: BUILD_FILES.map((file, index) => ({
+        name: join(ROOT, file),
+        status: 'passed',
+        startTime: runStart + 100 + index,
+        endTime: runStart + 101 + index,
+        assertionResults: [{
+          fullName: `${file} > exercised`,
+          title: 'exercised',
+          ancestorTitles: [file],
+          status: 'passed',
+        }],
+      })),
+    };
+    if (edit) edit(report);
+    return report;
+  }
+
   /**
    * Run the ratchet against an injected baseline + injected fake runner.
    * `report: null` = the runner wrote nothing; `rawReport` = arbitrary bytes.
@@ -982,6 +1038,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   function run({
     entries = {}, totalTests, totalFiles = 10, skippedCeiling = 0, uncollectedSuites,
     suites = [], report, rawReport, exitCode = 1, args = [], noBaseline = false,
+    captureRunner = false, inheritedVerifyDist = false,
   }) {
     const built = report === undefined ? reportOf(suites) : report;
     let src = '-';
@@ -989,6 +1046,9 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     else if (built !== null) src = tmpFile('json', JSON.stringify(built));
 
     const env = { ...process.env, TEST_RATCHET_RUN_CMD: `node ${FAKE} ${src} ${exitCode}` };
+    if (inheritedVerifyDist) env.VERIFY_DIST = 'hostile-parent-value';
+    const captureFile = captureRunner ? join(TMP, `capture-${seq += 1}.json`) : null;
+    if (captureFile) env.TEST_RATCHET_CAPTURE_FILE = captureFile;
     if (!noBaseline) {
       const rows = Object.entries(entries).map(([id, r]) => [id, {
         file: r.file ?? id.split(' :: ')[0],
@@ -1007,7 +1067,14 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       env.TEST_RATCHET_BASELINE = join(TMP, `absent-${seq += 1}.json`);
     }
     const r = spawnSync('node', [SCRIPT, ...args], { cwd: ROOT, encoding: 'utf8', env });
-    return { ...r, out: `${r.stdout}${r.stderr}`, baselineFile: env.TEST_RATCHET_BASELINE };
+    return {
+      ...r,
+      out: `${r.stdout}${r.stderr}`,
+      baselineFile: env.TEST_RATCHET_BASELINE,
+      capture: captureFile && existsSync(captureFile)
+        ? JSON.parse(readFileSync(captureFile, 'utf8'))
+        : null,
+    };
   }
 
   // ── anti-vacuity: "the suite actually ran" ────────────────────────────────
@@ -1016,12 +1083,22 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       const r = run({ report: null });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/NO REPORT|failing closed/i);
+
+      const strict = run({ report: null, args: ['--verify-dist'], noBaseline: true });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/NO REPORT|failing closed/i);
     });
 
     test('fails closed when the report is unparseable bytes', () => {
       const r = run({ rawReport: '{ this is not json' });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/UNPARSEABLE|failing closed/i);
+
+      const strict = run({
+        rawReport: '{ this is not json', args: ['--verify-dist'], noBaseline: true,
+      });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/UNPARSEABLE|failing closed/i);
     });
 
     test('fails closed when the report parses but contains ZERO tests', () => {
@@ -1030,12 +1107,132 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       const r = run({ report: { testResults: [] } });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/ZERO TESTS/i);
+
+      const strict = run({ report: { testResults: [] }, args: ['--verify-dist'], noBaseline: true });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/ZERO TESTS/i);
+
+      const missing = run({
+        report: strictReport((report) => { report.testResults.shift(); }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(missing.status, missing.out).not.toBe(0);
+      expect(missing.out).toMatch(/MISSING discovered build-test file/);
+
+      const extra = run({
+        report: strictReport((report) => {
+          report.testResults.push({
+            name: join(ROOT, 'tests/build/ghost.test.js'),
+            status: 'passed',
+            assertionResults: [{ fullName: 'ghost', status: 'passed' }],
+          });
+        }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(extra.status, extra.out).not.toBe(0);
+      expect(extra.out).toMatch(/EXTRA reported file/);
+
+      const outside = run({
+        report: strictReport((report) => {
+          report.testResults.push({
+            name: join(ROOT, REAL2),
+            status: 'passed',
+            assertionResults: [{ fullName: 'escaped', status: 'passed' }],
+          });
+        }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(outside.status, outside.out).not.toBe(0);
+      expect(outside.out).toMatch(/OUT-OF-SCOPE/);
+
+      const duplicate = run({
+        report: strictReport((report) => { report.testResults.push(report.testResults[0]); }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(duplicate.status, duplicate.out).not.toBe(0);
+      expect(duplicate.out).toMatch(/DUPLICATE reported build-test file/);
+
+      const duplicateRow = run({
+        report: strictReport((report) => {
+          report.testResults[0].assertionResults.push(
+            report.testResults[0].assertionResults[0],
+          );
+        }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(duplicateRow.status, duplicateRow.out).not.toBe(0);
+      expect(duplicateRow.out).toMatch(/DUPLICATE build-test row/);
     });
 
     test('fails closed even when the runner exits ZERO with an empty report', () => {
       // A crash that still exits 0 (a wrapper swallowing the code) must not pass.
       const r = run({ report: { testResults: [] }, exitCode: 0 });
       expect(r.status, r.out).not.toBe(0);
+
+      const strict = run({
+        report: strictReport(), exitCode: 1, args: ['--verify-dist'], noBaseline: true,
+      });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/runner exited NON-ZERO/);
+
+      const falseSuccess = run({
+        report: strictReport((report) => { report.success = false; }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(falseSuccess.status, falseSuccess.out).not.toBe(0);
+      expect(falseSuccess.out).toMatch(/report\.success is not TRUE/);
+
+      const badSuiteStatus = run({
+        report: strictReport((report) => { report.testResults[0].status = 'failed'; }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(badSuiteStatus.status, badSuiteStatus.out).not.toBe(0);
+      expect(badSuiteStatus.out).toMatch(/suite status was not PASSED/);
+
+      for (const field of [
+        'numTotalTests', 'numPassedTests', 'numFailedTests', 'numPendingTests', 'numTodoTests',
+      ]) {
+        const counter = run({
+          report: strictReport((report) => { report[field] += 1; }),
+          exitCode: 0,
+          args: ['--verify-dist'],
+          noBaseline: true,
+        });
+        expect(counter.status, `${field}: ${counter.out}`).not.toBe(0);
+        expect(counter.out).toContain(`report counter ${field}=`);
+      }
+
+      for (const mutate of [
+        (report) => { report.testResults[0].assertionResults[0].status = 'cancelled'; },
+        (report) => {
+          report.testResults[0].assertionResults[0].fullName = '';
+          report.testResults[0].assertionResults[0].title = '';
+          report.testResults[0].assertionResults[0].ancestorTitles = [];
+        },
+      ]) {
+        const incomplete = run({
+          report: strictReport(mutate),
+          exitCode: 0,
+          args: ['--verify-dist'],
+          noBaseline: true,
+        });
+        expect(incomplete.status, incomplete.out).not.toBe(0);
+        expect(incomplete.out).toMatch(/UNKNOWN\/INCOMPLETE build-test result row/);
+      }
     });
 
     test('does NOT fail closed when the suite really ran and really failed', () => {
@@ -1049,6 +1246,27 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.out).toMatch(/OK — no test regressions/);
       // anchored: the verdict assertion above proves the run reached the normal path
       expect(r.out).not.toMatch(/failing closed/i);
+
+      expect(BUILD_FILES.length, 'strict discovery must find a real build-test corpus').toBeGreaterThan(0);
+      const strict = run({
+        report: strictReport(),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+        captureRunner: true,
+      });
+      expect(strict.status, strict.out).toBe(0);
+      expect(strict.out).toMatch(new RegExp(`STRICT DIST OK .+ ${BUILD_FILES.length} discovered/reported file`));
+      expect(strict.capture).toEqual({ verifyDist: '1' });
+
+      const sourceEnv = run({
+        entries: { [identityOf(REAL, 'a')]: {} },
+        suites: [{ file: REAL, tests: [T('a')] }],
+        inheritedVerifyDist: true,
+        captureRunner: true,
+      });
+      expect(sourceEnv.status, sourceEnv.out).toBe(0);
+      expect(sourceEnv.capture).toEqual({ verifyDist: null });
     });
   });
 
@@ -1142,6 +1360,20 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/skipped tests grew/i);
+
+      for (const status of ['failed', 'skipped', 'pending', 'todo']) {
+        const strict = run({
+          report: strictReport((report) => {
+            report.testResults[0].assertionResults[0].status = status;
+            if (status === 'failed') report.testResults[0].status = 'failed';
+          }),
+          exitCode: status === 'failed' ? 1 : 0,
+          args: ['--verify-dist'],
+          noBaseline: true,
+        });
+        expect(strict.status, `${status}: ${strict.out}`).not.toBe(0);
+        expect(strict.out).toMatch(new RegExp(`${status.toUpperCase()} build-test row`));
+      }
     });
 
     test('the skip ceiling PASSES when skips shrink (it is not an always-red gate)', () => {
@@ -1167,6 +1399,18 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/SCOPE SENTINEL/);
       expect(r.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+
+      const strict = run({
+        report: strictReport((report) => {
+          report.testResults[0].status = 'failed';
+          report.testResults[0].assertionResults = [];
+        }),
+        exitCode: 1,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/UNCOLLECTED build-test suite/);
     });
 
     test('⚠⚠ CR-TRFZ-4: a suite that FAILED while enumerating only SKIPS reds too', () => {
@@ -1321,6 +1565,19 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(gapOnly.status, gapOnly.out).not.toBe(0);
       expect(gapOnly.out).toMatch(/SCOPE COLLAPSE/);
       expect(gapOnly.out).toMatch(/no suite could be NAMED/);
+
+      const strict = run({
+        report: strictReport((report) => {
+          report.testResults[0].startTime = report.startTime;
+          report.testResults[0].endTime = report.startTime;
+          report.testResults[0].assertionResults[0].status = 'pending';
+        }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(strict.status, strict.out).not.toBe(0);
+      expect(strict.out).toMatch(/COLLAPSED build-test suite/);
     });
 
     test('⚠⚠ a collapse is NEVER reported as skip-ceiling growth', () => {
@@ -1469,6 +1726,16 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.out).toMatch(/OK — no test regressions/);
       // anchored: the verdict assertion above proves the sentinel ran through to the normal path
       expect(r.out).not.toMatch(/SCOPE SENTINEL/);
+
+      for (const args of [[], ['--update'], ['--bootstrap']]) {
+        const leaked = run({
+          suites: [{ file: BUILD_FILES[0], tests: [T('escaped', 'passed')] }],
+          args,
+        });
+        expect(leaked.status, `${args.join(' ')}: ${leaked.out}`).not.toBe(0);
+        expect(leaked.out).toMatch(/SOURCE PHASE included tests\/build/);
+        expect(leaked.out).toContain(BUILD_FILES[0]);
+      }
     });
   });
 
@@ -1498,6 +1765,9 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.status, r.out).toBe(0);
       const written = JSON.parse(readFileSync(r.baselineFile, 'utf8'));
       expect(Object.keys(written.entries)).toEqual([identityOf(REAL, 'a')]);
+      expect(written._doc).toMatch(
+        /^PER-TEST failure census for the source phase \(all tests except tests\/build\/\*\*\)\./,
+      );
       // The attribution must SURVIVE a re-freeze — a re-freeze that dropped it
       // would launder every remaining row on the next update.
       expect(written.entries[identityOf(REAL, 'a')].subsystem).toBe('meta');
@@ -1555,6 +1825,29 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/--bootstrap refused/);
+
+      for (const mode of ['--update', '--bootstrap']) {
+        const strict = run({
+          report: strictReport(),
+          exitCode: 0,
+          args: ['--verify-dist', mode],
+          noBaseline: true,
+        });
+        expect(strict.status, `${mode}: ${strict.out}`).not.toBe(0);
+        expect(strict.out).toMatch(/--verify-dist is incompatible/);
+      }
+      for (const args of [['--update', '--bootstrap'], ['--update', '--update'], ['--unknown']]) {
+        const invalid = run({ report: strictReport(), exitCode: 0, args, noBaseline: true });
+        expect(invalid.status, `${args.join(' ')}: ${invalid.out}`).not.toBe(0);
+        expect(invalid.out).toMatch(/mutually exclusive|unknown argument/);
+      }
+
+      const buildDebt = run({
+        entries: { [identityOf(BUILD_FILES[0], 'known failure')]: {} },
+        suites: [{ file: REAL, tests: [T('a', 'passed')] }],
+      });
+      expect(buildDebt.status, buildDebt.out).not.toBe(0);
+      expect(buildDebt.out).toMatch(/SOURCE BASELINE contains tests\/build/);
     });
 
     test('a missing census reds rather than passing vacuously', () => {
@@ -1577,6 +1870,33 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(normalizePath(join(ROOT, 'tests/x.test.js'))).toBe('tests/x.test.js');
       expect(normalizePath('./tests/x.test.js')).toBe('tests/x.test.js');
       expect(normalizePath('tests\\x.test.js')).toBe('tests/x.test.js');
+      expect(normalizePath('tests/build/../lint/x.test.js')).toBe('tests/lint/x.test.js');
+
+      const discoveryRoot = join(TMP, `discovery-${seq += 1}`);
+      const buildRoot = join(discoveryRoot, 'tests/build');
+      const nested = join(buildRoot, '.hidden/nested');
+      mkdirSync(nested, { recursive: true });
+      const suffixes = [
+        'js', 'jsx', 'ts', 'tsx', 'cjs', 'cjsx', 'cts', 'ctsx',
+        'mjs', 'mjsx', 'mts', 'mtsx',
+      ];
+      for (const suffix of suffixes) writeFileSync(join(nested, `case.test.${suffix}`), '');
+      writeFileSync(join(nested, 'case.spec.tsx'), '');
+      writeFileSync(join(nested, 'case.test.js.snap'), '');
+      writeFileSync(join(nested, 'case.bench.js'), '');
+      writeFileSync(join(nested, 'case.TEST.js'), '');
+      const discovered = discoverBuildTestFiles(discoveryRoot);
+      expect(discovered).toHaveLength(13);
+      expect(discovered).toEqual([...discovered].sort());
+      expect(discovered.every((file) => file.startsWith('tests/build/.hidden/nested/'))).toBe(true);
+      for (const suffix of suffixes) {
+        expect(discovered).toContain(`tests/build/.hidden/nested/case.test.${suffix}`);
+      }
+      expect(discovered).toContain('tests/build/.hidden/nested/case.spec.tsx');
+      expect(discovered.some((file) => /snap|bench|\.TEST\./.test(file))).toBe(false);
+
+      symlinkSync('case.test.js', join(nested, 'linked.test.js'));
+      expect(() => discoverBuildTestFiles(discoveryRoot)).toThrow(/symbolic link/);
     });
 
     test('rowsOf reconstructs fullName from ancestorTitles when the runner omits it', () => {
