@@ -1472,7 +1472,8 @@
         { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
         { "action": "MODIFY", "path": "scripts/lib/premortem-triggers.mjs" },
         { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
-        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/newsHeadlineContract.walker.test.js" }
       ],
       "requiredSymbols": [
         { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
@@ -1499,13 +1500,13 @@
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical pure reconstructions while exact root ordinals 26076 scalar rows and scalar meta 1 240 1567 272 12 109 109 1 close with no Wizard News row entering AO-5 and no volatile field selected" },
-        { "id": "A2", "case": "exact typed selectors partition only timeline pulseHistory regionalLog and chronicle while exact null is accepted and retained as a distinct scalar value and malformed or extra segment keys unsafe indexes duplicate exact addresses delimiter collisions blank strings non-null non-string values absent families and a fifth family fail before normalization" },
+        { "id": "A2", "case": "exact typed selectors partition only timeline pulseHistory regionalLog and chronicle while exact null is accepted and retained as a distinct scalar value and malformed or extra segment keys unsafe selector-axis indexes duplicate exact addresses delimiter collisions blank strings non-null non-string values absent families and a fifth family fail before normalization while omitted nested scalar indexes are not treated as sparse producer arrays" },
         { "id": "A3", "case": "the exact 63 rows close at 1308 distinct and 5885 occurrences canonical serialization is 8280 bytes with sha256 8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae and validation plus comparison reject every malformed or bidirectional movement class" },
         { "id": "A4", "case": "timeline is the one deterministic authoritative CUT_TRADE_ROUTE player_action event with one nextEventLog row nonblank narrativeSummary and exact 4 8 12 counts while flat flavor rename destroy and table roads stay absent" },
         { "id": "A5", "case": "pulse history is exactly records 0 through 11 and 50 1286 5665 with selected headlines 151 80 mechanical 77 24 and consequence 240 81 where consequence is pinned as path-local compatibility coverage and not a third AO-4 liveness lane" },
         { "id": "A6", "case": "regional log reaches 12 pulse roots and 109 of 109 audit rows closes at 2 7 201 pins 92 of 6 changes kinds plus 109 of 1 source types and has exactly zero selected prose-field identities without inventing prose" },
         { "id": "A7", "case": "Chronicle is exactly one pure create-and-append row and 7 7 7 with fixed mode reason thesis summary and trigger values while ID time and campaign chronicles stay absent" },
-        { "id": "A8", "case": "baseline fail-closed polarity unchanged HZ-CROSSHOME identity status and instances two-export premortem union and synthetic mutation rationale exact census exact seven paths focused checks both typechecks observed-shape guard and bare full gate reconcile at one clean immutable commit" }
+        { "id": "A8", "case": "baseline fail-closed polarity unchanged HZ-CROSSHOME identity status and instances two-export premortem union amended AO-4 compatibility assertion and synthetic mutation rationale exact census exact eight paths focused checks both typechecks observed-shape guard and bare full gate reconcile at one clean immutable commit" }
       ],
       "checks": [
         ["npm", "run", "validate:packets"],
@@ -1531,6 +1532,7 @@
           "scripts/lib/prose-family-contract.mjs",
           "scripts/lib/premortem-triggers.mjs",
           "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
           "tests/lint/sovereigntyLightingContract.walker.test.js"],
         ["npm", "run", "typecheck:ratchet"],
         ["npm", "run", "typecheck:domain:strict"],

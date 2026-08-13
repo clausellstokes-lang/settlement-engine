@@ -12,7 +12,7 @@
   `972066affb82b002f197de7ce40ba3441dcd3220`, and CR-AO-1/4/9/10 plus the
   AO-4 -> AO-5 -> AO-6 order in the owner ledger.
 - **Collision group:** the estate-wide lighting census. AO-5 is the sole holder.
-- **Commit authority:** the coding agent edits only the seven manifest paths, leaves all
+- **Commit authority:** the coding agent edits only the eight manifest paths, leaves all
   changes unstaged and uncommitted, and does not promote. The coordinator constructs,
   proves, and old-value-CAS lands one green implementation commit, then records terminal
   packet state separately.
@@ -104,7 +104,7 @@ Explicitly out:
   AO-4 liveness;
 - any `src/**` edit, persisted shape/key, UI, public/DM projection, golden, flag, tuning value,
   dependency, global timeout, floor, ceiling, OSR scanner/artifact/baseline, test-ratchet
-  baseline, mutation sweep, hazard status/count/floor, or eighth implementation path.
+  baseline, mutation sweep, hazard status/count/floor, or ninth implementation path.
 
 Adjacent observations are receipt-only unless they disprove a premise, which is a STOP.
 
@@ -141,7 +141,7 @@ nonnegative safe integer, `path` is a nonempty typed-segment array, and `value` 
 exact `null` or a nonblank string. A field segment is exactly
 `{ kind:'field', value:nonblank string }`; an
 index segment is exactly `{ kind:'index', value:nonnegative safe integer }`. Extra keys,
-malformed segments, sparse/impossible addresses, blank strings, numbers, booleans, arrays,
+malformed segments, sparse/impossible selector-owned record axes, blank strings, numbers, booleans, arrays,
 objects, `undefined`, or duplicate exact addresses fail. The live 5,885-row denominator
 contains exactly 188 lawful null scalar occurrences: 148 at
 `impactDigest[].channelType`, 30 at `mechanicalRumorSeeds[].channelType`, five at
@@ -163,6 +163,12 @@ exactly `0..11`, `worldState` is ordinal `12`, `wizardNews` is ordinal `13`,
 Wizard News rows may prove root topology but never enter an AO-5 family. Any selected row
 containing a volatile field from AO-0's `VOLATILE_SCALAR_KEYS` fails. Every family must be
 nonempty, and the only family names are the four displayed above.
+
+The scalar projection intentionally omits array elements that carry no selected vocabulary.
+Contiguity is therefore enforceable only on the selector-owned record axes named in the table:
+timeline entry zero, pulse-history records `0..11`, Chronicle entry zero, and regional
+109/109 record reach. Do not infer contiguity for nested arrays such as
+`rollExplanations[]`; a missing projected nested index does not prove a sparse producer array.
 
 ### 3.2 Normalized identity and scalar-occurrence caveat
 
@@ -416,6 +422,12 @@ helper, and baseline to enforcers, and generalize note/triggers. The regional 10
 54 new historical prose defects. Hazard class count, status floors, and predicate count do not
 move.
 
+AO-4's existing `newsHeadlineContract.walker.test.js` compatibility assertion currently pins
+that predicate population to the News-only array. Amend that assertion in place—without a
+title, file, or census change—to import `PROSE_FAMILY_PROTECTED_SUBSTRATE`, form the same
+codepoint-sorted duplicate-free union, and require the predicate population to equal that
+union. This is a compatibility pin for the already-required union, not a ninth acceptance case.
+
 Add one `kind:"rationale"` mutation-manifest entry for the eight ordinary AO-5 controls.
 AO-6 owns standing source mutants; do not touch `mutation-sweep.sh` or `uncoveredBaseline`.
 
@@ -431,12 +443,12 @@ files / parked / credited / titles / suiteTitles
 
 The tolerant test-ratchet scope needs no baseline movement. Any different tuple is a STOP.
 
-## 7. Hard scope and exact seven-path manifest
+## 7. Hard scope and exact eight-path manifest
 
 | Limit | AO-5 budget |
 |---|---:|
 | Behavior families | 1 — exact totality for AO-5's four chartered corpus families |
-| Handwritten paths | exactly 7 |
+| Handwritten paths | exactly 8 |
 | Product or persisted files modified | 0 |
 | New logic-bearing leaves | 1 pure helper, at most 250 effective lines |
 | New test walker | 1, at most 250 effective lines |
@@ -460,8 +472,9 @@ or surfaces. No other default budget is widened.
 | MODIFY | `scripts/lib/premortem-triggers.mjs` | protected-substrate parser and existing predicate only | 15 effective | Derive the exact two-export union and make population/warning/evidence/synthetic accurate; no new predicate. |
 | MODIFY | `scripts/mutation-coverage-manifest.json` | AO-5 walker invariant | one row | Add one rationale; do not reserialize or move `uncoveredBaseline`. |
 | TEST | `tests/lint/sovereigntyLightingContract.walker.test.js` | `CENSUS` plus dated cause | five values | Re-derive whole; record only the exact movement execution returns. |
+| TEST | `tests/lint/newsHeadlineContract.walker.test.js` | existing A7 pre-mortem population assertion only | zero titles | Replace the News-only equality with the exact codepoint-sorted two-export union; no other case or assertion moves. |
 
-Generated artifacts: **NONE**. No other file may be edited. An eighth implementation path or
+Generated artifacts: **NONE**. No other file may be edited. A ninth implementation path or
 ninth test case is a STOP and split.
 
 ## 8. Ordered coding sequence
@@ -474,11 +487,12 @@ ninth test case is a STOP and split.
 3. Create the pure helper and exact baseline; create the eight-case walker with one expensive
    `beforeAll`, one corpus build, and two pure reconstructions.
 4. Extend `HZ-CROSSHOME`; generalize the existing pre-mortem parser/predicate to the union;
-   add the mutation rationale; re-derive and record the whole census.
-5. Run all focused checks and leave exactly seven paths unstaged and uncommitted for the
+   amend AO-4's existing A7 population assertion to that exact union; add the mutation
+   rationale; re-derive and record the whole census.
+5. Run all focused checks and leave exactly eight paths unstaged and uncommitted for the
    coordinator. Do not create an authored red commit.
 
-No cure or genesis follows. The pre-edit tree is already green and the finished seven-path
+No cure or genesis follows. The pre-edit tree is already green and the finished eight-path
 contract is one ordinary green implementation commit.
 
 ## 9. Closed acceptance denominator
@@ -486,13 +500,13 @@ contract is one ordinary green implementation commit.
 | ID | Required observation |
 |---|---|
 | A1 | One AO-0 scalar build feeds two byte-identical pure reconstructions; exact root ordinals, 26,076 rows, and scalar meta `1 / 240 / 1,567 / 272 / 12 / 109 / 109 / 1` close with no Wizard News row entering an AO-5 family and no volatile field entering selection. |
-| A2 | Exact typed selectors partition only timeline, pulseHistory, regionalLog, and chronicle; exact null is accepted and retained as a distinct scalar value, while malformed/extra segment keys, unsafe indexes, duplicate exact addresses, delimiter collisions, blank strings, non-null non-string selected values, absent families, and a fifth family fail before normalization. |
+| A2 | Exact typed selectors partition only timeline, pulseHistory, regionalLog, and chronicle; exact null is accepted and retained as a distinct scalar value, while malformed/extra segment keys, unsafe selector-axis indexes, duplicate exact addresses, delimiter collisions, blank strings, non-null non-string selected values, absent families, and a fifth family fail before normalization; omitted nested scalar indexes are not misclassified as sparse producer arrays. |
 | A3 | The exact 63-row table closes at 1,308 distinct / 5,885 occurrences, canonical serialization is 8,280 bytes with SHA-256 `8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae`, and validation/comparison reject new, grown, shrunk, vanished, renamed, malformed, duplicate, reordered, or digest-counterfeit rows. |
 | A4 | Timeline is the one deterministic authoritative `CUT_TRADE_ROUTE` event with `player_action`, one `nextEventLog` row, nonblank `narrativeSummary`, and exact 4/8/12 counts; flat flavor/rename/destroy/table roads are absent. |
 | A5 | Pulse history is exactly records `0..11` and 50/1,286/5,665; selected headlines are 151/80, mechanical 77/24, and consequence 240/81, with consequence explicitly pinned as a path-local compatibility alias rather than a third AO-4 liveness lane. |
 | A6 | Regional log reaches 12 pulse roots and 109/109 audit rows, closes at 2/7/201, pins 92/6 changes kinds plus 109/1 source types, and has exactly zero selected prose-field identities without inventing prose. |
 | A7 | Chronicle is exactly one pure create-and-append row and 7/7/7 with fixed mode/reason/thesis/summary/trigger values; ID/time are absent and `campaign.chronicles[]` is not selected. |
-| A8 | Baseline fail-closed polarities, unchanged HZ-CROSSHOME identity/count/status, two-export pre-mortem union and synthetic fire, mutation rationale, exact census, exact seven paths, focused checks, both typechecks, observed-shape guard, and bare full gate all reconcile at one clean immutable implementation commit. |
+| A8 | Baseline fail-closed polarities, unchanged HZ-CROSSHOME identity/count/status, two-export pre-mortem union plus the amended AO-4 compatibility assertion and synthetic fire, mutation rationale, exact census, exact eight paths, focused checks, both typechecks, observed-shape guard, and bare full gate all reconcile at one clean immutable implementation commit. |
 
 No ninth case is investigated. An adjacent finding is reported without repair unless it
 invalidates A1–A8, in which case stop.
@@ -525,6 +539,7 @@ npx eslint \
   scripts/lib/prose-family-contract.mjs \
   scripts/lib/premortem-triggers.mjs \
   tests/lint/proseFamilyContract.walker.test.js \
+  tests/lint/newsHeadlineContract.walker.test.js \
   tests/lint/sovereigntyLightingContract.walker.test.js
 npm run typecheck:ratchet
 npm run typecheck:domain:strict
@@ -541,7 +556,7 @@ receipt heartbeat.
 1. The coordinator commits this packet, index row, and manifest row as one three-document
    READY promotion from clean terminal AO-4.
 2. Dispatch seals that clean promotion descendant after the exact preflight in section 8.
-3. The coding agent edits exactly seven paths and leaves them unstaged/uncommitted.
+3. The coding agent edits exactly eight paths and leaves them unstaged/uncommitted.
 4. The coordinator audits scope and effective lines, then uses a private index to construct one
    direct green child of the sealed promotion without moving the shared ref.
 5. A fresh detached worktree proves focused checks and the bare full gate. Only then does one
@@ -572,7 +587,7 @@ STOP and report the smallest measured contradiction if:
   timeout, floor, ceiling, OSR artifact/baseline, test-ratchet baseline, hazard class/status/
   instances/floor, pre-mortem predicate count, mutation uncovered count, or global JSON
   serialization moves;
-- the helper or walker exceeds 250 effective lines, pre-mortem delta exceeds 15, an eighth
+- the helper or walker exceeds 250 effective lines, pre-mortem delta exceeds 15, a ninth
   implementation path or ninth case is needed, or census differs from
   `2412/365/2047/19984/5638`;
 - any required symbol/substrate drifts, any A1–A8 or gate check is nonzero, the shared ref moves,
@@ -583,7 +598,7 @@ report names the exact observed and expected values and proposes the smallest sp
 
 ## 13. Completion receipt
 
-Report sealed parent and final SHA; exact seven paths and effective-line deltas; one-build/two-
+Report sealed parent and final SHA; exact eight paths and effective-line deltas; one-build/two-
 reconstruction receipt; root ordinals and scalar meta; exact 63/1,308/5,885 totals, family
 totals, 8,280 bytes and digest; timeline/pulse/regional/Chronicle closures; regional zero-prose;
 scalar-alias caveat; A1–A8; every command/exit/count; both typechecks; observed-shape guard;
