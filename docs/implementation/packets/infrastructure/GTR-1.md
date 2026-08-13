@@ -1,6 +1,9 @@
 # Infrastructure / GTR-1 — one test phase, one artifact authority
 
-- **Status:** READY
+- **Status:** LANDED
+- **Implementation:** `cd4049481954539d8e4c9753f493cf18d0b33295` on
+  2026-08-13; code half `5f7e7051ccec72d489ad562d60ab20a6832046b1`; do
+  not redispatch.
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `357e7778e6318895c2ecb06dd5c7caed4dfe8863`
 - **Last revalidated:** 2026-08-13 at `357e7778e6318895c2ecb06dd5c7caed4dfe8863`
@@ -237,3 +240,33 @@ dist-present/dist-absent source equality, source totals, strict dist discovered/
 file and test totals, zero-nonrun proof, baseline before/after fields, all commands/exits,
 both typechecks, all 17 full-gate steps, product/golden/census delta (`NONE`), one-CAS
 proof, final clean state, deviations (`NONE` or STOP), and judgment calls (`NONE`).
+
+### Executed landing receipt — 2026-08-13
+
+- Verified base: `357e7778e6318895c2ecb06dd5c7caed4dfe8863`. Sealed
+  dispatch HEAD: `83f32d76747f5737b77ace308e391605bbe3439f`. Seal digest:
+  `65ca85260ee0a21dd9956d03733911248ebe5b586ba95fc2338bafbafbf5c268`.
+- Immutable pair: code half `5f7e7051ccec72d489ad562d60ab20a6832046b1`
+  changes exactly `package.json`, `scripts/check-test-ratchet.mjs`,
+  `tests/build/ciCheckParity.test.js`, and `tests/lint/testRatchet.test.js`;
+  genesis `cd4049481954539d8e4c9753f493cf18d0b33295` changes only
+  `scripts/.test-ratchet-baseline.json` and has the code half as its parent.
+- Baseline moved monotonically from subject `32f4e520e71774a233a0f8627cffa90a31674357`,
+  28,258 whole-suite tests / 2,403 files / skip ceiling 62 / 16 attributed
+  failures to subject `5f7e7051ccec72d489ad562d60ab20a6832046b1`, 27,956
+  source tests / 2,359 source files / skip ceiling 1 / the same 16 attributed
+  failures. The uncollected set and build-owned baseline rows are both empty.
+- A1–A8 passed. The three focused files passed 79/79; exact-path ESLint passed;
+  typecheck ratchets passed at 173/173 and 1,134/1,134. The source ratchet passed
+  with `dist/` absent and again after a fresh build with the same 27,956-test,
+  16-known-failure result.
+- Bare `npm run check:tail` ran all 17 steps and exited zero from a clean detached
+  genesis checkout. Build completed; strict dist verification discovered and
+  reported the same 50 files and passed 403/403 tests with zero failed, non-running,
+  uncollected, missing, extra, duplicate, or out-of-scope rows.
+- One old-value CAS moved `refs/heads/claude/composite-r4` from sealed HEAD
+  `83f32d76747f5737b77ace308e391605bbe3439f` directly to genesis
+  `cd4049481954539d8e4c9753f493cf18d0b33295`. All five authored paths are
+  clean; the eight H26 implementation edits remain separately preserved as foreign
+  work. Product, golden, flag, tuning, dependency, and lighting-census delta: `NONE`.
+  Deviations: `NONE`. Judgment calls: `NONE`.

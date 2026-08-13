@@ -4,7 +4,7 @@
   "packets": [
     {
       "id": "GTR-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GTR-1.md",
       "verifiedBase": "357e7778e6318895c2ecb06dd5c7caed4dfe8863",
       "changeManifest": [
@@ -41,7 +41,7 @@
     },
     {
       "id": "H26",
-      "status": "BLOCKED",
+      "status": "STALE",
       "packetPath": "docs/implementation/packets/infrastructure/H26.md",
       "verifiedBase": "9d001545ef15f522b94bd0eed766ec2c169bcfa1",
       "changeManifest": [
