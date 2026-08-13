@@ -76,14 +76,15 @@ describe.runIf(have)('claim_ai_request idempotency (pglite, 119)', () => {
 
   it('once the TTL has lapsed, a fresh claim WINS again (not a false duplicate)', async () => {
     expect((await claim(UID, 'k3')).duplicate).toBe(false);
-    // A LAPSED TTL, EXPRESSED WITHOUT A RACE. The sweep is
-    // `created_at < now() - make_interval(secs => v_ttl)`, and now() is the
-    // TRANSACTION timestamp — so at ttl=0 a row inserted microseconds earlier can
-    // compare EQUAL, the strict < is false, the sweep skips it, and the re-claim
-    // reports a false duplicate. That made this a coin flip (measured: passed and
-    // failed on consecutive isolated runs). A negative ttl puts the cutoff
-    // unambiguously in the future, so "lapsed" is proven rather than raced.
-    expect((await claim(UID, 'k3', -1)).duplicate).toBe(false);
+    // Backdate the real claim beyond a positive TTL. Passing ttl <= 0 is not a
+    // clock control: the function clamps it to 0, and its strict created_at < now()
+    // sweep can compare equal at pglite's timestamp precision.
+    await db.query(`
+      update public.ai_request_claims
+      set created_at = now() - interval '181 seconds'
+      where user_id = $1 and request_key = $2
+    `, [UID, 'k3']);
+    expect((await claim(UID, 'k3', 180)).duplicate).toBe(false);
   });
 
   it('distinct keys never collide (independent claims)', async () => {
