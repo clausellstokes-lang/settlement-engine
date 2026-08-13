@@ -1005,3 +1005,59 @@ closes:
 Sequencing after the GR-4c landing: chair-verify + flip → AO-1 micro-act → IA-2
 re-status → the machinery packet (with (g)) → the prose batch (b)–(f) → AO-0's
 schema-7 mint (carrying (a), SCW-1b's five sites, and the deferred figure).
+
+## §21 · THE SCHEMA COLLISION IS RULED; H26 OWNS 7 AND AO-0 MOVES TO 8
+## (2026-08-12 ~23:20, CR-H26-1..4 / CR-AO-8..10 — delegated manager ruling)
+
+The just-in-time compile found a real contradiction between two accepted records. The
+live governed source and Lane I's earlier schema-6 charter reserve **schema 7** for H26
+BANK-BY-RULE: the explained-writer rows must re-enter as one clean, reviewable set of
+additions, separate from every corpus movement. The later AO charter reused the ordinal
+without discharging that reservation. Git and the earlier exact charter win; the ordinal
+in §18 and §20 was mechanically stale.
+
+1. **CR-H26-1 — H26 remains the standalone schema-7 mint.** It does not fold into AO-0.
+   At `9d001545`, a fresh governed scan measures the four declarations at **44 reads / 31
+   `(file, identity)` rows / 31 files**, adding six files to the frozen inventory:
+   `factions` 2/2, `neighbourNetwork` 36/24, `stresses` 4/3, `worldPulse` 2/2. The
+   schema-7 target is therefore **1,998 reads / 1,412 identities / 387 files** if and only
+   if the immutable code-half proof reproduces those exact additions and no other motion.
+2. **CR-H26-2 — BANK-BY-RULE means a visible, tagged ceiling, not another allow-list.**
+   Every explained-writer finding survives into the governed inventory. A later reader
+   increments its per-file identity count and reds exactly like every ordinary overage.
+   Only a row carrying the exact explained-writer tag may ever be deliberately raised,
+   and only through a clean committed governed write carrying a nonblank persisted reason;
+   an untagged raise, a hand edit, an absent reason, or a reason with no actual tagged
+   growth is refused. Ordinary maintenance remains shrink-only.
+3. **CR-H26-3 — the code/genesis pair is one coordinator-owned atomic landing operation.**
+   The code half must be committed first because the artifact binds its SHA; it is
+   deliberately gate-red only on a precomputed exact failure set. The generated baseline
+   is the next commit and the only genesis path. A throwaway detached pair proves the
+   migration and full green gate before either branch CAS. The two commits are never
+   squashed, never exposed as a dispatch handoff between two sealed sessions, and a CAS
+   failure discards the pair and restarts against the actual parent. This is the narrow
+   plumbing resolution of the sealed-HEAD paradox, not a general packet exception.
+4. **CR-H26-4 — H26 is first in the queue and takes the FREE census row.** Its test-title
+   movement is re-derived whole at implementation; it may not forward-add historical
+   figures or raise any census/baseline ceiling.
+5. **CR-AO-8 — AO-0 serializes after the H26 genesis and targets schema 8.** It is
+   recompiled only from a clean green schema-7 descendant. The old `schema-7` wording in
+   §18 and §20 is superseded by this ruling; the rest of the AO order stands.
+6. **CR-AO-9 — AO-0 observes one authoritative shipped producer seam per chartered
+   family, not every incompatible record spelling.** Family 4 is already non-vacuous in
+   `pulseResult.regionalGraph.eventLog` (**109 unique rows** in the live replay), so it is
+   consumed rather than re-authored. Family 1 may use a deterministic post-pulse
+   `prepareAuthoritativeCanonEvent` result. Family 5 may represent only the pure
+   `aiData.chronicle[]` create+append seam. Flat flavor-event rows and
+   `campaign.chronicles[]` are explicitly deferred: the latter's only shipped road uses
+   caller-supplied AI prose, wall clock, persistence, analytics and store state.
+7. **CR-AO-10 — the scalar projection is opt-in and second-consumer-only.** It never
+   changes `foldCorpus`, never enters the default OSR artifact or baseline, excludes
+   volatile id/time fields, traverses in deterministic typed-path order, and fails closed
+   on malformed primitives, cycles or depth overflow. AO-0 remains BLOCKED until the H26
+   pair lands and its schema-8 packet is restamped against the resulting symbols and
+   exact code-half red set.
+
+Corrected queue: **H26 schema 7 → AO-0 schema 8 → AO-2 → AO-3 → AO-4 → AO-5
+→ AO-6 → GR-4e → CR-NEXT-1**. AO-3's owner-visible same-seed prose shift remains
+unchanged; the H26/AO ordinal correction does not spend or waive that veto.

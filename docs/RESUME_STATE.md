@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-12 22:44:47 EDT
+**Generated:** 2026-08-12 23:11:34 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
 | build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `9d001545` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `adedf32b` | **4605** |
+| ledger (main) | `review-fixes-2026-07-08` | `31a34aa5` | **4604** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 37Gi free (81% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260812T224355` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260812T231051` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T224355
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260812T231051
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -44,12 +44,12 @@ af3d93c8 2026-08-12 IN-1b: the dossier standing line, the mirror's first product
 ## Last 6 ledger commits
 
 ```
+31a34aa5 2026-08-12 The five prose debts are closed; AO-0 is next
 adedf32b 2026-08-12 PG-1 lands whole: the claim test stops racing its own clock
 99b5e621 2026-08-12 MX-1 closes whole: the ledger records machine-visible retirement
 354a942a 2026-08-12 MX-1 READY at e46bbd91; the two-site instruction was a four-site coupling
 ce57cdfe 2026-08-12 AO-1 landed at 41732a51 with both negative controls executed
 5a77b7d9 2026-08-12 GR-4c is done end-to-end; the flip carries IA-2's supersede; two lanes on
-3c6c0c6a 2026-08-12 AQ's locals are all green and it yielded mid-gate; resumed with collect order
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,7 @@ ce57cdfe 2026-08-12 AO-1 landed at 41732a51 with both negative controls executed
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-12 ~22:45 EDT) — prose batch LANDED at `9d001545`; PG-1 and MX-1 whole; build clean
+# ⭐⭐ CURRENT (2026-08-12 ~23:20 EDT) — schema collision ruled; H26 is next; build clean at `9d001545`
 
 **MX-1 IS DONE END-TO-END.** The five-file implementation landed at `3c61f42f`:
 `retiredSymbols` is now an optional, opposite-signed declaration beside
@@ -115,11 +115,21 @@ count-free. Receipts: validate **24 packets / 0 READY**, exact added-line `CLAIM
 and **1134/1134**, test ratchet **16 known failures of 28,359 at ceiling 16**, build
 green, dist **403/403**. Build porcelain is zero.
 
-**NEXT, in the recorded order:** re-derive, promote and dispatch AO-0's schema-7 mint
-(item (a) + SCW-1b's five sites + the deferred figure; AO-0 takes the FREE census row)
-→ AO-2 → AO-3 → AO-4 → AO-5 → AO-6 → GR-4e → CR-NEXT-1's wider corpus. AO-3 remains
-the owner-visible same-seed news-prose shift; owner veto surfaces remain §17.7 · §17.4
-· §17b · §18 · §19 · §20.
+**THE SCHEMA COLLISION IS RULED at OWNER_DECISION_QUEUE §21.** The older H26 charter
+and the live governed source already reserve schema 7 for BANK-BY-RULE; the later AO
+docket accidentally reused the ordinal. H26 therefore remains the standalone additions
+mint, measured at **44 reads / 31 rows / 31 files** over the four explained-writer
+identities, targeting **1,998/1,412/387** only if the committed proof reproduces the
+exact set. AO-0 moves to schema 8 and is narrowed to deterministic representative
+producer seams; exhaustive flat-event and `campaign.chronicles[]` coverage is deferred
+because the latter has no pure non-network producer. The scalar stream stays opt-in and
+cannot alter the OSR fold or baseline.
+
+**NEXT, in the corrected order:** compile/promote H26 schema 7 (it takes the FREE census
+row) → land its coordinator-owned code/genesis pair → re-derive AO-0 against the clean
+schema-7 genesis and promote it as schema 8 → AO-2 → AO-3 → AO-4 → AO-5 → AO-6 →
+GR-4e → CR-NEXT-1's wider corpus. AO-3 remains the owner-visible same-seed news-prose
+shift; owner veto surfaces remain §17.7 · §17.4 · §17b · §18 · §19 · §20 · §21.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
