@@ -1,7 +1,7 @@
 # Corpus Coverage / AO-4 — complete news-address totality and rewrite liveness
 
 - **Status:** READY
-- **Packet version:** `3`
+- **Packet version:** `4`
 - **Verified base:** `claude/composite-r4` at `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`
 - **Last revalidated:** 2026-08-13 at `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`
 - **Depends on:** AO-0 schema-8 genesis `e71beb84355666fe5508f61c0f9acdc516a97b79`,
@@ -173,8 +173,15 @@ lines, importing no product producer. Given the introductions from
 `reconstructWizardNewsIntroductions`, derive the address table exactly:
 
 1. Reject a non-array or empty introductions list.
-2. For each entry require nonblank string `kind`, `impactKind`, `headline`, and `summary`.
-3. Define `home = kind + '|' + impactKind`. Codepoint-sort the distinct homes.
+2. For each entry require nonblank string `kind`, `headline`, and `summary`, plus an own
+   `impactKind` value that is either exact `null` or a nonblank string. Define
+   `impactToken = impactKind === null ? 'null' : impactKind`. Reject missing or `undefined`
+   impact kind, blank strings, numbers, booleans, arrays, objects, embedded `|` in `kind` or
+   `impactToken`, and the non-null string `"null"`, which would collide with the canonical
+   null sentinel. The shipped Wizard News contract expressly permits exact null.
+3. Define `home = kind + '|' + impactToken`. Codepoint-sort the distinct homes. Exact null
+   therefore preserves the legacy `webwar_campaign_minted|null` and
+   `webwar_campaign_complete|null` identities; string `"null"` is never accepted.
 4. For each home and each field in the fixed order `headline`, `summary`, collect every exact
    string value, retaining duplicates.
 5. Classify a headline `prospective` iff `/\bmay\b/` matches. Classify a summary
@@ -185,6 +192,10 @@ lines, importing no product producer. Given the introductions from
    over exact strings and occurrences retains duplicates.
 8. Sort rows by codepoint identity `home|field|voiceClass`. Duplicate identities fail.
 
+Construct every emitted object explicitly in the displayed insertion order; object spread
+from an intermediate count bucket is forbidden because it can serialize `occurrences` before
+`distinctValues` and counterfeit the canonical digest.
+
 Canonical address serialization is UTF-8 `JSON.stringify(rows)` with no whitespace or final
 newline and object keys in the displayed insertion order. At this base it is 12,242 bytes and
 SHA-256 `82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694`.
@@ -192,6 +203,13 @@ The baseline stores both all 106 rows and that digest. The helper recomputes the
 requires exact totals: 53 homes, two fields, 106 identities, 14 prospective, 92 indicative,
 400 distinct values, and 544 occurrences. The digest is corroboration, not a substitute for
 row validation and bidirectional comparison.
+
+The live nullable census is pinned inside A4 without a ninth title: exactly 8 of 272
+introductions use exact null across exactly two of 53 homes — four
+`webwar_campaign_minted|null` and four `webwar_campaign_complete|null` occurrences. A fixture
+proves exact null and an ordinary string are accepted, then rejects every malformed/collision
+class named in step 2. These rows were already present when the canonical 106-row digest was
+derived, so no denominator or digest changes.
 
 ### 3.2 Raw rewrite liveness
 
@@ -214,6 +232,8 @@ index at or above eight for `mechanicalOutcomes`; and nonblank string values. Ty
 identity is `(root ordinal, pulse index, persisted field, outcome index)`, and duplicates fail.
 Stable order is `(pulse index, persisted field, outcome index, exact headline)`, with field
 comparison by codepoint. Preserve duplicate headline values at distinct addresses.
+Use that one numeric comparator for selection and validation; never re-sort by a stringified
+identity, which would place pulse 10 before pulse 2.
 
 The walker separately executes the production partition law with public, state-only, and
 suppression-only controls: public rows may enter `selectedOutcomes` but not mechanical;
@@ -240,6 +260,9 @@ counts are positive; inert means both are zero; a split zero/nonzero row is malf
 totals are 26 rules, 17 active, 9 inert, 69 distinct values, and 168 occurrences. The active
 table is §1.2. The inert table and
 its reasons are §3.3.
+Construct rewrite rows explicitly in the displayed insertion order. The live walker derives
+and compares every selected, mechanical, and union indicative count as well as prospective
+counts; validating frozen constants without deriving them is vacuous and forbidden.
 
 ### 3.3 Exact written inert quarantine
 
@@ -387,7 +410,7 @@ No second corpus build or global timeout/config edit is authorized.
 | A1 | One AO-0 scalar build feeds two byte-identical reconstructions closing at 12/272/32/240/53; the product partition proves public/state-only/suppression disjointness, exact 24/8 persisted caps, and why `consequenceOutcomes` is excluded. |
 | A2 | Complete final address totality yields exactly 106 rows, 400 distinct values, 544 occurrences, 14 prospective and 92 indicative, with zero blank or mixed identities and the exact canonical digest. |
 | A3 | Exact selected/mechanical raw selection yields 151/80/95/66 and 77/24/73/23, whose occurrence-disjoint union is 228/83/168/69; the final 26-rule table is exactly 17 active / 9 inert, every prospective matches once, no indicative matches, and active counts equal §1.2. |
-| A4 | Exact envelope and bidirectional comparators reject malformed, duplicate, empty, new, grown, shrunk, vanished, class-changed, mixed, uncovered, and overlapping inputs. |
+| A4 | Exact envelope and bidirectional comparators reject malformed, duplicate, empty, new, grown, shrunk, vanished, class-changed, mixed, uncovered, and overlapping inputs; exact null impact kind is accepted at the two frozen sentinel homes while missing/undefined, blank, other types, embedded delimiters, and string `"null"` fail. |
 | A5 | The zero-count identity set equals the nine written inert rows exactly; each carries its exact scoped nonblank §3.3 reason, and no active rule or reasonless inert row enters quarantine. |
 | A6 | Pre-cure has exactly one live raw challenge witness and zero overlap; post-cure has zero gaps, while naked fallback equals the producer `did` twin and queued/explicit-twin paths stay byte-identical. |
 | A7 | Unrelated headlines, all summaries/reasons, outcome input, and every non-headline `newsEntryForOutcome` field stay byte-identical; HZ-CROSSHOME, derived pre-mortem, mutation rationale, and census reconcile. |
@@ -460,7 +483,7 @@ Implementation and terminal record are never squashed. No red commit becomes a s
 
 ## 9. Mandatory STOP conditions
 
-STOP without widening if any denominator, digest, row, production partition/cap, class, active count, inert identity,
+STOP without widening if the exact-null census or sentinel law differs; if any denominator, digest, row, production partition/cap, class, active count, inert identity,
 written reason, witness, or census figure differs; if any blank/mixed address, second gap,
 overlap, indicative match, or replacement disagreement appears; if current producer output or
 any non-headline field moves; if the two durable lanes cease to be occurrence-disjoint, if
