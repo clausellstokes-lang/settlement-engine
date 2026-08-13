@@ -23,23 +23,14 @@ import { applySettlementLifecycleOutcomeToSettlement } from './settlementLifecyc
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { resolveProposalToOutcome } from './decisionTier.js';
+import { applySuccessionQuestionProposal, claimsSuccessionQuestionNamespace,
+} from './treatySuccessionProposalApply.js';
 import { applyRealmVerbOrder, buildRealmVerbOutcome, REALM_VERB_PAYLOAD_KIND } from './realmVerbExecution.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
 import { recordProposalProvenance } from './provenanceKernel.js';
-import {
-  isStateOnlyOutcome,
-  isSuppressionOnlyOutcome,
-  proposalRequiresRecordModeSupersession,
-  RECORD_MODE_PROPOSAL_VERSION,
-} from './pulseHelpers.js';
+import { isStateOnlyOutcome, isSuppressionOnlyOutcome, proposalRequiresRecordModeSupersession, RECORD_MODE_PROPOSAL_VERSION } from './pulseHelpers.js';
 import { wallClockNow } from '../clock.js';
-import {
-  isDriftOnlyOutcome,
-  isMetronomeRepeat,
-  newsEntryForOutcome,
-  reconcileSupersededProposalNews,
-  stateOnlyRumorSeedsFromHistory,
-} from './worldPulseFeedCuration.js';
+import { isDriftOnlyOutcome, isMetronomeRepeat, newsEntryForOutcome, reconcileSupersededProposalNews, stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
 import {
   authorityTransferEpochFor,
   governingFactionOf,
@@ -358,6 +349,7 @@ export function applyWorldPulseOutcomes({
     // it past the roll seam.
     if (isSuppressionOnlyOutcome(outcome)) continue;
     const stateOnly = isStateOnlyOutcome(outcome);
+    let ownsOutcomeNews = false;
     // state_only denotes a background mechanical refresh, not a DM decision.
     // Authority routing may have turned an originally-auto stochastic candidate
     // into a proposal; restore the mechanical lane here so the outcome still
@@ -503,6 +495,12 @@ export function applyWorldPulseOutcomes({
       }
       // Falls through: the strategy_deploy itself is a settlement-state no-op (its home
       // conditions re-upsert on the NEXT war tick once the deployment is live).
+    }
+
+    if (claimsSuccessionQuestionNamespace(outcome.proposalPayload)) {
+      const armed = applySuccessionQuestionProposal({ state, outcome, tick: tick ?? 0, now: now ?? null });
+      if (armed.lapsed) { lapsedOutcomeIds.push(String(outcome.id || '')); continue; }
+      state = armed.state; newsEntries.push(...armed.newsEntries); ownsOutcomeNews = armed.ownsOutcomeNews;
     }
 
     // W-COMPOSER-2 — THE REALM VERB ARM. An APPROVED realm_verb_order resolves
@@ -1056,6 +1054,7 @@ export function applyWorldPulseOutcomes({
       }
     }
     autoApplied.push(outcome);
+    if (ownsOutcomeNews) continue;
     // WR-6: an alliance call is carried through the ordinary outcome/proposal
     // lane, but once it actually applies its reader face belongs to the governed
     // coalition corpus. Proposal creation continued above, so a held call cannot
@@ -1244,7 +1243,9 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
       updateProposalStatus(campaign.worldState, proposalId, 'superseded', {
         supersededAt: now,
         supersededAtTick: tick,
-        supersessionReason: outcome.proposalPayload?.kind === 'siege_initiation'
+        supersessionReason: outcome.proposalPayload?.kind === 'succession_question'
+          ? 'succession_question_lapsed'
+          : outcome.proposalPayload?.kind === 'siege_initiation'
           && outcome.proposalPayload?.coalition
           ? 'coalition_join_lapsed'
           : 'bilateral_peace_lapsed',

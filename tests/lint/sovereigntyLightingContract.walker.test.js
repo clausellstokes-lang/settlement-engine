@@ -4032,7 +4032,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // denominator. Its one new credited file contributes exactly eight literal `it`
     // titles and one literal `describe` title; the amended AO-4 compatibility assertion
     // changes no registration. 2411/365/2046/19976/5637 → 2412/365/2047/19984/5638.
-    files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638,
+    // ⏱ GR-4d, 2026-08-13 — RE-DERIVED WHOLE after the lit succession decision.
+    // Its one new credited file contributes exactly eight literal `it` titles and one
+    // literal `describe` title; no existing registration moves.
+    // Prior row retained as a cross-contract ancestry pin: files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638
+    // 2412/365/2047/19984/5638 → 2413/365/2048/19992/5639.
+    files: 2413, parked: 365, credited: 2048, titles: 19992, suiteTitles: 5639,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -50,11 +50,22 @@ export const ACTOR_MAJOR_HOLD_WEEKS = 6;
  * (coup_succeeded, the seat changing hands). NOTE these are INITIATIONS, not the
  * bounded CONSEQUENCES of an already-approved premise: conquest and vassalization
  * (the unwinding of an approved siege) stay AUTO by the change-authority
- * philosophy — the DM approved the war, its resolution follows. Kept as a Set for
- * the O(1) routing check authorityFor makes on every candidate.
- * @type {ReadonlySet<string>}
+ * philosophy — the DM approved the war, its resolution follows. The public value
+ * is immutable data; a private Set supplies the O(1) routing check.
+ * @type {readonly string[]}
  */
-export const ACTOR_INITIATED_MAJOR_TYPES = new Set(['strategy_deploy', 'coup_succeeded', 'intervention_ordered', 'blockade_declared', 'treaty_breached']);
+export const ACTOR_INITIATED_MAJOR_TYPES = Object.freeze(['strategy_deploy', 'coup_succeeded', 'intervention_ordered', 'blockade_declared', 'treaty_breached']);
+const ACTOR_INITIATED_MAJOR_TYPE_SET = new Set(ACTOR_INITIATED_MAJOR_TYPES);
+const SUCCESSION_QUESTION_PAYLOAD_KIND = 'succession_question';
+export const SUCCESSION_QUESTION_TERMINALS = Object.freeze({ applied: 'disavow', dismissed: 'honor', expired: 'honor' });
+export const ACTOR_MAJOR_TERMINALS = Object.freeze({ applied: 'apply', dismissed: 'decline', expired: 'decline' });
+
+/** @param {unknown} payloadKind @param {unknown} status @returns {string|null} */
+export function actorMajorTerminalFor(payloadKind, status) {
+  const terminals = payloadKind === SUCCESSION_QUESTION_PAYLOAD_KIND ? SUCCESSION_QUESTION_TERMINALS : ACTOR_MAJOR_TERMINALS;
+  if (status === 'applied' || status === 'dismissed' || status === 'expired') return terminals[status];
+  return null;
+}
 
 /**
  * Is this changeType one of the actor-initiated majors M10a routes under routine?
@@ -62,7 +73,7 @@ export const ACTOR_INITIATED_MAJOR_TYPES = new Set(['strategy_deploy', 'coup_suc
  * @returns {boolean}
  */
 export function isActorInitiatedMajorType(changeType) {
-  return ACTOR_INITIATED_MAJOR_TYPES.has(changeType);
+  return ACTOR_INITIATED_MAJOR_TYPE_SET.has(changeType);
 }
 
 /**
@@ -94,6 +105,8 @@ export function pendingActorMajorFor(worldState, candidateType, actorId) {
   return proposals.some(p => p
     && p.status === 'pending'
     && p.outcome?.candidateType === candidateType
+    && !(candidateType === 'treaty_breached'
+      && p.outcome?.proposalPayload?.kind === SUCCESSION_QUESTION_PAYLOAD_KIND)
     && String(p.outcome?.targetSaveId) === id);
 }
 
@@ -128,7 +141,7 @@ export function expireStaleActorMajors(worldState, tick, now, intervalStartTick)
   const next = proposals.map(p => {
     if (p
       && p.status === 'pending'
-      && ACTOR_INITIATED_MAJOR_TYPES.has(p.outcome?.candidateType)
+      && ACTOR_INITIATED_MAJOR_TYPE_SET.has(p.outcome?.candidateType)
       && Number.isFinite(p.tick)
       && Number(p.tick) < startTick
       && nowTick - Number(p.tick) >= ACTOR_MAJOR_HOLD_WEEKS) {
