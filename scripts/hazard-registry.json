@@ -586,17 +586,20 @@
         "paths": [
           "tests/lint/newsVoiceContract.walker.test.js",
           "scripts/lib/news-voice-contract.mjs",
-          "tests/lint/.news-voice-baseline.json"
+          "tests/lint/.news-voice-baseline.json",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "scripts/lib/news-headline-contract.mjs",
+          "tests/lint/.news-headline-contract-baseline.json"
         ],
         "inChain": true,
-        "note": "The executed AO-0 scalar denominator reconstructs each accumulated Wizard News snapshot, classifies the closed applied-summary address set, and compares live debt to an immutable retro denominator plus an explicitly banked current set."
+        "note": "The executed AO-0 scalar denominator reconstructs each accumulated Wizard News snapshot, classifies the closed applied-summary address set and the complete final 106-row headline/summary address totality, and compares live debt to immutable baselines; AO-4 also proves the occurrence-disjoint 228-row selectedOutcomes+mechanicalOutcomes liveness union against all 26 exact fallback rules."
       },
       "instances": 53,
       "instanceEvidence": "EXECUTED AO-0 denominator: 48 distinct prospective summaries across 53 occurrences at seven applied NPC summary addresses. The one newsEntryForOutcome curation seam corrected applied headlines while placing the same prospective summary under queued and applied homes.",
       "triggers": [
         "any edit to a router that projects prose into more than one lifecycle home",
         "any edit to AO-0 scalar home/address fields used by the voice contract",
-        "any edit to the news-voice baseline, helper, producer, or curation seam"
+        "any edit to the news-voice or news-headline baseline, helper, producer, or curation seam"
       ],
       "upgradePath": "Class closed for the seven AO-2+3 addresses. Preserve the executed denominator and extend coverage only through a separately governed corpus-coverage packet."
     }

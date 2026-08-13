@@ -8,12 +8,14 @@ const CORPUS = Object.freeze({
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
   'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/lib/news-headline-contract.mjs',
   'scripts/lib/news-voice-contract.mjs',
   'src/domain/region/wizardNews.js',
   'src/domain/worldPulse/applyWorldPulse.js',
   'src/domain/worldPulse/npcAgency.js',
   'src/domain/worldPulse/pulseKernel.js',
   'src/domain/worldPulse/worldPulseFeedCuration.js',
+  'tests/lint/.news-headline-contract-baseline.json',
   'tests/lint/.news-voice-baseline.json',
 ]);
 

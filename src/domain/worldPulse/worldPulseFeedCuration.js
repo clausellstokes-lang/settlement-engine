@@ -15,7 +15,7 @@ import { clamp01 } from '../../kernel/math.js';
 /** @typedef {{ tick?: unknown, consequenceOutcomes?: PulseOutcome[], mechanicalOutcomes?: PulseOutcome[], mechanicalRumorSeeds?: CurationEntry[] }} PulseHistoryRecord */
 
 /** @type {Array<[RegExp, string]>} */
-const APPLIED_HEADLINE_REWRITES = [
+export const APPLIED_HEADLINE_REWRITES = [
   [/\bmay grow\b/, 'grows'],
   [/\bmay fall\b/, 'falls'],
   [/\bmay rise\b/, 'rises'],
@@ -41,6 +41,7 @@ const APPLIED_HEADLINE_REWRITES = [
   [/\bmay sabotage\b/, 'sabotages'],
   [/\bmay seek promotion\b/, 'seeks promotion'],
   [/\bmay undermine\b/, 'undermines'],
+  [/\bmay press a challenge to the government\b/, 'presses a challenge to the government'],
 ];
 
 const APPLIED_SUMMARY_IMPACT_KINDS = new Set([

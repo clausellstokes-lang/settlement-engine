@@ -4024,7 +4024,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // contract. Its one new credited file contributes exactly eight literal `it` titles
     // and one literal `describe` title; no existing test file changes registration shape.
     // 2409/365/2044/19960/5635 → 2410/365/2045/19968/5636.
-    files: 2410, parked: 365, credited: 2045, titles: 19968, suiteTitles: 5636,
+    // ⏱ AO-4, 2026-08-13 — RE-DERIVED WHOLE after the complete Wizard News headline
+    // address/liveness contract. Its one new credited file contributes exactly eight
+    // literal `it` titles and one literal `describe` title; no existing registration moves.
+    // 2410/365/2045/19968/5636 → 2411/365/2046/19976/5637.
+    files: 2411, parked: 365, credited: 2046, titles: 19976, suiteTitles: 5637,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
