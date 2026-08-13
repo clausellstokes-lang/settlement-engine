@@ -1390,6 +1390,75 @@
           "tests/scripts/implementationPackets.test.js",
           "tests/scripts/implementationSession.test.js"]
       ]
+    },
+    {
+      "id": "AO-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-4.md",
+      "verifiedBase": "ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/lib/news-voice-contract.mjs" },
+        { "action": "CREATE", "path": "scripts/lib/news-headline-contract.mjs" },
+        { "action": "CREATE", "path": "tests/lint/newsHeadlineContract.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.news-headline-contract-baseline.json" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/worldPulseFeedCuration.js" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "scripts/lib/news-voice-contract.mjs", "symbol": "export const NEWS_VOICE_PROTECTED_SUBSTRATE" },
+        { "path": "scripts/lib/news-voice-contract.mjs", "symbol": "export function reconstructWizardNewsIntroductions" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export function newsEntryForOutcome" },
+        { "path": "src/domain/worldPulse/pulseOutcomePartition.js", "symbol": "export function partitionPulseOutcomeLanes" },
+        { "path": "src/domain/worldPulse/pulseOutcomePartition.js", "symbol": "export function mechanicalPulseRecordFields" },
+        { "path": "src/domain/worldPulse/pulseHelpers.js", "symbol": "function isStateOnlyOutcome" },
+        { "path": "src/domain/worldPulse/pulseHelpers.js", "symbol": "function isPublicOutcome" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "selectedOutcomes: publicSelectedOutcomes.slice(0, 24)" },
+        { "path": "src/domain/worldPulse/factionCompetition.js", "symbol": "export const FACTION_VERB_PHRASES" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"id\": \"HZ-CROSSHOME\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "id: 'cross-home-voice-substrate-touched'" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\"" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical reconstructions closing at 12/272/32/240/53 while the product partition proves public state-only and suppression disjointness exact persisted caps 24 and 8 and exclusion of the overlapping consequence window" },
+        { "id": "A2", "case": "complete final address totality yields exactly 106 rows 400 distinct values 544 occurrences 14 prospective and 92 indicative with zero blank or mixed identities and canonical sha256 82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694" },
+        { "id": "A3", "case": "selected liveness is 151/80/95/66 mechanical is 77/24/73/23 and their occurrence-disjoint union is 228/83/168/69 while the final 26 rules are exactly 17 active and 9 inert every prospective matches once and no indicative matches" },
+        { "id": "A4", "case": "exact envelope and bidirectional comparators reject malformed duplicate empty new grown shrunk vanished class-changed mixed uncovered overlapping cap-breaching and third-lane inputs" },
+        { "id": "A5", "case": "the zero-count identity set equals the nine exact written scoped inert reasons in both directions and no active rule or reasonless inert row enters quarantine" },
+        { "id": "A6", "case": "pre-cure has exactly one live raw faction challenge witness and zero overlap post-cure has zero gaps naked fallback equals the producer did twin and queued plus explicit-twin paths stay byte-identical" },
+        { "id": "A7", "case": "unrelated headlines all summaries and reasons outcome input and every non-headline news field stay byte-identical while HZ-CROSSHOME derived premortem mutation rationale and whole census reconcile" },
+        { "id": "A8", "case": "the exact eight-path implementation passes focused checks both typechecks observed-shape guard and bare full gate at one clean immutable implementation commit with no unrelated movement" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "vitest", "run",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/domain/worldPulseNewsCuration.test.js",
+          "tests/domain/worldPulseRecordModes.test.js",
+          "tests/domain/worldPulseChronicleCuration.test.js",
+          "tests/domain/reasonHeadlineRegister.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/lib/news-voice-contract.mjs",
+          "scripts/lib/news-headline-contract.mjs",
+          "src/domain/worldPulse/worldPulseFeedCuration.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"]
+      ]
     }
   ]
 }
