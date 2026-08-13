@@ -119,7 +119,10 @@ import { tmpdir } from 'node:os';
 import { describe, expect, test, beforeAll } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-import { buildObservedCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
+import {
+  buildObservedCorpus,
+  OBSERVED_SCALAR_FIELDS,
+} from '../../scripts/lib/observed-shape-corpus.mjs';
 import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
 import {
   applyDomGlobalReceiverFilter, applyExplainedWriterFilter, applyLanguageSurfaceFilter,
@@ -143,6 +146,7 @@ const leafIdentity = (key, shape) => `${key} on ${shape}`;
 
 /** The producers run ONCE for the whole file. Every executed pin reads this. */
 let corpus = null;
+let scalarCorpus = null;
 let live = null;
 /** The estate's file list, walked ONCE — every scan below reuses it. */
 let estate = null;
@@ -239,6 +243,7 @@ function scanEstateWith(extraFiles = []) {
 
 beforeAll(async () => {
   corpus = await buildObservedCorpus();
+  scalarCorpus = await buildObservedCorpus({ scalarFields: OBSERVED_SCALAR_FIELDS });
   estate = sourceFiles(ROOT);
   live = scanEstateWith();
 }, 900_000);
@@ -324,7 +329,9 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // A NEW identity must be named as new, not as growth — the swap's tell.
     expect(msg).toContain(`NEW      ${leafIdentity('foundingTier', 'steadings')}`);
     expect(msg).toContain('TO COMPLY');
-    expect(msg).toContain('LOWER this file');
+    expect(msg).toContain('--write` re-freeze');
+    expect(msg).toContain('clean committed tree');
+    expect(msg).toContain('never hand-edit');
     expect(msg).toContain('Never raise a number');
   });
 
@@ -354,6 +361,77 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     expect(corpus.meta.steadingsMinted).toBeGreaterThan(0);
     expect(corpus.meta.simulationFlagsLit).toBeGreaterThan(20);
     expect(Object.keys(corpus.shapes).length).toBeGreaterThan(100);
+    expect(corpus.meta).toMatchObject({
+      shapeCount: 1321,
+      originCount: 8637,
+      transitionCount: 14650,
+    });
+    expect(scalarCorpus.scalarMeta).toEqual({
+      canonEventLogEntries: 1,
+      wizardNewsFinalEntries: 240,
+      wizardNewsAccumulatedEntries: 1567,
+      wizardNewsUnique: 272,
+      pulseHistory: 12,
+      regionalEventLog: 109,
+      regionalEventLogUnique: 109,
+      aiChronicle: 1,
+    });
+    expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
+    expect(Object.hasOwn(corpus, 'scalarMeta')).toBe(false);
+    const { scalarObservations, scalarMeta: _scalarMeta, ...scalarTopology } = scalarCorpus;
+    expect(scalarTopology).toEqual(corpus);
+    expect(scalarObservations.length).toBeGreaterThan(1_000);
+    expect(scalarObservations.every(({ root, rootOrdinal, path, value }) => (
+      typeof root === 'string'
+      && Number.isSafeInteger(rootOrdinal)
+      && path.length > 0
+      && path.some((segment) => (
+        segment.kind === 'field' && OBSERVED_SCALAR_FIELDS.includes(segment.value)
+      ))
+      && (value === null || ['string', 'number', 'boolean'].includes(typeof value))
+    ))).toBe(true);
+    const hasPath = (root, wanted) => scalarObservations.some((row) => (
+      row.root === root && wanted.every((part, index) => (
+        row.path[index]?.kind === part.kind && row.path[index]?.value === part.value
+      ))
+    ));
+    expect(hasPath('canonEventResult', [
+      { kind: 'field', value: 'nextEventLog' },
+      { kind: 'index', value: 0 },
+      { kind: 'field', value: 'event' },
+      { kind: 'field', value: 'cause' },
+    ])).toBe(true);
+    expect(hasPath('wizardNews', [
+      { kind: 'field', value: 'entries' },
+      { kind: 'index', value: 0 },
+    ])).toBe(true);
+    const accumulatedWizardRows = scalarObservations.filter((row) => (
+      row.root === 'pulseResult'
+      && row.path[0]?.kind === 'field' && row.path[0].value === 'wizardNews'
+      && row.path[1]?.kind === 'field' && row.path[1].value === 'entries'
+      && row.path[2]?.kind === 'index'
+    ));
+    expect([...new Set(accumulatedWizardRows.map((row) => row.rootOrdinal))])
+      .toEqual([...Array(corpus.meta.pulseIntervals).keys()]);
+    expect(accumulatedWizardRows.some((row) => (
+      row.rootOrdinal === corpus.meta.pulseIntervals - 1
+      && row.path[2].value === scalarCorpus.scalarMeta.wizardNewsFinalEntries - 1
+    ))).toBe(true);
+    expect(hasPath('worldState', [
+      { kind: 'field', value: 'pulseHistory' },
+      { kind: 'index', value: 0 },
+    ])).toBe(true);
+    expect(hasPath('pulseResult', [
+      { kind: 'field', value: 'regionalGraph' },
+      { kind: 'field', value: 'eventLog' },
+    ])).toBe(true);
+    expect(hasPath('aiChronicle', [
+      { kind: 'index', value: 0 },
+      { kind: 'field', value: 'mode' },
+    ])).toBe(true);
+    expect(scalarObservations.some((row) => row.path.some((segment) => (
+      segment.kind === 'field' && ['id', 'createdAt'].includes(segment.value)
+    )))).toBe(false);
   });
 
   test('THE PREMISE HOLDS: the four shapes the three defects live on were observed, and the keys are genuinely absent', () => {
@@ -453,6 +531,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     expect(live.domGlobals.cleared).toBeGreaterThan(0);
     expect(live.languageSurface.cleared).toBeGreaterThan(0);
     expect(live.explainedWriters.banked).toBe(44);
+    expect(Object.entries(corpus.shapes)
+      .filter(([, shape]) => shape.keys.includes('source'))
+      .map(([name]) => name)).toEqual([
+      'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
+      'institutions', 'magicDef', 'mercenary', 'site', 'walls', 'watch',
+    ]);
 
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
     // the raw half these are "the identity is not in the set", which is also
@@ -878,13 +962,26 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     // (c) an UNBASELINED file has ceiling ZERO — the law for all new work
     expect(compare([leafFinding('src/brand/new.js', 1, 'k', 'settlement')], { inventory: {} }).violations)
       .toHaveLength(1);
-    // (d) a row whose file is gone is fatal, not merely bankable
-    expect(compare([], { inventory: { 'src/does/not/exist.js': { [leafIdentity('k', 's')]: 1 } } }).stale)
-      .toHaveLength(1);
+    // (d) a row whose file is gone is fatal, not merely bankable, and tells the
+    // caller to re-derive rather than hand-edit the generated baseline.
+    const vanished = compare([], {
+      inventory: { 'src/does/not/exist.js': { [leafIdentity('k', 's')]: 1 } },
+    }).stale;
+    expect(vanished).toHaveLength(1);
+    expect(vanished[0]).toContain('governed --write re-freeze');
+    expect(vanished[0]).toContain('Never hand-edit');
+    const gone = compare([], {
+      inventory: { [RP]: { [leafIdentity('id', 'factions')]: 1 } },
+    }).stale;
+    expect(gone[0]).toContain('is GONE');
+    expect(gone[0]).toContain('governed --write re-freeze');
+    expect(gone[0]).toContain('Never hand-edit');
     // (e) an unbanked shrink is stale: the live inventory has no headroom.
     const shrunk = compare([findings[0]], { inventory });
     expect(shrunk.violations).toEqual([]);
     expect(shrunk.stale).toHaveLength(1);
+    expect(shrunk.stale[0]).toContain('governed --write re-freeze');
+    expect(shrunk.stale[0]).toContain('Never hand-edit');
     // (f) a collapsed corpus is refused
     expect(sentinelFailures({ usableShapes: 1, totalKeys: 1, resolvedReads: 1 }, baseline.sentinel).length)
       .toBeGreaterThanOrEqual(3);

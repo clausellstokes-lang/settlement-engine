@@ -10,6 +10,7 @@ import {
   assertBaselineRow,
   BASELINE_SCHEMA,
   parseLeafBaselineIdentity,
+  RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -19,6 +20,7 @@ import {
   validateSchema5Baseline,
   validateSchema6Baseline,
   validateSchema7Baseline,
+  validateSchema8Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -247,7 +249,8 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(7);
+    expect(BASELINE_SCHEMA).toBe(8);
+    expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
     expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
     // ⚠⚠ A RETIRED DEFINITION THAT THE LIVE ONE CAN MOVE IS NOT RETIRED. If the
@@ -362,13 +365,33 @@ function mutateSchema4(mutator) {
 
 function validSchema7Baseline() {
   const baseline = validSchema4Baseline();
-  baseline.schema = BASELINE_SCHEMA;
+  baseline.schema = RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA;
   baseline.rowTags = {
     'src/probe.js': {
       [LEAF_IDENTITY]: { reason: 'CR-H26 test ruling', rule: 'explained-writer' },
     },
   };
   baseline.digests.rowTags = digestOf(baseline.rowTags);
+  return baseline;
+}
+
+function validSchema8Baseline() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = BASELINE_SCHEMA;
+  return baseline;
+}
+
+function mutateSchema8(mutator) {
+  const baseline = validSchema8Baseline();
+  mutator(baseline);
+  baseline.digests.inventory = digestOf(baseline.inventory);
+  baseline.digests.rowTags = digestOf(baseline.rowTags);
+  baseline.digests.sentinel = digestOf(baseline.sentinel);
+  baseline.digests.scanStats = digestOf(baseline.scanStats);
+  baseline.digests.manifests = digestOf(baseline.manifests);
+  if (baseline.migrationReview) {
+    baseline.digests.migrationReview = digestOf(baseline.migrationReview);
+  }
   return baseline;
 }
 
@@ -508,7 +531,7 @@ describe('observed-shape schema-6 baseline envelope', () => {
   });
 
   test('gate and maintenance write reject a malformed baseline before corpus execution', async () => {
-    const malformed = mutateSchema7((baseline) => { delete baseline.migrationReview; });
+    const malformed = mutateSchema8((baseline) => { delete baseline.migrationReview; });
     let corpusCalls = 0;
     const overrides = {
       baselineExists: () => true,
@@ -523,8 +546,12 @@ describe('observed-shape schema-6 baseline envelope', () => {
 
 describe('observed-shape schema-7 bank-by-rule envelope', () => {
   test('A5: schemas 4-6 keep numeric inventory and only schema 7 admits sparse rowTags', () => {
-    const baseline = validSchema7Baseline();
-    expect(validateSchema7Baseline(baseline)).toBe(baseline);
+    const retired = validSchema7Baseline();
+    const baseline = validSchema8Baseline();
+    expect(validateSchema7Baseline(retired)).toBe(retired);
+    expect(validateSchema8Baseline(baseline)).toBe(baseline);
+    expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
+    expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     expect(typeof baseline.inventory['src/probe.js'][LEAF_IDENTITY]).toBe('number');
     for (const [schema, validate] of [
       [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA, validateSchema4Baseline],
@@ -561,11 +588,15 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     }],
   ])('A5 fails closed on %s', (_label, mutator) => {
     expect(() => validateSchema7Baseline(mutateSchema7(mutator))).toThrow();
+    expect(() => validateSchema8Baseline(mutateSchema8(mutator))).toThrow();
   });
 
   test('A5 independently integrity-binds the sparse tag map', () => {
     const baseline = validSchema7Baseline();
     baseline.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
     expect(() => validateSchema7Baseline(baseline)).toThrow(/rowTags digest mismatch/);
+    const live = validSchema8Baseline();
+    live.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
+    expect(() => validateSchema8Baseline(live)).toThrow(/rowTags digest mismatch/);
   });
 });

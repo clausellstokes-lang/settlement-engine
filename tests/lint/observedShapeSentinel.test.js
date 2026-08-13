@@ -31,6 +31,7 @@ import {
   isObservedShapeScanPath,
   isObservedShapeSubjectPath,
   LANGUAGE_SURFACE_RESIDUAL_KEYS,
+  RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -47,6 +48,7 @@ import {
   validateSchema5Baseline,
   validateSchema6Baseline,
   validateSchema7Baseline,
+  validateSchema8Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -340,7 +342,7 @@ const maintenanceRuntime = ({ current, frozen }) => {
   const baseline = validBaseline({ corpus, stats, frozen });
   Object.assign(runtime.overrides, {
     scanReaders: () => {
-      throw new Error('the schema-7 gate must not invoke the exact resolver');
+      throw new Error('the live heuristic gate must not invoke the exact resolver');
     },
     scanLegacyReaders: () => { runtime.calls.push('legacy-reader'); return { findings: current, stats }; },
     baselineExists: () => true,
@@ -1224,7 +1226,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * be shared is the NUMBER — pinned here in BOTH directions.
    */
   test('A5: schemas 4-6 retain the numeric law and schema 7 adds authenticated row tags', () => {
-    expect(BASELINE_SCHEMA).toBe(7);
+    expect(BASELINE_SCHEMA).toBe(8);
+    expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
     expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
     expect(RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA).toBe(6);
@@ -1233,7 +1236,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema7Baseline(live)).toBe(live);
+    expect(validateSchema8Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1243,15 +1246,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     delete numeric.digests.rowTags;
     const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema7Baseline(unfiltered)).toThrow();
+    expect(() => validateSchema8Baseline(unfiltered)).toThrow();
 
     const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema7Baseline(filtered)).toThrow();
+    expect(() => validateSchema8Baseline(filtered)).toThrow();
 
     const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema6Baseline(surface)).toBe(surface);
-    expect(() => validateSchema7Baseline(surface)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema8Baseline(surface)).toThrow(/noncanonical fields/);
+
+    const retiredBanked = { ...structuredClone(live), schema: RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA };
+    expect(validateSchema7Baseline(retiredBanked)).toBe(retiredBanked);
+    expect(() => validateSchema8Baseline(retiredBanked)).toThrow();
 
     const missing = structuredClone(live);
     const declared = leafFindingOf({
@@ -1329,12 +1336,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       baselineSchema: artifactBaselineSchemaOf('legacy-leaf'),
       siteSchema: 'source-position-v1',
     });
-    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 6. They are
+    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 8. They are
     // different numbers naming different things, and conflating them is what
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(7);
+    expect(BASELINE_SCHEMA).toBe(8);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
@@ -1605,7 +1612,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       .toHaveLength(1);
   });
 
-  test('the schema-7 ordinary write admits only pure decreases, never growth or an identity swap', async () => {
+  test('the schema-8 ordinary write admits only pure decreases, never growth or an identity swap', async () => {
     const held = leafFindingOf({ file: 'src/App.jsx', key: 'held', text: 'row.held' });
     const departed = leafFindingOf({
       file: 'src/App.jsx', line: 2, pos: 20, key: 'departed', text: 'row.departed',
@@ -1620,6 +1627,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(decrease.baselineWrites[0].inventory)
       .toEqual(artifactInventoryOf(BASELINE_SCAN_MODE, [held]));
     expect(decrease.baselineWrites[0].rowTags).toEqual({});
+    expect(decrease.baselineWrites[0]._doc.join('\n')).toContain('governed --write re-freeze');
+    expect(decrease.baselineWrites[0]._doc.join('\n')).toContain('never hand-edit');
     // The gate drove the HEURISTIC leg — not merely "some" leg.
     expect(decrease.calls).toContain('legacy-reader');
 

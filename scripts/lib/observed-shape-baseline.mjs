@@ -5,12 +5,16 @@
  * malformed row, missing migration genesis, disabled sentinel, or unbound scan
  * path must stop the gate before the expensive producer corpus executes.
  *
- * ── ⭐⭐ FIVE IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
+ * ── ⭐⭐ SIX IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
  *
- * `BASELINE_SCHEMA` is **7**: schema 6's numeric heuristic-leaf inventory with
- * explained-writer findings re-admitted and BANKED BY RULE in sparse `rowTags`.
- * The numeric identity remains `<key> on <shape>` with per-file multiplicity;
- * tags add governance metadata without changing that alphabet.
+ * `BASELINE_SCHEMA` is **8**: schema 7's tagged numeric heuristic-leaf
+ * inventory after the shared builder gained an opt-in scalar second consumer.
+ * The identity, topology inventory and envelope remain `<key> on <shape>` plus
+ * sparse `rowTags`; the schema mint binds the governed builder transition.
+ *
+ * `RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA` is **7**: schema 6's
+ * numeric inventory with explained-writer findings re-admitted and BANKED BY
+ * RULE in sparse `rowTags`. Retired, never redefined, never deleted.
  *
  * `RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA` is **6**: the same numeric
  * identity after M6, M11, M12 and the retired clear-outright M8/M9 behavior.
@@ -37,13 +41,14 @@
  * (`assertBaselineRow`, consumed by both the envelope validator and the gate's
  * `rowOf`), and each definition carries its own executed pins.
  *
- * ⚠⚠ SCHEMAS 4, 5 AND 6 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE
+ * ⚠⚠ SCHEMAS 4 THROUGH 8 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE
  * OPPOSITE CALL FOR THE OPPOSITE REASON. Schema 3's shape genuinely differs
  * (exact identity, thirteen-field sentinel, `count === 1`), so a shared
  * validator would have had to be a parameterised superset of two different
- * laws. The three leaf schemas have the IDENTICAL envelope, identity grammar,
- * telemetry record and receipt — only the finding-set PRODUCER differs — so
- * three copies would be one live law with three homes, which is exactly the
+ * laws. The five leaf schemas have the same numeric envelope law and identity
+ * grammar; schemas 7 and 8 share the same tagged extension too. Only the
+ * finding-set PRODUCER differs, so five copies would be one live law with five
+ * homes, which is exactly the
  * CR-OSR-FREEZE-8 shape. The one thing that must not be shared is the schema
  * NUMBER, so `validateLeafBaseline` takes it as an argument and each entry
  * point pins its own; a pin proves each refuses the others' numbers.
@@ -91,7 +96,10 @@ import {
   scannerToolDigestOf,
 } from './observed-shape-governance.mjs';
 
-export const BASELINE_SCHEMA = 7;
+/** The RETIRED bank-by-rule tagged definition. Schema 8 keeps its tagged
+ *  topology envelope while binding the opt-in scalar consumer. Never redefined. */
+export const RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA = 7;
+export const BASELINE_SCHEMA = 8;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -400,7 +408,7 @@ function validateInventory(inventory, scanTree) {
  * ⛔ RETIRED — the exact per-site definition. Kept executable so historical
  * schema-3 envelopes and the exact instrument's targeted receipts stay
  * verifiable; NEVER redefined in place. The live authority is
- * `validateSchema7Baseline` below.
+ * `validateSchema8Baseline` below.
  */
 export function validateSchema3Baseline(baseline) {
   assertExactKeys(baseline, 'schema-3 envelope', [
@@ -468,7 +476,7 @@ export function validateSchema3Baseline(baseline) {
   return baseline;
 }
 
-/* ══ HEURISTIC-LEAF ENVELOPES — 4–6 retired, 7 live ════════════════════════ */
+/* ══ HEURISTIC-LEAF ENVELOPES — 4–7 retired, 8 live ════════════════════════ */
 
 /**
  * ⛔ RETIRED — the UNFILTERED heuristic-leaf definition (CR-OSR-FREEZE-3-R1).
@@ -496,9 +504,19 @@ export function validateSchema6Baseline(baseline) {
   return validateLeafBaseline(baseline, RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA);
 }
 
-/** The LIVE authority — schema 6's 1,381 numeric rows plus the 31 re-admitted
- *  explained-writer numeric rows, with sparse content-addressed row tags. */
+/** ⛔ RETIRED — schema 6's numeric rows plus the re-admitted explained-writer
+ *  rows, with sparse content-addressed row tags. */
 export function validateSchema7Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE authority — schema 7's tagged numeric topology envelope after the
+ *  governed builder gained its opt-in scalar second consumer. */
+export function validateSchema8Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
@@ -648,8 +666,8 @@ function validateHeuristicMigrationReceipt(receipt, baseline) {
  * The heuristic-leaf envelope. Same 16 keys as schema 3; leaf identities with
  * multiplicity, heuristic telemetry, and a one-detector migration receipt.
  *
- * ⚠ `schema` IS AN ARGUMENT, NOT A CONSTANT READ FROM MODULE SCOPE. Schemas 4,
- * 5 and 6 share this law exactly (see the module header for why sharing is
+ * ⚠ `schema` IS AN ARGUMENT, NOT A CONSTANT READ FROM MODULE SCOPE. Schemas 4
+ * through 8 share this law exactly (see the module header for why sharing is
  * right here and wrong for schema 3); what must never be shared is WHICH number
  * each accepts, so each entry point below supplies its own and a pin drives
  * every direction of the refusal.

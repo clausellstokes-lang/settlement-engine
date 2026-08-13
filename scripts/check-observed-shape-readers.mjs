@@ -85,11 +85,12 @@ import {
   BASELINE_SCHEMA,
   MIN_ROWS,
   ORIGIN_MIN_ROWS,
+  RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema7Baseline,
+  validateSchema8Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -124,10 +125,12 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 4 = per leaf-name identity in the GOVERNED envelope, RAW detector output (RETIRED).
  * 5 = the same identity narrowed by M6 + M8/M9 alone (RETIRED).
  * 6 = the same identity narrowed by M6, M11, M12 and clear-outright M8/M9 (retired).
- * 7 = schema 6's numeric set with M8/M9 rows re-admitted and tagged. THE LIVE AUTHORITY.
+ * 7 = schema 6's numeric set with M8/M9 rows re-admitted and tagged (RETIRED).
+ * 8 = the same banked topology law after AO-0's opt-in scalar second consumer. THE LIVE AUTHORITY.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
+  RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -722,9 +725,11 @@ export const LANGUAGE_SURFACE_RESIDUAL_KEYS = Object.freeze(['toLocaleString']);
  *
  * ⚠ `RegExp.prototype` and `Function.prototype` are ABSENT ON PURPOSE. They
  * would admit `source`, `flags`, `lastIndex`, `test` and `name` — and `source`
- * is already an observed domain key on four shapes in this very estate, while
- * `name` is the most common domain key there is. A vocabulary that admits them
- * is a door, not a guard.
+ * is already an observed domain key on 12 shapes in the topology corpus
+ * (`causes`, `changes`, `charter`, `evidence`, `garrison`, `incomeSources`,
+ * `institutions`, `magicDef`, `mercenary`, `site`, `walls`, `watch`), while
+ * `name` is the most common domain key there is. A
+ * vocabulary that admits them is a door, not a guard.
  */
 const LANGUAGE_SURFACE_PROTOTYPES = Object.freeze([
   Object.prototype, Array.prototype, String.prototype,
@@ -1120,14 +1125,14 @@ export function assertExplainedWriterEvidence(
   return evidence;
 }
 
-/** Prove that schema 7's sparse tag map is exactly the declared explained-writer
+/** Prove that the live schema's sparse tag map is exactly the declared explained-writer
  *  address set present in the numeric inventory. Envelope validation proves tag
  *  grammar; this helper binds those tags to the governed declarations. */
 export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema7Baseline(baseline);
+  validateSchema8Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -1379,8 +1384,9 @@ export function ratchetMessage(file, rows) {
     + '  TO COMPLY: read a key the producer actually writes, or delete the dead arm.\n'
     + '    The authority is a real run, not a typedef: `node scripts/check-observed-shape-readers.mjs --report`\n'
     + '    prints the shape and the keys it was observed carrying.\n'
-    + '  TO SHRINK: fixed a site? LOWER this file\'s number for that identity in\n'
-    + '    scripts/.observed-shape-readers-baseline.json (delete the row when it reaches 0).\n'
+    + '  TO SHRINK: fixed a site? From a clean committed tree, run the governed\n'
+    + '    `node scripts/check-observed-shape-readers.mjs --write` re-freeze. It re-derives\n'
+    + '    every row and may only lower or delete ordinary debt; never hand-edit this baseline.\n'
     + '    Never raise a number, never add a file, never add an identity.';
 }
 
@@ -1462,21 +1468,21 @@ export function compare(findings, baseline) {
   }
   // The live generated inventory records exact current counts, not dormant
   // headroom. A vanished file or lower multiplicity is stale and must be folded
-  // into the same generated maintenance write; otherwise a later identity swap
-  // could spend an abandoned count while appearing under the old ceiling.
+  // through the governed --write re-freeze on a clean committed tree; never
+  // hand-edit a row or let a later identity swap spend an abandoned count.
   const stale = [];
   for (const [file, row] of Object.entries(baseline.inventory)) {
     if (!existsSync(join(ROOT, file))) {
-      stale.push(`${file}: deleted or moved — remove its row from the baseline.`);
+      stale.push(`${file}: deleted or moved — run the governed --write re-freeze on a clean committed tree; it will remove the derived row. Never hand-edit the baseline.`);
       continue;
     }
     const now = inv[file] || {};
     for (const [identity, ceiling] of Object.entries(rowOf(row, file))) {
       const count = now[identity] || 0;
       if (count === 0 && ceiling !== 0) {
-        stale.push(`${file}: "${identity}" is GONE against a frozen count of ${ceiling} — delete the row now; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
+        stale.push(`${file}: "${identity}" is GONE against a frozen count of ${ceiling} — run the governed --write re-freeze on a clean committed tree; it will delete the derived row. Never hand-edit the baseline; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
       } else if (count < ceiling) {
-        stale.push(`${file}: "${identity}" is ${count} against a frozen count of ${ceiling} — lower the row now; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
+        stale.push(`${file}: "${identity}" is ${count} against a frozen count of ${ceiling} — run the governed --write re-freeze on a clean committed tree; it will lower the derived row. Never hand-edit the baseline; schema ${BASELINE_SCHEMA} permits no dormant headroom.`);
       }
     }
   }
@@ -1895,10 +1901,11 @@ export function baselineOf({
       'Content-addressed per identity: dormant headroom and identity swaps are refused, so a NEW',
       'identity in an already-listed file reds exactly as a new file does, even at constant count.',
       'The line number is excluded so unrelated line churn does not rewrite the governed identity.',
-      'Ordinary maintenance may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
+      'Ordinary shrink maintenance is a governed --write re-freeze on a clean committed tree; never hand-edit rows.',
+      'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 7 = the same numeric identity, with explained-writer rows BANKED BY RULE.',
+      'SCHEMA 8 = schema 7 BANK-BY-RULE topology plus the governed opt-in scalar second consumer.',
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -1906,7 +1913,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–6 are the RETIRED numeric predecessors.',
+      'Schemas 4–7 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2079,7 +2086,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema7Baseline,
+    validateBaseline: validateSchema8Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

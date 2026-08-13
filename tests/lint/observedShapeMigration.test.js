@@ -15,6 +15,8 @@ import {
   BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
   BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS,
   BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+  CORPUS_COVERAGE_SCANNER_DELTA_PATHS,
+  CORPUS_COVERAGE_TARGET_SCHEMA,
   FILTERED_TARGET_SCHEMA,
   HEURISTIC_TARGET_SCHEMA,
   heuristicMigrationReport,
@@ -36,6 +38,7 @@ import {
 import {
   validateSchema6Baseline,
   validateSchema7Baseline,
+  validateSchema8Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 
 const SUBJECT_SHA = 'a'.repeat(40);
@@ -800,6 +803,16 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     return baseline;
   }
 
+  function schema7BaselineOf(artifact) {
+    const baseline = schema6BaselineOf(artifact);
+    baseline._doc = ['schema-7 tagged predecessor fixture'];
+    baseline.schema = BANKED_EXPLAINED_WRITER_TARGET_SCHEMA;
+    baseline.rowTags = {};
+    baseline.digests.rowTags = digestOf(baseline.rowTags);
+    validateSchema7Baseline(baseline);
+    return baseline;
+  }
+
   const predecessorScannerSha = 'b'.repeat(40);
   const unscannedSourceEntry = entry('src/unscanned.json', HASH_C);
 
@@ -814,6 +827,29 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     const detectorEntries = inputPaths.map((path) => {
       const originalSha = path === LEGACY_ALGORITHM.modulePath ? LEGACY_MODULE_SHA : HASH_A;
       const sha256 = current && changed.has(path) ? HASH_B : originalSha;
+      return entry(path, sha256, entryOverrides[path] || {});
+    });
+    const transitionSourceTree = manifest([sourceEntry, unscannedEntry]);
+    return {
+      detectorTree: manifest(detectorEntries),
+      sourceTree: transitionSourceTree,
+      executionTree: manifest([...transitionSourceTree.entries, ...detectorEntries]),
+    };
+  }
+
+  function corpusCoverageTransitionTrees({
+    current = false,
+    changedPaths = CORPUS_COVERAGE_SCANNER_DELTA_PATHS,
+    entryOverrides = {},
+    unscannedEntry = unscannedSourceEntry,
+    inputPaths = BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+  } = {}) {
+    const schema7Changed = new Set(BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS);
+    const schema8Changed = new Set(changedPaths);
+    const detectorEntries = inputPaths.map((path) => {
+      const originalSha = path === LEGACY_ALGORITHM.modulePath ? LEGACY_MODULE_SHA : HASH_A;
+      const predecessorSha = schema7Changed.has(path) ? HASH_B : originalSha;
+      const sha256 = current && schema8Changed.has(path) ? HASH_C : predecessorSha;
       return entry(path, sha256, entryOverrides[path] || {});
     });
     const transitionSourceTree = manifest([sourceEntry, unscannedEntry]);
@@ -1024,14 +1060,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       expect(report.target.baselineSchema).toBe(HEURISTIC_TARGET_SCHEMA);
       expect(report.rows).toEqual([]);
 
-      // ⭐ THE BARE CLI ALWAYS MEANS THE LIVE TARGET, WHICH IS NOW 7 — and a
+      // ⭐ THE BARE CLI ALWAYS MEANS THE LIVE TARGET, WHICH IS NOW 8 — and a
       // schema-2 predecessor cannot reach it, because `LEAF_MIGRATION_PREDECESSOR`
       // pairs each target with exactly its own predecessor. The refusal is the
       // pin: nothing silently re-runs a retired migration, and the default moving
       // with the live schema is what makes the bare CLI mean the current mint.
       expect(() => runMigration([
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
-      ])).toThrow(/predecessor baseline must be a schema-6 object/);
+      ])).toThrow(/predecessor baseline must be a schema-7 object/);
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1044,8 +1080,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
         `--current=${currentPath}`, `--target-schema=${HEURISTIC_TARGET_SCHEMA}`,
       ])).toThrow(/--current is only valid for the retired/);
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=8',
-      ])).toThrow(/--target-schema must be 7/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=9',
+      ])).toThrow(/--target-schema must be 8/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1071,10 +1107,11 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(FILTERED_TARGET_SCHEMA).toBe(5);
     expect(SURFACE_FILTERED_TARGET_SCHEMA).toBe(6);
     expect(BANKED_EXPLAINED_WRITER_TARGET_SCHEMA).toBe(7);
+    expect(CORPUS_COVERAGE_TARGET_SCHEMA).toBe(8);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
-    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4, 6: 5, 7: 6 });
+    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4, 6: 5, 7: 6, 8: 7 });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
     expect(heuristicReportOf(heuristicFixture()).kind)
@@ -1092,15 +1129,18 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(() => heuristicMigrationReport(
       fixture.predecessor, fixture.legacy, text, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     )).toThrow(/predecessor baseline must be a schema-6 object/);
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, fixture.legacy, text, CORPUS_COVERAGE_TARGET_SCHEMA,
+    )).toThrow(/predecessor baseline must be a schema-7 object/);
     // …and a target outside the table is refused by a TOTAL predicate rather
     // than by an enumeration of the numbers somebody thought to forbid.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 8))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 9))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.
@@ -1259,5 +1299,187 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     const nonGenesis = structuredClone(predecessor6);
     nonGenesis.frozenAtSha = 'd'.repeat(40);
     expect(() => reportFor(targetArtifact, nonGenesis)).toThrow(/requires the immutable schema-6 migration genesis/);
+
+    // A6 live arm: schema 7 is readable but retired, and advances exactly one
+    // rung to schema 8 through the corpus/check/baseline/migrate transition.
+    const schema7ScannerSha = 'd'.repeat(40);
+    const schema8ScannerSha = 'e'.repeat(40);
+    const schema7Trees = corpusCoverageTransitionTrees();
+    const schema7Artifact = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: schema7ScannerSha,
+      scannerSha: schema7ScannerSha,
+      ...schema7Trees,
+    });
+    const predecessor7 = schema7BaselineOf(schema7Artifact);
+    expect(validatePredecessorBaseline(
+      predecessor7, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+    )).toEqual(predecessor7);
+
+    const schema8Trees = corpusCoverageTransitionTrees({ current: true });
+    const schema8Artifact = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: schema8ScannerSha,
+      scannerSha: schema8ScannerSha,
+      ...schema8Trees,
+    });
+    const report8 = heuristicMigrationReport(
+      predecessor7,
+      schema8Artifact,
+      predecessorText(predecessor7),
+      CORPUS_COVERAGE_TARGET_SCHEMA,
+    );
+    expect(report8.kind).toBe('observed-shape-schema-7-to-8-migration');
+    expect(report8.inputs.scannerTransitionDigest).toBe(digestOf(report8.scannerTransition));
+    expect(report8.scannerTransition).toMatchObject({
+      predecessorSchema: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+      targetSchema: CORPUS_COVERAGE_TARGET_SCHEMA,
+      modifiedPaths: CORPUS_COVERAGE_SCANNER_DELTA_PATHS,
+    });
+    expect(report8.scannerTransition.unchangedPaths).toHaveLength(7);
+    expect([...report8.scannerTransition.modifiedPaths, ...report8.scannerTransition.unchangedPaths].sort())
+      .toEqual(BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS);
+    expect(report8.scannerTransition.predecessor.unscannedInputDigest)
+      .toBe(report8.scannerTransition.current.unscannedInputDigest);
+    expect(report8.summary).toEqual({
+      predecessorSame: 2,
+      predecessorDecreased: 0,
+      predecessorGone: 0,
+      predecessorIncreased: 0,
+      predecessorNew: 0,
+    });
+    expect(report8.predecessorRows.every((row) => row.reconciliation === 'same'))
+      .toBe(true);
+    expect(canonicalJson(predecessor7.inventory))
+      .toBe(canonicalJson(schema8Artifact.inventory));
+    expect(validateHeuristicMigrationReport(
+      report8,
+      predecessor7,
+      schema8Artifact,
+      predecessorText(predecessor7),
+      CORPUS_COVERAGE_TARGET_SCHEMA,
+    )).toBe(report8);
+
+    const readable8 = structuredClone(predecessor7);
+    readable8.schema = CORPUS_COVERAGE_TARGET_SCHEMA;
+    expect(validateSchema8Baseline(readable8)).toBe(readable8);
+    expect(() => validateSchema7Baseline(readable8)).toThrow(/is not schema 7/);
+
+    const review8 = acceptedReview(report8);
+    expect(review8.decisions.filter((decision) => decision.subject === 'scanner-transition'))
+      .toHaveLength(1);
+    const bundle8 = migrationBundleOf({
+      predecessorBaseline: predecessor7,
+      predecessorBaselineText: predecessorText(predecessor7),
+      legacyArtifact: schema8Artifact,
+      currentArtifact: schema8Artifact,
+      report: report8,
+      review: review8,
+    });
+    expect(validateMigrationBundle(bundle8)).toMatchObject({
+      targetInventoryDigest: schema8Artifact.digests.inventory,
+      subjectSha: schema8ScannerSha,
+    });
+
+    const reportFor8 = (artifact, predecessor = predecessor7) => heuristicMigrationReport(
+      predecessor,
+      artifact,
+      predecessorText(predecessor),
+      CORPUS_COVERAGE_TARGET_SCHEMA,
+    );
+    const targetWith8 = (treeOverrides = {}, artifactOverrides = {}) => legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: schema8ScannerSha,
+      scannerSha: schema8ScannerSha,
+      ...treeOverrides,
+      ...artifactOverrides,
+    });
+
+    const schema8ArtifactWith = (findings) => legacyArtifact(findings, {
+      subjectSha: schema8ScannerSha,
+      scannerSha: schema8ScannerSha,
+      ...schema8Trees,
+    });
+    expect(() => reportFor8(schema8ArtifactWith([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+      oldFinding(50, 500, 'covered', 'row'),
+    ]))).toThrow(/byte-identical, same-only.*"new":1/);
+    expect(() => reportFor8(schema8ArtifactWith([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(20, 200, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ]))).toThrow(/byte-identical, same-only.*"increased":1/);
+    expect(() => reportFor8(schema8ArtifactWith([
+      oldFinding(10, 100, 'held', 'row'),
+    ]))).toThrow(/byte-identical, same-only.*"gone":1/);
+    const repeatedSchema7Artifact = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(20, 200, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: schema7ScannerSha,
+      scannerSha: schema7ScannerSha,
+      ...schema7Trees,
+    });
+    expect(() => reportFor8(
+      schema8Artifact,
+      schema7BaselineOf(repeatedSchema7Artifact),
+    )).toThrow(/byte-identical, same-only.*"decreased":1/);
+
+    const threeCorpusChanges = corpusCoverageTransitionTrees({
+      current: true,
+      changedPaths: CORPUS_COVERAGE_SCANNER_DELTA_PATHS.slice(1),
+    });
+    expect(() => reportFor8(targetWith8(threeCorpusChanges))).toThrow(/must modify exactly/);
+
+    const fiveCorpusChanges = corpusCoverageTransitionTrees({
+      current: true,
+      changedPaths: [...CORPUS_COVERAGE_SCANNER_DELTA_PATHS, fifthPath],
+    });
+    expect(() => reportFor8(targetWith8(fiveCorpusChanges))).toThrow(/must modify exactly/);
+
+    const corpusModeChanged = corpusCoverageTransitionTrees({
+      current: true,
+      entryOverrides: { 'scripts/lib/observed-shape-corpus.mjs': { mode: '100755' } },
+    });
+    expect(() => reportFor8(targetWith8(corpusModeChanged))).toThrow(/file type or mode/);
+
+    const corpusSizeOnly = corpusCoverageTransitionTrees({
+      current: true,
+      entryOverrides: {
+        'scripts/check-observed-shape-readers.mjs': { sha256: HASH_B, size: 2 },
+      },
+    });
+    expect(() => reportFor8(targetWith8(corpusSizeOnly))).toThrow(/does not change content/);
+
+    const corpusExtraInput = corpusCoverageTransitionTrees({
+      current: true,
+      inputPaths: [...BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS, 'scripts/extra.mjs'],
+    });
+    expect(() => reportFor8(targetWith8(corpusExtraInput))).toThrow(/exact governed 11-input/);
+
+    const corpusMovedUnscanned = corpusCoverageTransitionTrees({
+      current: true,
+      unscannedEntry: entry('src/unscanned.json', HASH_B),
+    });
+    expect(() => reportFor8(targetWith8(corpusMovedUnscanned)))
+      .toThrow(/changes unscanned governed source inputs/);
+
+    expect(() => reportFor8(targetWith8(schema8Trees, {
+      subjectSha: schema7ScannerSha,
+      scannerSha: schema7ScannerSha,
+    }))).toThrow(/fresh committed scanner SHA/);
+
+    const nonGenesis7 = structuredClone(predecessor7);
+    nonGenesis7.frozenAtSha = 'f'.repeat(40);
+    expect(() => reportFor8(schema8Artifact, nonGenesis7))
+      .toThrow(/requires the immutable schema-7 migration genesis/);
   });
 });

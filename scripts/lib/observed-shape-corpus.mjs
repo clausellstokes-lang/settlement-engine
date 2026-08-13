@@ -71,6 +71,17 @@ export const CONFIGS = Object.freeze([
 /** Intervals of `simulateCampaignWorldPulse` driven over the generated saves. */
 export const PULSE_INTERVALS = 12;
 
+/** The prose-bearing scalar vocabulary admitted by AO-0. The scalar stream is
+ * opt-in; the observed-shape scanner continues to consume only topology. */
+export const OBSERVED_SCALAR_FIELDS = Object.freeze([
+  'cause', 'channelType', 'headline', 'impactKind', 'kind', 'mode',
+  'narrativeSummary', 'reason', 'reasons', 'scope', 'summary', 'summaryText',
+  'tags', 'thesis', 'triggeredBy', 'type',
+]);
+export const VOLATILE_SCALAR_KEYS = Object.freeze([
+  'appliedAt', 'createdAt', 'editedAt', 'id', 'time', 'timestamp', 'updatedAt',
+]);
+
 /** Every `<name>Enabled` simulation rule the domain tree reads, DISCOVERED from
  *  source rather than listed, so a new flag lights itself. */
 export function discoverSimulationFlags(readFileSync, globFiles) {
@@ -91,6 +102,111 @@ const FIELD_SEGMENT = 'field:';
 const ARRAY_ELEMENT_SEGMENT = 'element';
 const DYNAMIC_VALUE_SEGMENT = 'dynamic';
 const MAX_WALK_DEPTH = 64;
+
+const jsonScalar = (value) => (
+  value === null
+  || typeof value === 'string'
+  || typeof value === 'boolean'
+  || (typeof value === 'number' && Number.isFinite(value))
+);
+const assertScalarFields = (fields) => {
+  if (!Array.isArray(fields) || fields.some((field) => typeof field !== 'string' || !field)) {
+    throw new Error('observed scalar fields must be an array of nonempty strings');
+  }
+  if (new Set(fields).size !== fields.length) {
+    throw new Error('observed scalar fields must not repeat a field name');
+  }
+  return fields;
+};
+
+/**
+ * Project selected scalar fields from executed producer roots without folding
+ * away address, order, or multiplicity. Repeated root names remain distinct by
+ * their zero-based GLOBAL caller ordinal, and repeated equal values remain
+ * repeated rows. Paths are relative to the root and use typed segments so a
+ * literal numeric field cannot collide with an array index.
+ *
+ * The walker accepts JSON values only. Unsupported leaves, non-plain records,
+ * cycles, and depth loss fail loudly; an empty field selection is an isolated
+ * no-op so topology-only callers do not pay for or depend on this projection.
+ *
+ * @param {Array<{name:string,value:unknown}>} roots
+ * @param {{fields?:string[],maxDepth?:number}} options
+ * @returns {Array<{
+ *   root:string,
+ *   rootOrdinal:number,
+ *   path:Array<{kind:'field',value:string}|{kind:'index',value:number}>,
+ *   value:null|string|boolean|number,
+ * }>}
+ */
+export function scalarObservationsOf(roots, { fields = [], maxDepth = MAX_WALK_DEPTH } = {}) {
+  assertScalarFields(fields);
+  if (!Number.isSafeInteger(maxDepth) || maxDepth < 0) {
+    throw new Error('observed scalar maxDepth must be a non-negative safe integer');
+  }
+  if (fields.length === 0) return [];
+  if (!Array.isArray(roots)) throw new Error('observed scalar roots must be an array');
+
+  const selected = new Set(fields);
+  const rows = [];
+  const ancestors = new WeakSet();
+  const visit = (root, rootOrdinal, value, path, depth, capture = false) => {
+    if (depth > maxDepth) {
+      throw new Error(`observed scalar corpus exceeded depth ${maxDepth} at root ${JSON.stringify(root)}; refusing a truncated projection`);
+    }
+    if (jsonScalar(value)) {
+      if (capture) rows.push({ root, rootOrdinal, path, value });
+      return;
+    }
+    if (value === undefined || ['bigint', 'function', 'symbol'].includes(typeof value)
+      || (typeof value === 'number' && !Number.isFinite(value))) {
+      if (!capture) return;
+      throw new Error(`observed scalar corpus encountered a non-JSON value at root ${JSON.stringify(root)} / ${JSON.stringify(path)}`);
+    }
+    if (!value || typeof value !== 'object') {
+      throw new Error(`observed scalar corpus encountered an unsupported value at root ${JSON.stringify(root)} / ${JSON.stringify(path)}`);
+    }
+    if (!Array.isArray(value) && Object.getPrototypeOf(value) !== Object.prototype) {
+      if (!capture) return;
+      throw new Error(`observed scalar corpus encountered a non-plain record at root ${JSON.stringify(root)} / ${JSON.stringify(path)}`);
+    }
+    if (ancestors.has(value)) {
+      throw new Error(`observed scalar corpus encountered an ancestor cycle at root ${JSON.stringify(root)} / ${JSON.stringify(path)}`);
+    }
+    ancestors.add(value);
+    try {
+      if (Array.isArray(value)) {
+        for (let index = 0; index < value.length; index += 1) {
+          if (!Object.hasOwn(value, index)) {
+            throw new Error(`observed scalar corpus encountered a sparse array at root ${JSON.stringify(root)} / ${JSON.stringify(path)}`);
+          }
+          visit(root, rootOrdinal, value[index], [...path, { kind: 'index', value: index }], depth + 1, capture);
+        }
+        return;
+      }
+      for (const key of Object.keys(value).sort()) {
+        const nextPath = [...path, { kind: 'field', value: key }];
+        if (VOLATILE_SCALAR_KEYS.includes(key)) continue;
+        const child = value[key];
+        // A selected container carries every JSON-primitive leaf below it.
+        // This admits list/record prose fields such as reasons and tags without
+        // flattening away their typed relative address or duplicate values.
+        visit(root, rootOrdinal, child, nextPath, depth + 1, capture || selected.has(key));
+      }
+    } finally {
+      ancestors.delete(value);
+    }
+  };
+
+  roots.forEach((entry, rootOrdinal) => {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)
+      || typeof entry.name !== 'string' || !entry.name) {
+      throw new Error(`observed scalar root ${rootOrdinal} must carry a nonempty name and value`);
+    }
+    visit(entry.name, rootOrdinal, entry.value, [], 0);
+  });
+  return rows;
+}
 
 const encodePathValue = (value) => encodeURIComponent(String(value));
 const decodePathValue = (value) => decodeURIComponent(value);
@@ -572,12 +688,19 @@ export function foldCorpus(roots) {
  * Run all three producers and fold their output into the corpus.
  * @returns {Promise<{ shapes: Record<string, {rows:number, keys:string[]}>, meta: Record<string, unknown> }>}
  */
-export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet = true } = {}) {
+export async function buildObservedCorpus({
+  intervals = PULSE_INTERVALS,
+  quiet = true,
+  scalarFields = [],
+} = {}) {
+  assertScalarFields(scalarFields);
   const { generateSettlementPipeline } = await import(`${ROOT}/src/generators/generateSettlementPipeline.js`);
   const { simulateCampaignWorldPulse } = await import(`${ROOT}/src/domain/worldPulse/index.js`);
   const { applyRealmVerbOrder } = await import(`${ROOT}/src/domain/worldPulse/realmVerbExecution.js`);
   const { ensureRegionalGraph } = await import(`${ROOT}/src/domain/region/index.js`);
   const { buildSpatialDigest } = await import(`${ROOT}/src/domain/spatial/index.js`);
+  const { prepareAuthoritativeCanonEvent } = await import(`${ROOT}/src/domain/events/prepareCanonEvent.js`);
+  const { appendChronicleEntry, createChronicleEntry } = await import(`${ROOT}/src/lib/chronicle.js`);
   const { makeGridPack, placeSettlements } = await import(`${ROOT}/tests/fixtures/spatialPackFixtures.js`);
   const { readFileSync, readdirSync, statSync } = require_('node:fs');
 
@@ -594,6 +717,10 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
 
   /** @type {Array<{name:string, value:unknown}>} */
   const roots = [];
+  /** The five AO representative families. These references are also topology
+   * roots where noted; keeping a second list selects scalar observation without
+   * duplicating or re-authoring their values. */
+  const scalarRoots = [];
 
   // ── Producer 1: the settlement generator, multi-seed × multi-config. ──
   /** @type {unknown[]} */
@@ -639,19 +766,77 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
     wizardNews: { currentTick: 1, entries: [] },
   };
   let curSaves = saves;
+  const wizardNewsUnique = new Set();
   for (let i = 0; i < intervals; i += 1) {
     const out = simulateCampaignWorldPulse({
       campaign, saves: curSaves, interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z',
     });
     if (out?.worldState) campaign = { ...campaign, worldState: out.worldState };
     if (out?.wizardNews) campaign = { ...campaign, wizardNews: out.wizardNews };
+    for (const entry of out?.wizardNews?.entries || []) {
+      if (entry?.id != null) wizardNewsUnique.add(String(entry.id));
+    }
     if (Array.isArray(out?.saves) && out.saves.length) curSaves = out.saves;
     roots.push({ name: 'pulseResult', value: out });
+    // F4 consumes the existing pulse result's regional event log. The bounded
+    // view preserves the real relative path while excluding unrelated runtime
+    // arms (including non-JSON implementation sentinels) from this second
+    // consumer; no event row or prose value is copied or re-authored.
+    scalarRoots.push({
+      name: 'pulseResult',
+      value: {
+        regionalGraph: { eventLog: out?.regionalGraph?.eventLog || [] },
+        wizardNews: { entries: out?.wizardNews?.entries || [] },
+      },
+    });
   }
   roots.push({ name: 'worldState', value: campaign.worldState });
   roots.push({ name: 'wizardNews', value: campaign.wizardNews });
+  scalarRoots.push({
+    name: 'worldState',
+    value: { pulseHistory: campaign.worldState?.pulseHistory || [] },
+  });
+  scalarRoots.push({
+    name: 'wizardNews',
+    value: { entries: campaign.wizardNews?.entries || [] },
+  });
   roots.push({ name: 'campaign', value: { ...campaign, worldState: undefined, wizardNews: undefined } });
   for (const s of curSaves) roots.push({ name: 'save', value: s });
+
+  // ── AO family 1: one successful post-pulse authoritative canon event. ──
+  const canonEventResult = prepareAuthoritativeCanonEvent({
+    settlement: curSaves[0]?.settlement,
+    systemState: null,
+    phase: 'canon',
+    eventLog: [],
+    event: {
+      id: 'osr.canon.cut-route',
+      type: 'CUT_TRADE_ROUTE',
+      targetId: 'Observed North Road',
+      payload: {},
+      cause: 'player_action',
+    },
+    now: '2026-01-01T00:00:00.000Z',
+  });
+  if (!canonEventResult?.ok) {
+    throw new Error(`observed-shape corpus could not prepare its authoritative canon event: ${canonEventResult?.reason || 'unknown refusal'}`);
+  }
+  scalarRoots.push({
+    name: 'canonEventResult',
+    value: { nextEventLog: canonEventResult.nextEventLog },
+  });
+
+  // ── AO family 5: the pure Chronicle constructor + append projection. ──
+  // id/createdAt are deliberately outside OBSERVED_SCALAR_FIELDS; they remain
+  // real topology but never enter the deterministic prose stream.
+  const aiChronicle = appendChronicleEntry([], createChronicleEntry({
+    reason: 'progression',
+    aiSettlement: { thesis: 'Observed settlement thesis' },
+    aiDailyLife: { summary: 'Observed daily life summary' },
+    triggeredBy: 'observed-shape-corpus',
+    mode: 'full',
+  }));
+  scalarRoots.push({ name: 'aiChronicle', value: aiChronicle });
 
   // ── Producer 3: the steading mint, through the shipped realm verb. ──
   let steadingsMinted = 0;
@@ -671,6 +856,35 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
   }
 
   const { shapes, arrayShapes, singleHome, graph } = foldCorpus(roots);
+  const wizardEntries = Array.isArray(campaign.wizardNews?.entries)
+    ? campaign.wizardNews.entries : [];
+  let wizardNewsAccumulatedEntries = 0;
+  let regionalEventLog = 0;
+  const regionalEventLogUnique = new Set();
+  for (const { name, value } of scalarRoots) {
+    if (name !== 'pulseResult') continue;
+    wizardNewsAccumulatedEntries += Array.isArray(value?.wizardNews?.entries)
+      ? value.wizardNews.entries.length : 0;
+    const eventLog = Array.isArray(value?.regionalGraph?.eventLog)
+      ? value.regionalGraph.eventLog : [];
+    regionalEventLog += eventLog.length;
+    for (const entry of eventLog) {
+      if (entry?.id != null) regionalEventLogUnique.add(String(entry.id));
+    }
+  }
+  const scalarObservations = scalarFields.length
+    ? scalarObservationsOf(scalarRoots, { fields: scalarFields }) : null;
+  const meta = {
+    seeds: SEEDS.length,
+    configs: CONFIGS.length,
+    generations: generated.length,
+    pulseIntervals: intervals,
+    simulationFlagsLit: flags.length,
+    steadingsMinted,
+    shapeCount: Object.keys(shapes).length,
+    originCount: graph.meta.origins,
+    transitionCount: graph.meta.transitions,
+  };
   return {
     shapes,
     arrayShapes,
@@ -680,16 +894,17 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
      *  the resolver could not follow; anything wider binds `window`, `raw` and
      *  `plan` to unrelated corpus shapes. */
     rootShapes: [...new Set(roots.map((r) => r.name))].sort(),
-    meta: {
-      seeds: SEEDS.length,
-      configs: CONFIGS.length,
-      generations: generated.length,
-      pulseIntervals: intervals,
-      simulationFlagsLit: flags.length,
-      steadingsMinted,
-      shapeCount: Object.keys(shapes).length,
-      originCount: graph.meta.origins,
-      transitionCount: graph.meta.transitions,
-    },
+    meta,
+    ...(scalarObservations ? { scalarMeta: {
+      canonEventLogEntries: canonEventResult.nextEventLog.length,
+      wizardNewsFinalEntries: wizardEntries.length,
+      wizardNewsAccumulatedEntries,
+      wizardNewsUnique: wizardNewsUnique.size,
+      pulseHistory: Array.isArray(campaign.worldState?.pulseHistory)
+        ? campaign.worldState.pulseHistory.length : 0,
+      regionalEventLog,
+      regionalEventLogUnique: regionalEventLogUnique.size,
+      aiChronicle: aiChronicle.length,
+    }, scalarObservations } : {}),
   };
 }

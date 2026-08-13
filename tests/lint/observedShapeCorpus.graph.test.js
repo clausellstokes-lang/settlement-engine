@@ -1,6 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { foldCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
+import {
+  foldCorpus,
+  scalarObservationsOf,
+} from '../../scripts/lib/observed-shape-corpus.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function rootRecord(corpus, name) {
@@ -71,6 +74,51 @@ describe('observed shape corpus: path-qualified container graph', () => {
     expectAbsentWithAnchor(flat.keys, 'nestedOnly', 'flatOnly', 'flat separator path');
     expectAbsentWithAnchor(bracketLiteral.keys, 'arrayOnly', 'literalOnly', 'bracket literal path');
     expect(corpus.graph.pathEncoding).toBe('typed-uri-v1');
+
+    const observations = scalarObservationsOf([
+      { name: 'repeated', value: {
+        zIgnored: 'ordinary scalar outside the selected field set',
+        a: { headline: 'same' },
+        reasons: ['duplicate', 'duplicate'],
+      } },
+      { name: 'repeated', value: { headline: 'same' } },
+    ], { fields: ['headline', 'reasons'] });
+    expect(observations).toEqual([
+      {
+        root: 'repeated', rootOrdinal: 0,
+        path: [
+          { kind: 'field', value: 'a' },
+          { kind: 'field', value: 'headline' },
+        ],
+        value: 'same',
+      },
+      {
+        root: 'repeated', rootOrdinal: 0,
+        path: [
+          { kind: 'field', value: 'reasons' },
+          { kind: 'index', value: 0 },
+        ],
+        value: 'duplicate',
+      },
+      {
+        root: 'repeated', rootOrdinal: 0,
+        path: [
+          { kind: 'field', value: 'reasons' },
+          { kind: 'index', value: 1 },
+        ],
+        value: 'duplicate',
+      },
+      {
+        root: 'repeated', rootOrdinal: 1,
+        path: [{ kind: 'field', value: 'headline' }],
+        value: 'same',
+      },
+    ]);
+    expect(scalarObservationsOf([
+      { name: 'order', value: { headline: 'first', nested: { headline: 'second' } } },
+    ], { fields: ['headline'] })).toEqual(scalarObservationsOf([
+      { name: 'order', value: { nested: { headline: 'second' }, headline: 'first' } },
+    ], { fields: ['headline'] }));
   });
 
   test('a dynamic-value facet never erases the parent or contaminates exact-id values with fixed fields', () => {
@@ -181,6 +229,9 @@ describe('observed shape corpus: path-qualified container graph', () => {
     let tooDeep = { deepest: true };
     for (let i = 0; i < 70; i += 1) tooDeep = { next: tooDeep };
     expect(() => foldCorpus([{ name: 'r', value: tooDeep }])).toThrow(/refusing a truncated graph/);
+    expect(() => scalarObservationsOf([{ name: 'r', value: tooDeep }], {
+      fields: ['deepest'], maxDepth: 64,
+    })).toThrow(/refusing a truncated projection/);
   });
 
   test('ancestor cycles fail loudly instead of returning a provenance graph with a cut edge', () => {
@@ -193,5 +244,38 @@ describe('observed shape corpus: path-qualified container graph', () => {
     arrayCycle.push(arrayCycle);
     expect(() => foldCorpus([{ name: 'r', value: arrayCycle }]))
       .toThrow(/ancestor cycle.*refusing a cycle-truncated provenance graph/);
+    expect(() => scalarObservationsOf([{ name: 'r', value: objectCycle }], { fields: ['id'] }))
+      .toThrow(/ancestor cycle/);
+
+    for (const value of [undefined, Number.NaN, Number.POSITIVE_INFINITY, 1n, () => {}, Symbol('x')]) {
+      expect(() => scalarObservationsOf([
+        { name: 'r', value: { headline: value } },
+      ], { fields: ['headline'] })).toThrow(/non-JSON value/);
+    }
+    expect(scalarObservationsOf([{
+      name: 'r', value: { unselected: undefined, headline: 'selected' },
+    }], { fields: ['headline'] })).toEqual([{
+      root: 'r', rootOrdinal: 0,
+      path: [{ kind: 'field', value: 'headline' }],
+      value: 'selected',
+    }]);
+    expect(scalarObservationsOf([{
+      name: 'r',
+      value: { reasons: [{ id: 'volatile', createdAt: 'volatile', summary: 'kept' }] },
+    }], { fields: ['reasons'] })).toEqual([{
+      root: 'r', rootOrdinal: 0,
+      path: [
+        { kind: 'field', value: 'reasons' },
+        { kind: 'index', value: 0 },
+        { kind: 'field', value: 'summary' },
+      ],
+      value: 'kept',
+    }]);
+    expect(() => scalarObservationsOf([], { fields: ['headline', 'headline'] }))
+      .toThrow(/must not repeat/);
+    expect(() => scalarObservationsOf([], { fields: /** @type {never} */ ({}) }))
+      .toThrow(/array of nonempty strings/);
+    expect(scalarObservationsOf([{ name: 'r', value: objectCycle }], { fields: [] }))
+      .toEqual([]);
   });
 });

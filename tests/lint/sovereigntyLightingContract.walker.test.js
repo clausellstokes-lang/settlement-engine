@@ -4016,6 +4016,10 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // The tuple is unchanged: H26 rewrites existing credited titles in place, while its new
     // schema-envelope cases live in the already parked observedShapeBaseline file. This
     // comment adds no registration. One live measurement reconfirmed all five figures.
+    // ⏱ AO-0, 2026-08-13 — THE SCHEMA-8 CORPUS-COVERAGE MINT ADDS NO TEST TITLE.
+    // All six acceptance surfaces amend EXISTING registered cases in six existing test
+    // files; this file itself gains only this comment. The estate tuple therefore remains
+    // 2409/365/2044/19960/5635, re-derived whole rather than inferred from unchanged names.
     files: 2409, parked: 365, credited: 2044, titles: 19960, suiteTitles: 5635,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
