@@ -1090,3 +1090,41 @@ the disposable soak worktree or starting D-1/L0. Earlier rows that reserve a fre
 permission/signature turn or prohibit external contact solely for lack of owner
 authorization are historical on that point. Their evidence requirements and §3h's
 sequence remain binding.
+
+## §23 · AO-2 AND AO-3 FORM ONE ATOMIC CONTRACT→CURE TRAIN
+## (2026-08-13 ~07:20, CR-AO-11 — delegated manager ruling)
+
+The just-in-time AO-2 re-derivation found a lifecycle contradiction, not a product
+question. CR-AO-7 requires the voice contract to exist before its subject is cured and
+to red on arrival; the packet standard requires the branch exposed to every later lane
+to have a clean full gate. Freezing today's defect as accepted debt would erase the
+ruled retro-detection, while leaving a failing branch tip would erase landing authority.
+
+**CR-AO-11 — AO-2 and AO-3 compile as one coordinator-owned atomic three-commit
+train and one old-value CAS.** The semantic order remains visible and immutable:
+
+1. the AO-2 contract commit observes the live scalar corpus, freezes the exact defect
+   denominator, and has one precomputed deliberate red: outstanding voice debt is not
+   zero;
+2. its direct AO-3 child changes only the ruled view-time summary projection, reducing
+   the live debt to zero, and has one precomputed deliberate red family: the seven
+   vanished baseline identities are an unbanked win; and
+3. its direct bank child changes only the voice baseline to zero and must pass every
+   focused check and the bare full gate.
+
+The shared build ref moves only from the current green AO-0 descendant to the final
+green bank child after a detached proof. Neither red ancestor is exposed as a dispatch
+handoff or branch tip; the three commits are never squashed. A CAS failure, any extra
+red, or a final nonzero gate discards the train and requires recompilation against the
+actual parent. This is a narrow resolution for CR-AO-7, not a general red-landing
+exception.
+
+The live executed denominator is corrected and frozen in both honest dimensions:
+**48 distinct prospective summary values / 53 occurrences across seven applied NPC
+summary homes**, reconstructed from 272 introduced Wizard News entries and 53 observed
+homes. The older “48 entries” wording counted distinct values and omitted five duplicate
+occurrences. AO-2 owns exactly those seven applied-summary addresses. `reasons` stay in
+the entry signature for reconstruction but are not classified or rewritten: CR-AO-3
+ruled summary reuse defective, while the transcript's broader reasons suggestion was
+not adopted. AO-4 still owns totality and inert quarantine; AO-5 owns the remaining
+families; AO-6 owns the standing source-mutant battery.
