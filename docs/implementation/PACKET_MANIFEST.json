@@ -1614,6 +1614,73 @@
         ["npm", "run", "check:observed-shape-readers"],
         ["npm", "run", "check:tail"]
       ]
+    },
+    {
+      "id": "GR-4E",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4E.md",
+      "verifiedBase": "5a49d187f4445d33bc80d3bb2c2098bab23f92eb",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTermsCatalog.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreachCredibility.js" },
+        { "action": "TEST", "path": "tests/domain/informationStatecraftPins.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTermsWave3.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "export function fractureCredibilityDeltas" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "...fractureCredibilityDeltas(state, tick)," },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "function mintTreaty(args)" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "function mintTreatyFromCarriedSheet(args)" },
+        { "path": "src/domain/worldPulse/dispositionChannels.js", "symbol": "export function advanceTreatiesWithDisposition" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "const infowar = advanceInformationStatecraft({" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "const treatyAdvance = advanceTreatiesWithDisposition({" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "CREDIBILITY_HIT: 0.3" },
+        { "path": "src/domain/worldPulse/treatyBreachCredibility.js", "symbol": "micro-act **GR-4e**" },
+        { "path": "tests/domain/informationStatecraftPins.test.js", "symbol": "fracture record and charges the deserter" },
+        { "path": "tests/domain/informationStatecraftPins.test.js", "symbol": "a charged fracture debits the deserter" },
+        { "path": "tests/domain/peaceTermsWave3.test.js", "symbol": "SEPARATE EXIT: a worn, weak-tied member peels" },
+        { "path": "tests/property/peaceCausalDormancyGolden.test.js", "symbol": "peace-causal movers — dormancy golden" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a fracture stamped at tick five yields its exact recorded delta only at tick six while the mint tick later ticks genesis negative missing and nonfinite stamps yield none" },
+        { "id": "A2", "case": "advanceInformationStatecraft at tick six consumes a tick-five fracture through its existing spread and writes a negative credibility stock stamped at tick six" },
+        { "id": "A3", "case": "the existing separate-exit fixture proves the unchanged treaty writer stamps tick five and its exact returned world feeds no delta at tick five the exact credibility-hit delta at tick six and no replay at tick seven while both writer functions and the earlier-reader later-writer stage order remain bound" },
+        { "id": "A4", "case": "dark information statecraft all four dormancy families and the GR-4c oath-breach path remain unchanged with no new fold stage flag tuning persisted key golden registry or census movement" },
+        { "id": "A5", "case": "exactly five paths move one existing title is renamed no title is added or deleted and informationStatecraft remains at 780 effective lines with every baseline ceiling hazard and premortem file unchanged" },
+        { "id": "A6", "case": "in a disposable proof tree the old same-tick predicate mutant reds the renamed predecessor case and removing only the fracture-deriver spread leaves the pure case green but reds the existing stage-level credibility-stock case then both restore byte-identically" },
+        { "id": "A7", "case": "the immutable five-path candidate passes the exact 67-test direct battery and the exact measured 100-test wider battery corrected from the stale seven-file 94-test prediction by adding the directly relevant six-test peace-causal dormancy golden plus eslint both typechecks observed-shape validation packet hazard and premortem validation and the bare full gate without residue" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "--no-file-parallelism"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "tests/property/informationStatecraftDormancyGolden.test.js",
+          "tests/property/npcCredibilityDormancyGolden.test.js",
+          "tests/property/intelTradeDormancyGolden.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/property/peaceCausalDormancyGolden.test.js",
+          "--no-file-parallelism"],
+        ["npx", "eslint",
+          "src/domain/worldPulse/informationStatecraft.js",
+          "src/domain/worldPulse/peaceTermsCatalog.js",
+          "src/domain/worldPulse/treatyBreachCredibility.js",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npm", "run", "check:tail"]
+      ]
     }
   ]
 }
