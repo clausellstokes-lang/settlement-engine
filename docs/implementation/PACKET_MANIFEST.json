@@ -1118,7 +1118,7 @@
     },
     {
       "id": "MX-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/MX-1.md",
       "verifiedBase": "41732a516c72364e9b01be8959d98df1fdd68fb9",
       "changeManifest": [

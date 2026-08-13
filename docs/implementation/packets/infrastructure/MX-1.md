@@ -1,6 +1,7 @@
 # Infrastructure / MX-1 — machinery: retirement becomes machine-visible
 
-- **Status:** READY
+- **Status:** LANDED
+- **Implementation:** `3c61f42fd66478b1497ed14042bf786a18a279da` on 2026-08-12; do not redispatch.
 - **Packet version:** `1`
 - **Compiled by:** Lane AR (read-only design lane) 2026-08-12; **promoted by Lane AT** 2026-08-12 with every §15 figure executed at the base below — see §15.
 - **Verified base:** `claude/composite-r4` at `41732a516c72364e9b01be8959d98df1fdd68fb9`
@@ -470,3 +471,37 @@ In addition to `PACKET_STANDARD.md` §"Mandatory STOP conditions", stop — with
 **EXECUTED BY LANE AR (design), re-runnable:** the option comparison and its rejection grounds; the `d7b7d225` collision simulation that produced CR-AR-1; the drafted validator block; the hot-file measurement at that base.
 
 **NOT RUN, and deliberately the implementer's:** **B9** — both typecheck windows. **B10** — the full 17-step gate. Both are wave-end acts, not promotion acts.
+
+## 16. Landing receipt — `3c61f42f`, executed 2026-08-12
+
+- **Scope:** one private-index CAS commit over exactly the five §7 paths; raw diff
+  `+242/-3`; production effective-line movement `implementation-packets.mjs`
+  **540 → 581 (+41 of +55)** and `implementation-session.mjs`
+  **645 → 649 (+4 of +12)**; generated artifacts **NONE**; no `src/**`, golden,
+  persisted shape, baseline, ceiling, dependency, or census file moved.
+- **Recursive validator receipt:** before the first edit, `valid: 24 packets
+  (1 READY)`, `PRE_EDIT_TRUE_EXIT=0`; after the final edit and again from the
+  committed tree, `valid: 24 packets (1 READY)`, `POST_EDIT_TRUE_EXIT=0`.
+- **A1–A8:** the three dispatch-surface files stayed at **34/34**, exit 0, before
+  the edit, after the final edit, and from the committed tree. A1 was observed red
+  before the validator arm existed. A4 exercised present, absent and missing-file
+  `SUPERSEDED` states. A8 dispatched both the omitted-field `[]` form and a real
+  retirement target, preserved capsule-digest/authority equality, included the
+  retirement path in `fileHashes`, admitted an unchanged descendant and refused a
+  descendant that moved the retirement target.
+- **A7 mutant:** widening away the `status === 'LANDED'` guard made the READY +
+  surviving-retiree assertion red with the new LANDED-survivor error, exit 1; the
+  exact guard was restored and the focused assertion returned exit 0.
+- **Static and type posture:** exact four-file ESLint exit 0;
+  `typecheck:ratchet` (`tsconfig.full.json`) **173/173**, exit 0;
+  `typecheck:domain:strict` (`tsconfig.domain-strict.json`) **1134/1134**, exit 0;
+  authored `PACKET_STANDARD.md` prose produced `CLAIM_RE_HITS=0`.
+- **Census:** the lighting walker passed **33/33**, exit 0, with the frozen tuple
+  unchanged at **2409/365/2044/19960/5635** and no new or renamed test title.
+- **Full landing gate:** all 17 fail-fast steps ran, `FINAL_GATE_TRUE_EXIT=0`.
+  `test:ratchet` reported **16 known failures of 28,359 tests at ceiling 16**;
+  build completed; `verify:dist` passed **403/403**. The direct documentation
+  probes reproduced only the packet-recorded six foreign claim rows, while the
+  full ratchet attributed the committed failure identities without widening any
+  baseline.
+- **Deviations:** NONE. **Judgment calls:** NONE.
