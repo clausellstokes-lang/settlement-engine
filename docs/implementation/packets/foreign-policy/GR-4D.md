@@ -1,9 +1,11 @@
 # Foreign Policy / GR-4d — the lit succession decision
 
 - **Status:** READY
-- **Packet version:** `1`
+- **Packet version:** `2`
 - **Verified base:** `claude/composite-r4` at `7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1`
-- **Last revalidated:** 2026-08-13 at the verified base above.
+- **Last revalidated:** 2026-08-13; semantic substrate at the verified base
+  above, and the version-2 runner topology measured on attached promotion
+  `6f1cac100c147e22b4d9af69cf03f34eadd82e06`.
 - **Depends on:** GR-4a at `a53ef7c6` (dark succession answer and separate
   succession breach predicate), GR-4b-alpha at `dd457b9a` (the one honest
   disavowal beat), GR-4c at `cd2ab894` (the act-local credibility charge), and
@@ -20,6 +22,62 @@
   **941 effective lines**, equal to its tolerance-zero entry in
   `scripts/.size-baseline.json`. The whole lighting census is
   **2412/365/2047/19984/5638**.
+
+### Authority amendment history
+
+- **Version 2 — 2026-08-13, recursive sealed-check correction.** Version 1
+  mistakenly listed `npm run check:packet -- GR-4D` as one of GR-4D's own
+  manifest child checks. Executed proof found both possible geometries invalid:
+  a detached immutable candidate stops because the session machinery requires
+  `git symbolic-ref --quiet --short HEAD` to resolve an attached branch, while
+  an attached outer `implementation:resume` validates the seal and scope but
+  the nested child stops with `implementation session is already running:
+  GR-4D` because the outer runner already owns that session lock. A sealed
+  runner therefore cannot be its own child.
+- Version 2 removes that recursive child and records the governed validation
+  repair below. The manifest contains exactly
+  **ten** executable child checks. The coordinator runs
+  `npm run implementation:resume -- GR-4D` as the attached outer runner and
+  accepts only its complete sealed receipt; the final bare `check:tail` and
+  separate boot smoke remain mandatory and unchanged.
+- The version-1 capsule `4d9d2f96ed86a642d07c2ed9e7bbdffaea8e8be4b264e23483fe3b02120a8f0c`
+  and seal `e31d9be73f9fba38d1729eade10da0e90e6af3d31aad844a2879a24c2b5b6e2d`
+  are measured STOP evidence only. They may not authorize further execution.
+  After these three authority files land together, the coordinator regenerates
+  and verifies the version-2 capsule from an attached, target-clean authority
+  state and reseals before running the outer resume. The exact seven paths,
+  A1-A8 IDs and count, budgets, census, and six-mutant denominator are
+  unchanged; the validation contract is amended only as stated below.
+- Immutable proof also stopped the first implementation candidate on the
+  governed observed-shape-reader check and exposed an insertion-order gap in
+  its closed-record validator. The in-scope repair is one canonical
+  `exactProjection`: it validates exact key membership while projecting values
+  into the packet's named order, so neither persisted object insertion order nor
+  repeated direct field reads become authority. A5/A6 were strengthened inside
+  their existing titles; no registration moved. The pre-amendment evidence
+  object `556dab40e9fa684a5777931f426180d56cfc1f3a` carries those exact seven
+  target bytes at **+594/-23**, but is non-promotable and not seal-valid under
+  version 2 because it is a sibling of the amendment. Those exact target bytes
+  must be reconstructed as a new direct child of the landed and resealed
+  version-2 authority.
+  Its new files measure `treatySuccessionDecision.js` **176 raw / 138
+  effective**, `treatySuccessionProposalApply.js` **76 raw / 66 effective**,
+  and `treatySuccessionApproval.test.js` **300 raw**. Both source leaves remain
+  below their frozen packet budgets, each existing production-file delta
+  remains within its row, and the exact seven paths, eight titles, and census
+  are unchanged.
+
+  The revised candidate's manifest-ordered SHA-256 fingerprints are:
+
+  ```text
+  c9cad6ffda48aec04ab3966bad085783ed21fb8f9f75f73b27353a60d468556d  treatySuccessionDecision.js
+  fbc916dc5890b673ea2f6f3c7f58f451554759eef80f296151f9b220a1a9eef0  treatySuccessionProposalApply.js
+  d6b7e3b14ba98ce7806ffd83a06f0e30d0f7c8ed6e784d0f77e08a2bce7ec858  actorMajorApproval.js
+  ad0ddd8e93a3685b870c3359880c602e8464dcf6dae25bef5c2427fb028552ba  peaceTerms.js
+  7aadcba931ec4d594708147e4c13a8046b862802f325880c86d8e275db1792a6  applyWorldPulse.js
+  a597d3e056b7eac66eb8f5480bfc5be108d7efdf4bb5185e8cfc254129f009e9  treatySuccessionApproval.test.js
+  97a51402946e38f2ba1ce97588b2a11fd26eb0bca7e25f066f3813b1eae0dde6  sovereigntyLightingContract.walker.test.js
+  ```
 
 ## 1. Reconciled authority
 
@@ -126,6 +184,12 @@ Explicit non-goals:
 
 Overrides approved before dispatch: **NONE**. Exceeding any row is a STOP and a
 split.
+
+Final candidate measurement: the two new production leaves total **204
+effective lines** (`138 + 66`) against the `<=255` combined leaf allowance and
+the entire production change remains within `<=270`. Raw file length is not the
+budget unit; the packet and ESLint both use effective lines with comments and
+blanks skipped.
 
 ## 4. Verified tree contract
 
@@ -285,9 +349,11 @@ succession_question.<UTF-16-key-length>.<fnv-a-8hex>.<fnv-b-8hex>
 where `fnv-a` is `fnv1a32('gr4d:a\0' + questionKey)` and `fnv-b` is
 `fnv1a32('gr4d:b\0' + questionKey)`. The outcome carries this exact value as
 both `id` and `candidateId`; the proposal wrapper uses the existing
-`proposalIdFor(outcome, openedTick)`. `isSuccessionQuestionPayload` owns the
-full payload, opened-tick, outcome-id, and candidate-id recomputation so the
-apply leaf never duplicates the hash law.
+`proposalIdFor(outcome, openedTick)`. `successionQuestionPayloadTuple` owns the
+closed, key-order-independent projection plus full payload, opened-tick,
+outcome-id, and candidate-id recomputation. `isSuccessionQuestionPayload` is its
+boolean identity-preserving facade, and `successionQuestionRawKey` is the narrow
+permissive collision read. The apply leaf never duplicates the hash law.
 
 Before `upsertProposal`, inspect all retained proposal statuses, not only
 pending rows, by both exact `questionKey` and generated proposal ID:
@@ -455,7 +521,7 @@ No baseline may be widened. A new-file error is repaired at source.
 
 | Action | Path | Symbol/region | Maximum effective delta | Coding instruction |
 |---|---|---|---:|---|
-| `CREATE` | `src/domain/worldPulse/treatySuccessionDecision.js` | `successionQuestionKey`, `isSuccessionQuestionPayload`, `resolveSuccessionQuestions` | `<=140` | Own canonical identity, deep payload validation, all-status dedupe, and dark-vs-lit treaty-stage decision; write only through `upsertProposal` |
+| `CREATE` | `src/domain/worldPulse/treatySuccessionDecision.js` | `successionQuestionKey`, `successionQuestionPayloadTuple`, `isSuccessionQuestionPayload`, `successionQuestionRawKey`, `resolveSuccessionQuestions` | `<=140` | Own canonical identity, key-order-independent exact projection, deep payload validation, all-status dedupe, and dark-vs-lit treaty-stage decision; write only through `upsertProposal` |
 | `CREATE` | `src/domain/worldPulse/treatySuccessionProposalApply.js` | `claimsSuccessionQuestionNamespace`, `applySuccessionQuestionProposal` | `<=115` | GRAMMAR-owned succession-only apply; deep/current revalidation, lapse signaling, zero-or-one alpha beat, and generic-news ownership |
 | `MODIFY` | `src/domain/worldPulse/actorMajorApproval.js` | public vocabulary, private membership index, terminal records, `actorMajorTerminalFor`, `pendingActorMajorFor`, `expireStaleActorMajors` membership read | `<=15` | Export frozen arrays/records, never a frozen Set; type succession terminals, keep ordinary decline exact, and keep the succession namespace out of the generic `treaty_breached` hold guard |
 | `MODIFY` | `src/domain/worldPulse/peaceTerms.js` | succession import and existing treaty-stage call | `0` net | Replace import/call one-for-one, thread supplied `now`, remain exactly 797/800 |
@@ -485,8 +551,11 @@ Required created symbols are the symbols named in the two CREATE rows plus
    into the apply mouth at net-zero 941 without moving the realm arm.
 7. Re-derive and update the census, run focused checks, then execute the six
    disposable mutants outside the shared worktree and restore digest-exact.
-8. Run sealed packet checks, resume, the bare full gate, and boot smoke. Produce
-   the completion receipt; do not continue into voice, dossier, GR-5, or soak.
+8. From the attached sealed worktree, run `implementation:resume` once as the
+   outer sealed runner and require a complete passing receipt for the ten
+   manifest child checks. Then run the final bare full gate and boot smoke as
+   independent landing evidence. Produce the completion receipt; do not
+   continue into voice, dossier, GR-5, or soak.
 
 ## 9. Acceptance matrix — exactly eight titles
 
@@ -564,15 +633,26 @@ sh scripts/gate-mutex.sh --run -- npx vitest run \
   --no-file-parallelism
 
 npm run premortem -- --working
-npm run check:packet -- GR-4D
+
+# Coordinator-owned outer runner; this command is not a manifest child.
 npm run implementation:resume -- GR-4D
+
+# Independent final landing evidence; run bare, never through a pipeline.
 npm run check:tail
 npm run smoke:boot
 ```
 
-Every command must exit zero. Focused counts are reported from execution; no
-unexecuted historical test total may be copied into the receipt. The full gate
-is run bare and never read through a pipeline.
+The manifest check matrix contains exactly ten children: three validators,
+ESLint, the mutex-held focused Vitest battery, both TypeScript ratchets,
+observed-shape verification, `check:tail`, and `smoke:boot`. The working-tree
+premortem command is additional coordinator evidence, not a manifest child. The
+attached `implementation:resume` invocation is the outer sealed runner, not an
+eleventh child. Its session state and exact step receipts must report the whole
+ten-command plan complete and passing. The final two commands are then repeated
+outside that inner evidence plan as independent landing evidence. Every command
+must exit zero. Focused counts are reported from execution; no unexecuted
+historical test total may be copied into the receipt. The full gate is run bare
+and never read through a pipeline.
 
 ## 12. Disposable mutation proof
 
@@ -648,7 +728,8 @@ In addition to `PACKET_STANDARD.md`, stop before or during implementation if:
   more than one, or the generic applied twin survives;
 - whole census is not exactly `2413/365/2048/19992/5639`, either TypeScript
   ratchet gains a per-file error, any named mutant survives/does not plant, any
-  focused/sealed/full/boot command exits nonzero, or proof residue remains;
+  focused/sealed/full/boot command exits nonzero, the attached outer resume does
+  not produce a complete passing ten-child receipt, or proof residue remains;
 - any soak begins.
 
 Do not broaden the packet or repair adjacent findings. Report the exact STOP.
@@ -656,14 +737,22 @@ Do not broaden the packet or repair adjacent findings. Report the exact STOP.
 ## 15. Completion receipt template
 
 - Base SHA and seal/capsule identities:
-- Exact seven paths and raw/effective deltas:
+- Pre-amendment evidence object, non-promotable under version 2:
+  `556dab40e9fa684a5777931f426180d56cfc1f3a`; exact seven target bytes at
+  `+594/-23`:
+- Final resealed post-version-2 implementation SHA, which must be the direct
+  implementation child of the landed version-2 authority:
+- New-file measurement: decision leaf `176 raw / 138 effective`, apply leaf
+  `76 raw / 66 effective`, acceptance file `300 raw`:
+- Governed observed-shape STOP and `exactProjection` / A5-A6 repair evidence:
 - Final effective lines: `peaceTerms.js 797`, `applyWorldPulse.js 941`:
 - A1-A8 titles, exits, and focused counts:
 - Census re-derivation: `2413/365/2048/19992/5639`:
 - Both TypeScript ratchets and observed-shape result:
 - Six mutation exits, failing titles, and restored digests:
 - Premortem/hazard dispositions:
-- Sealed packet receipt and resume status:
+- Attached outer `implementation:resume` status and complete sealed receipt for
+  all ten manifest children (no recursive self-check):
 - Bare full-gate stages actually executed and boot-smoke exit:
 - Generated artifacts: `NONE`:
 - Deviations: `NONE | STOP`:

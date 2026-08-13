@@ -1765,7 +1765,6 @@
         ["npm", "run", "typecheck:ratchet"],
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "check:observed-shape-readers"],
-        ["npm", "run", "check:packet", "--", "GR-4D"],
         ["npm", "run", "check:tail"],
         ["npm", "run", "smoke:boot"]
       ]
