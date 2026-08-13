@@ -3,8 +3,18 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`
-- **Measured:** 2026-08-13 — **AO-4 promoted just in time.** The live manifest has
+  `09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`
+- **Measured:** 2026-08-13 — **AO-4 landed.** The exact eight-path implementation
+  `09e39ee6` passed its focused proof at 134/134 and the bare full gate at exit 0.
+  Address totality closed at 106 identities / 400 distinct / 544 occurrences /
+  14 prospective / 92 indicative with canonical SHA-256
+  `82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694`;
+  persisted-lane liveness closed at selected 151/80/95/66 + mechanical 77/24/73/23
+  = union 228/83/168/69, with 26 rules = 17 active + 9 written inert and zero gaps
+  or overlaps. The lighting census re-derived whole at
+  `2411/365/2046/19976/5637`. The live manifest has 29 rows and zero dispatchable
+  packets. AO-4 is terminal and the census reservation is free.
+- **Historical measurement:** 2026-08-13 — **AO-4 promoted just in time.** The live manifest had
   29 rows and exactly one dispatchable packet. Complete final Wizard News address
   totality is 53 homes × headline/summary = 106 rows, 400 distinct values and 544
   occurrences, split 14 prospective / 92 indicative with zero blank or mixed rows;
@@ -169,24 +179,23 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-H26 | [`H26`](./packets/infrastructure/H26.md) | **LANDED** at `98729f79`; code half `d081feee`; do not redispatch | Schema 7 BANK-BY-RULE: 44 reads / 31 tagged rows, target 1,998 / 1,412 / 387, exact reviewed four-entry scanner transition and clean 17-step gate. Reservations are free for post-H26 re-derivation. | AO-0 and every scalar/corpus producer seam; SCW-1b and item (a); any `src/**` edit; a fifth declaration; scan/corpus/sentinel movement; any other scanner drift; hand-edited JSON; untagged raises; every golden, tuning value, budget, timeout, floor and unrelated baseline |
 | LANDED-AO0 | [`AO-0`](./packets/corpus-coverage/AO-0.md) | **LANDED** at `e71beb84`; code half `3df85a3a`; do not redispatch | Schema 8 adds a second-consumer-only typed scalar projection over five authoritative shipped seams while preserving `foldCorpus`, default topology, OSR artifact, and inventory byte-for-byte. The strict 7→8 proof binds an exact four-entry scanner transition and 1,412 same rows with zero motion. | AO-2..6, prose cures, HZ-CROSSHOME, every `src/**` edit, flat flavor events, `campaign.chronicles[]`, volatile ID/time fields, scalar data in the default artifact, dependency, golden, flag, tuning, timeout, floor, ceiling or unrelated baseline movement |
 | LANDED-AO23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **LANDED** at `f0c272e8`; contract `c825af92`, cure `d4f213d0`; do not redispatch | Contract-before-cure without exposing a red branch tip: 272 introductions / 53 homes froze 48 distinct / 53 occurrence debt across seven applied-summary addresses, C1 proved the final-zero red, C2 cured only those addresses and proved exactly seven vanished identities, and C3 banked them to zero. The exact 7-path → 1-path → 1-path train passed 97/97 and only its green final child reached the shared ref. The census row is free. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
-| READY-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **READY** at `ba6a2913`; exact eight-path ordinary micro-wave | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The current 25 rules are 16 active / 9 exact reasoned inert with one live uncovered faction challenge; one producer-agreeing fallback closes to 26 = 17/9, zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. Ordinary one-green-implementation-commit lifecycle; no authored red commit. AO-4 solely holds the census row for the expected whole tuple `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
+| LANDED-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **LANDED** at `09e39ee6`; do not redispatch | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The exact fallback closes the registry to 26 = 17 active + 9 exact reasoned inert with zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. The eight-path implementation passed 134/134 and the bare full gate; the census row is free at `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-4 PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-4 LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: AO-4.** The live manifest has 29 rows and exactly one dispatchable
-packet. AO-4 adds one credited test file carrying exactly eight `it` titles and one
-`describe` title, so it is the only non-terminal packet that can move the census. Its
-anticipated whole re-derivation is `2411/365/2046/19976/5637`; implementation must execute
-the walker and STOP rather than forward-add if any figure differs. AO-2+3 is terminal and
-its prior `2410/365/2045/19968/5636` reservation is historical.
+⭐ **CURRENT HOLDER: FREE.** AO-4 LANDED at `09e39ee6`; its one credited test file
+carried exactly eight `it` titles and one `describe` title, and the executed whole
+re-derivation is `2411/365/2046/19976/5637`. The live manifest has 29 rows and zero
+dispatchable packets. AO-4 is terminal, so its reservation is historical and the row
+is free until the next non-terminal packet that can actually move a census figure.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

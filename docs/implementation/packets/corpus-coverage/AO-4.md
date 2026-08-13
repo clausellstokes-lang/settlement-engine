@@ -1,14 +1,18 @@
 # Corpus Coverage / AO-4 — complete news-address totality and rewrite liveness
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `4`
 - **Verified base:** `claude/composite-r4` at `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`
-- **Last revalidated:** 2026-08-13 at `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`
+- **Last revalidated:** 2026-08-13 at implementation commit
+  `09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`.
+- **Landed:** 2026-08-13 — implementation
+  `09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`; do not redispatch.
 - **Depends on:** AO-0 schema-8 genesis `e71beb84355666fe5508f61c0f9acdc516a97b79`,
   AO-2+3 zero-bank `f0c272e894f3f4d4edbd7fd1dac4c65580f87e52`, and terminal
   record `ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423`; CR-AO-1/4 and the
   §18/§21 order in the ledger.
-- **Collision group:** the estate-wide lighting census; AO-4 is its sole current holder.
+- **Collision group:** the estate-wide lighting census; AO-4 is terminal and the
+  reservation is free.
 - **Commit authority:** the coding agent edits only the eight manifest paths and does not
   stage or commit. The coordinator constructs, proves, and old-value-CAS lands the one
   implementation commit, then records terminal packet state separately.
@@ -21,6 +25,9 @@
   falls back from `may press a challenge to the government` to
   `presses a challenge to the government`. The current producer already supplies that exact
   applied twin, so its queued and applied output is byte-identical.
+- **Census receipt:** the one new test file added exactly eight `it` titles and one
+  `describe` title; the whole re-derived five-tuple is
+  `2411/365/2046/19976/5637`. AO-4 is terminal and the reservation is free.
 
 ## 1. Reconciled authority and corrected measurement
 
@@ -503,3 +510,53 @@ Report parent/final SHA; exact eight paths and line deltas; pre-cure one-gap rec
 reasons; A1–A8; all commands/exits/counts; both typechecks; observed-shape; bare full-gate true
 exit; census; hazard/pre-mortem/mutation; generated artifacts `NONE`; persisted/golden/flag/
 tuning/dependency movement `NONE`; deviations and judgment calls `NONE`.
+
+## 11. Executed landing receipt — 2026-08-13
+
+- **Authority and immutable landing:** promotion
+  `2859bae9de98fa19d602111702eb9fe5b7085d71` and nullable-home amendment
+  `4f9932d696a8c1ed10c4cbbb23e1611595a1880f` produced the dispatch parent. The
+  dispatch seal is
+  `3c71a8c2b33597142c668ae12fd340455c188ae6f4aa8e3d4e6ec18d961c4c64` and
+  the coding capsule digest is
+  `0a7bb15fc1d2df6e4defa114f6e7186cfc28c8245dadb5b911f8cc38a1a0d7cf`.
+  The direct green child is implementation
+  `09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`; one old-value CAS exposed it.
+- **Exact implementation scope:** the eight manifest paths and raw line deltas are
+  `scripts/lib/news-voice-contract.mjs` **+2/-0**,
+  `scripts/lib/news-headline-contract.mjs` **+197/-0**,
+  `tests/lint/newsHeadlineContract.walker.test.js` **+210/-0**,
+  `tests/lint/.news-headline-contract-baseline.json` **+1048/-0**,
+  `src/domain/worldPulse/worldPulseFeedCuration.js` **+2/-1**,
+  `scripts/hazard-registry.json` **+6/-3**,
+  `scripts/mutation-coverage-manifest.json` **+4/-0**, and
+  `tests/lint/sovereigntyLightingContract.walker.test.js` **+5/-1**.
+  No generated artifact was committed.
+- **Gap-to-totality proof:** the pre-cure registry reproduced exactly one uncovered,
+  zero-overlap live witness — `Military/Guard may press a challenge to the government`.
+  The final registry is **26 = 17 active + 9 exact written inert**, covering all
+  **168 occurrences / 69 distinct prospective values** exactly once with zero gap,
+  overlap, or indicative match. The naked fallback equals the producer `did` twin;
+  queued and explicit-twin output remains byte-identical.
+- **Corpus and address receipt:** the single corpus build closed at
+  **12 pulse roots / 272 introductions / 32 retirements / 240 final entries / 53
+  homes**. Complete headline+summary totality is **106 identities / 400 distinct
+  values / 544 occurrences / 14 prospective / 92 indicative** with zero blank or
+  mixed identities. Canonical serialization is **12,242 bytes** with SHA-256
+  `82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694`.
+  The nullable census remains **8/272** introductions across exactly the two frozen
+  `webwar_*|null` homes.
+- **Raw liveness receipt:** selected outcomes are **151 occurrences / 80 distinct /
+  95 prospective occurrences / 66 prospective distinct**; mechanical outcomes are
+  **77/24/73/23**. Their occurrence-disjoint union is **228/83/168/69**, with the
+  overlapping `consequenceOutcomes` compatibility lane excluded.
+- **Green closure:** A1–A8 and the focused proof passed **134/134**. The hazard
+  registry validated at **29** classes, **M12/P11/D6**, and the pre-mortem registry
+  validated at **28** predicates. Both typecheck ratchets passed at **173/173** and
+  **1,134/1,134**; plain observed-shape validation stayed green at **1,998** reads;
+  and the lighting census re-derived whole at **2411/365/2046/19976/5637**.
+- **Full landing gate:** bare `npm run check:tail` ran to exit 0. Strict dist
+  discovered the same **50** files and passed **403/403** tests. No golden, default
+  corpus, observed-shape artifact, flag, tuning, dependency, timeout, floor, ceiling,
+  persisted shape, hazard count/status, mutation uncovered count, unrelated baseline,
+  or ninth implementation path moved. Deviations: **NONE**. Judgment calls: **NONE**.
