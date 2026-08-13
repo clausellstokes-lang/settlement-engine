@@ -77,7 +77,7 @@
         { "id": "A3", "case": "an undeclared growth row stays red even with a raise reason and a missing orphan or forged explained-writer tag address is refused" },
         { "id": "A4", "case": "reasoned maintenance accepts one actual declared growth and refuses missing, malformed or no-op reasons while ordinary maintenance stays shrink-only" },
         { "id": "A5", "case": "schemas 4 through 7 keep numeric inventory while only schema 7 requires the exact sparse rowTags envelope and its address biconditional" },
-        { "id": "A6", "case": "the migration table permits only 6 to 7, the live receipt reviews exactly 31 new rows with zero other motion and schema-7 fixtures remain numerically readable" },
+        { "id": "A6", "case": "the migration table permits only 6 to 7, the live report binds exactly package.json plus the three H26 scanner-script changes with the other seven detector entries and unscanned inputs unchanged, one separate reviewed transition decision, exactly 31 new inventory rows and zero other inventory motion" },
         { "id": "A7", "case": "the clear-outright mutant removes the bank or hides the planted reader and flips its intended guard before exact restoration" },
         { "id": "A8", "case": "the detached proof yields exact eight-path code and one-path genesis commits, whole census derivation and a green full gate before one old-value branch CAS" }
       ],
