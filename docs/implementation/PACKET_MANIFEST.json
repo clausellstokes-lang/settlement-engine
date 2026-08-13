@@ -3,6 +3,65 @@
   "indexPath": "docs/implementation/INDEX.md",
   "packets": [
     {
+      "id": "H26",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/H26.md",
+      "verifiedBase": "9d001545ef15f522b94bd0eed766ec2c169bcfa1",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/check-observed-shape-readers.mjs" },
+        { "action": "MODIFY", "path": "scripts/lib/observed-shape-baseline.mjs" },
+        { "action": "MODIFY", "path": "scripts/migrate-observed-shape-readers.mjs" },
+        { "action": "TEST", "path": "tests/lint/observedShapeBaseline.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeMigration.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeReaders.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeSentinel.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "scripts/.observed-shape-readers-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "EXPLAINED_WRITER_EXEMPTIONS" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "applyExplainedWriterFilter" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "assertExplainedWriterEvidence" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "baselineOf" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "compare" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "BASELINE_SCHEMA" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "assertBaselineRow" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "validateSchema6Baseline" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "LEAF_MIGRATION_PREDECESSOR" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "SURFACE_FILTERED_TARGET_SCHEMA" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "heuristicMigrationReport" },
+        { "path": "tests/lint/observedShapeReaders.walker.test.js", "symbol": "THE GROWTH LAW IS EXECUTED" },
+        { "path": "tests/lint/observedShapeSentinel.test.js", "symbol": "M8/M9: the explained-writer exemption is an exact declared set" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the four live declarations survive as exactly 44 findings and 31 tagged per-file rows, with numeric target 1998 reads, 1412 identities and 387 files" },
+        { "id": "A2", "case": "one planted same-identity reader exceeds a tagged ceiling and reds by file, identity, count and ceiling while the unchanged control stays green" },
+        { "id": "A3", "case": "an undeclared growth row stays red even with a raise reason and a missing orphan or forged explained-writer tag address is refused" },
+        { "id": "A4", "case": "reasoned maintenance accepts one actual declared growth and refuses missing, malformed or no-op reasons while ordinary maintenance stays shrink-only" },
+        { "id": "A5", "case": "schemas 4 through 7 keep numeric inventory while only schema 7 requires the exact sparse rowTags envelope and its address biconditional" },
+        { "id": "A6", "case": "the migration table permits only 6 to 7, the live receipt reviews exactly 31 new rows with zero other motion and schema-7 fixtures remain numerically readable" },
+        { "id": "A7", "case": "the clear-outright mutant removes the bank or hides the planted reader and flips its intended guard before exact restoration" },
+        { "id": "A8", "case": "the detached proof yields exact eight-path code and one-path genesis commits, whole census derivation and a green full gate before one old-value branch CAS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/check-observed-shape-readers.mjs",
+          "scripts/lib/observed-shape-baseline.mjs",
+          "scripts/migrate-observed-shape-readers.mjs",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"]
+      ]
+    },
+    {
       "id": "TC-3A",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
