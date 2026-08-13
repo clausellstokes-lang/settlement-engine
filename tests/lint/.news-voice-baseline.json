@@ -20,15 +20,7 @@
     "totals": { "identities": 7, "distinctValues": 48, "occurrences": 53 }
   },
   "current": {
-    "outstanding": [
-      { "home": "applied|npc_bargain", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 5, "occurrences": 5 },
-      { "home": "applied|npc_exploit", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 3, "occurrences": 3 },
-      { "home": "applied|npc_expose", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 1, "occurrences": 1 },
-      { "home": "applied|npc_mobilize", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 5, "occurrences": 5 },
-      { "home": "applied|npc_protect", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 8, "occurrences": 8 },
-      { "home": "applied|npc_reform", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 21, "occurrences": 23 },
-      { "home": "applied|npc_suppress", "field": "summary", "expectedVoiceClass": "indicative", "observedVoiceClass": "prospective", "distinctValues": 5, "occurrences": 8 }
-    ],
-    "totals": { "identities": 7, "distinctValues": 48, "occurrences": 53 }
+    "outstanding": [],
+    "totals": { "identities": 0, "distinctValues": 0, "occurrences": 0 }
   }
 }
