@@ -4028,7 +4028,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // address/liveness contract. Its one new credited file contributes exactly eight
     // literal `it` titles and one literal `describe` title; no existing registration moves.
     // 2410/365/2045/19968/5636 → 2411/365/2046/19976/5637.
-    files: 2411, parked: 365, credited: 2046, titles: 19976, suiteTitles: 5637,
+    // ⏱ AO-5, 2026-08-13 — RE-DERIVED WHOLE after the four durable prose-family
+    // denominator. Its one new credited file contributes exactly eight literal `it`
+    // titles and one literal `describe` title; the amended AO-4 compatibility assertion
+    // changes no registration. 2411/365/2046/19976/5637 → 2412/365/2047/19984/5638.
+    files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -16,6 +16,7 @@ import {
   selectPersistedHeadlineRows,
   validateNewsHeadlineBaseline,
 } from '../../scripts/lib/news-headline-contract.mjs';
+import { PROSE_FAMILY_PROTECTED_SUBSTRATE } from '../../scripts/lib/prose-family-contract.mjs';
 import { NEWS_VOICE_PROTECTED_SUBSTRATE, reconstructWizardNewsIntroductions } from '../../scripts/lib/news-voice-contract.mjs';
 import { PREDICATES, makeContext } from '../../scripts/lib/premortem-triggers.mjs';
 import { FACTION_VERB_PHRASES } from '../../src/domain/worldPulse/factionCompetition.js';
@@ -193,11 +194,13 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect({ status: hazard.status, acceptedReason: hazard.acceptedReason, instances: hazard.instances, inChain: hazard.enforcer.inChain }).toEqual({ status: 'MACHINERY', acceptedReason: null, instances: 53, inChain: true });
     expect(hazard.enforcer.paths).toEqual(expect.arrayContaining(['tests/lint/newsHeadlineContract.walker.test.js', 'scripts/lib/news-headline-contract.mjs', 'tests/lint/.news-headline-contract-baseline.json']));
     const preMortem = PREDICATES.find((row) => row.id === 'cross-home-voice-substrate-touched'); const context = makeContext({ root: ROOT, rev: null });
-    expect(preMortem.population(context).items).toEqual(NEWS_VOICE_PROTECTED_SUBSTRATE);
+    expect(preMortem.population(context).items).toEqual([...new Set([
+      ...NEWS_VOICE_PROTECTED_SUBSTRATE, ...PROSE_FAMILY_PROTECTED_SUBSTRATE,
+    ])].sort(codepoint));
     expect(preMortem.run(context, { changes: [{ status: 'A', path: 'scripts/lib/news-headline-contract.mjs', oldPath: null }] })).toHaveLength(1);
     const mutation = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8')).invariants['tests/lint/newsHeadlineContract.walker.test.js'];
     expect(mutation.kind).toBe('rationale'); expect(mutation.rationale).toContain("AO-4's eight ordinary cases");
-    expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8')).toContain('files: 2411, parked: 365, credited: 2046, titles: 19976, suiteTitles: 5637');
+    expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8')).toContain('files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638');
   });
 
   it('A8 fails closed on duplicate, overlapping, indicative, and third-lane inputs', () => {
