@@ -106,17 +106,28 @@ after), validate 23/0 green, porcelain zero. JUDGMENT RATIFIED: floors pinned at
 exactly-measured ZERO SLACK (the ratchet discipline — a legitimate consolidation reds
 until re-measured; veto if headroom preferred).
 
-**LIVE: ONE lane:**
-- **Lane AT (Opus) — MX-1 promotion** (task `adc79700ffdc0c671`): authors the
-  machinery packet READY from AR's Option-B design (retiredSymbols; LANDED-absence
-  arm; disjointness; capsule both-projections-in-one-edit; substrate widening
-  declared; the hot-file PACKET_STANDARD section rides per CR-AR-9); zero new test
-  titles (the census row stays FREE for AO-0); expect 24 packets / 1 READY.
-Collection: on each landing → chair-verify → (AS: done; AT: dispatch the MX-1
-implementer). Queue after: PG-1 micro-act → prose batch (b)–(f) from laneAR-drafted-
-prose.md (re-anchor citations by symbol against the landings) → AO-0 schema-7 mint
-packet (item (a) + SCW-1b's five sites + the deferred figure) → AO-2..6 → GR-4e →
-CR-NEXT-1's wider corpus. Owner veto surfaces: §17.7 · §17.4 · §17b · §18 · §19 · §20.
+**⭐ MX-1 PROMOTED READY at `e46bbd91` and COLLECTED (~00:15, chair-verified: 24
+packets / 1 READY TRUE_EXIT=0, porcelain zero).** The promotion handled the era's
+FIRST mid-promotion foreign base move correctly (AO-1 landed under it; it re-pinned to
+`41732a51` and RE-EXECUTED every figure rather than inheriting — substrate diff empty,
+census unmoved). All seven deviations RATIFIED, the big one: **AR's two-site capsule
+instruction was WRONG — the substrate widening is a FOUR-site coupling** (derived
+filePaths vs hand-built filePaths, byte-compared, plus the fileHashes assertion); the
+two-site edit would have shipped a throwing dispatch. Banked to memory (the packet-
+system topic file). Also ratified: extended test titles pinned as requiredSymbols rows
+(machine-visible zero-new-titles), the census-holder rule SHARPENED (the holder is
+whichever non-terminal packet CAN MOVE a census figure — MX-1 cannot, takes no
+reservation, the row stays FREE for AO-0), 8/8 acceptance with the mutant + SUPERSEDED
+controls, and Option A's refusal now 174/174 (100%).
+
+**LIVE: Lane AU (Opus) implements MX-1** (task `adb87a4d5ebe2f0af`): the retiredSymbols
+arms, the FOUR-site capsule widening traced by execution, zero new titles, the
+recursive both-exits receipt, the hot-file PACKET_STANDARD section. ⛔ SEALED: nothing
+else lands until AU does. On landing → chair-verify → flip → then: PG-1 micro-act →
+prose batch (b)–(f) from laneAR-drafted-prose.md (re-anchor by symbol) → AO-0 schema-7
+mint packet (item (a) + SCW-1b's five sites + the deferred figure; takes the FREE
+census row) → AO-2..6 → GR-4e → CR-NEXT-1's wider corpus. Owner veto surfaces: §17.7 ·
+§17.4 · §17b · §18 · §19 · §20.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
