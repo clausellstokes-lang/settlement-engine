@@ -6,11 +6,16 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `972066af`
-- Commits: 3213
+- HEAD: `ee6934e9`
+- Commits: 3218
 - Working tree at refresh: 0 dirty entries
 
 ```
+ee6934e9 2026-08-13 AO-5: record prose-family contract landing
+72b7a87b 2026-08-13 AO-5: freeze remaining prose-family contracts
+8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
+cb48cc08 2026-08-13 AO-5: admit premortem-union compatibility pin
+92d60657 2026-08-13 AO-5: promote remaining prose-family contracts
 972066af 2026-08-13 AO-4: record headline totality landing
 09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
 4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
@@ -406,9 +411,4 @@ c86ad53a 2026-08-03 Lane WD-1: the war layer's pure reads leave the writer — 1
 5dcad538 2026-08-03 Lane MD piece 4a: the list's end becomes visible — one authored body, and the rule that keeps the next one honest
 4cc3d712 2026-08-03 Lane PB: register the lane's two new invariant files in the E-A manifest
 5ebc7b11 2026-08-03 Lane MD piece 3: the RR record's arithmetic, the count that becomes a guard, and the guard that was catching lexicons
-5a53ef66 2026-08-03 Lane PB piece 4: the composited-AA pin — the bar's contrast floor is the GRAIN's, not the cylinder's, and it was engine-dependent
-65ddec9a 2026-08-03 Lane MD piece 2: the two current-tense 523s become 525 — and the third one the sweep found
-d716b37e 2026-08-03 Lane MD piece 1: the mirror dies — historyBeats stops re-deriving the likely future and consumes the spine's own
-9a926344 2026-08-03 Lane PB piece 3: the maker's plate and the wax seal — the mark is riveted to the shaft, and one letter of the name becomes wax
-201cd0a8 2026-08-03 Lane PB piece 2: the shaft becomes a thin stick — 48 → 38, measured against the type it must seat, and the hang deepens for free
 ```

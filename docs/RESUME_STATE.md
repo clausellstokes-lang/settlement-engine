@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 10:21:17 EDT
+**Generated:** 2026-08-13 12:57:04 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `972066af` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `2e826756` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `ee6934e9` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `e30401aa` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 34Gi free (83% used)
+**Disk:** 33Gi free (84% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T102025` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260813T125548` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T102025
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T125548
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,11 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+ee6934e9 2026-08-13 AO-5: record prose-family contract landing
+72b7a87b 2026-08-13 AO-5: freeze remaining prose-family contracts
+8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
+cb48cc08 2026-08-13 AO-5: admit premortem-union compatibility pin
+92d60657 2026-08-13 AO-5: promote remaining prose-family contracts
 972066af 2026-08-13 AO-4: record headline totality landing
 09e39ee6 2026-08-13 AO-4: enforce Wizard News headline totality
 4f9932d6 2026-08-13 AO-4: admit canonical nullable news homes
@@ -35,21 +40,16 @@ staged set BY NAME AND COUNT.
 ba6a2913 2026-08-13 AO-2+3: record atomic voice contract-cure landing
 f0c272e8 2026-08-13 AO-3: bank the seven vanished voice-debt identities
 d4f213d0 2026-08-13 AO-3: cure applied Wizard News summary voice (deliberate red)
-c825af92 2026-08-13 AO-2: install the Wizard News voice contract (deliberate red)
-c5fd3638 2026-08-13 AO-2+3: promote atomic voice contract-cure train
-481c7e0a 2026-08-13 AO-0: record schema-8 landing
-e71beb84 2026-08-13 AO-0: freeze schema-8 corpus-coverage baseline
-3df85a3a 2026-08-13 AO-0: add opt-in scalar observation corpus
 ```
 ## Last 6 ledger commits
 
 ```
+e30401aa 2026-08-13 Record AO-4 headline totality landing
 2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
 e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
 a1578fcc 2026-08-13 Record AO-0 schema-8 landing
 9747d127 2026-08-13 Record GTR and H26 atomic landings
 1ed18d27 2026-08-13 Record universal standing authorization and the pre-soak boundary
-c38e9e24 2026-08-12 H26 keeps schema 7; AO-0 moves to schema 8
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,60 @@ c38e9e24 2026-08-12 H26 keeps schema 7; AO-0 moves to schema 8
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~10:22 EDT) — AO-4 is terminal; build clean at `972066af`
+# ⭐⭐ CURRENT (2026-08-13 ~13:00 EDT) — AO-5 is terminal; build clean at `ee6934e9`
+
+**AO-5 IS DONE END-TO-END.** Just-in-time promotion
+`92d606575baa1c454c96ac5cb2ea80b2f53f6dfb`, compatibility amendment
+`cb48cc0824ff432feba1735c796eef0700a1814f`, and census-compatibility restamp
+`8a3a5cd5ea88080418356d72ebcb004a98cb9d49` produced the final dispatch parent,
+sealed at digest
+`d346ef49dea723ae8c756ac74a73ee5c10bacfb4be1573bd9bba0e5cff437898`.
+The exact eight-path green implementation is
+`72b7a87b0375d759a9e72344664c3f4b6440a35f`; one old-value CAS exposed only
+that green child. Terminal flip
+`ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec` changes only INDEX, manifest, and
+the AO-5 packet. The shared index and build worktree are clean.
+
+One AO-0 corpus build emitted **26,076 scalar rows** with exact root ordinals
+`pulseResult` **0..11**, `worldState` **12**, `wizardNews` **13**,
+`canonEventResult` **14**, and `aiChronicle` **15**; two pure reconstructions were
+byte-identical. Scalar meta closed at canon **1**, Wizard final **240**, accumulated
+**1,567**, unique **272**, pulse history **12**, regional log **109/109**, and
+Chronicle **1**. The four-family contract closes at **63 identities / 1,308 distinct
+values / 5,885 occurrences** and **8,280 canonical bytes**, SHA-256
+`8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae`.
+Its exact family closures are timeline **4/8/12**, pulse history
+**50/1,286/5,665**, regional log **2/7/201** with 109/109 structural reach and zero
+selected prose identities, and pure Chronicle **7/7/7**. The selected denominator's
+188 lawful nulls remain data, not absence.
+
+A1–A8 and the focused proof passed **205/205 across 15 files**. The protected
+prose-family substrate is exactly **15** paths and its two-export pre-mortem union
+exactly **23**. `HZ-CROSSHOME` remains the same ten-key MACHINERY class with null
+accepted reason, in-chain true, and **53** instances; the hazard registry remains
+**29 classes (M12/P11/D6/A0)** and the pre-mortem registry **28 predicates**. Both
+typecheck ratchets pass at **173/173** and **1,134/1,134**; plain observed-shape
+validation remains green at **1,998 reads**. The lighting census was re-derived whole
+at **2412/365/2047/19984/5638**. Bare `npm run check:tail` exited 0; the build
+closed at **314 routes**, and strict dist discovered **50 files** and passed
+**403/403** tests with zero failures and zero non-running rows. No product source or
+output, persisted shape, golden, flag, tuning, dependency, timeout, floor, ceiling,
+observed-shape artifact, test-ratchet baseline, hazard count/status, mutation uncovered
+count, unrelated baseline, or ninth implementation path moved. Deviations and judgment
+calls: **NONE**.
+
+**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at full HEAD
+`ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec`; `validate:packets` reports **30
+packets / 0 READY, exit 0**. GTR-1, H26, AO-0, AO-2+3, AO-4, and AO-5 are terminal;
+the census reservation is free and there is no live implementation lane to collect.
+The universal standing authorization remains durable at ledger `1ed18d27`; it does
+not waive technical READY/STOP, evidence, substrate, or ordering law.
+
+**NEXT:** compile AO-6 fresh, just in time, from `ee6934e9`; do not redispatch AO-5.
+No diagnostic-soak worktree exists and D-1/L0 has not started; the requested terminal
+remains immediately before that first soak.
+
+# (superseded ~13:00) — AO-4 is terminal; build clean at `972066af`
 
 **AO-4 IS DONE END-TO-END.** Just-in-time promotion
 `2859bae9de98fa19d602111702eb9fe5b7085d71` and nullable-home amendment
