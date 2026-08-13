@@ -76,11 +76,23 @@ function mutantIssues(source) {
 }
 
 describe('Wizard News authoring presence — static census wall', () => {
+  // AO-1 LOCK-THE-WIN 2026-08-12 (CR-AO-5) — THE FOUR FLOORS RE-POINTED TO MEASURED,
+  // NOTHING WIDENED. These are shrink-only floors, and the estate has outgrown every
+  // one of them: they were frozen at 760/84/83/46, while the census measured at
+  // c73c17ef is 999 files, 99 candidate sites, 98 governed sites, 58 distinct paths. A
+  // floor trailing reality by 239 files is not a wall — 239 files could leave the
+  // denominator and nothing here would red. Re-pointed at MEASURED truth so a shrink
+  // below today's reality reds. This is a re-point, not a raise: the scan scope, the
+  // one exclusion, the 19-row ledger and every test identity are untouched.
+  // DERIVATION: censusNewsAuthoringSites (the same shared census this file runs)
+  // executed at c73c17ef against a clean tree, with the files figure cross-checked by
+  // `find` and by `git ls-files` — 999 = 999 = 999, zero ignored, zero untracked — so
+  // no sibling lane's uncommitted work is inside the number.
   test('the source census is broad and non-vacuous, including the historical blind spots', () => {
-    expect(census.files.length).toBeGreaterThanOrEqual(760);
-    expect(census.candidateSites.length).toBeGreaterThanOrEqual(84);
-    expect(census.sites.length).toBeGreaterThanOrEqual(83);
-    expect(new Set(census.sites.map((site) => site.path)).size).toBeGreaterThanOrEqual(46);
+    expect(census.files.length).toBeGreaterThanOrEqual(999);
+    expect(census.candidateSites.length).toBeGreaterThanOrEqual(99);
+    expect(census.sites.length).toBeGreaterThanOrEqual(98);
+    expect(new Set(census.sites.map((site) => site.path)).size).toBeGreaterThanOrEqual(58);
 
     const byPath = new Map();
     for (const site of census.sites) {
