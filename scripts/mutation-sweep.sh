@@ -28,7 +28,7 @@
 # label below reds, and a NEW invariant file with no manifest entry reds. Keep
 # labels stable — they are the join key.
 cd "$(dirname "$0")/.." || exit 2
-PASS=0; FAIL=0
+PASS=0; CLEAR=0; FAIL=0
 results=()
 
 # ── Dirty-tree refusal guard ─────────────────────────────────────────────────
@@ -47,6 +47,7 @@ MUTATED_FILES=(
   src/domain/userEdits.js
   src/generators/cascadeGenerator.js
   src/data/stressTypes.js
+  src/copy/en.js
   src/data/categoryVocabulary.js
   src/data/entityTags.js
   src/domain/display/parityContract.js
@@ -77,7 +78,7 @@ MUTATED_FILES=(
   src/domain/display/economyFreshness.js
   src/components/new/tabs/EconomicsTab.jsx
   src/store/operationRegistry.js
-  src/store/aiSlice.js
+  src/store/aiChronicleAppend.js
   src/store/neighbourSlice.js
   src/generators/steps/assembleInstitutions.js
   tests/fixtures/distribution-envelopes.manifest.json
@@ -97,6 +98,8 @@ MUTATED_FILES=(
   src/domain/spatial/spatialLedgerAccess.js
   src/domain/worldPulse/brokeragePlantHandoff.js
   src/domain/townMap/siteGenesis.js
+  src/domain/worldPulse/worldPulseFeedCuration.js
+  src/lib/chronicle.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -109,7 +112,7 @@ if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   fi
 fi
 
-# check_caught <label> <file> <check-cmd>
+# check_caught <label> <file> <check-cmd> [expected-full-title]
 # Call AFTER the file has been mutated. check-cmd must EXIT NONZERO when the
 # regression is present (gate caught it). Always reverts <file> via git, then
 # re-runs check-cmd on the clean tree: CAUGHT requires mutated=red AND
@@ -125,20 +128,103 @@ fi
 # self-diagnosing. (Under MUTATION_SWEEP_ALLOW_DIRTY=1 the premise does not
 # hold, so the check is skipped rather than lying in the other direction.)
 check_caught() {
-  local label="$1" file="$2" check="$3"
+  local label="$1" file="$2" check="$3" expected_title="${4:-}"
   if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ] && git diff --quiet -- "$file" 2>/dev/null; then
     results+=("BROKEN  GAP  $label  (mutation did not apply — $file is unchanged; stale anchor?)"); FAIL=$((FAIL+1))
     return
   fi
-  $check >/dev/null 2>&1; local code=$?
-  git checkout -- "$file" 2>/dev/null
-  $check >/dev/null 2>&1; local clean=$?
+  local mutated_output clean_output
+  mutated_output="$(NO_COLOR=1 $check 2>&1)"; local code=$?
+  git checkout -- "$file" 2>/dev/null; local restore=$?
+  if [ "$restore" -ne 0 ] || ! git diff --quiet -- "$file" 2>/dev/null; then
+    results+=("BROKEN  GAP  $label  (target did not restore byte-identically: $file)"); FAIL=$((FAIL+1))
+    return
+  fi
+  clean_output="$(NO_COLOR=1 $check 2>&1)"; local clean=$?
   if [ "$clean" -ne 0 ]; then
     results+=("BROKEN  GAP  $label  (gate red even without the mutation — misattributed/moved target?)"); FAIL=$((FAIL+1))
+  elif [ -n "$expected_title" ] && [ "$code" -ne 0 ]; then
+    local line trimmed suffix=" > $expected_title" title_matches=0
+    while IFS= read -r line || [ -n "$line" ]; do
+      trimmed="${line#"${line%%[!$' \t']*}"}"
+      if [[ "$trimmed" == FAIL\ * && "$trimmed" == *"$suffix" ]]; then
+        title_matches=$((title_matches+1))
+      fi
+    done <<< "$mutated_output"
+    if [ "$title_matches" -eq 1 ]; then
+      results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
+    elif [ "$title_matches" -eq 0 ]; then
+      results+=("BROKEN  GAP  $label  (missing expected failure: $expected_title)"); FAIL=$((FAIL+1))
+    else
+      results+=("BROKEN  GAP  $label  (ambiguous expected failure: $expected_title matched $title_matches lines)"); FAIL=$((FAIL+1))
+    fi
   elif [ "$code" -ne 0 ]; then
     results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
   else
     results+=("MISSED  GAP  $label  (gate stayed green)"); FAIL=$((FAIL+1))
+  fi
+}
+
+# check_clear <label> <file> <check-cmd> <expected-passed-count>
+# Negative-control variant: the planted and restored forms must both stay green
+# and must each report the exact two-file and test-count summaries.
+check_clear() {
+  local label="${1:-<missing-label>}"
+  if [ "$#" -ne 4 ]; then
+    results+=("BROKEN  GAP  $label  (check_clear requires exactly four arguments)"); FAIL=$((FAIL+1))
+    return
+  fi
+  local file="$2" check="$3" expected_count="$4"
+  if ! [[ "$expected_count" =~ ^[1-9][0-9]*$ ]] \
+      || [ "${#expected_count}" -gt 16 ] \
+      || { [ "${#expected_count}" -eq 16 ] && [[ "$expected_count" > 9007199254740991 ]]; }; then
+    results+=("BROKEN  GAP  $label  (expected passed count is not a positive safe integer: $expected_count)"); FAIL=$((FAIL+1))
+    return
+  fi
+  if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ] && git diff --quiet -- "$file" 2>/dev/null; then
+    results+=("BROKEN  GAP  $label  (mutation did not apply — $file is unchanged; stale anchor?)"); FAIL=$((FAIL+1))
+    return
+  fi
+  local mutated_output clean_output
+  mutated_output="$(NO_COLOR=1 $check 2>&1)"; local code=$?
+  git checkout -- "$file" 2>/dev/null; local restore=$?
+  if [ "$restore" -ne 0 ] || ! git diff --quiet -- "$file" 2>/dev/null; then
+    results+=("BROKEN  GAP  $label  (target did not restore byte-identically: $file)"); FAIL=$((FAIL+1))
+    return
+  fi
+  clean_output="$(NO_COLOR=1 $check 2>&1)"; local clean=$?
+
+  local expected_files="Test Files 2 passed (2)"
+  local expected_tests="Tests $expected_count passed ($expected_count)"
+  local mutated_files=0 mutated_tests=0 clean_files=0 clean_tests=0
+  local output line normalized
+  for output in "$mutated_output" "$clean_output"; do
+    local files=0 tests=0
+    while IFS= read -r line || [ -n "$line" ]; do
+      normalized="${line//$'\t'/ }"
+      while [[ "$normalized" == *"  "* ]]; do normalized="${normalized//  / }"; done
+      normalized="${normalized#"${normalized%%[! ]*}"}"
+      normalized="${normalized%"${normalized##*[! ]}"}"
+      [ "$normalized" = "$expected_files" ] && files=$((files+1))
+      [ "$normalized" = "$expected_tests" ] && tests=$((tests+1))
+    done <<< "$output"
+    if [ "$output" = "$mutated_output" ] && [ "$mutated_files" -eq 0 ] && [ "$mutated_tests" -eq 0 ]; then
+      mutated_files=$files; mutated_tests=$tests
+    else
+      clean_files=$files; clean_tests=$tests
+    fi
+  done
+
+  if [ "$code" -ne 0 ]; then
+    results+=("BROKEN  GAP  $label  (negative control red while planted: exit $code)"); FAIL=$((FAIL+1))
+  elif [ "$mutated_files" -ne 1 ] || [ "$mutated_tests" -ne 1 ]; then
+    results+=("BROKEN  GAP  $label  (planted summaries wrong: files=$mutated_files tests=$mutated_tests)"); FAIL=$((FAIL+1))
+  elif [ "$clean" -ne 0 ]; then
+    results+=("BROKEN  GAP  $label  (negative control red after restoration: exit $clean)"); FAIL=$((FAIL+1))
+  elif [ "$clean_files" -ne 1 ] || [ "$clean_tests" -ne 1 ]; then
+    results+=("BROKEN  GAP  $label  (restored summaries wrong: files=$clean_files tests=$clean_tests)"); FAIL=$((FAIL+1))
+  else
+    results+=("CLEAR   ok   $label"); CLEAR=$((CLEAR+1))
   fi
 }
 
@@ -217,7 +303,7 @@ check_caught "pdf/parity canonPath drift" src/domain/display/parityContract.js "
 
 # 7. Meta-pin — completeness claim with no @enforced-by (vitest)
 printf '\nThis guarantee is machine-enforced.\n' >> ARCHITECTURE.md
-check_caught "enforcement/meta-pin naked claim" ARCHITECTURE.md "npx vitest run tests/docs/enforcement-claims.test.js"
+check_caught "enforcement/meta-pin naked claim" ARCHITECTURE.md "npx vitest run tests/docs/enforcement-claims.test.js -t seventh --no-file-parallelism --reporter=verbose" "the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it"
 
 # 8. Undo inverse — drop a snapshot key so an event's undo is no longer a
 #    byte-exact inverse (vitest whole-object round-trip pin, domain.5)
@@ -303,10 +389,10 @@ check_caught "determinism/localeCompare in generators" src/generators/cascadeGen
 printf '\nexport const _mutTrans = Math.pow(2, 3);\n' >> src/domain/userEdits.js
 check_caught "determinism/transcendental Math.pow in domain" src/domain/userEdits.js "npx vitest run tests/lint/transcendentalMathBaseline.test.js"
 
-# 21. Voice mechanics — an exclamation point lands in a scanned prose string
-#     literal (the em-dash/'!' ban, shrink-only over src/data + src/domain).
-printf "\nexport const _mutVoice = 'sweep probe!';\n" >> src/data/stressTypes.js
-check_caught "voice/exclamation in scanned data prose" src/data/stressTypes.js "npx vitest run tests/copy/voiceMechanics.test.js"
+# 21. Voice mechanics — an exclamation point lands in the common copy registry.
+#     The filtered registry assertion must own this exact red.
+perl -0pi -e "s/    save:        'Save',/    save:        'Save!',/" src/copy/en.js
+check_caught "voice/exclamation in scanned data prose" src/copy/en.js "npx vitest run tests/copy/voiceMechanics.test.js -t en.registry --no-file-parallelism --reporter=verbose" "en registry is clean"
 
 # 22. Type-hygiene ratchet — a JSDoc any-cast lands in the strict-clean domain
 #     (the suppression-debt counter must red on growth).
@@ -565,8 +651,8 @@ check_caught "dead-op/unconsumed registry row joins the frozen ledger" src/store
 #     a real call site. updateSavedSettlement refuses the patch ATOMICALLY and no
 #     caller reads the envelope, so in production the whole write vanishes; the
 #     live source census must red rather than let that ship silently.
-perl -0pi -e "s/chronicle: nextChronicle \};\n    get\(\)\.updateSavedSettlement\(saveId, \{ aiData: nextAiData \}\);/chronicle: nextChronicle };\n    get().updateSavedSettlement(saveId, { aiData: nextAiData, aiRevisionCount: 1 });/" src/store/aiSlice.js
-check_caught "patch-keys/call site writes an unadmitted key" src/store/aiSlice.js "npx vitest run tests/store/savedSettlementPatchKeysWalker.test.js"
+perl -0pi -e "s/get\(\)\.updateSavedSettlement\(saveId, \{ aiData: nextAiData \}\);/get().updateSavedSettlement(saveId, { aiData: nextAiData, aiRevisionCount: 1 });/" src/store/aiChronicleAppend.js
+check_caught "patch-keys/call site writes an unadmitted key" src/store/aiChronicleAppend.js "npx vitest run tests/store/savedSettlementPatchKeysWalker.test.js -t censused --no-file-parallelism --reporter=verbose" "(a) every censused call-site key is admitted by SAVED_SETTLEMENT_PATCH_KEYS"
 
 # 54. R-4 config single-door scan — plant a fifth direct config-draft writer
 #     outside the enumerated exemptions. The exact-set scan must red: a write that
@@ -821,11 +907,33 @@ check_caught "info/plant handoff record door relaxed from exact age to a lower b
 perl -0pi -e 's{/ore\|iron\|stone\|mine\|silver\|gold\|coal/i}{/ore|iron|stone|mine|silver|gold/i}' src/domain/townMap/siteGenesis.js
 check_caught "site-coherence/coal dropped from the mountain-flank export arm" src/domain/townMap/siteGenesis.js "npx vitest run tests/lint/siteCoherenceRatchet.test.js --no-file-parallelism"
 
+# 76. AO-6 — one applied-headline producer twin is removed. The raw-analysis
+#     setup lets the filtered A6 pin own this exact red rather than a beforeAll
+#     closure throw owning it accidentally.
+perl -0pi -e "s@  \\[/\\\\bmay press a challenge to the government\\\\b/, 'presses a challenge to the government'\\],\\n@@" src/domain/worldPulse/worldPulseFeedCuration.js
+check_caught "corpus-coverage/headline rewrite row deleted" src/domain/worldPulse/worldPulseFeedCuration.js "npx vitest run tests/lint/newsHeadlineContract.walker.test.js -t A6 --no-file-parallelism --reporter=verbose" "A6 closes the sole live challenge gap with the exact producer twin"
+
+# 77. AO-6 — one applied summary home retains prospective/modal voice after its
+#     kind leaves the membership set. The completion pin must name the red.
+perl -0pi -e "s/'npc_bargain', //" src/domain/worldPulse/worldPulseFeedCuration.js
+check_caught "corpus-coverage/modal summary admitted under indicative home" src/domain/worldPulse/worldPulseFeedCuration.js "npx vitest run tests/lint/newsVoiceContract.walker.test.js -t debt-free --no-file-parallelism --reporter=verbose" "contract -> cure -> bank completion is aligned and debt-free"
+
+# 78. AO-6 — the pure Chronicle return projection silently loses summaryText.
+#     The post-AO-5 Chronicle denominator must name the red.
+perl -0pi -e 's/    summaryText,\n//' src/lib/chronicle.js
+check_caught "corpus-coverage/chronicle summaryText projection deleted" src/lib/chronicle.js "npx vitest run tests/lint/proseFamilyContract.walker.test.js -t A7 --no-file-parallelism --reporter=verbose" "A7 closes the pure Chronicle create-and-append road at 7 7 7"
+
+# 79. AO-6 — order-only source churn is semantically inert because the summary
+#     kinds form a set. Both News walkers must remain exactly 16/16 green before
+#     and after restoration.
+perl -0pi -e "s/'npc_bargain', 'npc_exploit'/'npc_exploit', 'npc_bargain'/" src/domain/worldPulse/worldPulseFeedCuration.js
+check_clear "corpus-coverage/summary impact set order swap stays clear" src/domain/worldPulse/worldPulseFeedCuration.js "npx vitest run tests/lint/newsVoiceContract.walker.test.js tests/lint/newsHeadlineContract.walker.test.js --no-file-parallelism" 16
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
 echo "────────────────────────────────────────────────────────"
-echo "  CAUGHT: $PASS    MISSED/BROKEN: $FAIL"
+echo "  CAUGHT: $PASS    CLEAR: $CLEAR    MISSED/BROKEN: $FAIL"
 # Leftover check. Scoped to MUTATED_FILES (so it can never drift from the areas
 # above — the old hand-kept directory list omitted tests/ and scripts/, where five
 # areas mutate) plus a tree-wide sweep for surviving PLANTED probes and .bak
@@ -837,5 +945,5 @@ if [ -n "$leftover_mutations$leftover_plants" ]; then
   [ -n "$leftover_mutations" ] && echo "$leftover_mutations"
   [ -n "$leftover_plants" ] && echo "$leftover_plants"
 fi
-if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
+if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught and every negative control stayed clear."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
 exit "$FAIL"

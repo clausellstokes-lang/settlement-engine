@@ -68,7 +68,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     addressRows = deriveNewsAddressRows(reconstruction.entries);
     rawRows = selectPersistedHeadlineRows(scalarRows);
     rawTelemetry = rawHeadlineLivenessOf(rawRows);
-    finalLiveness = measureHeadlineRewriteLiveness(rawRows, APPLIED_HEADLINE_REWRITES);
+    finalLiveness = analyzeHeadlineRewriteLiveness(rawRows, APPLIED_HEADLINE_REWRITES);
   }, 900_000);
 
   it('A1 reconstructs once and proves the persisted public and mechanical partition law', () => {
@@ -199,7 +199,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     ])].sort(codepoint));
     expect(preMortem.run(context, { changes: [{ status: 'A', path: 'scripts/lib/news-headline-contract.mjs', oldPath: null }] })).toHaveLength(1);
     const mutation = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8')).invariants['tests/lint/newsHeadlineContract.walker.test.js'];
-    expect(mutation.kind).toBe('rationale'); expect(mutation.rationale).toContain("AO-4's eight ordinary cases");
+    expect(mutation).toMatchObject({ kind: 'mutation', label: 'corpus-coverage/headline rewrite row deleted' });
     expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8')).toContain('files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638');
   });
 

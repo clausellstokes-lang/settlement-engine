@@ -241,7 +241,7 @@ describe('four durable prose-family exact-totality contract', () => {
     expect(predicate.sources).toEqual(['scripts/lib/news-voice-contract.mjs', 'scripts/lib/prose-family-contract.mjs']);
     expect(predicate.run(context, predicate.synthetic(context))).toHaveLength(1);
     const mutation = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8')).invariants['tests/lint/proseFamilyContract.walker.test.js'];
-    expect(mutation).toMatchObject({ kind: 'rationale' }); expect(mutation.rationale).toContain("AO-5's eight ordinary cases");
+    expect(mutation).toMatchObject({ kind: 'mutation', label: 'corpus-coverage/chronicle summaryText projection deleted' });
     expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8'))
       .toContain('files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638');
   });

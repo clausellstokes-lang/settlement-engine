@@ -200,16 +200,19 @@
    "what": "Standing planted test file carries one bare not.toContain assertion in a scanned tree; the exact zero-default ceiling must reject it, then the attribution rerun must green after the helper removes the probe."
   },
   "tests/lint/newsVoiceContract.walker.test.js": {
-   "kind": "rationale",
-   "rationale": "AO-2+3's eight ordinary cases execute the four baseline movement polarities, malformed and empty corpus refusal, duplicate-preserving snapshot reconstruction, and the ordered pre-cure/cure/bank completion result. These controls run through the same pure comparator and reconstruction helper on every gate; one standing sweep mutation would sample a strict subset while AO-6 owns the dedicated source-mutant battery."
+   "kind": "mutation",
+   "label": "corpus-coverage/modal summary admitted under indicative home",
+   "what": "Deleting npc_bargain from the applied-summary membership set must red the named debt-free completion assertion; after restoration, the same filtered attribution run must green."
   },
   "tests/lint/newsHeadlineContract.walker.test.js": {
-   "kind": "rationale",
-   "rationale": "AO-4's eight ordinary cases execute complete 106-row address totality and bidirectional movement failures, the exact selectedOutcomes+mechanicalOutcomes raw-liveness union with lane, cap, gap, overlap, and indicative refusals, the nine-row inert-quarantine biconditional, the sole challenge pre-cure/post-cure witness, fallback immutability, and governed hazard, pre-mortem, mutation, and census reconciliation. These controls run through the production partition/curation seams and the same pure derivation/comparator helper on every gate; AO-6 owns the dedicated standing source-mutant battery."
+   "kind": "mutation",
+   "label": "corpus-coverage/headline rewrite row deleted",
+   "what": "Deleting the government-challenge applied-headline rewrite row must red the named A6 producer-twin assertion; after restoration, the same filtered attribution run must green."
   },
   "tests/lint/proseFamilyContract.walker.test.js": {
-   "kind": "rationale",
-   "rationale": "AO-5's eight ordinary cases build the executed AO-0 scalar corpus once, reconstruct the four durable prose families twice, pin exact selector axes and structural reach, retain null and duplicate scalar occurrences, close every baseline row/count/digest bidirectionally, and reconcile timeline, pulse-history, regional-log, pure Chronicle, hazard, pre-mortem, mutation, and census controls. Those controls execute through the same pure derivation/comparator helper on every gate; AO-6 owns the dedicated standing source-mutant battery."
+   "kind": "mutation",
+   "label": "corpus-coverage/chronicle summaryText projection deleted",
+   "what": "Deleting summaryText from the pure Chronicle return projection must red the named A7 create-and-append assertion; after restoration, the same filtered attribution run must green."
   },
   "tests/lint/seatVocabularyUnification.walker.test.js": {
    "kind": "rationale",
@@ -1751,7 +1754,7 @@
   "tests/store/savedSettlementPatchKeysWalker.test.js": {
    "kind": "mutation",
    "label": "patch-keys/call site writes an unadmitted key",
-   "what": "Live-coupling walker (R-4 lane P-4) that re-derives the updateSavedSettlement patch-key census from src on every run and asserts both directions against the IMPORTED runtime SAVED_SETTLEMENT_PATCH_KEYS: admission (a censused key the allowlist refuses reds) and liveness (an allowlist member nothing writes reds unless listed as an INERT_CARRY). The standing plant adds an unadmitted aiRevisionCount key to the chronicle call site in src/store/aiSlice.js and reds assertion (a) (1 of 7) \u2014 updateSavedSettlement refuses such a patch ATOMICALLY and no caller reads the envelope, so in production the whole write vanishes. Upgraded from kind:rationale at the capability-remediation fold, when the store slices became tracked-and-clean (E-A amendment b0fc33e1)."
+   "what": "Live-coupling walker (R-4 lane P-4) that re-derives the updateSavedSettlement patch-key census from src on every run and asserts both directions against the IMPORTED runtime SAVED_SETTLEMENT_PATCH_KEYS: admission (a censused key the allowlist refuses reds) and liveness (an allowlist member nothing writes reds unless listed as an INERT_CARRY). The standing plant adds an unadmitted aiRevisionCount key to the chronicle call site in src/store/aiChronicleAppend.js and reds assertion (a) (1 of 7) \u2014 updateSavedSettlement refuses such a patch ATOMICALLY and no caller reads the envelope, so in production the whole write vanishes. Upgraded from kind:rationale at the capability-remediation fold, when the store slices became tracked-and-clean (E-A amendment b0fc33e1)."
   },
   "tests/store/configDirectWriterExemptions.scan.test.js": {
    "kind": "mutation",
