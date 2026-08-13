@@ -3,8 +3,23 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `72b7a87b0375d759a9e72344664c3f4b6440a35f`
-- **Measured:** 2026-08-13 — **AO-5 landed.** The exact eight-path implementation
+  `ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec`
+- **Measured:** 2026-08-13 — **AO-6 promoted just in time.** The live manifest has
+  31 rows and exactly one dispatchable packet. The clean terminal AO-5 tree carries
+  541 enumerated mutation-governed invariants split `68 mutation / 275 rationale /
+  198 uncovered`, ten additional meta mutations, 78 exact one-to-one sweep labels,
+  67 in-place-or-missing plants over 53 guarded target files, and uncovered baseline
+  198. AO-6 converts exactly the three corpus-coverage rationales to three named source
+  plants whose captured output must carry exactly one detailed `FAIL ... > <full-title>` line,
+  adds one semantic CLEAR control that proves exact `2 files / 16 tests` summaries both planted
+  and restored, and
+  commits exactly four governance paths. The headline walker's one-line setup correction lets
+  its deleted-row plant reach A6 itself while existing A3/A4 retain strict closure.
+  The required post-state is `71/272/198`, 81 exact claims/labels, 70 in-place calls,
+  55 guarded target files, `81 CAUGHT / 1 CLEAR / 0 gaps`. It changes no test title,
+  takes no census reservation, and leaves the whole tuple at
+  `2412/365/2047/19984/5638`.
+- **Historical measurement:** 2026-08-13 — **AO-5 landed.** The exact eight-path implementation
   `72b7a87b` passed its focused proof at 205/205 and the bare full gate at exit 0;
   strict dist passed 403/403 tests across 50 files and the build closed at 314 routes.
   One AO-0 scalar build and two byte-identical pure reconstructions froze the other four
@@ -201,22 +216,33 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-AO23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **LANDED** at `f0c272e8`; contract `c825af92`, cure `d4f213d0`; do not redispatch | Contract-before-cure without exposing a red branch tip: 272 introductions / 53 homes froze 48 distinct / 53 occurrence debt across seven applied-summary addresses, C1 proved the final-zero red, C2 cured only those addresses and proved exactly seven vanished identities, and C3 banked them to zero. The exact 7-path → 1-path → 1-path train passed 97/97 and only its green final child reached the shared ref. The census row is free. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
 | LANDED-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **LANDED** at `09e39ee6`; do not redispatch | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The exact fallback closes the registry to 26 = 17 active + 9 exact reasoned inert with zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. The eight-path implementation passed 134/134 and the bare full gate; the census row is free at `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
 | LANDED-AO5 | [`AO-5`](./packets/corpus-coverage/AO-5.md) | **LANDED** at `72b7a87b`; do not redispatch | One read-only contract freezes the exact other-four AO-0 denominator: timeline 4/8/12, pulse history 50/1286/5665, regional typed audit 2/7/201 with structural zero prose, and pure AI Chronicle 7/7/7; 63/1308/5885 overall at the exact 8,280-byte digest. The exact eight-path implementation proves one build/two reconstructions, exact null homes and selector axes, the real timeline and Chronicle seams, the 15-item protected substrate and 23-item union, while preserving every product output. It passed 205/205 focused tests and the bare full gate; the census row is free at `2412/365/2047/19984/5638`. | every `src/**` edit or prose cure; a fifth family; flat flavor events; `campaign.chronicles[]`; generic voice/AI classification; cross-path alias deduplication; `consequenceOutcomes` as a third AO-4 liveness lane; volatile ID/time; generic nested-index contiguity inferred from omitted scalar leaves; second in-walker corpus build; OSR/golden/flag/tuning/dependency/timeout/floor/ceiling/hazard-count/mutation-uncovered movement; ninth path or ninth case; AO-6 mutants |
+| READY-AO6 | [`AO-6`](./packets/corpus-coverage/AO-6.md) | **READY** | Final correctness closure for the corpus-coverage program: three exact source plants upgrade the three live AO rationales, and every nonzero is accepted only when exactly one captured line is a detailed `FAIL ... > <full-title>` attribution for the claiming title and the restored command greens. The headline walker's one-line strict-to-analysis setup correction makes the deleted-row plant fail inside A6 while A3/A4 retain ordinary strict closure. One semantic set-order swap must exit zero and report exact `2 files / 16 tests` summaries both planted and restored. The exact four committed paths move the mutation estate from `68/275/198 + meta 10` and 78 labels to `71/272/198 + meta 10` and 81 labels, with 70 in-place calls over 55 guarded targets. No test title moves, so the census remains free at `2412/365/2047/19984/5638`. | any committed `src/**` edit; a fourth positive mutant, second negative control, new test/title/suite/baseline, skipped/broad/unnamed red, exit-only CLEAR, dirty override, shared-tree whole sweep, product/corpus/helper/hazard/pre-mortem/census movement, uncovered-baseline movement, fifth committed path, ninth case, GR-4e or later work |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-5 LANDING
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-6 PROMOTION
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: FREE.** AO-5 LANDED at `72b7a87b`; its one new credited test file
-added exactly eight literal `it` titles and one literal `describe` title with no existing
-title changes. The executed whole re-derivation is `2412/365/2047/19984/5638`.
-The live manifest has 30 rows and zero dispatchable packets. AO-5 is terminal, so its
-reservation is historical and the row is free.
+⭐ **CURRENT HOLDER: FREE.** AO-6 is READY but title-neutral: it creates no test file and
+changes no literal `it`, `test`, or `describe` title, so no figure of the five-tuple can move
+and taking the reservation would buy nothing. Its two TEST rows alter assertions inside
+existing AO-4/AO-5 cases only. The live manifest has 31 rows and one dispatchable packet;
+the whole tuple remains the AO-5 landing receipt `2412/365/2047/19984/5638`.
+
+⚠ **DATED CORRECTION, 2026-08-13 at the AO-6 promotion.** The paragraph below — AO-5
+terminal and the row free — remains true history, but it no longer describes the current
+dispatch count. AO-6 is the second promotion after MX-1 that correctly does not take the row
+because it cannot move a census figure.
+
+AO-5 LANDED at `72b7a87b`; its one new credited test file added exactly eight literal `it`
+titles and one literal `describe` title with no existing title changes. The executed whole
+re-derivation is `2412/365/2047/19984/5638`. At that landing the live manifest had 30 rows and
+zero dispatchable packets. AO-5 is terminal, so its reservation is historical.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

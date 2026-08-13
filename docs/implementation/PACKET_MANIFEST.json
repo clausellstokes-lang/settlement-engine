@@ -1539,6 +1539,72 @@
         ["npm", "run", "check:observed-shape-readers"],
         ["npm", "run", "check:tail"]
       ]
+    },
+    {
+      "id": "AO-6",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-6.md",
+      "verifiedBase": "ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/mutation-sweep.sh" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/newsHeadlineContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/proseFamilyContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/mutation-sweep.sh", "symbol": "MUTATED_FILES=(" },
+        { "path": "scripts/mutation-sweep.sh", "symbol": "check_caught() {" },
+        { "path": "scripts/mutation-sweep.sh", "symbol": "── Mutation sweep results" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\": 198" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/newsVoiceContract.walker.test.js\"" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/newsHeadlineContract.walker.test.js\"" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/proseFamilyContract.walker.test.js\"" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseSweepLabels" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseSweepMutationTargets" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseGuardedMutatedFiles" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_SUMMARY_IMPACT_KINDS" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function createChronicleEntry" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A3 freezes both raw lanes and all 26 exact rewrite counts" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A6 closes the sole live challenge gap with the exact producer twin" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A7 leaves unrelated prose and every non-headline feed field byte-identical" },
+        { "path": "tests/lint/newsVoiceContract.walker.test.js", "symbol": "contract -> cure -> bank completion is aligned and debt-free" },
+        { "path": "tests/lint/proseFamilyContract.walker.test.js", "symbol": "A7 closes the pure Chronicle create-and-append road at 7 7 7" },
+        { "path": "tests/lint/proseFamilyContract.walker.test.js", "symbol": "A8 reconciles hazard premortem mutation and lighting governance" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"id\": \"HZ-CROSSHOME\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "id: 'cross-home-voice-substrate-touched'" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the clean pre-state closes at 541 invariants split 68 275 198 plus ten meta mutations 78 one-to-one labels 67 in-place or missing calls 53 unique guarded targets uncovered baseline 198 and exact unique anchors and titles" },
+        { "id": "A2", "case": "check_caught remains backward compatible for all existing callers while optional exact-title attribution requires changed bytes mutated nonzero exactly one captured line that after left trim begins FAIL and ends with the literal full-title suffix and restored zero and treats a skipped wrong absent or ambiguous title as broken" },
+        { "id": "A3", "case": "headline setup uses raw analysis while existing A3 and A4 retain strict closure so deleting only the government-challenge rewrite row reaches and fails A6 itself with exactly one detailed FAIL line ending in its exact title then restores byte-identically and greens" },
+        { "id": "A4", "case": "removing only npc_bargain from the applied-summary set reds through the filtered voice walker with exactly one detailed FAIL line ending in the exact debt-free title then restores byte-identically and greens" },
+        { "id": "A5", "case": "deleting only the Chronicle summaryText return property reds through the filtered prose-family walker with exactly one detailed FAIL line ending in the exact A7 title then restores byte-identically and greens" },
+        { "id": "A6", "case": "swapping the first two summary-kind set members changes bytes but preserves semantics so both News walkers exit zero and emit exactly one whitespace-normalized Test Files 2 passed 2 line and one Tests 16 passed 16 line in each planted and restored capture and produce one clear with zero reds" },
+        { "id": "A7", "case": "exactly three rationales become mutation labels and the post-state closes at 541 split 71 272 198 plus ten meta mutations 81 unique claims and labels 70 in-place calls 55 unique guarded targets and baseline 198 with governance unchanged" },
+        { "id": "A8", "case": "the exact four committed paths pass syntax focused checks both typechecks observed-shape validation the whole clean disposable-tree sweep at 81 caught one clear zero gaps and the bare full gate at one immutable commit with no residue or unrelated movement" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["bash", "-n", "scripts/mutation-sweep.sh"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "vitest", "run",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"]
+      ]
     }
   ]
 }
