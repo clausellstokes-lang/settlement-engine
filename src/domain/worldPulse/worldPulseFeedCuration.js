@@ -43,6 +43,11 @@ const APPLIED_HEADLINE_REWRITES = [
   [/\bmay undermine\b/, 'undermines'],
 ];
 
+const APPLIED_SUMMARY_IMPACT_KINDS = new Set([
+  'npc_bargain', 'npc_exploit', 'npc_expose', 'npc_mobilize',
+  'npc_protect', 'npc_reform', 'npc_suppress',
+]);
+
 function appliedHeadlineFor(/** @type {PulseOutcome} */ outcome) {
   if (outcome.appliedHeadline) return outcome.appliedHeadline;
   const headline = outcome.headline || '';
@@ -50,6 +55,13 @@ function appliedHeadlineFor(/** @type {PulseOutcome} */ outcome) {
     if (pattern.test(headline)) return headline.replace(pattern, replacement);
   }
   return headline;
+}
+
+function appliedSummaryFor(/** @type {PulseOutcome} */ outcome, /** @type {string} */ status) {
+  const summary = outcome.summary || '';
+  return status !== 'proposal' && APPLIED_SUMMARY_IMPACT_KINDS.has(outcome.candidateType || '')
+    ? summary.replace(/\bcan advance through\b/, 'advances through')
+    : summary;
 }
 
 /**
@@ -75,7 +87,7 @@ export function newsEntryForOutcome(outcome, tick, status = 'applied') {
     significance: major ? 'major' : 'notable',
     score: Math.round(severity * 80) + (major ? 18 : 0),
     headline: (status === 'proposal' ? outcome.headline : appliedHeadlineFor(outcome)) || 'World pulse update',
-    summary: outcome.summary || '',
+    summary: appliedSummaryFor(outcome, status),
     kind: status === 'proposal' ? 'queued' : 'applied',
     impactKind: outcome.candidateType || outcome.type,
     channelType: null,
