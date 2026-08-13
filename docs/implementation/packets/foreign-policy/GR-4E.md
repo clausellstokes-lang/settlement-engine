@@ -1,8 +1,17 @@
 # Foreign Policy / GR-4e — the fracture charge reaches the next pulse
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `5a49d187f4445d33bc80d3bb2c2098bab23f92eb`
+- **Last revalidated:** 2026-08-13 at implementation commit
+  `c5ef5c19daac462827e10b466932c284818cf737`.
+- **Landed:** 2026-08-13 — implementation
+  `c5ef5c19daac462827e10b466932c284818cf737`; do not redispatch.
+- **Authority history:** READY promotion
+  `3339188bb13ce46acd2a31e1f293327f64f56879`, dispatch seal
+  `b995d8c9a3b41619dcda3a56466892f398b62a7ff62db7a19e6522600b85b3fd`,
+  and capsule
+  `a31af4e2ce0eea9f1b22acdceebdd6435db34fb3a197ccf7f114adab68ffbf8a`.
 - **Compiled:** 2026-08-13 from the clean terminal AO-6 tree.
 - **Depends on:** the W-PEACE-3 fracture writers; the W-DOCTRINE-2 credibility
   reader and writer; GR-4c's measured dead-window finding and named `GR-4e`
@@ -275,3 +284,51 @@ Stop and report without widening scope if any of these is true:
   title is added/deleted;
 - either disposable mutant does not fail by the named counterforce, restored
   bytes differ, either battery misses 67/67 or 100/100, or the bare full gate is red.
+
+## 8. Executed landing receipt — 2026-08-13
+
+- **Authority and immutable landing:** READY promotion
+  `3339188bb13ce46acd2a31e1f293327f64f56879` produced seal
+  `b995d8c9a3b41619dcda3a56466892f398b62a7ff62db7a19e6522600b85b3fd`
+  and capsule
+  `a31af4e2ce0eea9f1b22acdceebdd6435db34fb3a197ccf7f114adab68ffbf8a`.
+  The direct green child is implementation
+  `c5ef5c19daac462827e10b466932c284818cf737`; its sole parent is the promotion,
+  and one old-value CAS exposed it.
+- **Exact implementation scope:** the five manifest paths and raw line deltas are
+  `src/domain/worldPulse/informationStatecraft.js` **+7/-7**,
+  `src/domain/worldPulse/peaceTermsCatalog.js` **+1/-1**,
+  `src/domain/worldPulse/treatyBreachCredibility.js` **+6/-5**,
+  `tests/domain/informationStatecraftPins.test.js` **+15/-7**, and
+  `tests/domain/peaceTermsWave3.test.js` **+7/-0**: **+36/-20** total.
+  `informationStatecraft.js` remains exactly **780 effective lines**. Exactly one
+  existing title was renamed; no title was added or deleted, so registration and
+  census cardinalities did not move. Generated artifacts: **NONE**.
+- **Disposable counterforces:** the old-window mutant exited `1` at
+  **64 passed / 3 failed**, including the exact renamed predecessor title
+  `reads the prior-tick fracture record and charges the deserter exactly once`;
+  log SHA-256
+  `1b5356594042b3c7dc9503aae73d05b6e3384bc97baf84b9a182a2eb1c1dd43b`.
+  The detached-deriver mutant exited `1` at **66 passed / 1 failed**: the pure
+  predecessor case remained green while
+  `a charged fracture debits the deserter's credibility stock` failed; log SHA-256
+  `b6208ee2ea2ad74afedfc586be362668a3f707a34dd9b23ab5d48b11a49c43ca`.
+  Each mutation restored byte-identically with no residue.
+- **Focused and static closure:** the restored direct battery passed **67/67**
+  (log SHA-256
+  `854c3049751801421d4b081c5f06e1565ceb76715e77f48534f82ca5889c42f8`)
+  and the direct-plus-dormancy battery passed **100/100** (log SHA-256
+  `d10ddf379113c189bf69c520ac8931fff4ab0f02074a3b983e9ab21d8d44ed71`).
+  Packet validation, hazard validation, pre-mortem self-check and eslint passed;
+  typecheck ratchet held **173/173**, strict domain typecheck held
+  **1,134/1,134**, and observed-shape validation remained exact at **1,998**.
+- **Full landing gate:** bare `npm run check:tail` exited `0`; strict dist
+  discovered **50 files** and passed **403/403** tests. The full-gate log SHA-256
+  is `d5771a94b64d17630561805e26cae429f9b164e0424dec73e849d6c88216f7a8`.
+  The immutable implementation tree was clean and carried no proof residue.
+- **No-motion and boundary receipt:** no second fold, pulse reorder, treaty-writer
+  edit, consume marker, persisted-shape change, flag, tuning, golden, registry,
+  baseline, ceiling, hazard, pre-mortem or census file moved. The whole census
+  remains **2412/365/2047/19984/5638**, and its reservation is free. A1-A7 passed.
+  No diagnostic-soak worktree was created and neither D-1 nor L0 was started.
+  The next governed act is the live **CR-NEXT-1** census only.

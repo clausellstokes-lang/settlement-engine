@@ -2,23 +2,31 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at terminal AO-6 record
-  `5a49d187f4445d33bc80d3bb2c2098bab23f92eb`.
-- **Measured:** 2026-08-13 — **GR-4e compiled just in time.** The live manifest has
-  32 rows and exactly one dispatchable packet. The two live treaty-fracture writers run
-  after the information-statecraft fold in the same pulse, so the current same-tick
-  predicate can never consume their records. GR-4e changes that one predicate to the
-  exact prior-tick law
-  `now < 1 || floor(finiteNumber(fracture.tick, NaN)) !== now - 1`, preserving the
-  one-fold stage order and making a fracture written at `T` charge at `T + 1` exactly
-  once. Its exact five-path scope carries one net-zero hot-file edit at 780/800, two
-  historical comment corrections, and two test edits with exactly one existing-title
-  rename and no registration or census-count movement. The direct and wider dormancy batteries
-  are frozen at 67/67 and 100/100, with the old-window and detached-deriver mutants required
-  in a disposable proof tree. The proposed seven-file wider battery was measured at
-  94 rather than 99 tests; adding the directly relevant six-test peace-causal dormancy
-  golden makes the corrected wider battery 100/100. The census remains free at
-  `2412/365/2047/19984/5638`.
+- **Measured branch/SHA:** `claude/composite-r4` at terminal GR-4e implementation
+  `c5ef5c19daac462827e10b466932c284818cf737`.
+- **Measured:** 2026-08-13 — **GR-4e LANDED.** The live manifest has 32 rows and
+  zero dispatchable packets. Promotion `3339188b`, seal `b995d8c9`, capsule
+  `a31af4e2` and direct green child `c5ef5c19` bind the exact five-path **+36/-20**
+  implementation. The sole logic edit replaces the dead same-tick fracture window
+  with the exact prior-tick law while preserving the one-fold stage order and the
+  hot file at **780/800**. Disposable mutants separately convicted the old window
+  at **64/67** and a detached stage call at **66/67**; restored batteries passed
+  **67/67** and **100/100**, and the bare full gate passed with strict dist
+  **403/403** across 50 files (log SHA-256
+  `d5771a94b64d17630561805e26cae429f9b164e0424dec73e849d6c88216f7a8`).
+  Exactly one title was renamed with no cardinality or census movement. The census
+  is free at `2412/365/2047/19984/5638`; the next governed act is the live
+  **CR-NEXT-1 census only**. No diagnostic-soak worktree was created and neither
+  D-1 nor L0 was started.
+- **Historical measurement:** 2026-08-13 — **GR-4e compiled just in time.** The
+  live manifest had 32 rows and exactly one dispatchable packet. The two live
+  treaty-fracture writers ran after the information-statecraft fold in the same
+  pulse, so the old same-tick predicate could never consume their records. The
+  packet froze the exact prior-tick law, five-path scope, net-zero 780/800 hot-file
+  edit, one existing-title rename, two disposable mutants and the corrected
+  **67/67 + 100/100** batteries; the proposed seven-file wider battery had measured
+  94 rather than 99 tests, so the directly relevant six-test peace-causal dormancy
+  golden supplied the honest 100-test closure.
 - **Historical measurement:** 2026-08-13 — **AO-6 landed after an immutable proof STOP and governed
   amendment.** The live manifest has 31 rows and zero dispatchable packets. The first immutable
   implementation candidate `b02bc709c81d3d7c3b30d13aa9126a5cbac04b27` remains unlanded:
@@ -226,7 +234,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-22 | [`IN-1b`](./packets/foreign-policy/IN-1B.md) | **LANDED** at `af3d93c8`; do not redispatch | The dossier standing line: the mirror's first production consumer, and the act that closes the orphan window IN-1a deliberately opened. One pure read-model under `src/domain/display/` composes `mirrorInputsAt` + `secondOrderMirrorOf` into one row per counterpart, and the Relationships / Neighbours surface gains a block under *"What the neighbours have been shown"* — band words in record voice, never a perception verb, with a DM-only `<details>` expansion to the deriving record. ⭐ **It ends IN-1a's both-states byte-identity LEGITIMATELY, in the same commit that ends it**: three live dormancy assertions are NARROWED rather than deleted, on the ES-3 template, and the surviving claim is driven by a rendered-surface dark golden rather than asserted. ⭐ **The read-model's home is ruled and it costs nothing**: `src/domain/display/` sits outside the coupling census's scope regex, so the leaf mints no layer claim, no cross-layer pair and no registry row, and the unlayered baseline at exactly 179 is untouched. ⛔⛔ **`src/components/OutputContainer.jsx` MEASURES 599 OF A HARD 600 — one effective line of headroom, EXECUTED at promotion against a delegated draft figure of ~582 that was wrong by seventeen lines.** The drafted six-line edit did not fit; the promotion STOPPED and **CR-IN1B-7 re-shaped the wiring to PROPS-ONLY at ZERO effective lines**, on the landed `'rumors'` shape one switch case above. That file now joins `peaceTerms.js` on the **HOT-FILE LIST** (packet §3.11): any packet naming either one opens with an executed headroom measurement and a net-zero edit shape. ⚠ Six draft-open items are closed by **CR-IN1B-1..7** — band-word composition with the authored pool deferred to IN-1c, the DM gate composed inside the tab from props with no new premium comparison, the British sentence-cased heading, the line on both views with the whole block suppressed on a public dossier, the replacement invariant name, and the seventh input family deferred again. ⭐ It **was** the sole in-flight holder of the estate-wide lighting-census walker — re-measured free at promotion; ⚠ **DATED CORRECTION 2026-08-12 at the landing — that clause is HISTORY**: this packet is terminal, a terminal packet reserves nothing, and the row is FREE until the next dispatch restamps it. ⚠ At the landing the chair rode TWO one-row cures on `af3d93c8` — **CR-IN1B-8** (the `title=` walker's fifth reasoned raise, 484 → 485; the preflight never measured that walker, compilers must) and **CR-IN1B-9** (`requiredSymbols[10]` re-pointed to the successor invariant; the existence check is status-blind, so a symbol-retiring packet names its SUCCESSOR, never the retiree). ⚠ **DATED CORRECTION 2026-08-12:** IN-1b §5b B12 named two legitimate pre-existing reds (`tests/docs/enforcement-claims.test.js`, ratchet entry 5, and the owner-approved `generatorGoldenMaster` golden) and missed a third. `tests/lint/proseNumerics.test.js` carries its own banked ratchet entry, so §5b B14's expectation of exit 0 on a run including that file was wrong at compile time and at landing. A packet's pre-existing-red list is derived from `scripts/.test-ratchet-baseline.json` whole, never from memory. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | `mirror_shift` / `mirror_confidence_degraded`, the Herald beats, the interim-desk declaration and the INFORMATION kind registry / receipt-pool module / annex URL (all IN-1c); projecting `mirror_standing_line` into a runtime corpus (IN-1c); the seventh input family, WR-7b's negotiation pictures (deferred again at CR-IN1B-6); any durable outbound-transfer record or new persisted family (refused at CR-IN1-7); any ninth `MirrorRecord` key, new band member or new `basis` token; any new tab id, kind registration or dossier corpus block; any new raw premium comparison or `EXEMPTIONS` row; **any new effective line in `OutputContainer.jsx`**; `outboundImpression.js`, `secondOrderBelief.js`'s code, `pulseKernel.js`, `applyWorldPulse.js`, `informationStatecraft.js`, `couplingInclusion.walker.test.js`, the dossier prose corpus, every baseline and every ceiling raise |
 
 | LANDED-23 | [`GR-4c`](./packets/foreign-policy/GR-4C.md) | **LANDED** at `cd2ab894`; do not redispatch | The oath that finally costs something: a torn-up treaty charges the breaking court's credibility stock, once, at the act, banded by the severity GR-4a already graded — closing the seam where a live reader chain (`credibilityScoreOf` → `reserveFor` → `OATHBREAKER_PENALTY`) has waited since GR-2 with no producer on the other side. One pure leaf plus a twelve-line gated block in a file with 637 lines of headroom; zero new flags, zero new persisted families, zero new surfaces, zero new tuning keys. ⭐ **Two compile premises were refuted at promotion and both corrections are the packet's substance.** First, the design routes the charge through the `fractureCredibilityDeltas` idiom, whose tick window is measurably dead — the reader folds 507 lines before the writer inside one pulse call, so a copied idiom would ship a born-dead charge; the charge moves to the breach site instead, and the window's repair is the named micro-act GR-4e. Second, the draft argued the new import was same-layer and owed no coupling row; executed measurement showed the cross-layer walker resolves layers from frozen regex module sets, **not directories** — `treatyBreach.js` is GRAMMAR, `informationStatecraft.js` is INFO — so the row was owed, the promotion STOPPED, and CR-GR4C-7 minted it together with the registry head edit four prior packets each forgot. ⭐ It **held** the estate-wide lighting-census walker's reservation — ⚠ **DATED CORRECTION 2026-08-12 at the landing: HISTORY**; this packet is terminal, a terminal packet reserves nothing, and the row is FREE (sixth restamp, same recurring reason). ⚠ Its one authored number, `CHARGE_BASE = 0.05`, is module-local, frozen, unsoaked, rides the endgame tuning signature, and the implementer may not tune it. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the dead-window repair (GR-4e), a fifth delta kind (needs an owner-signed tuning key, and the kind is not persisted), every Herald beat and chronicle line for the charge (GR-4d/GR-7), ungating the DM road from `oathHolderEnabled` (GR-7), the lit-mode queue and per-type terminal (GR-4d), `peaceTerms.js`, `informationStatecraft.js`, `OutputContainer.jsx`, `pulseKernel.js`, `pactFormation.js`, `couplingDesk.walker.test.js`, `couplingReceiptSample.test.js`, the coupling-inclusion baseline JSON, every other baseline and every ceiling raise |
-| READY-24 | [`GR-4e`](./packets/foreign-policy/GR-4E.md) | **READY** — verified base `5a49d187`; sole dispatchable row | Repairs the coalition-fracture credibility window at its one reader: a fracture written after the information-statecraft fold in tick `T` is consumed by that same fold at `T + 1`, once. The only executable edit is a one-for-one predicate replacement in the 780/800 hot file; two source comments reconcile GR-4c's historical deferral, and two existing test cases bind the predicate, stage call and real W-PEACE-3 writer with exactly one title rename and no count movement. Two disposable mutants must separately convict the old same-tick window and a detached stage call; the direct battery closes at 67 tests and the corrected wider battery at 100 (the proposed seven-file set measured 94, not 99; its directly relevant peace-causal golden adds six). | a second credibility fold; pulse reorder; any treaty-writer edit; consume marker or persisted-shape change; new flag, tuning, golden, registry, census, baseline or ceiling; any sixth path; any added/deleted test title; GR-4d/GR-5/GR-7 |
+| LANDED-24 | [`GR-4e`](./packets/foreign-policy/GR-4E.md) | **LANDED** at `c5ef5c19`; do not redispatch | The coalition-fracture credibility window now reaches its sole reader: a fracture written after the information-statecraft fold in tick `T` is consumed by that fold at `T + 1`, once. Promotion `3339188b`, seal `b995d8c9` and capsule `a31af4e2` produced the direct exact five-path child at **+36/-20**; the one executable edit is a one-for-one predicate replacement and the hot file remains 780/800. The old-window mutant exited 1 at 64/67 with the named predecessor title, the detached-stage mutant exited 1 at 66/67 with the pure case green and named stage case red, restoration closed at 67/67 and 100/100, and the bare full gate passed strict dist 403/403 across 50 files. Exactly one title was renamed, so no registration or census cardinality moved; the row is free at `2412/365/2047/19984/5638`. No soak was started. | a second credibility fold; pulse reorder; any treaty-writer edit; consume marker or persisted-shape change; new flag, tuning, golden, registry, census, baseline or ceiling; any sixth path; any added/deleted test title; GR-4d/GR-5/GR-7 |
 
 ## Authorized implementation infrastructure
 
@@ -246,18 +254,29 @@ re-derives that lane and decides whether to compile its immediate dependent.
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-6 LANDING
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the GR-4e LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: FREE.** AO-6 LANDED title-neutral at `0facf170`: it created no test file
-and changed no literal `it`, `test`, or `describe` title, so no figure of the five-tuple moved.
-Its two TEST rows alter assertions inside existing AO-4/AO-5 cases only. The live manifest has
-31 rows and zero dispatchable packets;
-the whole tuple remains the AO-5 landing receipt `2412/365/2047/19984/5638`.
+⭐ **CURRENT HOLDER: FREE.** GR-4e LANDED at `c5ef5c19` with exactly one existing title
+renamed and no title, suite or test-file addition/deletion, so no registration cardinality or
+figure of the five-tuple moved. The live manifest has **32 rows and zero dispatchable
+packets**; the whole tuple remains the AO-5 landing receipt
+`2412/365/2047/19984/5638`. The next governed act is the live **CR-NEXT-1 census only**.
+No diagnostic-soak worktree was created for this run, and neither D-1 nor L0 has started.
+
+⚠ **DATED CORRECTION, 2026-08-13 at the GR-4e landing.** The AO-6 paragraph below remains
+true history but no longer describes the current packet count. GR-4e also correctly took no
+reservation: changing one existing title without adding or deleting any registration cannot
+move a census cardinality. Landing returns its sole READY row to terminal state.
+
+AO-6 LANDED title-neutral at `0facf170`: it created no test file and changed no literal
+`it`, `test`, or `describe` title, so no figure of the five-tuple moved. Its two TEST rows
+alter assertions inside existing AO-4/AO-5 cases only. At that landing the live manifest had
+31 rows and zero dispatchable packets.
 
 ⚠ **DATED CORRECTION, 2026-08-13 at the AO-6 promotion.** The paragraph below — AO-5
 terminal and the row free — remains true history, but it no longer describes the current
