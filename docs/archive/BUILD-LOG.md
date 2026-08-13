@@ -6,11 +6,12 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `6ae70b19`
-- Commits: 3188
+- HEAD: `9d001545`
+- Commits: 3189
 - Working tree at refresh: 0 dirty entries
 
 ```
+9d001545 2026-08-12 Five prose debts stop pointing at names and figures that moved
 6ae70b19 2026-08-12 PG-1: the lapsed claim test stops racing the database clock
 a0adeeda 2026-08-12 MX-1 flips LANDED: retirement is machine-visible
 3c61f42f 2026-08-12 MX-1: retirement becomes machine-visible
@@ -410,5 +411,4 @@ d5660a7b 2026-08-03 Lane PT2-2: the splice guard had two refusals and the suite 
 ea0be549 2026-08-03 Ribbon V3: the bar becomes half of a war arrow, and the honey wood takes three foregrounds down with it
 1eafbaec 2026-08-03 Lane PS: the spine said the same seven things about every settlement, ungrammatically
 54465b54 2026-08-03 Lane GR: the golden master re-recorded for the icon sweep, after the five path-templates proved it was shape and nothing else
-2ed9a82a 2026-08-03 Queue: lane W8-B's landed slice and the razing's real blocker, which is a design fork nobody had measured
 ```
