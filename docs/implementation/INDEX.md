@@ -3,15 +3,20 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `7f231662fea6c80aa66fd62de30083f9a816f255`
-- **Measured:** 2026-08-13 — **AO-0 promoted just in time.** The live manifest has
-  27 rows and exactly one dispatchable packet. Its detached compile proof preserves
+  `e71beb84355666fe5508f61c0f9acdc516a97b79`
+- **Measured:** 2026-08-13 — **AO-0 landed.** The coordinator-owned pair
+  `3df85a3a` → `e71beb84` landed through one old-value CAS after a clean detached
+  17-step gate. The live manifest has 27 rows and zero dispatchable packets. The pair preserves
   the default corpus at 1,321 shapes / 8,637 origins / 14,650 transitions and the
   inventory at 1,998 reads / 1,412 identities / 387 files while an opt-in scalar
   consumer observes 26,076 rows across five shipped prose families. Schema 7→8 is
-  exactly 1,412 same rows and zero motion; the exact code-half red is only the
-  persisted schema-7 pin. AO-0 is the sole census holder at the unchanged
-  `2409/365/2044/19960/5635` five-tuple.
+  exactly 1,412 same rows and zero motion; the code-half's sole deliberate schema pin
+  is cleared by genesis. AO-0 is terminal; its observed-shape and census reservations
+  are free at the unchanged `2409/365/2044/19960/5635` five-tuple.
+- **Historical measurement:** 2026-08-13 — **AO-0 promoted just in time.** The live
+  manifest then had 27 rows and exactly one dispatchable packet. Its detached compile
+  proof established the same topology, inventory, scalar figures, and zero-motion
+  reconciliation later frozen by the landed pair.
 - **Historical measurement:** 2026-08-13 — **H26 landed.** The coordinator-owned H26 pair
   `d081feee` → `98729f79` landed through one old-value CAS after a clean detached
   17-step gate. Schema 7 freezes 1,998 reads / 1,412 identities / 387 files with
@@ -136,22 +141,22 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-M1 | [`MX-1`](./packets/infrastructure/MX-1.md) | **LANDED** at `3c61f42f`; do not redispatch | Machinery: retirement becomes machine-visible. An optional `retiredSymbols` array whose absence assertion binds at the one status where absence is assertable, mirroring the existing `CREATE` arm's nine-line rationale exactly, plus the cross-list disjointness arm that mechanizes CR-IN1B-9's hand cure — the manifest gains a way to say *"this packet retired X"* instead of being unable to tell that from *"this packet forgot X"*. ⭐ **Strictly additive**: zero existing manifest rows invalidated, no schema bump, and the arm the fix is bolted beside keeps its status-blindness intact — the validator gains an arm and loses none. ⛔ **The blocking collision is discharged.** The design lane measured `IA-2` holding seven of the needed paths at `d7b7d225`; CR-AR-1 re-statused it terminal, and MX-1's five paths re-simulated against the live manifest give **ZERO** duplicate-change-path errors. ⭐ **The design lane's two-site capsule instruction was measured wrong and is corrected in the packet**: the authority-projection pair and the derived-versus-hand-built `filePaths` pair are TWO coupling chains, so CR-AR-4's substrate widening is a **FOUR-site edit or every dispatch throws** `capsule omitted declared substrate`. ⭐ **It adds ZERO test titles, suite titles and test files** — every row goes inside an existing `it()` — so no figure of the estate-wide lighting census can move, and **this packet deliberately does NOT take the census row**; it stays free for the next promotion that genuinely needs it. ⚠ It carries CR-AR-9's hot-file section into `PACKET_STANDARD.md` with all three figures re-executed at this base (`OutputContainer.jsx` 599 of 600, `peaceTerms.js` 797 of 800, `informationStatecraft.js` 780 of 800), plus that file's stale header restamp. ⚠ **The packet edits its own validator**, so the implementer captures the tool's exit both before and after the edit; one figure where two are owed is a STOP. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | a status-aware skip exempting terminal packets from the symbol check (refused on the measured 174-of-174), any lint that parses a packet's free prose, `PACKET_MANIFEST_SCHEMA_VERSION`, retro-declaring retirements on packets already in history, editing any terminal packet's manifest row including IN-1B's cured `requiredSymbols[10]`, `scripts/implementation-gate.mjs`, `tests/scripts/implementationGate.test.js`, `INDEX.md` and `PACKET_MANIFEST.json` (coordinator acts), `tests/lint/sovereigntyLightingContract.walker.test.js`, `package.json` / `package-lock.json` (governed paths, and a dependency bump is a mint trigger), every observed-shape file, every other section of `PACKET_STANDARD.md`, all of the prose batch's items (a)–(f), every baseline and every ceiling raise |
 | LANDED-GTR1 | [`GTR-1`](./packets/infrastructure/GTR-1.md) | **LANDED** at `cd404948`; code half `5f7e7051`; do not redispatch | Assigns source tests and post-build artifact tests to disjoint, exhaustive phases; the clean 17-step gate proves the source census and strict 403/403 dist phase | any product source, dependency, new test title/file, raw-test filtering, duplicate CI build, skip-ceiling raise, product golden, tuning, flag, timeout, budget, census or non-test baseline |
 | LANDED-H26 | [`H26`](./packets/infrastructure/H26.md) | **LANDED** at `98729f79`; code half `d081feee`; do not redispatch | Schema 7 BANK-BY-RULE: 44 reads / 31 tagged rows, target 1,998 / 1,412 / 387, exact reviewed four-entry scanner transition and clean 17-step gate. Reservations are free for post-H26 re-derivation. | AO-0 and every scalar/corpus producer seam; SCW-1b and item (a); any `src/**` edit; a fifth declaration; scan/corpus/sentinel movement; any other scanner drift; hand-edited JSON; untagged raises; every golden, tuning value, budget, timeout, floor and unrelated baseline |
-| READY-AO0 | [`AO-0`](./packets/corpus-coverage/AO-0.md) | **READY**; revalidated at `7f231662`; fresh seal and atomic pair required | Schema 8 adds a second-consumer-only typed scalar projection over five authoritative shipped seams while preserving `foldCorpus`, default topology, OSR artifact, and inventory byte-for-byte. The strict 7→8 proof binds an exact four-entry scanner transition and 1,412 same rows with zero motion. | AO-2..6, prose cures, HZ-CROSSHOME, every `src/**` edit, flat flavor events, `campaign.chronicles[]`, volatile ID/time fields, scalar data in the default artifact, dependency, golden, flag, tuning, timeout, floor, ceiling or unrelated baseline movement |
+| LANDED-AO0 | [`AO-0`](./packets/corpus-coverage/AO-0.md) | **LANDED** at `e71beb84`; code half `3df85a3a`; do not redispatch | Schema 8 adds a second-consumer-only typed scalar projection over five authoritative shipped seams while preserving `foldCorpus`, default topology, OSR artifact, and inventory byte-for-byte. The strict 7→8 proof binds an exact four-entry scanner transition and 1,412 same rows with zero motion. | AO-2..6, prose cures, HZ-CROSSHOME, every `src/**` edit, flat flavor events, `campaign.chronicles[]`, volatile ID/time fields, scalar data in the default artifact, dependency, golden, flag, tuning, timeout, floor, ceiling or unrelated baseline movement |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-0 PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-0 LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: AO-0.** The live manifest has 27 rows and exactly one dispatchable
-packet. AO-0 adds no test or suite title and no test file; its detached proof re-derived
-the whole five-tuple unchanged at `2409/365/2044/19960/5635`. It nevertheless names the
-walker and therefore serializes the row until its terminal flip releases it.
+⭐ **CURRENT HOLDER: NONE.** The live manifest has 27 rows and zero dispatchable packets.
+AO-0 added no test or suite title and no test file; its committed genesis re-derived the
+whole five-tuple unchanged at `2409/365/2044/19960/5635`. A terminal packet reserves
+nothing, so the census row is free for the next just-in-time promotion.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

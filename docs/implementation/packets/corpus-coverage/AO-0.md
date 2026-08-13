@@ -1,9 +1,13 @@
 # Corpus coverage / AO-0 — five authoritative prose seams become observable
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `7f231662fea6c80aa66fd62de30083f9a816f255`
-- **Last revalidated:** 2026-08-13 at `7f231662fea6c80aa66fd62de30083f9a816f255`
+- **Last revalidated:** 2026-08-13 at schema-8 genesis
+  `e71beb84355666fe5508f61c0f9acdc516a97b79`
+- **Landed:** 2026-08-13 — code half
+  `3df85a3aa33b60be5983ebede63375d8d0fae8f5`, schema-8 genesis
+  `e71beb84355666fe5508f61c0f9acdc516a97b79`; do not redispatch.
 - **Depends on:** H26 code half `d081feee29288af58ec3eaf6cf513c0904c15b65`,
   schema-7 genesis `98729f7978613a6365af09aca44e01e9cf4c6b37`, terminal flip
   `7f231662fea6c80aa66fd62de30083f9a816f255`, and CR-AO-1..10 in the ledger.
@@ -12,9 +16,8 @@
 - **Commit authority:** coding edits exactly ten handwritten paths and does not commit
   or generate the baseline. The coordinator alone proves and lands the ten-path code
   half followed by the one-path generated schema-8 genesis.
-- **Census-holder:** AO-0 is the sole non-terminal holder of
-  `tests/lint/sovereigntyLightingContract.walker.test.js`; the whole five-tuple is
-  re-derived and may not be forward-added.
+- **Census receipt:** the whole five-tuple was re-derived unchanged at
+  `2409/365/2044/19960/5635`. AO-0 is terminal and the reservation is free.
 - **Baseline posture:** schema 7 is green at 1,998 reads / 1,412 identities / 387 files,
   including 44 explained-writer reads in 31 tagged rows. The default corpus is 1,321
   shapes / 8,637 origins / 14,650 transitions. The lighting census is
@@ -253,3 +256,41 @@ has any non-same row; code-half failures exceed the sole schema pin; a baseline 
 hand-authored; more than ten handwritten or one generated path moves; a title/file/census,
 ceiling, budget, timeout, floor, golden, dependency, flag, or tuning value moves; the ref
 moves; CAS fails; or the genesis gate is nonzero. No speculative repair or partial mint.
+
+## 11. Executed landing receipt — 2026-08-13
+
+- Promotion and seal: sealed HEAD
+  `91f6827713fd0d31be6b933c03c1b58ef8184f1e`; seal integrity
+  `4091c19c3b05d52d045a9539f32ffba15f4ef812fda2cbe04911fb55bb600a60`.
+- Code half: `3df85a3aa33b60be5983ebede63375d8d0fae8f5`, exactly the ten
+  handwritten paths in §6, `+877/-112`. Per-path additions/deletions in §6 order:
+  `25/18`, `34/16`, `227/12`, `116/38`, `85/1`, `36/5`, `230/8`, `102/5`,
+  `18/9`, `4/0`.
+- Genesis: `e71beb84355666fe5508f61c0f9acdc516a97b79`, exactly the generated
+  baseline JSON, `+45/-44`, parented directly to the code half. One old-value CAS moved
+  the branch from the sealed promotion to this genesis; all eleven shared-index paths
+  were then neutralized exactly.
+- Default corpus and scalar proof: default topology stayed
+  `1321/8637/14650`; the opt-in consumer observed 26,076 scalar rows. Seam receipts were
+  canon `1`; Wizard News `240/1567/272/53`; pulse history `12`; regional log
+  `109/109`; Chronicle `1`. The twelve source-bearing shapes remained `causes`,
+  `changes`, `charter`, `evidence`, `garrison`, `incomeSources`, `institutions`,
+  `magicDef`, `mercenary`, `site`, `walls`, and `watch`.
+- Schema-8 migration: `1998/1412/387`; all 31 explained-writer tags still bank
+  44 reads. Reconciliation was exactly 1,412 same and zero new, increased, decreased,
+  or gone; all 1,413 decisions were accepted and noted. Artifact/report/review/bundle
+  digests were respectively
+  `51de033c575251b034b47e00f2457020c8079b6bec608e9f91953d41fadb40cb`,
+  `53da69540b68d3985dd0ab8982472958526832520bf4ff4091c4bea099221629`,
+  `78f475448981d455e066fbc017a1942029375e97235e554a9885d243baa3fada`, and
+  `fc5acbb55c80d393e3c1e32dc182bde89c5286b50d082dc34085493dc4eae9bf`.
+  Scanner-transition digest:
+  `2407c3b278e39df2e49a3c42cf4dfd19232bee80867350f25845e83cc162c268`.
+- Verification: the code half passed 182/183 with only the compiled schema pin red;
+  the genesis passed all six focused files, 183/183. Exact-path ESLint passed; typecheck
+  ratchets remained `173/173` and `1134/1134`; plain OSR matched 1,998 exactly; the
+  whole lighting census remained `2409/365/2044/19960/5635`. Bare
+  `npm run check:tail` exited 0, including the 27,956-test / 2,359-file source phase,
+  fresh build, and strict 50-file / 403-test dist phase with zero non-runs.
+- Acceptance: A1–A8 passed. New test titles/files: zero. Deviations: **NONE**.
+  Judgment calls: **NONE**.
