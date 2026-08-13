@@ -6,11 +6,16 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `481c7e0a`
-- Commits: 3204
+- HEAD: `ba6a2913`
+- Commits: 3209
 - Working tree at refresh: 0 dirty entries
 
 ```
+ba6a2913 2026-08-13 AO-2+3: record atomic voice contract-cure landing
+f0c272e8 2026-08-13 AO-3: bank the seven vanished voice-debt identities
+d4f213d0 2026-08-13 AO-3: cure applied Wizard News summary voice (deliberate red)
+c825af92 2026-08-13 AO-2: install the Wizard News voice contract (deliberate red)
+c5fd3638 2026-08-13 AO-2+3: promote atomic voice contract-cure train
 481c7e0a 2026-08-13 AO-0: record schema-8 landing
 e71beb84 2026-08-13 AO-0: freeze schema-8 corpus-coverage baseline
 3df85a3a 2026-08-13 AO-0: add opt-in scalar observation corpus
@@ -406,9 +411,4 @@ d716b37e 2026-08-03 Lane MD piece 1: the mirror dies — historyBeats stops re-d
 9e6ac0bf 2026-08-03 WR-8 slice 5 (R2): the license is a durable world fact, and a forged save arms nobody
 ae547044 2026-08-03 Lane PB piece 1: the band turns around — the shingle now ascends INTO Realm, and the cells become the parallelograms the mockup asked for
 eaecafdc 2026-08-03 Queue: lane RR's two commits, the gate that was named rather than assumed, and the field that was never dead
-c4de968a 2026-08-03 Lane RR part 2: the re-record, and the two path-templates that are the whole of what moved
-bf731ea6 2026-08-03 WR-8 slice 4 (R + R2): the third intent, and the tier that is told nothing
-6039f993 2026-08-03 Lane W8-D repair: the second red lane W8-C committed past, in the file it was editing
-21bf1041 2026-08-03 Lane RR part 1: the origin rung learns to say forty-five things, and the guard learns to read camelCase
-32e25808 2026-08-03 Lane RT-4: the splice guard's LENGTH cap gets the standing plant it never had
 ```
