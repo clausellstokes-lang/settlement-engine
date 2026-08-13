@@ -6,11 +6,22 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `9d001545`
-- Commits: 3189
+- HEAD: `7f231662`
+- Commits: 3200
 - Working tree at refresh: 0 dirty entries
 
 ```
+7f231662 2026-08-13 H26: record schema-7 landing
+98729f79 2026-08-13 H26: freeze schema-7 explained-writer baseline
+d081feee 2026-08-13 H26: bank explained-writer reads by rule
+ed7bfb36 2026-08-13 H26: bind exact scanner transition
+3dbb19c9 2026-08-13 H26: re-promote schema-7 mint after GTR-1
+b96fae42 2026-08-13 GTR-1: record green atomic landing
+cd404948 2026-08-13 GTR-1 genesis: bind the source-phase test census
+5f7e7051 2026-08-13 GTR-1 code half: split source debt from built-artifact proof
+83f32d76 2026-08-13 GTR-1 promoted READY: the full gate stops depending on stale dist
+357e7778 2026-08-12 H26 keeps its promotion commit in the atomic pair
+7067e8d3 2026-08-12 H26 promoted READY: explained writers stay visible by rule
 9d001545 2026-08-12 Five prose debts stop pointing at names and figures that moved
 6ae70b19 2026-08-12 PG-1: the lapsed claim test stops racing the database clock
 a0adeeda 2026-08-12 MX-1 flips LANDED: retirement is machine-visible
@@ -400,15 +411,4 @@ bf731ea6 2026-08-03 WR-8 slice 4 (R + R2): the third intent, and the tier that i
 83a627b3 2026-08-03 Lane W8-D repair: the mounted-everywhere guard was red at HEAD, naming the previous lane's own test file
 65cd91fc 2026-08-03 Lane RT-1: the mirror's refusal, imported rather than re-spelled, and a lockstep pin that can no longer assert nothing
 0ab5e03e 2026-08-03 Lane PT2-5: the origin rung is thin, the widening is owner-gated, and the census key was inert
-eab23779 2026-08-03 Queue: lane W8-C's two commits, and the three silent inversions the fixtures caught
-ab71f940 2026-08-03 Lane W8-C slice 3: the gate that decides whether a war can end in a conquest, and the famine that comes with the ground
-88642979 2026-08-03 Lane PT2-4: "furs and pelts and game meat" — a list member that is itself a coordination
-acc1c726 2026-08-03 Lane PT2-3: the mirror said it mirrored the spine and had not for a long time
-c3411038 2026-08-03 Lane DG: the dormancy golden was a whole-engine snapshot wearing one flag's name
-d5660a7b 2026-08-03 Lane PT2-2: the splice guard had two refusals and the suite proved only their conjunction
-49e8fd23 2026-08-03 Lane W8-C: the wiring claim that reached one consumer, the leg that was a constant, and the field whose name lied
-4dbef1d1 2026-08-03 Lane PT2-1: the spine's real-generation pins were never seeded, and nothing could tell
-ea0be549 2026-08-03 Ribbon V3: the bar becomes half of a war arrow, and the honey wood takes three foregrounds down with it
-1eafbaec 2026-08-03 Lane PS: the spine said the same seven things about every settlement, ungrammatically
-54465b54 2026-08-03 Lane GR: the golden master re-recorded for the icon sweep, after the five path-templates proved it was shape and nothing else
 ```
