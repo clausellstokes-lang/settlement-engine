@@ -3,8 +3,16 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `b96fae4256daf2d295e294f47655468b2168d208`
-- **Measured:** 2026-08-13 — **re-derived at the H26 post-GTR re-promotion.** The coordinator-owned
+  `98729f7978613a6365af09aca44e01e9cf4c6b37`
+- **Measured:** 2026-08-13 — **H26 landed.** The coordinator-owned H26 pair
+  `d081feee` → `98729f79` landed through one old-value CAS after a clean detached
+  17-step gate. Schema 7 freezes 1,998 reads / 1,412 identities / 387 files with
+  44 reads banked in 31 tagged rows, an exact four-entry scanner transition, 1,413
+  reviewed decisions, 183/183 focused tests, and unchanged lighting census
+  `2409/365/2044/19960/5635`. H26 is terminal; its observed-shape and census
+  reservations are free. No product, golden, flag, tuning, dependency, ceiling or
+  unrelated baseline moved.
+- **Historical measurement:** 2026-08-13 — **re-derived at the H26 post-GTR re-promotion.** The coordinator-owned
   code/genesis pair `5f7e7051` → `cd404948` landed through one old-value CAS after a
   clean detached 17-step gate. The source phase passed 27,956 tests with the same 16
   attributed failures and a one-row non-run ceiling; the post-build phase passed 403/403
@@ -119,23 +127,22 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | SUP-I2 | [`IA-2`](./packets/infrastructure/IA-2.md) | **SUPERSEDED** | Re-statused by CR-AR-1, 2026-08-12: it drifted at `f1895e60` eleven commits behind, its CREATE row names machinery that already exists in the tree, and its former non-terminal state still reserved TWELVE paths — a collision proved by simulation against the machinery packet's seven. Its live content folds into the IA-3 docket when that is chartered. Sealed one packet dispatch, proved diff scope, checkpointed resumable evidence | test sharding, affected-test inference, auto worktree/commit/merge/cleanup, product code |
 | LANDED-M1 | [`MX-1`](./packets/infrastructure/MX-1.md) | **LANDED** at `3c61f42f`; do not redispatch | Machinery: retirement becomes machine-visible. An optional `retiredSymbols` array whose absence assertion binds at the one status where absence is assertable, mirroring the existing `CREATE` arm's nine-line rationale exactly, plus the cross-list disjointness arm that mechanizes CR-IN1B-9's hand cure — the manifest gains a way to say *"this packet retired X"* instead of being unable to tell that from *"this packet forgot X"*. ⭐ **Strictly additive**: zero existing manifest rows invalidated, no schema bump, and the arm the fix is bolted beside keeps its status-blindness intact — the validator gains an arm and loses none. ⛔ **The blocking collision is discharged.** The design lane measured `IA-2` holding seven of the needed paths at `d7b7d225`; CR-AR-1 re-statused it terminal, and MX-1's five paths re-simulated against the live manifest give **ZERO** duplicate-change-path errors. ⭐ **The design lane's two-site capsule instruction was measured wrong and is corrected in the packet**: the authority-projection pair and the derived-versus-hand-built `filePaths` pair are TWO coupling chains, so CR-AR-4's substrate widening is a **FOUR-site edit or every dispatch throws** `capsule omitted declared substrate`. ⭐ **It adds ZERO test titles, suite titles and test files** — every row goes inside an existing `it()` — so no figure of the estate-wide lighting census can move, and **this packet deliberately does NOT take the census row**; it stays free for the next promotion that genuinely needs it. ⚠ It carries CR-AR-9's hot-file section into `PACKET_STANDARD.md` with all three figures re-executed at this base (`OutputContainer.jsx` 599 of 600, `peaceTerms.js` 797 of 800, `informationStatecraft.js` 780 of 800), plus that file's stale header restamp. ⚠ **The packet edits its own validator**, so the implementer captures the tool's exit both before and after the edit; one figure where two are owed is a STOP. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | a status-aware skip exempting terminal packets from the symbol check (refused on the measured 174-of-174), any lint that parses a packet's free prose, `PACKET_MANIFEST_SCHEMA_VERSION`, retro-declaring retirements on packets already in history, editing any terminal packet's manifest row including IN-1B's cured `requiredSymbols[10]`, `scripts/implementation-gate.mjs`, `tests/scripts/implementationGate.test.js`, `INDEX.md` and `PACKET_MANIFEST.json` (coordinator acts), `tests/lint/sovereigntyLightingContract.walker.test.js`, `package.json` / `package-lock.json` (governed paths, and a dependency bump is a mint trigger), every observed-shape file, every other section of `PACKET_STANDARD.md`, all of the prose batch's items (a)–(f), every baseline and every ceiling raise |
 | LANDED-GTR1 | [`GTR-1`](./packets/infrastructure/GTR-1.md) | **LANDED** at `cd404948`; code half `5f7e7051`; do not redispatch | Assigns source tests and post-build artifact tests to disjoint, exhaustive phases; the clean 17-step gate proves the source census and strict 403/403 dist phase | any product source, dependency, new test title/file, raw-test filtering, duplicate CI build, skip-ceiling raise, product golden, tuning, flag, timeout, budget, census or non-test baseline |
-| READY-H26 | [`H26`](./packets/infrastructure/H26.md) | **READY**; revalidated at `b96fae42`; fresh seal and pair required | Schema 7 BANK-BY-RULE remains accepted: 44 reads / 31 rows / 31 files and target 1,998 / 1,412 / 387. The strict 6→7 review must bind exactly GTR's `package.json` plus H26's three scanner-script changes, prove the other seven entries and unscanned inputs unchanged, and carry a separately reviewed transition decision with zero extra inventory motion. Old seals and detached objects are evidence only. H26 remains the sole census holder. | AO-0 and every scalar/corpus producer seam; SCW-1b and item (a); any `src/**` edit; a fifth declaration; scan/corpus/sentinel movement; any other scanner drift; hand-edited JSON; untagged raises; every golden, tuning value, budget, timeout, floor and unrelated baseline |
+| LANDED-H26 | [`H26`](./packets/infrastructure/H26.md) | **LANDED** at `98729f79`; code half `d081feee`; do not redispatch | Schema 7 BANK-BY-RULE: 44 reads / 31 tagged rows, target 1,998 / 1,412 / 387, exact reviewed four-entry scanner transition and clean 17-step gate. Reservations are free for post-H26 re-derivation. | AO-0 and every scalar/corpus producer seam; SCW-1b and item (a); any `src/**` edit; a fifth declaration; scan/corpus/sentinel movement; any other scanner drift; hand-edited JSON; untagged raises; every golden, tuning value, budget, timeout, floor and unrelated baseline |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-12 at the H26 PROMOTION: H26 holds the row
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the H26 LANDING: the row is free
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
-one change path, so exactly one packet may hold the reservation.
+one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: H26, and H26 alone.** The live manifest has 26 rows and exactly one
-non-terminal census holder: H26. H26's eight-file code half adds executed guard
-titles and names the census walker; no other non-terminal row exists. The pre-wave five-tuple
-is `2409/365/2044/19960/5635`; the implementation re-derives the successor whole rather than
-forward-adding titles. Landing releases the row.
+⭐ **CURRENT HOLDER: NONE.** The live manifest has 26 rows and zero READY packets. H26
+landed at `98729f79`; its code half re-derived the five-tuple whole and confirmed it
+unchanged at `2409/365/2044/19960/5635`. A terminal packet reserves nothing, so the
+census row is free until the next just-in-time promotion claims it.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

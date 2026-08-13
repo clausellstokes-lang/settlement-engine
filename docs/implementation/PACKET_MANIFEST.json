@@ -41,7 +41,7 @@
     },
     {
       "id": "H26",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/H26.md",
       "verifiedBase": "b96fae4256daf2d295e294f47655468b2168d208",
       "changeManifest": [
