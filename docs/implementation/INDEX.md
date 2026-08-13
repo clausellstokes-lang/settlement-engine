@@ -2,12 +2,12 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at
-  AO-6 promotion `0ff79e6b6c75d77a2396703c07f982615d9f31f9`; its executable
-  pre-implementation base remains terminal AO-5
-  `ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec`.
-- **Measured:** 2026-08-13 — **AO-6 version 2 compiled after an immutable proof STOP.**
-  The live manifest has 31 rows and exactly one dispatchable packet. The first immutable
+- **Measured branch/SHA:** `claude/composite-r4` at AO-6 implementation
+  `0facf170320e12ccfc7fc4cf2fa8bc60605621dd`; promotion was
+  `0ff79e6b6c75d77a2396703c07f982615d9f31f9` and the governed version-2 amendment was
+  `eff62d6b2c698ff33089d9dfd296b87ec2d4c455`.
+- **Measured:** 2026-08-13 — **AO-6 landed after an immutable proof STOP and governed
+  amendment.** The live manifest has 31 rows and zero dispatchable packets. The first immutable
   implementation candidate `b02bc709c81d3d7c3b30d13aa9126a5cbac04b27` remains unlanded:
   its whole sweep exited 4 at `77 CAUGHT / 1 CLEAR / 4 gaps`, with log SHA-256
   `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`.
@@ -23,9 +23,11 @@
   and restored, and
   commits exactly four governance paths. The headline walker's one-line setup correction lets
   its deleted-row plant reach A6 itself while existing A3/A4 retain strict closure.
-  The required post-state is `71/272/198`, 81 exact claims/labels, 70 in-place calls,
+  The landed post-state is `71/272/198`, 81 exact claims/labels, 70 in-place calls,
   56 guarded target files and 56 unique `MUTATED_FILES` rows,
-  `81 CAUGHT / 1 CLEAR / 0 gaps`. It changes no test title,
+  `81 CAUGHT / 1 CLEAR / 0 gaps`. The exact four-path implementation is +137/-26 and passed
+  98/98 focused tests, both typechecks at 173/173 and 1,134/1,134, OSR at 1,998, and the bare
+  full gate at exit 0 with 50 strict-dist files and 403/403 tests. It changes no test title,
   takes no census reservation, and leaves the whole tuple at
   `2412/365/2047/19984/5638`.
 - **Historical measurement:** 2026-08-13 — **AO-5 landed.** The exact eight-path implementation
@@ -225,22 +227,22 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-AO23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **LANDED** at `f0c272e8`; contract `c825af92`, cure `d4f213d0`; do not redispatch | Contract-before-cure without exposing a red branch tip: 272 introductions / 53 homes froze 48 distinct / 53 occurrence debt across seven applied-summary addresses, C1 proved the final-zero red, C2 cured only those addresses and proved exactly seven vanished identities, and C3 banked them to zero. The exact 7-path → 1-path → 1-path train passed 97/97 and only its green final child reached the shared ref. The census row is free. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
 | LANDED-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **LANDED** at `09e39ee6`; do not redispatch | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The exact fallback closes the registry to 26 = 17 active + 9 exact reasoned inert with zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. The eight-path implementation passed 134/134 and the bare full gate; the census row is free at `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
 | LANDED-AO5 | [`AO-5`](./packets/corpus-coverage/AO-5.md) | **LANDED** at `72b7a87b`; do not redispatch | One read-only contract freezes the exact other-four AO-0 denominator: timeline 4/8/12, pulse history 50/1286/5665, regional typed audit 2/7/201 with structural zero prose, and pure AI Chronicle 7/7/7; 63/1308/5885 overall at the exact 8,280-byte digest. The exact eight-path implementation proves one build/two reconstructions, exact null homes and selector axes, the real timeline and Chronicle seams, the 15-item protected substrate and 23-item union, while preserving every product output. It passed 205/205 focused tests and the bare full gate; the census row is free at `2412/365/2047/19984/5638`. | every `src/**` edit or prose cure; a fifth family; flat flavor events; `campaign.chronicles[]`; generic voice/AI classification; cross-path alias deduplication; `consequenceOutcomes` as a third AO-4 liveness lane; volatile ID/time; generic nested-index contiguity inferred from omitted scalar leaves; second in-walker corpus build; OSR/golden/flag/tuning/dependency/timeout/floor/ceiling/hazard-count/mutation-uncovered movement; ninth path or ninth case; AO-6 mutants |
-| READY-AO6 | [`AO-6`](./packets/corpus-coverage/AO-6.md) | **READY** | Final correctness closure for the corpus-coverage program, amended only after immutable candidate `b02bc709` stopped at true exit 4, `77 CAUGHT / 1 CLEAR / 4 gaps` (log SHA-256 `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`). Three exact source plants upgrade the three live AO rationales, and every nonzero is accepted only when exactly one captured line is a detailed `FAIL ... > <full-title>` attribution for the claiming title and the restored command greens. The only legacy repairs are the exact token-filtered meta-pin, voice and patch-key calls (`seventh`, `en.registry`, `censused`), the voice target's move to `src/copy/en.js`, the patch-key target/`what` path's move to `src/store/aiChronicleAppend.js`, and removal of the modal Perl plant's stray quote. The headline walker's one-line strict-to-analysis setup correction makes the deleted-row plant fail inside A6 while A3/A4 retain ordinary strict closure. One semantic set-order swap must exit zero and report exact `2 files / 16 tests` summaries both planted and restored. The exact four committed paths move the mutation estate from `68/275/198 + meta 10` and 78 labels to `71/272/198 + meta 10` and 81 labels, with 70 in-place calls over 56 guarded targets and 56 unique `MUTATED_FILES` rows. No test title moves, so the census remains free at `2412/365/2047/19984/5638`. | any committed `src/**` edit; any legacy guard/label/plant/command/result/manifest movement outside packet section 3.5; a fourth positive mutant, second negative control, new test/title/suite/baseline, skipped/broad/unnamed red, exit-only CLEAR, dirty override, shared-tree whole sweep, product/corpus/helper/hazard/pre-mortem/census movement, uncovered-baseline movement, fifth committed path, ninth case, GR-4e or later work |
+| LANDED-AO6 | [`AO-6`](./packets/corpus-coverage/AO-6.md) | **LANDED** at `0facf170`; do not redispatch | Final correctness closure for the corpus-coverage program. Immutable candidate `b02bc709` stopped unlanded at true exit 4, `77 CAUGHT / 1 CLEAR / 4 gaps` (log SHA-256 `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`); governed amendment `eff62d6b` authorized only the four measured repairs. The final sealed child (`6bd0e117`, capsule `e7fe66ae`) landed the exact four paths at +137/-26 and closed at `71/272/198 + meta 10`, 81 exact claims/labels, 70 in-place calls, 56 guarded targets and 56 unique `MUTATED_FILES` rows. Its clean disposable sweep passed `81 CAUGHT / 1 CLEAR / 0 gaps` (log SHA-256 `c4e5fb08dc6cfe550db945a69e3c78fa02d172bac0fa6857258504aefcf81249`), focused tests passed 98/98, both typechecks and OSR passed, and the bare full gate passed with strict dist 403/403 (log SHA-256 `53f62e286def95a2f3399a9fcfaa665334afd5d33235403fb54605091f9a6c4d`). No test title moved, so the census is free at `2412/365/2047/19984/5638`. | any committed `src/**` edit; any legacy guard/label/plant/command/result/manifest movement outside packet section 3.5; a fourth positive mutant, second negative control, new test/title/suite/baseline, skipped/broad/unnamed red, exit-only CLEAR, dirty override, shared-tree whole sweep, product/corpus/helper/hazard/pre-mortem/census movement, uncovered-baseline movement, fifth committed path, ninth case, GR-4e or later work |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-6 PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-6 LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: FREE.** AO-6 is READY but title-neutral: it creates no test file and
-changes no literal `it`, `test`, or `describe` title, so no figure of the five-tuple can move
-and taking the reservation would buy nothing. Its two TEST rows alter assertions inside
-existing AO-4/AO-5 cases only. The live manifest has 31 rows and one dispatchable packet;
+⭐ **CURRENT HOLDER: FREE.** AO-6 LANDED title-neutral at `0facf170`: it created no test file
+and changed no literal `it`, `test`, or `describe` title, so no figure of the five-tuple moved.
+Its two TEST rows alter assertions inside existing AO-4/AO-5 cases only. The live manifest has
+31 rows and zero dispatchable packets;
 the whole tuple remains the AO-5 landing receipt `2412/365/2047/19984/5638`.
 
 ⚠ **DATED CORRECTION, 2026-08-13 at the AO-6 promotion.** The paragraph below — AO-5

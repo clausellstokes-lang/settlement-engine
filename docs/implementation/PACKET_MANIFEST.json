@@ -1542,7 +1542,7 @@
     },
     {
       "id": "AO-6",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/corpus-coverage/AO-6.md",
       "verifiedBase": "ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec",
       "changeManifest": [

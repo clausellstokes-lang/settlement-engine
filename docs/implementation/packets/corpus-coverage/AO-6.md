@@ -1,14 +1,16 @@
 # Corpus Coverage / AO-6 — standing source mutants with exact red attribution
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `2`
 - **Verified base:** `claude/composite-r4` at `ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec`
-- **Last revalidated:** 2026-08-13 against clean terminal AO-5 and the immutable stopped
-  AO-6 implementation proof described in section 1.1.
-- **Authority amendment parent:** AO-6 promotion
-  `0ff79e6b6c75d77a2396703c07f982615d9f31f9`. Version 2 must land as its
-  coordinator-owned three-document descendant before AO-6 is re-dispatched; the stopped
-  implementation commit is evidence, not a landing candidate.
+- **Last revalidated:** 2026-08-13 at implementation commit
+  `0facf170320e12ccfc7fc4cf2fa8bc60605621dd`.
+- **Landed:** 2026-08-13 — implementation
+  `0facf170320e12ccfc7fc4cf2fa8bc60605621dd`; do not redispatch.
+- **Authority history:** AO-6 promotion
+  `0ff79e6b6c75d77a2396703c07f982615d9f31f9`, then the governed version-2 amendment
+  `eff62d6b2c698ff33089d9dfd296b87ec2d4c455`. The stopped implementation commit is
+  retained as evidence, not as a landing candidate.
 - **Depends on:** AO-0 schema-8 genesis
   `e71beb84355666fe5508f61c0f9acdc516a97b79`, AO-2+3 zero bank
   `f0c272e894f3f4d4edbd7fd1dac4c65580f87e52`, AO-4 implementation
@@ -522,3 +524,45 @@ unchanged hazard, pre-mortem union/synthetic, corpus baselines/digests and light
 full-gate true exit; generated artifacts `NONE`; product/persisted/golden/flag/tuning/dependency/
 baseline movement `NONE`; deviations and judgment calls `NONE`; and adjacent observations
 without investigation.
+
+## 13. Executed landing receipt — 2026-08-13
+
+- **Authority and immutable landing:** the original READY promotion is
+  `0ff79e6b6c75d77a2396703c07f982615d9f31f9`. Immutable candidate
+  `b02bc709c81d3d7c3b30d13aa9126a5cbac04b27` stopped unlanded at true sweep exit `4`,
+  `77 CAUGHT / 1 CLEAR / 4 gaps`; its log SHA-256 is
+  `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`.
+  The exact measured contradictions were governed in version-2 amendment
+  `eff62d6b2c698ff33089d9dfd296b87ec2d4c455`. Fresh dispatch from that clean parent
+  produced seal
+  `6bd0e1174e62c3a990fd52f26eb7dcffa633501c65a868478ae2b0684e4d93d6` and capsule
+  `e7fe66aeb0ac70017d1832675fca58bb45538032245ed761e8a0502722f072c6`.
+  The direct green child is implementation
+  `0facf170320e12ccfc7fc4cf2fa8bc60605621dd`; one old-value CAS exposed it.
+- **Exact implementation scope:** the four manifest paths and raw line deltas are
+  `scripts/mutation-coverage-manifest.json` **+10/-7**,
+  `scripts/mutation-sweep.sh` **+124/-16**,
+  `tests/lint/newsHeadlineContract.walker.test.js` **+2/-2**, and
+  `tests/lint/proseFamilyContract.walker.test.js` **+1/-1**: **+137/-26** total.
+  Generated artifacts: **NONE**.
+- **Mutation closure:** the estate closes at 541 invariant rows split
+  **71 mutation / 272 rationale / 198 uncovered**, plus ten meta mutations; **81** unique
+  claims and labels; **70** in-place calls; **56** unique guarded targets and **56** unique
+  `MUTATED_FILES` rows; and uncovered baseline **198**. The whole clean disposable-tree sweep
+  exited `0` at **81 CAUGHT / 1 CLEAR / 0 gaps**. Its log SHA-256 is
+  `c4e5fb08dc6cfe550db945a69e3c78fa02d172bac0fa6857258504aefcf81249`.
+  Every target restored byte-identically and the proof tree had no mutation residue.
+- **Focused and static closure:** the six-file focused battery passed **98/98**; each of the
+  `seventh`, `en.registry`, and `censused` token selectors selected and passed exactly one
+  clean title. Typecheck ratchet passed **173/173**, strict domain typecheck passed
+  **1,134/1,134**, and observed-shape validation remained green at **1,998** reads.
+- **Full landing gate:** bare `npm run check:tail` exited `0`; strict dist discovered
+  **50 files** and passed **403/403** tests. The full-gate log SHA-256 is
+  `53f62e286def95a2f3399a9fcfaa665334afd5d33235403fb54605091f9a6c4d`.
+  The implementation commit was clean and carried no sweep residue.
+- **No-motion receipt:** product code/output, persisted shape, test and suite titles, goldens,
+  flags, tuning, dependencies, hazard/pre-mortem substrate, corpus baselines, OSR artifact,
+  unrelated baselines, and the estate-wide lighting census did not move. The whole census
+  remains **2412/365/2047/19984/5638**, and the reservation is free. A1-A8 passed.
+  Deviations: **NONE** beyond the separately governed stopped-proof amendment history.
+  Judgment calls: **NONE**.
