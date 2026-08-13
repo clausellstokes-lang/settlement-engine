@@ -6,11 +6,15 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `7f231662`
-- Commits: 3200
+- HEAD: `481c7e0a`
+- Commits: 3204
 - Working tree at refresh: 0 dirty entries
 
 ```
+481c7e0a 2026-08-13 AO-0: record schema-8 landing
+e71beb84 2026-08-13 AO-0: freeze schema-8 corpus-coverage baseline
+3df85a3a 2026-08-13 AO-0: add opt-in scalar observation corpus
+91f68277 2026-08-13 AO-0: promote schema-8 scalar observation mint
 7f231662 2026-08-13 H26: record schema-7 landing
 98729f79 2026-08-13 H26: freeze schema-7 explained-writer baseline
 d081feee 2026-08-13 H26: bank explained-writer reads by rule
@@ -407,8 +411,4 @@ bf731ea6 2026-08-03 WR-8 slice 4 (R + R2): the third intent, and the tier that i
 6039f993 2026-08-03 Lane W8-D repair: the second red lane W8-C committed past, in the file it was editing
 21bf1041 2026-08-03 Lane RR part 1: the origin rung learns to say forty-five things, and the guard learns to read camelCase
 32e25808 2026-08-03 Lane RT-4: the splice guard's LENGTH cap gets the standing plant it never had
-2c381e0b 2026-08-03 Lane RT-3: the origin-rung gate cites 525 keys, because 523 is the pre-HK-3 figure
-83a627b3 2026-08-03 Lane W8-D repair: the mounted-everywhere guard was red at HEAD, naming the previous lane's own test file
-65cd91fc 2026-08-03 Lane RT-1: the mirror's refusal, imported rather than re-spelled, and a lockstep pin that can no longer assert nothing
-0ab5e03e 2026-08-03 Lane PT2-5: the origin rung is thin, the widening is owner-gated, and the census key was inert
 ```

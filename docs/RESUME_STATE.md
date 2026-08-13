@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 05:00:37 EDT
+**Generated:** 2026-08-13 06:59:38 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `7f231662` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `1ed18d27` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `481c7e0a` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `9747d127` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 38Gi free (81% used)
+**Disk:** 37Gi free (82% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T045931` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260813T065821` — build 0 file(s), ledger 2180 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T045931
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T065821
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,6 +28,10 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
+481c7e0a 2026-08-13 AO-0: record schema-8 landing
+e71beb84 2026-08-13 AO-0: freeze schema-8 corpus-coverage baseline
+3df85a3a 2026-08-13 AO-0: add opt-in scalar observation corpus
+91f68277 2026-08-13 AO-0: promote schema-8 scalar observation mint
 7f231662 2026-08-13 H26: record schema-7 landing
 98729f79 2026-08-13 H26: freeze schema-7 explained-writer baseline
 d081feee 2026-08-13 H26: bank explained-writer reads by rule
@@ -36,20 +40,16 @@ ed7bfb36 2026-08-13 H26: bind exact scanner transition
 b96fae42 2026-08-13 GTR-1: record green atomic landing
 cd404948 2026-08-13 GTR-1 genesis: bind the source-phase test census
 5f7e7051 2026-08-13 GTR-1 code half: split source debt from built-artifact proof
-83f32d76 2026-08-13 GTR-1 promoted READY: the full gate stops depending on stale dist
-357e7778 2026-08-12 H26 keeps its promotion commit in the atomic pair
-7067e8d3 2026-08-12 H26 promoted READY: explained writers stay visible by rule
-9d001545 2026-08-12 Five prose debts stop pointing at names and figures that moved
 ```
 ## Last 6 ledger commits
 
 ```
+9747d127 2026-08-13 Record GTR and H26 atomic landings
 1ed18d27 2026-08-13 Record universal standing authorization and the pre-soak boundary
 c38e9e24 2026-08-12 H26 keeps schema 7; AO-0 moves to schema 8
 31a34aa5 2026-08-12 The five prose debts are closed; AO-0 is next
 adedf32b 2026-08-12 PG-1 lands whole: the claim test stops racing its own clock
 99b5e621 2026-08-12 MX-1 closes whole: the ledger records machine-visible retirement
-354a942a 2026-08-12 MX-1 READY at e46bbd91; the two-site instruction was a four-site coupling
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,70 +63,53 @@ adedf32b 2026-08-12 PG-1 lands whole: the claim test stops racing its own clock
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~05:05 EDT) — GTR-1 and H26 are terminal; build clean at `7f231662`
+# ⭐⭐ CURRENT (2026-08-13 ~07:00 EDT) — AO-0 is terminal; build clean at `481c7e0a`
 
-**GTR-1 IS DONE END-TO-END.** The sealed dispatch at `83f32d76` (verified base
-`357e7778`, seal `65ca85260ee0a21dd9956d03733911248ebe5b586ba95fc2338bafbafbf5c268`)
-produced code half `5f7e7051` and genesis `cd404948`. The code half changes exactly
-four handwritten paths (`package.json`, `scripts/check-test-ratchet.mjs`,
-`tests/build/ciCheckParity.test.js`, `tests/lint/testRatchet.test.js`), +655/-39;
-genesis changes only `scripts/.test-ratchet-baseline.json`, +5/-5. One old-value CAS
-moved the build branch directly from the sealed dispatch to genesis. The terminal flip
-`b96fae42` changes exactly INDEX, manifest, GTR-1 packet and H26 packet.
+**AO-0 IS DONE END-TO-END.** Promotion/seal HEAD `91f68277` (seal
+`4091c19c3b05d52d045a9539f32ffba15f4ef812fda2cbe04911fb55bb600a60`)
+produced code half `3df85a3a` and generated schema-8 genesis `e71beb84`. The code half
+changes exactly ten handwritten observed-shape paths, +877/-112; genesis changes only
+`scripts/.observed-shape-readers-baseline.json`, +45/-44. One old-value CAS moved the
+build ref directly from the sealed promotion to genesis. Terminal flip `481c7e0a`
+changes exactly INDEX, manifest, and the AO-0 packet; the shared index and worktree are
+clean.
 
-GTR's source baseline moved monotonically from 28,258 whole-suite tests / 2,403 files /
-skip ceiling 62 to **27,956 source tests / 2,359 source files / skip ceiling 1**, retaining
-the same 16 attributed failures and zero uncollected or build-owned rows. Its focused
-set passed 79/79; both typecheck ratchets passed 173/173 and 1,134/1,134. Source results
-were identical with `dist/` absent and present. The clean detached genesis ran all 17
-`check:tail` steps with exit 0; strict dist discovered exactly 50 files and passed
-403/403 tests with zero failed, non-running, uncollected, missing, extra, duplicate or
-out-of-scope rows. Product, golden, flag, tuning, dependency and lighting-census delta:
-**NONE**.
+The default corpus and detector remained byte-stable at **1,321 shapes / 8,637 origins /
+14,650 transitions** and **1,998 reads / 1,412 identities / 387 files**. The opt-in
+second consumer observed 26,076 scalar rows across the five ruled shipped seams:
+canon 1; Wizard News 240 final / 1,567 accumulated / 272 unique / 53 homes; pulse
+history 12; regional log 109/109 unique; Chronicle 1. The source-bearing compatibility
+set remains exactly twelve shapes. No scalar row enters `foldCorpus`, the default OSR
+artifact, or the generated baseline.
 
-**H26 IS DONE END-TO-END ON THE CORRECTED PROVENANCE CONTRACT.** The original
-post-GTR re-promotion `3dbb19c9` was amended at `ed7bfb36`: INDEX, manifest and H26
-packet now require the migration to machine-prove the exact four-entry detector move
-(`package.json` plus the three governed H26 scanner scripts), unchanged other seven
-detector entries and unchanged unscanned-input digest. That amendment was the fresh
-sealed dispatch (seal `e9965e4526691456aeee4da35957447f713f23272dd8ffc0cebd8306151e25a7`).
+Schema 7→8 reconciled exactly **1,412 same / 0 new / 0 increased / 0 decreased / 0
+gone**. All 1,413 inventory-plus-transition decisions were accepted and noted; 31
+explained-writer tags continue to bank 44 reads. Artifact/report/review/bundle digests
+are `51de033c575251b034b47e00f2457020c8079b6bec608e9f91953d41fadb40cb`,
+`53da69540b68d3985dd0ab8982472958526832520bf4ff4091c4bea099221629`,
+`78f475448981d455e066fbc017a1942029375e97235e554a9885d243baa3fada`, and
+`fc5acbb55c80d393e3c1e32dc182bde89c5286b50d082dc34085493dc4eae9bf`.
 
-H26 code half `d081feee` changes exactly its eight handwritten paths, +1,099/-166;
-schema-7 genesis `98729f79` changes only
-`scripts/.observed-shape-readers-baseline.json`, +651/-228. One old-value CAS moved the
-branch directly from `ed7bfb36` to genesis. The terminal flip `7f231662` changes exactly
-INDEX, manifest and H26 packet. Schema 7 freezes **1,998 reads / 1,412 identities / 387
-files**. Exactly 31 tagged rows bank 44 reads (factions 2/2; neighbourNetwork 36/24;
-stresses 4/3; worldPulse 2/2). Migration reconciliation is **1,381 same / 31 new / 0
-increased / 0 decreased / 0 gone**, with 1,413 accepted decisions: 1,412 inventory rows
-plus the separately reviewed scanner transition.
+The code half passed 182/183 focused cases with only the compiled schema pin red;
+genesis passed 183/183. ESLint and both typecheck ratchets passed (`173/173`,
+`1134/1134`); plain OSR matched 1,998 exactly. Bare `npm run check:tail` at committed
+genesis exited 0 through all 17 steps, including 27,956 source tests / 2,359 files,
+fresh build, and strict 50-file / 403-test dist verification with zero non-runs. The
+lighting census stayed **2409/365/2044/19960/5635**. Product source, goldens, flags,
+tuning, dependencies, ceilings, unrelated baselines, test files, and title cardinality
+did not move. A1–A8 passed; deviations and judgment calls: **NONE**.
 
-H26 report/review/bundle digests are
-`db757c06ba095613e35bbe5373240d17b6f34b8dfb0be960dae878ec181d7079`,
-`62d008827054074adfd2befafbf0848817ac6597fa1f11f493ee0ca7513fd871` and
-`0e62d6d5d9492acfb46799027311852389ed0f94177b7ee4dbbd824ac9056344`;
-scanner-transition digest is
-`c2232f559708a0725b1a977b27f7476ddb83d2d087576659b3c0dc1fad0e618a`.
-Code-half green suites passed 148/148 and its deliberate red set was exactly schema
-6→7 plus 31 new / zero stale rows. Genesis suites passed 183/183; ESLint and both
-typecheck ratchets passed; plain OSR matched 1,998 exactly. The clean detached genesis
-ran all 17 `check:tail` steps with exit 0, including the 27,956-test source phase and
-strict 50-file / 403-test dist phase. Lighting stayed
-**2409/365/2044/19960/5635**; product source, goldens, flags, tuning, dependencies,
-ceilings and unrelated baselines did not move.
+**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at `481c7e0a`;
+`validate:packets` reports **27 packets / 0 READY, exit 0** and the implementation
+machinery suites pass 34/34. GTR-1, H26, and AO-0 are terminal. Their observed-shape
+and census reservations are free; there is no live implementation lane to collect.
+The universal standing authorization remains durable at ledger `1ed18d27`; it does not
+waive technical READY/STOP, evidence, substrate, or ordering law.
 
-**CURRENT MACHINE STATE:** build branch `claude/composite-r4` is clean at `7f231662`;
-`validate:packets` reports **26 packets / 0 READY, exit 0**. H26 is terminal, its
-observed-shape and lighting-census reservations are free, and **there is no live H26
-lane or H26 work to collect**. The universal standing authorization is durable at
-ledger `1ed18d27`; technical READY/STOP, evidence, substrate and ordering laws still
-bind.
-
-**NEXT:** re-derive AO-0 from the current clean schema-7 substrate (the substantive
-genesis is `98729f79`, terminal documentation head `7f231662`) and compile a fresh
-schema-8 packet. Do not reuse the stale schema-7 AO docket. After AO-0: AO-2 → AO-3 →
-AO-4 → AO-5 → AO-6 → GR-4e → CR-NEXT-1's wider corpus. AO-3 remains the declared
-same-seed news-prose shift. No diagnostic soak has started.
+**NEXT:** re-derive and compile AO-2 just in time from `481c7e0a`, then AO-3 → AO-4 →
+AO-5 → AO-6 → GR-4e → CR-NEXT-1's wider dark corpus. AO-3 is the already-authorized
+same-seed Wizard News prose shift. No diagnostic-soak worktree exists and D-1/L0 has
+not started; the requested terminal remains immediately before that first soak.
 
 # (superseded ~23:40) — IN-1b LANDED + FLIPPED; GR-4c and the charter draft
 
