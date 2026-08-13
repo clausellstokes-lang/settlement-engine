@@ -3,8 +3,33 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `0b98626fae7cda5cce55659865d58250f976ce7b`
-- **Measured:** 2026-08-12 — **re-derived at the GR-4c promotion (CR-GR4C-6).** The previous
+  `41732a516c72364e9b01be8959d98df1fdd68fb9`
+- **Measured:** 2026-08-12 — **re-derived at the MX-1 promotion.** The previous header carried
+  `0b98626f` from the GR-4c promotion and was stale by event: GR-4c LANDED at `cd2ab894`, and IA-2
+  was re-statused at `c73c17ef`. MX-1 is pinned at `41732a51`.
+  ⚠⚠ **AND THIS PROMOTION IS THE FIRST TO RECORD A MID-PROMOTION BASE MOVE — A FOREIGN ONE.** MX-1
+  was compiled and measured at `c73c17ef`. A concurrent lane landed `41732a51` (`AO-1`, one file:
+  `tests/lint/wizardNewsAuthoring.walker.test.js`) while this promotion was in flight. The packet
+  was **re-pinned to `41732a51` and every load-bearing figure re-executed there**, rather than
+  landing a base the implementer would not find: ancestry proved (`merge-base --is-ancestor`), the
+  substrate diff `c73c17ef..41732a51` over all six of MX-1's declared paths proved **EMPTY**, the
+  defect shape re-confirmed, the five effective-line figures re-measured **identical**, and the
+  lighting census re-read **unmoved at `2409/365/2044/19960/5635`** because the foreign commit added
+  no test title. **A base move is not a reason to re-stamp a number; it is a reason to re-execute
+  it.**
+  ⭐⭐ **AND ONE PROMOTION-TIME MEASUREMENT CORRECTED THE DESIGN LANE'S EDIT SHAPE.** MX-1's design
+  instructed that the coding capsule's retirement field ride **two** sites — `capsuleAuthority` and
+  `manifestAuthority` — *"in one edit, or neither"*. Executed at promotion, that is one of **two**
+  coupling chains: `capsuleAuthority.filePaths` is **derived** from the capsule's own `fileHashes`
+  while `manifestAuthority.filePaths` is **hand-built** from the packet, the two are compared
+  byte-for-byte, and `assertAncestorAndSubstrate` then asserts that every declared substrate path
+  is present in `fileHashes`. The widening is a **FOUR-site edit**, and the two-site instruction
+  would have shipped a dispatch that throws `capsule omitted declared substrate`. **A mirror pair
+  is not one site, and an instruction is not a trace.**
+  ⭐⭐ **A PROMOTION MEASURED A PREDICTION FALSE AND THE RULE GOT SHARPER.** The census-holder
+  section predicted that *the next promotion claims the row*. MX-1 is the first promotion that
+  cannot move a census figure at all, so it takes no reservation — see the restated rule below.
+  ⭐⭐ **AND THE PRIOR PROMOTION'S LESSON STILL STANDS (CR-GR4C-6 / CR-IN1B-7).** The previous
   header carried `b17d32d2` from the IN-1b promotion and was stale by event: IN-1b LANDED at
   `af3d93c8` and the tree has since moved to `0b98626f`. GR-4c was compiled at `0b98626f` and
   is pinned there — **no mid-promotion base move**, proved by an executed `git rev-parse` and
@@ -73,6 +98,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 |---:|---|---|---|---|
 | LANDED-I1 | [`IA-1`](./packets/infrastructure/IA-1.md) | **LANDED** at `d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b`; do not redispatch | Automates packet enforcement and feedback topology without changing simulation behavior | event bus, pulse reorder, persistence, automatic worktree deletion, product-scope changes |
 | SUP-I2 | [`IA-2`](./packets/infrastructure/IA-2.md) | **SUPERSEDED** | Re-statused by CR-AR-1, 2026-08-12: it drifted at `f1895e60` eleven commits behind, its CREATE row names machinery that already exists in the tree, and its former non-terminal state still reserved TWELVE paths — a collision proved by simulation against the machinery packet's seven. Its live content folds into the IA-3 docket when that is chartered. Sealed one packet dispatch, proved diff scope, checkpointed resumable evidence | test sharding, affected-test inference, auto worktree/commit/merge/cleanup, product code |
+| NEXT-M1 | [`MX-1`](./packets/infrastructure/MX-1.md) | **READY** | Machinery: retirement becomes machine-visible. An optional `retiredSymbols` array whose absence assertion binds at the one status where absence is assertable, mirroring the existing `CREATE` arm's nine-line rationale exactly, plus the cross-list disjointness arm that mechanizes CR-IN1B-9's hand cure — the manifest gains a way to say *"this packet retired X"* instead of being unable to tell that from *"this packet forgot X"*. ⭐ **Strictly additive**: zero existing manifest rows invalidated, no schema bump, and the arm the fix is bolted beside keeps its status-blindness intact — the validator gains an arm and loses none. ⛔ **The blocking collision is discharged.** The design lane measured `IA-2` holding seven of the needed paths at `d7b7d225`; CR-AR-1 re-statused it terminal, and MX-1's five paths re-simulated against the live manifest give **ZERO** duplicate-change-path errors. ⭐ **The design lane's two-site capsule instruction was measured wrong and is corrected in the packet**: the authority-projection pair and the derived-versus-hand-built `filePaths` pair are TWO coupling chains, so CR-AR-4's substrate widening is a **FOUR-site edit or every dispatch throws** `capsule omitted declared substrate`. ⭐ **It adds ZERO test titles, suite titles and test files** — every row goes inside an existing `it()` — so no figure of the estate-wide lighting census can move, and **this packet deliberately does NOT take the census row**; it stays free for the next promotion that genuinely needs it. ⚠ It carries CR-AR-9's hot-file section into `PACKET_STANDARD.md` with all three figures re-executed at this base (`OutputContainer.jsx` 599 of 600, `peaceTerms.js` 797 of 800, `informationStatecraft.js` 780 of 800), plus that file's stale header restamp. ⚠ **The packet edits its own validator**, so the implementer captures the tool's exit both before and after the edit; one figure where two are owed is a STOP. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | a status-aware skip exempting terminal packets from the symbol check (refused on the measured 174-of-174), any lint that parses a packet's free prose, `PACKET_MANIFEST_SCHEMA_VERSION`, retro-declaring retirements on packets already in history, editing any terminal packet's manifest row including IN-1B's cured `requiredSymbols[10]`, `scripts/implementation-gate.mjs`, `tests/scripts/implementationGate.test.js`, `INDEX.md` and `PACKET_MANIFEST.json` (coordinator acts), `tests/lint/sovereigntyLightingContract.walker.test.js`, `package.json` / `package-lock.json` (governed paths, and a dependency bump is a mint trigger), every observed-shape file, every other section of `PACKET_STANDARD.md`, all of the prose batch's items (a)–(f), every baseline and every ceiling raise |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
@@ -102,6 +128,17 @@ That was the **fourth** restamp in one day, same recurring reason.
 fence's two titles) and a terminal packet reserves nothing. **The row is FREE**, and with IA-2
 re-statused SUPERSEDED in this same change there are now ZERO non-terminal packets — the next
 promotion claims the row at its dispatch.
+
+⭐⭐ **DATED CORRECTION, 2026-08-12 at the MX-1 PROMOTION — THE CLAUSE ABOVE PREDICTED WRONG, AND
+THE RULE IS BETTER FOR IT.** *"The next promotion claims the row at its dispatch"* assumed every
+promotion needs the row. **`MX-1` is a promotion that does not**, and it is the first: it adds zero
+test titles, zero suite titles and zero test files, so no figure of the five-tuple can move, and
+taking the reservation would deny it to a packet that genuinely needs it while buying nothing.
+**The row is STILL FREE at `41732a51` with MX-1 in flight.** ⇒ **The rule is restated in its
+correct form: the holder is whichever non-terminal packet can actually MOVE a census figure, and a
+packet that cannot move one must not claim the row.** Landing still releases it; a promotion no
+longer automatically claims it. ⛔ The prohibition below is unchanged and now binds MX-1's
+implementer by name: a packet that does not carry the row must not re-record the census anyway.
 
 ⭐ **RULED (chair, 2026-08-12) — THE FIFTH RESTAMP, AND THE RULE IS WORKING EXACTLY AS WRITTEN.
 `GR-4c` holds `tests/lint/sovereigntyLightingContract.walker.test.js` as its `TEST` row and is

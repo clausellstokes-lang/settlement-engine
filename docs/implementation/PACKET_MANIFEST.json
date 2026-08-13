@@ -1115,6 +1115,60 @@
           "tests/domain/guidanceRegistry.walker.test.js"],
         ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/domain/worldPulse/treatyBreach.js", "src/domain/worldPulse/informationStatecraft.js"]
       ]
+    },
+    {
+      "id": "MX-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/MX-1.md",
+      "verifiedBase": "41732a516c72364e9b01be8959d98df1fdd68fb9",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/implementation-packets.mjs" },
+        { "action": "MODIFY", "path": "scripts/implementation-session.mjs" },
+        { "action": "TEST", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "TEST", "path": "tests/scripts/implementationSession.test.js" },
+        { "action": "DOC", "path": "docs/implementation/PACKET_STANDARD.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/implementation-packets.mjs", "symbol": "validatePacketManifest" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "buildCodingCapsule" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "packetPathProblem" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "TERMINAL_PACKET_STATUSES" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "PACKET_MANIFEST_SCHEMA_VERSION" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "assertAncestorAndSubstrate" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "capsuleAuthority" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "manifestAuthority" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "assertCapsuleMatchesManifest" },
+        { "path": "tests/scripts/implementationPackets.test.js", "symbol": "accepts the canonical fixture and exposes pure header/index/path helpers" },
+        { "path": "tests/scripts/implementationPackets.test.js", "symbol": "rejects a required symbol absent from an existing source file" },
+        { "path": "tests/scripts/implementationSession.test.js", "symbol": "accepts an unchanged descendant but rejects descendant substrate changes" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Change manifest" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main reachable behavior: a LANDED packet declaring a retiredSymbols row whose symbol still survives in its named file reds with symbol survives in for LANDED retirement, while the same row with the symbol absent returns ok and errors empty, and so does the same row whose file is entirely missing because a retirement may delete the whole file" },
+        { "id": "A2", "case": "absent behavior, the backward-compatibility proof: the canonical fixture with no retiredSymbols key at all still returns ok and errors empty at every status it is already exercised at, which is the row proving every existing manifest entry stays valid under an additive optional field" },
+        { "id": "A3", "case": "counterforce, the non-terminal arm inverts the assertion: at a non-terminal status a retiree already absent reds with already absent from before the status, a missing file reds with path does not exist, and a retiree still present is ok because a pre-landing packet is written against a symbol that must still be there" },
+        { "id": "A4", "case": "the SUPERSEDED control proving the arm cannot quietly widen: at SUPERSEDED the retirement is asserted in neither direction, with symbol present, symbol absent and file missing all returning ok, exactly as the landed CREATE arm's own control does and for the same recorded reason" },
+        { "id": "A5", "case": "malformed but supported, and duplicates: retiredSymbols as a non-array reds with must be an array when present, a non-object row reds, a glob or absolute path reds through packetPathProblem, a blank or non-string symbol reds, and the same path and symbol twice reds with duplicate retired symbol, each reported once and none of them throwing" },
+        { "id": "A6", "case": "the disjointness arm mechanizing the chair cure: one path and symbol named in both requiredSymbols and retiredSymbols reds with names as BOTH required and retired at every status, and that row is not then also status-asserted, which is the compile error fixed by hand at the prior landing" },
+        { "id": "A7", "case": "the mandatory mutant control proving the status-awareness is real: with the LANDED guard deleted from the new block the non-terminal arm's expected result flips, so the guard is shown to be load-bearing rather than an arm no test can distinguish from its own absence" },
+        { "id": "A8", "case": "writer to reader integration and lifecycle round trip through a real dispatch: the capsule carries retiredSymbols always present and empty when there are none, the recomputed capsule digest stays self-consistent, the capsule and manifest authority projections still compare equal, the retirement path appears in fileHashes, and a descendant that moved a retirement target is refused while an unchanged descendant is still admitted" }
+      ],
+      "checks": [
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npx", "vitest", "run",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationSession.test.js",
+          "tests/scripts/implementationGate.test.js"],
+        ["npx", "vitest", "run",
+          "tests/docs/enforcement-claims.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/testRatchet.test.js"],
+        ["npx", "eslint",
+          "scripts/implementation-packets.mjs",
+          "scripts/implementation-session.mjs",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationSession.test.js"]
+      ]
     }
   ]
 }
