@@ -199,6 +199,10 @@
    "label": "epistemic/unanchored negative assertion planted",
    "what": "Standing planted test file carries one bare not.toContain assertion in a scanned tree; the exact zero-default ceiling must reject it, then the attribution rerun must green after the helper removes the probe."
   },
+  "tests/lint/newsVoiceContract.walker.test.js": {
+   "kind": "rationale",
+   "rationale": "AO-2+3's eight ordinary cases execute the four baseline movement polarities, malformed and empty corpus refusal, duplicate-preserving snapshot reconstruction, and the ordered pre-cure/cure/bank completion result. These controls run through the same pure comparator and reconstruction helper on every gate; one standing sweep mutation would sample a strict subset while AO-6 owns the dedicated source-mutant battery."
+  },
   "tests/lint/seatVocabularyUnification.walker.test.js": {
    "kind": "rationale",
    "ref": "es-0-seat-vocabulary-controls-executed-2026-08-05"

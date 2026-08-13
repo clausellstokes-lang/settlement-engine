@@ -575,6 +575,30 @@
         "any decomposition or leaf-extraction wave, which creates un-baselined modules by construction"
       ],
       "upgradePath": "Already MACHINERY and already in the gate chain, so the residual risk is human rather than mechanical: the reflex on a red is to ADD the new file to the baseline, which converts a caught defect into banked debt. scripts/premortem.mjs names this class the moment a new source file appears in a changeset, so the author meets the rule BEFORE the gate does."
+    },
+    {
+      "id": "HZ-CROSSHOME",
+      "title": "One prose value is projected unchanged across homes whose voice contracts differ",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["CR-AO-7/11 — AO-2+3 cross-home Wizard News voice contract"],
+      "enforcer": {
+        "paths": [
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "scripts/lib/news-voice-contract.mjs",
+          "tests/lint/.news-voice-baseline.json"
+        ],
+        "inChain": true,
+        "note": "The executed AO-0 scalar denominator reconstructs each accumulated Wizard News snapshot, classifies the closed applied-summary address set, and compares live debt to an immutable retro denominator plus an explicitly banked current set."
+      },
+      "instances": 53,
+      "instanceEvidence": "EXECUTED AO-0 denominator: 48 distinct prospective summaries across 53 occurrences at seven applied NPC summary addresses. The one newsEntryForOutcome curation seam corrected applied headlines while placing the same prospective summary under queued and applied homes.",
+      "triggers": [
+        "any edit to a router that projects prose into more than one lifecycle home",
+        "any edit to AO-0 scalar home/address fields used by the voice contract",
+        "any edit to the news-voice baseline, helper, producer, or curation seam"
+      ],
+      "upgradePath": "Class closed for the seven AO-2+3 addresses. Preserve the executed denominator and extend coverage only through a separately governed corpus-coverage packet."
     }
   ]
 }

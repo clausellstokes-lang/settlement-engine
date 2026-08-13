@@ -174,6 +174,15 @@ const SITE_COHERENCE_SUBSTRATE = [
 
 const EDGE_SHARED_DIR = 'supabase/functions/_shared';
 
+/** The cross-home voice contract owns this population. Parse its exported path
+ * array so this advisory never grows a second hand-maintained substrate list. */
+function newsVoiceSubstrate(ctx) {
+  const source = ctx.read('scripts/lib/news-voice-contract.mjs') || '';
+  const block = source.match(/export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object\.freeze\(\[([\s\S]*?)\]\);/);
+  if (!block) return [];
+  return [...block[1].matchAll(/'([^']+)'/g)].map((match) => match[1]);
+}
+
 /** Every bundle meta under the edge _shared dir — GLOBBED, never listed. */
 function bundleMetas(ctx) {
   return ctx.list(EDGE_SHARED_DIR)
@@ -1063,6 +1072,36 @@ export const PREDICATES = [
       return out;
     },
     synthetic: null,
+  },
+  {
+    id: 'cross-home-voice-substrate-touched',
+    classIds: ['HZ-CROSSHOME'],
+    derivation: 'derived',
+    sources: ['scripts/lib/news-voice-contract.mjs'],
+    what: 'a producer, router, scalar corpus, curation seam, or frozen denominator feeding the cross-home Wizard News voice contract changed',
+    population: (ctx) => ({
+      label: 'cross-home Wizard News voice substrate',
+      items: newsVoiceSubstrate(ctx),
+    }),
+    run(ctx, cs) {
+      const substrate = new Set(newsVoiceSubstrate(ctx));
+      const out = [];
+      for (const change of cs.changes) {
+        for (const path of touched(change)) {
+          if (!substrate.has(path)) continue;
+          out.push({
+            severity: 'warn',
+            message: `${path} feeds the cross-home Wizard News voice contract. Re-run the AO-0 scalar reconstruction and compare the seven applied-summary debt identities before banking any movement.`,
+            evidence: ['tests/lint/newsVoiceContract.walker.test.js', 'tests/lint/.news-voice-baseline.json'],
+          });
+        }
+      }
+      return out;
+    },
+    synthetic: (ctx) => {
+      const path = newsVoiceSubstrate(ctx)[0];
+      return path ? { changes: [{ status: 'M', path, oldPath: null }] } : null;
+    },
   },
 ];
 

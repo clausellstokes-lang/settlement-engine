@@ -4020,7 +4020,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // All six acceptance surfaces amend EXISTING registered cases in six existing test
     // files; this file itself gains only this comment. The estate tuple therefore remains
     // 2409/365/2044/19960/5635, re-derived whole rather than inferred from unchanged names.
-    files: 2409, parked: 365, credited: 2044, titles: 19960, suiteTitles: 5635,
+    // ⏱ AO-2+3, 2026-08-13 — RE-DERIVED WHOLE after the cross-home Wizard News voice
+    // contract. Its one new credited file contributes exactly eight literal `it` titles
+    // and one literal `describe` title; no existing test file changes registration shape.
+    // 2409/365/2044/19960/5635 → 2410/365/2045/19968/5636.
+    files: 2410, parked: 365, credited: 2045, titles: 19968, suiteTitles: 5636,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
