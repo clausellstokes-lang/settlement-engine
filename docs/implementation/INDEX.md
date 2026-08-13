@@ -3,8 +3,17 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `972066affb82b002f197de7ce40ba3441dcd3220`
-- **Measured:** 2026-08-13 — **AO-5 promoted just in time.** The live manifest has
+  `72b7a87b0375d759a9e72344664c3f4b6440a35f`
+- **Measured:** 2026-08-13 — **AO-5 landed.** The exact eight-path implementation
+  `72b7a87b` passed its focused proof at 205/205 and the bare full gate at exit 0;
+  strict dist passed 403/403 tests across 50 files and the build closed at 314 routes.
+  One AO-0 scalar build and two byte-identical pure reconstructions froze the other four
+  prose families at timeline `4/8/12`, pulse history `50/1286/5665`, regional log
+  `2/7/201`, and pure AI Chronicle `7/7/7`, totaling `63/1308/5885` at the exact
+  8,280-byte digest. The lighting census re-derived whole at
+  `2412/365/2047/19984/5638`. The live manifest has 30 rows and zero dispatchable
+  packets. AO-5 is terminal and the census reservation is free.
+- **Historical measurement:** 2026-08-13 — **AO-5 promoted just in time.** The live manifest has
   30 rows and exactly one dispatchable packet. AO-0's executed scalar stream closes
   the four remaining families at timeline `4/8/12`, pulse history
   `50/1286/5665`, regional log `2/7/201`, and pure AI Chronicle `7/7/7`, for an
@@ -191,25 +200,23 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-AO0 | [`AO-0`](./packets/corpus-coverage/AO-0.md) | **LANDED** at `e71beb84`; code half `3df85a3a`; do not redispatch | Schema 8 adds a second-consumer-only typed scalar projection over five authoritative shipped seams while preserving `foldCorpus`, default topology, OSR artifact, and inventory byte-for-byte. The strict 7→8 proof binds an exact four-entry scanner transition and 1,412 same rows with zero motion. | AO-2..6, prose cures, HZ-CROSSHOME, every `src/**` edit, flat flavor events, `campaign.chronicles[]`, volatile ID/time fields, scalar data in the default artifact, dependency, golden, flag, tuning, timeout, floor, ceiling or unrelated baseline movement |
 | LANDED-AO23 | [`AO-2+3`](./packets/corpus-coverage/AO-2-3.md) | **LANDED** at `f0c272e8`; contract `c825af92`, cure `d4f213d0`; do not redispatch | Contract-before-cure without exposing a red branch tip: 272 introductions / 53 homes froze 48 distinct / 53 occurrence debt across seven applied-summary addresses, C1 proved the final-zero red, C2 cured only those addresses and proved exactly seven vanished identities, and C3 banked them to zero. The exact 7-path → 1-path → 1-path train passed 97/97 and only its green final child reached the shared ref. The census row is free. | `reasons`, generic or unowned summary rewriting, headlines, `npcAgency.js`, persisted shape, AO-4 totality/inert quarantine, AO-5's other four families, AO-6's standing mutants, every golden, flag, tuning value, dependency, ceiling, observed-shape artifact and ninth implementation path |
 | LANDED-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **LANDED** at `09e39ee6`; do not redispatch | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The exact fallback closes the registry to 26 = 17 active + 9 exact reasoned inert with zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. The eight-path implementation passed 134/134 and the bare full gate; the census row is free at `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
-| AO5 | [`AO-5`](./packets/corpus-coverage/AO-5.md) | **READY** | One read-only contract freezes the exact other-four AO-0 denominator: timeline 4/8/12, pulse history 50/1286/5665, regional typed audit 2/7/201 with structural zero prose, and pure AI Chronicle 7/7/7; 63/1308/5885 overall at the exact 8,280-byte digest. It derives a protected-substrate union without making the News helper own these families and amends AO-4's existing A7 population and census compatibility assertions to the same union and re-derived tuple, with no title or product movement. | every `src/**` edit or prose cure; a fifth family; flat flavor events; `campaign.chronicles[]`; generic voice/AI classification; cross-path alias deduplication; `consequenceOutcomes` as a third AO-4 liveness lane; volatile ID/time; generic nested-index contiguity inferred from omitted scalar leaves; second in-walker corpus build; OSR/golden/flag/tuning/dependency/timeout/floor/ceiling/hazard-count/mutation-uncovered movement; ninth path or ninth case; AO-6 mutants |
+| LANDED-AO5 | [`AO-5`](./packets/corpus-coverage/AO-5.md) | **LANDED** at `72b7a87b`; do not redispatch | One read-only contract freezes the exact other-four AO-0 denominator: timeline 4/8/12, pulse history 50/1286/5665, regional typed audit 2/7/201 with structural zero prose, and pure AI Chronicle 7/7/7; 63/1308/5885 overall at the exact 8,280-byte digest. The exact eight-path implementation proves one build/two reconstructions, exact null homes and selector axes, the real timeline and Chronicle seams, the 15-item protected substrate and 23-item union, while preserving every product output. It passed 205/205 focused tests and the bare full gate; the census row is free at `2412/365/2047/19984/5638`. | every `src/**` edit or prose cure; a fifth family; flat flavor events; `campaign.chronicles[]`; generic voice/AI classification; cross-path alias deduplication; `consequenceOutcomes` as a third AO-4 liveness lane; volatile ID/time; generic nested-index contiguity inferred from omitted scalar leaves; second in-walker corpus build; OSR/golden/flag/tuning/dependency/timeout/floor/ceiling/hazard-count/mutation-uncovered movement; ninth path or ninth case; AO-6 mutants |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-5 PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the AO-5 LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: AO-5.** AO-4 is terminal at `972066af`, and AO-5 is the sole
-non-terminal packet naming the census walker. Its one new credited test file carries
-exactly eight literal `it` titles and one literal `describe` title; no existing title
-changes. The anticipated whole movement is therefore
-`2411/365/2046/19976/5637 -> 2412/365/2047/19984/5638`, but the implementer must
-re-derive all five figures and STOP rather than forward-add if execution differs. The
-live manifest has 30 rows and exactly one dispatchable packet.
+⭐ **CURRENT HOLDER: FREE.** AO-5 LANDED at `72b7a87b`; its one new credited test file
+added exactly eight literal `it` titles and one literal `describe` title with no existing
+title changes. The executed whole re-derivation is `2412/365/2047/19984/5638`.
+The live manifest has 30 rows and zero dispatchable packets. AO-5 is terminal, so its
+reservation is historical and the row is free.
 
 ⚠ **DATED CORRECTION, 2026-08-12.** The rule this section stated earlier today — `IN-1a` holding
 the row — is **HISTORY.** `IN-1a` LANDED at `5bf06481` and a terminal packet reserves nothing

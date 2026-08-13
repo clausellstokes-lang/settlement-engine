@@ -1,17 +1,20 @@
 # Corpus Coverage / AO-5 — the other four durable prose-family denominators
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `972066affb82b002f197de7ce40ba3441dcd3220`
-- **Last revalidated:** 2026-08-13 at terminal AO-4 record
-  `972066affb82b002f197de7ce40ba3441dcd3220`.
+- **Last revalidated:** 2026-08-13 at implementation commit
+  `72b7a87b0375d759a9e72344664c3f4b6440a35f`.
+- **Landed:** 2026-08-13 — implementation
+  `72b7a87b0375d759a9e72344664c3f4b6440a35f`; do not redispatch.
 - **Depends on:** AO-0 schema-8 genesis
   `e71beb84355666fe5508f61c0f9acdc516a97b79`, AO-2+3 zero bank
   `f0c272e894f3f4d4edbd7fd1dac4c65580f87e52`, AO-4 implementation
   `09e39ee65f8bfeccb1eb9684c15c5d06fa308ccb`, its terminal record
   `972066affb82b002f197de7ce40ba3441dcd3220`, and CR-AO-1/4/9/10 plus the
   AO-4 -> AO-5 -> AO-6 order in the owner ledger.
-- **Collision group:** the estate-wide lighting census. AO-5 is the sole holder.
+- **Collision group:** the estate-wide lighting census; AO-5 is terminal and the
+  reservation is free.
 - **Commit authority:** the coding agent edits only the eight manifest paths, leaves all
   changes unstaged and uncommitted, and does not promote. The coordinator constructs,
   proves, and old-value-CAS lands one green implementation commit, then records terminal
@@ -23,10 +26,9 @@
 - **Declared behavior shift:** **NONE.** This is a read-only corpus contract. No producer,
   persisted record, rendered prose, ID, timestamp, order, flag, tuning value, golden, or
   product output changes.
-- **Census reservation:** one new credited test file with exactly eight literal `it` titles
-  and one literal `describe` title predicts
-  `2411/365/2046/19976/5637 -> 2412/365/2047/19984/5638`. Re-derive the whole tuple;
-  never forward-add if execution differs.
+- **Census receipt:** one new credited test file added exactly eight literal `it` titles
+  and one literal `describe` title. The whole re-derived five-tuple is
+  `2412/365/2047/19984/5638`. AO-5 is terminal and the reservation is free.
 
 ## 1. Reconciled authority and the ambiguity closed
 
@@ -607,3 +609,65 @@ bare full-gate true exit; census; unchanged hazard identity/count/status; pre-mo
 synthetic; mutation rationale; generated artifacts `NONE`; product/persisted/golden/flag/tuning/
 dependency/baseline movement `NONE`; deviations and judgment calls `NONE`; and adjacent
 observations without investigation.
+
+## 14. Executed landing receipt — 2026-08-13
+
+- **Authority and immutable landing:** promotion
+  `92d606575baa1c454c96ac5cb2ea80b2f53f6dfb`, compatibility amendment
+  `cb48cc0824ff432feba1735c796eef0700a1814f`, and census-compatibility restamp
+  `8a3a5cd5ea88080418356d72ebcb004a98cb9d49` produced the final dispatch parent.
+  The dispatch seal is
+  `d346ef49dea723ae8c756ac74a73ee5c10bacfb4be1573bd9bba0e5cff437898` and
+  the coding capsule digest is
+  `387c605ab89971f70aa8339f55ca03ce29cdc0b7343eeaf32177a7242a355d3d`.
+  The direct green child is implementation
+  `72b7a87b0375d759a9e72344664c3f4b6440a35f`; one old-value CAS exposed it.
+- **Exact implementation scope:** the eight manifest paths and raw line deltas are
+  `scripts/lib/prose-family-contract.mjs` **+249/-0**,
+  `tests/lint/.prose-family-contract-baseline.json` **+87/-0**,
+  `tests/lint/proseFamilyContract.walker.test.js` **+248/-0**,
+  `scripts/hazard-registry.json` **+7/-4**,
+  `scripts/lib/premortem-triggers.mjs` **+14/-16**,
+  `scripts/mutation-coverage-manifest.json` **+4/-0**,
+  `tests/lint/sovereigntyLightingContract.walker.test.js` **+5/-1**, and
+  `tests/lint/newsHeadlineContract.walker.test.js` **+5/-2**: **+619/-23** total.
+  The helper is 235 effective lines and the walker 236, with one literal `describe`
+  and eight literal `it` titles. Generated artifacts: **NONE**.
+- **One-build corpus and canonical receipt:** one AO-0 corpus build emitted **26,076**
+  scalar rows with exact roots pulseResult **0..11**, worldState **12**, wizardNews
+  **13**, canonEventResult **14**, and aiChronicle **15**. Scalar meta closed at canon
+  **1**, Wizard final **240**, accumulated **1,567**, unique **272**, pulse-history
+  **12**, regional log **109/109**, and Chronicle **1**. Two pure reconstructions were
+  byte-identical. The selected contract is **4 families / 63 identities / 1,308
+  distinct values / 5,885 occurrences**, serialized to **8,280 bytes** at SHA-256
+  `8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae`.
+  Its **188** selected nulls close only at impact digest **148**, mechanical rumor
+  seeds **30**, consequence outcomes **5**, mechanical outcomes **4**, and selected
+  outcomes **1**.
+- **Family closures:** timeline closes at **4/8/12** through the actual fixed
+  `prepareAuthoritativeCanonEvent` road for `CUT_TRADE_ROUTE` at Observed North Road
+  and projects its result exactly into the scalar rows. Pulse history closes at
+  **50/1,286/5,665** across records 0..11; selected headline aliases are **151/80**,
+  mechanical **77/24**, and consequence **240/81**, with consequence retained only
+  as path-local compatibility coverage. Regional log closes at **2/7/201** across
+  exact roots 0..11, contiguous per-root event indexes, and **109/109** typed audit
+  rows with zero selected prose identities. Chronicle closes at **7/7/7** through
+  the actual pure `createChronicleEntry` -> `appendChronicleEntry` result projected
+  exactly into the scalar rows.
+- **Governance closure:** the protected prose-family substrate is the exact **15-item**
+  array and the two-export protected union is exactly **23**. `HZ-CROSSHOME` remains
+  the same 10-key **MACHINERY** class with null accepted reason, in-chain true, and
+  **53** instances; the registry remains **29** classes at **M12/P11/D6/A0**.
+  The pre-mortem registry remains **28** predicates with its exact two-export union
+  and synthetic fire, and the mutation rationale is present. The lighting census
+  re-derived whole at **2412/365/2047/19984/5638**.
+- **Green closure:** A1-A8 and the focused proof passed **205/205** across 15 files.
+  Both typecheck ratchets passed at **173/173** and **1,134/1,134**; plain
+  observed-shape validation stayed green at **1,998** reads.
+- **Full landing gate:** bare `npm run check:tail` ran to exit 0. The build closed at
+  **314 routes**; strict dist discovered **50 files** and passed **403/403** tests
+  with zero failures and zero non-running rows. No product source/output, persisted
+  shape, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape
+  artifact, test-ratchet baseline, hazard count/status, mutation uncovered count,
+  unrelated baseline, or ninth implementation path moved. Deviations: **NONE**.
+  Judgment calls: **NONE**.
