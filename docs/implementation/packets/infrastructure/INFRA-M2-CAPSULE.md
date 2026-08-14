@@ -204,6 +204,30 @@ consumers — nothing in `src/` imports this script, by construction.
 
 ⭐ `scripts/**` carries no `max-lines` ceiling; the ≤250 budget is this packet's own discipline.
 
+> **OVERRIDE INFRA-M2-A — the generator measures 282 effective lines against this packet's own
+> ≤250 line. RECORDED AT IMPLEMENTATION TIME, 2026-08-14, after the measurement, NOT back-dated
+> into the promotion.** The honest sequence is on the record: the budget was declared at promotion;
+> the built file measured **273**; one real compression pass (a shared declarator finder, one
+> two-way disagreement helper) took it to **271**; the remaining 21 lines could only be bought by
+> packing statements onto shared lines to move a number; and the end-to-end run then exposed a
+> vacuity bug whose cure added **+11** structural lines — the `countOf` helper that refuses an
+> export which is neither an array nor a keyed object, and the guard that refuses any figure which
+> would vanish from the artifact instead of landing. Those eleven lines are the most load-bearing
+> in the file and buying the budget back by deleting them would be the wrong trade stated plainly.
+>
+> Grounds. (a) **No enforced ceiling is breached, and that is executed rather than argued:**
+> `npx eslint scripts/base-state-capsule.mjs` exits 0 with zero bytes of output, and
+> `scripts/.size-baseline.json` holds 15 entries of which **none** is under `scripts/`. (b) The
+> standard's ≤250 line governs *"each new production leaf"*; this file is tooling with **zero
+> production consumers** by construction — nothing under `src/` imports it. (c) The excess is
+> structural, not discretionary: 22 declared provenance rows plus 22 readers is the artifact's own
+> shape, and the artifact's shape is frozen and owner-gated. (d) Compressing further would trade
+> legibility for a self-imposed number, which is the mirror image of raising a baseline to finish a
+> packet — and this file's whole job is to be auditable by the next compiler.
+>
+> ⛔ The override is for THIS member and **does not transfer**. ⚠ Vetoable: say "veto" and the file
+> is split, which costs a third handwritten file and breaches a different budget line instead.
+
 `retiredSymbols`: **NONE.**
 
 ---
