@@ -1,11 +1,11 @@
 # Foreign Policy / GR-4d — the lit succession decision
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `2`
 - **Verified base:** `claude/composite-r4` at `7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1`
-- **Last revalidated:** 2026-08-13; semantic substrate at the verified base
-  above, and the version-2 runner topology measured on attached promotion
-  `6f1cac100c147e22b4d9af69cf03f34eadd82e06`.
+- **Last revalidated:** 2026-08-13 at terminal implementation
+  `a17d0a0285d8c3d06ecd13baf1f05248a40c66de`, the direct child of
+  version-2 authority `fcf1efbded3b776db5f6c3ec971367df6d5a10c5`.
 - **Depends on:** GR-4a at `a53ef7c6` (dark succession answer and separate
   succession breach predicate), GR-4b-alpha at `dd457b9a` (the one honest
   disavowal beat), GR-4c at `cd2ab894` (the act-local credibility charge), and
@@ -43,9 +43,10 @@
 - The version-1 capsule `4d9d2f96ed86a642d07c2ed9e7bbdffaea8e8be4b264e23483fe3b02120a8f0c`
   and seal `e31d9be73f9fba38d1729eade10da0e90e6af3d31aad844a2879a24c2b5b6e2d`
   are measured STOP evidence only. They may not authorize further execution.
-  After these three authority files land together, the coordinator regenerates
-  and verifies the version-2 capsule from an attached, target-clean authority
-  state and reseals before running the outer resume. The exact seven paths,
+  The three version-2 authority files landed together at
+  `fcf1efbded3b776db5f6c3ec971367df6d5a10c5`; from that attached,
+  target-clean authority state the coordinator regenerated and verified the
+  version-2 capsule and seal before running the outer resume. The exact seven paths,
   A1-A8 IDs and count, budgets, census, and six-mutant denominator are
   unchanged; the validation contract is amended only as stated below.
 - Immutable proof also stopped the first implementation candidate on the
@@ -56,11 +57,12 @@
   repeated direct field reads become authority. A5/A6 were strengthened inside
   their existing titles; no registration moved. The pre-amendment evidence
   object `556dab40e9fa684a5777931f426180d56cfc1f3a` carries those exact seven
-  target bytes at **+594/-23**, but is non-promotable and not seal-valid under
-  version 2 because it is a sibling of the amendment. Those exact target bytes
-  must be reconstructed as a new direct child of the landed and resealed
+  target bytes at **+594/-23**, but remains non-promotable and not seal-valid
+  under version 2 because it is a sibling of the amendment. Its exact target
+  bytes were reconstructed as direct child
+  `a17d0a0285d8c3d06ecd13baf1f05248a40c66de` of the landed and resealed
   version-2 authority.
-  Its new files measure `treatySuccessionDecision.js` **176 raw / 138
+  The final child's new files measure `treatySuccessionDecision.js` **176 raw / 138
   effective**, `treatySuccessionProposalApply.js` **76 raw / 66 effective**,
   and `treatySuccessionApproval.test.js` **300 raw**. Both source leaves remain
   below their frozen packet budgets, each existing production-file delta
@@ -734,27 +736,77 @@ In addition to `PACKET_STANDARD.md`, stop before or during implementation if:
 
 Do not broaden the packet or repair adjacent findings. Report the exact STOP.
 
-## 15. Completion receipt template
+## 15. Executed landing receipt — 2026-08-13
 
-- Base SHA and seal/capsule identities:
-- Pre-amendment evidence object, non-promotable under version 2:
-  `556dab40e9fa684a5777931f426180d56cfc1f3a`; exact seven target bytes at
-  `+594/-23`:
-- Final resealed post-version-2 implementation SHA, which must be the direct
-  implementation child of the landed version-2 authority:
-- New-file measurement: decision leaf `176 raw / 138 effective`, apply leaf
-  `76 raw / 66 effective`, acceptance file `300 raw`:
-- Governed observed-shape STOP and `exactProjection` / A5-A6 repair evidence:
-- Final effective lines: `peaceTerms.js 797`, `applyWorldPulse.js 941`:
-- A1-A8 titles, exits, and focused counts:
-- Census re-derivation: `2413/365/2048/19992/5639`:
-- Both TypeScript ratchets and observed-shape result:
-- Six mutation exits, failing titles, and restored digests:
-- Premortem/hazard dispositions:
-- Attached outer `implementation:resume` status and complete sealed receipt for
-  all ten manifest children (no recursive self-check):
-- Bare full-gate stages actually executed and boot-smoke exit:
-- Generated artifacts: `NONE`:
-- Deviations: `NONE | STOP`:
-- Out-of-scope observations, without investigation:
-- Soak: `NOT STARTED`:
+- **Authority, seal, and immutable landing:** version-2 authority
+  `fcf1efbded3b776db5f6c3ec971367df6d5a10c5` produced capsule
+  `83cec03612020a0b3dda4762e033292a59d710bea90e9c23e0200ca54ce8a597`,
+  dispatch
+  `1190b4d8f25b60033cfa569ef9814a832d260b735f18c80e02abd62d6d7a8a00`,
+  and seal
+  `19d47eb78d6d4bfe5a2c1399d0595349b2b2482bfedbf1f21d26e3b7944fc793`.
+  Attached run `000001-8a95fbe9-c9fa-4de9-aebc-d87610f3406d`, plan
+  `1299070c007e92716bcdb2aae4e02a54ff3611482b50eae343c15e4770198309`,
+  passed all four runner preflights and all ten manifest children. Direct
+  implementation child `a17d0a0285d8c3d06ecd13baf1f05248a40c66de` has the
+  authority as its sole parent.
+- **Stopped evidence retained, never promoted:** version-1 authority
+  `6f1cac100c147e22b4d9af69cf03f34eadd82e06`, capsule
+  `4d9d2f96ed86a642d07c2ed9e7bbdffaea8e8be4b264e23483fe3b02120a8f0c`,
+  and seal
+  `e31d9be73f9fba38d1729eade10da0e90e6af3d31aad844a2879a24c2b5b6e2d`
+  remain STOP evidence. Detached execution stopped on the attached-branch
+  requirement; attached execution stopped on recursive session ownership.
+  Initial candidate `aa299e6c04af45a615a1fb836fa3d768431e344f` stopped on
+  governed observed-shape evidence. Repaired sibling
+  `556dab40e9fa684a5777931f426180d56cfc1f3a` remained non-promotable after
+  the authority amendment.
+- **Exact implementation scope:** the seven manifest paths moved
+  **+594/-23**. The decision leaf is **176 raw / 138 effective**; the apply
+  leaf is **76 raw / 66 effective**; `actorMajorApproval.js` ends at **49
+  effective** with a **+11** effective delta; `peaceTerms.js` remains **797**;
+  `applyWorldPulse.js` remains **941**; and the acceptance file is **300 raw**.
+  Generated artifacts: **NONE**.
+- **Acceptance and focused closure:** all exact A1-A8 titles passed. The direct
+  file passed **8/8**; the complete 15-file battery passed **211/211**. Packet,
+  hazard, pre-mortem, and ESLint validation passed.
+- **Static closure:** the full typecheck ratchet held **173/173**, strict domain
+  typecheck held **1,134/1,134**, and observed-shape validation remained exact
+  at **1,998**.
+- **Governed repair and counterforces:** canonical `exactProjection` removed
+  repeated direct observed-shape reads and made closed-record validation
+  independent of insertion order. All six disposable plants exited nonzero:
+  gate inversion failed A4; pending-only dedupe failed A5; succession decline
+  terminals failed A3 while its ordinary-major control remained green; the
+  public live-NAP route failed A2's tribute-only fixture; removed current
+  validation failed A6; removed authored-news suppression failed A2 with two
+  public beats. Every plant restored byte-identically to the seven
+  manifest-ordered hashes recorded above.
+- **Census:** the whole re-derivation is **2413/365/2048/19992/5639**: one new
+  credited file, eight new test titles, and one new suite title.
+- **Sealed outer receipt:** session state
+  `666128fd9559da173f296d31164fabe5313d9036baa267a89b6cd02c1266f55d`
+  is **PASSED**, with no failed, blocked, or remaining step. Its inner bare full
+  gate held the frozen source ratchet at **16 known failures across 27,999
+  tests** and passed strict dist **50/403**; full-log SHA-256
+  `c00e676eb48bd9c0a2c5bede31507f87426c4f017f29c5a5a438a7ee0c6c12e5`.
+  Its separate boot-smoke child passed.
+- **Independent landing evidence:** bare `npm run check:tail` exited **0**. Its
+  frozen source ratchet held **16 known failures across 27,999 tests**;
+  typecheck ratchet held **173/173** and strict domain typecheck held
+  **1,134/1,134**; the build completed, prerender wrote **314** documents
+  (**13 views + 15 gallery hubs + 286 compendium entries**), and strict dist
+  passed **50 files / 403 tests** with zero failed, non-run, uncollected,
+  missing, extra, or duplicate rows. The **940-line / 90,691-byte** full log is
+  `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.87566.log`;
+  its SHA-256 is
+  `6537b57a9aed5fb3344d9eebc4c3438f347dd3ff2e12e4a9f83e58c4d952ca97`.
+  Separate `npm run smoke:boot` exited **0** and reported
+  `boot-smoke: PASS — 513 chunk(s), 6265 edge(s), shell 31706 B.` The emitted
+  jsdom `HTMLCanvasElement.prototype.toDataURL` diagnostic was benign and did
+  not change the zero exit or PASS receipt.
+- **Boundary receipt:** no baseline, ceiling, flag, tuning, migration,
+  dependency, golden, registry, persisted family, public-repudiation predicate,
+  realm-order arm, or out-of-scope voice/UI file moved. Deviations: **NONE**.
+- **Soak:** **NOT STARTED**. No diagnostic-soak worktree was created for this
+  GR-4d run, and neither D-1 nor L0 started.

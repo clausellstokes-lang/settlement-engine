@@ -2,9 +2,24 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at terminal GR-4e record
-  `7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1`.
-- **Measured:** 2026-08-13 — **GR-4d compiled just in time.** The live manifest
+- **Measured branch/SHA:** `claude/composite-r4` at terminal GR-4d implementation
+  `a17d0a0285d8c3d06ecd13baf1f05248a40c66de`.
+- **Measured:** 2026-08-13 — **GR-4d LANDED.** The live manifest has 33 rows and
+  zero dispatchable packets. Version-2 authority `fcf1efbd`, capsule `83cec036`,
+  seal `19d47eb7`, and attached run
+  `000001-8a95fbe9-c9fa-4de9-aebc-d87610f3406d` bind the direct exact seven-path
+  child `a17d0a02` at **+594/-23**. A1-A8 passed **8/8** directly and **211/211**
+  in the 15-file battery; both TypeScript ratchets held **173/173** and
+  **1,134/1,134**, observed-shape stayed exact at **1,998**, and all six named
+  mutants failed by their intended titles before digest-exact restoration. The
+  sealed inner gate passed strict dist **50/403**. Independent bare `check:tail`
+  exited zero at the frozen **16 known failures / 27,999 tests**, built and
+  prerendered **314** documents, and passed strict dist **50/403** (log SHA-256
+  `6537b57a9aed5fb3344d9eebc4c3438f347dd3ff2e12e4a9f83e58c4d952ca97`);
+  separate boot smoke passed **513 chunks / 6,265 edges / 31,706-byte shell**.
+  The census is free at `2413/365/2048/19992/5639`. No diagnostic-soak worktree
+  was created for this GR-4d run, and neither D-1 nor L0 started.
+- **Historical measurement:** 2026-08-13 — **GR-4d compiled just in time.** The live manifest
   has 33 rows and exactly one dispatchable packet. GR-4a, GR-4c, and GR-4e are
   terminal, and the late treaty stage can see both same-tick seat-transition
   writers. The bounded mechanism queues only above-band DISAVOW descriptors when
@@ -246,7 +261,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | LANDED-23 | [`GR-4c`](./packets/foreign-policy/GR-4C.md) | **LANDED** at `cd2ab894`; do not redispatch | The oath that finally costs something: a torn-up treaty charges the breaking court's credibility stock, once, at the act, banded by the severity GR-4a already graded — closing the seam where a live reader chain (`credibilityScoreOf` → `reserveFor` → `OATHBREAKER_PENALTY`) has waited since GR-2 with no producer on the other side. One pure leaf plus a twelve-line gated block in a file with 637 lines of headroom; zero new flags, zero new persisted families, zero new surfaces, zero new tuning keys. ⭐ **Two compile premises were refuted at promotion and both corrections are the packet's substance.** First, the design routes the charge through the `fractureCredibilityDeltas` idiom, whose tick window is measurably dead — the reader folds 507 lines before the writer inside one pulse call, so a copied idiom would ship a born-dead charge; the charge moves to the breach site instead, and the window's repair is the named micro-act GR-4e. Second, the draft argued the new import was same-layer and owed no coupling row; executed measurement showed the cross-layer walker resolves layers from frozen regex module sets, **not directories** — `treatyBreach.js` is GRAMMAR, `informationStatecraft.js` is INFO — so the row was owed, the promotion STOPPED, and CR-GR4C-7 minted it together with the registry head edit four prior packets each forgot. ⭐ It **held** the estate-wide lighting-census walker's reservation — ⚠ **DATED CORRECTION 2026-08-12 at the landing: HISTORY**; this packet is terminal, a terminal packet reserves nothing, and the row is FREE (sixth restamp, same recurring reason). ⚠ Its one authored number, `CHARGE_BASE = 0.05`, is module-local, frozen, unsoaked, rides the endgame tuning signature, and the implementer may not tune it. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the dead-window repair (GR-4e), a fifth delta kind (needs an owner-signed tuning key, and the kind is not persisted), every Herald beat and chronicle line for the charge (GR-4d/GR-7), ungating the DM road from `oathHolderEnabled` (GR-7), the lit-mode queue and per-type terminal (GR-4d), `peaceTerms.js`, `informationStatecraft.js`, `OutputContainer.jsx`, `pulseKernel.js`, `pactFormation.js`, `couplingDesk.walker.test.js`, `couplingReceiptSample.test.js`, the coupling-inclusion baseline JSON, every other baseline and every ceiling raise |
 | LANDED-24 | [`GR-4e`](./packets/foreign-policy/GR-4E.md) | **LANDED** at `c5ef5c19`; do not redispatch | The coalition-fracture credibility window now reaches its sole reader: a fracture written after the information-statecraft fold in tick `T` is consumed by that fold at `T + 1`, once. Promotion `3339188b`, seal `b995d8c9` and capsule `a31af4e2` produced the direct exact five-path child at **+36/-20**; the one executable edit is a one-for-one predicate replacement and the hot file remains 780/800. The old-window mutant exited 1 at 64/67 with the named predecessor title, the detached-stage mutant exited 1 at 66/67 with the pure case green and named stage case red, restoration closed at 67/67 and 100/100, and the bare full gate passed strict dist 403/403 across 50 files. Exactly one title was renamed, so no registration or census cardinality moved; the row is free at `2412/365/2047/19984/5638`. No soak was started. | a second credibility fold; pulse reorder; any treaty-writer edit; consume marker or persisted-shape change; new flag, tuning, golden, registry, census, baseline or ceiling; any sixth path; any added/deleted test title; GR-4d/GR-5/GR-7 |
-| READY-GR4D | [`GR-4d`](./packets/foreign-policy/GR-4D.md) | **READY** at `7958cd33`; packet v2, dispatch only from the exact resealed authority | The lit succession decision, mechanism only. When both existing gates are true, the treaty stage queues one typed proposal for each above-band DISAVOW descriptor; below-band HONOR remains same-reference, silent, and unqueued. Apply and engine-auto use the same validated succession write, while dismiss, six-week expiry, and real ring overflow mean HONOR by making no treaty write; every ordinary actor-major keeps decline. The exact seven paths preserve `peaceTerms.js` at 797/800 and `applyWorldPulse.js` at 941, add one eight-case file, and reserve the whole census `2413/365/2048/19992/5639`. **V2 corrects the authority topology and records the in-contract immutable-proof repair:** v1 recursively listed its own sealed runner as a child. Detached execution stopped on the attached-branch contract; attached outer resume proved seal/scope and then the nested child stopped on the live session lock. V2 retains exactly ten real child checks, requires one attached outer `implementation:resume` with a complete sealed receipt, retires the v1 capsule/seal, and leaves the independent final bare gate and boot smoke mandatory. The earlier implementation evidence object also stopped on governed observed-shape evidence and an insertion-order validation gap; one canonical `exactProjection` plus stronger A5/A6 assertions closes both without a new title or path. Pre-amendment evidence object `556dab40` carries the exact seven target bytes at **+594/-23**, but is a non-promotable sibling of v2 authority; those bytes must be reconstructed as its new direct implementation child. The decision/apply leaves measure **138/140** and **66/115** effective lines. | GR-4b-ii/iii voice or dossier work; GR-5; a third leaf, eighth path, ninth title, new flag/tuning/state family/migration/golden/baseline/ceiling; public repudiation widening; realm-order-arm movement; any soak work |
+| LANDED-25 | [`GR-4d`](./packets/foreign-policy/GR-4D.md) | **LANDED** at `a17d0a02`; do not redispatch | The lit succession decision, mechanism only. When both existing gates are true, the treaty stage queues one typed proposal for each above-band DISAVOW descriptor; below-band HONOR remains same-reference, silent, and unqueued. Apply and engine-auto use the same validated succession write, while dismiss, six-week expiry, and real ring overflow mean HONOR by making no treaty write; every ordinary actor-major keeps decline. Version-2 authority `fcf1efbd`, capsule `83cec036`, seal `19d47eb7`, and the complete attached outer receipt bind the exact seven-path **+594/-23** direct child. The governed `exactProjection` repair closed observed-shape and insertion-order gaps; A1-A8 passed **8/8** and **211/211**, all six named mutants failed by their intended titles and restored digest-exact, the hot files remained **797/800** and **941**, both TypeScript ratchets and the **1,998** observed-shape count held, and the whole census landed at `2413/365/2048/19992/5639`. Independent bare `check:tail` exited zero at **27,999 tests / 16 frozen known failures** and strict dist **50/403** (log `6537b57a`); separate boot smoke passed **513 chunks / 6,265 edges / 31,706-byte shell**. The version-1 capsule/seal, candidates `aa299e6c` and `556dab40`, recursive-runner STOP, and governed validation STOP remain non-promoted evidence only. No soak started. | GR-4b-ii/iii voice or dossier work; GR-5; a third leaf, eighth path, ninth title, new flag/tuning/state family/migration/golden/baseline/ceiling; public repudiation widening; realm-order-arm movement; any soak work |
 
 ## Authorized implementation infrastructure
 
@@ -266,25 +281,29 @@ re-derives that lane and decides whether to compile its immediate dependent.
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
 
-### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the GR-4d PROMOTION
+### ⚠⚠ CENSUS-HOLDER RULE — restamped 2026-08-13 at the GR-4d LANDING
 
 The estate-wide lighting census (`tests/lint/sovereigntyLightingContract.walker.test.js`) moves
 whenever a packet adds test titles, and the serialization law ruled at `73f5be96` re-derives it
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **CURRENT HOLDER: GR-4d.** The packet creates exactly one credited test file
-with one literal `describe` and eight literal `it` registrations, renaming or
-deleting none. From the free terminal tuple `2412/365/2047/19984/5638`, its
-reserved whole tuple is therefore `2413/365/2048/19992/5639`. The live manifest
-has **33 rows and exactly one dispatchable packet**. No other non-terminal row
-may name the census walker. No diagnostic-soak worktree was created for this
-run, and neither D-1 nor L0 has started.
+⭐ **ROW FREE.** GR-4d LANDED at `a17d0a02`. Its one credited test file, one
+literal `describe`, and eight literal `it` registrations moved the free terminal
+tuple `2412/365/2047/19984/5638` to the re-derived terminal tuple
+`2413/365/2048/19992/5639`. The live manifest has **33 rows and zero
+dispatchable packets**; no non-terminal row currently names the census walker.
+A terminal packet reserves nothing. No diagnostic-soak worktree was created for
+this GR-4d run, and neither D-1 nor L0 started.
 
-⚠ **DATED CORRECTION, 2026-08-13 at the GR-4d promotion.** The GR-4e paragraph
-below remains true history but no longer describes the current holder or packet
-count. GR-4d takes the row because it adds one file, eight test titles, and one
-suite title.
+⚠ **DATED CORRECTION, 2026-08-13 at the GR-4d landing.** The promotion
+measurement below remains true history but no longer describes the current
+holder or packet count.
+
+⚠ **HISTORICAL PROMOTION MEASUREMENT, 2026-08-13.** GR-4d took the row because
+it added one file, eight test titles, and one suite title. Its reserved whole
+tuple was `2413/365/2048/19992/5639`, and the manifest then had 33 rows and one
+dispatchable packet. The GR-4e paragraph below remains earlier history.
 
 ⚠ **DATED CORRECTION, 2026-08-13 at the GR-4e landing.** The AO-6 paragraph below remains
 true history but no longer describes the current packet count. GR-4e also correctly took no
@@ -422,10 +441,11 @@ live symbols were checked at the measured SHA.
   event) is in history at `a53ef7c6`. ⚠ **GR-4b was then refused IN PART and split three ways
   at CR-GR4B-2:** of the five authored voice surfaces only the disavowal has an honest producer,
   so **GR-4b is the breach voice alone** — compiled here — while GR-4b-ii (`reaffirmed`,
-  `honored_by_silence`) and GR-4b-iii (the two open-question surfaces) sit behind **GR-4d**,
-  whose own substrate was already measured as weaker than the design assumes. GR-4c (the
-  credibility charge) is unchanged and compiled just-in-time. GR-5 is untouched and
-  `treatyRenewalEnabled` does not exist.
+  `honored_by_silence`) and GR-4b-iii (the two open-question surfaces) were dependency-gated
+  behind **GR-4d**. GR-4d LANDED at `a17d0a02`, discharging that dependency, but every
+  remaining voice/dossier surface still requires its own separately compiled packet; this
+  terminal record releases none of them. GR-4c (the credibility charge) is landed. GR-5 is
+  untouched and `treatyRenewalEnabled` does not exist.
 - **Foreign-policy information, IN-1:** ⚠ **REFUSED as one packet and split three ways at
   CR-IN1-1** — it carries three behavior families against a budget of one, its receipt half is
   headed for a Herald knowledge desk that does not exist (`HERALD_SECTIONS` is still the frozen
