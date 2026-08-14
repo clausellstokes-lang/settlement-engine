@@ -1917,6 +1917,58 @@
         ["npm", "run", "check:tail"],
         ["npm", "run", "smoke:boot"]
       ]
+    },
+    {
+      "id": "GR-4B-II-W2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-II-W2.md",
+      "verifiedBase": "039f8380dbc4566d48b5faa8eef39813b6f42eb4",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js" },
+        { "action": "MODIFY", "path": "src/store/campaignWorldPulseDeferred.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionReaffirmedVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/treatySuccessionOpeningVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/impactKindWalkers.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function successionQuestionPayloadTuple(outcome)" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "export function isSuccessionDisavowable(treaty, settlementId, fallenNpcId, tick)" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "export function swornPartiesOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "export function treatyOrientationOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyEnforcement.js", "symbol": "export function treatyLedgerOf(worldState)" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(kind, seed, interp = {}, context = null)" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function updateProposalStatus(worldState, proposalId, status, patch = {})" },
+        { "path": "src/domain/region/wizardNews.js", "symbol": "export function appendWizardNewsEntries(feed = {}, entries = [], options = {})" },
+        { "path": "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js", "symbol": "export function dismissSuccessionQuestionWithVoice(worldState, proposalId, tick, now)" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "dismissing a validated succession question mints exactly one fully addressed beat" },
+        { "id": "A2", "case": "all seven annex-verbatim families and slot vectors are reachable" },
+        { "id": "A3", "case": "a dark mechanism leaves the store byte-identical" },
+        { "id": "A4", "case": "a non-succession, terminal, or duplicate dismissal writes status and mints nothing" },
+        { "id": "A5", "case": "an ineligible or unaddressable instrument mints nothing, never a partial beat" },
+        { "id": "A6", "case": "the transition fires at most once and the feed never doubles" },
+        { "id": "A7", "case": "the leaf is byte-stable, draws nothing, writes nothing, and reads no clock" },
+        { "id": "A8", "case": "a real GR-4d docket dismissal reaches the feed and no other surface" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint", "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js", "src/store/campaignWorldPulseDeferred.js", "src/domain/worldPulse/grammarReceiptPools.js", "src/domain/worldPulse/grammarNews.js", "src/domain/realm/heraldRouting.js", "src/domain/display/chroniclersLetter.js", "src/domain/display/settlementRumors.js", "tests/domain/treatySuccessionReaffirmedVoice.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/domain/impactKindWalkers.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/treatySuccessionReaffirmedVoice.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/domain/treatySuccessionApproval.test.js", "tests/domain/treatySuccessionVoice.test.js", "tests/domain/successionQuestion.test.js", "tests/domain/impactKindWalkers.test.js", "tests/domain/guidanceRegistry.walker.test.js", "tests/design/deepCraftKillList.test.js", "tests/lint/wizardNewsAuthoring.walker.test.js", "tests/property/treatyLifecycleVoiceDormancyFence.test.js", "tests/lint/couplingInclusion.walker.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/negativeAssertionAnchor.walker.test.js", "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"]
+      ]
     }
   ]
 }

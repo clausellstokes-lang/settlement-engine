@@ -2,9 +2,39 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at terminal GR-4b-iii-b
-  implementation `770167c5`.
-- **Measured:** 2026-08-14 — **GR-4B-IIIB LANDED.** The live manifest has 35
+- **Measured branch/SHA:** `claude/composite-r4` at the `gr-4b-ii` train terminal
+  `7b54c038`.
+- **Measured:** 2026-08-14 — **THE GR-4B-II TRAIN LANDED (W1 + W2), the estate's
+  FIRST §28 train.** The live manifest has 36 rows and zero dispatchable packets.
+  Two members were built as one unexposed commit sequence on the private ref
+  `refs/trains/gr-4b-ii` and exposed atomically by one old-value CAS to the
+  train's single green terminal child: **W1** `039f8380` — the chair annex act
+  minting A-23 / CR-GR4B-16, docs-only, **zero census motion**, which is the
+  property that made it the train's lawful truncation boundary; **W2**
+  `b3602c15` — the `reaffirmed` voice, thirteen paths, signed by CR-GR4B-17
+  (registration files 3 → 5, paths 12 → 13), CR-GR4B-18 (the store-side dismiss
+  mount with **no new persisted key**, exactly-once supplied structurally by the
+  transition's compare-and-set) and CR-GR4B-19 (the landed silence pin
+  re-addressed in place, census-neutral); and the terminal **T** `7b54c038`.
+  W1's delta was proven zero by re-executing its battery at the base commit and
+  matching the failure identities exactly. A1-A8 passed 8/8; the 21-file battery
+  passed 270/270; all eight mutants convicted by their intended titles and
+  restored digest-exact, with M3 convicted by two independent cases; both
+  TypeScript ratchets held 173/173 and 1,134/1,134; OSR stayed exact at 1,998;
+  `title=` held at 485 and the four kill-list ceilings at 85/69/167/163. The
+  whole census was re-derived once, at the terminal, to exactly
+  `2416/365/2051/20016/5642`; bare `check:tail` exited 0 at **28,032 tests / 16
+  frozen known failures**, prerendered 314 documents, and passed strict dist
+  50/403; separate boot smoke passed 521/521 chunks. ⛔ Two corrections are on
+  the record rather than smoothed away: the packet's §7 row-5 prohibition on a
+  `KIND_SECTION_DIVERGENCES` entry was ruled **defective** (the walker is machine
+  truth; both rows landed inside the file's existing `<=2` budget), and the
+  terminal's first gate exited 1 on six un-anchored negative assertions, cured
+  in place before exposure with the member commit amended once while still
+  unexposed. A second red, `implementationSession.test.js`, never reproduced and
+  is recorded as PLAUSIBLE rather than diagnosed. The census is FREE. Full
+  receipts: the packet §13 and Lane TE2's train receipt. No soak started.
+- **Historical measurement:** 2026-08-14 — **GR-4B-IIIB LANDED.** The live manifest has 35
   rows and zero dispatchable packets. Implementation `770167c5` (exact ten
   paths, +100/-25 tracked) is the direct child of promotion `cdd4bf52`. B1-B8
   passed 8/8 (chair re-ran independently); the wider battery passed 212/212
@@ -332,6 +362,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-25 | [`GR-4d`](./packets/foreign-policy/GR-4D.md) | **LANDED** at `a17d0a02`; do not redispatch | The lit succession decision, mechanism only. When both existing gates are true, the treaty stage queues one typed proposal for each above-band DISAVOW descriptor; below-band HONOR remains same-reference, silent, and unqueued. Apply and engine-auto use the same validated succession write, while dismiss, six-week expiry, and real ring overflow mean HONOR by making no treaty write; every ordinary actor-major keeps decline. Version-2 authority `fcf1efbd`, capsule `83cec036`, seal `19d47eb7`, and the complete attached outer receipt bind the exact seven-path **+594/-23** direct child. The governed `exactProjection` repair closed observed-shape and insertion-order gaps; A1-A8 passed **8/8** and **211/211**, all six named mutants failed by their intended titles and restored digest-exact, the hot files remained **797/800** and **941**, both TypeScript ratchets and the **1,998** observed-shape count held, and the whole census landed at `2413/365/2048/19992/5639`. Independent bare `check:tail` exited zero at **27,999 tests / 16 frozen known failures** and strict dist **50/403** (log `6537b57a`); separate boot smoke passed **513 chunks / 6,265 edges / 31,706-byte shell**. The version-1 capsule/seal, candidates `aa299e6c` and `556dab40`, recursive-runner STOP, and governed validation STOP remain non-promoted evidence only. No soak started. | GR-4b-ii/iii voice or dossier work; GR-5; a third leaf, eighth path, ninth title, new flag/tuning/state family/migration/golden/baseline/ceiling; public repudiation widening; realm-order-arm movement; any soak work |
 | LANDED-26 | [`GR-4b-iii-a`](./packets/foreign-policy/GR-4B-IIIA.md) | **LANDED** at `7e7d5205`; do not redispatch | The one honest post-GR-4d opening surface is landed: a newly inserted valid pending succession question returns one fully addressed public `succession_question_opened` beat for that exact instrument. Version-2 authority `4bc44f8e`, capsule `518ee395`, seal `15f71332`, and cumulative attached run `000003-7cc4232d-03fc-4ad0-b3c7-7e86dd588a75` bind the exact twelve-path **+608/-27** direct child. The leaf is 119/84, `peaceTerms.js` remains 1264/797, A1-A8 passed **8/8**, the exact twenty-file battery passed **296/296**, all eight mutants convicted only their intended titles and restored digest-exact, both TypeScript ratchets and OSR held, and the census landed at `2414/365/2049/20000/5640`. Independent bare `check:tail` passed **28,010/16** and strict dist **50/403** (log `dc9662ec`); boot smoke passed **513/6,265/31,706**. Candidate `18d69d2b`, its anchor STOP, and the first repaired run's timeout aggregate remain non-authorizing. The census row is free. No GR-4B-IIIA soak started. | GR-4b-ii honor/reaffirmation voice; GR-4b-iii-b dossier; terminal voice; any successor/roster lookup; treaty-decision/apply edits; new state/flag/tuning/migration/golden/baseline/ceiling/dependency; mutation, hazard, coupling or OSR governance edits; thirteenth path, sixth registration, ninth title; terminal packets, annex, GR-5, soak |
 | LANDED-27 | [`GR-4b-iii-b`](./packets/foreign-policy/GR-4B-IIIB.md) | **LANDED** at `770167c5`; do not redispatch | The open-question dossier line: every treaty document carries one canonically ordered line per validated pending succession question, rendered beneath the age line at both corpus-named mounts (`TreatyPanel`, `WarFaithTab`). Exactly ten paths: one DISPLAY-owned composer leaf validated through `successionQuestionPayloadTuple`, one always-present `successionLines` read-model key under the dormancy fence, one `section: null` no-desk grammar row (registration cost 2 — CR-GR4B-11 does not transfer), two ageLine-idiom mounts, one eight-case acceptance file, and three governed walkers. The whole census is reserved at `2415/365/2050/20008/5641`, runtime `28010 → 28021` with 16 frozen, floors `109 → 110` with the routing identity `6 → 7` (legitimate no-desk divergence), `title=` frozen at 485 with zero headroom, and no hot file in the manifest. Eight named mutants, both TypeScript ratchets, OSR 1,998, the coupling walker, the bare full gate, and separate boot smoke are mandatory. | GR-4b-ii honor/terminal voices; GR-5; any `impactKind` mint, Herald desk, `WHAT_PHRASES`/`EXPECTED_VOICE`/chronicler row; PDF projection edit; successor/roster lookup; `title=` prop; kill-list token; new state/flag/tuning/golden/baseline/ceiling/dependency; eleventh path, third registration file, ninth title; annex or terminal-packet edits; soak |
+| LANDED-28 | [`GR-4b-ii-W2`](./packets/foreign-policy/GR-4B-II-W2.md) | **LANDED** at `b3602c15`; do not redispatch | The honor terminal answered aloud, and the second member of the estate's FIRST §28 train (`refs/trains/gr-4b-ii`: W1 `039f8380` annex act -> W2 `b3602c15` -> terminal `7b54c038`, one CAS). When a DM dismisses a pending succession question, the feed gains exactly one public `reaffirmed` beat naming both courts, the fallen holder and the recorded reason, closing the docket `succession_question_opened` opened. Thirteen paths: one pure `worldPulse` leaf owning the composer and the transition wrapper, one store thread through the existing single-producer `set()`, five mechanical registration homes (a Herald DESK kind costs five), one eight-case acceptance file, the re-addressed silence pin, and three governed walkers. CR-GR4B-18 rules the mount store-side with **no new persisted key** — exactly-once is structural in three layers (the CAS on `status === 'pending'`, no transition out of `dismissed`, entry-id dedupe) — and records the boundary that the first wave to RE-DERIVE this beat owes the key, which is what keeps `honored_by_silence` out. `ROUTED_TOKENS` and `REGISTERED_KIND_COUNT` move TOGETHER (377 -> 378, 110 -> 111) and the registered-minus-routed identity holds at 7 — the exact opposite of iii-b's `section: null` row. Census re-derived whole at the terminal to `2416/365/2051/20016/5642`, runtime `28021 -> 28032` with 16 frozen, `title=` frozen at 485, and no hot file in the manifest. | `honored_by_silence` and the expiry road (no transition site, so the persisted key is owed); GR-4b-beta `repudiated`; GR-4c `credibility_charge`; GR-5; ring-overflow, undo and replay voices; any new persisted key, state family, flag, tuning key, golden, baseline, ceiling or dependency; a fourteenth path, sixth registration file or ninth acceptance title; successor or roster lookup; `title=` prop; kill-list token; annex or terminal-packet edits; soak |
 
 ## Authorized implementation infrastructure
 
