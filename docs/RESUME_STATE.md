@@ -84,11 +84,21 @@ re-charter's first consumer of `habitVocabulary.js`, which must ALSO re-aim
 or it reds a test green since this landing. Receipt: `laneTE6-receipt.md`
 (679 lines). Base-check worktree removed.
 
-**LIVE (~21:00, keeper tick): TWO compile lanes** — **Lane TC7** re-charters
-HB-1 from the parked `refs/trains/hb-1-refuted` (the register cure; the
-goldens-byte-identical hard constraint; `src/domain/region` joins the
-root-set; the orphan-window discharge INCLUDING the habitCurve re-aim;
-§38.4 binds) → `laneTC7-*`; **Lane TC8** compiles the INFRA-2 micro-train
+**✅ TC7 COLLECTED + §39 RULED (~21:45, ledger `44b8c7e2`): HB-1′ compiled,
+all six items SIGNED** — the deletion becomes a REGISTER (membership-OR-
+registered-foreign, exact both directions, evidence arm — a future deletion
+now REDS); goldens preserved by four executed proof legs (live measurement
+1.02 at the real module; counterfactual measured); extensionless registry
+ids kill the importer-scan class at the registry end; ⚠⚠ TC7 FOUND A DEFECT
+IN LANDED HB-0.md (stale requiredSymbols pin, repair rides P1 — greens the
+validator where the refuted train had declared reds); the volume's six
+delete-instructing sites DEFERRED to their own micro-act (CR-HB1′-VOL).
+Recovered artifacts + four re-runnable harnesses in `laneTC7-recovered/`.
+**LIVE: Lane TE7 EXECUTES HB-1′** on `refs/trains/hb-1p` from `f6749fad`
+(P1 incl. the HB-0 record repair → I1 → T; census to
+`2425/366/2059/20077/5650`; runtime ~28093; validator 42/0; the two goldens
+byte-checked at EVERY commit; ONE held bare gate + smoke). Chair owns CAS.
+Receipt → `laneTE7-receipt.md`. **Lane TC7 done.** **Lane TC8** compiles the INFRA-2 micro-train
 (the §38.4 delete-clause law into every preamble · the §33 codeOnly()
 re-point · the capsule HOT_FILES parse · the §35.3 coupling-template machine
 check · the fork-registry scan hazard row) → `laneTC8-*`. Both scratchpad-
