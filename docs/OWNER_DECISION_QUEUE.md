@@ -1659,3 +1659,31 @@ executors never share it).
    reds the declared reads: [] row — the packet §5.2 correction); the
    median/p95 header pin re-aims to HB-3 on §41 item 2's reasoning.
 4. The volume's false-premise sites join CR-HB1′-VOL's queued micro-act.
+
+## §43 · HB-2B IS RULED; THE THREE BOUND VALUES ARE CHAIR-SIGNED (2026-08-15
+## ~04:40, chair, vetoable; derivations in laneTC10-report.md)
+
+1. **The three values are SIGNED on their executed derivations**:
+   `HABIT_ROWS_PER_ACTOR_CAP = 24` (2× the twelve-class vocabulary; eviction
+   reachable at 18.2% of the structural product; 26.4 KB at the certified
+   30-actor ceiling) · `PLEDGE_MAX_AGE_WEEKS = 156` (a HALF_LIFE_WEEKS ladder
+   MEMBER past the executed decay/credit crossover; indexed POSITIONALLY,
+   never spelled) · `PLEDGE_BOOK_CAP = 256` (the transient/persistent parity
+   point at 71% of the structural ceiling). All three unsoaked, riding the
+   tuning signature. The volume's proposals (48/208, and the ~14-byte row
+   cost) are REFUTED on R33/R34's measurements and recorded as such.
+2. **The band-walker finding is ACCEPTED as law, not loophole** (the
+   constants enter no soak band; the chair VALUE signature is item 1).
+   ⚠ **CR-HB0B-BANDGAP is DOCKETED to the machinery queue**: `waveBlocks()`'s
+   regex cannot see letter-suffixed wave blocks, so such a wave's bands would
+   silently miss the owner's signature scan — latent here, real in general.
+3. **M1 READY-ON-SIGNATURE (now signed) and M2 READY-ON-RULING are both
+   RULED READY**; R32's absorption is SIGNED (the two-file family pin and the
+   one-rounding-spelling constraint — everything routes through
+   `roundToUnits`, mutant M-13 proves it); the region-grain shared-path
+   ordering is accepted with forced M1→M2 order; the tightened
+   mutation-manifest counts stand.
+4. **Executor tripwires**: both typecheck ratchets at exact floors — ANY
+   movement from M1's HABIT_TUNING widening is a STOP (the compile's
+   PLAUSIBLE label is honest; the executor proves it); the census interior
+   reds only as declared by figure; osrFindings 1998.
