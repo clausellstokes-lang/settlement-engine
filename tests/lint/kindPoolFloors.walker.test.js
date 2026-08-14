@@ -155,10 +155,16 @@ const ROUTED_TOKENS = 377;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
 // +1 at GR-4b-iii-a: the tenth (`succession_question_opened`), a `notable` row.
-// ⚠ THE TWO MOVE TOGETHER OR THE −6 IDENTITY BELOW BREAKS: a kind registered without an
-// EXACT_SECTION row (or routed without a registry row) shifts the unrouted-registered
-// difference off 6, which is the arithmetic that keeps this census honest.
-const REGISTERED_KIND_COUNT = 109;
+// +1 at GR-4b-iii-b: the eleventh (`succession_question_open`), a `section: null` DOSSIER
+// row — registered here and deliberately NOT routed, which is why ROUTED_TOKENS holds at
+// 377 while this figure moves.
+// ⚠ THE NO-DESK CLASS IS WHY THE TWO DO NOT ALWAYS MOVE TOGETHER. A `section: null` row
+// registers WITHOUT routing by design: it renders into another surface, so an EXACT_SECTION
+// row would claim a desk it never reaches. Each such row raises the registered-minus-routed
+// difference by exactly one — that difference is the census's honesty check, and it is
+// asserted below at its current value rather than assumed constant. A kind routed WITHOUT a
+// registry row (or a desk-bearing kind registered without routing) still breaks it.
+const REGISTERED_KIND_COUNT = 110;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -310,9 +316,9 @@ describe('SP-E frequency-scaled floors — the unvoiced-token backlog', () => {
     // Every routed token is either registered or unvoiced, and the two partition the table.
     const routedAndRegistered = Object.keys(EXACT_SECTION).filter((t) => REGISTERED_KINDS.has(t));
     expect(routedAndRegistered.length + unvoiced.length).toBe(ROUTED_TOKENS);
-    // Six registered kinds route by no EXACT_SECTION row (dossier lines and the GRAMMAR rows
-    // that file no desk). Stated as a measurement so a kind that quietly LOST its routing is
-    // visible rather than absorbed.
-    expect(REGISTERED_KIND_COUNT - routedAndRegistered.length).toBe(6);
+    // Seven registered kinds route by no EXACT_SECTION row (dossier lines and the GRAMMAR
+    // rows that file no desk; +1 at GR-4b-iii-b). Stated as a measurement so a kind that
+    // quietly LOST its routing is visible rather than absorbed.
+    expect(REGISTERED_KIND_COUNT - routedAndRegistered.length).toBe(7);
   });
 });

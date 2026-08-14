@@ -24,9 +24,10 @@
  * all of them. This re-authors nothing: it records which authored sentence belongs to
  * which world, which is a wiring decision and therefore this file's business.
  *
- * ⚠ ONE POOL INVERTS THE PARTY SLOTS, exactly the WW-C hazard. Six of the seven pools bind
- * `{settlement}` to the OBLIGEE (the court owed to — the war victor, the sale's seller) and
- * `{counterpart}` to the OBLIGOR. `treaty_true_state_chip` is authored the other way round:
+ * ⚠ ONE POOL INVERTS THE PARTY SLOTS, exactly the WW-C hazard. Every pool that binds through
+ * the obligation axis puts `{settlement}` on the OBLIGEE (the court owed to — the war victor,
+ * the sale's seller) and `{counterpart}` on the OBLIGOR. `treaty_true_state_chip` is the one
+ * row authored the other way round:
  * "in fact {settlement} has sent less than it swore … and nobody across the border has
  * weighed it" makes `{settlement}` the party WITHHOLDING. A single global binding would
  * make that chip accuse the wrong court of quiet default — compiling, passing, and exactly
@@ -156,6 +157,17 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
   grammarKindRow('succession_question_opened', 'notable', 'public', 'trade', [
     [], ['npc', 'settlement'], ['counterpart', 'settlement'], ['npc'], [],
     ['settlement'], ['npc'],
+  ]),
+  // GR-4b-iii-b — the same instrument's DOSSIER line. `section` is null and that is a
+  // derivation, not a preference: this pool renders INTO the treaty document at two mounts,
+  // so it reaches no Herald desk, takes no WHAT_PHRASES row (a phrase for a clause rendered
+  // into another surface would be vocabulary with no address), files no chronicler section
+  // and mints no `impactKind`. Its party slots are bound by the composer from the question
+  // and the persisted parchment, not through the obligee/obligor role table.
+  grammarKindRow('succession_question_open', 'n/a', 'public', null, [
+    [], ['npc', 'settlement'], ['counterpart', 'settlement'],
+    ['settlement', 'counterpart'], [], ['settlement', 'counterpart'],
+    ['npc', 'settlement'], [],
   ]),
 ]);
 

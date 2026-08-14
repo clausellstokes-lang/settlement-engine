@@ -36,6 +36,9 @@ import { treatyAgeBandWord, treatyAgeClass } from '../worldPulse/treatyLifecycle
 // WR-10 sale is its exact MIRROR — the buyer receives the holding and still pays. Reading
 // the document's victorName/loserName here would put the wrong court on every sale chip.
 import { treatyOrientationOf } from '../worldPulse/treatyOrientation.js';
+// GR-4b-iii-b — the open-question dossier line. A sibling DISPLAY leaf, so it rides this
+// module's lazy chunk and reaches the engine never.
+import { successionQuestionOpenLines } from './treatySuccessionDossier.js';
 
 /**
  * THE HOUSE-VOICE COMPLIANCE TABLE — VOICE[family][state] is a speakable line for
@@ -236,7 +239,7 @@ export function treatyTrueStateChip(worldState, pairKey, options = {}) {
 export function renderTreatyDocument(worldState, pairKey) {
   const doc = treatyDocument(worldState, String(pairKey));
   if (!doc) return null;
-  return decorate(doc, recordFor(worldState, doc));
+  return decorate(doc, recordFor(worldState, doc), worldState);
 }
 
 /** The raw ledger record behind a rendered document — the obligation axis the GRAMMAR
@@ -256,7 +259,7 @@ function recordFor(worldState, doc) {
  */
 export function renderTreatiesForSettlement(worldState, settlementId) {
   return treatyDocumentsForSettlement(worldState, settlementId)
-    .map((doc) => decorate(doc, recordFor(worldState, doc)));
+    .map((doc) => decorate(doc, recordFor(worldState, doc), worldState));
 }
 
 /**
@@ -272,7 +275,7 @@ export function renderAllTreaties(worldState) {
   const out = [];
   for (const key of Object.keys(ledger).sort()) {
     const doc = treatyDocument(worldState, key);
-    if (doc) out.push(decorate(doc, ledger[key] || null));
+    if (doc) out.push(decorate(doc, ledger[key] || null, worldState));
   }
   return out;
 }
@@ -290,8 +293,10 @@ function conveyedHoldingOf(doc) {
 /** Dress one structured document in the house voice.
  *  @param {import('../worldPulse/peaceTerms.js').TreatyDocument} doc
  *  @param {Record<string, unknown> | null} [treaty] the raw record, for the age line's
- *    obligation-axis binding. Absent ⇒ the age line falls to its party-free families. */
-function decorate(doc, treaty = null) {
+ *    obligation-axis binding. Absent ⇒ the age line falls to its party-free families.
+ *  @param {Record<string, unknown> | null | undefined} [worldState] for the pending
+ *    succession questions standing against this instrument. Absent ⇒ no dossier line. */
+function decorate(doc, treaty = null, worldState = null) {
   /** @type {TreatyTermLine[]} */
   const termLines = doc.terms.map((t) => {
     /** @type {TreatyTermLine} */
@@ -335,5 +340,11 @@ function decorate(doc, treaty = null) {
     // GR-0 THE LONGEVITY VOICE. Null while the flag is dark, because the read-model
     // carries no `ageYears` then — one gate, read once, upstream of every surface.
     ageLine: treatyAgeLine(doc, treaty),
+    // GR-4b-iii-b THE OPEN-QUESTION DOSSIER LINE. ALWAYS PRESENT and `[]` when nothing
+    // qualifies — not a style choice: treatyLifecycleVoiceDormancyFence.test.js asserts the
+    // lit read-model grows exactly the key set ['ageYears'] over the dark one and that every
+    // other key is JSON-equal across the flag, so a drop-when-absent spelling would red a
+    // file outside this slice's manifest.
+    successionLines: successionQuestionOpenLines(worldState, doc.pairKey, doc.terms),
   };
 }

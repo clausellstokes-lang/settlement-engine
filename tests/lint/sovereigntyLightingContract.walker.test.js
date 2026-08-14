@@ -4042,7 +4042,17 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // titles and one literal `describe` title; no existing registration moves.
     // Prior row retained as a cross-contract ancestry pin: files: 2413, parked: 365, credited: 2048, titles: 19992, suiteTitles: 5639
     // 2413/365/2048/19992/5639 → 2414/365/2049/20000/5640.
-    files: 2414, parked: 365, credited: 2049, titles: 20000, suiteTitles: 5640,
+    // ⏱ GR-4b-iii-b, 2026-08-14 — RE-DERIVED WHOLE after the open-question dossier
+    // line. Its one new credited file contributes exactly eight literal `it` titles and
+    // one literal `describe` title; the registry-row edit and the two governed walker
+    // updates move NO registration — the three `test.each(GRAMMAR_KIND_REGISTRY)` sites
+    // in grammarLifecycleKindPools.walker.test.js gain three RUNTIME cases from the
+    // eleventh registry row, and a `.each` case is invisible to this census by
+    // construction. PARKED IS UNCHANGED at 365: every one of the new file's titles is
+    // spelled as a literal, so door 3's reader credits the file rather than parking it.
+    // Prior row retained as a cross-contract ancestry pin: files: 2414, parked: 365, credited: 2049, titles: 20000, suiteTitles: 5640
+    // 2414/365/2049/20000/5640 → 2415/365/2050/20008/5641.
+    files: 2415, parked: 365, credited: 2050, titles: 20008, suiteTitles: 5641,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

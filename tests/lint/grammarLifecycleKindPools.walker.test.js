@@ -1,7 +1,7 @@
 /**
  * grammarLifecycleKindPools.walker.test.js — GR-0's phrased-kind walker.
  *
- * The census of the pact grammar's lifecycle voice: the exact ten wired pools, their
+ * The census of the pact grammar's lifecycle voice: the exact eleven wired pools, their
  * frequency-scaled depth, their annex-verbatim text, the per-pool slot roles (one of them
  * INVERTED), the five Herald kinds' five joins, and the two pools this wave deliberately
  * did NOT wire. It certifies presentation width only; it is not behavioural soak evidence.
@@ -52,6 +52,9 @@ const EXPECTED = Object.freeze([
   ['disavowed_by_succession', 'major', 'public', 'trade', 5],
   // GR-4b-iii-a — the unanswered question, one public line per treaty instrument.
   ['succession_question_opened', 'notable', 'public', 'trade', 7],
+  // GR-4b-iii-b — the SAME question read later on the parchment itself. `n/a` and deskless
+  // because it renders INTO the treaty document at two mounts and reaches no Herald.
+  ['succession_question_open', 'n/a', 'public', null, 8],
 ]);
 
 /** SP-6's frequency-scaled floor. The `n/a` class is a DECLARED floor of six: a dossier
@@ -94,7 +97,7 @@ const UNTIL = '# GR-1';
  * keeps ONE census over ONE vocabulary.
  *
  * ⚠ THE WINDOW IS NARROW ON PURPOSE. `# GR-4` also contains `### repudiated (WR-0c
- * producer)` and four other authored-but-unwired kinds; only the kinds actually in
+ * producer)` and the other authored-but-unwired kinds; only the kinds actually in
  * GRAMMAR_KINDS are ever read, so widening the slice picks up nothing by accident. Both
  * anchors are asserted single by the first-match test below — the correction note CR-GR4B-3
  * added sits between the `# GR-4` heading and the first `### ` heading, so it lies outside
@@ -102,7 +105,9 @@ const UNTIL = '# GR-1';
  */
 const GR4_SECTION = '# GR-4';
 const GR4_UNTIL = '# GR-5';
-const GR4_KINDS = new Set(['disavowed_by_succession', 'succession_question_opened']);
+const GR4_KINDS = new Set([
+  'disavowed_by_succession', 'succession_question_opened', 'succession_question_open',
+]);
 
 function annexPool(kind) {
   const inGr4 = GR4_KINDS.has(kind);
@@ -116,9 +121,9 @@ function annexPool(kind) {
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the ten-pool census and every registry field are exact', () => {
+  test('the eleven-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(10);
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(11);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -167,7 +172,7 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('every pool address resolves in the GRAMMAR volume, not a legacy forward', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
-    expect(address).toHaveLength(10);
+    expect(address).toHaveLength(11);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
@@ -207,7 +212,8 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
   });
 
   test('⚠ THE PARTY BINDING INVERTS FOR EXACTLY ONE POOL, and it is named', () => {
-    // Six pools are authored from the OWED court's side; the DM chip is authored from the
+    // Every other pool that binds through this axis is authored from the OWED court's side;
+    // the DM chip is authored from the
     // WITHHOLDING court's ("in fact {settlement} has sent less than it swore"). A uniform
     // binding would accuse the wrong court of quiet default — compiling, passing, and
     // exactly backwards. The inversion is declared by name, not discovered.

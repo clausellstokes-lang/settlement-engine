@@ -141,6 +141,11 @@ function TreatyBlock({ treaties, sid }) {
             {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
             {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
             {doc.ageLine && <div style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{doc.ageLine}</div>}
+            {/* GR-4b-iii-b the open-question dossier line — the same block the realm panel
+                mounts, in the same muted italic register, beneath the longevity line. */}
+            {doc.successionLines.map((line, index) => (
+              <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{line}</div>
+            ))}
           </div>
         );
       })}

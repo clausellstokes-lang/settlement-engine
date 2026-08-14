@@ -123,6 +123,13 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
       {doc.ageLine && (
         <div data-testid="treaty-age-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.ageLine}</div>
       )}
+      {/* GR-4b-iii-b the open-question dossier line — one per pending succession question
+          standing against this instrument, in the read-model's canonical order. Empty until
+          a question is actually open. NO WASH and NO native tooltip: the muted italic
+          register is the age line's, verbatim. */}
+      {doc.successionLines.map((line, index) => (
+        <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{line}</div>
+      ))}
       {/* GR-0 the DM true-state chip: what the ledger knows and the owed court does not.
           Rendered ONLY for a ground-truth viewer, and only where the truth diverges.
           NO WASH (kill-list cure, lane AB): it is named for a stamp but renders an authored

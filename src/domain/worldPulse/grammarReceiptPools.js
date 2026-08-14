@@ -10,7 +10,7 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries the ten governed pools wired through GR-4b-iii-a.
+ * carries the eleven governed pools wired through GR-4b-iii-b.
  *
  * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
  * governed GR-0 and GR-4 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
@@ -139,6 +139,24 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     'Nothing has been broken. Nothing has been confirmed either.',
     (x) => `The clerks in ${x.settlement} have laid the unanswered oath on the council table, with room beneath it for one word.`,
     (x) => `Whatever the new seat decides, the oath ${x.npc} swore will be remembered longer than its terms.`,
+  ],
+  // GR-4b-iii-b — THE OPEN-QUESTION DOSSIER LINE. The same instrument the beat above
+  // announces, read later on the parchment itself: one line per validated pending question
+  // standing against one treaty. It claims no answer, no successor name, no breach and no
+  // per-treaty uniqueness — two questions may lawfully point at one treaty, and each renders
+  // its own line. ⭐ `{npc}` is the FALLEN holder on the ACTING court's oath stamp, and
+  // `{settlement}` is the acting court for EVERY viewer (CR-GR4B-15): variant 3 is authored
+  // from the counterpart's vantage in its own words, so re-binding per viewer would invert
+  // that family's meaning. Corrected wholesale at A-22 / CR-GR4B-12.
+  succession_question_open: [
+    'The new seat has not yet said whether the old oath holds.',
+    (x) => `The oath ${x.npc} swore for ${x.settlement} remains before the new seat, with no answer entered.`,
+    (x) => `From ${x.counterpart}, the treaty still reads as standing while ${x.settlement}'s answer remains pending.`,
+    (x) => `The parchment still joins ${x.settlement} to ${x.counterpart}; the pending question has not broken it.`,
+    'One docket entry holds the whole choice: honor the old oath or disavow it.',
+    (x) => `Until ${x.settlement} answers, the treaty with ${x.counterpart} remains live under the terms already written.`,
+    (x) => `Since ${x.npc} left the seat, ${x.settlement}'s treaty question has remained open and the treaty itself in force.`,
+    'If the seat gives no answer, the oath stands.',
   ],
   hollowed_detected: [
     (x) => `Hollowed and found out: the ${x.term} was kept on parchment and nowhere else.`,
