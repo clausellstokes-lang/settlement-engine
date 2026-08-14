@@ -612,7 +612,9 @@ export function coalitionConsolidation01(worldState, cid, item) {
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {string} cid
  * @param {PolItem | null | undefined} item
- * @param {string} moveKind  the strategy move key ('deploy'|'sue_for_peace'|'fortify'|…)
+ * @param {string} moveKind  a member of STRATEGY_MOVES ('deploy'|'sue_for_peace'|'defend'|…).
+ *   ⚠ The dead `'fortify'` disjunct was deleted at HB-1: that token belongs to the
+ *   MOBILIZATION vocabulary, never to this one, and the arm stayed live through `defend`.
  * @returns {number}
  */
 export function blocDecisionFactor(worldState, cid, item, moveKind) {
@@ -632,7 +634,7 @@ export function blocDecisionFactor(worldState, cid, item, moveKind) {
     pull += strain * 0.6; // revanchism: the term-burdened faction becomes the war party.
   } else if (move === 'sue_for_peace') {
     pull = (end === 'commerce' ? 0.5 : end === 'survival' ? 0.4 : 0) - strain * 0.5;
-  } else if (move === 'fortify' || move === 'defend') {
+  } else if (move === 'defend') {
     pull = (end === 'survival' ? 0.6 : end === 'seats' ? 0.2 : 0);
   }
   const factor = 1 + T.DECISION_LOAD_SPAN * command * clamp(pull, -1, 1);

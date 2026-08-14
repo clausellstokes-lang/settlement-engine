@@ -94,6 +94,7 @@ import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { settlementPoliticsActive, blocDecisionFactor } from './settlementPolitics.js';
 import { makeCommitmentLoad, moveCourseRelation } from './momentum.js'; import { makeCurrentWarCasusRead, terminationPeaceReasonLines, warFactorForCasusRead } from './warTermination.js';
 import { inheritedWarDemandFor } from './warPeaceDecision.js';
+import { MARTIAL_HISTORY_MOVES } from './strategyMoves.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -798,10 +799,9 @@ function enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness = aggres
       if (!dispositionReasons[move]) dispositionReasons[move] = [];
       if (!dispositionReasons[move].includes(receipt)) dispositionReasons[move].push(receipt);
     };
-    const martialMoves = new Set(['defend', 'hold', 'deploy', 'sue_for_peace', 'credit', 'missionize', 'prestige', 'opportunity']);
     for (const move of Object.keys(scored)) {
       let bar = 1;
-      if (D.martialInAggressiveness === true && martialMoves.has(move)
+      if (D.martialInAggressiveness === true && MARTIAL_HISTORY_MOVES.includes(move)
         && !(move === 'sue_for_peace' && termination)) {
         // Martial history already entered this move through computeAggressiveness.
         // Record that single consumption here; never multiply the bar by it again.

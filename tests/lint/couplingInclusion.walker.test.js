@@ -465,6 +465,26 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'HB substrate — the frozen reinforcement/decay curve and the single rounding door, riding the shared decay law and the shared outcome ladder rather than authoring either',
     reads: Object.freeze([]),
   }),
+  // ── HB-1 (2026-08-14): THE ACTION VOCABULARY AND THE FORK REGISTRY ────────────
+  //
+  // The same vocabulary argument one rung along. strategyMoves.js is the estate's ONE
+  // closed strategy-move list, spelled against by the chooser, the bloc decision load, the
+  // commitment load and the war-intent order — four ports, no subject of its own. ⛔ Its
+  // zero-import shape is CONTRACTUAL: a cross-volume collision contract requires the shared
+  // move vocabulary to be a DEPENDENCY-FREE leaf so the second volume can amend rather than
+  // mint, and a family home is exactly the back door a dependency would arrive through.
+  // habitForkRegistry.js is the classification OF those branches — a record about choosers
+  // rather than a chooser, and it schedules nothing and imports no port.
+  'src/domain/worldPulse/strategyMoves.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'the estate\'s ONE closed strategy-move vocabulary, spelled by four ports and owned by none; its zero-import shape is required by the cross-volume single-exporter contract, not merely convenient',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/habitForkRegistry.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'the HB fork classification record — every weighted decision fork in the domain with its disposition and the close it owes; it is a record ABOUT choosers rather than one, and its only import is the argued habit vocabulary leaf',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -497,6 +517,19 @@ const ARGUED_HOSTS = Object.freeze([
  * roster grew by three and the estate's DECLARED cross-layer reach grew by one edge that
  * was previously dark. A fourteenth admission is the next deliberate act.
  *
+ * 15 → 17 on 2026-08-14 (HB-1, the same train's second member), on the SAME vocabulary
+ * argument one rung along: a closed action vocabulary that every port branching on a
+ * strategy move spells against, and the fork registry that classifies those branches. ⛔ The
+ * vocabulary leaf's zero-import shape is contractual rather than incidental — a cross-volume
+ * collision contract requires the shared move list to be a DEPENDENCY-FREE leaf, and a
+ * LAYER_PATTERNS home would be the back door a dependency arrives through. Measured at the
+ * raise: both leaves are unlayered and already invisible to `scanCrossLayerPairs`, and their
+ * outbound layered reach measures 0 and 0 — the registry reaches only its sibling habit
+ * vocabulary, which is itself argued here. ⚠ THE CEILING WAS RE-READ AT ITS LIVE VALUE OF
+ * FIFTEEN BEFORE THIS EDIT, never patched blind from the value the first member inherited: a
+ * second 13 → 15 would red the exact-equality arm in the one file whose whole subject is a
+ * stale denominator. An eighteenth admission is the next deliberate act.
+ *
  * 13 → 15 on 2026-08-14 (HB-0, the `hb-1` train's first member), and the raise is recorded
  * rather than merely made. It admits the habit family's two substrate leaves under the
  * vocabulary argument this map already carries for bandFamilies, bandedStock and lawWord —
@@ -506,7 +539,7 @@ const ARGUED_HOSTS = Object.freeze([
  * with its reason. The net effect is one cross-layer read that would otherwise have been
  * dark becoming enumerated. A sixteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 15;
+const ARGUED_ROSTER_CEILING = 17;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

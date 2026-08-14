@@ -4105,7 +4105,35 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // source phase fails closed if such a row leaks into its report. The +8 from M2 lands there.
     // Prior row retained as a cross-contract ancestry pin: files: 2416, parked: 365, credited: 2051, titles: 20016, suiteTitles: 5642
     // 2416/365/2051/20016/5642 → 2418/366/2052/20024/5643.
-    files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643,
+    // ⏱ TRAIN hb-1 (M1 + M2), 2026-08-14 — RE-DERIVED WHOLE INSIDE THE TRAIN, at the last commit
+    // that moves a `tests/` byte, which is what leaves the train's terminal DOCS-ONLY and so makes
+    // the regenerated base-state capsule's stamped window literally true (the infra-1 precedent,
+    // OWNER_DECISION_QUEUE.md §30). DESIGN_BUILD_EFFICIENCY.md §2.3 makes the TRAIN the single
+    // non-terminal census holder, so the members' individual movements are working figures inside
+    // the unexposed chain and the re-derivation happens ONCE, here. The SUMMED cause, per member:
+    //   • M1 (HB-0, the habit substrate) contributes THREE new CREDITED files —
+    //     tests/domain/habitVocabulary.test.js and tests/domain/habitCurve.test.js at eight literal
+    //     `test` titles and one literal `describe` each, and
+    //     tests/lint/habitBandsReconciliation.walker.test.js at six and one:
+    //     +3 files / +3 credited / +22 titles / +3 suite titles. Its two new `src` leaves and its
+    //     two registration edits move NO registration and therefore no figure.
+    //   • M2 (HB-1, the action vocabularies and the fork registry) contributes FOUR new CREDITED
+    //     files — tests/domain/strategyMoves.test.js and tests/lint/chooserTotality.walker.test.js
+    //     at eight and one each, tests/domain/habitForkRegistry.test.js and
+    //     tests/lint/strategyMoveVocabulary.walker.test.js at six and one each:
+    //     +4 files / +4 credited / +28 titles / +4 suite titles.
+    // ⚠ THE INTERIOR STATE IS NAMED RATHER THAN HIDDEN: at M1's own commit this walker READ RED at
+    // 2421/366/2055/20046/5646 against the row below, by exactly the figure declared in that
+    // member's packet before the commit existed. That is lawful precisely because no interior
+    // commit is ever a branch tip, and it is cured HERE.
+    // ⚠ PARKED IS UNCHANGED AT 366, and that is earned rather than lucky: every title across all
+    // seven files is spelled as a LITERAL in a straight-line registration, so door 3 credits each
+    // file statically. A `test.each()` case is invisible to this census by construction and a
+    // `describe.runIf()` parks a file WHOLE — either would have broken this arithmetic, and the
+    // train forbade both by name.
+    // Prior row retained as a cross-contract ancestry pin: files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643
+    // 2418/366/2052/20024/5643 → 2425/366/2059/20074/5650.
+    files: 2425, parked: 366, credited: 2059, titles: 20074, suiteTitles: 5650,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
