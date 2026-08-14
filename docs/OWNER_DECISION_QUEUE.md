@@ -1427,3 +1427,32 @@ zero new false positives; census-neutral +0 tuple).
    (`codeOnly()`, ten importers). One micro-act, queued behind the ES trains.
 4. The M8n prose-correcting control, the aiCharterBundle restamp, and the
    discarded symlink dirty-build are RATIFIED as handled.
+
+## §34 · THE GR-6 TRAIN IS RULED (2026-08-14 ~15:10, chair, vetoable)
+
+Target ADOPTED: train `gr-6` = GR-6a (mints `mediationGeneralizedEnabled`,
+flag boundary + truncation boundary) → GR-6b (the war-opener mount, census
+re-record at the last tests-moving commit). GR-6c/d/e REFUSED-IN-PART on
+TC5's executed evidence (no expiry transition site / worstObservedEver
+measures zero / a clause is not a spec) — recorded, not built. The hb-1 and
+ep-0 alternatives stay recorded.
+
+CQ rulings (batched per §5): CQ-1 AUTHORED row CONFIRMED (GR has no pending
+regime). CQ-2 the band is CHAIR-AUTHORED and unsoaked, riding the tuning
+signature (the CHARGE_BASE precedent): the packet's drafted value stands AS
+the chair's IF it carries an executed band rationale; a blank or
+rationale-free band is a promotion STOP. CQ-3 the eighth GRAMMAR regex in the
+leaf's own commit is CONFIRMED (rename declined). CQ-4 the coupling row
+direction is RE-MEASURED at promotion; `reads` stays OUTBOUND-ONLY. CQ-5
+confirmed at dispatch (census free, porcelain clean). CQ-6 the load-point
+operand: the promotion quotes the live expression and applies the packet's
+drafted choice; shape mismatch = STOP. CQ-7 the coalition null-order reading
+is PINNED AS INHERITED. CQ-8 the consumer census walker is NAMED at
+promotion.
+
+OQ-TC5-1: **the cross-volume train ban LIFTS upon gr-6 landing clean** (its
+§2.5 condition is already exceeded); first application remains
+same-volume-preferred. OQ-TC5-2: **HB Q1's seal is NARROWED** — by its own
+words it binds HB-3 onward, not HB-0/HB-1, which become dispatchable once
+their Q2/Q3 are ruled at compile; the INDEX's HB not-dispatchable prose is
+corrected in that train's own P-commit.
