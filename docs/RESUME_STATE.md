@@ -103,7 +103,23 @@ the kind-pool arithmetic INVERTS post-iii-b: reaffirmed carries a DESK so
 only exercise the treaty-stage resolver; unbanked, cure census-neutral).
 ✅ CHAIR RULED §29 (CR-GR4B-16..19, one veto surface, ledger `690875f3`) after
 spot-verifying the three saves (110 confirmed at the walker; CR-GR4B-13 taken
-×3). **LIVE: Lane TE2 (Opus) EXECUTES THE TRAIN** on `refs/trains/gr-4b-ii`
+×3). **✅ TE2's TRAIN IS BUILT AND GREEN ON THE PRIVATE REF (~07:30):** chain
+`refs/trains/gr-4b-ii` = I1 `039f8380` (annex, zero census motion, base-equal
+red-set proof) → I2 `b3602c15` (reaffirmed: A1-A8 8/8, 270/270 battery, 8/8
+mutants, ONLY the one named interior red) → T `7b54c038` (census EXACT
+`2416/365/2051/20016/5642`, runtime 28032/16, bare gate TRUE_EXIT=0 all 20
+steps, smoke 0). Branch UNTOUCHED at `d383aa3c`; minifold HEAD detached at T
+(J-E3, reversible). Receipt: `laneTE2-train-receipt.md`. Chair ratified J-E2
+(walker-conformant divergence rows; the packet's prohibition was the defect)
+and the anchored-negative cure; the implementationSession one-shot red stays
+PLAUSIBLE-flake (watch at verification). **LIVE: TE2 authors T′** (docs-only
+child of T: W2 packet LANDED + GR preamble + INDEX + surgical manifest row +
+capsule restamp; validator expected 36/0). On its report: chair verifies
+(focused suite at T′, validator, chain topology) → **CAS `d383aa3c` → T′** →
+re-attach HEAD to the branch → ledger refresh. A successor with no TE2: the
+chain + receipt carry everything; verify then CAS per §2.4.
+
+**(superseded) Lane TE2 (Opus) EXECUTES THE TRAIN** on `refs/trains/gr-4b-ii`
 from `d383aa3c`: W1 annex (CR-GR4B-16/A-23 renumber) → W2 `reaffirmed` (13
 paths) → terminal census `2416/365/2051/20016/5642` + ONE bare gate held
 in-turn + smoke; chair owns CAS + flip; receipt → `laneTE2-train-receipt.md`.
