@@ -1,6 +1,11 @@
 # HB / HB-0B — THE THREE STRUCTURAL BOUNDS, MINTED IN THEIR ONE LAWFUL HOME
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `c777a158da79830d46862b8df24f427dd9050824`, member M1 of the `hb-2b` train.
+  Chain: promotion `3ad7c082` → this implementation commit → `P1b` → `I2` → the terminal.
+  ⭐ **BOTH TYPECHECK RATCHETS HELD THEIR EXACT FLOORS** — `173/173` (`tsconfig.full.json`)
+  and `1134/1134` (`tsconfig.domain-strict.json`) — which §10 risk 2 could only label
+  PLAUSIBLE at compile. The §43 item 4 tripwire is discharged on executed evidence.
 - **Train:** `hb-2b`, member **M1 of two**. Private ref `refs/trains/hb-2b`.
 - **Authority:** **OQ §42.2**, which rules this micro-act into existence:
   *"a two-member train `hb-2b` = M1 'HB-0b' (the three bounds minted in `HABIT_TUNING` — the one

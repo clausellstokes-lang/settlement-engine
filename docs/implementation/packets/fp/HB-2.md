@@ -1,6 +1,6 @@
 # HB / HB-2 — THE HABIT LEDGER, THE GATE LADDER'S FIRST DOOR, AND THE FLAG
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Train:** `hb-2b`, member **M2 of two**, executing after M1 (HB-0B). Private ref
   `refs/trains/hb-2b`.
 - **Authority:** **OQ §41** items 1–6 (which bind this member verbatim) and **OQ §42.3** (three
@@ -12,9 +12,10 @@
   `84fc1a6b8177aaaa26983f8ccb86003adb56f70dc6789213030ede947ddeb388`
   ⚠ **RE-COMPUTED AT P1** — a blank or stale sha is a promotion STOP. The git **blob** id is
   `28db0b4ed6ea3740a0d94da744b7deb963873574`, a different digest.
-- **Verified base:** `claude/composite-r4` at `e5ecc83dd443d13bdbc495d8cf701f93504fccdd`
-  M1's commit.** ⚠ **THIS MEMBER'S BASE IS I1, NOT HEAD** — its §5 measurement table is re-taken
-  after M1 lands.
+- **Verified base:** `claude/composite-r4` at `c777a158da79830d46862b8df24f427dd9050824`
+  ⚠ **THIS MEMBER'S BASE IS `I1` — M1's implementation commit — NOT the train's opening base
+  `e5ecc83d`.** M1 moved `habitCurve.js` and `habitCurve.test.js`, so this member's §5
+  measurement table is re-taken against its own parent rather than inherited.
 - **Capsule:** `BASE_STATE.json` stamped `5bcca49a`; `e5ecc83d` is its docs-only child, so its
   figures are citable as executed. ⛔ Every row this manifest touches is RE-EXECUTED.
 - **Bands:** ⛔ **NONE BY DESIGN — AND THE PREMISE IS NOW TRUE BY CONSTRUCTION RATHER THAN
