@@ -63,7 +63,33 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~04:10 EDT) — §27 BUILD-EVERYTHING ORDERING RULED;
+# ⭐⭐ CURRENT (2026-08-14 ~05:40 EDT) — ✅ GR-4B-IIIB LANDED at `770167c5`,
+# flipped + FIRST CAPSULE stamped at `d383aa3c`; the seal is LIFTED; Lane TC2
+# compiles the GR-4B-II train
+
+**GR-4B-IIIB IS DONE END-TO-END.** Implementation `770167c5` (exact ten paths,
++100/-25 tracked; chair re-ran B1-B8 8/8 TRUE_EXIT=0 and verified the receipt
+sha `18b8b135…`); flip `d383aa3c` (packet §13 + INDEX + surgical manifest flip
++ `docs/implementation/BASE_STATE.json`, the FIRST hand-stamped capsule at
+770167c5); validate:packets 35/0 TRUE_EXIT=0; porcelain ZERO. Census landed
+exactly as reserved `2415/365/2050/20008/5641`; runtime 28021/16; smoke 516.
+Notable in-lane: the gate caught 8 un-anchored negatives + 1 bare seed loop in
+the new test file (cured by HABITAT REMOVAL, no escape hatch); M4's vacuity
+finding is load-bearing — the treaty ledger is ONE-INSTRUMENT-PER-COURT-PAIR
+(pairKey from parties), so the treaty-key guard is defence-in-depth: DO NOT
+"simplify" it away (recorded in packet §13). J1 ratified (document-order pin).
+IB also hit outlast-the-gate once (recovered; authoritative gate re-held).
+⚠ One foreign `git stash` entry exists (analytics-intelligence-layer) —
+pre-existing, untouched, NOT ours.
+
+**LIVE: Lane TC2 (Opus) compiles the GR-4B-II TRAIN** (first §28 train):
+GR family preamble + train plan + W2 `reaffirmed` packet; W1 = the B1 annex
+act re-verified. Deliverables → scratchpad `laneTC2-*`. A successor COLLECTS.
+Queue behind it: infrastructure train (capsule script + PACKET_STANDARD
+amendment + IP-1 + the FPC-found INDEX/spine prose contradictions) → ES spine
+trains → the 85-wave §27 inventory per laneFPC-census.md.
+
+# (superseded ~05:40) ⭐⭐ CURRENT (2026-08-14 ~04:10 EDT) — §27 BUILD-EVERYTHING ORDERING RULED;
 # GR-4B-IIIB sealed session in flight; ⛔ nothing else lands until IB lands
 
 **⭐⭐ §27 (owner, ~04:05): "build everything, diagnostic soak, fix, full soak,

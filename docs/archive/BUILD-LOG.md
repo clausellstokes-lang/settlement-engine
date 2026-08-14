@@ -6,11 +6,14 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `2dd09360`
-- Commits: 3237
+- HEAD: `d383aa3c`
+- Commits: 3240
 - Working tree at refresh: 0 dirty entries
 
 ```
+d383aa3c 2026-08-14 docs: record GR-4b-iii-b landing; stamp the first base-state capsule
+770167c5 2026-08-14 feat: render open succession dossier lines
+cdd4bf52 2026-08-14 docs: promote GR-4b-iii-b packet
 2dd09360 2026-08-14 docs: finish A-22 succession exemplar cure
 c39d2413 2026-08-14 docs: correct succession dossier pool
 4a1a3707 2026-08-14 docs: record GR-4b-iii-a landing
@@ -408,7 +411,4 @@ d5b0fca8 2026-08-04 Lane WZ-3 piece 1: the lint pair resolves by restructure —
 af1b9d38 2026-08-03 Queue: lane WZ-2's rulings, the razing's mouth, and the two stops that keep WR-8 open
 172e5f22 2026-08-03 Lane WZ-2 piece 3: the license ledger is built, conserved and returned — and STOPPED one line short, on a gate that is not size
 6f1bada6 2026-08-03 Lane WZ-2 piece 2: the razing gets its mouth — a victor that burns mints no occupation, and the town it burned stays burned
-d5ec720e 2026-08-03 Lane PW piece 1: the sticky bar draws its ring inside its own box — five clipped top edges close, and the bronze is measured on wood
-4423cbda 2026-08-03 Lane WZ-2 piece 1: three paths nobody had ever run, and two rulings that were true about the wrong thing
-7bee2e93 2026-08-03 Lane PW piece 3: the deep-craft burn-down — five z-axis lifts struck, and not one ceiling raised
 ```
