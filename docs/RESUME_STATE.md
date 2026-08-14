@@ -133,10 +133,24 @@ substrate sweep protocol with grades, annex artifact, staleness + consumption
 laws; TTS — the train-topology simulator importing the REAL validator, with
 the banked rule inventory; §4: nothing relocated stops binding at its
 original site). TE10's probes PRESERVED from the volatile scratchpad at
-`docs/preverification-tools/laneTE10-probe{2,3}.mjs.txt`. **LIVE: Lane WV
-executes the FIRST SPV SWEEP (the WC volume)** — read-only beside TE10,
-annex → `laneWV-WC-SUBSTRATE.md` + `laneWV-report.md`; the chair grades the
-sweep at collection. **infra-3 QUEUED** (first train after hb-2b): the TTS
+`docs/preverification-tools/laneTE10-probe{2,3}.mjs.txt`. **✅ Lane WV COLLECTED (~07:40): THE FIRST SPV SWEEP IS COMPLETE AND PAID
+FOR ITSELF** — WC volume, sweep sha `e5ecc83d`: **238 claims / 159 TRUE /
+36 REFUTED / 43 UNVERIFIABLE**. Sharpest: WC-0's own move-vocabulary fence
+REDS ON LANDING DAY (three matches vs its at-most-one, all in HB-1's landed
+strategyMoves.js) · the TERM_FAMILIES pin misnamed AND its prescribed cure
+FORBIDDEN by the landed code · peaceTerms headroom 3 not 15 (dangerous
+direction) · ⛔⛔ **`WC_CHAIR_RULINGS.md` EXISTS IN NO REF** — the cited home
+of the 22 CR-WC rulings on which "all 17 waves DISPATCHABLE" rests; the
+family's dispatch authority is UNGROUNDED until found (search the archives/
+FVQ/memory estate) or RE-RULED · three "MEASURED" counts self-refuting.
+**C1 verdict:** partially discharged — HB minted `strategyMoves.js` + the
+fence; WC-0 DROPS that LANDS item; the C3 law-band half is WC's but its
+non-vacuity arm as authored is UNSATISFIABLE; WC-4's dispatched moves join
+ALL_MOVE_TOKENS never STRATEGY_MOVES. Committed flag rows at sweep sha = 18
+(the 19th is hb-2b's in-flight mint). Annex: `laneWV-WC-SUBSTRATE.md`;
+report with 6 judgments + 6 chair questions: `laneWV-report.md`. ⏳ CHAIR:
+rule the six questions + the WC_CHAIR_RULINGS search BEFORE WC-0 compiles
+(fresh-context sitting). **infra-3 QUEUED** (first train after hb-2b): the TTS
 script + PACKET_STANDARD/preamble amendments + this volume's fold +
 CR-HB0B-BANDGAP + the JSDoc-vacuity cure. WC-0's compile follows the sweep
 + infra-3, citing the annex.
