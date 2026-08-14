@@ -76,6 +76,15 @@ resumes at scale under §25's lane law after the current sealed session; next
 build order derives from FP §5 dependency order (ES-1 unblocked since SP-D).
 IP volume §4 corrected by pointer to §27.
 
+**⭐ §28 IS ARCHITECTED: `docs/DESIGN_BUILD_EFFICIENCY.md` (this branch; folds
+post-seal).** Operative NOW by procedure: batch rulings + pipeline staffing;
+the chair hand-stamps the FIRST BASE-STATE CAPSULE at the GR-4B-IIIB flip.
+First train = GR-4B-II (annex + `reaffirmed`, 2 members) with the GR family
+preamble authored at compile. Post-seal infrastructure train: capsule script +
+PACKET_STANDARD amendment + IP-1. Then the ES spine as trains. Train commits
+build on `refs/trains/<id>` (never the branch tip), one CAS exposes the green
+terminal only, gate NEVER thinned, cap 4 members, review after two trains.
+
 **GR-4B-IIIB PROMOTED at `cdd4bf52`** (packet + INDEX READY-27 row + surgical
 manifest append; validate:packets **35 packets / 1 READY, TRUE_EXIT=0**). Chair
 rulings SIGNED in-packet: CR-GR4B-13 (surfaces 1→2, both mounts corpus-named) ·
