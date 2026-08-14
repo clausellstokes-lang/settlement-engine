@@ -84,6 +84,17 @@ re-charter's first consumer of `habitVocabulary.js`, which must ALSO re-aim
 or it reds a test green since this landing. Receipt: `laneTE6-receipt.md`
 (679 lines). Base-check worktree removed.
 
+**LIVE (~21:00, keeper tick): TWO compile lanes** — **Lane TC7** re-charters
+HB-1 from the parked `refs/trains/hb-1-refuted` (the register cure; the
+goldens-byte-identical hard constraint; `src/domain/region` joins the
+root-set; the orphan-window discharge INCLUDING the habitCurve re-aim;
+§38.4 binds) → `laneTC7-*`; **Lane TC8** compiles the INFRA-2 micro-train
+(the §38.4 delete-clause law into every preamble · the §33 codeOnly()
+re-point · the capsule HOT_FILES parse · the §35.3 coupling-template machine
+check · the fork-registry scan hazard row) → `laneTC8-*`. Both scratchpad-
+only; the chair rules at collection. gr-6's re-charter stays CHAIR-OWED (the
+mount ruling + the band the chair must author — not delegated).
+
 **RE-CHARTER QUEUE (chair-owed, next):** (1) HB-1 on the register cure + the
 `src/domain/region` fourth directory + the fork-registry scan class, from
 the parked ref; (2) gr-6 on the HOSTILE_CONFIDENCE mount + chair-authored
