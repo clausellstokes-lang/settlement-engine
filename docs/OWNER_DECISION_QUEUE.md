@@ -1634,3 +1634,28 @@ executors never share it).
    JSDoc included) is RECORDED as a standing HB law; every future HB compile
    preflights it.
 6. R26-R30 and the struck provisional finding are ratified on the report.
+
+## §42 · HB-2 STOPPED PRE-P1 ON R31; ROAD B IS RULED (2026-08-15 ~03:20,
+## chair, vetoable; full evidence in laneTE9-receipt.md)
+
+1. **TE9's pre-P1 STOP is RATIFIED** — the charter's "structural bounds
+   declared at HB-0" are UNMEASURED FICTION (HABIT_TUNING has ten keys, none
+   a cap or age; zero grep hits estate-wide; PLEDGE_BOOK_CAP has no proposed
+   value anywhere in the volume). Sixth instance of the unmeasured-charter
+   class in the HB era. Every build road tripped a declared STOP; halting
+   over choosing was correct.
+2. **ROAD B IS RULED**: a two-member train `hb-2b` = M1 "HB-0b" (the three
+   bounds minted in HABIT_TUNING — the one lawful home per habitCurve's
+   landed header — with their tests) → M2 = HB-2 on the corrected premise,
+   twelve paths, honest Bands line. **The bound values are chair-signed at
+   promotion under the rationale-or-STOP tripwire**: the compile DERIVES
+   recommendations from measured substrate (the persist-cloud cost note at
+   volume :4202 for the caps; the HABIT_SPAN relationships for the age),
+   marked unsoaked and riding the tuning signature like every HABIT_TUNING
+   value. A value without an executed derivation is a promotion STOP.
+3. **The three TE9 findings BIND the compile**: the OSR clean-idiom
+   confirmation (receiver-grounding — 1998 holds for any adopter); the
+   num/asObject helpers must be LOCAL (importing them from npcLadderState
+   reds the declared reads: [] row — the packet §5.2 correction); the
+   median/p95 header pin re-aims to HB-3 on §41 item 2's reasoning.
+4. The volume's false-premise sites join CR-HB1′-VOL's queued micro-act.
