@@ -625,16 +625,28 @@ Compiled evidence and the full measurement live in
 [`../implementation/packets/foreign-policy/GR-4B.md`](../implementation/packets/foreign-policy/GR-4B.md)
 §3.4 and §12a.
 
+⛔⛔ **CORRECTED 2026-08-13 (CR-GR4B-10, after GR-4d's terminal landing) — THE OPENING
+POOL WAS AUTHORED ON A SUCCESSOR / MANY-INSTRUMENT AXIS THAT THE LANDED PRODUCER DOES NOT
+CARRY.** GR-4d opens one retained proposal for one exact treaty. Its descriptor carries the
+acting court, the other court, that treaty's key, and the fallen holder's id; it carries no
+successor name and no grouped treaty count. The selected treaty's own `sworn` stamp does carry
+the fallen holder's persisted name, and the producer has already proved the exact
+`settlementId` + `npcId` match before a question can exist. Therefore `{npc}` below binds only
+to the **FALLEN HOLDER**, never the successor; `{band}` leaves the block; variants 2, 4 and 7
+are re-authored on the fallen-holder / new-seat axis; variant 6 is singularized; and the
+slotless exemplar's editorial tag is corrected. The seven families, their order, audience and
+`notable` significance do not move. Ruled at **A-21** under A-11, A-15, A-18 and A-20.
+
 ### succession_question_opened (GR-4) — Herald / chronicle — significance: notable
-SLOTS: {settlement} {counterpart} {npc} {band}
+SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
-1. The old seat swore it; the new seat must choose. `[exemplar, slotted]`
-2. {npc} has taken the seat at {settlement} without taking the oath that stands with it, and the parchment has been left where the old seat left it.
+1. The old seat swore it; the new seat must choose. `[exemplar]`
+2. {npc} left an oath standing at {settlement}; the new seat has taken the chair while the parchment remains unanswered.
 3. The court of {counterpart} is waiting on one word from {settlement}, and the market is trading on which word it will be.
-4. Every treaty {npc} did not sign is a question this week, and there are {band} of them.
+4. The oath {npc} swore is a question this week, and the clerks have set its parchment before the new seat.
 5. Nothing has been broken. Nothing has been confirmed either.
-6. The clerks in {settlement} have laid out every unanswered oath on one table, and the table is not large enough.
-7. Whatever {npc} decides, the deciding itself will be remembered longer than the terms.
+6. The clerks in {settlement} have laid the unanswered oath on the council table, with room beneath it for one word.
+7. Whatever the new seat decides, the oath {npc} swore will be remembered longer than its terms.
 
 ### honored_by_silence (GR-4) — the question expires to HONOR — significance: routine
 SLOTS: {settlement} {counterpart} {npc}
@@ -1018,3 +1030,4 @@ token similarity with their slots blanked (the family rule, measured).
 | A-18 | Several natural deepening lines wanted a count the pools do not declare (`twice`, `one page apart`, `three courts`, `the first caravan`) | The no-digits law (constraint 1 + A-4 + A-10) wins every time, and the fix is never a `{band}` bolted onto a pool that has no band to fill it. Ordinals of SEQUENCE survive (`the first caravan`, `a first offer`, `the second draft` — these order events, they do not count state); counts of STATE were rewritten to the bilateral form (`the same promise in both`), to a position (`on facing pages`), or to the countless form (`every court in the matter`). No pool's `SLOTS:` line was widened to buy a sentence. |
 | A-19 | `treaty_lapsed` variant 1 exceeds the twenty-six-word convention, and the deepening pass was the first to measure it | Left as written and FLAGGED in the coverage ledger, not fixed. The append-only mandate is the stronger rule, and the line is doubly load-bearing — it is the volume's exemplar (A-1) and the Law One rewrite (A-2). A pass authorized to add variants is not authorized to reword the one sentence the volume quotes. Vetoable: if the chair wants it trimmed, it is a one-line edit with an A-1/A-2 re-check. |
 | A-20 | GR-4's `disavowed_by_succession` exemplar slotted `{npc}` to the SUCCESSOR, and `repudiated`'s third variant slotted `{reason}` — neither fact is on a surface the treaty stage can read (2026-08-12, CR-GR4B-3) | **Reachability wins, on the A-11 and A-15 precedents** — a causal claim the record does not carry is struck, and a slot no variant can fill is a defect rather than a courtesy. `{npc}` re-slots to the **fallen holder**, whose name IS persisted on the treaty's own `sworn` stamp and whom the landed engine receipt already names; `{reason}` is struck from `repudiated`'s `SLOTS:` line and its third variant re-authored to the same angle without it, keeping that pool at its `major` floor of four. ⚠ **This pass is authorized to reword an exemplar and A-19's pass was not**, and the difference is the point: A-19 protects a sentence a variant-adding pass had no cause to touch, whereas an unfillable slot renders the whole family unreachable, so the alternative here was not a thinner corpus but a pool no wave could wire. The dated note at the head of the `# GR-4` section carries the measurement. |
+| A-21 | GR-4's `succession_question_opened` pool named the SUCCESSOR through `{npc}`, grouped several treaties through `{band}` / “every,” and marked its slotless exemplar as slotted, while landed GR-4d retains one proposal per exact treaty and carries a fallen-holder id but no successor name or grouped treaty count (2026-08-13, CR-GR4B-10) | **The one-instrument producer and the parchment's history win, under A-11, A-15, A-18 and A-20.** `{npc}` binds only to the **fallen holder**, by matching the question's acting court and `npcId` against the selected treaty's total `sworn` reader, whose name is persisted; it never triggers a successor or roster lookup. `{band}` leaves the block, the multiple-instrument claims are singularized, and variants 2, 4 and 7 speak only the fallen holder's oath and the new seat's pending choice. The slotless exemplar is `[exemplar]`, not `[exemplar, slotted]`. All seven families remain, in order, and every named slot is supplied by the real one-question producer. |
