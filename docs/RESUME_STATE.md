@@ -101,7 +101,15 @@ the kind-pool arithmetic INVERTS post-iii-b: reaffirmed carries a DESK so
 110→111 with identity STAYING 7 (a section:null copy predicting 8 reds); (3)
 ⛔ the landed silence pin is a LIVE VACUITY (title names dismiss, assertions
 only exercise the treaty-stage resolver; unbanked, cure census-neutral).
-⏳ CHAIR: batch-rule CR-GR4B-16..19 (one veto surface), then execute the train
+✅ CHAIR RULED §29 (CR-GR4B-16..19, one veto surface, ledger `690875f3`) after
+spot-verifying the three saves (110 confirmed at the walker; CR-GR4B-13 taken
+×3). **LIVE: Lane TE2 (Opus) EXECUTES THE TRAIN** on `refs/trains/gr-4b-ii`
+from `d383aa3c`: W1 annex (CR-GR4B-16/A-23 renumber) → W2 `reaffirmed` (13
+paths) → terminal census `2416/365/2051/20016/5642` + ONE bare gate held
+in-turn + smoke; chair owns CAS + flip; receipt → `laneTE2-train-receipt.md`.
+A successor COLLECTS the private-ref chain (git log refs/trains/gr-4b-ii),
+re-verifies the last member independently, and continues per §2.4 — never
+re-dispatches while the ref exists. (superseded line:) execute the train
 per the plan. NOT done by TC2 (stated): no gate/smoke (terminal-only per
 §2.2); ratchets cited from capsule; B1 similarity figures unmeasured (no
 instrument exists — note for the machinery queue).
