@@ -4051,8 +4051,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // construction. PARKED IS UNCHANGED at 365: every one of the new file's titles is
     // spelled as a literal, so door 3's reader credits the file rather than parking it.
     // Prior row retained as a cross-contract ancestry pin: files: 2414, parked: 365, credited: 2049, titles: 20000, suiteTitles: 5640
-    // 2414/365/2049/20000/5640 → 2415/365/2050/20008/5641.
-    files: 2415, parked: 365, credited: 2050, titles: 20008, suiteTitles: 5641,
+    // 2414/365/2049/20008/5641 was the GR-4b-iii-b row; see the corrected tuple below.
+    // ⏱ TRAIN gr-4b-ii (W1 + W2), 2026-08-14 — RE-DERIVED WHOLE AT THE TRAIN TERMINAL,
+    // which is the ONLY exposed change in the chain (DESIGN_BUILD_EFFICIENCY.md §2.3: the
+    // TRAIN is the single non-terminal census holder, so the members' individual movements
+    // are working figures inside the unexposed chain and the re-derivation happens ONCE,
+    // here). The SUMMED cause, itemised per member:
+    //   • W1 (the A-23 / CR-GR4B-16 annex act) is DOCS-ONLY and contributes +0 to every
+    //     one of the five figures — which is exactly what made it the train's lawful
+    //     truncation boundary.
+    //   • W2 (the `reaffirmed` voice) contributes ONE new credited test file,
+    //     tests/domain/treatySuccessionReaffirmedVoice.test.js, with exactly eight literal
+    //     `it` titles and one literal `describe` title.
+    // No existing registration moves. ⭐ THE CR-GR4B-19 CURE IS CENSUS-NEUTRAL BY
+    // CONSTRUCTION: it re-words ONE existing title in treatySuccessionOpeningVoice.test.js
+    // and widens that same case's assertions, and this census counts titles rather than
+    // their text, so the file stays credited at its own eight. The two governed kind-pool
+    // walkers and impactKindWalkers likewise gain rows inside EXISTING loops and register
+    // no title — the three `test.each(GRAMMAR_KIND_REGISTRY)` sites gain three RUNTIME
+    // cases from the twelfth registry row, and a `.each` case is invisible to this census
+    // by construction (that +3 lands in the runtime denominator, never here; conflating
+    // the two is the arithmetic error this note exists to prevent).
+    // PARKED IS UNCHANGED at 365, and that was earned rather than lucky: every title in
+    // the new file is spelled as a literal, so door 3's reader credits the file statically
+    // rather than parking it.
+    // Prior row retained as a cross-contract ancestry pin: files: 2415, parked: 365, credited: 2050, titles: 20008, suiteTitles: 5641
+    // 2415/365/2050/20008/5641 → 2416/365/2051/20016/5642.
+    files: 2416, parked: 365, credited: 2051, titles: 20016, suiteTitles: 5642,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
