@@ -63,7 +63,40 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~23:50 EDT) — ✅ HB-1′ LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-15 ~01:10 EDT) — ✅ INFRA-2 LANDED AND EXPOSED at
+# `e5ecc83d` (EIGHTH exposure); the hazard classes are now MACHINERY
+
+**INFRA-2 LANDED WHOLE** (five commits, no promotions — J-TE8-2: infra
+members are machinery, not repo packets). Chain: `79ab59b4 → fd8e4dc7(I1
+preamble law, two-directional) → 2fd9ac04(I2 codeOnly re-point + forced
+deletions) → 04d1ae93(I3 capsule table-parse) → 5bcca49a(I4
+coupling-template ratchet + census re-record) → e5ecc83d(T capsule,
+docs-only)`. All compile figures RE-DERIVED at the moved base (three moved,
+all HB-1′-caused, none refuted). Terminal: census `2425/366/2059/20081/5650`
+· runtime 28104 · validator 42/0 · hotFiles 4 rows · gate+smoke TRUE_EXIT=0
+held · nine mutants proved. Chair verified at T (validator + 45 focused
+tests own-shell) then CAS `79ab59b4 → e5ecc83d`; porcelain ZERO. Receipt
+`laneTE8-receipt.md` (J-TE8-1..8 RATIFIED incl. the budget-overrun
+disclosure and the two packet mis-statements corrected on measurement).
+⭐ NOW MACHINERY: the two-directional delete-clause law in every preamble ·
+the ruin walker reads codeOnly (89 honest enrollments) · the capsule parses
+the hot-file table fail-closed · the coupling template is an inventory
+ratchet (4 legacy frozen). ⚠ standing hazard restated: the naked-claim red
+is banked PER-TEST — a seventh claim reds NOTHING; CLAIM_RE=0 is the real
+guard.
+
+**SESSION: EIGHT exposures, ZERO exposed reds.** HABIT 2/10 · machinery
+self-auditing · ~78 waves remain per §27.
+
+**NEXT QUEUE:** (1) gr-6 re-charter — CHAIR-OWED (the HOSTILE_CONFIDENCE
+mount ruling + chair-authored band; substrate measured in
+laneTE5-receipt.md); (2) HB-2 compile (occupancy-mix re-aim + O-1
+circumstanceClassOf home); (3) WC family compiles (17 waves; WC-0 inherits
+HB-1's discharged structural half); (4) CR-HB1′-VOL + the JSDoc-vacuity
+micro-acts; (5) onward per laneFPC-census.md to build-complete-dark, then
+the §3h tail per §37 — THE WALK is the one factual hold.
+
+# (superseded ~01:10) ⭐⭐ CURRENT (2026-08-14 ~23:50 EDT) — ✅ HB-1′ LANDED AND EXPOSED at
 # `79ab59b4` (seventh exposure); TE8 EXECUTES infra-2; HABIT is 2/10 built
 
 **HB-1′ LANDED WHOLE, every prediction exact.** Chain: `f6749fad →

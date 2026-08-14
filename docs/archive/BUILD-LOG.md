@@ -6,11 +6,16 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `79ab59b4`
-- Commits: 3261
+- HEAD: `e5ecc83d`
+- Commits: 3266
 - Working tree at refresh: 0 dirty entries
 
 ```
+e5ecc83d 2026-08-14 INFRA-2 T: regenerate the base-state capsule at the train's last content commit
+5bcca49a 2026-08-14 INFRA-2 M4: the coupling-registration template check, as an inventory ratchet
+04d1ae93 2026-08-14 INFRA-2 M3: parse the hot-file ceilings from PACKET_STANDARD, fail-closed
+2fd9ac04 2026-08-14 INFRA-2 M2: re-point the ruin-filter discovery scan through codeOnly()
+fd8e4dc7 2026-08-14 INFRA-2 M1: the preamble law batch (delete-clause, §31 preflight, non-code-token scans)
 79ab59b4 2026-08-14 docs(hb-1p T): land the hb-1p train — HB-1 flipped, capsule regenerated in ONE terminal commit
 1013d58b 2026-08-14 feat(hb-1p I1): HB-1 — the action vocabularies, the brancher REGISTER, and the fork registry
 dfd7b0ae 2026-08-14 docs(hb-1p P1): promote HB-1 READY and repair HB-0's stale requiredSymbols pin
@@ -406,9 +411,4 @@ c0ae5eb7 2026-08-04 Queue: WR-9c's row — and CR-WR9-D, the chair premise about
 d7a6a16b 2026-08-04 Queue: WR-9's row, and the certification repair that measured itself into a STOP
 fd222269 2026-08-04 WR-9a: the endings vocabulary learns to be filled — a classifier for five keys the engine never spoke, and two envelopes that fail honestly
 98edbc9f 2026-08-04 Lane V4D R-3: two docstrings stop over-claiming — the wound ladder in the sentence that makes the claim, and a law that was one notch stronger than its proof
-273ffbba 2026-08-04 Lane V4D R-2a: the blend pins take the RIBBON as their subject, not the whole shell
-39ba6590 2026-08-04 Queue: WZ-5's row is corrected -- "WR-8 CLOSES" was premature, verification rejected it, and this is what closes it
-1b7c1eac 2026-08-04 Lane WZ-5r: the ghost-write cure learns which language it is being spoken to in -- the graph's tokens stop at the relationship plane's door
-358a8956 2026-08-04 Lane V4D R-2: the whipping hung on one unpinned line — the blend gets a pin, a fall-back, and a list that cannot drift
-a2dbdd36 2026-08-04 Lane V4D R-1: the plaque survived on the phone — the burn's vertical axis becomes the bar's
 ```
