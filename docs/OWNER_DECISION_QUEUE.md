@@ -1300,3 +1300,36 @@ permanent reason).
 First applications: the GR-4b-ii train (annex act + `reaffirmed`), then the
 ES spine as trains. Honest estimate, labeled as such: wall-clock per landed
 wave drops 40-60%, dominated by gate amortization and preflight sharing.
+
+## §29 · THE GR-4B-II TRAIN IS RULED (2026-08-14 ~06:25, CR-GR4B-16..19 — one
+## veto surface per §28's batching law; chair, vetoable)
+
+Evidence: Lane TC2's compile (report + three drafts, shas in the hand note);
+chair spot-checks executed at `d383aa3c` (REGISTERED_KIND_COUNT already 110;
+CR-GR4B-13 taken by GR-4B-IIIB ×3).
+
+- **CR-GR4B-16 — the GR-4b-ii annex act is AUTHORIZED as train member W1**,
+  minting annex row A-23 under this id (the B1 draft's own id collided with
+  the landed 13 — renumber mandatory). Docs-only, zero census motion, the
+  train's lawful truncation boundary. All 15 B1 variants adopted as re-verified
+  by TC2 at base; the three flags on `honored_by_silence` ride OQ-1, out of
+  this train.
+- **CR-GR4B-17 — W2's scope overrides are SIGNED**: registration files 3→5 and
+  paths 12→13, on the measured ground that `reaffirmed` carries a Herald desk
+  (unlike iii-b's `section: null` line) so the desk homes are owed; GR-4b-α's
+  historical override does not transfer and is not invoked.
+- **CR-GR4B-18 — the store-side mount with NO new persisted key is ADOPTED.**
+  Exactly-once is structural (the store's compare-and-set on
+  `status === 'pending'`, no transition out of `dismissed`, entry-id dedupe);
+  `worldState.tick` is a feed-ordering stamp, never a derivation key. The
+  recorded boundary binds: the first wave that RE-DERIVES this beat owes the
+  persisted key — which keeps `honored_by_silence` out (OQ-1).
+- **CR-GR4B-19 — the landed silence pin is re-addressed IN PLACE** (its title
+  names dismiss; its assertions exercise only the treaty-stage resolver — a
+  live vacuity, confirmed unbanked). The cure is census-neutral and lands
+  inside W2; the title is the census key and does not move.
+
+The train executes per `laneTC2-TRAIN-PLAN-draft.md` on `refs/trains/gr-4b-ii`
+from base `d383aa3c`: W1 → W2 → terminal (whole census to
+`2416/365/2051/20016/5642`, runtime 28032, one bare gate + smoke), one CAS.
+The two named interior reds live at I2 only.
