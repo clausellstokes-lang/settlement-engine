@@ -3,8 +3,16 @@
 **Preamble:** `docs/implementation/preambles/HB-PREAMBLE.md` at SHA-256
 `2cf2407d93cef46ce647a88e235e2a9a84f68c310f9f4ccd7b01d14c9f9eb215`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6784bf62de455ca13b701c09b6b241476cf9d555`
+- **Landed:** `e188760b8fec296812b39b8c521781e43d266296` — the `hb-1` train's member M1.
+  Chain: promotion `436f138e` → this implementation commit. ⚠ **The status flips HERE, at
+  the train's next promotion commit, rather than at the terminal**, because
+  `PACKET_STANDARD.md` orders the coordinator to record the landing and re-status a packet
+  *"before opening the next dependent packet"* — and because a non-terminal packet RESERVES
+  its change paths, so leaving M1 READY while M2 is promoted would make the two members'
+  shared registration files a `duplicate change path across packets` error. §14 carries the
+  executed member proof.
 - **Ruled:** `OWNER_DECISION_QUEUE.md` §36 — CR-HB-Q2 (ACCEPT NARROWED: the twelve
   classes, `unpressed` as total fallback, the declared precedence; the occupancy-mix
   measurement re-aims to HB-2) and CR-HB-Q3 (ADOPT the rounding fence now; integer-domain
@@ -304,3 +312,40 @@ registration — ⛔ **no `test.each()`, no `describe.runIf()`.**
 - **The C3 re-point** to WC-0's `lawBandModulation.js` once that wave lands.
 - **O-2 — Q4's cost is already paid (R22).** `HB` is chartered. Q4's *substance* still
   needs a ruling at HB-2, but its stated blocking cost is stale.
+
+## 14. Executed landing evidence (member proof at `e188760b`)
+
+Every command bare, in-shell, unpiped, exit captured. No `gate-mutex.sh` wrapping.
+
+| Check | Exit | Result |
+|---|---|---|
+| `habitVocabulary` + `habitCurve` batteries | 0 | 27 tests passed |
+| `habitBandsReconciliation` + `couplingInclusion` | 0 | 16 tests passed |
+| `spBandFamilies` + `mutationCoverageManifest` + `sizeBaseline` | 0 | 22 tests passed |
+| §31 anchor preflight (`negativeAssertionAnchor.walker`) | 0 | 9 tests passed |
+| `check-observed-shape-readers.mjs` | 0 | 1998 findings, exactly matching the frozen inventory |
+| `validate:packets` | 0 | 41 packets / 1 READY |
+| `typecheck:ratchet` (`tsconfig.full.json`) | 0 | 173 errors, ceiling 173 |
+| `typecheck:domain:strict` (`tsconfig.domain-strict.json`) | 0 | 1134 errors, ceiling 1134 |
+| scoped `eslint` over all six touched files | 0 | clean |
+
+**Effective lines, ENFORCER (`Linter`, `max-lines`, skipBlankLines + skipComments):**
+`habitVocabulary.js` **50** and `habitCurve.js` **82**, both against a ≤ 250 budget.
+
+**Six mutants convicted, each restored digest-exact (`cmp` exit 0):** flattened outcome
+weights; collapsed law-band learn rates; a rung literal planted in a COMMENT (which reds the
+band-family walker, proving that scan really does read raw source); a precedence order
+permuted to equal the sorted set; a floor moved without its cap; and a `**Bands:**` line
+planted on a wave that declares none.
+
+⚠ **ONE PIN WAS FOUND SELF-REFERENTIAL BY WRITING ITS MUTANT FIRST.** The step-law
+assertion reads its own expected step out of `learnRateFor`, so a collapsed rate table moves
+both sides together and passes. The law-band divergence is therefore asserted DIRECTLY —
+three distinct rates, strictly descending with volatility — and that is the arm mutant M-2
+reds.
+
+**DECLARED INTERIOR RED, unexposed, cured at I2.** The estate lighting census records
+`2418/366/2052/20024/5643`; this tree measures **`2421/366/2055/20046/5646`**. The census is
+SEQUENCED and stops at its first red figure, so the remaining four were proved by an
+isolated probe — the recorded tuple replaced by the declared one, the walker re-run
+(33 passed, exit 0), the file restored (`cmp` exit 0, porcelain 0).

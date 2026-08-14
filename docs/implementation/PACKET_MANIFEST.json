@@ -2441,7 +2441,7 @@
     },
     {
       "id": "HB-0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/HB-0.md",
       "verifiedBase": "6784bf62de455ca13b701c09b6b241476cf9d555",
       "changeManifest": [
@@ -2487,6 +2487,60 @@
         ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
         ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
         ["npx", "eslint", "src/domain/worldPulse/habit/habitVocabulary.js", "src/domain/worldPulse/habit/habitCurve.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "HB-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/HB-1.md",
+      "verifiedBase": "6784bf62de455ca13b701c09b6b241476cf9d555",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/strategyMoves.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habitForkRegistry.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementStrategy.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "CREATE", "path": "tests/domain/strategyMoves.test.js" },
+        { "action": "CREATE", "path": "tests/domain/habitForkRegistry.test.js" },
+        { "action": "CREATE", "path": "tests/lint/chooserTotality.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/strategyMoveVocabulary.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const STRATEGY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const ALL_MOVE_TOKENS" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const NON_MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const HABIT_FORK_REGISTRY" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const NAMED_DOMAIN_LABELS" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const OWNER_DOMAIN_MAPPING" },
+        { "path": "src/domain/worldPulse/settlementStrategy.js", "symbol": "MARTIAL_HISTORY_MOVES" },
+        { "path": "tests/lint/chooserTotality.walker.test.js", "symbol": "const SCAN_ROOTS" },
+        { "path": "tests/lint/chooserTotality.walker.test.js", "symbol": "symbolsWithTwoDispositions" },
+        { "path": "tests/lint/chooserTotality.walker.test.js", "symbol": "symbolsWithTwoArities" },
+        { "path": "tests/lint/strategyMoveVocabulary.walker.test.js", "symbol": "MOVE_TOKEN_BRANCHERS" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "const ARGUED_ROSTER_CEILING = 17" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE EMITTER IS THE DENOMINATOR — STRATEGY_MOVES equals the set enumerateMoves actually emits across every exported scoring objective, both directions, never a hand list" },
+        { "id": "A2", "case": "NO MODULE BRANCHES ON A MOVE TOKEN OUTSIDE THE FROZEN EXPORT under the two-arm register predicate, and scoringObjective's lever keys are pinned inside STRATEGY_MOVES from the test side" },
+        { "id": "A3", "case": "GUARD-THE-GUARD — the walker REDS on a planted re-insertion of the deleted disjunct inside an owner module" },
+        { "id": "A4", "case": "THE CORRECTED martialMoves ACT — the derived subset is a proper subset of the totality, holds eight members, and excludes the three named moves BY NAME" },
+        { "id": "A5", "case": "C1's LEAF CONTRACT — the vocabulary leaf has zero imports, the union equals the emitted totality today, and at most one module exports the move list tree-wide" },
+        { "id": "A6", "case": "THE DISJUNCT DELETION'S BEHAVIOUR IDENTITY — no emitted move satisfies the removed disjunct, then the bloc decision load is unchanged move-for-move as the CHECK" },
+        { "id": "A7", "case": "THE THREE J-HB-23 ASSERTIONS — fourteen named-domain rows each with a disposition and a non-empty reason, the label set SET-EQUAL both ways to the closed eight, and the owner's seven domains mapped TOTAL onto them" },
+        { "id": "A8", "case": "THE PARTITION AND ITS UNIQUENESS ARMS — classified equals discovered both directions over the four idiom signatures across three roots, the root-set self-assertion, no symbol with two dispositions or two arities, every deferred row carrying a close, and deferral shrink-only" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/strategyMoves.test.js", "tests/domain/habitForkRegistry.test.js"],
+        ["npx", "vitest", "run", "tests/lint/chooserTotality.walker.test.js", "tests/lint/strategyMoveVocabulary.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/settlementPolitics.test.js", "tests/domain/settlementStrategy.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sizeBaseline.test.js", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint", "src/domain/worldPulse/strategyMoves.js", "src/domain/worldPulse/habitForkRegistry.js", "src/domain/worldPulse/settlementStrategy.js", "src/domain/worldPulse/settlementPolitics.js"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
       ]
     }
