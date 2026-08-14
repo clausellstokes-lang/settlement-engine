@@ -2438,6 +2438,57 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "HB-0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/HB-0.md",
+      "verifiedBase": "6784bf62de455ca13b701c09b6b241476cf9d555",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitVocabulary.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitCurve.js" },
+        { "action": "CREATE", "path": "tests/domain/habitVocabulary.test.js" },
+        { "action": "CREATE", "path": "tests/domain/habitCurve.test.js" },
+        { "action": "CREATE", "path": "tests/lint/habitBandsReconciliation.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const CIRCUMSTANCE_CLASSES" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const CIRCUMSTANCE_PRECEDENCE" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HABIT_CLASS_CEILING" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HABIT_HOLD_BANDS" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HOLD_RANK" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export const HABIT_TUNING" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function learnRateFor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function halfLifeBandFor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function severityWeightOf" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function applyCredit" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function habitFactor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function seatAdjusted" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function roundToUnits" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "const ARGUED_ROSTER_CEILING = 15" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "NEUTRAL IDENTITY — an absent stock returns exactly the number 1 from habitFactor, the door a dark flag goes through" },
+        { "id": "A2", "case": "THE ODDS-RATIO LAW over at least 1000 cases: every pairwise ratio inside the analytic interval, never 0 or 1, and the observed range FILLS that interval" },
+        { "id": "A3", "case": "THE FACTOR PIN — habitFactor lies strictly inside (1-s, 1+s); never the deleted per-probability pin" },
+        { "id": "A4", "case": "THE SYMMETRY FENCE — NEUTRAL_I minus FLOOR_I equals CAP_I minus NEUTRAL_I, with the behaviour reason in the failure message" },
+        { "id": "A5", "case": "THE VOCABULARY — sorted and precedence arrays are permutations; length is 12 AND at or under the owner-signed HABIT_CLASS_CEILING" },
+        { "id": "A6", "case": "THE CURVE — severity monotonicity within a direction, the anti-ratchet property, positional weight arity, codepoint tiebreak, and roundToUnits as the one rounding door" },
+        { "id": "A7", "case": "THE ONE-DIRECTIONAL BORROW — HABIT_HOLD_BANDS is derived by projection, the projection is threshold-ascending, and HOLD_RANK is the index" },
+        { "id": "A8", "case": "THE BANDS WALKER — both-directions reconciliation against the tuning seam, a live non-empty parser subject, and a planted Bands line on a NONE-BY-DESIGN wave REDS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/habitVocabulary.test.js", "tests/domain/habitCurve.test.js"],
+        ["npx", "vitest", "run", "tests/lint/habitBandsReconciliation.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/spBandFamilies.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
+        ["npx", "eslint", "src/domain/worldPulse/habit/habitVocabulary.js", "src/domain/worldPulse/habit/habitCurve.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
     }
   ]
 }
