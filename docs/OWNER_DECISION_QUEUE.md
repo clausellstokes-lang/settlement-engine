@@ -1712,3 +1712,21 @@ executors never share it).
 4. ⚠ HOUSEKEEPING RECORDED: MEMORY.md sits at 17,054 B — past the ~17KB hard
    read limit; **a fold pass is OWED before the next hook is added**, done at
    fresh context per the grep-every-hook law.
+
+## §45 · TWO FINAL EFFICIENCY LEVERS ADOPTED; THE CAP IS DECLARED (2026-08-15
+## ~06:20, chair ruling on the owner's efficiency question, vetoable)
+
+1. **VOLUME SUBSTRATE PRE-VERIFICATION** — before any family's first compile,
+   one read-only lane sweeps EVERY substrate claim in that volume against
+   HEAD (the FPC-census method applied to claims), producing a
+   corrected-premise annex compilers consume as ground truth. First
+   application: the WC volume before WC-0's compile. Rationale: six HB-era
+   refutations were paid retail at execution; this pays wholesale at recon.
+2. **VALIDATOR-TOPOLOGY SIMULATION AT COMPILE** — TE10's probe becomes a
+   mandatory compile-stage step: train plans EXECUTE their validator status
+   sequences against a synthetic manifest. Kills the R35 class for seconds
+   per compile. Both levers join the machinery docket.
+3. **THE CAP IS DECLARED**: further speed is REFUSED — no gate thinning, no
+   census sharding, no second engine worktree (the measured green-but-wrong
+   verdict), no pre-authorized stop-cures. The remaining pace is the honest
+   cost of ground-truth-checked landings.
