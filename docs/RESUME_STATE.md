@@ -63,7 +63,41 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~20:40 EDT) — ✅ HB-0 PREFIX LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-14 ~23:50 EDT) — ✅ HB-1′ LANDED AND EXPOSED at
+# `79ab59b4` (seventh exposure); TE8 EXECUTES infra-2; HABIT is 2/10 built
+
+**HB-1′ LANDED WHOLE, every prediction exact.** Chain: `f6749fad →
+dfd7b0ae(P1 incl. the HB-0 record repair) → 1013d58b(I1, 12 paths, census
+re-derived AT THE MEMBER — the J-TE6-3 general cure) → 79ab59b4(T docs-only
+ONE commit)`. Goldens byte-identical at SEVEN checkpoints (blob `6112fddc`);
+settlementPolitics.js executable text byte-identical (560→560, comment-only);
+census `2425/366/2059/20077/5650` EXACT; runtime 28093; validator 42/0;
+gate+smoke TRUE_EXIT=0 held; 10/10 mutants (M-1 = the exact refuted deletion
+reds 5). Chair verified at T (validator 42/0 + 42 focused tests own-shell)
+then CAS `f6749fad → 79ab59b4`; porcelain ZERO. Receipt `laneTE7-receipt.md`
+(J-TE7-1..8 + 6 deferrals ratified on the receipt; the ref-name and
+red-split deviations accepted as prose slips). ⭐ TWO DURABLE LAWS from TE7,
+now standing: (a) `retiredSymbols` is UNUSABLE on a READY packet (the
+validator requires the retiree present at non-terminal status); (b) census
+re-derivation belongs at the LAST tests/-moving MEMBER commit so the
+terminal stays docs-only and the capsule regenerates in ONE commit — this is
+train-plan LAW from here on. The refuted-train ledger row is DISCHARGED by
+this landing + §38/§39 (the chair's ledger IS the record).
+
+**LIVE: Lane TE8 EXECUTES infra-2** on `refs/trains/infra-2` from
+`79ab59b4` (base moved since compile — first act is re-deriving every
+figure at the live tree): M1 preamble law (two-directional) → M2 codeOnly
+three-edit re-point → M3 capsule table-parse → M4 coupling-template ratchet
+→ T (one docs-only commit). Chair owns CAS. Receipt → `laneTE8-receipt.md`.
+
+**QUEUE:** gr-6 re-charter (CHAIR-OWED: the HOSTILE_CONFIDENCE mount ruling
++ the chair-authored band) · CR-HB1′-VOL (the six volume delete-sites, own
+micro-act) · HB-2 (occupancy-mix re-aim + O-1 circumstanceClassOf home) ·
+WC family compiles · the ~78-wave §27 inventory · then the §3h tail per
+§37 (THE WALK = the one factual hold). Session: SEVEN exposures, ZERO
+exposed reds.
+
+# (superseded ~23:50) ⭐⭐ CURRENT (2026-08-14 ~20:40 EDT) — ✅ HB-0 PREFIX LANDED AND EXPOSED at
 # `f6749fad`; HB-1 + gr-6 in re-charter; the HABIT volume is OPEN
 
 **THE HB-0 PREFIX LANDED** (sixth exposure; §38's ruling executed exactly).

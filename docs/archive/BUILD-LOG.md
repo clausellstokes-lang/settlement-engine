@@ -6,11 +6,14 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `f6749fad`
-- Commits: 3258
+- HEAD: `79ab59b4`
+- Commits: 3261
 - Working tree at refresh: 0 dirty entries
 
 ```
+79ab59b4 2026-08-14 docs(hb-1p T): land the hb-1p train — HB-1 flipped, capsule regenerated in ONE terminal commit
+1013d58b 2026-08-14 feat(hb-1p I1): HB-1 — the action vocabularies, the brancher REGISTER, and the fork registry
+dfd7b0ae 2026-08-14 docs(hb-1p P1): promote HB-1 READY and repair HB-0's stale requiredSymbols pin
 f6749fad 2026-08-14 docs(hb-1 T''): regenerate the base-state capsule at the prefix terminal
 e205fb52 2026-08-14 docs(hb-1 T'): land the hb-1 PREFIX — HB-0 flipped, census re-derived at the prefix state
 e188760b 2026-08-14 feat(hb-1 I1): HB-0 — the habit substrate, dark by construction
@@ -408,7 +411,4 @@ fd222269 2026-08-04 WR-9a: the endings vocabulary learns to be filled — a clas
 1b7c1eac 2026-08-04 Lane WZ-5r: the ghost-write cure learns which language it is being spoken to in -- the graph's tokens stop at the relationship plane's door
 358a8956 2026-08-04 Lane V4D R-2: the whipping hung on one unpinned line — the blend gets a pin, a fall-back, and a list that cannot drift
 a2dbdd36 2026-08-04 Lane V4D R-1: the plaque survived on the phone — the burn's vertical axis becomes the bar's
-5ddd0d08 2026-08-04 Lane V4C piece 4: R7's horn cross-nock, BUILT AND SHOWN — one module, one element, and an honest verdict that it barely reads at 100%
-5acf5e93 2026-08-04 Lane V4C piece 3: the counsel pass — the plaque had an internal edge, the seal was two point seven pixels too wide, and the hang had no outline on a dark hero
-e36588c7 2026-08-04 Queue: lane WZ-5's row -- WR-8 CLOSES, the atrocity casus gets its producer, and a ghost-write class measured at seven sites dies at the writer
 ```
