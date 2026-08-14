@@ -1969,6 +1969,117 @@
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "check:observed-shape-readers"]
       ]
+    },
+    {
+      "id": "INFRA-M1-DOCS",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M1-DOCS.md",
+      "verifiedBase": "600831749908e340444087df734d18c27046980d",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "docs/DESIGN_BUILD_EFFICIENCY.md"
+        },
+        {
+          "action": "CREATE",
+          "path": "docs/DESIGN_IP_PROTECTION.md"
+        },
+        {
+          "action": "CREATE",
+          "path": "docs/implementation/preambles/INFRA-PREAMBLE.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/PACKET_STANDARD.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/INDEX.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCHITECTURE.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_HB.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_WC.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_EP.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Dispatch unit"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Default hard scope budget"
+        },
+        {
+          "path": "docs/implementation/preambles/GR-PREAMBLE.md",
+          "symbol": "## §P6 · Mutant hygiene"
+        },
+        {
+          "path": "docs/implementation/INDEX.md",
+          "symbol": "### Partial programs"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCHITECTURE.md",
+          "symbol": "+ 17 (WC) + 6 (EP) = **108**"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the enforcement-claims pin is green and no FROZEN_NAKED key grows"
+        },
+        {
+          "id": "A2",
+          "case": "both folds are verbatim apart from the recorded Status-clause rewrite"
+        },
+        {
+          "id": "A3",
+          "case": "the lighting census is unmoved at 2416/365/2051/20016/5642"
+        },
+        {
+          "id": "A4",
+          "case": "the three FPC cures are correct and the 108 arithmetic line is byte-identical to base"
+        },
+        {
+          "id": "A5",
+          "case": "PACKET_STANDARD gains exactly three new top-level sections carrying no capsule figure"
+        },
+        {
+          "id": "A6",
+          "case": "validate:packets exits 0 with every manifest/index/packet join closed"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/enforcement-claims.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
