@@ -1256,3 +1256,47 @@ Operative consequences (chair, recorded):
    build-phase acts. IP-2a still rides the post-diagnostic-soak fix window;
    IP-2b still rides the tuning signature (DESIGN_IP_PROTECTION.md §4's rows
    5-6 are corrected by pointer to this section).
+
+## §28 · BUILD-EFFICIENCY LAW FOR THE REMAINING WAVES (chair ruling, 2026-08-14
+## ~04:20, vetoable; answers the owner's efficiency ask)
+
+Six techniques, ordered by expected effect. The gate is AMORTIZED, never
+THINNED — no gate step becomes conditional (the five-dark-days incident is the
+permanent reason).
+
+1. **TRAIN LANDINGS, generalized from CR-AO-11 and CR-H26-3.** Same-volume,
+   collision-disjoint waves land as one coordinator-owned atomic train: each
+   wave keeps its own focused battery, walkers, mutants, and ratchet checks;
+   the train's terminal child alone pays the bare full gate + boot smoke; the
+   shared ref moves only to that green child by one old-value CAS; no
+   intermediate commit is ever exposed as a branch tip. Train size ≤ 4 waves.
+   A train-end gate red is bisected by the per-wave focused proofs. The census
+   is re-derived WHOLE once, at the terminal child (the serialization law's
+   in-change rule, satisfied at the only exposed commit).
+2. **THE BASE-STATE CAPSULE.** The landing/flip protocol regenerates one
+   derived estate-state artifact (hot-file effective lines, census tuple,
+   walker baselines, OSR count, flag-manifest count, validate:packets state)
+   stamped with the landing sha. A compiler at that exact base consumes the
+   capsule and re-executes ONLY the rows its manifest touches. This keeps the
+   B13 executed-figures law satisfied structurally (the figures WERE executed,
+   at this base, by the protocol) while killing the ~10-measurement repeated
+   preflight every draft lane currently pays.
+3. **FAMILY PACKET TEMPLATES.** Per volume, the chair pre-rules the invariant
+   packet sections once (hazard dispositions, gate obligations, STOP
+   conditions, coupling/OSR law) as a signed family preamble; per-wave packets
+   author only scope, behavior contract, manifest, acceptance cases, and
+   mutants, and cite the preamble. Proof strength unchanged; authoring cost
+   roughly halved.
+4. **STANDING PIPELINE STAFFING (the ruled cycle-4 precedent).** While the
+   implementer builds train N, a second lane compiles train N+1's packets
+   (scratchpad-only, no landing collision); the chair collects and lands.
+   Landing slot, gate slot, and census holder stay strictly serial.
+5. **BATCH CHAIR RULINGS PER FAMILY** at train-compile time (the CR-FP-3..10
+   seventeen-rulings precedent) instead of per-wave ruling round-trips.
+6. **FLAG WAVES ARE TRAIN BOUNDARIES.** The CQ5 one-commit flag law stands;
+   no-flag interiors train freely (seven of the nine old critical-path ES
+   waves are no-flag, so ES forms one or two natural trains).
+
+First applications: the GR-4b-ii train (annex act + `reaffirmed`), then the
+ES spine as trains. Honest estimate, labeled as such: wall-clock per landed
+wave drops 40-60%, dominated by gate amortization and preflight sharing.
