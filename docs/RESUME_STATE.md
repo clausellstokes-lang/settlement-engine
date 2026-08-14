@@ -92,6 +92,11 @@ ONE full gate; the compiler caught three inherited defects pre-landing; the
 executor caught a packet defect against machine-truth. Second data point =
 the next train, then the §8 review gate.
 
+**LIVE (~08:30): Lane TC3 (Opus) compiles the INFRASTRUCTURE TRAIN** from
+`60083174`: M1 docs batch (volume folds + FPC prose corrections +
+PACKET_STANDARD §28 amendment) → M2 capsule generator script → M3 IP-1
+sourcemap guard. Deliverables → scratchpad `laneTC3-*`. A successor COLLECTS.
+
 **NEXT (in order):** (1) the INFRASTRUCTURE TRAIN — capsule generator script +
 PACKET_STANDARD §28 amendment + IP-1 sourcemap guard + the FPC prose
 contradictions (INDEX:498 blocked-prose, the spine 109/108/111 count, volume
