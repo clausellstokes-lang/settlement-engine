@@ -118,7 +118,24 @@ CONQUEST_MARGIN waiver forecloses ANY bounded multiplier on that operand;
 the coupling-registration TEMPLATE GAP hit INSTANCE FIVE → §35.3 graduates
 it to a MACHINE CHECK (infra micro-act, queued with codeOnly() + the capsule
 HOT_FILES parse).
-**LIVE (~16:05): Lane TC6 (Opus) COMPILES `hb-1` = [HB-0, HB-1]** under
+**✅ TC6 COLLECTED + §36 RULED (~16:50, ledger `98c817c9`): hb-1 compiled and
+all eight chair items SIGNED in one sitting** — HB-0 READY-ON-RULING (Q2
+accepted narrowed: 12 classes measure zero, occupancy-mix re-aims to HB-2;
+Q3 rounding fence adopted: 18 hand-rolled half-life forks are the disease);
+HB-1 READY on the CORRECTED charter (⛔ R21: the literal "retire martialMoves"
+clause was a LIVE WAR-CHOOSER BEHAVIOUR CHANGE — struck; the act is a named
+derived subset); C1 ruled: HABIT MINTS (WC-0 measurably absent; WC-0's
+compiler INHERITS the discharged structural half); R24 net-zero at 812
+(HB-5 recompiles against it); the walker-name contradiction ruled to
+`chooserTotality.walker.test.js` (charter over prose). Six refutations
+banked; O-1 (`circumstanceClassOf` homeless) docketed to HB-2.
+**LIVE (~16:55): Lane TE6 (Opus) EXECUTES hb-1** on `refs/trains/hb-1` from
+`6784bf62`: P1(+INDEX prose fix)→I1(HB-0; declared red
+`2421/366/2055/20046/5646`)→P2→I2(HB-1; census to `2425/366/2059/20074/5650`;
+the shared coupling walker RE-READ at I2)→T (validator 42/0, runtime
+28090/16, ONE held bare gate + smoke). Chair owns CAS. Receipt →
+`laneTE6-receipt.md`.
+**(superseded) Lane TC6 compile dispatch** under
 §34's narrowed HB seal (Q1 binds HB-3+ only): Q2/Q3 recommended rulings with
 evidence for chair signature; new HB preamble; the template at full
 strength; M1/M2 collision-disjointness PROVEN; the C1 vs-WC disposition;
