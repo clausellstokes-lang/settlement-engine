@@ -129,7 +129,11 @@ compiler INHERITS the discharged structural half); R24 net-zero at 812
 (HB-5 recompiles against it); the walker-name contradiction ruled to
 `chooserTotality.walker.test.js` (charter over prose). Six refutations
 banked; O-1 (`circumstanceClassOf` homeless) docketed to HB-2.
-**LIVE (~16:55): Lane TE6 (Opus) EXECUTES hb-1** on `refs/trains/hb-1` from
+**~17:30: TE6 API-death at the P1→I1 boundary; RECOVERED CLEAN** — the chain
+already held P1 `436f138e` + I1 `e188760b` (HB-0 dark by construction),
+porcelain clean, no orphans; resumed with re-verify-I1-then-continue orders
+(uncaptured proofs re-run; captured receipts citable).
+**LIVE (resumed): Lane TE6 (Opus) EXECUTES hb-1** on `refs/trains/hb-1` from
 `6784bf62`: P1(+INDEX prose fix)→I1(HB-0; declared red
 `2421/366/2055/20046/5646`)→P2→I2(HB-1; census to `2425/366/2059/20074/5650`;
 the shared coupling walker RE-READ at I2)→T (validator 42/0, runtime
