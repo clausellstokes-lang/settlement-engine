@@ -1534,3 +1534,32 @@ Operative reading (chair, recorded):
    the owner is absent when its phase arrives, the program holds THERE and
    reports, unless the owner explicitly waives the walk in a future message.
    The V5 cull and legal/counsel items share this factual character.
+
+## §38 · HB-1 REFUTED; THE HB-0 PREFIX LANDS; A NEW PREAMBLE LAW (2026-08-14
+## ~19:30, chair, vetoable)
+
+1. **TE6's STOP is RATIFIED on its receipts** (base worktree 26/26 vs I2 red;
+   the deleted disjunct feeds two RATIFIED same-seed goldens through
+   `espionageAbsenceDormancy.test.js`'s direct token pass — the volume's own
+   nominated check refuted the volume's own deletion clause).
+2. **The I1 PREFIX IS RULED LANDABLE — this differs from gr-6 deliberately**:
+   HB-0's member proof is complete and self-consistent, its dark-by-
+   construction claim is TRUE at the prefix, and the orphan window is the
+   RECORDED IN-1a precedent (discharged at the HB-1 re-charter). TE6 builds a
+   fresh terminal T′ as the direct child of I1 (dropping P2/I2): the HB-0
+   flip alone, the whole census re-derived at the prefix state
+   (`2421/366/2055/20046/5646` predicted), capsule, validator (predicted
+   41/0), ONE held bare gate + smoke. The chair CASes to T′ on green.
+3. **HB-1 goes to RE-CHARTER** carrying TE6's finds: the register cure (six
+   modules spell move words from a different closed vocabulary — the cure is
+   the register, not disjointness), the fourth domain directory
+   (`src/domain/region`) the volume's widening missed, and the fork-registry
+   importer-scan class (a quoted module name reads as an importer to
+   raw-source scans — STRUCTURAL, recurs estate-wide; queued with the
+   codeOnly() micro-act family).
+4. **NEW PREAMBLE LAW (all volumes, lands at the next infra act):** a
+   charter's delete/retire clause executes ONLY after an executed consumer
+   census proves the target dead — THREE same-shape refutations today
+   (martialMoves R21, the gr-6 operand, HB-1's disjunct) make this the
+   habitat, not the instance.
+5. J-TE6-1/2 and the deviation set are RATIFIED on the receipt.
