@@ -648,28 +648,57 @@ AUDIENCE: public
 6. The clerks in {settlement} have laid the unanswered oath on the council table, with room beneath it for one word.
 7. Whatever the new seat decides, the oath {npc} swore will be remembered longer than its terms.
 
+⛔⛔ **CORRECTED 2026-08-14 (CR-GR4B-16, after GR-4d's typed terminal map landed) — THE TWO
+HONOR POOLS SPOKE OF A SEASON'S WAIT, WAGONS STILL RUNNING, A MARKET, A MUSTER STOOD DOWN, A
+SUCCESSOR, AND WORDS SPOKEN IN A NAMED PLACE, AND THE HONOR TERMINALS RECORD NONE OF IT.** A
+succession question that ends without a disavowal leaves exactly one durable row: its treaty
+key, the acting court, the other court, the fallen holder's id, the tick it opened on, its
+terminal status, and the typed map that reads BOTH the unanswered terminal and the answered
+one as HONOR. The treaty it names carries its two parties, its written terms, and the fallen
+holder on the acting court's persisted `sworn` stamp. ⛔ **No honor terminal stamps a world
+tick** — the only proposal terminal that does is the lapse, which is not an honor terminal —
+so no line here may name a duration, a season, a due date, a wait, or the moment the question
+closed. Neither surface names a successor, a counterparty's posture, a muster, a market, a
+delivery kept or missed, a place, an adjudicator, or the words used. Therefore `{npc}` in both
+pools binds only to the **FALLEN HOLDER**, never the successor, and never triggers a roster
+lookup; every claim of elapsed time leaves both blocks; and no line asserts that the
+instrument is still live, only what was never written to it, which the untouched ledger
+entails on every road. Eligibility admits any stamped live-term instrument, so "the peace" is
+corrected to "the oath" in both exemplar positions. The pools are separated by the one fact
+the record does carry: `honored_by_silence` speaks the terminal reached with no answer
+entered, `reaffirmed` the terminal reached by one, and `reaffirmed` may say the answer was
+unnecessary because the same map reads both terminals as honor. ⚠ A-7 mapped
+`honored_by_silence` to that expiry terminal **and** to the dark-mode scored default; the
+scored default writes nothing at all on either road, so it carries no receipt to be entailed
+by and governs no wording here. Six of eight `honored_by_silence` variants and five of seven
+`reaffirmed` variants are re-authored, the two exemplars are cured in place, and the two
+variants that already said only what the record carries — `honored_by_silence` 7 and
+`reaffirmed` 5 — stand verbatim. Both pools keep their variant count, order, `public`
+audience, `SLOTS:` line and significance class. Ruled at **A-23** under R-28, A-11, A-15,
+A-18, A-20, A-21 and A-22.
+
 ### honored_by_silence (GR-4) — the question expires to HONOR — significance: routine
 SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
-1. The question was never answered and the peace holds; silence honors the oath.
-2. No word came from {settlement}'s new seat, and the clerks entered the treaty as standing.
-3. In {counterpart} they waited a season for a repudiation that never arrived.
-4. {npc} let the date pass, which the law reads as yes.
-5. Nobody in {settlement} ever announced that the oath was kept; the wagons simply kept going.
-6. The captains on the frontier were never told to stand down because they were never told to stand up.
+1. The question was never answered and the oath stands; silence honors it.
+2. No answer was entered on {settlement}'s question, and nothing was struck from the treaty with {counterpart}.
+3. The parchment between {settlement} and {counterpart} reads as it read before the seat changed.
+4. The hand that swore was {npc}'s, and the hand after it left the writing alone.
+5. The new seat kept its silence, and the silence did the work of a signature.
+6. The oath {npc} gave outlived his seat, and nothing has been written against it.
 7. It is the quietest way an oath can change hands, and the clerks prefer it.
-8. In {counterpart}'s market the question was closed the day nothing happened.
+8. A clerk in {settlement} closed the entry with the space beneath it still empty, and shelved it.
 
 ### reaffirmed (GR-4) — the honor beat, answered aloud — significance: notable
 SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
-1. {npc} will keep the word the old seat gave. `[exemplar, slotted]`
-2. The new court of {settlement} has said aloud what it might have left unsaid: the peace stands.
-3. {counterpart} had readied its captains, and stood them down again.
-4. It cost him one sentence in open court, and it bought a season's quiet.
+1. The new seat will keep the word {npc} gave. `[exemplar, slotted + re-slotted]`
+2. The new court of {settlement} has said aloud what it might have left unsaid: the oath stands.
+3. Between {settlement} and {counterpart} nothing on the parchment moved; the movement was in the answering.
+4. Silence would have kept the oath just as well; the seat answered anyway.
 5. The oath changed hands and did not change.
-6. The clerks entered the reaffirmation with the date and the words used, because the words will be quoted.
-7. There were {npc}'s own people in the hall who had hoped for a different sentence.
+6. The question is closed by an answer and not by a lapse, and the record keeps the difference.
+7. The oath is still {npc}'s, and the chair that owns it now never swore it.
 
 ### disavowed_by_succession (GR-4) — pact ending; Herald — significance: major
 SLOTS: {settlement} {counterpart} {npc}
@@ -1048,3 +1077,4 @@ token similarity with their slots blanked (the family rule, measured).
 | A-20 | GR-4's `disavowed_by_succession` exemplar slotted `{npc}` to the SUCCESSOR, and `repudiated`'s third variant slotted `{reason}` — neither fact is on a surface the treaty stage can read (2026-08-12, CR-GR4B-3) | **Reachability wins, on the A-11 and A-15 precedents** — a causal claim the record does not carry is struck, and a slot no variant can fill is a defect rather than a courtesy. `{npc}` re-slots to the **fallen holder**, whose name IS persisted on the treaty's own `sworn` stamp and whom the landed engine receipt already names; `{reason}` is struck from `repudiated`'s `SLOTS:` line and its third variant re-authored to the same angle without it, keeping that pool at its `major` floor of four. ⚠ **This pass is authorized to reword an exemplar and A-19's pass was not**, and the difference is the point: A-19 protects a sentence a variant-adding pass had no cause to touch, whereas an unfillable slot renders the whole family unreachable, so the alternative here was not a thinner corpus but a pool no wave could wire. The dated note at the head of the `# GR-4` section carries the measurement. |
 | A-21 | GR-4's `succession_question_opened` pool named the SUCCESSOR through `{npc}`, grouped several treaties through `{band}` / “every,” and marked its slotless exemplar as slotted, while landed GR-4d retains one proposal per exact treaty and carries a fallen-holder id but no successor name or grouped treaty count (2026-08-13, CR-GR4B-10) | **The one-instrument producer and the parchment's history win, under A-11, A-15, A-18 and A-20.** `{npc}` binds only to the **fallen holder**, by matching the question's acting court and `npcId` against the selected treaty's total `sworn` reader, whose name is persisted; it never triggers a successor or roster lookup. `{band}` leaves the block, the multiple-instrument claims are singularized, and variants 2, 4 and 7 speak only the fallen holder's oath and the new seat's pending choice. The slotless exemplar is `[exemplar]`, not `[exemplar, slotted]`. All seven families remain, in order, and every named slot is supplied by the real one-question producer. |
 | A-22 | GR-4's `succession_question_open` dossier pool repeated the successor / grouped-oath defect already corrected for the opening beat, narrowed its exemplar to an unsupported “old peace,” and asserted envoys, prepared letters, town-wide waiting, market activity and universal compliance that neither the pending row nor the selected treaty carries (2026-08-14, CR-GR4B-12) | **The durable question and current parchment win under R-28, A-11, A-15, A-18, A-20 and A-21.** `{npc}` binds only to the **fallen holder** named by the acting court's persisted `sworn` stamp; it never triggers a successor or roster lookup. `{band}` leaves the block. Variant 1 says “old oath”: every eligible row has the matched persisted oath stamp, while no `non_aggression` or peace term is required. Every line is entailed by the exact pending wrapper, its typed HONOR / DISAVOW terminal map, or the currently eligible treaty's parties, live written terms and oath stamp. Distinct pending questions may share one treaty, so the renderer returns one canonically ordered line per validated row rather than claiming per-treaty uniqueness. All eight families remain in order, `public`, and `n/a`. |
+| A-23 | GR-4's two honor pools — `honored_by_silence` and `reaffirmed` — asserted a season's wait, wagons still running, a market that closed the question, captains stood down, a successor who let a date pass, a sentence spoken in open court with its date and words recorded, and a hall of disappointed partisans; GR-4d's landed honor terminals carry a typed HONOR word, a status, a wall-clock stamp and no world tick at all (2026-08-14, CR-GR4B-16) | **The typed terminal and the untouched parchment win, under R-28, A-11, A-15, A-18, A-20, A-21 and A-22.** `{npc}` binds only to the **fallen holder** named on the acting court's persisted `sworn` stamp, by the same settlement-and-holder match the landed opening voice already proves; no successor or roster lookup is ever triggered. Because no honor terminal stamps a world tick, every duration, season, due date and wait leaves both blocks, and because a beat may fire after the instrument has been pruned or spent, no line claims the treaty is still live — each speaks only what was never written to it, which the untouched ledger entails on every road. Eligibility admits any stamped live-term instrument, not only a peace, so both exemplars say "oath" where they said "peace". The two pools are separated by the one distinction the record does carry: `honored_by_silence` speaks the terminal reached with no answer entered, `reaffirmed` the terminal reached by one, and `reaffirmed` may say the answer was unnecessary precisely because the persisted map reads both terminals as honor. A-7's second mapping — the dark-mode scored default — writes nothing on either road and therefore governs no wording here; both pools speak the terminal only. Authored to the union of both expiry roads, so a capacity-evicted row makes no line false and the corpus compels no eviction filter; whether the producer nonetheless declines to voice such rows is a packet question this ruling leaves open. Both pools keep their variant count, order, `public` audience, `SLOTS:` line and significance class. |
