@@ -4077,7 +4077,35 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // rather than parking it.
     // Prior row retained as a cross-contract ancestry pin: files: 2415, parked: 365, credited: 2050, titles: 20008, suiteTitles: 5641
     // 2415/365/2050/20008/5641 → 2416/365/2051/20016/5642.
-    files: 2416, parked: 365, credited: 2051, titles: 20016, suiteTitles: 5642,
+    // ⏱ TRAIN infra-1 (M1 + M2 + M3), 2026-08-14 — RE-DERIVED WHOLE INSIDE THE TRAIN, at the
+    // last commit that moves a `tests/` byte, which is what leaves the train's terminal DOCS-ONLY
+    // and so makes the base-state capsule's stamped window literally true
+    // (OWNER_DECISION_QUEUE.md §30). DESIGN_BUILD_EFFICIENCY.md §2.3 makes the TRAIN the single
+    // non-terminal census holder, so the members' individual movements are working figures inside
+    // the unexposed chain and the re-derivation happens ONCE, here. The SUMMED cause, per member:
+    //   • M1 (INFRA-M1-DOCS) is DOCS-ONLY and contributes +0 to every one of the five figures —
+    //     nine files under docs/, and this walker's corpus is a walk of the `tests` tree, so no
+    //     docs/ path can enter it. That is what made M1 the train's lawful truncation boundary.
+    //   • M2 (INFRA-M2-CAPSULE) contributes ONE new CREDITED file,
+    //     tests/scripts/baseStateCapsule.test.js, with exactly eight literal `it` titles and one
+    //     literal `describe` title: +1 file / +1 credited / +8 titles / +1 suite title.
+    //   • M3 (INFRA-M3-IP1) contributes ONE new PARKED file, tests/build/sourcemapAbsence.test.js:
+    //     +1 file / +1 parked / +0 credited / +0 titles / +0 suite titles. It opens a
+    //     `describe.runIf(distExists)` suite, which door 3 classifies SUITE_NOT_RUNNING, and a file
+    //     is refused WHOLE if any suite it opens fails that door — so it contributes no titles at
+    //     all. ⭐ THAT PARK IS THE DESIGN, NOT A DEFECT: deleting the `runIf` to buy census credit
+    //     would red the whole suite on any fresh checkout with no dist/. The two executed
+    //     precedents for the same shape are tests/build/campaignRuntimeLazy.test.js and
+    //     tests/build/envoyPersistenceHydrationLazy.test.js, both SUITE_NOT_RUNNING:describe.runIf().
+    // ⚠ PARKED MOVES OFF 365 FOR THE FIRST TIME IN MANY LANDINGS, and it moves by exactly one, for
+    // exactly that one file. M2's file spells every title as a literal in a straight-line
+    // registration, so door 3 credits it statically; had it used `.each` or a conditional suite it
+    // would have parked WHOLE and the tuple would read 2418/367/2051/20016/5642 instead.
+    // ⚠ M3 adds ZERO to the runtime denominator: SOURCE_TEST_EXCLUDE is 'tests/build/**' and the
+    // source phase fails closed if such a row leaks into its report. The +8 from M2 lands there.
+    // Prior row retained as a cross-contract ancestry pin: files: 2416, parked: 365, credited: 2051, titles: 20016, suiteTitles: 5642
+    // 2416/365/2051/20016/5642 → 2418/366/2052/20024/5643.
+    files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
