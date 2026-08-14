@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-13 16:31:32 EDT
+**Generated:** 2026-08-14 01:45:06 EDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `7958cd33` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `5b0cc5fa` | **4605** |
+| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `2dd09360` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `bc774bc1` | **4605** |
 
 **Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
 **Disk:** 29Gi free (86% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260813T163037` — build 0 file(s), ledger 2179 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260814T014417` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260813T163037
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260814T014417
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,28 +28,28 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
-7958cd33 2026-08-13 docs: record GR-4e landing
-c5ef5c19 2026-08-13 fix: consume treaty fractures on next pulse
-3339188b 2026-08-13 docs: promote GR-4e treaty fracture handoff
-5a49d187 2026-08-13 docs: record AO-6 landing
-0facf170 2026-08-13 test: close AO corpus mutation battery
-eff62d6b 2026-08-13 docs: amend AO-6 after immutable sweep stop
-0ff79e6b 2026-08-13 docs(implementation): promote AO-6 correctness closure
-ee6934e9 2026-08-13 AO-5: record prose-family contract landing
-72b7a87b 2026-08-13 AO-5: freeze remaining prose-family contracts
-8a3a5cd5 2026-08-13 AO-5: restamp inherited census compatibility pin
-cb48cc08 2026-08-13 AO-5: admit premortem-union compatibility pin
-92d60657 2026-08-13 AO-5: promote remaining prose-family contracts
+2dd09360 2026-08-14 docs: finish A-22 succession exemplar cure
+c39d2413 2026-08-14 docs: correct succession dossier pool
+4a1a3707 2026-08-14 docs: record GR-4b-iii-a landing
+7e7d5205 2026-08-13 feat: voice opened succession questions
+4bc44f8e 2026-08-13 docs: complete GR-4B-IIIA v2 authority
+b40dbd09 2026-08-13 docs: correct GR-4b-iii-a order proof
+9be50ffe 2026-08-13 docs: promote GR-4b-iii-a packet
+955acd7a 2026-08-13 docs: correct GR-4b opening corpus
+7a589733 2026-08-13 docs: record GR-4d v2 landing
+a17d0a02 2026-08-13 feat: implement GR-4d lit succession decision
+fcf1efbd 2026-08-13 docs: amend GR-4d authority topology
+6f1cac10 2026-08-13 docs: promote GR-4d implementation packet
 ```
 ## Last 6 ledger commits
 
 ```
+bc774bc1 2026-08-13 docs: refresh ledger after GR-4e
 5b0cc5fa 2026-08-13 docs: refresh ledger after AO-6
 1fec79aa 2026-08-13 Record AO-5 prose-family contract landing
 e30401aa 2026-08-13 Record AO-4 headline totality landing
 2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
 e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
-a1578fcc 2026-08-13 Record AO-0 schema-8 landing
 ```
 ## Fable-survey debt (derived, not transcribed)
 
@@ -63,7 +63,50 @@ a1578fcc 2026-08-13 Record AO-0 schema-8 landing
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-13 ~16:35 EDT) — GR-4e is terminal; build clean at `7958cd33`
+# ⭐⭐ CURRENT (2026-08-14 ~01:50 EDT) — GR-4b-iii-a terminal; the orphaned A-22
+# exemplar cure is COLLECTED and LANDED at `2dd09360`; build clean; no lane live
+
+**THE 08-13 EVENING SESSIONS OUTRAN THIS NOTE.** Five landings happened after the
+block below was written, none recorded here: GR-4d v2 (packet `6f1cac10`, amendment
+`fcf1efbd`, implementation `a17d0a02`, recorded `7a589733`) and GR-4b-iii-a (packet
+`9be50ffe`, v2 authority `4bc44f8e`, implementation `7e7d5205` at +608/-27, recorded
+`4a1a3707`), plus the CR-GR4B-12/A-22 dossier-pool correction `c39d2413`. Their full
+receipts live in `docs/implementation/INDEX.md`'s measurement blocks and the two
+packets — this note defers to those rather than restating figures.
+
+**THE PREDECESSOR'S DYING-SESSION WIP IS COLLECTED.** The ~01:30 window death left
+one dirty build file: a +7/-6 refinement of `docs/content/RECEIPT_POOLS_GRAMMAR.md`
+finishing CR-GR4B-12 (variant 1's "old peace" narrowed an eligibility the landed
+code does not narrow). Collected per §3k: snapshot `20260814T013043`; independently
+re-verified — `isSuccessionDisavowable` (`treatySuccession.js:155`) requires a live
+term plus the persisted `sworn` stamp with NO treaty-kind filter, so "old oath" is
+entailed and "old peace" was not; annex walkers grammarLifecycleKindPools +
+kindPoolFloors + receiptAnnex passed 59/59 exit 0 WITH the edit in place; the
+enforcement-claims naked set was unchanged at the banked six, none in this file.
+Landed as `2dd09360`, exactly one path, porcelain ZERO after.
+
+**MACHINE STATE:** build `claude/composite-r4` clean at `2dd09360`; GR-4a, GR-4c,
+GR-4d v2, GR-4e, and GR-4b-iii-a terminal; manifest 34 rows / 0 READY; the census is
+FREE at `2414/365/2049/20000/5640`; no diagnostic-soak worktree, neither D-1 nor L0
+started; gate mutex FREE; no implementation lane live anywhere.
+
+**⚠ CR-NEXT-1 HAS NO REPO RECEIPT.** The GR-4e records name "the live CR-NEXT-1
+census" as the next governed act, but the ruling's text and any census run were
+transcript-only and died with the 08-13 sessions (scratchpads searched, nothing
+survives). GR-4d v2 and GR-4b-iii-a landed AFTER that point under §22's standing
+authorization with full sealed authority chains, so the GR-4 continuation is
+terminal fact. A successor must not block on re-deriving CR-NEXT-1; the live queue
+derives from the packets' own declarations.
+
+**NEXT:** compile **GR-4b-iii-b** (the dossier line `succession_question_open`,
+declared at `GR-4B-IIIA.md:43` and deferred at its §12) just in time from
+`2dd09360` — its corpus substrate is now fully cured (`c39d2413` + `2dd09360`,
+annex row A-22 final). Behind it, still deferred by the same declaration: GR-4b-ii
+(`honored_by_silence`, `reaffirmed`, honor/terminal voices) and GR-5. The requested
+terminal remains immediately before THE DIAGNOSTIC SOAK (§22); do not create the
+soak worktree or start D-1/L0.
+
+# (superseded ~01:50) — GR-4e is terminal; build clean at `7958cd33`
 
 **GR-4e IS DONE END-TO-END.** Just-in-time promotion
 `3339188bb13ce46acd2a31e1f293327f64f56879` compiled the fracture-credibility

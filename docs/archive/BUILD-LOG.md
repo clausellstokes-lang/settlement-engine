@@ -6,11 +6,23 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `7958cd33`
-- Commits: 3225
+- HEAD: `2dd09360`
+- Commits: 3237
 - Working tree at refresh: 0 dirty entries
 
 ```
+2dd09360 2026-08-14 docs: finish A-22 succession exemplar cure
+c39d2413 2026-08-14 docs: correct succession dossier pool
+4a1a3707 2026-08-14 docs: record GR-4b-iii-a landing
+7e7d5205 2026-08-13 feat: voice opened succession questions
+4bc44f8e 2026-08-13 docs: complete GR-4B-IIIA v2 authority
+b40dbd09 2026-08-13 docs: correct GR-4b-iii-a order proof
+9be50ffe 2026-08-13 docs: promote GR-4b-iii-a packet
+955acd7a 2026-08-13 docs: correct GR-4b opening corpus
+7a589733 2026-08-13 docs: record GR-4d v2 landing
+a17d0a02 2026-08-13 feat: implement GR-4d lit succession decision
+fcf1efbd 2026-08-13 docs: amend GR-4d authority topology
+6f1cac10 2026-08-13 docs: promote GR-4d implementation packet
 7958cd33 2026-08-13 docs: record GR-4e landing
 c5ef5c19 2026-08-13 fix: consume treaty fractures on next pulse
 3339188b 2026-08-13 docs: promote GR-4e treaty fracture handoff
@@ -399,16 +411,4 @@ af1b9d38 2026-08-03 Queue: lane WZ-2's rulings, the razing's mouth, and the two 
 d5ec720e 2026-08-03 Lane PW piece 1: the sticky bar draws its ring inside its own box — five clipped top edges close, and the bronze is measured on wood
 4423cbda 2026-08-03 Lane WZ-2 piece 1: three paths nobody had ever run, and two rulings that were true about the wrong thing
 7bee2e93 2026-08-03 Lane PW piece 3: the deep-craft burn-down — five z-axis lifts struck, and not one ceiling raised
-47d4643d 2026-08-03 Lane PW piece 2: the raw-button census true-up — one stale grandfather leaves, and the plate that was never guilty is not booked
-e932223d 2026-08-03 Queue: lane WZ-1's three rulings, and the three findings that say WR-8 does not close here
-86d83f6e 2026-08-03 Lane WZ-1: the razing's assembly layer — the law keeps its purity, and something else pays for it
-90ba2974 2026-08-03 Lane FS piece 4: the fletch cell's focus ring comes back inside its own box — and the ring that was there was failing 1.4.11 anyway
-f2c10742 2026-08-03 Edge bundles: five artifacts rebuilt from ONE clean committed tree, and the dirty-build class loses its habitat
-1c99d925 2026-08-03 Lane FS piece 3: the AA floor stops being one number and becomes every rider's own — and four real shortfalls fall out of the derivation
-2f4a716e 2026-08-03 Lane FS piece 2: PLATE_LIGHT_DEG stops being a docstring and becomes the single writer — one light, and the band turns to face it
-ea5771cc 2026-08-03 Lane FS piece 1: the band stops being corrugated metal — the comb becomes a whisper and the vane becomes the material
-1514c52a 2026-08-03 Lane EB: the icon sweep's test leftover — E2.2 stops freezing the dead slot and starts forbidding it
-f444cf8b 2026-08-03 Lane WD-7: W8-D's two tails — a capability anyone could spend, and a law that was only true above a line nobody had drawn
-560c9120 2026-08-03 Lane WD-2: the army record and the sack leave the head — 724 → 658 — and THREE REGISTRATION GUARDS ARE REPAIRED, one of which had been red for four commits
-ff7052f0 2026-08-03 Lane WD-5: the refusal aftermath leaves the head, and warDeployment.js CROSSES UNDER ITS CEILING — 846 → 724, baseline entry DELETED
 ```
