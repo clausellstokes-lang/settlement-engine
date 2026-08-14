@@ -4,9 +4,12 @@
 **Preamble:** `docs/implementation/preambles/HB-PREAMBLE.md` at SHA-256
 `2cf2407d93cef46ce647a88e235e2a9a84f68c310f9f4ccd7b01d14c9f9eb215` (**already signed and landed**).
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `f6749fad642e191b8214797102b6404373bd02ee`
-  (`git status --porcelain` → 0 lines, executed at compile).
+  (`git status --porcelain` → 0 lines, executed at compile and re-verified at open).
+- **Landed:** `1013d58baefeadc10a5da38b350a7fa86e2a1c63`, the single member of the `hb-1p` train.
+  Chain: promotion `dfd7b0ae` → this implementation commit → the terminal. §12 carries the
+  executed landing evidence.
 - **Capsule:** `docs/implementation/BASE_STATE.json` @ `e205fb52`, citable — the window to this base
   is **one docs path** (`git diff --name-only e205fb52 f6749fad`), no measured path moved.
 - **Ruled:** `OQ` **§38.3** (this re-charter, carrying TE6's three finds), **§38.4** (the
@@ -482,3 +485,34 @@ recorded tuple with the declared one, re-run, restore, `cmp` 0).
    (OQ §33 ruling 3) is the same family and is **NOT** repaired here.
 7. **The WC inbound half remains owed** — until it exists the arbitration is a recommendation with a
    fence, by WC's own words; after this train the fence exists.
+
+## 12. Executed landing evidence (member proof at `1013d58b`)
+
+Every figure below was executed in the build worktree at the member commit, bare and in-shell.
+
+| Row | Executed |
+|---|---|
+| the four new test files | **31 tests, exit 0** — `strategyMoves` 8 + `habitForkRegistry` 7 + `chooserTotality.walker` 8 + `strategyMoveVocabulary.walker` 8, exactly the §9 title budget |
+| ⭐⭐ the two ratified goldens | **9 passed, exit 0**, and the file is byte-identical at every commit boundary: blob `6112fddc14732ee77dadff871678b3ed892d0029`, `:305` sha256 `7b69419e…0bd1dc60`, `:325` sha256 `4d45c2b6…6fa250a5c8` |
+| `settlementPolitics.js` | **560 → 560** effective under the ENFORCER; raw 1066 → 1073 (+7 comment lines); the whole diff is eight ` *` lines and every non-comment line is byte-identical |
+| `settlementStrategy.js` | **812 → 812** effective, NET ZERO (R24) |
+| the two new leaves | `strategyMoves.js` **22** (budget 120) · `habitForkRegistry.js` **239** (budget 600, STOP at 800), **239 → 239** with extensionless ids — the F2 cure costs nothing |
+| the register's denominator | **10** live branchers, **4** of kind `strategy`, exactly **1** declared foreign token in **1** module; the evidence address spells it |
+| the registry | **32** rows · **20** classified = **20** discovered, both directions · **14** named-domain rows over **8** labels · **29** DEFER · **0** LEARN |
+| the dark closure | closure grown to a fixpoint = the three declared members, both directions; **0** modules outside it import any member |
+| `couplingInclusion.walker` | `ARGUED_ROSTER_CEILING` **15 → 17** in the same commit as the two rows; `UNLAYERED_BASELINE_CEILING` unmoved at 179 |
+| the lighting census | re-derived WHOLE at the member: `2421/366/2055/20046/5646` → **`2425/366/2059/20077/5650`**; `366 + 2059 = 2425` |
+| `espionageDoctrineStage.test.js` | **17 passed, exit 0** — the F2 siting cure's own control: the registry does NOT join that pin's importer list |
+| the anchor preflight (§31.2) | **exit 0** over all four new files, run BEFORE green was declared |
+| `validate:packets` | **exit 0, 42 packets / 1 READY** at the member — every one of P1's thirteen declared rows discharged |
+| observed-shape readers | **1998**, exactly matching the frozen inventory |
+| both typecheck ratchets | `typecheck:ratchet` **173/173** · `typecheck:domain:strict` **1134/1134**, both at their exact floors |
+| scoped `eslint` | **exit 0** over all ten touched source and test paths |
+| **the ten wave mutants** | **10 CAUGHT / 10 restored digest-exact** (`cmp` + sha256). M-7 is the sharpest: **+1 byte**, one red, and the distinct-string label COUNT stays at eight — which is why that arm is a SET EQUALITY and not a count |
+
+⚠ **ONE PREDICTION WAS CORRECTED ON EXECUTION, and it is recorded rather than smoothed away.**
+The train plan §7 declared P1's validator red as **13 rows split 10 + 3**; the executed split is
+**12 + 1**, because the two new walker files are `CREATE` rows whose paths are absent at P1 rather
+than present. The same thirteen rows, the same three named symbols beyond the ten, the same
+binding figure — exit 1, 13 rows, all cured at I1.
+

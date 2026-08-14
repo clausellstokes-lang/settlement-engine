@@ -2493,7 +2493,7 @@
     },
     {
       "id": "HB-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/HB-1.md",
       "verifiedBase": "f6749fad642e191b8214797102b6404373bd02ee",
       "changeManifest": [
