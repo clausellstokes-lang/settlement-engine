@@ -863,6 +863,130 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so.
     soakEvidence: 'unobserved',
   }),
+  // ── SETTLEMENT POLITICS (coherence, worldPulse/settlementPolitics.js) ──────
+  //
+  // JOINED 2026-08-14 BY GAP-1, AND IT IS THE FIRST ROW IN THIS LANE WHOSE KEY DID NOT
+  // ARRIVE WITH ITS FIRST GATE READ. Every row above landed under CR-WR10-C item 4's
+  // atomicity: manifest entry, first by-name gate read, and certification row in one
+  // commit. This gate has been in the tree since the politics layer landed. What
+  // changed is the INSTRUMENT — the census walker's detector pinned its receiver to
+  // the literal tokens `rules` and `simulationRules`, and this layer's door reads
+  // through a JSDoc-cast alias local, so the key was structurally invisible to the
+  // census that exists to demand exactly this row. The atomicity law is therefore
+  // satisfied in spirit: the manifest entry and the row land with the DETECTION.
+  Object.freeze({
+    rule: 'settlementPoliticsEnabled',
+    title: 'Settlement politics (ruling blocs and coalition consolidation)',
+    module: 'src/domain/worldPulse/settlementPolitics.js,src/domain/worldPulse/settlementStrategy.js,src/domain/worldPulse/warSeatBooks.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. The lane mints no `candidateType` literal at all —
+      // re-measured by the trace in tests/domain/subsystemRowsVirtual.test.js, which
+      // scans this lane's own leaf and finds zero. The evidence law forbids declaring
+      // a vocabulary the lane does not spell.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The layer authors no Herald beat of its own, and the only
+      // BEHAVIORAL_MOVER_FAMILIES member its consequences could ride is one the war
+      // and strategy lanes already fill for their own reasons — it could never carry
+      // ALIVE for this row alone.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and this is the row's hardest honest call. The blocs live
+      // as a per-settlement facet the strategy layer's own containers already carry;
+      // there is no `spatialLedgers.*` key this lane owns outright. Declaring a
+      // container another gate fills would grade this row alive off THAT layer's
+      // presence — the shared-container failure the statecraft row's beliefMaps
+      // exclusion already records, and the one this cohort refuses by construction.
+      stateKeys: Object.freeze([]),
+      other: 'THIS SUBSYSTEM IS STRUCTURALLY INVISIBLE TO EVERY RECEIPT SHAPE THE ESTATE WRITES, and saying so is the row. ⚠ ONE GATE, AND IT IS A CONJUNCTION: settlementPoliticsActive (settlementPolitics.js) requires settlementPoliticsEnabled === true AND factionCompetitionEnabled === true. The second conjunct is DEFAULT_SIMULATION_RULES-declared true and lit at full_simulation, so lighting settlementPoliticsEnabled ALONE genuinely lights this layer — the row says so explicitly because the opposite reading (that two owner acts are needed) would understate the blast radius of a single flag flip at THE ONE REGEN. WHAT IT DOES: a settlement whose factions compete resolves a RULING BLOC — a codepoint-stable composite id over its member factions — and tracks that bloc\'s coalitionConsolidation01 across ticks, which the strategy layer reads as a decision-load modifier and the war seat books read when apportioning seats. The tuning table (DECISION_LOAD_SPAN, RULING_CONSOLIDATION_FLOOR) and the vocabulary (blocId, ruling bloc, coalitionConsolidation01) are the module\'s own, which is what makes it a subsystem by every criterion CR-WR10-C names rather than a modifier on somebody else\'s. WHY EVERY CHANNEL IS EMPTY: the lane mints no candidate (re-measured, zero candidateType literals in its leaf); it authors no beat; and its state is a facet inside containers the strategy layer owns and fills under its own gate. THE OBSERVATION NEEDED to close this gap is a per-settlement bloc census in the soak receipt — a count, per observed year, of settlements carrying a resolved blocId, with the consolidation band — which no receipt schema carries today because censusWorldStateKeys stops one level into spatialLedgers and counts entries rather than facets. Until such an observation exists the layer is pinned where its bodies are readable instead: tests/property/settlementPoliticsDormancyGolden.test.js holds the dormancy golden, and a dark advance is compared field-by-field against a lit one there.',
+    }),
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_bloc_facet',
+        description: 'Law 12 (dormancy by absence): with either conjunct dark the bloc facet is never written, so a settlement serializes byte-identically to the pre-politics engine. settlementPoliticsEnabled has NO entry in DEFAULT_SIMULATION_RULES, so a campaign that never lit it carries zero bytes for this layer — the virtual-flag dormancy idiom, executed.',
+        check: 'NOT expressible from any receipt schema the estate writes: the census counts container ENTRIES, never their facets. Pinned in tests/property/settlementPoliticsDormancyGolden.test.js, where a dark advance is compared field-by-field against a lit one.',
+      }),
+      Object.freeze({
+        name: 'the_bloc_id_is_a_stable_composite_never_a_name',
+        description: 'The ruling bloc id is the codepoint-sorted join of its member factions stable parts, so a faction RENAME that re-mints a member stablePart re-mints the id rather than silently carrying a stale one. Membership is re-validated each tick and a bloc dropping below the member floor dissolves rather than persisting as a ghost.',
+        check: 'NOT expressible from a receipt: no census reads bloc identity, and a re-minted id is indistinguishable from a new bloc in an entry count. Pinned at the writer in tests/domain/settlementPolitics.test.js.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so. It is NOT in the
+    // ceilinged escape-hatch population (that set is rows which DECLARE a channel and
+    // still call the soak blind to them); this row declares nothing, which is the
+    // stronger and more honest statement.
+    soakEvidence: 'unobserved',
+  }),
+  // ── THE UNDERWAYS, ORGANIC FOUNDING (D6 coupling 5, institutionLifecycle.js) ──
+  //
+  // JOINED 2026-08-14 BY GAP-1, on the same footing as the row above: the gate read is
+  // not new, the DETECTION is. This one hid behind a `||`-defaulted parenthesised
+  // receiver expression rather than an alias local.
+  //
+  // ⚠⚠ THE ONE ROW IN THIS COHORT WHOSE LANE LEAF MINTS A CANDIDATE TYPE, AND THE
+  // REASON THE COHORT'S EMPTY-EVENTTYPES CLAIM HAD TO BE PARTITIONED RATHER THAN
+  // ASSERTED FLAT. institutionLifecycle.js spells `candidateType: 'institution_build'`
+  // and `candidateType: 'institution_closure'`. NEITHER IS DECLARABLE HERE, and the
+  // reason is the evidence law rather than modesty: `institution_build` is minted from
+  // the TOP-AFFINITY member of a gap set fed by downstream chains, resource needs and
+  // martial emergence weighting; this flag opens exactly ONE additional gap
+  // (`via: 'underways'`, village tier and above) and only when that gap wins the sort.
+  // The literal is therefore SHARED, it is ALREADY declared by
+  // institutionLifecycleEnabled's own row, and declaring it a second time here would
+  // grade this row ALIVE off another subsystem's traffic in worlds where this flag has
+  // never been true — precisely what the statecraft row's beliefMaps exclusion refuses.
+  // `institution_closure` is not on this flag's path at all. The cohort test now
+  // ENUMERATES both literals against a written shared-literal reason instead, so the
+  // under-claim is as loud as an over-claim would be.
+  Object.freeze({
+    rule: 'underwaysOrganicFoundingEnabled',
+    title: 'The underways (organic clandestine founding)',
+    module: 'src/domain/worldPulse/institutionLifecycle.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and uniquely in this lane the emptiness is an
+      // ATTRIBUTION fact rather than a shape or mount fact: the lane's leaf really
+      // does mint candidate literals, and neither is separable from the institution
+      // lifecycle layer that mints them for a dozen other reasons. See the section
+      // comment above, and the enumerated shared-literal ledger in
+      // tests/domain/subsystemRowsVirtual.test.js.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The lane authors no Herald beat; the founding surfaces
+      // through the institution lifecycle's own existing news, under that layer's gate.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY. The founded institution lands in the settlement's own
+      // institution roster — a container the settlement generator and the institution
+      // lifecycle layer both fill under their own gates, and which is populated in
+      // every ordinary world, so it can never carry ALIVE for this row alone.
+      // ⚠ The roster is named in WORDS here rather than as a dotted member access on
+      // purpose: tests/lint/ruinFilterRoster.walker.test.js scans raw source for that
+      // access with no comment or string blanking, so writing it would enrol this
+      // pure-data row as a false "reader" of a roster it never touches. Recorded
+      // rather than worked around silently — see this wave's receipt.
+      stateKeys: Object.freeze([]),
+      other: 'THIS SUBSYSTEM IS STRUCTURALLY INVISIBLE TO EVERY RECEIPT SHAPE THE ESTATE WRITES, and saying so is the row. ONE GATE: evaluateInstitutionLifecycle reads underwaysOrganicFoundingEnabled === true off the RAW rules — the flag is ABSENT from DEFAULT_SIMULATION_RULES, the npcLadder/heirs dormancy idiom — and threads the resulting underwaysFoundingLit into detectInstitutionGaps as an option. WHAT IT DOES: a settlement at village tier or above with a sustained criminal underground (a vice-nature institution present, read as a FACET rather than by name) and no existing clandestine institution gains ONE additional buildable gap, the excavated tunnel network, which then competes on affinity with every other gap and, if it wins and clears the build roll, becomes a real institution. THE MINE-FOUNDS-ITSELF PATTERN, applied to crime. WHY IT TOOK A ROW RATHER THAN AN EXEMPTION: it writes a real container — an institution — rather than re-ranking one somebody else writes, and exempting a real container writer is the shrug the exempt list exists to refuse (R19). WHY EVERY CHANNEL IS EMPTY: the candidate literals its leaf mints are SHARED with the institution lifecycle layer and already declared by that layer\'s row, so declaring them here would grade this row alive off traffic this flag never caused; the institution it founds lands in a container every ordinary world already populates. THE OBSERVATION NEEDED to close this gap is a per-founding PROVENANCE count in the soak receipt — a count, per observed year, of institution_build candidates whose gap kind is clandestine, or equivalently whose gap carried via: underways — which no receipt schema carries today because the candidate census counts candidateType literals and never the gap kind that produced them. Until such an observation exists the layer is pinned where its bodies are readable instead: tests/domain/institutionLifecycle.test.js, where a dark evaluate is compared against a lit one with the clandestine gap present.',
+    }),
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_the_absent_gap_not_a_dead_lookup',
+        description: 'Law 12 (dormancy by absence): dark, detectInstitutionGaps never opens the clandestine gap, so the gap set, the affinity sort and every downstream candidate are byte-identical to the pre-D6 engine. ⚠ The dormancy is now the FLAG and no longer a dead catalog lookup: the Underground network entry EXISTS on this lineage, so the resolver really does resolve and only the gate stands between a dark world and a lit one.',
+        check: 'NOT expressible from a receipt: the census counts candidateType literals and cannot see which gap kind produced a build. Pinned in tests/domain/institutionLifecycle.test.js, comparing a dark evaluate against a lit one on a settlement that satisfies every other precondition.',
+      }),
+      Object.freeze({
+        name: 'the_vice_signal_is_a_facet_read_never_a_name_match',
+        description: 'The criminal-underground precondition is read as an institutionNature facet equal to vice, and the skip condition as an institutionFunction facet equal to clandestine — never as a name or tag string match. A settlement whose tunnels are named anything at all is still recognised as already having them, and a renamed vice institution still signals.',
+        check: 'NOT expressible from a receipt: no census carries institution facets. Pinned at the reader in tests/domain/institutionLifecycle.test.js, with a renamed fixture proving the facet read rather than the name.',
+      }),
+      Object.freeze({
+        name: 'the_tier_floor_is_village_and_it_binds',
+        description: 'Excavation needs labor, so the gap opens only at village tier and above. A thorp with a thriving vice institution gains nothing, which keeps the layer from founding tunnels in settlements that could not dig them.',
+        check: 'NOT expressible from a receipt: the census carries no per-settlement tier at candidate time. Pinned at the boundary in tests/domain/institutionLifecycle.test.js, with a thorp fixture and a village fixture differing in exactly the tier.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so — and here that is
+    // an ATTRIBUTION statement, not a mount one. See the section comment above.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

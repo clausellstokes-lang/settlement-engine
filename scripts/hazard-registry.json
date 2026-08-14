@@ -534,12 +534,13 @@
       "status": "PARTIAL",
       "acceptedReason": null,
       "memory": ["case-sensitive-guard-blind-to-camelcase-fields.md", "lane-rr-combined-rerecord.md"],
-      "enforcer": { "paths": ["tests/lint/copyCorruption.test.js"], "inChain": true, "note": "SIG 1 reads as a total ban on empty icon slots and in fact bans only the lowercase spelling. A PERFECT PARTIAL: present, green, and its green means far less than its name claims." },
-      "instances": 2,
-      "instanceEvidence": "CONFIRMED: '4,462 dead slots still ship in generated output.' The camelCase arm was closed for the origin rung in lane RR; a 2nd re-record is still owed.",
+      "enforcer": { "paths": ["tests/lint/copyCorruption.test.js", "tests/lint/engineGatedRuleKeys.walker.test.js"], "inChain": true, "note": "SIG 1 reads as a total ban on empty icon slots and in fact bans only the lowercase spelling. A PERFECT PARTIAL: present, green, and its green means far less than its name claims. ⭐ INSTANCE 3 (GAP-1, 2026-08-14) IS THE SAME SHAPE ON A DIFFERENT AXIS and its cure is now an enforcer here: engineGatedRuleKeys.walker constrained its RECEIVER rather than its field name, so the guard was present, green, and blind to every gate spelled through an alias local or a defaulted expression. Its widened three-arm scan carries live positive controls for each arm, so deleting an arm reds by name instead of silently re-blinding the census." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED: '4,462 dead slots still ship in generated output.' The camelCase arm was closed for the origin rung in lane RR; a 2nd re-record is still owed. ⭐ INSTANCE 3, CONFIRMED AND CURED 2026-08-14 by GAP-1 at `5d6a0e7c`: tests/lint/engineGatedRuleKeys.walker.test.js pinned its gate-read receiver to the two literal tokens `rules` and `simulationRules` while its header claimed to source-scan for the strict gate idiom as such. Executed both directions on the live tree: the canonical-receiver scan measured 63 keys, the widened three-arm scan measures 70, LOST=0, GAINED=7 (arms 113/46/9 over 2,116 files). Four of the seven were accounted for by nothing at all. This is the registry's clearest instance of the class because the same hidden receiver shape sat on BOTH accounted and unaccounted keys, which means the guard's green was an accident of declaration rather than a measurement.",
       "triggers": [
         "any new source-scan guard using a \\b-anchored lowercase field name",
-        "any new camelCase field in generated output"
+        "any new camelCase field in generated output",
+        "any new source-scan guard that constrains a RECEIVER token rather than the shape it claims to measure"
       ],
       "upgradePath": "The general shape — 'a source-scan guard whose regex is narrower than its stated claim' — deserves a META-WALKER that compares each guard's stated claim against the population its regex can actually reach."
     },

@@ -125,6 +125,35 @@ const EXEMPT_RULE_KEYS = Object.freeze({
     + ' and owns no vocabulary, so a certification row could only ever grade the'
     + ' proposal queue, which baseline rows already cover. Exempt BY RECORDED RATIONALE,'
     + ' never by silence.',
+  // ── Joined 2026-08-14 by GAP-1, under OWNER_DECISION_QUEUE §32 rulings 1 and 5. Both
+  //    keys became VISIBLE for the first time when this walker's detector widened past
+  //    its canonical receiver; neither is new, and neither was hiding on purpose.
+  institutionPoliticalControlEnabled: 'NOT A SUBSYSTEM — a RANKING MODIFIER inside a'
+    + ' subsystem that is already certified. It gates exactly one expression in'
+    + ' src/domain/worldPulse/institutionLifecycle.js: `const controlSets ='
+    + ' politicalControlLit ? factionControlSets(settlement) : null`, which re-ranks the'
+    + ' closure candidates institutionLifecycleEnabled already mints. Its own comment at'
+    + ' the gate states the effect exactly: "Dark ⇒ closure ranking ignores'
+    + ' controlled/suppressed ⇒ byte-identical (institutionLifecycleEnabled is'
+    + ' default-true)." It writes no container of its own, mints no candidate type of its'
+    + ' own, and owns no vocabulary — it changes the ORDER of a list another subsystem'
+    + ' owns. A certification row could therefore only ever grade the institution'
+    + ' lifecycle lane, which carries its own row already, and a second row over the same'
+    + ' traffic is how one subsystem gets graded alive off another. Exempt BY RECORDED'
+    + ' RATIONALE, never by silence.',
+  biomeTruthEnabled: 'NOT A SUBSYSTEM — a CANON-FREEZE OPTION on the store canonize'
+    + ' path, not the pulse path. src/store/campaignSpatialCanonize.js reads it once, to'
+    + ' set `biomeTexture` into buildSpatialDigest, and its own header states the dormancy'
+    + ' verbatim: "Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every'
+    + ' existing canon/golden)." It adds one additive sub-digest to a canon authored ONCE'
+    + ' and never recomputed, so it has no per-tick aliveness to certify and no receipt'
+    + ' channel can ever grade it: the whole-world soak never calls runSpatialCanonize at'
+    + ' all. It matches routineMajorApproval in structure — an opt-in campaign option'
+    + ' rather than a layer with a life of its own. ⚠ RECORDED COUNTER-ARGUMENT rather'
+    + ' than suppressed: unlike routineMajorApproval it DOES change persisted bytes when'
+    + ' lit, which is why the chair gated this exemption rather than the lane taking it;'
+    + ' OWNER_DECISION_QUEUE §32 ruling 5 accepts it on that record. Exempt BY RECORDED'
+    + ' RATIONALE, never by silence.',
 });
 
 /**
@@ -174,15 +203,33 @@ const BACKLOG_RULE_KEYS = Object.freeze({
  * commit moved it into ENGINE_GATED_VIRTUAL_RULE_KEYS and authored its row in
  * subsystemRowsVirtual.js.
  *
- * ⚠ A HOLE THIS EPISODE EXPOSED, RECORDED HERE BECAUSE THE NEXT LANE WILL MEET IT.
- * The wiring lane first spelled its gate as a conjunction over a frozen rule list —
- * `REQUIRED_RULES.every((key) => rules[key] === true)` — which is a COMPUTED member
- * access. GATE_RE below matches only the dot-access idiom, so that spelling attributes
- * to no key at all: the flag was fully wired, genuinely engine-gated, and invisible to
- * this walker, which stayed green. The lane cured it locally by also reading its own
- * flag by name, but the CLASS is open — any future virtual key gated only through a
- * list conjunction hides from this census the same way. Widening GATE_RE to resolve
- * frozen-list membership is a chair decision, not a lane one, and is queued as such.
+ * ⚠ THE HOLE THIS EPISODE EXPOSED WAS RECORDED HERE AS THE FROZEN-LIST CONJUNCTION,
+ * AND THE MEASURED CLASS IS BROADER THAN THAT. Restated 2026-08-14 by GAP-1 against an
+ * executed scan, because the narrow statement sent the next lane looking for the wrong
+ * shape. The wiring lane first spelled its gate as a conjunction over a frozen rule
+ * list — `REQUIRED_RULES.every((key) => rules[key] === true)` — a COMPUTED member
+ * access that attributes to no key at all. That is real, but it is one instance of the
+ * general class: THE DETECTOR CONSTRAINED ITS **RECEIVER**, and its stated claim above
+ * ("source-scan `src/` for the strict gate idiom") is wider than any single-token
+ * receiver can reach. A real, strict, engine-gated read whose receiver is spelled any
+ * other way was invisible, and this walker stayed green over it.
+ *
+ * MEASURED AT `5d6a0e7c`: three live receiver shapes across four files hid SEVEN keys,
+ * four of them accounted for by nothing at all — while the frozen-list shape this
+ * paragraph used to name had ZERO live instances. The cure is the three-arm scan below
+ * (arm 1 unchanged, arms 2 and 3 added), which took the measurement from 63 keys to 70
+ * with LOST = 0. The three shapes it now reaches:
+ *   A — the JSDoc-cast ALIAS local: `const r = \/** @type … *\/ (rules); … r.<key> === true`
+ *   B — the `||`-defaulted parenthesised expression:
+ *       `(context.simulationRules || worldState?.simulationRules || {}).<key> === true`
+ *   C — a differently-named local bound from a `.simulationRules` access.
+ *
+ * ⚠ THE FROZEN-LIST CONJUNCTION REMAINS OPEN AND IS DELIBERATELY NOT GUARDED. It has
+ * zero live instances, so a guard for it would be a pin over an empty population — the
+ * recorded vacuity class. The class is real and merely dormant, so this paragraph is
+ * REWORDED rather than deleted: any future virtual key gated only through a list
+ * conjunction still hides from this census, and resolving frozen-list membership stays
+ * a chair decision rather than a lane one.
  */
 const PENDING_MANIFEST_KEYS = Object.freeze([]);
 
@@ -236,11 +283,107 @@ export function codeOnly(src) {
 }
 
 /**
- * The strict gate idiom. The receiver is `rules` or `simulationRules`; an
- * intervening `)` admits the JSDoc-cast spelling (the dominant one in this estate),
- * and `?.` admits the optional-chain spelling.
+ * ARM 1 — the strict gate idiom on a CANONICAL receiver. `rules` or
+ * `simulationRules`; an intervening `)` admits the JSDoc-cast spelling (the dominant
+ * one in this estate), and `?.` admits the optional-chain spelling. UNCHANGED by
+ * GAP-1: the widening is strictly additive, which is what makes the new measurement a
+ * superset rather than a replacement.
+ *
+ * ⭐ This is the ONLY arm carrying the FULL key vocabulary, and the asymmetry is
+ * deliberate (guard 3 below). It is the only arm that can measure a gate whose key
+ * does not end in `Enabled` — `routineMajorApproval` is the one such key today.
  */
 const GATE_RE = /\b(?:rules|simulationRules)\s*\)?\s*\??\.\s*([A-Za-z_$][\w$]*)\s*===\s*true/g;
+
+/**
+ * ARM 2 — the `||`-defaulted parenthesised receiver EXPRESSION (shape B), the spelling
+ * `(context.simulationRules || worldState?.simulationRules || {}).fooEnabled === true`.
+ *
+ * GUARD: the segment between the receiver token and the closing paren admits NO dot and
+ * NO paren, so the arm can never bridge across a member chain — in
+ * `rules.aEnabled === true && x.bEnabled === true` it cannot attribute `bEnabled` to
+ * `rules`. Restricted to `/Enabled$/` keys per guard 3.
+ */
+const GATE_EXPR_RE = /\b(?:rules|simulationRules)\b[^()\n.]*\)\s*\??\.\s*([A-Za-z_$][\w$]*Enabled)\s*===\s*true/g;
+
+/**
+ * ARM 3 — the resolved local ALIAS receiver (shapes A and C). Two regexes and a
+ * binding resolver, because an alias is not a token match: it is a fact about what a
+ * name was last bound to at the point of the read.
+ */
+const BIND_RE = /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*([^;]*);/g;
+const ALIAS_READ_RE = /\b([A-Za-z_$][\w$]*)\s*\??\.\s*([A-Za-z_$][\w$]*Enabled)\s*===\s*true/g;
+const CANONICAL_RECEIVERS = Object.freeze(['rules', 'simulationRules']);
+
+/**
+ * Every binding of every name in one file, in source order, tagged rules / not-rules.
+ *
+ * ⚠ GUARD 2 — NEAREST PRECEDING BINDING WINS, never a file-wide alias set, and this
+ * guard was found EMPIRICALLY rather than reasoned into place. `convergence.js` binds
+ * the name `r` SIX times; exactly one of them is the rules cast. A file-wide alias set
+ * attributed `r.invited === true` — whose nearest preceding binding is
+ * `const r = asObject(raw[k])` — to the rules object, which is a false positive on a
+ * key no rule declares. So every binding is recorded with its offset and a read is
+ * attributed only when the nearest binding PRECEDING that read is a rules binding.
+ *
+ * A name is a rules receiver when its right-hand side is one of exactly three shapes:
+ * a pure re-alias of an already-known receiver (what `\/** @type … *\/ (rules)` reduces
+ * to once comments are blanked), an rhs ENDING in a `.simulationRules` access with an
+ * optional `|| {}` default, or the ternary null-guard idiom whose live arm is
+ * `.simulationRules`. Iterated to a fixpoint so an alias-of-an-alias resolves.
+ *
+ * ⛔ REJECTED, on executed evidence: a `loose` variant admitting any rhs merely
+ * CONTAINING `.simulationRules` over-admits — it made `underwaysFoundingLit`, itself
+ * the RESULT of a gate read, into a receiver, taking the gained set from 7 to 8.
+ *
+ * @param {string} code comment- and string-blanked source
+ * @returns {Map<string, Array<{ at: number, isRules: boolean }>>}
+ */
+export function rulesBindingsOf(code) {
+  /** @type {Map<string, Array<{ at:number, isRules:boolean }>>} */
+  const byName = new Map();
+  let known = new Set(CANONICAL_RECEIVERS);
+  // Three passes is a fixpoint with headroom: the deepest live chain is one hop.
+  for (let pass = 0; pass < 3; pass += 1) {
+    byName.clear();
+    // ⚠ GUARD 1 — the RECEIVER-BOUNDARY guard, and this comment states exactly where it
+    // bites, because an earlier draft of it overclaimed and a planted mutant proved so.
+    //
+    // THE HAZARD IS REAL: an unbounded receiver alternation that can match a PREFIX of a
+    // longer identifier attributes reads to the wrong object. The prototype behind this
+    // cure produced exactly two false positives that way — `revealed` from
+    // `return leash.` and `isGoverning` from `rosterEntry ?` — once a short alias like
+    // `r` entered the alternation.
+    //
+    // ⭐ IN THIS SPELLING THE OPERATIVE REFUSAL IS THE BINDING LOOKUP IN `scanGateReads`,
+    // NOT THIS `\b`. A read is attributed only when its receiver has a RECORDED rules
+    // binding, so `leash` and `rosterEntry` are refused for having no binding at all —
+    // they never reach a regex boundary question. Removing the `\b` below therefore
+    // convicts nothing, and that is DECLARED here rather than left for a future lane to
+    // discover: it is defense in depth behind the `[\s)]*$` anchor, which already
+    // forbids trailing word characters. It is kept because the anchor and the
+    // alternation are edited by different hands for different reasons, and the day one
+    // of them grows a `.*` the boundary is the only thing left standing.
+    //
+    // The two false positives are pinned as live decoys in the `guard the guard` test
+    // above, where the operative refusal is what they actually exercise.
+    const pureAlias = new RegExp(String.raw`^[\s(]*(?:${[...known].join('|')})\b[\s)]*$`);
+    const next = new Set(known);
+    for (const match of code.matchAll(BIND_RE)) {
+      const [, name, rawRhs] = match;
+      const rhs = rawRhs.trim();
+      const isRules = pureAlias.test(rhs)
+        || /\.\s*simulationRules\b\s*(?:\|\|\s*\{\s*\}\s*)?\)*\s*$/.test(rhs)
+        || /\?\s*[A-Za-z_$][\w$.?]*\.\s*simulationRules\s*:\s*null\s*$/.test(rhs);
+      if (!byName.has(name)) byName.set(name, []);
+      byName.get(name).push({ at: match.index, isRules });
+      if (isRules) next.add(name);
+    }
+    if (next.size === known.size) break;
+    known = next;
+  }
+  return byName;
+}
 
 /** @param {string} dir @param {string[]} out */
 function walk(dir, out = []) {
@@ -253,19 +396,45 @@ function walk(dir, out = []) {
 }
 
 /**
- * Scan the given sources for the gate idiom.
+ * Scan the given sources for the gate idiom — the UNION of the three arms above.
+ *
+ * ⭐ GUARD 3, and it is a deliberate ASYMMETRY rather than an oversight: arms 2 and 3
+ * are restricted to `/Enabled$/` keys and arm 1 is not. Arm 1 must keep the full
+ * vocabulary because it is the only arm measuring `routineMajorApproval`. On a
+ * NON-CANONICAL receiver the key name is the only discriminator left — the receiver
+ * has stopped being evidence — so the naming convention carries the weight there.
+ *
+ * ⛔ `codeOnly` is FROZEN by GAP-1 and nothing here changes it: ten other test files
+ * import it, and its blanking is what keeps a gate written in PROSE out of the
+ * measurement.
+ *
  * @param {Array<{ rel: string, src: string }>} files
  * @returns {Map<string, string[]>} key -> the files that gate on it
  */
 export function scanGateReads(files) {
   /** @type {Map<string, Set<string>>} */
   const hits = new Map();
+  const add = (key, rel) => {
+    if (!hits.has(key)) hits.set(key, new Set());
+    hits.get(key).add(rel);
+  };
   for (const { rel, src } of files) {
     const code = codeOnly(src);
-    for (const match of code.matchAll(GATE_RE)) {
-      const key = match[1];
-      if (!hits.has(key)) hits.set(key, new Set());
-      hits.get(key).add(rel);
+    for (const match of code.matchAll(GATE_RE)) add(match[1], rel);
+    for (const match of code.matchAll(GATE_EXPR_RE)) add(match[1], rel);
+    const byName = rulesBindingsOf(code);
+    for (const match of code.matchAll(ALIAS_READ_RE)) {
+      const [, receiver, key] = match;
+      // Arm 1 already owns the canonical receivers, with the wider key vocabulary.
+      if (CANONICAL_RECEIVERS.includes(receiver)) continue;
+      const bindings = byName.get(receiver);
+      if (!bindings) continue;
+      let nearest = null;
+      for (const binding of bindings) {
+        if (binding.at < match.index) nearest = binding;
+        else break;
+      }
+      if (nearest && nearest.isRules) add(key, rel);
     }
   }
   return new Map([...hits.entries()]
@@ -373,10 +542,47 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       'if (/** @type {Record<string, unknown>} */ (rules).castReceiverEnabled === true) run();',
       'if (worldState?.simulationRules?.optionalChainEnabled === true) run();',
       'if (rules.notAGate !== true) skip();',
+      // ── GAP-1's arms 2 and 3, each driven POSITIVELY so an arm cannot be deleted
+      //    silently, and each decoy below driven NEGATIVELY in its real spelling.
+      'const g2expr = (context.simulationRules || worldState?.simulationRules || {}).exprReceiverEnabled === true;',
+      'const rr = /** @type {Record<string, unknown>} */ (rules);',
+      'if (rr.aliasReceiverEnabled === true) run();',
+      'const priorRules = (thing.simulationRules || {});',
+      'const renamed = priorRules.renamedLocalEnabled === true;',
+      // DECOYS — the three real non-gate receivers measured in src/ (a settlement
+      // generator config, a function option, and arg forwarding). A detector that
+      // admits any of these re-opens the blindness in the opposite direction.
+      'const d1 = config?.ancientRuinsEnabled === true;',
+      'const d2 = options?.appetiteEnabled === true;',
+      'const d3 = args.dispositionEnabled === true;',
+      // DECOY — GUARD 1: an unbounded receiver alternation matches the `r` inside
+      // `return` and inside `rosterEntry`, which is how the prototype produced two
+      // false positives on the live tree.
+      'const gone = () => { return leash.revealedEnabled === true; };',
+      'const g = rosterEntry ? rosterEntry.isGoverningEnabled === true : false;',
+      // DECOY — GUARD 2: a REBOUND short name whose nearest preceding binding is not
+      // the rules cast. A file-wide alias set would attribute this to the rules object.
+      'const rr2 = asObject(raw[k]);',
+      'const scoped = rr2.rebound0Enabled === true;',
+      // DECOY — the member-chain bridge arm 2's tail forbids: `bEnabled` belongs to
+      // `x`, not to `rules`, and no arm may attribute it here.
+      'const bridged = rules.leftEnabled === true && x.rightEnabled === true;',
     ].join('\n');
     const found = [...scanGateReads([{ rel: 'planted.js', src: planted }]).keys()];
-    // The three code spellings, and nothing from the four prose/negative decoys.
-    expect(found).toEqual(['bareReceiverEnabled', 'castReceiverEnabled', 'optionalChainEnabled']);
+    // The SIX code spellings, and nothing from the prose, negative and receiver decoys.
+    // Stated as an EXACT array rather than as bare collection negatives: this file's
+    // anchor ceiling is ZERO, so `not.toContain` would red the negative-assertion
+    // anchor walker, and an exact equality is the stronger claim anyway — it fails on
+    // an unexpected ADDITION as loudly as on a missing expectation.
+    expect(found).toEqual([
+      'aliasReceiverEnabled',
+      'bareReceiverEnabled',
+      'castReceiverEnabled',
+      'exprReceiverEnabled',
+      'leftEnabled',
+      'optionalChainEnabled',
+      'renamedLocalEnabled',
+    ]);
   });
 
   test('guard the guard: the auditor reds on every failure shape', () => {
@@ -464,8 +670,11 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
 
   test('the live scan is non-vacuous and reaches BOTH gate spellings', () => {
     // A scan that silently emptied would make every assertion below trivially true.
-    // The floors sit under today's measurement (51 keys across the tree) so ordinary
-    // retirement does not red the walker while a collapsed scan still does.
+    // The floors sit under today's measurement (70 keys across the tree, re-derived by
+    // GAP-1 when the detector widened from one receiver arm to three; it was 51 when
+    // this comment was first written and 63 immediately before the widening) so
+    // ordinary retirement does not red the walker while a collapsed scan still does.
+    // The floor stays 40: it is a COLLAPSE detector, never a ceiling.
     expect(sourceFiles.length).toBeGreaterThan(200);
     expect(readKeys.length).toBeGreaterThanOrEqual(40);
     // POSITIVE CONTROL, bare receiver: `rules.warLayerEnabled === true`.
@@ -477,6 +686,29 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     expect(readKeys).toContain('seaRoadsEnabled');
     // POSITIVE CONTROL, optional chain: `rules?.economicCoupReadEnabled === true`.
     expect(readKeys).toContain('economicCoupReadEnabled');
+    // ── GAP-1's three NON-CANONICAL receiver shapes, one live positive control each, so
+    //    an arm cannot be deleted without reddening here. Each names a real gate at a
+    //    real site rather than a synthetic one, which is what makes them controls on
+    //    the LIVE scan rather than a second copy of the guard-the-guard test above.
+    //
+    // ⚠ This test's TITLE still says "BOTH gate spellings" and the count is now higher
+    // than two. The title is left EXACTLY as it stands on purpose: GAP-1 is census-
+    // NEUTRAL by ruling (OWNER_DECISION_QUEUE §32 ruling 2), the estate-wide lighting
+    // census pins literal test titles by exact equality, and re-wording this one would
+    // move the tuple and take the estate's single census reservation for a legibility
+    // gain. The cost is recorded here rather than smoothed away.
+    //
+    // ARM 3, alias local: `const r = /** @type … */ (rules); r.settlementPoliticsEnabled === true`
+    // at src/domain/worldPulse/settlementPolitics.js.
+    expect(readKeys).toContain('settlementPoliticsEnabled');
+    // ARM 2, defaulted parenthesised expression:
+    // `(context.simulationRules || worldState?.simulationRules || {}).underwaysOrganicFoundingEnabled === true`
+    // at src/domain/worldPulse/institutionLifecycle.js.
+    expect(readKeys).toContain('underwaysOrganicFoundingEnabled');
+    // ARM 3, renamed local bound from a `.simulationRules` access:
+    // `const priorRules = (… .simulationRules || {}); priorRules.biomeTruthEnabled === true`
+    // at src/store/campaignSpatialCanonize.js.
+    expect(readKeys).toContain('biomeTruthEnabled');
   });
 
   test('the manifest holds against the tree in BOTH directions', () => {

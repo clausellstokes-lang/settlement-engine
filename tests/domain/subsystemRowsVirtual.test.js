@@ -124,11 +124,25 @@ const SPINE = 'errandSpineEnabled';
 // receipt channel. Its two empty channels are empty for reasons of design rather than of
 // mount — the lane mints no candidateType and, deliberately, no news kind at all.
 const PACTS = 'pactFormationEnabled';
+// Joined 2026-08-14 by GAP-1 under OWNER_DECISION_QUEUE §32 ruling 1. BOTH ARE THE FIRST
+// ROWS IN THIS LANE WHOSE KEYS DID NOT ARRIVE WITH THEIR FIRST GATE READ: the reads have
+// been in the tree since their layers landed, and both were invisible to the census
+// walker because its detector pinned the RECEIVER to the literal tokens `rules` and
+// `simulationRules`. Politics reads through a JSDoc-cast alias local; the underways
+// reads through a `||`-defaulted parenthesised expression. The widened three-arm
+// detector reaches both, so the manifest entry and the row land with the DETECTION.
+const POLITICS = 'settlementPoliticsEnabled';
+// ⚠⚠ AND THIS ONE IS WHY THE EMPTY-EVENTTYPES CLAIM BELOW IS NOW A PARTITION. Its lane
+// leaf really does mint candidateType literals — it is the only member of this cohort
+// that does — and neither literal is attributable to this flag. See
+// SHARED_CANDIDATE_LITERALS.
+const UNDERWAYS = 'underwaysOrganicFoundingEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
   CONQUEST, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
+  POLITICS, UNDERWAYS,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -213,6 +227,63 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/commercialReasons.js',
     'src/domain/worldPulse/commercialReasonsNews.js',
   ],
+  // The politics lane's own leaf is the whole lane: the gate door, the bloc resolver
+  // and the consolidation tracker live in one file. The two consumers named in the
+  // row's wider `module` list (settlementStrategy.js, warSeatBooks.js) are
+  // deliberately NOT here — they are the strategy and war layers' files, and tracing
+  // this lane's claims through them would measure those layers' vocabulary.
+  [POLITICS]: ['src/domain/worldPulse/settlementPolitics.js'],
+  // The underways lane's own leaf, and it is the same file as its gate: the flag is
+  // read in evaluateInstitutionLifecycle and threaded into detectInstitutionGaps in
+  // that one module. ⚠ THIS IS THE LEAF THAT MINTS CANDIDATE LITERALS — see
+  // SHARED_CANDIDATE_LITERALS immediately below, which is the whole reason the
+  // empty-eventTypes claim had to become a partition rather than a flat assertion.
+  [UNDERWAYS]: ['src/domain/worldPulse/institutionLifecycle.js'],
+});
+
+/**
+ * ⚠⚠ THE COHORT PARTITION, AND WHY IT IS STRICTLY STRONGER THAN THE FLAT CLAIM IT
+ * REPLACES. Through 2026-08-13 the empty-eventTypes trace below asserted ONE thing over
+ * the whole cohort: every row declares `eventTypes: []`, AND no lane leaf contains the
+ * string `candidateType`. Both halves were true, because every member happened to be a
+ * lane that mints nothing.
+ *
+ * GAP-1 added the first member that is not. `institutionLifecycle.js` spells
+ * `candidateType: 'institution_build'` and `candidateType: 'institution_closure'`, so
+ * the flat claim admitted no honest spelling of the underways row — declaring `[]` red
+ * the leaf half, and declaring the literals red the `toEqual([])` half. That is a
+ * closed pincer, and a contract with no honest exit is a contract that will be deleted
+ * rather than obeyed.
+ *
+ * ⛔ THE OBVIOUS CURE — "declare what your leaves mint" — IS REFUSED, on measured
+ * grounds, and the refusal is the point of this block. `institution_build` is minted
+ * from the TOP-AFFINITY member of a gap set fed by downstream chains, resource needs
+ * and martial emergence weighting; the underways flag opens exactly ONE additional gap
+ * and only when it wins the sort. So the literal is SHARED. It is ALREADY declared by
+ * `institutionLifecycleEnabled`'s own registry row. Declaring it here would grade the
+ * underways row ALIVE off institution builds this flag never caused — the same failure
+ * the statecraft row's `spatialLedgers.beliefMaps` exclusion refuses four tests below,
+ * and one this cohort cannot afford, because the honest-gap escape hatch that would
+ * otherwise absorb it (declare a channel, still say `unobserved`) sits at its
+ * SHRINK-ONLY ceiling of five in subsystemCertificationCorpus.test.js.
+ *
+ * ⇒ THE SHIPPED CONTRACT ASSERTS BOTH HALVES: declared `eventTypes` equals the
+ * SEPARABLE literals (those a row could honestly claim), and EVERY literal the leaves
+ * mint is accounted for — declared, or named here with a written reason. An
+ * under-claim is now exactly as loud as an over-claim, which is what the original
+ * comment asked for in words ("under-claiming rots exactly like over-claiming, it just
+ * reads as modesty") and could not enforce.
+ *
+ * ⛔ ANTI-VACUITY, and it runs in the direction that actually bites: a reason here for
+ * a literal the leaves DO NOT mint reds the trace. So this map cannot rot into a
+ * blanket waiver, and if the literal scan ever broke and measured nothing, every row
+ * below would red rather than pass.
+ */
+const SHARED_CANDIDATE_LITERALS = Object.freeze({
+  [UNDERWAYS]: Object.freeze({
+    institution_build: 'SHARED WITH THE INSTITUTION LIFECYCLE LAYER, which already declares it. The literal is minted from gaps[0] — the top-affinity member of a gap set fed by downstream supply chains, resource needs and martial emergence weighting. This flag opens exactly ONE additional gap (the clandestine tunnel network, village tier and above) and only when that gap wins the affinity sort, so a count of institution_build cannot separate a lit world from a dark one. Declaring it would grade this row ALIVE off another subsystem gate traffic.',
+    institution_closure: 'NOT ON THIS FLAG PATH AT ALL. The closure candidate is minted by the declining-streak arm of evaluateInstitutionLifecycle, which this flag never reaches; underwaysFoundingLit is threaded only into detectInstitutionGaps on the prosperous arm. It appears in this leaf because the leaf hosts the whole institution lifecycle, not because the underways lane mints it.',
+  }),
 });
 
 function walk(dir, out = []) {
@@ -466,20 +537,61 @@ describe('engine-gated virtual rows — TRACE against live source', () => {
     expect(declared, 'a shared container can never carry ALIVE for one row').not.toContain('spatialLedgers.beliefMaps');
   });
 
+  // ⚠ The TITLE below is deliberately unchanged although the claim is now a partition.
+  // GAP-1 is census-NEUTRAL by ruling (OWNER_DECISION_QUEUE §32 ruling 2) and the
+  // estate-wide lighting census pins literal test titles by exact equality, so
+  // re-wording this one would move the tuple and spend the estate's single census
+  // reservation on a legibility gain. The widening is explained in
+  // SHARED_CANDIDATE_LITERALS above instead, and the cost is recorded rather than
+  // smoothed away.
   test('the empty-eventTypes claim holds: no lane leaf mints a candidate', () => {
+    const MINT_RE = /candidateType:\s*'([^']+)'/g;
     for (const rule of VIRTUAL_RULES) {
-      expect(rowFor(rule).aliveness.eventTypes, `${rule}: the row declares no candidate vocabulary`).toEqual([]);
+      const declared = [...rowFor(rule).aliveness.eventTypes].sort();
+      const shared = SHARED_CANDIDATE_LITERALS[rule] || {};
+      const isZeroCandidateLane = !SHARED_CANDIDATE_LITERALS[rule];
+      /** @type {Set<string>} */
+      const minted = new Set();
       for (const leaf of LANE_LEAVES[rule]) {
         const file = sourceFiles.find((entry) => entry.rel === leaf);
         expect(file, `${rule}: lane leaf missing: ${leaf}`).toBeTruthy();
-        // A `candidateType` literal appearing here means the lane grew a vocabulary
-        // the receipt CAN see, and the row owes it an eventTypes entry. The evidence
-        // law runs in this direction too: under-claiming rots exactly like
-        // over-claiming, it just reads as modesty.
+        for (const match of file.src.matchAll(MINT_RE)) minted.add(match[1]);
+        // THE ZERO-CANDIDATE COHORT KEEPS TODAY'S CLAIM, BYTE FOR BYTE. A
+        // `candidateType` literal appearing in one of these leaves means the lane grew
+        // a vocabulary the receipt CAN see, and the row owes it an eventTypes entry —
+        // or, if the literal turns out to be shared, a written reason in
+        // SHARED_CANDIDATE_LITERALS. The evidence law runs in this direction too:
+        // under-claiming rots exactly like over-claiming, it just reads as modesty.
+        if (isZeroCandidateLane) {
+          expect(
+            file.src.includes('candidateType'),
+            `${rule}: ${leaf} now names candidateType — declare the literal in the row's eventTypes, or record why it is shared in SHARED_CANDIDATE_LITERALS`,
+          ).toBe(false);
+        }
+      }
+      // DECLARED == SEPARABLE. For every lane, the row must declare exactly those
+      // minted literals it can honestly claim — which for a zero-candidate lane is the
+      // empty set on both sides, so this arm subsumes the old `toEqual([])` rather
+      // than weakening it.
+      const separable = [...minted].filter((literal) => !(literal in shared)).sort();
+      expect(
+        declared,
+        `${rule}: the row's declared eventTypes must equal the literals its leaves mint MINUS the ones recorded as shared`,
+      ).toEqual(separable);
+      // ...AND EVERY SHARED REASON IS LIVE. A reason for a literal the leaves no
+      // longer mint is a stale waiver, and this is the arm that stops the map above
+      // from rotting into a blanket exemption. It is also the anti-vacuity control for
+      // the whole trace: if MINT_RE ever stopped matching, `minted` would empty and
+      // every shared row here would red instead of passing quietly.
+      for (const [literal, reason] of Object.entries(shared)) {
         expect(
-          file.src.includes('candidateType'),
-          `${rule}: ${leaf} now names candidateType — declare the literal in the row's eventTypes`,
-        ).toBe(false);
+          minted.has(literal),
+          `${rule}: SHARED_CANDIDATE_LITERALS names ${literal}, but no lane leaf mints it any more — delete the stale row`,
+        ).toBe(true);
+        expect(
+          reason.length,
+          `${rule}: the shared-literal reason for ${literal} is too thin to review`,
+        ).toBeGreaterThan(120);
       }
     }
   });
