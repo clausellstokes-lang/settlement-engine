@@ -104,7 +104,26 @@ HB-0/HB-1 dispatchable after their Q2/Q3 rule at compile (INDEX prose
 corrected in that train's P-commit). Alternatives recorded: hb-1 (next),
 ep-0 (single-member only; EP forbids trains), wy-1 (data-gated, kmScale has
 no producer).
-**LIVE (~15:15): Lane TE5 (Opus) EXECUTES gr-6** on `refs/trains/gr-6` from
+**⛔→✅ TE5 STOPPED THE WHOLE gr-6 TRAIN AT P1 (~16:00) AND THE STOP IS
+RATIFIED (§35 at ledger `ec86e090`):** BOTH §34 tripwires fired on executed
+evidence — the war-opener's threshold operand is NEVER EVALUATED for the
+ordered target (`warDeployment.js:1065` short-circuit + the file's own
+`:1045-47` CONQUEST_MARGIN waiver; proved by an isolated ×3 inflation that
+left every deliberated-march arm green), and the band was blank. The
+no-truncation call is ratified (refuted premise ≠ failed proof). Nothing
+committed; no ref created; branch clean at `6784bf62`. **GR-6 is PARKED FOR
+RE-CHARTER** (candidate mount = the HOSTILE_CONFIDENCE floor at `:1002`;
+band substrate measured in `laneTE5-receipt.md`). ⭐ DURABLE: the
+CONQUEST_MARGIN waiver forecloses ANY bounded multiplier on that operand;
+the coupling-registration TEMPLATE GAP hit INSTANCE FIVE → §35.3 graduates
+it to a MACHINE CHECK (infra micro-act, queued with codeOnly() + the capsule
+HOT_FILES parse).
+**LIVE (~16:05): Lane TC6 (Opus) COMPILES `hb-1` = [HB-0, HB-1]** under
+§34's narrowed HB seal (Q1 binds HB-3+ only): Q2/Q3 recommended rulings with
+evidence for chair signature; new HB preamble; the template at full
+strength; M1/M2 collision-disjointness PROVEN; the C1 vs-WC disposition;
+INDEX HB prose corrected in P1. Deliverables → `laneTC6-*`.
+**(superseded ~16:00) Lane TE5 (Opus) EXECUTES gr-6** on `refs/trains/gr-6` from
 `6784bf62`: P1→I1 (flag mint, declared red 2419-vs-2418) →P2→I2 (mount +
 census to `2420/366/2054/20040/5645`) →T (validator 42/0, runtime 28056/16,
 ONE held bare gate + smoke). Chair owns CAS. Receipt → `laneTE5-receipt.md`.
