@@ -1355,3 +1355,28 @@ Evidence: Lane TC3's compile (plan + three member packets + report, scratchpad
 - **INFRA-M4 stays deferred as recorded.** ⚠ QUEUE NOTE, not this train: the
   `.nvmrc` deleted-in-parent-repo vs `ciCheckParity` pinning anomaly is
   REPORTED UNINVESTIGATED — it joins the next infrastructure pass's docket.
+
+## §31 · THE §8 EFFICIENCY REVIEW — TWO TRAINS AUDITED (2026-08-14 ~10:45,
+## chair; the review DESIGN_BUILD_EFFICIENCY §8 step 5 requires)
+
+Data (wall-clock from lane run durations; waves landed per one exposed gate):
+- Pre-train baseline (08-13 era): ~2.5 h/wave, one-plus full gates per wave.
+- Train 1 (GR-4B-II, 2 waves): compile ~0.5 h + execute ~2.8 h ≈ 1.65 h/wave.
+- Train 2 (infra-1, 3 members): compile ~0.5 h + execute ~1.7 h ≈ 0.73 h/wave.
+- Combined: 5 members in ≈5.5 h ≈ 1.1 h/wave — **≈56% reduction, inside the
+  volume's 40-60% estimate. The estimate is CONFIRMED on first data.**
+- Red-rate: zero exposed reds, zero truncations; BOTH trains' first terminal
+  gates red on the SAME class (un-anchored negative assertions in new
+  acceptance files), both cured pre-exposure.
+
+Rulings:
+1. **The member cap of 4 is CONFIRMED** (no evidence for movement either way
+   yet; revisit at the ES trains).
+2. **The un-anchored-negative rule enters the preambles**: every new
+  acceptance file runs the negative-assertion anchor walker focusedly BEFORE
+  its member proof is declared green — removing the habitat of the one debt
+  class both trains minted.
+3. **The J-TE3-1 refinement is LAW** (already in the hand note): census-moving
+  members declare the lighting-walker interior red BY FIGURE in the train
+  plan, or the plan is defective.
+4. Trains remain same-volume until the ES trains land clean (unchanged).
