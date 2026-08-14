@@ -1609,3 +1609,28 @@ could vanish) — it joins the machinery queue, not this train. Interior reds
 accepted as declared by figure (I1 none; I2-I4 lighting-walker only, cured
 at T). EXECUTION SERIALIZES behind HB-1′ (one engine worktree; two
 executors never share it).
+
+## §41 · THE HB-2 TRAIN IS RULED (2026-08-15 ~02:15, chair, vetoable; one
+## sitting per §5; full evidence in laneTC9-report.md)
+
+1. **The single-member shape is SIGNED** — the classifier member was refused
+   on an executed layering measurement (7 layered reads vs an
+   ARGUED_UNLAYERED map whose largest is one; no lawful registration
+   exists). **O-1 escalates to a BLOCKING chair question at HB-4's compile**:
+   `circumstanceClassOf` needs a home ruling before HB-4 can compile — the
+   ledger takes the class as an argument, HB-4 is the first consumer.
+2. **Q2 TAKEN IN PART is SIGNED**: reachability at HB-2; occupancy re-aims
+   to HB-4; ⭐ the ~70% reopen trigger RE-PRICED onto the restricted
+   denominator — three of eleven pressed classes measured UNREACHABLE on
+   `full_simulation` (dark ports), and a trigger priced on them would fire
+   on darkness, not vocabulary.
+3. **R27's cure is SIGNED**: the worldState clock read uses the
+   `assizeKernel.js:242` clean idiom — osrFindings must hold 1998; any
+   movement is a STOP with no in-wave cure.
+4. **R28 SIGNED**: the packet binds to PACKET_STANDARD's hard 250 over the
+   charter's 280, split contingency declared.
+5. The landed raw-source vocabulary constraint (habitVocabulary.test.js:113 —
+   no future module may spell a class token outside the vocabulary leaf,
+   JSDoc included) is RECORDED as a standing HB law; every future HB compile
+   preflights it.
+6. R26-R30 and the struck provisional finding are ratified on the report.
