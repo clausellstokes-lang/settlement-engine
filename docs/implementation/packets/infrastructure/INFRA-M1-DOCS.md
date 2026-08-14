@@ -1,6 +1,6 @@
 # INFRA-M1-DOCS — the §28 documentary substrate
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `600831749908e340444087df734d18c27046980d`
 - **Train:** `infra-1`, member 1 of 3 — **the lawful truncation boundary**
 - **Preamble:** ⚠ this member AUTHORS `docs/implementation/preambles/INFRA-PREAMBLE.md`, so it is
@@ -260,3 +260,41 @@ explicitly so a reviewer does not read the absence as a skipped step.
 Verified base sha and final tree state · the nine changed files · A1-A6 with exact argv and exits ·
 **the claim count before and after, quoted** · the lighting census tuple quoted unchanged ·
 `validate:packets` output quoted · deviations `NONE` or a STOP · judgment calls `NONE`.
+
+---
+
+## §12 Landing receipt
+
+**LANDED at the `infra-1` train's I1 commit `e6eb4c5d`.** Nine docs files, zero production lines.
+
+- **A1** — the enforcement-claims pin was re-executed over the whole corpus. The naked-claim list
+  is **byte-identical to base** at its six pre-existing entries, none in a file this member touches,
+  so **no `FROZEN_NAKED` key grew**. The one red arm is the banked known failure and was proven
+  identically red at `60083174` by re-execution in a temp worktree at base
+  (`1 failed | 20 passed`, both runs).
+- **A2** — both folds verbatim: `git show review-fixes-2026-07-08:docs/<name> | diff -` reports
+  **only** the §3.1 Status-clause lines, for both volumes.
+- **A3** — the lighting census stood **unmoved** at `2416/365/2051/20016/5642`, `TRUE_EXIT=0`,
+  33/33. This is the `+0/+0/+0/+0/+0` proof that made this member the truncation boundary.
+- **A4** — the three FPC cures landed; the `= **108**` arithmetic line and all three
+  `## LANDED 2026-08-07` blocks are **byte-identical to base** (verified by diff).
+  ⚠ One compile claim was REFUTED and the banner does not repeat it: "all charter modules absent"
+  does not survive measurement (many named modules are pre-existing MODIFY targets). Each banner
+  instead carries the flag measurement, which is decisive: 11 of 18, 7 of 9 and 14 of 17 named
+  flags unminted for HB, WC and EP.
+  ⚠ The wave count 111 was independently re-derived rather than transcribed: extraction over §5's
+  own charter blocks gives ES 11, HB 10, WC 17, EP 6, WY-engine 7, and `60 + 11 + 7 + 33 = 111`.
+- **A5** — exactly three new top-level sections between `## Dispatch unit` and
+  `## Default hard scope budget`, carrying no capsule figure; §P3 states that INFRA has no standing
+  census tuple.
+- **A6** — `validate:packets` read **37 packets (1 READY)** at promotion and **39 packets
+  (0 READY)** at the terminal.
+
+⚠ **One promotion correction, made while the chain was unexposed.** The compile's `requiredSymbols`
+named two prose fragments this member's own cure DELETES. The validator checks `requiredSymbols` at
+**every** status, so a READY packet may only name symbols it preserves; `retiredSymbols` is no
+escape, because it requires the retiree to still be PRESENT until LANDED. The promotion therefore
+carries only preserved symbols, and the five symbols this member CREATES were added to the manifest
+at the flip — the one status at which a CREATE claim first becomes machine-checkable.
+
+**Deviations:** the two above, both recorded. **Judgment calls:** in the train receipt.

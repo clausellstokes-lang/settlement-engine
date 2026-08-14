@@ -1972,7 +1972,7 @@
     },
     {
       "id": "INFRA-M1-DOCS",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/INFRA-M1-DOCS.md",
       "verifiedBase": "600831749908e340444087df734d18c27046980d",
       "changeManifest": [
@@ -2014,6 +2014,26 @@
         }
       ],
       "requiredSymbols": [
+        {
+          "path": "docs/implementation/preambles/INFRA-PREAMBLE.md",
+          "symbol": "## \u00a7P1 \u00b7 Binding design-law citations"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Train landings"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## The base-state capsule and its consumption law"
+        },
+        {
+          "path": "docs/DESIGN_BUILD_EFFICIENCY.md",
+          "symbol": "## \u00a72 \u00b7 TRAIN LANDINGS"
+        },
+        {
+          "path": "docs/DESIGN_IP_PROTECTION.md",
+          "symbol": "### IP-1 \u2014 THE SOURCEMAP GUARD"
+        },
         {
           "path": "docs/implementation/PACKET_STANDARD.md",
           "symbol": "## Dispatch unit"
@@ -2083,7 +2103,7 @@
     },
     {
       "id": "INFRA-M2-CAPSULE",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/INFRA-M2-CAPSULE.md",
       "verifiedBase": "e6eb4c5d15c827133a8edcd68698f30754dd21ed",
       "changeManifest": [
@@ -2101,6 +2121,22 @@
         }
       ],
       "requiredSymbols": [
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export const PROVENANCE"
+        },
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export function capsuleFrom"
+        },
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export async function readAll"
+        },
+        {
+          "path": "tests/scripts/baseStateCapsule.test.js",
+          "symbol": "base-state capsule generator"
+        },
         {
           "path": "scripts/check-test-ratchet.mjs",
           "symbol": "export const SCOPE_FLOOR_RATIO"
@@ -2194,9 +2230,9 @@
     },
     {
       "id": "INFRA-M3-IP1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/INFRA-M3-IP1.md",
-      "verifiedBase": "aa6bca77f0a04d622d363e115d663eff69f06ff6",
+      "verifiedBase": "b713b05cbafe6d55eb799455e501803fe9082898",
       "changeManifest": [
         {
           "action": "CREATE",
@@ -2208,6 +2244,10 @@
         }
       ],
       "requiredSymbols": [
+        {
+          "path": "tests/build/sourcemapAbsence.test.js",
+          "symbol": "the shipped bundle carries no source maps (IP-1)"
+        },
         {
           "path": "scripts/check-test-ratchet.mjs",
           "symbol": "export function discoverBuildTestFiles"

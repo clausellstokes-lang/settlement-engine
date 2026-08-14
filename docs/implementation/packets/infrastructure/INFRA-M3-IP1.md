@@ -1,7 +1,7 @@
 # INFRA-M3-IP1 — the sourcemap guard
 
-- **Status:** READY
-- **Verified base:** `claude/composite-r4` at `aa6bca77f0a04d622d363e115d663eff69f06ff6`
+- **Status:** LANDED
+- **Verified base:** `claude/composite-r4` at `b713b05cbafe6d55eb799455e501803fe9082898`
 - **Train:** `infra-1`, member 3 of 3 — **the terminal member**
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
   `cd04a46315c919694d6eb5a043d74fe6173ec11be359be932d40ecf04af232f5`
@@ -311,3 +311,44 @@ count 50 → 51 · deviations `NONE` or a STOP · judgment calls `NONE`.
 ⭐ `DESIGN_IP_PROTECTION.md` §6 names exactly what IP-1 owes: *"the planted-mutant conviction +
 green at HEAD."* Both are above, and the receipt states them in those terms so the volume's own
 ledger can be closed against it.
+
+---
+
+## §13 Landing receipt
+
+**LANDED at the `infra-1` train's I3 commit `cfcc2fa2`.** One new test file plus the train's
+whole-census re-derivation.
+
+- **A1-A5:** `VERIFY_DIST=1` → **5 passed**, `TRUE_EXIT=0`; plain run → **3 passed / 2 skipped**,
+  `TRUE_EXIT=0` (A4). Scoped eslint **0 bytes of output**.
+- **THE MANDATORY CONFIG-FLIP MUTANT, in an isolated candidate worktree with its own build:**
+  `vite.config.js` pre-mutant SHA-256
+  `0d6e0ed6092d2896e3d4db81dbcf4bcb58faefb2137d56f4c8abe74e63171696`; `sourcemap: true` planted
+  with the byte change proved; `npx vite build` exit 0 → **521 `.map` files emitted**; the guard
+  exited **1** with **both** named arms red (`emits no .map file anywhere under dist/` and
+  `emits no sourceMappingURL directive in any built chunk`). `vite.config.js` restored
+  **digest-exact** — post SHA-256 identical to pre. The candidate worktree and its sourcemapped
+  artifact were then **removed entirely**, and the code-of-record worktree was verified untouched:
+  0 `.map` files, 524 assets, `vite.config.js` at the same digest.
+- **The four plant-nothing-greens all convicted**, each by name: M3-c1 the byte-change proof;
+  M3-c2 a fabricated `.map` under `dist/assets` reds the `.map` arm; M3-c3 a directive appended to
+  a real chunk reds the directive arm, restored digest-exact; M3-c4 `dist/` moved aside under
+  `VERIFY_DIST` reds the unconditional anti-vacuity arm. ⭐ c2 and c3 convict the two arms
+  **independently**, which closes the redundant-guard class.
+- **The green half, against a genuinely fresh build in the candidate:** 5/5 with 0 `.map` files and
+  524 assets — and again at the terminal's own post-build `verify:dist`.
+- **Census:** re-derived WHOLE to `2418/366/2052/20024/5643`, `TRUE_EXIT=0`, 33/33.
+  `verify:dist` corpus **50 → 51** (the terminal reports `STRICT DIST OK — 51 discovered/reported
+  file(s), 408 test(s)`). `runtimeTests` unmoved by this member; the terminal reads **28040**,
+  which is M2's +8 alone.
+
+⚠ **One compile premise was corrected before implementation and the correction is load-bearing:**
+22 files under `dist/map/libs/tinymce/skins/**` carry real `sourceMappingURL` directives as vendored
+third-party assets. An unscoped directive scan would have landed this guard RED at birth against
+bytes the build never authored. The `.map` arm stays whole-tree and still measures zero; the
+directive arm is scoped to what Rollup emits.
+
+⭐ `DESIGN_IP_PROTECTION.md` §6 names exactly what IP-1 owes — *"the planted-mutant conviction +
+green at HEAD"* — and both are above.
+
+**Deviations:** the directive-scan scoping and the census-placement decision, both recorded.

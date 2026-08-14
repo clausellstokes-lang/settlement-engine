@@ -1,6 +1,6 @@
 # INFRA-M2-CAPSULE — the base-state capsule generator
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `e6eb4c5d15c827133a8edcd68698f30754dd21ed`
 - **Train:** `infra-1`, member 2 of 3
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
@@ -360,3 +360,51 @@ no-conviction result stated plainly** · the lighting census tuple before and af
 interior red quoted verbatim · both ratchets by config name · the observed-shape exit and finding
 count · `validate:packets` output · **the generated `BASE_STATE.json` diff against base, quoted** ·
 the three deferrals restated · deviations `NONE` or a STOP · judgment calls `NONE`.
+
+---
+
+## §12 Landing receipt
+
+**LANDED at the `infra-1` train's I2 commit `b713b05c`** (amended once while unexposed; see below).
+
+- **A1-A8: 8/8, `TRUE_EXIT=0`**, one literal `describe` and eight literal `it`.
+- **The eight mutants, in an isolated candidate worktree** at the member commit with linked
+  `node_modules`, pristine leaf SHA-256 `bedff470…`: **7 CONVICTED by their required titles**,
+  every plant proved by a byte delta, every restore digest-exact, candidate green before and after
+  (`RESTORED exit=0 … matches=true`).
+  **M2-m6 PASSED, and it is a DECLARED NO-CONVICTION CONTROL, recorded rather than hidden**:
+  reading `routedTokens` from the walker's `ROUTED_TOKENS` constant instead of the live
+  `EXACT_SECTION` agrees at this base, which proves the redundant-guard class is present here and
+  that A3's `routedTokens` arm is not by itself evidence the source read is live. The conviction is
+  A2's `kind: MEASURED` row plus the `PROVENANCE` home string.
+  ⚠ M2-m7's first plant was syntactically invalid and convicted nothing; it was corrected to a
+  valid value mutation and then convicted A1. Recorded because an unconvicting mutant is a STOP
+  unless it is understood.
+- **The generator, run end to end at a clean tree:** `TRUE_EXIT=0`. Against the committed
+  hand-stamped capsule the only differences are `stampedAt`, `method` and `validatePackets` — every
+  other figure regenerated **byte-identically to the hand derivation**, which is this member's
+  central claim proven rather than asserted.
+- **Ratchets and validators at the member commit:** `typecheck:ratchet` 173/173;
+  `typecheck:domain:strict` 1134/1134; observed-shape **1998**, exactly the frozen inventory;
+  `validate:packets` 38 packets (2 READY); scoped eslint **0 bytes of output**.
+- **Census:** the named interior red appeared exactly as predicted — one file, the census arm,
+  `expected 2417 to be 2416` — and closed at I3 when the whole tuple was re-derived.
+
+⚠⚠ **TWO REAL DEFECTS WERE FOUND BY THIS MEMBER'S OWN ANTI-VACUITY MACHINERY, AND BOTH CURES ARE
+STRUCTURAL.** The battery's independent reader was reading the lighting census off a retained
+ancestry-pin COMMENT rather than the live constant (the generator was right; the reader is now
+anchored to line start). And `GRAMMAR_RECEIPTS` is a keyed OBJECT, so a bare `.length` yielded
+`undefined`, `JSON.stringify` **deleted the key from the artifact**, and a harness comparing
+`undefined` against `undefined` agreed — found only by the end-to-end run. The cures are a
+`countOf` helper that refuses any export which is neither array nor keyed object, a guard that
+refuses any figure which would vanish rather than land, and an A8 that now perturbs **every**
+compared row instead of a hand-kept subset, since that subset is exactly what let the row through.
+
+⚠ **AMENDED ONCE, BEFORE ANY EXPOSURE.** The terminal's first bare gate exited 1 at `test:ratchet`
+on the negative-assertion anchor walker: two un-anchored negatives in this acceptance file. A
+failing walker is a disabled guard, never bankable debt, and it was an interior red this train had
+not declared. Rather than cure it downstream, the member was amended so it carries its own clean
+proof, using `expectAbsentWithAnchor` with anchors that travel the same code path as each subject.
+
+**Deviations:** OVERRIDE INFRA-M2-A (282 effective lines against the packet's own 250, recorded at
+implementation time with no enforced ceiling breached) and the amendment above.
