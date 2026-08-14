@@ -141,7 +141,20 @@ character.
 already held P1 `436f138e` + I1 `e188760b` (HB-0 dark by construction),
 porcelain clean, no orphans; resumed with re-verify-I1-then-continue orders
 (uncaptured proofs re-run; captured receipts citable).
-**LIVE (resumed): Lane TE6 (Opus) EXECUTES hb-1** on `refs/trains/hb-1` from
+**⛔→✅ TE6 FULL-TRAIN STOP AT T (~19:30), RATIFIED §38 (ledger `5c1c5ec5`):
+HB-1's chartered disjunct deletion REFUTED** — it feeds two RATIFIED
+same-seed goldens via espionageAbsenceDormancy's direct token pass (base
+26/26 vs I2 red, proven in a clean base worktree). THIRD same-shape
+refutation today → §38.4 NEW PREAMBLE LAW: delete/retire clauses execute
+only after an executed consumer census proves the target dead. HB-1 →
+RE-CHARTER (the register cure; the missed `src/domain/region` directory;
+the fork-registry importer-scan structural class). **The HB-0 PREFIX IS
+RULED LANDABLE** (proof complete; IN-1a orphan-window precedent, discharge
+at the HB-1 re-charter).
+**LIVE: TE6 builds T′ on I1 `e188760b`** (HB-0 flip alone; census re-derived
+at prefix state `2421/366/2055/20046/5646`; validator 41/0; capsule; ONE
+held bare gate + smoke; refuted tip parked at refs/trains/hb-1-refuted for
+the re-charter). Chair CASes `6784bf62 → T′` on green. on `refs/trains/hb-1` from
 `6784bf62`: P1(+INDEX prose fix)→I1(HB-0; declared red
 `2421/366/2055/20046/5646`)→P2→I2(HB-1; census to `2425/366/2059/20074/5650`;
 the shared coupling walker RE-READ at I2)→T (validator 42/0, runtime
