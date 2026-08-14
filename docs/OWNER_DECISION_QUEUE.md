@@ -1409,3 +1409,21 @@ zero new false positives; census-neutral +0 tuple).
 6. The six G2 judgments are RATIFIED on the report's receipts; the §31
    anchor preflight is mandatory (the walker file has ZERO anchor-inventory
    rows — one bare not.toContain reds).
+
+## §33 · GAP-1 NAMING AND CLOSE-OUT RULINGS (2026-08-14 ~13:00, chair, vetoable)
+
+1. **The rename is GRANTED: the wave id is `GAP-1`.** CW-1 stays reserved for
+   the declared FP cascade governor (#58, `DESIGN_FP_ARCHITECTURE.md:2276`).
+   TE4's STOP at T was the correct act; G2's "the id is a proposal" was not a
+   justification. P1/I1 rebuild under the new id and re-seal; code unchanged.
+2. **J-TE4-1 RATIFIED**: the cohort widening asserts declared == SEPARABLE
+   with an enumerated shared-literal ledger — the literal declared == MINTED
+   predicate would grade a dark subsystem ALIVE off a channel another row
+   declares, or blow the shrink-only escape hatch. Recorded as the packet's
+   §4.3(a) amendment.
+3. **The `ruinFilterRoster.walker.test.js:53` guard defect is DOCKETED**: its
+   READER_RE scans RAW source (no codeOnly), enrolling a data table off a
+   comment — the BROADER-than-claim mirror of HZ-CAMELBLIND. The cure exists
+   (`codeOnly()`, ten importers). One micro-act, queued behind the ES trains.
+4. The M8n prose-correcting control, the aiCharterBundle restamp, and the
+   discarded symlink dirty-build are RATIFIED as handled.
