@@ -1159,3 +1159,27 @@ Operative reading (chair, vetoable):
    (currently: GR-4b-iii-b next; GR-4b-ii and GR-5 dispositioned at their evidence).
    Nothing in this ruling forces every declared future wave to precede the first soak;
    the soak lands at the latest point that still leaves repair room, per §3h.
+
+## §25 · THE FOUR-LANE PARALLELISM ORDER AND THE 20-MINUTE KEEPER TICK
+## (2026-08-14 ~02:05, owner ruling, in-chat)
+
+Owner, verbatim: **"Also set up a 20-minute timer that makes sure that nothing is
+stalled and that, up to four lanes, anything that can be worked in parallel (as
+appropriate) is working in parallel. I leave all those judgements to you. Lastly,
+frequently update our progress as I am likely to run out of 5 hour window usage. So
+prepare for that for seamless transitions when the window reopens."**
+
+Operative reading (chair, vetoable):
+
+1. **A 20-minute lane-keeper tick runs for the life of every session**: at each tick
+   the chair collects finished lanes, restaffs idle slots, and confirms nothing is
+   stalled.
+2. **The lane ceiling rises to FOUR total lanes, but the measured inner constraints
+   of the concurrency law stand un-waived**: at most TWO lanes writing build code,
+   ONE landing slot, ONE gate slot, ONE engine worktree. Lanes three and four are
+   read-only recon/draft lanes that commit nothing and never take the gate. The
+   second-worktree refusal was a measured green-but-wrong verdict, not caution, and
+   "as appropriate" is read as preserving it.
+3. **The seamless-resume directive tightens to every-tick currency**: the hand note
+   and ledger are refreshed at every dispatch, collection, landing, ruling, AND
+   keeper tick, so a window death at any moment costs at most one partial lane turn.

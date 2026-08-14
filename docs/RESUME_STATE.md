@@ -98,12 +98,18 @@ authorization with full sealed authority chains, so the GR-4 continuation is
 terminal fact. A successor must not block on re-deriving CR-NEXT-1; the live queue
 derives from the packets' own declarations.
 
-**LIVE (~02:00): Lane IIIB (Opus, background)** drafts the GR-4b-iii-b packet
-read-only from `2dd09360`; deliverables land at this session's scratchpad as
-`laneIIIB-GR-4B-IIIB-draft.md` + `laneIIIB-report.md`
-(`/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/`).
-It commits nothing; REFUSED-IN-PART is a valid return. A successor COLLECTS
-(verify its receipts independently), never re-dispatches while those files exist.
+**LIVE (~02:05): THREE lanes (all Opus, background, commit NOTHING), under §25's
+four-lane order + 20-minute keeper tick.** All deliverables land in this session's
+scratchpad `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/`:
+- **Lane IIIB** drafts the GR-4b-iii-b packet from `2dd09360` →
+  `laneIIIB-GR-4B-IIIB-draft.md` + `laneIIIB-report.md`. REFUSED-IN-PART valid.
+- **Lane SD** derives the first-diagnostic-soak execution plan from
+  `DIAGNOSTIC_SOAK_DESIGN.md` + §3h, verifying mechanisms at HEAD →
+  `laneSD-soak-plan.md` (QUOTED / VERIFIED-AT-HEAD / GAP labels).
+- **Lane II-R** recons GR-4b-ii kind-by-kind producer honesty post-GR-4d →
+  `laneIIR-gr4bii-recon.md` (feeds the pre-soak queue ruling).
+A successor COLLECTS finished lanes (verify receipts independently), never
+re-dispatches while their output files exist. §24+§25 are on the owner queue.
 
 **NEXT:** chair-verify Lane IIIB's draft, rule, then promote **GR-4b-iii-b**
 (the dossier line `succession_question_open`,
