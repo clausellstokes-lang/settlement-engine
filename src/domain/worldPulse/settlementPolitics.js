@@ -612,7 +612,14 @@ export function coalitionConsolidation01(worldState, cid, item) {
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {string} cid
  * @param {PolItem | null | undefined} item
- * @param {string} moveKind  the strategy move key ('deploy'|'sue_for_peace'|'fortify'|…)
+ * @param {string} moveKind  a member of STRATEGY_MOVES, PLUS the ONE REGISTERED FOREIGN
+ *   token `'fortify'` — the MOBILIZATION vocabulary's own move, which a live ratified
+ *   consumer passes straight in.
+ *   ⛔ THE `move === 'fortify' ||` DISJUNCT BELOW IS LIVE AND ITS DELETION IS REFUTED:
+ *   tests/property/espionageAbsenceDormancy.test.js's LOAD_BEARING_MOVES passes the token
+ *   directly and two RATIFIED same-seed goldens record its value (1.02 dark / 1.0168 lit).
+ *   Registered at MOVE_TOKEN_BRANCHERS in tests/lint/strategyMoveVocabulary.walker.test.js,
+ *   whose exact-both-directions arm reds BOTH on a deletion and on an undeclared token.
  * @returns {number}
  */
 export function blocDecisionFactor(worldState, cid, item, moveKind) {

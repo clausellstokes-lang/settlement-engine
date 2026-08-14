@@ -41,6 +41,22 @@ const S = HABIT_TUNING.HABIT_SPAN;
 const HABIT_DIR = 'src/domain/worldPulse/habit';
 const CURVE_HOME = `${HABIT_DIR}/habitCurve.js`;
 const NEW_LEAVES = Object.freeze([`${HABIT_DIR}/habitVocabulary.js`, CURVE_HOME]);
+const REGISTRY_HOME = 'src/domain/worldPulse/habitForkRegistry.js';
+
+/**
+ * ⭐⭐ THE HABIT FAMILY'S REVERSE-IMPORT CLOSURE INSIDE `src`, exact in BOTH directions.
+ * HB-0's two leaves plus the ONE module that imports either of them — the HB-1 fork registry,
+ * which reads the circumstance vocabulary and is itself read only by walkers. The dormancy
+ * case below asserts this list against the live tree and then asserts that nothing outside it
+ * reaches in, which is what "the wave changes no output" means once the family has an
+ * importer at all.
+ * @type {readonly string[]}
+ */
+const HABIT_DARK_CLOSURE = Object.freeze([
+  'src/domain/worldPulse/habit/habitCurve.js',
+  'src/domain/worldPulse/habit/habitVocabulary.js',
+  'src/domain/worldPulse/habitForkRegistry.js',
+]);
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -216,25 +232,67 @@ describe('HB-0 — the frozen curve, its fences, and the wave dormancy evidence'
     expect(roundings).toEqual([CURVE_HOME]);
   });
 
-  test('DORMANCY: neither new leaf has an importer anywhere in src, so the wave changes no output', () => {
-    // The wave's identity claim, proved structurally rather than asserted. Two modules
-    // with zero importers cannot move a generated world.
+  test('DARK CLOSURE: the habit family is unreachable from the engine, so the wave changes no output', () => {
+    // ⭐⭐ RE-AIMED IN PLACE at the HB-1 re-charter, in the SAME commit that creates the
+    // family's first importer. HB-0.md §15 wrote the discharge condition as a condition
+    // rather than a hope: this case USED to assert a WHOLE-TREE ABSOLUTE — "neither new leaf
+    // has an importer anywhere in src" — and its own designed first consumer falsifies that
+    // sentence. A wave that added the import without re-aiming here would have redded a test
+    // green since the HB-0 landing, which is why §15 named the re-aim as the first consumer's
+    // own obligation.
+    //
+    // ⛔ WHAT THE CLAIM BECAME, and it is STRONGER rather than weaker. "Dark" no longer means
+    // "these two leaves have no importer"; it means THE WHOLE FAMILY IS UNREACHABLE FROM THE
+    // ENGINE. Nothing outside the closure below reaches into it, so no generated world can
+    // observe any of it — and the closure is exact in BOTH directions, so a new consumer must
+    // declare itself here and a vanished one must be banked here.
     expect(SRC_FILES.length).toBeGreaterThan(500);
-    const importers = [];
+    const imports = new Map();
     for (const { rel, src } of SRC_FILES) {
-      if (NEW_LEAVES.includes(rel)) continue;
-      if (/from\s*['"][^'"]*habit\/(?:habitVocabulary|habitCurve)\.js['"]/.test(src)) {
-        importers.push(rel);
+      const dir = rel.split('/').slice(0, -1).join('/');
+      const specs = new Set();
+      for (const m of src.matchAll(/from\s*['"](\.[^'"]*)['"]/g)) {
+        specs.add(join(dir, m[1]).replace(/\\/g, '/'));
+      }
+      imports.set(rel, specs);
+    }
+    // (a) THE CLOSURE IS EXACT. Grow the reverse-import closure of the two HB-0 leaves to a
+    // fixpoint over the live tree and compare it, both directions, to the declared list.
+    const closure = new Set(NEW_LEAVES);
+    for (let grew = true; grew;) {
+      grew = false;
+      for (const { rel } of SRC_FILES) {
+        if (closure.has(rel)) continue;
+        for (const member of closure) {
+          if (!imports.get(rel).has(member)) continue;
+          closure.add(rel);
+          grew = true;
+          break;
+        }
       }
     }
     expect(
-      importers,
-      'HB-0 is dark by construction — a module imported one of its leaves, so the wave is'
-      + ' no longer byte-identical for every generated world and the identity claim is void',
+      [...closure].sort(),
+      'the habit family\'s reverse-import closure changed. A NEW consumer must be declared in'
+      + ' HABIT_DARK_CLOSURE in its own commit; a consumer that VANISHED must be banked here in'
+      + ' the same commit that removed it.',
+    ).toEqual([...HABIT_DARK_CLOSURE].sort());
+    // (b) THE CLOSURE IS CLOSED — the dormancy claim itself, asserted against the DECLARED
+    // list rather than the computed one, so a stale declaration cannot satisfy it by
+    // construction.
+    const outsiders = SRC_FILES
+      .filter(({ rel }) => !HABIT_DARK_CLOSURE.includes(rel))
+      .filter(({ rel }) => HABIT_DARK_CLOSURE.some((member) => imports.get(rel).has(member)))
+      .map(({ rel }) => rel)
+      .sort();
+    expect(
+      outsiders,
+      'a module OUTSIDE the habit family imported one of its members, so the family is no'
+      + ' longer unreachable from the engine and the wave\'s identity claim is void',
     ).toEqual([]);
-    // Guard the guard: the same detector finds the leaves' OWN sibling import, so an
-    // emptied scan cannot pass as an absence.
-    const curve = SRC_FILES.find(({ rel }) => rel === CURVE_HOME);
-    expect(/from\s*['"]\.\.\/bandedStock\.js['"]/.test(curve.src)).toBe(true);
+    // (c) GUARD THE GUARD. The same detector finds the family's real INBOUND edge and the
+    // leaves' own sibling import, so an emptied scan cannot pass as an absence.
+    expect(imports.get(REGISTRY_HOME).has(`${HABIT_DIR}/habitVocabulary.js`)).toBe(true);
+    expect(imports.get(CURVE_HOME).has('src/domain/worldPulse/bandedStock.js')).toBe(true);
   });
 });

@@ -465,6 +465,24 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'HB substrate — the frozen reinforcement/decay curve and the single rounding door, riding the shared decay law and the shared outcome ladder rather than authoring either',
     reads: Object.freeze([]),
   }),
+  // ⚠ THE TWO HB-1 ROWS BOTH CARRY AN EMPTY `reads`, AND THAT IS MEASURED RATHER THAN COPIED
+  // FROM THE PAIR ABOVE. The vocabulary leaf is dependency-FREE by contract — the cross-volume
+  // collision contract requires it, and a head re-export is how a dependency arrives by the
+  // back door, so it has none. The fork registry has exactly ONE import, the habit vocabulary,
+  // which this very map already holds as argued-unlayered and which is therefore absent from
+  // the layer map — an unlayered read is not a cross-layer reach. ⛔ Neither row may be
+  // pattern-matched against habitVocabulary.js's row above, which carries a NON-empty `reads`
+  // and a `readsReason`: those rows are not interchangeable.
+  'src/domain/worldPulse/strategyMoves.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB-1 substrate — the estate\'s ONE closed strategy-move vocabulary, minted DEPENDENCY-FREE because the cross-volume collision contract rules that exactly one module exports it and that the volume building its strategy wave first mints it as a zero-import leaf; it owns no subject and decides nothing',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/habitForkRegistry.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB-1 substrate — the frozen classification of every weighted decision fork the estate can see, read only by its two totality walkers and never by the engine; its single import is the habit circumstance vocabulary, itself argued-unlayered, so its cross-layer reach is empty',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -497,6 +515,15 @@ const ARGUED_HOSTS = Object.freeze([
  * roster grew by three and the estate's DECLARED cross-layer reach grew by one edge that
  * was previously dark. A fourteenth admission is the next deliberate act.
  *
+ * 15 → 17 on 2026-08-14 (HB-1, the `hb-1p` train's single member), and the raise is recorded
+ * rather than merely made. It admits the closed strategy-move vocabulary leaf and the habit
+ * fork registry, both under the substrate argument this map already carries — no new argument.
+ * Measured at the raise: both are unlayered and therefore already invisible to
+ * `scanCrossLayerPairs`, so no edge leaves the pair scan; the vocabulary leaf's outbound reach
+ * is 0 because the collision contract forbids it an import at all, and the registry's is 0
+ * because its one import is the argued-unlayered habit vocabulary. An eighteenth admission is
+ * the next deliberate act.
+ *
  * 13 → 15 on 2026-08-14 (HB-0, the `hb-1` train's first member), and the raise is recorded
  * rather than merely made. It admits the habit family's two substrate leaves under the
  * vocabulary argument this map already carries for bandFamilies, bandedStock and lawWord —
@@ -506,7 +533,7 @@ const ARGUED_HOSTS = Object.freeze([
  * with its reason. The net effect is one cross-layer read that would otherwise have been
  * dark becoming enumerated. A sixteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 15;
+const ARGUED_ROSTER_CEILING = 17;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

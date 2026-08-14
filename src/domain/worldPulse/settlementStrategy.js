@@ -75,6 +75,7 @@ import {
 // per-archetype objective SETS + the non-war MOVE LEVERS, selected by the governing
 // seat's archetype when the political-depth marker (beliefsActive) is live.
 import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjective.js';
+import { MARTIAL_HISTORY_MOVES } from './strategyMoves.js';
 // W-PEACE-1 (§14/§H): the CAUSAL REASONS layer's consumption seam. The typed
 // war/peace reason ledgers load the deploy / sue_for_peace weights (bounded,
 // centered-on-1.0 factors — ×1 exactly when the peace-engine gate is dark or no
@@ -798,10 +799,9 @@ function enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness = aggres
       if (!dispositionReasons[move]) dispositionReasons[move] = [];
       if (!dispositionReasons[move].includes(receipt)) dispositionReasons[move].push(receipt);
     };
-    const martialMoves = new Set(['defend', 'hold', 'deploy', 'sue_for_peace', 'credit', 'missionize', 'prestige', 'opportunity']);
     for (const move of Object.keys(scored)) {
       let bar = 1;
-      if (D.martialInAggressiveness === true && martialMoves.has(move)
+      if (D.martialInAggressiveness === true && MARTIAL_HISTORY_MOVES.includes(move)
         && !(move === 'sue_for_peace' && termination)) {
         // Martial history already entered this move through computeAggressiveness.
         // Record that single consumption here; never multiply the bar by it again.

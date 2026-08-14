@@ -4129,7 +4129,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   and a `describe.runIf()` parks a file WHOLE — either would have broken this arithmetic.
     // Prior row retained as a cross-contract ancestry pin: files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643
     // 2418/366/2052/20024/5643 → 2421/366/2055/20046/5646.
-    files: 2421, parked: 366, credited: 2055, titles: 20046, suiteTitles: 5646,
+    // ⏱ TRAIN hb-1p, THE HB-1 RE-CHARTER (single member M1), 2026-08-14 — RE-DERIVED WHOLE at
+    // the MEMBER commit, not at the terminal, and the placement is deliberate. The prefix
+    // landing above had nowhere else to put its cure because it was a one-member train whose
+    // member carried the movement as a declared interior red; this train re-derives at I1, which
+    // is the last commit in it that moves a `tests/` byte, so the terminal is DOCS-ONLY and the
+    // base-state capsule regenerates in ONE terminal commit instead of two.
+    //   • M1 (HB-1, the action vocabularies, the brancher register and the fork registry)
+    //     contributes FOUR new CREDITED files — tests/domain/strategyMoves.test.js and
+    //     tests/lint/chooserTotality.walker.test.js and
+    //     tests/lint/strategyMoveVocabulary.walker.test.js at eight literal `test` titles and one
+    //     literal `describe` each, and tests/domain/habitForkRegistry.test.js at seven and one:
+    //     +4 files / +0 parked / +4 credited / +31 titles / +4 suite titles.
+    //     ⭐ ITS EDIT TO tests/domain/habitCurve.test.js MOVES NO FIGURE. HB-0's dormancy case is
+    //     re-aimed IN PLACE from a whole-tree importer absolute to a DARK-CLOSURE claim — one
+    //     case in, one case out, same registration — because the wave that creates the family's
+    //     first importer is the wave that owes the re-aim (HB-0.md §15). A re-aim spelled as
+    //     "park the old case and add a new one" would have moved this tuple by +1 title for no
+    //     gain. Renaming the case's title is count-neutral: this census pins COUNTS, not titles.
+    //     Its two new `src` leaves, its two registration edits and its comment-only edit to
+    //     settlementPolitics.js move no registration and therefore no figure.
+    // ⚠ PARKED IS UNCHANGED AT 366, and again it is earned rather than lucky: every one of the
+    //   thirty-one titles is spelled as a LITERAL in a straight-line registration, so door 3
+    //   credits each file statically. A `test.each()` case is invisible to this census by
+    //   construction and a `describe.runIf()` parks a file WHOLE — either would have broken this
+    //   arithmetic, and the member forbids both by name.
+    // Prior row retained as a cross-contract ancestry pin: files: 2421, parked: 366, credited: 2055, titles: 20046, suiteTitles: 5646
+    // 2421/366/2055/20046/5646 → 2425/366/2059/20077/5650.
+    files: 2425, parked: 366, credited: 2059, titles: 20077, suiteTitles: 5650,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
