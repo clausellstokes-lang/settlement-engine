@@ -21,6 +21,22 @@
  * A NEW file that reads `.institutions`, filters nothing, and is not exempted FAILS
  * here — forcing its author to route through the accessor or classify it consciously.
  *
+ * ⛔⛔ THE TWO SCANS ASK DIFFERENT QUESTIONS AND THEREFORE READ DIFFERENT SOURCES.
+ * This asymmetry is deliberate, it is the whole subject of OQ §38.3's non-code-token
+ * class, and it is declared here so no later reader discovers it by reddening:
+ *   - READER_RE asks "does this file EXECUTE a roster read?" — so it scans
+ *     `codeOnly(src)`, which blanks comments AND string/template contents while
+ *     preserving every byte offset. A `.institutions` spelled only in a comment or
+ *     inside a quoted data-table path is not an execution and must not enrol.
+ *   - COMPLIANT_RE asks "does this file IMPORT the accessor (or carry a local ruin
+ *     guard)?" — so it stays on RAW bytes, and routing it through codeOnly would be a
+ *     DEFECT rather than a symmetry. MEASURED at this file's base: for the large
+ *     majority of the enrolled readers whose verdict would flip, the ONLY compliance
+ *     evidence is the import specifier `from '…/institutionRoster.js'`, which is a
+ *     STRING — the same blanker that cures the first misfire erases the second's
+ *     evidence. The figures live in the member packet that measured them, never here.
+ * ⇒ A mixed scan is the correct shape for a walker that asks both questions.
+ *
  * ACCEPTED REGEX-GATE GAPS (hand-audited 2026-07-19; adversarial-verified):
  *   - Compliance is FILE-granular. A file that imports the accessor (or holds a ruin
  *     token) for ONE read passes even if it has a SECOND unfiltered roster read. Known
@@ -33,8 +49,14 @@
  *   - Fully-routed files DROP OUT of the discovery set (the raw `.institutions` text is
  *     replaced by `liveInstitutions(...)`), so the fixed aggregators do not appear here.
  *   - `\.institutions\b` deliberately excludes `.institutionsById` / `.institutionsLost`
- *     (no word boundary before the trailing token) and matches config-path string
- *     literals like 'headcounts.institutions' (frozen as exempt where they occur).
+ *     (no word boundary before the trailing token). ⭐ CURED 2026-08-14, and the bullet
+ *     is rewritten rather than deleted so the shrink stays legible in the file that owns
+ *     it: this scan USED TO match config-path string literals like
+ *     'headcounts.institutions', which were then frozen as exempt where they occurred.
+ *     Routing discovery through codeOnly() excludes every comment and string-literal
+ *     spelling, so those files stop being readers at all. Exactly two rows left the
+ *     inventories with that cure — parityContract.js (exempt) and couplingRegistryWar.js
+ *     (quarantine) — and both are noted at their former sites below.
  *
  * TO COMPLY (new violation): route the roster read through liveInstitutions()/
  * isLiveInstitution() (src/domain/institutions/institutionRoster.js). If the read is
@@ -45,6 +67,8 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+
+import { codeOnly } from './engineGatedRuleKeys.walker.test.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const DOMAIN = join(ROOT, 'src', 'domain');
@@ -167,7 +191,15 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/display/threatAssessment.js': 'display — defenseProfile.institutions buckets',
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
   'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
-  'src/domain/display/parityContract.js': 'display/contract — a canon-path string literal, not a roster read',
+  // ── canon-path string literal: RETIRED 2026-08-14, THE READ WAS NEVER A READ ────
+  // parityContract.js was exempted for `'headcounts.institutions'` at :75 — a
+  // canon-path STRING LITERAL inside a data table, never a roster read. Re-pointing
+  // discovery through codeOnly() blanks string contents, so the file stops matching
+  // this walker's scan at all and its exempt row is deleted with the same cure. The
+  // exempt honesty arm below REQUIRES that: "no longer reads .institutions
+  // (moved/renamed/cleaned) — delete its exempt row".
+  // ⚠ Do NOT re-add the row "just in case" — an exempt entry for a non-reader is
+  // exactly the stale state that arm exists to forbid.
   'src/domain/display/visibilityAudit.js': 'display/audit — covert-dossier impairment read',
 });
 
@@ -176,7 +208,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
  *
  * These are NOT exemptions and they must never be moved into RUIN_AGNOSTIC_EXEMPT: an
  * exemption asserts "this reader is ruin-agnostic on purpose, here is the reason", and
- * nobody has made that judgement about these six. They are `.institutions` readers that
+ * nobody has made that judgement about these five. They are `.institutions` readers that
  * landed WITHOUT being dispositioned at all, and they are named here so the walker can
  * tell the debt it already knows about from a NEW undispositioned reader.
  *
@@ -201,7 +233,12 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
  * not available either.
  */
 const UNDISPOSITIONED_RUIN_READERS = Object.freeze([
-  'src/domain/certification/couplingRegistryWar.js',
+  // ── receiptField string: RETIRED 2026-08-14, THE READ WAS NEVER A READ ──────────
+  // couplingRegistryWar.js entered this quarantine on ONE line — a `receiptField:`
+  // canon path quoted inside a data table at :111. It never read a roster. Re-pointing
+  // discovery through codeOnly() blanks string contents, so it stops matching the scan
+  // and its quarantine row is deleted with the same cure, exactly as the honesty arm
+  // below demands. ⚠ Do NOT re-add it "just in case".
   'src/domain/worldPulse/dispositionNews.js',
   'src/domain/worldPulse/envoyNegotiationPictureBuilder.js',
   'src/domain/worldPulse/razingExecution.js',
@@ -224,7 +261,10 @@ function discoverReaders() {
   for (const abs of walk(DOMAIN)) {
     const rel = relative(ROOT, abs).split(/[\\/]/).join('/');
     const src = readFileSync(abs, 'utf8');
-    if (READER_RE.test(src)) readers.push({ rel, compliant: COMPLIANT_RE.test(src) });
+    // READER_RE reads CODE; COMPLIANT_RE reads RAW. The asymmetry is deliberate and its
+    // reason is stated in the header block — do not "fix" it into a symmetry.
+    const code = codeOnly(src);
+    if (READER_RE.test(code)) readers.push({ rel, compliant: COMPLIANT_RE.test(src) });
   }
   return readers;
 }
@@ -280,6 +320,31 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
       UNDISPOSITIONED_RUIN_READERS.length,
       'the quarantine emptied — if that is real, delete it and this arm together; if it is not, the walker stopped discovering readers',
     ).toBeGreaterThan(0);
+  });
+
+  test('the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols', () => {
+    // Synthetic half: the blanker's contract, stated on bytes this file owns. Without
+    // this half the live half below could pass over a scan that simply broke.
+    const prose = codeOnly('// settlement.institutions is discussed here\nconst x = 1;\n');
+    const quoted = codeOnly("const t = { receiptField: 'a.institutions.b' };\n");
+    expect(READER_RE.test(prose)).toBe(false);
+    expect(READER_RE.test(quoted)).toBe(false);
+    // Live half: the two real files this cure removed, proved absent from the live scan.
+    const rels = readers.map((r) => r.rel);
+    // The synthetic half above proves the blanker is what excludes these two, and the exact
+    // population leg below proves the scan still discovered the whole corpus, so neither
+    // absence can be the vacuous kind where the scan simply found nothing.
+    // anchored: paired with the synthetic blanker proof above and the exact count below
+    expect(rels).not.toContain('src/domain/certification/couplingRegistryWar.js');
+    // anchored: same pairing — blanker proved live above, population proved exact below
+    expect(rels).not.toContain('src/domain/display/parityContract.js');
+    // …and the scan is still measuring the whole real population. This third leg is not
+    // decorative: without it a scan that broke entirely would satisfy both absences above,
+    // and a scan reverted to RAW bytes would satisfy neither but for the wrong reason.
+    // ⛔ EXACT, and shrink-or-grow both mean re-measure: a new `.institutions` reader in
+    // src/domain moves this figure, and the cure is to route it through the accessor or
+    // disposition it — never to nudge this number.
+    expect(readers.length).toBe(89);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
