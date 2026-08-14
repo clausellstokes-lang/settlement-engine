@@ -1209,3 +1209,22 @@ advances resolved server-side for connected/paid accounts (the engine is headles
 and Node-runnable today), aligning secrecy, enforcement, and sync; a design doc,
 not a pre-launch act. Corpus copyright registration is a LEGAL item — owner
 carve-out BY NATURE, queued for counsel, not self-ruled.
+
+### §26a · Owner clarification (2026-08-14 ~03:10, in-chat) and adjusted weighting
+
+Owner, verbatim intent: determinism serves devs/admins, not the general audience —
+the audience wants to EXPERIENCE trust, not measure it; machinery and explanations
+can hide so long as the experience is perfect; the goal is deterring cloning while
+brand and revenue build. Chair notes, recorded not ruled: (1) machinery-hiding is a
+UI/presentation direction already aligned with the legibility law and the reveal
+seam — it deters nothing (bundle readers never see the UI) and is adopted as
+presentation doctrine, not as protection; (2) in-fiction explanation (the news
+address law's prose "why") stays — it IS the experience; what hides is numbers,
+bands, formulas, and determinism talk; (3) the "cloud worlds" §26 option's product
+cost is LOWER than the 08-07 audit weighted, because open local verifiability has
+no mass-audience value — initial generation stays local/instant, only world
+advances would move server-side for connected tiers; it remains post-launch on
+endgame-stability and infra-cost grounds, but rises in priority within §26; (4)
+the deterrence economics: the cloning window that hurts is post-success, by which
+time corpus growth, release velocity, accumulated user worlds, and the watermark
+trap compound — speed is the cheapest deterrent and is already the plan.
