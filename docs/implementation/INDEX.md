@@ -3,7 +3,36 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at the `infra-1` train terminal.
-- **Measured:** 2026-08-14 — **THE `gap-1` TRAIN LANDED (`GAP-1`), the estate's THIRD
+- **Measured:** 2026-08-14 — **THE `hb-1` TRAIN LANDED A PREFIX (`HB-0` ALONE), the estate's
+  FOURTH §28 train and its first PARTIAL exposure.** The live manifest has 41 rows and zero
+  dispatchable packets. Chain: promotion `436f138e` → implementation `e188760b` → terminal.
+  It is the HABIT volume's FIRST CODE: two zero-caller pure leaves — the closed twelve-class
+  circumstance vocabulary with its declared precedence and owner-signed ceiling, and the
+  frozen curve whose one rounding door every stock value passes through — plus the volume's
+  own Bands/§8.2 reconciliation walker, whose sibling provably does not generalize because
+  that parser's prefix alternation does not name HB and the habit volume's waves are bold
+  paragraphs rather than headings. Dark by construction: no flag, no caller, no world read,
+  no persisted shape, so the landing is byte-identical for every generated world and the
+  dormancy evidence is a zero-importer source scan rather than a claim.
+  ⛔ **THE TRAIN'S SECOND MEMBER (`HB-1`) IS NOT IN THIS LANDING.** It STOPPED at the
+  terminal on a REFUTED PREMISE, ratified at `OWNER_DECISION_QUEUE.md` §38, which also rules
+  this prefix landable on its own complete proof. The premise that died is the volume's own
+  R7-corrected one: deleting the dead `'fortify'` disjunct from the ruling-bloc decision load
+  is NOT behaviour-identical, because a ratified same-seed golden names that token in its
+  load-bearing move list and records a non-neutral factor for it. Half the proof held — no
+  EMITTED move satisfies the disjunct — and the half the volume itself nominated as the check
+  is what caught the rest. Two further finds ride to the re-charter: a fork registry that
+  stores module paths as text reads as an importer to every source scan keyed on a bare
+  filename, and this wave's dormancy case is a whole-tree absolute that its own designed
+  first consumer falsifies. ⚠ The prefix leaves a NAMED ORPHAN WINDOW — two `src` leaves
+  nothing imports — on the recorded IN-1a precedent, discharged at the re-charter's first
+  consumer; `packets/fp/HB-0.md` §15 carries it with its discharge condition.
+  ⚠ **THIS TERMINAL IS NOT DOCS-ONLY**, and that is the prefix's own shape: a two-member
+  train re-derives the census at its last `tests/`-moving MEMBER commit, and a one-member
+  prefix has nowhere for that cure to sit but the terminal. The base-state capsule therefore
+  stamps at the terminal rather than at the member.
+
+- **Measured (previous):** 2026-08-14 — **THE `gap-1` TRAIN LANDED (`GAP-1`), the estate's THIRD
   §28 train and its first single-member one.** The live manifest has 40 rows and zero
   dispatchable packets. Chain: promotion `ea98c42f` → implementation `152d3f19` →
   terminal. ⚠ The wave was promoted as `CW-1` and RENAMED under §33: that id is the
@@ -454,7 +483,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-AO4 | [`AO-4`](./packets/corpus-coverage/AO-4.md) | **LANDED** at `09e39ee6`; do not redispatch | Complete 53-home headline+summary totality freezes 106 rows / 400 distinct / 544 occurrences / 14 prospective / 92 indicative at the exact 12,242-byte digest, including eight lawful null impact kinds across two collision-proof `webwar_*|null` homes. Rewrite liveness walks the occurrence-disjoint persisted union: selected 151/80/95/66 + mechanical 77/24/73/23 = union 228/83/168/69. The exact fallback closes the registry to 26 = 17 active + 9 exact reasoned inert with zero gaps/overlaps, while the current producer's explicit applied twin remains byte-identical. The eight-path implementation passed 134/134 and the bare full gate; the census row is free at `2411/365/2046/19976/5637`. | `consequenceOutcomes` as a third/double-counted liveness lane; string `"null"` or delimiter collisions; summaries, `reasons`, producer wording, generic/fuzzy rewrite, current producer output movement, persisted shape, AO-5/6, second corpus build, golden, flag, tuning, dependency, timeout, floor, ceiling, observed-shape artifact, hazard count/status, mutation uncovered movement or ninth path/case |
 | LANDED-AO5 | [`AO-5`](./packets/corpus-coverage/AO-5.md) | **LANDED** at `72b7a87b`; do not redispatch | One read-only contract freezes the exact other-four AO-0 denominator: timeline 4/8/12, pulse history 50/1286/5665, regional typed audit 2/7/201 with structural zero prose, and pure AI Chronicle 7/7/7; 63/1308/5885 overall at the exact 8,280-byte digest. The exact eight-path implementation proves one build/two reconstructions, exact null homes and selector axes, the real timeline and Chronicle seams, the 15-item protected substrate and 23-item union, while preserving every product output. It passed 205/205 focused tests and the bare full gate; the census row is free at `2412/365/2047/19984/5638`. | every `src/**` edit or prose cure; a fifth family; flat flavor events; `campaign.chronicles[]`; generic voice/AI classification; cross-path alias deduplication; `consequenceOutcomes` as a third AO-4 liveness lane; volatile ID/time; generic nested-index contiguity inferred from omitted scalar leaves; second in-walker corpus build; OSR/golden/flag/tuning/dependency/timeout/floor/ceiling/hazard-count/mutation-uncovered movement; ninth path or ninth case; AO-6 mutants |
 | LANDED-AO6 | [`AO-6`](./packets/corpus-coverage/AO-6.md) | **LANDED** at `0facf170`; do not redispatch | Final correctness closure for the corpus-coverage program. Immutable candidate `b02bc709` stopped unlanded at true exit 4, `77 CAUGHT / 1 CLEAR / 4 gaps` (log SHA-256 `d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a`); governed amendment `eff62d6b` authorized only the four measured repairs. The final sealed child (`6bd0e117`, capsule `e7fe66ae`) landed the exact four paths at +137/-26 and closed at `71/272/198 + meta 10`, 81 exact claims/labels, 70 in-place calls, 56 guarded targets and 56 unique `MUTATED_FILES` rows. Its clean disposable sweep passed `81 CAUGHT / 1 CLEAR / 0 gaps` (log SHA-256 `c4e5fb08dc6cfe550db945a69e3c78fa02d172bac0fa6857258504aefcf81249`), focused tests passed 98/98, both typechecks and OSR passed, and the bare full gate passed with strict dist 403/403 (log SHA-256 `53f62e286def95a2f3399a9fcfaa665334afd5d33235403fb54605091f9a6c4d`). No test title moved, so the census is free at `2412/365/2047/19984/5638`. | any committed `src/**` edit; any legacy guard/label/plant/command/result/manifest movement outside packet section 3.5; a fourth positive mutant, second negative control, new test/title/suite/baseline, skipped/broad/unnamed red, exit-only CLEAR, dirty override, shared-tree whole sweep, product/corpus/helper/hazard/pre-mortem/census movement, uncovered-baseline movement, fifth committed path, ninth case, GR-4e or later work |
-| HB-1-M1 | [`HB-0`](./packets/fp/HB-0.md) | **READY** at `6784bf62de455ca13b701c09b6b241476cf9d555` | Member M1 of the `hb-1` train, the HABIT volume's first code and the train's truncation boundary. Two zero-caller pure leaves — the twelve-class circumstance vocabulary with its declared precedence and owner-signed ceiling, and the frozen curve whose one rounding door every stock value passes through — plus the volume's own Bands/§8.2 reconciliation walker, whose sibling `spBandFamilies` provably does not generalize because its wave-block parser names nine volume prefixes and HB is not one of them. Dark by construction: no flag, no caller, no world read, no persisted shape, so the wave is byte-identical for every generated world and the dormancy evidence is a zero-importer source scan. Dispatchable because `OWNER_DECISION_QUEUE.md` §36 signed CR-HB-Q2 and CR-HB-Q3 and §34 narrowed HB Q1's seal to HB-3 onward. It takes two `ARGUED_UNLAYERED` rows and raises the argued roster ceiling 13 → 15 in the same commit, because the baseline door is closed to a new leaf by doctrine | the argued roster ceiling and the unlayered baseline; the severity ladder and every module that could spell one of its rungs; `HABIT_TUNING` and every band it holds; `proposedSoakBands.js`, the soak manifest version and its coupling vocabulary; any flag manifest row; `pulseKernel.js` and `applyWorldPulse.js`; every persisted shape |
+| LANDED-HB0 | [`HB-0`](./packets/fp/HB-0.md) | **LANDED** at `e188760b8fec296812b39b8c521781e43d266296`; do not redispatch | Member M1 of the `hb-1` train, the HABIT volume's first code and the train's truncation boundary. Two zero-caller pure leaves — the twelve-class circumstance vocabulary with its declared precedence and owner-signed ceiling, and the frozen curve whose one rounding door every stock value passes through — plus the volume's own Bands/§8.2 reconciliation walker, whose sibling `spBandFamilies` provably does not generalize because its wave-block parser names nine volume prefixes and HB is not one of them. Dark by construction: no flag, no caller, no world read, no persisted shape, so the wave is byte-identical for every generated world and the dormancy evidence is a zero-importer source scan. Dispatchable because `OWNER_DECISION_QUEUE.md` §36 signed CR-HB-Q2 and CR-HB-Q3 and §34 narrowed HB Q1's seal to HB-3 onward. It takes two `ARGUED_UNLAYERED` rows and raises the argued roster ceiling 13 → 15 in the same commit, because the baseline door is closed to a new leaf by doctrine | the argued roster ceiling and the unlayered baseline; the severity ladder and every module that could spell one of its rungs; `HABIT_TUNING` and every band it holds; `proposedSoakBands.js`, the soak manifest version and its coupling vocabulary; any flag manifest row; `pulseKernel.js` and `applyWorldPulse.js`; every persisted shape |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
@@ -466,7 +495,22 @@ whenever a packet adds test titles, and the serialization law ruled at `73f5be96
 WHOLE in the change that moves any figure. The validator forbids two non-terminal packets naming
 one change path, so at most one packet may hold the reservation.
 
-⭐ **ROW FREE.** GR-4b-iii-a LANDED at `7e7d5205`. Its one credited test file,
+⭐ **ROW FREE.** The `hb-1` train landed a PREFIX (`HB-0` alone) and re-derived the tuple at
+its terminal, which is where a one-member prefix's cure has to sit. Three new credited test
+files carrying twenty-two literal `it` titles and three literal `describe` titles moved the
+free terminal tuple `2418/366/2052/20024/5643` to the re-derived terminal tuple
+`2421/366/2055/20046/5646`; parked stayed at 366 because every one of those titles is a
+literal in a straight-line registration. The live manifest has **41 rows and zero
+dispatchable packets**; no non-terminal row currently names the census walker, and a terminal
+packet reserves nothing. ⛔ The train's second member is NOT in this figure — it stopped on a
+refuted premise and its four files, twenty-eight titles and four suite titles return to
+compile with it. For this run no diagnostic, weekly, release or research soak worktree was
+created.
+
+⚠ **DATED CORRECTION, 2026-08-14 at the `hb-1` prefix landing.** The paragraph below remains
+true history but no longer describes the current holder or packet count.
+
+⚠ **HISTORICAL, 2026-08-14.** GR-4b-iii-a LANDED at `7e7d5205`. Its one credited test file,
 one literal `describe`, and eight literal `it` registrations moved the free
 terminal tuple `2413/365/2048/19992/5639` to the re-derived terminal tuple
 `2414/365/2049/20000/5640`. The three existing registry-driven sites added

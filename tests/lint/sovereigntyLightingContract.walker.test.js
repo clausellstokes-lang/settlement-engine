@@ -4105,7 +4105,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // source phase fails closed if such a row leaks into its report. The +8 from M2 lands there.
     // Prior row retained as a cross-contract ancestry pin: files: 2416, parked: 365, credited: 2051, titles: 20016, suiteTitles: 5642
     // 2416/365/2051/20016/5642 → 2418/366/2052/20024/5643.
-    files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643,
+    // ⏱ TRAIN hb-1, THE PREFIX LANDING (M1 alone), 2026-08-14 — RE-DERIVED WHOLE at the train's
+    // terminal. ⚠ THIS TERMINAL IS NOT DOCS-ONLY AND THAT IS THE PREFIX'S OWN SHAPE, not a
+    // departure: DESIGN_BUILD_EFFICIENCY.md §2.3 makes the TRAIN the single non-terminal census
+    // holder, and a two-member train would have re-derived at its last `tests/`-moving MEMBER
+    // commit. This train landed a PREFIX of one member (OWNER_DECISION_QUEUE.md §38), whose own
+    // commit carried the movement as a NAMED interior red, so the cure has nowhere to sit but
+    // here. The base-state capsule therefore stamps at THIS commit rather than at the member's.
+    //   • M1 (HB-0, the habit substrate) contributes THREE new CREDITED files —
+    //     tests/domain/habitVocabulary.test.js and tests/domain/habitCurve.test.js at eight
+    //     literal `test` titles and one literal `describe` each, and
+    //     tests/lint/habitBandsReconciliation.walker.test.js at six and one:
+    //     +3 files / +0 parked / +3 credited / +22 titles / +3 suite titles.
+    //     Its two new `src` leaves and its two registration edits move NO registration and
+    //     therefore no figure.
+    // ⛔ M2 (HB-1) IS NOT IN THIS LANDING. Its four test files, twenty-eight titles and four
+    //   suite titles are NOT counted here; the train STOPPED at T on a refuted premise and that
+    //   member returns to compile. A figure carrying M2's movement in a prefix landing would be
+    //   the arithmetic error this note exists to prevent.
+    // ⚠ PARKED IS UNCHANGED AT 366, and that is earned rather than lucky: every title in all
+    //   three files is spelled as a LITERAL in a straight-line registration, so door 3 credits
+    //   each file statically. A `test.each()` case is invisible to this census by construction
+    //   and a `describe.runIf()` parks a file WHOLE — either would have broken this arithmetic.
+    // Prior row retained as a cross-contract ancestry pin: files: 2418, parked: 366, credited: 2052, titles: 20024, suiteTitles: 5643
+    // 2418/366/2052/20024/5643 → 2421/366/2055/20046/5646.
+    files: 2421, parked: 366, credited: 2055, titles: 20046, suiteTitles: 5646,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

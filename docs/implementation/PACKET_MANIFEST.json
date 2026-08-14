@@ -2441,7 +2441,7 @@
     },
     {
       "id": "HB-0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/HB-0.md",
       "verifiedBase": "6784bf62de455ca13b701c09b6b241476cf9d555",
       "changeManifest": [

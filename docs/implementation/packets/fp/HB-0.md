@@ -3,8 +3,14 @@
 **Preamble:** `docs/implementation/preambles/HB-PREAMBLE.md` at SHA-256
 `2cf2407d93cef46ce647a88e235e2a9a84f68c310f9f4ccd7b01d14c9f9eb215`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6784bf62de455ca13b701c09b6b241476cf9d555`
+- **Landed:** `e188760b8fec296812b39b8c521781e43d266296`, exposed as the **PREFIX** of the
+  `hb-1` train. Chain: promotion `436f138e` → this implementation commit → the terminal.
+  ⚠ **THE TRAIN'S SECOND MEMBER IS NOT IN THIS LANDING.** HB-1 STOPPED at the terminal on a
+  refuted premise and returns to compile; `OWNER_DECISION_QUEUE.md` §38 ratifies that stop
+  and rules this prefix landable on its own proof. §14 carries the executed evidence and
+  §15 the orphan window.
 - **Ruled:** `OWNER_DECISION_QUEUE.md` §36 — CR-HB-Q2 (ACCEPT NARROWED: the twelve
   classes, `unpressed` as total fallback, the declared precedence; the occupancy-mix
   measurement re-aims to HB-2) and CR-HB-Q3 (ADOPT the rounding fence now; integer-domain
@@ -304,3 +310,71 @@ registration — ⛔ **no `test.each()`, no `describe.runIf()`.**
 - **The C3 re-point** to WC-0's `lawBandModulation.js` once that wave lands.
 - **O-2 — Q4's cost is already paid (R22).** `HB` is chartered. Q4's *substance* still
   needs a ruling at HB-2, but its stated blocking cost is stale.
+
+
+## 14. Executed landing evidence (member proof at `e188760b`)
+
+Every command bare, in-shell, unpiped, exit captured. No `gate-mutex.sh` wrapping. Re-run in
+full against the COMMITTED tree, so nothing below is inherited from a pre-commit working
+state.
+
+| Check | Exit | Result |
+|---|---|---|
+| `habitVocabulary` + `habitCurve` batteries | 0 | 27 tests passed |
+| `habitBandsReconciliation` + `couplingInclusion` | 0 | 16 tests passed |
+| `spBandFamilies` + `mutationCoverageManifest` + `sizeBaseline` | 0 | 22 tests passed |
+| §31 anchor preflight (`negativeAssertionAnchor.walker`) | 0 | 9 tests passed |
+| `check-observed-shape-readers.mjs` | 0 | 1998 findings, exactly matching the frozen inventory |
+| `typecheck:ratchet` (`tsconfig.full.json`) | 0 | 173 errors, ceiling 173 |
+| `typecheck:domain:strict` (`tsconfig.domain-strict.json`) | 0 | 1134 errors, ceiling 1134 |
+| scoped `eslint` over all six touched files | 0 | clean |
+
+**Effective lines, ENFORCER (`Linter`, `max-lines`, skipBlankLines + skipComments):**
+`habitVocabulary.js` **50** and `habitCurve.js` **82**, both against a ≤ 250 budget.
+
+**Six mutants convicted, each restored digest-exact (`cmp` exit 0):** flattened outcome
+weights; collapsed law-band learn rates; a rung literal planted in a COMMENT, which reds the
+band-family walker and so proves that scan really does read raw source; a precedence order
+permuted to equal the sorted set; a floor moved without its cap; and a `**Bands:**` line
+planted on a wave that declares none.
+
+⚠ **ONE PIN WAS FOUND SELF-REFERENTIAL BY WRITING ITS MUTANT FIRST.** The step-law assertion
+reads its own expected step out of `learnRateFor`, so a collapsed rate table moves both sides
+together and passes. The law-band divergence is therefore asserted DIRECTLY — three distinct
+rates, strictly descending with volatility — and that is the arm the mutant reds.
+
+**THE CENSUS.** This member's own commit carried the movement as a NAMED interior red
+(`2418/366/2052/20024/5643` recorded against a live `2421/366/2055/20046/5646`, all five
+figures proved by an isolated probe restored digest-exact). Because the landing is a PREFIX,
+the cure has nowhere to sit but the terminal, which therefore re-derives the tuple WHOLE and
+is not docs-only. The base-state capsule stamps at the terminal accordingly.
+
+## 15. ⚠ THE ORPHAN WINDOW, NAMED WITH ITS DISCHARGE CONDITION
+
+**This landing exposes two `src` leaves that NOTHING IMPORTS.** That is the wave's whole
+identity argument — two modules with zero importers cannot change a generated world, which
+is why the dormancy evidence is a source scan rather than a claim — but it is also an orphan
+window, and it is recorded here rather than left for a later census to re-find.
+
+**IT IS A KNOWN, PRECEDENTED SHAPE, NOT A NEW ONE.** The estate has landed dark instruments
+ahead of their consumers before, and `bandFamilies.js` — which this family imports — was
+itself landed *"consumed by nothing at land time — dark by construction"*. The window is the
+recorded IN-1a precedent.
+
+**WHY IT IS WIDER HERE THAN THE TRAIN PLANNED, STATED PLAINLY.** The consumer these leaves
+were built for was the SAME TRAIN's second member, whose fork registry imports the
+vocabulary. That member stopped on a refuted premise, so the window that would have closed
+inside one exposure now stays open across a re-charter.
+
+> **DISCHARGE CONDITION.** The window closes at the **HB-1 re-charter's first consumer** —
+> the wave that imports `habitVocabulary.js` (the fork registry is the designed first
+> reader). Until then these two leaves are orphaned by design and by record.
+
+⛔ **ONE CONSEQUENCE THE RE-CHARTER MUST CARRY, because it is a measured fact rather than a
+caution.** `tests/domain/habitCurve.test.js`'s dormancy case asserts *"neither new leaf has
+an importer anywhere in `src`"* — a WHOLE-TREE ABSOLUTE. It is true at this prefix and it
+was measured FALSE the moment the fork registry existed, because that registry legitimately
+imports the vocabulary. **The first consumer must re-aim that case in its own commit**, from
+a whole-tree absolute to the claim the wave actually needs: that HB-0 wired nothing, and that
+the family's own consumers are themselves dark. A wave that adds the import without re-aiming
+the case reds a test that has been green since this landing.
