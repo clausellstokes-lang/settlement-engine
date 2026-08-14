@@ -1333,3 +1333,25 @@ The train executes per `laneTC2-TRAIN-PLAN-draft.md` on `refs/trains/gr-4b-ii`
 from base `d383aa3c`: W1 → W2 → terminal (whole census to
 `2416/365/2051/20016/5642`, runtime 28032, one bare gate + smoke), one CAS.
 The two named interior reds live at I2 only.
+
+## §30 · THE INFRA-1 TRAIN IS RULED (2026-08-14 ~09:05, chair, vetoable)
+
+Evidence: Lane TC3's compile (plan + three member packets + report, scratchpad
+`laneTC3-*`); capsule admissibility re-executed 19/22 figures, all matching.
+
+- **The train shape is SIGNED**: P1→I1(M1 docs)→P2→I2(M2 capsule)→P3→I3(M3
+  IP-1)→T on `refs/trains/infra-1` from `60083174`; zero interior reds stated
+  affirmatively; promotions ride the chain (the J-E1 lesson applied); validator
+  reads 39/0 at T.
+- **J-TC3-2 RATIFIED**: the capsule generator ships NO `package.json` script
+  row — `package.json` is a governed scanner path and a byte change is a
+  schema-mint trigger; the npm alias rides the next OSR mint docket.
+- **The capsule stamps at the terminal's parent content commit** (I3), with
+  the consumptionLaw's docs-only-window clause covering T and later docs
+  children — no commit-then-amend gymnastics.
+- **M3's polarity ruling SIGNED**: IP-1's absence check false-greens on a
+  stale dist, so its reads are VERIFY_DIST-gated plus an unconditional
+  anti-vacuity case — the rendered-surface-negative class honored.
+- **INFRA-M4 stays deferred as recorded.** ⚠ QUEUE NOTE, not this train: the
+  `.nvmrc` deleted-in-parent-repo vs `ciCheckParity` pinning anomaly is
+  REPORTED UNINVESTIGATED — it joins the next infrastructure pass's docket.
