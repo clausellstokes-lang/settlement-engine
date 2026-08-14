@@ -6,11 +6,18 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `60083174`
-- Commits: 3244
+- HEAD: `5d6a0e7c`
+- Commits: 3251
 - Working tree at refresh: 0 dirty entries
 
 ```
+5d6a0e7c 2026-08-14 docs: land the infra-1 train terminal (M1 + M2 + M3 flipped, capsule generated)
+cfcc2fa2 2026-08-14 feat: land INFRA-M3-IP1, the sourcemap guard, and re-derive the whole census
+2bb7c161 2026-08-14 docs: promote INFRA-M3-IP1 as infra-1 train member 3
+b713b05c 2026-08-14 feat: land INFRA-M2-CAPSULE, the base-state capsule generator
+ec153f56 2026-08-14 docs: promote INFRA-M2-CAPSULE as infra-1 train member 2
+e6eb4c5d 2026-08-14 docs: land INFRA-M1-DOCS, the §28 documentary substrate
+af2cf566 2026-08-14 docs: promote INFRA-M1-DOCS as infra-1 train member 1
 60083174 2026-08-14 docs: promote and land the gr-4b-ii train (GR-4B-II-W2 + the GR preamble)
 7b54c038 2026-08-14 test: re-derive the whole lighting census at the gr-4b-ii train terminal
 b3602c15 2026-08-14 feat: speak the reaffirmed voice on the dismiss road
@@ -404,11 +411,4 @@ dd86e5f9 2026-08-04 Lane V4C piece 2: the whipping becomes thread — the crest 
 506598af 2026-08-04 Lane WZ-4 piece 2 (4b): the deterrent is priced before the act — and WR-6's web is CONSUMED, never rebuilt
 23e89b18 2026-08-04 Lane V4B piece 2 (the feather): the one-curve law, the splits, and the fray stops drawing where nothing can see it
 2654984a 2026-08-04 Lane WZ-4 piece 1 (4a): the world judges the razing on each observer's own axis — and a ghost-write class is closed on the way
-334bef48 2026-08-04 Lane V4B piece 1: the war arrow's lean is MIRRORED — the frame retires, the four slashes become identical parallels, and the active mark moves to the binding
-32035947 2026-08-04 Queue: lane WZ-3's row — the false premise corrected, the leak caught before it bit, and the three quarters of item 4 that are measured rather than guessed
-e5ceb2f2 2026-08-04 Lane WZ-3 piece 4: the razing gets a Herald home — the world's biggest event was unroutable
-2d24ac3d 2026-08-04 Lane WZ-3 piece 3: the five WD leaves get REAL lit walkthroughs — and the record that said they were covered is corrected
-6a9038c9 2026-08-04 The ribbon V4 spec leaves the session scratchpad: the war-arrow design law becomes a repo document
-b43986b5 2026-08-04 Lane WZ-3 piece 2: the razing's licenses come home — the spread lands, the unwired ledger retires, and a tick that burns two towns keeps both
-898d1c0b 2026-08-04 Lane V4 piece 1: the war arrow goes to cedar — the ink register dies, the wordmark is gilded, and the plate retires
 ```

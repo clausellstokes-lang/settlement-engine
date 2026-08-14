@@ -63,7 +63,47 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~08:20 EDT) — ✅✅ THE FIRST §28 TRAIN IS LANDED AND
+# ⭐⭐ CURRENT (2026-08-14 ~10:30 EDT) — ✅✅ TWO §28 TRAINS LANDED; branch at
+# `5d6a0e7c` (infra-1 exposed); the §8 EFFICIENCY REVIEW IS NOW DUE
+
+**INFRA-1 LANDED AND EXPOSED.** Chain (7 commits, promotions in-chain):
+`60083174 → af2cf566(P1) → e6eb4c5d(I1 docs: both volumes FOLDED + INFRA
+preamble + PACKET_STANDARD §28 sections + the three FPC prose cures) →
+ec153f56(P2) → b713b05c(I2 capsule GENERATOR, amended once pre-exposure) →
+2bb7c161(P3) → cfcc2fa2(I3 IP-1 guard + whole census) → 5d6a0e7c(T flips +
+first MACHINE-GENERATED capsule, stamped I3)`. Terminal figures ALL EXACT:
+census `2418/366/2052/20024/5643` · runtime 28040/16 · verify:dist 51/408 ·
+validator 39/0 · gate TRUE_EXIT=0 all 20 steps · smoke 521/521. Chair
+verified at T before CAS (validator 39/0 + 41 focused tests TRUE_EXIT=0, own
+shell); CAS `60083174 → 5d6a0e7c`; porcelain ZERO; foreign stash untouched.
+Receipt: `laneTE3-train-receipt.md` (J-TE3-1..7 + three deferrals + the
+INFRA-M2-A budget note recorded there). CHAIR RATIFICATIONS: J-TE3-1 —
+"zero interior reds" was WRONG BY CONSTRUCTION for census-moving members
+(the lighting walker reds until the tuple re-derivation); ⭐ §28 REFINEMENT
+LAW: every future train plan DECLARES the census-walker interior red for
+census-moving members by figure, or the plan is defective. The two compile
+premises refuted by measurement (HB/WC/EP module-absence; the TinyMCE
+vendored .map scoping that would have birthed IP-1 red) are recorded in the
+receipt. ⚠ Un-anchored-negative debt appeared in BOTH trains' first gates —
+a pattern: acceptance-file authors keep minting it; consider a preamble rule.
+
+**LANDED THIS SESSION (build branch):** A-22 cure `2dd09360` · GR-4b-iii-b
+`770167c5`+`d383aa3c` · GR-4B-II train (4 commits → `60083174`) · infra-1
+train (7 commits → `5d6a0e7c`). Volumes now IN-TREE: DESIGN_BUILD_EFFICIENCY
++ DESIGN_IP_PROTECTION (ledger copies historical). IP-1 is LIVE (521 .map
+mutant conviction). The capsule is MACHINE-GENERATED from now on.
+
+**NEXT (in order):** (1) ⭐ the §8 EFFICIENCY REVIEW (two trains = the data;
+audit wall-clock + red-rates vs the 40-60% estimate; confirm/adjust the cap
+of 4; record) + fold the J-TE3 ratifications into the preamble as the
+un-anchored-negative rule; (2) rule the GAP-1 packet draft
+(`laneG1-gap1-packet-draft.md`) and land the walker cure (pre-ES obligation);
+(3) the ES spine trains per `laneFPC-census.md` §5 order; (4) onward through
+the 85-wave §27 inventory (WY/WF/POP/INT → HB/WC/EP). OQ-1
+(`honored_by_silence` persisted-key boundary) stands. The `.nvmrc`/
+ciCheckParity anomaly is docketed (§30). The keeper tick is standing.
+
+# (superseded ~10:30) ⭐⭐ CURRENT (2026-08-14 ~08:20 EDT) — ✅✅ THE FIRST §28 TRAIN IS LANDED AND
 # EXPOSED: branch at `60083174`; GR-4b-ii annex + `reaffirmed` are TERMINAL
 
 **THE GR-4B-II TRAIN LANDED WHOLE.** Exposed chain (was `refs/trains/gr-4b-ii`,
