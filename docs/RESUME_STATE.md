@@ -76,6 +76,27 @@ resumes at scale under §25's lane law after the current sealed session; next
 build order derives from FP §5 dependency order (ES-1 unblocked since SP-D).
 IP volume §4 corrected by pointer to §27.
 
+**✅ Lane FPC COLLECTED (~04:45): THE FRESH FP CENSUS — 111 declared / 22
+landed whole / 4 part-built / 85 REMAINING** (full table + method receipts in
+`laneFPC-census.md`; method law honored — landed-state by flag-manifest
+membership, packet ancestry + CREATE-path existence, or live test markers,
+never commit subjects or module-name presence, both of which produced false
+positives at EP and ES-5c). Per family: SP 6/6 · ES 9 landed + ES-6 part ·
+GR 4 + GR-4 at 6/8 slices · CW 1/4 · IN 1 + IN-1 part · TR 1 + TR-9 part ·
+WY 0/7 · WF 0/10 · POP 0/8 · INT 0/8 · HB 0/10 · WC 0/17 · EP 0/6. Flags: 16
+live rows; 52 FP flags unminted of 63 declared. ⚠ SEVEN CONTRADICTIONS, three
+load-bearing, queued for the post-seal prose batch: (1) INDEX.md:498's prose
+calls GR-3b/IN-0c blocked while its own rows LANDED-4/5 record them landed
+(chair spot-checked both); (2) HB/WC/EP volume-header "LANDED" means the
+DOCUMENT landed — 32/26/16 mentions with ZERO code at HEAD (the exact
+commit-subject-census trap, now with three whole programs as bait); (3) the
+spine's wave count self-disagrees (heading 109 / arithmetic 108 / extraction
+111 — the 108 reconciles if ES-5 counts once; NOTHING should quote 109). Also
+stale: §5 PROGRESS blockquote (16 landings behind), ES-5c's module-name
+erratum (`npcLadderChallenge.js` not `npcLadderContest.js`), a falsified
+strategicPosture.js grep-comment. The census file is the §27 build queue's
+foundation; the 85 remaining sequence per §5 dependency order.
+
 **⭐ §28 IS ARCHITECTED: `docs/DESIGN_BUILD_EFFICIENCY.md` (this branch; folds
 post-seal).** Operative NOW by procedure: batch rulings + pipeline staffing;
 the chair hand-stamps the FIRST BASE-STATE CAPSULE at the GR-4B-IIIB flip.
