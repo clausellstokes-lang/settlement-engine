@@ -82,9 +82,29 @@ IB also hit outlast-the-gate once (recovered; authoritative gate re-held).
 ⚠ One foreign `git stash` entry exists (analytics-intelligence-layer) —
 pre-existing, untouched, NOT ours.
 
-**LIVE: Lane TC2 (Opus) compiles the GR-4B-II TRAIN** (first §28 train):
-GR family preamble + train plan + W2 `reaffirmed` packet; W1 = the B1 annex
-act re-verified. Deliverables → scratchpad `laneTC2-*`. A successor COLLECTS.
+**✅ Lane TC2 COLLECTED (~06:10): THE GR-4B-II TRAIN IS COMPILED.** Four
+deliverables in scratchpad (`laneTC2-GR-PREAMBLE-draft.md` sha `3b0fb860…` ·
+`laneTC2-TRAIN-PLAN-draft.md` sha `a871dbd3…` ·
+`laneTC2-GR-4B-II-W2-packet-draft.md` sha `bbcf3572…` · `laneTC2-report.md`),
+all CLAIM_RE-clean; tree closed clean at `d383aa3c`. Train: W1 annex act
+(docs-only, ZERO census motion = the lawful truncation boundary, mints
+CR-GR4B-16 + A-23) → W2 `reaffirmed` (13 paths, store-side mount) on
+`refs/trains/gr-4b-ii`; terminal census `2416/365/2051/20016/5642`, runtime
+28032; two named interior reds, both at I2. **W2 COMPILABLE — no persisted
+key owed** (exactly-once is STRUCTURAL: the store's CAS on status==='pending'
+at campaignWorldPulseDeferred.js:1069, no path out of `dismissed`, and entry-id
+dedupe; the moment any wave RE-DERIVES this beat the key becomes owed — why
+`honored_by_silence` is NOT a member, filed OQ-1). **B1 ADOPTED, one mandatory
+amendment.** TC2's three saves, chair-verify each before ruling: (1) ⛔
+CR-GR4B-13 is TAKEN by iii-b — the annex ruling must mint CR-GR4B-16; (2) ⛔
+the kind-pool arithmetic INVERTS post-iii-b: reaffirmed carries a DESK so
+110→111 with identity STAYING 7 (a section:null copy predicting 8 reds); (3)
+⛔ the landed silence pin is a LIVE VACUITY (title names dismiss, assertions
+only exercise the treaty-stage resolver; unbanked, cure census-neutral).
+⏳ CHAIR: batch-rule CR-GR4B-16..19 (one veto surface), then execute the train
+per the plan. NOT done by TC2 (stated): no gate/smoke (terminal-only per
+§2.2); ratchets cited from capsule; B1 similarity figures unmeasured (no
+instrument exists — note for the machinery queue).
 Queue behind it: infrastructure train (capsule script + PACKET_STANDARD
 amendment + IP-1 + the FPC-found INDEX/spine prose contradictions) → ES spine
 trains → the 85-wave §27 inventory per laneFPC-census.md.
