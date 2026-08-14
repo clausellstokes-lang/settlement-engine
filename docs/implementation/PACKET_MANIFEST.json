@@ -1867,6 +1867,56 @@
         ["npm", "run", "check:tail"],
         ["npm", "run", "smoke:boot"]
       ]
+    },
+    {
+      "id": "GR-4B-IIIB",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-IIIB.md",
+      "verifiedBase": "2dd09360e63fcca2b278dcf4d3e9c7f949434e55",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/display/treatySuccessionDossier.js" },
+        { "action": "MODIFY", "path": "src/domain/display/treatyDocument.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "MODIFY", "path": "src/components/map/TreatyPanel.jsx" },
+        { "action": "MODIFY", "path": "src/components/new/tabs/WarFaithTab.jsx" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionDossier.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function successionQuestionPayloadTuple(outcome)" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "export function swornPartiesOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "export function treatyOrientationOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyEnforcement.js", "symbol": "export function treatyLedgerOf(worldState)" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(kind, seed, interp = {}, context = null)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderTreatyDocument(worldState, pairKey)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderTreatiesForSettlement(worldState, settlementId)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderAllTreaties(worldState)" }
+      ],
+      "acceptanceCases": [
+        { "id": "B1", "case": "a validated pending question renders exactly one fully addressed dossier line" },
+        { "id": "B2", "case": "all eight annex-verbatim families and slot vectors are reachable" },
+        { "id": "B3", "case": "a dark mechanism leaves both mounts and the read-model byte-identical" },
+        { "id": "B4", "case": "terminal, unvalidated and foreign rows render no line" },
+        { "id": "B5", "case": "an unresolvable address renders nothing, never a partial line" },
+        { "id": "B6", "case": "two questions on one treaty render two lines in canonical order" },
+        { "id": "B7", "case": "the same world is byte-stable, draws nothing, and writes nothing" },
+        { "id": "B8", "case": "a real late-stage succession reaches both mounts and no other surface" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint", "src/domain/display/treatySuccessionDossier.js", "src/domain/display/treatyDocument.js", "src/domain/worldPulse/grammarReceiptPools.js", "src/domain/worldPulse/grammarNews.js", "src/components/map/TreatyPanel.jsx", "src/components/new/tabs/WarFaithTab.jsx", "tests/domain/treatySuccessionDossier.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/treatySuccessionDossier.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js", "tests/components/treatyDossierTab.test.jsx", "tests/property/treatyLifecycleVoiceDormancyFence.test.js", "tests/domain/sovereigntyWaveCloseIntegration.test.js", "tests/domain/successionQuestion.test.js", "tests/domain/peaceTermsWave3.test.js", "tests/design/deepCraftKillList.test.js", "tests/domain/guidanceRegistry.walker.test.js", "tests/domain/impactKindWalkers.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/lint/couplingInclusion.walker.test.js", "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"],
+        ["npm", "run", "smoke:boot"]
+      ]
     }
   ]
 }
