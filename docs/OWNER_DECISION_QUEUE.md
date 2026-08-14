@@ -1456,3 +1456,34 @@ same-volume-preferred. OQ-TC5-2: **HB Q1's seal is NARROWED** — by its own
 words it binds HB-3 onward, not HB-0/HB-1, which become dispatchable once
 their Q2/Q3 are ruled at compile; the INDEX's HB not-dispatchable prose is
 corrected in that train's own P-commit.
+
+## §35 · GR-6 STOPPED AT P1 — RATIFIED; THE PIPELINE PIVOTS TO HB (2026-08-14
+## ~16:00, chair, vetoable)
+
+1. **TE5's full-train STOP is RATIFIED, including the refusal to truncate to
+   an M1 prefix** — §2.4's truncation answers a failed proof, never a refuted
+   premise; an orphaned flag-minted leaf with an unruled consumer would be
+   debt wearing a landing. Both §34 tripwires fired on executed evidence: the
+   war-opener's threshold operand is NEVER EVALUATED for the ordered target
+   (`warDeployment.js:1065` short-circuit; the file's own `:1045-47` waiver
+   note; proved by an isolated ×3 inflation leaving every deliberated-march
+   arm green), and the band was literally blank.
+2. **GR-6 is PARKED FOR RE-CHARTER**, not dead: the candidate mount is the
+   `HOSTILE_CONFIDENCE` floor at `:1002` (per-settlement, pre-loop, already
+   coalition-guarded) — a chair mount ruling plus a chair-authored band
+   against the measured substrate (WAR_FACTOR_W 0.3 · CONQUEST_MARGIN 0.12 ·
+   HOSTILE_CONFIDENCE 0.42 · the landed strength ladder). One future compile
+   pass carries both; nothing lands until then.
+3. **The coupling-registration TEMPLATE GAP is at INSTANCE FIVE** and
+   graduates to a structural cure: a machine check (validator or
+   PACKET_STANDARD walker) that a packet naming a new coupling row also
+   names the head re-export + exact-list pin + registry test paths. Queued as
+   an infra micro-act beside the §33 codeOnly() re-point and the capsule
+   HOT_FILES parse fix.
+4. TE5's settled re-measurements are BANKED for the re-charter (direction
+   WAR→GRAMMAR; the vacuous warIntent walker note discharged; CQ-7's reading
+   survives). J-TE5-1..4 ratified on the receipt.
+5. **The pipeline pivots to `hb-1`** = [HB-0, HB-1] under §34's narrowed
+   seal: compile with HB Q2/Q3 ruled at compile (recommendations required),
+   the INDEX HB prose correction in its P-commit, full §28 form. HB Q1's
+   persisted fields stay untouched (they bind HB-3+).
