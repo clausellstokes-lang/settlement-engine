@@ -129,6 +129,14 @@ compiler INHERITS the discharged structural half); R24 net-zero at 812
 (HB-5 recompiles against it); the walker-name contradiction ruled to
 `chooserTotality.walker.test.js` (charter over prose). Six refutations
 banked; O-1 (`circumstanceClassOf` homeless) docketed to HB-2.
+**⭐⭐ §37 (owner, ~18:05, ledger `db4ed034`): RUN TO THE END — all permission
+pop-ups pre-granted, now and future.** The delegated terminal is the WHOLE
+§3h tail incl. tuning signature at evidence-completeness and each
+push/deploy at its ordered phase. Evidence gates unwaived. ⚠ THE WALK stays
+a FACTUAL gate (only the owner's eye) — the program HOLDS there if the owner
+is absent, unless explicitly waived later. V5 cull + legal share that
+character.
+
 **~17:30: TE6 API-death at the P1→I1 boundary; RECOVERED CLEAN** — the chain
 already held P1 `436f138e` + I1 `e188760b` (HB-0 dark by construction),
 porcelain clean, no orphans; resumed with re-verify-I1-then-continue orders
