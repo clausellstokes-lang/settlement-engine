@@ -103,9 +103,27 @@ four-lane order + 20-minute keeper tick.** All deliverables land in this session
 scratchpad `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/`:
 - **Lane IIIB** drafts the GR-4b-iii-b packet from `2dd09360` →
   `laneIIIB-GR-4B-IIIB-draft.md` + `laneIIIB-report.md`. REFUSED-IN-PART valid.
-- **Lane SD** derives the first-diagnostic-soak execution plan from
-  `DIAGNOSTIC_SOAK_DESIGN.md` + §3h, verifying mechanisms at HEAD →
-  `laneSD-soak-plan.md` (QUOTED / VERIFIED-AT-HEAD / GAP labels).
+- **✅ Lane SD COLLECTED (~02:20): the soak plan is DERIVED and the design's flag
+  arithmetic is STALE.** Full plan in `laneSD-soak-plan.md`. Headlines: the design's
+  "88 keys / 41 dark layers" is now **95 keys / 48 dark layers** (live manifest 16
+  keys, census 73, registry 72 rows — re-derive at soak time, never inherit);
+  ⚠⚠ **GAP-1: dark engine gates INVISIBLE to the census walker via non-canonical
+  receivers** — chair spot-checked three of four at HEAD (`settlementPolitics.js:169`
+  aliased `r`; `institutionLifecycle.js:661/:665` `(context.simulationRules || …)`;
+  `biomeTruthEnabled` SD-reported, chair check pending) — the walker's GATE_RE
+  measures 63 keys and misses all of them; THIS IS THE CRITICAL-PATH DECISION
+  BEFORE THE SOAK (the lighting sets and "every flag dark" both depend on the true
+  inventory); ⚠ the flag-forcing overlay must land in `fullRules` ABOVE
+  `whole-world-soak.mjs:208` (darkRules derives from fullRules there) or the
+  ABSENT-vs-EXPLICIT-FALSE dark control silently breaks; `--skip-divergence` must
+  be authored (`--divergence-years 0` is clamped away at `:93`); D-1 = L0
+  (`full_simulation`, 45 flags, 30y×12s) runs at HEAD with ZERO new code;
+  findings-doc home unruled (SD recommends `docs/DIAGNOSTIC_SOAK_FINDINGS.md`,
+  chair to rule); coupling registry now 49 rows/11 pairIds (L5 re-derives live);
+  `npm ci` in the soak tree (the §4 tolerance is for gate runs, not soak numbers);
+  the concurrency law's own read-only carve-out covers the disposable soak tree;
+  ⚠ 44 worktrees exist — do NOT prune. Receipts note: all disk receipts are schema
+  v4 (zero v5), so the 72 certification rows have never graded executed evidence.
 - **✅ Lane II-R COLLECTED (~02:12): GR-4b-ii is COMPILABLE IN PART.** Full table in
   `laneIIR-gr4bii-recon.md` (27,450 B). Verdicts: `honored_by_silence` PARTIAL
   (expiry terminal durable+typed but NO WORLD TICK — only ISO `expiredAt`; 5/8
