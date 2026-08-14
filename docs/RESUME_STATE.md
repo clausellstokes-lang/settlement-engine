@@ -63,7 +63,36 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~01:50 EDT) — GR-4b-iii-a terminal; the orphaned A-22
+# ⭐⭐ CURRENT (2026-08-14 ~03:05 EDT) — GR-4B-IIIB is READY at `cdd4bf52`,
+# DISPATCH SEALED, Lane IB (Opus) IMPLEMENTING; ⛔ SEALED SESSION — nothing else
+# lands on the build branch until IB lands
+
+**GR-4B-IIIB PROMOTED at `cdd4bf52`** (packet + INDEX READY-27 row + surgical
+manifest append; validate:packets **35 packets / 1 READY, TRUE_EXIT=0**). Chair
+rulings SIGNED in-packet: CR-GR4B-13 (surfaces 1→2, both mounts corpus-named) ·
+CR-GR4B-14 (stamped live-term eligibility via the read-model's own term view) ·
+CR-GR4B-15 (viewer-independent binding); drafting judgments 4-6 RATIFIED; the
+kindPoolFloors "move together" comment is ORDERED reworded to name the no-desk
+class. ⚠ HAZARD NEAR-MISS BANKED: the first promotion commit re-serialized
+PACKET_MANIFEST.json whole (+6078/−1873 reformat noise via json.dump) — caught
+by diff-stat review, cured by amend with a style-matched 50-line append. The
+manifest joins mutation-coverage-manifest.json in the never-re-serialize class.
+
+**Dispatch sealed:** capsule
+`c42f9cd205006c8a28ec982d85781f821411741fec358aa3dedfe3c7ac970880`, seal
+`5d65bb9148eba62836e0f7ef4062c412f209d8aa9f49b7d76991637045e0b9bb`, session dir
+`.git/worktrees/minifold/implementation-sessions/GR-4B-IIIB`, log
+`dispatch-iiib.log` in this session's scratchpad.
+
+**LIVE: Lane IB (Opus) implements GR-4B-IIIB** — edits only, ten paths, chair
+owns commit/CAS/flip; completion receipt lands at scratchpad
+`laneIB-completion-receipt.md`. A successor COLLECTS (survey porcelain — the ten
+paths dirty is the lane's WIP, back it up, re-verify, land by plumbing+CAS);
+never re-dispatch while WIP exists. Draft lanes G1 (GAP-1 walker cure) and B1
+(GR-4b-ii corpus annex) still run read-only; collect their scratchpad files on
+report. §26 (IP-protection ruling) recorded on the owner queue at `9b9a88b1`.
+
+# (superseded ~03:05) — GR-4b-iii-a terminal; the orphaned A-22
 # exemplar cure is COLLECTED and LANDED at `2dd09360`; build clean; no lane live
 
 **THE 08-13 EVENING SESSIONS OUTRAN THIS NOTE.** Five landings happened after the
