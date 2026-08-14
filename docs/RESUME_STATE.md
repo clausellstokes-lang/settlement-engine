@@ -88,6 +88,15 @@ guard.
 **SESSION: EIGHT exposures, ZERO exposed reds.** HABIT 2/10 · machinery
 self-auditing · ~78 waves remain per §27.
 
+**LIVE (~01:25, keeper tick): Lane TC9 (Opus) COMPILES HB-2** from
+`e5ecc83d`: the Q2 occupancy-mix re-aim (~70% reopen-trigger intact) + the
+O-1 `circumstanceClassOf` home disposition; the M4 coupling ratchet and the
+§38.4 consumer-census law are now LIVE and bind its packet. Deliverables →
+`laneTC9-*`; the chair rules at collection. ⏳ gr-6 re-charter DELIBERATELY
+HELD for a fresh-context chair pass (it authors a tuning band — the chair
+declines to author one at exhausted context; substrate banked in
+laneTE5-receipt.md; nothing blocks on it).
+
 **NEXT QUEUE:** (1) gr-6 re-charter — CHAIR-OWED (the HOSTILE_CONFIDENCE
 mount ruling + chair-authored band; substrate measured in
 laneTE5-receipt.md); (2) HB-2 compile (occupancy-mix re-aim + O-1
