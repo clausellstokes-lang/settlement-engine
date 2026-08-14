@@ -96,7 +96,17 @@ pressed classes measured UNREACHABLE on full_simulation — dark ports);
 R27's osrFindings STOP cured by the assizeKernel clean idiom; R28 binds the
 leaf to 250; ⭐ standing HB law: no module spells a class token outside the
 vocabulary leaf (raw-source, JSDoc included).
-**LIVE (~02:20): Lane TE9 EXECUTES hb-2** on `refs/trains/hb-2` from
+**⛔→✅ TE9 STOPPED PRE-P1 (~03:15) — R31 RATIFIED §42 (ledger `f8d4743b`):**
+the charter's "inherited structural bounds" are FICTION (HABIT_TUNING has
+ten keys, none a cap/age; PLEDGE_BOOK_CAP has NO proposed value anywhere) —
+HB-2 as chartered was a TUNING ACT in disguise; every road tripped a STOP;
+nothing was written. **ROAD B RULED: train `hb-2b`** = M1 "HB-0b" (the three
+bounds minted in HABIT_TUNING, values DERIVED from measured substrate,
+chair-signed at promotion, unsoaked, riding the signature) → M2 HB-2
+corrected (§42.3: local helpers; median/p95 → HB-3; honest Bands line).
+**LIVE (~03:25): Lane TC10 COMPILES hb-2b** → `laneTC10-*`; the chair rules
+values + band-walker finding at collection.
+**(superseded) TE9 executes hb-2** on `refs/trains/hb-2` from
 `e5ecc83d` (P1→I1 census-at-member to `2428/366/2062/20103/5653`, runtime
 28126→T docs-only; validator 43/0; osrFindings 1998 tripwired; dark-closure
 3→4 with habitGate proven OUTSIDE). Chair owns CAS. Receipt →
