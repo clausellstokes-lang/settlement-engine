@@ -92,10 +92,21 @@ ONE full gate; the compiler caught three inherited defects pre-landing; the
 executor caught a packet defect against machine-truth. Second data point =
 the next train, then the §8 review gate.
 
-**LIVE (~08:30): Lane TC3 (Opus) compiles the INFRASTRUCTURE TRAIN** from
-`60083174`: M1 docs batch (volume folds + FPC prose corrections +
-PACKET_STANDARD §28 amendment) → M2 capsule generator script → M3 IP-1
-sourcemap guard. Deliverables → scratchpad `laneTC3-*`. A successor COLLECTS.
+**✅ TC3 COLLECTED + §30 RULED (~09:05, ledger `9dd77d95`): the infra-1 train
+is compiled** — 3 members, ZERO interior reds, promotions IN-CHAIN (the J-E1
+lesson), capsule admissibility re-executed 19/22 all-match. Two traps designed
+out: `package.json` is a GOVERNED SCANNER PATH (a byte change = schema-mint
+trigger — the capsule ships NO npm row, J-TC3-2 ratified); the `tests/lint/`
+enumerator opts files in by dir+basename (M2/M3 placed AND named to stay out).
+M3's polarity ruling: IP-1's absence check FALSE-GREENS on a stale dist →
+VERIFY_DIST-gated + anti-vacuity case. ⚠ queue note: `.nvmrc` deleted while
+`ciCheckParity` pins it — uninvestigated, next infra docket.
+**LIVE (~09:10): Lane TE3 (Opus) EXECUTES infra-1** on `refs/trains/infra-1`
+from `60083174` per `laneTC3-TRAIN-PLAN.md`: P1→I1(docs, truncation boundary)
+→P2→I2(capsule, stamps at I3 per §30)→P3→I3(IP-1)→T (census
+`2418/366/2052/20024/5643`, runtime 28040, verify:dist 51, validator 39/0,
+ONE bare gate held in-turn + smoke). Chair owns CAS. Receipt →
+`laneTE3-train-receipt.md`. A successor COLLECTS the chain per §2.4.
 
 **NEXT (in order):** (1) the INFRASTRUCTURE TRAIN — capsule generator script +
 PACKET_STANDARD §28 amendment + IP-1 sourcemap guard + the FPC prose
