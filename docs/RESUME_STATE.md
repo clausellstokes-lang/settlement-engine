@@ -84,6 +84,18 @@ manifest joins mutation-coverage-manifest.json in the never-re-serialize class.
 `.git/worktrees/minifold/implementation-sessions/GR-4B-IIIB`, log
 `dispatch-iiib.log` in this session's scratchpad.
 
+**⭐ THE IP-PROTECTION PROGRAM IS ARCHITECTED (owner order, ~03:30):**
+`docs/DESIGN_IP_PROTECTION.md` landed on THIS branch (the build branch is
+sealed) — IP-1 sourcemap guard (PRE-SOAK, after the seal lifts) · IP-2a prose
+salts (post-first-soak repair window, declared shift; ⛔ the salt register
+NEVER enters the repo — owner's design-handoff folder) · IP-2b constant salts
+(ride the tuning signature) · IP-2c counsel brief (owner carve-out) · IP-3
+server-enforced paid surfaces (first post-launch iteration) · IP-4 cloud
+worlds (post-launch program; design done). §4 of the volume carries the full
+sequencing table relative to §3h. FOLD OBLIGATION: to the build branch at the
+first integration point after the seal lifts, CLAIM_RE-checked in the same
+change.
+
 **LIVE: Lane IB (Opus) implements GR-4B-IIIB** — edits only, ten paths, chair
 owns commit/CAS/flip; completion receipt lands at scratchpad
 `laneIB-completion-receipt.md`. A successor COLLECTS (survey porcelain — the ten
