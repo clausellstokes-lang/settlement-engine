@@ -2552,6 +2552,44 @@
         ["npm", "run", "typecheck:ratchet"],
         ["npm", "run", "typecheck:domain:strict"]
       ]
+    },
+    {
+      "id": "HB-0B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/HB-0B.md",
+      "verifiedBase": "e5ecc83dd443d13bdbc495d8cf701f93504fccdd",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/habit/habitCurve.js" },
+        { "action": "TEST", "path": "tests/domain/habitCurve.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "HABIT_ROWS_PER_ACTOR_CAP" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "PLEDGE_MAX_AGE_WEEKS" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "PLEDGE_BOOK_CAP" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "const MEDIAN_VOLATILITY_INDEX" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "halfLifeWeeksOf" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE THREE BOUNDS EXIST, ARE FINITE POSITIVE INTEGERS, AND ARE FROZEN MEMBERS OF THE ONE BAG — each Number.isInteger and greater than zero, and a write to HABIT_TUNING does not take under the freeze" },
+        { "id": "A2", "case": "THE ROW CAP IS STRICTLY BELOW THE STRUCTURAL PRODUCT so eviction is reachable, with the product DERIVED from CIRCUMSTANCE_CLASSES.length times STRATEGY_MOVES.length rather than transcribed; and the half-life rung word appears ZERO times in habitCurve.js raw source, asserted with a positive control that finds the rung in bandedStock.js first" },
+        { "id": "A3", "case": "THE PLEDGE AGE IS A MEMBER OF THE SHARED LADDER AND IS THE MEDIAN COURT'S OWN BAND — Object.values(HALF_LIFE_WEEKS) contains it, and it equals halfLifeWeeksOf(HABIT_TUNING.HALF_LIFE[LAW_WORD_VOLATILITY[1]]). The RELATIONSHIP is pinned, never the literal, because a literal pin passes a hand-keyed re-spelling" },
+        { "id": "A4", "case": "THE THREE MEMBERS HAVE ZERO CONSUMERS IN src/, scanned over raw source, with the guard-the-guard finding NEUTRAL_I's real consumers first so the absence is proven live rather than emptied" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/habitCurve.test.js"],
+        ["npx", "vitest", "run", "tests/domain/habitVocabulary.test.js"],
+        ["npx", "vitest", "run", "tests/lint/habitBandsReconciliation.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/spBandFamilies.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
+        ["npx", "eslint", "src/domain/worldPulse/habit/habitCurve.js"],
+        ["node", "scripts/check-tuning-bands.mjs"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
     }
   ]
 }
