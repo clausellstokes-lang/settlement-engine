@@ -4037,7 +4037,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // literal `describe` title; no existing registration moves.
     // Prior row retained as a cross-contract ancestry pin: files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638
     // 2412/365/2047/19984/5638 → 2413/365/2048/19992/5639.
-    files: 2413, parked: 365, credited: 2048, titles: 19992, suiteTitles: 5639,
+    // ⏱ GR-4b-iii-a, 2026-08-13 — RE-DERIVED WHOLE after the succession-question
+    // opening voice. Its one new credited file contributes exactly eight literal `it`
+    // titles and one literal `describe` title; no existing registration moves.
+    // Prior row retained as a cross-contract ancestry pin: files: 2413, parked: 365, credited: 2048, titles: 19992, suiteTitles: 5639
+    // 2413/365/2048/19992/5639 → 2414/365/2049/20000/5640.
+    files: 2414, parked: 365, credited: 2049, titles: 20000, suiteTitles: 5640,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

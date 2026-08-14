@@ -1,9 +1,9 @@
 /**
  * grammarLifecycleKindPools.walker.test.js — GR-0's phrased-kind walker.
  *
- * The census of the pact grammar's lifecycle voice: the exact eight wired pools, their
+ * The census of the pact grammar's lifecycle voice: the exact ten wired pools, their
  * frequency-scaled depth, their annex-verbatim text, the per-pool slot roles (one of them
- * INVERTED), the three Herald kinds' five joins, and the two pools this wave deliberately
+ * INVERTED), the five Herald kinds' five joins, and the two pools this wave deliberately
  * did NOT wire. It certifies presentation width only; it is not behavioural soak evidence.
  *
  * THE READER IS THE SHARED ONE. tests/helpers/receiptAnnex.js was EXTENDED with the
@@ -50,6 +50,8 @@ const EXPECTED = Object.freeze([
   // Its pool is authored in the volume's `# GR-4` section rather than `# GR-0`, which is why
   // the reader below takes a PER-KIND window instead of one file-wide slice.
   ['disavowed_by_succession', 'major', 'public', 'trade', 5],
+  // GR-4b-iii-a — the unanswered question, one public line per treaty instrument.
+  ['succession_question_opened', 'notable', 'public', 'trade', 7],
 ]);
 
 /** SP-6's frequency-scaled floor. The `n/a` class is a DECLARED floor of six: a dossier
@@ -100,7 +102,7 @@ const UNTIL = '# GR-1';
  */
 const GR4_SECTION = '# GR-4';
 const GR4_UNTIL = '# GR-5';
-const GR4_KINDS = new Set(['disavowed_by_succession']);
+const GR4_KINDS = new Set(['disavowed_by_succession', 'succession_question_opened']);
 
 function annexPool(kind) {
   const inGr4 = GR4_KINDS.has(kind);
@@ -114,9 +116,9 @@ function annexPool(kind) {
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the nine-pool census and every registry field are exact', () => {
+  test('the ten-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(9);
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(10);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -165,13 +167,13 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('every pool address resolves in the GRAMMAR volume, not a legacy forward', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
-    expect(address).toHaveLength(9);
+    expect(address).toHaveLength(10);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
   test('THE FIRST-MATCH LAW: every document anchor this walker rides matches exactly once', () => {
     // An `exec`/`indexOf` document pin retargets SILENTLY when a second matching heading
-    // appears (the CR-WR10-A/B hazard class). Both slice anchors and all seven kind
+    // appears (the CR-WR10-A/B hazard class). Both slice anchors and every governed kind
     // headings are asserted single here, and the mutants below prove the guard fires.
     expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-0(?=[ \n])/gm, 'GR-0 section')).not.toThrow();
     expect(() => anchoredOnce(ANNEX_SOURCE, /^# GR-1(?=[ \n])/gm, 'terminator')).not.toThrow();
@@ -221,10 +223,10 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
     expect(grammarSlotRoles('treaty_true_state_chip')).not.toEqual(DEFAULT_GRAMMAR_SLOT_ROLES);
   });
 
-  test('THE FIVE JOINS: both Herald kinds are phrased, routed, filed and desk-consistent', () => {
+  test('THE FIVE JOINS: all Herald kinds are phrased, routed, filed and desk-consistent', () => {
     expect([...GRAMMAR_HERALD_KINDS])
       .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened',
-        'disavowed_by_succession']);
+        'disavowed_by_succession', 'succession_question_opened']);
     for (const kind of GRAMMAR_HERALD_KINDS) {
       // JOIN 3 — the world phrase, so no projection can fall back to an engine token.
       expect(WHAT_PHRASES[kind], `${kind}: missing WHAT_PHRASES`).toBeTruthy();
@@ -241,7 +243,7 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
       expect(KIND_SECTION[kind]).toBe('courts');
       expect(KIND_SECTION_DIVERGENCES[kind]).toBe('trade');
     }
-    // The treaty cohort keeps ONE desk: the four kinds a reader meets as one story.
+    // The treaty cohort keeps ONE desk across every stage a reader meets as one story.
     for (const sibling of ['treaty_signed', 'treaty_breached']) {
       expect(SECTION_OF(sibling), `${sibling}: the cohort split`).toBe('trade');
     }

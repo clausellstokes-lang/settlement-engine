@@ -10,11 +10,11 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries GR-0's seven wired pools only; GR-1..GR-6 extend it or take their own.
+ * carries the ten governed pools wired through GR-4b-iii-a.
  *
- * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in
- * docs/content/RECEIPT_POOLS_GRAMMAR.md under `# GR-0 — THE LIFECYCLE VOICE`, with only the
- * `{slot}` tokens turned into interpolations and the editorial `[exemplar, …]` tags stripped.
+ * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
+ * governed GR-0 and GR-4 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
+ * `{slot}` tokens turned into interpolations and editorial `[exemplar, …]` tags stripped.
  * The pools were EXTRACTED from the annex mechanically rather than transcribed, and
  * tests/lint/grammarLifecycleKindPools.walker.test.js re-derives them from the document on
  * every run, so a hand edit here reds rather than silently forking the corpus.
@@ -113,11 +113,10 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `Neither court marked the day; in ${x.counterpart} the season's work went on exactly as before.`,
   ],
   // GR-4b-α — THE SUCCESSION DISAVOWAL, the one `# GR-4` ending whose producer is landed,
-  // persisted AND reachable from a mount this wave owns. Its five siblings stay authored and
-  // unwired: three assert a question standing OPEN ACROSS TICKS, which the answer leaf
-  // resolves inside a single expression, so their prose would be untrue the instant it minted
-  // (GR-4d); `reaffirmed` is GR-4b-ii's and `credibility_charge` is GR-4c's. ⛔ `repudiated`
-  // is authored here too and deliberately NOT wired — CR-GR4B-8: the open road already speaks
+  // persisted AND reachable from a mount this wave owns. GR-4b-iii-a now wires the one honest
+  // question-opening pool immediately below; the terminal HONOR pools remain GR-4b-ii's and
+  // `credibility_charge` remains GR-4c's. ⛔ `repudiated` is authored here too and deliberately
+  // NOT wired — CR-GR4B-8: the open road already speaks
   // a fully-addressed `treaty_breached` beat, so a second desk kind would double-voice it.
   //
   // ⭐ `{npc}` BINDS TO THE FALLEN HOLDER — the hand that swore, named on the parchment's own
@@ -129,6 +128,17 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `In ${x.counterpart} they had expected it, and it landed hard regardless.`,
     'The seat that swore is gone, and the word went out of the door with it.',
     'It was cheap to do, and it will be dear to have done.',
+  ],
+  // GR-4b-iii-a — THE QUESTION OPENS. `{npc}` is the FALLEN holder recorded on this
+  // instrument, never the successor. Each family speaks one unanswered treaty only.
+  succession_question_opened: [
+    'The old seat swore it; the new seat must choose.',
+    (x) => `${x.npc} left an oath standing at ${x.settlement}; the new seat has taken the chair while the parchment remains unanswered.`,
+    (x) => `The court of ${x.counterpart} is waiting on one word from ${x.settlement}, and the market is trading on which word it will be.`,
+    (x) => `The oath ${x.npc} swore is a question this week, and the clerks have set its parchment before the new seat.`,
+    'Nothing has been broken. Nothing has been confirmed either.',
+    (x) => `The clerks in ${x.settlement} have laid the unanswered oath on the council table, with room beneath it for one word.`,
+    (x) => `Whatever the new seat decides, the oath ${x.npc} swore will be remembered longer than its terms.`,
   ],
   hollowed_detected: [
     (x) => `Hollowed and found out: the ${x.term} was kept on parchment and nowhere else.`,

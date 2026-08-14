@@ -83,7 +83,7 @@ function grammarKindRow(kind, significance, audience, section, requiredSlots, co
 }
 
 /**
- * GR-0's governed rows. `section` is non-null on the two HERALD kinds only; the clause,
+ * The governed rows. `section` is non-null on the five HERALD kinds only; the clause,
  * ending, dossier and chip pools are rendered INTO another surface and file nowhere of
  * their own (a section for them would claim a desk they never reach).
  * @type {ReadonlyArray<Readonly<GrammarRegistryEntry>>}
@@ -150,12 +150,19 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
   grammarKindRow('disavowed_by_succession', 'major', 'public', 'trade', [
     ['npc'], ['settlement'], ['counterpart'], [], [],
   ]),
+  // GR-4b-iii-a — one public question-opening beat for one pending treaty instrument.
+  // Its party slots are bound by the composer from the question and persisted parchment,
+  // not through the obligee/obligor role table.
+  grammarKindRow('succession_question_opened', 'notable', 'public', 'trade', [
+    [], ['npc', 'settlement'], ['counterpart', 'settlement'], ['npc'], [],
+    ['settlement'], ['npc'],
+  ]),
 ]);
 
-/** The exact GR-0 governed pool set. */
+/** The exact governed pool set. */
 export const GRAMMAR_KINDS = Object.freeze(GRAMMAR_KIND_REGISTRY.map((row) => row.kind));
 
-/** The two rows that reach the Herald as kinds of their own. */
+/** The five rows that reach the Herald as kinds of their own. */
 export const GRAMMAR_HERALD_KINDS = Object.freeze(
   GRAMMAR_KIND_REGISTRY.filter((row) => row.section !== null).map((row) => row.kind),
 );

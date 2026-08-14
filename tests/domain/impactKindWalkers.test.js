@@ -165,6 +165,8 @@ const EXPECTED_VOICE = {
   // crier register fits an oathbreaking, so it stays deliberately unvoiced (JUDGMENT,
   // vetoable — the treaty_lapsed / treaty_disclosure_opened precedent exactly).
   disavowed_by_succession: null,
+  // GR-4b-iii-a is the unanswered opening beat from the same authored treaty cohort.
+  succession_question_opened: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

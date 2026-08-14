@@ -126,7 +126,7 @@ import { stampSworn } from './oathHolder.js';
 // mount is half-blind — it would see government changes and miss every organic
 // coup/challenge/succession/vacancy. Dark ⇒ the same reference back, so the compare below
 // is untouched and the mover returns its caller's own state.
-import { resolveSuccessionQuestions } from './treatySuccessionDecision.js';
+import { resolveSuccessionQuestionsWithOpeningVoice } from './treatySuccessionOpeningVoice.js';
 import { isRepudiationBreach } from './treatyBreachTypes.js';
 // GR-0 — THE LIFECYCLE VOICE. The two moments this mover has always executed in silence:
 // the prune that retires a spent instrument, and the tick a court's OBSERVED compliance
@@ -315,7 +315,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   // caller's untouched state. A disavowal writes through the family's declared rewriter, so
   // `prevLedger` (pre-answer) and the seed below (post-answer) differ and `changed` is true
   // — which matters, because the pulse discards this mover's state when it says otherwise.
-  let { worldState: workingState, newsEntries: successionBeats } = resolveSuccessionQuestions(worldState, tick, now);
+  let { worldState: workingState, newsEntries: successionBeats } = resolveSuccessionQuestionsWithOpeningVoice(worldState, tick, now);
   const liveLedger = treatyLedgerOf(workingState) || {};
   const edges = (graph?.edges && Array.isArray(graph.edges) ? graph.edges : null)
     || (Array.isArray(snapshot?.regionalGraph?.edges) ? snapshot.regionalGraph.edges : []);
