@@ -2080,6 +2080,117 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "INFRA-M2-CAPSULE",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M2-CAPSULE.md",
+      "verifiedBase": "e6eb4c5d15c827133a8edcd68698f30754dd21ed",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/base-state-capsule.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/scripts/baseStateCapsule.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/BASE_STATE.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export const SCOPE_FLOOR_RATIO"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "EXACT_SECTION"
+        },
+        {
+          "path": "src/domain/worldPulse/grammarNews.js",
+          "symbol": "GRAMMAR_KIND_REGISTRY"
+        },
+        {
+          "path": "src/domain/worldPulse/grammarReceiptPools.js",
+          "symbol": "GRAMMAR_RECEIPTS"
+        },
+        {
+          "path": "docs/implementation/BASE_STATE.json",
+          "symbol": "consumptionLaw"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export function enumerateInvariants"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "SHAPE — six top-level keys in order and the 20 committed figure keys in order"
+        },
+        {
+          "id": "A2",
+          "case": "TOTALITY — PROVENANCE and the emitted key set agree in both directions"
+        },
+        {
+          "id": "A3",
+          "case": "HAND-DERIVATION — independently coded readers equal readAll's values"
+        },
+        {
+          "id": "A4",
+          "case": "THE ARG GUARD — a missing or below-floor --runtime-tests throws and writes nothing"
+        },
+        {
+          "id": "A5",
+          "case": "FAIL-CLOSED — a missing home and a nonzero shell-out each throw and name the row"
+        },
+        {
+          "id": "A6",
+          "case": "PLACEMENT — enumerateInvariants does not pick this file and the walk is non-trivial"
+        },
+        {
+          "id": "A7",
+          "case": "GOVERNED-INPUT NEGATIVE CONTROL — the new script is not a scanner tool file"
+        },
+        {
+          "id": "A8",
+          "case": "DISCRIMINATION — a one-unit perturbation and an emptied consumptionLaw each red"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/baseStateCapsule.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ],
+        [
+          "npx",
+          "eslint",
+          "scripts/base-state-capsule.mjs",
+          "tests/scripts/baseStateCapsule.test.js"
+        ]
+      ]
     }
   ]
 }
