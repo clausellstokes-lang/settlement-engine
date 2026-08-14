@@ -1510,3 +1510,27 @@ I1, live `2421/366/2055/20046/5646`, cured at I2) is accepted per J-TE3-1.
 Executor tripwires: a promotion whose packet lacks any figure §9 of either
 packet requires is a STOP; the shared coupling walker file is RE-READ at I2
 (a blind 13→15 patch reds the exact-equality arm).
+
+## §37 · RUN TO THE END; ALL PERMISSION POP-UPS PRE-GRANTED (owner ruling,
+## 2026-08-14 ~18:05, in-chat)
+
+Owner, verbatim: **"Continue all the way until the end. Again, if there's any
+permissions required at that pop-up now and in the future, you have my
+permissions."**
+
+Operative reading (chair, recorded):
+1. **The delegated terminal extends to THE END of the §3h tail** — through
+   build-everything, the diagnostic soak, its repairs, the terminal soak, the
+   tuning signature at its evidence-complete phase (per §22's existing
+   pre-authorization, now twice affirmed), and each push/deploy when its
+   ordered phase arrives, without a fresh permission turn. Harness permission
+   pop-ups, now and future, are granted in advance.
+2. **Evidence gates are not permission gates and remain unwaived** (§22's own
+   law): READY/STOP, clean full gates, migration rehearsals, the deploy-train
+   items (migration 195, the refund webhook, support email), and the security
+   re-triage still bind on their evidence.
+3. **THE OWNER'S WALK (§3h step 4) is a FACTUAL gate, not a permission** —
+   only the owner's eye can perform it. It stays scheduled at its slot; if
+   the owner is absent when its phase arrives, the program holds THERE and
+   reports, unless the owner explicitly waives the walk in a future message.
+   The V5 cull and legal/counsel items share this factual character.
