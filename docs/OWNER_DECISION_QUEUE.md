@@ -1687,3 +1687,28 @@ executors never share it).
    movement from M1's HABIT_TUNING widening is a STOP (the compile's
    PLAUSIBLE label is honest; the executor proves it); the census interior
    reds only as declared by figure; osrFindings 1998.
+
+## §44 · R35 RATIFIED; ROAD A (SPLIT PROMOTION) IS RULED (2026-08-15 ~05:40,
+## chair, vetoable; probes banked beside laneTE10-receipt.md)
+
+1. **TE10's pre-P1 STOP is RATIFIED** — the plan's "no disjointness rule"
+   was false: `implementation-packets.mjs:498/:516-524` reserves change
+   paths for EVERY non-terminal status (DRAFT included — no demotion
+   escape), and both members lawfully name `tests/domain/habitCurve.test.js`.
+   The estate's first two-non-terminal-packets-one-path train found the rule
+   honestly, by execution at all four status states.
+2. **ROAD A IS SIGNED (CR-HB2B-SPLITP)**: P1a (promote M1 alone, validator
+   43/1) → I1 → P1b (flip M1 LANDED + promote M2, 44/1) → I2 → T (44/0).
+   One extra docs-only commit; lawful because M1 has ZERO CREATE rows so the
+   mid-train flip asserts nothing false; the TE7 census law survives (I2
+   stays the last tests/-moving commit). Both packets' §9 validator
+   sequences restamp to `42/0 → 43/1 → 44/1 → 44/0` at P1a. Roads B/C/E
+   refused as compiled (false manifest / facts about nonexistent files /
+   validator-widening smuggling).
+3. The three §43-signed values are UNTOUCHED and spend exactly as compiled.
+   The seven banked pre-STOP measurements (incl. no-test-pins-HABIT_TUNING,
+   the positional index resolving to 156, R31 re-confirmed) are inherited by
+   the resumed execution without re-derivation.
+4. ⚠ HOUSEKEEPING RECORDED: MEMORY.md sits at 17,054 B — past the ~17KB hard
+   read limit; **a fold pass is OWED before the next hook is added**, done at
+   fresh context per the grep-every-hook law.
