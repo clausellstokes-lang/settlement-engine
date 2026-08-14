@@ -6,11 +6,14 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `5d6a0e7c`
-- Commits: 3251
+- HEAD: `6784bf62`
+- Commits: 3254
 - Working tree at refresh: 0 dirty entries
 
 ```
+6784bf62 2026-08-14 docs: land the gap-1 train terminal (GAP-1 flipped, capsule generated)
+152d3f19 2026-08-14 feat: widen the engine-gated census detector past its canonical receiver
+ea98c42f 2026-08-14 docs: promote GAP-1 as the gap-1 train's single member
 5d6a0e7c 2026-08-14 docs: land the infra-1 train terminal (M1 + M2 + M3 flipped, capsule generated)
 cfcc2fa2 2026-08-14 feat: land INFRA-M3-IP1, the sourcemap guard, and re-derive the whole census
 2bb7c161 2026-08-14 docs: promote INFRA-M3-IP1 as infra-1 train member 3
@@ -408,7 +411,4 @@ db779d5e 2026-08-04 Lane WZ-5 piece 2: the ghost-write class dies at the writer 
 dd86e5f9 2026-08-04 Lane V4C piece 2: the whipping becomes thread — the crest that was never on screen, and one diagonal that says somebody tied this
 19dd07e2 2026-08-04 Lane WZ-5 piece 1 (4d): the atrocity casus gets its producer -- the world hears about the fire, and outrage arrives at news speed
 653be592 2026-08-04 Lane V4C piece 1: the wood gets its finishes — two more turbulence passes, one writer, and a budget that is SPENT rather than declared
-506598af 2026-08-04 Lane WZ-4 piece 2 (4b): the deterrent is priced before the act — and WR-6's web is CONSUMED, never rebuilt
-23e89b18 2026-08-04 Lane V4B piece 2 (the feather): the one-curve law, the splits, and the fray stops drawing where nothing can see it
-2654984a 2026-08-04 Lane WZ-4 piece 1 (4a): the world judges the razing on each observer's own axis — and a ghost-write class is closed on the way
 ```

@@ -63,7 +63,40 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~10:30 EDT) — ✅✅ TWO §28 TRAINS LANDED; branch at
+# ⭐⭐ CURRENT (2026-08-14 ~14:10 EDT) — ✅ GAP-1 LANDED AND EXPOSED at
+# `6784bf62`; the census walker now sees EVERY dark gate; ES trains are NEXT
+
+**GAP-1 LANDED WHOLE** (third exposed train; the rename to GAP-1 executed
+byte-justified — 26 id-token replacements, zero detector bytes moved, bundles
+regenerated not hand-edited). Chain: `5d6a0e7c → ea98c42f(P1) →
+152d3f19(I1 cure) → 6784bf62(T)`. Widened scan 63→70/LOST=0; manifest rows
+16→18; registry 72→74; census titles 73→75; exemptions 1→3 (written reasons);
+backlog 17 untouched; census tuple HELD EXACT `2418/366/2052/20024/5643`;
+validator 40/0; gate TRUE_EXIT=0 held in-turn; smoke 521/521; capsule stamped
+`152d3f19`; `convergence.js` (798/800) is ON the hot-file list. Chair verified
+at T (validator 40/0 + census walker 33/33, own shell) then CAS
+`5d6a0e7c → 6784bf62`; porcelain ZERO; foreign stash untouched. Receipt:
+`laneTE4-receipt.md` (428 lines). RATIFIED: J-TE4-5 — the capsule generator's
+hardcoded HOT_FILES (3 where the table has 4) is DEFERRED-RECORDED in the
+packet §14.5 (cure: parse the table; rides the next infra micro-act with the
+§33 ruinFilterRoster codeOnly() re-point). The capsule-stamping shape
+(generate from terminal docs, stamp at parent) is verified precedent.
+
+**SESSION TALLY (build branch):** A-22 cure · GR-4b-iii-b · GR-4B-II train
+(2 waves) · infra-1 train (3 members, incl. IP-1 live + machine capsule) ·
+GAP-1. Nine landings, four exposed CAS moves, zero exposed reds. §31: ≈56%
+wall-clock reduction confirmed.
+
+**NEXT:** (1) the ES spine trains — compile ES-1.. per `laneFPC-census.md`
+and the ES volume's declared serialization (two trains, 4+3 or 3+4; flag
+waves are boundaries; census-red declarations per J-TE3-1; the §31 anchor
+preflight mandatory); (2) behind them: the §33 codeOnly() micro-act + the
+capsule HOT_FILES parse fix as one infra micro-train; (3) onward through the
+85-wave §27 inventory (WY/WF/POP/INT → HB/WC/EP), soak only after everything.
+OQ-1 (`honored_by_silence`) and the `.nvmrc`/ciCheckParity anomaly stand
+docketed. The keeper tick is standing.
+
+# (superseded ~14:10) ⭐⭐ CURRENT (2026-08-14 ~10:30 EDT) — ✅✅ TWO §28 TRAINS LANDED; branch at
 # `5d6a0e7c` (infra-1 exposed); the §8 EFFICIENCY REVIEW IS NOW DUE
 
 **INFRA-1 LANDED AND EXPOSED.** Chain (7 commits, promotions in-chain):
