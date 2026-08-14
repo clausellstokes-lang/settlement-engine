@@ -1380,3 +1380,32 @@ Rulings:
   members declare the lighting-walker interior red BY FIGURE in the train
   plan, or the plan is defective.
 4. Trains remain same-volume until the ES trains land clean (unchanged).
+
+## §32 · GAP-1 IS RULED ON THE G2 RESTAMP (2026-08-14 ~11:15, chair, vetoable)
+
+Evidence: laneG2-GAP1-packet-restamped.md + laneG2-report.md at `5d6a0e7c`
+(hidden keys UNMOVED, population-side proof; widened scan 63→70, LOST=0,
+zero new false positives; census-neutral +0 tuple).
+
+1. **OQ-G2-1 — the REFUSED-IN-PART split is ACCEPTED**: the closed-cohort
+   pincer at `subsystemRowsVirtual.test.js:469-484` is real (candidateType ×2
+   in institutionLifecycle.js forecloses every row spelling). The packet
+   proceeds as: cohort WIDENED for `underwaysOrganicFoundingEnabled` (a real
+   container writer), EXEMPTION ROW with written reason for
+   `institutionPoliticalControlEnabled` (ranking modifier, byte-identical
+   dark) — the hazard-conversion law's exempt-with-reason arm.
+2. **OQ-G2-2 SIGNED** — census-neutral; per J-TE3-1 the plan declares NO
+   census interior red.
+3. **OQ-G2-3 — `convergence.js` (798/800, measured) JOINS THE STANDING
+   HOT-FILE LIST in this landing's docs flip**; any packet touching it opens
+   with an executed headroom measurement. It outranks two current list
+   members in tightness.
+4. **OQ-G2-4 conditional**: if the widened detection lives entirely in the
+   walker test file, NO OSR mint is owed; if ANY governed scanner path moves,
+   the executor STOPs and the wave re-charters onto the mint docket. The
+   executor verifies which holds before its first edit.
+5. **OQ-G2-5 — D-4's exemption ACCEPTED** with its written reason, same arm
+   as ruling 1.
+6. The six G2 judgments are RATIFIED on the report's receipts; the §31
+   anchor preflight is mandatory (the walker file has ZERO anchor-inventory
+   rows — one bare not.toContain reds).
