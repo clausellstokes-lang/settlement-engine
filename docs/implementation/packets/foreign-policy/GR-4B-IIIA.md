@@ -1,11 +1,12 @@
 # Foreign Policy / GR-4B-IIIA — the question-opening voice
 
 - **Status:** READY
-- **Packet version:** `1`
+- **Packet version:** `2`
 - **Verified base:** `claude/composite-r4` at `955acd7ad2aafc9fc64ad71ade64c54349219495`
-- **Last revalidated:** 2026-08-13, after the annex-only chair correction
-  `955acd7ad2aafc9fc64ad71ade64c54349219495`, whose direct parent is the GR-4d
-  terminal `7a589733a8bcfae68c3768c035e0670e3331e493`.
+- **Last revalidated:** 2026-08-13, after the stopped version-1 draft audit and
+  packet-only canonical-order correction. The verified base remains the annex-only
+  chair correction `955acd7ad2aafc9fc64ad71ade64c54349219495`, whose direct
+  parent is the GR-4d terminal `7a589733a8bcfae68c3768c035e0670e3331e493`.
 - **Depends on:** GR-4b-alpha at `dd457b9a` for the landed succession-voice
   grammar idiom and GR-4d at implementation `a17d0a02`, version-2 authority
   `fcf1efbd`, and terminal receipt `7a589733` for the durable pending question.
@@ -91,6 +92,28 @@ This override applies only to that row. The handwritten implementation total is
 already exactly **12** and receives **no override**. GR-4b-alpha's historical
 `12 → 14` override does not transfer. A thirteenth path, sixth registration
 file, or attempt to invoke the inherited total override is a STOP.
+
+### Version-1 STOP evidence — non-authorizing history
+
+The first dispatch at authority HEAD `9be50ffe` used capsule `ca469f4b`,
+dispatch `56e053aa`, seal `f8243861`, and run
+`000001-1da8b33b-ffba-4a03-9c68-c3842574f89c`. It STOPPED before an
+immutable candidate was constructed: A5 contradicted the landed canonical order;
+A7 rewrote statuses and copied states instead of exercising the real lifecycle;
+and the draft's A1/A8 whole-treaty equalities mistook landed treaty-clock and
+compliance normalization for writes by this wrapper. All twelve targets were
+restored to exact HEAD and both CREATE targets are absent. The version-1 capsule,
+dispatch, seal, run, and every receipt beneath them are historical evidence only;
+none may be resumed or reused.
+
+A7 keeps its existing path and exact title. It must drive Apply, Dismiss, and undo
+through the real store actions, six-week expiry through
+`expireStaleActorMajors`, and ring overflow through `upsertProposal`; replay
+the opening wrapper over every resulting terminal or restored-pending state and
+assert zero new `succession_question_opened` beats. The Apply control separately
+asserts exactly one existing alpha `disavowed_by_succession` beat. This correction
+changes no path, title, scope, budget, count, check, manifest projection, or soak
+posture.
 
 ## 2. Outcome and boundary
 
@@ -315,7 +338,9 @@ The function follows this exact order:
 9. Compose the grammar receipt only after the queue write. An unresolved
    treaty, court name, fallen-holder name, or receipt returns zero opening
    beats for that row but never vetoes or rolls back the proposal.
-10. Preserve proposal enumeration order. Use no sort, locale operation, draw,
+10. Preserve the landed decision's canonical final proposal order; the wrapper
+    adds no sort or reordering of its own. Reversing input-object insertion order
+    must change neither proposal nor beat order. Use no locale operation, draw,
     clock, `Date`, or `Math.random`.
 
 ### 6.1 Per-instrument identity
@@ -452,7 +477,7 @@ named A-title red, restore exact pre-mutant SHA-256, and rerun focused green.
 | M2 | replace the receipt seed with one constant | A2 |
 | M3 | allow composition in dark/direct/HONOR mode | A3 |
 | M4 | remove the pre/post-new or exact-pending filter | A4 and/or A7 |
-| M5 | use court-pair/tick identity instead of validated outcome ID | A5 |
+| M5 | replace the validated `outcomeId` at the receipt-seed, `sourceEventId`, and public-ID derivation sites with one court-pair/`openedTick` identity, without changing iteration or order | A5: the two same-court instruments lose distinct source and public identities while canonical order remains unchanged |
 | M6 | introduce a draw or unstable seed/order | A6 |
 | M7 | compose during terminal transition or replay | A7 |
 | M8 | revert the `peaceTerms.js` mount to raw `resolveSuccessionQuestions` | A8 |
