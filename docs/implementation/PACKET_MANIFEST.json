@@ -2191,6 +2191,98 @@
           "tests/scripts/baseStateCapsule.test.js"
         ]
       ]
+    },
+    {
+      "id": "INFRA-M3-IP1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M3-IP1.md",
+      "verifiedBase": "aa6bca77f0a04d622d363e115d663eff69f06ff6",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "tests/build/sourcemapAbsence.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export function discoverBuildTestFiles"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export function isBuildTestPath"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export const SOURCE_TEST_EXCLUDE"
+        },
+        {
+          "path": "package.json",
+          "symbol": "\"verify:dist\""
+        },
+        {
+          "path": "vite.config.js",
+          "symbol": "chunkSizeWarningLimit"
+        },
+        {
+          "path": "tests/build/vendorPdfLazy.test.js",
+          "symbol": "process.env.VERIFY_DIST"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN — zero .map files anywhere under dist/ with VERIFY_DIST set"
+        },
+        {
+          "id": "A2",
+          "case": "MAIN — no emitted dist/assets chunk carries a sourceMappingURL directive"
+        },
+        {
+          "id": "A3",
+          "case": "ANTI-VACUITY — VERIFY_DIST with a missing or empty dist is a hard failure"
+        },
+        {
+          "id": "A4",
+          "case": "DISABLED/ABSENT — without VERIFY_DIST and without dist the file no-ops cleanly"
+        },
+        {
+          "id": "A5",
+          "case": "CENSUS INHERITANCE — the strict runner discovers this file and the source phase excludes it"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/sourcemapAbsence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/build/sourcemapAbsence.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
