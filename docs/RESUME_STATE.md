@@ -87,10 +87,19 @@ packet §14.5 (cure: parse the table; rides the next infra micro-act with the
 GAP-1. Nine landings, four exposed CAS moves, zero exposed reds. §31: ≈56%
 wall-clock reduction confirmed.
 
-**NEXT:** (1) the ES spine trains — compile ES-1.. per `laneFPC-census.md`
-and the ES volume's declared serialization (two trains, 4+3 or 3+4; flag
-waves are boundaries; census-red declarations per J-TE3-1; the §31 anchor
-preflight mandatory); (2) behind them: the §33 codeOnly() micro-act + the
+**⚠ CORRECTION to the line below (chair, ~14:30): the census says ES is
+mostly LANDED (9 whole; only ES-6b unchartered) — "ES spine trains" was the
+chair's stale shorthand.** The real remaining bulk: WY 0/7 · WF 0/10 ·
+POP 0/8 · INT 0/8 · HB 0/10 · WC 0/17 · EP 0/6, plus GR-5/6/7, TR tails,
+IN tails, CW 3 dark, ES-6b.
+**LIVE (~14:30): Lane TC5 (Opus) DERIVES + COMPILES THE NEXT TRAIN** from
+`6784bf62`: step 1 proposes the target (≤4 same-volume unblocked waves per
+FP §5 dependency order + the census; two rejected alternatives named);
+step 2 compiles it in full §28 form. Deliverables → scratchpad `laneTC5-*`
+(TARGET-DERIVATION · TRAIN-PLAN · member packets · report). The chair RULES
+the target at collection — the lane's pick is a proposal, never an authority.
+
+**NEXT (superseded phrasing):** (1) the next FP trains per the derivation; (2) behind them: the §33 codeOnly() micro-act + the
 capsule HOT_FILES parse fix as one infra micro-train; (3) onward through the
 85-wave §27 inventory (WY/WF/POP/INT → HB/WC/EP), soak only after everything.
 OQ-1 (`honored_by_silence`) and the `.nvmrc`/ciCheckParity anomaly stand
