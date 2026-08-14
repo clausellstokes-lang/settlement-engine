@@ -1183,3 +1183,29 @@ Operative reading (chair, vetoable):
 3. **The seamless-resume directive tightens to every-tick currency**: the hand note
    and ledger are refreshed at every dispatch, collection, landing, ruling, AND
    keeper tick, so a window death at any moment costs at most one partial lane turn.
+
+## §26 · IP-PROTECTION ARCHITECTURE ASK (owner, 2026-08-14 ~02:25, in-chat)
+
+Owner, verbatim intent: local-CPU processes could let savvy users decode/clone the
+code, architecture, and tuning; asks for thoughts on prevention, including moving
+"the essentials and key pieces" server-side.
+
+Chair ruling (vetoable, grounded in the MEASURED 2026-08-07 exposure audit): the
+blanket engine move is REFUSED again on the measured grounds (destroys instant
+local generation, the determinism experience, and the local-compute margin
+structure; minification cannot hide tuning — 90.2% of constants ship as object
+keys; obfuscation taxes first paint forever and buys weeks). ADOPTED for
+architecture instead, in order: (1) the cheap hardening now-ish — a CI assertion
+pinning the no-sourcemaps default (owed since 08-07); (2) STATIC corpus
+watermarking (salted distinctive phrasings + 2-3 correct-but-arbitrarily-precise
+constants) — static, never per-account, because per-account variation breaks
+seed-address identity (THE PROMISE); prose salting moves output bytes so it lands
+with the post-soak composition repairs, BEFORE the tuning signature; the constant
+salts ride the tuning act itself; (3) server-side enforcement of the three
+ADVISORY paywalls (PDF export right, premium chapter, Instant World) — artifact
+assembly moves server-side, the simulation does not; own gated wave, likely
+post-soak; (4) OPTIONAL post-launch tier architecture: "cloud worlds" — world
+advances resolved server-side for connected/paid accounts (the engine is headless
+and Node-runnable today), aligning secrecy, enforcement, and sync; a design doc,
+not a pre-launch act. Corpus copyright registration is a LEGAL item — owner
+carve-out BY NATURE, queued for counsel, not self-ruled.
