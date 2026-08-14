@@ -211,6 +211,58 @@ can reach, plus its own wave-specific hazards.
   `smoke:boot`. The bare full gate does not subsume it.
 - **HZ-PIPEEXIT** — §P7.
 - **HZ-MUTANTNOOP / HZ-TESTVACUITY** — §P6.
+- **HZ-UNANCHOREDNEGATIVE — the §31 preflight, and it binds new ASSERTIONS, not just new
+  files.** OWNER_DECISION_QUEUE §31 ruling 2: *"every new acceptance file runs the
+  negative-assertion anchor walker focusedly BEFORE its member proof is declared green."*
+  Both of the first two trains redded their first terminal gate on this one class.
+  **MEASURED MECHANISM** — executed read at `79ab59b4` of the walker the preflight command
+  below names: `SCAN_ROOTS = ['tests']`, the scanned matchers are `not.toContain` /
+  `not.toMatch` / `not.toHaveProperty`, and the per-file ceiling is
+  `FROZEN_UNANCHORED_NEGATIVES[file] ?? READMITTED_GENERATION_FACING[file] ?? 0`.
+  ⛔ **A file in neither ledger has a ceiling of ZERO** — so a bare negative reds the walker
+  in an EXISTING file exactly as it does in a new one. Read the obligation as binding on
+  every **new negative assertion**, wherever it lands.
+  **TO COMPLY**, one of: route through `tests/helpers/anchoredNegatives.js`
+  (`expectPresentThenAbsent` / `expectAbsentWithAnchor`) **called by name on the same
+  line** — an alias or a wrapper is not recognised; or carry
+  `// anchored: <why this cannot go vacuous>` on the assertion line **or the line
+  immediately above it**, with the marker on the **last** line of a multi-line comment.
+  **THE PREFLIGHT COMMAND** (bare, in-shell, never piped), run before the member declares
+  green:
+  `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js ; echo TRUE_EXIT=$?`
+  ⛔ Never raise a ceiling and never add a file to either ledger to finish a packet — the
+  walker's own instruction is: never raise a number; never add a file.
+
+> **HZ-NONCODETOKENSCAN — a raw-source scan reads prose and quoted strings as evidence, and
+> it misfires in BOTH directions (OWNER_DECISION_QUEUE §38.3).** Before writing or moving
+> any source-scanning walker, **state which question the scan asks**, because the answer
+> decides the source it must read:
+>
+> | The scan asks | Read | Why |
+> |---|---|---|
+> | "does this file **execute** X?" | `codeOnly(src)` | a token in a comment, a JSDoc block, a doc string, or a data-table string literal is not an execution |
+> | "does this file **import or register** X?" | RAW source | the evidence *is* a quoted module specifier, and `codeOnly` blanks string contents |
+>
+> `codeOnly` lives at `tests/lint/engineGatedRuleKeys.walker.test.js` and is imported by ten
+> other test files. It blanks comments **and string/template contents** while preserving
+> every byte offset; `${...}` expressions are kept, because they are code.
+>
+> ⚠⚠ **MEASURED IN BOTH DIRECTIONS — and the figures live in the measuring member's packet,
+> never here**, because a preamble carries no per-wave figure. Over the `src/domain` corpus a
+> raw `\.institutions\b` scan enrolled non-readers off quoted data-table strings — a
+> `receiptField:` path and a canon-path literal — both of which `codeOnly` excludes. In the
+> same corpus, routing the **compliance** half through `codeOnly` would have flipped readers
+> the other way, most of them because their only compliance evidence is the import specifier
+> `from '…/institutionRoster.js'` — which is a string. The same blanker that cures the first
+> misfire causes the second.
+>
+> ⛔ **A mixed scan is therefore lawful and is the normal shape** — one arm on `codeOnly`,
+> one on raw — but the asymmetry is **declared in the file with its reason**, never left for
+> a later reader to discover by reddening.
+>
+> ⚠ A third face, recorded: a JSDoc `@typedef` naming a guard token as a **type field**
+> greens a compliance scan that reads raw source. Two live instances are docketed; both
+> filter correctly in code, so the defect is vacuous evidence rather than a wrong verdict.
 
 Run **both** the hazard-registry and pre-mortem validators. Premortem warnings
 are dispositions to verify, never waivers. A new working warning whose cure lies
@@ -250,6 +302,9 @@ revert is exactly the parallel-session hazard the dirty-tree guard refuses.
   test may not build its expected side from the code under test.
 - ⛔ A multi-line `// anchored:` marker counts only if its **last** line carries
   the marker, and the anchor must be the line **immediately above**.
+- ⛔ A **new negative assertion is not proved until the anchor walker is green** — the §P5
+  HZ-UNANCHOREDNEGATIVE preflight runs BEFORE the member declares green, and a file in
+  neither anchor ledger carries a ceiling of zero however old that file is.
 
 ---
 
@@ -319,6 +374,27 @@ stops — **without expanding or repairing** — when:
     migration, marketplace, paid-policy, or legal work would begin. **None of
     these is ever implied by an implementation packet**, and
     `DESIGN_IP_PROTECTION.md` §5 refuses the first three by name.
+16. a **delete, retire, remove, or strike clause** would execute without an executed
+    consumer census proving the target dead — the law binding that clause is stated in
+    full immediately below this list;
+
+> **THE DELETE-CLAUSE LAW (OWNER_DECISION_QUEUE §38.4).** A charter's delete, retire,
+> remove, or strike clause **executes ONLY after an executed consumer census proves the
+> target dead.** The census is run by the member that would perform the deletion, at its own
+> verified base, and its receipt names the walked corpus, the denominator, and every
+> surviving consumer by path. ⛔ A clause is not a measurement. A charter sentence saying a
+> thing is dead is a **premise to be tested**, never a licence to delete — and when the
+> census refutes it, **the code wins and the packet stops**, with the clause struck or
+> re-aimed at a named derived subset rather than obeyed.
+>
+> ⚠ **Three same-shape refutations on 2026-08-14 are why this is law and not advice**:
+> HB-1's `martialMoves` retirement (a live war-chooser behaviour change), gr-6's war-opener
+> operand (never evaluated — a short-circuit, with the file's own waiver note beside it),
+> and HB-1's deleted disjunct (feeding two ratified same-seed goldens). Each was caught by
+> an executed census; none was visible in the charter prose.
+>
+> ⭐ **A deletion whose census comes back CLEAN still records the census** — the receipt is
+> what lets the next wave trust the absence instead of re-deriving it.
 
 The STOP report contains the smallest measured contradiction, the evidence, and a
 proposed packet split. **It contains no speculative repair.**

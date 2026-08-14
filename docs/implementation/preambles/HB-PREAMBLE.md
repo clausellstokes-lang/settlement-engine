@@ -136,6 +136,38 @@ row* (Q4) and never prices the *inclusion ratchet*, which fires four waves earli
 | H-G | **Two spellings of one fact** (R13 / the arity-uniqueness lesson) | A symbol carrying two dispositions, or two arities, is a RED. Where the volume itself carries two spellings, the packet resolves it explicitly and records the resolution — it never picks one silently. |
 | H-H | **Naked-claim doc debt** | Since `32f4e520` the naked-claim debt is PER-CLAIM: a new claim in any `docs/**.md` mints a new key and can red a GREEN test the ratchet cannot absorb. Every HB packet sentence that states a figure carries its executed receipt inline, and no HB document spells a phrase in `tests/docs/enforcement-claims.test.js`'s `CLAIM_RE` without a resolvable `@enforced-by` tag within three lines. |
 | H-I | **CHECK-GIT-FIRST** | Mandatory on every shared file. The war lane's files (`settlementStrategy`, `settlementPolitics`) are the estate's most contended; the wave serializes against any in-flight war wave. |
+| H-J | **Non-code token scans** (OQ §38.3) | A source-scanning walker states which question it asks BEFORE it is written or moved; the class and its two directions are set out in the block immediately below this table. |
+
+> **HZ-NONCODETOKENSCAN — a raw-source scan reads prose and quoted strings as evidence, and
+> it misfires in BOTH directions (OWNER_DECISION_QUEUE §38.3).** Before writing or moving
+> any source-scanning walker, **state which question the scan asks**, because the answer
+> decides the source it must read:
+>
+> | The scan asks | Read | Why |
+> |---|---|---|
+> | "does this file **execute** X?" | `codeOnly(src)` | a token in a comment, a JSDoc block, a doc string, or a data-table string literal is not an execution |
+> | "does this file **import or register** X?" | RAW source | the evidence *is* a quoted module specifier, and `codeOnly` blanks string contents |
+>
+> `codeOnly` lives at `tests/lint/engineGatedRuleKeys.walker.test.js` and is imported by ten
+> other test files. It blanks comments **and string/template contents** while preserving
+> every byte offset; `${...}` expressions are kept, because they are code.
+>
+> ⚠⚠ **MEASURED IN BOTH DIRECTIONS — and the figures live in the measuring member's packet,
+> never here**, because a preamble carries no per-wave figure. Over the `src/domain` corpus a
+> raw `\.institutions\b` scan enrolled non-readers off quoted data-table strings — a
+> `receiptField:` path and a canon-path literal — both of which `codeOnly` excludes. In the
+> same corpus, routing the **compliance** half through `codeOnly` would have flipped readers
+> the other way, most of them because their only compliance evidence is the import specifier
+> `from '…/institutionRoster.js'` — which is a string. The same blanker that cures the first
+> misfire causes the second.
+>
+> ⛔ **A mixed scan is therefore lawful and is the normal shape** — one arm on `codeOnly`,
+> one on raw — but the asymmetry is **declared in the file with its reason**, never left for
+> a later reader to discover by reddening.
+>
+> ⚠ A third face, recorded: a JSDoc `@typedef` naming a guard token as a **type field**
+> greens a compliance scan that reads raw source. Two live instances are docketed; both
+> filter correctly in code, so the defect is vacuous evidence rather than a wrong verdict.
 
 ## §P3 · THE §31 ANCHOR PREFLIGHT — MANDATORY, PER NEW TEST FILE
 
@@ -275,6 +307,27 @@ An HB executor STOPS and reports — never invents, never renegotiates — on an
    authored outside `HABIT_TUNING`.
 7. **A governed-path move** where the packet declared none.
 8. **Porcelain surprise.** Foreign WIP in a manifest file: stop, report, preserve.
+9. a **delete, retire, remove, or strike clause** would execute without an executed
+   consumer census proving the target dead — the law binding that clause is stated in
+   full immediately below this list;
+
+> **THE DELETE-CLAUSE LAW (OWNER_DECISION_QUEUE §38.4).** A charter's delete, retire,
+> remove, or strike clause **executes ONLY after an executed consumer census proves the
+> target dead.** The census is run by the member that would perform the deletion, at its own
+> verified base, and its receipt names the walked corpus, the denominator, and every
+> surviving consumer by path. ⛔ A clause is not a measurement. A charter sentence saying a
+> thing is dead is a **premise to be tested**, never a licence to delete — and when the
+> census refutes it, **the code wins and the packet stops**, with the clause struck or
+> re-aimed at a named derived subset rather than obeyed.
+>
+> ⚠ **Three same-shape refutations on 2026-08-14 are why this is law and not advice**:
+> HB-1's `martialMoves` retirement (a live war-chooser behaviour change), gr-6's war-opener
+> operand (never evaluated — a short-circuit, with the file's own waiver note beside it),
+> and HB-1's deleted disjunct (feeding two ratified same-seed goldens). Each was caught by
+> an executed census; none was visible in the charter prose.
+>
+> ⭐ **A deletion whose census comes back CLEAN still records the census** — the receipt is
+> what lets the next wave trust the absence instead of re-deriving it.
 
 ## §P8 · CAPSULE ADMISSIBILITY AND THE RE-EXECUTION LAW
 
