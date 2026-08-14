@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "stampedAt": "770167c5",
+  "stampedDate": "2026-08-14",
+  "method": "hand-stamped by the chair at the GR-4B-IIIB flip from the landing receipts; the generator script is a queued infrastructure wave (DESIGN_BUILD_EFFICIENCY.md \u00a73, \u00a78)",
+  "consumptionLaw": "citable as executed ONLY by a compiler whose verified base is exactly stampedAt; rows a manifest touches are always re-executed",
+  "figures": {
+    "lightingCensus": "2415/365/2050/20008/5641",
+    "runtimeTests": 28021,
+    "frozenKnownFailures": 16,
+    "titleCensus": 485,
+    "killList": "85/69/167/163",
+    "osrFindings": 1998,
+    "typecheckRatchet": "173/173",
+    "strictDomainRatchet": "1134/1134",
+    "hotFiles": {
+      "src/components/OutputContainer.jsx": "599/600",
+      "src/domain/worldPulse/peaceTerms.js": "797/800",
+      "src/domain/worldPulse/informationStatecraft.js": "780/800"
+    },
+    "flagManifestRows": 16,
+    "grammarKindRegistryRows": 11,
+    "validatePackets": "35 packets / 0 READY",
+    "voiceMechanicsBankedArms": 4
+  }
+}

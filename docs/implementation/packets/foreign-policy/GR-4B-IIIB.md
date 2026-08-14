@@ -1,6 +1,6 @@
 # Foreign Policy / GR-4B-IIIB — the open-question dossier line
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `2dd09360e63fcca2b278dcf4d3e9c7f949434e55`
 - **Base measured:** 2026-08-14 ("docs: finish A-22 succession exemplar cure")
@@ -729,3 +729,23 @@ outputs are quoted in the drafting report beside this file.
   `129 passed / 4 failed (133)`; all four failures are
   `tests/copy/voiceMechanics.test.js` arms already present by name in
   `scripts/.test-ratchet-baseline.json`.
+
+## 13. Executed landing receipt — 2026-08-14
+
+Implementation `770167c5`, direct child of promotion `cdd4bf52`, exactly the
+ten manifest paths at **+100/-25** (tracked eight) plus the two CREATEs. The
+chair independently re-ran B1-B8 (8/8, TRUE_EXIT=0) and verified the lane's
+completion receipt at SHA-256
+`18b8b135f24bdeba5e17134587e0e87ba970320a49259b6cc60eeb45b42429bf`
+(scratchpad `laneIB-completion-receipt.md`, 452 lines — the full figures live
+there and in the commit body). Census landed exactly as reserved:
+`2415/365/2050/20008/5641`; runtime `28021` with the frozen ceiling `16`;
+bare `check:tail` TRUE_EXIT=0; separate `smoke:boot` exit 0 (516/516 chunks).
+Chair rulings at collection: J1 RATIFIED (document-order assertion for the
+beneath-the-age-line pin — additive-only constraint outranks a testid edit);
+the M4/M6 first-pass vacuity disclosures RATIFIED as cured, with M4's finding
+recorded: the ledger is one-instrument-per-court-pair (pairKey derives from
+the parties at peaceTermsDocument.js), so the treaty-key guard is
+defence-in-depth on the read-model path — do not "simplify" it away. The
+gate's un-anchored-negative/bare-seed-loop catch was cured by habitat removal,
+never by escape hatch. No soak started.
