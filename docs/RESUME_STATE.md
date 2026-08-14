@@ -63,9 +63,18 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~03:05 EDT) — GR-4B-IIIB is READY at `cdd4bf52`,
-# DISPATCH SEALED, Lane IB (Opus) IMPLEMENTING; ⛔ SEALED SESSION — nothing else
-# lands on the build branch until IB lands
+# ⭐⭐ CURRENT (2026-08-14 ~04:10 EDT) — §27 BUILD-EVERYTHING ORDERING RULED;
+# GR-4B-IIIB sealed session in flight; ⛔ nothing else lands until IB lands
+
+**⭐⭐ §27 (owner, ~04:05): "build everything, diagnostic soak, fix, full soak,
+tune."** EVERY declared wave builds DARK before the first diagnostic soak —
+§3h step 1 restored literally; §22's near-terminal reading and §24 op-item 4
+SUPERSEDED; the chair's launch-scope fork is MOOT. The pre-soak inventory is
+the WHOLE declared program (~95+ waves at the 08-07 vintage; Lane FPC is
+re-deriving the exact per-family table now → `laneFPC-census.md`). The build
+resumes at scale under §25's lane law after the current sealed session; next
+build order derives from FP §5 dependency order (ES-1 unblocked since SP-D).
+IP volume §4 corrected by pointer to §27.
 
 **GR-4B-IIIB PROMOTED at `cdd4bf52`** (packet + INDEX READY-27 row + surgical
 manifest append; validate:packets **35 packets / 1 READY, TRUE_EXIT=0**). Chair

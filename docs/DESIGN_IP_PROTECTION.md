@@ -201,6 +201,14 @@ initial generation stays local and instant, and only the advance loop moves.
 
 ## §4 · The sequencing table (relative to the ruled tail)
 
+> ⚠ **CORRECTED 2026-08-14 by OWNER_DECISION_QUEUE §27 (build-everything
+> ordering):** rows 2-5 no longer imply the diagnostic soak follows the GR-4b
+> tail directly — EVERY declared program wave builds first, then the soak. The
+> IP waves' own slots are unchanged: IP-1 during the build phase, IP-2a in the
+> post-diagnostic-soak fix window, IP-2b at the tuning signature, IP-3/IP-4
+> post-launch. §27 is the ordering authority; this table stays for the IP
+> rows' relative positions only.
+
 | Order | Act | Output-moving? | Slot |
 |---|---|---|---|
 | 1 | GR-4B-IIIB lands (in flight) | yes (declared, packeted) | now, sealed session |

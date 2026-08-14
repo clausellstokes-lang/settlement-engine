@@ -1228,3 +1228,31 @@ endgame-stability and infra-cost grounds, but rises in priority within §26; (4)
 the deterrence economics: the cloning window that hurts is post-success, by which
 time corpus growth, release velocity, accumulated user worlds, and the watermark
 trap compound — speed is the cheapest deterrent and is already the plan.
+
+## §27 · THE BUILD-EVERYTHING ORDERING (owner correction, 2026-08-14 ~04:05, in-chat)
+
+Owner, verbatim: **"diagnostic soak is after everything is built. its build
+everything, diagnostic soak, fix, full soak, tune."**
+
+Operative consequences (chair, recorded):
+
+1. **§3h step 1 is restored in its literal sense.** "Build waves to completion —
+   every flag DARK" means EVERY DECLARED WAVE of the compiled program builds
+   before the first diagnostic soak. The 08-13/08-14 sessions' near-terminal
+   reading of §22 ("reach a clean, green, ledger-current build-complete-dark
+   SHA" as the CURRENT surface) and §24 operative-reading item 4 ("nothing
+   forces every declared future wave to precede the first soak") are
+   SUPERSEDED by this correction.
+2. **The chair's 08-14 launch-scope recommendation is MOOT** — there is no
+   pre-build-complete launch fork. The sequence to launch is: build everything
+   → diagnostic soak → fix → full (terminal) soak → tune → the §3h tail's
+   remaining steps. The owner's walk, the tuning signature, and each push
+   remain their own gates, unchanged.
+3. **The build program resumes at scale.** The pre-soak inventory is the whole
+   declared program (the fresh FPC census defines it exactly); packet-grain
+   dispatch under §25's lane law (two build writers max) continues as the
+   delivery mechanism. In-flight work is unchanged and already conforms:
+   GR-4B-IIIB, the GAP-1 walker cure, the GR-4b-ii train, and IP-1 are all
+   build-phase acts. IP-2a still rides the post-diagnostic-soak fix window;
+   IP-2b still rides the tuning signature (DESIGN_IP_PROTECTION.md §4's rows
+   5-6 are corrected by pointer to this section).
