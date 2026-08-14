@@ -84,7 +84,7 @@ function grammarKindRow(kind, significance, audience, section, requiredSlots, co
 }
 
 /**
- * The governed rows. `section` is non-null on the five HERALD kinds only; the clause,
+ * The governed rows. `section` is non-null on the six HERALD kinds only; the clause,
  * ending, dossier and chip pools are rendered INTO another surface and file nowhere of
  * their own (a section for them would claim a desk they never reach).
  * @type {ReadonlyArray<Readonly<GrammarRegistryEntry>>}
@@ -169,12 +169,22 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
     ['settlement', 'counterpart'], [], ['settlement', 'counterpart'],
     ['npc', 'settlement'], [],
   ]),
+  // GR-4b-ii-W2 — THE HONOR TERMINAL, ANSWERED ALOUD. A treaty lifecycle beat, so it takes
+  // the treaty cohort's trade desk exactly as its three GR-4 siblings do, and unlike
+  // `succession_question_open` it DOES carry a desk: it is a beat in the feed, not a line
+  // rendered into the treaty document, so it owes the full five registration homes. Its
+  // party slots are bound by the composer from the question and the persisted parchment,
+  // not through the obligee/obligor role table. It declares NO contexts: every family is
+  // honest at a dismissal, because the dismissal is the only moment this kind speaks.
+  grammarKindRow('reaffirmed', 'notable', 'public', 'trade', [
+    ['npc'], ['settlement'], ['settlement', 'counterpart'], [], [], [], ['npc'],
+  ]),
 ]);
 
 /** The exact governed pool set. */
 export const GRAMMAR_KINDS = Object.freeze(GRAMMAR_KIND_REGISTRY.map((row) => row.kind));
 
-/** The five rows that reach the Herald as kinds of their own. */
+/** The six rows that reach the Herald as kinds of their own. */
 export const GRAMMAR_HERALD_KINDS = Object.freeze(
   GRAMMAR_KIND_REGISTRY.filter((row) => row.section !== null).map((row) => row.kind),
 );

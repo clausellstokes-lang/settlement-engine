@@ -151,7 +151,10 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // compelled-books beat files the treaty cohort's trade desk by its OWN token.
 // +1 at GR-4b: `disavowed_by_succession`, on the same reading and the same desk.
 // +1 at GR-4b-iii-a: `succession_question_opened`, the pending instrument's public beat.
-const ROUTED_TOKENS = 377;
+// +1 at GR-4b-ii-W2: `reaffirmed`, that question's HONOR terminal answered aloud — a
+// desk-BEARING row, so it moves this figure and REGISTERED_KIND_COUNT together and leaves
+// the registered-minus-routed difference below untouched at 7.
+const ROUTED_TOKENS = 378;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
 // +1 at GR-4b-iii-a: the tenth (`succession_question_opened`), a `notable` row.
@@ -164,7 +167,10 @@ const ROUTED_TOKENS = 377;
 // difference by exactly one — that difference is the census's honesty check, and it is
 // asserted below at its current value rather than assumed constant. A kind routed WITHOUT a
 // registry row (or a desk-bearing kind registered without routing) still breaks it.
-const REGISTERED_KIND_COUNT = 110;
+// +1 at GR-4b-ii-W2: the twelfth (`reaffirmed`), a `notable` row that DOES carry a desk —
+// the exact opposite of the row above it, and the reason both censuses move together here
+// while the difference below stays at 7.
+const REGISTERED_KIND_COUNT = 111;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

@@ -102,6 +102,7 @@ export const KIND_SECTION = Object.freeze({
   // diverges to trade with the cohort, recorded in KIND_SECTION_DIVERGENCES.
   disavowed_by_succession: 'courts',
   succession_question_opened: 'courts',
+  reaffirmed: 'courts',
   vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
   commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
   npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',

@@ -21,13 +21,13 @@
  * instead of introducing a shared normalized result envelope.
  */
 import {
+  appendWizardNewsEntries,
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
 import {
   canonizeWorldState,
   ensureWorldState,
-  updateProposalStatus,
 } from '../domain/worldPulse/worldState.js';
 import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import {
@@ -1046,8 +1046,16 @@ export async function runDismissWorldPulseProposal({
   proposalId,
   isSessionCurrent,
 }) {
-  const { extractProposalDecision } = await import('../lib/pulseFingerprint.js');
-  // The telemetry import yields. Repeat owner and interval guards before writing.
+  // The reaffirmed voice rides a DYNAMIC edge, mirroring the apply road: the store's eager
+  // first-paint chunk must not gain the pact-grammar corpus.
+  const [
+    { extractProposalDecision },
+    { dismissSuccessionQuestionWithVoice },
+  ] = await Promise.all([
+    import('../lib/pulseFingerprint.js'),
+    import('../domain/worldPulse/treatySuccessionReaffirmedVoice.js'),
+  ]);
+  // Both imports yield. Repeat owner and interval guards before writing.
   if (!isSessionCurrent()) return null;
   if (get().isAdvanceInFlight(campaignId) || get().getPausedAdvance(campaignId)) {
     return null;
@@ -1068,12 +1076,18 @@ export async function runDismissWorldPulseProposal({
     // none may rewrite the authoritative terminal decision or its timestamp.
     if (!currentProposal || currentProposal.status !== 'pending') return;
     const now = new Date().toISOString();
-    campaign.worldState = updateProposalStatus(
-      ensureWorldState(campaign.worldState, campaign),
-      proposalId,
-      'dismissed',
-      { dismissedAt: now },
-    );
+    // The leaf performs this exact transition through the SAME status writer and returns
+    // the zero-or-one beat it earns. `tick` comes off the normalized world, never a clock.
+    const world = ensureWorldState(campaign.worldState, campaign);
+    const voiced = dismissSuccessionQuestionWithVoice(world, proposalId, world.tick, now);
+    campaign.worldState = voiced.worldState;
+    // Presentation never vetoes mechanics, and an unaddressable dismissal leaves the feed
+    // untouched BY REFERENCE — an ordinary actor-major dismissal stays byte-identical.
+    if (voiced.newsEntries.length) {
+      campaign.wizardNews = appendWizardNewsEntries(
+        campaign.wizardNews, voiced.newsEntries, { now },
+      );
+    }
     proposal = campaign.worldState.proposals
       .find(item => item.id === proposalId) || null;
     // The proposal is a draft proxy here; flatten it before set() returns.

@@ -307,7 +307,7 @@ describe('GR-4b-iii-a — the question-opening voice', () => {
     clock.mockRestore();
   });
 
-  it('apply, dismiss, expiry, overflow, undo, and replay never mint terminal or duplicate opening voice', async () => {
+  it('the treaty-stage resolver mints no terminal or duplicate voice on apply, dismiss, expiry, overflow, undo, or replay', async () => {
     const opening = resolve(world());
     const [row] = proposalsOf(opening);
     expect(beatsOf(opening)).toHaveLength(1);
@@ -328,6 +328,17 @@ describe('GR-4b-iii-a — the question-opening voice', () => {
       .toBeTruthy();
     const dismissedWorld = campaignWorld(dismissStore);
     expect(proposalsOf({ worldState: dismissedWorld })[0].status).toBe('dismissed');
+    // ⭐ CR-GR4B-19 — THE SURFACE THIS CASE ACTUALLY GUARDS. Every assertion here runs
+    // through the treaty-stage RESOLVER, so GR-4b-ii-W2's store-side terminal beat would
+    // have left them all green while the old title called the dismiss road silent — a live
+    // vacuity rather than a red. The dismiss leg therefore reads the STORE's own feed
+    // directly: exactly one `reaffirmed` entry is minted there, by that road and no other,
+    // while the replay below proves the resolver still mints nothing.
+    const dismissedFeed = dismissStore.getState().campaigns[0].wizardNews.entries;
+    const reaffirmed = dismissedFeed.filter((entry) => entry.impactKind === 'reaffirmed');
+    expect(reaffirmed).toHaveLength(1);
+    expect(reaffirmed[0]).toMatchObject({ kind: 'reaffirmed', tick: TICK, section: 'trade' });
+    expect(dismissedFeed).toHaveLength(1);
 
     const aged = {
       ...opening.worldState,

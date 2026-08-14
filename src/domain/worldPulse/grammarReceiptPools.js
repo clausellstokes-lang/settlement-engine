@@ -10,7 +10,7 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries the eleven governed pools wired through GR-4b-iii-b.
+ * carries the twelve governed pools wired through GR-4b-ii-W2.
  *
  * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
  * governed GR-0 and GR-4 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
@@ -114,8 +114,10 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
   ],
   // GR-4b-α — THE SUCCESSION DISAVOWAL, the one `# GR-4` ending whose producer is landed,
   // persisted AND reachable from a mount this wave owns. GR-4b-iii-a now wires the one honest
-  // question-opening pool immediately below; the terminal HONOR pools remain GR-4b-ii's and
-  // `credibility_charge` remains GR-4c's. ⛔ `repudiated` is authored here too and deliberately
+  // question-opening pool immediately below; GR-4b-ii-W2 wires `reaffirmed`, the HONOR terminal
+  // reached by an ANSWER, at the foot of this object, while `honored_by_silence` (the terminal
+  // reached by SILENCE, whose expiry road has no transition site to mount on) and
+  // `credibility_charge` remain deferred. ⛔ `repudiated` is authored here too and deliberately
   // NOT wired — CR-GR4B-8: the open road already speaks
   // a fully-addressed `treaty_breached` beat, so a second desk kind would double-voice it.
   //
@@ -157,6 +159,23 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `Until ${x.settlement} answers, the treaty with ${x.counterpart} remains live under the terms already written.`,
     (x) => `Since ${x.npc} left the seat, ${x.settlement}'s treaty question has remained open and the treaty itself in force.`,
     'If the seat gives no answer, the oath stands.',
+  ],
+  // GR-4b-ii-W2 — THE HONOR TERMINAL, ANSWERED ALOUD. The same instrument the two pools
+  // above open and refuse, reaching the terminal a DM's dismissal types as HONOR. ⭐ `{npc}`
+  // is the FALLEN holder on the acting court's oath stamp; the seat that ANSWERS is never
+  // named, because no honor terminal records who spoke. Corrected wholesale at A-23 /
+  // CR-GR4B-16: no line names a duration, a season, a due date or a wait, because no honor
+  // terminal stamps a world tick, and none claims a successor, a muster, a market or the
+  // words used. What separates it from `honored_by_silence` is the one distinction the
+  // record does carry — an answer entered, rather than a lapse.
+  reaffirmed: [
+    (x) => `The new seat will keep the word ${x.npc} gave.`,
+    (x) => `The new court of ${x.settlement} has said aloud what it might have left unsaid: the oath stands.`,
+    (x) => `Between ${x.settlement} and ${x.counterpart} nothing on the parchment moved; the movement was in the answering.`,
+    'Silence would have kept the oath just as well; the seat answered anyway.',
+    'The oath changed hands and did not change.',
+    'The question is closed by an answer and not by a lapse, and the record keeps the difference.',
+    (x) => `The oath is still ${x.npc}'s, and the chair that owns it now never swore it.`,
   ],
   hollowed_detected: [
     (x) => `Hollowed and found out: the ${x.term} was kept on parchment and nowhere else.`,

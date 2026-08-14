@@ -167,6 +167,12 @@ const EXPECTED_VOICE = {
   disavowed_by_succession: null,
   // GR-4b-iii-a is the unanswered opening beat from the same authored treaty cohort.
   succession_question_opened: null,
+  // GR-4b-ii-W2 is that question's HONOR terminal, answered aloud — the same cohort and the
+  // same shape once more, and the beat that closes the docket the line above opened. No
+  // crier register fits an oath kept, and it must not borrow the trade crier merely because
+  // it shares the cohort's trade DESK (the desk FILES, the crier VOICES). Deliberately
+  // unvoiced (JUDGMENT, vetoable — the succession_question_opened precedent exactly).
+  reaffirmed: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

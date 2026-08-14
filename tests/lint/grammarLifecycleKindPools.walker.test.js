@@ -1,9 +1,9 @@
 /**
  * grammarLifecycleKindPools.walker.test.js — GR-0's phrased-kind walker.
  *
- * The census of the pact grammar's lifecycle voice: the exact eleven wired pools, their
+ * The census of the pact grammar's lifecycle voice: the exact twelve wired pools, their
  * frequency-scaled depth, their annex-verbatim text, the per-pool slot roles (one of them
- * INVERTED), the five Herald kinds' five joins, and the two pools this wave deliberately
+ * INVERTED), the six Herald kinds' five joins, and the two pools this wave deliberately
  * did NOT wire. It certifies presentation width only; it is not behavioural soak evidence.
  *
  * THE READER IS THE SHARED ONE. tests/helpers/receiptAnnex.js was EXTENDED with the
@@ -55,6 +55,10 @@ const EXPECTED = Object.freeze([
   // GR-4b-iii-b — the SAME question read later on the parchment itself. `n/a` and deskless
   // because it renders INTO the treaty document at two mounts and reaches no Herald.
   ['succession_question_open', 'n/a', 'public', null, 8],
+  // GR-4b-ii-W2 — that question's HONOR terminal, answered aloud. A BEAT in the feed rather
+  // than a line rendered into the document, so unlike the row above it carries a desk and
+  // owes the full five registration homes.
+  ['reaffirmed', 'notable', 'public', 'trade', 7],
 ]);
 
 /** SP-6's frequency-scaled floor. The `n/a` class is a DECLARED floor of six: a dossier
@@ -107,6 +111,7 @@ const GR4_SECTION = '# GR-4';
 const GR4_UNTIL = '# GR-5';
 const GR4_KINDS = new Set([
   'disavowed_by_succession', 'succession_question_opened', 'succession_question_open',
+  'reaffirmed',
 ]);
 
 function annexPool(kind) {
@@ -121,9 +126,9 @@ function annexPool(kind) {
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the eleven-pool census and every registry field are exact', () => {
+  test('the twelve-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(11);
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(12);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -172,7 +177,7 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
 
   test('every pool address resolves in the GRAMMAR volume, not a legacy forward', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
-    expect(address).toHaveLength(11);
+    expect(address).toHaveLength(12);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
@@ -229,10 +234,10 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
     expect(grammarSlotRoles('treaty_true_state_chip')).not.toEqual(DEFAULT_GRAMMAR_SLOT_ROLES);
   });
 
-  test('THE FIVE JOINS: all Herald kinds are phrased, routed, filed and desk-consistent', () => {
+  test('THE SIX JOINS: all Herald kinds are phrased, routed, filed and desk-consistent', () => {
     expect([...GRAMMAR_HERALD_KINDS])
       .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened',
-        'disavowed_by_succession', 'succession_question_opened']);
+        'disavowed_by_succession', 'succession_question_opened', 'reaffirmed']);
     for (const kind of GRAMMAR_HERALD_KINDS) {
       // JOIN 3 — the world phrase, so no projection can fall back to an engine token.
       expect(WHAT_PHRASES[kind], `${kind}: missing WHAT_PHRASES`).toBeTruthy();

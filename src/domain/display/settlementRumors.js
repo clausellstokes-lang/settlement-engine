@@ -266,6 +266,7 @@ export const WHAT_PHRASES = Object.freeze({
   treaty_disclosure_opened: 'a court opening its books to the party it signed with',
   disavowed_by_succession: 'a new seat refusing the oath the old one swore',
   succession_question_opened: 'a new seat weighing the oath the old one swore',
+  reaffirmed: 'a new seat keeping the oath the old one swore',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

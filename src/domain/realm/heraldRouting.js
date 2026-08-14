@@ -238,6 +238,8 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   disavowed_by_succession: 'trade',
   // GR-4b-iii-a — an unanswered instrument remains on the treaty cohort's own desk.
   succession_question_opened: 'trade',
+  // GR-4b-ii-W2 — the same instrument's HONOR terminal, answered aloud, on the same desk.
+  reaffirmed: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)
@@ -619,6 +621,10 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // GR-4b-iii-a: the letter files the court's question under `courts`; the Herald files
   // the still-live instrument with the treaty cohort (JUDGMENT, vetoable).
   succession_question_opened: 'trade',
+  // GR-4b-ii-W2: the letter files the answer to that question under `courts` beside the
+  // question itself; the Herald files the instrument it leaves standing with the treaty
+  // cohort (JUDGMENT, vetoable — one desk for the cohort, as for the five above).
+  reaffirmed: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.
