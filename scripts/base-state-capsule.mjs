@@ -39,12 +39,12 @@ const GUIDANCE_WALKER = 'tests/domain/guidanceRegistry.walker.test.js';
 const KILL_LIST = 'tests/design/deepCraftKillList.test.js';
 const VOICE_MECHANICS = 'tests/copy/voiceMechanics.test.js';
 
-/** The standing hot-file list and its ceilings (PACKET_STANDARD.md, "Hot files"). */
-const HOT_FILES = Object.freeze({
-  'src/components/OutputContainer.jsx': 600,
-  'src/domain/worldPulse/peaceTerms.js': 800,
-  'src/domain/worldPulse/informationStatecraft.js': 800,
-});
+const PACKET_STANDARD = 'docs/implementation/PACKET_STANDARD.md';
+
+/** A `| \`path\` | effective | ceiling | headroom |` row of the standing hot-file table. */
+const HOT_FILE_ROW_RE = /^\|\s*`([^`]+)`\s*\|\s*\d+\s*\|\s*(\d+)\s*\|\s*-?\d+\s*\|/gm;
+/** Any backticked table row in that section — the CANDIDATE count the parse must match. */
+const HOT_FILE_CANDIDATE_RE = /^\|\s*`[^`]+`\s*\|/gm;
 
 /** Paths whose dirt would make the stamp a lie. docs/ is excluded except the artifact itself,
  * because a landing legitimately stages its own promotion and ledger prose alongside this run. */
@@ -81,7 +81,7 @@ export const PROVENANCE = Object.freeze({
   osrFindings: figure('MEASURED', 'scripts/check-observed-shape-readers.mjs', 'stdout finding count'),
   typecheckRatchet: figure('MEASURED', 'scripts/check-full-typecheck.mjs', 'stdout errors/ceiling'),
   strictDomainRatchet: figure('MEASURED', 'scripts/check-domain-strict.mjs', 'stdout errors/ceiling'),
-  hotFiles: figure('MEASURED', 'eslint Linter max-lines', 'skipBlankLines + skipComments'),
+  hotFiles: figure('MEASURED', 'PACKET_STANDARD.md "Hot files" (ceilings) + eslint Linter max-lines (effective)', 'skipBlankLines + skipComments'),
   flagManifestRows: figure('MEASURED', 'src/domain/worldPulse/simulationRules.js', 'ENGINE_GATED_VIRTUAL_RULE_KEYS.length'),
   grammarKindRegistryRows: figure('MEASURED', 'src/domain/worldPulse/grammarNews.js', 'GRAMMAR_KIND_REGISTRY.length'),
   grammarReceiptsPools: figure('MEASURED', 'src/domain/worldPulse/grammarReceiptPools.js', 'GRAMMAR_RECEIPTS.length'),
@@ -230,6 +230,60 @@ function effectiveLines(row, relPath) {
   return hit ? Number(String(hit.message).match(/\((\d+)\)/)[1]) : 1;
 }
 
+/**
+ * The standing hot-file list, PARSED from its one canonical home — PACKET_STANDARD.md's
+ * "Hot files" table.
+ *
+ * ⛔ NEVER TRANSCRIBED. A second spelling of this table is exactly what let the capsule
+ * report three rows for a four-row list once the coordinator added convergence.js (GAP-1
+ * §14.5, deferral J-TE4-5): the constant this replaced was this file's ONE violation of its
+ * own one-canonical-truth law, and adding a fourth hardcoded row would have re-committed it.
+ *
+ * ⭐ Only the CEILING is taken. The table's stated Effective is a point-in-time coordinator
+ * measurement the tree legitimately moves away from — the standard's own rule is that a row
+ * leaves the list only when the file's measured headroom grows, a coordinator act — so the
+ * effective count is MEASURED here and never read from the table. A generator that threw on
+ * that drift would make the capsule un-generatable after any lawful edit to a hot file.
+ *
+ * Every arm throws, per this file's law that not one figure may be emitted as a default.
+ *
+ * @param {string} [row] the PROVENANCE row name, so a refusal names the figure it broke
+ * @param {string} [source] markdown to parse; defaults to the canonical home's bytes
+ * @returns {Record<string, number>} path -> ceiling, in table order
+ */
+export function hotFileCeilings(row = 'hotFiles', source) {
+  const markdown = source ?? readHome(row, PACKET_STANDARD);
+  // F1 — the section must exist exactly once. A renamed or duplicated heading must not
+  // silently yield an empty list.
+  const sections = markdown.split(/^## /m).filter((part) => part.startsWith('Hot files'));
+  if (sections.length !== 1) {
+    fail(row, `PACKET_STANDARD.md has ${sections.length} "## Hot files" sections, expected exactly 1`);
+  }
+  const section = sections[0];
+  // F3 — the candidate count is read INDEPENDENTLY of the row parse. ⭐ This is the arm that
+  // catches a malformed cell: without it a row whose ceiling is not a number drops out
+  // silently and the list shrinks by one, which is the precise failure this function exists
+  // to end, and which F2 (zero rows) can never see on a three-of-four list.
+  const candidates = [...section.matchAll(HOT_FILE_CANDIDATE_RE)].length;
+  const parsed = [...section.matchAll(HOT_FILE_ROW_RE)];
+  // F2 — an empty hot-file list emitted as {} is the silently-zeroed row this file forbids.
+  if (parsed.length === 0) fail(row, 'the "Hot files" table parsed ZERO rows');
+  if (parsed.length !== candidates) {
+    fail(row, `the "Hot files" table has ${candidates} backticked row(s) but ${parsed.length}`
+      + ' parsed — a cell is malformed and the list would silently shrink');
+  }
+  /** @type {Record<string, number>} */
+  const ceilings = {};
+  for (const [, path, ceiling] of parsed) {
+    // F5 — two ceilings for one file has no honest resolution.
+    if (path in ceilings) fail(row, `the "Hot files" table names ${path} twice`);
+    // F4 — a rotted path would measure nothing and emit a default.
+    if (!existsSync(join(ROOT, path))) fail(row, `the "Hot files" table names a path that does not exist: ${path}`);
+    ceilings[path] = Number(ceiling);
+  }
+  return ceilings;
+}
+
 function ratchetBaseline(row) {
   const parsed = JSON.parse(readHome(row, RATCHET_BASELINE));
   if (!parsed?.entries || typeof parsed.totalTests !== 'number') fail(row, 'baseline lacks entries or totalTests');
@@ -273,7 +327,7 @@ export async function readAll(runtimeTests, io = {}) {
       /\((\d+) error\(s\), ceiling (\d+)\)/, shell),
     strictDomainRatchet: ratchetPair('strictDomainRatchet', 'scripts/check-domain-strict.mjs',
       /\((\d+) errors, ceiling (\d+)\)/, shell),
-    hotFiles: Object.fromEntries(Object.entries(HOT_FILES)
+    hotFiles: Object.fromEntries(Object.entries(hotFileCeilings('hotFiles'))
       .map(([path, ceiling]) => [path, `${effectiveLines('hotFiles', path)}/${ceiling}`])),
     flagManifestRows: countOf('flagManifestRows', rules.ENGINE_GATED_VIRTUAL_RULE_KEYS),
     grammarKindRegistryRows: countOf('grammarKindRegistryRows', news.GRAMMAR_KIND_REGISTRY),

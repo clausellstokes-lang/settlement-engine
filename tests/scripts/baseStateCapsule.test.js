@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { Linter } from 'eslint';
 import {
-  FIGURE_ORDER, PROVENANCE, capsuleFrom, main, readAll,
+  FIGURE_ORDER, PROVENANCE, capsuleFrom, hotFileCeilings, main, readAll,
 } from '../../scripts/base-state-capsule.mjs';
 import { enumerateInvariants } from '../lint/mutationCoverage.shared.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -38,6 +38,7 @@ const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 const json = (rel) => JSON.parse(read(rel));
 
 const CAPSULE = 'docs/implementation/BASE_STATE.json';
+const STANDARD = 'docs/implementation/PACKET_STANDARD.md';
 const RATCHET_BASELINE = 'scripts/.test-ratchet-baseline.json';
 const LIGHTING = 'tests/lint/sovereigntyLightingContract.walker.test.js';
 const POOLS = 'tests/lint/kindPoolFloors.walker.test.js';
@@ -54,6 +55,20 @@ const CANNED = Object.freeze({
 const cannedShell = (row) => {
   if (!(row in CANNED)) throw new Error(`the battery has no canned stdout for ${row}`);
   return CANNED[row];
+};
+
+/**
+ * THIS FILE'S OWN read of the standing hot-file table — a split-and-match spelling, kept
+ * deliberately different from the generator's matchAll pair, per the header rule that no
+ * expectation here may be built out of the code under test.
+ */
+const tableCeilings = (markdown = read(STANDARD)) => {
+  const section = markdown.split(/^## /m).filter((part) => part.startsWith('Hot files'));
+  if (section.length !== 1) throw new Error('the battery could not locate the Hot files section');
+  return Object.fromEntries(section[0].split('\n')
+    .map((line) => line.match(/^\|\s*`([^`]+)`\s*\|\s*\d+\s*\|\s*(\d+)\s*\|/))
+    .filter(Boolean)
+    .map((m) => [m[1], Number(m[2])]));
 };
 
 /** THIS FILE'S OWN reader — deliberately a different engine from the generator's espree. */
@@ -78,10 +93,13 @@ async function mismatchesAgainstHomes(readings) {
   const receipts = await import('../../src/domain/worldPulse/grammarReceiptPools.js');
   const routing = await import('../../src/domain/realm/heraldRouting.js');
   const linter = new Linter({ configType: 'flat' });
-  const messages = linter.verify(read('src/domain/worldPulse/peaceTerms.js'), {
-    languageOptions: { ecmaVersion: 'latest', sourceType: 'module', parserOptions: { ecmaFeatures: { jsx: true } } },
-    rules: { 'max-lines': ['error', { max: 1, skipBlankLines: true, skipComments: true }] },
-  });
+  const effectiveOf = (rel) => {
+    const found = linter.verify(read(rel), {
+      languageOptions: { ecmaVersion: 'latest', sourceType: 'module', parserOptions: { ecmaFeatures: { jsx: true } } },
+      rules: { 'max-lines': ['error', { max: 1, skipBlankLines: true, skipComments: true }] },
+    }).find((m) => m.ruleId === 'max-lines');
+    return found ? Number(String(found.message).match(/\((\d+)\)/)[1]) : 1;
+  };
   // ⚠ THE CENSUS READ IS ANCHORED TO THE LIVE LINE ON PURPOSE, AND THE FIRST CUT OF IT WAS WRONG.
   // A per-key `files: (\d+)` search matches the RETAINED ANCESTRY-PIN COMMENTS above the live
   // constant — five of them, each a real prior tuple — so it read 2412/365/2047/19984/5638 off a
@@ -123,13 +141,24 @@ async function mismatchesAgainstHomes(readings) {
     stampedAt: 'feedface',
     stampedDate: '2026-08-14',
   };
-  const peaceTerms = Number(String(messages.find((m) => m.ruleId === 'max-lines').message).match(/\((\d+)\)/)[1]);
   const rows = Object.entries(expected)
     .filter(([key, value]) => readings[key] !== value)
     .map(([key, value]) => `${key}: generator ${readings[key]} vs home ${value}`);
-  if (readings.hotFiles['src/domain/worldPulse/peaceTerms.js'] !== `${peaceTerms}/800`) {
-    rows.push(`hotFiles.peaceTerms: generator ${readings.hotFiles['src/domain/worldPulse/peaceTerms.js']} vs home ${peaceTerms}/800`);
+  // ⚠⚠ `hotFiles` COUNTS AS EXACTLY ONE TOWARD `compared`, HOWEVER MANY ROWS IT COMPARES.
+  // A8 below asserts `Object.keys(readings).length - 1 === compared`, so widening this
+  // comparison's WEIGHT would red the perturbation arm; widening its COVERAGE does not.
+  // Coverage is what matters here: the capsule reported three rows for a four-row table for
+  // a whole wave because only peaceTerms was ever compared.
+  const homeCeilings = tableCeilings();
+  const mismatched = [];
+  for (const [path, ceiling] of Object.entries(homeCeilings)) {
+    const want = `${effectiveOf(path)}/${ceiling}`;
+    if (readings.hotFiles[path] !== want) mismatched.push(`${path}: generator ${readings.hotFiles[path]} vs home ${want}`);
   }
+  for (const path of Object.keys(readings.hotFiles)) {
+    if (!(path in homeCeilings)) mismatched.push(`${path}: emitted but absent from the standing table`);
+  }
+  if (mismatched.length) rows.push(`hotFiles: ${mismatched.join('; ')}`);
   return { rows, compared: Object.keys(expected).length + 1 };
 }
 
@@ -191,6 +220,45 @@ describe('base-state capsule generator', () => {
       expect(rows.join(' | '), `perturbing ${key} was invisible to the harness`)
         .toContain(key === 'hotFiles' ? 'hotFiles' : key);
     }
+  });
+
+  it('parses the hot-file ceilings out of PACKET_STANDARD, and refuses every malformed table', () => {
+    const mine = tableCeilings();
+    // ⚠⚠ THE VACUITY GUARD, AND IT IS NOT DECORATIVE. If both engines were broken the same
+    // way — the failure mode this file's header exists to prevent — `{}` would equal `{}`
+    // and the agreement below would be about nothing. Requiring this file's own read to
+    // find at least the four known rows FIRST is what makes the agreement evidence.
+    expect(Object.keys(mine).length, 'the table read nothing — this arm would pass vacuously')
+      .toBeGreaterThanOrEqual(4);
+    expect(hotFileCeilings()).toEqual(mine);
+    // …and the standing list is what the generator emits, not a second hand-kept copy.
+    expect(Object.keys(readings.hotFiles)).toEqual(Object.keys(mine));
+
+    const table = (...rows) => `# doc\n\n## Hot files\n\n| File | Effective | Ceiling | Headroom |\n|---|---:|---:|---:|\n${rows.join('\n')}\n\n## After\n`;
+    const good = '| `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |';
+    const other = '| `src/components/OutputContainer.jsx` | 599 | 600 | 1 |';
+    // F1 — absent, and duplicated: a renamed or doubled heading must not yield an empty list.
+    expect(() => hotFileCeilings('hotFiles', '# doc\n\n## Other\n')).toThrow(/hotFiles.*0 "## Hot files" sections/);
+    expect(() => hotFileCeilings('hotFiles', `${table(good)}## Hot files\n\n${good}\n`))
+      .toThrow(/hotFiles.*2 "## Hot files" sections/);
+    // F2 — zero rows parsed is the silently-zeroed figure this generator forbids outright.
+    expect(() => hotFileCeilings('hotFiles', table())).toThrow(/hotFiles.*parsed ZERO rows/);
+    // F3 — ⭐ THE STRUCTURAL CURE. A malformed ceiling cell drops one row out of an otherwise
+    // healthy table, which F2 can never see, and which is the exact shape of the bug this
+    // parse exists to end: the capsule shipped a three-of-four list for a whole wave.
+    expect(() => hotFileCeilings('hotFiles', table(good, '| `src/domain/worldPulse/convergence.js` | 798 | eight hundred | 2 |')))
+      .toThrow(/hotFiles.*2 backticked row\(s\) but 1 parsed/);
+    // F4 — a rotted path would measure nothing and emit a default.
+    expect(() => hotFileCeilings('hotFiles', table('| `src/domain/never-written.js` | 1 | 800 | 799 |')))
+      .toThrow(/hotFiles.*does not exist: src\/domain\/never-written\.js/);
+    // F5 — two ceilings for one file has no honest resolution.
+    expect(() => hotFileCeilings('hotFiles', table(good, good))).toThrow(/hotFiles.*names src\/domain\/worldPulse\/peaceTerms\.js twice/);
+    // …and the happy path over synthetic bytes, so the refusals above are not the only
+    // thing this arm can observe.
+    expect(hotFileCeilings('hotFiles', table(good, other))).toEqual({
+      'src/domain/worldPulse/peaceTerms.js': 800,
+      'src/components/OutputContainer.jsx': 600,
+    });
   });
 
   it('refuses to write without a runtime-test count at or above the ratchet scope floor', async () => {
