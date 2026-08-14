@@ -432,6 +432,39 @@ const ARGUED_UNLAYERED = Object.freeze({
     ]),
     readsReason: 'the one GRAMMAR read is the strict envoy DTO normalizer, held HERE rather than in worldState.js precisely so its negotiation/peace-term closure does not ride first paint while every raw world still crosses the validator once — that split is the module\'s whole reason for existing, so the reach is declared and counted rather than erased, and a second port reds this arm by name',
   }),
+  // ── HB-0 (2026-08-14): THE HABIT FAMILY'S TWO SUBSTRATE LEAVES ────────────────
+  //
+  // Not a new argument — the bandFamilies / bandedStock / lawWord VOCABULARY reading,
+  // applied one rung down to the family that spells against them. Neither leaf owns a
+  // subject: one is a closed circumstance-class vocabulary and a borrowed hold ladder,
+  // the other is a frozen curve over the shared decay law and the shared outcome ladder.
+  // Giving either a LAYER_PATTERNS home would make every port's own reading of a habit
+  // word a cross-layer coupling, which is hosting by another name — and no HB filename
+  // matches any of the seven family patterns anyway, checked against all seven.
+  //
+  // ⛔ THE BASELINE DOOR IS CLOSED TO THEM BY DOCTRINE, and the walker's own census arm
+  // says so: a new .js under src/domain/worldPulse takes a family or an argued entry in
+  // the SAME commit, NEVER a baseline row. The census scope regex recurses into
+  // subdirectories, so `habit/` is inside it from the day it exists.
+  //
+  // ⚠ THE TWO ROWS DO NOT CARRY THE SAME `reads`, AND THE DIFFERENCE IS MEASURED, not
+  // copied across. The curve reaches only argued-unlayered siblings; the vocabulary
+  // reaches one INTERIOR module, because the hold ladder is a one-directional borrow of
+  // a table that is declared `const` upstream and reachable only through that port's own
+  // exported tuning bag. A `reads: []` row on the vocabulary would red this file by name.
+  'src/domain/worldPulse/habit/habitVocabulary.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB substrate — the closed circumstance-class vocabulary and the borrowed hold ladder, spelled by every port that will file a habit key; it owns no subject and mints no action word',
+    reads: Object.freeze([
+      'src/domain/worldPulse/dispositionLedger.js',
+    ]),
+    readsReason: 'the one INTERIOR read is the disposition channel tuning bag, and it is a DERIVATION rather than a coupling: the channel band table is declared const upstream and its only outward path is that bag, so the hold ladder is projected from the live table instead of transcribed into a second array that could drift — declaring the reach is what keeps the borrow one-directional and visible',
+  }),
+  'src/domain/worldPulse/habit/habitCurve.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB substrate — the frozen reinforcement/decay curve and the single rounding door, riding the shared decay law and the shared outcome ladder rather than authoring either',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -463,8 +496,17 @@ const ARGUED_HOSTS = Object.freeze([
  * for the two big hosts and 3 for errandMint. The single edge is declared below, so the
  * roster grew by three and the estate's DECLARED cross-layer reach grew by one edge that
  * was previously dark. A fourteenth admission is the next deliberate act.
+ *
+ * 13 → 15 on 2026-08-14 (HB-0, the `hb-1` train's first member), and the raise is recorded
+ * rather than merely made. It admits the habit family's two substrate leaves under the
+ * vocabulary argument this map already carries for bandFamilies, bandedStock and lawWord —
+ * no new argument, one rung down. Measured at the raise: both leaves are unlayered and
+ * therefore already invisible to `scanCrossLayerPairs`, so no edge leaves the pair scan;
+ * their outbound layered reach measures 1 and 0, and the single edge is DECLARED below
+ * with its reason. The net effect is one cross-layer read that would otherwise have been
+ * dark becoming enumerated. A sixteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 13;
+const ARGUED_ROSTER_CEILING = 15;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
