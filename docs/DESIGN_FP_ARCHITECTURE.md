@@ -830,11 +830,41 @@ payload builder returns through veilPublicPayload (standing law).
 
 ---
 
-## §5 THE WAVES (109 waves, dependency-ordered ACROSS programs; each: one
+## §5 THE WAVES (111 waves, dependency-ordered ACROSS programs; each: one
 ## commit per wave/slice, focused gates per slice, full gate at wave end
 ## through check:tail / gate-tail.sh, ledger row; every flagged wave DARK per
 ## §3; the per-program architecture file carries the full spec — the block
 ## here is the binding charter, order, and cross-program deltas)
+
+⚠⚠ **THE WAVE COUNT IS 111, AND THE DERIVATION IS STATED HERE SO NO READER
+RE-DERIVES IT UNDER PRESSURE.** Three figures appear in this document's history
+and all three are arithmetically correct under their own ES-5 convention. The
+common base is `60 + WY-engine 7 = 67`, plus the ES family, plus the 2026-08-07
+fold's `10 (HB) + 17 (WC) + 6 (EP) = 33`:
+
+| ES-5 counted as | ES family | total | where it appears |
+|---|---:|---:|---|
+| one wave (`ES-5`) | 8 | **108** | the `= **108**` arithmetic line below, from the 2026-08-07 fold |
+| two slices (`ES-5a`, `ES-5b`) | 9 | **109** | the heading and closing clause, after CR-ES5B-1 |
+| **four slices (`ES-5a/5b/5c/5d`)** | **11** | **111** | ⭐ **the live charter, and the figure now stated above** |
+
+MEASURED 2026-08-14 at `60083174` by extraction over this section's own charter
+blocks: ES 11, HB 10, WC 17, EP 6, WY-engine 7. §5 charters `ES-5a`, `ES-5b`,
+`ES-5c` and `ES-5d` as four separate blocks, so 11 is the live ES family and 111
+is the live total. `109` was written when only the a/b slice existed and was
+never reconciled against the `108` line it sits above.
+
+⛔ **THE `= **108**` ARITHMETIC LINE BELOW IS LEFT EXACTLY AS IT STANDS.** It is a
+correct statement of the 2026-08-07 fold's own arithmetic under that fold's own
+ES-5 convention, and it is the evidence that reconciles all three figures.
+Overwriting it to match the live total would destroy that evidence and leave a
+later reader with a number and no way to check it.
+
+⚠ Unchanged by this correction: WY's five SURFACE waves stay excluded by this
+section's own clause (counting them would give 116); SP-F is declared NON-WAVE;
+and ES-Da is a slice of the REFUSED ES-D, so it raises neither numerator nor
+denominator.
+
 
 Numbering is the compiled build order. "Early-eligible" marks the measured
 buildable-now set whose early motion is chair question Q2; absent that
@@ -3029,7 +3059,7 @@ docs/DESIGN_FP_ARCH_WY.md (WAYFARE), and — folded 2026-08-07 — the three
 further owner-amendment volumes docs/DESIGN_FP_ARCH_HB.md (HABIT),
 docs/DESIGN_FP_ARCH_WC.md (WAR CIRCULATION) and docs/DESIGN_FP_ARCH_EP.md
 (ADVANCE EPOCH), each normative where this volume
-compresses it. 45 refuted premises bound, 109 waves ordered, 63 flags
+compresses it. 45 refuted premises bound, 111 waves ordered, 63 flags
 manifested, 14 new sub-ledgers priced, 112 seams pinned (45 here, ES 46-58, WY
 59-66, HB 67-79, WC 80-102, EP 103-112 — per-row in the five volumes). Where
 this volume compresses, the

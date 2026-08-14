@@ -1,5 +1,23 @@
 # DESIGN — THE ADVANCE EPOCH (EP: living futures, immutable pasts)
 
+⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
+volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+TE3, and stated as a measurement rather than an impression:
+**14 of the 17 `*Enabled` flags this volume names are unminted**, including its
+signature `advanceEpochEnabled`, which has **zero occurrences anywhere under
+`src/`** — not a gate, not a read, not a string. `epochSegment.js` is absent from
+`src/` entirely. The 3 that are minted (`beliefAxesEnabled`, `espionageEnabled`,
+`oathHolderEnabled`) are pre-existing flags this volume reads. ⚠ EP is the
+sharpest case for the rule below: EP-1 and EP-2's charter-named modules
+`pulseKernel.js`, `spatialUsage.js` and `campaignWorldPulseDeferred.js` ARE
+present, because all three are pre-existing MODIFY targets.
+
+⛔ Module PRESENCE never promotes a wave. Several modules this volume names are
+already in `src/` because they are pre-existing MODIFY targets, and several flags
+it names are already minted because it READS them; neither fact is progress on
+this volume's own waves. The `LANDING IS NOT SEALING` warning further down covers
+a *different* confusion and does not cover this one.
+
 ## LANDED 2026-08-07 as a member of the docs/DESIGN_FP_ARCH_* family — the
 ## per-program file for the EP owner-amendment program, sibling to
 ## docs/DESIGN_FP_ARCH_{SP,GR,IN,TR,WF,POP,INT,CW,ES,WY,HB,WC}.md and NORMATIVE

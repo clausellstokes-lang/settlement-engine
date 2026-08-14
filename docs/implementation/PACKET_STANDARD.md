@@ -5,7 +5,9 @@
 **Scope:** instructions compiled for coding agents from SettlementForge design law
 
 **Measured tree:** `claude/composite-r4` at
-`e46bbd9189424a0146a70c812a12cfc8cbab9c88` on 2026-08-12
+`600831749908e340444087df734d18c27046980d` on 2026-08-14 — the base of the
+`infra-1` train, whose member `INFRA-M1-DOCS` added the three §28 sections below
+(train landings, family packet preambles, the base-state capsule).
 
 ## Purpose
 
@@ -114,6 +116,126 @@ A packet may include:
 
 It may not combine independent lanes, a cleanup sweep, a tuning pass, a soak
 program, or opportunistic repairs.
+
+## Train landings
+
+A **train** is an ordered set of at most four same-volume, collision-disjoint
+waves built as one unexposed commit sequence and exposed atomically by one
+old-value compare-and-swap to the train's single green terminal child. It is the
+§28 answer to a cost model in which the full gate and the repeated preflight
+dominate a micro-wave's wall clock.
+
+The chain is built on a **private ref** (`refs/trains/<train-id>`) so it is
+reachable and snapshot-friendly without any intermediate commit ever being a
+branch tip. The shared branch ref moves **once**, from base to terminal, and only
+after the terminal's bare full gate and separate boot smoke both exit zero with
+their status captured in-shell.
+
+**What stays with each member, unchanged:** the packet's focused battery green at
+its own implementation commit, its mutants convicted and restored digest-exact,
+both TypeScript ratchets at their exact floors, the observed-shape count exact,
+scoped eslint, and any walker it touches either green or a **named** red.
+
+**What moves to the terminal, and only these:** the bare full gate, the boot
+smoke, the whole-census re-derivation, and the ledger row — one row narrating the
+train with per-member sub-entries.
+
+**Interior reds must be named in the train plan before they exist.** An interior
+commit may carry a precomputed exact red — most commonly a census walker that
+only greens once the whole tuple is re-derived — and that is lawful precisely
+because the commit is never exposed. An unnamed one is not. ⚠ A member that adds
+a test file forces exactly this red by construction, because the census arm is an
+exact equality against a recorded constant; a plan that schedules such a member
+and then declares zero interior reds has mis-declared, and the cure is to name
+the red with its predicted figures.
+
+**Truncation is a complete outcome, not a failure mode.** If a member's focused
+proof reds, the train truncates at the last green member boundary: the terminal
+is re-pointed after the green prefix, the census is re-derived for that prefix,
+the prefix lands, and the failed member returns to compile. **A prefix landing is
+a complete, lawful train.** If the terminal's own gate reds, the per-member
+focused proofs localize the cause by construction; truncate to the green prefix
+and never land past unexplained red.
+
+**Boundaries.** A flag-minting wave is a train boundary — the one-commit flag law
+is untouched — so it rides alone or as the FIRST member of a train whose
+remaining members are no-flag slices of that same flag. No cross-volume trains
+until two same-volume trains have landed clean.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.
+
+## Family packet preambles
+
+Per volume, the chair signs ONE family preamble at
+`docs/implementation/preambles/<VOL>-PREAMBLE.md` carrying the sections that do
+not vary per wave: binding design-law citations, the hazard dispositions that
+always apply, the volume's census law, mutant hygiene, the gate-reading law, and
+the standing STOP conditions. Each member packet then carries only its scope and
+boundary, its behavior and identity contract, its exact manifest with budgets,
+its acceptance cases, its wave-specific mutants and hazards, and a header line
+citing the preamble **by SHA-256**.
+
+A preamble edit changes that hash, which re-stamps every citing packet, so drift
+between a family's members and their shared law is structurally impossible rather
+than merely discouraged.
+
+`validate:packets` needs no change: packets remain complete on their required
+structured fields, and a preamble is authority prose exactly as the design
+volumes already are.
+
+⛔ **A preamble carries no per-wave figure.** Every census tuple, effective-line
+count, seal, and denominator lives in the member packet and is re-executed there.
+A figure in a preamble is a restatement with no stamped base.
+
+⚠ **A volume does not inherit another volume's preamble.** Where a preamble's
+census law, registration cost, or hazard set would be wrong for a second family,
+that family authors its own; sections that are genuinely estate-wide law may be
+lifted verbatim, and the lift is recorded as such.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §4.
+
+## The base-state capsule and its consumption law
+
+`docs/implementation/BASE_STATE.json` is a derived artifact regenerated at each
+exposure and **stamped with the sha it was derived at**. It exists to kill the
+repeated preflight: roughly ten base measurements that every compiling lane
+currently re-executes independently, at a base that has not moved between them.
+
+**Consumption law.** A compiler whose verified base is exactly `stampedAt` may
+cite the capsule's figures as EXECUTED — they were, by the landing protocol, at
+exactly that tree. A compiler whose base is a **docs-only descendant of
+`stampedAt`, with every measured path byte-identical across that window**, may do
+the same; that clause is the chair's adopted train-plan judgment **J-T1**, and it
+is what lets a promotion or ledger commit sit between the stamp and the next
+compile without invalidating the capsule.
+
+**A capsule stamped at any other sha is worthless for citation** and the compiler
+measures from scratch. The pre-capsule behavior is therefore always the fallback,
+so the mechanism can never make a compile worse than it was.
+
+⛔ **Capsule-only compilation is refused.** A compiler must still RE-EXECUTE every
+row its own manifest touches — a hot file it edits, a walker it moves, a corpus
+it grows. The capsule covers the UNTOUCHED base and never the wave's own surface,
+because those are exactly the rows where staleness kills.
+
+**Provenance is not uniform, and a compiler should know which kind it is citing.**
+Some rows are MEASURED — computed from the tree by a live import, an eslint
+`Linter` run, or a shell-out to an existing measurer. Others are PINNED — read
+from an exact-equality constant in its canonical home, which equals the tree if
+and only if the gate step asserting it is green. At an exposure the full gate has
+just passed, so a pinned read is an executed read; naming the distinction is what
+keeps the artifact from becoming the restatement engine
+`DESIGN_BUILD_EFFICIENCY.md` §9 warns about.
+
+⛔ The generator **invents no measurement of its own**. It shells the measurers
+that already exist, so it cannot fork a second spelling of any figure. Where a
+figure has no canonical measurer, the generator **refuses to write** rather than
+inventing one or emitting a default.
+
+⚠ **This section states the law and names no figure.** The numbers live in the
+artifact, where being wrong is visible against a stamped sha.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §3.
 
 ## Default hard scope budget
 

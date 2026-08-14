@@ -1,5 +1,23 @@
 # DESIGN — HABIT CONDITIONING (HB: actors learn, and being known is the price)
 
+⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
+volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+TE3, and stated as a measurement rather than an impression:
+**11 of the 18 `*Enabled` flags this volume names are unminted**, including
+its signature `habitConditioningEnabled` and `habitAnticipationEnabled` — the
+live engine-gated flag manifest holds 16 rows and none of the 11 is among them.
+The 7 that are minted (`beliefAxesEnabled`, `believedConditionsEnabled`,
+`believedDevotionEnabled`, `believedScarcityEnabled`, `errandSpineEnabled`,
+`infoStatecraftEnabled`, `secondOrderBeliefEnabled`) are pre-existing flags this
+volume reads, not flags it minted. **Zero files under `src/` carry `habit` in
+their name.**
+
+⛔ Module PRESENCE never promotes a wave. Several modules this volume names are
+already in `src/` because they are pre-existing MODIFY targets, and several flags
+it names are already minted because it READS them; neither fact is progress on
+this volume's own waves. The `LANDING IS NOT SEALING` warning further down covers
+a *different* confusion and does not cover this one.
+
 ## LANDED 2026-08-07 as a member of the docs/DESIGN_FP_ARCH_* family — the
 ## per-program file for the HB owner-amendment program, sibling to
 ## docs/DESIGN_FP_ARCH_{SP,GR,IN,TR,WF,POP,INT,CW,ES,WY,WC,EP}.md and NORMATIVE

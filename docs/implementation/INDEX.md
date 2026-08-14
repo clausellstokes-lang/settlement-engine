@@ -538,8 +538,16 @@ live symbols were checked at the measured SHA.
 
 - **Foreign-policy corpus:** SP-A through SP-F, CW-0w, GR-0 through GR-2 plus
   GR-3a, IN-0a/0b/0d, TR-1, TR-9c, and ES-0 through ES-4 plus ES-5a are landed.
-  GR-3b and IN-0c are the only partial-slice closers reconciled now, and both
-  are blocked on the explicit decisions above.
+  ⭐ **DATED CORRECTION, 2026-08-14 at the `infra-1` train (INFRA-M1-DOCS): GR-3b
+  and IN-0c have BOTH LANDED and neither is blocked.** GR-3b landed at `40afbdd6`
+  and IN-0c at `29e2dc3c`; both are proven ancestors of this base, both packets
+  read LANDED with every `changeManifest` CREATE path present on disk, and the
+  LANDED-4 / LANDED-5 rows in the table above plus the dated correction beneath
+  this census already said so. This sentence was the last stale reader of a
+  closed program and it is the one a dispatching lane meets first, which is why
+  it is cured in place rather than annotated. The "Minimum decisions needed to
+  unblock" section below is retained as a worked example of what a blocking
+  decision looks like, **not as open work**.
 - **Town Cartography:** TC-0 through TC-2 are landed, and TC-3a plus TC-3b have
   now landed in order (TC-3 itself stays SUPERSEDED; its preserved implementation
   was their raw material). TC-4 has LANDED at `5a6f76fe` — the buildings layer is

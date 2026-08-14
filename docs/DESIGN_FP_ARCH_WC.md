@@ -1,5 +1,21 @@
 # DESIGN_FP_ARCH_WC -- THE WAR-CIRCULATION VOLUME
 
+⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
+volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+TE3, and stated as a measurement rather than an impression:
+**7 of the 9 `*Enabled` flags this volume names are unminted**, including its
+signature `warCirculationEnabled` — the live engine-gated flag manifest holds 16
+rows and none of the 7 is among them. The 2 that are minted
+(`errandSpineEnabled`, `espionageEnabled`) are pre-existing flags this volume
+reads. ⭐ This volume's own PROGRESS blockquote already reads `ARCHITECTED, NOT
+STARTED`; this banner makes the header agree with it.
+
+⛔ Module PRESENCE never promotes a wave. Several modules this volume names are
+already in `src/` because they are pre-existing MODIFY targets, and several flags
+it names are already minted because it READS them; neither fact is progress on
+this volume's own waves. The `LANDING IS NOT SEALING` warning further down covers
+a *different* confusion and does not cover this one.
+
 ## LANDED 2026-08-07 as a member of the docs/DESIGN_FP_ARCH_* family — the
 ## per-program file for the WC owner-amendment program, sibling to
 ## docs/DESIGN_FP_ARCH_{SP,GR,IN,TR,WF,POP,INT,CW,ES,WY,HB,EP}.md and NORMATIVE
