@@ -1563,3 +1563,24 @@ Operative reading (chair, recorded):
    (martialMoves R21, the gr-6 operand, HB-1's disjunct) make this the
    habitat, not the instance.
 5. J-TE6-1/2 and the deviation set are RATIFIED on the receipt.
+
+## §39 · THE HB-1′ RE-CHARTER IS RULED (2026-08-14 ~21:45, chair, vetoable;
+## one sitting per §5)
+
+All six batched items are SIGNED per TC7's recommendations and executed
+evidence: CR-HB1′-R7 the volume's corrected R7 delete clause is STRUCK —
+the disjunct is LIVE (measured 1.02 at the ratified golden's own consumer;
+the counterfactual measured, not re-implemented); the register replaces the
+deletion · CR-HB1′-REG the register shape (membership-OR-registered-foreign,
+EXACT both directions, evidence arm asserting the named address spells the
+token) — the only shape that reds a future deletion · CR-HB1′-F2
+extensionless ids + tests/-siting; the doctrine-stage scan DEFERS to the
+codeOnly() family (infra-2 carries it) · CR-HB1′-HB0FIX the stale
+requiredSymbols pin in LANDED HB-0.md repairs at P1 (a defect in a landed
+record, honestly surfaced — this greens the validator at I1 and T) ·
+CR-HB1′-DORM the dark-closure re-aim discharges the §15 orphan window ·
+CR-HB1′-VOL the six volume-text sites stay DEFERRED to their own micro-act
+(naked-claim gate risk respected). J-TC7-1..7 ratified on the report.
+Executor tripwires: the two goldens byte-identical at every commit
+(:305/:325 — ANY movement is a full-train STOP); settlementPolitics.js
+executable text byte-identical (comment-only, 560→560 effective).
