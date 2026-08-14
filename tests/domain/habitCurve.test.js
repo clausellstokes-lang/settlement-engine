@@ -32,9 +32,11 @@ import {
   seatAdjusted,
   severityWeightOf,
 } from '../../src/domain/worldPulse/habit/habitCurve.js';
-import { HALF_LIFE_BANDS } from '../../src/domain/worldPulse/bandedStock.js';
+import { HALF_LIFE_BANDS, HALF_LIFE_WEEKS, halfLifeWeeksOf } from '../../src/domain/worldPulse/bandedStock.js';
 import { SEVERITY_LADDER } from '../../src/domain/worldPulse/bandFamilies.js';
+import { CIRCUMSTANCE_CLASSES } from '../../src/domain/worldPulse/habit/habitVocabulary.js';
 import { LAW_WORDS } from '../../src/domain/worldPulse/lawWord.js';
+import { STRATEGY_MOVES } from '../../src/domain/worldPulse/strategyMoves.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const S = HABIT_TUNING.HABIT_SPAN;
@@ -42,6 +44,16 @@ const HABIT_DIR = 'src/domain/worldPulse/habit';
 const CURVE_HOME = `${HABIT_DIR}/habitCurve.js`;
 const NEW_LEAVES = Object.freeze([`${HABIT_DIR}/habitVocabulary.js`, CURVE_HOME]);
 const REGISTRY_HOME = 'src/domain/worldPulse/habitForkRegistry.js';
+
+/** HB-0B's three structural bounds, named once so no case re-spells the list. */
+const BOUND_KEYS = Object.freeze([
+  'HABIT_ROWS_PER_ACTOR_CAP',
+  'PLEDGE_MAX_AGE_WEEKS',
+  'PLEDGE_BOOK_CAP',
+]);
+
+/** The MEDIAN court's position in the volatility order — the same index the curve indexes by. */
+const MEDIAN_COURT = 1;
 
 /**
  * ⭐⭐ THE HABIT FAMILY'S REVERSE-IMPORT CLOSURE INSIDE `src`, exact in BOTH directions.
@@ -294,5 +306,116 @@ describe('HB-0 — the frozen curve, its fences, and the wave dormancy evidence'
     // leaves' own sibling import, so an emptied scan cannot pass as an absence.
     expect(imports.get(REGISTRY_HOME).has(`${HABIT_DIR}/habitVocabulary.js`)).toBe(true);
     expect(imports.get(CURVE_HOME).has('src/domain/worldPulse/bandedStock.js')).toBe(true);
+  });
+
+  // ── HB-0B — THE THREE STRUCTURAL BOUNDS ────────────────────────────────────────────
+  // A §42.2 micro-act, not a volume wave. The HB-2 charter asserted these were "declared in
+  // HABIT_TUNING at HB-0"; they were nowhere in the tree (R31, ratified at §42.1), and these
+  // four cases are the commit that makes that sentence true. The VALUES are chair-signed at
+  // §43 item 1 on executed derivations and are marked UNSOAKED, riding the tuning signature
+  // like the ten constants already in the bag.
+
+  test('THE THREE BOUNDS are finite positive integers and frozen members of the ONE bag', () => {
+    for (const key of BOUND_KEYS) {
+      expect(
+        Object.prototype.hasOwnProperty.call(HABIT_TUNING, key),
+        `${key} must live in HABIT_TUNING and nowhere else — the curve's landed header commits`
+        + ' that no habit constant is authored outside this bag',
+      ).toBe(true);
+      expect(Number.isInteger(HABIT_TUNING[key]), `${key} is an integer-domain quantity`).toBe(true);
+      expect(HABIT_TUNING[key]).toBeGreaterThan(0);
+      expect(Number.isFinite(HABIT_TUNING[key])).toBe(true);
+    }
+    // THE FREEZE IS LOAD-BEARING, not decoration: the bag is the single home, so a write that
+    // silently took would fork the tuning at run time. In an ES module this throws.
+    expect(Object.isFrozen(HABIT_TUNING)).toBe(true);
+    const before = HABIT_TUNING.PLEDGE_BOOK_CAP;
+    expect(() => { HABIT_TUNING.PLEDGE_BOOK_CAP = before + 1; }).toThrow(TypeError);
+    expect(HABIT_TUNING.PLEDGE_BOOK_CAP).toBe(before);
+  });
+
+  test('the row cap is STRICTLY below the DERIVED structural product, and the curve spells no rung word', () => {
+    // (a) EVICTION MUST BE REACHABLE. The product is derived from the two live vocabularies,
+    // never transcribed, so a vocabulary that grew moves this denominator with it.
+    const product = CIRCUMSTANCE_CLASSES.length * STRATEGY_MOVES.length;
+    expect(
+      HABIT_TUNING.HABIT_ROWS_PER_ACTOR_CAP,
+      'the row cap reached the structural product, so the chartered nearest-neutral eviction'
+      + ' is unreachable on every world — a dead arm wearing a cap\'s clothing',
+    ).toBeLessThan(product);
+    // (b) A WHOLE MULTIPLE OF THE CLASS VOCABULARY, so every class gets the same allowance and
+    // the ledger carries no ordering dependency.
+    expect(HABIT_TUNING.HABIT_ROWS_PER_ACTOR_CAP % CIRCUMSTANCE_CLASSES.length).toBe(0);
+    expect(HABIT_TUNING.HABIT_ROWS_PER_ACTOR_CAP / CIRCUMSTANCE_CLASSES.length).toBeGreaterThan(1);
+    // (c) GUARD THE GUARD. A transcribed denominator cannot detect a vocabulary that grew, so
+    // this battery's own source may not spell the product as a literal.
+    const ownSource = readFileSync(join(ROOT, 'tests/domain/habitCurve.test.js'), 'utf8');
+    expect(
+      new RegExp(`\\b${product}\\b`).test(ownSource),
+      'the structural product is transcribed as a literal in this battery — derive it from the'
+      + ' live vocabularies instead, or it goes stale the moment either one grows',
+    ).toBe(false);
+    // (d) THE RUNG WORD IS DERIVED, NEVER SPELLED — here or in the curve. habitCurve.js's own
+    // landed header commits that "no rung word is spelled anywhere in this file", and NO WALKER
+    // ENFORCES THAT: spBandFamilies governs the severity ladder and the significance classes
+    // only, and dispositionLedger.js spells a half-life rung today and is green. This arm is
+    // the machinery that promise otherwise lacks.
+    const rung = halfLifeBandFor(LAW_WORD_VOLATILITY[MEDIAN_COURT]);
+    expect(HALF_LIFE_BANDS).toContain(rung);
+    const sourceOf = (rel) => SRC_FILES.find((file) => file.rel === rel).src;
+    // the positive control runs FIRST, so an emptied scan cannot pass as an absence
+    expect(sourceOf('src/domain/worldPulse/bandedStock.js').includes(rung)).toBe(true);
+    expect(
+      HALF_LIFE_BANDS.filter((word) => sourceOf(CURVE_HOME).includes(word)),
+      'a half-life rung word is spelled in habitCurve.js, falsifying a sentence its own landed'
+      + ' header makes — and no walker in the estate would have caught it',
+    ).toEqual([]);
+  });
+
+  test('the pledge max age is a MEMBER of the shared ladder, and it is the median court\'s own band', () => {
+    // ⚠ THE RELATIONSHIP IS PINNED, NOT THE NUMBER. A pin on the value would pass a hand-keyed
+    // re-spelling that happens to equal today's figure while belonging to no ladder at all.
+    expect(
+      Object.values(HALF_LIFE_WEEKS),
+      'the pledge max age is not a rung of the estate\'s one time ladder — the habit family\'s'
+      + ' discipline is to ride shared ladders rather than author numbers',
+    ).toContain(HABIT_TUNING.PLEDGE_MAX_AGE_WEEKS);
+    expect(HABIT_TUNING.PLEDGE_MAX_AGE_WEEKS).toBe(
+      halfLifeWeeksOf(HABIT_TUNING.HALF_LIFE[LAW_WORD_VOLATILITY[MEDIAN_COURT]]),
+    );
+    // and the INDEXING is positional: the three courts occupy three CONSECUTIVE rungs of the
+    // shared ladder, and the age is the middle one's. A reorder or an inserted rung upstream
+    // reds here instead of silently re-pointing the age at another court's forgetting band.
+    const rungIndices = LAW_WORD_VOLATILITY
+      .map((word) => HALF_LIFE_BANDS.indexOf(halfLifeBandFor(word)));
+    expect(rungIndices.filter((index) => index < 0)).toEqual([]);
+    for (let i = 1; i < rungIndices.length; i += 1) {
+      expect(
+        rungIndices[i],
+        'the three courts no longer sit on consecutive rungs of the shared ladder, so the'
+        + ' positional offset the curve indexes by has stopped meaning what it says',
+      ).toBe(rungIndices[i - 1] + 1);
+    }
+    expect(HABIT_TUNING.PLEDGE_MAX_AGE_WEEKS)
+      .toBe(halfLifeWeeksOf(HALF_LIFE_BANDS[rungIndices[MEDIAN_COURT]]));
+  });
+
+  test('the three bounds have ZERO consumers in src, and the detector is proved live on NEUTRAL_I', () => {
+    const mentionsOf = (symbol) => SRC_FILES
+      .filter(({ src }) => src.includes(symbol))
+      .map(({ rel }) => rel)
+      .sort();
+    // GUARD THE GUARD FIRST: the same detector finds a sibling member of the same bag exactly
+    // where it genuinely lives, so an emptied scan cannot pass as an absence.
+    expect(mentionsOf('NEUTRAL_I')).toEqual([CURVE_HOME]);
+    for (const key of BOUND_KEYS) {
+      expect(
+        mentionsOf(key),
+        `${key} has a consumer in src/. This wave is DARK BY THE STRONGEST ARGUMENT — nothing`
+        + ' reads the three members — and the FIRST WAVE THAT SPENDS THEM OWES THE RE-AIM OF'
+        + ' THIS CASE IN THE SAME COMMIT THAT CREATES THE CONSUMER, exactly as HB-1 re-aimed'
+        + ' HB-0\'s dormancy absolute in place. That wave is HB-2, whose ledger is the spender.',
+      ).toEqual([CURVE_HOME]);
+    }
   });
 });

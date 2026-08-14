@@ -70,7 +70,7 @@
  *
  * @enforced-by tests/domain/habitCurve.test.js
  */
-import { HALF_LIFE_BANDS, decayTowardNeutral } from '../bandedStock.js';
+import { HALF_LIFE_BANDS, decayTowardNeutral, halfLifeWeeksOf } from '../bandedStock.js';
 import { severityRankOf } from '../bandFamilies.js';
 import { LAW_WORDS } from '../lawWord.js';
 
@@ -89,6 +89,13 @@ export const LAW_WORD_VOLATILITY = Object.freeze(['lawless', 'balanced', 'lawful
  * upstream reds this family instead of silently re-pointing a decay.
  */
 const HALF_LIFE_BAND_OFFSET = 1;
+
+/**
+ * Where the MEDIAN court sits in the volatility order above. The pledge age below is
+ * indexed POSITIONALLY through this rather than authored, for the same reason the bands
+ * are: a reorder upstream must red this family instead of silently re-pointing an age.
+ */
+const MEDIAN_VOLATILITY_INDEX = 1;
 
 /** Learn rates by volatility order (refinement 16). */
 const LEARN_RATES = Object.freeze([0.22, 0.14, 0.09]);
@@ -131,6 +138,34 @@ export const HABIT_TUNING = Object.freeze({
   )),
   /** Outcome weights, positional against the shared ladder. */
   SEVERITY_W,
+  /**
+   * ⛔ THE ROW CAP — twice the twelve-class vocabulary, so every class carries the same
+   * allowance. A cap that is not a whole multiple biases the ledger toward whichever class
+   * filled first, which is an ordering dependency in the one mechanism whose determinism
+   * exists BECAUSE insertion order would break replay. It sits at 18.2% of the structural
+   * product (the class vocabulary times the move vocabulary), so the nearest-neutral
+   * eviction is REACHABLE; a cap at or above that product would make it a dead arm.
+   */
+  HABIT_ROWS_PER_ACTOR_CAP: 24,
+  /**
+   * ⛔ THE PLEDGE MAX AGE, in campaign weeks — INDEXED out of the shared ladder at the
+   * MEDIAN court's own forgetting band, never authored and never spelled. Past this age the
+   * decay accrued while an episode ran exceeds the largest credit that grading it could
+   * ever apply, so the lesson arrives after the student has forgotten more than it teaches.
+   * ⚠ A hand-keyed number here would belong to no ladder; the battery pins the RELATIONSHIP
+   * rather than the value, because a pin on the value passes a re-spelling.
+   */
+  PLEDGE_MAX_AGE_WEEKS: halfLifeWeeksOf(
+    HALF_LIFE_BANDS[HALF_LIFE_BAND_OFFSET + MEDIAN_VOLATILITY_INDEX],
+  ),
+  /**
+   * ⛔ THE PLEDGE BOOK BACKSTOP. The book is TRANSIENT and the row ledger is PERSISTENT, so
+   * a backstop that costs more than the state it feeds is not a bound but a second ledger;
+   * this sits at the parity point between them. It is 71% of the certified-scale structural
+   * ceiling, so its oldest-first eviction — the book's one SILENT loss, where a lapse leaves
+   * a receipt and an eviction does not — cannot fire in ordinary play.
+   */
+  PLEDGE_BOOK_CAP: 256,
 });
 
 /**
