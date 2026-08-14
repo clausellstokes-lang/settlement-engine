@@ -98,12 +98,18 @@ Recovered artifacts + four re-runnable harnesses in `laneTC7-recovered/`.
 (P1 incl. the HB-0 record repair → I1 → T; census to
 `2425/366/2059/20077/5650`; runtime ~28093; validator 42/0; the two goldens
 byte-checked at EVERY commit; ONE held bare gate + smoke). Chair owns CAS.
-Receipt → `laneTE7-receipt.md`. **Lane TC7 done.** **Lane TC8** compiles the INFRA-2 micro-train
-(the §38.4 delete-clause law into every preamble · the §33 codeOnly()
-re-point · the capsule HOT_FILES parse · the §35.3 coupling-template machine
-check · the fork-registry scan hazard row) → `laneTC8-*`. Both scratchpad-
-only; the chair rules at collection. gr-6's re-charter stays CHAIR-OWED (the
-mount ruling + the band the chair must author — not delegated).
+Receipt → `laneTE7-receipt.md`. **Lane TC7 done.** **✅ TC8 COLLECTED + §40 RULED (~22:30, ledger `71f6a09c`): infra-2 compiled,
+four members SIGNED** — M1 preamble law made TWO-DIRECTIONAL (TC8 proved
+routing COMPLIANT_RE through codeOnly is a DEFECT: 11/13 compliance
+evidences ARE strings; import-shape vs comment-noise = one class, two
+sides) · M2 the codeOnly re-point SCOPE-CORRECTED (three edits: the
+three-state simulation proved the re-point alone reds two shrink-only
+arms) · M3 capsule table-parse (fail-closed count equality) · M4 the
+coupling-template inventory ratchet (7 trigger / 3 pass / 4 frozen legacy —
+exactly GR-4C's named four). J-TC8-5 ratified: preamble sha in a LANDED
+packet = HISTORICAL SEAL; re-stamp binds READY only. JSDoc-typedef vacuity
+DOCKETED. ⚠ EXECUTION SERIALIZES: TE8 dispatches only after TE7 lands (one
+engine worktree). gr-6 re-charter stays CHAIR-OWED (mount + band).
 
 **RE-CHARTER QUEUE (chair-owed, next):** (1) HB-1 on the register cure + the
 `src/domain/region` fourth directory + the fork-registry scan class, from
