@@ -1584,3 +1584,28 @@ CR-HB1′-VOL the six volume-text sites stay DEFERRED to their own micro-act
 Executor tripwires: the two goldens byte-identical at every commit
 (:305/:325 — ANY movement is a full-train STOP); settlementPolitics.js
 executable text byte-identical (comment-only, 560→560 effective).
+
+## §40 · THE INFRA-2 TRAIN IS RULED (2026-08-14 ~22:30, chair, vetoable; one
+## sitting per §5; full evidence in laneTC8-report.md)
+
+All four members SIGNED as compiled: M1 the preamble law (delete-clause law
+absent everywhere, measured; §31 preflight to GR+INFRA; the fork-registry
+class folds in as a docs row — AND the law is made TWO-DIRECTIONAL on TC8's
+finding that routing COMPLIANT_RE through codeOnly is a DEFECT: for 11 of 13
+files the compliance evidence IS a string; import-shape evidence and
+comment-noise are the two sides of one class) · M2 the codeOnly re-point
+with the SCOPE CORRECTION (three edits, one commit: re-point + the two
+inventory deletions the three-state simulation proved necessary; 89
+survivors keep their verdicts) · M3 the capsule table-parse with its
+fail-closed count-equality arm · M4 the coupling-template check as an
+inventory ratchet with the four measured legacy rows frozen shrink-only
+(status-scoping rejected as vacuous — measured). J-TC8-1..6 RATIFIED,
+including J-TC8-5: a preamble sha citation in a LANDED packet is a
+HISTORICAL SEAL — edits re-stamp only the preamble's own header; the
+re-stamp law binds READY packets only (recorded as the citation law's
+clarified reading). The conquestFeeds/moralInstitutionPressure JSDoc-typedef
+vacuity is DOCKETED (a walker green off a @typedef while the real filter
+could vanish) — it joins the machinery queue, not this train. Interior reds
+accepted as declared by figure (I1 none; I2-I4 lighting-walker only, cured
+at T). EXECUTION SERIALIZES behind HB-1′ (one engine worktree; two
+executors never share it).
