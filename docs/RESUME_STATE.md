@@ -92,7 +92,23 @@ mostly LANDED (9 whole; only ES-6b unchartered) — "ES spine trains" was the
 chair's stale shorthand.** The real remaining bulk: WY 0/7 · WF 0/10 ·
 POP 0/8 · INT 0/8 · HB 0/10 · WC 0/17 · EP 0/6, plus GR-5/6/7, TR tails,
 IN tails, CW 3 dark, ES-6b.
-**LIVE (~14:30): Lane TC5 (Opus) DERIVES + COMPILES THE NEXT TRAIN** from
+**✅ TC5 COLLECTED + §34 RULED (~15:10, ledger `71b2439b`): the next train is
+`gr-6`** = GR-6a (mints `mediationGeneralizedEnabled`; flag + truncation
+boundary) → GR-6b (war-opener mount). GR-6c/d/e REFUSED-IN-PART on executed
+evidence (no expiry transition site / worstObservedEver zero hits / clause≠
+spec). Eight CQs ruled batched (band chair-authored-by-adoption with
+rationale-or-STOP; load-point quoted-or-STOP; coupling direction re-measured;
+coalition null-order pinned INHERITED). ⭐ OQ-TC5-1: the CROSS-VOLUME BAN
+LIFTS when gr-6 lands clean. ⭐ OQ-TC5-2: HB Q1's seal NARROWED to HB-3+ —
+HB-0/HB-1 dispatchable after their Q2/Q3 rule at compile (INDEX prose
+corrected in that train's P-commit). Alternatives recorded: hb-1 (next),
+ep-0 (single-member only; EP forbids trains), wy-1 (data-gated, kmScale has
+no producer).
+**LIVE (~15:15): Lane TE5 (Opus) EXECUTES gr-6** on `refs/trains/gr-6` from
+`6784bf62`: P1→I1 (flag mint, declared red 2419-vs-2418) →P2→I2 (mount +
+census to `2420/366/2054/20040/5645`) →T (validator 42/0, runtime 28056/16,
+ONE held bare gate + smoke). Chair owns CAS. Receipt → `laneTE5-receipt.md`.
+**(superseded) Lane TC5 derivation dispatch** from
 `6784bf62`: step 1 proposes the target (≤4 same-volume unblocked waves per
 FP §5 dependency order + the census; two rejected alternatives named);
 step 2 compiles it in full §28 form. Deliverables → scratchpad `laneTC5-*`
