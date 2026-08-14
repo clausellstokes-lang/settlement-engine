@@ -2467,7 +2467,8 @@
         { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function habitFactor" },
         { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function seatAdjusted" },
         { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function roundToUnits" },
-        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "const ARGUED_ROSTER_CEILING = 15" }
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitVocabulary.js': Object.freeze({" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitCurve.js': Object.freeze({" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "NEUTRAL IDENTITY — an absent stock returns exactly the number 1 from habitFactor, the door a dark flag goes through" },
@@ -2488,6 +2489,68 @@
         ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
         ["npx", "eslint", "src/domain/worldPulse/habit/habitVocabulary.js", "src/domain/worldPulse/habit/habitCurve.js"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "HB-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/HB-1.md",
+      "verifiedBase": "f6749fad642e191b8214797102b6404373bd02ee",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/strategyMoves.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habitForkRegistry.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementStrategy.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "CREATE", "path": "tests/domain/strategyMoves.test.js" },
+        { "action": "CREATE", "path": "tests/domain/habitForkRegistry.test.js" },
+        { "action": "CREATE", "path": "tests/lint/chooserTotality.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/strategyMoveVocabulary.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/habitCurve.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const STRATEGY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const ALL_MOVE_TOKENS" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const NON_MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const HABIT_FORK_REGISTRY" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const NAMED_DOMAIN_LABELS" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const OWNER_DOMAIN_MAPPING" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_DISPOSITIONS" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_ARITIES" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_CLASS_VOCABULARY" },
+        { "path": "tests/lint/strategyMoveVocabulary.walker.test.js", "symbol": "const MOVE_TOKEN_BRANCHERS" },
+        { "path": "tests/lint/chooserTotality.walker.test.js", "symbol": "const SCAN_ROOTS" },
+        { "path": "tests/domain/habitCurve.test.js", "symbol": "const HABIT_DARK_CLOSURE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE EMITTER IS THE DENOMINATOR \u2014 STRATEGY_MOVES equals the set enumerateMoves actually emits across every exported scoring objective on generated candidates, both directions, never a hand list" },
+        { "id": "A2", "case": "THE BRANCHER REGISTER IS EXACT BOTH DIRECTIONS against the live scan (measured denominator TEN): an unregistered brancher reds, a stale row reds, every row carries a recognised kind and a written reason; plus scoringObjective.js lever keys are a subset of STRATEGY_MOVES asserted from the TEST side" },
+        { "id": "A3", "case": "THE OWNER ARM AND ITS EVIDENCE \u2014 inside a strategy-kind module every move-keyed literal is a MEMBER or a DECLARED FOREIGN TOKEN, and the declared foreign set equals the measured foreign set EXACTLY in both directions; every foreignTokens entry carries a non-empty vocabulary and reason, and its evidence path exists and its evidenceSymbol spells the token. A deletion of the registered disjunct REDS here" },
+        { "id": "A4", "case": "THE CORRECTED martialMoves ACT (R21) \u2014 MARTIAL_HISTORY_MOVES is a proper subset of STRATEGY_MOVES of length 8, the three exclusions asserted BY NAME, and the derived eight reproduce the pre-wave membership EXACTLY" },
+        { "id": "A5", "case": "C1 LEAF CONTRACT \u2014 strategyMoves.js has zero imports by source scan, ALL_MOVE_TOKENS equals STRATEGY_MOVES today, and the AT-MOST-ONE-EXPORTER scan holds tree-wide" },
+        { "id": "A6", "case": "THE DARK CLOSURE (HB-0.md section 15 discharge) \u2014 HABIT_DARK_CLOSURE set-equals the measured reverse-import closure both directions, no module outside it imports any member of it, and the detector is proved live on the family real inbound edge. Re-aimed in place with zero new titles" },
+        { "id": "A7", "case": "THE REGISTRY THREE J-HB-23 ASSERTIONS PLUS THE F2 INVARIANT \u2014 FOURTEEN named-domain rows each with a disposition and a non-empty reason; the label set SET-EQUAL both directions to the closed explicit eight; the owner SEVEN spoken domains mapped TOTAL onto those eight; and every row module id is EXTENSIONLESS and resolves to a real file" },
+        { "id": "A8", "case": "THE PARTITION AND ITS UNIQUENESS ARMS \u2014 classified equals discovered both directions over the idiom signatures across FOUR roots including src/domain/region; the ROOT-SET self-assertion; symbolsWithTwoDispositions empty; symbolsWithTwoArities empty; every DEFER row closeOwed non-empty; DEFER shrink-only; plus the registry own guard-the-guard" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/strategyMoves.test.js", "tests/domain/habitForkRegistry.test.js"],
+        ["npx", "vitest", "run", "tests/lint/chooserTotality.walker.test.js", "tests/lint/strategyMoveVocabulary.walker.test.js"],
+        ["npx", "vitest", "run", "tests/property/espionageAbsenceDormancy.test.js"],
+        ["npx", "vitest", "run", "tests/domain/habitCurve.test.js", "tests/domain/habitVocabulary.test.js"],
+        ["npx", "vitest", "run", "tests/domain/settlementPoliticsPins.test.js", "tests/domain/settlementStrategy.test.js"],
+        ["npx", "vitest", "run", "tests/property/settlementPoliticsDormancyGolden.test.js", "tests/domain/warMachineObeysPolitics.test.js"],
+        ["npx", "vitest", "run", "tests/domain/espionageDoctrineStage.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sizeBaseline.test.js", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js", "tests/lint/spBandFamilies.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
       ]
     }
   ]
