@@ -98,7 +98,15 @@ authorization with full sealed authority chains, so the GR-4 continuation is
 terminal fact. A successor must not block on re-deriving CR-NEXT-1; the live queue
 derives from the packets' own declarations.
 
-**NEXT:** compile **GR-4b-iii-b** (the dossier line `succession_question_open`,
+**LIVE (~02:00): Lane IIIB (Opus, background)** drafts the GR-4b-iii-b packet
+read-only from `2dd09360`; deliverables land at this session's scratchpad as
+`laneIIIB-GR-4B-IIIB-draft.md` + `laneIIIB-report.md`
+(`/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/`).
+It commits nothing; REFUSED-IN-PART is a valid return. A successor COLLECTS
+(verify its receipts independently), never re-dispatches while those files exist.
+
+**NEXT:** chair-verify Lane IIIB's draft, rule, then promote **GR-4b-iii-b**
+(the dossier line `succession_question_open`,
 declared at `GR-4B-IIIA.md:43` and deferred at its §12) just in time from
 `2dd09360` — its corpus substrate is now fully cured (`c39d2413` + `2dd09360`,
 annex row A-22 final). Behind it, still deferred by the same declaration: GR-4b-ii
