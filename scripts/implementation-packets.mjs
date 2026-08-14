@@ -43,6 +43,42 @@ const ACTION_SET = new Set(PACKET_ACTIONS);
 const TERMINAL_PACKET_STATUSES = new Set(['LANDED', 'SUPERSEDED']);
 const DEFAULT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
+/**
+ * A ROW-CARRYING coupling-registry volume leaf: `couplingRegistryWar.js` and its four
+ * siblings, each exporting a `*_COUPLINGS` aggregate the head spreads into
+ * COUPLING_REGISTRY. The lookahead excludes the head itself.
+ */
+const COUPLING_LEAF_RE = /^src\/domain\/certification\/couplingRegistry(?!\.js$)[A-Za-z0-9]+\.js$/;
+/**
+ * ⛔ EXCLUDED ON AN EXECUTED READING, not on its name: couplingRegistrySchema.js exports
+ * only COUPLING_REGISTRY_SCHEMA_VERSION and the couplingRow() factory — no `*_COUPLINGS`
+ * aggregate at all — so it declares the row SHAPE and mints no row.
+ */
+const COUPLING_SCHEMA_LEAF = 'src/domain/certification/couplingRegistrySchema.js';
+/** The composing head: import + COUPLING_REGISTRY spread + named re-export. */
+const COUPLING_HEAD = 'src/domain/certification/couplingRegistry.js';
+/** The exact-list pin AND the per-volume registry test — both live in this one file. */
+const COUPLING_PIN = 'tests/domain/couplingRegistry.test.js';
+
+/**
+ * ⛔ SHRINK-ONLY. Packets that minted a coupling row BEFORE this check existed and named
+ * only the volume leaf. Every one of the five recorded instances failed the same way: the
+ * manifest named the leaf and stopped, the head did not re-export the row, the row imported
+ * as `undefined`, and the exact-list pin reddened AFTER the edit rather than being read
+ * before it. These four are exactly the four GR-4C.md:205 names.
+ *
+ * Their manifests are historical records of what each packet TOLD its implementer, and each
+ * implementer's departure is separately recorded in FABLE_VALIDATION_QUEUE.md, so they are
+ * NOT retro-edited — rewriting them would erase the only evidence the gap ever existed, in
+ * the same act that claims to prevent it.
+ *
+ * A row leaves this list only when its packet's manifest genuinely names both companions,
+ * and the honesty arm in tests/scripts/implementationPackets.test.js reds until the row is
+ * deleted, so a silent shrink is not available either. ⛔ An id may NEVER be added here to
+ * make a packet pass; adding is the one motion that arm exists to forbid.
+ */
+const COUPLING_REGISTRATION_LEGACY = Object.freeze(['ES-5B', 'ES-5C', 'ES-5D', 'ES-6A']);
+
 const SHA_40 = /^[0-9a-f]{40}$/;
 const SHA_256 = /^[0-9a-f]{64}$/;
 const ID_TOKEN = /^[A-Za-z0-9][A-Za-z0-9+._-]*$/;
@@ -83,6 +119,38 @@ export function packetPathProblem(value) {
   if (posix.normalize(value) !== value) return 'must already be normalized';
   return null;
 }
+
+/**
+ * The coupling-registration template gap, measured off one packet's change paths.
+ *
+ * A packet that mints a coupling row must name THREE files, and five waves running named
+ * only the first: the volume leaf, the composing head (couplingRegistry.js is an explicit
+ * enumeration of named aggregates, not a dynamic composition, so an un-re-exported row
+ * imports as `undefined`), and the registry test that holds the exact-list pin. GR-4C is
+ * why the pin FILE is required rather than merely the head: it named head and pin from the
+ * start and still missed a SECOND exact-list pin inside that same file, so requiring the
+ * file is what puts a reader in front of every pin it contains.
+ *
+ * @param {string[]} changePaths every path in one packet's changeManifest
+ * @returns {{ leaves:string[], missing:string[] }} empty leaves means the packet is untriggered
+ */
+export function couplingRegistrationGaps(changePaths) {
+  const leaves = changePaths
+    .filter((path) => COUPLING_LEAF_RE.test(path) && path !== COUPLING_SCHEMA_LEAF);
+  if (leaves.length === 0) return { leaves, missing: [] };
+  return {
+    leaves,
+    missing: [COUPLING_HEAD, COUPLING_PIN].filter((path) => !changePaths.includes(path)),
+  };
+}
+
+/** @param {unknown} id @returns {boolean} */
+export function isCouplingRegistrationLegacy(id) {
+  return COUPLING_REGISTRATION_LEGACY.includes(String(id).toUpperCase());
+}
+
+/** The frozen legacy inventory itself, so its honesty arm can audit it in both directions. */
+export const couplingRegistrationLegacyIds = () => [...COUPLING_REGISTRATION_LEGACY];
 
 /**
  * Parse the packet-header facts that identify its authority and verified base.
@@ -466,6 +534,24 @@ export function validatePacketManifest(manifest, options = {}) {
       if (row.action === 'CREATE' && status === 'LANDED' && !fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist for LANDED CREATE: ${row.path}`);
       }
+    }
+
+    // ── THE COUPLING-REGISTRATION TEMPLATE CHECK (OQ §35 ruling 3, instance FIVE) ───────
+    // Applied at EVERY status deliberately. Scoping it to non-terminal statuses would have
+    // been the tidier idiom and is REFUSED as vacuous: there are zero READY packets and
+    // every coupling packet in the estate is LANDED, so such a check would have no live
+    // subject and could be broken by any edit without anything reddening — the recorded
+    // vacuity class, inside a guard whose whole purpose is to stop a silent miss.
+    const coupling = couplingRegistrationGaps([...localChangePaths]);
+    if (coupling.leaves.length > 0 && coupling.missing.length > 0
+      && !isCouplingRegistrationLegacy(id)) {
+      addError(
+        errors,
+        `${idLabel} mints a coupling row in ${coupling.leaves.join(', ')} but its changeManifest`
+        + ` does not name ${coupling.missing.join(' or ')}: a row the composing head does not`
+        + ' re-export and the exact-list pin does not name CANNOT EXIST — it imports as'
+        + ' undefined and the pin reds after the edit instead of being read before it.',
+      );
     }
 
     const symbolKeys = new Set();

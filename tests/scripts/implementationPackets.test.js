@@ -14,7 +14,11 @@ import {
   buildCodingCapsule,
   canonicalSerialize,
   capsuleDigestOf,
+  couplingRegistrationGaps,
+  couplingRegistrationLegacyIds,
   extractSymbolExcerpt,
+  isCouplingRegistrationLegacy,
+  loadPacketManifest,
   packetPathProblem,
   parseIndexPacketStatuses,
   parsePacketHeader,
@@ -22,6 +26,10 @@ import {
   validatePacketManifest,
   verifyCodingCapsule,
 } from '../../scripts/implementation-packets.mjs';
+
+const COUPLING_LEAF = 'src/domain/certification/couplingRegistryEspionage.js';
+const COUPLING_HEAD = 'src/domain/certification/couplingRegistry.js';
+const COUPLING_PIN = 'tests/domain/couplingRegistry.test.js';
 
 const BASE = 'a'.repeat(40);
 const INDEX_PATH = 'docs/implementation/INDEX.md';
@@ -172,6 +180,81 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'LANDED'));
     expect(validatePacketManifest(landedWithoutRetirements, { rootDir: root }))
       .toEqual({ ok: true, errors: [] });
+  });
+
+  it('reds a packet that mints a coupling row without naming the head re-export and the registry pin', () => {
+    for (const path of [COUPLING_LEAF, COUPLING_HEAD, COUPLING_PIN]) {
+      write(root, path, 'export const fixture = true;\n');
+    }
+    /** @param {string[]} paths */
+    const withChanges = (paths) => {
+      const candidate = clone(manifest);
+      candidate.packets[0].changeManifest = paths.map((path) => ({ action: 'MODIFY', path }));
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    // Leaf alone — the shape all five recorded instances shipped.
+    const leafOnly = errorText(withChanges([COUPLING_LEAF]));
+    expect(leafOnly).toContain('P-1 mints a coupling row in src/domain/certification/couplingRegistryEspionage.js');
+    expect(leafOnly).toContain(COUPLING_HEAD);
+    expect(leafOnly).toContain(COUPLING_PIN);
+
+    // Leaf + head — instance FIVE's shape, which a head-only check would have passed.
+    const noPin = errorText(withChanges([COUPLING_LEAF, COUPLING_HEAD]));
+    expect(noPin).toContain(`does not name ${COUPLING_PIN}`);
+    expect(noPin).toContain('P-1');
+
+    // Leaf + head + pin — the complete registration passes.
+    expect(withChanges([COUPLING_LEAF, COUPLING_HEAD, COUPLING_PIN]))
+      .toEqual({ ok: true, errors: [] });
+
+    // The head itself and the SCHEMA leaf are not row-carrying leaves and never trigger.
+    // couplingRegistrySchema.js exports the row FACTORY and no `*_COUPLINGS` aggregate, so
+    // a packet touching only it mints no row — excluded on that reading, not on its name.
+    expect(couplingRegistrationGaps([COUPLING_HEAD]).leaves).toEqual([]);
+    expect(couplingRegistrationGaps(['src/domain/certification/couplingRegistrySchema.js']).leaves)
+      .toEqual([]);
+    expect(withChanges([COUPLING_HEAD])).toEqual({ ok: true, errors: [] });
+  });
+
+  it('⛔ the coupling-registration legacy inventory is EXACT — an un-banked cure reds too', () => {
+    const live = loadPacketManifest();
+    /** @param {Record<string, any>} packet */
+    const gapsOf = (packet) => couplingRegistrationGaps(
+      (packet.changeManifest ?? []).map((row) => row.path),
+    );
+    const triggering = live.packets.filter((packet) => gapsOf(packet).leaves.length > 0);
+    const passing = triggering.filter((packet) => gapsOf(packet).missing.length === 0);
+    const failing = triggering.filter((packet) => gapsOf(packet).missing.length > 0);
+
+    // ⚠⚠ THE ANTI-VACUITY LEGS, AND THEY ARE THE POINT. An empty inventory over zero
+    // triggering packets would satisfy every other assertion here while proving nothing —
+    // the empty-population class. A trigger regex narrowed to match nothing is the failure
+    // mode a green suite cannot otherwise see, and it is the exact shape of the class this
+    // check exists to end, so the live population is pinned as a FLOOR in both parts.
+    expect(triggering.length, 'no packet triggers the coupling check — the trigger is dead')
+      .toBeGreaterThanOrEqual(7);
+    expect(passing.length, 'no packet passes the check on its own — the check is unsatisfiable')
+      .toBeGreaterThanOrEqual(3);
+    expect(couplingRegistrationLegacyIds().length, 'the inventory emptied — if that is real, '
+      + 'delete it and this arm together').toBeGreaterThan(0);
+
+    // Both directions, exactly as the ruin-filter quarantine audits its own list.
+    const stale = [];
+    for (const id of couplingRegistrationLegacyIds()) {
+      const packet = live.packets.find((row) => String(row.id).toUpperCase() === id);
+      if (!packet) { stale.push(`${id}: absent from the manifest — a stale legacy row`); continue; }
+      const gaps = gapsOf(packet);
+      if (gaps.leaves.length === 0) stale.push(`${id}: no longer mints a coupling row — delete its legacy row`);
+      else if (gaps.missing.length === 0) stale.push(`${id}: now names both companions — delete its legacy row (bank the win)`);
+    }
+    expect(stale, 'the legacy inventory drifted from the manifest it exempts').toEqual([]);
+
+    // …and the inventory is EXACTLY the failing set: an id may never be added to buy a pass.
+    expect([...couplingRegistrationLegacyIds()].sort())
+      .toEqual(failing.map((packet) => String(packet.id).toUpperCase()).sort());
+    expect(failing.every((packet) => isCouplingRegistrationLegacy(packet.id))).toBe(true);
+    expect(passing.some((packet) => isCouplingRegistrationLegacy(packet.id))).toBe(false);
   });
 
   it('rejects an indexed packet omitted from the manifest', () => {

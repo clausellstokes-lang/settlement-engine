@@ -4155,8 +4155,44 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   construction and a `describe.runIf()` parks a file WHOLE — either would have broken this
     //   arithmetic, and the member forbids both by name.
     // Prior row retained as a cross-contract ancestry pin: files: 2421, parked: 366, credited: 2055, titles: 20046, suiteTitles: 5646
-    // 2421/366/2055/20046/5646 → 2425/366/2059/20077/5650.
-    files: 2425, parked: 366, credited: 2059, titles: 20077, suiteTitles: 5650,
+    // Prior row retained as a cross-contract ancestry pin: files: 2425, parked: 366, credited: 2059, titles: 20077, suiteTitles: 5650
+    // 2425/366/2059/20077/5650 → 2425/366/2059/20081/5650.
+    // ⏱ TRAIN infra-2, THE INFRA MICRO-ACT BATCH (four members), 2026-08-14 — RE-DERIVED
+    // WHOLE at M4's commit, the LAST commit in this train that moves a `tests/` byte, so the
+    // terminal stays DOCS-ONLY and the base-state capsule regenerates in ONE commit. Never
+    // patched one figure at a time: all five are re-derived together and the cause is named.
+    //   • M1 (the preamble law batch) is DOCS-ONLY and moves NOTHING. The corpus is a walk of
+    //     the `tests` tree filtered to `*.test.js` / `*.test.jsx`, so no `docs/` path can
+    //     enter it (INFRA-PREAMBLE §P3 rule 1) — which is what made M1 this train's lawful
+    //     truncation boundary.
+    //   • M2 (the codeOnly re-point) adds ONE literal `test` title to
+    //     tests/lint/ruinFilterRoster.walker.test.js, a file already CREDITED.
+    //   • M3 (the capsule hot-file parse) adds ONE literal `it` title to
+    //     tests/scripts/baseStateCapsule.test.js, likewise already credited.
+    //   • M4 (the coupling-registration check) adds TWO literal `it` titles to
+    //     tests/scripts/implementationPackets.test.js, likewise already credited.
+    //     Train total: +0 files / +0 parked / +0 credited / +4 titles / +0 suite titles.
+    // ⚠ FILES DOES NOT MOVE BECAUSE NO MEMBER CREATES A TEST FILE. All four new titles land
+    //   in three files the walker already credits, so `credited` cannot move either — it
+    //   cannot move without `files`, and 366 + 2059 = 2425 still closes.
+    // ⚠ PARKED IS UNCHANGED AT 366, and it is earned rather than lucky: all four titles are
+    //   spelled as string LITERALS in straight-line registrations, so door 3 keeps crediting
+    //   each file statically. A `test.each()` case is invisible to this census by
+    //   construction and a `describe.runIf()` parks a file WHOLE — either would have broken
+    //   this arithmetic, and every member forbids both by name.
+    // ⚠⚠ SUITE TITLES ARE PROVED SEPARATELY, AND ON PURPOSE. This census is SEQUENCED and
+    //   stops at its first red figure, so at every interior commit of this train the `titles`
+    //   arm redded and `suiteTitles` NEVER EXECUTED — trusting a green there would be
+    //   trusting a green that never ran. It is proved instead by grepping the WHOLE train
+    //   diff over `tests/` for added `describe(` lines and requiring ZERO: executed, zero
+    //   hits, no member opens a new suite.
+    // ⭐ M2 CARRIES A MEASURED SUBTLETY THAT MOVES THE RUNTIME DENOMINATOR WITHOUT MOVING
+    //   THIS TUPLE: importing `codeOnly` re-registers engineGatedRuleKeys' seven titles under
+    //   ruinFilterRoster at RUN TIME (the ten pre-existing importers already do this). This
+    //   census parses each file's OWN bytes, so it sees +1 there, not +8. The runtime
+    //   denominator is a FLOOR, not a pin (§P3 rule 5), and is transcribed into the capsule
+    //   from the terminal's own executed ratchet receipt rather than predicted.
+    files: 2425, parked: 366, credited: 2059, titles: 20081, suiteTitles: 5650,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
