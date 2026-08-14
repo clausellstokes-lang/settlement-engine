@@ -106,8 +106,24 @@ scratchpad `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a24
 - **Lane SD** derives the first-diagnostic-soak execution plan from
   `DIAGNOSTIC_SOAK_DESIGN.md` + §3h, verifying mechanisms at HEAD →
   `laneSD-soak-plan.md` (QUOTED / VERIFIED-AT-HEAD / GAP labels).
-- **Lane II-R** recons GR-4b-ii kind-by-kind producer honesty post-GR-4d →
-  `laneIIR-gr4bii-recon.md` (feeds the pre-soak queue ruling).
+- **✅ Lane II-R COLLECTED (~02:12): GR-4b-ii is COMPILABLE IN PART.** Full table in
+  `laneIIR-gr4bii-recon.md` (27,450 B). Verdicts: `honored_by_silence` PARTIAL
+  (expiry terminal durable+typed but NO WORLD TICK — only ISO `expiredAt`; 5/8
+  variants unreachable); `reaffirmed` PARTIAL (dismiss-to-HONOR persisted and
+  distinguishable from silence — GR-4b's D2 premise now FALSE — but no world tick,
+  no news channel, exemplar itself defective); scored below-band HONOR NO-PRODUCER
+  (chair spot-checked: `treatySuccessionDecision.js:153` continues on non-disavow);
+  lapsed/superseded PRODUCER-EXISTS with the ONLY tick-carrying terminal
+  (`supersededAtTick`, `applyWorldPulse.js:1176/1245`, chair spot-checked) but NO
+  authored pool; applied already voiced. ⚠ Only Apply speaks — every other terminal
+  resolves SILENTLY, and that silence is a LANDED PIN (chair spot-checked the title
+  at `treatySuccessionOpeningVoice.test.js:310`) — GR-4b-ii re-addresses that
+  title, never deletes it. Recommended split (vetoable): B1 corpus annex act
+  (A-21/A-22 pattern, chair) → `reaffirmed` (no new persisted key) →
+  `honored_by_silence` (the schema-mint risk lives there). ⚠ Its "no derivable
+  exactly-once discriminator" claim is INFERRED — needs an adversarial pass before
+  any packet leans on it. Second flag conjunction + ring-overflow exclusion are
+  mandatory budget items.
 A successor COLLECTS finished lanes (verify receipts independently), never
 re-dispatches while their output files exist. §24+§25 are on the owner queue.
 
