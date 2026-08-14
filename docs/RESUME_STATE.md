@@ -96,13 +96,26 @@ sequencing table relative to §3h. FOLD OBLIGATION: to the build branch at the
 first integration point after the seal lifts, CLAIM_RE-checked in the same
 change.
 
-**LIVE: Lane IB (Opus) implements GR-4B-IIIB** — edits only, ten paths, chair
-owns commit/CAS/flip; completion receipt lands at scratchpad
-`laneIB-completion-receipt.md`. A successor COLLECTS (survey porcelain — the ten
-paths dirty is the lane's WIP, back it up, re-verify, land by plumbing+CAS);
-never re-dispatch while WIP exists. Draft lanes G1 (GAP-1 walker cure) and B1
-(GR-4b-ii corpus annex) still run read-only; collect their scratchpad files on
-report. §26 (IP-protection ruling) recorded on the owner queue at `9b9a88b1`.
+**⚡ TRIPLE 529 EVENT (~03:40): all three lanes killed by server-side Overloaded
+errors within minutes.** Survey results: **Lane IB died in preflight, porcelain
+EMPTY at `cdd4bf52` — zero partial edits, zero loss; RESUMED from transcript
+with the re-run-every-measurement order.** Lanes G1 and B1 died AFTER writing
+complete deliverables (only their report-back turns were lost) — both are
+COLLECTED FROM DISK, no re-dispatch: `laneG1-gap1-packet-draft.md` (35,834 B) +
+`laneG1-report.md` (17,228 B) and `laneB1-annex-draft.md` (11,090 B) +
+`laneB1-report.md` (19,049 B), all four tails verified clean. G1's last words
+confirm its figures were re-verified at `cdd4bf52`. ⏳ CHAIR RULINGS OWED on
+both drafts (GAP-1 packet promotion; the GR-4b-ii annex act) — next boundary
+after IB lands or at a keeper tick. B1's report flags one open question on
+`succession_question_opened` v3 (not acted on) and keeps the annex act
+decoupled from the code waves.
+
+**LIVE: Lane IB (Opus, resumed) implements GR-4B-IIIB** — edits only, ten
+paths, chair owns commit/CAS/flip; completion receipt lands at scratchpad
+`laneIB-completion-receipt.md`. A successor COLLECTS (survey porcelain — the
+ten paths dirty is the lane's WIP, back it up, re-verify, land by
+plumbing+CAS); never re-dispatch while WIP exists. §26 (IP-protection ruling)
+recorded on the owner queue at `9b9a88b1`.
 
 # (superseded ~03:05) — GR-4b-iii-a terminal; the orphaned A-22
 # exemplar cure is COLLECTED and LANDED at `2dd09360`; build clean; no lane live
