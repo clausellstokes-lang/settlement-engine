@@ -149,7 +149,14 @@ after IB lands or at a keeper tick. B1's report flags one open question on
 `succession_question_opened` v3 (not acted on) and keeps the annex act
 decoupled from the code waves.
 
-**LIVE: Lane IB (Opus, resumed) implements GR-4B-IIIB** — edits only, ten
+**~05:00: IB hit the OUTLAST-THE-GATE hazard** (yielded mid-second-gate; its
+waiters + exit echo died with the yield). Chair survey: WIP = exactly the ten
+manifest paths, no foreign dirt; the orphaned check:tail process ALIVE writing
+`laneIB-checktail2.log`. IB RESUMED with orders: never kill the orphan, poll it
+to completion for triage only, then ONE authoritative bare gate held in its own
+turn with TRUE_EXIT quoted, then smoke:boot, then the §12 receipt.
+
+**LIVE: Lane IB (Opus, resumed twice) implements GR-4B-IIIB** — edits only, ten
 paths, chair owns commit/CAS/flip; completion receipt lands at scratchpad
 `laneIB-completion-receipt.md`. A successor COLLECTS (survey porcelain — the
 ten paths dirty is the lane's WIP, back it up, re-verify, land by
