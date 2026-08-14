@@ -6,11 +6,15 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `d383aa3c`
-- Commits: 3240
+- HEAD: `60083174`
+- Commits: 3244
 - Working tree at refresh: 0 dirty entries
 
 ```
+60083174 2026-08-14 docs: promote and land the gr-4b-ii train (GR-4B-II-W2 + the GR preamble)
+7b54c038 2026-08-14 test: re-derive the whole lighting census at the gr-4b-ii train terminal
+b3602c15 2026-08-14 feat: speak the reaffirmed voice on the dismiss road
+039f8380 2026-08-14 docs: correct the two GR-4 honor pools (A-23, CR-GR4B-16)
 d383aa3c 2026-08-14 docs: record GR-4b-iii-b landing; stamp the first base-state capsule
 770167c5 2026-08-14 feat: render open succession dossier lines
 cdd4bf52 2026-08-14 docs: promote GR-4b-iii-b packet
@@ -407,8 +411,4 @@ e5ceb2f2 2026-08-04 Lane WZ-3 piece 4: the razing gets a Herald home — the wor
 6a9038c9 2026-08-04 The ribbon V4 spec leaves the session scratchpad: the war-arrow design law becomes a repo document
 b43986b5 2026-08-04 Lane WZ-3 piece 2: the razing's licenses come home — the spread lands, the unwired ledger retires, and a tick that burns two towns keeps both
 898d1c0b 2026-08-04 Lane V4 piece 1: the war arrow goes to cedar — the ink register dies, the wordmark is gilded, and the plate retires
-d5b0fca8 2026-08-04 Lane WZ-3 piece 1: the lint pair resolves by restructure — the analysis that blocked it was false on both legs
-af1b9d38 2026-08-03 Queue: lane WZ-2's rulings, the razing's mouth, and the two stops that keep WR-8 open
-172e5f22 2026-08-03 Lane WZ-2 piece 3: the license ledger is built, conserved and returned — and STOPPED one line short, on a gate that is not size
-6f1bada6 2026-08-03 Lane WZ-2 piece 2: the razing gets its mouth — a victor that burns mints no occupation, and the town it burned stays burned
 ```

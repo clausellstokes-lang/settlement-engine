@@ -63,7 +63,46 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~05:40 EDT) — ✅ GR-4B-IIIB LANDED at `770167c5`,
+# ⭐⭐ CURRENT (2026-08-14 ~08:20 EDT) — ✅✅ THE FIRST §28 TRAIN IS LANDED AND
+# EXPOSED: branch at `60083174`; GR-4b-ii annex + `reaffirmed` are TERMINAL
+
+**THE GR-4B-II TRAIN LANDED WHOLE.** Exposed chain (was `refs/trains/gr-4b-ii`,
+now reachable from the branch; the ref is left in place, harmless):
+`d383aa3c → 039f8380` (W1 annex, A-23/CR-GR4B-16, zero census motion,
+base-equal red-set proof) `→ b3602c15` (W2 `reaffirmed`: 8/8 acceptance,
+270/270 battery, 8/8 mutants digest-exact, the ONE named interior red only)
+`→ 7b54c038` (terminal: census EXACT `2416/365/2051/20016/5642`, runtime
+28032/16 frozen, bare gate TRUE_EXIT=0 all 20 steps, smoke 0) `→ 60083174`
+(T′ docs: GR-4B-II-W2 packet LANDED + `preambles/GR-PREAMBLE.md` CANONICAL sha
+`ef96f8b6…` + INDEX LANDED-28 + surgical manifest append byte-proven +
+capsule re-stamped with figures re-derived and cross-checked). Chair verified
+independently before the CAS: chain topology exact, 96/96 across three
+focused suites TRUE_EXIT=0, validator **36 packets / 0 READY TRUE_EXIT=0**;
+CAS `d383aa3c → 60083174` executed; worktree re-attached; porcelain ZERO; the
+one foreign stash untouched. Full train receipt (520 lines):
+`laneTE2-train-receipt.md`. Chair ratifications recorded in the packet §13:
+J-E2 (walker-conformant divergence rows — the packet row-5 prohibition was
+the defect), the anchored-negative cure, the pre-exposure I2 amendment, the
+capsule docs-window rule (ADOPTED). `implementationSession` one-shot red
+stays PLAUSIBLE-flake — passed twice since; if it recurs, it is NOT this
+train's cure to assume.
+
+**§28 LIVE-FIRE VERDICT (first data point):** the train landed two waves for
+ONE full gate; the compiler caught three inherited defects pre-landing; the
+executor caught a packet defect against machine-truth. Second data point =
+the next train, then the §8 review gate.
+
+**NEXT (in order):** (1) the INFRASTRUCTURE TRAIN — capsule generator script +
+PACKET_STANDARD §28 amendment + IP-1 sourcemap guard + the FPC prose
+contradictions (INDEX:498 blocked-prose, the spine 109/108/111 count, volume
+"LANDED" header warnings) + DESIGN_BUILD_EFFICIENCY.md and
+DESIGN_IP_PROTECTION.md folded from the ledger branch (CLAIM_RE-checked);
+(2) rule the GAP-1 packet draft (`laneG1-gap1-packet-draft.md`, banked) and
+land its walker cure; (3) the ES spine trains per `laneFPC-census.md`;
+onward through the 85-wave §27 inventory. `honored_by_silence` stays OQ-1
+(persisted-key boundary recorded in §29/CR-GR4B-18).
+
+# (superseded ~08:20) ⭐⭐ CURRENT (2026-08-14 ~05:40 EDT) — ✅ GR-4B-IIIB LANDED at `770167c5`,
 # flipped + FIRST CAPSULE stamped at `d383aa3c`; the seal is LIFTED; Lane TC2
 # compiles the GR-4B-II train
 
