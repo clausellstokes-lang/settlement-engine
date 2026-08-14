@@ -126,6 +126,20 @@ because M1 has zero CREATE rows. Seven pre-STOP measurements banked and
 inherited. ⚠ MEMORY.md at 17,054 B — A FOLD PASS IS OWED at fresh context
 (grep-every-hook law) before any new hook.
 **LIVE (resumed ~05:45): TE10 EXECUTES hb-2b under Road A.** Chair owns CAS.
+
+**⭐ §45 IS ARCHITECTED AND IMPLEMENTING (~06:50):**
+`docs/DESIGN_PREVERIFICATION.md` landed on THIS branch (SPV — the volume
+substrate sweep protocol with grades, annex artifact, staleness + consumption
+laws; TTS — the train-topology simulator importing the REAL validator, with
+the banked rule inventory; §4: nothing relocated stops binding at its
+original site). TE10's probes PRESERVED from the volatile scratchpad at
+`docs/preverification-tools/laneTE10-probe{2,3}.mjs.txt`. **LIVE: Lane WV
+executes the FIRST SPV SWEEP (the WC volume)** — read-only beside TE10,
+annex → `laneWV-WC-SUBSTRATE.md` + `laneWV-report.md`; the chair grades the
+sweep at collection. **infra-3 QUEUED** (first train after hb-2b): the TTS
+script + PACKET_STANDARD/preamble amendments + this volume's fold +
+CR-HB0B-BANDGAP + the JSDoc-vacuity cure. WC-0's compile follows the sweep
++ infra-3, citing the annex.
 **(superseded) TE10 first dispatch** on `refs/trains/hb-2b` from
 `e5ecc83d` (census at I2 to `2428/366/2062/20107/5653`, runtime 28130;
 validator 44/0; ratchet floors tripwired; T docs-only; held gate + smoke).

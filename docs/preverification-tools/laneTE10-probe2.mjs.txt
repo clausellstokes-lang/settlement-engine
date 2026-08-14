@@ -1,0 +1,21 @@
+import { loadPacketManifest } from '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold/scripts/implementation-packets.mjs';
+const root = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold';
+const m = loadPacketManifest({ rootDir: root });
+const TERMINAL = new Set(['LANDED', 'SUPERSEDED']);
+const byStatus = {};
+for (const p of m.packets) byStatus[p.status] = (byStatus[p.status] || 0) + 1;
+console.log('live packet count:', m.packets.length);
+console.log('status histogram:', JSON.stringify(byStatus));
+const nonTerminal = m.packets.filter((p) => !TERMINAL.has(p.status));
+console.log('NON-TERMINAL packets (these RESERVE change paths):', nonTerminal.map((p) => `${p.id}[${p.status}]`).join(', ') || '(none)');
+const reserved = new Map();
+for (const p of nonTerminal) for (const r of p.changeManifest) reserved.set(r.path, p.id);
+const M1 = ['src/domain/worldPulse/habit/habitCurve.js', 'tests/domain/habitCurve.test.js'];
+const M2 = ['src/domain/worldPulse/habit/habitLedger.js','src/domain/worldPulse/habit/habitGate.js','src/lib/spatialUsage.js','src/domain/worldPulse/simulationRules.js','src/domain/certification/subsystemRowsVirtual.js','tests/domain/habitLedger.test.js','tests/property/habitNeutralIdentity.test.js','tests/lint/habitLedgerSingleWriter.walker.test.js','tests/domain/habitCurve.test.js','tests/lint/couplingInclusion.walker.test.js','tests/lint/sovereigntyLightingContract.walker.test.js','scripts/mutation-coverage-manifest.json'];
+console.log('\n-- collisions with EXISTING non-terminal packets --');
+let ext = 0;
+for (const p of [...M1, ...M2]) if (reserved.has(p)) { console.log('  COLLIDE', p, '<-', reserved.get(p)); ext += 1; }
+console.log('  count:', ext);
+console.log('\n-- M1 x M2 intersection --');
+const inter = M1.filter((p) => M2.includes(p));
+console.log(' ', JSON.stringify(inter));
