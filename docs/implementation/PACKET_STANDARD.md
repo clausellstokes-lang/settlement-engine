@@ -273,8 +273,18 @@ A hot file sits within a handful of effective lines of a ceiling that will not b
 | File | Effective | Ceiling | Headroom |
 |---|---:|---:|---:|
 | `src/components/OutputContainer.jsx` | 599 | 600 | 1 |
+| `src/domain/worldPulse/convergence.js` | 798 | 800 | 2 |
 | `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |
 | `src/domain/worldPulse/informationStatecraft.js` | 780 | 800 | 20 |
+
+⭐ `convergence.js` joined on 2026-08-14 by `OWNER_DECISION_QUEUE.md` §32 ruling 3, on
+the executed measurement `GAP-1` §2.4 carries — it is tighter than two of the three
+rows that were already here, and it had no entry, no `scripts/.size-baseline.json`
+row and no door. All four figures above were re-executed at `5d6a0e7c` with eslint's
+own `Linter` under `max-lines` `{ skipBlankLines: true, skipComments: true }`.
+⚠ The measurement is what earned the row: `convergence.js` rebinds a short local six
+times and is a natural target for exactly the kind of multi-line probe that would red
+`max-lines` for a reason having nothing to do with the change under test.
 
 Three rules bind every packet:
 

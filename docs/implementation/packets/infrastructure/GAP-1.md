@@ -3,8 +3,14 @@
 **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` at SHA-256
 `cd04a46315c919694d6eb5a043d74fe6173ec11be359be932d40ecf04af232f5`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `5d6a0e7c19d5a0d58880ee3db9ff8c2b537ece5c`
+- **Landed:** `152d3f19cabe8b3006d94e56ff104029bccc5676` — the `gap-1` train's single
+  implementation member. Chain: promotion `ea98c42f` → implementation `152d3f19` →
+  terminal (this docs flip). §14 carries the executed landing evidence.
+- **Id:** ruled `GAP-1` by `OWNER_DECISION_QUEUE.md` §33. The draft proposed `CW-1`,
+  which is already the declared FP wave #58 (THE CASCADE GOVERNOR,
+  `cascadeGovernorEnabled`, PHASE 8); that id stays reserved for it.
 - **Promoted:** 2026-08-14 by Lane TE4 as the single member of the `gap-1` train,
   under `OWNER_DECISION_QUEUE.md` §32 (chair, vetoable), which rules all five of
   this packet's open questions. §13 records each ruling and the one place where
@@ -979,3 +985,29 @@ row that grades ALIVE on another lane's traffic is worse than no row at all. Say
 "veto" and the arm asserts declared-equals-MINTED, which forces
 `eventTypes: ['institution_build','institution_closure']` onto this row and either
 a sixth escape-hatch member or an `indirect` claim no receipt can support.*
+
+### 14.5 ⚠ A SECOND HOME FOR THE HOT-FILE FACT — DEFERRED, NOT MISSED
+
+§32 ruling 3 puts `src/domain/worldPulse/convergence.js` on the standing hot-file list
+"in this landing's docs flip", and that landed: `PACKET_STANDARD.md`'s **Hot files**
+table now carries it at its executed **798/800**, with the measurement recorded beside it.
+
+⛔ **The fact has a SECOND home, and this member deliberately did not touch it.**
+`scripts/base-state-capsule.mjs:43` carries `HOT_FILES` as a hardcoded constant —
+its own comment says *"The standing hot-file list and its ceilings (PACKET_STANDARD.md,
+'Hot files')"* — so the generator mirrors the table rather than parsing it. The capsule
+emitted at this landing therefore reports **three** hot files, not four.
+
+**Why it was not cured here.** `scripts/base-state-capsule.mjs` is a MEASURER this
+member merely reads, and INFRA-PREAMBLE §P8.8 makes an edit to one a STOP: *"any edit
+to the `check` chain, to CI, or to a measurer the member merely reads appears
+necessary … ⛔ The gate is AMORTIZED, never THINNED."* It is also outside this packet's
+change manifest. Editing it to add one row would have been a silent scope expansion
+into the exact class the preamble names.
+
+**DELIBERATELY DEFERRED — documented, not a bug to re-find.** The next INFRA micro-act
+that opens `base-state-capsule.mjs` adds the `convergence.js` row to `HOT_FILES`, or
+better, teaches the generator to PARSE the `PACKET_STANDARD.md` table so the two homes
+cannot diverge again. This is the same shape as the capsule's own `INFRA-M4` deferral
+for the runtime denominator, and it is filed the same way. Until then the authority is
+the table, and the capsule's `hotFiles` row is known-short by exactly this one entry.

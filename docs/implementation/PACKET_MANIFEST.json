@@ -2326,7 +2326,7 @@
     },
     {
       "id": "GAP-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GAP-1.md",
       "verifiedBase": "5d6a0e7c19d5a0d58880ee3db9ff8c2b537ece5c",
       "changeManifest": [
@@ -2349,7 +2349,15 @@
         { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const VIRTUAL_RULES" },
         { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const LANE_LEAVES" },
         { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "the empty-eventTypes claim holds: no lane leaf mints a candidate" },
-        { "path": "scripts/hazard-registry.json", "symbol": "HZ-CAMELBLIND" }
+        { "path": "scripts/hazard-registry.json", "symbol": "HZ-CAMELBLIND" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const GATE_EXPR_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function rulesBindingsOf" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const ALIAS_READ_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const CANONICAL_RECEIVERS =" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const SHARED_CANDIDATE_LITERALS" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'settlementPoliticsEnabled'" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'underwaysOrganicFoundingEnabled'" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "`src/domain/worldPulse/convergence.js` | 798 | 800 | 2" }
       ],
       "acceptanceCases": [
         {
