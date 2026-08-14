@@ -104,7 +104,23 @@ nothing was written. **ROAD B RULED: train `hb-2b`** = M1 "HB-0b" (the three
 bounds minted in HABIT_TUNING, values DERIVED from measured substrate,
 chair-signed at promotion, unsoaked, riding the signature) → M2 HB-2
 corrected (§42.3: local helpers; median/p95 → HB-3; honest Bands line).
-**LIVE (~03:25): Lane TC10 COMPILES hb-2b** → `laneTC10-*`; the chair rules
+**✅ TC10 COLLECTED + §43 RULED (~04:40, ledger `b0df70ba`): hb-2b compiled;
+THE THREE BOUNDS ARE CHAIR-SIGNED on executed derivations** — CAP=24 (2× the
+vocabulary, eviction reachable, 26.4 KB @ 30 actors) · AGE=156 (a
+HALF_LIFE_WEEKS ladder MEMBER past the decay/credit crossover, indexed
+POSITIONALLY) · BOOK=256 (the transient/persistent parity point). The
+volume's 48/208 + ~14-byte figures REFUTED (R33 1.79× wrong; R34 the
+180-denominator is 6× the certified ceiling). Band walker: no census move,
+no owner band owed (the landed law quoted) — but ⚠ CR-HB0B-BANDGAP DOCKETED
+(waveBlocks() blind to letter-suffixed blocks → bands would miss the
+signature scan). R32 absorbed (the two-file family pin + ONE-rounding-
+spelling — all rounding via roundToUnits, mutant M-13). M1→M2 order FORCED
+(shared path, region-disjoint).
+**LIVE (~04:45): Lane TE10 EXECUTES hb-2b** on `refs/trains/hb-2b` from
+`e5ecc83d` (census at I2 to `2428/366/2062/20107/5653`, runtime 28130;
+validator 44/0; ratchet floors tripwired; T docs-only; held gate + smoke).
+Chair owns CAS. Receipt → `laneTE10-receipt.md`.
+**(superseded) TC10 compiles hb-2b** → `laneTC10-*`; the chair rules
 values + band-walker finding at collection.
 **(superseded) TE9 executes hb-2** on `refs/trains/hb-2` from
 `e5ecc83d` (P1→I1 census-at-member to `2428/366/2062/20103/5653`, runtime
