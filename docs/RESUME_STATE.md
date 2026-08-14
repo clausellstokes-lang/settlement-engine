@@ -93,7 +93,17 @@ train (7 commits → `5d6a0e7c`). Volumes now IN-TREE: DESIGN_BUILD_EFFICIENCY
 + DESIGN_IP_PROTECTION (ledger copies historical). IP-1 is LIVE (521 .map
 mutant conviction). The capsule is MACHINE-GENERATED from now on.
 
-**NEXT (in order):** (1) ⭐ the §8 EFFICIENCY REVIEW (two trains = the data;
+**✅ §31 RECORDED (ledger `e532bcec`): the §8 review is DONE** — ≈56%
+wall-clock reduction over two trains (inside the 40-60% estimate, CONFIRMED);
+cap of 4 held; two new laws: the un-anchored-negative preflight enters the
+preambles, and J-TE3-1's census-red declaration is train-plan law.
+**LIVE (~10:50): Lane G2 (Opus) RESTAMPS the GAP-1 packet at `5d6a0e7c`**
+(G1's draft was compiled at `cdd4bf52`, 12 commits and two walker edits ago;
+full re-detection ordered, no inherited figures) → `laneG2-GAP1-packet-
+restamped.md` + `laneG2-report.md`. On its report: chair rules → promote →
+execute (single-member wave or ES-train head) → then the ES spine trains.
+
+**NEXT (in order):** (1) ~~the §8 EFFICIENCY REVIEW~~ DONE (§31); (two trains = the data;
 audit wall-clock + red-rates vs the 40-60% estimate; confirm/adjust the cap
 of 4; record) + fold the J-TE3 ratifications into the preamble as the
 un-anchored-negative rule; (2) rule the GAP-1 packet draft
