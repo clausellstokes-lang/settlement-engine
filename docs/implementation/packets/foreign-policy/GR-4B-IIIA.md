@@ -1,12 +1,14 @@
 # Foreign Policy / GR-4B-IIIA — the question-opening voice
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `2`
 - **Verified base:** `claude/composite-r4` at `955acd7ad2aafc9fc64ad71ade64c54349219495`
-- **Last revalidated:** 2026-08-13, after the stopped version-1 draft audit and
-  packet-only canonical-order correction. The verified base remains the annex-only
-  chair correction `955acd7ad2aafc9fc64ad71ade64c54349219495`, whose direct
-  parent is the GR-4d terminal `7a589733a8bcfae68c3768c035e0670e3331e493`.
+- **Last revalidated:** 2026-08-14, at terminal implementation
+  `7e7d52059043c0cd1e189e0b85bebb2d28dd58dd`, the direct child of
+  version-2 authority `4bc44f8e0b67a8528171b82c8e9ee9fe375a20da`.
+  The verified base remains the annex-only chair correction
+  `955acd7ad2aafc9fc64ad71ade64c54349219495`, whose direct parent is the
+  GR-4d terminal `7a589733a8bcfae68c3768c035e0670e3331e493`.
 - **Depends on:** GR-4b-alpha at `dd457b9a` for the landed succession-voice
   grammar idiom and GR-4d at implementation `a17d0a02`, version-2 authority
   `fcf1efbd`, and terminal receipt `7a589733` for the durable pending question.
@@ -583,3 +585,155 @@ Stop and return to the chair on any of:
 
 This packet ends after the opening beat lands and its receipts are attached.
 It does not continue into GR-4b-ii, GR-4b-iii-b, GR-5, or soak.
+
+## 13. Executed landing receipt — 2026-08-14
+
+- **Authority, seal, and immutable landing:** version-2 authority
+  `4bc44f8e0b67a8528171b82c8e9ee9fe375a20da` produced capsule
+  `518ee395a451846fa30b6848603943d26f723e3eb35d088b217acc13db55fbb1`,
+  dispatch
+  `591f5f338f7d7cc1e3998277b793d7d5c335af79bc3df8fa5486bc843e7f6d9b`,
+  and seal
+  `15f713325572d3d4269c4400c2fb82119c5c8e0ddca7d5b5acdf315702039e5f`.
+  Immutable implementation
+  `7e7d52059043c0cd1e189e0b85bebb2d28dd58dd` has that authority as its
+  sole parent and tree
+  `c803236d5d498ebf7199698787ef9db48013f7ba`. Its sealed working
+  fingerprint is
+  `6c96e5112b48586486d14ce00f9646c7dea3f346cb487cfd894d5aeb9087f134`.
+- **Exact implementation scope:** exactly twelve manifest paths moved
+  **+608/-27**. The new leaf is **119 raw / 84 effective**;
+  `peaceTerms.js` remains exactly **1264 raw / 797 effective**; total
+  effective production movement is **+101**, within the packet's `<=228`
+  budget. The acceptance file is **427 raw / 391 effective**. Generated
+  artifacts: **NONE**.
+
+Manifest-ordered terminal target receipt:
+
+| Path | Raw / effective | SHA-256 |
+|---|---:|---|
+| `src/domain/worldPulse/treatySuccessionOpeningVoice.js` | `119 / 84` | `67a38dd4a289a79dc4355f956828a25f6a1ce37a80cdcfb4de93727a30ee5450` |
+| `src/domain/worldPulse/peaceTerms.js` | `1264 / 797` | `cd15da4a74a8c8f04a9f42fff9b4064e72c44bc2d4fd6b6fb660f7ab41640885` |
+| `src/domain/worldPulse/grammarReceiptPools.js` | `152 / 93` | `81e654348b8ae0a10fab654d2bae6f2074d110eac1dbc11bd3dba9200c64eac1` |
+| `src/domain/worldPulse/grammarNews.js` | `244 / 110` | `e9dd32b2144ef3205b33552e14c7c9a7a7ae849ae054ee58ea4b392c972adea9` |
+| `src/domain/realm/heraldRouting.js` | `625 / 266` | `79e2568c1b506093d47f372bd470b01e0b0e352ff0f37b757e7f2497678da72d` |
+| `src/domain/display/chroniclersLetter.js` | `415 / 219` | `a7a041a4781c3687a506bc3e5da8ae495115c4e707a0e5148471c136ac8dd28f` |
+| `src/domain/display/settlementRumors.js` | `880 / 507` | `2b7d72ab413a3dae1b2e5be9be13bc9a306f6340734c98da2c3be1cd4d71937b` |
+| `tests/domain/treatySuccessionOpeningVoice.test.js` | `427 / 391` | `33b71078f0c1bb4f7b86276e72665a59738d8f640730d70883d6b33f8409c7c5` |
+| `tests/lint/grammarLifecycleKindPools.walker.test.js` | `338 / 210` | `5b4229415ee817d995f1bf4963cd5f1e66029ab824e1b2f9a4b194ffb9e58baa` |
+| `tests/lint/kindPoolFloors.walker.test.js` | `318 / 183` | `d90285db4f571810462be16594f64a9e66489c8927d7b28b37143272616eb64f` |
+| `tests/domain/impactKindWalkers.test.js` | `201 / 87` | `d0a4706ffcfbf5505e3ee5f9768a3a9d9023b8a8adc5093fabcfa27a201b6a13` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `4395 / 1336` | `b912230b033f409bd1f933344de645259f9c3eaf6ba23b4d018a222eb6aca324` |
+
+- **Acceptance and focused closure:** the exact A1-A8 file passed **1/1
+  file and 8/8 tests**. The exact twenty-file predecessor/contract battery
+  passed **20/20 files and 296/296 tests**. The repaired
+  negative-assertion-anchor walker passed **1/1 file and 9/9 tests**.
+  Packet, hazard-registry, pre-mortem, exact-twelve ESLint, coupling, and
+  cross-home checks passed.
+- **Static closure:** the full TypeScript ratchet held **173/173**, strict
+  domain held **1,134/1,134**, and observed-shape readers remained exact at
+  **1,998**.
+- **Registry and census closure:** receipt-pool rows are **10**; grammar
+  Herald rows **5**; registered impact kinds **109**; explicitly routed
+  kinds **377**; routed-and-registered **103**; registered-minus-routed
+  **6**; deliberately unvoiced **274**; underfloor **28**. The runtime
+  denominator moved exactly `27999 → 28010`: eight literal A cases plus
+  three registry-driven cases, with the known-failure ceiling frozen at
+  **16**. The whole census is
+  **2414/365/2049/20000/5640**, exactly `+1/0/+1/+8/+1`.
+- **Controlled mutation closure:** every plant changed bytes uniquely,
+  the mutex-held direct-file command exited **1**, and only its intended
+  A-title failed:
+  - M1 `f08319012d897f9354884c9616eee439dc99e5f47f5a6a2fd0e7402c2d83329c`
+    convicted A1 `a newly inserted proposal emits exactly one opening beat`;
+  - M2 `0933c74a16e26300a7ba5a980dbfc0ffa4c3cb7d986ed9da8836cba08a9ed007`
+    convicted A2 `all seven annex-verbatim families and slot vectors are reachable`;
+  - M3 `13b93833bf2cf0a1c9c41813f666742c40ae1099b6abf4cfd415ac433a3e66c1`
+    convicted A3 `absent or false gates, direct handling, and HONOR emit no opening beat`;
+  - M4 `dc185a634b9d75118679f7c495cb0a0b028d7ef8cbaf9df2c3bb37ab29d1e64b`
+    convicted A4 `duplicates, retained terminals, and collisions emit no second opening beat`;
+  - M5 `8815438f280a1860b20e91c004d4d8b21e02e07efc6237006c5eea16b202d38e`
+    convicted A5 `two instruments get distinct identities and reverse enumeration stays stable`;
+  - M6 `b05a4aa91a099953e12cfc7a1615c4fb81168e3e031aeaf6b83a0b6c081e4082`
+    convicted A6 `the same input is byte-stable and draws no randomness`;
+  - M7 `a159b86a0856bc631055b68f7d91b0b343adcf390abfa0fe71180930baeaa3ff`
+    convicted A7 `apply, dismiss, expiry, overflow, undo, and replay never mint terminal or duplicate opening voice`;
+  - M8 `ad0ddd8e93a3685b870c3359880c602e8464dcf6dae25bef5c2427fb028552ba`
+    convicted A8 `a real organic ladder succession reaches the late treaty stage and emits one fully addressed public beat`.
+  M1-M7 restored the leaf to
+  `67a38dd4a289a79dc4355f956828a25f6a1ce37a80cdcfb4de93727a30ee5450`;
+  M8 restored `peaceTerms.js` to
+  `cd15da4a74a8c8f04a9f42fff9b4064e72c44bc2d4fd6b6fb660f7ab41640885`;
+  the acceptance file remained
+  `33b71078f0c1bb4f7b86276e72665a59738d8f640730d70883d6b33f8409c7c5`.
+  The tracked diff-index was zero after every restoration.
+- **Stopped evidence retained, never promoted:** section 1's version-1
+  authority, capsule, dispatch, seal, and run remain historical only.
+  Version-2 sibling candidate
+  `18d69d2b09fa4e76b34e7b84949e3ffb49b1a268` and run
+  `000001-4eab4a4f-1059-4fb7-951b-d4100230592d` stopped on the one
+  unanchored negative assertion; failed focused-9 receipt integrity
+  `cebfb2c9e873523bc4a26e16c3d44394e298392345b9cd1e528e73fe39760798`.
+  The first repaired run
+  `000002-e6ac3d20-3b3f-4c7b-81b7-decaa231a708` stopped at focused-9
+  because `postureNameCollision.walker.test.js` CR-C4-1 and
+  `implementationSession.test.js` IA-2 exceeded their load timeouts.
+  Its failed focused-9 receipt integrity is
+  `dbda91b1b0123e1417543c7ac22d32720d59751e4773f7651ed664d00ca1c903`;
+  the **388-line / 29,295-byte** failed log is
+  `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.92699.log`,
+  SHA-256
+  `2dd13453c0dce635440951f9d16149ba1d2ecc53c30da2be5dd7dcfe9a8d6f64`.
+  Candidate `18d69d2b`, both failed aggregates, and both failed focused-9
+  receipts remain non-authorizing STOP history.
+- **Attached cumulative session topology:** resume run
+  `000003-7cc4232d-03fc-4ad0-b3c7-7e86dd588a75`, plan
+  `14cd13070f10556ed5d626df6718ce8cf589df7ae114749296e88948b8fd65f6`,
+  freshly reran packet validation and focused-9. Validation receipt integrity
+  is `7b065377d9122dc5efc344c94caed192b1df0c715bddab8f642fdd8bb24c94c3`;
+  focused-9 receipt integrity is
+  `57448e2496fe674a8aa0f9bc9d0278da00a5bc0196cdad031da7f65db8f237fd`.
+  The resume projection reused only PASSED children whose plan, seal, and
+  pre/post fingerprint matched exactly. Current state integrity
+  `b38d91d4901e6e4b1e1f8cb16d753a1b26f9c87175ff40536ff13aaf779b0d2e`
+  is **PASSED**, with all fourteen session steps complete and none failed,
+  blocked, or remaining.
+- **Attached full-gate and smoke evidence:** the fresh attached bare
+  `check:tail` exited **0**. Its **940-line / 89,207-byte** log is
+  `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.64345.log`,
+  SHA-256
+  `0de126ade2cbbc8e4a976c70f53cd1da8df325f92220ee4a8fd7101eef7ecc95`.
+  It held **16 known failures across 28,010 tests**, both TypeScript
+  ratchets, the **314-document** prerender, and strict dist **50/403**.
+  The separately PASSED exact-fingerprint smoke child from repaired run 2
+  is legitimately reused by the cumulative state: receipt integrity
+  `769f3a6c745b0b8316f2c2508fca28b62afd14ce3f766129a6b56fafd596a3a8`,
+  exit **0**, **513 chunks / 6,265 edges / 31,706-byte shell**. This is a
+  claim about that qualifying child, not authorization of run 2's failed
+  aggregate.
+- **Independent landing evidence:** bare `npm run check:tail` exited **0**
+  against exact candidate `7e7d5205`. Its full log is
+  `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.15159.log`;
+  SHA-256
+  `dc9662ec9f09f50b6a1d581a52c4d71c68b64736d1f1ece0b708976fc8b2e348`;
+  **940 lines / 86,981 bytes**. The source ratchet held **16 known failures
+  across 28,010 tests**; full and strict-domain TypeScript held
+  **173/173** and **1,134/1,134**; build completed in **45.30s**; prerender
+  wrote **314** documents (**13 views + 15 gallery hubs + 286 compendium
+  entries**); strict dist passed **50 files / 403 tests** with zero failed,
+  non-run, uncollected, missing, extra, or duplicate rows. Separate bare
+  `npm run smoke:boot` exited **0** and passed **513 chunks, 6,265 static
+  edges, 31,706 bytes of markup, and 513/513 initialized chunks**. Its
+  jsdom `HTMLCanvasElement.toDataURL` not-implemented diagnostic was
+  expected and benign.
+- **Boundary and release receipt:** no implementation path outside the
+  twelve-path manifest moved; no state family, writer, flag, tuning,
+  migration, dependency, golden, baseline, ceiling, mutation manifest,
+  hazard registry, coupling registry, observed-shape artifact, dossier,
+  terminal voice, or annex moved. Deviations: **NONE**. At terminal
+  promotion GR-4B-IIIA reserves no collision group or census row; the
+  whole census is **FREE** at `2414/365/2049/20000/5640`.
+- **Soak:** **NOT STARTED**. This claim is scoped to GR-4B-IIIA: no
+  diagnostic, weekly, release, or research soak and no GR-4B-IIIA soak
+  worktree was created.

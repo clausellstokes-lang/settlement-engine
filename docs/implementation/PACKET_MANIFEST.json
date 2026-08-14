@@ -1771,7 +1771,7 @@
     },
     {
       "id": "GR-4B-IIIA",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-IIIA.md",
       "verifiedBase": "955acd7ad2aafc9fc64ad71ade64c54349219495",
       "changeManifest": [
