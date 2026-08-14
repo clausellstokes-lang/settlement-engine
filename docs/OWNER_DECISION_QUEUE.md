@@ -1128,3 +1128,34 @@ the entry signature for reconstruction but are not classified or rewritten: CR-A
 ruled summary reuse defective, while the transcript's broader reasons suggestion was
 not adopted. AO-4 still owns totality and inert quarantine; AO-5 owns the remaining
 families; AO-6 owns the standing source-mutant battery.
+
+## §24 · THE TERMINAL MOVES THROUGH THE FIRST DIAGNOSTIC SOAK AND ITS REPAIRS
+## (2026-08-14 ~01:55, owner ruling, in-chat)
+
+Owner, verbatim: **"also, continue all the way until after the first diagnostic soak
+and fix. For anything now or emergent in the future, I give my permission and approval
+and leave all judgment and decisions to you and to the standard that we have already
+mentioned. any questions?"**
+
+Operative reading (chair, vetoable):
+
+1. **§22's terminal — "immediately before THE DIAGNOSTIC SOAK" — is superseded.** The
+   program continues THROUGH the first diagnostic soak: reach a clean, green,
+   ledger-current build-complete-dark SHA; create the disposable soak worktree; execute
+   the first diagnostic soak (findings only, flags forced lit, per the soak design and
+   `START_HERE.md` §3h step 2); then land the composition repairs its findings license
+   as their own gated waves (§3h step 3). **The new terminal is after those first-soak
+   repairs land.**
+2. **The soak remains FINDINGS ONLY** — it may not sign, apply, or adjust a band;
+   tuning-band movements it suggests remain proposals for the later tuning phase. "And
+   fix" licenses composition repairs from findings, not the tuning signature, which
+   stays at §3h step 7 as its own act (§22 already pre-authorized its permission for
+   when its evidence-complete phase arrives).
+3. **The grant renews §22 verbatim in scope:** permission, approval, and judgment are
+   the chair's for everything now or emergent; evidence requirements, READY/STOP law,
+   packet scope, clean full gates, §3h's order, and the recorded standard remain
+   binding and unwaived.
+4. **Pre-soak build scope stays chair-derived** from the packets' own declarations
+   (currently: GR-4b-iii-b next; GR-4b-ii and GR-5 dispositioned at their evidence).
+   Nothing in this ruling forces every declared future wave to precede the first soak;
+   the soak lands at the latest point that still leaves repair room, per §3h.

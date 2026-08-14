@@ -102,9 +102,12 @@ derives from the packets' own declarations.
 declared at `GR-4B-IIIA.md:43` and deferred at its §12) just in time from
 `2dd09360` — its corpus substrate is now fully cured (`c39d2413` + `2dd09360`,
 annex row A-22 final). Behind it, still deferred by the same declaration: GR-4b-ii
-(`honored_by_silence`, `reaffirmed`, honor/terminal voices) and GR-5. The requested
-terminal remains immediately before THE DIAGNOSTIC SOAK (§22); do not create the
-soak worktree or start D-1/L0.
+(`honored_by_silence`, `reaffirmed`, honor/terminal voices) and GR-5.
+⭐⭐ **§24 (owner, 08-14 ~01:55) MOVES THE TERMINAL:** the program now continues
+THROUGH the first diagnostic soak and its repair waves — findings-only soak, then
+composition repairs as gated waves; see OWNER_DECISION_QUEUE §24. The soak still
+lands at the latest point that leaves repair room; pre-soak scope stays
+chair-derived per the packets' declarations.
 
 # (superseded ~01:50) — GR-4e is terminal; build clean at `7958cd33`
 
