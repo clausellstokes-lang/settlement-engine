@@ -101,8 +101,23 @@ derives from the packets' own declarations.
 **LIVE (~02:05): THREE lanes (all Opus, background, commit NOTHING), under §25's
 four-lane order + 20-minute keeper tick.** All deliverables land in this session's
 scratchpad `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/`:
-- **Lane IIIB** drafts the GR-4b-iii-b packet from `2dd09360` →
-  `laneIIIB-GR-4B-IIIB-draft.md` + `laneIIIB-report.md`. REFUSED-IN-PART valid.
+- **✅ Lane IIIB COLLECTED (~02:35): GR-4b-iii-b is COMPILABLE — full draft packet
+  delivered** (`laneIIIB-GR-4B-IIIB-draft.md` 718 lines + `laneIIIB-report.md` 439
+  lines, receipts for every figure). Headlines: display-layer import of the GR-4d
+  validator costs ZERO new modules (222-module closure already reaches the family);
+  NO hot file in the manifest (797/780/599 all measured at base, none touched);
+  ⚠ `title=` walker at ZERO headroom (485/485 — the draft forbids any new title=
+  prop); registration cost is 2 files not 5 (`section: null` keeps the kind out of
+  GRAMMAR_HERALD_KINDS; CR-GR4B-11 does not transfer); dormancy fence forces
+  `successionLines` always-present-`[]`; the 4 voiceMechanics walker arms are
+  BANKED so the acceptance file asserts corpus hygiene directly; 10-path manifest,
+  ≤152 effective lines vs the 400 standard; predicted census
+  `2415/365/2050/20008/5641`, runtime `28010→28021`, floors `109→110` with the
+  6→7 identity divergence legitimate (no-desk class). ONE chair gate: CR-GR4B-13
+  surfaces 1→2 (both mounts named by the corpus heading). Six judgments + five
+  open questions await chair ruling; CLAIM_RE = 0 on both deliverables. NEXT:
+  chair reads the draft, rules CR-GR4B-13..15 + open Qs, promotes READY, then
+  dispatches the implementer (sole census holder).
 - **✅ Lane SD COLLECTED (~02:20): the soak plan is DERIVED and the design's flag
   arithmetic is STALE.** Full plan in `laneSD-soak-plan.md`. Headlines: the design's
   "88 keys / 41 dark layers" is now **95 keys / 48 dark layers** (live manifest 16
