@@ -6,11 +6,15 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `6784bf62`
-- Commits: 3254
+- HEAD: `f6749fad`
+- Commits: 3258
 - Working tree at refresh: 0 dirty entries
 
 ```
+f6749fad 2026-08-14 docs(hb-1 T''): regenerate the base-state capsule at the prefix terminal
+e205fb52 2026-08-14 docs(hb-1 T'): land the hb-1 PREFIX — HB-0 flipped, census re-derived at the prefix state
+e188760b 2026-08-14 feat(hb-1 I1): HB-0 — the habit substrate, dark by construction
+436f138e 2026-08-14 docs(hb-1 P1): promote HB-0 READY, sign the HB family preamble, correct the INDEX HB prose
 6784bf62 2026-08-14 docs: land the gap-1 train terminal (GAP-1 flipped, capsule generated)
 152d3f19 2026-08-14 feat: widen the engine-gated census detector past its canonical receiver
 ea98c42f 2026-08-14 docs: promote GAP-1 as the gap-1 train's single member
@@ -407,8 +411,4 @@ a2dbdd36 2026-08-04 Lane V4D R-1: the plaque survived on the phone — the burn'
 5ddd0d08 2026-08-04 Lane V4C piece 4: R7's horn cross-nock, BUILT AND SHOWN — one module, one element, and an honest verdict that it barely reads at 100%
 5acf5e93 2026-08-04 Lane V4C piece 3: the counsel pass — the plaque had an internal edge, the seal was two point seven pixels too wide, and the hang had no outline on a dark hero
 e36588c7 2026-08-04 Queue: lane WZ-5's row -- WR-8 CLOSES, the atrocity casus gets its producer, and a ghost-write class measured at seven sites dies at the writer
-db779d5e 2026-08-04 Lane WZ-5 piece 2: the ghost-write class dies at the writer -- the relationship plane can no longer be handed a key it cannot type
-dd86e5f9 2026-08-04 Lane V4C piece 2: the whipping becomes thread — the crest that was never on screen, and one diagonal that says somebody tied this
-19dd07e2 2026-08-04 Lane WZ-5 piece 1 (4d): the atrocity casus gets its producer -- the world hears about the fire, and outrage arrives at news speed
-653be592 2026-08-04 Lane V4C piece 1: the wood gets its finishes — two more turbulence passes, one writer, and a budget that is SPENT rather than declared
 ```

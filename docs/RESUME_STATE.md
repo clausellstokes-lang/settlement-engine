@@ -63,7 +63,37 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-14 ~14:10 EDT) — ✅ GAP-1 LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-14 ~20:40 EDT) — ✅ HB-0 PREFIX LANDED AND EXPOSED at
+# `f6749fad`; HB-1 + gr-6 in re-charter; the HABIT volume is OPEN
+
+**THE HB-0 PREFIX LANDED** (sixth exposure; §38's ruling executed exactly).
+Chain: `6784bf62 → 436f138e(P1) → e188760b(I1 HB-0) → e205fb52(T′ flip +
+census at the prefix) → f6749fad(T″ capsule, docs-only — J-TE6-3 RATIFIED:
+the capsule generator REFUSED to stamp an unmeasured tree; the two-commit
+terminal is the guard working)`. Figures: census `2421/366/2055/20046/5646`
+EXACT · runtime **28062 measured** (NOT the plan's 28090 — the stopped
+member's titles honestly absent) · validator 41/0 · gate TRUE_EXIT=0 all 17
+steps · smoke 521/521 · ⭐ the three espionage reds GONE at the prefix
+(independent confirmation they were I2-caused). Chair verified at T″
+(validator 41/0 + census walker 33/33 own-shell) then CAS
+`6784bf62 → f6749fad`; porcelain ZERO. Refuted work PARKED at
+`refs/trains/hb-1-refuted` (P2+I2 recoverable for the re-charter). ⚠ ORPHAN
+WINDOW recorded at HB-0.md §15 (IN-1a precedent): discharge = the HB-1
+re-charter's first consumer of `habitVocabulary.js`, which must ALSO re-aim
+`habitCurve.test.js`'s whole-tree-absolute dormancy case in its own commit
+or it reds a test green since this landing. Receipt: `laneTE6-receipt.md`
+(679 lines). Base-check worktree removed.
+
+**RE-CHARTER QUEUE (chair-owed, next):** (1) HB-1 on the register cure + the
+`src/domain/region` fourth directory + the fork-registry scan class, from
+the parked ref; (2) gr-6 on the HOSTILE_CONFIDENCE mount + chair-authored
+band; (3) the infra micro-train (codeOnly() re-point · capsule HOT_FILES
+parse · the coupling-template machine check · §38.4's delete-clause preamble
+law · the fork-registry scan class cure). Then HB-2 (Q2's occupancy-mix
+re-aim + O-1 circumstanceClassOf home), WC family compiles, and the ~80-wave
+§27 inventory. §37: run to the end; THE WALK is the one factual hold.
+
+# (superseded ~20:40) ⭐⭐ CURRENT (2026-08-14 ~14:10 EDT) — ✅ GAP-1 LANDED AND EXPOSED at
 # `6784bf62`; the census walker now sees EVERY dark gate; ES trains are NEXT
 
 **GAP-1 LANDED WHOLE** (third exposed train; the rename to GAP-1 executed
