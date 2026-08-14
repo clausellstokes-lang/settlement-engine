@@ -88,7 +88,20 @@ guard.
 **SESSION: EIGHT exposures, ZERO exposed reds.** HABIT 2/10 · machinery
 self-auditing · ~78 waves remain per §27.
 
-**LIVE (~01:25, keeper tick): Lane TC9 (Opus) COMPILES HB-2** from
+**✅ TC9 COLLECTED + §41 RULED (~02:15, ledger `6829d137`): hb-2 compiled as
+a SINGLE member** (the classifier member REFUSED on an executed layering
+measurement — ⛔ O-1 escalates to a BLOCKING chair question at HB-4's
+compile). Q2 TAKEN IN PART with the ~70% trigger RE-PRICED (three of eleven
+pressed classes measured UNREACHABLE on full_simulation — dark ports);
+R27's osrFindings STOP cured by the assizeKernel clean idiom; R28 binds the
+leaf to 250; ⭐ standing HB law: no module spells a class token outside the
+vocabulary leaf (raw-source, JSDoc included).
+**LIVE (~02:20): Lane TE9 EXECUTES hb-2** on `refs/trains/hb-2` from
+`e5ecc83d` (P1→I1 census-at-member to `2428/366/2062/20103/5653`, runtime
+28126→T docs-only; validator 43/0; osrFindings 1998 tripwired; dark-closure
+3→4 with habitGate proven OUTSIDE). Chair owns CAS. Receipt →
+`laneTE9-receipt.md`.
+**(superseded) TC9 compile dispatch** from
 `e5ecc83d`: the Q2 occupancy-mix re-aim (~70% reopen-trigger intact) + the
 O-1 `circumstanceClassOf` home disposition; the M4 coupling ratchet and the
 §38.4 consumer-census law are now LIVE and bind its packet. Deliverables →
