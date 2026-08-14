@@ -2323,6 +2323,113 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "GAP-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GAP-1.md",
+      "verifiedBase": "5d6a0e7c19d5a0d58880ee3db9ff8c2b537ece5c",
+      "changeManifest": [
+        { "action": "TEST", "path": "tests/lint/engineGatedRuleKeys.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "MODIFY", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "REGISTER", "path": "scripts/hazard-registry.json" },
+        { "action": "DOC", "path": "docs/implementation/PACKET_STANDARD.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function codeOnly" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function scanGateReads" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function auditEngineGatedKeys" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const GATE_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const EXEMPT_RULE_KEYS" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const BACKLOG_RULE_KEYS" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "export const VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const VIRTUAL_RULES" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const LANE_LEAVES" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "the empty-eventTypes claim holds: no lane leaf mints a candidate" },
+        { "path": "scripts/hazard-registry.json", "symbol": "HZ-CAMELBLIND" }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN — the widened scan is a strict superset: all 63 currently-measured keys survive (LOST=0) and the seven known-hidden keys are caught (WIDE=70)"
+        },
+        {
+          "id": "A2",
+          "case": "NEGATIVE — the three non-gate decoys (config?., options?., args.) and the scope/boundary artifacts stay unmatched"
+        },
+        {
+          "id": "A3",
+          "case": "GUARD 2 — nearest-preceding-binding wins: convergence.js rebinds `r` six times and only the rules cast attributes"
+        },
+        {
+          "id": "A4",
+          "case": "DISPOSITION — the two manifested keys carry authored virtual rows and the two exempted keys carry rationales over the review floor"
+        },
+        {
+          "id": "A5",
+          "case": "COHORT — the widened empty-eventTypes claim holds for the zero-candidate cohort and the candidate-bearing lane enumerates its shared literals"
+        },
+        {
+          "id": "A6",
+          "case": "BACKLOG — BACKLOG_RULE_KEYS stays exact at seventeen and its ceiling is never raised"
+        },
+        {
+          "id": "A7",
+          "case": "CENSUS NEUTRALITY — no test file, test title or suite title is added; the lighting tuple holds byte-identically"
+        },
+        {
+          "id": "A8",
+          "case": "ANCHOR PREFLIGHT — the negative-assertion anchor walker stays green; the walker file admits no bare collection negative"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/engineGatedRuleKeys.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemRowsVirtual.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemCertificationCorpus.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "src/domain/worldPulse/simulationRules.js",
+          "src/domain/certification/subsystemRowsVirtual.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
