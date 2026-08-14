@@ -116,7 +116,17 @@ no owner band owed (the landed law quoted) — but ⚠ CR-HB0B-BANDGAP DOCKETED
 signature scan). R32 absorbed (the two-file family pin + ONE-rounding-
 spelling — all rounding via roundToUnits, mutant M-13). M1→M2 order FORCED
 (shared path, region-disjoint).
-**LIVE (~04:45): Lane TE10 EXECUTES hb-2b** on `refs/trains/hb-2b` from
+**⛔→✅ TE10 STOPPED PRE-P1 (~05:30) on R35, RATIFIED §44 (ledger
+`ab62172d`):** the plan's "no disjointness rule" was FALSE — the validator
+reserves change paths at EVERY non-terminal status (DRAFT included), and the
+two members share habitCurve.test.js; measured at all four status states.
+**ROAD A SIGNED (CR-HB2B-SPLITP):** split promotion P1a(43/1) → I1 →
+P1b(flip+promote, 44/1) → I2 → T(44/0) — one extra docs commit, lawful
+because M1 has zero CREATE rows. Seven pre-STOP measurements banked and
+inherited. ⚠ MEMORY.md at 17,054 B — A FOLD PASS IS OWED at fresh context
+(grep-every-hook law) before any new hook.
+**LIVE (resumed ~05:45): TE10 EXECUTES hb-2b under Road A.** Chair owns CAS.
+**(superseded) TE10 first dispatch** on `refs/trains/hb-2b` from
 `e5ecc83d` (census at I2 to `2428/366/2062/20107/5653`, runtime 28130;
 validator 44/0; ratchet floors tripwired; T docs-only; held gate + smoke).
 Chair owns CAS. Receipt → `laneTE10-receipt.md`.
