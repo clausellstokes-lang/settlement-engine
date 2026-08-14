@@ -1487,3 +1487,26 @@ corrected in that train's own P-commit.
    seal: compile with HB Q2/Q3 ruled at compile (recommendations required),
    the INDEX HB prose correction in its P-commit, full §28 form. HB Q1's
    persisted fields stay untouched (they bind HB-3+).
+
+## §36 · THE HB-1 TRAIN IS RULED (2026-08-14 ~16:50, chair, vetoable; one
+## sitting per §5)
+
+All eight batched items are SIGNED per TC6's recommendations and evidence:
+CR-HB-Q2 ACCEPT NARROWED (twelve classes + `unpressed` total fallback +
+declared precedence; the occupancy-mix measurement re-aims to HB-2 — HB-0 is
+pure and cannot classify) · CR-HB-Q3 ADOPT the rounding fence now,
+integer-domain decay recorded as a future widening (18 hand-rolled half-life
+forks are the disease; a second decay law is forbidden) · CR-HB1-C1 HABIT
+MINTS C1 (WC-0 measurably absent; the two-export leaf shape; M2's
+at-most-one-exporter scan discharges WC-0's structural half — recorded so
+WC-0's compiler inherits it) · CR-HB1-R21 the corrected `martialMoves` act:
+a NAMED DERIVED SUBSET, never retirement — the charter's literal clause was a
+live war-chooser behaviour change and is struck · CR-HB1-R24 net-zero at 812;
+HB-5 recompiles against that · CR-HB1-W the three J-HB-23 assertions live in
+`chooserTotality.walker.test.js` (the §4 charter outranks §3c prose) ·
+CR-HB-PRE the preamble is signed, sha stamped at P1 · CR-HB-IDX the INDEX
+prose correction rides P1. The one declared interior red (lighting walker at
+I1, live `2421/366/2055/20046/5646`, cured at I2) is accepted per J-TE3-1.
+Executor tripwires: a promotion whose packet lacks any figure §9 of either
+packet requires is a STOP; the shared coupling walker file is RE-READ at I2
+(a blind 13→15 patch reds the exact-equality arm).
