@@ -157,6 +157,18 @@ leak) + ci-1b (9 stale e2e selectors) CONFIRMED real, cures ruled
 into the micro-batch; ci-1c blocked on the owner's CI log paste;
 ⚠ the §82 clean-room was a SUBSET receipt — banked as the 12th
 receipt-vacuity law.**
+**⭐⭐⭐ THE §70 PROGRAM IS CLOSED (§96): SEVEN ROUNDS, EVERY FAMILY
+STAMPED — §74 caps ESTATE-WIDE. ~30 MATERIAL obstructions pre-paid;
+SEVEN certification-pattern instances (§92.2 check DISCHARGED); ⛔
+TR-5's charter FROZEN destructive-as-written (re-charter at the TR
+sitting); C-TLF-8 causedBy walker at CW-1; batched stale-site sitting
+= NINE volumes. §95: est-1 EXPOSED at its 2-member green prefix (13th
+exposure, tip `5c774940`, validator 49/0, census 2431/364/2067/20148/
+5660, ratchet 15); CR-EST-CONTROLZERO = the zero-assertion conversion;
+est-1c (EST-C + conversion) running as TE15's continuation. Executor
+queue after est-1c: eff-1a → eff-1b → wc-0 → WC-0E → rn-1 → prf-1 →
+cs+gen-1 → da → dom-1..3 → micro-batch → EP's 5-member train → family
+trains per §74 groupings.**
 **⭐⭐ §51 IS COMPLETE — 14/14 DIMENSIONS + THE §88 SYNTHESIS.**
 Verdict: sound, coherent, measured-deterministic, defect surface
 ENUMERATED AND BOUNDED. Launch-blocking in full: dom-2 (7

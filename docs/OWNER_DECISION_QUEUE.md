@@ -3634,3 +3634,45 @@ product thesis, and the constitution held under measurement.**
    proven cure + the conversion, executed by TE15's continuation
    with context intact. The persistence-admission grazing stays on
    the veto surface.
+
+## §96 · THE TAILS ROUND ACCEPTED — THE §70 PROGRAM IS COMPLETE
+## (2026-08-15, chair, vetoable; evidence laneTLF-round.md +
+## laneTLF-report.md; sealed at `a6fd6395`, 17 key blobs re-verified
+## identical across est-1's mid-round landing)
+
+1. **The consolidated §70.4 stamp is ACCEPTED for TR, IN, CW, ES**:
+   absorption 32/43 + 11 structural rows SIGNED here; 123/127 blobs
+   identical with all four movers fully diffed; 16 tree-wide claim
+   groups intact, 0 verdict changes; grades TR MATERIAL · IN DRIFT ·
+   CW MATERIAL · ES DRIFT. Cures C-TLF-1..12 are SIGNED as compile
+   obligations. IN is recorded the estate's healthiest family (all
+   nine refutations absorbed by landed machinery, zero carried).
+2. **⛔ TR-5's CHARTER IS FROZEN — destructive as written** (it
+   orders an already-fired tripwire re-trip, retirement of pins that
+   no longer exist, and a row DELETE that would ERASE the GR-3
+   discharge record): no TR train compiles against it; the TR
+   re-charter joins the family's first sitting with the round's cure
+   text as its draft. TR is the SIXTH certification instance and CW
+   the SEVENTH (the silent-omission variant beside a lane a compiler
+   could wrongly route into) — **the estate-wide §92.2 check is
+   DISCHARGED: seven instances, all cured or chartered; IN and ES
+   verified NOT instances.**
+3. **C-TLF-8 IS RULED MACHINERY** (the hazard-conversion law's own
+   fork, PARTIAL forbidden): CW's SC-6 causedBy obligation — a
+   one-sided law adopted by six files across ~23 landings with zero
+   consuming-volume clauses — gets its walker at CW-1's compile;
+   written acceptance was the alternative and is refused because the
+   obligation is load-bearing for the coupling story. ES-6b
+   re-scopes to its measured live consumer and its threshold ruling
+   replaces the shipped unauthored `'careful'` default; ES-Da gains
+   its volume section in the batched sitting, which now covers NINE
+   volumes.
+4. **⭐⭐ THE §70 PROGRAM IS CLOSED: SEVEN ROUNDS, EVERY FAMILY
+   STAMPED** (WC · WF · EP · POP · INT · WY · TR/IN/CW/ES). The §74
+   differential caps now apply ESTATE-WIDE. Aggregate yield: ~30
+   MATERIAL obstructions found and cured BEFORE any executor could
+   hit them as a STOP — among them five certification-pattern
+   deaths, one actively destructive charter, one phantom
+   deliverable unblocking LG-2, a live army-supply double-drive, and
+   the reception contract fourteen LG waves needed. The owner's
+   "one last round for each with fable" is EXECUTED IN FULL.
