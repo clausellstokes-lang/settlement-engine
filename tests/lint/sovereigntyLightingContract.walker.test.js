@@ -4285,7 +4285,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   re-derived tuple land in the SAME commit, so this walker is GREEN at every commit of the
     //   train — at P1 (docs-only), at I1 (both edits together) and at T (docs-only).
     // 2430/366/2064/20123/5655 → 2431/366/2065/20131/5656.
-    files: 2431, parked: 366, credited: 2065, titles: 20131, suiteTitles: 5656,
+    // ── est-1 / EST-A (member 1 of 3), 2026-08-15 ────────────────────────────────────
+    // ⭐ TITLES +1 AND NOTHING ELSE, and each of the other four is a MEASUREMENT rather
+    //   than an inheritance: the whole tuple was re-derived by this arm at this commit.
+    //   `tests/security/mapSnapshotImport.contract.test.js` was already CREDITED, so its
+    //   one added `it` — the truncation control that refuses a non-empty-but-truncated
+    //   extract — moves the evidence layer alone. `files` cannot move: est-1 creates no
+    //   test file at any member. `parked`/`credited` cannot move: the file was credited
+    //   before and is credited after. `suiteTitles` cannot move: the control joins an
+    //   EXISTING `describe` and opens none.
+    // ⚠ The sequenced arms stop at the first red figure, so `suiteTitles` was proved by
+    //   re-running this arm with the whole tuple re-recorded — never by assuming that an
+    //   unreached assertion had held.
+    // 2431/366/2065/20131/5656 → 2431/366/2065/20132/5656.
+    files: 2431, parked: 366, credited: 2065, titles: 20132, suiteTitles: 5656,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

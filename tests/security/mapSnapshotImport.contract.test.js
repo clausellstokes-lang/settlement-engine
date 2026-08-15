@@ -24,8 +24,16 @@ const SRC = readFileSync(resolve(process.cwd(), 'src', 'store', 'galleryImportMa
 function importActionBody() {
   const start = SRC.indexOf('importGalleryMapWithCampaignImpl');
   expect(start, 'importGalleryMapWithCampaign not found — rename?').toBeGreaterThan(-1);
-  // Grab a generous window; the action is well under this size.
-  return SRC.slice(start, start + 6000);
+  // Anchor on the impl's own closing brace, never a magic width. The action is the
+  // LAST declaration in the module, so its body runs to the file's final column-0 `}`
+  // (measured: of the eight column-0 `\n}` positions in this file, exactly one follows
+  // the impl). A fixed 6,000-char window silently truncated this extract: the seed
+  // carry sits 6,206 chars in and the `sharedMap.fmgSnapshot` branch 6,113 chars in,
+  // so BOTH guards in this describe were scanning a body that stopped 1,718 chars
+  // before the action ended.
+  const end = SRC.indexOf('\n}', start);
+  expect(end, 'the impl has no column-0 closing brace — reformatted?').toBeGreaterThan(start);
+  return SRC.slice(start, end + 2);
 }
 
 /**
@@ -47,6 +55,15 @@ function singleImportActionBody() {
 
 describe('cross-user map import never carries an untrusted raw snapshot (F6)', () => {
   const body = importActionBody();
+
+  // THE TRUNCATION CONTROL, at its site. The estate's anti-vacuity walker catches an
+  // EMPTY extract; this is the non-empty-but-truncated shape it cannot see, and it is
+  // how a 6,000-char window hid the seed carry and the untrusted-snapshot branch from
+  // both guards below for the whole window they sat banked as debt.
+  it('the extract is the WHOLE action body, not a truncated window', () => {
+    expect(body.trimEnd().endsWith('}')).toBe(true);
+    expect(SRC.slice(SRC.indexOf('importGalleryMapWithCampaignImpl') + body.length).trim()).toBe('');
+  });
 
   it('does not assign an imported fmgSnapshot into local map state', () => {
     // Any `<lhs>.fmgSnapshot = <rhs>` where rhs reads the shared/imported map.
