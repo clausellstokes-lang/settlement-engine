@@ -157,6 +157,22 @@ occur; ⚠ the one-frozen-table-per-family LAW has NO canonical spelling
 anywhere (8 existing faith tables + 6 proposed dials with no named home — a
 WF-sitting question); a load-time normalizer EXISTS contradicting §3. No
 §38.4 census owed. Annex: `laneWFS-WF-SUBSTRATE.md`.
+**⚠ FOREIGN SESSION ALERT (~22:30):** the owner started a separate local
+session "Fix prose-blind ruin-filter roster walker" (task_67899181) — that
+defect was ALREADY CURED by infra-2 M2 (landed `e5ecc83d`). The session will
+likely find it moot; if it WRITES to the shared worktree it is an
+uncoordinated second writer — executors' foreign-dirt STOPs are the fence;
+the chair flags any collision at collection.
+
+**LIVE (~22:35): THE FINAL THREE SWEEPS DISPATCHED (lanes at cap with
+TE11):** Lane INT-S (interiors, 8 waves) → `laneINTS-*`; Lane WY-S
+(wayfaring engine, 7 waves; kmScale + supplyCargo verdicts ordered) →
+`laneWYS-*`; Lane TL-S (the TR/IN/CW/ES tails, ~16 waves, per-wave
+CHARTER-SOUND/ROTTED/BLOCKED verdicts) → `laneTLS-*`. When these land, EVERY
+remaining family is swept; the §48 loop then runs cure-architecture passes
+(WC first) until nothing material remains. LG's volume is the one unswept
+territory by design (chair-authored first).
+
 **⭐ THE SWEEP PROGRAM'S CUMULATIVE HAUL: 699 claims graded, 141 REFUTED
 across WC/EP/POP/WF — every one found at recon prices before any compile
 spent an hour on it.** **✅ Lane EP-S COLLECTED (~19:20): 131 claims / 101 TRUE / 25 REFUTED / 5
