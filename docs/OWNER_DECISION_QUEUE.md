@@ -2278,3 +2278,27 @@ EXECUTION SERIALIZES behind INT-3B (one engine worktree).
    by the ≥10 census). Phase-V verification for these findings executes IN
    the cure/compile lanes' §48 re-sweeps (the working pattern), not as a
    separate pass.
+
+## §58 · INT-3B'S STOP RATIFIED; THE RELAND ORDERED (2026-08-16 ~09:00,
+## chair, vetoable; evidence in laneTE12-receipt.md)
+
+1. **The STOP is RATIFIED as correct procedure** — a declared mutant
+   conviction door (M2's walker arm) was refuted by mechanism
+   (`readsByPattern` scans only INNERMOST brace groups; a nested object
+   literal evades it), and curing a governed walker in-wave is a seventh
+   path the packet's own STOP condition forbids. Refusing to paper over it
+   was right.
+2. **THE RELAND IS ORDERED AS-IS**: the refutation touches the GUARD's
+   reach, never the member's behavior — the implementation is fully green
+   (census exact-in-one-run, OSR earned live at 1998, both ratchets at
+   floors, six walkers, A8's positive pin DID convict M2). TE12 re-points
+   from `int-3b-i1-stopped`, amends the packet's M2 claim to the honest
+   single-door conviction (a docs amendment in the same reland), authors T,
+   and runs both gates held with exits read from the tails.
+3. **The NESTING-BLINDNESS detector gap is DOCKETED to the machinery
+   queue** (the readsByPattern innermost-brace gap; ZERO live evaders
+   measured — latent, not live; it joins the scan-cure family beside the
+   doctrine-stage re-point and the CR-IN1C-DRIFT refactor).
+4. The lane's own CLAIM_RE run over its authored bytes (0 hits, with the
+   frozen entry's absorption hazard named) is ratified as the banked-red
+   law practiced correctly.
