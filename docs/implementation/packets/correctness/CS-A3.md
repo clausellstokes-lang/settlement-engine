@@ -1,6 +1,6 @@
 # CS / CS-A3 — `cs-2`, the beaten army's second same-tick battle (member 3 of 4 of `cs-a`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (`armyTransitKernel.js` blob `0dc38438`, byte-identical to the R-CSA audit base
   `d5a6c009`)
