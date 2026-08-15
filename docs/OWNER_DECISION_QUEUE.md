@@ -1872,3 +1872,20 @@ substrate check for the volume). Siege lockdown composes the landed siege
 state with the LG exit modes; smuggler/tunnel features are a substrate
 question the volume must grade before promising them. All §46 dispositions
 carry.
+
+§46c fourth addendum (owner, ~12:10): (1) CAPTURE RESOLUTION UNDER SIEGE —
+a spy or envoy NPC captured at a besieged settlement (a failed smuggle-out,
+or the siege falling to the attackers) resolves by the CAPTOR'S RELATION to
+the NPC's faction: FRIENDLY attackers RELEASE them; ENEMY attackers hold
+them FOR RANSOM. (2) REFUSAL CONTINUES THE JOURNEY — if the spy's cover
+group is refused at the gates, the spy travels WITH the group to its next
+destination and must re-cover there: a new population, a caravan, another
+avenue, or traveling alone to attempt infiltration.
+
+Chair note: the ransom outcome touches the RANSOM substrate — the WR-era
+record parks "seat ransom + persistence" as an owner-gated arm; NPC ransom
+is a sibling family the LG volume must grade (what exists, what the parked
+status covers) before chartering the outcome — flagged, not assumed. The
+refusal-continuation rule is pure graph continuation (the group's own
+itinerary is the spy's), which keeps the mission alive as world state, not
+a reroll.
