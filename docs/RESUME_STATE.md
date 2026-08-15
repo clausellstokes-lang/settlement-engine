@@ -209,6 +209,33 @@ figure at the live tree): M1 preamble law (two-directional) → M2 codeOnly
 three-edit re-point → M3 capsule table-parse → M4 coupling-template ratchet
 → T (one docs-only commit). Chair owns CAS. Receipt → `laneTE8-receipt.md`.
 
+**✅ Lane LGR COLLECTED (~10:40): THE LG SUBSTRATE MAP IS BANKED**
+(`laneLGR-substrate.md` 50KB graded MEASURED/ABSENT + `laneLGR-report.md`
+20KB, 11 verdicts, 10 chair questions). ⭐⭐ HEADLINES: (1) TELEPORTATION
+CIRCLES ARE ALREADY LIVE — `spatial/teleportEdges.js` (M9c) + distanceRead
+:784 route through circle cliques TODAY; armyTransit consumes it; the
+owner's transitive relay IS the existing Dijkstra — LG's circle work is
+GATE-AND-BOUND over landed code, not a build. (2) ⚠⚠ LATENT DEFECT IN
+LANDED CODE: the clique has NO WILLINGNESS GATE (teleportEdges.js:21-26
+promised it, never built) — A HOSTILE ARMY CAN ROUTE THROUGH ITS TARGET'S
+CIRCLE. Repair disposition belongs to the LG volume (routing change =
+declared shift). (3) NO VESSEL ENTITIES EXIST — the §46a fleet model is a
+WIDENING on both halves (no sea refit); ⚠ it INVERTS supplyShipments.js:20's
+"never per-wagon" cardinality law — Q7's count-derived/commitments-stored
+split is the reconciling shape. (4) The naval battle stack is a COMPLETE
+COPYABLE TEMPLATE (resolveFieldBattle + 3 news kinds/10 surfaces). (5) News:
+six carrier lanes exist; vessel lane = the in-flight army idiom; ⚠ default
+infoMode 'omniscient' — the news-with-vessels feature is real only in
+non-omniscient worlds. FOUR BLOCKING chair questions: Q2 (gating live
+teleport = doctrine-10 shift), Q5 (airField's six exact-null pins vs the
+W-NAVY ledger road — lane leans ledger), Q7, Q10 (LG missing from the
+band-walker prefix alternation — settle BEFORE authoring).
+**⏳ NEXT CHAIR SITTING (fresh context): AUTHOR THE LG VOLUME** binding
+§46+§46a+§46b verbatim, ruling the ten questions, and dispositioning the
+willingness-gate defect. Then LG joins the §27 inventory as its own family.
+
+**QUEUE:** gr-6 re-charter
+
 **QUEUE:** gr-6 re-charter (CHAIR-OWED: the HOSTILE_CONFIDENCE mount ruling
 + the chair-authored band) · CR-HB1′-VOL (the six volume delete-sites, own
 micro-act) · HB-2 (occupancy-mix re-aim + O-1 circumstanceClassOf home) ·
