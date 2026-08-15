@@ -2916,7 +2916,7 @@
     },
     {
       "id": "EFF-M1A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M1A.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [
@@ -2926,7 +2926,8 @@
         { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" },
         { "path": "scripts/base-state-capsule.mjs", "symbol": "export const CAPSULE_PATH" },
         { "path": "eslint.config.js", "symbol": "files: ['scripts/**/*.{js,mjs,cjs}']" },
-        { "path": "vite.config.js", "symbol": "testTimeout: 20000" }
+        { "path": "vite.config.js", "symbol": "testTimeout: 20000" },
+        { "path": "scripts/preproof-train.mjs", "symbol": "async function preproofMember(member)" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "two green members exit 0 and worktree registrations are empty IMMEDIATELY after exit" },
@@ -2946,7 +2947,7 @@
     },
     {
       "id": "EFF-M1B",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M1B.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [

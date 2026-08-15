@@ -1,6 +1,6 @@
 # EFF-M1B — the §77 premise-map tool
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 2 of 4
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256

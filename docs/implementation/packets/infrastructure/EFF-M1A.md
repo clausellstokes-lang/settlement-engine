@@ -1,6 +1,6 @@
 # EFF-M1A — the parallel pre-proof harness
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 1 of 4 — the tools half of the §74/§77 efficiency stack
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
@@ -191,3 +191,27 @@ Verified base sha and final tree state · the one changed file · A1-A8 with exa
 exits · the probe battery table with every exit read in-shell · the cache-isolation digests
 before and after · deviations `NONE` or a STOP · judgment calls recorded in the train receipt.
 
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1a` train's I1 commit `24688a37`.** One script, zero production lines, zero census
+motion.
+
+- **A1-A5, A6, A8** — the sixteen-probe battery re-run at this base, every exit read in-shell:
+  H1 0 · H2 1 · H3 2 · H4 2 · H4b 0 · H4c 2 · H7 2 · H8 2 · H9 2 · H10 2 · H11 2 · H12 2 ·
+  H13 2 · H13b 2 · H14 2 · H15 2, with registrations at ZERO after every single probe and the
+  toy repo's porcelain empty at the end. H5 (SIGTERM) exited 2 with registrations empty
+  immediately and a delayed `ps` showing zero surviving batteries.
+- **A6** — H14 ended the wedged member at 3.1 s under a 3 000 ms ceiling with `phase=timeout`,
+  against the 300 s hang it would otherwise have held.
+- **A7** — a real estate battery (`tests/domain/canonSave.test.js` at this base) exited 0 in
+  2.9 s; its cache landed at `<runRoot>/E1.vite-cache/vitest/…` and the executor tree's
+  `node_modules/.vite` digest was `9c558ab63421b5d6debea15a4f936fa2ceca7726` both before and
+  after the run.
+- ⭐ **ONE DRAFT CLAIM WAS REFUTED BY EXECUTION AND IS CURED HERE, NOT CARRIED.** The draft
+  passed `--reporter=basic`, which vitest 4 removed; against the estate that produced a
+  STARTUP error, exit 1, and the harness reporting "1 RED — early truncation signal" for a
+  reporter typo — R-D6's own class, surviving in a new form the audit's toy could not see
+  because its stub ignored the flag. The cure is §3.6's verdict-evidence gate plus a live
+  reporter pair, and `phase: 'startup'` is proven in both directions (H15 versus H2).
