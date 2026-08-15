@@ -389,7 +389,7 @@ describe('SP-D errand consumer registry — BOTH WAYS against the tree', () => {
     ).toBeGreaterThan(0);
   });
 
-  test('the THREE built consumers today are the war errand head, the pact proposals and the covert missions', () => {
+  test('the FOUR built consumers today are the war errand head, the pact proposals, the covert missions and the emigre seam', () => {
     // Recorded as a fact rather than assumed, and the fact has MOVED TWICE: at FP GR-2
     // (2026-08-06) and again at ES-1 (2026-08-06). The spine's whole purpose is to be
     // minted through by more than one lane, and three now do. The remaining four pre-pins
@@ -408,12 +408,24 @@ describe('SP-D errand consumer registry — BOTH WAYS against the tree', () => {
     // PRODUCTS, IN-4's couriers move CARGO). Landing ES-1 against the shared row would have
     // declared IN-4 built and pointed the registry at `covertErrand.js`, a file nobody has
     // written. So ES-1 took its own row and left IN-4's pre-pin intact and still unbuilt.
+    //
+    // THE FOURTH (INT-3b, 2026-08-15) IS THE FIRST TO ARRIVE AT AN ADDRESS THE REGISTRY
+    // CHOSE FOR IT. `emigreErrand.js` was named in the frozen map at SP-D, unbuilt, and the
+    // wave's whole deliverable is the file at that address plus the one-word flip — so the
+    // pre-pin did not merely predict this consumer, it SPECIFIED it, and this arm is where
+    // the prediction is cashed. It is also the first built consumer that NOTHING CALLS:
+    // dormancy by having no caller rather than by a flag, which DIRECTION 2 is indifferent
+    // to because it asks whether the module reaches the mint head, not whether anything
+    // reaches the module. The pre-pins toward TR-8, WF-2b and IN-4 remain, so the
+    // built/unbuilt partition above is still a real measurement on both halves.
     expect(builtModules).toEqual([
+      'src/domain/worldPulse/emigreErrand.js',
       'src/domain/worldPulse/envoyErrand.js',
       'src/domain/worldPulse/espionage/espionageMissions.js',
       'src/domain/worldPulse/pactProposals.js',
     ]);
     expect(minters).toEqual([
+      'src/domain/worldPulse/emigreErrand.js',
       'src/domain/worldPulse/envoyErrand.js',
       'src/domain/worldPulse/espionage/espionageMissions.js',
       'src/domain/worldPulse/pactProposals.js',

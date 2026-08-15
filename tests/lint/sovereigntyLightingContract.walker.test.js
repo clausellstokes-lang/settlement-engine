@@ -4221,7 +4221,38 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   is a fact about MULTI-member chains; stated affirmatively so no executor cures a red that
     //   was never predicted.
     // 2428/366/2062/20107/5653 → 2429/366/2063/20115/5654.
-    files: 2429, parked: 366, credited: 2063, titles: 20115, suiteTitles: 5654,
+    // Prior row retained as a cross-contract ancestry pin: files: 2429, parked: 366, credited: 2063, titles: 20115, suiteTitles: 5654
+    // ⏱ TRAIN int-3b, INT-3B THE ÉMIGRÉ MINT SEAM (ONE member), 2026-08-15 — RE-DERIVED WHOLE
+    // at I1, which is this train's ONLY `tests/`-moving commit, so the terminal stays DOCS-ONLY
+    // and the base-state capsule regenerates in ONE commit. Never patched one figure at a time:
+    // all five are re-derived together and the cause is named. ⚠ The five constants below were
+    // written as ONE tuple and the arm set went green in a single run — which is the only way a
+    // SEQUENCED census can be trusted, because it stops measuring at its first red figure and a
+    // green on arm 1 after a patch says nothing whatever about arms 2 through 5.
+    //   • The member creates ONE test file, tests/domain/emigreErrand.test.js, carrying ONE
+    //     literal `describe` and EIGHT literal top-level `test` calls (the packet's eight-case
+    //     acceptance matrix, both dormancy fences among them):
+    //     +1 file / +0 parked / +1 credited / +8 titles / +1 suite title.
+    //   • The one `src` CREATE (emigreErrand.js), the one-word REGISTER (the ERRAND_CONSUMERS
+    //     `built` flip) and the two walker edits move NO registration and therefore NO figure.
+    // ⭐⭐ THE WALKER TITLE RENAME IS CENSUS-NEUTRAL, AND THAT WAS CHECKED RATHER THAN ASSUMED.
+    //   tests/lint/errandConsumerRegistry.walker.test.js's count-bearing third title goes from
+    //   "the THREE built consumers…" to "the FOUR built consumers…": ONE title out, ONE title
+    //   in, so `titles` moves by the acceptance file's eight and nothing else. ⚠ A rename is
+    //   only free when the old title is not a BANKED FAILURE — the title IS the census key, and
+    //   renaming a banked one destroys its identity and silently un-banks it. Executed read of
+    //   the 16 frozen entries in scripts/.test-ratchet-baseline.json: NONE names
+    //   errandConsumerRegistry, couplingInclusion or sovereigntyLightingContract.
+    // ⚠ PARKED IS UNCHANGED AT 366, and it is earned rather than lucky: all eight new titles are
+    //   string LITERALS in a straight-line registration inside ONE literal `describe`, so door 3
+    //   credits the file statically. A `test.each()` case is invisible to this census by
+    //   construction and a `describe.runIf()` parks a file WHOLE — either would have closed this
+    //   arithmetic while measuring nothing, and the packet forbids both by name.
+    // ⭐ A SINGLE-MEMBER TRAIN BUYS A CENSUS WITH NO INTERIOR RED: the acceptance file and this
+    //   re-derived tuple land in the SAME commit, so this walker is GREEN at every commit of the
+    //   train — at P1 (docs-only), at I1 (both edits together) and at T (docs-only).
+    // 2429/366/2063/20115/5654 → 2430/366/2064/20123/5655.
+    files: 2430, parked: 366, credited: 2064, titles: 20123, suiteTitles: 5655,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

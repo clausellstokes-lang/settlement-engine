@@ -199,6 +199,22 @@ const LAYER_PATTERNS = Object.freeze({
     // future WAR or TRADE consumer of `courtPostureOf` register its coupling, which is
     // exactly the designed-coupling discipline this ratchet exists to enforce.
     /^src\/domain\/worldPulse\/strategicPosture\.js$/,
+    // INT-3b: the émigré mint seam. A defeated claimant's flight is INTERIOR's own
+    // subject — the layer mints the contest that defeats him, owns the standing he
+    // loses and owns the grievance his harboring will raise — so the leaf takes
+    // INTERIOR whatever noun it is named after, on exactly the reading that gave
+    // strategicPosture.js INTERIOR and secondOrderBelief.js INFO: the distinction is
+    // SUBJECT, not program. It is NOT an ARGUED_UNLAYERED case, and the contrast is
+    // sharp: the argued roster is for modules that own no subject and are spoken by
+    // every port — errandMint.js, the head this leaf calls, is exactly such a module
+    // and is argued as substrate — while this one owns an exile's departure outright.
+    // Giving it a family is what will force INT-3b-ii's coming trigger, and any WAR or
+    // POP consumer of an émigré's journey, to register the coupling instead of reading
+    // across a port in silence.
+    // ⛔ AN EXACT-PATH REGEX, NOT AN `emigre[A-Z]` PREFIX: the secondOrderBelief.js note
+    // above rules it, and the reason is unchanged — a prefix would claim files nobody
+    // has designed and silently widen a frozen family.
+    /^src\/domain\/worldPulse\/emigreErrand\.js$/,
   ],
 });
 

@@ -359,7 +359,7 @@ export const ERRAND_CONSUMERS = Object.freeze([
     purposeClass: 'factional',
     module: 'src/domain/worldPulse/emigreErrand.js',
     wave: 'INT-3b',
-    built: false,
+    built: true,
   }),
 ]);
 export const ENVOY_ENCOUNTER_KINDS = Object.freeze([
