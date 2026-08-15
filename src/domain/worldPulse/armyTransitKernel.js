@@ -654,6 +654,16 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
     const dep = deployments[armyId];
     const targetId = dep && dep.targetId != null ? String(dep.targetId) : '';
     if (!targetId) continue;
+    // CS-A4 (cs-5): mirror the war layer's own exclusion. warDeployment.js resolves a
+    // `recalled` deployment as a withdrawal and DELETES it — but only on the next tick,
+    // and this derive pass runs after it. A recall stamped in the SAME tick
+    // (applyWorldPulse's sue_for_peace / return_home, warRulingsEvidence), or any driver
+    // that advances transit without the war layer, would otherwise reach the seed branch
+    // below — and a RETREAT record's destId equals its originId, so it can never equal
+    // targetId and that branch is ALWAYS taken for one. It would re-seed a fresh march at
+    // the ORIGINAL sinceTick, which stepArmyPosition can carry straight to position01 1:
+    // an army recalled from the field re-appearing ARRIVED at the objective it abandoned.
+    if (dep.recalled) continue;
     const priorRec = prior[armyId] || null;
     const rawPriorRec = asObject(rawPrior[armyId]);
     const readiness = clamp01(num(dep.readiness, 0.5));

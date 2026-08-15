@@ -362,16 +362,32 @@ describe('M5 — the kernel adapter: derive, advance, collide, persist', () => {
   });
 
   it('two crossing armies fight a FIELD BATTLE — the loser is mauled + written back weaker', () => {
-    // Tick 0: seed both marches at position 0. Tick 1: they are mid-route → collide.
+    // ⚠ BODY CORRECTED BY CS-A4; the title and this test's INTENT are unchanged.
+    // The old body drove tick 0, then asserted the battle on TICK 1, with a comment
+    // claiming "tick 0 seeds, tick 1 they are mid-route → collide". That description was
+    // never what the engine did: collisions are path-OVERLAP, not co-location, so these
+    // two collide on the DEPART tick, at position 0. Measured at base eab6eba0 this
+    // fixture minted a battle on tick 0 AND tick 1 AND tick 2 — borin mauled 60 → 39.57
+    // → 23.78 → 13.08 while carrying a RETREAT record and a `recalled` stamp the whole
+    // time. That is exactly the "battle-per-tick" hostilePairFor's own comment says
+    // spatial-engine-3 forbids: the derive loop clobbered borin's retreat record back
+    // into a fresh march every tick, so by detection time its role was no longer RETREAT
+    // and the exclusion never fired. The old body's tick-1 assertion was therefore
+    // pinning the DEFECT. It now asserts the battle where it actually happens and adds
+    // the invariant that was missing.
     let ws = worldState();
-    let out = advanceArmyTransit({ snapshot, worldState: ws, digest: lineDigest(), graph: {}, rng: createPRNG('k'), tick: 0 });
-    ws = out.worldState;
-    out = advanceArmyTransit({ snapshot, worldState: ws, digest: lineDigest(), graph: {}, rng: createPRNG('k'), tick: 1 });
-    expect(out.newsEntries.length).toBe(1);
-    expect(out.newsEntries[0].impactKind).toBe('field_battle');
+    const first = advanceArmyTransit({ snapshot, worldState: ws, digest: lineDigest(), graph: {}, rng: createPRNG('k'), tick: 0 });
+    ws = first.worldState;
+    expect(first.newsEntries.length).toBe(1);
+    expect(first.newsEntries[0].impactKind).toBe('field_battle');
     // the deployment write-back: the weaker army (borin) loses strength
-    const dep = out.worldState.deployments;
-    expect(dep.borin.currentEffectiveStrength).toBeLessThan(60);
+    expect(first.worldState.deployments.borin.currentEffectiveStrength).toBeLessThan(60);
+    const mauledOnce = first.worldState.deployments.borin.currentEffectiveStrength;
+    // …and the beaten pair fights ONCE per encounter (spatial-engine-3): the next tick
+    // mints no second battle and takes no further strength from the retreating column.
+    const second = advanceArmyTransit({ snapshot, worldState: ws, digest: lineDigest(), graph: {}, rng: createPRNG('k'), tick: 1 });
+    expect(second.newsEntries.length, 'the beaten, recalled column was given a second battle').toBe(0);
+    expect(second.worldState.deployments.borin.currentEffectiveStrength).toBe(mauledOnce);
   });
 
   it('is deterministic: two identical runs produce identical ledgers + news', () => {
@@ -613,10 +629,18 @@ describe('M5 — CS-A3: a beaten army fights ONCE per tick, across ticks', () =>
 
   it("halves the beaten army's mauling: strength falls at most once per tick", () => {
     const perTick = driveStar(3);
-    // Base: 50 -> 27.5 -> 15.125 inside tick 0 alone (two maulings). Cured: one maul
-    // per tick, so tick 0 lands exactly on the single-battle floor 50 * 0.55.
+    // Base mauled twice inside tick 0 ALONE: 50 -> 27.5 -> 15.125. Cured, tick 0 lands
+    // exactly on the single-battle floor 50 * 0.55.
     expect(perTick[0].aStrength, 'tick 0 mauled the loser more than once').toBe(27.5);
-    expect(perTick[1].aStrength, 'tick 1 mauled the loser more than once').toBe(15.125);
+    // From tick 1 the column is out of the transit ledger entirely, because CS-A4 stops
+    // deriving a deployment the kernel has already stamped `recalled` — it is going home,
+    // and the war layer owns that homecoming. A record surviving here would be the
+    // re-derived march CS-A4 exists to prevent, so ABSENT is the cured state; the guard
+    // below tolerates either, and pins that no FURTHER mauling happens if one is present.
+    for (const t of perTick.slice(1)) {
+      if (t.aStrength === null) continue;
+      expect(t.aStrength, `tick ${t.tick}: the beaten column was mauled again`).toBe(27.5);
+    }
   });
 
   it('leaves the loser in a RETREAT record whose position01 is never re-spent as ground advantage', () => {
@@ -646,5 +670,109 @@ describe('M5 — CS-A3: a beaten army fights ONCE per tick, across ticks', () =>
     // NON-VACUITY: `b` DID fight, so the fixture genuinely reached the collision path
     // and `c`'s stillness is a skip rather than an inert tick.
     expect(ledger.b.strength, 'the first battle did not happen — nothing was skipped').toBe(485);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CS-A4 (cs-5) — A RECALLED ARMY IS NOT RE-DERIVED INTO A FRESH MARCH.
+//
+// The derive loop skipped only on a missing targetId and never consulted
+// dep.recalled. A RETREAT record has destId === originId, which can never equal
+// targetId, so the "new campaign" branch was ALWAYS taken for one — re-seeding a
+// march at the ORIGINAL sinceTick, which stepArmyPosition can carry straight to
+// position01 = 1. Measured at base eab6eba0 with a recall stamped after tick 0:
+//   tick 1: a[retreat a->a pos=0]      tick 2: a[march a->d pos=1]  ← ARRIVED
+//
+// ⛔ THE CURE SKIPS THE DEPLOYMENT, SO THE RECORD IS ABSENT, NOT PRESERVED. The
+// ledger is rebuilt from `deployments` every pass. The compile's pin text asked
+// for "still the RETREAT record at tick n+1", which would red against this cure;
+// what the defect actually needs — and what this asserts — is that no march
+// toward the abandoned target is re-seeded and position01 never reaches 1.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('M5 — CS-A4: a recalled army is never re-derived into a fresh march', () => {
+  const recallDigest = () => {
+    const nodes = ['a', 'b', 'd', 'x'];
+    const distanceMatrix = {};
+    const tiers = {};
+    for (const m of nodes) {
+      distanceMatrix[m] = {};
+      tiers[m] = {};
+      for (const n of nodes) if (m !== n) { distanceMatrix[m][n] = (m === 'x' || n === 'x') ? 100 : 200; tiers[m][n] = 1; }
+    }
+    return {
+      spatialCanonVersion: 1,
+      settlementIds: nodes,
+      gates: [
+        { between: ['a', 'x'], cost: 100 }, { between: ['x', 'd'], cost: 100 },
+        { between: ['b', 'x'], cost: 100 },
+      ],
+      distanceMatrix,
+      tiers,
+    };
+  };
+  const snapshot = {
+    byId: { get: (id) => ({ id, name: id, causal: { scores: { economic_capacity: 60 } } }) },
+    settlements: ['a', 'b', 'd', 'x'].map((id) => ({ id })),
+  };
+  const rng = { fork: () => ({ random: () => 0.99, fork: () => ({ random: () => 0.99 }) }) };
+
+  /** Drive three ticks, stamping `recalled` on `a` after the tick given. @returns per-tick records */
+  function driveWithRecall(recallAfterTick) {
+    const digest = recallDigest();
+    let worldState = {
+      spatialCanonVersion: 1,
+      simulationRules: { warLayerEnabled: true, infoMode: 'omniscient' },
+      deployments: {
+        a: { targetId: 'd', sinceTick: 0, currentEffectiveStrength: 50, readiness: 0.5 },
+        b: { targetId: 'd', sinceTick: 0, currentEffectiveStrength: 60, readiness: 0.5 },
+      },
+    };
+    const perTick = [];
+    for (let tick = 0; tick < 3; tick += 1) {
+      const out = advanceArmyTransit({ snapshot, worldState, digest, graph: {}, rng, tick, now: null });
+      worldState = out.worldState;
+      if (tick === recallAfterTick && worldState.deployments.a) {
+        // The SAME-TICK stamp applyWorldPulse's sue_for_peace / return_home writes,
+        // landing between the war layer's pass and the next derive pass.
+        worldState = {
+          ...worldState,
+          deployments: { ...worldState.deployments, a: { ...worldState.deployments.a, recalled: { cause: 'sue_for_peace', tick } } },
+        };
+      }
+      const ledger = armyTransitLedger(worldState) || {};
+      perTick.push({ tick, a: ledger.a ? { role: ledger.a.role, destId: ledger.a.destId, position01: ledger.a.position01 } : null, b: ledger.b ? { destId: ledger.b.destId, position01: ledger.b.position01 } : null });
+    }
+    return perTick;
+  }
+
+  it('never re-seeds a march toward the abandoned target, at EVERY tick after the recall', () => {
+    const perTick = driveWithRecall(0);
+    // Tick 0 is before the stamp: `a` must genuinely be marching on `d`, or the
+    // fixture never reached the derive branch this pin guards.
+    expect(perTick[0].a, 'tick 0: no record for `a` — the fixture would be vacuous').toBeTruthy();
+    expect(perTick[0].a.destId, 'tick 0: `a` was never committed to the target').toBe('d');
+    // THE ACCUMULATOR: asserted per tick, not only at the end. A record that was
+    // clobbered and then coincidentally re-derived would pass a final-state check.
+    for (const t of perTick.slice(1)) {
+      if (t.a === null) continue; // skipped deployment ⇒ no record at all, which is the cure
+      expect(t.a.destId, `tick ${t.tick}: a recalled army was re-seeted toward its abandoned target`).not.toBe('d');
+      expect(t.a.position01, `tick ${t.tick}: a recalled army reached position01 1 — it ARRIVED at the target it abandoned`).not.toBe(1);
+    }
+  });
+
+  it('leaves an UN-recalled deployment deriving normally — the guard reads `recalled`', () => {
+    // NEGATIVE CONTROL. Without this, a cure that suppressed the derive loop wholesale
+    // would pass the arm above while breaking every ordinary march.
+    const perTick = driveWithRecall(-1); // never stamp
+    for (const t of perTick) {
+      expect(t.a, `tick ${t.tick}: an un-recalled army lost its transit record`).toBeTruthy();
+      expect(t.a.destId, `tick ${t.tick}: an un-recalled army stopped marching on its target`).toBe('d');
+    }
+    // …and it does arrive, which is the behaviour the cure must NOT suppress.
+    expect(perTick[2].a.position01, 'an un-recalled march never progressed').toBeGreaterThan(0);
+    // The un-recalled sibling `b` is the second control: it is never stamped in either
+    // run, so it must be byte-identical across both.
+    const stamped = driveWithRecall(0);
+    expect(stamped.map((t) => t.b)).toEqual(perTick.map((t) => t.b));
   });
 });

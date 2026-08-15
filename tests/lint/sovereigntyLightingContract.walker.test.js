@@ -4392,7 +4392,17 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   assuming an unreached assertion had held. The figures were read from the walker's
     //   own failure output, never predicted.
     // 2438/364/2074/20206/5672 → 2438/364/2074/20208/5672.
-    files: 2438, parked: 364, credited: 2074, titles: 20208, suiteTitles: 5672,
+    // cs-a (CS-A1..CS-A4, the declared-shift correctness train) re-records again, on its
+    //   LAST tests-moving member: +12 titles and +4 suite titles, all four cures adding
+    //   their trajectory pins to files that already existed and were already CREDITED, so
+    //   files/parked/credited do NOT move — no member of the train creates a test file,
+    //   which is deliberate because the census sits at its pinned ceiling and a new test
+    //   file reds TWO censuses. The +12 is 3 (CS-A1) + 3 (CS-A2) + 4 (CS-A3) + 2 (CS-A4).
+    //   Figures read from the walker's OWN failure output, never predicted, and the arms
+    //   are SEQUENCED so the first run reached `titles` only — `suiteTitles` was proved by
+    //   re-running with the whole tuple re-recorded, never by assuming it had held.
+    // 2438/364/2074/20208/5672 → 2438/364/2074/20220/5676.
+    files: 2438, parked: 364, credited: 2074, titles: 20220, suiteTitles: 5676,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
