@@ -3711,3 +3711,40 @@ product thesis, and the constitution held under measurement.**
    omnibus (§§53.6/74/77/85.4/95.2), the preamble member with the
    §81.3 templates and the §93.3 INT refresh. est-1 is COMPLETE in
    full: E-2, E-3, E-1 all landed across two lawful trains.
+
+## §98 · eff-1a COLLECTED AND EXPOSED — THE MACHINERY IS IN THE TREE
+## (2026-08-15, chair; evidence laneTE16-receipt.md, 10-rung chain,
+## both gates green, capsule diff three lines exactly)
+
+1. **eff-1a IS LANDED AND EXPOSED** (fifteenth exposure, CAS
+   `954b4e0f → 4f2d37d1`, validator 54/0 own-shell, both scripts
+   verified present at the tip): the pre-proof harness and the
+   premise-map tool are estate machinery; PACKET_STANDARD carries
+   the omnibus (§§53.6/74/77/85.4/95.2); the preambles carry the
+   caps, the §81.3 templates with provenance tags preserved, and the
+   §93.3 INT refresh. All §86.4 obligations honored MEASURABLY
+   (S5 pairing verbatim; R-H1 as a REQUIRED plan field, not a
+   default; R-D8 proven by digest comparison).
+2. **The headline finding is RATIFIED as §63 working**: re-derivation
+   at the real toolchain refuted the cured draft's `--reporter=basic`
+   (removed in vitest 4 — the toy stub couldn't see it; a startup
+   error would have masqueraded as a truncation signal). The cure's
+   cure — the VERDICT-EVIDENCE GATE (a nonzero exit grades battery-
+   red ONLY when the JSON names ≥1 executed test; else startup → 2)
+   — is the R-D6 class closed for good, proven both directions.
+3. **TE16's four findings, all acted on this sitting**: (i) R1's
+   first real conviction read the ESTATE truly (wc-0 base-stale) —
+   the TC17 re-compile is dispatched; (ii) the DBE divergence — the
+   build-branch fold rides eff-1b with the CORRECTED §2.7 wording
+   (the ledger copy's "read-only symlink" falsehood is fixed this
+   commit); (iii) **§96.4 ERRATUM**: "every family stamped" covers
+   the SEVEN ROUND-SWEPT families only — GR and HB hold cap FOUR
+   until their sittings (gr-6, HB-3/Q1) grant stamps on their
+   accumulated per-wave records; INFRA charters per-act at cap 4;
+   (iv) eff-1b confirmed unblocked (54/0) and dispatched as TE16's
+   continuation with the F9 build-branch sites added.
+4. Two worktree hazards BANKED to memory: a temp worktree is never
+   porcelain-empty once node_modules is linked (gitignore matches
+   the directory, not a symlink); the private-index method leaves
+   the REAL index stale (`git status` shows landed paths as
+   deleted-until-`read-tree HEAD`). J-TE16-1..9 SIGNED.

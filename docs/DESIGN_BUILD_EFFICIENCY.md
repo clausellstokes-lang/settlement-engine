@@ -156,10 +156,13 @@ cap differentiates on evidence:
 Member batteries MAY execute concurrently in ISOLATED throwaway worktrees
 before the train assembles — the mutant-candidate method generalized:
 
-- The harness (`scripts/preproof-train.mjs`, landed by the eff-1 infra
-  train; charter + authored draft in the session scratchpad `laneP74-*`)
-  creates one detached temp worktree per member OUTSIDE the repo, links
-  node_modules read-only, runs each member's DECLARED battery
+- The harness (`scripts/preproof-train.mjs`, LANDED at eff-1a; charter +
+  authored draft in the session scratchpad `laneP74-*`) creates one
+  detached temp worktree per member OUTSIDE the repo, links node_modules
+  as a PLAIN WRITE-THROUGH SYMLINK (measured: writes pass through to the
+  executor tree — per-member `cacheDir` isolation, the R-D8 obligation
+  landed with the harness, is what prevents cross-battery cache
+  sharing), runs each member's DECLARED battery
   (`npx vitest run <files>` — never `npm run check*`, never gate-mutex,
   never pkill), captures each exit in-shell to a per-member log, and
   reports a member×exit table.
