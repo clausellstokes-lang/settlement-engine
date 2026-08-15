@@ -110,6 +110,12 @@ noted, not rescued (contents superseded by the committed copies).
 scratchpads) → `laneWCS-findings.md`; verdict FOUND-WHOLE / FOUND-PARTIAL /
 LOST decides whether the WC sitting re-rules from the volume's veto list.
 
+**LIVE (~15:20, keeper tick): Lane TC11 COMPILES GR-5** (treatyRenewalEnabled,
+single-member flag-boundary train) from `6cd18ad3` — SPV-inline grading
+ordered on every volume claim (the stale-charter record is six-for-six);
+the TTS status-sequence simulation ordered at compile; tuning-flavored
+values chair-gated. → `laneTC11-*`; the chair rules at collection.
+
 **NEXT (chair sittings at fresh context, §37 course to the first soak):**
 (1) the LG VOLUME (§46 + §46a×2 + §46b + §46c×5-plus-restored, the LGR map,
 ten questions, the willingness-gate defect); (2) gr-6 re-charter; (3) WC
