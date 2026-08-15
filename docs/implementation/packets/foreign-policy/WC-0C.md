@@ -1,6 +1,6 @@
 # War Circulation / WC-0C — the law-band table's shape and its cured C3 fence
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/wc-0`, **member 3 of 4**. Plan: `laneTC14-TRAIN-PLAN.md`.
 - **Chair authority:** `OWNER_DECISION_QUEUE.md` **§52 ruling 1** (the disjoint GUARD/CONTROL pools
   SIGNED as architected-and-held, after candidate 1 was refuted by its own re-sweep) and
