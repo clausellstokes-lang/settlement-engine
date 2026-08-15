@@ -3957,3 +3957,38 @@ product thesis, and the constitution held under measurement.**
    message catch are ratified. J-TE18-1..14 SIGNED. **TC19 (prf-1
    compile) and STS (the nine-volume cure consolidation) are
    DISPATCHED in parallel.**
+
+## §105 · THE prf-1 COMPILE ACCEPTED — A RESTORATION, NOT A DESIGN
+## (2026-08-15, chair, vetoable; evidence laneTC19-PRF1-PLAN.md +
+## laneTC19-report.md, every figure executed)
+
+1. **⭐⭐ THE HEADLINE IS HISTORY, NOT CODE**: the §84.2 cure ALREADY
+   EXISTED — the memo landed 2026-07-02, survived to 07-05, and was
+   DESTROYED at the 07-15 master merge (568 conflicts; the
+   resolution took the memo-less parent, blob-exact transition walk
+   quoted). The surviving pin is VACUOUS — its docstring claims the
+   memo, its five assertions all pass against the un-memoized base —
+   which is why a ~5× regression lived unreported for six weeks.
+   prf-1 is a RESTORATION; the vacuous pin is replaced by the
+   discriminating alias-snapshot guard (no new file, no new export,
+   executed-proven to discriminate). The MERGE-DESTROYS-CURES class
+   joins the memory bank beside its enabler, the vacuous pin.
+2. **The compile's figures are ACCEPTED**: 46,062 differential
+   checks / 0 diffs; generation makes ZERO normalizeGood calls (no
+   golden can move by any path); the real call rate is ~29,000/tick
+   at n=30 (the audit's 3,000 was conservative); memory bound
+   measured flat at 323 keys; micro-bench 103×/79× per call, 66.5×
+   on the tick mix; **the honest whole-tick claim is the Amdahl band
+   3.2×–5.5×, 4.7× at the measured midpoint** — the ~5× ruling
+   confirmed at band-top, stated as a band. ⚠ The +14-of-15
+   shared-file delta leaves ONE line of room — a named STOP
+   condition. §104.4's bundle law caught the regeneration the
+   audit missed (both AI bundles' closures) — the law earning its
+   keep on its second day.
+3. **R1 convicted truly again** (cs-gen-1 uncompiled; the
+   counterfactual proves prf-1's shape clean): **TC20 is DISPATCHED
+   on the cs+gen-1 batch** — SEVEN members as TWO trains (4+3) under
+   the un-stamped cap, the cross-volume §68.5 petition carried by
+   their premise maps, trajectory pins per §72.3, cs-6's both-sides
+   cure ending the preserved-`ally` visibility hold. prf-1's
+   executor dispatches when R1 holds. J-TC19-1..10 SIGNED.
