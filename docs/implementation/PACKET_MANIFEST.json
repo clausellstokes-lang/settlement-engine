@@ -9002,7 +9002,7 @@
     },
     {
       "id": "RN-C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/RN-C.md",
       "verifiedBase": "d8236665b1e5e6a4c97a74401724823f94509c6e",
       "changeManifest": [
@@ -9104,6 +9104,113 @@
           "run",
           "tests/lint/vocabularyTotality.walker.test.js",
           "tests/lint/sizeBaseline.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "RN-B1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/RN-B1.md",
+      "verifiedBase": "196b256a44dd6032e2684ed330aba437553bc91c",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/relationships/canonicalRelationship.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/spatial/generosityGate.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/events/mutateWorld.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/region/discoverDependencyCandidates.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/regionalNeighbourSeam.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/relationships/canonicalRelationship.js",
+          "symbol": "export function canonicalRelationshipLabel"
+        },
+        {
+          "path": "src/domain/spatial/generosityGate.js",
+          "symbol": "export function normalizeBondKind"
+        },
+        {
+          "path": "src/domain/events/mutateWorld.js",
+          "symbol": "const ADVERSARIAL_RANK"
+        },
+        {
+          "path": "src/domain/region/discoverDependencyCandidates.js",
+          "symbol": "function relationBetween"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the same-seed golden suite is byte-identical — 87 files / 623 tests, exit 0"
+        },
+        {
+          "id": "A2",
+          "case": "the identity pin passes with exactly the six declared rows moved and divergence at 15"
+        },
+        {
+          "id": "A3",
+          "case": "G2: all five legacy bond spellings now resolve to a qualifying kind, and the KINDS are not widened"
+        },
+        {
+          "id": "A4",
+          "case": "G3: a persisted coldwar edge survives a rival infiltration untouched, while neutral still escalates"
+        },
+        {
+          "id": "A5",
+          "case": "G3: enemy still ranks 0 — expected-dead, pinned"
+        },
+        {
+          "id": "A6",
+          "case": "relationBetween: a legacy plural yields the same candidate set as the canonical singular, and an unknown label still yields none"
+        },
+        {
+          "id": "A7",
+          "case": "the lighting census reads 2438/364/2074/20206/5672, files unmoved"
+        },
+        {
+          "id": "A8",
+          "case": "vendorPdfLazy passes under VERIFY_DIST=1 with the three budget guards RUN, not skipped"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/generation.test.js",
+          "tests/property/"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/regionalNeighbourSeam.test.js",
+          "tests/domain/regionRelationshipB06Fixes.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
         ]
       ]
     }

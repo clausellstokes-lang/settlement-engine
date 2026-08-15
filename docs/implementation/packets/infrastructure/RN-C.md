@@ -1,8 +1,16 @@
 # INFRA / RN-C — the orphan dispositions, and the habitat that let them accumulate
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `d8236665b1e5e6a4c97a74401724823f94509c6e`
   (RN-A1's implementation commit)
+- **Landed:** `196b256a44dd6032e2684ed330aba437553bc91c` — chain: promotion `c73ebb3d` → content `196b256a`. Battery green
+  first run (10 files / 171 tests, exit 0), plus 13 further war-consumer suites / 123 tests
+  exit 0; both typecheck ratchets at their exact floors; OSR, eslint and the anchor walker
+  exit 0. ⛔ **`convergence.js` measured at EXACTLY 798 effective lines after the edit**, the
+  same figure as before it — net zero by construction, with eslint's own `Linter`. Every
+  other touched file's effective count is unchanged too. The habitat pin was proved to bite:
+  a planted `suzerain` in `LEVY_SUPPORT_TYPES` reds the exact-set arm by name (1 failed |
+  13 passed), restored from a `cp` backup verified byte-identical by `cmp`.
 - **Train:** `rn-1`, member **3 of 4**
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
   `c691af9fe6ade05097857699829771062058b289e55e0445aba2eee9498e64fa`
