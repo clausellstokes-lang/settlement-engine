@@ -1,8 +1,17 @@
 # INFRA / RN-A1 — one home, one writer: the output-neutral re-exporter
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `a8f09e14eba7cc9f7ab40addce1204cbbbf132da`
   (RN-A0's implementation commit)
+- **Landed:** `d8236665b1e5e6a4c97a74401724823f94509c6e` — chain: promotion `24ac90fa` →
+  content `d8236665`. Battery green first run (10 files / 115 passed + 10 skipped, exit 0);
+  both typecheck ratchets at their exact floors; OSR, eslint and the anchor walker exit 0.
+  ⭐ **`RNS-25` IS MEASURED AND ITS FORK IS NOT TAKEN**: the three first-paint budget guards
+  skip without a build, so this lane BUILT `dist/` and ran them for real — entry-closure raw,
+  gzip and Brotli all under budget, 28/28 exit 0 under `VERIFY_DIST=1`. The premise is
+  promoted from UNVERIFIABLE-AT-BASE to measured, at the member that owns it.
+  Effective lines: `canonicalRelationship.js` 174 → 184 (+10, within the ≤15 contract),
+  `relationshipState.js` 360 → 352 (net **−8**).
 - **Train:** `rn-1`, member **2 of 4**
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
   `c691af9fe6ade05097857699829771062058b289e55e0445aba2eee9498e64fa`

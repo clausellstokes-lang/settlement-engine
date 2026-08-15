@@ -8897,7 +8897,7 @@
     },
     {
       "id": "RN-A1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/RN-A1.md",
       "verifiedBase": "a8f09e14eba7cc9f7ab40addce1204cbbbf132da",
       "changeManifest": [
@@ -8997,6 +8997,113 @@
           "vitest",
           "run",
           "tests/lint/mutationCoverageManifest.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "RN-C",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/RN-C.md",
+      "verifiedBase": "d8236665b1e5e6a4c97a74401724823f94509c6e",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/roads/thirdPartyRansom.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/convergence.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/conquestDoctrineStage.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warCapacityReads.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warHomeCosts.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warAllianceRisk.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/vocabularyTotality.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/roads/thirdPartyRansom.js",
+          "symbol": "const ALLY_LIKE"
+        },
+        {
+          "path": "src/domain/worldPulse/convergence.js",
+          "symbol": "const FRIENDLY_REL"
+        },
+        {
+          "path": "src/domain/worldPulse/warCapacityReads.js",
+          "symbol": "const ALLY_SUPPORT_TYPES"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "convergence.js measures at most 798 effective lines after the edit, with eslint's own Linter"
+        },
+        {
+          "id": "A2",
+          "case": "the habitat pin passes: every member of all six sets is reachable-by-named-producer or declared EXPECTED-DEAD"
+        },
+        {
+          "id": "A3",
+          "case": "defensive_pact is still present in all four readers and pinned EXPECTED-DEAD-UNTIL mutual_defense"
+        },
+        {
+          "id": "A4",
+          "case": "ally is still present in FRIENDLY_REL and pinned expected-dead with the CR-TE18-CONVERGENCEALLIED reason"
+        },
+        {
+          "id": "A5",
+          "case": "the thirdPartyRansom, convergence and warAllianceRisk suites pass unchanged"
+        },
+        {
+          "id": "A6",
+          "case": "conquestExecutionWr8 and razingExecutionWr8 pass — the cordial negative control still holds"
+        },
+        {
+          "id": "A7",
+          "case": "vocabularyTotality.walker.test.js passes whole, its frozen anchor row unmoved at 1"
+        },
+        {
+          "id": "A8",
+          "case": "sizeBaseline.test.js passes and gains no entry"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/thirdPartyRansom.test.js",
+          "tests/domain/thirdPartyRansomLit.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/convergence.test.js",
+          "tests/domain/warAllianceRisk.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/vocabularyTotality.walker.test.js",
+          "tests/lint/sizeBaseline.test.js"
         ]
       ]
     }
