@@ -63,7 +63,25 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-16 ~00:40 EDT) — ✅✅ GR-5A LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-15, true date — see the §62/§63 boundary erratum:
+# earlier "08-16" stamps were clock skew) — RN-C RULED §64 (B1 SIGNED /
+# B2 REFUSED, rn-1 queued FIFTH); §63 pre-coding law RATIFIED by owner
+# ("do what you recommend"): one-slot reference drafts only
+
+**THE LOOP ORDER STANDS: run sweep/fix/re-sweep + the executor queue until
+NOTHING MATERIAL LANDS** (owner, verbatim "do it until nothing material
+lands"). Executor queue (§59.6 + §64.7, serial, one worktree): **INT-3B
+reland (TE12 LIVE, Opus)** → IN-1C-A → est-1 → wc-0 → rn-1. INT-3B's
+landing collection owes the FIRST §61 incremental re-sweep. Live read-only
+lanes beside the executor: **R-PLC (persistence/lifecycle, FABLE)** +
+**R-XLS (cross-layer semantics, FABLE)** — §51 dimensions, deliverables
+`laneRPLC-*` / `laneRXLS-*` in the session scratchpad. Chair-owed sittings
+unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
+IN-1c-b charter. Owner-open: P1 tuning-signature posture · P6 bounded burn
+· "campaign" naming. Ledger tip after this commit carries §63+§64.
+
+# ─── prior note (superseded header, content still valid) ───
+# ⭐⭐ (2026-08-16 ~00:40 EDT stamp, skewed) — ✅✅ GR-5A LANDED AND EXPOSED at
 # `fc8451c4` (TENTH exposure); flag manifest at 20; the sweep program nearly
 # complete; §51 review Phase-S opened with its first FABLE lane
 

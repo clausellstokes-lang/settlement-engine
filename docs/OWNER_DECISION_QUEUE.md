@@ -2400,3 +2400,77 @@ that skips the increment is incomplete.
    reconciliation. The gate text updates accordingly.
 4. The paywall trio's client-boolean state is REAFFIRMED coherent-by-intent
    (§26.3's post-launch server cure stands chartered).
+
+> ⚠ DATE ERRATUM (chair, 2026-08-15): §58–§62's "2026-08-16" stamps were
+> written under in-session clock skew; their true writing window is
+> 2026-08-14/15. Ordering is unaffected — section numbers, not stamps, are
+> the sequence of record.
+
+## §63 · THE PRE-CODING QUESTION RULED, OWNER-RATIFIED (2026-08-15, owner:
+## "do what you recommend" on the chair's recommendation, verbatim in-session)
+
+1. **General pre-coding is REFUSED** — code authored more than one train
+   ahead of its executor slot rots against the moving base at the measured
+   volume-rot rate, and proof cannot be pre-paid because verification binds
+   to a tree snapshot. Typing is a minor share of a wave's cost; proof
+   dominates and stays at-landing.
+2. **The three lawful forms stand**: packets as executable-grade contracts
+   (§6 behavior sections at transcription precision); parked proven code on
+   evidence refs (real attempts at the current base only); corpus/prose
+   pre-authoring under annex governance.
+3. **⭐ NEW — THE ONE-SLOT REFERENCE-DRAFT LAW**: the compile lane for the
+   train NEXT in the executor queue MAY include a reference draft of member
+   code when the member is a pure leaf, marked NON-AUTHORITATIVE in the
+   packet; the executor re-derives against its verified base and never
+   trusts the draft. Beyond one slot ahead is refused. The preamble line
+   rides the next infra act's docs member.
+
+## §64 · THE RN-C CURE RULED — THE RELATIONSHIP-NORMALIZER FORK (2026-08-15,
+## chair, vetoable; evidence in laneRNC-cure.md + laneRNC-report.md, both
+## probes TRUE_EXIT=0 in-shell, code of record `fc8451c4`)
+
+1. **The five-arm ladder is ADOPTED** (J-RNC-1): A0 renames · A1 structure
+   (output-neutral single-table re-exporter) · B1 legacy-live content ·
+   B2 speculative content · C orphan pins. J-RNC-2 through J-RNC-8 are all
+   SIGNED as argued: the canonical table lives in
+   `canonicalRelationship.js` (the bundle direction is forced, lazy→eager
+   is the only lawful import); `criminal_corridor → criminal_network`
+   moves layers, never joins the shared table; case and empty/nullish
+   policies stay PER-PLANE (both load-bearing); `FRIENDLY_LABELS` is
+   RENAMED not merged (`COALITION_FRIENDLY_LABELS`); the regional legacy
+   map is pinned `keys ⊇ shared table` as a superset; `relationBetween`
+   joins arm B1.
+2. **⛔ ARM B1 IS SIGNED (persisted-world read class, §48.4), exercised
+   under the §24/§37 delegation and recorded on the veto surface**: a
+   legacy `trade_partners` edge today reads `neutral`'s numbers under a
+   `trade_partners` label — leaving that preserves a MISREADING, not lived
+   history; the cure restores the reading the persisted label always
+   claimed. Same-seed generation is measured unmoved (all 12 divergent
+   spellings producer-less). The standing pre-feature-golden method still
+   binds before the landing claim; B1 is the train's LAST member and never
+   its green prefix (the est-1 ordering law applies).
+3. **ARM B2 IS REFUSED** (J-RNC-5 adopted): the nine speculative spellings
+   have zero tree-wide occurrences outside the alias tables; they mark
+   `SPECULATIVE — read tolerance only` with expected-dead pins.
+4. **The census-ceiling question is RULED RE-POINT**: the single-writer
+   walker re-points an existing lint suite (the census sits at its pinned
+   ceiling; lock-the-win / re-point / cure are the only doors). If compile
+   finds no honest re-point, the packet prices the re-record explicitly as
+   a chair STOP surface — never an executor call.
+5. **The stale test title stays** (the title is the census key; the comment
+   is corrected in-arm); the title change is DOCKETED to whichever act next
+   re-records that census. **`BOND_KINDS` joins A0** as a sibling rename
+   row — same name-collision class, found by this pass's re-sweep.
+6. The §38.4 orphan dispositions are RATIFIED as graded, including the
+   `cordial` negative-control preservation in the two war fixtures and the
+   `defensive_pact` CHARTERED-ORPHAN pin marked EXPECTED-DEAD-UNTIL
+   `mutual_defense`. The reachability-per-spelling habitat pin is adopted
+   for the whole admission-set family (the WC O-9 precedent).
+7. **rn-1 joins the executor queue FIFTH** (§59.6 extended): INT-3B reland
+   → IN-1C-A → est-1 → wc-0 → rn-1 (members A0→A1→C→B1, staged). The
+   bundle-neutrality figure stays PLAUSIBLE; the executing packet measures
+   against the exact `sizeBaseline` ceilings, never inherits the estimate.
+8. The lane's own re-sweep (§61 level 1) caught six design breaks including
+   a refutation of its own earlier claim (`relationBetween` reads links
+   uncanonicalised — an EIGHTH read policy, so its `'ally'` arm is LIVE);
+   all six are incorporated above. The cadence law is working as ruled.
