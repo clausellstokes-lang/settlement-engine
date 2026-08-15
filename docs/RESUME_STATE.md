@@ -173,7 +173,22 @@ class) OPEN AND BATCHED. **LIVE: TE12 EXECUTES INT-3B** on
 `2430/366/2064/20123/5655` runtime 28146, OSR 1998 earned live → T docs-only;
 held gates read from tails). Chair owns CAS. Receipt → `laneTE12-receipt.md`.
 
-**LIVE (four lanes): TE12(INT-3B executing) · TC13(IN-1c) · TC14(WC-0 compile — the
+**✅ TC13 COLLECTED + §55 RULED (ledger `d43f88a6`): IN-1c REFUSED-AS-
+CHARTERED and split** — IN-1C-A compiled whole (11 paths, ZERO
+flags/writers/numbers — lands without a value signature on the §47
+precedent); IN-1c-b blocked on the Q3+Q5 charter (the interim desk + three
+certification pins, one sitting when it compiles); IN-1c-c REFUSED (no
+producer). Mechanism finds recorded: the mirror is NOT re-derivable at a
+past tick (strength crossings inexpressible — IN-family substrate);
+⭐ CR-IN1C-DRIFT docketed (NINE seeded-pick forks, two spellings, the FNV
+low-bit hazard cured in exactly one — machinery queue); two {season}
+variants declared unreachable with the seven-pin + anti-vacuity control.
+**TE13 (IN-1C-A execution) QUEUES BEHIND TE12** (one worktree). **LIVE:
+Lane R-VOC (§51 dimension: VOCABULARY COHERENCE, FABLE)** — the four
+vocabularies audited for one-concept-one-name, seeded with the drift finds
+→ `laneRVOC-*`.
+
+**LIVE (four lanes): TE12(INT-3B executing) · R-VOC · TC14(WC-0 compile — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
 dimension 11, FABLE — the estate auditing itself: banked-red blindness,
