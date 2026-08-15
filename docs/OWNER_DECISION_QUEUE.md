@@ -1947,3 +1947,30 @@ any deviation from those figures is a STOP. The refused successors
 (5b/5c/5d/5e/5f) stand refused pending bands/producers. ⭐ NOTED: 5A mints
 `worstObservedEver` — the exact substrate GR-6d was refused for lacking;
 the gr-6 re-charter sitting inherits that fact.
+
+## §48 · THE FULL-LANES + CURE-ARCHITECTURE DOCTRINE (owner order, 2026-08-15
+## ~17:30, in-chat, verbatim intent)
+
+Owner: keep all FOUR lanes full — an empty lane runs the next initial sweep;
+when a sweep catches a defect, ARCHITECT the fix before any implementation;
+RE-SWEEP the architected fix until it holds architecturally; then leave the
+implementation to the normal pipeline to discover.
+
+Operative rules (chair, vetoable):
+1. **No idle slots**: a freed lane takes the next family sweep (INT, WY, the
+   TR/IN tails follow WF/EP/POP) or a cure-architecture pass, whichever the
+   queue ranks higher.
+2. **The cure-architecture pass**: STOP-class and structural refutations from
+   sweeps get their cures DESIGNED in a dedicated lane pass — vetoable drafts
+   grounded in the same graded substrate, chair-signed at collection.
+   Proportionality binds: prose-level refutations (stale cites, wrong counts)
+   stay annex rows and never spawn an architecture pass.
+3. **The re-sweep loop**: an architected cure is verified by the SPV method
+   against the live tree before banking; a cure failing its re-sweep TWICE
+   escalates to the chair rather than iterating blind. Banked cures are what
+   compiles consume — implementation discovers a pre-verified design.
+4. Owner-gated cure classes (persisted shape, tuning values, parked rows)
+   architect the ARMS and stop at the gate, per the standing laws.
+First applications: a WC cure-architecture lane over the 36 WV refutations
+(the fence signature, the TERM_FAMILIES pin, the C3 non-vacuity arm) when a
+slot frees; the willingness-gate defect stays with the LG volume sitting.
