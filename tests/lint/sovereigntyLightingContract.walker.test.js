@@ -4321,7 +4321,22 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   `files` unmoved and `parked` 366 → 364. Every other figure was proved by re-running
     //   the arm with the WHOLE tuple re-recorded, never by assuming an unreached assertion.
     // 2431/366/2065/20132/5656 → 2431/364/2067/20148/5660.
-    files: 2431, parked: 364, credited: 2067, titles: 20148, suiteTitles: 5660,
+    // ── est-1c / EST-C (the sole member), 2026-08-15 ─────────────────────────────────
+    // ⭐ TITLES +1 AND NOTHING ELSE. `tests/lib/accountContentPortability.test.js` was already
+    //   CREDITED and gains one `test` — the symmetry pin that refuses the icon-admission
+    //   asymmetry in BOTH directions. Deliberately NOT a new test file: a new file would move
+    //   `files` and `credited` and buy a census-integrity surface for a pin that belongs
+    //   beside the guards it protects.
+    // ⭐⭐ AND THE RULED CR-EST-CONTROLZERO CONVERSION MOVES NOTHING, WHICH WAS MEASURED
+    //   BEFORE IT WAS WRITTEN: `tests/lint/testRatchet.test.js` is CREDITED at 64 titles / 9
+    //   suites, and the conversion rewrites two tests IN PLACE without changing their count.
+    //   A conversion that had merged them would have shown up here as titles 20148, and the
+    //   arm would have been right to red.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure: the first run proved
+    //   files/parked/credited unmoved and titles 20148 → 20149; `suiteTitles` was never
+    //   reached, and was proved by re-running the arm with the WHOLE tuple re-recorded.
+    // 2431/364/2067/20148/5660 → 2431/364/2067/20149/5660.
+    files: 2431, parked: 364, credited: 2067, titles: 20149, suiteTitles: 5660,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

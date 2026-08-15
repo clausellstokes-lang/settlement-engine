@@ -23,6 +23,7 @@ import {
   contentRevisionHash,
 } from '../../src/domain/content/customContentVersioning.js';
 import {
+  admitReviewedSupplyChain,
   remapReviewedSupplyChain,
   reviewedSupplyChainContentHash,
 } from '../../src/domain/content/reviewedSupplyChainPersistence.js';
@@ -92,6 +93,33 @@ function receiptFor(prepared, idsByPackEntry) {
 }
 
 describe('account custom-content identity portability', () => {
+  // ⭐ THE SYMMETRY PIN, and it pins the SYMMETRY rather than the symptom. Three rows in this
+  // file and in customContentSlice.race sat banked as "debt" under a cause that was false in
+  // both halves: they were not fixtures (the chain is built from the discoverer's REAL output,
+  // two lines below) and no writer had "stopped supplying needIcon" (it supplies '' on
+  // purpose, pinned by copyCorruption). The real defect was that two sibling icon fields,
+  // written into ONE object literal as the SAME empty string, were validated by two different
+  // rules — so confirming any auto-discovered supply chain was refused outright.
+  // ⛔ Asserting only that the admission succeeds would pass again the day someone re-tightens
+  // needIcon and loosens something else. Asserting that BOTH icons are '' AND that the chain
+  // admits is the assertion that fails if either side of the asymmetry returns.
+  test('a discovered chain admits with the discoverer\'s own empty icons (both of them)', () => {
+    // The BARE chain, exactly as SupplyChainsManager hands it to the confirm command — not the
+    // packaged `reviewed` record, whose definitionId/revisionId/contentHash/localUid the
+    // admission correctly refuses as unknown keys.
+    const { resource, good } = reviewedLibraryFixture();
+    const chain = confirmCustomSupplyChainReview(
+      inferSupplyChains({ resources: [resource], tradeGoods: [good] })[0],
+    );
+    expect(chain.resourceIcon, 'the discoverer stopped emitting an empty resourceIcon').toBe('');
+    expect(chain.needIcon, 'the discoverer stopped emitting an empty needIcon').toBe('');
+    const admission = admitReviewedSupplyChain(chain);
+    expect(
+      admission.ok,
+      `the icon-admission asymmetry is back: ${(admission.errors || []).join(' ')}`,
+    ).toBe(true);
+  });
+
   test('joins pack source identity to durable receipt ids and rebuilds a valid binding', () => {
     const sourceItem = {
       name: 'Haunted Glassworks',

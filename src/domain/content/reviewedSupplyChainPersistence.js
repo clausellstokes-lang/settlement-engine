@@ -159,13 +159,19 @@ function exactKeys(value, keys, field) {
 /**
  * @param {unknown} value
  * @param {string} field
- * @param {{nullable?:boolean,max?:number}} [options]
+ * `emptyOk` admits the empty string for the one field whose WRITER emits it deliberately
+ * (`needIcon`, see :542). It is opt-in per call site rather than a default, so every other
+ * field keeps the non-empty rule, and it widens only the emptiness arm — the trim and length
+ * checks still apply, which keeps an opted-in field STRICTER than the inline `resourceIcon`
+ * check it now agrees with.
+ *
+ * @param {{nullable?:boolean,max?:number,emptyOk?:boolean}} [options]
  */
 function boundedText(value, field, options = {}) {
   if (value == null && options.nullable) return null;
   if (
     typeof value !== 'string'
-    || value.length === 0
+    || (value.length === 0 && !options.emptyOk)
     || value !== value.trim()
     || [...value].length > (options.max || MAX_TEXT)
   ) {
@@ -539,7 +545,19 @@ export function admitReviewedSupplyChain(value, options = {}) {
         ? artifact.upstreamNote
         : (() => { throw new TypeError('upstreamNote is invalid.'); })(),
       needLabel: boundedText(artifact.needLabel, 'needLabel'),
-      needIcon: boundedText(artifact.needIcon, 'needIcon'),
+      // ⭐ THE DISCOVERER EMITS AN EMPTY NEED-ICON STRING FOR EVERY CHAIN IT FINDS — a
+      // discovered chain has no author-supplied icon yet, and the renderer treats empty as "no
+      // icon". (The literal is deliberately spelled out in words here rather than as code:
+      // copyCorruption's `empty-icon-prop` scan reads src/ as TEXT, its SIG-1 allowlist names
+      // inferSupplyChains.js alone, and the right cure for a comment that trips a source scan
+      // is to reword the comment, never to widen the scan.)
+      // (SupplyChainsPanel.jsx:237 guards `{needIcon && …}`). Its sibling `resourceIcon`
+      // (:517) has ALWAYS admitted the empty string through an inline check; this field
+      // never did, so every discovered chain was refused at confirm time and the feature
+      // could not complete for anyone. The two now agree. ⛔ `emptyOk` widens ONLY the
+      // emptiness arm: the trim and length checks still apply here, so `needIcon` stays
+      // stricter than the sibling it was assumed to match.
+      needIcon: boundedText(artifact.needIcon, 'needIcon', { emptyOk: true }),
       needColor: boundedText(artifact.needColor, 'needColor'),
       discovered: {
         nodes,

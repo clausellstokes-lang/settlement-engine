@@ -597,8 +597,8 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       // ⚠️ THESE TWO EMPTY ICON SLOTS ARE NOT DEAD — DO NOT SWEEP THEM (lane RR).
       // `resourceIcon` and `needIcon` (below) are REQUIRED KEYS of the reviewed
       // supply-chain persistence shape: content/reviewedSupplyChainPersistence.js
-      // runs an exactKeys check over CHAIN_KEYS and then demands
-      // `typeof resourceIcon === 'string'`, so a discovered chain missing either
+      // runs an exactKeys check over CHAIN_KEYS and then checks each icon's VALUE,
+      // so a discovered chain missing either
       // key is rejected with "unsupported shape. Missing: resourceIcon." the
       // moment an author confirms it (SupplyChainsManager → confirmCustomSupply-
       // ChainReview spreads this object through unchanged). The icon sweep's
@@ -616,7 +616,14 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       upstreamMissing: importObjs.map((i) => i.label),
       upstreamNote: importObjs.length ? `Imported inputs: ${importObjs.map((i) => i.label).join(', ')}` : '',
       // needIcon: see the resourceIcon note above — a required persistence key,
-      // not emoji-strip residue.
+      // not emoji-strip residue. ⛔ THE NOTE ABOVE USED TO SAY THE BOUNDARY DEMANDS
+      // ONLY `typeof === 'string'`. That was TRUE for `resourceIcon` and FALSE for
+      // this field: `needIcon` went through `boundedText`, whose empty-string arm
+      // threw, so EVERY discovered chain was refused at confirm time and the
+      // feature could not complete for anyone. The two validators were made to
+      // agree at reviewedSupplyChainPersistence.js:542 (`{ emptyOk: true }`), and
+      // this comment is corrected here because a comment that misdescribes a
+      // boundary is how the divergence survived every prior sweep.
       needLabel: 'Custom', needIcon: '', needColor: '#a0762a',
       // ── discovery / verification metadata (renderer ignores) ──
       discovered: {
