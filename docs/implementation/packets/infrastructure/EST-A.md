@@ -3,8 +3,16 @@
 **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` at SHA-256
 `c4e3f531ba585ef6d033ac3deb3b88ece5648c527c6ef7f46020ef0156de38ce`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `a6fd63952ad15624548f775ce18c24ad099ce3ff`
+- **Landed:** `3be4736f0119bdbedb627e9bf862782e21c9dc0a` — the `est-1` train's first member.
+  Chain: promotion `2422f08f` → content `634ceaee` → census half `c3be5af4` → the fourth path
+  `3be4736f`. ⚠ **THREE content commits, not one, and each split is a law rather than a
+  preference**: the remove-only re-freeze may not be taken over a live tree, so the content
+  committed first and the freeze was taken DETACHED at that committed sha with
+  `TEST_RATCHET_SHA` carrying it (the landed GTR-1 "code half" idiom); the fourth path was
+  found by the guard at §4.1 and is priced in its own commit with the packet amendment that
+  buys it. §4.1 and §8 carry the executed landing evidence.
 - **Train:** `est-1`, member **1 of 3** (E-2 in the `OWNER_DECISION_QUEUE.md` §56 charter's
   lettering). Member order `EST-A → EST-B → EST-C` is SIGNED at §60.3, and **staged
   promotion is LAW for this train**: all three members re-record the lighting census, so

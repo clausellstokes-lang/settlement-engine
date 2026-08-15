@@ -2807,7 +2807,7 @@
     },
     {
       "id": "EST-A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EST-A.md",
       "verifiedBase": "a6fd63952ad15624548f775ce18c24ad099ce3ff",
       "changeManifest": [
@@ -2834,6 +2834,39 @@
         ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
         ["npx", "vitest", "run", "tests/lint/contractTestAntiVacuity.walker.test.js"],
         ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "EST-B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/EST-B.md",
+      "verifiedBase": "3be4736f0119bdbedb627e9bf862782e21c9dc0a",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "tests/components/fogTierGate.test.jsx" },
+        { "action": "MODIFY", "path": "tests/application/commands/executeCommand.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/negativeAssertionAnchor.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "tests/components/fogTierGate.test.jsx", "symbol": "the derivation stays tier-blind (source scan)" },
+        { "path": "tests/application/commands/executeCommand.test.js", "symbol": "command executor replay and freshness" },
+        { "path": "tests/lint/negativeAssertionAnchor.walker.test.js", "symbol": "FROZEN_UNANCHORED_NEGATIVES" },
+        { "path": "src/store/fogEditSlice.js", "symbol": "fogEdit" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "fogTierGate passes nine tests, including four spelled tier-blind module scans and the roster totality guard that discovers them" },
+        { "id": "A2", "case": "executeCommand passes seven tests, the three spelled stale-context refusals carrying the same three reasons verbatim" },
+        { "id": "A3", "case": "the lighting walker's own parkReasonsFor returns an EMPTY reason list for both rewritten files, not merely a different one" },
+        { "id": "A4", "case": "the census literal is re-recorded WHOLE at 2431/364/2067/20148/5660 and the walker is green in this same commit" },
+        { "id": "A5", "case": "the negative-assertion anchor walker is green with fogTierGate's frozen row DELETED rather than lowered, its inventory-honesty arm satisfied by the deletion" },
+        { "id": "A6", "case": "test:ratchet exits 0 with fifteen known failures and no RATCHET DOWN line — this member repairs nothing and regresses nothing" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/components/fogTierGate.test.jsx"],
+        ["npx", "vitest", "run", "tests/application/commands/executeCommand.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
       ]
     }
