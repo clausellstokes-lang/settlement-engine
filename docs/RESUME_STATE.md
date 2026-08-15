@@ -188,6 +188,17 @@ Lane R-VOC (§51 dimension: VOCABULARY COHERENCE, FABLE)** — the four
 vocabularies audited for one-concept-one-name, seeded with the drift finds
 → `laneRVOC-*`.
 
+**✅ R-EST COLLECTED + §56 RULED (ledger `5fcc076a`): the estate audited
+itself and the repairs are chartered** — the EST-1 train (E-1 the needIcon
+fixture cure un-banking THREE rows incl. a data-loss race, ratchet 16→13;
+E-2 the F6 window cure incl. the XSS blind tail; E-3 the two
+security-adjacent parked suites re-pointed live). ⭐ P6 SURFACED TO THE
+OWNER with the bounded-burn recommendation (198/545 guards unproven; five
+frozen baselines; .clamp-primitive growing under a banked alarm — the
+chair proceeds bounded unless overruled). conquestFeeds docket RECONCILED
+(cured); zero new hidden-gate instances. **LIVE: TC15 compiles est-1** →
+`laneTC15-*`.
+
 **LIVE (four lanes): TE12(INT-3B executing) · R-VOC · TC14(WC-0 compile — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
