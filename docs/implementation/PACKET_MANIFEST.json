@@ -9693,6 +9693,66 @@
           "tests/lint/sovereigntyLightingContract.walker.test.js"
         ]
       ]
+    },
+    {
+      "id": "CS-B0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-B0.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/beliefAxes.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/beliefAxes.js",
+          "symbol": "export function foldBeliefAxes"
+        },
+        {
+          "path": "src/domain/worldPulse/beliefAxes.js",
+          "symbol": "CAT_ADOPT_ACCURACY"
+        },
+        {
+          "path": "tests/domain/beliefAxesCultural.test.js",
+          "symbol": "STALENESS: a connected court believes the OLD rite until the beat lands, then adopts the NEW"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "an observer with no cultural label yet seeds it from ground truth, whether the key is absent or present-but-null"
+        },
+        {
+          "id": "A2",
+          "case": "a label already held is never overwritten by ground truth \u2014 only a fresh tradition_change clearing CAT_ADOPT_ACCURACY moves it"
+        },
+        {
+          "id": "A3",
+          "case": "the beliefAxesCultural STALENESS pin passes with NOT ONE CHARACTER of its file edited"
+        },
+        {
+          "id": "A4",
+          "case": "both belief dormancy contract arms stay green \u2014 the axes remain dark when the gate is absent"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/beliefAxesCultural.test.js",
+          "tests/domain/beliefAxes.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/beliefAxisSubjects.test.js",
+          "tests/property/believedWorldAxesDormancyFence.test.js"
+        ]
+      ]
     }
   ]
 }
