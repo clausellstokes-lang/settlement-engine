@@ -2,8 +2,57 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at the `est-1c` train terminal.
-- **Measured:** 2026-08-15 — **THE `est-1c` TRAIN LANDED (`EST-C`), AND WITH IT THE ESTATE'S
+- **Measured branch/SHA:** `claude/composite-r4` at the `eff-1a` train terminal.
+- **Measured:** 2026-08-15 — **THE `eff-1a` TRAIN LANDED ALL FOUR MEMBERS: the
+  efficiency machinery, landing itself.** Chain: base `954b4e0f` → `fdf14f60` (P1) →
+  `24688a37` (EFF-M1A) → `dde9ff55` (P2) → `93e3904a` (EFF-M1B) → `e831e93f` (P3) →
+  `0e8f39b2` (EFF-M2) → `986b0c22` (P4) → `3d50effb` (EFF-M3) → `85712a1f` (T1) → the
+  terminal. Eight handwritten files, ZERO production lines, and a capsule diff of exactly
+  three lines — `stampedAt`, the sha inside `method`, and `validatePackets` 50 → 54.
+  ⭐ **`scripts/preproof-train.mjs`** runs member batteries concurrently in throwaway
+  worktrees outside the repo, with containment enforced on REALPATHS, batteries spawned
+  detached so signal cleanup kills process GROUPS rather than reaching for `pkill`, cleanup
+  awaited on every exit path through ONE shared promise paired with a `signalled` flag, and an
+  exit vocabulary in which a battery red is the ONLY exit 1. It pays both obligations the R-EFF
+  audit left to its landing: a REQUIRED per-battery `timeoutMs` (the ceiling is the plan
+  author's measured obligation, never a constant the harness invents) and per-member vitest
+  cache isolation through a generated override config written OUTSIDE the worktree — because
+  the throwaway tree's `node_modules` is a write-through symlink, so Vite's default
+  `cacheDir` resolves into the executor's own tree.
+  ⭐⭐ **ONE DRAFT CLAIM WAS REFUTED BY EXECUTION AND CURED RATHER THAN CARRIED**:
+  `--reporter=basic` no longer exists in vitest 4, so an estate run produced a STARTUP error,
+  exit 1, and the harness announcing an early truncation signal for a reporter typo — a setup
+  failure masquerading as a battery red, which is the exact class the audit had already cured
+  once and which the toy repo could not see because its stub ignored the flag. A battery red is
+  now graded only against a JSON result naming at least one executed test; anything else is
+  `phase: 'startup'` and exit 2.
+  ⭐ **`scripts/premise-map.mjs`** makes the three re-charter redundancies checkable rather
+  than asserted, and CONVICTED THE ESTATE on its first application: the next distinct-family
+  slot after the `eff-1a`→`eff-1b` staged pair was not compiled, so R1 did not hold. The same
+  plan with that one field true reports R1 HOLDS, which is what makes the conviction the
+  estate's state and not the tool's.
+  ⭐ **`PACKET_STANDARD.md` gained six sections** — differential member caps, parallel
+  pre-proof, premise maps and scoped truncation, validator status-sequence simulation, the
+  registration obligations a wave prices at compile, and the census-burn law — and the five
+  family preambles each gained ONE section, 131 lines, byte-identical across all five apart
+  from the section number and a single family-measured stamp line.
+  ⚠ **The stamp line refused the easy reading**: the §70 program's seven rounds stamped ten
+  volumes, GR and HB are in neither that enumeration nor any acceptance of their own, and INFRA
+  has no annex for a round to stamp — so all three record a cap of FOUR with the door named,
+  because writing EIGHT into an unstamped family's preamble would manufacture exactly the
+  authority the stamp precondition exists to gate.
+
+> ⚠⚠ **THE MEASURED-BLOCK CONVENTION IS BINDING AT EVERY EXPOSURE.** The landing lane — not
+> the chair — writes the block, in its own terminal commit, in the same act that flips the last
+> member and regenerates the capsule. A block names the train, its chain by sha, and what the
+> train actually settled; the prior block is demoted to `Measured (previous)` and nothing is
+> ever deleted. **Three blocks had lapsed when the `eff-1b` train restored them** — `gr-5a`
+> and `int-3b` (both named in §68.4) and `eff-1a`, whose own terminal missed the obligation
+> one landing earlier and whose executor records the lapse here rather than leaving it to be
+> found. A lapse is cheap to repair and expensive to notice: the block is the only place a
+> reader learns what a landed train MEANT, and `git log` does not carry it.
+
+- **Measured (previous):** 2026-08-15 — **THE `est-1c` TRAIN LANDED (`EST-C`), AND WITH IT THE ESTATE'S
   ORDINARY TEST DEBT REACHES ZERO.** Chain: base `5c774940` → `0adf27ff` (P1) → `5ca2012c`
   (content) → `c632cbf4` (census half + the ruled conversion) → the terminal.
   ⛔⛔ **WHAT IT ACTUALLY FIXED WAS NEVER TEST DEBT.** Three ratchet rows filed as `debt` were
@@ -118,6 +167,48 @@
   `hb-2b`'s, so `int-3b`'s terminal — this train's own base — refreshed neither. Its landing is
   recorded in its own packet and in `OWNER_DECISION_QUEUE.md` §65.
 
+- **Measured (previous):** 2026-08-15 — **THE `int-3b` TRAIN LANDED (`INT-3B`), the
+  ELEVENTH exposure and the INT family's first wave.** Chain: base `fc8451c4` → `8401efbc`
+  (P1, which also landed the INT family preamble) → `28d2824b` (I1 — the parked green
+  re-pointed byte-identical) → the terminal. One pure, dark-safe, number-free leaf prices a
+  defeated claimant's flight through the estate's ONE purposeful-travel substrate.
+  ⭐⭐ **The wave's true blocker was found by measurement, not by reading**: the errand ROW DTO
+  is war-welded — `normalizeErrand` refuses any row without a valid peace offer, acceptance
+  and snapshot — so the design volume's own *"NO NEW LEDGER — SP-1 errands"* sentence is
+  refuted at the base and no émigré record can persist there. The cure is GR-2's road: minting
+  through the spine PRICES a journey and VALIDATES a class, and writes no row at all, so the
+  member persists nothing and prejudges nothing while the record's home stays owner-gated.
+  ⭐ Because the leaf's only import is ARGUED substrate, `scanCrossLayerPairs` produced ZERO
+  pairs: no interior coupling registry was minted, no baseline entry bought, and both exact
+  ceilings stood still. That single finding is what kept it a one-file wave rather than a
+  registry program. ⚠ SIX paths exactly, with the estate-wide lighting census re-derived WHOLE
+  in the same commit — which is what keeps a single-member train green at every commit.
+  ⚠ **This block was LAPSED and is restored by the `eff-1b` train** (§68.4); its authority is
+  the chair's own collection record.
+- **Measured (previous):** 2026-08-14 — **THE `gr-5a` TRAIN LANDED (`GR-5A`), the TENTH
+  exposure — and it STOPPED TWICE on the way, both STOPs ratified into standing law.** Chain:
+  base `6cd18ad3` → `66494971` (P1′, re-promoted on the SIGNED seven-path manifest) →
+  `85d19adf` (I1′) → `e93376ec` (I1″, the signed edge-shared bundles and the fourteen-path
+  manifest) → the terminal; the superseded `836d1da8` (P1) and `318a7fff` (I1) are preserved
+  on their own parked refs. A treaty remembers the worst it was ever observed to do: one
+  conditional, monotone, drop-when-absent field written at the one site that already computes
+  the tick's worst observation.
+  ⭐⭐ **THE FLAG-MINT HABITAT TURNED OUT TO HAVE THREE OBLIGATIONS, NOT ONE, AND THIS TRAIN
+  STOPPED TWICE FINDING THEM.** Minting an engine-gated flag costs (a) the ordered
+  `subsystemRowsVirtual` equality pin; (b) the seven generated edge-shared bundle artefacts
+  whenever `simulationRules.js` moves, without which the freshness gate reds; and (c) the flag
+  drive spelled as a LITERAL `<flag>: true` in the acceptance file, because mechanism-coverage
+  credit is granted only on a literal and a computed key attributes to NO key at all. Obligation
+  (c) is the cheapest of the three to miss, because the code is right and only the machinery is
+  blind. All three are standing law for every volume from this train forward.
+  ⛔ **GR-5 as chartered was REFUSED IN PART** — the volume's block is six behaviours and five
+  bands wearing one wave's name, and each of the five successors carries the measured reason it
+  cannot compile at that base. ⭐ It authors ZERO numbers, which is why it landed without a
+  chair value signature. ⚠ The lying-exit class was re-confirmed live here: the ratchet outlasted
+  its window, backgrounded, and the harness reported the WRAPPER's exit 0 over a red gate —
+  caught by reading the log, never by believing the code.
+  ⚠ **This block was LAPSED and is restored by the `eff-1b` train** (§68.4); its authority is
+  the chair's rulings at §§47/49/50.
 - **Measured (previous):** 2026-08-14 — **THE `hb-2b` TRAIN LANDED BOTH MEMBERS (`HB-0B` + `HB-2`), the
   estate's SIXTH §28 train and its FIRST SPLIT PROMOTION.** The live manifest has 44 rows and
   zero dispatchable packets. Chain: `3ad7c082` (P1a) → `c777a158` (I1) → `46f1c942` (P1b) →

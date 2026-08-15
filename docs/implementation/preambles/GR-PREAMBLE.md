@@ -180,8 +180,8 @@ Every class below already has a hazard-registry row. **A GR member packet owes n
 new hazard row**; it owes a disposition line for each class its manifest can
 reach, plus its own wave-specific hazards.
 
-- **HZ-SIZECEILING** — the three standing hot files (`OutputContainer.jsx`,
-  `peaceTerms.js`, `informationStatecraft.js`) are measured **at the packet's own
+- **HZ-SIZECEILING** — the FOUR standing hot files (`OutputContainer.jsx`,
+  `convergence.js`, `peaceTerms.js`, `informationStatecraft.js`) are measured **at the packet's own
   base with eslint's own `Linter` under `max-lines`
   `{ skipBlankLines: true, skipComments: true }`** — never `wc -l`, never an
   inherited figure, never a delegated one. A manifest naming a hot file shapes its

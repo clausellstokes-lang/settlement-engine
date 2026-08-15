@@ -206,15 +206,25 @@ registration file names, EXPLICITLY AND BY PATH: the ROW, the HEAD RE-EXPORT (or
 none exists), the EXACT-LIST/EXACT-COUNT PIN, and the REGISTRY TEST PATH.** A packet that
 names fewer than four is defective on its face.
 
-**THE HB-SPECIFIC INSTANCE, MEASURED AT `6784bf62` (R23).** Two instruments fire on any new
+**THE HB-SPECIFIC INSTANCE, RE-MEASURED AT `4f2d37d1` (R23; first measured at `6784bf62`).**
+Two instruments fire on any new
 `.js` under `src/domain/worldPulse/**` or `src/domain/spatial/**`, both in
 `tests/lint/couplingInclusion.walker.test.js`:
 
 ```js
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;   // the walk RECURSES into subdirectories
-const ARGUED_ROSTER_CEILING = 13;      // asserted with toBe(), EXACT — not <=
+const ARGUED_ROSTER_CEILING = 19;      // asserted with toBe(), EXACT — not <=
 const UNLAYERED_BASELINE_CEILING = 179; // asserted with toBe(), EXACT
 ```
+
+⚠ **THE CEILING ROTTED BY THIS FAMILY'S OWN HAND, AND THE TRANSITION WALK SAYS SO.**
+Derived by reading the literal at each commit that moved it, never by a pickaxe candidate:
+**13** at `7699e367` (2026-08-10, where the `toBe()` exact-equality arm was introduced) →
+**15** at `e188760b` (HB-0) → **17** at `1013d58b` (HB-1) → **19** at `de214782` (HB-2), all
+three on 2026-08-14 and all three HB's own waves paying the price this section states.
+`UNLAYERED_BASELINE_CEILING` stood still at **179** across the same window. ⛔ A preamble
+figure that a family's own waves move is stale the moment the next one lands — an HB compile
+RE-READS both literals from the walker at its own base and never inherits them from here.
 
 and the census arm:
 

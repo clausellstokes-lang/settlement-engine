@@ -197,14 +197,15 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
   the integration-fold block) bind at the waves those rows name; each is
   vetoable. So do HB Q1-Q5, CR-WC-1..CR-WC-22 and EP Q1-Q5, which live in their
   own volumes rather than here. ⛔ **THREE OWNER GATES RIDE THESE ROWS AND NONE
-  OF THEM BLOCKED THE FOLD:** WY F9 `supplyCargo` (UNSIGNED — and WC-10 HARD-GATES
-  on it), WC CR-WC-9 (the persisted field batch, blocking WC-6 onward), and EP's
-  four §7a parked rows.
-  ⚠ F9 and CR-WC-9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (this
-  file's header), which applies the owner's blanket queue sign-off granted 2026-08-05 and
-  recorded in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue position;
-  this older spelling is superseded** (noted 2026-08-11 per chair order, session
-  `c42c8924`).
+  OF THEM BLOCKED THE FOLD:** WY F9 `supplyCargo`, WC CR-WC-9 (the persisted field
+  batch, blocking WC-6 onward), and EP's four §7a parked rows.
+  ⚠ **F9 and CR-WC-9: SIGNED, released at their queue positions** — status governed by the
+  SOL_QUEUE reconciliation of 2026-08-09 (this file's header), which applies the owner's
+  blanket queue sign-off granted 2026-08-05 and recorded in
+  `docs/FABLE_VALIDATION_QUEUE.md`. WC-10 HARD-GATES on WY-8a's **build**, never on the
+  signature. *(Point, don't restate: the superseded "UNSIGNED" spelling stood inline here
+  until the `eff-1b` train struck it; first noted 2026-08-11 per chair order, session
+  `c42c8924`.)*
 - EVERYTHING BUILDS DARK. Sol never lights a flag, runs a soak, ratifies a
   band, re-records a golden without a recorded ruling, or pushes — see §4.
   ⭐ **EP's dark-state claim is defined PER ADVANCE PATH (EP §2.4) and is
@@ -345,13 +346,14 @@ volumes corrected @ 36862650 + fdf43790):
     order) · **WY-5** after WY-4. Nine conditional fields on EXISTING records,
     zero new top-level keys, zero new ledger keys; ⛔ the §2a owner sign-off
     table gates the field-minting waves one row at a time — an unsigned row
-    stalls exactly one wave, never the program, and **F9 (`supplyCargo`) is
-    UNSIGNED: no build until the owner signs it.**
-    ⚠ F9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (this file's
-    header), which applies the owner's blanket queue sign-off granted 2026-08-05 and
-    recorded in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue
-    position; this older spelling is superseded** (noted 2026-08-11 per chair order,
-    session `c42c8924`). Row 18c of this file states the reconciled reading: "F9
+    stalls exactly one wave, never the program.
+    ⚠ **F9 (`supplyCargo`): SIGNED, released at its queue position** — status governed by
+    the SOL_QUEUE reconciliation of 2026-08-09 (this file's header), which applies the
+    owner's blanket queue sign-off granted 2026-08-05 and recorded in
+    `docs/FABLE_VALIDATION_QUEUE.md`. *(Point, don't restate: the superseded "F9 is
+    UNSIGNED: no build until the owner signs it" spelling stood inline here until the
+    `eff-1b` train struck it; first noted 2026-08-11 per chair order, session
+    `c42c8924`.)* Row 18c of this file states the reconciled reading: "F9
     `supplyCargo` is owner-SIGNED but UNBUILT and rides §2 LANE B".
     ⚠️ **THE PREFIX ADMISSION (both volumes).** ES joins
     `CHARTERED_VOLUME_PREFIXES` as the TENTH prefix and WY as the ELEVENTH, each
@@ -474,7 +476,12 @@ volumes corrected @ 36862650 + fdf43790):
     row gains "(slice 8a is ENGINE — the 2k supply train, F9,
     `armySupplyEnabled`; it additionally waits on engine WY-3 and takes the
     commodityFlow quiet window; 8b is the surface mirror as before)."
-    ⛔ Slice 8a does not build until the owner signs the F9 `supplyCargo` row.
+    ⚠ **F9 `supplyCargo`: SIGNED, released at its queue position** (the SOL_QUEUE header
+    reconciliation of 2026-08-09). Slice 8a is UNBUILT, which is a build state and not a
+    signature state. *(Point, don't restate: the superseded "does not build until the owner
+    signs the F9 row" spelling stood here until the `eff-1b` train struck it. ⚠ This site
+    was ABSENT from the round's six-site census — the under-enumeration the census itself
+    warned about, found again on the sweep that was supposed to close it.)*
 22. **THE RECEIPT-POOL ANNEXES ARE PRE-AUTHORED (2026-08-02)** — docs/content/
     RECEIPT_POOLS_{WAR,TRADE,FAITH,POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,
     COUPLINGS}.md: 676 phrased kinds, ~3,000 angle-distinct variants, authored

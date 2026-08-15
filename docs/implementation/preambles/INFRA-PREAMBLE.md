@@ -194,7 +194,8 @@ can reach, plus its own wave-specific hazards.
   having measured nothing.
 - **HZ-NEWFILECEILING** — both TypeScript ratchets stay zero-error for every new
   path. Repair at source; ⛔ never add a baseline entry.
-- **HZ-SIZECEILING** — the three standing hot files are measured **at the
+- **HZ-SIZECEILING** — the FOUR standing hot files (`OutputContainer.jsx`,
+  `convergence.js`, `peaceTerms.js`, `informationStatecraft.js`) are measured **at the
   member's own base with eslint's own `Linter` under `max-lines`
   `{ skipBlankLines: true, skipComments: true }`** — never `wc -l`, never an
   inherited figure, never a delegated one. A manifest naming a hot file shapes

@@ -2552,8 +2552,12 @@ one-commit law AFFIRMED; the WR flags recorded as pre-manifest history).
 row**, named there so the veto lands where the build lands.
 
 **⛔ PARKED — OWNER-GATED, RECORDED, NOT BUILT BY THIS FOLD OR ANY WAVE UNDER IT:**
-(1) the **F9 `supplyCargo` sign-off row** — WY-8a does not build until the owner
-signs it; (2) the **ES Q5 alliance-topology ACQUIRE** — a new persisted key
+(1) ⚠ **F9 `supplyCargo`: SIGNED, released at its queue position** — see the
+`docs/SOL_QUEUE.md` header reconciliation of 2026-08-09, which applies the owner's blanket
+queue sign-off of 2026-08-05 recorded in THIS file, whose RELEASED-TO-BUILD list below names
+this row. *(Point, don't restate: the superseded "does not build until the owner signs it"
+spelling stood here until the `eff-1b` train struck it; first noted 2026-08-11 per chair
+order, session `c42c8924`.)* (2) the **ES Q5 alliance-topology ACQUIRE** — a new persisted key
 family, one-line future-widening row; (3) the **war-chooser spy wiring**
 (`settlementStrategy`) — deferred to a future owner ruling per CR-ES-4; (4) the
 **Q6 / J-POP-14 arrival couplings** — ONE owner ruling covers both, per CR-FP-6.
@@ -5921,14 +5925,15 @@ had moved to ELEVEN. Marked as HISTORY, with the reader pointed at
 `CHARTERED_VOLUME_PREFIXES` and indexed by seam row 32. Point, don't restate.
 
 **⛔ WHAT REMAINS OWNER-GATED AND IS NOT DISCHARGED BY THIS FOLD.** CR-WC-9 (WC's
-persisted field batch — blocks WC-6 onward, never blocked the fold); WY F9
-`supplyCargo` UNSIGNED, on which WC-10 HARD-GATES; EP's FOUR §7a parked rows; HB Q1's
+persisted field batch — blocks WC-6 onward, never blocked the fold); EP's FOUR §7a parked rows; HB Q1's
 two owner-gated persisted fields.
-⚠ F9 and CR-WC-9: status governed by the SOL_QUEUE reconciliation of 2026-08-09
-(`docs/SOL_QUEUE.md` header), which applies the owner's blanket queue sign-off granted
-2026-08-05 and recorded in THIS file — **SIGNED, released at its queue position; this
-older spelling is superseded** (noted 2026-08-11 per chair order, session `c42c8924`).
-The grant's own RELEASED-TO-BUILD list above names "the F9 `supplyCargo` sign-off row". **AND THE THREE VOLUMES ARE NOT SEALED BY LANDING:**
+⚠ **F9 `supplyCargo` and CR-WC-9: SIGNED, released at their queue positions** — status
+governed by the SOL_QUEUE reconciliation of 2026-08-09 (`docs/SOL_QUEUE.md` header), which
+applies the owner's blanket queue sign-off granted 2026-08-05 and recorded in THIS file;
+the grant's own RELEASED-TO-BUILD list above names "the F9 `supplyCargo` sign-off row".
+WC-10 still HARD-GATES on WY-8a's **build**, which is a different gate from a signature.
+*(Point, don't restate: the superseded "F9 UNSIGNED" spelling led this paragraph until the
+`eff-1b` train struck it; first noted 2026-08-11 per chair order, session `c42c8924`.)* **AND THE THREE VOLUMES ARE NOT SEALED BY LANDING:**
 EP is a DRAFT AT ROUND SEVEN with four revision-6 rulings confirmed by nobody; HB's
 round four has NO RECORDED CLOSE; WC is ARCHITECTED, NOT STARTED. Each says so in its
 own header. **A reader who reads "landed" as "sealed" is wrong, and was warned.**

@@ -85,8 +85,13 @@ There are exactly two lawful doors, and the walker's own table says which:
   prefix *"would claim files nobody has designed and silently widen a frozen family."*
 - **An `ARGUED_UNLAYERED` entry** — reserved for modules that own **no subject** and are spoken
   by every port (the band vocabulary, the law word, the errand mint). It costs a written
-  argument, a `reads` declaration, and a deliberate move of `ARGUED_ROSTER_CEILING` (**19**,
-  **exact equality** in both directions since 2026-08-10).
+  argument, a `reads` declaration, and a deliberate move of `ARGUED_ROSTER_CEILING`.
+  ⚠ **TWO DATES, AND THEY ARE NOT THE SAME DATE** — the earlier spelling here conflated them.
+  The **exact-equality** discipline (`toBe()`, both directions) dates from `7699e367`,
+  2026-08-10, where the ceiling stood at **13**. The **figure 19** dates from `de214782`,
+  2026-08-14, after HB-0/HB-1/HB-2 walked it 13 → 15 → 17 → 19 in one day. Re-read the
+  literal from `tests/lint/couplingInclusion.walker.test.js` at your own base; it is 19 at
+  `4f2d37d1` and this line is not the authority for it.
 
 Taking a layer home makes the leaf's imports visible to `scanCrossLayerPairs`, which is the
 point — and which leads directly to (b).
