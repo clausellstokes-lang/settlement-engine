@@ -2375,3 +2375,28 @@ family's voided annex rows (only the rows whose subject files the landing
 touched), so annexes stay continuously green rather than rotting until a
 consumer trips. First application: the INT-3B landing. A landing collection
 that skips the increment is incomplete.
+
+## §62 · THE SECURITY DIMENSION RULED (2026-08-16 ~12:40, chair, vetoable;
+## evidence in laneRSEC-security-audit.md, all static at `fc8451c4`)
+
+1. **Five of six areas MEASURED CLEAN/STRONG/SOUND**: the injectable-filter
+   class cured at its one site; RLS strong (128 policies, every table
+   enabled, the historical USING(true) dropped, BYOK zero-select); the
+   public-projection seam SOUND (hard-deny, walker-enforced census, no
+   covert escape, all 19 ground-truth consumers DM/admin); PII SOUND
+   (masking, peppered hashes, durable deletion); billing STRONG (signature
+   verification, two-belt idempotency, server-side pricing). The refund
+   seam is cured net-current; IP-1 lives in CI; both owed-removal docs
+   confirmed absent.
+2. **F2 DOCKETED**: the admin `.or()` strip passes LIKE wildcards (`%`/`_`)
+   — elevated-admin enumeration, LOW, a one-line machinery cure joining the
+   next micro-batch.
+3. **⭐ THE 118-FINDINGS DEPLOY GATE IS RESTATED**: individual register
+   rows remain unre-triaged (the register is out-of-repo, owner's custody),
+   but EVERY pattern class its known rows exemplify sweeps CLEAN at HEAD —
+   the static half of that gate is substantially discharged; what remains
+   for the deploy phase is the RUNTIME half (live migrations, dashboard
+   auth settings, the webhook train) plus optional owner-side register
+   reconciliation. The gate text updates accordingly.
+4. The paywall trio's client-boolean state is REAFFIRMED coherent-by-intent
+   (§26.3's post-launch server cure stands chartered).
