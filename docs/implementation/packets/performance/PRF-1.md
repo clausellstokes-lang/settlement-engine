@@ -1,8 +1,18 @@
 # PRF / PRF-1 — the goods-matcher RESTORATION (the sole member of `prf-1`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `630265b341ab406bb55438b277723154d871597b`
   (the `rn-1` train's terminal, `goodsCatalog.js` blob `fc474eab`)
+- **Landed:** `97ece4b7` — chain: base `630265b3` → promotion `e40e211e` (P1) → implementation
+  `97ece4b7` (PRF-1) → the terminal. Member battery green at the implementation commit
+  (**13 files / 219 tests, exit 0**); the differential identity battery **46,062 checks / 0
+  diffs** against a `git archive` of the base; the SAME-SEED GOLDEN SUITE byte-identical at
+  **87 files / 623 tests, exit 0**, run after the last edit; both typecheck ratchets at their
+  exact floors (**173/173**, **1134/1134**); the anchor walker and scoped eslint exit 0.
+  Census re-derived WHOLE at `2438/364/2074/20208/5672` with `files`/`parked`/`credited`
+  never moving. Both guards proven to bite by planting the destroying blob `fc474eab` and
+  restoring via `cp`/`cmp`: the alias-snapshot arm was the ONLY one of seven to red, and
+  `validate:packets` exited 1 naming both new required symbols.
 - **Train:** `prf-1`, family **PRF** (un-stamped per §96.4's enumeration, cap 4), member
   **1 of 1**. One member carries the primary behavior, its necessary integration path, and
   its prevention guard — the dispatch unit PACKET_STANDARD expressly allows. Splitting

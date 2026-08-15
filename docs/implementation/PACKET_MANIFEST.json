@@ -9216,7 +9216,7 @@
     },
     {
       "id": "PRF-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/performance/PRF-1.md",
       "verifiedBase": "630265b341ab406bb55438b277723154d871597b",
       "changeManifest": [
