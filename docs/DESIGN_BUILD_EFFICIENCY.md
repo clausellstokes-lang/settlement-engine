@@ -3,11 +3,18 @@
 - **Status:** ARCHITECTED 2026-08-14 (Fable chair), under OWNER_DECISION_QUEUE
   §27 (build-everything ordering) and §28 (the six-technique ruling this volume
   expands). Landed on the ledger branch — the build branch is sealed under
-  GR-4B-IIIB at authoring time. **Fold: DONE.** This volume folded to the build
-  branch verbatim at the `infra-1` train's member INFRA-M1-DOCS, with the
-  enforcement-claims `CLAIM_RE` scan executed in the same change and returning
-  zero hits over this file. This copy on `claude/composite-r4` is the canonical
-  one; the ledger-branch copy is history.
+  GR-4B-IIIB at authoring time. **Fold: DONE, TWICE — and the second fold is why
+  this clause is now a convention rather than a note.** The volume folded first at
+  the `infra-1` train's member INFRA-M1-DOCS. The chair then amended the LEDGER copy
+  (§2.4's re-charter redundancy block, §2.6, §2.7, and §7's cap-line alignment), so
+  the branch carried two divergent canonical texts until the `eff-1b` train re-folded
+  the ledger text whole. ⚠ **THE FOLDED-VOLUME CONVENTION, stated once so the next
+  divergence cannot be silent:** the LEDGER copy is the DRAFTING SURFACE — the chair
+  amends there, because the ledger carries no gate — and THIS copy on
+  `claude/composite-r4` is CANONICAL AT ITS BASE, re-folded by a build-branch docs
+  member whenever the chair's drafting surface has moved. A reader on this branch
+  reads this file; a reader who needs to know whether it is current diffs it against
+  the ledger. `CLAIM_RE` was executed over the folded text and returned zero hits.
 - **Prime constraint, restated so no section below can erode it:** the gate is
   AMORTIZED, never THINNED. No step of `npm run check` becomes conditional,
   skippable, or "lite." The five days the gate ran dark behind one
@@ -92,12 +99,92 @@ at any exposed state there is at most one READY packet, same as today.
   chain position at EVERY member boundary (§6). A successor collects the
   chain, re-verifies the last member's proof independently, and continues.
 
+**Re-charter redundancy (ODQ §77, 2026-08-15).** A refuted premise no longer
+stalls the pipeline through three channels, each cured separately:
+
+- **R1 — the dual-family ready queue.** The compile pipeline keeps the
+  executor queue's next TWO slots at compiled-and-TTS-simulated status, drawn
+  from at least TWO distinct families. A STOP in the executing family's train
+  pivots the slot to the other family's ready train at zero wall-clock; the
+  re-charter runs on chair/compile lanes concurrently, off the serial path.
+- **R2 — the premise map and scoped truncation** (amended per the R-EFF
+  audit, ODQ §83 — the original text was blind to commit topology and to
+  member→member code dependency). Every train plan carries a PREMISE MAP:
+  member → the annex rows and rulings it cites (from the packet's own SPV
+  citations; TTS-checked at compile) PLUS `dependsOn` member→member code
+  edges and the `flagMember` designation for every flag-train slice. Row
+  ids are charset-validated (ASCII, NFC-normalized) against the named
+  annex; a scope query warns on near-miss ids — an unmatched id must
+  CONVICT, never silently no-op. At execution, a refuted SUBSTRATE-FACT
+  row stops the citing members AND, transitively, every member that
+  `dependsOn` a stopped member or slices a stopped flag member. **A
+  continue-tail NEVER lands as-committed** — its commits carry the stopped
+  member's tree as ancestor — it RE-CHAINS by cherry-pick onto the last
+  surviving member (clean by validator path-disjointness), re-proves every
+  battery at its new commit, and the census re-derives at the SURVIVING
+  chain's last tests-moving member. A LAW-shaped refutation, an invalid
+  map, or an absent map remains a FULL-TRAIN STOP.
+- **R3 — pre-ruled conditional forks.** Where SPV graded a premise
+  UNVERIFIABLE-AT-BASE, the compile MAY bring the fork to the chair AT
+  PROMOTION: "if row X refutes at execution, member M lands in shape M′" —
+  signed then, so the anticipated refutation costs no mid-train round-trip.
+  Bounded deliberately: only SPV-flagged premises, never blanket pre-ruling
+  (the judgment-dilution and rot costs of pre-deciding everything are the
+  §63/§70a lesson).
+
 ### 2.5 Boundaries
 
 Flag-minting waves are train boundaries (the CQ5 one-commit flag law is
 untouched): a flag wave rides alone or as the FIRST member of a train whose
 remaining members are no-flag slices of that same flag. No cross-volume trains
 until two same-volume trains have landed clean (rollout guard, §8).
+
+### 2.6 Differential member caps (ODQ §74.2, evidence-gated; owner-ordered
+### implementation 2026-08-15)
+
+The 4-member cap of §2.1 priced mid-train premise death at the HB-era rate.
+The pre-verification stack (SPV annexes, the §70 Fable rounds, TTS) has
+since driven mid-train premise deaths to zero across landed trains, so the
+cap differentiates on evidence:
+
+- A family whose annex carries a **§70.4 FABLE-ROUND STAMP**: engine trains
+  up to **EIGHT** members; prose/docs/dossier trains (proof = focused
+  batteries + title-only census motion) up to **TEN**.
+- An un-stamped family stays at **FOUR**.
+- Everything else in §2 is UNCHANGED: per-member full proof (§2.2), the one
+  terminal bare gate, truncate-to-green (§2.4), the flag-wave boundary
+  (§2.5), census re-derived at the last tests-moving member (§2.3). The
+  gate is amortized wider, never thinned.
+- Why not one train per family outright: gate amortization is nearly spent
+  at eight (4→8 halves terminal gates; 8→17 saves almost nothing) while
+  truncation blast-radius keeps growing linearly, and per-member proof —
+  the dominant cost — is invariant to train size.
+
+### 2.7 Parallel pre-proof, serial landing (ODQ §74.3; owner-ordered
+### implementation 2026-08-15)
+
+Member batteries MAY execute concurrently in ISOLATED throwaway worktrees
+before the train assembles — the mutant-candidate method generalized:
+
+- The harness (`scripts/preproof-train.mjs`, LANDED at eff-1a; charter +
+  authored draft in the session scratchpad `laneP74-*`) creates one
+  detached temp worktree per member OUTSIDE the repo, links node_modules
+  as a PLAIN WRITE-THROUGH SYMLINK (measured: writes pass through to the
+  executor tree — per-member `cacheDir` isolation, the R-D8 obligation
+  landed with the harness, is what prevents cross-battery cache
+  sharing), runs each member's DECLARED battery
+  (`npx vitest run <files>` — never `npm run check*`, never gate-mutex,
+  never pkill), captures each exit in-shell to a per-member log, and
+  reports a member×exit table.
+- Pre-proof is ADVISORY WALL-CLOCK COMPRESSION ONLY: the assembled train
+  still runs every battery at its member commit (§2.2) and the one
+  terminal bare gate at T. A pre-proof green is never citable as landing
+  proof; a pre-proof red is an early truncation signal that saves the
+  serial slot from discovering it late.
+- Invocation is confined to the serial executor slot (or the chair with no
+  executor mid-commit): `git worktree add/remove` writes shared repo
+  metadata, so the harness runs inside the slot that already owns it, and
+  always prunes on exit.
 
 ## §3 · THE BASE-STATE CAPSULE — measure once per landing, not once per lane
 
@@ -177,8 +264,10 @@ of five. Rulings remain individually numbered and individually vetoable.
 
 - **Gate tiering or conditional steps** — refused permanently (the prime
   constraint).
-- **Trains above 4 members** — the bisection and window-death blast radius
-  grow superlinearly with length; 4 is the cap until §8's review.
+- **Trains above the §2.6 differential caps** — §2.6 (ODQ §74) IS the
+  review this line originally deferred to: 8 engine / 10 prose for
+  §70.4-stamped families, 4 un-stamped. The superlinear blast-radius
+  concern is answered by the §2.4-R2 premise map, not waived.
 - **Cross-volume trains at rollout** — collision and preamble coherence risks
   compound across volumes; revisit after two clean same-volume trains.
 - **A per-wave "lite" sealed runner** — the sealed-session machinery runs per
