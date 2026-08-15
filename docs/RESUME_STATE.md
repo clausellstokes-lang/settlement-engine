@@ -130,8 +130,23 @@ values chair-gated. → `laneTC11-*`; the chair rules at collection.
 
 **LIVE (~17:00): FOUR LANES AT THE §25 CAP** — TE11 executes GR-5A (the one
 build-writer) + THREE read-only SPV sweeps running the §45 protocol ahead
-of their families' turns: **Lane WF-S** (workforce volume, 10 waves) →
-`laneWFS-*`; **✅ Lane EP-S COLLECTED (~19:20): 131 claims / 101 TRUE / 25 REFUTED / 5
+of their families' turns: **✅ Lane WF-S COLLECTED (~20:40): 148 claims / 91 TRUE / 54 REFUTED (the
+highest rot: 36%, the volume 363 commits stale) / 3 UNVERIFIABLE.** Sharpest:
+WF-6's precondition ALREADY DISCHARGED (GR-3a landed the five faith terms;
+the pinned assertion now reads true); SP-1 is BUILT with its ledger at
+`worldState.envoyErrands` NOT spatialLedgers.errands, pilgrims typed
+`personal` not `religious` (walker-policed both ways — §5-3's probe would
+mis-type half the wave); ⭐ `suppressedAtTick` has a THIRD write site
+(religionState.js:485 patron-siege) — WF-1 stamping two leaves a silent
+codepoint-prune fallback invisible to the golden; peaceTerms headroom 3 not
+~24; the SP-4 read is `courtRiskAppetiteOf` so §5-4's collision cannot
+occur; ⚠ the one-frozen-table-per-family LAW has NO canonical spelling
+anywhere (8 existing faith tables + 6 proposed dials with no named home — a
+WF-sitting question); a load-time normalizer EXISTS contradicting §3. No
+§38.4 census owed. Annex: `laneWFS-WF-SUBSTRATE.md`.
+**⭐ THE SWEEP PROGRAM'S CUMULATIVE HAUL: 699 claims graded, 141 REFUTED
+across WC/EP/POP/WF — every one found at recon prices before any compile
+spent an hour on it.** **✅ Lane EP-S COLLECTED (~19:20): 131 claims / 101 TRUE / 25 REFUTED / 5
 UNVERIFIABLE.** ⭐ THE KERNEL CORE SURVIVES VERBATIM (the createPRNG root
 composition, the single call site, the nine-step order, the whole 68-site
 entropy census re-bucketed — no 23rd read site). Sharpest refutations:
