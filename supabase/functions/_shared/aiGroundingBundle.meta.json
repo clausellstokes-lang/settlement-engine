@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-15T15:12:43.501Z",
+  "generatedAt": "2026-08-15T16:58:57.860Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "98c5b6c654b59226",
+  "sourceHash": "42062989f793a50f",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -42,6 +42,7 @@
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",
     "src/domain/regionalGraph.js",
+    "src/domain/relationships/canonicalRelationship.js",
     "src/domain/rulingPower.js",
     "src/domain/simulationSpine.js",
     "src/domain/spatial/cohesionWeave.js",
