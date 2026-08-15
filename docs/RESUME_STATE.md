@@ -103,9 +103,20 @@ before WC-5/WC-15. **⭐ §74 THROUGHPUT LAW: Fable-stamped families run
 8-member engine trains / 10-member prose trains (un-stamped stay 4);
 parallel pre-proof in temp worktrees lawful; gate never thinned.**
 **⭐ §71.5 BASELINE PUSH IN FLIGHT (background; first attempt died at a
-10-min tool ceiling, origin unmoved, rerunning)** — then the PR. LIVE:
-R-GEN (generation) + TE13 (IN-1C-A); dispatching WF-F round + R-PRF
-(performance); remaining dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+10-min tool ceiling, origin unmoved, rerunning)** — then the PR.
+**⭐ §75: IN-1C-A built GREEN, STOPPED at terminal on the pre-ruled
+manifest row; chair ruled OPTION 2 (new IN-family rationale ref, two
+surgical inserts, never re-serialize); TE14 completing the terminal
+from parked I1 `22cedb1b` — no rebuild.** **⭐ §76: §74 IMPLEMENTED —
+DBE §2.6+§2.7 landed (ledger); harness CODED as laneP74-preproof-
+train.mjs (draft, syntax-OK, NOT live-tested — TE14 holds the slot);
+eff-1 infra train CHARTERED (laneP74-charter.md) queued AFTER est-1
+BEFORE wc-0 (M1 harness w/ executed-receipt proof · M2 PACKET_STANDARD
+· M3 preambles · M4 §68.4 docs debts).** ⚠ NEW HAZARD: .git/config
+core.bare FLIPPED TRUE mid-session (setter unknown) — every git add
+dies "must be run in a work tree"; cure `git config core.bare false`;
+memory saved. LIVE: TE14 + R-GEN + WF-F + R-PRF; remaining §51
+dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
 future landing collection owes its increment. **⭐ §70 (owner, 08-15):
 THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/

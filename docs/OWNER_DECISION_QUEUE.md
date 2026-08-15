@@ -2896,3 +2896,35 @@ first push via pull request"**
    lines → close `refs/trains/in-1c-a`. The chair CASes at
    collection with the §61 increment.
 
+## §76 · §74 IMPLEMENTED — THE eff-1 CHARTER (2026-08-15, chair,
+## executing the owner's verbatim order to "architect, code and
+## implement" the throughput law; vetoable in its chair-authored parts)
+
+1. **The law's canonical spelling is LANDED on the ledger**:
+   DESIGN_BUILD_EFFICIENCY.md gains §2.6 (differential caps — 8 engine
+   / 10 prose for §70.4-stamped families, 4 un-stamped; everything
+   else in §2 unchanged) and §2.7 (parallel pre-proof, serial landing
+   — advisory wall-clock compression, never landing proof,
+   executor-slot-only invocation). Same commit as this section.
+2. **The harness is CODED**: `laneP74-preproof-train.mjs` (session
+   scratchpad; syntax-checked, `node --check` exit 0) — one detached
+   temp worktree per member outside the repo, linked node_modules,
+   bounded-concurrency vitest batteries, per-member in-handle exit
+   capture, prune-on-every-exit, refusals for in-repo tmp roots and
+   empty batteries; exit 0/1/2 = all-green / early-truncation-signal /
+   harness-failure. It is a §63 NON-AUTHORITATIVE DRAFT until eff-1
+   lands it as `scripts/preproof-train.mjs`. NOT live-tested this
+   sitting — a live run creates shared worktree metadata and TE14
+   holds the slot (the §2.7 law applied to its own birth).
+3. **The eff-1 infra train is CHARTERED** (laneP74-charter.md): M1 the
+   harness with an EXECUTED-RECEIPT proof (a synthetic green+red
+   two-member run — deliberately NOT a new test file, which would red
+   two censuses at the pinned ceiling); M2 PACKET_STANDARD amendments
+   (cap table, pre-proof option line, the docketed §53.6 flag-mint
+   text); M3 preamble one-liners; M4 the §68.4 docs-debt
+   consolidation. **Queue position: after est-1, before wc-0**, so
+   wc-0 is the first pre-proofed train. Refusal recorded: no
+   cap-enforcement lint (train plans are already a chair STOP
+   surface); the harness stays un-wired from npm scripts so the
+   check-chain mutex can never catch it.
+

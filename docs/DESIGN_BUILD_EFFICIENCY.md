@@ -96,6 +96,50 @@ untouched): a flag wave rides alone or as the FIRST member of a train whose
 remaining members are no-flag slices of that same flag. No cross-volume trains
 until two same-volume trains have landed clean (rollout guard, §8).
 
+### 2.6 Differential member caps (ODQ §74.2, evidence-gated; owner-ordered
+### implementation 2026-08-15)
+
+The 4-member cap of §2.1 priced mid-train premise death at the HB-era rate.
+The pre-verification stack (SPV annexes, the §70 Fable rounds, TTS) has
+since driven mid-train premise deaths to zero across landed trains, so the
+cap differentiates on evidence:
+
+- A family whose annex carries a **§70.4 FABLE-ROUND STAMP**: engine trains
+  up to **EIGHT** members; prose/docs/dossier trains (proof = focused
+  batteries + title-only census motion) up to **TEN**.
+- An un-stamped family stays at **FOUR**.
+- Everything else in §2 is UNCHANGED: per-member full proof (§2.2), the one
+  terminal bare gate, truncate-to-green (§2.4), the flag-wave boundary
+  (§2.5), census re-derived at the last tests-moving member (§2.3). The
+  gate is amortized wider, never thinned.
+- Why not one train per family outright: gate amortization is nearly spent
+  at eight (4→8 halves terminal gates; 8→17 saves almost nothing) while
+  truncation blast-radius keeps growing linearly, and per-member proof —
+  the dominant cost — is invariant to train size.
+
+### 2.7 Parallel pre-proof, serial landing (ODQ §74.3; owner-ordered
+### implementation 2026-08-15)
+
+Member batteries MAY execute concurrently in ISOLATED throwaway worktrees
+before the train assembles — the mutant-candidate method generalized:
+
+- The harness (`scripts/preproof-train.mjs`, landed by the eff-1 infra
+  train; charter + authored draft in the session scratchpad `laneP74-*`)
+  creates one detached temp worktree per member OUTSIDE the repo, links
+  node_modules read-only, runs each member's DECLARED battery
+  (`npx vitest run <files>` — never `npm run check*`, never gate-mutex,
+  never pkill), captures each exit in-shell to a per-member log, and
+  reports a member×exit table.
+- Pre-proof is ADVISORY WALL-CLOCK COMPRESSION ONLY: the assembled train
+  still runs every battery at its member commit (§2.2) and the one
+  terminal bare gate at T. A pre-proof green is never citable as landing
+  proof; a pre-proof red is an early truncation signal that saves the
+  serial slot from discovering it late.
+- Invocation is confined to the serial executor slot (or the chair with no
+  executor mid-commit): `git worktree add/remove` writes shared repo
+  metadata, so the harness runs inside the slot that already owns it, and
+  always prunes on exit.
+
 ## §3 · THE BASE-STATE CAPSULE — measure once per landing, not once per lane
 
 **Definition.** A derived artifact, `docs/implementation/BASE_STATE.json` (on
