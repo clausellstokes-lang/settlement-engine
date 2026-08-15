@@ -3293,3 +3293,86 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
    cured and re-proven, law amended where law was the defect, and the
    residual risk surface named (the landing executor's three
    obligations) rather than silent.
+
+## §87 · THE DOCS/OPS/MARKET DIMENSION RULED — §51'S LAST SURVEY
+## (2026-08-15, chair, vetoable; evidence laneRDOM-audit.md +
+## laneRDOM-report.md, base sealed at `d5a6c009`)
+
+1. **DOCS**: every freshness-PINNED claim re-derived TRUE (the pin
+   pattern wins); the rot is confined to hand-typed figures —
+   **dom-1** cures them (the 14→17 stages in README/DEPLOY, the stale
+   test censuses, ARCHITECTURE's removed-Welcome NAV, CURRENT_STATE's
+   heads) and EXTENDS the freshness-pin pattern over the cured
+   figures. Docs micro-act class.
+2. **OPS RATIFIED STRONG** (deploy/backup/incident/monitoring all
+   documented-and-current) with ONE deploy-blocking gap — **dom-2**:
+   seven consumed secret names have zero documentation, including
+   `STRIPE_PRICE_SURVEYOR`, whose absence makes the FIRST SURVEYOR
+   PURCHASE FAIL on a by-the-book deploy (47 consumed names vs 16
+   documented). Cure: the derived env census joins the
+   deployRunbookFreshness pin pattern. AUDIT-ZERO, HIGH.
+3. **⛔ dom-3 — THE FOUNDERS CONTRADICTION, the market dimension's
+   launch blocker**: `/pricing` still SELLS `founder_lifetime` at $99
+   with the 30-seat sellout enforced, while the built-and-routed
+   `/founders` Hall ships the owner's recorded 2026-08-02 ruling —
+   thirty chairs, ALL BY INVITATION, NONE SOLD, EVER — and the
+   design's required copy rewrite + assert-no-purchase-path pin never
+   landed. **The cure ENFORCES the standing owner ruling** (remove
+   the purchase path, land the pin); it touches a PAID SURFACE and is
+   therefore flagged at the top of the veto surface even though the
+   policy it implements is the owner's own. Joins audit-zero HIGH; the
+   founder-seat legal-sign-off gate (transfers) is untouched.
+4. Market strengths RECORDED as code-evidenced (the enforced
+   determinism constitution, adversarially-survived simulation depth,
+   STRONG-graded billing); the migration train (74 undeployed) and
+   live willingness-to-pay proof stay deploy-phase/owner-side.
+5. **§51 IS COMPLETE: FOURTEEN OF FOURTEEN DIMENSIONS SURVEYED AND
+   RULED.** The synthesis follows as §88.
+
+## §88 · THE §51 COMPREHENSIVE REVIEW — CHAIR SYNTHESIS (2026-08-15;
+## the integrated verdict over all fourteen dimensions)
+
+**THE VERDICT: the system is architecturally sound, doctrinally
+coherent, measured-deterministic, and its entire defect surface is now
+ENUMERATED AND BOUNDED — nothing found anywhere contradicts the
+product thesis, and the constitution held under measurement.**
+
+1. **What is PROVEN, not believed**: THE PROMISE at 360/360
+   byte-identity with order-independence and soak replay (§80);
+   coherence 19/23 checks at zero over 360 settlements; asymptotics
+   near-linear to n=30 with capped accumulators (§84); security 5/6
+   areas clean/strong with RLS at 128 policies (§62); the persistence
+   floor HIGH with the determinism boundary machine-enforced (§66);
+   a11y systematized; the address law implemented; the runbook estate
+   current (§87).
+2. **The defect surface, complete and countable** (the audit-zero
+   inventory, nothing open-ended remains): cs-1..5 (engine
+   correctness) · gen-1..3 (generation duplication/corpus/unreachable)
+   · prf-1 (the goods-matcher — the single highest-leverage repair,
+   soak prerequisite) · prf-2/da-6 (main-thread forecast) · da-1..5
+   (display adoption) · rn-1's arms (the alias fork) · dom-1..3
+   (docs figures, the secret census, the founders contradiction) ·
+   ci-1 (the CI divergence) · the machinery micro-batch · the
+   law-body S-rows. Owner-parked items stand apart, listed at §71.2.
+3. **The four systemic patterns the review surfaced** (worth more
+   than any single defect): HALF-ADOPTED CHOKEPOINTS — the cure
+   module exists, adoption stalled partway (colors, tick translator,
+   formatCount; the pattern: finish adoptions, then pin them);
+   PERSISTED-READ DRIFT — one mechanism, many readers, membership
+   drift (the alias family; cure = one table + reader census);
+   UNEXECUTED CHECKS ROT — the three CI-only jobs and the design-law
+   layer both drifted exactly where nothing local ever ran them
+   (cure = §70 rounds, §81.4, ci-1); PINNED FIGURES HELD, HAND-TYPED
+   FIGURES ROTTED — everywhere, without exception (cure = extend the
+   pin pattern, dom-1/dom-2).
+4. **Launch-blocking, in full**: dom-2, dom-3, ci-1, and the
+   deploy-phase runtime half already ruled at §62.3 (migrations,
+   dashboard auth, the webhook train). Nothing else found blocks
+   launch — the rest is quality and polish, scheduled.
+5. **What the review deliberately did NOT cover**: emergent long-run
+   dynamics (the diagnostic soak's job — the review pre-paid its
+   composition-layer half; the soak still owes the behavior-over-
+   centuries half) and live-market proof (owner-side). The review's
+   own method held: every dimension Fable-surveyed, executed evidence
+   throughout, all judgments vetoable, three findings self-refuted by
+   re-sweep before ruling — the epistemics worked.

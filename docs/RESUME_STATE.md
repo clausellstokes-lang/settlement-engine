@@ -145,6 +145,15 @@ rulings GRANTED (minting-wave obligation, ERRAND_CONSUMERS precedent);
 ⭐ THE REGISTRY-MINT TWO-OBLIGATION LAW adopted (the §49/§50 sibling:
 fork-classification row + coverage-baseline row priced at compile for
 every seeded chooser/pool mint); terminal T2 running as continuation.
+**⭐⭐ §51 IS COMPLETE — 14/14 DIMENSIONS + THE §88 SYNTHESIS.**
+Verdict: sound, coherent, measured-deterministic, defect surface
+ENUMERATED AND BOUNDED. Launch-blocking in full: dom-2 (7
+undocumented secrets incl. STRIPE_PRICE_SURVEYOR — first Surveyor
+purchase fails on by-the-book deploy) · ⛔ dom-3 (/pricing still
+SELLS founder_lifetime $99 against the owner's 2026-08-02
+invitation-only ruling — cure enforces the standing ruling; PAID
+SURFACE, top of veto list) · ci-1 · the §62.3 runtime half. §86: cure
+pass ACCEPTED, eff-1a/eff-1b UNBLOCKED (3 named compile obligations).
 ⚠ Chair scheduling error recorded: the hooked baseline-push attempt
 gate-contended TE14 — NEW LAW: no push while an executor holds the
 slot. PR#49 CI reds: clean-room repro ALL GREEN at tip (§82) — lane
