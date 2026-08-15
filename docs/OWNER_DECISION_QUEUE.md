@@ -1787,3 +1787,31 @@ trade is abstract determines widening-vs-refit; the LGR recon is extended to
 answer it, plus the news-latency machinery and the stat homes for the fleet
 derivation. All §46 dispositions (two flags, dormancy, persisted-shape veto
 surface, producers-before-prose, §43 value law) carry unchanged.
+
+### §46b · Owner refinement: RESCUE, ENVOYS, AND THE INFILTRATION CHANNEL
+### (2026-08-15 ~09:50, in-chat, verbatim intent; amends §46/§46a)
+
+(1) THE RETREAT-RESCUE EXCEPTION — the ONE exception to the units-never-
+return law: vessels may be dispatched to retrieve a defeated force that has
+NO conventional retreat route (the isolated island; the landlocked pocket),
+carrying it to the nearest allied settlement or home. (2) ENVOY VESSELS —
+ships/airships/circles may carry a NAMED NPC on a diplomatic mission (peace
+petition etc.) whose purpose is not espionage: faster and safer; NEVER
+carrying military units for a siege; standard encounter rules if intercepted
+by the target or third parties. (3) THE INFILTRATION CHANNEL (owner: "may be
+controversial... ground them in reason") — a spy may infiltrate an
+otherwise-unreachable target BY RIDING THE TARGET'S OWN NETWORK (ship /
+airship / circle), to enter AND leave, at a MUCH SMALLER success chance,
+gated on the acting faction KNOWING that network exists.
+
+Chair dispositions, recorded: the rescue exception triggers ONLY on
+measured route-absence (a deterministic graph query, never convenience), is
+capacity-bound, and is interceptable like any convoy. Envoy vessels compose
+with the LANDED envoy machinery and the ES-Da covert-rider seam (an
+intercepted envoy is a credibility/casus event — the GR-4c substrate).
+The infiltration channel is an ESPIONAGE ROUTE MODIFIER, not new mission
+math: a reachability gate + a knowledge predicate (the belief layer's
+known-network read — making network CONCEALMENT a defensive act and
+infrastructure a legitimate intel target) + a reduced-chance multiplier
+under the §43 value law. All three are LATE LG waves (consumers of the core
+graph/pool), producers-before-prose binding as ever.
