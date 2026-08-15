@@ -1,6 +1,6 @@
 # War Circulation / WC-0A — the closed vocabularies (`peopleLedger.js` + `warStance.js`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/wc-0`, **member 1 of 4**. Plan: `laneTC14-TRAIN-PLAN.md`.
 - **Chair authority:** `OWNER_DECISION_QUEUE.md` **§52** (the four WC cures signed; WC-0
   compile-ready) and **§48** (the cure-architecture doctrine), plus this train plan's §1

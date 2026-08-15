@@ -8260,7 +8260,7 @@
     },
     {
       "id": "WC-0A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/WC-0A.md",
       "verifiedBase": "98c7872ebf3bb5a43091a5ff7d1b7918881593f0",
       "changeManifest": [
@@ -8351,6 +8351,86 @@
           "src/domain/worldPulse/warStance.js",
           "tests/domain/peopleLedgerVocabulary.test.js",
           "tests/domain/warStanceLadder.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "WC-0B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/WC-0B.md",
+      "verifiedBase": "98c7872ebf3bb5a43091a5ff7d1b7918881593f0",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/spatial/migration.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/militaryColumnRelease.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/spatial/migration.js",
+          "symbol": "export const DEMOGRAPHIC_COLUMN_CLASSES"
+        },
+        {
+          "path": "src/domain/spatial/migration.js",
+          "symbol": "export function isDemographicColumn"
+        },
+        {
+          "path": "src/domain/spatial/migration.js",
+          "symbol": "export function releaseArrivals"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "B1",
+          "case": "MILITARY_COLUMN_CLASSES holds its three members including reinforcement_column, and COLUMN_CLASSES is the frozen totality union of both lists"
+        },
+        {
+          "id": "B2",
+          "case": "the release-fork pin, direction one: a reinforcement_column planted on the migration ledger is NOT released by releaseArrivals"
+        },
+        {
+          "id": "B3",
+          "case": "the widening-omitted mutant reds B2: with the release guard restored to the demographic predicate alone, the planted military column IS released into M4's arrival pass"
+        },
+        {
+          "id": "B4",
+          "case": "the discriminator is three-way: unclassed-legacy released, demographic held, military held, and an unheard-of class still released because the fail-closed promise holds"
+        },
+        {
+          "id": "B5",
+          "case": "the class stays part of the column KEY, so a reinforcement_column and a refugee column on the same origin/dest/tick occupy different keys"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/militaryColumnRelease.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/migrationWithMortality.test.js",
+          "tests/domain/demographicsMigration.test.js",
+          "tests/domain/migrationRumors.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/spatial/migration.js",
+          "tests/domain/militaryColumnRelease.test.js"
         ]
       ]
     }
