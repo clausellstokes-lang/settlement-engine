@@ -2504,3 +2504,44 @@ that skips the increment is incomplete.
    there under the docs-only-window clause; the compile's base moved one
    landing, so TE13 re-derives touched premises and census tuples rather
    than inheriting them. Queue: IN-1C-A → est-1 → wc-0 → rn-1.
+
+## §66 · THE PERSISTENCE/LIFECYCLE DIMENSION RULED (2026-08-15, chair,
+## vetoable; evidence in laneRPLC-persistence-audit.md + laneRPLC-report.md,
+## all static at `d5a6c009`)
+
+1. **The layer's floor is HIGH** (every major persisted surface versioned,
+   admission-walled, owner-fenced; the determinism boundary machine-
+   enforced; the spatialLedgers fails-open law has NO live instance —
+   26/26 TRACKED keys measured read) and the audit's gradings are RATIFIED
+   as advisory, including the J-RPLC-5 refutation (the population-`{total}`
+   shape is an inverted comment, not a live class) and J-RPLC-2's
+   deliberate-posture read of account-import.
+2. **⛔ G2/G3 JOIN rn-1's ARM B1** — the same signed mechanism class as
+   §64.2 (a persisted legacy spelling reading into the wrong bucket;
+   the cure restores the reading the persisted label always claimed):
+   `normalizeBondKind` folds only the plural so persisted `'ally'`/
+   `'trade'`/`'liege'` edges read non-qualifying, and `adversarialRank`
+   ranks persisted `'coldwar'`/`'cold-war'` at 0 so the no-downgrade
+   guard downgrades. Both route one-line through the canonical table;
+   the reader-census pin from §64's habitat cure covers them; B1 stays
+   the train's LAST member and the pre-feature-golden proof binds.
+3. **G1 RULED AT THE CHOKEPOINT**: normalize legacy display-name-keyed
+   `servicesToggles` bags inside `setServiceToggles` (the writer all
+   callers inherit — the fix-at-chokepoint law), so rows heal on next
+   write; the zero-caller `hydrateServicesToggles` operationRegistry row
+   is re-pointed or retired with its §38.4 census at compile. **G4 RULED
+   SCRUB**: partner back-links scrub on delete (rename already cascades;
+   the mutate-batch RPC exists; the name-reuse path would let a future
+   same-named settlement INHERIT a dead settlement's edge — fabricated
+   lived history, against THE PROMISE). G1 + G4 + the Q5 walker-guard
+   extension (assert every TRACKED key is read) join the machinery
+   micro-batch beside F2.
+4. **Q4 IS OWNER-GATED and OPEN**: is "Import my data" meant to RESTORE
+   campaign lifecycle (phase, eventLog, AI prose, version history)?
+   Today it deliberately resets all three with the distrust rationale
+   in-file; the export contents make restore possible. The recorded
+   posture stands until the owner rules.
+5. The lane's FABLE-VALIDATION-OWED marker is corrected as INVERTED: the
+   33aeea35 boundary attaches to Opus-made judgments; this was a Fable
+   lane. Under §51 staffing the G1–G3 mechanism readings get their Opus
+   verification at compile, which the SPV/§48 flow already requires.

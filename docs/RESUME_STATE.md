@@ -76,10 +76,13 @@ incremental re-sweep EXECUTED (4 INT annex rows re-verified, increment
 appended to laneINTS-INT-SUBSTRATE.md). Executor queue (§59.6 + §64.7 +
 §65.4, serial, one worktree): **IN-1C-A (TE13 LIVE, Opus, base
 `d5a6c009`)** → est-1 → wc-0 → rn-1. Live read-only lanes beside the
-executor: **R-PLC (persistence/lifecycle, FABLE)** + **R-XLS (cross-layer
-semantics, FABLE)** — §51 dimensions, deliverables `laneRPLC-*` /
-`laneRXLS-*` in the session scratchpad; both opened at `fc8451c4` and
-close-check the one-landing move per their briefs. Chair-owed sittings
+executor: **R-XLS (cross-layer semantics, FABLE, live)**; **✅ R-PLC
+COLLECTED AND RULED §66** (layer floor HIGH; G2/G3 join rn-1 arm B1;
+G1 chokepoint + G4 scrub + Q5 guard join the machinery micro-batch beside
+F2; Q4 import-vs-restore is OWNER-OPEN). §51 dimensions done: intent ·
+estate · vocabulary · security · design↔impl · persistence/lifecycle;
+next picks on freed slots: product surfaces · law-body consistency ·
+correctness spot-audits → chair synthesis. Chair-owed sittings
 unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
 IN-1c-b charter. Owner-open: P1 tuning-signature posture · P6 bounded burn
 · "campaign" naming. Ledger tip after this commit carries §63+§64+§65.
