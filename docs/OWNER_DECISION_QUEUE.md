@@ -4420,3 +4420,26 @@ half stays pre-launch. The walls restated: the emitter is read-side,
 provably outside the deterministic core, covered by the same
 scan-walker; the simulation class carries no PII as a TYPED property.
 The charter lane received the addendum in flight.
+
+## §118 · THE NEVER-SOLD ATTESTATION — DOM-3 UNBLOCKS (owner,
+## verbatim, 2026-08-15: "also no founder seats have been sold as of
+## this date. so remove the $99 purchase button.")
+
+1. **The §115.2 precondition is DISCHARGED by owner attestation**,
+   dated 2026-08-15: no founder_lifetime seat has ever been sold,
+   test purchases included. The DOM.U2 fork resolves to the
+   NEVER-SOLD arm; the grandfather-copy arm is DEAD.
+2. **DOM-3 executes as compiled**: the $99 purchase path is REMOVED —
+   the CTA becomes "Request a chair" navigating to the already-built
+   §5b letterbox; the checkout goes fail-closed (the PRICE_MAP row
+   and seat gate deleted, `ABOLISHED_PRODUCTS` explicit, the webhook
+   branches KEPT as the inbound refund path); the
+   assert-no-purchase-path pin lands rendered-surface-positive. The
+   nine existence-pinning assertions and the eleven copy sites cure
+   per the plan's §4.1 transcription; the final rendered copy is
+   QUOTED to the owner at collection per the §115 promise.
+3. The dom train runs at full shape (DOM-1+2+3, dom-4 riding where
+   the validator admits it) in its queue slot after da-b. The
+   attestation is the record; the build-time never-sold verification
+   clause in PricingPage.jsx is SATISFIED-BY-ATTESTATION and its
+   note updates to cite this section.
