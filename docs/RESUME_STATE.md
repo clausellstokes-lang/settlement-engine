@@ -145,6 +145,18 @@ rulings GRANTED (minting-wave obligation, ERRAND_CONSUMERS precedent);
 ⭐ THE REGISTRY-MINT TWO-OBLIGATION LAW adopted (the §49/§50 sibling:
 fork-classification row + coverage-baseline row priced at compile for
 every seeded chooser/pool mint); terminal T2 running as continuation.
+**✅✅ §90: IN-1C-A LANDED AND EXPOSED — TWELFTH exposure, build tip
+`a6fd6395`, validator 47/0, ratchet 16/28154, capsule 20/20 on
+forecast; HBF-33 DEFER signed (closeOwed binds it to HBF-07);
+`settlementWorkbenchMount` recorded-for-observation (one data point).
+LIVE: TE15 (est-1, Opus, base `a6fd6395`, E-2→E-3→E-1 staged) +
+EP-F (the EP round incl. single-member-law examination). §61
+increment: absence-class rows superseded-as-predicted; per-row
+re-verification delegated to the §70 rounds. §89: ci-1a (Deno env
+leak) + ci-1b (9 stale e2e selectors) CONFIRMED real, cures ruled
+into the micro-batch; ci-1c blocked on the owner's CI log paste;
+⚠ the §82 clean-room was a SUBSET receipt — banked as the 12th
+receipt-vacuity law.**
 **⭐⭐ §51 IS COMPLETE — 14/14 DIMENSIONS + THE §88 SYNTHESIS.**
 Verdict: sound, coherent, measured-deterministic, defect surface
 ENUMERATED AND BOUNDED. Launch-blocking in full: dom-2 (7

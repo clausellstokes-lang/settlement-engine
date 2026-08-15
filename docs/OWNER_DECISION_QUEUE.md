@@ -3412,3 +3412,46 @@ product thesis, and the constitution held under measurement.**
    its discriminator. CI green stays a DEPLOY-phase gate, not a build
    blocker; the two real reds are test-layer, not product-layer —
    no engine or product behavior is implicated.
+
+## §90 · IN-1C-A COLLECTED AND EXPOSED — THE TWELFTH EXPOSURE
+## (2026-08-15, chair; evidence laneTE14-receipt.md both parts + the
+## chair's own-shell receipts)
+
+1. **VERIFIED AND EXPOSED**: chain `d5a6c009 → 15889756(P1) →
+   22cedb1b(I1) → 3f8fae00(cure) → 24c61190(T2a) → a6fd6395(T2b)`;
+   the terminal tail confirmed docs-only by diff (4 paths); both
+   gates green from the gate-tail's own lines (ratchet 16/28154 at
+   ceiling · smoke 521/521); capsule 20 figures ALL on TE13's
+   forecast; CAS `d5a6c009 → a6fd6395` by the chair, porcelain zero,
+   own-shell validator 47/0. IN-1C-A is the estate's ELEVENTH landed
+   FP wave and the IN family's second.
+2. **THE FORK CLASSIFICATION IS SIGNED**: HBF-33 `DEFER` on HBF-07's
+   own taxonomy line — the GRAMMAR twin's identical fork, identity
+   MEASURED (same detector, the source's own "copied from
+   grammarNews.js" record), with the `closeOwed` binding the two rows
+   to close together. STAY was rightly refused on the registry's own
+   false-record law. The `DEFER_CEILING` 29→30 companion is RATIFIED
+   as the ruled row's mechanical cost, recorded not smuggled
+   (J-TE14-7).
+3. **J-TE14-6 RATIFIED** (the two-commit terminal — DIRTY_SCOPES make
+   a single T2 unconstructible; the split keeps the capsule stamp
+   literally true, the §65.2 method) and **J-TE14-9 RATIFIED** (the
+   packet's "eleven paths" amended to the measured FIFTEEN — a
+   refuted figure never stays in a landed packet; §8 carries the
+   §85.4 obligations as preflight law now). The UNATTRIBUTED
+   `settlementWorkbenchMount` full-suite interaction is RECORDED FOR
+   OBSERVATION — not called a flake; if it recurs at est-1's
+   terminal it becomes a finding with two data points.
+4. **The §61 increment, dispositioned**: the landing's twenty paths
+   touch rows in eight annexes, overwhelmingly the ABSENCE class now
+   SUPERSEDED-AS-PREDICTED (exemplar verified: the tails annex's
+   I1-5 "informationReceiptPools.js does not exist" — it now does,
+   by this landing). Per-row re-verification is DELEGATED to each
+   family's §70 round, whose obligation (b) already covers all
+   landings since its sweep sha — EP's round is running now; the
+   remaining rounds inherit.
+5. **The queue moved before this sitting** (dispatch-before-ruling):
+   TE15 executes est-1 at base `a6fd6395` (member order E-2→E-3→E-1,
+   staged promotion, delta-table re-derivation, the §85.4 preflight);
+   lane EP-F runs the EP Fable round including the single-member-law
+   examination and the §68.5 pick-backlog disposition table.
