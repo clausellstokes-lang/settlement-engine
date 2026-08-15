@@ -2657,6 +2657,56 @@
         ["npm", "run", "typecheck:ratchet"],
         ["npm", "run", "typecheck:domain:strict"]
       ]
+    },
+    {
+      "id": "GR-5A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-5A.md",
+      "verifiedBase": "6cd18ad3e9b8be768d0e69ce1edc641cb5b626db",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/domain/treatyRenewalMemory.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function treatyRenewalActive(worldState)" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function worstObservedEverAfter(" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function worstObservedEverOf(treaty)" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'treatyRenewalEnabled'" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "export function advanceTreaties(" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export const PACT_PROVENANCE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "lit: a treaty observed strained records worstObservedEver 'strained' at the compliance write — the main behaviour and the lit-mutant control every dormancy fence below is anchored against" },
+        { "id": "A2", "case": "FENCE 1, the own-footprint golden: with the flag unset no worstObservedEver key is written and the treaty ledger is byte-identical to the pre-wave engine, asserted only AFTER the lit path is shown to write" },
+        { "id": "A3", "case": "FENCE 2, the absent-vs-false differential: an explicit false behaves exactly as absent and the two ledgers are byte-identical to each other" },
+        { "id": "A4", "case": "FENCE 3, the call-path spy: worstObservedEverAfter is never called on any path through advanceTreaties while the flag is dark, so the fold expression is not merely harmless but unevaluated" },
+        { "id": "A5", "case": "FENCE 4, the gate-polarity census: exactly three src files name treatyRenewalEnabled — the declarer, the certifier and the gate — and the only gate is a strict === true read, with no loose, negated or == false spelling anywhere" },
+        { "id": "A6", "case": "MONOTONE: a treaty that strains and then recovers keeps worstObservedEver 'strained', driven through the REAL advanceTreaties rather than a hand-built record, which is GR-5's whole reason to exist" },
+        { "id": "A7", "case": "the two excluded branches: neither the all-terms-lapsed prune nor the repudiation shell writes worstObservedEver, because both continue before the PASS-2 fold" },
+        { "id": "A8", "case": "lifecycle: a multi-tick record JSON round-trips, a legacy record with no key reads 'honored' through worstObservedEverOf, and no src consumer of the reader exists — the GR-0 handoff tripwire" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/treatyRenewalMemory.test.js"],
+        ["npx", "vitest", "run", "tests/domain/pactAmendment.test.js"],
+        ["npx", "vitest", "run", "tests/domain/peaceTerms.test.js"],
+        ["npx", "vitest", "run", "tests/property/treatyLifecycleVoiceDormancyFence.test.js"],
+        ["npx", "vitest", "run", "tests/property/pactFormationDormancyFence.test.js"],
+        ["npx", "vitest", "run", "tests/lint/engineGatedRuleKeys.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/subsystemRowsVirtual.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/check-tuning-bands.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
     }
   ]
 }
