@@ -48,7 +48,8 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { drawUnique } from '../../src/generators/hookVariety.js';
 import { themeOfText, UNTYPED } from '../../src/domain/hookThemes.js';
-import { NPC_FACTION_LOYALTY } from '../../src/data/npcData.js';
+import { NPC_FACTION_LOYALTY, MANNERISMS, SPEECH_PATTERNS } from '../../src/data/npcData.js';
+import { generateReligionType } from '../../src/generators/npcGenerator.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { gen } from '../simulation/simHelpers.js';
@@ -299,5 +300,102 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // them, so some overflow ALWAYS survives. An envelope met by a corpus with
     // nothing to measure would be worthless.
     expect(overflow, 'no overflow at all — this envelope would be vacuous').toBeGreaterThan(0);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CS-A1 (gen-1a) — the no-replacement TELL/SPEECH draw.
+//
+// §72.3 refuses a pure-function pin for this defect, and rightly: drawUnique is
+// already pinned as a function above. What was never pinned is the REGISTRY
+// FILLING ACROSS A WHOLE SETTLEMENT'S NPC POPULATION — the accumulator. A pin
+// that only inspected the finished roster would pass against a registry that
+// stopped accumulating partway, which is why arm 1 walks every PREFIX.
+//
+// Measured at base eab6eba0 over 240 settlements (6 tiers × 40 seeds):
+//   settlements repeating a tell    120/240 -> 0   (metropolis 40/40 -> 0)
+//   settlements repeating a speech  128/240 -> 0   (metropolis 40/40 -> 0)
+//   seeds shifting their roll total   0/32           rosters resized 0/240
+//   corpus-wide field delta          personality.tell + .speech ONLY
+// ─────────────────────────────────────────────────────────────────────────────
+describe('CS-A1 draws — the tell/speech registry accumulates across the population', () => {
+  test('pin:tell-speech-accumulator — no repeat at EVERY prefix, while the pool can still supply one', () => {
+    // A metropolis is the worst case: ~18 NPCs against 30-entry pools, where the
+    // birthday bound made a base collision near-certain (40/40 metropolises).
+    const s = genAt('metropolis', 0);
+    const npcs = (s.npcs || []).filter((n) => n && n.personality);
+    expect(npcs.length, 'a metropolis with no NPCs would make this pin vacuous').toBeGreaterThan(2);
+
+    // Pool sizes are READ, never written as literals — the cure's whole claim is
+    // relative to the authored pool, so a pool edit must move this pin's bound
+    // rather than silently invalidate it.
+    for (const [field, pool] of [['tell', MANNERISMS], ['speech', SPEECH_PATTERNS]]) {
+      const drawn = npcs.map((n) => n.personality[field]).filter(Boolean);
+      expect(drawn.length, `${field}: no ${field} values drawn at all`).toBeGreaterThan(2);
+      // THE ACCUMULATOR ARM. k = 2..n, so a registry that fills for the first few
+      // NPCs and then stops reds here even though the full roster might not.
+      for (let k = 2; k <= drawn.length; k += 1) {
+        const prefix = drawn.slice(0, k);
+        if (prefix.length > pool.length) break; // past exhaustion a repeat is unavoidable BY DESIGN
+        expect(
+          new Set(prefix).size,
+          `${field}: the first ${k} draws repeat while the ${pool.length}-entry pool could still supply a fresh one`,
+        ).toBe(prefix.length);
+      }
+    }
+  });
+
+  test('pin:tell-speech-negative-control — with no registry the same draw repeats', () => {
+    // NON-VACUITY. generateReligionType reached with no registry is exactly the
+    // pre-cure code path (a plain seeded pick with replacement), so this arm
+    // reproduces the defect the arm above asserts is gone. Without it, arm 1
+    // would pass against a pool that simply never collides.
+    const DRAWS = MANNERISMS.length; // 30 draws from a 30-entry pool, with replacement
+    const seen = { tell: new Set(), speech: new Set() };
+    let tellDrawn = 0;
+    let speechDrawn = 0;
+    const state = countingRng('cs-a1-negative-control');
+    for (let i = 0; i < DRAWS; i += 1) {
+      const r = generateReligionType(); // NO registry — the degraded path :82 documents
+      if (r.tell) { seen.tell.add(r.tell); tellDrawn += 1; }
+      if (r.speech) { seen.speech.add(r.speech); speechDrawn += 1; }
+    }
+    expect(state.rolls, 'the control must actually have drawn').toBeGreaterThan(0);
+    expect(tellDrawn, 'no tells drawn — the control would be vacuous').toBe(DRAWS);
+    expect(speechDrawn, 'no speech drawn — the control would be vacuous').toBe(DRAWS);
+    // With replacement over a 30-entry pool, 30 draws collide with overwhelming
+    // probability; the seed is fixed, so this is a fact about THIS run, not a
+    // probabilistic hope.
+    expect(
+      seen.tell.size < tellDrawn || seen.speech.size < speechDrawn,
+      'the registry-less path drew no duplicate at all — the accumulator pin above would be vacuous',
+    ).toBe(true);
+  });
+
+  test('pin:tell-speech-roll-budget — threading the registry costs and saves ZERO rolls', () => {
+    // HK-LAW-6 at the two new draw sites. drawUnique spends exactly one _rng() in
+    // every arm and pick() spends exactly one _roll(), so the swap must be
+    // roll-for-roll identical — the property that keeps 0 of 32 corpus seeds from
+    // shifting their total. ⛔ A future secrets wiring must red THIS arm.
+    const DRAWS = MANNERISMS.length + 4; // deliberately past exhaustion, crossing every arm
+    const run = (withRegistry) => {
+      const state = countingRng('cs-a1-roll-budget');
+      const reg = withRegistry ? { tells: new Set(), speech: new Set() } : undefined;
+      const drawn = [];
+      for (let i = 0; i < DRAWS; i += 1) {
+        drawn.push(drawUnique(MANNERISMS, reg?.tells));
+        drawn.push(drawUnique(SPEECH_PATTERNS, reg?.speech));
+      }
+      return { rolls: state.rolls, drawn };
+    };
+    const bare = run(false);
+    const registered = run(true);
+    expect(bare.rolls, 'the registry-less path spends one roll per draw').toBe(DRAWS * 2);
+    expect(registered.rolls, 'the registry must not add or save a single roll').toBe(bare.rolls);
+    // GUARD-THE-GUARD: equal budgets mean nothing if the two runs chose alike.
+    // anchored: both arrays are pinned to the exact length DRAWS * 2 on the line
+    // below, so neither can be empty or undefined when this inequality is read.
+    expect(registered.drawn).toHaveLength(bare.drawn.length);
+    expect(registered.drawn).not.toEqual(bare.drawn);
   });
 });

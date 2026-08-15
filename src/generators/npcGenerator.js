@@ -104,7 +104,7 @@ const generateSingleNPC = (
     category,
     worldLaw,
   });
-  const religion = generateReligionType();
+  const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
   const goal = generateNPCRelType(role, category, config);
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
@@ -300,12 +300,16 @@ const filterByGuild = (
 // dropped one becomes null (absent). Consumers tolerate absence: npcCorruptibleFlaw
 // returns null with no flaw, and the personality string builders use .filter(Boolean).
 // Exported for the corruption-trait-gate distribution tests.
-export const generateReligionType = () => {
+export const generateReligionType = (reg) => {
   const dominantCand = pickFromArray(NPC_PERSONALITY_TRAITS.positive);
   const flawCand = pickFromArray(NPC_PERSONALITY_TRAITS.negative);
   const modifier = pickFromArray(NPC_PERSONALITY_TRAITS.neutral);
-  const tell = pickFromArray(MANNERISMS);
-  const speech = pickFromArray(SPEECH_PATTERNS);
+  // CS-A1 (gen-1a): no-replacement within a settlement. `reg?.` is the established
+  // idiom at this site (see the hookRegistry comment): a caller that threads no
+  // registry — the corruption-trait-gate suite is the only one — degrades to the
+  // pre-cure plain seeded pick rather than throwing, and the PINS are the guard.
+  const tell = drawUnique(MANNERISMS, reg?.tells);
+  const speech = drawUnique(SPEECH_PATTERNS, reg?.speech);
 
   // ONE seeded roll AFTER both pickFromArray calls — walk the cumulative bands of
   // TRAIT_PRESENCE_DISTRIBUTION to pick a presence bucket. Drawing the roll last
@@ -1424,7 +1428,13 @@ export const generateNPCs = (
   // wave E batch E2) and the same BEAT is not retold in a different string while
   // an untold one is still available (`themes`, wave HK-3). This is the machinery
   // behind the hook repeat-rate and theme-repeat envelopes; see hookVariety.js.
-  const hookRegistry = { titles: new Set(), themes: new Set() };
+  // `tells` and `speech` join it for cs-a/CS-A1 (gen-1a): MANNERISMS and
+  // SPEECH_PATTERNS are 30 authored entries each and were drawn WITH replacement
+  // across ~18 NPCs in a metropolis, so 120/240 settlements repeated a tell and
+  // 128/240 a speech pattern. drawUnique spends exactly one seeded roll in every
+  // arm (HK-LAW-6), so routing these two draws through it is roll-for-roll
+  // neutral — measured 0 of 32 seeds shifting their total roll count.
+  const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set() };
   const candidates = getUpgradeOpportunities(institutions, tier, weights)
     .filter(worldLaw.allowsRole);
 
