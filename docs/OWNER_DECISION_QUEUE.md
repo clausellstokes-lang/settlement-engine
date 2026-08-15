@@ -2177,3 +2177,25 @@ Phase-F dispositions unchanged.
    (PACKET_STANDARD carries none of it — grep-verified) — the queued
    prose/machinery act is PROMOTED to ride with WC-0's train or sooner;
    the hazard-conversion law demands it.
+
+## §54 · INT-3B IS RULED (2026-08-16 ~05:00, chair, vetoable; evidence in
+## laneTC12-report.md)
+
+1. **The one-member REFUSED-IN-PART shape is SIGNED**: the pure dark-safe
+   leaf (one import, no world reads, no writes, no flag, no numbers, no
+   caller — the landed HB-2 identity shape), six paths, three-commit train.
+2. **The five beyond-annex refutations BIND**, sharpest: the errand row DTO
+   is WAR-WELDED (normalizeErrand rejects émigré rows), so the volume's
+   "NO NEW LEDGER — SP-1 errands" is false AND the cure is the GR-2 road —
+   minting through the spine is PRICING, not row-writing; ENVOY_PURPOSES
+   stays exactly as the annex binds. The quoted-literal purposeClass
+   (empirically driven — the const reds the one-reader law), the exact-path
+   INTERIOR regex, and the builtModules+minters exact pin are all SIGNED.
+3. **X5 is RESOLVED-NOT-PAID** (no cross-layer read lands; both exact
+   ceilings hold; no couplingRegistryInterior mint this wave) — signed.
+4. **Q-TC12-1 (where an émigré record persists) STAYS OPEN AND BATCHED** —
+   a persisted-shape class decision the member doesn't need; it rides the
+   next owner-visible sitting with the other five questions. J-TC12-1..7
+   ratified on the report.
+5. The OSR receipt gap is accepted as declared (frozen-baseline arithmetic
+   inherited; ANY movement at execution is a STOP).
