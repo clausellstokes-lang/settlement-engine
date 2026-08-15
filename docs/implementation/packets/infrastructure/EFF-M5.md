@@ -1,6 +1,6 @@
 # EFF-M5 — the build-efficiency volume, re-folded whole
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `4f2d37d1a3954cdf226af9584b15f6663929e92b`
 - **Train:** `eff-1b`, member 2 of 2 — the train's terminal member
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
@@ -143,3 +143,44 @@ folded body and the source, in either direction, breaks it.
 Verified base and final tree state · the one changed file · A1-A6 with exact argv and exits ·
 the inverse-check result quoted · the claim count before and after · deviations `NONE` or a
 STOP · judgment calls in the train receipt.
+
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1b` train's I2 commit `ef6b0984`.** One docs file, zero production lines,
+zero census motion. Every case executed in a TEMP WORKTREE at `ef6b0984` itself.
+
+- **A2** — ⭐ **the fold is verbatim, and it is PROVED rather than asserted.** The inverse check
+  — take the folded file, put the OLD Status clause back where the new one is, compare against
+  `refs/heads/review-fixes-2026-07-08:docs/DESIGN_BUILD_EFFICIENCY.md` — returns **True**: byte
+  equality, in the direction that can fail. `git show --stat` records 96 insertions and 7
+  deletions.
+- **A3** — present on the build copy after the fold: `### 2.4 Failure semantics` with its
+  re-charter redundancy block (R1/R2/R3), `### 2.6 Differential member caps`,
+  `### 2.7 Parallel pre-proof, serial landing`, and §7's refusal line aligned to §2.6 in place
+  of the old "trains above 4 members … until §8's review".
+- **A4** — §2.7 reads "links node_modules **as a PLAIN WRITE-THROUGH SYMLINK** (measured: writes
+  pass through to the executor tree — per-member `cacheDir` isolation, the R-D8 obligation landed
+  with the harness, is what prevents cross-battery cache sharing)". The dispatch ordered the
+  corrected sense; measurement found the chair's parallel correction already in the source, so
+  this member inherited it and authored nothing.
+- **A5** — the header states the folded-volume convention: ledger = drafting surface (it carries
+  no gate), build copy = canonical at its base, re-folded whenever the drafting surface moves.
+- **A6** — the lighting census walker: **33 passed**, exit 0; `validate:packets` 56 packets,
+  exit 0.
+- **A1** — ⛔ **THIS MEMBER'S OWN PROOF CAUGHT A RED, AND THE RED WAS THE TRAIN'S, NOT THE
+  ESTATE'S.** The claims pin returned `2 failed | 19 passed (21)` against the base's
+  `1 failed | 20 passed (21)`, with three new naked-claim keys — all in `EFF-M4.md`, whose
+  landing receipt had quoted the four frozen keys VERBATIM. A packet sits in the claims corpus
+  like any other `docs/**.md`, so a receipt that reproduces the vocabulary it reports on becomes
+  an instance of it. The cure is a REWORDING of `EFF-M4.md`'s prose, riding the terminal — never
+  a widened scan, never a corpus exemption — and the pin returns to base identity at the
+  terminal, quoted in the train receipt.
+  ⚠ Recorded rather than smoothed, because the sequencing is the lesson: `EFF-M4`'s deliverable
+  proof at `d840a3a6` was clean and STAYED clean; the regression entered at the PROMOTION rung
+  that appended its receipt. Verification binds to a tree snapshot, and a receipt written after
+  the green run is an edit after the green run.
+
+**Deviations:** the A1 self-red above, cured at the terminal. **Judgment calls:** in the train
+receipt.

@@ -2,8 +2,49 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at the `eff-1a` train terminal.
-- **Measured:** 2026-08-15 — **THE `eff-1a` TRAIN LANDED ALL FOUR MEMBERS: the
+- **Measured branch/SHA:** `claude/composite-r4` at the `eff-1b` train terminal.
+- **Measured:** 2026-08-15 — **THE `eff-1b` TRAIN LANDED BOTH MEMBERS: the staged successor
+  that pays the records the machinery train left owing.** Chain: base `4f2d37d1` → `937ab5f4`
+  (P1) → `d840a3a6` (EFF-M4) → `6bdba84e` (P2) → `ef6b0984` (EFF-M5) → the terminal. Eight docs
+  files, zero production lines, zero census motion.
+  ⭐ **`EFF-M4` repaired stale RECORDS, and every repair carries the measurement that produced
+  it.** The HB preamble's argued-roster ceiling moved 13 → 19 WITH its transition walk (13 at
+  `7699e367`, then 15, 17 and 19 across HB-0, HB-1 and HB-2 in a single day) so a reader learns
+  the figure rotted by that family's own hand and that a compile must re-read the literal rather
+  than inherit it; INT's provenance was un-conflated, because the exact-equality DISCIPLINE
+  dates from 08-10 and the FIGURE from 08-14 while the old line asserted both of 08-10; GR and
+  INFRA moved from three standing hot files to FOUR, each now naming all four.
+  ⭐ **THREE lapsed Measured blocks were restored, not the two the ruling named** — `gr-5a`,
+  `int-3b`, and `eff-1a`, whose own terminal had missed the obligation one landing earlier. That
+  third one is measured rather than assumed: `git log -S` shows this convention's blocks are
+  written by the LANDING LANE in its own terminal commit, so the absence was a lapse of the same
+  rule this block restates, and the lapse is named inside the restatement rather than quietly
+  repaired.
+  ⭐ **The F9 strike-and-point landed at FIVE build-branch sites, not the four dispatched.** An
+  exhaustive re-grep found a third `SOL_QUEUE.md` site carrying no adjacent note at all — the
+  same bare shape the round called the sharpest of its six, and absent from that six. The
+  under-enumeration the census warned about, found again on the sweep meant to close it.
+  ⛔ One dispatched item was REFUSED as not landable and ROUTED instead: `docs/START_HERE.md` is
+  a LEDGER file and does not exist on this branch. Its premise was re-verified TRUE at this base
+  (the check chain is 17 steps, derived from `package.json`'s own script) so the chair's ledger
+  sitting acts on a measured figure rather than an inherited one.
+  ⭐⭐ **`EFF-M5` re-folded `DESIGN_BUILD_EFFICIENCY.md` whole, and the divergence it cured is
+  the fold mechanism biting its own tail.** `INFRA-M1-DOCS` folded that volume and deliberately
+  deleted the "until then, the ledger copy is canonical" clause, because two canonical copies is
+  the drift a fold exists to end — and the chair then amended the LEDGER copy, so the branch
+  silently reacquired exactly that drift while the build copy's header asserted it was canonical.
+  The fold is verbatim, PROVED by an inverse check that reproduces the source byte-for-byte, and
+  the rewritten clause replaces the assertion with a CONVENTION: the ledger copy is the DRAFTING
+  SURFACE because it carries no gate, and the build copy is CANONICAL AT ITS BASE, re-folded by
+  a docs member whenever the drafting surface has moved.
+  ⚠ **One self-red is on the record.** `EFF-M4`'s landing receipt quoted the four frozen
+  naked-claim keys verbatim and thereby minted three new ones in its own file — a packet is in
+  the claims corpus like any other doc. `EFF-M5`'s focused proof caught it, and the cure is a
+  REWORDING rather than a widened scan or an exemption. The sequencing is the lesson: M4's
+  deliverable proof was clean and stayed clean; the regression entered at the promotion rung that
+  appended the receipt, because a receipt written after a green run is an edit after a green run.
+
+- **Measured (previous):** 2026-08-15 — **THE `eff-1a` TRAIN LANDED ALL FOUR MEMBERS: the
   efficiency machinery, landing itself.** Chain: base `954b4e0f` → `fdf14f60` (P1) →
   `24688a37` (EFF-M1A) → `dde9ff55` (P2) → `93e3904a` (EFF-M1B) → `e831e93f` (P3) →
   `0e8f39b2` (EFF-M2) → `986b0c22` (P4) → `3d50effb` (EFF-M3) → `85712a1f` (T1) → the
@@ -769,7 +810,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | EFF-5 | [`EFF-M4`](./packets/infrastructure/EFF-M4.md) | **LANDED** | Member 1 of the `eff-1b` train — the staged successor to `eff-1a`, whose terminal is its base. It repairs stale RECORDS in seven docs files and nothing else. The §68.4 debts: the HB preamble `ARGUED_ROSTER_CEILING` corrected 13 to 19 and stamped at this base, WITH the transition walk that produced it (13 at `7699e367` where the exact-equality arm arrived, then 15, 17 and 19 across HB-0, HB-1 and HB-2 in a single day) so a reader learns the figure rotted by the family own hand; INT provenance un-conflated, because the discipline dates from 08-10 and the FIGURE from 08-14 and the earlier line asserted both of 08-10; GR and INFRA hot-file counts three to FOUR, naming `convergence.js` which joined the standing list on an executed measurement. ⭐ THREE lapsed INDEX Measured blocks restored, not two: `gr-5a`, `int-3b` and — measured rather than assumed, since `git log -S` shows the block is written by the LANDING LANE in its own terminal — `eff-1a`, whose executor missed it one landing earlier and records the lapse in the convention block itself. ⭐ The F9 strike-and-point lands C-WYF-1 Arm A at FIVE build-branch sites rather than the four dispatched: an exhaustive re-grep found a third SOL_QUEUE site carrying no adjacent note at all, the same bare shape the round called the sharpest of six — the under-enumeration the census warned about, found again on the sweep meant to close it. ⛔ One dispatched item is NOT landable here and is routed rather than dropped: `docs/START_HERE.md` is a LEDGER file and does not exist on this branch; its premise is re-verified TRUE at this base (the check chain is 17 steps, derived from `package.json` own script) so the chair ledger sitting acts on a measured figure. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | the two `DESIGN_FP_ARCHITECTURE.md` F9 sites (the chair own); the efficiency-volume fold (member 2); `docs/START_HERE.md`; any code, test, script or config; any census motion |
 
-| EFF-6 | [`EFF-M5`](./packets/infrastructure/EFF-M5.md) | **READY** | Member 2 of the `eff-1b` train and its terminal member. It re-folds `docs/DESIGN_BUILD_EFFICIENCY.md` whole from the ledger branch, restoring ONE canonical text where the branch had acquired two. ⚠ The divergence is the fold mechanism biting its own tail: `INFRA-M1-DOCS` folded the volume and deliberately deleted the "until then the ledger copy is canonical" clause, because two canonical copies is the drift a fold ends — and the chair then amended the ledger copy with the re-charter redundancy block, the differential caps and the parallel-pre-proof section, so the branch silently reacquired exactly that drift while the build copy own header asserted it was canonical. ⭐ The fold is verbatim and PROVED so by an inverse check: replacing the new Status clause with the old one reproduces the source byte-for-byte. ⭐ The rewritten clause states the folded-volume convention once, so the next divergence cannot be silent — the LEDGER copy is the DRAFTING SURFACE because it carries no gate, and the build copy is CANONICAL AT ITS BASE, re-folded by a docs member whenever the drafting surface has moved. ⭐ It authors no wording of its own: the corrected write-through-symlink sense in the pre-proof section (naming per-member cacheDir isolation as what prevents cache sharing, which this train member 1a proved by execution) was already in the source, so the fold inherits it rather than re-authoring it. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any second file; authoring or amending law text (the body is the chair own); re-touching `PACKET_STANDARD.md`; any code, test, script or config |
+| EFF-6 | [`EFF-M5`](./packets/infrastructure/EFF-M5.md) | **LANDED** | Member 2 of the `eff-1b` train and its terminal member. It re-folds `docs/DESIGN_BUILD_EFFICIENCY.md` whole from the ledger branch, restoring ONE canonical text where the branch had acquired two. ⚠ The divergence is the fold mechanism biting its own tail: `INFRA-M1-DOCS` folded the volume and deliberately deleted the "until then the ledger copy is canonical" clause, because two canonical copies is the drift a fold ends — and the chair then amended the ledger copy with the re-charter redundancy block, the differential caps and the parallel-pre-proof section, so the branch silently reacquired exactly that drift while the build copy own header asserted it was canonical. ⭐ The fold is verbatim and PROVED so by an inverse check: replacing the new Status clause with the old one reproduces the source byte-for-byte. ⭐ The rewritten clause states the folded-volume convention once, so the next divergence cannot be silent — the LEDGER copy is the DRAFTING SURFACE because it carries no gate, and the build copy is CANONICAL AT ITS BASE, re-folded by a docs member whenever the drafting surface has moved. ⭐ It authors no wording of its own: the corrected write-through-symlink sense in the pre-proof section (naming per-member cacheDir isolation as what prevents cache sharing, which this train member 1a proved by execution) was already in the source, so the fold inherits it rather than re-authoring it. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any second file; authoring or amending law text (the body is the chair own); re-touching `PACKET_STANDARD.md`; any code, test, script or config |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.

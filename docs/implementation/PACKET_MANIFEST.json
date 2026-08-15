@@ -3078,7 +3078,7 @@
     },
     {
       "id": "EFF-M5",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M5.md",
       "verifiedBase": "4f2d37d1a3954cdf226af9584b15f6663929e92b",
       "changeManifest": [

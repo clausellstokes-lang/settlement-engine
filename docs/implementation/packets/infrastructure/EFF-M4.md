@@ -219,10 +219,18 @@ a control run at the base `4f2d37d1`.
   SIX entries; the only difference is three LINE NUMBERS in `FABLE_VALIDATION_QUEUE.md`
   (3013/3882/5659 → 3017/3886/5663), the +4-line shift this member's own F9 edit causes. The
   ratchet key is `<file> :: <matched vocabulary>` and carries no line number, so the key set is
-  byte-identical — proved by stripping line numbers and diffing: `3 × FVQ :: 0 problems`,
-  `1 × FVQ :: machine-enforced`, `1 × GOLDEN_SHIFT_LEDGER :: machine-enforced`,
-  `1 × IN-0C :: machine-enforced`, exactly `FROZEN_NAKED`'s four keys at their frozen counts.
-  The per-claim arm PASSES at both commits, which is what a grown key would have broken.
+  byte-identical — proved by stripping line numbers and diffing. The four keys stand at their
+  frozen counts: three in `FABLE_VALIDATION_QUEUE.md` under the lint-count phrase, one more in
+  the same file plus one each in `GOLDEN_SHIFT_LEDGER.md` and `IN-0C.md` under the
+  machine-enforcement phrase. The per-claim arm PASSES at both commits, which is what a grown
+  key would have broken.
+  ⛔⛔ **AND THE SPELLING ABOVE IS DELIBERATELY BROKEN, BECAUSE THE FIRST DRAFT OF THIS RECEIPT
+  WAS THE SEVENTH NAKED CLAIM.** Quoting the four keys VERBATIM minted three new ones in this
+  file — a packet is in the claims corpus exactly like any other `docs/**.md`, so a receipt that
+  reproduces the vocabulary it is reporting on becomes an instance of it. Caught by member 2's
+  own focused proof (`2 failed | 19 passed` against the base's `1 failed | 20 passed`), and cured
+  the way the estate's `copyCorruption` precedent requires: by REWORDING the prose, never by
+  widening the scan or exempting the file.
 - **A2** — all eleven anchored edits reported `OK` from a runner that refuses on absence
   (`ANCHOR ABSENT`) and on ambiguity (`ANCHOR AMBIGUOUS (Nx)`); no edit was applied by fuzzy
   match, and the INDEX restoration additionally asserted its three anchors present exactly once
