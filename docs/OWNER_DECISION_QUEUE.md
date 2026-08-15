@@ -3171,3 +3171,43 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
 5. **eff-1a/eff-1b remain HELD until the cure re-sweep reports green.**
    Nothing downstream moves onto un-re-swept machinery — the audit
    exists so that wc-0 runs on proven rails.
+
+## §84 · THE PERFORMANCE DIMENSION RULED — THE GOODS-MATCHER FINDING
+## (2026-08-15, chair, vetoable; evidence laneRPRF-performance-audit.md
+## + laneRPRF-report.md, all figures from executed probes at `d5a6c009`)
+
+1. **The asymptotics are RATIFIED HEALTHY** (generation interactive at
+   every tier, worst p95 274 ms; simulation near-linear, slope
+   0.86–1.0 to n=30; accumulators capped, state plateau ~6 MB) and the
+   J-RPRF judgments are SIGNED, including J-RPRF-2's disclosed
+   profiler contamination with clean re-runs — the receipt-honesty
+   laws practiced.
+2. **⭐⭐ prf-1 — THE GOODS-MATCHER CURE — is the review program's
+   single highest-leverage repair**: `goodsCatalog.js` owns 70–83% of
+   ALL tick CPU (`fuzzyMatch` re-tokenizes 219 static strings per
+   call, `normalizeGood` memoizes nothing, ~3,000 calls/tick; fuzzy
+   713 µs vs exact 6.8 µs). The architected two-part memoization is
+   BEHAVIOR-NEUTRAL BY CONSTRUCTION (byte-identity safe) and worth
+   ~5×. **RULED: prf-1 is a SOAK PREREQUISITE, queued immediately
+   after rn-1, ahead of the rest of audit-zero** — it converts the
+   soak tail from a wall into an iterable loop: CENTURY-100 ≈ 15–34 h
+   sequential today, ≈ 25–60 MINUTES cured; CENTURY-300 impractical
+   today, 4–10 h cured. Proof shape: the identity pin over a
+   generation+simulation corpus plus the pre-feature golden — an
+   ordinary repair, NOT a declared shift.
+3. **prf-2 — the Realm Forecast runs its 52-tick orchestrator on the
+   main thread** (minutes of frozen UI at full-sim rates): joins the
+   display-adoption queue as da-6, with the standing Vite-worker
+   hazard noted (a worker is a SEPARATE rollup build — classify by
+   references; the second-manifest chunk law applies).
+4. **The soak-tail figures are the planning numbers of record** for
+   the diagnostic/full/terminal soaks (tasks #5/#6): CERT-30 ≈ 2–5 h
+   now, ≈ 3–7 h under the cured engine's fuller load — tractable
+   either way; the century profiles run AFTER prf-1 lands, by ruling.
+5. §81.2's gate-runner question stays open but narrows: the goods
+   cure speeds every simulation-heavy suite; the next terminal gate's
+   executor SAVES THE SUITE TIMING TABLE so the sharding decision is
+   made on measured file times, not guesses.
+6. §51 state: THIRTEEN of fourteen dimensions done; R-DOM (docs+ops+
+   market consolidated, the lightest three) dispatched as the LAST
+   survey lane → then the chair synthesis.
