@@ -157,7 +157,22 @@ occur; ⚠ the one-frozen-table-per-family LAW has NO canonical spelling
 anywhere (8 existing faith tables + 6 proposed dials with no named home — a
 WF-sitting question); a load-time normalizer EXISTS contradicting §3. No
 §38.4 census owed. Annex: `laneWFS-WF-SUBSTRATE.md`.
-**⚠ FOREIGN SESSION ALERT (~22:30):** the owner started a separate local
+**⭐⭐ THE LG VOLUME IS AUTHORED (~23:10, the §46 chair sitting):**
+`docs/DESIGN_FP_ARCH_LG.md` (ledger branch; folds with the annex as
+LG-SUBSTRATE at the next integration point). Binds all §46 directives BY
+REFERENCE; rules the ten LGR questions (Q2: the willingness gate lands
+GATED under `circleNetworkEnabled`, lit at lighting — the defect is live
+but unobserved pre-launch, so no smuggled shift; Q5: the W-NAVY ledger
+road; Q7: counts derived / commitments stored — reconciling the
+never-per-wagon law; Q10: no LG band before the prefix lands); declares
+the ladder LG-0..LG-13+ (~14+ waves; two flags: circleNetworkEnabled +
+vesselFleetsEnabled; LG-9+ BLOCKED-ON POP-1); rules the POP/LG/ES
+column-class vocabulary ONCE (POP owns, others consume read-only);
+seven refusals recorded. The three-obligation flag law and TTS/SPV/anchor
+preflights bound into every compile via §6. FOREIGN SESSION: deleted by
+the owner — collision risk gone.
+
+**⚠ FOREIGN SESSION ALERT (~22:30, resolved — session deleted):** the owner started a separate local
 session "Fix prose-blind ruin-filter roster walker" (task_67899181) — that
 defect was ALREADY CURED by infra-2 M2 (landed `e5ecc83d`). The session will
 likely find it moot; if it WRITES to the shared worktree it is an
