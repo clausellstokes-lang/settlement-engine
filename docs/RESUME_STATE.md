@@ -131,9 +131,27 @@ values chair-gated. → `laneTC11-*`; the chair rules at collection.
 **LIVE (~17:00): FOUR LANES AT THE §25 CAP** — TE11 executes GR-5A (the one
 build-writer) + THREE read-only SPV sweeps running the §45 protocol ahead
 of their families' turns: **Lane WF-S** (workforce volume, 10 waves) →
-`laneWFS-*`; **Lane EP-S** (epoch volume, 6 waves, single-member law + four
-owner-parked §7a rows respected; cross-checks the volume against the
-RECOVERED EP_CHAIR_RULINGS) → `laneEPS-*`; **Lane POP-S** (populations
+`laneWFS-*`; **✅ Lane EP-S COLLECTED (~19:20): 131 claims / 101 TRUE / 25 REFUTED / 5
+UNVERIFIABLE.** ⭐ THE KERNEL CORE SURVIVES VERBATIM (the createPRNG root
+composition, the single call site, the nine-step order, the whole 68-site
+entropy census re-bucketed — no 23rd read site). Sharpest refutations:
+EP-3's DM-DOOR pin VACUOUS (one call site, not two — the C1 repair is in
+NEITHER volume copy); the FROZEN-EIGHT trap DEAD (VIRTUAL_RULES holds 19;
+J-EP-1's premise and veto cost both refuted); three walker-freeze figures
+DRIFTED (38/13/48 vs 37/10/47 — frozen as written the EP-0 walker reds day
+one); the dormancy denominator stale by multiples ("32/27/8/4·11" measures
+53/16/49/12); ⭐ the RECOVERED chair docs rule ALL FIVE questions + CLOSE E5
+under conditions C1 (DM-door repair) / **C2 (draw-count parity EXECUTED
+before EP-1 LANDS — no instrument exists; denominator = 22 fork/random
+sites in pulseKernel.js — an EP-family build obligation)** / C3 (rows
+compose last). §7a's FOUR stay PARKED (authority updated by the blanket
+grant, sequencing per the volume: own waves, never EP-4 slices). ⏳ both
+chair docs are Opus-era, Fable validation owed at the EP sitting. ⚠ SPV
+METHOD LAW ADDENDUM (from the lane's own honest miss): while an executor is
+live, HEAD-state rows are evidenced ONLY via git show/git grep HEAD — a
+shared-tree vitest run measures the executor's dirt (its 1/14 "failure" was
+gr-5a's in-flight key, green at HEAD). Joins the protocol doc with the
+prose acts. Annex: `laneEPS-EP-SUBSTRATE.md`. **Lane POP-S** (populations
 volume, 8 waves; the two-shape population finding + §46c migration
 double-consumer claims graded) → `lanePOPS-*`. The chair grades all three
 annexes at collection; WC's annex already banked. Sweeps make every future
