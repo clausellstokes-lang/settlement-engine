@@ -2660,7 +2660,7 @@
     },
     {
       "id": "GR-5A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-5A.md",
       "verifiedBase": "6cd18ad3e9b8be768d0e69ce1edc641cb5b626db",
       "changeManifest": [

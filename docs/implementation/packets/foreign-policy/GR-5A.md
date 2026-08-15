@@ -1,6 +1,6 @@
 # Foreign Policy / GR-5A — the monotone memory (`treatyRenewalEnabled`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/gr-5a`, **ONE member**. Plan: `laneTC11-TRAIN-PLAN.md`.
 - **Chair authority:** `OWNER_DECISION_QUEUE.md` **§47** (2026-08-15) — all six open questions
   signed and `J-TC11-1..5` ratified. **O-5** accepts the P1 exit-1 with exactly four named
