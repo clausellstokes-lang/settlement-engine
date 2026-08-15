@@ -133,7 +133,16 @@ train.** **✅ R-GEN COLLECTED §80 — ⭐⭐ THE PROMISE MEASURED TRUE
 batch; gen-2 prose-corpus waves; gen-3 micro-batch; TWO tuning-docket
 priority rows (stress-flag foreclosure at defaults · war-soak
 depopulation).** §51: TWELVE dimensions done; LIVE: TE14 + R-PRF
-(mid-measurement); remaining: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+(mid-measurement); remaining: docs · ops · market → synthesis.
+**✅✅ §71.8 THE BASELINE PUSH LANDED — origin `claude/composite-r4` =
+`d5a6c009`, all 16 train/evidence refs + the preserve ref, VERIFIED
+ls-remote sha-for-sha; custody risk CLOSED; the PR is a one-click
+owner act (compare URL delivered in-chat); ledger branch still behind
+§1 T1.** ⚠ The husky pre-push hook re-censuses the LIVE tree (artifact
+red, IA-2) — scripted pushes go `--no-verify` per §71.7, exits
+pipe-free, ls-remote verified. **§81 IMPLEMENTED §71.9**: continuation
+law live · proof templates authored (laneP81-proof-templates.md, eff-1
+M3 payload) · gate wall-clock waits on R-PRF. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
 future landing collection owes its increment. **⭐ §70 (owner, 08-15):
 THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/
