@@ -3525,3 +3525,35 @@ product thesis, and the constitution held under measurement.**
 4. POP is STAMPED. Rounds remaining: INT-F and WY-F dispatched in
    parallel (WY-F additionally executes the four chair-owed WY
    groundings including XLS-4's producer trace); tails last.
+
+## §93 · THE INT ROUND ACCEPTED (2026-08-15, chair, vetoable;
+## evidence laneINTF-round.md + laneINTF-report.md, base sealed at
+## `a6fd6395`)
+
+1. **The §70.4 stamp is ACCEPTED**: absorption 59/62 + 3 carried
+   (SIGNED here — C38/C238's second preset-negative site and C257's
+   envelope-instrument shape ride cures C-INTF-5/6); voided rows 10
+   intact / 2 superseded-as-predicted / 0 verdict changes; law pass
+   6 MATERIAL / 8 DRIFT / 10 HOLDS; the INT-3B §61 increment
+   inherited and re-corroborated, not redone.
+2. **INT is the FOURTH certification-pattern instance, verified by
+   measurement** (three pins red the new-lane design in its first
+   flag wave's own commit; the interior's live flag already
+   certifies in-file): C-INTF-1 applies the §92.2 standing cure —
+   six in-file certifications, six §49/§50 bills, and **INT-2's
+   bill is VOID** (GAP-1 already landed its flag and row).
+3. **⭐ THE PREAMBLE REFRESH IS RULED NOW, WHILE IT COSTS ZERO**
+   (F-2): INT-PREAMBLE §P8.6's STOP figure rotted lawfully in-window
+   (registries 9→10 at IN-1C-A) and would fire a FALSE STOP on the
+   next INT compile; at 47 packets / 0 non-terminal the re-stamp
+   cost is zero today and nonzero after any promotion — the refresh
+   rides eff-1a's docs member. `reframeEnabled`'s
+   detector-invisibility is CONFIRMED at this sha and joins the
+   §58.3 nesting-blindness detector docket.
+4. **THE FOUR-VOLUME STALE-SITE MICRO-ACT IS DOCKETED AS ONE CHAIR
+   SITTING**: WF, EP (C-EPF-2), POP (C-POPF stale sites), and INT
+   (~14 sites incl. "INT-3b BLOCKED" against its LANDED reality)
+   each carry a drafted volume-text cure; the volumes are
+   ledger-resident chair surfaces, so all four apply in one sitting
+   with their rounds' drafted texts. INT is STAMPED; WY-F runs;
+   tails last.
