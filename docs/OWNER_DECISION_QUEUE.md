@@ -1974,3 +1974,28 @@ Operative rules (chair, vetoable):
 First applications: a WC cure-architecture lane over the 36 WV refutations
 (the fence signature, the TERM_FAMILIES pin, the C3 non-vacuity arm) when a
 slot frees; the willingness-gate defect stays with the LG volume sitting.
+
+## §49 · GR-5A'S I1 STOP RATIFIED; THE FLAG-MINT SEVENTH-PATH LAW (2026-08-15
+## ~18:40, chair, vetoable; evidence in laneTE11-receipt.md + the banked
+## stopped-tree)
+
+1. **The STOP is RATIFIED**: the certification row is mandatory (the walker
+   demands it green) and reds the ordered-equality pin at
+   `subsystemRowsVirtual.test.js:384`, which the six-path manifest omitted —
+   no lawful six-path shape exists. TC11 missed the ADJACENT precedent
+   (HB-2's manifest names that exact file; HB-2B's D2 records it).
+2. **The AMENDMENT IS SIGNED**: the seventh path
+   `{TEST, tests/domain/subsystemRowsVirtual.test.js}` joins the manifest —
+   three module-scope literal edits, ZERO new titles, census-neutral (the
+   predicted tuple and the 28138 floor stand). P1 is superseded and
+   re-authored; the parked P1 ref stays as evidence (J-TE11-2 RATIFIED).
+   Handwritten files 7 of 12; every §47 tripwire unchanged.
+3. **⭐ THE FLAG-MINT SEVENTH-PATH LAW (standing, all volumes):** every
+   packet that mints an engine-gated flag INCLUDES
+   `tests/domain/subsystemRowsVirtual.test.js` in its manifest and prices
+   its three literal edits — three independent discoveries make this the
+   habitat, not the instance. It enters the preambles/PACKET_STANDARD with
+   the queued prose micro-act; compilers preflight it NOW from this ruling.
+4. All other receipts ACCEPTED as reported: the peaceTerms 797/1264/3-3
+   tripwire held exactly; P1's four named reds and nothing else; CLAIM_RE 0;
+   plumbing-only commits; nothing exposed.
