@@ -1898,3 +1898,10 @@ therefore reads: believed destination × observed cargo. (Chair: this is the
 information program's own observed-vs-believed taxonomy applied at the
 checkpoint — inspection converts one fact class and not the other; the
 volume charters the check as exactly that two-register read.)
+
+§46a addendum (owner, ~12:45): REBUILD SPEED IS ECONOMIC — the time a
+settlement takes to rebuild a downed ship or airship is determined by its
+ECONOMY and TIER, not a flat timer. (Chair: same derivation family as the
+fleet count itself — both read the landed tier/prosperity substrates, so a
+rich port recovers its reach faster than a poor one, coefficients under the
+§43 law, cooldownUntil as the one landed timer spelling.)
