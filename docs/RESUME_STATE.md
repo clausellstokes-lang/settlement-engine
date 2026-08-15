@@ -91,16 +91,21 @@ convergence + XLS-2 relief/dynamic-mint arm + XLS-5 exact-key services
 cure ruled into the micro-batch/repair queue; XLS-4 + XLS-6 docketed for
 Opus producer-path verification at the WY/war sitting; the 21 unreachable
 service rows are an OWNER CULL question; corpus union 281 recorded).
-§51 dimensions done (10): intent · estate · vocabulary · security ·
+§51 dimensions done (11): intent · estate · vocabulary · security ·
 design↔impl · persistence/lifecycle · cross-layer semantics · law-body
-(**§68**: forward-pointer law adopted + three pointers placed at §1/§22/
-§37; read-back law adopted; build-docs debts → one docs member; ban
-stands, lazy lift) · product surfaces (**§69**: display-adoption family
-da-1..da-5 queued after rn-1, PDF/gallery first; tick-by-tier ruling;
-fix-then-guard locale lint) (+ the LG self-sweep); LIVE next: **R-CSA
-(correctness spot-audits, FABLE)** + **R-GEN (generation quality,
-FABLE)**; remaining after: performance · docs · ops · market → chair
-synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+(§68) · product surfaces (§69) · **correctness (§72: FIVE probe-proven
+engine defects → repair packets cs-1..cs-5 in the audit-zero program;
+same-seed OUTPUT-MOVING by design, declared-shift discipline)** (+ the
+LG self-sweep). **✅ WC FABLE ROUND ACCEPTED §73 — wc-0 UNBLOCKED**;
+R30 snapshot preserved at `refs/preserve/wc-r30-snapshot`; F-1 binds
+WC-0E (TRACKED rows land WITH writers same-commit); F-2 prose micro-act
+before WC-5/WC-15. **⭐ §74 THROUGHPUT LAW: Fable-stamped families run
+8-member engine trains / 10-member prose trains (un-stamped stay 4);
+parallel pre-proof in temp worktrees lawful; gate never thinned.**
+**⭐ §71.5 BASELINE PUSH IN FLIGHT (background; first attempt died at a
+10-min tool ceiling, origin unmoved, rerunning)** — then the PR. LIVE:
+R-GEN (generation) + TE13 (IN-1C-A); dispatching WF-F round + R-PRF
+(performance); remaining dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
 future landing collection owes its increment. **⭐ §70 (owner, 08-15):
 THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/

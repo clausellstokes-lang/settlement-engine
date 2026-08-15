@@ -2778,4 +2778,90 @@ first push via pull request"**
    act after T1. The AUDIT-ZERO GATE (§71.1) still governs the first
    POST-BASELINE family push; the per-family cadence (§71.3) is
    unchanged.
+6. Execution note: the first push attempt died at a 10-minute tool
+   ceiling with origin unmoved (verified by ls-remote); rerun in the
+   background. The PR opens once the pack lands; `gh` absent — the PR
+   rides the push's suggested URL or the owner's logged-in browser.
+
+## §72 · THE CORRECTNESS DIMENSION RULED (2026-08-15, chair, vetoable;
+## evidence in laneRCSA-correctness-audit.md + laneRCSA-report.md, six
+## probes TRUE_EXIT=0, all at `d5a6c009`; adopted by reference — the
+## executing compiles read the audit wholesale)
+
+1. **Five probe-demonstrated engine defects are CONFIRMED and join the
+   §71 audit-zero program as repair packets cs-1..cs-5** (soak-class
+   composition defects found pre-soak — the review doing the diagnostic
+   soak's work early): cs-1 belief silence-decay compounds
+   (`0.92^(n(n+1)/2)` vs the documented half-life-8; prune at 9 ticks
+   not ~42 — the frozen `lastUpdateTick`); cs-2 a beaten army fights a
+   second same-tick battle at full home-ground advantage (the retreat
+   exclusion runs only at collision detection); cs-3 boom mints under
+   live embattlement then busts from nothing (−1 band, −3 legitimacy;
+   the mint gate omits its own bust branch's `severed` predicate);
+   cs-4 the demographic named floor mints population against the
+   receipt (`max(named, …)` vs the module's own law 1); cs-5 (latent)
+   the transit derive loop re-materializes a recalled army in a
+   one-tick window. Each cure lands with a TRAJECTORY pin, not only a
+   pure-function pin (the fixture-blind-spot class all five share);
+   Opus verification at compile per §51 staffing.
+2. **The INVARIANT-HOLDS families are RECORDED** (the no-miracle
+   clamp/attrition family under a 600-point sweep; demographics
+   conservation closing to zero byte-identically; the whole GR-4a
+   succession chain including garbage-cause totality) — these carry
+   the audit's attack record as their standing defense.
+3. Blast-radius note for the queue: cs-1..cs-4 are same-seed
+   OUTPUT-MOVING by design (they repair live mis-simulation); they are
+   post-§27 build-order repairs riding the declared-shift discipline —
+   goldens re-record at THE ONE REGEN, never silently.
+
+## §73 · THE WC FABLE ROUND ACCEPTED — wc-0 UNBLOCKED (2026-08-15,
+## chair, vetoable; evidence in laneWCF-round.md + laneWCF-report.md;
+## stamp facts executed at `d5a6c009`, volume blob `c5305a82`)
+
+1. **The §70.4 stamp is ACCEPTED**: refutation absorption 33/36 clean +
+   2 docketed + 1 PARTIAL; 19 voided rows re-verified (17 intact, 2
+   lawfully superseded, 0 verdict changes); law pass 2 MATERIAL /
+   8 DRIFT / 8 HOLDS. **The wc-0 train may compile against the WC
+   annex.**
+2. **R30's in-progress snapshot survived only as a dangling commit —
+   now PRESERVED at `refs/preserve/wc-r30-snapshot` (`b75e8c4d`)** and
+   riding the baseline push. The preserve-refs family joins the push
+   set standing.
+3. **F-1 BINDS THE WC-0E CHARTER**: the walker's `toEqual` is exact-set
+   both directions, so TRACKED rows land only WITH their live
+   `setSpatialLedger` writers and the by-name gate-read modules in the
+   SAME commit — the §59.2 charter sentence is corrected by this
+   ruling. **F-2**: the three unexecuted prose amendments (R28, O-7,
+   the struck WR10 widening) execute as the volume prose micro-act
+   BEFORE WC-5/WC-15 compile; the drafted cure text is adopted.
+4. CR-WC-21 and CR-WC-19 stand VALIDATED by fresh measurement; CR-WC-9
+   stays owner-parked; O-9/O-10 get named rows in the wc-1 charter.
+
+## §74 · TRAIN THROUGHPUT LAW — the owner's whole-family question
+## RULED (2026-08-15, chair, vetoable; answers "why not code whole
+## families and gate once?" with the evidence)
+
+1. **The 4-cap was truncation economics, not physics**: when premises
+   died mid-train at the HB-era rate, a 17-member train turned one
+   refutation into a many-member pileup. The SPV/TTS/Fable-round stack
+   has since driven mid-train premise deaths to ZERO across the landed
+   trains — the risk the cap priced is measurably smaller.
+2. **⭐ DIFFERENTIAL CAPS, evidence-gated**: a family whose annex
+   carries a Fable-round stamp (§70.4) may run engine trains of up to
+   **8** members; prose/docs/dossier waves (light proof, no census
+   motion beyond titles) up to **10**; un-stamped families stay at 4.
+   Per-member full proof, the single terminal gate, truncate-to-green
+   §2.4, and the flag-wave boundary are UNCHANGED — the gate is
+   amortized wider, never thinned.
+3. **⭐ PARALLEL PRE-PROOF, SERIAL LANDING**: member batteries may
+   execute in parallel in ISOLATED temp worktrees (the mutant-tree
+   method; no gate-mutex contact) before the train assembles; the
+   assembled train still runs every battery's suite at its member
+   commit plus the one terminal bare gate. This parallelizes the
+   expensive half of a wave with zero gate weakening; the executor
+   charters gain the option line.
+4. Answer recorded for the owner: with the reviews converging, the
+   remaining bulk IS coding+proving (~96 waves + the audit-zero
+   fixes); under §§72–74 the per-family cost drops again while every
+   gate keeps full strength.
 
