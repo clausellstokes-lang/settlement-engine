@@ -116,6 +116,17 @@ ordered on every volume claim (the stale-charter record is six-for-six);
 the TTS status-sequence simulation ordered at compile; tuning-flavored
 values chair-gated. → `laneTC11-*`; the chair rules at collection.
 
+**LIVE (~17:00): FOUR LANES AT THE §25 CAP** — TE11 executes GR-5A (the one
+build-writer) + THREE read-only SPV sweeps running the §45 protocol ahead
+of their families' turns: **Lane WF-S** (workforce volume, 10 waves) →
+`laneWFS-*`; **Lane EP-S** (epoch volume, 6 waves, single-member law + four
+owner-parked §7a rows respected; cross-checks the volume against the
+RECOVERED EP_CHAIR_RULINGS) → `laneEPS-*`; **Lane POP-S** (populations
+volume, 8 waves; the two-shape population finding + §46c migration
+double-consumer claims graded) → `lanePOPS-*`. The chair grades all three
+annexes at collection; WC's annex already banked. Sweeps make every future
+family compile start on measured ground.
+
 **NEXT (chair sittings at fresh context, §37 course to the first soak):**
 (1) the LG VOLUME (§46 + §46a×2 + §46b + §46c×5-plus-restored, the LGR map,
 ten questions, the willingness-gate defect); (2) gr-6 re-charter; (3) WC
