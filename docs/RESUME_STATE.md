@@ -63,7 +63,53 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-15 ~13:40 EDT) — ✅ HB-2B LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-16 ~00:40 EDT) — ✅✅ GR-5A LANDED AND EXPOSED at
+# `fc8451c4` (TENTH exposure); flag manifest at 20; the sweep program nearly
+# complete; §51 review Phase-S opened with its first FABLE lane
+
+**GR-5A LANDED WHOLE** (chain `6cd18ad3 → 66494971(P1′) → 85d19adf(I1′) →
+e93376ec(I1″ bundles) → fc8451c4(T)`): both gates read from their OWN
+gate-tail lines exit 0 — 45/0 validator · 28138/16 ratchet · strict dist
+51/408 · smoke 521/6499. peaceTerms 797/797/3-3 exact; census
+`2429/366/2063/20115/5654`; zero authored numbers; the capsule/flip
+ordering wart HB-2B left is CLOSED (flip-then-capsule; 45/0 true in its own
+commit). Chair verified at T (45/0 + 47 focused tests own-shell), CAS
+`6cd18ad3 → fc8451c4`, porcelain ZERO, archive refreshed. Two STOPs and
+three §-laws were the price and the yield: §49 (the ordered pin) + §50
+(the bundles + the literal drive) — the THREE-OBLIGATION flag-mint law now
+protects every future flag family. treatyRenewalEnabled = flag 20 @ idx 18.
+
+**✅ Lane WY-S COLLECTED (~00:30): 126 claims / 102 TRUE / 11 REFUTED / 13
+UNVERIFIABLE.** ⭐ F9 `supplyCargo` IS SIGNED at HEAD (the blanket queue
+sign-off names it RELEASED; the reconciliation note in two homes; the old
+UNSIGNED memory is STALE — but the superseded spelling stands verbatim at
+THREE sites, a first-hit-grep trap; strike-or-preserve = chair call at the
+WY sitting) — WC-10's gate reads WY-8a's BUILD, not a signature. kmScale
+CONFIRMED absent (WY-1 is the family's cleanest wave, substrate documented
+in-file). Sharpest defects: `src/domain/war/` DOES NOT EXIST (WY-8a's path
+reservation collides with nothing — silent); the CONDITION_BANDS design
+collision (armyStrength already ships a supply-worded ladder from a
+DIFFERENT quantity — chair pass owed before WY-8b); WY admitted to
+CHARTERED_VOLUME_PREFIXES WITHOUT its promised registry row; covert
+chokepoints 8 not 5; ES-2 landed (WY-6's hedge discharged). Annex:
+`laneWYS-WY-SUBSTRATE.md`.
+
+**SWEEP PROGRAM STATE: WC · EP · POP · WF · INT · WY banked (six annexes,
+~1,100 claims graded, 214 refuted). LIVE: TL-S (the TR/IN/CW/ES tails) +
+LG-S (the LG self-sweep — §51's FIRST FABLE SURVEY LANE).** On their
+collection: §48 cure rounds (WC first) + §51 Phase-S continues on freed
+slots (Fable surveys, Opus verifies, chair governs).
+
+**A SUCCESSOR RESUMES:** (1) collect TL-S/LG-S; (2) §51 Phase-S per the ODQ
+charter; (3) the sittings: gr-6 re-charter · WC cures · WY chair passes
+(CONDITION_BANDS collision; the F9 strike-or-preserve; the war/ dir
+reservation) · MEMORY.md fold (OWED; F9 memory stale-flagged) · HB-3/Q1;
+(4) WC-0 compile after its cures; (5) §27 build order onward — soak only
+after EVERYTHING (incl. LG's ~14 waves; LG-9+ blocked on POP-1). §37: all
+permissions granted; THE WALK is the one factual hold. Ledger tip is the
+resume anchor; every §17-§51 ruling is the law.
+
+# (superseded ~00:40) ⭐⭐ CURRENT (2026-08-15 ~13:40 EDT) — ✅ HB-2B LANDED AND EXPOSED at
 # `6cd18ad3` (NINTH exposure): HABIT is 4/10; the three signed bounds are IN
 
 **HB-2B LANDED WHOLE under CR-HB2B-SPLITP** — chain `e5ecc83d → 3ad7c082(P1a)
