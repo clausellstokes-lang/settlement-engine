@@ -223,3 +223,87 @@ describe('WAVE A — advanceBeliefMaps is order-independent (total-order fold)',
     expect(JSON.stringify(fwd.next)).toBe(JSON.stringify(rev.next));
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CS-A2 (cs-1) — THE SILENCE-DECAY TRAJECTORY, through the persisted ledger.
+//
+// The pin at 'SILENCE decays confidence monotonically' above is a PURE-FUNCTION
+// SINGLE-CALL pin. It is true, and it is exactly the fixture blind spot 72.3
+// names: it can never see the LEDGER, where the defect lived. The silence branch
+// persisted a decayed confidence while leaving lastUpdateTick frozen, so the next
+// pass decayed an already-decayed value over a window one tick longer and the
+// exponent went triangular — 0.92^(n(n+1)/2). Measured at base eab6eba0 the belief
+// pruned at 9 silent ticks against the ~42 SILENCE_DECAY documents.
+//
+// ⛔ THE REFERENCE VALUES ARE THE round4-ACCUMULATED RECURRENCE, NEVER Math.pow.
+// round4 is applied once per persistence pass, so the accumulated curve is the
+// semantics. Measured separation from Math.pow: up to 1.364e-4, first visible at
+// tick 7 (0.5579 vs 0.5578). A pin written the obvious way would be FALSE, and
+// loosening a tolerance would be the wrong repair — ODQ 107.2 binds this shape.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('CS-A2 — the silence-decay trajectory across the persisted ledger', () => {
+  const SILENT_TICKS = 12;
+
+  /** Drive a cold-started, never-refreshed belief and collect the record each tick. */
+  function silentRun(ticks) {
+    const settlements = [item('a', 'city', 40000), item('b', 'town', 3000)];
+    const snapshot = snapshotOf(settlements, [{ id: 'e.ab', from: 'a', to: 'b', relationshipType: 'neutral' }]);
+    let ws = { spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' } };
+    let out = advanceBeliefMaps({ snapshot, pressureIdx: null, worldState: ws, tick: 0 });
+    ws = { ...ws, spatialLedgers: { beliefMaps: out.next } };
+    const records = [];
+    for (let t = 1; t <= ticks; t += 1) {
+      out = advanceBeliefMaps({ snapshot, pressureIdx: null, worldState: ws, tick: t });
+      ws = { ...ws, spatialLedgers: { beliefMaps: out.next } };
+      const rec = seatOf(out.next, 'a').b;
+      if (!rec) return { records, prunedAt: t };
+      records.push(rec);
+    }
+    return { records, prunedAt: null };
+  }
+
+  it('follows the round4-ACCUMULATED recurrence exactly over twelve silent ticks — and NOT Math.pow', () => {
+    const { records } = silentRun(SILENT_TICKS);
+    expect(records, 'the belief must survive all twelve ticks for this pin to mean anything').toHaveLength(SILENT_TICKS);
+
+    const D = BELIEF_TUNING.SILENCE_DECAY;
+    const round4 = (v) => Math.round(v * 10000) / 10000;
+    const recurrence = [];
+    let c = 1;
+    for (let n = 0; n < SILENT_TICKS; n += 1) { c = round4(c * D); recurrence.push(c); }
+    const observed = records.map((r) => r.confidence01);
+
+    // THE WHOLE ARRAY, not a spot check — the accumulator is the array itself.
+    expect(observed).toEqual(recurrence);
+
+    // ⛔ AND THE TRAP, DEMONSTRATED RATHER THAN DESCRIBED. If these two ever became
+    // equal the comment above would be stale, so the pin asserts the separation it
+    // depends on instead of trusting it.
+    const viaPow = observed.map((_, i) => round4(Math.pow(D, i + 1)));
+    expect(
+      viaPow,
+      'round4(Math.pow) has converged with the accumulated recurrence — the reference shape above must be re-derived',
+    ).not.toEqual(recurrence);
+  });
+
+  it('never advances lastUpdateTick, because that stamp also gates the fresh-report filter', () => {
+    const { records } = silentRun(SILENT_TICKS);
+    expect(records).toHaveLength(SILENT_TICKS);
+    const stamps = [...new Set(records.map((r) => r.lastUpdateTick))];
+    // ONE distinct value across twelve ticks. A cure that bumped the stamp would
+    // silently drop reports arriving during silence (arrivalTick > lastUpdateTick).
+    expect(stamps, 'lastUpdateTick moved during silence — reports arriving mid-silence would be dropped').toHaveLength(1);
+  });
+
+  it('forgets at tick 43 rather than tick 9 — the whole semantic claim in one number', () => {
+    const { records, prunedAt } = silentRun(60);
+    expect(prunedAt, 'the belief never pruned inside 60 silent ticks').toBe(43);
+    // NEGATIVE CONTROL: the base trajectory is asserted ABSENT, so this suite reds
+    // against a reverted cure rather than merely against a differently-broken one.
+    // At tick 4 the triangular curve reads 0.4344 and the cured curve reads 0.7164.
+    const D = BELIEF_TUNING.SILENCE_DECAY;
+    const triangularAt4 = Math.round(Math.pow(D, (4 * 5) / 2) * 10000) / 10000;
+    expect(records[3].confidence01, 'the trajectory is still the triangular one — the cure is not in effect').not.toBe(triangularAt4);
+    expect(records[3].confidence01).toBe(0.7164);
+  });
+});

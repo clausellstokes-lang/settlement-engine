@@ -1183,12 +1183,25 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
 
     let record;
     if (freshReports.length) {
-      const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
+      // CS-A2 (cs-1): ONE silence step per advance pass, not `now − lastUpdateTick`.
+      // The silence branch below persists the DECAYED confidence while leaving
+      // lastUpdateTick frozen, so measuring the window against that frozen stamp
+      // decayed an already-decayed value over an ever-longer window — the trajectory
+      // was 0.92^(n(n+1)/2), triangular, and a belief pruned at 9 silent ticks
+      // instead of the ~42 SILENCE_DECAY documents. Uniform one-step reproduces the
+      // refreshed-every-tick case byte-identically (that case always had
+      // now − lastUpdateTick === 1) and diverges only from the SECOND consecutive
+      // silent tick, which is exactly the defect's own footprint.
+      const silent = priorRec ? 1 : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
       record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01, axesActive: ctx.axesActive === true, subjectId, subjectAxes: ctx.subjectAxes ?? null });
     } else {
-      // Silence: decay confidence, keep the frozen value.
-      const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
+      // Silence: decay confidence ONE step, keep the frozen value. ⚠ lastUpdateTick is
+      // deliberately NOT advanced — it also gates the fresh-report filter above
+      // (`arrivalTick > lastUpdateTick`), so bumping it would silently DROP reports
+      // that arrived during the silence. That is why the cure moves the step count
+      // rather than the stamp.
+      const silent = 1;
       const conf = decayedConfidence(/** @type {BeliefRecord} */ (priorRec).confidence01, silent, decayKeep01);
       record = { .../** @type {BeliefRecord} */ (priorRec), confidence01: round4(conf) };
     }
