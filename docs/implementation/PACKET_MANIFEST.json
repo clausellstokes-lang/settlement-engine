@@ -9987,5 +9987,264 @@
         ]
       ]
     }
-  ]
+,
+    {
+      "id": "DA-A2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-A2.md",
+      "verifiedBase": "bd0439d19ec2b3d080b38c083785b103b6e0d545",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/UndoHistoryPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/auspice/AuspicePanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/ChroniclersLetterPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/LiveWarStatus.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/TimelapsePanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/WorldPulsePanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/region/RegionalGraphSummary.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/region/RegionalImpactInbox.jsx"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/map/WorldPulsePanel.jsx",
+          "symbol": "World Pulse"
+        },
+        {
+          "path": "src/components/region/RegionalImpactInbox.jsx",
+          "symbol": "function kindLabel(kind)"
+        },
+        {
+          "path": "src/components/UndoHistoryPanel.jsx",
+          "symbol": "function pointLabel(entry)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "each of the eight DM instruments carries an in-file block naming the tier decision, citing \u00a769.3, and stating the exact sanctioned count"
+        },
+        {
+          "id": "A2",
+          "case": "the recorded counts total 11 tick across the eight files, matching the measured raw counters exactly"
+        },
+        {
+          "id": "A3",
+          "case": "no rendered prose changes anywhere: the member is comment-only"
+        },
+        {
+          "id": "A4",
+          "case": "effective lines are unmoved in all eight files, because max-lines skips comments"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/copy/proseLeak.test.js",
+          "tests/lint/sizeBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/ui/UndoHistoryPanel.test.jsx",
+          "tests/components/timelapsePanel.test.jsx",
+          "tests/components/worldPulsePanel.test.jsx"
+        ]
+      ]
+    },
+    {
+      "id": "DA-A1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-A1.md",
+      "verifiedBase": "bd0439d19ec2b3d080b38c083785b103b6e0d545",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/humanizeEngineTokens.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/gallery/CampaignStatePanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/sections/FaithWar.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/sections/PowerStructure.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/new/tabs/WarFaithTab.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/home/LandingArtifacts.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/contentStudio/ContentSampleReceipt.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlements/RealmStrip.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/RealmForecast.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/surveyor/AutonomyPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/townMap/scene3d/TownSceneInspector.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/townMap/scene3d/TownSceneLivingSummary.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/helpers/jsxLiteralWalk.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/copy/proseLeak.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/humanizeEngineTokens.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/components/gallery/galleryCampaignsTab.test.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/components/realmStrip.test.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/display/humanizeEngineTokens.js",
+          "symbol": "export function tickCalendarLabel"
+        },
+        {
+          "path": "src/domain/display/humanizeEngineTokens.js",
+          "symbol": "export function humanizeContextSignature"
+        },
+        {
+          "path": "tests/helpers/jsxLiteralWalk.js",
+          "symbol": "export function extractJsxProseStrings"
+        },
+        {
+          "path": "tests/helpers/jsxLiteralWalk.js",
+          "symbol": "export function scanJsxTree"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "a seeded `Tick {tick}` component is reported as ZERO by the committed flat detector and as ONE by the adjacency arm, in the same run"
+        },
+        {
+          "id": "A2",
+          "case": "the segment surface reaches every file the flat surface does and produces the identical literal-digit hit set, so the widening is additive over the old blind spot's complement"
+        },
+        {
+          "id": "A3",
+          "case": "every one of the 29 raw counters is either cured or matched by an exact in-file \u00a769.3 allowance, and a stale allowance reds as loudly as a missing one"
+        },
+        {
+          "id": "A4",
+          "case": "tests/copy/.prose-leak-jsx-baseline.json is byte-identical to its committed content: nothing was banked as debt"
+        },
+        {
+          "id": "A5",
+          "case": "humanizeEngineTokens.js is +27/-0 against the base, so every export with a persisted-prose consumer keeps a byte-identical body"
+        },
+        {
+          "id": "A6",
+          "case": "tickDurationLabel disagrees with tickCalendarLabel at every span in a year, so a duration can never be routed through the calendar translator"
+        },
+        {
+          "id": "A7",
+          "case": "CampaignStatePanel mounts and renders its clock and chronicle prose, and the rendered text contains no `Tick <n>`"
+        },
+        {
+          "id": "A8",
+          "case": "both AI bundle freshness suites red before the regeneration and pass after it, in the same commit"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/copy/proseLeak.test.js",
+          "tests/domain/humanizeEngineTokens.test.js",
+          "tests/lint/heraldContaminationFence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
+          "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
+          "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/gallery/galleryCampaignsTab.test.jsx",
+          "tests/components/realmStrip.test.jsx",
+          "tests/pdf/fullPdf.render.test.jsx"
+        ]
+      ]
+    }  ]
 }
