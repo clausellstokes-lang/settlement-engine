@@ -199,7 +199,17 @@ chair proceeds bounded unless overruled). conquestFeeds docket RECONCILED
 (cured); zero new hidden-gate instances. **LIVE: TC15 compiles est-1** →
 `laneTC15-*`.
 
-**LIVE (four lanes): TE12(INT-3B executing) · R-VOC · TC14(WC-0 compile — the
+**✅ R-VOC COLLECTED + §57 RULED (ledger `54bccde3`): 17 concepts — 6
+coherent, 3 deliberate-mirror affirmed, 3 drifted, 4 COLLIDED.** ⛔ THE
+SHARPEST REVIEW FINDING: the relationship NORMALIZER ITSELF IS FORKED (two
+disagreeing alias tables; legacy spellings gate differently by subsystem —
+BEHAVIORAL, DM-visible) → its §48 cure pass DISPATCHED (Lane RN-C: consumer
+census, blast radius MEASURED, output-neutral-vs-declared-shift verdict
+required). Tier boundary 240-vs-400 joins est; 'capital' ghost + "tiny
+hamlet" copy join prose; "campaign" double-duty SURFACED owner-visible with
+the keep-labels recommendation; CR-IN1C-DRIFT census grew 9→19.
+**LIVE (four lanes): TE12(INT-3B executing) · RN-C(normalizer cure) ·
+TC14(WC-0 compile — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
 dimension 11, FABLE — the estate auditing itself: banked-red blindness,
