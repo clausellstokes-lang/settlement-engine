@@ -1,6 +1,6 @@
 # War Circulation / WC-0D — the amnesty and jubilee term families
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/wc-0`, **member 4 of 4 — THE TERMINAL MEMBER.** Plan:
   `laneTC14-TRAIN-PLAN.md`. ⭐ **It carries the census row and re-derives the whole tuple at `I4`,
   the train's last `tests/`-moving commit, so `T` stays docs-only.**

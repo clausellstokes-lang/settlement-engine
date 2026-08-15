@@ -2,8 +2,58 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at the `eff-1b` train terminal.
-- **Measured:** 2026-08-15 — **THE `eff-1b` TRAIN LANDED BOTH MEMBERS: the staged successor
+- **Measured branch/SHA:** `claude/composite-r4` at the `wc-0` train terminal.
+- **Measured:** 2026-08-15 — **THE `wc-0` TRAIN LANDED ALL FOUR MEMBERS: the WAR-CIRCULATION
+  family's first code, and the estate's first train built on the landed §77/§2.7 machinery.**
+  Chain: base `98c7872e` → `a393b109` (D0) → `79ffba74` (P1) → `511d2ceb` (WC-0A) → `e92e962c`
+  (P2) → `4c87bae4` (WC-0B) → `3b660f91` (P3) → `cf7e6466` (WC-0C) → `9da1bec5` (P4) →
+  `e47d6763` (WC-0D) → the terminal. Six new production and test leaves, six new suites,
+  twenty-six new titles, and `validate:packets` 56/0 → 60/0.
+  ⭐⭐ **THE MACHINERY RAN AHEAD OF THE BUILD AND BOTH TOOLS EARNED THEIR KEEP.** The premise map
+  validates in both directions and `queue-check` **now HOLDS** — the §77 R1 conviction lane TC17
+  reported is DISCHARGED, because `rn-1` (RN) was compiled and TTS-simulated as slot 2 while this
+  train ran, so the next two executor slots are two distinct families. The pre-proof harness ran
+  all four member batteries concurrently in isolated worktrees at their own commits, TRUE_EXIT 0.
+  ⭐ **`timeoutMs` was re-measured rather than inherited.** The compile left it at an
+  acknowledged bounded guess of 600 000 ms; a calibration run of the harness itself measured a
+  worst case of 10.2 s cold and four-way concurrent, and the live run's worst was 18.7 s (the
+  law-band fence walks all of `src/`). Re-stamped at 120 000 ms — real headroom, and a wedged
+  process is caught in two minutes instead of ten.
+  ⭐⭐ **THREE PINS WERE WRITTEN VACUOUS AND EACH WAS CAUGHT BY ITS OWN MUTANT BEFORE LANDING.**
+  WC-0A's derived-set arm first re-computed the derivation inside the test and compared it to the
+  export — two things that move together, so the literal-substitution mutant passed 5/5; it now
+  plants a dead arm into a copy of the real source and requires the copy's export to LOSE that
+  event. Its module-load arm first threw its own error, a self-supplied anchor that survives the
+  guard's deletion; it now requires the MODULE to refuse the import. WC-0D's darkness arm asked
+  the preset WRAPPER whether it owned the gate key, when every override is spread into `rules` —
+  so the wrapper can never own it and the mutant that lit the flag walked straight past. All
+  three now red. **The fixture-mirrors-deriver and self-supplied-anchor classes were caught by
+  running the mutants, not by reading the tests.**
+  ⭐ **A VOLUME UNDER-ENUMERATION WAS FOUND BY RUNNING THE VOLUME'S OWN RULE.** §7.A.4 makes the
+  block-touching set a DERIVATION and then illustrates it with a nine-member list prefixed
+  "today". Derived, it is TEN: `dm_removed` names the `block` pool on its debit arm, and a DM
+  removal that left the share integrals stale is the hole a third declared sink exists to close.
+  The hand list rotted exactly as the derivation was introduced to prevent. Docketed to the
+  volume prose micro-act; the rule itself is intact and measured true.
+  ⛔ **THE FLIP CONVICTED A LANDED PACKET, AND A ROT CLASS WAS CENSUSED AND CLOSED.** `EFF-M4`
+  pinned the exact TEXT of an argued-roster ceiling in `requiredSymbols`, which are
+  existence-checked at EVERY status — so WC-0C moving that ceiling by the roster arm's own
+  instruction broke a landed packet. All 40 value-bearing `requiredSymbols` were enumerated: 37
+  pin a stable structural prefix, and exactly THREE pinned a mutable numeric literal, one of them
+  authored by this lane at its own P1. All three are converted to value-free existence pins; the
+  number carried nothing `verifiedBase` did not already carry.
+  ⚠ **A DECLARED CAPABILITY DELTA, not a discovered one.** With `sovereigntyTradeEnabled` lit,
+  the offerable family set grows by two and `amnesty` takes index 0 of the stacking order,
+  changing which family the sovereignty market offers first. The seeded corpus cannot move
+  because that key is virtual and lit in no preset — asserted over the resolved rule objects, not
+  claimed — so WC-0's own "DORMANCY: total" stays true of the corpus and is no longer true in the
+  capability sense.
+  ⭐ **The four numeric catalog fields are TRANSCRIBED with their derivations quoted in the
+  source**, awaiting the chair's signature at collection; the train authors no number of its own,
+  and both new leaves' scalar and curve tables land as SHAPE with their values scheduled to their
+  movers.
+
+- **Measured (previous):** 2026-08-15 — **THE `eff-1b` TRAIN LANDED BOTH MEMBERS: the staged successor
   that pays the records the machinery train left owing.** Chain: base `4f2d37d1` → `937ab5f4`
   (P1) → `d840a3a6` (EFF-M4) → `6bdba84e` (P2) → `ef6b0984` (EFF-M5) → the terminal. Eight docs
   files, zero production lines, zero census motion.
@@ -818,7 +868,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | WC-3 | [`WC-0C`](./packets/foreign-policy/WC-0C.md) | **LANDED** | Member 3 of 4 of the `wc-0` train. ONE frozen table SHAPE with no values in it, plus the fence that keeps it singular. ⛔⛔ IT CARRIES NO CURVE VALUES, and that is the whole reason the shape lands apart from its content: the volume corrected itself in writing after an earlier drafting landed four curves in the wave whose closing line reads TUNING: none — curves are constants and constants are owner-signature surface. Each curve lands with its MOVER instead. ⭐ THE FENCE IS A CURE FOR A DOUBLE VACUITY, both executed: the volume's authored pattern matches an EMPTY candidate pool, so its non-vacuity arm can never pass (the pattern cannot match its own exclusion list) and its EXCLUDES clause subtracts from an empty set. One device was asked to prove two separable things; this member separates them into a GUARD pool asserted against a named empty list and a CONTROL pool that proves the extractor is alive. ⭐ AND THE C3 CONTRACT IS ALREADY BREACHED AT HEAD, TWICE, BY MODULES A NAME-KEYED FENCE CANNOT SEE: habitCurve.js builds its law-word-keyed curves by fromEntries over a derived order, and espionageDoctrine.js carries two private tables. Both predate WC and both are RECORDED rather than repaired, as frozen legacy rows keyed by exact module identity at a ceiling exact in BOTH directions, so a later dissolution is banked in the diff rather than becoming invisible headroom. ⚠ THE MEMBER IS THIRD BY MEASUREMENT: its argued-roster entry and the leaf that entry names must land in the SAME commit, because the roster arm asserts the module exists. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any curve value, tuning key, band or threshold; the move-vocabulary fence, which HB-1 already shipped; repairing either frozen legacy module, which is another volume's landed code; a third legacy row, which is a STOP and a chair question; `.coupling-unlayered-baseline.json`, which is forbidden outright |
 
-| WC-4 | [`WC-0D`](./packets/foreign-policy/WC-0D.md) | **READY** | Member 4 of 4 of the `wc-0` train and its TERMINAL member — it carries the lighting census row and re-derives the whole tuple, so the train's landing commit stays docs-only. Two producer-less term-catalog rows, `amnesty` and `jubilee`, each in its own family: the two exits the volume's own "Debt needs exits" section requires a settlement to be able to write into a peace. They land as seam rows with NO producer entry and no draft-lens membership — the `non_intervention` mechanism verbatim, so no producer means never drafted means byte-identical registration. ⭐ BUT THE NO-PRODUCER RECIPE DOES NOT REACH THE FAMILY LIST, which is DERIVED at module scope: registering two producer-less rows mutates an exported array with no producer involved, which is why this member is a 32-reference consumer census with a catalog edit attached rather than a catalog edit with a note. Two consumers red and both are cured here: the NAMED grown set, and a totality loop demanding a house-voice row for every family across three compliance states — which is what makes the six authored lines mandatory rather than decorative. ⛔ THE VOLUME'S OWN OBLIGATION TO WIDEN THE WR-10 LANDING RECORD IS STRUCK: that record is a LANDING RECORD rather than a policy, its own module says widening it would erase the fact the tripwire preserves, and a mutant proves the refusal is enforced. ⭐⭐ AND THE INERTNESS PIN IS RE-AIMED AT A REASON THAT IS TRUE: the volume's stated ground is refuted, because the market's search reads the AVAILABLE family set and stacks a family with no term on the table anyway. Inertness survives for a different reason — the gating flag is virtual and lit in no preset — so the pin asserts that structural darkness and DECLARES the capability delta rather than claiming inertness. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any producer, draft-lens membership or catalog-row property; widening the WR-10 landing record; touching `peaceTerms.js`, which sits at 797 of 800; a house WORD for either type, the default arm being proved total; any golden re-record, and any movement in the committed settlement hash or the persisted coherence receipt, either of which is a STOP |
+| WC-4 | [`WC-0D`](./packets/foreign-policy/WC-0D.md) | **LANDED** | Member 4 of 4 of the `wc-0` train and its TERMINAL member — it carries the lighting census row and re-derives the whole tuple, so the train's landing commit stays docs-only. Two producer-less term-catalog rows, `amnesty` and `jubilee`, each in its own family: the two exits the volume's own "Debt needs exits" section requires a settlement to be able to write into a peace. They land as seam rows with NO producer entry and no draft-lens membership — the `non_intervention` mechanism verbatim, so no producer means never drafted means byte-identical registration. ⭐ BUT THE NO-PRODUCER RECIPE DOES NOT REACH THE FAMILY LIST, which is DERIVED at module scope: registering two producer-less rows mutates an exported array with no producer involved, which is why this member is a 32-reference consumer census with a catalog edit attached rather than a catalog edit with a note. Two consumers red and both are cured here: the NAMED grown set, and a totality loop demanding a house-voice row for every family across three compliance states — which is what makes the six authored lines mandatory rather than decorative. ⛔ THE VOLUME'S OWN OBLIGATION TO WIDEN THE WR-10 LANDING RECORD IS STRUCK: that record is a LANDING RECORD rather than a policy, its own module says widening it would erase the fact the tripwire preserves, and a mutant proves the refusal is enforced. ⭐⭐ AND THE INERTNESS PIN IS RE-AIMED AT A REASON THAT IS TRUE: the volume's stated ground is refuted, because the market's search reads the AVAILABLE family set and stacks a family with no term on the table anyway. Inertness survives for a different reason — the gating flag is virtual and lit in no preset — so the pin asserts that structural darkness and DECLARES the capability delta rather than claiming inertness. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any producer, draft-lens membership or catalog-row property; widening the WR-10 landing record; touching `peaceTerms.js`, which sits at 797 of 800; a house WORD for either type, the default arm being proved total; any golden re-record, and any movement in the committed settlement hash or the persisted coherence receipt, either of which is a STOP |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
