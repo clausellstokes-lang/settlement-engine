@@ -68,6 +68,27 @@ const HABIT_DARK_CLOSURE = Object.freeze([
   'src/domain/worldPulse/habit/habitCurve.js',
   'src/domain/worldPulse/habit/habitVocabulary.js',
   'src/domain/worldPulse/habitForkRegistry.js',
+  // ⭐ JOINED AT HB-2, and the intuitive answer is wrong in an instructive way. The ledger
+  // imports the vocabulary and the curve, so it JOINS. ⛔ `habitGate.js` — minted in the SAME
+  // commit, into the SAME directory — does NOT, because the closure grows by REVERSE imports
+  // and the gate imports nothing at all: being imported BY a member does not enrol a file.
+  // Declaring both would red arm (a) in the other direction.
+  'src/domain/worldPulse/habit/habitLedger.js',
+]);
+
+/**
+ * The habit directory's file count. ⛔ HB-2 DOUBLES IT, and that matters beyond arithmetic:
+ * the single-rounding-door scan below runs over the WHOLE family and asserts an array of
+ * EXACTLY ONE, so neither new leaf may spell any rounding operator. Every rounding in the
+ * ledger routes through the imported `roundToUnits` and its eviction compares integers that
+ * function already produced.
+ */
+const HABIT_FAMILY_FILES = 4;
+
+/** The two files lawfully allowed to spell a member of the tuning bag — see the A4 re-aim. */
+const BOUND_HOMES = Object.freeze([
+  'src/domain/worldPulse/habit/habitCurve.js',
+  'src/domain/worldPulse/habit/habitLedger.js',
 ]);
 
 function walk(dir, out = []) {
@@ -237,7 +258,7 @@ describe('HB-0 — the frozen curve, its fences, and the wave dormancy evidence'
     // in the one door. The scan is proven live by finding that one before asserting there
     // is no second.
     const family = SRC_FILES.filter(({ rel }) => rel.startsWith(`${HABIT_DIR}/`));
-    expect(family.length).toBe(2);
+    expect(family.length).toBe(HABIT_FAMILY_FILES);
     const roundings = family.flatMap(({ rel, src }) => [
       ...src.matchAll(/\b(?:Math\.round|Math\.trunc|Math\.floor|Math\.ceil|toFixed)\s*\(/g),
     ].map(() => rel));
@@ -405,17 +426,25 @@ describe('HB-0 — the frozen curve, its fences, and the wave dormancy evidence'
       .filter(({ src }) => src.includes(symbol))
       .map(({ rel }) => rel)
       .sort();
+    // ⭐⭐ RE-AIMED IN PLACE AT HB-2, in the SAME commit that creates the first consumer, with
+    // ZERO new titles — exactly the discharge this case's own failure message demanded, and
+    // exactly how HB-1 re-aimed HB-0's whole-tree dormancy absolute. WHAT THE CLAIM WAS at
+    // HB-0B: "nothing in src reads the three bounds", which was true for precisely one commit.
+    // ⛔ WHAT IT BECAME, AND IT IS STRONGER RATHER THAN WEAKER: the bounds are spelled ONLY
+    // inside the habit family, and that family is unreachable from the engine by the dark
+    // closure case above. A bound reaching any third file would mean a consumer outside the
+    // family had appeared, which is the thing worth catching.
     // GUARD THE GUARD FIRST: the same detector finds a sibling member of the same bag exactly
     // where it genuinely lives, so an emptied scan cannot pass as an absence.
-    expect(mentionsOf('NEUTRAL_I')).toEqual([CURVE_HOME]);
+    expect(mentionsOf('NEUTRAL_I')).toEqual([...BOUND_HOMES]);
     for (const key of BOUND_KEYS) {
       expect(
         mentionsOf(key),
-        `${key} has a consumer in src/. This wave is DARK BY THE STRONGEST ARGUMENT — nothing`
-        + ' reads the three members — and the FIRST WAVE THAT SPENDS THEM OWES THE RE-AIM OF'
-        + ' THIS CASE IN THE SAME COMMIT THAT CREATES THE CONSUMER, exactly as HB-1 re-aimed'
-        + ' HB-0\'s dormancy absolute in place. That wave is HB-2, whose ledger is the spender.',
-      ).toEqual([CURVE_HOME]);
+        `${key} is spelled outside the habit family. The bounds are SPENT by the ledger and`
+        + ' AUTHORED by the curve, and nothing else may name them: the family is unreachable'
+        + ' from the engine, so a third speller is a consumer that escaped the closure. A wave'
+        + ' that legitimately spends them owes the re-aim of this case in the same commit.',
+      ).toEqual([...BOUND_HOMES]);
     }
   });
 });

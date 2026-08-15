@@ -169,6 +169,10 @@ export function extractSpatialUsage(worldState) {
     // standing the same tick. The ledger is one-tick and drop-when-empty, so a nonzero count
     // means graded missions genuinely landed on THIS tick rather than that a lane is lit.
     mission_credits: recCount(L.missionCreditEvents),
+    // HB-2 THE HABIT SUB-LEDGER. Actors carrying at least one learned row. The ledger is
+    // drop-when-neutral at four levels, so an actor appears here only while it holds a
+    // contrast that is genuinely off neutral — a count of courts that have learned something.
+    habit_actors: recCount(L.habits?.rows),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -202,6 +206,7 @@ export function extractSpatialUsage(worldState) {
     ['demographic_plans', counts.demographic_plans], // wave P3 the overflow valves
     ['pact_formation', counts.pacts_awaiting_answer], // GR-2 peacetime offers afoot
     ['mission_credit', counts.mission_credits],       // ES-5d graded covert missions crediting careers
+    ['habit_conditioning', counts.habit_actors],      // HB-2 courts holding a learned contrast
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -296,6 +301,28 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   // career total, and never a backlog. Zero is the ordinary reading in a lit world on a tick
   // where nobody's mission came home, which is most ticks.
   'missionCreditEvents',
+  // HB-2 THE HABIT SUB-LEDGER (habitLedger.js, its ONE writer). TRACKED on routeNetwork's,
+  // pactProposals' and missionCreditEvents' footing, and the exemption's conjunction fails in
+  // BOTH halves. NO TRACKED FLAG: `habitConditioningEnabled` is virtual and lit in no preset,
+  // so it is absent from TRACKED_FLAGS. NO TRACKED MOVER: nothing else in this list can see the
+  // habit lane fire — the ledger is read by no subsystem at all at this wave, which is the
+  // wave's own identity claim.
+  //
+  // AND POSITIVELY: a habit row is a DEPOSIT rather than a re-derivation. It is written at a
+  // tick, PERSISTS across ticks carrying its own week stamp, and is consumed later by a
+  // different subsystem's read — the armyTransit / spatialArrivals / missionCreditEvents shape,
+  // and all of those are TRACKED. Prop hygiene is satisfied by the distinction the
+  // vengeanceLicenses, warIntents and missionCreditEvents rows all draw: the keys are actor
+  // identities, and we emit the key COUNT and never a key.
+  //
+  // ⛔ THE STORE-LAYER ESCAPE IS NAMED AND REFUSED: this walker governs keys written via
+  // `setSpatialLedger` from inside `src/domain`, so a habit stamp written from the store layer
+  // would evade it entirely. The single-writer census is what closes that door.
+  //
+  // ⚠ THE HONEST LIMIT: `habitConditioningEnabled` is lit in no preset, so this reads ZERO on
+  // every generated world today. A reading of zero while the layer is dark is the truth, not a
+  // blind spot — the same sentence routeNetwork and demographicPlans are carried on.
+  'habits',
 ]);
 
 /**

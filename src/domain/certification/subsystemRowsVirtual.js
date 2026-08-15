@@ -498,6 +498,53 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // real and readable the day such a receipt exists.
     soakEvidence: 'indirect',
   }),
+  // ── HABIT CONDITIONING (HB-2, docs/DESIGN_FP_ARCH_HB.md §4) ────────────────
+  // AUTHORED, NEVER PENDING. This wave's home cohort is the ENGINE-GATED VIRTUAL one and
+  // that cohort's pending array measures empty, so there is nowhere to defer to; direction 3
+  // of the engine-gated walker exists because "manifested here, pending elsewhere" once
+  // shipped a red.
+  Object.freeze({
+    rule: 'habitConditioningEnabled',
+    title: 'Habit conditioning (the learned-contrast sub-ledger)',
+    module: 'src/domain/worldPulse/habit/habitLedger.js,src/domain/worldPulse/habit/habitGate.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: this wave mints no pulse candidate and composes no beat, so there
+      // is no candidateType literal in it to declare.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the lane returns no news, so it classifies into no mover family.
+      moverFamilies: Object.freeze([]),
+      // ONE channel, and it is REACHABLE rather than aspirational: censusWorldStateKeys walks
+      // one level into spatialLedgers, so this key reports the ledger's own sub-map count.
+      stateKeys: Object.freeze(['spatialLedgers.habits']),
+      other: 'ONE GATE, ONE DOOR, AND NO CALLER AT THIS WAVE. habitsActive requires habitConditioningEnabled === true read BY NAME (habit/habitGate.js), which is the ONE read of this key in the tree; the by-name spelling is load-bearing rather than stylistic, because a frozen-list conjunction is a computed member access and would hide a fully wired flag from the engine-gated-key census entirely. WHAT THIS WAVE BUILDS: the sub-ledger that STORES a learned contrast, its single writer, the first door of the four-door ladder, and the registration. WHAT IT DELIBERATELY DOES NOT BUILD: anything that COMPUTES a habit, DECIDES with one, or CLASSIFIES a circumstance - the class arrives as an argument, and the classifier has no lawful home yet, which is a blocking question for HB-4 rather than a gap here. THE LEDGER IS DROP-WHEN-NEUTRAL AT FOUR LEVELS - the neutral row, the emptied class, the emptied actor, and finally the whole sub-ledger, which drops the spatialLedgers namespace with it when it was the last one - so an emptied world stays byte-identical to a dormant one and this census reads real adoption rather than a materialized container. THE WRITER IS UNCALLED BY DESIGN: writeHabits exists and nothing under src calls it, so the count is structurally zero on every generated world at this wave, and that is the wave identity claim rather than a blind spot. TWO DETERMINISTIC EVICTIONS bound it: rows evict nearest-neutral against the per-actor cap and the pledge book evicts oldest-first against its own, each with a codepoint tiebreak, because consulting insertion order would break replay in an engine whose whole contract is that a seed reproduces. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.habits, which requires both a preset that lights the flag and the credit fold that HB-3 adds to supply a caller.',
+    }),
+    // No caller is wired, so nothing runs on any tick. REACTIVE rather than per_tick is the
+    // honest reading even once HB-3 supplies one: a habit row is written only when an episode
+    // actually closes and grades, never on a bare pulse.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_ledger_is_gated',
+        description: 'writeHabits returns its INPUT worldState reference before touching any ledger when the gate is dark, so the key cannot materialize behind a dark switch and a dark world is byte-identical. The gate returns before any allocation, which is what makes setSpatialLedger - the call that CREATES the namespace - unreachable rather than merely unused.',
+        check: 'In any v5 receipt whose subsystems.rules records habitConditioningEnabled false or omits it, subsystems.stateKeys carries no spatialLedgers.habits. Expressible from the v5 subsystems section alone.',
+      }),
+      Object.freeze({
+        name: 'aliveness_reads_the_high-water_mark',
+        description: 'A ledger that filled and then drained still proves the doctrine ran, so aliveness is judged on maxEntries rather than finalEntries - the vengeanceLicenses precedent. Drop-when-neutral means a court that learned a contrast and then forgot it back to neutral leaves NO final entry at all, so a final-entries reading would grade a lane that genuinely fired as dead.',
+        check: 'For a receipt whose census carries spatialLedgers.habits, maxEntries is greater than zero even where finalEntries is zero. Expressible from the v5 stateKeys census.',
+      }),
+    ]),
+    // ⛔ `indirect`, NOT `unobserved`, and the instrument itself ruled the distinction: a row
+    // that DECLARES a channel and still calls the soak blind to it converts a real SILENT into
+    // an instrument GAP, and that population is ceilinged at five — *"give the new row a channel
+    // the receipt can read, or accept SILENT; do not raise this ceiling."* This row declares
+    // `spatialLedgers.habits`, and that channel is REAL and READABLE the day a receipt exists:
+    // censusWorldStateKeys walks one level into spatialLedgers, so nothing about the reading is
+    // hypothetical — it waits on a preset lighting the flag and on HB-3 supplying a caller, not
+    // on an instrument that cannot see. The espionage row above carries the identical sentence
+    // for the identical reason.
+    soakEvidence: 'indirect',
+  }),
   // ── INFORMATION STATECRAFT (D-3, docs/DESIGN_DEEP_COUPLINGS.md) ────────────
   Object.freeze({
     rule: 'infoStatecraftEnabled',

@@ -465,6 +465,26 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'HB substrate — the frozen reinforcement/decay curve and the single rounding door, riding the shared decay law and the shared outcome ladder rather than authoring either',
     reads: Object.freeze([]),
   }),
+  'src/domain/worldPulse/habit/habitGate.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB substrate — the first door of the four-door habit gate ladder, the ONE by-name read of the conditioning flag in the tree; it imports nothing at all, which is what makes its empty reads structural rather than argued',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/habit/habitLedger.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'HB substrate — the habit sub-ledger and its single writer, storing a learned contrast without computing, deciding or classifying one; the circumstance class arrives as an argument rather than being derived here',
+    reads: Object.freeze([]),
+  }),
+  // ⚠ THE TWO HB-2 ROWS ABOVE CARRY AN EMPTY `reads` FOR TWO DIFFERENT REASONS, MEASURED
+  // RATHER THAN COPIED. The gate imports NOTHING, so its row cannot drift in either direction.
+  // The ledger imports four modules and every one of them is absent from the layer map: three
+  // are habit-family leaves this very map holds as argued-unlayered, and spatialLedgerAccess.js
+  // is itself an argued-unlayered row here — an unlayered read is not a cross-layer reach.
+  // ⛔ THIS IS WHY `num` AND `asObject` ARE RE-IMPLEMENTED LOCALLY IN THE LEDGER RATHER THAN
+  // IMPORTED FROM npcLadderState.js, which exports both: that module matches the INTERIOR layer
+  // family, and `layeredImportsOf` is direct-imports-only, so importing those two helpers would
+  // give the ledger a real interior read and red this row BY NAME, in both directions. The
+  // duplication is deliberate and the trade is recorded where the next reader will meet it.
   // ⚠ THE TWO HB-1 ROWS BOTH CARRY AN EMPTY `reads`, AND THAT IS MEASURED RATHER THAN COPIED
   // FROM THE PAIR ABOVE. The vocabulary leaf is dependency-FREE by contract — the cross-volume
   // collision contract requires it, and a head re-export is how a dependency arrives by the
@@ -533,7 +553,7 @@ const ARGUED_HOSTS = Object.freeze([
  * with its reason. The net effect is one cross-layer read that would otherwise have been
  * dark becoming enumerated. A sixteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 17;
+const ARGUED_ROSTER_CEILING = 19;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

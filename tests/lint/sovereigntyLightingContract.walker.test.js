@@ -4192,7 +4192,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   census parses each file's OWN bytes, so it sees +1 there, not +8. The runtime
     //   denominator is a FLOOR, not a pin (§P3 rule 5), and is transcribed into the capsule
     //   from the terminal's own executed ratchet receipt rather than predicted.
-    files: 2425, parked: 366, credited: 2059, titles: 20081, suiteTitles: 5650,
+    files: 2428, parked: 366, credited: 2062, titles: 20107, suiteTitles: 5653,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

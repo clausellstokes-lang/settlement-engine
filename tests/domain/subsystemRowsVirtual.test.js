@@ -46,6 +46,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const AXES = 'beliefAxesEnabled';
 const CONQUEST = 'conquestDoctrineEnabled';
+const HABIT = 'habitConditioningEnabled';
 const STATECRAFT = 'infoStatecraftEnabled';
 const RUMORS = 'migrationRumorsEnabled';
 // Joined 2026-08-04 by lane WW-A: the WR-10 conveyance landed its first gate read, and
@@ -141,7 +142,7 @@ const UNDERWAYS = 'underwaysOrganicFoundingEnabled';
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
-  CONQUEST, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
+  CONQUEST, HABIT, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
   POLITICS, UNDERWAYS,
 ]);
 
@@ -155,6 +156,13 @@ const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule
  * whole module list would measure other subsystems' vocabulary.
  */
 const LANE_LEAVES = Object.freeze({
+  // HB-2. The door where the flag is read and the leaf where the bodies are. ⛔ Both are
+  // ZERO-CANDIDATE by construction — this wave mints no pulse candidate and composes no beat,
+  // which is why its row's eventTypes is empty rather than merely unfilled.
+  [HABIT]: [
+    'src/domain/worldPulse/habit/habitGate.js',
+    'src/domain/worldPulse/habit/habitLedger.js',
+  ],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf
