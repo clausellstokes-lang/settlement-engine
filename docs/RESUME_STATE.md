@@ -149,7 +149,25 @@ TR-7 · TR-9rem · IN-2..IN-6 · CW-2x · CW-3 — all CHARTER-SOUND with
 corrections bound in the annex; INT-3b compiling now; WC-0 after WC-C's
 cures; LG-0 after LG-S.
 
-**LIVE (~01:00, four lanes at cap — the holdup dissolved):** TL-S (tails
+**✅ WC-C COLLECTED + §52 RULED (ledger `7d4b01de`): all four WC cures
+SIGNED architected-and-held** (one C3 candidate refuted by its own re-sweep
+and discarded — the loop policing itself); the TWO C3 breaches at HEAD land
+as frozen legacy rows shrink-only; ⛔ the WC-4 FENCE-KEY defect docketed as
+its own §48 cure (blocks WC-4, not WC-0). **✅ R-INT COLLECTED + §53 RULED
+(ledger `ab702b98`): 30 HONORED / 6 CHARTERED / 3 DRIFTED (2 already cured
+by the record's own machinery) / 5 PENDING** — ⭐ P1 (the tuning-signature/
+push carve-out vs the universal grants) is SURFACED TO THE OWNER, chair
+posture = conservative (a fresh owner act at the signature's phase) until
+answered; P2/P3 reconciled vetoably; P5 elevated (the flag-mint law enters
+PACKET_STANDARD with WC-0's train); D3 docketed to the prose batch.
+
+**LIVE (four lanes): TC12(INT-3b) · TC13(IN-1c) · TC14(WC-0 compile — the
+first fully-§48-treated family opening; the six house lines drafted for
+chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
+dimension 11, FABLE — the estate auditing itself: banked-red blindness,
+vacuity classes, ratchet health, walker gaps, unproven guards, parked rot).**
+
+**(superseded) LIVE (~01:00, four lanes at cap — the holdup dissolved):** TL-S (tails
 sweep) · LG-S (LG self-sweep, Fable) · **Lane WC-C — THE FIRST §48
 CURE-ARCHITECTURE PASS** (the WC fence signature, the TERM_FAMILIES pin
 cure, the C3 non-vacuity arm, the LANDS correction; each cure RE-SWEPT
