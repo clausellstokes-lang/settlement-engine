@@ -8791,7 +8791,7 @@
     },
     {
       "id": "RN-A0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/RN-A0.md",
       "verifiedBase": "cf12c9768bea3619a71574cafdd4c4b820922f63",
       "changeManifest": [
@@ -8892,6 +8892,111 @@
           "vitest",
           "run",
           "tests/lint/seatVocabularyUnification.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "RN-A1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/RN-A1.md",
+      "verifiedBase": "a8f09e14eba7cc9f7ab40addce1204cbbbf132da",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/relationships/canonicalRelationship.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/relationshipState.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/implicitNeutralSingleSource.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/regionalNeighbourSeam.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/relationships/canonicalRelationship.js",
+          "symbol": "export function canonicalRelationshipLabel"
+        },
+        {
+          "path": "src/domain/worldPulse/relationshipState.js",
+          "symbol": "export const RELATIONSHIP_TYPE_ALIASES"
+        },
+        {
+          "path": "src/domain/worldPulse/relationshipState.js",
+          "symbol": "export const normalizeRelationshipType"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the 40-input identity pin passes: every normalizeRelationshipType and canonicalRelationshipLabel result is byte-identical to the pre-feature base"
+        },
+        {
+          "id": "A2",
+          "case": "exactly 17 of 40 inputs still diverge between the two resolvers — the pin's negative control"
+        },
+        {
+          "id": "A3",
+          "case": "normalizeType === normalizeRelationshipType is referentially true"
+        },
+        {
+          "id": "A4",
+          "case": "the single-writer walker passes: the spelling-table roster is exactly the home plus the three banked shims"
+        },
+        {
+          "id": "A5",
+          "case": "the walker's guard-the-guard arm passes — the home itself matches the signature"
+        },
+        {
+          "id": "A6",
+          "case": "the five relationship domain suites pass unchanged"
+        },
+        {
+          "id": "A7",
+          "case": "tests/build/vendorPdfLazy.test.js and tests/lint/sizeBaseline.test.js pass — the import is bundle-lawful"
+        },
+        {
+          "id": "A8",
+          "case": "tests/lint/couplingInclusion.walker.test.js passes with no new registry row"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/regionalNeighbourSeam.test.js",
+          "tests/domain/canonicalRelationship.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/implicitNeutralSingleSource.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/vendorPdfLazy.test.js",
+          "tests/lint/sizeBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/mutationCoverageManifest.test.js"
         ]
       ]
     }

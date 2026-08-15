@@ -1,7 +1,13 @@
 # INFRA / RN-A0 — the three name-collision renames
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `cf12c9768bea3619a71574cafdd4c4b820922f63`
+- **Landed:** `a8f09e14` — chain: promotion `cd71f0d2` → content `a8f09e14`. Battery green
+  first run (6 files / 114 tests, exit 0 in-shell); both typecheck ratchets at their exact
+  floors `173/173` and `1134/1134`; `negativeAssertionAnchor` exit 0; eslint clean; OSR exit
+  0. Effective lines measured with eslint's own `Linter` **EXACTLY unchanged** —
+  `conquestDoctrineStage.js` 267 → 267, `intelActs.js` 200 → 200 — which is the executed
+  form of this member's output-neutrality claim.
 - **Train:** `rn-1`, member **1 of 4** — the ladder's first rung and the train's green prefix
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
   `c691af9fe6ade05097857699829771062058b289e55e0445aba2eee9498e64fa`, measured at this
