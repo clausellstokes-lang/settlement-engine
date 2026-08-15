@@ -3132,3 +3132,42 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
    CI green remains owed before the deploy phase per §62's runtime
    half. The owner can accelerate the hunt by pasting the first error
    lines from any one failing job's log — requested in-chat.
+
+## §83 · THE R-EFF AUDIT COLLECTED — THE STACK HARDENS BEFORE FIRST USE
+## (2026-08-15, chair, vetoable; evidence laneREFF-audit.md +
+## laneREFF-report.md, 25 executed probes; verdict: NOT YET FOOLPROOF —
+## 2 MATERIAL / 15 DEFECT / 7 HARDENING, core design SURVIVED)
+
+1. **R-M1 RULED CURED AS ARCHITECTED** (the audit confirmed AND
+   enlarged chair suspicion S1): scoped truncation was blind to commit
+   topology (a continue-tail lands the stopped member's tree as its
+   ancestor — toy-repo demonstrated) and to member→member code
+   dependency including flag slices. The cure is LAW NOW — DBE §2.4-R2
+   amended this commit: `dependsOn` + `flagMember` + transitive STOP +
+   the cherry-pick re-chain + re-proof at new commits + census at the
+   surviving chain's last tests-moving member (also cures S4).
+2. **R-M2 RULED CURED AS ARCHITECTED**: exact-string row matching let
+   a trailing space or homoglyph flip a STOP into a silent NO-OP
+   (executed) — charset+NFC validation, the --annex existence check,
+   and near-miss conviction are now R2 law (same amendment) and land
+   in the tool draft via the cure pass.
+3. **THE CURE PASS IS DISPATCHED AS A CONTINUATION** (§81.1's first
+   operational use — the audit lane itself, context intact): all 15
+   DEFECT + 7 HARDENING cures applied to the three drafts; the eff-1
+   charter RESTRUCTURED as eff-1a + eff-1b (its five members under a
+   ≤4 header and the M3/M4 preamble-path collision were the audit's
+   own catches); the §63.3 reconciliation recorded (the drafts exist
+   under explicit owner implement orders, not the one-slot window);
+   then the FULL probe battery re-runs against the cured drafts (§61
+   level-1) — homoglyph ids must now convict.
+4. **DBE §7's cap refusal is ALIGNED with §2.6** (this commit) — the
+   line deferred to "§8's review" and §2.6 is that review. The §8.4
+   ES-plan/R1 conflict and the harness exit-code semantics are cured
+   in the pass. The audit's conduct is RATIFIED, including its own
+   in-flight catch of the §71.7 pipe-exit trap and its refusal to
+   demonstrate S2's cache corruption inside the estate (right call —
+   the mechanism is proven at config level; eff-1's compile adds the
+   per-worktree cacheDir isolation).
+5. **eff-1a/eff-1b remain HELD until the cure re-sweep reports green.**
+   Nothing downstream moves onto un-re-swept machinery — the audit
+   exists so that wc-0 runs on proven rails.

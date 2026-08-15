@@ -97,15 +97,23 @@ stalls the pipeline through three channels, each cured separately:
   from at least TWO distinct families. A STOP in the executing family's train
   pivots the slot to the other family's ready train at zero wall-clock; the
   re-charter runs on chair/compile lanes concurrently, off the serial path.
-- **R2 — the premise map and scoped truncation.** Every train plan carries a
-  PREMISE MAP: member → the annex rows and rulings it cites (enumerable from
-  the packet's own SPV citations; TTS-checked at compile). At execution, a
-  refuted SUBSTRATE-FACT row stops exactly the members whose cited-row set
-  contains it; members citing only intact rows continue as the train's new
-  tail, and the refutation-disposition rides the receipt into the chair's
-  CAS collection. A LAW-shaped refutation, or any refutation on a train
-  whose plan lacks the map, remains a FULL-TRAIN STOP — the conservative
-  default survives wherever the map cannot prove independence.
+- **R2 — the premise map and scoped truncation** (amended per the R-EFF
+  audit, ODQ §83 — the original text was blind to commit topology and to
+  member→member code dependency). Every train plan carries a PREMISE MAP:
+  member → the annex rows and rulings it cites (from the packet's own SPV
+  citations; TTS-checked at compile) PLUS `dependsOn` member→member code
+  edges and the `flagMember` designation for every flag-train slice. Row
+  ids are charset-validated (ASCII, NFC-normalized) against the named
+  annex; a scope query warns on near-miss ids — an unmatched id must
+  CONVICT, never silently no-op. At execution, a refuted SUBSTRATE-FACT
+  row stops the citing members AND, transitively, every member that
+  `dependsOn` a stopped member or slices a stopped flag member. **A
+  continue-tail NEVER lands as-committed** — its commits carry the stopped
+  member's tree as ancestor — it RE-CHAINS by cherry-pick onto the last
+  surviving member (clean by validator path-disjointness), re-proves every
+  battery at its new commit, and the census re-derives at the SURVIVING
+  chain's last tests-moving member. A LAW-shaped refutation, an invalid
+  map, or an absent map remains a FULL-TRAIN STOP.
 - **R3 — pre-ruled conditional forks.** Where SPV graded a premise
   UNVERIFIABLE-AT-BASE, the compile MAY bring the fork to the chair AT
   PROMOTION: "if row X refutes at execution, member M lands in shape M′" —
@@ -243,8 +251,10 @@ of five. Rulings remain individually numbered and individually vetoable.
 
 - **Gate tiering or conditional steps** — refused permanently (the prime
   constraint).
-- **Trains above 4 members** — the bisection and window-death blast radius
-  grow superlinearly with length; 4 is the cap until §8's review.
+- **Trains above the §2.6 differential caps** — §2.6 (ODQ §74) IS the
+  review this line originally deferred to: 8 engine / 10 prose for
+  §70.4-stamped families, 4 un-stamped. The superlinear blast-radius
+  concern is answered by the §2.4-R2 premise map, not waived.
 - **Cross-volume trains at rollout** — collision and preamble coherence risks
   compound across volumes; revisit after two clean same-volume trains.
 - **A per-wave "lite" sealed runner** — the sealed-session machinery runs per
