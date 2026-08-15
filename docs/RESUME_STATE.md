@@ -217,8 +217,25 @@ SURVIVES STRENGTHENED (A8's positive pin convicted M2 alone). The detector
 gap is DOCKETED (the scan-cure family). **TE12 RESUMED: re-point the parked
 green I1 (`28d2824b`), amend the M2 claim honest, author T, both gates held
 from tails.** Chair owns CAS.
+**✅ TC14 COLLECTED + §59 RULED (ledger `d6ea9224`): WC-0 REFUSED-IN-PART
+into a FOUR-MEMBER train** (0A vocabularies · 0B column union · 0C law-band
++ cured C3 fence · 0D amnesty/jubilee + terminal) with THREE STOP-class
+refutations invisible to reading: a registration wave CANNOT mint a flag
+(the walker reds unread manifest keys — both flags leave to the named
+successor WC-0E, a boundary train); TRACKED rows are live-writer claims;
+three leaves match no layer pattern at exact ceilings. Q9 ruled
+TRANSCRIBE-AND-RECORD (chair signs at promotion); the six house lines
+provisionally signed on their executed guards (corpus signature completes
+at collection); R35 reproduced live in the executed validator sequence
+(45/0→…→49/0, dup=0). ⚠ a naked-claim token in WC_CHAIR_RULINGS.md:389
+docketed cure-at-fold. **THE EXECUTOR QUEUE (§59.6): INT-3B reland (live) →
+IN-1C-A → est-1 → wc-0.** **LIVE: Lane R-SEC (§51 dimension 5, FABLE) —
+the static security/privacy/billing posture audit** (injectable-filter
+class, RLS policies, the paywall trio, the ground-truth seam, PII,
+webhook verification) → `laneRSEC-*`.
+
 **LIVE (four lanes): TE12(INT-3B relanding) · RN-C(normalizer cure) ·
-TC14(WC-0 compile — the
+R-SEC(security survey — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
 dimension 11, FABLE — the estate auditing itself: banked-red blindness,
