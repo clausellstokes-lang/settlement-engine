@@ -3,8 +3,16 @@
 **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` at SHA-256
 `c4e3f531ba585ef6d033ac3deb3b88ece5648c527c6ef7f46020ef0156de38ce`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `3be4736f0119bdbedb627e9bf862782e21c9dc0a`
+- **Landed:** `dae90484c26e273699890e8b4dfa754a8045e7a8` — the `est-1` train's second member and,
+  as executed, its **last**. Chain: promotion `7c041e9b` (which also flipped EST-A) →
+  implementation `dae90484` → the terminal. Two compile premises were refuted at build and
+  both are corrected in place rather than absorbed (the fourth fog module, and the fourth
+  path); the executed figures are in §6 and §8. ⛔ **EST-C did not promote** — see `EST-C`'s
+  entry on the lane receipt and §4.1 of `EST-A.md`: its three targets are the estate's entire
+  remaining ordinary-debt population, and paying them empties a classifier control that cannot
+  be honestly refilled.
 - **Train:** `est-1`, member **2 of 3** (E-3 in the `OWNER_DECISION_QUEUE.md` §56 charter's
   lettering). Promoted alone under the §60.3 staged-promotion law, after EST-A flipped
   LANDED in the same commit that promotes this member.
