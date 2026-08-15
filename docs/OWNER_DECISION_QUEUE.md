@@ -4466,3 +4466,37 @@ The charter lane received the addendum in flight.
    section at the next ledger docs touch (the paused-workflow resume
    handle is dead in this harness; the fresh counsel lane is the
    resumption of record).
+
+## §120 · THE tm CHARTER ACCEPTED — GAP-CLOSURE, NOT CONSTRUCTION
+## (2026-08-15, chair, vetoable; evidence laneTMC-TM-CHARTER.md +
+## laneTMC-report.md, all claims measured-static)
+
+1. **The reframe is ACCEPTED (J-TMC-1)**: §117's ordered plane
+   substantially EXISTS at the tip — the frozen ~130-name closed
+   taxonomy (ESLint-enforced, rev 12), consent v2 with server
+   clamping, the hardened ingest sink, RLS-zero storage across
+   migrations 036–134, k-anonymous rollups, the private research
+   export, hard-erase deletion — plus two in-tree ancestor designs
+   the exhumation order never named. tm is GAP-CLOSURE: the
+   full-strength §117.3 wall walker (a narrower seed exists), the
+   §117a simulation-metrics class end-to-end, and registry rows for
+   since-landed surfaces.
+2. **J-TMC-2..7 SIGNED**: the sim class PII-free BY SCHEMA in its own
+   table (resolving §117a's one-taxonomy order against the in-tree
+   two-layer ruling); the soak emitter as a PURE RECEIPT TRANSFORM
+   on the existing schema-v4 behavioral observation (outside the
+   deterministic core STRUCTURALLY); tm-core BEFORE the diagnostic
+   soak with a pure-Node aggregator (soaks need zero cloud); §49/§50
+   and §85.4 avoided-by-design. **THE LAUNCH-DAY CUT NEEDS ZERO NEW
+   CLIENT CODE** — deploy the train, set the secrets, verify crons,
+   one probe batch.
+3. **⚠ TWO MORE MISSING SECRETS JOIN dom-2's census**:
+   `ANALYTICS_HASH_PEPPER` (its absence SILENTLY kills device-actor
+   linkage — the §117 order's own data continuity) and
+   `EXPORT_SHARED_SECRET` — the dom executor's brief carries the
+   addendum; dom-2's derived census picks both up by construction.
+4. **TWO OWNER-VALUE flags join the owner-open list**: the 400-day
+   retention ratification and the market-plane consent default —
+   legal/product-tail items, parked with the §71.2 family. tm-core
+   slots before the diagnostic soak; the analytical surfaces trail
+   per §117.2.
