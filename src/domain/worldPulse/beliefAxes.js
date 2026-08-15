@@ -223,7 +223,22 @@ function migrationDirectionFor(report, subjectId) {
 export function foldBeliefAxes({ prior, groundTruth, reports, subjectId, subjectAxes = null }) {
   const T = AXIS_TUNING;
   const priorBand = prior && Number.isFinite(prior.populationTrendBand) ? Number(prior.populationTrendBand) : groundTruth.populationTrendBand;
-  const priorLabel = prior && typeof prior === 'object' && 'observanceLabel' in prior ? prior.observanceLabel ?? null : groundTruth.observanceLabel;
+  // CS-B0: the CULTURAL axis seeds from ground truth whenever the observer has NO label yet —
+  // key absent OR present-but-null. The old `'observanceLabel' in prior` test only seeded while
+  // the KEY was missing, so a belief first folded before its subject's traditions had
+  // materialized latched `null` PERMANENTLY: the key then existed, the ground-truth fallback
+  // could never fire again, and the only escape was a tradition_change beat.
+  // ⚠ It was invisible until cs-1 (CS-A2) landed, and that is the whole story: under the old
+  // triangular silence decay a belief pruned every ~9 silent ticks and re-materialized with
+  // prior === null, which broke the latch and re-seeded the label from truth. The "staleness"
+  // the D-1c pin observed was that churn — a periodic re-copy of TRUTH — not the rumor net.
+  // Curing the decay removed the churn and exposed the latch underneath it.
+  // ⛔ THE STALENESS FEATURE IS UNTOUCHED: once a label is held, the PRIOR still wins unless a
+  // fresh tradition_change clears CAT_ADOPT_ACCURACY. This only decides where a FIRST label
+  // comes from, never whether a held one survives.
+  const priorLabel = prior && typeof prior === 'object' && prior.observanceLabel != null
+    ? prior.observanceLabel
+    : groundTruth.observanceLabel;
 
   // DEMOGRAPHIC — aggregate the fresh migration_flight tellings.
   let trendSum = 0;
