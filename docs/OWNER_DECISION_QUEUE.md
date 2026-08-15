@@ -3455,3 +3455,38 @@ product thesis, and the constitution held under measurement.**
    staged promotion, delta-table re-derivation, the §85.4 preflight);
    lane EP-F runs the EP Fable round including the single-member-law
    examination and the §68.5 pick-backlog disposition table.
+
+## §91 · THE EP FABLE ROUND ACCEPTED — AND THE SINGLE-MEMBER LAW
+## RELAXED (2026-08-15, chair, vetoable; evidence laneEPF-round.md +
+## laneEPF-report.md; stamp facts re-verified through a recovered
+## mid-round watchdog stall, zero work lost)
+
+1. **The §70.4 stamp is ACCEPTED**: absorption 23/25 + 2 structural
+   rows carried (signed HERE per the §73/§78 mechanism, completing
+   absorption); voided rows 12 intact / 4 superseded-as-predicted /
+   0 verdict changes over 12 landings; law pass 4 MATERIAL / 8 DRIFT
+   / 10 HOLDS. The two EP chair documents' consumed rulings are now
+   Fable-surveyed — that validation debt is DISCHARGED.
+2. **The four cures are SIGNED as compile obligations**: C-EPF-3
+   re-charters EP-1 to certify IN-FILE (the own-lane design is dead
+   at mechanism level — the twenty-member exact bijection at
+   subsystemRowsVirtual.test.js:407 reds it in its own commit) and
+   prices the §49/§50 flag-mint bill the volume predates; C-EPF-4
+   names the draw-count parity instrument as an EP-1 pin (denominator
+   22 at this base — the claim E5 was closed on gets an owner);
+   C-EPF-2 cures all ten stale volume sites in one unreserved-path
+   micro-act; the ACCESSOR_DEF miscite row rides it.
+3. **⭐ THE SINGLE-MEMBER LAW IS RELAXED AS RECOMMENDED**: the
+   cross-program half STANDS on its recorded reason; the one-member
+   gloss yields to ONE EP-EXCLUSIVE 5-MEMBER TRAIN plus the terminal
+   wave, under the round's four conditions verbatim — six dispatch
+   cycles collapse to two trains + one wave, kernel quiet-windows six
+   → one. EP is now STAMPED; its trains carry §77 premise maps from
+   birth.
+4. The fourteen §68.5 picks are DISPOSITIONED per the round's table —
+   and the naming collision is RECORDED: they belong to the
+   EPISTEMIC-PREVENTION program, not the EP family; the table routes
+   to that program's next sitting. §70 rounds state: WC ✅ WF ✅ EP ✅;
+   POP-F dispatched (POP-1's LG-seam verification is its sharpest
+   obligation — fourteen LG waves hang on it); INT → WY → tails
+   remain.
