@@ -8639,6 +8639,155 @@
           "tests/domain/amnestyJubileeRegistration.test.js"
         ]
       ]
+    },
+    {
+      "id": "WC-0E",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/WC-0E.md",
+      "verifiedBase": "00298c5f82ad10e80d5584bf30d7c642e27fc382",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/worldPulse/contributionLedger.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/worldState.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/simulationRules.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/certification/subsystemRowsVirtual.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/subsystemRowsVirtual.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/contributionLedgerShape.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "symbol": "export const VIRTUAL_SUBSYSTEM_ROWS"
+        },
+        {
+          "path": "src/domain/worldPulse/worldState.js",
+          "symbol": "function normalizeDeployments"
+        },
+        {
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const LAYER_PATTERNS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "E1",
+          "case": "both flags join the engine-gated manifest and the triple bijection holds at 22/22/22 with the ordered-equality pin green"
+        },
+        {
+          "id": "E2",
+          "case": "direction 1: each flag has a by-name === true read in contributionLedger.js in this same commit, asserted over the live source"
+        },
+        {
+          "id": "E3",
+          "case": "direction 3: each flag carries an authored VIRTUAL_SUBSYSTEM_ROWS row and stands in no lane's pending list"
+        },
+        {
+          "id": "E4",
+          "case": "CONTRIBUTION_KINDS and the record shapes are frozen, totality-exported and throw on an unknown kind"
+        },
+        {
+          "id": "E5",
+          "case": "the normalizer is fail-closed: an unknown kind, a malformed record and a non-object all disappear rather than surviving"
+        },
+        {
+          "id": "E6",
+          "case": "the blocks[] arm normalizes on EVERY load with both flags dark, which is what proves it is ungated"
+        },
+        {
+          "id": "E7",
+          "case": "the literal flag drive: the file drives each flag with a literal true, and the gate is false when either flag alone is lit"
+        },
+        {
+          "id": "E8",
+          "case": "no spatialUsage row is added and the exact-set walker is green: contributionLedger.js calls setSpatialLedger zero times"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/contributionLedgerShape.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lib/spatialLedgerCoverage.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/contributionLedger.js",
+          "tests/domain/contributionLedgerShape.test.js"
+        ]
+      ]
     }
   ]
 }
