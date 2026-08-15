@@ -2679,3 +2679,35 @@ that skips the increment is incomplete.
    hazard-conversion law and recorded on the veto surface (the lane's
    owner-gated caution is noted; a guard addition that reds nothing at
    adoption is machinery, not a ratchet raise).
+
+## §70 · THE FABLE FINAL ROUND (owner directive, 2026-08-15, in-chat;
+## operative reading recorded by the chair)
+
+Owner, verbatim: **"have you deliberately resweeped all remaining designs
+so that there is no material defaults or obstructions to implimentation
+that you can detect? if you get to that point with opus, do one last
+round for each with fable"**
+
+1. **The honest state at recording**: every remaining design volume has
+   been swept ONCE (the eight annexes, ~1,350 claims, 259 refutations
+   pre-paid) and kept continuously green by the §61 incremental machinery
+   — but a deliberate wholesale SECOND pass per volume has not run. The
+   WC/EP/POP/WF/INT/WY/tails sweeps were OPUS lanes (pre-§51 staffing);
+   only LG's was Fable.
+2. **⭐ THE FABLE FINAL ROUND IS LAW**: each Opus-swept volume receives
+   one final FABLE round before its family's first implementation train
+   consumes the annex. Scope per volume: (a) re-verify every REFUTED
+   row's correction was absorbed by a cure, charter, or annex note;
+   (b) re-verify all rows voided by landings since the sweep sha;
+   (c) a fresh Fable judgment pass over the volume's DESIGN-LAW sections
+   — the layer SPV §1.1 deliberately excluded from the Opus sweeps and
+   exactly where Fable judgment adds what Opus fact-checking cannot.
+3. **Timing is just-in-time, not wholesale-now**: the round runs when the
+   family's cure loop has quiesced AND within one landing of the family's
+   first train (whichever binds later) — a round run weeks early rots at
+   the measured annex-rot rate and would be re-run anyway. LG needs no
+   round (already Fable); a family whose annex the §61 increments have
+   fully re-verified still gets its (c) law pass.
+4. Sequencing home: the round is a named precondition line in each
+   family's first train charter; a compile citing an Opus annex with no
+   Fable-round stamp inherits a STOP.

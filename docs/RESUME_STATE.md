@@ -95,7 +95,13 @@ fix-then-guard locale lint) (+ the LG self-sweep); LIVE next: **R-CSA
 FABLE)**; remaining after: performance · docs · ops · market → chair
 synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
-future landing collection owes its increment. TE13 mid-train on
+future landing collection owes its increment. **⭐ §70 (owner, 08-15):
+THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/
+tails) gets one final Fable round (refutation-absorption check + voided
+rows + the DESIGN-LAW pass SPV excluded) within one landing of its
+family's first train; a compile citing an un-stamped Opus annex inherits
+a STOP. First due: WC (wc-0 is fourth in the executor queue) — dispatch
+its Fable round BEFORE wc-0 executes.** TE13 mid-train on
 refs/trains/in-1c-a (detached HEAD there is LAWFUL; branch pinned
 `d5a6c009` until chair CAS). Chair-owed sittings
 unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
