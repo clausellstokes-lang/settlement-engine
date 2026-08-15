@@ -2040,3 +2040,46 @@ jointly across POP/LG/ES at the LG sitting, not at POP-1's Q1 alone.
 5. **DOCKETED (infra):** three of the seven bundles move ONLY a wall-clock
    `generatedAt` — nondeterministic churn dirtying unrelated artefacts on
    any input touch; a determinism wart for the next infra micro-act.
+
+## §51 · THE COMPREHENSIVE COHERENCE REVIEW IS CHARTERED (owner order,
+## 2026-08-15 ~23:40, in-chat, verbatim intent)
+
+Owner: a comprehensive review of the whole system integrating what is
+IMPLEMENTED and what is DESIGNED; assessments on every aspect and dimension;
+running processes taken into account; the KEY EMPHASIS — everything that
+should be coherent from the CODING, LOGICAL, INTUITIVE, and INTENT
+perspectives IS coherent, or gets fixes to make it so. STAFFING LAW (owner):
+**Fable does survey, recon, and validation; Opus 5 does verification —
+managed and governed by Fable.**
+
+The chartered shape (chair, vetoable):
+1. **Phase S — the survey fan-out (FABLE lanes)** across the dimensions:
+   cross-layer engine semantics (do composed layers mean the same thing by
+   the same words); design↔implementation coherence (seeded by the seven
+   banked sweep annexes — reused, not redone); INTENT coherence (the ODQ
+   directive trail §17-§50 audited against what landed — does the built
+   thing match what the owner said); intuitive/vocabulary coherence (one
+   concept one name across engine, prose, UI, docs); coding coherence
+   (idioms, single-writer, layering, the preamble laws' uptake); product
+   surfaces (dossier/Herald/map/PDF against the legibility+news-address
+   laws); persistence & lifecycle paths; the security posture snapshot;
+   the verification estate itself (guards guarding guards — banked-red
+   blindness, vacuity classes); the law-body (ODQ+volumes+preambles
+   internally consistent).
+2. **Phase V — verification (OPUS lanes, Fable-governed):** every material
+   Phase-S finding independently verified with executed evidence before it
+   enters the register.
+3. **Phase F — the coherence-fix pipeline:** verified findings disposition
+   into the EXISTING machinery — annex corrections, §48 cure-architecture,
+   sitting questions, or wave amendments — never a parallel fix program.
+   Incoherence-by-design (deliberate asymmetries with recorded reasons)
+   is recorded as coherent-by-intent, not "fixed".
+4. The review runs READ-ONLY beside the build (lanes under the §25 cap,
+   interleaved with the remaining sweeps + cure passes by chair priority);
+   the LG self-sweep folds in as a Phase-S slice. Findings register lands
+   incrementally in the ledger; the chair synthesizes the comprehensive
+   assessment at Phase-S closure.
+5. ⚠ CAPACITY NOTE, recorded as information: Fable survey lanes spend the
+   Fable window materially faster than the Opus staffing did; the chair
+   sequences Fable lanes to the high-judgment slices first so an
+   exhaustion mid-review degrades gracefully to the §-recorded remainder.
