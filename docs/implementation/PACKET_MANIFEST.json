@@ -3037,6 +3037,70 @@
         ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
       ]
+    },
+    {
+      "id": "EFF-M4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M4.md",
+      "verifiedBase": "4f2d37d1a3954cdf226af9584b15f6663929e92b",
+      "changeManifest": [
+        { "action": "DOC", "path": "docs/implementation/preambles/HB-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/INT-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/GR-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/INFRA-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/INDEX.md" },
+        { "action": "DOC", "path": "docs/FABLE_VALIDATION_QUEUE.md" },
+        { "action": "DOC", "path": "docs/SOL_QUEUE.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "const ARGUED_ROSTER_CEILING = 19;" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "const UNLAYERED_BASELINE_CEILING = 179;" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Hot files" },
+        { "path": "docs/implementation/preambles/HB-PREAMBLE.md", "symbol": "THE HB-SPECIFIC INSTANCE" },
+        { "path": "docs/implementation/preambles/GR-PREAMBLE.md", "symbol": "HZ-SIZECEILING" },
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "HZ-SIZECEILING" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the claims pin failure identity is byte-identical to base and no frozen naked-claim key grows" },
+        { "id": "A2", "case": "every anchor was present exactly once before its edit; no fuzzy match was used" },
+        { "id": "A3", "case": "the HB ceiling reads 19 with its transition walk recorded, and the unlayered baseline still reads 179" },
+        { "id": "A4", "case": "INT provenance names both dates with their shas and defers to the walker" },
+        { "id": "A5", "case": "GR and INFRA both name FOUR hot files matching the standard own table" },
+        { "id": "A6", "case": "INDEX carries gr-5a, int-3b and eff-1a blocks in reverse-chronological order plus the convention block" },
+        { "id": "A7", "case": "zero stale F9 assertions survive on the build branch outside the two chair-reserved architecture sites" },
+        { "id": "A8", "case": "the lighting census is unmoved and validate:packets exits 0" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/docs/enforcement-claims.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "EFF-M5",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M5.md",
+      "verifiedBase": "4f2d37d1a3954cdf226af9584b15f6663929e92b",
+      "changeManifest": [
+        { "action": "DOC", "path": "docs/DESIGN_BUILD_EFFICIENCY.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "docs/DESIGN_BUILD_EFFICIENCY.md", "symbol": "## §2 · TRAIN LANDINGS" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Differential member caps" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the claims pin identity holds and CLAIM_RE over the folded file is zero" },
+        { "id": "A2", "case": "the fold is verbatim: the inverse check reproduces the ledger file byte-for-byte" },
+        { "id": "A3", "case": "the re-charter block, 2.6, 2.7 and the aligned refusal line are all present after the fold" },
+        { "id": "A4", "case": "2.7 carries the corrected write-through-symlink sense naming per-member cacheDir isolation" },
+        { "id": "A5", "case": "the header states the folded-volume convention" },
+        { "id": "A6", "case": "the lighting census is unmoved and validate:packets exits 0" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/docs/enforcement-claims.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
     }
   ]
 }
