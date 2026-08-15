@@ -3992,3 +3992,27 @@ product thesis, and the constitution held under measurement.**
    their premise maps, trajectory pins per §72.3, cs-6's both-sides
    cure ending the preserved-`ally` visibility hold. prf-1's
    executor dispatches when R1 holds. J-TC19-1..10 SIGNED.
+
+## §106 · THE NINE-VOLUME STALE-SITE SITTING EXECUTED (2026-08-15,
+## chair; evidence laneSTS-consolidated.md + laneSTS-apply receipts,
+## every anchor verified count-1 against live branch bytes)
+
+1. **NINETY of 107 blocks are APPLIED in this commit** across the
+   nine ledger volumes (WC 8 · WF 9 · EP 10 · POP 12 · INT 14 ·
+   WY 11 · TR 15 · CW 9 · DFA 2): 85 mechanically with strict
+   one-anchor verification, 5 chair-placed (the WF tuning-home law
+   before §3; EP's seventh-pass block after REVISION 6; POP's
+   address-rot note after the §1 table; the two WY fragments whose
+   STS anchors had dropped the bullet indent). The CLAIM_RE screen
+   is ZERO on every touched file, before and after. The 17 ES/IN
+   blocks are ROUTED to the build-branch docs member per C-TLF-12
+   (their ledger copies lack the amendment blocks the anchors sit
+   in). The four judgment-flagged wordings were chair-read at apply.
+2. The DFA move (the bare F9 site drifted :3043 → :3006 since the
+   round) and the TR walker constraint (four exactly-once pinned
+   sentences, all worded around) were honored as STS assembled them.
+   The consolidation's 13-item not-done list is INHERITED as the
+   residue docket (the WC F-2 items 4-5 need laneWCC-cures.md; the
+   POP inline addresses ride the address-rot note instead; the
+   charter/preamble cures ride their own commits). **The biggest
+   batched chair debt is CLEARED.**

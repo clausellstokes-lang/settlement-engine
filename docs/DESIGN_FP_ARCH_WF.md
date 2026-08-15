@@ -185,7 +185,7 @@ The eight flags and their lanes are the volume's §3, unchanged:
 | Flag | Lane (ANDs with) | Wave | First real gate read (manifest-timing commit) |
 |---|---|---|---|
 | `faithUnseatingEnabled` | LOCAL (deity presence) | WF-1 | the fall-classification fork in the WF-1 leaf, consumed at advanceReligionStates' fold |
-| `pilgrimageEnabled` | SPREAD + SP-1 lit | WF-2a | pilgrimSeason.js's subsumption switch |
+| `pilgrimageEnabled` | SPREAD + `errandSpineEnabled === true` | WF-2a | pilgrimSeason.js's subsumption switch |
 | `faithStanceConsequencesEnabled` | SPREAD | WF-3 | the aggression-threshold read in the WF-3 leaf |
 | `omenReadsEnabled` | LOCAL | WF-4 | omenReading.js's qualifying-calamity gate |
 | `faithSchismEnabled` | LOCAL (+ covert seam arm) | WF-5a | the split-condition gate in the WF-5 leaf |
@@ -236,6 +236,24 @@ volume, verified via V22/V23).
 
 ---
 
+**THE WF TUNING-HOME LAW (WF-F round, chair-signed).** Every new WF
+dial lands INSIDE a frozen tuning table: dials on existing modules join
+that module's existing table (the eight measured homes —
+`RELIGION_TUNING`, `RELIGION_LEGITIMACY_TUNING`, `PIETY_TUNING`,
+`PANTHEON_TUNING`, `SACRED_CLAIM_TUNING`, `STANCE_TUNING`,
+`STANCE_LANE_TUNING`, `CRISIS_CONVERSION_TUNING`); every NEW leaf mints
+exactly ONE `<NAME>_TUNING` frozen table in its own module (patronFall,
+pilgrimSeason, stanceConsequences, omenReading, covertCongregation,
+faithTermExecutors, tithe, realmFaithArcs as built) — never bare module
+constants (the `pilgrimage.js:32-38` six-bare-dials shape is the
+measured counter-example, not the template). Every volume-proposed
+value (520w, 156w, 260w, ≥3, the caps, the bands) enters its wave's
+compile as a RECOMMENDATION that must carry an executed derivation from
+measured substrate or the compile STOPs at promotion (§43's
+rationale-or-STOP; the HB-2B derivation rows are the template). All are
+unsoaked and ride the owner's tuning signature — lighting and
+ratification stay owner-held per the volume's own header.
+
 ## §3 CANONICAL MODEL — zero new top-level keys (the fight, won)
 
 No new `worldState.*` top-level key anywhere in the program. Six persisted
@@ -249,9 +267,13 @@ worldState.religionStates[cid]          EXISTS (one writer: the advanceReligionS
   .patronFalls[]                        WF-1  { ref, cause, atTick } ring, cause in the
                                               closed five-token vocabulary (J-WF-5);
                                               capped <= 3 (the pruneSuppressed idiom)
-  .deities[ref].suppressedAtTick        WF-1  stamped by the two existing suppression
-                                              transitions (religionState.js:262/:277)
-                                              when lit; absent => legacy codepoint prune
+  .deities[ref].suppressedAtTick        WF-1  stamped at EVERY suppression write site
+                                              (comment-stripped source scan for the
+                                              suppressed:true write idiom -- the scan
+                                              IS the list; three at the WF-F stamp:
+                                              :262/:277/:485 incl. the patron-siege
+                                              loop) when lit; absent => legacy
+                                              codepoint prune
   .deities[ref].covert                  WF-5b { share(band), sinceTick, shepherdRef? }
                                               (J-WF-4: in place, never a parallel ledger)
   .templeWealth                         WF-7  { band, movedTick } — banded stock, not
@@ -278,9 +300,27 @@ ledger under SP-1's lifecycle, when built), fall/split/exposure receipts
   writer (patronFalls at a classified fall; suppressedAtTick at the suppression
   write; covert at the suppression/imposed-flip fraction; templeWealth at the
   first non-zero quarterly fold; creedRef at the split founding; omenReadings at
-  a qualifying calamity on a deity-bearing settlement). No load-time
-  normalizer exists for religionStates or spatialLedgers sub-ledgers — shape
-  discipline is pinned AT the writer (the occupations precedent, war §5 WR-10).
+  a qualifying calamity on a deity-bearing settlement). LIFECYCLE
+  RE-DERIVATION LAW (WF-F round; the "no load-time normalizer" sentence
+  is STRUCK — refuted: `worldState.js` `CONDITIONAL_LEDGER_KEYS` lists
+  BOTH `religionStates` and `spatialLedgers`, its array order IS the
+  pinned serialized key order, and `ensureWorldState` materializes each
+  present key through one of three branches). Each persisted WF
+  addition's CREATE/PERSIST clause is re-derived at its wave's compile
+  against `CONDITIONAL_LEDGER_KEYS` + the `ensureWorldState` loop,
+  naming: (i) the branch its ledger takes (frozen / deep-clone /
+  dedicated normalizer — and whether a dedicated normalizer is owed;
+  `normalizeEnvoyRows` is the precedent); (ii) the byte-order
+  consequence — top-level order is the pinned serialized order and
+  NEVER moves for WF (zero new top-level keys, §3's own law — assert
+  it); sub-key order inside `religionStates[cid]` and `spatialLedgers`
+  is the writer's enumeration — pin it explicitly; (iii) round-trip
+  pins run THROUGH `ensureWorldState`, both arms (field absent / field
+  present); (iv) the VEIL check — assert, never assume, that the new
+  material sits inside ledgers `WORLD_SNAPSHOT_HARD_DENY` already
+  covers. WF-4's drop-when-empty fence is asserted against the loop's
+  measured behavior for an absent `spatialLedgers.omenReadings`, at the
+  byte level.
 - **READ:** consumers read through the leaves' published reads only; the
   dossier prose reader (DS-FTH-3) and FaithSection model read the same
   spellings — the corpus is the reader-side contract (R8).
@@ -358,7 +398,12 @@ chain + typed action + settlements by name + reason (L6).
 
 ### WF-1 — THE UNSEATING (`faithUnseatingEnabled`; LOCAL)
 - **Files (measured):** religionState.js 356 eff/800 (~440 headroom — the
-  suppressedAtTick stamps at :262/:277 and the prune's flag-forked narrative
+  suppressedAtTick stamps at EVERY suppression write site — derived by
+  comment-stripped source scan, never hand-listed (three at the WF-F
+  stamp: :262/:277/:485, the patron-siege loop included), with a census
+  pin: scanned write-site count EQUALS stamped-site count, exact
+  (currently 3), so a future fourth site reds the pin instead of
+  minting a stamp-less entry — and the prune's flag-forked narrative
   sort key at :353-357 are small in-place edits, legal); NEW leaf
   `patronFall.js` (classification + ring writer helper consumed by the fold;
   budget ≤ 200 eff); warTermination.js **FROZEN 818** — the
@@ -395,11 +440,24 @@ chain + typed action + settlements by name + reason (L6).
   (Reformation detector reads the ring).
 
 ### WF-2 — PILGRIMS + LEGATES (`pilgrimageEnabled`; SPREAD; two slices)
-- **HARD PRECONDITION (measured):** SP-1 absent at HEAD (V40/R5). WF-2b does
-  not build until `spatialLedgers.errands` exists with typed purpose
-  `religious`; war's ENVOY_PURPOSES is closed ['sue','self_parlay'] and is NOT
-  extended (its walkers pin closure). WF-2a (the season) has no SP-1
-  dependency and may land first within the slice discipline.
+- **HARD PRECONDITION — DISCHARGED (WF-F round):** SP-1 is BUILT
+  (`src/domain/worldPulse/errandMint.js`; substrate
+  `worldState.envoyErrands` per chair ruling CR-FP-10 keep-in-place;
+  flag `errandSpineEnabled`, manifest row 7 — NOT
+  `spatialLedgers.errands`, which never existed). WF-2b is the
+  build-out of the TWO reserved rows in
+  `envoyErrandVocabulary.js:295 ERRAND_CONSUMERS`:
+  `legates → src/domain/worldPulse/legateErrand.js` (purposeClass
+  `religious`) and `pilgrims → src/domain/worldPulse/pilgrimErrand.js`
+  (purposeClass **`personal`** — NEVER `religious`); each module lands
+  WITH its row's `built:true` flip in the SAME commit
+  (`tests/lint/errandConsumerRegistry.walker.test.js` reds both
+  directions). `ENVOY_PURPOSES` stays closed at `['sue','self_parlay']`
+  — that leaf is the war half, and "never widen war's envoy vocabulary"
+  binds THAT LEAF ONLY; the class layer (`ENVOY_PURPOSE_CLASSES:130`,
+  `PURPOSE_CLASS_BY_PURPOSE:147`) is the lawful join. WF-2a (the
+  season) has no SP-1 dependency and may land first within the slice
+  discipline.
 - **Files (measured):** pilgrimage.js 41 eff (the subsumption seam — the scalar
   source switch is a ~5-line fork); NEW leaf `pilgrimSeason.js` (season
   composition over the existing draw math; budget ≤ 250 eff); NEW leaf
@@ -536,10 +594,15 @@ chain + typed action + settlements by name + reason (L6).
   declared fallback if GR-3 declines the term).
 
 ### WF-6 — FAITH TERMS (`faithTermsEnabled`; SPREAD; needs SP-3 lit + GR-3 rows)
-- **Files (measured):** peaceTermsCatalog.js 80 eff/800 — GR-3's five faith
-  rows land HERE (R1; membership + spelling are GRAMMAR's, GR-3's minting
-  site); peaceTerms.js **776 eff/800 — ~24 lines of headroom**: net-zero seam
-  lines ONLY (the volume's ceiling claim, now measured); ALL executors land in
+- **Files (measured — CORRECTED, WF-F round):** GR-3's five faith rows
+  are LANDED (GR-3a @ `0be4800d`; catalog `family:'faith'` rows at
+  `peaceTermsCatalog.js:228-245`; catalog now 24 terms / 11 families) —
+  WF-6 compiles as a CONSUMER and mints NO catalog row (a re-mint
+  collides with GR-3a's walkers); peaceTerms.js is a
+  **ZERO-HEADROOM-CLASS file (797/800 at the WF-F stamp)**: net-zero
+  seam lines only, re-measured at the compile's own base — any growth
+  is a STOP plus an extraction recipe, never a squeeze (the WF-1
+  warTermination rule verbatim); ALL executors land in
   NEW leaf siblings (`faithTermExecutors.js` or per-family leaves; budget
   ≤ 300 eff total); negotiationPictures.js (BUILT, R5) consumed never forked.
 - **Deltas from the volume (compiled):** (i) the SIZING pin derives from the
@@ -668,10 +731,15 @@ chain + typed action + settlements by name + reason (L6).
 
 1. **GR-3 / TR-5 / WR-10 — the catalog tripwire (the TR-5 pattern, live).**
    `TERM_FAMILIES` is DERIVED (peaceTermsCatalog.js:192) and
-   `catalogGrewSinceWr10()` (sovereigntyBundle.js:166) reds the moment any
-   family lands beyond WR-10's landing set — the pin
-   tests/domain/sovereigntyBundleWr10.test.js:321 asserts `false` TODAY.
-   **The GR-3 landing commit (GRAMMAR's) trips it BY DESIGN**: per the war
+   `catalogGrewSinceWr10()` (sovereigntyBundle.js:166) FIRED at GR-3a's
+   landing and is ASSERTED IN ITS FIRED STATE — the pin now sits at
+   `sovereigntyBundleWr10.test.js:336` asserting `true`, with `:341`
+   naming the grown set EXACTLY `['commercial','faith','population']`
+   and the landing record deliberately NOT widened (the same
+   struck-widening law the WC family ruled at §52.1). The
+   widening/tripwire half of this seam is DONE; WF-6's obligations
+   reduce to its own half (call-time family derivation; no family
+   literal outside the catalog). Historical record: per the war
    volume's own §3 instruction, that commit re-reads WR-10's degradation note,
    widens the bundle expectations, and deletes the dependency row. THIS
    program's obligation, pre-pinned from the faith side: WF-6's executors
@@ -689,11 +757,15 @@ chain + typed action + settlements by name + reason (L6).
    tripwire — a pin asserting the CPL port symbols are UNCONSUMED by faith
    goes red when the port lands, instructing the widening (the
    catalogGrewSinceWr10 shape, applied to the port).
-3. **SP-1 (absent — V40/R5).** WF-2b binds by SP number; the errand ledger's
-   name resolves at build (VERIFY-AT-BUILD). Pre-pin: WF-2b's spec carries a
-   red-until-built existence probe (module + purpose-token `religious`), so
-   the wave cannot silently build against war's closed ENVOY_PURPOSES
-   (['sue','self_parlay'], envoyErrandVocabulary.js:119 — the wrong ledger).
+3. **SP-1 (DISCHARGED — WF-F round).** The spine is BUILT and the
+   ledger name is resolved: `worldState.envoyErrands` (CR-FP-10). The
+   red-until-built existence probe is DEAD — its trigger fired — and
+   is STRUCK: a probe for module + purpose-token `religious` would
+   pass on legates alone and silently mis-type the pilgrim half
+   (`personal`, never `religious`). The landing surface is the TWO
+   reserved `ERRAND_CONSUMERS` rows (see WF-2's corrected
+   precondition), walker-policed both directions — the registry row,
+   not a probe, is the seam.
 4. **SP-4 posture (absent) — the name-collision tripwire.** `riskToleranceOf`
    already exports from src/domain/roads/state.js:319 (npc-scoped). Pre-pin:
    every WF posture-consuming spec names the SP-4 module PATH it expects and
