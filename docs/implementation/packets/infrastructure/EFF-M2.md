@@ -1,6 +1,6 @@
 # EFF-M2 — the packet-standard omnibus
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 3 of 4 — the first of the two docs members
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256

@@ -1,6 +1,6 @@
 # EFF-M3 — the family preambles: caps, stamps, and the standing battery templates
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 4 of 4 — the train's terminal member
 - **Preamble:** ⚠ this member EDITS all five family preambles, including

@@ -2975,7 +2975,7 @@
     },
     {
       "id": "EFF-M2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M2.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [
@@ -2983,7 +2983,10 @@
       ],
       "requiredSymbols": [
         { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Train landings" },
-        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Family packet preambles" }
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Family packet preambles" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Differential member caps" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Premise maps and scoped truncation" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Burning a census row" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "the enforcement-claims pin stays green and no frozen naked-claim key grows" },
@@ -3001,7 +3004,7 @@
     },
     {
       "id": "EFF-M3",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M3.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [
