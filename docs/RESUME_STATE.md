@@ -234,6 +234,20 @@ the static security/privacy/billing posture audit** (injectable-filter
 class, RLS policies, the paywall trio, the ground-truth seam, PII,
 webhook verification) → `laneRSEC-*`.
 
+**✅ TC15 COLLECTED + §60 RULED (ledger `c80cf37d`): est-1 compiled with all
+three charter cures CORRECTED BY EXECUTION** — ⛔⛔ E-1 IS A LIVE TOTAL
+OUTAGE, not fixture rot: CONFIRMING ANY AUTO-DISCOVERED SUPPLY CHAIN THROWS
+TODAY (writer deliberately emits '' icons; the admission validator rejects;
+the charter's fixture patch would have greened three guards OVER the
+outage). Q1 ruled REPAIR (admission admits the deliberate output — proven
+byte-identical for non-empty). E-2 = a boundary anchor burning a FOURTH
+banked row; E-3's chartered rewrite measured ZERO (parks are
+TEST_CONTEXT_PARAM; replacement adopted). Member order REVERSED with
+reasons (the owner-gate-grazing E-1 last, never the green prefix); staged
+promotion PROVEN mandatory; ratchet 16→12 across the train; tuples
+BASE-BOUND (deltas are the durable product — the executor re-derives).
+est-1 is THIRD in the §59.6 queue.
+
 **LIVE (four lanes): TE12(INT-3B relanding) · RN-C(normalizer cure) ·
 R-SEC(security survey — the
 first fully-§48-treated family opening; the six house lines drafted for
