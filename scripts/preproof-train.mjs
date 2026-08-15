@@ -37,9 +37,14 @@
  *    that path resolves THROUGH the symlink into the executor tree, so N
  *    concurrent members plus any executor-tree run would share one physical
  *    cache. Each member therefore runs under a generated override config,
- *    written OUTSIDE the worktree (the throwaway tree stays porcelain-clean),
- *    that re-exports the member's own `vite.config.js` with an explicit `root`
- *    and a per-member absolute `cacheDir` under the run root;
+ *    written OUTSIDE the worktree, that re-exports the member's own
+ *    `vite.config.js` with an explicit `root` and a per-member absolute
+ *    `cacheDir` under the run root. ⚠ MEASURED, so no one inherits a rosier
+ *    claim: the override adds NO entry to the throwaway tree's own status, but
+ *    the tree is not porcelain-empty either — `git status` there reports
+ *    `?? node_modules`, because `.gitignore`'s `node_modules/` pattern matches
+ *    a DIRECTORY and the link step necessarily creates a SYMLINK. The tree is
+ *    removed with `--force`, so nothing survives the run;
  *  - ⭐ A RED IS ONLY A RED IF THE BATTERY ACTUALLY RAN. vitest exits 1 both for
  *    a failing test and for a STARTUP error (a bad reporter name, an unloadable
  *    config, no matching test files) — so the exit code alone cannot carry the
@@ -247,10 +252,11 @@ process.on('SIGINT', () => { void shutdown('SIGINT'); });
 process.on('SIGTERM', () => { void shutdown('SIGTERM'); });
 
 /**
- * The per-member vitest config. It lives OUTSIDE the worktree so the throwaway
- * tree stays porcelain-clean, names `root` explicitly so nothing depends on the
- * cwd default, and pins an absolute per-member `cacheDir` — the R-D8 isolation.
- * A tree with no vite.config.js (a toy probe repo) gets the bare override.
+ * The per-member vitest config. It lives OUTSIDE the worktree so it adds no
+ * entry to the throwaway tree's own status, names `root` explicitly so nothing
+ * depends on the cwd default, and pins an absolute per-member `cacheDir` — the
+ * R-D8 isolation. A tree with no vite.config.js (a toy probe repo) gets the
+ * bare override.
  */
 function writeMemberConfig(member, wtDir) {
   const configPath = join(runRoot, `${member.name}.vitest.config.mjs`);

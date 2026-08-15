@@ -1,6 +1,6 @@
 # EFF-M3 — the family preambles: caps, stamps, and the standing battery templates
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 4 of 4 — the train's terminal member
 - **Preamble:** ⚠ this member EDITS all five family preambles, including
@@ -167,3 +167,47 @@ byte-diff, A3's citation re-verification and A6's unmoved census, all exact-equa
 Verified base and final tree state · the five changed files with their before and after
 SHA-256s · A1-A7 with exact argv and exits · the claim count before and after · the census
 tuple unchanged · deviations `NONE` or a STOP · judgment calls in the train receipt.
+
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1a` train's I4 commit `3d50effb`.** Five docs files, zero production
+lines, zero census motion. Every case executed in a TEMP WORKTREE at `3d50effb` itself.
+
+- **A1** — the claims pin's failure identity is **byte-identical to base**: `1 failed | 20
+  passed (21)` at both `954b4e0f` and `3d50effb`, the same single banked arm, and the
+  naked-claim list is the SAME SIX entries — none in a preamble. The per-claim ratchet arm is
+  among the twenty that PASS at both commits, so no `FROZEN_NAKED` key grew. `CLAIM_RE` over
+  the authored block measured **zero** before the commit.
+- **A2** — the five appended blocks are **131 lines each**, and pairwise `diff` of GR against
+  HB, IN, INFRA and INT reports **no difference at all** once the section-number heading and
+  the single stamp line are excluded. One text, five copies, provably.
+- **A3** — provenance re-verified rather than inherited. `[receipt: TE13 C3/C6]` → TE13 §C3
+  is the two-armed eligibility control proved by reachability over 400 seeds and §C6 is
+  totality on the post-change composer; `[receipt: TE13 §3]` → the effective-line section
+  reading "eslint's own `Linter` under `max-lines {skipBlankLines, skipComments}`, never
+  `wc -l`"; `[receipt: TE13 C4]` → the dark golden byte- and sha-identical; `[receipt: TE12
+  M4]` → the exact-set walker arms; `[receipt: TE13 §4.3]` → arms 5 and 6, a duplicated
+  section heading and a rotted kind heading, each proven to throw; `[receipt: TE13 J-TE13-2 /
+  J-TE13-3]` → the census-ceiling fold and the cured-not-lowered floors idiom; `[receipt: TE13
+  §5]` → `REGISTRIES` 9→10 and `REGISTERED_KIND_COUNT` 111→112, both re-confirmed against this
+  base's capsule rows (`kindPoolFloorsRegistries: 10`, `kindPoolFloorsRegisteredKinds: 112`).
+  `[law: ODQ §73.3 F-1]` quoted verbatim; `[law: ODQ §50.2]` matches its three obligations
+  exactly; `[law: ODQ §75.1 option 2]` matches "one rationale row with a NEW ref … TWO surgical
+  inserts, never a re-serialization". T-PROSE claims **no receipt** and says so in its header.
+- **A4** — no per-wave figure entered any preamble; the stamp line is the only measured cell.
+- **A5** — the §93.3 window was re-measured in a clean worktree at base: `validate:packets`
+  **50 packets (0 READY)**, so zero non-terminal and the re-stamp cost nothing. §P8.6 now reads
+  `off **10**`, matching the capsule.
+- **A6** — the lighting census walker: **33 passed**, exit 0, at base and at this commit alike.
+- **A7** — `validate:packets` **54 packets (1 READY)**, exit 0, at this commit.
+
+⭐ **THE STAMP LINE IS THE MEMBER'S REAL JUDGMENT, AND IT REFUSED THE EASY READING.** §96.4's
+summary sentence says "every family stamped"; its own parenthetical enumerates WC · WF · EP ·
+POP · INT · WY · TR/IN/CW/ES. GR and HB are in neither the enumeration nor any §70.4
+acceptance, and INFRA has no annex to stamp. All three record FOUR with the door named, because
+writing 8 into an unstamped family's preamble would manufacture precisely the authority the
+stamp precondition exists to gate.
+
+**Deviations:** NONE. **Judgment calls:** in the train receipt.

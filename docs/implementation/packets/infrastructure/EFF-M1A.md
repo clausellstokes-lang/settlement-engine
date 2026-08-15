@@ -89,11 +89,14 @@ registrations, and a "truncation signal" naming a member killed by our own SIGTE
   measured, and the charter deferred the ceiling precisely because it needs real battery
   wall-clocks. Expiry SIGKILLs the process GROUP and reports `phase: 'timeout'` → exit 2.
 - **R-D8 — per-worktree cache isolation.** Each member runs under a generated override config
-  written OUTSIDE the worktree (so the throwaway tree stays porcelain-clean) that re-exports
-  the member's own `vite.config.js` with an explicit `root` and an absolute per-member
-  `cacheDir` under the run root. The `node_modules` link stays a PLAIN write-through symlink,
-  exactly as the charter's harness contract requires; isolation is bought by the config, not by
-  pretending the link is read-only.
+  written OUTSIDE the worktree, re-exporting the member's own `vite.config.js` with an explicit
+  `root` and an absolute per-member `cacheDir` under the run root. The `node_modules` link stays
+  a PLAIN write-through symlink, exactly as the charter's harness contract requires; isolation
+  is bought by the config, not by pretending the link is read-only. ⚠ Measured precisely: the
+  override adds no entry to the throwaway tree's own status, but that tree is not
+  porcelain-empty — `git status` there reports `?? node_modules`, because `.gitignore`'s
+  `node_modules/` pattern matches a DIRECTORY and the link step creates a SYMLINK. The tree is
+  removed with `--force`, so nothing survives the run.
 
 ### 3.6 A red is only a red if the battery ran
 
@@ -215,3 +218,11 @@ motion.
   reporter typo — R-D6's own class, surviving in a new form the audit's toy could not see
   because its stub ignored the flag. The cure is §3.6's verdict-evidence gate plus a live
   reporter pair, and `phase: 'startup'` is proven in both directions (H15 versus H2).
+
+⚠ **ONE WORDING CORRECTION, MADE WHILE THE CHAIN WAS UNEXPOSED.** §3.5 and the script header
+first said the generated config keeps the throwaway worktree "porcelain-clean". Measured in a
+temp worktree: the tree reports `?? node_modules`, because `.gitignore`'s `node_modules/`
+pattern matches a directory and the link step creates a symlink. The CODE is unchanged and
+correct — the config is still written outside the tree — and both sentences now state exactly
+what was measured. The three focused checks were re-executed at the terminal commit against the
+corrected file.

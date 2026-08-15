@@ -153,3 +153,37 @@ unmoved census — both exact-equality reads that fail closed.
 Verified base and final tree state · the one changed file · A1-A6 with exact argv and exits ·
 the claim count quoted before and after · the census tuple quoted unchanged · deviations `NONE`
 or a STOP · judgment calls in the train receipt.
+
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1a` train's I3 commit `0e8f39b2`.** One docs file, zero production lines,
+zero census motion.
+
+Every acceptance case was executed in a TEMP WORKTREE at `0e8f39b2` itself, with the
+enforcement corpus and the census walker reading that exact tree.
+
+- **A1** — the claims pin's failure identity is **byte-identical to base**: `1 failed | 20
+  passed (21)` at `954b4e0f` and `1 failed | 20 passed (21)` at `0e8f39b2`, the same single
+  banked arm, and the naked-claim list is the SAME SIX entries in the same order — none in a
+  file this member touches. The per-claim ratchet arm ("the banked naked-claim debt is frozen
+  PER CLAIM") is among the twenty that PASS at both commits, so no `FROZEN_NAKED` key grew.
+  `CLAIM_RE` over the authored bytes measured **zero** before the commit.
+- **A2** — six new top-level sections between `## Train landings` and `## Family packet
+  preambles`; `git show --stat` reports 151 insertions and 3 deletions, the three deletions
+  being the re-stamped `**Measured tree:**` lines.
+- **A3** — no census tuple, seal, denominator or per-family figure appears: the cap table is
+  law, and the section says in terms that a family's own preamble is where its stamp is read.
+- **A4** — every queue citation resolves by number; the ledger-branch citations are named as
+  such in the header, with the fold recorded as owed.
+- **A5** — `validate:packets` **54 packets (1 READY)**, exit 0, at this commit.
+- **A6** — the lighting census walker: **33 passed**, exit 0, at base and at this commit alike.
+
+⚠ **A DIVERGENCE FOUND WHILE COMPILING IS RECORDED, NOT REPAIRED.** `docs/DESIGN_BUILD_
+EFFICIENCY.md` on this branch predates the chair's §2.4-R2, §2.6 and §2.7 amendments, which
+live only on `review-fixes-2026-07-08`. Re-folding is a chair act; the sections therefore state
+their law in full rather than delegating to a citation a reader cannot follow here, and the
+header names the fold as owed.
+
+**Deviations:** the recorded divergence above. **Judgment calls:** in the train receipt.

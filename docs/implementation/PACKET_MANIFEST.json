@@ -3004,7 +3004,7 @@
     },
     {
       "id": "EFF-M3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M3.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [
@@ -3019,7 +3019,9 @@
         { "path": "docs/implementation/preambles/GR-PREAMBLE.md", "symbol": "# GR FAMILY PACKET PREAMBLE" },
         { "path": "docs/implementation/preambles/HB-PREAMBLE.md", "symbol": "# HB FAMILY PACKET PREAMBLE" },
         { "path": "docs/implementation/preambles/IN-PREAMBLE.md", "symbol": "# IN FAMILY PACKET PREAMBLE" },
-        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" }
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" },
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "THE §74 CAP, THE §70.4 STAMP PRECONDITION" },
+        { "path": "docs/implementation/preambles/INT-PREAMBLE.md", "symbol": "of `kindPoolFloorsRegistries` off **10**" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "the enforcement-claims pin stays green and no frozen naked-claim key grows" },
