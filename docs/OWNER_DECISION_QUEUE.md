@@ -2711,3 +2711,23 @@ round for each with fable"**
 4. Sequencing home: the round is a named precondition line in each
    family's first train charter; a compile citing an Opus annex with no
    Fable-round stamp inherits a STOP.
+
+### §70a · TIMING REFINED ON THE OWNER'S CHALLENGE (2026-08-15, chair;
+### owner: "why haven't you resweeped everything? ... you had time")
+
+The chair's §70.3 just-in-time reasoning conflated the round's two
+halves, and the owner's challenge is SUSTAINED on one of them:
+- **The substrate half — (a)+(b) — rots and stays landing-adjacent**
+  (re-verifying rows that intervening landings will void again is
+  re-paid work; the §61 increments already hold this half green).
+- **The DESIGN-LAW half — (c) — does NOT rot at the substrate rate**
+  (a volume's internal logic and cross-volume law fit move only when
+  law moves) **and could have been running in parallel all along. It
+  starts NOW, batched across the free lane capacity**, nearest-train
+  families first: WC (full round — its train is within the §70.3
+  window anyway) → WF → EP → POP → INT → WY → tails. The chair's
+  earlier sequencing (spending the reopened Fable lanes on §51's
+  cross-cutting dimensions before per-volume law passes) is recorded
+  as the judgment it was — higher yield per lane-hour, but it left
+  the law passes unscheduled rather than queued, which this section
+  cures.
