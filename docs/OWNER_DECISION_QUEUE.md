@@ -4197,3 +4197,39 @@ before you do the full soak and tune."**
    §72.3 golden re-record quoting the four-family table, the
    expected-green terminal, the capsule, both trains closed for a
    single chair CAS.
+
+## §112 · THE DECLARED-SHIFT BATCH CLOSED AND EXPOSED — THE
+## TWENTY-FIRST EXPOSURE (2026-08-15, chair; evidence
+## laneTE21-receipt.md, 28 KB)
+
+1. **cs-a AND cs-b ARE LANDED AND EXPOSED TOGETHER** (CAS
+   `eab6eba0 → bd0439d1`, validator 74/0 own-shell): all EIGHT
+   members of the signed batch — the five correctness cures, cs-6's
+   both-sides allied fix, gen-1a's duplication cure, and CS-B0's
+   null-latch kill — with the four golden families re-recorded
+   LAWFULLY under amended §72.3 (the G1 commit quotes the table
+   verbatim), the gate honestly green at 12/28238 ceiling-exact, and
+   the capsule stamped at the re-record commit. The gate was run
+   TWICE with only the post-edit run cited — the edit-voids-green
+   law practiced.
+2. **The three trajectory pins landed each with a mutant that reds
+   it alone** (sharpest: M2 separating the signed mint-gate reading
+   from the correct-LOOKING siege-clock alternative — the pin now
+   IS the §107.3 ruling); the pre-packet consumer sweep (991 files)
+   caught the executor's own pin breaking the un-anchored-negative
+   ceiling (cured with the anchor idiom, not muted) and proved
+   `metronomeCooldownLint` pre-existing three independent ways.
+   TWO inherited figures corrected on the record (the EXPECTED-DEAD
+   population is 5→4 per the compile's own prediction; the CS-B2
+   fixture could not execute its own defect and was scaled —
+   J-TE21-1). The parked-suite census invisibility got a fresh
+   recorded instance (upswingKernel.test.js, parked at base,
+   attributed by per-file revert and recorded in the walker's
+   ancestry).
+3. J-TE21-1..10 SIGNED. ⚠ TE21 wrote three memory entries
+   unbriefed — content unreviewed; the chair verifies them at the
+   next memory touch (the grazing noted, not punished: the entries'
+   subjects are the lane's own measured lessons). **AUDIT-ZERO
+   state: the engine-correctness and generation-duplication rows are
+   DONE; TC21 compiles da-1..6 now; remaining after da: dom-1..3 →
+   micro-batch → then the family builds.**
