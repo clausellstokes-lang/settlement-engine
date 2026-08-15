@@ -3597,3 +3597,40 @@ product thesis, and the constitution held under measurement.**
    TL-F (the tails, the LAST round) dispatched — at its acceptance
    every family in the estate is stamped and the §74 caps apply
    estate-wide.
+
+## §95 · est-1 COLLECTED AT ITS GREEN PREFIX — THE THIRTEENTH
+## EXPOSURE, AND CR-EST-CONTROLZERO (2026-08-15, chair, vetoable;
+## evidence laneTE15-receipt.md, 27 in-shell exits)
+
+1. **EST-A + EST-B are LANDED AND EXPOSED** (CAS `a6fd6395 →
+   5c774940`, porcelain zero, validator 49/0 own-shell, both
+   gate-tails 0 with agreeing in-shell exits): E-2's cure was
+   CODE-RIGHT-PIN-WRONG made whole — a 6,000-char window scanned
+   6,000 of a 7,717-char body, hiding the seed carry AND the only
+   branch handling the untrusted snapshot blob from its own XSS
+   negative; the anchor now sits on the impl's closing brace with
+   zero authored width. E-3 returned 16 titles + 4 suites that were
+   RUNNING AND INVISIBLE to the evidence layer; the chartered cure
+   measured zero as a counterfactual and was rightly not landed.
+2. **The honesty rows are RATIFIED**: the ratchet trajectory landed
+   at 15, not the declared 12 — stated, not left to be noticed;
+   both compile premises that mattered were refuted and corrected in
+   place (four fog modules not three; four paths per member not
+   three); and the lane's real product is LAW: **burning a census
+   row is NEVER a one-path act** — every inventory asserting the
+   row's debt goes stale the moment the win lands; compiles price
+   the inventory sweep with the burn.
+3. **⭐ CR-EST-CONTROLZERO IS RULED — THE ZERO-ASSERTION
+   CONVERSION**: when EST-C's payment empties the ordinary-debt
+   population, `ORDINARY_TEST_CONTROL` converts to the victory
+   assertion (population exactly zero; message names the
+   eradication; any future ordinary red reds the gate on arrival,
+   never banked). The lock-the-win door of the census-ceiling
+   family; the three partial shapes the executor refused stay
+   refused; re-filling the control by mis-certifying a walker is
+   FORBIDDEN by name.
+4. **est-1c is DISPATCHED as the one-member follow-up** (the §60.3
+   staged shape) on the new base: the preserved EST-C packet + the
+   proven cure + the conversion, executed by TE15's continuation
+   with context intact. The persistence-admission grazing stays on
+   the veto surface.
