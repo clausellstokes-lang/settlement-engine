@@ -64,9 +64,16 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      and what the next action is. This is the ONLY part a script cannot know. -->
 
 # ⭐⭐ CURRENT (2026-08-15, true date — see the §62/§63 boundary erratum:
-# earlier "08-16" stamps were clock skew) — RN-C RULED §64 (B1 SIGNED /
-# B2 REFUSED, rn-1 queued FIFTH); §63 pre-coding law RATIFIED by owner
-# ("do what you recommend"): one-slot reference drafts only
+# earlier "08-16" stamps were clock skew) — ⭐⭐ §71 PUSH PROGRAM RULED
+# (owner): AUDIT-ZERO GATE → FIRST PUSH VIA PR → then one PR per FAMILY
+# completion. NO push before all §51 audits complete AND every finding
+# is fixed to ZERO (owner-parked items excluded, listed in the PR body).
+# Ledger branch + refs/trains/* ride pushes as branch backup, NEVER
+# merged; merging any PR = owner act. `gh` absent — part of push act.
+# Custody risk OPEN until first push (everything since 07-26 local-only).
+# Also this date: RN-C RULED §64 (B1 SIGNED / B2 REFUSED, rn-1 queued
+# FIFTH); §63 pre-coding law RATIFIED ("do what you recommend"):
+# one-slot reference drafts only
 
 **THE LOOP ORDER STANDS: run sweep/fix/re-sweep + the executor queue until
 NOTHING MATERIAL LANDS** (owner, verbatim "do it until nothing material

@@ -2731,3 +2731,51 @@ halves, and the owner's challenge is SUSTAINED on one of them:
   as the judgment it was — higher yield per lane-hour, but it left
   the law passes unscheduled rather than queued, which this section
   cures.
+
+## §71 · THE PUSH PROGRAM RULED — PR CADENCE AND THE AUDIT-ZERO GATE
+## (owner, two orders 2026-08-15 in-chat; operative reading recorded)
+
+Owner, verbatim, first order: **"okay after landing each family push it
+via pull request"** — then, amending the start, second order: **"after
+the audits are done, do the fixes for them if anything (comprehensively
+fix every finding that it finds down to zero on all of them) then do the
+first push via pull request"**
+
+1. **THE AUDIT-ZERO GATE precedes the FIRST push**: (a) all §51
+   dimensions complete (correctness and generation are live; performance,
+   docs, ops, market queued; then the chair synthesis); (b) EVERY finding
+   from every audit lane is comprehensively fixed to zero — the da-1..5
+   display family, the machinery micro-batch, the services repair, the
+   rn-1 arms, G1–G4, the law-body S-rows and build-docs member, and
+   whatever the remaining dimensions surface. "Fixed to zero" means
+   landed with proof under the standing gates, not triaged away.
+2. **EXCLUDED from "zero" by carve-out nature**: findings whose cure is
+   an owner decision stay parked and surfaced (today: the 21-row cull
+   §67.6, Q4 import-vs-restore §66.4, P1/P6, "campaign" naming, §13) —
+   the chair cannot zero an owner-parked item; each is listed in the
+   first PR's body instead.
+3. **THEN the first push via pull request**, and thereafter **one push +
+   PR at each FAMILY completion** (the first order's cadence). Mechanics
+   recorded now, executed then: the build branch pushes and carries the
+   PR; the ledger branch and `refs/trains/*` ride the same act as pure
+   branch pushes for custody (⛔ the ledger branch NEVER merges to
+   master — branch backup only); MERGING any PR remains an owner act
+   (master may deploy). PR bodies state the dark-flag posture. Tooling
+   note: `gh` is absent on this machine; installing it (or using git +
+   manual PR) is part of the first push act.
+4. ~~This section SUPERSEDES the §70a-era custody recommendation's
+   immediate-baseline shape: the owner chose audits → zero → push.~~
+   **AMENDED BY §71.5 minutes later — the baseline is restored.**
+5. **THIRD ORDER (owner, verbatim): "actually, do a baseline push via
+   pull request now, then continue with everything else."** Operative:
+   the BASELINE push executes NOW — the build branch (`d5a6c009`) +
+   `refs/trains/*` to origin, and the baseline PR opens from
+   `claude/composite-r4` → `master` (dark posture stated; merging
+   remains an owner act). ⚠ The LEDGER branch is DEFERRED from this
+   push: §1 T1 binds — `marketing/` (~460MB of masters) rides that
+   branch and T1's recorded default (move masters out, commit the
+   removal) must execute first; the ledger push joins the next push
+   act after T1. The AUDIT-ZERO GATE (§71.1) still governs the first
+   POST-BASELINE family push; the per-family cadence (§71.3) is
+   unchanged.
+
