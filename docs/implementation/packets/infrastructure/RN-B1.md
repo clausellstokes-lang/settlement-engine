@@ -1,8 +1,14 @@
 # INFRA / RN-B1 — the SIGNED legacy-live content cure (the train's LAST member)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `196b256a44dd6032e2684ed330aba437553bc91c`
   (RN-C's implementation commit)
+- **Landed:** `9c8fe6cd` — chain: promotion `946dbd5b` → content `9c8fe6cd`, the train's
+  terminal content commit. Battery green (8 files / 122 tests, exit 0 after the last edit);
+  the SAME-SEED GOLDEN SUITE byte-identical at 87 files / 623 tests, exit 0; the first-paint
+  budget re-verified against a real build with all three guards RUN (28/28); both typecheck
+  ratchets at their exact floors 173/173 and 1134/1134; OSR, eslint and the anchor walker
+  exit 0. Census re-derived WHOLE: `2438/364/2074/20206/5672`, `files` unmoved.
 - **Train:** `rn-1`, member **4 of 4** — ⛔ **THE TRAIN'S LAST MEMBER, AND NEVER ITS GREEN
   PREFIX** (§64.2, the est-1 ordering law). It is ordered last precisely so that its
   owner-gated content can never strand the structural members in front of it.

@@ -9109,7 +9109,7 @@
     },
     {
       "id": "RN-B1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/RN-B1.md",
       "verifiedBase": "196b256a44dd6032e2684ed330aba437553bc91c",
       "changeManifest": [
