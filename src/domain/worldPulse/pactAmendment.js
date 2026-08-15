@@ -46,7 +46,7 @@
  *   tests/property/pactFormationDormancyFence.test.js
  */
 import { setSpatialLedger } from '../spatial/distanceRead.js';
-import { treatyPairKey } from './peaceTermsPrimitives.js';
+import { rankState, treatyPairKey } from './peaceTermsPrimitives.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
 import { pactFormationActive } from './pactProposals.js';
 
@@ -110,6 +110,85 @@ function termsOf(value) {
 export function provenanceOf(treaty) {
   const written = text(recordOf(treaty).provenance);
   return PACT_PROVENANCE.includes(written) ? written : 'dictated';
+}
+
+/**
+ * ── GR-5A: THE MONOTONE MEMORY ─────────────────────────────────────────────────
+ *
+ * THE GATE (§3, the CQ5 law). A VIRTUAL key: absent from `DEFAULT_SIMULATION_RULES` and
+ * from every preset spread, so a campaign that never lights it pays ZERO persisted bytes;
+ * read strictly with `=== true`, so ABSENT and FALSE are identical at the decision site;
+ * manifested in `ENGINE_GATED_VIRTUAL_RULE_KEYS` with its AUTHORED certification row in the
+ * SAME COMMIT as this, its first real gate read.
+ *
+ * ONCE and BY NAME, both deliberate and both the `pactFormationActive` precedent verbatim:
+ * by NAME because a frozen-list `.every()` conjunction is a computed member access that
+ * attributes to no key and would hide a fully wired flag from the engine-gated-key census;
+ * ONCE because two doors on one flag is how a deleted guard hides behind a surviving one.
+ *
+ * ⚠ THE GATE LIVES HERE RATHER THAN IN THE MOVER, and that is FORCED rather than chosen:
+ * `peaceTerms.js` measures 797 of a hard 800 effective lines with no size-baseline entry
+ * and no door, so every symbol this wave needs must arrive on an import edge that file
+ * ALREADY has. This module is one of them.
+ *
+ * @param {unknown} worldState @returns {boolean}
+ */
+export function treatyRenewalActive(worldState) {
+  const rules = recordOf(recordOf(worldState).simulationRules);
+  return rules.treatyRenewalEnabled === true;
+}
+
+/**
+ * THE READ that resolves an absent memory without writing it — the `provenanceOf` discipline
+ * one function above, verbatim.
+ *
+ * ⭐ IT RECORDS HISTORY SINCE LIGHTING, AND THAT IS DECLARED RATHER THAN IMPLIED. A record
+ * written before this wave existed carries no key, and a record whose world never lit the
+ * flag never gains one; both answer `honored`, because the instrument has no observation of
+ * anything worse ON RECORD. Nothing migrates and nothing is backfilled (T4).
+ *
+ * ⚠ THE RECEIVER IS A CALL, NOT A BARE `treaty.` CHAIN, and that is load-bearing: the
+ * observed-shape detector grounds a finding by its receiver root, and a CallExpression
+ * receiver resolves to no shape at all. `recordOf(treaty).worstObservedEver` therefore costs
+ * this file zero inventory rows, where a bare chain in a new function may not.
+ *
+ * TOTAL: any shape at all — null, a number, a foreign string, a missing field — answers
+ * `honored` without throwing, because the ordering is what decides membership.
+ *
+ * @param {unknown} treaty @returns {string} 'honored' | 'strained' | 'defaulted'
+ */
+export function worstObservedEverOf(treaty) {
+  const written = text(recordOf(treaty).worstObservedEver);
+  return rankState(written) > 0 ? written : 'honored';
+}
+
+/**
+ * THE MONOTONE FOLD — the whole of GR-5's substrate, and the one thing a treaty record
+ * cannot do today.
+ *
+ * `complianceState` is OVERWRITTEN every advance from the current tick's observation, so a
+ * pact that was strained for a decade and honoured last week is, on the parchment, a pact
+ * that was never strained. This fold is the counterforce: it moves UP the `rankState`
+ * ordering and never down, so the record keeps the worst it was ever SEEN to do.
+ *
+ * ⛔ OBSERVED, NEVER TRUE. Its source is `comp.observedState` as already folded into the
+ * mover's `worstObserved` local — the fogged register a court actually has. An undetected
+ * cheat is not history, because the engine models what courts believe.
+ *
+ * ⛔ ONE ORDERING, IMPORTED. `rankState` is the family's own comparator; a raw string
+ * comparison would sort `defaulted < honored < strained` alphabetically and silently invert
+ * the fold. No second ordering is authored here.
+ *
+ * PURE: no rng, no clock, no write. It returns the next value and the mover assigns it.
+ *
+ * @param {unknown} treaty the record as it stands BEFORE this tick's write
+ * @param {unknown} observed this tick's worst OBSERVED compliance
+ * @returns {string} 'honored' | 'strained' | 'defaulted'
+ */
+export function worstObservedEverAfter(treaty, observed) {
+  const held = worstObservedEverOf(treaty);
+  const seen = text(observed);
+  return rankState(seen) > rankState(held) ? seen : held;
 }
 
 /**
