@@ -9213,6 +9213,160 @@
           "tests/lint/negativeAssertionAnchor.walker.test.js"
         ]
       ]
+    },
+    {
+      "id": "PRF-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/performance/PRF-1.md",
+      "verifiedBase": "630265b341ab406bb55438b277723154d871597b",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/region/goodsCatalog.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/goodsCatalogMemo.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/fixtures/goods-matcher-identity-corpus.json"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/region/goodsCatalog.js",
+          "symbol": "export function normalizeGood"
+        },
+        {
+          "path": "src/domain/region/goodsCatalog.js",
+          "symbol": "function fuzzyMatch"
+        },
+        {
+          "path": "src/domain/region/goodsCatalog.js",
+          "symbol": "const ALIAS_INDEX"
+        },
+        {
+          "path": "src/domain/region/goodsCatalog.js",
+          "symbol": "const FUZZY_CANDIDATES"
+        },
+        {
+          "path": "src/domain/region/goodsCatalog.js",
+          "symbol": "const FUZZY_MEMO"
+        },
+        {
+          "path": "tests/domain/goodsCatalogMemo.test.js",
+          "symbol": "goodsCatalog — fuzzyMatch memo is behavior-invisible"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the frozen pre-feature corpus replays through the restored module with 0 divergences across 1,236 tier-1 inputs and a 169-row deep slice"
+        },
+        {
+          "id": "A2",
+          "case": "the five landed equivalence titles pass, wording byte-identical"
+        },
+        {
+          "id": "A3",
+          "case": "the alias-snapshot arm discriminates: a runtime-pushed alias does not move a memo-COLD fuzzy resolution, and the arm reds when the pre-cure blob is planted"
+        },
+        {
+          "id": "A4",
+          "case": "the bounded memo clears past 512 unique labels and results stay correct"
+        },
+        {
+          "id": "A5",
+          "case": "generation same-seed goldens byte-identical — generation makes 0 normalizeGood calls on that path"
+        },
+        {
+          "id": "A6",
+          "case": "the simulated-forward same-seed goldens unmoved at 87 files / 623 tests, run after the last edit"
+        },
+        {
+          "id": "A7",
+          "case": "the lighting census re-reads with files/parked/credited unmoved at 2438/364/2074 and titles 20208"
+        },
+        {
+          "id": "A8",
+          "case": "goodsCatalog.js measures 435 effective under the 800 layer ceiling; delta +14 under the 15-line shared cap"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/goodsCatalogMemo.test.js",
+          "tests/domain/goodsSubsumption.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/marketPrices.test.js",
+          "tests/generators/isolatedTrade.test.js",
+          "tests/pdf/supplyChainObjectExports.test.js",
+          "tests/kernel/slugify.parity.test.js",
+          "tests/domain/magicSubstitutionReagents.test.js",
+          "tests/domain/newLaneCouplingsG1d.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/generation.test.js",
+          "tests/property/"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
+          "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
+          "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ]
+      ]
     }
   ]
 }
