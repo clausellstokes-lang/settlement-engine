@@ -3676,3 +3676,38 @@ product thesis, and the constitution held under measurement.**
    deliverable unblocking LG-2, a live army-supply double-drive, and
    the reception contract fourteen LG waves needed. The owner's
    "one last round for each with fable" is EXECUTED IN FULL.
+
+## §97 · est-1c COLLECTED AND EXPOSED — ZERO ORDINARY DEBT, THE
+## FOURTEENTH EXPOSURE (2026-08-15, chair; evidence
+## laneTE15-receipt.md §23, 45 in-shell exits across both trains)
+
+1. **EST-C IS LANDED AND EXPOSED** (CAS `5c774940 → 954b4e0f`,
+   porcelain zero, validator 50/0 own-shell, both gate-tails 0 with
+   agreeing in-shell exits): the live supply-chain outage is CURED
+   admission-side exactly as §60.1 ruled — one explicit `emptyOk`
+   widening ONLY the emptiness arm, the field stricter than its
+   sibling; confirming an auto-discovered chain works again. Fixing
+   once cleared all three census rows — the packet premise became a
+   measurement.
+2. **CR-EST-CONTROLZERO IS APPLIED AS RULED**: the ratchet completed
+   §60.4's `16 → 12` descent; ordinary (non-walker) debt is **ZERO**;
+   the floor was DELETED not zeroed (a zero floor under an emptied
+   control is the tautology the ruling forbids); the sampling test
+   is the victory assertion with its anti-vacuity partner keeping
+   zero-of-an-empty-set honest. `28158` carried by two independent
+   agreeing readings.
+3. The executor's two self-reds are RATIFIED as boundaries working
+   (the admission refused the draft pin's unknown keys;
+   `copyCorruption` convicted a comment spelling the empty-icon
+   literal — cured by REWORDING, never by widening the scan, per
+   the dotted-token law). J-TE15-8..12 SIGNED, including the
+   conversion riding the re-freeze commit (false before, mandatory
+   after). **The census-burn law is CONFIRMED at three-for-three
+   measured instances and rides eff-1a's M2 into the packet
+   standard.**
+4. **TE16 IS DISPATCHED on eff-1a** at base `954b4e0f` (dispatched
+   before this sitting): the cured harness + premise-map from the
+   §86 drafts with the three named obligations, the PACKET_STANDARD
+   omnibus (§§53.6/74/77/85.4/95.2), the preamble member with the
+   §81.3 templates and the §93.3 INT refresh. est-1 is COMPLETE in
+   full: E-2, E-3, E-1 all landed across two lawful trains.
