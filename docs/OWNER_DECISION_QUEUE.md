@@ -4047,3 +4047,37 @@ product thesis, and the constitution held under measurement.**
    touched files blob-identical to the audit base — the mechanisms
    re-verified, not assumed. Ceilings named: convergence 798/800
    (+2), armyTransitKernel 792/800 (+8 for two members together).
+
+## §108 · prf-1 COLLECTED AND EXPOSED — THE SOAK PREREQUISITE LANDS,
+## THE TWENTIETH EXPOSURE (2026-08-15, chair; evidence
+## laneTE19-receipt.md, 22 KB, every exit captured)
+
+1. **prf-1 IS LANDED AND EXPOSED** (CAS `630265b3 → eab6eba0`,
+   validator 66/0 own-shell): the restoration character-exact to
+   plan; 46,062 differential checks / 0 diffs against the COMMITTED
+   blob; goldens 87/623 unmoved (the ordinary-repair premise held);
+   both gates green with agreeing readings; **the measured speedup:
+   103.2× per fuzzy hit, 69.0× on the tick mix, the whole-tick
+   Amdahl band 3.22/4.73/5.49× — §84.2's ~5× CONFIRMED at band-top.
+   The century soak is now an iterable loop, not a wall.** The
+   planted destroying blob reddened EXACTLY the new guard (one arm
+   of seven) — simultaneously the guard's proof and the executed
+   demonstration of the six-week blindness.
+2. **J-TE19-1..6 SIGNED**, sharpest: J-TE19-3's requiredSymbols
+   second detector (the deletion class now reds `validate:packets`
+   inside `npm run check`, test-independently — proven by the same
+   plant) and J-TE19-5's inherited-corpus truncation catch (TC19's
+   sweep file held 200 of 323 keys via a silent slice — re-harvested
+   and reproduced; the lesson joins the receipt-vacuity bank: an
+   inherited corpus file may be truncated at source — re-harvest
+   when load-bearing). The +688-bytes-per-AI-bundle eager-IIFE cost
+   is RECORDED AND ACCEPTED (no governing size row; joins the
+   bundle-budget docket with its packet note). The enforcement-claims
+   red is PROVEN PRE-EXISTING (base repro, empty claim-set diff,
+   12/12 ceiling). The tick-cost-guard deferral is RATIFIED (the
+   memo's only honest guard is a cost guard, which needs the new
+   envelope first — soak-era).
+3. **TE20 IS DISPATCHED on cs-a** (the declared-shift batch's first
+   train, the three §107 signatures in its brief) and **lane MEM-F
+   prepares the overdue memory-index fold** (17,315 bytes, past its
+   own hard limit; grep-every-hook law; the chair applies).
