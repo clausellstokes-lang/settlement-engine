@@ -3052,3 +3052,31 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
 5. §51 state: TWELVE dimensions done. Remaining: docs · ops · market ·
    the R-PRF figures (mid-flight) → the chair synthesis.
 
+## §81 · THE LAST THREE EFFICIENCY LEVERS (2026-08-15, chair, vetoable;
+## on the owner's "anything else... without losing quality?")
+
+1. **⭐ THE LANE-CONTINUATION LAW (adopted now, operational)**: same-train
+   follow-on work CONTINUES the existing executor lane with its context
+   intact (SendMessage) instead of spawning fresh — TE13 spent a large
+   share of its 453K tokens on orientation that TE14, spawned cold for
+   the same train, re-paid in full. Zero quality cost: same laws, same
+   agent, freshest context. The exception is deliberate: when the prior
+   lane's own judgment was the defect, fresh eyes are the point — the
+   chair chooses per dispatch and says which.
+2. **GATE WALL-CLOCK ENGINEERING — measurement-gated, not yet acted**:
+   when R-PRF's figures land, shard/parallelize the gate runner across
+   cores and speed the top slow suites (same tests, same assertions,
+   faster clock; a slow test's accidental real-timer waits are speed
+   bugs, not coverage). Nothing moves before the measurement says where
+   the time actually goes.
+3. **PROOF-SHAPE TEMPLATES PER WAVE CLASS (rides eff-1 M3)**: each
+   family preamble gains the standing battery template per wave class
+   (engine / prose / walker / registry), so compiles stop re-deriving
+   proof ARCHITECTURE wave by wave — proof content unchanged,
+   compile-time derivation deleted.
+4. Recorded honestly: beyond these three, the chair finds no further
+   lever that keeps quality whole. Post-baseline, running the SAME full
+   gate additionally on CI against pushed train refs is available as a
+   supplementary environment signal — supplementary only; the local
+   gate-tail receipt remains the receipt of record.
+
