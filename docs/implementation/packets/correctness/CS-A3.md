@@ -4,6 +4,12 @@
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (`armyTransitKernel.js` blob `0dc38438`, byte-identical to the R-CSA audit base
   `d5a6c009`)
+- **Landed:** `874c642b`. **Measured:** the defect reproduces (2 field battles in one
+  tick, the loser mauled 50 → 27.5 → 15.125) and the cure reduces it to one. Three planted
+  mutants, restored with `cmp` exit 0: deleting the guard reds **4 of 44**; the compile's
+  two-arm shape and the register-after-retreat variant each pass **44 of 44** — reported
+  as measured, and the reason the structural `requiredSymbols` guard was added. Effective
+  lines **792 → 795**. Member battery **4 files / 119 tests, exit 0**, no golden moved.
 - **Train:** `cs-a`, family **CS** (un-stamped, cap 4), member **3 of 4**. CS-A4 shares
   this file and is therefore NOT promoted until this member reaches a terminal status —
   the §44 Road-A split promotion applied inside a train, forced by the validator's

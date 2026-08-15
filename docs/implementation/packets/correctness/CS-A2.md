@@ -1,8 +1,17 @@
 # CS / CS-A2 — `cs-1`, the belief silence-decay cure (member 2 of 4 of `cs-a`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (`beliefMap.js` blob `08499928`, byte-identical to the R-CSA audit base `d5a6c009`)
+- **Landed:** `014a1c60`. **Measured:** the base trajectory tracks the triangular
+  `0.92^(n(n+1)/2)` exactly at every tick and prunes at **9**; the cure follows the
+  round4-accumulated recurrence exactly at **all 42 live ticks** and prunes at **43**;
+  `lastUpdateTick` holds one distinct value across the whole run. `Math.pow` parts from
+  the recurrence at **tick 7**, worst-case **1.364e-4**. Two planted mutants, restored
+  with `cmp` exit 0: reverting the silence branch red **3 of 23**; the naive
+  `lastUpdateTick = now` cure red **exactly 1 of 23** — the invariance arm, the arm that
+  exists for that wrong cure. Member battery **6 files / 84 tests** with only the two
+  declared-shift goldens red. Effective lines **778 → 778**.
 - **Train:** `cs-a`, family **CS** (un-stamped, cap 4), member **2 of 4**.
 - **Preamble:** none — see CS-A1 §preamble for the reasoning; CS is its own family.
 - **Authorities:** `OWNER_DECISION_QUEUE.md` **§72.1** (cs-1 confirmed: belief silence

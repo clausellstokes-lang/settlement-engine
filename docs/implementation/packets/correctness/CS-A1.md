@@ -1,9 +1,19 @@
 # CS / CS-A1 — `gen-1a`, the no-replacement tell/speech draw (member 1 of 4 of `cs-a`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (the `prf-1` train's terminal; `npcGenerator.js` blob `a5876b73`, unmoved from the
   R-GEN audit base `d5a6c009`)
+- **Landed:** `75e608ad` — chain: base `eab6eba0` → `8cf97677` (P1) → **`75e608ad`
+  (CS-A1)** → `014a1c60` → `874c642b` → `9bb72151` (P2) → `24c675af` → the terminal.
+  **Measured:** duplicate tells **120/240 → 0**, duplicate speech **128/240 → 0**;
+  roll totals shifted **0 of 32 seeds**; rosters resized **0 of 240**; corpus-wide field
+  delta confined to `personality.tell` and `personality.speech`, with `name`, `secret` and
+  `plotHooks` at **zero** deltas across 2207 NPCs. Two planted mutants each reddened
+  **exactly the accumulator arm** (1 failed / 12 passed), restored with `cmp` exit 0.
+  Member battery **5 files / 68 tests, exit 0**. Effective lines **1350 → 1350**, the
+  exact baseline floor, so no `.size-baseline.json` motion. Declared shift:
+  `generatorGoldenMaster` moves **501 configs**, enumerated and NOT re-recorded.
 - **Train:** `cs-a`, family **CS** (un-stamped, cap 4), member **1 of 4**. Ordered first
   on measured blast radius (225 of 240 corpus hashes move) per §74.2's
   highest-first instruction.

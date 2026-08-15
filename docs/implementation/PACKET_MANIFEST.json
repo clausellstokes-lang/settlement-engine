@@ -9370,7 +9370,7 @@
     },
     {
       "id": "CS-A1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-A1.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9395,6 +9395,14 @@
         {
           "path": "src/generators/hookVariety.js",
           "symbol": "export function drawUnique"
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "const religion = generateReligionType(hookRegistry);"
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "  const tell = drawUnique(MANNERISMS, reg?.tells);\n  const speech = drawUnique(SPEECH_PATTERNS, reg?.speech);"
         },
         {
           "path": "tests/generators/hookThemeDraws.test.js",
@@ -9452,7 +9460,7 @@
     },
     {
       "id": "CS-A2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-A2.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9477,6 +9485,10 @@
         {
           "path": "src/domain/worldPulse/beliefMap.js",
           "symbol": "SILENCE_DECAY: 0.92"
+        },
+        {
+          "path": "src/domain/worldPulse/beliefMap.js",
+          "symbol": "      const silent = priorRec ? 1 : 0;"
         },
         {
           "path": "tests/domain/beliefMap.test.js",
@@ -9600,7 +9612,7 @@
     },
     {
       "id": "CS-A4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-A4.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9629,6 +9641,10 @@
         {
           "path": "src/domain/worldPulse/warDeployment.js",
           "symbol": "recalledPairs"
+        },
+        {
+          "path": "src/domain/worldPulse/armyTransitKernel.js",
+          "symbol": "    if (dep.recalled) continue;"
         },
         {
           "path": "tests/domain/armyTransitFieldCombat.test.js",

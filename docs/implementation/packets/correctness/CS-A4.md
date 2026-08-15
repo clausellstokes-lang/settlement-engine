@@ -1,11 +1,22 @@
 # CS / CS-A4 — `cs-5`, the recalled-army derive window (member 4 of 4 of `cs-a`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (the train's dispatch base). This member is nonetheless authored ON TOP of CS-A3's
   implementation `874c642b3fe7cd5ce15e4116fbda76f127a146f2`, which shares its file and
   reached a terminal status in the same commit that promoted this packet — the two may
   never be live simultaneously.
+- **Landed:** `24c675af` — the train's terminal implementation. **Measured:** the defect
+  reproduces (a recalled army reaching `position01 = 1` at its abandoned target on tick 2),
+  and — the finding this member turned up — the estate's own landed line-digest fixture
+  mints a field battle on **every** tick against an already-beaten, already-recalled
+  column (60 → 39.57 → 23.78 → 13.08). ⭐ CS-A3 does not close that; **this member does**,
+  because the derive loop was clobbering the retreat record back into a march each tick so
+  `hostilePairFor`'s RETREAT exclusion never fired. A landed test was pinning that defect
+  and its body is corrected (title byte-identical). Deleting the guard reds **3 of 44**,
+  including the corrected test. Effective lines **792 → 796** — four of the eight budgeted
+  for this member and CS-A3 together. Member battery **4 files / 121 tests, exit 0**.
+  Census re-derived whole: **2438/364/2074/20208/5672 → 2438/364/2074/20220/5676**.
 - **`dependsOn`: CS-A3.** The edge is real, not bookkeeping: CS-A3's cure is what lets a
   RETREAT record survive the collision loop at all; this member's cure is what keeps that
   record from being clobbered by the next derive pass. Landing this member without CS-A3
