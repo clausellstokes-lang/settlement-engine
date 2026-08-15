@@ -1999,3 +1999,14 @@ slot frees; the willingness-gate defect stays with the LG volume sitting.
 4. All other receipts ACCEPTED as reported: the peaceTerms 797/1264/3-3
    tripwire held exactly; P1's four named reds and nothing else; CLAIM_RE 0;
    plumbing-only commits; nothing exposed.
+
+§46c correction (chair, ~20:00, on POP-S's measurement): my §46c note said
+the spy "reuses the landed group-treatment outcomes." REFUTED — there IS no
+caravan reception machinery at HEAD; migration landing is unconditional
+with no capacity read (demographicsMigration.js:453-482). POP-1's arrival
+clearing would be the FIRST refusal machinery in the tree, so §46c's cover
+mechanics are BLOCKED-ON POP-1, not consumers of it. Sequencing recorded:
+POP-1 precedes the §46c spy waves. Also ruled ONCE for three families (the
+POP-S recommendation): the demographic column-class vocabulary and
+carry-through (columnOf's whitelist + DEMOGRAPHIC_COLUMN_CLASSES) are ruled
+jointly across POP/LG/ES at the LG sitting, not at POP-1's Q1 alone.

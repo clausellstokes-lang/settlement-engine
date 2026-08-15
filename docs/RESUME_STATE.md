@@ -151,9 +151,26 @@ METHOD LAW ADDENDUM (from the lane's own honest miss): while an executor is
 live, HEAD-state rows are evidenced ONLY via git show/git grep HEAD — a
 shared-tree vitest run measures the executor's dirt (its 1/14 "failure" was
 gr-5a's in-flight key, green at HEAD). Joins the protocol doc with the
-prose acts. Annex: `laneEPS-EP-SUBSTRATE.md`. **Lane POP-S** (populations
-volume, 8 waves; the two-shape population finding + §46c migration
-double-consumer claims graded) → `lanePOPS-*`. The chair grades all three
+prose acts. Annex: `laneEPS-EP-SUBSTRATE.md`. **✅ Lane POP-S COLLECTED (~20:00): 182 claims / 146 TRUE / 26 REFUTED / 10
+UNVERIFIABLE** — the volume's own mechanism readings excellent (106/109);
+the rot is neighbouring-program state + hand-keyed addresses. Sharpest:
+GR-3's population terms LANDED two days after the volume compiled (POP-5b's
+degraded posture is a dead premise); SP-2 believed-conditions LANDED
+(POP-1's precondition satisfied); flag-parking fallbacks CLOSED (backlog at
+its exact 17 cap); the coupling registry decomposed → POP needs an unpriced
+desk leaf in all six waves; ⭐⭐ THE TWO-SHAPE POPULATION DEFECT: the volume
+never grades its own subject field — no producer of the object shape exists
+at HEAD and the failure is SILENT (num()→0→continue, no receipt) — a
+latent-defect-class find like the willingness gate, cure belongs to POP-0/1;
+⭐ §46c INVERTED: NO caravan reception machinery exists — §46c is
+BLOCKED-ON POP-1 (ODQ corrected in-line); the column-class vocabulary is
+ruled ONCE across POP/LG/ES at the LG sitting; DESIGN_DEMOGRAPHIC_ENGINE.md
+is LIVE and load-bearing (20 citing files) — POP depends on it, names it
+zero times; POP-6's window is off-by-one (12-row cap vs 13-tick season).
+⚠ Pre-emptive void notice recorded: gr-5a's landing voids the
+manifest-census rows (the staleness law self-applying). Annex:
+`lanePOPS-POP-SUBSTRATE.md`. ALL THREE SWEEPS NOW BANKED (WC/EP/POP + WF
+still running); every future family compile starts on graded ground. The chair grades all three
 annexes at collection; WC's annex already banked. Sweeps make every future
 family compile start on measured ground.
 
