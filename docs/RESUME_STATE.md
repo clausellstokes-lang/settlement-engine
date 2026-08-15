@@ -91,7 +91,21 @@ incident noted in-line; all other §46 blocks verified present by grep; the
 fragment removed. ⚠ LAW REINFORCED: every ledger append states its cwd
 assumption — cd explicitly, always.
 
-**LIVE (~14:00, keeper tick): Lane WCS searches for the 22 CR-WC rulings**
+**✅✅ Lane WCS COLLECTED (~14:30): FOUND-WHOLE — all 22 CR-WC rulings
+survive** (97,967 B, blob `9459be7d` chair-verified by hash-object), plus
+EP_CHAIR_RULINGS (67,820 B) and HB_CHAIR_RULINGS (52,372 B) with the SAME
+defect: ALL UNTRACKED in docs/architected-volumes-pending-fold/ — one
+`git clean -fd` from total loss, with only reboot-mortal snapshots and
+Codex-internal refs as copies. The WC volume's :44 "on the ledger branch"
+citation was FICTION; the memory note hb-wc-ep-fold-landed.md:82 is STALE.
+**CURED THIS COMMIT: the eleven program files committed to the ledger**
+(rulings ×3, soak design, ontology, seam table, round records ×2, README,
+the two md5-attested HB instruments byte-exact; .DS_Store excluded). The
+citation is now TRUE; EP and HB are grounded; CR-WC-9 remains the one
+owner-escalated persisted-shape question inside the WC rulings; the WC
+sitting proceeds on recovered authority. Findings: `laneWCS-findings.md`.
+⚠ orphan commit `b75e8c4d` (three snapshot files, no ref) is gc-prunable —
+noted, not rescued (contents superseded by the committed copies).
 (all refs' histories, docs/archive, the memory estate, the queues, surviving
 scratchpads) → `laneWCS-findings.md`; verdict FOUND-WHOLE / FOUND-PARTIAL /
 LOST decides whether the WC sitting re-rules from the volume's veto list.
