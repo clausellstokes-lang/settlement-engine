@@ -1,6 +1,6 @@
 # Foreign Policy / IN-1c-a — THE INFORMATION REGISTRY AND THE GOVERNED STANDING LINE (`secondOrderBeliefEnabled`, no new flag)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** `2` (v1 was TC13's compile at `fc8451c4`; v2 is this promotion, re-derived
   at the moved base — see the BASE-MOVE RE-DERIVATION block immediately below)
 - **Verified base:** `claude/composite-r4` at `d5a6c0094a373d50f7d4870d44fb84f598164e85`
@@ -14,6 +14,31 @@
   `PACKET_MANIFEST.json` moved inside that window — so that one row is re-executed here (§5b B8)
   rather than cited, exactly as TC13 found at the previous base.
 - **Train:** `refs/trains/in-1c-a` — **SOLE MEMBER.** Plan: `laneTC13-TRAIN-PLAN.md`
+- **Landed:** `24c61190731687952924de5c146046c07845ebda` (the last content commit; the member's own
+  eleven paths are `22cedb1b0dcc00fbd217f5b3b6312b6394f2f767`). Chain: promotion `15889756` → implementation
+  `22cedb1b` → the ruled cure `3f8fae00` → the ruled registration rows `24c61190` → the terminal.
+  ⛔⛔ **THIS TRAIN STOPPED TWICE, AND BOTH STOPS WERE RATIFIED.**
+  **STOP ONE (§75)** — the new walker's basename matches the enforced nomenclature and it lives
+  under `tests/lint/`, so it is a governed mutation invariant automatically and
+  `scripts/mutation-coverage-manifest.json` owed it a row. §6.5 and §8 item 5 below pre-ruled that
+  branch as **STOP and report**, because a `rationale` row is a governance claim about
+  verification adequacy and no build lane may write itself an exemption. Lane TE13 stopped and
+  priced four cures; **§75 ruled OPTION 2** and lane TE14 applied it as TWO SURGICAL TEXT INSERTS,
+  five added lines and zero removed, so §14's re-serialization STOP was never breached.
+  **STOP TWO (§85)** — with that cure in hand, the first full `test:ratchet` this member ever
+  received returned **THREE failing tests outside the frozen census**, and TE14 attributed two of
+  them BY MEASUREMENT to this member's own new leaves: the same three files pass at the base
+  `d5a6c009` and fail identically at `22cedb1b` and at the cure. `informationNews.js` mints an
+  unclassified weighted decision fork, and `informationReceiptPools` is an uncovered module.
+  **§85 ruled both rows the MINTING WAVE'S obligation** rather than another family's file, and
+  they land at `24c61190`.
+  ⚠⚠ **THIS PACKET PRICED NEITHER ROW, AND THAT IS THE WAVE'S REAL LESSON.** The change manifest
+  below says ELEVEN handwritten paths; the member actually cost **FIFTEEN** — the eleven, the
+  mutation-coverage row, the `habitForkRegistry.js` classification (HBF-33), that walker's exact
+  `DEFER_CEILING`, and the lit-coverage registration. ⭐ §85.4 adopts the generalisation as the
+  **REGISTRY-MINT TWO-OBLIGATION LAW**: a registry family that mints a seeded pick AND a pool
+  module owes two estate-wide census rows, and a compiler prices both up front. This member is its
+  first priced instance. ⛔ Only the FULL gate finds them; the focused member battery cannot.
 - **Preamble:** `docs/implementation/preambles/IN-PREAMBLE.md` @ SHA-256
   `e284353f17252a84fd3de4f581678cd86edd3370fea60ebfb29efd02068dc609` (computed over the LANDED
   bytes at this train's P1, not over the scratchpad draft) — §I1–§I13 in full: the design-law
@@ -585,6 +610,15 @@ IN-1b's acceptance files **this one IS a governed mutation invariant automatical
 re-serialized** (recorded estate hazard). If a manifest row is genuinely owed, **STOP and report** —
 do not rewrite the manifest.
 
+⭐ **DISCHARGED AT THE TERMINAL, AND THE STOP FIRED EXACTLY AS WRITTEN.** The row was genuinely
+owed: `enumerateInvariants` returned 546 files and the totality arm's own `missing` list held this
+walker and nothing else. TE13 stopped rather than writing the estate an exemption for itself.
+`OWNER_DECISION_QUEUE.md` §75 ruled OPTION 2 and the terminal applied it as two surgical text
+inserts — the `rationale` row plus a NEW ref
+`in1c-a-information-kind-pools-executed-2026-08-15` authored for the IN family — five added lines,
+zero removed, the manifest never re-serialized. See the **Landed** bullet at the head of this
+packet.
+
 ### 6.6 `src/domain/display/neighbourMirror.js` — MODIFY
 
 `standingSentence` is replaced by a call into the registry. Everything else in the file is untouched.
@@ -726,6 +760,14 @@ and every file outside the table above.
 5. ⚠ **THE MUTATION MANIFEST.** The new walker's basename matches the enforced nomenclature and it
    lives under `tests/lint/`, so it is a governed invariant automatically. ⛔ **Never re-serialize
    `scripts/mutation-coverage-manifest.json`** — if a row is genuinely owed, STOP and report.
+   ⭐ **DISCHARGED:** a row WAS genuinely owed, TE13 stopped and reported, and §75 ruled OPTION 2
+   — applied at the terminal as two surgical inserts, never a re-serialization.
+6. ⚠⚠ **THE TWO OBLIGATIONS THIS PACKET NEVER PRICED, ADDED AT THE TERMINAL UNDER §85.** Minting a
+   phrased-kind registry family costs TWO estate-wide census rows beyond the eleven paths: a
+   `HABIT_FORK_REGISTRY` classification for the seeded pick (`informationNews.js#informationReceipt`
+   is discovered by the KEYED_RACE signature, exactly as `grammarNews.js#grammarReceipt` is, and
+   takes HBF-07's DEFER verbatim), together with that walker's exact `DEFER_CEILING`; and a
+   lit-coverage registration for the pool module. ⭐ §85.4 makes this standing law — preflight both.
 6. ⚠ **WHAT IS NOT OWED, measured so nobody "helpfully" edits it:**
    `heraldRouting.js` (no desk, no `EXACT_SECTION` row); `chroniclersLetter.js` (`KIND_SECTION` not
    owed for a no-desk row); `settlementRumors.js` (`WHAT_PHRASES` **FORBIDDEN** for a `section: null`
@@ -972,7 +1014,14 @@ when:
   is in this manifest and none may join it.
 - ⛔ **`scripts/.observed-shape-readers-baseline.json` would need a row**, or the walker reports a new
   or stale finding. Report; **never `--write`**.
-- ⛔ **`scripts/mutation-coverage-manifest.json` would need re-serializing.**
+- ⛔ **`scripts/mutation-coverage-manifest.json` would need re-serializing.** ⭐ **NOT BREACHED.**
+  A row was genuinely owed, this packet's own STOP fired, and the chair ruled it (§75 OPTION 2);
+  the terminal added the row and its NEW IN-family ref with two surgical text inserts — five added
+  lines, zero removed — so the file was never re-serialized.
+- ⛔ **`mechanism-lit-coverage-baseline.json` would need a hand edit.** ⭐ **FIRED, AND RULED.** It
+  needed exactly one: `informationReceiptPools` is a genuinely dark pool module. The terminal
+  STOPPED on it, and §85.2 authorized a ONE-ROW registration carrying its own `amended` block in
+  the file's existing idiom — 23 → 24, in the walker's own order, never a re-serialization.
 - ⛔ **A committed golden moves**, or `mechanism-lit-coverage-baseline.json` would need a hand edit.
 - ⛔ **Any new persisted key, ledger sub-key, writer, stage, flag, tuning key, tab id, Herald kind,
   registry beyond the one, PRNG draw or clock read** becomes necessary.

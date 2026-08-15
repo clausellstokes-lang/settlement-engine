@@ -2757,7 +2757,7 @@
     },
     {
       "id": "IN-1C-A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/IN-1C-A.md",
       "verifiedBase": "d5a6c0094a373d50f7d4870d44fb84f598164e85",
       "changeManifest": [
