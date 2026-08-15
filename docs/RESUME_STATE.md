@@ -91,6 +91,11 @@ incident noted in-line; all other §46 blocks verified present by grep; the
 fragment removed. ⚠ LAW REINFORCED: every ledger append states its cwd
 assumption — cd explicitly, always.
 
+**LIVE (~14:00, keeper tick): Lane WCS searches for the 22 CR-WC rulings**
+(all refs' histories, docs/archive, the memory estate, the queues, surviving
+scratchpads) → `laneWCS-findings.md`; verdict FOUND-WHOLE / FOUND-PARTIAL /
+LOST decides whether the WC sitting re-rules from the volume's veto list.
+
 **NEXT (chair sittings at fresh context, §37 course to the first soak):**
 (1) the LG VOLUME (§46 + §46a×2 + §46b + §46c×5-plus-restored, the LGR map,
 ten questions, the willingness-gate defect); (2) gr-6 re-charter; (3) WC
