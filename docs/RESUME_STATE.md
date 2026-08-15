@@ -116,8 +116,16 @@ tails/LG), ~1,350 claims graded, 259 refutations — the entire remaining
 inventory including the chair's own newest volume stands on measured
 ground.** **LIVE: Lane TC13 COMPILES IN-1c** (the open front's first pick;
 the IN preamble authored en route) → `laneTC13-*`. Four lanes: WC-C ·
-TC12(INT-3b) · TC13(IN-1c) · <slot for the §51 Phase-S Fable lanes on next
-free>.
+TC12(INT-3b) · TC13(IN-1c) · **Lane R-INT — §51 Phase-S dimension 1: INTENT
+COHERENCE (FABLE)** — the whole ODQ directive trail §17-§50 + the
+constitutional layer graded HONORED/CHARTERED/DRIFTED/PENDING-AMBIGUOUS
+against what landed, incl. the meta-audit of the chair's own operative
+readings → `laneRINT-*`. Phase-S queue behind it (Fable, one per freed
+slot): vocabulary/intuitive coherence · cross-layer engine semantics ·
+product surfaces vs the legibility+news laws · the law-body consistency
+audit · the estate-guarding-itself audit. Phase-V (Opus) verifies material
+findings; Phase-F dispositions into the machinery; the chair synthesizes
+the comprehensive assessment at Phase-S closure.
 
 **✅ Lane TL-S COLLECTED (~01:30): 208 claims / 155 TRUE / 43 REFUTED / 10
 UNVERIFIABLE across TR/IN/CW/ES tails — and the refutations mostly UNBLOCK:**
