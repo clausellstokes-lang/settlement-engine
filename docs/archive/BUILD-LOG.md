@@ -6,11 +6,16 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `e5ecc83d`
-- Commits: 3266
-- Working tree at refresh: 0 dirty entries
+- HEAD: `6cd18ad3`
+- Commits: 3271
+- Working tree at refresh: 1 dirty entries
 
 ```
+6cd18ad3 2026-08-14 HB-2B T: flip HB-2 LANDED, regenerate the capsule, close the train
+de214782 2026-08-14 HB-2B I2 (HB-2): the habit ledger, the gate ladder's first door, and the flag
+46f1c942 2026-08-14 HB-2B P1b: flip HB-0B LANDED and promote HB-2 READY (CR-HB2B-SPLITP, OQ §44)
+c777a158 2026-08-14 HB-2B I1 (HB-0B): the three structural bounds, minted in their one lawful home
+3ad7c082 2026-08-14 HB-2B P1a: promote HB-0B READY alone under CR-HB2B-SPLITP (OQ §44)
 e5ecc83d 2026-08-14 INFRA-2 T: regenerate the base-state capsule at the train's last content commit
 5bcca49a 2026-08-14 INFRA-2 M4: the coupling-registration template check, as an inventory ratchet
 04d1ae93 2026-08-14 INFRA-2 M3: parse the hot-file ceilings from PACKET_STANDARD, fail-closed
@@ -406,9 +411,4 @@ a70c9284 2026-08-04 WR-9d: the instrument counts its first real war — and the 
 cb1ea74f 2026-08-04 Queue: correct WR-9c's focused-battery figure — 98, not the 97 captured before the last pin
 c0ae5eb7 2026-08-04 Queue: WR-9c's row — and CR-WR9-D, the chair premise about force 2 that the tree disproved
 7a3c51ef 2026-08-04 WR-9c: the six forces learn which of them cannot be measured — five cells that grade, one that names the substrate it does not have, and a chair premise the tree refuted
-43b3195b 2026-08-04 Queue: WR-9r's three chair rulings, and the correction for a measurement fd222269's commit body got wrong
-06c58f69 2026-08-04 WR-9r: the duration histogram learns to say "I could not read this" — unmeasurable becomes its own diagnosis, and Infinity stops being a short war
-d7a6a16b 2026-08-04 Queue: WR-9's row, and the certification repair that measured itself into a STOP
-fd222269 2026-08-04 WR-9a: the endings vocabulary learns to be filled — a classifier for five keys the engine never spoke, and two envelopes that fail honestly
-98edbc9f 2026-08-04 Lane V4D R-3: two docstrings stop over-claiming — the wound ladder in the sentence that makes the claim, and a law that was one notch stronger than its proof
 ```

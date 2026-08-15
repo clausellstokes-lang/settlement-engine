@@ -63,7 +63,42 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-15 ~01:10 EDT) — ✅ INFRA-2 LANDED AND EXPOSED at
+# ⭐⭐ CURRENT (2026-08-15 ~13:40 EDT) — ✅ HB-2B LANDED AND EXPOSED at
+# `6cd18ad3` (NINTH exposure): HABIT is 4/10; the three signed bounds are IN
+
+**HB-2B LANDED WHOLE under CR-HB2B-SPLITP** — chain `e5ecc83d → 3ad7c082(P1a)
+→ c777a158(I1 bounds 24/156/256) → 46f1c942(P1b) → de214782(I2 HB-2 ledger+
+gate+flag) → 6cd18ad3(T)`. Validator sequence EXACTLY as §44 signed
+(42/0→43/1→43/1→44/1→44/1→44/0, zero duplicate-path rows — Road A resolves
+R35 by execution); BOTH ratchet floors held at both interior commits
+(173/173, 1134/1134 — the compile's PLAUSIBLE now CONFIRMED); census EXACT
+`2428/366/2062/20107/5653`; runtime 28130; osr 1998; gate+smoke TRUE_EXIT=0
+held; 20 mutants convicted. Four deviations RATIFIED on the receipt
+(laneTE10-receipt.md, 461 lines), sharpest: D4 — I2 re-cut after a red first
+cut proved SIX defects its own (incl. two raw NUL bytes and a
+soak-blind channel row cured to 'indirect' WITHOUT raising the ceiling);
+D2 — the manifest grew 12→20 on mechanical consequences, all named. Chair
+verified at T (validator 44/0 + census 33/33 own-shell) then CAS
+`e5ecc83d → 6cd18ad3`; porcelain ZERO (one junk fragment removed, see
+below). Flag manifest 19 rows; HABIT_DARK_CLOSURE 4.
+
+**⚠ LEDGER INCIDENT, FOUND AND CURED (~13:20):** the §46c avoidance
+addendum's append ran in the WRONG WORKTREE (the recorded cwd-reset hazard)
+— its text existed only as an untracked minifold fragment and NEVER reached
+the ledger. Found at the hb-2b collection (TE10 preserved the foreign file
+correctly); text recovered verbatim; RESTORED at ledger `31d99fac` with the
+incident noted in-line; all other §46 blocks verified present by grep; the
+fragment removed. ⚠ LAW REINFORCED: every ledger append states its cwd
+assumption — cd explicitly, always.
+
+**NEXT (chair sittings at fresh context, §37 course to the first soak):**
+(1) the LG VOLUME (§46 + §46a×2 + §46b + §46c×5-plus-restored, the LGR map,
+ten questions, the willingness-gate defect); (2) gr-6 re-charter; (3) WC
+questions + WC_CHAIR_RULINGS search; (4) MEMORY.md fold (17,054 B, OWED);
+(5) HB-3 disposition (Q1's owner-gated fields under §22/§37 — rule at the
+sitting); then WC-0 on its graded annex and onward through the inventory.
+
+# (superseded ~13:40) ⭐⭐ CURRENT (2026-08-15 ~01:10 EDT) — ✅ INFRA-2 LANDED AND EXPOSED at
 # `e5ecc83d` (EIGHTH exposure); the hazard classes are now MACHINERY
 
 **INFRA-2 LANDED WHOLE** (five commits, no promotions — J-TE8-2: infra
