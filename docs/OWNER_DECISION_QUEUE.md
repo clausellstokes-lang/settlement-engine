@@ -3376,3 +3376,39 @@ product thesis, and the constitution held under measurement.**
    own method held: every dimension Fable-surveyed, executed evidence
    throughout, all judgments vetoable, three findings self-refuted by
    re-sweep before ruling — the epistemics worked.
+
+## §89 · THE CI DIVERGENCE RULED — AND §82'S CLAIM CORRECTED
+## (2026-08-15, chair, vetoable; evidence laneCIX-audit.md +
+## laneCIX-report.md, all probes executed)
+
+1. **§82.1 IS CORRECTED ON THE RECORD**: the chair's clean-room ran a
+   PROPER SUBSET of the failing jobs' steps (`check:edge` where the
+   job fails at `test:edge`; the e2e STATIC guard where the job runs
+   the suite) — "all five green" proved the subset, not the jobs. The
+   hazard is BANKED as the receipt-vacuity family's 12th law: a repro
+   must run the failing job's OWN failing step.
+2. **ci-1a (CONFIRMED, deterministic everywhere)**: `deno test`
+   serial-in-one-process leaks `operator-message-worker`'s module-top
+   `Deno.env.set("CLIENT_URL", …)` into the alphabetically-later
+   CORS pins (658 passed / 2 failed locally too). Cure as
+   architected: env-restore discipline + CORS-pin hardening.
+   Test-hygiene, micro-act class.
+3. **ci-1b (CONFIRMED, zero flakes)**: nine e2e failures, all stale
+   selectors against three weeks of renamed/removed UI affordances
+   (27 passed / 9 failed each with its retry). The §88.3
+   unexecuted-checks-rot pattern's third instance. Cure:
+   per-affordance spec reconciliation across the five named files;
+   the Playwright census is outside the vitest ceiling — compile
+   verifies.
+4. **ci-1c (UNEXPLAINED, blocked on the CI log)**: build+dist — every
+   locally-falsifiable mechanism REFUTED by executed probe (17,140
+   specifiers, zero case-killers; lockfile, locale, TZ, `.only`,
+   deno.lock CDN all clean; the VERIFY_DIST=1-gated 63 assertions
+   pass under CI-matched env). Survivors: node 22 vs 24, Linux
+   proper, and the 7 GB runner vs `bootSmoke`'s 6 GB-heap child. The
+   report enumerates the exact discriminating log lines; the owner's
+   paste request stands.
+5. ci-1a+ci-1b join the micro-batch as ruled cures; ci-1c joins on
+   its discriminator. CI green stays a DEPLOY-phase gate, not a build
+   blocker; the two real reds are test-layer, not product-layer —
+   no engine or product behavior is implicated.
