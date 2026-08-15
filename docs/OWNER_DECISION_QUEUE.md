@@ -3557,3 +3557,43 @@ product thesis, and the constitution held under measurement.**
    ledger-resident chair surfaces, so all four apply in one sitting
    with their rounds' drafted texts. INT is STAMPED; WY-F runs;
    tails last.
+
+## §94 · THE WY ROUND ACCEPTED — AND THE WY SITTING CLOSED IN ONE ACT
+## (2026-08-15, chair, vetoable; evidence laneWYF-round.md +
+## laneWYF-report.md, volume blob verified unchanged across all three
+## in-window ledger moves)
+
+1. **The §70.4 stamp is ACCEPTED**: absorption 7/11 + 4 structural
+   rows SIGNED here (WY had no cure surface; its §7+FVQ rulings were
+   Fable-surveyed — that debt discharged); voided rows 54/55 blobs
+   identical, 11 tree-wide claims INTACT, 0 verdict changes; law
+   pass 6 MATERIAL / 8 DRIFT / 10 HOLDS with all five §7 rulings
+   validated.
+2. **THE FOUR CHAIR-OWED WY ITEMS CLOSE NOW, on the groundings**:
+   (i) CONDITION_BANDS — the collision is a LIVE three-scalar
+   army-supply model the volume never names, and WY-8a as written
+   DOUBLE-DRIVES attrition and reinforcement: C-WYF-3's
+   one-supply-truth contract is SIGNED; the rename executes at
+   compile (measured free — zero external consumers). (ii) F9 —
+   STRIKE-AND-POINT at all SIX sites (the census was
+   under-enumerated; DFA:3043 is the no-adjacent-note grep-trap):
+   ledger sites join the batched micro-act; the FVQ/SOL sites ride
+   the next build-branch docs member. (iii) WY-8a BINDS to
+   `src/domain/worldPulse/armySupply.js` beside supplyWebWarfare
+   (twin-note pairing; the absent `src/domain/war/` reservation
+   dissolves at zero cross-volume cost). (iv) **XLS-4 IS CLOSED BY
+   MEASUREMENT**: the 13-archetype silence is DELIBERATE and
+   machine-pinned with an anti-drift arm — the 13-rows cure is
+   DECLINED (it would double-count and red the pin); only the
+   `activeConditions.js` header qualifier is owed, riding the
+   micro-batch.
+3. **WY is the FIFTH certification-pattern instance** (the
+   deferred-batch variant — WY-11's eight batched cert rows red the
+   bijection at the first flag wave): C-WYF-5 applies §92.2. C-WYF-6
+   is SIGNED — eight of nine dial families get derivation homes
+   before any WY band lands (the WF F-5 shape). C-WYF-7 joins the
+   batched stale-site sitting, now FIVE volumes.
+4. **WY is STAMPED. Six of seven rounds done** (WC/WF/EP/POP/INT/WY);
+   TL-F (the tails, the LAST round) dispatched — at its acceptance
+   every family in the estate is stamped and the §74 caps apply
+   estate-wide.
