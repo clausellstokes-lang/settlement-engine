@@ -3888,3 +3888,36 @@ product thesis, and the constitution held under measurement.**
    §73.3 F-1 charter in full (TRACKED rows + writers + by-name
    gate-read modules same-commit), §92.2 in-file certification, a
    solo train per the flag-boundary law.
+
+## §103 · WC-0E COLLECTED AND EXPOSED — THE EIGHTEENTH EXPOSURE, AND
+## THE UNGATED-PERSISTENCE LAW (2026-08-15, chair; evidence
+## laneTE17-receipt.md Part II, first-run green gates)
+
+1. **WC-0E IS LANDED AND EXPOSED** (CAS `00298c5f → cf12c976`,
+   validator 61/0 own-shell): both WC flags minted, all three
+   §49/§50 obligations incurred and proved, §92.2 certification
+   in-file at real depth, and — for the first time — a flag train
+   green on its FIRST gate run because the registration obligations
+   were priced at compile. The efficiency thesis measured.
+2. **The preflight's refutation is RATIFIED AS LAW — THE UNGATED-
+   PERSISTENCE RULE**: an arm that normalizes or cleans PERSISTED
+   state runs UNCONDITIONALLY; gating persistence hygiene behind a
+   flag is the fail-OPEN direction (a dark world's saves would rot
+   un-normalized). `normalizeDeployments` landed ungated; both flag
+   reads landed as the borrowed conjunction shape. Estate-wide from
+   this section forward.
+3. **ZERO TRACKED rows is RATIFIED with its mutant proof** (the
+   volume chartered rows in the same sentence that denies writer
+   calls — both cannot hold; M4 plants a row and the exact-set
+   walker convicts). **The bijection is recorded as a TRIPLE**
+   (manifest + VIRTUAL_RULES + VIRTUAL_SUBSYSTEM_ROWS moved 20→22
+   together). §50.1's "seven bundles" measured as 2 real + 5
+   timestamp churn — the generatedAt-churn docket gains its
+   evidence. The M5 redundancy-not-vacuity correction is ratified
+   (three trains running, three mutants catching plausible pins).
+   J-TE17-11..15 SIGNED.
+4. **TE18 IS DISPATCHED on rn-1** at `cf12c976` (fresh lane, new
+   family): TC18's plan, the §101 door-1 budget, B1 last with the
+   pre-feature golden, the hot-file and anchor-row traps by name.
+   WC stands at FIVE of seventeen waves landed; the queue behind
+   rn-1 is prf-1 → cs+gen-1 → da → dom → micro-batch.
