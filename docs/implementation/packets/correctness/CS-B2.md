@@ -1,6 +1,6 @@
 # CS / CS-B2 — the demographic named floor stops minting people (member 3 of `cs-b`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (the `cs-a` train's dispatch base; authored on top of cs-b's `6d19d5e7`)
 - **Train:** `cs-b`, family **CS** (un-stamped, cap 4), member **3**. Change paths disjoint

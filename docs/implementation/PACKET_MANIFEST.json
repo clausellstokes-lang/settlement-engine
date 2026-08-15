@@ -9756,7 +9756,7 @@
     },
     {
       "id": "CS-B1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-B1.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9777,6 +9777,14 @@
         {
           "path": "src/domain/worldPulse/upswingKernel.js",
           "symbol": "BOOM_MIN_DWELL"
+        },
+        {
+          "path": "src/domain/worldPulse/upswingKernel.js",
+          "symbol": "if (!severed && dwell >= T.BOOM_MIN_DWELL) {"
+        },
+        {
+          "path": "tests/domain/upswingKernel.test.js",
+          "symbol": "THE SIEGE DELAYED IT, IT DID NOT KILL IT: lifting at tick 7 mints the boom on that very tick"
         }
       ],
       "acceptanceCases": [
@@ -9815,7 +9823,7 @@
     },
     {
       "id": "CS-B2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-B2.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9836,6 +9844,14 @@
         {
           "path": "src/domain/worldPulse/demographicsKernel.js",
           "symbol": "const pool = Math.max(0, before - named);"
+        },
+        {
+          "path": "src/domain/worldPulse/demographicsKernel.js",
+          "symbol": "const after = Math.max(Math.min(named, before), before + births - deaths);"
+        },
+        {
+          "path": "tests/domain/demographicsMigration.test.js",
+          "symbol": "THE TRAJECTORY: a roster larger than the head count grows by BIRTHS, and the ten-tick closure residual is ZERO"
         }
       ],
       "acceptanceCases": [
@@ -9876,7 +9892,7 @@
     },
     {
       "id": "CS-B3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-B3.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [
@@ -9904,7 +9920,25 @@
         },
         {
           "path": "src/domain/worldPulse/convergence.js",
-          "symbol": "const FRIENDLY_REL = new Set("
+          "symbol": "const FRIENDLY_REL = new Set(['allied', 'trade_partner', 'vassal']);"
+        },
+        {
+          "path": "tests/lint/vocabularyTotality.walker.test.js",
+          "symbol": "allied: 'REACHABLE, AND THE CURE (CS-B3 / cs-6)"
+        },
+        {
+          "path": "tests/domain/convergence.test.js",
+          "symbol": "THE RETIRED TOKEN: a raw `ally` edge is INERT"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/convergence.js",
+          "symbol": "new Set(['ally', 'trade_partner', 'vassal'])"
+        },
+        {
+          "path": "tests/lint/vocabularyTotality.walker.test.js",
+          "symbol": "ally: 'EXPECTED-DEAD, AND THE DEFECT IS THE REASON (CR-TE18-CONVERGENCEALLIED)"
         }
       ],
       "acceptanceCases": [
