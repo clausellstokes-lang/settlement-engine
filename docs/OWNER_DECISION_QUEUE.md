@@ -3748,3 +3748,39 @@ product thesis, and the constitution held under measurement.**
    the directory, not a symlink); the private-index method leaves
    the REAL index stale (`git status` shows landed paths as
    deleted-until-`read-tree HEAD`). J-TE16-1..9 SIGNED.
+
+## §99 · THE WC-0 RE-BASE COLLECTED — DISPATCH-READY, AND R1'S SECOND
+## SLOT FILLED (2026-08-15, chair, vetoable; evidence
+## laneTC17-WC0-REBASE.md + laneTC17-report.md, TTS TRUE_EXIT=0,
+## sixteen §77 invocations both directions)
+
+1. **wc-0 is RE-BASED AND DISPATCH-READY at `4f2d37d1`**: not one
+   premise died across 29 commits and five landings; all three §59
+   STOP-class refutations bind on byte-identical walkers; six
+   figures re-derived to the delta idiom; the capsule citable; the
+   §73.3 F-1 correction authored IN FULL including the half neither
+   §59.2 nor TC14 named (each flag's by-name gate-read module lands
+   in the SAME commit or direction 1 reds).
+2. **TC17's gap-find is ADOPTED as a packet constraint on all four
+   members**: `negativeAssertionAnchor.walker` gives every new
+   tests/domain|lint file CEILING ZERO against a 515-row roster —
+   TC14 named it nowhere and WC-0C's fence is exactly the
+   reaching shape. D0 shrinks by a third (the flag-mint prose act
+   already landed via EFF-M2; TC14's Q8 caveat discharged). §97.2's
+   consequence is RESTATED for the executor: the frozen-empty
+   control means a red member battery TRUNCATES — banking has no
+   door.
+3. **⛔ R1 remains convicted — slot 2 did not exist** (`queue-check`
+   exit 1, the estate read truly). **JUDGMENT: the rn-1 COMPILE
+   (TC18) is dispatched as the second slot** — chosen over TC17's
+   lg-2 recommendation because rn-1 is queue-adjacent (third in the
+   ruled executor order), fully ruled (§64/§66/§67), and a distinct
+   family; lg-2 additionally sits behind LG-0 and the Q10 prefix.
+   Say "veto" to flip to lg-2. ⚠ The Q10 BAND-WALKER PREFIX is
+   confirmed STILL OWED (it rode neither eff train) — it must land
+   before any LG band; docketed to the next infra member.
+4. TC17's two method traps are BANKED (the census walker's
+   ancestry-pin comments defeat first-match greps — probe the live
+   tuple line; a counterfactual that convicts for the WRONG reason
+   is not a proof). wc-0's executor dispatches at eff-1b's
+   collection.
