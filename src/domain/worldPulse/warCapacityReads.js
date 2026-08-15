@@ -57,7 +57,10 @@ export const ARMY_DEPLOYED_CAPACITY_PENALTY = 14; // home-defense points lost wh
 
 // Ally defense (P3, flag-gated). Support relationships whose neighbour may send relief,
 // and the fraction of that neighbour's home defense it contributes to the besieged town.
-const ALLY_SUPPORT_TYPES = new Set(['allied', 'ally', 'vassal', 'patron', 'defensive_pact']);
+// RN-C: `ally` left as an ORPHAN — it folds to 'allied' on both planes and has zero
+// producers, and 'allied' is already admitted here. `defensive_pact` STAYS: it is a
+// CHARTERED ORPHAN, expected-dead until peaceTermsCatalog's `mutual_defense` gains a writer.
+const ALLY_SUPPORT_TYPES = new Set(['allied', 'vassal', 'patron', 'defensive_pact']);
 const ALLY_RELIEF_FRACTION = 0.4;
 
 /**

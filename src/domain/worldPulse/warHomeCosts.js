@@ -76,7 +76,9 @@ const EXHAUSTION_CONDITION_FLOOR = 0.20;
 // vassal / allied neighbours. LEVY_SUPPORT_TYPES excludes 'patron' — you levy subordinates
 // and peers, not your own overlord. The strain is the loyalty cost: a levied vassal accrues
 // war-weariness, so an over-drawn client eventually rebels (and, under warDisposition, coups).
-const LEVY_SUPPORT_TYPES = new Set(['vassal', 'allied', 'ally', 'defensive_pact']);
+// RN-C: `ally` left as an ORPHAN (folds to 'allied' on both planes, zero producers, and
+// 'allied' is already admitted). `defensive_pact` STAYS as the chartered orphan.
+const LEVY_SUPPORT_TYPES = new Set(['vassal', 'allied', 'defensive_pact']);
 const LEVY_POP_RATE_PER_TICK = 0.004; // ~0.4% of a vassal's population per tick (gentler than home conscription)
 const LEVY_POP_FLOOR = 300;           // never levy a vassal below this skeleton population
 const LEVY_STRAIN_PER_TICK = 0.05;    // war-weariness a vassal accrues per tick of being levied (the loyalty cost)

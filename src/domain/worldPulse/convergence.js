@@ -825,7 +825,15 @@ function neighborsOf(edges, id) {
 }
 
 const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']);
-const FRIENDLY_REL = new Set(['ally', 'trade_partner', 'vassal', 'tributary', 'protectorate']);
+// RN-C: `tributary` and `protectorate` left as ORPHANS (zero producers tree-wide).
+// ⛔ `ally` STAYS, and it is DEAD: relType here is read RAW off a regional-graph edge, which
+// carries CANONICAL labels, and canonicalRelationshipLabel('ally') is 'allied'. So this set
+// admits a value that can never arrive and MISSES 'allied', which can — an allied neighbour
+// is not read as friendly by the motive scorer. Adding 'allied' would move GENERATED OUTPUT,
+// so it is a chair surface (CR-TE18-CONVERGENCEALLIED), not this output-neutral arm's. The
+// dead entry is kept ON PURPOSE: a tidy {trade_partner, vassal} would look correct and the
+// missing 'allied' would stop being visible. The habitat pin declares it expected-dead.
+const FRIENDLY_REL = new Set(['ally', 'trade_partner', 'vassal']);
 
 /** The 0..1 prosperity/strength proxy for a patron (the fundingOf idiom — economic
  *  capacity as the projectable-strength stand-in in wave 1). EXPORTED (W-COMPOSER-2):

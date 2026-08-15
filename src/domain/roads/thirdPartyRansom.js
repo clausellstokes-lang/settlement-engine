@@ -67,7 +67,12 @@ export const THIRD_PARTY_RANSOM_TUNING = Object.freeze({
 const REFUSE_TRAITS = new Set(['proud', 'loyal', 'principled', 'zealous', 'pious']);
 const ACCEPT_TRAITS = new Set(['pragmatic', 'ambitious', 'opportunistic']);
 // §9 the succor/leverage relationship reads (relationshipTypeBetween vocabulary)
-const ALLY_LIKE = new Set(['ally', 'allied', 'friendly', 'vassal', 'patron', 'client', 'defensive_pact', 'cordial', 'kinship']);
+// RN-C: `friendly`, `cordial` and `kinship` left this set as ORPHANS — the producer census
+// over all of src/ returns ZERO writes of each into any relationship-type position, and none
+// is in RELATIONSHIP_SELECTIONS, so no author can mint one. `cordial` remains load-bearing as
+// a deliberate NON-ADMITTED negative control in razingExecutionWr8/warDeployment fixtures;
+// removing it from THIS set is what those controls prove, and the fixtures are untouched.
+const ALLY_LIKE = new Set(['ally', 'allied', 'vassal', 'patron', 'client', 'defensive_pact']);
 const TRADE_LIKE = new Set(['trade_partner', 'trade', 'commercial']);
 const RIVAL_LIKE = new Set(['rival', 'cold_war']);
 // §9 the predatory (leverage) governing archetype — the generosity §2.1 leverage-seat read

@@ -99,7 +99,16 @@ const BELIEF_STRENGTH_WORDS = Object.freeze([
  * Re-deriving the set from the produced allianceLabel corpus is rn-1 arm C's row
  * (ODQ §67.4), not this rename's.
  */
-const COALITION_FRIENDLY_LABELS = Object.freeze(new Set(['allied', 'alliance', 'friendly', 'ally', 'vassal', 'suzerain']));
+// RN-C (ODQ §67.4): the set is RE-DERIVED from the PRODUCED allianceLabel corpus, and four
+// dead synonyms leave — `alliance`, `ally` (both fold to 'allied' on BOTH planes), `suzerain`
+// (folds to 'vassal' regionally) and `friendly` (no fold, and no producer anywhere). Measured:
+// ZERO writes of each into any relationship-type position across all of src/, and none is in
+// RELATIONSHIP_SELECTIONS. The survivors are reachable: 'allied' from the authoring
+// vocabulary, 'vassal' from three named producers.
+// ⚠ THE EXCLUSION OF trade_partner/patron/client STANDS AND IS DELIBERATE (J-RNC-6), on the
+// `envoyTestimony` precedent recorded above: a coalition is who would MARCH, not who would
+// trade. This is the §67.4 record-at-the-site, kept beside the re-derivation it qualifies.
+const COALITION_FRIENDLY_LABELS = Object.freeze(new Set(['allied', 'vassal']));
 const COALITION_HOSTILE_LABELS = Object.freeze(new Set(['hostile', 'cold_war', 'rival']));
 
 /** The pressure ladder's words, in ascending order, minus `unknown`. */

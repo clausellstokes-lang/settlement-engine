@@ -186,3 +186,119 @@ describe('vocabularyTotality — adversarial self-tests (not vacuous)', () => {
     expect(tokensBy(body, /m\s*===\s*'([^']+)'/g).sort()).toEqual(['frontier', 'safe']);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RN-C — THE REACHABILITY-PER-SPELLING HABITAT PIN (ODQ §64.6, the WC O-9 idiom)
+// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * THE HABITAT, not the instances. rn-1's arm C removed eight orphan members from six
+ * relationship admission sets. Removing them cures the instances; this pin removes the
+ * HABITAT that let them accumulate — a hand-rolled admission set drifting away from the
+ * vocabulary its producers can actually emit, silently, because an unmatched member is
+ * indistinguishable from a member that simply has not come up yet.
+ *
+ * THE RULE, and it is the same exact-set-both-ways rule as the contracts above: every
+ * member of every set below is EITHER declared reachable — a producer somewhere in src/
+ * writes it into a relationship-type-bearing position, or the authoring vocabulary
+ * `RELATIONSHIP_SELECTIONS` offers it — OR declared EXPECTED-DEAD with a written reason.
+ * A set that acquires an undeclared member REDS; a declaration for a member that has
+ * left REDS too, so a later cure must delete its row and bank the win here.
+ */
+const RELATIONSHIP_ADMISSION_SETS = Object.freeze({
+  'src/domain/roads/thirdPartyRansom.js|ALLY_LIKE': Object.freeze({
+    ally: 'EXPECTED-DEAD: folds to `allied` on both planes and has zero producers; kept because `allied` is admitted beside it, so the set is still correct.',
+    allied: 'REACHABLE: the authoring vocabulary (RELATIONSHIP_SELECTIONS).',
+    vassal: 'REACHABLE: named producers in occupation.js and relationshipRulesAdversarial.js.',
+    patron: 'REACHABLE: named producer in relationshipState.js (the patron/client orientation).',
+    client: 'REACHABLE: named producer in relationshipState.js.',
+    defensive_pact: 'EXPECTED-DEAD UNTIL `mutual_defense` GAINS A WRITER: the chartered orphan. peaceTermsCatalog.js carries `mutual_defense` as the writer-in-waiting and records that defensive_pact edges have had five reader families and no writer.',
+  }),
+  'src/domain/worldPulse/convergence.js|FRIENDLY_REL': Object.freeze({
+    ally: 'EXPECTED-DEAD, AND THE DEFECT IS THE REASON (CR-TE18-CONVERGENCEALLIED): relType here is read RAW off a regional-graph edge, which carries CANONICAL labels, so `ally` can never arrive — and `allied`, which can, is ABSENT from this set. Adding it moves generated output, so it is a chair surface. This row is the instrument pointing at that gap and must not be quietly deleted.',
+    trade_partner: 'REACHABLE: the authoring vocabulary.',
+    vassal: 'REACHABLE: named producers in occupation.js and relationshipRulesAdversarial.js.',
+  }),
+  'src/domain/worldPulse/conquestDoctrineStage.js|COALITION_FRIENDLY_LABELS': Object.freeze({
+    allied: 'REACHABLE: the authoring vocabulary.',
+    vassal: 'REACHABLE: named producers.',
+  }),
+  'src/domain/worldPulse/conquestDoctrineStage.js|COALITION_HOSTILE_LABELS': Object.freeze({
+    hostile: 'REACHABLE: six named producers.',
+    cold_war: 'REACHABLE: named producer, and the authoring vocabulary.',
+    rival: 'REACHABLE: the authoring vocabulary.',
+  }),
+  'src/domain/worldPulse/warCapacityReads.js|ALLY_SUPPORT_TYPES': Object.freeze({
+    allied: 'REACHABLE: the authoring vocabulary.',
+    vassal: 'REACHABLE: named producers.',
+    patron: 'REACHABLE: named producer.',
+    defensive_pact: 'EXPECTED-DEAD UNTIL `mutual_defense` GAINS A WRITER: the chartered orphan.',
+  }),
+  'src/domain/worldPulse/warHomeCosts.js|LEVY_SUPPORT_TYPES': Object.freeze({
+    vassal: 'REACHABLE: named producers.',
+    allied: 'REACHABLE: the authoring vocabulary.',
+    defensive_pact: 'EXPECTED-DEAD UNTIL `mutual_defense` GAINS A WRITER: the chartered orphan.',
+  }),
+});
+
+/** Members of a `const NAME = ... new Set([...])` declaration, lowercased + sorted. */
+function admissionSetMembers(src, name) {
+  const m = new RegExp(`const\\s+${name}\\s*=[^[]*\\[([^\\]]*)\\]`).exec(src);
+  if (!m) return null;
+  return tokensBy(m[1], /'([^']+)'/g).sort();
+}
+
+describe('RN-C — relationship admission sets: every member reachable or declared dead', () => {
+  it('the extractor finds real members (guard non-vacuity)', () => {
+    // Without this, a rotted regex would return [] for every set and the exact-set arms
+    // below would compare [] against [] for a declaration table nobody had maintained.
+    const src = "const T = new Set(['alpha', 'Beta']);";
+    expect(admissionSetMembers(src, 'T')).toEqual(['alpha', 'beta']);
+    expect(admissionSetMembers(src, 'MISSING')).toBe(null);
+  });
+
+  it('every set resolves, and its live membership EXACTLY equals its declaration', () => {
+    for (const [key, declared] of Object.entries(RELATIONSHIP_ADMISSION_SETS)) {
+      const [file, name] = key.split('|');
+      const live = admissionSetMembers(read(file), name);
+      expect(live, `${key} did not resolve — the set was renamed or reshaped`).not.toBe(null);
+      const declaredKeys = Object.keys(declared).map((k) => k.toLowerCase()).sort();
+      expect(
+        setDiff(live, declaredKeys),
+        `${key} gained UNDECLARED member(s). Every member must be either reachable by a`
+        + ' named producer or declared EXPECTED-DEAD with a written reason — that is the'
+        + ' habitat rule rn-1 arm C exists to install.',
+      ).toEqual([]);
+      expect(
+        setDiff(declaredKeys, live),
+        `${key} declares member(s) that have LEFT the set. Delete their rows here in the`
+        + ' same commit that removes them, so the win is banked in the diff.',
+      ).toEqual([]);
+    }
+  });
+
+  it('every EXPECTED-DEAD declaration carries a real written reason', () => {
+    // A bare 'EXPECTED-DEAD' would let a member be parked without anyone stating why it
+    // cannot arrive — which is exactly the silence this pin exists to end.
+    const dead = Object.entries(RELATIONSHIP_ADMISSION_SETS)
+      .flatMap(([key, d]) => Object.entries(d).map(([m, why]) => [`${key}|${m}`, why]))
+      .filter(([, why]) => why.startsWith('EXPECTED-DEAD'));
+    expect(dead.length, 'the expected-dead population vanished — this pin would be vacuous').toBeGreaterThan(0);
+    for (const [at, why] of dead) {
+      expect(why.length, `${at} has a stub reason`).toBeGreaterThan(60);
+    }
+  });
+
+  it('the chartered orphan is present in ALL FOUR of its readers', () => {
+    // defensive_pact is kept deliberately. If a later sweep removed it from one reader
+    // but not the others, the four would silently disagree about the same edge.
+    const readers = [
+      'src/domain/roads/thirdPartyRansom.js',
+      'src/domain/worldPulse/warCapacityReads.js',
+      'src/domain/worldPulse/warHomeCosts.js',
+      'src/domain/worldPulse/warAllianceRisk.js',
+    ];
+    for (const f of readers) {
+      expect(read(f).includes("'defensive_pact'"), `${f} dropped the chartered orphan`).toBe(true);
+    }
+  });
+});

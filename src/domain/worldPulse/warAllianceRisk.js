@@ -38,7 +38,10 @@ export function readAllianceWebRisk({ rows, observerId, enemyId, worldState, str
     // The belief label is observer↔subject (the only categorical relationship
     // axis the belief estate actually owns).  A court believed friendly is less
     // likely to retaliate against the observer; a believed rival is more likely.
-    const responseWeight = ['allied', 'ally', 'vassal', 'patron', 'defensive_pact'].includes(believedRelationship)
+    // RN-C: `ally` left this inline literal as an ORPHAN — it folds to 'allied' on both
+    // planes and has zero producers, and 'allied' is already admitted. `defensive_pact`
+    // STAYS as the chartered orphan (expected-dead until `mutual_defense` gains a writer).
+    const responseWeight = ['allied', 'vassal', 'patron', 'defensive_pact'].includes(believedRelationship)
       ? 0.35
       : ['hostile', 'rival', 'cold_war'].includes(believedRelationship) ? 1 : 0.7;
     const believedStrength01 = clamp01(readBeliefStrength(observer, subjectId, worldState, truth)) * responseWeight;
