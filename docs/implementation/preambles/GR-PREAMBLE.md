@@ -444,3 +444,137 @@ The preamble deliberately does **not** cover, and a member packet must supply:
 - its wave-specific mutants and wave-specific hazards;
 - its sealed-check child list and completion-receipt contents;
 - the SHA-256 of **this file** as it stood at promotion.
+
+---
+
+## §P10 · THE §74 CAP, THE §70.4 STAMP PRECONDITION, AND THE §81.3 STANDING BATTERY TEMPLATES
+
+⚠ **ESTATE-WIDE LAW, LIFTED VERBATIM INTO EVERY FAMILY PREAMBLE.** `PACKET_STANDARD.md`
+permits the lift for "sections that are genuinely estate-wide law" and requires the lift to be
+recorded as one; this is that record. Only the **stamp line** below is family-measured. Every
+other byte of this section is identical in the GR, HB, IN, INFRA and INT preambles, so a
+compile may read it once and cite it thereafter.
+
+### 1 · The member cap is evidence-gated (`DESIGN_BUILD_EFFICIENCY.md` §2.6, ODQ §74.2)
+
+| Family's §70.4 Fable-round stamp | Engine train | Prose / docs / dossier train |
+|---|---:|---:|
+| **stamped** | up to **8** members | up to **10** members |
+| **un-stamped** | **4** | **4** |
+
+⛔ **THE STAMP IS A PRECONDITION, NEVER A DEFAULT.** ODQ §70.4: a compile citing an
+Opus-swept annex that carries no Fable-round stamp **inherits a STOP**. An un-stamped family
+stays at four however light its waves look, and no executor may read a light wave class as a
+stamp. The §61 incremental machinery keeping an annex green is not a stamp either — the stamp
+is the round's own recorded acceptance.
+
+⛔ **NOTHING ELSE IN §2 MOVES WITH THE CAP.** Per-member full proof (§2.2), the ONE terminal
+bare gate, truncate-to-green (§2.4), the flag-wave train boundary (§2.5) and the census
+re-derived WHOLE at the last tests-moving member (§2.3) are all unchanged. The gate is
+amortized wider, never thinned.
+
+**THIS FAMILY'S STAMP, AS RECORDED:** **NONE RECORDED.** The §70 program closed at seven rounds, stamping WC · WF · EP · POP · INT · WY · TR/IN/CW/ES (ODQ §96.4); **GR is not among them**, and no §70.4 acceptance for this volume appears in the decision queue. **GR trains therefore cap at FOUR members**, engine or prose, until a Fable round stamps the volume and this line is re-measured. ⚠ Do not read the §96.4 summary sentence "every family stamped" as covering GR: the parenthetical in that same ruling is the enumeration, and it is the enumeration that binds.
+
+### 2 · Pre-proof is compression, never proof (`DESIGN_BUILD_EFFICIENCY.md` §2.7, ODQ §74.3)
+
+A train plan MAY declare a pre-proof plan and run `scripts/preproof-train.mjs` from the serial
+executor slot, executing member batteries concurrently in throwaway worktrees outside the repo
+before the train assembles.
+
+- ⛔ **A pre-proof green is NEVER landing proof.** Every battery re-runs at its own member
+  commit, and the terminal still runs the one bare gate plus the separate boot smoke.
+- A pre-proof **exit 1** is an early truncation signal — every battery ran and at least one
+  was red.
+- A pre-proof **exit 2** is a harness or setup failure and implies **nothing** about any
+  member; reading it as a truncation signal is the recorded R-D6 defect.
+
+### 3 · The premise map rides every train plan (§77; `scripts/premise-map.mjs`)
+
+The compile runs `validate` (with `--annex`), then `queue-check`; at any refutation the
+executor runs `scope`. An absent map, an invalid map, a LAW-graded refutation, a near-miss row
+id, or a truncation that leaves nothing to continue all keep the conservative FULL-TRAIN STOP.
+A surviving tail RE-CHAINS by exact-manifest cherry-pick and re-proves at its new commits; it
+never lands its original commits, because those carry the stopped member's tree as ancestor.
+
+### 4 · §81.3 · THE STANDING BATTERY TEMPLATE PER WAVE CLASS
+
+The template deletes the per-wave re-derivation of proof ARCHITECTURE. **Proof CONTENT is
+unchanged** — a wave still executes every line below and records its own figures in its own
+packet. Per-line provenance is tagged: `[receipt: …]` lines were re-verified against the named
+landed receipt, `[law: …]` / `[practice: …]` lines against the named law text. No line claims a
+receipt that does not exist.
+
+**Every wave, regardless of class, additionally owes:** the §31 anchor preflight · the
+validator status-sequence simulation · `CLAIM_RE` at zero over authored docs bytes, with the
+per-claim naked-claim ratchet consulted BEFORE writing · manifest edits surgical-only · exits
+read in-shell and gates read from the gate-tail's own line · the §77 premise-map rows for its
+train.
+
+#### T-ENGINE (exemplars: GR-5A P1′/I1′, INT-3B I1)
+
+1. Focused vitest battery: every touched module's own suite **plus every walker suite whose
+   scan claims a touched path** — run own-shell, exits captured.
+2. Behaviour pins for each contract line in the packet's contract section, including at least
+   one NEGATIVE control per new branch — trajectory / multi-tick pins where state accumulates,
+   not only pure-function pins. `[receipt: TE13 C3 (the two-armed eligibility control, proved
+   by reachability over 400 seeds) and C6 (totality on the POST-change composer); law:
+   fixture-mirrors-deriver for the trajectory clause — a fixture that mirrors the deriver can
+   never see a dead arm]`
+3. Census re-derived WHOLE at the last tests-moving member, never patched; effective lines by
+   eslint's own `Linter` under `max-lines {skipBlankLines, skipComments}`, never `wc -l`.
+   `[receipt: TE12 §4; TE13 §3]`
+4. Both typecheck ratchets at their exact floors; the OSR figure held; zero new coupling pairs
+   unless the packet prices the row. `[receipt: TE12 and TE13, both]`
+5. Same-seed posture STATED: dark = byte-identity proven behind the dormancy fence
+   `[receipt: TE13 C4 — the dark golden byte- and sha-identical]`; output-moving = the
+   declared-shift row plus a pre-feature golden built from `git archive <base>` and the test
+   file's OWN fixture `[practice: the ES-Da landing and the §80.2 declared-shift batch — NOT
+   exemplified by any of the three named train receipts, all of which were dark]`.
+
+#### T-PROSE
+
+⚠ **NO LANDED TRAIN RECEIPT EXISTS FOR THIS CLASS.** These lines derive from the AO
+prose-family contract landings, the GR producers-before-prose law, the finite-semantics law,
+the per-claim naked-claim ratchet and the rendered-surface-negative law. `gen-2` will supply
+the first train exemplar. A compiler verifies these lines against the named LAW texts, and
+must not cite a receipt for them.
+
+1. Corpus additions are DATA under the finite-semantics law: typed buckets only, no new engine
+   branches; producers land BEFORE prose (the GR law).
+2. `CLAIM_RE` at zero on every authored doc; the per-claim naked-claim ratchet consulted BEFORE
+   writing, because a new claim key mints a NEW key and reds a test that is green today.
+3. Census motion is TITLE-ONLY or none; no walker baseline moves; the validator status sequence
+   is simulated at compile.
+4. A rendered-surface pin for at least one consumer of each new bucket — the
+   rendered-surface-negative law's second vacuity is a negative that passes because the surface
+   never rendered at all.
+
+#### T-WALKER (exemplars: INT-3B's three walkers, IN-1C-A's registry walker)
+
+1. The walker convicts BOTH directions — an exact-set `toEqual` or equivalent: unwritten claims
+   red AND unclaimed writes red. `[receipt: TE12 M4]`
+2. At least two IN-SUITE MUTANT-CONTROL arms proven to THROW on every ordinary run (the §75
+   idiom) — never a sweep plant, because `git checkout --` on a live shared tree is thrice
+   prohibited. `[receipt: TE13 §4.3 — arms 5 and 6, a duplicated section heading and a rotted
+   kind heading, each proven to throw]`
+3. The mutation-coverage manifest row: the family's own rationale ref in the
+   GRAMMAR / COMMERCIAL / §75 shape, TWO surgical inserts, **never a re-serialize**.
+   `[law: ODQ §75.1 option 2, adopted verbatim]`
+4. Two-census pricing declared at compile — a new test FILE reds two censuses, and the ceiling
+   doors are lock-the-win / re-point / cure, named in the packet. `[receipt: TE13 J-TE13-2]`
+5. `// anchored:` lines obey the last-line rule; no self-supplied anchors.
+
+#### T-REGISTRY (exemplar: IN-1C-A)
+
+1. The registry row lands WITH its live writer or minter in the SAME commit — the §73.3 F-1
+   consumerless-row law; both directions red otherwise. `[law: ODQ §73.3 F-1, quoted]`
+2. Flag-minting prices the §49/§50 THREE OBLIGATIONS: the ordered `subsystemRowsVirtual` pin ·
+   the seven edge-shared bundles when `simulationRules.js` moves · the LITERAL `<flag>: true`
+   drive in the acceptance file. Flag waves are train boundaries. `[law: ODQ §50.2]`
+3. Minting a seeded chooser or pool additionally prices the §85.4 TWO OBLIGATIONS at compile:
+   its decision-fork classification row and its mechanism-coverage baseline row.
+   `[law: ODQ §85.4]`
+4. Width and liveness bounds are CURED, never lowered — non-emptiness plus an exact-equality
+   exception list naming the small family. `[receipt: TE13 J-TE13-3]`
+5. Registry-count constants re-derived, each a measured edit and never an inherited figure.
+   `[receipt: TE13 §5]`
