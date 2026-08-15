@@ -8788,6 +8788,112 @@
           "tests/domain/contributionLedgerShape.test.js"
         ]
       ]
+    },
+    {
+      "id": "RN-A0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/RN-A0.md",
+      "verifiedBase": "cf12c9768bea3619a71574cafdd4c4b820922f63",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/conquestDoctrineStage.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/spatial/intelActs.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/postureNameCollision.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/conquestDoctrineStage.js",
+          "symbol": "export function coalitionCensusFor"
+        },
+        {
+          "path": "src/domain/spatial/intelActs.js",
+          "symbol": "export function intelTradeActive"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/conquestDoctrineStage.js",
+          "symbol": "const FRIENDLY_LABELS"
+        },
+        {
+          "path": "src/domain/worldPulse/conquestDoctrineStage.js",
+          "symbol": "const HOSTILE_LABELS"
+        },
+        {
+          "path": "src/domain/spatial/intelActs.js",
+          "symbol": "const BOND_KINDS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "tests/lint/postureNameCollision.walker.test.js passes whole, including the new RN-A0 arm"
+        },
+        {
+          "id": "A2",
+          "case": "each of COALITION_FRIENDLY_LABELS, COALITION_HOSTILE_LABELS, INTEL_BOND_KINDS resolves to exactly ONE definition under src/domain"
+        },
+        {
+          "id": "A3",
+          "case": "FRIENDLY_LABELS now resolves to exactly ONE definition (beliefMap.js) and BOND_KINDS to exactly ONE (npcLadderState.js)"
+        },
+        {
+          "id": "A4",
+          "case": "HOSTILE_LABELS still resolves to exactly TWO definitions — the deliberate residual, pinned so the non-cure is visible"
+        },
+        {
+          "id": "A5",
+          "case": "tests/domain/intelActs.test.js and tests/domain/espionageDoctrine.test.js pass unchanged"
+        },
+        {
+          "id": "A6",
+          "case": "tests/domain/conquestExecutionWr8.test.js and tests/domain/razingExecutionWr8.test.js pass unchanged"
+        },
+        {
+          "id": "A7",
+          "case": "tests/lint/seatVocabularyUnification.walker.test.js passes unchanged"
+        },
+        {
+          "id": "A8",
+          "case": "both typecheck ratchets sit at their exact floors"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/postureNameCollision.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/intelActs.test.js",
+          "tests/domain/espionageDoctrine.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/conquestExecutionWr8.test.js",
+          "tests/domain/razingExecutionWr8.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/seatVocabularyUnification.walker.test.js"
+        ]
+      ]
     }
   ]
 }
