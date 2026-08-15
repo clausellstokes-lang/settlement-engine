@@ -4166,3 +4166,34 @@ before you do the full soak and tune."**
    figures under a red ratchet). J-TE20-1..10 SIGNED. TE20's
    continuation runs cs-b as CS-B0 + the plan's train two + the
    amended-law re-record; BOTH trains expose at its green terminal.
+
+## §111 · CS-B0 COLLECTED — THE NULL-LATCH KILLED; THE HONEST STOP
+## RATIFIED; TE21 FINISHES (2026-08-15, chair; evidence the
+## laneTE20-receipt.md continuation appendix)
+
+1. **CS-B0 IS COLLECTED with a sharper mechanism than the fork as
+   posed**: `foldBeliefAxes` tested KEY PRESENCE for its cold seed,
+   so a belief folded before its subject's traditions materialized
+   wrote `observanceLabel: null` and LATCHED permanently — the
+   ground-truth fallback could never fire again. The cure seeds on
+   no-label-yet, key absent OR present-but-null. **The pin was
+   restored with ZERO characters edited and went red→green** —
+   vindicating §110.2's refusal to truncate (the latch predates cs-1
+   and is independent of it). The lifecycle lesson joins the
+   persisted-state family: a key-presence cold-seed test is a
+   LATCH-MINTING shape — seed on semantic absence, never key
+   absence.
+2. **TE20's honest stop is RATIFIED AS EXEMPLARY**: the three
+   remaining cures written, measured line-neutral (convergence's
+   two-line ceiling unconsumed), and SAVED AS A PATCH rather than
+   shipped without the trajectory pins this train's charter exists
+   to demand — a clean tree plus a measured patch outranks unproven
+   cures, exactly the receipts-over-claims doctrine. The §110.4
+   parenthetical is corrected on the record (train two = cs-3,
+   cs-4, cs-6; the stale members were already landed in cs-a; no
+   cs-b member touches armyTransitKernel — it rests at 797/800).
+3. **TE21 IS DISPATCHED to finish** from the patch: the three
+   trajectory pins to the cs-a standard, the packets, the amended-
+   §72.3 golden re-record quoting the four-family table, the
+   expected-green terminal, the capsule, both trains closed for a
+   single chair CAS.
