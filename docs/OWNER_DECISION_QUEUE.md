@@ -3856,3 +3856,35 @@ product thesis, and the constitution held under measurement.**
    convicted its own draft). The cure text joins the next
    build-branch docs member. rn-1 stands READY, third in queue
    behind WC-0E.
+
+## §102 · wc-0 COLLECTED AND EXPOSED — THE WC FAMILY'S FIRST CODE,
+## THE SEVENTEENTH EXPOSURE (2026-08-15, chair; evidence
+## laneTE17-receipt.md, twelve commits, four members, no truncations)
+
+1. **wc-0 IS LANDED AND EXPOSED** (CAS `98c7872e → 00298c5f`,
+   validator 60/0 own-shell, gate + smoke green bare, census landing
+   on TC17's predicted tuple `2437/364/2073/20175/5666` FIRST TRY,
+   confirmed three independent ways). The first machinery-native
+   train worked end to end: pre-proofed, premise-mapped, exact
+   manifest arities at every member.
+2. **The §59.3 transcriptions are SIGNED** (amnesty ←
+   non_intervention 0.5/6/15/1.0; jubilee ← toll_exemption
+   0.5/4/10/1.0, derivations quoted in the receipt and the source)
+   and **the six house lines are COLLECTED AND SIGNED** on their
+   executed guards — §59.4's corpus signature completes.
+3. **J-TE17-10 RATIFIED AND MADE LAW**: the unpriced
+   mutation-coverage row for a new lint file was cured surgically
+   rather than truncating a proven train, and the class is standing —
+   **every new `tests/lint/` file owes its coverage row, priced at
+   compile** (second instance after §75; the WC preamble and the
+   packet standard's next docs member carry it). J-TE17-6 RATIFIED
+   (three mutable ceiling literals in requiredSymbols made
+   rot-proof, one the executor's own — the EFF-M4 conviction
+   extended). The three vacuous pins caught BY THEIR OWN MUTANTS are
+   ratified as the pin-vacuity machinery earning its keep. All ten
+   judgments SIGNED. §77 R1 is DISCHARGED at measurement.
+4. **WC-0E IS DISPATCHED as TE17's continuation** on `00298c5f`:
+   both WC flags mint with the §49/§50 obligations INCURRED, the
+   §73.3 F-1 charter in full (TRACKED rows + writers + by-name
+   gate-read modules same-commit), §92.2 in-file certification, a
+   solo train per the flag-boundary law.
