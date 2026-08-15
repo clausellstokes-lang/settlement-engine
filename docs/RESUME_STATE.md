@@ -110,7 +110,19 @@ noted, not rescued (contents superseded by the committed copies).
 scratchpads) → `laneWCS-findings.md`; verdict FOUND-WHOLE / FOUND-PARTIAL /
 LOST decides whether the WC sitting re-rules from the volume's veto list.
 
-**LIVE (~15:20, keeper tick): Lane TC11 COMPILES GR-5** (treatyRenewalEnabled,
+**⛔→✅ TE11 STOPPED AT I1 (~18:30), RATIFIED §49 (ledger `66f99b49`):** the
+certification row is MANDATORY but reds the ordered pin at
+`subsystemRowsVirtual.test.js:384` — a file the six-path manifest omitted
+(TC11 missed HB-2's adjacent precedent). AMENDMENT SIGNED: the seventh path
+joins (three literal edits, ZERO titles, census-neutral). ⭐ STANDING LAW
+MINTED: every flag-minting packet includes subsystemRowsVirtual.test.js —
+three independent discoveries = the habitat. Every §47 tripwire HELD at the
+stop (peaceTerms 797/797/3-3 exact; P1's four named reds only; CLAIM_RE 0).
+Parked P1 `836d1da8` stays as evidence; stopped-tree banked.
+**LIVE (resumed ~18:45): TE11 re-authors P1′ and runs the amended
+seven-path train to T** (tuple `2429/366/2063/20115/5654`, runtime 28138,
+validator 45/0 at T; held gate + smoke). Chair owns CAS.
+**(superseded) TC11 compile dispatch** (treatyRenewalEnabled,
 single-member flag-boundary train) from `6cd18ad3` — SPV-inline grading
 ordered on every volume claim (the stale-charter record is six-for-six);
 the TTS status-sequence simulation ordered at compile; tuning-flavored
