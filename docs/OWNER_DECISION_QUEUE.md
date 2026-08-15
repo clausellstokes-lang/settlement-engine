@@ -1915,3 +1915,12 @@ derivation family with the fleet count and rebuild speed) from THROUGHPUT
 (what a route/mode can carry — the §46a bounds). Both read the landed
 stat substrates; coefficients under the §43 law; the volume charters them
 as two distinct typed reads so neither ever impersonates the other.)
+
+§46c addendum (owner, ~11:05; RESTORED ~13:20 — the original append ran in
+the wrong worktree via the recorded cwd-reset hazard and never reached the
+ledger; text preserved verbatim, gap found at the hb-2b collection):
+group-traveling spies also gain a HIGHER chance of avoiding military units
+that cross the route — the group's civilian profile shields its members
+from military encounter checks, spy included. (Chair: same modifier family;
+the group's existing encounter-treatment is the one truth the spy inherits,
+avoidance and refusal alike.)
