@@ -2199,3 +2199,28 @@ Phase-F dispositions unchanged.
    ratified on the report.
 5. The OSR receipt gap is accepted as declared (frozen-baseline arithmetic
    inherited; ANY movement at execution is a STOP).
+
+## §55 · IN-1C-A IS RULED (2026-08-16 ~06:20, chair, vetoable; one sitting
+## per §5; evidence in laneTC13-TRAIN-PLAN.md §7 + laneTC13-report.md)
+
+All five batched questions SIGNED per TC13's recommendations: **Q1**
+`'routine'` annex-verbatim (nine variants clear the floor of 8 outright —
+no exception row; DECLARED_EXCEPTIONS stays single-entry) · **Q2** the two
+{season} variants DECLARED UNREACHABLE with the measurement; the eligible
+set pinned at exactly SEVEN with the anti-vacuity control (given a season ⇒
+NINE, else the filter is stuck); the season supply is its own future act
+with its boot-chunk cost priced · **Q3** the interim-desk decision rules at
+IN-1c-b's compile (an EXACT_SECTION row to events with a dated IN-5
+re-point comment — the fallback becomes a decision); IN-1C-A touches
+heraldRouting NOT AT ALL · **Q4** CR-IN1C-DRIFT DOCKETED to the machinery
+queue (nine forked seeded-pick sites, two spellings, the FNV low-bit hazard
+cured in exactly one — a cross-family refactor, a STOP for any single wave;
+IN-1C-A copies the cured spelling and records why) · **Q5** the three
+certification-surface movements rule together WITH Q3 as one IN-1c-b
+charter. The REFUSED-AS-CHARTERED split (A compiled / b blocked on
+Q3+Q5 / c refused — no producer) is SIGNED; J-TC13-1 ratified; the member
+lands WITHOUT a value signature on the §47 O-6 precedent (zero authored
+numbers, stated affirmatively). The mirror's past-tick non-derivability
+finding (a strength crossing is inexpressible; all three cures closed) is
+RECORDED as IN-family substrate — IN-1c-b's charter inherits it.
+EXECUTION SERIALIZES behind INT-3B (one engine worktree).
