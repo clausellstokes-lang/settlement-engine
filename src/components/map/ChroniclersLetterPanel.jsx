@@ -10,6 +10,23 @@
  * @enforced-by tests/domain/chroniclersLetter.test.js + tests/property/chroniclersLetterGolden.test.js
  */
 
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The letter's span header states the exact window the letter was composed over,
+ * which is the DM's own read-floor control ("Mark as read" moves it).
+ *
+ * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ * prose-leak-allowance: tick 1
+ */
+
 import { useMemo } from 'react';
 import { Mail, Check, Download, Sparkles } from 'lucide-react';
 import { useStore } from '../../store/index.js';

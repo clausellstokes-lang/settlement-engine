@@ -12,6 +12,23 @@
  * Lazy: the auspice domain module is dynamic-imported on demand, so its advance
  * engine stays off the first-paint closure.
  */
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The omen beat's gutter stamp is the DM's index into a THROWAWAY future run;
+ * the number is how the DM lines a glimpsed beat up against the real realm.
+ *
+ * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ * prose-leak-allowance: tick 1
+ */
+
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BODY, BORDER, GOLD_DEEP, AMBER_DEEP, sans, FS, SP, R } from '../theme.js';

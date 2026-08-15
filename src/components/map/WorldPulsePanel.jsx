@@ -1,3 +1,20 @@
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The panel header's clock chip and the latest-pulse card's heading both name
+ * the advance the DM is inspecting; the Pulse is the advance instrument itself.
+ *
+ * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ * prose-leak-allowance: tick 2
+ */
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
