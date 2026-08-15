@@ -5,9 +5,21 @@
 **Scope:** instructions compiled for coding agents from SettlementForge design law
 
 **Measured tree:** `claude/composite-r4` at
-`600831749908e340444087df734d18c27046980d` on 2026-08-14 — the base of the
-`infra-1` train, whose member `INFRA-M1-DOCS` added the three §28 sections below
-(train landings, family packet preambles, the base-state capsule).
+`954b4e0f7cfcc18426da352d6dda34ece6c2a53b` on 2026-08-15 — the base of the
+`eff-1a` train, whose member `EFF-M2` added the six efficiency sections below
+(differential member caps, parallel pre-proof, premise maps and scoped
+truncation, validator status-sequence simulation, the registration obligations,
+and the census-burn law). The three §28 sections (train landings, family packet
+preambles, the base-state capsule) were added by `INFRA-M1-DOCS` at
+`600831749908e340444087df734d18c27046980d`.
+
+⚠ **Two authority citations below point at the ledger branch, deliberately.**
+`DESIGN_BUILD_EFFICIENCY.md` §§2.4-R2, 2.6 and 2.7 are chair law texts landed on
+`review-fixes-2026-07-08` after this branch's copy was folded, so the folded
+`docs/DESIGN_BUILD_EFFICIENCY.md` here does not yet carry them. Re-folding that
+volume is a chair act and is recorded as owed; the sections below therefore state
+their law in full rather than delegating it to a citation a reader cannot follow
+on this branch.
 
 ## Purpose
 
@@ -163,6 +175,142 @@ remaining members are no-flag slices of that same flag. No cross-volume trains
 until two same-volume trains have landed clean.
 
 Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.
+
+## Differential member caps
+
+The four-member cap above priced mid-train premise death at the rate the HB era measured. The
+pre-verification stack — substrate annexes, the Fable rounds, validator-topology simulation —
+has since driven mid-train premise deaths to zero across the landed trains, so the cap
+differentiates on evidence rather than on caution:
+
+| The family's Fable-round stamp | Engine train | Prose / docs / dossier train |
+|---|---:|---:|
+| **stamped** | up to **8** members | up to **10** members |
+| **un-stamped** | **4** | **4** |
+
+⛔ **The stamp is a precondition, never a default.** A compile that cites a substrate annex
+carrying no Fable-round stamp inherits a STOP. An un-stamped family stays at four however light
+its waves look, and no compiler may read a light wave class as a stamp. A family's own preamble
+carries its recorded stamp status; that line, not this table, is where a compiler reads which
+column it is in.
+
+⛔ **Nothing else in the train law moves with the cap.** Per-member full proof, the single bare
+terminal gate, the whole-census re-derivation, truncate-to-green, and the flag-wave boundary
+are all unchanged. The gate is amortized across more members, never thinned.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.6 · `OWNER_DECISION_QUEUE.md` §74.2.
+
+## Parallel pre-proof
+
+A train plan MAY declare a pre-proof plan. `scripts/preproof-train.mjs`, invoked from the
+serial executor slot, runs each member's declared battery concurrently in a throwaway detached
+worktree outside the repo, and reports a member-by-exit table.
+
+⛔ **A pre-proof green is never landing proof.** The assembled train still runs every battery at
+its own member commit and still seals with the one bare terminal gate; pre-proof compresses
+wall clock and nothing else. Its exits are read as: **0** every battery ran and passed · **1**
+every battery ran and at least one was red, which is an early truncation signal · **2** a
+setup, harness, timeout, or startup failure, which implies **nothing** about any member. Reading
+an exit 2 as a truncation signal is a recorded defect class, not a judgment call.
+
+Invocation is confined to the executor slot because `git worktree add/remove` writes shared
+repository metadata, and the harness is deliberately wired into no npm script so the check-chain
+mutex can never catch it.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.7 · `OWNER_DECISION_QUEUE.md` §74.3.
+
+## Premise maps and scoped truncation
+
+A refuted premise used to stall the pipeline through three channels. Each has its own
+redundancy, and all three are checkable with `scripts/premise-map.mjs`.
+
+**R1 — the dual-family ready queue.** The compile pipeline keeps the executor queue's next TWO
+slots compiled and status-simulated, drawn from at least two distinct families, so a STOP pivots
+the serial slot to the other family at zero wall clock while the re-charter runs on chair and
+compile lanes. Where build order forces same-family adjacency, a staged-promotion pair — two
+trains split precisely so that shared change paths are never reserved by two non-terminal
+packets at once — occupies ONE slot, and the invariant binds over the pair plus the next
+distinct-family train. `premise-map.mjs queue-check` enforces the invariant and binds the queue
+block to the plan's own train.
+
+**R2 — the premise map.** Every train plan carries a map of member → the annex rows and rulings
+it cites, derived from the packet's own substrate citations and checked at compile. The plan
+file is JSON, schema v2: `train`, `family`, `annex`, optional `flagMember`, `members[]` with
+`premises[{row, grade}]` or an explicit `premiseFree: true`, optional `dependsOn` naming EARLIER
+members only, optional `forks[]`, and a `queue[]` block. Grades are `MEASURED-TRUE`,
+`UNVERIFIABLE-AT-BASE`, or `LAW`, and one row carries one grade plan-wide. Row ids are
+charset-validated after NFC normalization and, with `--annex`, must exist in the named annex —
+the map's completeness is a compile-verified claim, never an assumption.
+
+At execution, a refuted substrate row stops the citing members AND, transitively, every member
+that `dependsOn` a stopped member or slices a stopped flag member.
+
+⛔ **A continue-tail never lands as committed** — its commits carry the stopped member's tree as
+ancestor. The surviving tail re-chains by exact-manifest cherry-pick onto the last surviving
+member, re-proves every battery at its new commits, and the census re-derives at the surviving
+chain's last tests-moving member.
+
+⛔ **The conservative defaults are structural, not optional.** A refutation that is LAW-shaped,
+a map that is absent or invalid, a refuted row id that matches a citation only after
+normalization, and a truncation that leaves nothing to continue each keep the FULL-TRAIN STOP.
+A near-miss row id must convict rather than report that no member cites it: a silent no-op is
+how a member built on a refuted premise lands while the receipt tells the chair the train was
+unaffected.
+
+**R3 — pre-ruled conditional forks.** Only where a premise is graded `UNVERIFIABLE-AT-BASE` may
+the compile bring a fork to the chair at promotion: "if row X refutes at execution, member M
+lands in shape M′." Signed then, the anticipated refutation costs no mid-train round trip.
+Bounded deliberately — never blanket pre-ruling. A forked member is its own outcome and is never
+listed as stopped; its DEPENDENTS still stop unless the chair rules otherwise.
+
+Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.4 · `OWNER_DECISION_QUEUE.md` §77, §83, §86.
+
+## Validator status-sequence simulation
+
+Before a train plan is dispatched, the compile EXECUTES the plan's validator status sequence
+against a synthetic manifest — every intermediate state the chain will pass through, in order,
+not merely its endpoints. A change path is reserved at every non-terminal status, DRAFT
+included, so two live packets naming one path red `validate:packets` until one of them reaches
+a terminal status; a plan that only checks its final state cannot see that.
+
+Authority: `OWNER_DECISION_QUEUE.md` §45.2.
+
+## Registration obligations a wave prices at compile
+
+Two mint classes carry standing obligations that no packet had enumerated, and each was
+independently discovered more than once before it was written down. A wave in either class
+prices them AT COMPILE, in its own change manifest.
+
+**A flag mint carries three obligations.** (a) The ordered `subsystemRowsVirtual` equality pin.
+(b) The seven generated edge-shared bundles, whenever `simulationRules.js` moves — the freshness
+gate reds without them, and the cure is one `npm run build:edge-shared` with zero handwritten
+files. (c) ⭐ The LITERAL `<flag>: true` drive in the acceptance file: mechanism-coverage credit
+is granted only on a literal, so a computed member attributes to no key at all. Obligation (c)
+is the cheapest to miss, because the code is right and only the machinery is blind.
+
+**A seeded chooser or pool mint carries two obligations.** (a) Its decision-fork classification
+row, classified by the registry's own taxonomy — no honest class is a STOP, never a guess. (b)
+Its mechanism-coverage baseline row, appended with the standard rationale idiom. Both are
+estate-wide rows, and both belong to the minting wave rather than to whichever family happens to
+own the file.
+
+Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4.
+
+## Burning a census row
+
+⛔ **Burning a census row is never a one-path act.** Every inventory that asserts the row's debt
+goes stale the moment the win lands, so a compile prices the inventory sweep together with the
+burn — the burn, the ratchet descent, the control or floor the row fed, and every other
+enumeration naming it, counted as paths in the change manifest before dispatch rather than
+discovered at the terminal.
+
+Two shapes follow from that. A floor under an emptied population is DELETED, not zeroed: a zero
+floor beneath an empty control asserts nothing. And where a payment empties a population
+entirely, the control CONVERTS to the victory assertion — the population is exactly zero, the
+message names what was eradicated, and any future member of that population reds on arrival
+instead of being banked into a census.
+
+Authority: `OWNER_DECISION_QUEUE.md` §95.2, §97.2.
 
 ## Family packet preambles
 
