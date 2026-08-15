@@ -9367,6 +9367,232 @@
           "tests/lint/negativeAssertionAnchor.walker.test.js"
         ]
       ]
+    },
+    {
+      "id": "CS-A1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-A1.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/npcGenerator.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/generators/hookThemeDraws.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateReligionType"
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "const hookRegistry"
+        },
+        {
+          "path": "src/generators/hookVariety.js",
+          "symbol": "export function drawUnique"
+        },
+        {
+          "path": "tests/generators/hookThemeDraws.test.js",
+          "symbol": "HK-3 draws — the corpus, through the real pipeline"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "within a single settlement no tell and no speech pattern repeats while the drawn count stays at or under the authored pool size, asserted at every prefix length"
+        },
+        {
+          "id": "A2",
+          "case": "the same generation with the registry Sets absent reproduces a duplicate, so the accumulator arm cannot pass vacuously"
+        },
+        {
+          "id": "A3",
+          "case": "the total seeded roll count is equal with and without the registry Sets — the draw swap is roll-for-roll neutral"
+        },
+        {
+          "id": "A4",
+          "case": "no NPC roster resizes and no field outside personality.tell and personality.speech moves across the corpus"
+        },
+        {
+          "id": "A5",
+          "case": "npcGenerator.js stays at its exact 1350-line baseline, so no size-baseline motion is owed"
+        },
+        {
+          "id": "A6",
+          "case": "generateReligionType called with no argument keeps its present behaviour, so the corruption-trait-gate distribution suite is unmoved"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/generators/hookThemeDraws.test.js",
+          "tests/domain/corruptionTraitGate.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/simulation/distributionEnvelopes.test.js",
+          "tests/domain/npcCirculation.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sizeBaseline.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "CS-A2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-A2.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/beliefMap.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/beliefMap.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/beliefMap.js",
+          "symbol": "export function decayedConfidence"
+        },
+        {
+          "path": "src/domain/worldPulse/beliefMap.js",
+          "symbol": "function reconcileSlot"
+        },
+        {
+          "path": "src/domain/worldPulse/beliefMap.js",
+          "symbol": "SILENCE_DECAY: 0.92"
+        },
+        {
+          "path": "tests/domain/beliefMap.test.js",
+          "symbol": "WAVE A — reconciliation (V.4)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "twelve consecutive silent ticks through the real advanceBeliefMaps reproduce the round4-accumulated recurrence exactly, element for element"
+        },
+        {
+          "id": "A2",
+          "case": "the same twelve values are NOT equal to round4(Math.pow(0.92, n)) — the trap the ruling names is demonstrated, not argued"
+        },
+        {
+          "id": "A3",
+          "case": "lastUpdateTick is unchanged across all twelve ticks"
+        },
+        {
+          "id": "A4",
+          "case": "the belief prunes at tick 43 rather than tick 9"
+        },
+        {
+          "id": "A5",
+          "case": "the triangular base trajectory is asserted absent, so the pin reds against a reverted cure"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/beliefMap.test.js",
+          "tests/domain/beliefAxisSubjects.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/npcCirculationBelief.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "CS-A3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-A3.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/armyTransitKernel.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/armyTransitFieldCombat.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/armyTransitKernel.js",
+          "symbol": "function hostilePairFor"
+        },
+        {
+          "path": "src/domain/worldPulse/armyTransitKernel.js",
+          "symbol": "const retreated = new Set()"
+        },
+        {
+          "path": "src/domain/worldPulse/armyTransitKernel.js",
+          "symbol": "ARMY_ROLES.RETREAT"
+        },
+        {
+          "path": "tests/domain/armyTransitFieldCombat.test.js",
+          "symbol": "M5 — retreat routes by the M1 danger re-score"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "on a three-army crossing-path fixture the beaten army is named by at most one field_battle entry per tick, asserted every tick across three ticks"
+        },
+        {
+          "id": "A2",
+          "case": "the beaten army's strength falls at most once per tick, where the base mauls it twice"
+        },
+        {
+          "id": "A3",
+          "case": "after the losing tick the record carries the RETREAT role and its position01 is never consumed as ground advantage by a later battle"
+        },
+        {
+          "id": "A4",
+          "case": "with retreat routing unavailable the beaten army still fights only once — the arm that discriminates this cure from a retreat-keyed guard"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/armyTransitFieldCombat.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/convergence.test.js",
+          "tests/domain/warConvergenceForces.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/moverCompositionSmoke.test.js"
+        ]
+      ]
     }
   ]
 }
