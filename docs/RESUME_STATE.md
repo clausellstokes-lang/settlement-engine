@@ -138,7 +138,19 @@ depopulation).** §51: TWELVE dimensions done; LIVE: TE14 + R-PRF
 `d5a6c009`, all 16 train/evidence refs + the preserve ref, VERIFIED
 ls-remote sha-for-sha; custody risk CLOSED; the PR is a one-click
 owner act (compare URL delivered in-chat); ledger branch still behind
-§1 T1.** ⚠ The husky pre-push hook re-censuses the LIVE tree (artifact
+§1 T1.** **⭐ §85: IN-1C-A stopped a SECOND time — LAWFULLY — on two
+I1-introduced full-gate reds invisible to the 16-file battery
+(chooserTotality fork row + mechanismLitCoverage baseline); both
+rulings GRANTED (minting-wave obligation, ERRAND_CONSUMERS precedent);
+⭐ THE REGISTRY-MINT TWO-OBLIGATION LAW adopted (the §49/§50 sibling:
+fork-classification row + coverage-baseline row priced at compile for
+every seeded chooser/pool mint); terminal T2 running as continuation.
+⚠ Chair scheduling error recorded: the hooked baseline-push attempt
+gate-contended TE14 — NEW LAW: no push while an executor holds the
+slot. PR#49 CI reds: clean-room repro ALL GREEN at tip (§82) — lane
+CIX hunting the platform divergence (case-sensitivity prime); cure
+pass (laneREFF continuation) actively hardening all three drafts;
+prf-1 goods-matcher = SOAK PREREQUISITE queued after rn-1 (§84).** ⚠ The husky pre-push hook re-censuses the LIVE tree (artifact
 red, IA-2) — scripted pushes go `--no-verify` per §71.7, exits
 pipe-free, ls-remote verified. **§81 IMPLEMENTED §71.9**: continuation
 law live · proof templates authored (laneP81-proof-templates.md, eff-1

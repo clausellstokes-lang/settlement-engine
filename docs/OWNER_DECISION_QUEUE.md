@@ -3211,3 +3211,48 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
 6. §51 state: THIRTEEN of fourteen dimensions done; R-DOM (docs+ops+
    market consolidated, the lightest three) dispatched as the LAST
    survey lane → then the chair synthesis.
+
+## §85 · IN-1C-A'S SECOND STOP RULED — AND THE REGISTRY-MINT
+## TWO-OBLIGATION LAW (2026-08-15, chair, vetoable; evidence
+## laneTE14-receipt.md; terminal T2 running as a §81.1 continuation)
+
+1. **TE14's §75 cure is COLLECTED CLEAN** (numstat 5/0 surgical, the
+   totality arm re-executed to `MISSING: []`, validator 47/0) and its
+   SECOND STOP is RATIFIED AS LAWFUL: the full ratchet found two reds
+   the 16-file battery could not see, both attributed to I1 by
+   three-commit bisection (base green / I1 red / T1 red) — the
+   terminal gate catching what focused proof cannot is the DESIGN,
+   not a failure of it.
+2. **RULING ONE**: the `chooserTotality` classification row for
+   `informationNews.js#informationReceipt` is the MINTING WAVE'S
+   obligation, executed at its terminal — the fork registry's home
+   file belongs to the registry, not to HB's family (the
+   ERRAND_CONSUMERS precedent). TE14 classifies per the registry's
+   own taxonomy, quotes the classification for collection review;
+   no honest class = STOP.
+3. **RULING TWO**: the `mechanismLitCoverage` baseline append (23→24,
+   naming `informationReceiptPools` with the standard rationale
+   idiom) is authorized as the minting wave's REGISTRATION — the
+   keep-out existed so the chair decides, and a one-row registration
+   with its reason stated is never a silent re-record.
+4. **⭐ THE REGISTRY-MINT TWO-OBLIGATION LAW IS ADOPTED** (TE14's
+   observation, the §49/§50 sibling): any wave minting a seeded
+   chooser or pool PRICES AT COMPILE (a) its decision-fork
+   classification row and (b) its mechanism-coverage baseline row —
+   two estate-wide rows every registry mint costs and no packet had
+   enumerated. IN-1C-A's pair is the first priced instance
+   (retroactively, at its terminal); the preamble line rides eff-1b's
+   M3; the packet-standard line rides M2.
+5. **The chair's own scheduling error is RECORDED**: the §71.5
+   baseline push (its first, hooked attempt) ran its pre-push full
+   gate FROM the build worktree while TE14 held the slot — the
+   one-writer premise TE14 was dispatched under was false, and TE14's
+   handling (kill nothing, verify the branch unmoved, refuse the
+   contaminated gate citation, defer the ref move) is RATIFIED as
+   exemplary. NEW LINE: no push is dispatched while an executor holds
+   the slot; scripted pushes remain `--no-verify` (§71.7).
+6. The lying-exit class fired its second recorded instance (harness
+   "exit code 0" over `CLAIMS_TRUE_EXIT=1`) and was caught by the
+   in-shell law — the §50.4 defense holding as designed. Terminal T2
+   (cure + the two registration rows + flip + capsule + bare gates)
+   runs now as a continuation with context intact.
