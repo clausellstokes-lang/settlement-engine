@@ -123,8 +123,17 @@ absorption-gap rows CURED at acceptance (WF had no cure lane/rulings
 file); five cures now compile obligations incl. F-5 the WF TUNING-HOME
 LAW (§42/§43 pre-cure) and F-1 (WF-2b builds on the LANDED errand
 spine, pilgrims `personal`); Q1/Q4 to the WF sitting. §70 rounds:
-WC ✅ · WF ✅ · next EP → POP → INT → WY → tails. LIVE: TE14 + R-GEN +
-R-PRF; remaining §51 dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+WC ✅ · WF ✅ · next EP → POP → INT → WY → tails. **⭐ §79: §77
+IMPLEMENTED+PROVEN — laneP77-premise-map.mjs (validate/scope/
+queue-check), SEVEN-invocation battery all in-shell, both directions;
+rides eff-1 as M1b; wc-0 = first pre-proofed AND premise-mapped
+train.** **✅ R-GEN COLLECTED §80 — ⭐⭐ THE PROMISE MEASURED TRUE
+(360/360 byte-identical, order-independent, soak replay); coherence
+19/23 at zero; gen-1 duplication cure SIGNED into the declared-shift
+batch; gen-2 prose-corpus waves; gen-3 micro-batch; TWO tuning-docket
+priority rows (stress-flag foreclosure at defaults · war-soak
+depopulation).** §51: TWELVE dimensions done; LIVE: TE14 + R-PRF
+(mid-measurement); remaining: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
 future landing collection owes its increment. **⭐ §70 (owner, 08-15):
 THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/

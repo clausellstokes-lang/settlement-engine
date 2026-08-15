@@ -2987,3 +2987,68 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
    substrate. WF's first train inherits the §77 premise-map obligation
    from birth.
 
+## §79 · §77 IMPLEMENTED AND PROVEN (2026-08-15, chair, executing the
+## owner's verbatim implement order; evidence = the executed battery in
+## laneP74-charter.md ADDENDUM 2, fixtures preserved)
+
+1. **The machinery is CODED**: `laneP77-premise-map.mjs` (scratchpad
+   draft; lands as `scripts/premise-map.mjs` via eff-1 member M1b) —
+   `validate` / `scope` / `queue-check` implement R2+R3, R2's
+   truncation calculus, and R1 respectively. Pure file-in/file-out:
+   no git state, lawful beside a live executor — which is why, unlike
+   the pre-proof harness, it could be proven THIS sitting.
+2. **The proof battery is EXECUTED — seven invocations, all exits
+   in-shell, both directions**: lawful plan accepted (0); illegal
+   fork on a MEASURED-TRUE premise convicted (1); scoped truncation
+   computed with the signed fork surfaced; a LAW-graded citation
+   forcing FULL-STOP (1); an uncited row a NO-OP (0); the dual-family
+   queue holding (0); a single-family queue convicted (1). The
+   conservative defaults are STRUCTURAL: an invalid or absent plan
+   cannot scope anything — it full-stops.
+3. eff-1's charter now carries M1a (preproof harness) + M1b (this
+   tool) + M2 (PACKET_STANDARD: caps, pre-proof line, §77 mechanisms,
+   §53.6 text) + M3 (preambles) + M4 (§68.4 docs debts). The landing
+   receipt re-runs both proof batteries at the train's base. wc-0,
+   dispatching after eff-1, becomes the first train that is BOTH
+   pre-proofed and premise-mapped.
+
+## §80 · THE GENERATION-QUALITY DIMENSION RULED (2026-08-15, chair,
+## vetoable; evidence in laneRGEN-generation-audit.md + laneRGEN-
+## report.md — ~3,000 headless generations + a 10-year whole-world
+## soak, zero throws, all at `d5a6c009`)
+
+1. **⭐⭐ THE PROMISE IS MEASURED TRUE**: 360/360 byte-identical hashes
+   across fresh-process re-runs, 6/6 order-independence, and the soak
+   replaying byte-identically year over year including in a worker
+   isolate. Coherence 19 of 23 checks at ZERO (0/13,412 relationship
+   endpoints dangling, 0/3,052 faction members, food/tier/terrain/
+   receipt all clean). This is the review's crowning measured result.
+2. **gen-1 (audit-zero, SIGNED as a declared shift)**: within-settlement
+   duplication — identical secrets in 136/360 settlements, identical
+   mannerisms in 181/360 (60/60 metropolises; a 30-pool sampled WITH
+   replacement across 18 NPCs), hooks 22/360. Cure = the no-replacement
+   pattern `npc_identity` already uses. Same-seed OUTPUT-MOVING —
+   signed into the cs-1..5 declared-shift batch under the §27 order;
+   goldens re-record ONCE at THE ONE REGEN.
+3. **gen-2 (prose-corpus expansion family)**: the corpus-scale
+   repetition (the two fixed magic-suffix strings at 360/360 arrival
+   scenes; the universal hamlet sentence; 28 event names over 1,836
+   instances; 36 faction names; label-grade names in prose) cures as
+   AUTHORED VARIANT waves — data under the finite-semantics law,
+   pre-authorable per §63, batched at the 10-member prose cap.
+   **gen-3 (micro-batch)**: the one genuinely unreachable catalog
+   entry (`Massive walls and fortifications`, permanently shadowed in
+   the metro exclusive-group merge) — re-key or retire-with-census at
+   compile.
+4. **THE TUNING DOCKET GAINS TWO PRIORITY ROWS (owner-signed phase,
+   strictly last)**: (a) the stress-flag foreclosure — at all-default
+   sliders the deterministic threshold fails every gate on every seed,
+   so 7 of 18 relationship archetypes are INVISIBLE to default-slider
+   users (all 7 proven reachable at computed combos) — an
+   experience-first defect in the default posture, not a bug in the
+   machinery; (b) the war-fixture soak observations (90%+ town
+   depopulation over 10 years; the stressor rhythm flat at 0). Neither
+   is touched before the tuning phase per §3h.
+5. §51 state: TWELVE dimensions done. Remaining: docs · ops · market ·
+   the R-PRF figures (mid-flight) → the chair synthesis.
+
