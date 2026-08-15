@@ -67,14 +67,34 @@ describe('command executor replay and freshness', () => {
     expect(later).toMatchObject({ status: 'applied', replayed: true });
   });
 
-  test.each([
-    ['owner_changed', { ownerId: 'owner-2' }],
-    ['save_changed', { saveId: 'save-2' }],
-    ['revision_changed', { revision: 'rev-2' }],
-  ])('refuses stale context: %s', async (reason, change) => {
+  // ⭐ SPELLED OUT, NOT TABLE-DRIVEN. A `test.each` callback that takes parameters parks
+  // the WHOLE FILE out of the estate's lighting census (the walker's TEST_CONTEXT_PARAM
+  // rule), so this suite's stale-context refusals — the executor's freshness contract —
+  // were invisible to every title-keyed instrument. The three rows are carried verbatim.
+  // ⚠ NO TOTALITY GUARD IS AUTHORED HERE, AND THE OMISSION IS DELIBERATE: the three
+  // reasons are the command context's own closed freshness triple (ownerId / saveId /
+  // revision), not an open discovered roster, and a guard over a closed three-key literal
+  // would be the self-referential-pin class (list == list). The real obligation — a
+  // fourth freshness dimension owes a fourth spelled case — is docketed as
+  // CR-EST-FRESHTRIPLE where it will be found, rather than faked with a vacuous assertion.
+  test('refuses stale context: owner_changed', async () => {
     const apply = vi.fn();
-    const receipt = await harness(apply).execute(command(), context(change));
-    expect(receipt).toMatchObject({ status: 'stale', reason });
+    const receipt = await harness(apply).execute(command(), context({ ownerId: 'owner-2' }));
+    expect(receipt).toMatchObject({ status: 'stale', reason: 'owner_changed' });
+    expect(apply).not.toHaveBeenCalled();
+  });
+
+  test('refuses stale context: save_changed', async () => {
+    const apply = vi.fn();
+    const receipt = await harness(apply).execute(command(), context({ saveId: 'save-2' }));
+    expect(receipt).toMatchObject({ status: 'stale', reason: 'save_changed' });
+    expect(apply).not.toHaveBeenCalled();
+  });
+
+  test('refuses stale context: revision_changed', async () => {
+    const apply = vi.fn();
+    const receipt = await harness(apply).execute(command(), context({ revision: 'rev-2' }));
+    expect(receipt).toMatchObject({ status: 'stale', reason: 'revision_changed' });
     expect(apply).not.toHaveBeenCalled();
   });
 

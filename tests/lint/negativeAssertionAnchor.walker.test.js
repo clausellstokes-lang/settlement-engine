@@ -218,7 +218,15 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/economicsTabMalformedFlows.test.jsx': 1,
   'tests/components/engineSections.test.jsx': 2,
   'tests/components/faithSection.test.jsx': 8,
-  'tests/components/fogTierGate.test.jsx': 1,
+  // ⭐ 2026-08-15, est-1 / EST-B: `tests/components/fogTierGate.test.jsx` LEFT THIS ROSTER AT
+  //   ZERO, and it left the way the inventory-honesty arm demands ("a site was anchored;
+  //   LOWER the row to 0 (delete it at 0) to bank the win"). Its single un-anchored
+  //   `.not.toMatch` lived inside a `test.each` callback; spelling the cases out turned one
+  //   site into FOUR, so all four were routed through a reader that THROWS on absence and
+  //   refuses an empty read, and each carries the inline escape this walker defines. ⛔ The
+  //   cheaper shape — anchor three, leave one un-anchored so the count still reads 1 — was
+  //   refused: four identical assertions with one deliberately left bare is bookkeeping
+  //   dressed as a guard. The win is banked by DELETION, never by a lowered ceiling.
   'tests/components/frozenTenseDefenseCopy.test.js': 2,
   'tests/components/g5FirstSurveyCopy.test.js': 6,
   'tests/components/g5FirstSurveyPdfTwins.test.js': 3,

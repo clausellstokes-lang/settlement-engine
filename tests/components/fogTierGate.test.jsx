@@ -16,7 +16,7 @@
  */
 
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { render, cleanup, fireEvent, screen } from '@testing-library/react';
@@ -92,13 +92,60 @@ describe('the derivation stays tier-blind (source scan)', () => {
   // affordances only (the mapChains law, verbatim).
   const FORBIDDEN = /TIER_GATE|canUseMapChains|ELEVATED_ROLES|useStore|authSlice|\bauth\b|entitled|canEdit/;
 
-  test.each([
-    'src/domain/townMap/fogSessions.js',
+  // ⭐ SPELLED OUT, NOT TABLE-DRIVEN, AND THE REASON IS MEASURED. A `test.each` callback
+  // that takes a parameter parks the WHOLE FILE out of the estate's lighting census
+  // (the walker's TEST_CONTEXT_PARAM rule), so every title in this security-adjacent
+  // suite was invisible to every title-keyed instrument while it sat here as evidence.
+  // ⛔ Re-pointing the table at a LIVE source would not have fixed it: a static literal
+  // table is what EARNS credit, and the walker's credit predicate only ever removes.
+  // The loop belongs INSIDE a named test (the SP-D idiom), which is what the roster
+  // totality guard at the bottom of this describe is.
+  const TIER_BLIND_MODULES = Object.freeze([
     'src/domain/townMap/fogGeometry.js',
+    'src/domain/townMap/fogSessions.js',
     'src/store/fogEditBody.js',
-  ])('%s carries no auth/tier-gate concept', (rel) => {
+    'src/store/fogEditSlice.js',
+  ]);
+
+  /** Read one tier-blind module, refusing an empty read so the scan cannot go vacuous. */
+  function tierBlindSource(rel) {
     const src = readFileSync(join(ROOT, rel), 'utf8');
-    expect(src).not.toMatch(FORBIDDEN);
+    expect(src.length, `${rel} read as empty — the scan below would pass for the wrong reason`).toBeGreaterThan(0);
+    return src;
+  }
+
+  test('fogGeometry.js carries no auth/tier-gate concept', () => {
+    // anchored: tierBlindSource throws on absence and refuses an empty read, and the roster totality test below proves this path is part of the whole fog derivation rather than a stale address.
+    expect(tierBlindSource(TIER_BLIND_MODULES[0])).not.toMatch(FORBIDDEN);
+  });
+
+  test('fogSessions.js carries no auth/tier-gate concept', () => {
+    // anchored: tierBlindSource throws on absence and refuses an empty read, and the roster totality test below proves this path is part of the whole fog derivation rather than a stale address.
+    expect(tierBlindSource(TIER_BLIND_MODULES[1])).not.toMatch(FORBIDDEN);
+  });
+
+  test('fogEditBody.js carries no auth/tier-gate concept', () => {
+    // anchored: tierBlindSource throws on absence and refuses an empty read, and the roster totality test below proves this path is part of the whole fog derivation rather than a stale address.
+    expect(tierBlindSource(TIER_BLIND_MODULES[2])).not.toMatch(FORBIDDEN);
+  });
+
+  test('fogEditSlice.js carries no auth/tier-gate concept', () => {
+    // anchored: tierBlindSource throws on absence and refuses an empty read, and the roster totality test below proves this path is part of the whole fog derivation rather than a stale address.
+    expect(tierBlindSource(TIER_BLIND_MODULES[3])).not.toMatch(FORBIDDEN);
+  });
+
+  // ANTI-DRIFT — the charter's "live table" intent, kept without the parking cost. The
+  // spelled roster must BE the fog derivation, not a snapshot of it: a new fog module
+  // reds HERE rather than slipping past four hand-spelled cases forever.
+  test('the tier-blind roster IS the whole fog derivation (a new module reds)', () => {
+    const discovered = [
+      ...readdirSync(join(ROOT, 'src/domain/townMap')).filter((f) => /^fog.*\.js$/.test(f))
+        .map((f) => `src/domain/townMap/${f}`),
+      ...readdirSync(join(ROOT, 'src/store')).filter((f) => /^fogEdit.*\.js$/.test(f))
+        .map((f) => `src/store/${f}`),
+    ].sort();
+    expect(discovered.length, 'the discovery found nothing — the scan would be vacuous').toBeGreaterThan(0);
+    expect(discovered).toEqual([...TIER_BLIND_MODULES].sort());
   });
 
   test('the pane wires the gate from its OWN canEdit prop (the cosmetic-edit predicate)', () => {

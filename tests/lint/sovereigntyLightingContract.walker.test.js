@@ -4298,7 +4298,30 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   re-running this arm with the whole tuple re-recorded — never by assuming that an
     //   unreached assertion had held.
     // 2431/366/2065/20131/5656 → 2431/366/2065/20132/5656.
-    files: 2431, parked: 366, credited: 2065, titles: 20132, suiteTitles: 5656,
+    // ── est-1 / EST-B (member 2 of 3), 2026-08-15 ────────────────────────────────────
+    // ⭐⭐ TWO FILES LEAVE THE PARKED POOL, AND THIS IS THE MOTION THE PARK RULES EXIST TO
+    //   MAKE POSSIBLE. `tests/components/fogTierGate.test.jsx` and
+    //   `tests/application/commands/executeCommand.test.js` both parked under
+    //   TEST_CONTEXT_PARAM — a `.each` callback taking a parameter — so every title in two
+    //   security-adjacent suites was invisible to every title-keyed instrument. Spelling the
+    //   cases out as straight-line tests (the SP-D idiom) returns an EMPTY reason list for
+    //   both, measured with this walker's own `parkReasonsFor` before the edit was written.
+    // ⛔ THE CHARTERED CURE WOULD HAVE MOVED NOTHING, and the counterfactual was executed
+    //   rather than argued: re-pointing them at LIVE tables leaves both PARKED, because
+    //   `staticTableRows` credits a non-empty ArrayExpression and this file's own header
+    //   says the predicate "never widens credit, it only ever removes it".
+    // ⚠ TITLES +16, RUNTIME ONLY +2, and the gap is the whole point: titles move because
+    //   PARKED titles become visible, runtime moves only for genuinely new cases (fog's
+    //   roster-totality guard and its fourth spelled module).
+    // ⭐ THE FOURTH MODULE IS THE GUARD WORKING ON ITS FIRST RUN. The compiled shape spelled
+    //   three tier-blind modules; the discovery found FOUR (`src/store/fogEditSlice.js` also
+    //   matches `^fogEdit.*\.js$`). It was measured clean against the forbidden vocabulary
+    //   and spelled, never exempted.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure: the first run proved only
+    //   `files` unmoved and `parked` 366 → 364. Every other figure was proved by re-running
+    //   the arm with the WHOLE tuple re-recorded, never by assuming an unreached assertion.
+    // 2431/366/2065/20132/5656 → 2431/364/2067/20148/5660.
+    files: 2431, parked: 364, credited: 2067, titles: 20148, suiteTitles: 5660,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
