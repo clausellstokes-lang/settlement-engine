@@ -2869,6 +2869,50 @@
         ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
       ]
+    },
+    {
+      "id": "EST-C",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/EST-C.md",
+      "verifiedBase": "5c774940c1edfc20bd11ace2c40141088081807b",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/content/reviewedSupplyChainPersistence.js" },
+        { "action": "MODIFY", "path": "src/domain/inferSupplyChains.js" },
+        { "action": "MODIFY", "path": "tests/lib/accountContentPortability.test.js" },
+        { "action": "TEST", "path": "tests/store/customContentSlice.race.test.js" },
+        { "action": "MODIFY", "path": "scripts/.test-ratchet-baseline.json" },
+        { "action": "MODIFY", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/content/reviewedSupplyChainPersistence.js", "symbol": "function boundedText(value, field, options = {})" },
+        { "path": "src/domain/content/reviewedSupplyChainPersistence.js", "symbol": "admitReviewedSupplyChain" },
+        { "path": "src/domain/inferSupplyChains.js", "symbol": "needIcon" },
+        { "path": "tests/lib/accountContentPortability.test.js", "symbol": "inferSupplyChains" },
+        { "path": "tests/lint/testRatchet.test.js", "symbol": "ORDINARY_TEST_CONTROL" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "accountContentPortability passes whole, including the two formerly banked rows whose recorded cause named a writer that never stopped writing" },
+        { "id": "A2", "case": "customContentSlice.race passes whole, including the formerly banked delayed-response rewind guard" },
+        { "id": "A3", "case": "the new symmetry pin passes: a discovered chain carries the empty string for BOTH icons AND the admission returns ok true" },
+        { "id": "A4", "case": "the pglite persistence suite and copyCorruption both stay green — the non-empty icon path and the pinned empty literal are untouched" },
+        { "id": "A5", "case": "test:ratchet prints RATCHET DOWN naming exactly the three needIcon rows and exits 0" },
+        { "id": "A6", "case": "after the detached remove-only update the baseline holds twelve entries and none names needIcon" },
+        { "id": "A7", "case": "the ruled CONTROLZERO conversion is green in the SAME commit as the re-freeze: the roster is empty, the ordinary-debt population asserts EXACTLY zero against a non-empty census whose every row is ledgered, and the file's title count is unmoved" },
+        { "id": "A8", "case": "the census literal is re-recorded WHOLE at 2431/364/2067/20149/5660 and the walker is green in this same commit" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/lib/accountContentPortability.test.js"],
+        ["npx", "vitest", "run", "tests/store/customContentSlice.race.test.js"],
+        ["npx", "vitest", "run", "tests/security/reviewedSupplyChainPersistence.pglite.test.js"],
+        ["npx", "vitest", "run", "tests/lint/copyCorruption.test.js"],
+        ["npx", "vitest", "run", "tests/lint/testRatchet.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
     }
   ]
 }
