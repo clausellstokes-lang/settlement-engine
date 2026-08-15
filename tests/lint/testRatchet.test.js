@@ -876,69 +876,78 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // removed to make anything green — removing it is what the arm DEMANDS once the row is
   // gone ("a file whose debt is burned down leaves the list rather than lingering as a stale
   // certificate").
-  const ORDINARY_TEST_CONTROL = Object.freeze([
-    'tests/lib/accountContentPortability.test.js',
-    'tests/store/customContentSlice.race.test.js',
-  ]);
+  // ⭐⭐ 2026-08-15, est-1c / EST-C — THE ZERO-ASSERTION CONVERSION (chair ruling
+  // CR-EST-CONTROLZERO). The last two names left together, and they left the RIGHT way:
+  // EST-C cured the icon-admission asymmetry that had been refusing EVERY auto-discovered
+  // supply chain, and their three census rows were banked away by a remove-only re-freeze.
+  // ⭐ ORDINARY TEST DEBT IS NOW ZERO. Every surviving census row is a LEDGERED ENFORCEMENT
+  // WALKER, which is a measured partition rather than a hope — the arm below asserts it.
+  //
+  // ⛔ THE ROSTER IS EMPTY BECAUSE ITS POPULATION IS, AND IT MAY NOT BE REFILLED. Naming any
+  // survivor here would certify a walker as ordinary — the exact 2026-08-07 error this whole
+  // block exists to prevent — and the floor it used to carry is gone rather than lowered,
+  // because a floor of zero under a message saying the control emptied is a tautology wearing
+  // a guard's clothes.
+  //
+  // ⭐ SO THE CONTROL CONVERTS INSTEAD OF EMPTYING. It used to SAMPLE the ordinary population
+  // to show the classifier had no false positives. It now asserts that the population IS
+  // EXACTLY ZERO — strictly stronger, because "the classifier swept in a real debt row" and "a
+  // lane banked an ordinary failure" are both instances of AN UNLEDGERED ROW EXISTS, and the
+  // conversion reds on either. This is the LOCK-THE-WIN door of the census-ceiling family, and
+  // the win may never be spent: a future ordinary failure REDS THE GATE ON ARRIVAL instead of
+  // joining a census. That is the FAILING-TEST-IS-DEBT doctrine with the debt door shut.
+  const ORDINARY_TEST_CONTROL = Object.freeze([]);
 
-  test('⚠ THE ORDINARY-TEST CONTROL — the classifier leaves real non-walker debt alone', () => {
-    // The mirror of the enforcing pin, and the reason the identification is five narrow
-    // arms rather than "it reads the filesystem". Every file named here carries REAL debt
-    // in this census — a thrown TypeError, a field-projection break, a stale built
-    // artifact, a durable-command race, a docs-freshness drift — and none of them is a
-    // guard. A classifier that swept them in would refuse legitimate debt and be deleted
-    // within a week.
-    for (const file of ORDINARY_TEST_CONTROL) {
-      const arms = walkerArmsOf(file);
-      expect(
-        Object.entries(arms).filter(([, hit]) => hit).map(([arm]) => arm),
-        `${file} is named here as ordinary debt and the classifier CLAIMS IT. One of the two is\n`
-        + 'wrong, and it is almost certainly this list: read the file, and if it enumerates a\n'
-        + 'population and compares the result against a frozen one, it is a WALKER — free its\n'
-        + 'census row into its own shrink-only inventory and take it off this list. Do NOT narrow\n'
-        + 'the classifier to make this green; that is exactly how the 2026-08-07 misses happened.',
-      ).toEqual([]);
-    }
+  test('⭐ ORDINARY TEST DEBT IS ERADICATED — the census holds enforcement walkers ONLY', () => {
+    // THE VICTORY ASSERTION, and it is a guard rather than a trophy: it is the converse of
+    // the enforcing pin above. That one says every WALKER row must be ledgered; this one says
+    // every row, full stop — so a row appearing in neither ledger reds here whether it got
+    // there by a classifier false positive or by a lane banking an ordinary failure.
+    const ledgered = new Set([...admittedIds, ...owedIds]);
+    const ordinary = Object.keys(baseline.entries).filter((id) => !ledgered.has(id)).sort();
+    expect(
+      ordinary,
+      'ordinary test debt was ERADICATED at est-1c; any new ordinary red is TRIAGED\n'
+      + 'IMMEDIATELY, NEVER BANKED. A row here means exactly one of two things: a lane banked an\n'
+      + 'ordinary failure instead of fixing it (fix it — do NOT widen the census), or an\n'
+      + 'enforcement walker lost its ledger row (put the row back). The eradication is a WON\n'
+      + 'POSITION, not a ceiling, and it may not be spent.',
+    ).toEqual([]);
+    expect(
+      ORDINARY_TEST_CONTROL,
+      'the sampling roster is the corpse of a paid debt, never a place to park a walker:\n'
+      + 'refilling it would certify a walker as ordinary, which is the 2026-08-07 error.',
+    ).toEqual([]);
   });
 
-  test('⛔ the control list is REAL — every named file carries a census row of its own', () => {
-    // THE ANTI-PADDING ARM. Without it the control is trivially satisfiable: name ten
-    // arbitrary green tests and the classifier "proves" it has no false positives while
-    // saying nothing about the rows that actually matter. Requiring each name to own a
-    // live census row ties the control to the population it is a control FOR, and it also
-    // makes the list self-cleaning — a file whose debt is burned down leaves the list
-    // rather than lingering as a stale certificate.
-    const censusFiles = new Set(Object.values(baseline.entries).map((r) => r.file));
-    const notInCensus = ORDINARY_TEST_CONTROL.filter((f) => !censusFiles.has(f));
+  test('⛔ the eradication is a REAL partition, not an empty census', () => {
+    // THE ANTI-VACUITY ARM, and it is the direct descendant of the anti-padding one it grew
+    // out of. Zero ordinary rows is only a WIN if the census is populated and wholly
+    // accounted for: without this, the arm above passes the day the baseline is deleted, the
+    // reader breaks, or the scope sentinel stops collecting. A victory assertion invites
+    // exactly that failure, so the victory is pinned to a real population here.
+    const rows = Object.keys(baseline.entries);
     expect(
-      notInCensus,
-      'these control files carry no census row — a control over green tests proves nothing about'
-      + ' the census. Drop them, or name a file whose debt is real.',
-    ).toEqual([]);
-    // anchored: the membership check above proves the list was compared against a populated
-    // census, so the floor below is a floor on a real list rather than on an empty one.
-    // 5 → 3 on 2026-08-10. NOT a weakening of the classifier: this floor is bounded above by
-    // the number of ORDINARY-debt files left in the census, so it must fall as that debt is
-    // paid or it becomes a veto on the burn-down (the reasoning is written out in full at the
-    // RATCHETED 23 → 17 note). It is still a LITERAL, never `ORDINARY_TEST_CONTROL.length`,
-    // which would prove list == list. It may fall with the population; it may never be padded.
-    // ⭐ 3 → 2 on 2026-08-15, est-1 / EST-A, on exactly that law and its landed precedent: the
-    //   F6 row was BURNED, so the file left the list above and a floor of 3 would have been a
-    //   control's sample size vetoing the burn-down it exists to observe. The list is still
-    //   REAL — both surviving names carry live census rows.
-    // ⛔⛔ AND THE NEXT STEP DOWN IS NOT AVAILABLE TO A BUILD LANE. Measured at this commit:
-    //   of the 15 census rows, 12 are ledgered walkers and the remaining 3 are the two files
-    //   above. Paying THOSE takes this population to ZERO, and the list cannot be refilled —
-    //   naming any survivor here would certify a walker as ordinary, the exact 2026-08-07
-    //   error. At zero this arm becomes vacuous and the false-positive half of the block stops
-    //   being tested, which is a DISABLED GUARD rather than a banked win. What replaces the
-    //   control when ordinary debt reaches zero is a governance question about verification
-    //   adequacy, and no build lane may write itself that exemption: est-1's member EST-C
-    //   holds the cure for all three remaining rows and is STOPPED here for a ruling.
+      rows.length,
+      'the census is EMPTY — the eradication arm above would then pass for the wrong reason',
+    ).toBeGreaterThan(0);
     expect(
-      ORDINARY_TEST_CONTROL.length,
-      'the control emptied — the false-positive half of this block is no longer being tested',
-    ).toBeGreaterThanOrEqual(2);
+      admittedIds.length + owedIds.length,
+      'both ledgers emptied — nothing is being classified, so "wholly ledgered" says nothing',
+    ).toBeGreaterThan(0);
+    const ledgered = new Set([...admittedIds, ...owedIds]);
+    expect(
+      rows.filter((id) => ledgered.has(id)).length,
+      'every surviving census row must be a LEDGERED enforcement walker — that identity is what\n'
+      + 'makes "zero ordinary debt" a partition claim about a real population rather than a\n'
+      + 'statement about an empty set',
+    ).toBe(rows.length);
+    // ⭐ AND THE CLASSIFIER IS STILL EXERCISED IN BOTH DIRECTIONS, which is what the retired
+    // sampling roster used to buy. The enforcing pin proves every walker row is ledgered; the
+    // `NO SINGLE ARM CLASSIFIES THEM ALL` pin proves each arm still has a live counterexample
+    // it must classify correctly; and this arm proves there is nothing left for a false
+    // positive to land on. A false positive today would have to invent an unledgered row —
+    // and that reds in the arm above.
   });
 
 

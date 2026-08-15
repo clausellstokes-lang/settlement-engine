@@ -1,7 +1,7 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "634ceaee0794d567f7dadd2a771efbf7665287ce",
-  "totalTests": 28155,
+  "measuredAtSha": "5ca2012c3ae5cdd3f5dc996fc716a9d64985bd47",
+  "totalTests": 28158,
   "totalFiles": 2380,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
@@ -54,22 +54,6 @@
       "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
       "class": "debt"
     },
-    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive": {
-      "file": "tests/lib/accountContentPortability.test.js",
-      "test": "account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive",
-      "subsystem": "content / reviewed supply-chain persistence",
-      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
-      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
-      "class": "debt"
-    },
-    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability remaps reviewed evidence only through a full archive receipt": {
-      "file": "tests/lib/accountContentPortability.test.js",
-      "test": "account custom-content identity portability remaps reviewed evidence only through a full archive receipt",
-      "subsystem": "content / reviewed supply-chain persistence",
-      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
-      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
-      "class": "debt"
-    },
     "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
       "file": "tests/lint/clampPrimitiveBaseline.test.js",
       "test": "clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01",
@@ -116,14 +100,6 @@
       "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
       "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
       "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
-    },
-    "tests/store/customContentSlice.race.test.js :: customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive": {
-      "file": "tests/store/customContentSlice.race.test.js",
-      "test": "customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive",
-      "subsystem": "content / reviewed supply-chain persistence",
-      "cause": "Same root cause as accountContentPortability: reviewedSupplyChainContentHash throws `needIcon must be bounded non-empty text` from boundedText() when a durable command race replays a reviewed response whose artifact has no needIcon.",
-      "introducedAt": "unbisectable: shares the accountContentPortability cause — the writer that stopped supplying needIcon is not yet identified. Fix once, and all three tests clear.",
       "class": "debt"
     }
   }
