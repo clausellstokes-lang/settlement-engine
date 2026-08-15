@@ -16,6 +16,7 @@ import {
   ChapterBand, ChapterHeadline, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { powerHeadline, powerTone } from '../lib/headlines.js';
+import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { StackedBar, ScoreWithBreakdown } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
@@ -306,7 +307,7 @@ function RuleAndSuccession({ lineage, occupied }) {
           <Tag tone="bad">OCCUPIED</Tag>
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginLeft: 4, flex: 1 }}>
             Held under {occupied.occupier} by right of conquest
-            {occupied.sinceTick != null ? ` (since tick ${occupied.sinceTick})` : ''}.
+            {occupied.sinceTick != null ? ` (since ${tickCalendarLabel(occupied.sinceTick)})` : ''}.
           </Text>
         </View>
       )}
@@ -322,7 +323,7 @@ function RuleAndSuccession({ lineage, occupied }) {
           )}
           {g.tick != null && (
             <Text style={{ ...type.caption, color: palette.faint, fontSize: pt['7.5'], marginLeft: 4 }}>
-              tick {g.tick}
+              {tickCalendarLabel(g.tick)}
             </Text>
           )}
         </View>

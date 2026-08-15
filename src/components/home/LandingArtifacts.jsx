@@ -78,10 +78,12 @@ const dotColor = { danger: RED, success: GREEN, gold: GOLD, warning: AMBER };
 export const cardStyle = { background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[2] };
 const eyebrowGold = { fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: GOLD_DEEP };
 const monoTag = { fontFamily: MONO, fontSize: FS.xs, color: MUTED };
-// The quiet provenance stamp: `seed · lf-010` (+ ` · week K` where the artifact
-// shows advanced state). Mono, muted, deliberately unshouty.
+// The quiet provenance stamp: `seed · lf-010` (+ how far the artifact's world was
+// advanced). Mono, muted, deliberately unshouty. §69.3: this is the PUBLIC landing
+// page, so the raw counter `week K` is forbidden — the same fact reads as an
+// elapsed span, which is what a visitor can actually use.
 const seedTag = (withWeek = false) =>
-  `seed · ${fixture.seed}${withWeek ? ` · week ${fixture.weeks}` : ''}`;
+  `seed · ${fixture.seed}${withWeek ? ` · ${fixture.weeks} weeks in` : ''}`;
 
 // A small status chip (band label). radius 4 = R.sm.
 export function Chip({ tone, children, style }) {

@@ -211,3 +211,26 @@ export default function RealmForecast({ campaign }) {
 export function liveFingerprint(campaign, interval, saves = []) {
   return forecastFingerprint(campaign, interval, saves);
 }
+
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The forecast digest stamps each beat with the week it falls in, inside a
+ * THROWAWAY run of the coming season. The number is how the DM lines a
+ * glimpsed beat up against the real realm, and there is no real calendar to
+ * name because none of it has happened.
+ *
+ * §69.3 splits the tiers: a raw engine week counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ *
+ * It sits at the FOOT of the file on purpose: tests/lint/.prose-numerics-baseline.json
+ * addresses its rows by path AND LINE, so a block inserted at the head would rot
+ * every row beneath it in a census this member has no business moving.
+ * prose-leak-allowance: week 2
+ */

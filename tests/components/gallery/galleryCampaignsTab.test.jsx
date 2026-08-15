@@ -18,6 +18,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 import GalleryPage from '../../../src/components/GalleryPage.jsx';
 import GalleryCampaigns from '../../../src/components/gallery/GalleryCampaigns.jsx';
+import CampaignStatePanel from '../../../src/components/gallery/CampaignStatePanel.jsx';
 
 const mocks = vi.hoisted(() => ({
   galleryApi: {
@@ -210,5 +211,47 @@ describe('the Campaigns tab — full filter/search/sort parity', () => {
     await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
       expect.objectContaining({ search: 'reach', filters: expect.objectContaining({ kind: ['map_with_campaign'] }) }),
     ), { timeout: 1500 });
+  });
+});
+
+// ── §69.3 / §113: the PUBLIC world-clock cure, pinned AT THE RENDERED SURFACE ──
+// A negative asserted against a surface that never mounted passes vacuously, so
+// every arm here first proves the panel actually rendered its clock, and only
+// then asserts what the reader does NOT see. CampaignStatePanel is the sanitized
+// public share — the one gallery surface a non-owner reads — and it carried
+// `Tick {tick}` twice: on the World Clock chip row and on every chronicle entry.
+describe('CampaignStatePanel — no raw engine counter reaches the public share', () => {
+  const SNAPSHOT = {
+    worldClock: { tick: 60, calendar: { year: 2, month: 3, season: 'spring' } },
+    chronicle: [{ tick: 60, headlines: [{ headline: 'The wharves overflow', summary: 'Trade swells past the quay.' }], affectedSettlementNames: ['Midwater'] }],
+  };
+  const SECTIONS = ['worldClock', 'chronicle'];
+
+  test('the World Clock section RENDERS, and says the week in the reader own unit', () => {
+    const { container } = render(<CampaignStatePanel snapshot={SNAPSHOT} sections={SECTIONS} />);
+    const text = container.textContent || '';
+    // The surface mounted: its heading and its sibling chips are on screen.
+    expect(text).toContain('World Clock');
+    expect(text).toContain('Year 2');
+    expect(text).toContain('Spring');
+    // tick 60 is week 9 of the second year, said in the sanctioned span idiom.
+    expect(text).toContain('Week 9 of 52');
+  });
+
+  test('the chronicle entry RENDERS, and dates itself by the calendar rather than the counter', () => {
+    const { container } = render(<CampaignStatePanel snapshot={SNAPSHOT} sections={SECTIONS} />);
+    const text = container.textContent || '';
+    expect(text).toContain('The wharves overflow');
+    expect(text).toContain('week 9 of spring, year 2');
+  });
+
+  test('\u26d4 the rendered panel contains NO `Tick <n>` anywhere (the leak, not a proxy for it)', () => {
+    const { container } = render(<CampaignStatePanel snapshot={SNAPSHOT} sections={SECTIONS} />);
+    const text = container.textContent || '';
+    // Guard-the-guard: the assertion below is worthless if the panel rendered
+    // nothing, so prove there is prose to search before searching it.
+    expect(text.length).toBeGreaterThan(40);
+    expect(text).toContain('The wharves overflow');
+    expect(/\btick\s*\d/i.test(text), `raw counter survived: ${text}`).toBe(false);
   });
 });

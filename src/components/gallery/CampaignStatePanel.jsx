@@ -22,8 +22,12 @@
  */
 
 
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_TXT, INK, SECOND, SP, sans } from '../theme.js';
+
+/** Weeks in the durable year — the same calendar humanizeEngineTokens keeps. */
+const WEEKS_PER_YEAR = 52;
 
 const SECTION_KEYS = Object.freeze(['worldClock', 'dashboard', 'chronicle', 'pantheon', 'warNetwork']);
 
@@ -84,7 +88,10 @@ function WorldClockSection({ worldClock }) {
         <Chip title="In-world year">Year {year}</Chip>
         <Chip title="In-world month">Month {month}</Chip>
         <Chip title="In-world season">{season}</Chip>
-        <Chip title="Simulation tick">Tick {tick}</Chip>
+        {/* §69.3: the raw simulation counter is FORBIDDEN on a public share. The
+            week within the year is the datum the tick actually carried, said in
+            the reader's own unit and in the sanctioned span idiom. */}
+        <Chip title="In-world week. One tick is one week; a year is 52 weeks.">Week {(tick % WEEKS_PER_YEAR) + 1} of 52</Chip>
       </div>
     </section>
   );
@@ -120,7 +127,7 @@ function ChronicleTick({ entry }) {
   return (
     <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
       <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-        Tick {Math.max(0, Math.floor(Number(entry?.tick) || 0))}
+        {tickCalendarDetailLabel(Math.max(0, Math.floor(Number(entry?.tick) || 0)))}
       </div>
       {headlines.map((h, i) => (
         <div key={i}>

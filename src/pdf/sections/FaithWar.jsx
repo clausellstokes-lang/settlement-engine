@@ -22,6 +22,7 @@ import { ChapterBand, ChapterHeadline, HairRule, Tag } from '../primitives/Dense
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
+import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -32,6 +33,26 @@ const POSTURE_TONE = {
 };
 
 const ALIGN_TONE = { evil: 'bad', good: 'good', neutral: 'muted' };
+
+/**
+ * §69.3's float half, cured: an UNCAUSED multiplier or scalar is a leak, and the
+ * two sub-lines on the strip below were exactly that — `aggression ×0.62` and a
+ * bare `0.42`. The reader cannot act on either; neither says what moved it.
+ *
+ * The war-weariness bands already have authored cause sentences on the SCREEN
+ * (the WarFaithTab war-weariness line), so the PDF adopts the same wording
+ * rather than inventing a second voice for the same scar: the two surfaces now
+ * agree. The posture strip gets NOTHING, which is the other half of the ruling's
+ * "the recorded cause phrase or nothing" — the vm carries no recorded cause for
+ * aggression, and inventing one here would be worse than the number was.
+ *
+ * `rested` and `war-weary` are deliberately absent: the band name is the whole
+ * honest statement, so `sub` is undefined and Stat renders no caption line.
+ */
+const WAR_WEARY_CAUSE = Object.freeze({
+  'near peace': 'The scar is healing; this realm leans toward peace.',
+  exhausted: 'Sustained fighting is pushing it to sue for peace.',
+});
 
 function Stat({ label, value, sub, tone = 'ink', flex = 1 }) {
   const color = palette[tone] || palette.ink;
@@ -112,7 +133,6 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         <Stat
           label="POSTURE"
           value={posture.label}
-          sub={`aggression ×${posture.value.toFixed(2)}`}
           tone={postureTone}
           flex={2}
         />
@@ -120,7 +140,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           <Stat
             label="WAR-WEARY"
             value={cap(exhaustion.band)}
-            sub={exhaustion.value.toFixed(2)}
+            sub={WAR_WEARY_CAUSE[exhaustion.band]}
             tone={exhaustion.band === 'exhausted' ? 'bad' : exhaustion.band === 'near peace' ? 'good' : 'warn'}
           />
         )}
@@ -152,7 +172,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           {lw.occupied && (
             <Line label="Occupied." tone="bad">
               Held under {lw.occupied.occupier} by right of conquest
-              {lw.occupied.sinceTick != null ? ` (since tick ${lw.occupied.sinceTick})` : ''}.
+              {lw.occupied.sinceTick != null ? ` (since ${tickCalendarLabel(lw.occupied.sinceTick)})` : ''}.
             </Line>
           )}
         </View>
@@ -165,7 +185,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             <Line label="Mobilization." tone="warn">
               {mobilization.phrase}
               {mobilization.ticksToDeploy > 0
-                ? `. Roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`
+                ? `. Roughly ${tickDurationLabel(mobilization.ticksToDeploy)} from marching.`
                 : '.'}
             </Line>
           )}

@@ -352,3 +352,25 @@ export default function TownSceneInspector({
     </aside>
   );
 }
+
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The living-record inspector is the town map's forensic readout: it states
+ * the week a scar or rebuild was RECORDED, so the DM can match it against the
+ * chronicle entry that caused it.
+ *
+ * §69.3 splits the tiers: a raw engine week counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ *
+ * It sits at the FOOT of the file on purpose: tests/lint/.prose-numerics-baseline.json
+ * addresses its rows by path AND LINE, so a block inserted at the head would rot
+ * every row beneath it in a census this member has no business moving.
+ * prose-leak-allowance: week 1
+ */

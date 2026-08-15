@@ -104,8 +104,10 @@ function FixtureResult({ fixture }) {
     <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
       <strong>Tradition · dossier observance:</strong>{' '}
       {observance?.name || fixture.name}
+      {/* The observance window's opening week is genuinely a week OF THE YEAR,
+          so it says so: the sanctioned span idiom, not a bare counter (§69.3). */}
       {observance?.window?.startWeekOfYear
-        ? ` · week ${observance.window.startWeekOfYear}`
+        ? ` · week ${observance.window.startWeekOfYear} of the year`
         : ''}
     </div>
   );

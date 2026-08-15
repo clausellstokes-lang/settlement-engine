@@ -65,6 +65,33 @@ export function tickCalendarDetailLabel(tick) {
 }
 
 /**
+ * A SPAN of ticks as a duration phrase in the reader's own unit: `one week`,
+ * `6 weeks`. One tick is one week, so the number itself is already the reader's
+ * unit — what leaks is the word `tick`, not the count.
+ *
+ * ⛔ THIS IS NOT `tickCalendarLabel`, AND THE TWO ARE NOT INTERCHANGEABLE.
+ * A calendar label answers WHEN (`the spring of year 1`); a duration answers HOW
+ * LONG. Routing a duration through the calendar translator produces
+ * "Roughly the spring of year 1 ticks from marching." — which is why the
+ * duration sites needed an export of their own rather than the one that existed.
+ *
+ * Exact rather than hedged: every site that renders a duration today is an
+ * actionable readout (how many advances until an army marches, until a queued
+ * impact matures), so an approximating phrase would cost the reader the number
+ * the surface exists to give. Sites that want a hedge already carry their own
+ * ("Roughly …"). Total on garbage (non-finite ⇒ 0 ⇒ `less than a week`).
+ *
+ * @param {number} ticks
+ * @returns {string}
+ */
+export function tickDurationLabel(ticks) {
+  const n = Math.max(0, Math.floor(Number(ticks) || 0));
+  if (n === 0) return 'less than a week';
+  if (n === 1) return 'one week';
+  return `${n} weeks`;
+}
+
+/**
  * A schema token (snake_case, kebab-case, or camelCase) as plain lowercase
  * words: `succession_coup` → `succession coup`, `goalProgress` → `goal progress`.
  * Total on garbage (non-string ⇒ '').

@@ -13,6 +13,7 @@ import {
   tickCalendarDetailLabel,
   settlementSizeLabel,
   tickCalendarLabel,
+  tickDurationLabel,
 } from '../../src/domain/display/humanizeEngineTokens.js';
 import { seasonForTick } from '../../src/domain/worldPulse/worldState.js';
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -43,6 +44,42 @@ describe('tickCalendarDetailLabel — Chronicle-scale calendar precision', () =>
     expect(tickCalendarDetailLabel(13)).toBe('week 1 of summer, year 1');
     expect(tickCalendarDetailLabel(52)).toBe('week 1 of spring, year 2');
     expect(tickCalendarDetailLabel(5)).not.toMatch(/\btick\b/i);
+  });
+});
+
+describe('tickDurationLabel — HOW LONG, which the calendar label cannot say', () => {
+  it('reads as a span in the reader own unit, exactly', () => {
+    expect(tickDurationLabel(1)).toBe('one week');
+    expect(tickDurationLabel(2)).toBe('2 weeks');
+    expect(tickDurationLabel(13)).toBe('13 weeks');
+    expect(tickDurationLabel(0)).toBe('less than a week');
+  });
+
+  it('is total on garbage', () => {
+    expect(tickDurationLabel(NaN)).toBe('less than a week');
+    expect(tickDurationLabel(-4)).toBe('less than a week');
+    expect(tickDurationLabel(/** @type {any} */ (undefined))).toBe('less than a week');
+    expect(tickDurationLabel(2.7)).toBe('2 weeks');
+  });
+
+  it('never emits a bare tick token', () => {
+    for (const t of [0, 1, 2, 13, 52, 400]) {
+      expect(/\btick/i.test(tickDurationLabel(t)), `tick leaked at ${t}`).toBe(false);
+    }
+  });
+
+  // ⛔ THE DISCRIMINATION THAT MAKES THIS A SECOND EXPORT RATHER THAN A REUSE.
+  // The compile's named STOP: routing a DURATION through the calendar translator
+  // yields "Roughly the spring of year 1 ticks from marching." The two answer
+  // different questions and must never collapse into one another, so the pin
+  // asserts they DISAGREE on the same input rather than merely that each works.
+  it('is not interchangeable with the calendar label at any span in a year', () => {
+    for (let t = 0; t <= 52; t++) {
+      expect(tickDurationLabel(t), `duration and calendar collided at ${t}`)
+        .not.toBe(tickCalendarLabel(t));
+    }
+    expect(`Roughly ${tickDurationLabel(6)} from marching.`).toBe('Roughly 6 weeks from marching.');
+    expect(`Roughly ${tickCalendarLabel(6)} from marching.`).toBe('Roughly the spring of year 1 from marching.');
   });
 });
 

@@ -28,6 +28,8 @@ import { GOLD_TXT, BODY, SLATE_DEEP, FS, sans, swatch } from '../theme.js';
 const SIEGE_RED = swatch['#8B1A1A'];
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
+/** Weeks in the durable year — the same calendar humanizeEngineTokens keeps. */
+const WEEKS_PER_YEAR = 52;
 
 /**
  * The dominant faith in a campaign's pantheon: the highest-tier deity (major >
@@ -146,7 +148,10 @@ export default function RealmStrip({ campaign, settlements = [] }) {
     >
       <Seg title="In-world clock. One tick is one week; a year is 52 weeks.">
         <strong style={{ color: GOLD_TXT, fontSize: FS.sm }}>{clock}</strong>
-        <span style={{ color: BODY }}> · week {tick}</span>
+        {/* §69.3: a player-facing strip gets no raw counter. The tick IS the week,
+            and the tooltip beside it already says a year is 52 of them, so the
+            honest span idiom carries the same fact without the engine's numbering. */}
+        <span style={{ color: BODY }}> · week {(tick % WEEKS_PER_YEAR) + 1} of 52</span>
       </Seg>
 
       <Seg title="Active sieges in the realm">
@@ -165,7 +170,10 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       {newsAge != null && (
         <Seg title="Wizard News recency">
           <span style={{ color: BODY }}>
-            {newsAge === 0 ? 'News this week' : `News ${newsAge} week${newsAge === 1 ? '' : 's'} ago`}
+            {/* Byte-identical to the pluralized spelling it replaces. The literal
+                `week` no longer sits against an interpolation, because an age in
+                weeks is honest prose and must not read as a counter label. */}
+            {newsAge === 0 ? 'News this week' : `News ${newsAge === 1 ? `${newsAge} week` : `${newsAge} weeks`} ago`}
           </span>
         </Seg>
       )}

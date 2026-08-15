@@ -7,8 +7,12 @@
  *   flagKey — a camelCase simulationRules boolean flag key (set built live from
  *             DEFAULT_SIMULATION_RULES + every preset, so new flags auto-join);
  *   tick    — a bare `tick <n>` counter (the reader gets calendar dates;
- *             src/domain/display/humanizeEngineTokens.js is the chokepoint);
- *   week    — a bare `week <n>` NOT in the sanctioned span idiom `week k of N`;
+ *             src/domain/display/humanizeEngineTokens.js is the chokepoint).
+ *             In JSX this reads BOTH surfaces: the literal-digit form, and the
+ *             label-against-an-interpolation form `Tick {tick}` that the flat
+ *             extractor is structurally blind to (§113, the adjacency arm);
+ *   week    — a bare `week <n>` NOT in the sanctioned span idiom `week k of N`,
+ *             on the same two surfaces;
  *   schema  — goal-engine / pulse schema field names in prose;
  *   rawId   — a raw settlement/npc id token (uuid, npc_<n>, generated_<X>,
  *             candidate.* / npc_ladder.* event ids);
@@ -44,7 +48,13 @@ import { advanceEntries } from '../../src/domain/display/chronicleGraph.js';
 import { chronicleForAdvance } from '../../src/domain/display/chronicleReadModel.js';
 import { decreesForAdvance } from '../../src/domain/display/decreeTracker.js';
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
-import { extractJsxProseStrings, scanJsxTree } from '../helpers/jsxLiteralWalk.js';
+import {
+  INTERPOLATION_HOLE,
+  extractJsxProseSegments,
+  extractJsxProseStrings,
+  scanJsxSegmentTree,
+  scanJsxTree,
+} from '../helpers/jsxLiteralWalk.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const JSX_BASELINE_PATH = join(ROOT, 'tests/copy/.prose-leak-jsx-baseline.json');
@@ -281,12 +291,79 @@ function countJsxTokenLeaks(strings) {
   return counts;
 }
 
-const JSX_SCAN = scanJsxTree(join(ROOT, 'src'), ROOT);
+// ── THE ADJACENCY ARM (ODQ §113) — what the flat surface could never see ─────
+//
+// ⛔ THE DETECTOR ABOVE WAS VACUOUS FOR ITS OWN SUBJECT, AND ITS BUDGET OF ZERO
+// WAS A RECEIPT FOR NOTHING. `DETECTORS.tick` requires literal digits
+// (`/\btick\s+\d+/`), while `extractJsxProseStrings` deliberately drops every
+// `${…}` and `{expr}` hole. Reader-facing code writes `Tick {tick}`, never
+// `Tick 12` — so the two rules composed to a scan that could not match a single
+// live site. It reported `tick: 0` across all 552 components while 29 raw
+// counters rendered on gallery, PDF, map, town-map, surveyor and landing
+// surfaces. §113 ratified the de-vacuification: the sites cure or carry a
+// RECORDED §69.3 allowance, and none of them is banked as baseline debt.
+//
+// The adjacency arm runs on the SEGMENT surface (holes preserved as
+// INTERPOLATION_HOLE) and matches a counter LABEL sitting against a hole. The
+// two arms are disjoint by construction — the literal-digit arm needs digits,
+// the adjacency arm needs a hole, and no string can offer both to one match —
+// so `tick`/`week` totals are the sum of the arms with nothing double counted.
+const TICK_HOLE_RE = new RegExp(`\\btick\\s*${INTERPOLATION_HOLE}`, 'gi');
+// `week k of N` stays the sanctioned span idiom on the hole surface too: an
+// honest relative label ("week 9 of 52"), not an engine counter.
+const WEEK_HOLE_RE = new RegExp(`\\bweek\\s*${INTERPOLATION_HOLE}(?!\\s*of)`, 'gi');
 
+/** @param {{text:string}[]} segments @returns {{tick:number,week:number}} */
+function countAdjacencyLeaks(segments) {
+  let tick = 0;
+  let week = 0;
+  for (const { text } of segments) {
+    tick += (text.match(TICK_HOLE_RE) || []).length;
+    week += (text.match(WEEK_HOLE_RE) || []).length;
+  }
+  return { tick, week };
+}
+
+// ── THE RECORDED §69.3 ALLOWANCE — read from the FILE, not from a table here ──
+// §69.3 splits the tiers: a raw tick counter is ALLOWED on a DM-facing
+// instrument where the number is the control the DM operates, and FORBIDDEN on
+// player, public and PDF surfaces. The ruling requires the allowance to be
+// RECORDED IN THE FILE, so that is exactly where this reads it from — there is
+// no allowlist in this suite to drift out of step with the source, and the
+// comment a reviewer sees in the component IS the thing the ratchet enforces.
+// Deleting the comment reds; growing the file past its recorded count reds;
+// curing a site without striking its allowance ALSO reds, so an allowance
+// cannot outlive the leak it was granted for.
+const ALLOWANCE_RE = /prose-leak-allowance:\s*(tick|week)\s+(\d+)/g;
+
+/** @param {string} rel @returns {{tick:number,week:number}} */
+function recordedAllowance(rel) {
+  const out = { tick: 0, week: 0 };
+  for (const m of readFileSync(join(ROOT, rel), 'utf8').matchAll(ALLOWANCE_RE)) {
+    out[/** @type {'tick'|'week'} */ (m[1])] += Number(m[2]);
+  }
+  return out;
+}
+
+const JSX_SCAN = scanJsxTree(join(ROOT, 'src'), ROOT);
+const JSX_SEGMENT_SCAN = scanJsxSegmentTree(join(ROOT, 'src'), ROOT);
+/** @type {Map<string, {text:string,line:number}[]>} */
+const SEGMENTS_BY_REL = new Map(JSX_SEGMENT_SCAN.map(({ rel, segments }) => [rel, segments]));
+
+/** @type {{rel:string, raw:{tick:number,week:number}, allowed:{tick:number,week:number}}[]} */
+const ADJACENCY_ROWS = [];
 /** @type {Record<string, {flagKey:number,tick:number,week:number,schema:number,rawId:number}>} */
 const currentJsxLeaks = {};
 for (const { rel, strings } of JSX_SCAN) {
   const c = countJsxTokenLeaks(strings);
+  const raw = countAdjacencyLeaks(SEGMENTS_BY_REL.get(rel) || []);
+  const allowed = recordedAllowance(rel);
+  if (raw.tick || raw.week || allowed.tick || allowed.week) ADJACENCY_ROWS.push({ rel, raw, allowed });
+  // The per-file DEBT is what is neither cured nor recorded. A sanctioned site
+  // is not debt and must never enter the committed baseline (§113: the 29 are
+  // cured sites, not baseline entries) — it is asserted by the register below.
+  c.tick += Math.max(0, raw.tick - allowed.tick);
+  c.week += Math.max(0, raw.week - allowed.week);
   if (Object.values(c).some((n) => n > 0)) currentJsxLeaks[rel] = c;
 }
 
@@ -322,10 +399,18 @@ describe('E-E proseLeak JSX extension — component engine-token ratchet (shrink
   });
 
   it('total JSX engine-token debt never grows past its committed budget', () => {
+    // ⚠ THE SECOND CLAUSE OF THIS FINDING WAS FALSE FOR A YEAR, AND IT IS THE
+    // REASON THE ADJACENCY ARM EXISTS. "ZERO tick/week leaks anywhere in
+    // components" was never measured — it was what a detector that could not
+    // match a single live site reported. There were 29, on gallery, PDF, map,
+    // town-map, surveyor and landing surfaces (ODQ §113). The zeroes below are
+    // now REAL: the adjacency arm feeds this same total, so a raw counter that
+    // is neither cured nor sanctioned lands here as debt and reds.
+    //
     // FINDING (E-E build, 2026-07-21): the measured floor is 29 flagKey hits
     // across exactly 3 files (src/components/map/SimulationRulesAxes.jsx,
-    // SimulationRulesDialog.jsx, src/components/settlements/LivingWorldGates.jsx)
-    // and ZERO tick/week/schema/rawId leaks anywhere in components. Read all 3
+    // SimulationRulesDialog.jsx, src/components/settlements/LivingWorldGates.jsx).
+    // Read all 3
     // before assuming these are leaks: every one is SETTINGS/GATING UI — a
     // flag-key -> human-label toggle table (e.g. `['momentumEnabled',
     // 'Momentum', '...']`) or a gates array (`key: 'warLayerEnabled'`) — where
@@ -374,5 +459,109 @@ describe('E-E proseLeak JSX extension — component engine-token ratchet (shrink
     expect(strings).not.toBeNull();
     const counts = countJsxTokenLeaks(/** @type {string[]} */ (strings));
     expect(counts).toEqual(ZERO_LEAKS);
+  });
+});
+
+// ── §113: THE ADJACENCY ARM AND ITS RECORDED ALLOWANCE REGISTER ──────────────
+describe('E-E adjacency arm — the counter labels the flat scan could not see (§113)', () => {
+  const SEEDED_COUNTER = [
+    'export function Seed({ tick, week }) {',
+    '  return <span>Tick {tick} of week {week}</span>;',
+    '}',
+  ].join('\n');
+
+  it('⛔ THE VACUITY, REPRODUCED: the committed flat detector reports NOTHING on a live counter site', () => {
+    // This is the whole finding, executed rather than asserted. The seeded
+    // component renders a raw `Tick {tick}` — the exact shape of all 29 live
+    // sites — and the detector that shipped with a budget of zero cannot see it.
+    // If this arm ever goes green-by-catching, the flat detector grew an
+    // adjacency notion of its own and this suite's two surfaces have converged.
+    const strings = extractJsxProseStrings(SEEDED_COUNTER);
+    expect(strings).not.toBeNull();
+    expect(countJsxTokenLeaks(/** @type {string[]} */ (strings)).tick).toBe(0);
+  });
+
+  it('the adjacency arm CATCHES that same seeded counter, and stays quiet on the cured spelling', () => {
+    const seeded = extractJsxProseSegments(SEEDED_COUNTER);
+    expect(seeded).not.toBeNull();
+    expect(countAdjacencyLeaks(/** @type {any} */ (seeded)).tick).toBe(1);
+
+    // The cure: the calendar phrase carries no label-then-value adjacency.
+    const cured = extractJsxProseSegments(
+      'export const Seed = ({ tick }) => <span>{tickCalendarLabel(tick)}</span>;',
+    );
+    expect(countAdjacencyLeaks(/** @type {any} */ (cured))).toEqual({ tick: 0, week: 0 });
+  });
+
+  it('the sanctioned `week k of N` span idiom survives the hole surface', () => {
+    const span = extractJsxProseSegments(
+      'export const Seed = ({ w }) => <span>week {w} of 52</span>;',
+    );
+    expect(countAdjacencyLeaks(/** @type {any} */ (span)).week).toBe(0);
+    const bare = extractJsxProseSegments('export const Seed = ({ w }) => <span>week {w}</span>;');
+    expect(countAdjacencyLeaks(/** @type {any} */ (bare)).week).toBe(1);
+  });
+
+  it('FAITHFULNESS: the second surface reaches every file the first one does, and adds no literal-digit hit of its own', () => {
+    // The de-vacuification must be additive over the OLD blind spot's
+    // COMPLEMENT: whatever the shipped detector could already see, the new
+    // surface must still see, and the new surface must not silently re-attribute
+    // a literal-digit hit. Both arms are checked over the whole live corpus.
+    expect(JSX_SEGMENT_SCAN.length).toBe(JSX_SCAN.length);
+    expect(JSX_SEGMENT_SCAN.map((r) => r.rel)).toEqual(JSX_SCAN.map((r) => r.rel));
+    const literalDigitOnSegments = JSX_SEGMENT_SCAN.flatMap(({ rel, segments }) =>
+      segments.flatMap(({ text }) => [
+        ...DETECTORS.tick(text).map((t) => `${rel}|tick|${t}`),
+        ...DETECTORS.week(text).map((t) => `${rel}|week|${t}`),
+      ]));
+    const literalDigitOnStrings = JSX_SCAN.flatMap(({ rel, strings }) =>
+      strings.flatMap((s) => [
+        ...DETECTORS.tick(s).map((t) => `${rel}|tick|${t}`),
+        ...DETECTORS.week(s).map((t) => `${rel}|week|${t}`),
+      ]));
+    expect(literalDigitOnSegments.sort()).toEqual(literalDigitOnStrings.sort());
+  });
+
+  it('every raw counter is either CURED or carries its recorded §69.3 allowance — none is banked as debt', () => {
+    const unrecorded = ADJACENCY_ROWS
+      .filter((r) => r.raw.tick > r.allowed.tick || r.raw.week > r.allowed.week)
+      .map((r) => `${r.rel}: raw ${JSON.stringify(r.raw)} > allowed ${JSON.stringify(r.allowed)}`);
+    expect(
+      unrecorded,
+      '\nA raw `Tick {n}` / `week {n}` reached a component with no recorded allowance.\n'
+      + 'Cure it through src/domain/display/humanizeEngineTokens.js, or — only on a\n'
+      + 'DM-facing instrument — record the §69.3 allowance in the file itself.\n'
+      + `${unrecorded.join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  it('no allowance outlives its site (a stale grant is as dishonest as a missing one)', () => {
+    const stale = ADJACENCY_ROWS
+      .filter((r) => r.allowed.tick > r.raw.tick || r.allowed.week > r.raw.week)
+      .map((r) => `${r.rel}: allowed ${JSON.stringify(r.allowed)} > raw ${JSON.stringify(r.raw)}`);
+    expect(
+      stale,
+      `\nStrike the allowance line: the site it was granted for is gone.\n${stale.join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  it('the recorded allowance stays inside its committed register (NEVER raise)', () => {
+    // The §69.3 register, measured at the da-a landing: 20 sanctioned counters
+    // across 12 DM-facing instruments — 11 `tick` on the undo history, the
+    // auspice, the chronicler's letter span, the live-war deployments, the
+    // timelapse scrubber, the World Pulse header and card, and the two regional
+    // impact queues; 9 `week` on the surveyor's autonomy receipt, the two
+    // town-scene living readouts and the realm forecast digest. Every OTHER
+    // site in the 29 cured. This number may FALL as instruments adopt the
+    // calendar phrase; it may never rise, because a rise means a raw counter
+    // reached a surface and was written off instead of translated.
+    const totals = ADJACENCY_ROWS.reduce(
+      (t, r) => ({ tick: t.tick + r.allowed.tick, week: t.week + r.allowed.week }),
+      { tick: 0, week: 0 },
+    );
+    const files = ADJACENCY_ROWS.filter((r) => r.allowed.tick > 0 || r.allowed.week > 0);
+    expect(totals.tick, 'tick allowances').toBeLessThanOrEqual(11);
+    expect(totals.week, 'week allowances').toBeLessThanOrEqual(9);
+    expect(files.length, 'files carrying an allowance').toBeLessThanOrEqual(12);
   });
 });

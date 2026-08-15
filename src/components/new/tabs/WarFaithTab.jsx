@@ -30,6 +30,7 @@ import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../../domain/display/mobilizationStatus.js';
+import { tickDurationLabel } from '../../../domain/display/humanizeEngineTokens.js';
 import { settlementOccupation, occupierHoldings } from '../../../domain/display/occupationStatus.js';
 import { renderTreatiesForSettlement } from '../../../domain/display/treatyDocument.js';
 import FaithSection from '../../settlement/FaithSection.jsx';
@@ -78,7 +79,7 @@ function WarBlock({ war, nameFor }) {
         <Line strong="Mobilization.">
           {mobilization.phrase}
           {mobilization.ticksToDeploy > 0 && (
-            <span style={{ color: MUTED }}>{` Roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`}</span>
+            <span style={{ color: MUTED }}>{` Roughly ${tickDurationLabel(mobilization.ticksToDeploy)} from marching.`}</span>
           )}
         </Line>
       )}

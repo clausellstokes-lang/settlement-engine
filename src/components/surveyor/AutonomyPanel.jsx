@@ -364,3 +364,26 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
     </div>
   );
 }
+
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * The autonomy run's progress readout and its stop RECEIPT. A receipt is an
+ * exact account of what the operator asked for and what the world did: the
+ * week it stopped on and how many it advanced. Rounding either into a phrase
+ * would cost the receipt the only thing it is for.
+ *
+ * §69.3 splits the tiers: a raw engine week counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ *
+ * It sits at the FOOT of the file on purpose: tests/lint/.prose-numerics-baseline.json
+ * addresses its rows by path AND LINE, so a block inserted at the head would rot
+ * every row beneath it in a census this member has no business moving.
+ * prose-leak-allowance: week 4
+ */

@@ -101,3 +101,94 @@ export function scanJsxTree(rootDir, repoRoot) {
   }
   return results.sort((a, b) => (a.rel < b.rel ? -1 : a.rel > b.rel ? 1 : 0));
 }
+
+/**
+ * ── THE ADJACENCY MARKER (the second surface) ────────────────────────────────
+ *
+ * `extractJsxProseStrings` above deliberately DROPS every `${…}` interpolation
+ * and every `{expr}` JSX child, because it answers "what literal text does this
+ * component contain". That is the right surface for a character ban (an em dash
+ * is an em dash wherever it sits) and the WRONG surface for an ADJACENCY ban.
+ *
+ * A counter label is a relationship between a word and the value beside it:
+ * `Tick {tick}` is a leak and `Tick` alone is not. Drop the hole and the two
+ * become the same string, so a detector built on the flat surface is
+ * STRUCTURALLY BLIND to every live counter site — it can only ever see the
+ * literal-digit form `tick 12`, which reader-facing code essentially never
+ * writes. That blindness is what let `proseLeak`'s `tick` budget sit at zero
+ * while 29 live sites rendered raw counters (ODQ §113).
+ *
+ * This second extractor keeps the holes as `INTERPOLATION_HOLE`, a NUL byte —
+ * chosen because no JavaScript source text can contain one, so a hole can never
+ * be confused with authored content and no authored content can forge a hole.
+ * Each segment is one JSX element's joined children, or one template literal.
+ *
+ * ⛔ ADDITIVE. `extractJsxProseStrings`, `scanJsxTree` and `walkJsxFiles` keep
+ * byte-identical behaviour: `voiceMechanics.test.js` and `proseLeak.test.js`
+ * both import them and both carry committed per-file budgets, so a change there
+ * would move a second suite's ratchet from inside this one's cure.
+ */
+export const INTERPOLATION_HOLE = '\u0000';
+
+/**
+ * Parse one JSX source file and extract its prose SEGMENTS with interpolation
+ * holes preserved. A segment is one JSX element/fragment's joined children, or
+ * one template literal's quasis joined by holes.
+ * @param {string} src
+ * @returns {{ text: string, line: number }[] | null} null if the file failed to
+ *   parse (callers must skip, not throw — the same contract as the flat walk).
+ */
+export function extractJsxProseSegments(src) {
+  /** @type {any} */
+  let ast;
+  try {
+    ast = parse(src, { ecmaVersion: 2024, sourceType: 'module', ecmaFeatures: { jsx: true }, loc: true });
+  } catch {
+    return null;
+  }
+  /** @type {{ text: string, line: number }[]} */
+  const out = [];
+  /** @param {any} n */
+  const visit = (n) => {
+    if (!n || typeof n !== 'object') return;
+    if (n.type === 'TemplateLiteral') {
+      let s = '';
+      for (let i = 0; i < n.quasis.length; i += 1) {
+        s += n.quasis[i].value.cooked ?? '';
+        if (i < n.expressions.length) s += INTERPOLATION_HOLE;
+      }
+      out.push({ text: s, line: n.loc?.start.line ?? 0 });
+    } else if (n.type === 'JSXElement' || n.type === 'JSXFragment') {
+      let s = '';
+      for (const ch of n.children || []) {
+        if (ch.type === 'JSXText') s += ch.value;
+        else if (ch.type === 'JSXExpressionContainer') s += INTERPOLATION_HOLE;
+      }
+      if (s.trim() || s.includes(INTERPOLATION_HOLE)) out.push({ text: s, line: n.loc?.start.line ?? 0 });
+    }
+    for (const k in n) {
+      if (k === 'loc' || k === 'range' || k === 'parent') continue;
+      const v = n[k];
+      if (Array.isArray(v)) { for (const x of v) if (x && typeof x.type === 'string') visit(x); }
+      else if (v && typeof v.type === 'string') visit(v);
+    }
+  };
+  visit(ast);
+  return out;
+}
+
+/**
+ * Walk every `.jsx` file under `rootDir`, extracting its prose SEGMENTS.
+ * @param {string} rootDir absolute directory to scan
+ * @param {string} repoRoot absolute repo root (for relative-path keys)
+ * @returns {{ rel: string, segments: { text: string, line: number }[] }[]}
+ */
+export function scanJsxSegmentTree(rootDir, repoRoot) {
+  const results = [];
+  for (const abs of walkJsxFiles(rootDir)) {
+    const rel = relative(repoRoot, abs).replace(/\\/g, '/');
+    const segments = extractJsxProseSegments(readFileSync(abs, 'utf8'));
+    if (segments) results.push({ rel, segments });
+  }
+  return results.sort((a, b) => (a.rel < b.rel ? -1 : a.rel > b.rel ? 1 : 0));
+}
