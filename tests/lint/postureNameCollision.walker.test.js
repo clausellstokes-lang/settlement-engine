@@ -215,3 +215,90 @@ describe('CR-C4-1 — the SP volume records the ruling where a reader will find 
     expect(volume).not.toMatch(/`postureOf`\/`riskToleranceOf` reads/);
   });
 });
+
+/**
+ * RN-A0 (ODQ §64.1, §64.5) — THE RELATIONSHIP NAME COLLISIONS.
+ *
+ * The same defect class this file was built for, arriving from the relationship
+ * plane: three module-private identifiers were each bound in more than one module
+ * under `src/domain` with DIFFERENT membership. Nothing red — every module was
+ * internally consistent — so the damage landed on the reader who carried one
+ * site's meaning to another.
+ *
+ * This arm adds three names to the scanner above; it builds no new mechanism, and
+ * that is why rn-1 creates no new `tests/lint/` file (ODQ §64.4's ruled re-point).
+ */
+const RN_A0_RENAMED = Object.freeze([
+  Object.freeze({ name: 'COALITION_FRIENDLY_LABELS', home: 'src/domain/worldPulse/conquestDoctrineStage.js' }),
+  Object.freeze({ name: 'COALITION_HOSTILE_LABELS', home: 'src/domain/worldPulse/conquestDoctrineStage.js' }),
+  Object.freeze({ name: 'INTEL_BOND_KINDS', home: 'src/domain/spatial/intelActs.js' }),
+]);
+
+/** The declarations RN-A0 deliberately did NOT rename — the collision's other side. */
+const RN_A0_SURVIVORS = Object.freeze([
+  Object.freeze({ name: 'FRIENDLY_LABELS', home: 'src/domain/worldPulse/beliefMap.js' }),
+  Object.freeze({ name: 'BOND_KINDS', home: 'src/domain/worldPulse/npcLadderState.js' }),
+]);
+
+/**
+ * ⛔ THE RESIDUAL COLLISION RN-A0 LEFT STANDING, ON PURPOSE.
+ *
+ * `HOSTILE_LABELS` was bound in THREE modules and only `conquestDoctrineStage.js`'s
+ * moved. `informationStatecraft.js` is a hot file (780 of 800 effective lines) and
+ * `brokerageServicesRules.js` was outside rn-1's scope entirely, so the sweep that
+ * would have cured all three was FORBIDDEN by the packet rather than forgotten.
+ *
+ * Pinning the survivors at EXACTLY TWO is what makes the non-cure visible: it reds
+ * if a later lane sweeps them silently, and it reds if a fourth declaration lands.
+ * The day the remaining two are cured this expectation is edited in that lane's own
+ * commit, which is the point — the disposition is a decision, never a drift.
+ */
+const RN_A0_RESIDUAL = Object.freeze({
+  name: 'HOSTILE_LABELS',
+  homes: Object.freeze([
+    'src/domain/worldPulse/brokerageServicesRules.js',
+    'src/domain/worldPulse/informationStatecraft.js',
+  ]),
+});
+
+describe('RN-A0 — the relationship name collisions resolve to one definition each', () => {
+  test('each renamed name binds in exactly ONE module, and that module is its own', () => {
+    for (const { name, home } of RN_A0_RENAMED) {
+      expect(
+        definers(name),
+        `${name} must bind exactly once, in ${home}. A second binding is the same`
+        + ' no-runtime-symptom collision RN-A0 renamed it to end.',
+      ).toEqual([home]);
+      const owner = DOMAIN_FILES.find((f) => f.rel === home);
+      expect(definitionCount(owner.code, name)).toBe(1);
+    }
+  });
+
+  test('all three renamed bindings stay MODULE-PRIVATE — the neutrality proof', () => {
+    // RN-A0 is output-neutral BECAUSE nothing can observe it. The moment one of these
+    // is exported the rename becomes a public-surface change and that claim dies.
+    for (const { name } of RN_A0_RENAMED) {
+      expect(exporters(name), `${name} became exported — RN-A0's output-neutrality claim rests on it being module-private`).toEqual([]);
+    }
+  });
+
+  test('the survivors kept their names and are now unambiguous', () => {
+    for (const { name, home } of RN_A0_SURVIVORS) {
+      expect(
+        definers(name),
+        `${name} was left with its name by RN-A0 because it is the one that should keep it;`
+        + ' it must now be the ONLY binding of that name.',
+      ).toEqual([home]);
+    }
+  });
+
+  test('the residual HOSTILE_LABELS collision is left standing, deliberately and visibly', () => {
+    expect(
+      [...definers(RN_A0_RESIDUAL.name)].sort(),
+      'the deliberate residual moved. RN-A0 renamed conquestDoctrineStage.js\'s binding'
+      + ' ONLY: informationStatecraft.js is a hot file and brokerageServicesRules.js was'
+      + ' out of scope, so these two survive BY DECISION. If a lane cured them, edit this'
+      + ' expectation in that lane\'s commit; if a new one landed, that is the defect.',
+    ).toEqual([...RN_A0_RESIDUAL.homes].sort());
+  });
+});

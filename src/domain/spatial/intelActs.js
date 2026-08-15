@@ -38,8 +38,16 @@ export const INTEL_TRANSFERS_LEDGER = 'intelTransfers';
 /** The generosity-owned per-pair cooldown sub-ledger (pairKey → lastTradeWeek). */
 export const INTEL_COOLDOWN_LEDGER = 'intelCooldown';
 
-/** The relationship kinds a GIFT rides (a bonded ally) — the generosity gate vocabulary. */
-const BOND_KINDS = new Set(['allied', 'trade_partner', 'vassal', 'patron', 'client']);
+/**
+ * The relationship kinds a GIFT rides (a bonded ally) — the generosity gate vocabulary.
+ *
+ * INTEL_-prefixed because the bare name COLLIDES: `npcLadderState.js` EXPORTS a
+ * `BOND_KINDS` of an entirely different vocabulary (`loyalty`/`gratitude`/`friendship`
+ * — personal bonds, not relationship kinds). The collision has no runtime symptom, so
+ * the damage lands on the reader who carries one meaning to the other site. The
+ * exported one keeps its name; this module-private one takes the prefix (RN-A0).
+ */
+const INTEL_BOND_KINDS = new Set(['allied', 'trade_partner', 'vassal', 'patron', 'client']);
 
 export const INTEL_TRADE_TUNING = Object.freeze({
   // A belief updated within this many ticks of "now" is a FRESH trigger (the seller just
@@ -230,7 +238,7 @@ export function enumerateIntelOpportunities({ beliefMaps, edges, graph, relState
     const to = edge && edge.to != null ? String(edge.to) : '';
     if (!from || !to || from === to) continue;
     const kind = normalizeRelationshipType(String(edge.relationshipType || 'neutral'));
-    if (!BOND_KINDS.has(kind)) continue;
+    if (!INTEL_BOND_KINDS.has(kind)) continue;
     const rel = ensureRelationshipState(edge, relStates[relationshipKeyFromEdge(edge)]);
     const strength01 = clamp01(0.7 * (Number(rel.trust) || 0) + 0.3 * (Number(rel.pactStrength) || 0));
     if (strength01 < T.BOND_FLOOR) continue;

@@ -84,9 +84,23 @@ const BELIEF_STRENGTH_WORDS = Object.freeze([
  * imported, on the `envoyTestimony` precedent: this stage needs a closed
  * two-way census and must not acquire a reach it does not otherwise need. The
  * hostile side is everything the belief layer already treats as hostile.
+ *
+ * COALITION_-prefixed because the bare names COLLIDE across modules with
+ * different membership: `FRIENDLY_LABELS` is also bound in `beliefMap.js`, and
+ * `HOSTILE_LABELS` in `informationStatecraft.js` and `brokerageServicesRules.js`.
+ * The collision has no runtime symptom — every module is internally consistent
+ * and every gate is green — so the damage lands later, on the reader who carries
+ * one site's meaning to another. The prefix names WHOSE census this is; the other
+ * declarations deliberately keep their names (RN-A0).
+ *
+ * ⚠ MEMBERSHIP IS NEITHER MERGED NOR RE-DERIVED HERE. That this census excludes
+ * `trade_partner`/`patron`/`client` is DELIBERATE, on the `envoyTestimony`
+ * precedent recorded above: a coalition is who would march, not who would trade.
+ * Re-deriving the set from the produced allianceLabel corpus is rn-1 arm C's row
+ * (ODQ §67.4), not this rename's.
  */
-const FRIENDLY_LABELS = Object.freeze(new Set(['allied', 'alliance', 'friendly', 'ally', 'vassal', 'suzerain']));
-const HOSTILE_LABELS = Object.freeze(new Set(['hostile', 'cold_war', 'rival']));
+const COALITION_FRIENDLY_LABELS = Object.freeze(new Set(['allied', 'alliance', 'friendly', 'ally', 'vassal', 'suzerain']));
+const COALITION_HOSTILE_LABELS = Object.freeze(new Set(['hostile', 'cold_war', 'rival']));
 
 /** The pressure ladder's words, in ascending order, minus `unknown`. */
 const PRESSURE_WORDS = Object.freeze(['quiet', 'present', 'pressing', 'decisive']);
@@ -155,8 +169,8 @@ export function coalitionCensusFor(worldState, observerId, rivalId) {
   for (const subjectId of Object.keys(observerMap).sort()) {
     if (subjectId === rivalId || subjectId === observerId) continue;
     const label = String(asObject(observerMap[subjectId]).allianceLabel || '');
-    if (FRIENDLY_LABELS.has(label)) friends += 1;
-    else if (HOSTILE_LABELS.has(label)) enemies += 1;
+    if (COALITION_FRIENDLY_LABELS.has(label)) friends += 1;
+    else if (COALITION_HOSTILE_LABELS.has(label)) enemies += 1;
   }
   return {
     ownWord: pressureWordForCount(friends),
