@@ -2913,6 +2913,123 @@
         ["node", "scripts/check-observed-shape-readers.mjs"],
         ["node", "scripts/implementation-packets.mjs", "validate"]
       ]
+    },
+    {
+      "id": "EFF-M1A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M1A.md",
+      "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "scripts/preproof-train.mjs" }
+      ],
+      "requiredSymbols": [
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" },
+        { "path": "scripts/base-state-capsule.mjs", "symbol": "export const CAPSULE_PATH" },
+        { "path": "eslint.config.js", "symbol": "files: ['scripts/**/*.{js,mjs,cjs}']" },
+        { "path": "vite.config.js", "symbol": "testTimeout: 20000" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "two green members exit 0 and worktree registrations are empty IMMEDIATELY after exit" },
+        { "id": "A2", "case": "a red battery exits 1 naming the member — the only exit-1 class" },
+        { "id": "A3", "case": "every setup and crash class exits 2 with no truncation signal implied" },
+        { "id": "A4", "case": "all three refusal boundaries refuse with zero repo dirt, and the sibling-prefix tmpRoot is accepted" },
+        { "id": "A5", "case": "SIGTERM exits 2 with registrations empty at once and a delayed ps showing zero surviving batteries" },
+        { "id": "A6", "case": "R-H1: a plan without a positive timeoutMs is refused, and a wedged battery reports phase timeout instead of hanging" },
+        { "id": "A7", "case": "R-D8: a real estate battery caches under its per-member cacheDir and the shared node_modules/.vite digest is unchanged" },
+        { "id": "A8", "case": "the script is lint-clean under the repo eslint and node --check exits 0" }
+      ],
+      "checks": [
+        ["node", "--check", "scripts/preproof-train.mjs"],
+        ["npx", "eslint", "scripts/preproof-train.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "EFF-M1B",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M1B.md",
+      "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "scripts/premise-map.mjs" }
+      ],
+      "requiredSymbols": [
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the seven proofs reproduce at this base: 0 1 0 1 0 0 1" },
+        { "id": "A2", "case": "the signed fork surfaces as its own FORKED bucket and never under STOP" },
+        { "id": "A3", "case": "both row-id corruption doors convict: charset at validate, near-miss at scope" },
+        { "id": "A4", "case": "the transitive closure stops dependents of stopped and of forked members and continues the disjoint one" },
+        { "id": "A5", "case": "contradictory grades, whole-train citation and a family-less queue all convict" },
+        { "id": "A6", "case": "the annex check separates present, missing-row and unreadable into 0, 1 and 2" },
+        { "id": "A7", "case": "an invalid plan cannot scope, and a missing row id or unknown subcommand is a usage error" },
+        { "id": "A8", "case": "the script is lint-clean under the repo eslint and node --check exits 0" }
+      ],
+      "checks": [
+        ["node", "--check", "scripts/premise-map.mjs"],
+        ["npx", "eslint", "scripts/premise-map.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "EFF-M2",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M2.md",
+      "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
+      "changeManifest": [
+        { "action": "DOC", "path": "docs/implementation/PACKET_STANDARD.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Train landings" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Family packet preambles" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the enforcement-claims pin stays green and no frozen naked-claim key grows" },
+        { "id": "A2", "case": "exactly six new top-level sections in the stated position, surroundings byte-identical" },
+        { "id": "A3", "case": "no section carries a per-family or per-wave figure" },
+        { "id": "A4", "case": "every authority citation resolves, with the ledger-branch divergence recorded in the header" },
+        { "id": "A5", "case": "validate:packets exits 0 with every join closed" },
+        { "id": "A6", "case": "the lighting census is unmoved" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/docs/enforcement-claims.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "EFF-M3",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/infrastructure/EFF-M3.md",
+      "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
+      "changeManifest": [
+        { "action": "DOC", "path": "docs/implementation/preambles/GR-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/HB-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/IN-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/INFRA-PREAMBLE.md" },
+        { "action": "DOC", "path": "docs/implementation/preambles/INT-PREAMBLE.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "docs/implementation/preambles/INT-PREAMBLE.md", "symbol": "## §P8 · Standing STOP conditions" },
+        { "path": "docs/implementation/preambles/GR-PREAMBLE.md", "symbol": "# GR FAMILY PACKET PREAMBLE" },
+        { "path": "docs/implementation/preambles/HB-PREAMBLE.md", "symbol": "# HB FAMILY PACKET PREAMBLE" },
+        { "path": "docs/implementation/preambles/IN-PREAMBLE.md", "symbol": "# IN FAMILY PACKET PREAMBLE" },
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the enforcement-claims pin stays green and no frozen naked-claim key grows" },
+        { "id": "A2", "case": "the five new sections are byte-identical apart from the section number and the one stamp line" },
+        { "id": "A3", "case": "every receipt-tagged line resolves in its named receipt and every law-tagged line in its named law text" },
+        { "id": "A4", "case": "no preamble gains a per-wave figure" },
+        { "id": "A5", "case": "the zero-cost re-stamp window still holds at 50 packets with zero non-terminal, and INT P8.6 reads 10 after" },
+        { "id": "A6", "case": "the lighting census is unmoved" },
+        { "id": "A7", "case": "validate:packets exits 0 with every join closed" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/docs/enforcement-claims.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
     }
   ]
 }
