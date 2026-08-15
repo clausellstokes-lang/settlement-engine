@@ -1758,3 +1758,32 @@ recon lane dispatches now (routes, sea-battle machinery, alliance edges,
 deployment travel-time, persisted-shape homes). Persisted-shape widening
 (circle/port as settlement features) is declared for the veto surface per
 the standing law. Design thoughts delivered in-chat; the volume binds them.
+
+### §46a · Owner refinement: THE FLEET MODEL (2026-08-15 ~09:10, in-chat,
+### verbatim intent; amends §46 item 2-4)
+
+(1) Allies may use an ally's airship for transport "where reasonable and
+coherent"; airships CIRCLE BACK and re-serve. (2) THE BOUND: each settlement
+has a FLEET — a derived number of airships from tier, economics, and
+population. Each airship serves trade OR war; a dispatched airship is
+UNAVAILABLE until it returns. (3) THE CARGO ASYMMETRY, refined from §46's
+one-way law: return legs may carry trade and anything else EXCEPT direct
+units/reinforcements — troops flow TOWARD war by air, never back. (4)
+AIRSHIPS TRAVEL WITH NEWS — vessels are information carriers; arrivals
+deliver the origin's news. (5) A vessel lost in an air battle becomes
+UNAVAILABLE FOR A REBUILD PERIOD ("an appropriate amount of time"), not
+permanently erased. (6) ⭐ THE WHOLE MODEL GENERALIZES TO SEA: regular ports
+and ships get the same fleet bounds, trade-or-war allocation, unavailability
+windows, and rebuild timers.
+
+Chair note: this replaces the committed-for-the-duration sketch with a
+UNIFIED VESSEL-POOL model (one machinery, two modes: air = all routes
+untouched by ground forces; sea = sea routes) — one canonical truth for both,
+which makes item 6 structural rather than duplicated. Fleet counts are
+DERIVED from existing settlement stats (finite semantics — coefficients, not
+a new stored dial), rebuild windows likewise. ⚠ The sea generalization may
+touch LANDED naval behavior — whether ships exist as entities at HEAD or
+trade is abstract determines widening-vs-refit; the LGR recon is extended to
+answer it, plus the news-latency machinery and the stat homes for the fleet
+derivation. All §46 dispositions (two flags, dormancy, persisted-shape veto
+surface, producers-before-prose, §43 value law) carry unchanged.
