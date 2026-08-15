@@ -2302,3 +2302,31 @@ EXECUTION SERIALIZES behind INT-3B (one engine worktree).
 4. The lane's own CLAIM_RE run over its authored bytes (0 hits, with the
    frozen entry's absorption hazard named) is ratified as the banked-red
    law practiced correctly.
+
+## §59 · THE WC-0 TRAIN IS RULED (2026-08-16 ~10:10, chair, vetoable;
+## evidence in laneTC14-report.md; CLAIM_RE 0 across all eight docs)
+
+1. **The four-member shape is SIGNED** (WC-0A vocabularies · 0B column-class
+   union · 0C law-band + the cured C3 fence · 0D amnesty/jubilee + census
+   terminal; D0 docs opening; staged promotion per CR-HB2B-SPLITP; T
+   docs-only). The three STOP-class refutations BIND: a registration wave
+   cannot mint a flag (the walker reds unread manifest keys — both flags
+   leave, the three §49/§50 obligations priced but NOT incurred); TRACKED
+   spatialUsage rows are live-writer claims (they leave); three leaves match
+   no LAYER_PATTERNS row at exact ceilings.
+2. **WC-0E is NAMED as the flag-wave successor** (contributionLedger, both
+   flags, the TRACKED rows, the blocks[] arm) — a train boundary. Q1 RULED:
+   WC-1's dependency line reads "WC-0A..D AND WC-0E."
+3. **Q9 RULED: TRANSCRIBE-AND-RECORD** — the four numeric TERM_CATALOG
+   fields for amnesty/jubilee transcribe from the producer-less seam
+   analogues with the derivation quoted; the chair signs the transcriptions
+   at promotion; inventing values stays forbidden. The train plan's
+   corrected zero-numbers claim is ratified as corrected.
+4. **The six house lines are provisionally signed** on their executed
+   mechanical guards + LAW ONE; the executor quotes them in the landing
+   receipt for the chair's collection review (the corpus signature
+   completes there).
+5. The live naked-claim token at WC_CHAIR_RULINGS.md:389 is DOCKETED to
+   that file's fold obligation (cure-at-fold); WV's R32 recorded CURED.
+6. **THE EXECUTOR QUEUE (one worktree, serial):** INT-3B reland (running) →
+   IN-1C-A (ruled §55) → est-1 (on TC15's ruling) → the wc-0 train.
