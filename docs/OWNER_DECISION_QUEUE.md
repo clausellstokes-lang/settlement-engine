@@ -4443,3 +4443,26 @@ The charter lane received the addendum in flight.
    attestation is the record; the build-time never-sold verification
    clause in PricingPage.jsx is SATISFIED-BY-ATTESTATION and its
    note updates to cite this section.
+
+## §119 · THE RIBBON/V5 PROGRAM RE-ENTERS — BUILD DEFERRED POST-TUNE
+## (owner, 2026-08-15: "the arrow, we had some pending work that can
+## wait until after the full soak and tune.")
+
+1. **The V5 BUILD WAVES are SEQUENCED POST-FULL-SOAK-AND-TUNE** by
+   owner order — they join the tail AFTER tuning, before/with the
+   deploy phase (the V4-era "build waits on minifold freeing" clause
+   is superseded by this explicit slot). The da display family
+   proceeds decoupled.
+2. **The COUNSEL PASS completes NOW** (lane V5-C, zero src — the
+   pass was paused mid-amendment and was already owed): the
+   consolidated V5 spec (the four directives + D5's photoreal law +
+   the pendant-problem criterion + the texture-budget re-ruling),
+   the complete Higgsfield ASSET MANIFEST in the owner's own prompt
+   discipline (the owner drives generation at their leisure —
+   reference PNGs confirmed present in the template-review folder),
+   and the v5 build-wave plan with proof shapes. Deliverables bank
+   until the post-tune slot.
+3. The START_HERE identity-program section gains a pointer to this
+   section at the next ledger docs touch (the paused-workflow resume
+   handle is dead in this harness; the fresh counsel lane is the
+   resumption of record).
