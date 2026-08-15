@@ -117,6 +117,18 @@ const LAYER_PATTERNS = Object.freeze({
     /^src\/domain\/worldPulse\/war[A-Z]/,
     /^src\/domain\/worldPulse\/(?:occupation|deploymentReturn|mobilization|razing|conquest|siege|vengeance|atrocity)/,
     /^src\/domain\/spatial\/(?:armyTransit|embattlement|navalLayer)\.js$/,
+    // WC-0A: the people ledger. Where the people a war moves actually ARE — the pools, the
+    // events and the conservation identity WC-6's walker derives its checks from — is WAR's own
+    // subject, so the leaf takes WAR whatever noun it is named after, on exactly the reading that
+    // gave secondOrderBelief.js INFO and strategicPosture.js INTERIOR: the distinction is
+    // SUBJECT, not program. It is NOT an ARGUED_UNLAYERED case — the roster is for modules that
+    // own no subject and are spoken by every port, and this one owns people-conservation
+    // outright. A family home is what will force WC-13's absorption market and WC-15's cohorts to
+    // register their couplings instead of reading across a port in silence.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `people[A-Z]` PREFIX: a prefix would claim files nobody has
+    // designed and silently widen a frozen family (the IN-1 precedent, verbatim; and INT-3B took
+    // this identical shape for emigreErrand.js one wave before this one landed).
+    /^src\/domain\/worldPulse\/peopleLedger\.js$/,
   ],
   TRADE: [
     /^src\/domain\/worldPulse\/(?:routeNetwork|tradeRoute|tradeWar|commodity|merchant|foodStockpile|foodLedger)/,
