@@ -1055,3 +1055,129 @@ describe('12. DETERMINISM — replay, seed families, ZERO new streams, purity', 
     expect(away).toBeLessThan(home);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CS-B2 (`cs-4`) — THE NAMED FLOOR MINTED PEOPLE AGAINST ITS OWN RECEIPT
+//
+// `const after = Math.max(named, before + births - deaths)` looks like the H3 cast
+// protection, but H3 is already structural: `deaths` is drawn against the ANONYMOUS POOL
+// (`pool = before - named`), so `before + births - deaths >= named` holds identically
+// whenever `named <= before`. The `max` could therefore only ever BIND in the one case
+// where it is wrong — `named > before` — and there it did not protect anybody, it
+// INVENTED people, breaking this module's own header law 1 ("no growth term that is not
+// a birth") and making the receipt line arithmetically false in the same breath.
+//
+// ⛔ WHY THIS NEEDED A TRAJECTORY PIN (§72.3), and it is not a stylistic preference: the
+// mint is a ONE-TICK event that then hides. Measured at this base with a 2,000-head town
+// carrying a 2,600-name roster, the whole defect is tick 1 and every later tick looks
+// perfectly healthy:
+//
+//   tick   BASE (defective)                                   CURED
+//   1      before 2000 → after 2600; births 2, deaths 0        before 2000 → after 2002
+//          the row records delta 600 under the reason
+//          "2 born and 0 buried."  ← 598 souls from nothing
+//   2-10   +2/+3 a tick, indistinguishable from health         +1/+2 a tick
+//   Σ      Δ 620 against 22 births ⇒ CLOSURE RESIDUAL 598      Δ 18, 18 births, RESIDUAL 0
+//
+// A single-tick fixture asserting "population did not fall below the cast" PASSES on the
+// defect. Only the accumulated closure — Δtotal − (births − deaths) summed over the run —
+// convicts it, which is why the cumulative residual is this pin's central assertion.
+//
+// ⚠ THE COMPILE'S OWN FIXTURE CANNOT SEE THIS. `laneTC20-CSGEN-PLAN.md` §4.5 specifies
+// "a village with population 10 and 50 named residents". Executed at this base, a village
+// of 10 has an expected birth count of 10 × 0.00088 = 0.0088, so `births` is 0 on every
+// tick, `if (births === 0 && deaths === 0) continue` skips the block entirely, and base
+// and cure produce IDENTICAL ten-tick runs (population 10, forever, no receipt at all).
+// The fixture is scaled to a town whose expected births clear 1 (2,000 × 0.00085 = 1.7)
+// so the defect actually executes. Recorded as a deviation, J-TE21-1.
+describe('13. CS-B2 (cs-4) — THE NAMED FLOOR NEVER MINTS: population moves by births alone', () => {
+  /** Drive `ticks` ticks of the natural step with no roads (so no column can move
+   *  anybody and the closure is births and deaths alone), returning one row per tick. */
+  function driveRoster({ population, named, ticks, seed = 'b2' }) {
+    let live = [{
+      saveId: 'Rosterhold',
+      settlement: place({ id: 'Rosterhold', tier: 'town', population, dailyProduction: 40000, named }),
+    }];
+    let ws = litWorld();
+    const rows = [];
+    for (let t = 1; t <= ticks; t += 1) {
+      const r = advanceDemographics({
+        snapshot: snapOf(live), worldState: ws, settlementUpdates: live,
+        rng: rngOf(`${seed}::${t}`), tick: t,
+      });
+      ws = r.worldState;
+      live = r.settlementUpdates;
+      const settlement = live.find((u) => u.saveId === 'Rosterhold').settlement;
+      const receipt = (r.receipts || []).find((x) => x.kind === 'demographic_step');
+      const row = (settlement.populationHistory || []).filter((x) => x.tick === t).pop() ?? null;
+      rows.push({
+        population: settlement.population, receipt, row,
+        departures: r.accounting.departures, arrivals: r.accounting.arrivals,
+      });
+    }
+    return rows;
+  }
+
+  test('THE TRAJECTORY: a roster larger than the head count grows by BIRTHS, and the ten-tick closure residual is ZERO', () => {
+    const rows = driveRoster({ population: 2000, named: 2600, ticks: 10 });
+    // The lane really ran: every tick wrote a step receipt, and nobody migrated (no roads),
+    // so births and deaths are the ONLY terms in the closure.
+    expect(rows.every((r) => r.receipt), 'every tick produced a demographic step').toBe(true);
+    expect(rows.every((r) => r.departures === 0 && r.arrivals === 0), 'no migration term').toBe(true);
+
+    // PER TICK: the head count moves by exactly births − deaths. Never more.
+    for (const [i, r] of rows.entries()) {
+      const previous = i === 0 ? 2000 : rows[i - 1].population;
+      expect(r.population - previous, `tick ${i + 1} moved by more than its own births/deaths`)
+        .toBe(r.receipt.births - r.receipt.deaths);
+      expect(r.receipt.after, 'the receipt agrees with what was written').toBe(r.population);
+    }
+
+    // THE ACCUMULATOR — the term a single-tick fixture cannot hold. At base this is 598.
+    const births = rows.reduce((s, r) => s + r.receipt.births, 0);
+    const deaths = rows.reduce((s, r) => s + r.receipt.deaths, 0);
+    const delta = rows[rows.length - 1].population - 2000;
+    expect(births, 'the fixture never gave birth, so nothing was tested').toBeGreaterThan(0);
+    expect(delta - (births - deaths), 'CLOSURE: no growth term that is not a birth').toBe(0);
+
+    // THE CAST IS STILL PROTECTED — and without inventing anyone. The anonymous pool is
+    // empty (the roster exceeds the head count), so the death draw can take nobody.
+    expect(rows.every((r) => r.receipt.deaths === 0), 'a death was drawn against the named cast').toBe(true);
+    expect(rows.every((r) => r.receipt.namedFloor === 2600), 'the roster is what the kernel read').toBe(true);
+  });
+
+  test('THE RECEIPT LINE IS TRUE: every populationHistory row\'s reason accounts for its own delta', () => {
+    const rows = driveRoster({ population: 2000, named: 2600, ticks: 10 });
+    const written = rows.filter((r) => r.row);
+    expect(written.length, 'no history row was written at all').toBeGreaterThan(0);
+    for (const r of written) {
+      const { births, deaths } = r.receipt;
+      // The row's own prose, re-derived from the same two integers the row records.
+      expect(r.row.reason, 'the reason string is the delta it claims to explain')
+        .toBe(`${births} born and ${deaths} buried.`);
+      expect(r.row.delta, 'the recorded delta IS births minus deaths').toBe(births - deaths);
+      // The herald line quotes the same head count the record holds — at base tick 1 this
+      // line read "counts 2,600 souls this week, 2 born and 0 buried".
+      expect(String(r.receipt.line)).toContain(`${r.population.toLocaleString('en-US')} souls this week`);
+      expect(String(r.receipt.line)).toContain(`${births} born and ${deaths} buried`);
+    }
+  });
+
+  test('NEGATIVE CONTROL: an ordinary town (roster far below the head count) is BYTE-IDENTICAL to the old expression', () => {
+    // Where `named <= before`, `Math.min(named, before) === named` and the cure is the
+    // base expression character for character. This run is the receipt for that claim:
+    // it is the exact ten-tick sequence the base engine produces, and it exercises the
+    // OTHER branch — deaths actually fire here, which they cannot in the run above.
+    const rows = driveRoster({ population: 2000, named: 40, ticks: 10 });
+    expect(rows.map((r) => r.population), 'an ordinary town\'s trajectory moved')
+      .toEqual([2001, 2002, 2003, 2004, 2005, 2005, 2006, 2006, 2006, 2006]);
+    expect(rows.map((r) => r.receipt.deaths), 'the death branch is live in this control')
+      .toEqual([1, 1, 1, 1, 1, 2, 1, 1, 2, 1]);
+    const births = rows.reduce((s, r) => s + r.receipt.births, 0);
+    const deaths = rows.reduce((s, r) => s + r.receipt.deaths, 0);
+    expect((rows[rows.length - 1].population - 2000) - (births - deaths), 'CLOSURE holds here too').toBe(0);
+    // And the floor still binds nothing: the cast is protected by the pool clamp, not the max.
+    expect(rows.every((r) => r.receipt.deaths <= r.receipt.before - r.receipt.namedFloor),
+      'a death was drawn from outside the anonymous pool').toBe(true);
+  });
+});

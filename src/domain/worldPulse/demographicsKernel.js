@@ -294,7 +294,15 @@ export function advanceDemographics({
     // pool, so the cast is never in the lottery.
     const pool = Math.max(0, before - named);
     const deaths = Math.min(pool, integerize(pool * rates.death01, draw()));
-    const after = Math.max(named, before + births - deaths);
+    // CS-B2 (cs-4): floor WITHOUT the mint. deaths <= pool = before - named, so the old
+    // Math.max(named, ...) could only bind when named > before — and then it MINTED people,
+    // breaking this module's own law 1 ('no growth term that is not a birth') and making the
+    // receipt line ('counts N souls this week, 1 born and 0 buried') arithmetically false.
+    // Clamping the floor to `before` keeps the named cast protected without inventing anyone:
+    // where named <= before this is byte-identical to the old expression, which is every
+    // ordinary settlement; where named > before (a DM population edit, or a terminal-decline
+    // town reduced toward its cast) population now moves by births - deaths alone.
+    const after = Math.max(Math.min(named, before), before + births - deaths);
 
     if (births === 0 && deaths === 0) continue;           // a still week writes nothing
 
