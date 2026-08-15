@@ -1,8 +1,8 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "5f7e7051ccec72d489ad562d60ab20a6832046b1",
-  "totalTests": 27956,
-  "totalFiles": 2359,
+  "measuredAtSha": "634ceaee0794d567f7dadd2a771efbf7665287ce",
+  "totalTests": 28155,
+  "totalFiles": 2380,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
@@ -116,14 +116,6 @@
       "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
       "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
       "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
-    },
-    "tests/security/mapSnapshotImport.contract.test.js :: cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally": {
-      "file": "tests/security/mapSnapshotImport.contract.test.js",
-      "test": "cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally",
-      "subsystem": "security / cross-user map import contract",
-      "cause": "The import no longer carries the safe `seed` field through, so geography cannot regenerate locally after a cross-user import — the F6 contract requires the raw snapshot be dropped but the seed retained.",
-      "introducedAt": "unbisectable: a field-projection change in the import path; the projection is assembled in more than one place. Burn-down lane must trace the seed through the import projection.",
       "class": "debt"
     },
     "tests/store/customContentSlice.race.test.js :: customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive": {
