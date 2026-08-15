@@ -189,7 +189,31 @@ likely find it moot; if it WRITES to the shared worktree it is an
 uncoordinated second writer — executors' foreign-dirt STOPs are the fence;
 the chair flags any collision at collection.
 
-**LIVE (~22:35): THE FINAL THREE SWEEPS DISPATCHED (lanes at cap with
+**✅ Lane INT-S COLLECTED (~23:55): 284 claims / 214 TRUE / 62 REFUTED (34
+address-rot, 28 substantive) / 8 UNVERIFIABLE.** Sharpest: the flag
+manifest at 20 (INT §2's five-count premise dead, its "vetoable judgment"
+now enforced machinery); ⭐ INT-3b UNBLOCKED with its host PRE-RESERVED by
+name in ERRAND_CONSUMERS (Q1's HOLD refuted); the `'contested'` band value
+DOES NOT EXIST in warSeatBooks (a vacuous-pin trap); SP-4's rename means
+INT-1's specced pin targets a nonexistent name; the coupling registry is
+schema v4 per-volume leaves — every INT wave lands couplingRegistryInterior
+NOT a head edit. ⚠⚠ NEW HIDDEN GATE: `reframeEnabled` is a REAL strict gate
+absent from manifest+exempt+backlog (the GAP-1 class — unclosable read-only
+beside a live executor; joins the next census act's docket). Annex:
+`laneINTS-INT-SUBSTRATE.md` (both §38.4 censuses pre-executed).
+⭐ ITS SWEEP TIP REVEALS: TE11 HAS AUTHORED T (`fc8451c4` "GR-5A T: flip
+LANDED") — the train is complete on its ref; awaiting TE11's gate report,
+then chair verify + CAS.
+
+**⭐ WINDOW-LOSS PREP RE-AFFIRMED (owner, ~23:50):** this note is CURRENT as
+of every boundary; a successor resumes via: (1) collect TE11's report or
+verify refs/trains/gr-5a's T directly (validator 45/0 + census walker at T,
+then CAS `6cd18ad3 → <T>`); (2) collect WY-S/TL-S/LG-S on report; (3) §51
+Phase-S continues on freed slots (FABLE lanes per the staffing law; Opus
+verifies); (4) the sittings: gr-6 re-charter · WC cures (§48 round 1) ·
+MEMORY.md fold (OWED) · WC-0 compile next after cures.
+
+**LIVE: THE FINAL SWEEP SET (lanes at cap with
 TE11):** Lane INT-S (interiors, 8 waves) → `laneINTS-*`; Lane WY-S
 (wayfaring engine, 7 waves; kmScale + supplyCargo verdicts ordered) →
 `laneWYS-*`; Lane TL-S (the TR/IN/CW/ES tails, ~16 waves, per-wave
