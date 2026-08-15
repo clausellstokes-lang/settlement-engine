@@ -2,8 +2,42 @@
 
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
-- **Measured branch/SHA:** `claude/composite-r4` at the `wc-0` train terminal.
-- **Measured:** 2026-08-15 — **THE `wc-0` TRAIN LANDED ALL FOUR MEMBERS: the WAR-CIRCULATION
+- **Measured branch/SHA:** `claude/composite-r4` at the `wc-0e` train terminal.
+- **Measured:** 2026-08-15 — **THE `wc-0e` TRAIN LANDED ITS SOLE MEMBER: both war-circulation
+  flags, with the by-name reads that make them honest.** Chain: base `00298c5f` → `00ceda98`
+  (D0) → `57e0b8f5` (P1) → `9602952b` (WC-0E) → the terminal. A flag wave is a train boundary,
+  so it rode alone. `validate:packets` 60/0 → 61/0.
+  ⭐⭐ **THE BIJECTION IS A TRIPLE AND ALL THREE MOVED TOGETHER**, 20 → 22 across the engine-gated
+  manifest, `VIRTUAL_RULES` and `VIRTUAL_SUBSYSTEM_ROWS`. §92.2's ordered pin couples the first
+  two and `engineGatedRuleKeys` direction 3 couples the first to the third, so a mint that moved
+  fewer than three reds two walkers. All three §49/§50 obligations were INCURRED and each proved.
+  ⛔⛔ **THE FRESH PREFLIGHT REFUTED PART OF ITS OWN CHARTER, WHICH IS WHY THE PACKET WAS COMPILED
+  RATHER THAN INHERITED.** The charter named both the `blocks[]` fail-closed arm and each flag's
+  by-name gate-read module; measured, those cannot be the same site — `normalizeDeployments` takes
+  no rules and has none in scope, and it must NOT acquire any, because persistence hygiene runs on
+  every load and an arm that cleaned malformed saves only while the flag was lit would leave a dark
+  world's saves un-normalized, the fail-OPEN direction on a persistence surface. The arm landed
+  UNGATED and both reads landed as one conjunction in the ledger's own gate — the
+  `warLayerEnabled`/`warTerminationEnabled` shape already live in `settlementStrategy.js`, borrowed
+  rather than invented. Lane TC17 predicted a compiler would miss exactly this half of F-1.
+  ⛔ **NO `spatialUsage` TRACKED ROW LANDED, AND THE VOLUME CONTRADICTS ITSELF ON IT IN ONE
+  SENTENCE**: it charters rows for all three keys at this wave while saying the wave makes no
+  writer calls. The coverage walker is exact-set in both directions over a live source scan, so a
+  row for a key nothing writes reds — §73.3's F-1 is the correction of that precise sentence, and
+  the mutant that plants the row reds the walker, which is F-1 demonstrated mechanically.
+  ⭐ **TWO INHERITED FIGURES WERE RE-DERIVED WITH THEIR MECHANISMS NAMED.** §50.1's "seven
+  edge-shared bundles" decomposes **2 + 5**: exactly two bundles reach `simulationRules.js`
+  transitively, and all five metafiles move on ANY invocation — measured by running the builder
+  against a clean tree with no input change at all, which dirtied five metafiles and zero bundles.
+  And the coupling verify-at-build fired at COMPILE rather than at build: `contributionLedger.js`
+  matched none of the 21 `LAYER_PATTERNS` regexes and took an exact-path WAR home in its own
+  commit, a family home rather than an argued admission, so both ceilings stood still.
+  ⚠ **ONE MUTANT NEEDED A CORRECTION AND IT IS ON THE RECORD.** The literal-drive mutant first
+  replaced ONE drive and convicted nothing, because five others remained and the credit survived —
+  redundancy rather than vacuity, but it proved nothing. The corrected plant removes EVERY literal
+  drive for one flag and the lit-coverage ratchet reds.
+
+- **Measured (previous):** 2026-08-15 — **THE `wc-0` TRAIN LANDED ALL FOUR MEMBERS: the WAR-CIRCULATION
   family's first code, and the estate's first train built on the landed §77/§2.7 machinery.**
   Chain: base `98c7872e` → `a393b109` (D0) → `79ffba74` (P1) → `511d2ceb` (WC-0A) → `e92e962c`
   (P2) → `4c87bae4` (WC-0B) → `3b660f91` (P3) → `cf7e6466` (WC-0C) → `9da1bec5` (P4) →
@@ -870,7 +904,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | WC-4 | [`WC-0D`](./packets/foreign-policy/WC-0D.md) | **LANDED** | Member 4 of 4 of the `wc-0` train and its TERMINAL member — it carries the lighting census row and re-derives the whole tuple, so the train's landing commit stays docs-only. Two producer-less term-catalog rows, `amnesty` and `jubilee`, each in its own family: the two exits the volume's own "Debt needs exits" section requires a settlement to be able to write into a peace. They land as seam rows with NO producer entry and no draft-lens membership — the `non_intervention` mechanism verbatim, so no producer means never drafted means byte-identical registration. ⭐ BUT THE NO-PRODUCER RECIPE DOES NOT REACH THE FAMILY LIST, which is DERIVED at module scope: registering two producer-less rows mutates an exported array with no producer involved, which is why this member is a 32-reference consumer census with a catalog edit attached rather than a catalog edit with a note. Two consumers red and both are cured here: the NAMED grown set, and a totality loop demanding a house-voice row for every family across three compliance states — which is what makes the six authored lines mandatory rather than decorative. ⛔ THE VOLUME'S OWN OBLIGATION TO WIDEN THE WR-10 LANDING RECORD IS STRUCK: that record is a LANDING RECORD rather than a policy, its own module says widening it would erase the fact the tripwire preserves, and a mutant proves the refusal is enforced. ⭐⭐ AND THE INERTNESS PIN IS RE-AIMED AT A REASON THAT IS TRUE: the volume's stated ground is refuted, because the market's search reads the AVAILABLE family set and stacks a family with no term on the table anyway. Inertness survives for a different reason — the gating flag is virtual and lit in no preset — so the pin asserts that structural darkness and DECLARES the capability delta rather than claiming inertness. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any producer, draft-lens membership or catalog-row property; widening the WR-10 landing record; touching `peaceTerms.js`, which sits at 797 of 800; a house WORD for either type, the default arm being proved total; any golden re-record, and any movement in the committed settlement hash or the persisted coherence receipt, either of which is a STOP |
 
-| WC-5 | [`WC-0E`](./packets/foreign-policy/WC-0E.md) | **READY** | The SOLE member of the `wc-0e` train — a flag wave is a train boundary, so it rides alone. It mints BOTH war-circulation flags and INCURS the §49/§50 three obligations rather than pricing them: the subsystemRowsVirtual ordered-equality pin, the edge-shared bundles, and the literal flag drive. It also lands contributionLedger.js as record shapes plus a fail-closed normalizer with NO writer, and the blocks[] persistence arm. ⛔⛔ THE FRESH PREFLIGHT REFUTED PART OF ITS OWN CHARTER, which is why this packet is compiled rather than inherited: the charter names both the blocks[] fail-closed arm and each flag's by-name gate-read module, and MEASURED those cannot be the same site — normalizeDeployments takes no rules parameter and has none in scope, and it must NOT acquire one, because persistence hygiene has to run on every load or a dark world's saves go un-normalized, which is the fail-OPEN direction. The arm therefore lands UNGATED and contributionLedger.js carries both reads as a two-flag conjunction, the war layer gating the lane and the feature flag gating the ledger — the settlementStrategy warLayer/warTermination shape already live in the tree. ⛔ AND IT CARRIES NO spatialUsage TRACKED ROW: the coverage walker is exact-set in both directions over a live source scan, and the volume charters those rows while saying in the same sentence that this wave makes no writer calls; F-1 is the correction of that sentence, and the three rows travel to WC-1, WC-11 and WC-13 with their writers. ⭐ The bundle count is re-derived rather than inherited: seven artefacts move, and they decompose two-with-real-content plus five metafiles that move on ANY invocation including one with no input change at all. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any setSpatialLedger call or TRACKED row; the credit, shortfall, arrival and close folds, which are WC-1's; threading rules into normalizeDeployments; lighting either flag in any preset; the close and call-in grade vocabularies; any curve, band or threshold |
+| WC-5 | [`WC-0E`](./packets/foreign-policy/WC-0E.md) | **LANDED** | The SOLE member of the `wc-0e` train — a flag wave is a train boundary, so it rides alone. It mints BOTH war-circulation flags and INCURS the §49/§50 three obligations rather than pricing them: the subsystemRowsVirtual ordered-equality pin, the edge-shared bundles, and the literal flag drive. It also lands contributionLedger.js as record shapes plus a fail-closed normalizer with NO writer, and the blocks[] persistence arm. ⛔⛔ THE FRESH PREFLIGHT REFUTED PART OF ITS OWN CHARTER, which is why this packet is compiled rather than inherited: the charter names both the blocks[] fail-closed arm and each flag's by-name gate-read module, and MEASURED those cannot be the same site — normalizeDeployments takes no rules parameter and has none in scope, and it must NOT acquire one, because persistence hygiene has to run on every load or a dark world's saves go un-normalized, which is the fail-OPEN direction. The arm therefore lands UNGATED and contributionLedger.js carries both reads as a two-flag conjunction, the war layer gating the lane and the feature flag gating the ledger — the settlementStrategy warLayer/warTermination shape already live in the tree. ⛔ AND IT CARRIES NO spatialUsage TRACKED ROW: the coverage walker is exact-set in both directions over a live source scan, and the volume charters those rows while saying in the same sentence that this wave makes no writer calls; F-1 is the correction of that sentence, and the three rows travel to WC-1, WC-11 and WC-13 with their writers. ⭐ The bundle count is re-derived rather than inherited: seven artefacts move, and they decompose two-with-real-content plus five metafiles that move on ANY invocation including one with no input change at all. ⚠ This cell is prose, and the packet validator reads the STATUS column literally: keep status words out of it | any setSpatialLedger call or TRACKED row; the credit, shortfall, arrival and close folds, which are WC-1's; threading rules into normalizeDeployments; lighting either flag in any preset; the close and call-in grade vocabularies; any curve, band or threshold |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.

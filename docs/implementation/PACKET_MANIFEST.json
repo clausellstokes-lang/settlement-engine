@@ -8642,7 +8642,7 @@
     },
     {
       "id": "WC-0E",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/WC-0E.md",
       "verifiedBase": "00298c5f82ad10e80d5584bf30d7c642e27fc382",
       "changeManifest": [

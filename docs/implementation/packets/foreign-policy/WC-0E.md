@@ -1,6 +1,6 @@
 # War Circulation / WC-0E — the two flags, the contribution ledger's shape, and the `blocks[]` arm
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/wc-0e`, **the sole member.** A flag wave is a train boundary (§59.1), so
   it rides alone.
 - **Chair authority:** `OWNER_DECISION_QUEUE.md` **§59.2** (WC-0E named as the flag-wave
