@@ -1889,3 +1889,12 @@ status covers) before chartering the outcome — flagged, not assumed. The
 refusal-continuation rule is pure graph continuation (the group's own
 itinerary is the spy's), which keeps the mission alive as world state, not
 a reroll.
+
+§46c fifth addendum (owner, ~12:25): THE INSPECTION SPLIT — a confiscating
+army INSPECTS the caravan, so its CARGO becomes OBSERVED GROUND TRUTH to
+that army at the check; but the caravan's DESTINATION/allegiance is NOT
+revealed by inspection — it stays BELIEF. The confiscation decision
+therefore reads: believed destination × observed cargo. (Chair: this is the
+information program's own observed-vs-believed taxonomy applied at the
+checkpoint — inspection converts one fact class and not the other; the
+volume charters the check as exactly that two-register read.)
