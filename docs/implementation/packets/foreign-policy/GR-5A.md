@@ -9,8 +9,14 @@
   …and **§49** (2026-08-15) — the first compile's I1 STOP RATIFIED and the **SEVENTH PATH SIGNED**
   (`{TEST, tests/domain/subsystemRowsVirtual.test.js}`, three module-scope literal edits, zero new
   titles, census-neutral). This packet is the re-authored **P1′**; the parked P1 stays as evidence
-  at `refs/trains/gr-5a-p1-parked`. ⭐ §49 ruling 3 makes the flag-mint seventh path STANDING LAW
-  for every volume. Every §47 tripwire is unchanged.
+  at `refs/trains/gr-5a-p1-parked`.
+  …and **§50** (2026-08-15) — the second STOP RATIFIED and **PATHS 8–14 SIGNED**: the seven
+  generated edge-shared bundle artefacts that `simulationRules.js` feeds (one
+  `npm run build:edge-shared`, zero handwritten files, census- and behaviour-neutral). The
+  in-scope literal-drive cure and the M6′ substitution are ratified; the parked I1 stays as
+  evidence at `refs/trains/gr-5a-i1-parked`. ⭐ **§49 ruling 3, as amended by §50 ruling 2, makes
+  the flag-mint law THREE OBLIGATIONS for every volume — §6.3.** Every §47 tripwire is unchanged:
+  `peaceTerms.js` 797→797 / 1264→1264 / numstat `3/3`, and this member authors ZERO numbers.
 - **Volume:** GR — Foreign Policy / the pact-grammar voice family.
 - **Family preamble, cited BY SHA-256** (the §P-header citation law):
   `docs/implementation/preambles/GR-PREAMBLE.md`
@@ -257,7 +263,7 @@ treaty.worstObservedEver : 'honored' | 'strained' | 'defaulted'
 
 ---
 
-## 6. Exact SEVEN-path implementation manifest
+## 6. Exact FOURTEEN-path implementation manifest — SEVEN handwritten, SEVEN generated
 
 | # | Action | Path | Symbol / region | Max Δ eff | Instruction |
 |---|---|---|---|---:|---|
@@ -269,9 +275,35 @@ treaty.worstObservedEver : 'honored' | 'strained' | 'defaulted'
 | 6 | TEST | `tests/lint/sovereigntyLightingContract.walker.test.js` | the recorded tuple | n/a | Re-derive the WHOLE tuple in this same commit to `2429/366/2063/20115/5654`. ⛔ Never patch one figure — the census is SEQUENCED and stops measuring at its first red |
 | 7 | TEST | `tests/domain/subsystemRowsVirtual.test.js` | `VIRTUAL_RULES`, `LANE_LEAVES` | n/a | ⭐ **THE FLAG-MINT SEVENTH PATH (§49 ruling 2, and ruling 3 makes it STANDING LAW for every volume).** THREE module-scope literal edits and **ZERO new test titles**: one `const TREATY_RENEWAL = 'treatyRenewalEnabled';` in the rule-const block with its dated joining comment; `TREATY_RENEWAL` appended to `VIRTUAL_RULES` (AUTHORING order — the row is appended last in `subsystemRowsVirtual.js`, so it appends last here); and `[TREATY_RENEWAL]: ['src/domain/worldPulse/pactAmendment.js']` in `LANE_LEAVES`. ⛔ Add no `it`, `test` or `describe` — this path is CENSUS-NEUTRAL and path 6's tuple depends on it staying so |
 
-⛔ **AN EIGHTH PATH IS A STOP.** ⛔ **A third registration-only production file is a STOP** (the
+| 8–14 | MODIFY | `supabase/functions/_shared/` — `aiCharterBundle.js`, `aiCharterBundle.meta.json`, `aiGroundingBundle.meta.json`, `aiOutputSchemaBundle.js`, `aiOutputSchemaBundle.meta.json`, `analyticsEventsBundle.meta.json`, `intentAtlasBundle.meta.json` | the recorded source hashes | n/a | ⭐ **THE EDGE-SHARED BUNDLES (§50 ruling 1).** GENERATED, never hand-edited: run `npm run build:edge-shared` and commit what it writes. `simulationRules.js` is an INPUT to these bundles and each carries a recorded source hash, so path 3 reds `aiCharterBundle.freshness` and `aiOutputSchemaBundle.freshness` until they are regenerated. ⛔ Never hand-edit a bundle, never re-record a hash by hand, and never widen the frozen test census to absorb the red |
+
+⛔ **A FIFTEENTH PATH IS A STOP.** ⛔ **A third registration-only production file is a STOP** (the
 default budget is 3 and this packet spends 2; **no override is recorded and none may be inherited —
 §P2: AN OVERRIDE NEVER TRANSFERS**).
+
+⭐ **THE BUDGET IS SPENT IN HANDWRITTEN FILES, AND IT IS 7 OF 12.** Paths 8–14 are machine output
+from one command over a source this wave already owns: they cost **zero** handwritten files, add
+**zero** test titles, and change **no** behaviour. PACKET_STANDARD's completion receipt carries a
+*"generated artifact delta"* line for exactly this class.
+
+### 6.3 ⭐⭐ THE FLAG-MINT LAW — THREE OBLIGATIONS, AND THIS PACKET PAYS ALL THREE
+
+§49 ruling 3 as AMENDED by §50 ruling 2, standing for every volume. Minting an engine-gated flag
+is never one edit; it carries three obligations, each discovered independently more than once, and
+a compiler preflights all three:
+
+| # | Obligation | Price here |
+|---|---|---|
+| **(a)** | `tests/domain/subsystemRowsVirtual.test.js` — the ordered-equality pin at `:384`. A certification row is mandatory and reds it by construction | path 7 — three module-scope edits, ZERO titles |
+| **(b)** | the seven edge-shared bundles, whenever `simulationRules.js` moves | paths 8–14 — one `npm run build:edge-shared`, ZERO handwritten |
+| **(c)** | ⭐ the flag drive spelled as a **LITERAL** `<flag>: true` in the acceptance file | ZERO paths — a spelling, §8 |
+
+⚠ **(c) IS THE CHEAPEST TO MISS AND THE HARDEST TO SEE.** `tests/property/mechanismLitCoverage.test.js`
+grants AUTO lit credit only on a literal `<flag>: true` (`flagTrueRe`); a drive spelled through a
+computed key — `const FLAG = '…'; { [FLAG]: true }` — **attributes to no key**, so the wave is
+genuinely proven lit and still reads as lit-UNPROVEN, whereupon the ratchet demands a shrink-only
+baseline raise that §P8.6 forbids. It is the same class `simulationRules.js`'s own CQ5 comment
+warns about, one layer out: **the gate is spelled by name in `src/`, the DRIVE by name in `tests/`.**
 
 ### 6.2 ⭐⭐ WHY PATH 7 EXISTS — MEASURED AT `6cd18ad3`, NOT ARGUED
 
@@ -479,10 +511,11 @@ judgment calls `NONE`.
    a §42/§43 chair act, never an implementer's.
 8. `kindPoolFloors`' `REGISTRIES` moves off **9**, or any numeral moves in a direction not predicted
    in §4.4.
-9. An EIGHTH path, a third registration-only production file, or a ninth acceptance title.
-   ⚠ The seventh — `tests/domain/subsystemRowsVirtual.test.js` — is SIGNED into §6 by §49 ruling
-   2 and is no longer a STOP; adding a TEST TITLE to it still is, because path 6's tuple is
-   derived on the premise that this path is census-neutral.
+9. A FIFTEENTH path, a third registration-only production file, or a ninth acceptance title.
+   ⚠ The seventh — `tests/domain/subsystemRowsVirtual.test.js` — is SIGNED by §49 ruling 2, and
+   paths 8–14, the generated edge-shared bundles, are SIGNED by §50 ruling 1. Adding a TEST TITLE
+   to path 7 is still a STOP, because path 6's tuple is derived on the premise that it is
+   census-neutral; hand-editing any of paths 8–14 is a STOP, because they are machine output.
 10. The census walker is dirty at dispatch, or a foreign lane holds uncommitted test titles at
     re-record time.
 11. Any soak, tuning, deploy, push, migration, marketplace, paid-policy or legal work would begin.
