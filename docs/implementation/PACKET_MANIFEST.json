@@ -9753,6 +9753,205 @@
           "tests/property/believedWorldAxesDormancyFence.test.js"
         ]
       ]
+    },
+    {
+      "id": "CS-B1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-B1.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/upswingKernel.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/upswingKernel.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/upswingKernel.js",
+          "symbol": "export function advanceUpswing"
+        },
+        {
+          "path": "src/domain/worldPulse/upswingKernel.js",
+          "symbol": "BOOM_MIN_DWELL"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "a settlement embattled from tick 0 accumulates boom dwell for six consecutive ticks and mints no boom_enter receipt and no bust"
+        },
+        {
+          "id": "A2",
+          "case": "no prosperity band and no legitimacy point moves across those six ticks — the punishment minted from nothing is gone"
+        },
+        {
+          "id": "A3",
+          "case": "the siege DELAYED the boom rather than killing it: lifting embattlement mints boom_enter on the lift tick itself, off banked dwell"
+        },
+        {
+          "id": "A4",
+          "case": "the identical fixture unembattled still mints at BOOM_MIN_DWELL — embattlement is the only thing the cure gates"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/upswingKernel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemRowsGrowth.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "CS-B2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-B2.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/demographicsKernel.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/demographicsMigration.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/demographicsKernel.js",
+          "symbol": "export function advanceDemographics"
+        },
+        {
+          "path": "src/domain/worldPulse/demographicsKernel.js",
+          "symbol": "const pool = Math.max(0, before - named);"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "a settlement whose named roster exceeds its head count grows by births alone — the head count never rises by more than births minus deaths in any tick"
+        },
+        {
+          "id": "A2",
+          "case": "the cumulative closure across a ten-tick run is exactly zero (at base it is 598)"
+        },
+        {
+          "id": "A3",
+          "case": "every populationHistory row's reason string and delta agree with the receipt's own births and deaths, and the herald line quotes the head count actually written"
+        },
+        {
+          "id": "A4",
+          "case": "an ordinary settlement (roster below head count) is byte-identical to the old expression, with the death branch live"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/demographicsMigration.test.js",
+          "tests/domain/demographicsKernel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/demographicsFloor.test.js",
+          "tests/domain/demographicsCure.test.js",
+          "tests/domain/demographicsWorldsHand.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "CS-B3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/correctness/CS-B3.md",
+      "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/convergence.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/vocabularyTotality.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/convergence.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/convergence.js",
+          "symbol": "export function advanceIntervention"
+        },
+        {
+          "path": "src/domain/worldPulse/convergence.js",
+          "symbol": "const FRIENDLY_REL = new Set("
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "an allied regional-graph edge reaches the motive scorer: allied patrons commit incumbent-side columns stamped invited, at every tick of a four-tick drive"
+        },
+        {
+          "id": "A2",
+          "case": "the interventions ledger accrues one column per contest per tick and then holds — 1, 2, 2, 2"
+        },
+        {
+          "id": "A3",
+          "case": "a neutral edge reads neither treaty nor invitation, and a raw `ally` edge is inert — the label the old set admitted can do nothing"
+        },
+        {
+          "id": "A4",
+          "case": "the habitat pin's declaration table moves in the SAME commit: the ally row deleted, an allied row added, and the EXPECTED-DEAD population still non-empty"
+        },
+        {
+          "id": "A5",
+          "case": "the lighting census is re-recorded WHOLE for the train from the walker's own failure output, with files/parked/credited unmoved"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/convergence.test.js",
+          "tests/lint/vocabularyTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/property/interventionDormancyGolden.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/realmVerbExecution.test.js",
+          "tests/lint/strategyMoveVocabulary.walker.test.js"
+        ]
+      ]
     }
   ]
 }
