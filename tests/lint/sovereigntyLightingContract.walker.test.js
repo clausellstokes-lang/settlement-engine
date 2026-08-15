@@ -4374,7 +4374,25 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   predicted: `files` passing untouched at 2438 is itself the evidence that the
     //   re-point held.
     // 2438/364/2074/20183/5667 → 2438/364/2074/20206/5672.
-    files: 2438, parked: 364, credited: 2074, titles: 20206, suiteTitles: 5672,
+    // ⏱ prf-1 (PRF-1, the sole member — the goods-matcher RESTORATION), 2026-08-15 —
+    //   RE-DERIVED WHOLE. ⭐ `files`, `parked` and `credited` DO NOT MOVE, for the same
+    //   reason rn-1's did not: the train creates ZERO new test files. Both new arms join
+    //   tests/domain/goodsCatalogMemo.test.js, which was already CREDITED — its five test
+    //   titles and one describe are all literal, so door 3's reader recognises them
+    //   statically. Only the evidence layer moves: +2 titles and NO suite title, because
+    //   both arms join the EXISTING `describe` and open none.
+    // ⚠ The two arms are the packet's real deliverable. The five titles that survived the
+    //   2026-07-15 master merge are equivalence pins and pass against an un-memoized
+    //   matcher (measured 5/5), so they could not report the cure's deletion; the added
+    //   alias-snapshot arm is executed-proven to red at the destroying blob and was the
+    //   ONLY arm of seven to do so when that blob was planted and restored via cp/cmp.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so the first run here
+    //   reached `titles` ONLY (20206 → 20208) and `suiteTitles` was never evaluated; it
+    //   was proved by re-running this arm with the WHOLE tuple re-recorded, never by
+    //   assuming an unreached assertion had held. The figures were read from the walker's
+    //   own failure output, never predicted.
+    // 2438/364/2074/20206/5672 → 2438/364/2074/20208/5672.
+    files: 2438, parked: 364, credited: 2074, titles: 20208, suiteTitles: 5672,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
