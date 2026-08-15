@@ -1,11 +1,13 @@
 # EFF-M5 — the build-efficiency volume, re-folded whole
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Verified base:** `claude/composite-r4` at `4f2d37d1a3954cdf226af9584b15f6663929e92b`
 - **Train:** `eff-1b`, member 2 of 2 — the train's terminal member
-- **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md`, cited at the SHA-256 it
-  carries AFTER member 1 lands (member 1 edits it, which is the citation mechanism working
-  rather than a defect; the sha is recorded at this member's promotion).
+- **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
+  `c691af9fe6ade05097857699829771062058b289e55e0445aba2eee9498e64fa` — the hash it carries AFTER member 1's
+  edit, measured at this member's promotion. ⚠ Member 1 edits that file, so a citation of
+  its BASE hash would be stale before this member dispatched; the re-stamp is the citation
+  mechanism working rather than a defect.
 - **Authorities:** the chair's dispatch of `eff-1b` (this member is finding #2 of the
   `laneTE16` receipt, acted on) · `OWNER_DECISION_QUEUE.md` §77/§83/§86 (the §2.4-R2 amendment
   the ledger carries), §74.2/§74.3 (§2.6 and §2.7) · the folded-volume convention this member

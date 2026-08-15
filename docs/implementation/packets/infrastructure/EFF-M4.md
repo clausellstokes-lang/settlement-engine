@@ -1,6 +1,6 @@
 # EFF-M4 — the docs-debt consolidation and the F9 strike-and-point
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `4f2d37d1a3954cdf226af9584b15f6663929e92b`
 - **Train:** `eff-1b`, member 1 of 2 — the staged successor to `eff-1a`, whose terminal is this
   member's base. The split is what keeps the shared preamble paths from ever being reserved by
@@ -205,3 +205,52 @@ claim identity, A7's exhaustive re-grep, and A8's unmoved census.
 Verified base and final tree state · the seven changed files · A1-A8 with exact argv and exits ·
 the claim count and naked-claim list quoted before and after · the census tuple unchanged ·
 deviations `NONE` or a STOP · judgment calls in the train receipt.
+
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1b` train's I1 commit `d840a3a6`.** Seven docs files, zero production
+lines, zero census motion. Every case executed in a TEMP WORKTREE at `d840a3a6` itself, against
+a control run at the base `4f2d37d1`.
+
+- **A1** — the claims pin's failure identity is **byte-identical to base**: `1 failed | 20
+  passed (21)` at both commits, the same single banked arm. The naked-claim list is the SAME
+  SIX entries; the only difference is three LINE NUMBERS in `FABLE_VALIDATION_QUEUE.md`
+  (3013/3882/5659 → 3017/3886/5663), the +4-line shift this member's own F9 edit causes. The
+  ratchet key is `<file> :: <matched vocabulary>` and carries no line number, so the key set is
+  byte-identical — proved by stripping line numbers and diffing: `3 × FVQ :: 0 problems`,
+  `1 × FVQ :: machine-enforced`, `1 × GOLDEN_SHIFT_LEDGER :: machine-enforced`,
+  `1 × IN-0C :: machine-enforced`, exactly `FROZEN_NAKED`'s four keys at their frozen counts.
+  The per-claim arm PASSES at both commits, which is what a grown key would have broken.
+- **A2** — all eleven anchored edits reported `OK` from a runner that refuses on absence
+  (`ANCHOR ABSENT`) and on ambiguity (`ANCHOR AMBIGUOUS (Nx)`); no edit was applied by fuzzy
+  match, and the INDEX restoration additionally asserted its three anchors present exactly once
+  before writing.
+- **A3** — the preamble now quotes `const ARGUED_ROSTER_CEILING = 19;`, the transition walk is
+  recorded in the section, and `UNLAYERED_BASELINE_CEILING` still reads `179` — both re-read
+  from the live walker at this base.
+- **A4** — INT's line now names `7699e367` (2026-08-10, discipline, ceiling 13) and `de214782`
+  (2026-08-14, figure 19) separately, and defers to the walker as the authority.
+- **A5** — GR and INFRA both read "the FOUR standing hot files" and both now name all four;
+  the list matches `PACKET_STANDARD.md`'s own table exactly.
+- **A6** — INDEX carries `eff-1a` (current), then est-1c, est-1, in-1c-a, **int-3b**, **gr-5a**,
+  hb-2b, hb-1p, hb-1, gap-1 — correct reverse-chronological order, verified against the
+  terminals' own commit dates — plus the convention block naming the eff-1a lapse.
+- **A7** — the exhaustive re-grep finds **zero** stale F9 assertions on the build branch
+  outside the two chair-reserved `DESIGN_FP_ARCHITECTURE.md` sites.
+- **A8** — the lighting census walker: **33 passed**, exit 0, at base and at this commit alike;
+  `validate:packets` 54 → 56 packets, exit 0 at both.
+
+⭐ **THE SWEEP FOUND A FIFTH SITE THE CENSUS DID NOT HAVE.** `SOL_QUEUE.md:477` — *"⛔ Slice 8a
+does not build until the owner signs the F9 `supplyCargo` row"* — carried no adjacent note at
+all. It is the same bare shape the round called the sharpest of its six, and it was absent from
+that six. Cured with the rest and named as an addition, because a strike-and-point act that
+leaves the worst build-branch instance standing is not a sweep.
+
+⛔ **ONE DISPATCHED ITEM WAS REFUSED AS NOT LANDABLE, AND ROUTED.** `docs/START_HERE.md` is a
+ledger file; its premise (the gate is 17 steps) is re-verified TRUE at this base and recorded in
+§1.1 for the chair's ledger sitting.
+
+**Deviations:** the fifth F9 site (added) and the START_HERE routing (refused here), both above.
+**Judgment calls:** in the train receipt.
