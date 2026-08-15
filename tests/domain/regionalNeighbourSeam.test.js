@@ -51,6 +51,10 @@ import {
   normalizeType,
 } from '../../src/domain/worldPulse/relationshipState.js';
 import { RELATIONSHIP_PLANE_ALIASES } from '../../src/domain/relationships/canonicalRelationship.js';
+// RN-B1's moved reads are pinned through their PUBLIC paths.
+import { QUALIFYING_KINDS, normalizeBondKind } from '../../src/domain/spatial/generosityGate.js';
+import { mutateSettlement } from '../../src/domain/events/mutate.js';
+import { discoverDependencyCandidates } from '../../src/domain/region/discoverDependencyCandidates.js';
 
 const NOW = '2026-06-11T00:00:00.000Z';
 const T1 = '2026-06-01T00:00:00.000Z';
@@ -524,15 +528,37 @@ describe('H16 — accepted subjugation orients channels and dossiers by the stam
  * the code now does, so it cannot mirror the cure: that is the whole point of building
  * it from the archive rather than from the working tree.
  *
+ * ⛔⛔ RN-B1 THEN MOVED SIX ROWS OF IT, AND THAT MOTION IS THE DELIVERABLE — DECLARED,
+ * NOT DISCOVERED. B1 is the SIGNED persisted-world read cure (ODQ §48.4, §64.2). Each
+ * moved row is marked `⬅ RN-B1 MOVED` and every one is a LEGACY-LIVE spelling that used
+ * to resolve to a label with no RELATIONSHIP_DEFAULTS row, and so silently received
+ * `neutral`'s numbers under its own contradicting label:
+ *
+ *     trade_partners     'trade_partners'  → 'trade_partner'
+ *     Trade_Partners     'trade_partners'  → 'trade_partner'
+ *     overlord           'overlord'        → 'vassal'
+ *     smuggling          'smuggling'       → 'criminal_network'
+ *     smuggling_partner  'smuggling_partner' → 'criminal_network'
+ *     Hostile rival      'hostile rival'   → 'hostile'
+ *
+ * ⭐ THE REGIONAL COLUMN DID NOT MOVE AT ALL — only the state plane's. And SAME-SEED
+ * GENERATION IS UNMOVED, proved rather than argued: the full golden suite (87 files /
+ * 623 tests) is byte-identical after this shift, because nothing in `src/` can PRODUCE
+ * any of these spellings; they arrive only from an already-saved world.
+ *
+ * ⚠ `smuggling_partner` newly DIVERGES where it used to agree. That is correct and
+ * deliberate: the REGIONAL plane keeps it as a first-class structural type, while the
+ * state plane collapses the smuggling family onto the defaults row it has always meant.
+ *
  * Columns: [input, canonicalRelationshipLabel(input), normalizeRelationshipType(input)]
  */
 const RN_A1_RESOLUTION_GOLDEN = Object.freeze([
-  ['trade_partners', 'trade_partner', 'trade_partners'],
+  ['trade_partners', 'trade_partner', 'trade_partner'],   // ⬅ RN-B1 MOVED
   ['allies', 'allied', 'allies'],
-  ['overlord', 'vassal', 'overlord'],
+  ['overlord', 'vassal', 'vassal'],                       // ⬅ RN-B1 MOVED
   ['suzerain', 'vassal', 'suzerain'],
   ['liege', 'vassal', 'liege'],
-  ['smuggling', 'smuggling_partner', 'smuggling'],
+  ['smuggling', 'smuggling_partner', 'criminal_network'], // ⬅ RN-B1 MOVED
   ['coldwar', 'cold_war', 'coldwar'],
   ['cold-war', 'cold_war', 'cold-war'],
   ['war', 'war', 'hostile'],
@@ -553,7 +579,7 @@ const RN_A1_RESOLUTION_GOLDEN = Object.freeze([
   ['patron', 'patron', 'patron'],
   ['client', 'client', 'client'],
   ['vassal', 'vassal', 'vassal'],
-  ['smuggling_partner', 'smuggling_partner', 'smuggling_partner'],
+  ['smuggling_partner', 'smuggling_partner', 'criminal_network'], // ⬅ RN-B1 MOVED
   ['other', 'other', 'other'],
   ['channel_inferred', 'channel_inferred', 'channel_inferred'],
   ['friendly', 'friendly', 'friendly'],
@@ -563,9 +589,9 @@ const RN_A1_RESOLUTION_GOLDEN = Object.freeze([
   ['protectorate', 'protectorate', 'protectorate'],
   ['', '', 'neutral'],
   ['  ', '', ''],
-  ['Trade_Partners', 'trade_partner', 'trade_partners'],
+  ['Trade_Partners', 'trade_partner', 'trade_partner'],   // ⬅ RN-B1 MOVED
   ['HOSTILE', 'HOSTILE', 'hostile'],
-  ['Hostile rival', 'Hostile rival', 'hostile rival'],
+  ['Hostile rival', 'Hostile rival', 'hostile'],          // ⬅ RN-B1 MOVED
   ['tense', 'tense', 'tense'],
 ]);
 
@@ -576,18 +602,19 @@ const RN_A1_NULLISH_GOLDEN = Object.freeze([
 ]);
 
 /** The divergence count the two planes are REQUIRED to keep. */
-const RN_A1_EXPECTED_DIVERGENCE = 17;
+const RN_A1_EXPECTED_DIVERGENCE = 15;
 
 describe('RN-A1 — one home, one writer: the resolvers did not move', () => {
-  it('every one of the 40 corpus inputs resolves byte-identically to the pre-feature base', () => {
+  it('the 40-corpus resolutions match the pre-feature base except B1\'s six declared rows', () => {
     const actual = RN_A1_RESOLUTION_GOLDEN.map(([input]) => [
       input, canonicalRelationshipLabel(input), normalizeRelationshipType(input),
     ]);
     expect(
       actual,
-      'a relationship spelling resolves differently than it did before RN-A1 moved the'
-      + ' table. RN-A1 is a RELOCATION, not a content cure: any movement here means the'
-      + ' two plane tables were merged, which is arm B1 and owner-gated.',
+      'a relationship spelling resolves differently than this table records. The six rows'
+      + ' marked `⬅ RN-B1 MOVED` are the SIGNED persisted-read cure and are expected; any'
+      + ' OTHER movement means a table was merged or a per-plane policy was unified, both'
+      + ' of which are owner-gated and both of which move generated output.',
     ).toEqual(RN_A1_RESOLUTION_GOLDEN.map((row) => [...row]));
   });
 
@@ -598,7 +625,7 @@ describe('RN-A1 — one home, one writer: the resolvers did not move', () => {
     expect(actual).toEqual(RN_A1_NULLISH_GOLDEN.map((row) => [...row]));
   });
 
-  it('⛔ the two planes still DIVERGE on exactly 17 of 40 — the pin\'s negative control', () => {
+  it('⛔ the two planes still DIVERGE on exactly 15 of 40 — the pin\'s negative control', () => {
     // Without this arm the golden above would still pass if a cure converged the two
     // resolvers onto ONE table and the golden had been re-recorded from the cured tree.
     // The count is the property that makes accidental convergence loud.
@@ -626,6 +653,113 @@ describe('RN-A1 — one home, one writer: the resolvers did not move', () => {
     // is what makes the fork in RN-A1 §3 detectable if it were ever taken silently.
     expect(RELATIONSHIP_TYPE_ALIASES).toBe(RELATIONSHIP_PLANE_ALIASES);
     expect(Object.isFrozen(RELATIONSHIP_PLANE_ALIASES)).toBe(true);
-    expect(Object.keys(RELATIONSHIP_PLANE_ALIASES)).toHaveLength(8);
+    expect(Object.keys(RELATIONSHIP_PLANE_ALIASES)).toHaveLength(13);
+  });
+});
+
+// ── RN-B1: THE MOVED READS (ODQ §48.4 / §64.2 / §66.2, SIGNED) ────────────
+
+/**
+ * The three routings B1 lands, each pinned through its PUBLIC path rather than at a
+ * module-private helper, so the pin fails if the repair stops reaching real callers.
+ *
+ * ⛔ EVERY ONE IS A PERSISTED-WORLD READ REPAIR AND THE SHIFT IS DECLARED: a saved
+ * campaign carrying one of these legacy spellings reads differently after this commit.
+ * That is the deliverable — the label always claimed the reading it now gets, and
+ * leaving it preserved a misreading rather than lived history. No same-seed generation
+ * cell moves, because nothing in src/ can produce these spellings.
+ *
+ * The before-states below were MEASURED against a `git archive` of the arm-C terminal
+ * `196b256a`, not remembered.
+ */
+describe('RN-B1 — the moved reads', () => {
+  const infiltrationBase = (rel) => ({
+    name: 'Home',
+    neighbourNetwork: [
+      { id: 'n1', name: 'Stonehaven', relationshipType: rel },
+      { id: 'n2', name: 'Irontown', relationshipType: 'trade_partner' },
+    ],
+  });
+  const infiltrated = (instigatorRelationship) => ({
+    id: 'ev-rn-b1', type: 'APPLY_STRESSOR', targetId: 'infiltrated',
+    payload: {
+      stressorType: 'infiltrated', label: 'infiltrated', severity: 0.5,
+      instigatorNeighbour: 'Stonehaven', instigatorRelationship,
+    },
+  });
+  const relAfterInfiltration = (persisted, target) =>
+    mutateSettlement({ settlement: infiltrationBase(persisted), event: infiltrated(target) })
+      .neighbourNetwork.find((n) => n.name === 'Stonehaven')?.relationshipType;
+
+  it('G2 — the five legacy bond spellings now QUALIFY for the generosity gate', () => {
+    // §66.2 named three; the measured population is FIVE. Each used to normalize to
+    // itself, miss QUALIFYING_KINDS, and so never even be ASKED the generosity question.
+    const cured = { ally: 'allied', allies: 'allied', trade: 'trade_partner', liege: 'vassal', overlord: 'vassal' };
+    for (const [persisted, canonical] of Object.entries(cured)) {
+      expect(normalizeBondKind(persisted), `${persisted} should read as ${canonical}`).toBe(canonical);
+      expect(QUALIFYING_KINDS.has(normalizeBondKind(persisted)), `${persisted} must now qualify`).toBe(true);
+    }
+  });
+
+  it('G2 — the pre-existing fold survives and the KINDS are not widened', () => {
+    // The hand-rolled `trade_partners` fold was REPLACED by the router, not dropped.
+    expect(normalizeBondKind('trade_partners')).toBe('trade_partner');
+    expect(normalizeBondKind('allied')).toBe('allied');
+    expect(normalizeBondKind('ALLIED')).toBe('allied');
+    expect(normalizeBondKind('')).toBe('');
+    // The cure widens which SPELLINGS are recognised, never which KINDS qualify.
+    expect(QUALIFYING_KINDS.has(normalizeBondKind('hostile'))).toBe(false);
+    expect(QUALIFYING_KINDS.has(normalizeBondKind('rival'))).toBe(false);
+  });
+
+  it('G3 — a persisted coldwar edge is no longer DOWNGRADED by a rival infiltration', () => {
+    // MEASURED at 196b256a: 'coldwar' + a rival infiltration returned 'rival' — the rank
+    // read took the label raw, ranked it 0, and the no-downgrade guard "escalated" a cold
+    // war into a rivalry, the exact motion the guard exists to forbid.
+    expect(relAfterInfiltration('coldwar', 'rival')).toBe('coldwar');
+    expect(relAfterInfiltration('cold-war', 'rival')).toBe('cold-war');
+    // The canonical spelling was always correct — it is the control that proves the pin
+    // is reading the guard and not merely asserting that nothing ever changes.
+    expect(relAfterInfiltration('cold_war', 'rival')).toBe('cold_war');
+    // ...and a genuinely milder edge still ESCALATES, so the guard was repaired, not disabled.
+    expect(relAfterInfiltration('neutral', 'rival')).toBe('rival');
+  });
+
+  it('⚠ G3 — `enemy` is EXPECTED-DEAD, not cured, and that is the ruling', () => {
+    // Curing `enemy` needs a SPECULATIVE spelling merged into the canonical table, which
+    // §64.3 refuses. It was downgradeable before and still is, DELIBERATELY (§101.3).
+    // Pinned so the gap stays a recorded decision rather than an unnoticed hole.
+    expect(canonicalRelationshipLabel('enemy')).toBe('enemy');
+    expect(relAfterInfiltration('enemy', 'rival')).toBe('rival');
+  });
+
+  it('relationBetween — a legacy plural link is finally VISIBLE to dependency discovery', () => {
+    // MEASURED at 196b256a: 'trade_partners' produced ZERO candidates because the reader
+    // returned the label RAW and every downstream comparison used canonical spellings.
+    const save = (id, links) => ({
+      id, name: id,
+      settlement: {
+        id, name: id, neighbourNetwork: links, institutions: [], activeConditions: [],
+        config: {}, economicState: { primaryExports: [], primaryImports: [], activeChains: [] },
+      },
+    });
+    const withRel = (t) => save('a', [{ id: 'b', name: 'b', neighbourName: 'b', relationshipType: t }]);
+    const target = save('b', []);
+    const plural = discoverDependencyCandidates(withRel('trade_partners'), target);
+    const singular = discoverDependencyCandidates(withRel('trade_partner'), target);
+    expect(plural.length).toBeGreaterThan(0);
+    expect(plural.map((c) => c.type).sort()).toEqual(singular.map((c) => c.type).sort());
+    // An unknown label still passes through verbatim — the resolver widens nothing.
+    expect(discoverDependencyCandidates(withRel('protector'), target)).toEqual([]);
+  });
+
+  it('⚠ `tense` is NOT merged — the one target no ruling determined', () => {
+    // The fifth LEGACY-LIVE spelling the cure names. `rival`, `cold_war` and `hostile` are
+    // all defensible targets carrying materially different trust/resentment/fear numbers,
+    // so choosing one here would INVENT owner-gated content rather than execute it. It
+    // stays unmapped — the same neutral numbers it reads today — and is an open chair
+    // question. Adding it later is a one-row diff with a signed target.
+    expect(normalizeRelationshipType('tense')).toBe('tense');
+    expect(canonicalRelationshipLabel('tense')).toBe('tense');
   });
 });

@@ -16,7 +16,7 @@ import { crisisOnset, crisisResolve, withStressorResolved } from '../crisisLifec
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
-import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
+import { canonicalRelationshipLabel, relationshipDefinition } from '../relationships/canonicalRelationship.js';
 import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';
 import {
   nativeSemanticDepletedResourceKeys,
@@ -644,7 +644,17 @@ function raidOrMonsterAttack(/** @type {MutEntity} */ s, /** @type {MutEntity} *
 // trade_partner, neutral, ...) rank at 0 and are always escalatable.
 /** @type {Readonly<Record<string, number>>} */
 const ADVERSARIAL_RANK = Object.freeze({ rival: 1, cold_war: 2, war: 3, hostile: 3 });
-const adversarialRank = (/** @type {string} */ rel) => ADVERSARIAL_RANK[String(rel || '').toLowerCase()] || 0;
+// ⛔ RN-B1 / G3 (ODQ §66.2, SIGNED). The rank read used to take the persisted label RAW, so
+// a legacy `coldwar` / `cold-war` edge ranked 0 and the no-downgrade guard above DOWNGRADED
+// it: an infiltration stressor targeting `rival` (rank 1) "escalated" a cold war to a
+// rivalry, the exact motion the guard exists to forbid. Routing through the canonical
+// resolver cures it with ZERO content widening — that table already maps both spellings to
+// `cold_war` — and it completes the intent the comment above already states.
+// ⚠ `enemy` is NOT cured and is expected-dead by ruling: the canonical table leaves it
+// unmapped, and mapping it would require merging a SPECULATIVE spelling, which §64.3
+// refuses. It ranks 0 today and still ranks 0, deliberately (§101.3).
+const adversarialRank = (/** @type {string} */ rel) =>
+  ADVERSARIAL_RANK[canonicalRelationshipLabel(String(rel || '')).toLowerCase()] || 0;
 
 /**
  * Resolve the target relationship an instigator flip should set. War stressors

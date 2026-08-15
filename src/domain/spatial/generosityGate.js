@@ -10,9 +10,16 @@
  * without dragging the whole lazy generosityEV kernel into the first-paint static closure
  * (the constitutional "lazy kernels" posture, design §6 — the registryProse idiom).
  *
- * FIRST-PAINT LAW: keep this leaf import-free. Never add a dependency here.
+ * FIRST-PAINT LAW: this leaf is EAGER — it is in the first-paint static closure — so it
+ * may never pull anything NEW into that closure. RN-B1 gives it its one dependency, and
+ * the rule is honoured rather than waived: `canonicalRelationship.js` is ALREADY in the
+ * entry chunk (measured in the built dist — both modules' literals live in the same
+ * `assets/index-*.js`), so the edge costs ZERO first-paint bytes. The budget guard below
+ * is the enforcer and it was re-run against a real build for this change. Never add a
+ * dependency that is not already eager; never raise the budget to fit one.
  * @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
  */
+import { canonicalRelationshipLabel } from '../relationships/canonicalRelationship.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function finiteNumber(v, fallback) {
@@ -30,16 +37,25 @@ function finiteNumber(v, fallback) {
 export const QUALIFYING_KINDS = new Set(['allied', 'trade_partner', 'vassal', 'patron', 'client']);
 
 /**
- * Normalize a raw relationship label to the gate's bond-kind vocabulary: lowercased,
- * with the legacy plural 'trade_partners' folded to the canonical singular (the same
- * alias the relationship events' write chokepoint folds — mutateWorld LEGACY_REL_ALIASES;
- * the regional read side is canonicalRelationshipLabel). Kept HERE so the eager handler
- * and the lazy affordance predicate normalize identically (the same-function law).
+ * Normalize a raw relationship label to the gate's bond-kind vocabulary: lowercased, and
+ * routed through the CANONICAL resolver. Kept HERE so the eager handler and the lazy
+ * affordance predicate normalize identically (the same-function law).
+ *
+ * ⛔ RN-B1 / G2 (ODQ §66.2, SIGNED). This used to fold exactly ONE spelling by hand
+ * (`trade_partners`), so a persisted edge carrying any other legacy spelling of a
+ * QUALIFYING kind was read as NON-qualifying and the generosity question was never even
+ * asked of it. §66.2 named three such spellings; measured at the base, the population is
+ * FIVE — `ally`, `allies`, `trade`, `liege`, `overlord` — every one of which the canonical
+ * table already resolves to a qualifying label. Routing cures all five with ZERO content
+ * widening; the mechanism is the ruling's, the wider population is this train's measurement.
+ *
+ * The hand-rolled fold is REPLACED rather than kept beside the router, because two
+ * normalizers on one plane is the exact drift rn-1 exists to end. `trade_partners` still
+ * folds — the canonical table carries it — so no behaviour it used to have is lost.
  * @param {unknown} raw @returns {string}
  */
 export function normalizeBondKind(raw) {
-  const k = String(raw || '').toLowerCase();
-  return k === 'trade_partners' ? 'trade_partner' : k;
+  return canonicalRelationshipLabel(String(raw || '')).toLowerCase();
 }
 
 /**

@@ -10,7 +10,7 @@ import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.j
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
-import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { canonicalEdgeForLink, canonicalRelationshipLabel } from '../relationships/canonicalRelationship.js';
 import { NO_TRADE_RELATIONSHIPS } from './tradeLinks.js';
 import { healingLedger } from '../healingLedger.js';
 import { wallClockNow } from '../clock.js';
@@ -46,7 +46,16 @@ function relationBetween(sourceSave, targetSave) {
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
-  return link?.relationshipType || link?.type || null;
+  // ⛔ RN-B1 / J-RNC-8 (SIGNED). This returned the persisted label RAW — the EIGHTH read
+  // policy on this plane, and the lane's own re-sweep caught it refuting an earlier claim
+  // that the read side was covered. A legacy `ally` or `trade_partners` edge therefore
+  // reached NO_TRADE_RELATIONSHIPS and every downstream comparison under a spelling none
+  // of them recognise. Routing the return through the canonical resolver gives this reader
+  // the same vocabulary every other regional reader already has.
+  // The `|| null` is preserved EXACTLY: canonicalRelationshipLabel('') is '', which is
+  // falsy, so a link with neither field still yields null rather than an empty string.
+  const raw = link?.relationshipType || link?.type || null;
+  return raw === null ? null : (canonicalRelationshipLabel(raw) || null);
 }
 
 /** @param {SaveLike | null | undefined} sourceSave @param {SaveLike | null | undefined} targetSave @returns {LinkLike | null} */

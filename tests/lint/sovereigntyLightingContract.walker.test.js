@@ -4357,7 +4357,24 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   train's ONLY tests-moving commit, so unlike its predecessor there is no interior
     //   red anywhere in it — the tuple is green the first and only time the arms run.
     // 2437/364/2073/20175/5666 → 2438/364/2074/20183/5667.
-    files: 2438, parked: 364, credited: 2074, titles: 20183, suiteTitles: 5667,
+    // ⏱ rn-1 (RN-A0, RN-A1, RN-C, RN-B1 — the relationship-normalizer train), 2026-08-15 —
+    //   RE-DERIVED WHOLE. ⭐ `files`, `parked` and `credited` DO NOT MOVE AT ALL, and that is
+    //   the deliberate purchase of ODQ §64.4's ruled RE-POINT: all four members add arms to
+    //   test files that already exist, so the train creates ZERO new test files. Only the
+    //   evidence figures move — +23 titles and +5 suite titles across four already-credited
+    //   files: postureNameCollision.walker (A0's three renamed collision names, +1 describe),
+    //   implicitNeutralSingleSource (A1's spelling-table single-writer law, +1 describe),
+    //   regionalNeighbourSeam (A1's 40-input identity pin and B1's moved reads, +2 describes),
+    //   and vocabularyTotality.walker (C's reachability habitat pin, +1 describe).
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so this census was RED at
+    //   the train's three interior commits by construction — every member here moves tests,
+    //   unlike wc-0e — and only `titles` was ever reached. The whole tuple is re-recorded
+    //   together here, at the train's last tests-moving member, which is what keeps its
+    //   landing docs-only. The figures were read from the walker's own failure output, never
+    //   predicted: `files` passing untouched at 2438 is itself the evidence that the
+    //   re-point held.
+    // 2438/364/2074/20183/5667 → 2438/364/2074/20206/5672.
+    files: 2438, parked: 364, credited: 2074, titles: 20206, suiteTitles: 5672,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

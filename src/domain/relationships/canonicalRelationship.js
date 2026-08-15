@@ -104,6 +104,46 @@ export const RELATIONSHIP_PLANE_ALIASES = Object.freeze({
   subject: 'vassal',
   tributary: 'vassal',
   criminal_corridor: 'criminal_network',
+
+  // ⛔ RN-B1 — THE LEGACY-LIVE MERGE. OWNER-GATED AND SIGNED (ODQ §48.4, §64.2).
+  //
+  // Each row below is a spelling this tree DOCUMENTS as real save content. Before this
+  // merge a persisted edge carrying one of them resolved to a label with NO
+  // RELATIONSHIP_DEFAULTS row, so it silently received `neutral`'s numbers under its own
+  // contradicting label. That preserved a MISREADING, not lived history; these rows
+  // restore the reading the persisted label always claimed. THE PROMISE is not touched:
+  // no same-seed generation cell moves, because nothing in src/ can PRODUCE any of these
+  // spellings — they can only arrive from an already-saved world.
+  //
+  //   trade_partners     RELATIONSHIP_OPTIONS.OPENED_TRADE_ROUTE still offers it and the
+  //                      write chokepoint folds it; named a legacy-save spelling at
+  //                      populationDynamics.js:182 and stressorDynamics.js:74.
+  //   overlord           canonicalEdgeForLink handles it as a legacy-save direction hint.
+  //   smuggling          the smuggling family collapses onto the defaults row it has
+  //   smuggling_partner  always meant on THIS plane — `criminal_network`, exactly as
+  //                      `criminal_corridor` above and as canonicalPropagationLabel does.
+  //                      (The REGIONAL table deliberately keeps `smuggling_partner` as a
+  //                      first-class structural type; that asymmetry is the point.)
+  //   hostile rival      the Axis-2 carrier. The key is the LOWERCASED form because this
+  //                      plane lowercases before lookup; the file's own comment above
+  //                      records that 'Hostile rival' reads at the hostile tier.
+  //
+  // ⚠ `tense` IS DELIBERATELY NOT MERGED, AND ITS ABSENCE IS A DECISION, NOT AN OVERSIGHT.
+  // It is the fifth LEGACY-LIVE spelling the cure names, but no ruling determines WHICH
+  // defaults row it should claim: `rival`, `cold_war` and `hostile` are all defensible and
+  // they carry materially different trust/resentment/fear numbers, so choosing one here
+  // would be inventing owner-gated content rather than executing it. It stays unmapped
+  // (neutral numbers, as today) and is raised as an open chair question. Adding it later
+  // is a one-row diff with a signed target.
+  //
+  // ⛔ ARM B2 STAYS REFUSED (§64.3): allies, suzerain, liege, coldwar, cold-war, war,
+  // enemy, subject, tributary are SPECULATIVE — zero producers and zero evidence any world
+  // carried them. The four already present above predate this merge and are not widened.
+  trade_partners: 'trade_partner',
+  overlord: 'vassal',
+  smuggling: 'criminal_network',
+  smuggling_partner: 'criminal_network',
+  'hostile rival': 'hostile',
 });
 
 // Matrix/channel-bundle vocabulary: canonical labels that have NO row in the
