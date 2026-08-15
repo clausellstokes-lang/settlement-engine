@@ -3109,3 +3109,26 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
    supplementary environment signal — supplementary only; the local
    gate-tail receipt remains the receipt of record.
 
+
+## §82 · PR #49 CI REDS — CLEAN-ROOM REPRO GREEN, DIVERGENCE HUNT LIVE
+## (2026-08-15, chair; evidence laneCI-repro.log, five exits captured)
+
+1. **The three failing required checks do NOT reproduce at the tip**: a
+   from-scratch archive install ran the failing jobs' own commands —
+   `npm ci` 0 · `npm run build` 0 · `npm run verify:dist` 0 ·
+   `deno task check:edge` 0 · the e2e static guard 0. The tip's code
+   passes its own CI commands on this machine; the reds are the
+   ENVIRONMENT-DIVERGENCE class (ubuntu/case-sensitive/CI-runner vs
+   this Mac). These are also the THREE CI-ONLY checks nothing local
+   has run for three weeks — the §81.4 supplementary-signal gap made
+   real.
+2. **Lane CIX dispatched (Fable)**: five ranked hypotheses — H1
+   case-sensitive import resolution (statically provable without CI
+   logs), H2 the .nvmrc/local node split, H3 the Deno job's 42s
+   failure point (lock/version pin), H4 Playwright's CI-conditional
+   config and environment-sensitive spec families, H5 secrets/locale.
+   Cure = the ci-1 micro-act, architected at collection.
+3. The PR stands as CUSTODY regardless (merge was never the intent);
+   CI green remains owed before the deploy phase per §62's runtime
+   half. The owner can accelerate the hunt by pasting the first error
+   lines from any one failing job's log — requested in-chat.
