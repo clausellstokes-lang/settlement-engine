@@ -10,6 +10,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { advanceUpswing, upswingArcsActive, UPSWING_TUNING } from '../../src/domain/worldPulse/upswingKernel.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { prosperityRank } from '../../src/data/constants.js';
 
@@ -327,6 +328,100 @@ describe('upswing — B2 bust: severance names the artery (constitution)', () =>
     // Prosperity retreated (a bust condition minted).
     const s = r.settlementUpdates.find((u) => u.saveId === 'p').settlement;
     expect((s.activeConditions || []).some((c) => c.archetype === 'custom_crisis' && c.id?.startsWith('condition.bust'))).toBe(true);
+  });
+});
+
+// ── CS-B1 (`cs-3`) — THE BOOM MINT'S MISSING `severed` PREDICATE ───────────────
+// §72.1 ruled it: `severed` (:617) was computed for every settlement but consulted ONLY
+// inside the `prior?.phase === 'boom'` bust branch, so the MINT gate saw throughput +
+// centrality + dwell alone. A town embattled from tick 0 therefore accumulated dwell,
+// MINTED a boom under live siege, and busted the very next tick — −1 prosperity band,
+// −3 legitimacy and a `Trade Bust` condition, a punishment minted from nothing.
+//
+// ⛔ THIS IS A TRAJECTORY PIN BY CONSTRUCTION (§72.3), and the shape is the point: the
+// defect is INVISIBLE to any single-tick fixture. At tick 0, 1 and 2 base and cure agree
+// exactly (both accumulate, both mint nothing); the divergence is a MULTI-TICK story that
+// only a driven run with the accumulator on show can tell. Measured at this base, over
+// six embattled ticks with boom-qualifying throughput and centrality:
+//
+//   tick   BASE (defective)                        CURED
+//   0-1    building, dwell 1 → 2                   building, dwell 1 → 2
+//   2      boom_enter MINTS under live siege       building, dwell 3
+//   3      bust — Comfortable → Moderate, 55 → 52  building, dwell 4
+//   4-5    bust holds                              building, dwell 5 → 6
+//
+// ⚠ §107.3 signed J-TC20-4 — the MINT gate, NOT the dwell accumulation. So the siege
+// DELAYS the boom rather than KILLING it, and the third arm below is what pins that
+// reading: gating the accumulator too would leave dwell at 0 when the siege lifts and the
+// boom would arrive three ticks LATER, not on the lift tick itself.
+function driveEmbattledBoom(ticks, lift) {
+  const f = boomFixture({ throughput: 4, centrality: 0.5, embattled: true });
+  let worldState = f.worldState;
+  let settlementUpdates = f.settlementUpdates;
+  const rows = [];
+  for (let t = 0; t < ticks; t++) {
+    if (lift !== null && t === lift) {
+      const ledgers = { ...worldState.spatialLedgers };
+      delete ledgers.embattlement;            // the siege is raised
+      worldState = { ...worldState, spatialLedgers: ledgers };
+    }
+    const snapshot = { settlements: settlementUpdates.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+    const r = advanceUpswing({ snapshot, worldState, settlementUpdates, graph: f.graph, rng: null, tick: 100 + t, now: NOW });
+    worldState = r.worldState; settlementUpdates = r.settlementUpdates;
+    const rec = worldState.spatialLedgers?.upswing?.boom?.p ?? null;
+    const s = settlementUpdates.find((u) => u.saveId === 'p').settlement;
+    rows.push({
+      phase: rec?.phase ?? '(none)', dwell: rec?.dwell ?? null,
+      kinds: r.receipts.map((x) => x.kind),
+      archetypes: (s.activeConditions || []).map((c) => c.archetype),
+      prosperity: s.economicState.prosperity,
+      legitimacy: Number(s.powerStructure.publicLegitimacy.score),
+    });
+  }
+  return rows;
+}
+
+describe('upswing — CS-B1 (cs-3): a boom cannot MINT under embattlement', () => {
+  it('THE TRAJECTORY: six embattled ticks accumulate dwell 1→6 and mint NOTHING — no boom, no bust, no punishment', () => {
+    const rows = driveEmbattledBoom(6, null);
+    // THE ACCUMULATOR, visible per tick — this is what a pure-function pin cannot see.
+    expect(rows.map((r) => r.dwell), 'dwell accumulates every embattled tick').toEqual([1, 2, 3, 4, 5, 6]);
+    expect(rows.map((r) => r.phase), 'the arc stays in `building` for the whole siege').toEqual(Array(6).fill('building'));
+    // Dwell passes BOOM_MIN_DWELL at tick 2 and KEEPS passing it — so every tick from
+    // there on is a tick the base engine would have minted or busted on.
+    expect(rows[2].dwell, 'the dwell threshold is crossed mid-run, not merely never reached')
+      .toBeGreaterThanOrEqual(UPSWING_TUNING.BOOM_MIN_DWELL);
+    // NOTHING is minted across the whole run — neither the boom nor the punishment.
+    expect(rows.flatMap((r) => r.kinds), 'no receipt of any kind mints under siege').toEqual([]);
+    expect(rows.flatMap((r) => r.archetypes), 'no boom and no Trade Bust condition').toEqual([]);
+    // The punishment minted from nothing: at base these moved at tick 3.
+    expect(rows.map((r) => r.prosperity), 'prosperity never retreats').toEqual(Array(6).fill('Comfortable'));
+    expect(rows.map((r) => r.legitimacy), 'legitimacy never takes the bust knock').toEqual(Array(6).fill(55));
+  });
+
+  it('THE SIEGE DELAYED IT, IT DID NOT KILL IT: lifting at tick 7 mints the boom on that very tick', () => {
+    const rows = driveEmbattledBoom(8, 6);
+    // Six silent embattled ticks, then the lift tick mints immediately — the accumulated
+    // dwell was BANKED, not reset. (This is the arm that refuses the wrong cure: gate the
+    // accumulation as well and dwell would restart, so the boom would arrive at tick 9.)
+    expect(rows.slice(0, 6).flatMap((r) => r.kinds), 'silence for the whole siege').toEqual([]);
+    expect(rows[6].kinds, 'the boom mints on the LIFT tick, with no fresh dwell to serve').toEqual(['boom_enter']);
+    expect(rows[6].phase).toBe('boom');
+    expect(rows[6].archetypes, 'the boom condition lands').toContain('boom');
+    // And it is a real, sustained boom — not a one-tick flicker that busts again. The
+    // negative is anchored on `boom`, the live sibling written by the same conditions
+    // array on the same tick: if the collection drifted away, the anchor reds first.
+    expect(rows[7].kinds, 'the boom sustains the following tick').toEqual(['boom_sustain']);
+    expectAbsentWithAnchor(rows[7].archetypes, 'custom_crisis', 'boom', 'no Trade Bust ever follows the lift');
+  });
+
+  it('NEGATIVE CONTROL: the identical fixture UNEMBATTLED booms at tick 3 — embattlement is the only thing the cure gates', () => {
+    // Same throughput, centrality and arteries; only the siege is removed. If this run
+    // failed to boom, the first arm's silence would be the fixture's fault, not the cure's.
+    const control = driveEmbattledBoom(6, 0);
+    expect(control[2].kinds, 'a peaceful town mints on schedule at MIN_DWELL').toEqual(['boom_enter']);
+    expect(control.map((r) => r.phase)).toEqual(['building', 'building', 'boom', 'boom', 'boom', 'boom']);
+    expect(control.map((r) => r.prosperity), 'and never busts').toEqual(Array(6).fill('Comfortable'));
   });
 });
 

@@ -673,7 +673,15 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
         // Fell back below the exit band before minting — drop the building record.
       } else {
         const dwell = (prior?.dwell || 0) + 1;
-        if (dwell >= T.BOOM_MIN_DWELL) {
+        // CS-B1 (cs-3): the MINT gate now carries the same `severed` predicate (:617) the
+        // bust branch already enforces. Without it a settlement embattled from tick 0 kept
+        // accumulating dwell, minted boom_enter, and busted the very next tick for -1
+        // prosperity band and -3 legitimacy plus a Trade Bust condition — a punishment
+        // minted from nothing, against the module's own 'no new capital from nothing' law.
+        // ⚠ 107.2 signed the MINT gate, NOT the dwell accumulation: dwell keeps building
+        // under embattlement, so the boom ARRIVES the tick the siege lifts (the siege
+        // DELAYED it) rather than having its clock reset (the siege KILLED it).
+        if (!severed && dwell >= T.BOOM_MIN_DWELL) {
           // MINT THE BOOM: the condition + the first prosperity drift, records fragile edges.
           if (ui !== undefined) {
             ensureCloned();
