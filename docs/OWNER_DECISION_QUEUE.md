@@ -4081,3 +4081,47 @@ product thesis, and the constitution held under measurement.**
    train, the three §107 signatures in its brief) and **lane MEM-F
    prepares the overdue memory-index fold** (17,315 bytes, past its
    own hard limit; grep-every-hook law; the chair applies).
+
+## §109 · THE TOTAL REVIEW PHASE — OWNER-ORDERED (2026-08-15,
+## verbatim, in-chat; the operative charter recorded by the chair)
+
+Owner, verbatim: **"after the first diagnostic soak and fix and before
+the full soak for tuning, I want a truly comprehensive systems analysis
+survey, and review where you are looking into every single co[de]base
+subsystem, claim, and dimension and making sure that everything is as
+close to perfect as it can be and working amongst everything that we
+have been working on for all of this time for this codebase. Then
+you're going to fix it. After that, you will push it to be saved in git
+before you do the full soak and tune."**
+
+1. **THE PHASE INSERTS INTO THE RULED TAIL**: build-complete-dark →
+   diagnostic soak → composition fixes → **THE TOTAL REVIEW → its
+   fix-to-zero → THE CHECKPOINT PUSH** → the full soak → THE WALK +
+   THE ONE REGEN → terminal soak → tuning (§3h's ordering otherwise
+   unchanged; tuning stays last and owner-signed).
+2. **SCOPE — exhaustive by construction, not sampled**: (a) EVERY
+   SUBSYSTEM, enumerated from the tree's own censuses (the module
+   census of src/domain, the registries, the flag manifest as fully
+   minted, the coupling registry, the spatialLedgers manifest, the
+   walker inventory) — each subsystem gets a named review row, none
+   inherited from §51's sampling; (b) EVERY CLAIM — the annex corpus,
+   the volumes as cured at §106, the packet record, and the docs
+   claim corpus, re-graded at the post-build tree (the SPV grades
+   re-derived, not inherited); (c) EVERY DIMENSION — the fourteen
+   §51 dimensions re-run at post-build depth PLUS the dimension §51
+   could not reach: integrated long-run dynamics, now informed by the
+   diagnostic soak's own findings. The integration question governs
+   throughout: everything working AMONGST everything — the
+   cross-subsystem seams get their own rows, not just the subsystems.
+3. **STAFFING extends the §51 law**: Fable surveys, recons, and
+   validates; Opus verifies under Fable's governance; the chair rules
+   and fixes-to-zero through the standing train machinery. The §71.1
+   audit-zero mechanism applies to this phase's findings verbatim
+   (owner-parked items excluded and listed).
+4. **THE CHECKPOINT PUSH IS PRE-AUTHORIZED BY THIS ORDER** for that
+   moment: the build branch, all train/evidence refs, and the ledger
+   branch (T1's marketing-masters disposition executes first per §1
+   so the ledger can ride), pushed with `--no-verify` per §71.7 under
+   the no-push-while-executor-holds-slot law, verified by ls-remote
+   sha-for-sha, PR-updated per the §71.3 cadence. Only after that
+   receipt does the full soak begin.
