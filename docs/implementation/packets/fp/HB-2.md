@@ -1,6 +1,12 @@
 # HB / HB-2 — THE HABIT LEDGER, THE GATE LADDER'S FIRST DOOR, AND THE FLAG
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `de214782bbff2291c77d0a62c9ec40a66781e727`, member M2 of the `hb-2b` train.
+  Chain: `3ad7c082` (P1a) → `c777a158` (I1, HB-0B) → `46f1c942` (P1b) → this implementation
+  commit → the terminal. ⭐ **THE CENSUS RE-DERIVED WHOLE HERE TO THE PREDICTED TUPLE EXACTLY**
+  — `2425/366/2059/20081/5650` → `2428/366/2062/20107/5653` — and **`osrFindings` HELD AT
+  1998**, which §7.3 named the sharpest execution risk in the train. Both typecheck ratchets
+  held their exact floors at this commit as well.
 - **Train:** `hb-2b`, member **M2 of two**, executing after M1 (HB-0B). Private ref
   `refs/trains/hb-2b`.
 - **Authority:** **OQ §41** items 1–6 (which bind this member verbatim) and **OQ §42.3** (three
@@ -370,6 +376,26 @@ a `kind: 'mutation'` label must join `scripts/mutation-sweep.sh` one-to-one in *
 and this wave declares no sweep script — and may **never** take `kind: 'uncovered'`, which is
 shrink-only against `uncoveredBaseline: 198`. ⛔ **Append by hand; NEVER re-serialize the file** —
 a re-serialization is a whole-file diff nobody can review.
+
+### 5.6 · ⚠⚠ THE MANIFEST GREW FROM TWELVE PATHS TO TWENTY AT THE LANDING (`D2`, recorded)
+
+**Eight paths joined, and every one is a MECHANICAL CONSEQUENCE of a path this manifest already
+reserved.** None is new scope; each is a downstream artefact the compile did not price.
+
+| # | Path | Why it was owed |
+|---|---|---|
+| 13 | `tests/domain/subsystemRowsVirtual.test.js` | ⛔ **THE EXACT-LIST PIN** for the certification row row 5 reserves. `VIRTUAL_RULES` is an ordered equality against `VIRTUAL_SUBSYSTEM_ROWS`, and `LANE_LEAVES` is iterated over it, so the row cannot land without them. §5.2's registration-template law already demands an exact-list pin move in the SAME commit as its row — the compile applied that reasoning to `ARGUED_ROSTER_CEILING` and missed it one layer out. ⭐ **SAME SHAPE AS `R32`**, and found the same way: by reddening |
+| 14–20 | `supabase/functions/_shared/{aiCharter,aiOutputSchema}Bundle.js` + five `*.meta.json` | `simulationRules.js` (row 4) is a **bundle INPUT**. MEASURED: of the 110 inputs to `aiCharterBundle`, it is the **ONLY** one that differs from the train's base, so the CQ5 key genuinely staled two bundles. Regenerated with `npm run build:edge-shared`, which is the cure the freshness test names in its own title. ⛔ **ALL SEVEN MOVE TOGETHER**: `CR-EB-2 (b)` requires one build window, and reverting the three timestamp-only siblings to keep the diff small **REDDED** the no-stale-siblings arm — executed, then reverted back |
+
+⛔ **A THIRTEENTH-PATH RULE THAT READS AS DISCIPLINE CAN BECOME A LIE.** §11's *"no thirteenth
+path"* is a scope fence, not a physics claim: a reserved path whose landed pins and generated
+artefacts live elsewhere DRAGS them, and refusing to move them would have landed a red rather
+than kept a promise. The honest act is to move them and record the growth, which is this row.
+
+⚠ **WHAT WOULD HAVE PREVENTED IT:** a compile-time question — *"for each reserved path, what
+exact-list pin names it, and what generated artefact takes it as an input?"* Both answers were
+mechanically discoverable at compile: `VIRTUAL_RULES` by grep, the bundle inputs by reading
+`*.meta.json`. **Recorded as a compile-checklist item for the next HB wave.**
 
 ---
 

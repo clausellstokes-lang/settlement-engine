@@ -2593,7 +2593,7 @@
     },
     {
       "id": "HB-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/HB-2.md",
       "verifiedBase": "c777a158da79830d46862b8df24f427dd9050824",
       "changeManifest": [
@@ -2608,7 +2608,15 @@
         { "action": "TEST", "path": "tests/domain/habitCurve.test.js" },
         { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
         { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
-        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiGroundingBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/intentAtlasBundle.meta.json" }
       ],
       "requiredSymbols": [
         { "path": "src/domain/worldPulse/habit/habitLedger.js", "symbol": "export const HABIT_LEDGER_KEY" },
