@@ -2754,6 +2754,56 @@
         ["node", "scripts/implementation-packets.mjs", "validate"],
         ["npm", "run", "typecheck:domain:strict"]
       ]
+    },
+    {
+      "id": "IN-1C-A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-1C-A.md",
+      "verifiedBase": "d5a6c0094a373d50f7d4870d44fb84f598164e85",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/informationReceiptPools.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/informationNews.js" },
+        { "action": "MODIFY", "path": "src/domain/display/neighbourMirror.js" },
+        { "action": "MODIFY", "path": "tests/helpers/receiptAnnex.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/lint/informationKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/neighbourMirror.test.js" },
+        { "action": "TEST", "path": "tests/ui/neighbourMirrorLine.test.js" },
+        { "action": "TEST", "path": "tests/property/secondOrderBeliefDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationReceiptPools.js", "symbol": "export const INFORMATION_RECEIPTS" },
+        { "path": "src/domain/worldPulse/informationNews.js", "symbol": "export function informationReceipt(" },
+        { "path": "src/domain/display/neighbourMirror.js", "symbol": "export function neighbourMirrorLines(" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(" },
+        { "path": "tests/helpers/receiptAnnex.js", "symbol": "export function receiptAnnexPool(" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "LIT main behaviour: a world holding one disinfo row toward a counterpart yields one row whose line is one of the nine annex variants rendered under the same interp, asserted by POOL MEMBERSHIP and never against a hardcoded sentence, with band, staleness, basis and lastShownTick byte-identical to the pre-change read-model" },
+        { "id": "C2", "case": "DETERMINISM AND STABILITY with its anti-vacuity arm: identical inputs yield byte-identical rows, the same counterpart draws the same variant across calls, and two different counterparts in one world are shown capable of drawing different variants — a pick stuck at index 0 satisfies stability alone" },
+        { "id": "C3", "case": "THE ELIGIBILITY CONTROL IN BOTH DIRECTIONS: with counterpart and band the eligible set is exactly seven and excludes variants 2 and 7 BY INDEX; with a season supplied it is exactly nine. Without the second arm a stuck filter passes" },
+        { "id": "C4", "case": "THE DARK GOLDEN, DRIVEN over the RENDERED surface: the tab rendered three times over one settlement and campaign — key absent, key explicitly false, and key lit with no outbound record — all byte-identical to IN-1b's landed pre-wave capture and to each other" },
+        { "id": "C5", "case": "THE RENDERED-SURFACE PHRASE SCAN with its presence pin and its mutant: the lit text carries the heading and the composed line and exceeds a measured floor; that same text scanned against MIRROR_PERCEPTION_BANNED yields no hit; and the identical scanner applied to a planted string DOES flag it" },
+        { "id": "C6", "case": "TOTALITY UNCHANGED: a null or garbage worldState, a missing settlementId, a non-array counterpartIds, counterpartId equal to settlementId, a non-finite tick and a missing nameFor each answer the empty array without throwing, asserted on the POST-change composer" },
+        { "id": "C7", "case": "THE FALLBACK ARM IS DRIVEN, NOT DECLARED: with the registry yielding nothing for the kind, the composed line is the landed hand-composed sentence verbatim and is non-empty — an undriven fallback is the dead-arm class" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/lint/informationKindPools.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/neighbourMirror.test.js"],
+        ["npx", "vitest", "run", "tests/ui/neighbourMirrorLine.test.js"],
+        ["npx", "vitest", "run", "tests/lint/kindPoolFloors.walker.test.js"],
+        ["npx", "vitest", "run", "tests/property/secondOrderBeliefDormancyFence.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/subsystemRowsVirtual.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
     }
   ]
 }
