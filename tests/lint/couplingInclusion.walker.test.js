@@ -531,6 +531,11 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'HB-1 substrate — the frozen classification of every weighted decision fork the estate can see, read only by its two totality walkers and never by the engine; its single import is the habit circumstance vocabulary, itself argued-unlayered, so its cross-layer reach is empty',
     reads: Object.freeze([]),
   }),
+  'src/domain/worldPulse/lawBandModulation.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'The law-band modulation table is shared VOCABULARY, not a layer\'s state: four consumer families across two volumes read it — HABIT\'s learning rate-decay, and WC\'s relay efficiency, block cohesion and drift expression — and it owns none of their subjects. It is the bandFamilies / bandedStock / lawWord case exactly: a module every port spells against, carrying a SHAPE and no values. Giving it a layer home would make every port\'s own reading of a shared table read as a cross-layer coupling into whichever family won the name',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -581,7 +586,7 @@ const ARGUED_HOSTS = Object.freeze([
  * with its reason. The net effect is one cross-layer read that would otherwise have been
  * dark becoming enumerated. A sixteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 19;
+const ARGUED_ROSTER_CEILING = 20;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
