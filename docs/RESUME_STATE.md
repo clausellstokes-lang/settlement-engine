@@ -76,13 +76,21 @@ incremental re-sweep EXECUTED (4 INT annex rows re-verified, increment
 appended to laneINTS-INT-SUBSTRATE.md). Executor queue (§59.6 + §64.7 +
 §65.4, serial, one worktree): **IN-1C-A (TE13 LIVE, Opus, base
 `d5a6c009`)** → est-1 → wc-0 → rn-1. Live read-only lanes beside the
-executor: **R-XLS (cross-layer semantics, FABLE, live)**; **✅ R-PLC
-COLLECTED AND RULED §66** (layer floor HIGH; G2/G3 join rn-1 arm B1;
-G1 chokepoint + G4 scrub + Q5 guard join the machinery micro-batch beside
-F2; Q4 import-vs-restore is OWNER-OPEN). §51 dimensions done: intent ·
-estate · vocabulary · security · design↔impl · persistence/lifecycle;
-next picks on freed slots: product surfaces · law-body consistency ·
-correctness spot-audits → chair synthesis. Chair-owed sittings
+executor: **✅ R-PLC COLLECTED AND RULED §66** (layer floor HIGH; G2/G3
+join rn-1 arm B1; G1 chokepoint + G4 scrub + Q5 guard join the machinery
+micro-batch beside F2; Q4 import-vs-restore is OWNER-OPEN). **✅ R-XLS
+COLLECTED AND RULED §67** (pinned vocabularies CLEAN; XLS-1 color
+convergence + XLS-2 relief/dynamic-mint arm + XLS-5 exact-key services
+cure ruled into the micro-batch/repair queue; XLS-4 + XLS-6 docketed for
+Opus producer-path verification at the WY/war sitting; the 21 unreachable
+service rows are an OWNER CULL question; corpus union 281 recorded).
+§51 dimensions done (8): intent · estate · vocabulary · security ·
+design↔impl · persistence/lifecycle · cross-layer semantics (+ the LG
+self-sweep); LIVE next: **R-PSF (product surfaces, FABLE)** + **R-LAW
+(law-body consistency, FABLE)**; then correctness spot-audits → chair
+synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+the FIRST post-landing increment executed at INT-3B (§65.3); every
+future landing collection owes its increment. Chair-owed sittings
 unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
 IN-1c-b charter. Owner-open: P1 tuning-signature posture · P6 bounded burn
 · "campaign" naming. Ledger tip after this commit carries §63+§64+§65.

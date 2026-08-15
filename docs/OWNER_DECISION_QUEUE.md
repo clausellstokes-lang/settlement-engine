@@ -2545,3 +2545,48 @@ that skips the increment is incomplete.
    33aeea35 boundary attaches to Opus-made judgments; this was a Fable
    lane. Under §51 staffing the G1–G3 mechanism readings get their Opus
    verification at compile, which the SPV/§48 flow already requires.
+
+## §67 · THE CROSS-LAYER SEMANTICS DIMENSION RULED (2026-08-15, chair,
+## vetoable; evidence in laneRXLS-crosslayer-audit.md + laneRXLS-report.md,
+## three executed probes, all at `d5a6c009`)
+
+1. **The pinned vocabularies verify CLEAN** (venue family, institution
+   corpus side-cars, condition-archetype subsets, seat vocabulary) and
+   the six J-RXLS judgments are RATIFIED, including J-RXLS-4's honest
+   *that*-not-*when* staleness claim: the SIMULATION_LOGIC_AUDIT
+   merchant_wealth finding is CURED at HEAD (zero orphans over 46×16) —
+   the doc cross-reference joins the docs micro-act queue. The corpus
+   union figure is 281 (276 catalog + founding names); memory updated.
+2. **XLS-1 RULED — the components converge on the canonical module**
+   (J-RXLS-1 adopted: the module's recorded ruling outranks the
+   components' silent state): all five surfaces route through
+   `relColor()`/`relRgb()`, the pin idiom extends, and
+   `RelationshipsTab`'s darker palette survives only if compile finds
+   recorded intent — else it converges. `secret_alliance` membership is
+   ASKED OF THE CORPUS at compile (produced → joins REL_HEX; not →
+   expected-dead). Packet-sized UI repair, joins the micro-batch queue.
+3. **XLS-2 RULED**: the `relief` WHAT_PHRASES row lands; both impactKind
+   walkers gain a dynamic-mint census arm (the union-of-arms law — a
+   dynamic mint IS an arm); EXPECTED_VOICE enumerates the 13 regional
+   kinds explicitly so an unvoiced kind is a decision, never a guard
+   accident. Machinery micro-batch.
+4. **XLS-3 RULED**: the conquest coalition set is RE-DERIVED from the
+   produced allianceLabel corpus (the ask-the-corpus law); its four dead
+   synonym members leave via rn-1's arm C as already dispositioned in
+   §64.6; the trade_partner/patron/client exclusion STANDS as deliberate
+   (J-RNC-6's asymmetry ruling) and the intent is RECORDED at the site.
+5. **XLS-4 and XLS-6 are DOCKETED FOR PRODUCER-PATH VERIFICATION** (Opus,
+   per §51 staffing) before any cure: the 13 war-era archetypes without
+   faction-delta templates join the owed WY/war chair sitting (either 13
+   rows or recorded-absence + the "1:1" header fix); `conflict_pressure`'s
+   forecast-vs-applied dual nature needs the herald ingestion path traced
+   (split or sectionAuthority only if both natures are real).
+6. **XLS-5 RULED**: the services matcher moves from fuzzy scoring to
+   exact-key resolution against the closed 281-union corpus (the
+   corpus-enumeration law; the p≥1.0 rule guaranteed the live
+   `Household levy` break). Repair packet. **⛔ The 21 unreachable
+   INSTITUTION_SERVICES rows are a CULL QUESTION — owner-carved**: they
+   hold expected-dead pins until the owner rules keep-or-cull.
+7. The `minor`/`moderate` per-lane decode split (0.25/0.5 table-event vs
+   0.35/0.6 stressor) is RECORDED for the tuning phase (tuning is last,
+   owner-signed) — not a cure surface now.
