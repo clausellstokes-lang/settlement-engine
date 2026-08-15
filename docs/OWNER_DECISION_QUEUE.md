@@ -2144,3 +2144,36 @@ Phase-F dispositions unchanged.
 5. **WC-0 IS COMPILE-READY** on: the WV annex + the WCC cures + the
    recovered 22 rulings + R35's paste-ready C1 row. The compile prices the
    three-obligation flag law and the frozen-legacy-2 rows.
+
+## §53 · THE INTENT AUDIT'S DISPOSITIONS (2026-08-16 ~04:00, chair,
+## vetoable; the audit: laneRINT-intent-audit.md, tally 30H/6C/3D/5P)
+
+1. **P1 IS SURFACED TO THE OWNER, NOT SELF-RULED** — the one genuine
+   constitutional question: §17 carves THE TUNING SIGNATURE and each push
+   as untouchable-by-blanket-wording; §22/§37 read the owner's universal
+   grants as covering both at their ordered phases; THE PROMISE says the
+   signature IS the promise. The chair's operating posture UNTIL THE OWNER
+   ANSWERS: the grants govern permission-class blockers, but THE TUNING
+   SIGNATURE executes only with a fresh owner act at its phase (the
+   conservative reading; zero practical cost until the tuning phase).
+   The owner's one-word ruling supersedes.
+2. **D1/D2 stand as the record shows** — drift caught and cured by the
+   machinery (the §27 correction; the §49 correction). No action; they are
+   the audit's proof the veto surface works.
+3. **D3 (live, small)**: the §17b owner-pick on the map-notes surface was
+   dissolved by §22 and never exercised — DOCKETED as a micro-act: the
+   chair exercises the pick under the grant at the next prose batch, with
+   the comment corrected in the same act.
+4. **P2 RECONCILED (vetoable)**: "strategically reasonable" = deterministic
+   least-cost over the one graph IS the faithful reading (finite semantics
+   forbids a judgment call inside the engine); recorded as the intended
+   narrowing, owner may veto.
+5. **P3 RECONCILED (vetoable)**: product-scope boundary 4 ("never a NAMED
+   character's fate") protects PLAYER/party characters; engine-minted NPCs
+   (holders, envoys, spies) are world state whose fates the sim already
+   writes (successions, deaths). The §46b/§46c capture/ransom mechanics are
+   in-scope. Recorded; owner may veto.
+6. **P5 ELEVATED**: the three-obligation flag-mint law is DOCUMENT-only
+   (PACKET_STANDARD carries none of it — grep-verified) — the queued
+   prose/machinery act is PROMOTED to ride with WC-0's train or sooner;
+   the hazard-conversion law demands it.
