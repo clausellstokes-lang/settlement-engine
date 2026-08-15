@@ -4402,7 +4402,27 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   are SEQUENCED so the first run reached `titles` only — `suiteTitles` was proved by
     //   re-running with the whole tuple re-recorded, never by assuming it had held.
     // 2438/364/2074/20208/5672 → 2438/364/2074/20220/5676.
-    files: 2438, parked: 364, credited: 2074, titles: 20220, suiteTitles: 5676,
+    // cs-b (CS-B0..CS-B3, the declared-shift correctness train's SECOND half) re-records on
+    //   its LAST tests-moving member, CS-B3. CS-B0 touched no test file at all. The other
+    //   three members each add a three-arm trajectory pin to a file that already existed, so
+    //   files/parked/credited do NOT move — and here that is not an inference: those three
+    //   figures are asserted BEFORE `titles` in this arm and they PASSED, which is the receipt.
+    // ⚠⚠ NINE TEST TITLES WERE ADDED AND THE EVIDENCE LAYER MOVED BY SIX. The delta was
+    //   ATTRIBUTED per file by reverting one file at a time and re-reading this arm's own
+    //   output: demographicsMigration +3, convergence +3, and upswingKernel **+0**. The
+    //   upswing file is PARKED — it was parked at this train's base too (reverting its edits
+    //   leaves the count at 20226, so its titles were invisible before this train touched it),
+    //   so no park state changed and no member of this train is responsible for it. It is
+    //   recorded because a parked file's pins are real coverage the census cannot see, and a
+    //   future lane reading "+6" against three three-arm pins would otherwise re-derive this.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so the first run here reached
+    //   `titles` ONLY (20220 → 20226) and `suiteTitles` was never evaluated. It was proved by
+    //   re-running this arm with `titles` re-recorded, which then reported `expected 5678 to be
+    //   5676` — read from the walker's own failure output, never assumed to have held. The +2
+    //   is one describe each from demographicsMigration and convergence; upswingKernel's new
+    //   describe is invisible for the same park reason its three titles are.
+    // 2438/364/2074/20220/5676 → 2438/364/2074/20226/5678.
+    files: 2438, parked: 364, credited: 2074, titles: 20226, suiteTitles: 5678,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -826,14 +826,18 @@ function neighborsOf(edges, id) {
 
 const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']);
 // RN-C: `tributary` and `protectorate` left as ORPHANS (zero producers tree-wide).
-// ⛔ `ally` STAYS, and it is DEAD: relType here is read RAW off a regional-graph edge, which
-// carries CANONICAL labels, and canonicalRelationshipLabel('ally') is 'allied'. So this set
-// admits a value that can never arrive and MISSES 'allied', which can — an allied neighbour
-// is not read as friendly by the motive scorer. Adding 'allied' would move GENERATED OUTPUT,
-// so it is a chair surface (CR-TE18-CONVERGENCEALLIED), not this output-neutral arm's. The
-// dead entry is kept ON PURPOSE: a tidy {trade_partner, vassal} would look correct and the
-// missing 'allied' would stop being visible. The habitat pin declares it expected-dead.
-const FRIENDLY_REL = new Set(['ally', 'trade_partner', 'vassal']);
+// ⭐ CS-B3 (cs-6) CURES WHAT RN-C RECORDED. `ally` is GONE and `allied` has taken its place.
+// relType reaches here RAW off a regional-graph edge (neighborsOf, :822 — no canonicalization)
+// and those edges carry CANONICAL labels, so `ally` could never arrive: measured at this base,
+// canonicalRelationshipLabel('ally' | 'alliance' | 'allies') is 'allied', and
+// RELATIONSHIP_SELECTIONS offers `allied`, never `ally`. The set therefore admitted a value
+// nothing can produce while MISSING the one that is produced — an allied neighbour was
+// invisible to the intervention motive scorer (treatyWithIncumbent at :915, the `invited` read
+// at :1107 and :1155). RN-C kept the dead entry ON PURPOSE as an instrument, because a tidy
+// {trade_partner, vassal} would have looked correct and the gap would have stopped being
+// visible; this member is the act that retires the instrument, and it may only do so in the
+// SAME commit that adds `allied` and moves the habitat pin's declaration table.
+const FRIENDLY_REL = new Set(['allied', 'trade_partner', 'vassal']);
 
 /** The 0..1 prosperity/strength proxy for a patron (the fundingOf idiom — economic
  *  capacity as the projectable-strength stand-in in wave 1). EXPORTED (W-COMPOSER-2):

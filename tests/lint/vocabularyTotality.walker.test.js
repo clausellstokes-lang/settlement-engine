@@ -214,7 +214,7 @@ const RELATIONSHIP_ADMISSION_SETS = Object.freeze({
     defensive_pact: 'EXPECTED-DEAD UNTIL `mutual_defense` GAINS A WRITER: the chartered orphan. peaceTermsCatalog.js carries `mutual_defense` as the writer-in-waiting and records that defensive_pact edges have had five reader families and no writer.',
   }),
   'src/domain/worldPulse/convergence.js|FRIENDLY_REL': Object.freeze({
-    ally: 'EXPECTED-DEAD, AND THE DEFECT IS THE REASON (CR-TE18-CONVERGENCEALLIED): relType here is read RAW off a regional-graph edge, which carries CANONICAL labels, so `ally` can never arrive — and `allied`, which can, is ABSENT from this set. Adding it moves generated output, so it is a chair surface. This row is the instrument pointing at that gap and must not be quietly deleted.',
+    allied: 'REACHABLE, AND THE CURE (CS-B3 / cs-6): canonicalRelationshipLabel maps ally/alliance/allies onto `allied`, and RELATIONSHIP_SELECTIONS offers `allied` — so this is the label regional-graph edges actually carry into the motive scorer. It replaced the EXPECTED-DEAD `ally` row that CR-TE18-CONVERGENCEALLIED kept as an instrument; the instrument is retired because the gap it pointed at is closed.',
     trade_partner: 'REACHABLE: the authoring vocabulary.',
     vassal: 'REACHABLE: named producers in occupation.js and relationshipRulesAdversarial.js.',
   }),

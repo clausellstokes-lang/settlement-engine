@@ -19,6 +19,7 @@ import {
   interventionLegitimacy, interventionTilt, interventionObligationMint,
   foreignClashes, foreignClashIntensityOf,
   interventionLedger, recordsForTarget, interventionAdjFor,
+  advanceIntervention,
   orderInterventionVerbFactory, CONVERGENCE_TUNING,
   deriveSides, engagementOptions, resolveSideBattle, reliefFlipsSiege,
   prizeRivalryCasus, overstayOccupation, canReEngage,
@@ -489,5 +490,136 @@ describe('W-CONVERGENCE §7 — the verbs are REGISTERED (the W-COMPOSER-2 lift 
     expect(realmVerbFor('ORDER_INTERVENTION')?.candidateType).toBe(orderInterventionVerbFactory().candidateType);
     expect(realmVerbFor('REINFORCE')?.candidateType).toBe(reinforceVerbFactory().candidateType);
     expect(realmVerbFor('INTERCEPT')?.candidateType).toBe(interceptVerbFactory().candidateType);
+  });
+});
+
+// ── CS-B3 (`cs-6`) — AN ALLIED NEIGHBOUR IS VISIBLE TO THE MOTIVE SCORER ───────
+// `FRIENDLY_REL` held `ally`, and `relType` reaches it RAW off a regional-graph edge
+// (`neighborsOf`, convergence.js:822 — no canonicalization), while those edges carry
+// CANONICAL labels. Executed at this base: canonicalRelationshipLabel maps `ally`,
+// `alliance` and `allies` ALL onto `allied`, and RELATIONSHIP_SELECTIONS offers `allied`
+// and never `ally`. The set therefore admitted a token nothing in the tree can produce
+// while MISSING the one that is produced — so a sworn ally read exactly like a stranger.
+//
+// ⛔ WHY A SET-MEMBERSHIP ASSERTION WOULD NOT HAVE BEEN A PIN. `expect(FRIENDLY_REL.has(
+// 'allied')).toBe(true)` is the pure-function shape §72.3 refuses: it restates the edit
+// instead of proving the consequence, and it would have passed just as happily on a set
+// that had gained `allied` while some caller still canonicalized on the way in. This pin
+// drives the real mover instead, and the accumulator is the interventions LEDGER across
+// ticks. Measured at this base with two allied neighbours over a live coup contest:
+//
+//   tick   BASE (`ally`)          CURED (`allied`)
+//   1      ledger empty           crown→ford, incumbent, preserve_order, INVITED
+//   2      ledger empty           + delve→ford (one new column per contest per tick)
+//   3-4    ledger empty           both rows held, both still invited
+//
+// At base the allied run is byte-for-byte the NEUTRAL run — which is exactly the defect
+// stated as a measurement: the engine could not tell an ally from a stranger.
+describe('W-CONVERGENCE — CS-B3 (cs-6): an ALLIED edge reaches the motive scorer', () => {
+  const ivSettlement = (name, { population = 9000, factions } = {}) => ({
+    name, tier: 'city', population,
+    config: { tradeRouteAccess: 'road' },
+    institutions: [],
+    economicState: { prosperity: 'Wealthy', primaryExports: [], primaryImports: [] },
+    powerStructure: {
+      publicLegitimacy: { score: 55, label: 'Stable' },
+      factions: factions || [{ faction: 'Town Council', category: 'civic', power: 50, isGoverning: true }],
+      conflicts: [],
+    },
+    npcs: [], activeConditions: [],
+  });
+
+  /** Ferrywater is in a live coup; Crownhold and Delvemoor are its foreign neighbours. */
+  const ivSnapshot = () => {
+    const byId = new Map([
+      ['ford', { id: 'ford', name: 'Ferrywater', settlement: ivSettlement('Ferrywater', {
+        population: 3200,
+        factions: [
+          { faction: 'Town Council', category: 'civic', power: 40, isGoverning: true },
+          { faction: 'The Garrison', category: 'military', power: 36 },
+        ],
+      }) }],
+      ['crown', { id: 'crown', name: 'Crownhold', settlement: ivSettlement('Crownhold', { population: 55000 }) }],
+      ['delve', { id: 'delve', name: 'Delvemoor', settlement: ivSettlement('Delvemoor', { population: 42000 }) }],
+    ]);
+    return { byId, settlements: [...byId.values()] };
+  };
+
+  const coupStressor = () => ({
+    id: 'world_stressor.coup_detat.ford', type: 'coup_detat', severity: 0.55, peakSeverity: 0.55,
+    originSettlementId: 'ford', affectedSettlementIds: ['ford'],
+    originContext: { sponsorSettlementId: null },
+  });
+
+  // Every fork rolls 0, so the loaded dice ALWAYS fire. That is deliberate: this pin is
+  // about which motives the relationship makes available, not about the rarity of the
+  // roll, and a seeded-rarity fixture would need sixty ticks to say the same thing.
+  const certainRng = { fork: () => ({ random: () => 0 }) };
+
+  /** Drive the intervention mover `ticks` ticks, returning the ledger census per tick. */
+  function driveIntervention(relationshipType, ticks) {
+    const snapshot = ivSnapshot();
+    const graph = {
+      edges: [
+        { id: 'edge.crown.ford', from: 'crown', to: 'ford', relationshipType },
+        { id: 'edge.delve.ford', from: 'delve', to: 'ford', relationshipType },
+      ],
+      channels: [],
+    };
+    let worldState = {
+      tick: 1,
+      simulationRules: { warLayerEnabled: true, interventionEnabled: true },
+      stressors: [coupStressor()],
+    };
+    const rows = [];
+    for (let t = 1; t <= ticks; t += 1) {
+      worldState = { ...worldState, stressors: [coupStressor()] };
+      const r = advanceIntervention({ snapshot, worldState, graph, rng: certainRng, tick: t, now: '2026-01-01T00:00:00.000Z' });
+      worldState = r.worldState;
+      const ledger = interventionLedger(worldState) || {};
+      rows.push({
+        census: Object.keys(ledger).sort().map((k) => `${ledger[k].interId}->${ledger[k].target}:${ledger[k].side}:${ledger[k].motive}`),
+        records: Object.keys(ledger).sort().map((k) => ledger[k]),
+        news: r.newsEntries.length,
+      });
+    }
+    return rows;
+  }
+
+  it('THE TRAJECTORY: allied patrons commit INVITED incumbent-props, one column per tick, and hold them', () => {
+    const rows = driveIntervention('allied', 4);
+    // THE ACCUMULATOR — the ledger grows one column per tick and then holds, which is the
+    // "interventions accrue over ticks, never a same-tick swarm" law made visible.
+    expect(rows.map((r) => r.census.length), 'the ledger accrues one column a tick, then holds')
+      .toEqual([1, 2, 2, 2]);
+    expect(rows[0].census).toEqual(['crown->ford:incumbent:preserve_order']);
+    expect(rows[1].census).toEqual(['crown->ford:incumbent:preserve_order', 'delve->ford:incumbent:preserve_order']);
+    // AT EVERY TICK: every committed column is an incumbent-prop, and every one is INVITED
+    // — `invited` is the second FRIENDLY_REL read (convergence.js:1159) and it is what
+    // makes the intervention legitimacy-cheap. At base this ledger is empty at every tick.
+    for (const [i, r] of rows.entries()) {
+      expect(r.records.every((x) => x.side === INTERVENTION_SIDES.INCUMBENT), `tick ${i + 1}: a non-incumbent column`).toBe(true);
+      expect(r.records.every((x) => x.invited === true), `tick ${i + 1}: an allied patron was not invited`).toBe(true);
+    }
+    // The motive is preserve_order, which fires ONLY on `treatyWithIncumbent` here: this
+    // fixture has no foreign grip, no debt, no leash and no rival, so a treaty read is the
+    // only thing that can produce a motive at all.
+    expect(rows[3].records.every((x) => x.motive === 'preserve_order')).toBe(true);
+    expect(rows.reduce((s, r) => s + r.news, 0), 'each commitment is heralded').toBe(2);
+  });
+
+  it('NEGATIVE CONTROL: a NEUTRAL edge reads neither treaty nor invitation — the ledger stays empty', () => {
+    const rows = driveIntervention('neutral', 4);
+    expect(rows.map((r) => r.census.length), 'a stranger bought a column').toEqual([0, 0, 0, 0]);
+    expect(rows.reduce((s, r) => s + r.news, 0)).toBe(0);
+  });
+
+  it('THE RETIRED TOKEN: a raw `ally` edge is INERT — the label the old set admitted can do nothing', () => {
+    // This is the cure's own justification, executed rather than asserted: `ally` is not a
+    // label the tree produces, and the set no longer pretends otherwise. If a future change
+    // canonicalized on the way in, or re-added `ally`, this arm and the one above would
+    // stop disagreeing and the gap would be back.
+    const rows = driveIntervention('ally', 4);
+    expect(rows.map((r) => r.census.length), '`ally` reached the scorer, so the raw-edge premise moved').toEqual([0, 0, 0, 0]);
   });
 });
