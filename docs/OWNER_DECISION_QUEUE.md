@@ -1905,3 +1905,13 @@ ECONOMY and TIER, not a flat timer. (Chair: same derivation family as the
 fleet count itself — both read the landed tier/prosperity substrates, so a
 rich port recovers its reach faster than a poor one, coefficients under the
 §43 law, cooldownUntil as the one landed timer spelling.)
+
+§46 addendum (owner, ~12:55): REINFORCEMENT AND SUPPLY VOLUME IS
+SETTLEMENT-DERIVED — how much a settlement can send as reinforcements and
+supplies, REGARDLESS of the path traveled (ground, sea, air, or circle),
+reflects its TIER, POPULATION, and ECONOMICS. (Chair: this cleanly
+separates CAPACITY (what you can field — settlement-derived, one
+derivation family with the fleet count and rebuild speed) from THROUGHPUT
+(what a route/mode can carry — the §46a bounds). Both read the landed
+stat substrates; coefficients under the §43 law; the volume charters them
+as two distinct typed reads so neither ever impersonates the other.)
