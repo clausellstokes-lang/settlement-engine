@@ -337,8 +337,15 @@ describe('WR-10c — TR-5 graceful degradation, pinned in both directions', () =
     // ...and it fired for the reason claimed, not for some other family drifting in. The
     // grown-past set is named EXACTLY, so a fourth family arriving reds here rather than
     // being absorbed by a `true` that had stopped meaning anything.
+    // ⭐ WC-0D is the SECOND discharge of this same wire: its two producer-less exits,
+    // `amnesty` and `jubilee`, each take their own family and so each grows the derived
+    // list. ⛔ THE LAWFUL MOVE IS THIS NAMED SET, NEVER THE LANDING RECORD — the record's
+    // own module says so in terms at `sovereigntyBundle.js:74`: "WR10_FAMILIES_AT_LANDING
+    // IS DELIBERATELY NOT WIDENED. It is named a LANDING RECORD rather than a policy …
+    // widening it would erase the fact the tripwire exists to preserve." A reader who
+    // mistakes a widened RECORD for the lawful cure deletes the measurement.
     const grown = TERM_FAMILIES.filter((family) => !WR10_FAMILIES_AT_LANDING.includes(family));
-    expect([...grown].sort()).toEqual(['commercial', 'faith', 'population']);
+    expect([...grown].sort()).toEqual(['amnesty', 'commercial', 'faith', 'jubilee', 'population']);
     // THE LANDING RECORD IS STILL THE LANDING RECORD. It is deliberately NOT widened —
     // its own docstring calls it a record and not a policy, and widening it would erase
     // the fact this pin exists to preserve. Every WR-10-era family is still in the live

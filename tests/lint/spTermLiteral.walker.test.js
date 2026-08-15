@@ -76,8 +76,8 @@ describe('SP speaks no treaty-term family (seam ruling 3)', () => {
     // passing against a catalog half again as large, which is a floor that has stopped
     // measuring anything — the recorded slack-floor vacuity. They move DOWNWARD toward
     // reality only, and never upward to admit a shrink.
-    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(11);
-    expect(TERM_TYPES.length).toBeGreaterThanOrEqual(24);
+    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(13);
+    expect(TERM_TYPES.length).toBeGreaterThanOrEqual(26);
     expect(TERM_FAMILIES).toContain('economic');
     expect(TERM_FAMILIES).toContain('sovereignty_transfer');
     // GR-3's three, named so a family SILENTLY DISAPPEARING reds here rather than merely

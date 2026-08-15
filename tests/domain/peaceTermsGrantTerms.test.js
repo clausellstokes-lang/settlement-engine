@@ -190,7 +190,7 @@ describe('GR-3 A — NO PRODUCER-LESS TERM (the D4 tombstone made law)', () => {
     // Every absence claim below is worthless if the catalog, the lens or the asset map
     // silently emptied. Floors tighten toward reality; they are never relaxed.
     expect(TERM_TYPES.length).toBeGreaterThanOrEqual(24);
-    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(11);
+    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(13);
     expect(Object.keys(CLASS_TERM).length).toBeGreaterThanOrEqual(9);
     expect(Object.keys(PACT_DRAFT_LENS).length).toBeGreaterThanOrEqual(5);
     expect(producedTypes().size).toBeGreaterThanOrEqual(9);

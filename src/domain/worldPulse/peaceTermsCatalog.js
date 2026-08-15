@@ -285,6 +285,40 @@ export const TERM_CATALOG = Object.freeze({
   exclusivity: Object.freeze({ family: 'commercial', weight: 1.0, baseYears: 4, maxYears: 10, baseMag: 1.0, stream: false, executor: 'seam' }),
   market_access: Object.freeze({ family: 'commercial', weight: 0.7, baseYears: 5, maxYears: 12, baseMag: 1.0, stream: false, executor: 'seam' }),
   toll_exemption: Object.freeze({ family: 'commercial', weight: 0.5, baseYears: 4, maxYears: 10, baseMag: 1.0, stream: false, executor: 'seam' }),
+  // ── WC-0D: THE TWO EXITS. §1.10 ("Debt needs exits") requires a settlement to be able to
+  // write a way OUT of a war's obligations into a peace, and the catalog had no term for
+  // either. Each takes its OWN family: neither is a variety of anything already here.
+  //
+  // ⛔ NO PRODUCER, AND THAT IS THE MECHANISM RATHER THAN AN OMISSION. `executor: 'seam'`
+  // with NO producer entry and no peacetime draft-lens membership is the `non_intervention`
+  // recipe verbatim: no producer means never drafted, which means the registration is
+  // byte-identical on every seeded world. The producer lands with the wave that mints one,
+  // and the seam tripwire reds that day — which IS the instruction to move the reachability
+  // obligation there.
+  //
+  // ⭐⭐ THE FOUR NUMERIC FIELDS ARE TRANSCRIBED, NOT AUTHORED (ODQ §59.3,
+  // TRANSCRIBE-AND-RECORD; the chair signs the transcription at collection). Weights and
+  // durations are TUNING, and tuning is owner-signature surface under THE PROMISE. Each row
+  // takes its values whole from the producer-less seam whose semantics it actually matches,
+  // and the derivation is quoted here so the match can be judged rather than trusted:
+  //
+  //   amnesty <- non_intervention (0.5 / 6 / 15 / 1.0). Both are a SOVEREIGN UNDERTAKING OF
+  //   FORBEARANCE: the state binds itself NOT to act — against a neighbour in one case,
+  //   against its own named in the other. `non_intervention` is the catalog's only other
+  //   producer-less seam that is a negative obligation of the sovereign rather than a
+  //   transfer or a grant of access, and it carries the long horizon such an undertaking
+  //   needs, because forbearance that lapses early was never forbearance.
+  //
+  //   jubilee <- toll_exemption (0.5 / 4 / 10 / 1.0). Both are a REMISSION OF A STANDING
+  //   ECONOMIC CHARGE: an obligation that would otherwise keep falling due is struck out by
+  //   the treaty rather than transferred to anyone. `toll_exemption` is the catalog's only
+  //   other producer-less seam of that shape, and it carries the shorter horizon a
+  //   commercial remission is priced against, a trading term rather than a sovereign one.
+  //
+  // ⛔ Both take the SEAM WEIGHT 0.5 that both analogues carry, and magnitude 1.0, which is
+  // every seam row's value in the catalog. No number below is this member's invention.
+  amnesty: Object.freeze({ family: 'amnesty', weight: 0.5, baseYears: 6, maxYears: 15, baseMag: 1.0, stream: false, executor: 'seam' }),
+  jubilee: Object.freeze({ family: 'jubilee', weight: 0.5, baseYears: 4, maxYears: 10, baseMag: 1.0, stream: false, executor: 'seam' }),
 });
 
 /** The typed term-type taxonomy (catalog keys, codepoint-frozen for the walker). */

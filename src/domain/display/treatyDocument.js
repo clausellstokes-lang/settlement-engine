@@ -119,6 +119,32 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
     strained: 'The named house still trades, but the tollmen find new reasons to count, and the counting takes all day.',
     defaulted: 'The promised terms of trade are withdrawn; the named house pays what any stranger pays, or is turned away.',
   }),
+  // ⭐ BOTH NEW FAMILIES ARE MERCIES, AND A MERCY FRAYS BY BEING SLOW. Neither `strained`
+  // line below refuses anything, on the GR-3 reading this table already keeps: a granted
+  // right is not seized back the way a garrison is thrown off — it is narrowed, delayed,
+  // made unwelcome. An amnesty frays when the lists survive in a drawer; a jubilee frays
+  // when the term arrives and the ledgers close one page at a time.
+  //
+  // WC-0D — the amnesty family. A pardon is a mercy about NAMES, so its register is the
+  // list: honoured, the list is not read; strained, the list survives unread; defaulted,
+  // the list is read out again.
+  amnesty: Object.freeze({
+    honored: 'The named are let be; the lists are not read out, and men who were owed a rope walk to market unremarked.',
+    strained: 'The lists are not read out, but neither are they burned, and a pardoned man finds honest work harder to come by than he did.',
+    defaulted: 'The old lists are read out again, and the pardon is kept as though it had never been written.',
+  }),
+  // WC-0D — the jubilee family. A release is a mercy about TERMS, so its register is the
+  // ledger: honoured, the books close at the appointed term; strained, they close slowly
+  // and unevenly; defaulted, the term passes and the debt is demanded whole.
+  // ⛔ LAW ONE GOVERNS THIS FAMILY ABSOLUTELY. The word carries a religious echo in our own
+  // world; these three sentences do not. Not one says anything about a god, a rite or a
+  // blessing — they speak about ledgers, bonds and terms, the things a treaty can actually
+  // bind. A jubilee here is a DEBT RELEASE and nothing else.
+  jubilee: Object.freeze({
+    honored: 'The reckoning is kept: at the appointed term the ledgers close, the bonds are struck through, and no one is asked again for what was released.',
+    strained: 'The term comes and the ledgers close slowly; the bonds are struck through one by one, and some are found to have been copied out elsewhere first.',
+    defaulted: 'The appointed term passes with the ledgers still open, and what was to have been released is demanded in full.',
+  }),
 });
 
 /** A generic register floor for any future family the table does not name (keeps

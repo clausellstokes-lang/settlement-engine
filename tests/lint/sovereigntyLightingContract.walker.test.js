@@ -4336,7 +4336,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   files/parked/credited unmoved and titles 20148 → 20149; `suiteTitles` was never
     //   reached, and was proved by re-running the arm with the WHOLE tuple re-recorded.
     // 2431/364/2067/20148/5660 → 2431/364/2067/20149/5660.
-    files: 2431, parked: 364, credited: 2067, titles: 20149, suiteTitles: 5660,
+    // ⏱ wc-0 (WC-0D, the train's terminal member), 2026-08-15 — RE-DERIVED WHOLE after the
+    //   war-circulation family's first train. FOUR members contributed SIX new credited files
+    //   and NOTHING ELSE: WC-0A's peopleLedgerVocabulary + warStanceLadder, WC-0B's
+    //   militaryColumnRelease, WC-0C's lawBandTable.walker + lawBandModulationShape, and
+    //   WC-0D's amnestyJubileeRegistration. Each carries exactly ONE literal `describe` and
+    //   straight-line `it` calls, so the six files contribute six suite titles and
+    //   twenty-six test titles between them; no existing registration moves, and `parked` is
+    //   untouched because none of the six trips a park rule.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so `files` was RED at the
+    //   train's three interior commits by construction — 2433 at I1, 2434 at I2, 2436 at I3,
+    //   each named in the train plan before it existed — and parked/credited/titles/
+    //   suiteTitles were never reached there. The whole tuple is re-recorded together here,
+    //   at the train's last tests-moving commit, which is what keeps its landing docs-only.
+    // 2431/364/2067/20149/5660 → 2437/364/2073/20175/5666.
+    files: 2437, parked: 364, credited: 2073, titles: 20175, suiteTitles: 5666,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
