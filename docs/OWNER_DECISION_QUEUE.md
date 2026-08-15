@@ -2224,3 +2224,28 @@ numbers, stated affirmatively). The mirror's past-tick non-derivability
 finding (a strength crossing is inexpressible; all three cures closed) is
 RECORDED as IN-family substrate — IN-1c-b's charter inherits it.
 EXECUTION SERIALIZES behind INT-3B (one engine worktree).
+
+## §56 · THE ESTATE SELF-AUDIT RULED; THE ESTATE-REPAIR TRAIN CHARTERED
+## (2026-08-16 ~07:10, chair, vetoable; evidence in laneREST-estate-audit.md)
+
+1. **The ESTATE-REPAIR train (est-1) is CHARTERED**, three members, all
+   §48-treated: E-1 the `needIcon` fixture TypeError cure (un-banks THREE
+   contract rows incl. a data-loss race — the highest-leverage burn in the
+   estate; the ratchet shrinks 16→13); E-2 the F6 slice-window widening
+   (cures the misattributed pin at its own measuredAtSha AND the XSS
+   negative's 1,718-byte blind tail — one line, machinery class); E-3 the
+   two security-adjacent parked suites re-pointed from static `.each`
+   tables to live tables (the aiFallbackTotality pattern).
+2. **P6 IS SURFACED TO THE OWNER with a recommendation** — the paused
+   meta-ratchets: 198 of 545 guards mutation-unproven (36%), five baselines
+   frozen all era, one (`.clamp-primitive` 62→73) growing under a banked
+   alarm. RECOMMENDATION: a BOUNDED BURN — mutation-prove the
+   security-adjacent and census-critical guards (est-family follow-ups),
+   and ACCEPT the remainder with a recorded reason per the
+   hazard-conversion law's accept arm; a full burn is weeks of lanes for
+   diminishing catch-rates. The chair proceeds on the bounded reading
+   unless the owner rules otherwise.
+3. The conquestFeeds docket is RECONCILED (cured at `2fd9ac04`; the docket
+   row closes); GAP-1's arms verified live with ZERO new hidden-gate
+   instances; the audit's own discarded-false-output note is ratified as
+   the capture law working.
