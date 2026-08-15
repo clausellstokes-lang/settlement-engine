@@ -221,6 +221,12 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     reason: '⭐⭐ FOUND BY THE ROOT-SET SELF-ASSERTION ON ITS FIRST RUN, and the widening is itself the finding. A softmax over logits with a keyed tiebreak — two idiom signatures in one symbol, so it is unambiguously a weighted chooser. Its directory sat OUTSIDE the three scan roots the volume declared, exactly the failure the root-set arm exists to catch: a totality walker whose roots miss a whole domain directory does not report a gap, it reports SUCCESS. ⚠ It is the same fork the TRADE-partnerships row names as its second half, so the checklist had seen it while the idiom scan could not',
     closeOwed: 'grade a contest entry against the contest FLIP, which is the same close the trade-partnership row owes; the two rows close together or not at all',
   }),
+  fork({
+    forkId: 'HBF-33', module: 'src/domain/worldPulse/informationNews',
+    symbol: 'informationReceipt', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'a keyed race over receipt prose pools in the INFORMATION registry, and it is HBF-07\'s TWIN rather than merely its lookalike. IN-1c-a mints the estate\'s fifth phrased-kind registry family, and this leaf\'s own source comment records the pick as THE KEYED PICK, copied from grammarNews.js, cured for the same recorded reason; it matches the identical KEYED_RACE signature (hash01) that discovered HBF-07. ⭐ It therefore takes HBF-07\'s disposition rather than a fresh reading: a prose pick is very likely NOT a decision fork, but that is a reading rather than a measurement, and this wave does not make it either. ⚠ Filing STAY here on the strength of the pool being annex-verbatim would rule, for INFORMATION alone, the exact question HBF-07 left open for GRAMMAR',
+    closeOwed: 'establish whether a receipt pool pick is a decision at all; if it selects prose rather than an act, this row becomes STAY, and no habit load may ever tilt what the world SAYS about an act it did not choose. ⚠ This is HBF-07\'s question over grammarReceipt, word for word, so the two rows close TOGETHER or not at all: one answer about prose picks cannot be true for GRAMMAR and false for INFORMATION',
+  }),
   // ── ROWS THAT ARE BOTH SIGNATURE-DISCOVERED AND OWNER-NAMED ───────────────────
   fork({
     forkId: 'HBF-17', module: 'src/domain/worldPulse/settlementStrategy',

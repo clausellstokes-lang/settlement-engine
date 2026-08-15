@@ -9,6 +9,16 @@
     "notBurnedDown": "The 23 modules and the one flag are INVENTORIED, not repaired. Writing their lit walkthroughs is a separate wave; this lane restores the guard, it does not clear the habitat. The list is SHRINK-ONLY: the walker reds if a name gains coverage and is not struck (an un-banked win) exactly as it reds if a new name appears.",
     "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef"
   },
+  "amended": {
+    "at": "22cedb1b0dcc00fbd217f5b3b6312b6394f2f767",
+    "on": "2026-08-15",
+    "by": "lane TE14, the IN-1C-A terminal, under OWNER_DECISION_QUEUE.md \u00a785.2",
+    "what": "ONE entry added: informationReceiptPools. The list grows 23 -> 24, and this block is the reason that growth is a REGISTRATION rather than a silent re-record.",
+    "why": "\u26d4 A DELIBERATE, VETOABLE ADMISSION OF DEBT, RULED BY THE CHAIR RATHER THAN TAKEN BY THE LANE. IN-1c-a mints the estate's FIFTH phrased-kind registry family, and informationReceiptPools.js is its annex-verbatim pool leaf: nine mirror_standing_line variants, ZERO imports, and no standing flag-ON lit proof of its own. The module is genuinely DARK at this landing, reached through informationNews.js's registry rather than driven by a lit walkthrough, so an inventory row is the honest record and a coverage claim would be a false one. \u26d4 It was NOT taken as an implementer's convenience: this file is named in IN-1C-A's INDEX keep-out cell AND in the packet's \u00a714 STOP list, the terminal STOPPED on it, and \u00a785.2 is the ruling that released it.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms computation, never transcribed from a review: at base d5a6c009 the RATCHET (modules) arm is GREEN at 23 names; at I1 22cedb1b and at this terminal it reports those identical 23 PLUS informationReceiptPools. The name's spelling and its position between envoyInterceptionStage and lineageNews are taken from that output, which is the walker's own order.",
+    "notBurnedDown": "informationReceiptPools is INVENTORIED, not repaired. Writing its lit walkthrough is a separate wave and IN-1c-b is the natural home. The list stays SHRINK-ONLY: strike this name the moment a lit proof lands, in that same commit.",
+    "law": "\u2b50 THE FIRST PRICED INSTANCE OF THE REGISTRY-MINT TWO-OBLIGATION LAW (\u00a785.4): a registry family that mints a seeded pick AND a pool module costs TWO estate-wide census rows, this one and a habitForkRegistry.js classification row (HBF-33). Neither was priced in IN-1C-A's packet, and both were found only by the full gate. A compiler prices both up front."
+  },
   "mechanisms": [
     "applyWorldPulseBetrayal",
     "applyWorldPulseFactionRoster",
@@ -20,6 +30,7 @@
     "envoyErrandEvidence",
     "envoyErrandParlay",
     "envoyInterceptionStage",
+    "informationReceiptPools",
     "lineageNews",
     "npcDmVerbAuthority",
     "npcDmVerbRecords",

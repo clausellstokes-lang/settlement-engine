@@ -94,7 +94,7 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
  * the argued-roster idiom, and it is why the constant is a COUNT rather than a list: a list
  * would restate what the registry already answers.
  */
-const DEFER_CEILING = 29;
+const DEFER_CEILING = 30;
 
 /** The named-domain checklist's row count, asserted rather than read off. */
 const NAMED_DOMAIN_ROWS = 14;
