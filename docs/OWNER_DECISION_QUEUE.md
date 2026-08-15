@@ -4125,3 +4125,44 @@ before you do the full soak and tune."**
    the no-push-while-executor-holds-slot law, verified by ls-remote
    sha-for-sha, PR-updated per the §71.3 cadence. Only after that
    receipt does the full soak begin.
+
+## §110 · cs-a COLLECTED RED-AND-LAWFUL — THE DECLARED-SHIFT
+## RE-RECORD LAW AMENDED (2026-08-15, chair, vetoable; evidence
+## laneTE20-receipt.md, 33 KB)
+
+1. **cs-a is COLLECTED, UNEXPOSED pending an honest green**: all four
+   members landed (validator 70/0 own-shell at the terminal); the
+   gate's red is FOUR declared-shift golden families (enumerated,
+   arm-checked — dormancy contracts and anti-vacuity green, only
+   projection hashes moved) plus ONE unmasked real defect. The
+   within-train staged promotion was proven necessary by
+   counterfactual. **The gate also caught a feature destruction no
+   battery saw** — CS-A4's specified cure destroyed WR-7b's envoy
+   carried-terms; the two-guard cure with per-guard mutants is
+   SIGNED.
+2. **THE FORK IS RULED (a)**: `observanceLabel` had NO seeding path
+   of its own — the "staleness" the pin observed was churn residue
+   from the very bug cs-1 cured. The cultural feeder gets its own
+   seeding path as **CS-B0**, the pin restored unchanged;
+   re-pointing (deleting a landed feature's coverage) refused;
+   truncating CS-A2 refused (the cure is signed and correct, the
+   defect downstream).
+3. **⭐ §72.3 IS AMENDED — the declared-shift/zero-banking collision
+   resolved**: declared-shift goldens RE-RECORD AT THE SHIFTING
+   TRAIN'S OWN TERMINAL, the declared-shift table quoted in the
+   re-record commit (never silent — the table IS the declaration);
+   THE ONE REGEN remains the sole re-record for FLAG-LIGHTING
+   shifts. Deferring to the regen would leave the gate red for every
+   intervening train — an unpriced consequence that would poison the
+   gate as an instrument, and banking has no door by §95.3.
+4. **Ratified**: CS-A4's kill of the battle-per-tick pathology (the
+   landed fixture minted a field battle EVERY tick against a beaten
+   recalled column — a real long-standing simulation bug, exactly
+   the class the batch existed to cure); CS-A3 re-keyed on DEFEAT
+   after its two-arm shape was refuted by four byte-identical
+   variant trees; the four refuted compile figures (re-measurement
+   law working — GEN.M6 line-neutral, the round4 separation
+   1.364e-4 binding the pin); the capsule refusal (no invented
+   figures under a red ratchet). J-TE20-1..10 SIGNED. TE20's
+   continuation runs cs-b as CS-B0 + the plan's train two + the
+   amended-law re-record; BOTH trains expose at its green terminal.
