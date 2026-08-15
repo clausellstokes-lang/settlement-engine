@@ -4500,3 +4500,31 @@ The charter lane received the addendum in flight.
    legal/product-tail items, parked with the §71.2 family. tm-core
    slots before the diagnostic soak; the analytical surfaces trail
    per §117.2.
+
+## §121 · THE V5 COUNSEL BANKED — AND THE TRANSCRIPT-REPLAY RECOVERY
+## (2026-08-15, chair; evidence laneV5C-V5-SPEC.md +
+## laneV5C-ASSET-MANIFEST.md + laneV5C-report.md)
+
+1. **The counsel pass is COMPLETE AND BANKED for the §119 post-tune
+   slot**: the consolidated V5 spec (structural layer cited
+   section-by-section, the D5 z-ordered composition law, the crop
+   law with per-asset crop-line-y, the 225° shadow split, the
+   pendant problem as FOUR TESTABLE CLAUSES, the vetoable
+   texture-budget re-ruling), the asset manifest consolidating the
+   already-executed program (13 generations of 2026-08-05, the
+   2026-08-06 cull KEEP-5/CUT-5/HOLD-2, model pin CONFIRMED
+   nano_banana_pro@4k by executed-call receipts over the cull
+   lane's label), and the v5-1..6 dark wave plan with proofs
+   confined to the four existing suites (no new test files). Only
+   THREE re-generations remain owner-owed, prompts ready-to-run at
+   the owner's leisure; six visual OQs bank for the post-tune
+   sitting.
+2. **The recovery is RATIFIED AS A CLASS**: the paused pass's /tmp
+   deliverables were PURGED; the lane recovered the chair-verified
+   spec BYTE-FAITHFULLY by replaying the recorded Write/Edit
+   operations from the old transcripts (8 writes + 59/59 edits,
+   zero anchor failures). Transcript-replay is the recovery method
+   of record for purged banked work; the corollary is LAW: each
+   family's scratchpad annex FOLDS at its first train (the standing
+   obligation, now with its own proven loss mode) — the wakeup
+   briefs carry the reminder.
