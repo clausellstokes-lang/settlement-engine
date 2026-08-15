@@ -3490,3 +3490,38 @@ product thesis, and the constitution held under measurement.**
    POP-F dispatched (POP-1's LG-seam verification is its sharpest
    obligation — fourteen LG waves hang on it); INT → WY → tails
    remain.
+
+## §92 · THE POP ROUND ACCEPTED — THE CERTIFICATION-PATTERN STANDING
+## CURE, AND THE LG BLOCKAGE NARROWED (2026-08-15, chair, vetoable;
+## evidence lanePOPF-round.md + lanePOPF-report.md, base sealed
+## unmoved at `a6fd6395`)
+
+1. **The §70.4 stamp is ACCEPTED**: absorption 18/26 + 8 structural
+   rows (POP is the WF case — no rulings surface existed; the eight
+   are SIGNED here per the §78/§91 mechanism); voided rows 8 intact /
+   1 superseded-as-predicted / 0 verdict changes over 65 compared
+   blobs; law pass 5 MATERIAL / 9 DRIFT / 10 HOLDS. Cures
+   C-POPF-1..8 are SIGNED as compile obligations, headed by
+   **C-POPF-2 — THE RECEPTION CONTRACT**: POP-1's §6 contract now
+   specifies exactly what §46c's journey fates consume (inputs,
+   refusal-by-suspicion, wartime relaxation, caravan class-intake,
+   and the flag-conjunction ordering LG's waves left undeclared).
+2. **⭐ THE CERTIFICATION-PATTERN STANDING CURE**: the exact 20↔20
+   bijection (`subsystemRowsVirtual.test.js:407`) has now killed the
+   own-lane certification design in THREE volumes (WC-0E's F-1, EP's
+   J-EP-1, POP's F-1) — all family volumes authored before that pin
+   are RULED SUPERSEDED on their certification/flag sections: the
+   in-file pattern + the priced §49/§50 bill is LAW, and the
+   remaining rounds (INT/WY/tails) VERIFY instance application
+   rather than re-discover the class.
+3. **⭐ THE LG BLOCKAGE IS NARROWED (F-3)**: LG Q3's "POP's cured
+   shape when POP-0/1 lands" is a PHANTOM deliverable — §66.1 proved
+   the scalar is schema-canonical; **LG-2's preflight RE-POINTS to
+   the scalar and waits on nothing**. LG-9..12 still wait on POP-1
+   itself, now with C-POPF-2 as their exact consumption seam; POP-1
+   lands the TIER_POP refusal pin instead of the phantom. The
+   round's self-correction (the caravan-token narrowing) is ratified
+   as the honesty practice it is.
+4. POP is STAMPED. Rounds remaining: INT-F and WY-F dispatched in
+   parallel (WY-F additionally executes the four chair-owed WY
+   groundings including XLS-4's producer trace); tails last.
