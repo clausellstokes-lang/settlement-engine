@@ -2098,6 +2098,10 @@
   }
  },
  "meta": {
+  "meta:relationship-spelling-single-home": {
+   "kind": "rationale",
+   "rationale": "The RELATIONSHIP-SPELLING single-writer arm of tests/lint/implicitNeutralSingleSource.test.js (RN-A1, ODQ 64.1/64.4). That file's own entry above is spent on the NEW-minter plant ('neutral-neighbour/second implicit minter') and the schema allows one label per entry, so this SECOND independent invariant needs its own key -- the case the manifest's _doc names exactly. WHY IT DEFERS TO RATIONALE RATHER THAN kind:'mutation'. Promotion needs a standing plant in scripts/mutation-sweep.sh, and validating a plant means EXECUTING the sweep, whose revert is `git checkout -- <file>` against the live worktree (mutation-sweep.sh lines 35 and 131). This program's shared-tree protocol forbids the entire checkout family outright, so no build lane may run the sweep on this tree -- the same reason already recorded at sp-c-posture-controls-executed-2026-08-06. THE CONTROL WAS NEVERTHELESS EXECUTED AT BUILD TIME, 2026-08-15, planted and restored from a cp backup verified byte-identical by `cmp` in the same shell (never the checkout family): a second frozen spelling table ({ alliance: 'allied', tributary: 'vassal' }) appended to src/domain/worldPulse/relationshipHierarchy.js reds the single-home arm BY NAME and nothing else -- 1 failed | 5 passed -- which is the tight attribution a mutant is for. PROMOTION PATH, NAMED: run that same plant from CI or a dedicated single-owner checkout; it needs no other port's file and so cannot red a neighbouring lane. The arm also carries its own guard-the-guard non-vacuity assertions (the home must itself match the signature, and must match ALL of them), so a signature set that rotted to nothing reds rather than passing empty."
+  },
   "meta:eslint-determinism-domain-wallclock": {
    "kind": "mutation",
    "label": "determinism/domain new Date()",

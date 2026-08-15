@@ -76,3 +76,110 @@ describe('implicit neutral neighbour — single writer (effectiveNeighbours.js)'
     ).toEqual([]);
   });
 });
+
+// ── RN-A1: THE RELATIONSHIP-SPELLING SINGLE-WRITER LAW (ODQ §64.1/§64.4) ─────
+
+/**
+ * The law one level up from the guard above.
+ *
+ * The arm above says an implicit-neutral READING may never fork into a second,
+ * drifting implementation. RN-A1's law says the relationship-SPELLING reading may
+ * never fork into a second, drifting TABLE: `canonicalRelationship.js` is the single
+ * HOME for every map from a legacy or synonym spelling onto a canonical relationship
+ * label, and it hosts one table per plane (regional + relationship-state) side by
+ * side rather than merged.
+ *
+ * SCAN SIGNATURE (DECLARATION shapes only, never reads): a spelling→label pair as it
+ * appears in an object literal, e.g. `alliance: 'allied'`. A consumer that READS a
+ * label (`if (type === 'allied')`) carries no colon-quote pair and does not match, so
+ * ordinary relationship logic is free.
+ *
+ * ⭐ THE ROSTER WAS ASKED OF THE CORPUS, NOT GUESSED. These signatures were measured
+ * against all of `src/` before they were written here: five files matched at RN-A1's
+ * base, and four match after the relocation.
+ *
+ * CANNOT-CATCH (accepted, and the same class the guard above records): a fold
+ * expressed as control flow rather than a table — `k === 'trade_partners' ? …` — has
+ * no object-literal pair and cannot match. `generosityGate.js` is exactly that shape,
+ * which is why it is NOT on the banked roster below; its fold is arm B1's row.
+ */
+const SPELLING_HOME = 'src/domain/relationships/canonicalRelationship.js';
+
+const SPELLING_TABLE_SIGNATURES = [
+  /['"]?\balliance['"]?\s*:\s*['"]allied['"]/,
+  /['"]?\bally['"]?\s*:\s*['"]allied['"]/,
+  /['"]?\btrade['"]?\s*:\s*['"]trade_partner['"]/,
+  /['"]?\btrade_partners['"]?\s*:\s*['"]trade_partner['"]/,
+  /['"]?\boverlord['"]?\s*:\s*['"]vassal['"]/,
+  /['"]?\btributary['"]?\s*:\s*['"]vassal['"]/,
+  /['"]?\bsubject['"]?\s*:\s*['"]vassal['"]/,
+  /['"]?\benemy['"]?\s*:\s*['"]hostile['"]/,
+  /['"]?\bwar['"]?\s*:\s*['"]hostile['"]/,
+  /['"]?\bcoldwar['"]?\s*:\s*['"]cold_war['"]/,
+  /['"]?\bcriminal_corridor['"]?\s*:\s*['"]criminal_network['"]/,
+  /['"]?\bsmuggling['"]?\s*:\s*['"]smuggling_partner['"]/,
+];
+
+/**
+ * ⛔ THE BANKED SHIM INVENTORY — SHRINK-ONLY, EXACT-SET, NEVER GROWS.
+ *
+ * Three modules still carry their own private spelling fold. RN-A1 enumerates them as
+ * BANKED DEBT rather than re-pointing them, which is what keeps that member at two
+ * modified production files; re-pointing any one of them is a later act that pays the
+ * §95.2 sweep for the row it burns.
+ *
+ * The assertion below is EXACT-SET in both directions, and that is deliberate. A `<=`
+ * ceiling would let a cure go unbanked: when a shim is re-pointed this test REDS and
+ * demands its line be deleted here, so the win is locked in the diff instead of
+ * becoming invisible headroom. That is the sizeBaseline honesty idiom, applied to
+ * spelling tables.
+ */
+const BANKED_SPELLING_SHIMS = Object.freeze([
+  'src/domain/events/mutateWorld.js',
+  'src/domain/regionalGraph.js',
+  'src/domain/worldPulse/canonRelationshipImpact.js',
+]);
+
+/** @param {string} file @returns {boolean} */
+function declaresSpellingTable(file) {
+  const src = stripComments(readFileSync(join(REPO, file), 'utf8'));
+  return SPELLING_TABLE_SIGNATURES.some((re) => re.test(src));
+}
+
+describe('relationship spelling tables — single home (canonicalRelationship.js)', () => {
+  it('the home itself matches the signature (guard non-vacuity)', () => {
+    // Without this, a scan whose signatures had all rotted would report an empty
+    // offender list and pass while enforcing nothing.
+    expect(declaresSpellingTable(SPELLING_HOME)).toBe(true);
+  });
+
+  it('the home hosts BOTH plane tables — one home is not one table', () => {
+    const src = stripComments(readFileSync(join(REPO, SPELLING_HOME), 'utf8'));
+    const matched = SPELLING_TABLE_SIGNATURES.filter((re) => re.test(src));
+    expect(
+      matched.length,
+      'the home stopped carrying both plane tables. RN-A1 put the relationship-state'
+      + ' plane table BESIDE the regional one; if one vanished, either it was merged'
+      + ' (arm B1, owner-gated) or it drifted back out to another module.',
+    ).toBe(SPELLING_TABLE_SIGNATURES.length);
+  });
+
+  it('no file outside the home and the banked shims declares a spelling table', () => {
+    const declarers = sourceFiles().filter(declaresSpellingTable).sort();
+    expect(
+      declarers,
+      'a relationship-spelling table was declared outside its single home.'
+      + ` Declare it in ${SPELLING_HOME} and import it, or — if this is a cure that`
+      + ' RETIRED a banked shim — delete that shim from BANKED_SPELLING_SHIMS in the'
+      + ' same commit, because this inventory only ever shrinks.',
+    ).toEqual([SPELLING_HOME, ...BANKED_SPELLING_SHIMS].sort());
+  });
+
+  it('every banked shim is real — the inventory cannot hide a stale row', () => {
+    // An entry naming a file that no longer folds spellings would silently reserve a
+    // slot for a future offender. Each row must still be a genuine, live shim.
+    for (const shim of BANKED_SPELLING_SHIMS) {
+      expect(declaresSpellingTable(shim), `${shim} no longer declares a spelling table — delete its banked row`).toBe(true);
+    }
+  });
+});

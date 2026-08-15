@@ -10,7 +10,13 @@
  * a 2-module cycle. These are all PURE (no rng, no Date, no worldPulse imports),
  * so hoisting them into this leaf lets both modules depend DOWNWARD on it. No
  * behavior change: definitions are moved verbatim.
+ *
+ * RN-A1 gives this module its ONE import: the relationship plane's spelling table,
+ * re-exported from `../relationships/canonicalRelationship.js`. That module is itself
+ * a zero-import pure leaf, so the edge is strictly DOWNWARD and no cycle is possible;
+ * the "no rng, no Date, no worldPulse imports" property above is unchanged.
  */
+import { RELATIONSHIP_PLANE_ALIASES } from '../relationships/canonicalRelationship.js';
 
 /** @param {number} value @returns {number} */
 export const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
@@ -109,22 +115,40 @@ export const RELATIONSHIP_DEFAULTS = {
   },
 };
 
-/** @type {Record<string, string>} */
-export const RELATIONSHIP_TYPE_ALIASES = {
-  trade: "trade_partner",
-  alliance: "allied",
-  ally: "allied",
-  war: "hostile",
-  enemy: "hostile",
-  subject: "vassal",
-  tributary: "vassal",
-  criminal_corridor: "criminal_network",
-};
+/**
+ * The relationship plane's spelling table, RE-EXPORTED from its single home.
+ *
+ * RN-A1: the literal moved to `../relationships/canonicalRelationship.js` so that
+ * relationship spelling knowledge has ONE home and cannot fork into a second,
+ * drifting table. The name, the export and every one of its consumers are
+ * unchanged — this is a re-export, not a re-spelling.
+ *
+ * ⛔ It is re-exported rather than MERGED into the regional table beside it. The two
+ * planes disagree on 17 of a 40-input corpus deliberately (this one collapses
+ * war/enemy/subject/tributary onto RELATIONSHIP_DEFAULTS rows; the regional one keeps
+ * them as structural types), and merging their content is owner-gated.
+ *
+ * @type {Record<string, string>}
+ */
+export const RELATIONSHIP_TYPE_ALIASES = RELATIONSHIP_PLANE_ALIASES;
 
-/** @param {string} [type] @returns {string} */
+/**
+ * ⛔ AXIS-2 AND AXIS-3 POLICY STAY PER-PLANE, AND BOTH ARE LOAD-BEARING.
+ * This resolver ALWAYS lowercases (the canonical one preserves the original on a
+ * miss) and returns 'neutral' for a falsy input (the canonical one returns ''), and
+ * `region/graph.js`'s `if (liveType && …)` refresh guard and its falsy-type early
+ * return both read those behaviours. Unifying either MOVES GENERATED OUTPUT, unlike
+ * the table divergence, which is unreachable from generation.
+ * @param {string} [type] @returns {string}
+ */
 export const normalizeRelationshipType = (type) =>
   RELATIONSHIP_TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
 
+/**
+ * ⛔ REFERENTIALLY IDENTICAL, NOT MERELY EQUIVALENT. `ensureRelationshipState` below
+ * calls both spellings in one expression; two separately constructed functions would
+ * satisfy every value test and break this identity silently. Pinned by name.
+ */
 export const normalizeType = normalizeRelationshipType;
 
 // Major relationship changes need a longer-lived source than the rolling

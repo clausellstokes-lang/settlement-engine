@@ -8,20 +8,39 @@ const SYMMETRIC_TYPES = new Set([
   'criminal_network',
 ]);
 
-// ── Canonical relationship-label normalizer ─────────────────────────────────
+// ── THE HOME OF RELATIONSHIP SPELLING KNOWLEDGE ─────────────────────────────
 //
-// ONE alias table shared by every regional system (lib/relationshipGraph,
-// domain/regionalGraph, domain/region/graph) so a label authored as 'ally',
-// 'overlord', or the legacy plural 'trade_partners' resolves to the same
-// canonical base label everywhere instead of silently drifting in one
-// subsystem. Each subsystem still maps FROM this canonical label to its own
-// effect profile.
+// This file is the SINGLE HOME for relationship spelling knowledge: every alias
+// table mapping a legacy or synonym spelling onto a canonical relationship label
+// is declared HERE. `tests/lint/implicitNeutralSingleSource.test.js` enforces it
+// as a single-writer law over a declaration-shaped scan of all of `src/`, with
+// the remaining private folds enumerated there as a shrink-only banked inventory.
 //
-// This table is CROSS-VOCAB-SAFE: it only collapses spelling/synonym variants
-// onto a base label that every consumer already recognizes. It deliberately
-// does NOT collapse 'smuggling_partner' → 'criminal_network', because
-// 'smuggling_partner' is the CANONICAL term in the regional structural vocab
-// (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
+// ⛔ ONE HOME IS NOT ONE TABLE. There are TWO — one per plane — and they are
+// deliberately NOT merged:
+//
+//   RELATIONSHIP_LABEL_ALIASES  the REGIONAL plane (lib/relationshipGraph,
+//     domain/regionalGraph, domain/region/graph). STRUCTURAL vocabulary: it
+//     keeps 'war', 'subject' and 'tributary' as themselves, because the regional
+//     graph carries them as first-class types.
+//   RELATIONSHIP_PLANE_ALIASES  the RELATIONSHIP-STATE plane (worldPulse).
+//     EFFECT-PROFILE vocabulary: it collapses those same three onto the keys
+//     RELATIONSHIP_DEFAULTS actually carries ('hostile', 'vassal'), because a
+//     plane that cannot find a defaults row has no numbers to apply.
+//
+// The two resolvers disagree on 17 of a 40-input corpus, ON PURPOSE. An
+// exact-equality identity pin in `tests/domain/regionalNeighbourSeam.test.js`
+// holds that divergence at exactly 17, so a later cure cannot quietly converge
+// the planes. Merging their CONTENT is owner-gated (ODQ §64.2) and is not this
+// file's to do; hosting them side by side is what makes this file the one home.
+//
+// Each subsystem still maps FROM its canonical label to its own effect profile.
+//
+// Both tables are CROSS-VOCAB-SAFE: each only collapses spelling/synonym variants
+// onto a base label its own consumers already recognize. The regional table
+// deliberately does NOT collapse 'smuggling_partner' → 'criminal_network',
+// because 'smuggling_partner' is the CANONICAL term in the regional structural
+// vocab (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
 // canonicalPropagationLabel (see PROPAGATION_ALIASES below).
 /** @type {Readonly<Record<string, string>>} */
 const RELATIONSHIP_LABEL_ALIASES = Object.freeze({
@@ -55,6 +74,37 @@ export function canonicalRelationshipLabel(label) {
   const raw = String(label || '').trim();
   return RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
 }
+
+/**
+ * The RELATIONSHIP-STATE plane's alias table — the second table this home hosts.
+ *
+ * Consumed by `src/domain/worldPulse/relationshipState.js`, which re-exports it as
+ * `RELATIONSHIP_TYPE_ALIASES` and builds `normalizeRelationshipType` over it. It lives
+ * here rather than there so that spelling knowledge has ONE home; it is a separate
+ * export rather than a merge because the two planes legitimately disagree.
+ *
+ * ⛔ WHERE IT DIVERGES FROM THE REGIONAL TABLE ABOVE, AND WHY THAT IS CORRECT:
+ *   war, enemy   → 'hostile'   the state plane needs a RELATIONSHIP_DEFAULTS row;
+ *   subject      → 'vassal'    the regional plane keeps these as structural types.
+ *   tributary    → 'vassal'
+ *   criminal_corridor → 'criminal_network'  (both planes agree here)
+ * And where the regional table folds and this one does NOT: 'trade_partners',
+ * 'allies', 'overlord', 'suzerain', 'liege', 'smuggling', 'coldwar', 'cold-war'.
+ * Folding those here is the LEGACY-LIVE content cure and is arm B1's owner-gated
+ * row — NOT this member's. The 17-of-40 divergence pin is what holds that line.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const RELATIONSHIP_PLANE_ALIASES = Object.freeze({
+  trade: 'trade_partner',
+  alliance: 'allied',
+  ally: 'allied',
+  war: 'hostile',
+  enemy: 'hostile',
+  subject: 'vassal',
+  tributary: 'vassal',
+  criminal_corridor: 'criminal_network',
+});
 
 // Matrix/channel-bundle vocabulary: canonical labels that have NO row in the
 // propagation matrix (lib/relationshipGraph PROPAGATION_MATRIX) map onto the
