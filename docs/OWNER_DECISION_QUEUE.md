@@ -2116,3 +2116,31 @@ first in ranking but nothing excluded:
 The chair's synthesis at closure covers ALL fourteen, coherence first.
 Findings register incremental in the ledger; Phase-V verification and
 Phase-F dispositions unchanged.
+
+## §52 · THE WC CURES ARE RULED; WC-0 OPENS (2026-08-16 ~03:20, chair,
+## vetoable; evidence in laneWCC-cures.md + laneWCC-report.md)
+
+1. **All four cures SIGNED as architected-and-held** (each passed its §48
+   re-sweep; candidate 1 of the C3 arm was refuted by its own re-sweep and
+   correctly discarded — the loop working): the match-counting fence
+   signature; the five-member TERM_FAMILIES literal (never the landing
+   record) with the inertness pin re-aimed; the disjoint GUARD/CONTROL
+   pools for C3; the LANDS correction (drop the CREATE HB-1 already made;
+   keep the one genuine C3-fence CREATE).
+2. **The two NEEDS-CHAIR arms RULED**: the six house-voice lines are
+   corpus authoring at WC-0's compile, chair-signed there (the §47 O-6
+   pattern). The C3 CONTRACT: candidate 2's disjointness arm is SIGNED, and
+   the two MEASURED BREACHES AT HEAD (habitCurve.js + espionageDoctrine.js
+   private law-word tables, invisible to the name-keyed fence) land as
+   FROZEN LEGACY ROWS, shrink-only, enumerated by exact identity (the M4
+   pattern) — the class is closed at two, never grandfathered silently.
+3. **⛔ THE WC-4 FENCE-KEY DEFECT IS DOCKETED as its own §48 cure**: both
+   lawful widening directions of the landed HB-1 fence are closed at HEAD
+   (the spread-derived ALL_MOVE_TOKENS leaves no literal home). It blocks
+   WC-4, not WC-0; its cure-architecture rides the next cure slot.
+4. The TERM_CATALOG inertness re-grounding (virtual-key absence, not the
+   volume's stated reason) is RECORDED in the annex; the amended flag facts
+   (manifest 20; the three flag-mint obligations bind WC-0) carry.
+5. **WC-0 IS COMPILE-READY** on: the WV annex + the WCC cures + the
+   recovered 22 rulings + R35's paste-ready C1 row. The compile prices the
+   three-obligation flag law and the frozen-legacy-2 rows.
