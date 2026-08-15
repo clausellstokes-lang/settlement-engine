@@ -2360,3 +2360,18 @@ EXECUTION SERIALIZES behind INT-3B (one engine worktree).
    the executor re-derives the base tuple and applies deltas. est-1 stays
    THIRD in the §59.6 executor queue. Ratchet trajectory 16 → 12 across
    the train.
+
+## §61 · THE RE-SWEEP CADENCE BECOMES LAW (2026-08-16 ~12:00, chair ruling
+## on the owner's question, vetoable)
+
+The SPV loop's four re-verification levels, the fourth now made standing:
+(1) CURE RE-SWEEPS — every architected cure re-swept before banking (§48,
+existing, has refuted its own candidates); (2) CONSUMER-SIDE LAZY
+RE-VERIFICATION — voided annex rows re-verified at use under the staleness
+law (existing, has fired correctly); (3) SELF-SWEEP of fresh volumes
+(existing, LG); (4) ⭐ NEW — THE POST-LANDING INCREMENTAL RE-SWEEP: every
+train landing's chair collection includes re-verification of the affected
+family's voided annex rows (only the rows whose subject files the landing
+touched), so annexes stay continuously green rather than rotting until a
+consumer trips. First application: the INT-3B landing. A landing collection
+that skips the increment is incomplete.
