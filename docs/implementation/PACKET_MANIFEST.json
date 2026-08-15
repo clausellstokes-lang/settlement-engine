@@ -2714,6 +2714,46 @@
         ["npm", "run", "typecheck:ratchet"],
         ["npm", "run", "typecheck:domain:strict"]
       ]
+    },
+    {
+      "id": "INT-3B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/INT-3B.md",
+      "verifiedBase": "fc8451c44c21032009ac9dfba8c8589ac7eb6de0",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/emigreErrand.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/envoyErrandVocabulary.js" },
+        { "action": "TEST", "path": "tests/lint/errandConsumerRegistry.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "CREATE", "path": "tests/domain/emigreErrand.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/emigreErrand.js", "symbol": "export function emigreErrandFor(" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "export function mintErrandSpine(" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "export const ERRAND_CONSUMERS" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "LIT: errandSpineEnabled true (a literal) plus a priceable pair returns reason 'spine', ok true, and a plan whose single outbound leg carries the caller's own depart and arrival ticks unchanged — the main-behaviour control every fence below is anchored against" },
+        { "id": "A2", "case": "FENCE 1, dormancy: with the flag absent the same call returns reason 'dark', ok true, an empty field block, and no purpose class written anywhere — asserted only AFTER A1 has shown the lit path writes" },
+        { "id": "A3", "case": "FENCE 2, absent vs false: errandSpineEnabled false (a literal) and the key absent produce byte-identical answers, so ABSENT and FALSE are one state at the decision site" },
+        { "id": "A4", "case": "the road is not the flag's to change: an unpriceable plan returns reason 'invalid_route_plan' identically lit and dark, refused before the gate" },
+        { "id": "A5", "case": "THE REGISTRY IS TRUE: the ERRAND_CONSUMERS row whose consumer is 'ambitious' reads built true, purposeClass 'factional', and a module that resolves to an existing file" },
+        { "id": "A6", "case": "THE IDENTITY CLAIM, no caller is wired: a source walk of all of src/ finds zero call sites of the export outside its own module, with the loop running INSIDE one named test rather than as a generator" },
+        { "id": "A7", "case": "ZERO AUTHORED NUMBERS: the module's executable source, comments stripped, contains no numeric literal at all — this member spends nothing the chair has not signed" },
+        { "id": "A8", "case": "THE ONE-READER LAW FROM THE INSIDE: the module's executable source never spells purposeClass, declaredPurpose or truePurpose as a member read, a computed read, or a binding-pattern element; the class rides the call as a quoted literal" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/emigreErrand.test.js"],
+        ["npx", "vitest", "run", "tests/lint/errandConsumerRegistry.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/namedPersonTransitTotality.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
     }
   ]
 }
