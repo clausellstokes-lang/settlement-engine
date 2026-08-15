@@ -2717,7 +2717,7 @@
     },
     {
       "id": "INT-3B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/INT-3B.md",
       "verifiedBase": "fc8451c44c21032009ac9dfba8c8589ac7eb6de0",
       "changeManifest": [

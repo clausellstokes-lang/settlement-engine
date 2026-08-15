@@ -1,7 +1,16 @@
 # Interior / INT-3B — the émigré mint seam (no flag, no ledger, no number)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/int-3b`, **ONE member**. Plan: `laneTC12-TRAIN-PLAN.md`.
+- **Landed:** `28d2824b488937e0b51fdd69920574aa2327f9fa`. Chain: promotion `8401efbc` →
+  this implementation commit → the terminal. ⛔ **THE IMPLEMENTATION COMMIT STOPPED BEFORE IT
+  LANDED, AND THE STOP WAS RATIFIED.** Mutant M2's declared SECOND conviction door — the
+  one-reader walker arm — was measured to SURVIVE, so lane TE12 refused to paper over it,
+  parked the green implementation at `refs/trains/int-3b-i1-stopped`, and reported.
+  `OWNER_DECISION_QUEUE.md` §58 ratifies that stop as correct procedure, dockets the detector
+  gap to the machinery queue (§58.3), and ORDERS THE RELAND AS-IS on the measured ground that
+  the refutation touches the GUARD's reach and never this member's behaviour. The commit
+  relanded byte-identical; only this packet's M2 claim was amended, in the terminal.
 - **Chair authority:** ⭐ **RULED — `OWNER_DECISION_QUEUE.md` §54.** The one-member
   REFUSED-IN-PART shape is SIGNED; the five beyond-annex refutations BIND; the quoted-literal
   `purposeClass`, the exact-path INTERIOR regex and the `builtModules`+`minters` exact pin are
@@ -150,7 +159,17 @@ the distinction by SUBJECT.
 war errand head, the pact proposals and the covert missions."* A fourth consumer reds both arrays
 and falsifies the title. **The flip alone is not the price; path 3 is.**
 
-### R-INT3B-5 (executed) — a NAMED CONSTANT for the purpose class would red the one-reader law
+### R-INT3B-5 (executed, and NARROWED at the reland) — a NAMED CONSTANT is an offender to the one-reader law's PATTERN, but only where no sibling brace nests
+
+⛔ **NARROWED BY EXECUTION AT THE RELAND (OQ §58.1/§58.3).** The four rows below were driven as
+FLAT snippets and every one of them still reproduces. What does NOT follow — and what the original
+heading claimed — is that a named constant in THIS MODULE would red the law: `readsByPattern` scans
+only INNERMOST brace groups (`/\{[^{}]*\}/g`), so the same offending element inside an object
+literal that CONTAINS a nested brace is invisible to it. This leaf's mint call carries a nested
+`routePlan`, so mutant M2 SURVIVED the walker (§10). The quoted literal is still the right and
+signed spelling — it is now the ONLY thing keeping the module clean, which is a stronger reason
+than the one this premise gave. The detector gap is docketed to the machinery queue; ZERO live
+evaders were measured estate-wide, so it is latent rather than live.
 
 `readsByPattern` matches any object-literal or binding element that IS one of
 `purposeClass|declaredPurpose|truePurpose`, optionally renamed **to an identifier**. Driven at the
@@ -163,7 +182,9 @@ FALSE  purposeClass: 'diplomatic'          ← GR-2's landed spelling, clean
 TRUE   const { purposeClass } = row;       ← the shorthand the law exists for
 ```
 
-⇒ **the class rides the mint call as a quoted literal, and the module defines no constant for it.**
+⇒ **the class rides the mint call as a quoted literal, and the module defines no constant for it** —
+and A8's positive pin `toContain("purposeClass: 'factional'")` is what actually holds it there,
+which is why that pin is the single door M2 is convicted through.
 
 ---
 
@@ -411,7 +432,7 @@ Every mutant is planted, executed, reverted, and never committed.
 | # | Mutant | Must red |
 |---|---|---|
 | **M1** | drop `purposeClass` from the mint call | **A1** (the class no longer resolves — `purposeClassOf` finds no mapping row for the free-form purpose and the mint refuses `invalid_purpose_class`) |
-| **M2** | spell the class as a module constant instead of a literal | **A8**, and — driven separately — `errandConsumerRegistry.walker.test.js`'s one-reader arm (R-INT3B-5) |
+| **M2** | spell the class as a module constant instead of a literal | **A8**, by its POSITIVE LITERAL PIN (`toContain("purposeClass: 'factional'")`) — a SINGLE-DOOR conviction. ⛔ **AMENDED AT THE RELAND (OQ §58.2).** This row originally also claimed `errandConsumerRegistry.walker.test.js`'s one-reader arm, "driven separately", on R-INT3B-5. **That claim is STRUCK: executed, the walker arm SURVIVED M2** — `readsByPattern` scans only INNERMOST brace groups, so an offending element inside an object literal that CONTAINS a nested brace (this module's `routePlan`) is invisible to it. The flat spelling R-INT3B-5's table drove IS caught; this module's real shape is not. The detector gap is DOCKETED to the machinery queue (§58.3, ZERO live evaders measured — latent, not live) and was refused in-wave as a seventh path |
 | **M3** | flip `built` back to `false` while the module exists | `errandConsumerRegistry.walker.test.js` DIRECTION 2, by name |
 | **M4** | delete the exact-path regex from `LAYER_PATTERNS.INTERIOR` | `couplingInclusion.walker.test.js`'s new-unlayered-module arm **and** its exact-set equality |
 | **M5** | return `lit: minted.ok` instead of `minted.reason === 'spine'` | **A2** — a dark world answers `ok:true`, so the substitution reports a lit spine on a dark world |
@@ -424,6 +445,12 @@ Named here so its absence is a decision rather than a gap.
 
 ⚠ **M1 and M2 must be driven SEPARATELY through the composed predicate.** `readsAField` is a
 three-door disjunction, and this estate has measured a deleted door hiding behind a surviving one.
+⭐ **AND DRIVING THEM SEPARATELY IS EXACTLY WHAT CAUGHT THE OVERCLAIM.** Had M2 been driven only
+against the acceptance file it would have read as a clean two-door kill; driven against the walker
+as well, its second door was measured to SURVIVE, which is how the `readsByPattern` nesting gap was
+found at all. The method held even though the claim it tested did not — and the estate's own rule
+about a deleted door hiding behind a surviving one is the same shape one rung up: an ASSERTED door
+that never fires hides behind a real one just as well.
 
 ---
 
