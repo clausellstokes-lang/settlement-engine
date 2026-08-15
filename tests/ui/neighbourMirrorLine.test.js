@@ -33,8 +33,11 @@ import { afterEach, describe, expect, test } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
-import { NEIGHBOUR_MIRROR_HEADING, MIRROR_BAND_WORDS } from '../../src/domain/display/neighbourMirror.js';
+import {
+  NEIGHBOUR_MIRROR_HEADING, MIRROR_BAND_WORDS, neighbourMirrorLines,
+} from '../../src/domain/display/neighbourMirror.js';
 import { MIRROR_PERCEPTION_BANNED } from '../../src/domain/worldPulse/secondOrderBelief.js';
+import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
 import { useStore } from '../../src/store/index.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -121,6 +124,39 @@ function perceptionHits(text) {
     : words.has(banned)));
 }
 
+/**
+ * IN-1c-a: THE SENTENCE IS NO LONGER TRANSCRIBABLE, so it is DERIVED from the same read-model
+ * the component calls, over the same fixture the store is seeded with. Every presence and
+ * absence below reads against THIS rather than against a copied sentence — a transcription
+ * would have to be re-typed the day a chair annex act touched the corpus, and until somebody
+ * noticed, an absence pin would be passing because it named prose nothing renders.
+ * @returns {string} the standing line the lit fixture actually composes for Bramwell
+ */
+function composedLine() {
+  const [row] = neighbourMirrorLines({
+    worldState: {
+      tick: 12,
+      simulationRules: { secondOrderBeliefEnabled: true },
+      spatialLedgers: { disinfo: [PLANT] },
+    },
+    settlementId: 's',
+    counterpartIds: ['o', 'p'],
+    tick: 12,
+    nameFor: (id) => SAVED.find((entry) => entry.id === id)?.settlement.name || String(id),
+  });
+  return row.line;
+}
+
+/** The governed pool rendered under the interpolation the read-model supplies for this fixture. */
+function governedPool() {
+  const row = INFORMATION_KIND_REGISTRY.find((candidate) => candidate.kind === 'mirror_standing_line');
+  const interp = { band: MIRROR_BAND_WORDS.strong, counterpart: 'Bramwell' };
+  return row.pool.map((variant) => {
+    const raw = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+    return raw.charAt(0).toUpperCase() + raw.slice(1);
+  });
+}
+
 describe('C4 — the dark golden, driven over the rendered surface', () => {
   test('the pre-wave baseline is pinned by two independent measures', () => {
     // A control on the pin itself: a truncated or empty digest would let every
@@ -172,8 +208,13 @@ describe('C5 — the rendered-surface phrase scan, standing on a presence pin', 
     // the block must add real prose, and every absence in this describe stands on it.
     expect(text.length).toBeGreaterThan(darkText.length + 100);
     expect(text).toContain(NEIGHBOUR_MIRROR_HEADING);
-    expect(text).toContain(MIRROR_BAND_WORDS.strong);
-    expect(text).toContain('Bramwell has been shown');
+    // IN-1c-a: the standing sentence is now one of NINE authored variants, so the surface is
+    // pinned against the line the read-model actually composes for this fixture and against
+    // the governed pool that line must belong to. ⛔ Never a transcribed sentence: the corpus
+    // is the authority, and this file is not a second copy of it.
+    const line = composedLine();
+    expect(governedPool()).toContain(line);
+    expect(text).toContain(line);
   });
 
   test('the scanner itself CONVICTS — a mutant string carrying each banned form is flagged', () => {
@@ -206,7 +247,11 @@ describe('C6 (rendered half) — the DM expansion and the public-dossier boundar
     seedStore();
     const playerText = renderTab({ playerView: true }).textContent;
     // The LINE is a court's own bookkeeping and renders on both views…
-    expect(playerText).toContain('Bramwell has been shown');
+    expect(playerText).toContain(composedLine());
+    // …and the DM view drew the SAME sentence, which is the property the seed exists to hold:
+    // the seam moves the expansion and never the line, so a seed read off the row's own
+    // DM-nulled date would red here rather than silently giving two viewers two voices.
+    expect(dmText).toContain(composedLine());
     // …while the expansion is the only DM-gated half. The line above is the anchor.
     expectAbsentWithAnchor(playerText, 'DM truth', NEIGHBOUR_MIRROR_HEADING, 'player view keeps the line, drops the expansion');
   });
@@ -218,6 +263,9 @@ describe('C6 (rendered half) — the DM expansion and the public-dossier boundar
     // alive and populated, so the heading's absence is a suppression and not an
     // empty component.
     expectAbsentWithAnchor(publicText, NEIGHBOUR_MIRROR_HEADING, 'Neighbour Network', 'public dossier suppresses the whole block');
-    expectAbsentWithAnchor(publicText, 'Bramwell has been shown', 'Neighbour Network', 'public dossier carries no standing line');
+    // ⛔ RE-POINTED AT IN-1c-a, and the re-point is the point: this absence named a sentence
+    // the composer no longer writes, so it would have gone on passing forever while measuring
+    // nothing at all. It now names the line the lit fixture genuinely renders.
+    expectAbsentWithAnchor(publicText, composedLine(), 'Neighbour Network', 'public dossier carries no standing line');
   });
 });

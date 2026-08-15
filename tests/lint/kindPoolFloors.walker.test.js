@@ -66,6 +66,7 @@ import {
 } from '../../src/domain/worldPulse/eventProse.js';
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
+import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
 import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
 
 /**
@@ -84,6 +85,11 @@ const REGISTRIES = Object.freeze([
   ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY],
   ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
   ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY],
+  // IN-1c-a: the fifth FP registry family, and the estate's first ONE-ROW registry. Its single
+  // kind is a DOSSIER LINE with `section: null`, so it registers WITHOUT routing — which is why
+  // it moves REGISTERED_KIND_COUNT and the divergence identity below while leaving
+  // ROUTED_TOKENS exactly where it is.
+  ['INFORMATION', INFORMATION_KIND_REGISTRY],
 ]);
 
 /**
@@ -170,7 +176,12 @@ const ROUTED_TOKENS = 378;
 // +1 at GR-4b-ii-W2: the twelfth (`reaffirmed`), a `notable` row that DOES carry a desk —
 // the exact opposite of the row above it, and the reason both censuses move together here
 // while the difference below stays at 7.
-const REGISTERED_KIND_COUNT = 111;
+// +1 at IN-1c-a: `mirror_standing_line`, the whole of the estate's FIFTH registry family
+// (INFORMATION) and its first row. A `section: null` DOSSIER line rendered into the town
+// page's standing-line block, so it takes the same no-desk road `succession_question_open`
+// took: ROUTED_TOKENS holds at 378 while this figure moves, and the divergence below rises
+// by exactly one.
+const REGISTERED_KIND_COUNT = 112;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -179,10 +190,20 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
-    expect(REGISTRIES).toHaveLength(9);
+    expect(REGISTRIES).toHaveLength(10);
     for (const [name, rows] of REGISTRIES) {
-      expect(rows.length, `${name}: registry is empty`).toBeGreaterThanOrEqual(5);
+      expect(rows.length, `${name}: registry is empty`).toBeGreaterThanOrEqual(1);
     }
+    // ⭐ THE OLD BLANKET FLOOR OF FIVE IS KEPT AS AN EXACT EXCEPTION LIST RATHER THAN LOWERED
+    // FOR EVERYBODY. Every registry was multi-kind until IN-1c-a landed the estate's first
+    // deliberately ONE-ROW family (its two siblings have no honest producer at this base and
+    // re-file behind their own charter, so minting them now would register kinds whose pools
+    // can never render). Lowering the loop above to a bare non-emptiness check would have
+    // silently released the other NINE families from any width guard at all; naming the sole
+    // exception instead keeps all nine at five-or-more by exact equality AND makes a SECOND
+    // small family a visible, reviewed act rather than a number that quietly slipped.
+    expect(REGISTRIES.filter(([, rows]) => rows.length < 5).map(([name]) => name))
+      .toEqual(['INFORMATION']);
     expect(ALL_ROWS).toHaveLength(REGISTERED_KIND_COUNT);
     expect(REGISTERED_KINDS.size, 'two registries claim the same kind').toBe(REGISTERED_KIND_COUNT);
     expect(Object.keys(EXACT_SECTION)).toHaveLength(ROUTED_TOKENS);
@@ -322,9 +343,10 @@ describe('SP-E frequency-scaled floors — the unvoiced-token backlog', () => {
     // Every routed token is either registered or unvoiced, and the two partition the table.
     const routedAndRegistered = Object.keys(EXACT_SECTION).filter((t) => REGISTERED_KINDS.has(t));
     expect(routedAndRegistered.length + unvoiced.length).toBe(ROUTED_TOKENS);
-    // Seven registered kinds route by no EXACT_SECTION row (dossier lines and the GRAMMAR
-    // rows that file no desk; +1 at GR-4b-iii-b). Stated as a measurement so a kind that
-    // quietly LOST its routing is visible rather than absorbed.
-    expect(REGISTERED_KIND_COUNT - routedAndRegistered.length).toBe(7);
+    // Eight registered kinds route by no EXACT_SECTION row (dossier lines and the GRAMMAR
+    // rows that file no desk; +1 at GR-4b-iii-b, +1 at IN-1c-a's `mirror_standing_line`).
+    // Stated as a measurement so a kind that quietly LOST its routing is visible rather than
+    // absorbed.
+    expect(REGISTERED_KIND_COUNT - routedAndRegistered.length).toBe(8);
   });
 });

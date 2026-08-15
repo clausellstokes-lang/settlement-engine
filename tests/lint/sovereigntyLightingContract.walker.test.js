@@ -4251,8 +4251,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⭐ A SINGLE-MEMBER TRAIN BUYS A CENSUS WITH NO INTERIOR RED: the acceptance file and this
     //   re-derived tuple land in the SAME commit, so this walker is GREEN at every commit of the
     //   train — at P1 (docs-only), at I1 (both edits together) and at T (docs-only).
-    // 2429/366/2063/20115/5654 → 2430/366/2064/20123/5655.
-    files: 2430, parked: 366, credited: 2064, titles: 20123, suiteTitles: 5655,
+    // Prior row retained as a cross-contract ancestry pin: files: 2430, parked: 366, credited: 2064, titles: 20123, suiteTitles: 5655
+    // ⏱ TRAIN in-1c-a, IN-1C-A THE INFORMATION REGISTRY AND THE GOVERNED STANDING LINE (ONE
+    // member), 2026-08-15 — RE-DERIVED WHOLE at I1, which is this train's ONLY `tests/`-moving
+    // commit, so the terminal stays DOCS-ONLY and the base-state capsule regenerates in ONE
+    // commit. Never patched one figure at a time: all five were re-derived TOGETHER, in a
+    // single run, and the cause is named. ⚠ The five constants below were written as ONE tuple
+    // and the arm set went green in a single run — the only way a SEQUENCED census can be
+    // trusted, because it stops measuring at its first red figure and a green on arm 1 after a
+    // patch says nothing whatever about arms 2 through 5.
+    //   • The member creates ONE test file, tests/lint/informationKindPools.walker.test.js,
+    //     carrying ONE literal `describe` and EIGHT literal top-level `test` calls (the
+    //     packet's own registered shape, counted before it was written and measured after):
+    //     +1 file / +0 parked / +1 credited / +8 titles / +1 suite title.
+    //   • ⭐ THE OTHER TEN PATHS MOVE NO FIGURE, AND THAT WAS DESIGNED RATHER THAN LUCKY. The
+    //     two `src` CREATEs and the two `src` MODIFY/REGISTERs carry no titles at all; the four
+    //     `tests/` files this member AMENDS gain assertions and one RENAMED title inside cases
+    //     that already existed — tests/domain/neighbourMirror.test.js stays at twelve titles,
+    //     tests/ui/neighbourMirrorLine.test.js at eight, and the census counts titles rather
+    //     than their text. tests/helpers/receiptAnnex.js is a helper and registers nothing.
+    // ⭐⭐ THE EIGHT-TITLE SHAPE WAS CHECKED AGAINST THE COUNTER, NOT ASSUMED. The new walker
+    //   was FIRST written with NINE straight-line cases; the ninth was folded into the census
+    //   arm before this tuple was touched, because a member that moved `titles` by a figure its
+    //   packet did not predict is a STOP rather than an adjustment. The probe that measured it
+    //   was a console.log placed INSIDE this very test, above its first assertion, so it minted
+    //   no title and could not move what it was measuring; it was removed before this re-record.
+    // ⚠ PARKED IS UNCHANGED AT 366, and it is earned rather than lucky: all eight new titles are
+    //   string LITERALS in a straight-line registration inside ONE literal `describe`, so door 3
+    //   credits the file statically. ⛔ The sibling WR-10 walker this file's shape was copied
+    //   from carries THREE `test.each()` sites and is parked WHOLE for exactly that reason —
+    //   the template was copied, its table-driven registration deliberately was not.
+    // ⭐ A SINGLE-MEMBER TRAIN BUYS A CENSUS WITH NO INTERIOR RED: the walker file and this
+    //   re-derived tuple land in the SAME commit, so this walker is GREEN at every commit of the
+    //   train — at P1 (docs-only), at I1 (both edits together) and at T (docs-only).
+    // 2430/366/2064/20123/5655 → 2431/366/2065/20131/5656.
+    files: 2431, parked: 366, credited: 2065, titles: 20131, suiteTitles: 5656,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

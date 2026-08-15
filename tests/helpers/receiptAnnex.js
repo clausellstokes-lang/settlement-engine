@@ -57,6 +57,16 @@ export const GRAMMAR_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_GRAMM
  * rather than leaving it to be discovered when a future merge relocates a pool.
  */
 export const TRADE_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_TRADE.md', import.meta.url);
+/**
+ * The FP-INFORMATION annex (IN-1c onward). Added here for the third time rather than forked
+ * for the same measured reason: the address lie and the first-match hole are properties of
+ * the READER, so a fourth volume that copied the extractor would re-open both once per
+ * volume. Like the trade annex this one carries no one-kind-one-pool forward, so the legacy
+ * road below never runs for it — which the IN walker asserts POSITIVELY by pinning
+ * `from === 'information'`, rather than leaving it to be discovered when a future merge
+ * relocates a pool and the pin goes quietly stale.
+ */
+export const INFORMATION_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_INFORMATION.md', import.meta.url);
 const LEGACY_ANNEX = new URL('../../docs/content/RECEIPT_POOLS_LEGACY.md', import.meta.url);
 
 /** The forward left behind by the one-kind-one-pool merge, 2026-08-03. */

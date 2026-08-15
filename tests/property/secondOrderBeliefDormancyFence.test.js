@@ -197,6 +197,15 @@ describe('FENCE 3 — call-path dormancy, on a spy the leaf really goes through'
     // this fence now exists to catch, and an EMPTY list would mean the scan broke.
     expect(importers).toEqual(['src/domain/display/neighbourMirror.js']);
 
+    // ⚠ IN-1c-a MOVED THIS CALLER'S SENTENCE SOURCE AND DID NOT MOVE ITS CALL PATH, which is
+    // the whole reason the equality above is still exactly one element. The read-model now
+    // composes its standing line through the INFORMATION kind registry instead of a
+    // hand-written template, but the registry is imported by the READ-MODEL, not by the leaf:
+    // this scan is over the modules importing secondOrderBelief.js, and IN-1c-a adds none.
+    // A wave that gave the mirror a PULSE producer would add one, and that is the regression
+    // this fence exists to catch — so the clause is recorded here rather than left to be
+    // re-derived by whoever meets a two-element array first.
+    //
     // …and it is a RENDER-TIME read-model, not an engine path. The two properties that
     // make it one are measured rather than asserted: it never names the key (so it adds no
     // second gate), and it holds the identity check that yields nothing when dark.

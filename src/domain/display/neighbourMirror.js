@@ -36,7 +36,15 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { informationReceipt } from '../worldPulse/informationNews.js';
 import { MIRROR_UNKNOWN, mirrorInputsAt, secondOrderMirrorOf } from '../worldPulse/secondOrderBelief.js';
+
+/**
+ * The governed kind this read-model voices. IN-1c-a moved the sentence's SOURCE out of this
+ * file and into the INFORMATION corpus; the row it names files no Herald desk, because this
+ * line renders into the town page under the heading above and reaches no feed.
+ */
+const STANDING_LINE_KIND = 'mirror_standing_line';
 
 /** The section's own title. British spelling throughout, matching the mount file. */
 export const NEIGHBOUR_MIRROR_HEADING = 'What the neighbours have been shown';
@@ -127,14 +135,38 @@ function basisPhrases(basis) {
 
 /**
  * The sentence itself: who was shown what, how long ago, and whether we have gone quiet.
- * @param {string} counterpartName @param {string} band @param {string} staleness @param {boolean} sealed
+ *
+ * ── IN-1c-a: THE SOURCE MOVED, THE SENTENCE'S JOB DID NOT ──────────────────────────
+ *
+ * Through IN-1b this was ONE composed template, rendered on every town page in every campaign
+ * forever. It now draws from the governed INFORMATION corpus — nine authored variants, picked
+ * deterministically and stably per counterpart — which is the act CR-IN1B-1 deferred to IN-1c
+ * by name. The corpus is the authority; this function is the join.
+ *
+ * ⛔ THE FALLBACK IS TOTAL, AND IT IS THE LANDED SENTENCE RATHER THAN A BLANK. A pool that
+ * resolved to nothing must never render an empty dossier line: a line with one voice is worse
+ * than nine, and a line with NO voice is a defect. The composed template below is kept whole
+ * as that answer, which is also why both word maps stay live in production.
+ *
+ * ⚠ THE STANDING-SILENCE CLAUSE IS THIS FILE'S, NOT THE CORPUS'S. The annex authors nine
+ * STANDING sentences and authors no silence clause; a court's kept quiet is a second fact we
+ * already hold, so it is appended here exactly as it was before. Folding it into the pool
+ * would be an annex act and is not this wave's.
+ *
+ * @param {string} counterpartName @param {string} band @param {string} staleness
+ * @param {boolean} sealed @param {string} seed the campaign-stable pick key
  * @returns {string}
  */
-function standingSentence(counterpartName, band, staleness, sealed) {
+function standingSentence(counterpartName, band, staleness, sealed, seed) {
   const shown = wordOf(MIRROR_BAND_WORDS, band);
-  const when = wordOf(MIRROR_STALENESS_WORDS, staleness);
-  return `${counterpartName} has been shown ${shown}, ${when}.`
-    + (sealed ? ' Nothing has left our hand since.' : '');
+  // ⛔ `{season}` IS NOT SUPPLIED (CR-IN1C-2): this layer holds a tick and no calendar, and
+  // both roads to one cost more than this wave. Two authored variants name a season and are
+  // declared unreachable rather than quietly dropped from the corpus.
+  const receipt = informationReceipt(STANDING_LINE_KIND, seed, { band: shown, counterpart: counterpartName });
+  const composed = receipt
+    ? receipt.line
+    : `${counterpartName} has been shown ${shown}, ${wordOf(MIRROR_STALENESS_WORDS, staleness)}.`;
+  return composed + (sealed ? ' Nothing has left our hand since.' : '');
 }
 
 /**
@@ -178,7 +210,12 @@ export function neighbourMirrorLines({
       counterpartId,
       counterpartName,
       lastShownTick: dm ? finite(mirror.lastShownTick) : null,
-      line: standingSentence(counterpartName, band, staleness, mirror.sealed === true),
+      // ⛔⛔ THE SEED READS THE MIRROR'S DATE, NEVER THE ROW'S. The row nulls `lastShownTick`
+      // for a player viewer, so seeding off it would hand the DM and the player DIFFERENT
+      // variants of the same sentence. The seam moves the EXPANSION and never the line. No
+      // rng, no clock read, no store read: ids and a durable date the record already holds.
+      line: standingSentence(counterpartName, band, staleness, mirror.sealed === true,
+        `${selfId}:${counterpartId}:${finite(mirror.lastShownTick) ?? 'none'}`),
       staleness,
     }));
   }
