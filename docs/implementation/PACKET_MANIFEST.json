@@ -2947,14 +2947,15 @@
     },
     {
       "id": "EFF-M1B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M1B.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [
         { "action": "CREATE", "path": "scripts/premise-map.mjs" }
       ],
       "requiredSymbols": [
-        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" }
+        { "path": "docs/implementation/preambles/INFRA-PREAMBLE.md", "symbol": "# INFRA FAMILY PACKET PREAMBLE" },
+        { "path": "scripts/premise-map.mjs", "symbol": "function cmdScope(path, rowId, flags)" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "the seven proofs reproduce at this base: 0 1 0 1 0 0 1" },
@@ -2974,7 +2975,7 @@
     },
     {
       "id": "EFF-M2",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/infrastructure/EFF-M2.md",
       "verifiedBase": "954b4e0f7cfcc18426da352d6dda34ece6c2a53b",
       "changeManifest": [

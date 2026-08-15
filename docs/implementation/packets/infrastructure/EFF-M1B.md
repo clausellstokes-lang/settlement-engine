@@ -1,6 +1,6 @@
 # EFF-M1B — the §77 premise-map tool
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `954b4e0f7cfcc18426da352d6dda34ece6c2a53b`
 - **Train:** `eff-1a`, member 2 of 4
 - **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` @ SHA-256
@@ -163,3 +163,39 @@ everything would red the battery just as loudly as one that convicted nothing.
 
 Verified base and final tree state · the one changed file · A1-A8 with exact argv and exits ·
 the full battery table · deviations `NONE` or a STOP · judgment calls in the train receipt.
+
+---
+
+## §11 Landing receipt
+
+**LANDED at the `eff-1a` train's I2 commit `93e3904a`.** One script, zero production lines,
+zero census motion.
+
+- **A1** — the seven §79.2 proofs reproduce EXACTLY at this base: `0 / 1 / 0 / 1 / 0 / 0 / 1`.
+- **A2** — R3's output surfaces the fork as its own bucket:
+  `FORKED: SYN-A lands as → SYN-A': narrowed to the surviving shape`, with `STOP: (none)` and
+  `CONTINUE: SYN-B, SYN-C, SYN-D`.
+- **A3** — both doors convict: a whitespace row id in the plan reds `validate` (1) and its
+  `scope` FULL-STOPs through the invalid-plan door (1); a homoglyph id reds `validate` (1); and
+  a REFUTED id corrupted by a trailing space or a U+2011 dash FULL-STOPs as a NEAR-MISS (1/1)
+  naming the citation it nearly matched.
+- **A4** — closure both ways: `STOP: A, B (depends on A), C (depends on B)` with `CONTINUE: D`;
+  a refuted flag member is a FULL-STOP (1); a forked member's dependent stops while the
+  disjoint member continues — `FORKED: A · STOP: B (depends on A) · CONTINUE: C` (0).
+- **A5** — contradictory grades (1), whole-train citation (1, FULL-STOP where the pre-cure
+  draft exited 0 with an empty CONTINUE), family-less queue (1).
+- **A6** — `--annex` separates all three classes: `0 / 1 / 2`.
+- **A7** — an invalid plan cannot scope (1), a missing row id is usage (2), an unknown
+  subcommand is usage (2).
+- **A8** — `node --check` 0 and `npx eslint scripts/premise-map.mjs` 0.
+- ⭐ **SELF-APPLICATION.** The tool was run against `eff-1a`'s OWN premise map: `validate
+  --annex` 0 over 24 cited rows; `scope` on a row cited only by M3 stops M3 alone; `scope` on a
+  row M1A cites stops M1A **and** M2 and M3 through their `dependsOn` edges while M1B
+  continues; a LAW row FULL-STOPs; a trailing-space refutation is convicted as a near-miss.
+- ⚠ **`queue-check` CONVICTED THE ESTATE, CORRECTLY, ON ITS FIRST APPLICATION** — reported to
+  the chair rather than smoothed: `R1 VIOLATION: not TTS-simulated: wc-0`. The next
+  distinct-family slot after the `eff-1a`→`eff-1b` staged pair is not compiled, so R1 does not
+  hold today. The identical plan with that one field true reports `R1 HOLDS`, so the conviction
+  is the estate's state and not the tool's.
+
+**Deviations:** NONE. **Judgment calls:** in the train receipt.
