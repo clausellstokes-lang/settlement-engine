@@ -2249,3 +2249,32 @@ EXECUTION SERIALIZES behind INT-3B (one engine worktree).
    row closes); GAP-1's arms verified live with ZERO new hidden-gate
    instances; the audit's own discarded-false-output note is ratified as
    the capture law working.
+
+## §57 · THE VOCABULARY AUDIT RULED (2026-08-16 ~08:00, chair, vetoable;
+## evidence in laneRVOC-vocab-audit.md; tally 6C/3DM/3D/4COLLIDED over 17)
+
+1. **⛔ THE RELATIONSHIP-NORMALIZER FORK is the review's sharpest cure and
+   goes FIRST in the machinery queue**: two disagreeing alias tables
+   (canonicalRelationship.js's "ONE alias table" claim vs
+   relationshipState.js:113-128), legacy spellings gating differently by
+   subsystem — BEHAVIORAL, DM-visible. Its §48 cure-architecture pass is
+   DISPATCHED: unify on one table with a consumer census, the divergence's
+   blast radius measured, and any same-seed movement DECLARED (this is
+   exactly the declared-shift class); the FRIENDLY_LABELS double
+   declaration and the never-produced members ride the same pass.
+2. **The tier-boundary defect (240 vs 400) joins the est family** as a
+   repair member (the UI fallback contradicts canonical popToTier against
+   constants.js's own must-agree law — DM-visible wrongness); the
+   half-alive 'capital' typedef ghost and the "tiny hamlet" copy join the
+   prose/annex batch.
+3. **"Campaign"'s double duty is SURFACED OWNER-VISIBLE with a
+   recommendation**: keep the DM-facing "Campaigns" (saves) label; the
+   military COURSE_KINDS stay engine-internal but war prose never renders
+   the bare word where ambiguous — a prose-batch act, owner may veto for a
+   full rename.
+4. The deliberate mirrors are AFFIRMED as coherent-by-intent (recorded
+   reasons cited); the CR-IN1C-DRIFT census growth (9→19 sites) updates its
+   docket; the WF friendly-spellings attribution is corrected (superseded
+   by the ≥10 census). Phase-V verification for these findings executes IN
+   the cure/compile lanes' §48 re-sweeps (the working pattern), not as a
+   separate pass.
