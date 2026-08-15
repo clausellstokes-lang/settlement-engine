@@ -3256,3 +3256,40 @@ its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
    in-shell law — the §50.4 defense holding as designed. Terminal T2
    (cure + the two registration rows + flip + capsule + bare gates)
    runs now as a continuation with context intact.
+
+## §86 · THE CURE PASS ACCEPTED — eff-1a/eff-1b UNBLOCKED (2026-08-15,
+## chair, vetoable; evidence = the laneREFF audit addendum, all
+## re-sweep exits in-shell)
+
+1. **The cure pass is ACCEPTED**: all 24 findings (2 MATERIAL / 15
+   DEFECT / 7 HARDENING) are cured IN THE DRAFTS and RE-PROVEN — the
+   seven original premise-map proofs hold under schema v2 (the fork
+   case legitimately re-records as FORKED), all four defect verdicts
+   flipped to conviction, the near-miss door convicts both corrupted
+   ids, the closure probes are correct in every direction, and the
+   harness's thirteen probes sit at their cured exit classes with
+   zero surviving processes and zero repo dirt. One cure failed its
+   own first re-sweep and was iterated — the §61 level-1 loop doing
+   exactly its job.
+2. **J-REFF-6 IS SIGNED**: dependents of a FORKED member STOP by
+   default; continuing them is a chair act, never the tool's default.
+3. **The R1 staged-promotion exemption is RULED**: an eff-1a→eff-1b
+   pair (same-family staged promotion holding shared paths apart)
+   occupies ONE R1 slot; the dual-family invariant binds over the
+   pair plus the next distinct-family train.
+4. **§83.5's hold is RELEASED — eff-1a and eff-1b are UNBLOCKED**,
+   queued after est-1 unchanged. The eff-1a compiler inherits three
+   NAMED obligations from the addendum: preserve the S5 cure's
+   cleanup-promise + signalled-flag PAIRING (the shutdown/main race
+   the re-sweep itself caught); the R-H1 battery timeout; the R-D8
+   per-worktree cache isolation.
+5. **The addendum's receipt discovery joins the receipt-vacuity
+   family**: `pgrep` immediately after a group-kill counts processes
+   mid-death and lies green — the honest liveness check is a DELAYED
+   `ps`. Recorded in memory beside the pipe-exit and lying-wrapper
+   classes.
+6. Verdict for the owner's order: the efficiency stack is now as
+   foolproof as this audit cycle can make it — every found defect
+   cured and re-proven, law amended where law was the defect, and the
+   residual risk surface named (the landing executor's three
+   obligations) rather than silent.
