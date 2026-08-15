@@ -745,18 +745,25 @@ describe('M5 — CS-A4: a recalled army is never re-derived into a fresh march',
     return perTick;
   }
 
-  it('never re-seeds a march toward the abandoned target, at EVERY tick after the recall', () => {
+  it('never ARRIVES at the abandoned target, at EVERY tick after the recall', () => {
     const perTick = driveWithRecall(0);
     // Tick 0 is before the stamp: `a` must genuinely be marching on `d`, or the
     // fixture never reached the derive branch this pin guards.
     expect(perTick[0].a, 'tick 0: no record for `a` — the fixture would be vacuous').toBeTruthy();
     expect(perTick[0].a.destId, 'tick 0: `a` was never committed to the target').toBe('d');
-    // THE ACCUMULATOR: asserted per tick, not only at the end. A record that was
-    // clobbered and then coincidentally re-derived would pass a final-state check.
+    const atRecall = perTick[0].a.position01;
+    // THE INVARIANT IS ARRIVAL, NOT THE RECORD'S EXISTENCE. The cure has two halves and
+    // they leave the record in two different states, both correct: a recalled column that
+    // was RE-SEEDED (its retreat record no longer aims at the target) gets no record at
+    // all, while one still holding a live record KEEPS it — WR-7b's envoy interception
+    // stamps `recalled` and needs the record to survive so the carried terms ride home.
+    // What must NEVER happen either way is the arrival the defect produced.
+    // THE ACCUMULATOR: asserted per tick, not once. A record clobbered and then
+    // coincidentally re-derived would pass a final-state check.
     for (const t of perTick.slice(1)) {
-      if (t.a === null) continue; // skipped deployment ⇒ no record at all, which is the cure
-      expect(t.a.destId, `tick ${t.tick}: a recalled army was re-seeted toward its abandoned target`).not.toBe('d');
+      if (t.a === null) continue; // re-seed refused ⇒ no record, which is one cured shape
       expect(t.a.position01, `tick ${t.tick}: a recalled army reached position01 1 — it ARRIVED at the target it abandoned`).not.toBe(1);
+      expect(t.a.position01, `tick ${t.tick}: a recalled army advanced toward the objective it broke off from`).toBe(atRecall);
     }
   });
 

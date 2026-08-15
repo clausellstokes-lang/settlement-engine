@@ -654,16 +654,6 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
     const dep = deployments[armyId];
     const targetId = dep && dep.targetId != null ? String(dep.targetId) : '';
     if (!targetId) continue;
-    // CS-A4 (cs-5): mirror the war layer's own exclusion. warDeployment.js resolves a
-    // `recalled` deployment as a withdrawal and DELETES it — but only on the next tick,
-    // and this derive pass runs after it. A recall stamped in the SAME tick
-    // (applyWorldPulse's sue_for_peace / return_home, warRulingsEvidence), or any driver
-    // that advances transit without the war layer, would otherwise reach the seed branch
-    // below — and a RETREAT record's destId equals its originId, so it can never equal
-    // targetId and that branch is ALWAYS taken for one. It would re-seed a fresh march at
-    // the ORIGINAL sinceTick, which stepArmyPosition can carry straight to position01 1:
-    // an army recalled from the field re-appearing ARRIVED at the objective it abandoned.
-    if (dep.recalled) continue;
     const priorRec = prior[armyId] || null;
     const rawPriorRec = asObject(rawPrior[armyId]);
     const readiness = clamp01(num(dep.readiness, 0.5));
@@ -692,6 +682,22 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
       : null;
     // A NEW campaign (no prior record, or the prior aimed elsewhere) seeds a march.
     if (!priorRec || priorRec.destId !== targetId || priorRec.originId !== String(armyId)) {
+      // CS-A4 (cs-5): a RECALLED army is never RE-SEEDED onto a fresh march. warDeployment
+      // resolves a `recalled` deployment as a withdrawal and deletes it, but only on the
+      // NEXT tick, and this derive pass runs after it — so a same-tick recall stamp
+      // (applyWorldPulse's sue_for_peace / return_home, warRulingsEvidence), or any driver
+      // advancing transit without the war layer, still reaches this branch. And it ALWAYS
+      // reaches it for a RETREAT record, whose destId equals its originId and so can never
+      // equal targetId. The seed below would re-plan at the ORIGINAL sinceTick, which
+      // stepArmyPosition can carry straight to position01 1 — the recalled army reappearing
+      // ARRIVED at the objective it abandoned.
+      // ⛔ THE GUARD SITS HERE, INSIDE THE SEED BRANCH, AND NOT AT THE TOP OF THE LOOP.
+      // At the top it also skipped the ONGOING branch, which is where a recalled army's
+      // carriedTermSheet and interceptionDecision are preserved — and WR-7b's envoy
+      // interception deliberately stamps `recalled` (cause envoy_terms_carried_home) and
+      // then needs its record to keep advancing so the terms ride home. A top-of-loop skip
+      // dropped the whole record and the sheet with it; that was measured, not predicted.
+      if (dep.recalled) continue;
       const plan = planMarch(digest, worldState, armyId, targetId, readiness, null, num(dep.sinceTick, nowTick), season);
       if (!plan) continue; // unreachable/unmapped — no transit (the aspatial war layer still runs)
       const seedCore = {
@@ -760,8 +766,15 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
         };
       })()
       : priorRec;
-    const advanced = stepArmyPosition({ ...activePrior, strength, readiness, supplyQuality, funding }, nowTick);
-    const arrived = hasArrived(advanced, nowTick);
+    // CS-A4, the ONGOING half: a RECALLED column does not advance toward the objective it
+    // has abandoned. Its record is KEPT — WR-7b's envoy interception stamps `recalled`
+    // (cause envoy_terms_carried_home) and needs the record to survive so the carried term
+    // sheet rides home — but its position is HELD at the prior tick, so it can never step
+    // to position01 1 and "arrive" somewhere its deployment has already broken off from.
+    // The war layer resolves the actual homecoming on the next pass.
+    const stepTick = dep.recalled ? num(priorRec.lastTick, nowTick) : nowTick;
+    const advanced = stepArmyPosition({ ...activePrior, strength, readiness, supplyQuality, funding }, stepTick);
+    const arrived = hasArrived(advanced, stepTick);
     records[armyId] = { ...advanced, role: arrived ? ARMY_ROLES.MARCH : ARMY_ROLES.REINFORCEMENT };
   }
 

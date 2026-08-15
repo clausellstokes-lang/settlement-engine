@@ -70,21 +70,40 @@ guard is live on every field-battle retreat. The live windows are therefore:
 2. **any driver that advances transit without the war layer**, which includes the
    kernel's own test surface.
 
-## §3 · WHAT REPLACES IT
+## §3 · WHAT REPLACES IT — TWO GUARDS, AND A LANDED CONSUMER FORCED THE SECOND
 
-One guard in the derive loop: a recalled deployment is skipped, mirroring the war layer's
-own exclusion.
+⛔ **The compile's single top-of-loop `continue` is REFUTED by a landed feature, measured
+at the terminal gate rather than predicted.** WR-7b's envoy interception deliberately
+stamps `deployments[a].recalled` with `cause: 'envoy_terms_carried_home'` and then needs
+the transit record to keep advancing so the carried term sheet rides home. A top-of-loop
+skip dropped the whole record — `armyTransitLedger(...)` came back **null** and
+`tests/domain/armyTransitEnvoyWr7b.test.js` threw. The cure therefore has two halves, and
+the shapes they leave behind are deliberately different:
+
+1. **the SEED half** — a recalled deployment is never RE-SEEDED onto a fresh march. This
+   is the guard the defect needs, because a RETREAT record's `destId` equals its
+   `originId` and so can never equal `targetId`, which is why the seed branch was always
+   taken for one. A column in that state gets no record, which is correct: it is going
+   home and the war layer owns the homecoming.
+2. **the ONGOING half** — a recalled column that still holds a live record KEEPS it, but
+   its position is HELD at the prior tick, so it can never step to `position01 = 1` and
+   "arrive" somewhere its deployment has already broken off from.
+
+⚠ **The intermediate shape was tried and measured insufficient**: moving the guard into
+the seed branch alone fixed WR-7b but let a recalled *marching* column continue to its
+target and arrive — cs-5's primary live window (`sue_for_peace` / `return_home` stamped on
+a marching army). Only the pair satisfies both. **Each half carries its own planted
+mutant** and reds alone (§ Landed), which is the STOP condition the compile's CS-A3 shape
+failed.
 
 ⛔ **The compile's trajectory pin for this member is not satisfiable as written, and is
 corrected here rather than approximated.** It asks the pin to assert that at tick n+1 the
-army's record is "still the RETREAT record". Under `continue` the army gets **no record at
-all** that pass — the ledger is rebuilt from `deployments` every tick — so the record is
-ABSENT, not preserved. Asserting preservation would red against the very cure it
-describes. The pin therefore asserts what the cure actually guarantees, which is also what
-the defect actually needs: **no MARCH toward the abandoned target is re-seeded, and
-`position01` never reaches 1.** Absence satisfies the invariant the audit named; the
-audit's own alternative shape ("preserve a prior RETREAT record until `hasArrived`") would
-have satisfied the compile's wording, and is NOT what §72.1 ruled.
+army's record is "still the RETREAT record". Under the SEED half the army gets **no record
+at all** that pass — the ledger is rebuilt from `deployments` every tick — so for a beaten
+column the record is ABSENT, not preserved, and asserting preservation would red against
+the cure. **The invariant is ARRIVAL, not the record's existence**, and that is what the pin
+asserts: `position01` never reaches 1 and never advances after the recall, at every tick,
+whichever of the two shapes the column is in.
 
 ## §4 · ⛔ THE TRAJECTORY PIN
 

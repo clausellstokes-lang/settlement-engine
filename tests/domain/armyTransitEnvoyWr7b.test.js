@@ -409,10 +409,19 @@ describe('WR-7b army picture evidence and temporal projection', () => {
       },
     };
     const rng = { fork: () => ({ random: () => 0 }) };
-    worldState = advanceArmyTransit({ snapshot: snapshot(), worldState, digest: digest(), graph: graph(), rng, tick: 0 }).worldState;
+    // ⚠ BODY CORRECTED BY CS-A4 (cs-5); title and intent unchanged. The old body drove
+    // tick 0 and asserted the single battle on TICK 1. Collisions are path-OVERLAP, not
+    // co-location, so these two collide on the DEPART tick — the tick-1 entry it was
+    // counting was the SECOND battle of an already-beaten, already-recalled column, which
+    // is the battle-per-tick pathology spatial-engine-3 forbids and which cs-2 + cs-5
+    // together now end. The battle is asserted where it actually happens, and the
+    // once-ness the title claims is asserted across BOTH ticks rather than assumed.
+    const first = advanceArmyTransit({ snapshot: snapshot(), worldState, digest: digest(), graph: graph(), rng, tick: 0 });
+    worldState = first.worldState;
+    expect(first.newsEntries).toHaveLength(1);
     const out = advanceArmyTransit({ snapshot: snapshot(), worldState, digest: digest(), graph: graph(), rng, tick: 1 });
-    expect(out.newsEntries).toHaveLength(1);
-    const rows = armyTransitLedger(out.worldState);
+    expect(out.newsEntries, 'the beaten column was given a second battle').toHaveLength(0);
+    const rows = armyTransitLedger(first.worldState);
     for (const row of Object.values(rows)) {
       const sources = row.commandPicture.mutations.map((mutation) => mutation.sourceId);
       expect(new Set(sources).size).toBe(sources.length);
