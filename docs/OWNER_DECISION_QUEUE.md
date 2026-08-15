@@ -2010,3 +2010,33 @@ POP-1 precedes the §46c spy waves. Also ruled ONCE for three families (the
 POP-S recommendation): the demographic column-class vocabulary and
 carry-through (columnOf's whitelist + DEMOGRAPHIC_COLUMN_CLASSES) are ruled
 jointly across POP/LG/ES at the LG sitting, not at POP-1's Q1 alone.
+
+## §50 · GR-5A'S SECOND STOP RATIFIED; THE FLAG-MINT LAW COMPLETES AT THREE
+## OBLIGATIONS (2026-08-15 ~21:50, chair, vetoable; laneTE11-receipt.md)
+
+1. **The I1′ STOP is RATIFIED** — the eighth-path class: `simulationRules.js`
+   feeds SEVEN generated edge-shared bundle artefacts the manifest omits;
+   the freshness gate is red without them; the cure is one
+   `npm run build:edge-shared`, zero handwritten files, census- and
+   behaviour-neutral. **The amendment is SIGNED**: the seven MODIFY rows
+   join; handwritten stays 7 of 12.
+2. **§49 ruling 3 is AMENDED — the flag-mint habitat carries THREE
+   obligations**, each independently discovered twice-plus: (a) the
+   subsystemRowsVirtual ordered-equality pin; (b) the seven edge-shared
+   bundles when simulationRules.js moves; (c) ⭐ the LITERAL flag drive in
+   the acceptance file (mechanismLitCoverage grants AUTO credit only on a
+   literal `<flag>: true` — a computed member attributes to no key; the
+   code is right and only the machinery blind — the cheapest to miss).
+   All three enter the preambles/PACKET_STANDARD with the queued prose act;
+   compilers preflight from this ruling NOW.
+3. TE11's in-scope cure of (c) is RATIFIED (12/12 green, committed at I1′);
+   the M6-inert finding and M6′ substitution are RATIFIED (the lapse
+   branch's delete IS the boundary's enforcer; M6′ convicts it under A7).
+4. ⚠ **The lying exit is RE-CONFIRMED as a live class**: the ratchet
+   outlasted its window, backgrounded, and the harness reported the
+   WRAPPER's exit 0 over a red gate — caught by reading the log, not
+   believing the code. The capture law stands: an exit not read from the
+   gate's own tail is no receipt.
+5. **DOCKETED (infra):** three of the seven bundles move ONLY a wall-clock
+   `generatedAt` — nondeterministic churn dirtying unrelated artefacts on
+   any input touch; a determinism wart for the next infra micro-act.
