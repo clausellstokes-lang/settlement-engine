@@ -4016,3 +4016,34 @@ product thesis, and the constitution held under measurement.**
    POP inline addresses ride the address-rot note instead; the
    charter/preamble cures ride their own commits). **The biggest
    batched chair debt is CLEARED.**
+
+## §107 · THE cs+gen-1 COMPILE ACCEPTED — THREE SIGNATURES, AND
+## prf-1 RUNS (2026-08-15, chair, vetoable; evidence
+## laneTC20-CSGEN-PLAN.md + laneTC20-report.md, the two-train shape
+## FORCED by executed TTS convictions)
+
+1. **The two-train shape is ACCEPTED as validator-forced** (cs-2+cs-5
+   share armyTransitKernel; the lighting pin forbids co-non-terminal
+   trains) and **R1 HOLDS on both maps — prf-1's blocker is
+   DISCHARGED; TE19 is DISPATCHED** on the restoration with the
+   timing receipt, the bundle regeneration, and the +14/15 STOP
+   condition in its brief. The R-D14 slot-1 reconciliation is
+   ratified (the tool refused the chair's phrasing correctly).
+2. **J-TC20-1 IS SIGNED — gen-1 NARROWS**: the tells/speech arm lands
+   (measured roll-budget-invariant end to end, 0/32 seeds shifted,
+   cures its defect COMPLETELY); the secrets arm is REFUSED IN PART —
+   draw discipline only halves it because POOL WIDTH is the defect
+   (5–8 entries against 18-NPC metropolises), so it RE-CHARTERS into
+   gen-2 where pool authoring and draw discipline land together. The
+   §80.2 cure-pointer correction is adopted (`drawUnique` in
+   hookVariety is the prior art, not npc_identity).
+3. **J-TC20-3 IS SIGNED — the uniform one-step decay cure**, refusing
+   the persisted `lastDecayTick` alternative (a schema act, owner
+   territory; the one-step achieves the documented half-life without
+   new persisted shape). The round4-accumulation nuance (the cured
+   curve sits 1.0e-4 off naive Math.pow — a pin written the obvious
+   way would be FALSE) binds the executor's pin shape. **J-TC20-4 IS
+   SIGNED** (cs-3 gates the MINT, not the dwell). Eight of nine
+   touched files blob-identical to the audit base — the mechanisms
+   re-verified, not assumed. Ceilings named: convergence 798/800
+   (+2), armyTransitKernel 792/800 (+8 for two members together).
