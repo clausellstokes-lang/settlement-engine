@@ -4339,3 +4339,34 @@ before you do the full soak and tune."**
    {dom, da-a}, the micro-batch honestly reported still-unconvicted.
    **TE22 runs da-a now**; queue: da-a → da-b → dom-1+2(+4) → the
    micro-batch → EP → the family trains.
+
+## §116 · GUARD-BURN TRANCHE ONE ACCEPTED — FIVE CONVICTIONS, AND
+## THE CLASS-FOLD RULING (2026-08-15, chair, vetoable; evidence
+## laneGV1-burn.md + laneGV1-report.md, method calibrated on both
+## known kills before any green was trusted)
+
+1. **The census is RE-DERIVED**: 748 guards (543 files ∪ 547
+   manifest rows), 207 proven / 201 rationale-accepted / 340
+   unproven upper bound — and the meta-finding is ratified: BOTH
+   known kills lived exactly where the accounting was thinnest (one
+   absent from the manifest entirely, one marked 'uncovered').
+2. **FIVE CONVICTIONS, each by executed plant, join the micro-batch
+   as gv-1..5** in this priority order: **gv-1 byokNeverLogged**
+   (the BYOK key-logging guard is blind to the multi-line form
+   PRETTIER PRODUCES — a security guard whose blind spot is the
+   default formatting; highest priority); **gv-2 sessionGateCensus**
+   (`false &&` neuters session gating with all 20 arms green — the
+   only enforcement on the non-spending money surfaces); **gv-3
+   ciCheckParity** (`|| true` and continue-on-error invisible —
+   presence-not-enforcement; rides beside ci-1a/1b); **gv-4
+   spatialLedgerCoverage** (the standing fails-open hazard now has
+   its EXECUTED estate-wide receipt — a deleted mover row leaves
+   28/28 green; the §66 Q5 guard extension gains its evidence);
+   **gv-5 rawColorLiteral** (17-literal invisible headroom +
+   template-hex AST blindness, proven discriminatively).
+3. **TRANCHE TWO IS RULED PER THE RECOMMENDATION**: cure the five,
+   then fold the TWO NEW BLIND CLASSES (same-line conjunction,
+   unconsumed-gate-call) into the anti-vacuity walker — structural
+   prevention over guard-by-guard probing; the remaining 33 ranked
+   probes and the 201 rationale-row audit follow the fold, cheaper.
+   Four proven receipts recorded never-re-probe. J-GV1-1..6 SIGNED.
