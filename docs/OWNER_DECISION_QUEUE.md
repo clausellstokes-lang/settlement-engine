@@ -1924,3 +1924,26 @@ that cross the route — the group's civilian profile shields its members
 from military encounter checks, spy included. (Chair: same modifier family;
 the group's existing encounter-treatment is the one truth the spy inherits,
 avoidance and refusal alike.)
+
+## §47 · GR-5A IS RULED (2026-08-15 ~16:10, chair, vetoable; one sitting;
+## evidence in laneTC11-report.md)
+
+All six batched questions SIGNED per TC11's recommendations: O-1 the
+single-member shape (the executed R35 probe is the proof); O-2 the
+PACT_ENDINGS home rules at 5b/5d when a producer makes the pin honest —
+neither symbol moves at 5A; O-3 the two false landed sentences DOCKETED to
+the prose micro-act queue (pactAmendment.js:56's two-acts promise;
+⚠ PACKET_STANDARD's OutputContainer 599/600 row does not reproduce by its
+own named method — a standing-doc defect); O-4 `renewed`/`converted` are
+CHARTERED ORPHANS on the non_intervention idiom (recorded so 5b/5d never
+re-mint); O-5 the P1 exit-1 with exactly four named symbol rows is accepted
+(the T-time CREATE proof outranks a cosmetic clean P1); O-6 ⛔ GR-5A authors
+ZERO numbers — every GR-5 band derives at the member that needs it under
+the §42/§43 law, which is exactly why 5A lands without a value signature.
+J-TC11-1..5 RATIFIED, sharpest J-TC11-1: the three symbols site in
+pactAmendment.js (127/800, GRAMMAR, zero OSR rows) with peaceTerms.js's
+three edits as ONE-FOR-ONE replacements — 797→797, 1264→1264, numstat 3/3;
+any deviation from those figures is a STOP. The refused successors
+(5b/5c/5d/5e/5f) stand refused pending bands/producers. ⭐ NOTED: 5A mints
+`worstObservedEver` — the exact substrate GR-6d was refused for lacking;
+the gr-6 re-charter sitting inherits that fact.
