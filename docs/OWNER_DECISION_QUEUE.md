@@ -132,6 +132,11 @@ or uncoached-user evidence remain physical gates rather than open design picks.
 Tail order (owner ruling 2026-07-19, unchanged): loop convergence → PUSH #1 → soak
 → tuning → THE ONE REGEN → THE WALK → PUSH #2 → THE VERY END deploy → PUSH #3.
 
+> ⛔ SUPERSEDED ON THE TAIL ORDER — §3h (08-06) re-ruled it: THE WALK and THE
+> ONE REGEN precede the terminal soak, and TUNING IS LAST. Read §3h (and §27's
+> build-everything order) before acting on the line above; it is kept verbatim
+> as the historical transcription only. [Pointer added per §68, 2026-08-15.]
+
 - **T1. Marketing-masters LFS-vs-move** — ~460MB in `marketing/` on this ledger branch; before pushing review-fixes: LFS-migrate OR move masters out (recorded default: move out, commit the removal). Blocks: the ledger-branch push only if the masters ride it. [RA§3]
 - **T2. PUSH #1** — dark, soak-ready composite to origin as backup/transfer. ⭐ *Materially satisfied 2026-07-26 by THE BANKING PUSH (standing backup authorization + owner re-order); see ledger row.* Residual: owner may still declare a formal PUSH#1 point post-convergence. [RA§5]
 - **T3. The soak** — CERT-30 / CENTURY-100 / CENTURY-300 with pre-declared bands; now also the realm-scale certification profiles (soak:release). Blocks: tuning. [CQ-T6, NEW]
@@ -1068,6 +1073,10 @@ unchanged; the H26/AO ordinal correction does not spend or waive that veto.
 Owner, verbatim: **“for anything now and in the future that requires my permission,
 i give you that freely.”**
 
+> ⚠ CARVE-OUTS SURVIVE THIS GRANT — read §53.1 before executing the tuning
+> signature or any push under it: the conservative posture (a fresh owner act
+> at the signature phase) governs until the owner rules P1. [Pointer per §68.]
+
 Every present or future item whose only blocker is owner permission, approval, veto,
 confirmation, or signature is authorized in advance. The chair/manager may choose and
 execute the strongest coherent option at that item's already-governed program boundary
@@ -1517,6 +1526,10 @@ packet requires is a STOP; the shared coupling walker file is RE-READ at I2
 Owner, verbatim: **"Continue all the way until the end. Again, if there's any
 permissions required at that pop-up now and in the future, you have my
 permissions."**
+
+> ⚠ CARVE-OUTS SURVIVE THIS GRANT — as with §22, read §53.1 before the tuning
+> signature or any push: the conservative posture governs until the owner
+> rules P1. [Pointer per §68.]
 
 Operative reading (chair, recorded):
 1. **The delegated terminal extends to THE END of the §3h tail** — through
@@ -2590,3 +2603,79 @@ that skips the increment is incomplete.
 7. The `minor`/`moderate` per-lane decode split (0.25/0.5 table-event vs
    0.35/0.6 stressor) is RECORDED for the tuning phase (tuning is last,
    owner-signed) — not a cure surface now.
+
+## §68 · THE LAW-BODY DIMENSION RULED (2026-08-15, chair, vetoable;
+## evidence in laneRLAW-lawbody-audit.md + laneRLAW-report.md, six probes
+## executed, corpus = 13 named documents whole)
+
+1. **The gradings are RATIFIED** (6 contradictions / 13 supersession rows /
+   5 ambiguities / 5 dead-law rows / 7 gaps) and all six J-RLAW judgments
+   SIGNED, including J-RLAW-1's reading of §1's tail line as
+   chair-transcribed prose (pointer lawful) and J-RLAW-5's severity
+   ranking of the constitutional-inversion spelling.
+2. **⭐ THE FORWARD-POINTER LAW IS ADOPTED** (LAW-G1): when a later section
+   strikes or narrows earlier text, the earlier site gains a one-line
+   forward pointer in the same sitting; owner-verbatim text gets pointers
+   appended beneath it, never edits. **Applied in this commit to the three
+   sharpest**: §1 → §3h (the dead tail order), §22 → §53.1 and §37 → §53.1
+   (the grants now name the surviving carve-out posture at both entry
+   points). The remaining S-rows, including the S12 annotations on the
+   ledger copies of the two folded volumes (authorized — the ledger
+   carries no gate), execute as one marker micro-act from the lane's
+   proposed texts at the next sitting.
+3. **⭐ THE LEDGER READ-BACK LAW IS ADOPTED** (hazard-conversion of the
+   §46c lost-append class): every ledger append is verified by reading the
+   new commit object's own blob tail for the appended heading before the
+   sitting closes. Practiced from this commit forward.
+4. **The build-branch docs debts consolidate into ONE docs member** of the
+   next build-branch act: the HB preamble's stale `ARGUED_ROSTER_CEILING`
+   13 → 19 (the executed tiebreak: 19 at HEAD) with INT's false "since
+   08-10" provenance corrected; the GR/INFRA "three hot files" → four; the
+   two lapsed INDEX Measured blocks (GR-5A, INT-3B) restored and the
+   convention restated as binding at every exposure; START_HERE's gate
+   figure 14 → 17; §53.6's three-obligation PACKET_STANDARD text (already
+   docketed) rides the same member.
+5. **The cross-volume-train ban STANDS, lifted lazily**: §34's trigger
+   died with gr-6's park, but the ban lifts only when a concrete
+   cross-volume train petitions the chair and its plan survives TTS — not
+   by standing declaration. **The EP-* pick backlog** gets its disposition
+   sweep at the EP family's next sitting, dispositions recorded in the
+   queue's EP section as the tracking surface.
+6. §13 (the main worktree's disposition) REMAINS OWNER-OPEN and is
+   re-surfaced; P1 is reaffirmed, its residual cure (the two pointers) now
+   placed.
+
+## §69 · THE PRODUCT-SURFACES DIMENSION RULED (2026-08-15, chair,
+## vetoable; evidence in laneRPSF-product-audit.md + laneRPSF-report.md,
+## all static at `d5a6c009`; the mid-survey HEAD move is TE13's detached
+## train HEAD, not a branch move — verified by ref inspection)
+
+1. **The doctrinal floor is RATIFIED as STRONG** (in-fiction empty states,
+   house-voice error boundaries, the address law with typed containment
+   chains, systematized a11y) and all five J-RPSF judgments are SIGNED,
+   including LEGIBLE-BY-RULING for the faith receipt prose and the
+   base-pin discipline of J-RPSF-5.
+2. **⭐ THE FIVE HALF-ADOPTED CHOKEPOINTS BECOME THE DISPLAY-ADOPTION
+   FAMILY (da-1..da-5)**, queued after rn-1, outward-facing surfaces
+   first (the PDF is the leakiest surface; it and the public gallery lead
+   every member): da-1 tick-translator adoption at the six bypasses; da-2
+   the eight `formatCount` sites; da-3 the relationship-palette family —
+   §67.2's ruling is CLARIFIED to cover the WHOLE seven-definition family
+   (Q1 answered: converge; the module's overclaiming header and the
+   orphaned `REL_RGB` are cured in the same packet); da-4 the date-locale
+   unification (the compile measures the corpus and adopts the dominant
+   convention); da-5 the authored display lexicon over the 46-site
+   `replace(/_/g,' ')` census (the finite-semantics law's display half).
+3. **Q2 RULED BY TIER**: raw "Tick N" is ALLOWED on DM-tool surfaces
+   (the machinery-visible tier by design; the allowance recorded in-file)
+   and FORBIDDEN on player/public surfaces — the gallery chip and every
+   PDF instance join da-1. **Q3 RULED**: the faith ruling's own condition
+   is the test — a multiplier may be named only WITH its cause as prose;
+   "aggression ×N.NN" and the bare war-weariness float carry no cause and
+   join da-1 as leaks.
+4. **Q4 RULED AS FIX-THEN-GUARD MACHINERY**: the localeFormatGuard lint
+   extends to `components`/`pdf` only AFTER da-2 cures the eight sites,
+   so the guard never reds a green tree — adopted under the
+   hazard-conversion law and recorded on the veto surface (the lane's
+   owner-gated caution is noted; a guard addition that reds nothing at
+   adoption is machinery, not a ratchet raise).

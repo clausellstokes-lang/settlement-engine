@@ -84,13 +84,20 @@ convergence + XLS-2 relief/dynamic-mint arm + XLS-5 exact-key services
 cure ruled into the micro-batch/repair queue; XLS-4 + XLS-6 docketed for
 Opus producer-path verification at the WY/war sitting; the 21 unreachable
 service rows are an OWNER CULL question; corpus union 281 recorded).
-§51 dimensions done (8): intent · estate · vocabulary · security ·
-design↔impl · persistence/lifecycle · cross-layer semantics (+ the LG
-self-sweep); LIVE next: **R-PSF (product surfaces, FABLE)** + **R-LAW
-(law-body consistency, FABLE)**; then correctness spot-audits → chair
+§51 dimensions done (10): intent · estate · vocabulary · security ·
+design↔impl · persistence/lifecycle · cross-layer semantics · law-body
+(**§68**: forward-pointer law adopted + three pointers placed at §1/§22/
+§37; read-back law adopted; build-docs debts → one docs member; ban
+stands, lazy lift) · product surfaces (**§69**: display-adoption family
+da-1..da-5 queued after rn-1, PDF/gallery first; tick-by-tier ruling;
+fix-then-guard locale lint) (+ the LG self-sweep); LIVE next: **R-CSA
+(correctness spot-audits, FABLE)** + **R-GEN (generation quality,
+FABLE)**; remaining after: performance · docs · ops · market → chair
 synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
-future landing collection owes its increment. Chair-owed sittings
+future landing collection owes its increment. TE13 mid-train on
+refs/trains/in-1c-a (detached HEAD there is LAWFUL; branch pinned
+`d5a6c009` until chair CAS). Chair-owed sittings
 unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
 IN-1c-b charter. Owner-open: P1 tuning-signature posture · P6 bounded burn
 · "campaign" naming. Ledger tip after this commit carries §63+§64+§65.
