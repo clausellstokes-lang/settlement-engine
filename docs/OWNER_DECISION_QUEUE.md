@@ -3921,3 +3921,39 @@ product thesis, and the constitution held under measurement.**
    pre-feature golden, the hot-file and anchor-row traps by name.
    WC stands at FIVE of seventeen waves landed; the queue behind
    rn-1 is prf-1 → cs+gen-1 → da → dom → micro-batch.
+
+## §104 · rn-1 COLLECTED AND EXPOSED — THE ALIAS CURE IS IN, THE
+## NINETEENTH EXPOSURE (2026-08-15, chair; evidence
+## laneTE18-receipt.md, fourteen judgments)
+
+1. **rn-1 IS LANDED AND EXPOSED** (CAS `cf12c976 → 630265b3`,
+   validator 65/0 own-shell): A1's neutrality PROVEN byte-identical
+   over the 40-input corpus against a pre-feature archive; B1's
+   same-seed goldens unmoved across 87 files / 623 tests re-run
+   after the last edit; `convergence.js` landed at EXACTLY 798/800;
+   both walkers proven to bite by planted mutants restored via
+   cp/cmp; census `2438/364/2074/20206/5672` with files/parked/
+   credited never moving. The base check found 3 moved blobs of 40
+   and graded each individually — no LAW premise died; RNS-14 dead
+   as stated, scoped to B1's whole-census re-derivation exactly as
+   the premise map ruled.
+2. **`tense` IS SIGNED → `rival`** (the executor rightly refused to
+   invent it): the mildest antagonistic bucket — a legacy label of
+   strain maps to tension-without-war; over-claiming hostility would
+   manufacture conflict from a persisted word. One-row diff, rides
+   the next RN-touching member. Say "veto" with a different target
+   to flip it.
+3. **CR-TE18-CONVERGENCEALLIED is RULED INTO THE DECLARED-SHIFT
+   BATCH as cs-6**: FRIENDLY_REL misses the live `allied` (an allied
+   neighbour invisible to the intervention scorer) and admits the
+   unreachable `ally` — the cure moves generated output, so it rides
+   cs+gen-1; the executor's refusal to tidy `ally` prematurely is
+   ratified (visibility over neatness until both sides cure).
+4. **THE BUNDLE-CLOSURE LAW IS MINTED** (J-TE18-13's class): a
+   member editing any file inside an edge-shared bundle closure OWES
+   the bundle regeneration, priced at compile. The CR-EB-2(b)
+   guard's mid-cure correction (timestamp churn is load-bearing
+   single-build-window evidence) and the backtick-damaged commit
+   message catch are ratified. J-TE18-1..14 SIGNED. **TC19 (prf-1
+   compile) and STS (the nine-volume cure consolidation) are
+   DISPATCHED in parallel.**
