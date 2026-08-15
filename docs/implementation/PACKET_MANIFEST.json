@@ -9696,7 +9696,7 @@
     },
     {
       "id": "CS-B0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/correctness/CS-B0.md",
       "verifiedBase": "eab6eba053e09732f12acbfe563874db02f056ce",
       "changeManifest": [

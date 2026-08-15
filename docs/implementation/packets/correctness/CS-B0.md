@@ -1,6 +1,6 @@
 # CS / CS-B0 — the cultural axis gets its OWN seeding path (member 1 of `cs-b`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `eab6eba053e09732f12acbfe563874db02f056ce`
   (the `cs-a` train's dispatch base; authored on top of cs-a's terminal `e3b596a2`)
 - **Train:** `cs-b`, family **CS** (un-stamped, cap 4), member **1**. Its change paths are
