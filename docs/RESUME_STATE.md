@@ -100,6 +100,25 @@ LG-S (the LG self-sweep — §51's FIRST FABLE SURVEY LANE).** On their
 collection: §48 cure rounds (WC first) + §51 Phase-S continues on freed
 slots (Fable surveys, Opus verifies, chair governs).
 
+**✅ Lane LG-S COLLECTED (~02:00, the FABLE self-sweep): 50 rows / 46 TRUE /
+2 REFUTED / 1 UNVERIFIABLE / 1 NOTED + 5 substrate errata — THE VOLUME
+HELD; every defect is annex/micro-act class, no machinery cure owed.**
+Sharpest: Q5's premise refuted-but-REINFORCING (EIGHT null pins not six —
+the ledger-road ruling stands stronger); ⚠ the §4.1 rarity INVERSION a
+compile would have shipped (town 0.08 / city 0.15 per tier blocks — annex
+carries the correction); the §6 TTS obligation binds to the same next-infra
+gate as Q10 (one-sentence cure, micro-act); §46a citation miscount (one
+addendum not two). All six voided substrate rows re-verified INTACT at the
+moved tip; the willingness gap still live; both flag names untaken.
+Annex: `laneLGS-LG-SUBSTRATE.md` (canonical until fold).
+**⭐⭐ THE SWEEP PROGRAM IS CLOSED: EIGHT annexes (WC/EP/POP/WF/INT/WY/
+tails/LG), ~1,350 claims graded, 259 refutations — the entire remaining
+inventory including the chair's own newest volume stands on measured
+ground.** **LIVE: Lane TC13 COMPILES IN-1c** (the open front's first pick;
+the IN preamble authored en route) → `laneTC13-*`. Four lanes: WC-C ·
+TC12(INT-3b) · TC13(IN-1c) · <slot for the §51 Phase-S Fable lanes on next
+free>.
+
 **✅ Lane TL-S COLLECTED (~01:30): 208 claims / 155 TRUE / 43 REFUTED / 10
 UNVERIFIABLE across TR/IN/CW/ES tails — and the refutations mostly UNBLOCK:**
 all three TR spine blockers DISCHARGED (five of seven TR waves carry false
