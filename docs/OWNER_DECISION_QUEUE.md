@@ -1815,3 +1815,24 @@ known-network read — making network CONCEALMENT a defensive act and
 infrastructure a legitimate intel target) + a reduced-chance multiplier
 under the §43 value law. All three are LATE LG waves (consumers of the core
 graph/pool), producers-before-prose binding as ever.
+
+### §46c · Owner refinement: CARAVAN COVER FOR SPIES (2026-08-15 ~11:00,
+### in-chat, verbatim intent; amends §46b's infiltration channel)
+
+A spy gains a HIGHER entry chance by joining a co-traveling group — an
+immigrant population or a caravan — and inherits that group's fate: if the
+group is refused or neglected at the gate, so is the spy. Preconditions:
+a group must actually be traveling the same direction on the same route in
+the window (encounter en route), or the spy departs WITH a group they know
+is leaving, settlement to settlement. On the map layer the spy renders at
+the traveling group's position — the cover is spatial truth.
+
+Chair note: this completes an ENTRY-ROUTE SPECTRUM for infiltration —
+conventional approach < caravan cover (higher odds, fate-coupled to the
+group) < the §46b network channel (much lower odds, knowledge-gated) — each
+a typed modifier on the ONE existing mission math (§43 value law). The
+fate-coupling reuses the landed group-treatment outcomes verbatim (one
+canonical truth: the spy inherits the caravan's already-simulated
+reception, no new refusal math). Map rendering is a projection rule: public
+surfaces show the GROUP; DM-tier reveal follows the existing
+includeGroundTruth seam. An ES×LG×POP seam, late-wave, producers first.
