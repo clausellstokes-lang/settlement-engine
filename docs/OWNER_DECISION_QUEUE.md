@@ -1730,3 +1730,31 @@ executors never share it).
    census sharding, no second engine worktree (the measured green-but-wrong
    verdict), no pre-authorized stop-cures. The remaining pace is the honest
    cost of ground-truth-checked landings.
+
+## §46 · OWNER DIRECTIVE: THE LOGISTICS NETWORK — TELEPORTATION CIRCLES AND
+## AIRSHIPS (2026-08-15 ~08:30, in-chat, verbatim intent; NEW CAPABILITY)
+
+Owner's directive, intent preserved: (1) TELEPORTATION CIRCLES — allied or
+mutually-beneficial settlements that BOTH have circles form a network that
+cuts travel time/distance for war (reinforcements, resources) and is used
+"wherever it is strategically reasonable"; TRANSITIVE RELAY is explicit: A
+(no circle), allied with B and C (both circles, all three co-belligerent) —
+A marches to B, teleports B→C. (2) AIRSHIPS — ONE docking port at the ORIGIN
+suffices (no destination port needed); they fly the EXISTING routes at
+reduced time (owner delegates the factor, "one third or one fourth or
+however you deem appropriate"); they avoid ALL ground forces; enemy airships
+on the same route = an AIR BATTLE, the aerial equivalent of the landed
+sea-route battles with the same consequence machinery. (3) THE WARTIME
+ONE-WAY LAW: military airlift delivers and returns NOTHING during war
+(trade airships round-trip as normal). (4) CAPACITY LIMITS on both modes —
+"there should be a limit... otherwise overwhelming"; values are
+tuning-class, chair-derived under the §42/§43 rationale law.
+
+Chair disposition: NEW CAPABILITY under §27 — it joins the declared build
+inventory as its own architected family (working name LG, two flags:
+circles / airships, dark by construction, dormancy byte-identity). The
+volume is CHAIR-AUTHORED at the next architecture sitting; a substrate
+recon lane dispatches now (routes, sea-battle machinery, alliance edges,
+deployment travel-time, persisted-shape homes). Persisted-shape widening
+(circle/port as settlement features) is declared for the veto surface per
+the standing law. Design thoughts delivered in-chat; the volume binds them.
