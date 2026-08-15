@@ -119,9 +119,22 @@ MINTED: every flag-minting packet includes subsystemRowsVirtual.test.js —
 three independent discoveries = the habitat. Every §47 tripwire HELD at the
 stop (peaceTerms 797/797/3-3 exact; P1's four named reds only; CLAIM_RE 0).
 Parked P1 `836d1da8` stays as evidence; stopped-tree banked.
-**LIVE (resumed ~18:45): TE11 re-authors P1′ and runs the amended
-seven-path train to T** (tuple `2429/366/2063/20115/5654`, runtime 28138,
-validator 45/0 at T; held gate + smoke). Chair owns CAS.
+**⛔→✅ TE11 SECOND STOP AT I1′ (~21:40), RATIFIED §50 (ledger `96c1fe16`):**
+the EIGHTH-PATH class — simulationRules.js feeds SEVEN edge-shared bundle
+artefacts the manifest omitted (HB-2's exact set); cure = one
+build:edge-shared, zero handwritten, census-neutral, SIGNED. ⭐ §49's law
+COMPLETES AT THREE OBLIGATIONS per flag mint: the ordered pin + the seven
+bundles + the LITERAL flag drive (mechanismLitCoverage AUTO credit needs a
+literal `<flag>: true` — TE11 found and CURED it in scope, 12/12).
+⚠ §50.4: the LYING-EXIT class re-confirmed (the ratchet backgrounded and
+the harness reported the wrapper's 0 over a red gate — caught by READING
+the gate tail). DOCKETED: three bundles churn only wall-clock generatedAt
+(determinism wart, next infra act). Everything substantive at I1′ is GREEN
+AND MEASURED (peaceTerms 797/797/3-3 re-verified after nine plants; census
+tuple exact; 8/8+9/9+14/14+7/7; OSR 1998; floors exact; 7+M6′ mutants).
+Parked evidence refs: gr-5a-p1-parked + gr-5a-i1-parked.
+**LIVE (resumed ~21:55): TE11 lands the bundle rows + amended packet, then
+T** (validator 45/0; both gate exits READ FROM THE LOGS). Chair owns CAS.
 **(superseded) TC11 compile dispatch** (treatyRenewalEnabled,
 single-member flag-boundary train) from `6cd18ad3` — SPV-inline grading
 ordered on every volume claim (the stale-charter record is six-for-six);
