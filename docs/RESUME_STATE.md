@@ -161,7 +161,19 @@ posture = conservative (a fresh owner act at the signature's phase) until
 answered; P2/P3 reconciled vetoably; P5 elevated (the flag-mint law enters
 PACKET_STANDARD with WC-0's train); D3 docketed to the prose batch.
 
-**LIVE (four lanes): TC12(INT-3b) · TC13(IN-1c) · TC14(WC-0 compile — the
+**✅ TC12 COLLECTED + §54 RULED (ledger `8d34781e`): INT-3b compiled
+REFUSED-IN-PART into ONE pure member** — the war-welded errand DTO refuted
+the volume's no-new-ledger claim; the GR-2 PRICING ROAD is the cure
+(minting through the spine prices, never row-writes; ENVOY_PURPOSES
+untouched); the quoted-literal purposeClass (empirically forced), the
+exact-path INTERIOR regex, and the builtModules+minters pin all signed;
+X5 resolved-not-paid; Q-TC12-1 (émigré persistence home — persisted-shape
+class) OPEN AND BATCHED. **LIVE: TE12 EXECUTES INT-3B** on
+`refs/trains/int-3b` from `fc8451c4` (P1 one-red validator → I1 census to
+`2430/366/2064/20123/5655` runtime 28146, OSR 1998 earned live → T docs-only;
+held gates read from tails). Chair owns CAS. Receipt → `laneTE12-receipt.md`.
+
+**LIVE (four lanes): TE12(INT-3B executing) · TC13(IN-1c) · TC14(WC-0 compile — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
 dimension 11, FABLE — the estate auditing itself: banked-red blindness,
