@@ -172,6 +172,16 @@ seven refusals recorded. The three-obligation flag law and TTS/SPV/anchor
 preflights bound into every compile via §6. FOREIGN SESSION: deleted by
 the owner — collision risk gone.
 
+**⭐ OWNER ORDER (~23:20): THE LG VOLUME ITSELF GETS THE §48 LOOP** — an SPV
+sweep of DESIGN_FP_ARCH_LG.md's claims against live HEAD (the chair's own
+authoring graded like anyone's; the inherited substrate was stamped at
+`e5ecc83d`, two landings back), then cure-architecture on material findings,
+repeated to quiescence. QUEUED FOR THE FIRST FREED SLOT (four lanes at cap:
+TE11 + INT-S + WY-S + TL-S); the keeper dispatches Lane LG-S on collection
+of any of the three sweeps. Charter: the standard §1 protocol + grade the
+volume's rulings' PREMISES (not the rulings themselves — those are chair
+authority) and its substrate inheritances at the current tip.
+
 **⚠ FOREIGN SESSION ALERT (~22:30, resolved — session deleted):** the owner started a separate local
 session "Fix prose-blind ruin-filter roster walker" (task_67899181) — that
 defect was ALREADY CURED by infra-2 M2 (landed `e5ecc83d`). The session will
