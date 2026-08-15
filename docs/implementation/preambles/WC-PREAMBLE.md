@@ -228,6 +228,36 @@ exports the table*. Every one of those is a negative and every one owes an ancho
 npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js ; echo TRUE_EXIT=$?
 ```
 
+## §P3b · THE MUTATION-COVERAGE ROW EVERY NEW `tests/lint/**` FILE OWES (ODQ §102.2)
+
+⛔ **PRICED AT COMPILE, NOT DISCOVERED AT THE GATE.** `tests/lint/mutationCoverageManifest.test.js`
+enumerates every invariant file and requires each to carry a mutation-coverage entry. **A new
+`tests/lint/**` file is an enumerated invariant file the moment it lands**, so a wave that mints
+one owes its row in the SAME landing.
+
+⚠⚠ **AND THE OBLIGATION IS INVISIBLE TO A FOCUSED RUN, WHICH IS HOW IT WAS FOUND.** `wc-0`'s
+`WC-0C` minted `tests/lint/lawBandTable.walker.test.js`; that member's own focused battery was
+green at its own commit and stayed green, and the red arrived only at the train's terminal gate,
+where it is most expensive. This is the **second** independent discovery of the shape — the first
+was `IN-1C-A`'s walker under ODQ §75 — which is what makes it the habitat rather than the
+instance, and why it is written here rather than remembered.
+
+**TO COMPLY**, one of, in the ruling's own order of preference:
+1. plant a standing regression in `scripts/mutation-sweep.sh` proving the file reds (**preferred**,
+   and it makes the row `kind: 'mutation'`); or
+2. add ONE `rationale` entry to `scripts/mutation-coverage-manifest.json` with a written reason
+   that describes **real convicting power** — the §75 shape, and honest only if the file genuinely
+   carries in-suite controls or the wave executed mutants against it.
+
+⛔ **NEVER as an `uncovered` row**: that list only ever shrinks, and the walker says so in its own
+failure message.
+⛔ **NEVER by re-serializing the manifest** — the standing hazard. Insert surgically and check the
+diff is a pure insert; `wc-0`'s own cure measured **5 insertions, 0 deletions**, with
+`uncoveredBaseline` untouched.
+⚠ A `rationale` row should also NAME ITS PROMOTION PATH, because the sweep's own revert is the
+`git checkout --` family this program's shared-tree protocol forbids outright, so no build lane
+may run the sweep on this tree — the deferral is real and recorded, not an excuse.
+
 ## §P4 · THE REGISTRATION TEMPLATE — MANDATORY AT FULL STRENGTH (ODQ §35.3)
 
 Every WC packet that mints a row in a registration file names, **EXPLICITLY AND BY PATH**: the
