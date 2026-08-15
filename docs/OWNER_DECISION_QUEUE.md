@@ -2083,3 +2083,36 @@ The chartered shape (chair, vetoable):
    Fable window materially faster than the Opus staffing did; the chair
    sequences Fable lanes to the high-judgment slices first so an
    exhaustion mid-review degrades gracefully to the §-recorded remainder.
+
+### §51a · Owner clarification (2026-08-16 ~02:40): COMPREHENSIVE AND
+### EXHAUSTIVE — coherence is the HIGHEST priority, NOT the only one
+
+The review's Phase-S dimension roster expands to the full spectrum, each a
+survey lane (FABLE) with Opus verification behind it, coherence-weighted
+first in ranking but nothing excluded:
+1. COHERENCE (the four lenses: coding/logical/intuitive/intent — R-INT
+   running; vocabulary, cross-layer semantics, law-body follow);
+2. CORRECTNESS & DETERMINISM (same-seed/dormancy/purity spot-audits beyond
+   the walkers' own claims);
+3. ARCHITECTURE (layering, dependency direction, canonical ownership, the
+   headless law);
+4. CODE QUALITY & LEGIBILITY (inheritance-grade readability, idiom
+   consistency, comment discipline, hot-file pressure);
+5. SECURITY / PRIVACY / BILLING (the extracted register's 118 unre-triaged
+   findings folded in; the public-projection seams; RLS posture);
+6. PERFORMANCE & BUNDLE (first-paint budgets, chunk shape, soak timings);
+7. GENERATION QUALITY (constraint coherence, variety, the corpus);
+8. SIMULATION SUBSTANCE (composed-layer meaningfulness — the pre-soak read);
+9. PRODUCT & UX SURFACES (legibility law, news-address law, onboarding,
+   accessibility);
+10. PERSISTENCE & LIFECYCLE (saves, regen, undo, migrate — the estate's
+    most-bitten class);
+11. THE VERIFICATION ESTATE ITSELF (guards-guarding-guards, banked-red
+    blindness, vacuity, ratchet health);
+12. DOCS & LAW-BODY (internal consistency, staleness, the volumes);
+13. OPERATIONS & DEPLOY READINESS (the four deploy gates, CI parity, the
+    .nvmrc anomaly, backup/restore);
+14. PRODUCT/MARKET (positioning vs the landed reality — code-grounded).
+The chair's synthesis at closure covers ALL fourteen, coherence first.
+Findings register incremental in the ledger; Phase-V verification and
+Phase-F dispositions unchanged.
