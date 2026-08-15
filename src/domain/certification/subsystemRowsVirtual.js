@@ -1088,6 +1088,106 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // SILENT into an instrument GAP, and that population is ceilinged.
     soakEvidence: 'unobserved',
   }),
+  // ── WC-0E · THE WAR-CIRCULATION FLAGS (docs/DESIGN_FP_ARCH_WC.md §7.A.2) ──────
+  Object.freeze({
+    rule: 'warCirculationEnabled',
+    title: 'War circulation (the layer gate: people, columns and contributions move as one conserved population)',
+    module: 'src/domain/worldPulse/contributionLedger.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and for this wave it is not a hard call: the member lands a
+      // closed vocabulary, record shapes, a fail-closed normalizer and a gate. It mints no
+      // pulse candidate, so there is no `candidateType` literal to declare.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The only BEHAVIORAL_MOVER_FAMILIES member this lane could ride
+      // is `war`, which would grade the row ALIVE off the entire war layer's traffic in
+      // worlds where the flag has never been true — the refusal the treaty-renewal and
+      // lifecycle-voice rows above make for the same reason.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND HERE IT IS A MEASUREMENT RATHER THAN A JUDGEMENT: this
+      // member calls setSpatialLedger ZERO times. There is no container to declare because
+      // the wave writes no persisted byte at all. The warContributions ledger and its
+      // TRACKED row arrive together at WC-1, with the writer.
+      stateKeys: Object.freeze([]),
+      other: 'THE LAYER FLAG, and it gates a lane that at this wave has no writer at all. Read by name in contributionLedger.contributionLedgerActive as one half of a conjunction with contributionLedgerEnabled: either key absent or false leaves the whole lane dark, so lighting this one alone changes nothing observable. WHAT NOTHING CAN SEE: the wave calls setSpatialLedger zero times and persists no byte, so there is no container for censusWorldStateKeys to walk and no entry count for a soak to read; the module is a closed vocabulary, four declared record fields, a fail-closed normalizer and this gate. Declaring any spatialLedgers container here would grade the row ALIVE off another subsystem entirely. THE OBSERVATION THAT WOULD CLOSE IT: WC-1 lands the writer — troops-lent credit at the levy edge, supplies credit at shipment arrival — and with it the warContributions ledger and its spatialUsage TRACKED row, at which point this row gains a real stateKeys declaration and a soak can grade it.',
+    }),
+    // REACTIVE, not per_tick: a contribution is an event-driven deposit — a party lends
+    // troops or delivers supplies when its own war reasons move it — never a scheduled
+    // fold. ⚠ `none` is not a member of SUBSYSTEM_TEMPOS; the vocabulary is closed at
+    // per_tick | yearly | multi_year | rare | reactive, and the row declares the cadence
+    // the lane will have WHEN LIT rather than the zero it has while dark.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_lane_is_gated_by_both_flags',
+        description: 'The ledger is reachable only when BOTH keys are strictly true. Either one absent or false leaves the lane dark, so lighting one alone changes nothing.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js, which drives each flag with a LITERAL true and asserts the gate is false for each single-flag world.',
+      }),
+      Object.freeze({
+        name: 'nothing_is_written',
+        description: 'The module calls setSpatialLedger zero times and persists no byte, which is what keeps its TRACKED row out of spatialUsage until WC-1 lands the writer.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js by a source scan of the landed module, and enforced tree-wide by the exact-set spatialLedgerCoverage walker.',
+      }),
+      Object.freeze({
+        name: 'the_normalizer_fails_closed',
+        description: 'An unknown kind, a malformed record, a negative or non-finite amount and a missing counterparty all yield null rather than a half-shaped record surviving into a save.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js across every refusal direction.',
+      }),
+    ]),
+    // No channel is declared, so the row can never be ALIVE and says so. `unobserved` is the
+    // honest reading: declaring a channel this wave does not own would convert a real SILENT
+    // into an instrument GAP.
+    soakEvidence: 'unobserved',
+  }),
+  // ── WC-0E · THE WAR-CIRCULATION FLAGS (docs/DESIGN_FP_ARCH_WC.md §7.A.2) ──────
+  Object.freeze({
+    rule: 'contributionLedgerEnabled',
+    title: 'The war-contribution ledger (record shapes and their fail-closed normalizer)',
+    module: 'src/domain/worldPulse/contributionLedger.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and for this wave it is not a hard call: the member lands a
+      // closed vocabulary, record shapes, a fail-closed normalizer and a gate. It mints no
+      // pulse candidate, so there is no `candidateType` literal to declare.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The only BEHAVIORAL_MOVER_FAMILIES member this lane could ride
+      // is `war`, which would grade the row ALIVE off the entire war layer's traffic in
+      // worlds where the flag has never been true — the refusal the treaty-renewal and
+      // lifecycle-voice rows above make for the same reason.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND HERE IT IS A MEASUREMENT RATHER THAN A JUDGEMENT: this
+      // member calls setSpatialLedger ZERO times. There is no container to declare because
+      // the wave writes no persisted byte at all. The warContributions ledger and its
+      // TRACKED row arrive together at WC-1, with the writer.
+      stateKeys: Object.freeze([]),
+      other: 'THE FEATURE FLAG, read by name beside warCirculationEnabled in the same conjunction. It gates the contribution ledger specifically, within a war-circulation layer the other key gates as a whole. WHAT IT GATES AT THIS WAVE: record shapes and their fail-closed normalizer, and nothing else — an unknown kind, a malformed record, a negative or non-finite amount and a missing counterparty each yield null rather than a half-shaped row surviving into a save. WHAT NOTHING CAN SEE: there is no writer, so no ledger key exists to declare and no census or soak can distinguish a lit world from a dark one; the exact-set spatialLedgerCoverage walker enforces that symmetry from the other side, refusing a TRACKED row for a key nothing writes. THE OBSERVATION THAT WOULD CLOSE IT: the WC-1 writer, whose first setSpatialLedger call makes warContributions a real container this row can then declare.',
+    }),
+    // REACTIVE, not per_tick: a contribution is an event-driven deposit — a party lends
+    // troops or delivers supplies when its own war reasons move it — never a scheduled
+    // fold. ⚠ `none` is not a member of SUBSYSTEM_TEMPOS; the vocabulary is closed at
+    // per_tick | yearly | multi_year | rare | reactive, and the row declares the cadence
+    // the lane will have WHEN LIT rather than the zero it has while dark.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_lane_is_gated_by_both_flags',
+        description: 'The ledger is reachable only when BOTH keys are strictly true. Either one absent or false leaves the lane dark, so lighting one alone changes nothing.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js, which drives each flag with a LITERAL true and asserts the gate is false for each single-flag world.',
+      }),
+      Object.freeze({
+        name: 'nothing_is_written',
+        description: 'The module calls setSpatialLedger zero times and persists no byte, which is what keeps its TRACKED row out of spatialUsage until WC-1 lands the writer.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js by a source scan of the landed module, and enforced tree-wide by the exact-set spatialLedgerCoverage walker.',
+      }),
+      Object.freeze({
+        name: 'the_normalizer_fails_closed',
+        description: 'An unknown kind, a malformed record, a negative or non-finite amount and a missing counterparty all yield null rather than a half-shaped record surviving into a save.',
+        check: 'Pinned in tests/domain/contributionLedgerShape.test.js across every refusal direction.',
+      }),
+    ]),
+    // No channel is declared, so the row can never be ALIVE and says so. `unobserved` is the
+    // honest reading: declaring a channel this wave does not own would convert a real SILENT
+    // into an instrument GAP.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

@@ -150,12 +150,20 @@ const UNDERWAYS = 'underwaysOrganicFoundingEnabled';
 // these THREE module-scope edits — this const, the VIRTUAL_RULES member, the LANE_LEAVES entry
 // — carrying ZERO new test titles, so no packet's census tuple moves for it.
 const TREATY_RENEWAL = 'treatyRenewalEnabled';
+// WC-0E. The war-circulation pair, minted together because their gate is ONE conjunction:
+// the LAYER flag and the ledger's own FEATURE flag, read by name in
+// contributionLedger.contributionLedgerActive. Splitting them across two waves would land
+// each read in a commit where its conjunction partner does not exist, reddening direction 1
+// in both halves.
+const WAR_CIRCULATION = 'warCirculationEnabled';
+const CONTRIBUTION_LEDGER = 'contributionLedgerEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
   CONQUEST, HABIT, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
   POLITICS, UNDERWAYS, TREATY_RENEWAL,
+  WAR_CIRCULATION, CONTRIBUTION_LEDGER,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -265,6 +273,16 @@ const LANE_LEAVES = Object.freeze({
   // SHARED_CANDIDATE_LITERALS immediately below, which is the whole reason the
   // empty-eventTypes claim had to become a partition rather than a flat assertion.
   [UNDERWAYS]: ['src/domain/worldPulse/institutionLifecycle.js'],
+  // WC-0E. ONE FILE for BOTH flags, and unusually that is exactly right: the gate is a
+  // single conjunction in contributionLedger.contributionLedgerActive, and the whole lane
+  // at this wave IS that module — a closed vocabulary, record shapes and a fail-closed
+  // normalizer. ⛔ Both are ZERO-CANDIDATE by construction: the wave mints no pulse
+  // candidate, composes no beat and writes no persisted byte, so there is no candidate
+  // literal in either lane to declare. The blocks[] persistence arm this wave also lands
+  // is deliberately NOT here — it sits in worldState.normalizeDeployments and is UNGATED,
+  // because save hygiene must run whether or not the layer is lit.
+  [WAR_CIRCULATION]: ['src/domain/worldPulse/contributionLedger.js'],
+  [CONTRIBUTION_LEDGER]: ['src/domain/worldPulse/contributionLedger.js'],
 });
 
 /**

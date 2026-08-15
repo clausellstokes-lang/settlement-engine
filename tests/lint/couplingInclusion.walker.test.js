@@ -129,6 +129,16 @@ const LAYER_PATTERNS = Object.freeze({
     // designed and silently widen a frozen family (the IN-1 precedent, verbatim; and INT-3B took
     // this identical shape for emigreErrand.js one wave before this one landed).
     /^src\/domain\/worldPulse\/peopleLedger\.js$/,
+    // WC-0E: the war-contribution ledger. Who owes whom for a war — the kinds, the record
+    // shapes and the conservation the credit rides on — is WAR's own subject, on the same
+    // reading that gave peopleLedger.js WAR and emigreErrand.js INTERIOR: the distinction is
+    // SUBJECT, not program. It is NOT an ARGUED_UNLAYERED case; the roster is for modules
+    // that own no subject and are spoken by every port, and this one owns war-contribution
+    // outright. A family home is what will force WC-1's arrival fold and WC-9's close fold to
+    // register their couplings instead of reading across a port in silence.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `contribution[A-Z]` PREFIX: a prefix would claim files
+    // nobody has designed and silently widen a frozen family (the IN-1 precedent, verbatim).
+    /^src\/domain\/worldPulse\/contributionLedger\.js$/,
   ],
   TRADE: [
     /^src\/domain\/worldPulse\/(?:routeNetwork|tradeRoute|tradeWar|commodity|merchant|foodStockpile|foodLedger)/,

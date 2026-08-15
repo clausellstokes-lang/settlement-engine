@@ -144,6 +144,34 @@ function normalizeDeployments(value) {
       if (anchor) next.joinLedger = [anchor];
       else delete next.joinLedger;
     }
+    // WC-0E: `blocks[]` is the origin-tagged population inside a deployed army — the
+    // durable half of the war-circulation conservation identity, extending
+    // leviedPopulationBySource. Keep only well-shaped rows: an entry needs a non-empty
+    // originId and a non-negative integer headcount, because a block whose headcount is
+    // absent or fractional cannot be reconciled against the people ledger and a block with
+    // no origin cannot be credited home. A list that empties out disappears rather than
+    // surviving as an empty artifact, exactly as `casusReasons` above does.
+    //
+    // ⛔ DELIBERATELY UNGATED, AND THIS IS THE POINT RATHER THAN AN OVERSIGHT. Persistence
+    // hygiene must run on EVERY load, lit or dark: an arm that only cleaned malformed
+    // saves while `warCirculationEnabled` was true would leave every dark world's saves
+    // un-normalized and hand a later lit tick a ledger it never validated — the fail-OPEN
+    // direction, on a persistence surface. This function has no `simulationRules` in scope
+    // and must not acquire any; the flags' by-name gate reads live in
+    // contributionLedger.contributionLedgerActive, which is where the lane's behaviour is.
+    if (Object.prototype.hasOwnProperty.call(next, 'blocks')) {
+      const blocks = Array.isArray(next.blocks)
+        ? next.blocks.filter((/** @type {unknown} */ block) => {
+          if (!block || typeof block !== 'object' || Array.isArray(block)) return false;
+          const row = /** @type {Record<string, unknown>} */ (block);
+          const headcount = Number(row.headcount);
+          return String(row.originId ?? '') !== ''
+            && Number.isInteger(headcount) && headcount >= 0;
+        })
+        : [];
+      if (blocks.length) next.blocks = blocks;
+      else delete next.blocks;
+    }
     normalized[key] = next;
   }
   return normalized;

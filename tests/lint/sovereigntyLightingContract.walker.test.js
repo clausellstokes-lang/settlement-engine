@@ -4350,7 +4350,14 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   suiteTitles were never reached there. The whole tuple is re-recorded together here,
     //   at the train's last tests-moving commit, which is what keeps its landing docs-only.
     // 2431/364/2067/20149/5660 → 2437/364/2073/20175/5666.
-    files: 2437, parked: 364, credited: 2073, titles: 20175, suiteTitles: 5666,
+    // ⏱ wc-0e (WC-0E, a sole-member flag train), 2026-08-15 — RE-DERIVED WHOLE. ONE new
+    //   credited file, tests/domain/contributionLedgerShape.test.js, contributing exactly
+    //   eight literal `it` titles and one literal `describe`; no existing registration
+    //   moves and `parked` is untouched because the file trips no park rule. This is the
+    //   train's ONLY tests-moving commit, so unlike its predecessor there is no interior
+    //   red anywhere in it — the tuple is green the first and only time the arms run.
+    // 2437/364/2073/20175/5666 → 2438/364/2074/20183/5667.
+    files: 2438, parked: 364, credited: 2074, titles: 20183, suiteTitles: 5667,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

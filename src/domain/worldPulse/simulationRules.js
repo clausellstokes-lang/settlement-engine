@@ -323,6 +323,20 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // real container, so exempting it would have been the R19 shrug the exempt list's own
   // comment exists to refuse.
   'underwaysOrganicFoundingEnabled',
+  // Joined 2026-08-15 by WC wave WC-0E under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), BOTH in the SAME commit as their first real gate reads and their AUTHORED
+  // certification rows. The two reads are ONE conjunction in
+  // contributionLedger.contributionLedgerActive: `warCirculationEnabled` gates the
+  // war-circulation LAYER and `contributionLedgerEnabled` gates this ledger within it, so
+  // either one dark leaves the lane dark. That is the settlementStrategy
+  // warLayer/warTermination shape, borrowed rather than invented.
+  // ⛔ THE GATE COULD NOT LIVE WHERE THE CHARTER FIRST PUT IT. The blocks[] fail-closed arm
+  // this wave also lands sits in worldState.normalizeDeployments, which takes no rules and
+  // must not acquire any: persistence hygiene runs on EVERY load, and an arm that cleaned
+  // malformed saves only while the flag was lit would leave a dark world's saves
+  // un-normalized — the fail-OPEN direction on a persistence surface.
+  'warCirculationEnabled',
+  'contributionLedgerEnabled',
 ]);
 
 /**
