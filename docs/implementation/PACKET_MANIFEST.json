@@ -8356,7 +8356,7 @@
     },
     {
       "id": "WC-0B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/WC-0B.md",
       "verifiedBase": "98c7872ebf3bb5a43091a5ff7d1b7918881593f0",
       "changeManifest": [
@@ -8431,6 +8431,102 @@
           "eslint",
           "src/domain/spatial/migration.js",
           "tests/domain/militaryColumnRelease.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "WC-0C",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/WC-0C.md",
+      "verifiedBase": "98c7872ebf3bb5a43091a5ff7d1b7918881593f0",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/worldPulse/lawBandModulation.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/lawBandTable.walker.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/lawBandModulationShape.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const ARGUED_ROSTER_CEILING"
+        },
+        {
+          "path": "src/domain/worldPulse/lawWord.js",
+          "symbol": "export const LAW_WORDS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "C1",
+          "case": "ARM 1 — the GUARD pool is asserted against a NAMED empty list, because a signature gone blind must read as an empty list rather than as a pass"
+        },
+        {
+          "id": "C2",
+          "case": "ARM 2, extractor liveness — the same extractor over the CONTROL pool finds lawWord.js and at least two identifiers, the job the authored non-vacuity arm could never do"
+        },
+        {
+          "id": "C3",
+          "case": "ARM 3, disjointness — no CONTROL identifier is admitted by GUARD, which is what the EXCLUDES clause actually meant"
+        },
+        {
+          "id": "C4",
+          "case": "ARMS 4 and 5 — a planted SECOND exporting module reds, ONE planted exporter is still green, and counting is by MODULE so two identifiers in one module stay green"
+        },
+        {
+          "id": "C5",
+          "case": "the frozen legacy set is exactly the two named modules at its exact ceiling, and a third private table reds by name rather than being absorbed"
+        },
+        {
+          "id": "C6",
+          "case": "the key set is frozen, totality-exported and throws on an unknown key; the axis is the three law words and a fourth word throws"
+        },
+        {
+          "id": "C7",
+          "case": "the table is EMPTY and that is asserted, not assumed — zero curve values are declared anywhere in the module"
+        },
+        {
+          "id": "C8",
+          "case": "the totality pin in its survivable direction: every registered key has a curve and every curve names a registered key, without requiring the table to be full"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/lawBandTable.walker.test.js",
+          "tests/domain/lawBandModulationShape.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/couplingInclusion.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/lawBandModulation.js",
+          "tests/lint/lawBandTable.walker.test.js",
+          "tests/domain/lawBandModulationShape.test.js"
         ]
       ]
     }

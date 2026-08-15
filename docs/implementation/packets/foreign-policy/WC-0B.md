@@ -1,6 +1,6 @@
 # War Circulation / WC-0B — the column-class union and the release fork
 
-- **Status:** READY
+- **Status:** LANDED
 - **Train:** `refs/trains/wc-0`, **member 2 of 4**. Plan: `laneTC14-TRAIN-PLAN.md`.
 - **Chair authority:** `OWNER_DECISION_QUEUE.md` **§52** and this train plan's §1 refusal-in-part
   (chair **Q1**). Ruling consumed: **CR-WC-10** (mint the SECOND counts-mover manifest; do not
