@@ -115,8 +115,16 @@ BEFORE wc-0 (M1 harness w/ executed-receipt proof · M2 PACKET_STANDARD
 · M3 preambles · M4 §68.4 docs debts).** ⚠ NEW HAZARD: .git/config
 core.bare FLIPPED TRUE mid-session (setter unknown) — every git add
 dies "must be run in a work tree"; cure `git config core.bare false`;
-memory saved. LIVE: TE14 + R-GEN + WF-F + R-PRF; remaining §51
-dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
+memory saved. **⭐ §77 RE-CHARTER REDUNDANCY RULED** (R1 dual-family
+ready queue · R2 premise map + scoped truncation, LAW refutations keep
+full stop · R3 SPV-flagged conditional forks) — DBE §2.4 amended, all
+three ride eff-1 M2. **✅ WF FABLE ROUND ACCEPTED §78** — 12 structural
+absorption-gap rows CURED at acceptance (WF had no cure lane/rulings
+file); five cures now compile obligations incl. F-5 the WF TUNING-HOME
+LAW (§42/§43 pre-cure) and F-1 (WF-2b builds on the LANDED errand
+spine, pilgrims `personal`); Q1/Q4 to the WF sitting. §70 rounds:
+WC ✅ · WF ✅ · next EP → POP → INT → WY → tails. LIVE: TE14 + R-GEN +
+R-PRF; remaining §51 dimensions: docs · ops · market → synthesis. §61 re-sweep state: level-1 cure re-sweeps executed (RN-C);
 the FIRST post-landing increment executed at INT-3B (§65.3); every
 future landing collection owes its increment. **⭐ §70 (owner, 08-15):
 THE FABLE FINAL ROUND — every Opus-swept annex (WC/EP/POP/WF/INT/WY/

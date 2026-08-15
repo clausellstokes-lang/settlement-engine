@@ -2928,3 +2928,62 @@ first push via pull request"**
    surface); the harness stays un-wired from npm scripts so the
    check-chain mutex can never catch it.
 
+## §77 · RE-CHARTER REDUNDANCY RULED (2026-08-15, chair, vetoable; on
+## the owner's question "can we create a redundancy for: forces a
+## family back to charter?"; canonical spelling in DBE §2.4, amended
+## same commit)
+
+A refuted premise stalls the pipeline through three channels; each gets
+its own redundancy, all riding eff-1's M2 into PACKET_STANDARD:
+1. **R1 — THE DUAL-FAMILY READY QUEUE**: the compile pipeline keeps the
+   executor queue's next TWO slots compiled-and-TTS-simulated from at
+   least TWO distinct families, so a STOP pivots the serial slot to the
+   other family at zero wall-clock while the re-charter runs
+   concurrently on chair/compile lanes.
+2. **R2 — THE PREMISE MAP + SCOPED TRUNCATION**: every train plan maps
+   member → cited annex rows (derivable from the packet's own SPV
+   citations; TTS-checked at compile). A refuted SUBSTRATE-FACT row
+   stops exactly the citing members; premise-disjoint members continue
+   as the train's tail, the disposition riding the receipt into the
+   chair's CAS collection. A LAW-shaped refutation, or any train
+   without the map, keeps the conservative FULL-TRAIN STOP — the map's
+   own completeness is a compile-verified claim, never assumed.
+3. **R3 — PRE-RULED CONDITIONAL FORKS**: only for premises SPV graded
+   UNVERIFIABLE-AT-BASE, the compile may bring "if row X refutes,
+   member M lands as M′" to the chair at promotion — the anticipated
+   refutation then costs no mid-train round-trip. Bounded to
+   SPV-flagged premises; blanket pre-ruling refused (the §63/§70a
+   rot-and-dilution lesson).
+
+## §78 · THE WF FABLE ROUND ACCEPTED — WITH ITS ABSORPTION GAP CURED
+## IN THIS ACT (2026-08-15, chair, vetoable; evidence in
+## laneWFF-round.md + laneWFF-report.md, all figures executed at
+## `d5a6c009`)
+
+1. **The §70.4 stamp is ACCEPTED**: absorption 42/54 annex-carried +
+   12 STRUCTURAL rows unabsorbed (WF, unlike WC, had no cure lane, no
+   rulings file, no preamble — the sweep's five STOP items appeared in
+   no ruling); voided rows 13 intact / 2 superseded-as-predicted / 0
+   verdict changes over 7 landings; law pass 5 MATERIAL / 8 DRIFT /
+   8 HOLDS. **Per the §73 mechanism, the chair's signature HERE adopts
+   the round's five architected cures, completing absorption of all 12
+   structural rows in this act.**
+2. **The five cures are ADOPTED as compile obligations**: F-1 WF-2b
+   builds on the LANDED errand spine (the volume's §5-3 probe clause
+   is superseded — pilgrims are typed `personal`, and the reserved
+   exact paths govern); F-2 WF-6 re-scopes to CONSUME the
+   already-landed GR-3 rows (headroom is 3 lines, not ~24); F-3 WF-1
+   stamps all THREE suppression sites (the `:485` patron-siege loop
+   included); F-4 the four persisted-addition waves re-derive their
+   lifecycle clauses against the EXISTING normalizer
+   (`CONDITIONAL_LEDGER_KEYS` + `ensureWorldState` + the pinned key
+   order — §3's no-normalizer premise is dead); F-5 THE WF TUNING-HOME
+   LAW — every dial (520w/156w/260w, caps, bands) gets a derivation
+   home table and a chair signature under §42/§43 BEFORE any WF band
+   lands (the HB-2 STOP shape, pre-cured).
+3. Volume Q2/Q3 are CLOSED in the tree's direction as the round found;
+   Q1 (five realm arcs) and Q4 (DS-FTH binding) stay open for the WF
+   family sitting, both recommendations validated on measured
+   substrate. WF's first train inherits the §77 premise-map obligation
+   from birth.
+

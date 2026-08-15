@@ -89,6 +89,31 @@ at any exposed state there is at most one READY packet, same as today.
   chain position at EVERY member boundary (§6). A successor collects the
   chain, re-verifies the last member's proof independently, and continues.
 
+**Re-charter redundancy (ODQ §77, 2026-08-15).** A refuted premise no longer
+stalls the pipeline through three channels, each cured separately:
+
+- **R1 — the dual-family ready queue.** The compile pipeline keeps the
+  executor queue's next TWO slots at compiled-and-TTS-simulated status, drawn
+  from at least TWO distinct families. A STOP in the executing family's train
+  pivots the slot to the other family's ready train at zero wall-clock; the
+  re-charter runs on chair/compile lanes concurrently, off the serial path.
+- **R2 — the premise map and scoped truncation.** Every train plan carries a
+  PREMISE MAP: member → the annex rows and rulings it cites (enumerable from
+  the packet's own SPV citations; TTS-checked at compile). At execution, a
+  refuted SUBSTRATE-FACT row stops exactly the members whose cited-row set
+  contains it; members citing only intact rows continue as the train's new
+  tail, and the refutation-disposition rides the receipt into the chair's
+  CAS collection. A LAW-shaped refutation, or any refutation on a train
+  whose plan lacks the map, remains a FULL-TRAIN STOP — the conservative
+  default survives wherever the map cannot prove independence.
+- **R3 — pre-ruled conditional forks.** Where SPV graded a premise
+  UNVERIFIABLE-AT-BASE, the compile MAY bring the fork to the chair AT
+  PROMOTION: "if row X refutes at execution, member M lands in shape M′" —
+  signed then, so the anticipated refutation costs no mid-train round-trip.
+  Bounded deliberately: only SPV-flagged premises, never blanket pre-ruling
+  (the judgment-dilution and rot costs of pre-deciding everything are the
+  §63/§70a lesson).
+
 ### 2.5 Boundaries
 
 Flag-minting waves are train boundaries (the CQ5 one-commit flag law is
