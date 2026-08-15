@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { customDeps, withCustomContent } from '../../src/lib/dependencyEngine.js';
+import {
+  computeFinishedGoodsDemand,
+} from '../../src/generators/economy/finishedGoodsDemand.js';
 
 // §14 trade flow, Phase 1 — a custom good/institution declaring it `satisfies` a
 // finished-goods demand category contributes local supply (shrinking imports)
@@ -58,6 +61,124 @@ describe('customDeps.finishedGoodsSupply', () => {
     const cc = { institutions: [{ name: 'Hedge Armory', localUid: 'h1', satisfies: 'military' }] };
     withCustomContent(cc, () => {
       expect(customDeps.finishedGoodsSupply('military', new Set(['hedge armory'])).supply).toBe(2);
+    });
+  });
+
+  it('counts one exact same-name institution and rejects an ambiguous legacy name', () => {
+    const first = {
+      localUid: 'twin-arsenal-a',
+      definitionId: 'definition:twin-arsenal-a',
+      name: 'Twin Arsenal',
+      satisfies: 'military',
+      economicWeight: 'backbone',
+    };
+    const second = {
+      localUid: 'twin-arsenal-b',
+      definitionId: 'definition:twin-arsenal-b',
+      name: 'Twin Arsenal',
+      satisfies: 'military',
+      economicWeight: 'backbone',
+    };
+
+    withCustomContent({ institutions: [first, second] }, () => {
+      expect(customDeps.finishedGoodsSupply(
+        'military',
+        [first],
+        'town',
+      )).toEqual({
+        supply: 5,
+        goods: [],
+      });
+      expect(customDeps.finishedGoodsSupply(
+        'military',
+        new Set(['twin arsenal']),
+        'town',
+      )).toEqual({
+        supply: 0,
+        goods: [],
+      });
+    });
+  });
+
+  it('deduplicates exact trade-good projections and rejects ambiguous name-only goods', () => {
+    const provider = {
+      localUid: 'twin-forge',
+      definitionId: 'definition:twin-forge',
+      name: 'Twin Forge',
+    };
+    const first = {
+      localUid: 'twin-blade-a',
+      definitionId: 'definition:twin-blade-a',
+      name: 'Twin Blade',
+      satisfies: 'military',
+      economicWeight: 'backbone',
+      requiredInstitution: 'custom:twin-forge',
+    };
+    const second = {
+      localUid: 'twin-blade-b',
+      definitionId: 'definition:twin-blade-b',
+      name: 'Twin Blade',
+      satisfies: 'military',
+      economicWeight: 'backbone',
+      requiredInstitution: 'custom:twin-forge',
+    };
+
+    withCustomContent({
+      institutions: [provider],
+      tradeGoods: [first, second],
+    }, () => {
+      expect(customDeps.finishedGoodsSupply(
+        'military',
+        [provider],
+        'town',
+        { tradeGoods: [first, first] },
+      )).toEqual({
+        supply: 5,
+        goods: ['Twin Blade'],
+      });
+      expect(customDeps.finishedGoodsSupply(
+        'military',
+        [provider],
+        'town',
+      )).toEqual({
+        supply: 0,
+        goods: [],
+      });
+    });
+  });
+
+  it('threads exact institution identity through the canonical demand-gap consumer', () => {
+    const first = {
+      localUid: 'canonical-arsenal-a',
+      definitionId: 'definition:canonical-arsenal-a',
+      name: 'Canonical Arsenal',
+      satisfies: 'military',
+      economicWeight: 'backbone',
+    };
+    const second = {
+      ...first,
+      localUid: 'canonical-arsenal-b',
+      definitionId: 'definition:canonical-arsenal-b',
+    };
+
+    withCustomContent({ institutions: [first, second] }, () => {
+      const exports = [];
+      const imports = [];
+      computeFinishedGoodsDemand(
+        'town',
+        'road',
+        [{ name: 'Barracks' }, first],
+        [],
+        exports,
+        imports,
+      );
+
+      // Barracks demand is 3 and one backbone arsenal supplies 5: the exact
+      // -2 gap produces neither an import nor the "< -2" export bonus. Counting
+      // both definitions would add the bonus; losing exact identity would add
+      // an import.
+      expect(exports).toEqual([]);
+      expect(imports).toEqual([]);
     });
   });
 });

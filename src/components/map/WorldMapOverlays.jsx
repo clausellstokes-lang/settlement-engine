@@ -8,13 +8,19 @@
  */
 
 import { Suspense, lazy } from 'react';
-import { sans, FS, R, ELEV, swatch } from '../theme.js';
+import { sans, FS, ELEV, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
+import { t } from '../../copy/index.js';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
 
 const SimulationRulesDialog = lazy(() => import('./SimulationRulesDialog.jsx'));
+// THE GATHERED ADJUDICATION SCREEN (realm directive 7 / J-D7). A lazy leaf: a
+// session that never withholds a decision never loads the docket surface, its
+// outcome cards, or the address-chain machinery behind them.
+// @enforced-by tests/build/gatheredAdjudicationLazy.test.js
+const GatheredAdjudication = lazy(() => import('./GatheredAdjudication.jsx'));
 
 export function WorldMapOverlays({
   toast,
@@ -45,22 +51,40 @@ export function WorldMapOverlays({
   setShowSimulationRules,
   tourOpen,
   setTourOpen,
+  // J-D7: { open, count, sinceTick, onClose, onOpen } from useAdvanceSession.
+  // Inert default so every existing call site renders byte-identically.
+  gatheredDocket = null,
 }) {
   return (
     <>
       {/* Toast — an optional `action` renders a recovery CTA (P10) so an error
           (e.g. "canonize first") offers a reachable next step, not a dead-end. */}
+      {/* Persistent polite announcer (SB5): this toast previously carried NO live
+          semantics at all — a save/advance confirmation was invisible to screen
+          readers. Non-error text is announced as a TEXT CHANGE inside this
+          always-mounted region (a role=status inserted with its text is read
+          inconsistently); errors interrupt via role=alert on the visible box,
+          which IS reliable on insertion. */}
+      <div className="sr-only" role="status" aria-live="polite">
+        {toast && toast.kind !== 'error' ? toast.text : ''}
+      </div>
       {toast && (
-        <div style={{
+        <div
+          role={toast.kind === 'error' ? 'alert' : undefined}
+          aria-live={toast.kind === 'error' ? 'assertive' : undefined}
+          style={{
           position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
           display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
           background: toast.kind === 'error' ? swatch['#8A2A2A'] : toast.kind === 'info' ? swatch.info : swatch.success,
-          color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+          color: swatch.white, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
           boxShadow: ELEV[2],
           zIndex: 100,
         }}>
-          <span>{toast.text}</span>
+          {/* Non-error text is aria-hidden here (the announcer above carries it);
+              the action button must stay in the a11y tree, so only the text span
+              is hidden, never the box. */}
+          <span aria-hidden={toast.kind === 'error' ? undefined : true}>{toast.text}</span>
           {toast.action && (
             <Button
               variant="ghost"
@@ -69,7 +93,7 @@ export function WorldMapOverlays({
               style={{
                 flexShrink: 0,
                 background: 'rgba(255,255,255,0.16)', color: swatch.white,
-                border: '1px solid rgba(255,255,255,0.4)', borderRadius: R.sm,
+                border: '1px solid rgba(255,255,255,0.4)',
                 padding: '4px 10px', fontSize: FS.xs, fontWeight: 800,
                 minHeight: undefined,
               }}
@@ -100,12 +124,12 @@ export function WorldMapOverlays({
               {!worldCanonized && (
                 <div style={{
                   background: swatch['#FAF8F4'], border: `1px solid ${swatch.stressAmber}55`,
-                  borderLeft: `3px solid ${swatch.stressAmber}`, borderRadius: R.sm,
+                  borderLeft: `3px solid ${swatch.stressAmber}`,
                   padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
                 }}>
                   <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
-                    This realm isn't canonized yet — its history can't advance until it is.
-                    Canonize now to lock the world and begin its timeline.
+                    This realm's world clock hasn't started yet. Its history can't advance until it does.
+                    Start the World Clock to lock the world and begin its timeline.
                   </div>
                   <Button
                     variant="primary"
@@ -113,7 +137,7 @@ export function WorldMapOverlays({
                     onClick={onCanonizeWorld}
                     disabled={canonizeBusy}
                   >
-                    {canonizeBusy ? 'Canonizing…' : 'Canonize the world'}
+                    {canonizeBusy ? 'Starting…' : t('canon.startWorldClock')}
                   </Button>
                 </div>
               )}
@@ -153,6 +177,27 @@ export function WorldMapOverlays({
           onClose={() => setShowSimulationRules(false)}
         />
       </Suspense>
+
+      {/* THE GATHERED ADJUDICATION SCREEN — ONE surface for every matter the
+          advance left unruled (never a sequential modal chain). Mounted only
+          while open, so the lazy chunk is fetched on the first withheld decision
+          and never on a full-auto realm. */}
+      {gatheredDocket?.open && (
+        <Suspense
+          fallback={
+            <div role="status" aria-live="polite" style={{ position: 'fixed', inset: 0, display: 'grid', placeItems: 'center', zIndex: 60 }}>
+              Gathering the matters for your judgment…
+            </div>
+          }
+        >
+          <GatheredAdjudication
+            open
+            campaign={activeCampaign}
+            sinceTick={gatheredDocket.sinceTick}
+            onClose={gatheredDocket.onClose}
+          />
+        </Suspense>
+      )}
 
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />

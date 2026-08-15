@@ -53,21 +53,24 @@ function overviewRivers() {
       const discharge = r.discharge + " m³/s";
       const length = rn(r.length * distanceScale) + " " + unit;
       const width = rn(r.width * distanceScale, 3) + " " + unit;
-      const basin = riversById.get(r.basin)?.name;
+      // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+      const basin = escapeHtml(riversById.get(r.basin)?.name);
+      const name = escapeHtml(r.name);
+      const type = escapeHtml(r.type);
 
       lines += /* html */ `<div
         class="states"
         data-id=${r.i}
-        data-name="${r.name}"
-        data-type="${r.type}"
+        data-name="${name}"
+        data-type="${type}"
         data-discharge="${r.discharge}"
         data-length="${r.length}"
         data-width="${r.width}"
         data-basin="${basin}"
       >
         <span data-tip="Click to focus on river" class="icon-dot-circled pointer"></span>
-        <div data-tip="River name" style="margin-left: 0.4em;" class="riverName">${r.name}</div>
-        <div data-tip="River type name" class="riverType">${r.type}</div>
+        <div data-tip="River name" style="margin-left: 0.4em;" class="riverName">${name}</div>
+        <div data-tip="River type name" class="riverType">${type}</div>
         <div data-tip="River discharge (flux power)" class="biomeArea">${discharge}</div>
         <div data-tip="River length from source to mouth" class="biomeArea">${length}</div>
         <div data-tip="River mouth width" class="biomeArea">${width}</div>

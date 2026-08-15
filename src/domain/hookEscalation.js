@@ -1,13 +1,17 @@
 /**
  * domain/hookEscalation.js — Structured hooks + escalation-clock derivation.
  *
- * Today's hooks live scattered across:
+ * Tier 4.10 of the roadmap. Today's hooks live scattered across:
  *
  *   settlement.economicViability.plotHooks      — economic pressures
  *   settlement.history.events[].plotHooks       — historical event hooks
  *   settlement.defenseProfile.plotHooks         — defense / threat hooks
  *   settlement.powerStructure.plotHooks         — faction-level hooks
- *   settlement.plotHooks                        — aggregated top-level hooks
+ *   settlement.npcs[].plotHooks                 — per-figure hooks
+ *
+ * ⚠ `settlement.plotHooks` IS NOT ONE OF THEM. This list used to name an
+ * "aggregated top-level" address; nothing has ever written it. See the deleted
+ * arm in collectAllHooks below.
  *
  * The shapes differ (some are strings, some are { category, hook,
  * severity } objects, some carry hidden context). This module presents
@@ -29,14 +33,16 @@
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
+import { retainHooks, retentionKey, editedHookTextKeys } from './dossier/hookRetention.js';
+import { themeOfText } from './hookThemes.js';
 
 // ── Hook collection ─────────────────────────────────────────────────────
 // Walks every location the generator might have planted hooks and
 // returns a flat array. Tolerant of missing fields / mixed shapes.
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {any[]} Raw hook entries gathered from across the settlement.
+ * @param {Record<string, any>} settlement
+ * @returns {Array<Record<string, any>>} Raw hook entries gathered from across the settlement.
  *                  Shapes vary; downstream consumers pass each through
  *                  deriveStructuredHook to normalize.
  */
@@ -44,10 +50,13 @@ export function collectAllHooks(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
   const out = [];
 
-  // Top-level aggregated list (sometimes populated by post-processing).
-  if (Array.isArray(settlement.plotHooks)) {
-    for (const h of settlement.plotHooks) out.push({ source: 'aggregate', raw: h });
-  }
+  // ⚠ THE 'aggregate' ARM WAS DELETED, NOT DISABLED (2026-08-11). It read
+  // `settlement.plotHooks` — "sometimes populated by post-processing", which was
+  // never true: no writer in this repo produces `plotHooks` on a settlement ROOT,
+  // and the header's claim that hooks live at `settlement.plotHooks` was aspiration
+  // rather than observation. Every live address is walked below, so deleting the
+  // arm removes a dead read and loses no hook. Do not re-add it — a genuinely new
+  // aggregate address belongs in this walk under its own source label.
 
   // Economic viability hooks.
   const econ = settlement.economicViability;
@@ -106,7 +115,7 @@ export function collectAllHooks(settlement) {
 // Hooks come in three shapes: bare string, { hook: string, … }, or
 // { text: string, … }. Normalize to a single text field.
 
-/** @param {any} raw */
+/** @param {*} raw @returns {string} */
 function hookTextFrom(raw) {
   if (raw == null) return '';
   if (typeof raw === 'string') return raw.trim();
@@ -118,16 +127,13 @@ function hookTextFrom(raw) {
   return '';
 }
 
-/**
- * @param {any} raw
- * @param {any} fallback
- */
+/** @param {*} raw @param {string} fallback @returns {string} */
 function hookCategoryFrom(raw, fallback) {
   if (raw && typeof raw === 'object' && typeof raw.category === 'string') return raw.category;
   return fallback;
 }
 
-/** @param {any} raw */
+/** @param {*} raw @returns {string} */
 function hookSeverityFrom(raw) {
   if (raw && typeof raw === 'object' && typeof raw.severity === 'string') return raw.severity;
   return 'medium';
@@ -165,7 +171,8 @@ const ORIGIN_RULES = [
 
 /**
  * Best-effort classifier returning one of the canonical origin labels.
- * @param {any} hookText
+ * @param {*} hookText
+ * @returns {string}
  */
 export function deriveHookOrigin(hookText) {
   const text = String(hookText || '');
@@ -181,6 +188,7 @@ export function deriveHookOrigin(hookText) {
 // failure-consequence heuristic — short prose anchored to the origin
 // category. Consumers (PDF, AI overlay) can render directly.
 
+/** @type {Record<string, { ifIgnored: string[], possibleResolutions: string[] }>} */
 const ORIGIN_CONSEQUENCES = Object.freeze({
   chain: {
     ifIgnored: [
@@ -208,7 +216,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   institution: {
     ifIgnored: [
-      'The institution becomes impaired. Services it provides degrade.',
+      'The institution becomes impaired — services it provides degrade.',
       'Dependent factions / chains lose their anchor.',
       'A rival institution captures the vacated role.',
     ],
@@ -220,7 +228,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   npc: {
     ifIgnored: [
-      'The NPC takes drastic action: defection, betrayal, departure, or death.',
+      'The NPC takes drastic action — defection, betrayal, departure, or death.',
       'Their faction or institution loses leadership and capacity.',
       'A power vacuum opens; opportunistic actors rush in.',
     ],
@@ -232,14 +240,14 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   external: {
     ifIgnored: [
-      'The external pressure compounds: more refugees, more raids, deeper plague.',
+      'The external pressure compounds — more refugees, more raids, deeper plague.',
       'Local resources are consumed defending or absorbing the impact.',
       'Public order strains as the threat lingers.',
     ],
     possibleResolutions: [
       'Confront the external force directly (combat, diplomacy, magic).',
       'Hire intermediaries to absorb the threat.',
-      'Adapt. Reorganize the settlement around the new reality.',
+      'Adapt — reorganize the settlement around the new reality.',
     ],
   },
   pressure: {
@@ -256,7 +264,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   other: {
     ifIgnored: [
-      'The hook fades, but leaves consequences the DM can pick up later.',
+      'The hook fades — but leaves consequences the DM can pick up later.',
     ],
     possibleResolutions: [
       'Direct intervention by the players.',
@@ -275,8 +283,10 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
  *   }
  *
  * Pure; tolerant; returns null for empty hooks.
- * @param {any} rawWrapper
- * @param {import('./settlement.schema.js').SimSettlement} [settlement]
+ *
+ * @param {*} rawWrapper
+ * @param {Record<string, any>} [settlement]
+ * @returns {Record<string, any>|null}
  */
 export function deriveStructuredHook(rawWrapper, settlement) {
   if (!rawWrapper) return null;
@@ -292,7 +302,7 @@ export function deriveStructuredHook(rawWrapper, settlement) {
   const origin   = deriveHookOrigin(text);
   const severity = hookSeverityFrom(raw);
   const category = hookCategoryFrom(raw, origin);
-  const consequences = /** @type {Record<string, any>} */ (ORIGIN_CONSEQUENCES)[origin] || ORIGIN_CONSEQUENCES.other;
+  const consequences = ORIGIN_CONSEQUENCES[origin] || ORIGIN_CONSEQUENCES.other;
 
   // Stable id: hash-ish of category + first 40 chars of text.
   const idTail = text.slice(0, 40).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
@@ -316,16 +326,44 @@ export function deriveStructuredHook(rawWrapper, settlement) {
   };
 }
 
-/**
- * Convert every hook on the settlement into a structured form.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+/** Convert every hook on the settlement into a structured form.
+ *
+ * J-HK-5 — THE TWO COLLECTORS CONVERGE. This surface adopts the SAME retention
+ * helper the display aggregator uses (src/domain/dossier/hookRetention.js), so
+ * the estate has one visible story set rather than a deduped dossier beside a
+ * raw structured list. The layer is dark by default here for the same reason it
+ * is dark there: `retention: true` is opt-in, so today's output is byte-
+ * identical and every existing caller is unmoved.
+ *
+ * The DM's-pen protection is LIVE on this surface in a way it is not on the
+ * display one — `collectAllHooks` walks `settlement.plotHooks`, which is exactly
+ * where userEdits seats its editable 'hook'/'plotHook' entities, so an edited
+ * hook here is a real key in a real set rather than a vacuous guard.
+ *
+ * @param {Record<string, any>} settlement
+ * @param {{ retention?: boolean }} [options] `retention: true` engages HK-2
+ * @returns {Array<Record<string, any>>}
  */
-export function deriveAllStructuredHooks(settlement) {
+export function deriveAllStructuredHooks(settlement, options = {}) {
   if (!settlement) return [];
-  return collectAllHooks(settlement)
+  const structured = /** @type {Array<Record<string, any>>} */ (collectAllHooks(settlement)
     .map(wrapper => deriveStructuredHook(wrapper, settlement))
-    .filter(Boolean);
+    .filter(Boolean));
+  if (!options.retention) return structured;
+  return retainHooks(structured, {
+    // The structured surface carries no relationship rows (collectAllHooks does
+    // not walk `relationships`), so the exact-text classifier is the whole story
+    // here — no archetype arm is needed or possible.
+    themeOf: (hook) => themeOfText(hook.text),
+    editedTextKeys: editedHookTextKeys(settlement),
+    scaleBand: settlement.tier,
+  });
 }
+
+/** Retention-key helper kept beside the adopter so a caller wanting to build its
+ *  own protected-key set uses the same fold both collectors use.
+ *  @param {unknown} text @returns {string} */
+export const structuredHookKey = (text) => retentionKey(text);
 
 // ── Escalation clocks ──────────────────────────────────────────────────
 // Multi-stage trajectories derived from current simulation state. The
@@ -339,7 +377,7 @@ export function deriveAllStructuredHooks(settlement) {
 //   6. Riot breaks out in the market.
 //
 // We don't try to construct clocks from prose; we derive them from the
-// structured supply-chain and faction foundations. A disrupted food chain spawns
+// structured Tier 4.3 + 4.1 foundations. A disrupted food chain spawns
 // a bread-riot clock; a disrupted trade chain spawns a smuggling-rise
 // clock; a low-legitimacy governing faction spawns a legitimacy-crisis
 // clock. The stages are templated per clock type and the actors are
@@ -392,7 +430,7 @@ const CLOCK_TEMPLATES = Object.freeze({
       'Allies are forced to pick sides.',
       'Quiet inducements / threats circulate.',
       'A symbolic act of defiance occurs.',
-      'Open break. The principals stop speaking publicly.',
+      'Open break — the principals stop speaking publicly.',
     ],
   },
 });
@@ -402,12 +440,9 @@ const CLOCK_TEMPLATES = Object.freeze({
  * values. Unknown tokens are preserved so the rendered stage still
  * reads cleanly when no actor is available.
  */
-/**
- * @param {any} stage
- * @param {any} vars
- */
+/** @param {string} stage @param {Record<string, any>} vars @returns {string} */
 function fillStage(stage, vars) {
-  return stage.replace(/\{(\w+)\}/g, (/** @type {any} */ match, /** @type {any} */ name) => {
+  return stage.replace(/\{(\w+)\}/g, (/** @type {string} */ match, /** @type {string} */ name) => {
     return vars[name] || match;
   });
 }
@@ -423,7 +458,8 @@ function fillStage(stage, vars) {
  *   }
  *
  * Tolerant: returns an empty array when no triggers are present.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {Record<string, any>} settlement
+ * @returns {Array<Record<string, any>>}
  */
 export function deriveEscalationClocks(settlement) {
   if (!settlement) return [];
@@ -445,7 +481,7 @@ export function deriveEscalationClocks(settlement) {
         stages: tmpl.stages.map(s => fillStage(s, { controller: chain.controller })),
       });
     }
-    if (chain.needKey === 'trade') {
+    if (chain.needKey === 'trade_entrepot') {
       const tmpl = CLOCK_TEMPLATES.smuggling_rise;
       clocks.push({
         id: `clock.smuggling_rise.${chain.id}`,
@@ -481,7 +517,7 @@ export function deriveEscalationClocks(settlement) {
   // their archetypes differ, that's the seed for a split. Avoids false
   // positives for single-archetype dominance.
   if (factions.length >= 2) {
-    const sorted = [...factions].sort((a, b) => (b.power || 0) - (a.power || 0));
+    const sorted = [.../** @type {any[]} */ (factions)].sort((a, b) => (b.power || 0) - (a.power || 0));
     const top = sorted[0], second = sorted[1];
     const powerDelta = (top.power || 0) - (second.power || 0);
     if (powerDelta <= 8 && top.archetype !== second.archetype) {
@@ -503,9 +539,9 @@ export function deriveEscalationClocks(settlement) {
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
 
-/**
- * Aggregate count by origin classification.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+/** Aggregate count by origin classification.
+ * @param {Record<string, any>} settlement
+ * @returns {Record<string, number>}
  */
 export function structuredHookOriginBreakdown(settlement) {
   /** @type {Record<string, number>} */
@@ -513,7 +549,7 @@ export function structuredHookOriginBreakdown(settlement) {
     pressure: 0, factionConflict: 0, institution: 0,
     npc: 0, chain: 0, external: 0, other: 0,
   };
-  for (const h of /** @type {any[]} */ (deriveAllStructuredHooks(settlement))) {
+  for (const h of /** @type {Array<Record<string, any>>} */ (deriveAllStructuredHooks(settlement))) {
     if (out[h.origin] !== undefined) out[h.origin] += 1;
   }
   return out;

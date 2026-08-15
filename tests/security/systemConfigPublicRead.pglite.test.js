@@ -25,6 +25,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_058 = resolve(process.cwd(), 'supabase', 'migrations', '058_scope_system_config_public_read.sql');
 const present = existsSync(MIG_058);
 
@@ -38,7 +40,7 @@ describe('system_config pglite target exists (guards against silent vacuous skip
 /** Extract the allowlist SELECT policy verbatim from migration 058. */
 function extractPolicy() {
   const src = readFileSync(MIG_058, 'utf-8');
-  const m = src.match(/create policy "Public reads scoped to safe config keys"[\s\S]*?;\s*\n/i);
+  const m = src.match(/^create policy "Public reads scoped to safe config keys"[\s\S]*?;\s*\n/im);
   if (!m) throw new Error('could not extract the allowlist policy from migration 058');
   return m[0];
 }
@@ -80,7 +82,7 @@ describe.runIf(present)('system_config public-read allowlist — executed agains
       create role nosuperuser nologin;
       grant select on public.system_config to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

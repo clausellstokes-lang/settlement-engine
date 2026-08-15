@@ -50,6 +50,7 @@ export function useDossierEntityNav(settlement, setActiveTab, tabs = []) {
   const navigateToEntity = useCallback((id) => {
     const entry = index.resolve(id);
     if (!entry) return; // unknown id -> no-op (rename-safe: ids are stable)
+    if (entry?.identity?.interactive === false) return; // ambiguous legacy identity -> readable, never guessed
     if (!tabIdSignature.split('|').includes(entry.tab)) return; // tab gated out -> no-op
 
     stableSetActiveTab(entry.tab, 'entity_link');

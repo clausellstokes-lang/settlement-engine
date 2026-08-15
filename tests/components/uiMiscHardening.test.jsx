@@ -8,8 +8,10 @@
  *     re-renders with a fresh onCancel identity (finding #1).
  *   • The shared focus-trap hook handles Escape via the latest handler and
  *     restores focus on close — GalleryReportDialog inherits it (finding #3).
- *   • AccountProfileSection only renders an avatar background for safe http(s)
- *     URLs, falling back to the initial-letter gradient otherwise (finding #2).
+ *   • AccountProfileSection renders an avatar only for safe http(s) URLs,
+ *     falling back to the initial letter otherwise (finding #2 — re-pinned
+ *     after the profile-identity lane replaced the CSS-url tile with an
+ *     <img> and removed the pasted-URL input entirely).
  *   • ImageCropper surfaces a visible error instead of silently failing, and
  *     requests crossOrigin for remote images (finding #5).
  *   • Disclosure wires aria-controls between trigger and panel (finding #7).
@@ -97,10 +99,26 @@ describe('GalleryReportDialog (finding #3) — inherits the primitives focus tra
   });
 });
 
-describe('AccountProfileSection avatar URL (finding #2)', () => {
+describe('AccountProfileSection avatar safety (finding #2, re-pinned)', () => {
+  // ── ARCHITECTURE CHANGE, and why these assertions moved with it ────────────
+  // Finding #2 originally hardened a CSS `background-image: url(...)` avatar
+  // tile fed by a free-text "Avatar URL" prop: the risk was a payload breaking
+  // out of the url() literal into arbitrary CSS.
+  //
+  // The profile-identity lane (DESIGN_PROFILE_IMAGE.md §3/§6) removed BOTH
+  // halves of that risk rather than escaping around it. The pasted-URL box is
+  // gone — profiles.avatar_url is now written only by the upload pipeline — and
+  // the tile is a real <img src> rendered by PublicAvatar, so there is no CSS
+  // literal left to break out of.
+  //
+  // Two of the three original assertions ("no url() is emitted") would now pass
+  // TRIVIALLY, since nothing emits url() under any input at all. A vacuously
+  // green safety test is worse than a red one: it keeps reporting success after
+  // the property it guards has stopped being tested. So the block is re-pinned
+  // on the property that is still real and still refusable — a hostile scheme
+  // must never reach the DOM as an image source, and the letter-circle must
+  // take its place.
   const baseProps = {
-    auth: { displayName: 'Aldric', user: { email: 'aldric@example.com' }, role: 'user' },
-    setAvatarInput: vi.fn(),
     emailNotifications: false, setEmailNotifications: vi.fn(),
     modelPreference: '', setModelPreference: vi.fn(),
     editingName: false, setEditingName: vi.fn(),
@@ -109,50 +127,52 @@ describe('AccountProfileSection avatar URL (finding #2)', () => {
     profileError: null, profileSaving: false, profileSaved: false,
     handleSaveProfilePreferences: vi.fn(),
   };
-
-  const avatarTile = () =>
-    // The 56x56 round tile is the first child div inside the flex row.
-    document.querySelector('div[style*="border-radius: 50%"], div[style*="borderRadius: 50%"]')
-    || screen.getByText('A').parentElement; // initial-letter fallback
-
-  test('renders a background image for a safe https URL', () => {
-    render(<AccountProfileSection {...baseProps} avatarInput="https://cdn.example.com/a.png" />);
-    const tile = avatarTile();
-    expect(tile.getAttribute('style')).toMatch(/url\(/);
-    expect(tile.getAttribute('style')).toMatch(/cdn\.example\.com/);
+  const authWith = (avatarUrl) => ({
+    displayName: 'Aldric', user: { email: 'aldric@example.com' }, role: 'user', avatarUrl,
   });
 
-  test('rejects a javascript: URL and falls back to the initial-letter gradient', () => {
-    render(<AccountProfileSection {...baseProps} avatarInput="javascript:alert(1)" />);
-    // No url() background; the initial letter is shown instead.
-    expect(screen.getByText('A')).toBeTruthy();
-    const tile = screen.getByText('A').parentElement;
-    expect(tile.getAttribute('style') || '').not.toMatch(/url\(/);
-  });
-
-  test('rejects a CSS-breakout payload (no url() emitted)', () => {
-    render(
-      <AccountProfileSection
-        {...baseProps}
-        avatarInput={'");background:red;//'}
-      />,
+  test('renders a safe https avatar as a real <img>, never as a CSS url()', () => {
+    const { container } = render(
+      <AccountProfileSection {...baseProps} auth={authWith('https://cdn.example.com/a.png')} />,
     );
-    expect(screen.getByText('A')).toBeTruthy();
-    const tile = screen.getByText('A').parentElement;
-    // The malformed value is not a valid http(s) URL, so no background image.
-    expect(tile.getAttribute('style') || '').not.toMatch(/url\(/);
+    const img = screen.getByTestId('public-avatar-image');
+    expect(img.getAttribute('src')).toContain('cdn.example.com');
+    // The whole CSS-injection vector is gone, not merely escaped.
+    expect(container.innerHTML).not.toMatch(/url\(/);
   });
 
-  test('shows a tier chip with the tier display name for a free user', () => {
-    render(<AccountProfileSection {...baseProps} auth={{ ...baseProps.auth, tier: 'free' }} />);
-    // The 'free' tier resolves to its display name; the raw key never appears.
-    expect(screen.getByText('Wanderer')).toBeTruthy();
-    expect(screen.queryByText(/free/i)).toBeNull();
+  test('rejects a javascript: URL and falls back to the initial letter', () => {
+    render(<AccountProfileSection {...baseProps} auth={authWith('javascript:alert(1)')} />);
+    expect(screen.queryByTestId('public-avatar-image')).toBeNull();
+    // The section also renders the identity block's own 128/32 previews, which
+    // are letter-circles here (the store has no avatar in this harness). The
+    // header tile is the first one rendered, and it is the one under test.
+    expect(screen.getAllByTestId('public-avatar-letter')[0].textContent).toBe('A');
   });
 
-  test('omits the tier chip when no tier is present', () => {
-    render(<AccountProfileSection {...baseProps} />);
-    expect(screen.queryByText('Wanderer')).toBeNull();
+  test('rejects a data: URL — an inline payload is not an avatar', () => {
+    render(<AccountProfileSection {...baseProps} auth={authWith('data:image/svg+xml,<svg onload=alert(1)>')} />);
+    expect(screen.queryByTestId('public-avatar-image')).toBeNull();
+    // The section also renders the identity block's own 128/32 previews, which
+    // are letter-circles here (the store has no avatar in this harness). The
+    // header tile is the first one rendered, and it is the one under test.
+    expect(screen.getAllByTestId('public-avatar-letter')[0].textContent).toBe('A');
+  });
+
+  test('rejects the original CSS-breakout payload, which is simply not a URL', () => {
+    render(<AccountProfileSection {...baseProps} auth={authWith('");background:red;//')} />);
+    expect(screen.queryByTestId('public-avatar-image')).toBeNull();
+    // The section also renders the identity block's own 128/32 previews, which
+    // are letter-circles here (the store has no avatar in this harness). The
+    // header tile is the first one rendered, and it is the one under test.
+    expect(screen.getAllByTestId('public-avatar-letter')[0].textContent).toBe('A');
+  });
+
+  test('NON-VACUITY GUARD — the safe case really does produce an image', () => {
+    // Without this, every assertion above would still pass if PublicAvatar
+    // stopped rendering images altogether.
+    render(<AccountProfileSection {...baseProps} auth={authWith('https://cdn.example.com/b.webp')} />);
+    expect(screen.getByTestId('public-avatar-image')).toBeTruthy();
   });
 });
 

@@ -131,4 +131,24 @@ describe('A5 — Account Support section (FAQ-first + tickets)', () => {
     expect(screen.queryByText(/internal/i)).toBeNull();
     expect(invoke).toHaveBeenCalledWith('account-actions', { body: { action: 'list_ticket_thread', ticketId: 't-1' } });
   });
+
+  test('a direct operator-message reply opens a prelinked account ticket', async () => {
+    const Section = await importSection();
+    render(<Section operatorMessage={{ id: 'message-7', kind: 'direct', subject: 'A concern about your gallery item' }} />);
+
+    expect((await screen.findByRole('status')).textContent).toMatch(/linked to that notice/i);
+    expect(screen.getByLabelText(/subject/i).value).toBe('Re: A concern about your gallery item');
+    expect(screen.getByLabelText(/^category$/i).value).toBe('account');
+    fireEvent.change(screen.getByLabelText(/describe your issue/i), { target: { value: 'Here is the context.' } });
+    fireEvent.click(screen.getByRole('button', { name: /create ticket/i }));
+
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('account-actions', expect.objectContaining({
+      body: expect.objectContaining({
+        action: 'create_ticket',
+        links: expect.objectContaining({ operator_message_id: 'message-7' }),
+        metadata: expect.objectContaining({ operator_message_id: 'message-7' }),
+      }),
+    })));
+    expect(screen.queryByRole('status')).toBeNull();
+  });
 });

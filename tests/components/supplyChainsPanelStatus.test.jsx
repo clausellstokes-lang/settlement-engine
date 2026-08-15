@@ -29,5 +29,10 @@ describe('SupplyChainsPanel getStatus', () => {
     expect(getStatus('running')).toBe(STATUS.running);
     expect(getStatus('impaired')).toBe(STATUS.impaired);
     expect(getStatus('broken')).toBe(STATUS.broken);
+    expect(getStatus('active')).toBe(STATUS.active);
+    expect(getStatus('confirmed')).toBe(STATUS.confirmed);
+    expect(getStatus('stale')).toBe(STATUS.stale);
+    expect(getStatus('blocked')).toBe(STATUS.blocked);
+    expect(getStatus('ineligible')).toBe(STATUS.ineligible);
   });
 });

@@ -6,11 +6,10 @@
  * pipeline and assert that the traces emitted reflect the configured
  * pressures.
  *
- * Today only the `assembleInstitutions` step emits traces, so the
- * assertions here are scoped to institution selection. As more steps
- * adopt trace recording, this file is the natural home for tests like
- * "plague trace propagates to healing-capacity downstream" or "cut
- * trade route reduces merchant faction power".
+ * Institution traces originate in selection and in the downstream passes
+ * that add, remove, or repair seats. This file is also the natural home for
+ * tests like "plague trace propagates to healing-capacity downstream" or
+ * "cut trade route reduces merchant faction power".
  *
  * Pattern:
  *   1. Generate a settlement with a config that forces a specific
@@ -56,6 +55,7 @@ describe('trace surface: every generated settlement carries traces', () => {
       'cascadePass',
       'isolationPass',
       'factionCorrelationPass',
+      'coherenceRepairPass',
     ]);
     for (const t of instTraces) {
       expect(VALID.has(t.step)).toBe(true);

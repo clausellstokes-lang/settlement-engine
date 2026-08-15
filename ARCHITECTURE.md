@@ -25,32 +25,90 @@ functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 ```
 data/        Pure content tables — the moat. ~18k lines: institutionalCatalog,
              namingData, supplyChainData, npcData, historyData, … No logic.
+kernel/      Determinism primitives — the seeded-PRNG seam (prng.js) and its
+             global context (rngContext.js). Tiny, dependency-free (only
+             seedrandom); the lowest engine layer, which generators and domain
+             both build on. Its own first-paint chunk (`kernel`), so the
+             createPRNG seam never drags the lazy engine chunk into first paint.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 19-step pipeline; the rest are domain generators
+             steps/ holds the 22-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
+             Bundled as the ~514 kB lazy `engine` chunk — fetched on first
+             Generate (settlementSlice's loadEngine dynamic import), NOT on
+             first paint. The small slice the entry legitimately reaches (the
+             coherence draft-check, neighbour backlink, pipeline-rail labels +
+             their influence-scoring spine) rides a separate first-paint
+             `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
-             entities, contradictions, provenance, migrations, schema, summary.
-             Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
-store/       Zustand slices (16) — the single client state container.
-components/   React UI. Inline-styled, token-driven. Large feature panels +
+             entities, contradictions, provenance, migrations, schema, summary,
+             the renderer-neutral settlement-scene projection and manifest
+             compiler (`townScene/`; one canonical truth for 2D and 3D),
+             the **campaign world-pulse simulation** (`worldPulse/` — ~378 modules
+             that age a canonized region tick-by-tick: proposals, party impacts,
+             the multi-tick interval orchestrator, PLUS the geopolitical
+             subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
+             `mobilization`), trade war & blockade (`tradeWar`/`blockadeTransport`/
+             `tradeSalience`), religion (`religionState`/`pantheon`/`religiousContest`/
+             divine mandate), coups & faction competition, and NPC agency; the
+             shared sim-shape typedefs live in `pulseShapes.js`), the **spatial-canon
+             engine** (`spatial/` — the Phase 5.5 KEYSTONE, 30 modules that make the
+             realm map a first-class engine input; see "The spatial engine" below),
+             regional causality (`region/`), and the fail-closed public-safe display
+             projection (`display/`). Every roll forks a seeded, injected RNG (determinism is
+             sacred — no Date.now/Math.random). Was the only gate-typechecked layer;
+             the gate now covers the non-JSX logic tree, and `worldPulse/` also carries a
+             strict-typecheck ratchet + an any-cast burn-down ratchet
+             (scripts/count-domain-any.mjs). <!-- @enforced-by tsconfig.full.json + tsconfig.domain-strict.json + tests/lint/domainAnyCastBaseline.test.js -->
+             `pulseStageManifest.js` records non-executing stage order/read/write
+             contracts and `ledgerOwnershipManifest.js` records certification-only
+             writer families; `pulseKernel.js` remains execution authority.
+             <!-- @enforced-by tests/domain/pulseStageContracts.test.js -->
+application/ Application-command lifecycle: admitted envelopes, owner/target/
+             revision context, legal command specifications, replay-safe receipts,
+             and bounded server-authoritative command adapters. This is a
+             vertical migration seam, not a second store or a universal event bus.
+store/       Zustand slices (20) — the single client state container, incl. the
+             campaign world-pulse, regional, account-import, persisted
+             display-preference, and NPC-verb slices.
+components/  React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
              @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
-             existing 35 files burning down (scripts/.raw-button-baseline.json);
-             every icon-only button must carry an
+             existing files burning down; every icon-only button must carry an
              accessible name — @enforced-by jsx-hygiene/icon-button-needs-label) +
-             new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
+             new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ (World
+             Map + Realm hub) + auth/ + account/ + admin/ + pricing/ + purchase/ +
+             home/ (landing) + region/ + legal/ (terms/privacy/refunds).
+workers/     Bounded off-main-thread transforms. The TownScene workers lower an
+             already audience-projected manifest into live transferable geometry
+             or nested-lazy deterministic PNG/GLB exports; neither receives raw
+             canonical or DM-only state.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
-             routes, authIntents, customRegistry, dependencyEngine.
+             routes, authIntents, customRegistry, dependencyEngine, and the
+             settlement-scene worker client/cache/adaptive-quality policy.
 hooks/ copy/ design/ config/   Cross-cutting: tokens, copy strings, pricing.
 ```
 
-**Three-layer rule (respected): `data → generators → presentation`.** Generators
-import data and never import React/Zustand, so the whole engine runs headlessly
-(tests, scripts, server). The one edge that wires live custom-content into the
-generator is `setCustomContentSource(...)` in `store/index.js` — kept there on
-purpose so the generator stays store-free.
+**The main read/data-flow map is
+`data → kernel → { generators, domain } → store → components/pdf`.** Durable
+write paths are migrating vertically through
+`components → application command → domain operation → transactional service/store
+projection`; unchanged legacy writers still use the established store/service path.
+`generators` and `domain` are mutually-dependent PEER engine layers by design —
+generators reuse domain vocabulary (trace, magicFilter, goodsCatalog,
+customContentSchema, factionArchetypes) and domain reuses engine derivations
+(structuralValidator, crossSettlementConflicts, computeActiveChains). Both build
+on `kernel`, the shared determinism primitives (`createPRNG` / `rngContext`).
+The ONE invariant that is enforced, and the one that matters: **nothing under
+`src/kernel`, `src/data`, `src/generators`, or `src/domain` imports React,
+Zustand, or the store** — that is what keeps the whole engine headless (tests,
+scripts, server). Dependency cycles are pinned to a frozen 4-cycle baseline that
+may only shrink.
+<!-- @enforced-by tests/architecture/layerBoundaries.test.js -->
+The one edge that wires live custom-content into the generator is
+`setCustomContentSource(...)` in `store/index.js` — kept there on purpose so
+the generator stays store-free.
 
 ---
 
@@ -58,20 +116,27 @@ purpose so the generator stays store-free.
 
 `generators/steps/index.js` registers steps in dependency order; each step
 module calls `registerStep()` on import. The runner lives in
-`generators/pipeline.js` and threads a **seeded PRNG context** (`rngContext.js`,
-`prng.js`) plus an `onStep` callback (used by the UI "pipeline reveal").
+`generators/pipeline.js` and threads a **seeded PRNG context**
+(`kernel/rngContext.js`, `kernel/prng.js`) plus an `onStep` callback (used by
+the UI "pipeline reveal").
 
-Order (all 19 registered steps): `resolveConfig → resolveResources →
+Order (22 steps): `resolveConfig → buildGenerationContext → resolveResources →
 resolveStress → resolveNeighbour → assembleInstitutions → subsumptionPass →
 cascadePass → isolationPass → stressConfirmPass → generateEconomy →
 generatePower → neighbourFactions → factionCorrelationPass →
-economyReconcilePass → structuralValidationPass → generatePopulation →
-corruptionPass → generateNarratives → assembleSettlement`.
+coherenceRepairPass → economyReconcilePass → powerEconomyReconcilePass →
+structuralValidationPass → generatePopulation → corruptionPass →
+generateNarratives → assembleSettlement`.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (derived from steps/index.js) -->
 
-Determinism matters: same seed ⇒ same settlement. This is what makes the
-property-based and snapshot tests possible. The **Strangler-Fig** migration is
-COMPLETE — the legacy monolithic `generateSettlement.js` has been removed;
-`generateSettlementPipeline.js` (the registered-step pipeline) is the sole path.
+Determinism matters: same seed ⇒ same settlement — pinned by a 525-config
+golden-master hash manifest (recount 2026-08-03 — 523 was the PRE-HK-3 figure)
+and enforced by construction (seeded per-step PRNG
+forks; Math.random/Date/localeCompare banned by lint in the engine + domain).
+The **Strangler-Fig** migration is COMPLETE: legacy `generateSettlement.js` is
+deleted; `generateSettlementPipeline.js` is the only entry point. The three
+big domain generators (economic/power/services) are thin barrels over
+`economy/` + `power/` + `services/` modules (≤800 lines each, ratchet-enforced).
 
 `structuralValidator.js` validates engine output shape; `settlement.schema.js`
 (domain) is the canonical schema and `settlementMigrations.js` upgrades old
@@ -79,12 +144,58 @@ saves when the shape changes.
 
 ---
 
+## The spatial engine + the engine-wave stack
+
+Phase 5.5 added a **spatial-canon engine** (`src/domain/spatial/`, 30 modules)
+that promotes the realm map to a first-class engine input: settlements carry
+positions, neighbours, and travel costs, and an M1–M11 "mover ladder" ages the
+realm tick-by-tick (migration, trade lanes, war fronts, discovery, calamity,
+upswing). On top of the physical movers sits a stack of **engine waves** — tempo
+governance (E0), the generosity instruments (E1), war/peace reasoning + treaties
+(W-PEACE), and the four doctrine layers (supply-web warfare, information
+statecraft, the corruption web, settlement politics). Every one ships **dormant
+and gated**: with its feature absent or its flag off, generation is byte-identical
+to before it existed.
+
+The constitution these obey — **same-seed byte-identity, dormancy, and the
+first-paint ratchet** — is deliberately NOT restated here (a second copy would
+drift). It lives in `docs/PHASE55_EXECUTION_PLAYBOOK.md` §0.2 (constitutional
+laws), with the mover ladder and wave stack recorded in §0.0. That playbook is the
+authority for anything that changes engine behaviour or first-paint cost; this
+section is only the entry pointer to it.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (must mention src/domain/spatial) -->
+
+---
+
+## Settlement scene: one truth, two presentations
+
+`src/domain/townScene/` derives a versioned, audience-safe
+`TownSceneManifest` from canonical settlement state. The 2D plan and illustrated
+3D portrait consume that derived truth; neither is a second mutable settlement
+model. Player filtering happens before scene compilation or worker transport, and
+Three.js is confined to the lazy
+`src/components/townMap/scene3d/` presentation boundary.
+
+The 3D portrait is currently available as an opt-in view through
+`settlementScene3d`, while `settlementScene3dDefault` remains off. Promotion to
+the default requires current local, rendered, device, accessibility, human, and
+field evidence. The 2D plan remains the permanent precision, accessibility,
+export, and performance fallback after any future promotion.
+
+The full ownership, determinism, privacy, worker, lifecycle, adaptive-quality,
+editing, and accessibility design lives in
+[`docs/TOWN_SCENE_3D_ARCHITECTURE.md`](docs/TOWN_SCENE_3D_ARCHITECTURE.md).
+Its machine-readable evidence and promotion rules live in
+[`docs/TOWN_SCENE_PROMOTION_CONTRACT.json`](docs/TOWN_SCENE_PROMOTION_CONTRACT.json).
+
+---
+
 ## State (`store/index.js`)
 
-One Zustand store composed from 16 slices, with `immer + persist +
+One Zustand store composed from 20 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
-only lightweight, user-owned data (config + toggles)** — never the large
-generated settlement object. `onRehydrate` resets the wizard to the mode picker.
+only lightweight, user-owned data (config + toggles + device display
+preferences)** — never the large generated settlement object. `onRehydrate` resets the wizard to the mode picker.
 
 `authIntents` (registered here) powers "save-as-signup": an anonymous action is
 queued, then replayed with real credentials after the user authenticates.
@@ -95,103 +206,97 @@ Auth is **two orthogonal axes**: `tier` (anon / free / premium) × `role`
 
 ---
 
+## Application commands, journals, and transport
+
+`src/application/commands/` is the application boundary for reviewed mutations.
+It admits a target-addressed envelope, checks owner and expected state, resolves a
+small command specification, executes the existing domain/store verb, and emits a
+typed receipt. Its memory journal provides in-session duplicate suppression and
+replay; it is not described as durable.
+
+The three similarly named mechanisms have intentionally different jobs:
+
+- `store/operationRegistry.js` is the mutation census and governance vocabulary.
+  It tells reviewers which store verbs exist; it does not dynamically dispatch
+  every mutation.
+- `store/outbox.js` is eventual transport for legacy persistence work. Delivery
+  completion is not command authority.
+- `application_command_journal` (migration 183) is durable command identity,
+  outcome, and reconciliation evidence. The first bounded transaction is
+  `CUT_TRADE_ROUTE`: pure client preparation plus one owner-scoped PostgreSQL
+  compare-and-set that mutates the save and finalizes the receipt atomically.
+  Its initiating Surveyor review exposes an explicit same-session recovery
+  action: it reads the exact owner-scoped journal row, replays a confirmed
+  commit to project its row/receipt, retries the unchanged command only when no
+  durable row exists, and never retries an unresolved claim.
+- Migration 184 extends that same authority to reviewed structured imports:
+  create-and-attach or exclusive rehome, exact pre-command membership topology,
+  campaign-envelope preservation, and final command receipt share one
+  transaction. Configured clients do not dual-write through legacy save,
+  campaign, or outbox paths.
+
+The migration rule is vertical: move one complete command family without dual
+writing, prove replay/stale/offline/owner-race behavior, then migrate the next.
+There is no flag-day Zustand rewrite and no generic server executor that accepts
+arbitrary mutation names.
+
+---
+
 ## Routing
 
 `lib/routes.js` is the single source of truth: a `ROUTES` table mapping internal
 `view` ids ⇄ public paths, plus guards (`auth` / `elevated`). `App.jsx` switches
-on `view`; a single `NAV` array (Create · Settlements · World Map · Compendium ·
-Gallery · About) lives in `App.jsx`, with Pricing as a secondary header link
-(`HERO_LINKS`). The former `/compare` pages are a tab on the **About** page
-(renamed from "How To Use"); Workshop / "Custom Generate" was removed entirely.
-`/workshop` and `/compare*` stay as routes that redirect to those surfaces. The
-mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
+on `view`; the **`NAV` is derived from the `ROUTES` table** (Create · Welcome ·
+Library · Realm · Compendium · Gallery · About), with Pricing as a secondary
+header link. `/` is a marketing front door that resolves to the **Welcome/home**
+landing (returning members route on to their workspace). The former `/compare`
+pages are a tab on the **About** page (renamed from "How To Use"); Workshop /
+"Custom Generate" was removed entirely. `/workshop` and `/compare*` stay as routes
+that redirect to those surfaces. Public gallery dossiers deep-link at
+`/gallery/:slug`, prerendered with per-slug OG tags for non-JS scrapers by
+`api/gallery-meta.js` (a Vercel rewrite that precedes the SPA catch-all). The
+mobile bottom-nav caps at 5 items (Realm is off the mobile bottom nav); desktop
+shows all visible items.
 
 ---
 
 ## Backend (`supabase/`)
 
-- **migrations/** (112) — schema + RLS policies + credit ledger + version
-  history + save-limit + profile-security + auth/credit trust-boundary repair +
-  account/billing models + the community gallery (votes, comments, privacy
-  sanitization, reports, moderation, importable dossiers) + analytics core +
-  regional NPC/propagation reports + map-backdrop storage + admin
-  least-privilege/audit-log/deletion/support + the **account-status SECURITY
-  migrations** (057/059/060 enforce account-status writes/RLS) + **062**
-  (close authz gaps: RLS on the two analytics tables, drop the un-audited
-  privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) +
-  **066** (Auth Phase 2: server-write-only `security_answers` bcrypt table +
-  SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) +
-  **067/068** (recovery-verify lockout with a time-bounded self-healing predicate
-  so a failed-answer streak throttles via escalating backoff instead of permanently
-  locking the account) + **069** (an atomic `persist_world_pulse_advance`
-  SECURITY DEFINER RPC that writes a world-pulse advance's entire settlement +
-  campaign write-set in one owner-checked transaction; now wired into the client
-  persist path — the cloud branch of `flushWorldPulsePersist` routes the whole
-  advance write-set through this single RPC, so a partial failure can no longer
-  carry forward a half-applied advance. The optional `p_expected_tick` stale-apply
-  guard only fires when non-null: forward advances pass the post-advance tick so a
-  duplicate re-apply is a no-op, while an undo passes NULL (last-write-wins) so the
-  lower restored tick reaches the cloud instead of being rejected as stale) +
-  **070** (nullable `gallery_realm_arc_summary` text column on settlements, the
-  read/write target for the gallery realm-arc share) + **071** (an `importable`
-  gallery facet: recreates the `tile_rows`/`list_gallery_dossiers` RPC chain to
-  surface and filter on the owner `gallery_importable` opt-in) + **072** (maps-side
-  parity: a `saved_maps.gallery_importable` owner opt-in + `import_gallery_map`
-  server-gated clone RPC + an `importable` facet on `list_gallery_maps`) +
-  **073** (restore the account-status guard on the publish-map RPC) + **074**
-  (documentation-only re-affirmation of the **069** `persist_world_pulse_advance`
-  RPC for its second caller — the Phase-4b campaign change-queue member-commit,
-  which reuses 069's `p_expected_tick`=NULL path to persist a local settlement
-  edit whose campaign snapshot carries the new `worldState.deferredImpacts` key,
-  with the cross-settlement regional ripple deferred to the next world-pulse
-  Advance; creates no new object, re-affirms the authenticated-only GRANT, and
-  updates the function COMMENT to name both callers) +
-  **084** (duplicate-saveId hardening for **069**'s `persist_world_pulse_advance`:
-  its ownership pre-check compared owned settlement rows against the raw
-  `jsonb_array_length` of the write-set, so a repeated saveId tripped a false
-  "not owned" abort; 084 recreates the net-current body comparing owned rows against
-  the count of DISTINCT referenced ids instead — every other line, the signature, and
-  the GRANT are 069 verbatim) +
-  **085** (refund_credits service-role gate fix: 033 locked the GRANT to
-  `service_role`, but 009's body opened with an `auth.uid() is null` raise +
-  owner check, so the AI-failure refund — called from the edge via the
-  service-role client — threw every time, charging the user without refunding;
-  085 recreates 009's net-current body, skipping the auth.uid()/ownership raises
-  ONLY when the caller is `service_role`, preserving the authenticated-user
-  checks exactly) +
-  **086** (atomic AI-spend reservation: the global daily/monthly USD cap was
-  checked read-only before the model calls while COGS landed only after, so
-  concurrent generations could collectively overrun the cap; 086 adds a
-  reservation RPC reconciled to actuals) +
-  **097** (defense-in-depth for the credit ledger's allocation invariant: a
-  constraint trigger on `credit_spend_allocations` locks the referenced grant row
-  and rejects any insert/update whose per-grant total would exceed the grant's
-  amount, so `SUM(allocations) <= grant.amount` is enforced by the schema — not
-  only by `spend_credits`'s arithmetic — even against a future caller or a manual
-  fix) —
-  all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
-  spine. Apply every file in `supabase/migrations/` in lexical order; never skip
-  the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
-- **functions/** (13 Deno edge functions; `_shared/` is a helper dir, not a
-  deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
-  - `auth-recovery` — logged-OUT password recovery (Auth Phase 2). No JWT; the
-    caller forgot their password. Per-IP + per-email rate limit (fail-closed) +
-    bot guard → service-role-only recovery RPCs (066): reveal one random security
-    question, verify the answer, email a `recovery` reset link to the account.
+- **migrations/** (195) — prod applied head tracked in `supabase/applied-head.json`,
+  ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
+  version history + save-limit + profile-security + auth/credit trust-boundary
+  repair (017) + account/billing models (018) + the community gallery —
+  votes, comments, privacy sanitization, reports, moderation (019-022), all via
+  SECURITY DEFINER RPCs with sanitized public reads. The chain extends through
+  the subscription/pricing + referral + dossier-entitlement models, world-pulse
+  atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
+  consent + velocity guards, gallery view-dedup, and migration 194's private
+  Operator Messages/receipt substrate with lease-safe broadcast delivery and
+  explicit product-update consent — up to the current head. RLS is the security
+  spine.
+- **functions/** (33 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
   - `stripe-webhook` — verifies the signature (`constructEvent`) before acting;
-    uses the service-role key (no user JWT on webhooks). Also settles referral
-    rewards (107) on the referee's first real payment — claim-once RPCs, both
-    parties rewarded (founder credits / customer-level coupon), clawed back on
-    refund/dispute/payment-failure — and sends the reward notices directly via
-    Resend (`_shared/referralEmails.ts`, fire-and-forget).
+    uses the service-role key (no user JWT on webhooks).
   - `admin-actions` — JWT-auth → profile `role` check → 403; allowlisted
-    metadata keys/roles (anti-privilege-escalation).
+    metadata keys/roles (anti-privilege-escalation). Operator direct notices,
+    warnings, and bans commit their Account Message + real-actor audit in the
+    database before provider-neutral best-effort mail; a mass broadcast also
+    requires the exact `SEND TO ALL` confirmation and a fresh password AMR.
+  - `operator-message-worker` — disabled-by-default, secret-gated leased courier
+    for queued broadcasts. Stable recipient cursors and per-user email outcomes
+    are database-owned; each provider send requires a heartbeat plus a
+    lease-token-bound recipient CAS claim, whose fresh address/consent/token is
+    the only delivery authority. Abandoned `sending` attempts become terminal
+    outcome-unknown records and are never resent.
+  - `unsubscribe` — public GET-confirm / POST-mutate bearer-token boundary. It
+    calls only the service-role opt-out RPC; GET never mutates and the token can
+    never enable an email category.
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
-    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/aiGroundingBundle.freshness.test.js -->
+    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->
 
 Secrets live in the Supabase dashboard / Vercel env, never in the repo. Client
 reads only `VITE_*` vars (see `.env.example`); the anon key is public by design
@@ -214,31 +319,98 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 
 ## The gate
 
-`npm run check` = `validate:data && validate:edge && validate:map &&
-validate:migration-head && typecheck && typecheck:domain:strict && lint &&
-test && build` (nine stages — the authoritative list is the `check` script in
-`package.json`; keep this line in sync with it).
+`npm run check` = `validate:hazard-registry && validate:premortem &&
+validate:packets && validate:data && validate:custom-content-manifest &&
+validate:migration-head && validate:edge && validate:map &&
+validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
+typecheck:ratchet && typecheck:domain:strict && lint && test:ratchet && build &&
+verify:dist`.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
+- **validate:hazard-registry** — integrity of `scripts/hazard-registry.json`: every
+  recorded hazard class either names live enforcing machinery or carries an explicit
+  accepted-reason, so a class cannot sit recorded-but-unenforced.
+- **validate:premortem** — `scripts/premortem.mjs --self-check`, the instrument that
+  reads a changeset and names the recorded hazard classes that shape exposes, before
+  the error rather than after it.
+- **validate:packets** — fail-closed parity across the implementation index,
+  human packet contracts, live required symbols, and the machine-readable packet
+  manifest; it also supplies deterministic READY-only coding capsules.
+  <!-- @enforced-by tests/scripts/implementationPackets.test.js -->
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
-- **validate:edge** — edge-function contract/shape checks.
-- **validate:map** — Azgaar/FMG map-bridge validation.
-- **validate:migration-head** — the migration applied-head ledger is in sync
-  (fails closed if a migration was added without bumping the head).
-- **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
-  tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
-  punch-list reached zero, so the gate was switched to full coverage;
-  `typecheck:domain` keeps the fast domain-only check.
-- **typecheck:domain:strict** — the strict-mode domain typecheck (tighter than
-  the full-tree pass, scoped to the domain layer).
+- **validate:custom-content-manifest** — regenerates the canonical custom-content
+  authority in check mode and fails if any generated client, edge, or SQL
+  projection has drifted from `schema/custom-content.manifest.json`.
+- **validate:migration-head** — migration numbering is contiguous and the
+  checked-in applied-head ledger is well-formed (see `docs/DEPLOY.md`).
+- **validate:edge** — the edge-function contracts (config + `verify_jwt` posture,
+  the built `_shared` bundle wiring).
+- **validate:map** — the vendored Azgaar FMG map fork stays within its pinned
+  contract.
+- **validate:tuning-bands** — the R-15 tuning-band manifest
+  (`src/domain/tuning/proposedSoakBands.js`) is well-formed and every proposed
+  band ships `PROPOSED` (soak-vetoable), so no malformed or pre-ratified band slips in.
+- **validate:foundry-module** — the standalone `foundry-module/` package (the
+  world importer) is well-formed and safe (module.json valid, importer parses, no
+  content-into-code) — an out-of-app-gates top-level dir like `public/map`.
+- **validate:mcp-server** — the standalone `mcp-server/` package (the local Truth
+  Server) is dependency-free, parses, has no write/network path, and its tool
+  manifest is read-only by construction (no mutating tool exists).
+- **typecheck:ratchet** — `tsc --noEmit -p tsconfig.full.json` over the **non-JSX
+  src logic tree** (domain/store/lib/hooks/generators plus `.js` PDF/foundry
+  modules), read through the per-file ceiling in
+  `scripts/check-full-typecheck.mjs`. It deliberately does not claim
+  `src/components/**/*.jsx` or `src/pdf/**/*.jsx`; those remain covered by
+  ESLint, rendered tests, and the Vite build. `typecheck:domain` keeps the fast
+  domain-only check, and `npm run typecheck` remains the RAW, unfiltered tsc run
+  a burn-down lane reads.
+
+  This step was a boolean gate at zero errors until 2026-08-07. It went red on
+  2026-08-02 (`7796954e`) and stayed red, and because the gate is an `&&` chain,
+  **`lint`, `test`, `build` and `verify:dist` — every step behind it — stopped
+  running with it** for four days and ~368 commits. The ratchet is the repair: a
+  truthful ceiling, measured in an integrity-counted `git archive` of a committed
+  sha, that may only shrink. A file absent from the baseline has an allowance of
+  ZERO, so new work must still be typecheck-clean. Burn it down with
+  `npm run typecheck`, then bank the win with `npm run typecheck:ratchet:update`.
+- **test:ratchet** — the full Vitest suite, run through the PER-TEST census
+  (`scripts/check-test-ratchet.mjs`). Step 12 was a boolean gate at zero failures
+  and it was red, so **`build` and `verify:dist` — the two steps that guard
+  against shipping a `dist` that cannot boot — had not run in the gate since
+  2026-08-02** either. Same repair as step 9, one step later. It **runs the whole
+  suite** (it never skips, excludes or suppresses a test) and compares the result
+  against a frozen census of 49 known failures across 34 files, measured in an
+  integrity-counted checkout of a committed sha. Every entry carries an
+  attribution — subsystem, cause, introducing commit, class — so a row nobody can
+  trace is refused. A failing test ABSENT from the census is a regression;
+  `--update` may only REMOVE entries. A baselined test that turns up **skipped**
+  reds, and the suite-wide skip count is frozen: a skipped test is not debt, it is
+  a hole. Raw list: `npm run test`. Bank a win: `npm run test:ratchet:update`.
+  <!-- @enforced-by tests/lint/testRatchet.test.js -->
+- **typecheck:domain:strict** — the `src/domain/` strict ratchet
+  (`scripts/check-domain-strict.mjs`): the any-cast burn-down that may only shrink.
+- **typecheck:ui-boundaries** — an opt-in, baseline-free strict manifest for
+  dependency-light Game Grade UI read-model modules. It grows only when a
+  module reaches zero strict errors; it is not presented as whole-JSX coverage.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest (unit, property-based, domain/store/lib integration,
-  component/UI smoke, a11y, security, edge-function). The suite grows every PR;
-  the live count is whatever CI runs (`npx vitest list | wc -l` for a local
-  snapshot) — hard numbers here rot, so trust the CI run over this line.
+- **test** — Vitest, ~20,100 tests / ~1988 files: unit, property-based,
+  domain/store/lib integration, component/UI smoke, accessibility, security, and
+  edge-function contracts. Counts are approximate; executable output remains the
+  authority.
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
+- **verify:dist** — the constitutional **first-paint ratchet**: the built entry
+  chunk's static closure must stay under `CLOSURE_BUDGET_BYTES`, a monotone,
+  owner-gated ceiling (see the playbook §0.2). Lazy/dormant additions cost zero
+  first-paint bytes; a new eager import must fit the margin or reclaim it.
+
+Locally the 17-step chain remains fail-fast. CI runs the same evidence across
+parallel validation, type, lint, test, and paired build/`verify:dist` jobs, then
+joins them behind the required `Validate, test, build` aggregate. Every setup-node
+job reads the repository runtime from `.nvmrc`.
+<!-- @enforced-by tests/build/ciCheckParity.test.js -->
 
 Runs in CI (`.github/workflows/ci.yml`) on push/PR and via husky `pre-push`;
 `pre-commit` runs lint-staged `eslint --fix`. E2E (Playwright, `e2e/`) is
@@ -253,23 +425,22 @@ separate (`npm run test:e2e`), not in the default gate.
   bare `import { _Foo }`. Bare `_Foo` requests a *non-existent* export: it
   renders `undefined` in prod and crashes dev ESM. The build now catches this
   (onwarn → error), but write the alias form to begin with.
-- **The gate type-checks the full src logic tree** (it was domain-only; the
-  punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
-  `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
+- **The gate type-checks the non-JSX src logic tree** (it was domain-only; the
+  punch-list hit zero and the gate switched to `tsconfig.full.json`).
+  `src/components/**/*.jsx`, `src/pdf/**/*.jsx`, `src/data`, `src/utils`, and
+  tests stay out of this tsc scope — lean on ESLint, rendered tests, and the
+  build guard there. Do not describe this as full JSX coverage.
 - **`OutputContainer.jsx`** (the dossier renderer) is the densest,
-  highest-stakes view — now written in plain JSX (the old raw
-  `React.createElement` form was refactored out; grep confirms zero
-  `createElement`). Edit carefully; PDF parity (below) rides on it.
+  highest-stakes view — full JSX (the historical createElement form was
+  converted in Track C), guarded by the visual-budget + jsx-hygiene error
+  rules and the dossier smoke tests. Edit carefully anyway.
 - **`public/map/main.js`** is a ~1.4k-line fork of Azgaar FMG — outside all
   gates, reconciled by hand on upstream releases (`docs/fmg-fork.md`).
 - **PDF parity**: the on-screen dossier and the PDF render from related but
   separate code (`pdf/lib/viewModel.js`); changing one can drift the other
   (`PDF_PARITY_AUDIT.md`).
-- **Deploy**: pushing `master` triggers a Vercel build, but it is **gated on CI** —
-  `vercel.json`'s `ignoreCommand` runs `scripts/vercel-ignore-build.mjs`, a
-  fail-closed check that blocks the deploy unless the `check`/`e2e`/`deno-tests`
-  jobs are green on the commit (operator sets a read-only `GITHUB_CI_STATUS_TOKEN`;
-  without it the gate blocks rather than ships). See `docs/DEPLOY.md`.
+- **Deploy**: pushing `master` deploys live (Vercel). See `docs/DEPLOY.md` for
+  gating that on CI.
 - **Bus factor is one.** Plan-file vocabulary (`P1xx`, "Pillars A–H") and a
   single authorial voice run throughout. This file exists to lower the cost of a
   second contributor.

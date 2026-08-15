@@ -12,11 +12,12 @@
 import { withImpairment } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
+import { isLiveInstitution } from '../institutions/institutionRoster.js';
 
 /** @param {any} s */
 const norm = (s) => String(s || '').trim().toLowerCase();
 /** @param {any} x */
-const nameOf = (x) => x?.name || x?.faction || '';
+const nameOf = (x) => x?.faction || x?.name || '';
 
 /**
  * @param {any} arr
@@ -181,6 +182,7 @@ export function advanceInstitutionReform(settlement, rng) {
   const reformed = [];
   const nextInstitutions = institutions.map((/** @type {any} */ inst) => {
     if (!hasCorruptionImpairment(inst)) return inst;
+    if (!isLiveInstitution(inst)) return inst; // a calamity-ruined building cannot reform (ruin-filter class); kept in the roster, denied the roll
     if (harborsCorruptInsider(settlement, inst.name)) return inst; // rot still inside
     if (rng.fork(`reform:${norm(inst.name)}`).random() >= chance) return inst;
     reformed.push({ name: inst.name });

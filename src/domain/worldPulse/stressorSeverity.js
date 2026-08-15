@@ -9,15 +9,14 @@
  * instead of foodStockpile reaching back UP into stressors. No behavior change.
  */
 
-/** Clamp to [0, 1]. VERBATIM copy of the former stressors.js clamp01 — a
- *  non-finite (incl. non-number) input becomes 0, then Math clamps. Kept
- *  byte-for-byte so the determinism golden master is unaffected.
- *  @param {number} value
- *  @returns {number} */
-export function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
+// clamp01 is the kernel primitive (code-quality-4). The former local copy — a
+// VERBATIM copy of the old stressors.js clamp01 (non-finite → 0, then Math clamps)
+// — is byte-identical to it over every input (parity-proven in
+// tests/kernel/clampPrimitive.parity.test.js), so the determinism golden master
+// is unaffected. Imported (not just re-exported) so this module's own callers
+// below keep a local binding; re-exported so stressors.js still imports it here.
+import { clamp01 } from '../../kernel/math.js';
+export { clamp01 };
 
 /**
  * The severity a stressor actually exerts on ONE settlement: the recorded global

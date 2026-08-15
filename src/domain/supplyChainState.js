@@ -1,7 +1,7 @@
 /**
  * domain/supplyChainState.js — Stateful supply-chain derivation.
  *
- * Today's chain object lives on
+ * Tier 4.3 of the roadmap. Today's chain object lives on
  * `settlement.economicState.activeChains[]` with shape:
  *
  *   {
@@ -34,12 +34,118 @@
  * and get the canonical shape.
  *
  * No imports from src/lib — the domain tsconfig include stays
- * self-contained, same constraint honored.
+ * self-contained, same constraint Phase 9 honored.
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 
-import { snakeCase } from './ids.js';
+// ── Local typedefs ────────────────────────────────────────────────────────
+
+/** @typedef {import('./settlement.schema.js').SupplyChainStatus} SupplyChainStatus */
+
+/**
+ * Legacy active-chain entry as computeActiveChains.js emits it (plus the
+ * canonical fields a re-derived chain already carries — idempotent input).
+ * @typedef {Object} LegacyChain
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [needKey]
+ * @property {string} [needLabel]
+ * @property {string} [chainId]
+ * @property {string} [label]
+ * @property {string} [status]
+ * @property {string} [legacyStatus]
+ * @property {string[]} [upstreamChains]
+ * @property {string[]} [processingInstitutions]
+ * @property {string[]} [outputs]
+ * @property {string[]} [services]
+ * @property {string} [resource]
+ * @property {string|null} [resourceKey]
+ * @property {'available'|'depleted'|'absent'} [resourceCondition]
+ * @property {string|null} [resourceInputKey]
+ * @property {'available'|'depleted'|'absent'} [resourceInputCondition]
+ * @property {boolean} [resourceInputAvailable]
+ * @property {boolean} [exportable]
+ * @property {boolean} [entrepot]
+ * @property {boolean|string} [activatedByResource]
+ * @property {boolean} [substituteActive]
+ * @property {boolean} [resourceDepleted]
+ * @property {{institution?: string, resource?: string, severity?: string, impact?: string, affectedServices?: string[]}} [dependency]
+ * @property {string} [magicNote]
+ * @property {number} [magicRecovery]
+ * @property {string} [upstreamNote]
+ */
+
+/**
+ * Active condition as this module reads it (enriched shape from
+ * activeConditions.js#deriveAllActiveConditions).
+ * @typedef {Object} ConditionLike
+ * @property {string} id
+ * @property {string} archetype
+ * @property {string} label
+ * @property {string} [description]
+ * @property {number} severity
+ * @property {string} status
+ * @property {string[]} [affectedSystems]
+ * @property {Array<{reason?: string, effect?: string, source?: string}>} [causes]
+ */
+
+/**
+ * Regional pressure annotation attached to a derived chain.
+ * @typedef {Object} RegionalPressure
+ * @property {string} id
+ * @property {string} archetype
+ * @property {string} label
+ * @property {number} severity
+ * @property {string} status
+ * @property {string[]} affectedSystems
+ */
+
+/**
+ * Canonical derived chain state (schema SupplyChainState plus the legacy
+ * fields carried forward losslessly).
+ * @typedef {Object} DerivedSupplyChainState
+ * @property {string} id
+ * @property {string} name
+ * @property {string|undefined} needKey
+ * @property {string|undefined} needLabel
+ * @property {SupplyChainStatus} status
+ * @property {string|undefined} legacyStatus
+ * @property {string} controller
+ * @property {string[]} dependencies
+ * @property {string[]} substitutes
+ * @property {string[]} beneficiaries
+ * @property {string[]} victims
+ * @property {string} failureConsequences
+ * @property {RegionalPressure[]} regionalPressures
+ * @property {string[]|undefined} outputs
+ * @property {string[]|undefined} services
+ * @property {string|undefined} resource
+ * @property {string|null|undefined} resourceKey
+ * @property {'available'|'depleted'|'absent'|undefined} resourceCondition
+ * @property {string|null|undefined} resourceInputKey
+ * @property {'available'|'depleted'|'absent'|undefined} resourceInputCondition
+ * @property {boolean|undefined} resourceInputAvailable
+ * @property {boolean|undefined} exportable
+ * @property {boolean|undefined} entrepot
+ * @property {boolean|string|undefined} activatedByResource
+ * @property {boolean|undefined} substituteActive
+ * @property {boolean|undefined} resourceDepleted
+ * @property {{institution?: string, resource?: string, severity?: string, impact?: string, affectedServices?: string[]}|undefined} dependency
+ * @property {string|undefined} magicNote
+ * @property {number|undefined} magicRecovery
+ * @property {string|undefined} upstreamNote
+ * @property {string[]} processingInstitutions
+ */
+
+/**
+ * Settlement fields this module reads.
+ * @typedef {Object} ChainsSettlementSource
+ * @property {{activeChains?: LegacyChain[]}} [economicState]
+ * @property {{activeChains?: LegacyChain[]}} [economy]
+ * @property {LegacyChain[]} [supplyChains]
+ */
+
 // ── Status remap ──────────────────────────────────────────────────────────
 // Legacy vocabulary → canonical vocabulary per the roadmap. The status
 // fields encode different intensities:
@@ -54,15 +160,17 @@ import { snakeCase } from './ids.js';
 //
 // The current generator only emits a subset of these states; the
 // remaining states (`captured`, `collapsing`) become reachable when
-// event-driven faction logic and active conditions land.
+// Tier 4.2 event-driven faction logic and Tier 2.3 active conditions
+// land.
 //
-// Magic-as-supplement is load-bearing: a druid-
+// Magic-as-supplement is load-bearing (Cohesion Wave 5 #1): a druid-
 // propped depleted chain used to canonicalize to 'stable' via the
 // unknown-status fallthrough — fully healthy to sim, AI, and receipts —
 // while the purpose-built 'substituted' status had no producer. Same
 // for 'unexploited' (the isolated-subsistence trade shutdown), which
 // scored as 'stable' instead of 'blocked'.
 
+/** @type {Readonly<Record<string, SupplyChainStatus>>} */
 const LEGACY_TO_CANONICAL = Object.freeze({
   operational:         'stable',
   running:             'stable',
@@ -73,6 +181,7 @@ const LEGACY_TO_CANONICAL = Object.freeze({
   unexploited:         'blocked',     // trade chain shut off (no route to exploit it)
 });
 
+/** @type {ReadonlySet<string>} */
 const CANONICAL_STATUSES = new Set([
   'stable', 'strained', 'scarce', 'blocked',
   'captured', 'substituted', 'collapsing',
@@ -82,12 +191,15 @@ const CANONICAL_STATUSES = new Set([
  * Map a legacy status string to the canonical vocabulary. Already-
  * canonical values pass through. Unknown values default to 'stable'
  * (the most-conservative reading — keeps the engine running).
+ *
+ * @param {unknown} legacyStatus
+ * @returns {SupplyChainStatus}
  */
-/** @param {any} legacyStatus */
 export function canonicalSupplyChainStatus(legacyStatus) {
   if (typeof legacyStatus !== 'string') return 'stable';
+  // @ts-ignore -- Set membership guarantees the union at runtime; Set.has() does not narrow string literals.
   if (CANONICAL_STATUSES.has(legacyStatus)) return legacyStatus;
-  return (/** @type {any} */ (LEGACY_TO_CANONICAL))[legacyStatus] || 'stable';
+  return LEGACY_TO_CANONICAL[legacyStatus] || 'stable';
 }
 
 // ── Chain id helper ──────────────────────────────────────────────────────
@@ -95,9 +207,21 @@ export function canonicalSupplyChainStatus(legacyStatus) {
 // composite id construction in computeActiveChains.js. Consumers
 // querying traces by id from either path see the same shape.
 
-/** @param {any} s */
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s)
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase();
+}
 
-/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
+/**
+ * @param {LegacyChain | null | undefined} chain
+ * @returns {string | null}
+ */
 function chainIdFromShape(chain) {
   if (!chain) return null;
   if (typeof chain.id === 'string' && chain.id.startsWith('chain.')) return chain.id;
@@ -109,7 +233,7 @@ function chainIdFromShape(chain) {
 // ── Beneficiary / victim inference ────────────────────────────────────────
 // Pure heuristic over the chain's need category. The roadmap calls for
 // these as first-class fields; we provide reasonable defaults so the
-// scaffolding is usable today. Custom user content + event
+// scaffolding is usable today. Custom user content + Tier 4.2 event
 // consequences can override per chain in future iterations.
 //
 // Keys mirror the SUPPLY_CHAIN_NEEDS groups in data/supplyChainData.js
@@ -119,6 +243,7 @@ function chainIdFromShape(chain) {
 // joins harness (tests/joins/chains.test.js) pins the alignment in
 // both directions.
 
+/** @type {Readonly<Record<string, {beneficiaries: string[], victims: string[], failureConsequence: string}>>} */
 export const NEED_HEURISTICS = Object.freeze({
   food_security: {
     beneficiaries: ['common population', 'grain merchants', 'temple relief'],
@@ -177,21 +302,33 @@ export const NEED_HEURISTICS = Object.freeze({
   },
 });
 
-/** @param {any} chain */
+/**
+ * @param {LegacyChain} chain
+ * @returns {string[]}
+ */
 function inferBeneficiaries(chain) {
-  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
+  // @ts-ignore -- an undefined needKey simply misses the table (yields undefined); the fallback branch below handles it.
+  const h = NEED_HEURISTICS[chain.needKey];
   return h ? [...h.beneficiaries] : ['settlement residents'];
 }
 
-/** @param {any} chain */
+/**
+ * @param {LegacyChain} chain
+ * @returns {string[]}
+ */
 function inferVictims(chain) {
-  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
+  // @ts-ignore -- an undefined needKey simply misses the table (yields undefined); the fallback branch below handles it.
+  const h = NEED_HEURISTICS[chain.needKey];
   return h ? [...h.victims] : ['settlement residents'];
 }
 
-/** @param {any} chain */
+/**
+ * @param {LegacyChain} chain
+ * @returns {string}
+ */
 function inferFailureConsequence(chain) {
-  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
+  // @ts-ignore -- an undefined needKey simply misses the table (yields undefined); the fallback branch below handles it.
+  const h = NEED_HEURISTICS[chain.needKey];
   if (!h) return 'The settlement adapts; specifics depend on context.';
   // If we already have a strained or scarce status, soften the language.
   return h.failureConsequence;
@@ -213,7 +350,10 @@ const REGIONAL_CHAIN_ARCHETYPES = new Set([
   'regional_tax_revenue_disruption',
 ]);
 
-/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
+/**
+ * @param {LegacyChain | null | undefined} chain
+ * @returns {string}
+ */
 function searchableChainText(chain) {
   return [
     chain?.name,
@@ -231,50 +371,47 @@ function searchableChainText(chain) {
 }
 
 /**
- * @param {any} condition
- * @param {import('./settlement.schema.js').SimSupplyChain} chain
- * @param {any} haystack
+ * @param {ConditionLike | null | undefined} condition
+ * @param {LegacyChain | null | undefined} chain
+ * @param {string} haystack
+ * @returns {boolean}
  */
 function conditionMatchesChain(condition, chain, haystack) {
   if (!condition || !chain) return false;
   const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
+  // @ts-ignore -- an undefined needKey never matches any entry; includes() is safe with it at runtime.
   if (systems.includes(chain.needKey)) return true;
-  // 'merchant_wealth' is a tolerant legacy-only alias (retired as a live tag;
-  // see activeConditions.js merchant_wealth-retirement note). Kept so saved
-  // conditions carrying the old tag still match exportable chains; new economic
-  // bite routes through trade_connectivity.
-  if (chain.exportable && systems.some((/** @type {any} */ s) => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
+  if (chain.exportable && systems.some(s => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
   if (chain.entrepot && systems.includes('trade_connectivity')) return true;
   const conditionText = [
     condition.label,
     condition.description,
-    ...(Array.isArray(condition.causes) ? condition.causes.map((/** @type {any} */ c) => c.reason || c.effect || c.source) : []),
+    ...(Array.isArray(condition.causes) ? condition.causes.map(c => c.reason || c.effect || c.source) : []),
   ]
     .filter(Boolean)
     .join(' ')
     .toLowerCase();
   return haystack
     .split(/[^a-z0-9]+/)
-    .filter((/** @type {any} */ token) => token.length >= 4)
-    .some((/** @type {any} */ token) => conditionText.includes(token));
+    .filter(token => token.length >= 4)
+    .some(token => conditionText.includes(token));
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSupplyChain} chain
- * @param {any} settlement
- * @param {any[]} [conditions]  the settlement's active conditions, derived ONCE by
- *   the caller (deriveAllSupplyChainStates) and passed down so a 20-chain
- *   settlement does not re-derive its identical condition list 20 times — the
- *   single biggest cost in the trade-war hot path. Falls back to deriving them
- *   when called standalone, so the result is identical either way.
+ * @param {LegacyChain} chain
+ * @param {object | null | undefined} settlement
+ * @returns {RegionalPressure[]}
  */
-function inferRegionalPressures(chain, settlement, conditions) {
+function inferRegionalPressures(chain, settlement) {
   if (!settlement) return [];
   const haystack = searchableChainText(chain);
-  return (conditions || deriveAllActiveConditions(settlement))
-    .filter((/** @type {any} */ condition) => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
-    .filter((/** @type {any} */ condition) => conditionMatchesChain(condition, chain, haystack))
-    .map((/** @type {any} */ condition) => ({
+  return deriveAllActiveConditions(settlement)
+    // @ts-ignore -- deriveAllActiveConditions (activeConditions.js, owned elsewhere) is still untyped; inert once it returns ConditionLike[].
+    .filter(condition => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
+    // @ts-ignore -- same untyped upstream (activeConditions.js).
+    .filter(condition => conditionMatchesChain(condition, chain, haystack))
+    // @ts-ignore -- same untyped upstream (activeConditions.js).
+    .map(condition => ({
       id: condition.id,
       archetype: condition.archetype,
       label: condition.label,
@@ -282,19 +419,21 @@ function inferRegionalPressures(chain, settlement, conditions) {
       status: condition.status,
       affectedSystems: Array.isArray(condition.affectedSystems) ? [...condition.affectedSystems] : [],
     }))
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.severity || 0) - (a.severity || 0));
+    // @ts-ignore -- same untyped upstream (activeConditions.js).
+    .sort((a, b) => (b.severity || 0) - (a.severity || 0));
 }
 
 /**
- * @param {any} baseStatus
- * @param {any} regionalPressures
+ * @param {SupplyChainStatus} baseStatus
+ * @param {RegionalPressure[]} regionalPressures
+ * @returns {SupplyChainStatus}
  */
 function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
   if (!regionalPressures.length) return baseStatus;
-  const maxSeverity = Math.max(...regionalPressures.map((/** @type {any} */ p) => p.severity || 0));
-  const severeCount = regionalPressures.filter((/** @type {any} */ p) => (p.severity || 0) >= 0.55).length;
+  const maxSeverity = Math.max(...regionalPressures.map(p => p.severity || 0));
+  const severeCount = regionalPressures.filter(p => (p.severity || 0) >= 0.55).length;
 
-  // 'blocked' and 'substituted' gained real producers
+  // 'blocked' and 'substituted' gained real producers in Wave 5 #1
   // (unexploited / magically_sustained). Judgment call: a blocked chain
   // is already offline, so pressure cannot make it scarcer — it only
   // compounds into 'collapsing', same as captured/collapsing; a
@@ -319,23 +458,27 @@ function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
 }
 
 /**
- * @param {any} base
- * @param {any} regionalPressures
+ * @param {string} base
+ * @param {RegionalPressure[]} regionalPressures
+ * @returns {string}
  */
 function appendRegionalFailureContext(base, regionalPressures) {
   if (!regionalPressures.length) return base;
-  const labels = regionalPressures.slice(0, 2).map((/** @type {any} */ p) => p.label).join('; ');
+  const labels = regionalPressures.slice(0, 2).map(p => p.label).join('; ');
   return `${base} Regional pressure: ${labels}.`;
 }
 
 // ── Controller inference ──────────────────────────────────────────────────
-// Every chain should declare a controller — usually a
+// Tier 4.3 wants every chain to declare a controller — usually a
 // faction or institution that takes a rent on the chain's output. We
 // derive from the dependency.institution when present (the most
 // reliable signal), falling back to the first processing institution.
 // If neither is present, the controller is 'unattributed'.
 
-/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
+/**
+ * @param {LegacyChain | null | undefined} chain
+ * @returns {string}
+ */
 function inferController(chain) {
   if (chain?.dependency?.institution) return chain.dependency.institution;
   const first = Array.isArray(chain?.processingInstitutions) ? chain.processingInstitutions[0] : null;
@@ -349,8 +492,12 @@ function inferController(chain) {
 // resulting list is a flat strings array suitable for "what does this
 // chain need?" displays.
 
-/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
+/**
+ * @param {LegacyChain | null | undefined} chain
+ * @returns {string[]}
+ */
 function inferDependencies(chain) {
+  /** @type {string[]} */
   const out = [];
   if (chain?.resource) out.push(`resource: ${chain.resource}`);
   if (Array.isArray(chain?.upstreamChains)) {
@@ -367,10 +514,13 @@ function inferDependencies(chain) {
 // via a substitute. The list of *possible* substitutes lives in the
 // catalog rather than on the chain instance, so we report only what
 // the current shape supports: a one-entry list when a substitute is
-// active, empty otherwise. Custom content as causal objects
+// active, empty otherwise. Tier 4.16 (custom content as causal objects)
 // will expand this; for now it's a faithful read of available data.
 
-/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
+/**
+ * @param {LegacyChain | null | undefined} chain
+ * @returns {string[]}
+ */
 function inferSubstitutes(chain) {
   if (chain?.substituteActive) return ['active magical / alternative substitute in use'];
   return [];
@@ -384,24 +534,22 @@ function inferSubstitutes(chain) {
  * Pure; idempotent; lossless on legacy fields. Returns null for
  * nullish input.
  *
- * @param {import('./settlement.schema.js').SimSupplyChain} chain      Active chain entry from
+ * @param {LegacyChain | null | undefined} chain      Active chain entry from
  *                            settlement.economicState.activeChains[].
- * @param {import('./settlement.schema.js').SimSettlement} [settlement] Optional context — reserved for
+ * @param {object | null} [settlement] Optional context — reserved for
  *                            controller-by-faction-archetype derivation
  *                            in future iterations.
- * @param {any[]} [conditions] The settlement's active conditions, derived once by
- *                            deriveAllSupplyChainStates and threaded in to avoid a
- *                            per-chain re-derivation; falls back to deriving them.
- * @returns {Object|null}
+ * @returns {DerivedSupplyChainState|null}
  */
-export function deriveSupplyChainState(chain, settlement, conditions) {
+export function deriveSupplyChainState(chain, settlement) {
   if (!chain || typeof chain !== 'object') return null;
 
   const baseStatus = canonicalSupplyChainStatus(chain.status);
-  const regionalPressures = inferRegionalPressures(chain, settlement, conditions);
+  const regionalPressures = inferRegionalPressures(chain, settlement);
   const status = applyRegionalPressureToStatus(baseStatus, regionalPressures);
 
   return {
+    // @ts-ignore -- chain is non-null here (guarded above), so chainIdFromShape's null branch is unreachable.
     id: chainIdFromShape(chain),
     // Honor canonical `name` first so re-deriving a previously-derived
     // chain produces the same shape (idempotent contract). Falls back
@@ -428,23 +576,28 @@ export function deriveSupplyChainState(chain, settlement, conditions) {
     outputs:                chain.outputs,
     services:               chain.services,
     resource:               chain.resource,
+    resourceKey:            chain.resourceKey,
+    resourceCondition:      chain.resourceCondition,
+    resourceInputKey:       chain.resourceInputKey,
+    resourceInputCondition: chain.resourceInputCondition,
+    resourceInputAvailable: chain.resourceInputAvailable,
     exportable:             chain.exportable,
     entrepot:               chain.entrepot,
     activatedByResource:    chain.activatedByResource,
     substituteActive:       chain.substituteActive,
     resourceDepleted:       chain.resourceDepleted,
     dependency:             chain.dependency,
-    // The magic-substitution and upstream-dependency passes
+    // Wave 5 #1: the magic-substitution and upstream-dependency passes
     // explain WHY a chain is substituted/strained (chainMagicSubstitution.js
     // writes magicNote, computeActiveChains.js writes upstreamNote). The
     // derivation used to drop both, so the canonical surface asserted a
-    // status with no receipt. magicRecovery rides along too: the
-    // substitution MAGNITUDE travels with its note, so a
+    // status with no receipt. Wave 8 carries magicRecovery too (the W1
+    // deferred note): the substitution MAGNITUDE rides with its note, so a
     // 25% prop and a 70% rescue stop being indistinguishable downstream.
     magicNote:              chain.magicNote,
     magicRecovery:          chain.magicRecovery,
     upstreamNote:           chain.upstreamNote,
-    // : preserve processingInstitutions so the explanation
+    // Phase 19: preserve processingInstitutions so the explanation
     // module can match institutions to the chains that use them as
     // processors. Earlier derivation code did not carry it forward.
     processingInstitutions: Array.isArray(chain.processingInstitutions)
@@ -453,44 +606,47 @@ export function deriveSupplyChainState(chain, settlement, conditions) {
   };
 }
 
-/** Enrich every active chain on a settlement. Returns []. for missing data. */
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * Enrich every active chain on a settlement. Returns []. for missing data.
+ * @param {ChainsSettlementSource | null | undefined} settlement
+ * @returns {DerivedSupplyChainState[]}
+ */
 export function deriveAllSupplyChainStates(settlement) {
   if (!settlement) return [];
   const chains = settlement.economicState?.activeChains
               || settlement.economy?.activeChains
               || settlement.supplyChains
               || [];
-  // Derive the active-conditions list ONCE for the whole settlement and thread it
-  // into every chain (it is identical for all of them) instead of letting each
-  // chain re-derive it inside inferRegionalPressures — the dominant redundant cost.
-  const conditions = deriveAllActiveConditions(settlement);
-  return chains.map((/** @type {any} */ c) => deriveSupplyChainState(c, settlement, conditions)).filter(Boolean);
+  // @ts-ignore -- filter(Boolean) removes the nulls at runtime; TS does not narrow through BooleanConstructor here.
+  return chains.map(c => deriveSupplyChainState(c, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ────────────────────────────────────────────────────
 // Cheap counters used by the simulation spine, distribution tests, and
-// future "if nothing changes" forecasts.
+// future Tier 4.10 "if nothing changes" forecasts.
 
 /**
  * Count chains by canonical status. Returns { stable, strained,
  * scarce, blocked, captured, substituted, collapsing } with zeros.
+ * @param {ChainsSettlementSource | null | undefined} settlement
+ * @returns {Record<SupplyChainStatus, number>}
  */
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function supplyChainStatusBreakdown(settlement) {
+  /** @type {Record<SupplyChainStatus, number>} */
   const out = {
     stable: 0, strained: 0, scarce: 0, blocked: 0,
     captured: 0, substituted: 0, collapsing: 0,
   };
   for (const c of deriveAllSupplyChainStates(settlement)) {
-    if ((/** @type {any} */ (out))[c.status] !== undefined) (/** @type {any} */ (out))[c.status] += 1;
+    if (out[c.status] !== undefined) out[c.status] += 1;
   }
   return out;
 }
 
 /**
  * True when any chain is in a non-stable state.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {ChainsSettlementSource | null | undefined} settlement
+ * @returns {boolean}
  */
 export function hasDisruptedChains(settlement) {
   for (const c of deriveAllSupplyChainStates(settlement)) {

@@ -6,28 +6,31 @@
  * It reuses the existing, undo-clean machinery end to end:
  *   1. The DM picks a campaign settlement → `hydrateFromSave` loads it into the
  *      live detail slot (state.settlement + activeSaveId).
- *   2. The existing <PrimaryDeityPicker> renders, and its `setPrimaryDeity` dispatches
- *      the SET_PRIMARY_DEITY canon event through applyEvent (registry + undo stack).
+ *   2. The existing <DeityAssignmentPanel> renders (the W-C4 patron/cult picker),
+ *      and its `setPrimaryDeity` / `imposeCult` dispatch the SET_PRIMARY_DEITY /
+ *      IMPOSE_CULT canon events through applyEvent (registry + undo stack).
  *
  * No new event, no new mutation path — exactly the plan's "its event is already
  * plumbed + undo-clean" requirement. The other steering interventions (Declare War
  * / Force Siege / Trigger Trade War / Sue for Peace) are a documented follow-up,
  * surfaced here as a clearly-disabled "coming soon" affordance (never half-wired).
  *
- * Premium-gated by canManageCampaigns at the Realm level; PrimaryDeityPicker adds
- * its own canUseCustomContent gate + zero-authored-deities explainer.
+ * Premium-gated by canManageCampaigns at the Realm level; DeityAssignmentPanel adds
+ * its own canUseCustomContent gate (premium write picker / lapsed read-only / free
+ * upsell that names no deity), and never reveals a latent seed to a free viewer.
  */
 
 import { useMemo } from 'react';
-import { Sun, Swords, Lock } from 'lucide-react';
+import { Sun, Swords, ArrowRight } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
-import PrimaryDeityPicker from '../settlement/PrimaryDeityPicker.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SP, SECOND, sans } from '../theme.js';
+import DeityAssignmentPanel from '../settlement/DeityAssignmentPanel.jsx';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SP, SECOND, sans } from '../theme.js';
 
-// The documented FOLLOW-UP steering interventions — surfaced as disabled chips so
-// the DM knows they're coming, never as half-wired controls (plan decision 7).
-const COMING_SOON = ['Declare War', 'Force Siege', 'Trigger Trade War', 'Sue for Peace'];
+// components-map-4: the war/diplomacy steering verbs SHIPPED with W-COMPOSER-2 —
+// they now live in Realm Orders (the World Pulse composer). This surface points
+// the DM there instead of the stale "coming soon" that outlived the wave.
+const NOW_IN_ORDERS = ['Declare War', 'Force Siege', 'Trigger Trade War', 'Sue for Peace'];
 
 /**
  * @param {Object} props
@@ -77,7 +80,7 @@ export default function AssignDeityFromMap({ campaign }) {
                 if (m) hydrateFromSave(m.save);
               }}
               style={{
-                width: '100%', padding: '8px 10px', minHeight: 36, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                width: '100%', padding: '8px 10px', minHeight: 36, border: `1px solid ${BORDER}`,
                 fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD,
               }}
             >
@@ -89,8 +92,9 @@ export default function AssignDeityFromMap({ campaign }) {
           </div>
 
           {selected ? (
-            // The existing picker — dispatches SET_PRIMARY_DEITY (undo-clean).
-            <PrimaryDeityPicker />
+            // The existing W-C4 picker — reads the live settlement slot, dispatches
+            // SET_PRIMARY_DEITY / IMPOSE_CULT (undo-clean) with its own tier gate.
+            <DeityAssignmentPanel />
           ) : (
             <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
               Pick a settlement above to assign or change its patron deity.
@@ -99,26 +103,24 @@ export default function AssignDeityFromMap({ campaign }) {
         </>
       )}
 
-      {/* ── Documented follow-up: the other steering interventions ────────── */}
+      {/* ── War & diplomacy steering: SHIPPED — now in Realm Orders ────────── */}
       <div style={{
-        border: `1px dashed ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: SP.sm,
+        border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: SP.sm,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>
           <Swords size={12} /> War &amp; diplomacy steering
-          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 3, color: MUTED }}>
-            <Lock size={10} /> Coming soon
+          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 3, color: GOLD }}>
+            Now in Realm Orders <ArrowRight size={11} />
           </span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-          {COMING_SOON.map(label => (
+          {NOW_IN_ORDERS.map(label => (
             <span
               key={label}
-              aria-disabled="true"
-              title="Read-only Realm. War and diplomacy steering is a documented follow-up"
+              title="Available in Realm Orders (the World Pulse composer). Staged, previewed, and undoable."
               style={{
-                padding: '3px 8px', border: `1px solid ${BORDER2}`, borderRadius: R.sm,
-                background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
-                opacity: 0.65, cursor: 'not-allowed',
+                padding: '3px 8px', border: `1px solid ${BORDER2}`,
+                background: CARD, color: INK, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
               }}
             >
               {label}
@@ -126,8 +128,8 @@ export default function AssignDeityFromMap({ campaign }) {
           ))}
         </div>
         <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
-          The Realm is read-only first. War and diplomacy steering arrives in a
-          later pass, fully undoable.
+          These orders now live in <strong>Realm Orders</strong>, in the World Pulse panel.
+          Each one staged, previewed against the forecast, and fully undoable before it lands.
         </p>
       </div>
     </div>

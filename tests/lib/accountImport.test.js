@@ -11,12 +11,19 @@
  *     field — ownership is remapped by the server on write.
  *   • A throwing record is dropped (ok:false), never aborts.
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   validateAccountImport,
   prepareSettlementEntry,
+  ensureNormalizeLoaded,
   MAX_IMPORT_SETTLEMENTS,
+  MAX_IMPORT_BYTES,
 } from '../../src/lib/accountImport.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+// LINEAGE ADAPT (master merge W6): this lineage lazily loads the normalizer;
+// prepareSettlementEntry needs it primed (mirrors the saves.js call pattern).
+beforeAll(async () => { await ensureNormalizeLoaded(); });
 import { ACCOUNT_EXPORT_VERSION } from '../../src/lib/accountData.js';
 
 const envelope = (over = {}) => JSON.stringify({
@@ -33,6 +40,29 @@ describe('validateAccountImport — fail-closed envelope', () => {
     const res = validateAccountImport('not json {');
     expect(res.ok).toBe(false);
     expect(res.error).toMatch(/valid JSON/i);
+    expect(res.failureKind).toBe('json_boundary_invalid');
+  });
+
+  it('rejects duplicate authority keys instead of accepting last-key-wins JSON', () => {
+    const res = validateAccountImport(
+      `{"version":${ACCOUNT_EXPORT_VERSION},"settlements":[],"campaigns":[],"customContentArchive":null,"customContentArchive":{}}`,
+    );
+    expect(res).toMatchObject({
+      ok: false,
+      error: expect.stringMatching(/ambiguous duplicate fields/i),
+      failureKind: 'json_boundary_invalid',
+    });
+  });
+
+  it('rejects decoded duplicate keys nested inside an archive ledger', () => {
+    const res = validateAccountImport(
+      `{"version":${ACCOUNT_EXPORT_VERSION},"settlements":[],"campaigns":[],"customContentArchive":{"ledger":{"definitions":[],"def\\u0069nitions":[]}}}`,
+    );
+    expect(res).toMatchObject({
+      ok: false,
+      error: expect.stringMatching(/ambiguous duplicate fields/i),
+      failureKind: 'json_boundary_invalid',
+    });
   });
 
   it('rejects an empty string', () => {
@@ -48,6 +78,8 @@ describe('validateAccountImport — fail-closed envelope', () => {
   it('rejects a missing / non-numeric version', () => {
     expect(validateAccountImport(JSON.stringify({ settlements: [] })).ok).toBe(false);
     expect(validateAccountImport(JSON.stringify({ version: 'x', settlements: [] })).ok).toBe(false);
+    expect(validateAccountImport(JSON.stringify({ version: 0, settlements: [] })).ok).toBe(false);
+    expect(validateAccountImport(JSON.stringify({ version: 1.5, settlements: [] })).ok).toBe(false);
   });
 
   it('rejects a NEWER-than-this-build version (no down-migration)', () => {
@@ -59,11 +91,39 @@ describe('validateAccountImport — fail-closed envelope', () => {
   it('rejects a wrong-shape settlements / campaigns field', () => {
     expect(validateAccountImport(envelope({ settlements: { not: 'an array' } })).ok).toBe(false);
     expect(validateAccountImport(envelope({ campaigns: 'nope' })).ok).toBe(false);
+    expect(validateAccountImport(envelope({ customContentArchive: [] })).ok).toBe(false);
+  });
+
+  it('rejects competing or invalid custom-content authorities', () => {
+    expect(validateAccountImport(envelope({
+      customContentArchive: {},
+      customContentPack: {},
+    })).ok).toBe(false);
+    expect(validateAccountImport(envelope({
+      customContentArchive: {},
+    })).ok).toBe(false);
+    expect(validateAccountImport(envelope({
+      customContentPack: { format: 'legacy-pack-placeholder' },
+    })).ok).toBe(false);
   });
 
   it('rejects too many settlements (DoS bound)', () => {
     const many = new Array(MAX_IMPORT_SETTLEMENTS + 1).fill({ settlement: {} });
     expect(validateAccountImport(envelope({ settlements: many })).ok).toBe(false);
+  });
+
+  it('enforces the UTF-8 envelope byte cap inside the validator', () => {
+    const oversized = JSON.stringify({
+      version: ACCOUNT_EXPORT_VERSION,
+      settlements: [],
+      campaigns: [],
+      padding: 'x'.repeat(MAX_IMPORT_BYTES),
+    });
+    const res = validateAccountImport(oversized);
+    expect(res).toMatchObject({
+      ok: false,
+      error: expect.stringMatching(/too large/i),
+    });
   });
 
   it('accepts a valid envelope and defaults missing arrays', () => {
@@ -77,6 +137,24 @@ describe('validateAccountImport — fail-closed envelope', () => {
     const res = validateAccountImport(envelope());
     expect(res.ok).toBe(true);
     expect(res.value).not.toHaveProperty('profile');
+  });
+
+  it('accepts but never imports export-only service records', () => {
+    const res = validateAccountImport(envelope({
+      serviceRecords: {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [{ id: 'foreign-message', body: 'do not recreate' }],
+        consentChanges: [{ consentKey: 'market', newValue: true }],
+      },
+    }));
+    expect(res.ok).toBe(true);
+    expectAbsentWithAnchor(
+      Object.keys(res.value),
+      'serviceRecords',
+      'settlements',
+      'export-only service records are excluded from the live import envelope',
+    );
   });
 });
 

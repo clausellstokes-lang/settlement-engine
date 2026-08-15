@@ -2,7 +2,7 @@
  * creditLedgerHarness.js — shared pglite harness for the credit/money RPCs.
  *
  * Loads the ACTUAL, NET-CURRENT PL/pgSQL function bodies (get_credit_balance +
- * allocations from 018, spend_credits + system_grant_credits from 024,
+ * allocations from 018, spend_credits from 192, system_grant_credits from 024,
  * refund_credits from 087 (net-current), admin_grant_credits from 009) into an in-process Postgres
  * (pglite) over a minimal schema mirror. auth.uid()/auth.role()/privileged are
  * GUC stubs; _audit_action is a no-op.
@@ -28,6 +28,7 @@ export const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
   '087': resolve(dir, '087_review_money_hardening.sql'),
+  '192': resolve(dir, '192_tier_credit_multiplier.sql'),
   // 097/098: the allocation-within-grant backstop trigger (097 shipped the
   // constraint trigger; 098 is the net-current function body — 097's AFTER-
   // trigger double-count fix). Registered here so creditAllocationTrigger.
@@ -42,7 +43,7 @@ export const allMigrationsExist = Object.values(MIG).every(existsSync);
  *  public.<name>` to the first `$$;`. */
 export function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration ${migKey}`);
   return m[0];
 }
@@ -64,6 +65,9 @@ export async function makeCreditLedgerDb() {
     create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
       select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
     $fn$;
+    create or replace function public.assert_current_session() returns void language plpgsql as $fn$
+      begin return; end
+    $fn$;
     create or replace function public._audit_action(
       p_actor_id uuid, p_target_id uuid, p_action text, p_before jsonb, p_after jsonb, p_reason text
     ) returns void language plpgsql as $fn$ begin return; end $fn$;
@@ -73,6 +77,13 @@ export async function makeCreditLedgerDb() {
       credits integer not null default 0, is_founder boolean not null default false,
       display_name text, updated_at timestamptz default now()
     );
+    create table public.system_config (
+      key text primary key,
+      value jsonb not null
+    );
+    create or replace function public.account_is_active(p_user_id uuid) returns boolean language sql stable as $fn$
+      select exists(select 1 from public.profiles where id = p_user_id)
+    $fn$;
     create table public.credit_ledger (
       id uuid primary key default gen_random_uuid(), user_id uuid not null,
       kind text not null check (kind in ('grant','spend')),
@@ -101,7 +112,11 @@ export async function makeCreditLedgerDb() {
     );
   `);
   await db.exec(extractFn('018', 'get_credit_balance'));
-  await db.exec(extractFn('024', 'spend_credits'));
+  // 024 is immutable historical evidence (the original 3/4/5 schedule). The
+  // current charge body is 192: 174's 5/4/6 forward reprice plus an inert tier
+  // multiplier. Testing 192 keeps paid-path assertions current without editing
+  // an already-applied migration.
+  await db.exec(extractFn('192', 'spend_credits'));
   // pglite can't resolve the <<grant_fn>> block label as a qualifier for a
   // function PARAMETER; re-qualify by the function name (behaviorally identical).
   await db.exec(extractFn('024', 'system_grant_credits').replace(/\bgrant_fn\.source\b/g, 'system_grant_credits.source'));

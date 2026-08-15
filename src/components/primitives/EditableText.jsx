@@ -34,7 +34,7 @@ const COLORS = Object.freeze({
   muted:      '#9c8068',
   border:     '#d2bd96',
   edited:     '#5a2a8a',
-  editedBg:   'rgba(90,42,138,0.08)',
+  editedBg:   'transparent',
   editedBdr:  'rgba(90,42,138,0.35)',
   focusBdr:   '#a0762a',
   focusBg:    '#fffbf5',
@@ -122,7 +122,6 @@ export function EditableText({
     const baseStyle = {
       whiteSpace: multiline ? 'pre-wrap' : 'nowrap',
       cursor: editMode ? 'text' : 'default',
-      borderRadius: 3,
       padding: editMode ? '2px 4px' : 0,
       margin: editMode ? '-2px -4px' : 0,
       background: isEdited && editMode ? COLORS.editedBg : 'transparent',
@@ -163,7 +162,6 @@ export function EditableText({
     minHeight: multiline ? 60 : undefined,
     boxSizing: 'border-box',
     border: `1px solid ${COLORS.focusBdr}`,
-    borderRadius: 4,
     padding: '6px 8px',
     background: COLORS.focusBg,
     color: COLORS.inkDeep,
@@ -219,12 +217,12 @@ export function EditableText({
 export function EditedBadge({ count = null, style = {} }) {
   return (
     <span
-      title="This dossier contains user-edited prose. The engine will preserve these edits across rerolls; the AI overlay will pass them through verbatim."
+      title="This dossier contains user-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         fontSize: FS.xxs, fontWeight: 700, color: COLORS.edited,
         background: COLORS.editedBg, border: `1px solid ${COLORS.editedBdr}`,
-        borderRadius: 3, padding: '2px 6px',
+        padding: '2px 6px',
         textTransform: 'uppercase', letterSpacing: '0.05em',
         ...style,
       }}
@@ -244,7 +242,6 @@ function RevertChip({ originalValue, onClick }) {
         marginLeft: 6,
         background: 'none',
         border: `1px solid ${COLORS.editedBdr}`,
-        borderRadius: 3,
         padding: '0 5px',
         color: COLORS.edited,
         fontSize: FS.micro,

@@ -24,6 +24,10 @@ import RelationshipEdges from './map/RelationshipEdges.jsx';
 import ChainEdges        from './map/ChainEdges.jsx';
 import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
+import TravelersLayer    from './map/TravelersLayer.jsx';
+// V-3 THE TIMELAPSE — STATIC within this already-lazy map chunk (the FP-R idiom:
+// a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
+import TimelapseLayer    from './map/TimelapseLayer.jsx';
 import RoadsLayer        from './map/RoadsLayer.jsx';
 import LabelsLayer       from './map/LabelsLayer.jsx';
 import MarkersLayer      from './map/MarkersLayer.jsx';
@@ -34,10 +38,12 @@ import PlacementsLayer   from './map/PlacementsLayer.jsx';
 import { MAP_MODES }     from '../store/mapSlice.js';
 import { TextInputDialog } from './primitives/Dialog.jsx';
 
-export default function MapOverlay({ bridge, onTransform }) {
+export default function MapOverlay({ bridge, transformOut }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
+  // V-3 THE TIMELAPSE: the overlay mounts only while scrubbing (timelapseTick set).
+  const timelapseActive = useStore(s => s.timelapseTick != null);
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const updateLabel = useStore(s => s.updateLabel);
   const updateMarker = useStore(s => s.updateMarker);
@@ -47,6 +53,13 @@ export default function MapOverlay({ bridge, onTransform }) {
   // no FMG iframe / bridge viewport to mirror).
   const customBackdrop = useStore(s => s.mapState.customBackdrop);
   const imageMode = !!customBackdrop?.imageUrl;
+  // mapChains tier gate (Owner Ruling #5, 2026-07-17 — "enforce mapChains"):
+  // TIER_GATE marks supply-chain map edges premium-only; the gate wraps the
+  // AFFORDANCE (this render + the LayersPanel/RoutesToolbar toggles), never the
+  // derivation — ChainEdges/computeMapChains stay tier-blind. Selector-call
+  // pattern per SettlementDetail's canExportFreely (elevated roles pass inside
+  // canUseMapChains itself).
+  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -113,11 +126,7 @@ export default function MapOverlay({ bridge, onTransform }) {
 
     const applyT = (t) => {
       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
-      // Emit the live transform to the owner (WorldMap) via callback instead of
-      // reaching into a ref passed through props — the owner writes it to a ref
-      // IT owns, which its drop handler reads synchronously. Same live-read
-      // guarantee, but no mutate-a-foreign-ref side channel (react-hooks/immutability).
-      onTransform?.(transformRef.current);
+      if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
       const { tx, ty, scale } = transformRef.current;
       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
       schedulePersist(tx, ty, scale, W, H);
@@ -176,10 +185,7 @@ export default function MapOverlay({ bridge, onTransform }) {
       window.removeEventListener('pointerup', onUp);
       el.removeEventListener('wheel', onWheel);
     };
-    // `onTransform` is a stable useCallback from WorldMap; its identity never
-    // changes across renders, so listing it here satisfies exhaustive-deps
-    // without ever re-running this pan/zoom effect on render.
-  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height, onTransform]);
+  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height]);
 
   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
@@ -318,13 +324,21 @@ export default function MapOverlay({ bridge, onTransform }) {
           {/* Geography-derived charted trails need FMG pack.cells — omitted in
               image mode (relationship/chain straight-line edges still render). */}
           {layers.roads && !imageMode && <RoadsLayer bridge={bridge} />}
-          {layers.chains        && <ChainEdges />}
+          {layers.chains && mapChainsUnlocked && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
+          {/* V-3 THE TIMELAPSE — history pulses + grew/declined tint at the scrub
+              tick. A background lens (drawn early so glyphs + pins sit on top);
+              mounts only while scrubbing; DM-secret + dormant otherwise. */}
+          {timelapseActive && <TimelapseLayer />}
           <RegionalCausalityLayer />
           {/* UX Phase 5 — spatial war/faith glyphs (deployment arrows, siege rings +
               coalition badge, occupation shading, trade-war prize). Self-gates to
               null when no campaign / no live war state; honors channel visibility. */}
           <WarFaithMapOverlay />
+          {/* DESIGN_THE_ROADS §13 — moving armies / migrant columns / named-NPC envoys over
+              the road graph. Opt-in DM-truth lens (default off); dormant ledgers render
+              nothing. Above war glyphs, below the settlement pins. */}
+          {layers.travelers && <TravelersLayer />}
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
           {layers.markers       && <MarkersLayer onEditMarker={marker => setEditDialog({ kind: 'marker', item: marker })} />}
           {layers.labels        && <LabelsLayer onEditLabel={label => setEditDialog({ kind: 'label', item: label })} />}

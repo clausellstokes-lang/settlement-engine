@@ -22,18 +22,21 @@
  * reintroduces no size gate. The anon HomeHero instant path never reaches here.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { track, EVENTS } from '../../lib/analytics.js';
+import { useStore } from '../../store/index.js';
 import ConfigurationPanel from '../ConfigurationPanel.jsx';
 import InstitutionalGrid from '../InstitutionalGrid.jsx';
 import ServicesTogglePanel from '../ServicesTogglePanel.jsx';
 import TradeDynamicsPanel from '../TradeDynamicsPanel.jsx';
 import CharacterPresetCard from './CharacterPresetCard.jsx';
+import ResetConstraintsButton from './ResetConstraintsButton.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
+import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { INK, MUTED, SECOND, serif_, FS, SP } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, SP } from '../theme.js';
 
 // Deep-constraints sections — each keeps its wizard STEP ID so funnel analytics
 // (wizard_step_viewed) still fire when the section is opened.
@@ -71,6 +74,77 @@ function DeepSection({ id, label, hint, collapsedHint, Panel }) {
 }
 
 /**
+ * SeedField — THE PROMISE, made a surface (Walk W1, owner order 2026-07-21, ledger
+ * 13da1e95). Enter an exact seed and forge it: this reuses the founding-seeds
+ * derivation path (setRandomSliderMode(true) so every priority dial rolls
+ * deterministically from the seed via resolveConfig's _randomizePriorities, then
+ * generateSettlement(seed)). No parallel derivation, and no updateConfig({seed}) —
+ * the seed is the generateSettlement argument, exactly as FoundingWorlds forges it,
+ * so the configSeamContract stays intact. GenerateWizard swaps to the output view on
+ * the new settlement (its settlement-change effect). The current draft's seed
+ * (store lastSeed) is shown for copying so a rolled world can be reproduced or shared.
+ */
+function SeedField() {
+  const generate = useStore((s) => s.generateSettlement);
+  const setRandomSliderMode = useStore((s) => s.setRandomSliderMode);
+  const lastSeed = useStore((s) => s.lastSeed);
+  const [value, setValue] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const forge = async () => {
+    const seed = value.trim();
+    if (!seed || busy) return;
+    setBusy(true);
+    try {
+      setRandomSliderMode(true);
+      await generate(seed);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const copySeed = async () => {
+    if (lastSeed == null || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    try {
+      await navigator.clipboard.writeText(String(lastSeed));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard blocked (permissions / insecure context) */ }
+  };
+
+  return (
+    <div style={{ marginBottom: SP.md, paddingBottom: SP.sm, borderBottom: `1px solid ${BORDER}` }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px`, flexWrap: 'wrap' }}>
+        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Exact seed</span>
+        <span style={{ fontSize: FS.xs, color: MUTED }}>reproduce a world: every dial rolls from the seed</span>
+      </div>
+      <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'center', padding: `0 ${SP.xs}px` }}>
+        <input
+          type="text"
+          aria-label="Exact seed"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') forge(); }}
+          placeholder="Enter a seed"
+          style={{ flex: '1 1 200px', minWidth: 160, padding: '6px 10px', border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, boxSizing: 'border-box', background: CARD, color: INK }}
+        />
+        <Button variant="secondary" size="sm" busy={busy} disabled={!value.trim()} onClick={forge}>
+          Forge seed
+        </Button>
+      </div>
+      {lastSeed != null && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.xs, padding: `0 ${SP.xs}px`, flexWrap: 'wrap' }}>
+          <span style={{ fontSize: FS.xs, color: MUTED }}>Current draft seed</span>
+          <code style={{ fontSize: FS.xs, color: SECOND }} data-testid="current-seed">{String(lastSeed)}</code>
+          <Button variant="ghost" size="sm" onClick={copySeed}>{copied ? 'Copied' : 'Copy'}</Button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
  * @param {{ mode?: 'basic'|'advanced', showPlaceInRegion?: boolean }} [props]
  *   mode — 'basic' renders Character + Foundations only (the simulator rolls
  *     priorities, resources, stress, institutions, services, and trade from
@@ -102,6 +176,10 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
 
   return (
     <div data-testid="layered-configuration-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* Exact-seed input (Advanced only, top of the panel): forge a world from a
+          seed, and copy the current draft's seed. THE PROMISE made a surface. */}
+      {advanced && <SeedField />}
+
       {/* Tier-1: Character preset. In Advanced this card also hosts the five
           always-on priority sliders (archetype chips + Random/Custom + sliders
           reconciled into one control); Basic shows archetype chips only. On
@@ -116,7 +194,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
           label now sits as a borderless group header above that single card —
           the dominant entry point (P4), grouping carried by spacing (P5). */}
       <div data-section-id="config" style={{ marginBottom: SP.sm }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px`, borderBottom: `1px solid ${BORDER}` }}>
           <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>1 · Foundations</span>
           <span style={{ fontSize: FS.xs, color: MUTED }}>size, route, culture: the essentials</span>
         </div>
@@ -137,11 +215,14 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
               WHAT this group controls at a visible tier, not a muted micro-cap
               that reads as fine print. This is the expert accelerator — sell that
               the depth exists, never bury it. */}
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px`, borderBottom: `1px solid ${BORDER}` }}>
             <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>
               2 · Institutions, services &amp; trade
             </span>
             <span style={{ fontSize: FS.xs, color: MUTED }}>force or forbid specifics</span>
+            {/* The group-level undo for the three grids below: each grid's own
+                Reset clears one bag, this clears all three at once. */}
+            <ResetConstraintsButton />
           </div>
           {DEEP_SECTIONS.map(s => <DeepSection key={s.id} {...s} />)}
         </div>

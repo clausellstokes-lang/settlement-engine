@@ -10,8 +10,10 @@
 import { describe, it, expect } from 'vitest';
 import {
   buildEdit, appendEdit, revertEdit, dropEdit,
-  activeEdits, hasPending, previewCascade, EDIT_KINDS,
+  activeEdits, hasPending, EDIT_KINDS,
+  COMMITTABLE_EDIT_KINDS,
 } from '../../src/domain/pendingEdits.js';
+import { previewCascade } from '../../src/domain/pendingEditsPreview.js';
 
 describe('pendingEdits — construction', () => {
   it('builds a frozen edit with id + kind + payload + ts', () => {
@@ -35,6 +37,47 @@ describe('pendingEdits — construction', () => {
     expect(EDIT_KINDS).toContain('add-institution');
     expect(EDIT_KINDS).toContain('edit-prose');
     expect(EDIT_KINDS.length).toBeGreaterThanOrEqual(10);
+  });
+});
+
+describe('pendingEdits — committable-kinds contract (no silent drop)', () => {
+  // The queueEdit seam (store/settlementSlice) admits only COMMITTABLE_EDIT_KINDS.
+  // Everything else is scaffolding without a commit dispatcher. These pins keep the
+  // set honest so an un-committable kind can never enter the queue and be silently
+  // dropped at commit.
+  it('COMMITTABLE_EDIT_KINDS is a subset of EDIT_KINDS', () => {
+    for (const k of COMMITTABLE_EDIT_KINDS) {
+      expect(EDIT_KINDS).toContain(k);
+    }
+  });
+
+  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle + roads ops + player siding + the table event + recall + prose)', () => {
+    // DESIGN_NPC_LIFECYCLE §2 added live dispatchers for the three typed NPC ops
+    // (edit / reassign / stasis+return); DESIGN_THE_ROADS §11 added the two party-hand
+    // roads ops (ransom / rescue); DESIGN_DEEP_COUPLINGS §8 D-4e added the player-siding op
+    // (champion); R-1 THE SESSION LEDGER added 'table-event' (via applyTableEvent);
+    // DESIGN_VISION_WAVE V-24a added the recall rider (recall) — all route through
+    // applyEditOp/applyNpcOp (commitPendingEdits' default arm). R-2 (capability
+    // remediation, 2026-07-27) added 'edit-prose' (via applyProse → the registered
+    // applyUserEditAction writer). Owner queue #14 added 'rename-faction' (via
+    // applyRename → the converged renameFactionImpl writer over the enumerated
+    // cascade in domain/factionRename.js). Kept in lockstep with the
+    // commitPendingEdits switch.
+    expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual([
+      'champion-npc', 'edit-npc', 'edit-prose', 'ransom-npc', 'reassign-npc', 'recall-npc',
+      'rename-faction', 'rename-npc', 'rename-settlement', 'rescue-npc', 'return-npc',
+      'stasis-npc', 'table-event',
+    ]);
+  });
+
+  it('the un-dispatched scaffolding kinds are explicitly NOT committable', () => {
+    // 'edit-prose' left this list in R-2 when it gained its dispatcher;
+    // 'rename-faction' left it in owner queue #14 when it gained one.
+    for (const k of ['add-institution', 'remove-institution',
+      'add-resource', 'remove-resource', 'add-stressor', 'remove-stressor']) {
+      expect(EDIT_KINDS).toContain(k);                    // still a declared kind…
+      expect(COMMITTABLE_EDIT_KINDS).not.toContain(k);    // …but has no committer
+    }
   });
 });
 
@@ -87,15 +130,26 @@ describe('pendingEdits — queue ops', () => {
 });
 
 describe('pendingEdits — cascade preview', () => {
+  // ⚠ THE THREE HOOKS MOVED OFF THE SETTLEMENT ROOT (2026-08-11). They were
+  // `settlement.plotHooks`, an address no writer in this repo produces — so
+  // `downstreamCounts.hooks` was 0 for every real user and this fixture was the
+  // only shape in which it was not. They now sit at live addresses the canonical
+  // collector (domain/dossier/plotHooks.js) walks, so the count below is
+  // unchanged at 3 and is now reachable from a generated settlement.
   const baseSettlement = {
     name: 'Hightower',
-    npcs: [{ name: 'A' }, { name: 'B' }],
+    npcs: [{ name: 'A', plotHooks: [{ text: 'H1' }, { text: 'H2' }] }, { name: 'B' }],
     factions: [{ name: 'F1' }],
-    plotHooks: [{ title: 'H1' }, { title: 'H2' }, { title: 'H3' }],
+    economicViability: { plotHooks: [{ hook: 'H3' }] },
   };
 
   it('empty queue → empty preview', () => {
     const p = previewCascade(baseSettlement, []);
+    expect(p.epistemic).toEqual({
+      class: 'bounded_projection',
+      basis: 'queued_intents_and_current_read_model',
+      simulatesCommit: false,
+    });
     expect(p.summaryLines).toEqual([]);
     expect(p.narrativeImpact).toBe('none');
     expect(p.warnings).toEqual([]);
@@ -109,6 +163,104 @@ describe('pendingEdits — cascade preview', () => {
     ];
     const p = previewCascade(baseSettlement, q);
     expect(p.summaryLines).toContain('+1 institution');
+  });
+
+  it('preserves balanced structural intents as exact directional changes', () => {
+    const q = [
+      buildEdit('add-institution', { id: 'new-guild', label: 'New Guild' }, 1),
+      buildEdit('remove-institution', { id: 'old-abbey', label: 'Old Abbey' }, 2),
+    ];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability).toEqual({ status: 'available', reason: null });
+    expect(p.scope).toEqual({
+      kind: 'intent-set',
+      count: 2,
+      intentIds: q.map(edit => edit.id),
+    });
+    expect(p.structural.status).toBe('balanced');
+    expect(p.structural.deltas).toEqual([
+      {
+        intentId: q[0].id,
+        kind: 'add-institution',
+        subject: 'institution',
+        direction: 'add',
+        amount: 1,
+        targetLabel: 'New Guild',
+      },
+      {
+        intentId: q[1].id,
+        kind: 'remove-institution',
+        subject: 'institution',
+        direction: 'remove',
+        amount: 1,
+        targetLabel: 'Old Abbey',
+      },
+    ]);
+    expect(p.summaryLines).toContain(
+      '2 structural changes balance to no net count change',
+    );
+  });
+
+  it('names preview unavailability instead of reporting no structural effect', () => {
+    const q = [buildEdit('add-institution', { id: 'new-guild' }, 1)];
+    const p = previewCascade(null, q);
+
+    expect(p.availability.status).toBe('unavailable');
+    expect(p.epistemic.class).toBe('unavailable');
+    expect(p.availability.reason).toMatch(/settlement is unavailable/i);
+    expect(p.structural.status).toBe('unavailable');
+    // The queued direction remains inspectable even though downstream evaluation
+    // could not run.
+    expect(p.structural.deltas).toMatchObject([
+      { direction: 'add', subject: 'institution', targetLabel: 'new-guild' },
+    ]);
+    expect(p.summaryLines).toEqual([]);
+  });
+
+  it('marks table-event consequences unassessed instead of claiming zero effect', () => {
+    const q = [buildEdit('table-event', {
+      record: {
+        kind: 'obligation',
+        targets: { ref: 'debt', label: 'A debt' },
+      },
+      directive: {
+        dispatch: 'applyEvent',
+        event: { type: 'APPLY_STRESSOR', payload: { type: 'debt', severity: 0.5 } },
+      },
+    }, 1)];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability.status).toBe('partial');
+    expect(p.epistemic.class).toBe('partial_projection');
+    expect(p.availability.reason).toMatch(/typed consequences.*does not simulate/i);
+    expect(p.structural.status).toBe('unassessed');
+    expect(p.summaryLines).toContain(
+      '1 table event queued; downstream effect unassessed',
+    );
+  });
+
+  it('keeps known directional rows when a mixed table-event review is partial', () => {
+    const q = [
+      buildEdit('add-institution', { id: 'new-guild', label: 'New Guild' }, 1),
+      buildEdit('remove-institution', { id: 'old-abbey', label: 'Old Abbey' }, 2),
+      buildEdit('table-event', {
+        record: { kind: 'stressor-relief' },
+        directive: {
+          dispatch: 'applyEvent',
+          event: { type: 'RESOLVE_STRESSOR', payload: { type: 'debt', magnitude: 0.5 } },
+        },
+      }, 3),
+    ];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability.status).toBe('partial');
+    expect(p.structural.status).toBe('unassessed');
+    expect(p.structural.deltas).toMatchObject([
+      { direction: 'add', targetLabel: 'New Guild' },
+      { direction: 'remove', targetLabel: 'Old Abbey' },
+    ]);
+    expect(p.summaryLines).not.toContain('No structural effect');
   });
 
   it('reverted edits don\'t count', () => {
@@ -155,5 +307,18 @@ describe('pendingEdits — cascade preview', () => {
     ];
     const p = previewCascade(baseSettlement, q);
     expect(p.warnings.some(w => /Removing multiple institutions/.test(w))).toBe(true);
+  });
+
+  it('previews NPC lifecycle decisions by name and flags narrated prose for follow-up', () => {
+    const narrated = { ...baseSettlement, _narrative: { thesis: '...' } };
+    const q = [
+      buildEdit('stasis-npc', { npcIndex: 0, reason: 'journey' }, 1),
+      buildEdit('recall-npc', { npcIndex: 1 }, 2),
+    ];
+    const p = previewCascade(narrated, q);
+    expect(p.summaryLines).toContain('A: would be set aside (journey)');
+    expect(p.summaryLines).toContain('B: would be recalled home');
+    expect(p.downstreamCounts.npcChanges).toBe(2);
+    expect(p.narrativeImpact).toBe('progression-suggested');
   });
 });

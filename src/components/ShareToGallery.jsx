@@ -15,17 +15,24 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
+import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save, Link2 } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
+import {
+  publishSettlement, unpublishSettlement, updateGalleryMetadata,
+  shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
+} from '../lib/gallery.js';
+import UnlistedShareBar from './gallery/UnlistedShareBar.jsx';
+import { t } from '../copy/index.js';
 import { validateDossier } from '../domain/validation/consistency.js';
+import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
 import { settlementWarStatus } from '../domain/display/warStatus.js';
+import { computeAliveness } from '../lib/galleryAliveness.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
 import Button from './primitives/Button.jsx';
-import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, GREEN_BG, SUCCESS_BORDER, RED, INK, BODY, swatch } from './theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 
 const MUTED = swatch['#6B5340'];
 const _BODY  = swatch['#4A3B22'];
@@ -45,14 +52,14 @@ function isCampaignCanonized(campaignState) {
   );
 }
 
-function suggestedTagsFor(settlement = {}) {
-  // Read the attributes the engine actually persists (config.terrainType, the
-  // governing faction name, powerStructure.stability) — the old paths
-  // (config.terrain, governmentType, viability.stability) were never written, so
-  // every suggested-tag list silently dropped them.
+export function suggestedTagsFor(settlement = {}) {
+  // Read the attributes the engine actually persists (config.terrainType via
+  // resolveTerrain, the governing faction name, config.culture) — the old paths
+  // (config.terrain, powerStructure.governmentType, viability.stability) were
+  // never written, so every suggested-tag list silently dropped them.
   return [
     settlement.tier,
-    settlement.config?.terrainType || settlement.config?.terrainOverride,
+    resolveTerrain(settlement.config),
     settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
     settlement.config?.culture,
     settlement.powerStructure?.government || settlement.powerStructure?.governingName,
@@ -76,9 +83,15 @@ export default function ShareToGallery({
   saveId,
   isPublic: isPublicProp,
   publicSlug: slugProp,
+  // V-20 UNLISTED SHARING — optional round-trip of the party-link state from the
+  // saved row. Callers that don't thread it still work (the unlisted state is
+  // entered via the button; persistence-across-reload is the light follow-on).
+  visibility: visibilityProp = 'public',
+  unlistedSlug: unlistedSlugProp = null,
   campaignState = null,
   settlement = null,
   galleryDescription = '',
+  galleryTitle = '',
   galleryImageUrl = '',
   galleryImageAlt = '',
   galleryTags = [],
@@ -94,7 +107,8 @@ export default function ShareToGallery({
   // lib/gallery.js), so a published dossier is always the RAW simulation. Read
   // the save's AI data so we can say plainly when the prose won't be included.
   const liveAiData = useStore(s => (saveId ? (s.savedSettlements || []).find(x => x.id === saveId)?.aiData : null));
-  // §S4 — the campaign this save belongs to, for the public-safe realm-arc digest.
+  // §S4 — the campaign this save belongs to, for the public-safe realm-arc digest
+  // and the live at-war facet (which the gallery row cannot recompute on its own).
   const owningCampaign = useStore(s => {
     if (!saveId) return null;
     return (s.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(saveId))) || null;
@@ -103,8 +117,15 @@ export default function ShareToGallery({
 
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
+  // V-20 unlisted (party-link) state.
+  const [isUnlisted, setIsUnlisted]   = useState(visibilityProp === 'unlisted');
+  const [unlistedSlug, setUnlistedSlug] = useState(unlistedSlugProp || null);
+  const [unlistedCopied, setUnlistedCopied] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
   const [description, setDescription] = useState(galleryDescription || '');
+  // Gallery display title (migration 147) — empty falls back to the settlement
+  // name at the server chokepoint (the 148 tile-rows coalesce).
+  const [title, setTitle] = useState(galleryTitle || '');
   const [imageUrl, setImageUrl] = useState(galleryImageUrl || '');
   const [imageAlt, setImageAlt] = useState(galleryImageAlt || '');
   const [tagsInput, setTagsInput] = useState((galleryTags?.length ? galleryTags : suggestedTagsFor(settlement)).join(', '));
@@ -118,11 +139,10 @@ export default function ShareToGallery({
   const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
   // Opt-in: let other users import (clone) this public dossier into their library.
   const [importable, setImportable] = useState(Boolean(galleryImportable));
-  // Per-member (per-NPC) visibility overrides (migration 092). Each NPC inherits
-  // the settlement shareDm / importable flags unless explicitly overridden here; we
-  // store ONLY the deltas (an entry whose value equals the current settlement
-  // default is dropped) so the column stays minimal and un-overridden members keep
-  // following the settlement flags as those change.
+  // Per-member (per-NPC) visibility overrides (migration 092/093). Each NPC
+  // inherits the settlement shareDm flag unless explicitly overridden here; we
+  // store ONLY the deltas so the column stays minimal and un-overridden members
+  // keep following the settlement flag as it changes.
   const [memberOverrides, setMemberOverrides] = useState(() => (
     galleryMemberOverrides && typeof galleryMemberOverrides === 'object' && !Array.isArray(galleryMemberOverrides)
       ? galleryMemberOverrides
@@ -145,8 +165,8 @@ export default function ShareToGallery({
     });
   }, [owningCampaign, allSaves]);
   // Gallery facet snapshot (migration 063). Read from the REAL settlement
-  // attributes (not the owner tags): culture + prosperity + patron deity from
-  // the persisted data, and the live at-war flag from the owning campaign's war
+  // attributes (not the owner tags): culture + prosperity + patron deity from the
+  // persisted data, and the live at-war flag from the owning campaign's war
   // ledger. Captured here so the gallery row can filter on them without
   // recomputing live campaign state. Empty/absent ⇒ omitted (the column nulls).
   const facets = useMemo(() => {
@@ -162,10 +182,15 @@ export default function ShareToGallery({
       facetProsperity: settlement?.economicState?.prosperity || '',
       facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
       facetAtWar: warStatus?.atWar === true,
+      // GALLERY-2 phase 2 (migration 147): the aliveness snapshot — pulse-history
+      // depth + world age band from the owning campaign's LIVE worldState (the
+      // same "cannot recompute" posture as atWar). null when campaign-less.
+      facetAliveness: computeAliveness(owningCampaign),
     };
   }, [owningCampaign, saveId, settlement]);
   const metadata = useMemo(() => ({
     description,
+    title,
     imageUrl,
     imageAlt,
     tags: tagsInput,
@@ -175,7 +200,7 @@ export default function ShareToGallery({
     memberOverrides,
     realmArcSummary,
     ...facets,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
+  }), [description, title, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -186,13 +211,16 @@ export default function ShareToGallery({
     <div style={{
       width: '100%', display: 'flex', alignItems: 'flex-start', gap: 6,
       padding: '7px 9px', marginTop: SP.xs,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md,
+      border: `1px solid ${BORDER2}`,
       background: CARD_ALT, color: BODY,
       fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
     }}>
+      {shareNarrated && hasNarrative
+        ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
+        : <Lock size={12} style={{ marginTop: 1, flexShrink: 0, color: MUTED }} />}
       <span>
         {shareNarrated && hasNarrative
-          ? <>The gallery displays your <strong>narrated dossier</strong>. Viewers read the refined prose. Private DM content (secrets, hooks, notes) remains hidden.</>
+          ? <>The gallery will show your <strong>AI-narrated dossier</strong>. Viewers see the refined prose; DM-private content (secrets, hooks, notes) is still removed.</>
           : <>The gallery shows the <strong>raw simulation</strong>. Your AI {aiKinds} prose stays private and is not included in the public dossier.</>}
       </span>
     </div>
@@ -203,25 +231,29 @@ export default function ShareToGallery({
     return (
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '6px 10px', borderRadius: R.md,
+        padding: '6px 10px',
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
-        Save the settlement first to share publicly.
+        <Lock size={12} /> Save first to share publicly
       </div>
     );
   }
 
   async function handlePublish() {
     if (!canonReady) {
-      setError('Canonize the campaign world before sharing this dossier publicly.');
+      setError(t('errors.shareCanonFirst', { action: t('canon.startWorldClock') }));
       return;
     }
     // Trust gate (feature doc §1b): never publish a dossier whose facts
     // contradict across surfaces — public content must be internally consistent.
     const { blocking } = validateDossier(settlement);
     if (blocking.length > 0) {
-      setError(`Cannot publish yet. ${blocking.length} consistency issue${blocking.length === 1 ? '' : 's'} to resolve: ${blocking.map(b => b.description).join(' · ')}`);
+      setError(t('errors.publishBlocked', {
+        count: blocking.length,
+        issues: blocking.length === 1 ? 'issue' : 'issues',
+        details: blocking.map(b => b.description).join(' · '),
+      }));
       return;
     }
     setBusy(true); setError(null);
@@ -238,6 +270,7 @@ export default function ShareToGallery({
           is_public: true,
           public_slug: newSlug,
           gallery_description: description,
+          gallery_title: title,
           gallery_image_url: imageUrl,
           gallery_image_alt: imageAlt,
           gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
@@ -270,6 +303,7 @@ export default function ShareToGallery({
       // reload below is what fixes it. This is plain cache hygiene.)
       updateSavedSettlement?.(saveId, {
         gallery_description: description,
+        gallery_title: title,
         gallery_image_url: imageUrl,
         gallery_image_alt: imageAlt,
         gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
@@ -318,6 +352,59 @@ export default function ShareToGallery({
       .catch(() => { /* clipboard refused; nothing to do */ });
   }
 
+  // ── V-20 UNLISTED SHARING (party link) ────────────────────────────────────
+  async function handleShareUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await shareSettlementUnlisted(saveId);
+      setUnlistedSlug(newSlug);
+      setIsUnlisted(true);
+      setIsPublic(false); // sharing unlisted removes it from the public gallery
+      try { updateSavedSettlement?.(saveId, { is_public: false, visibility: 'unlisted', unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not create the unlisted link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleRotateUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await rotateSettlementUnlistedSlug(saveId);
+      setUnlistedSlug(newSlug);
+      try { updateSavedSettlement?.(saveId, { unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not rotate the link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleStopUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      await revokeSettlementUnlisted(saveId);
+      setIsUnlisted(false);
+      setUnlistedSlug(null);
+      try { updateSavedSettlement?.(saveId, { visibility: 'public', unlisted_slug: null }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not stop the unlisted share');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function handleCopyUnlisted() {
+    if (!unlistedSlug || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    navigator.clipboard.writeText(publicUrlFor(unlistedSlug))
+      .then(() => {
+        setUnlistedCopied(true);
+        setTimeout(() => setUnlistedCopied(false), 2000);
+      })
+      .catch(() => { /* clipboard refused */ });
+  }
+
   const detailsForm = detailsOpen && (
     <div style={{
       width: '100%',
@@ -325,14 +412,13 @@ export default function ShareToGallery({
       gap: SP.sm,
       padding: SP.sm,
       border: `1px solid ${BORDER2}`,
-      borderRadius: R.md,
       background: CARD_ALT,
       marginTop: SP.xs,
     }}>
       {hasNarrative && (
         <label htmlFor="share-to-gallery-narrated" style={{
           display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-          padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+          padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
         }}>
           <input
             id="share-to-gallery-narrated"
@@ -343,14 +429,14 @@ export default function ShareToGallery({
             style={{ marginTop: 2, flexShrink: 0 }}
           />
           <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            <strong style={{ color: INK }}>Publish the narrated version</strong> instead of the raw simulation. Viewers read your refined prose. Private DM content is removed unless you enable the option below. Save details or re-share to apply.
+            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply.
           </span>
         </label>
       )}
       {/* Owner opt-in: expose the full DM-private layer publicly. Off by default. */}
       <label htmlFor="share-to-gallery-dm" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, background: CARD,
       }}>
         <input
           id="share-to-gallery-dm"
@@ -360,14 +446,17 @@ export default function ShareToGallery({
           onChange={event => setShareDm(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-          <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become visible to all readers. Disabled by default; save details or re-share to enable.
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
+          <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
+          <span>
+            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
+          </span>
         </span>
       </label>
       {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
       <label htmlFor="share-to-gallery-importable" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
       }}>
         <input
           id="share-to-gallery-importable"
@@ -378,9 +467,12 @@ export default function ShareToGallery({
           style={{ marginTop: 2, flexShrink: 0 }}
         />
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-          <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Disabled by default; save details or re-share to enable.
+          <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
         </span>
       </label>
+      {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the
+          settlement has no member NPCs. Each member defaults to the settlement's
+          DM-reveal and import flags; a per-member toggle overrides just that NPC. */}
       <GalleryMemberVisibility
         settlement={settlement}
         shareDm={shareDm}
@@ -388,6 +480,25 @@ export default function ShareToGallery({
         memberOverrides={memberOverrides}
         setMemberOverrides={setMemberOverrides}
       />
+      <Field label="Gallery title (blank uses the settlement name)" htmlFor="share-to-gallery-title">
+        <input
+          id="share-to-gallery-title"
+          aria-label="Gallery title (blank uses the settlement name)"
+          value={title}
+          maxLength={120}
+          onChange={event => setTitle(event.target.value)}
+          placeholder={settlement?.name || 'Settlement name'}
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
       <Field label="Public description">
         <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>
@@ -410,7 +521,6 @@ export default function ShareToGallery({
           style={{
             minHeight: 32,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -429,7 +539,6 @@ export default function ShareToGallery({
           style={{
             minHeight: 32,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -453,6 +562,20 @@ export default function ShareToGallery({
     </div>
   );
 
+  // V-20 UNLISTED state — party link: copy + rotate (revoke) + stop sharing.
+  if (isUnlisted && unlistedSlug) {
+    return (
+      <UnlistedShareBar
+        copied={unlistedCopied}
+        busy={busy}
+        error={error}
+        onCopy={handleCopyUnlisted}
+        onRotate={handleRotateUnlisted}
+        onStop={handleStopUnlisted}
+      />
+    );
+  }
+
   // Published state — show "Public" badge + copy link + unshare.
   if (isPublic && slug) {
     return (
@@ -462,13 +585,13 @@ export default function ShareToGallery({
       }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 9px', borderRadius: R.md,
-          background: GREEN_BG, color: GREEN,
-          border: `1px solid ${SUCCESS_BORDER}`,
+          padding: '4px 9px',
+          background: 'transparent', color: GREEN,
+          border: `1px solid ${GREEN}`,
           fontSize: FS.xs, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
-          Public
+          <Globe size={11} /> Public
         </span>
         <Button
           variant="gold"
@@ -500,7 +623,7 @@ export default function ShareToGallery({
             display: 'inline-flex', alignItems: 'center', gap: 4,
             fontSize: FS.xs, color: RED,
           }}>
-            {error}
+            <AlertCircle size={11} /> {error}
           </span>
         )}
         {aiOverlayNote}
@@ -508,8 +631,8 @@ export default function ShareToGallery({
             the public chronicle existed — the gallery projects it at read
             time, so their event log is visible retroactively. */}
         <span style={{ flexBasis: '100%', fontSize: FS.xs, color: INK, opacity: 0.75 }}>
-          Your settlement's event chronicle (event titles and summaries) is visible
-          on the gallery page. Unshare to remove it.
+          Your settlement's event chronicle (event titles and summaries) is publicly
+          visible on the gallery page. Unshare to remove it.
         </span>
         {detailsForm}
       </div>
@@ -534,6 +657,15 @@ export default function ShareToGallery({
         {busy ? 'Publishing…' : 'Share to gallery'}
       </Button>
       <Button
+        variant="secondary"
+        size="sm"
+        onClick={handleShareUnlisted}
+        busy={busy}
+        icon={<Link2 size={12} />}
+      >
+        Unlisted link
+      </Button>
+      <Button
         variant="ghost"
         size="sm"
         onClick={() => setDetailsOpen(open => !open)}
@@ -546,7 +678,7 @@ export default function ShareToGallery({
           display: 'inline-flex', alignItems: 'center', gap: 4,
           fontSize: FS.xs, color: RED,
         }}>
-          {error}
+          <AlertCircle size={11} /> {error}
         </span>
       )}
       <span style={{
@@ -554,7 +686,7 @@ export default function ShareToGallery({
       }}>
         {canonReady
           ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
-          : 'Canonize this campaign world before sharing the dossier publicly.'}
+          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}
       </span>
       {aiOverlayNote}
       {detailsForm}

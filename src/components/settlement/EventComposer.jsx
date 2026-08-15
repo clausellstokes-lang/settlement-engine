@@ -1,84 +1,112 @@
 /**
- * EventComposer — Pick an event, optionally preview, then stage it.
+ * EventComposer — Pick an event, optionally preview, then apply.
  *
  * Available in both phases. In draft mode the same engine runs but
- * nothing is logged ("see what would happen"). In canon mode the staged
- * event adds a timeline entry when the queue commits. Preview is a
- * look-ahead, not a gate — Apply is always offered.
+ * nothing is logged ("see what would happen"). In canon mode applying
+ * adds a timeline entry. The store handlers gate the log persistence;
+ * this UI is identical in both modes. Preview is a look-ahead, not a
+ * gate — Apply is always offered. On a narrated save, a successful
+ * apply raises the StaleNarrativeModal (the prose no longer matches).
  *
- * Apply no longer commits immediately: it STAGES the assembled event in the
- * per-settlement change-queue (ChangeQueuePanel above). The queue's
- * "Save N changes" replays each order through the same applyEvent path and
- * persists atomically, then soft-refreshes the dossier. The post-commit
- * staleness notice fires from that commit seam (SettlementDetail), not here.
+ * The per-event-type inputs live in cohesive presentational modules under
+ * ./eventComposer/*; all state lives here in the parent and threads down as
+ * props, and event assembly is the pure ./eventComposer/buildEvent.js. The host
+ * stays a thin orchestrator under the 600-line ratchet.
  */
 
-import { useState, useMemo } from 'react';
-import { X, Check } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { Zap } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { EVENT_REGISTRY } from '../../domain/events/registry.js';
+import { customContentForActiveContext } from '../../store/activeCustomContentContext.js';
+import { AFFORDANCE_MANIFEST, authorableVerbs, criminalOrgOptions, vetoProse } from '../../domain/events/affordanceManifest.js';
+import { eventStalenessKey } from '../../domain/events/stalenessKey.js';
+// registryFull = registry + composer prose (description/targetPrompt) — see
+// registryProse.js; registry.js alone carries only the eager pipeline fields.
+import { EVENT_REGISTRY } from '../../domain/events/registryFull.js';
 import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
-import { deriveOnsetSeverity } from '../../domain/state/deriveStressorSeverity.js';
-import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
-import { governingFactionOf } from '../../domain/rulingPower.js';
-import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
+import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
-import { institutionHasTag, TAG } from '../../lib/entities.js';
-import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
-import Button from '../primitives/Button.jsx';
-import { campaignPeerOptions, PARTY, PARTY_BG } from './eventComposer/helpers.js';
-import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
+import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
+import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
+import { MUTED, BORDER, CARD, sans, FS, SP } from '../theme.js';
+import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
+import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
+import { CLOCK_BOUND_SCOPE_NOTICE, PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
 import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
+import { AddNpcTraitFields } from './eventComposer/AddNpcTraitFields.jsx';
+import { EventComposerCorruptionFields } from './eventComposer/EventComposerCorruptionFields.jsx';
+import { EventComposerSecondaryFields } from './eventComposer/EventComposerSecondaryFields.jsx';
 import { EventComposerRelationshipExtras } from './eventComposer/EventComposerRelationshipExtras.jsx';
 import { EventComposerTierField, clampTierDirection } from './eventComposer/EventComposerTierField.jsx';
-import { EventComposerCorruptionFields } from './eventComposer/EventComposerCorruptionFields.jsx';
 import { EventComposerDeityField, canStageDeityEvent } from './eventComposer/EventComposerDeityField.jsx';
-import { EventComposerSecondaryFields } from './eventComposer/EventComposerSecondaryFields.jsx';
 import { EventComposerLinkNeighbourField, linkableSiblings } from './eventComposer/EventComposerLinkNeighbourField.jsx';
-import { buildEvent as assembleEvent } from './eventComposer/buildEvent.js';
-import { AddNpcTraitFields } from './eventComposer/AddNpcTraitFields.jsx';
+import { ComposerNavigator } from './eventComposer/ComposerNavigator.jsx';
+import { ApplyControls } from './eventComposer/ApplyControls.jsx';
+import { buildEvent, mintComposeEventId } from './eventComposer/buildEvent.js';
+import { applyComposerIntent, resetComposerForVerb } from './eventComposer/applyComposerIntent.js';
 import {
-  RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
-  NON_AUTHORABLE_EVENTS, CUSTOM_RESOURCE_OPTION,
-  inputStyle, selectStyle,
+  RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS, CUSTOM_RESOURCE_OPTION,
+  inputStyle, selectStyle, refusalBoxStyle,
 } from './eventComposer/EventComposerConstants.js';
+// Clock-bound queue-refusal + batch-outcome helpers (store-hooks-state-1) — the
+// DM's-order-is-sacred surfacing, kept out of this file for the max-lines split.
+import { applyRefusalPayload, applyRefusalMessage, batchApplyOutcome, batchRefusalText } from './eventComposer/applyOutcome.js';
 
 // onLink (= SettlementDetail's handleLink) is threaded in only so the folded
-// "Link a neighbour" dropdown entry can reuse the exact link cascade (stage a
-// `link` order standalone / full applyLink clock-bound). When it is absent the
-// LINK_NEIGHBOUR entry simply does not appear.
+// LINK_NEIGHBOUR pseudo-event can delegate to the neighbour-link cascade. With no
+// onLink handler wired the LINK_NEIGHBOUR entry simply does not appear — the whole
+// feature ships dormant until the fenced SettlementDetail.jsx passes it through.
 export default function EventComposer({ onLink = null }) {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
+  const applyEvent   = useStore(s => s.applyEvent);
   const dismissPreview = useStore(s => s.dismissPreview);
   const pendingPreview = useStore(s => s.pendingPreview);
   const previewBatch   = useStore(s => s.previewEventBatch);
+  const applyBatch     = useStore(s => s.applyEventBatch);
   const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
   const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
-  // Change-queue wiring: Apply now STAGES the assembled event (it commits at the
-  // queue's "Save N changes", not on this click). The event is built exactly as
-  // before so the committed event is byte-identical to a direct apply. The
-  // post-commit staleness notice moves to ChangeQueuePanel's commit seam
-  // (SettlementDetail.onQueueCommitted) — nothing mutates on this click.
-  const queueChange = useStore(s => s.queueChange);
-  // Scope (Phase 4a — STANDALONE only): the change-queue stages ONLY for
-  // non-clock-bound settlements. A clock-bound canon campaign member surrenders
-  // its timeline to the world pulse — applyEvent there redirects the event into
-  // the pulse queue, so staging it on the (hidden) change-queue would let a
-  // staged event silently redirect. For those, Apply commits IMMEDIATELY through
-  // applyEvent (which performs the world-pulse redirect), exactly as before the
-  // change-queue existed. The campaign queue path is Phase 4b.
-  const applyEvent = useStore(s => s.applyEvent);
-  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
+  // Target-first / SuccessorPrompt injection (Composer V2 §4): an intent staged
+  // from anywhere populates THIS form (the one source of truth), then clears.
+  const composerIntent = useStore(s => s.composerIntent);
+  const stageComposerIntent = useStore(s => s.stageComposerIntent);
+  // Queued-vs-now (§5): clock-bound canon settlements queue to the next advance.
+  const isClockBound = useStore(s => (typeof s.isSettlementClockBound === 'function' ? s.isSettlementClockBound : null));
+  // Staleness wiring: a committed change on a NARRATED save makes the AI
+  // prose out of date, so a successful apply raises StaleNarrativeModal.
+  // Boolean selector — the narrative blobs are large and we only need "is
+  // there one". Nothing can go stale on a raw (never-narrated) save.
+  const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
+  const customContent = useStore(customContentForActiveContext);
+  // Faith seam — premium custom-content entitlement gates the deity field; the
+  // pricing-moment seam opens the purchase modal for a free/anon upsell.
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  // LINK_NEIGHBOUR + OPENED_TRADE_ROUTE campaign-peer targeting read the library.
+  const savedSettlements = useStore(s => s.savedSettlements);
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const campaigns = useStore(s => s.campaigns);
+
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
   const [description, setDesc]  = useState('');
+  // Compose-session-stable event id (§5 IDENTITY): minted once per composition;
+  // dial turns never re-mint. Re-minted on verb change / apply / add-to-batch.
+  const [sessionEventId, setSessionEventId] = useState(() => mintComposeEventId());
+  // Injected-composition provenance (SuccessorPrompt stages 'world_event').
+  const [causeOverride, setCauseOverride] = useState('');
+  // A veto refusal from the last Apply — the blocking-refusal surface (§2).
+  const [applyRefusal, setApplyRefusal] = useState(null);
+  // A clock-bound queue-refusal reason from the last batch Apply — keeps the
+  // staged cart and surfaces the reason instead of silently dropping the batch
+  // (store-hooks-state-1). Cleared on cart edit / clear / a successful apply.
+  const [batchRefusal, setBatchRefusal] = useState(null);
   // §8 M3b — "Caused by the party" attribution. Off by default; when set, the
   // event is tagged party-caused (cause: 'party_action' + partyCaused: true) so
   // the timeline/Chronicle can distinguish "the table did this" from "the world
@@ -90,19 +118,16 @@ export default function EventComposer({ onLink = null }) {
   const [importance, setImportance] = useState('notable');     // ADD_NPC, KILL_NPC
   const [role, setRole]             = useState('');           // ADD_NPC, ASSIGN_NPC_TO_ROLE
   const [institutionId, setInstitutionId] = useState('');     // ADD_NPC, ASSIGN_NPC_TO_ROLE
-  // ADD_NPC descriptive traits — free text, optional. These mirror exactly what
-  // the NPC read card shows (npcComponents NPCInlineCard via normalizeNpcTraits):
-  // flaw, temperament (personality.dominant), goal, constraint, secret. Without
-  // them an authored NPC rendered those rows empty.
-  const [npcFlaw, setNpcFlaw] = useState(''), [npcTemperament, setNpcTemperament] = useState('');
-  const [npcGoals, setNpcGoals] = useState(''), [npcConstraint, setNpcConstraint] = useState('');
-  const [npcSecret, setNpcSecret] = useState('');
   const [quality, setQuality]       = useState('competent');   // ASSIGN_NPC_TO_ROLE
+  // ADD_NPC descriptive traits — surfaced verbatim on the NPC read card. Optional.
+  const [npcFlaw, setNpcFlaw]               = useState('');
+  const [npcTemperament, setNpcTemperament] = useState('');
+  const [npcGoals, setNpcGoals]             = useState('');
+  const [npcConstraint, setNpcConstraint]   = useState('');
+  const [npcSecret, setNpcSecret]           = useState('');
   // Severity + axis are intentionally hidden from the DM — the 0-100 "math"
   // confused more than it clarified. Impair Institution / Impair Faction apply a
   // standard moderate setback to legitimacy; these values feed buildEvent below.
-  // To re-expose: turn these back into useState and restore the Dimension /
-  // Severity <Field>s that used to live in the form.
   const severity  = 0.7;        // IMPAIR_INSTITUTION / IMPAIR_FACTION (+ legacy DAMAGE_INSTITUTION)
   const dimension = 'legitimacy';
   const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
@@ -110,57 +135,29 @@ export default function EventComposer({ onLink = null }) {
   const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
   const [corruptScope, setCorruptScope] = useState('individual'); // IMPOSE_CORRUPTION: individual | individual_institution
+  const [corruptBeneficiary, setCorruptBeneficiary] = useState(''); // IMPOSE_CORRUPTION §6: '' = local underworld; 'foreign:<id>' = a foreign patron court
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
-  // APPLY_STRESSOR severity is no longer DM-picked: the onset's hardness is a
-  // CONSEQUENCE of the settlement's preexisting pressure, derived in the domain
-  // (deriveStressorSeverity) when the composer omits it. No state, no dropdown.
+  const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
+  const [instigatorNeighbour, setInstigatorNeighbour] = useState('');   // APPLY_STRESSOR: war/infiltration instigator
+  const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // APPLY_STRESSOR: infiltration souring level
+  const [tradeTarget, setTradeTarget] = useState('');          // OPENED_TRADE_ROUTE: optional campaign-peer target
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
+  const [reliefMagnitude, setReliefMagnitude] = useState('measured'); // FORCE_RELIEF / OFFER_CREDIT: word-banded share of the above-floor surplus
   const [tradeDirection, setTradeDirection] = useState('export'); // ADD_TRADE_GOOD: export | import
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
   const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
-  const [tierDirection, setTierDirection] = useState('promotion'); // SHIFT_TIER: promote up / demote down one tier
-  // SET_PRIMARY_DEITY / IMPOSE_CULT (the folded "Patron & Cults" card). deityMode is
-  // 'assign' (pick a deity ref) or 'remove' (clear the patron / drop a named cult).
-  const [deityRef, setDeityRef] = useState('');
-  const [deityMode, setDeityMode] = useState('assign');
-  const [cultRemoveRef, setCultRemoveRef] = useState('');
-  // LINK_NEIGHBOUR (the folded "Link a neighbour" card): pick a partner save + a
-  // relationship; Apply delegates to onLink (handleLink), never to applyEvent.
-  const [partnerSaveId, setPartnerSaveId] = useState('');
-  const [linkRelType, setLinkRelType] = useState('neutral');
-  const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
+  const [tierDirection, setTierDirection] = useState('promotion'); // SHIFT_TIER: promotion | demotion
+  const [deityRef, setDeityRef] = useState('');               // SET_PRIMARY_DEITY / IMPOSE_CULT: picked deity ref
+  const [deityMode, setDeityMode] = useState('assign');       // SET_PRIMARY_DEITY / IMPOSE_CULT: assign | remove
+  const [cultRemoveRef, setCultRemoveRef] = useState('');     // IMPOSE_CULT: the cult to drop
+  const [partnerSaveId, setPartnerSaveId] = useState('');     // LINK_NEIGHBOUR: the partner settlement save
+  const [linkRelType, setLinkRelType] = useState('neutral');  // LINK_NEIGHBOUR: the link relationship
+  const [staleNotice, setStaleNotice] = useState(null);        // post-apply "narrative is now stale" modal: null | { label }
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
-  const customContent = useStore(s => s.customContent);
-  // Premium gate for deity authoring/assignment (the simulation is the gate), and
-  // the purchase modal opener for the upsell — both consumed by EventComposerDeityField.
-  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
-  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
-  const [instigatorNeighbour, setInstigatorNeighbour] = useState(''); // #1 APPLY_STRESSOR: optional war instigator
-  const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // #3 APPLY_STRESSOR (infiltrated): souring level
-  const [tradeTarget, setTradeTarget] = useState('');          // #6 OPENED_TRADE_ROUTE: optional campaign-settlement target
-  // #6 — the active campaign's OTHER settlements (so a trade route can open with
-  // any campaign member, not only a pre-linked neighbour); see campaignPeerOptions.
-  const activeSaveId = useStore(s => s.activeSaveId);
-  // True when this settlement is bound to a canonized campaign clock: Apply then
-  // commits immediately (world-pulse redirect) instead of staging on the queue.
-  const clockBound = !!(activeSaveId != null && typeof isSettlementClockBound === 'function' && isSettlementClockBound(activeSaveId));
-  const campaigns = useStore(s => s.campaigns);
-  const savedSettlements = useStore(s => s.savedSettlements);
-  // A clock-bound member's Apply lands on the world pulse; while that campaign's
-  // advance is in flight the store no-ops the write (the advance replaces worldState
-  // wholesale and would clobber it). Surface that here so the form DISABLES submit
-  // and shows why, instead of silently swallowing a GM action with no recovery.
-  // Subscribe to the advanceInFlight LIST itself (not the stable isAdvanceInFlight fn
-  // ref) so the disable + hint re-render the instant an advance starts or ends — same
-  // membership test the store uses.
-  const advanceInFlightList = useStore(s => s.advanceInFlight);
-  const boundCampaign = useMemo(() => (clockBound ? campaigns.find(c => (c.settlementIds || []).some(id => String(id) === String(activeSaveId))) : null), [clockBound, campaigns, activeSaveId]);
-  const advanceBusy = !!(boundCampaign && Array.isArray(advanceInFlightList) && advanceInFlightList.some(id => String(id) === String(boundCampaign.id)));
-  const campaignSettlementOptions = useMemo(
-    () => campaignPeerOptions(campaigns, savedSettlements, activeSaveId),
-    [campaigns, savedSettlements, activeSaveId],
-  );
+  // §10 MUTABLE DOCKET: non-null while editing a QUEUED intention ({ campaignId,
+  // queueId, eventId }); re-staging replaces the entry in place, same identity.
+  const [editingQueue, setEditingQueue] = useState(null); const updateQueuedEvent = useStore(s => s.updateQueuedEvent);
 
   // Catalog sources for the catalog-backed "Add" events. Institutions come
   // from the full institutional catalog + the user's Compendium, minus what's
@@ -173,14 +170,9 @@ export default function EventComposer({ onLink = null }) {
     () => [...new Set(institutionCatalogItems.map(i => i.category).filter(Boolean))].sort(),
     [institutionCatalogItems],
   );
-  // Narrow deps to exactly what factionCompendium reads (powerStructure.factions
-  // with a top-level factions fallback) so this catalog doesn't recompute on
-  // every unrelated settlement re-allocation in edit mode.
-  const factionGroups = useMemo(
-    () => factionCompendium(settlement),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [settlement?.powerStructure?.factions, settlement?.factions],
-  );
+  // Factions: descriptor database + the user's Compendium factions ('Custom'
+  // group) — the merge FactionEventBanner's arrives-through-an-event copy sells.
+  const factionGroups = useMemo(() => factionCompendium(settlement, customContent?.factions || []), [settlement, customContent?.factions]);
   // APPLY_STRESSOR — the FULL stressor vocabulary: generation types +
   // campaign-only types (rebellion, market shock, criminal corridor, magical
   // instability, coup d'état) + the user's custom stressors, deduped.
@@ -188,27 +180,17 @@ export default function EventComposer({ onLink = null }) {
     settlement?.stressors || settlement?.stress || settlement?.stresses || [],
     customContent?.stressors || [],
   ), [settlement?.stressors, settlement?.stress, settlement?.stresses, customContent?.stressors]);
-  // CHANGE_RULING_POWER — every faction except the one already on the seat.
-  const rulingPowerOptions = useMemo(() => {
-    const governing = governingFactionOf(settlement);
-    return (settlement?.powerStructure?.factions || [])
-      .filter(f => f && f !== governing)
-      .map(f => ({ id: String(f.faction || f.name || ''), name: String(f.faction || f.name || '') }))
-      .filter(o => o.id);
-    // Narrow deps to what this reads — the faction list + which one is seated.
-    // governingFactionOf keys off the per-faction `f.isGoverning` flag FIRST,
-    // then falls back to powerStructure.governingName. `isGoverning` lives on
-    // objects inside the factions array, so the `factions` reference dep already
-    // covers it: every seat change is an immutable update that mints a fresh
-    // array (and fresh faction objects), re-running this memo. governingName is
-    // listed for the fallback path.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settlement?.powerStructure?.factions, settlement?.powerStructure?.governingName]);
+  // CHANGE_RULING_POWER — the manifest's seat gate (wraps governingFactionOf;
+  // the same targets transferRulingPower will accept — same-function law).
+  const rulingPowerOptions = useMemo(
+    () => AFFORDANCE_MANIFEST.CHANGE_RULING_POWER.targetOptions(settlement),
+    [settlement],
+  );
   // ADD_TRADE_GOOD — datalist suggestions: every catalogued export label
   // across all tiers (free text still wins; the label is the storage format).
   const tradeGoodSuggestions = useMemo(() => {
     const names = new Set();
-    for (const tierGoods of Object.values(EXPORT_GOODS_BY_TIER || {})) {
+    for (const tierGoods of Object.values(GOODS_MODIFIERS_BY_TIER || {})) {
       for (const name of Object.keys(tierGoods || {})) names.add(name);
     }
     return [...names].sort((a, b) => a.localeCompare(b));
@@ -237,95 +219,141 @@ export default function EventComposer({ onLink = null }) {
       .map(([faction, npcs]) => ({ faction, npcs }))
       .sort((a, b) => a.faction.localeCompare(b.faction));
   }, [settlement?.npcs]);
-  const hasSwapPairs = npcSwapGroups.length > 0;
-  // IMPOSE_CORRUPTION — criminal organizations present in the settlement (same CRIMINAL-tag
-  // detector the corruption domain uses, so the picker matches what the engine recognizes).
-  const criminalOrgs = useMemo(
-    () => (settlement?.institutions || [])
-      // Match the domain's isCriminalInstitution exactly (tag/name backfill OR criminal category),
-      // so the picker offers precisely what the handler accepts.
-      .filter(i => institutionHasTag(i, TAG.CRIMINAL) || /criminal/i.test(String(i?.category || '')))
-      .map(i => i.name).filter(Boolean),
-    [settlement?.institutions],
+  // IMPOSE_CORRUPTION — the manifest's wrap over readCorruptionClimate: the
+  // EXACT list the imposeCorruption handler resolves against (the old inline
+  // comment-mirror filter is retired — same-function law).
+  const criminalOrgs = useMemo(() => criminalOrgOptions(settlement), [settlement]);
+  // OPENED_TRADE_ROUTE — other active-campaign members of the active save, so a
+  // trade route can open with any campaign peer, not only a linked neighbour.
+  const campaignSettlementOptions = useMemo(
+    () => campaignPeerOptions(campaigns || [], savedSettlements || [], activeSaveId),
+    [campaigns, savedSettlements, activeSaveId],
   );
-  // EXPOSE_CORRUPTION only acts on a corrupt, not-yet-ousted NPC; the mutation
-  // no-ops otherwise. Offer the action solely when there is such a target, so a
-  // clean pick (or a free-typed name on an empty list) can never move the dials
-  // and narrate with no real state behind it.
-  const hasCorruptNpcs = useMemo(
-    () => (settlement?.npcs || []).some(n => n?.corrupt === true && !n?.ousted),
-    [settlement?.npcs],
-  );
-  // APPLY_STRESSOR onset severity is DERIVED from the settlement's preexisting
-  // pressure, not picked at the table. Surface the derived word read-only so the
-  // DM sees the consequence the state produces (the engine reads the number).
-  const derivedOnset = useMemo(() => {
-    const sev = deriveOnsetSeverity(settlement);
-    const word = sev >= 0.7 ? 'critical' : sev >= 0.55 ? 'strained' : 'calm';
-    return { sev, word };
-  }, [settlement]);
 
-  if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
   const needsTarget = !!spec?.requiresTarget;
-  // LINK_NEIGHBOUR is a folded pseudo-event (not in EVENT_REGISTRY): it only
-  // appears when an onLink handler is wired AND there is at least one other saved
-  // settlement to link to. Apply delegates to onLink, so it is never previewed,
-  // batched, or routed through buildEvent.
-  const canLinkNeighbour = !!onLink && linkableSiblings(savedSettlements, settlement, activeSaveId).length > 0;
-  const isLinkNeighbour = type === 'LINK_NEIGHBOUR';
   // ADD_RESOURCE's "Custom resource…" option holds the real target in the
   // companion text input; the swap events also need their counterpart picked.
   const effectiveTarget = type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION
     ? customResourceName
     : target;
-  // #6 — OPENED_TRADE_ROUTE is satisfied by EITHER a linked neighbour OR a
-  // chosen campaign-settlement target, so the target requirement is met when
-  // either is set.
+  // OPENED_TRADE_ROUTE may target a campaign peer instead of a linked neighbour;
+  // when one is picked it satisfies the target requirement (and overrides the id).
   const resolvedTarget = (type === 'OPENED_TRADE_ROUTE' && tradeTarget.trim())
     ? tradeTarget.trim()
     : effectiveTarget;
-  const canSubmit = (!needsTarget || resolvedTarget.trim().length > 0)
+  // War / infiltration stressor detection drives the optional instigator inputs.
+  const stressorKey = String(stressorPick?.key || target || '').toLowerCase();
+  const isWarStressor = WAR_STRESSOR_TYPES.includes(stressorKey);
+  const isInfiltrationStressor = INFILTRATION_STRESSOR_TYPES.includes(stressorKey);
+  const isDeityEvent = type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT';
+  const isLinkNeighbour = type === 'LINK_NEIGHBOUR';
+  // LINK_NEIGHBOUR is a folded pseudo-event (not in EVENT_REGISTRY): it only
+  // appears when an onLink handler is wired AND there is at least one other saved
+  // settlement to link to. Apply delegates to onLink, never to applyEvent.
+  const canLinkNeighbour = !!onLink && !!settlement && linkableSiblings(savedSettlements, settlement, activeSaveId).length > 0;
+  // The manifest predicate is part of the submit gate: an unavailable verb
+  // cannot be staged, and its reasons render below (grayed-with-reason, §2).
+  const verbEntry = AFFORDANCE_MANIFEST[type] || null;
+  const verbCtx = { canUseCustom, campaignPeerCount: campaignSettlementOptions.length };
+  const verbAvailability = (!isLinkNeighbour && verbEntry && !verbEntry.foldedInto && settlement)
+    ? verbEntry.predicate(settlement, verbCtx)
+    : { available: true, reasons: [], unlocks: [] };
+  const canSubmit = verbAvailability.available
+    && (!needsTarget || resolvedTarget.trim().length > 0)
     && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId)
-    // Deity events: refuse a no-op or unseatable imposition before it can stage
-    // (the same guards the setPrimaryDeity / imposeCult store actions enforce).
-    && !((type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT')
-      && !canStageDeityEvent({ type, settlement, deityRef, deityMode, cultRemoveRef, customContent, canUseCustom }))
-    // LINK_NEIGHBOUR needs a partner picked.
     && !(isLinkNeighbour && !partnerSaveId)
-    // Block submit while this member's campaign is advancing — the store would no-op
-    // the apply, and the composer lives on a different surface from the Advance button
-    // so the two can be open at once.
-    && !advanceBusy;
-  // #1 — the optional instigator dropdown only makes sense for a WAR-type
-  // stressor (siege / wartime / occupation / betrayal). Detect via the picked
-  // catalog key (falling back to the free-typed target).
-  const isWarStressor = type === 'APPLY_STRESSOR'
-    && WAR_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
-  // #3 — an INFILTRATION stressor likewise takes an optional instigator, but
-  // sours the named neighbour to a lighter, DM-configurable relationship.
-  const isInfiltrationStressor = type === 'APPLY_STRESSOR'
-    && INFILTRATION_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
+    && !(isDeityEvent && !canStageDeityEvent({ type, settlement, deityRef, deityMode, cultRemoveRef, customContent, canUseCustom }));
+  // Queued-vs-now (§5): surfaced plainly instead of silently queueing.
+  const queuesToNextAdvance = phase === 'canon' && !!activeSaveId && !!isClockBound && isClockBound(activeSaveId);
+
+  // THE STALENESS LAW (§5): the current composition's key. The preview pane is
+  // valid iff its stored key AND its settlement reference both still match.
+  const currentKey = settlement && canSubmit && !isLinkNeighbour
+    ? eventStalenessKey(assembleEvent())
+    : '';
+  const isStale = !!pendingPreview
+    && (pendingPreview._previewKey !== currentKey || pendingPreview._forSettlement !== settlement);
+
+  // The ONE setters bag (threaded to the verb-reset + intent-consumption
+  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
+  // DECLARED ABOVE the `if (!settlement) return null` below: the intent effect
+  // is registered on EVERY render, settlement-null ones included, so a const
+  // declared after that return is in its temporal dead zone when the effect
+  // fires and reading it throws. Nothing here needs a live settlement.
+  const composerSetters = {
+    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
+    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
+    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
+    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
+    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
+    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
+    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
+    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
+    setImportance, setReliefMagnitude, setPartyCaused,
+  };
+
+  // Composer-intent consumption (§4): an intent staged from anywhere (entity
+  // card, SuccessorPrompt) populates the FORM — the one source of truth — and
+  // the live preview derives from it like any hand-built composition.
+  // Syncing an EXTERNAL staged intent into form state is the one legitimate
+  // shape here: the intent arrives from outside the component (SuccessorPrompt,
+  // entity cards) exactly once, and the effect immediately consumes+clears it.
+  useEffect(() => {
+    if (!composerIntent) return;
+    // The full consumption body (incl. the §10 edit seeding) lives in
+    // applyComposerIntent.js — 1:1 with editSeed.js's field twins.
+    applyComposerIntent(composerIntent, { ...composerSetters, switchType });
+    stageComposerIntent(null);
+    // switchType/setters are stable; the intent object is the real trigger.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [composerIntent]);
+
+  // LIVE PREVIEW (§5): benchmarked 2026-07-14 — runEventPipeline is p50≈0.4ms,
+  // p95<1.6ms on a metropolis WITH faction responses (two orders of magnitude
+  // under a frame), so the pane re-derives the FULL pipeline on every form
+  // change (150ms debounce), no skipFactionResponses tiering needed.
+  useEffect(() => {
+    if (!currentKey || !settlement) return undefined;
+    const t = setTimeout(() => {
+      const pp = useStore.getState().pendingPreview;
+      if (pp && pp._previewKey === currentKey && pp._forSettlement === settlement) return;
+      previewEvent(assembleEvent());
+    }, 150);
+    return () => clearTimeout(t);
+    // currentKey is derived from the ENTIRE form payload; previewEvent is a
+    // stable zustand action; assembleEvent's other inputs are captured by key.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentKey, settlement]);
+
+  if (!settlement) return null;
 
   // Derive a sensible institution list for the institution-pickers.
   const institutionOptions = (settlement.institutions || [])
     .map(i => ({ id: i.id || i.name, name: i.name || i.id }))
     .filter(o => o.id && o.name);
 
-  // buildEvent (the per-type payload assembly) lives in eventComposer/buildEvent.js;
-  // this thin closure threads the form state in so the parent stays under the ratchet.
-  // SHIFT_TIER's direction is clamped to a legal move (clampTierDirection) so the
-  // staged event matches what the Direction field shows (the handler also no-ops an
-  // out-of-bounds shift, so a queue replay past the cap/floor stays harmless).
-  function buildEvent() {
-    return assembleEvent({
+  // The ONE verb-change chokepoint (select dropdown, navigator chips, staged
+  // intents): resets every per-type field, re-mints the compose-session id
+  // (a different verb IS a different composition — §5 identity), ends §10 edits.
+  // Safe to stay below the early return even though the intent effect calls it:
+  // a function declaration is initialized at scope entry, and the bag its body
+  // reads is declared above.
+  function switchType(v) { resetComposerForVerb(v, composerSetters); }
+
+  // Thin closure: thread the form state into the pure buildEvent assembler. The
+  // tier direction is pre-clamped so the shown option and the staged event agree.
+  function assembleEvent() {
+    return buildEvent({
       type, target, effectiveTarget, settlement, phase,
+      sessionEventId, causeOverride,
       addCategory, severity, dimension,
       importance, role, institutionId,
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
-      quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-      stressorPick, powerCause,
-      tradeDirection, tradeEntrepot, swapWithNpcId, tierDirection: clampTierDirection(settlement, tierDirection),
+      quality, relationshipType, criminalOrg, criminalOrgs, corruptScope, corruptBeneficiary,
+      stressorPick, stressorSeverity, powerCause, reliefMagnitude,
+      tradeDirection, tradeEntrepot, swapWithNpcId,
+      tierDirection: clampTierDirection(settlement, tierDirection),
       customContent, deityRef, deityMode, cultRemoveRef,
       isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
       partyCaused, description,
@@ -333,19 +361,23 @@ export default function EventComposer({ onLink = null }) {
   }
 
   function onPreview() {
-    previewEvent(buildEvent());
+    previewEvent(assembleEvent());
+  }
+
+  function resetAfterApply() {
+    setTarget('');
+    setDesc('');
+    setPartyCaused(false);
+    setDestroyConfirm('');
+    setSwapWithNpcId('');
+    setCustomResourceName('');
+    setCauseOverride('');
+    setSessionEventId(mintComposeEventId()); // next composition = next identity
   }
 
   function onApply() {
-    // Advance-in-flight floor: the store no-ops a clock-bound member's applyEvent
-    // during its campaign's advance (returns null with only a console.warn), so
-    // falling through would clear every field + dismiss the preview and silently
-    // drop the GM's event. The button is disabled while advanceBusy (applyOk),
-    // but a click racing the advance start must ALSO bail before any state clears.
-    if (advanceBusy) return;
-    // LINK_NEIGHBOUR — delegate to onLink (handleLink), which stages the `link`
-    // change-queue order for a standalone save or applies the full cascade
-    // immediately for a clock-bound member. Never builds/stages an event.
+    // LINK_NEIGHBOUR — delegate to onLink (handleLink), which runs the full
+    // bidirectional neighbour-link cascade. Never builds/stages an event.
     if (isLinkNeighbour) {
       const partner = (savedSettlements || []).find(s => String(s.id) === String(partnerSaveId));
       if (onLink && partner) onLink(partner, linkRelType);
@@ -355,54 +387,51 @@ export default function EventComposer({ onLink = null }) {
     }
     // §9c — Destroy Settlement is drastic + recoverable-only-by-effort, so it
     // requires typing the settlement name to confirm. Block apply until it matches.
-    const evType = pendingPreview?.event?.type || type;
-    if (evType === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
-    // Build the event exactly as a direct apply would: prefer the previewed
-    // event (the exact thing the DM saw) over re-building, preserving the
-    // preview==apply byte-identity invariant. Then STAGE it instead of
-    // committing — the queue's "Save N changes" runs the same applyEvent later.
-    const builtEvent = pendingPreview?.event || buildEvent();
-    if (activeSaveId) {
-      const spec = EVENT_REGISTRY[evType];
-      const humanLabel = (() => {
-        try { return spec?.narrate?.(builtEvent, settlement) || spec?.label || evType; }
-        catch { return spec?.label || evType; }
-      })();
-      // Clock-bound campaign member: apply immediately (applyEvent redirects to
-      // the world-pulse queue). Standalone: stage on the change-queue.
-      if (clockBound) applyEvent(builtEvent);
-      else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: builtEvent } });
-      if (pendingPreview?.event) dismissPreview();
+    if (type === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
+    // THE STALENESS LAW (§5): the apply-prefers-pendingPreview bypass is
+    // RETIRED. Apply ALWAYS commits the freshly-built form event; when the
+    // form and settlement are unchanged since the last preview this is the
+    // previewed event byte-for-byte (same session id, same payload) — the
+    // audit's preview↔commit identity now holds BY CONSTRUCTION of the key,
+    // and an edited form can never commit a stale preview.
+    // §10: re-staging an EDITED queued intention replaces the entry IN PLACE
+    // (same queueId/position/id); the drain's veto channel re-validates at the tick.
+    if (editingQueue) {
+      const ok = updateQueuedEvent(editingQueue.campaignId, editingQueue.queueId, assembleEvent());
+      setEditingQueue(null);
+      if (ok) { setApplyRefusal(null); resetAfterApply(); }
+      return;
     }
-    setTarget('');
-    setDesc('');
-    setPartyCaused(false);
-    setDestroyConfirm('');
-    setSwapWithNpcId('');
-    setCustomResourceName('');
-    setInstigatorNeighbour('');
-    setInstigatorRelationship('rival');
-    setTradeTarget('');
-    setDeityRef('');
-    setDeityMode('assign');
-    setCultRemoveRef('');
-    // The staleness notice moves to COMMIT time (nothing has mutated here yet —
-    // see ChangeQueuePanel's onCommitted seam in SettlementDetail).
+    const evType = type;
+    const entry = applyEvent(assembleEvent());
+    // Handler-veto channel (§2): the world refused — a blocking refusal, not
+    // a commit. Keep the form (the DM will retarget), surface the reason.
+    // Blocking refusal — a handler veto (§2) OR a clock-bound queue refusal
+    // (store-hooks-state-1: advance in flight / parked, nothing queued). Either
+    // way KEEP the form and surface the reason (keyed to THIS composition, so the
+    // box hides by derivation once the form moves) — never silently reset the
+    // form + raise the stale-narrative modal as if the order committed.
+    if (entry && entry.ok === false && (entry.veto || entry.queued === false)) {
+      setApplyRefusal(applyRefusalPayload(entry, currentKey));
+      return;
+    }
+    setApplyRefusal(null);
+    resetAfterApply();
+    // Post-apply staleness notice: the event committed (and stays committed
+    // regardless of what the modal answers) — on a narrated save the AI
+    // prose was written against the previous state, so offer regenerate /
+    // continue-with-raw. Raw saves have nothing to go stale. A clock-bound
+    // settlement only QUEUED the event (entry.queued) — nothing changed yet,
+    // so the narrative isn't stale until the next World Pulse resolves it.
+    if (entry && !entry.queued && narrated) {
+      setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
+    }
   }
 
   return (
-    <div
-      data-anchor="event-composer"
-      id="event-composer"
-      // Programmatic-focus target: the NextActionRail's "Apply an event" rung
-      // enters edit mode then focuses this composer (it is otherwise unreachable
-      // from the rail without a hunt down the Workshop). tabIndex={-1} makes the
-      // container focusable without adding it to the natural tab order.
-      tabIndex={-1}
-      style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+    <div data-anchor="event-composer" style={{
+      background: CARD, border: `1px solid ${BORDER}`,
       padding: SP.sm, marginTop: SP.sm,
-      outline: 'none',
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
@@ -410,6 +439,7 @@ export default function EventComposer({ onLink = null }) {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
+        <Zap size={12} />
         Make Changes
       </div>
       <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: -2, marginBottom: SP.sm, lineHeight: 1.4 }}>
@@ -418,74 +448,82 @@ export default function EventComposer({ onLink = null }) {
           : 'Draft: nothing is logged yet. Stage changes and preview their effect before you canonize.'}
       </div>
 
+      {editingQueue && <EditQueueBanner onStop={() => { setEditingQueue(null); setSessionEventId(mintComposeEventId()); }} />}
+
+      {/* §4 — nobody ever meets the catalog: pressures rail + target-first +
+          family browse + search, all projections of the affordance manifest. */}
+      <ComposerNavigator
+        settlement={settlement}
+        ctx={verbCtx}
+        onPickVerb={switchType}
+        onPickTargetVerb={(t, targetId) => { switchType(t); if (targetId) setTarget(String(targetId)); }}
+      />
+
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setRole(''); setInstitutionId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); setTierDirection('promotion'); setDeityRef(''); setDeityMode('assign'); setCultRemoveRef(''); setPartnerSaveId(''); setLinkRelType('neutral'); }} style={selectStyle}>
-            {Object.entries(EVENT_REGISTRY)
-              /* Hide non-authorable events from the DM action list (see
-                 NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
-                 equivalent events (authored via the Roster's Stressors), and
-                 Damage Institution (redundant with Impair). All stay in the
-                 registry for back-compat + world-engine simulation.
-                 §9b/g/h — relationship events only appear when the settlement
-                 has linked neighbours to act on. #6 — OPENED_TRADE_ROUTE is the
-                 exception: it can target any OTHER campaign settlement, so it
-                 also appears when the active save has campaign peers. */
-              .filter(([k]) => !NON_AUTHORABLE_EVENTS.has(k))
-              .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours
-                || (k === 'OPENED_TRADE_ROUTE' && campaignSettlementOptions.length > 0))
-              /* The standing swap needs two NPCs in one faction — hide the
-                 single Promote/Demote NPC action when no faction has a pair to
-                 swap. DEMOTE_NPC is hidden via NON_AUTHORABLE_EVENTS (folded in). */
-              .filter(([k]) => k !== 'PROMOTE_NPC' || hasSwapPairs)
-              /* Expose Corruption acts only on a corrupt NPC — hide it when the
-                 settlement has none, so the action can never be a no-op. */
-              .filter(([k]) => k !== 'EXPOSE_CORRUPTION' || hasCorruptNpcs)
-              .map(([k, s]) => (
-                <option key={k} value={k}>{s.label}</option>
-              ))}
-            {/* LINK_NEIGHBOUR — folded "Link a neighbour" card. A pseudo-event (no
-                registry entry): shown only when an onLink handler is wired and a
-                linkable sibling save exists. */}
+          <select value={type} onChange={e => switchType(e.target.value)} aria-label="Event type" style={selectStyle}>
+            {/* Predicate-driven verb list (§2): the manifest's authorable verbs.
+                Grayed-with-reason beats absent — an unavailable verb renders
+                disabled with WHY, so unavailability teaches instead of hiding.
+                (Folded types never list; their cards live in the manifest.) */}
+            {authorableVerbs().map(v => {
+              const p = v.predicate(settlement, verbCtx);
+              return (
+                <option key={v.type} value={v.type} disabled={!p.available}>
+                  {v.label}{p.available ? '' : ` (${p.reasons[0] || 'unavailable'})`}
+                </option>
+              );
+            })}
+            {/* LINK_NEIGHBOUR — folded "Link a neighbour" pseudo-event (no registry
+                entry): shown only when an onLink handler is wired and a partner exists. */}
             {canLinkNeighbour && <option value="LINK_NEIGHBOUR">Link a neighbour</option>}
           </select>
+          {!verbAvailability.available && (
+            <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, maxWidth: 260, lineHeight: 1.4 }}>
+              {[...verbAvailability.reasons, ...verbAvailability.unlocks].join(' ')}
+            </span>
+          )}
         </Field>
 
-        <EventComposerTargetField
-          type={type}
-          target={target}
-          setTarget={setTarget}
-          spec={spec}
-          settlement={settlement}
-          setAddCategory={setAddCategory}
-          setStressorPick={setStressorPick}
-          stressorPick={stressorPick}
-          setCustomResourceName={setCustomResourceName}
-          customResourceName={customResourceName}
-          setSwapWithNpcId={setSwapWithNpcId}
-          swapWithNpcId={swapWithNpcId}
-          institutionCatalogItems={institutionCatalogItems}
-          institutionCategories={institutionCategories}
-          stressorPickerItems={stressorPickerItems}
-          rulingPowerOptions={rulingPowerOptions}
-          factionGroups={factionGroups}
-          tradeGoodSuggestions={tradeGoodSuggestions}
-          resourceCatalogOptions={resourceCatalogOptions}
-          npcSwapGroups={npcSwapGroups}
-        />
-
-        {/* SHIFT_TIER — promote or demote one size tier (the folded "Settlement
-            Size" card). Only the legal move(s) appear. */}
-        {type === 'SHIFT_TIER' && (
-          <EventComposerTierField
+        {/* The deity / tier / link fields override or replace the target, so the
+            vestigial free-text Target is suppressed for those kinds. */}
+        {!isDeityEvent && type !== 'SHIFT_TIER' && !isLinkNeighbour && (
+          <EventComposerTargetField
+            type={type}
+            target={target} setTarget={setTarget}
+            setDesc={setDesc}
+            spec={spec}
             settlement={settlement}
-            tierDirection={tierDirection}
-            setTierDirection={setTierDirection}
+            setAddCategory={setAddCategory}
+            setStressorPick={setStressorPick}
+            stressorPick={stressorPick}
+            setCustomResourceName={setCustomResourceName}
+            customResourceName={customResourceName}
+            setSwapWithNpcId={setSwapWithNpcId}
+            swapWithNpcId={swapWithNpcId}
+            institutionCatalogItems={institutionCatalogItems}
+            institutionCategories={institutionCategories}
+            stressorPickerItems={stressorPickerItems}
+            rulingPowerOptions={rulingPowerOptions}
+            factionGroups={factionGroups}
+            tradeGoodSuggestions={tradeGoodSuggestions}
+            resourceCatalogOptions={resourceCatalogOptions}
+            npcSwapGroups={npcSwapGroups}
           />
         )}
 
-        {/* SET_PRIMARY_DEITY / IMPOSE_CULT — the folded "Patron & Cults" card. */}
-        {(type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT') && (
+        {/* IMPOSE_CORRUPTION — WHO benefits (local underworld / foreign patron) + which criminal organization + how far the rot reaches */}
+        {type === 'IMPOSE_CORRUPTION' && (
+          <EventComposerCorruptionFields
+            criminalOrgs={criminalOrgs} criminalOrg={criminalOrg} setCriminalOrg={setCriminalOrg}
+            corruptScope={corruptScope} setCorruptScope={setCorruptScope}
+            foreignSettlements={campaignSettlementOptions}
+            corruptBeneficiary={corruptBeneficiary} setCorruptBeneficiary={setCorruptBeneficiary}
+          />
+        )}
+
+        {/* SET_PRIMARY_DEITY / IMPOSE_CULT — the patron + cult inputs (premium-gated) */}
+        {isDeityEvent && (
           <EventComposerDeityField
             type={type}
             settlement={settlement}
@@ -501,7 +539,16 @@ export default function EventComposer({ onLink = null }) {
           />
         )}
 
-        {/* LINK_NEIGHBOUR — the folded "Link a neighbour" card. */}
+        {/* SHIFT_TIER — force a one-step promotion/demotion (only legal moves shown) */}
+        {type === 'SHIFT_TIER' && (
+          <EventComposerTierField
+            settlement={settlement}
+            tierDirection={tierDirection}
+            setTierDirection={setTierDirection}
+          />
+        )}
+
+        {/* LINK_NEIGHBOUR — pick a partner save + relationship (delegates to onLink) */}
         {isLinkNeighbour && (
           <EventComposerLinkNeighbourField
             settlement={settlement}
@@ -514,35 +561,25 @@ export default function EventComposer({ onLink = null }) {
           />
         )}
 
-        {/* IMPOSE_CORRUPTION — which criminal organization corrupts the NPC, and how
-            far the rot reaches (extracted to keep the composer under the ratchet) */}
-        {type === 'IMPOSE_CORRUPTION' && (
-          <EventComposerCorruptionFields
-            criminalOrgs={criminalOrgs}
-            criminalOrg={criminalOrg}
-            setCriminalOrg={setCriminalOrg}
-            corruptScope={corruptScope}
-            setCorruptScope={setCorruptScope}
-          />
-        )}
-
-        {/* ADD_TRADE_GOOD direction/handling, APPLY_STRESSOR onset, and
-            CHANGE_RULING_POWER "how" — extracted to hold the line ratchet. */}
+        {/* Per-type secondary inputs: trade direction/handling, stressor severity,
+            ruling-power cause, and the read-only KILL_NPC importance. */}
         <EventComposerSecondaryFields
           type={type}
           tradeDirection={tradeDirection}
           setTradeDirection={setTradeDirection}
           tradeEntrepot={tradeEntrepot}
           setTradeEntrepot={setTradeEntrepot}
-          derivedOnset={derivedOnset}
+          stressorSeverity={stressorSeverity}
+          setStressorSeverity={setStressorSeverity}
           powerCause={powerCause}
           setPowerCause={setPowerCause}
+          reliefMagnitude={reliefMagnitude}
+          setReliefMagnitude={setReliefMagnitude}
           settlement={settlement}
           target={target}
         />
 
-        {/* #1 war-stressor instigator + #6 trade-route campaign target — both
-            optional, settlement-local relationship effects. */}
+        {/* Optional relationship extras: war/infiltration instigator, trade peer */}
         <EventComposerRelationshipExtras
           type={type}
           settlement={settlement}
@@ -567,7 +604,8 @@ export default function EventComposer({ onLink = null }) {
         )}
 
         {/* ADD_NPC defines a NEW NPC, so its importance is a real choice.
-            KILL_NPC does not ask — it derives from the selected NPC below. */}
+            KILL_NPC does not ask — it derives from the selected NPC (shown by
+            EventComposerSecondaryFields). */}
         {type === 'ADD_NPC' && (
           <Field label="Importance" hint={
             importance === 'pillar' ? 'Death creates major consequences' :
@@ -584,13 +622,15 @@ export default function EventComposer({ onLink = null }) {
           </Field>
         )}
 
-        {/* ADD_NPC descriptive traits — the same flaw / temperament / goal /
-            constraint / secret the NPC read card shows. All optional. */}
+        {/* ADD_NPC — the descriptive traits surfaced on the NPC read card. */}
         {type === 'ADD_NPC' && (
           <AddNpcTraitFields
-            flaw={npcFlaw} setFlaw={setNpcFlaw} temperament={npcTemperament} setTemperament={setNpcTemperament}
-            goals={npcGoals} setGoals={setNpcGoals} constraint={npcConstraint} setConstraint={setNpcConstraint}
-            secret={npcSecret} setSecret={setNpcSecret} />
+            flaw={npcFlaw} setFlaw={setNpcFlaw}
+            temperament={npcTemperament} setTemperament={setNpcTemperament}
+            goals={npcGoals} setGoals={setNpcGoals}
+            constraint={npcConstraint} setConstraint={setNpcConstraint}
+            secret={npcSecret} setSecret={setNpcSecret}
+          />
         )}
 
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && (() => {
@@ -607,7 +647,7 @@ export default function EventComposer({ onLink = null }) {
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
                 <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
-                  <option value="">Pick a role -</option>
+                  <option value="">Pick a role</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
               </Field>
@@ -623,7 +663,7 @@ export default function EventComposer({ onLink = null }) {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">, None</option>
+              <option value="">None</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}
@@ -655,144 +695,100 @@ export default function EventComposer({ onLink = null }) {
           </span>
         )}
 
-        <Field label="Description" hint="optional">
-          <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle} />
-        </Field>
+        {/* Description is not meaningful for the delegate-only LINK_NEIGHBOUR. */}
+        {!isLinkNeighbour && (
+          <Field label="Description" hint="optional">
+            <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle} />
+          </Field>
+        )}
 
         {/* §8 M3b — party attribution. A canonical "the party did this" flag. */}
-        <label
-          htmlFor="event-party-caused"
-          title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
-            padding: '5px 9px', borderRadius: R.sm, cursor: 'pointer',
-            border: `1px solid ${partyCaused ? PARTY : BORDER}`,
-            background: partyCaused ? PARTY_BG : 'transparent',
-            color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
-          }}
-        >
-          <input
-            id="event-party-caused"
-            type="checkbox"
-            checked={partyCaused}
-            onChange={e => setPartyCaused(e.target.checked)}
-            aria-label="Caused by the party"
-            style={{ margin: 0 }}
-          />
-          Caused by the party
-        </label>
+        {!isLinkNeighbour && (
+          <label
+            htmlFor="event-party-caused"
+            title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
+              padding: '5px 9px', cursor: 'pointer',
+              border: `1px solid ${partyCaused ? PARTY : BORDER}`,
+              background: partyCaused ? PARTY_BG : 'transparent',
+              color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
+            }}
+          >
+            <input
+              id="event-party-caused"
+              type="checkbox"
+              checked={partyCaused}
+              onChange={e => setPartyCaused(e.target.checked)}
+              aria-label="Caused by the party"
+              style={{ margin: 0 }}
+            />
+            Caused by the party
+          </label>
+        )}
       </div>
 
-      {advanceBusy && (
-        <p style={{ margin: `${SP.sm}px 0 0`, fontSize: FS.xs, color: MUTED }}>
-          The realm is advancing. Give it a moment, then apply this change.
-        </p>
+      <ApplyControls
+        type={type}
+        phase={phase}
+        isLinkNeighbour={isLinkNeighbour}
+        canSubmit={canSubmit}
+        settlement={settlement}
+        destroyConfirm={destroyConfirm}
+        setDestroyConfirm={setDestroyConfirm}
+        pendingPreview={pendingPreview}
+        dismissPreview={dismissPreview}
+        onPreview={onPreview}
+        onApply={onApply}
+        onAddToBatch={() => { setStaged(prev => [...prev, assembleEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); setSessionEventId(mintComposeEventId()); }}
+      />
+
+      {/* Apply refusal: a handler veto (§2) OR a clock-bound queue refusal
+          (store-hooks-state-1) — both blocking, both keep the form. */}
+      {applyRefusal && applyRefusal.forKey === currentKey && (
+        <div style={refusalBoxStyle}>
+          {applyRefusalMessage(applyRefusal, vetoProse)}
+        </div>
       )}
 
-      <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        {/* Link creation is a structural change-queue order, not a previewable
-            event, so Preview is suppressed for it (Apply delegates to onLink). */}
-        <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit || isLinkNeighbour}>
-          Preview
-        </Button>
-        {(() => {
-          // Apply is always offered — preview is an optional look-ahead, not
-          // a gate. With a preview pending, Apply commits exactly the
-          // previewed event (audit invariant); without one it applies the
-          // form as built, so it honors the same canSubmit rule as Preview.
-          // The Destroy confirm gate follows the event that would actually
-          // apply (the previewed one if pending, else the picked type).
-          // The advance-in-flight guard applies EITHER WAY — a pending preview
-          // waives the form-completeness checks in canSubmit, not the store's
-          // "apply would be no-op'd during an advance" floor.
-          const isDestroy = (pendingPreview?.event?.type || type) === 'DESTROY_SETTLEMENT';
-          const destroyOk = !isDestroy || destroyConfirm.trim() === (settlement?.name || '').trim();
-          const applyOk = destroyOk && !advanceBusy && (pendingPreview ? true : canSubmit);
-          return (
-            <>
-              {isDestroy && (
-                <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, borderRadius: R.sm, background: swatch.dangerBg }}>
-                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
-                    ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by deliberate action.
-                  </div>
-                  <input
-                    value={destroyConfirm}
-                    onChange={(e) => setDestroyConfirm(e.target.value)}
-                    placeholder={`Type "${settlement?.name || ''}" to confirm`}
-                    aria-label="Type the settlement name to confirm destruction"
-                    style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
-                  />
-                </div>
-              )}
-              <Button
-                variant={isDestroy ? 'danger' : 'success'}
-                size="sm"
-                icon={<Check size={11} />}
-                onClick={onApply}
-                disabled={!applyOk}
-              >
-                {isDestroy ? 'Destroy settlement' : isLinkNeighbour ? 'Link a neighbour' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
-              </Button>
-              {pendingPreview && (
-                <Button variant="secondary" size="sm" icon={<X size={11} />} onClick={() => { dismissPreview(); setDestroyConfirm(''); }}>
-                  Cancel
-                </Button>
-              )}
-            </>
-          );
-        })()}
-        <Button
-          variant="gold"
-          size="sm"
-          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); setInstigatorNeighbour(''); setTradeTarget(''); }}
-          disabled={!canSubmit || isLinkNeighbour}
-        >
-          + Add to batch
-        </Button>
-      </div>
+      {/* Queued-vs-now (§5): plainly said, never silent. */}
+      {queuesToNextAdvance && (
+        <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
+          {CLOCK_BOUND_SCOPE_NOTICE}
+        </div>
+      )}
 
-      {pendingPreview && <PreviewPanel preview={pendingPreview} />}
+      {pendingPreview && <PreviewPanel preview={pendingPreview} stale={isStale} queued={queuesToNextAdvance} />}
 
       {staged.length > 0 && (
         <BatchCart
           staged={staged}
           settlement={settlement}
           phase={phase}
-          advanceBusy={advanceBusy}
           pendingBatchPreview={pendingBatchPreview}
-          onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
-          onClear={() => { setStaged([]); dismissBatchPreview(); }}
+          refusalNotice={batchRefusalText(batchRefusal)}
+          onRemove={(i) => { setBatchRefusal(null); setStaged(prev => prev.filter((_, idx) => idx !== i)); }}
+          onClear={() => { setBatchRefusal(null); setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
           onApply={() => {
-            // Same advance-in-flight floor as onApply: a clock-bound member's
-            // applyEvent is no-op'd mid-advance, so applying the batch then
-            // would clear the cart while every event silently dropped. Keep the
-            // staged events intact; the DM re-applies after the advance settles.
-            // (Events can sit staged from before the advance started — the
-            // "+ Add to batch" disable only stops NEW staging.)
-            if (advanceBusy) return;
-            // Batch apply now ENQUEUES one order per staged event (spec §2.2
-            // option a). The flush replays each through applyEvent in order, so
-            // forward references between staged events resolve exactly as the
-            // old applyEventBatch's serial re-run did. Nothing commits here.
-            if (activeSaveId) {
-              for (const ev of staged) {
-                const spec = EVENT_REGISTRY[ev?.type];
-                const humanLabel = (() => {
-                  try { return spec?.narrate?.(ev, settlement) || spec?.label || ev?.type; }
-                  catch { return spec?.label || ev?.type; }
-                })();
-                // Clock-bound: apply each immediately (world-pulse redirect);
-                // standalone: stage on the change-queue.
-                if (clockBound) applyEvent(ev);
-                else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: ev } });
-              }
-            }
-            dismissBatchPreview();
+            // A clock-bound queue refusal with nothing landed KEEPS the staged
+            // batch and surfaces the reason (store-hooks-state-1); a commit fires
+            // one staleness notice (skipped when the batch only queued).
+            const o = batchApplyOutcome(applyBatch(staged));
+            if (o.noop) return;
+            if (!o.committed) return setBatchRefusal(o.refusalReason);
+            setBatchRefusal(null);
+            if (o.fireStale && narrated) setStaleNotice({ label: `${staged.length} changes` });
             setStaged([]);
           }}
         />
       )}
+
+      <StaleNarrativeModal
+        open={!!staleNotice}
+        changeLabel={staleNotice?.label}
+        onClose={() => setStaleNotice(null)}
+      />
 
       {/* Roster & Tune was removed (owner decision, 2026-06-11): its four
           sections were redundant — or worse — next to the event catalog.

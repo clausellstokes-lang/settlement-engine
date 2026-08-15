@@ -17,6 +17,11 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../domain/factionArchetypes.js';
+import {
+  nativeSemanticName,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
+import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
@@ -47,12 +52,51 @@ export const FACTION_ROLES = {
     { role: 'Lieutenant',     importance: 'key' },
   ],
   noble: [
-    { role: 'Lord Mayor',     importance: 'pillar', linkToInst: /council|court|hall|government/ },
+    { role: 'Lord Mayor',     importance: 'pillar', linkToInst: /council|court|government|\b(?:town|city)\s?halls?\b/ },
   ],
   arcane: [
     { role: 'Archmagister',   importance: 'pillar', linkToInst: /tower|academy|college|magisterium/ },
   ],
 };
+
+// ── THE LORD MAYOR'S CIVIC-HALL NARROWING, 2026-08-11 (owner-approved, ────────
+// OWNER_DECISION_QUEUE §17.1) ────────────────────────────────────────────────
+// The noble pattern's bare `hall` alternative matched ANY institution whose name
+// merely ends in "hall", so the Lord Mayor — the settlement's civic head — was
+// linked to gambling dens and mercenary hiring halls. Declared as a known
+// imperfection when the institution-link repair landed (GOLDEN_SHIFT_LEDGER_MAIN
+// SHIFT-2, 0f85ced0), which measured 4 wrong links of 20 across a 120-seed probe:
+// 'Gambling halls' x2, 'Free company hall', "Adventurers' charter hall".
+//
+// DERIVED FROM THE CLOSED CORPUS, NOT FROM GUESSWORK. Institution names are never
+// templated: every push site copies a literal key out of `data/institutionalCatalog`
+// (276 unique names over 6 tiers), and `nativeSemanticName` returns '' for
+// custom/DM content, so the set of strings this pattern can ever see is closed and
+// enumerable. Enumerated at HEAD e7774ff2, the OLD pattern matched 15 of the 276;
+// the new one matches 10 — a STRICT SUBSET (zero names newly matched). The five it
+// drops are the entire non-civic-hall class, not just the three the probe named:
+//     "Adventurers' charter hall"  (Magic / Adventuring)   ← probe-named
+//     'Free company hall'          (Defense)               ← probe-named
+//     'Gambling halls'             (Entertainment)         ← probe-named
+//     'Hireling hall'              (Adventuring)           ← same class, unhit by the probe
+//     "Carriers' hiring hall"      (Economy)               ← same class, unhit by the probe
+// The ten that survive are every governmental/civic name in the catalog:
+//     'Town hall'  'City hall'  'Courthouse'  'Multiple courthouses'
+//     'Multiple court buildings'  'Mayor and council'  'Town council'
+//     'Elder Grove Council'  'City-state government'  'Palace/government complex'
+//
+// `council`, `court` and `government` are DELIBERATELY LEFT BARE: they have zero
+// false friends in the closed corpus, and narrowing them would be unmeasured
+// same-seed movement bought for no defect. `court` must stay un-anchored — a
+// `\bcourt\b` would stop matching 'Courthouse' and 'Multiple courthouses'.
+// No speculative civic-hall spellings ('moot hall', 'village hall', 'guildhall')
+// were added: the corpus is closed, so an alternative matching nothing in it is
+// unfalsifiable pattern surface. A future civic hall added to the catalog must be
+// added here too — the same maintenance the merchant row's 'trade hall' carries.
+//
+// ⚠ DECLARED SHIFT: a settlement whose only `hall` was a non-civic one now links
+// nothing (or falls through to a real civic seat later in the roster). No RNG is
+// drawn at the match site, so no downstream draw moves.
 
 // Canonical archetype → factionRoles' structural-role key. Only these six imply
 // structural NPCs; every other canonical archetype → null (no synthesis), as before.
@@ -66,6 +110,43 @@ const CANONICAL_TO_ROLE = Object.freeze({
   [FA.CRAFT]:    'merchant',
   [FA.NOBLE]:    'noble',
   [FA.ARCANE]:   'arcane',
+});
+
+// OFFICE-EQUIVALENCE: realized NPC role (whitespace/punct-insensitive, see
+// normalizeRoleKey) → the structural role-key that role FILLS. This is the
+// office-coverage fallback: when an existing NPC's factionAffiliation does not
+// resolve to a power-seat (custom content, partial data), a clear leadership
+// title still marks the office held so a placeholder is NOT duplicated beside it
+// (the probe: a realized 'Guard Captain' covers the 'watch' office that a
+// 'Watch Captain' placeholder would otherwise duplicate). Validated against the
+// generator's real role vocabulary; only UNAMBIGUOUS leadership titles are listed
+// — ambiguous roles (Miller, Blacksmith, Healer, Lieutenant) are deliberately
+// omitted so they never mis-cover an office. Coverage-only: an entry can suppress
+// a duplicate, never force a synthesis.
+const ROLE_KEY_SYNONYMS = Object.freeze({
+  // watch (military leadership)
+  guardcaptain: 'watch', watchcaptain: 'watch', captainofthewatch: 'watch',
+  sheriff: 'watch', constable: 'watch', marshal: 'watch', commander: 'watch',
+  knightdame: 'watch', warden: 'watch', sergeantatarms: 'watch',
+  // temple (religious leadership)
+  highpriest: 'temple', highpriestess: 'temple', archpriest: 'temple',
+  deaconcurate: 'temple', parishpriest: 'temple', chaplain: 'temple',
+  bishop: 'temple', abbot: 'temple', abbess: 'temple', prelate: 'temple',
+  patriarch: 'temple', matriarch: 'temple',
+  // merchant (trade / craft leadership)
+  guildmaster: 'merchant', grainfactor: 'merchant', factor: 'merchant',
+  mastercraftsman: 'merchant', marketoverseer: 'merchant', caravanmaster: 'merchant',
+  mastertanner: 'merchant', masterweaver: 'merchant', headbrewer: 'merchant',
+  seniortrader: 'merchant', trademaster: 'merchant',
+  // thieves (criminal leadership)
+  kingpin: 'thieves', crimelord: 'thieves', shadowmaster: 'thieves',
+  fence: 'thieves', localfence: 'thieves',
+  // noble
+  lordmayor: 'noble', lordladyofthemanor: 'noble', lordofthemanor: 'noble',
+  nobleheir: 'noble', baron: 'noble', baroness: 'noble', headofhouse: 'noble',
+  // arcane
+  archmagister: 'arcane', archmage: 'arcane', magister: 'arcane',
+  courtwizard: 'arcane', highsorcerer: 'arcane', mastermage: 'arcane',
 });
 
 /**
@@ -87,28 +168,77 @@ export function matchFactionArchetype(faction) {
  *
  * @param {Object} faction
  * @param {Object[]} institutions   for resolving linkToInst
+ * @param {unknown} generationContext
  * @returns {Object[]} structural NPCs
  */
-export function generateFactionStructuralNpcs(faction, institutions = []) {
+export function generateFactionStructuralNpcs(
+  faction,
+  institutions = [],
+  generationContext = null,
+) {
   const arch = matchFactionArchetype(faction);
   if (!arch) return [];
-  const defs = FACTION_ROLES[arch] || [];
-  const factionId = faction.id || faction.faction || faction.name || '';
-  const factionName = faction.name || faction.faction || 'Unknown faction';
+  const worldLaw = resolveGenerationWorldLaw(generationContext);
+  const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
+  // `linkedFactionIds` is the propagation identity: prefer a durable authored
+  // id, falling back to the canonical display key only for legacy/generated
+  // seats that genuinely carry no id. `factionAffiliation` remains display prose.
+  const factionKey = factionRefOf(faction);
+  const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
   return defs.map((def, i) => {
-    const linkedInstId = def.linkToInst
-      ? institutions.find(inst => def.linkToInst.test(String(inst.name || '').toLowerCase()))?.id
+    // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ────────────────────
+    // The bare `?.id` read the WRONG IDENTITY: a generated institution carries no
+    // `id` property at all (measured at HEAD 4a9b6cf4 — 3632 institutions across
+    // 120 seeded generations, ZERO with an `id`), so this expression was
+    // unconditionally `undefined` and `linkedInstitutionIds` was unconditionally
+    // EMPTY for every faction structural NPC ever generated. That silently broke
+    // pillar-NPC ripple (entities/npcs.killNpc), impairment propagation
+    // (entities/propagate), successor ranking (entities/successors), and the
+    // SuccessorPrompt institution dropdown.
+    //
+    // The fix is to read the identity the CONSUMERS actually join on, not to mint
+    // a new one: `domain/entities/propagate.js` defines the join as
+    // `instId = (i) => i?.id || i?.name`, so an institution's identity is its id
+    // when it has one and its NAME otherwise. `id ||` is kept rather than
+    // simplified to `name` so an id-bearing institution is never downgraded to a
+    // rename-sensitive label — the same precedence the rest of the domain uses
+    // (counterfactual.js, contradictions.js, dailyLife.js, districtProfile.js).
+    // NOT `catalogId`: no consumer of `linkedInstitutionIds` joins on it, and
+    // custom/DM institutions carry none.
+    //
+    // ⚠ DECLARED SHIFT: structural NPCs whose `linkToInst` pattern matches a
+    // present institution now carry one institution id where they carried an empty
+    // array before. No RNG is drawn here, so no downstream draw moves; the change
+    // is confined to this one field. A settlement regenerated from the same seed
+    // across this date boundary is expected to differ in exactly that way.
+    const linkedInst = def.linkToInst
+      ? institutions.find(inst => def.linkToInst.test(
+        nativeSemanticName(inst).toLowerCase(),
+      ))
       : null;
+    const linkedInstId = linkedInst ? (linkedInst.id || linkedInst.name) : null;
     return {
       id: `npc.${slug(factionName)}_${slug(def.role)}_${i}`,
       name: nameTemplateFor(def.role),
       role: def.role,
       importance: def.importance,
       status: 'active',
+      // factionAffiliation is the DISPLAY-name link every pipeline NPC carries and
+      // the key downstream consumers (and this module's own office-coverage) read.
+      // Stamping it makes the synthesized leader belong to its seat AND makes a
+      // second ensureFactionStructuralNpcs pass idempotent (the placeholder now
+      // covers its own office, so it is not re-synthesized).
+      factionAffiliation: factionName,
       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
-      linkedFactionIds: factionId ? [factionId] : [],
+      // Canonical faction identity. Name-only legacy seats intentionally fall
+      // back to their display key; id-bearing seats must never be downgraded to
+      // a rename-sensitive label because propagation and clergy joins are id-first.
+      linkedFactionIds: factionKey ? [factionKey] : [],
       // Defaults for the structural fields the impairment engine reads.
-      influence: def.importance === 'pillar' ? 75 : def.importance === 'key' ? 50 : 25,
+      // Influence is a BAND STRING everywhere it is consumed (npcComponents,
+      // campaign PDF filter `influence === 'high'`) — the prior numeric 75/50/25
+      // silently failed every consumer comparison.
+      influence: def.importance === 'pillar' ? 'high' : def.importance === 'key' ? 'moderate' : 'low',
       legitimacyContribution: def.importance === 'pillar' ? 30 : 10,
       stabilityContribution:  def.importance === 'pillar' ? 25 : 8,
       generatedAs: 'faction_structural',  // marker for migration / debugging
@@ -117,38 +247,82 @@ export function generateFactionStructuralNpcs(faction, institutions = []) {
 }
 
 /**
- * Walk all factions in a settlement and ensure each archetype has its
- * structural NPCs. Idempotent: skips a role if an existing NPC already
- * matches it (by role pattern + faction linkage).
+ * Walk a settlement's power-seats and synthesize a structural leader ONLY for an
+ * office (temple/watch/merchant/thieves/noble/arcane) that NO realized NPC already
+ * holds. Idempotent, and — critically — office-EQUIVALENT: a 'Watch Captain'
+ * placeholder is NOT added beside a realized 'Guard Captain', because coverage is
+ * keyed on the ROLE-KEY (archetype), not the exact role string.
+ *
+ * THE BUG THIS FIXES (generators-domain-2): the prior implementation walked
+ * `settlement.factions` — the NPC-GROUPING list ("The Commercial Circle") whose
+ * names frequently classify as 'other', so most offices were silently dropped;
+ * and its dedup matched on exact role string + faction id, neither of which lines
+ * up with a realized seat-holder (role names differ — 'Watch Captain' vs 'Guard
+ * Captain'; the grouping's id is not the seat-holder's factionAffiliation). Net
+ * result: it synthesized DUPLICATES beside realized leaders AND missed genuinely
+ * unled offices. The fix reads the authoritative `powerStructure.factions` seats
+ * (which carry a classifying `category`) and dedups by office-equivalence.
  *
  * @param {Object} settlement
+ * @param {unknown} generationContext
  * @returns {Object} new settlement with structural NPCs appended
  */
-export function ensureFactionStructuralNpcs(settlement) {
+export function ensureFactionStructuralNpcs(
+  settlement,
+  generationContext = null,
+) {
   if (!settlement) return settlement;
-  const factions = settlement.factions || settlement.powerStructure?.factions || [];
-  if (!factions.length) return settlement;
+  const worldLaw = resolveGenerationWorldLaw(
+    generationContext,
+    settlement.config || settlement._config || {},
+  );
+  // Office source: the powerStructure power-seats are the authoritative faction
+  // list — each carries a `category` that classifies reliably. Fall back to the
+  // grouping list only when no powerStructure exists (bare-faction test inputs).
+  const seats = settlement.powerStructure?.factions?.length
+    ? settlement.powerStructure.factions
+    : (settlement.factions || []);
+  if (!seats.length) return settlement;
 
   const existingNpcs = settlement.npcs || [];
+
+  // Index seats by display name so a realized NPC's factionAffiliation resolves to
+  // its seat's canonical archetype (→ role-key).
+  const seatByName = new Map();
+  for (const seat of seats) {
+    const nm = factionDisplayNameOf(seat).toLowerCase();
+    if (nm) seatByName.set(nm, seat);
+  }
+
+  // OFFICE COVERAGE by role-key. An office is "already held" if any existing NPC
+  // resolves to that role-key — via its affiliation's archetype (primary) or a
+  // leadership role-synonym (fallback). Synthesized placeholders from a prior pass
+  // count as coverage too (they carry factionAffiliation), so re-running is a no-op.
+  const coveredRoleKeys = new Set();
+  for (const npc of existingNpcs) {
+    const affil = String(npc.factionAffiliation || '').toLowerCase();
+    const seat = affil ? seatByName.get(affil) : null;
+    const byAffiliation = seat
+      ? matchFactionArchetype(seat)
+      : (affil ? matchFactionArchetype({ name: affil }) : null);
+    if (byAffiliation) coveredRoleKeys.add(byAffiliation);
+    const byRole = ROLE_KEY_SYNONYMS[normalizeRoleKey(npc.role)];
+    if (byRole) coveredRoleKeys.add(byRole);
+  }
+
   const additions = [];
-  for (const faction of factions) {
-    const structural = generateFactionStructuralNpcs(faction, settlement.institutions || []);
-    for (const proposed of structural) {
-      const proposedFactionKeys = proposed.linkedFactionIds.map(id => String(id).toLowerCase());
-      const alreadyExists = existingNpcs.some(npc => {
-        // Same role (whitespace/punctuation-insensitive, so 'Guild Master' ===
-        // 'Guildmaster') + same faction = treat as the same person.
-        const sameRole = normalizeRoleKey(npc.role) === normalizeRoleKey(proposed.role);
-        if (!sameRole) return false;
-        // Pipeline NPCs link to their faction via factionAffiliation (display
-        // name), NOT linkedFactionIds — checking only ids meant the dedup never
-        // matched a generated NPC, so structural seat-holders always duplicated.
-        const byId = (npc.linkedFactionIds || []).some(id => proposedFactionKeys.includes(String(id).toLowerCase()));
-        const byAffiliation = proposedFactionKeys.includes(String(npc.factionAffiliation || '').toLowerCase());
-        return byId || byAffiliation;
-      });
-      if (!alreadyExists) additions.push(proposed);
-    }
+  for (const seat of seats) {
+    const roleKey = matchFactionArchetype(seat);
+    if (!roleKey) continue;                     // archetype with no structural roles (government/civic/labor/…)
+    if (coveredRoleKeys.has(roleKey)) continue; // office already held (realized or already-synthesized)
+    const structural = generateFactionStructuralNpcs(
+      seat,
+      settlement.institutions || [],
+      worldLaw,
+    );
+    if (!structural.length) continue;
+    additions.push(...structural);
+    coveredRoleKeys.add(roleKey);               // one office per role-key: a 2nd economy seat won't re-synthesize
   }
   if (!additions.length) return settlement;
   return { ...settlement, npcs: [...existingNpcs, ...additions] };

@@ -4,7 +4,7 @@ import { previewCampaignWorldPulse, applyWorldPulseOutcomes } from '../../src/do
 import { advanceReligionStates } from '../../src/domain/worldPulse/religiousContest.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature D (R2) — the religion core: gradual pantheon driver + conversion
@@ -118,17 +118,25 @@ function drive(campaign, saves, rules) {
   });
 }
 
-describe('advanceReligionStates — DOUBLE GATE dormancy', () => {
-  test('flag OFF ⇒ empties even with deities present (byte-identical no-op)', () => {
+describe('advanceReligionStates — TWO-LANE gate (W-F1)', () => {
+  test('spread OFF + deities present ⇒ local pantheons evolve, but NO cross-settlement spread', () => {
+    // Post gate-split: with deities present the subsystem is active, so each
+    // deity-bearing settlement evolves LOCALLY — but spread OFF means no mints, no
+    // carrier reach, and the deity-free convert C is never touched (no state, no flip).
     const fx = contestFixture();
-    const campaign = religionCampaign({ religionDynamicsEnabled: false }, fx);
-    const result = drive(campaign, fx.saves, { religionDynamicsEnabled: false });
-    expect(result.religionStates).toBeNull();
-    expect(result.outcomes).toEqual([]);
+    const campaign = religionCampaign({ faithSpreadEnabled: false }, fx);
+    const result = drive(campaign, fx.saves, { faithSpreadEnabled: false });
+    expect(result.religionStates).not.toBeNull();
+    expect(result.religionStates.asource.patronRef).toBe('custom:lu_vael');
+    expect(result.religionStates.bsource.patronRef).toBe('custom:lu_korl');
+    // The deity-free convert receives no faith (no reach) ⇒ no religionState for it.
+    expect('cconv' in result.religionStates).toBe(false);
+    // No cross-settlement side effects.
     expect(result.graphChannels).toEqual([]);
+    expect(result.outcomes).toEqual([]);
   });
 
-  test('flag ON but NO deity assigned ⇒ empties (activation gate short-circuits)', () => {
+  test('spread ON but NO deity assigned ⇒ empties (activation gate short-circuits)', () => {
     const saves = [
       save('x', 'Xtown'), save('y', 'Ytown'), save('z', 'Ztown'),
     ];
@@ -137,7 +145,7 @@ describe('advanceReligionStates — DOUBLE GATE dormancy', () => {
       { id: 'edge.y.z', from: 'y', to: 'z', relationshipType: 'trade_partner' },
     ];
     const campaign = religionCampaign({}, { settlementIds: ['x', 'y', 'z'], edges });
-    const result = drive(campaign, saves, { religionDynamicsEnabled: true });
+    const result = drive(campaign, saves, { faithSpreadEnabled: true });
     expect(result.religionStates).toBeNull();
     expect(result.outcomes).toEqual([]);
     expect(result.graphChannels).toEqual([]);
@@ -272,7 +280,12 @@ describe('previewCampaignWorldPulse — full pulse wiring', () => {
     expect(snap).toBeTruthy();
     expect(['Vael', 'Korl']).toContain(snap.name);
     // The re-embed re-picks the exact field set (no foreign field leaks).
-    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'name', 'rankAxis', 'temperamentAxis']);
+    // `lawAxis` joined that set in the T4 ONE-REGEN batch, which restored the
+    // conversion writer's one missing axis — a conversion is now structurally
+    // identical to a DM assign. Writer-level parity is pinned in
+    // tests/domain/deityEmbedWriterParity.test.js; this is the through-the-pulse
+    // witness that the restored field survives the real kernel path.
+    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'lawAxis', 'name', 'rankAxis', 'temperamentAxis']);
   });
 
   test('DOUBLE-GATE: a deity-free campaign with the flag ON is byte-identical to flag OFF', () => {

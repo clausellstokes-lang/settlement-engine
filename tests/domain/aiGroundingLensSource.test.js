@@ -10,11 +10,14 @@
 import { describe, it, expect } from 'vitest';
 import { buildAiGroundingPayload } from '../../src/domain/aiGrounding.js';
 import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from '../../src/domain/capacityModel.js';
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { gen } from '../simulation/simHelpers.js';
 
 describe('aiGrounding capacity lens set is the shared VISIBLE_CAPACITY_LENSES', () => {
   it('exposes exactly the shared visible lenses, in the shared order', () => {
-    const settlement = generateSettlementPipeline({ seed: 'lens-source-of-truth' });
+    // Seeded through the options slot. This call used to pass `{ seed }` as the
+    // CONFIG bag, where nothing reads it, so it generated a fresh random world
+    // on every run; the pipeline now refuses that spelling outright.
+    const settlement = gen({}, 'lens-source-of-truth');
     const payload = buildAiGroundingPayload(settlement);
     const keys = Object.keys(payload.bands.capacities);
 

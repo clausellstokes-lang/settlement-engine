@@ -1,10 +1,18 @@
-// Option catalogs + active-filter count for the gallery MAPS tab.
+// Option catalogs + campaign facets for the gallery MAPS surfaces.
 //
 // Filter/sort/search now run SERVER-SIDE in list_gallery_maps (migration 065),
 // mirroring the dossier feed: GalleryMaps sends its facet/search/sort state to
 // the RPC and renders the returned rows directly. This module keeps only the
-// pieces that stay client-side — the option catalogs, the dynamic tag vocabulary,
-// the active-filter count, and the owner-edit gate.
+// pieces that stay client-side — the option catalogs, the owner-edit gate, and
+// the campaign-facet derivations.
+//
+// SPLIT 2026-07-21 (T5, the orphaned-components ruling): the dependency-free
+// filter model (BACKDROP_OPTIONS / emptyMapFilters / deriveTagVocabulary /
+// activeMapFilterCount) moved to galleryMapsFilters.js so the gallery chunk
+// never imports THIS module — its campaign-facet half rides the
+// MapShareEditorOverlay chunk, and sharing it across both lazy chunks split
+// out a new chunk whose dep-map filename broke the first-paint closure budget
+// (+42 B). See galleryMapsFilters.js's header for the full rationale.
 //
 // Tile shape per item (list_gallery_maps): slug, name, kind ('map' |
 // 'map_with_campaign'), description, tags (text[]), backdrop_kind ('image' |
@@ -21,32 +29,11 @@ export const KIND_OPTIONS = Object.freeze([
   ['map_with_campaign', 'Map and campaign', 'The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the chronicle, the pantheon, its wars and settlement network, and the dashboard.'],
 ]);
 
-// backdrop_kind facet — an uploaded image vs procedurally generated terrain.
-export const BACKDROP_OPTIONS = Object.freeze([
-  ['image', 'Image backdrop'],
-  ['fmg', 'Generated terrain'],
-]);
-
-// Sort options, all applied server-side (migration 065). 'most_imported' orders
-// by the real import_count; 'most_viewed' by view_count; newest is the default
-// published_at desc order.
-export const MAP_SORT_OPTIONS = Object.freeze([
-  ['newest', 'Newest'],
-  ['most_viewed', 'Most viewed'],
-  ['most_imported', 'Most imported'],
-]);
-
-// The empty maps-filters shape — the single source of truth for "no narrowing"
-// (the GalleryMaps initial state + its Clear reset). `importable` is the owner
-// import opt-in facet (saved_maps.gallery_importable, migration 072). A fresh
-// copy each call so callers can mutate freely without sharing array refs.
-export function emptyMapFilters() {
-  return { kind: [], backdrop: [], tags: [], hasSettlements: false, importable: false };
-}
-
-export function human(value) {
-  return String(value || '').replace(/_/g, ' ');
-}
+// The maps/campaigns sort catalog (MAP_SORT_OPTIONS) moved to the gallery-only
+// galleryMapsFilters.js — the Maps and Campaigns tabs render the sort dropdown
+// and ride the gallery chunk, so importing the catalog from THIS module (the
+// share-editor chunk's home) would re-trigger the +42 B shared-chunk rebalance
+// the split exists to prevent. See galleryMapsFilters.js's header.
 
 /**
  * Build a strict slug -> owned-campaign lookup for the gallery edit gate.
@@ -71,23 +58,6 @@ export function ownedCampaignBySlug(campaigns = []) {
   return map;
 }
 
-/**
- * The union of tags across the fetched items, lowercased and de-duped, sorted
- * for a stable chip order. The maps vocabulary is dynamic (owner-authored), not
- * a fixed catalog, so it is derived from the batch rather than declared.
- */
-export function deriveTagVocabulary(items = []) {
-  const seen = new Set();
-  for (const item of Array.isArray(items) ? items : []) {
-    const tags = Array.isArray(item?.tags) ? item.tags : [];
-    for (const tag of tags) {
-      const norm = String(tag || '').trim().toLowerCase();
-      if (norm) seen.add(norm);
-    }
-  }
-  return Array.from(seen).sort();
-}
-
 // ── Campaign facets + suggested tags (map_with_campaign shares) ─────────────
 //
 // A campaign share's facets/tags are derived from the SAME real persisted data
@@ -100,6 +70,8 @@ export function deriveTagVocabulary(items = []) {
 
 import { TIER_ORDER } from '../../domain/customContentSchema.js';
 import { liveSieges, liveTradeWars } from '../../domain/display/warStatus.js';
+import { resolveTerrain } from '../../domain/resolveTerrain.js';
+import { computeAliveness, campaignWorldAgeBand } from '../../lib/galleryAliveness.js';
 
 /** @param {any} m a campaign member view ({ tier, settlement }) @returns {string} */
 function memberTier(m) {
@@ -108,8 +80,7 @@ function memberTier(m) {
 
 /** @param {any} m a campaign member view @returns {string} the persisted terrain */
 function memberTerrain(m) {
-  const cfg = m?.settlement?.config || {};
-  return String(cfg.terrainType || cfg.terrainOverride || '').trim().toLowerCase();
+  return String(resolveTerrain(m?.settlement?.config) || '').trim().toLowerCase();
 }
 
 /** @param {any} m a campaign member view @returns {string} the persisted culture */
@@ -248,7 +219,8 @@ export function suggestedTagsForCampaign(campaign = {}, members = []) {
  * data, mirroring the dossier facet snapshot in ShareToGallery.jsx.
  * @param {any} campaign
  * @param {Array<any>} members
- * @returns {{ memberBand: string, atWar: boolean, dominantCulture: string, tierSpread: string }}
+ * @returns {{ memberBand: string, atWar: boolean, dominantCulture: string, tierSpread: string,
+ *             aliveness: number | null, worldAge: string | null }}
  */
 export function campaignFacets(campaign = {}, members = []) {
   const list = Array.isArray(members) ? members : [];
@@ -257,16 +229,10 @@ export function campaignFacets(campaign = {}, members = []) {
     atWar: atWar(campaign),
     dominantCulture: dominantCulture(list),
     tierSpread: tierSpread(list),
+    // GALLERY-2 phase 2 (147/149): the aliveness snapshot + world-age band from
+    // the campaign's live worldState — the SAME shared derivations the dossier
+    // path uses (lib/galleryAliveness.js), so the two snapshots never diverge.
+    aliveness: computeAliveness(campaign),
+    worldAge: campaignWorldAgeBand(campaign),
   };
-}
-
-/** Count of active facets — drives the "Clear" affordance and section badges. */
-export function activeMapFilterCount(filters = {}) {
-  let sum = 0;
-  sum += Array.isArray(filters.kind) ? filters.kind.length : 0;
-  sum += Array.isArray(filters.backdrop) ? filters.backdrop.length : 0;
-  sum += Array.isArray(filters.tags) ? filters.tags.length : 0;
-  sum += filters.hasSettlements ? 1 : 0;
-  sum += filters.importable ? 1 : 0;
-  return sum;
 }

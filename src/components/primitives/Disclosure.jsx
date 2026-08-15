@@ -1,8 +1,8 @@
 import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
-import Badge from './Badge.jsx';
+import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
+import Badge from './Badge.jsx';
 
 export default function Disclosure({
   title,
@@ -15,15 +15,21 @@ export default function Disclosure({
   onFirstOpen,
   style,
 }) {
-  const [open, setOpen] = useState(defaultOpen);
-  const fired = useRef(defaultOpen);
+  // a11y: the trigger names its panel (ported master fix — aria-controls pairs
+  // with aria-expanded so AT users can jump to the disclosed region).
   const panelId = useId();
-  const iconsOn = useIconsOn();
-  const Icon = open ? ChevronDown : ChevronRight;
-
+  const [open, setOpen] = useState(defaultOpen);
   // Fire onFirstOpen once, the first time the section is revealed. Lets a
   // call site lazily teach a deep control (analytics step, coach) without a
   // separate effect. Pre-armed when defaultOpen so it doesn't fire on mount.
+  const fired = useRef(defaultOpen);
+  // Icons-off everywhere but the Realm map (IconsContext). The open/closed
+  // chevron is an AFFORDANCE, not decoration, so it keeps a channel: outside
+  // the map it falls back to the unicode TEXT chevron IconsContext.js names as
+  // exempt from the gate. The fallback keeps the icon's 14px box so the title
+  // does not shift horizontally between the open and closed states.
+  const iconsOn = useIconsOn();
+  const Icon = open ? ChevronDown : ChevronRight;
   const toggle = () => setOpen((value) => {
     const next = !value;
     if (next && !fired.current && onFirstOpen) { fired.current = true; onFirstOpen(); }
@@ -34,7 +40,6 @@ export default function Disclosure({
     <section
       style={{
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         background: CARD,
         overflow: 'hidden',
         ...style,
@@ -61,7 +66,10 @@ export default function Disclosure({
       >
         {iconsOn
           ? <Icon size={14} color={MUTED} />
-          : <span aria-hidden="true" style={{ width: 14, textAlign: 'center', color: MUTED, fontWeight: 800, lineHeight: 1, flexShrink: 0 }}>{open ? '−' : '+'}</span>}
+          : <span aria-hidden="true" style={{
+              width: 14, flexShrink: 0, textAlign: 'center',
+              fontSize: FS.xs, lineHeight: 1, color: MUTED,
+            }}>{open ? '▾' : '▸'}</span>}
         <span style={{
           flex: 1,
           minWidth: 0,

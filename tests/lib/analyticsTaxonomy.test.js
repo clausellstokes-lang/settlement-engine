@@ -12,6 +12,7 @@ import { describe, it, expect } from 'vitest';
 import {
   EVENTS, EVENT_CLASS, EVENTS_REV, RESEARCH_EVENT_KEYS, EVENT_NAME_RE, classForEvent,
 } from '../../src/lib/analyticsEvents.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('analytics event taxonomy', () => {
   it('EVENT_CLASS keys are 1:1 with EVENTS keys', () => {
@@ -31,6 +32,21 @@ describe('analytics event taxonomy', () => {
   it('event names are unique', () => {
     const names = Object.values(EVENTS);
     expect(new Set(names).size).toBe(names.length);
+  });
+
+  it('keeps consent changes out of product analytics', () => {
+    expectAbsentWithAnchor(
+      Object.values(EVENTS),
+      'consent_updated',
+      EVENTS.HOMEPAGE_VIEW,
+      'wire event registry excludes consent receipts',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(EVENTS),
+      'CONSENT_UPDATED',
+      'HOMEPAGE_VIEW',
+      'event-key registry excludes consent receipts',
+    );
   });
 
   it('the research-class set is exactly the documented four', () => {

@@ -95,13 +95,22 @@ function fixtureSettlement() {
         { category: 'food_security', hook: 'Bread prices climb sharply.', severity: 'medium' },
       ],
     },
-    // Top-level plotHooks is a surface collectAllHooks() actually reads (the
-    // economicState.plotHooks above is NOT). Without this, entityCatalog yields
-    // zero hooks and every explainHook test below silently bails on
-    // hooks.length === 0 — the exact coverage-evaporation this fixture guards.
-    plotHooks: [
-      { category: 'food_security', hook: 'Bread prices climb sharply.', severity: 'medium' },
-    ],
+    // The hook surface the explainHook tests below depend on. It sits at
+    // `economicViability.plotHooks` because that is an address collectAllHooks()
+    // actually walks — NEITHER the `economicState.plotHooks` above NOR a
+    // settlement-ROOT `plotHooks` is read. The root key was this fixture's hook
+    // surface until aed0fc0e deleted collectAllHooks' `aggregate` arm as a read no
+    // writer has ever fed; this fixture was the seventh manufacturing that dead
+    // shape and the one that commit's six-fixture sweep missed. Re-pointed at the
+    // live address at an unchanged count of one, so the pins now exercise the real
+    // path: a reader that regresses to the root address finds nothing here either.
+    // Without a live address entityCatalog yields zero hooks and the explainHook
+    // suite goes vacuous — the exact coverage-evaporation this fixture guards.
+    economicViability: {
+      plotHooks: [
+        { category: 'food_security', hook: 'Bread prices climb sharply.', severity: 'medium' },
+      ],
+    },
     npcs: [
       {
         id: 'npc.captain_rusk',

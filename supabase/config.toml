@@ -62,7 +62,7 @@ schema_paths = []
 enabled = true
 # Specifies an ordered list of seed files to load during db reset.
 # Supports glob patterns relative to supabase directory: "./seeds/*.sql"
-sql_paths = ["./seed_local.sql"]
+sql_paths = ["./seed.sql"]
 
 [db.network_restrictions]
 # Enable management of network restrictions.
@@ -213,11 +213,7 @@ enable_signup = true
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
 # If enabled, users need to confirm their email address before signing in.
-# Auth Phase 2: the account is locked until the email link is clicked; the signup
-# window auto-logs-in by polling signInWithPassword once the link is confirmed.
-# OPERATOR: this flag governs `supabase start` (local) ONLY — you MUST also enable
-# email confirmations in the hosted Supabase Auth settings for production.
-enable_confirmations = true
+enable_confirmations = false
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
@@ -383,10 +379,15 @@ deno_version = 2
 # config.toml is the source of truth for `supabase functions deploy`, so pinning
 # each function's intent here makes deploys deterministic — the platform JWT gate
 # can never be silently flipped by a forgotten/remembered `--no-verify-jwt` flag.
-# A function whose intent is "do my own auth" (signature, shared secret, or a
-# per-request anon path) MUST be verify_jwt = false, or the platform rejects it
-# before its own auth runs. Enforced by tests/edgeFunctions/verifyJwtPins.test.js
-# (every function dir must have an explicit pin here).
+# scripts/deploy.sh DERIVES its `--no-verify-jwt` posture by parsing this file, so
+# config and deploy can never drift (killed the split-brain where create-checkout
+# was deployed --no-verify-jwt with no config entry and verify-checkout-session was
+# never deployed at all). A function whose intent is "do my own auth" (signature,
+# shared secret, or a per-request anon path) MUST be verify_jwt = false, or the
+# platform rejects it before its own auth runs. Enforced by
+# tests/edgeFunctions/verifyJwtPins.test.js (every function dir must have an
+# explicit pin here) and tests/edgeFunctions/verifyJwtPosture.contract.test.js
+# (config is the single source of truth deploy.sh parses).
 
 # ── verify_jwt = false: functions that authenticate themselves ───────────────
 # Stripe posts a signature, not a Supabase JWT — with the gate on, the platform
@@ -418,11 +419,66 @@ verify_jwt = false
 [functions.analytics-export]
 verify_jwt = false
 
+# Cron-invoked nightly AI-pricing resync (migration 115, pg_net → this function)
+# authenticated by the x-cron-secret shared secret (PRICING_RESYNC_CRON_SECRET),
+# not a JWT — fail-closed on a wrong/missing secret (403) and refuses to run when
+# the secret is unconfigured (503). The platform gate would reject the cron call
+# (no user JWT) and the nightly resync would never run.
+[functions.pricing-resync-cron]
+verify_jwt = false
+
+# founder-transfer (Money Wave #17) — SELF-AUTHENTICATING, same posture as
+# pricing-resync-cron: its `run_due` cron action carries NO Supabase JWT (it
+# authenticates by the x-cron-secret shared secret, constant-time compared, and
+# refuses 503 when the secret is unconfigured), so the platform gate would 401 the
+# hourly sweep and the whole due-runner (finalize / payout release / expiry /
+# auto-reload cancel / stewardship) would silently never run. Every USER action does
+# its own getUser() JWT check (401 without it) PLUS the single-session gate + velocity,
+# so verify_jwt=false is safe. Missing this pin ⇒ deploy.sh deploys it WITH the gate on.
+[functions.founder-transfer]
+verify_jwt = false
+
+# Cron-invoked nightly retention-expiry warning (migration 166, pg_net → this
+# function), authenticated by the x-cron-secret shared secret
+# (RETENTION_WARNING_CRON_SECRET), not a JWT — fail-closed on a wrong/missing
+# secret (403) and refuses to run unconfigured (503). Same posture as
+# pricing-resync-cron; the platform gate would reject the JWT-less cron call.
+[functions.retention-warning-cron]
+verify_jwt = false
+
+# Cron-invoked durable account-deletion worker (migration 175, pg_net). It
+# authenticates the x-cron-secret header against ACCOUNT_DELETION_CRON_SECRET,
+# constant-time, refuses an unset secret, and re-checks the private database kill
+# switch. There is no user JWT on a pg_net dispatch.
+[functions.account-deletion-worker]
+verify_jwt = false
+
+# Cron-invoked durable payment-refund recovery (migration 180, pg_net). It
+# authenticates x-cron-secret against PAYMENT_REFUND_CRON_SECRET, constant-time,
+# refuses an unset/mismatched secret, and re-checks the private database kill
+# switch. There is no user JWT on a pg_net dispatch.
+[functions.payment-refund-worker]
+verify_jwt = false
+
+# Cron-invoked Operator Messages courier. Migration 194 seeds its private
+# dispatcher disabled with no URL/secret, so the deployed function remains inert
+# until an owner deliberately configures and enables it. When active it
+# authenticates x-cron-secret in-handler; pg_net carries no user JWT.
+[functions.operator-message-worker]
+verify_jwt = false
+
 # Per-template self-auth: authenticated templates read the recipient from
 # auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
 # would block the anonymous cap_warning email (anon users have no user JWT).
 [functions.send-email]
+verify_jwt = false
+
+# Public GET-confirm / POST-opt-out endpoint linked from announcement email.
+# Possession of the opaque per-user token authorizes only an opt-OUT through the
+# migration-194 service-role-only RPC; the edge is the sole bearer-token boundary.
+# Email clients and logged-out users carry no Supabase JWT.
+[functions.unsubscribe]
 verify_jwt = false
 
 # Logged-OUT password recovery (Auth Phase 2): the caller has NO JWT (they forgot
@@ -432,11 +488,32 @@ verify_jwt = false
 [functions.auth-recovery]
 verify_jwt = false
 
+# Dynamic OG-card renderer for shared /gallery/:slug unfurls. The callers ARE the
+# unfurl bots (facebookexternalhit, Twitterbot, Discordbot, Slackbot) — they carry
+# NO Supabase JWT, so the platform gate would 401 every social preview. It reads
+# only already-public data (the get_gallery_dossier sanitizer, anon key, coarse
+# columns) and takes no write path, so anonymous access is the whole point.
+[functions.og-image]
+verify_jwt = false
+
+# Liveness + optional deep DB probe for uptime monitoring (Wave E). Anonymous by
+# design — external uptime services and the bundled scripts/ops/uptime-probe.mjs
+# poll it with no JWT; it reads no user data and takes no write path.
+[functions.health]
+verify_jwt = false
+
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
 # Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
 # on any of these would expose an authenticated/money/admin endpoint to unauth
 # traffic. Each also re-checks auth (and role, where relevant) inside the handler.
 [functions.create-checkout]
+verify_jwt = true
+
+# Account-bound checkout-session verification (credit packs / premium / founder):
+# requires Authorization: Bearer <supabase JWT> and asserts the session's bound
+# user id matches the caller. OURS-only function (no counterpart on the parallel
+# line); pinned true so a stray --no-verify-jwt can't expose it to unauth traffic.
+[functions.verify-checkout-session]
 verify_jwt = true
 
 [functions.create-customer-portal]
@@ -446,6 +523,63 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.generate-chronicle]
+verify_jwt = true
+
+# ai-analyst (Surveyor S1) — authenticated, user-facing AI control surface. verify_jwt
+# true (the handler additionally re-checks auth, account status, and the Surveyor
+# entitlement gate inside the function).
+[functions.ai-analyst]
+verify_jwt = true
+
+# interview (V-1 THE INTERVIEW) — authenticated, user-facing AI control surface (the
+# analyst's sibling: cited answers with a conjecture register). verify_jwt true (the
+# handler additionally re-checks auth, account status, and the Surveyor entitlement gate,
+# and spends the metered 'analysis' credit inside the function).
+[functions.interview]
+verify_jwt = true
+
+# surveyor-byok (BYOK MANAGEMENT SURFACE, #29) — authenticated key management: the
+# verify-by-test-call. verify_jwt true (the handler additionally re-checks auth,
+# account status, and the Surveyor entitlement gate inside the function).
+[functions.surveyor-byok]
+verify_jwt = true
+
+# interpret-session (Surveyor S3) — the intent compiler: authenticated, user-facing.
+# verify_jwt true (the handler additionally re-checks auth, account status, the
+# Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.interpret-session]
+verify_jwt = true
+
+# parley (Surveyor S3) — in-character consultation: authenticated, user-facing,
+# DM-only. verify_jwt true (the handler additionally re-checks auth, account status,
+# the Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.parley]
+verify_jwt = true
+
+# custom-content (Surveyor S4) — homebrew content compiler: authenticated, user-facing,
+# DM-only. verify_jwt true (the handler additionally re-checks auth, account status, the
+# Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.custom-content]
+verify_jwt = true
+
+# style-overhaul (Surveyor task #28 phase 2) — bespoke map-style compiler: authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.style-overhaul]
+verify_jwt = true
+
+# construct-settlement (Surveyor S5) — intent → settlement generator config: authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.construct-settlement]
+verify_jwt = true
+
+# construct-realm (Surveyor S6) — intent → realm composer config: authenticated, user-facing,
+# DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.construct-realm]
+verify_jwt = true
+
+# surveyor-autonomy (Surveyor S7) — autonomy composer (StopCondition + nudges): authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.surveyor-autonomy]
 verify_jwt = true
 
 [functions.account-actions]

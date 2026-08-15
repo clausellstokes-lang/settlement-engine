@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "frozenAt": "2026-08-01",
+  "policy": "Exact legacy exceptions only. Rows may be deleted after source repair; never add or raise the 19-row ceiling.",
+  "rePinnedAt": "2026-08-03",
+  "rePinNote": "EXACT RE-PIN, not a widening: the ceiling stays 19, no row was added, and every row's ISSUE SET is byte-identical to the frozen one. Two chronicleGraph rows moved 258->260 and 273->279 with NEW signatures because commit 397c184b (Lane HR (1)) replaced their two inline noun-phrase fallbacks with the shared PULSE_OUTCOME_FALLBACK / PULSE_IMPACT_FALLBACK constants from receiptClauseFloor.js and added a comment above the first. The debt itself did not move: both rows still carry exactly missing-field:id plus their unrouted bare kind. The separately-pinned proposal-undo EXCLUSION also relocated (779->852, signature unchanged, cause 526c5e31); it lives in tests/lint/newsAuthoringCensus.shared.mjs, not in this ledger.",
+  "entries": [
+    {
+      "path": "src/domain/display/chronicleGraph.js",
+      "line": 260,
+      "column": 16,
+      "signature": "6a81853beed7e8f6",
+      "issues": [
+        "missing-field:id",
+        "missing-registration:unrouted:outcome"
+      ]
+    },
+    {
+      "path": "src/domain/display/chronicleGraph.js",
+      "line": 279,
+      "column": 16,
+      "signature": "e0f59002d2d26cff",
+      "issues": [
+        "missing-field:id",
+        "missing-registration:unrouted:impact"
+      ]
+    },
+    {
+      "path": "src/domain/display/chronicleReadModel.js",
+      "line": 308,
+      "column": 28,
+      "signature": "66773e01014c1f57",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:dynamic-bare-kind"
+      ]
+    },
+    {
+      "path": "src/domain/display/chronicleReadModel.js",
+      "line": 510,
+      "column": 29,
+      "signature": "8c876f35ada07e4d",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-registration:dynamic-bare-kind"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/auspice.js",
+      "line": 39,
+      "column": 10,
+      "signature": "2e6199f733f1aae8",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:dynamic-bare-kind"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/commonsVoiceKernel.js",
+      "line": 167,
+      "column": 16,
+      "signature": "4acb1bced21fe294",
+      "issues": [
+        "missing-registration:unrouted:applied"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/deploymentReturn.js",
+      "line": 378,
+      "column": 43,
+      "signature": "54d95a8e9f6837c0",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/deploymentReturn.js",
+      "line": 418,
+      "column": 43,
+      "signature": "8918d3000c9bf8f4",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/deploymentReturn.js",
+      "line": 436,
+      "column": 45,
+      "signature": "d537a1d322a471d8",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:disband"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/deploymentReturn.js",
+      "line": 498,
+      "column": 41,
+      "signature": "6112dee1f16660ef",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:splinter"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/forecastRun.js",
+      "line": 136,
+      "column": 41,
+      "signature": "a2d2cc1319af7988",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:dynamic-bare-kind"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/forecastRun.js",
+      "line": 142,
+      "column": 37,
+      "signature": "a2d2cc1319af7988",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:dynamic-bare-kind"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/institutionStatusLifecycle.js",
+      "line": 438,
+      "column": 31,
+      "signature": "bd3e8aef405a8de0",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:impairment_lifted"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/institutionStatusLifecycle.js",
+      "line": 457,
+      "column": 31,
+      "signature": "9d129f654dc48fb0",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:impairment_opened"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/institutionStatusLifecycle.js",
+      "line": 472,
+      "column": 31,
+      "signature": "60f83dd2a6c4eb6d",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:shell_formed"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/institutionStatusLifecycle.js",
+      "line": 486,
+      "column": 31,
+      "signature": "f9239b21107ca1cd",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:shell_reactivated"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
+      "line": 229,
+      "column": 17,
+      "signature": "109c48c04cb1f412",
+      "issues": [
+        "missing-field:id",
+        "missing-field:settlementIds",
+        "missing-field:severity",
+        "missing-registration:unrouted:magic_regime_demoted",
+        "missing-registration:unrouted:magic_regime_promoted"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/narrativeTempo.js",
+      "line": 500,
+      "column": 11,
+      "signature": "6498a01695d46731",
+      "issues": [
+        "missing-registration:unrouted:tempo_pressure"
+      ]
+    },
+    {
+      "path": "src/domain/worldPulse/simulationProfile.js",
+      "line": 449,
+      "column": 58,
+      "signature": "c01e50c59a0fb0ad",
+      "issues": [
+        "missing-registration:unrouted:ruleset_change"
+      ]
+    }
+  ]
+}

@@ -88,7 +88,7 @@ export const TAG = Object.freeze({
   RESOURCE_EXTRACTION: 'resource_extraction',
   INDUSTRY:            'industry',
 
-  // ── The 27 tags the institutionalCatalog actually uses that were
+  // ── A+ P1.6 — the 27 tags the institutionalCatalog actually uses that were
   // previously ungoverned (validateTag/isKnownTag silently passed them). Adding
   // them as canonical constants brings catalog coverage to 42/42 WITHOUT editing
   // the catalog data (zero behavior change). Some are synonyms of the tags above
@@ -122,6 +122,15 @@ export const TAG = Object.freeze({
   ADVENTURING:     'adventuring',
   ESSENTIAL:       'essential',
   UNDERGROUND:     'underground',
+
+  // ── [W-I INFORMATION BROKERAGES] I1. The two tags the brokerage catalog entries
+  // declare. INFORMATION is the functional domain (this house deals in what is known);
+  // BROKERAGE is the institutional role (it WEIGHS talk rather than producing it), which
+  // is what keeps it distinct from the rumour-source houses that merely host talk. Both
+  // are catalog-declared, so the reachability guard in
+  // tests/data/dataVocabularyCoverage.test.js sees them.
+  INFORMATION:     'information',
+  BROKERAGE:       'brokerage',
 });
 
 // ── Tag groups ─────────────────────────────────────────────────────────────

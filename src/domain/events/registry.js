@@ -19,11 +19,38 @@
  * `classifyInstitution` without touching this registry.
  */
 
+import { sev01 } from './mutateHelpers.js';
+
 /** @typedef {import('../types.js').EventType} EventType */
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../entities/status.js').Impairment} Impairment */
 /** @typedef {import('../entities/npcs.js').NpcStructural} NpcStructural */
+
+/**
+ * The event shape the registry reads. Identical to {@link Event} except the
+ * `payload` bag is indexable (generators stamp arbitrary type-specific keys).
+ * @typedef {Omit<Event, 'payload'> & { payload?: Record<string, any> }} RegistryEvent
+ */
+/**
+ * The subset of a settlement the narrate/stateDeltas closures read.
+ * @typedef {Object} RegistrySettlement
+ * @property {string} [name]
+ * @property {Array<Record<string, unknown>>} [stressors]
+ * @property {Array<Record<string, unknown>>} [stress]
+ * @property {Array<Record<string, unknown>>} [stresses]
+ * @property {Array<{ id?: string, name?: string, factionAffiliation?: string }>} [npcs]
+ */
+/**
+ * One event's impact specification.
+ * @typedef {Object} EventSpec
+ * @property {string} [label]
+ * @property {string} [description]
+ * @property {boolean} [requiresTarget]
+ * @property {string} [targetPrompt]
+ * @property {(event: RegistryEvent, settlement?: RegistrySettlement) => Record<string, number>} [stateDeltas]
+ * @property {(event: RegistryEvent, settlement?: RegistrySettlement) => string} [narrate]
+ */
 
 /**
  * Each spec may now optionally declare entity patches the apply step
@@ -43,7 +70,11 @@
  * Coarse institution classification by name pattern. Replaced by tag
  * lookup once the catalog migrates to structured tags.
  */
-export function classifyInstitution(/** @type {any} */ name) {
+/**
+ * @param {unknown} name
+ * @returns {keyof typeof INSTITUTION_KIND_DELTAS}
+ */
+export function classifyInstitution(name) {
   const n = String(name || '').toLowerCase();
   if (/granary|mill|silo|storage|warehouse/.test(n))           return 'food_storage';
   if (/temple|cathedral|shrine|monastery|church/.test(n))      return 'religious';
@@ -76,74 +107,15 @@ const INSTITUTION_KIND_DELTAS = {
 };
 
 /**
- * The subsystem keys an event of a given type touches. `batch.js` reads this to
- * tell the DM which subsystems a batch of events affects (the batch-preview
- * "affected subsystems" list). Descriptive metadata only — there is no
- * step-level partial-rerun engine (it was retired); edits do a full same-seed
- * regen and derived state is recomputed on demand. Keep the lists tight so the
- * preview reads honestly.
- */
-export const RERUN_KEYS_FOR_EVENT = {
-  ADD_INSTITUTION:    ['institutions', 'services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  REMOVE_INSTITUTION: ['institutions', 'services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  DAMAGE_INSTITUTION: ['services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  DEPLETE_RESOURCE:   ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  CUT_TRADE_ROUTE:    ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  ADD_NPC:                ['npcs', 'powerStructure', 'narrative'],
-  KILL_NPC:               ['npcs', 'powerStructure', 'institutions', 'narrative'],
-  ASSIGN_NPC_TO_ROLE:     ['npcs', 'institutions', 'powerStructure', 'narrative'],
-  IMPAIR_INSTITUTION:     ['institutions', 'services', 'economicState', 'narrative'],
-  RESTORE_INSTITUTION:    ['institutions', 'services', 'economicState', 'narrative'],
-  IMPAIR_FACTION:         ['powerStructure', 'narrative'],
-  RESTORE_FACTION:        ['powerStructure', 'narrative'],
-  ADD_FACTION:            ['powerStructure', 'narrative'],
-  // Extended events.
-  KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
-  EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
-  IMPOSE_CORRUPTION:      ['npcs', 'powerStructure', 'narrative'],
-  REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-  PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-  RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
-  // Player intervention events.
-  REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
-  BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
-  SETTLEMENT_DISPUTE:     ['powerStructure', 'narrative'],
-  STARTED_RIOT:           ['powerStructure', 'economicState', 'narrative'],
-  OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],
-  DESTROY_SETTLEMENT:     ['economicState', 'powerStructure', 'narrative'],
-  // Coup d'état wave — authored crises + transfers of the governing seat.
-  APPLY_STRESSOR:         ['powerStructure', 'economicState', 'narrative'],
-  CHANGE_RULING_POWER:    ['powerStructure', 'npcs', 'narrative'],
-  // Editor roster wave — the Roster's add/remove vocabulary as first-class canon events.
-  RESOLVE_STRESSOR:       ['powerStructure', 'economicState', 'narrative'],
-  ADD_TRADE_GOOD:         ['economicState', 'narrative'],
-  REMOVE_TRADE_GOOD:      ['economicState', 'narrative'],
-  ADD_RESOURCE:           ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
-  DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
-  // Assigning a patron deity (or imposing a cult beneath it) re-derives the
-  // religion substrate (the deity term in deriveReligiousAuthority) + narrative.
-  SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
-  IMPOSE_CULT:            ['powerStructure', 'narrative'],
-  // A forced tier shift rebands population and performs institution roster surgery, so it
-  // re-derives the broad structural surface (institutions + demand/food + economy + power).
-  SHIFT_TIER:             ['institutions', 'demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-};
-
-/**
  * The full event registry. Each entry produces:
  *   - stateDeltas(event, settlement) → partial SystemState additive numbers
  *   - narrate(event, settlement)     → one-line DM-facing summary
  */
-export const EVENT_REGISTRY = {
+export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   ADD_INSTITUTION: {
     label: 'Add institution',
-    description: 'A new institution is established. New civic capacity, new factional weight.',
     requiresTarget: true,
-    targetPrompt: 'Institution name (e.g. "Granary", "Temple of Mercy")',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
       // Adding inverts the sign of the destruction effect: gaining a
@@ -151,44 +123,40 @@ export const EVENT_REGISTRY = {
       // would hurt it.
       return invertSigns(base);
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `A new ${labelOf(event.targetId)} was established.`;
     },
   },
 
   REMOVE_INSTITUTION: {
     label: 'Remove institution',
-    description: 'An institution closes or is dissolved. Its services and authority disappear.',
     requiresTarget: true,
-    targetPrompt: 'Institution name to remove',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
       // Full removal is slightly more severe than damage — multiply by
       // 1.2 to express that.
       return scale(base, 1.2);
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `The ${labelOf(event.targetId)} closed or was dissolved.`;
     },
   },
 
   DAMAGE_INSTITUTION: {
     label: 'Damage institution',
-    description: 'An institution is damaged but not destroyed. Reduced capacity, recoverable.',
     requiresTarget: true,
-    targetPrompt: 'Institution name to damage',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
       // Damage scaled by severity (default 0.7) — burning the granary at
       // severity 1.0 hurts as much as removal; vandalizing it at 0.3
       // costs much less.
-      const sev = Number(event.payload?.severity ?? 0.7);
+      const sev = sev01(event.payload?.severity, 0.7);
       return scale(base, sev);
     },
-    narrate(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
+    narrate(event) {
+      const sev = sev01(event.payload?.severity, 0.7);
       const word = sev >= 0.85 ? 'gutted' : sev >= 0.5 ? 'damaged' : 'partly damaged';
       return `The ${labelOf(event.targetId)} was ${word}.`;
     },
@@ -196,31 +164,48 @@ export const EVENT_REGISTRY = {
 
   DEPLETE_RESOURCE: {
     label: 'Deplete resource',
-    description: 'A resource node is exhausted, contaminated, or otherwise lost.',
     requiresTarget: true,
-    targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
     stateDeltas() {
       // Flat impact — resource loss always hurts resilience and bumps
       // resource pressure regardless of which resource. Specifics
       // come from the cascading rerun.
       return { resilience: -10, resourcePressure: +18 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `${labelOf(event.targetId)} is no longer available.`;
     },
   },
 
   CUT_TRADE_ROUTE: {
     label: 'Cut trade route',
-    description: 'A trade route is closed, blockaded, or rendered unsafe. Imports/exports stall.',
     requiresTarget: false,
-    targetPrompt: 'Optional: which route (e.g. "river road", "south bridge")',
     stateDeltas() {
       return { resilience: -12, resourcePressure: +12, externalThreat: +5 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const which = event.targetId ? ` (${labelOf(event.targetId)})` : '';
       return `Trade route${which} cut.`;
+    },
+  },
+
+  // Directive 3 — a road the DM charters by hand between two settlements of one
+  // realm. The deltas are deliberately modest and one-directional: a new road
+  // widens the market a little and steadies the town a little. It is not a
+  // windfall, and it never sours anything, because chartering a road is an act of
+  // infrastructure rather than diplomacy. The geography-derived cost lives in the
+  // route's own provenance row, not in these dimensions.
+  CREATE_ROUTE: {
+    label: 'Charter a road',
+    requiresTarget: true,
+    stateDeltas() {
+      return { resourcePressure: -6, resilience: +4 };
+    },
+    narrate(event) {
+      const to = labelOf(event.targetId);
+      const water = event.payload?.mode === 'water';
+      return water
+        ? `A run of ships to ${to} is chartered; the harbour keeps the schedule.`
+        : `A road to ${to} is chartered; wagons will wear it in by the season's end.`;
     },
   },
 
@@ -229,10 +214,8 @@ export const EVENT_REGISTRY = {
   // it sets (neutral/rival/cold_war/hostile) drives the severity + the mutation.
   SETTLEMENT_DISPUTE: {
     label: 'Settlement dispute',
-    description: 'A dispute sours relations with a neighbouring settlement, downgrading the relationship.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const rel = event.payload?.relationshipType || 'rival';
       const sev = rel === 'hostile' ? 1 : rel === 'cold_war' ? 0.7 : rel === 'rival' ? 0.45 : 0.2;
       return {
@@ -241,7 +224,7 @@ export const EVENT_REGISTRY = {
         resilience:     -Math.round(sev * 8),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const rel = String(event.payload?.relationshipType || 'rival').replace(/_/g, ' ');
       return `Relations with ${labelOf(event.targetId)} soured to ${rel}.`;
     },
@@ -249,13 +232,11 @@ export const EVENT_REGISTRY = {
 
   DESTROY_SETTLEMENT: {
     label: 'Destroy settlement',
-    description: 'The settlement is destroyed, abandoned, or rendered uninhabitable. Kept as campaign history rather than deleted.',
     requiresTarget: false,
-    targetPrompt: 'Optional cause (e.g. "dragon fire", "flood", "siege")',
     stateDeltas() {
       return { resilience: -100, volatility: +20, externalThreat: +20, resourcePressure: +15 };
     },
-    narrate(/** @type {any} */ event, /** @type {any} */ settlement) {
+    narrate(event, settlement) {
       const cause = event.targetId ? ` by ${labelOf(event.targetId)}` : '';
       return `${settlement?.name || 'The settlement'} was destroyed${cause}.`;
     },
@@ -270,16 +251,14 @@ export const EVENT_REGISTRY = {
 
   ADD_NPC: {
     label: 'Add NPC',
-    description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
     requiresTarget: true,
-    targetPrompt: 'NPC name (or "role @ institution", e.g. "High Priestess @ Temple")',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
-      const map = /** @type {any} */ ({ minor: 0, notable: 2, key: 5, pillar: 8 });
-      return { resilience: +(map[importance] ?? 2) };
+      const map = { minor: 0, notable: 2, key: 5, pillar: 8 };
+      return { resilience: +(map[/** @type {keyof typeof map} */ (importance)] ?? 2) };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const role = event.payload?.role ? ` as ${event.payload.role}` : '';
       const inst = event.payload?.institution ? ` at the ${event.payload.institution}` : '';
       return `${labelOf(event.targetId)} arrived${role}${inst}.`;
@@ -288,20 +267,18 @@ export const EVENT_REGISTRY = {
 
   KILL_NPC: {
     label: 'Kill / remove NPC',
-    description: 'An NPC dies, is exiled, or otherwise leaves play. Linked institutions and factions are affected.',
     requiresTarget: true,
-    targetPrompt: 'NPC name to remove',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       // Severity scales by importance. Pillar NPC death shakes the
       // settlement; minor NPCs leave no engine trace.
       const importance = event.payload?.importance || 'notable';
-      const map = /** @type {any} */ ({ minor: { volatility: 0 },
+      const map = { minor: { volatility: 0 },
                     notable: { resilience: -3, volatility: +3 },
                     key:     { resilience: -8, volatility: +8 },
-                    pillar:  { resilience: -14, volatility: +15 } });
-      return map[importance] || map.notable;
+                    pillar:  { resilience: -14, volatility: +15 } };
+      return map[/** @type {keyof typeof map} */ (importance)] || map.notable;
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
       return `${labelOf(event.targetId)} is gone${cause}.`;
     },
@@ -309,21 +286,19 @@ export const EVENT_REGISTRY = {
 
   ASSIGN_NPC_TO_ROLE: {
     label: 'Assign NPC to role',
-    description: 'Place an NPC into an institution role, partially or fully restoring vacated capacity.',
     requiresTarget: true,
-    targetPrompt: 'NPC name to assign',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const quality = event.payload?.quality || 'competent';
-      const map = /** @type {any} */ ({
+      const map = {
         weak:              { resilience: +2 },
         competent:         { resilience: +5 },
         popular:           { resilience: +7, volatility: -3 },
         corrupt:           { resilience: +3, volatility: +5 },
         faction_captured:  { resilience: +4, volatility: +2 },
-      });
-      return map[quality] || map.competent;
+      };
+      return map[/** @type {keyof typeof map} */ (quality)] || map.competent;
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const role = event.payload?.role || 'a vacant role';
       const inst = event.payload?.institution ? ` at the ${event.payload.institution}` : '';
       return `${labelOf(event.targetId)} took up ${role}${inst}.`;
@@ -338,14 +313,12 @@ export const EVENT_REGISTRY = {
 
   IMPAIR_INSTITUTION: {
     label: 'Impair institution',
-    description: 'Mark an institution as impaired along a chosen dimension (legitimacy, influence, capacity, etc.).',
     requiresTarget: true,
-    targetPrompt: 'Institution name',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.5);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.5);
       return { resilience: -Math.round(sev * 12), volatility: +Math.round(sev * 6) };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const dim = event.payload?.dimension || 'capacity';
       return `${labelOf(event.targetId)} suffered a ${dim} setback.`;
     },
@@ -353,23 +326,19 @@ export const EVENT_REGISTRY = {
 
   RESTORE_INSTITUTION: {
     label: 'Restore institution',
-    description: 'Recovery from a prior impairment. Removes impairments tagged with the chosen cause event.',
     requiresTarget: true,
-    targetPrompt: 'Institution name',
     stateDeltas() { return { resilience: +6 }; },
-    narrate(/** @type {any} */ event) { return `${labelOf(event.targetId)} recovered.`; },
+    narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   IMPAIR_FACTION: {
     label: 'Impair faction',
-    description: 'A faction loses leadership, legitimacy, wealth, or another dimension.',
     requiresTarget: true,
-    targetPrompt: 'Faction name',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.5);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.5);
       return { volatility: +Math.round(sev * 10) };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const dim = event.payload?.dimension || 'standing';
       return `${labelOf(event.targetId)} lost ${dim}.`;
     },
@@ -377,117 +346,87 @@ export const EVENT_REGISTRY = {
 
   RESTORE_FACTION: {
     label: 'Restore faction',
-    description: 'A faction recovers from a prior impairment.',
     requiresTarget: true,
-    targetPrompt: 'Faction name',
     stateDeltas() { return { volatility: -5 }; },
-    narrate(/** @type {any} */ event) { return `${labelOf(event.targetId)} recovered.`; },
+    narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   ADD_FACTION: {
     label: 'Add faction',
-    description: 'A new faction forms or arrives: a guild, cult, syndicate, or noble bloc. A fresh contender for power and influence.',
     requiresTarget: true,
-    targetPrompt: 'Faction name (e.g. "Dockworkers Guild", "Ashen Hand")',
     stateDeltas() {
       // A new organized power center adds friction until the balance settles.
       return { volatility: 5 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `A new faction, ${labelOf(event.targetId)}, has formed.`;
     },
   },
 
-  // ── Extended event surface ──────────────────────────────────────────────
+  // ── Wave 1: extended event surface ──────────────────────────────────────
   // Five events that cover ~80% of common in-world incidents in canon
   // play. Each is implemented as a thin wrapper over the existing
   // mutation primitives — no new architecture, just authored content.
 
   KILL_LEADER: {
     label: 'Kill leader',
-    description: 'The settlement\'s ruling figure dies, is exiled, or is removed. Major consequences for legitimacy and faction balance.',
     requiresTarget: true,
-    targetPrompt: 'Leader\'s name (NPC)',
     stateDeltas() {
       // Always a pillar-tier consequence regardless of authored importance —
       // killing the LEADER is the structural shock by definition.
       return { resilience: -16, volatility: +18, externalThreat: +4 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
-      return `${labelOf(event.targetId)} (the settlement's leader) is gone${cause}.`;
+      return `${labelOf(event.targetId)} — the settlement's leader — is gone${cause}.`;
     },
   },
 
   EXPOSE_CORRUPTION: {
     label: 'Expose corruption',
-    description: 'A corrupt NPC is publicly revealed. The NPC is cleaned, scarred, and replaced by a successor; both the criminal institution they answered to and their home institution are tarnished by propagation; legitimacy collapses and rivals exploit the vacuum. A faction or institution becomes scandalised only through this chain, never by direct exposure.',
     requiresTarget: true,
-    targetPrompt: 'Corrupt NPC to reveal',
-    /** @param {any} event @param {import('../settlement.schema.js').SimSettlement} [settlement] */
-    stateDeltas(event, settlement) {
-      // Backstop: the mutation only fires for a corrupt NPC target (mutate.js
-      // exposeCorruption no-ops on anything else). The dials and prose must
-      // never move when the structural change cannot — so when the target is
-      // not a corrupt NPC, the authored deltas are zero, matching the no-op.
-      // The pipeline passes settlement to both preview and apply, so this stays
-      // byte-identical across the two paths.
-      if (!isCorruptNpcTarget(settlement, event.targetId)) return {};
-      const sev = Number(event.payload?.severity ?? 0.7);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.7);
       return {
         resilience: -Math.round(sev * 8),
         volatility: +Math.round(sev * 14),
       };
     },
-    /** @param {any} event @param {import('../settlement.schema.js').SimSettlement} [settlement] */
-    narrate(event, settlement) {
-      // No structural change happened for a non-corrupt-NPC target (see
-      // stateDeltas), so write no scandal prose for it either.
-      if (!isCorruptNpcTarget(settlement, event.targetId)) return '';
+    narrate(event) {
       return `Corruption inside ${labelOf(event.targetId)} has been publicly exposed.`;
     },
   },
 
   IMPOSE_CORRUPTION: {
     label: 'Impose corruption',
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes covertly corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     requiresTarget: true,
-    targetPrompt: 'Clean NPC to turn (pick the organization below)',
-    /** @param {any} event */
     stateDeltas(event) {
       // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
-      const sev = Number(event.payload?.severity ?? 0.5);
-      // Scope: turning the individual is the base hit; capturing their whole
-      // institution rots a node of the settlement, so the bigger scope moves a
-      // bigger dial (extra resilience drag) to match its tangible reach.
-      const institutionScope = event.payload?.scope === 'individual_institution';
+      const sev = sev01(event.payload?.severity, 0.5);
       return {
-        resilience: -Math.round(sev * (institutionScope ? 9 : 5)),
-        volatility: +Math.round(sev * (institutionScope ? 11 : 8)),
+        resilience: -Math.round(sev * 5),
+        volatility: +Math.round(sev * 8),
       };
     },
-    /** @param {any} event */
     narrate(event) {
       const org = event.payload?.criminalInstitution;
-      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''}. Corruption takes root in the shadows.`;
+      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''} — corruption takes root in the shadows.`;
     },
   },
 
   REFUGEE_WAVE: {
     label: 'Refugee wave',
-    description: 'A surge of refugees arrives. Population spikes; food security and infrastructure strain. Faction politics shift.',
     requiresTarget: false,
-    targetPrompt: 'Optional: source region (e.g. "the eastern border")',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const size = event.payload?.size || 'medium';   // small | medium | large
-      const map = /** @type {any} */ ({
+      const map = {
         small:  { resilience: -5,  resourcePressure: +8,  externalThreat: +3 },
         medium: { resilience: -10, resourcePressure: +14, externalThreat: +6, volatility: +4 },
         large:  { resilience: -16, resourcePressure: +20, externalThreat: +8, volatility: +8 },
-      });
-      return map[size] || map.medium;
+      };
+      return map[/** @type {keyof typeof map} */ (size)] || map.medium;
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const size = event.payload?.size || 'medium';
       const from = event.targetId ? ` from ${labelOf(event.targetId)}` : '';
       return `A ${size} refugee wave arrived${from}.`;
@@ -496,18 +435,16 @@ export const EVENT_REGISTRY = {
 
   PLAGUE: {
     label: 'Plague',
-    description: 'A disease outbreak. Population pressure on healing institutions; quarantine erodes order; faction responses diverge sharply.',
     requiresTarget: false,
-    targetPrompt: 'Optional: disease name (e.g. "Red Cough")',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         resilience: -Math.round(sev * 18),
         volatility: +Math.round(sev * 12),
         resourcePressure: +Math.round(sev * 10),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const which = event.targetId ? ` "${labelOf(event.targetId)}"` : '';
       return `A plague${which} is spreading.`;
     },
@@ -515,39 +452,35 @@ export const EVENT_REGISTRY = {
 
   RAID_OR_MONSTER_ATTACK: {
     label: 'Raid or monster attack',
-    description: 'External force strikes: bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     requiresTarget: false,
-    targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         externalThreat: +Math.round(sev * 22),
         resilience: -Math.round(sev * 10),
         volatility: +Math.round(sev * 4),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const which = event.targetId ? ` by ${labelOf(event.targetId)}` : '';
       return `The settlement was attacked${which}.`;
     },
   },
 
-  // ── Player intervention events ───────────────────────────────────────────
+  // ── Phase 24 / Tier 4.11 — Player intervention events ────────────────────
 
   REMOVED_THREAT: {
     label: 'Removed threat',
-    description: 'Players neutralized an active threat. External pressure eases, defenders recover footing.',
     requiresTarget: false,
-    targetPrompt: 'Optional: threat name (e.g. "bandit captain", "blight fey")',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         externalThreat: -Math.round(sev * 18),
         resilience:     +Math.round(sev * 8),
         volatility:     -Math.round(sev * 4),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const which = event.targetId ? ` (${labelOf(event.targetId)})` : '';
       return `The threat${which} was neutralized.`;
     },
@@ -557,30 +490,26 @@ export const EVENT_REGISTRY = {
   // settlement to Allied. Volatility settles; mutual defense + trade improve.
   BROKERED_ALLIANCE: {
     label: 'Brokered alliance',
-    description: 'Formalize an alliance with a neighbouring settlement. Relations become Allied; volatility settles and mutual defense improves.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
     stateDeltas() {
       return { volatility: -7, resilience: +6, resourcePressure: -3 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `An alliance was brokered with ${labelOf(event.targetId)}.`;
     },
   },
 
   STARTED_RIOT: {
     label: 'Started riot',
-    description: 'Players triggered or fanned a public disturbance. Legitimacy slips; criminal opportunity rises.',
     requiresTarget: false,
-    targetPrompt: 'Optional: district or trigger (e.g. "Lower Quarter")',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         volatility: +Math.round(sev * 16),
         resilience: -Math.round(sev * 10),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const where = event.targetId ? ` in ${labelOf(event.targetId)}` : '';
       return `A riot broke out${where}.`;
     },
@@ -590,13 +519,11 @@ export const EVENT_REGISTRY = {
   // neighbouring settlement (allied / client / patron / trade_partners).
   OPENED_TRADE_ROUTE: {
     label: 'Opened trade route',
-    description: 'Open a trade relationship with a neighbouring settlement. Imports flow, merchant wealth rises, smuggling premiums collapse.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
     stateDeltas() {
       return { resilience: +9, resourcePressure: -7, volatility: -3 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const rel = String(event.payload?.relationshipType || 'trade_partners').replace(/_/g, ' ');
       return `A ${rel} trade route with ${labelOf(event.targetId)} has opened.`;
     },
@@ -604,17 +531,15 @@ export const EVENT_REGISTRY = {
 
   RECOVERED_RESOURCE: {
     label: 'Recovered resource',
-    description: 'A previously depleted or lost resource is recovered or replenished. Resource pressure eases.',
     requiresTarget: true,
-    targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.7);
       return {
         resourcePressure: -Math.round(sev * 16),
         resilience:       +Math.round(sev * 8),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `The ${labelOf(event.targetId)} has been recovered.`;
     },
   },
@@ -623,11 +548,9 @@ export const EVENT_REGISTRY = {
 
   APPLY_STRESSOR: {
     label: 'Apply stressor',
-    description: 'An active crisis grips the settlement. Pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
     requiresTarget: true,
-    targetPrompt: 'Stressor (from the catalog)',
-    stateDeltas(/** @type {any} */ event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+    stateDeltas(event) {
+      const sev = sev01(event.payload?.severity, 0.6);
       const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
       const external = /siege|occup|wartime|war\b|monster|raider/.test(type);
       const scarcity = /famine|market|indebt|debt|migration/.test(type);
@@ -638,7 +561,7 @@ export const EVENT_REGISTRY = {
         ...(scarcity ? { resourcePressure: +Math.round(sev * 12) } : {}),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const label = event.payload?.label || labelOf(event.targetId);
       return `${label} grips the settlement.`;
     },
@@ -646,21 +569,19 @@ export const EVENT_REGISTRY = {
 
   CHANGE_RULING_POWER: {
     label: 'Change ruling power',
-    description: "Hand the government to a different authoritative power: coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
     requiresTarget: true,
-    targetPrompt: 'Faction that takes power',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       const cause = event.payload?.cause || 'coup';
-      const map = /** @type {any} */ ({
+      const map = {
         coup:        { volatility: +18, resilience: -8 },
         conquest:    { volatility: +20, resilience: -12, externalThreat: +10 },
         election:    { volatility: +6,  resilience: +2 },
         succession:  { volatility: +8,  resilience: -2 },
         appointment: { volatility: +6,  resilience: -2 },
-      });
-      return map[cause] || map.coup;
+      };
+      return map[/** @type {keyof typeof map} */ (cause)] || map.coup;
     },
-    narrate(/** @type {any} */ event, /** @type {any} */ settlement) {
+    narrate(event, settlement) {
       const cause = event.payload?.cause || 'coup';
       const where = settlement?.name ? ` in ${settlement.name}` : '';
       return `${labelOf(event.targetId)} took power${where} by ${cause}.`;
@@ -675,18 +596,16 @@ export const EVENT_REGISTRY = {
 
   RESOLVE_STRESSOR: {
     label: 'Remove stressor',
-    description: 'An active crisis ends. Pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
     requiresTarget: true,
-    targetPrompt: 'Stressor currently gripping the settlement',
-    stateDeltas(/** @type {any} */ event, /** @type {any} */ settlement) {
+    stateDeltas(event, settlement) {
       // The inverse of APPLY_STRESSOR, scaled by the REMOVED entry's recorded
       // severity (the registry computes from the BEFORE settlement, so the
       // entry is still present here). Word-banded legacy severities ('medium')
       // fall through to the 0.5 default.
       const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
-      const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(settlement?.[k]));
+      const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray((/** @type {Record<string, unknown>} */ (settlement))?.[k]));
       const entry = containerKey
-        ? settlement[containerKey].find((/** @type {any} */ st) =>
+        ? (/** @type {Record<string, Array<Record<string, unknown>>>} */ (settlement))[containerKey].find(st =>
             String(st?.type || '').toLowerCase() === type
             || String(st?.name || '').toLowerCase() === type)
         : null;
@@ -701,7 +620,7 @@ export const EVENT_REGISTRY = {
         ...(scarcity ? { resourcePressure: -Math.round(sev * 12) } : {}),
       };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const label = event.payload?.label || labelOf(event.targetId);
       return `${label} no longer grips the settlement.`;
     },
@@ -709,17 +628,15 @@ export const EVENT_REGISTRY = {
 
   ADD_TRADE_GOOD: {
     label: 'Add trade good',
-    description: 'A new good enters the settlement\'s trade profile: exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
     requiresTarget: true,
-    targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       // A new import eases material pressure; a new export firms up the
       // economic base. Small numbers — one good is a dial, not a shock.
       return event.payload?.direction === 'import'
         ? { resourcePressure: -5, resilience: +2 }
         : { resilience: +4 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const label = event.payload?.label || labelOf(event.targetId);
       if (event.payload?.entrepot) return `${label} now moves through the settlement's warehouses in transit.`;
       return event.payload?.direction === 'import'
@@ -730,52 +647,54 @@ export const EVENT_REGISTRY = {
 
   REMOVE_TRADE_GOOD: {
     label: 'Remove trade good',
-    description: 'A good drops out of the settlement\'s trade profile: the market moved on, the supplier dried up, or the route no longer carries it.',
     requiresTarget: true,
-    targetPrompt: 'Trade good to remove',
     stateDeltas() {
       // The inverse dial of ADD_TRADE_GOOD's export case; direction isn't
       // known at removal (the label is stripped from every list it sits in).
       return { resilience: -4, resourcePressure: +3 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       return `${labelOf(event.targetId)} no longer moves through the settlement's markets.`;
     },
   },
 
   ADD_RESOURCE: {
     label: 'Add resource',
-    description: 'A new resource node is discovered or opened nearby: a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
     requiresTarget: true,
-    targetPrompt: 'Resource (from the catalog, or a custom name)',
     stateDeltas() {
       // The counterpart of DEPLETE_RESOURCE's flat hit, slightly damped —
       // discovering a node helps less suddenly than losing one hurts.
       return { resilience: +8, resourcePressure: -10 };
     },
-    narrate(/** @type {any} */ event) {
+    narrate(event) {
       const label = event.payload?.label || labelOf(event.targetId);
       return `${label} is now worked near the settlement.`;
     },
   },
 
+  // ── Religion ──────────────────────────────────────────────────────────────
+  // The patron deity + cult events are the AUTHORED-DELTA twins of the
+  // embed-on-assign bridge (mutate.js setPrimaryDeity / imposeCult write
+  // config.primaryDeitySnapshot / config.cultDeitySnapshots; the pulse's
+  // subsystemActivation gate flips the religion layer on the instant either
+  // embed appears). The deltas here are the small legitimacy/unrest nudge so
+  // the change moves a visible dial; the substrate weight lives in
+  // deriveReligiousAuthority, read off the embedded snapshot, not here.
+
   SET_PRIMARY_DEITY: {
     label: 'Assign patron deity',
-    description: 'A settlement adopts (or sheds) its patron deity — the leading creed of the pantheon. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
     requiresTarget: false,
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       // A change of patron god is a legitimacy/ritual event, not an economic
       // shock — a small steadying nudge so that, like every other make-change,
-      // it visibly moves a dial. The substrate weight lives in
-      // deriveReligiousAuthority (read off the embedded snapshot), not here.
-      const hasDeity = !!(event?.payload?.snapshot || event?.payload?.deityRef || event?.targetId);
-      // Adopting a patron deity steadies legitimacy and dampens unrest;
-      // shedding one (null payload) is the small inverse, the patron-less drift.
+      // it visibly moves a dial. Adopting a patron deity steadies legitimacy and
+      // dampens unrest; shedding one (null payload) is the small inverse, the
+      // patron-less drift.
+      const hasDeity = !!(event.payload?.snapshot || event.payload?.deityRef || event.targetId);
       return hasDeity
         ? { resilience: +3, volatility: -2 }
         : { resilience: -3, volatility: +2 };
     },
-    /** @param {any} event */
     narrate(event) {
       const snap = event.payload?.snapshot;
       if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
@@ -788,17 +707,15 @@ export const EVENT_REGISTRY = {
 
   IMPOSE_CULT: {
     label: 'Impose a cult',
-    description: "A cult-level deity is seeded into the settlement BENEATH the patron — a secondary faith taking root in its own niche (temperament × alignment). Large settlements sustain more cults across the niche grid; small ones reconcile by displacing the weakest cult, or refuse when only the patron's slot remains. The resolved snapshot is embedded on the settlement so the religion substrate reads it without touching the custom-content store.",
     requiresTarget: false,
-    stateDeltas(/** @type {any} */ event) {
+    stateDeltas(event) {
       // A new cult stirs the populace — a small unrest ripple, the rough inverse
       // of adopting a steadying patron. Removing a cult settles it back.
-      const hasCult = !!(event?.payload?.snapshot && (event?.payload?.deityRef ?? event?.targetId));
+      const hasCult = !!(event.payload?.snapshot && (event.payload?.deityRef ?? event.targetId));
       return hasCult
         ? { volatility: +2, resilience: -1 }
         : { volatility: -1, resilience: +1 };
     },
-    /** @param {any} event */
     narrate(event) {
       const snap = event.payload?.snapshot;
       if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
@@ -811,18 +728,15 @@ export const EVENT_REGISTRY = {
 
   SHIFT_TIER: {
     label: 'Promote or demote tier',
-    description: "Force the settlement up or down one size tier (thorp through metropolis), a DM override of the organic growth-and-decline drift. Population resettles into the new tier's band, and the institution roster reconciles exactly as an organic shift would: a promotion raises the institutions the larger tier sustains, while a demotion leaves the ones it can no longer support behind as ruined remnants (a watch-post where a garrison stood, a privatized market, a hollowed-out hall) rather than erasing them.",
     requiresTarget: false,
-    /** @param {any} event */
     stateDeltas(event) {
       // Growth steadies a settlement; forced decline unsettles it. A rough mirror.
-      return event?.payload?.direction === 'demotion'
+      return event.payload?.direction === 'demotion'
         ? { volatility: +2, resilience: -2 }
         : { volatility: -1, resilience: +1 };
     },
-    /** @param {any} event */
     narrate(event) {
-      return event?.payload?.direction === 'demotion'
+      return event.payload?.direction === 'demotion'
         ? 'The settlement contracts, slipping to a smaller tier as its grander institutions fall to ruin.'
         : 'The settlement swells to a larger tier, its institutions rising to match the new scale.';
     },
@@ -830,29 +744,62 @@ export const EVENT_REGISTRY = {
 
   REMOVE_RESOURCE: {
     label: 'Remove resource',
-    description: 'A resource node is lost outright: claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
     requiresTarget: true,
-    targetPrompt: 'Nearby resource to remove',
     stateDeltas() {
       // Same flat shock as DEPLETE_RESOURCE — the chains read the same loss.
       return { resilience: -10, resourcePressure: +18 };
     },
-    narrate(/** @type {any} */ event) {
-      return `${labelOf(event.targetId)} is gone. No longer worked, no longer counted on.`;
+    narrate(event) {
+      return `${labelOf(event.targetId)} is gone — no longer worked, no longer counted on.`;
+    },
+  },
+
+  // ── The generosity counterpart verbs (FP-G3 wave — the Counterpart Criterion) ──
+  // The DM-forceable twins of the generosity engine's grain instruments
+  // (docs/DESIGN_GENEROSITY_ENGINE.md §4): FORCE_RELIEF decrees a gift of grain to a
+  // qualifying neighbour; OFFER_CREDIT extends the same grain as a loan. The handlers
+  // (mutateWorld.js) run the SAME structural gate the organic mover runs
+  // (spatial/generosityGate.js qualifiesForGenerosity) and honour the same hard
+  // reserve-floor law — the DM overrides the WILLINGNESS, never the law.
+
+  FORCE_RELIEF: {
+    label: 'Force grain relief',
+    requiresTarget: true,
+    stateDeltas(event) {
+      // Shipping grain out by decree: stores drop (pressure up) and the town absorbs
+      // the outflow (a small resilience dent). Scaled by the word-banded magnitude
+      // dial; modest — a gift is a dial, not a shock.
+      const mag = sev01(event.payload?.magnitude, 0.5);
+      return { resourcePressure: +Math.round(mag * 8), resilience: -Math.round(mag * 4) };
+    },
+    narrate(event) {
+      return `Grain wagons rolled to ${labelOf(event.targetId)} — relief by decree.`;
+    },
+  },
+
+  OFFER_CREDIT: {
+    label: 'Offer grain credit',
+    requiresTarget: true,
+    stateDeltas(event) {
+      // A loan moves the same grain with a lighter political shudder — the ledger
+      // promises it back (design §3.4; maturity lives with the mover).
+      const mag = sev01(event.payload?.magnitude, 0.5);
+      return { resourcePressure: +Math.round(mag * 5), resilience: -Math.round(mag * 2) };
+    },
+    narrate(event) {
+      return `A measure of grain went to ${labelOf(event.targetId)} — as a loan, not a gift.`;
     },
   },
 
   PROMOTE_NPC: {
     label: 'Promote/Demote NPC',
-    description: 'Two NPCs of one faction swap standing (importance, influence, structural rank). One rises, the other steps down. The same swap reads either way, so this single action covers both a promotion and a demotion.',
     requiresTarget: true,
-    targetPrompt: 'NPC whose standing changes',
     stateDeltas() {
       // A reshuffle inside one faction: friction, not crisis.
       return { volatility: +3 };
     },
-    narrate(/** @type {any} */ event, /** @type {any} */ settlement) {
-      const npc = (settlement?.npcs || []).find((/** @type {any} */ n) =>
+    narrate(event, settlement) {
+      const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
       const faction = npc?.factionAffiliation || 'their faction';
@@ -862,66 +809,46 @@ export const EVENT_REGISTRY = {
 
   DEMOTE_NPC: {
     label: 'Demote NPC',
-    description: 'An NPC is pushed down the ranks of their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction who steps over them.',
     requiresTarget: true,
-    targetPrompt: 'NPC who falls',
     stateDeltas() {
       return { volatility: +3 };
     },
-    narrate(/** @type {any} */ event, /** @type {any} */ settlement) {
-      const npc = (settlement?.npcs || []).find((/** @type {any} */ n) =>
+    narrate(event, settlement) {
+      const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
       const faction = npc?.factionAffiliation || 'their faction';
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },
-};
+});
 
 /** All EventTypes the engine knows about. Useful for UI option lists. */
 export const EVENT_TYPES = /** @type {EventType[]} */ (Object.keys(EVENT_REGISTRY));
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
-function invertSigns(/** @type {any} */ deltas) {
-  const out = /** @type {any} */ ({});
+/** @param {Record<string, number>} deltas @returns {Record<string, number>} */
+function invertSigns(deltas) {
+  /** @type {Record<string, number>} */
+  const out = {};
   for (const [k, v] of Object.entries(deltas)) out[k] = -v;
   return out;
 }
 
-function scale(/** @type {any} */ deltas, /** @type {any} */ factor) {
-  const out = /** @type {any} */ ({});
+/** @param {Record<string, number>} deltas @param {number} factor @returns {Record<string, number>} */
+function scale(deltas, factor) {
+  /** @type {Record<string, number>} */
+  const out = {};
   for (const [k, v] of Object.entries(deltas)) out[k] = Math.round(v * factor);
   return out;
 }
 
-function labelOf(/** @type {any} */ targetId) {
+/** @param {unknown} targetId @returns {string} */
+function labelOf(targetId) {
   if (!targetId) return 'target';
   // Strip "category." prefix if present (e.g. "institution.granary" → "granary")
-  const tail = /** @type {any} */ (String(targetId).split('.').pop());
+  const tail = String(targetId).split('.').pop();
   // Title-case for display
-  return tail.replace(/^[a-z]/, (/** @type {any} */ c) => c.toUpperCase()).replace(/_/g, ' ');
-}
-
-/**
- * Does this target id resolve to a corrupt, not-yet-ousted NPC in the
- * settlement? Mirrors mutate.js findNpc's id/name/label matching so the
- * EXPOSE_CORRUPTION authored deltas + narration fire on exactly the targets the
- * mutation acts on. Without a settlement (e.g. a label-only registry probe) we
- * cannot tell, so we permit the authored effect rather than suppress it.
- *
- * @param {import('../settlement.schema.js').SimSettlement} [settlement]
- * @param {string} [targetId]
- * @returns {boolean}
- */
-export function isCorruptNpcTarget(settlement, targetId) {
-  if (!settlement) return true; // no settlement to check against — do not suppress
-  const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  const t = String(targetId || '').toLowerCase();
-  const label = labelOf(targetId).toLowerCase();
-  const npc = npcs.find((/** @type {any} */ n) =>
-    String(n?.id || '').toLowerCase() === t
-    || String(n?.name || '').toLowerCase() === t
-    || String(n?.name || '').toLowerCase() === label);
-  return !!(npc && npc.corrupt === true && !npc.ousted);
+  return /** @type {string} */ (tail).replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
 }

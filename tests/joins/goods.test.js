@@ -1,11 +1,16 @@
 import { afterEach, describe, expect, test } from 'vitest';
 
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
+
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../src/data/economicData.js';
-import { GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
+import { GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
 import { customDeps } from '../../src/lib/dependencyEngine.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
-import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 
 // Join harness: TRADE_DEPENDENCY_NEEDS keys and GOODS_MODIFIERS_BY_TIER
 // requiredInstitution fields are free-string joins against the institution
@@ -71,10 +76,81 @@ describe('joins: GOODS_MODIFIERS_BY_TIER requiredInstitution resolves against th
   });
 });
 
+describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export shape', () => {
+  // F30 pin: GOODS_MODIFIERS_BY_TIER is now the SINGLE goods table — the live
+  // generator table (getGoodsModifiers), the wizard grid (TradeDynamicsPanel),
+  // the EventComposer datalist, and the prebuilt registry all read it. The
+  // export good shape is { category, p, on, [requiredInstitution], desc }: a
+  // numeric probability p in (0,1] and a boolean default-on flag. getGoodsModifiers
+  // gates on `spec.on && _rng() < spec.p`, so a good with a non-numeric p or a
+  // non-boolean on silently never rolls (or always rolls) — the exact drift
+  // class this file guards.
+  //
+  // [data-tables-4] The table is now UNIFORMLY p/on-shaped. The former lone
+  // exception — the town/Enslaved persons institution/route BOOST schema — was
+  // rewritten into a standard { category, p, on, desc } row, and its reader-less
+  // boost fields dropped. It is kept DELIBERATELY DEFAULT-OFF (on:false): because
+  // getGoodsModifiers short-circuits on `spec.on` BEFORE drawing rng, a default-off
+  // row is byte-identical to the old shapeless one (never reached the draw), so the
+  // reshape shifts no golden. Enabling it (on:true) is an owner-gated change that
+  // draws rng and shifts the goods goldens — pinned off here so the flip is conscious.
+
+  const isBoostSpec = (def) =>
+    'institutionBoost' in def || 'routeBoost' in def || 'resourceBoost' in def;
+
+  test('every good has numeric p in (0,1] and boolean on', () => {
+    const offenders = [];
+    for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
+      for (const [good, def] of Object.entries(goods)) {
+        const pOk = typeof def.p === 'number' && def.p > 0 && def.p <= 1;
+        const onOk = typeof def.on === 'boolean';
+        if (!pOk || !onOk) {
+          offenders.push(`${tier}/${good} -> p=${JSON.stringify(def.p)}, on=${JSON.stringify(def.on)}`);
+        }
+      }
+    }
+    expect(offenders, `goods with an invalid p/on export shape: ${offenders.join('; ')}`).toEqual([]);
+  });
+
+  test('no boost-schema (shapeless) entries remain — the table is uniform', () => {
+    // A future boost-schema (or otherwise shapeless) entry surfaces here for review
+    // rather than silently joining the table as an inert good.
+    const boostEntries = [];
+    for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
+      for (const [good, def] of Object.entries(goods)) {
+        if (isBoostSpec(def)) boostEntries.push(`${tier}/${good}`);
+      }
+    }
+    expect(boostEntries).toEqual([]);
+  });
+
+  test('town/Enslaved persons is the deliberately default-OFF restricted export', () => {
+    // Reshaped by [data-tables-4] from a boost schema into a standard row, kept
+    // inert-by-default so the reshape stays byte-identical. If this flips to on:true
+    // the goods goldens WILL move — that is an owner-gated, consciously-recorded change.
+    const def = GOODS_MODIFIERS_BY_TIER.town['Enslaved persons'];
+    expect(def, 'town/Enslaved persons export row must exist').toBeTruthy();
+    expect(def.category).toBe(GOODS_CATEGORIES.TRADE);
+    expect(typeof def.p).toBe('number');
+    expect(def.on, 'must stay default-off (on:true is a golden-shifting owner gate)').toBe(false);
+    expect(isBoostSpec(def), 'reader-less boost fields must stay dropped').toBe(false);
+  });
+
+  test('pin is not vacuous (standard goods are actually walked)', () => {
+    let n = 0;
+    for (const goods of Object.values(GOODS_MODIFIERS_BY_TIER)) {
+      for (const def of Object.values(goods)) {
+        if (typeof def.p === 'number' && typeof def.on === 'boolean') n++;
+      }
+    }
+    expect(n).toBeGreaterThanOrEqual(40);
+  });
+});
+
 describe('behavior: repaired joins produce DM-visible output', () => {
   afterEach(() => clearActiveRng());
 
-  test("hamlet with a Fisher's landing gains fish exports and maritime income", () => {
+  test("inland hamlet with a Fisher's landing gains fish exports without claiming maritime trade", () => {
     // rng pinned to 0 → every probability roll passes; output is fully
     // deterministic and the institution gate is the only variable under test.
     setActiveRng({ random: () => 0 });
@@ -86,12 +162,39 @@ describe('behavior: repaired joins produce DM-visible output', () => {
       { nearbyResources: [] }
     );
     const incomeSources = withLanding.incomeSources.map((i) => i.source);
-    expect(incomeSources).toContain('Fish & Maritime Produce');
+    expect(incomeSources).toContain('Fish & Preserved Produce');
+    // The inland label is the anchor: both labels are produced by the same fish good
+    // through the same gate, so an empty income list cannot fake the maritime denial.
+    expectAbsentWithAnchor(
+      incomeSources, 'Fish & Maritime Produce', 'Fish & Preserved Produce',
+      'an inland landing claims no maritime trade',
+    );
 
     // Without the landing the good's institution gate must block the roll.
     setActiveRng({ random: () => 0 });
     const without = generateEconomicState('hamlet', [], 'road', {}, { nearbyResources: [] });
-    expect(without.incomeSources.map((i) => i.source)).not.toContain('Fish & Maritime Produce');
+    expectPresentThenAbsent(
+      incomeSources, without.incomeSources.map((i) => i.source), 'Fish & Preserved Produce',
+      'the institution gate blocks the good when the landing is absent',
+    );
+  });
+
+  test("coastal port with a Fisher's landing retains the maritime income label", () => {
+    setActiveRng({ random: () => 0 });
+    const coastalPort = generateEconomicState(
+      'hamlet',
+      [{ name: "Fisher's landing", category: 'Crafts' }],
+      'port',
+      {},
+      {
+        nearbyResources: [],
+        tradeRouteAccess: 'port',
+        terrainType: 'coastal',
+      },
+    );
+
+    expect(coastalPort.incomeSources.map((income) => income.source))
+      .toContain('Fish & Maritime Produce');
   });
 
   test('Free company hall without local iron/grain reports a trade dependency', () => {

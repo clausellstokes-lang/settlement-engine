@@ -1,9 +1,10 @@
 /**
  * domain/counterfactual.js — "What if removed?" causal projection.
  *
- * This is the pure composition layer: everything the structured
- * derivations produced — substrate diffs, event pipeline, explanation
- * envelopes, capacity supply/demand, daily-life slots — can now answer:
+ * Tier 4.17 of the roadmap. This is the pure composition tier:
+ * everything Phases 17, 18, 19, 21, 22 produced — substrate diffs,
+ * event pipeline, explanation envelopes, capacity supply/demand,
+ * daily-life slots — can now answer:
  *
  *   counterfactual(settlement, { type, id, action }) ->
  *     CounterfactualResult {
@@ -25,22 +26,22 @@
  *   replace     — remove and substitute (future iteration)
  *
  * Supported entity types in V1:
- *   institution   — uses event pipeline
+ *   institution   — uses Phase 18 event pipeline
  *                   (REMOVE_INSTITUTION / DAMAGE_INSTITUTION / ADD_INSTITUTION)
- *   npc           — KILL_NPC via the event pipeline
+ *   npc           — KILL_NPC via Phase 18
  *   faction       — manual clone-and-modify (no event archetype yet)
  *   chain         — manual clone-and-modify of chain status
  *
  * Pure function. The input settlement is never mutated.
  *
  * Compounding payoff:
- *   - This is the "ifRemoved" envelope, but ACTUALLY RUN.
+ *   - This is the "ifRemoved" Phase 19 envelope, but ACTUALLY RUN.
  *     The pure projection lets the UI show real numeric deltas with
  *     real prose, not authored guesses.
- *   - Causal delta summaries after regeneration are the
+ *   - Tier 5.1 (causal delta summaries after regeneration) is the
  *     same shape as a counterfactual diff — both consume the same
  *     helpers.
- *   - For AI grounded-in-trace, the counterfactual result is
+ *   - Tier 6.1 (AI grounded-in-trace) — the counterfactual result is
  *     a complete grounding envelope the AI can describe with prose.
  */
 
@@ -54,7 +55,22 @@ import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 
-import { snakeCase } from './ids.js';
+/** @typedef {import('./settlement.schema.js').SimSettlement} SimSettlement */
+
+/**
+ * The ref a caller names a counterfactual target with. `action` defaults to
+ * 'remove' when absent; `type`/`id` are required for a non-empty projection.
+ *
+ * @typedef {{ type?: string, id?: string, action?: string }} CounterfactualRef
+ */
+
+/**
+ * A diagnostic emitted by the projection (mirrors the event pipeline's
+ * PipelineWarning shape, which is what gets spread into this list).
+ *
+ * @typedef {{ severity: string, message: string }} CounterfactualWarning
+ */
+
 // ── Action vocabulary ────────────────────────────────────────────────────
 
 export const COUNTERFACTUAL_ACTIONS = Object.freeze([
@@ -64,9 +80,10 @@ export const COUNTERFACTUAL_ACTIONS = Object.freeze([
 // ── Action → event mapping for the event-pipeline path ───────────────────
 
 /**
- * @param {string} type
- * @param {string} id
- * @param {string} action
+ * @param {string} type    entity kind ('institution' | 'faction' | 'npc' | 'chain')
+ * @param {string} id      stable entity id
+ * @param {string} action  one of COUNTERFACTUAL_ACTIONS
+ * @returns {{ type: string, targetId: string, payload?: { severity: number }, cause: string }|null}
  */
 function buildEventFor(type, id, action) {
   // Bare-id institution targets (e.g. 'institution.granary'): the
@@ -91,7 +108,16 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * NOTE ON `settlement`: this stays `any` rather than becoming SimSettlement.
+ * The composer below hands this function's RESULT to explainEntity /
+ * compareCausalState, and those declare their own settlement shapes
+ * (ExplainSettlement, which embeds CanonicalSettlement's REQUIRED _seed /
+ * generatorVersion / identity; CausalState). A SimSettlement in, SimSettlement
+ * out would surface five strict errors on a file whose strict allowance is
+ * zero. Threading SimSettlement is only free where the callee takes `any` —
+ * see the lane note in the commit message.
+ *
+ * @param {any} settlement
  * @param {string} type
  * @param {string} id
  * @param {string} action
@@ -101,30 +127,20 @@ function manualMutate(settlement, type, id, action) {
   // don't observe mutation of the input.
   const next = { ...settlement };
 
-  // Track whether any entity actually matched and mutated. An unmatched id,
-  // an unhandled action ('replace' has no branch below), or an unsupported
-  // type must return the ORIGINAL reference so counterfactual()'s identity
-  // guard fires and surfaces the "no counterfactual path" warning instead of
-  // silently reporting empty deltas.
-  let changed = false;
-
   if (type === 'faction') {
     const factionId = String(id || '');
     const slug = factionId.startsWith('faction.') ? factionId.slice('faction.'.length) : factionId;
-    const factions = (settlement.powerStructure?.factions || []).map(/** @param {any} f */ f => {
+    const factions = (settlement.powerStructure?.factions || []).map((/** @type {any} */ f) => {
       const fSlug = (f?.faction || f?.name || '').toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
       const matched = f?.id === factionId || fSlug === slug;
       if (!matched) return f;
       const power = typeof f?.power === 'number' ? f.power : 0;
-      let /** @type {number} */ nextPower;
+      let nextPower = power;
       if (action === 'remove')      nextPower = 0;
-      else if (action === 'weaken')      nextPower = Math.max(0, power - 30);
-      else if (action === 'strengthen')  nextPower = Math.min(100, power + 20);
-      else return f; // unhandled action (e.g. 'replace') — leave untouched
-      changed = true;
+      if (action === 'weaken')      nextPower = Math.max(0, power - 30);
+      if (action === 'strengthen')  nextPower = Math.min(100, power + 20);
       return { ...f, power: nextPower, _counterfactual: { previousPower: power, action } };
     });
-    if (!changed) return settlement;
     next.powerStructure = {
       ...(settlement.powerStructure || {}),
       factions,
@@ -134,21 +150,18 @@ function manualMutate(settlement, type, id, action) {
 
   if (type === 'chain') {
     const chainId = String(id || '');
-    const activeChains = (settlement.economicState?.activeChains || []).map(/** @param {any} c */ c => {
+    const activeChains = (settlement.economicState?.activeChains || []).map((/** @type {any} */ c) => {
       const candidateId = `chain.${(c?.needKey || '').toLowerCase()}.${(c?.chainId || '').toLowerCase()}`;
       if (chainId === candidateId || c?.id === chainId) {
         const nextStatus =
           action === 'remove'     ? 'collapsing' :
           action === 'weaken'     ? 'scarce'     :
           action === 'strengthen' ? 'operational':
-                                    undefined;
-        if (nextStatus === undefined) return c; // unhandled action — leave untouched
-        changed = true;
+                                    c?.status;
         return { ...c, status: nextStatus, _counterfactual: { previousStatus: c?.status, action } };
       }
       return c;
     });
-    if (!changed) return settlement;
     next.economicState = {
       ...(settlement.economicState || {}),
       activeChains,
@@ -156,9 +169,7 @@ function manualMutate(settlement, type, id, action) {
     return next;
   }
 
-  // Unsupported type (no event pipeline path either) — return the original
-  // reference so the caller's identity guard reports the missing path.
-  return settlement;
+  return next;
 }
 
 // ── Composer ─────────────────────────────────────────────────────────────
@@ -167,11 +178,12 @@ function manualMutate(settlement, type, id, action) {
  * Project the consequences of removing / weakening / strengthening an
  * entity. Pure: never mutates the input settlement.
  *
- * @param {Object} settlement
- * @param {Object} ref
- * @param {string} ref.type    'institution' | 'faction' | 'npc' | 'chain'
- * @param {string} ref.id      Stable id of the entity.
- * @param {string} ref.action  'remove' | 'weaken' | 'strengthen' | 'replace'
+ * @param {any} settlement
+ *   Stays `any`: the derivations this composes (explainEntity, deriveSystemState,
+ *   deriveDailyLife) each declare a different settlement typedef, and none of
+ *   them accepts SimSettlement.
+ * @param {CounterfactualRef|null|undefined} ref
+ *   `{ type, id, action }` — action defaults to 'remove'.
  * @returns {Object} CounterfactualResult
  */
 export function counterfactual(settlement, ref) {
@@ -194,7 +206,7 @@ export function counterfactual(settlement, ref) {
   const beforeCapacities  = deriveAllCapacities(settlement);
   const beforeDailyLife   = deriveDailyLife(settlement);
 
-  // 2. Run the projection — either through event pipeline
+  // 2. Run the projection — either through Phase 18 event pipeline
   // (institutions / npcs) or via manual clone-and-modify (factions /
   // chains).
   let nextSettlement;
@@ -212,13 +224,17 @@ export function counterfactual(settlement, ref) {
     if (nextSettlement === settlement) {
       warnings.push({
         severity: 'mismatch',
-        message: `No counterfactual path for ${ref.type}:${action} yet. Settlement unchanged.`,
+        message: `No counterfactual path for ${ref.type}:${action} yet — settlement unchanged.`,
       });
     }
   }
 
   // 3. Re-derive AFTER state.
   const afterSystemState = pipelineResult?.afterSystemState || deriveSystemState(nextSettlement);
+  // Load-bearing: the pipeline's afterCausalState is typed `Object`, and
+  // compareCausalState wants a CausalState. Without this the file gains a
+  // strict error, and its strict allowance is zero.
+  /** @type {any} */
   const afterCausalState = pipelineResult?.afterCausalState || deriveCausalState(nextSettlement);
   const afterCapacities  = deriveAllCapacities(nextSettlement);
   const afterDailyLife   = deriveDailyLife(nextSettlement);
@@ -247,7 +263,7 @@ export function counterfactual(settlement, ref) {
     summary.push(pipelineResult.narrativeSummary);
   }
 
-  for (const d of /** @type {any[]} */ (deltas.systemState || [])) {
+  for (const d of deltas.systemState || []) {
     if (d.explanation) summary.push(d.explanation);
   }
   for (const d of deltas.capacities || []) {
@@ -279,7 +295,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {SimSettlement|null|undefined} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];
@@ -291,12 +307,12 @@ export function counterfactualCandidates(settlement) {
     out.push({ type: 'institution', id, label: inst.name || id });
   }
 
-  // Factions (ids)
+  // Factions (Phase 9 ids)
   for (const p of deriveAllFactionProfiles(settlement)) {
     out.push({ type: 'faction', id: p.id, label: p.name });
   }
 
-  // Chains (ids)
+  // Chains (Phase 10 ids)
   for (const c of deriveAllSupplyChainStates(settlement)) {
     out.push({ type: 'chain', id: c.id, label: c.name });
   }
@@ -321,7 +337,7 @@ export function supportedCounterfactualActions() {
  * Summarize a counterfactual result as a flat array of lines. Same
  * pattern as summarizeEventResult / summarizeForecast.
  */
-/** @param {any} result */
+/** @param {{ summary?: string[] }|null|undefined} result */
 export function summarizeCounterfactual(result) {
   if (!result || !Array.isArray(result.summary)) return [];
   return [...result.summary];
@@ -330,8 +346,8 @@ export function summarizeCounterfactual(result) {
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /**
- * @param {any} ref
- * @param {any[]} messages
+ * @param {CounterfactualRef|null|undefined} ref
+ * @param {Array<string|CounterfactualWarning>} messages
  */
 function makeEmptyResult(ref, messages) {
   return {
@@ -352,10 +368,13 @@ function makeEmptyResult(ref, messages) {
   };
 }
 
-/** @param {any} s */
+/** @param {unknown} s */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 
 /**
- * @param {any} s
+ * @param {unknown} s
  * @param {number} n
  */
 function truncateText(s, n) {

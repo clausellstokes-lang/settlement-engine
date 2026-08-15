@@ -2,6 +2,11 @@
 // WorldPulsePanel.jsx. These translate the ids/shape the simulation records into
 // the strings the World Pulse cards read. No JSX, no state — pure functions and
 // the small constant Sets the panel filters stressors against.
+import { formatCount } from '../../domain/formatNumber.js';
+import {
+  humanizeToken,
+  settlementSizeLabel,
+} from '../../domain/display/humanizeEngineTokens.js';
 
 export function percent(value) {
   return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
@@ -13,7 +18,7 @@ export function human(value) {
 
 export function signedNumber(value) {
   const n = Math.round(Number(value) || 0);
-  return `${n > 0 ? '+' : ''}${n.toLocaleString()}`;
+  return `${n > 0 ? '+' : ''}${formatCount(n)}`;
 }
 
 export function unique(values = []) {
@@ -47,6 +52,25 @@ export function collectSettlementIds(item = {}) {
   return unique(ids.map(String));
 }
 
+// THE NEWS ADDRESS LAW subject descriptor for a pulse item: the TYPED ids the
+// address-chain resolver joins on (never prose). The realm web resolves npcId
+// (settlement-prefixed) to the deep settlement › power › faction › npc chain;
+// falls to a faction (factionId, or factionName scoped to the containing
+// settlement); falls to the settlement itself; resolves to nothing (subjectless,
+// e.g. a plague) when the record names no addressable actor.
+export function outcomeSubjectDescriptor(item = {}) {
+  const o = item.outcome || item;
+  const payload = o.proposalPayload || item.proposalPayload || {};
+  const ids = collectSettlementIds(item);
+  const settlementId = o.targetSaveId ?? o.settlementId ?? payload.settlementId ?? ids[0] ?? null;
+  return {
+    npcId: o.npcId || item.npcId || null,
+    factionId: o.factionId || item.factionId || null,
+    factionName: o.factionName || payload.factionName || item.factionName || null,
+    settlementId,
+  };
+}
+
 // The named entities involved in a pulse item, in reader-priority order.
 export function involvedEntities(item = {}, nameById = new Map()) {
   const o = item.outcome || item;
@@ -73,33 +97,47 @@ export function involvedEntities(item = {}, nameById = new Map()) {
 export function proposalDetails(outcome = {}) {
   const payload = outcome.proposalPayload || {};
   if (payload.kind === 'tier_change') {
-    return [`${human(payload.fromTier)} -> ${human(payload.toTier)}`, human(payload.direction)];
+    return [
+      `Size ${settlementSizeLabel(payload.fromTier, 'unknown')} → ${settlementSizeLabel(payload.toTier, 'unknown')}`,
+      humanizeToken(payload.direction),
+    ].filter(Boolean);
   }
   if (payload.kind === 'relationship_label_change') {
-    return [`${human(payload.fromType)} -> ${human(payload.toType)}`, human(outcome.ruleId || outcome.ruleFamily)];
+    return [`${humanizeToken(payload.fromType)} → ${humanizeToken(payload.toType)}`];
   }
   if (payload.kind === 'npc_action') {
     return [
-      human(payload.actionFamily),
-      payload.dotRankBefore && payload.dotRankAfter ? `${payload.dotRankBefore} dot -> ${payload.dotRankAfter} dot` : human(payload.roleArchetype),
+      humanizeToken(payload.actionFamily),
+      payload.dotRankBefore && payload.dotRankAfter
+        ? `${payload.dotRankBefore} dot → ${payload.dotRankAfter} dot`
+        : humanizeToken(payload.roleArchetype),
     ].filter(Boolean);
   }
   if (payload.kind === 'government_change') {
-    return [human(payload.governmentPreference), human(payload.legitimacyBand), 'preserve institutions'];
+    return [
+      humanizeToken(payload.governmentPreference),
+      humanizeToken(payload.legitimacyBand),
+      'preserve institutions',
+    ];
   }
   if (payload.kind === 'institution_suppression' || payload.kind === 'institution_capture') {
-    return [human(payload.kind), payload.institutionName].filter(Boolean);
+    return [humanizeToken(payload.kind), payload.institutionName].filter(Boolean);
   }
   if (payload.kind === 'faction_power_shift') {
-    return [human(payload.kind), human(payload.cause)].filter(Boolean);
+    return [humanizeToken(payload.kind), humanizeToken(payload.cause)].filter(Boolean);
   }
-  return [human(outcome.ruleFamily), human(outcome.ruleId)].filter(Boolean).slice(0, 2);
+  // ruleFamily/ruleId are implementation addresses, not reader facts. When a
+  // proposal carries no typed display payload, the card's authored headline and
+  // summary remain the honest detail rather than laundering an internal id.
+  return [];
 }
 
 export function outcomeDetails(outcome = {}, nameById = new Map()) {
   const details = [...proposalDetails(outcome)];
   if (outcome.tierChange) {
-    details.push(`${human(outcome.tierChange.fromTier)} -> ${human(outcome.tierChange.toTier)}`);
+    details.push(
+      `Size ${settlementSizeLabel(outcome.tierChange.fromTier, 'unknown')} → ${settlementSizeLabel(outcome.tierChange.toTier, 'unknown')}`,
+    );
   }
   if (outcome.populationDeltas?.length) {
     details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${nameById.get(String(delta.saveId)) || 'Settlement'}: ${signedNumber(delta.delta)}`));

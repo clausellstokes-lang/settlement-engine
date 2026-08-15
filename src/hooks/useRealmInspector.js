@@ -17,6 +17,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useStore } from '../store/index.js';
+import {
+  readHeraldCommandSession,
+  writeHeraldCommandSession,
+} from '../components/map/heraldCommandSession.js';
 
 // Plain-language, GM-facing text for the engine's known advance-failure reasons
 // (P10/P11): the raw reason code goes to console.warn, never the toast.
@@ -27,14 +31,18 @@ export const ADVANCE_ERROR_TEXT = Object.freeze({
   // Typed no-op reasons from the store guards (campaignWorldPulseSlice):
   advance_in_flight: 'The realm is already advancing. Give it a moment.',
   advance_paused: 'This realm has a paused advance. Resume it (or undo it) before advancing again.',
+  world_frozen: 'Time is frozen in this world — nothing moves until you unfreeze it. Change World progression in Simulation rules to advance.',
 });
 
 // The old campaign-workspace tabs map onto Inspector sections. The
 // pendingMapWorkspace store signal (e.g. the Library Advance-Time CTA requesting
 // 'news') is translated to an Inspector section so the post-advance "what changed"
 // surface lands without a body-swap.
+// The Herald has no Pulse / Chronicle door — the post-advance "what changed"
+// surface is the Dashboard (front page, this-advance lens). Pantheon folds into
+// Faith. (THE REALM INSPECTOR = NEWSPAPER, 2026-07-22.)
 const WORKSPACE_TO_SECTION = Object.freeze({
-  map: 'dashboard', pulse: 'pulse', news: 'chronicle', pantheon: 'pantheon',
+  map: 'dashboard', pulse: 'dashboard', news: 'dashboard', pantheon: 'faith',
 });
 
 // The Inspector's three size states (plan §1). 'default' is today's 420px dock;
@@ -77,14 +85,34 @@ export function useRealmInspector({
   // gates handleApplyPreset (below) and is surfaced to the toolbar/dialog so a preset
   // chip or Save can't fire a write that will be silently dropped.
   const advanceInFlightList = useStore(s => s.advanceInFlight);
+  // A PARKED pause is the same clobber window (store-hooks-state-3): a campaign
+  // paused mid-interval for verdicts re-commits worldState wholesale on resume, so
+  // a rules edit written into the parked window — and its rulesetLog receipt — is
+  // silently reverted just like a mid-advance one. Subscribe to the active
+  // campaign's pausedAdvance so the gate flips the instant a pause parks/clears
+  // (the store mutators enforce the same block; this is the UI mirror).
+  const advancePaused = useStore(s => !!(
+    activeCampaignId
+    && (s.campaigns || []).find(c => String(c.id) === String(activeCampaignId))?.worldState?.pausedAdvance
+  ));
   const rulesEditBlocked = !!(
     activeCampaignId
-    && Array.isArray(advanceInFlightList)
-    && advanceInFlightList.some(id => String(id) === String(activeCampaignId))
+    && (advancePaused
+      || (Array.isArray(advanceInFlightList)
+        && advanceInFlightList.some(id => String(id) === String(activeCampaignId))))
   );
 
-  const [inspectorOpen, setInspectorOpen] = useState(false);
-  const [inspectorSection, setInspectorSection] = useState('dashboard');
+  const initialHeraldSession = readHeraldCommandSession(activeCampaignId);
+  const [inspectorOpen, setInspectorOpen] = useState(
+    () => initialHeraldSession?.open === true,
+  );
+  const [inspectorSection, setInspectorSection] = useState(
+    () => initialHeraldSession?.section || 'dashboard',
+  );
+  const heraldSessionCampaignRef = useRef(
+    activeCampaignId == null ? null : String(activeCampaignId),
+  );
+  const skipHeraldPersistRef = useRef(false);
   // The dock's three-state size (plan §1). Starts at 'default' (today's 420px)
   // and is restored from sessionStorage once on mount below.
   const [inspectorSize, setInspectorSizeState] = useState('default');
@@ -126,6 +154,36 @@ export function useRealmInspector({
   // one-shot deep-link consumption below can drive it the way the workspace request
   // drives the Inspector section.
   const [showSimulationRules, setShowSimulationRules] = useState(false);
+
+  // The Realm route unmounts when a linked dossier opens. Restore the same
+  // campaign's dock/section on browser-back, and keep campaign switches isolated
+  // so one realm never inherits another realm's reading position.
+  useEffect(() => {
+    if (activeCampaignId == null) return;
+    const campaignKey = String(activeCampaignId);
+    if (heraldSessionCampaignRef.current === campaignKey) return;
+    heraldSessionCampaignRef.current = campaignKey;
+    skipHeraldPersistRef.current = true;
+    const restored = readHeraldCommandSession(campaignKey);
+    // Sync a session-owned presentation record into local UI state. The campaign
+    // identity guard makes this a one-shot transition, not a render feedback loop.
+    setInspectorOpen(restored?.open === true);
+    setInspectorSection(restored?.section || 'dashboard');
+  }, [activeCampaignId]);
+
+  useEffect(() => {
+    if (activeCampaignId == null) return;
+    const campaignKey = String(activeCampaignId);
+    if (heraldSessionCampaignRef.current !== campaignKey) return;
+    if (skipHeraldPersistRef.current) {
+      skipHeraldPersistRef.current = false;
+      return;
+    }
+    writeHeraldCommandSession(campaignKey, {
+      open: inspectorOpen,
+      section: inspectorSection,
+    });
+  }, [activeCampaignId, inspectorOpen, inspectorSection]);
 
   // Open the locked Dashboard teaser for anon/free on entry (reachable, not hidden).
   const lockedPreviewShownRef = useRef(false);
@@ -178,7 +236,8 @@ export function useRealmInspector({
     // braces guard for a click that lands mid-tick.
     if (rulesEditBlocked) { showToast('info', 'The realm is advancing. Give it a moment, then apply the preset.'); return; }
     try {
-      const { SIMULATION_RULE_PRESETS } = await import('../domain/worldPulse/index.js');
+      // code-quality-6: dynamic-import the leaf, not the 22-module worldPulse barrel.
+      const { SIMULATION_RULE_PRESETS } = await import('../domain/worldPulse/simulationRules.js');
       const preset = SIMULATION_RULE_PRESETS[presetId];
       if (!preset) return;
       await updateCampaignSimulationRules(activeCampaignId, preset.rules);

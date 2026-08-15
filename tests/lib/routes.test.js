@@ -12,10 +12,12 @@
 import { describe, it, expect } from 'vitest';
 import {
   ROUTES,
+  NAV,
   resolveLocation,
   viewToPath,
   titleForView,
   guardForView,
+  allowsFloatingFeedback,
   isKnownView,
   isSafeNextPath,
 } from '../../src/lib/routes.js';
@@ -80,6 +82,15 @@ describe('routes — resolveLocation paths', () => {
     expect(resolveLocation('/settlements/').view).toBe('settlements');
     expect(resolveLocation('/compendium?x=1#culture').view).toBe('compendium');
     expect(resolveLocation('/compare/kanka#top').view).toBe('compare-kanka');
+  });
+
+  it('preserves Account section and linked-message query state', () => {
+    expect(resolveLocation('/account?section=messages')).toMatchObject({
+      view: 'account', params: { section: 'messages' },
+    });
+    expect(resolveLocation('/account?section=support&message=msg%2Fone')).toMatchObject({
+      view: 'account', params: { section: 'support', message: 'msg/one' },
+    });
   });
 
   it('marks an unknown path as notFound but still returns the default view', () => {
@@ -195,9 +206,78 @@ describe('routes — titles + guards', () => {
     expect(guardForView('workshop')).toBeUndefined(); // component self-locks
   });
 
+  it('owns floating-feedback chrome policy in the route table', () => {
+    for (const view of [
+      'signin',
+      'register',
+      'reset-password',
+      'set-new-password',
+      'verify-email',
+      'confirm-email',
+      'dossier-success',
+    ]) {
+      expect(allowsFloatingFeedback(view)).toBe(false);
+    }
+    expect(allowsFloatingFeedback('generate')).toBe(true);
+    expect(allowsFloatingFeedback('does-not-exist')).toBe(true);
+  });
+
   it('isKnownView distinguishes declared views', () => {
     expect(isKnownView('settlements')).toBe(true);
     expect(isKnownView('nope')).toBe(false);
+  });
+});
+
+describe('routes — wave 4 IA (home / realm / nav / legal)', () => {
+  it('home + realm resolve and round-trip', () => {
+    expect(resolveLocation('/home').view).toBe('home');
+    expect(resolveLocation('/realm').view).toBe('realm');
+    expect(viewToPath('home')).toBe('/home');
+    expect(viewToPath('realm')).toBe('/realm');
+  });
+
+  it('legacy ?view=map aliases straight into the Realm hub', () => {
+    const r = resolveLocation('/?view=map');
+    expect(r.view).toBe('realm');
+    expect(r.legacy).toBe(true);
+  });
+
+  it('the /map PATH still resolves (App redirects it to /realm)', () => {
+    expect(resolveLocation('/map').view).toBe('map');
+  });
+
+  it('exposes NAV derived from the nav metadata, sorted by order', () => {
+    const ids = NAV.map(n => n.id);
+    // THE ABOUT SPLIT: the About nav cell now points at the split's default
+    // page (`about-what-this-is` at /about/what-this-is), not the retired
+    // pre-split `howto`. Ordered behaviour change, not drift.
+    //
+    // ⚠️ OWNER-DIRECTED SPEC CHANGE, 2026-08-03 (THE FLETCHED RIBBON, lane FL):
+    // `'home'` LEFT this list. The ribbon became the back half of an arrow and the
+    // wordmark became the home button, so the Welcome ROUTE keeps its path, title
+    // and '/'-canonicalization — proved by the round-trip test at the top of this
+    // describe — while its `nav` block is retired, which is what removes it from
+    // NAV and from every surface derived from NAV. Ordered behaviour change, not
+    // drift. tests/store/appNavSsot.test.js pins the retirement's exact SHAPE (a
+    // live route with no nav metadata), so a deletion cannot pass as a retirement.
+    expect(ids).toEqual(['generate', 'settlements', 'realm', 'compendium', 'gallery', 'about-what-this-is']);
+    const orders = NAV.map(n => n.order);
+    expect([...orders].sort((a, b) => a - b)).toEqual(orders);
+    for (const n of NAV) {
+      expect(isKnownView(n.id)).toBe(true);
+      expect(typeof n.label).toBe('string');
+      expect(n.label.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('legal pages are public (no guard) routes that round-trip', () => {
+    for (const v of ['terms', 'privacy', 'refunds']) {
+      expect(guardForView(v)).toBeUndefined();
+      expect(resolveLocation(viewToPath(v)).view).toBe(v);
+    }
+    expect(viewToPath('terms')).toBe('/terms');
+    expect(viewToPath('privacy')).toBe('/privacy');
+    expect(viewToPath('refunds')).toBe('/refunds');
   });
 });
 

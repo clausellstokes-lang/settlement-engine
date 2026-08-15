@@ -21,7 +21,11 @@
  * stable node-index order rather than a Math/locale-dependent ordering.
  */
 
-import { buildChainEdges, CHAIN_DEFS } from './supplyChains.js';
+import {
+  buildChainEdges,
+  CHAIN_DEFS,
+  nativeChainResourceList,
+} from './supplyChains.js';
 
 /**
  * Minimal binary min-heap (priority queue) over arbitrary items, ordered by a
@@ -110,10 +114,7 @@ function chainMembership(sett) {
     if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
     return '';
   };
-  const resList = sett?.config?.nearbyResources
-    || sett?.nearbyResources
-    || sett?.resources
-    || [];
+  const resList = nativeChainResourceList(sett);
   const resources = new Set(resList.map(normRes).filter(Boolean));
 
   const normInst = (i) => (i?.id || i?.name || '').toLowerCase();
@@ -165,7 +166,24 @@ export function computeRoadEdges(saves, placements) {
       y: p.y,
       tier,
       rank: TIER_RANK[tier] ?? 2,
-      isPort: !!(sett?.tradeRouteAccess === 'port' || sett?.port),
+      // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ──────────────────
+      // This read was one level too SHALLOW. `tradeRouteAccess` has no writer at
+      // the top level of either a save row or a settlement blob — the RESOLVED
+      // route is persisted at `.config.tradeRouteAccess` (assembleSettlement
+      // writes `config: { ...effectiveConfig }`) — and the second arm, `sett.port`,
+      // has no writer anywhere in the repo. `isPort` was therefore ALWAYS FALSE,
+      // which made `preferSea` below always false: no road between two port
+      // settlements has ever been routed as a sea lane. Same defect and same fix
+      // as PlacementsLayer.jsx:129, which landed earlier with the same rationale.
+      //
+      // `sett` is already unwrapped above (`save.settlement || save`), so this one
+      // address serves both save shapes; no extra wrapper hop is added.
+      //
+      // ⚠ DECLARED SHIFT: a map whose placements connect two port settlements now
+      // emits `preferSea: true` on that edge where it emitted false before. The
+      // edge SET and its order are unchanged — only this flag moves. A road network
+      // rendered across this date boundary is expected to differ in exactly that way.
+      isPort: sett?.config?.tradeRouteAccess === 'port',
       save,
       sett,
     });

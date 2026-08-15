@@ -16,7 +16,7 @@
  * uuid-less rows are sent here.
  */
 
-import { getConsent } from './consent.js';
+import { getConsent, CONSENT_MODEL_VERSION } from './consent.js';
 import { track, EVENTS } from './analytics.js';
 import { enqueueSnapshot } from './analyticsQueue.js';
 import {
@@ -113,6 +113,9 @@ export function captureFingerprint(moment, settlement, opts = {}) {
       enqueueSnapshot({
         settlementUuid,
         capturePoint: moment,
+        // Consent basis stamped on every research payload (model v2 = the opt-out
+        // flip), so a snapshot's consent provenance is auditable server-side.
+        consentVersion: CONSENT_MODEL_VERSION,
         hot: {
           ...hotColumns(reduced, save, full),
           // deterministic, seed-independent grouping key (a hash — non-personal).
@@ -126,6 +129,7 @@ export function captureFingerprint(moment, settlement, opts = {}) {
       // the chain link so evolution sequences reconstruct without prose.
       track(EVENTS.SETTLEMENT_FINGERPRINT_CAPTURED, {
         moment,
+        consent_version: CONSENT_MODEL_VERSION,
         fingerprint_hash: fingerprintHash,
         prev_fingerprint_hash: _prevHash.get(settlementUuid),
       }, { subjectId: settlementUuid });

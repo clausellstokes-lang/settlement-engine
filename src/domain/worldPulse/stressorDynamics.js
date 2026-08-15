@@ -27,17 +27,18 @@
  * Deterministic: everything reads the world snapshot; no RNG, no Date.
  */
 
+import { clamp01 } from '../../kernel/math.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
-import { coupContenders } from '../rulingPower.js';
+import { coupContenders } from '../rulingPowerCoup.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
+// M18: per-graph edge/channel indices so edgesTouching/incomingChannels are O(degree), not full
+// scans on every source × affected-settlement evaluation.
+import { edgeAdjacencyIndex, channelsByToIndex } from './tickIndices.js';
 
-function clamp01(/** @type {any} */ value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 // ── Institution classes ──────────────────────────────────────────────────
 // Same name-regex idiom the capacity model uses; counts are normalized at
@@ -56,15 +57,17 @@ const INSTITUTION_CLASSES = Object.freeze({
 export function institutionClassValue(/** @type {any} */ settlement, /** @type {any} */ className) {
   const re = INSTITUTION_CLASSES[/** @type {keyof typeof INSTITUTION_CLASSES} */ (className)];
   if (!re) return 0;
-  const count = (settlement?.institutions || [])
+  // LIVE roster only — a calamity-ruined garrison/temple/court supplies no capacity to
+  // gate stressor mitigation (siege relief, famine, faith, admin, …) (ruin-filter class).
+  const count = liveInstitutions(settlement)
     .filter((/** @type {any} */ inst) => re.test(String(inst?.name || ''))).length;
   return Math.min(1, count / 2);
 }
 
 function edgesTouching(/** @type {any} */ snapshot, /** @type {any} */ settlementId) {
-  const id = String(settlementId);
-  const edges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
-  return edges.filter((/** @type {any} */ e) => String(e?.from) === id || String(e?.to) === id);
+  // M18: edges touching id (from===id || to===id, edge-order preserved), served from the shared
+  // per-graph index instead of re-filtering the whole edges array on every call.
+  return edgeAdjacencyIndex(snapshot?.regionalGraph).get(String(settlementId)) || [];
 }
 
 export function relationshipTypeOf(/** @type {any} */ edge) {
@@ -75,10 +78,10 @@ export function relationshipTypeOf(/** @type {any} */ edge) {
 
 function incomingChannels(/** @type {any} */ snapshot, /** @type {any} */ settlementId, /** @type {any} */ channelType) {
   const id = String(settlementId);
-  const channels = snapshot?.regionalGraph?.channels || snapshot?.channels || [];
-  return channels.filter((/** @type {any} */ c) =>
-    String(c?.to) === id
-    && String(c?.type) === channelType
+  // M18: channels with to===id come from the shared per-graph index (channel-order preserved); the
+  // type + confirmed-status filter is unchanged, so the result is byte-identical to the full filter.
+  return (channelsByToIndex(snapshot?.regionalGraph).get(id) || []).filter((/** @type {any} */ c) =>
+    String(c?.type) === channelType
     && String(c?.status || 'confirmed') === 'confirmed');
 }
 

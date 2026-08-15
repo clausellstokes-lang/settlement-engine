@@ -14,16 +14,24 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
+import { REACTION_KEYS } from '../data/galleryReactionVocab.js';
+import { AGE_BAND_IDS } from '../domain/ageBands.js';
+import { resolveSettlementTerrain, terrainOrNull } from '../domain/resolveTerrain.js';
+import { clampAliveness } from './galleryAliveness.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
 
 export const GALLERY_SORT_OPTIONS = Object.freeze([
   ['relevant', 'Most relevant'],
+  // GALLERY-2 phase 2 (migration 148): the publish-time aliveness snapshot —
+  // worlds with the most lived simulation first; un-stamped shares fall back
+  // to relevance order (server-side nulls-last).
+  ['most_alive', 'Most alive'],
   ['top_voted', 'Top voted'],
   ['most_viewed', 'Most viewed'],
   ['most_commented', 'Most discussed'],
@@ -36,8 +44,10 @@ export const GALLERY_SORT_OPTIONS = Object.freeze([
 
 // IN-list facets the public feed accepts. governmentType + stability were
 // dropped: the engine writes a free-text faction name / composite label for
-// each, so no bounded sidebar vocabulary can ever match them (migration 063).
-// culture + prosperity are the new bounded-vocab facets.
+// each, so no bounded sidebar vocabulary can ever match them, AND the server
+// list RPC (list_gallery_dossiers, migration 063/071) never filtered on them —
+// they were dead chips. culture + prosperity are the bounded-vocab facets the
+// server actually honors (migration 063).
 const FILTER_ARRAY_KEYS = Object.freeze(['tier', 'terrain', 'magicLevel', 'culture', 'prosperity']);
 
 /**
@@ -64,8 +74,16 @@ export async function publishSettlement(settlementId, metadata = null) {
   return data; // slug string
 }
 
+/** Remove from the gallery. Slug is preserved server-side for re-share. */
+export async function unpublishSettlement(settlementId) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  const { error } = await supabase.rpc('unpublish_settlement', { target_id: settlementId });
+  if (error) throw new Error(error.message || 'Unpublish failed');
+  try { track(EVENTS.GALLERY_UNPUBLISHED, {}); } catch { /* never affects unpublish */ }
+}
+
 /**
- * Fetch a clone-ready, server-sanitized dossier for import. Server-gated on
+ * Fetch a clone-ready dossier payload for IMPORT. Server-gated on
  * gallery_importable + is_public + auth (migration 048): returns null when the
  * dossier isn't importable / not found / the caller is anonymous. The payload
  * is the SAME sanitized projection the gallery page shows (never raw data, never
@@ -78,17 +96,22 @@ export async function fetchDossierForImport(slug) {
   if (error) throw new Error(error.message || 'Import fetch failed');
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) return null;
-  return { id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) };
+  // §9 names the IMPORT PAYLOAD explicitly — the mask applies "in the public VIEW and
+  // in the SHARED/IMPORT PAYLOAD identically" — and this builder hoists `row.name`
+  // exactly as the dossier read did, so it leaves through the same seam. The storage
+  // law is not violated: the AUTHOR's stored text is untouched; what the importer
+  // saves is the projection, which is what left privacy.
+  return veilPublicPayload({ id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) });
 }
 
 /**
  * Client defense-in-depth for the import payload. The import_gallery_dossier RPC
  * is server-gated and already sanitized, but every OTHER gallery read re-clamps
  * client-side because RLS/raw writes mean the row can't be fully trusted — this
- * path was the one exception. Strip only the keys that are NEVER legitimately
- * shared (so this is non-lossy for an opted-in DM share's secrets/hooks/prose):
- * the generation seed (the RPC contract promises it is absent) and the DM scratch
- * notes that toPublicSafe drops even in owner-opted full mode (publicSafe.js).
+ * path is no exception. Strip only the keys that are NEVER legitimately shared
+ * (non-lossy for an opted-in DM share's secrets/hooks/prose): the generation
+ * seed (the RPC contract promises it is absent) and the DM scratch notes that
+ * toPublicSafe drops even in owner-opted full mode (publicSafe.js).
  */
 function stripImportConfidential(data) {
   if (!data || typeof data !== 'object') return data;
@@ -112,14 +135,6 @@ function stripImportConfidential(data) {
   return out;
 }
 
-/** Remove from the gallery. Slug is preserved server-side for re-share. */
-export async function unpublishSettlement(settlementId) {
-  if (!isConfigured) throw new Error('Supabase not configured');
-  const { error } = await supabase.rpc('unpublish_settlement', { target_id: settlementId });
-  if (error) throw new Error(error.message || 'Unpublish failed');
-  try { track(EVENTS.GALLERY_UNPUBLISHED, {}); } catch { /* never affects unpublish */ }
-}
-
 export async function updateGalleryMetadata(settlementId, metadata = {}) {
   if (!isConfigured) throw new Error('Supabase not configured');
   if (!settlementId) throw new Error('Missing settlement id');
@@ -140,85 +155,77 @@ export async function updateGalleryMetadata(settlementId, metadata = {}) {
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /**
- * Publish a campaign's map to the gallery. kind: 'map' (blank canvas) |
- * 'map_with_campaign'. `importable` is the owner opt-in (saved_maps.gallery_importable,
- * migration 072): pass a boolean to set it, or omit it to leave the prior choice
- * untouched (publish_map coalesces null → current). The toolbar's plain share omits
- * it, so a fresh share stays non-importable (column default) until the owner opts in.
+ * Build the publish_map RPC param bag (migration 089) from the MapShareEditor's
+ * buildShareOpts keys. First-publish (shareMap) MUST write the SAME sanitized
+ * values the edit-after-publish path (galleryMapMetadataPatch → updateMapGalleryMetadata)
+ * writes, or a freshly published map diverges from the same map re-saved: before
+ * this, shareMap forwarded only kind/description/tags, so the living-world reveal,
+ * cover image + alt, importable flag, realm-arc summary and facets all silently
+ * dropped on the FIRST publish (finding components-commerce-2). Every text field is
+ * sanitized/bounded here to match the edit path; the world snapshot + sections
+ * additionally pass the server-side forbidden-key scan (089), the real privacy
+ * boundary. Exported so the client↔RPC param-parity contract test can pin these
+ * keys against the migration's function signature.
  *
- * The share-editor opts (image, world snapshot, realm-arc summary, facets) are
- * the SAME fields galleryMapMetadataPatch sanitizes; here they ride the
- * publish_map RPC params so a single publish call both flips is_public and
- * captures the metadata snapshot. The world snapshot is built + sanitized by the
- * CALLER (serializeWorldSnapshotPublic) and passed through as-is. Each optional
- * field coalesces null → current server-side, so an omitted opt leaves the prior
- * value untouched (same posture as p_importable).
- *
- * @param {string} campaignId saved_maps row id (must be a synced uuid)
  * @param {{
- *   kind?: string,
- *   description?: string,
- *   tags?: string[]|null,
- *   importable?: boolean,
- *   imageUrl?: string,
- *   imageAlt?: string,
- *   shareWorld?: boolean,
- *   worldSections?: string[],
- *   worldSnapshot?: object|null,
- *   realmArcSummary?: string,
+ *   kind?: string, description?: string, tags?: string[]|string,
+ *   importable?: boolean, imageUrl?: string, imageAlt?: string, shareWorld?: boolean,
+ *   worldSections?: string[], worldSnapshot?: object|null, realmArcSummary?: string,
  *   facets?: object|null,
  * }} [opts]
+ * @returns {Object} the publish_map RPC params (p_* keys; target_id is added by shareMap)
  */
-export async function shareMap(campaignId, {
-  kind = 'map',
-  description = '',
-  tags = null,
-  importable,
-  imageUrl,
-  imageAlt,
-  shareWorld,
-  worldSections,
-  worldSnapshot,
-  realmArcSummary,
-  facets,
+export function publishMapParams({
+  kind = 'map', description = '', tags = null,
+  importable, imageUrl, imageAlt, shareWorld,
+  worldSections, worldSnapshot, realmArcSummary, facets,
 } = {}) {
+  const cleanDescription = sanitizeGalleryHtml(String(description || '').slice(0, 8000)).trim().slice(0, 4000);
+  const rawImageUrl = String(imageUrl || '').trim().slice(0, 1000);
+  const cleanAlt = String(imageAlt || '').trim().slice(0, 220);
+  const cleanSummary = realmArcSummary === undefined
+    ? null
+    : (sanitizeRealmArcSummary(String(realmArcSummary || '')) || null);
+  const cleanSections = worldSections === undefined
+    ? null
+    : [...new Set(
+        (Array.isArray(worldSections) ? worldSections : [])
+          .map(key => String(key || '').trim())
+          .filter(key => WORLD_SECTION_KEYS.includes(key)),
+      )];
+  const snapOk = worldSnapshot && typeof worldSnapshot === 'object' && !Array.isArray(worldSnapshot);
+  const facetsOk = facets && typeof facets === 'object' && !Array.isArray(facets);
+  return {
+    p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
+    p_description: cleanDescription || null,
+    // Empty clamp result publishes as null (not []) so the row's tag facet reads
+    // "unset" rather than "zero tags" (ported master fix).
+    p_tags: (() => { const c = clampTags(tags); return c.length ? c : null; })(),
+    // undefined ⇒ null so the RPC's coalesce(..., current) preserves a prior value.
+    p_importable: importable === undefined ? null : importable === true,
+    // Only forward a safe, non-empty cover; empty/unsafe ⇒ null (RPC preserves).
+    p_image_url: rawImageUrl && isSafePublicImageUrl(rawImageUrl) ? rawImageUrl : null,
+    p_image_alt: cleanAlt || null,
+    p_share_world: shareWorld === undefined ? null : shareWorld === true,
+    p_world_sections: cleanSections,
+    p_world_snapshot: worldSnapshot === undefined ? null : (snapOk ? worldSnapshot : null),
+    p_realm_arc_summary: cleanSummary,
+    p_facets: facetsOk ? facets : null,
+  };
+}
+
+/**
+ * Publish a campaign's map to the gallery. Accepts the full MapShareEditor
+ * buildShareOpts bag and forwards ALL of it to publish_map (see publishMapParams).
+ * kind: 'map' (blank canvas) | 'map_with_campaign'.
+ */
+export async function shareMap(campaignId, opts = {}) {
   if (!isConfigured) throw new Error('Supabase not configured');
   if (!UUID_RE.test(String(campaignId || ''))) throw new Error('Save this campaign to the cloud before sharing its map.');
-  // Sanitize the text/url fields the same way the direct-update patch does, so
-  // the publish path and the edit-after-publish path store identical shapes
-  // (defense in depth — there is no server/DB scrub of these columns).
-  const safeImageUrl = imageUrl === undefined ? undefined : (() => {
-    const trimmed = String(imageUrl || '').trim().slice(0, 1000);
-    return isSafePublicImageUrl(trimmed) ? trimmed : null;
-  })();
-  const safeSections = worldSections === undefined ? undefined : [...new Set(
-    (Array.isArray(worldSections) ? worldSections : [])
-      .map(key => String(key || '').trim())
-      .filter(key => WORLD_SECTION_KEYS.includes(key)),
-  )];
-  const safeSnapshot = worldSnapshot === undefined
-    ? undefined
-    : ((worldSnapshot && typeof worldSnapshot === 'object' && !Array.isArray(worldSnapshot)) ? worldSnapshot : null);
-  const { data, error } = await supabase.rpc('publish_map', {
-    target_id: campaignId,
-    p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
-    // Sanitize rich-text on write to the SAME budget as galleryMapMetadataPatch /
-    // the settlement path (there is no server/DB scrub of gallery_description): cap
-    // raw generously, sanitize, then trim to 4000 VISIBLE chars. The old raw 500-
-    // char slice both under-budgeted and shipped unsanitized HTML on first publish.
-    p_description: (sanitizeGalleryHtml(String(description || '').slice(0, 8000)).trim().slice(0, 4000)) || null,
-    p_tags: (() => { const clamped = clampTags(tags); return clamped.length ? clamped : null; })(),
-    p_importable: importable === undefined ? null : importable === true,
-    p_image_url: safeImageUrl === undefined ? null : safeImageUrl,
-    p_image_alt: imageAlt === undefined ? null : (String(imageAlt || '').trim().slice(0, 220) || null),
-    p_share_world: shareWorld === undefined ? null : shareWorld === true,
-    p_world_sections: safeSections === undefined ? null : safeSections,
-    p_world_snapshot: safeSnapshot === undefined ? null : safeSnapshot,
-    p_realm_arc_summary: realmArcSummary === undefined ? null : (sanitizeRealmArcSummary(String(realmArcSummary || '')) || null),
-    p_facets: (facets && typeof facets === 'object' && !Array.isArray(facets)) ? facets : null,
-  });
+  const params = publishMapParams(opts);
+  const { data, error } = await supabase.rpc('publish_map', { target_id: campaignId, ...params });
   if (error) throw new Error(error.message || 'Map share failed');
-  try { track(EVENTS.GALLERY_PUBLISHED, { kind }); } catch { /* analytics never affects publish */ }
+  try { track(EVENTS.GALLERY_PUBLISHED, { kind: params.p_kind }); } catch { /* analytics never affects publish */ }
   return data; // slug
 }
 
@@ -230,27 +237,12 @@ export async function unshareMap(campaignId) {
 }
 
 /**
- * Browse public maps (anonymized tiles). Filter/sort/search run SERVER-SIDE
- * (migration 065) — the tile carries import_count + a REAL member_count, and the
- * RPC applies the kind/backdrop/tags/has-settlements facets + ilike search +
- * ORDER BY before pagination. Owner identity is never projected.
+ * Server-side facet normalizer for the map gallery (list_gallery_maps p_filters,
+ * migration 090). Forwards the array facets (kind / backdrop / tags) and the
+ * boolean toggles (has-settlements, importable). Mirrors normalizeGalleryFilters
+ * so an empty facet never narrows the server query. (Ported master fix, W6 —
+ * the RPC accepted p_filters all along; the client never forwarded it.)
  */
-export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest', search = '', filters = {} } = {}) {
-  if (!isConfigured) return { items: [] };
-  const { data, error } = await supabase.rpc('list_gallery_maps', {
-    p_page: page,
-    p_page_size: pageSize,
-    p_sort_key: sort,
-    p_search_query: search || '',
-    p_filters: normalizeMapFilters(filters),
-  });
-  if (error) throw new Error(error.message || 'Could not load shared maps');
-  return { items: Array.isArray(data) ? data : [] };
-}
-
-// Forward only the map facets the RPC understands: the non-empty IN-list arrays
-// (kind / backdrop / tags) and the boolean toggles (has-settlements, importable).
-// Mirrors normalizeGalleryFilters so an empty facet never narrows the server query.
 export function normalizeMapFilters(filters = {}) {
   const out = {};
   for (const key of ['kind', 'backdrop', 'tags']) {
@@ -264,38 +256,24 @@ export function normalizeMapFilters(filters = {}) {
   return out;
 }
 
-/**
- * Fire-and-forget import counter for a shared map. Called from the import path
- * (campaignSlice) after a successful clone; the importer is not the map's owner,
- * so the bump runs in a SECURITY DEFINER RPC (bump_map_import, migration 065).
- * A counter failure must never fail the import, so the error is swallowed.
- */
-export async function bumpMapImport(slug) {
-  if (!isConfigured || !slug) return;
-  const { error } = await supabase.rpc('bump_map_import', { p_slug: slug });
-  if (error && import.meta?.env?.DEV) {
-    console.warn('[gallery] bump_map_import failed:', error.message);
-  }
+/** Browse public maps (anonymized tiles). */
+export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest', search = '', filters = {} } = {}) {
+  if (!isConfigured) return { items: [] };
+  const { data, error } = await supabase.rpc('list_gallery_maps', {
+    p_page: page,
+    p_page_size: pageSize,
+    p_sort_key: sort,
+    p_search_query: search || '',
+    p_filters: normalizeMapFilters(filters),
+  });
+  if (error) throw new Error(error.message || 'Could not load shared maps');
+  return { items: Array.isArray(data) ? data : [] };
 }
 
-/** Fetch one public map payload (blank-canvas backdrop in Phase 1). View path. */
+/** Fetch one public map payload (blank-canvas backdrop in Phase 1). */
 export async function fetchGalleryMap(slug) {
   if (!isConfigured || !slug) return null;
   const { data, error } = await supabase.rpc('get_gallery_map', { p_slug: slug });
-  if (error) throw new Error(error.message || 'Could not load that map');
-  return data || null;
-}
-
-/**
- * Fetch a clone-ready map payload for IMPORT. Server-gated on gallery_importable +
- * is_public + auth (migration 072): returns null when the map isn't importable /
- * not found / the caller is anonymous. The payload is the SAME projection the
- * preview shows (never raw map_data / private worldState) — importing exposes
- * nothing the viewer didn't already see. Mirrors fetchDossierForImport (048).
- */
-export async function fetchMapForImport(slug) {
-  if (!isConfigured || !slug) return null;
-  const { data, error } = await supabase.rpc('import_gallery_map', { p_slug: slug });
   if (error) throw new Error(error.message || 'Could not load that map');
   return data || null;
 }
@@ -392,8 +370,72 @@ export async function setCurated(settlementId, curated, sortOrder = null) {
 }
 
 /**
+ * Fetch the FEATURED gallery — the small, top-billed set of hero worlds shown
+ * first (Vision V-13, the sibling of the curated set). Backed by the
+ * `list_featured_dossiers()` RPC (migration 168); returns dossiers in explicit
+ * featured order (featured_order asc, nulls last → published_at desc). Empty
+ * array when Supabase isn't configured.
+ */
+export async function fetchFeaturedGallery() {
+  if (!isConfigured) return [];
+
+  const { data, error } = await supabase.rpc('list_featured_dossiers');
+  if (error) {
+    console.error('[gallery] featured listing failed:', error);
+    return [];
+  }
+
+  return (data || []).map(row => ({
+    id:          row.id,
+    slug:        row.public_slug,
+    name:        row.name,
+    tier:        row.tier,
+    publishedAt: row.published_at,
+    viewCount:   row.view_count ?? 0,
+    featured:    true,
+  }));
+}
+
+/**
+ * Admin-only: mark a dossier as featured (or unmark it). The server RPC
+ * (migration 168) gates this to developer/admin roles and writes an audit row;
+ * a normal user's call is rejected (tests/security/galleryFeatured.pglite).
+ *
+ * @param {string} settlementId — The settlement to feature.
+ * @param {boolean} featured    — Target state.
+ * @param {number} [sortOrder]  - Optional explicit sort index within the featured section.
+ */
+export async function setFeatured(settlementId, featured, sortOrder = null) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  const { error } = await supabase.rpc('set_featured', {
+    target_id:  settlementId,
+    featured,
+    sort_order: sortOrder,
+  });
+  if (error) throw new Error(error.message || 'Featured toggle failed');
+}
+
+// ── V-20 UNLISTED SHARING + featured maps (migration 168) ────────────────────
+// Extracted to ./galleryUnlisted.js (hot-file ceiling) and re-exported so every
+// existing consumer keeps importing from gallery.js.
+export {
+  fetchFeaturedMaps, setFeaturedMap,
+  shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
+  fetchMyUnlistedDossiers, fetchUnlistedDossier,
+  shareMapUnlisted, rotateMapUnlistedSlug, fetchMyUnlistedMaps, fetchUnlistedMap,
+  adaptUnlistedCampaign, fetchUnlistedCampaign,
+} from './galleryUnlisted.js';
+// fetchUnlistedDossier is also used internally by the fetchPublicDossier fallback.
+import { fetchUnlistedDossier } from './galleryUnlisted.js';
+
+/**
  * Fetch a single public dossier by its slug. Returns the sanitized
  * settlement payload that OutputContainer can render read-only.
+ *
+ * V-20: falls back to the unlisted-by-slug read when the public lookup misses,
+ * so a party link (/gallery?slug=<unlisted_slug>) opens the world in-app. The
+ * unlisted read reuses the SAME server sanitizer, so it leaks no more than a
+ * public read.
  */
 export async function fetchPublicDossier(slug) {
   if (!isConfigured) return null;
@@ -406,14 +448,33 @@ export async function fetchPublicDossier(slug) {
     return null;
   }
   const row = Array.isArray(data) ? data[0] : data;
-  if (!row) return null;
+  if (!row) {
+    // V-20: a public lookup miss may be an UNLISTED party link — resolve it by
+    // its unlisted slug (the server already sanitized the dossier). No votes /
+    // reactions / view-bump for an unlisted read (those are public-gallery
+    // features an unlisted world is deliberately absent from).
+    const unlisted = await fetchUnlistedDossier(slug);
+    if (!unlisted) return null;
+    return {
+      ...sanitizeDossier({
+        id: unlisted.id,
+        name: unlisted.name,
+        tier: unlisted.tier,
+        public_slug: unlisted.slug,
+        data: unlisted.dossier,
+        author_name: unlisted.author_name,
+      }),
+      unlisted: true,
+    };
+  }
 
   // Fire-and-forget view bump. We don't want a slow counter write to
   // delay rendering; failure here just leaves the number stale.
   bumpPublicView(slug).catch(() => { /* swallow */ });
 
-  const [voteState, moreByCreator] = await Promise.all([
+  const [voteState, reactionState, moreByCreator] = await Promise.all([
     fetchGalleryVoteState(row.id),
+    fetchGalleryReactionState(row.id),
     fetchMoreByCreator(slug),
   ]);
 
@@ -424,6 +485,7 @@ export async function fetchPublicDossier(slug) {
       moreByCreator,
     }),
     voteState,
+    reactionState,
   };
 }
 
@@ -468,6 +530,64 @@ export async function fetchGalleryVoteState(settlementId) {
   return { netVotes: Math.max(0, Number(row?.net_votes) || 0), voted: !!row?.voted };
 }
 
+// ── Structured reactions (GALLERY-2 phase 2, migration 146) ──────────────────
+// Six fixed fiction-register phrases (src/data/galleryReactionVocab.js), never
+// free text. Same seam shape as votes: a toggle RPC + a state read, both
+// normalized through sanitizeReactionState (key-allowlisted, count-clamped)
+// because every gallery read re-clamps client-side.
+
+/**
+ * Normalize RPC reaction rows ([{ reaction_key, reaction_count, mine }]) into
+ * { counts: {key: n}, mine: {key: true} }. Unknown keys are dropped (bounded
+ * vocabulary — defense in depth over a drifted row); counts clamp to ≥ 0.
+ * Also accepts a jsonb counts object ({ key: n }) — the tile-row shape.
+ * @param {Array<Object>|Object|null} raw
+ * @returns {{ counts: Record<string, number>, mine: Record<string, boolean> }}
+ */
+export function sanitizeReactionState(raw) {
+  /** @type {Record<string, number>} */ const counts = {};
+  /** @type {Record<string, boolean>} */ const mine = {};
+  if (Array.isArray(raw)) {
+    for (const row of raw) {
+      const key = row?.reaction_key;
+      if (!REACTION_KEYS.includes(key)) continue;
+      counts[key] = Math.max(0, Math.floor(Number(row?.reaction_count)) || 0);
+      if (row?.mine === true) mine[key] = true;
+    }
+  } else if (raw && typeof raw === 'object') {
+    for (const key of REACTION_KEYS) {
+      const n = Math.max(0, Math.floor(Number(raw[key])) || 0);
+      if (n > 0) counts[key] = n;
+    }
+  }
+  return { counts, mine };
+}
+
+/**
+ * Toggle one of the six fixed reactions on a public settlement. Returns the
+ * settlement's full post-toggle reaction state. Auth-required server-side
+ * (toggle_gallery_reaction raises for anon/banned/over-velocity callers).
+ */
+export async function toggleGalleryReaction(settlementId, reactionKey) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!REACTION_KEYS.includes(reactionKey)) throw new Error('Unknown reaction');
+  const { data, error } = await supabase.rpc('toggle_gallery_reaction', {
+    target_settlement_id: settlementId,
+    reaction: reactionKey,
+  });
+  if (error) throw new Error(error.message || 'Reaction failed');
+  try { track(EVENTS.GALLERY_ENGAGEMENT, { action: 'reaction' }); } catch { /* never affects the toggle */ }
+  return sanitizeReactionState(Array.isArray(data) ? data : []);
+}
+
+/** Per-key reaction counts + which the caller gave. Anon-safe (mine stays {}). */
+export async function fetchGalleryReactionState(settlementId) {
+  if (!isConfigured || !settlementId) return { counts: {}, mine: {} };
+  const { data, error } = await supabase.rpc('get_gallery_reaction_state', { target_settlement_id: settlementId });
+  if (error) return { counts: {}, mine: {} };
+  return sanitizeReactionState(Array.isArray(data) ? data : []);
+}
+
 export async function fetchGalleryComments(settlementId) {
   if (!isConfigured || !settlementId) return [];
   const { data, error } = await supabase.rpc('list_gallery_comments', { target_settlement_id: settlementId });
@@ -477,11 +597,13 @@ export async function fetchGalleryComments(settlementId) {
   }
   return (data || []).map(row => ({
     id: row.id,
+    // A moderation tombstone (172) carries no body/author — the RPC nulls them.
+    moderated: !!row.moderated,
     body: String(row.body || ''),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     canDelete: !!row.can_delete,
-    authorLabel: row.author_label || 'A DM',
+    authorLabel: row.author_label || (row.moderated ? '' : 'A DM'),
   }));
 }
 
@@ -556,43 +678,16 @@ function readGovernmentType(data) {
     || '';
 }
 
-// gallery_tags has no server/DB scrub either (RLS lets an owner write the array
-// directly), so the read normalizers re-apply the same clamp the write path uses
-// (lower-case, strip to [a-z0-9 -], drop empties, cap the count) plus a per-tag
-// length bound — defense in depth, so a drifted/malicious row can never smuggle
-// markup or an unbounded blob through this field. Mirrors the share-metadata
-// write clamp.
-const TAG_LENGTH_LIMIT = 40;
-const TAG_COUNT_LIMIT = 12;
-
-/**
- * The single tag clamp shared by every gallery path (publish, edit, read) so they
- * can never diverge: lower-case, strip to [a-z0-9 -], bound each tag to
- * TAG_LENGTH_LIMIT, drop empties, cap the count. Accepts an array or a
- * comma-separated string (the editor's raw input shape).
- *
- * @param {string[]|string} tags raw tags (array or comma-separated string)
- * @returns {string[]} the clamped tag list
- */
-function clampTags(tags) {
-  const list = Array.isArray(tags) ? tags : String(tags || '').split(',');
-  return list
-    .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, '').slice(0, TAG_LENGTH_LIMIT))
-    .filter(Boolean)
-    .slice(0, TAG_COUNT_LIMIT);
-}
-
-// READ-path clamp: array-only. A non-array stored value is a drifted/malicious
-// row, not editor input, so it yields [] rather than being comma-split (the
-// write-path behaviour of clampTags). Both share the same per-tag clamp.
-function sanitizeGalleryTags(tags) {
-  if (!Array.isArray(tags)) return [];
-  return clampTags(tags);
-}
-
+// THE PUBLIC-PAYLOAD VEIL SEAM (§9, VH-1) — see publicSafe.js `veilPublicPayload`.
+// Every builder below RETURNS through it. `row.name` is the raw DB display name and
+// the one the gallery page actually renders (GalleryDetail's
+// `{dossier.name || dossier.settlement?.name}` — the toPublicSafe-veiled copy is only
+// the FALLBACK), so before this seam the veil was outrun by the field beside it.
+// Veiling at the boundary rather than per-field means a new hoisted column is covered
+// on arrival. Cheap: veilDeep returns the SAME references when nothing is flagged.
 function sanitizeTile(row) {
   const data = row.data || {};
-  return {
+  return veilPublicPayload({
     id:           row.id,
     slug:         row.public_slug,
     name:         row.name,
@@ -601,35 +696,51 @@ function sanitizeTile(row) {
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
     curated:      row.is_curated ?? false,
-    // gallery_description is sanitized rich-text HTML, but there is no server/DB
-    // scrub — RLS lets an owner write raw HTML via a direct table update, and
-    // sanitizing-on-write only guards values this client wrote. Sanitize on READ
-    // too, at the normalizer chokepoint, so the data object is HTML-safe for ANY
-    // consumer (card, dossier, PDF, json export) regardless of the stored value.
-    description:  sanitizeGalleryHtml(row.gallery_description || ''),
+    description:  sanitizeGalleryHtml(row.gallery_description || ''), // read-path scrub (ported master fix)
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         sanitizeGalleryTags(row.gallery_tags),
+    tags:         sanitizeGalleryTags(row.gallery_tags), // read-path clamp (ported master fix)
     population:   Number(row.population ?? data.population) || null,
-    terrain:      row.terrain || data?.config?.terrainType || data?.config?.terrainOverride || data?.geography?.terrain || data?.terrain || '',
+    // Terrain goes through THE ONE terrain read (domain/resolveTerrain.js).
+    // The facet column (row.terrain) stays FIRST because it is the server's own
+    // snapshot, but it coalesces config.terrainOverride verbatim (migrations
+    // 063/071/147), so a legacy row can store the 'auto' UI sentinel; terrainOrNull
+    // is the guard resolveTerrain.js documents for exactly this column.
+    // R-4 lane P-6, DECLARED DISPLAY SHIFT (two effects, measured, each vetoable by
+    // restoring the old chain on this line):
+    //   1. a legacy blob whose stale config.terrain contradicted its rolled
+    //      config.terrainType now reads as the engine value, not the stale one;
+    //   2. when the server facet column is null/blank (mocks, older local DBs, the
+    //      defense-in-depth path this sanitizer exists for) the fallback previously
+    //      read the NEVER-WRITTEN config.terrain and so showed nothing for every
+    //      wizard-generated settlement; it now shows the real terrain.
+    terrain:      terrainOrNull(row.terrain) || resolveSettlementTerrain(data) || '',
     governmentType: row.government_type || readGovernmentType(data),
     magicLevel:   row.magic_level || data?.config?.magicLevel || data?.magicLevel || '',
     stability:    row.stability || data?.viability?.stability || data?.systemState?.stability || data?.stability || '',
     primaryResource: row.primary_resource || data?.config?.nearbyResources?.[0] || data?.nearbyResources?.[0] || '',
     threatLevel:  row.threat_level || data?.threatProfile?.level || data?.defense?.threatLevel || data?.threatLevel || '',
-    // New facets (migration 063). Server returns stored snapshots; the data
-    // fallbacks keep mocks + pre-migration rows truthful.
+    // Facet snapshot columns (migration 063) — surfaced on the tile so the
+    // listing can filter/render culture, prosperity, patron deity and the live
+    // at-war flag without touching the payload (ported master fix, W6).
     culture:      row.culture || data?.config?.culture || '',
     prosperity:   row.prosperity || data?.economicState?.prosperity || '',
     primaryDeity: row.primary_deity || data?.config?.primaryDeitySnapshot?.name || '',
     atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
-    // Public author name resolved live by owner id (migration 076). Empty when
-    // an owner has no external_name yet (pre-075 / mock rows).
-    author:       row.author_name || '',
-  };
+    // GALLERY-2 phase 2 (migration 148 tile columns; absent rows read empty/null).
+    // reactions: per-key counts as a jsonb object — key-allowlisted + clamped.
+    reactions:    sanitizeReactionState(row.reactions || null).counts,
+    // aliveness: the publish-time snapshot (0–100 int; null = shared before the
+    // score existed — the owner re-shares to stamp it).
+    aliveness:    sanitizeAliveness(row.aliveness),
+  });
 }
+
+// Read-path aliveness clamp = THE shared null-safe clamp (galleryAliveness.js;
+// a bare Number(null) would smear "unknown" into 0).
+const sanitizeAliveness = clampAliveness;
 
 // Public-safe sanitization is consolidated in domain/display/publicSafe.js
 // (toPublicSafe) — a single, named, tested projection of the display spine
@@ -678,33 +789,8 @@ function sanitizeChronicle(entries) {
   return entries.map(sanitizeChronicleEntry).filter(Boolean).slice(-CHRONICLE_LIMIT);
 }
 
-// ── Public realm-arc summary (§S4) ───────────────────────────────────────────
-// The campaign's war/pantheon epic ("The Ascendancy of X", "The War of Y") is a
-// PUBLIC-SAFE digest DERIVED from the already-public ledgers (pantheon tiers + war
-// state) — NOT the raw chronicle, which is DM-private and stripped by both
-// sanitizers. It rides its OWN column (gallery_realm_arc_summary), separate from
-// the settlement `data` (which toPublicSafe would strip via /chronicle/i if the
-// narrative lived inside it). We re-clamp it to a plain bounded scalar here,
-// defense in depth, so a drifted/malicious row can never smuggle markup or an
-// unbounded blob through this field.
-const REALM_ARC_SUMMARY_LIMIT = 600;
-
-function sanitizeRealmArcSummary(value) {
-  if (typeof value !== 'string') return '';
-  // Plain text only — strip any angle brackets so the digest can never carry
-  // markup into the gallery page, and bound the length.
-  return value.replace(/[<>]/g, '').trim().slice(0, REALM_ARC_SUMMARY_LIMIT);
-}
-
 function sanitizeDossier(row) {
-  // Per-member overrides (migration 092). The server RPC already projected row.data
-  // through these; passing them into toPublicSafe keeps the client defense-in-depth
-  // from re-stripping a member the owner individually revealed (and re-strips one
-  // they individually hid), so client + server agree member-for-member.
-  const memberOverrides = (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
-    ? row.gallery_member_overrides
-    : {};
-  return {
+  return veilPublicPayload({
     id:           row.id,
     slug:         row.public_slug,
     name:         row.name,
@@ -712,44 +798,49 @@ function sanitizeDossier(row) {
     // Owner opt-in: when gallery_share_dm is set, publish the full DM view
     // unstripped (the server RPC already returns it raw in that case; this keeps
     // the client defense-in-depth from re-stripping what the owner chose to show).
-    settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true, memberOverrides }),
+    // Per-member overrides (092/093) reveal/hide individual NPCs regardless of the
+    // settlement-level flag; the client projection mirrors the server splice.
+    settlement:   toPublicSafe(row.data, {
+      full: row.gallery_share_dm === true,
+      memberOverrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
+        ? row.gallery_member_overrides : null,
+    }),
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),
-    // §S4 — the public-safe realm-arc digest (a derived scalar, NOT the raw
-    // chronicle). Its own column, re-clamped to plain bounded text here.
-    realmArcSummary: sanitizeRealmArcSummary(row.gallery_realm_arc_summary),
     // Owner opted to reveal DM-private content — the public viewer must render in
     // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
     // data being present. See PublicDossierView.
     shareDm:      row.gallery_share_dm === true,
-    // Owner opt-in (migration 047): may other users clone this into their library?
+    // Owner opt-in: gates the "Import" affordance on the detail page (the
+    // import_gallery_dossier RPC is the server-authoritative gate; this only
+    // decides whether to SHOW the button). get_gallery_dossier returns this flag
+    // (migration 047/071).
     importable:   row.gallery_importable === true,
-    // Per-member visibility overrides (migration 092), for any UI that surfaces them.
-    memberOverrides,
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
-    // Headline living-world state for the dossier hero — the one fact that
-    // signals a simulated settlement, not a generator snapshot. Same derivation
-    // as the list tile so card and dossier agree.
-    stability:    row.stability || row.data?.viability?.stability || row.data?.systemState?.stability || row.data?.stability || '',
-    // Sanitize gallery_description on READ (not just on write): there is no
-    // server/DB scrub and RLS lets an owner write raw HTML directly, so this
-    // normalizer is the chokepoint that makes the description HTML-safe for any
-    // consumer downstream. Mirrors sanitizeTile.
-    description:  sanitizeGalleryHtml(row.gallery_description || ''),
+    description:  sanitizeGalleryHtml(row.gallery_description || ''), // read-path scrub (ported master fix)
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         sanitizeGalleryTags(row.gallery_tags),
+    tags:         sanitizeGalleryTags(row.gallery_tags), // read-path clamp (ported master fix)
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
-    // Public author name resolved live by owner id (migration 076).
-    author:       row.author_name || '',
+    // §S4 realm-arc digest — written at publish (gallery_realm_arc_summary) but
+    // previously never READ back; sanitized+bounded on read (ported master fix).
+    realmArcSummary: sanitizeRealmArcSummary(row.gallery_realm_arc_summary),
+    // GALLERY-2 phase 2: the publish-time aliveness snapshot (148 dossier column;
+    // null for rows shared before the score existed).
+    aliveness:    sanitizeAliveness(row.aliveness),
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
-  };
+  });
 }
 
+// NOT veiled, deliberately: the ADMIN report queue. A moderator reviewing a report
+// must read the reported name and body VERBATIM — masking them would blind the very
+// backstop lane the civility guard's own header names as its second layer. This
+// projection is admin-gated (fetchGalleryReports → an admin-only RPC) and never
+// reaches a public surface. Exemption, recorded, not an oversight.
 function sanitizeReport(row) {
   return {
     id: row.report_id,
@@ -802,30 +893,33 @@ function normalizeGalleryFilters(filters = {}) {
   if (filters.hasImage) out.hasImage = true;
   if (filters.hasComments) out.hasComments = true;
   if (filters.curatedOnly) out.curatedOnly = true;
+  // Patron-deity presence facet (gallery_facet_deity, migration 063).
   if (filters.hasDeity) out.hasDeity = true;
+  // At-war facet (gallery_facet_at_war, migration 063). The server honored it
+  // all along; forwarded since GALLERY-2 phase 2 (the /gallery/at-war hub).
+  if (filters.atWar) out.atWar = true;
   // Owner import opt-in facet (gallery_importable, migration 047; surfaced as a
-  // list facet by migration 071). Narrows to dossiers their owner allowed to
-  // clone.
+  // list facet by migration 071). Narrows to dossiers their owner allowed to clone.
   if (filters.importable) out.importable = true;
   return out;
 }
 
 function galleryMetadataPatch(metadata = {}) {
-  // MERGE-PATCH semantics: every field below is written ONLY when the caller
-  // provided it (!== undefined), like the shareNarrated/shareDm/facet fields
-  // have always been. The old shape wrote description/image/alt/tags
-  // unconditionally, so a partial bag (e.g. publishSettlement called with just
-  // { importable: true }) silently wiped the published metadata. An explicitly
-  // provided empty value still clears its column — omission is what preserves.
+  // MERGE-PATCH semantics (ported master fix, master-merge W6): every field is
+  // written ONLY when the caller provided it (!== undefined), like the
+  // shareNarrated/shareDm/facet fields below have always been. The old shape
+  // wrote description/image/alt/tags unconditionally, so a partial bag (e.g. a
+  // caller updating just { importable: true }) silently wiped the published
+  // metadata. An explicitly provided empty value still clears its column —
+  // omission is what preserves.
   const patch = {
     gallery_updated_at: new Date().toISOString(),
   };
-  // Descriptions are sanitized rich-text HTML (§4c). Sanitize ON WRITE here (not
-  // only at render): there is no server/DB-side scrub of gallery_description, so
-  // sanitizing the stored value is what makes it XSS-safe regardless of which
-  // consumer renders it — a future unsanitized render path can't resurrect stored
-  // script. Cap the raw input generously before sanitizing, then hard-bound the
-  // sanitized result to the column budget.
+  // Descriptions are sanitized rich-text HTML (§4c). Sanitize ON WRITE (the
+  // same idiom as galleryMapMetadataPatch below): there is no server/DB-side
+  // scrub of gallery_description, so sanitizing the stored value is what makes
+  // it XSS-safe regardless of which consumer renders it. Cap the raw input
+  // before sanitizing, then bound the sanitized result to the column budget.
   if (metadata.description !== undefined) {
     const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
     patch.gallery_description = description || null;
@@ -838,12 +932,9 @@ function galleryMetadataPatch(metadata = {}) {
     const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
     patch.gallery_image_alt = imageAlt || null;
   }
-  // The single shared tag clamp (clampTags) the read + publish paths use too,
-  // so the three can never diverge: lower-case, strip to [a-z0-9 -], bound each
-  // tag, drop empties, cap the count. Writing the same shape we'd accept on read
-  // keeps a stored row from carrying an unbounded blob the read normalizer would
-  // later trim.
   if (metadata.tags !== undefined) {
+    // The shared clamp (see clampTags below): per-tag length bound + count cap,
+    // the same write-path clamp the map twin (galleryMapMetadataPatch) uses.
     patch.gallery_tags = clampTags(metadata.tags);
   }
   // Owners can opt to publish the AI-narrated dossier instead of the raw
@@ -857,6 +948,12 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.shareDm !== undefined) {
     patch.gallery_share_dm = metadata.shareDm === true;
   }
+  // Per-member visibility overrides (migration 092/093): a keyed map of
+  // { revealDm?, allowImport? } that reveals/hides individual member NPCs
+  // independent of the settlement-level shareDm flag. Clamped on write (below).
+  if (metadata.memberOverrides !== undefined) {
+    patch.gallery_member_overrides = clampMemberOverrides(metadata.memberOverrides);
+  }
   // Owner opt-in: let other users import (clone) this public dossier into their
   // own library. Off by default; the import RPC honors this flag (migration 047).
   if (metadata.importable !== undefined) {
@@ -864,7 +961,7 @@ function galleryMetadataPatch(metadata = {}) {
   }
   // §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED scalar,
   // not the raw chronicle. Sanitized to plain bounded text so the gallery row can
-  // never carry markup or an unbounded blob.
+  // never carry markup or an unbounded blob (migration 070).
   if (metadata.realmArcSummary !== undefined) {
     const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
     patch.gallery_realm_arc_summary = summary || null;
@@ -872,7 +969,7 @@ function galleryMetadataPatch(metadata = {}) {
   // Facet snapshots (migration 063). Captured at publish/re-share time from the
   // REAL settlement attributes — culture/prosperity/deity from the persisted
   // data, atWar from the owning campaign's LIVE war ledger (which the gallery row
-  // cannot recompute on its own). ShareToGallery derives these; we clamp + null
+  // cannot recompute on its own). ShareToGallery derives these; clamp + null
   // empties here so a facet column never holds an empty string.
   if (metadata.facetCulture !== undefined) {
     patch.gallery_facet_culture = String(metadata.facetCulture || '').trim().slice(0, 64) || null;
@@ -886,23 +983,48 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.facetAtWar !== undefined) {
     patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
-  // Per-member (per-NPC) gallery visibility overrides (migration 092). There is no
-  // server/DB scrub of this column, so shape-clamp on write (defense in depth, like
-  // tags/description): a json object keyed by NPC key, values { revealDm?, allowImport? }
-  // with boolean values only. ShareToGallery already drops keys equal to the
-  // settlement default; this is the final shape gate.
-  if (metadata.memberOverrides !== undefined) {
-    patch.gallery_member_overrides = clampMemberOverrides(metadata.memberOverrides);
+  // GALLERY-2 phase 2 (migration 147). The aliveness snapshot: 0–100 int from
+  // the owning campaign's live worldState (src/lib/galleryAliveness.js) —
+  // exactly at_war's Path-A posture (client-derived, owner-RLS write). null
+  // (no owning campaign) clears the column so a save that LEFT its campaign
+  // never keeps a stale liveness claim.
+  if (metadata.facetAliveness !== undefined) {
+    patch.gallery_facet_aliveness = clampAliveness(metadata.facetAliveness);
+  }
+  // The sharer-editable gallery title (migration 147): sanitized like the blurb
+  // (same DOMPurify pass), then reduced to plain bounded text — a title is a
+  // NAME, not rich text. Empty clears the column (the tile helper's coalesce
+  // falls back to settlements.name).
+  if (metadata.title !== undefined) {
+    patch.gallery_title = sanitizeGalleryTitle(metadata.title) || null;
   }
   return patch;
 }
 
+const GALLERY_TITLE_LIMIT = 120;
+
+/**
+ * Title clamp shared by write + read: the blurb's sanitizer first (moderation
+ * parity), then strip any residual markup to inert text, collapse whitespace,
+ * bound to GALLERY_TITLE_LIMIT.
+ * @param {unknown} value
+ * @returns {string}
+ */
+function sanitizeGalleryTitle(value) {
+  if (typeof value !== 'string') return '';
+  return sanitizeGalleryHtml(value.slice(0, 1000))
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, GALLERY_TITLE_LIMIT);
+}
+
 /**
  * Final shape gate for the gallery_member_overrides column: keep only string keys
- * (bounded) mapping to { revealDm?, allowImport? } with boolean values, capped in
- * count. Drops anything malformed so a drifted bag can never store an unbounded or
- * non-boolean blob the server would then read.
+ * mapping to an object with boolean revealDm / allowImport, capped at 1000 members
+ * so a hand-crafted payload can't bloat the row. Anything malformed collapses to {}.
  * @param {any} raw
+ * @returns {Record<string, {revealDm?: boolean, allowImport?: boolean}>}
  */
 function clampMemberOverrides(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
@@ -915,29 +1037,67 @@ function clampMemberOverrides(raw) {
     if (!val || typeof val !== 'object') continue;
     /** @type {Record<string, boolean>} */
     const entry = {};
-    if (typeof (/** @type {any} */ (val).revealDm) === 'boolean') entry.revealDm = (/** @type {any} */ (val)).revealDm;
-    if (typeof (/** @type {any} */ (val).allowImport) === 'boolean') entry.allowImport = (/** @type {any} */ (val)).allowImport;
+    if (typeof val.revealDm === 'boolean') entry.revealDm = val.revealDm;
+    if (typeof val.allowImport === 'boolean') entry.allowImport = val.allowImport;
     if (Object.keys(entry).length) { out[key] = entry; n += 1; }
   }
   return out;
 }
 
-// ── Map gallery metadata write (campaigns / saved_maps) ──────────────────────
-// The maps share editor edits the saved_maps row's gallery_* columns directly
-// (RLS scopes the update to the owner), exactly as the settlement editor edits
-// settlements. saved_maps carries the SAME defense-in-depth posture as
-// settlements: there is no server/DB scrub of gallery_description / gallery_tags
-// / gallery_realm_arc_summary, so the write path must sanitize the stored value
-// (sanitizing-on-write is what keeps a future unsanitized render path from
-// resurrecting stored markup). Mirrors galleryMetadataPatch field-for-field;
-// the only map-specific additions are the world-snapshot trio (share toggle,
-// section allowlist, pass-through jsonb snapshot).
+function isSafePublicImageUrl(value) {
+  if (!value) return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
 
-// Allowlist of world-snapshot section keys an owner may choose to reveal. The
-// snapshot itself is built + sanitized by the caller (the editor, via
-// serializeWorldSnapshotPublic); this list bounds WHICH sections the public
-// preview is permitted to render, so a drifted/malicious row can never smuggle
-// an unknown section key. Mirrors the bounded-vocab posture of FILTER_ARRAY_KEYS.
+// ── Map-gallery (saved_maps) metadata: share-editor read + edit-after-publish ──
+// The saved_maps gallery_* columns (migration 088) carry the map-share editor's
+// metadata (cover, alt, tags, description, world-snapshot reveal). No server/DB
+// scrub exists for these columns, so every text field is sanitized + bounded on
+// write, and read back sanitized too.
+
+const TAG_LENGTH_LIMIT = 40;
+const TAG_COUNT_LIMIT = 12;
+
+/**
+ * The single tag clamp shared by every gallery path (publish, edit, read) so they
+ * can never diverge: lower-case, strip to [a-z0-9 -], bound each tag to
+ * TAG_LENGTH_LIMIT, drop empties, cap the count. Accepts an array or a
+ * comma-separated string (the editor's raw input shape).
+ *
+ * @param {string[]|string} tags raw tags (array or comma-separated string)
+ * @returns {string[]} the clamped tag list
+ */
+function clampTags(tags) {
+  const list = Array.isArray(tags) ? tags : String(tags || '').split(',');
+  return list
+    .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, '').slice(0, TAG_LENGTH_LIMIT))
+    .filter(Boolean)
+    .slice(0, TAG_COUNT_LIMIT);
+}
+
+// READ-path clamp: array-only. A non-array stored value is a drifted/malicious
+// row, not editor input, so it yields [] rather than being comma-split (the
+// write-path behaviour of clampTags). Both share the same per-tag clamp.
+function sanitizeGalleryTags(tags) {
+  if (!Array.isArray(tags)) return [];
+  return clampTags(tags);
+}
+
+const REALM_ARC_SUMMARY_LIMIT = 600;
+
+// The public-safe realm-arc digest (§S4) re-clamped to a plain bounded scalar:
+// plain text only (strip angle brackets so the digest can never carry markup),
+// length-bounded. Defense in depth over a drifted/malicious row.
+function sanitizeRealmArcSummary(value) {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[<>]/g, '').trim().slice(0, REALM_ARC_SUMMARY_LIMIT);
+}
+
 // The five realm-share reveal sections. These keys MUST match exactly the option
 // keys serializeWorldSnapshotPublic (src/domain/display/worldSnapshotPublic.js)
 // gates each section on, and the Realm Inspector sections the editor toggles map
@@ -951,6 +1111,10 @@ const WORLD_SECTION_KEYS = Object.freeze([
   'dashboard',
 ]);
 
+// The canonical age-band vocabulary (the 147 CHECK constraint mirrors it).
+// domain/ageBands.js is a zero-import pure leaf, so this costs nothing.
+const WORLD_AGE_BANDS = AGE_BAND_IDS;
+
 /**
  * Build the saved_maps gallery-metadata patch from an editor metadata bag.
  * Mirrors galleryMetadataPatch (settlements) but targets the saved_maps
@@ -958,63 +1122,39 @@ const WORLD_SECTION_KEYS = Object.freeze([
  * sanitized + bounded on write (no server/DB scrub exists for these columns).
  *
  * @param {{
- *   description?: string,
- *   imageUrl?: string,
- *   imageAlt?: string,
- *   tags?: string[]|string,
- *   importable?: boolean,
- *   realmArcSummary?: string,
- *   memberBand?: string,
- *   dominantCulture?: string,
- *   tierSpread?: string,
- *   atWar?: boolean,
- *   shareWorld?: boolean,
- *   worldSections?: string[],
+ *   description?: string, imageUrl?: string, imageAlt?: string,
+ *   tags?: string[]|string, importable?: boolean, realmArcSummary?: string,
+ *   memberBand?: string, dominantCulture?: string, tierSpread?: string,
+ *   atWar?: boolean, aliveness?: number|null, worldAge?: string|null,
+ *   shareWorld?: boolean, worldSections?: string[],
  *   worldSnapshot?: object|null,
  * }} [metadata]
  * @returns {Object} the saved_maps update patch
  */
 function galleryMapMetadataPatch(metadata = {}) {
-  // Sanitize ON WRITE (cap the raw input generously before sanitizing, then
-  // hard-bound the sanitized result to the column budget) — identical posture
-  // to galleryMetadataPatch's gallery_description.
   const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
   const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
   const patch = {
     gallery_description: description || null,
     gallery_image_alt: imageAlt || null,
-    // The single shared tag clamp (clampTags) the settlement write + read paths
-    // use too: lower-case, strip to [a-z0-9 -], bound each tag, drop empties, cap
-    // the count.
     gallery_tags: clampTags(metadata.tags),
     gallery_updated_at: new Date().toISOString(),
   };
-  // Cover PRESERVE-ON-OMIT: only set gallery_image_url when a non-empty value is
-  // provided, so a mis-seed (the edit-after-publish draft mounting before the
-  // prior cover is fetched) can never null an existing cover. An empty/whitespace
-  // value leaves the column untouched; a non-empty value is sanitized + bounded.
+  // PRESERVE-ON-OMIT: only set gallery_image_url when a non-empty value is
+  // provided, so a mis-seed can never null an existing cover.
   const rawImageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
   if (rawImageUrl) {
     patch.gallery_image_url = isSafePublicImageUrl(rawImageUrl) ? rawImageUrl : null;
   }
-  // Owner opt-in: let other DMs import (clone) this public map. Written only when
-  // provided so an omitted value leaves the prior choice untouched; mirrors the
-  // settlement path's gallery_importable.
   if (metadata.importable !== undefined) {
     patch.gallery_importable = metadata.importable === true;
   }
-  // §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED
-  // scalar, re-clamped to plain bounded text so the map row can never carry
-  // markup or an unbounded blob. Mirrors the settlement path.
   if (metadata.realmArcSummary !== undefined) {
     const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
     patch.gallery_realm_arc_summary = summary || null;
   }
-  // CAMPAIGN facet snapshots — the saved_maps facet columns are campaign-shaped
-  // (migration 088: member_band / dominant_culture / tier_spread / at_war), NOT the
-  // settlement-shaped culture/prosperity/deity (those live on the settlements table).
-  // The editor's campaignFacets() emits exactly these keys; clamp + null empties so a
-  // facet column never holds an empty string.
+  // CAMPAIGN facet snapshots (migration 088: member_band / dominant_culture /
+  // tier_spread / at_war). Clamp + null empties so a facet column never holds ''.
   if (metadata.memberBand !== undefined) {
     patch.gallery_facet_member_band = String(metadata.memberBand || '').trim().slice(0, 64) || null;
   }
@@ -1027,13 +1167,21 @@ function galleryMapMetadataPatch(metadata = {}) {
   if (metadata.atWar !== undefined) {
     patch.gallery_facet_at_war = metadata.atWar === true;
   }
-  // Owner opt-in: reveal the living-world snapshot alongside the shared map.
+  // GALLERY-2 phase 2 (147/149): the campaign aliveness + world-age snapshots,
+  // mirroring the settlement twin's clamps (null = unknown, never 0).
+  if (metadata.aliveness !== undefined) {
+    patch.gallery_facet_aliveness = clampAliveness(metadata.aliveness);
+  }
+  if (metadata.worldAge !== undefined) {
+    const band = String(metadata.worldAge || '');
+    patch.gallery_facet_world_age = WORLD_AGE_BANDS.includes(band) ? band : null;
+  }
   if (metadata.shareWorld !== undefined) {
     patch.gallery_share_world = metadata.shareWorld === true;
   }
   // Which world-snapshot sections the public preview may render. Clamp to the
-  // bounded allowlist (drop unknown keys, dedupe, dropping empties) so a
-  // drifted row can never name an un-vetted section.
+  // bounded allowlist (drop unknown keys, dedupe) so a drifted row can never
+  // name an un-vetted section.
   if (metadata.worldSections !== undefined) {
     const sections = Array.isArray(metadata.worldSections) ? metadata.worldSections : [];
     patch.gallery_world_sections = [...new Set(
@@ -1043,9 +1191,8 @@ function galleryMapMetadataPatch(metadata = {}) {
     )];
   }
   // The world snapshot itself — a PUBLIC-SAFE jsonb projection the CALLER built
-  // (serializeWorldSnapshotPublic) and already sanitized. lib/gallery does not
-  // re-shape it; we only pass it through (or null it out when absent). Reject a
-  // non-object so the column never holds a scalar/array smuggled in its place.
+  // (serializeWorldSnapshotPublic) and already sanitized. Pass-through, or null
+  // when absent; reject a non-object so the column never holds a scalar/array.
   if (metadata.worldSnapshot !== undefined) {
     const snap = metadata.worldSnapshot;
     patch.gallery_world_snapshot = (snap && typeof snap === 'object' && !Array.isArray(snap)) ? snap : null;
@@ -1056,25 +1203,14 @@ function galleryMapMetadataPatch(metadata = {}) {
 /**
  * Fetch ONLY the saved_maps gallery_* columns for the owner, so the share editor
  * can seed its edit-after-publish draft (cover, alt, importable, world sections)
- * with the values already persisted — without those, "Save gallery details" would
- * overwrite the saved cover with an empty draft and re-enable every world section.
- *
- * This is a DEDICATED fetch, deliberately kept OUT of the campaign-load SELECT
- * (lib/campaigns.js): that path runs for every user on every page and must stay
- * independent of whether migration 088 (these columns) is applied. Here we own the
- * dependency, so the fetch must FAIL GRACEFULLY: if the columns do not exist yet
- * (pre-088) the query errors, and we return null rather than throwing — the editor
- * simply falls back to its defaults, exactly as before this seed existed.
+ * with the values already persisted. FAILS GRACEFULLY: pre-088 the columns are
+ * absent and the select errors — we return null and the editor keeps its default
+ * draft rather than overwriting a saved cover with an empty one.
  *
  * @param {string} campaignId saved_maps row id (the campaign id)
  * @returns {Promise<{
- *   imageUrl: string,
- *   imageAlt: string,
- *   importable: boolean,
- *   worldSections: string[]|null,
- *   shareWorld: boolean,
- *   description: string,
- *   tags: string[],
+ *   imageUrl: string, imageAlt: string, importable: boolean,
+ *   worldSections: string[]|null, shareWorld: boolean, description: string, tags: string[],
  * }|null>} the seeded gallery fields, or null when unavailable (pre-088 / not found)
  */
 export async function fetchCampaignGalleryFields(campaignId) {
@@ -1093,8 +1229,6 @@ export async function fetchCampaignGalleryFields(campaignId) {
     return null;
   }
   const { data, error } = result || {};
-  // Pre-088 the columns are absent and the select errors; treat any error as
-  // "no seed available" so the editor keeps its default draft.
   if (error || !data) return null;
   return {
     imageUrl: data.gallery_image_url || '',
@@ -1128,14 +1262,4 @@ export async function updateMapGalleryMetadata(campaignId, metadata = {}) {
     .eq('id', campaignId);
   if (error) throw new Error(error.message || 'Map gallery metadata update failed');
   return patch;
-}
-
-function isSafePublicImageUrl(value) {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return url.protocol === 'http:' || url.protocol === 'https:';
-  } catch {
-    return false;
-  }
 }

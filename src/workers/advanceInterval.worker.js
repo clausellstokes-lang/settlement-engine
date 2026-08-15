@@ -21,19 +21,16 @@
  * worker bundle stays the audited DOM-free graph.
  */
 import { simulateCampaignWorldInterval } from '../domain/worldPulse/advanceInterval.js';
-import { setCustomContentSource } from '../lib/dependencyEngine.js';
 
 self.onmessage = async (e) => {
   const { payload, customContent } = e.data || {};
-  // Re-point the custom-content seam that store/index.js injects at boot on the
-  // main thread (setCustomContentSource(() => useStore.getState().customContent)).
-  // A fresh worker starts with the empty default getter, so without this every
-  // custom institution/resource would be invisible to computeActiveChains and the
-  // sim would silently diverge from the page for custom-content campaigns.
-  setCustomContentSource(() => customContent || {});
   try {
     const result = await simulateCampaignWorldInterval({
       ...payload,
+      // Scope the immutable campaign projection per synchronous kernel tick.
+      // This mirrors the in-thread fallback without installing mutable global
+      // library state for the worker lifetime.
+      customContent: customContent || {},
       onProgress: (detail) => self.postMessage({ type: 'progress', detail }),
     });
     self.postMessage({ type: 'result', result });

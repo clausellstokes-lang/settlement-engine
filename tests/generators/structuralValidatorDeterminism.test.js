@@ -77,6 +77,64 @@ describe('checkStructuralValidity is deterministic (no RNG flicker)', () => {
   });
 });
 
+describe('GATE_FEATURES dependency evidence is ladder-aware', () => {
+  const dependencyViolationFor = (names, subject) => (
+    checkStructuralValidity(
+      names.map(name => ({ name })),
+      { tier: 'metropolis', tradeRouteAccess: 'road' },
+    ).violations.find(violation => (
+      violation.type === 'dependency_violation'
+      && violation.institution === subject
+    ))
+  );
+
+  test('a subject cannot satisfy its own gate through SPATIAL_FEATURES', () => {
+    expect(
+      dependencyViolationFor(['Great library'], 'Great library'),
+    ).toMatchObject({
+      missing: [
+        "Sage's quarter",
+        'Cathedral (10,000+ only)',
+        'Multiple monasteries',
+      ],
+      severity: 'error',
+    });
+
+    expect(
+      dependencyViolationFor(['Mercenary quarter'], 'Mercenary quarter'),
+    ).toMatchObject({
+      missing: ['Hireling hall'],
+      severity: 'error',
+    });
+  });
+
+  test('a centralized scale ladder proves a legitimately evicted prerequisite', () => {
+    // Each greater removes the named lesser during roster normalization. The
+    // validator must not demand that the normalized roster contain both rungs.
+    expect(
+      dependencyViolationFor(["Mages' guild"], "Mages' guild"),
+    ).toBeUndefined();
+    expect(
+      dependencyViolationFor(
+        ["Multiple adventurers' guilds"],
+        "Multiple adventurers' guilds",
+      ),
+    ).toBeUndefined();
+    expect(
+      dependencyViolationFor(['Academy of magic'], 'Academy of magic'),
+    ).toBeUndefined();
+  });
+
+  test('evidence from a different seated institution still satisfies the gate', () => {
+    expect(
+      dependencyViolationFor(
+        ['Great library', 'Multiple monasteries'],
+        'Great library',
+      ),
+    ).toBeUndefined();
+  });
+});
+
 // ── 2. No-magic worlds never surface magical_controversy as a tension ─────────
 
 describe('no-magic worlds suppress the magical_controversy tension (finding #12)', () => {

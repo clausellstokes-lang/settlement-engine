@@ -13,8 +13,12 @@
  *      hard-to-find regression we're trying to catch.
  *
  * The configs span the tier spectrum and a few dimensions known to
- * change behavior (terrain, trade-route access). We don't try to be
- * exhaustive — we want a fast tripwire, not a fixture museum.
+ * change behavior. Terrain is pinned through terrainOverride (the live
+ * terrain key the pipeline reads) paired with a terrain-honest trade
+ * route, so the mountain/desert fixtures genuinely exercise the
+ * terrain-specific resource and institution branches — a bare `terrain`
+ * key is inert. We don't try to be exhaustive — we want a fast tripwire,
+ * not a fixture museum.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -22,17 +26,21 @@ import { generateSettlementPipeline } from '../src/generators/generateSettlement
 
 const SEED = 'sf-test-2026-04';
 
+// terrainOverride is the live terrain key (terrainHelpers.getTerrainType /
+// resolveConfig / resolveResources read it; a bare `terrain` is dead), paired
+// with the trade route that honestly reaches each terrain's resources. The
+// fixture names describe the terrain the pipeline actually generates.
 const FIXTURES = [
-  { name: 'thorp_grassland_road',     config: { settType: 'thorp',      culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' } },
-  { name: 'hamlet_forest_isolated',   config: { settType: 'hamlet',     culture: 'celtic',   terrain: 'forest',    tradeRouteAccess: 'none' } },
-  { name: 'village_river_road',       config: { settType: 'village',    culture: 'germanic', terrain: 'river',     tradeRouteAccess: 'road' } },
-  { name: 'village_coastal_port',     config: { settType: 'village',    culture: 'norse',    terrain: 'coastal',   tradeRouteAccess: 'port' } },
-  { name: 'town_grassland_road',      config: { settType: 'town',       culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' } },
-  { name: 'town_mountains_road',      config: { settType: 'town',       culture: 'germanic', terrain: 'mountains', tradeRouteAccess: 'road' } },
-  { name: 'town_swamp_river',         config: { settType: 'town',       culture: 'celtic',   terrain: 'swamp',     tradeRouteAccess: 'river' } },
-  { name: 'city_grassland_road',      config: { settType: 'city',       culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' } },
-  { name: 'city_coastal_port',        config: { settType: 'city',       culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' } },
-  { name: 'metropolis_river_port',    config: { settType: 'metropolis', culture: 'mediterranean', terrain: 'river',  tradeRouteAccess: 'port' } },
+  { name: 'thorp_plains_road',         config: { settType: 'thorp',      culture: 'germanic', terrainOverride: 'plains',    tradeRouteAccess: 'road' } },
+  { name: 'hamlet_forest_isolated',    config: { settType: 'hamlet',     culture: 'celtic',   terrainOverride: 'forest',    tradeRouteAccess: 'isolated' } },
+  { name: 'village_riverside_river',   config: { settType: 'village',    culture: 'germanic', terrainOverride: 'riverside', tradeRouteAccess: 'river' } },
+  { name: 'village_coastal_port',      config: { settType: 'village',    culture: 'norse',    terrainOverride: 'coastal',   tradeRouteAccess: 'port' } },
+  { name: 'town_hills_road',           config: { settType: 'town',       culture: 'germanic', terrainOverride: 'hills',     tradeRouteAccess: 'road' } },
+  { name: 'town_mountain_road',        config: { settType: 'town',       culture: 'germanic', terrainOverride: 'mountain',  tradeRouteAccess: 'road' } },
+  { name: 'town_desert_road',          config: { settType: 'town',       culture: 'arabic',   terrainOverride: 'desert',    tradeRouteAccess: 'road' } },
+  { name: 'city_plains_road',          config: { settType: 'city',       culture: 'germanic', terrainOverride: 'plains',    tradeRouteAccess: 'road' } },
+  { name: 'city_coastal_port',         config: { settType: 'city',       culture: 'mediterranean', terrainOverride: 'coastal', tradeRouteAccess: 'port' } },
+  { name: 'metropolis_riverside_port', config: { settType: 'metropolis', culture: 'mediterranean', terrainOverride: 'riverside',  tradeRouteAccess: 'port' } },
 ];
 
 function gen(config) {
@@ -45,8 +53,12 @@ describe('determinism', () => {
   test.each(FIXTURES)('$name produces stable structure across two runs with same seed', ({ config }) => {
     const a = gen(config);
     const b = gen(config);
-    // The full settlement object includes generated NPCs whose IDs may embed
-    // timestamps or other entropy — compare structure, not deep equality.
+    // Same seed ⇒ BYTE-identical output, NPC ids included: ids are slug+index
+    // composed (factionRoles.js), and eslint bans Date.now / new Date() /
+    // Math.random across src/generators. This tripwire compares the SHAPE on
+    // purpose — a cosmetic re-wording should not fail it. The byte line is held
+    // by tests/property/generatorGoldenMaster.test.js (sha256 over the whole
+    // settlement, whole corpus); nothing here licenses entropy in an id.
     expect(structureFingerprint(a)).toEqual(structureFingerprint(b));
   });
 });
@@ -100,7 +112,7 @@ describe('snapshot shape', () => {
   // Single representative case; we don't snapshot all 10 to keep CI focused.
   // Add cases here if you want to lock specific tiers/edge cases against
   // accidental restructuring.
-  test('village_river_road structure is stable', () => {
+  test('village_riverside_river structure is stable', () => {
     const s = gen(FIXTURES[2].config);
     expect(structureFingerprint(s)).toMatchInlineSnapshot(`
       {
@@ -111,8 +123,8 @@ describe('snapshot shape', () => {
         "hasPowerStructure": true,
         "hasSpatial": true,
         "hookCount": 0,
-        "institutionCount": 37,
-        "npcCount": 4,
+        "institutionCount": 38,
+        "npcCount": 5,
         "populationBucket": "100-1000",
         "stressCount": 0,
         "tier": "village",

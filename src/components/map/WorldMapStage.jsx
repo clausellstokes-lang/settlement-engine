@@ -13,15 +13,23 @@
  * Rendered DOM is unchanged.
  */
 
-import { memo, Suspense, lazy } from 'react';
+import { memo, Suspense, lazy, useCallback, useRef, useState } from 'react';
 import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
+import { flag } from '../../lib/flags.js';
+import { useRealmLoadProgress } from '../loadingJourney/useRealmLoadProgress.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
-import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, R, swatch, PARCH_100 } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, swatch, PARCH_100 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
+// C2L surface 2 — the reality-mode scroll-unfurl backdrop over the booting FMG
+// iframe. Lazy (rides this route chunk, zero eager) + taste-gated at the mount.
+const RealmUnfurlLoading = lazy(() => import('../loadingJourney/RealmUnfurlLoading.jsx'));
+// The progress-scrubbed realm journey video (owner order 2026-07-22). Lazy leaf —
+// rides this route chunk, zero eager (its fingerprint stays off first paint).
+const ProgressJourneyOverlay = lazy(() => import('../loadingJourney/ProgressJourneyOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./PlacementDetailCard.jsx'));
 const QuickInspector  = lazy(() => import('./QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./LayersPanel.jsx'));
@@ -30,11 +38,14 @@ const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./WorldPulsePanel.jsx'));
 const PantheonPanel   = lazy(() => import('./PantheonPanel.jsx'));
 const MapLegend       = lazy(() => import('./MapLegend.jsx'));
-
-// Cachebuster bumped whenever public/map/* changes so browsers don't serve
-// a stale iframe bundle (e.g. old drop handler missing the settlementforge
-// path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop12';
+// E-I (bar 9): the keyboard placement session — its own lazy chunk, mounted
+// only when a palette card's Enter arms it, so it costs zero eager bytes (the
+// composite first-paint margin is ~25 B; nothing new may ride the entry).
+const KeyboardPlacementControl = lazy(() => import('./KeyboardPlacementControl.jsx'));
+// W-G / J-D1 — the autoplacement consent popup. Mounted only once the palette's
+// Autoplace entry is pressed, so the planner, the raster adapter and the pack read
+// all ride an interaction chunk that a session which never autoplaces never loads.
+const AutoplacementConsent = lazy(() => import('./AutoplacementConsent.jsx'));
 
 function WorldMapStageImpl({
   showingWizardNews,
@@ -47,9 +58,10 @@ function WorldMapStageImpl({
   handleDragLeave,
   handleDrop,
   iframeRef,
+  mapFrameUrl = null,
   bridgeReady,
   bridgeRef,
-  onOverlayTransform,
+  overlayTransformRef,
   onNavigate,
   showLayersPanel,
   setShowLayersPanel,
@@ -67,6 +79,66 @@ function WorldMapStageImpl({
   const mapError      = useStore(s => s.mapError);
   const setMapMode    = useStore(s => s.setMapMode);
   const imageMode     = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+  // E-I — the keyboard placement session (bar 9). The palette card's Enter arms
+  // it; the lazy overlay steers + commits through the pointer path's own gates.
+  // announceRef is the palette's aria-live setter (assigned via announceOut, the
+  // transformOut ref idiom), so BOTH input paths speak through ONE announcer.
+  const [kbPlaceSave, setKbPlaceSave] = useState(null);
+  const kbReturnFocusRef = useRef(null);
+  const announceRef = useRef(null);
+  const announce = useCallback((text) => { announceRef.current?.(text); }, []);
+  const handleKeyboardPlace = useCallback((save) => {
+    if (!bridgeReady && !imageMode) {
+      announce('The map is still loading. Try again in a moment.');
+      return;
+    }
+    kbReturnFocusRef.current = (typeof document !== 'undefined') ? document.activeElement : null;
+    setKbPlaceSave(save);
+  }, [bridgeReady, imageMode, announce]);
+  const endKeyboardPlace = useCallback(() => {
+    setKbPlaceSave(null);
+    const el = kbReturnFocusRef.current;
+    kbReturnFocusRef.current = null;
+    if (el && typeof el.focus === 'function') el.focus();
+  }, []);
+  // W-G / J-D1 — the autoplacement consent session. The palette's Autoplace entry
+  // opens it; the popup surveys, itemizes, and writes nothing until confirmed. The
+  // trigger's focus is restored on close, the same contract the keyboard placement
+  // session honours.
+  const [showAutoplace, setShowAutoplace] = useState(false);
+  const autoplaceReturnFocusRef = useRef(null);
+  const handleAutoplace = useCallback(() => {
+    autoplaceReturnFocusRef.current = (typeof document !== 'undefined') ? document.activeElement : null;
+    setShowAutoplace(true);
+  }, []);
+  const endAutoplace = useCallback(() => {
+    setShowAutoplace(false);
+    const el = autoplaceReturnFocusRef.current;
+    autoplaceReturnFocusRef.current = null;
+    if (el && typeof el.focus === 'function') el.focus();
+  }, []);
+  // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
+  // surface is byte-unchanged; the walk flips it on to compare without a rebuild).
+  const showRealmFilm = flag('loadingJourneyFilm');
+  // The progress-scrubbed realm journey video (owner order 2026-07-22) — one shared
+  // overlay covering the booting FMG iframe, driven by the realm boot's REAL progress
+  // (bridgeReady/mapReady are coincident here, so a bounded time-creep travels and
+  // mapReady snaps it home). Dormant-safe: absent asset ⇒ the current presentation.
+  const journeyProgress = useRealmLoadProgress({
+    ready: mapReady,
+    bridgeReady,
+    active: !imageMode && !mapError,
+    runId: mapReloadKey,
+  });
+  // The world map, in words (SB5 / bar 9): the FMG iframe is a visual,
+  // pointer-driven editor with no accessible tree of its own, so an sr-only
+  // summary inside the map container carries the map's factual content — which
+  // settlements stand on the world — to screen readers. Names resolve through
+  // the SAME saves list the palette renders; non-covert scalars only.
+  const placedNames = Object.values(placements || {})
+    .map((p) => (activeSaves || []).find((sv) => String(sv?.id ?? sv?.settlement?.id ?? '') === String(p?.settlementId ?? '')))
+    .map((sv) => sv?.name || sv?.settlement?.name)
+    .filter(Boolean);
   return (
       showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -103,9 +175,32 @@ function WorldMapStageImpl({
               onCreateCampaign={onCreateCampaign}
               onSelectCampaign={onSelectCampaign}
               hasCampaigns={hasCampaigns}
+              onKeyboardPlace={handleKeyboardPlace}
+              announcerRef={announceRef}
+              onAutoplace={handleAutoplace}
             />
           </Suspense>
         </SidebarShell>
+
+        {/* W-G / J-D1 — the consent popup. A fixed-position dialog, so it is
+            mounted beside the sidebar rather than inside the map container; it
+            renders nothing until the entry is pressed. */}
+        {showAutoplace && (
+          // A NARRATED boundary, not a silent one: pressing Autoplace must visibly
+          // do something even while its chunk is still arriving, or the button
+          // reads as broken and gets pressed again.
+          <Suspense fallback={
+            <div
+              role="status"
+              style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}
+            >
+              Opening the surveyor&hellip;
+            </div>
+          }
+          >
+            <AutoplacementConsent saves={activeSaves} onClose={endAutoplace} announce={announce} />
+          </Suspense>
+        )}
 
         {/* Map container */}
         {/* a11y: passive drag-and-drop target (settlements are dragged from the
@@ -121,36 +216,45 @@ function WorldMapStageImpl({
             position: 'relative',
             background: PARCH,
             border: `2px solid ${isDraggingOver ? GOLD : BORDER}`,
-            borderRadius: R.lg,
             overflow: 'hidden',
             minHeight: 0,
           }}
         >
           {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
               the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
-          {/* SECURITY — same-origin FMG fork (public/map, vendored libs). This iframe
-              runs on the app origin and can therefore read the Supabase session in
-              localStorage. Containment that IS in place: (1) the bridge validates
-              event.origin === our origin AND event.source === this iframe, and posts
-              with an explicit origin target, never '*' (lib/mapBridge.js); (2) the
-              vercel.json CSP scopes connect-src for /map/ so a compromised lib can't
-              freely exfiltrate. Deliberately NOT sandboxed: an iframe with BOTH
-              allow-scripts and allow-same-origin (which FMG needs for its localStorage
-              /IndexedDB) can remove its own sandbox, so a same-origin sandbox is theater
-              against a compromised-script threat while risking the paid map; dropping
-              allow-same-origin instead denies FMG storage and breaks it. The real
-              isolation is serving /map/ from a SEPARATE ORIGIN (an infra change): the
-              bridge already speaks postMessage, so that is a src + origin-config swap,
-              not a rewrite. Tracked as the follow-up; do not add a same-origin sandbox. */}
-          {!imageMode && (
+          {/* SECURITY — the production FMG fork is served from the dedicated map
+              origin resolved by mapRuntimeConfig. That keeps its deliberately
+              relaxed script policy and browser storage away from the app origin's
+              Supabase session. Both postMessage directions pin the exact opposite
+              origin AND WindowProxy; neither side uses '*'. Local Vite development
+              may still use /map/ on localhost. Deliberately not sandboxed: the fork
+              needs its own origin's storage and full editor runtime, while the
+              separate-origin boundary supplies the meaningful containment. */}
+          {/* Text equivalent of the map's spatial content for screen readers.
+              Rendered before the iframe so it is the first thing an SR reads
+              inside the map container. */}
+          <div className="sr-only" data-testid="world-map-in-words">
+            {placedNames.length
+              ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed (${placedNames.join(', ')}). The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
+              : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map, or by pressing Enter on a palette card and steering with the arrow keys; each placed settlement will be listed here.'}
+          </div>
+          {!imageMode && mapFrameUrl && (
             <iframe
               // Keyed on mapReloadKey so the "Reload map" recovery action drops
               // the dead iframe and mounts a fresh one (P10).
               key={mapReloadKey}
               ref={iframeRef}
               data-tour="map"
-              src={FMG_URL}
+              src={mapFrameUrl}
               title="Fantasy Map"
+              // a11y (SB5, bar 9): the FMG editor is a third-party visual tool —
+              // tabbing into it strands a keyboard user inside an unmanaged
+              // editor (WCAG 2.4.3), and its DOM is meaningless to a screen
+              // reader. Removed from the Tab order and the accessibility tree;
+              // the sr-only "world map in words" summary above and the palette
+              // carry the equivalent content. Pointer interaction is unchanged.
+              tabIndex={-1}
+              aria-hidden="true"
               // Don't leak the parent URL (which can carry view/query state) to any
               // request the map frame issues. Zero functional impact; small hardening.
               referrerPolicy="no-referrer"
@@ -163,6 +267,25 @@ function WorldMapStageImpl({
               }}
             />
           )}
+          {/* The progress-scrubbed realm journey video over the booting FMG iframe
+              (owner order 2026-07-22), covering it from first paint so the fork's own
+              loading screen never shows through. When the asset is absent it renders
+              the CURRENT presentation — the RealmUnfurlLoading scroll-unfurl backdrop
+              when the taste-gate is on, else nothing (the "Summoning the world…"
+              loader below stays visible). Only the FMG boot path (image-backdrop mode
+              skips the iframe). Decorative — the toolbar "Loading…" line is the a11y
+              floor. Self-dismisses on mapReady (renders null once faded); the reload
+              key remounts a fresh run. */}
+          {!imageMode && !mapError && (
+            <Suspense fallback={null}>
+              <ProgressJourneyOverlay
+                key={mapReloadKey}
+                progress={journeyProgress}
+                zIndex={4}
+                fallback={showRealmFilm ? <RealmUnfurlLoading bridgeReady={bridgeReady} /> : null}
+              />
+            </Suspense>
+          )}
           {(bridgeReady || imageMode) && (
             <Suspense fallback={null}>
               {/* bridgeRef.current is read during render to pass into the overlay.
@@ -170,8 +293,11 @@ function WorldMapStageImpl({
                   constructed once during the bridge-init effect and never
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
-              {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} onTransform={onOverlayTransform} />
+              { }
+              {/* RF's F2 ref contract (master-merge W1 mis-resolution fixed at W6): the
+                  parent live-reads transformOut for the drop handler — master's
+                  onTransform CALLBACK spelling silently severed the threading. */}
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
             </Suspense>
           )}
           <Suspense fallback={null}>
@@ -241,7 +367,7 @@ function WorldMapStageImpl({
             <>
               <div style={{
                 position: 'absolute', inset: 12, border: `3px dashed ${GOLD}`,
-                borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
+                background: 'rgba(160,118,42,0.06)',
                 pointerEvents: 'none',
               }} />
               {/* Drop preview tooltip. Shows during drag with
@@ -262,9 +388,8 @@ function WorldMapStageImpl({
                     position: 'absolute', top: 24, right: 24,
                     padding: '8px 12px', background: INK,
                     color: PARCH_100,
-                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
+                    border: `1px solid ${GOLD}`,
                     fontSize: FS.xs, lineHeight: 1.45,
-                    boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
                     pointerEvents: 'none', maxWidth: 220,
                   }}
                 >
@@ -281,6 +406,32 @@ function WorldMapStageImpl({
                 </div>
               )}
             </>
+          )}
+          {/* E-I — the keyboard placement session, mounted last so it paints
+              above every map overlay. Lazy: the chunk loads only when a palette
+              card's Enter arms a session. Commits through the pointer path's
+              own seam (bridge.placeSettlement / addPlacement — ONE gate). */}
+          {kbPlaceSave && (
+            <Suspense fallback={(
+              // Narrated wait (witnessed-wait ratchet): the session chunk loads
+              // on the FIRST arm only; the chip narrates that beat in-world.
+              <div style={{
+                position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)',
+                background: INK, color: PARCH_100, border: `1px solid ${GOLD}`,
+                padding: '6px 10px', fontSize: FS.xs,
+              }}
+              >
+                Readying the placement target…
+              </div>
+            )}
+            >
+              <KeyboardPlacementControl
+                save={kbPlaceSave} imageMode={imageMode}
+                bridgeRef={bridgeRef} iframeRef={iframeRef}
+                containerRef={mapContainerRef} transformRef={overlayTransformRef}
+                announce={announce} onDone={endKeyboardPlace}
+              />
+            </Suspense>
           )}
         </div>
 
@@ -305,7 +456,7 @@ function SidebarShell({ children }) {
   return (
     <div style={{
       width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+      background: CARD, border: `1px solid ${BORDER}`,
       overflow: 'hidden',
     }}>
       {children}

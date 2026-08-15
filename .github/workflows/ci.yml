@@ -1,113 +1,137 @@
 name: CI
 
 on:
+  # Run on every branch push (not just master/main) so feature branches — where
+  # the work actually happens — get the same gate before they ever reach a PR
+  # (finding F35: CI was advisory to feature branches).
   push:
-    branches: [master, main]
+    branches: ['**']
   pull_request:
     branches: [master, main]
+  # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
+  # gated to these events only). Per-push/PR runs are unaffected — the sweep runs
+  # a gate step once per injected mutation and is too slow for the hot path.
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
 
 jobs:
-  check:
-    name: Validate, test, build
+  check-validation:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / validation
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      # A+ P0.4: fail the gate on a HIGH+ vulnerability in a PRODUCTION dependency
-      # (e.g. the dompurify advisory behind the gallery XSS floor). NOTE: --omit=dev
-      # is a RUNTIME-ONLY filter, not a toolchain-safety guarantee — it excludes the
-      # build toolchain (esbuild/vite/rollup/postcss/autoprefixer), which produces
-      # the shipped bytes. The non-blocking "full audit" step below surfaces those
-      # build-toolchain advisories (many need a breaking major bump, so they don't
-      # block here) so a supply-chain compromise in the toolchain is at least visible.
+      - run: npm ci
       - name: Audit production dependencies
         run: npm audit --audit-level=high --omit=dev
+      - name: Audit dev dependencies (non-blocking visibility)
+        run: npm audit --audit-level=high
+        continue-on-error: true
+      - run: npm run validate:hazard-registry
+      - run: npm run validate:premortem
+      - run: npm run validate:packets
+      - run: npm run validate:data
+      - run: npm run validate:custom-content-manifest
+      - run: npm run validate:migration-head
+      - run: npm run validate:edge
+      - run: npm run validate:map
+      - run: npm run validate:tuning-bands
+      - run: npm run validate:foundry-module
+      - run: npm run validate:mcp-server
 
-      # Build-toolchain + dev-dependency advisories. Non-blocking (|| true) because
-      # they often require a breaking major and shouldn't wedge the gate — but they
-      # ARE printed in the log so esbuild/vite/rollup advisories are no longer a
-      # blind spot. Promote to blocking once the toolchain is on advisory-clean pins.
-      - name: Audit full dependency tree (build toolchain — non-blocking)
-        run: npm audit --audit-level=high || true
+  check-types:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / type ratchets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck:ratchet
+      - run: npm run typecheck:domain:strict
 
-      # Fail fast on data corruption: duplicate object keys silently
-      # overwrite earlier definitions in JS, so a regression here would
-      # quietly distort the simulation outputs without breaking the build.
-      - name: Validate data
-        run: npm run validate:data
+  check-lint:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
 
-      - name: Validate edge functions
-        run: npm run validate:edge
-
-      - name: Validate vendored map JavaScript
-        run: npm run validate:map
-
-      - name: Validate migration head (contiguity + applied-head ledger)
-        run: npm run validate:migration-head
-
-      # tsc --noEmit against src/domain/. The JSDoc types in the domain
-      # layer get validated by tsc; the pipeline output object shapes,
-      # impairment dimensions, event types, and faction-response shapes
-      # are all enforced at edit time. Adding a new event without
-      # updating EventType union fails here.
-      - name: Type check
-        run: npm run typecheck
-
-      # Domain STRICT gate: tsc with strict flags over src/domain (+ the
-      # generation path) against a frozen baseline of allowed errors, so new
-      # strict violations can't sneak in. `npm run check` and the pre-push hook
-      # already run this; CI ran `typecheck` but NOT this, leaving a parity gap
-      # where a strict regression could land on master green. Closed here.
-      - name: Type check (domain strict)
-        run: npm run typecheck:domain:strict
-
-      # ESLint on the full src/ + tests + scripts, run with `--max-warnings 0`
-      # so a WARNING is now blocking too (not just errors) — a new stale-closure
-      # (react-hooks/exhaustive-deps) or accidental setState-in-effect can no
-      # longer slip through green. The tree is warning-clean; the few legitimate
-      # forward-looking-rule sites (data-load / debounce / reset effects) carry a
-      # co-located, justified eslint-disable rather than a blanket suppression.
-      - name: Lint
-        run: npm run lint
-
-      # Vitest: unit + property-based (fast-check) engine tests, domain +
-      # store + lib integration, component/UI smoke, a11y, security, and
-      # edge-function contract tests. The exact count grows every PR — see this
-      # step's log for the live total rather than a number that rots in a comment.
-      - name: Run tests
-        run: npm run test
-
-      # Production build — confirms Vite/Rollup chunking is healthy, the
-      # bundle still produces, and (via the vite.config onwarn guard) that
-      # no named import is missing/unresolved. This job's conclusion ("Validate,
-      # test, build") is a REQUIRED check for the Vercel deploy gate: the
-      # fail-closed ignoreCommand (scripts/vercel-ignore-build.mjs, wired in
-      # vercel.json) blocks any production/preview deploy unless this job — plus
-      # the e2e and deno-tests jobs — are green on the deploying commit. See
-      # docs/DEPLOY.md ("Gating production on CI") for the operator token setup.
-      - name: Build
-        run: npm run build
-
-      # Post-build verification: the vendor-pdf AND engine lazy-chunk contracts read
-      # the built dist/ graph (chunk isolation + size band + modulepreload filter). In
-      # the unit pass above dist/ doesn't exist yet, so both suites are `runIf(distExists)`
-      # and silently NO-OP — re-run them here AFTER the build with VERIFY_DIST=1, which
-      # turns a missing dist/ into a HARD failure so neither chunk contract can count
-      # green having verified nothing. (engineChunkLazy was previously omitted, so its
-      # own-chunk + size-band assertions had zero enforcement anywhere in CI.)
-      - name: Verify vendor-pdf + engine lazy chunks (post-build, anti-vacuity)
-        run: npx vitest run tests/build/vendorPdfLazy.test.js tests/build/engineChunkLazy.test.js
+  check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / test ratchet
+    runs-on: ubuntu-latest
+    # The ratchet executes the real ~710s full suite. Keep measured headroom for
+    # runner variance; a timeout is not a test verdict.
+    timeout-minutes: 30
+    env:
+      CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
+        postgresql://postgres:postgres@127.0.0.1:5432/postgres
+    services:
+      postgres:
+        image: postgres:17
         env:
-          VERIFY_DIST: '1'
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:ratchet
+
+  check-build:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / build and dist
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run verify:dist
+
+  check:
+    name: Validate, test, build
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [check-validation, check-types, check-lint, check-tests, check-build]
+    steps:
+      - name: Require every parallel gate group
+        env:
+          VALIDATION_RESULT: ${{ needs.check-validation.result }}
+          TYPES_RESULT: ${{ needs.check-types.result }}
+          LINT_RESULT: ${{ needs.check-lint.result }}
+          TESTS_RESULT: ${{ needs.check-tests.result }}
+          BUILD_RESULT: ${{ needs.check-build.result }}
+        run: |
+          for result in "$VALIDATION_RESULT" "$TYPES_RESULT" "$LINT_RESULT" "$TESTS_RESULT" "$BUILD_RESULT"; do
+            test "$result" = success || exit 1
+          done
 
   e2e:
     name: Chromium end-to-end
@@ -118,58 +142,121 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      # Install BOTH engines the e2e projects use. The `mobile-safari` project
+      # (playwright.config.js) is the iPhone 13 device profile, whose
+      # defaultBrowserType is WEBKIT — so the mobile-pointer-targets step below
+      # launches webkit, not chromium. Installing chromium alone (the prior bug)
+      # left that step trying to launch a browser that was never installed
+      # ("Executable doesn't exist … webkit"); the anti-vacuity guards below now
+      # also make an all-skipped mobile run a hard failure instead of green-on-
+      # nothing, so the missing engine can no longer hide.
       - name: Install Playwright browsers (chromium + webkit)
-        # webkit powers the mobile-safari project (iPhone 13 profile) used by
-        # the "Audit mobile pointer targets" step below — without it that step
-        # fails at browser launch ("Executable doesn't exist … webkit").
         run: npx playwright install --with-deps chromium webkit
 
-      # ANTI-VACUITY (review #1 trust fix): a required Playwright step counted
-      # GREEN while running ZERO assertions (the mobile spec's
-      # `test.skip(!isMobile)` guard means a renamed/typo'd project skips every
-      # test and Playwright still exits 0). This STATIC guard asserts each
-      # project resolves to >0 discovered specs BEFORE we run — a moved spec or a
-      # renamed project fails the job here instead of going green-on-nothing.
-      - name: Assert E2E projects discover specs (anti-vacuity, static)
-        run: |
-          node scripts/check-e2e-not-vacuous.mjs --project=chromium --projects chromium
-          node scripts/check-e2e-not-vacuous.mjs e2e/mobile-pointer-targets.spec.js --project=mobile-safari --projects mobile-safari
+      # Static anti-vacuity guard: prove the project actually enumerates specs
+      # BEFORE running (a renamed/typo'd project would list zero tests and exit 0).
+      - name: Guard chromium e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects chromium
 
       - name: Run Chromium E2E
-        # Emit a JSON report alongside the run (--reporter github,json keeps the
-        # readable GitHub annotations) so the RUNTIME anti-vacuity guard below can
-        # prove the run actually executed tests (not all-skipped).
         run: npx playwright test --project=chromium --reporter=github,json
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-chromium.json
 
-      # RUNTIME anti-vacuity guard: fail HARD if the chromium run executed 0 real
-      # tests (`expected:0`) — i.e. everything was skipped but Playwright exited
-      # 0. This is the ratchet that makes "green-on-nothing" impossible.
-      - name: Assert Chromium E2E executed tests (anti-vacuity, runtime)
+      # Runtime anti-vacuity guard: prove the run actually EXECUTED tests (not
+      # all-skipped-but-exit-0). Reads Playwright's JSON result.
+      - name: Guard chromium e2e executed (runtime)
         run: node scripts/check-e2e-not-vacuous.mjs --results playwright-chromium.json
 
+      - name: Guard mobile e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects mobile-safari
+
       - name: Audit mobile pointer targets
-        # Emit JSON so the runtime guard can confirm the mobile spec actually RAN
-        # under mobile-safari (isMobile=true) rather than being skipped — the
-        # exact failure the review pinned (the mobile check ran 0 specs).
         run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-mobile.json
 
-      - name: Assert mobile pointer-target audit executed tests (anti-vacuity, runtime)
+      - name: Guard mobile e2e executed (runtime)
         run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
+
+  performance:
+    name: Production-build browser performance
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the local-data production artifact
+        run: npm run build -- --mode e2e
+
+      - name: Guard performance discovery is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --config playwright.perf.config.js --projects performance-chromium,performance-mobile-chromium
+
+      - name: Measure desktop and lower-end mobile production profiles
+        run: npx playwright test --config playwright.perf.config.js --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-performance.json
+          SF_PERFORMANCE_RECEIPT: artifacts/performance/browser-synthetic.json
+
+      - name: Guard performance execution is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-performance.json
+
+      - name: Retain browser-performance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-performance-evidence
+          path: |
+            artifacts/performance/browser-synthetic.*.json
+            playwright-performance.json
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
 
   # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
   # The money-path trust boundaries (stripe-webhook signature verification; later
   # the generate-narrative refund decision) are RUN here against forged vs. signed
   # requests — the regex-over-source contracts in vitest can't prove behavior.
+  coverage-floors:
+    # Coverage floors for the money / security modules — a regression RATCHET
+    # on the highest-consequence files (spend/refund via aiSlice+creditsSlice,
+    # saves, checkout reconcile, credit ledger, stripe, pending dossier). Runs
+    # the suite under v8 coverage and fails if any floored file drops more than
+    # ~5pts below its measured baseline (floors in vite.config.js
+    # coverage.thresholds; a deleted money-path test is exactly the regression
+    # this catches). Parallel to `check` so the ratchet never doubles the
+    # critical path's wall-clock.
+    name: Coverage floors (money / security)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - name: Coverage floors
+        run: npm run test:coverage:floors
+
   deno-tests:
     name: Edge function execution tests (Deno)
     runs-on: ubuntu-latest
@@ -177,78 +264,305 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # `deno task check:edge` resolves a transitive `@types/node` type-reference
-      # carried by the esm.sh npm shims the money-path functions import (e.g.
-      # stripe). This is a Deno-only runner with no node_modules, so provide JUST
-      # that one type package — installed in isolation so we do NOT pull the whole
-      # app dependency tree (a full `npm ci`) merely to type-check 12 edge files.
-      # Verified locally: with only @types/node present, check:edge is green; deno
-      # resolves it from node_modules/. (Adopting package.json via deno's
-      # nodeModulesDir=none was rejected — it bloats deno.lock with the entire
-      # Node tree.)
+      # Deno resolves npm:@types/node from the repository's manual node_modules
+      # tree. Keep this an npm-ci install from the committed lockfile: relying on
+      # an incidental/transitive package or a developer's parent node_modules
+      # made the production type gate fail before it could check any source.
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: Provide @types/node for the edge type-check
-        run: |
-          npm install --no-save --prefix "$RUNNER_TEMP/types-node" @types/node@22
-          mkdir -p node_modules
-          cp -R "$RUNNER_TEMP/types-node/node_modules/." node_modules/
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install locked Node type dependencies
+        run: npm ci --ignore-scripts
 
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
 
-      # Type-check the money-path edge sources (deno check over the trust-boundary
-      # entrypoints + refund policy). This is BLOCKING: a type regression in
-      # stripe-webhook / create-checkout / generate-narrative refund logic must
-      # not ship. This is how the money-path PRODUCTION code gets type-checked in
-      # CI. (test:edge below still runs with --no-check until the edge *.test.ts
-      # mock clients are typed to satisfy the handler deps — see deno.json //gate.)
-      - name: Type check edge functions (Deno)
+      # This must remain a blocking step BEFORE the --no-check execution suite.
+      # test:edge's deliberately structural mocks cannot stand in for checking
+      # the production auth/money entrypoints and their transitive imports.
+      - name: Type-check edge-function production sources
         run: deno task check:edge
-
-      # Deno lint over the edge sources. Non-blocking for now (|| true) so a new
-      # lint rule can't wedge the gate, but the output is surfaced in the log so
-      # drift is visible. Promote to blocking once the edge tree lints clean.
-      - name: Lint edge functions (Deno — non-blocking)
-        run: deno task lint:edge || true
 
       - name: Run edge-function Deno tests
         run: deno task test:edge
 
-  # Retrigger the Vercel production deploy AFTER CI concludes. Vercel runs the
-  # fail-closed ignoreCommand (scripts/vercel-ignore-build.mjs) seconds after a
-  # push — CI (~10-15m) has never reported by then, so the push-triggered deploy
-  # is ALWAYS skipped with "required checks not yet reported", and Vercel does
-  # NOT re-evaluate on its own when CI later goes green: without a retrigger the
-  # auto-deploy is terminally skipped and only a manual dashboard Redeploy ships.
-  # This job closes that loop: on a master push, only after EVERY gating job
-  # succeeds (`needs` — a failed/cancelled dependency skips this job entirely),
-  # POST the Vercel Deploy Hook so a fresh deployment runs with CI now green and
-  # the gate PROCEEDS. OPT-IN and non-breaking: it no-ops (exit 0) unless the
-  # VERCEL_DEPLOY_HOOK_URL secret is set (create the hook in Vercel → Project →
-  # Settings → Git → Deploy Hooks, branch `master`; paste the URL into GitHub →
-  # repo Settings → Secrets and variables → Actions). Until then, deploys stay
-  # manual — nothing about the current workflow changes.
-  redeploy: # deploy-gate: optional (this job IS the deploy trigger — it cannot gate itself)
-    name: Trigger Vercel deploy (post-CI)
+  # ── Golden master under a hostile locale + timezone ──────────────────────────
+  # The `check` job runs the suite in CI's default C.UTF-8/UTC environment — the
+  # same class of environment the golden manifest was captured in, so a locale-
+  # dependent formatting or collation leak (toLocaleString rendering `8000` as
+  # "8.000", ICU collation reordering a sort) can sit green there forever and
+  # still break same-seed replay on a user's machine. This leg re-runs ONLY the
+  # golden/determinism suites (cheap — seconds of test time, not the full gate)
+  # under tr_TR.UTF-8 (the Turkish-I locale that breaks the most latent i18n
+  # assumptions; Node's ICU reads LANG/LC_ALL directly, so no locale-gen setup
+  # is needed) and a non-UTC, odd-offset timezone (Chatham, +12:45/+13:45). If
+  # any hash in the 155-config manifest depends on the host locale or clock,
+  # this job reds while `check` stays green — the exact leak the eslint
+  # locale-formatting ban and tests/lint/localeFormatGuard.test.js guard at
+  # edit time, proven end-to-end here.
+  determinism-hostile-locale:
+    name: Golden master under tr_TR + Chatham TZ
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      LANG: tr_TR.UTF-8
+      LC_ALL: tr_TR.UTF-8
+      TZ: Pacific/Chatham
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Golden + determinism suites (hostile locale/TZ)
+        run: >
+          npx vitest run
+          tests/property/generatorGoldenMaster.test.js
+          tests/pdf/goldenViewModel.test.js
+          tests/domain/determinismLeaks.test.js
+          tests/generators/customContentDeterminism.test.js
+          tests/domain/formatNumber.test.js
+          tests/kernel/rngContextFailClosed.test.js
+          tests/lint/localeFormatGuard.test.js
+          tests/lint/localeCompareGuard.test.js
+
+  # ── Enforcement-spine mutation sweep (opt-in) ───────────────────────────────
+  # Injects a deliberate regression per enforced invariant and asserts the gate
+  # catches each one (scripts/mutation-sweep.sh). It runs a gate step PER mutation
+  # (slow), so it is kept OFF the per-push/PR hot path: only the weekly cron and a
+  # manual workflow_dispatch trigger it. The fresh checkout is clean, so the
+  # script's dirty-tree guard is a no-op here; a MISSED regression (a gate that
+  # stayed green under a planted bug) exits nonzero and fails this job.
+  mutation-sweep:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Enforcement mutation sweep (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run mutation sweep
+        run: bash scripts/mutation-sweep.sh
+
+  # ── Religion-balance soak lane (opt-in) ─────────────────────────────────────
+  # The scripts/audit/religion-*.mjs probes drive the faith subsystem across many
+  # seeded trials (patron-contest hold rates, schism drift, divine-mandate → coup
+  # coupling, growth↔legitimacy balance) and emit distribution tables the owner
+  # reads when TUNING the constants. THESE THREE religion probes are DIAGNOSTIC:
+  # they log surfaces and never assert a threshold, so they exit 0 by design — this
+  # lane produces log artifacts for human review, it is not a pass/fail gate (a
+  # balance drift shows up as a shifted distribution in the log, not a red build).
+  # NB (scripts-build-ci-3): "diagnostic-only" is NOT the framing for the whole soak
+  # surface — the separate `world-soak` lane below runs whole-world-soak.mjs, a
+  # genuine PASS/FAIL watchdog (composed-kernel same-seed byte-identity + population/
+  # cost envelopes, `process.exit(failures.length ? 1 : 0)`). Kept OFF the
+  # per-push/PR hot path (each soak runs thousands of seeded pulse ticks) — only
+  # the weekly cron and a manual workflow_dispatch trigger it, exactly like the
+  # mutation sweep above.
+  #
+  # Approx runtime at the iteration counts below (ubuntu-latest, in-memory, no I/O):
+  #   religion-balance     (--seeds 300 --ticks 80)  ~5-10s   (pure domain fns)
+  #   religion-soak        (--seeds 40  --ticks 60)  ~10-30s  (advanceReligionStates)
+  #   religion-coup-soak   (--seeds 10  --ticks 100) ~1-3min  (3k full-kernel pulses)
+  # The 20-minute timeout is generous headroom over the ~4-minute total.
+  religion-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Religion balance soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Religion balance surfaces
+        run: node scripts/audit/religion-balance.mjs --seeds 300 --ticks 80
+
+      - name: Religion live-loop soak
+        run: node scripts/audit/religion-soak.mjs --seeds 40 --ticks 60
+
+      - name: Divine-mandate → coup coupling soak
+        run: node scripts/audit/religion-coup-soak.mjs --seeds 10 --ticks 100
+
+  # ── Generation semantic certification (opt-in, assertive) ───────────────────
+  # The ordinary test suite keeps a small named generation cohort on the hot
+  # path. This weekly/manual lane crosses the complete live tier, culture,
+  # terrain, route, threat, content-profile, and magic vocabularies at larger
+  # scale. It fails on `needs_review`, receipt findings, broken final-dossier
+  # references, percentage-conservation errors, non-finite values, missing
+  # dimension coverage, or same-seed replay drift. Unlike the exploratory
+  # simulate-generations report, this is a real pass/fail contract.
+  generation-certification:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Generation semantic certification (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Certify 1,200 generated settlements
+        run: >
+          npm run certify:generation --
+          --count 1200
+          --output artifacts/generation/certification.json
+
+      - name: Upload generation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-certification-${{ github.sha }}
+          path: artifacts/generation/certification.json
+          if-no-files-found: error
+          retention-days: 90
+
+  # ── Whole-world soak lane (opt-in) — composed-kernel + scale evidence ────────
+  # The weekly profile runs the same assertive composed soak at 4, 12, 24, and
+  # 30 settlements for 30 years. Each cell repeats the primary seed byte-for-byte
+  # and also runs a divergent seed. The wrapper binds receipts to both HEAD and a
+  # working-tree source fingerprint, so evidence from a dirty manual run cannot
+  # masquerade as evidence for the commit alone.
+  #
+  # The five wave soaks (cause-lifecycle / conquest-market / war-cluster /
+  # institution-ecology / religion-plane) run alongside as DIAGNOSTIC log-artifact
+  # steps — they have no process.exit, only log distribution tables for human review
+  # (same contract as the religion probes above), so they never gate this job; only
+  # the whole-world watchdog does. Kept OFF the per-push/PR hot path — weekly cron +
+  # manual workflow_dispatch only, like the mutation sweep and religion lanes.
+  #
+  # This is intentionally not a deploy gate. Release certification uses the
+  # larger manual `npm run soak:release` matrix; the 300-year attractor study is
+  # a separate research profile. See docs/SOAK_PLAN_R2.md.
+  world-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Whole-world soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Thirty-year realm-scale matrix (PASS/FAIL)
+        run: npm run soak:weekly -- --output artifacts/soak/weekly.json
+
+      # DIAGNOSTIC log-artifact steps (no process.exit — they only print tables).
+      - name: Cause-lifecycle soak surfaces
+        run: node scripts/audit/cause-lifecycle-soak.mjs
+
+      - name: Conquest-market soak surfaces
+        run: node scripts/audit/conquest-market-soak.mjs
+
+      - name: War-cluster soak surfaces
+        run: node scripts/audit/war-cluster-soak.mjs
+
+      - name: Institution-ecology soak surfaces
+        run: node scripts/audit/institution-ecology-soak.mjs
+
+      - name: Religion-plane soak surfaces
+        run: node scripts/audit/religion-plane-soak.mjs --seeds 24 --ticks 120
+
+      - name: Upload commit-bound soak evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: realm-scale-evidence-${{ github.sha }}
+          path: artifacts/soak/
+          if-no-files-found: warn
+          retention-days: 90
+
+  # ── Production deploy gated on the full green gate (finding F35) ─────────────
+  # "The gate is the product": production must advance only through CI. This job
+  # runs ONLY after every required code/browser/performance/Deno gate passes,
+  # ONLY on master. It is a safe
+  # no-op until the operator finishes the dashboard half — set the VERCEL_TOKEN
+  # secret AND turn OFF Vercel's push auto-deploy (see docs/DEPLOY.md). Until
+  # then it logs and skips (green), so adding it can't break the current flow;
+  # once configured, CI becomes the ONLY path to production.
+  deploy:  # deploy-gate: optional — this job IS the deploy action, not a gate on it
+    name: Deploy to production (gated)
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve deploy readiness
+        id: guard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN not set — skipping CI deploy. Vercel push auto-deploy (if still enabled) handles production. See docs/DEPLOY.md to make CI the only path."
+          fi
+      - name: Deploy to Vercel (production)
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
+
+  # ── Post-CI Vercel Deploy-Hook retrigger (composes with the fail-closed gate) ──
+  # The vercel.json `ignoreCommand` (scripts/vercel-ignore-build.mjs) is fail-
+  # CLOSED: a push-triggered Vercel build runs seconds after the push, long before
+  # CI can report, so that build is ALWAYS skipped ("checks not yet reported") and
+  # Vercel never re-evaluates on its own. This job closes the loop: on a master
+  # push, AFTER the same gating jobs the CI-native `deploy` job needs, it POSTs the
+  # Vercel Deploy Hook so a FRESH deployment runs with CI now green and the gate
+  # PROCEEDS. Opt-in via the VERCEL_DEPLOY_HOOK_URL secret — a no-op when unset, so
+  # nothing regresses for an operator who redeploys manually. This is the "Vercel-
+  # drives-the-deploy" half; the `deploy` job above is the "CI-drives-the-deploy"
+  # half — defense-in-depth, and either can ship once its secret is configured.
+  redeploy:  # deploy-gate: optional — the retrigger runs AFTER the gates; it must not gate itself
+    name: Retrigger Vercel deploy (post-CI)
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [check, e2e, deno-tests]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - name: POST the Vercel Deploy Hook (no-op unless the secret is set)
+      - name: POST the Vercel Deploy Hook (opt-in; no-op when the secret is unset)
         env:
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: |
           if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
-            echo "VERCEL_DEPLOY_HOOK_URL secret not set — skipping the auto-redeploy (deploys remain manual)."
+            echo "VERCEL_DEPLOY_HOOK_URL not set — skipping redeploy hook (manual/dashboard redeploy still works)."
             exit 0
           fi
-          # The hook deploys the branch HEAD, which may have advanced past this
-          # commit. That is safe: the ignoreCommand re-verifies the required
-          # checks on whatever commit actually builds, so a red HEAD still
-          # cannot ship — and the newer commit's own CI run fires its own hook.
-          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL" -o /dev/null
-          echo "Vercel deploy hook triggered for master."
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"

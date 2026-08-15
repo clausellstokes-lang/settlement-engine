@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { computeAllyRelief, resolveSiegeVerdict } from '../../src/domain/worldPulse/warDeployment.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * Ally defense P3 (flag-gated, default OFF): a besieged town's allied/vassal/patron

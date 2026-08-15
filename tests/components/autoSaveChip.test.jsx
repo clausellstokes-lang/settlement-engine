@@ -80,6 +80,19 @@ describe('AutoSaveChip', () => {
     expect(screen.getByText(/Saved 5 min ago/)).toBeTruthy();
   });
 
+  it('resolves a numeric campaign row from the string id emitted by the picker', () => {
+    const savedAt = new Date(NOW - 5 * 60_000).toISOString();
+    const mapState = { savedAt, placements: {}, labels: [], markers: [], forests: [] };
+    useStore.__set({
+      activeCampaignId: '42',
+      campaigns: [{ id: 42, mapState }],
+      mapState,
+    });
+
+    render(<AutoSaveChip />);
+    expect(screen.getByText(/Saved 5 min ago/)).toBeTruthy();
+  });
+
   it('renders "Unsaved changes" when placements diverge', () => {
     const savedAt = new Date(NOW - 60_000).toISOString();
     useStore.__set({

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-domain-strict.mjs — strict-typecheck ratchet for the domain kernel.
+ * check-domain-strict.mjs — A+ domain.7 strict-typecheck ratchet.
  *
  * The domain is the pure kernel every other layer trusts and the layer best
  * positioned to be strict. Turning strict + noImplicitAny ON over src/domain
@@ -15,6 +15,17 @@
  * — exact-set governance + a ceiling that only ratchets down.
  *
  * Wired into `npm run check` via `npm run typecheck:domain:strict`.
+ *
+ * ⚠ THIS IS THE SECOND OF TWO TYPECHECKERS IN THE CHAIN. Step 9 is
+ * `typecheck:ratchet` over `tsconfig.full.json`; this is step 10 over
+ * `tsconfig.domain-strict.json`. THEY DISAGREE. A typecheck figure quoted without
+ * naming its config reads as total and is not: the 2026-08-06 idiom sweep
+ * (eca65c8a -> 1977db07) introduced 0 rows under the full config and 31 under this
+ * one, and two of those 31 crossed a per-file ceiling and reddened this step — in a
+ * file (peaceTerms.js) that appears in NO commit of that sweep, because JSDoc added
+ * elsewhere narrows inferred types that flow into files nobody opened.
+ * See CONTRIBUTING.md, "THE TWO-TYPECHECKER RECEIPT LAW", before quoting any
+ * introduced/removed count from either checker.
  */
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -22,92 +33,109 @@ import path from 'node:path';
 import url from 'node:url';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
-// DOMAIN_STRICT_BASELINE overrides the baseline path so the ratchet semantics
-// (esp. the --update lower-only contract) are testable against a temp file
-// without clobbering the committed baseline — same testability rationale as the
-// DOMAIN_STRICT_TSC_CMD override below.
+// DOMAIN_STRICT_BASELINE / DOMAIN_STRICT_TSC_CMD are TESTABILITY seams (ported
+// master fix): the fail-closed meta-test injects a fake tsc + temp baseline so
+// the failure paths are exercisable without breaking the real toolchain.
 const BASELINE = process.env.DOMAIN_STRICT_BASELINE || path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
 const UPDATE = process.argv.includes('--update');
 
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
 // we parse stdout regardless, so don't let execSync throw on that.
-//
-// But a non-zero exit means two very different things: tsc RAN and found type
-// errors (normal — parse them), or tsc FAILED TO RUN (bad config, missing
-// binary, OOM). The catch folds stdout+stderr into one string either way, and a
-// failed-to-run tsc emits no parseable `error TSxxxx` lines — so the count comes
-// out empty, reads as "no regressions", and greens the gate on a broken
-// typecheck. We must tell the two apart and fail CLOSED on execution failure.
-// The TSCMD override exists so the failure path is testable without breaking tsc.
-const TSCMD = process.env.DOMAIN_STRICT_TSC_CMD || 'npx tsc --noEmit -p tsconfig.domain-strict.json';
 let out;
-let tscRan = true; // exit 0 ⇒ tsc ran clean
+let tscExitedNonZero = false;
 try {
-  out = execSync(TSCMD, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  out = execSync(process.env.DOMAIN_STRICT_TSC_CMD || 'npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 } catch (e) {
+  tscExitedNonZero = true;
   out = `${e.stdout || ''}${e.stderr || ''}`;
-  // tsc ran iff its output carries at least one recognizable diagnostic line.
-  // No `error TS` line on a non-zero exit ⇒ tsc never produced a typecheck.
-  tscRan = /error TS\d+:/.test(out);
-}
-
-if (!tscRan) {
-  console.error('[domain-strict] tsc failed to run (no parseable diagnostics) — failing closed; this is NOT a clean typecheck.');
-  console.error(out.trim().slice(0, 2000) || '(no output captured)');
-  process.exit(2);
-}
-
-// tscRan is necessary but not sufficient: config-load failures ALSO print
-// `error TSxxxx:` lines (TS18003 "no inputs found", TS5083 "cannot read file",
-// tsconfig syntax errors located in the .json itself) — so they pass the sniff
-// above, yet no source file was ever typechecked, the per-file count comes out
-// 0, and the gate would green on nothing. Classify every diagnostic: a REAL
-// typecheck diagnostic is located in a source file (`file(line,col): error TS`
-// where file is not a .json config). Any other `error TS` line is a
-// config-level failure ⇒ the typecheck did not run over the domain ⇒ fail
-// CLOSED, same as a tsc that never started.
-const FILE_DIAG = /^(.+?)\((\d+),(\d+)\): error TS\d+/;
-const configErrors = [];
-for (const raw of out.split('\n')) {
-  const line = raw.trim();
-  if (!/error TS\d+:/.test(line)) continue;
-  const m = FILE_DIAG.exec(line);
-  if (!m || m[1].endsWith('.json')) configErrors.push(line);
-}
-if (configErrors.length) {
-  console.error('[domain-strict] tsc reported config-level errors — the strict typecheck never ran over the domain; failing closed; this is NOT a clean typecheck.');
-  console.error(configErrors.slice(0, 20).join('\n'));
-  process.exit(2);
 }
 
 // Count errors per src/domain file (ignore import-followed errors outside the
 // domain — those belong to the non-strict full typecheck, not this scope).
+// SS4 hardening: the old RE only matched cwd-relative forward-slash paths, so a
+// tsc emitting absolute or backslash paths would parse to 0 domain errors while
+// located diagnostics elsewhere kept the fail-closed sentinel quiet — a silent
+// green. Match the src/domain segment anywhere in the located path and
+// normalize, so path-format drift cannot zero the count.
 const counts = {};
-const RE = /^(src\/domain\/[^(]+\.js)\((\d+),(\d+)\): error TS/;
+const RE = /(?:^|[\\/])(src[\\/]domain[\\/][^(]+\.js)\((\d+),(\d+)\): error TS/;
 for (const line of out.split('\n')) {
   const m = RE.exec(line.trim());
   if (!m) continue;
-  counts[m[1]] = (counts[m[1]] || 0) + 1;
+  const file = m[1].split('\\').join('/');
+  counts[file] = (counts[file] || 0) + 1;
 }
 const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-if (UPDATE) {
-  // A ratchet only TIGHTENS. `--update` re-baselines after a burn-down, so the
-  // new ceiling may only stay equal or drop — never RISE. Writing a higher total
-  // here would silently widen the allowance (the exact thing the gate forbids on
-  // a normal run), turning the re-baseline into a debt-laundering backdoor. So
-  // refuse to raise: if a baseline exists, the new total must be ≤ the old one.
-  if (fs.existsSync(BASELINE)) {
-    const prev = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
-    if (typeof prev.total === 'number' && total > prev.total) {
-      console.error(
-        `[domain-strict] refusing to RAISE the ceiling: new total ${total} > baseline ${prev.total}. ` +
-          `--update may only LOWER the ratchet (the debt can shrink, never grow). ` +
-          `Fix or annotate the +${total - prev.total} new strict error(s) instead of widening the baseline.`,
-      );
-      process.exit(1);
-    }
+// ── Anti-vacuity sentinel ([build-tooling-docs-3]) — "tsc actually ran" ──────
+// tsc exits non-zero for BOTH "found type errors" and "could not run at all"
+// (a renamed/deleted tsconfig.domain-strict.json, a broken typescript install, an
+// OOM-killed run). The per-file RE above only matches `src/domain/…: error TS`
+// diagnostics, so a run that never typechecked the domain parses to total=0 and
+// would read as "✓ no strict-type regressions" → exit 0 — the exact green-on-
+// nothing this ratchet exists to prevent. Distinguish "ran clean" from "did not
+// run": if tsc exited non-zero yet produced ZERO domain diagnostics, and its
+// output is either empty (binary/tsc missing) or carries a GLOBAL diagnostic —
+// an `error TS…` with no `file(line,col):` prefix (TS5058 path-not-found, TS6053
+// file-not-found, TS18003 no-inputs, module-resolution config failures) — the
+// typecheck did not happen. Fail loudly. Guards both the check and the --update
+// re-baseline (never write a 0-error baseline from a broken run).
+const globalDiagnostics = out
+  .split('\n')
+  .map((l) => l.trim())
+  .filter((l) => /^error TS\d+:/.test(l));
+// HOLE CLOSED (master merge W6): the old condition let a failed-to-run tsc with
+// NON-empty, non-TS-diagnostic output ("Cannot find module typescript") slip
+// through to exit 0. The discriminator is a FILE-LOCATED diagnostic
+// (`file(line,col): error TS`) anywhere in the output: its presence proves tsc
+// actually typechecked source (even outside the domain scope — the normal
+// ratchet path handles those). Zero located diagnostics on a non-zero exit is
+// either a global/config-load failure (TS18003 etc., the globalDiagnostics
+// below) or a failed-to-run — both fail closed.
+// A diagnostic LOCATED IN a .json config (TS5083 / tsconfig syntax errors) is
+// still a config-load failure, not a typecheck — only source-file locations
+// prove the domain was checked.
+const locatedDiagnostics = out
+  .split('\n')
+  .filter((l) => /^[^\s(][^(]*\(\d+,\d+\): error TS\d+:/.test(l.trim()))
+  .filter((l) => !/\.json\(\d+,\d+\):/.test(l.trim()));
+if (tscExitedNonZero && locatedDiagnostics.length === 0) {
+  console.error('[domain-strict] tsc failed to run against the domain (non-zero exit, zero domain diagnostics parsed) — failing closed; this ratchet verified NOTHING, not "0 errors":');
+  console.error(
+    globalDiagnostics.length
+      ? globalDiagnostics.map((l) => `  ${l}`).join('\n')
+      : `  ${(out.trim().slice(0, 2000)) || '(no tsc output at all — is typescript installed? is tsconfig.domain-strict.json present?)'}`,
+  );
+  console.error('\nA broken-toolchain vacuous pass is not a clean typecheck. Fix the config/install; do not ignore.');
+  process.exit(1);
+}
+
+// ── Scope sentinel (SS4) — "the DOMAIN was actually in the compilation" ──────
+// The fail-closed guard above proves tsc RAN; it cannot prove tsc ran OVER
+// src/domain. If tsconfig.json's include (which tsconfig.domain-strict.json
+// inherits) is narrowed away from the domain, tsc checks something else, any
+// located diagnostic suppresses the fail-closed path, the src/domain regex
+// matches nothing, and total=0 reads as a clean ratchet — the domain kernel
+// silently loses its strict gate. `--listFilesOnly` resolves the file set from
+// the SAME config without typechecking (cheap) and must name the domain.
+// Skipped when DOMAIN_STRICT_TSC_CMD injects a fake tsc (the fail-closed
+// meta-test seam); the static include pin in tests/lint/domainStrictBaseline
+// covers the config shape there.
+if (!process.env.DOMAIN_STRICT_TSC_CMD) {
+  let listed;
+  try {
+    listed = execSync('npx tsc -p tsconfig.domain-strict.json --listFilesOnly', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    listed = `${e.stdout || ''}`;
   }
+  if (!/[\\/]src[\\/]domain[\\/]/.test(String(listed || ''))) {
+    console.error('[domain-strict] scope sentinel: tsc\'s resolved file set contains NO src/domain file — the strict ratchet is no longer checking the domain kernel.');
+    console.error('Check tsconfig.domain-strict.json / tsconfig.json include+exclude; a narrowed include makes this ratchet vacuously green.');
+    process.exit(1);
+  }
+}
+
+if (UPDATE) {
   const sorted = Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
   fs.writeFileSync(BASELINE, `${JSON.stringify({ total, files: sorted }, null, 2)}\n`);
   console.log(`[domain-strict] baseline updated: ${total} errors across ${Object.keys(counts).length} files.`);

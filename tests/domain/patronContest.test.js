@@ -6,7 +6,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { resolvePatronContest, patronContestOdds, patronNicheContested, RELIGION_TUNING } from '../../src/domain/worldPulse/religionState.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const ref = (x) => `custom:lu_${x.toLowerCase()}`;
 const dEntry = (name, niche, share, legitimacy, standing = 'cult') => ({

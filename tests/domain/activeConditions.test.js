@@ -147,6 +147,29 @@ describe('deriveActiveCondition()', () => {
     expect(c2.id).toBe(c1.id);
   });
 
+  it('drops unsupported spatial-target aliases from the canonical shape', () => {
+    const aliases = {
+      districtId: 'district.one',
+      targetDistrictId: 'district.two',
+      districtIds: ['district.three'],
+      targetDistrictIds: ['district.four'],
+      buildingId: 'building.one',
+      targetBuildingId: 'building.two',
+      anchorKey: 'anchor.one',
+      buildingIds: ['building.three'],
+      targetBuildingIds: ['building.four'],
+      anchorKeys: ['anchor.two'],
+    };
+    const c = deriveActiveCondition({ archetype: 'abandonment', ...aliases });
+    // LIVENESS ANCHOR: deriveActiveCondition returns null for input it rejects, and a
+    // negative property assertion against null passes — so without these pins the loop
+    // below would read a total rejection as a successful alias strip.
+    expect(c).toMatchObject({ archetype: 'abandonment' });
+    expect(c).toHaveProperty('severityBand');
+    // anchored: `c` is proven to be a derived canonical condition by the two pins above
+    for (const key of Object.keys(aliases)) expect(c).not.toHaveProperty(key);
+  });
+
   it('returns null for nullish input', () => {
     expect(deriveActiveCondition(null)).toBeNull();
     expect(deriveActiveCondition('plague')).toBeNull();
@@ -348,10 +371,13 @@ describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
     expect(sev(tick(s0))).toBe(0.5);
   });
 
-  it('a no-status condition holds severity — canonical defaulting must not invent motion', () => {
-    // Raw partial, never derived: no status written. Plague's template
-    // defaults to 'worsening', so this pins that the drift reads the
-    // status as written, not the canonical default.
+  it('[domain-top-state-1] a no-status condition holds severity flat across TWO ticks — canonical defaulting must not invent motion', () => {
+    // Raw partial, never derived: no status written. Plague's template defaults to
+    // 'worsening'. Before the fix the FIRST tick wrote the canonical 'worsening'
+    // back onto the condition, and the SECOND tick read that written direction and
+    // climbed +0.04 — inventing motion the condition never claimed. The drift must
+    // leave a directionless condition flat forever, so the written status must NOT
+    // be canonicalized to a directional default. (Old code failed the second tick.)
     const s0 = { activeConditions: [{
       archetype: 'plague', severity: 0.6,
       duration: { elapsedTicks: 0, expiresAtTicks: 12 },
@@ -359,34 +385,22 @@ describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
     const s1 = tick(s0);
     expect(sev(s1)).toBe(0.6);
     expect(s1.activeConditions[0].duration.elapsedTicks).toBe(1);
+    // the written status is not a directional default that would drift next tick
+    expect(s1.activeConditions[0].status).not.toBe('worsening');
+    const s2 = tick(s1);
+    expect(sev(s2)).toBe(0.6);
   });
 
-  it("a legacy 'active' status holds severity — flat is correct for non-directional statuses", () => {
+  it("[domain-top-state-1] a legacy 'active' status holds severity flat across TWO ticks — flat is correct for non-directional statuses", () => {
     const s0 = { activeConditions: [{
       archetype: 'plague', severity: 0.6, status: 'active',
       duration: { elapsedTicks: 0, expiresAtTicks: 12 },
     }] };
-    expect(sev(tick(s0))).toBe(0.6);
-  });
-
-  it('an undirected condition holds severity ACROSS ticks — the persisted status must not re-drift', () => {
-    // Regression: the drift correctly read the RAW status (undirected → 0),
-    // but the returned condition used to persist canonical.status (plague's
-    // template default 'worsening'), so from tick 2 onward severity climbed —
-    // the invented motion, merely delayed one tick. Persist a drift-neutral
-    // status instead so the flat promise holds every tick.
-    const s0 = { activeConditions: [{
-      archetype: 'plague', severity: 0.6,
-      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
-    }] };
     const s1 = tick(s0);
-    const s2 = tick(s1);
-    const s3 = tick(s2);
     expect(sev(s1)).toBe(0.6);
-    expect(sev(s2)).toBe(0.6);
-    expect(sev(s3)).toBe(0.6);
-    // And the persisted status is drift-neutral, not the template default.
-    expect(s1.activeConditions[0].status).toBe('stable');
+    // the legacy status is preserved, not rewritten to the directional default
+    expect(s1.activeConditions[0].status).not.toBe('worsening');
+    expect(sev(tick(s1))).toBe(0.6);
   });
 
   it('drift scales with the interval (week 0.25x, year 6x)', () => {

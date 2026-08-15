@@ -35,7 +35,6 @@ export default function ControlsStrip({
       padding: '8px 12px', background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       display: 'flex', flexDirection: 'column', gap: 6,
       position: 'sticky', top: 0, zIndex: 10,
-      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
     }}>
       {/* Search + action buttons */}
       <div style={{ display: 'flex', gap: 5, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -45,7 +44,7 @@ export default function ControlsStrip({
             onChange={e => setSearch(e.target.value)}
             placeholder={placeholder}
             aria-label={placeholder}
-            style={{ width: '100%', padding: '5px 24px 5px 8px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
+            style={{ width: '100%', padding: '5px 24px 5px 8px', border: `1px solid ${BORDER}`, fontSize: FS['11.5'], background: swatch['#FAF8F4'], color: INK, boxSizing: 'border-box', fontFamily: sans }}
           />
           {search && (
             <span style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', display: 'inline-flex' }}>
@@ -82,7 +81,7 @@ export default function ControlsStrip({
         ))}
         {extraStats}
         {tier === 'all' && (
-          <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.info, background: swatch['#E8ECFF'], borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.info, background: swatch['#E8ECFF'], padding: '1px 6px', letterSpacing: '0.04em' }}>
             All tiers
           </span>
         )}

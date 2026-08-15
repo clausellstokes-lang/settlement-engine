@@ -1,7 +1,7 @@
 /**
  * AccountSecuritySection.jsx — "Login & Security" section of the Account page.
  *
- * The headline Phase A2 gap. Self-contained (owns its own local state and calls
+ * The headline account gap. Self-contained (owns its own local state and calls
  * the auth service directly) so AccountPage stays a thin composition root.
  *
  * Covers:
@@ -17,16 +17,13 @@
  *     ready structure; not implemented.
  */
 import { useEffect, useState } from 'react';
-import {
-  KeyRound, Link2, Unlink, Check,
-} from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
-  DANGER_BORDER, SUCCESS_BORDER, TINT_GOLD,
-} from '../theme.js';
+  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, FS, swatch } from '../theme.js';
+import { TINT_GOLD } from './accountTheme.js';
 import Section from './AccountSection.jsx';
 import Pill from '../primitives/Pill.jsx';
 
@@ -36,17 +33,27 @@ const LINKABLE = [
   { provider: 'discord', label: 'Discord' },
 ];
 
+/** Format an ISO signed-in-at into a coarse local label (null when unparseable). */
+function formatSignedInAt(iso) {
+  if (!iso) return null;
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  } catch { return null; }
+}
+
 function fieldStyle() {
   return {
     padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`,
-    borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK,
+    fontSize: FS.sm, fontFamily: sans, color: INK,
     boxSizing: 'border-box', width: '100%',
   };
 }
 
 function ErrorBanner({ children }) {
   return (
-    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', fontSize: FS.sm, color: swatch.danger }}>
       {children}
     </div>
   );
@@ -54,7 +61,7 @@ function ErrorBanner({ children }) {
 
 function OkBanner({ children }) {
   return (
-    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', fontSize: FS.sm, color: swatch.success }}>
       {children}
     </div>
   );
@@ -94,6 +101,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   // ── Sign out everywhere ───────────────────────────────────────────────────
   const [globalBusy, setGlobalBusy] = useState(false);
 
+  // ── Active session (§7.4, M-9e) ───────────────────────────────────────────
+  // The current device + signed-in-at, read from current_account_session (owner-SELECT
+  // RLS, 161). Lazy import of fetchActiveSession DIRECTLY — no eager auth.js wrapper
+  // (this panel is already on the lazy account route). Fails closed to null.
+  const [activeSession, setActiveSession] = useState(null); // {deviceLabel, signedInAt} | null
+  const [deviceFallback, setDeviceFallback] = useState(null);
+
   useEffect(() => {
     let alive = true;
     authService.getIdentities().then((list) => {
@@ -102,19 +116,32 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
     return () => { alive = false; };
   }, []);
 
+  useEffect(() => {
+    let alive = true;
+    import('../../lib/authSecurity.js')
+      .then(async ({ fetchActiveSession, sessionDeviceLabel }) => {
+        const s = await fetchActiveSession();
+        if (!alive) return;
+        setActiveSession(s);
+        try { setDeviceFallback(sessionDeviceLabel()); } catch { /* ignore */ }
+      })
+      .catch(() => { if (alive) setActiveSession(null); });
+    return () => { alive = false; };
+  }, []);
+
   const handleChangePassword = async () => {
     setPwError(null);
     setPwDone(false);
     if (!currentPw || !newPw) {
-      setPwError('Enter your current and new password.');
+      setPwError(t('errors.pwEnterBoth'));
       return;
     }
     if (newPw.length < 8) {
-      setPwError('Your new password must be at least 8 characters.');
+      setPwError(t('errors.pwTooShort'));
       return;
     }
     if (newPw !== confirmPw) {
-      setPwError('The new passwords do not match.');
+      setPwError(t('errors.pwMismatch'));
       return;
     }
     setPwBusy(true);
@@ -231,7 +258,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 autoComplete="new-password" style={fieldStyle()}
               />
               <div style={{ display: 'flex', gap: SP.sm }}>
-                <Button variant="primary" size="md" busy={pwBusy} onClick={handleChangePassword} icon={<Check size={14} />}>
+                <Button variant="primary" size="md" busy={pwBusy} onClick={handleChangePassword}>
                   Update password
                 </Button>
                 <Button variant="ghost" size="md" disabled={pwBusy} onClick={() => { setPwOpen(false); setPwError(null); setCurrentPw(''); setNewPw(''); setConfirmPw(''); }}>
@@ -274,14 +301,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                           variant="ghost" size="md" busy={busy}
                           disabled={onlyOneIdentity}
                           title={onlyOneIdentity ? 'You must keep at least one method connected' : undefined}
-                          icon={<Unlink size={13} />}
-                          onClick={() => handleUnlink(linked)}
+                                  onClick={() => handleUnlink(linked)}
                         >
                           Unlink
                         </Button>
                       </>
                     ) : (
-                      <Button variant="secondary" size="md" busy={busy} icon={<Link2 size={13} />} onClick={() => handleLink(provider)}>
+                      <Button variant="secondary" size="md" busy={busy} onClick={() => handleLink(provider)}>
                         Link
                       </Button>
                     )}
@@ -315,16 +341,23 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
           </div>
         </div>
 
-        {/* ── Sign out everywhere ───────────────────────────────────────── */}
+        {/* ── Active session + sign out everywhere (§7.4, M-9e) ──────────── */}
         <div>
           <div style={actionRow}>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sign out everywhere</div>
+              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Active session</div>
+              <div style={{ fontSize: FS.sm, color: INK, marginTop: 2, lineHeight: 1.45 }}>
+                {activeSession?.deviceLabel || deviceFallback || 'This device'}
+                {formatSignedInAt(activeSession?.signedInAt)
+                  ? <span style={{ color: BODY }}> · signed in {formatSignedInAt(activeSession?.signedInAt)}</span>
+                  : null}
+              </div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-                Sign out of every device and browser. Use this if you have lost a device.
+                Your account allows one active session at a time. Signing in on another device
+                signs this one out. Lost a device? Sign out everywhere to revoke every session.
               </div>
             </div>
-            <Button variant="secondary" size="md" busy={globalBusy} icon={<KeyRound size={13} />} onClick={handleSignOutEverywhere}>
+            <Button variant="secondary" size="md" busy={globalBusy} onClick={handleSignOutEverywhere}>
               Sign out all
             </Button>
           </div>

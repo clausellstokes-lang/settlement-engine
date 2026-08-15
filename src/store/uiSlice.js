@@ -7,129 +7,58 @@
  * dumped back into whatever overlay they happened to leave open.
  *
  * Keys in use:
- *   tableViewOpen — when true, the phone-optimized Table View
+ *   tableViewOpen — P142 / D-6. When true, the phone-optimized Table View
  *                   overlay is shown over the dossier. Set true by the
  *                   "Open in Table View" button in SummaryTabV2 (routed via
  *                   OutputContainer) and back to false by the close
  *                   affordance inside TableView.
- *   detailLevel   — the reading-depth "altitude" axis ('guided' | 'standard' |
- *                   'expert' ↔ Overview / Detail / Engine) the dossier engine
- *                   sections (EngineSections, WarFaithSection) read to decide how
- *                   much depth to show. Defaults to 'standard'. The global dossier
- *                   toggle was removed; the Substrate tab now owns a local control.
- *                   IS persisted (returning power users keep their depth) — see the
- *                   `userPrefs.detailLevel` line in store/index.js partialize.
  *
  * The generic setUserPref(key, value) shape matches the call site the
  * Summary tab already speaks — `setUserPref('tableViewOpen', true)` — and
  * gives future transient prefs a home without minting a new slice each time.
  *
- * NOTE: the transient keys here are intentionally left out of the persist
- * `partialize` in store/index.js so they do not survive a reload; `detailLevel`
- * is the deliberate exception (explicitly persisted there).
+ * NOTE: intentionally left out of the persist `partialize` in store/index.js
+ * so none of these prefs survive a reload.
  */
-
-/** The valid altitude rungs, in ascending depth. Frozen so callers can validate. */
-export const DETAIL_LEVELS = Object.freeze(['guided', 'standard', 'expert']);
-
-/**
- * The default reading depth for the dossier's engine sections (EngineSections,
- * WarFaithSection). 'standard' shows band readouts + scores by default. It
- * replaced 'guided' when the global dossier "Detail" toggle was removed, so the
- * engine depth those sections used to gate now surfaces without a toggle. The
- * Substrate tab carries its own LOCAL Overview/Detail/Engine control.
- */
-export const DEFAULT_DETAIL_LEVEL = 'standard';
-
-/**
- * Durable, user-owned product preferences surfaced on the Account page
- * ("Product Preferences" section). UNLIKE the transient userPrefs keys these
- * ARE persisted (see store/index.js partialize/merge) so a returning user keeps
- * their defaults. Each key is a default the relevant surface reads when it has
- * no per-artifact override:
- *
- *   playerViewDefault     — whether new settlements default to player-safe view.
- *   pdfStyle              — preferred PDF/export visual style ('classic'|'compact'|'parchment').
- *   aiPolishDefault       — opt-in default for AI prose polish on generation.
- *   galleryPublicDefault  — whether shares default to public gallery visibility.
- *   shareDefault          — default share scope for new player-view links.
- *   campaignMapAutosave   — auto-save map edits while running a campaign.
- *   emailNotifications    — product/lifecycle email opt-in (mirrors the profile flag).
- */
-export const PRODUCT_PREF_DEFAULTS = Object.freeze({
-  playerViewDefault: false,
-  pdfStyle: 'classic',
-  aiPolishDefault: false,
-  galleryPublicDefault: false,
-  shareDefault: 'unlisted',
-  campaignMapAutosave: true,
-  emailNotifications: true,
-});
 
 export const createUiSlice = (set, get) => ({
   // ── State ────────────────────────────────────────────────────────────────
   userPrefs: {
     tableViewOpen: false,
-    detailLevel: DEFAULT_DETAIL_LEVEL,
   },
-
-  // Auth modal visibility. Lifted out of App.jsx local state so app-wide
-  // surfaces that have no prop path to App (PricingMomentCard's signup
-  // moments, future nudges) can open sign-in directly — mirroring how
-  // purchaseModalOpen already lives on the store. Transient: deliberately
-  // left out of the persist partialize so a reload lands on a closed modal.
-  authModalOpen: false,
 
   // Quiet confirmation for a same-device dossier retro auto-upgrade (108). Set
   // by the silent post-save claim when a durable right attaches to a just-saved
   // settlement; the App renders it as one transient toast and clears it. Null =
-  // nothing to show. Transient (left out of persist).
+  // nothing to show. Transient (deliberately left out of the persist partialize).
   dossierClaimToast: null,
 
-  /** Durable product-preference defaults (Account → Product Preferences). */
-  productPrefs: { ...PRODUCT_PREF_DEFAULTS },
-
-  /**
-   * The dossier entity the hyperlink layer last navigated to, or null.
-   *
-   * Shape: `{ id, ts }`. `id` is the stable entity id (e.g. 'faction.iron_guild');
-   * `ts` is a fresh timestamp on every focus so each tab's "open the matching
-   * card" effect re-fires even when the SAME link is clicked twice (a bare id
-   * would not change, so the effect would not run).
-   *
-   * Lives on the store (not a card-local prop) because the selected entity must
-   * survive the cross-tab remount: clicking an NPC's faction switches to the
-   * Power tab, which mounts fresh and reads this to know which faction to open.
-   * Transient: left out of the persist partialize so a reload lands unfocused.
-   */
+  // The dossier entity a hyperlink last navigated to ({ id, ts } | null). Lives
+  // on the store (not a card-local prop) because the target must survive the
+  // cross-tab remount: clicking an NPC's faction switches to the Power tab, which
+  // mounts fresh and reads this to know which faction to open. The `ts` stamp
+  // makes a repeat click of the same link re-fire the open-the-card effect.
+  // Transient (out of the persist partialize) so a reload lands unfocused.
   focusedEntity: null,
+
+  // Whether the sign-in modal is open. Lifted onto the store (was App-local
+  // useState) so an app-wide nudge — the signup/unlock PricingMomentCard fired
+  // at an anonymous user — can route to sign-in instead of the buy-credits wall.
+  // Transient: deliberately excluded from the persist partialize (a reload lands
+  // with no modal open), the same class as purchaseModalOpen.
+  authModalOpen: false,
 
   // ── Actions ──────────────────────────────────────────────────────────────
 
-  /**
-   * Set a single durable product preference. Unknown keys are ignored so a
-   * stale persisted/UI value can't introduce a bogus pref. Persisted via the
-   * store-index partialize.
-   * @param {keyof typeof PRODUCT_PREF_DEFAULTS} key
-   * @param {*} value
-   */
-  setProductPref: (key, value) =>
-    set(state => {
-      if (!Object.prototype.hasOwnProperty.call(PRODUCT_PREF_DEFAULTS, key)) return;
-      if (!state.productPrefs) state.productPrefs = { ...PRODUCT_PREF_DEFAULTS };
-      state.productPrefs[key] = value;
-    }),
-
-  /** Read a product preference, falling back to its default. */
-  getProductPref: (key) => {
-    const prefs = get().productPrefs || {};
-    return Object.prototype.hasOwnProperty.call(prefs, key) ? prefs[key] : PRODUCT_PREF_DEFAULTS[key];
-  },
+  /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
+  setDossierClaimToast: (message) =>
+    set(state => { state.dossierClaimToast = message || null; }),
 
   /**
-   * Mark a dossier entity as the navigation target. Stamps a fresh `ts` so the
-   * per-tab open-the-card effects re-fire on repeat clicks of the same link.
-   * @param {string} id   Stable entity id (e.g. 'faction.iron_guild', 'npc_3').
+   * Mark a dossier entity as the navigation target (a hyperlink click). Stamps a
+   * fresh `ts` so the per-tab open-the-card effects re-fire on a repeat click of
+   * the same link.
+   * @param {string} id  Stable entity id (e.g. 'faction.iron_guild', 'npc_3').
    */
   focusEntity: (id) =>
     set(state => {
@@ -141,31 +70,15 @@ export const createUiSlice = (set, get) => ({
   clearFocusedEntity: () =>
     set(state => { state.focusedEntity = null; }),
 
-  /** Open/close the auth (sign-in / create-account) modal. */
+  /** Open or close the sign-in modal (transient; not persisted). */
   setAuthModalOpen: (open) =>
     set(state => { state.authModalOpen = !!open; }),
-
-  /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
-  setDossierClaimToast: (message) =>
-    set(state => { state.dossierClaimToast = message || null; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>
     set(state => {
       if (!state.userPrefs) state.userPrefs = {};
       state.userPrefs[key] = value;
-    }),
-
-  /**
-   * Set the progressive-disclosure altitude ('guided' | 'standard' | 'expert').
-   * Ignores anything outside DETAIL_LEVELS so a bad value can't wedge the UI.
-   * @param {'guided'|'standard'|'expert'} level
-   */
-  setDetailLevel: (level) =>
-    set(state => {
-      if (!DETAIL_LEVELS.includes(level)) return;
-      if (!state.userPrefs) state.userPrefs = {};
-      state.userPrefs.detailLevel = level;
     }),
 
   /**

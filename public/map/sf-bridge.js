@@ -21,12 +21,11 @@
 //   settlementEngine:removePlacement     { burgId }
 //   settlementEngine:restorePlacements   { placements }
 //   settlementEngine:clearAllPlacements
+//   settlementEngine:exportThumb         { size }
 //   settlementEngine:getViewport
 //   settlementEngine:setViewport         { cx, cy, scale, duration }
 //   settlementEngine:fitMap
 //   settlementEngine:saveSnapshot
-//   settlementEngine:exportThumb         { maxW }  → small JPEG data URL of the
-//                                          rendered terrain (gallery thumbnail)
 //   settlementEngine:loadSnapshot        { snapshot }
 //   settlementEngine:resetMap            { seed }
 //   settlementEngine:activateTool        { tool, options }
@@ -51,6 +50,15 @@
 (function initSettlementForgeBridge() {
   const isEmbedded = window.parent !== window;
   if (!isEmbedded) return;
+
+  // sf-origin.js loads immediately before this bridge and owns the one allowed
+  // parent origin. Deployed hosts have no same-origin fallback: if the explicit
+  // parentOrigin handshake is absent or malformed, install no command surface
+  // and emit no map/campaign data.
+  const originContract = window.__sfBridgeOrigin;
+  const parentOrigin = originContract?.parentOrigin || null;
+  const postToParent = originContract?.postToParent;
+  if (!parentOrigin || typeof postToParent !== 'function') return;
 
   // Apply SettlementForge chrome palette class
   document.body.classList.add('sf-embedded');
@@ -244,33 +252,8 @@
   }
 
   // ── postMessage plumbing ────────────────────────────────────────────────
-  // Target our own origin (the parent serves /map/ from the same host). The
-  // target origin is FAIL-CLOSED: if it can't be resolved to a concrete http(s)
-  // origin (opaque/sandboxed iframe → "null", file:// scheme → empty/"null"),
-  // we REFUSE to post rather than broadcast to '*'. A '*' target would leak the
-  // bridge's replies (which can carry map/campaign data) to any origin that
-  // happens to hold a reference to this window — so a failed origin computation
-  // must never fall back to broadcasting.
-  function resolveParentOrigin() {
-    let origin;
-    try { origin = window.location.origin; } catch (_) { return null; }
-    // Opaque/file origins serialize to "null" (the string) or an empty value;
-    // neither is a safe postMessage target — treat both as unresolved.
-    if (!origin || origin === 'null') return null;
-    if (!/^https?:\/\//.test(origin)) return null;
-    return origin;
-  }
-
-  function postToParent(msg) {
-    const targetOrigin = resolveParentOrigin();
-    if (!targetOrigin) {
-      // Fail closed: no trustworthy target origin → do not post at all.
-      return;
-    }
-    try {
-      window.parent.postMessage(msg, targetOrigin);
-    } catch (_) { /* cross-origin / detached parent — drop silently */ }
-  }
+  // postToParent closes over the exact origin resolved by sf-origin.js. It
+  // never recomputes from this child window and never falls back to '*'.
 
   function reply(rid, payload) {
     if (!rid) return;
@@ -340,6 +323,21 @@
   // outside this bridge closure and otherwise can't see local helpers.
   window.__sfScreenToMap = screenToMap;
 
+  // ── Map seed accessor (H10) ─────────────────────────────────────────────
+  // FMG's real map seed is the top-level global `seed` (main.js: `var seed`, set
+  // from the URL seed / generateSeed() / a precreated seed, and serialized by
+  // save.js). The bridge previously reported `pack.seed`, which FMG NEVER assigns
+  // — so every fmg:ready / fmg:mapReset carried seed:null. Read the real global.
+  // It's a `var` (a genuine window property), but we reach it as a GUARDED BARE
+  // IDENTIFIER — the one convention this file uses for FMG's script-scoped globals
+  // (svg/zoom) — so an upstream rename degrades to null, not a ReferenceError.
+  function currentSeed() {
+    try {
+      if (typeof seed !== 'undefined' && seed != null && seed !== '') return String(seed);
+    } catch (_) { /* global not bound yet */ }
+    return null;
+  }
+
   // ── Viewport broadcasting ───────────────────────────────────────────────
   // Parse a transform attribute of the form "translate(tx, ty) scale(k)" or
   // "matrix(a b c d e f)". Returns { tx, ty, scale } or null.
@@ -373,7 +371,11 @@
       if (parsed) {
         tx = parsed.tx; ty = parsed.ty; scale = parsed.scale || 1;
       } else {
-        const svgSel = window.svg;
+        // PHANTOM-GLOBAL FIX: `svg` is a top-level `let` in main.js (main.js:23),
+        // a script-scoped lexical global — NEVER window.svg. window.svg was always
+        // undefined, so this d3.zoomTransform fallback never ran. Reach it as a
+        // guarded bare identifier. (d3 is a real UMD window global — left as-is.)
+        const svgSel = (typeof svg !== 'undefined') ? svg : null;
         const tf = (svgSel && window.d3?.zoomTransform) ? window.d3.zoomTransform(svgSel.node()) : null;
         scale = tf?.k || 1;
         tx = tf?.x || 0;
@@ -428,8 +430,16 @@
   }
   function installViewportBroadcaster() {
     try {
-      if (window.zoom && window.svg) {
-        window.zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
+      // PHANTOM-GLOBAL FIX (behavior activation): `zoom` (const, main.js:225) and
+      // `svg` (let, main.js:23) are script-scoped lexical globals, NEVER window
+      // properties. The old `window.zoom && window.svg` guard was `undefined &&
+      // undefined` — always false — so this d3 zoom hook NEVER attached and the
+      // React overlay's pan/zoom mirroring rode on the RAF poll alone. Reaching
+      // the bindings as guarded bare identifiers LIGHTS the zoom-driven broadcast:
+      // fmg:viewport now fires synchronously on the d3 zoom event, not only on the
+      // next animation frame.
+      if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg) {
+        zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
       }
     } catch (e) { /* best-effort */ }
     // Start the RAF poll once (idempotent).
@@ -477,11 +487,15 @@
 
   async function resetMapCmd(seed) {
     if (typeof regenerateMap !== 'function') throw new Error('regenerateMap unavailable');
-    if (seed != null) {
-      try { window.seed = String(seed); } catch (e) {}
-    }
     window.__sfPlacedBurgIds.clear();
-    await Promise.resolve(regenerateMap('SettlementForge resetMap'));
+    // FMG's generate(options) destructures `options.seed` (a STRING) and routes
+    // it through setSeed → aleaPRNG (public/map/main.js). The old call passed a
+    // bare STRING ('SettlementForge resetMap'), which destructured to
+    // seed:undefined — so the documented {seed} was silently ignored and every
+    // reset produced a fresh random map. Pass a real options object with the
+    // seed so it actually applies; omit it (undefined) to keep randomizing.
+    const options = seed != null ? { seed: String(seed) } : undefined;
+    await Promise.resolve(regenerateMap(options));
   }
 
   // ── Command handlers ────────────────────────────────────────────────────
@@ -848,6 +862,104 @@
       }
     },
 
+    // ── Spatial pack capture (Phase 5.5 MODULATION — the keystone's live seam) ──
+    // READ-ONLY snapshot of the terrain cell arrays the parent needs to freeze a
+    // spatial digest at an entitled canonize: h (height), biome, r (river flag), p
+    // (cell centroid [x,y]), c (neighbour adjacency). It MUTATES NOTHING — it only
+    // copies the already-generated pack arrays out (the pure digest builder runs
+    // parent-side over this capture, never over the iframe). TypedArrays are
+    // converted to plain arrays so the parent's normalizeSpatialPack (which uses
+    // Array.isArray) reads them; p/c are already plain arrays. Because the pack is
+    // static in memory once generated, two captures of the same map are identical
+    // (the parent asserts this and freezes the first regardless — freeze-first).
+    'settlementEngine:getSpatialPack'(data, rid) {
+      try {
+        const cells = pack?.cells;
+        if (!cells || !cells.h || !cells.c) {
+          return reply(rid, { type: 'fmg:spatialPackReply', pack: null });
+        }
+        const plain = (arr) => (Array.isArray(arr) ? arr : (arr ? Array.from(arr) : []));
+        reply(rid, {
+          type: 'fmg:spatialPackReply',
+          pack: {
+            cells: {
+              h: plain(cells.h),
+              biome: plain(cells.biome),
+              r: plain(cells.r),
+              // p is an array of [x,y] pairs, c an array of neighbour-index arrays;
+              // both are already plain arrays in the pack — copy the outer array so
+              // the reply can't alias live pack state.
+              p: Array.isArray(cells.p) ? cells.p.map((pt) => (Array.isArray(pt) ? [pt[0], pt[1]] : pt)) : [],
+              c: Array.isArray(cells.c) ? cells.c.map((nb) => (Array.isArray(nb) ? nb.slice() : plain(nb))) : [],
+            },
+          },
+        });
+      } catch (err) {
+        console.warn('[sfBridge] getSpatialPack failed', err);
+        replyError(rid, 'fmg:spatialPackReply', err);
+      }
+    },
+
+    // Rasterize the rendered terrain to a small JPEG data URL for a maps-gallery
+    // cover (parent: src/lib/mapThumb.js). Best-effort by contract: any failure
+    // (no SVG, tainted canvas from an external <image>, unsupported toDataURL)
+    // replies { dataUrl: null } and the caller falls back to the terrain
+    // placeholder. This must NEVER throw across the bridge or block a share.
+    async 'settlementEngine:exportThumb'(data, rid) {
+      try {
+        const svgEl = document.getElementById('map');
+        const srcW = window.graphWidth || (svgEl ? svgEl.clientWidth : 0) || 0;
+        const srcH = window.graphHeight || (svgEl ? svgEl.clientHeight : 0) || 0;
+        if (!svgEl || srcW < 1 || srcH < 1) {
+          return reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
+        }
+        const size = Math.max(64, Math.min(1024, Number(data && data.size) || 480));
+        const fit = Math.min(size / srcW, size / srcH, 1);
+        const outW = Math.max(1, Math.round(srcW * fit));
+        const outH = Math.max(1, Math.round(srcH * fit));
+
+        // Clone the live SVG, pin explicit dimensions + a full-map viewBox so the
+        // export captures the WHOLE map (not the current pan/zoom crop), and
+        // neutralize the camera transform FMG applies to the #viewbox group.
+        const clone = svgEl.cloneNode(true);
+        clone.setAttribute('width', String(srcW));
+        clone.setAttribute('height', String(srcH));
+        clone.setAttribute('viewBox', '0 0 ' + srcW + ' ' + srcH);
+        clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        const vb = clone.querySelector('#viewbox');
+        if (vb) vb.removeAttribute('transform');
+        const xml = new XMLSerializer().serializeToString(clone);
+        const svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+
+        const dataUrl = await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = outW;
+              canvas.height = outH;
+              const ctx = canvas.getContext('2d');
+              if (!ctx) return resolve(null);
+              // White matte: JPEG has no alpha, so transparency would render black.
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, outW, outH);
+              ctx.drawImage(img, 0, 0, outW, outH);
+              resolve(canvas.toDataURL('image/jpeg', 0.82));
+            } catch (_) {
+              resolve(null); // tainted canvas / unsupported — placeholder fallback
+            }
+          };
+          img.onerror = () => resolve(null);
+          img.src = svgUrl;
+        });
+
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: dataUrl, w: outW, h: outH });
+      } catch (err) {
+        console.warn('[sfBridge] exportThumb failed', err);
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
+      }
+    },
+
     'settlementEngine:getViewport'(data, rid) {
       reply(rid, { type: 'fmg:viewportReply', ...getCurrentViewport() });
     },
@@ -857,14 +969,16 @@
       try {
         if (typeof window.zoomTo === 'function' && cx != null && cy != null) {
           window.zoomTo(cx, cy, scale || 3, duration);
-        } else if (window.zoom && window.svg && window.d3) {
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          // PHANTOM-GLOBAL FIX: zoom/svg are lexical globals, not window props —
+          // this d3 fallback was dead. Guarded bare access makes it live.
           const w = window.graphWidth || 0;
           const h = window.graphHeight || 0;
           const s = scale || 1;
           const tx = w / 2 - cx * s;
           const ty = h / 2 - cy * s;
-          window.svg.transition().duration(duration)
-            .call(window.zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
+          svg.transition().duration(duration)
+            .call(zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
         }
         // The zoom event will fire and broadcast a new viewport; also reply
         // synchronously with the pre-transition state for the caller.
@@ -876,9 +990,24 @@
 
     'settlementEngine:fitMap'(data, rid) {
       try {
-        if (window.zoom && window.svg && window.d3) {
-          window.svg.transition().duration(600)
-            .call(window.zoom.transform, window.d3.zoomIdentity);
+        // The embedded build's svg/zoom are top-level let bindings in main.js
+        // (script-scoped, NOT window properties), so the old window.* guard
+        // silently no-oped while replying success. resetZoom() is a top-level
+        // function DECLARATION (thus a real global) that closes over the
+        // scoped svg/zoom and applies the identity transform -- which IS the
+        // fitted full-realm view in embedded mode. Use it; fall back to
+        // fitMapToScreen (canvas re-size only) and the guarded bare-global path
+        // (the phantom-global sweep converted this last resort from the dead
+        // window.* form so it too is live if ever reached).
+        if (typeof resetZoom === 'function') {
+          resetZoom(600);
+        } else if (typeof fitMapToScreen === 'function') {
+          fitMapToScreen();
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          svg.transition().duration(600)
+            .call(zoom.transform, window.d3.zoomIdentity);
+        } else {
+          throw new Error('fitMap: no fit mechanism available in this build');
         }
         reply(rid, { type: 'fmg:viewportReply', ...getCurrentViewport() });
       } catch (err) {
@@ -892,38 +1021,6 @@
         reply(rid, { type: 'fmg:snapshotReply', snapshot });
       } catch (err) {
         replyError(rid, 'fmg:snapshotReply', err);
-      }
-    },
-
-    // Rasterize the rendered FMG terrain to a small JPEG data URL so the maps
-    // gallery tile can show the map image (generated-terrain shares have no
-    // customBackdrop, so no thumb otherwise). Reuses FMG's own getMapURL export
-    // (self-contained SVG blob: inlined fonts/styles, same-origin → no canvas
-    // taint), then downscales via canvas like FMG's PNG path. Best-effort: any
-    // failure replies with an error and the share falls back to the placeholder.
-    async 'settlementEngine:exportThumb'(data, rid) {
-      try {
-        const maxW = Number(data?.maxW) || 480;
-        const url = await getMapURL('png', { fullMap: true, noScaleBar: true });
-        const img = new Image();
-        img.onload = () => {
-          try {
-            const ratio = img.height / img.width;
-            const w = Math.min(maxW, img.width);
-            const h = Math.round(w * ratio);
-            const c = document.createElement('canvas');
-            c.width = w; c.height = h;
-            c.getContext('2d').drawImage(img, 0, 0, w, h);
-            const dataUrl = c.toDataURL('image/jpeg', 0.82);
-            reply(rid, { type: 'fmg:exportThumbReply', dataUrl, w, h });
-          } catch (err) {
-            replyError(rid, 'fmg:exportThumbReply', err);
-          }
-        };
-        img.onerror = () => replyError(rid, 'fmg:exportThumbReply', 'rasterize failed');
-        img.src = url;
-      } catch (err) {
-        replyError(rid, 'fmg:exportThumbReply', err);
       }
     },
 
@@ -951,8 +1048,8 @@
           installMutationObservers();
           installViewportBroadcaster();
           scheduleViewportBroadcast();
-          reply(rid, { type: 'fmg:mapResetReply', seed: pack?.seed || null });
-          postToParent({ type: 'fmg:mapReset', seed: pack?.seed || null });
+          reply(rid, { type: 'fmg:mapResetReply', seed: currentSeed() });
+          postToParent({ type: 'fmg:mapReset', seed: currentSeed() });
           notifyBurgList();
         }, 500);
       } catch (err) {
@@ -1118,21 +1215,16 @@
 
   // ── Message listener ────────────────────────────────────────────────────
   window.addEventListener('message', async (event) => {
-    // Origin check: this bridge is served from our own origin (/map/index.html)
-    // and embedded by the parent app. Any command claiming another origin is a
-    // third-party trying to drive the bridge. Drop it.
-    if (event.origin !== window.location.origin) return;
-
-    // Source check: the bridge only ever takes commands from its embedder.
-    // Reject anything not posted by window.parent (sibling iframes, popups,
-    // a stray window holding a ref). Mirrors the parent-side check in
-    // src/lib/mapBridge.js.
-    if (event.source !== window.parent) return;
-
     const data = event?.data;
     if (!data || typeof data !== 'object') return;
     const { type, _rid } = data;
     if (typeof type !== 'string' || !type.startsWith('settlementEngine:')) return;
+
+    // Trust boundary: only the configured parent origin AND the WindowProxy
+    // that embedded us may drive destructive map commands. The map's own origin
+    // is intentionally different in production.
+    if (event.origin !== parentOrigin) return;
+    if (event.source !== window.parent) return;
 
     const handler = handlers[type];
     if (!handler) return;  // unknown command — silent
@@ -1150,7 +1242,7 @@
   function notifyReady() {
     if (readyNotified) return;
     readyNotified = true;
-    const seed = pack?.seed || null;
+    const seed = currentSeed();
     postToParent({
       type: 'fmg:ready',
       seed,
@@ -1174,12 +1266,21 @@
 
   // Ready poll: check for pack.cells (geography is done) instead of
   // pack.burgs (which may be empty when manors=0).
+  // SettlementForge fork patch: bound the poll. Without a timeout, an upstream `pack` rename would leave the
+  // optional chain undefined forever — the interval never clears, fmg:ready never fires, and the blank iframe
+  // gives zero diagnostic. After ~60s (120 × 500ms) stop and surface a console warning instead of spinning.
+  let readyPollAttempts = 0;
   const readyPoll = setInterval(() => {
     const hasCells = pack?.cells?.i?.length > 0;
     const hasBurgs = pack?.burgs?.length > 0;
     if (hasCells || hasBurgs) {
       clearInterval(readyPoll);
       notifyReady();
+    } else if (++readyPollAttempts >= 120) {
+      clearInterval(readyPoll);
+      try {
+        console.warn('[sf-bridge] fmg:ready timed out — pack.cells never populated (upstream global rename?)');
+      } catch (e) { /* best-effort */ }
     }
   }, 500);
 

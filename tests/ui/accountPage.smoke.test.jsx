@@ -19,7 +19,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup, fireEvent, within } from '@testing-library/react';
+import { render, cleanup, screen } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -37,6 +37,8 @@ vi.mock('../../src/lib/analytics.js', () => ({
 const storeState = {
   auth: {
     user: { id: 'u1', email: 'tester@example.com' },
+    session: { access_token: 'session-u1' },
+    loading: false,
     tier: 'free',
     role: 'user',
     displayName: 'Tester',
@@ -51,21 +53,14 @@ const storeState = {
   campaigns: [],
   maxSaves: () => 3,
   canSave: () => true,
-  importAccountData: vi.fn().mockResolvedValue({ ok: true }),
   authSignOut: vi.fn(),
-  setAuth: vi.fn(),
-  // Recovery-questions section (Finding #4) reads/sets via these actions.
-  authGetSecurityQuestionIds: vi.fn().mockResolvedValue([]),
-  authSetSecurityAnswers: vi.fn().mockResolvedValue(undefined),
-  // Phase A2 — new selectors/actions the page (and its new sections) read.
   removeSavedSettlement: vi.fn(),
   clearSavedSettlements: vi.fn(),
   deleteCampaign: vi.fn(),
-  productPrefs: {
-    defaultDetailLevel: 'guided', galleryPublicDefault: false, shareDefault: 'unlisted',
-    playerViewDefault: false, pdfStyle: 'classic', aiPolishDefault: false, campaignMapAutosave: true,
-  },
+  importAccountData: vi.fn(),
+  productPrefs: {},
   setProductPref: vi.fn(),
+  setAuth: vi.fn(),
 };
 
 vi.mock('../../src/store/index.js', () => {
@@ -94,88 +89,38 @@ describe('AccountPage — decomposition smoke', () => {
     expect(container.firstChild).not.toBeNull();
   });
 
-  // ── Left-nav layout lock-in ────────────────────────────────────────────────
-  // The reorg introduced a left-sidebar settings layout (AccountNav): a rail of
-  // section rows + a focus-managed content panel that loads to Profile first.
-  // These pin the IA so a future refactor can't silently drop a section, regress
-  // the default landing, or strand a section's primary action.
-
-  test('the nav rail exposes all six sections as a named landmark', async () => {
+  test('honors a Messages section deep link', async () => {
     const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-    render(<AccountPage onNavigateAdmin={() => {}} />);
-    const nav = document.querySelector('nav[aria-label="Account settings"]');
-    expect(nav).toBeTruthy();
-    for (const label of ['Profile', 'Security', 'Subscription', 'Support', 'Data', 'Preferences']) {
-      expect(within(nav).getByRole('button', { name: label })).toBeTruthy();
-    }
+    render(<AccountPage routeSection="messages" onNavigateAdmin={() => {}} />);
+    expect(screen.getAllByText('Messages').length).toBeGreaterThan(1);
+    expect(screen.getByText(/no messages from SettlementForge/i)).toBeTruthy();
   });
 
-  test('Profile is the default section: its row is aria-current and its panel shows', async () => {
+  test('mounts product defaults beside the durable email-category controls', async () => {
     const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-    render(<AccountPage onNavigateAdmin={() => {}} />);
-    const nav = document.querySelector('nav[aria-label="Account settings"]');
-    const profileRow = within(nav).getByRole('button', { name: 'Profile' });
-    expect(profileRow.getAttribute('aria-current')).toBe('page');
-    // Profile panel heading is present; the other section headings are not yet.
-    expect(document.querySelector('section[aria-label="Profile"]')).toBeTruthy();
-    expect(within(document.body).queryByRole('heading', { name: 'Profile' })).toBeTruthy();
-    expect(within(document.body).queryByRole('heading', { name: 'Data and privacy' })).toBeNull();
+    render(<AccountPage routeSection="preferences" onNavigateAdmin={() => {}} />);
+    expect(screen.getByText('Product Preferences')).toBeTruthy();
+    expect(screen.getByText('Email preferences')).toBeTruthy();
+    expect(screen.queryByLabelText(/^Email notifications$/i)).toBeNull();
   });
 
-  // Smoke each section: clicking its rail row mounts the panel and surfaces that
-  // section's primary surface (heading or primary action).
-  const SECTION_SMOKE = [
-    { row: 'Security', expectHeading: 'Login and security' },
-    { row: 'Subscription', expectHeading: 'Subscription & Credits' },
-    { row: 'Support', expectHeading: 'Customer Support' },
-    { row: 'Data', expectHeading: 'Data and privacy' },
-    { row: 'Preferences', expectHeading: 'Product Preferences' },
-  ];
-
-  for (const { row, expectHeading } of SECTION_SMOKE) {
-    test(`selecting "${row}" renders its panel with its primary surface`, async () => {
-      const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-      render(<AccountPage onNavigateAdmin={() => {}} />);
-      const nav = document.querySelector('nav[aria-label="Account settings"]');
-      fireEvent.click(within(nav).getByRole('button', { name: row }));
-      // Active row is now aria-current; the section's heading is on-screen.
-      expect(within(nav).getByRole('button', { name: row }).getAttribute('aria-current')).toBe('page');
-      expect(within(document.body).getByRole('heading', { name: expectHeading })).toBeTruthy();
-    });
-  }
-
-  test('Security also surfaces the account-recovery questions (grouped panel)', async () => {
+  test('resolves a direct message query into the Support ticket prelink', async () => {
     const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-    render(<AccountPage onNavigateAdmin={() => {}} />);
-    const nav = document.querySelector('nav[aria-label="Account settings"]');
-    fireEvent.click(within(nav).getByRole('button', { name: 'Security' }));
-    expect(within(document.body).getByRole('heading', { name: 'Login and security' })).toBeTruthy();
-    expect(within(document.body).getByRole('heading', { name: 'Account recovery questions' })).toBeTruthy();
-  });
-
-  test('Data primary action (Download JSON) is wired and the Import control is live', async () => {
-    const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-    render(<AccountPage onNavigateAdmin={() => {}} />);
-    const nav = document.querySelector('nav[aria-label="Account settings"]');
-    fireEvent.click(within(nav).getByRole('button', { name: 'Data' }));
-    expect(within(document.body).getByRole('button', { name: /Download JSON/i })).toBeTruthy();
-    // The "Coming soon" stub has been replaced by the live import flow: a
-    // file-input trigger (canSave:true in the mock → the control is enabled).
-    const importInput = document.getElementById('account-import-file');
-    expect(importInput).toBeTruthy();
-    expect(importInput.disabled).toBe(false);
-  });
-
-  test('the elevated-only Developer Admin row appears only when elevated', async () => {
-    const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-    // Default mock: not elevated → no admin row.
-    const { unmount } = render(<AccountPage onNavigateAdmin={() => {}} />);
-    expect(within(document.body).queryByRole('button', { name: /Developer Admin Panel/i })).toBeNull();
-    unmount();
-    // Flip elevation and re-render.
-    storeState.isElevated = () => true;
-    render(<AccountPage onNavigateAdmin={() => {}} />);
-    expect(within(document.body).getByRole('button', { name: /Developer Admin Panel/i })).toBeTruthy();
-    storeState.isElevated = () => false;
+    const OperatorMessagesProvider = (await import('../../src/components/account/OperatorMessagesProvider.jsx')).default;
+    const service = {
+      listMyOperatorMessages: vi.fn().mockResolvedValue([{
+        id: 'message-route', kind: 'direct', messageClass: 'service', senderRole: 'admin',
+        subject: 'Route-linked concern', body: 'Please reply.', createdAt: '2026-08-02T12:00:00.000Z', readAt: null,
+      }]),
+      getMyOperatorUnreadCount: vi.fn().mockResolvedValue(1),
+      markOperatorMessageRead: vi.fn(),
+    };
+    render(
+      <OperatorMessagesProvider service={service}>
+        <AccountPage routeSection="support" routeMessageId="message-route" onNavigateAdmin={() => {}} />
+      </OperatorMessagesProvider>,
+    );
+    expect((await screen.findByLabelText(/subject/i)).value).toBe('Re: Route-linked concern');
+    expect(screen.getByRole('status').textContent).toMatch(/linked to that notice/i);
   });
 });

@@ -41,7 +41,7 @@ import {
   fetchGalleryReports, resolveGalleryReport,
   fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
-import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsUtils.js';
+import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -134,10 +134,12 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
         hasDeity: true,
         // Owner import opt-in facet (gallery_importable; surfaced by migration 071).
         importable: true,
-        // Retired facets must NOT be forwarded: governmentType / stability have no
-        // stable vocabulary to match, and atWar + the population range were dropped
-        // as redundant with tier/size and noisy.
+        // At-war facet: the server honored it since 063; forwarded since
+        // GALLERY-2 phase 2 (the /gallery/at-war hub) — no longer dropped.
         atWar: true,
+        // Retired facets must NOT be forwarded: governmentType / stability have no
+        // stable vocabulary to match, and the population range was dropped as
+        // redundant with tier/size and noisy.
         populationMin: 401,
         populationMax: 5000,
         governmentType: ['monarchy'],
@@ -150,6 +152,7 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
         prosperity: ['Wealthy'],
         hasDeity: true,
         importable: true,
+        atWar: true,
       },
     }));
   });
@@ -320,7 +323,9 @@ describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
       .mockResolvedValueOnce({
         data: [{
           id: '1', public_slug: 's1', name: 'X', tier: 'town',
-          data: { foo: 'bar', dmCompass: { secret: true } }, published_at: '2025-01-01', view_count: 3,
+          // population is on the public top-level allowlist; dmCompass is not
+          // (and is DM-private) — the projection keeps the former, drops the latter.
+          data: { population: 1200, dmCompass: { secret: true } }, published_at: '2025-01-01', view_count: 3,
         }],
         error: null,
       })
@@ -331,7 +336,7 @@ describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
     expect(dossier).toMatchObject({
       id: '1',
       slug: 's1', name: 'X', tier: 'town',
-      settlement: { foo: 'bar' },
+      settlement: { population: 1200 },
       publishedAt: '2025-01-01', viewCount: 3,
       netVotes: 4,
       voteState: { netVotes: 4, voted: true },

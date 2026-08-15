@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { ensureNpcStates, npcId } from '../../src/domain/worldPulse/npcAgency.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // B03 finding #4: evaluateNpcRules only advances an NPC's contextSignature
 // through a goal_rebranch candidate. A context transition that produces NO

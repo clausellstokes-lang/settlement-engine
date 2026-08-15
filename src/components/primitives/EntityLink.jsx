@@ -17,25 +17,44 @@ import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
  *   - renders the `fallback` as PLAIN TEXT (not a dead link) when the id no
  *     longer resolves or the target tab is gated out of this settlement.
  *
+ * VERBATIM (pronoun) links: when `verbatim` is set the link shows `fallback`
+ * exactly — the wrapped word — instead of the entity's current name. A pronoun
+ * token ⟦pronoun:id|he⟧ must render "he" (linked), never "Aldric"; only the
+ * TARGET is the entity. The unresolved branch already renders `fallback` as
+ * plain text, so a broken pronoun link degrades to the bare word.
+ *
  * @param {object} props
  * @param {string} props.id          Stable entity id (e.g. 'faction.iron_guild').
  * @param {string} [props.type]      Advisory entity type ('faction' | 'npc' | …).
  *                                   The index already knows the type; kept for
  *                                   the later generator-emitted {id,type} refs.
- * @param {string} [props.fallback]  Text shown when the id does not resolve.
+ * @param {string} [props.fallback]  Text shown when the id does not resolve, and
+ *                                   the verbatim text shown when `verbatim` is set.
+ * @param {boolean} [props.verbatim] Render `fallback` verbatim (a pronoun link)
+ *                                   rather than the resolved current name.
  * @param {object} [props.style]     Extra inline style merged onto the link.
  */
-export default function EntityLink({ id, type, fallback = '', style }) {
+export default function EntityLink({ id, type, fallback = '', verbatim = false, style }) {
   const { index, navigateToEntity } = useDossierEntities();
   const entry = id ? index?.resolve?.(id) : null;
 
-  // Broken / unresolved link -> plain text, never a link that goes nowhere.
-  if (!entry) {
+  // Broken, unresolved, or identity-ambiguous references stay plain text. An
+  // imported collision must never turn "first record wins" into navigation.
+  if (!entry || entry?.identity?.interactive === false) {
     const text = fallback || '';
-    return text ? <span data-entity-type={type}>{text}</span> : null;
+    return text ? (
+      <span
+        data-entity-type={type}
+        data-entity-identity={entry?.identity?.state || undefined}
+      >
+        {text}
+      </span>
+    ) : null;
   }
 
-  const label = entry.currentName || fallback || entry.label || '';
+  // A pronoun link keeps the wrapped word; a name link resolves the live name.
+  const destination = entry.currentName || fallback || entry.label || '';
+  const label = verbatim ? fallback : destination;
 
   const activate = () => navigateToEntity(id);
   const onKeyDown = (e) => {
@@ -49,7 +68,7 @@ export default function EntityLink({ id, type, fallback = '', style }) {
     <button
       type="button"
       data-entity-type={entry.type || type}
-      aria-label={`Go to ${label}`}
+      aria-label={`Go to ${destination}`}
       onClick={activate}
       onKeyDown={onKeyDown}
       style={{
@@ -66,7 +85,6 @@ export default function EntityLink({ id, type, fallback = '', style }) {
         textDecorationColor: `${swatch['#A0762A']}80`,
         textUnderlineOffset: 2,
         cursor: 'pointer',
-        borderRadius: 2,
         WebkitTapHighlightColor: 'transparent',
         ...style,
       }}

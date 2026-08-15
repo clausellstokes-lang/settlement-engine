@@ -26,7 +26,11 @@
  * A11y:
  *   - role="status" + aria-live="polite" so screen readers hear each
  *     active step.
- *   - Esc dismisses immediately (power-user fast-path).
+ *   - There is NO skip / Esc fast-path — the reveal deliberately plays to
+ *     completion (owner-signed, a52a88b1 "loading reveal plays through";
+ *     the earlier Esc handler + Skip button were removed there). Reduced-
+ *     motion drops the film backdrop (JourneyFilm), not the dwell window —
+ *     shortening the dwell is an owner pacing decision, not a repair.
  *
  * Flag: `pipelineReveal` (default on in prod).
  */
@@ -35,7 +39,12 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK_DEEP, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { flag } from '../../lib/flags.js';
+import { legsForTier } from '../loadingJourney/journeyManifest.js';
+import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
+import ProgressJourneyOverlay from '../loadingJourney/ProgressJourneyOverlay.jsx';
+import { pipelineStepFraction } from '../loadingJourney/journeyProgress.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
 // declare it locally — kept tight (single value, used once).
@@ -63,6 +72,11 @@ export default function PipelineReveal({ onComplete }) {
   const history = useStore(s => s.pipelineHistory || []);
   const settlementName = useStore(s => s.settlement?.name || 'this settlement');
   const tier = useStore(s => s.settlement?.tier);
+  // C2L — the loading journey film as this theater's BACKDROP. Off by default
+  // (taste-gate); the stills floor + reveal card are unchanged when off.
+  const hasSettlement = useStore(s => !!s.settlement);
+  const showFilm = flag('loadingJourneyFilm');
+  const [filmClock, setFilmClock] = useState(null);
 
   // Stable label lookup. tx() returns the whole map; we read once.
   const labelMap = useMemo(() => tx('pipelineSteps') || {}, []);
@@ -106,6 +120,11 @@ export default function PipelineReveal({ onComplete }) {
       const rolled = (minS + Math.random() * (maxS - minS)) * 1000;
       targetMsRef.current = Math.max(MIN_TOTAL_MS, rolled);
     }
+    // Share this reveal's timeline with the loading film so it scrubs the growth
+    // and lands on the ordered tier exactly as the dossier arrives (both keyed to
+    // startedAt + targetMs). Setting state here does not re-arm this effect (its
+    // deps exclude filmClock), so the reveal's own timing is untouched.
+    setFilmClock({ startedAt: startedAtRef.current, targetMs: targetMsRef.current });
 
     let i = 0;
     let dwellTimer = null;
@@ -149,12 +168,33 @@ export default function PipelineReveal({ onComplete }) {
         animation: 'sf-fadeIn 0.2s ease-out',
       }}
     >
+      {/* Backdrop (zIndex 0, behind the card) — the progress-scrubbed realm journey
+          video (owner order 2026-07-22), scrubbed by REAL pipeline-step progress
+          (played/total), holding its last frame through the dwell (this reveal owns
+          its own dismissal). When the asset is absent it falls back to the CURRENT
+          presentation: the desk→tier growth film when the taste-gate is on, else the
+          plain ink backdrop. Both keep the stills floor. */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <ProgressJourneyOverlay
+          progress={pipelineStepFraction(activeIndex, steps.length)}
+          zIndex={0}
+          holdAtEnd
+          fallback={showFilm && filmClock ? (
+            <JourneyFilm
+              legsToPlay={legsForTier(tier)}
+              arrived={hasSettlement}
+              scriptWindowMs={filmClock.targetMs}
+              startedAtMs={filmClock.startedAt}
+            />
+          ) : null}
+        />
+      </div>
       <div style={{
+        position: 'relative', zIndex: 1,
         maxWidth: 460, width: '90%',
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: 'linear-gradient(180deg, rgba(43,33,16,0.85), rgba(27,20,8,0.95))',
         border: `1px solid ${GOLD}55`,
-        borderRadius: R.lg,
         textAlign: 'center',
       }}>
         <div style={{
@@ -184,7 +224,7 @@ export default function PipelineReveal({ onComplete }) {
         <div style={{
           marginTop: SP.lg, height: 3,
           background: 'rgba(201,162,76,0.15)',
-          borderRadius: 2, overflow: 'hidden',
+          overflow: 'hidden',
         }}>
           <div style={{
             height: '100%',

@@ -16,7 +16,8 @@
  * swap it in without reshaping their state.
  *
  * Token-driven and accessible. The tab buttons clear the 44px mobile tap
- * floor. Presentation only; ships unwired (5c adopts it on the read surfaces).
+ * floor. Presentation only; ships unwired (a later sub-wave adopts it on the
+ * read surfaces).
  *
  * @param {Object} props
  * @param {{id:string,label:React.ReactNode}[]} props.tabs
@@ -27,7 +28,7 @@
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import {
-  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_TXT, MUTED, SP, sans,
+  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans,
 } from '../theme.js';
 
 export default function MobileTabStrip({
@@ -149,7 +150,7 @@ export default function MobileTabStrip({
                 borderBottom: `2px solid ${active ? GOLD : 'transparent'}`,
                 marginBottom: -1,
                 background: active ? CARD : 'transparent',
-                color: active ? GOLD_TXT : MUTED,
+                color: active ? GOLD_DEEP : MUTED,
                 fontFamily: sans,
                 fontSize: FS.sm,
                 fontWeight: active ? 800 : 600,

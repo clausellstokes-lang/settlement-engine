@@ -1,12 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
-import { evaluateSettlementStrategyRules } from '../../src/domain/worldPulse/settlementStrategy.js';
+import { enumerateMoves, evaluateSettlementStrategyRules } from '../../src/domain/worldPulse/settlementStrategy.js';
 import { evaluateWorldPulseRules, resolveCandidateConflicts } from '../../src/domain/worldPulse/candidateEvents.js';
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveSettlementPressures, pressureIndex } from '../../src/domain/worldPulse/pressureModel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { authorityTransferEpochFor } from '../../src/domain/rulingPower.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature C (C2) — the settlement strategy chooser. Test gates:
@@ -140,6 +141,136 @@ describe('C2 strategy chooser — gated (anti-vacuity)', () => {
       expect(c.conflictTags.filter(t => /^strategy:/.test(t))).toHaveLength(1);
       expect(c.ruleFamily).toBe('strategy');
     }
+  });
+
+  test('defend and hold remain conflict suppressors, not Chronicle outcomes', () => {
+    const saves = [save('solo', 'Stillwater')];
+    const { snap, pIdx } = snapshotFor(strategyCampaign({}, { settlementIds: ['solo'] }), saves);
+    const chooseAt = (roll) => evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 6,
+      simulationRules: { settlementStrategyEnabled: true },
+      rng: { random: () => roll, fork: () => ({ random: () => roll }) },
+    })[0];
+
+    const defend = chooseAt(0);
+    const hold = chooseAt(0.999999);
+
+    expect(defend.candidateType).toBe('strategy_defend');
+    expect(hold.candidateType).toBe('strategy_hold');
+    for (const candidate of [defend, hold]) {
+      expect(candidate.recordMode).toBe('suppression_only');
+      expect(candidate.conflictTags).toEqual([`strategy:${candidate.targetSaveId}`]);
+      expect(candidate.condition).toBeUndefined();
+    }
+  });
+
+  test('an archetype lever with no eligible relationship is an inert conflict suppressor', () => {
+    const merchant = save('solo', 'Stillwater', {
+      factions: [
+        { faction: 'Merchant Council', category: 'merchant', power: 78, isGoverning: true },
+        { faction: 'Dock Wardens', category: 'military', power: 42 },
+      ],
+    });
+    const campaign = strategyCampaign({ infoMode: 'unreliable' }, {
+      settlementIds: ['solo'],
+      extraState: { spatialCanonVersion: 1 },
+    });
+    const { snap, pIdx } = snapshotFor(campaign, [merchant]);
+    let inertLever = null;
+
+    for (let index = 0; index < 64 && !inertLever; index += 1) {
+      const candidate = evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6,
+        simulationRules: campaign.worldState.simulationRules,
+        rng: createPRNG(`inert-lever-${index}`),
+      })[0];
+      if (['strategy_reroute', 'strategy_embargo', 'strategy_credit']
+        .includes(candidate?.candidateType)) {
+        inertLever = candidate;
+      }
+    }
+
+    expect(inertLever).toMatchObject({
+      recordMode: 'suppression_only',
+      conflictTags: ['strategy:solo'],
+    });
+    expect(inertLever.relationshipKey).toBeUndefined();
+    expect(inertLever.relationshipPatch).toBeUndefined();
+    expect(inertLever.condition).toBeUndefined();
+  });
+
+  test('an archetype lever with a real relationship nudge remains public', () => {
+    const merchant = save('merchant', 'Stillwater', {
+      factions: [
+        { faction: 'Merchant Council', category: 'merchant', power: 78, isGoverning: true },
+      ],
+    });
+    const partner = save('partner', 'Fairhaven');
+    const fixture = {
+      settlementIds: ['merchant', 'partner'],
+      edges: [{
+        id: 'edge.merchant.partner',
+        from: 'merchant',
+        to: 'partner',
+        relationshipType: 'neutral',
+      }],
+      relationshipStates: {
+        'edge.merchant.partner': { relationshipType: 'neutral' },
+      },
+      extraState: { spatialCanonVersion: 1 },
+    };
+    const campaign = strategyCampaign({ infoMode: 'unreliable' }, fixture);
+    const { snap, pIdx } = snapshotFor(campaign, [merchant, partner]);
+    let materialLever = null;
+
+    for (let index = 0; index < 64 && !materialLever; index += 1) {
+      const candidate = evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6,
+        simulationRules: campaign.worldState.simulationRules,
+        rng: createPRNG(`material-lever-${index}`),
+      }).find(row => row.targetSaveId === 'merchant');
+      if (candidate?.relationshipKey && candidate?.relationshipPatch) {
+        materialLever = candidate;
+      }
+    }
+
+    expect(materialLever).toMatchObject({
+      ruleFamily: 'strategy',
+      relationshipKey: 'edge.merchant.partner',
+    });
+    expect(materialLever.recordMode).toBeUndefined();
+  });
+
+  test('a production pulse drops a chosen hold from candidate and roll receipts', () => {
+    const saves = [save('solo', 'Stillwater')];
+    const campaign = strategyCampaign({}, {
+      settlementIds: ['solo'],
+      extraState: { rngSeed: 'strategy-0' },
+    });
+    const { snap, pIdx } = snapshotFor(campaign, saves);
+    const raw = evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 7,
+      simulationRules: campaign.worldState.simulationRules,
+      rng: createPRNG('strategy-0::tick:7::one_week').fork('settlement-strategy'),
+    });
+    expect(raw).toEqual([expect.objectContaining({
+      candidateType: 'strategy_hold',
+      recordMode: 'suppression_only',
+    })]);
+
+    const pulse = previewCampaignWorldPulse({
+      campaign,
+      saves,
+      interval: 'one_week',
+      now: NOW,
+    });
+    expect(pulse.candidates.some(candidate =>
+      candidate.recordMode === 'suppression_only')).toBe(false);
+    expect(pulse.rollExplanations.some(explanation =>
+      explanation.candidateType === 'strategy_hold')).toBe(false);
+    expect(pulse.pulseRecord.candidateCount).toBe(
+      pulse.candidates.filter(candidate => !candidate.recordMode).length,
+    );
   });
 });
 
@@ -353,6 +484,248 @@ describe('C2 strategy chooser — sue-for-peace gate', () => {
       const peace = out.find(c => c.metadata.settlementId === 'strong' && c.candidateType === 'strategy_sue_for_peace');
       expect(peace).toBeUndefined();
     }
+  });
+});
+
+describe('WR-1 termination control — one read replaces the legacy peace threshold', () => {
+  const scoreOf = (moves, move) => moves.find((row) => row.move === move)?.score;
+  const moveArgs = (exhaustion) => ({
+    sId: 'strong',
+    ctx: { hostileTargets: ['weak'], besieging: [], homeBesieged: false, vassalBesieged: false },
+    aggressiveness: 1,
+    strengthFor: (id) => (String(id) === 'strong' ? 0.8 : 0.4),
+    exhaustion,
+  });
+
+  test('sue pressure replaces exhaustion instead of stacking with it, and performs no second fidelity read', () => {
+    let forkCount = 0;
+    const termination = { suePressure01: 0.64 };
+    const low = enumerateMoves({
+      ...moveArgs(0.05), termination, chaosPull: 1, rust: 1,
+      rng: { fork: () => { forkCount += 1; throw new Error('termination control must prevent a second peace-threshold read'); } },
+    });
+    const high = enumerateMoves({ ...moveArgs(0.95), termination });
+    expect(scoreOf(low, 'sue_for_peace')).toBe(scoreOf(high, 'sue_for_peace'));
+    expect(forkCount).toBe(0);
+  });
+
+  test('the termination read already includes momentum, so generic commitment load does not discount the suit again', () => {
+    const termination = { suePressure01: 0.8 };
+    const base = enumerateMoves({ ...moveArgs(0.2), termination });
+    const loaded = enumerateMoves({
+      ...moveArgs(0.2), termination,
+      commitmentLoad: { factorFor: () => 0.5 },
+    });
+    expect(scoreOf(loaded, 'sue_for_peace')).toBe(scoreOf(base, 'sue_for_peace'));
+    expect(scoreOf(loaded, 'deploy')).toBeLessThan(scoreOf(base, 'deploy'));
+  });
+
+  test('the chosen suit reuses the evaluator receipt and does not expose numeric causal prose', () => {
+    const drained = save('strong', 'Ironhold', {
+      tier: 'city', population: 45000,
+      activeConditions: [
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain' },
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain 2' },
+      ],
+    });
+    const saves = [drained, weakSave('weak', 'Thornmere')];
+    const numericCoalitionReceipt = 'The coalition thins: 2 of 5 co-belligerents have left the field.';
+    const fixture = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+      extraState: {
+        deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+        spatialLedgers: {
+          peaceReasons: {
+            'strong>weak': {
+              updatedTick: 6,
+              reasons: {
+                coalition_fracture: {
+                  type: 'coalition_fracture', score: 0.8, sinceTick: 1, tick: 6,
+                  receipt: numericCoalitionReceipt,
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    const { snap, pIdx } = snapshotFor(strategyCampaign({
+      warLayerEnabled: true, peaceEngineEnabled: true,
+    }, fixture), saves);
+    const reason = 'The mounting cost of the campaign now decides the court\'s suit.';
+    const out = evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 6,
+      simulationRules: { settlementStrategyEnabled: true },
+      warTerminationByAttacker: new Map([['strong', {
+        attackerId: 'strong', targetId: 'weak', suePressure01: 1,
+        dissolvedCauseTypes: [], receipt: { reason },
+      }]]),
+    });
+    const peace = out.find((candidate) => candidate.metadata.settlementId === 'strong' && candidate.candidateType === 'strategy_sue_for_peace');
+    expect(peace).toBeTruthy();
+    expect(peace.reasons).toContain(reason);
+    expect(peace.reasons).toContain('The coalition is thinning as allies leave the field.');
+    expect(peace.reasons).not.toContain(numericCoalitionReceipt); // anchored: the authored coalition line above proves this reason family remained live
+    expect(peace.reasons.every((line) => !/\d(?:\.\d+)?/.test(line))).toBe(true);
+    expect(peace.reasons.every((line) => !/Casus pacis:/.test(line))).toBe(true);
+  });
+
+  test('a missing deployment clock cannot mint a bilateral peace-offer marker', () => {
+    const drained = save('strong', 'Ironhold', {
+      tier: 'city',
+      population: 45000,
+      activeConditions: [
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain' },
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain 2' },
+      ],
+    });
+    const saves = [drained, weakSave('weak', 'Thornmere')];
+    for (const sinceTick of [null, '', '   ']) {
+      const campaign = strategyCampaign({
+        warLayerEnabled: true,
+        warTerminationEnabled: true,
+      }, {
+        ...HOSTILE_PAIR,
+        extraState: { deployments: { strong: { targetId: 'weak', sinceTick, role: 'siege' } } },
+      });
+      const { snap, pIdx } = snapshotFor(campaign, saves);
+      const out = evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6,
+        simulationRules: campaign.worldState.simulationRules,
+        warTerminationByAttacker: new Map([['strong', {
+          attackerId: 'strong',
+          targetId: 'weak',
+          suePressure01: 1,
+          dissolvedCauseTypes: [],
+          receipt: { reason: 'The campaign has become too costly.' },
+        }]]),
+      });
+      const peace = out.find((candidate) => candidate.targetSaveId === 'strong'
+        && candidate.candidateType === 'strategy_sue_for_peace');
+      expect(peace).toBeTruthy();
+      expect(peace.proposalPayload.peaceOffer).toBeUndefined();
+      expect(peace.proposalPayload.peaceFrontSinceTick).toBeUndefined();
+    }
+  });
+});
+
+describe('WR-1 current casus — the strategy producer cannot renew stale predation', () => {
+  test('a patron counterforce removes stale opportunism before it can mint a fresh march intent', () => {
+    const saves = [
+      save('strong', 'Ironhold', { tier: 'city', population: 5000 }),
+      save('weak', 'Thornmere', { tier: 'town', population: 4000 }),
+      save('guardian', 'Highwatch', { tier: 'city', population: 8000 }),
+    ];
+    const fixture = {
+      settlementIds: saves.map(item => item.id),
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        { id: 'edge.guardian.weak', from: 'guardian', to: 'weak', relationshipType: 'patron' },
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile' },
+        'edge.guardian.weak': { relationshipType: 'patron', patronSaveId: 'guardian' },
+      },
+      extraState: {
+        spatialCanonVersion: 1,
+        spatialLedgers: {
+          warReasons: {
+            'strong>weak': {
+              updatedTick: 1,
+              reasons: {
+                opportunism: {
+                  type: 'opportunism', score: 1, sinceTick: 1, tick: 1,
+                  receipt: 'The court remembers an undefended prize.',
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    const choose = warTerminationEnabled => {
+      const campaign = strategyCampaign({
+        warLayerEnabled: true, peaceEngineEnabled: true, warTerminationEnabled,
+      }, fixture);
+      const { snap, pIdx } = snapshotFor(campaign, saves);
+      return evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6, simulationRules: campaign.worldState.simulationRules, rng: createPRNG('p-126'),
+      }).find(candidate => candidate.targetSaveId === 'strong');
+    };
+
+    const dark = choose(false);
+    const lit = choose(true);
+    expect(dark).toMatchObject({
+      candidateType: 'strategy_deploy',
+      metadata: { deployTargetId: 'weak' },
+    });
+    expect(dark.reasons).toContain('Casus belli: opportunism (1.00) — The court remembers an undefended prize.');
+    expect(lit.candidateType).toBe('strategy_hold');
+    expect(lit.metadata.deployTargetId).toBeUndefined();
+    expect(lit.reasons).toEqual(["Ironhold's strategy chooser selected hold."]);
+  });
+});
+
+describe('WR-5 inherited war demand — the installed seat honors its charge', () => {
+  function choose(desiredAction) {
+    const strong = strongSave('strong', 'Ironhold');
+    strong.settlement.npcs = [{
+      id: 'new',
+      name: 'The New Marshal',
+      importance: 'pillar',
+      factionAffiliation: 'Military Council',
+      personality: { dominant: 'cautious', flaw: 'proud', modifier: 'measured' },
+    }];
+    const saves = [strong, weakSave('weak', 'Thornmere')];
+    const campaign = strategyCampaign({
+      warLayerEnabled: true,
+      warTerminationEnabled: true,
+    }, {
+      ...HOSTILE_PAIR,
+      extraState: {
+        spatialLedgers: {
+          npcLadder: {
+            strong: {
+              factions: { 'fac.military_council': { rungs: ['strong:new'] } },
+              seatTransitions: [{
+                id: 'seat.install', fromRulerId: 'strong:old', toRulerId: 'strong:new',
+                cause: 'government_change', tick: 5,
+                authorityEpoch: authorityTransferEpochFor(strong.settlement),
+                governingFactionName: 'Military Council',
+                warDemand: {
+                  actorId: 'strong', targetId: 'weak', decisionId: 'war.decision', desiredAction,
+                },
+              }],
+            },
+          },
+        },
+      },
+    });
+    const { snap, pIdx } = snapshotFor(campaign, saves);
+    return evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 6,
+      simulationRules: campaign.worldState.simulationRules,
+      warTerminationByAttacker: new Map([['strong', {
+        attackerId: 'strong', targetId: 'weak', suePressure01: 1,
+        dissolvedCauseTypes: [], receipt: { reason: 'The court has read the war again.' },
+      }]]),
+      rng: createPRNG('demand-does-not-depend-on-this-draw'),
+    }).find((candidate) => candidate.targetSaveId === 'strong');
+  }
+
+  test('the same legal state can compel peace or bar peace without inventing a move', () => {
+    const peace = choose('peace');
+    const continueWar = choose('continue');
+    expect(peace).toMatchObject({
+      candidateType: 'strategy_sue_for_peace',
+      metadata: { inheritedWarDemand: { decisionId: 'war.decision', desiredAction: 'peace' } },
+    });
+    expect(continueWar.candidateType).not.toBe('strategy_sue_for_peace');
+    expect(continueWar.metadata.inheritedWarDemand).toMatchObject({
+      decisionId: 'war.decision', desiredAction: 'continue',
+    });
   });
 });
 

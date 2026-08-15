@@ -1,7 +1,8 @@
 /**
  * domain/events/eventPipeline.js — Unified event preview/apply/derive flow.
  *
- * `previewEvent` and `applyEvent` once ran on *different* code paths:
+ * Tier 2.2 of the roadmap. Before Phase 18, `previewEvent` and
+ * `applyEvent` ran on *different* code paths:
  *
  *   previewEvent: applyStateDeltas(beforeState, spec.stateDeltas(event))
  *   applyEvent:   deriveSystemState(mutateSettlement(settlement, event))
@@ -17,11 +18,11 @@
  *      (this preserves the authored-effect surface that mutate doesn't
  *      structurally model — e.g. "food storage damage raises resource
  *      pressure by +12" lives in the registry, not in the derivation)
- *   5. Re-derive CausalState (14-variable substrate)
+ *   5. Re-derive CausalState (14-variable substrate, Phase 17)
  *   6. Compute deltas at both layers (compareSystemState +
  *      compareCausalState)
- *   7. Compute faction relationship deltas
- *   8. Compute faction responses
+ *   7. Compute Phase 14 faction relationship deltas
+ *   8. Compute faction responses (Phase 9+)
  *   9. Emit the narrative summary
  *
  * Both `previewEvent` and `applyEvent` become thin wrappers around
@@ -34,35 +35,75 @@
  */
 
 import { EVENT_REGISTRY } from './registry.js';
-import { mutateSettlement } from './mutate.js';
+import { mutateSettlementChecked } from './mutate.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { generateFactionResponses } from './factionResponses.js';
-import { clamp01, bandFor } from '../state/bands.js';
+import { clamp01, bandForDimension } from '../state/bands.js';
 import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { recalculateFactionRelationships } from '../factionRelationshipUpdate.js';
-import { resolveStressorEventSeverity } from './resolveStressorEventSeverity.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
+/** @typedef {import('../types.js').StateDimension} StateDimension */
+/** @typedef {import('../types.js').Delta} Delta */
+/** @typedef {import('../types.js').FactionResponse} FactionResponse */
+
+/**
+ * Substrate-layer (Phase 17) diff entry, as produced by compareCausalState.
+ * Local shape mirror — causalState.js documents the entry in prose only.
+ * @typedef {Object} CausalStateDelta
+ * @property {string} variable
+ * @property {number} [before]
+ * @property {number} [after]
+ * @property {number} change
+ * @property {string} [bandBefore]
+ * @property {string} [bandAfter]
+ * @property {string} [polarity]
+ * @property {string} [explanation]
+ */
+
+/**
+ * Pipeline warning entry. `severity: 'mismatch'` aborts the pipeline;
+ * `'veto'` is the handler-veto channel (Composer V2 §2) — a gated mutation
+ * REFUSED, the pipeline aborts the same way, and `code` carries the stable
+ * machine code the affordance-manifest predicates cover; `'soft'` records a
+ * non-fatal sub-system failure.
+ * @typedef {Object} PipelineWarning
+ * @property {string} severity
+ * @property {string} message
+ * @property {string} [code]
+ * @property {string} [detail]
+ */
 
 // ── Authored-delta application ───────────────────────────────────────────
 // Identical math to the legacy previewEvent#applyStateDeltas, kept here
 // so the pipeline can layer the registry's authored deltas on top of
 // the structurally-derived SystemState.
 
-/** @param {any} state @param {any} deltas */
+/**
+ * Layer authored additive deltas onto a derived SystemState.
+ * (The Record intersection gives string-key access over the four fixed
+ * dimensions; SystemState is structurally assignable to it.)
+ * @param {SystemState & Record<string, StateDimension>} state
+ * @param {Record<string, number>|null|undefined} deltas
+ * @returns {SystemState}
+ */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
-  /** @type {Record<string, any>} */
-  const next = /** @type {Record<string, any>} */ ({});
+  /** @type {SystemState & Record<string, StateDimension>} */
+  const next = /** @type {SystemState & Record<string, StateDimension>} */ ({});
   for (const key of Object.keys(state)) {
     const dim = state[key];
     const change = deltas?.[key] ?? 0;
     const value = Math.round(clamp01((dim?.value ?? 50) + change));
     next[key] = {
+      // Polarity-ORIENTED, exactly as deriveSystemState's finalize() bands: this
+      // authored layer is what PERSISTS as campaignState.systemState, so banding
+      // it through the bare higher-is-better ladder wrote the inverted word into
+      // the save for the three lower-is-better dimensions.
       value,
-      band: bandFor(value),
+      band: bandForDimension(key, value),
       drivers: dim?.drivers || [],
       risks:   dim?.risks || [],
     };
@@ -87,7 +128,7 @@ function applyAuthoredStateDeltas(state, deltas) {
  *
  * @param {SystemState} systemState — a freshly derived SystemState
  * @param {Event}  event
- * @param {any} [settlement] the BEFORE settlement (authored deltas may read it)
+ * @param {Object|null} [settlement] the BEFORE settlement (authored deltas may read it)
  * @returns {SystemState}
  */
 export function layerAuthoredDeltas(systemState, event, settlement = null) {
@@ -102,7 +143,7 @@ export function layerAuthoredDeltas(systemState, event, settlement = null) {
 /**
  * @typedef {Object} EventPipelineResult
  *
- * Every consumer (preview / apply / future counterfactual)
+ * Every consumer (preview / apply / future Tier 4.17 counterfactual)
  * receives the same envelope.
  *
  * @property {Event}        event
@@ -112,12 +153,12 @@ export function layerAuthoredDeltas(systemState, event, settlement = null) {
  * @property {SystemState}  afterSystemState
  * @property {Object}       beforeCausalState
  * @property {Object}       afterCausalState
- * @property {Array<Object>} systemStateDeltas
- * @property {Array<Object>} causalStateDeltas
+ * @property {Delta[]}      systemStateDeltas
+ * @property {CausalStateDelta[]} causalStateDeltas
  * @property {Array<Object>} factionRelationshipDeltas
- * @property {Array<Object>} factionResponses
+ * @property {FactionResponse[]} factionResponses
  * @property {string}       narrativeSummary
- * @property {Array<Object>} warnings
+ * @property {PipelineWarning[]} warnings
  */
 
 /**
@@ -138,9 +179,11 @@ export function runEventPipeline(settlement, event, options = {}) {
   const beforeCausalState = deriveCausalState(beforeSettlement);
 
   // 1. Validate the event
-  /** @type {any} */
+  /** @type {NonNullable<(typeof EVENT_REGISTRY)[Event['type']]>} */
+  // @ts-ignore -- the initializer can be null, but every null path exits via
+  // the mismatch early-return below; past it, spec is non-null by construction.
   const spec = event ? EVENT_REGISTRY[event.type] : null;
-  /** @type {any[]} */
+  /** @type {PipelineWarning[]} */
   const warnings = [];
   if (!event || !spec) {
     warnings.push({ severity: 'mismatch', message: `Unknown event type: ${event?.type}` });
@@ -148,37 +191,48 @@ export function runEventPipeline(settlement, event, options = {}) {
     warnings.push({ severity: 'mismatch', message: `${spec.label} requires a target` });
   }
 
-  // Early-return if validation failed — no mutation, no deltas
-  if (warnings.some(w => w.severity === 'mismatch')) {
-    return {
-      event,
-      beforeSettlement,
-      nextSettlement: beforeSettlement,
-      beforeSystemState,
-      afterSystemState: beforeSystemState,
-      beforeCausalState,
-      afterCausalState: beforeCausalState,
-      systemStateDeltas: [],
-      causalStateDeltas: [],
-      factionRelationshipDeltas: [],
-      factionResponses: [],
-      narrativeSummary: '',
-      warnings,
-    };
-  }
+  // Shared abort envelope: validation mismatches and handler vetoes both
+  // return the before-state untouched with NO deltas and NO narration.
+  const abortResult = () => ({
+    event,
+    beforeSettlement,
+    nextSettlement: beforeSettlement,
+    beforeSystemState,
+    afterSystemState: beforeSystemState,
+    beforeCausalState,
+    afterCausalState: beforeCausalState,
+    systemStateDeltas: [],
+    causalStateDeltas: [],
+    factionRelationshipDeltas: [],
+    factionResponses: [],
+    narrativeSummary: '',
+    warnings,
+  });
 
-  // 1b. Resolve a DERIVED onset severity for an APPLY_STRESSOR whose DM did not
-  //     pick one: severity is a CONSEQUENCE of the BEFORE settlement's
-  //     preexisting pressure, not a dialed-in number. Stamp it ONCE here so the
-  //     mutation, the authored stateDeltas, the narrative, and (downstream) the
-  //     roaming-twin directive all read the SAME value — the crisis triple can't
-  //     drift. An explicitly-authored severity passes through untouched.
-  const resolvedEvent = resolveStressorEventSeverity(beforeSettlement, event);
+  // Early-return if validation failed — no mutation, no deltas
+  if (warnings.some(w => w.severity === 'mismatch')) return abortResult();
 
   // 2. Mutate a cloned settlement — entity-level changes (status flips,
-  //    impairments, NPC patches, propagation). mutateSettlement never
-  //    mutates the input.
-  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event: resolvedEvent, now: /** @type {any} */ (now) });
+  //    impairments, NPC patches, propagation). The checked router surfaces
+  //    the handler-veto channel (Composer V2 §2): a gated no-op is a blocking
+  //    refusal, and deltas + narration must NOT commit on it — the phantom-
+  //    event hole (timeline stories the world never did) closes here for
+  //    preview and apply alike. Never mutates the input.
+  // @ts-ignore -- mutate.js declares args.now as string|undefined but its own
+  // default is `now = null`; the declared type there should be string|null.
+  const mutated = mutateSettlementChecked({ settlement: beforeSettlement, event, now });
+  if (mutated.veto) {
+    // Terse eager message (code + detail); the LAZY composer surfaces the full
+    // DM-facing prose via the manifest's vetoProse(code, detail).
+    warnings.push({
+      severity: 'veto',
+      code: mutated.veto.code,
+      detail: mutated.veto.detail,
+      message: `${spec.label || event.type} refused: ${mutated.veto.code}${mutated.veto.detail ? ` (${mutated.veto.detail})` : ''}`,
+    });
+    return abortResult();
+  }
+  const nextSettlement = mutated.settlement;
 
   // 3. Re-derive structural SystemState from the mutated settlement
   const afterStructural = deriveSystemState(nextSettlement);
@@ -192,10 +246,10 @@ export function runEventPipeline(settlement, event, options = {}) {
   //    Cast: spec.stateDeltas is typed as 1-arg in the registry typedef
   //    but accepts an optional settlement parameter — every spec we
   //    have today honors it. Cast through Function to express that.
-  const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(resolvedEvent, beforeSettlement) || {};
+  const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(event, beforeSettlement) || {};
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, rawAuthoredDeltas);
 
-  // 5. Re-derive CausalState from the mutated settlement (the 14-variable
+  // 5. Re-derive CausalState from the mutated settlement (Phase 17
   //    substrate). The substrate reads from supply chains, factions,
   //    NPCs, active conditions, and generator output — most of which
   //    mutateSettlement may have changed.
@@ -205,14 +259,14 @@ export function runEventPipeline(settlement, event, options = {}) {
   const systemStateDeltas = compareSystemState(beforeSystemState, afterSystemState);
   const causalStateDeltas = compareCausalState(beforeCausalState, afterCausalState);
 
-  // 7. Faction relationship deltas — computed against the
+  // 7. Phase 14 faction relationship deltas — computed against the
   //    BEFORE settlement because the deltas describe how the event
   //    moves factions, not what the post-event state already reflects.
-  /** @type {any[]} */
+  /** @type {ReturnType<typeof recalculateFactionRelationships>} */
   let factionRelationshipDeltas = [];
   if (!skipFactionResponses) {
     try {
-      factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, resolvedEvent);
+      factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, event);
     } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction relationship calc failed: ${e?.message || e}` });
     }
@@ -220,11 +274,11 @@ export function runEventPipeline(settlement, event, options = {}) {
 
   // 8. Faction responses (existing system) — computed against the
   //    MUTATED settlement so impaired factions speak as such.
-  /** @type {any[]} */
+  /** @type {ReturnType<typeof generateFactionResponses>} */
   let factionResponses = [];
   if (!skipFactionResponses) {
     try {
-      factionResponses = generateFactionResponses(nextSettlement, resolvedEvent);
+      factionResponses = generateFactionResponses(/** @type {import('./factionResponses.js').SettlementLike} */ (nextSettlement), event);
     } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction responses failed: ${e?.message || e}` });
     }
@@ -234,14 +288,11 @@ export function runEventPipeline(settlement, event, options = {}) {
   //    resolution since the event names what it intended to do.
   //    Same cast as stateDeltas: narrate accepts an optional settlement.
   const narrativeSummary = typeof spec.narrate === 'function'
-    ? /** @type {Function} */ (spec.narrate)(resolvedEvent, beforeSettlement)
+    ? /** @type {Function} */ (spec.narrate)(event, beforeSettlement)
     : '';
 
   return {
-    // The resolved event (derived severity stamped in) is the canonical record:
-    // the store logs THIS event and recomputes the twin directive from it, so
-    // the dossier entry, the state deltas, and the roaming twin all agree.
-    event: resolvedEvent,
+    event,
     beforeSettlement,
     nextSettlement,
     beforeSystemState,
@@ -261,9 +312,9 @@ export function runEventPipeline(settlement, event, options = {}) {
 
 /**
  * High-level summary of an event pipeline result. Useful for the
- * "what just happened" UI surface and AI grounding.
+ * "what just happened" UI surface and Tier 6.1 AI grounding.
  *
- * Two-band separation: the display bands
+ * Two-band separation (W6#2): the display bands
  * (Stable/Strained/Vulnerable/Critical) and the causal-substrate bands
  * (surplus/adequate/strained/critical/collapsed) share words at
  * incompatible thresholds, so concatenating both delta families into
@@ -272,7 +323,9 @@ export function runEventPipeline(settlement, event, options = {}) {
  * systemStateDeltas only. The substrate's causalStateDeltas ship
  * separately in `diagnosticLines` for internal/debug surfaces; nothing
  * DM-facing should render them.
- * @param {any} result
+ *
+ * @param {EventPipelineResult|null|undefined} result
+ * @returns {{ lines: string[], diagnosticLines: string[], systemDeltaCount: number, causalDeltaCount: number, factionDeltaCount: number }}
  */
 export function summarizeEventResult(result) {
   if (!result) {

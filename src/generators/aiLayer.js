@@ -1,8 +1,11 @@
 /**
- * aiLayer.js — Narrative Layer AI engine
+ * aiLayer.js — LOCAL template-based narrative engine (NOT an API client).
  *
- * Builds a structured prompt from the full settlement object,
- * calls the Claude API, and returns a structured narrative object:
+ * Despite the "AI" name, runTemplateNarrative makes no network calls and talks
+ * to no LLM. It extracts a context from the settlement and synthesizes the
+ * narrative deterministically from string templates (buildLocalThesis /
+ * buildLocalDailyLife / buildLocalNotes / buildLocalCompass). It returns a
+ * structured narrative object shaped like the real one:
  * {
  *   thesis:    string,            // 2-3 para settlement character overview
  *   dailyLife: string,            // 3-4 para daily life prose (replaces DailyLifeTab generate)
@@ -11,7 +14,16 @@
  *     npcs, history, resources, viability, plot_hooks
  *   }
  * }
+ *
+ * The genuine LLM path lives server-side (supabase/functions/generate-narrative,
+ * reached via src/store/aiSlice.js when Supabase is configured). This module is
+ * the offline fallback OutputContainer.jsx runs when it is NOT configured.
+ *
+ * buildAiLayerPrompt is exported for the server prompt + tests; the local
+ * synthesizer builds it but does not send it anywhere.
  */
+
+import { formatCount } from '../domain/formatNumber.js';
 
 // ── Data extraction ─────────────────────────────────────────────────────────
 
@@ -125,7 +137,7 @@ export function extractFullContext(s) {
     stresses: stresses.map(st => st?.label || st?.type).filter(Boolean),
 
     // Economy
-    prosperity:   via.summary?.split(/[—:]/)[0]?.trim() || null,
+    prosperity:   via.summary?.split('—')[0]?.trim() || null,
     econScore:    Math.round(eco.compound?.economyOutput ?? scores.economic ?? 50),
     chains:       chains.map(c => `${c.label || c.chainId} (${c.status || 'ok'})`).slice(0, 8),
     // incomeSources live on economicState (economicGenerator's return), NOT
@@ -160,7 +172,10 @@ export function extractFullContext(s) {
     // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
     // generateConflicts) — description/type exist only on legacy/edge shapes.
     conflicts:    conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
-    tensions:     tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
+    // `t.title` deleted as writerless — see dailyLifeLogic.js for the key-set proof.
+    // Byte-identical prompt output: a tension has never carried `title`, so this
+    // expression already evaluated to `t.type` on every record the engine can build.
+    tensions:     tensions.slice(0, 3).map(t => t.type).filter(Boolean),
 
     // NPCs
     npcsCount:    npcs.length,
@@ -202,12 +217,17 @@ export function extractFullContext(s) {
     // settlement.plotHooks is never written — the live hooks are
     // economicViability.plotHooks ({ category, hook, severity } objects) and
     // the per-event history.historicalEvents[].plotHooks (strings). Merge
-    // both (top-level kept as a legacy fallback), normalize to plain text,
-    // dedupe, and cap at 4 to keep the prompt budget where it was.
+    // both, normalize to plain text, dedupe, and cap at 4 to keep the prompt
+    // budget where it was.
+    //
+    // ⚠ THE `...(s.plotHooks || [])` SPREAD WAS DELETED, NOT DISABLED
+    // (2026-08-11). This comment already recorded that the root key is never
+    // written, and it was kept anyway "as a legacy fallback" — a fallback that
+    // can never fall back. Deleting it is byte-identical on every settlement the
+    // pipeline produces. Do not re-add it.
     plotHooks:    [...new Set([
       ...(via.plotHooks || []),
       ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []),
-      ...(s.plotHooks || []),
     ].map(normalizePlotHook).filter(Boolean))].slice(0, 4),
 
     // Spatial
@@ -222,7 +242,7 @@ export function buildAiLayerPrompt(ctx) {
 
   lines.push('SETTLEMENT DATA');
   lines.push(`Name: ${ctx.name}`);
-  lines.push(`Tier: ${ctx.tier}${ctx.population ? ` — population ~${ctx.population.toLocaleString('en-US')}` : ''}`);
+  lines.push(`Tier: ${ctx.tier}${ctx.population ? ` — population ~${formatCount(ctx.population)}` : ''}`);
   if (ctx.culture)    lines.push(`Culture: ${ctx.culture}`);
   if (ctx.terrain)    lines.push(`Terrain: ${ctx.terrain}`);
   lines.push(`Trade access: ${ctx.tradeRoute}`);
@@ -371,7 +391,7 @@ function buildLocalCompass(ctx) {
   };
 }
 
-export async function runAiLayer(settlement, onProgress) {
+export async function runTemplateNarrative(settlement, onProgress) {
   const ctx    = extractFullContext(settlement);
   const _prompt = buildAiLayerPrompt(ctx);
 

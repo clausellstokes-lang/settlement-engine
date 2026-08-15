@@ -21,26 +21,39 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER, CHROME } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
+import { ModeSelector } from './generate/ModeSelector.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
-import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 import BuyThisDossier from './BuyThisDossier.jsx';
-import ExportDraftButton from './generate/ExportDraftButton.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
+import FoundingWorlds from './generate/FoundingWorlds.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
+import ExportDraftButton from './generate/ExportDraftButton.jsx';
+import { ClerkNote, ClerkNoteStrong } from './generate/ClerkNote.jsx';
+import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
-// Pipeline reveal overlay (tiny, but stays lazy so non-generating
+// P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
+// THE WORKFLOW BLOCK — the generation-steps rail that sits ahead of the film
+// block below. Lazy for the same reason the drawer's copy is: the Create page is
+// a first-paint surface, and the wizard chunk must not statically re-absorb the
+// rail's import graph (stepMetadata / trace / simulationSpine).
+const PipelineRail = lazy(() => import('./PipelineRail.jsx'));
+// LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
+// only meaningful once a settlement exists. The dossier tabs import the same leaf
+// statically from inside their own lazy chunks, so this costs a shared chunk, not
+// first-paint bytes.
+const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 // The linear step wizard collapsed into LayeredConfigurationPanel (UX overhaul
@@ -64,9 +77,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Store state
   const settlement    = useStore(s => s.settlement);
   const activeSaveId  = useStore(s => s.activeSaveId);
-  const config        = useStore(s => s.config);
+  // (No `config` subscription: the retired coach effect was its only reader, and
+  // the analytics payload takes config off a fresh useStore.getState() snapshot
+  // in handleGenerate. Nothing this component RENDERS depends on config.)
   const wizardMode    = useStore(s => s.wizardMode);
-  const entryPath     = useStore(s => s.entryPath);
   const loadedFromSave = useStore(s => s.loadedFromSave);
   const importedNeighbour = useStore(s => s.importedNeighbour);
   const canSave       = useStore(s => s.canSave());
@@ -78,15 +92,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const generate        = useStore(s => s.generateSettlement);
   const setWizardStep   = useStore(s => s.setWizardStep);
   const setWizardMode   = useStore(s => s.setWizardMode);
-  const setEntryPath    = useStore(s => s.setEntryPath);
-  const resetConfig     = useStore(s => s.resetConfig);
-  const resetAllToggles = useStore(s => s.resetAllToggles);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
   const setSettlement   = useStore(s => s.setSettlement);
 
-  // Pipeline reveal state. When `pipelineRevealActive` is
+  // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
   // true, the dossier is hidden behind the reveal overlay. Once the
   // overlay's playback completes it calls dismissPipelineReveal and the
   // dossier appears.
@@ -96,6 +107,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
+  const [generating, setGenerating] = useState(false);
+  // State disables the visible controls; the ref closes the same-tick window
+  // before React can render that disabled state.
+  const generatingRef = useRef(false);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
   // Recoverable unsaved dossier. If a save stalled and the user reloaded to
   // recover, the generated settlement is gone from the store (never persisted)
@@ -104,8 +119,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [restorableDraft, setRestorableDraft] = useState(() => readDraft());
 
   // ── Analytics: wizard-funnel session bookkeeping ─────────────────────────
-  // Plain refs so they never trigger renders. `generatedThisSession` flips
-  // true the first time the user fires Generate, suppressing wizard_abandoned.
+  // Plain refs so they never trigger renders. `generatedThisSession` flips only
+  // after Generate resolves with a settlement, suppressing wizard_abandoned.
   // `visitedSteps` accumulates the distinct step ids seen; `wizardMountAt`
   // anchors the dwell band for abandonment. All fire-and-forget, additive.
   const generatedThisSession = useRef(false);
@@ -124,48 +139,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     }
   }, [settlement]);
 
-  // Restore the recovered dossier into the store. The draft is kept (not cleared)
-  // until a save actually lands, so a second stall/reload can recover again.
-  const handleRestoreDraft = useCallback(() => {
-    if (!restorableDraft?.settlement) return;
-    setSettlement(restorableDraft.settlement);
-    setShowOutput(true);
-    setRestorableDraft(null);
-  }, [restorableDraft, setSettlement]);
-
-  const handleDismissDraft = useCallback(() => {
-    clearDraft();
-    setRestorableDraft(null);
-  }, []);
-
-  // ── Scroll-padding so the pinned chrome never hides a dossier control ──
-  // While the dossier is on screen, two stacked sticky bars pin to the top of
-  // the window scroller: the app header (top:0, ~59px) and the WizardOutputToolbar
-  // (top:60, ~64px tall → bottom ~124px). A focus move or anchored scroll into a
-  // dossier section would otherwise land the target flush under that chrome,
-  // hiding the very control the user jumped to (the Overview/DM Summary/Plot
-  // Hooks tabs, card headers). `scroll-padding-top` on the real scroller (the
-  // document element — `main` is no longer a scroll container) reserves the
-  // chrome's height so those scrolls stop just below it. On mobile the slim app
-  // header (CHROME.headerMobile) and the WizardOutputToolbar (CHROME.toolbarHeight)
-  // now STACK — the toolbar pins at the header's height rather than tucking under
-  // it — so a focus/anchor scroll must clear BOTH bars, not just the header.
-  // Scoped to the visible-dossier window and fully reverted on teardown so other
-  // views keep the default scroll behaviour.
-  const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
-  useEffect(() => {
-    if (!dossierVisible || typeof document === 'undefined') return undefined;
-    const root = document.documentElement;
-    const prev = root.style.scrollPaddingTop;
-    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
-    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
-    return () => { root.style.scrollPaddingTop = prev; };
-  }, [dossierVisible, isMobile]);
-
   // Analytics: the linear step wizard collapsed into the layered Create panel
   // (UX overhaul Phase 6). LayeredConfigurationPanel now fires wizard_step_viewed
-  // for each section (config / institutions / services / trade) as it is opened.
-  // Here we seed the abandonment session with the always-mounted `config` step so
+  // for each section (config / institutions / services / trade) as it is opened —
+  // it is the SOLE emitter, so no competing per-step fire lives here. Here we seed
+  // the abandonment session with the always-mounted `config` step so
   // wizard_abandoned still reports a meaningful last step when the user leaves
   // without generating.
   useEffect(() => {
@@ -208,8 +186,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     };
   }, []);
 
-  const handleGenerate = useCallback(() => {
-    // Anonymous daily cap. Regeneration counts against the same
+  const handleGenerate = useCallback(async () => {
+    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
     // 3/day allowance as the first generation (enforced in the store), so
     // when an anon is already at cap, route to the sign-in/unlock flow
     // rather than dead-clicking — generateSettlement would no-op anyway.
@@ -217,12 +195,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       if (typeof onSignIn === 'function') onSignIn();
       return;
     }
+    if (generatingRef.current) return;
+    generatingRef.current = true;
+    setGenerating(true);
     setGenerateError(null);
     // Analytics (additive, fire-and-forget): generation_started. Read coarse
     // config enums + toggle counts from a fresh store snapshot so we never
-    // add a render-triggering subscription. Mark the session as having
-    // generated so wizard_abandoned won't fire on unmount.
-    generatedThisSession.current = true;
+    // add a render-triggering subscription.
     try {
       const st = useStore.getState();
       const cfg = st.config || {};
@@ -245,12 +224,17 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       });
     } catch { /* analytics must never affect generation */ }
     try {
-      generate();
+      const generated = await generate();
+      if (!generated) throw new Error('Generation completed without a settlement.');
+      generatedThisSession.current = true;
       clearLoadedFromSave();
       setShowOutput(true); // show output after generation
     } catch (e) {
       console.error('GENERATE ERROR:', e);
-      setGenerateError(`Error: ${e.message || e}`);
+      setGenerateError(t('errors.generateFail'));
+    } finally {
+      generatingRef.current = false;
+      setGenerating(false);
     }
   }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 
@@ -265,29 +249,22 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     setPendingExit(null);
     if (clearSettlement) clearSettlement();
     setShowOutput(false);
-    if (kind === 'back') {
-      // Back → where you generated from, choices intact. Instant generation has
-      // no config screen, so it returns to the Create landing; basic/advanced
-      // keep their wizardMode + config so you can tweak and re-roll.
-      if (entryPath === 'instant') { setWizardMode(null); setWizardStep(0); }
-    } else {
-      // New Draft → the SAME path you chose, but fresh: configs AND institution/
-      // service/goods toggles are cleared so none of your prior choices carry
-      // over. Resetting the toggles here is what keeps a force you set on an
-      // earlier build (e.g. an out-of-tier institution) from silently re-applying
-      // to the next settlement and surfacing as a phantom "deliberate override".
-      setWizardMode(entryPath === 'instant' ? null : (entryPath || wizardMode || null));
-      resetConfig();
-      resetAllToggles();
+    if (kind === 'new') {
+      setWizardMode(null);   // → Create landing: mode picker + instant generation
       setWizardStep(0);
     }
-  }, [clearSettlement, setWizardMode, setWizardStep, entryPath, wizardMode, resetConfig, resetAllToggles]);
+  }, [clearSettlement, setWizardMode, setWizardStep]);
 
   const requestExit = useCallback((kind) => {
-    // Unsaved + generated → warn before discarding the random draft.
-    if (settlement && !activeSaveId) { setPendingExit(kind); return; }
+    // Warn before discarding an unsaved random draft — but only when the user
+    // actually has a save path to lose it to. Anonymous visitors have NO Save
+    // affordance (the anon model is ephemeral by design: roll freely, sign in
+    // to keep), so a "you'll lose your draft" confirm is misleading friction —
+    // and it stranded the "New returns to a fresh state" flow behind a dialog
+    // the anon path never expects (the e2e regression, mobile-safari + chromium).
+    if (settlement && !activeSaveId && authTier !== 'anon') { setPendingExit(kind); return; }
     doExit(kind);
-  }, [settlement, activeSaveId, doExit]);
+  }, [settlement, activeSaveId, authTier, doExit]);
 
   /** Back — one step, to the config you generated from (choices intact). */
   const handleBack = useCallback(() => requestExit('back'), [requestExit]);
@@ -295,43 +272,44 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
-  // Contextual nav (#15): App bumps createResetNonce when the user re-clicks the
-  // ALREADY-ACTIVE Create tab. Reset to the first (generate-ask) screen via the
-  // same New-Draft path, so an unsaved generated roll still triggers the
-  // discard-confirm rather than vanishing silently. Mount value is captured so
-  // the effect never fires on first render.
-  const createResetNonce = useStore(s => s.createResetNonce);
-  const prevResetNonceRef = useRef(createResetNonce);
+  // ── Scroll-padding so the pinned chrome never hides a dossier control ──
+  // While the dossier is on screen, two stacked sticky bars pin to the top of
+  // the window scroller: the app header and the WizardOutputToolbar (pinned at
+  // the header's height on mobile so the two STACK). A focus move or anchored
+  // scroll into a dossier section would otherwise land the target flush under
+  // that chrome, hiding the very control the user jumped to. scroll-padding-top
+  // on the document element (the real scroller) reserves the chrome's height so
+  // those scrolls stop just below it. Scoped to the visible-dossier window and
+  // fully reverted on teardown so other views keep the default behaviour. (B4b.)
+  const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
   useEffect(() => {
-    if (createResetNonce !== prevResetNonceRef.current) {
-      prevResetNonceRef.current = createResetNonce;
-      handleNewSettlement();
-    }
-  }, [createResetNonce, handleNewSettlement]);
+    if (!dossierVisible || typeof document === 'undefined') return undefined;
+    const root = document.documentElement;
+    const prev = root.style.scrollPaddingTop;
+    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
+    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    return () => { root.style.scrollPaddingTop = prev; };
+  }, [dossierVisible, isMobile]);
 
-  // Onboarding coach step tracking
-  const onboardingActive = useStore(s => s.onboardingActive);
-  const onboardingStep = useStore(s => s.onboardingStep);
-  const advanceOnboarding = useStore(s => s.advanceOnboarding);
+  // Restore the recovered dossier into the store. The draft is kept (not cleared)
+  // until a save actually lands, so a second stall/reload can recover again.
+  const handleRestoreDraft = useCallback(() => {
+    if (!restorableDraft?.settlement) return;
+    if (typeof setSettlement === 'function') setSettlement(restorableDraft.settlement);
+    setShowOutput(true);
+    setRestorableDraft(null);
+  }, [restorableDraft, setSettlement]);
 
-  // Auto-advance step 0 → 1 when user picks a tier (config.settType changes from 'random')
-  useEffect(() => {
-    if (!onboardingActive) return;
-    if (onboardingStep !== 0) return;
-    if (config.settType && config.settType !== 'random') {
-      advanceOnboarding();
-    }
-  }, [onboardingActive, onboardingStep, config.settType, advanceOnboarding]);
+  const handleDismissDraft = useCallback(() => {
+    clearDraft();
+    setRestorableDraft(null);
+  }, []);
 
-  // Auto-advance step 1 → 2 when a settlement is first generated
-  useEffect(() => {
-    if (!onboardingActive) return;
-    if (onboardingStep >= 2) return;
-    if (settlement) {
-      // Jump straight to "explore" regardless of whether tier was touched
-      useStore.getState().setOnboardingStep(2);
-    }
-  }, [onboardingActive, onboardingStep, settlement]);
+  // (The first-run coach's step tracking lived here until 2026-07-27. It drove
+  // two data-onboard-highlight attributes that no CSS rule ever styled, so it
+  // rendered nothing; the coach state machine was retired whole and the live
+  // first-run teaching belongs to the guidance registry — see the header of
+  // src/store/onboardingSlice.js.)
 
   // Empty state: no mode selected yet AND no settlement.
   //
@@ -356,32 +334,34 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       <>
         {restorableDraft && (
           <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', padding: `${SP.md}px 0 0` }}>
-            <div style={{
-              background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8,
-              padding: '12px 16px', display: 'flex', flexWrap: 'wrap', alignItems: 'center',
-              gap: 12, justifyContent: 'space-between',
-            }}>
-              <div style={{ fontFamily: sans, fontSize: FS.sm, color: swatch['#5A3A00'], flex: '1 1 280px' }}>
-                <strong>A save was interrupted.</strong>{' '}
-                Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
-                {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
-                  ? `"${restorableDraft.name}"` : 'settlement'} is still here.
-              </div>
-              <div style={{ display: 'flex', gap: SP.sm }}>
-                <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
-                <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
-              </div>
-            </div>
+            {/* The interrupted-save recovery, as a rubric-headed clerk's note
+                (Deep Craft cluster 1 — no tinted wash; the rubric speaks). */}
+            <ClerkNote
+              rubric="A save was interrupted"
+              actions={
+                <>
+                  <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
+                  <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
+                </>
+              }
+            >
+              Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
+              {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
+                ? `"${restorableDraft.name}"` : 'settlement'} is still here.
+            </ClerkNote>
           </div>
         )}
         <WizardEmptyState
           showHomeHero={showHomeHero}
           showModePicker={showModePicker}
-          isMobile={isMobile}
           setWizardMode={setWizardMode}
           onSignIn={onSignIn}
           onNavigate={onNavigate}
+          isMobile={isMobile}
         />
+        {/* R-2 CURATED FIRST SEEDS — offered on the create landing (forges a real
+            world whose opening years tell a story; claims-parity-proven). */}
+        <FoundingWorlds onNavigate={onNavigate} />
       </>
     );
   }
@@ -391,18 +371,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // the single LayeredConfigurationPanel (Character preset → Foundations →
   // Fine-tune → Deep constraints → Place in Region). Size is NOT gated — free
   // accounts generate up to metropolis. Anonymous users never reach here (the
-  // hero generates instantly; the mode picker is signed-in only).
+  // hero generates instantly; the mode picker is signed-in only). This restores
+  // master's single-surface config stage (base of record); the linear stepped
+  // wizard it replaced was the 0168e287-merge regression.
   if (!settlement) {
     return (
       // Cap the config stage to the shared page width — mirrors the dossier
       // branch (PAGE_MAX, below) so the input view is framed, not full-bleed (P12).
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
-        <ChangeModeBar mode={wizardMode} onChangeMode={(m) => { if (m) setEntryPath(m); setWizardMode(m); }} />
-
-        {/* The anon-in-panel "Free mode generates Thorp/Hamlet/Village" banner
-            was removed: anon users never pick a mode, so this config-panel branch
-            is unreachable for them (dead code), and its tier list contradicted
-            the hero's ('hamlet/village/town') and the real cap ('town'). */}
+        {/* Mode switch (Basic ⇄ Advanced) + the null/Create-exit path. The live
+            store has no entryPath, so this is the plain setWizardMode binding
+            (setWizardMode(null) exits to the Create landing). */}
+        <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
         <WizardLoadedBanners
           loadedFromSave={loadedFromSave}
@@ -412,11 +392,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         />
 
         {/* Instructional intro — the canonical PageHeader idiom (eyebrow + serif
-            title + italic subtitle), shared with the standalone surfaces. The
-            only saturated-gold mass on this page is the Generate button (P4
-            one-focal-point); the small-size header carries the section label
-            without out-shouting it. Mode-specific guidance rides the subtitle. */}
+            title + italic subtitle). The only saturated-gold mass on this page is
+            the Generate button (P4 one-focal-point). as="h2": the app chrome owns
+            the page h1. Mode-specific guidance rides the subtitle. */}
         <PageHeader
+          as="h2"
           size="sm"
           eyebrow={t('generate.introEyebrow')}
           title={t('generate.introTitle')}
@@ -425,44 +405,57 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             : t('generate.introSubtitleBasic')}
         />
 
-        <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
-          <LayeredConfigurationPanel mode={wizardMode === 'advanced' ? 'advanced' : 'basic'} />
+        {/* THE LEAF (C1r-c1 — the FORGE commissioning-desk composition, docs/
+            DESIGN_DEEP_CRAFT_PAGES.md: "Advanced unfolds a second leaf"). The
+            configuration is a folded leaf that opens from its crease — oc-m-unfold,
+            behavior #2 of the sanctioned twelve (design/organic/motion.js). LAYOUT
+            ONLY: the SAME LayeredConfigurationPanel + WizardCloseout are re-vehicled
+            inside the leaf with ZERO handler changes, and the content is fully in
+            the DOM at t=0 (the reveal is presentation over complete content, instant
+            under prefers-reduced-motion via the global oc-m- collapse), so the
+            behavioral pins — layeredConfigurationPanel + generateWizardFocus — hold
+            unchanged. The inner flex column re-supplies the SP.xl gap the two blocks
+            had as sibling flex children before the leaf wrapped them. */}
+        <div className="oc-m-unfold" style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
+          <div>
+            {/* showPlaceInRegion is a conscious decision (census A3): the
+                Place-in-Region layer is a KEEP control that master's base-of-record
+                composition renders in Advanced (the panel internally gates it to
+                advanced-on-desktop, so Basic never shows it regardless). */}
+            <LayeredConfigurationPanel
+              mode={wizardMode === 'advanced' ? 'advanced' : 'basic'}
+              showPlaceInRegion={wizardMode === 'advanced'}
+            />
+          </div>
+
+          {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
+              review step; Advanced, where the user set real constraints, gets a
+              "Ready to generate" summary so Generate reads as a confirmation. */}
+          {wizardMode === 'advanced' && <WizardCloseout />}
         </div>
 
-        {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
-            review step; Advanced, where the user set real constraints, gets a
-            "Ready to generate" summary so Generate reads as a confirmation. */}
-        {wizardMode === 'advanced' && <WizardCloseout />}
-
-        {/* First-generation failures land HERE too. The store re-throws before it
-            ever sets `settlement`, so on a failed first roll the pre-generate
-            branch re-renders — without this block the error had no DOM home and
-            the click was a silent dead-end (P10). The Generate button below is the
-            retry affordance. */}
+        {/* First-generation failures land HERE too (P10). The store re-throws
+            before it ever sets `settlement`, so on a failed first roll the
+            pre-generate branch re-renders — without this block the click was a
+            silent dead-end. Carried by the Deep Craft clerk's-note idiom (no
+            tinted wash); the Generate button below is the retry affordance. */}
         {generateError && (
-          <div role="alert" style={{
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: swatch.dangerBg,
-            border: `1px solid ${DANGER_BORDER}`,
-            borderRadius: R.md,
-            color: swatch.danger,
-            fontFamily: sans,
-            fontSize: FS.sm,
-          }}>
+          <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
             {generateError}
-          </div>
+          </ClerkNote>
         )}
 
         {/* The single primary CTA on the pre-generate region — styled entirely by
-            the Button primitive (no re-skinning gradient/shadow/raw font), so it
-            reads as the one focal point (P4) with the canonical primary look. */}
+            the Button primitive (no re-skinning gradient/shadow), so it reads as
+            the one focal point (P4) with the canonical primary look. */}
         <Button
           variant="primary"
           fullWidth
           onClick={handleGenerate}
-          data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
+          disabled={generating}
+          busy={generating}
         >
-          Generate Draft
+          {generating ? 'Generating draft…' : 'Generate Draft'}
         </Button>
         <p className="sf-readable-strip" style={{
           alignSelf: 'center',
@@ -476,32 +469,58 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     );
   }
 
+  // (Custom Generate / the Workshop was removed. Anonymous users never reach a
+  // config landing — the hero generates instantly; Basic/Advanced are signed-in
+  // only.)
+
+  // ── Post-generation: the dossier view (and the navigated-back recall). ──────
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-      {/* Regenerate — a SUBORDINATE control. The dossier below is the post-reveal
-          hero (P1/P9); re-rolling discards the current draft, so it must not
-          out-shout the content the reveal just earned. It's a quiet right-aligned
-          secondary, not a full-width gold band. Save (below the dossier) is the
-          single primary post-generate action. */}
-      {/* Regenerate moved into the sticky toolbar (beside New). The re-roll error
-          alert stays here so a failed regenerate surfaces above the dossier. */}
+      {/* LOCKS ENGINE Phase A — what a new roll keeps. This sits with the full
+          generate rather than in a tab because identity and ground are exactly
+          what a whole new roll would otherwise take away; the per-section locks
+          live beside their own Reroll buttons. */}
+      {settlement && <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}><LockControls scope="world" /></Suspense>}
+
+      {/* Regenerate moved into the sticky toolbar (beside New). The re-roll
+          error alert stays here so a failed regenerate surfaces above the
+          dossier. */}
       {settlement && generateError && (
-        <div role="alert" style={{
-          marginTop: SP.sm,
-          padding: `${SP.sm}px ${SP.md}px`,
-          background: swatch.dangerBg,
-          border: `1px solid ${DANGER_BORDER}`,
-          borderRadius: R.md,
-          color: swatch.danger,
-          fontFamily: sans,
-          fontSize: FS.sm,
-        }}>
+        <ClerkNote
+          role="alert"
+          rubric={t('generate.notes.errorRubric')}
+          style={{ marginTop: SP.sm }}
+        >
           {generateError}
-        </div>
+        </ClerkNote>
       )}
 
-      {/* Pipeline reveal overlay. Renders only when the flag is on,
+      {/* THE WORKFLOW BLOCK (owner directive, 2026-07-31) — the generation-steps
+          rail, restored to the Create-page seat it lost when the dossier's dead
+          Simulation tab was excised (3176e22d), and seated IMMEDIATELY BEFORE the
+          film block below on BOTH breakpoints (this column is the shared
+          desktop/mobile order — nothing here is breakpoint-forked).
+
+          It reads the SAME store pipelineHistory the reveal plays back — the
+          engine's own onStep receipts — so every label comes from the step
+          registry through metaForStep and fills in as a run's steps land; no
+          label list is forked here. `compact` holds it to the legibility law's
+          glance register, and the rail self-hides until a run has produced
+          history, so the pre-generation and recall states are untouched.
+
+          The wait is NARRATED rather than silent (the witnessed-wait ratchet):
+          this block occupies real space above the film, so a null boundary would
+          be a perceptible hole. */}
+      {settlement && (
+        <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Retracing how this settlement was forged…</div>}>
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+            <PipelineRail compact />
+          </div>
+        </Suspense>
+      )}
+
+      {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
           a settlement was just generated, and the slice flagged the reveal
           as active. Dismisses itself by calling dismissPipelineReveal()
           when its playback completes. */}
@@ -516,54 +535,44 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           the overlay dismissing on top of it. */}
       {settlement && showOutput && !pipelineRevealActive && (
         <>
-          {/* ── Back navigation toolbar ──────────────────────────────────
-              Capped to the same PAGE_MAX column the dossier body uses below.
-              Previously the toolbar rendered full <main> width while the
-              dossier was centred at PAGE_MAX, so on wide screens the dark
-              sticky bar overhung the dossier on both sides and read as a bar
-              sitting over the content. The cap is applied to the toolbar's
-              OWN box (via maxWidth) rather than a wrapper div: the toolbar is
-              position:sticky, so a height-collapsed wrapper would become its
-              containing block and rob it of its sticky travel. Kept a direct
-              child of the tall outer column so it stays pinned through the
-              full dossier scroll. */}
+          {/* ── Back navigation toolbar ──────────────────────────── */}
           <WizardOutputToolbar
             settlement={settlement}
             isMobile={isMobile}
             handleBack={handleBack}
             handleGenerate={handleGenerate}
+            generating={generating}
             handleNewSettlement={handleNewSettlement}
             maxWidth={PAGE_MAX}
           />
 
-          <Suspense fallback={
-            // Minimal dossier skeleton (a couple of header/stat bars at page
-            // width) so the rare cold-load reads as the dossier assembling, not
-            // a bare "loading" line (P9/P10).
-            <div aria-hidden="true" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.md, padding: `${SP.lg}px 0` }}>
-              <div style={{ height: 28, width: '40%', borderRadius: R.md, background: MUTED, opacity: 0.35 }} />
-              <div style={{ height: 14, width: '60%', borderRadius: R.sm, background: MUTED, opacity: 0.25 }} />
-              <div style={{ display: 'flex', gap: SP.md, marginTop: SP.sm }}>
-                {[0,1,2].map(i => <div key={i} style={{ flex: 1, height: 64, borderRadius: R.md, background: MUTED, opacity: 0.2 }} />)}
-              </div>
-            </div>
-          }>
-            {/* Cap the dossier body to the shared page width so it
+          <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Laying out the settlement dossier…</div>}>
+            {/* P139 — cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
-                toolbar above shares the same PAGE_MAX column. marginTop:-SP.lg
-                cancels ONLY this element's share of the parent column's gap:16
-                (longhand after the margin shorthand, so left/right auto-centering
-                is preserved), pulling the dossier flush under the header band
-                without collapsing the error-alert / save-row gaps. */}
-            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', marginTop: -SP.lg }}>
+                toolbar above stays full-width.
+                THE ARRIVAL (Deep Craft H1): the oc-arrival orchestration lays
+                the dossier down as a composed document (organic.css; presentation
+                only — content is fully in the DOM at t=0, instant under
+                reduced-motion, and it replays on any dossier re-mount, e.g.
+                returning via View Settlement — the document is re-delivered). */}
+            {/* Flush the dossier to the sticky black toolbar (owner order,
+                2026-07-21): the post-generate column uses flex `gap: 16`, which
+                left a parchment seam between the toolbar's bottom edge and the
+                dossier's top border. A -16 top margin cancels exactly that one
+                inter-item gap so the dossier sits flush under the bar, while the
+                gap below (dossier → Save row) is preserved. The toolbar keeps its
+                own sticky box (it must NOT be wrapped), so the seam is closed from
+                the dossier side. Holds on scroll (the sticky bar reserves its flow
+                box) and on mobile (the auto-hiding bar keeps its reserved space). */}
+            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', marginTop: -16, width: '100%', willChange: 'transform' }}>
               <OutputContainer hideHeader />
             </div>
           </Suspense>
 
-          {/* Save to library — the single primary post-generate action. "Buy this
-              dossier" sits beside it as the quiet one-time-purchase alternative,
-              hoisted from the dossier action band so the two commit actions live
-              together. Save leads; Buy is the neighbour. */}
+          {/* Save to library — the primary post-generate action. Export PDF sits
+              beside it for export-capable tiers (Cartographer / Founder /
+              elevated), who can export the unsaved draft directly; it self-hides
+              for free + anon (who save first, or take the hero Buy CTA). */}
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: SP.sm, flexWrap: 'wrap', paddingTop: SP.xs }}>
             <SaveToLibraryButton
               settlement={settlement}
@@ -571,34 +580,79 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
-            {/* size="lg" matches the Save button so the two read as a balanced
-                primary+secondary pair; BuyThisDossier stacks its one-time caption
-                BELOW the button (not inline) so the note no longer pushes the
-                centered pair off to the side. */}
-            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
-            {/* Premium / elevated can export the draft as a PDF without saving;
-                self-gates on the export-access hook so anon (Buy) and free see
-                nothing here. */}
+            {/* Buy this dossier — the anonymous/free one-time purchase CTA,
+                mirrored from master's Save row (B4a). Self-gates by tier/config
+                (hidden for export-capable tiers), so it never competes with the
+                Save/Export primaries when they apply. */}
+            <BuyThisDossier settlement={settlement} saveId={activeSaveId} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
           </div>
 
-          {/* The post-generate "what's next" checklist now lives folded into the
-              PostGenCoach card (mounted at the App level) so it floats as one
-              dismissible helper instead of a second in-page block. */}
+          {/* Post-generate "what's next" guidance now lives in the app-level
+              PostGenCoach (the guidance registry's wizard-postgen host, mounted
+              in App.jsx), so the canonical Save / Export / New controls above own
+              this in-flow space uncontested. */}
+          <ConfirmDialog
+            open={!!pendingExit}
+            tone="warning"
+            title="Leave this settlement?"
+            body="This settlement hasn't been saved yet. It's randomly generated, so the exact result won't come back, though your configuration is kept so you can regenerate."
+            confirmLabel={pendingExit === 'new' ? 'Discard and start new' : 'Discard and go back'}
+            onConfirm={() => doExit(pendingExit)}
+            onCancel={() => setPendingExit(null)}
+          />
         </>
       )}
 
-      {/* Leave-confirm — rendered once at the top level so it works whether the
-          dossier is showing or the user has navigated back. */}
-      <ConfirmDialog
-        open={!!pendingExit}
-        tone="warning"
-        title="Leave this settlement?"
-        body="This settlement is not saved yet. It is randomly generated, so the exact result will not come back. Your configuration stays, so you can roll it again."
-        confirmLabel={pendingExit === 'new' ? 'Discard and start new' : 'Discard and go back'}
-        onConfirm={() => doExit(pendingExit)}
-        onCancel={() => setPendingExit(null)}
-      />
+      {/* When settlement exists but user navigated back — show re-view option + mode picker */}
+      {settlement && !showOutput && (
+        <>
+          {/* The last-generated recall, as a clerk's note (green wash retired). */}
+          <ClerkNote
+            rubric="Last generated"
+            actions={
+              <Button
+                variant="success"
+                size="sm"
+                onClick={() => setShowOutput(true)}
+              >
+                View Settlement
+              </Button>
+            }
+          >
+            <ClerkNoteStrong>{settlement.name || 'Untitled'}</ClerkNoteStrong>
+            {' · '}{settlement.tier}
+          </ClerkNote>
+
+          {/* Mode picker — let the user start fresh in either generation mode.
+              Picking a mode here clears the current settlement so the wizard
+              re-enters its empty state in the chosen mode. The Regenerate
+              button above stays available for "same config, new roll". */}
+          <div style={{
+            padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`,
+            background: CARD,
+            border: `1px solid ${BORDER}`,
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: SP.md }}>
+              <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
+                Or start a new settlement
+              </div>
+              <div style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED }}>
+                Pick a mode to begin a fresh generation. Your last settlement remains saved above.
+              </div>
+            </div>
+            <ModeSelector
+              mode={wizardMode}
+              onModeChange={(newMode) => {
+                if (clearSettlement) clearSettlement();
+                setWizardMode(newMode);
+                setWizardStep(0);
+                setShowOutput(false);
+              }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -17,17 +17,18 @@
  *   - a read-only action (list_my_tickets) is NOT gated (reachable while inactive)
  *
  * ALSO covered here (stripe-deletion remediation): process_deletions must STOP
- * BILLING for each deleted account. The process_account_deletions RPC anonymises
- * the profile but never touches Stripe (and the nightly pg_cron run calls the RPC
- * directly), so the handler sweeps every soft-deleted profile still holding a
- * Stripe id: cancel the subscription, then clear the stored ids. Asserted at the
- * boundary with an injected fake Stripe:
+ * BILLING for each deleted account. Migration 175's processor transactionally
+ * enqueues a leased cleanup job and leaves the request processing. The manual
+ * handler invokes the same shared queue worker as the secret-gated cron; only the
+ * completion RPC clears linkage + marks done. Asserted at the boundary with an
+ * injected queue/Stripe fake:
  *   - a deleted user with a recorded subscription ⇒ stripe.subscriptions.cancel
  *     runs with the stored id and the profile's Stripe ids are cleared
  *   - a legacy customer-only row (pre-087, no recorded sub id) ⇒ resolved via
  *     subscriptions.list; open subs canceled, nothing open ⇒ just cleared
  *   - already-canceled / missing at Stripe ⇒ idempotent, deletion still succeeds
- *   - an unexpected Stripe outage ⇒ deletion still succeeds, ids RETAINED for retry
+ *   - pagination follows every subscriptions.list page before clearing linkage
+ *   - auth/Stripe/lookup failures ⇒ non-success response, ids RETAINED for retry
  *
  * `handleAccountActions` is the exported handler; we inject recording stubs via its
  * `deps` seam (production passes nothing).
@@ -161,55 +162,185 @@ Deno.test('an ACTIVE actor is allowed through and create_ticket runs with the ve
 /** Billing row shape the sweep reads back for each processed user. */
 type BillingRow = { id: string; stripe_subscription_id: string | null; stripe_customer_id: string | null };
 
-/** Admin stub for the process_deletions path: the role gate reads an ADMIN
- *  profile, the processor RPC reports one processed request (req1 → user u1),
- *  and the soft-deleted billing sweep (.not/.or/.limit chain) reads `billing`.
- *  Every profiles UPDATE is recorded so a test can assert whether the Stripe
- *  linkage was cleared or retained. */
-function makeDeletionAdmin(billing: BillingRow[]) {
+/** Admin stub for the migration-175 durable process_deletions path: the role
+ * gate reads ADMIN, the processor queues jobs, the shared worker leases those
+ * jobs, checkpoints auth, and asks the completion RPC to transactionally clear
+ * linkage + mark request/job done. */
+function makeDeletionAdmin(
+  billing: BillingRow[],
+  opts: {
+    callerLookupError?: boolean;
+    processedLookupError?: boolean;
+    billingLookupError?: boolean;
+    banError?: boolean;
+    clearError?: boolean;
+  } = {},
+) {
   const rpc: Array<{ fn: string; args: unknown }> = [];
   const updates: Array<{ values: Record<string, unknown>; id: string }> = [];
+  const billingCheckpoints = new Map<
+    string,
+    { subscriptionIds: string[]; customerIds: string[]; revision: number }
+  >();
   let bans = 0;
+  const softDeletes: Array<{ userId: string; shouldSoftDelete: boolean }> = [];
+  let claimed = false;
   // deno-lint-ignore no-explicit-any
   const client: any = {
     from: (_table: string) => ({
       select: (_cols: string) => ({
         // role gate: profiles.role for the caller.
-        eq: () => ({ single: () => Promise.resolve({ data: { role: 'admin', email: 'a@x.com' }, error: null }) }),
-        // processed request ids → user ids (awaited .in on deletion_requests).
-        in: (_col: string, _ids: string[]) => Promise.resolve({ data: [{ user_id: 'u1' }], error: null }),
-        // the billing sweep: soft-deleted profiles still holding a Stripe id.
-        not: () => ({ or: () => ({ limit: () => Promise.resolve({ data: billing, error: null }) }) }),
-      }),
-      update: (values: Record<string, unknown>) => ({
-        eq: (_col: string, id: string) => { updates.push({ values, id }); return Promise.resolve({ error: null }); },
+        eq: () => ({
+          single: () => Promise.resolve({
+            data: opts.callerLookupError ? null : { role: 'admin', email: 'a@x.com' },
+            error: opts.callerLookupError ? { message: 'caller lookup failed' } : null,
+          }),
+        }),
       }),
     }),
-    auth: { admin: { updateUserById: () => { bans += 1; return Promise.resolve({ error: null }); } } },
+    auth: {
+      admin: {
+        updateUserById: () => {
+          bans += 1;
+          return Promise.resolve({ error: opts.banError ? { message: 'ban failed' } : null });
+        },
+        deleteUser: (userId: string, shouldSoftDelete: boolean) => {
+          softDeletes.push({ userId, shouldSoftDelete });
+          return Promise.resolve({ error: null });
+        },
+      },
+    },
     rpc: (fn: string, args: unknown) => {
       rpc.push({ fn, args });
-      return Promise.resolve({ data: { ids: ['req1'] }, error: null });
+      if (fn === 'process_account_deletions') {
+        return Promise.resolve(opts.processedLookupError
+          ? { data: null, error: { message: 'processor failed' } }
+          : { data: { queued: billing.length, ids: billing.map((_, i) => `req${i + 1}`) }, error: null });
+      }
+      if (fn === 'claim_account_deletion_cleanup_jobs') {
+        if (opts.billingLookupError) {
+          return Promise.resolve({ data: null, error: { message: 'queue claim failed' } });
+        }
+        if (claimed) return Promise.resolve({ data: [], error: null });
+        claimed = true;
+        return Promise.resolve({
+          data: billing.map((row, i) => ({
+            job_id: `job${i + 1}`,
+            deletion_request_id: `req${i + 1}`,
+            user_id: row.id,
+            lease_token: `lease${i + 1}`,
+            attempts: 1,
+            auth_revoked_at: null,
+            stripe_subscription_id: row.stripe_subscription_id,
+            stripe_customer_id: row.stripe_customer_id,
+            surveyor_subscription_id: null,
+            surveyor_customer_id: null,
+            late_stripe_subscription_ids: [],
+            late_stripe_customer_ids: [],
+            late_billing_revision: 0,
+          })),
+          error: null,
+        });
+      }
+      if (fn === 'mark_account_deletion_auth_revoked') {
+        return Promise.resolve({ data: true, error: null });
+      }
+      if (fn === 'checkpoint_account_deletion_billing_identity') {
+        const checkpointArgs = args as Record<string, unknown>;
+        const jobId = String(checkpointArgs.p_job_id);
+        const checkpoint = billingCheckpoints.get(jobId) ?? {
+          subscriptionIds: [],
+          customerIds: [],
+          revision: 0,
+        };
+        let grew = false;
+        const subscriptionId = typeof checkpointArgs.p_subscription_id === 'string'
+          ? checkpointArgs.p_subscription_id
+          : null;
+        const customerId = typeof checkpointArgs.p_customer_id === 'string'
+          ? checkpointArgs.p_customer_id
+          : null;
+        if (subscriptionId && !checkpoint.subscriptionIds.includes(subscriptionId)) {
+          checkpoint.subscriptionIds.push(subscriptionId);
+          grew = true;
+        }
+        if (customerId && !checkpoint.customerIds.includes(customerId)) {
+          checkpoint.customerIds.push(customerId);
+          grew = true;
+        }
+        if (grew) checkpoint.revision += 1;
+        billingCheckpoints.set(jobId, checkpoint);
+        return Promise.resolve({
+          data: {
+            ok: true,
+            late_stripe_subscription_ids: [...checkpoint.subscriptionIds],
+            late_stripe_customer_ids: [...checkpoint.customerIds],
+            late_billing_revision: checkpoint.revision,
+          },
+          error: null,
+        });
+      }
+      if (fn === 'complete_account_deletion_cleanup_job') {
+        if (opts.clearError) {
+          return Promise.resolve({ data: null, error: { message: 'clear failed' } });
+        }
+        const jobIndex = Number(String((args as Record<string, unknown>).p_job_id).replace('job', '')) - 1;
+        const row = billing[jobIndex];
+        if (row) {
+          updates.push({
+            values: { stripe_subscription_id: null, stripe_customer_id: null },
+            id: row.id,
+          });
+        }
+        return Promise.resolve({ data: true, error: null });
+      }
+      if (fn === 'fail_account_deletion_cleanup_job') {
+        return Promise.resolve({ data: true, error: null });
+      }
+      throw new Error(`unexpected RPC ${fn}`);
     },
   };
-  return { rpc, updates, bans: () => bans, adminClient: () => client };
+  return { rpc, updates, bans: () => bans, softDeletes, adminClient: () => client };
 }
 
 /** Recording fake Stripe. `behavior` drives subscriptions.cancel/list:
  *  ok = resolves; missing = cancel rejects resource_missing (already gone at
  *  Stripe); outage = cancel AND list reject with an unrelated transport error.
  *  `listedSubs` is what subscriptions.list reports open for any customer. */
-function makeStripe(behavior: 'ok' | 'missing' | 'outage' = 'ok', listedSubs: string[] = []) {
+function makeStripe(
+  behavior: 'ok' | 'missing' | 'outage' | 'cancel_outage' = 'ok',
+  listedSubs: string[] = [],
+  retrievedCustomer = 'cus_1',
+) {
   const canceled: string[] = [];
   const listedFor: string[] = [];
+  const deletedCustomers: string[] = [];
   const client = {
+    customers: {
+      del: (id: string) => {
+        deletedCustomers.push(id);
+        if (behavior === 'outage') {
+          return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
+        }
+        return Promise.resolve({ id, deleted: true });
+      },
+    },
     subscriptions: {
+      retrieve: (id: string) => {
+        if (behavior === 'outage') {
+          return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
+        }
+        return Promise.resolve({ id, customer: retrievedCustomer });
+      },
       cancel: (id: string) => {
         canceled.push(id);
         if (behavior === 'missing') {
           return Promise.reject(Object.assign(new Error(`No such subscription: '${id}'`), { code: 'resource_missing' }));
         }
-        if (behavior === 'outage') return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
-        return Promise.resolve({ id, status: 'canceled' });
+        if (behavior === 'outage' || behavior === 'cancel_outage') {
+          return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
+        }
+        return Promise.resolve({ id, status: 'canceled', customer: retrievedCustomer });
       },
       list: ({ customer }: { customer: string }) => {
         listedFor.push(customer);
@@ -218,7 +349,7 @@ function makeStripe(behavior: 'ok' | 'missing' | 'outage' = 'ok', listedSubs: st
       },
     },
   };
-  return { canceled, listedFor, stripeClient: () => client };
+  return { canceled, listedFor, deletedCustomers, stripeClient: () => client };
 }
 
 /** Did any profiles update clear the Stripe linkage for `id`? */
@@ -241,6 +372,7 @@ Deno.test('process_deletions CANCELS a processed user\'s live subscription and c
   assertEquals(res.status, 200);
   const body = await res.json();
   assertEquals(body.subscriptionsCanceled, 1);
+  assertEquals(admin.softDeletes, [{ userId: 'u1', shouldSoftDelete: true }]);
   assertEquals(stripe.canceled, ['sub_live_1']);          // canceled the STORED id
   assertEquals(linkageCleared(admin.updates, 'u1'), true); // shell keeps no billing identifier
 });
@@ -272,6 +404,60 @@ Deno.test('a legacy customer-only row WITH an open subscription at Stripe is lis
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
+Deno.test('a DUAL-PLAN user (recorded sub + a SECOND open sub at Stripe) has BOTH canceled — the Surveyor sub is never orphaned', async () => {
+  // Regression pin (SB3): a recorded id no longer short-circuits the customer
+  // enumeration. sub_cartographer is in profiles.stripe_subscription_id; a
+  // Surveyor sub id lives only in surveyor_entitlements but is open under the
+  // SAME customer. Canceling only the recorded id left Surveyor billing forever
+  // (clearLinkage nulls the customer id, so it could never be found again).
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_cartographer', stripe_customer_id: 'cus_dual' }]);
+  const stripe = makeStripe('ok', ['sub_cartographer', 'sub_surveyor'], 'cus_dual');   // Stripe lists BOTH open subs
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 2);                 // BOTH plans stopped
+  assertEquals(stripe.canceled.sort(), ['sub_cartographer', 'sub_surveyor']); // deduped, both canceled
+  assertEquals(stripe.listedFor, ['cus_dual']);                             // enumerated EVEN WITH a recorded id
+  assertEquals(linkageCleared(admin.updates, 'u1'), true);
+});
+
+Deno.test('subscription enumeration follows EVERY Stripe page before canceling and clearing linkage', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_many' }]);
+  const canceled: string[] = [];
+  const listCalls: Array<Record<string, unknown>> = [];
+  const stripeClient = () => ({
+    customers: {
+      del: (id: string) => Promise.resolve({ id, deleted: true }),
+    },
+    subscriptions: {
+      retrieve: (id: string) => Promise.resolve({ id }),
+      cancel: (id: string) => {
+        canceled.push(id);
+        return Promise.resolve({ id });
+      },
+      list: (params: Record<string, unknown>) => {
+        listCalls.push(params);
+        if (!params.starting_after) {
+          return Promise.resolve({ data: [{ id: 'sub_page_1' }], has_more: true });
+        }
+        return Promise.resolve({ data: [{ id: 'sub_page_2' }], has_more: false });
+      },
+    },
+  });
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 2);
+  assertEquals(listCalls.length, 2);
+  assertEquals(listCalls[1].starting_after, 'sub_page_1');
+  assertEquals(canceled, ['sub_page_1', 'sub_page_2']);
+  assertEquals(linkageCleared(admin.updates, 'u1'), true);
+});
+
 Deno.test('a subscription already gone at Stripe (resource_missing) does not abort the deletion — idempotent, ids cleared', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_gone', stripe_customer_id: 'cus_1' }]);
@@ -284,27 +470,79 @@ Deno.test('a subscription already gone at Stripe (resource_missing) does not abo
   assertEquals(linkageCleared(admin.updates, 'u1'), true); // nothing left to stop ⇒ still cleared
 });
 
-Deno.test('an unexpected Stripe outage never aborts the deletion — ids RETAINED so a re-run can retry', async () => {
+Deno.test('an unexpected Stripe outage reports cleanup incomplete and RETAINS ids for retry', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('outage');
   const res = await handleAccountActions(processReq(), {
     userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
   });
-  assertEquals(res.status, 200);                            // soft-fail, like the GoTrue ban
-  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(res.status, 502);
+  const body = await res.json();
+  assertEquals(body.success, false);
+  assertEquals(body.subscriptionsCanceled, 0);
   assertEquals(linkageCleared(admin.updates, 'u1'), false); // kept for the retry sweep
   assertEquals(admin.bans() > 0, true);                     // the ban still ran (deletion stands)
 });
 
-Deno.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — deletion still succeeds, ids retained', async () => {
+Deno.test('a cancellation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
+  const stripe = makeStripe('cancel_outage');
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 502);
+  assertEquals((await res.json()).success, false);
+  assertEquals(linkageCleared(admin.updates, 'u1'), false);
+});
+
+Deno.test('an auth revocation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin(
+    [{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }],
+    { banError: true },
+  );
+  const stripe = makeStripe('ok');
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 502);
+  assertEquals((await res.json()).success, false);
+  assertEquals(stripe.canceled, ['sub_live_1']);            // billing still stops
+  assertEquals(linkageCleared(admin.updates, 'u1'), false); // retained as retry marker
+});
+
+Deno.test('a processed request/user lookup error is not discarded or reported as success', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([], { processedLookupError: true });
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: makeStripe().stripeClient,
+  });
+  assertEquals(res.status, 500);
+  assertEquals((await res.json()).success, false);
+});
+
+Deno.test('a deleted billing lookup error is not discarded or reported as success', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([], { billingLookupError: true });
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: makeStripe().stripeClient,
+  });
+  assertEquals(res.status, 500);
+  assertEquals((await res.json()).success, false);
+});
+
+Deno.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — cleanup is incomplete and ids retained', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const res = await handleAccountActions(processReq(), {
     userClient: user.userClient, adminClient: admin.adminClient, stripeClient: () => null,
   });
-  assertEquals(res.status, 200);
-  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(res.status, 502);
+  const body = await res.json();
+  assertEquals(body.success, false);
+  assertEquals(body.subscriptionsCanceled, 0);
   assertEquals(linkageCleared(admin.updates, 'u1'), false);
 });
 

@@ -1,7 +1,7 @@
 /**
  * domain/defenseLedger.js — the canonical conserved defense quantities for a settlement.
  *
- * Mirrors foodLedger: defenseGenerator already computes the five scored
+ * P3.3b Stage 1b. Mirrors foodLedger: defenseGenerator already computes the five scored
  * defense dimensions + a numeric readiness and persists them on `settlement.defenseProfile`.
  * The drift it cures is the same parallel-model pattern food had — capacityModel.deriveDefense
  * read the military score AND separately re-counted the fortification institutions that score
@@ -40,13 +40,19 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
-/** @param {any} v */
+/** @type {(v: unknown) => v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
-/** @param {any} v @param {any} d */
+/** @type {(v: unknown, d: number) => number} */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {any} settlement
+ * Structural view of the settlement fields this ledger reads.
+ * @typedef {Object} DefenseLedgerSource
+ * @property {{ scores?: { military?: unknown, monster?: unknown, internal?: unknown, economic?: unknown, magical?: unknown } | null, readiness?: { score?: unknown } | null, magicDependency?: unknown } | null} [defenseProfile]
+ */
+
+/**
+ * @param {DefenseLedgerSource | null | undefined} settlement
  * @returns {DefenseLedger}
  */
 export function defenseLedger(settlement) {
@@ -59,8 +65,10 @@ export function defenseLedger(settlement) {
     internal:        num(sc.internal, 50),
     economic:        num(sc.economic, 50),
     magical:         num(sc.magical, 50),
-    readinessScore:  num(dp.readiness?.score, 50),
-    magicDependency: dp.magicDependency === true,
+    // `sc` non-null (guard above) implies `dp` non-null; TS cannot link the aliases.
+    readinessScore:  num(/** @type {any} */ (dp).readiness?.score, 50),
+    // same alias link: `sc` truthy guarantees `dp` is the profile object.
+    magicDependency: /** @type {any} */ (dp).magicDependency === true,
     present: true,
   };
 }

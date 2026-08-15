@@ -11,16 +11,23 @@
 
 import {
   STATUS_REMOVED,
-  withImpairment, withoutEventImpairments,
+  withImpairment, withoutEventImpairments, effectiveStatus,
 } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
-import { reconcileCultImposition } from '../worldPulse/religionState.js';
-import { applyTierOutcomeToSettlement } from '../worldPulse/tierResourceDynamics.js';
+// The two sim appliers are imported from their dependency-light LEAVES (W2b
+// byte-budget extraction), NOT from religionState.js / tierResourceDynamics.js:
+// this module is statically reachable from the eager store via the mutate.js
+// router, and the fat modules drag the pulse kernel (pantheon, relationshipState,
+// worldState, simulationRules, canonicalAccessors, supplyChainData, goodsCatalog,
+// resourceTaxonomy) into the first-paint closure. The fat modules re-export the
+// same leaf objects, so both paths read ONE applier (referential identity).
+import { reconcileCultImposition } from '../worldPulse/cultImpositionApply.js';
+import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
-import { createPRNG } from '../../generators/prng.js';
+import { createPRNG } from '../../kernel/prng.js';
 import { institutionIsFoodAnchor } from '../institutionClassify.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
@@ -29,13 +36,22 @@ import {
   findInstitution, findFaction, findNpc,
   replaceInstitution, replaceFaction, replaceNpc,
   labelFromTarget, slugify,
+  vetoMutation, sev01,
 } from './mutateHelpers.js';
+
+// A settlement / entity / event is a schemaless open object at this layer — every
+// handler spreads it (`{ ...s, ... }`) and reads a wide, evolving surface with no
+// single schema to import (mirrors the pre-split mutate.js typedefs). These
+// aliases document intent while keeping the pure-`any` reality centralized.
+/** @typedef {any} MutSettlement */
+/** @typedef {any} MutEntity */
+/** @typedef {any} MutateEvent */
 
 // ── Institution mutations ──────────────────────────────────────────────────
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function destroySettlement(s, event) {
   return {
@@ -55,7 +71,7 @@ function destroySettlement(s, event) {
 // A FOOD ANCHOR is the load-bearing food infrastructure the food_anchor_lost
 // template names (granary, mill, fishery) — losing one is a settlement-level food
 // crisis, not just a closed shop. Sawmills/lumber mills cut wood, not flour.
-/** @param {import('../settlement.schema.js').SimInstitution} inst */
+/** @param {MutEntity} inst */
 // Id-first (rename-proof) food-anchor test. The name rule + its catalog-id twin
 // now live at the canonical join (institutionIsFoodAnchor in computeActiveChains,
 // alongside the other institutionMatches* joins); this local alias keeps the two
@@ -69,10 +85,10 @@ const isFoodAnchorInstitution = institutionIsFoodAnchor;
 // districts, threats) but NO producer — destroying the granary updated faction
 // edges yet never raised the food crisis those consumers were waiting for.
 /**
- * @param {import('../settlement.schema.js').SimSettlement} next
- * @param {import('../settlement.schema.js').SimInstitution} inst
- * @param {any} event
- * @param {any} severity
+ * @param {MutSettlement} next
+ * @param {MutEntity} inst
+ * @param {MutateEvent} event
+ * @param {MutEntity} severity
  */
 function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
   if (!isFoodAnchorInstitution(inst)) return next;
@@ -97,11 +113,11 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
 // counts as broken. Used to gate the food-crisis wind-down so restoring an
 // UNRELATED impairment on a granary that remains physically broken does not
 // prematurely declare its food supply healthy again.
-/** @param {import('../settlement.schema.js').SimInstitution} inst */
+/** @param {MutEntity} inst */
 function hasBreakingCapacityImpairment(inst) {
   if (inst?.status === STATUS_REMOVED || inst?.status === 'destroyed') return true;
   return (inst?.impairments || []).some(
-    (/** @type {any} */ i) => i?.type === 'capacity' && i?.covert !== true && Number(i?.severity ?? 0) >= 0.6,
+    (/** @type {MutEntity} */ i) => i?.type === 'capacity' && i?.covert !== true && Number(i?.severity ?? 0) >= 0.6,
   );
 }
 
@@ -112,8 +128,8 @@ function hasBreakingCapacityImpairment(inst) {
 // id), so a food_anchor_lost crisis raised by a DIFFERENT anchor's loss survives.
 // No-op for a non-anchor institution (it never raised one).
 /**
- * @param {import('../settlement.schema.js').SimSettlement} next
- * @param {import('../settlement.schema.js').SimInstitution} inst
+ * @param {MutSettlement} next
+ * @param {MutEntity} inst
  */
 function withoutFoodAnchorLostFor(next, inst) {
   if (!isFoodAnchorInstitution(inst)) return next;
@@ -129,13 +145,13 @@ function withoutFoodAnchorLostFor(next, inst) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function damageInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
-  const severity = Number(event.payload?.severity ?? 0.7);
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
+  const severity = sev01(event.payload?.severity, 0.7);
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: 'capacity',
     severity,
@@ -152,12 +168,12 @@ function damageInstitution(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function removeInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   const removed = { ...inst, status: STATUS_REMOVED, removedByEventId: event.id };
   let next = replaceInstitution(s, inst, removed);
   // Removal propagates the strongest possible impairment to linked
@@ -183,15 +199,15 @@ function removeInstitution(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function addInstitution(s, event) {
   const name = labelFromTarget(event.targetId);
   const list = s.institutions || [];
   // Idempotent: if an institution with the same name already exists,
   // we don't duplicate — we just clear any prior REMOVED status.
-  const existing = list.find((/** @type {any} */ i) => i.name?.toLowerCase() === name.toLowerCase());
+  const existing = list.find((/** @type {MutEntity} */ i) => i.name?.toLowerCase() === name.toLowerCase());
   if (existing) {
     // Re-open is scoped like restoreInstitution: clear ONLY the removal — the
     // REMOVED/DESTROYED status and any impairments whose cause was that removal
@@ -221,15 +237,15 @@ function addInstitution(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function impairInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: event.payload?.dimension || 'capacity',
-    severity: Number(event.payload?.severity ?? 0.5),
+    severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
     description: event.description || `Impairment: ${event.payload?.dimension || 'capacity'}`,
   });
@@ -247,12 +263,12 @@ function impairInstitution(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function restoreInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   // Restore is scoped to ONE prior impairment. With an explicit causeEventId we
   // undo exactly that event; without one we undo the MOST RECENT impairment (the
   // last-applied cause) — never a blanket clear, which would wipe impairments
@@ -276,7 +292,7 @@ function restoreInstitution(s, event) {
 
 // The causeEventId of the most recently applied impairment (impairments append
 // in order, so the last entry is newest). Null when the entity carries none.
-/** @param {any} entity */
+/** @param {MutEntity} entity */
 // entity is an institution OR faction (union) — left as any.
 function latestImpairmentCause(entity) {
   const imps = Array.isArray(entity?.impairments) ? entity.impairments : [];
@@ -287,15 +303,15 @@ function latestImpairmentCause(entity) {
 // ── Faction mutations ──────────────────────────────────────────────────────
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function impairFaction(s, event) {
   const faction = findFaction(s, event.targetId);
-  if (!faction) return s;
+  if (!faction) return vetoMutation('faction_not_found', labelFromTarget(event.targetId));
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: event.payload?.dimension || 'public_support',
-    severity: Number(event.payload?.severity ?? 0.5),
+    severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
     description: event.description || `Faction setback: ${event.payload?.dimension || 'public_support'}`,
   });
@@ -308,12 +324,12 @@ function impairFaction(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function restoreFaction(s, event) {
   const faction = findFaction(s, event.targetId);
-  if (!faction) return s;
+  if (!faction) return vetoMutation('faction_not_found', labelFromTarget(event.targetId));
   // Same single-impairment scope as restoreInstitution: explicit cause, else the
   // most recent one — never a blanket clear of unrelated in-timeline impairments.
   const causeId = event.payload?.causeEventId ?? latestImpairmentCause(faction);
@@ -324,37 +340,27 @@ function restoreFaction(s, event) {
 }
 
 /**
- * ADD_FACTION — introduce a new faction. Mirrors addInstitution: idempotent
- * by name (re-adding an existing faction just clears removed/impaired state),
- * and writes to powerStructure.factions (the canonical location) so the
- * power-structure rerun and seat logic see it.
+ * ADD_FACTION — introduce a new faction. Idempotent by canonical name: an
+ * existing faction is left byte-for-byte unchanged. Factions have impairment
+ * and restoration events, but no removal lifecycle; ADD_FACTION must not act as
+ * a hidden resurrection path for unsupported provenance fields. New factions
+ * write to powerStructure.factions (the canonical location) so the
+ * power-structure rerun and seat logic see them.
  */
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function addFaction(s, event) {
   const name = labelFromTarget(event.targetId) || event.payload?.name;
-  if (!name) return s;
+  if (!name) return vetoMutation('empty_target');
   const psFactions = s.powerStructure?.factions;
   const flatFactions = s.factions;
   const list = psFactions || flatFactions || [];
   const existing = list.find(
-    (/** @type {any} */ f) => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
+    (/** @type {MutEntity} */ f) => String(f.faction || f.name || '').toLowerCase() === name.toLowerCase(),
   );
-  if (existing) {
-    // Re-add is scoped like restoreFaction: clear ONLY the removal — the
-    // REMOVED/DESTROYED status and any impairments whose cause was that removal
-    // (removedByEventId) — never a blanket clear that wipes UNRELATED impairments
-    // from other in-timeline events (a riot, a levy) the re-add never touched.
-    const removalCause = existing.removedByEventId || existing.destroyedByEventId || null;
-    const { removedByEventId: _r, destroyedByEventId: _d, ...rest } = existing;
-    const restored = {
-      ...(removalCause ? withoutEventImpairments(rest, removalCause) : rest),
-      status: 'active',
-    };
-    return replaceFaction(s, existing, restored);
-  }
+  if (existing) return vetoMutation('faction_already_present', name);
   const newFaction = {
     id: `faction.${slugify(name)}`,
     name,
@@ -378,11 +384,11 @@ function addFaction(s, event) {
 // ── NPC mutations ──────────────────────────────────────────────────────────
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function addNpc(s, event) {
-  const npc = createNpc({
+  const npc = createNpc(/** @type {MutEntity} */ ({
     name: labelFromTarget(event.targetId) || event.payload?.name,
     role: event.payload?.role,
     importance: event.payload?.importance || 'notable',
@@ -397,18 +403,18 @@ function addNpc(s, event) {
     constraint:  event.payload?.constraint,
     secret:      event.payload?.secret,
     _idSeed: event.id, // deterministic, event-scoped id (avoids same-name collisions)
-  });
+  }));
   npc.createdByEventId = event.id; // so undo can drop the NPC this event created
   return { ...s, npcs: [...(s.npcs || []), npc] };
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function killNpcMutation(s, event) {
   const npc = findNpc(s, event.targetId);
-  if (!npc) return s;
+  if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
   const importance = event.payload?.importance || npc.importance || inferImportance(npc);
   const enriched = { ...npc, importance };
   const result = killNpc(/** @type {import('../entities/npcs.js').NpcStructural} */ (enriched), event.id);
@@ -461,8 +467,8 @@ function killNpcMutation(s, event) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function assignNpcMutation(s, event) {
   const npc = findNpc(s, event.targetId) || createNpc({ name: labelFromTarget(event.targetId) });
@@ -480,9 +486,9 @@ function assignNpcMutation(s, event) {
   });
   // Replace or insert the NPC record
   const list = s.npcs || [];
-  const idx = list.findIndex((/** @type {any} */ n) => idOf(n) === idOf(npc));
-  const nextNpc = /** @type {import('../settlement.schema.js').SimNpc} */ (result.npc);
-  /** @type {import('../settlement.schema.js').SimSettlement} */
+  const idx = list.findIndex((/** @type {MutEntity} */ n) => idOf(n) === idOf(npc));
+  const nextNpc = /** @type {MutEntity} */ (result.npc);
+  /** @type {MutSettlement} */
   let next = idx >= 0
     ? { ...s, npcs: [...list.slice(0, idx), nextNpc, ...list.slice(idx + 1)] }
     : { ...s, npcs: [...list, nextNpc] };
@@ -503,15 +509,22 @@ function assignNpcMutation(s, event) {
       //      staffing) so callers that supply no discriminator are unchanged.
       const fillsEventId = event.payload?.fillsVacancyEventId;
       const role = String(event.payload?.role || '').trim().toLowerCase();
-      const healsThisVacancy = (/** @type {any} */ imp) => {
+      const healsThisVacancy = (/** @type {MutEntity} */ imp) => {
         if (imp.type !== 'staffing') return false;
         if (fillsEventId) return imp.causeEventId === fillsEventId;
         if (role) return String(imp.description || '').toLowerCase().includes(`(${role})`);
         return true; // no discriminator → v1 single-vacancy clear
       };
+      const clearedImpairments = (targetInst.impairments || []).filter((/** @type {MutEntity} */ i) => !healsThisVacancy(i));
       const cleared = {
         ...targetInst,
-        impairments: (targetInst.impairments || []).filter((/** @type {any} */ i) => !healsThisVacancy(i)),
+        impairments: clearedImpairments,
+        // Recompute status: filtering the healed staffing wound out of the
+        // impairments array left the raw `status` field stale, so a fully-healed
+        // institution kept rendering 'impaired'. effectiveStatus drops it to
+        // 'active' when no visible impairment remains (and is a no-op when the
+        // second vacancy's penalty is still present).
+        status: effectiveStatus({ ...targetInst, impairments: clearedImpairments }),
       };
       let withCleared = replaceInstitution(next, targetInst, cleared);
       for (const { impairment } of result.restorations) {
@@ -533,8 +546,8 @@ function assignNpcMutation(s, event) {
  * that entails. Reuses killNpcMutation under the hood.
  */
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function killLeaderMutation(s, event) {
   const enrichedEvent = {
@@ -553,25 +566,71 @@ function killLeaderMutation(s, event) {
  * institution exposure. A non-corrupt or non-NPC target is a no-op.
  */
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
+ */
+/**
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function exposeCorruption(s, event) {
+  // §corruption Phase 4 — prefer a corrupt NPC target: clean + scar them and
+  // impair BOTH the tied criminal institution and their home institution/faction
+  // (the same path organic exposure uses). Falls back to faction/institution:
+  // exposing a faction/institution directly still scandalises it (our in-place
+  // behaviour — the dead corruption_exposed consumer tree needs a producer).
   const npc = findNpc(s, event.targetId);
   if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
-  // Decision 3: the direct faction/institution expose path is removed. A
-  // faction or institution becomes scandalised solely via propagation from an
-  // exposed NPC, so there is nothing to do for a non-corrupt-NPC target.
-  return s;
+
+  const severity = sev01(event.payload?.severity, 0.7);
+  const inst    = findInstitution(s, event.targetId);
+  const faction = findFaction(s, event.targetId);
+  const target  = inst || faction;
+  if (!target) return vetoMutation('target_not_found', labelFromTarget(event.targetId));
+
+  const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
+    type: 'legitimacy',
+    severity,
+    causeEventId: event.id,
+    description: event.description || `Corruption inside ${target.name} was exposed publicly.`,
+  });
+
+  // The scandal becomes a durable condition: corruption_exposed is read by
+  // ruling_authority (its ONLY condition reaction), administrative capacity,
+  // daily life, districts, and threats — but no event ever produced it, so the
+  // whole consumer tree was dead and the scandal vanished on re-derivation.
+  const scandal = (/** @type {MutEntity} */ next) => withActiveCondition(next, {
+    archetype: 'corruption_exposed',
+    severity,
+    triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: event.targetId },
+    causes: [{ source: 'event', eventId: event.id, detail: `Corruption inside ${target.name} was exposed publicly.` }],
+  });
+
+  if (inst) {
+    let next = replaceInstitution(s, inst, withImpairment(inst, impairment));
+    next = propagateImpairment({
+      settlement: next,
+      origin: { entityType: 'institution', entityId: idOf(inst), impairment },
+    });
+    return scandal(next);
+  }
+
+  // Faction case
+  let next = replaceFaction(s, faction, withImpairment(faction, impairment));
+  next = propagateImpairment({
+    settlement: next,
+    origin: { entityType: 'faction', entityId: factionIdOf(faction), impairment },
+  });
+  return scandal(next);
 }
 
 // DM exposes a specific corrupt NPC: impair the
 // tied criminal + home institution/faction (shared organic path), then remove the
 // disgraced NPC and install a fresh successor in their seat.
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} npc
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutEntity} npc
+ * @param {MutateEvent} event
  */
 function exposeCorruptNpc(s, npc, event) {
   const now = event.timestamp || event.createdAt || null;
@@ -584,11 +643,11 @@ function exposeCorruptNpc(s, npc, event) {
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });
   const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
-  const nextNpcs = (/** @type {any} */ (next).npcs || []).map((/** @type {any} */ n) => (n === npc ? successorNpc(n, rng) : n));
+  const nextNpcs = (/** @type {MutEntity} */ (next).npcs || []).map((/** @type {MutEntity} */ n) => (n === npc ? successorNpc(n, rng) : n));
   // The NPC scandal is also a durable corruption_exposed condition (see exposeCorruption).
   return withActiveCondition({ ...next, npcs: nextNpcs }, {
     archetype: 'corruption_exposed',
-    severity: Number(event.payload?.severity ?? 0.7),
+    severity: sev01(event.payload?.severity, 0.7),
     triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: npc.id || npc.name },
     causes: [{ source: 'event', eventId: event.id, detail: `${npc.name} was publicly exposed as corrupt and ousted.` }],
   });
@@ -598,14 +657,14 @@ function exposeCorruptNpc(s, npc, event) {
 // corruption ties of NPCs bound to it: they separate from criminal activity.
 // No-op for a non-criminal institution (no NPC names it as a tie).
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} institutionName
+ * @param {MutSettlement} s
+ * @param {MutEntity} institutionName
  */
 function severCorruptionTiesTo(s, institutionName) {
   const n = String(institutionName || '').toLowerCase();
   if (!n) return s;
   let changed = false;
-  const nextNpcs = (s.npcs || []).map((/** @type {any} */ npc) => {
+  const nextNpcs = (s.npcs || []).map((/** @type {MutEntity} */ npc) => {
     if (npc.corrupt && String(npc.corruptTies?.criminalInstitution || '').toLowerCase() === n) {
       changed = true;
       return { ...npc, corrupt: false, corruptionVector: null, ousted: true };
@@ -622,28 +681,30 @@ function severCorruptionTiesTo(s, institutionName) {
 // so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
 // Covert by design: no public legitimacy impairment here (that is the exposure consequence).
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function imposeCorruption(s, event) {
   const npc = findNpc(s, event.targetId);
-  if (!npc || npc.corrupt) return s; // need a real, not-already-corrupt NPC
+  // need a real, not-already-corrupt NPC
+  if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
+  if (npc.corrupt) return vetoMutation('npc_already_corrupt', npc.name);
 
-  // Resolve the criminal organization: an explicit pick, else the settlement's criminal
-  // institution. With no criminal organization there is nothing to link to — no-op.
-  const orgName = event.payload?.criminalInstitution
-    || readCorruptionClimate(s).criminalInstitutions[0]
-    || null;
-  if (!orgName) return s;
-
-  // Vector derives from the NPC's own corruptible flaw (greed / fear / status / ...), mirroring
-  // the organic onset path; defaults to greed when the NPC has no flagged flaw.
-  const vector = corruptionVectorForFlaw(npcCorruptibleFlaw(npc));
+  // W-DOCTRINE-3b §6 — THE BENEFICIARY. A composer beneficiary leash (payload.leash, already
+  // normalized by buildEvent) names a FOREIGN patron court and REPLACES the local-org rule (the
+  // channel requirement): it must carry a resolvable settlement endpoint, else there is nothing
+  // to leash to (no_beneficiary). Stamping the leash names NO local criminalInstitution — a
+  // foreign conspirator's exposure blames no local guild (§4). Absent leash ⇒ today's local path
+  // (a criminal org — BYTE-IDENTICAL). The vector derives from the NPC's own corruptible flaw.
+  const leash = event.payload?.leash;
+  if (leash && !leash.settlementId) return vetoMutation('no_beneficiary');
+  const orgName = event.payload?.criminalInstitution || readCorruptionClimate(s).criminalInstitutions[0] || null;
+  if (!leash && !orgName) return vetoMutation('no_criminal_org');
   const corrupted = {
     ...npc,
     corrupt: true,
-    corruptionVector: vector,
-    corruptTies: { ...(npc.corruptTies || {}), criminalInstitution: orgName },
+    corruptionVector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
+    corruptTies: { ...(npc.corruptTies || {}), ...(leash ? { leash } : { criminalInstitution: orgName }) },
   };
   let next = replaceNpc(s, npc, corrupted);
 
@@ -692,24 +753,24 @@ const NPC_STANDING_FIELDS = Object.freeze(['importance', 'influence', 'structura
  * both refs; the composer only offers real same-faction pairs).
  */
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} event
+ * @param {MutSettlement} s
+ * @param {MutateEvent} event
  */
 function swapNpcStanding(s, event) {
   // Empty refs must never reach findNpc: '' loose-matches the first NPC
   // whose id is null (String(null || '') === ''), silently swapping with a
   // bystander instead of no-opping.
   const peerRef = event.payload?.swapWithNpcId || event.payload?.swapWithName;
-  if (!event.targetId || !peerRef) return s;
+  if (!event.targetId || !peerRef) return vetoMutation('swap_pair_incomplete');
   const a = findNpc(s, event.targetId);
   const b = findNpc(s, peerRef);
-  if (!a || !b || a === b) return s;
+  if (!a || !b || a === b) return vetoMutation('swap_pair_invalid');
   // Standing swaps stay inside ONE faction (the owner's design). If both
   // NPCs declare an affiliation and they differ, this is a mis-targeted
   // event — no-op rather than mis-stamp a foreign factionId onto the peer.
   if (a.factionAffiliation && b.factionAffiliation
     && String(a.factionAffiliation).toLowerCase() !== String(b.factionAffiliation).toLowerCase()) {
-    return s;
+    return vetoMutation('swap_cross_faction', `${a.name} / ${b.name}`);
   }
 
   // Swap presence AS WELL AS value: when `from` carries the field, copy it
@@ -717,7 +778,7 @@ function swapNpcStanding(s, event) {
   // than assigning `undefined` (which downstream readers that distinguish
   // 'absent' from 'undefined' — inferImportance fallbacks, dotRank adoption —
   // treat differently). The swap is then symmetric in presence and value.
-  const carryStanding = (/** @type {any} */ from, /** @type {any} */ onto) => {
+  const carryStanding = (/** @type {MutEntity} */ from, /** @type {MutEntity} */ onto) => {
     const next = { ...onto };
     for (const field of NPC_STANDING_FIELDS) {
       if (field in from) next[field] = from[field];
@@ -755,8 +816,8 @@ function swapNpcStanding(s, event) {
  * never the store. A null/absent payload deity clears the assignment (returns
  * the settlement to dormant). No wall-clock field is written.
  *
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
+ * @param {MutSettlement} s
+ * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: MutEntity } }} event
  */
 function setPrimaryDeity(s, event) {
   const ref = event.payload?.deityRef ?? event.targetId ?? null;
@@ -800,8 +861,8 @@ function setPrimaryDeity(s, event) {
  * no ref is given); an emptied list drops the key so a cult-free settlement is
  * structurally identical to one that never had a cult (the dormancy oracle).
  *
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
+ * @param {MutSettlement} s
+ * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: MutEntity } }} event
  */
 function imposeCult(s, event) {
   const ref = event.payload?.deityRef ?? event.targetId ?? null;
@@ -812,10 +873,10 @@ function imposeCult(s, event) {
   // Remove path: a null snapshot drops the named cult (or clears all when no ref).
   if (!snapshot) {
     const next = ref
-      ? cults.filter((/** @type {any} */ c) => String(c?._deityRef || c?.name || '') !== String(ref))
+      ? cults.filter((/** @type {MutEntity} */ c) => String(c?._deityRef || c?.name || '') !== String(ref))
       : [];
     if (!next.length) delete config.cultDeitySnapshots;
-    else config.cultDeitySnapshots = Object.freeze(next.map((/** @type {any} */ c) => Object.freeze({ ...c })));
+    else config.cultDeitySnapshots = Object.freeze(next.map((/** @type {MutEntity} */ c) => Object.freeze({ ...c })));
     return { ...s, config };
   }
 
@@ -832,8 +893,11 @@ function imposeCult(s, event) {
   });
   const tier = s.tier || config.tier || 'village';
   const result = reconcileCultImposition({ patron: config.primaryDeitySnapshot || null, cults, tier, deity: entry });
+  if (result.action === 'refused') {
+    return vetoMutation(`cult_${result.reason}`, entry.name);
+  }
   if (!result.cults.length) delete config.cultDeitySnapshots;
-  else config.cultDeitySnapshots = Object.freeze(result.cults.map((/** @type {any} */ c) => Object.freeze({ ...c })));
+  else config.cultDeitySnapshots = Object.freeze(result.cults.map((/** @type {MutEntity} */ c) => Object.freeze({ ...c })));
   return { ...s, config };
 }
 
@@ -845,16 +909,16 @@ function imposeCult(s, event) {
  * leaves over-tier ones as inactive RUINED remnants with their fates) and the tier +
  * institution history are byte-identical to an organic tier change. One tier per call; a
  * no-op at the cap (metropolis) or floor (thorp).
- * @param {import('../settlement.schema.js').SimSettlement} s
+ * @param {MutSettlement} s
  * @param {{ payload?: { direction?: string } }} event
  */
 function shiftTier(s, event) {
   const direction = event.payload?.direction === 'demotion' ? 'demotion' : 'promotion';
   const fromTier = s.tier || s.config?.tier || popToTier(Number(s.population) || 0);
   const idx = TIER_ORDER.indexOf(fromTier);
-  if (idx < 0) return s;
+  if (idx < 0) return vetoMutation('tier_unknown', String(fromTier));
   const toTier = TIER_ORDER[direction === 'promotion' ? idx + 1 : idx - 1];
-  if (!toTier) return s;                                  // already at the cap / floor
+  if (!toTier) return vetoMutation('tier_at_bound', direction);
   // Reband population into the target band — a forced shift needs it (the organic path
   // does not, since population already crossed the threshold). A plain clamp lands a
   // promotion at the band floor and a demotion at the band ceiling, leaving an already

@@ -45,7 +45,7 @@ vi.mock('../../src/lib/flags.js', () => ({
 }));
 
 // Store mock. A mutable singleton drives every selector; subscribe and
-// getState are stubbed for the analytics/onboarding/effect paths.
+// getState are stubbed for the analytics/effect paths.
 const storeState = {
   settlement: null,
   aiSettlement: null,
@@ -70,9 +70,6 @@ const storeState = {
   pinNpc: vi.fn(),
   unpinNpc: vi.fn(),
   queueEdit: vi.fn(),
-  trackTabExplored: vi.fn(),
-  onboardingActive: false,
-  onboardingStep: 0,
   userPrefs: { tableViewOpen: false },
   setUserPref: vi.fn(),
 };
@@ -90,5 +87,27 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
   test('module imports and the default export is a component function', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(typeof mod.default).toBe('function');
+  });
+
+  // Phase 5 W4e — the three dossier-depth tabs register into the Systems group,
+  // and the OURS-ahead mounted Versions tab is NOT displaced from Notes.
+  test('Systems group registers the Substrate / Magic / War & Faith sub-tabs', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.systems.tabs).toEqual(
+      expect.arrayContaining(['substrate', 'magic', 'war_faith']),
+    );
+  });
+
+  test('the mounted Versions tab (F26) stays registered under Notes', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
+  });
+
+  // W2-c — the Map group is a first-class tab, ordered Summary / Systems / World /
+  // Map / Notes. Pin the group ORDER (Object insertion order) + the single map tab.
+  test('the Map group sits fifth, between World and Notes', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(Object.keys(mod.TAB_GROUPS)).toEqual(['summary', 'systems', 'world', 'map', 'notes']);
+    expect(mod.TAB_GROUPS.map.tabs).toEqual(['map']);
   });
 });

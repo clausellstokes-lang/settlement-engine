@@ -1,14 +1,22 @@
 /**
  * api/csp-report.js — Vercel serverless sink for CSP violation reports.
  *
- * The enforcing Content-Security-Policy in vercel.json declares
+ * The enforcing Content-Security-Policy headers in vercel.json declare
  *   report-uri /api/csp-report
  *   report-to  csp-endpoint  (Reporting-Endpoints: csp-endpoint="/api/csp-report")
- * but until this endpoint existed those reports 404'd into the void. This
- * function makes the sink REAL: it accepts the violation POST and emits ONE
- * structured `[csp-report]` JSON line to stdout, so violations are collected and
- * searchable in Vercel's Function Logs (filter on "csp-report"). It is a passive
- * collector — it never blocks, mutates, or returns data; it just records.
+ * so the browser blocks a violation and POSTs a report. This function makes the
+ * sink REAL: it accepts the violation POST
+ * and emits ONE structured `[csp-report]` JSON line to stdout, so violations are
+ * collected and searchable in Vercel's Function Logs (filter on "csp-report"). It
+ * is a passive collector — it never blocks, mutates, or returns data; it records.
+ *
+ * ── OPERATIONS ────────────────────────────────────────────────────────────────
+ * Watch Vercel Function Logs (filter "csp-report") after every resource or
+ * origin change. Each line names the blocked URI and violated directive. Widen
+ * only the matching directive for a verified, load-bearing resource; never
+ * respond to a violation by demoting the policy to Report-Only. Keep the map
+ * block's separately scoped policy — the vendored FMG surface needs
+ * 'unsafe-eval' plus the watabou/deorum/dropbox origins.
  *
  * Two wire formats must be handled (a browser sends one or the other):
  *   - report-uri:  Content-Type application/csp-report, body { "csp-report": {…} }

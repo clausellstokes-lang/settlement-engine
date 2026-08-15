@@ -1,13 +1,12 @@
 /**
- * AccountTickets.jsx — Phase A5 user-facing support ticket workflow.
+ * AccountTickets.jsx — user-facing support ticket workflow.
  *
  * Rendered inside the Account "Customer Support" section, AFTER the FAQ
  * (self-resolve first). Surfaces:
  *   • "My tickets" — the caller's own tickets (number + status), via the
  *     account-actions `list_my_tickets` action (RLS/RPC-scoped to the caller).
  *   • "Create ticket" — category / priority / subject / message + an optional
- *     link picker (settlement / campaign / map / payment ref). Calls
- *     account-actions `create_ticket`.
+ *     link picker (settlement id). Calls account-actions `create_ticket`.
  *   • Per-ticket thread — user-visible events ONLY (internal notes are never
  *     returned to the owner by the server) + a reply box (account-actions
  *     `reply_ticket`).
@@ -17,16 +16,13 @@
  * RPC enforces visibility, so there is nothing to hide client-side — the
  * thread payload simply doesn't contain them.
  */
-import { useCallback, useEffect, useState } from 'react';
-import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED,
-  sans, FS, SP, R, swatch, DANGER_BORDER,
-} from '../theme.js';
+  GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED, sans, FS, SP, swatch } from '../theme.js';
 
 const CATEGORIES = ['general', 'billing', 'bug', 'account', 'gallery', 'feature', 'other'];
 const PRIORITIES = ['low', 'normal', 'high', 'urgent'];
@@ -60,17 +56,14 @@ function StatusPill({ status }) {
     <Pill
       bg={open ? swatch['#FBF5E6'] : swatch['#E0D0B0']}
       color={open ? GOLD_TXT : BODY}
-      icon={open
-        ? <CircleDot size={11} aria-hidden="true" />
-        : <CheckCircle2 size={11} aria-hidden="true" />}
-      style={{ borderRadius: R.sm }}
+      style={{}}
     >
       {STATUS_LABEL[status] || status}
     </Pill>
   );
 }
 
-export default function AccountTickets() {
+export default function AccountTickets({ operatorMessage = null }) {
   // Mobile reflow: stack the two-up category/priority row, let the ticket reply
   // box pin its Send button below the textarea, and wrap long ticket subjects
   // instead of truncating them. All guarded so desktop renders byte-identical.
@@ -87,6 +80,8 @@ export default function AccountTickets() {
   const [priority, setPriority] = useState('normal');
   const [settlementId, setSettlementId] = useState('');
   const [creating, setCreating] = useState(false);
+  const [linkedOperatorMessageId, setLinkedOperatorMessageId] = useState(null);
+  const appliedOperatorMessageId = useRef(null);
 
   // thread
   const [active, setActive] = useState(null);   // the selected ticket row
@@ -113,6 +108,17 @@ export default function AccountTickets() {
   // eslint-disable-next-line react-hooks/set-state-in-effect -- mount data-load: loadTickets sets the spinner/list on open (same pattern as GalleryMaps/AdminPanel)
   useEffect(() => { loadTickets(); }, [loadTickets]);
 
+  useEffect(() => {
+    const messageId = typeof operatorMessage?.id === 'string' ? operatorMessage.id.trim() : '';
+    if (!messageId || operatorMessage?.kind !== 'direct' || appliedOperatorMessageId.current === messageId) return;
+    appliedOperatorMessageId.current = messageId;
+    setLinkedOperatorMessageId(messageId);
+    setSubject(`Re: ${operatorMessage.subject || 'Message from SettlementForge'}`);
+    setCategory('account');
+    setError(null);
+    setView('create');
+  }, [operatorMessage]);
+
   const openThread = useCallback(async (ticket) => {
     setActive(ticket); setView('thread'); setEvents([]); setError(null);
     setLoading(true);
@@ -130,14 +136,22 @@ export default function AccountTickets() {
     if (!subject.trim() || !message.trim()) return;
     setCreating(true); setError(null);
     try {
-      const links = settlementId.trim() ? { settlement_id: settlementId.trim() } : {};
+      const links = {
+        ...(settlementId.trim() ? { settlement_id: settlementId.trim() } : {}),
+        ...(linkedOperatorMessageId ? { operator_message_id: linkedOperatorMessageId } : {}),
+      };
+      const metadata = {
+        ...(typeof navigator !== 'undefined' ? { ua: navigator.userAgent } : {}),
+        ...(linkedOperatorMessageId ? { operator_message_id: linkedOperatorMessageId } : {}),
+      };
       await callAccount({
         action: 'create_ticket',
         subject: subject.trim(), message: message.trim(),
         category, priority, links,
-        metadata: typeof navigator !== 'undefined' ? { ua: navigator.userAgent } : {},
+        metadata,
       });
       setSubject(''); setMessage(''); setCategory('general'); setPriority('normal'); setSettlementId('');
+      setLinkedOperatorMessageId(null);
       setView('list');
       await loadTickets();
     } catch (e) {
@@ -145,7 +159,7 @@ export default function AccountTickets() {
     } finally {
       setCreating(false);
     }
-  }, [subject, message, category, priority, settlementId, loadTickets]);
+  }, [subject, message, category, priority, settlementId, linkedOperatorMessageId, loadTickets]);
 
   const submitReply = useCallback(async () => {
     if (!active || !replyBody.trim()) return;
@@ -164,7 +178,7 @@ export default function AccountTickets() {
 
   const inputStyle = {
     width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-    border: `1px solid ${BORDER}`, borderRadius: R.md,
+    border: `1px solid ${BORDER}`,
     fontSize: FS.md, fontFamily: sans, outline: 'none', boxSizing: 'border-box',
   };
 
@@ -176,18 +190,22 @@ export default function AccountTickets() {
         </span>
         {view === 'list' && (
           <>
-            <Button variant="ghost" size="sm" onClick={loadTickets} icon={<RefreshCw size={12} />}>
+            <Button variant="ghost" size="sm" onClick={loadTickets}>
               Refresh
             </Button>
-            <Button variant="gold" size="sm" onClick={() => { setError(null); setView('create'); }}
-              icon={<Plus size={12} />}>
+            <Button variant="gold" size="sm" onClick={() => {
+              setError(null); setLinkedOperatorMessageId(null);
+              setSubject(''); setMessage(''); setCategory('general'); setPriority('normal'); setSettlementId('');
+              setView('create');
+            }}
+             >
               New ticket
             </Button>
           </>
         )}
         {view !== 'list' && (
           <Button variant="ghost" size="sm" onClick={() => { setError(null); setView('list'); }}
-            icon={<ChevronLeft size={12} />}>
+           >
             Back to tickets
           </Button>
         )}
@@ -196,7 +214,7 @@ export default function AccountTickets() {
       {error && (
         <div role="alert" style={{
           padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg,
-          border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: RED,
+          border: '1px solid #e8b0b0', fontSize: FS.sm, color: RED,
         }}>
           {error}
         </div>
@@ -217,7 +235,7 @@ export default function AccountTickets() {
                 style={{
                   justifyContent: 'flex-start', textAlign: 'left', gap: SP.sm,
                   padding: `${SP.sm + 2}px ${SP.md}px`, border: `1px solid ${BORDER2}`,
-                  borderRadius: R.md, background: swatch.white, whiteSpace: 'normal',
+                  background: swatch.white, whiteSpace: 'normal',
                 }}>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
@@ -235,6 +253,11 @@ export default function AccountTickets() {
       {/* ── CREATE ───────────────────────────────────────────────────── */}
       {view === 'create' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+          {linkedOperatorMessageId && (
+            <div role="status" style={{ padding: `${SP.sm}px ${SP.md}px`, background: CARD_HDR, border: `1px solid ${BORDER}`, color: BODY, fontSize: FS.sm }}>
+              Replying to a direct message from SettlementForge. This support ticket will stay linked to that notice.
+            </div>
+          )}
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: SP.sm }}>
             <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
               Category
@@ -279,7 +302,7 @@ export default function AccountTickets() {
           </div>
 
           {active.linked_faq && (
-            <div style={{ fontSize: FS.sm, color: SECOND, background: swatch['#FBF5E6'], padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md }}>
+            <div style={{ fontSize: FS.sm, color: SECOND, background: swatch['#FBF5E6'], padding: `${SP.sm}px ${SP.md}px` }}>
               Support linked a help article that may answer this: <strong>{active.linked_faq}</strong>
             </div>
           )}
@@ -295,7 +318,7 @@ export default function AccountTickets() {
                 <div key={ev.id} style={{
                   padding: `${SP.sm}px ${SP.md}px`,
                   background: fromAgent ? CARD_HDR : swatch.white,
-                  border: `1px solid ${BORDER2}`, borderRadius: R.md,
+                  border: `1px solid ${BORDER2}`,
                   alignSelf: fromAgent ? 'flex-start' : 'flex-end',
                   maxWidth: '85%',
                 }}>
@@ -314,7 +337,7 @@ export default function AccountTickets() {
               value={replyBody} onChange={(e) => setReplyBody(e.target.value)} rows={2}
               style={{ ...inputStyle, resize: 'vertical', flex: 1 }} />
             <Button variant="gold" size="md" busy={replying} fullWidth={isMobile}
-              onClick={submitReply} disabled={replying || !replyBody.trim()} icon={<Send size={13} />}>
+              onClick={submitReply} disabled={replying || !replyBody.trim()}>
               Reply
             </Button>
           </div>

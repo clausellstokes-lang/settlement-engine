@@ -40,12 +40,19 @@ describe('captureTransitionNewsEntries', () => {
     expect(entries[0].tick).toBe(9);
     expect(entries[0].settlementIds).toEqual(['a']);
     expect(entries[0].createdAt).toBe('2026-06-11T00:00:00.000Z');
+    expect(entries[0].reasons).toEqual([
+      "City Watch has taken the settlement's governing machinery into its hands.",
+    ]);
+    // anchored: the exact one-element reason contract above proves the projection is populated.
+    expect(entries[0].reasons.join(' ')).not.toMatch(/capture ladder|→|\b(?:none|adversarial|equilibrium|corrupted)\b/i);
   });
 
   it('liberation (leaving capture) is major; the corrupted boundary is notable', () => {
     const [liberation] = captureTransitionNewsEntries([transition('capture', 'corrupted')], nameFor, 10);
     expect(liberation.significance).toBe('major');
     expect(liberation.headline).toContain('breaks the underworld');
+    // anchored: the factual liberation headline above proves this transition rendered.
+    expect(liberation.reasons.join(' ')).not.toMatch(/capture ladder|→|\bcorrupted\b/i);
     const [compromised] = captureTransitionNewsEntries([transition('equilibrium', 'corrupted')], nameFor, 10);
     expect(compromised.significance).toBe('notable');
     const [recovering] = captureTransitionNewsEntries([transition('corrupted', 'equilibrium')], nameFor, 10);

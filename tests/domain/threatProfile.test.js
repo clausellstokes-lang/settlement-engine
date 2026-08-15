@@ -216,15 +216,22 @@ describe('collectThreatSources()', () => {
     expect(types.has('cult')).toBe(true);
   });
 
-  it("reads the legacy 'stress' alias, like every sibling deriver (via canonStressors)", () => {
-    // Regression: the hand-rolled read only checked `stressors`/`stresses`,
-    // missing the `stress` alias that canonStressors (and every sibling
-    // deriver) resolves. A settlement carrying its stressors under `stress`
-    // now contributes threat sources.
+  it('surfaces a single stressor stored as a bare object (canonical resolver)', () => {
     const sources = collectThreatSources({
-      stress: [{ name: 'Bandit raids on the south road', severity: 0.6 }],
+      stressors: { name: 'Bandit raids on the south road', severity: 0.6 },
     });
-    expect(sources.some(s => s.originSurface === 'stressors' && s.inferredType === 'bandit_raids')).toBe(true);
+    const stressorSources = sources.filter(s => s.originSurface === 'stressors');
+    expect(stressorSources.length).toBe(1);
+    expect(stressorSources[0].inferredType).toBe('bandit_raids');
+  });
+
+  it('surfaces stressors carried under the singular `stress` alias', () => {
+    const sources = collectThreatSources({
+      stress: [{ name: 'Plague spreading through the quarter', severity: 0.7 }],
+    });
+    const stressorSources = sources.filter(s => s.originSurface === 'stressors');
+    expect(stressorSources.length).toBe(1);
+    expect(stressorSources[0].inferredType).toBe('plague');
   });
 });
 

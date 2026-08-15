@@ -3,10 +3,22 @@ import { swatch } from '../theme.js';
  * TierIcon — pure SVG glyph for a settlement placement.
  *
  * Renders a tier-appropriate shape (thorp dot through metropolis crown)
- * with optional port (anchor), capital (gold ring), and selected (halo)
- * modifiers. Counter-scales by 1/scale so icons stay legible at any zoom.
+ * with optional port (anchor) and selected (halo) modifiers. Counter-scales
+ * by 1/scale so icons stay legible at any zoom.
  *
  * Pure presentational component — no store hooks. Caller wires click.
+ *
+ * ⛔ NO CAPITAL MODIFIER, AND THIS IS A WORLD-MODEL FACT RATHER THAN A GAP.
+ * The owner ruled that nothing intrinsically makes a settlement a capital —
+ * the closest in-system analog is an OVERLORD — so the concept does not exist
+ * in the settlement shape at all. The former `capital` prop (a gold ring plus
+ * a brighter body off `swatch['#D4A445']`) was therefore dead twice over and
+ * independently: no writer anywhere reached app state (both FMG bridges drop
+ * the burg's `capital` bit before the store — mapSlice's placement and
+ * burgToConfig keep neither spelling), AND `tierFor` below allowlists six
+ * tiers with 'capital' absent, so the size-tier token could not cross-wire
+ * into it either. Do NOT restore it as an overlord ring: an overlord visual
+ * is a separate capability the owner has not commissioned.
  */
 
 const TIER_FROM_POP = (pop = 0) => {
@@ -27,7 +39,6 @@ export function tierFor(settlement) {
 
 const STROKE  = swatch['#1C1409'];
 const FILL    = swatch['#A0762A'];   // brown/gold body
-const FILL_HI = swatch['#D4A445'];   // capital gold
 const HALO    = swatch['#FBBF24'];   // selected halo
 
 /**
@@ -35,8 +46,8 @@ const HALO    = swatch['#FBBF24'];   // selected halo
  * is the placement point and units are screen pixels (caller applies a
  * counter-scale group transform).
  */
-function TierShape({ tier, capital }) {
-  const body = capital ? FILL_HI : FILL;
+function TierShape({ tier }) {
+  const body = FILL;
   switch (tier) {
     case 'thorp':
       return <circle cx={0} cy={0} r={3} fill={body} stroke={STROKE} strokeWidth={0.6} />;
@@ -95,7 +106,6 @@ function PortBadge() {
  * @param {object}   props
  * @param {string}   props.tier         — thorp|hamlet|village|town|city|metropolis
  * @param {boolean}  [props.port]       — render anchor badge
- * @param {boolean}  [props.capital]    — render gold capital ring + brighter body
  * @param {boolean}  [props.selected]   — render selection halo + 1.3x scale
  * @param {number}   props.scale        — current map zoom scale (counter-scale by 1/scale)
  * @param {number}   props.x            — map x (caller wraps in <g transform="translate(...)">)
@@ -106,7 +116,7 @@ function PortBadge() {
  * @param {string}   [props.cursor]
  */
 export default function TierIcon({
-  tier, port, capital, selected, scale = 1,
+  tier, port, selected, scale = 1,
   x, y, label, onClick, onPointerDown, onPointerMove, onPointerUp, onPointerCancel,
   cursor = 'pointer',
 }) {
@@ -134,16 +144,7 @@ export default function TierIcon({
             strokeOpacity={0.85}
           />
         )}
-        {capital && (
-          <circle
-            cx={0} cy={0} r={11}
-            fill="none"
-            stroke={FILL_HI}
-            strokeWidth={1.6}
-            strokeOpacity={0.9}
-          />
-        )}
-        <TierShape tier={tier} capital={capital} />
+        <TierShape tier={tier} />
         {port && <PortBadge />}
         {label && (
           <text

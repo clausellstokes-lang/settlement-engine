@@ -13,8 +13,18 @@
  * a pillar-tier death; the SuccessorPrompt UI consumes the ranked list.
  */
 
+import { factionRefOf, resolveFactionRef } from '../factionRefs.js';
 
 /** @typedef {import('./npcs.js').NpcStructural} NpcStructural */
+
+/**
+ * The slice of a settlement successor inference reads — just the NPC
+ * roster. Full settlement objects satisfy this structurally.
+ * @typedef {Object} SettlementWithNpcs
+ * @property {NpcStructural[]=} npcs
+ * @property {{ factions?: Array<{ id?: unknown, faction?: unknown, name?: unknown }> }=} powerStructure
+ * @property {Array<{ id?: unknown, faction?: unknown, name?: unknown }>=} factions
+ */
 
 /**
  * Find the most likely successors to an outgoing NPC.
@@ -22,7 +32,8 @@
  * Ranking criteria (in order):
  *   1. Already linked to the same institution(s) — internal succession
  *      (the obvious candidate: the deputy)
- *   2. Linked to the same faction(s) — political loyalty
+ *   2. Linked to the same faction(s) — political loyalty (id/name compatibility
+ *      handles are resolved through the settlement's faction roster)
  *   3. Importance tier — key > notable > minor
  *   4. Influence score (if present)
  *
@@ -31,24 +42,26 @@
  * institutional/faction links is the standard successor.
  *
  * @param {Object} args
- * @param {import('../settlement.schema.js').SimNpc} args.outgoing
- * @param {import('../settlement.schema.js').SimSettlement} args.settlement
+ * @param {NpcStructural | null | undefined} args.outgoing
+ * @param {SettlementWithNpcs | null | undefined} args.settlement
  * @param {number} [args.limit=3]
  * @returns {NpcStructural[]} ranked candidates
  */
 export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
   if (!outgoing || !settlement) return [];
-  /** @type {any[]} */
   const npcs = settlement.npcs || [];
   const outId = outgoing.id || outgoing.name;
   const outInst = new Set(outgoing.linkedInstitutionIds || []);
-  const outFac  = new Set(outgoing.linkedFactionIds || []);
+  const factions = settlement.powerStructure?.factions?.length
+    ? settlement.powerStructure.factions
+    : (settlement.factions || []);
+  const outFac = canonicalFactionLinks(outgoing.linkedFactionIds, factions);
 
   // Score each NPC for successor fitness. Higher score = better fit.
   const scored = npcs
     .filter(n => (n.id || n.name) !== outId)               // not the same NPC
     .filter(n => n.status !== 'dead' && n.status !== 'removed' && n.status !== 'exiled')
-    .map(n => ({ npc: n, score: scoreCandidate(n, outInst, outFac) }))
+    .map(n => ({ npc: n, score: scoreCandidate(n, outInst, outFac, factions) }))
     .filter(s => s.score > 0)                              // anyone with zero overlap is irrelevant
     .sort((a, b) => b.score - a.score);
 
@@ -62,7 +75,11 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
  * field is empty and the SuccessorPrompt will fall back to free-form
  * input.
  *
- * @param {{ npc: import('../settlement.schema.js').SimNpc, settlement: import('../settlement.schema.js').SimSettlement, limit?: number }} args
+ * @param {Object} args
+ * @param {NpcStructural | null | undefined} args.npc
+ * @param {SettlementWithNpcs | null | undefined} args.settlement
+ * @param {number} [args.limit=3]
+ * @returns {string[]} candidate npc ids (or names when no id exists)
  */
 export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
   return inferSuccessors({ outgoing: npc, settlement, limit })
@@ -71,11 +88,13 @@ export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimNpc} candidate
- * @param {Set<any>} outInst
- * @param {Set<any>} outFac
+ * @param {NpcStructural} candidate
+ * @param {Set<string>} outInst   institution ids the outgoing NPC was linked to
+ * @param {Set<string>} outFac    canonical faction handles the outgoing NPC was linked to
+ * @param {Array<{ id?: unknown, faction?: unknown, name?: unknown }>} factions
+ * @returns {number} successor-fitness score; 0 = no overlap, irrelevant
  */
-function scoreCandidate(candidate, outInst, outFac) {
+function scoreCandidate(candidate, outInst, outFac, factions) {
   // Institutional overlap is the strongest signal — internal succession
   // is the standard inheritance pattern (deputy mayor becomes mayor).
   const candInst = candidate.linkedInstitutionIds || [];
@@ -85,7 +104,7 @@ function scoreCandidate(candidate, outInst, outFac) {
   }
 
   // Faction overlap is the next strongest — political loyalty matters.
-  const candFac = candidate.linkedFactionIds || [];
+  const candFac = canonicalFactionLinks(candidate.linkedFactionIds, factions);
   let facOverlap = 0;
   for (const id of candFac) {
     if (outFac.has(id)) facOverlap += 25;
@@ -113,4 +132,23 @@ function scoreCandidate(candidate, outInst, outFac) {
   if (typeof candidate.influence === 'number') score += Math.min(candidate.influence / 10, 10);
 
   return score;
+}
+
+/**
+ * Resolve historical name handles and id handles onto the same canonical key when
+ * the settlement carries a faction roster. Unknown refs remain exact strings, so
+ * legacy NPC-only fixtures retain their previous overlap semantics.
+ *
+ * @param {string[] | null | undefined} refs
+ * @param {Array<{ id?: unknown, faction?: unknown, name?: unknown }>} factions
+ * @returns {Set<string>}
+ */
+function canonicalFactionLinks(refs, factions) {
+  const out = new Set();
+  for (const ref of refs || []) {
+    const resolved = resolveFactionRef(factions, ref);
+    const canonical = factionRefOf(resolved) || String(ref || '');
+    if (canonical) out.add(canonical);
+  }
+  return out;
 }

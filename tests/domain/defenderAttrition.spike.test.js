@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { evaluateWarLayer, SIEGE_MAX_AGE } from '../../src/domain/worldPulse/warDeployment.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * Defender-attrition SPIKE (flag-gated, DEFAULT OFF). Proves: (1) with the flag off the

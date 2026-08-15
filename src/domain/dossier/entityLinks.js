@@ -1,5 +1,15 @@
 import { factionIdFromName } from '../../lib/entities.js';
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 
+/**
+ * @typedef {{ id?: string, refId?: string, name?: string, label?: string, faction?: string, [key: string]: unknown }} EntityLike
+ * @typedef {{ personality?: Record<string, any> | string | string[] | null, secret?: unknown, goal?: unknown, goals?: unknown, [key: string]: unknown }} NpcLike
+ * @typedef {{ key: string, label: string, value: string, visibility: string }} Trait
+ * @typedef {{ npcs?: NpcLike[], powerStructure?: { factions?: EntityLike[] }, factions?: EntityLike[], institutions?: EntityLike[], config?: { nearbyResources?: unknown[] }, resourceAnalysis?: { availableResources?: unknown[] }, [key: string]: unknown }} DossierSettlement
+ */
+
+/** @type {Readonly<Record<string, string>>} */
 const KIND_PREFIX = Object.freeze({
   settlement: 'settlement',
   npc: 'npc',
@@ -11,25 +21,21 @@ const KIND_PREFIX = Object.freeze({
   neighbour: 'neighbour',
   // Deities are addressable entities (the patron-faith snapshot). Declared
   // explicitly so a `deity` anchor reads `dossier-deity-<slug>` rather than
-  // falling through to slugifyEntity('deity') — keeps the sink anchor legible
-  // and self-documenting.
+  // falling through to slugifyEntity('deity') — keeps the sink anchor legible.
   deity: 'deity',
   event: 'event',
   hook: 'hook',
   condition: 'condition',
 });
 
-export function slugifyEntity(/** @type {any} */ value) {
-  return String(value || 'unknown')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80) || 'unknown';
+/** @param {unknown} value @returns {string} */
+export function slugifyEntity(value) {
+  return kernelSlugify(value, { sep: '-', max: 80, fallback: 'unknown', empty: 'unknown' });
 }
 
-export function entityAnchor(/** @type {any} */ kind, /** @type {any} */ entity, fallback = '') {
-  const prefix = (/** @type {any} */ (KIND_PREFIX))[kind] || slugifyEntity(kind);
+/** @param {string} kind @param {EntityLike | null | undefined} entity @param {string} [fallback] @returns {string} */
+export function entityAnchor(kind, entity, fallback = '') {
+  const prefix = KIND_PREFIX[kind] || slugifyEntity(kind);
   const raw = entity?.id || entity?.refId || entity?.name || entity?.label || fallback;
   return `dossier-${prefix}-${slugifyEntity(raw)}`;
 }
@@ -44,16 +50,17 @@ export function entityAnchor(/** @type {any} */ kind, /** @type {any} */ entity,
  * `factionIdFromName`, not this helper.
  *
  * @param {string} kind
- * @param {Record<string, any>} [entity]
+ * @param {EntityLike | null | undefined} [entity]
  * @param {string} [fallback]
  * @returns {string}
  */
 export function entityIdFor(kind, entity, fallback = '') {
   const label = entity?.name || entity?.label || fallback || String(entity?.id || kind || 'item');
-  return entity?.id || entity?.refId || slugifyEntity(label);
+  return String(entity?.id || entity?.refId || slugifyEntity(label));
 }
 
-export function entityLink(/** @type {any} */ kind, /** @type {any} */ entity, fallback = '') {
+/** @param {string} kind @param {EntityLike | null | undefined} entity @param {string} [fallback] */
+export function entityLink(kind, entity, fallback = '') {
   const label = entity?.name || entity?.label || fallback || String(entity?.id || kind || 'item');
   const anchor = entityAnchor(kind, entity, label);
   return {
@@ -72,11 +79,7 @@ export function entityLink(/** @type {any} */ kind, /** @type {any} */ entity, f
  * NPC's stable `.id` doesn't silently miss. Returns null for a name absent from
  * the index (a foreign-settlement contact) — the caller then renders plain text.
  *
- * Shared by every site that holds a bare NPC name (or a partial object without
- * the stable id): NeighbourLinkCard's npcConnections, PowerTab sub-faction
- * members, EngineSections rivals.
- *
- * @param {object|null} index  buildDossierEntityIndex result (or null).
+ * @param {{ npcs?: Array<{ id: string, currentName?: string }> } | null | undefined} index
  * @param {string} name        The NPC's stated name.
  * @returns {string|null}
  */
@@ -84,8 +87,8 @@ export function localNpcId(index, name) {
   if (!index || !name) return null;
   const key = String(name).trim().toLowerCase();
   if (!key) return null;
-  const hit = ((/** @type {any} */ (index)).npcs || []).find(
-    (/** @type {any} */ n) => String(n.currentName || '').trim().toLowerCase() === key,
+  const hit = (index.npcs || []).find(
+    n => String(n.currentName || '').trim().toLowerCase() === key,
   );
   return hit ? hit.id : null;
 }
@@ -93,17 +96,10 @@ export function localNpcId(index, name) {
 /**
  * Resolve an institution display name to its stable index id, matching against
  * the index's STRUCTURED institution entries (by slugified current name) — never
- * by regex-scanning prose. Returns the entry's id (rename-safe: EntityLink
- * re-resolves the current name at render) or null when no institution matches,
- * in which case the caller degrades to plain text rather than a dead link.
+ * by regex-scanning prose. Returns the entry's id (rename-safe) or null when no
+ * institution matches, in which case the caller degrades to plain text.
  *
- * Shared by every tab that holds a bare institution name and wants a link:
- * EconomicsTab's `Via:` providers, PowerTab's per-faction institutional
- * footprint. Slugify normalizes case + punctuation so the match holds
- * regardless of the source's casing.
- *
- * @param {{institutions?: Array<{id: string, currentName?: string, raw?: {name?: string}}>}|null} index
- *   buildDossierEntityIndex result (or null off-dossier).
+ * @param {{ institutions?: Array<{ id: string, currentName?: string, raw?: { name?: string } }> } | null | undefined} index
  * @param {string} name         Institution display name to resolve.
  * @returns {string|null}       Stable institution id, or null.
  */
@@ -111,20 +107,19 @@ export function institutionIdFromName(index, name) {
   if (!index?.institutions?.length || !name) return null;
   const key = slugifyEntity(name);
   const hit = index.institutions.find(
-    /** @param {{id: string, currentName?: string, raw?: {name?: string}}} inst */
-    inst =>
-      slugifyEntity(inst.currentName) === key
-      || slugifyEntity(inst.raw?.name) === key);
+    inst => slugifyEntity(inst.currentName) === key || slugifyEntity(inst.raw?.name) === key);
   return hit ? hit.id : null;
 }
 
-function normalizeList(/** @type {any} */ value) {
+/** @param {unknown} value @returns {string[]} */
+function normalizeList(value) {
   if (!value) return [];
   if (Array.isArray(value)) return value.filter(Boolean).map(String);
   return [String(value)].filter(Boolean);
 }
 
-function pushTrait(/** @type {any} */ out, /** @type {any} */ key, /** @type {any} */ label, /** @type {any} */ value, visibility = 'public') {
+/** @param {Trait[]} out @param {string} key @param {string} label @param {unknown} value @param {string} [visibility] */
+function pushTrait(out, key, label, value, visibility = 'public') {
   const values = normalizeList(value);
   for (const item of values) {
     const trimmed = item.trim();
@@ -133,7 +128,8 @@ function pushTrait(/** @type {any} */ out, /** @type {any} */ key, /** @type {an
   }
 }
 
-function firstText(/** @type {any[]} */ ...values) {
+/** @param {...unknown} values @returns {string | null} */
+function firstText(...values) {
   for (const value of values) {
     if (!value) continue;
     if (typeof value === 'string') return value;
@@ -143,15 +139,20 @@ function firstText(/** @type {any[]} */ ...values) {
       continue;
     }
     if (typeof value === 'object') {
-      const hit = value.short || value.description || value.long || value.text || value.name;
+      const hit = /** @type {Record<string, any>} */ (value).short
+        || /** @type {Record<string, any>} */ (value).description
+        || /** @type {Record<string, any>} */ (value).long
+        || /** @type {Record<string, any>} */ (value).text
+        || /** @type {Record<string, any>} */ (value).name;
       if (typeof hit === 'string' && hit.trim()) return hit;
     }
   }
   return null;
 }
 
-export function normalizeNpcTraits(/** @type {any} */ npc = {}) {
-  /** @type {any[]} */
+/** @param {NpcLike} [npc] @returns {Trait[]} */
+export function normalizeNpcTraits(npc = {}) {
+  /** @type {Trait[]} */
   const traits = [];
   const personality = npc.personality;
 
@@ -174,7 +175,7 @@ export function normalizeNpcTraits(/** @type {any} */ npc = {}) {
   pushTrait(traits, 'loyalty', 'Loyalty', npc.loyalty || npc.loyalties);
   pushTrait(traits, 'fear', 'Fear', npc.fear || npc.fears);
   pushTrait(traits, 'goal', 'Goal', firstText(npc.goal, npc.goals));
-  pushTrait(traits, 'secret', 'Secret', typeof npc.secret === 'string' ? npc.secret : npc.secret?.what, 'gm');
+  pushTrait(traits, 'secret', 'Secret', typeof npc.secret === 'string' ? npc.secret : (/** @type {{ what?: unknown }} */ (npc.secret))?.what, 'gm');
 
   const seen = new Set();
   return traits.filter((trait) => {
@@ -187,21 +188,10 @@ export function normalizeNpcTraits(/** @type {any} */ npc = {}) {
 
 /**
  * Which dossier tab owns each entity type. `navigateToEntity` reads this to
- * decide which tab to switch to before scrolling.
- *
- * Institutions are enumerated as their own objects ONLY in the Overview tab's
- * Institutions disclosure (the Power tab renders none; Services/Defense/
- * Economics only mention them as 'Via:' providers), so institution links land
- * on 'overview' where the sink lives.
- *
- * Neighbours route to 'relationships' rather than 'neighbours': the
- * NeighbourLinkCard sink renders on BOTH the full Relationships tab and the
- * neighbours-only tab, but 'relationships' is registered on a superset
- * condition (relationships/factions/conflicts OR a neighbour network) whereas
- * 'neighbours' is gated more narrowly. Routing to the superset tab means a
- * neighbour link never no-ops on a settlement that registered only the full
- * tab.
- * @type {Readonly<Record<string,string>>}
+ * decide which tab to switch to before scrolling. Institutions land on
+ * 'overview' (their only self-enumerated sink); neighbours route to the
+ * superset 'relationships' tab so a neighbour link never no-ops.
+ * @type {Readonly<Record<string, string>>}
  */
 export const TYPE_TO_TAB = Object.freeze({
   npc: 'npcs',
@@ -209,9 +199,6 @@ export const TYPE_TO_TAB = Object.freeze({
   institution: 'overview',
   deity: 'war_faith',
   settlement: 'overview',
-  // Phase C additions — the tab each newly-indexed type calls home. Neighbours
-  // (and the trade partners that resolve to them) live on the Relationships
-  // tab; historical events on History; resources/services on their own tabs.
   neighbour: 'relationships',
   event: 'history',
   resource: 'resources',
@@ -221,15 +208,14 @@ export const TYPE_TO_TAB = Object.freeze({
 /**
  * Read the live current name off a raw entity (rename-safe getter source).
  * @param {string} type
- * @param {Record<string, any>} raw
+ * @param {{ faction?: string, name?: string, label?: string, neighbourName?: string, title?: string, type?: string } | null | undefined} raw
  * @param {string} fallback
  * @returns {string}
  */
 function readCurrentName(type, raw, fallback) {
   if (!raw || typeof raw !== 'object') return fallback;
   if (type === 'faction') return raw.faction || raw.name || raw.label || fallback;
-  // A neighbour entry's display name is its neighbourName (the partner
-  // settlement), falling back to the generic name/label.
+  // A neighbour entry's display name is its neighbourName (the partner).
   if (type === 'neighbour') return raw.neighbourName || raw.name || raw.label || fallback;
   // Historical events title off name/title/type.
   if (type === 'event') return raw.name || raw.title || raw.label || raw.type || fallback;
@@ -240,8 +226,7 @@ function readCurrentName(type, raw, fallback) {
  * Decorate a base entityLink entry with the navigator contract: a `type`, the
  * owning `tab`, and a LIVE `currentName` getter. The getter reads the raw
  * entity at access time (never caches a name at build time) so a renamed
- * entity always reports its current name — this is what makes EntityLink
- * rename-safe by construction.
+ * entity always reports its current name — what makes EntityLink rename-safe.
  *
  * @param {string} type
  * @param {Record<string, any>} base   The entityLink(...) result (id, label, anchor, href).
@@ -250,11 +235,18 @@ function readCurrentName(type, raw, fallback) {
  */
 function decorateEntry(type, base, raw) {
   const fallbackLabel = base.label;
+  const authoredIdentity = typeof raw?.id === 'string' && raw.id.trim()
+    || typeof raw?.refId === 'string' && raw.refId.trim();
   return {
     ...base,
     type,
     tab: TYPE_TO_TAB[type] || 'overview',
     raw,
+    identity: {
+      state: authoredIdentity ? 'authored' : 'derived_legacy',
+      interactive: true,
+      reason: null,
+    },
     get currentName() {
       return readCurrentName(type, raw, fallbackLabel);
     },
@@ -265,9 +257,9 @@ function decorateEntry(type, base, raw) {
  * Stable id for a neighbour-network entry. Prefers the entry's own persisted id
  * (the `link_*` / `generated_*` / `live_*` ids the link/save/render paths mint),
  * falling back to a name-derived `neighbour.<snake>` so an entry that predates
- * those ids still resolves. Mirrors the id RelationshipsTab keys its cards by.
+ * those ids still resolves.
  *
- * @param {Record<string, any>} entry
+ * @param {Record<string, any> | null | undefined} entry
  * @returns {string|null}
  */
 export function neighbourIdFor(entry) {
@@ -280,50 +272,77 @@ export function neighbourIdFor(entry) {
 /**
  * Stable id for a historical / timeline event. Events already carry an `id` in
  * most generated saves; legacy events without one get a deterministic
- * `event.<snake(name)>` so cross-references and the chronicle TOC resolve.
- * Falls back to the supplied list index only when even the name is missing
- * (last-resort, still stable within a single settlement render).
+ * `event.<snake(name)>`, and a last-resort `event.index-N` when even the name
+ * is missing.
  *
- * @param {Record<string, any>} event
- * @param {number} index
+ * @param {Record<string, any> | null | undefined} event
+ * @param {number} [_index] retained for call-site compatibility; never identity
  * @returns {string|null}
  */
-export function eventIdFor(event, index) {
+export function eventIdFor(event, _index) {
   if (!event || typeof event !== 'object') return null;
   if (typeof event.id === 'string' && event.id) return event.id;
   const name = event.name || event.title || event.label;
   if (name) return `event.${slugifyEntity(name)}`;
-  return `event.index-${index}`;
+  // The former `event.index-N` fallback relinked an old event when an unrelated
+  // sibling was inserted or reordered. Canonical key ordering makes this
+  // surrogate stable across JSON export/import and object-key insertion order.
+  // Byte-identical anonymous events intentionally collide; the index marks that
+  // ambiguity non-interactive below rather than smuggling array position back
+  // into durable-looking identity.
+  const canonical = JSON.stringify(stableEntityClone(event)) || '{}';
+  return `event.legacy-${fnv1a32(canonical).toString(36)}`;
+}
+
+/**
+ * Build a JSON-safe, key-sorted value for deterministic legacy identity.
+ *
+ * @param {unknown} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {unknown}
+ */
+function stableEntityClone(value, ancestors = new WeakSet()) {
+  if (value == null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') return Number.isFinite(value) ? value : String(value);
+  if (typeof value === 'bigint') return String(value);
+  if (typeof value === 'undefined' || typeof value === 'function' || typeof value === 'symbol') {
+    return null;
+  }
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? 'Invalid Date' : value.toISOString();
+  }
+  if (typeof value !== 'object') return String(value);
+  if (ancestors.has(value)) return '[Circular]';
+  ancestors.add(value);
+
+  let clone;
+  if (Array.isArray(value)) {
+    clone = value.map(entry => stableEntityClone(entry, ancestors));
+  } else {
+    /** @type {Record<string, unknown>} */
+    const objectClone = {};
+    const record = /** @type {Record<string, unknown>} */ (value);
+    for (const key of Object.keys(record).sort()) {
+      objectClone[key] = stableEntityClone(record[key], ancestors);
+    }
+    clone = objectClone;
+  }
+  ancestors.delete(value);
+  return clone;
 }
 
 /**
  * Build a navigable index of the dossier's structured entities.
  *
  * Returns the original per-kind arrays (npcs / factions / institutions /
- * resources) PLUS a flat `byId` map and a `resolve(id)` lookup so the hyperlink
- * layer can turn a stable id into `{ id, type, tab, anchor, currentName }`.
- *
- * Faction ids are derived with the canonical {@link factionIdFromName} (snake_case,
- * underscores) — the SAME function that produces an NPC's `factionLink` — so an
- * NPC's stated affiliation resolves to its faction card by id with no
- * name-matching. (The anchor still uses the hyphen slug for the DOM id; identity
- * and anchor are intentionally distinct strings.)
- *
- * Phase C extends the index to be EXHAUSTIVE: neighbours (relationship cards),
- * historical events (link targets), and resources are now resolvable, and trade
- * partners reuse the neighbour entries via {@link resolveTradePartner}. All ids
- * are derived from existing fields (no generator change), so generator output
- * stays byte-identical and links follow entities by id (rename-safe).
+ * resources / neighbours / events / deities) PLUS a flat `byId` map and a
+ * `resolve(id)` lookup so the hyperlink layer can turn a stable id into
+ * `{ id, type, tab, anchor, currentName }`. Faction ids are the canonical
+ * `factionIdFromName` (snake) so a name-stated NPC affiliation resolves with no
+ * name-matching. All ids derive from existing fields (no generator change), so
+ * generator output stays byte-identical and links follow entities by id.
  *
  * @param {Record<string, any>} [settlement]
- * @returns {{
- *   npcs: object[], factions: object[], institutions: object[], resources: object[],
- *   neighbours: object[], events: object[],
- *   deities: object[], settlement: (object|null),
- *   byId: Map<string, object>,
- *   resolve: (id: string) => (object|null),
- *   resolveTradePartner: (nameOrId: string) => (object|null),
- * }}
  */
 export function buildDossierEntityIndex(settlement = {}) {
   const npcs = (settlement.npcs || []).map((/** @type {any} */ npc) =>
@@ -338,18 +357,10 @@ export function buildDossierEntityIndex(settlement = {}) {
     // IDENTITY must be the canonical snake id (== npc.factionLink), not the
     // hyphen anchor slug entityLink derives. Override it here.
     base.id = factionIdFromName(displayName) || base.id;
-    // RENAME-TOLERANCE SEAM: the name-derived id above is the primary key every
-    // current consumer (npcProfile.factionLink, factionProfile, the PDF
-    // viewModel, and every EntityLink id={factionIdFromName(name)} call site)
-    // still computes from the display name — so it MUST remain the primary id.
-    // But a name-derived id breaks on rename. When a faction carries a STABLE,
-    // rename-decoupled `faction.id` (which the id-scheme migration will backfill;
-    // see flaggedForMainLoop), register the entry under that id too so a link
-    // that already holds the stable id resolves without name-matching. Aliasing
-    // (rather than replacing the primary) keeps every legacy link working while
-    // the stable id becomes resolvable — the minimum-safe enforcement of the
-    // "name is immutable" invariant this cluster can land without touching the
-    // ~15 cross-file consumers.
+    // RENAME-TOLERANCE SEAM: the name-derived id above stays the primary key
+    // every current consumer computes from the display name. But when a faction
+    // carries a STABLE, rename-decoupled `faction.id`, ALSO register the entry
+    // under that id so a link holding the stable id resolves to the same card.
     const entry = decorateEntry('faction', base, faction);
     if (typeof faction.id === 'string' && faction.id && faction.id !== base.id) {
       entry.aliasIds = [faction.id];
@@ -363,7 +374,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   const resources = [
     ...(settlement.config?.nearbyResources || []),
     ...(settlement.resourceAnalysis?.availableResources || []),
-  ].map(resource => {
+  ].map((/** @type {any} */ resource) => {
     const entity = typeof resource === 'string'
       ? { id: resource, name: resource.replace(/_/g, ' ') }
       : resource;
@@ -372,11 +383,9 @@ export function buildDossierEntityIndex(settlement = {}) {
 
   // NEIGHBOURS — the unified neighbourNetwork plus the live generator
   // `neighborRelationship` entry RelationshipsTab synthesizes for unsaved
-  // settlements (same `live_<name>` id it mints), so a trade partner / actor
-  // ref resolves to the relationship card whether the settlement is saved or
-  // freshly generated. Dedup by neighbour name keeps the persisted entry
-  // authoritative over the synthesized live one.
-  /** @type {object[]} */
+  // settlements. Dedup by neighbour name keeps the persisted entry authoritative
+  // over the synthesized live one.
+  /** @type {Record<string, any>[]} */
   const neighbourEntries = [];
   const seenNeighbourNames = new Set();
   const pushNeighbour = (/** @type {any} */ entry) => {
@@ -404,16 +413,15 @@ export function buildDossierEntityIndex(settlement = {}) {
     });
   }
 
-  // EVENTS — historical + timeline beats, indexed as link TARGETS (actor
-  // cross-refs, the chronicle TOC). Keyed by the event's own id or a
-  // name-derived `event.<snake>`; first id wins on collision.
-  /** @type {object[]} */
+  // EVENTS — historical + timeline beats, indexed as link TARGETS. Keyed by the
+  // event's own id or a name-derived `event.<snake>`; first id wins on collision.
+  /** @type {Record<string, any>[]} */
   const eventEntries = [];
   const rawEvents = [
     ...(settlement.history?.historicalEvents || []),
     ...(settlement.history?.eventsTimeline || []),
   ];
-  rawEvents.forEach((event, i) => {
+  rawEvents.forEach((/** @type {any} */ event, /** @type {number} */ i) => {
     if (!event || typeof event !== 'object') return;
     const id = eventIdFor(event, i);
     if (!id) return;
@@ -425,58 +433,66 @@ export function buildDossierEntityIndex(settlement = {}) {
     eventEntries.push(decorateEntry('event', base, event));
   });
 
-  // Optional deity (war/faith snapshot). No dedicated typedef today, so it is
-  // only indexed when a recognizable name is present — kept minimal for Phase A.
+  // Optional deity (war/faith snapshot). Indexed only when a recognizable name
+  // is present, as a TRUE `deity` entry: identity is the `deity.<slug>` id
+  // WarFaithSection's EntityLink carries; the anchor is `dossier-deity-<slug>`.
+  /** @type {Record<string, any>[]} */
   const deities = [];
   const deityName = settlement.config?.primaryDeitySnapshot?.name
     || settlement.primaryDeity?.name
     || settlement.config?.primaryDeitySnapshot?.deity;
   if (deityName) {
     const rawDeity = settlement.config?.primaryDeitySnapshot || settlement.primaryDeity || { name: deityName };
-    // Mint a TRUE deity entry (kind 'deity'): identity is the `deity.<slug>` id
-    // WarFaithSection's EntityLink carries, and the anchor is `dossier-deity-
-    // <slug>` — the SAME string the WarFaithSection sink declares via
-    // entityAnchor('deity', …). (Earlier this borrowed kind 'settlement', which
-    // produced a `dossier-settlement-<slug>` anchor with no matching sink.)
     const deityId = `deity.${slugifyEntity(deityName)}`;
     const base = {
       ...entityLink('deity', { name: deityName }),
-      // Identity is the `deity.<slug>` id WarFaithSection's EntityLink carries;
-      // the anchor (built from the name above) stays `dossier-deity-<slug(name)>`,
-      // the SAME string the WarFaithSection sink declares via
-      // entityAnchor('deity', { name }). Setting `id` from a `{name}`-derived
-      // link (not an `{id}`-derived one) keeps anchor and id independent: the
-      // anchor never doubles the `deity-` prefix.
       id: deityId,
     };
     deities.push(decorateEntry('deity', base, rawDeity));
   }
 
   // The settlement itself is addressable (overview tab).
+  /** @type {Record<string, any>[]} */
   const settlementEntries = [];
   if (settlement.id || settlement.name) {
     settlementEntries.push(decorateEntry('settlement', { ...entityLink('settlement', settlement) }, settlement));
   }
 
   // byId order = resolution precedence on id collision (first wins). Named
-  // entities (npcs/factions/institutions) come before resources/neighbours/
-  // events so a richer card always wins a shared slug; deities + settlement
-  // last as catch-alls.
+  // entities come before resources/neighbours/events so a richer card always
+  // wins a shared slug; deities + settlement last as catch-alls.
   const all = [
     ...npcs, ...factions, ...institutions,
     ...resources, ...neighbourEntries, ...eventEntries,
     ...deities, ...settlementEntries,
   ];
+
+  // Same-family identity reuse is ambiguous. Preserve every readable entry in
+  // its family array, but make the shared reference non-interactive so no link
+  // can silently choose the first sibling. Cross-family collisions keep the
+  // historical richer-kind precedence because callers also carry a type.
+  const identityCounts = new Map();
+  for (const entry of all) {
+    const key = `${entry.type}:${entry.id}`;
+    identityCounts.set(key, (identityCounts.get(key) || 0) + 1);
+  }
+  for (const entry of all) {
+    if ((identityCounts.get(`${entry.type}:${entry.id}`) || 0) <= 1) continue;
+    entry.identity = {
+      state: 'degraded_collision',
+      interactive: false,
+      reason: 'More than one legacy record resolves to this identity.',
+    };
+  }
+  /** @type {Map<string, Record<string, any>>} */
   const byId = new Map();
   for (const entry of all) {
     if (entry.id && !byId.has(entry.id)) byId.set(entry.id, entry);
   }
   // Register alias ids AFTER every primary id so a primary always wins a shared
-  // key. Today only factions carry an `aliasIds` (their stable rename-decoupled
-  // id, in addition to the name-derived primary) — this is what lets a link that
-  // holds the stable id resolve to the same card the name-derived link hits.
+  // key. Today only factions carry `aliasIds` (their stable rename-decoupled id).
   for (const entry of all) {
-    const aliases = /** @type {any} */ (entry).aliasIds;
+    const aliases = entry.aliasIds;
     if (!Array.isArray(aliases)) continue;
     for (const aliasId of aliases) {
       if (aliasId && !byId.has(aliasId)) byId.set(aliasId, entry);
@@ -496,17 +512,14 @@ export function buildDossierEntityIndex(settlement = {}) {
     /**
      * Resolve a stable id to its decorated entry, or null (broken-link guard).
      * @param {string} id
-     * @returns {(object|null)}
      */
     resolve: (id) => (id && byId.get(id)) || null,
     /**
      * Resolve a trade partner (a neighbour NAME or id stored in economicState)
-     * to its neighbour entry — Phase B trade-partner links reuse the SAME
-     * relationship card rather than minting a separate type. Returns null when
-     * no neighbour matches (degrade to plain text). Rename-safe: the returned
-     * entry's currentName is still the live getter.
+     * to its neighbour entry — trade-partner links reuse the SAME relationship
+     * card rather than minting a separate type. Returns null when no neighbour
+     * matches (degrade to plain text).
      * @param {string} nameOrId
-     * @returns {(object|null)}
      */
     resolveTradePartner: (nameOrId) => {
       if (!nameOrId) return null;

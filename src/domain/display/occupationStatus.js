@@ -27,11 +27,11 @@
  * Strict-clean (typecheck:domain:strict). No React/Zustand imports.
  */
 
-/** @param {any} a @param {any} b @returns {number} */
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
-/** @param {any} v @param {number} [d] @returns {number} */
+/** @param {unknown} v @param {number} [d] @returns {number} */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
+const clamp01 = (/** @type {unknown} */ v) => Math.max(0, Math.min(1, num(v)));
 
 // The occupation state ladder → DM phrase (occupied-side framing). Mirrors the
 // engine STATE_LADDER but says nothing about the enum or the hysteresis.
@@ -77,9 +77,9 @@ export function resistancePhrase(v) {
  * under a live occupation ⇒ self-gating.
  *
  * @param {Object} args
- * @param {any} args.settlementId   the OCCUPIED settlement id.
+ * @param {unknown} args.settlementId   the OCCUPIED settlement id.
  * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {(id:unknown)=>string} [args.nameFor]
  * @returns {{ occupierName: string, statePhrase: string, resistancePhrase: string, pays: boolean, burdened: boolean } | null}
  */
 export function settlementOccupation({ settlementId, worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
@@ -111,9 +111,9 @@ export function settlementOccupation({ settlementId, worldState, nameFor = (id) 
  * occupier's own dossier).
  *
  * @param {Object} args
- * @param {any} args.settlementId   the OCCUPIER settlement id.
+ * @param {unknown} args.settlementId   the OCCUPIER settlement id.
  * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {(id:unknown)=>string} [args.nameFor]
  * @returns {{ holds: Array<{ name: string, statePhrase: string, resistancePhrase: string }>, stretchedThin: boolean, strengthened: boolean } | null}
  */
 export function occupierHoldings({ settlementId, worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
@@ -155,7 +155,7 @@ export function occupierHoldings({ settlementId, worldState, nameFor = (id) => S
  *
  * @param {Object} args
  * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {(id:unknown)=>string} [args.nameFor]
  * @returns {Array<{ occupiedId: string, occupiedName: string, occupierName: string, statePhrase: string, resistancePhrase: string, pays: boolean }>}
  */
 export function occupationStandings({ worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {

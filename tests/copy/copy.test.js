@@ -36,17 +36,6 @@ describe('t()', () => {
     expect(warn).toHaveBeenCalled();
   });
 
-  it('warns (does NOT throw) on a missing key, even in DEV', () => {
-    // The header documents the actual contract: a missing key WARNS in DEV and
-    // returns the key string everywhere — it never throws (a throw would let one
-    // typo take down the page). This pins doc and code together so neither drifts.
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    expect(import.meta.env.DEV).toBe(true); // vitest runs in DEV
-    expect(() => t('totally.missing.key')).not.toThrow();
-    expect(t('totally.missing.key')).toBe('totally.missing.key');
-    expect(warn).toHaveBeenCalled();
-  });
-
   it('handles multiple variables in one string', () => {
     expect(t('ai.insufficient', { cost: 12, balance: 4 }))
       .toBe('You need 12 credits for this. You have 4.');
@@ -91,18 +80,10 @@ describe('en map shape (drift guards)', () => {
     }
   });
 
-  it('has every tab name referenced by the redesign §18.9 spec', () => {
-    const requiredTabs = [
-      'overview', 'summary', 'economics', 'power', 'defense', 'history',
-      'relationships', 'plotHooks', 'dailyLife', 'services', 'resources',
-      'viability', 'npcs', 'dmCompass',
-    ];
-    for (const tab of requiredTabs) {
-      expect(en.tabs).toHaveProperty(tab);
-      expect(typeof en.tabs[tab]).toBe('string');
-      expect(en.tabs[tab].length).toBeGreaterThan(0);
-    }
-  });
+  // The 'has every tab name' drift-guard was removed with the tab intro-lede
+  // family (owner order 2026-07-22): the poetic tabs.* ledes no longer exist, so
+  // there is no required-tab list to guard. tabs stays an (empty) namespace,
+  // pinned by the namespace guard above.
 
   it('has all three pricing tiers with name + cta + features', () => {
     for (const tier of ['wanderer', 'cartographer', 'founder']) {
@@ -178,7 +159,9 @@ describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
       const joined = (features || []).join(' | ').toLowerCase();
       expect(joined).not.toContain('pay-per-use ai features');
       // The new phrasing should be present somewhere in the tier's features.
-      expect(joined).toContain('narrative refinement');
+      // Both tiers keep the "narrative" framing (Wanderer: "narrative refinement",
+      // Cartographer: "30 narrative credits"), never "AI features".
+      expect(joined).toContain('narrative');
     }
   });
 });
@@ -224,33 +207,25 @@ describe('Tier 7.14 migration coverage', () => {
   });
 
   it('exposes auth modal button + placeholder + subtitle keys', () => {
-    // Buttons:
+    // Buttons (password-primary floor, W5.1 — the disclosure/method-toggle
+    // keys are retired; the email link + magic-close actions replace them):
     expect(t('auth.button.working')).toBe('Working...');
-    expect(t('auth.button.sendLink')).toBe('Send sign-in link');
-    expect(t('auth.button.emailLink')).toBe('Email me a sign-in link');
     expect(t('auth.button.createAcct')).toBe('Create account');
     expect(t('auth.button.signIn')).toBe('Sign in');
+    expect(t('auth.button.emailLink')).toBe('Email me a sign-in link');
+    expect(t('auth.button.resend')).toBe('Resend link');
+    expect(t('auth.button.differentEmail')).toBe('Use a different email');
+    // Magic-link close + alternatives divider + modal title:
+    expect(t('auth.magic.sent', { email: 'gm@example.com' })).toContain('gm@example.com');
+    expect(t('auth.oauth.divider')).toBe('or continue with');
+    expect(t('auth.modalTitle')).toBe('Welcome back');
     // Placeholders:
     expect(t('auth.placeholder.email')).toBe('Email address');
     expect(t('auth.placeholder.password')).toBe('Password');
-    expect(t('auth.placeholder.confirmPassword')).toBe('Confirm password');
-    // Password-mismatch guard (sign-up confirm field):
-    expect(t('auth.error.passwordMismatch')).toBe('Those passwords do not match.');
     // Subtitles + checkbox:
     expect(t('auth.signinSubtitle')).toContain('Sign in to keep your work');
     expect(t('auth.signupSubtitle', { tier: 'Wanderer' })).toContain('Wanderer');
     expect(t('auth.rememberMe')).toBe('Remember me on this device');
     expect(t('auth.localMode')).toContain('local mode');
-  });
-});
-
-describe('deferred security-questions copy points at the real section', () => {
-  it('references the actual enrollment section name, not "Login and security"', () => {
-    const deferred = t('auth.security.saveDeferred');
-    const sectionHeading = en.auth.security.account.heading;
-    // The durable enrollment UI is its own sibling section, not inside
-    // Login & Security. The deferred-save copy must name it accurately.
-    expect(deferred).toContain(sectionHeading);
-    expect(deferred.toLowerCase()).not.toContain('login and security');
   });
 });

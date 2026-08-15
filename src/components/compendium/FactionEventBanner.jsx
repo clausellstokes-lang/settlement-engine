@@ -1,12 +1,12 @@
 /**
  * FactionEventBanner — the faction relabel.
  *
- * Custom factions never reach generation (`eligibleCustomContent` doesn't read
- * the factions bucket). Rather than wire them in (fixture / byte-identity risk),
- * we RELABEL: a faction enters an EXISTING world through an in-world event, not
- * at generation time. This banner stops the honesty gap and routes to the
- * EventComposer (via an open settlement). It does NOT claim the faction will be
- * generated.
+ * Custom factions never reach generation: the tier filter passes the factions
+ * bucket through untouched (TIER_GATED_BUCKETS) and generation materializes
+ * nothing from it — both pinned by tests/domain/customContentTierGates.test.js.
+ * Rather than wire them in (fixture / byte-identity risk), we RELABEL: a faction
+ * enters an EXISTING world through an in-world event, not at generation time.
+ * This banner routes to the EventComposer, never claiming it will be generated.
  *
  * The faction accent is read from the shared CATEGORY_BY_KEY data (not a fresh
  * literal) so the colour stays in lockstep with the bucket chip.
@@ -24,7 +24,6 @@ export default function FactionEventBanner() {
     <div style={{
       marginBottom: 10, padding: '9px 12px',
       background: `${FACTION}0F`, border: `1px solid ${FACTION}44`, borderLeft: `3px solid ${FACTION}`,
-      borderRadius: 7,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>

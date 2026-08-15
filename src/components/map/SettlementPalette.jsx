@@ -6,19 +6,49 @@
  * Placed settlements show a "placed" badge and are visually muted.
  */
 
-import { useMemo, useState } from 'react';
-import { MapPin, Search, GripVertical, FolderOpen, PlusCircle } from 'lucide-react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
+import { formatCount } from '../../domain/formatNumber.js';
+import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { GOLD, GOLD_BG, INK, BODY, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
-import { threatDisplay } from './settlementThreat.js';
+import CampaignEmptyState from './CampaignEmptyState.jsx';
+import { threatDisplay, isCalmThreat } from './settlementThreat.js';
+
+// S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
+// was orphaned when the owner's create-page walk fix unmounted its only card
+// (WizardEmptyState). Its natural host is the Realm empty state: it COMPOSES a
+// realm, so the no-campaign moment is exactly where "build a whole realm at
+// once" belongs. Mounted subordinate to the Create/Select CTA, never the page's
+// gold (Advance owns that, and Advance only renders once a campaign is active,
+// so the two golds never co-occur). Lazy so the heavy composer never enters the
+// palette chunk — the realm-surfaces-lazy law holds; the desktop gate means it
+// is never reached on a phone, so isMobile is pinned false.
+const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'));
 
 export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
+  onKeyboardPlace, announcerRef, onAutoplace,
 }) {
   const [query, setQuery] = useState('');
-  // Hover on a palette card sets the QuickInspector
+  // F28 → E-I — the placement live region. F28 made Enter honest (it selected
+  // and announced guidance instead of promising an impossible drag); E-I makes
+  // Enter PLACE: on a placeable card it arms the keyboard placement session
+  // (onKeyboardPlace → WorldMapStage's lazy overlay), which steers a target
+  // with the arrow keys and commits through the same store gate as a drop.
+  const [placementHint, setPlacementHint] = useState('');
+  // (announcerRef is a parent-owned ref, assigned in the effect below.)
+  // E-I — expose this live region as THE placement announcer (the transformOut
+  // ref idiom): the keyboard session speaks its instructions, moves, commits,
+  // and refusals through the same aria-live footer the cards already use.
+  useEffect(() => {
+    if (!announcerRef) return undefined;
+    announcerRef.current = setPlacementHint;
+    return () => { announcerRef.current = null; };
+  }, [announcerRef]);
+  const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
+  // P136 / M-6 — hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
   const setHover = useStore(s => s.setHoveredSettlementId);
   const clearHover = useStore(s => s.clearHoveredSettlementId);
@@ -43,12 +73,10 @@ export default function SettlementPalette({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      {/* Header — the CARD_HDR tint carries the chrome grouping; the internal
-          hairline is dropped so the column isn't a stack of false-floor rules
-          (P5). One outer frame (the Stage's SidebarShell) is the only elevation. */}
+      {/* Header */}
       <div style={{
         padding: `${SP.sm}px ${SP.md}px`,
-        background: CARD_HDR,
+        background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: SECOND,
@@ -70,7 +98,6 @@ export default function SettlementPalette({
               width: '100%',
               padding: '6px 8px 6px 26px',
               border: `1px solid ${BORDER}`,
-              borderRadius: R.sm,
               fontSize: FS.xs, fontFamily: sans,
               background: CARD,
               outline: 'none',
@@ -78,37 +105,56 @@ export default function SettlementPalette({
             }}
           />
         </div>
+        {/* W-G / directive 1 — the Autoplace entry. It lives HERE, at the head of
+            the placement surface, because this sidebar is where placing happens:
+            a worldbuilder looking at "drag a card onto the map" is exactly the
+            person who wants "or do it for all of them". Secondary, never the
+            page's gold (Advance owns that). It opens a consent popup and by
+            itself changes nothing, so it is safe to press out of curiosity —
+            which is the only way anyone will ever discover what it does. */}
+        {activeCampaign && typeof onAutoplace === 'function' && saves.length > 0 && (
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<MapPinned size={12} />}
+            onClick={onAutoplace}
+            aria-label="Autoplace: survey the realm and propose the best ground for every settlement. Nothing is placed until you confirm."
+            style={{ width: '100%', marginTop: SP.xs }}
+          >
+            Autoplace all
+          </Button>
+        )}
       </div>
 
       {/* No-campaign prompt — placement needs an active campaign. This is an
-          ACTIONABLE empty state, so it carries a real first-click here instead
-          of pointing at the toolbar (P1/P8/P10): a primary "Create a campaign"
-          when none exist, a "Select a campaign" when some do. The gold TINT +
-          icon carry the call-out in two channels without a third nested frame —
-          matching the borderless "No settlements yet" state below (P5). */}
+          ACTIONABLE empty state (P1/P8): it carries a real first click here
+          instead of pointing at the toolbar — a primary "Create a campaign"
+          when none exist, "Select a campaign" when some do. It REUSES the ONE
+          shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
+          so "no campaign" looks the same on every surface. */}
       {!activeCampaign && (
-        <div style={{
-          margin: SP.sm,
-          display: 'grid', gap: SP.sm, justifyItems: 'center', textAlign: 'center',
-          padding: SP.md,
-          borderRadius: R.md, background: GOLD_BG,
-        }}>
-          <FolderOpen size={20} color={GOLD} />
-          <div style={{ fontSize: FS.sm, fontWeight: 800, color: INK, fontFamily: sans, lineHeight: 1.4 }}>
-            Start a campaign to place settlements
-          </div>
-          <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
+        <div style={{ margin: SP.sm, marginBottom: 0 }}>
+          <CampaignEmptyState
+            lead="Start a campaign to place settlements"
+            onCreateCampaign={onCreateCampaign}
+            onSelectCampaign={onSelectCampaign}
+            hasCampaigns={hasCampaigns}
+          />
+          <div style={{
+            marginTop: SP.xs, padding: `0 ${SP.xs}px`,
+            fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5,
+            textAlign: 'center',
+          }}>
             A campaign holds your map and its living world. Only canon settlements drop onto the map.
           </div>
-          {hasCampaigns && typeof onSelectCampaign === 'function' ? (
-            <Button variant="primary" size="sm" icon={<FolderOpen size={13} />} onClick={onSelectCampaign}>
-              Select a campaign
-            </Button>
-          ) : typeof onCreateCampaign === 'function' ? (
-            <Button variant="primary" size="sm" icon={<PlusCircle size={13} />} onClick={onCreateCampaign}>
-              Create a campaign
-            </Button>
-          ) : null}
+          {/* S2r re-home (C5): the premium one-click realm composer, subordinate
+              to the Create/Select CTA above it. Self-gates on premium (a
+              non-premium reach fires the pricing moment); lazy, so the composer
+              never enters the palette chunk. isMobile is pinned false — the Realm
+              is desktop-gated, so this sidebar never renders on a phone. */}
+          <Suspense fallback={null}>
+            <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
+          </Suspense>
         </div>
       )}
 
@@ -116,6 +162,9 @@ export default function SettlementPalette({
       <div style={{ flex: 1, overflowY: 'auto', padding: SP.sm }}>
         {!filtered.length ? (
           saves.length === 0 ? (
+            // Actionable no-settlements empty state: the hint keeps naming the
+            // Create tab, and the CTA IS the first click (guarded — the palette
+            // renders without onNavigate in isolated/test mounts).
             <div style={{
               display: 'grid', gap: SP.sm, justifyItems: 'center', textAlign: 'center',
               padding: SP.md,
@@ -138,7 +187,7 @@ export default function SettlementPalette({
           ) : (
             <div style={{
               padding: SP.md, textAlign: 'center',
-              fontSize: FS.xs, color: BODY, fontStyle: 'italic',
+              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
             }}>
               No matches.
             </div>
@@ -149,6 +198,25 @@ export default function SettlementPalette({
               key={save.id}
               save={save}
               placed={placedSettlements.has(String(save.id))}
+              onSelect={(name, isPlaced) => {
+                setSelectedBurgId(null);
+                setHover?.(save.id); // surface the QuickInspector peek
+                // Fix wave 4 (idx28) + E-I: the hint leads with what Enter just
+                // DID. A placeable card now ARMS the keyboard placement session
+                // (the F28 "scoped follow-on", built); the blocked cases keep
+                // announcing the honest reason instead of dead-ending.
+                if (isPlaced) {
+                  setPlacementHint(`${name} is already placed on the map.`);
+                } else if (!activeCampaign) {
+                  setPlacementHint(`${name} selected. Its overview is showing beside the map. Select a campaign to place it on the map.`);
+                } else if (typeof onKeyboardPlace === 'function') {
+                  onKeyboardPlace(save);
+                } else {
+                  // Isolated mounts without the stage (tests, storybook-style
+                  // harnesses): keep the honest pointer guidance.
+                  setPlacementHint(`${name} selected. Its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`);
+                }
+              }}
               onHover={(hovering) => {
                 if (hovering) setHover?.(save.id);
                 else clearHover?.();
@@ -158,21 +226,25 @@ export default function SettlementPalette({
         )}
       </div>
 
-      {/* Footer hint — separated by top padding only, not a borderTop rule: a
-          bottom hairline read as a page-end that suppressed awareness of the
-          scroll region above it (P5 false-floor). */}
-      <div style={{
-        padding: `${SP.sm}px ${SP.md}px ${SP.xs}px`,
-        fontSize: FS.xs, color: BODY, fontStyle: 'italic',
-        textAlign: 'center',
-      }}>
-        Drag a card onto the map to place it.
+      {/* Footer hint — doubles as an aria-live region so a keyboard user who
+          selects a card (Enter/Space) hears honest placement guidance instead
+          of a silently-inert "button". */}
+      <div
+        aria-live="polite"
+        style={{
+          padding: `${SP.xs}px ${SP.md}px`,
+          borderTop: `1px solid ${BORDER2}`,
+          fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+          textAlign: 'center',
+        }}
+      >
+        {placementHint || 'Drag a card onto the map to place it.'}
       </div>
     </div>
   );
 }
 
-// Enriched palette. The card surfaces tier + pop + threat
+// P136 / M-2 — Enriched palette. The card surfaces tier + pop + threat
 // + stress so a worldbuilder choosing where to place a settlement sees
 // the relevant facts without opening the dossier.
 //
@@ -180,16 +252,15 @@ export default function SettlementPalette({
 // source DossierHeaderRow reads, so a settlement can never read as one threat
 // here and another in its dossier (P2).
 
-function SettlementCard({ save, placed, onHover }) {
+function SettlementCard({ save, placed, onSelect, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
-  // En-dash placeholder for a missing tier — the app's standard "intentional
-  // absence" mark — rather than the stray ', ' that read as a render bug (P11).
-  const tier = save.tier || settlement.tier || '–';
+  const tier = save.tier || settlement.tier || EMPTY_VALUE;
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
-  // 'frontier' is the calm baseline both surfaces suppress; threatDisplay
-  // returns its tones but the pill below self-gates on threat !== 'frontier'.
+  // 'frontier' and 'heartland' are the calm baselines both surfaces suppress
+  // (isCalmThreat); threatDisplay returns tones but the pill below self-gates
+  // via !isCalmThreat so neither calm tier renders a chip.
   const threatTone = threatDisplay(threat);
   // Stress can be an array (stressors[]) or a single object — both
   // shapes surface a label.
@@ -218,25 +289,34 @@ function SettlementCard({ save, placed, onHover }) {
     }));
   }
 
+  // F28 → E-I — Enter/Space is a REAL action: it selects the settlement (the
+  // QuickInspector peek) and, on a placeable card, arms the keyboard placement
+  // session (arrow keys steer a map target; Enter commits through the same
+  // store gate as a pointer drop). Blocked cases (already placed, no campaign)
+  // announce the honest reason via the palette's aria-live footer.
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault(); // Space would otherwise scroll the list
+      onSelect?.(name, placed);
+    }
+  }
+
   return (
-    // Not role="button": placement is a mouse drag with no keyboard equivalent
-    // here, so announcing a button would be a false affordance (WCAG 2.1.1). The
-    // card stays focusable so keyboard users still get the hover-peek (onFocus),
-    // and the label describes what focus does rather than promising a gesture.
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- draggable peek source: drag is a mouse gesture with no keyboard placement path on this surface, so no button role is claimed
     <div
       draggable
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- focusable so keyboard users still trigger the onFocus hover-peek; not announced as interactive
+      role="button"
       tabIndex={0}
-      aria-label={`${name}. Drag onto the map to place it.`}
+      aria-label={placed
+        ? `${name}, already placed on the map`
+        : `${name}, ${tier}. Press Enter for placement options.`}
       onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
       style={{
         display: 'flex', alignItems: 'flex-start', gap: SP.xs,
         padding: `${SP.xs}px ${SP.sm}px`,
         marginBottom: 4,
         background: placed ? GOLD_BG : CARD,
         border: `1px solid ${placed ? GOLD : BORDER}`,
-        borderRadius: R.sm,
         cursor: 'grab',
         opacity: placed ? 0.75 : 1,
         fontSize: FS.sm, fontFamily: sans, color: INK,
@@ -265,24 +345,24 @@ function SettlementCard({ save, placed, onHover }) {
             <MapPin size={11} color={GOLD} title="Placed on map" />
           )}
         </div>
-        <div style={{ fontSize: FS.xs, color: BODY, marginTop: 1 }}>
-          {tier} · {pop.toLocaleString()}
+        <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 1 }}>
+          {tier} · {formatCount(pop)}
         </div>
         {(threat || stressLabel) && (
           <div style={{
             display: 'flex', alignItems: 'center', gap: 4,
             marginTop: 3, flexWrap: 'wrap',
           }}>
-            {threatTone && threat !== 'frontier' && (
+            {threatTone && !isCalmThreat(threat) && (
               <span style={{
                 // Fill/border use the lighter hue; the LABEL uses the audited
                 // -text step so the word clears 4.5:1 on the card (P7) — the
                 // embattled pill previously rendered its text at 3.43:1.
-                fontSize: FS.xs, fontWeight: 800,
+                fontSize: FS.xxs, fontWeight: 800,
                 color: threatTone.text,
                 background: `${threatTone.fill}1A`,
                 border: `1px solid ${threatTone.fill}55`,
-                borderRadius: 3, padding: '1px 5px',
+                padding: '1px 5px',
                 textTransform: 'uppercase', letterSpacing: '0.04em',
               }}>
                 {threatTone.label}
@@ -292,19 +372,16 @@ function SettlementCard({ save, placed, onHover }) {
               <span
                 title={`Active stressor: ${stressLabel}`}
                 style={{
-                  // Fill/border are derived from the same amber stress swatch the
-                  // label uses, with 1A/55 alpha suffixes — the same recipe the
-                  // threat pill above builds from threatTone.fill (no raw rgba).
-                  fontSize: FS.xs, fontWeight: 700,
+                  fontSize: FS.xxs, fontWeight: 700,
                   color: swatch['#8A5A20'],
-                  background: `${swatch['#8A5A20']}1A`,
-                  border: `1px solid ${swatch['#8A5A20']}55`,
-                  borderRadius: 3, padding: '1px 5px',
+                  background: 'rgba(196,128,60,0.10)',
+                  border: '1px solid rgba(196,128,60,0.30)',
+                  padding: '1px 5px',
                   maxWidth: 110, overflow: 'hidden',
                   textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}
               >
-                ⚠ {stressLabel}
+                {stressLabel}
               </span>
             )}
           </div>

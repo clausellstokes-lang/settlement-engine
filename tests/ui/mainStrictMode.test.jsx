@@ -37,7 +37,12 @@ vi.mock('../../src/design/tokens.js', async (importOriginal) => ({
   emitCssTokens: vi.fn(),
 }));
 vi.mock('../../src/lib/analyticsProvider.js', () => ({ installAnalyticsProvider: vi.fn() }));
-vi.mock('../../src/lib/analyticsQueue.js', () => ({ installAnalyticsQueue: vi.fn(), setSessionIdGetter: vi.fn() }));
+vi.mock('../../src/lib/analyticsQueue.js', () => ({
+  installAnalyticsQueue: vi.fn(),
+  setSessionIdGetter: vi.fn(),
+  // main.jsx imports this on this lineage (LINEAGE ADAPT, master merge W6).
+  setAnalyticsElevated: vi.fn(),
+}));
 vi.mock('../../src/lib/analytics.js', () => ({ track: vi.fn(), EVENTS: new Proxy({}, { get: (_t, k) => String(k) }) }));
 vi.mock('../../src/lib/session.js', () => ({ returnVisitBand: () => ({ is_return: false, days_since_last_visit_band: 'na' }), stampVisit: vi.fn(), getSessionId: () => 's' }));
 vi.mock('../../src/lib/errorReporter.js', () => ({ reportError: vi.fn(), installGlobalErrorHandlers: vi.fn() }));
@@ -52,20 +57,22 @@ beforeEach(() => {
   document.body.innerHTML = '<div id="root"></div>';
 });
 
-describe('main.jsx — StrictMode wrapping', () => {
-  test('renders StrictMode → ErrorBoundary → App', async () => {
+describe('main.jsx — root wrapping', () => {
+  // LINEAGE NOTE (master merge W6): master additionally wraps the tree in
+  // React.StrictMode (dev-only double-invoke hardening; production no-op).
+  // This lineage does not — flipping StrictMode on across the whole app is a
+  // broad dev-behavior switch, QUEUED for the owner ("adopt StrictMode
+  // wrapping") rather than adopted at merge tail. This pin asserts the tree
+  // this lineage ships: ErrorBoundary outermost, wrapping App.
+  test('renders ErrorBoundary → App (StrictMode adoption queued for the owner)', async () => {
     await import('../../src/main.jsx');
 
     const rootEl = captured.rootEl;
     expect(rootEl).toBeTruthy();
 
-    // Outermost element is React.StrictMode.
-    expect(rootEl.type).toBe(React.StrictMode);
-
-    // Its single child is the ErrorBoundary (a class component, kept outermost
+    // Outermost element is the ErrorBoundary (a class component, kept outermost
     // app wrapper so componentDidCatch still funnels crashes to reportError).
-    const boundary = rootEl.props.children;
-    expect(boundary).toBeTruthy();
+    const boundary = rootEl;
     expect(typeof boundary.type).toBe('function');
     expect(boundary.type.prototype?.componentDidCatch).toBeTypeOf('function');
 

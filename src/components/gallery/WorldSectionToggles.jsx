@@ -12,7 +12,7 @@
  * checkboxes and hands back the next Set.
  */
 
-import { sans, SP, R, FS, CARD, CARD_ALT, BORDER2, INK, BODY, MUTED } from '../theme.js';
+import { sans, SP, FS, CARD, CARD_ALT, BORDER2, INK, BODY, MUTED } from '../theme.js';
 
 /**
  * The five revealable world sections: [key, label, helper]. The keys MUST stay in
@@ -24,7 +24,7 @@ export const WORLD_SECTIONS = Object.freeze([
   ['worldClock', 'World clock', 'The in-world date, season, and how many ticks the realm has lived.'],
   ['chronicle', 'Chronicle', 'The headline log of what happened each tick across the realm.'],
   ['pantheon', 'Pantheon', 'The deities, their tiers, and how many settlements hold each faith.'],
-  ['warNetwork', 'War and network', 'Live sieges, trade wars, standings, and the public channels between settlements.'],
+  ['warNetwork', 'War and network', 'Live sieges, trade wars, realm contest records, and the public channels between settlements.'],
   ['dashboard', 'Dashboard', 'The simulation rules in play and the realm-arc summary of its epics.'],
 ]);
 
@@ -44,7 +44,7 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
   return (
     <div style={{
       display: 'grid', gap: SP.xs, padding: SP.sm,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+      border: `1px solid ${BORDER2}`, background: CARD,
     }}>
       <div style={{ display: 'grid', gap: 2 }}>
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -62,7 +62,7 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
             htmlFor={id}
             style={{
               display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-              padding: SP.xs, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT,
+              padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD_ALT,
             }}
           >
             <input

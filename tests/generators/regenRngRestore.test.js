@@ -4,15 +4,16 @@
  * regenNPCsPipeline / regenHistoryPipeline set an active seeded RNG for the
  * duration of the reroll and clear it in a finally. They used to clear it to
  * NULL unconditionally, assuming generation is never nested — so a regen called
- * from inside an outer seeded run would wipe the outer RNG, silently dropping
- * the rest of that run's draws to the Math.random() fallback. The fix saves the
- * prior RNG (setActiveRng returns it) and restores it. These tests reproduce the
- * re-entrant case: an outer RNG must survive a nested regen.
+ * from inside an outer seeded run would wipe the outer RNG; under our
+ * fail-closed kernel the outer run's next draw would THROW (their tree degraded
+ * to Math.random()). The fix saves the prior RNG (setActiveRng returns it) and
+ * restores it. These tests reproduce the re-entrant case: an outer RNG must
+ * survive a nested regen.
  */
 
 import { describe, it, expect } from 'vitest';
-import { setActiveRng, clearActiveRng, getActiveRng } from '../../src/generators/rngContext.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { setActiveRng, clearActiveRng, getActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { regenNPCsPipeline, regenHistoryPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const SETTLEMENT = {

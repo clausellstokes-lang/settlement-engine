@@ -39,6 +39,7 @@ import { foodLedger } from '../foodLedger.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { supplyCompleteness } from './supplyCompleteness.js';
 import { isCompatible, isBattlefieldPrimary } from './relationshipCompatibility.js';
+import { activeSpatialDigest, mappedDistanceWeight, distanceLegibility } from '../spatial/distanceRead.js';
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 const codepoint = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -248,7 +249,7 @@ function recencyLift(worldState, buyerId, commodityId, supplierId, tick) {
  *
  * @param {any} snapshot @param {any} worldState @param {any} buyerId
  * @param {any} supplierId @param {string|object} commodity
- * @param {{ tick?: number, relationshipType?: string, channelStrength?: number }} [ctx]
+ * @param {{ tick?: number, relationshipType?: string, channelStrength?: number, distanceWeight?: number }} [ctx]
  * @returns {TradeSalience|null}
  */
 export function commodityTradeSalience(snapshot, worldState, buyerId, supplierId, commodity, ctx = {}) {
@@ -260,6 +261,13 @@ export function commodityTradeSalience(snapshot, worldState, buyerId, supplierId
     : supplierStrengths.get(String(supplierId));
   // No confirmed carrier of K from this supplier into this buyer ⇒ no tie.
   if (!Number.isFinite(channelStrength) || channelStrength <= 0) return null;
+  // SPATIAL (5.5-M item 2): a distant supplier's channel weight is ATTENUATED —
+  // the same tie is worth less when the goods travel farther. distFactor is the
+  // per-edge distanceWeight threaded by computeTradeSalienceMap under the marker
+  // (floored ⇒ an established distant channel is weakened, never zeroed) and is
+  // EXACTLY 1.0 when spatial canon is absent / the pair is unmapped ⇒ the core
+  // expression below is byte-identical on the aspatial path.
+  const distFactor = Number.isFinite(ctx.distanceWeight) ? clamp01(ctx.distanceWeight) : 1;
   // The supplier must actually be able to supply K (a credible tie).
   if (supplyCompleteness(snapshot, supplierId, commodityId) <= 0) return null;
 
@@ -275,7 +283,9 @@ export function commodityTradeSalience(snapshot, worldState, buyerId, supplierId
   // NEED is the spine; the channel strength scales it (a thin tie is less load-
   // bearing); replace/recency/political lift it. Centered so a high-need,
   // hard-to-replace, recent, allied tie approaches 1, a redundant luxury tie ~0.
-  const core = need * (0.55 + channelStrength * 0.45);
+  // distFactor (1.0 off the spatial path) attenuates ONLY the channel-strength
+  // contribution — distance weakens the tie's grip, not the buyer's raw need.
+  const core = need * (0.55 + channelStrength * distFactor * 0.45);
   const salience = clamp01(
     T.W_NEED * core
     + T.W_REPLACE * replace * core
@@ -303,7 +313,7 @@ export function commodityTradeSalience(snapshot, worldState, buyerId, supplierId
  * either side has a CRITICAL-supplier dependency on the other (for coercion).
  *
  * @param {any} snapshot @param {any} worldState @param {any} aId @param {any} bId
- * @param {{ tick?: number, relationshipType?: string }} [ctx]
+ * @param {{ tick?: number, relationshipType?: string, distanceWeight?: number }} [ctx]
  * @returns {{ salience: number, critical: boolean,
  *   dependentId: string|null, supplierId: string|null,
  *   ties: TradeSalience[] }}
@@ -388,6 +398,12 @@ export function computeTradeSalienceMap(snapshot, worldState, ctx = {}) {
   const salience = {};
   const states = snapshot?.worldState?.relationshipStates || worldState?.relationshipStates || {};
   const tick = Number.isFinite(ctx.tick) ? Number(ctx.tick) : (worldState?.tick || 0);
+  // SPATIAL GATE (5.5-M): the frozen digest, present ONLY under the entitled
+  // spatial-canon marker. Absent ⇒ every edge's distanceWeight is 1.0 ⇒ this map
+  // is byte-identical to the aspatial computation. The trade chain is modulated
+  // EXACTLY HERE (the salience→war-dampening factor); computeSecondaryStatusOverlay
+  // passes no distanceWeight, so the categorical overlay is NOT double-modulated.
+  const digest = activeSpatialDigest(worldState);
 
   for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const key = edge?.id || `rel.${edge?.from}.${edge?.to}`;
@@ -395,7 +411,8 @@ export function computeTradeSalienceMap(snapshot, worldState, ctx = {}) {
     const to = edge?.to || edge?.target || edge?.b;
     if (from == null || to == null) continue;
     const relationshipType = String(states[key]?.relationshipType || edge?.relationshipType || 'neutral');
-    const pair = pairTradeSalience(snapshot, worldState, from, to, { tick, relationshipType });
+    const distanceWeight = digest ? mappedDistanceWeight(digest, from, to) : 1;
+    const pair = pairTradeSalience(snapshot, worldState, from, to, { tick, relationshipType, distanceWeight });
     if (pair.salience <= 0) continue;
     const factor = tradeSalienceFactor(pair.salience, pair.critical);
     salience[key] = {
@@ -404,6 +421,16 @@ export function computeTradeSalienceMap(snapshot, worldState, ctx = {}) {
       dependentId: pair.dependentId,
       supplierId: pair.supplierId,
     };
+    // LEGIBILITY (item 5, lazy read-model surface): where distance materially
+    // attenuates a mapped tie, attach the "distant supplier (≈N weeks)" read for
+    // the dossier/realm surfaces. Present ONLY under the marker + a mapped, distant
+    // pair ⇒ byte-neutral otherwise (the info rollup gains no key on the aspatial path).
+    if (digest) {
+      // Read from the dependent → supplier direction when known (the buyer's-eye
+      // view); distance is symmetric, so the edge endpoints are an equivalent fallback.
+      const distance = distanceLegibility(digest, pair.dependentId || from, pair.supplierId || to);
+      if (distance) salience[key].distance = distance;
+    }
     if (factor !== 1.0) factors[key] = factor;
   }
   return { factors, salience };

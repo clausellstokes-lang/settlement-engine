@@ -1,34 +1,48 @@
-import { SECOND, sans, FS, SP, PARCH } from '../theme.js';
+import { useState } from 'react';
+import { X } from 'lucide-react';
+import { MUTED, SECOND, BORDER, sans, FS, SP } from '../theme.js';
 import { SAMPLE_SETTLEMENTS } from '../../data/sampleSettlements.js';
 import { SampleCard } from './SampleCard.jsx';
+import SurveyorNote from '../guidance/SurveyorNote.jsx';
+import Button from '../primitives/Button.jsx';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+
+// content-immersion-r2-3: the registered library_empty_invitation whisper — its
+// dismissal now rides the unified sf:guidance store (a mount-site concern per
+// SurveyorNote's contract), so a keeper who hides it stays un-nagged.
+const WHISPER_ID = 'library_empty_invitation';
 
 export function SampleDashboard({ onFork, forkingId }) {
+  const [invited, setInvited] = useState(() => !isGuidanceDismissed(WHISPER_ID));
   return (
-    // Borderless tinted block — one elevation only. The three SampleCards inside
-    // already carry their own borders; an outer bordered box would nest cards
-    // inside a card (box-soup). Tint + the heading + spacing do the grouping.
-    // Flat placeholder surface uses PARCH, distinct from the CARD fill the real
-    // SampleCards carry, so the surface itself (not just a 1px border) marks the
-    // elevation difference between a flat status block and a card (P5).
     <div style={{
       padding: '20px 16px',
-      background: PARCH,
-      borderRadius: 8,
+      background: 'rgba(255,251,245,0.96)',
+      border: `1px solid ${BORDER}`,
     }}>
-      {/* P1: the SampleCards are the hero of the empty state, not the chrome.
-          The instruction recedes to ONE quiet subordinate caption — the heading
-          is demoted from an uppercase layer-cake title to a plain prose lead at
-          the same weight as its explainer, so the two no longer stack into a
-          mini layer-cake that wins the squint over the dossiers they introduce.
-          The cards pull up directly below. Copy text is unchanged (voice owns
-          wording); only the visual hierarchy was restructured. */}
-      <h2 style={{
-        margin: '0 0 4px',
-        fontSize: FS.sm, fontWeight: 600, color: SECOND, lineHeight: 1.5,
-        textAlign: 'center', fontFamily: sans,
+      {/* W-GUIDE-2 §8: the empty library greets the keeper in the Surveyor's
+          note register (registered whisper library_empty_invitation). A margin
+          rest-point invitation — it never blocks or floats. */}
+      {invited && (
+        <div style={{ marginBottom: SP.md, display: 'flex', alignItems: 'flex-start', gap: 4 }}>
+          <div style={{ flex: 1 }}>
+            <SurveyorNote topic="library" moment="empty" id="library-empty-invitation" compact />
+          </div>
+          <Button
+            variant="ghost" size="sm" icon={<X size={11} />}
+            aria-label="Dismiss the library note"
+            onClick={() => { markGuidanceDismissed(WHISPER_ID); setInvited(false); }}
+          />
+        </div>
+      )}
+      <div style={{
+        fontSize: FS.xs, fontWeight: 800, color: MUTED,
+        textTransform: 'uppercase', letterSpacing: '0.06em',
+        marginBottom: 10,
+        textAlign: 'center',
       }}>
         Start from a sample. Or roll your own
-      </h2>
+      </div>
       <p style={{
         margin: '0 auto 14px', maxWidth: 460,
         fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
@@ -37,7 +51,7 @@ export function SampleDashboard({ onFork, forkingId }) {
         Three hand-picked seeds you can fork into your own saves. Each forks
         with a unique character. Same setting, different settlement.
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {SAMPLE_SETTLEMENTS.map(sample => (
           <SampleCard
             key={sample.id}

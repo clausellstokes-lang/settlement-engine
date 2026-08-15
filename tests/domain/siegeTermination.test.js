@@ -4,7 +4,7 @@ import { evaluateWarLayer, SIEGE_MAX_AGE } from '../../src/domain/worldPulse/war
 import { verdictAllowsHarassment } from '../../src/domain/worldPulse/feasibilityGate.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Siege termination — two LOW-severity correctness gates in the war layer.

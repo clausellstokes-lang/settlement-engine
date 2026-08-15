@@ -16,7 +16,7 @@ import { checkStructuralValidity } from '../../generators/structuralValidator.js
 /** @typedef {import('../types.js').CoherenceWarning} CoherenceWarning */
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {CoherenceWarning[]}
  */
 export function checkDraftEdit(settlement) {
@@ -34,8 +34,8 @@ export function checkDraftEdit(settlement) {
   let result;
   try {
     result = checkStructuralValidity(institutions, config);
-  } catch (e) {
-    return [{ severity: 'warning', message: `Validator error: ${/** @type {any} */ (e)?.message || e}` }];
+  } catch (/** @type {any} */ e) {
+    return [{ severity: 'warning', message: `Validator error: ${e?.message || e}` }];
   }
 
   for (const v of result?.violations || []) {
@@ -87,8 +87,8 @@ function formatSuggestion(s) {
  * shallow — the structuralValidator's `suggested` field already has
  * most useful hints; we just promote them. A future version can produce
  * "click to add this institution" affordances against the catalog.
- * @param {any} v
  */
+/** @param {any} v */
 function suggestFixesForViolation(v) {
   if (Array.isArray(v.suggested) && v.suggested.length) return v.suggested;
   if (Array.isArray(v.missing) && v.missing.length) return v.missing.map((/** @type {any} */ m) => `Add ${m}`);

@@ -9,12 +9,6 @@
  * writes it into a result object at that path. At the end, the server
  * sends a full `aiSettlement` object as the authoritative final state.
  *
- * The narrative run ALSO folds in daily life: it streams the dawn→night
- * beats as `dailyLife.<beat>` per-field messages and returns the assembled
- * `dailyLife` object in the final `done` (and on the return value). Daily
- * life is generated under the SINGLE narrative spend — no extra charge.
- * The separate `type: 'dailyLife'` call still works for back-compat callers.
- *
  * Per-pass errors are reported via `onField(field, null, error)` but
  * are NOT fatal — the server keeps the raw data for any failed pass,
  * so the client's final `result` still has something sensible at that
@@ -28,18 +22,6 @@ import { supabase, isConfigured } from './supabase.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Stream watchdog budgets. A stalled half-open stream (TCP connection alive,
-// no bytes arriving) used to wedge ALL AI actions until a page reload because
-// `reader.read()` never resolves. Two independent deadlines guard against it:
-//   • OVERALL — a hard ceiling on the whole request, including a model that
-//     streams slowly-but-steadily forever.
-//   • IDLE    — reset on every chunk read; fires when no bytes have arrived for
-//     this long, catching the half-open stall mid-stream.
-// On either trip we abort the fetch; the read loop then rejects with an
-// AbortError the caller maps to a clean, retryable error.
-const STREAM_OVERALL_TIMEOUT_MS = 180000; // 3 min ceiling for a full run
-const STREAM_IDLE_TIMEOUT_MS = 45000;     // 45s with no chunk = treat as stalled
 
 // Derive the localStorage key the supabase client uses to persist its session.
 // The client key defaults to `sb-<project-ref>-auth-token`. If
@@ -56,42 +38,79 @@ const AUTH_TOKEN_LS_KEY = (() => {
 
 /**
  * Get a usable access token without deadlocking on supabase-js's cross-tab
- * auth lock. Strategy: race `supabase.auth.getSession()` against a 2s timeout;
- * on timeout, read the token straight out of localStorage (skipping the
- * auto-refresh path). The noop-lock change in `supabase.js` should prevent
- * the hang in the first place — this is belt-and-suspenders for any future
- * regression (supabase-js upgrade, stale tab, etc.).
+ * auth lock.
+ *
+ * Primary path: race `supabase.auth.getSession()` (which reads the client's
+ * configured storage — sessionStorage when "remember me" is off, localStorage
+ * otherwise; see src/lib/supabase.js authStorageAdapter) against a 2s timeout.
+ *
+ * Fallback (timeout or no session): read the persisted token DIRECTLY, checking
+ * BOTH stores and reassembling supabase-js's chunked (`<key>.0`, `.1`, …) form
+ * for large tokens. The old fallback read only the unchunked localStorage key,
+ * so a "remember me off" session (token in sessionStorage) or a chunked token
+ * fell through to a spurious "Not signed in".
  */
-// Clock-skew grace on the persisted token's expiry. A token that lapsed within
-// this window is still served from the fallback: the edge function tolerates a
-// few seconds of skew, and rejecting a just-expired token here would surface a
-// spurious "not signed in" while a refresh is one round-trip away.
-const TOKEN_EXPIRY_SKEW_MS = 30000; // 30s
+/**
+ * C2 (bar 8): THE CLERK'S REGISTER SCRUB. The AI is a bucketing clerk, never a
+ * writer with its own voice — yet its two most legible tells (the em dash and the
+ * exclamation point, both banned by docs/VOICE_AND_TONE.md §3) had no gate on the
+ * returned prose. Every STRING the narrative stream delivers passes through this
+ * before it reaches the store (and so before ai_data persists): U+2014 becomes a
+ * comma join, `!` becomes a full stop. Mechanical by design — names and numbers
+ * are untouched (the generator never mints either tell), so the overlay verifier's
+ * fact checks see the same facts. Exported for the unit test only.
+ * @param {unknown} v @returns {unknown}
+ */
+export function scrubClerkRegister(v) {
+  if (typeof v === 'string') return v.replace(/\s*—\s*/g, ', ').replace(/!/g, '.');
+  if (Array.isArray(v)) return v.map(scrubClerkRegister);
+  if (v && typeof v === 'object') {
+    /** @type {Record<string, unknown>} */
+    const out = {};
+    for (const [k, x] of Object.entries(v)) {
+      // The setPath guard's sibling: a crafted streamed key must not graft a
+      // prototype onto the rebuilt object.
+      if (k === '__proto__' || k === 'constructor' || k === 'prototype') continue;
+      out[k] = scrubClerkRegister(x);
+    }
+    return out;
+  }
+  return v;
+}
 
 async function getAccessTokenSafe() {
-  // Read the persisted token from a given store, validating expiry (with a
-  // small skew grace so a just-expired token isn't rejected outright).
-  const readFrom = (store) => {
-    if (!AUTH_TOKEN_LS_KEY || !store) return null;
+  // Read + validate a persisted supabase session from one Web Storage area,
+  // reassembling the chunked form supabase-js writes for large tokens.
+  const readFromStore = (store) => {
+    if (!store || !AUTH_TOKEN_LS_KEY) return null;
     try {
-      const raw = store.getItem(AUTH_TOKEN_LS_KEY);
+      let raw = store.getItem(AUTH_TOKEN_LS_KEY);
+      if (raw == null) {
+        // Chunked: supabase-js splits large sessions across `<key>.0`, `.1`, …
+        let assembled = '';
+        for (let i = 0; ; i++) {
+          const chunk = store.getItem(`${AUTH_TOKEN_LS_KEY}.${i}`);
+          if (chunk == null) break;
+          assembled += chunk;
+        }
+        raw = assembled || null;
+      }
       if (!raw) return null;
       const parsed = JSON.parse(raw);
       const token = parsed?.access_token;
       const expAt = parsed?.expires_at; // seconds since epoch
       if (!token) return null;
-      if (typeof expAt === 'number' && expAt * 1000 + TOKEN_EXPIRY_SKEW_MS < Date.now()) return null;
+      if (typeof expAt === 'number' && expAt * 1000 < Date.now()) return null;
       return token;
     } catch { return null; }
   };
-  // "Remember me off" routes the supabase auth token to sessionStorage (see the
-  // storage adapter in supabase.js), so the fallback must check BOTH stores or a
-  // session-only user on a slow getSession() gets a spurious "not signed in".
-  const readLS = () => {
-    let ls = null, ss = null;
-    try { ls = typeof localStorage !== 'undefined' ? localStorage : null; } catch { /* sandboxed */ }
-    try { ss = typeof sessionStorage !== 'undefined' ? sessionStorage : null; } catch { /* sandboxed */ }
-    return readFrom(ss) || readFrom(ls);
+
+  // "Remember me off" routes the token to sessionStorage, so check it first;
+  // otherwise fall to localStorage (the default persistent store).
+  const readStored = () => {
+    const fromSession = typeof sessionStorage !== 'undefined' ? readFromStore(sessionStorage) : null;
+    if (fromSession) return fromSession;
+    return typeof localStorage !== 'undefined' ? readFromStore(localStorage) : null;
   };
 
   try {
@@ -101,24 +120,8 @@ async function getAccessTokenSafe() {
     ]);
     const token = result?.data?.session?.access_token;
     if (token) return token;
-  } catch (_) { /* fall through to LS */ }
-
-  const cached = readLS();
-  if (cached) return cached;
-
-  // Nothing usable in either store — the persisted token may have lapsed past
-  // the skew grace. Try one bounded refresh before giving up so an expired-but-
-  // refreshable session doesn't surface a spurious "not signed in". The race
-  // keeps this from re-introducing the cross-tab-lock hang it guards against.
-  try {
-    const refreshed = await Promise.race([
-      supabase.auth.refreshSession(),
-      new Promise((_, rej) => setTimeout(() => rej(new Error('refresh_timeout')), 2000)),
-    ]);
-    const token = refreshed?.data?.session?.access_token;
-    if (token) return token;
-  } catch (_) { /* fall through */ }
-  return null;
+  } catch (_) { /* fall through to the persisted token */ }
+  return readStored();
 }
 
 /**
@@ -129,16 +132,20 @@ async function getAccessTokenSafe() {
  * @param {object} [opts]
  * @param {(field: string, value: unknown, error?: string) => void} [opts.onField] - called as each field streams in (error set on per-pass failure)
  * @param {(status: object) => void} [opts.onStatus] - called for status/phase events
+ * @param {(notice: {status: string, spendId: string|null, reason: string|null, supportNote: string|null}) => void} [opts.onRefundFailure] - called when the server reports that an automatic refund for a failed generation also failed
+ * @param {AbortSignal} [opts.signal] - abort signal; when it fires the fetch + stream are torn down and the call rejects with an AbortError
+ * @param {number} [opts.idleTimeoutMs] - watchdog: abort if no bytes arrive within this window (default 60000; resets on every chunk to cover slow first-token)
+ * @param {number} [opts.overallTimeoutMs] - hard ceiling on the whole run: abort if the stream hasn't finished within this window (default 180000; unlike the idle watchdog, does not reset on chunks)
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
+ * @param {string} [opts.modelPreference] - User model preference key.
  * @param {object|null} [opts.relationshipMemoryContext] - dailyLife only: compact campaign relationship posture digest.
  * @param {object|null} [opts.chronicleContext] - narrative + dailyLife: compact weighted Chronicle digest (recent + party-caused events).
- * @param {object|null} [opts.warMoraleContext] - narrative + dailyLife: compact war-morale digest (resolve/hope/supply/faith/sentiment), computed client-side only under the warEconomySurfacing flag. Absent ⇒ byte-identical prompt.
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
  * @param {object|null} [opts.priorDailyLife] - progression only: the previous aiDailyLife (reserved for future)
- * @returns {Promise<{ result: object, dailyLife?: object|null, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }>}
+ * @returns {Promise<{ result: object, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }>}
  */
 export async function generateNarrative(type, settlement, settlementId, opts = {}) {
   if (!isConfigured) {
@@ -156,22 +163,13 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
 
   // Build the request body. Progression carries extra fields the server needs
   // to do its diff-aware thesis + subset-of-passes run.
-  // Strip client-only undo history before sending: `versionHistory` is an array
-  // of capped full-settlement snapshots that can push a rich/canonized settlement
-  // past the edge body cap (HTTP 413). The server never reads it — the prompt is
-  // built from a compact summarizeSettlement(), and the refined-prose overlay it
-  // returns is stored separately from the raw settlement (which keeps its history
-  // untouched in the store). Shallow-omit so the caller's settlement is unmutated.
-  const { versionHistory: _omitVersionHistory, ...leanSettlement } = settlement || {};
-  const body = { type, settlement: leanSettlement, settlementId, pinnedNpcIds };
+  const body = { type, settlement, settlementId, pinnedNpcIds };
   if (typeof opts.aiGuidance === 'string' && opts.aiGuidance.trim()) {
     body.aiGuidance = opts.aiGuidance.trim();
   }
-  // NOTE: model preference is NO LONGER sent from the client. The edge function
-  // resolves it server-side (forced override → profiles.model_preference →
-  // global default), so a crafted request can't pick a model the user never
-  // saved. The account-page <select> still persists profiles.model_preference;
-  // that saved value is the authoritative input the server reads.
+  if (typeof opts.modelPreference === 'string' && opts.modelPreference.trim()) {
+    body.modelPreference = opts.modelPreference.trim();
+  }
   if (type === 'dailyLife' && opts.relationshipMemoryContext && typeof opts.relationshipMemoryContext === 'object') {
     body.relationshipMemoryContext = opts.relationshipMemoryContext;
   }
@@ -179,12 +177,6 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // narrative + daily-life passes, so prose can reference what's happened.
   if ((type === 'narrative' || type === 'dailyLife') && opts.chronicleContext && typeof opts.chronicleContext === 'object') {
     body.chronicleContext = opts.chronicleContext;
-  }
-  // P5 war-morale grounding (narrative + daily-life). Computed client-side only when the
-  // warEconomySurfacing flag is on; the server sanitizes + fence-strips it before it reaches
-  // the prompt. Absent ⇒ no field ⇒ the request (and prompt) is byte-identical.
-  if ((type === 'narrative' || type === 'dailyLife') && opts.warMoraleContext && typeof opts.warMoraleContext === 'object') {
-    body.warMoraleContext = opts.warMoraleContext;
   }
   if (type === 'progression') {
     body.changeType     = opts.changeType || '';
@@ -195,76 +187,53 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
 
   const url = `${SUPABASE_URL}/functions/v1/generate-narrative`;
 
-  // Watchdog: abort the fetch if the whole run blows the overall ceiling OR if
-  // the stream goes idle (no chunk) past the idle budget. The idle timer is
-  // reset on every successful chunk read inside the loop below. We surface the
-  // trip reason so the thrown error reads cleanly instead of a bare AbortError.
+  // F18 — abort + idle-watchdog wiring. We own an internal AbortController so
+  // the stream can be torn down on (a) an external cancel signal (settlement
+  // switch / explicit cancel from the slice) and (b) an idle stream that stops
+  // delivering NDJSON lines. Without this a stalled edge-function stream leaves
+  // `await reader.read()` pending forever — which strands aiLoading and wedges
+  // every subsequent AI action. Either trigger aborts the fetch, `read()`
+  // rejects, and the loop unwinds instead of hanging.
   const controller = new AbortController();
-  let abortReason = null;
-  let idleTimer = null;
-  const overallTimer = setTimeout(() => {
-    abortReason = 'overall';
-    controller.abort();
-  }, STREAM_OVERALL_TIMEOUT_MS);
-  const armIdleWatchdog = () => {
-    if (idleTimer) clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-      abortReason = 'idle';
-      controller.abort();
-    }, STREAM_IDLE_TIMEOUT_MS);
+  const externalSignal = opts.signal;
+  const onExternalAbort = () => controller.abort();
+  if (externalSignal) {
+    if (externalSignal.aborted) controller.abort();
+    else externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+  }
+
+  // Two independent deadlines (ported master fix): IDLE resets on every chunk
+  // and catches a half-open stall; OVERALL is a hard ceiling on the whole run —
+  // without it a stream that sends bytes steadily but never finishes hangs the
+  // AI action forever (the idle timer keeps resetting).
+  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 45000;
+  const OVERALL_TIMEOUT_MS = Number.isFinite(opts.overallTimeoutMs) ? opts.overallTimeoutMs : 180000;
+  let idleTimedOut = false;
+  let watchdog = null;
+  const overallTimer = setTimeout(() => { idleTimedOut = true; controller.abort(); }, OVERALL_TIMEOUT_MS);
+  const armWatchdog = () => {
+    if (watchdog) clearTimeout(watchdog);
+    watchdog = setTimeout(() => { idleTimedOut = true; controller.abort(); }, IDLE_TIMEOUT_MS);
   };
-  const clearWatchdogs = () => {
+  const disarmWatchdog = () => {
+    if (watchdog) { clearTimeout(watchdog); watchdog = null; }
     clearTimeout(overallTimer);
-    if (idleTimer) clearTimeout(idleTimer);
   };
 
-  let res;
-  try {
-    res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-      },
-      body: JSON.stringify(body),
-      signal: controller.signal,
-    });
-  } catch (e) {
-    clearWatchdogs();
-    // A pre-stream abort (TTFB never arrived) maps to the same retryable error
-    // a mid-stream stall does; other fetch failures propagate unchanged.
-    if (abortReason || e?.name === 'AbortError') {
-      throw new Error('AI generation timed out (the simulator stopped responding). Please retry.', { cause: e });
-    }
-    throw e;
-  }
-
-  // Non-streaming error path: the function threw before streaming started.
-  if (!res.ok) {
-    clearWatchdogs();
-    const txt = await res.text().catch(() => '');
-    let msg = `HTTP ${res.status}`;
-    try {
-      const body = JSON.parse(txt);
-      if (body?.error) msg = body.error;
-    } catch { /* not JSON; keep HTTP code */ }
-    throw new Error(msg);
-  }
+  // A meaningful, user-facing error for the two abort flavors. Both carry
+  // name === 'AbortError' so the slice's errorKindFromError classifies them as
+  // 'aborted' (previously dead code — no path produced an abort here).
+  const makeAbortError = () => {
+    const e = new Error(idleTimedOut
+      ? 'AI generation stalled — the server stopped responding partway through. Please try again.'
+      : 'AI generation was cancelled.');
+    e.name = 'AbortError';
+    return e;
+  };
 
   // Streaming path: read NDJSON lines, dispatch to onField, collect final result.
-  // A 2xx with no body (e.g. a proxy stripped it) would otherwise throw an
-  // unmapped TypeError off `res.body.getReader()` and leak both watchdog timers.
-  // Clear them and surface the same retryable error a truncated stream gets.
-  if (!res.body) {
-    clearWatchdogs();
-    throw new Error('AI generation returned an empty response (no stream). Please retry.');
-  }
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
   let buffer = '';
   let result = {};
-  let dailyLife = null;
   let creditsRemaining = null;
   let finalType = type;
   let fatalError = null;
@@ -273,10 +242,9 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   let succeededFields = [];
   let sawDone = false;
 
-  // Support nested field paths like "powerStructure.factions". A server-sent
-  // path is untrusted input: reject any segment that would walk the prototype
-  // chain (__proto__/constructor/prototype) so a crafted field name can't
-  // pollute Object.prototype through the result object.
+  // Support nested field paths like "powerStructure.factions". Refuse any
+  // prototype-chain segment (ported master fix): a crafted streamed field name
+  // like "__proto__.polluted" must never pollute Object.prototype.
   const setPath = (target, path, value) => {
     const keys = path.split('.');
     if (keys.some(k => k === '__proto__' || k === 'constructor' || k === 'prototype')) return;
@@ -295,6 +263,24 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       return;
     }
 
+    // F1-CLIENT — refund-failure notice. When a paid generation fails the
+    // server auto-refunds the credit; if THAT refund also fails it emits
+    // `{ refund: 'failed', spend_id, reason, supportNote }`. Previously this
+    // line matched no branch and was silently dropped, so a user who was out
+    // a credit never saw the support reference. Surface it; non-fatal to the
+    // stream (a terminal `error` line, if present, still throws below).
+    if (msg.refund) {
+      try {
+        opts.onRefundFailure?.({
+          status:      typeof msg.refund === 'string' ? msg.refund : 'failed',
+          spendId:     msg.spend_id ?? null,
+          reason:      msg.reason ?? null,
+          supportNote: msg.supportNote ?? null,
+        });
+      } catch (_) { /* UI error should not break stream */ }
+      return;
+    }
+
     // Terminal error (function-level, e.g. thesis failed or all passes failed)
     if (msg.error && !msg.field) {
       fatalError = new Error(msg.error);
@@ -308,47 +294,26 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       return;
     }
 
-    // Per-field success — progressive UI update (supports dotted paths).
-    // Daily-life beats stream as `dailyLife.<beat>` during a narrative run;
-    // collect them into a separate `dailyLife` object instead of writing them
-    // into the narrative `result`, then forward to onField for progress UI.
+    // Per-field success — progressive UI update (supports dotted paths). The
+    // value passes the clerk's register scrub before store or UI meet it.
     if (msg.field) {
-      if (msg.field.startsWith('dailyLife.')) {
-        const beat = msg.field.slice('dailyLife.'.length);
-        // The beat name is untrusted server input, same as a setPath segment:
-        // reject __proto__/constructor/prototype so a crafted beat can't walk
-        // the prototype chain and pollute Object.prototype. DROP it entirely —
-        // don't forward to onField — so the consumer slice can't act on it
-        // either (a forwarded beat would otherwise be written into aiDailyLife
-        // state under the dangerous key). The write below is skipped too.
-        if (beat === '__proto__' || beat === 'constructor' || beat === 'prototype') {
-          return;
-        }
-        if (!dailyLife || typeof dailyLife !== 'object') dailyLife = {};
-        dailyLife[beat] = msg.value;
-      } else {
-        setPath(result, msg.field, msg.value);
-      }
-      try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
+      const clean = scrubClerkRegister(msg.value);
+      setPath(result, msg.field, clean);
+      try { opts.onField?.(msg.field, clean); } catch (_) { /* UI error should not break stream */ }
       return;
     }
 
     // Final success line — the server's `result` is authoritative
     if (msg.done) {
       sawDone = true;
-      // A `done` with a missing or non-object `result` is a malformed completion:
-      // treating it as success would silently persist an empty {} over what
-      // should have been a real narrative (and charge a credit for nothing).
-      // Flag it fatal so the caller retries instead of saving the blank.
+      // A `done` with a missing or non-object `result` is a malformed completion
+      // (ported master fix): treating it as success would silently persist an
+      // empty {} over what should have been a real narrative (and charge a
+      // credit for nothing). Flag it fatal so the caller retries.
       if (msg.result && typeof msg.result === 'object') {
-        result = msg.result;
+        result = /** @type {Record<string, unknown>} */ (scrubClerkRegister(msg.result));
       } else {
         fatalError = new Error('AI generation completed without a result (malformed response). Please retry.');
-      }
-      // Authoritative daily-life payload from a bundled narrative run. Prefer
-      // the server's final object; fall back to the streamed-beat accumulation.
-      if (msg.dailyLife && typeof msg.dailyLife === 'object') {
-        dailyLife = msg.dailyLife;
       }
       if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
       if (msg.type) finalType = msg.type;
@@ -358,14 +323,49 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     }
   };
 
-  // Arm the idle watchdog before the first read; each successful read re-arms
-  // it. A trip aborts the controller, which rejects the pending `reader.read()`.
-  armIdleWatchdog();
+  // Arm the watchdog BEFORE fetch so a server that never sends response
+  // headers (dead connection) is still aborted; every received chunk resets
+  // it so a healthy-but-slow stream (long first-token, periodic status pings)
+  // is never killed prematurely.
+  armWatchdog();
   try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+
+    // Non-streaming error path: the function threw before streaming started.
+    if (!res.ok) {
+      const txt = await res.text().catch(() => '');
+      let msg = `HTTP ${res.status}`;
+      try {
+        const errBody = JSON.parse(txt);
+        if (errBody?.error) msg = errBody.error;
+      } catch { /* not JSON; keep HTTP code */ }
+      throw new Error(msg);
+    }
+
+    // A 2xx with no body (e.g. a proxy stripped it) would otherwise throw an
+    // unmapped TypeError off `res.body.getReader()` and leak the watchdog
+    // timers (ported master fix): clear them and surface the same retryable
+    // error a truncated stream gets.
+    if (!res.body) {
+      disarmWatchdog();
+      throw new Error('AI generation returned an empty response (no stream). Please retry.');
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      armIdleWatchdog(); // a chunk arrived — reset the idle countdown
+      armWatchdog(); // bytes arrived — reset the idle timer
       buffer += decoder.decode(value, { stream: true });
 
       let newlineIdx;
@@ -377,24 +377,29 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
         try { msg = JSON.parse(line); } catch { continue; }
         handleMessage(msg);
       }
-    }
-  } catch (e) {
-    clearWatchdogs();
-    // A watchdog trip (or any abort of the stream) reads as a clean, retryable
-    // timeout rather than a wedged action. The caller clears its loading flag
-    // and surfaces a friendly message off this throw.
-    if (abortReason || e?.name === 'AbortError') {
-      throw new Error('AI generation timed out (the simulator stopped responding). Please retry.', { cause: e });
-    }
-    throw e;
-  }
-  clearWatchdogs();
 
-  // Flush any final line that wasn't newline-terminated — the `done` marker is
-  // often the last line and may arrive without a trailing newline.
-  const tail = buffer.trim();
-  if (tail) {
-    try { handleMessage(JSON.parse(tail)); } catch { /* unparseable tail = truncation */ }
+      // Stop as soon as the terminal marker arrives instead of blocking on
+      // another read. Some servers hold the connection open briefly after the
+      // final line; without this the idle watchdog would eventually fire and
+      // turn an already-complete generation into a false abort.
+      if (sawDone) break;
+    }
+
+    // Flush any final line that wasn't newline-terminated — the `done` marker
+    // is often the last line and may arrive without a trailing newline.
+    const tail = buffer.trim();
+    if (tail) {
+      try { handleMessage(JSON.parse(tail)); } catch { /* unparseable tail = truncation */ }
+    }
+  } catch (err) {
+    // A fetch/read abort (idle watchdog OR external cancel) surfaces here as a
+    // DOMException/AbortError. Translate it into a classified, user-facing
+    // error; re-throw anything else (network failure, HTTP error) untouched.
+    if (controller.signal.aborted) throw makeAbortError();
+    throw err;
+  } finally {
+    disarmWatchdog();
+    if (externalSignal) externalSignal.removeEventListener('abort', onExternalAbort);
   }
 
   if (fatalError) throw fatalError;
@@ -402,14 +407,9 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // Surface it so the caller retries instead of persisting a partial (but
   // credit-charged) generation as if it were complete.
   if (!sawDone) {
-    throw new Error('AI generation ended without a completion marker (truncated response). Please retry.');
+    throw new Error('AI generation ended without a completion marker (truncated response) — please retry.');
   }
-  // Normalize an empty daily-life accumulation to null so callers can use a
-  // simple truthiness check (every beat failing yields {} from the server).
-  if (dailyLife && typeof dailyLife === 'object' && Object.keys(dailyLife).length === 0) {
-    dailyLife = null;
-  }
-  return { result, dailyLife, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
+  return { result, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
 }
 
 // ── Mock for local dev ──────────────────────────────────────────────────────
@@ -420,7 +420,7 @@ async function mockGenerate(type, settlement, onField) {
 
   if (type === 'narrative') {
     // Mock refinement architecture: thesis + a couple of refined sections
-    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people. The people who know the difference are the ones who decide which doors open after dark.`;
+    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people — and the people who know the difference are the ones who decide which doors open after dark.`;
     await delay(400);
     try { onField?.('thesis', thesis); } catch (_) {}
 
@@ -431,36 +431,24 @@ async function mockGenerate(type, settlement, onField) {
       refinedSettlement.institutions = refinedSettlement.institutions.map((inst, _i) => ({
         ...inst,
         description: (inst?.description || inst?.detail || 'An institution of the settlement.') +
-          ' (Mock refinement. The real narrator would thread the thesis through this description.)',
+          ' (Mock refinement — the real narrator would thread the thesis through this description.)',
       }));
       await delay(300);
       try { onField?.('institutions', refinedSettlement.institutions); } catch (_) {}
     }
-    // The narrative run folds in daily life — mock the bundled beats so local
-    // dev mirrors production (one narrative action, narrative + daily life).
-    const mockDaily = mockDailyLifePayload(name);
-    for (const [beat, v] of Object.entries(mockDaily)) {
-      await delay(120);
-      try { onField?.(`dailyLife.${beat}`, v); } catch (_) {}
-    }
-    return { result: refinedSettlement, dailyLife: mockDaily, creditsRemaining: 0, type: 'narrative', partialFailure: false, failedFields: [], succeededFields: ['institutions'] };
+    return { result: refinedSettlement, creditsRemaining: 0, type: 'narrative', partialFailure: false, failedFields: [], succeededFields: ['institutions'] };
   }
 
-  const payload = mockDailyLifePayload(name);
-  for (const [k, v] of Object.entries(payload)) {
-    await delay(300);
-    try { onField?.(k, v); } catch (_) {}
-  }
-  return { result: payload, dailyLife: payload, creditsRemaining: 0, type: 'dailyLife' };
-}
-
-/** Deterministic daily-life prose for local dev (no Supabase). */
-function mockDailyLifePayload(name) {
-  return {
+  const payload = {
     dawn:    `As the first grey light seeps over the horizon, ${name} stirs to life. A rooster crows from behind the smithy, and the night watch shuffles toward the tavern for a warm meal before sleep.`,
     morning: `The market opens with the clatter of stall frames being assembled. A queue forms at the baker's door. Children chase each other through the lanes while their parents begin the day's labors.`,
     midday:  `The sun reaches its zenith and work pauses. Folk gather in the shade of the old oak in the square, sharing bread and gossip. A traveling merchant arrives with news from distant lands.`,
     evening: `As shadows lengthen, the tavern fills with the day's stories. A bard tunes their lute in the corner. The smell of stew drifts from open windows, and lanterns are lit along the main road.`,
     night:   `${name} settles into a watchful quiet. The night patrol makes their rounds, boots crunching on gravel. Behind closed doors, families share evening prayers or whispered schemes.`,
   };
+  for (const [k, v] of Object.entries(payload)) {
+    await delay(300);
+    try { onField?.(k, v); } catch (_) {}
+  }
+  return { result: payload, creditsRemaining: 0, type: 'dailyLife' };
 }

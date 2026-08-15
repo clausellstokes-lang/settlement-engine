@@ -18,7 +18,7 @@ import { describe, expect, test } from 'vitest';
 import { deploymentReturnOutcomes } from '../../src/domain/worldPulse/deploymentReturn.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 function save(id, name, population = 4000) {
   return {

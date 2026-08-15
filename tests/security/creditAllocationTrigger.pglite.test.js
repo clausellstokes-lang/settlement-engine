@@ -66,6 +66,20 @@ it('targeted migration(s) present (suite not vacuous)', () => {
   expect(allMigrationsExist).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeAll boots the
+ * suite's single shared database, so the whole file rides one cold boot.
+ * Never tune this to a measurement (that is how the previous 30000ms here went
+ * brittle); generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProvisioning) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(allMigrationsExist)('allocation-within-grant trigger — net-current (097 DDL + 098 body)', () => {
   beforeAll(async () => {
     db = await makeCreditLedgerDb();
@@ -75,7 +89,7 @@ describe.runIf(allMigrationsExist)('allocation-within-grant trigger — net-curr
     await db.exec(extractFn('097', 'enforce_allocation_within_grant'));
     await db.exec(extractConstraintTriggerDdl());
     await db.exec(extractFn('098', 'enforce_allocation_within_grant'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_grant_idempotency, public.credit_ledger, public.credit_transactions cascade;');
@@ -104,8 +118,8 @@ describe.runIf(allMigrationsExist)('allocation-within-grant trigger — net-curr
   });
 
   it('spend_credits end-to-end is not blocked by the backstop (the live-path regression)', async () => {
-    await grant(UID, 5);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3
+    await grant(UID, 7); // grant bumped 5→7 so narrative (cost 5) is still a >half-headroom PARTIAL allocation (5 of 7), the exact case 097 double-counted
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5
     expect(r.ok).toBe(true);
     expect(r.balance).toBe(2);
     expect(await balanceOf(UID)).toBe(2);

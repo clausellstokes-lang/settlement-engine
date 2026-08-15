@@ -13,6 +13,7 @@ import {
   supportedArchetypes,
   factionIdFromName,
 } from '../../src/domain/factionRelationshipUpdate.js';
+import { supportedConditionArchetypes } from '../../src/domain/activeConditions.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 // ── Sample settlements ──────────────────────────────────────────────────
@@ -327,6 +328,80 @@ describe('supportedArchetypes()', () => {
     expect(list).toContain('food_anchor_lost');
     expect(list).toContain('dominant_npc_removed');
     expect(list).toContain('siege_lifted');
+  });
+});
+
+// ── Closed-set coverage pin: the documented 1:1 claim ──────────────────
+// activeConditions.js:35 promises "condition archetypes map 1:1 to delta
+// templates." Before E4 this was a 6-of-30 claim: 24 condition archetypes
+// advanced time with NO faction narrative. This pin machine-checks the 1:1
+// so the two vocabularies can never silently drift apart again — a new
+// condition archetype without a faction template (or vice versa) fails here.
+//
+// W2a-main reconciliation: the gated war/trade/occupation layer adds a family of
+// condition archetypes (war_drain, occupation_resistance, trade_embargo, …) that
+// route their faction consequences through the WAR LAYER (mobilizationReactions,
+// factionCompetition, occupation) rather than the generic time-advance
+// ARCHETYPE_IMPACTS path — so they intentionally carry NO faction-impact template
+// (matching the reference tree, which drops this pin entirely). We keep the pin but
+// EXEMPT exactly that intentional set, so the 1:1 invariant still holds airtight for
+// every non-war-layer archetype and any UNEXPECTED drift still fails.
+const WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT = [
+  'army_deployed', 'occupation_burden', 'occupation_lifted', 'occupation_resistance',
+  'reinforcement_cost', 'relief_burden', 'trade_embargo', 'trade_realignment',
+  'vassal_trade_coercion', 'war_drain', 'war_exhaustion', 'war_mobilization', 'war_spoils',
+].sort();
+
+describe('faction-impact ↔ condition archetype coverage (closed set)', () => {
+  it('every non-war-layer condition archetype has a faction-impact template', () => {
+    const impactSet = new Set(supportedArchetypes());
+    const exempt = new Set(WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT);
+    const missing = supportedConditionArchetypes().filter(a => !impactSet.has(a) && !exempt.has(a));
+    expect(missing, `condition archetypes with no faction template: ${missing.join(', ')}`).toEqual([]);
+  });
+
+  it('the war-layer exemption set is exactly the condition archetypes that route faction consequences elsewhere', () => {
+    // Anti-drift: the archetypes lacking an impact must be EXACTLY the documented
+    // war-layer set — a new no-impact condition outside this list fails here.
+    const impactSet = new Set(supportedArchetypes());
+    const noImpact = supportedConditionArchetypes().filter(a => !impactSet.has(a)).sort();
+    expect(noImpact).toEqual(WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT);
+  });
+
+  it('every faction-impact archetype is a real condition archetype (no orphans)', () => {
+    const conditionSet = new Set(supportedConditionArchetypes());
+    const orphans = supportedArchetypes().filter(a => !conditionSet.has(a));
+    expect(orphans, `faction templates with no condition archetype: ${orphans.join(', ')}`).toEqual([]);
+  });
+
+  it('the non-war-layer vocabularies are exactly 1:1 (all 33 impact archetypes)', () => {
+    const exempt = new Set(WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT);
+    const impacts = [...supportedArchetypes()].sort();
+    const conditions = [...supportedConditionArchetypes()].filter(a => !exempt.has(a)).sort();
+    expect(impacts).toEqual(conditions);
+    // 30 + the 3 W-UPSWING positive-polarity arcs (reconstruction / boom / flourishing).
+    expect(impacts).toHaveLength(33);
+  });
+
+  it('each authored archetype produces at least one delta against a full roster', () => {
+    const exempt = new Set(WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT);
+    for (const archetype of supportedConditionArchetypes()) {
+      // dominant_npc_removed routes through targetNpc, not the roster loop.
+      if (archetype === 'dominant_npc_removed') continue;
+      // War-layer conditions route faction consequences through the war layer, not here.
+      if (exempt.has(archetype)) continue;
+      const updates = recalculateFactionRelationships(
+        multiFactionSettlement(),
+        { type: `CONDITION_TICK_${archetype.toUpperCase()}` },
+        { archetype },
+      );
+      expect(updates.length, `${archetype} produced no faction deltas`).toBeGreaterThan(0);
+      // Magnitudes stay in the documented moderate band (3–10 per delta).
+      for (const u of updates) {
+        expect(Math.abs(u.delta), `${archetype}/${u.field} magnitude ${u.delta}`).toBeGreaterThanOrEqual(2);
+        expect(Math.abs(u.delta), `${archetype}/${u.field} magnitude ${u.delta}`).toBeLessThanOrEqual(10);
+      }
+    }
   });
 });
 

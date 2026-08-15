@@ -1,12 +1,11 @@
-import { snakeCase } from './ids.js';
 /**
  * domain/activeConditions.js — First-class persistent world conditions.
  *
- * Plague, refugee waves, cut routes, sieges,
+ * Tier 2.3 of the roadmap. Plague, refugee waves, cut routes, sieges,
  * corruption scandals — these are not one-shot events. They linger,
  * accumulate effects, and eventually resolve or escalate. Today the
  * generator stamps them onto stressors and the time-progression layer
- * takes them as an external array. This module promotes
+ * (Phase 15) takes them as an external array. This module promotes
  * them to canonical state on the settlement.
  *
  *   settlement.activeConditions = [
@@ -29,15 +28,15 @@ import { snakeCase } from './ids.js';
  * return new settlements. No mutation. No imports from src/lib.
  *
  * Compounding fit:
- *   - advanceTime reads archetypesFromSettlement() when the
+ *   - advanceTime (Phase 15) reads archetypesFromSettlement() when the
  *     caller doesn't pass an external override; ages elapsed; drops
  *     expired conditions on its own. The simulator owns its conditions.
- *   - factionRelationshipUpdate keyed by the same archetype
+ *   - factionRelationshipUpdate (Phase 14) keyed by the same archetype
  *     vocabulary, so condition archetypes map 1:1 to delta templates.
- *   - hookEscalation clocks already key off settlement state;
+ *   - hookEscalation (Phase 11) clocks already key off settlement state;
  *     a 'plague' condition can become the trigger for a healing-crisis
- *     clock once capacity modeling lands.
- *   - The AI overlay reads conditions as grounded facts and
+ *     clock once Tier 4.4 capacity modeling lands.
+ *   - The AI overlay (Tier 6) reads conditions as grounded facts and
  *     narrates "the plague has lasted four months" from real state.
  */
 
@@ -47,7 +46,9 @@ import { snakeCase } from './ids.js';
 // keys match factionRelationshipUpdate.js so a condition's archetype is
 // directly applicable to recalculateFactionRelationships.
 
-const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
+// Exported for conditionPromotion's generation-severity derivation (the
+// archetype defaultSeverity is the base the settlement-state modifier nudges).
+export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   plague: {
     label: 'Plague',
     description: 'A virulent illness spreads through the settlement.',
@@ -140,7 +141,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
-  // The magical crisis family (magical_instability / magic_deadzone
+  // Wave 7: the magical crisis family (magical_instability / magic_deadzone
   // world-pulse stressors) finally promotes — before this archetype a town
   // generated (or struck) mid-arcane-crisis carried it as pure narrative and
   // the substrate's magical_stability variable never heard about it. One
@@ -149,7 +150,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // public grows uneasy, and the arcane substrate itself is destabilized.
   magical_instability: {
     label: 'Magical instability',
-    description: 'Magic in the settlement is misbehaving: surging wild, failing, or fallen silent.',
+    description: 'Magic in the settlement is misbehaving — surging wild, failing, or fallen silent.',
     affectedSystems: ['magical_stability', 'healing_capacity', 'public_legitimacy'],
     defaultExpiresAtTicks: 7,
     defaultStatus: 'worsening',
@@ -246,7 +247,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_migration_pressure: {
     label: 'Regional migration pressure',
     description: 'A nearby shock is pushing people across the regional network.',
-    // housing_pressure declared: deriveHousingPressure reads this
+    // housing_pressure declared (Wave 7): deriveHousingPressure reads this
     // condition through the affectedSystems contract like every other
     // deriver — the explanation/AI surfaces must list every system the
     // substrate actually charges.
@@ -274,7 +275,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_religious_pressure: {
     label: 'Regional religious pressure',
     description: 'Religious authority or crisis is echoing through connected institutions.',
-    affectedSystems: ['public_legitimacy', 'social_trust', 'healing_capacity', 'religious_authority'],
+    affectedSystems: ['public_legitimacy', 'social_trust', 'healing_capacity'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
@@ -316,7 +317,11 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // pays to wage war. war_drain is the missing SOURCE of the economic-homeostasis
   // loop (deriveEconomicCapacity subtracts severity×18 for any economic_capacity
   // condition); it deliberately lists ONLY economic_capacity so it does not double-
-  // count with the trade/economy pressure archetypes in pressureModel.
+  // count with the trade/economy pressure archetypes in pressureModel. NOTE: the
+  // economic_capacity affectedSystems label is INERT in this tree (causalState does
+  // not yet derive that system variable — it lands with W2b); these templates are
+  // consumed only when the gated war layer STAMPS them, so a no-war settlement is
+  // byte-identical, and the catalog stays consistent with the war-layer archetype sets.
   war_drain: {
     label: 'War drain',
     description: 'Sustaining a campaign abroad is bleeding the home economy.',
@@ -336,12 +341,6 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // The NON-REVERTING war-exhaustion SCAR (the homeostasis ratchet). war_drain is a
   // reverting condition (re-upserted each tick from the live front count, drifting
   // and expiring like any condition); the SCAR is the lasting mark a long war leaves.
-  // It accumulates from a worldState ledger that ratchets up with sustained
-  // deployment and decays only SLOWLY when the war ends — so unlike a relationship
-  // (which mean-reverts ~12%/tick), a protracted campaign leaves a durable economic
-  // wound that keeps pushing the aggressor toward suing for peace. Lists ONLY
-  // economic_capacity (the homeostasis sink), like war_drain; the strength penalty is
-  // applied directly in settlementStrength. A long expiry so it lingers as a scar.
   war_exhaustion: {
     label: 'War exhaustion',
     description: 'Years of campaigning have left a lasting wound on the war economy and the public will to fight.',
@@ -350,14 +349,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.4,
   },
-  // ── WAR-ECONOMY MOBILIZATION. A settlement on a war footing (the
-  // war_preparation → mobilized → deployed posture ramp, mobilization.js) shifts
-  // economic priorities toward the war effort BEFORE a shot is fired. Lists ONLY
-  // economic_capacity (the homeostasis dial) — the cost of standing up a war
-  // economy — and is LIGHTER than war_drain (preparing for war is cheaper than
-  // sustaining a campaign abroad). It is the VISIBLE "this settlement is gearing for
-  // war" marker the DM read-model + the neighbour-reaction layer key on. Reversible
-  // (it eases as the posture cools back to peace), so it does not become a scar.
+  // ── WAR-ECONOMY MOBILIZATION. A settlement on a war footing shifts economic
+  // priorities toward the war effort BEFORE a shot is fired. Lighter than war_drain.
   war_mobilization: {
     label: 'War mobilization',
     description: 'The settlement is shifting onto a war footing. Its economy is reorganizing for the coming campaign.',
@@ -366,15 +359,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.35,
   },
-  // ── REINFORCEMENT COST. Replenishing a deployed army DRAINS the
-  // origin: levies, coin, supply trains, and grain flow OUT to the front, and the
-  // home pays for it. Heavier than war_drain (sustaining a static siege is cheaper
-  // than continuously feeding fresh manpower and materiel into one), and the longer
-  // the army has been away (deploymentAge) the deeper the bleed. Lists the systems a
-  // sustained reinforcement effort actually saps — economic_capacity (coin/supply),
-  // public_legitimacy (the home tires of the levy), and defense_readiness (the home
-  // garrison is repeatedly stripped to top up the field army). Reverts as the
-  // reinforcement effort winds down — it is a cost-of-war condition, NOT a scar.
+  // ── REINFORCEMENT COST. Replenishing a deployed army DRAINS the origin: levies,
+  // coin, supply trains, and grain flow OUT to the front, and the home pays for it.
   reinforcement_cost: {
     label: 'Reinforcement burden',
     description: 'The home keeps bleeding men, coin, and grain to the front to keep the army in the field.',
@@ -402,9 +388,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
   },
-  // ── Geopolitical war layer — trade war. ─────────────────────────────────────
-  // A buyer realigning its primary supplier (the WINNER side's market gain is a
-  // mild local adjustment as new trade lanes settle in). Reversible, light.
+  // ── Geopolitical war layer — trade war. A buyer realigning its primary supplier
+  // (the WINNER side's market gain is a mild local adjustment). Reversible, light.
   trade_realignment: {
     label: 'Trade realignment',
     description: 'A new primary supplier is reshaping local trade flows.',
@@ -425,14 +410,9 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
-  // ── STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a
-  // valuable, hard-to-replace trade tie is weaponized under military/religious tension
-  // (the tradeLeverageCandidate embargo-collapse branch). It is the hostile escalation
-  // of regional_import_shortage — a critical supplier deliberately cutting the flow — so
-  // it bites the same systems: trade_connectivity (the severed lane), food_security (the
-  // tie is most often a food dependency the embargo starves), and public_legitimacy (the
-  // ruler who let the town be cornered). Stamped ONLY behind the gated war layer, so a
-  // no-war settlement never carries it ⇒ byte-identical when OFF.
+  // ── STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a valuable,
+  // hard-to-replace trade tie is weaponized under military/religious tension. Stamped
+  // ONLY behind the gated war layer, so a no-war settlement never carries it.
   trade_embargo: {
     label: 'Trade embargo',
     description: 'A critical supplier has cut off the flow. The dependent economy reels.',
@@ -441,12 +421,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.55,
   },
-  // ── OCCUPATION layer (the stateful occupier-benefit/burden/resistance
-  // loop). occupation_resistance is the OCCUPIED-side condition: sabotage, noncompliance,
-  // and an organizing resistance that GROWS when the occupied is intact/loyalist/populous
-  // and SHRINKS when devastated/compliant. It strains the occupier's hold (defense), the
-  // public order, and the war economy — the thing that makes a contested occupation a
-  // NET LOSS for the occupier.
+  // ── OCCUPATION layer. occupation_resistance is the OCCUPIED-side condition:
+  // sabotage, noncompliance, and an organizing resistance that harries the occupiers.
   occupation_resistance: {
     label: 'Occupation resistance',
     description: 'Sabotage, noncompliance, and an organizing resistance harry the occupiers.',
@@ -455,11 +431,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.45,
   },
-  // occupation_burden is the OCCUPIER-side cost: garrisons, administrators, and suppression
-  // tie down strength across every occupation, and OVEREXTENSION (each additional
-  // occupation) deepens it. Bites the war economy AND the home garrison (force committed
-  // to holding conquests cannot fight elsewhere). Reversible — it eases as occupations
-  // stabilize or are released; it is a cost-of-empire condition, not a scar.
+  // occupation_burden is the OCCUPIER-side cost: garrisons, administrators, and
+  // suppression tie down strength across every occupation; OVEREXTENSION deepens it.
   occupation_burden: {
     label: 'Occupation burden',
     description: 'Garrisoning and administering conquered settlements ties down the occupier\'s strength.',
@@ -468,13 +441,8 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.4,
   },
-  // war_spoils is the OCCUPIER-side BENEFIT — the INVERSE of war_exhaustion. The CAPPED
-  // benefit a STABILIZED occupation yields (tribute, levies, materiel) sustains the
-  // occupier's war effort. deriveEconomicCapacity treats it as a POSITIVE (relieving)
-  // economic-capacity term (the sole one), and the occupation layer HARD-CAPS its severity
-  // (the anti-snowball containment), so the relief is bounded no matter how many
-  // settlements the occupier holds. Easing by default (a transient, re-upserted gain), and
-  // it does NOT list economic_capacity in affectedSystems — the deriver handles it by
+  // war_spoils is the OCCUPIER-side BENEFIT — the INVERSE of war_exhaustion. It does
+  // NOT list economic_capacity in affectedSystems — the deriver handles it by
   // archetype so the generic drain scan never mistakes it for a cost.
   war_spoils: {
     label: 'War spoils',
@@ -484,6 +452,35 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
   },
+  // ── W-UPSWING positive-polarity ARC conditions (registered as LIFTS in
+  // archetypeCatalog.UPSWING_LIFT_CONDITIONS — they RAISE the systems they declare).
+  // Minted by the lazy upswingKernel mover, gated behind virtual upswingArcsEnabled;
+  // a dark world never carries them (byte-identical). The templates give the arcs
+  // defaults + keep the archetype-registry consistency test green.
+  reconstruction: {
+    label: 'Reconstruction',
+    description: 'The settlement is rebuilding after a calamity or the lifting of a siege — the rebuild race is on.',
+    affectedSystems: ['public_legitimacy', 'labor_capacity', 'social_trust'],
+    defaultExpiresAtTicks: 12,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.4,
+  },
+  boom: {
+    label: 'Boom',
+    description: 'Sustained trade and surplus have tipped the settlement into a boom — prosperous, and quietly dependent on the arteries feeding it.',
+    affectedSystems: ['public_legitimacy', 'trade_connectivity'],
+    defaultExpiresAtTicks: 14,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.4,
+  },
+  flourishing: {
+    label: 'Flourishing',
+    description: 'A long peace and steady legitimacy have made the settlement culturally fertile — a golden age, modest and bounded.',
+    affectedSystems: ['public_legitimacy', 'social_trust'],
+    defaultExpiresAtTicks: 16,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.35,
+  },
 });
 
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);
@@ -492,10 +489,47 @@ const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];
 // ── Severity / band helpers ──────────────────────────────────────────────
 
 /**
+ * @typedef {{ elapsedTicks: number, expiresAtTicks: (number|null) }} ConditionDuration
+ * @typedef {{ tick: number, sourceEventType: (string|null), sourceEventTargetId: (string|null) }} ConditionTriggeredAt
+ */
+
+/**
+ * @typedef {Object} ActiveCondition
+ * @property {string} id
+ * @property {string} archetype
+ * @property {string} label
+ * @property {string} description
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} status
+ * @property {ConditionTriggeredAt} triggeredAt
+ * @property {ConditionDuration} duration
+ * @property {string[]} affectedSystems
+ * @property {any[]} causes
+ */
+
+/**
+ * @typedef {Object} ActiveConditionInput
+ * @property {string} [id]
+ * @property {string} [archetype]
+ * @property {string} [label]
+ * @property {string} [description]
+ * @property {number} [severity]
+ * @property {string} [status]
+ * @property {Partial<ConditionTriggeredAt>} [triggeredAt]
+ * @property {Partial<ConditionDuration>} [duration]
+ * @property {string[]} [affectedSystems]
+ * @property {any[]} [causes]
+ */
+
+/** @typedef {Record<string, any>} CondSettlement */
+
+/**
  * Map a 0..1 severity score to a band. Anything <0 returns 'low',
  * >1 returns 'critical'. Boundaries: ≥0.75 critical, ≥0.5 high, ≥0.25
  * medium, else low.
- * @param {any} severity
+ * @param {unknown} severity
+ * @returns {string}
  */
 export function severityBand(severity) {
   const s = typeof severity === 'number' ? severity : 0;
@@ -507,7 +541,8 @@ export function severityBand(severity) {
 
 /**
  * Returns the default severity for a band — symmetric to severityBand.
- * @param {any} band
+ * @param {string} band
+ * @returns {number}
  */
 export function defaultSeverityForBand(band) {
   switch (band) {
@@ -524,9 +559,18 @@ export function defaultSeverityForBand(band) {
 // condition twice produces the same id) — falls back to a hash of the
 // archetype + label on first construction.
 
-/** @param {any} s */
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 
-/** @param {any} s */
+/**
+ * @param {string} s
+ * @returns {string}
+ */
 function shortHash(s) {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
@@ -534,8 +578,9 @@ function shortHash(s) {
 }
 
 /**
- * @param {any} archetype
- * @param {any} [opts]
+ * @param {unknown} archetype
+ * @param {{ sourceEventId?: any, suffix?: any, label?: any, tick?: any }} [opts]
+ * @returns {string}
  */
 export function conditionIdFromArchetype(archetype, opts = {}) {
   const arche = snakeCase(archetype || 'unknown');
@@ -545,11 +590,10 @@ export function conditionIdFromArchetype(archetype, opts = {}) {
   if (opts.suffix) {
     return `condition.${arche}.${snakeCase(opts.suffix)}`;
   }
-  // Fallback id is tick-INVARIANT (archetype + label only): a condition
-  // re-minted from a partial that lost its id but whose triggeredAt.tick
-  // differs must still hash to the same id, so id-keyed dedup (withActiveCondition
-  // replace-by-id, eventConditions sync) keeps working. Matches the stability
-  // intent stated in the header comment above.
+  // Fallback id is tick-INVARIANT (archetype + label only): a condition re-minted
+  // from a partial that lost its id but whose triggeredAt.tick differs must still
+  // hash to the same id, so id-keyed dedup (withActiveCondition replace-by-id,
+  // eventConditions sync) keeps working. Matches the stability intent above.
   return `condition.${arche}.${shortHash(`${arche}.${opts.label || ''}`)}`;
 }
 
@@ -559,8 +603,8 @@ export function conditionIdFromArchetype(archetype, opts = {}) {
 // shapes, and inserts a stable id. Idempotent.
 
 /**
- * @param {any} condition  Partial or already-canonical condition.
- * @returns {any}    Canonical-shape condition, or null on bad input.
+ * @param {ActiveConditionInput | null | undefined} condition  Partial or already-canonical condition.
+ * @returns {ActiveCondition | null}    Canonical-shape condition, or null on bad input.
  */
 export function deriveActiveCondition(condition) {
   if (!condition || typeof condition !== 'object') return null;
@@ -569,7 +613,7 @@ export function deriveActiveCondition(condition) {
     ? condition.archetype
     : 'unknown';
 
-  const tmpl = (/** @type {any} */ (CONDITION_ARCHETYPE_TEMPLATES))[archetype] || null;
+  const tmpl = /** @type {Record<string, any>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype] || null;
 
   const severity = typeof condition.severity === 'number'
     ? Math.max(0, Math.min(1, condition.severity))
@@ -590,7 +634,7 @@ export function deriveActiveCondition(condition) {
       : condition.duration.expiresAtTicks,
   };
 
-  const status = VALID_STATUSES.has(condition.status)
+  const status = VALID_STATUSES.has(/** @type {string} */ (condition.status))
     ? condition.status
     : (tmpl ? tmpl.defaultStatus : 'stable');
 
@@ -621,33 +665,36 @@ export function deriveActiveCondition(condition) {
   };
 }
 
+/** Derive every condition on a settlement. Returns []. for missing data. */
 /**
- * Derive every condition on a settlement. Returns []. for missing data.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {ActiveCondition[]}
  */
 export function deriveAllActiveConditions(settlement) {
   if (!settlement) return [];
   const arr = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  return arr.map(deriveActiveCondition).filter(Boolean);
+  return /** @type {ActiveCondition[]} */ (arr.map(deriveActiveCondition).filter(Boolean));
 }
 
 /**
- * Flat archetype keys from canonical conditions. Used by advanceTime.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * Flat archetype keys from canonical conditions. Used by Phase 15 advanceTime.
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {string[]}
  */
 export function activeArchetypes(settlement) {
-  return deriveAllActiveConditions(settlement).map((/** @type {any} */ c) => c.archetype);
+  return deriveAllActiveConditions(settlement).map(c => c.archetype);
 }
 
 /**
  * Lookup by id OR by archetype. Returns the first match or null.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {CondSettlement | null | undefined} settlement
  * @param {any} idOrArchetype
+ * @returns {ActiveCondition | null}
  */
 export function findActiveCondition(settlement, idOrArchetype) {
   if (!idOrArchetype) return null;
   const all = deriveAllActiveConditions(settlement);
-  return all.find((/** @type {any} */ c) => c.id === idOrArchetype || c.archetype === idOrArchetype) || null;
+  return all.find(c => c.id === idOrArchetype || c.archetype === idOrArchetype) || null;
 }
 
 // ── Pure with* helpers ───────────────────────────────────────────────────
@@ -658,8 +705,11 @@ export function findActiveCondition(settlement, idOrArchetype) {
 /**
  * Add (or overwrite) an active condition. If a condition with the same
  * id already exists it is replaced. Returns a new settlement.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} partial
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {ActiveConditionInput} partial
+ * @returns {any}
  */
 export function withActiveCondition(settlement, partial) {
   if (!settlement) return settlement;
@@ -667,19 +717,20 @@ export function withActiveCondition(settlement, partial) {
   if (!canonical) return settlement;
 
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  const filtered = existing.filter((/** @type {any} */ c) => c?.id !== canonical.id);
+  const filtered = existing.filter(c => c?.id !== canonical.id);
   return { ...settlement, activeConditions: [...filtered, canonical] };
 }
 
+/** Remove a condition by id. No-op if not found. Returns a new settlement. */
 /**
- * Remove a condition by id. No-op if not found. Returns a new settlement.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {CondSettlement | null | undefined} settlement
  * @param {any} conditionId
+ * @returns {any}
  */
 export function withoutActiveCondition(settlement, conditionId) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  const next = existing.filter((/** @type {any} */ c) => c?.id !== conditionId);
+  const next = existing.filter(c => c?.id !== conditionId);
   if (next.length === existing.length) return settlement;
   return { ...settlement, activeConditions: next };
 }
@@ -708,7 +759,10 @@ export function withoutActiveCondition(settlement, conditionId) {
  * ('world_pulse' / entity ids), and regional (channel ids) conditions are
  * deliberately excluded: generation re-derives its own, and world/regional
  * conditions belong to the campaign layer (worldPulse/reconcile.js).
- * @param {any} condition
+ */
+/**
+ * @param {{ causes?: any[] } | null | undefined} condition
+ * @returns {boolean}
  */
 export function isEventSourcedCondition(condition) {
   return Array.isArray(condition?.causes)
@@ -722,7 +776,10 @@ export function isEventSourcedCondition(condition) {
  * the input settlement untouched when there is nothing to record and no
  * stale record to update, so no-op events and plain settlements stay
  * byte-identical.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {any}
  */
 export function withEventConditionsSynced(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
@@ -741,25 +798,25 @@ export function withEventConditionsSynced(settlement) {
     return settlement;
   }
   const next = { ...settlement, config: { ...(settlement.config || {}), eventConditions: projected } };
-  if (raw) next._config = { ...raw, eventConditions: projected };
+  if (raw) /** @type {any} */ (next)._config = { ...raw, eventConditions: projected };
   return next;
 }
 
 /**
  * Advance every condition's elapsedTicks by the interval-scaled amount.
- * Mirrors the INTERVAL_SCALES so a per-week tick adds 0.25 to
+ * Mirrors the Phase 15 INTERVAL_SCALES so a per-week tick adds 0.25 to
  * elapsed; per-month adds 1.0; per-year adds 6.0.
  *
- * Also applies the severity dynamics: the status written on the
+ * Also applies the W5#5 severity dynamics: the status written on the
  * condition nudges severity per tick (worsening climbs toward 1, easing
  * falls toward the 0.05 floor, anything else holds flat), and a condition
  * inside the pre-expiry window ramps toward easing instead of
  * flat-then-cliff. The severityBand is recomputed to match the nudged
  * severity.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
- * @returns {any} new settlement
+ * @param {Object} settlement
+ * @param {string} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
+ * @returns {Object} new settlement
  */
 const INTERVAL_TICK_INCREMENTS = Object.freeze({
   one_week:   0.25,
@@ -768,7 +825,7 @@ const INTERVAL_TICK_INCREMENTS = Object.freeze({
   one_year:   6.00,
 });
 
-// Severity dynamics: the status written on the condition drives a
+// Severity dynamics (W5#5): the status written on the condition drives a
 // small, bounded, deterministic per-tick severity drift — a written
 // 'worsening' climbs, a written 'easing' falls, anything else ('stable',
 // legacy 'active', or no status at all) holds flat. The drift reads the
@@ -795,16 +852,16 @@ const EASING_SEVERITY_FLOOR = 0.05;
 const EXPIRY_EASING_WINDOW_TICKS = 2;
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
- * @returns {any} new settlement
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {string} interval
+ * @returns {any}
  */
 export function withTickedConditionDurations(settlement, interval) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
   if (existing.length === 0) return settlement;
 
-  const increment = (/** @type {any} */ (INTERVAL_TICK_INCREMENTS))[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
+  const increment = /** @type {Record<string, number>} */ (INTERVAL_TICK_INCREMENTS)[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
 
   const next = existing.map((/** @type {any} */ c) => {
     const canonical = deriveActiveCondition(c);
@@ -814,19 +871,8 @@ export function withTickedConditionDurations(settlement, interval) {
     const cap = canonical.duration.expiresAtTicks;
     const windingDown = typeof cap === 'number'
       && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
-    // Read the RAW status, not canonical.status: canonical defaulting maps a
-    // legacy/undirected condition (e.g. 'active' or absent) onto a template
-    // default like 'worsening', which would silently invent drift. The status
-    // we persist below must match the one that drove this decision, or the
-    // invented motion just reappears one tick later.
     const driftStatus = windingDown ? 'easing' : c.status;
-    const driftPerTick = (/** @type {any} */ (SEVERITY_DRIFT_PER_TICK))[driftStatus] ?? 0;
-    // The status we persist must reproduce this drift on the next tick.
-    // A directed status (worsening/easing) is kept verbatim; anything
-    // undirected (legacy 'active', absent, template-defaulted) normalizes
-    // to drift-neutral 'stable' so canonical defaulting can't reintroduce
-    // the invented motion one tick later.
-    const persistedStatus = driftPerTick !== 0 ? driftStatus : 'stable';
+    const driftPerTick = /** @type {Record<string, number>} */ (SEVERITY_DRIFT_PER_TICK)[driftStatus] ?? 0;
     let severity = canonical.severity;
     if (driftPerTick > 0) {
       severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
@@ -838,7 +884,15 @@ export function withTickedConditionDurations(settlement, interval) {
       ...canonical,
       severity,
       severityBand: severityBand(severity),
-      status: persistedStatus,
+      // [domain-top-state-1] Preserve the RAW status when the input had no valid
+      // directional status. Writing back canonical.status would canonicalize a
+      // missing/legacy/'active' status to the template default (e.g. plague's
+      // 'worsening'), and the next tick would read that written-back direction and
+      // invent motion (+0.04/tick) — defeating the drift's own no-invented-motion
+      // invariant. For a valid input status canonical.status === c.status, so this
+      // is byte-identical for every normally-generated condition; only legacy/raw-
+      // partial conditions (which the drift must leave flat) are affected.
+      status: windingDown ? 'easing' : (VALID_STATUSES.has(c.status) ? canonical.status : c.status),
       duration: {
         ...canonical.duration,
         elapsedTicks,
@@ -857,8 +911,11 @@ export function withTickedConditionDurations(settlement, interval) {
  * Conditions with `expiresAtTicks: null` persist indefinitely. Returns
  * `{ settlement, expired }`.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {{settlement: any, expired: Array<any>}}
+ * @returns {{settlement: Object, expired: Array<Object>}}
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {{ settlement: any, expired: ActiveCondition[] }}
  */
 export function withExpiredConditionsRemoved(settlement) {
   if (!settlement) return { settlement, expired: [] };
@@ -899,7 +956,10 @@ export function withExpiredConditionsRemoved(settlement) {
  *     bySeverityBand: { low: 0, medium: 1, high: 1, critical: 0 },
  *     summaryLines: [...],
  *   }
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {{ count: number, byArchetype: Record<string, number>, bySeverityBand: Record<string, number>, summaryLines: string[] }}
  */
 export function summarizeActiveConditions(settlement) {
   const all = deriveAllActiveConditions(settlement);
@@ -907,12 +967,13 @@ export function summarizeActiveConditions(settlement) {
   const byArchetype = {};
   /** @type {Record<string, number>} */
   const bySeverityBand = { low: 0, medium: 0, high: 0, critical: 0 };
+  /** @type {string[]} */
   const summaryLines = [];
 
   for (const c of all) {
     byArchetype[c.archetype] = (byArchetype[c.archetype] || 0) + 1;
     if (bySeverityBand[c.severityBand] !== undefined) bySeverityBand[c.severityBand] += 1;
-    summaryLines.push(`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
+    summaryLines.push(`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
   }
 
   return {
@@ -923,17 +984,18 @@ export function summarizeActiveConditions(settlement) {
   };
 }
 
-/** Catalog keys. Useful for drift detection + custom content. */
+/** Catalog keys. Useful for drift detection + Tier 4.16 custom content. */
 export function supportedConditionArchetypes() {
   return Object.keys(CONDITION_ARCHETYPE_TEMPLATES);
 }
 
+/** Catalog access — exposes the per-archetype defaults for UI/help text. */
 /**
- * Catalog access — exposes the per-archetype defaults for UI/help text.
- * @param {any} archetype
+ * @param {string} archetype
+ * @returns {any}
  */
 export function conditionArchetypeTemplate(archetype) {
-  return (/** @type {any} */ (CONDITION_ARCHETYPE_TEMPLATES))[archetype] || null;
+  return /** @type {Record<string, any>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype] || null;
 }
 
 /** Canonical severity band list. */

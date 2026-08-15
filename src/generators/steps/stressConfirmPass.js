@@ -35,6 +35,9 @@ import { registerStep } from '../pipeline.js';
 import { buildStressContext } from '../stressGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+import {
+  nativeSemanticName,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 // Per-type suppressor keywords mirroring buildStressContext's institution
 // flags — used ONLY to name the suppressing institutions in the trace.
@@ -49,19 +52,23 @@ const SUPPRESSOR_KEYWORDS = {
 function suppressorNames(stressType, institutions) {
   const kws = SUPPRESSOR_KEYWORDS[stressType] || [];
   return institutions
-    .filter(i => {
-      const n = (i.name || '').toLowerCase();
+    .map(institution => ({
+      institution,
+      semanticName: nativeSemanticName(institution),
+    }))
+    .filter(({ semanticName }) => {
+      const n = semanticName.toLowerCase();
       return kws.some(kw => n.includes(kw));
     })
-    .map(i => i.name)
+    .map(({ institution }) => institution.name)
     .slice(0, 3);
 }
 
 registerStep('stressConfirmPass', {
   deps: ['resolveStress', 'isolationPass'],
-  reads: ['effectiveConfig', 'institutions', 'stress', 'tier'], // ctx keys this step consumes that another step produces
+  reads: ['effectiveConfig', 'institutions', 'stress', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['stress', 'stressTypes'],
-  mutates: ['effectiveConfig'], // re-stamps confirmed stress keys on effectiveConfig in place
+  mutates: ['effectiveConfig'], // re-stamps confirmed stress keys on effectiveConfig in place (A+ P1.7)
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, effectiveConfig, institutions } = ctx;
@@ -85,7 +92,6 @@ registerStep('stressConfirmPass', {
   ]);
 
   const kept = [];
-  let dropped = 0;
   for (const entry of entries) {
     const type = entry?.type;
     if (!type || forced.has(type)) { kept.push(entry); continue; }
@@ -106,7 +112,6 @@ registerStep('stressConfirmPass', {
       continue;
     }
 
-    dropped += 1;
     const suppressors = suppressorNames(type, institutions);
     recordTrace(ctx, {
       targetType: 'stressor',
@@ -118,8 +123,8 @@ registerStep('stressConfirmPass', {
           source: suppressors.length ? instSource(suppressors[0]) : 'institutionRoster',
           effect: `kept with p=${keepProbability.toFixed(2)}, roll failed`,
           reason: suppressors.length
-            ? `${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll). The re-weighted roll dropped it.`
-            : `The settlement's institutions reduce the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll). The re-weighted roll dropped it.`,
+            ? `${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`
+            : `The settlement's institutions reduce the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`,
         },
       ],
       downstreamEffects: [
@@ -128,8 +133,16 @@ registerStep('stressConfirmPass', {
     });
   }
 
-  if (dropped === 0) return {};
-
+  // Always re-stamp from the confirmed container (not just when something was
+  // dropped). isolationPass can APPEND an emergent famine to the container AFTER
+  // resolveStress set effectiveConfig.stressTypes, without touching that channel
+  // — so a config where nothing was dropped can still carry a container entry the
+  // economics channel hasn't seen yet. Syncing unconditionally makes the confirmed
+  // container the single source of truth: the economy reads famine iff a famine
+  // entry actually survived. For every OTHER config this is a no-op — kept equals
+  // the entries resolveStress already threaded, in the same order (the
+  // entries.length===0 guard above already short-circuits the no-stress case).
+  //
   // Keep the same effectiveConfig threading contract resolveStress set up,
   // so every downstream config.stressTypes reader sees the confirmed set.
   // Catalog types only — a custom authored entry (config.stressorEdits)

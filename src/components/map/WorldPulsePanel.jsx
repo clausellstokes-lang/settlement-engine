@@ -1,18 +1,20 @@
-import { useMemo, useState } from 'react';
-import { Activity, BookMarked, CheckCircle2, Clock3, PauseCircle, PlayCircle, XCircle } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
-import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, AMBER, AMBER_BG, AMBER_DEEP, DANGER_BORDER, FS, GOLD, GOLD_BG, INK, MUTED, RED, RED_BG, SECOND, SP, R, sans, serif_ } from '../theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans } from '../theme.js';
+import { ClerkNote } from '../generate/ClerkNote.jsx';
 import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
   attackerEntity,
+  collectSettlementIds,
   digestDetails,
   human,
   involvedEntities,
   nameMapFromSaves,
   outcomeDetails,
+  outcomeSubjectDescriptor,
   percent,
   proposalDetails,
   rollIsDeterministic,
@@ -20,40 +22,119 @@ import {
   stressorSummary,
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
-import LiveWarStatus from './LiveWarStatus.jsx';
+import WhileYouWereAway from './WhileYouWereAway.jsx';
+import RealmDocket from './RealmDocket.jsx';
+import RealmVerbComposer from './RealmVerbComposer.jsx';
+import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
+import { t } from '../../copy/index.js';
 
 export default function WorldPulsePanel({ campaign, advancing = false }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
   const recordPartyImpact = useStore(s => s.recordPartyImpact);
-  // Advance-scaling Stage 4: resume the paused interval with the DM's verdicts.
+  // experience-product-fit-1: the resume-with-verdicts action. The store action
+  // already accepts a per-major `decisions` map (dismissed ⇒ excluded; unset ⇒
+  // recommended); the pause surface below is what finally collects it.
   const resolveIntervalMajors = useStore(s => s.resolveIntervalMajors);
   const [namingStressorId, setNamingStressorId] = useState(null);
   const [busyProposalId, setBusyProposalId] = useState(null);
   const [canonBusy, setCanonBusy] = useState(false);
-  const [resumeBusy, setResumeBusy] = useState(false);
-  // Per-major DM verdict ({ [id]: 'dismissed' }); absent ⇒ recommended on resume.
-  const [majorDecisions, setMajorDecisions] = useState({});
   const [actionError, setActionError] = useState(null);
+  // The majors the DM has toggled to DISMISS on the paused fork (Set of ids).
+  const [dismissedMajorIds, setDismissedMajorIds] = useState(() => new Set());
+  const [resumeBusy, setResumeBusy] = useState(false);
+  const campaignId = campaign?.id;
+  const toggleDismissMajor = useCallback((id) => {
+    setDismissedMajorIds(prev => {
+      const next = new Set(prev);
+      if (next.has(String(id))) next.delete(String(id)); else next.add(String(id));
+      return next;
+    });
+  }, []);
+  const submitVerdicts = useCallback(async () => {
+    if (resumeBusy || !campaignId) return;
+    setResumeBusy(true);
+    setActionError(null);
+    try {
+      const decisions = {};
+      for (const id of dismissedMajorIds) decisions[String(id)] = { decision: 'dismissed' };
+      const result = await resolveIntervalMajors(campaignId, decisions);
+      if (result && result.ok === false) {
+        setActionError(t('errors.realmContinueFail'));
+      } else {
+        setDismissedMajorIds(new Set());
+      }
+    } catch (err) {
+      setActionError(t('errors.resumeFail'));
+    } finally {
+      setResumeBusy(false);
+    }
+  }, [resumeBusy, campaignId, dismissedMajorIds, resolveIntervalMajors]);
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
+
+  // H2 · THE FIRST ADVANCE — the almanac's new page turns in. On the session's
+  // first committed advance, the pulse page pivots at its binding (oc-m-pageturn)
+  // as it settles. Detection is read-side off the existing advance counter
+  // (worldState.pulseHistory grows by one per advance), baselined at mount; the
+  // panel mounts before the advance commits (openInspectorAt('pulse') runs ahead
+  // of the commit), so the first increase is the DM's first advance. Component-
+  // local refs keep it once — NO new store field, NO persisted state; reduced-
+  // motion collapses the turn to instant via the global [class*='oc-m-'] rule.
+  const almanacPulseLen = campaign?.worldState?.pulseHistory?.length || 0;
+  const almanacBaselineRef = useRef(null);
+  const almanacTurnedRef = useRef(false);
+  const [almanacTurn, setAlmanacTurn] = useState(false);
+  useEffect(() => {
+    if (almanacBaselineRef.current == null) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
+    if (almanacTurnedRef.current) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
+    if (almanacPulseLen <= almanacBaselineRef.current) return undefined;
+    almanacTurnedRef.current = true;
+    almanacBaselineRef.current = almanacPulseLen;
+    setAlmanacTurn(true);
+    const timer = setTimeout(() => setAlmanacTurn(false), 900);
+    return () => clearTimeout(timer);
+  }, [almanacPulseLen]);
+
+  // M10b catch-up now fires from campaign ACTIVATION (setActiveCampaign — the
+  // §0.6.1-named site), not from this panel's mount, so the world moves on every
+  // open path rather than only when the Pulse tab happens to render
+  // (experience-product-fit-1). The result is surfaced by the "while you were away"
+  // digest (WhileYouWereAway, fed by the transient livingCatchUp store field).
+
   if (!campaign) return null;
 
-  // While the realm is advancing, the section it routes to (P10) shows a
-  // simulation-stage skeleton instead of sitting on the PREVIOUS tick's numbers —
-  // so progress reads in two channels (the toolbar label flip + this in-place
-  // status) and the GM never mistakes stale results for the new ones.
-  if (advancing) {
-    return <AdvancingSkeleton />;
-  }
-
   const worldState = campaign.worldState || {};
+  // worldpulse-core-1: a campaign PAUSED mid-interval for DM verdicts is not idle —
+  // resolveIntervalMajors re-derives the paused segment from the cursor's pre-tick
+  // snapshot and wholesale-commits it, so any Apply/Dismiss/party-impact made during
+  // the parked window is silently discarded on resume. The store mutators now no-op
+  // while paused; gate the affordances here too so the buttons don't invite a write
+  // that vanishes. The DM resolves/undoes the pause (elsewhere) before acting.
+  const paused = !!worldState.pausedAdvance;
+  // experience-product-fit-1: the batched majors the paused advance is waiting on.
+  const pendingMajors = paused ? (worldState.pausedAdvance?.pendingMajors || []) : [];
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
   const pulseHistory = worldState.pulseHistory || [];
   const latestPulse = pulseHistory[pulseHistory.length - 1] || null;
   const rules = worldState.simulationRules || {};
-  const rolls = latestPulse?.rollExplanations || [];
+  // M10a (CL-3) — the RATIONALE surface. The realm's approval custom frames the
+  // pending queue: recommendations proposes WITH its reasoning, dm_only asks about
+  // everything, and routine-with-major-approval routes the actor-initiated majors
+  // (a war declaration, a coup) here. Each card already renders the candidate's
+  // reasons[] as its rationale; this note names WHY the turn is waiting on the DM.
+  const autonomy = politicalAutonomyOf(rules);
+  const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
+  const proposalNote = autonomy === 'recommendations'
+    ? 'The realm recommends these turns and shows its reasoning with each. Apply or dismiss.'
+    : autonomy === 'dm_only'
+      ? 'Every major turn awaits your word. Each carries the reasoning behind it.'
+      : routineMajorApproval
+        ? 'Routine life runs itself; the campaign-altering turns (a war declaration, a coup) wait here for your word. They stand down on their own if left unanswered.'
+        : null;
+  const rolls = (latestPulse?.rollExplanations || [])
+    .filter(roll => !['state_only', 'suppression_only'].includes(roll?.recordMode));
   const resolved = latestPulse?.resolvedStressors || [];
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
   const impactDigest = latestPulse?.impactDigest || [];
@@ -63,21 +144,15 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const echoes = liveStressors.filter(s => s.status === 'residual');
 
   const runProposalAction = async (proposalId, action) => {
-    // Guard only against re-firing THIS exact action — not every other row. A
-    // single global guard meant that while one proposal's apply/dismiss was in
-    // flight (the store updates optimistically but the cloud persist can lag),
-    // every other row's buttons were blocked, so the GM had to switch tabs (which
-    // remounts the panel and resets the flag) to resolve the next one. Per-row
-    // scoping lets pending proposals be resolved consecutively in place.
-    if (busyProposalId === `${action}:${proposalId}`) return;
+    if (busyProposalId || paused) return;
     setBusyProposalId(`${action}:${proposalId}`);
     setActionError(null);
     try {
       const fn = action === 'apply' ? applyProposal : dismissProposal;
       const updated = await fn(campaign.id, proposalId);
-      if (!updated) setActionError('Proposal could not be updated.');
+      if (!updated) setActionError(t('errors.proposalUpdateFail'));
     } catch (err) {
-      setActionError(`Proposal update failed: ${err?.message || err}`);
+      setActionError(t('errors.proposalUpdateFail'));
     } finally {
       setBusyProposalId(null);
     }
@@ -90,45 +165,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
     try {
       await canonizeCampaignWorld(campaign.id);
     } catch (err) {
-      setActionError(`Canonize failed: ${err?.message || err}`);
+      setActionError(t('errors.worldClockStartFail'));
     } finally {
       setCanonBusy(false);
-    }
-  };
-
-  // Advance-scaling Stage 4: the paused-advance cursor for this campaign, read off
-  // worldState so it survives a reload. Flag-gated: the legacy single-tick advance
-  // never parks a cursor, so this is always null with the flag off (no banner).
-  const pausedAdvance = flag('advanceMultiTick') ? (worldState.pausedAdvance || null) : null;
-
-  const toggleMajor = (id) => {
-    setMajorDecisions(prev => {
-      const next = { ...prev };
-      if (next[id] === 'dismissed') delete next[id];
-      else next[id] = 'dismissed';
-      return next;
-    });
-  };
-
-  // Continue the paused interval with the DM's verdicts. A major toggled off is
-  // dismissed; every other batched major resolves to its recommended outcome. The
-  // store re-derives the paused tick deterministically and continues the remaining
-  // ticks (re-parking a fresh pause if the next tick surfaces majors).
-  const runContinueAdvance = async () => {
-    if (resumeBusy || !resolveIntervalMajors) return;
-    setResumeBusy(true);
-    setActionError(null);
-    try {
-      const decisions = {};
-      for (const [id, verdict] of Object.entries(majorDecisions)) {
-        decisions[id] = { decision: verdict };
-      }
-      await resolveIntervalMajors(campaign.id, decisions);
-      setMajorDecisions({});
-    } catch (err) {
-      setActionError(`Could not continue advancing: ${err?.message || err}`);
-    } finally {
-      setResumeBusy(false);
     }
   };
 
@@ -141,7 +180,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         flexDirection: 'column',
         background: CARD,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         overflow: 'hidden',
       }}>
         <header style={{
@@ -155,7 +193,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: R.lg,
             border: `1px solid ${BORDER2}`,
             background: CARD,
             display: 'flex',
@@ -166,7 +203,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             <Activity size={18} color={GOLD} />
           </div>
           <div style={{ minWidth: 0 }}>
-            <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['22'], lineHeight: 1.14, fontWeight: 700 }}>
+            <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
               World Pulse
             </h2>
             <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
@@ -175,20 +212,20 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           </div>
         </header>
-        <div style={{ padding: SP.lg }}>
+        <div style={{ padding: 16 }}>
           {actionError && (
-            <div style={{ border: `1px solid ${DANGER_BORDER}`, borderRadius: R.lg, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: RED_BG }}>
+            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
               {actionError}
-            </div>
+            </ClerkNote>
           )}
           <OutcomeCard
-            title="Canonize the campaign world first"
-            summary="The realm advances only after you lock the map, the placements, and the campaign assumptions as canon."
+            heading="Start the campaign's World Clock first"
+            summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions and start the world clock."
             severity={0.45}
             details={['required before advancement']}
             actions={(
-              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Canonize campaign world">
-                <BookMarked size={13} /> {canonBusy ? 'Canonizing' : 'Canonize world'}
+              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} hint="Start the campaign's world clock">
+                <BookMarked size={13} /> {canonBusy ? 'Starting…' : t('canon.startWorldClock')}
               </SmallButton>
             )}
           />
@@ -205,7 +242,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       flexDirection: 'column',
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       overflow: 'hidden',
     }}>
       <header style={{
@@ -219,7 +255,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div style={{
           width: 34,
           height: 34,
-          borderRadius: 8,
           border: `1px solid ${BORDER2}`,
           background: CARD,
           display: 'flex',
@@ -230,7 +265,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           <Activity size={18} color={GOLD} />
         </div>
         <div style={{ minWidth: 0 }}>
-          <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['22'], lineHeight: 1.14, fontWeight: 700 }}>
+          <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
             World Pulse
           </h2>
           <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
@@ -244,94 +279,149 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </div>
       </header>
 
-      <div style={{
+      {advancing && (
+        <div role="status" style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          padding: '9px 16px', borderBottom: `1px solid ${BORDER}`,
+          background: GOLD_BG, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        }}>
+          <Activity size={14} color={GOLD} />
+          Advancing the realm… the pulse below updates when it settles.
+        </div>
+      )}
+
+      <div
+        className={almanacTurn ? 'oc-m-pageturn' : undefined}
+        style={{
         flex: 1,
         minHeight: 0,
         overflowY: 'auto',
-        padding: SP.lg,
+        padding: 16,
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 330px), 1fr))',
-        gap: SP.lg,
+        gap: 16,
         alignItems: 'start',
       }}>
-        {/* Advance-scaling Stage 4 PAUSED banner — an amber decision surface,
-            visually distinct from the loading skeleton, presenting this pause's
-            batched majors as Apply/Dismiss cards with a Continue CTA. Spans the
-            full grid so it sits above the sections, not in a column. */}
-        {pausedAdvance && (
-          <div style={{ gridColumn: '1 / -1' }}>
-            <PausedAdvanceBanner
-              pausedAdvance={pausedAdvance}
-              decisions={majorDecisions}
-              onToggle={toggleMajor}
-              onContinue={runContinueAdvance}
-              busy={resumeBusy}
-              nameById={nameById}
-            />
-          </div>
-        )}
-
-        {/* §S3 — LIVE war/trade/faith status from the post-pulse worldState +
-            regional graph. Self-gates: a no-war campaign renders nothing. */}
-        <LiveWarStatus campaign={campaign} nameById={nameById} />
-
-        <Section title="Pending Proposals" count={pending.length}>
+        {/* components-dossier-4: the "while you were away" catch-up digest, spanning
+            the full width above the pulse sections. Self-gates to nothing. */}
+        <div style={{ gridColumn: '1 / -1' }}>
+          <WhileYouWereAway campaignId={campaign.id} />
+        </div>
+        {/* W-COMPOSER-2 §10: THE DOCKET — the realm's staged future (queued
+            member orders in drain order) + THE FORECAST attached to it. */}
+        <div style={{ gridColumn: '1 / -1' }}>
+          <RealmDocket campaign={campaign} />
+        </div>
+        {/* W-COMPOSER-2 §6: REALM ORDERS — the forcing surface over the realm
+            affordance manifest (force-as-proposal; approval applies above). */}
+        <div style={{ gridColumn: '1 / -1' }}>
+          <RealmVerbComposer campaign={campaign} />
+        </div>
+        <Section heading="Pending Proposals" count={pending.length}>
           {actionError && (
-            <div style={{ border: `1px solid ${DANGER_BORDER}`, borderRadius: R.lg, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: RED_BG }}>
+            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
               {actionError}
+            </ClerkNote>
+          )}
+          {paused && (
+            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
+                The advance paused for your word. {pendingMajors.length > 0
+                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict. Keep each (it applies as recommended) or dismiss it, then resume the interval.`
+                  : 'Resume or undo the advance to continue. Applying, dismissing, or naming here would be undone on resume.'}
+              </div>
+              {pendingMajors.map((major) => {
+                const id = String(major?.id ?? '');
+                const dismissed = dismissedMajorIds.has(id);
+                return (
+                  <OutcomeCard
+                    key={id}
+                    heading={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
+                    summary={major.summary || major.outcome?.summary || ''}
+                    severity={typeof major.severity === 'number' ? major.severity : 0.8}
+                    reasons={major.reasons || major.outcome?.reasons || []}
+                    details={proposalDetails(major.outcome || major)}
+                    involved={involvedEntities(major, nameById)}
+                    subject={outcomeSubjectDescriptor(major)}
+                    affectedIds={collectSettlementIds(major)}
+                    tone={dismissed ? 'normal' : 'major'}
+                    actions={(
+                      <SmallButton
+                        tone={dismissed ? 'danger' : 'good'}
+                        onClick={() => toggleDismissMajor(id)}
+                        disabled={resumeBusy}
+                      >
+                        {dismissed ? <><XCircle size={13} /> Dismissed</> : <><CheckCircle2 size={13} /> Keep</>}
+                      </SmallButton>
+                    )}
+                  />
+                );
+              })}
+              <SmallButton
+                tone="good"
+                onClick={submitVerdicts}
+                disabled={resumeBusy}
+              >
+                <Clock3 size={13} /> {resumeBusy
+                  ? 'Resuming'
+                  : dismissedMajorIds.size > 0
+                    ? `Resume with your verdicts (${dismissedMajorIds.size} dismissed)`
+                    : 'Resume with recommendations'}
+              </SmallButton>
             </div>
           )}
+          {pending.length > 0 && proposalNote && (
+            <ClerkNote rubric="The realm's counsel" style={{ marginBottom: 10 }}>
+              {proposalNote}
+            </ClerkNote>
+          )}
           {pending.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pending proposals.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {pending.map(proposal => {
-                // Disable only THIS row's buttons while either of its actions is in
-                // flight — never the whole list, so the next proposal stays clickable.
-                const rowBusy = busyProposalId === `apply:${proposal.id}`
-                  || busyProposalId === `dismiss:${proposal.id}`;
-                return (
+              {pending.map(proposal => (
                 <OutcomeCard
                   key={proposal.id}
-                  title={proposal.headline}
+                  heading={proposal.headline}
                   summary={proposal.summary}
                   severity={proposal.severity}
                   reasons={proposal.reasons}
                   details={proposalDetails(proposal.outcome)}
                   involved={involvedEntities(proposal, nameById)}
+                  subject={outcomeSubjectDescriptor(proposal)}
+                  affectedIds={collectSettlementIds(proposal)}
                   tone="major"
                   actions={(
                     <>
                       <SmallButton
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
-                        title="Apply proposal"
-                        disabled={rowBusy}
+                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'}
+                        disabled={!!busyProposalId || paused}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
                       </SmallButton>
                       <SmallButton
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
-                        title="Dismiss proposal"
-                        disabled={rowBusy}
+                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'}
+                        disabled={!!busyProposalId || paused}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
                       </SmallButton>
                     </>
                   )}
                 />
-                );
-              })}
+              ))}
             </div>
           )}
         </Section>
 
-        <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
+        <Section heading="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No active stressors. The realm is quiet, for now.
             </div>
           ) : (
@@ -342,7 +432,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   && !stressor.originContext?.attackerLabel
                   && !stressor.originContext?.attackerSettlementId;
                 const nameThisAttacker = async (label) => {
-                  if (!recordPartyImpact || namingStressorId) return;
+                  if (!recordPartyImpact || namingStressorId || paused) return;
                   setNamingStressorId(stressor.id);
                   setActionError(null);
                   try {
@@ -353,7 +443,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       label: `Named the force behind ${stressor.label || human(stressor.type)}`,
                     });
                   } catch (err) {
-                    setActionError(`Naming failed: ${err?.message || err}`);
+                    setActionError(t('errors.namingFail'));
                   } finally {
                     setNamingStressorId(null);
                   }
@@ -361,7 +451,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={stressor.id}
-                    title={stressor.label || human(stressor.type)}
+                    heading={stressor.label || human(stressor.type)}
                     summary={stressorSummary(stressor)}
                     severity={stressor.severity}
                     details={stressorDetails(stressor)}
@@ -373,7 +463,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                     actions={unnamed && recordPartyImpact ? (
                       <NameAttackerControl
                         stressor={stressor}
-                        busy={!!namingStressorId}
+                        busy={!!namingStressorId || paused}
                         onName={nameThisAttacker}
                       />
                     ) : null}
@@ -383,7 +473,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {echoes.map(stressor => (
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
-                  title={`${stressor.label || human(stressor.type)}, in living memory`}
+                  heading={`${stressor.label || human(stressor.type)}, in living memory`}
                   summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
                   severity={stressor.memoryStrength ?? 0}
                   details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
@@ -394,15 +484,15 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Latest Pulse" count={latestPulse ? selected : 0}>
+        <Section heading="Latest Pulse" count={latestPulse ? selected : 0}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <OutcomeCard
-                title={`Tick ${latestPulse.tick} advanced`}
+                heading={`Tick ${latestPulse.tick} advanced`}
                 summary={`${latestPulse.autoAppliedCount || 0} drift item(s), ${latestPulse.proposalCount || 0} proposal(s), ${latestPulse.candidateCount || 0} candidate(s).`}
                 severity={Math.min(1, selected / 8)}
                 reasons={[latestPulse.interval, latestPulse.calendar?.season, `${rolls.length} rolls`].filter(Boolean)}
@@ -410,36 +500,39 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {appliedOutcomes.slice(0, 10).map(outcome => (
                 <OutcomeCard
                   key={outcome.id}
-                  title={outcome.headline || human(outcome.candidateType)}
+                  heading={outcome.headline || human(outcome.candidateType)}
                   summary={outcome.summary}
                   severity={outcome.severity}
                   reasons={outcome.reasons}
                   details={outcomeDetails(outcome, nameById)}
                   involved={involvedEntities(outcome, nameById)}
+                  subject={outcomeSubjectDescriptor(outcome)}
+                  affectedIds={collectSettlementIds(outcome)}
                   tone={outcome.applyMode === 'proposal' ? 'major' : 'normal'}
                 />
               ))}
               {resolved.map(stressor => (
                 <OutcomeCard
                   key={stressor.id}
-                  title={`${stressor.label} resolved`}
+                  heading={`${stressor.label} resolved`}
                   summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
                   involved={involvedEntities(stressor, nameById)}
+                  affectedIds={collectSettlementIds(stressor)}
                 />
               ))}
             </div>
           )}
         </Section>
 
-        <Section title="Impact Digest" count={impactDigest.length}>
+        <Section heading="Impact Digest" count={impactDigest.length}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : impactDigest.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No regional impacts recorded for this pulse.
             </div>
           ) : (
@@ -447,12 +540,14 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {impactDigest.slice(0, 12).map(entry => (
                 <OutcomeCard
                   key={entry.id}
-                  title={entry.headline}
+                  heading={entry.headline}
                   summary={entry.summary}
                   severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
                   reasons={entry.reasons}
                   details={digestDetails(entry, nameById)}
                   involved={involvedEntities(entry, nameById)}
+                  subject={outcomeSubjectDescriptor(entry)}
+                  affectedIds={collectSettlementIds(entry)}
                   tone={entry.significance === 'major' ? 'major' : 'normal'}
                 />
               ))}
@@ -460,9 +555,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Roll Explanations" count={rolls.length}>
+        <Section heading="Roll Explanations" count={rolls.length}>
           {rolls.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No rolls recorded.
             </div>
           ) : (
@@ -477,7 +572,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                     gap: 8,
                     padding: 10,
                     border: `1px solid ${passed ? GOLD : BORDER}`,
-                    borderRadius: R.lg,
                     background: passed ? GOLD_BG : CARD,
                   }}>
                     <Clock3 size={15} color={passed ? GOLD : MUTED} style={{ marginTop: 2 }} />
@@ -500,121 +594,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           )}
         </Section>
-      </div>
-    </section>
-  );
-}
-
-// Advance-scaling Stage 4: the PAUSED banner. An amber, steady (non-animated)
-// decision surface — deliberately unlike the AdvancingSkeleton's pulsing spinner —
-// so a paused interval reads as waiting BY DESIGN for the DM, not stuck loading.
-// Presents the batched majors as Apply/Dismiss decision cards (reusing OutcomeCard)
-// and a Continue CTA that names how many ticks remain.
-//
-// a11y: role=region + aria-label states "waiting for your decisions" so the wait is
-// announced as intentional. Each major's verdict is a real toggle button carrying
-// aria-pressed; the amber framing is never the only signal (the heading text +
-// per-card "Will apply / Dismissed" label carry it too).
-function PausedAdvanceBanner({ pausedAdvance, decisions, onToggle, onContinue, busy, nameById }) {
-  const majors = Array.isArray(pausedAdvance?.pendingMajors) ? pausedAdvance.pendingMajors : [];
-  const total = pausedAdvance?.ticksTotal || 0;
-  const done = pausedAdvance?.ticksDone || 0;
-  const remaining = Math.max(0, total - done);
-  const interval = human(pausedAdvance?.interval || '');
-  return (
-    <section
-      data-testid="advance-paused-banner"
-      aria-label="Advance paused, waiting for your decisions on the major forks"
-      style={{
-        border: `1px solid ${AMBER}`,
-        borderLeft: `4px solid ${AMBER}`,
-        borderRadius: R.lg,
-        background: AMBER_BG,
-        padding: SP.lg,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: SP.md,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-        <PauseCircle size={20} color={AMBER_DEEP} style={{ flexShrink: 0, marginTop: 1 }} aria-hidden />
-        <div style={{ minWidth: 0, flex: 1 }}>
-          <h3 style={{ margin: 0, color: AMBER_DEEP, fontFamily: serif_, fontSize: FS.lg, fontWeight: 800, lineHeight: 1.2 }}>
-            Advance paused at a major fork
-          </h3>
-          <p style={{ margin: '4px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-            {majors.length === 1 ? 'One change' : `${majors.length} changes`} could reshape the {interval || 'interval'}.
-            Keep the ones you want, dismiss the rest, then continue. {remaining} of {total} steps remain.
-          </p>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {majors.map((major, i) => {
-          const id = major.id || `major-${i}`;
-          const dismissed = decisions[id] === 'dismissed';
-          return (
-            <div key={id} style={{ opacity: dismissed ? 0.6 : 1 }}>
-              <OutcomeCard
-                title={major.headline || human(major.candidateType)}
-                summary={major.summary}
-                severity={major.severity}
-                reasons={major.reasons}
-                involved={involvedEntities(major, nameById)}
-                tone="major"
-                actions={(
-                  <SmallButton
-                    tone={dismissed ? 'good' : 'danger'}
-                    title={dismissed ? 'Keep this change' : 'Dismiss this change'}
-                    onClick={() => onToggle(id)}
-                    disabled={busy}
-                  >
-                    {dismissed
-                      ? <><CheckCircle2 size={13} /> Keep</>
-                      : <><XCircle size={13} /> Dismiss</>}
-                  </SmallButton>
-                )}
-              />
-              <div style={{ marginTop: 4, color: dismissed ? RED : AMBER_DEEP, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
-                {dismissed ? 'Dismissed, will not apply' : 'Will apply on continue'}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <SmallButton
-          tone="good"
-          title="Apply your decisions and continue advancing the realm"
-          onClick={onContinue}
-          disabled={busy}
-        >
-          <PlayCircle size={14} /> {busy ? 'Continuing' : `Continue advancing (${remaining} of ${total} remaining)`}
-        </SmallButton>
-      </div>
-    </section>
-  );
-}
-
-// While advanceCampaignWorld runs, the Pulse section shows this instead of the
-// prior tick (P10). A pulsing spinner + a named stage line + ghost rows read as
-// "the engine is computing depth", not a bare spinner, and self-clear when the
-// real digest replaces them.
-function AdvancingSkeleton() {
-  return (
-    <section data-testid="world-pulse-advancing" aria-busy="true" style={{ display: 'grid', gap: SP.md }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
-        <Activity size={15} color={GOLD} className="sf-spin" aria-hidden />
-        Advancing the realm…
-      </div>
-      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-        Simulating wars, faiths, trade, and migration for this tick.
-      </div>
-      <div style={{ display: 'grid', gap: SP.sm }}>
-        {[0, 1, 2].map(i => (
-          <div key={i} style={{ height: 44, borderRadius: R.md, background: CARD_ALT, border: `1px solid ${BORDER2}`, opacity: 1 - i * 0.22 }} />
-        ))}
       </div>
     </section>
   );

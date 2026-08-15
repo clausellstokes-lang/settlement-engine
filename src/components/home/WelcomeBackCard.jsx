@@ -1,11 +1,12 @@
 /**
- * WelcomeBackCard.jsx — return-visit personalization.
+ * WelcomeBackCard.jsx — P115 / X-9 return-visit personalization.
  *
  * Surfaces above the (signed-in) HomeHero when the user returns 24h+
  * after their last visit. Reads the most-recent saved settlement from
  * the store and offers a two-click resume.
  *
- * Self-gates on (GA — the welcomeBack flag was promoted and inlined):
+ * Self-gates on:
+ *   - flag('welcomeBack')           (default off; flip per phase plan)
  *   - useReturnVisit().isReturn     (24h+ since last visit)
  *   - auth.tier !== 'anon'          (anons have no saved settlement context)
  *   - lastSettlement present        (no point greeting an empty library)
@@ -13,21 +14,31 @@
  * Renders nothing otherwise.
  */
 
+import { useState } from 'react';
 import { useStore } from '../../store/index.js';
+import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
-import { INK, BODY, BORDER, CARD, sans, serif_, FS, SP, R, GOLD_TXT, LANDING_MAX } from '../theme.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+import { INK, BODY, BORDER, sans, serif_, FS, SP, R, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+
+// content-immersion-r2-3: the registered home_welcome_back whisper — the return-
+// visit card now honors (and offers) the unified sf:guidance dismissal.
+const WHISPER_ID = 'home_welcome_back';
 
 export default function WelcomeBackCard({ onOpen, onForge }) {
   const tier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
   const { isReturn, daysSinceLastVisit, lastSettlement } = useReturnVisit();
+  const [dismissed, setDismissed] = useState(() => isGuidanceDismissed(WHISPER_ID));
 
+  if (!flag('welcomeBack')) return null;
   if (tier === 'anon') return null;
   if (!isReturn) return null;
   if (!lastSettlement) return null;
+  if (dismissed) return null;
 
   const handleOpen = () => {
     Funnel.track(EVENTS.WELCOME_BACK_OPEN_CLICKED, {
@@ -45,24 +56,25 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
   const days = Math.max(1, daysSinceLastVisit);
   const settlementName = lastSettlement.name || 'your last settlement';
 
-  // Flattened re-entry strip, not a second hero. The signed-in HomeHero below
-  // is the dominant parchment gradient+shadow surface; matching that treatment
-  // here produced two co-equal cards that failed the squint test. A plain CARD
-  // fill + hairline border (no gradient, no shadow) drops this a clear elevation
-  // level so the hero stays the single focal point, and the tighter bottom
-  // margin groups it to the hero by spacing.
   return (
     <div style={{
-      maxWidth: LANDING_MAX, margin: `${SP.lg}px auto ${SP.sm}px`,
-      background: CARD,
+      maxWidth: 520, margin: `${SP.lg}px auto`,
+      background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
       border: `1px solid ${BORDER}`,
       borderRadius: R.lg, overflow: 'hidden',
+      boxShadow: '0 4px 16px rgba(27,20,8,0.08)',
       fontFamily: sans,
     }}>
-      <div style={{ padding: SP.lg }}>
+      <div style={{ padding: SP.lg, position: 'relative' }}>
+        <Button
+          variant="ghost" size="sm"
+          aria-label="Dismiss the welcome-back card"
+          onClick={() => { markGuidanceDismissed(WHISPER_ID); setDismissed(true); }}
+          style={{ position: 'absolute', top: SP.sm, right: SP.sm }}
+        />
         <div style={{
           fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-          textTransform: 'uppercase', color: GOLD_TXT,
+          textTransform: 'uppercase', color: GOLD_DEEP,
         }}>
           {t('hero.welcomeBack.eyebrow') || 'Welcome back'}
         </div>
@@ -81,14 +93,9 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
             `How did your session in ${settlementName} go?`}
         </p>
         <div style={{ display: 'flex', gap: SP.sm, marginTop: SP.md, flexWrap: 'wrap' }}>
-          {/* Both CTAs sit BELOW the signed-in hero's solid-gold "Generate"
-              primary, which must stay the single gold focal point of the stack
-              (P4). "Open" keeps the lead by position + outline emphasis (secondary,
-              not gold) so two gold primaries don't sit one card apart; "Forge a
-              follow-up" drops to ghost. */}
           <Button
             type="button"
-            variant="secondary"
+            variant="primary"
             size="md"
             onClick={handleOpen}
           >
@@ -96,7 +103,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
           </Button>
           <Button
             type="button"
-            variant="ghost"
+            variant="secondary"
             size="md"
             onClick={handleForge}
           >

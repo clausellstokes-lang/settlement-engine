@@ -89,19 +89,31 @@ describe('data-schema.4 — faction roles stay matchable (the prevention pin)', 
 
   test('FACTION_DESCRIPTORS is the expected closed role set', () => {
     expect(roles.slice().sort()).toEqual(
-      ['criminal', 'economy', 'government', 'magic', 'military', 'other', 'religious'],
+      ['crafts', 'criminal', 'economy', 'government', 'magic', 'military', 'noble', 'other', 'religious'],
     );
   });
 
-  test('every role (except the catch-all "other") matches via priorityCategory OR grouping', () => {
-    // This is the core invariant: a role that names neither a priorityCategory
-    // value nor a grouping key can NEVER match an institution — a silent
-    // false-negative (the constants.js resilience-dial failure mode). E.g.
-    // 'religious' is carried by the 'Religious' grouping (entries are
-    // priorityCategory 'religion'); 'military' by the 'military' priorityCategory
-    // (the grouping is 'Defense'). Both must stay reachable.
-    const dead = roles.filter((r) => r !== 'other' && !matchable.has(r));
-    expect(dead, `faction roles that can match NO institution: ${JSON.stringify(dead)}`).toEqual([]);
+  // Roles reachable NOT through institution matching but through the emergent
+  // NPC-cluster / DM-compendium naming path (factionGrouping's descriptor pick ->
+  // FACTION_DESCRIPTORS[dominantCategory]). 'noble' is a faction category
+  // surfaced on generated noble factions but has no institution
+  // grouping/priorityCategory, so it is matchable through that path rather than
+  // the institution OR-chain below. Kept as a named allowlist so a genuinely
+  // dead role (no consumer at all) still trips.
+  const NON_INSTITUTION_MATCHABLE = new Set(['noble']);
+
+  test('every role (except the catch-all "other") matches via an institution axis OR the faction-naming path', () => {
+    // The core invariant: a role that names neither a priorityCategory value nor a
+    // grouping key can NEVER match an institution — a silent false-negative (the
+    // constants.js resilience-dial failure mode). E.g. 'religious' is carried by the
+    // 'Religious' grouping (entries are priorityCategory 'religion'); 'military' by
+    // the 'military' priorityCategory (the grouping is 'Defense'). Both must stay
+    // reachable. 'noble' is reached through the faction-naming path, not institutions,
+    // so it is allowlisted (see NON_INSTITUTION_MATCHABLE).
+    const dead = roles.filter(
+      (r) => r !== 'other' && !matchable.has(r) && !NON_INSTITUTION_MATCHABLE.has(r),
+    );
+    expect(dead, `faction roles that can match NO institution and are not allowlisted: ${JSON.stringify(dead)}`).toEqual([]);
   });
 });
 

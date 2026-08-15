@@ -10,8 +10,8 @@
  *
  * This proves the lifecycle events fire the notify path (the path is invoked on
  * create / assigned / waiting_on_user / resolution / closed / reopened / reply),
- * and that the notify path SOFT-FAILS (never throws) so a Resend outage can't
- * break a ticket action.
+ * and that the notify path SOFT-FAILS (never throws) so a mail-provider outage
+ * can't break a ticket action.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -60,8 +60,13 @@ describe('A5 — ticket email lifecycle wiring (admin-actions)', () => {
   });
 
   it('notifyTargetEmail resolves the target email server-side and soft-fails', () => {
-    // Reused A4 helper: service-role-resolved address, soft-fail on unconfigured.
+    // Reused A4 helper: service-role-resolved address, provider-neutral delivery,
+    // and a controlled soft-fail result when no mail provider is configured.
     expect(adminSrc).toMatch(/const notifyTargetEmail = async/);
-    expect(adminSrc).toMatch(/if \(!apiKey \|\| !fromEmail\) return false/);
+    expect(adminSrc).toMatch(/const deliverTargetEmail = async/);
+    expect(adminSrc).toMatch(/if \(!mailer\.configured\)/);
+    expect(adminSrc).toMatch(
+      /return \{ status: "skipped", sent: false, reason: "provider_unconfigured"/,
+    );
   });
 });

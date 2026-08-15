@@ -1,7 +1,7 @@
 /**
  * domain/factionProfile.js — Structured faction profile derivation.
  *
- * Today's faction objects are flat:
+ * Tier 4.1 of the roadmap. Today's faction objects are flat:
  *   { faction: string, power: number, desc: string }
  *
  * That's enough to display a power bar but not enough to drive event
@@ -33,14 +33,83 @@
 import { factionArchetype, FACTION_ARCHETYPES as FA } from './factionArchetypes.js';
 import { governanceLedger } from './governanceLedger.js';
 
-import { snakeCase } from './ids.js';
+/**
+ * The flat legacy faction record the generator emits (all fields optional —
+ * this module is tolerant of partial shapes).
+ * @typedef {Object} FactionLike
+ * @property {string} [faction]  legacy name field
+ * @property {string} [name]
+ * @property {number} [power]
+ * @property {string} [desc]
+ * @property {boolean} [isGoverning]
+ * @property {string[]} [controlsInstitutionIds]
+ */
+
+/**
+ * The slice of powerStructure/power this module reads.
+ * @typedef {Object} PowerBlock
+ * @property {string} [governingName]
+ * @property {string} [governingFactionName]
+ * @property {{ score?: unknown, label?: unknown }|number|null} [publicLegitimacy]
+ * @property {FactionLike[]} [factions]
+ */
+
+/**
+ * The slice of a settlement this module reads.
+ * @typedef {Object} SettlementCtx
+ * @property {PowerBlock|null} [powerStructure]
+ * @property {PowerBlock|null} [power]
+ * @property {FactionLike[]} [factions]
+ */
+
+/**
+ * @typedef {'government'|'military'|'merchant'|'religious'|'criminal'|'arcane'|'craft'|'occupation'|'other'} ProfileArchetype
+ */
+
+/**
+ * @typedef {Object} ArchetypeTemplate
+ * @property {string[]} wants
+ * @property {string[]} fears
+ * @property {string[]} leverage
+ * @property {string[]} vulnerabilities
+ * @property {Record<string, string>} resources  band values: low / medium / high
+ */
+
+/**
+ * @typedef {Object} FactionProfile
+ * @property {string} id
+ * @property {string} name
+ * @property {ProfileArchetype} archetype
+ * @property {number} power
+ * @property {number} legitimacy
+ * @property {Record<string, string>} resources
+ * @property {string[]} wants
+ * @property {string[]} fears
+ * @property {string[]} leverage
+ * @property {string[]} vulnerabilities
+ * @property {string} [desc]
+ * @property {string[]} controlsInstitutionIds
+ */
+
 // Small inline id helper — derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
 // across into src/lib (which is outside the domain tsconfig include).
 // Matches the format produced by src/lib/entities.js#idOf so consumers
 // querying traces by id see the same shape from both call paths.
-/** @param {any} s @returns {string} */
-/** @param {any} name @returns {string} */
+/**
+ * @param {string} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s)
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase();
+}
+/**
+ * @param {string} name
+ * @returns {string}
+ */
 function factionIdFromName(name) {
   return `faction.${snakeCase(name)}`;
 }
@@ -55,6 +124,7 @@ function factionIdFromName(name) {
 // correctly 'criminal'.
 
 /** canonical archetype → factionProfile's local archetype vocabulary. */
+/** @type {Readonly<Record<string, ProfileArchetype>>} */
 const CANONICAL_TO_PROFILE = Object.freeze({
   [FA.GOVERNMENT]: 'government', [FA.NOBLE]: 'government', [FA.CIVIC]: 'government',
   [FA.MILITARY]: 'military', [FA.MERCHANT]: 'merchant', [FA.RELIGIOUS]: 'religious',
@@ -67,20 +137,21 @@ const CANONICAL_TO_PROFILE = Object.freeze({
  * Archetype for a faction, in factionProfile's local vocabulary
  * (occupation/criminal/arcane/religious/military/merchant/craft/government/other).
  * Delegates detection to the canonical factionArchetype() so every layer agrees.
- * @param {import('./settlement.schema.js').SimFaction} faction
- * @returns {string}
+ * @param {FactionLike|string|null|undefined} faction
+ * @returns {ProfileArchetype}
  */
 export function deriveFactionArchetype(faction) {
   if (!faction) return 'other';
-  return /** @type {Record<string, string>} */ (CANONICAL_TO_PROFILE)[factionArchetype(faction)] || 'other';
+  return CANONICAL_TO_PROFILE[factionArchetype(faction)] || 'other';
 }
 
 // ── Archetype templates ──────────────────────────────────────────────────
 // Default profile data per archetype. These are reasonable starting
-// values that consumers can refine or override later (custom
+// values that consumers can refine or override later (Tier 4.16 custom
 // user content adopts the same shape). The roadmap calls out
 // resource-band values explicitly: low / medium / high.
 
+/** @type {Readonly<Record<string, ArchetypeTemplate>> & { other: ArchetypeTemplate }} */
 const ARCHETYPE_TEMPLATES = Object.freeze({
   government: {
     wants:    ['maintain authority', 'collect taxes / tribute', 'preserve order'],
@@ -150,10 +221,11 @@ const ARCHETYPE_TEMPLATES = Object.freeze({
 /**
  * Look up the archetype template. Returns 'other' for unknown values.
  * Read-only — returns a shallow clone so callers can safely customize.
- * @param {any} archetype
+ * @param {string} archetype
+ * @returns {ArchetypeTemplate}
  */
 export function templateForArchetype(archetype) {
-  const t = /** @type {Record<string, any>} */ (ARCHETYPE_TEMPLATES)[archetype] || ARCHETYPE_TEMPLATES.other;
+  const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.other;
   // Shallow clone (with deeper clones for array/object fields) so a
   // consumer modifying `wants` doesn't pollute the frozen template.
   return {
@@ -170,11 +242,15 @@ export function templateForArchetype(archetype) {
 // powerStructure. Per-faction legitimacy doesn't exist as a stored
 // field yet, so we approximate: the governing faction inherits the
 // settlement's public legitimacy score; non-governing factions get a
-// neutral 50 (middle band). When faction relationship
-// updates after events land, this derivation will be the place
+// neutral 50 (middle band). When Tier 4.2 (faction relationship
+// updates after events) lands, this derivation will be the place
 // where event-driven legitimacy adjustments aggregate.
 
-/** @param {import('./settlement.schema.js').SimFaction} faction @param {import('./settlement.schema.js').SimSettlement} [settlement] @returns {number} */
+/**
+ * @param {FactionLike|string} faction
+ * @param {SettlementCtx|null|undefined} settlement
+ * @returns {number}
+ */
 function legitimacyFor(faction, settlement) {
   const power = settlement?.powerStructure || settlement?.power;
   if (!power) return 50;
@@ -187,14 +263,15 @@ function legitimacyFor(faction, settlement) {
   // matched a "Merchant League" government; "Noble Families" matched every
   // "Noble Governorship"). The roster isGoverning flag wins when present.
   const isGoverning = (typeof faction === 'object' && faction?.isGoverning === true)
-    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase());
+    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase())
+    || power.governingFactionName === factionName;
 
   // Governing faction inherits the settlement's public legitimacy via the conserved
   // governance ledger (handles the { score } object + legacy bare number uniformly).
   const gov = governanceLedger(settlement);
   if (isGoverning && gov.present) return gov.legitimacyScore;
 
-  // Non-governing factions: neutral baseline. Future work
+  // Non-governing factions: neutral baseline. Future Tier 4.2 work
   // will shift this based on whether the faction is sponsoring relief,
   // pursuing scandals, etc.
   return 50;
@@ -209,11 +286,11 @@ function legitimacyFor(faction, settlement) {
  * produces the same output. Lossless on the input fields — `power`,
  * `desc`, etc. are preserved on the returned profile.
  *
- * @param {import('./settlement.schema.js').SimFaction} faction
- * @param {import('./settlement.schema.js').SimSettlement} [settlement]   Optional context for legitimacy
+ * @param {FactionLike|string} faction
+ * @param {SettlementCtx} [settlement]   Optional context for legitimacy
  *                                derivation. If omitted, legitimacy
  *                                falls back to 50 (neutral).
- * @returns {any} The enriched profile.
+ * @returns {FactionProfile|null} The enriched profile.
  */
 export function deriveFactionProfile(faction, settlement) {
   if (!faction) return null;
@@ -244,7 +321,7 @@ export function deriveFactionProfile(faction, settlement) {
     // Preserve everything else off the legacy object so consumers
     // currently reading `faction.desc` etc. keep working.
     ...(typeof faction === 'object' ? { desc: faction.desc } : {}),
-    // : preserve controlsInstitutionIds so the explanation
+    // Phase 19: preserve controlsInstitutionIds so the explanation
     // module can answer "which factions control this institution?"
     // without reaching into the raw faction list separately.
     controlsInstitutionIds: (typeof faction === 'object' && Array.isArray(faction.controlsInstitutionIds))
@@ -257,8 +334,15 @@ export function deriveFactionProfile(faction, settlement) {
  * Convenience: enrich every faction on a settlement into a structured
  * profile. Useful for the PipelineRail / PDF faction section that
  * wants to render the whole roster.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {any[]}
+ *
+ * Nullish roster rows (which `deriveFactionProfile` maps to null) are
+ * dropped, so the result is a dense `FactionProfile[]` — no consumer
+ * needs to null-guard elements. Consumers key on `profile.id`/`.name`,
+ * never on positional alignment with the raw faction list, so filtering
+ * is safe. On well-formed settlements the generator never emits nullish
+ * rows, so this is a no-op there.
+ * @param {SettlementCtx|null|undefined} settlement
+ * @returns {FactionProfile[]}
  */
 export function deriveAllFactionProfiles(settlement) {
   if (!settlement) return [];
@@ -266,5 +350,11 @@ export function deriveAllFactionProfiles(settlement) {
                 || settlement.power?.factions
                 || settlement.factions
                 || [];
-  return factions.map(/** @param {any} f */ f => deriveFactionProfile(f, settlement));
+  /** @type {FactionProfile[]} */
+  const out = [];
+  for (const f of factions) {
+    const profile = deriveFactionProfile(f, settlement);
+    if (profile) out.push(profile);
+  }
+  return out;
 }

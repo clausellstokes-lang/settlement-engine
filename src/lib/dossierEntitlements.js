@@ -23,7 +23,7 @@
  * a durable right (the right references the saves table).
  */
 
-import { supabase, isConfigured, withTimeout } from './supabase.js';
+import { supabase, isConfigured } from './supabase.js';
 
 /**
  * Whether the signed-in caller holds an ACTIVE durable export right on the
@@ -41,11 +41,7 @@ export async function fetchHasDossierEntitlement(saveId) {
   if (typeof saveId !== 'string' || saveId.trim() === '') return false;
 
   try {
-    const { data, error } = await withTimeout(
-      supabase.rpc('has_dossier_entitlement', { p_save_id: saveId.trim() }),
-      15000,
-      'Dossier entitlement check',
-    );
+    const { data, error } = await supabase.rpc('has_dossier_entitlement', { p_save_id: saveId.trim() });
     if (error) {
       console.error('[dossierEntitlements] has_dossier_entitlement failed:', error);
       return false; // fail closed — offer the purchase, never a free pass

@@ -1,35 +1,34 @@
 import { useState, useMemo } from 'react';
-import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, serif_, FS, SP, swatch } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, SP, swatch, EMPTY_VALUE, ANCHOR_OFFSET } from '../theme.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes';
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../generators/lookups.js';
-// REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
-// global-search index and these tabs render from one source of truth.
-import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
-// The Religion & the Pantheon catalog tab documents the deity axes
-// + their effects FROM THE SHARED SINGLE SOURCE (the same coupling strings the
-// engine + the dossier read), never hand-copied numbers.
-import { DEITY_AXIS_EFFECTS } from '../../domain/display/deityEffects.js';
-import { Tag, Row, Card } from './primitives.jsx';
+// THE REGISTRY-RENDER LAW: tiers, archetypes and relationships all render from the
+// generated drift-contract artifact (tiers from the engine's POPULATION_RANGES;
+// archetypes/relationships routed through from the authored catalogData taxonomy).
+// A divergent constant fails tests/docs/compendiumDataFreshness.test.js.
+import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
+import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 
-// REL_TYPES + ARCHETYPES are imported from '../../domain/compendium/catalogData.js'
-// (see import block above). CAT_COLORS stays here — it's display-only.
-//
-// Economic uses the darker gold-as-TEXT token (#7A5A1A, 6.16:1 on card): the
-// lighter #a0762a passes only as a fill/border, not as text (3.98:1, AA fail).
-// Tag renders both a tint fill AND coloured label text from the same value, so
-// the value must clear AA as text. Military/Religious/etc. already do.
+// Gold-as-TEXT clears AA only at the darker token (#7A5A1A, 6.16:1 on card); the
+// lighter #a0762a passes as a fill/border but FAILS as text (3.98:1). The Tag
+// label and the tier/route/threat name cells render this value as coloured TEXT,
+// so it must clear AA as text.
 const ECON_TXT = swatch['#7A5A1A'];
+// Archetypes + relationships render from the generated artifact CD (see import
+// block above). CAT_COLORS stays here — it's display-only.
 const CAT_COLORS = { Economic:ECON_TXT, Military:'#8b1a1a', Religious:'#1a4a2a', Magic:'#3a1a7a', Criminal:'#4a1a4a', Balanced:'#1a3a7a' };
+
+// Banded concepts render their full ladder from the generated artifact (every rung
+// NAMED + a one-line reading). A tab pulls only the ladders routed to it.
+const laddersFor = (tab) => (CD.bandLadders || []).filter((l) => l.tab === tab);
 
 // ── Tab content ─────────────────────────────────────────────────────────────
 
-// Section sub-heading inside the prose/row tabs. Builds hierarchy from >=2
-// channels (size FS.xl + weight + serif + the section's domain accent + a
-// left-accent rule) so a heading reads as a distinct level ABOVE its child
-// cards. At FS.lg it sat only 1px over the FS['14'] card titles and the
-// section/card tiers collapsed into one; FS.xl opens the gap and keeps the
-// intended intro / section / card three-tier system perceivable (P4).
+// Section sub-heading inside the prose/row tabs. Builds hierarchy from multiple
+// channels (FS.xl serif + weight + the section's domain accent + a left rule) so
+// a heading reads as a level ABOVE its child cards (P4) rather than sitting a
+// pixel over the card titles.
 function SectionHeading({ id, accent=INK, children }) {
   return (
     <div id={id} style={{ fontFamily:serif_, fontSize:FS.xl, fontWeight:700, color:accent, borderLeft:`3px solid ${accent}`, paddingLeft:8, margin:`${SP.xl}px 0 ${SP.sm}px` }}>
@@ -38,37 +37,51 @@ function SectionHeading({ id, accent=INK, children }) {
   );
 }
 
-export function TiersTab({ search='' }) {
-  const match = (a, b) => !search || a.toLowerCase().includes(search) || b.toLowerCase().includes(search);
-  // Color column is the row's NAME text color → must clear AA. The gold rows
-  // use the darker gold-as-text token (#7A5A1A) rather than #a0762a, which fails
-  // AA as text. Hamlet/Dangerous gold likewise step to a legible darker gold.
-  const ECON_TXT = swatch['#7A5A1A'];
-  const tiers = [['Thorp','20-80','#8b1a1a','Single institution. Subsistence only.'],['Hamlet','80-400','#8a5010','2-3 institutions. Local subsistence. Minimal trade.'],['Village','400-900',ECON_TXT,'4-6 institutions. Surplus production begins. Weekly market.'],['Town','900-4,000','#1a5a28','7-10 institutions. Specialization appears. Guilds form.'],['City','4,000-25,000','#1a3a7a','11-14 institutions. Full institutional diversity. Factional politics.'],['Metropolis','25,000+','#4a1a6a','15+ institutions. All systems active. Complex faction dynamics.']].filter(([name,,,desc])=>match(name,desc));
-  const routes = [['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.',ECON_TXT],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].filter(([name,desc])=>match(name,desc));
-  const threats = [['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.',ECON_TXT],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].filter(([name,desc])=>match(name,desc));
+// Per-tier display metadata — the population BANDS render from CD.tiers (the engine
+// POPULATION_RANGES, corrected: the old inline bands were wrong, e.g. Thorp 20-80 vs
+// the real 8-60). Only the colour + institution-count prose stays authored here.
+const TIER_META = {
+  thorp:      { color:'#8b1a1a', desc:'Single institution. Subsistence only.' },
+  hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
+  village:    { color:ECON_TXT, desc:'4-6 institutions. Surplus production begins. Weekly market.' },
+  town:       { color:'#1a5a28', desc:'7-10 institutions. Specialization appears. Guilds form.' },
+  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Factional politics.' },
+  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex faction dynamics.' },
+};
+
+export function TiersTab({ _search='' }) {
   return <>
     <p id="tiers" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
     </p>
-    {/* Rows sit on whitespace, not per-row hairlines — clusters emerge from
-        the larger gap before each SectionHeading instead. */}
-    {tiers.map(([name,pop,color,desc])=>(
-      <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', alignItems:'flex-start' }}>
-        <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color}}>{name}</div><div style={{fontSize:FS.xs,color:BODY}}>{pop} pop.</div></div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</div>
-      </div>))}
-    {routes.length > 0 && <SectionHeading id="trade-routes" accent={swatch['#A0762A']}>Trade Route Access</SectionHeading>}
-    {routes.map(([name,desc,color])=>(
-      <div key={name} style={{ display:'flex', gap:10, padding:'6px 0' }}>
+    {CD.tiers.map((t)=>{
+      const meta = TIER_META[t.id] || { color:GOLD, desc:'' };
+      const pop = `${t.min.toLocaleString()}–${t.max.toLocaleString()}`;
+      return (
+      <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
+        <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{meta.desc}</div>
+      </div>);
+    })}
+    <SectionHeading id="trade-routes" accent={swatch['#A0762A']}>Trade Route Access</SectionHeading>
+    {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.',ECON_TXT],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
+      <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
-    {threats.length > 0 && <SectionHeading id="threat" accent={swatch['#8B1A1A']}>Monster Threat</SectionHeading>}
-    {threats.map(([name,desc,color])=>(
-      <div key={name} style={{ display:'flex', gap:10, padding:'6px 0' }}>
+    <SectionHeading id="threat" accent={swatch['#8B1A1A']}>Monster Threat</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>The regional threat set at generation. The engine has three arms (heartland, frontier, plagued).</p>
+    {[['Safe Heartland','Monsters are rumor. Civilian institutions dominate and the militia is law enforcement.','#1a5a28'],['Active Frontier','A managed, active threat. Walls and garrison are elevated; raids and patrols are routine.',ECON_TXT],['Embattled Region','Active war or monster pressure. The militia is the most important institution, and crisis conditions hold.','#8b1a1a']].map(([name,desc,color])=>(
+      <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
+      </div>))}
+    <SectionHeading id="terrain" accent={INK}>Terrain</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>Terrain steers which resources are nearby, how far a settlement leans on imported food, and which calamity flavour it draws.</p>
+    {CD.terrain.map((t)=>(
+      <div key={t.id} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:INK, minWidth:110, flexShrink:0, textTransform:'capitalize' }}>{t.id}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{t.reading}</span>
       </div>))}
   </>;
 }
@@ -76,36 +89,38 @@ export function TiersTab({ search='' }) {
 export function EconomyTab() {
   return <>
     <div id="economy" />
-    {/* Italic descriptor lead-in, the per-category one-liner that sets the
-        section's frame before its cards. Reuses the FS.xs / BODY / italic
-        pattern the prose tabs already use for sub-labels. */}
+    {/* Italic descriptor lead-in — the per-tab one-liner that frames the section
+        before its cards. */}
     <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 12px' }}>
       How prosperity is produced, traded, and stressed.
     </div>
-    {/* The lead concept — prosperity is an OUTPUT, not a dial — is the focal
-        tier; the remaining cards are the quieter supporting set (P4). */}
-    <Card title="Prosperity Tiers" accent={GOLD} lead>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
-    <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
-    <Card title="Exports and Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
-    <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
-    <Card title="Viability Score" accent='#8b1a1a'>Economic stress analysis showing which factors are supporting prosperity and which are fragile.</Card>
+    {/* The lead concept — prosperity is an OUTPUT, not a dial — renders its full
+        ladder: every rung named with how a settlement at that rung reads (P4). */}
+    {/* Prosperity (output), Priority Bands (the slider grading), Chain Status (the
+        chain-chip vocabulary), and the Coherence Check verdicts all render as
+        ladders from CD.bandLadders. The owner's four Economy examples used to be
+        one-sentence cards that named vocabulary they never enumerated. */}
+    {laddersFor('economy').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
+    <Card title="Exports & Imports" accent='#1a5a28'>Exports are a settlement's surplus production; imports are the gaps its own chains cannot cover. Each trade dependency is graded vulnerable (it leans on open trade routes, so a siege or blockade would impair it) or critical (already under stress or effectively isolated, running on stockpiles). Import capacity follows the trade route: highest for a port, then crossroads, river, and road, and lowest when isolated.</Card>
   </>;
 }
 
 export function PowerTab_({ search='' }) {
-  const cats = ['All','Economic','Military','Religious','Criminal','Magic','Balanced'];
+  const cats = ['All', ...CD.archetypes.categories];
   const [cat, setCat] = useState('All');
-  // A routed global-search jump (search prop present) must reveal its target
-  // regardless of a stale local category filter, or the AND below could land the
-  // reader on an empty grid — a dead first click (P8). We derive the effective
-  // category instead of mutating state in an effect: an active search forces
-  // 'All', and the picker still reflects the user's pick once search clears.
+  // Dead-first-click guard: a routed global-search jump (search prop present)
+  // must reveal its target regardless of a stale local category filter, or the
+  // AND below could land the reader on an empty grid — a dead first click (P8).
+  // We derive the effective category instead of mutating state in an effect: an
+  // active search forces 'All', and the picker still reflects the user's pick
+  // once search clears.
   const effectiveCat = search ? 'All' : cat;
-  const filtered = ARCHETYPES.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
+  const filtered = CD.archetypes.entries.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A faction's power starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
-      {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={effectiveCat===c?'gold':'secondary'} size="sm" aria-pressed={effectiveCat===c}>{c}</Button>)}
+      {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={effectiveCat===c?'primary':'ghost'} size="sm" aria-pressed={effectiveCat===c}>{c}</Button>)}
     </div>
     {filtered.length === 0 ? (
       <div style={{ padding:'20px 16px', textAlign:'center' }}>
@@ -115,122 +130,67 @@ export function PowerTab_({ search='' }) {
     ) : (
     <div id="archetypes" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:8 }}>
       {filtered.map(a => (
-        <div key={a.name} style={{ borderLeft:`3px solid ${CAT_COLORS[a.cat]||GOLD}`, borderRadius:7, padding:'10px 12px', background:'rgba(255,251,245,0.95)' }}>
+        <div key={a.name} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${CAT_COLORS[a.cat]||GOLD}`, padding:'10px 12px' }}>
           <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:4 }}>
             <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{a.name}</span>
             <Tag label={a.cat} color={CAT_COLORS[a.cat]||GOLD}/>
           </div>
-          <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
+          <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
           <div style={{ fontSize: FS['11.5'], color:SEC, lineHeight:1.5 }}>{a.desc}</div>
         </div>))}
     </div>
     )}
+    {/* How far a criminal interest has taken a seat of power: the capture ladder.
+        id="power" so the glossary capture-rung lifeline lands on the ladder itself. */}
+    <div id="power" style={{ marginTop:16, scrollMarginTop:ANCHOR_OFFSET }}>
+      {laddersFor('power').map((l) => (
+        <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
+    </div>
+    <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
+    <SectionHeading accent={INK}>Governance stability</SectionHeading>
+    {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'8px 0 0' }}>{CD.governance.note}</p>
+    <SectionHeading accent={INK}>How power changes hands</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>{CD.powerStructure.note}</p>
+    {CD.powerStructure.transferCauses.map((c)=>(<Row key={c.id} label={c.label} lw={130}>{c.reading}</Row>))}
+    <SectionHeading accent={INK}>How corruption moves</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>{CD.corruption.note}</p>
+    {CD.corruption.vectors.map((v)=>(<Row key={v.label} label={v.label} lw={130}>{v.reading}</Row>))}
   </>;
 }
 
-const DEITY_ACCENT = swatch['#7A5A1A'];
-
-// The three deity axes documented for the catalog, each effect string pulled
-// from the SHARED single source (DEITY_AXIS_EFFECTS) so the reference never
-// drifts from the engine. Axis label + the per-value effect copy.
-const PANTHEON_AXES = [
-  {
-    axis: 'Alignment', sub: 'good / evil / neutral → corruption',
-    rows: [
-      ['Good', DEITY_AXIS_EFFECTS.alignment.good.effect],
-      ['Evil', DEITY_AXIS_EFFECTS.alignment.evil.effect],
-      ['Neutral', 'No pull on corruption.'],
-    ],
-  },
-  {
-    axis: 'Temperament', sub: 'warlike / peacelike / neutral → aggression',
-    rows: [
-      ['Warlike', DEITY_AXIS_EFFECTS.temperament.warlike.effect],
-      ['Peacelike', DEITY_AXIS_EFFECTS.temperament.peacelike.effect],
-      ['Neutral', "No pull on the realm's aggression."],
-    ],
-  },
-  {
-    axis: 'Rank', sub: 'major / minor / cult → religious authority (+ magic legality)',
-    rows: [
-      ['Major', `${DEITY_AXIS_EFFECTS.rank.major.effect}. Only a major god also tightens magic legality (a warlike/evil major makes magic openly opposed).`],
-      ['Minor', DEITY_AXIS_EFFECTS.rank.minor.effect],
-      ['Cult', DEITY_AXIS_EFFECTS.rank.cult.effect],
-    ],
-  },
-];
-
-// Religion & the Pantheon — replaces the stale "Magic & Religion"
-// tab. Documents the three deity axes + their effects (from the shared source),
-// the dormant-until-assigned model, the conversion contest, tiers, and the
-// Ascendancy / Twilight arcs. Keeps the legacy `#magic` anchor so search index
-// + ANCHOR_TO_TAB deep-links still land here.
 export function ArcaneTab() {
+  const faith = CD.faith;
   return <>
-    <div id="magic" />
-    <p id="religion" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
-      A homebrew pantheon steers the living world through three frozen axes. A god is
-      <strong> dormant</strong> until you assign it as a settlement&rsquo;s primary deity and turn on
-      Religion dynamics. Until then it changes nothing (byte-identical to a deity-free world).
-    </p>
-
-    {PANTHEON_AXES.map(({ axis, sub, rows }) => (
-      <div key={axis} style={{ marginBottom:SP.lg }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.xl, fontWeight:700, color:DEITY_ACCENT, borderLeft:`3px solid ${DEITY_ACCENT}`, paddingLeft:8 }}>{axis}</div>
-        <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'2px 0 4px', paddingLeft:8 }}>{sub}</div>
-        {rows.map(([k, v]) => (
-          <div key={k} style={{ display:'flex', gap:10, padding:'4px 0 4px 8px' }}>
-            <span style={{ fontSize:FS.xs, fontWeight:700, color:DEITY_ACCENT, minWidth:70, flexShrink:0 }}>{k}</span>
-            <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{v}</span>
-          </div>
-        ))}
-      </div>
-    ))}
-
-    <SectionHeading accent={DEITY_ACCENT}>The conversion contest</SectionHeading>
-    {/* The dormant-until-assigned rule is the gating concept the rest of the
-        contest depends on, so it leads as the one focal card here (P4). */}
-    <Card title="Dormant until assigned" accent={DEITY_ACCENT} lead>A deity only acts once it is a settlement&rsquo;s primary god (the embed-on-assign bridge) AND the campaign&rsquo;s Religion-dynamics rule is on. No assignment, no effect.</Card>
-    <Card title="Contesting converts" accent='#1a4a2a'>With religion dynamics on, neighbouring faiths contest each tick. Alignment-direction match, warlike posture, and rank weight the pull. A winning faith gains seats; a losing one cedes them.</Card>
-    <Card title="Tiers (major / minor / cult)" accent='#3a1a7a'>Rank scales how hard a god anchors religious authority and whether it regulates magic. A major pantheon-head outweighs a fringe cult.</Card>
-    <Card title="Ascendancy and Twilight arcs" accent='#5a2a8a'>A faith that keeps winning rises through an <em>Ascendancy</em> arc (more seats, firmer orthodoxy); one that keeps losing slides into a <em>Twilight</em> arc toward irrelevance.</Card>
-
-    <SectionHeading accent={swatch.magic}>Magic and faith interplay (generation)</SectionHeading>
-    <Card title="Magic Suppression" accent='#5a2a8a'>Sliders run 0 to 100. Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
-    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic buffers deficits. Arcane institutions can substitute for missing production.</Card>
-    <Card title="Magic and Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
-  </>;
-}
-
-// Living World — the missing static→living-world bridge in the
-// reference catalog. Five plain-language groups documenting the simulation
-// substrate the generator feeds into once a campaign runs.
-const LIVING_WORLD_GROUPS = [
-  ['Causal Substrate', '#1a3a7a',
-    'Sixteen canonical variables (legitimacy, food security, unrest, religious authority, …) the engine carries per settlement. Generation seeds them; each advance re-derives them from prior state, never wall-clock.'],
-  ['Pressures and Strength', '#a0762a',
-    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. They roll up into a single defend-or-yield signal that drives strategy.'],
-  ['World Pulse', '#1a5a28',
-    'The per-tick advance: stressors fire, populations and trade drift, institutions are born and die, proposals queue for the DM. Off-by-default toggles keep a peacetime save byte-identical.'],
-  ['War Layer', '#8b1a1a',
-    'Armies march, sieges form, conquests change rulers; warExhaustion rises until a self-ending peace. Entirely dormant unless the War-layer rule is enabled.'],
-  ['Religion and Pantheon', DEITY_ACCENT,
-    'Assigned deities contest converts, gain seats, and steer corruption / aggression / magic legality through their axes. Dormant until a primary deity is assigned and Religion dynamics are on.'],
-];
-
-export function LivingWorldTab() {
-  return <>
-    <p id="living-world" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
-      The generator builds a town in seconds; the <strong>living world</strong> then runs the region for
-      years. These are the systems that wake up once a campaign advances. Each is opt-in, off by default,
-      and silent for a non-campaign save.
-    </p>
-    {/* The causal substrate is the load-bearing concept (the variables every
-        other system reads/writes), so it leads as the one focal card; the rest
-        are the quieter supporting set (P4). */}
-    {LIVING_WORLD_GROUPS.map(([title, accent, body], i) => (
-      <Card key={title} title={title} accent={accent} lead={i === 0}>{body}</Card>
-    ))}
+    {/* THE DEITY AXES lead the tab (owner doctrine: no premade roster; a custom
+        deity is authored on these four axes, projected from DEITY_AXIS_EFFECTS). */}
+    <SectionHeading id="faith" accent={INK}>Deities: the four axes</SectionHeading>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>{faith.authorship}</p>
+    {faith.axes.map((a) => (
+      <div key={a.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
+        <div style={{ fontSize:FS.md, fontWeight:700, color:INK, marginBottom:3 }}>{a.label}{a.derived ? ' (derived)' : ''}</div>
+        {a.lines.map((line, i) => (
+          <div key={i} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{line}</div>))}
+      </div>))}
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, margin:'8px 0 0' }}>{faith.temperNote}</p>
+    {laddersFor('arcane').filter((l) => l.anchor === 'faith').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
+    <SectionHeading id="magic" accent={INK}>Magic</SectionHeading>
+    {laddersFor('arcane').filter((l) => l.anchor === 'magic').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
+    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. When the magic dial permits, four traditions can substitute for missing production, druidic strongest, then divine, arcane, and alchemical. Magical transport carries necessities through a blockade: a teleportation circle at full strength, an airship at half.</Card>
+    <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
+    <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
+    <Card title="Religion & Governance" accent='#1a4a2a'>Religion 72+ with low Military produces Theocracy. With strong Crime produces Religious Fraud.</Card>
+    <Card title="Magic & Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+    <SectionHeading id="cultures" accent={INK}>Cultures</SectionHeading>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 8px' }}>{CD.cultures.note}</p>
+    <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
+      {CD.cultures.values.map((c)=>(
+        <span key={c.id} style={{ fontSize:FS.xs, fontWeight:700, color:INK, background:`${GOLD}14`, padding:'2px 8px' }}>{c.label}</span>))}
+    </div>
   </>;
 }
 
@@ -243,24 +203,32 @@ export function StressTab({ search='' }) {
     { label:'Political Fracture', description:'Governance contested. Multiple factions claim legitimacy.' },
   ];
   return <>
-    <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, borderRadius:7, marginBottom:12 }}>
+    <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, marginBottom:12 }}>
       <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
     </div>
-    {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
-      <div key={s.label||s.id} style={{ padding:'6px 0' }}>
+    {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
+      <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
-        {(s.description||s.desc) && <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc}</div>}
+        {/* The mechanical body is the stress type's viabilityNote (what it does to the
+            settlement); the crisisHook is the ready-at-the-table scene. Neither field
+            was rendered before, so every row showed a bare EMPTY_VALUE dash. */}
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.viabilityNote||s.description||s.desc||EMPTY_VALUE}</div>
+        {s.crisisHook && <div style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, marginTop:4 }}>At the table: {s.crisisHook}</div>}
       </div>))}
+    {/* How the resulting state reads: the settlement-stability and capacity-strain ladders. */}
+    <SectionHeading accent={INK}>Reading a Settlement</SectionHeading>
+    {laddersFor('stress').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
   </>;
 }
 
 export function NeighbourTab({ search='' }) {
   return <>
     <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
-    {REL_TYPES.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
-      <div key={r.id} style={{ display:'flex', gap:10, padding:'6px 0', alignItems:'flex-start' }}>
-        <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
+    {CD.relationships.entries.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
+      <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
     <SectionHeading accent={INK}>Cross-Settlement Systems</SectionHeading>
@@ -268,8 +236,8 @@ export function NeighbourTab({ search='' }) {
   </>;
 }
 
-export function InstitutionsTab({ search }) {
-  // Catalog load can throw (the live lookups read generated data). We track the
+export function InstitutionsTab({ _config, search }) {
+  // Catalog load can throw (the live lookups read generated data). Track the
   // failure explicitly so a load FAILURE is distinguishable from a zero-result
   // SEARCH below — otherwise both render the same "no matches" copy and the
   // reader is told to clear a search that isn't the problem (P10).
@@ -288,7 +256,7 @@ export function InstitutionsTab({ search }) {
   }, [catalog]);
   // Economy uses the gold-as-text token (#7A5A1A): catColors is the Tag color,
   // which renders as label TEXT, so #a0762a (AA fail as text) can't be used here.
-  const catColors = { Economy:swatch['#7A5A1A'], Military:'#8b1a1a', Magic:'#3a1a7a', Religion:'#1a4a2a', Criminal:'#4a1a4a', 'Government/Admin':'#1a3a7a' };
+  const catColors = { Economy:ECON_TXT, Military:'#8b1a1a', Magic:'#3a1a7a', Religion:'#1a4a2a', Criminal:'#4a1a4a', 'Government/Admin':'#1a3a7a' };
   const filtered = useMemo(() => {
     if (!search) return all.slice(0, 48);
     const q = search.toLowerCase();
@@ -307,8 +275,7 @@ export function InstitutionsTab({ search }) {
     );
   }
   return <>
-    {/* Italic descriptor lead-in, the per-category one-liner above the entry
-        list. Reuses the FS.xs / BODY / italic sub-label pattern. */}
+    {/* Italic descriptor lead-in, the one-liner above the entry list. */}
     <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 8px' }}>
       Every institution the simulator can generate, and what selects it.
     </div>
@@ -319,6 +286,9 @@ export function InstitutionsTab({ search }) {
         ? <><strong>{filtered.length}</strong> results</>
         : <>Showing first <strong>48</strong> of <strong>{all.length}</strong> institutions. Use search to filter.</>}
     </p>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
+      Each entry rolls a base chance shifted by the matching priority slider band; a Core entry always generates.
+    </p>
     {filtered.length === 0 ? (
       <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:BODY }}>
         No institutions match your search. Clear the search box above to see the full catalog.
@@ -326,7 +296,7 @@ export function InstitutionsTab({ search }) {
     ) : (
     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:6 }}>
       {filtered.map(inst => (
-        <div key={inst.name} style={{ borderLeft:`3px solid ${catColors[inst.category]||GOLD}`, borderRadius:6, padding:'8px 10px', background:'rgba(255,251,245,0.95)' }}>
+        <div key={inst.name} style={{ border:`1px solid ${BOR}`, padding:'8px 10px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
             <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{inst.name}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}

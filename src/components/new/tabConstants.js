@@ -1,25 +1,14 @@
-import { Home, Beer, Sword, Sparkles, ScrollText, Cross, Ship, Scale, Drama, ClipboardList, VenetianMask } from 'lucide-react';
 import { swatch } from '../theme.js';
-import useIsMobile, { getIsMobile } from '../../hooks/useIsMobile.js';
 // Shared constants for all tab components
 
-// Reactive mobile flag for the dossier tabs. Earlier this was a plain
-// `getIsMobile()` read taken once at render, so a rotate/resize across the 640
-// breakpoint left the tab stacked the wrong way until the next unrelated
-// re-render. Tabs now consume the shared `useIsMobile` store via this thin
-// re-export, so they re-render the instant the breakpoint flips — the same
-// reactive source Buttons/IconButtons already read.
-//
-// It is a hook: call it unconditionally at the top of a component, before any
-// early return (React rules of hooks). The lint `use`-prefix convention is
-// satisfied by the export name below.
-export const useIsMobileTab = () => useIsMobile(640);
+// F28 — the old `isMobile = () => window.innerWidth < 640` helper was a
+// non-reactive one-shot read: it never re-evaluated on resize/rotate, so a tab
+// laid out for desktop stayed desktop after the viewport narrowed (and vice
+// versa). All consumers now use the reactive `useIsMobile` hook
+// (src/hooks/useIsMobile.js), which subscribes to window resize. The export was
+// removed once the last call site migrated — reach for the hook, not a helper.
 
-// Non-reactive synchronous read, kept for the rare non-React caller that only
-// needs a one-shot value (no subscription). Prefer `useIsMobileTab` in render.
-export const isMobile = () => getIsMobile(640);
-
-// ── BODY token ───────────────────────────────────────────────────────────────
+// ── Tier 7.19 — BODY token (sweep across components) ─────────────────────────
 // The tabs historically used a per-file `const second=swatch['#6B5340']` for body
 // copy. Centralising it here means a future contrast adjustment is one edit,
 // not 13. The hex value matches the existing ink-mid brown so the visual
@@ -28,7 +17,12 @@ export const BODY = swatch['#6B5340'];
 export const PROSPERITY_COLORS = {Poverty:'#8b1a1a',Impoverished:'#8b1a1a',Struggling:'#8a4010',Poor:'#8a4010',Moderate:'#7a5010',Modest:'#7a5010',Comfortable:'#1a5a28',Prosperous:'#1a4a2a',Wealthy:'#1a5a28',Thriving:'#0a3a18'};
 export const EVENT_COLORS = {disaster:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0',label:'Disaster'},political:{color:'#1a3a7a',bg:'#f4f6fd',border:'#c0cce8',label:'Political'},economic:{color:'#a0762a',bg:'#faf6ec',border:'#e0d0a0',label:'Economic'},religious:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8',label:'Religious'},magical:{color:'#2a5a8a',bg:'#f4f8fd',border:'#b8cce8',label:'Magical'}};
 export const SEV_COLORS = {minor:'#6b5340',major:'#a0762a',catastrophic:'#8b1a1a'};
-export const FACTION_COLORS = ['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a','#3a2a1a'];
+export const SERVICE_META = {lodging:{label:'Lodging',accent:'#2a3a7a',icon:'\u{1F3E0}'},food:{label:'Food & Drink',accent:'#1a5a28',icon:'\u{1F37A}'},equipment:{label:'Equipment',accent:'#a0762a',icon:'\u2694\uFE0F'},magic:{label:'Magical Services',accent:'#5a2a8a',icon:'\u2728'},information:{label:'Information',accent:'#1a5a6a',icon:'\u{1F4DC}'},healing:{label:'Healing',accent:'#8b1a1a',icon:'\u2695\uFE0F'},transport:{label:'Transportation',accent:'#2a4a7a',icon:'\u{1F40E}'},legal:{label:'Legal & Financial',accent:'#3a3a3a',icon:'\u2696\uFE0F'},entertainment:{label:'Entertainment',accent:'#7a3a1a',icon:'\u{1F3AD}'},employment:{label:'Employment',accent:'#1a4a2a',icon:'\u{1F4CB}'},criminal:{label:'Criminal Services',accent:'#3a1a1a',icon:'\u{1F5E1}\uFE0F',note:'Available if you know where to look'}};
+// Canonical index-keyed faction palette for the dossier. Single source of truth
+// for the Power tab's stacked faction bar and the Summary tab's faction bar —
+// both import this instead of forking their own arrays. (Consolidated from four
+// drifted copies; this is the dossier-canonical sequence the Power tab rendered.)
+export const FACTION_COLORS = ['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a','#3a1a6a','#6a3a1a'];
 export const REL_STYLES = {
   ally:           {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
   rival:          {color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},
@@ -41,18 +35,23 @@ export const REL_STYLES = {
   family:         {color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
 };
 export const relStyle = t => REL_STYLES[t] || {color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'};
+// Service categories. NO ICON FIELD (owner icon-sweep directive, 2026-08-03):
+// the eleven emoji pictograms that used to dress these rows are gone — the label
+// and the accent colour carry the category. Do not reintroduce an icon slot;
+// tests/lint/copyCorruption.test.js SIG 1 bans the empty-string form outright,
+// and tests/components/serviceCategoryIcons.test.jsx pins the absence of glyphs.
 export const Ts = {
-  lodging:     { label:'Lodging',           accent:'#2a3a7a', icon:Home },
-  food:        { label:'Food & Drink',      accent:'#1a5a28', icon:Beer },
-  equipment:   { label:'Equipment',         accent:'#a0762a', icon:Sword },
-  magic:       { label:'Magical Services',  accent:'#5a2a8a', icon:Sparkles },
-  information: { label:'Information',       accent:'#1a5a6a', icon:ScrollText },
-  healing:     { label:'Healing',           accent:'#8b1a1a', icon:Cross },
-  transport:   { label:'Transportation',    accent:'#2a4a7a', icon:Ship },
-  legal:       { label:'Legal & Financial', accent:'#3a3a3a', icon:Scale },
-  entertainment:{ label:'Entertainment',    accent:'#7a3a1a', icon:Drama },
-  employment:  { label:'Employment',        accent:'#1a4a2a', icon:ClipboardList },
-  criminal:    { label:'Criminal Services', accent:'#3a1a1a', icon:VenetianMask, note:'Available if you know where to look' },
+  lodging:     { label:'Lodging',           accent:'#2a3a7a' },
+  food:        { label:'Food & Drink',      accent:'#1a5a28' },
+  equipment:   { label:'Equipment',         accent:'#a0762a' },
+  magic:       { label:'Magical Services',  accent:'#5a2a8a' },
+  information: { label:'Information',       accent:'#1a5a6a' },
+  healing:     { label:'Healing',           accent:'#8b1a1a' },
+  transport:   { label:'Transportation',    accent:'#2a4a7a' },
+  legal:       { label:'Legal & Financial', accent:'#3a3a3a' },
+  entertainment:{ label:'Entertainment',    accent:'#7a3a1a' },
+  employment:  { label:'Employment',        accent:'#1a4a2a' },
+  criminal:    { label:'Criminal Services', accent:'#3a1a1a', note:'Available if you know where to look' },
 };
 
 

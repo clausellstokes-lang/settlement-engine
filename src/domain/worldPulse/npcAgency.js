@@ -1,11 +1,22 @@
+import { clamp01 } from '../../kernel/math.js';
 import { stablePart } from './worldState.js';
 import { relationshipRoles } from './relationshipEvolution.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
-  hasCorruptingDeity, npcDeityDisfavor,
-} from '../corruption.js';
+  hasCorruptingDeity, npcDeityDisfavor } from '../corruption.js';
+// THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
+// corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
+// this import adds nothing to first paint.
+import { resolveLeash } from '../corruptionLeash.js';
+// Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
+// pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
+// position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
+import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
+// H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
+import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
+import { NPC_GOAL_NEWS, pickLine } from './eventProse.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -173,10 +184,6 @@ const GOALS = [
 ];
 
 /** @param {any} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /**
  * @param {any} saveId
@@ -209,9 +216,20 @@ export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlement
     const vector = st.corruptionProfile?.vector || null;
     const ousted = !!st.ousted;
     const timesExposed = st.timesExposed || 0;
-    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted && (npc.timesExposed || 0) === timesExposed) return npc;
+    // W-DOCTRINE-3b — the foreign LEASH rides the SAME sync (the dual-write mirror
+    // discipline: the leash sits beside `corrupt` on BOTH sides of the settlement.npcs ↔
+    // npcStates seam). npcStates.corruptionLeash is written ONLY by the gated corruptionWeb
+    // mint — absent in every legacy world ⇒ this branch is inert ⇒ byte-identical. It carries
+    // onto corruptTies.leash so resolveLeash reads a minted asset exactly like a DM-composed one.
+    const leash = corrupt && st.corruptionLeash && typeof st.corruptionLeash === 'object' ? st.corruptionLeash : null;
+    const leashChanged = !!leash && JSON.stringify(npc.corruptTies?.leash ?? null) !== JSON.stringify(leash);
+    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted && (npc.timesExposed || 0) === timesExposed && !leashChanged) return npc;
     changed = true;
-    return { ...npc, corrupt, corruptionVector: vector, timesExposed, ...(ousted ? { ousted: true } : {}) };
+    return {
+      ...npc, corrupt, corruptionVector: vector, timesExposed,
+      ...(ousted ? { ousted: true } : {}),
+      ...(leashChanged ? { corruptTies: { ...(npc.corruptTies || {}), leash } } : {}),
+    };
   });
   return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }
@@ -224,14 +242,19 @@ function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
+// ⚠ THREE RUNGS WERE DELETED HERE, NOT DISABLED (2026-08-11) — the same three,
+// for the same reason, as disposition.importanceWeight, whose comment carries the
+// full census. This function and that one are DELIBERATE MIRRORS ("mirrors
+// npcAgency.notability so the agency layer and the disposition read the same
+// authored-importance ladder"), so they are repaired together or they drift.
+// `npc.notability` and `npc.dots` have no writer anywhere in this repo; the
+// `importance` arms short-circuit above them, so the deletion cannot change an
+// answer for any shape the estate produces.
 /** @param {import('../settlement.schema.js').SimNpc} npc */
 function notability(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
   if (npc.importance === 'notable') return 0.62;
-  if (npc.notability === 3 || npc.dots === 3) return 0.9;
-  if (npc.notability === 2 || npc.dots === 2) return 0.68;
-  if (npc.notability === 1 || npc.dots === 1) return 0.48;
   return 0.38;
 }
 
@@ -286,7 +309,9 @@ function pressureScore(pressureIdx, settlementId, kinds = []) {
  * @param {any} state
  */
 function settlementForState(snapshot, state) {
-  return (snapshot?.settlements || []).find((/** @type {any} */ item) => String(item.id) === String(state.settlementId)) || null;
+  // H17: O(1) id lookup (FIRST-wins, matching the prior linear .find) instead of an O(settlements)
+  // rescan per NPC state.
+  return settlementByIdIndex(snapshot).get(String(state.settlementId)) || null;
 }
 
 /**
@@ -296,10 +321,12 @@ function settlementForState(snapshot, state) {
 function dominantRelationshipContext(snapshot, settlementId) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sid = String(settlementId);
-  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+  // H17: iterate only the edges TOUCHING sid (edge-order preserved) instead of the whole graph per
+  // NPC state. The index keys on the normalized from/to the snapshot always carries, so every edge
+  // here satisfies the old `from === sid || to === sid` guard — it is dropped as a proven no-op.
+  for (const edge of edgeAdjacencyIndex(snapshot?.regionalGraph).get(sid) || []) {
     const from = String(edge.from || edge.source || '');
     const to = String(edge.to || edge.target || '');
-    if (from !== sid && to !== sid) continue;
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
     if (rel === 'vassal') {
@@ -667,13 +694,14 @@ export function relaxNpcStates(worldState) {
  * forked per (npc, tick) so replays are deterministic. No criminal institution →
  * no onset/exposure pressure (the rule).
  *
- * When `religionActive` (the caller's religionDynamicsEnabled +
- * isSubsystemActive gate) AND a settlement carries an embedded EVIL deity, the
- * onset gate is RELAXED (`hasCriminalInst || hasCorruptingDeity`) so the evil
- * deity can corrupt the faithful even in a crime-free town. A per-NPC,
- * bounded, centered-on-1.0 `deityDisfavor` then modulates the chosen knob (evil
- * → onset, good → exposure) by the NPC's AUTHORED alignment. `religionActive`
- * false (default) ⇒ deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
+ * When `religionActive` (the caller's deity-presence isSubsystemActive gate — a
+ * LOCAL faith effect, gated by deity presence ALONE post W-F1, not by any rule
+ * flag) AND a settlement carries an embedded EVIL deity, the onset gate is RELAXED
+ * (`hasCriminalInst || hasCorruptingDeity`) so the evil deity can corrupt the
+ * faithful even in a crime-free town. A per-NPC, bounded, centered-on-1.0
+ * `deityDisfavor` then modulates the chosen knob (evil → onset, good → exposure)
+ * by the NPC's AUTHORED alignment. `religionActive` false (deity-free) ⇒
+ * deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
  *
  * @param {any} worldState
  * @param {any} snapshot
@@ -688,7 +716,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
     // The embedded deity snapshot (only consulted when the religion layer is
-    // ACTIVE — religionDynamicsEnabled + isSubsystemActive).
+    // ACTIVE — the deity-presence isSubsystemActive gate; a LOCAL faith effect).
     // null ⇒ deityDisfavor stays 1.0 and the gate is unrelaxed ⇒ byte-identical.
     const deity = religionActive ? (item.settlement?.config?.primaryDeitySnapshot || null) : null;
     const corruptingDeity = religionActive && hasCorruptingDeity(item.settlement);
@@ -701,6 +729,10 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // a crime-free town ("the faithful are corrupted from within"). Additive
     // and 0 when no deity ⇒ a deity-free town is byte-identical.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeity;
+    // W-F3 site #7: the corruption-plane amplifier over the onset rate — a devout
+    // chaotic-evil patron makes the rot spread faster, a lawful-good one starves it.
+    // 1.0 for a deity-free / legacy 3-axis / non-devout settlement ⇒ byte-identical.
+    const planePressureMult = (deity ? corruptionPlaneMultOf(item.settlement, deity) : 1) * skimPressureMultFor(item, worldState);
     // Real thieves-guild strength (if threaded) drags effective security down
     // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
@@ -743,7 +775,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
         // where criminal infrastructure exists (RELAXED for an evil deity).
         // A prior exposure (organic or DM) makes re-corruption progressively
         // harder. An evil deity's onset disfavor rides here.
-        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness })) {
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness, pressureMult: planePressureMult })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -767,12 +799,33 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const visibility = Math.min(1, (s.dotRank || 1) / 3 + proximity);
       // A good deity's repression rides the EXPOSURE side (which runs regardless
       // of a criminal institution): a misaligned/corrupt NPC is outed faster.
+      // D6 THE UNDERWAYS (coupling 3 — exposure discount) SEAM (deferred, documented): a
+      // clandestine settlement should discount this exposure roll (multiply the result by
+      // UNDERWAYS_TUNING.EXPOSURE_DISCOUNT when settlementHasUnderways(item.settlement)). NOT
+      // wired for two compounding reasons: npcAgency.js sits at its max-lines baseline ceiling
+      // (the clandestineFacet import would exceed it), AND exposureChance lives in the EAGER
+      // corruption.js first-paint chunk, so a covertShelter param there costs eager bytes for a
+      // dark path (the ratchet forbids that). Lands with a size-baseline refresh (owner-gated).
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
-      const criminalInstitution = npc.corruptTies?.criminalInstitution || climate.criminalInstitutions[0] || null;
+      // Attribution is DELIBERATE through the resolver (§4). A LOCAL/cutout leash
+      // keeps today's read — the tied org, falling back to the climate's first
+      // criminal org — BYTE-IDENTICAL. A FOREIGN leash blames NO local org (the
+      // innocent-guild fix: a foreign conspirator's exposure never impairs the
+      // local guild); the foreign-consequence lane rides the leash instead.
+      const leash = resolveLeash(npc, item.settlement);
+      const criminalInstitution = leash.foreign ? null : (leash.criminalInstitution || climate.criminalInstitutions[0] || null);
       const atBottom = (s.dotRank || 1) <= 1;
+      // W-DOCTRINE-3b §4 — annotate a FOREIGN exposure with its resolved patron endpoint +
+      // the asset's importance, captured HERE where the leash + NPC are in hand (an ousting
+      // replaces the NPC downstream, so re-resolving later would miss it). Byte-neutral: the
+      // persisted corruptionEvents projection picks only 5 named fields, never these; the
+      // BLOWBACK they feed is gated behind corruptionWebActive (applyForeignExposureBlowback).
+      const foreignFields = leash.foreign
+        ? { foreign: true, patronId: leash.settlementId, patronKind: leash.kind, patronFactionName: leash.factionName, importance: npc.importance }
+        : null;
 
       if (atBottom && local.random() < CORRUPTION_TUNING.outReplaceAtNotable) {
         npcStates[id] = {
@@ -783,7 +836,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
           ousted: true,
           timesExposed: priorExposures + 1,
         };
-        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution });
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution, ...foreignFields });
       } else {
         const nextRank = demoteDotRank(s.dotRank);
         npcStates[id] = {
@@ -793,7 +846,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
           corruptionHeat: clamp01((s.corruptionHeat || 0) * 0.7),
           timesExposed: priorExposures + 1,
         };
-        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution });
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution, ...foreignFields });
       }
     });
   }
@@ -838,6 +891,8 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     + action.severityBias,
   );
   const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);
+  // A repeated automatic, non-targeted action advances gauges but expresses no new
+  // choice. Proposals and moves against named rivals remain public events.
   const nextRank = actionFamily === 'seek_promotion' ? Math.min(3, (state.dotRank || 1) + 1) : state.dotRank;
 
   return {
@@ -851,7 +906,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     factionId: state.factionId,
     severity,
     probability: Math.min(0.48, 0.06 + severity * 0.36 + state.ambition * 0.08),
-    applyMode: proposal ? 'proposal' : 'auto',
+    applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
     headline: `${state.name} may ${actionPhrase}`,
     summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
@@ -970,11 +1025,11 @@ function npcGoalCulmination(state, tick) {
     severity: 0.85,
     probability: 0.9,
     applyMode: 'auto',
-    headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while, and now seizes it.`,
+    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal }),
+    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal }),
     reasons: [
-      `${state.name}'s long-term goal progress reached its culmination.`,
-      `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,
+      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal }),
+      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, role: state.roleArchetype.replace(/_/g, ' ') }),
     ],
     npcPatch: {
       goalProgress: { short: 0, long: 0 },
@@ -987,12 +1042,12 @@ function npcGoalCulmination(state, tick) {
     condition: {
       archetype: 'faction_challenge',
       label: `${state.name}'s ascendance`,
-      description: `${state.name} has consolidated power, shifting the local balance.`,
+      description: pickLine(NPC_GOAL_NEWS.culmination.conditionDescription, `${state.npcId}:${tick}:culmination:condition`, { name: state.name }),
       severity: 0.55,
       status: 'stable',
       triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_GOAL_CULMINATION', sourceEventTargetId: state.npcId },
       affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
-      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: 'A long ambition reached fruition.' }],
+      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: pickLine(NPC_GOAL_NEWS.culmination.causeReason, `${state.npcId}:${tick}:culmination:cause`) }],
     },
     metadata: { roleArchetype: state.roleArchetype, longGoal: state.longGoal, dotRankBefore: state.dotRank, dotRankAfter: nextRank },
     conflictTags: [`npc:${state.npcId}`, `settlement:${state.settlementId}:goal_culmination`],
@@ -1018,12 +1073,14 @@ function npcGoalRebranch(state, context, tick) {
     factionId: state.factionId,
     severity: 0.44,
     probability: 1,
-    applyMode: 'auto',
-    headline: `${state.name} changes ambitions`,
-    summary: `${state.name}'s goals shift because the settlement context changed.`,
+    applyMode: 'auto', ...(goals.shortGoal === state.shortGoal && goals.longGoal === state.longGoal ? { recordMode: 'state_only' } : {}),
+    // A context signature/reset is still applied and audited, but only an actual
+    // change of short/long intent earns a Chronicle beat.
+    headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
+    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
     reasons: [
-      `Context changed from ${state.contextSignature || 'unknown'} to ${context.signature}.`,
-      `Personality remains anchored by ideal ${String(state.ideal || 'unknown').replace(/_/g, ' ')} and flaw ${String(state.flaw || 'unknown').replace(/_/g, ' ')}.`,
+      pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
+      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
     ],
     npcPatch: {
       ...goals,
@@ -1057,6 +1114,11 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const out = [];
 
   for (const state of states) {
+    // A party-removed NPC (killed / exiled / captured) leaves no agency behind —
+    // skip its state so no 'X may protect/undermine…' headline fires for a corpse.
+    // The roster drop (partyImpact remove_npc) makes pruneNpcStates clear this
+    // state on a later advance; this guard covers the interim. [worldpulse-core-2]
+    if (state.removed) continue;
     const context = contextForNpc(snapshot, state);
     if (state.contextSignature && state.contextSignature !== context.signature) {
       const rebranch = npcGoalRebranch(state, context, tick);

@@ -28,7 +28,7 @@ import * as catalog from '../../src/data/institutionalCatalog.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
 import {
   GOODS_CATEGORIES,
-  EXPORT_GOODS_BY_TIER,
+  GOODS_MODIFIERS_BY_TIER,
   IMPORT_GOODS_BY_TIER,
   COMMODITY_CATEGORY_MAP,
 } from '../../src/data/tradeGoodsData.js';
@@ -71,8 +71,15 @@ describe('data-schema.5 — trade-good category coverage', () => {
   const vocab = new Set(Object.values(GOODS_CATEGORIES));
 
   test('every good.category is a GOODS_CATEGORIES value', () => {
+    // GOODS_MODIFIERS_BY_TIER is the LIVE generator table (read by
+    // getGoodsModifiers) — pinning it here, rather than a stale export mirror,
+    // means the category vocabulary the generator actually honours stays
+    // governed. Entries without a `category` (the town Enslaved-persons boost
+    // spec, which carries institution/route boosts instead of a p/on export
+    // shape) are skipped by the `!= null` guard — see tests/joins/goods.test.js
+    // for the full shape pin.
     const offenders = [];
-    for (const src of [EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER]) {
+    for (const src of [GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER]) {
       for (const g of allGoods(src)) {
         if (g && g.category != null && !vocab.has(g.category)) {
           offenders.push(`${g.name ?? '?'}:${g.category}`);
@@ -84,7 +91,7 @@ describe('data-schema.5 — trade-good category coverage', () => {
 
   test('pin is not vacuous (goods are actually walked)', () => {
     let n = 0;
-    for (const g of allGoods(EXPORT_GOODS_BY_TIER)) if (g) n++;
+    for (const g of allGoods(GOODS_MODIFIERS_BY_TIER)) if (g) n++;
     expect(n).toBeGreaterThanOrEqual(20);
   });
 

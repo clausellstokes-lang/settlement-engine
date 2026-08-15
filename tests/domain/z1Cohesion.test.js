@@ -115,6 +115,21 @@ describe('Z1 — population is no longer blind to occupation/war-drain', () => {
     expect(occLoss).toBeLessThanOrEqual(drainLoss);
   });
 
+  test('coherence-07: the REFRESHED occupation stressors keep shedding refugees past the 6-tick vassal_extraction expiry', () => {
+    // vassal_extraction is stamped ONCE at conquest and expires after 6 ticks; occupation.js then
+    // re-emits occupation_resistance (the occupied town) every tick while the occupation stands.
+    // occupation_resistance now joins the flight set — so an ongoing occupation keeps bleeding
+    // people, with no 6-tick cliff. occupation_burden (the OCCUPIER's overextension) presses the
+    // RATE (WAR_CRISIS) but is austerity, not flight — like war_drain it is NOT in the flight set.
+    const resist = popDeltaFor('occ_ongoing', [{ archetype: 'occupation_resistance', severity: 0.95, status: 'worsening' }]).sample;
+    const burden = popDeltaFor('occupier', [{ archetype: 'occupation_burden', severity: 0.95, status: 'worsening' }]).sample;
+    expect(resist).toBeLessThan(0); // the occupied town flees its occupiers, tick after tick
+    expect(burden).toBeLessThan(0); // the occupier bleeds people to overextension too (rate press)
+    // occupation_resistance is flight-class (the wider severe cap) → sheds at least as much as the
+    // rate-only occupation_burden, exactly as vassal_extraction outsheds war_drain.
+    expect(resist).toBeLessThanOrEqual(burden);
+  });
+
   test('occupation_lifted is RECOVERY, not flight (it lifts the rate, never emigrates)', () => {
     const { sample } = popDeltaFor('freed', [
       { archetype: 'occupation_lifted', severity: 0.5, status: 'easing' },

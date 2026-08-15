@@ -68,10 +68,10 @@ const saveB = {
 
 describe('pendingEditsQueue resets on settlement identity swaps', () => {
   let store;
-  beforeEach(() => {
+  beforeEach(async () => {
     store = makeStore();
     store.setState(s => { s.settlement = bareSettlement('Mossbridge'); });
-    store.getState().queueEdit('rename-settlement', { newName: 'New Mossbridge' });
+    await store.getState().queueEdit('rename-settlement', { newName: 'New Mossbridge' });
     expect(store.getState().pendingEditsQueue).toHaveLength(1);
   });
 
@@ -80,9 +80,9 @@ describe('pendingEditsQueue resets on settlement identity swaps', () => {
     expect(store.getState().pendingEditsQueue).toHaveLength(0);
   });
 
-  test('a stale queued rename can no longer commit against the newly-opened save', () => {
+  test('a stale queued rename can no longer commit against the newly-opened save', async () => {
     store.getState().hydrateFromSave(saveB);
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
     // Before the fix this renamed Stoneford to "New Mossbridge".
     expect(store.getState().settlement.name).toBe('Stoneford');
   });

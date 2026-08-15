@@ -7,18 +7,21 @@
  * Premium-gated: non-premium sees a labeled teaser, never an interactive control
  * (the read surface is the free→premium signpost; the assign is the premium act).
  *
- * BYTE-IDENTICAL SAFETY: this writes only `config.targetCampaignId` — a pure
- * intent field the static generator never reads (verified: no generator/domain
- * consumer). It does NOT change any config→generator mapping or default, so a
- * given config still produces the identical settlement. The actual move-to-
- * campaign + deity assignment is performed after save (library / editor), where
- * a settlement record exists to attach to; this card captures the intent.
+ * BYTE-IDENTICAL SAFETY: this writes only `config.targetCampaignId` +
+ * `config.primaryDeityRef` — pure intent fields the static generator never keys a
+ * golden fixture on (the golden CFGs set neither). It does NOT change any
+ * config→generator mapping or default, so a given config still produces the
+ * identical settlement. Mounted PRE-generation, the chosen intent bakes into
+ * `settlement._config` (generateSettlement spreads store config into fullConfig),
+ * so SaveToLibraryButton persists it (`config: settlement._config`); the actual
+ * move-to-campaign + deity assignment is performed after save (library / editor),
+ * where a settlement record exists to attach to. This card captures the intent.
  */
 
 import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
-import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, R, PROSE_MAX } from '../theme.js';
+import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, PROSE_MAX } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export default function PlaceInRegionCard() {
@@ -38,7 +41,7 @@ export default function PlaceInRegionCard() {
   }, [customContent]);
 
   const wrap = {
-    border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.lg,
+    border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
     padding: `${SP.md}px ${SP.lg}px`, background: CARD,
   };
   const heading = (
@@ -84,7 +87,7 @@ export default function PlaceInRegionCard() {
             id="place-campaign"
             value={targetId}
             onChange={e => updateConfig({ targetCampaignId: e.target.value || null })}
-            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, borderRadius: 5, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
+            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
           >
             <option value="">Unassigned (keep it standalone)</option>
             {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -100,7 +103,7 @@ export default function PlaceInRegionCard() {
             id="place-deity"
             value={deityRef}
             onChange={e => updateConfig({ primaryDeityRef: e.target.value || null })}
-            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, borderRadius: 5, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
+            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
           >
             <option value="">No primary deity (dormant)</option>
             {deities.map(d => <option key={d.refId} value={d.refId}>{d.name}</option>)}

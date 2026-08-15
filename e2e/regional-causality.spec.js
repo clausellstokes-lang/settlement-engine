@@ -215,10 +215,12 @@ test.describe('regional causality campaign UI', () => {
     await page.goto('/settlements');
 
     await expect(page.getByText('Trade Belt')).toBeVisible();
-    await expect(page.getByText('Regional graph')).toBeVisible();
+    // Legibility wave (2026-07-22): "Regional graph" -> "Between Your Towns";
+    // the settlement badge "N queued" -> "N changes queued".
+    await expect(page.getByText('Between Your Towns')).toBeVisible();
     await expect(page.getByText('Causal chains')).toBeVisible();
     await expect(page.getByText('Millcross', { exact: true })).toBeVisible();
-    await expect(page.getByText('2 queued')).toBeVisible();
+    await expect(page.getByText('2 changes queued')).toBeVisible();
     await expect(page.getByText(/1\/2 ready/)).toBeVisible();
 
     await page.getByTitle('Show causal details').first().click();

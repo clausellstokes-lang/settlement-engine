@@ -23,7 +23,7 @@
  */
 
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, cleanup, fireEvent, within } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -65,6 +65,8 @@ const storeState = {
   isElevated: () => false,
   isDeveloper: () => false,
   savedSettlements: [{ id: 's1' }, { id: 's2' }, { id: 's3' }],
+  savedSettlementsOwnerId: 'u1',
+  savedSettlementsHydrationGeneration: 1,
   campaigns: [],
   maxSaves: () => 3,
   canSave: () => true,
@@ -75,6 +77,8 @@ const storeState = {
   authSetSecurityAnswers: vi.fn().mockResolvedValue(undefined),
   removeSavedSettlement: vi.fn(),
   clearSavedSettlements: vi.fn(),
+  withSettlementDeletionLock: vi.fn((_ids, operation) =>
+    operation({ mutationToken: 'account-delete-lock', campaignIds: [] })),
   deleteCampaign: vi.fn(),
   productPrefs: {
     defaultDetailLevel: 'guided', galleryPublicDefault: false, shareDefault: 'unlisted',
@@ -95,15 +99,20 @@ vi.mock('../../src/store/index.js', () => {
 beforeEach(() => {
   dataSectionProps = null;
   deleteMock.mockReset();
+  storeState.auth.user = { id: 'u1', email: 'tester@example.com' };
+  storeState.savedSettlements = [{ id: 's1' }, { id: 's2' }, { id: 's3' }];
+  storeState.savedSettlementsOwnerId = 'u1';
+  storeState.savedSettlementsHydrationGeneration = 1;
   storeState.removeSavedSettlement.mockClear();
   storeState.clearSavedSettlements.mockClear();
+  storeState.withSettlementDeletionLock.mockReset().mockImplementation(
+    (_ids, operation) => operation({ mutationToken: 'account-delete-lock', campaignIds: [] }),
+  );
 });
 
 async function mountDataSection() {
   const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-  render(<AccountPage onNavigateAdmin={() => {}} />);
-  const nav = document.querySelector('nav[aria-label="Account settings"]');
-  fireEvent.click(within(nav).getByRole('button', { name: 'Data' }));
+  render(<AccountPage routeSection="data" onNavigateAdmin={() => {}} />);
   expect(dataSectionProps).not.toBeNull();
   return dataSectionProps;
 }
@@ -116,6 +125,13 @@ describe('AccountPage — handleDeleteAllSettlements server-result inspection', 
     await expect(props.onDeleteAllSettlements()).resolves.toBeUndefined();
 
     expect(deleteMock.mock.calls.map(c => c[0]).sort()).toEqual(['s1', 's2', 's3']);
+    expect(deleteMock.mock.calls.every(
+      c => c[1] === 'u1' && typeof c[2] === 'function' && c[2](),
+    )).toBe(true);
+    expect(storeState.removeSavedSettlement.mock.calls.map(c => c[0]).sort()).toEqual(['s1', 's2', 's3']);
+    expect(storeState.removeSavedSettlement.mock.calls.every(
+      c => c[1]?.mutationToken === 'account-delete-lock',
+    )).toBe(true);
     expect(storeState.clearSavedSettlements).toHaveBeenCalledTimes(1);
   });
 
@@ -135,5 +151,77 @@ describe('AccountPage — handleDeleteAllSettlements server-result inspection', 
     // Only the server-confirmed rows leave local state.
     const removed = storeState.removeSavedSettlement.mock.calls.map(c => c[0]).sort();
     expect(removed).toEqual(['s1', 's3']);
+  });
+
+  test('a busy campaign refuses before any server or local deletion starts', async () => {
+    storeState.withSettlementDeletionLock.mockResolvedValueOnce({
+      ok: false,
+      reason: 'advance_in_flight',
+      campaignId: 'camp-1',
+    });
+    const props = await mountDataSection();
+
+    await expect(props.onDeleteAllSettlements()).rejects.toThrow(/campaign update/i);
+    expect(deleteMock).not.toHaveBeenCalled();
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+    expect(storeState.clearSavedSettlements).not.toHaveBeenCalled();
+  });
+
+  test('zero-row A deletes after rotation reject without clearing the B cache', async () => {
+    const releases = [];
+    deleteMock.mockImplementation((_id, _ownerId, isSessionCurrent) =>
+      new Promise((resolve, reject) => {
+        releases.push(() => {
+          if (isSessionCurrent()) {
+            resolve(null);
+          } else {
+            reject(Object.assign(
+              new Error('session changed'),
+              { code: 'auth_session_changed' },
+            ));
+          }
+        });
+      }));
+    const props = await mountDataSection();
+
+    const deleting = props.onDeleteAllSettlements();
+    expect(deleteMock).toHaveBeenCalledTimes(3);
+
+    storeState.auth.user = { id: 'u2', email: 'other@example.com' };
+    storeState.savedSettlements = [{ id: 'b-save' }];
+    storeState.savedSettlementsOwnerId = 'u2';
+    storeState.savedSettlementsHydrationGeneration = 2;
+    releases.forEach(release => release());
+
+    await expect(deleting).rejects.toThrow(/account changed/i);
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+    expect(storeState.clearSavedSettlements).not.toHaveBeenCalled();
+    expect(storeState.savedSettlements).toEqual([{ id: 'b-save' }]);
+  });
+
+  test('committed A delete responses are recognized but never applied to B', async () => {
+    const releases = [];
+    const committed = [];
+    deleteMock.mockImplementation((id) => new Promise(resolve => {
+      releases.push(() => {
+        committed.push(id);
+        resolve(id);
+      });
+    }));
+    const props = await mountDataSection();
+
+    const deleting = props.onDeleteAllSettlements();
+    expect(deleteMock).toHaveBeenCalledTimes(3);
+    storeState.auth.user = { id: 'u2', email: 'other@example.com' };
+    storeState.savedSettlements = [{ id: 'b-save' }];
+    storeState.savedSettlementsOwnerId = 'u2';
+    storeState.savedSettlementsHydrationGeneration = 2;
+    releases.forEach(release => release());
+
+    await expect(deleting).rejects.toThrow(/account changed/i);
+    expect(committed.sort()).toEqual(['s1', 's2', 's3']);
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+    expect(storeState.clearSavedSettlements).not.toHaveBeenCalled();
+    expect(storeState.savedSettlements).toEqual([{ id: 'b-save' }]);
   });
 });

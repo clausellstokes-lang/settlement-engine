@@ -21,6 +21,7 @@
 
 import { deriveCausalState, SYSTEM_VARIABLES } from '../domain/causalState.js';
 import { normalizeGood } from '../domain/region/goodsCatalog.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 
 // ── Banding helpers ──────────────────────────────────────────────────────────
 export function populationBand(pop) {
@@ -251,7 +252,12 @@ export function extractSettlementFingerprint(settlement, save = null, opts = {})
     // campaign world; all enum/count distributions, never names/goal-prose)
     npc: npcDistributions(settlement, save, opts),
     relationship_count: arr(settlement.relationships).length,
-    hook_count: arr(settlement.plotHooks || settlement.hooks).length,
+    // ⚠ WAS ALWAYS ZERO. This read was `settlement.plotHooks || settlement.hooks`
+    // — neither key is written on a settlement ROOT by any writer in this repo, so
+    // every fingerprint ever captured reported hook_count: 0 regardless of how many
+    // hooks the settlement actually carried. Counted through the canonical collector
+    // (domain/dossier/plotHooks.js) so this figure means what its name says.
+    hook_count: collectPlotHooks(settlement).length,
     service_count: arr(settlement.services).length,
     // neighbours — relationship types only
     neighbours: arr(settlement.neighbourNetwork || settlement.neighbours)
@@ -386,6 +392,16 @@ export function extractStressorGenesis(settlement) {
 }
 
 // ── Stable stringify + hash ──────────────────────────────────────────────────
+// INTENTIONAL TWIN — do NOT unify with settlementFingerprint.js's stableStringify
+// (code-quality-architecture-5, verdict PARTIAL→low). This one is the STALENESS
+// serializer for computeFingerprintHash → analytics content_hash / research _prevHash;
+// it consumes an extractReducedFingerprint PROJECTION (never a raw settlement) and its
+// edge semantics differ ON PURPOSE (circular → null, undefined skipped, functions left
+// to JSON.stringify). The settlementFingerprint twin is a PII-bearing pre-hash serializer
+// over the full prose settlement with different circular/function handling. The two never
+// compare against each other and take different inputs, so for any JSON-serializable input
+// they agree and the divergence (functions/circular/undefined-in-array) cannot manifest as
+// an identity mismatch — merging them buys nothing and risks a silent hash shift.
 /** Deterministic JSON with sorted keys (so the same fingerprint hashes equal). */
 export function stableStringify(value) {
   const seen = new WeakSet();

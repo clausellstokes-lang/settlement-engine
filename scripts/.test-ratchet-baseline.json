@@ -1,0 +1,138 @@
+{
+  "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
+  "measuredAtSha": "5f7e7051ccec72d489ad562d60ab20a6832046b1",
+  "totalTests": 27956,
+  "totalFiles": 2359,
+  "skippedCeiling": 1,
+  "uncollectedSuites": {},
+  "entries": {
+    "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
+      "file": "tests/docs/enforcement-claims.test.js",
+      "test": "enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target",
+      "subsystem": "docs / enforcement-claim meta-pin",
+      "cause": "A completeness claim in docs/FABLE_VALIDATION_QUEUE.md:179 (the R-BLD-10 chair ruling row) carries no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds.",
+      "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
+      "class": "debt"
+    },
+    "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
+      "file": "tests/domain/metronomeCooldownLint.test.js",
+      "test": "metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)",
+      "subsystem": "worldPulse / metronome cooldown (E4-2a flood class)",
+      "cause": "src/domain/worldPulse/razingExecution.js stamps a condition/stressor as a metronome-EXEMPT outcome source but names no cooldown/metronome mechanism, so the non-cooldown emitter set grew instead of shrinking.",
+      "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
+      "class": "debt"
+    },
+    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive": {
+      "file": "tests/lib/accountContentPortability.test.js",
+      "test": "account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
+      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
+      "class": "debt"
+    },
+    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability remaps reviewed evidence only through a full archive receipt": {
+      "file": "tests/lib/accountContentPortability.test.js",
+      "test": "account custom-content identity portability remaps reviewed evidence only through a full archive receipt",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
+      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
+      "class": "debt"
+    },
+    "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
+      "file": "tests/lint/clampPrimitiveBaseline.test.js",
+      "test": "clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01",
+      "subsystem": "lint / clamp primitive ratchet",
+      "cause": "The baseline lists 62 files that define a local clamp/clamp01 while the tree now has 73 — 11 new local clamp definitions landed instead of importing the shared primitive.",
+      "introducedAt": "unbisectable: 11 separate local clamp definitions across many 2026-08 waves; no single introducing commit. Burn-down lane must route each to the shared primitive.",
+      "class": "debt"
+    },
+    "tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline": {
+      "file": "tests/lint/proseNumerics.test.js",
+      "test": "prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline",
+      "subsystem": "copy / prose numerics ratchet",
+      "cause": "The path+line+category+snippet debt list drifted from the committed baseline (413 rows) — new prose numerics leaked and/or legacy rows moved lines, which this exact-identity ratchet reads as drift.",
+      "introducedAt": "unbisectable: an exact line-addressed inventory that rots whenever any governed file shifts lines; the hand-keyed line-address rot class. Burn-down lane must regenerate once and review every removed row.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references": {
+      "file": "tests/lint/warRulingKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references",
+      "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
+      "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
+      "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/security/mapSnapshotImport.contract.test.js :: cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally": {
+      "file": "tests/security/mapSnapshotImport.contract.test.js",
+      "test": "cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally",
+      "subsystem": "security / cross-user map import contract",
+      "cause": "The import no longer carries the safe `seed` field through, so geography cannot regenerate locally after a cross-user import — the F6 contract requires the raw snapshot be dropped but the seed retained.",
+      "introducedAt": "unbisectable: a field-projection change in the import path; the projection is assembled in more than one place. Burn-down lane must trace the seed through the import projection.",
+      "class": "debt"
+    },
+    "tests/store/customContentSlice.race.test.js :: customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive": {
+      "file": "tests/store/customContentSlice.race.test.js",
+      "test": "customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "Same root cause as accountContentPortability: reviewedSupplyChainContentHash throws `needIcon must be bounded non-empty text` from boundedText() when a durable command race replays a reviewed response whose artifact has no needIcon.",
+      "introducedAt": "unbisectable: shares the accountContentPortability cause — the writer that stopped supplying needIcon is not yet identified. Fix once, and all three tests clear.",
+      "class": "debt"
+    }
+  }
+}

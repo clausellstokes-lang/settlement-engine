@@ -3,7 +3,7 @@
 User-agent: *
 Allow: /
 
-# Public content (home, create, compendium, how-to, pricing, gallery, compare)
+# Public content (home, create, compendium, about, pricing, gallery, compare)
 # is crawlable. Keep crawl budget OFF the app surfaces, the private library, the
 # auth/account flows, the checkout return, and build artifacts.
 Disallow: /api/
@@ -21,6 +21,109 @@ Disallow: /set-new-password
 Disallow: /verify-email
 Disallow: /confirm-email
 Disallow: /checkout/
+
+# ── AI-training / dataset crawlers: reserved (opt out of the whole site) ───────
+# SettlementForge's simulations, dossiers, and generated prose are the product.
+# We reserve them against text-and-data-mining for model training and against
+# assistant surfaces that would re-serve our content instead of sending readers
+# to the app. This is defense-in-depth alongside the X-Robots-Tag / TDM-Reservation
+# response headers (vercel.json) and the noai/noimageai meta on the entry doc —
+# robots.txt is a VOLUNTARY-compliance signal, honored by the majors below but not
+# a wall; see docs/PERIMETER_RUNBOOK.md for what each layer does and does not stop.
+#
+# NOT listed here (deliberately allowed) — the funnel depends on them: general
+# search indexers (Googlebot, Bingbot, DuckDuckBot, Applebot) and social-unfurl
+# fetchers (Slackbot, Twitterbot, facebookexternalhit, LinkedInBot, Discordbot).
+# Each token below is a MODEL/AI crawler, blocked with a one-line reason.
+
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+User-agent: OAI-SearchBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+User-agent: Claude-User
+Disallow: /
+User-agent: Claude-SearchBot
+Disallow: /
+
+# Google — Extended is the AI-training opt-out TOKEN; blocking it does NOT affect
+# Googlebot search indexing. GoogleOther is Google's non-search R&D crawler.
+User-agent: Google-Extended
+Disallow: /
+User-agent: GoogleOther
+Disallow: /
+
+# Apple — Extended is the AI-training opt-out TOKEN; base Applebot (Siri/Spotlight
+# search) stays allowed above under User-agent: *.
+User-agent: Applebot-Extended
+Disallow: /
+
+# Common Crawl — the dataset most open-model training corpora are built from.
+User-agent: CCBot
+Disallow: /
+
+# ByteDance
+User-agent: Bytespider
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+User-agent: Perplexity-User
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# Meta AI (the training crawler + fetcher; the facebookexternalhit UNFURL bot is
+# NOT blocked so shared links still render OG cards).
+User-agent: Meta-ExternalAgent
+Disallow: /
+User-agent: meta-externalagent
+Disallow: /
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+# Amazon (Alexa / AI knowledge)
+User-agent: Amazonbot
+Disallow: /
+
+# Other model/dataset crawlers seen in the wild.
+User-agent: Diffbot
+Disallow: /
+User-agent: ImagesiftBot
+Disallow: /
+User-agent: Omgilibot
+Disallow: /
+User-agent: Omgili
+Disallow: /
+User-agent: Timpibot
+Disallow: /
+User-agent: PetalBot
+Disallow: /
+User-agent: YouBot
+Disallow: /
+User-agent: AI2Bot
+Disallow: /
+User-agent: DuckAssistBot
+Disallow: /
+User-agent: Kangaroo Bot
+Disallow: /
+User-agent: Scrapy
+Disallow: /
 
 # Surface the sitemap (canonical path URLs) so search engines find the public
 # pages without crawling the SPA link graph.

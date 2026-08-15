@@ -19,7 +19,6 @@
  */
 
 import { useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { FS, PARCH, INK_DEEP, INK, GOLD, GOLD_B, MUTED, BORDER, sans, serif_, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
@@ -30,7 +29,7 @@ import {
 } from '../../domain/display/regionWakeReplay.js';
 
 // No semantic violet/crimson token exists; keep these as swatch lookups.
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const CRIMSON = swatch['#8B1A1A'];
 
 function StepDot({ active, done }) {
@@ -62,7 +61,7 @@ function ArcLine({ children }) {
  * @param {Object} props
  * @param {() => void} [props.onUpgrade]  route to the canonical premium-value surface.
  */
-export default function RegionWakeReplay({ onUpgrade }) {
+export default function RegionWakeReplay({ onUpgrade, compact = false }) {
   const tier = useStore(s => s.auth.tier);
   const settlement = useStore(s => s.settlement);
   const [step, setStep] = useState(0);
@@ -77,23 +76,36 @@ export default function RegionWakeReplay({ onUpgrade }) {
   const last = REPLAY_STEP_COUNT - 1;
   const atEnd = step >= last;
 
+  // Miniature scale ("half-scale almanac strip") for the below-the-fold proof
+  // pair (C1r-c2). Presentational only — same canned fixture, projections, and
+  // self-gate. The strip goes flat (rule-framed, no rounded corners or
+  // elevation) and narrows; the header type and paddings step down. The scrubber
+  // controls DELIBERATELY keep their >=44px touch targets in BOTH modes (a
+  // miniature shrinks chrome, never a hit target) — see the control block below,
+  // whose Button styles are intentionally left untouched by `compact`.
+  const M = compact
+    ? { cardMax: 300, cardMargin: '0 auto 32px', headPad: '9px 12px', titleFS: FS['13.5'],
+        bodyPad: 11, bodyMinH: 132, headlinePad: 8, ctrlPad: '8px 12px', footPad: '8px 12px 11px' }
+    : { cardMax: 480, cardMargin: '0 auto 56px', headPad: '12px 16px', titleFS: FS['16'],
+        bodyPad: 14, bodyMinH: 168, headlinePad: 10, ctrlPad: '8px 14px', footPad: '10px 16px 14px' };
+
   return (
     <section
       aria-label="Watch a region wake up (read-only replay)"
       data-testid="region-wake-replay"
       style={{
-        maxWidth: 480, margin: '0 auto 56px',
+        maxWidth: M.cardMax, margin: M.cardMargin,
         background: swatch.white,
         border: `1px solid ${BORDER}`,
-        borderRadius: 8,
+        borderRadius: compact ? 0 : 8,
         overflow: 'hidden',
-        boxShadow: '0 6px 24px rgba(27,20,8,0.08)',
+        boxShadow: compact ? 'none' : '0 6px 24px rgba(27,20,8,0.08)',
         fontFamily: sans,
       }}
     >
       {/* Header — eyebrow + title + step indicator */}
       <header style={{
-        padding: '12px 16px',
+        padding: M.headPad,
         background: `linear-gradient(135deg, ${INK_DEEP}, ${INK})`,
         color: GOLD,
       }}>
@@ -104,7 +116,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
           {t('replay.eyebrow')}
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
-          <div style={{ fontFamily: serif_, fontSize: FS['16'], fontWeight: 600 }}>
+          <div style={{ fontFamily: serif_, fontSize: M.titleFS, fontWeight: 600 }}>
             {t('replay.title')}
           </div>
           <div style={{ fontSize: FS.micro, color: GOLD_B, fontFamily: sans, letterSpacing: '0.05em' }}>
@@ -122,13 +134,13 @@ export default function RegionWakeReplay({ onUpgrade }) {
       </header>
 
       {/* Body — the projected read-outs for this month */}
-      <div style={{ padding: 14, minHeight: 168 }}>
+      <div style={{ padding: M.bodyPad, minHeight: M.bodyMinH }}>
         {/* Latest headline */}
         {view.headlines.length > 0 ? (
           <div style={{
-            padding: 10, marginBottom: 10,
+            padding: M.headlinePad, marginBottom: 10,
             background: PARCH, border: `1px solid ${BORDER}`,
-            borderLeft: `3px solid ${GOLD}`, borderRadius: 5,
+            borderLeft: `3px solid ${GOLD}`, borderRadius: compact ? 0 : 5,
           }}>
             <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK }}>
               {view.headlines[0].headline}
@@ -156,7 +168,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
             </span>
           )}
           {view.pantheon.length > 0 && (
-            <span style={chip(VIOLET)}>
+            <span style={chip(SLATE)}>
               {view.pantheon[0].id.split(/[:_]/).pop()} · {view.pantheon[0].tier}
             </span>
           )}
@@ -178,7 +190,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
       {/* Controls — scrubber (read-only; just an index) */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8,
-        padding: '8px 14px', borderTop: `1px solid ${BORDER}`, background: PARCH,
+        padding: M.ctrlPad, borderTop: `1px solid ${BORDER}`, background: PARCH,
       }}>
         <Button
           variant="ghost"
@@ -186,7 +198,6 @@ export default function RegionWakeReplay({ onUpgrade }) {
           onClick={() => setStep(s => Math.max(0, s - 1))}
           disabled={step === 0}
           aria-label={t('replay.prev')}
-          icon={<ChevronLeft size={14} />}
           // minWidth too: the short "Back" label + chevron only filled ~43px
           // wide, 1px under the 44px touch-target floor the height already met.
           style={{ minHeight: 44, minWidth: 44 }}
@@ -198,7 +209,6 @@ export default function RegionWakeReplay({ onUpgrade }) {
             variant="secondary"
             size="sm"
             onClick={() => setStep(0)}
-            icon={<RotateCcw size={13} />}
             style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.restart')}
@@ -208,7 +218,6 @@ export default function RegionWakeReplay({ onUpgrade }) {
             variant="secondary"
             size="sm"
             onClick={() => setStep(s => Math.min(last, s + 1))}
-            trailingIcon={<ChevronRight size={14} />}
             style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.next')}
@@ -218,7 +227,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
 
       {/* Footer — the pitch + CTA to the canonical premium-value surface */}
       <footer style={{
-        padding: '10px 16px 14px', borderTop: `1px dashed ${BORDER}`,
+        padding: M.footPad, borderTop: `1px dashed ${BORDER}`,
         background: swatch.white, textAlign: 'center',
       }}>
         <div style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic', fontFamily: serif_ }}>

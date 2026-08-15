@@ -28,6 +28,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_DIR = resolve(process.cwd(), 'supabase/migrations');
 const MIG_053 = resolve(MIG_DIR, '053_admin_user_management.sql');
 const MIG_059 = resolve(MIG_DIR, '059_enforce_account_status_rls.sql');
@@ -48,7 +50,7 @@ describe('104/105/106 pglite targets exist (guards against silent vacuous skip)'
 /** Extract a `create or replace function public.<name>` body verbatim through its first `$$;`. */
 function extractFn(file, name) {
   const src = readFileSync(file, 'utf8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from ${file}`);
   return m[0];
 }
@@ -125,7 +127,7 @@ describe.runIf(allExist)('104 — admin_user_summary counts campaign_state (pgli
          ($1, null)`,
       [OWNER],
     );
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('DIFFERENTIAL: under the 053 body the campaign count is NULL (undefined_column swallowed)', async () => {
     await db.exec(extractFn(MIG_053, 'admin_user_summary'));
@@ -184,7 +186,7 @@ describe.runIf(allExist)('105 — publish_settlement canon gate restored (pglite
       );
       ids[key] = r.rows[0].id;
     }
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('DIFFERENTIAL: under the 059 body an UN-canonized settlement publishes (the gap is real)', async () => {
     await db.exec(extractFn(MIG_059, 'publish_settlement'));
@@ -248,7 +250,7 @@ describe.runIf(allExist)('106 — bump_map_import dedup ledger (pglite)', () => 
     };
     openMap = await mk('open-map', true);
     closedMap = await mk('closed-map', false);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('DIFFERENTIAL: under the 065 body one caller loops the counter up (forgeable)', async () => {
     await db.exec(extractFn(MIG_065, 'bump_map_import'));

@@ -8,7 +8,7 @@ import {
   addRegionalChannels,
   setRegionalChannelStatus,
 } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // B01 — siege RESOLUTION retires the war_front channel (cross-tick).

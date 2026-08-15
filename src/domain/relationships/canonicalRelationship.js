@@ -14,15 +14,15 @@ const SYMMETRIC_TYPES = new Set([
 // domain/regionalGraph, domain/region/graph) so a label authored as 'ally',
 // 'overlord', or the legacy plural 'trade_partners' resolves to the same
 // canonical base label everywhere instead of silently drifting in one
-// subsystem. Each subsystem still maps FROM this canonical
-// label to its own effect profile.
+// subsystem. Each subsystem still maps FROM this canonical label to its own
+// effect profile.
 //
 // This table is CROSS-VOCAB-SAFE: it only collapses spelling/synonym variants
 // onto a base label that every consumer already recognizes. It deliberately
 // does NOT collapse 'smuggling_partner' → 'criminal_network', because
 // 'smuggling_partner' is the CANONICAL term in the regional structural vocab
 // (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
-// localPropagationType (see PROPAGATION_ALIASES below).
+// canonicalPropagationLabel (see PROPAGATION_ALIASES below).
 /** @type {Readonly<Record<string, string>>} */
 const RELATIONSHIP_LABEL_ALIASES = Object.freeze({
   // Legacy plural the old 'Opened Trade Route' event wrote.
@@ -60,8 +60,8 @@ export function canonicalRelationshipLabel(label) {
 // propagation matrix (lib/relationshipGraph PROPAGATION_MATRIX) map onto the
 // row that carries their semantics. Applied AFTER canonicalRelationshipLabel so
 // 'smuggling'→'smuggling_partner'→'criminal_network' resolves in one pass.
-// Kept separate from the cross-vocab table so the regional
-// structural graph keeps 'smuggling_partner' as a first-class type.
+// Kept separate from the cross-vocab table so the regional structural graph
+// keeps 'smuggling_partner' as a first-class type.
 /** @type {Readonly<Record<string, string>>} */
 const PROPAGATION_ALIASES = Object.freeze({
   smuggling_partner: 'criminal_network',
@@ -102,18 +102,50 @@ export const RELATIONSHIP_SELECTIONS = [
   { value: 'vassal_of', label: 'Current settlement is vassal' },
 ];
 
-/** @param {any} save */
+// The relationship families that militarize governance narrative — the
+// hostile-neighbour stability band and the "Ongoing tensions with {neighbour}"
+// recentConflict line. Canonical vocabulary ('rival'/'cold_war'/'hostile') plus
+// the legacy save spellings ('tense', 'hostile_rival'/'Hostile rival', which
+// lower+substring-match 'hostile'). Substring-tolerant so a single predicate
+// serves both generatePower's gate and priorityHelpers' military/economy reader.
+export const ADVERSARIAL_RELATIONSHIP_MATCHES = ['hostile', 'rival', 'cold_war', 'tense'];
+
+/**
+ * @param {string | null | undefined} relType
+ * @returns {boolean} true when the neighbour relationship is adversarial
+ */
+export function isAdversarialRelationship(relType) {
+  const t = String(relType || '').toLowerCase();
+  return t !== '' && ADVERSARIAL_RELATIONSHIP_MATCHES.some((k) => t.includes(k));
+}
+
+/**
+ * A settlement save record (or the settlement itself) — only the fields this
+ * module reads. Legacy saves store population as a bare number, canonical ones
+ * as `{ total }`.
+ * @typedef {Object} SettlementSaveLike
+ * @property {string=} id
+ * @property {string=} tier
+ * @property {{ id?: string, tier?: string, population?: number | { total?: number } }=} settlement
+ */
+
+/**
+ * @param {SettlementSaveLike | null | undefined} save
+ * @returns {number} tier rank plus a small population-scaled bonus
+ */
 function strengthScore(save) {
   const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
+  // @ts-expect-error -- population is number | { total } across save generations; `.total ||` is the tolerant read
   const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
   return (TIER_RANK[tier] ?? 2) + Math.min(0.8, Math.log10(Math.max(1, population)) / 8);
 }
 
 /**
- * @param {any} sourceId
- * @param {any} targetId
- * @param {any} sourceSave
- * @param {any} targetSave
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string }} stronger endpoint first
  */
 function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
   return strengthScore(targetSave) > strengthScore(sourceSave)
@@ -122,9 +154,11 @@ function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
 }
 
 /**
- * @param {any} selection
- * @param {any} sourceId
- * @param {any} targetId
+ * @typedef {{ relationshipType: string, from: string, to: string, sourceRole: string, targetRole: string }} RelationshipDefinition
+ * @param {string} selection  a RELATIONSHIP_SELECTIONS value
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @returns {RelationshipDefinition}
  */
 export function relationshipDefinition(selection, sourceId, targetId) {
   const source = String(sourceId);
@@ -154,8 +188,9 @@ export function relationshipDefinition(selection, sourceId, targetId) {
 }
 
 /**
- * @param {any} definition
- * @param {any} localRole
+ * @param {RelationshipDefinition} definition
+ * @param {string} localRole
+ * @returns {{ relationshipType: string, relationshipFrom: string, relationshipTo: string, localRelationshipRole: string, displayRelationshipType: string }}
  */
 export function relationshipLinkMetadata(definition, localRole) {
   return {
@@ -168,9 +203,10 @@ export function relationshipLinkMetadata(definition, localRole) {
 }
 
 /**
- * @param {any} edge
- * @param {any} sourceId
- * @param {any} [_targetId]
+ * @param {{ from?: string, relationshipType?: string } | null | undefined} edge
+ * @param {string} sourceId
+ * @param {string} [_targetId]
+ * @returns {{ sourceRole: string, targetRole: string }}
  */
 export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
   const sourceIsFrom = String(edge?.from) === String(sourceId);
@@ -193,9 +229,20 @@ export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
 /**
  * Resolve new canonical metadata and old display-oriented saves to one edge.
  * Legacy hierarchical links infer the stronger endpoint as patron/overlord.
- * @param {any} link
- * @param {any} sourceSave
- * @param {any} targetSave
+ *
+ * @typedef {Object} RelationshipLinkLike
+ * @property {string=} relationshipType
+ * @property {string=} type                      legacy alias of relationshipType
+ * @property {string=} relationshipFrom
+ * @property {string=} relationshipTo
+ * @property {string=} localRelationshipRole
+ * @property {string=} sourceRole            authored canonical role on the source side
+ * @property {string=} displayRelationshipType
+ *
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string, relationshipType: string } | null}
  */
 export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   const sourceId = sourceSave?.id || sourceSave?.settlement?.id;
@@ -262,7 +309,7 @@ const DIRECTIONAL_ROLE_PHRASES = Object.freeze({
  * legacy row with neither field present returns null so the caller keeps its
  * existing non-directional label (no regression).
  *
- * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string }} link
+ * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string } | null | undefined} link
  *   the neighbourNetwork entry.
  * @param {string} [neighbourName] the linked settlement's name (fills the slot).
  * @returns {string|null} e.g. "Overlord of Thornmere", or null when not directional.
@@ -276,7 +323,10 @@ export function directionalRelationshipLabel(link, neighbourName) {
   return phrase(name);
 }
 
-/** @param {any} link */
+/**
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @returns {string} relationship type as seen from the local settlement
+ */
 export function localPropagationType(link) {
   const role = link?.localRelationshipRole || link?.displayRelationshipType;
   if (role === 'client') return 'patron';

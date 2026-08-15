@@ -19,6 +19,9 @@
  * is a warning so the linter doesn't block work but surfaces issues.
  */
 
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
@@ -26,6 +29,27 @@ import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
 import jsxHygiene from './scripts/eslint-plugin-jsx-hygiene.js';
+
+// ── The size-ratchet baseline (code-quality-architecture-1 + -3) ─────────────
+// scripts/.size-baseline.json is the SINGLE SOURCE OF TRUTH for the per-file
+// max-lines ceilings of the files that legitimately exceed their layer ceiling
+// today. It REPLACES the old `max-lines: 'off'` grandfather blocks (which allowed
+// UNBOUNDED growth — pulseKernel grew +28% effective before this froze it). Each
+// entry becomes a per-file `max-lines: ['error', { max }]` override generated
+// below (spread in AFTER the per-layer rules so it wins). tests/lint/sizeBaseline.
+// test.js keeps this map honest: a file that grows past its number reds eslint; a
+// file that shrinks must have its number LOWERED (lock the win); a file that falls
+// under its layer ceiling must have its entry DELETED. Shrink-only, never raise.
+const __eslintDir = dirname(fileURLToPath(import.meta.url));
+const SIZE_BASELINE = JSON.parse(
+  readFileSync(join(__eslintDir, 'scripts/.size-baseline.json'), 'utf8'),
+);
+const sizeBaselineOverrides = Object.entries(SIZE_BASELINE)
+  .filter(([file]) => !file.startsWith('_'))
+  .map(([file, max]) => ({
+    files: [file],
+    rules: { 'max-lines': ['error', { max, skipBlankLines: true, skipComments: true }] },
+  }));
 
 // eslint-plugin-react doesn't yet support ESLint 10's flat-config
 // resolver (throws on contextOrFilename.getFilename). We drop it and
@@ -73,7 +97,7 @@ export default [
       // react's jsx-no-duplicate-props isn't loadable on ESLint 10, so this is
       // the local equivalent. Error: a dropped prop is a real bug.
       'jsx-hygiene/no-duplicate-jsx-props': 'error',
-      // Inline object/array selectors in useStore() re-render on every change
+      // A+ P1.5 — inline object/array selectors in useStore() re-render every change
       // (the Zustand footgun). Count is zero today; ERROR locks it. @enforced-by this rule.
       'jsx-hygiene/no-inline-store-selector': 'error',
       'no-fallthrough': 'error',
@@ -112,18 +136,18 @@ export default [
       'no-useless-escape': 'warn',
       'no-case-declarations': 'warn',
 
-      // ── Visual budget guardrails ─────────────────────────────────────
+      // ── P120 / V-1 V-2 V-5 — Visual budget guardrails ────────────────
       // Three local rules surface design-system drift. They started as
-      // warnings while the codebase carried legacy violations; the cleanup
-      // migrated every raw fontSize, color, and inline button verb to a
-      // token (zero rendered change). Count is now zero, so they are
-      // promoted to ERROR — new drift fails the gate.
+      // warnings while the codebase carried legacy violations; the P120/
+      // P121 burn-down migrated every raw fontSize, color, and inline
+      // button verb to a token (zero rendered change). Count is now zero,
+      // so they are promoted to ERROR — new drift fails the gate.
       // @enforced-by visual-budget/no-raw-fontsize, visual-budget/no-raw-color, visual-budget/no-raw-button-copy
       'visual-budget/no-raw-fontsize':   'error',
       'visual-budget/no-raw-color':      'error',
       'visual-budget/no-raw-button-copy': 'error',
 
-      // ── Funnel/analytics event-name contract ──────────────────────────
+      // ── P146 — Funnel/analytics event-name contract ───────────────────
       // Event names passed to track()/Funnel.track() must be EVENTS.*
       // constants, never raw strings or template literals. The runtime
       // whitelist only warns in DEV and drops in prod; this catches the
@@ -141,64 +165,132 @@ export default [
   // so a settlement replays byte-exact from its stored seed. A bare
   // Math.random(), Date.now(), or new Date() in generator logic is a silent
   // determinism leak the gate could not see before (rngContext's fallback
-  // converts it into invisible non-reproducibility). Errors here, so a new
-  // leak fails CI. prng.js (the documented sole non-determinism entry, for
-  // seed minting) and rngContext.js (the fallback itself) are exempt.
+  // converts it into invisible non-reproducibility). localeCompare is banned
+  // for the same reason (F13): it collates through the host ICU/locale tables,
+  // so a sort that feeds rng draw order or persisted output can order non-ASCII
+  // strings differently across devices/locales — use compareCodepoint from
+  // domain/deterministicSort.js. Locale FORMATTING (toLocaleString /
+  // toLocaleDateString / toLocaleTimeString / Intl.*) is banned as the sibling
+  // class: it renders through the same host tables, so `8000` lands in persisted
+  // output as "8,000" on a US host and "8.000" on a German one (the re-grade
+  // found exactly this in the foodBalance viability warnings) — use formatCount
+  // from domain/formatNumber.js (the cross-device-stable number format).
+  // Errors here, so a new leak fails CI. The two
+  // sanctioned non-determinism seams — prng.js (the sole seed-minting entry)
+  // and rngContext.js (whose helpers now fail CLOSED with no seeded context;
+  // its unseededRandom() escape hatch is the one ambient draw) — live in
+  // src/kernel/, OUTSIDE this block's src/generators/ scope, so they need no
+  // explicit exemption: the ban simply doesn't reach them.
   {
     files: ['src/generators/**/*.js'],
-    ignores: ['src/generators/prng.js', 'src/generators/rngContext.js'],
     rules: {
       'no-restricted-syntax': ['error',
         {
-          // MemberExpression (not CallExpression) so an ALIAS — `const r = Math.random; r()`,
-          // or `Math.random` handed to a callback — is caught too, not only direct calls.
-          selector: "MemberExpression[object.name='Math'][property.name='random']",
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
         },
         {
-          selector: "MemberExpression[object.name='Date'][property.name='now']",
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Determinism: Date.now() is non-reproducible in the seeded pipeline. Thread a timestamp in instead.',
         },
         {
           selector: "NewExpression[callee.name='Date'][arguments.length=0]",
           message: 'Determinism: new Date() reads wall-clock time and breaks same-seed replay. Construct from an explicit value.',
         },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
       ],
     },
   },
 
-  // ── Determinism/purity guard widened to the domain kernel ───────────────────
-  // The domain layer must be a pure function of its inputs. This locks the
-  // entropy/env/config leak classes by CONSTRUCTION: no Math.random(), no
-  // import.meta, and no importing lib config/store modules (flags/saves/campaigns)
-  // from domain. @enforced-by this rule block.
-  // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — once every
-  // `now = new Date()` default-param fallback was threaded through from callers,
-  // this block could ban no-arg `new Date()` and `Date.now()` alongside
-  // Math.random()/import.meta. src/domain/clock.js is the sole exemption
+  // ── [determinism-pdf-locale-collation] + [determinism-pdf-entropy] (Cycle-3 W6) ─
+  // The paid PDF export is same-seed constitutional too, but src/pdf sat OUTSIDE the
+  // sim-tree determinism blocks. Two determinism classes are banned here:
+  //   • COLLATION — a localeCompare tie-break (the SupplyChainFlow category-group
+  //     ordering) could order non-ASCII labels differently across machines/locales.
+  //   • RANDOMNESS/ENTROPY (Cycle-3 M21) — a raw entropy draw in a PDF field id or any
+  //     rendered value makes the same viewmodel emit a DIFFERENT document each render
+  //     (M21: Editable.safeName's `f_${Math.random()}` field-name fallback). Ban the
+  //     entropy class: Math.random + crypto.randomUUID/getRandomValues. Fallbacks must
+  //     be deterministic (FNV-1a over stable inputs — see Editable.safeName).
+  // SCOPE NOTE — WALL-CLOCK IS INTENTIONALLY NOT BANNED. The generation-DATE stamp
+  // (Cover) and USER event timestamps (Timeline) legitimately read wall-clock at the
+  // src/pdf boundary; that allowance is ledgered (TEMPORAL_AUDIT.md §1) and asserted
+  // by tests/lint/determinismBanCoverage.test.js (pdf layer forbids the new-Date ban),
+  // so NO Date.now()/new Date() ban here — only randomness + collation, the classes
+  // that must never leak into a same-seed document. @enforced-by this rule block +
+  // tests/lint/pdfEntropyGuard.test.js (source-scan + wiring pin).
+  {
+    files: ['src/pdf/**/*.{js,jsx}'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism (M21): Math.random() in the same-seed PDF export makes the same viewmodel emit a different document each render. Use a deterministic FNV-1a hash of the stable inputs the call site has (see Editable.safeName / kernel/proseHash.js).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='randomUUID']",
+          message: 'Determinism: crypto.randomUUID() is a fresh random id every render — the same-seed PDF export must be reproducible. Derive a deterministic id from stable inputs (FNV-1a, see Editable.safeName).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='getRandomValues']",
+          message: 'Determinism: crypto.getRandomValues() is non-reproducible entropy — the same-seed PDF export must be byte-stable given its viewmodel. Derive deterministic values from stable inputs (FNV-1a, see Editable.safeName).',
+        },
+      ],
+    },
+  },
+
+  // ── A+ P1.2 — Determinism/purity guard widened to the domain kernel ──────────
+  // The domain layer must be a pure function of its inputs (see P0.5, which removed
+  // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
+  // CONSTRUCTION: no Math.random(), no import.meta, no importing lib config/store
+  // modules (flags/saves/campaigns) from domain, no localeCompare (F13 — the
+  // host ICU/locale collation reorders non-ASCII strings across devices; use
+  // compareCodepoint from domain/deterministicSort.js), and no locale FORMATTING
+  // (toLocaleString / toLocaleDateString / toLocaleTimeString / Intl.* — the same
+  // host tables render `8000` as "8,000" vs "8.000" depending on the device; use
+  // formatCount from domain/formatNumber.js). @enforced-by this rule block.
+  // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — the Phase-2
+  // now-threading track (Track A) finished threading the ~20 `now = new Date()`
+  // default-param fallbacks, so this block bans no-arg `new Date()` and `Date.now()`
+  // alongside Math.random()/import.meta. src/domain/clock.js is the sole exemption
   // (the documented wall-clock seam, mirroring rngContext/prng for randomness); a
   // source-regex guard (tests/domain/domainWallClock.test.js) backs this up if lint
   // is skipped. Parsing calls (`new Date(someValue)`) are deterministic-given-input
   // and intentionally NOT matched — only the no-arg readers are.
-  // ── Bare JSON.parse(JSON.stringify) clone ban (clone seam) ──────────────────
-  // The hot-path deep clone is centralized in src/domain/clone.js (deepClone),
-  // which uses structuredClone with a JSON fallback. Bare JSON.parse(JSON.stringify)
-  // on the store/domain hot paths is slower and lossy (drops undefined-valued keys,
-  // coerces Dates to strings), so it is banned by construction here. The selector is
-  // ADDED to this existing domain determinism block (flat-config is last-wins per
-  // rule, so a second no-restricted-syntax block would CLOBBER the determinism
-  // selectors above). src/domain/clone.js is exempt — it is the sole sanctioned
-  // clone seam and legitimately holds the JSON fallback. A source-scan guard
-  // (tests/lint/deepCloneHotPath.test.js) backs this up if lint is skipped.
-  // @enforced-by this rule + tests/lint/deepCloneHotPath.test.js
   {
     files: ['src/domain/**/*.js'],
-    ignores: ['src/domain/clock.js', 'src/domain/clone.js'],
+    ignores: ['src/domain/clock.js'],
     rules: {
       'no-restricted-syntax': ['error',
         {
-          // MemberExpression so an alias (`const r = Math.random; r()`) is caught too.
-          selector: "MemberExpression[object.name='Math'][property.name='random']",
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: the domain kernel must be pure — no Math.random(). Thread a seeded/derived value from the caller.',
         },
         {
@@ -210,12 +302,32 @@ export default [
           message: 'Determinism: new Date() reads wall-clock — thread `now` from the caller (default wallClockNow() from domain/clock.js, the sole sanctioned wall-clock entry).',
         },
         {
-          selector: "MemberExpression[object.name='Date'][property.name='now']",
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Determinism: Date.now() reads wall-clock — use wallClockMs() from domain/clock.js (the sole sanctioned entry) or thread a value in.',
         },
         {
-          selector: "CallExpression[callee.object.name='JSON'][callee.property.name='parse'] > CallExpression[callee.object.name='JSON'][callee.property.name='stringify']",
-          message: 'Use deepClone() from src/domain/clone.js — bare JSON.parse(JSON.stringify) is slower and lossy (drops undefined keys). The clone seam is centralized.',
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
         },
       ],
       'no-restricted-imports': ['error', {
@@ -227,28 +339,150 @@ export default [
     },
   },
 
-  // ── Bare JSON.parse(JSON.stringify) clone ban (store hot paths) ─────────────
-  // The store layer routes every hot-path deep clone through deepClone() (imported
-  // from ../domain/clone.js) — structuredClone with a JSON fallback, faster and
-  // lossless vs bare JSON.parse(JSON.stringify) (which drops undefined keys and
-  // coerces Dates). The store has no other no-restricted-syntax block, so this is a
-  // standalone block (no clobber risk). Backed by tests/lint/deepCloneHotPath.test.js.
-  // @enforced-by this rule + tests/lint/deepCloneHotPath.test.js
+  // ── Phase 5.5 W0 / F6 — sim-path purity across workers + kernel ──────────────
+  // The temporal audit (docs/TEMPORAL_AUDIT.md) found the no-Date gates covered
+  // src/generators + src/domain but NOT the other two sim-path dirs: src/workers
+  // (the advance worker — same code as the main thread) and src/kernel
+  // (rngContext/prng — the sanctioned NON-determinism seams). F6/[determinism-
+  // constitution-3] widened this from Date-only to the FULL determinism-guard set
+  // (Math.random + host-locale collation/format), because an ambient Math.random or
+  // a localeCompare/toLocale*/Intl call in the worker would ALSO silently fork
+  // worker-vs-main-thread bytes only under the simAdvanceWorker flag — the exact
+  // silent-divergence class the whole guard suite exists to make impossible. All
+  // three files verified CLEAN at extension time, so this lands as a hard error with
+  // no debt. The scan tests (tests/lint/locale*Guard.test.js) pin the selector counts.
+  // The store/lib/components layers are deliberately NOT covered — the boundary where
+  // wall-clock/locale legitimately enter (pinned-`now` mints, user timestamps,
+  // display formatting) — see the audit's boundary table.
+  //
+  // Three scopes, because the exemptions differ (flat config is last-wins per rule,
+  // so each file must be covered by exactly ONE no-restricted-syntax block):
+  //   • workers/** — the FULL ban incl. Math.random (no legitimate ambient entropy).
+  //   • kernel/** except prng.js — Date + locale, but NOT Math.random (rngContext's
+  //     unseededRandom() is the sanctioned fail-closed ambient draw).
+  //   • kernel/prng.js — locale only; generateSeed() mints from Date.now() plus WebCrypto,
+  //     falling back to Math.random where no crypto is exposed, BY DESIGN (the sole
+  //     seed-minting entry) — but prng needs no LOCALE exemption.
   {
-    files: ['src/store/**/*.{js,jsx}'],
+    files: ['src/workers/**/*.js'],
     rules: {
-      'no-restricted-syntax': ['error', {
-        selector: "CallExpression[callee.object.name='JSON'][callee.property.name='parse'] > CallExpression[callee.object.name='JSON'][callee.property.name='stringify']",
-        message: 'Use deepClone() from src/domain/clone.js — bare JSON.parse(JSON.stringify) is slower and lossy (drops undefined keys). The clone seam is centralized.',
-      }],
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: the advance worker must be pure — no Math.random(). Use the seeded rngContext draws or thread a value in; a raw draw forks worker-vs-main-thread bytes.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock on the sim path — thread `now` from the caller (the store boundary mints it; wallClockNow() in domain/clock.js is the domain seam).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() reads wall-clock on the sim path — thread a value in (only src/kernel/prng.js generateSeed may mint ambient entropy).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/kernel/**/*.js'],
+    ignores: ['src/kernel/prng.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock on the sim path — thread `now` from the caller (the store boundary mints it; wallClockNow() in domain/clock.js is the domain seam).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() reads wall-clock on the sim path — thread a value in (only src/kernel/prng.js generateSeed may mint ambient entropy).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/kernel/prng.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
     },
   },
 
   // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
   // accessibility gaps accumulated invisibly. These started at WARN for an
-  // incremental cleanup; once the recommended-rule count reached zero (the
-  // cleanup spanned 55 files) they were promoted to ERROR so regressions block
+  // incremental cleanup; once the recommended-rule count reached zero (WS3
+  // burn-down across 55 files) they were promoted to ERROR so regressions block
   // the gate — mirroring how the visual-budget rules were hardened.
   // @enforced-by jsx-a11y/alt-text
   // A handful of
@@ -263,12 +497,12 @@ export default [
     ),
   },
 
-  // ── Component size ratchet (max-lines) ──────────────────────────────────────
+  // ── A+ P1.4 + components-core — component size ratchet (max-lines) ───────────
   // The ten historical god-components (WorldMap 1338, EventComposer 1208,
   // CompendiumPanel 1165, GenerateWizard 1140, SettlementsPanel 1104,
   // OutputContainer 1019, SettlementDetail, WorldPulsePanel, AdminTrendsPanel,
   // AccountPage) have all been decomposed below 600 effective lines via
-  // behavior-preserving extraction. Every src/components/**/*.jsx file
+  // behavior-preserving extraction (Track C). Every src/components/**/*.jsx file
   // is now under 600, so the ratchet is promoted from 'warn' to 'error': a NEW
   // god-component fails the gate the moment it lands.
   // @enforced-by max-lines (this rule)
@@ -280,7 +514,89 @@ export default [
     },
   },
 
-  // ── Forked design-token const guard (components) ────────────────────────────
+  // ── F31 — generator size ratchet (max-lines) ─────────────────────────────────
+  // The three de-minified monoliths (economicGenerator 2,650 / powerGenerator
+  // 2,493 / servicesGenerator 2,033) were decomposed into thin barrels over
+  // economy/ + power/ + services/ modules, all under 800 effective lines, with
+  // the golden master byte-identical. This ratchet locks the shape: a generator
+  // file that grows past 800 fails the gate.
+  // @enforced-by max-lines (this rule) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
+  // The legacy files still over 800 (npcGenerator, narrativeGenerator,
+  // historyGenerator) are FROZEN at their current effective size by the size
+  // baseline (generated overrides at the bottom of this file) — no longer `off`
+  // (unbounded), a burn-down worklist: decompose one below 800 and DELETE its
+  // baseline entry. computeActiveChains and defenseGenerator have since fallen
+  // under the 800 ceiling and had their entries removed.
+  {
+    files: ['src/generators/**/*.js'],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+
+  // ── code-quality-7 — domain size ratchet (max-lines) ─────────────────────────
+  // The domain layer is the highest-judgment code in the tree (the tick kernel,
+  // the war layer, the causal graph) and was the only major layer without a size
+  // ratchet — so a mis-read costs the most exactly where nothing guarded growth
+  // (M9–M11 all landed here). This mirrors the F31 generator ratchet. Every
+  // current offender is grandfathered by the explicit override below — a
+  // shrink-only burn-down worklist, not a licence: decompose one below 800 and
+  // DELETE its override (same doctrine as every baseline in this file). Ceiling
+  // matches generators (800) to exert real pressure. Independently tracked
+  // follow-up: warDeployment.evaluateWarLayer (~930-line function) decomposes
+  // along its own step comments — behaviour-preserving, goldens byte-identical
+  // (deferred; not part of this ratchet). A NEW domain file that grows past 800
+  // EFFECTIVE lines (skipBlankLines + skipComments) is rejected by max-lines. Files
+  // ALREADY over 800 are frozen at their current size by scripts/.size-baseline.json (the
+  // generated per-file overrides at the bottom of this file) — NOT `off`. That is
+  // the code-quality-architecture-1 fix: `off` let pulseKernel grow +28% unbounded
+  // and never locked the stressors.js win (now 477 eff, under 800 — removed).
+  // @enforced-by max-lines (this rule) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
+  {
+    files: ['src/domain/**/*.js'],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+
+  // ── code-quality-architecture-3 — size-ratchet coverage extension ────────────
+  // The size ratchet previously covered only components (600), generators (800),
+  // and domain (800). The store, pdf, lib, hooks, and utils layers — and the
+  // src-root files (App.jsx was missed by the src/components/** glob) — had NO
+  // max-lines rule, so a 1,298-line slice or a 732-effective-line App.jsx grew
+  // unguarded. Same 800 ceiling as the other engine-adjacent layers (600 for the
+  // root .jsx, which is component-shaped); current over-ceiling files
+  // (settlementSlice, aiSlice, pdf/lib/viewModel, App.jsx) are frozen by the baseline.
+  // The extension left ONE hole: the components ceiling above matches `.jsx` only, so the
+  // non-component logic modules under src/components (runtimes, presentation models,
+  // handler bundles) had no rule at all — threeSceneRuntime.js reached 704 effective lines
+  // unguarded. They take the 800 engine-adjacent ceiling, not the 600 component ceiling:
+  // they are plain modules, and 704 already lives between the two.
+  // @enforced-by max-lines (these rules) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
+  {
+    files: [
+      'src/components/**/*.js', // components-layer .js modules (the .jsx rule above is jsx-only)
+      'src/store/**/*.{js,jsx}',
+      'src/pdf/**/*.{js,jsx}',
+      'src/lib/**/*.{js,jsx}',
+      'src/hooks/**/*.{js,jsx}',
+      'src/utils/**/*.{js,jsx}',
+      'src/*.js', // src-root .js (main-graph glue); none over 800 today, future-proofed
+    ],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    // src-root .jsx (App.jsx / AppViews.jsx / main.jsx) — component-shaped, so the
+    // 600 component ceiling. App.jsx (955) is frozen by the size baseline below.
+    files: ['src/*.jsx'],
+    rules: {
+      'max-lines': ['error', { max: 600, skipBlankLines: true, skipComments: true }],
+    },
+  },
+
+  // ── A+ P1.3 — forked design-token const guard (components) ──────────────────
   // no-raw-color only inspects JSX style props; this catches `const X = '#hex'`
   // re-declarations of token values. 43 files are grandfathered in
   // scripts/.forked-color-baseline.json (burn-down worklist); a NEW fork in any
@@ -292,7 +608,7 @@ export default [
     rules: { 'visual-budget/no-forked-color-const': 'error' },
   },
 
-  // ── Raw <button> guard ──────────────────────────────────────────────────────
+  // ── A+ enforcement.5 — raw <button> guard ───────────────────────────────────
   // A real Button/IconButton primitive exists, but raw <button> elements outside
   // primitives/ re-implement focus-ring/disabled/target-size/variants by hand.
   // Files that currently fork are grandfathered in scripts/.raw-button-baseline.json
@@ -300,8 +616,8 @@ export default [
   // baseline cannot grow (pinned to monotone shrink).
   // @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js
   //
-  // An icon-only <button> (element child, no text anywhere in the subtree) must
-  // carry an accessible name (aria-label/aria-labelledby/title), or
+  // A+ design-a11y.5 — icon-only <button> (element child, no text anywhere in the
+  // subtree) must carry an accessible name (aria-label/aria-labelledby/title), or
   // a screen reader announces only "button". The 82 historical offenders were all
   // labeled; this is ERROR with NO baseline — the count is zero and stays zero.
   // @enforced-by jsx-hygiene/icon-button-needs-label + tests/ui/a11y.audit.test.jsx
@@ -314,9 +630,62 @@ export default [
     },
   },
 
+  // ── F24 follow-through — no ', ' placeholder in component fallbacks ─────────
+  // A typography reformat corrupted em-dashes into ', ' (`x || '—'` became
+  // `x || ', '`, `.split('—')` became `.split(', ')`), so missing values render
+  // as a bare comma-space in the app UI. The PDF side is pinned by
+  // tests/pdf/missingValuePlaceholders.test.js; this is the app-side guard.
+  // Missing-value placeholders must be EMPTY_VALUE from components/theme.js.
+  // Joiner usage stays legal by construction: `.join(', ')` / `.split(', ')`
+  // are call arguments and `{k > 0 ? ', ' : ''}` is a ConditionalExpression
+  // (PipelineRail's downstream-effects list) — none of these positions are
+  // matched. Only fallback positions (`|| ', '`, `?? ', '`, `return ', '`) and
+  // JSX copy that OPENS with ', ' (a decapitated em-dash) are errors.
+  // NOTE: scoped to src/components only — widening `files` to a glob that
+  // overlaps src/generators or src/domain would silently REPLACE their
+  // determinism no-restricted-syntax blocks (flat config is last-wins per rule).
+  {
+    files: ['src/components/**/*.{js,jsx}'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "LogicalExpression[operator='||'] > Literal[value=', ']",
+          message: "', ' as a fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        {
+          selector: "LogicalExpression[operator='??'] > Literal[value=', ']",
+          message: "', ' as a fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        {
+          selector: "ReturnStatement > Literal[value=', ']",
+          message: "Returning the literal ', ' is a corrupted em-dash placeholder — return EMPTY_VALUE from components/theme.js.",
+        },
+        // Ternary fallback (`cond ? value : ', '`). Only the ALTERNATE slot is
+        // restricted: PipelineRail's legitimate joiner is `k > 0 ? ', ' : ''`
+        // (consequent slot), and consequent-position placeholders can't be
+        // distinguished from that joiner shape — they stay a documented residual.
+        {
+          selector: "ConditionalExpression[alternate.value=', ']",
+          message: "', ' as a ternary fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        // `const X = ', '` — the corrupted form of theme.js's own
+        // `EMPTY_VALUE = '—'`. A joiner constant is not a real loss: pass the
+        // literal to .join(', ') directly instead of naming it.
+        {
+          selector: "VariableDeclarator > Literal[value=', ']",
+          message: "A ', ' constant is a corrupted em-dash placeholder (cf. EMPTY_VALUE in components/theme.js) — restore '—', or inline the literal into .join(', ') if it is a joiner.",
+        },
+        {
+          selector: 'JSXElement > JSXText:first-child[value=/^\\s*,\\s/]',
+          message: "JSX copy opening with ', ' is a decapitated em-dash (e.g. '— Choose an archetype —') — restore the em-dash.",
+        },
+      ],
+    },
+  },
+
   // Narrative template tables that hold render-time rng/pickRandom2 closures
-  // (moved out of src/data so the data layer stays pure-import). They are still
-  // uniform-signature data tables — every entry is
+  // (A+ Track H data-schema.3: moved out of src/data so the data layer stays
+  // pure-import). They are still uniform-signature data tables — every entry is
   // `(r) => …` even when an individual line doesn't read `r` — so the same
   // intentional-shape rationale as the src/data override applies: flagging the
   // unused `r` would be pure noise.
@@ -336,16 +705,20 @@ export default [
     files: ['src/data/**/*.{js,jsx}'],
     rules: {
       'no-unused-vars': 'off',
-      // ── src/data purity ──────────────────────────────────────────────────────
+      // ── A+ Track H (data-schema.2) — src/data purity ─────────────────────────
       // src/data/** must be PURE DATA: no runtime imports of the generators,
       // store, or lib layers (which would re-introduce RNG capture / IO leaks
       // into the data tables). Executable closures live in the generators layer
       // (stressNarrative.js, narrativeText.js); the data files hold only fields.
-      // @enforced-by this rule + tests/domain/dataPurity.test.js
+      // The kernel layer is NOT banned wholesale — data legitimately imports the
+      // pure, deterministic kernel/slugify.js — but the prng seam IS: kernel/prng.js
+      // carries generateSeed() (Date.now()+Math.random()), the one ambient-entropy
+      // vector in the kernel (scripts-build-ci-1 residual). rngContext.js is likewise
+      // banned (seeded-draw capture). @enforced-by this rule + tests/domain/dataPurity.test.js
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['**/generators/**', '**/store/**', '**/lib/**'],
-          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib. Move executable logic into the generators layer and import data, not behavior.',
+          group: ['**/generators/**', '**/store/**', '**/lib/**', '**/kernel/prng*', '**/kernel/rngContext*'],
+          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib, or the kernel prng/rngContext seams (generateSeed/ambient RNG re-introduces non-determinism). Move executable logic into the generators layer and import data, not behavior.',
         }],
       }],
     },
@@ -374,4 +747,11 @@ export default [
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
+
+  // ── Per-file size-baseline overrides (generated from scripts/.size-baseline.json) ──
+  // MUST be last: flat config resolves rules last-match-wins, so each frozen per-file
+  // `max-lines` ceiling here overrides the per-layer 800/600 rules above for that one
+  // file. This replaces the old `max-lines: 'off'` grandfathers — the files are bounded
+  // at their current size, not unbounded. Edit the JSON, never these generated objects.
+  ...sizeBaselineOverrides,
 ];

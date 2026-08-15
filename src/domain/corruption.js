@@ -19,7 +19,11 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
-import { TRAIT_ALIGNMENT } from '../data/npcData.js';
+// TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
+// re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
+// so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
+// module into the first-paint static closure (FP-G3 reclaim). @see data/npcTraitWeights.js
+import { TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../data/npcTraitWeights.js';
 
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
@@ -47,14 +51,14 @@ const FLAW_VECTOR = Object.freeze({
 
 export const CORRUPTIBLE_FLAWS = Object.freeze(Object.keys(FLAW_VECTOR));
 
-/** @param {any} flaw */
+/** @param {unknown} flaw */
 export function isCorruptibleFlaw(flaw) {
   if (!flaw) return false;
   return Object.prototype.hasOwnProperty.call(FLAW_VECTOR, String(flaw).toLowerCase());
 }
 
 /** Corruption vector for a flaw; defaults to 'greed' for an unmapped value.
- *  @param {any} flaw */
+ *  @param {unknown} flaw */
 export function corruptionVectorForFlaw(flaw) {
   return /** @type {Record<string, string>} */ (FLAW_VECTOR)[String(flaw || '').toLowerCase()] || 'greed';
 }
@@ -121,7 +125,7 @@ export const CORRUPTION_TUNING = Object.freeze({
 
 /** @param {number} x @param {number} lo @param {number} hi @returns {number} */
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
-/** @param {any} x @returns {number} */
+/** @param {number} x @returns {number} */
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
 // ── Good/evil deity → corruption pressure ───────────────────────────────────
@@ -140,14 +144,20 @@ export const DEITY_CORRUPTION_TUNING = Object.freeze({
 
 /** Lowercased authored personality descriptor strings for an NPC: reads the
  *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
- *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
+ *  string / array shape, PLUS the growth-layer acquired overlay (learned traits
+ *  the engine weathered onto the NON-core npc.acquiredTraits[] — commission #36;
+ *  absent ⇒ [] ⇒ byte-identical). NEVER reads npcStates.alignment (RNG-rolled).
  * @param {import('./settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredAlignmentTraits(npc = {}) {
   const p = npc?.personality;
-  if (!p) return [];
-  if (typeof p === 'string') return [p];
-  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
-  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  const acquired = acquiredTraitDescriptors(npc);
+  /** @type {string[]} */
+  let core;
+  if (!p) core = [];
+  else if (typeof p === 'string') core = [p];
+  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
+  else core = [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  return acquired.length ? [...core, ...acquired] : core;
 }
 
 /** Signed good↔evil conscience score for an NPC's AUTHORED personality (Σ of
@@ -289,6 +299,19 @@ function deityDisfavorMult(mult) {
   return clamp(mult, lo, hi);
 }
 
+// ── W-F3 corruption-plane PRESSURE seam ─────────────────────────────────────
+// The corruption-plane amplifier (piety.corruptionPlaneMult) is a SETTLEMENT-level
+// multiplier over the pressure RATE — distinct from the per-NPC deityDisfavor knob
+// above — passed by the pulse callers (npcAgency / factionCapture) as `pressureMult`.
+// It defaults to 1.0 ⇒ byte-identical (deity-free / legacy 3-axis / non-devout), and
+// is sanity-bounded here; the pressure function's own final min/max clamp is the real
+// containment, so the plane can tilt the forward rate but never death-spiral it.
+const PRESSURE_MULT_MAX = 2.0;
+/** @param {number} mult @returns {number} */
+function pressureRateMult(mult) {
+  return Number.isFinite(mult) ? clamp(mult, 0, PRESSURE_MULT_MAX) : 1.0;
+}
+
 /**
  * Generation-time corruption probability for an ELIGIBLE NPC with a criminal
  * institution present. Caller must check eligibility + criminal presence first.
@@ -316,10 +339,12 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * resisting the pull: a flaw+temperament NPC turns at `steadiness`× a flaw-only
  * NPC's rate. Defaults to 1.0 ⇒ no temperament / dormant is byte-identical.
  *
- * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number}} [args]
+ * `pressureMult` is the W-F3 corruption-plane amplifier (1.0 default ⇒ byte-identical).
+ *
+ * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number, pressureMult?:number}} [args]
  * @returns {number}
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1, pressureMult = 1 } = {}) {
   const t = CORRUPTION_TUNING.onset;
   let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
   // A burned official is warier + more watched: each prior exposure makes
@@ -328,6 +353,9 @@ export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, prior
   p *= deityDisfavorMult(deityDisfavor);
   // A steady temperament resists the pull (post-sum threshold shift, not a draw).
   p *= clamp(steadiness, 0, 1);
+  // The settlement-level corruption-plane amplifier (chaotic-evil patron + piety ⇒ the
+  // rot spreads faster; lawful-good ⇒ it is starved). 1.0 ⇒ byte-identical.
+  p *= pressureRateMult(pressureMult);
   return clamp(p, t.min, t.max);
 }
 
@@ -355,6 +383,10 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
   // A repeat offender draws more scrutiny: each prior exposure makes re-exposure easier.
   p *= 1 + t.repeatBoost * Math.max(0, priorExposures);
   p *= deityDisfavorMult(deityDisfavor);
+  // NOTE: exposure is the SELF-CLEANING counter-force, not a corruption PRESSURE channel,
+  // so the W-F3 corruption-plane amplifier deliberately does NOT ride here (owner scope:
+  // "pressure channels only") — amplifying the counter-force would make devout-CE clean
+  // up faster, the opposite of the intent.
   return clamp(p, t.min, t.max);
 }
 
@@ -363,7 +395,7 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
 export const IMPORTANCE_LADDER = Object.freeze(['pillar', 'key', 'notable', 'minor']);
 
 /** Demote one importance step (floor = minor). Unknown → 'notable'.
- *  @param {any} importance */
+ *  @param {string} importance */
 export function demoteImportance(importance) {
   const i = IMPORTANCE_LADDER.indexOf(importance);
   if (i < 0) return 'notable';
@@ -371,13 +403,13 @@ export function demoteImportance(importance) {
 }
 
 /** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1).
- *  @param {any} dotRank */
+ *  @param {unknown} dotRank */
 export function demoteDotRank(dotRank) {
   return Math.max(1, (Number(dotRank) || 1) - 1);
 }
 
 /** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced.
- *  @param {any} importance */
+ *  @param {string|null|undefined} importance */
 export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
@@ -389,7 +421,7 @@ export function canBeOuted(importance) {
 export const CAPTURE_LADDER = Object.freeze(['none', 'adversarial', 'equilibrium', 'corrupted', 'capture']);
 
 /** Step the ladder one rung up (toward capture) or down (toward none).
- *  @param {any} state @param {any} up */
+ *  @param {string} state @param {boolean} up */
 export function advanceCaptureState(state, up) {
   const i = CAPTURE_LADDER.indexOf(state);
   const cur = i < 0 ? 0 : i;
@@ -404,10 +436,11 @@ export const CAPTURE_TUNING = Object.freeze({
 
 /** Per-tick chance a faction with a corrupt seat-holder climbs the ladder. The
  *  corrupt member's seat rank (1=agent..3=leader) drives it; security+prosperity
- *  damp it. */
-export function captureAdvanceChance({ rank = 1, security = 0.5, prosperity = 0.5 } = {}) {
+ *  damp it. `pressureMult` is the W-F3 corruption-plane amplifier over the INSTITUTION
+ *  capture rate (a pressure channel) — 1.0 default ⇒ byte-identical. */
+export function captureAdvanceChance({ rank = 1, security = 0.5, prosperity = 0.5, pressureMult = 1 } = {}) {
   const t = CAPTURE_TUNING.advance;
-  const p = t.base + n01((Number(rank) || 1) / 3) * t.rank - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  const p = (t.base + n01((Number(rank) || 1) / 3) * t.rank - n01(security) * t.security - n01(prosperity) * t.prosperity) * pressureRateMult(pressureMult);
   return clamp(p, t.min, t.max);
 }
 
@@ -465,15 +498,20 @@ const PROSPERITY_SCORE = Object.freeze({
   prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
 });
 
-/** @param {any} value */
+/** @param {unknown} value */
 function prosperityScore(value) {
   const s = String(value || '').toLowerCase();
   for (const [k, v] of Object.entries(PROSPERITY_SCORE)) { if (s.includes(k)) return v; }
   return 0.4; // unknown → middling
 }
 
-/** @param {import('./settlement.schema.js').SimInstitution} inst */
-function isCriminalInstitution(inst) {
+/**
+ * The ONE criminal-organization detector (tag/name backfill OR criminal
+ * category). Exported (W-COMPOSER-1) so the composer's affordance layer wraps
+ * THIS function instead of re-implementing the filter — the same-function law.
+ * @param {import('./settlement.schema.js').SimInstitution} inst
+ */
+export function isCriminalInstitution(inst) {
   if (!inst) return false;
   // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
   // resolved by the centralized institutionTags map (lib/entities) — plus the
@@ -491,6 +529,9 @@ export function readCorruptionClimate(settlement) {
   const sp = eco.safetyProfile || settlement?.safetyProfile || {};
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
 
+  // The inline cast below stays: `.map(i => i.name)` yields (string|undefined)[]
+  // and `.filter(Boolean)` does not narrow it, so letting i infer as
+  // SimInstitution makes the declared `criminalInstitutions: string[]` red.
   const criminalInstitutions = institutions.filter(isCriminalInstitution).map((/** @type {any} */ i) => i.name).filter(Boolean);
   const hasCriminalInst = criminalInstitutions.length > 0
     || (Array.isArray(sp.criminalInstitutions) && sp.criminalInstitutions.length > 0);
@@ -533,7 +574,7 @@ export const PATRONAGE_TUNING = Object.freeze({
   proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
 });
 
-/** @param {any} a @param {any} b */
+/** @param {unknown} a @param {unknown} b */
 function nameMatches(a, b) {
   const x = String(a || '').trim().toLowerCase();
   const y = String(b || '').trim().toLowerCase();
@@ -561,7 +602,7 @@ export function npcHomeInstitution(npc) {
 export function compromisedSecurityInstitutions(settlement) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const securityInstitutions = institutions
-    .filter((/** @type {any} */ inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
 
   // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
@@ -572,9 +613,9 @@ export function compromisedSecurityInstitutions(settlement) {
   const revealed = new Set();
   const covert = new Set();
   for (const inst of securityInstitutions) {
-    const corruptionImps = (inst.impairments || []).filter((/** @type {any} */ imp) => imp?.type === 'corruption');
+    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
     if (!corruptionImps.length) continue;
-    if (corruptionImps.some((/** @type {any} */ imp) => imp?.covert !== true)) revealed.add(inst.name);
+    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
     else covert.add(inst.name);
   }
 
@@ -582,7 +623,7 @@ export function compromisedSecurityInstitutions(settlement) {
     if (npc?.corrupt !== true || npc?.ousted) continue;
     const home = npcHomeInstitution(npc);
     if (!home) continue;
-    const match = securityInstitutions.find((/** @type {any} */ inst) => nameMatches(inst.name, home));
+    const match = securityInstitutions.find((inst) => nameMatches(inst.name, home));
     if (match && !revealed.has(match.name)) covert.add(match.name);
   }
 

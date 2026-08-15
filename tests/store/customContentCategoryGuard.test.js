@@ -1,14 +1,10 @@
 /**
  * tests/store/customContentCategoryGuard.test.js — B11-store finding #9.
  *
- * addCustomItem / updateCustomItem / deleteCustomItem assumed the category
- * bucket already existed. A category not present in EMPTY (a typo, a UI bucket
- * added before EMPTY, or a cloud row with an unexpected category) made
- * state.customContent[category] undefined, so .unshift/.findIndex/.filter threw
- * INSIDE the Immer producer and aborted the action with an uncaught error.
- *
- * The fix lazily initialises the bucket. These tests pin that no throw occurs
- * and the item lands.
+ * Unknown categories once created arbitrary buckets on demand. That behavior
+ * made a typo an undeclared extension point. The canonical manifest now fails
+ * such writes closed while keeping the caller-facing compatibility methods
+ * total (no throw and no mutation).
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import { create } from 'zustand';
@@ -34,34 +30,46 @@ function makeStore() {
   })));
 }
 
-describe('customContent mutators guard an unknown category (finding #9)', () => {
+describe('customContent mutators fail closed on an unknown category', () => {
   beforeEach(() => installLocalStorage());
 
-  it('addCustomItem creates the bucket instead of throwing', () => {
+  it('addCustomItem refuses the bucket without throwing or mutating state', async () => {
     const store = makeStore();
-    expect(() => store.getState().addCustomItem('totallyNewBucket', { name: 'X' }))
-      .not.toThrow();
-    expect(store.getState().customContent.totallyNewBucket).toHaveLength(1);
-    expect(store.getState().customContent.totallyNewBucket[0].name).toBe('X');
+    // async since the de-eager lane — a rejection would fail this await, which
+    // is the same no-throw pin the sync wrapper used to assert.
+    const result = await store.getState().addCustomItem(
+      'totallyNewBucket',
+      { name: 'X' },
+    );
+    expect(result).toBeNull();
+    expect(store.getState().customContent.totallyNewBucket).toBeUndefined();
+    expect(store.getState().customContentError).toMatch(/unregistered_bucket/);
   });
 
-  it('updateCustomItem on an unknown category is a safe no-op', () => {
+  it('updateCustomItem on an unknown category is a safe no-op', async () => {
     const store = makeStore();
-    expect(() => store.getState().updateCustomItem('phantomBucket', 'id-1', { name: 'Y' }))
-      .not.toThrow();
-    expect(store.getState().customContent.phantomBucket).toEqual([]);
+    const result = await store.getState().updateCustomItem(
+      'phantomBucket',
+      'id-1',
+      { name: 'Y' },
+    );
+    expect(result).toBeNull();
+    expect(store.getState().customContent.phantomBucket).toBeUndefined();
   });
 
-  it('deleteCustomItem on an unknown category is a safe no-op', () => {
+  it('deleteCustomItem on an unknown category returns a failed receipt', async () => {
     const store = makeStore();
-    expect(() => store.getState().deleteCustomItem('ghostBucket', 'id-1'))
-      .not.toThrow();
-    expect(store.getState().customContent.ghostBucket).toEqual([]);
+    const receipt = await store.getState().deleteCustomItem(
+      'ghostBucket',
+      'id-1',
+    );
+    expect(receipt).toMatchObject({ ok: false });
+    expect(store.getState().customContent.ghostBucket).toBeUndefined();
   });
 
-  it('known buckets are unaffected (regression guard)', () => {
+  it('known buckets are unaffected (regression guard)', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('institutions', { name: 'Grand Hall' });
+    await store.getState().addCustomItem('institutions', { name: 'Grand Hall' });
     expect(store.getState().customContent.institutions[0].name).toBe('Grand Hall');
   });
 });

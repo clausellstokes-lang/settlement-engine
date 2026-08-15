@@ -12,7 +12,8 @@
  * (3) the simultaneous drain at advanceCampaignWorld, including the crisis-twin
  * injection that relocates from author time to tick time.
  */
-import { beforeEach, describe, test, expect, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, test, expect, vi } from 'vitest';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -37,8 +38,8 @@ vi.mock('../../src/lib/campaigns.js', () => {
 });
 
 // Multi-tick is GA (default-on in flags.js). This file pins the LEGACY single-tick
-// clock-queue drain/undo semantics ("one advance = one tick", viaTick===0); mock the
-// flag OFF so its assertions stay byte-exact.
+// clock-queue drain/undo semantics ("one advance = one tick"); mock the flag OFF so
+// its assertions stay byte-exact.
 vi.mock('../../src/lib/flags.js', () => ({
   flag: vi.fn(name => (name === 'advanceMultiTick' ? false : false)),
 }));
@@ -48,6 +49,7 @@ import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { edgeIdFor } from '../../src/domain/region/graph.js';
 import { drainQueuedEvents } from '../../src/domain/events/drainQueuedEvents.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
@@ -395,5 +397,303 @@ describe('campaign-clock: Phase C review-fix regressions', () => {
     const active = store.getState().savedSettlements.find(s => s.id === 'ashford');
     const bare = deriveSystemState(active.settlement);
     expect(active.campaignState.systemState.externalThreat.value).toBe(bare.externalThreat.value);
+  });
+});
+
+// ── Lane-2 drain-path parity (domain-events-region-1 twin) ───────────────────
+// The immediate path (settlementSlice.rippleEventThroughWorld) ripples a NON-party
+// DM relationship verb onto the campaign's pulse edge the instant it applies. A
+// clock-bound member's identical verb QUEUES and must ripple at the tick, through
+// the SAME applier — same canonical edge minting (edgeIdFor), same lastCanonEventId
+// supersession stamp, same orientation. These pin the drained twin.
+describe('campaign-clock: drain-path parity for canon relationship verbs (Lane-2 twin)', () => {
+  // The forward ripple awaits the lazy world-engine chunk; warm it once so the
+  // immediate-path comparison's fire-and-forget lands fast + deterministically.
+  beforeAll(async () => {
+    installLocalStorage();
+    const warm = makeStore();
+    await warm.getState().recordCanonRelationshipRipple('no-such-campaign', {
+      event: { id: 'warm', type: 'OPENED_TRADE_ROUTE', targetId: 'x' }, homeId: 'y',
+    });
+  });
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  const brokeredAlliance = (id, targetId) => ({ id, type: 'BROKERED_ALLIANCE', targetId, payload: {}, cause: 'player_action' });
+  const ALLY_KEY = edgeIdFor('ashford', 'brookmere'); // the canonical derivation id
+
+  async function flushUntil(pred, timeoutMs = 5000) {
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      if (pred()) return;
+      await new Promise(r => setTimeout(r, 10));
+    }
+  }
+
+  test('a queued BROKERED_ALLIANCE drains into the canonical pulse edge, stamped for supersession', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    store.getState().applyEvent(brokeredAlliance('ev-ally', 'brookmere'));
+    // Queued — the ripple has NOT fired yet (the immediate path would have by now).
+    expect(pendingOf(store)).toHaveLength(1);
+    expect(worldOf(store).relationshipStates || {}).toEqual({});
+
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+
+    const rel = worldOf(store).relationshipStates?.[ALLY_KEY];
+    expect(rel).toBeTruthy();
+    expect(rel.relationshipType).toBe('allied');
+    expect(rel.lastCanonEventId).toBe('ev-ally'); // the supersession stamp landed
+    // The canonical graph edge was minted (survives the tick, keyed by edgeIdFor).
+    expect((store.getState().campaigns[0].regionalGraph.edges || []).some(e => e.id === ALLY_KEY)).toBe(true);
+  });
+
+  test('PARITY: a drained verb yields the same relationship content as the immediate path', async () => {
+    const stripVolatile = (rel) => {
+      // The WHEN fields legitimately differ (immediate fires at author-time/tick 0,
+      // the drain at the tick) — compare the WHAT (type + affect + supersession).
+      const { updatedAt, lastTransitionTick, recentIncidents, ...stable } = rel;
+      return stable;
+    };
+
+    // IMMEDIATE: world NOT canonized ⇒ ashford non-clock-bound ⇒ ripples at author
+    // time (fire-and-forget — flush it).
+    const immediate = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: false });
+    immediate.getState().applyEvent(brokeredAlliance('ev-par', 'brookmere'));
+    await flushUntil(() => immediate.getState().campaigns[0].worldState.relationshipStates?.[ALLY_KEY]);
+    const immRel = immediate.getState().campaigns[0].worldState.relationshipStates[ALLY_KEY];
+
+    // DRAIN: world canonized ⇒ ashford clock-bound ⇒ queues, ripples at the tick
+    // through the SAME applier (awaited inside advanceCampaignWorld).
+    const drain = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    drain.getState().applyEvent(brokeredAlliance('ev-par', 'brookmere'));
+    await drain.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    const drainRel = drain.getState().campaigns[0].worldState.relationshipStates[ALLY_KEY];
+
+    expect(drainRel).toBeTruthy();
+    expect(immRel).toBeTruthy();
+    expect(stripVolatile(drainRel)).toEqual(stripVolatile(immRel));
+    expect(drainRel.lastCanonEventId).toBe('ev-par');
+    expect(immRel.lastCanonEventId).toBe('ev-par');
+  });
+
+  test('DETERMINISM (pinNow seam): two drains with the same pinned now are byte-identical, updatedAt included', async () => {
+    const runOnce = async () => {
+      const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+      store.getState().applyEvent(brokeredAlliance('ev-det', 'brookmere'));
+      await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+      return store.getState().campaigns[0].worldState.relationshipStates?.[ALLY_KEY];
+    };
+    const a = await runOnce();
+    const b = await runOnce();
+    expect(a).toBeTruthy();
+    // The advance's pinned `now` threaded through the seam IS the edge's updatedAt —
+    // NOT a wall-clock read. Absent the seam this would be a per-run wall stamp.
+    expect(a.updatedAt).toBe('2026-02-01T00:00:00.000Z');
+    // Byte-identical INCLUDING updatedAt (the pinNow collapse makes the drained
+    // ripple fully deterministic — no field needs stripping).
+    expect(a).toEqual(b);
+  });
+
+  test('NEGATIVE CONTROL: a drained non-relationship event mints no pulse relationship edge', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    // DEPLETE_RESOURCE carries no relationship semantics ⇒ the gate surfaces nothing.
+    store.getState().applyEvent({ id: 'ev-neg', type: 'DEPLETE_RESOURCE', targetId: 'iron ore', payload: {}, cause: 'player_action' });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    expect(worldOf(store).relationshipStates || {}).toEqual({});
+  });
+
+  test('NEGATIVE CONTROL: a party-caused relationship verb does NOT drain through the non-party path', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    // partyCaused ⇒ excluded from the non-party canon gate (it is Lane-1's territory).
+    store.getState().queueSettlementEvent('ashford', { id: 'ev-party', type: 'BROKERED_ALLIANCE', targetId: 'brookmere', payload: {}, partyCaused: true, cause: 'player_action' });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    expect(worldOf(store).relationshipStates?.[ALLY_KEY]).toBeUndefined();
+  });
+});
+
+describe('campaign-clock: THE MUTABLE DOCKET (W-COMPOSER-2 §10)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('EDIT round-trip: updateQueuedEvent replaces IN PLACE — same queueId, same drain position, id preserved', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.getState().applyEvent(stressorEvent('ev-first', 'under_siege'));
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-edit-me', 'plague_outbreak'));
+    store.getState().applyEvent(stressorEvent('ev-last', 'famine'));
+    expect(pendingOf(store)).toHaveLength(3);
+    expect(pendingOf(store)[1].queueId).toBe(queueId);
+
+    // The edit: same event id (identity persists across edits), new dials.
+    const edited = { ...stressorEvent('ev-edit-me', 'plague_outbreak'), payload: { stressorType: 'plague_outbreak', label: 'Under Plague', severity: 0.35 } };
+    const ok = store.getState().updateQueuedEvent('camp-1', queueId, edited);
+    expect(ok).toBe(true);
+
+    const queue = pendingOf(store);
+    expect(queue).toHaveLength(3);
+    // POSITION preserved (drain order is part of the docket's meaning).
+    expect(queue[1].queueId).toBe(queueId);
+    expect(queue[1].event.id).toBe('ev-edit-me');
+    expect(queue[1].event.payload.severity).toBe(0.35);
+    // Neighbours untouched.
+    expect(queue[0].event.id).toBe('ev-first');
+    expect(queue[2].event.id).toBe('ev-last');
+  });
+
+  test('CANCEL is byte-identical to never-queued (worldState round-trip)', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // Warm-up queue+cancel so the baseline is the ENSURED worldState shape
+    // (queueSettlementEvent normalizes via ensureWorldState on first touch).
+    const warm = store.getState().applyEvent(stressorEvent('ev-warm'));
+    store.getState().cancelQueuedEvent('camp-1', warm.queueId);
+    const before = JSON.parse(JSON.stringify(worldOf(store)));
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-gone'));
+    expect(pendingOf(store)).toHaveLength(1);
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(true);
+    expect(JSON.parse(JSON.stringify(worldOf(store)))).toEqual(before);
+    expect(store.getState().eventLog).toHaveLength(0);
+  });
+
+  test('unknown queueId edits refuse; docket mutations refuse while an advance is in flight', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    expect(store.getState().updateQueuedEvent('camp-1', 'pe_missing', stressorEvent('x'))).toBe(false);
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-guard'));
+    // Simulate an in-flight advance (the sync-prefix guard's read).
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    expect(store.getState().updateQueuedEvent('camp-1', queueId, stressorEvent('ev-guard'))).toBe(false);
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(false);
+    store.setState(state => { state.advanceInFlight = []; });
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(true);
+  });
+
+  test('a LAPSED entry that reaches the drain is REFUSED VISIBLY in the advance digest — never phantom-committed, never silent', async () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // A doomed intention: removing a trade good the settlement never had —
+    // the handler's own gate (trade_good_not_found) refuses at the tick.
+    store.getState().queueSettlementEvent('ashford', {
+      id: 'ev-doomed', type: 'REMOVE_TRADE_GOOD', targetId: 'moon-sugar', payload: {}, cause: 'player_action',
+    });
+    expect(pendingOf(store)).toHaveLength(1);
+
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+
+    // Consumed (never re-refuses forever), NOT applied, and VISIBLY refused.
+    expect(pendingOf(store)).toHaveLength(0);
+    const byId = Object.fromEntries(store.getState().savedSettlements.map(s => [s.id, s]));
+    expect((byId.ashford.campaignState.eventLog || []).some(e => e.event?.id === 'ev-doomed')).toBe(false);
+    const feed = store.getState().campaigns[0].wizardNews;
+    const refusal = (feed.entries || []).find(n => n.impactKind === 'queue_refused');
+    expect(refusal).toBeTruthy();
+    expect(refusal.summary).toMatch(/trade_good_not_found/);
+    expect(refusal.headline).toMatch(/ashford/i);
+  });
+});
+
+// ── W-R2-INTENT: no DM order is silently dropped ─────────────────────────────
+describe('campaign-clock: clock-bound queue refusals ride VISIBLY (store-hooks-state-1)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('applyEvent during an IN-FLIGHT advance returns ok:false/queued:false (not a silent success-shaped drop)', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    const ret = store.getState().applyEvent(stressorEvent('ev-inflight'));
+    expect(ret).toMatchObject({ ok: false, queued: false });
+    expect(ret.before.reason).toBe('advance_in_flight');
+    // Nothing queued, nothing logged — but the refusal is TYPED, not a phantom.
+    expect(pendingOf(store)).toHaveLength(0);
+    expect(store.getState().eventLog).toHaveLength(0);
+    // After the advance clears, the same event queues normally (queued:true).
+    store.setState(state => { state.advanceInFlight = []; });
+    const ok = store.getState().applyEvent(stressorEvent('ev-after'));
+    expect(ok).toMatchObject({ queued: true });
+    expect(pendingOf(store)).toHaveLength(1);
+  });
+
+  test('applyEvent during a PARKED pause refuses with the advance_paused reason', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // Park a paused advance (getPausedAdvance reads worldState.pausedAdvance).
+    store.setState(state => { state.campaigns[0].worldState.pausedAdvance = { cursor: 1, preWorldState: {} }; });
+    const ret = store.getState().applyEvent(stressorEvent('ev-paused'));
+    expect(ret).toMatchObject({ ok: false, queued: false });
+    expect(ret.before.reason).toBe('advance_paused');
+    expect(pendingOf(store)).toHaveLength(0);
+  });
+
+  test('applyEventBatch classifies clock-bound refusals: nothing lands, queueRefused set, queuedOnly false', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    const r = store.getState().applyEventBatch([
+      stressorEvent('b1', 'under_siege'),
+      stressorEvent('b2', 'famine'),
+    ]);
+    expect(r.ok).toBe(true);
+    expect(r.logEntries).toHaveLength(0);   // nothing committed
+    expect(r.queueRefused).toBe(true);       // the cart must keep the staged batch
+    expect(r.queuedOnly).toBe(false);        // never mislabel as a clean queue
+    expect(r.warnings.length).toBeGreaterThan(0);
+    expect(r.warnings[0].reason).toBe('advance_in_flight');
+  });
+});
+
+describe('campaign-clock: the drain refuses a missing/inactive target VISIBLY (state-lifecycle-3)', () => {
+  test('an INACTIVE member (settlement:null) — its queued intentions are refused, never silently dropped', () => {
+    // A member save that lapsed to inactive under free-tier retention loads with
+    // settlement:null yet stays queued.
+    const saves = [{ id: 'ashford', name: 'Ashford', settlement: null, campaignState: { eventLog: [] } }];
+    const queue = [{ queueId: 'q-inactive', saveId: 'ashford', event: { id: 'e1', type: 'APPLY_STRESSOR', targetId: 'famine' } }];
+    const out = drainQueuedEvents({ queue, saves, now: '2026-02-01T00:00:00.000Z', tick: 3 });
+    expect(out.updates).toHaveLength(0);
+    expect(out.refusals).toHaveLength(1);
+    expect(out.refusals[0]).toMatchObject({ queueId: 'q-inactive', saveId: 'ashford', code: 'target_inactive', eventType: 'APPLY_STRESSOR' });
+  });
+
+  test('a NON-MEMBER save (absent entirely) — refused with missing_target', () => {
+    const out = drainQueuedEvents({
+      queue: [{ queueId: 'q-gone', saveId: 'ashford', event: { id: 'e1', type: 'APPLY_STRESSOR', targetId: 'famine' } }],
+      saves: [], now: '2026-02-01T00:00:00.000Z', tick: 3,
+    });
+    expect(out.refusals).toHaveLength(1);
+    expect(out.refusals[0].code).toBe('missing_target');
+  });
+});
+
+describe('campaign-clock: re-homing a settlement drops its queued intentions from the campaign it LEAVES (store-hooks-state-6)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('addToCampaign prunes the moved settlement\'s pendingEvents from the old campaign', () => {
+    const store = seed(makeStore(), { ids: ['ashford'], worldCanon: true });
+    store.setState(state => {
+      state.campaigns.push({
+        id: 'camp-2', name: 'Other', settlementIds: [], regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 's2', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      });
+    });
+    store.getState().applyEvent(stressorEvent('ev-move'));
+    expect(pendingOf(store)).toHaveLength(1); // queued on camp-1
+
+    // Snapshot the roster camp-1 held BEFORE the move: it is the liveness anchor for
+    // "the settlement left". A copy, because the store re-homes in place.
+    const camp1IdsBefore = [
+      ...store.getState().campaigns.find(c => c.id === 'camp-1').settlementIds,
+    ];
+
+    store.getState().addToCampaign('camp-2', 'ashford');
+
+    const camp1 = store.getState().campaigns.find(c => c.id === 'camp-1');
+    expectPresentThenAbsent(
+      camp1IdsBefore, camp1.settlementIds, 'ashford', 're-homing leaves the old campaign',
+    );
+    // The queued intentions did NOT strand in camp-1 to be silently vaporized.
+    expect(camp1.worldState.pendingEvents || []).toHaveLength(0);
   });
 });

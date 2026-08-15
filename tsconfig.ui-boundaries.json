@@ -1,0 +1,27 @@
+{
+  "//": [
+    "Opt-in strict check for dependency-free Game Grade UI read-model modules.",
+    "This is intentionally a small positive manifest, not an error baseline.",
+    "Modules graduate into this list only when they pass strict JSDoc checking.",
+    "JSX components remain in the normal ESLint, render-test, and Vite gates until",
+    "the project adopts React declarations; this config does not pretend otherwise."
+  ],
+  "extends": "./tsconfig.full.json",
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "checkJs": true
+  },
+  "include": [
+    "src/vite-env.d.ts",
+    "src/components/map/heraldCommandNavigation.js",
+    "src/components/map/heraldCommandSelectors.js",
+    "src/components/map/heraldCommandSession.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public",
+    "tests"
+  ]
+}

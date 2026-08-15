@@ -1,9 +1,9 @@
 /**
  * domain/aiOverlayVerifier.js — runtime canon-preservation guard.
  *
- * The AI overlay is supposed to refine prose
+ * Tier 6.4 of the roadmap. The AI overlay is supposed to refine prose
  * without inventing entities, renaming proper nouns, or contradicting
- * facts (per PRESERVATION_RULES + forbidden-changes
+ * facts (per Tier 6.3 PRESERVATION_RULES + Tier 6.1 forbidden-changes
  * catalog). Models are statistical — sometimes they violate the
  * contract anyway. This module is the safety net that catches it:
  *
@@ -26,28 +26,6 @@
  * the AI streaming response pipeline before committing the overlay
  * into store state.
  *
- * SCOPE BOUNDARY (deliberate — an audit named this the "weakest link"; it is a
- * reasoned boundary, not an oversight):
- *   - STRUCTURAL by design. This diffs entity ARRAYS (factions/NPCs/institutions
- *     by id/index/role) and typed FACTS (population/tier/canon tag). It does NOT
- *     scan free-form prose for an invented proper noun — a temple or NPC that the
- *     model names only in a sentence and never adds to an entity array is not
- *     flagged. Robust prose proper-noun-vs-canon detection is a fuzzy NLP problem
- *     with real false-positive cost, and here it would run on a PAID generation, so
- *     a naive heuristic that wrongly flags legitimate color is a liability, not a
- *     safeguard. The defenses against prose invention are instead: the prompt
- *     contract ("Do not invent … reference DM-named lore as color only", prompts.ts)
- *     and the clone-based merge (the FIRST defense) — this structural check is the
- *     defense-in-depth behind them, not a prose linter.
- *   - CLIENT-SIDE at commit by design. generate-narrative refines PROSE fields, so a
- *     server-side structural pass over its output would be near-vacuous; and the app's
- *     trust model is not adversarial-client. The commit-time run (aiSlice) is the
- *     effective trust boundary for the structural changes that CAN occur (edits).
- *   - NEVER REFUSES a commit by design (see aiSlice.js): the user paid for the call,
- *     so a surfaced "your AI output drifted" warning beats withholding the prose.
- *   Escalating any of these (server-side pass, prose scan, hard refuse) is a product
- *   decision with money-path tradeoffs — intentionally left to an explicit call.
- *
  * Architectural fit:
  *   - The store's `setAiSettlement` action (src/store/aiSlice.js)
  *     runs every overlay through this verifier before committing it.
@@ -63,6 +41,46 @@ import { tagEntityCanon } from './canonStatus.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { walkUserEdits } from './userEdits.js';
 
+/**
+ * An entity node the AI overlay might touch (npc / faction / institution /
+ * root hook / condition / supply chain). Identity is carried on `id`, `name`, or
+ * the legacy `faction` alias; canon-status fields are inherited so the same
+ * value can be handed to {@link tagEntityCanon}.
+ * @typedef {import('./canonStatus.js').CanonTaggable & {
+ *   id?: unknown,
+ *   name?: unknown,
+ *   faction?: unknown,
+ * }} AiEntity
+ */
+
+/**
+ * A single canon-preservation violation.
+ * @typedef {Object} AiOverlayViolation
+ * @property {string} kind
+ * @property {string} field
+ * @property {string} key
+ * @property {unknown} label
+ * @property {string} [detail]
+ * @property {unknown} [newLabel]
+ * @property {unknown} [before]
+ * @property {unknown} [after]
+ */
+
+/**
+ * Settlement view the verifier reads. An index signature lets the root
+ * fact-key sweep read arbitrary keys; the named entity-array properties
+ * keep the entity comparisons strongly typed.
+ * @typedef {{
+ *   [k: string]: unknown,
+ *   institutions?: AiEntity[],
+ *   npcs?: AiEntity[],
+ *   hooks?: AiEntity[],
+ *   supplyChains?: AiEntity[],
+ *   activeConditions?: AiEntity[],
+ *   powerStructure?: { factions?: AiEntity[] },
+ * }} OverlaySettlement
+ */
+
 // ── Violation kinds (frozen vocabulary) ─────────────────────────────────
 
 export const VIOLATION_KINDS = Object.freeze([
@@ -72,7 +90,7 @@ export const VIOLATION_KINDS = Object.freeze([
   'changed_fact',
   'changed_canon',
   'removed_history_beat',
-  // User-edited prose is canon. The verifier checks that
+  // Tier 6.6: user-edited prose is canon. The verifier checks that
   // every value still equals the user's authored string.
   'changed_user_field',
 ]);
@@ -80,24 +98,42 @@ export const VIOLATION_KINDS = Object.freeze([
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /**
- * Stable identifier for an entity: explicit `id` first, then `name`,
- * then `faction` (legacy alias used by some power-structure entries).
+ * Stable identifier for an entity: explicit `id` first, then `faction`,
+ * then `name`. That order is NOT arbitrary — it is rulingPower.nameOf's
+ * precedence (`.faction || .name`), and this key must agree with it: a
+ * powerStructure.factions record's canonical display name lives in
+ * `.faction`, while `.name` is a legacy alias some records also carry.
+ * Reading the alias first would key a renamed faction under its stale name
+ * and misclassify the rename as a remove+invent pair.
  * The same identity function MUST be used for both sides so we don't
  * spuriously flag rename-as-id-change.
  */
-function entityKey(/** @type {any} */ e) {
+/**
+ * @param {AiEntity | null | undefined} e
+ * @returns {string | null}
+ */
+function entityKey(e) {
   if (!e || typeof e !== 'object') return null;
   if (e.id != null) return `id:${String(e.id)}`;
-  if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
   if (typeof e.faction === 'string' && e.faction.length) return `name:${e.faction}`;
+  if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
   return null;
 }
 
-function displayName(/** @type {any} */ e) {
-  return (e && typeof e === 'object' && (e.name || e.faction)) || null;
+/**
+ * @param {AiEntity | null | undefined} e
+ * @returns {unknown}
+ */
+function displayName(e) {
+  return (e && typeof e === 'object' && (e.faction || e.name)) || null;
 }
 
-function asArray(/** @type {any} */ maybe) {
+/**
+ * @template T
+ * @param {T[] | null | undefined | unknown} maybe
+ * @returns {T[]}
+ */
+function asArray(maybe) {
   return Array.isArray(maybe) ? maybe : [];
 }
 
@@ -113,7 +149,13 @@ function asArray(/** @type {any} */ maybe) {
  * what we want to flag. Without ids we fall back to name and can't
  * detect rename (a rename looks like remove + add).
  */
-function compareEntityArrays(/** @type {any} */ field, /** @type {any} */ originalArr, /** @type {any} */ refinedArr) {
+/**
+ * @param {string} field
+ * @param {AiEntity[] | null | undefined} originalArr
+ * @param {AiEntity[] | null | undefined} refinedArr
+ * @returns {AiOverlayViolation[]}
+ */
+function compareEntityArrays(field, originalArr, refinedArr) {
   const violations = [];
   const oMap = new Map();
   for (const e of asArray(originalArr)) {
@@ -165,7 +207,7 @@ function compareEntityArrays(/** @type {any} */ field, /** @type {any} */ origin
         key: k,
         label: oName,
         newLabel: rName,
-        detail: `Entity "${oName}" renamed to "${rName}". Proper-noun changes are forbidden.`,
+        detail: `Entity "${oName}" renamed to "${rName}" — proper-noun changes are forbidden.`,
       });
     }
   }
@@ -178,7 +220,13 @@ function compareEntityArrays(/** @type {any} */ field, /** @type {any} */ origin
  * user-authored entities. (Drafts can become canon — that's a normal
  * promotion. The forbidden direction is locked/user → anything else.)
  */
-function compareCanonTags(/** @type {any} */ field, /** @type {any} */ originalArr, /** @type {any} */ refinedArr) {
+/**
+ * @param {string} field
+ * @param {AiEntity[] | null | undefined} originalArr
+ * @param {AiEntity[] | null | undefined} refinedArr
+ * @returns {AiOverlayViolation[]}
+ */
+function compareCanonTags(field, originalArr, refinedArr) {
   const violations = [];
   const oMap = new Map();
   for (const e of asArray(originalArr)) {
@@ -228,7 +276,12 @@ const ROOT_FACT_KEYS = Object.freeze([
   'id', 'name', 'tier', 'population', '_seed', 'schemaVersion', 'simulationVersion',
 ]);
 
-function compareRootFacts(/** @type {any} */ original, /** @type {any} */ refined) {
+/**
+ * @param {OverlaySettlement} original
+ * @param {OverlaySettlement} refined
+ * @returns {AiOverlayViolation[]}
+ */
+function compareRootFacts(original, refined) {
   const violations = [];
   for (const key of ROOT_FACT_KEYS) {
     const o = original?.[key];
@@ -258,10 +311,16 @@ function compareRootFacts(/** @type {any} */ original, /** @type {any} */ refine
  * — if the AI drops or rewrites one of those to the point that a beat
  * no longer derives, this catches it.
  */
-function compareHistoryBeats(/** @type {any} */ original, /** @type {any} */ refined) {
+/**
+ * @param {OverlaySettlement} original
+ * @param {OverlaySettlement} refined
+ * @returns {AiOverlayViolation[]}
+ */
+function compareHistoryBeats(original, refined) {
+  /** @type {AiOverlayViolation[]} */
   const violations = [];
-  const oBeats = /** @type {any} */ (deriveHistoryBeats(original));
-  const rBeats = /** @type {any} */ (deriveHistoryBeats(refined));
+  const oBeats = deriveHistoryBeats(original);
+  const rBeats = deriveHistoryBeats(refined);
   for (const key of Object.keys(oBeats)) {
     if (oBeats[key] && !rBeats[key]) {
       violations.push({
@@ -282,10 +341,16 @@ function compareHistoryBeats(/** @type {any} */ original, /** @type {any} */ ref
  * Verify that every field the user has hand-edited in the ORIGINAL
  * settlement still carries the user's exact value in the REFINED
  * output. User-edited prose is canon — the AI must pass it through
- * verbatim.
+ * verbatim. Tier 6.6.
  */
-function compareUserFields(/** @type {any} */ original, /** @type {any} */ refined) {
-  const /** @type {any[]} */ violations = [];
+/**
+ * @param {OverlaySettlement} original
+ * @param {OverlaySettlement} refined
+ * @returns {AiOverlayViolation[]}
+ */
+function compareUserFields(original, refined) {
+  /** @type {AiOverlayViolation[]} */
+  const violations = [];
   const edits = walkUserEdits(original);
   if (edits.length === 0) return violations;
 
@@ -300,7 +365,7 @@ function compareUserFields(/** @type {any} */ original, /** @type {any} */ refin
     if (expected === undefined) continue;
     if (expected === actual) continue;
     const ent = locateEntity(refined, kind, entityIndex) || locateEntity(original, kind, entityIndex);
-    const label = ent?.name || ent?.faction || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
+    const label = ent?.faction || ent?.name || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
     violations.push({
       kind: 'changed_user_field',
       field: kind === 'settlement' ? path : `${kind}[${entityIndex}].${path}`,
@@ -314,6 +379,7 @@ function compareUserFields(/** @type {any} */ original, /** @type {any} */ refin
   return violations;
 }
 
+/** @type {Record<string, string[]>} */
 const ENTITY_ARRAY_PATH_BY_KIND = {
   npc:            ['npcs'],
   institution:    ['institutions'],
@@ -327,10 +393,17 @@ const ENTITY_ARRAY_PATH_BY_KIND = {
   currentTension: ['history', 'currentTensions'],
 };
 
-function locateEntity(/** @type {any} */ settlement, /** @type {any} */ kind, /** @type {any} */ entityIndex) {
+/**
+ * @param {unknown} settlement
+ * @param {string} kind
+ * @param {number} entityIndex
+ * @returns {any}
+ */
+function locateEntity(settlement, kind, entityIndex) {
   if (kind === 'settlement') return settlement;
-  const segs = /** @type {any} */ (ENTITY_ARRAY_PATH_BY_KIND)[kind];
+  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
   if (!segs) return null;
+  /** @type {any} */
   let ref = settlement;
   for (const seg of segs) {
     if (ref == null || typeof ref !== 'object') return null;
@@ -340,7 +413,14 @@ function locateEntity(/** @type {any} */ settlement, /** @type {any} */ kind, /*
   return ref[entityIndex] || null;
 }
 
-function readUserExpectedValue(/** @type {any} */ settlement, /** @type {any} */ kind, /** @type {any} */ entityIndex, /** @type {any} */ path) {
+/**
+ * @param {unknown} settlement
+ * @param {string} kind
+ * @param {number} entityIndex
+ * @param {string} path
+ * @returns {unknown}
+ */
+function readUserExpectedValue(settlement, kind, entityIndex, path) {
   const entity = locateEntity(settlement, kind, entityIndex);
   if (!entity) return undefined;
   const keys = path.split('.');
@@ -356,7 +436,8 @@ function readUserExpectedValue(/** @type {any} */ settlement, /** @type {any} */
  * Build a violations summary by kind for at-a-glance reporting.
  */
 /**
- * @param {any[]} violations
+ * @param {AiOverlayViolation[]} violations
+ * @returns {{ invented: number, removed: number, renamed: number, contradicted: number, canonChanged: number, historyDropped: number, userFieldChanged: number }}
  */
 function summariseViolations(violations) {
   return {
@@ -373,22 +454,16 @@ function summariseViolations(violations) {
 /**
  * Run every check and return a violations report.
  *
- * @param {import('./settlement.schema.js').SimSettlement} original  The settlement BEFORE the AI overlay.
- * @param {import('./settlement.schema.js').SimSettlement} refined   The settlement AFTER the AI overlay.
+ * @param {OverlaySettlement|null|undefined} original  The settlement BEFORE the AI overlay.
+ * @param {OverlaySettlement|null|undefined} refined   The settlement AFTER the AI overlay.
  * @returns {{
  *   ok: boolean,
- *   violations: Array<{
- *     kind: string,
- *     field: string,
- *     key: string,
- *     label: string,
- *     detail: string,
- *     [k: string]: any,
- *   }>,
- *   summary: { invented: number, removed: number, renamed: number, contradicted: number, canonChanged: number, historyDropped: number },
+ *   violations: AiOverlayViolation[],
+ *   summary: { invented: number, removed: number, renamed: number, contradicted: number, canonChanged: number, historyDropped: number, userFieldChanged: number },
  * }}
  */
 export function verifyAiOverlay(original, refined) {
+  /** @type {AiOverlayViolation[]} */
   const violations = [];
 
   // Null safety. If either side is null, we can't meaningfully verify —
@@ -405,7 +480,25 @@ export function verifyAiOverlay(original, refined) {
   // Root-level facts.
   violations.push(...compareRootFacts(original, refined));
 
-  // Entity arrays — institutions, factions, npcs, hooks, chains, conditions.
+  // Entity arrays — institutions, factions, npcs, ROOT hooks, chains,
+  // conditions. `dmCompass.hooks` is intentionally a different nested address:
+  // AI-authored compass prompts never enter this root entity contract.
+  //
+  // ⚠ `hooks` AND `supplyChains` ARE DELIBERATELY KEPT, AND THIS IS A RECORDED
+  // NON-REPAIR (2026-08-11), not an oversight. Both are settlement-ROOT keys no
+  // writer produces, and the observed-shape inventory banks them here as
+  // reader-with-no-writer rows — every other reader of those two keys was
+  // repaired in the same change that added this note. These two stay because
+  // this is not a display read, it is a FENCE: compareEntityArrays reports
+  // `invented_entity` for any key present in `refined` and absent from
+  // `original`, so an undefined-vs-populated comparison is exactly the case it
+  // exists to catch. The edge refiner already emits a top-level `hooks` array in
+  // its JSON contract (supabase/functions/generate-narrative/prompts.ts) which
+  // the applier nests under `dmCompass`; if that applier ever wrote it to the
+  // root instead, THIS is the line that would notice. Deleting it would remove
+  // a working anti-hallucination guard to satisfy a census — the same reasoning
+  // that stopped the `locks` cluster. Deliberately deferred, documented, not a
+  // bug to re-find.
   violations.push(...compareEntityArrays('institutions', original.institutions, refined.institutions));
   violations.push(...compareEntityArrays(
     'powerStructure.factions',
@@ -430,7 +523,7 @@ export function verifyAiOverlay(original, refined) {
   // History beat drop-out.
   violations.push(...compareHistoryBeats(original, refined));
 
-  // User-edited prose must round-trip verbatim.
+  // Tier 6.6: user-edited prose must round-trip verbatim.
   violations.push(...compareUserFields(original, refined));
 
   return {
@@ -443,7 +536,11 @@ export function verifyAiOverlay(original, refined) {
 /**
  * Flat one-line strings suitable for logging / DM-facing toast.
  */
-export function summarizeViolations(/** @type {any} */ violations) {
+/**
+ * @param {AiOverlayViolation[]} violations
+ * @returns {string[]}
+ */
+export function summarizeViolations(violations) {
   return asArray(violations).map(v => `[${v.kind}] ${v.field}: ${v.detail}`);
 }
 
@@ -454,7 +551,12 @@ export function summarizeViolations(/** @type {any} */ violations) {
  * the hardest violations (invented + renamed) while letting the user
  * decide what to do about softer ones (removed_history_beat).
  */
-export function filterViolations(/** @type {any} */ violations, /** @type {any} */ allowedKinds) {
+/**
+ * @param {AiOverlayViolation[]} violations
+ * @param {Iterable<string>} allowedKinds
+ * @returns {AiOverlayViolation[]}
+ */
+export function filterViolations(violations, allowedKinds) {
   const allowed = new Set(allowedKinds);
   return asArray(violations).filter(v => allowed.has(v.kind));
 }

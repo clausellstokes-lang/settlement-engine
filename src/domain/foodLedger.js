@@ -1,7 +1,7 @@
 /**
  * domain/foodLedger.js — the canonical conserved food quantities for a settlement.
  *
- * The conserved-ledger foundation. The food physics already exist — foodGenerator computes them and
+ * P3 foundation. The food physics already exist — foodGenerator computes them and
  * persists them on `economicState.foodSecurity`. The problem (see docs/P3_CONSERVED_LEDGER.md)
  * is that consumers read them inconsistently: the capacity model keeps a PARALLEL food
  * model, and two substrate derivers read fields foodGenerator never produces
@@ -43,17 +43,18 @@ const NEUTRAL = Object.freeze({
   present: false,        // true once a real foodSecurity object backed it
 });
 
-/** @param {any} v @returns {boolean} */
+/** @param {unknown} v @returns {v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
-/** @param {any} v @param {number} d @returns {number} */
+/** @param {unknown} v @param {number} d @returns {number} */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {{ economicState?: { foodSecurity?: unknown, [key: string]: unknown } | null, foodSecurity?: unknown } | null | undefined} settlement
  * @returns {FoodLedger}
  */
 export function foodLedger(settlement) {
-  const fs = settlement?.economicState?.foodSecurity || settlement?.foodSecurity || null;
+  /** @type {Record<string, unknown>} */
+  const fs = /** @type {any} */ (settlement?.economicState?.foodSecurity || settlement?.foodSecurity || null);
   if (!fs || typeof fs !== 'object') return NEUTRAL;
   return {
     dailyNeed:        num(fs.dailyNeed, 0),

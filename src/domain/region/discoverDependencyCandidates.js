@@ -1,19 +1,30 @@
 /**
  * domain/region/discoverDependencyCandidates.js
  *
- * Finds likely logistics/economic regional channels between saved settlements. Discovery is
+ * Finds likely P0 regional channels between saved settlements. Discovery is
  * deliberately advisory: candidates start as suggested channels and become
  * campaign truth only after the DM confirms them.
  */
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
-import { canonicalEdgeForLink, canonicalRelationshipLabel } from '../relationships/canonicalRelationship.js';
+import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { NO_TRADE_RELATIONSHIPS } from './tradeLinks.js';
 import { healingLedger } from '../healingLedger.js';
 import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
+/**
+ * @typedef {{ id?: string, name?: string, settlement?: Record<string, any>, neighbourNetwork?: any[], [key: string]: unknown }} SaveLike
+ * @typedef {{ id?: string | null, name?: string | null, tier?: unknown, population?: number, exports?: any[], imports?: any[], route?: { open?: boolean, [key: string]: unknown }, [key: string]: unknown }} NodeLike
+ * @typedef {{ id?: unknown, targetId?: unknown, neighbourName?: unknown, name?: unknown, relationshipType?: unknown, type?: unknown, [key: string]: unknown }} LinkLike
+ * @typedef {{ label: string, id?: string, criticality?: number, [key: string]: unknown }} GoodLike
+ * @typedef {Record<string, unknown>} ChannelLike
+ */
+
+/** @type {Set<string>} */
 const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'trade_partner',
   'allied',
@@ -24,48 +35,34 @@ const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'neutral',
 ]);
 
-/**
- * @param {import('../settlement.schema.js').SimSettlement} sourceSave
- * @param {import('../settlement.schema.js').SimSettlement} targetSave
- */
+/** @param {SaveLike | null | undefined} sourceSave @param {SaveLike | null | undefined} targetSave @returns {string | null} */
 function relationBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  const link = links.find((/** @type {any} */ n) =>
+  const link = links.find((/** @type {LinkLike} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
-  // Canonicalize legacy/spelling variants ('trade_partners' plural, 'ally',
-  // 'smuggling', 'coldwar', 'overlord') so discovery's branch matching agrees
-  // with the confirmed relationshipChannelBundle path (graph.js), which also
-  // routes through canonicalRelationshipLabel. Reading the raw label here made
-  // every legacy relationship silently mint ZERO discovered channels.
-  const raw = link?.relationshipType || link?.type;
-  return raw ? canonicalRelationshipLabel(raw) : null;
+  return link?.relationshipType || link?.type || null;
 }
 
-/**
- * @param {import('../settlement.schema.js').SimSettlement} sourceSave
- * @param {import('../settlement.schema.js').SimSettlement} targetSave
- */
+/** @param {SaveLike | null | undefined} sourceSave @param {SaveLike | null | undefined} targetSave @returns {LinkLike | null} */
 function linkBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  return links.find((/** @type {any} */ n) =>
+  return links.find((/** @type {LinkLike} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   ) || null;
 }
 
-/**
- * @param {any} options
- */
+/** @param {{ type: string, from: NodeLike, to: NodeLike, rel: string, strength?: number, confidence?: number, explanation?: string }} args @returns {ChannelLike | null} */
 function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation }) {
   return candidate({
     type,
@@ -80,27 +77,13 @@ function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence =
   });
 }
 
-/**
- * @param {any} out
- * @param {any} type
- * @param {any} a
- * @param {any} b
- * @param {any} rel
- * @param {any} strength
- * @param {any} confidence
- * @param {any} [explanation]
- */
+/** @param {Array<ChannelLike | null>} out @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
 function addTwoWay(out, type, a, b, rel, strength, confidence, explanation) {
   out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation }));
   out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation }));
 }
 
-/**
- * @param {any} out
- * @param {any} patron
- * @param {any} client
- * @param {any} rel
- */
+/** @param {Array<ChannelLike | null>} out @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addPatronageChannels(out, patron, client, rel, strength = 0.62, confidence = 0.7) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -131,12 +114,7 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
   }));
 }
 
-/**
- * @param {any} out
- * @param {any} overlord
- * @param {any} vassal
- * @param {any} rel
- */
+/** @param {Array<ChannelLike | null>} out @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -168,20 +146,15 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
   addTwoWay(out, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
-/**
- * @param {import('../settlement.schema.js').SimSettlement} sourceSave
- * @param {import('../settlement.schema.js').SimSettlement} targetSave
- * @param {any} source
- * @param {any} target
- */
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @returns {Array<ChannelLike | null>} */
 function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
-  /** @type {any[]} */
+  /** @type {Array<ChannelLike | null>} */
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
   const targetRel = relationBetween(targetSave, sourceSave);
   const relationshipLink = linkBetween(sourceSave, targetSave)
     || linkBetween(targetSave, sourceSave);
-  const canonical = canonicalEdgeForLink(relationshipLink, sourceSave, targetSave);
+  const canonical = canonicalEdgeForLink(/** @type {Parameters<typeof canonicalEdgeForLink>[0]} */ (relationshipLink), sourceSave, targetSave);
   if (canonical?.relationshipType === 'patron') {
     const patron = String(canonical.from) === String(source.id) ? source : target;
     const client = patron === source ? target : source;
@@ -204,10 +177,7 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   } else if (rel === 'rival' || rel === 'cold_war') {
     addTwoWay(out, 'resource_competition', source, target, rel, 0.56, 0.58);
     addTwoWay(out, 'information_flow', source, target, rel, 0.45, 0.55);
-  } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
-    // 'smuggling_partner' (the canonical regional term, also reached from the
-    // 'smuggling' alias) mints the criminal corridor here, mirroring the
-    // confirmed relationshipChannelBundle branch in graph.js.
+  } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
     addTwoWay(out, 'criminal_corridor', source, target, rel, 0.68, 0.72);
   } else if (rel === 'religious_authority') {
     addTwoWay(out, 'religious_authority', source, target, rel, 0.62, 0.65);
@@ -216,19 +186,15 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   return out.filter(Boolean);
 }
 
-/**
- * @param {any} goods
- */
+/** @param {GoodLike[]} goods @param {number} [base] @returns {number} */
 function channelStrengthForGoods(goods, base = 0.5) {
   if (!goods.length) return base;
-  const maxCriticality = Math.max(...goods.map((/** @type {any} */ g) => goodCriticality(g)));
+  const maxCriticality = Math.max(...goods.map(g => goodCriticality(g)));
   const countLift = Math.min(0.2, Math.max(0, goods.length - 1) * 0.05);
   return Math.max(0.1, Math.min(1, base + maxCriticality * 0.35 + countLift));
 }
 
-/**
- * @param {any} rel
- */
+/** @param {string | null | undefined} rel @returns {number} */
 function relationshipConfidence(rel) {
   if (!rel) return 0.55;
   if (rel === 'trade_partner') return 0.9;
@@ -241,9 +207,7 @@ function relationshipConfidence(rel) {
   return 0.5;
 }
 
-/**
- * @param {any} raw
- */
+/** @param {ChannelLike} raw @returns {ChannelLike | null} */
 function candidate(raw) {
   return normalizeChannel({
     status: 'suggested',
@@ -252,8 +216,8 @@ function candidate(raw) {
   });
 }
 
-// ── SUGGESTED-only heuristics for the two formerly uncreatable channel types
-// (service_dependency, migration_pressure).
+// ── R3 decision (2026-06-11): SUGGESTED-only heuristics for the two formerly
+// uncreatable channel types (service_dependency, migration_pressure).
 // Deliberately conservative and low-confidence — the DM confirm gate is the
 // safety; nothing here (or anywhere) auto-confirms them.
 
@@ -267,7 +231,7 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
 /**
  * Healing/service capacity, read from the raw save's institutions via the
  * canonical classifier (healingLedger) — the regional projection dropped its
- * dead `services` field in the projection diet and it must NOT come back without a real
+ * dead `services` field in R4/H18 and it must NOT come back without a real
  * reader; discovery reads the raw save the same way relationBetween reads the
  * raw neighbourNetwork. A lone shrine is not a regional service hub — and
  * neither are two of them: a provider needs two-plus healing-capable
@@ -276,14 +240,14 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
  * carries an institutions array yet has neither a healing institution nor an
  * offered healing service.
  */
-/**
- * @param {import('../settlement.schema.js').SimSettlement} save
- */
+/** @param {SaveLike | null | undefined} save */
 function healingCapacityOf(save) {
   const settlement = settlementFromSave(save) || {};
-  const ledger = healingLedger(settlement);
-  const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const anchor = institutions.find((/** @type {any} */ i) => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
+  const ledger = healingLedger(/** @type {Parameters<typeof healingLedger>[0]} */ (settlement));
+  // LIVE roster only — a calamity-ruined temple/monastery/hospital cannot anchor regional
+  // healing capacity (ruin-filter class); healerCount is already live via healingLedger.
+  const institutions = liveInstitutions(settlement);
+  const anchor = institutions.find((/** @type {{ name?: unknown }} */ i) => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
   return {
     healerCount: ledger.healerCount,
     anchorName: anchor ? String(anchor.name) : null,
@@ -292,11 +256,9 @@ function healingCapacityOf(save) {
   };
 }
 
-/**
- * @param {any} tier
- */
+/** @param {unknown} tier @returns {number | null} */
 function tierRankOf(tier) {
-  const rank = TIER_ORDER.indexOf(tier);
+  const rank = TIER_ORDER.indexOf(/** @type {string} */ (tier));
   return rank >= 0 ? rank : null;
 }
 
@@ -305,28 +267,31 @@ function tierRankOf(tier) {
  * - trade_dependency supplier -> dependent
  * - export_market buyer/market -> exporter
  * - trade_route one route endpoint -> the other endpoint
- * - service_dependency service provider -> dependent (suggested-only)
- * - migration_pressure smaller pole -> bigger pole (suggested-only)
+ * - service_dependency service provider -> dependent (R3, suggested-only)
+ * - migration_pressure smaller pole -> bigger pole (R3, suggested-only)
  *
  * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
  */
-/**
- * @param {import('../settlement.schema.js').SimSettlement} sourceSave
- * @param {import('../settlement.schema.js').SimSettlement} targetSave
- * @param {any} [options]
- */
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {{ now?: string }} [options] @returns {ChannelLike[]} */
 export function discoverDependencyCandidates(sourceSave, targetSave, options = {}) {
-  const source = /** @type {any} */ (deriveRegionalState(sourceSave));
-  const target = /** @type {any} */ (deriveRegionalState(targetSave));
+  const source = deriveRegionalState(sourceSave);
+  const target = deriveRegionalState(targetSave);
   if (!source.id || !target.id || source.id === target.id) return [];
 
   const rel = relationBetween(sourceSave, targetSave) || relationBetween(targetSave, sourceSave);
   const relConfidence = relationshipConfidence(rel);
+  // Hostile pairs don't openly trade goods — the same rule the generation-time
+  // trade layer enforces (tradeLinks NO_TRADE_RELATIONSHIPS). Without this the
+  // floored 0.62 confidence advertised a "likely trade dependency" between two
+  // settlements at open war, contradicting the sibling layer. A hostile pair
+  // still surfaces war_front/resource_competition texture below. [domain-events-region-6]
+  const tradeBlocked = NO_TRADE_RELATIONSHIPS.has(String(rel || '').toLowerCase());
+  /** @type {Array<ChannelLike | null>} */
   const out = [];
 
   const sourceExportsTargetImports = goodsIntersect(source.exports, target.imports);
-  if (sourceExportsTargetImports.length) {
+  if (!tradeBlocked && sourceExportsTargetImports.length) {
     out.push(candidate({
       type: 'trade_dependency',
       from: source.id,
@@ -356,7 +321,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   }
 
   const targetExportsSourceImports = goodsIntersect(target.exports, source.imports);
-  if (targetExportsSourceImports.length) {
+  if (!tradeBlocked && targetExportsSourceImports.length) {
     out.push(candidate({
       type: 'trade_dependency',
       from: target.id,
@@ -389,7 +354,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   const friendly = !rel || TRADE_FRIENDLY_RELATIONSHIPS.has(rel);
   const hasTradeEvidence = !!rel || sourceExportsTargetImports.length > 0 || targetExportsSourceImports.length > 0;
   // The exact predicate under which a trade_route is suggested below — the
-  // service/migration heuristics ride the same route/trade link.
+  // R3 service/migration heuristics ride the same route/trade link.
   const routeTradeLink = bothHaveRoutes && friendly && hasTradeEvidence;
   if (routeTradeLink) {
     const routeStrength = rel === 'trade_partner' ? 0.72 : rel === 'allied' || rel === 'ally' ? 0.6 : 0.45;
@@ -410,16 +375,16 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
     }
   }
 
-  // service_dependency — provider -> dependent when the provider has real
+  // R3: service_dependency — provider -> dependent when the provider has real
   // healing/service capacity the dependent lacks, and the route/trade link
   // above makes the service reachable. Born suggested, never auto-confirmed.
   if (routeTradeLink) {
     const sourceHealing = healingCapacityOf(sourceSave);
     const targetHealing = healingCapacityOf(targetSave);
-    for (const [provider, dependent, capacity, need] of [
+    for (const [provider, dependent, capacity, need] of /** @type {Array<[NodeLike, NodeLike, ReturnType<typeof healingCapacityOf>, ReturnType<typeof healingCapacityOf>]>} */ ([
       [source, target, sourceHealing, targetHealing],
       [target, source, targetHealing, sourceHealing],
-    ]) {
+    ])) {
       if (!capacity.provider || !need.lacking) continue;
       out.push(candidate({
         type: 'service_dependency',
@@ -437,7 +402,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
     }
   }
 
-  // migration_pressure — along the same suggested trade route when the
+  // R3: migration_pressure — along the same suggested trade route when the
   // poles are unbalanced (tier gap >= 2 or population ratio >= 4x). People
   // flow toward the bigger pole, so the channel runs smaller -> larger: a
   // crisis at the small end (health/security shock, population loss) sends
@@ -476,18 +441,16 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
 
   // Deterministic timestamp: same idiom as deriveRegionalImpacts — stamp the
   // threaded `now` over candidate()'s wall-clock default when provided.
-  const candidates = out.filter(Boolean);
+  const candidates = /** @type {ChannelLike[]} */ (out.filter(Boolean));
   if (options.now) {
     return candidates.map(channel => ({ ...channel, discoveredAt: options.now, updatedAt: options.now }));
   }
   return candidates;
 }
 
-/**
- * @param {any[]} [saves]
- * @param {any} [options]
- */
+/** @param {SaveLike[]} [saves] @param {{ now?: string }} [options] @returns {ChannelLike[]} */
 export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
+  /** @type {ChannelLike[]} */
   const out = [];
   const seen = new Set();
   for (let i = 0; i < saves.length; i++) {
@@ -502,13 +465,9 @@ export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
   return out;
 }
 
-/**
- * @param {any[]} [saves]
- * @param {any} [existingGraph]
- * @param {any} [options]
- */
+/** @param {SaveLike[]} [saves] @param {unknown} [existingGraph] @param {{ now?: string }} [options] */
 export function deriveGraphWithDiscoveredCandidates(saves = [], existingGraph = null, options = {}) {
-  const graph = deriveRegionalGraphFromSaves(saves, existingGraph, options);
+  const graph = deriveRegionalGraphFromSaves(saves, /** @type {Parameters<typeof deriveRegionalGraphFromSaves>[1]} */ (existingGraph), options);
   const candidates = discoverCampaignDependencyCandidates(saves, options);
   return addRegionalChannels(graph, candidates, options);
 }

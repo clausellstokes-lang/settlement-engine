@@ -26,14 +26,15 @@ import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
-import { FOUNDER_SEAT_CAP } from '../lib/founderSeats.js';
+import useLivePricing from '../hooks/useLivePricing.js';
 import {
-  getVisibleTiers, getActivePacks, getTierDisplayName,
+  getVisibleTiers, getActivePacks, SINGLE_DOSSIER, TIERS,
 } from '../config/pricing.js';
-import { t, tx } from '../copy/index.js';
+import { tp } from '../copy/pricingPage.js';
+import { t } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
 import { useFlag } from '../lib/flags.js';
-import { GOLD, GOLD_TXT, INK, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PROSE_MAX, FORM_MAX } from './theme.js';
+import { GOLD, INK, PARCH, sans, serif_, SP, FS, BODY, PROSE_MAX, FORM_MAX } from './theme.js';
 import { space } from '../design/tokens.js';
 
 // Between-section rhythm: SP tops out at xxl=24, which also appears as
@@ -50,263 +51,18 @@ const HEADER_GAP = space['space-7']; // 32 — header → first region
 // vertical spine wander). Sized to fit three maxWidth-320 cards + 2×SP.lg(16)
 // gaps = 992; the row stays centered, so narrower viewports still wrap+center.
 const TIER_ROW_MAX = 3 * 320 + 2 * 16; // 992
-import FounderBadge from './primitives/FounderBadge.jsx';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
+import { TierCard, PackTile } from './pricing/PricingTierCards.jsx';
+import {
+  SurveyorBand, FounderCharterBand, TaskMenu, ComparisonTable, PricingFaq,
+} from './pricing/PricingBands.jsx';
+import { ClerkNote } from './generate/ClerkNote.jsx';
 
-function FeatureRow({ children }) {
-  return (
-    <li style={{
-      display: 'flex', alignItems: 'flex-start', gap: 8,
-      padding: '4px 0', color: BODY, fontSize: FS.sm,
-      fontFamily: sans, lineHeight: 1.5,
-    }}>
-      <span>{children}</span>
-    </li>
-  );
-}
 
-function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
-  // P9 / decision 4 — when the simulation-led A/B variant is on, source the
-  // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
-  // the current copy. The variant DELIBERATELY names no size as premium (size
-  // is free); the audience pitch line still takes precedence when present.
-  const variantFeatures = simulationVariant ? tx(`pricing.variant.tiers.${tier.key}.features`) : null;
-  const features = (Array.isArray(variantFeatures) && variantFeatures.length)
-    ? variantFeatures
-    : (tx(`pricing.tiers.${tier.key}.features`) || []);
-  const variantTagline = simulationVariant ? t(`pricing.variant.tiers.${tier.key}.tagline`) : null;
-  // Prefer audience-led pitch over generic tagline when the
-  // flag is on and a per-audience line is available. Falls back to the
-  // simulation-variant tagline, then the legacy tagline.
-  const tagline  = audienceLine || variantTagline || t(`pricing.tiers.${tier.key}.tagline`);
-  const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
-  const priceSub   = t(`pricing.tiers.${tier.key}.priceSub`);
-  const name       = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
-
-  // Content-as-hero (P1/P4/P6): the FIRST feature is the "why pay" benefit for
-  // this tier (e.g. Cartographer: advance-time / run-the-region). Promote it to
-  // a single bold lead line directly under the price; the remaining features
-  // become an equal-weight checklist so the card has one content focal point
-  // instead of a flat list where the simulation value reads like a storage bullet.
-  const [leadFeature, ...restFeatures] = features;
-
-  const headingId = `tier-${tier.key}-name`;
-  const recommendedId = `tier-${tier.key}-recommended`;
-
-  return (
-    <article
-      aria-labelledby={headingId}
-      aria-describedby={emphasised ? recommendedId : undefined}
-      style={{
-        flex: '1 1 240px', minWidth: 240, maxWidth: 320,
-        background: CARD,
-        // P4 — exactly one focal card. The recommended tier carries the heavy
-        // gold border + lift; siblings stay quiet (hairline border, no shadow)
-        // so the single highlight survives the squint test instead of three
-        // near-identical bordered boxes competing (P5 anti-box-soup).
-        border: emphasised ? `2px solid ${GOLD}` : `1px solid ${BORDER}`,
-        borderRadius: R.xl,
-        padding: emphasised
-          ? `${SP.lg}px ${SP.lg}px ${SP.xl}px`
-          : `${SP.md}px ${SP.lg}px ${SP.lg}px`,
-        display: 'flex', flexDirection: 'column', gap: SP.md,
-        boxShadow: emphasised
-          ? '0 6px 24px rgba(201,162,76,0.25)'
-          : 'none',
-        position: 'relative',
-      }}
-    >
-      {emphasised && (
-        <span
-          id={recommendedId}
-          style={{
-            position: 'absolute', top: -10, right: 16,
-            // P7 — the page's most-emphasised label must clear AA. White-on-gold
-            // was 2.4:1 (the exact pairing the app already retired in Button +
-            // FounderBadge); ink-on-gold is 7.6:1, the house recommended-badge idiom.
-            background: GOLD, color: INK,
-            fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em',
-            padding: '3px 9px', borderRadius: 4,
-            textTransform: 'uppercase',
-          }}
-        >
-          Most popular
-        </span>
-      )}
-
-      <header style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        {/* P4 — the name is the card's quiet tier label, not a second focal
-            point. Held at FS.lg/BODY so the price stays the unambiguous single
-            focus and the card caps at ~3 levels (price > lead benefit >
-            everything else). */}
-        <h3 id={headingId} style={{
-          margin: 0,
-          fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: BODY,
-        }}>
-          {name}
-        </h3>
-        {tier.key === 'founder' && <FounderBadge force size="sm" />}
-      </header>
-
-      <p style={{
-        margin: 0, fontSize: FS.sm, color: BODY,
-        fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
-      }}>
-        {tagline}
-      </p>
-
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-        {/* P4 — the price is the per-card focal point: it wins on size (FS.32),
-            weight (700) and color (INK) over every other element, so nothing
-            competes for the single squint-test focus. */}
-        <span style={{ fontSize: FS['32'], fontFamily: serif_, fontWeight: 700, color: INK, lineHeight: 1 }}>
-          {priceLabel}
-        </span>
-        <span style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
-          {priceSub}
-        </span>
-      </div>
-
-      {leadFeature && (
-        // P4 — the "why pay" lead is level 2 of three. At FS.md it sat 1px above
-        // the FS.sm checklist and the two levels blurred together. Lift to FS.lg
-        // (held apart from the tier NAME, also FS.lg, by INK+700 vs name's
-        // BODY+600) and add a clear gap below so the checklist visibly begins a
-        // new cluster — three levels survive the squint: price > lead > list.
-        <p style={{
-          margin: `${SP.xs}px 0 ${SP.sm}px`,
-          fontSize: FS.lg, fontWeight: 700, color: INK,
-          fontFamily: sans, lineHeight: 1.4,
-        }}>
-          {leadFeature}
-        </p>
-      )}
-
-      {tier.key === 'founder' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {/* P3/P7 — scarcity is the founder card's live delta. Carry it in two
-              channels (count + filled meter), in legible BODY weight-600 rather
-              than violet-hue-alone. Live count via the founder_seats_taken RPC
-              (migration 010); the fetch may fail or be pending, so fall back to
-              the safe "Limited to N seats" copy with no meter in those cases. */}
-          <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
-            {typeof founderSeatsRemaining === 'number'
-              ? `${founderSeatsRemaining} of ${FOUNDER_SEAT_CAP} seats remaining.`
-              : `Limited to ${FOUNDER_SEAT_CAP} seats.`}
-          </p>
-          {typeof founderSeatsRemaining === 'number' && (
-            <div
-              aria-hidden="true"
-              style={{
-                height: 4, borderRadius: R.sm, overflow: 'hidden',
-                background: BORDER,
-              }}
-            >
-              <div style={{
-                height: '100%', borderRadius: R.sm, background: GOLD,
-                width: `${Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - founderSeatsRemaining) / FOUNDER_SEAT_CAP) * 100))}%`,
-              }} />
-            </div>
-          )}
-        </div>
-      )}
-
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0, flex: 1 }}>
-        {restFeatures.map((f, i) => <FeatureRow key={i}>{f}</FeatureRow>)}
-      </ul>
-
-      {(() => {
-        const notConfigured = !isConfigured && tier.priceCents > 0;
-        return (
-          <Button
-            type="button"
-            onClick={onCta}
-            disabled={loading || notConfigured}
-            // P8 — button emphasis follows the ACTION's importance, not the card's
-            // position. Only a real purchase action gets the solid-gold primary
-            // (decided by the parent so the region has exactly one). A billing/
-            // portal "manage" or a "current plan" self-state drops to secondary,
-            // so a low-stakes maintenance action never out-shouts the conversion
-            // path on the emphasised card.
-            variant={isPrimaryCta && ctaKind === 'purchase' ? 'primary' : 'secondary'}
-            size="lg"
-            fullWidth
-            // ~44px target for the page's highest-value tap (Fitts) — lg is 40px.
-            style={{ minHeight: 44 }}
-            // The disabled reason rides on opacity alone otherwise; name it.
-            title={notConfigured ? 'Payments are not available in local mode.' : undefined}
-            aria-disabled={notConfigured || undefined}
-          >
-            {loading ? 'Redirecting…' : ctaLabel}
-          </Button>
-        );
-      })()}
-    </article>
-  );
-}
-
-function PackTile({ pack, onBuy, loading, emphasised }) {
-  return (
-    <button
-      type="button"
-      onClick={onBuy}
-      disabled={loading || !isConfigured}
-      title={!isConfigured ? 'Payments are not available in local mode.' : undefined}
-      // The tile is several stacked divs with no single accessible name; name
-      // the affordance for screen readers as "<N credits>, <price>".
-      aria-label={`${t('pricing.creditPacks.pack', { credits: pack.credits })}, ${pack.price}`}
-      style={{
-        flex: '1 1 160px', minWidth: 160,
-        padding: `${SP.lg}px ${SP.md}px`,
-        // P5 anti-box-soup — ONE elevation channel per tile. The non-emphasised
-        // tiles separate from the parchment section tint by the faint shadow
-        // ALONE (border + shadow was two channels doing one job, re-creating the
-        // bordered spreadsheet grid the section comment claims to have removed);
-        // the focal pack carries the single gold border (no shadow) so exactly
-        // one tile reads as elevated.
-        background: emphasised ? 'rgba(201,162,76,0.06)' : CARD,
-        border: emphasised ? `2px solid ${GOLD}` : 'none',
-        boxShadow: emphasised ? 'none' : '0 1px 4px rgba(27,20,8,0.06)',
-        borderRadius: R.xl,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        cursor: loading ? 'wait' : 'pointer',
-        fontFamily: sans, opacity: loading ? 0.6 : 1,
-        position: 'relative',
-      }}
-    >
-      {/* P3/P4/P6 — three ranked levels, delta-first. The PRICE keeps the
-          size-dominant focal level (FS.xxl). The per-credit value + the N%-off
-          discount are the WHY-buy-bigger delta — the entire purpose of a
-          volume-discount table — so they form a clear secondary level just under
-          the price (FS.md + weight, gold-dominant on the focal tile) instead of
-          a detached FS.xs corner badge + the page's quietest line. The credit
-          quantity recedes to a single supporting label (it was stated twice
-          before — the bare number AND the "N credits" label). */}
-      <div style={{ fontSize: FS.xxl, fontWeight: 700, color: emphasised ? GOLD_TXT : INK }}>
-        {pack.price}
-      </div>
-      <div style={{ fontSize: FS.md, fontWeight: 700, color: emphasised ? GOLD_TXT : BODY }}>
-        {t('pricing.creditPacks.perEach', { price: pack.perCredit })}
-      </div>
-      {pack.discount && (
-        <div style={{
-          fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          color: emphasised ? GOLD_TXT : SECOND,
-        }}>
-          {pack.discount}
-        </div>
-      )}
-      <div style={{ fontSize: FS.xs, color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-        {t('pricing.creditPacks.pack', { credits: pack.credits })}
-      </div>
-    </button>
-  );
-}
 
 export default function PricingPage({ onNavigate }) {
   const isElevated = useStore(s => s.isElevated());
@@ -323,6 +79,7 @@ export default function PricingPage({ onNavigate }) {
   const [redeemNotice, setRedeemNotice] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
+  const livePricing = useLivePricing();
 
   // Keep the cross-surface stash in sync with the field so the code survives
   // leaving for the credit-pack modal (and vice versa).
@@ -334,6 +91,15 @@ export default function PricingPage({ onNavigate }) {
 
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
+
+  // P8 (W-DOC): ONE dominant primary across band 2 + the charter band. The
+  // emphasised Cartographer wins while purchasable; an already-premium reader's
+  // primary falls through to the Founder upgrade on the charter band.
+  const pricingPrimaryKey = (() => {
+    if (ctaFor(TIERS.cartographer).kind === 'purchase') return 'cartographer';
+    if (ctaFor(TIERS.founder).kind === 'purchase') return 'founder';
+    return null;
+  })();
 
   // P9 / decision 4 — simulation-led pricing copy A/B. When ON, the page
   // subtitle + tier taglines + feature lists lead with the living simulation
@@ -475,7 +241,7 @@ export default function PricingPage({ onNavigate }) {
           with the single gold left-border idiom intact. The line is body
           prose, so it carries the BODY token (not a muted aside). */}
       <p style={{
-        margin: `0 0 ${HEADER_GAP}px`, maxWidth: PROSE_MAX,
+        margin: `0 0 ${SP.md}px`, maxWidth: PROSE_MAX,
         padding: `${SP.xs}px ${SP.md}px`,
         borderLeft: `2px solid ${GOLD}`,
         fontSize: FS.md, color: BODY,
@@ -484,25 +250,25 @@ export default function PricingPage({ onNavigate }) {
         {t('pricing.antiAi')}
       </p>
 
+      {/* Band 1 (brief §3) — the no-hidden-fees sentence (the Stripe pattern):
+          one plain declarative line, document register, no box. */}
+      <p style={{
+        margin: `0 0 ${HEADER_GAP}px`, maxWidth: PROSE_MAX,
+        fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55,
+      }}>
+        {tp('band1.noHiddenFees')}
+      </p>
+
       {checkoutError && (
-        <div
+        // The tinted danger callout becomes a rubric-headed clerk's note (the
+        // C1c idiom): the apparatus speaks the failure in one oxblood rubric
+        // voice on a drawn left rule — no wash, no radius. Text + retry action
+        // + alert semantics unchanged.
+        <ClerkNote
+          rubric="Checkout"
           role="alert"
-          style={{
-            margin: `0 auto ${HEADER_GAP}px`,
-            maxWidth: FORM_MAX,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: swatch.dangerBg,
-            border: '1px solid #e8b0b0',
-            borderRadius: R.md,
-            color: swatch.danger,
-            fontFamily: sans,
-            fontSize: FS.sm,
-            display: 'flex', flexDirection: 'column', gap: SP.sm,
-            alignItems: 'center',
-          }}
-        >
-          <span>{checkoutError}</span>
-          {lastAttempt && (
+          style={{ margin: `0 auto ${HEADER_GAP}px`, maxWidth: FORM_MAX }}
+          actions={lastAttempt && (
             <Button
               type="button"
               variant="danger"
@@ -513,7 +279,9 @@ export default function PricingPage({ onNavigate }) {
               Try again
             </Button>
           )}
-        </div>
+        >
+          {checkoutError}
+        </ClerkNote>
       )}
 
       {/* ── Checkout riders (107): redeem code + referral intent ────────── */}
@@ -552,45 +320,78 @@ export default function PricingPage({ onNavigate }) {
           {t('pricing.tiers.heading')}
         </h2>
         {(() => {
-          const ctas = tiers.map(tier => ({ tier, cta: ctaFor(tier) }));
+          // W-DOC (brief §3 band 2): the subscription row is the THREE-way scan
+          // Free / Cartographer / Surveyor — the Founder leaves the row and
+          // renders below as the charter band (a different KIND of object), so
+          // the subscription decision stays a three-way scan (ruling #3).
+          const rowTiers = tiers.filter(tier => tier.key !== 'founder');
+          const ctas = rowTiers.map(tier => ({ tier, cta: ctaFor(tier) }));
           // P8 — the region carries EXACTLY ONE dominant primary, chosen for the
           // most important purchasable action (never a manage/current self-state,
           // never picked by card position alone). Prefer the emphasised
-          // Cartographer card when it is still purchasable; otherwise fall back to
-          // the highest-value remaining purchase card (e.g. for an already-premium
-          // user, the Founder upgrade) so the region never ends up all-secondary
-          // with no obvious first click.
-          const primaryKey = (() => {
-            const emphasisedEntry = ctas.find(({ tier }) => tier.key === 'cartographer');
-            if (emphasisedEntry && emphasisedEntry.cta.kind === 'purchase') {
-              return emphasisedEntry.tier.key;
-            }
-            const fallback = ctas.find(({ cta }) => cta.kind === 'purchase');
-            return fallback ? fallback.tier.key : null;
-          })();
-
+          // Cartographer card when it is still purchasable; otherwise fall back
+          // (the charter band below handles the already-premium Founder case via
+          // pricingPrimaryKey).
           return ctas.map(({ tier, cta }) => (
             <TierCard
               key={tier.key}
               tier={tier}
               ctaLabel={cta.label}
               ctaKind={cta.kind}
-              isPrimaryCta={tier.key === primaryKey}
+              isPrimaryCta={tier.key === pricingPrimaryKey}
               onCta={cta.onCta}
               // Wanderer has no in-flight checkout product (its CTA only
               // navigates), so map it to a sentinel that buy()/manageBilling()
               // never pass to setLoading. Mapping to null instead matched the
               // page's initial loading===null at rest, which left the free
               // tier's button permanently disabled showing 'Redirecting…'.
-              loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : tier.key === 'cartographer' ? 'premium' : 'wanderer')}
+              loading={loading === (tier.key === 'cartographer' ? 'premium' : 'wanderer')}
               emphasised={tier.key === 'cartographer'}
-              founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
               audienceLine={audienceLineFor(tier.key)}
               simulationVariant={simulationVariant}
             />
           ));
         })()}
+        {/* The Surveyor band — walled violet, AT LAST (ruling #3): the AI lane
+            is task-priced + BYOK, never a lookalike subscription. */}
+        <SurveyorBand onSeeMenu={() => {
+          const el = typeof document !== 'undefined' && document.getElementById('task-menu');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }} />
       </section>
+
+      {/* Cartographer framed as SERVICE, not unlock (brief §3 / the Forge
+          precedent): the recurring fee maps to a recurring service, said once. */}
+      <p style={{
+        margin: `0 auto ${SECTION_GAP}px`, maxWidth: PROSE_MAX,
+        padding: `${SP.xs}px ${SP.md}px`, borderLeft: `2px solid ${GOLD}`,
+        fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.6,
+      }}>
+        {tp('band2.serviceLine')}
+      </p>
+
+      {/* THE FOUNDER CHARTER (brief §3 band 2): live meter + the arithmetic and
+          sustainability sentences, all config-derived. */}
+      <FounderCharterBand
+        founderSeatsRemaining={founderSeatsRemaining}
+        cta={ctaFor(TIERS.founder)}
+        isPrimaryCta={pricingPrimaryKey === 'founder'}
+        loading={loading === 'founder_lifetime'}
+      />
+
+      {/* The Founder tier's proof surface: THE FOUNDERS' HALL. A quiet link so a
+          visitor can see who is already seated — the Hall is the proof.
+          LABEL ONLY. The Founder CARD above still carries the purchase copy of the
+          superseded design; abolishing that path (DESIGN_FOUNDERS_HALL §1/§5) is a
+          paid-surface change gated on the build-time never-sold verification
+          against the seat ledger and purchase history, and is NOT this lane's to
+          make. Renaming the destination is not the same act as removing the door,
+          and the two must not ride in one commit. */}
+      <div style={{ textAlign: 'center', marginTop: `-${SP.md}px`, marginBottom: SECTION_GAP }}>
+        <Button variant="ghost" size="sm" onClick={() => onNavigate?.('founders')}>
+          Visit the Founders&rsquo; Hall &rarr;
+        </Button>
+      </div>
 
       {/* ── Credit packs ────────────────────────────────────────────────── */}
       {/* P5 — the section is grouped by its parchment tint + the larger top gap
@@ -598,28 +399,48 @@ export default function PricingPage({ onNavigate }) {
           around tinted tiles on a page of bordered tier cards = three concentric
           parchment-family box levels; differential spacing carries the grouping
           without the third fence. */}
+      {/* ── Band 3 (brief §3): the ONE-TIME LANE — led by the $2.99 bundle (the
+          a-la-carte pattern this market mourned), then packs, then THE TASK
+          MENU. One clearly-labeled lane: "no subscription required". */}
       <section
-        aria-label="Credit packs"
+        aria-labelledby="one-time-heading"
         style={{
           background: PARCH,
-          borderRadius: R.xl,
           padding: `${SP.xl}px ${SP.lg}px`,
           marginBottom: SECTION_GAP,
         }}
       >
         <header style={{ textAlign: 'center', marginBottom: SP.lg }}>
-          {/* First-contact gloss: a new DM reads prices for an abstract token
-              with no sense of what it buys. The native title= names the
-              affordance from the copy registry's own fact (one credit refines a
-              settlement into prose), no new marketing wording. */}
-          <h2
-            title="A credit refines one settlement's data into prose. The structural simulation stays free."
-            style={{
-              margin: 0, fontFamily: serif_, fontSize: FS.xxl, color: INK,
-            }}
-          >
-            {t('pricing.creditPacks.heading')}
+          <h2 id="one-time-heading" style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl, color: INK }}>
+            {tp('band3.heading')}
           </h2>
+        </header>
+
+        {/* The bundle LEADS. Informational-with-a-path: the buy itself lives on
+            a forged settlement's dossier (the in-context purchase), so the CTA
+            routes to the forge instead of a contextless checkout. */}
+        <div style={{ maxWidth: PROSE_MAX, margin: `0 auto ${SP.xl}px`, textAlign: 'center' }}>
+          <h3 style={{ margin: `0 0 ${SP.xs}px`, fontFamily: serif_, fontSize: FS.xl, color: INK }}>
+            {tp('band3.bundle.name')}
+          </h3>
+          <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans, lineHeight: 1.5 }}>
+            {tp('band3.bundle.lead', { price: SINGLE_DOSSIER.priceLabel })}
+          </p>
+          <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+            {tp('band3.bundle.body')}
+          </p>
+          <p style={{ margin: `0 0 ${SP.md}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+            {tp('band3.bundle.where')}
+          </p>
+          <Button variant="secondary" size="lg" style={{ minHeight: 44 }} onClick={() => onNavigate?.('generate')}>
+            {tp('band3.bundle.cta')}
+          </Button>
+        </div>
+
+        <header style={{ textAlign: 'center', marginBottom: SP.lg }}>
+          <h3 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xl, color: INK }}>
+            {tp('band3.packs.heading')}
+          </h3>
           <p style={{
             margin: `${SP.xs}px auto 0`, maxWidth: PROSE_MAX,
             fontSize: FS.sm, color: BODY, lineHeight: 1.5,
@@ -642,6 +463,13 @@ export default function PricingPage({ onNavigate }) {
             />
           ))}
         </div>
+        {/* Expiry honesty, in the same visual block as the prices (never a
+            help-article footnote): no expiry machinery exists — say so. */}
+        <p style={{ margin: `${SP.md}px 0 0`, textAlign: 'center', fontSize: FS.sm, color: BODY, fontWeight: 600 }}>
+          {tp('band3.packs.note')}
+        </p>
+
+        <TaskMenu livePricing={livePricing} />
 
         {!isConfigured && (
           <p style={{
@@ -652,6 +480,13 @@ export default function PricingPage({ onNavigate }) {
           </p>
         )}
       </section>
+
+      {/* ── Band 4: the comparison table (THE ENTITLEMENT LADDER, ruled
+          2026-07-17, rendered from config). ── */}
+      <ComparisonTable />
+
+      {/* ── Band 5: the objection-first FAQ. ── */}
+      <PricingFaq />
 
       {/* P9 — the page-end onward path was a SECOND copy of the Wanderer tier's
           exact CTA (same label + same onNavigate('generate')), so the page

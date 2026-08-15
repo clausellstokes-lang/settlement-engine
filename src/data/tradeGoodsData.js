@@ -20,521 +20,112 @@ export const GOODS_CATEGORIES = {
 };
 
 /**
- * Export goods available by settlement tier
- * Each good has:
- * - category: GOODS_CATEGORIES type
- * - p: 0-1 probability if institution exists
- * - requiredInstitution: institution name that enables this (optional)
- * - on: whether this appears in generation by default
- */
-export const EXPORT_GOODS_BY_TIER = {
-  thorp: {
-    Eggs: {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.9,
-      on: true,
-      desc: "Fresh eggs from household chickens",
-    },
-    "Small game": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.6,
-      on: true,
-      desc: "Rabbits, fowl from local hunting",
-    },
-    "Foraged goods": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.7,
-      on: true,
-      desc: "Mushrooms, berries, herbs",
-    },
-  },
-
-  hamlet: {
-    "Grain surplus": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.8,
-      on: true,
-      desc: "Wheat, barley, oats beyond subsistence needs",
-    },
-    "Raw wool": {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      p: 0.7,
-      on: true,
-      desc: "Unprocessed wool from sheep",
-    },
-    "Dairy products": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.6,
-      on: true,
-      desc: "Cheese, butter, milk",
-    },
-    Livestock: {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.5,
-      on: true,
-      desc: "Cattle, sheep, pigs for sale",
-    },
-    "Honey and beeswax": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.4,
-      on: true,
-      desc: "Local beekeeping products",
-    },
-  },
-
-  village: {
-    "Agricultural surplus": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.9,
-      on: true,
-      desc: "Grain, wheat, barley in quantity",
-    },
-    "Raw wool and hides": {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      p: 0.8,
-      on: true,
-      desc: "Bulk unprocessed animal products",
-    },
-    Livestock: {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      p: 0.7,
-      on: true,
-      desc: "Cattle, sheep, pigs in regular supply",
-    },
-    "Eggs and dairy": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.8,
-      on: true,
-      desc: "Regular production for market",
-    },
-    "Honey and beeswax": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.5,
-      on: true,
-      desc: "Established beekeeping",
-    },
-    "Milled flour": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.9,
-      requiredInstitution: "Mill",
-      on: true,
-      desc: "Ground grain for bread-making",
-    },
-    "Basic metalwork": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.6,
-      requiredInstitution: "Blacksmith",
-      on: true,
-      desc: "Horseshoes, nails, simple tools",
-    },
-  },
-
-  town: {
-    "Enslaved persons": {
-      category: GOODS_CATEGORIES.TRADE,
-      p: 0.15,
-      on: false,
-      desc: "Human beings bought and sold as property. War captives, debt slaves, and trafficked persons. High value, restricted to settlements with slave markets.",
-      requiredInstitution: "Slave market",
-    },
-    "Guild-manufactured goods": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.9,
-      requiredInstitution: "Craft guilds (5-15)",
-      on: true,
-      desc: "Cloth, leather goods, metalwork",
-    },
-    "Processed textiles": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.8,
-      requiredInstitution: "Weavers/Textile workers",
-      on: true,
-      desc: "Woven cloth, finished fabrics",
-    },
-    "Quality tools and weapons": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.7,
-      requiredInstitution: "Blacksmiths (3-10)",
-      on: true,
-      desc: "Well-crafted implements and basic arms",
-    },
-    "Baked goods": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.8,
-      requiredInstitution: "Bakers (5-15)",
-      on: true,
-      desc: "Bread, pastries for market",
-    },
-    "Preserved foods": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      p: 0.6,
-      on: true,
-      desc: "Salted meats, pickled vegetables",
-    },
-    "Barrels and containers": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.5,
-      requiredInstitution: "Craft guilds (5-15)",
-      on: true,
-      desc: "Wooden casks for storage/transport",
-    },
-    "Leather goods": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.7,
-      requiredInstitution: "Tanners",
-      on: true,
-      desc: "Tanned hides, leather products",
-    },
-    "Pottery and ceramics": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.6,
-      requiredInstitution: "Craft guilds (5-15)",
-      on: true,
-      desc: "Household vessels and tiles",
-    },
-    "Rope and cordage": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.5,
-      requiredInstitution: "Craft guilds (5-15)",
-      on: true,
-      desc: "Essential for shipping and construction",
-    },
-  },
-
-  city: {
-    "Enslaved persons": {
-      category: GOODS_CATEGORIES.TRADE,
-      p: 0.2,
-      on: false,
-      desc: "Large-scale slave trade through licensed markets. War captives, imports from slave-taking regions, debt bondage.",
-      requiredInstitution: "Slave market district",
-    },
-    "Luxury manufactured goods": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.8,
-      on: true,
-      desc: "High-quality crafted items",
-    },
-    "Fine metalwork and jewelry": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.7,
-      requiredInstitution: "Specialized metalworkers",
-      on: true,
-      desc: "Precious metal goods, gemstone work",
-    },
-    "Legal services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.9,
-      requiredInstitution: "Multiple courthouses",
-      on: true,
-      desc: "Contracts, court access, legal expertise",
-    },
-    "Financial services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.7,
-      requiredInstitution: "Banking houses",
-      on: true,
-      desc: "Letters of credit, money changing",
-    },
-    "Specialized guild crafts": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.9,
-      requiredInstitution: "Craft guilds (30-80)",
-      on: true,
-      desc: "50+ specializations available",
-    },
-    "Books and manuscripts": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.6,
-      requiredInstitution: "Craft guilds (30-80)",
-      on: true,
-      desc: "Hand-copied texts, illuminated works",
-    },
-    "Advanced weapons and armor": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.6,
-      requiredInstitution: "Specialized metalworkers",
-      on: true,
-      desc: "Professional military equipment",
-    },
-    "Fine textiles": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.7,
-      requiredInstitution: "Craft guilds (30-80)",
-      on: true,
-      desc: "Silk, velvet, high-quality woolens",
-    },
-    "Dyed cloth": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.8,
-      requiredInstitution: "Craft guilds (30-80)",
-      on: true,
-      desc: "Colored fabrics, specialty dyes",
-    },
-    Glassware: {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      p: 0.5,
-      requiredInstitution: "Glassmakers",
-      on: true,
-      desc: "Windows, vessels, decorative glass",
-    },
-  },
-
-  metropolis: {
-    "International banking services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.9,
-      requiredInstitution: "Banking district",
-      on: true,
-      desc: "Letters of credit, international finance",
-    },
-    "Extreme luxury goods": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.8,
-      on: true,
-      desc: "Rare items, masterwork crafts",
-    },
-    "High art and culture": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.7,
-      on: true,
-      desc: "Theater, music, commissioned art",
-    },
-    "Educational services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.8,
-      requiredInstitution: "Academy of magic",
-      on: true,
-      desc: "University degrees, advanced training",
-    },
-    "Political influence": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.9,
-      on: true,
-      desc: "Access to power, legal frameworks",
-    },
-    "Rare spices and dyes": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.7,
-      on: true,
-      desc: "Imported exotic materials",
-    },
-    "Master-crafted weapons": {
-      category: GOODS_CATEGORIES.LUXURY,
-      p: 0.6,
-      requiredInstitution: "Specialized metalworkers",
-      on: true,
-      desc: "Legendary quality arms and armor",
-    },
-    "Architectural services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.7,
-      requiredInstitution: "Craft guilds (100-150+)",
-      on: true,
-      desc: "Cathedral design, fortress planning",
-    },
-    "Printing services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      p: 0.5,
-      requiredInstitution: "Printing house",
-      on: true,
-      desc: "Mass-produced texts (if technology exists)",
-    },
-  },
-};
-
-/**
- * Import goods needed by settlement tier.
- *
- * Shape: tier → goodName → props (mirrors EXPORT_GOODS_BY_TIER). Each good
- * carries an optional `source` tag (`basic` | `fromHigher` | `fromHinterland`
- * | `fromCityOrMetropolis` | `fromMetropolis`) recording which supplier the
- * import comes from — previously encoded as an extra layer of bucket keys.
- *
- * That bucket-nested shape was a landmine: customRegistry's prebuilt-catalog
- * enumeration walks tier → key → props expecting `key` to be a good name, so
- * the bucket labels (`basic`, `fromHinterland`, …) leaked into the Compendium
- * as fake trade goods while the real imports (arrays) were dropped. Flattening
- * to good-name keys fixes the enumeration and keeps the supplier metadata via
- * `source`. Nothing consumes the bucket layout for generation — the economic
- * generator keeps its own local UPGRADE_GOODS_BY_TIER pools.
+ * Import goods needed by settlement tier
+ * Structured by what tier needs from what tier
  */
 export const IMPORT_GOODS_BY_TIER = {
   thorp: {
-    Salt: { category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, source: "basic", desc: "Food preservation" },
-    "Metal tools": { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Simple implements" },
-    Cloth: { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Basic textiles" },
+    basic: [
+      { name: "Salt", category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, desc: "Food preservation" },
+      { name: "Metal tools", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Simple implements" },
+      { name: "Cloth", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Basic textiles" },
+    ],
   },
 
   hamlet: {
-    "Metal goods": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "basic",
-      desc: "Tools, nails, horseshoes",
-    },
-    Salt: { category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, source: "basic", desc: "Food preservation" },
-    "Quality cloth": { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Better textiles" },
+    basic: [
+      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
+      { name: "Salt", category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, desc: "Food preservation" },
+      { name: "Quality cloth", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Better textiles" },
+    ],
   },
 
   village: {
-    "Metal goods": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "basic",
-      desc: "Tools, nails, horseshoes",
-    },
-    "Quality cloth and clothing": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "basic",
-      desc: "Finished garments",
-    },
-    "Salt for preservation": {
-      category: GOODS_CATEGORIES.FOOD_PROCESSED,
-      on: true,
-      source: "basic",
-      desc: "Essential preservative",
-    },
-    "Specialized tools": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "basic",
-      desc: "Advanced implements",
-    },
-    "Legal services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromHigher",
-      desc: "Contracts, court access",
-    },
-    "Advanced medical care": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromHigher",
-      desc: "Skilled physicians",
-    },
-    "Manufactured goods": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "fromHigher",
-      desc: "Wide variety of crafts",
-    },
+    basic: [
+      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
+      {
+        name: "Quality cloth and clothing",
+        category: GOODS_CATEGORIES.MANUFACTURED,
+        on: true,
+        desc: "Finished garments",
+      },
+      {
+        name: "Salt for preservation",
+        category: GOODS_CATEGORIES.FOOD_PROCESSED,
+        on: true,
+        desc: "Essential preservative",
+      },
+      { name: "Specialized tools", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Advanced implements" },
+    ],
+    fromHigher: [
+      { name: "Legal services", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Contracts, court access" },
+      { name: "Advanced medical care", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Skilled physicians" },
+      { name: "Manufactured goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Wide variety of crafts" },
+    ],
   },
 
   town: {
-    "Enslaved persons": {
-      category: GOODS_CATEGORIES.TRADE,
-      desc: "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
-    },
-    "Luxury textiles": {
-      category: GOODS_CATEGORIES.LUXURY,
-      on: true,
-      source: "fromCityOrMetropolis",
-      desc: "Fine cloth, silk",
-    },
-    "Spices and exotic dyes": {
-      category: GOODS_CATEGORIES.LUXURY,
-      on: true,
-      source: "fromCityOrMetropolis",
-      desc: "Imported rarities",
-    },
-    "Banking services": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromCityOrMetropolis",
-      desc: "Letters of credit",
-    },
-    "Advanced legal expertise": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromCityOrMetropolis",
-      desc: "Specialized law",
-    },
-    "Rare materials": {
-      category: GOODS_CATEGORIES.LUXURY,
-      on: true,
-      source: "fromCityOrMetropolis",
-      desc: "Exotic goods",
-    },
-    "Food surplus": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      on: true,
-      source: "fromHinterland",
-      desc: "Agricultural hinterland",
-    },
-    "Raw wool and hides": {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      on: true,
-      source: "fromHinterland",
-      desc: "For processing",
-    },
-    Timber: {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      on: true,
-      source: "fromHinterland",
-      desc: "Construction material",
-    },
+    // Restricted/illicit imports. Grouped like every other tier bucket
+    // (an array of {name,…}), NOT a bare good key: the registry ingest mints
+    // one good per element and never mints a bucket KEY, so a bare-key good
+    // beside array groups minted no real good and left the group key as a
+    // phantom. [data-tables-1]
+    restricted: [
+      {
+        name: "Enslaved persons",
+        category: GOODS_CATEGORIES.TRADE,
+        on: true,
+        desc: "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
+      },
+    ],
+    fromCityOrMetropolis: [
+      { name: "Luxury textiles", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Fine cloth, silk" },
+      { name: "Spices and exotic dyes", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Imported rarities" },
+      { name: "Banking services", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Letters of credit" },
+      { name: "Advanced legal expertise", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Specialized law" },
+      { name: "Rare materials", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Exotic goods" },
+    ],
+    fromHinterland: [
+      { name: "Food surplus", category: GOODS_CATEGORIES.AGRICULTURAL, on: true, desc: "Agricultural hinterland" },
+      { name: "Raw wool and hides", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "For processing" },
+      { name: "Timber", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Construction material" },
+    ],
   },
 
   city: {
-    "International banking": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromMetropolis",
-      desc: "Global connections",
-    },
-    "Highest luxury goods": {
-      category: GOODS_CATEGORIES.LUXURY,
-      on: true,
-      source: "fromMetropolis",
-      desc: "Rarities and masterworks",
-    },
-    "Political legitimacy": {
-      category: GOODS_CATEGORIES.SERVICES,
-      on: true,
-      source: "fromMetropolis",
-      desc: "Royal/imperial connections",
-    },
-    "Bulk food": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      on: true,
-      source: "fromHinterland",
-      desc: "Massive agricultural needs",
-    },
-    "Raw materials": {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      on: true,
-      source: "fromHinterland",
-      desc: "Ore, timber, wool",
-    },
-    "Basic goods for resale": {
-      category: GOODS_CATEGORIES.MANUFACTURED,
-      on: true,
-      source: "fromHinterland",
-      desc: "Market redistribution",
-    },
+    fromMetropolis: [
+      { name: "International banking", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Global connections" },
+      { name: "Highest luxury goods", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Rarities and masterworks" },
+      {
+        name: "Political legitimacy",
+        category: GOODS_CATEGORIES.SERVICES,
+        on: true,
+        desc: "Royal/imperial connections",
+      },
+    ],
+    fromHinterland: [
+      { name: "Bulk food", category: GOODS_CATEGORIES.AGRICULTURAL, on: true, desc: "Massive agricultural needs" },
+      { name: "Raw materials", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Ore, timber, wool" },
+      {
+        name: "Basic goods for resale",
+        category: GOODS_CATEGORIES.MANUFACTURED,
+        on: true,
+        desc: "Market redistribution",
+      },
+    ],
   },
 
   metropolis: {
-    "Massive food requirements": {
-      category: GOODS_CATEGORIES.AGRICULTURAL,
-      on: true,
-      source: "basic",
-      desc: "Regional network",
-    },
-    "Raw materials": {
-      category: GOODS_CATEGORIES.RAW_MATERIALS,
-      on: true,
-      source: "basic",
-      desc: "Entire regional supply",
-    },
-    "Luxury imports": {
-      category: GOODS_CATEGORIES.LUXURY,
-      on: true,
-      source: "basic",
-      desc: "From distant lands",
-    },
+    basic: [
+      {
+        name: "Massive food requirements",
+        category: GOODS_CATEGORIES.AGRICULTURAL,
+        on: true,
+        desc: "Regional network",
+      },
+      { name: "Raw materials", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Entire regional supply" },
+      { name: "Luxury imports", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "From distant lands" },
+    ],
   },
 };
 
@@ -688,12 +279,19 @@ export const GOODS_MODIFIERS_BY_TIER = {
     },
   },
   town: {
+    // Restricted slave-trade export. Carried the standard { category, p, on, desc }
+    // shape as of [data-tables-4], replacing an authored institution/route BOOST
+    // schema whose fields (institutions/tradeRoutes/resourceBoost/institutionBoost/
+    // routeBoost) no reader ever consumed — a model for an engine that was never
+    // built. Kept DELIBERATELY DEFAULT-OFF (on:false): getGoodsModifiers gates on
+    // `spec.on` BEFORE the rng draw, so an inert row is byte-identical to the old
+    // shapeless one (skipped before any draw) — flipping it to on:true is a
+    // conscious, owner-gated change that draws rng and shifts the goods goldens.
     "Enslaved persons": {
       category: GOODS_CATEGORIES.TRADE,
       p: 0.15,
-      on: false,
-      desc: "Human beings bought and sold as property. War captives, debt slaves, and trafficked persons. High value, restricted to settlements with slave markets.",
-      requiredInstitution: "Slave market",
+      on: !1,
+      desc: "Captives trafficked on through slave markets and holding networks.",
     },
     "Guild-manufactured goods": {
       category: GOODS_CATEGORIES.MANUFACTURED,
@@ -942,6 +540,8 @@ export const COMMODITY_CATEGORY_MAP = {
   livestock: "grain",
   dairy: "grain",
   "game meat": "grain",
+  "animal hides": "craft",
+  furs: "luxury",
   "forest herbs": "herbs",
   wool: "textile",
   flax: "textile",

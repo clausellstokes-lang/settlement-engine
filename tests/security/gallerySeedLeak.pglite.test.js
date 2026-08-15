@@ -41,6 +41,8 @@ import { supabase } from '../../src/lib/supabase.js';
 import { toPublicSafe, PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { fetchDossierForImport, updateGalleryMetadata } from '../../src/lib/gallery.js';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -49,7 +51,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  seed strip fails here, not in production. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   for (const f of files) {
     const src = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8');
@@ -83,7 +85,7 @@ describe('SQL sanitizers strip the generation seed (net-current, pglite)', () =>
     await db.exec('create schema if not exists public;');
     await db.exec(netCurrentFn('_gallery_sanitize_public_json'));
     await db.exec(netCurrentFn('_gallery_dm_full_json'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const run = async (fn, obj) =>
     (await db.query(`select public.${fn}($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;

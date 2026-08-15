@@ -29,8 +29,16 @@
  */
 
 import { stablePart } from './worldState.js';
-import { resolveCoupVerdict } from '../rulingPower.js';
+import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import { computeWarSentiment } from './disposition.js';
+// W-CONVERGENCE — a surviving foreign intervener tilts the verdict (interventionAdj).
+// 0 when the intervention layer is dark ⇒ byte-identical (the warSentimentAdj precedent).
+import { interventionAdjFor } from './convergence.js';
+// M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
+// through the shared authority policy so the seat-change joins the approval queue
+// under the forcing modes AND under routine-with-major-approval (byte-identical
+// verbatim under legacy routine/full — the flag is absent there).
+import { authorityFor } from './changeAuthorityPolicy.js';
 
 // How strongly war sentiment shifts the coup hold-chance (P2). Modest — a sour war
 // tilts the seat's footing, it does not by itself topple a secure ruler.
@@ -81,9 +89,14 @@ function clamp(min, max, value) {
  * @param {number} [args.tick]
  * @param {Record<string, number>} [args.warExhaustion]  P2: the war-exhaustion scar ledger
  * @param {boolean} [args.warDispositionEnabled]  P2 flag: fold war sentiment into the hold-chance
+ * @param {Record<string, unknown>} [args.rules]  M10a: the simulation rules — the coup's applyMode
+ *   routes through authorityFor (verbatim under legacy routine/full; proposal under the forcing
+ *   modes and routine-with-major-approval).
+ * @param {Record<string, unknown>} [args.worldState]  W-CONVERGENCE: the world state — read for the
+ *   surviving-intervener tilt (interventionAdjFor; 0 when the intervention layer is dark).
  * @returns {any[]} outcomes for applyWorldPulseOutcomes (deterministic, probability 1)
  */
-export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false }) {
+export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false, rules = {}, worldState = {} }) {
   const outcomes = [];
   for (const stressor of resolved) {
     if (stressor?.type !== COUP_STRESSOR_TYPE) continue;
@@ -100,12 +113,26 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
     const warSentimentAdj = warDispositionEnabled
       ? WAR_SENTIMENT_PHOLD_WEIGHT * computeWarSentiment(entry.settlement, warExhaustion[saveId])
       : 0;
+    // W-CONVERGENCE: the surviving foreign interveners' signed tilt (0 when dark).
+    const interventionAdj = interventionAdjFor(worldState, saveId);
+    // coherence-13 (economicCoupReadEnabled, a VIRTUAL flag ABSENT from DEFAULT_SIMULATION_RULES):
+    // a prosperous seat holds, a hollowed treasury falls. Reads the settlement's already-derived
+    // economic_capacity causal score (symmetric to ruling_authority above), centered at 50 and
+    // scaled ±0.125 exactly like authorityAdj (÷400). The flag absent ⇒ 0 ⇒ byte-identical (the
+    // warSentimentAdj/interventionAdj precedent — stressorsEnabled is default-true, so this verdict
+    // is on the shipped-lit path; the dark default MUST contribute nothing).
+    const economicCapacityScore = entry.causal?.scores?.economic_capacity;
+    const economicAdj = (rules?.economicCoupReadEnabled === true && Number.isFinite(economicCapacityScore))
+      ? (Number(economicCapacityScore) - 50) / 400
+      : 0;
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
       severity,
       rulingAuthorityScore: entry.causal?.scores?.ruling_authority ?? null,
       warSentimentAdj,
+      interventionAdj,
+      economicAdj,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';
@@ -139,7 +166,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
         summary: `The conspiracy broke against the seat. Purges and loyalty tests follow; the plotters' names are currency now.`,
         reasons: [
           verdict.reason,
-          `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
+          'The contest broke in the ruling seat\'s favor.',
         ],
         condition: {
           archetype: 'coup_suppressed',
@@ -160,13 +187,18 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       type: 'power_transfer',
       candidateType: 'coup_succeeded',
       ruleId: 'coup_verdict_fall',
-      applyMode: locked ? 'proposal' : 'auto',
+      // M10a — the coup's LEGACY applyMode (locked ⇒ proposal, else auto — the
+      // player-lock escalation) is the legacyMode fed through authorityFor:
+      // VERBATIM under routine/full (byte-identical), forced to 'proposal' under
+      // dm_only/recommendations and under routine-with-major-approval (a coup is an
+      // actor-initiated major). No fresh rng — the verdict already rolled.
+      applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto'),
       severity: clamp(0.45, 1, severity),
       headline: `${verdict.winner.name} seizes power in ${settlementName}`,
       summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
       reasons: [
         verdict.reason,
-        `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
+        'The contest broke against the ruling seat.',
         ...(locked
           ? ['The governing faction is locked. The seat cannot change hands without your approval.']
           : []),

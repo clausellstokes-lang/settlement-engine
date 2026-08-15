@@ -25,12 +25,12 @@ import {
   queueRegionalImpacts,
   REGIONAL_GRAPH_SCHEMA_VERSION,
   setRegionalChannelStatus,
-  setRegionalChannelVisibility,
   setRegionalImpactStatus,
   summarizeWizardNews,
   WIZARD_NEWS_SIGNIFICANCE,
 } from '../../src/domain/region/index.js';
 import { findActiveCondition, withoutActiveCondition } from '../../src/domain/activeConditions.js';
+import { createWizardNewsEntryFromImpact } from '../../src/domain/region/wizardNews.js';
 
 function save(id, name, settlement = {}) {
   return {
@@ -93,6 +93,66 @@ describe('deriveRegionalState()', () => {
     expect(state.imports.map(g => g.id)).toContain('iron');
     expect(state.route.open).toBe(true);
     expect(state.depletedGoods.map(g => g.id)).toContain('grain');
+  });
+
+  it('projects built-in goods only from native resource ownership', () => {
+    const customOnly = save('custom', 'Namesake', {
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: [],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesDepleted: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+        nearbyResourcesState: { iron_deposits: 'depleted' },
+      },
+    });
+    const dualOwner = save('dual', 'Dual Namesake', {
+      config: {
+        ...customOnly.settlement.config,
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: ['iron_deposits'],
+      },
+    });
+
+    const customState = deriveRegionalState(customOnly);
+    const dualState = deriveRegionalState(dualOwner);
+
+    expect(customState.localProduction.map(good => good.id))
+      .not.toContain('iron');
+    expect(customState.depletedGoods.map(good => good.id))
+      .not.toContain('iron');
+    expect(dualState.localProduction.map(good => good.id))
+      .toContain('iron');
+    expect(dualState.depletedGoods.map(good => good.id))
+      .toContain('iron');
+  });
+
+  it('detects native production loss when a custom namesake remains visible', () => {
+    const before = save('dual', 'Dual Namesake', {
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+      },
+    });
+    const after = save('dual', 'Dual Namesake', {
+      config: {
+        ...before.settlement.config,
+        nearbyResourcesNative: [],
+      },
+    });
+
+    const delta = deriveLocalDelta(before, after, {
+      event: {
+        id: 'event.native-exhaustion',
+        type: 'resource_removal',
+      },
+    });
+    expect(delta.changes).toContainEqual(expect.objectContaining({
+      kind: 'local_production_lost',
+      good: expect.objectContaining({ id: 'iron' }),
+    }));
   });
 });
 
@@ -555,10 +615,16 @@ describe('graph channel merge', () => {
       strength: 0.4,
       discoveredAt,
       confirmedAt,
+      // Curated HIDDEN at mint. (This used to be applied afterwards through
+      // setRegionalChannelVisibility, RETIRED under owner queue #21; normalizeChannel
+      // honours an explicit visibility on the way in, which is the live path a
+      // relationship bundle already uses to mint gm/hidden channels.)
+      visibility: 'hidden',
       evidence: [{ source: 'dm', reason: 'Canonized at the table.' }],
     };
-    let graph = addRegionalChannels(null, [raw]);
-    graph = setRegionalChannelVisibility(graph, graph.channels[0].id, 'hidden');
+    const graph0 = addRegionalChannels(null, [raw]);
+    expect(graph0.channels[0].visibility).toBe('hidden'); // the curation is really there
+    let graph = graph0;
 
     // Discovery re-derives the candidate: born suggested, fresh wall-clock
     // discoveredAt, no confirmedAt, new measurements.
@@ -596,15 +662,19 @@ describe('graph channel merge', () => {
       channels: [
         { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
         { type: 'criminal_corridor', from: 'b', to: 'c', status: 'confirmed' },
+        // A v1 row that already carried a curated value. The migration must DEFAULT
+        // the two above without OVERWRITING this one — the half a defaults-only pin
+        // cannot see. (Formerly proven by calling setRegionalChannelVisibility after
+        // the migration; that op was RETIRED under owner queue #21, and asserting on
+        // the migration's own output is the closer pin anyway.)
+        { type: 'trade_dependency', from: 'c', to: 'd', status: 'confirmed', visibility: 'hidden' },
       ],
     });
 
     expect(graph.schemaVersion).toBe(REGIONAL_GRAPH_SCHEMA_VERSION);
-    expect(graph.channels.find(c => c.type === 'trade_dependency').visibility).toBe('public');
+    expect(graph.channels.find(c => c.from === 'a').visibility).toBe('public');
     expect(graph.channels.find(c => c.type === 'criminal_corridor').visibility).toBe('gm');
-
-    const hidden = setRegionalChannelVisibility(graph, graph.channels[0].id, 'hidden');
-    expect(hidden.channels[0].visibility).toBe('hidden');
+    expect(graph.channels.find(c => c.from === 'c').visibility).toBe('hidden');
   });
 
   it('advances delayed queued impacts and expires stale impacts', () => {
@@ -684,9 +754,43 @@ describe('wizard news feed', () => {
     const notable = entries.find(entry => entry.impactIds.includes('regional_impact.notable'));
 
     expect(major.significance).toBe(WIZARD_NEWS_SIGNIFICANCE.MAJOR);
-    expect(major.reasons).toContain('high severity');
+    expect(major.reasons).toContain('a heavy blow');
     expect(major.sourceEventId).toBe('evt_grain');
+    expect(major.summary).toContain('Granary Ford');
+    expect(major.summary).toContain('Millcross');
+    expect(major.summary).toContain('Grain');
+    // anchored: source, target, and good above prove the authored regional summary is populated.
+    expect(major.summary).not.toMatch(/\b(?:queued|regional impact|via)\b|_/i);
     expect(notable.significance).toBe(WIZARD_NEWS_SIGNIFICANCE.NOTABLE);
+  });
+
+  it('humanizes a bare goods id in an authored regional summary', () => {
+    const entry = createWizardNewsEntryFromImpact({
+      id: 'regional_impact.bare_good',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer',
+      channelType: 'trade_dependency',
+      goods: [{ id: 'bulk_grain' }],
+      severity: 0.7,
+      status: 'queued',
+    }, {
+      tick: 3,
+      graph: {
+        nodes: [{ id: 'supplier', name: 'Granary Ford' }, { id: 'buyer', name: 'Millcross' }],
+        channels: [{
+          id: 'channel.trade_dependency.supplier.buyer',
+          type: 'trade_dependency',
+          from: 'supplier',
+          to: 'buyer',
+          status: 'confirmed',
+        }],
+      },
+    });
+    expect(entry.summary).toContain('Bulk Grain');
+    // anchored: the humanized good above proves the bare-id projection rendered.
+    expect(entry.summary).not.toContain('bulk_grain');
   });
 
   it('records a ready update when delayed regional impacts mature', () => {

@@ -13,15 +13,47 @@
  * terrain mode support.
  */
 
-import { track, EVENTS } from '../lib/analytics.js';
-import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { deepClone } from '../domain/clone.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
+// The campaign-write persistence chokepoint (campaignSlice's own idiom, and
+// already in the eager closure through it) — the autoplacement Herald record is a
+// campaign write, so it persists the way every other campaign write does.
+import { persistCampaignState } from './campaignSliceShared.js';
+
+// FP-G9 first-paint reclaim: computeRoadEdges (+ its supplyChains dep, ~19 KB
+// source) is reached from the eager store ONLY here, and ONLY for the
+// fire-and-forget MAP_ROUTE_DRAWN analytics below — never for state. A static
+// import dragged the whole roadNetwork chunk into the first-paint closure. The
+// lazy map surfaces (WorldMap/RoadsLayer) import computeRoadEdges directly, so
+// dynamic-importing it here (memoized, the settlementSlice loadEngine idiom)
+// lets roadNetwork + supplyChains ride the lazy map chunk instead. The one
+// observable shift is analytics timing: MAP_ROUTE_DRAWN fires one microtask
+// later (the placement, its gate return, and MAP_PLACEMENT_ADDED all stay
+// synchronous). @enforced-by tests/build/vendorPdfLazy.test.js (byte budget).
+let _roadNetworkPromise;
+const loadRoadNetwork = () => {
+  if (!_roadNetworkPromise) _roadNetworkPromise = import('../lib/roadNetwork.js');
+  return _roadNetworkPromise;
+};
+
+// W-G: the Herald record for an autoplacement act. Reached from the eager store
+// ONLY here, and only to APPEND one news entry after the placements have already
+// landed — so it rides the same dynamic-import treatment as roadNetwork above
+// rather than dragging the region news module into the first-paint closure. The
+// one observable consequence is timing: the Herald entry lands one microtask
+// after the placements, exactly as MAP_ROUTE_DRAWN does.
+let _wizardNewsPromise;
+const loadWizardNews = () => {
+  if (!_wizardNewsPromise) _wizardNewsPromise = import('../domain/region/wizardNews.js');
+  return _wizardNewsPromise;
+};
 
 export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
   ANNOTATE: 'annotate',
-  // Routes mode: relationship-first overlay. Forces
+  // P110 / M-4 — Routes mode: relationship-first overlay. Forces
   // RelationshipEdges + RoadsLayer + ChainEdges to full opacity,
   // hides annotate UI, surfaces a network-stress alert when the
   // supply-chain state has cascading impacts.
@@ -59,11 +91,19 @@ const DEFAULT_LAYERS = {
   regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
   regionalMinSeverity: 0,
   regionalShowGm: true,
-  // UX Phase 5 — spatial war/faith glyph overlay (deployment arrows, siege rings +
-  // coalition badge, occupation shading, trade-war prize). On by default; honors
-  // channel visibility via the same regionalShowGm gate as the other overlays.
+  // Spatial war/faith glyph overlay (WarFaithMapOverlay). Default ON so a live
+  // war campaign shows its deployment arrows / siege rings / occupation shading;
+  // a dormant world renders nothing regardless (empty read-models). Present in
+  // DEFAULT_LAYERS so the LayersPanel "War & faith" toggle is a real toggle (the
+  // toggleLayer guard no-ops keys absent from this map).
   warFaith: true,
   roads: true,
+  // DESIGN_THE_ROADS §13 — the Travelers overlay: army columns + migrant columns +
+  // named-NPC envoys, moving on the road graph. DEFAULT OFF (opt-in DM-truth lens);
+  // the ~20 B eager default is this key (travelersFilter defaults null = all three
+  // sub-layers, set on demand). The army/migrant sub-layers read LIVE ledgers with no
+  // flag; the envoy sub-layer is present only when the roads ledger is lit (§13).
+  travelers: false,
   labels: true,
   markers: true,
   forests: true,
@@ -105,13 +145,6 @@ function freshMapState() {
     // the same <g>-space as the backdrop <image> — so every existing overlay
     // layer renders them unchanged (the <g> transform handles display scaling).
     customBackdrop: null,
-    // Render-INERT gallery thumbnail of the FMG terrain, captured on share so the
-    // maps-gallery tile can show the map image (generated-terrain maps have no
-    // customBackdrop → no thumb otherwise). Shape { imageUrl, w, h } | null.
-    // NOTHING reads this for display and it is NOT in MAP_UNDO_KEYS, so it never
-    // touches the undo stack or flips the editor into image-mode the way
-    // customBackdrop.imageUrl does.
-    galleryThumb: null,
     // Settlement burgs placed on the map: burgId -> { settlementId, x, y, cellId, placedAt }
     placements: {},
     // User-added text labels
@@ -130,7 +163,7 @@ function freshMapState() {
 // The annotate/placement undo stack only needs the MUTABLE sub-slices — NOT the
 // heavy fmgSnapshot geography blob (often ~1MB+), the custom backdrop, layer
 // toggles, or the camera viewport. Snapshotting the whole mapState cloned that
-// blob on every label/marker/forest op, and restoring it wrongly reverted
+// blob on every label/marker/forest op (F6), and restoring it wrongly reverted
 // geography + camera on undo. We snapshot + restore only these keys.
 const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
 
@@ -145,14 +178,6 @@ function snapshotAnnotations(mapState) {
 function restoreAnnotations(mapState, snap) {
   for (const k of MAP_UNDO_KEYS) {
     if (snap[k] !== undefined) mapState[k] = deepClone(snap[k]);
-  }
-  // Backdrop is only present in snapshots taken by the undoable image-import
-  // path (setMapBackdrop). Normal annotation snapshots omit it, so this branch
-  // never fires for label/marker/forest/placement undos — the backdrop is left
-  // exactly as it was. `null` is a real value (no backdrop), so guard on the
-  // key's presence, not truthiness.
-  if ('customBackdrop' in snap) {
-    mapState.customBackdrop = snap.customBackdrop ? deepClone(snap.customBackdrop) : null;
   }
 }
 
@@ -191,9 +216,15 @@ export const createMapSlice = (set, get) => ({
   annotateTool: ANNOTATE_TOOLS.SELECT,  // current annotate tool
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
   selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
+  // V-3 THE TIMELAPSE + V-15 THE AGED MAP — the shared scrub position. null ⇒
+  // timelapse INACTIVE (live view; every derived overlay renders as today). A number
+  // ⇒ scrubbing that advance tick; the realm timelapse overlay and the town aged-map
+  // overlay both read it (the one coordination contract, "the scrubber drives both").
+  // Transient UI, not persisted, not worldState ⇒ zero golden / zero persist impact.
+  timelapseTick: null,
   selectedAnnotationId: null,  // clicked label/marker/forest
   selectedAnnotationKind: null,  // 'label' | 'marker' | 'forest' — which layer the id lives in
-  // Quick-inspector hover state. Distinct from
+  // P136 / M-6 — quick-inspector hover state. Distinct from
   // `selectedSettlementId` because selection is a deliberate click;
   // hover is a "peek" that doesn't commit. The QuickInspector
   // component subscribes to this and renders a 3-line card.
@@ -245,9 +276,14 @@ export const createMapSlice = (set, get) => ({
 
   setSelectedSettlementId: (id) => set(state => { state.selectedSettlementId = id; }),
 
+  // V-3 THE TIMELAPSE — set the scrub position (null deactivates the timelapse).
+  setTimelapseTick: (tick) => set(state => {
+    state.timelapseTick = (tick == null || !Number.isFinite(Number(tick))) ? null : Number(tick);
+  }),
+
   clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
 
-  // Hover-peek mutations. Setting hoveredSettlementId
+  // P136 / M-6 — hover-peek mutations. Setting hoveredSettlementId
   // does not affect selection; the QuickInspector renders a tiny
   // floating card with name + pressure + top hook so the user can
   // peek a placement without committing to opening the full detail.
@@ -257,9 +293,9 @@ export const createMapSlice = (set, get) => ({
 
   // The calling layer (LabelsLayer / MarkersLayer / ForestsLayer) knows which
   // kind it owns, so it passes `kind` alongside the id. That lets the Annotate
-  // toolbar's Delete fire the SINGLE correct deletion instead of firing both
-  // deleteLabel + deleteMarker blindly. HitLayer clears with no kind on a
-  // background click, nulling both.
+  // toolbar's Delete fire the SINGLE correct deletion instead of firing every
+  // delete blindly. HitLayer clears with no kind on a background click, nulling
+  // both. Additive: existing 1-arg callers keep working (kind defaults null).
   setSelectedAnnotationId: (id, kind = null) => set(state => {
     state.selectedAnnotationId = id;
     state.selectedAnnotationKind = id ? kind : null;
@@ -295,13 +331,30 @@ export const createMapSlice = (set, get) => ({
 
   // ── Placements (settlement drops) ─────────────────────────────────────────
   addPlacement: ({ burgId, settlementId, x, y, cellId, via }) => {
-    // Route count BEFORE the add — used only to detect whether this placement
-    // brought a new derived road edge into being (the MAP_ROUTE_DRAWN proxy).
-    let routeCountBefore = 0;
-    try {
-      const prev = get();
-      routeCountBefore = computeRoadEdges(prev.savedSettlements, prev.mapState.placements).length;
-    } catch { /* analytics-only; never block the placement */ }
+    // THE AUTHORITATIVE PLACEMENT GATE (store-hooks-state-7). useMapBridge documents
+    // addPlacement as "the authoritative gate (campaign / canon / no-duplicate)" and
+    // branches on { ok:false, reason }, but the store placed UNCONDITIONALLY and
+    // returned undefined — so a settlementPlaced bridge event that bypasses
+    // handleDrop's pre-checks (a direct FMG placement, a re-entrant echo) mutated with
+    // no gate, and the documented refusal toast (PLACEMENT_REJECT_COPY) was dead code.
+    // Mirror WorldMap.handleDrop's checks HERE so both entry points share ONE gate:
+    // a settlement only lands on a campaign map, only if it is canon, at most once.
+    const gate = get();
+    if (!gate.activeCampaignId) return { ok: false, reason: 'no-campaign' };
+    if (settlementId != null) {
+      const saveRec = (gate.savedSettlements || []).find(sv => String(sv.id) === String(settlementId));
+      if (saveRec && !isCanonSave(saveRec)) return { ok: false, reason: 'not-canon' };
+      if (Object.values(gate.mapState?.placements || {}).some(p => String(p.settlementId) === String(settlementId))) {
+        return { ok: false, reason: 'duplicate' };
+      }
+    }
+
+    // Snapshot the PRE-placement map inputs for the MAP_ROUTE_DRAWN proxy below.
+    // computeRoadEdges runs LAZILY (dynamic import), so capture the immutable
+    // pre-set state now — immer freezes it, so it stays a valid before-image.
+    const prevForRoutes = get();
+    const prevSaves = prevForRoutes.savedSettlements;
+    const prevPlacements = prevForRoutes.mapState.placements;
 
     set(state => {
       snapshotForUndo(state, 'place settlement');
@@ -313,13 +366,20 @@ export const createMapSlice = (set, get) => ({
       };
     });
 
+    // Snapshot the POST-placement map inputs SYNCHRONOUSLY (immer froze them), so
+    // the deferred MAP_ROUTE_DRAWN block below computes on the exact same before/
+    // after images the old synchronous code did — the lazy load defers only the
+    // analytics TIMING, never which state it reads.
+    const nextForRoutes = get();
+    const nextSaves = nextForRoutes.savedSettlements;
+    const nextPlacements = nextForRoutes.mapState.placements;
+
     // Fire-and-forget analytics — coarse counts only, NEVER coordinates.
     try {
-      const next = get();
-      const placementCountAfter = Object.keys(next.mapState.placements || {}).length;
+      const placementCountAfter = Object.keys(nextPlacements || {}).length;
       // Tier of the just-placed settlement, derived inline as a coarse enum.
       const save = settlementId
-        ? (next.savedSettlements || []).find(s => String(s?.id) === String(settlementId))
+        ? (nextSaves || []).find(s => String(s?.id) === String(settlementId))
         : null;
       const tier = save?.settlement?.tier || save?.tier || 'unknown';
       track(EVENTS.MAP_PLACEMENT_ADDED, {
@@ -327,24 +387,33 @@ export const createMapSlice = (set, get) => ({
         tier,
         via: via === 'picker' ? 'picker' : 'drop',
       });
-
-      // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn;
-      // a placement that grows the road graph is the natural "a route appeared"
-      // moment. Only fire when the edge count strictly increases.
-      const edges = computeRoadEdges(next.savedSettlements, next.mapState.placements);
-      if (edges.length > routeCountBefore) {
-        // Did this add link two settlement-backed placements (vs an empty burg)?
-        const linksTwoPlaced = edges.some(e => {
-          const a = next.mapState.placements[e.fromBurgId];
-          const b = next.mapState.placements[e.toBurgId];
-          return !!(a?.settlementId && b?.settlementId);
-        });
-        track(EVENTS.MAP_ROUTE_DRAWN, {
-          route_count_after: edges.length,
-          links_two_placed_settlements: linksTwoPlaced,
-        });
-      }
     } catch { /* analytics is best-effort; never affect placement behavior */ }
+
+    // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn; a
+    // placement that grows the road graph is the natural "a route appeared"
+    // moment. Only fire when the edge count strictly increases. computeRoadEdges
+    // rides the LAZY roadNetwork chunk (see loadRoadNetwork above) — deferred here
+    // so the eager store never pulls it into first paint. Fully fire-and-forget:
+    // the placement + its gate return already resolved synchronously.
+    loadRoadNetwork().then(({ computeRoadEdges }) => {
+      try {
+        const routeCountBefore = computeRoadEdges(prevSaves, prevPlacements).length;
+        const edges = computeRoadEdges(nextSaves, nextPlacements);
+        if (edges.length > routeCountBefore) {
+          // Did this add link two settlement-backed placements (vs an empty burg)?
+          const linksTwoPlaced = edges.some(e => {
+            const a = nextPlacements[e.fromBurgId];
+            const b = nextPlacements[e.toBurgId];
+            return !!(a?.settlementId && b?.settlementId);
+          });
+          track(EVENTS.MAP_ROUTE_DRAWN, {
+            route_count_after: edges.length,
+            links_two_placed_settlements: linksTwoPlaced,
+          });
+        }
+      } catch { /* analytics is best-effort; never affect placement behavior */ }
+    }).catch(() => { /* chunk load failed — analytics only, ignore */ });
+    return { ok: true };
   },
 
   removePlacementLocal: (burgId) => {
@@ -365,7 +434,9 @@ export const createMapSlice = (set, get) => ({
     // canonized, placed settlements can no longer be moved. Adding new ones is
     // still allowed (addPlacement is ungated). The UI also disables the drag
     // affordance; this is the authoritative backstop (incl. autosave paths).
-    const camp = state.campaigns?.find(c => c.id === state.activeCampaignId);
+    const camp = state.campaigns?.find(
+      c => c?.id != null && String(c.id) === String(state.activeCampaignId),
+    );
     if (camp?.worldState?.canonizedAt) return;
     const p = state.mapState.placements[burgId];
     if (!p) return;
@@ -374,9 +445,151 @@ export const createMapSlice = (set, get) => ({
     if (patch?.cellId !== undefined) p.cellId = patch.cellId;
   }),
 
-  replaceAllPlacements: (placements) => set(state => {
-    state.mapState.placements = { ...(placements || {}) };
-  }),
+  /**
+   * W-G / J-D1 — COMMIT AN AUTOPLACEMENT. The consent popup calls this only after
+   * the user has confirmed, with exactly the itemized moves they agreed to.
+   *
+   * THIS ACTION MINTS NO POSITION WRITE OF ITS OWN. Every coordinate goes through
+   * the two writes the map already uses — `updatePlacement` for a settlement
+   * already on the map, `addPlacement` (the authoritative campaign/canon/duplicate
+   * gate) for one that is not — so the canon move-lock, the placement row shape,
+   * and every existing refusal apply to autoplacement for free. A third position
+   * writer is precisely how a lock ends up enforced on one path and ghosted on
+   * another.
+   *
+   * WHY NO BRIDGE ROUND-TRIP (verified against the vendored frame, not assumed):
+   * public/map/sf-bridge.js stores `x: mapPt.x, y: mapPt.y` after `screenToMap`
+   * and derives `cellId = findCell(mapPt.x, mapPt.y)`, so a stored placement's x/y
+   * live in the SAME map space as the pack centroids the planner reads — a planned
+   * cell's centroid can be written straight through. And its `restorePlacements`
+   * handler documents itself a no-op "now that placements are React-rendered": the
+   * burgId is an opaque store key the frame does not own. So both classes commit
+   * store-side in map coordinates, in FMG and image mode alike, with no
+   * screen-space conversion and no async echo to race.
+   *
+   * The canonize guard is ALSO checked here, before anything is snapshotted, so a
+   * frozen realm gets one legible refusal instead of a silent no-op per move
+   * (updatePlacement's own guard would refuse each write without saying why).
+   *
+   * ONE undo snapshot covers the whole act: pressing Undo puts every settlement
+   * back where it was, because a placement pass the user cannot take back in one
+   * gesture is not a placement pass they will risk trying.
+   *
+   * @param {{ proposals?: Array<{ kind?: 'move'|'place', burgId?: string|null,
+   *   settlementId: string, name?: string, x: number, y: number, toCell?: number }>,
+   *   seed?: string, version?: number }} args
+   * @returns {{ ok: true, moved: number, placed: number, refused: number }
+   *   | { ok: false, reason: string }}
+   */
+  applyAutoplacement: ({ proposals = [], seed = '', version = 0 } = {}) => {
+    const gate = get();
+    const campaignId = gate.activeCampaignId;
+    if (!campaignId) return { ok: false, reason: 'no-campaign' };
+    const camp = (gate.campaigns || []).find(
+      c => c?.id != null && String(c.id) === String(campaignId),
+    );
+    if (camp?.worldState?.canonizedAt) return { ok: false, reason: 'canonized' };
+
+    const rows = (Array.isArray(proposals) ? proposals : []).filter(
+      m => m && m.settlementId != null
+        && Number.isFinite(Number(m.x)) && Number.isFinite(Number(m.y)),
+    );
+    if (!rows.length) return { ok: false, reason: 'nothing-to-do' };
+
+    // ONE snapshot for the whole act (before any write), so one Undo reverts it all.
+    set(state => { snapshotForUndo(state, 'autoplace settlements'); });
+
+    let moved = 0;
+    let placed = 0;
+    /** @type {string[]} */
+    const landedIds = [];
+    /** @type {string[]} */
+    const landedNames = [];
+    for (const row of rows) {
+      const cellId = Number.isInteger(row.toCell) ? row.toCell : null;
+      const x = Number(row.x);
+      const y = Number(row.y);
+      if (row.kind === 'place' || !row.burgId) {
+        // NOT on the map yet: through addPlacement, which is the gate that checks
+        // campaign / canon / no-duplicate. A refusal is honoured, never bypassed.
+        const res = get().addPlacement({
+          burgId: `sf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+          settlementId: row.settlementId,
+          x,
+          y,
+          cellId,
+          via: 'picker',
+        });
+        if (res && res.ok === false) continue;
+        placed += 1;
+      } else {
+        const before = get().mapState.placements?.[row.burgId];
+        if (!before) continue;                     // a placement that vanished mid-consent
+        get().updatePlacement(row.burgId, { x, y, cellId });
+        const after = get().mapState.placements?.[row.burgId];
+        if (!after || (after.x === before.x && after.y === before.y)) continue;
+        moved += 1;
+      }
+      landedIds.push(String(row.settlementId));
+      if (row.name) landedNames.push(String(row.name));
+    }
+
+    // THE HERALD RECORD — ONE item for the whole charter, never one per settlement.
+    // Deferred by the dynamic import (see loadWizardNews); the placements above
+    // already landed synchronously and nothing here can undo them.
+    const namedIds = landedIds;
+    const names = landedNames;
+    const total = moved + placed;
+    if (total > 0) {
+      loadWizardNews().then(({ appendWizardNewsEntries }) => {
+        set(state => {
+          const c = (state.campaigns || []).find(
+            x => x?.id != null && String(x.id) === String(campaignId),
+          );
+          if (!c) return;
+          const tick = Number(c.worldState?.tick) || 0;
+          const already = (c.wizardNews?.entries || []).filter(
+            e => e?.kind === 'autoplacement',
+          ).length;
+          c.wizardNews = appendWizardNewsEntries(c.wizardNews, [{
+            // Deterministic and collision-free: the same charter drawn twice at the
+            // same tick is two entries, not one silently swallowed by a dedupe.
+            id: `wizard_news.autoplacement.${tick}.${already}`,
+            tick,
+            scope: 'realm',
+            kind: 'autoplacement',
+            significance: 'notable',
+            severity: 0.35,
+            headline: "The realm's charter is drawn",
+            summary: total === 1
+              ? 'One settlement takes its place on the map.'
+              : `${total} settlements take their places on the map.`,
+            // THE ADDRESS CHAIN: ids, never names — the AddressChain resolver names
+            // them at read time, so a later rename can never strand this record.
+            settlementIds: namedIds,
+            reasons: names.length ? [`The charter names ${names.join(', ')}.`] : [],
+            tags: ['autoplacement', `plan_v${Number(version) || 0}`, seed ? `seed:${seed}` : ''].filter(Boolean),
+          }], { now: new Date().toISOString() });
+          c.updatedAt = new Date().toISOString();
+          persistCampaignState(state, campaignId);
+        });
+      }).catch(() => { /* the record is a receipt, never a gate on the placements */ });
+    }
+
+    return { ok: true, moved, placed, refused: rows.length - total };
+  },
+
+  // RETIRED (R-5b, owner queue #21): `replaceAllPlacements`. It overwrote the
+  // whole placement bag in one unguarded, un-snapshotted write — no canon guard,
+  // no snapshotForUndo — and its ONLY appearance in the product was an INERT
+  // WorldMap.jsx binding (`const _replaceAllPlacements = useStore(...)`) that was
+  // never called. That binding is what made the op look reachable to a naive grep,
+  // and it is the shape the dead-op ratchet's inert-binding discount exists to
+  // catch. The LIVE bulk-placement writers are replaceMapState (whole-mapState
+  // restore, the snapshot/undo path) and clearAllPlacementsLocal (snapshotted);
+  // neither needed this door. Nothing durable referred to it, so no migration is
+  // owed. Re-adding a bulk placement write means re-facing the snapshot + canon
+  // guard questions this one silently skipped.
 
   clearAllPlacementsLocal: () => set(state => {
     snapshotForUndo(state, 'clear placements');
@@ -464,23 +677,10 @@ export const createMapSlice = (set, get) => ({
    * Switch the map to a custom image backdrop. Non-destructive: the FMG
    * snapshot is left intact so clearMapBackdrop restores terrain mode. Bumps
    * geometryVersion so derived layers (roads) recompute and skip A*.
-   *
-   * Undoable as a SINGLE step: before applying, this captures the pre-import
-   * annotation sub-slices AND the prior customBackdrop onto the undo stack, so
-   * the map's Undo button reverts the whole import (backdrop + any placements it
-   * overwrote) in one click. The snapshot carries the `customBackdrop` key,
-   * which restoreAnnotations only honors when present — annotation undos are
-   * untouched.
    * @param {{imageUrl:string,w:number,h:number}} backdrop
    */
   setMapBackdrop: (backdrop) => set(state => {
     if (!backdrop || !backdrop.imageUrl) return;
-    const snapshot = snapshotAnnotations(state.mapState);
-    snapshot.customBackdrop = state.mapState.customBackdrop
-      ? deepClone(state.mapState.customBackdrop) : null;
-    state.mapUndoStack.push({ action: 'import map image', snapshot, timestamp: Date.now() });
-    if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
-    state.mapRedoStack = [];
     state.mapState.customBackdrop = {
       imageUrl: backdrop.imageUrl,
       w: Number(backdrop.w) || 0,
@@ -491,18 +691,6 @@ export const createMapSlice = (set, get) => ({
     // place the backdrop off-screen; the overlay then contain-fits the image.
     state.mapState.viewport = { ...DEFAULT_VIEWPORT };
     state.geometryVersion = (state.geometryVersion || 0) + 1;
-  }),
-
-  /**
-   * Record the render-inert gallery thumbnail captured on share. Does NOT touch
-   * the undo stack, customBackdrop, viewport, or geometryVersion — it is pure
-   * metadata carried in mapState so publish_map / list_gallery_maps can surface
-   * a tile image for generated-terrain maps. { imageUrl, w, h } | null.
-   */
-  setGalleryThumb: (thumb) => set(state => {
-    state.mapState.galleryThumb = thumb && thumb.imageUrl
-      ? { imageUrl: thumb.imageUrl, w: Number(thumb.w) || 0, h: Number(thumb.h) || 0 }
-      : null;
   }),
 
   /** Drop back to FMG terrain mode (keeps any existing fmgSnapshot). */
@@ -529,6 +717,15 @@ export const createMapSlice = (set, get) => ({
    * Does NOT touch the FMG snapshot — that needs to be loaded via the bridge.
    */
   replaceMapState: (next) => set(state => {
+    // Lifecycle-clear (fix wave 2 #3): the annotation/placement undo+redo stacks are
+    // scoped to the map they were recorded against. A campaign switch swaps mapState
+    // here but PREVIOUSLY left the stacks intact, so pressing Undo in campaign B
+    // injected campaign A's placements / secret markers into B (a cross-campaign
+    // secret leak, and geometry from the wrong world). The stacks MUST be dropped
+    // whenever the underlying map is replaced; the AnnotateToolbar Undo button reads
+    // mapUndoStack.length so an emptied stack disables it automatically.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
     if (!next) { state.mapState = freshMapState(); return; }
     // Merge with defaults to handle older snapshots missing new fields
     const fresh = freshMapState();
@@ -542,7 +739,6 @@ export const createMapSlice = (set, get) => ({
       markers:  next.markers  || [],
       forests:  next.forests  || [],
       customBackdrop: next.customBackdrop || null, // older campaigns → null (FMG mode)
-      galleryThumb: next.galleryThumb || null,     // render-inert share thumbnail
     };
   }),
 
@@ -556,6 +752,11 @@ export const createMapSlice = (set, get) => ({
     // pointing at the now-gone settlement.
     state.selectedSettlementId = null;
     state.hoveredSettlementId = null;
+    // Lifecycle-clear (fix wave 2 #3): drop the map-scoped undo/redo history so a
+    // deselect / fresh-campaign switch can't let a later Undo restore the prior
+    // campaign's placements or secret markers into a different (or empty) map.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
   }),
 
   // ── Undo/redo (per-action snapshot of annotation/placement sub-slices) ─────
@@ -569,31 +770,24 @@ export const createMapSlice = (set, get) => ({
   mapUndo: () => set(state => {
     const entry = state.mapUndoStack.pop();
     if (!entry) return;
-    // Mirror the entry's shape onto the redo snapshot: an import entry carries
-    // the backdrop, so the redo snapshot must capture the CURRENT backdrop too
-    // (re-applying it as one step). Annotation entries omit the key, so the
-    // backdrop is never touched on a label/marker/forest/placement undo.
-    const redoSnap = snapshotAnnotations(state.mapState);
-    if ('customBackdrop' in entry.snapshot) {
-      redoSnap.customBackdrop = state.mapState.customBackdrop
-        ? deepClone(state.mapState.customBackdrop) : null;
-    }
-    state.mapRedoStack.push({ action: entry.action, snapshot: redoSnap, timestamp: Date.now() });
-    // Restore the annotation/placement sub-slices — and the backdrop only when
-    // the entry carried it. Geography (fmgSnapshot), layers, and camera are
-    // always left as they are.
+    state.mapRedoStack.push({
+      action: entry.action,
+      snapshot: snapshotAnnotations(state.mapState),
+      timestamp: Date.now(),
+    });
+    // Restore ONLY the annotation/placement sub-slices — geography (fmgSnapshot),
+    // layers, backdrop, and camera are left as they are.
     restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   mapRedo: () => set(state => {
     const entry = state.mapRedoStack.pop();
     if (!entry) return;
-    const undoSnap = snapshotAnnotations(state.mapState);
-    if ('customBackdrop' in entry.snapshot) {
-      undoSnap.customBackdrop = state.mapState.customBackdrop
-        ? deepClone(state.mapState.customBackdrop) : null;
-    }
-    state.mapUndoStack.push({ action: entry.action, snapshot: undoSnap, timestamp: Date.now() });
+    state.mapUndoStack.push({
+      action: entry.action,
+      snapshot: snapshotAnnotations(state.mapState),
+      timestamp: Date.now(),
+    });
     restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
@@ -612,7 +806,9 @@ export const createMapSlice = (set, get) => ({
   getSettlementForBurg: (burgId) => {
     const p = get().mapState.placements[burgId];
     if (!p) return null;
-    return (get().savedSettlements || []).find(s => s.id === p.settlementId) || null;
+    return (get().savedSettlements || []).find(
+      s => s?.id != null && String(s.id) === String(p.settlementId),
+    ) || null;
   },
 
   // ── Burg→config conversion (used to derive settlement from a clicked burg) ──

@@ -22,9 +22,39 @@
 
 import { deityRankStrength, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcCorruptibleFlaw } from '../corruption.js';
+// Phase 4 W-F3 — the government-form × law-axis synergy reads the patron's signed
+// law position (lawSign: +1 lawful · −1 chaotic · 0 neutral/legacy) off the ONE
+// axis projection, so a law-neutral/legacy patron contributes EXACTLY 0.
+import { lawSign } from './deityStance.js';
+// Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
+// (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
+import { evil01, chaos01, deityTemper } from './deityAxes.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
+// Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
+// STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
+// and its martial readiness (a maintained war machine is warlike conduct). Both close
+// the fit loop: keeping a cruel institution under a good patron, or arming under a
+// peacelike one, registers as DRIFT. Both read 0 for a settlement with none ⇒ byte-identical.
+import { settlementMoralConductLean } from './moralMartialLean.js';
+import { settlementMartialConductLean } from './martialReadiness.js';
+// THE FACTION-KEY BUG (same class as the ladder's, commits 25749ae5 + dc0b6e2b): real
+// powerStructure.factions records carry the display name in `.faction` and carry NEITHER
+// `.name` NOR `.id` NOR `.archetype`. rulerLens hand-rolled its own `.name` lookups and its
+// own `.id` join, so all three read dead on every generated settlement. These are the
+// canonical accessors — the SAME chokepoints the other faction consumers use — imported
+// rather than re-spelled, because a tenth hand-rolled variant is how this class propagates.
+// rulingPower/factionArchetypes are EAGER modules and this is a lazy worldPulse leaf, so
+// the import runs in the safe lazy → eager direction and adds 0 first-paint bytes.
+import { governingFactionOf } from '../rulingPower.js';
+import { factionArchetype } from '../factionArchetypes.js';
+import { npcInFaction, ladderFactionKey } from './npcLadderState.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
-const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
+// 'peacelike' is deriveTemper's spelling (deityAxes); 'peaceful' is the
+// legacy stored-axis spelling. BOTH map to 0 so a derived temper reads correctly
+// through this lens. [worldpulse-religion-trade-1]
+const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0, peacelike: 0 });
 const ALIGN_POS = /** @type {Record<string, number>} */ ({ evil: 0, neutral: 0.5, good: 1 });
 
 // A governing faction's archetype implies a temperament + alignment lean (0..1),
@@ -61,7 +91,84 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   COMPROMISE_TRADITION_FADE: 0.5, // fraction of tenure+neighbour weight stripped at full compromise (entrenched faiths keep some)
   W_INSTITUTION: 0.12,            // max legitimacy a temple-rich settlement lends the ESTABLISHED faith (a bounded
                                   // bonus atop the sum-1 base — creed-agnostic structural backing that entrenches incumbents)
+  // W-F3 government-form × law-axis synergy: a patron whose law position MATCHES the
+  // governance form's law affinity earns extra legitimacy standing; a mismatch (the
+  // trickster over a dukedom, the lawgiver in a freebooter port) is a friction. LAW
+  // AXIS ONLY — the FORM of rule is a law-chaos matter (conduct is good-evil, handled
+  // elsewhere). Bounded (max ±SYNERGY_W × composite piety) and piety-scaled; EXACTLY 0
+  // for a law-neutral/legacy patron or a settlement with no measured piety.
+  SYNERGY_W: 0.06,
+  // ── W-F4 RECIPROCAL PATRON LOOP (owner addendum 2026-07-10) ─────────────────
+  // A patron is chosen AND RETAINED partly by ALIGNMENT FIT: how much the settlement's
+  // OWN ENDOGENOUS conduct matches the deity's two-axis plane. The relationship is
+  // reciprocal but NOT perpetual — the fit is re-derived from CURRENT conduct each tick
+  // (drifting conduct erodes the signal) and the LAG step decays legitimacy toward it,
+  // so an imposed patron over misaligned conduct WITHERS unless conduct comes to match.
+  // ENDOGENEITY (strict): the conduct plane reads ONLY domestic signals — governance
+  // character, corruption/compromise depth, and the settlement's own governance-form law
+  // affinity. War, trade, partnerships, the USER, and the PARTY are EXCLUDED (foreign
+  // policy and divine fiat never feed the loop). SIGNED and 0 at a neutral deity OR
+  // neutral conduct ⇒ byte-identical for legacy/neutral deities. SUBCRITICAL: the swing
+  // is bounded and small (no absorbing state — entrenchment is strong, not ownership).
+  CONDUCT_FIT_W: 0.14,          // max legitimacy swing from ±full conduct alignment
+  CONDUCT_GOV_W: 0.6,           // governance-character weight in the conduct plane…
+  CONDUCT_COMPROMISE_W: 0.4,    // …vs corruption/compromise depth
+  // ── W-F8 endogenous STRUCTURE terms (moral institutions + martial readiness) ──
+  // Additive nudges on the conduct plane from the settlement's own STANDING structure,
+  // both EXACTLY 0 when absent (no morally-coded institution / no readiness record) ⇒
+  // byte-identical. The moral term shifts BOTH axes (cruelty→evil, disorder→chaos);
+  // the martial term shifts toward the warlike quadrant (evil+chaos), so a peacelike
+  // patron over a war machine reads a mismatch (the demilitarization pressure).
+  CONDUCT_MORAL_INST_W: 0.3,    // signed cruelty/disorder lean of morally-coded institutions
+  CONDUCT_MARTIAL_W: 0.35,      // warlike lean from martial readiness (already 0..~0.6 signed +)
+  // ── W-F4 CLERGY LEGITIMACY DRAG (owner clergy-lens addendum) ────────────────
+  // A scandalous priesthood is a legitimacy drag: the god's seat is only as clean as
+  // the clergy who minister it. Keyed on the influence-weighted corruptible-flaw taint,
+  // SHARPENED when the compromise is already publicly REVEALED (a covert stain hurts
+  // less than an open scandal). Cross-term: a HOSTILE court (a ruler misaligned with the
+  // patron) amplifies the scandal, a SYNERGISTIC court shields it. EXACTLY 0 for an
+  // unflawed / trait-neutral / no-religious-faction priesthood ⇒ byte-identical.
+  CLERGY_SCANDAL_W: 0.16,       // max legitimacy drag from a fully-tainted revealed priesthood
+  CLERGY_REVEALED_SHARPEN: 0.6, // extra weight on the REVEALED share of the taint (covert→revealed)
+  CLERGY_COURT_AMP: 0.5,        // hostile court amplifies / synergistic court shields the scandal
 });
+
+// Each governance form carries a signed law-axis affinity (+1 lawful … −1 chaotic,
+// 0 centre) — the "how ordered is the FORM of rule" reading the owner named. Matched
+// by name like mandateGovWeight. THEOCRACY is special (its affinity IS the patron's
+// own law position — synergy by construction), handled in governmentLawFit.
+const GOVERNMENT_LAW_AFFINITY = /** @type {Array<[RegExp, number]>} */ ([
+  [/crimin|syndicate|thiev|outlaw|pirate|bandit/, -1.0],                 // criminal syndicates ⇒ chaotic
+  [/free.?town|frontier|tribal|moot|clan|nomad|compact|commune|anarch/, -0.6], // free-towns / frontier / tribal ⇒ chaotic-lean
+  [/merchant|council|republic|oligarch|confeder|guild|senate|parliament/, 0], // merchant councils ⇒ centre
+  [/monarch|feudal|autocra|imperial|empire|kingdom|throne|royal|king|queen|emperor|duke|dukedom|magistr|magocra|despot|dynast|principality/, 1.0], // feudal/royal/dukedom/magistracy ⇒ lawful
+]);
+
+/** Signed law-axis affinity of a governance form (+1 lawful … −1 chaotic, 0 centre/unknown).
+ *  Exported so the W-F4 crisis-conversion term can fade the small-tier chaos bonus by how
+ *  lawful the government is (a chartered town resists the whisper a thorp cannot).
+ *  @param {string|null|undefined} government @returns {number} */
+export function governmentLawAffinity(government) {
+  const g = String(government || '').toLowerCase();
+  for (const [re, v] of GOVERNMENT_LAW_AFFINITY) if (re.test(g)) return v;
+  return 0;
+}
+
+/**
+ * The signed government-form × patron-law ALIGNMENT ∈ [−1, +1]: +1 when the patron's
+ * law position matches the form's affinity (prop), −1 on full mismatch (friction), 0
+ * for a law-neutral/legacy patron (lawSign 0) — the byte-identity anchor. A THEOCRACY's
+ * affinity IS the patron's own law position, so alignment = lawSign² ∈ {0, +1}: synergy
+ * by construction, and still 0 for a law-neutral patron. Pure.
+ * @param {{ lawAxis?: string }|null|undefined} deity @param {string|null|undefined} government @returns {number}
+ */
+export function governmentLawFit(deity, government) {
+  const law = lawSign(deity);                       // +1 lawful · −1 chaotic · 0 neutral/legacy
+  if (law === 0) return 0;
+  const g = String(government || '').toLowerCase();
+  const affinity = /theocra/.test(g) ? law : governmentLawAffinity(government);
+  return law * affinity;                            // ∈ [−1, +1]
+}
 
 const clamp01 = (/** @type {number} */ n) => (n < 0 ? 0 : n > 1 ? 1 : n);
 
@@ -82,7 +189,9 @@ const STANDING_BACKING = /** @type {Record<string, number>} */ ({ ascendant: 1, 
  * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
  */
 export function institutionBackingOf(settlement) {
-  const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // LIVE roster only — a calamity-destroyed cathedral is a ruin, not standing worship,
+  // and lends no faith backing (ruin-filter class).
+  const insts = liveInstitutions(settlement);
   let weighted = 0;
   for (const it of insts) {
     const tags = Array.isArray(it?.tags) ? it.tags : [];
@@ -92,8 +201,9 @@ export function institutionBackingOf(settlement) {
   return clamp01(weighted / INSTITUTION_SAT);
 }
 
-/** Importance → org-power weight (mirrors entities/npcs importanceWeight). @param {import('../settlement.schema.js').SimNpc} npc */
-function orgPower(npc) {
+/** Importance → org-power weight (mirrors entities/npcs importanceWeight). Exported so
+ *  the clergy lens (W-F3) aggregates the priesthood on the SAME weight. @param {import('../settlement.schema.js').SimNpc} npc */
+export function orgPower(npc) {
   const w = /** @type {Record<string, number>} */ ({ minor: 0.0, notable: 0.4, key: 0.7, pillar: 1.0 });
   return w[String(npc?.importance || 'minor')] ?? 0;
 }
@@ -103,25 +213,79 @@ function orgPower(npc) {
  * lean, how much org-power backs it, and the corruption it sits in. Folds the
  * governing faction's archetype with its strongest linked NPC's authored alignment.
  * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number }}
+ * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number, moralLean: { cruelty: number, disorder: number }, martialLean: number }}
  */
 export function rulerLens(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = String(ps.governingName || '').toLowerCase();
-  // Match the governing faction by name; fall back to the highest-power faction.
-  let ruler = factions.find((/** @type {any} */ f) => String(f?.name || '').toLowerCase() === governing);
-  if (!ruler && governing) ruler = factions.find((/** @type {any} */ f) => governing.startsWith(String(f?.name || '').toLowerCase()) && f?.name);
-  if (!ruler) ruler = factions.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => (Number(b?.power) || 0) - (Number(a?.power) || 0))[0];
-  const lean = ARCHETYPE_LEAN[String(ruler?.archetype || 'other')] || ARCHETYPE_LEAN.other;
+  // THE SEAT. governingFactionOf is the canonical accessor (`.isGoverning` first, then
+  // nameOf === governingName, where nameOf reads `.faction || .name`). The two hand-rolled
+  // `.name` finds it replaces were DEAD on real data — 0 matches over every generated
+  // record probed — so every settlement fell through to the highest-power fallback.
+  //
+  // THAT FALLBACK IS WRONG ON FRESH WORLDS, not merely on exotic ones. rulingStructure sorts
+  // the faction array governing-first REGARDLESS of power, so the seat is routinely not the
+  // strongest faction and the array order hides it; re-sorting by power alone lands
+  // elsewhere. Measured through the full generateSettlementPipeline: the fallback picks the
+  // WRONG faction on 66/180 = 36.7% of freshly generated settlements (an independent probe
+  // over a different corpus measured 25-35%, so the rate is corpus-sensitive but the
+  // direction is not). A repeat coup makes it worse — each win banks +6 on the winner while
+  // the seat's own power never moves. Measuring against the BARE generatePowerStructure
+  // instead shows 360/360 agreement and reads as harmless; that corpus is not
+  // representative, and believing it is how this defect stayed unnoticed.
+  //
+  // The fallback is KEPT as a last resort for the shape that has no seat to find: no
+  // `.isGoverning` record and no matching governingName (the legacy/partial fixture shape).
+  const ruler = governingFactionOf(
+    /** @type {Parameters<typeof governingFactionOf>[0]} */ (/** @type {unknown} */ (settlement)))
+    || factions.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => (Number(b?.power) || 0) - (Number(a?.power) || 0))[0];
+  // THE ARCHETYPE. `.archetype` is a hand-authored fixture key only — no generator writes
+  // it, so `String(ruler?.archetype || 'other')` resolved 'other' on 100% of real data and
+  // the whole ARCHETYPE_LEAN table was dead weight. factionArchetype is the canonical
+  // detector and reads the `.category` every real record DOES carry. Fixture `.archetype`
+  // keeps precedence so the legacy unit shape still drives the lens it was written for.
+  // The cast is load-bearing DOCUMENTATION, not a silencer: now that `ruler` comes from the
+  // typed governingFactionOf, tsc correctly reports that `.archetype` is not on
+  // RulingFaction — which is exactly the defect. It stays OFF the typedef (adding it would
+  // legitimize a key no writer produces) and is read here only to honour hand-authored
+  // fixtures, so the read is cast at the one site that needs it.
+  const archetype = String(/** @type {{ archetype?: string }} */ (ruler)?.archetype || '') || factionArchetype(ruler);
+  const lean = ARCHETYPE_LEAN[archetype] || ARCHETYPE_LEAN.other;
 
-  // The faction's strongest linked NPC sharpens the alignment lean (authored character).
-  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-  const rulerId = String(ruler?.id || '');
+  // The ruling faction's strongest linked NPC sharpens the alignment lean (authored
+  // character). The old join read `String(ruler?.id || '')` — always '' on real data, because
+  // no generated record carries `.id` — so the filter never skipped anyone and the scan
+  // silently covered the WHOLE roster. `lead` was therefore the strongest NPC in the
+  // settlement, not the seat's, and `rulerFlaw` rotted the throne for a flaw carried by
+  // ANY townsperson. Membership now routes through npcInFaction, the canonical chokepoint,
+  // which matches the generator's display affiliation plus the id-first
+  // `linkedFactionIds` compatibility contract (name-only generated seats still
+  // carry their display handle; authored id-bearing seats carry their id).
+  //
+  // THIS NARROWING FIRES ON REAL DATA: measured over generateSettlementPipeline, the
+  // governing seat has at least one affiliated NPC in 180/180 settlements, so the scan
+  // genuinely narrows from the roster to the seat. (A bare-generatePowerStructure probe
+  // suggested the opposite — that the seat is always memberless — because it does not run
+  // the pipeline's NPC affiliation step. It is not a representative corpus; see the note in
+  // tests/domain/religionLegitimacyFactionKey.test.js.)
+  //
+  // The whole-roster fallback is kept for the shape where the seat has NO members at all —
+  // hand-authored fixtures and sparse worlds — where an empty set would null `lead` and zero
+  // `rulerFlaw`, making the lens read blanker than before.
+  // @enforced-by tests/domain/religionLegitimacyFactionKey.test.js (the pin's two join cases).
+  const allNpcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const seatKey = ruler ? ladderFactionKey(ruler) : '';
+  const seatMembers = ruler
+    ? allNpcs.filter((n) => npcInFaction(
+      /** @type {Record<string, unknown>} */ (n || {}),
+      ruler,
+      seatKey,
+      factions,
+    ))
+    : [];
+  const npcs = seatMembers.length ? seatMembers : allNpcs;
   let lead = null; let leadPow = -1; let rulerFlaw = 0;
   for (const n of npcs) {
-    const linked = Array.isArray(n?.linkedFactionIds) ? n.linkedFactionIds.map(String) : [];
-    if (rulerId && !linked.includes(rulerId)) continue;
     const p = orgPower(n);
     if (p > leadPow) { leadPow = p; lead = n; }
     // A corruptible flaw on a power-holder rots the throne proportional to their clout.
@@ -137,14 +301,27 @@ export function rulerLens(settlement) {
   // a criminal ruling faction each rot the legitimate rulership. Saturating 0..1. This
   // is the variable amplifier for evil faiths (consumed by deityGrowthFavor).
   const crimInst = climate.hasCriminalInst ? clamp01(0.3 + 0.18 * (Array.isArray(climate.criminalInstitutions) ? climate.criminalInstitutions.length : 1)) : 0;
-  const factionDark = String(ruler?.archetype) === 'criminal' ? 0.5 : 0;
+  // Reads the DERIVED archetype for the same reason the lean does: `.archetype` is absent
+  // from every generated record, so this compromise term could never fire on real data.
+  const factionDark = archetype === 'criminal' ? 0.5 : 0;
   const compromise = clamp01(0.35 * crime + 0.28 * crimInst + 0.40 * rulerFlaw + 0.25 * factionDark);
-  return { temper: clamp01(lean.temper), align, power, corrupt: crime, compromise };
+  // W-F8: the settlement's own STANDING structure as endogenous conduct — its
+  // morally-coded institutions ({cruelty,disorder} signed lean) and its martial
+  // readiness (signed warlike lean). Both 0 when absent ⇒ the conduct plane is
+  // unchanged ⇒ byte-identical for every settlement without them.
+  const moralLean = settlementMoralConductLean(settlement);
+  const martialLean = settlementMartialConductLean(settlement);
+  return { temper: clamp01(lean.temper), align, power, corrupt: crime, compromise, moralLean, martialLean };
 }
 
 /** 0..1 fit between a deity and a ruling-power lens (alignment + temperament). @param {any} deity @param {{temper:number,align:number}} lens */
 function deityRulerFit(deity, lens) {
-  const dT = TEMPER_POS[deity?.temperamentAxis] ?? 0.5;
+  // Temper via the DERIVATION (deityTemper), NOT the retired stored
+  // temperamentAxis — otherwise this dominant ruler-fit lane splits temper
+  // semantics from the rest of the engine (a 4-axis evil+chaotic deity derives
+  // 'warlike' everywhere else but read 0.5/neutral here off a stale/absent
+  // stored field). [worldpulse-religion-trade-1]
+  const dT = TEMPER_POS[deityTemper(deity) ?? 'neutral'] ?? 0.5;
   const dA = ALIGN_POS[deity?.alignmentAxis] ?? 0.5;
   const temperFit = 1 - Math.abs(dT - lens.temper);
   const alignFit = 1 - Math.abs(dA - lens.align);
@@ -187,14 +364,17 @@ export function deityGrowthFavor(deity, lens) {
  * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef
  * @param {(snapshot:any, id:string)=>any} deitySnapshotFor @param {number} [targetMass]
  */
-function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass) {
+function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass, rankStrengthOf = deityRankStrength) {
   if (!neighbourIds.length) return 0;
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
     if (!snap || String(snap._deityRef || snap.name) !== String(deityRef)) continue;
     const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
-    acc += (0.5 + 0.5 * deityRankStrength(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
+    // [worldpulse-religion-trade-4] G1d — an endorsing neighbour's EARNED pantheon
+    // tier lends more standing (rankStrengthOf blends snapshot rank with pantheon tier;
+    // defaults to the base rank when no resolver is threaded ⇒ byte-identical).
+    acc += (0.5 + 0.5 * rankStrengthOf(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
   }
   return clamp01(Math.min(RELIGION_LEGITIMACY_TUNING.PREVALENCE_CAP, acc / Math.max(1, neighbourIds.length)));
 }
@@ -222,7 +402,7 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
     let touches = 0;
     for (const e of (rec?.corruptionEvents || [])) if (String(e?.settlementId) === cid) touches += 1;
     for (const e of (rec?.factionCaptureEvents || [])) if (String(e?.settlementId) === cid) touches += 1.5;
-    for (const o of (rec?.selectedOutcomes || [])) if (String(o?.targetSaveId) === cid) touches += 0.4 * (Number(o?.severity) || 0.3);
+    for (const o of outcomesForMechanicalHistory(rec)) if (String(o?.targetSaveId) === cid) touches += 0.4 * (Number(o?.severity) || 0.3);
     if (touches <= 0) continue;
     momentum += recency * Math.min(2, touches) * (fit - 0.5) * 2;  // (fit−0.5)*2 ⇒ −1..+1 direction
     wsum += recency * Math.min(2, touches);
@@ -232,18 +412,71 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
 }
 
 /**
+ * The settlement's ENDOGENOUS conduct plane (evilness, chaoticness), each 0..1 and
+ * 0.5-neutral, from DOMESTIC signals ONLY: governance character (lens.align, 0 evil …
+ * 1 good), corruption/compromise depth, and the settlement's own governance-FORM law
+ * affinity. No external actions (war/trade/partnerships), no user/party. Pure.
+ * @param {{ align?: number, compromise?: number, moralLean?: { cruelty?: number, disorder?: number }, martialLean?: number }} lens
+ * @param {string|null|undefined} government
+ * @returns {{ evil01: number, chaos01: number }}
+ */
+function conductPlane(lens, government) {
+  const T = RELIGION_LEGITIMACY_TUNING;
+  const compromise = clamp01(Number(lens?.compromise) || 0);
+  const align = Number.isFinite(lens?.align) ? clamp01(Number(lens.align)) : 0.5;   // 0 evil … 1 good
+  const rot = 0.5 + 0.5 * compromise;                                               // 0.5 clean … 1 rotten
+  // W-F8 endogenous STRUCTURE nudges — 0 when absent (⇒ byte-identical). Signed
+  // cruelty/disorder from morally-coded institutions; signed warlike lean from readiness
+  // (pushes BOTH axes toward the warlike evil+chaos quadrant).
+  const moral = lens?.moralLean || { cruelty: 0, disorder: 0 };
+  const martial = Number(lens?.martialLean) || 0;
+  const evilStruct = (Number(moral.cruelty) || 0) * T.CONDUCT_MORAL_INST_W + martial * T.CONDUCT_MARTIAL_W;
+  const chaosStruct = (Number(moral.disorder) || 0) * T.CONDUCT_MORAL_INST_W + martial * T.CONDUCT_MARTIAL_W;
+  const conductEvil01 = clamp01((1 - align) * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W + evilStruct);
+  const govChaos = (1 - governmentLawAffinity(government)) / 2;                      // 0 lawful … 1 chaotic (0.5 neutral)
+  const conductChaos01 = clamp01(govChaos * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W + chaosStruct);
+  return { evil01: conductEvil01, chaos01: conductChaos01 };
+}
+
+/**
+ * Signed ALIGNMENT FIT ∈ [−1,+1] of a deity's plane with the settlement's endogenous
+ * conduct: per-axis agreement (both same sign ⇒ aligned, opposite ⇒ opposed), averaged.
+ * EXACTLY 0 for a neutral deity (evil01/chaos01 = 0.5) OR neutral conduct ⇒ the reciprocal
+ * loop is invisible to legacy/neutral fixtures. Pure — read from CURRENT conduct only, so
+ * a drift in conduct erodes the signal (the "continuously fed / never perpetual" rule).
+ * REUSED by the piety amplifier (W-F5.5 conduct-drift-erodes-piety): the SAME endogenous
+ * signal that erodes legitimacy also erodes felt devotion — exported so piety never
+ * recomputes it (the owner's "reuse, never recompute" mandate).
+ * @param {{ alignmentAxis?: string, lawAxis?: string }} deity
+ * @param {{ align?: number, compromise?: number }} lens
+ * @param {string|null|undefined} government
+ * @returns {number}
+ */
+export function conductFitSignal(deity, lens, government) {
+  const c = conductPlane(lens, government);
+  const agreeMoral = (evil01(deity) - 0.5) * (c.evil01 - 0.5) * 4;   // −1..+1; 0 at neutral either side
+  const agreeLaw = (chaos01(deity) - 0.5) * (c.chaos01 - 0.5) * 4;
+  const s = 0.5 * (agreeMoral + agreeLaw);
+  return s < -1 ? -1 : s > 1 ? 1 : s;
+}
+
+/**
  * The 0..1 legitimacy TARGET a deity drifts toward this tick. Composes ruler
  * endorsement, neighbour recognition, accumulated tenure, and chronicle momentum,
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
- *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any }} args
+ *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any,
+ *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null,
+ *   rankStrengthOf?:(deity:unknown)=>number }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null, rankStrengthOf = deityRankStrength }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
-  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement));
+  // [worldpulse-religion-trade-4] G1d — thread the pantheon-tier-blended rank resolver
+  // into neighbour recognition so a neighbouring seat-won creed lends more standing.
+  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement), rankStrengthOf);
   const tenure = (Number(entry?.tenure) || 0) / ((Number(entry?.tenure) || 0) + T.TENURE_HALF);   // 0..~1, saturating
   const chronicle = chronicleMomentum(worldState, cid, deity, L);
   const stain = Math.max(0, Number(entry?.heresyStain) || 0);
@@ -260,7 +493,30 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   // Religious-institution backing: temples lend bounded, creed-agnostic legitimacy to
   // the faith that holds the seat (scaled by its standing) — entrenching the incumbent.
   const instTerm = T.W_INSTITUTION * clamp01(institutionBacking) * (STANDING_BACKING[entry?.standing] ?? 0.1);
-  return clamp01(base + instTerm - stain);
+  // W-F3 government-form × law synergy: a law-matched patron earns standing, a mismatch
+  // frets it — piety-scaled, and EXACTLY 0 for a law-neutral/legacy patron (governmentLawFit)
+  // OR when no piety was measured (pietyMult null ⇒ deity-free / tick-0 / unit fixtures) ⇒
+  // byte-identical. Governance form read off powerStructure (passed by the driver).
+  const gov = government ?? settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName;
+  const synergy = pietyMult == null ? 0 : T.SYNERGY_W * governmentLawFit(deity, gov) * pietyMult;
+  // W-F4 reciprocal patron loop: an endogenous conduct-alignment term grafted onto the
+  // W_RULER family. Gated on a measured piety record (pietyMult != null) — the SAME
+  // discipline as synergy — so static/unit fixtures without piety are byte-identical, and
+  // SET_PRIMARY_DEITY (which mints no piety and no conduct fit) never feeds the loop: an
+  // imposed patron over misaligned conduct withers here until conduct comes to match.
+  // SIGNED (raises the aligned patron, erodes the misaligned) and 0 for a neutral deity.
+  const conductFit = pietyMult == null ? 0 : T.CONDUCT_FIT_W * conductFitSignal(deity, L, gov);
+  // W-F4 clergy legitimacy drag: a scandalous priesthood erodes the seat's standing,
+  // sharpened when the taint is publicly REVEALED, and modulated by the court — a ruler
+  // HOSTILE to the patron amplifies the scandal, a synergistic one shields it. EXACTLY 0
+  // for an unflawed / trait-neutral / no-religious-faction priesthood ⇒ byte-identical.
+  let clergyDrag = 0;
+  if (clergy && Number(clergy.weight) > 0) {
+    const scandal = clamp01(Number(clergy.taint) + T.CLERGY_REVEALED_SHARPEN * Number(clergy.revealedTaint));
+    const courtMod = 1 + T.CLERGY_COURT_AMP * (0.5 - deityRulerFit(deity, L)) * 2;   // hostile ⇒ >1, synergistic ⇒ <1
+    clergyDrag = T.CLERGY_SCANDAL_W * scandal * courtMod;
+  }
+  return clamp01(base + instTerm + synergy + conductFit - stain - clergyDrag);
 }
 
 /**

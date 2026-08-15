@@ -38,6 +38,30 @@ function makeStripe(session: Record<string, unknown>) {
   return { retrievals, stripeClient: stripeClient as any };
 }
 
+/** Admin (service-role) stub for the delivery-stash read/claim (migration 122).
+ *  `row` is what the dossier_purchases select returns (null → missing row →
+ *  settlement:null). Records the claim update so a test can assert it was stamped. */
+function makeAdmin(row: { settlement: unknown } | null) {
+  const updates: Array<{ patch: unknown; token: string }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_table: string) => ({
+      select: (_cols: string) => ({
+        eq: (_col: string, _val: string) => ({
+          maybeSingle: () => Promise.resolve({ data: row, error: null }),
+        }),
+      }),
+      update: (patch: unknown) => ({
+        eq: (_col: string, val: string) => {
+          updates.push({ patch, token: val });
+          return Promise.resolve({ error: null });
+        },
+      }),
+    }),
+  };
+  return { updates, adminClient: () => client };
+}
+
 const paidSession = (overrides: Record<string, unknown> = {}) => ({
   id: VALID_SESSION,
   status: 'complete',
@@ -96,16 +120,36 @@ Deno.test('the over-limit path returns 429 before Stripe is called (amplificatio
   assertEquals(stripe.retrievals.length, 0);
 });
 
-Deno.test('a complete, paid single_dossier session with a matching token verifies', async () => {
+Deno.test('a complete, paid single_dossier session verifies, returns the stashed settlement, and stamps the claim', async () => {
   const stripe = makeStripe(paidSession());
+  const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
-    { stripeClient: stripe.stripeClient, rateLimit: allowAll },
+    { stripeClient: stripe.stripeClient, rateLimit: allowAll, adminClient: admin.adminClient },
   );
   assertEquals(res.status, 200);
   assertEquals(stripe.retrievals.length, 1);
   const body = await res.json();
   assertEquals(body.verified, true);
+  // Delivery stash (122): the server-persisted settlement rides back on the response…
+  assertEquals(body.settlement, { name: 'Riverbend', tier: 'village' });
+  // …and the claim is stamped, keyed on the session's checkout_token.
+  assertEquals(admin.updates.length, 1);
+  assertEquals(admin.updates[0].token, VALID_TOKEN);
+});
+
+Deno.test('a verified session with a MISSING stash row falls back to settlement:null (no claim stamp)', async () => {
+  const stripe = makeStripe(paidSession());
+  const admin = makeAdmin(null);   // no dossier_purchases row for this token
+  const res = await handleVerifyDossier(
+    req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
+    { stripeClient: stripe.stripeClient, rateLimit: allowAll, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.verified, true);
+  assertEquals(body.settlement, null);   // client stash fallback
+  assertEquals(admin.updates.length, 0); // nothing to claim
 });
 
 Deno.test('a token MISMATCH is not verified (403) even for a paid session', async () => {
@@ -174,4 +218,82 @@ Deno.test('backstop: an over-limit IP does not consume global budget', () => {
   // Global ceiling is 120; the first IP consumed only its 30 allowed hits, so a
   // rotation of fresh IPs can still use the remaining 90 before the global cap.
   assertEquals(otherAllowed, 90);
+});
+
+// ── Wave-D human verification (Turnstile) — VERIFY-ONLY-IF-PRESENT ─────────────
+// This is the POST-PAYMENT verify step, so a paid buyer must ALWAYS be able to
+// collect their PDF. The wiring is deliberately verify-only-if-present: a missing/
+// blocked token is NEVER a block; only a token that is present AND fails
+// verification is rejected. INERT (a no-op) until TURNSTILE_SECRET_KEY is set.
+
+/** Stub globalThis.fetch so a secret-configured verifyTurnstile resolves a known
+ *  siteverify verdict without touching the network. Returns a restore fn. */
+function stubFetch(success: boolean): () => void {
+  const original = globalThis.fetch;
+  // deno-lint-ignore no-explicit-any
+  globalThis.fetch = (() => Promise.resolve(new Response(JSON.stringify({ success }), { status: 200 }))) as any;
+  return () => { globalThis.fetch = original; };
+}
+
+Deno.test('INERT: a captchaToken in the body does not change verification while unconfigured', async () => {
+  Deno.env.delete('TURNSTILE_SECRET_KEY');
+  const stripe = makeStripe(paidSession());
+  const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
+  const res = await handleVerifyDossier(
+    req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN, captchaToken: 'anything' }),
+    { stripeClient: stripe.stripeClient, rateLimit: allowAll, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);            // inert → the token is a no-op
+  assertEquals((await res.json()).verified, true);
+});
+
+Deno.test('ACTIVE + NO token still verifies (200): a paid buyer is NEVER blocked on a missing token', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  try {
+    const stripe = makeStripe(paidSession());
+    const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
+    const res = await handleVerifyDossier(
+      req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),   // no captchaToken
+      { stripeClient: stripe.stripeClient, rateLimit: allowAll, adminClient: admin.adminClient },
+    );
+    assertEquals(res.status, 200);          // never a stuck button post-payment
+    assertEquals((await res.json()).verified, true);
+  } finally {
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+Deno.test('ACTIVE + a PRESENT VALID token verifies (200)', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(true);
+  try {
+    const stripe = makeStripe(paidSession());
+    const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
+    const res = await handleVerifyDossier(
+      req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN, captchaToken: 'good' }),
+      { stripeClient: stripe.stripeClient, rateLimit: allowAll, adminClient: admin.adminClient },
+    );
+    assertEquals(res.status, 200);
+    assertEquals((await res.json()).verified, true);
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+Deno.test('ACTIVE + a PRESENT INVALID token is rejected (403) before Stripe', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(false);
+  try {
+    const stripe = makeStripe(paidSession());
+    const res = await handleVerifyDossier(
+      req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN, captchaToken: 'garbage' }),
+      { stripeClient: stripe.stripeClient, rateLimit: allowAll },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stripe.retrievals.length, 0);   // rejected before the Stripe retrieve
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
 });

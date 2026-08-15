@@ -1,47 +1,65 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import {FolderPlus, Plus} from 'lucide-react';
+import { FolderPlus, Plus } from 'lucide-react';
 
 import { track, EVENTS } from '../lib/analytics.js';
-import { reportError } from '../lib/errorReporter.js';
 import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
+import {generateCrossSettlementConflictsDeterministic} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
-import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
+import { campaignMembershipIndex } from '../domain/relationships/effectiveNeighbours.js';
+import { INK, BODY, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
+import { t } from '../copy/index.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, isSaveActive } from '../lib/saveAccess.js';
+import {
+  relationshipDefinition,
+  relationshipLinkMetadata,
+} from '../domain/relationships/canonicalRelationship.js';
+import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackLink.js';
 import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
 import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
-import { useChangeQueueCascade } from './settlementDetail/useChangeQueueCascade.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
-import { migrateConfig, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
-import { SettlementCard } from './settlements/SettlementCard.jsx';
+import {
+  migrateConfig, findSaveById, saveCountBand, dayGapBand,
+  canonPhaseOf, lastEditedMs, hasAiData,
+  withSettlementChanges, withFactionRenamed, withNpcRenamed,
+} from './settlements/helpers.js';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
+import {
+  createLibraryBatchPersister,
+  createLibraryDeleteHandlers,
+} from './settlements/libraryDeleteHandlers.js';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
 import BulkActionBar from './settlements/BulkActionBar.jsx';
-import { ADVANCE_TIME_NAV_TARGET } from './settlements/advanceTimeTarget.js';
+import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
+import { useOwnerScopedSaves } from '../hooks/useOwnerScopedSaves.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
+import UnassignedLedger from './settlements/UnassignedLedger.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
 export default function SettlementsPanel({ onNavigate, routeId }) {
   const updateConfig = useStore(s => s.updateConfig);
+  const setInstitutionToggles = useStore(s => s.setInstitutionToggles);
+  const setCategoryToggles = useStore(s => s.setCategoryToggles);
+  const setGoodsToggles = useStore(s => s.setGoodsToggles);
+  const setServiceToggles = useStore(s => s.setServiceToggles);
+  const setSettlement = useStore(s => s.setSettlement);
+  const setLoadedFromSave = useStore(s => s.setLoadedFromSave);
   const maxSaves = useStore(s => s.maxSaves());
   const canSave = useStore(s => s.canSave());
   const authTier = useStore(s => s.auth.tier);
   const isElevated = useStore(s => s.isElevated());
   const authUser = useStore(s => s.auth.user);
-  const setSavedSettlements = useStore(s => s.setSavedSettlements);
-  const notePersistedSave = useStore(s => s.notePersistedSave);
-  const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
   const generateSettlement = useStore(s => s.generateSettlement);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -60,9 +78,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const toggleCampaignCollapsed = useStore(s => s.toggleCampaignCollapsed);
   const addToCampaign = useStore(s => s.addToCampaign);
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
+  const getCampaignMembershipBlock = useStore(s => s.getCampaignMembershipBlock);
+  const getSettlementDeletionBlock = useStore(s => s.getSettlementDeletionBlock);
+  // W4a — Library living surface: canonize-from-list, per-campaign advance-time.
+  const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
-  const requestMapWorkspace = useStore(s => s.requestMapWorkspace);
   const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
   const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
@@ -72,16 +93,29 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const applyAllQueuedRegionalImpacts = useStore(s => s.applyAllQueuedRegionalImpacts);
   const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
 
+  const onLoad = (data) => {
+    if (data && !isSaveActive(data)) return;
+    // Prefer the settlement's RAW pre-resolution config (random sentinels
+    // intact) over the save's stored config: legacy saves only carry the
+    // RESOLVED config, which pinned 'random' settings to their first roll
+    // after "Apply Saved Configuration & Regenerate".
+    const rawConfig = data.settlement?._config || data.config;
+    if (rawConfig) updateConfig(migrateConfig(rawConfig));
+    if (data.institutionToggles) setInstitutionToggles(data.institutionToggles);
+    if (data.categoryToggles) setCategoryToggles(data.categoryToggles);
+    if (data.goodsToggles) setGoodsToggles(data.goodsToggles);
+    if (data.servicesToggles) setServiceToggles(data.servicesToggles);
+    if (data.settlement) { setSettlement(data.settlement); setLoadedFromSave({ name: data.settlement.name, tier: data.settlement.tier }); }
+    onNavigate?.('generate');
+  };
+
   // Which sample is mid-generation (holds the sample.id). Drives the
   // per-card disabled state + transient "Generating…" label so a slow
   // engine load can't be double-clicked into two concurrent forks.
   const [forkingId, setForkingId] = useState(null);
-  // Declared here (above forkSample) so the fork auto-save failure path can set
-  // it without a forward reference. Shared with the persistBatch recovery row.
-  const [persistenceError, setPersistenceError] = useState('');
 
   /**
-   * Fork a sample. "Generate" on a sample card now actually
+   * Fork a Tier 8.2 sample. "Generate" on a sample card now actually
    * produces the settlement (it used to only pre-fill the wizard and
    * navigate, which read as a no-op). The flow:
    *   1. Load the sample's config into generator state with a
@@ -126,75 +160,30 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // the sample becomes a real save, not just an unsaved draft.
     if (canSave) {
       try {
-        // Persist, refresh savedSettlements so the count is correct, then fire
-        // the real-save instrumentation (first_save/third_save pricing moments
-        // + 'saved' fingerprint). These are awaited deliberately: the fork must
-        // land in the library (and the count must be current) BEFORE we navigate
-        // to the generate view, so the user doesn't arrive ahead of their own
-        // save. A failure here is caught below and only logged — it never blocks
-        // the navigation that follows.
-        const saveId = await savesService.save({ name: result.name || sample.name, tier: result.tier || sample.tier, settlement: result, config: result._config || forkedConfig });
-        // Refresh the library count after the fork save. A failure here is
-        // non-fatal (the save landed; only the local count refresh missed) so we
-        // don't reject the fork — but route it through the central error seam
-        // instead of swallowing it silently, so a persistently-failing list read
-        // is observable rather than invisible.
-        await savesService.list().then(setSavedSettlements)
-          .catch(e => reportError(e, { kind: 'settlementsPanel.forkSave.listRefresh' }));
-        notePersistedSave?.(result, saveId);
+        // V2 DEFAULT-MINT (create chokepoint 2/3): a forked settlement is a NEW settlement —
+        // mint layout v2 onto its fresh blob (non-clobbering; a fork carries no mapEdits).
+        // Lazy import keeps first-paint byte-identical.
+        const { newSettlementMapEdits } = await import('../domain/townMap/mapEdits.js');
+        const minted = result.mapEdits ? result : { ...result, mapEdits: newSettlementMapEdits() };
+        await savesService.save({
+          name: minted.name || sample.name,
+          tier: minted.tier || sample.tier,
+          settlement: minted,
+          config: minted._config || forkedConfig,
+        });
       } catch (e) {
-        // P10: the fork's "generate AND save" promise failed. Surface a
-        // recoverable message on the Library (where the missing save is noticed)
-        // rather than landing the user on the dossier believing it was saved.
         console.error('[SettlementsPanel] fork auto-save failed:', e);
-        setPersistenceError('Your settlement was generated but could not be saved to your library. Open it and use Save to retry.');
       }
     }
 
     clearLoadedFromSave();
     setForkingId(null);
     onNavigate?.('generate');
-    // setPersistenceError is a stable useState setter — omitted from deps
-    // (exhaustive-deps exempts setters; it is also declared below this callback).
   }, [
-    authUser?.id, updateConfig, generateSettlement, canSave, clearLoadedFromSave,
-    onNavigate, setPurchaseModalOpen, forkingId, setSavedSettlements, notePersistedSave,
+    authUser?.id, updateConfig, generateSettlement, canSave,
+    clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
   ]);
 
-  const [saves, _setSavesLocal] = useState([]);
-  // Live mirror of `saves` for the change-queue flush. During a flush the
-  // cascade executors mutate local saves SYNCHRONOUSLY across several React
-  // state updates; the end-of-batch commit must read the LATEST snapshot, not
-  // the closure's render-time `saves`. The ref is kept in lockstep by setSaves.
-  const savesRef = useRef([]);
-  // True while a change-queue flush is replaying cascades. When set, the
-  // cross-save cascades (applyRename / handleLink / removeNeighbour) mutate
-  // local saves/detail but DEFER their cloud write — the flush owns the single
-  // end-of-batch persistBatch. Affected row ids accumulate in flushAffectedRef.
-  const flushDeferRef = useRef(false);
-  const flushAffectedRef = useRef(new Set());
-  // Wrapper: update local state + Zustand store so WorldMap palette stays in sync
-  const setSaves = useCallback((newSaves) => {
-    savesRef.current = newSaves;
-    _setSavesLocal(newSaves);
-    setSavedSettlements(newSaves);
-  }, [setSavedSettlements]);
-  useEffect(() => {
-    return useStore.subscribe(
-      state => state.savedSettlements,
-      nextSaves => {
-        // Keep the flush snapshot in lockstep with external store writes too.
-        // aiSlice persists narrative/notes/pins straight onto store rows; if
-        // only local state mirrored them, a later change-queue flush would
-        // rebuild rows from the stale ref and clobber the fresh aiData.
-        // (Writes routed through setSaves already set the ref first, so this
-        // re-assignment is idempotent for them.)
-        savesRef.current = nextSaves || [];
-        _setSavesLocal(nextSaves || []);
-      },
-    );
-  }, []);
-  const [savesLoading, setSavesLoading] = useState(true);
   const [deleteId, setDeleteId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [linking, setLinking] = useState(false);
@@ -203,30 +192,29 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [newCampaignName, setNewCampaignName] = useState('');
   const [showNewCampaign, setShowNewCampaign] = useState(false);
   const [reactivatingId, setReactivatingId] = useState(null);
-  const [reactivationError, setReactivationError] = useState('');
+  const [reactivationError, setReactivationError] = useState(null);
+  const [persistenceError, setPersistenceError] = useState(null);
+  const resetOwnerView = useCallback(() => {
+    setDetail(null);
+    setDeleteId(null);
+    setPersistenceError(null);
+  }, []);
+  const reportLibraryLoadError = useCallback(error => {
+    console.error('Failed to load saves:', error);
+    setPersistenceError(t('errors.libraryLoadFail'));
+  }, []);
+  const { reloadSaves, saves, savesLoading, setSaves } = useOwnerScopedSaves(
+    authUser?.id,
+    { onOwnerBoundary: resetOwnerView, onLoadError: reportLibraryLoadError },
+  );
 
-  const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
+  // Co-campaign settlements are implicit Neutral neighbours by default (owner
+  // order 2026-07-22). From ALL active campaigns (not the premium-gated
+  // `activeCampaigns`) so the Network Effects cascade stays ungated for every tier.
+  const neighbourCampaignOf = useMemo(() => campaignMembershipIndex(campaigns.filter(isCampaignActive)), [campaigns]);
+  const allModifiers = useMemo(() => getAllModifiers(saves, 4, { campaignOf: neighbourCampaignOf }), [saves, neighbourCampaignOf]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
-
-  const reloadSaves = useCallback(async () => {
-    const loaded = await savesService.list();
-    setSaves(loaded);
-    return loaded;
-  }, [setSaves]);
-
-  // Load the library for the CURRENT owner. Keyed on authUser?.id and guarded by
-  // a `cancelled` latch so a sign-out/in that resolves an in-flight list from the
-  // PREVIOUS user can't write that user's saves into this session (the campaign
-  // path guards the same way via campaignCacheOwner). Re-runs on owner change so a
-  // fresh sign-in refreshes the library instead of showing the mount-time snapshot.
-  useEffect(() => {
-    let cancelled = false;
-    savesService.list()
-      .then(loaded => { if (cancelled) return; setSaves(loaded); setSavesLoading(false); })
-      .catch(e => { if (cancelled) return; console.error('Failed to load saves:', e); setSavesLoading(false); });
-    return () => { cancelled = true; };
-  }, [setSaves, authUser?.id]);
 
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
   // band is accurate. useFunnelEvent fires on the false→true transition and
@@ -239,23 +227,23 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const handleReactivateSave = async (save) => {
     if (!save?.id || !canReactivateInactive) {
-      setReactivationError('Choose an inactive settlement after freeing one of your three free slots.');
+      setReactivationError(t('errors.reactivateNeedsSlot'));
       return;
     }
     setReactivatingId(save.id);
-    setReactivationError('');
+    setReactivationError(null);
     try {
       const result = await savesService.reactivateFreeSettlement(save.id);
       if (result && result.ok === false) {
         setReactivationError(result.reason === 'free_limit_reached'
-          ? 'Your three free settlement slots are already active.'
-          : 'That settlement could not be reactivated.');
+          ? t('errors.reactivateSlotsFull')
+          : t('errors.reactivateFail'));
         return;
       }
       await reloadSaves();
     } catch (e) {
       console.error('Reactivation failed:', e);
-      setReactivationError('That settlement could not be reactivated.');
+      setReactivationError(t('errors.reactivateFail'));
     } finally {
       setReactivatingId(null);
     }
@@ -277,8 +265,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // focus request changes, not when `detail` becomes truthy (we early-
   // return for that).
   useEffect(() => {
-    if (!pendingFocusId || savesLoading || !saves.length || detail) return;
-    const match = saves.find(s => s.id === pendingFocusId);
+    if (pendingFocusId == null || savesLoading || !saves.length || detail) return;
+    const match = saves.find(s => String(s.id) === String(pendingFocusId));
     if (match && isSaveActive(match)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDetail({ ...match, saveData: match });
@@ -334,141 +322,155 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     else navigate('settlements');
   }, [detail]);
 
-  // Atomic multi-row commit. Returns true on success, false on a rolled-back
-  // failure, so the change-queue flush can detect a failed dual-row link commit
-  // (which restores BOTH rows here) and keep the queue retryable. The legacy
-  // immediate-apply callers ignore the return and rely on the persistenceError
-  // banner, unchanged.
-  const persistBatch = async (updatedSaves, modifiedIds, options = {}) => {
-    const previousSaves = saves;
-    try {
-      setPersistenceError('');
-      const updates = modifiedIds
-        .map(id => updatedSaves.find(entry => String(entry.id) === String(id)))
-        .filter(Boolean);
-      await savesService.mutateBatch({
-        updates,
-        deletes: options.deletes || [],
-        creates: options.creates || [],
-      });
-      return true;
-    } catch (e) {
-      console.error('Persist failed:', e);
-      setSaves(previousSaves);
-      const openId = detail?.saveData?.id;
-      const previousDetail = previousSaves.find(entry => String(entry.id) === String(openId));
-      if (openId) setDetail(previousDetail ? { ...previousDetail, saveData: previousDetail } : null);
-      setPersistenceError('That change could not be saved. The library was restored to its previous state.');
-      return false;
-    }
-  };
-
-  // ── Change-queue scope (Phase 4b — standalone AND campaign members) ────────
-  // The change-queue stages-then-commits for ANY open settlement now. For a
-  // STANDALONE settlement the commit persists the single row immediately (Phase
-  // 4a/4a.2 — byte-unchanged). For a CLOCK-BOUND CANON campaign member the commit
-  // applies the settlement-LOCAL change now, persists atomically via the 069 RPC,
-  // and DEFERS the regional propagation to the next Advance (flushQueue's campaign
-  // branch). Either way the identity-lock + canon guards in queueEdit/applyRename
-  // still reject frozen renames, so enabling the queue here loosens nothing.
-  const queueChange = useStore(s => s.queueChange);
-  const openDetailId = detail?.saveData?.id ?? null;
-  const queueActiveForOpenDetail = !!(openDetailId != null);
-
-  // ── Cross-save cascade (rename / link / unlink) + change-queue replay seam ──
-  // Extracted to a co-located hook to keep this surface under the size ratchet.
-  // It owns the immediate-apply AND deferred-flush modes for all three cascades
-  // and registers the flush's replay executor + atomic batch commit.
-  const { applyRename, handleLink, removeNeighbour } = useChangeQueueCascade({
-    saves, setSaves, savesRef, detail, setDetail, setLinking, setNetworkVersion,
-    persistBatch, applyCosmeticRename, queueChange, queueActiveForOpenDetail,
-    flushDeferRef, flushAffectedRef,
+  const persistBatch = createLibraryBatchPersister({
+    ownerId: authUser?.id ?? null, previousSaves: saves,
+    detail, setDetail, setSaves, setPersistenceError,
   });
 
-  // ── Delete ──────────────────────────────────────────────────────────────
-  const deleteConfirmed = (id) => {
-    const deletedSave = saves.find(s => s.id === id);
-    // SETTLEMENT_DELETED — fired at the confirmed delete, before the save
-    // leaves local state. Coarse enums/bands/booleans only.
-    if (deletedSave) {
-      track(EVENTS.SETTLEMENT_DELETED, {
-        canon_phase: canonPhaseOf(deletedSave),
-        age_days_band: dayGapBand(lastEditedMs(deletedSave)),
-        had_ai_data: hasAiData(deletedSave),
-        was_published: !!deletedSave.is_public,
-      });
-    }
-    // Survivors computed ONCE (was recomputed per-row inside the map and again
-    // in the modifiedIds filter — O(n²)). `updated` is index-aligned to it, so
-    // the changed-row diff below is a cheap per-index identity compare.
-    const survivors = saves.filter(s => s.id !== id);
-    const deletedName = deletedSave?.name;
-    const deletedSettlementName = deletedSave?.settlement?.name;
-    const updated = survivors.map(s => {
-      // Only clean a survivor whose network genuinely references the deleted
-      // save — by neighbour id OR by matching name. The previous predicate's
-      // `|| n.linkId` matched ANY entry carrying a linkId, so a single linked
-      // neighbour anywhere in the deleted save's network flagged (and re-scanned)
-      // every survivor. Test the SURVIVOR's own network against the deleted id/name.
-      const net = s.settlement?.neighbourNetwork || [];
-      const isr = s.settlement?.interSettlementRelationships || [];
-      const wasLinked = net.some(n => n.id === id || n.name === deletedName || n.name === deletedSettlementName);
-      if (!wasLinked) return s;
-      const cleanNet = net.filter(n => n.id !== id && n.name !== deletedName && n.name !== deletedSettlementName);
-      const cleanISR = isr.filter(r => r.partnerSettlement !== deletedSettlementName && r.partnerSettlement !== deletedName);
-      if (cleanNet.length === net.length && cleanISR.length === isr.length) return s;
-      return { ...s, settlement: { ...s.settlement, neighbourNetwork: cleanNet, interSettlementRelationships: cleanISR } };
+  // ── Rename ──────────────────────────────────────────────────────────────
+  const applyRename = (type, id, oldName, newName) => {
+    if (!newName.trim() || newName.trim() === oldName) return;
+    // Campaign-clock identity lock (defense in depth): NPC + faction names freeze
+    // once the owning settlement is canonized. The detail view hides the rename
+    // affordance, but guard the persisting mutation itself so no future caller
+    // can rename a canon settlement's NPCs/factions. Settlement-name renames and
+    // the draft phase are unaffected.
+    if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
+    const trimmed = newName.trim();
+    const saveId = detail?.saveData?.id;
+    // Owner queue #14: BOTH arms route ENTIRELY through the ONE converged writer
+    // (domain/factionRename.js), which the store lane calls too, so a rename
+    // means the same thing on every lane and can only regress in one place. The
+    // generic rewrites this replaced were both too broad and too narrow: too
+    // broad because they renamed a neighbouring TOWN sharing the name, and too
+    // narrow because neither walked `factions[].members[]` — the second home a
+    // character is stored in, and a separate object on every RELOADED save.
+    //
+    // `id` addresses the record the detail view offered; the cascade itself
+    // joins by NAME, because the stored joins it heals (relationships[].npc1Name,
+    // member chips) are display names rather than ids.
+    const updatedSaves = saves.map(save => {
+      const isHost = String(save.id) === String(saveId);
+      return type === 'faction'
+        ? withFactionRenamed(save, isHost, detail.settlement.name, oldName, trimmed)
+        : withNpcRenamed(save, isHost, detail.settlement.name, oldName, trimmed);
     });
-    setSaves(updated); setDeleteId(null);
-    if (detail?.saveData?.id === id) setDetail(null);
-    const modifiedIds = updated.filter((s, i) => s !== survivors[i]).map(s => s.id);
-    persistBatch(updated, modifiedIds, { deletes: [id] });
-  };
+    setSaves(updatedSaves);
+    const modifiedIds = updatedSaves.filter((s, i) => s !== saves[i]).map(s => s.id);
+    persistBatch(updatedSaves, modifiedIds);
+    const updatedDetailSave = findSaveById(updatedSaves, saveId);
+    if (updatedDetailSave) setDetail(d => ({ ...d, ...updatedDetailSave, saveData: updatedDetailSave }));
 
-  // ── Bulk delete ───────────────────────────────────────────────────────────
-  // Remove every selected id in ONE batch (so neighbour cleanup + persistence run
-  // against a single coherent snapshot, not N racing closures over a stale list).
-  // The pure array work lives in computeBulkDelete; this owns the side effects.
-  const bulkDeleteConfirmed = (ids) => {
-    const idSet = new Set(ids.map(String));
-    for (const ds of saves.filter(s => idSet.has(String(s.id)))) {
-      track(EVENTS.SETTLEMENT_DELETED, {
-        canon_phase: canonPhaseOf(ds), age_days_band: dayGapBand(lastEditedMs(ds)),
-        had_ai_data: hasAiData(ds), was_published: !!ds.is_public,
-      });
+    // AI-2: cosmetic-tier change — cascade the rename into every touched
+    // save's ai_data blob too. applyCosmeticRename no-ops when a save has
+    // no narrative, so this is cheap for unnarrated saves.
+    for (const mid of modifiedIds) {
+      applyCosmeticRename({ saveId: mid, oldName, newName: trimmed });
     }
-    const { remaining, modifiedIds } = computeBulkDelete(saves, ids);
-    setSaves(remaining);
-    if (detail?.saveData?.id && idSet.has(String(detail.saveData.id))) setDetail(null);
-    persistBatch(remaining, modifiedIds, { deletes: ids });
   };
 
-  // ── Canonize ──────────────────────────────────────────────────────────────
-  // Promote a draft save to canon straight from the library row. The store
-  // action owns the mutation + persistence; the savedSettlements subscription
-  // (above) refreshes the local list, so the row flips draft → Canon. Guarded
-  // (active + draft) at the button; the action also no-ops on already-canon.
-  const handleCanonize = useCallback((s) => {
-    if (!isSaveActive(s) || canonPhaseOf(s) !== 'draft') return;
-    canonizeSavedSettlement(s.id);
-  }, [canonizeSavedSettlement]);
+  const { deleteConfirmed, bulkDeleteConfirmed } = createLibraryDeleteHandlers({
+    ownerId: authUser?.id ?? null, saves, detail, setDetail, setDeleteId,
+    setSaves, setPersistenceError, persistBatch,
+  });
 
-  // ── Advance Time ────────────────────────────────────────────────────────────
-  // Advance a campaign's world one step, then jump to the World Map's Wizard
-  // News panel for that campaign. Reuses the campaign-world pulse (the button is
-  // disabled when the world isn't canonized, so the {ok:false} branch is just a
-  // defensive guard). The 'news' workspace is requested via a one-shot store
-  // signal WorldMap consumes on mount.
-  const handleAdvanceCampaignTime = useCallback(async (campaignId, interval = 'one_month') => {
-    const result = await advanceCampaignWorld(campaignId, interval);
-    if (result && result.ok === false) return; // not canonized / nothing to do
-    setActiveCampaign(campaignId);
-    // Forward-compatible nav: the Realm hub (Phase 4) repoints ADVANCE_TIME_NAV_TARGET
-    // in one place; today it lands on the World Map's Wizard-News workspace.
-    requestMapWorkspace(ADVANCE_TIME_NAV_TARGET.workspace);
-    onNavigate?.(ADVANCE_TIME_NAV_TARGET.view);
-  }, [advanceCampaignWorld, setActiveCampaign, requestMapWorkspace, onNavigate]);
+  // ── Link ────────────────────────────────────────────────────────────────
+  const handleLink = (linkedSave, relType) => {
+    const definition = relationshipDefinition(relType || 'neutral', detail.saveData.id, linkedSave.id);
+    const resolvedRelType = definition.relationshipType;
+    const linkId = `link_${detail.saveData.id}_${linkedSave.id}`;
+    const currentNeighbourEntry = {
+      id: linkedSave.id, linkId,
+      name: linkedSave.name, neighbourName: linkedSave.name,
+      neighbourTier: linkedSave.tier, tier: linkedSave.tier,
+      ...relationshipLinkMetadata(definition, definition.sourceRole),
+      description: `Manually linked as ${definition.sourceRole.replace(/_/g, ' ')}.`,
+      bidirectional: true,
+    };
+    const partnerNeighbourEntry = {
+      id: detail.saveData.id, linkId,
+      name: detail.settlement.name, neighbourName: detail.settlement.name,
+      neighbourTier: detail.settlement.tier || detail.saveData.tier,
+      tier: detail.saveData.tier,
+      ...relationshipLinkMetadata(definition, definition.targetRole),
+      description: `${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g, ' ')}.`,
+      bidirectional: true,
+    };
+    const { forA: currentNpcs, forB: partnerNpcs } = buildInterSettlementNPCs(
+      detail.settlement, linkedSave.settlement, resolvedRelType, linkId,
+    );
+    const { forA: currentConflicts, forB: partnerConflicts } =
+      generateCrossSettlementConflictsDeterministic(
+        detail.settlement, linkedSave.settlement, resolvedRelType, linkId,
+      );
+    const currentNetwork = [...(detail.settlement.neighbourNetwork || []), currentNeighbourEntry];
+    const currentRelationships = [
+      ...(detail.settlement.interSettlementRelationships || []), ...currentNpcs, ...currentConflicts,
+    ];
+    const currentChanges = { neighbourNetwork: currentNetwork, interSettlementRelationships: currentRelationships };
+    const currentSaveId = detail?.saveData?.id;
+    const updatedSaves = saves.map(save => {
+      if (String(save.id) === String(currentSaveId)) {
+        return withSettlementChanges(save, currentChanges);
+      }
+      if (String(save.id) === String(linkedSave.id)) {
+        const existingNetwork = save.settlement?.neighbourNetwork || [];
+        const partnerNetwork = [partnerNeighbourEntry, ...existingNetwork
+          .filter(neighbour => String(neighbour.id) !== String(currentSaveId))];
+        const existingRelationships = save.settlement?.interSettlementRelationships || [];
+        const partnerRelationships = [...existingRelationships
+          .filter(relationship => relationship.linkId !== linkId), ...partnerNpcs, ...partnerConflicts];
+        return withSettlementChanges(
+          save, { neighbourNetwork: partnerNetwork, interSettlementRelationships: partnerRelationships },
+        );
+      }
+      return save;
+    });
+    setSaves(updatedSaves);
+    setDetail(currentDetail => withSettlementChanges(currentDetail, currentChanges));
+    setNetworkVersion(version => version + 1);
+    setLinking(false);
+    persistBatch(updatedSaves, [detail.saveData.id, linkedSave.id]);
+  };
 
+  const removeNeighbour = (index) => {
+    const removedEntry = detail.settlement.neighbourNetwork[index];
+    const linkId = removedEntry?.linkId;
+    const currentNetwork = detail.settlement.neighbourNetwork
+      .filter((_, neighbourIndex) => neighbourIndex !== index);
+    const currentRelationships = (detail.settlement.interSettlementRelationships || [])
+      .filter(relationship => !linkId || relationship.linkId !== linkId);
+    const currentChanges = { neighbourNetwork: currentNetwork, interSettlementRelationships: currentRelationships };
+    let updatedSaves = saves.map(save => {
+      if (String(save.id) !== String(detail?.saveData?.id)) return save;
+      return withSettlementChanges(save, currentChanges);
+    });
+    if (linkId || removedEntry?.id) {
+      const partnerId = removedEntry?.id;
+      const partnerSave = partnerId ? findSaveById(updatedSaves, partnerId) : null;
+      if (partnerSave) {
+        updatedSaves = updatedSaves.map(save => {
+          if (String(save.id) !== String(partnerId)) return save;
+          const partnerNetwork = (save.settlement?.neighbourNetwork || []).filter(
+            neighbour => linkId
+              ? neighbour.linkId !== linkId
+              : String(neighbour.id) !== String(detail?.saveData?.id),
+          );
+          const partnerRelationships = (save.settlement?.interSettlementRelationships || [])
+            .filter(relationship => !linkId || relationship.linkId !== linkId);
+          return withSettlementChanges(save, {
+            neighbourNetwork: partnerNetwork, interSettlementRelationships: partnerRelationships,
+          });
+        });
+      }
+    }
+    setSaves(updatedSaves);
+    setDetail(currentDetail => withSettlementChanges(currentDetail, currentChanges));
+    setNetworkVersion(version => version + 1);
+    const modifiedIds = [detail.saveData.id];
+    if (removedEntry?.id) modifiedIds.push(removedEntry.id);
+    persistBatch(updatedSaves, modifiedIds);
+  };
 
   // (The direct-edit path — onEditSettlement, feeding the Roster & Tune
   // correction editor — was removed with that editor: every settlement
@@ -485,16 +487,51 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   // Routes a card's "Create a campaign" CTA to the panel's new-campaign input
   // (which autoFocuses on open), so the kebab's no-campaign state has a real path
-  // forward instead of a path-less label (deferred item 2).
-  // The new-campaign input autoFocuses on open, so the browser scrolls it into
-  // view; this just reveals it as the path forward from the card's kebab.
+  // forward instead of a path-less label.
   const openCreateCampaign = useCallback(() => setShowNewCampaign(true), []);
 
-  // The regional-impact store actions are forwarded to CampaignFolder directly
-  // (they share the folder's exact (campaignId, …) signature) — the former
-  // identity-wrapper useCallbacks added no behaviour and only diluted this file.
+  // ── Canonize (from the library row kebab) ─────────────────────────────────
+  // Promote a draft save to canon straight from the list. The store action owns
+  // the mutation + persistence; the savedSettlements subscription refreshes the
+  // local list, so the row flips draft → Canon. Guarded (active + draft); the
+  // action also no-ops on already-canon.
+  const handleCanonize = useCallback((s) => {
+    if (!isSaveActive(s) || canonPhaseOf(s) !== 'draft') return;
+    canonizeSavedSettlement(s.id);
+  }, [canonizeSavedSettlement]);
 
-  // Library search + sort + filter state. Self-contained
+  // ── Advance Time (per campaign, from the list) ────────────────────────────
+  // Premium (Cartographer) gate lives on the card. The handler + its typed-refusal
+  // surface live in useCampaignAdvance (experience-product-fit-2).
+  const { advanceError, handleAdvanceCampaignTime } = useCampaignAdvance({
+    advanceCampaignWorld, setActiveCampaign, onNavigate,
+  });
+
+  const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
+    applyQueuedRegionalImpact(campaignId, impactId);
+  }, [applyQueuedRegionalImpact]);
+
+  const handleIgnoreRegionalImpact = useCallback((campaignId, impactId) => {
+    ignoreQueuedRegionalImpact(campaignId, impactId);
+  }, [ignoreQueuedRegionalImpact]);
+
+  const handleResolveRegionalImpact = useCallback((campaignId, impactId) => {
+    resolveRegionalImpact(campaignId, impactId);
+  }, [resolveRegionalImpact]);
+
+  const handleAdvanceRegionalImpacts = useCallback((campaignId, ticks) => {
+    advanceCampaignRegionalImpacts(campaignId, ticks);
+  }, [advanceCampaignRegionalImpacts]);
+
+  const handleApplyAllRegionalImpacts = useCallback((campaignId) => {
+    applyAllQueuedRegionalImpacts(campaignId);
+  }, [applyAllQueuedRegionalImpacts]);
+
+  const handleIgnoreAllRegionalImpacts = useCallback((campaignId) => {
+    ignoreAllQueuedRegionalImpacts(campaignId);
+  }, [ignoreAllQueuedRegionalImpacts]);
+
+  // P108 / E-6 — Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
   // (applyLibraryFilters) is a pure function over the saves array.
   const [libraryQuery, setLibraryQuery] = useState('');
@@ -502,7 +539,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [libraryFilters, setLibraryFilters] = useState({});
 
   // Save → owning campaign + the living-world filter context (reuses the same
-  // owning-campaign worldState the cards render from — one source of truth).
+  // owning-campaign worldState the cards render from — one source of truth, no
+  // divergent recompute) for the "At war" / campaign filters.
   const { filterContext } = useLibraryLiveWorld(activeCampaigns);
 
   const filteredSaves = useMemo(() => {
@@ -519,25 +557,23 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     addToCampaign,
     canonizeSavedSettlement,
     bulkDeleteConfirmed,
+    getCampaignMembershipBlock,
+    getSettlementDeletionBlock,
     isActive: isSaveActive,
     isDraft: (sv) => canonPhaseOf(sv) === 'draft',
   });
   const { selectMode, selectedIds, toggleSelect } = bulk;
 
-  // Set of save ids surviving the active query/filter — the rendered collections
-  // below intersect with this so the toolbar isn't inert.
-  const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
-
   // Derive assigned/unassigned settlement grouping (from the FILTERED set so the
   // search/sort/filter UI actually changes what renders).
   const assignedIds = useMemo(() => {
     const ids = new Set();
-    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
+    for (const c of activeCampaigns) for (const id of c.settlementIds || []) ids.add(String(id));
     return ids;
   }, [activeCampaigns]);
 
   const unassignedSaves = useMemo(
-    () => filteredSaves.filter(s => !assignedIds.has(s.id)),
+    () => filteredSaves.filter(s => !assignedIds.has(String(s.id))),
     [filteredSaves, assignedIds],
   );
 
@@ -551,18 +587,18 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       has_ai_data: hasAiData(s),
       save_count_band: saveCountBand(saves.length),
       via: 'library',
-    });
+    }, { subjectId: s.id });
     setDetail({ ...s, saveData: s });
   };
 
   // ── Detail view ─────────────────────────────────────────────────────────
   if (detail) {
     return <SettlementDetail
-      detail={detail} setDetail={setDetail} saves={saves}
+      detail={detail} setDetail={setDetail} saves={saves} setSaves={setSaves}
       linking={linking} setLinking={setLinking}
       editNamesOpen={editNamesOpen} setEditNamesOpen={setEditNamesOpen}
       handleLink={handleLink} removeNeighbour={removeNeighbour}
-      applyRename={applyRename}
+      applyRename={applyRename} onLoad={onLoad}
     />;
   }
 
@@ -571,7 +607,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // reactivationError both render through this so the two error rows stay
   // visually identical and neither forks a raw-hex border. No dedicated
   // danger-border token exists, so the border falls back to swatch.danger.
-  const alertStyle = { padding:'9px 12px', background:swatch.dangerBg, color:swatch.danger, border:`1px solid ${swatch.danger}`, borderRadius:6, fontFamily:sans, fontSize:FS.sm };
+  const alertStyle = { padding:'9px 12px', background:swatch['#FAF8F4'], color:swatch.danger, border:`1px solid ${swatch.danger}`, fontFamily:sans, fontSize:FS.sm };
   return (
     // Differential rhythm, not a flat 12px stack: the funnel cluster (alerts +
     // header + meter) groups tight via local margins, then a single loose break
@@ -579,8 +615,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // dominant band rather than another peer in an even stack.
     <Page>
      <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
-      {persistenceError && <div role="alert" style={alertStyle}>{persistenceError}</div>}
-      {reactivationError && <div role="alert" style={alertStyle}>{reactivationError}</div>}
+      {persistenceError && <div role="alert" style={alertStyle}><strong>Library:</strong> {persistenceError}</div>}
+      {reactivationError && <div role="alert" style={alertStyle}><strong>Reactivation:</strong> {reactivationError}</div>}
+      {advanceError && <div role="alert" style={alertStyle}><strong>Advance:</strong> {advanceError}</div>}
 
       {/* Page header — the GM's own content owns the top of their own page; the
           SaveQuotaMeter is demoted to a slim strip below so the funnel frames
@@ -595,8 +632,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         actions={<Button variant="primary" size="md" icon={<Plus size={16}/>} onClick={() => onNavigate?.('generate')}>New settlement</Button>}
       />
 
-      {/* Save-quota meter + funnel header (Phase 3) — COUNT limit, not size.
-          'Sign in' routes to the real sign-in flow (was mis-wired to pricing).
+      {/* Save-quota meter + funnel header (W4a) — COUNT limit, never a size cap.
+          The cap (max) is the store's maxSaves() (free floor 3, premium ∞) — read,
+          not hardcoded. 'Sign in' routes to the sign-in flow; 'Upgrade' to pricing.
           Tight to the header above (one funnel cluster); the loose content
           break lives on the toolbar/list region below, not here. */}
       <SaveQuotaMeter tier={authTier} used={activeSlotsUsed} max={maxSaves}
@@ -612,12 +650,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           sort={librarySort} setSort={setLibrarySort}
           filters={libraryFilters} setFilters={setLibraryFilters}
           totalCount={saves.length} visibleCount={filteredSaves.length}
-          campaigns={activeCampaigns}
+          minimal={saves.length < 5}
           selectMode={selectMode} onToggleSelectMode={bulk.toggleMode}
         /></div>
       )}
 
-      {/* Bulk multi-select action bar + its delete confirm (Phase 3). */}
+      {/* Bulk multi-select action bar + its delete confirm (W4a). */}
       {selectMode && saves.length > 0 && (
         <BulkActionBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
       )}
@@ -636,53 +674,58 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
                 // eslint-disable-next-line jsx-a11y/no-autofocus -- new-campaign field appears on user action; focus lets them type the name immediately
                 placeholder="Campaign name..." autoFocus
-                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
+                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
               <Button variant="primary" size="sm" onClick={handleCreateCampaign} disabled={!newCampaignName.trim()}>Create</Button>
               <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
           ) : (
-            <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
-              New campaign
-            </Button>
+            <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
+              <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>} style={{ alignSelf:'flex-start' }}>New campaign</Button>
+              <span style={{ fontSize:FS.xs, color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
+            </div>
           )}
         </div>
       )}
 
       {savesLoading ? (
-        // Skeleton card rows (P9): first paint matches the eventual list shape so
+        // Skeleton card rows: first paint matches the eventual list shape so
         // the layout doesn't pop when saves resolve. PARCH-tinted, card-height
-        // rhythm; role=status + the SR-only text announce load completion.
-        <div role="status" aria-busy="true" aria-label="Loading saves" style={{ marginTop:SP.xl, display:'flex', flexDirection:'column', gap:SP.sm }}>
+        // rhythm; role=status announces the polite loading live region.
+        <div role="status" aria-live="polite" aria-busy="true" aria-label="Loading saves" style={{ marginTop:SP.xl, display:'flex', flexDirection:'column', gap:SP.sm }}>
           {[0,1,2].map(i => (
-            <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}`, borderRadius:7 }} />
+            <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}` }} />
           ))}
         </div>
       ) : (saves.length === 0 && campaigns.length === 0) ? (
-        // Show sample dossiers instead of a bare empty state — but ONLY when
-        // there are no campaigns either. A campaign-first user (campaigns made
-        // before any settlement is saved) falls through to the campaign folders
-        // below instead of seeing a "you have nothing" sample.
+        // Tier 8.2 — show sample dossiers instead of a bare empty state.
+        // Eliminates the "you have nothing — go figure it out" first run.
+        // Gated on campaigns too: a campaign-first user (campaigns made before
+        // any settlement is saved) falls through to the campaign folders below
+        // instead of seeing a "you have nothing" sample.
         <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} /></div>
       ) : (filteredSaves.length === 0 && saves.length > 0) ? (
         // The library has saves, but none survive the active search/filters.
         // Offer a recovery CTA rather than a silent dead-end (no inert list).
         // Flat PARCH placeholder surface — distinct from the CARD-filled real
-        // cards so the surface itself carries the elevation difference (P5).
-        <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, borderRadius:8, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
-          <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK }}>No settlements match your search or filters</div>
+        // cards so the surface itself carries the elevation difference.
+        <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
+          <h2 style={{ margin:0, fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK }}>No settlements match your search or filters</h2>
           <div style={{ maxWidth:PROSE_MAX, fontFamily:sans, fontSize:FS.sm, color:BODY }}>Try a broader term, or clear the active filters to see all {saves.length} saved settlement{saves.length === 1 ? '' : 's'}.</div>
           <Button variant="secondary" size="sm" onClick={() => { setLibraryQuery(''); setLibraryFilters({}); }}>Clear filters</Button>
         </div>
       ) : (
         // Group-of-groups rhythm: campaign folders and the unassigned pile are
         // distinct chunks (loose SP.lg between), while the cards within each
-        // chunk stay tight (SP.xs, below).
+        // chunk stay tight.
         <div style={{ display:'flex', flexDirection:'column', gap:SP.lg }}>
           {/* Campaign folders */}
           {campaigns.map(campaign => {
+            const campaignIds = new Set((campaign.settlementIds || []).map(String));
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
-              ? campaign.settlementIds.map(id => saves.find(s => s.id === id))
-                  .filter(Boolean).filter(s => filteredIds.has(s.id))
+              // Filter the already-sorted Library sequence by normalized
+              // membership, so folders honor the selected sort and mixed
+              // numeric/string ids cannot duplicate into "Unassigned".
+              ? filteredSaves.filter(s => campaignIds.has(String(s.id)))
               : [];
             return (
               <CampaignFolder key={campaign.id} campaign={campaign} settlements={campSaves}
@@ -693,12 +736,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 toggleCollapsed={toggleCampaignCollapsed}
                 onDiscoverRegional={discoverCampaignRegionalChannels}
                 onConfirmRegionalChannel={(campaignId, channelId) => setRegionalChannelStatus(campaignId, channelId, 'confirmed')}
-                onApplyRegionalImpact={applyQueuedRegionalImpact}
-                onIgnoreRegionalImpact={ignoreQueuedRegionalImpact}
-                onResolveRegionalImpact={resolveRegionalImpact}
-                onAdvanceRegionalImpacts={advanceCampaignRegionalImpacts}
-                onApplyAllRegionalImpacts={applyAllQueuedRegionalImpacts}
-                onIgnoreAllRegionalImpacts={ignoreAllQueuedRegionalImpacts}
+                onApplyRegionalImpact={handleApplyRegionalImpact}
+                onIgnoreRegionalImpact={handleIgnoreRegionalImpact}
+                onResolveRegionalImpact={handleResolveRegionalImpact}
+                onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
+                onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
+                onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
                 onReactivate={handleReactivateSave}
                 canReactivate={canReactivateInactive}
                 reactivatingId={reactivatingId}
@@ -719,48 +762,19 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               renders unconditionally so the common no-campaign library (a bare
               pile of saves) still has a layer-cake anchor over the cards:
               'Settlements (n)' when there are no campaigns, 'Unassigned (n)'
-              when they exist. Quiet eyebrow style keeps it from adding a fourth
+              when they exist. Quiet eyebrow style (FS.xs + SECOND — clears AA
+              where MUTED at FS.xxs failed 4.5:1) keeps it from adding a fourth
               dominance level. */}
           {unassignedSaves.length > 0 && (
-            <section>
-              {/* The list's one structural anchor — lifted to FS.xs + SECOND
-                  (ink-800, clears AA; MUTED at FS.xxs failed 4.5:1 and was the
-                  smallest text on the surface). The quiet eyebrow read is kept via
-                  uppercase + letterspacing, not via a failing color (P7). It now
-                  sits at a consistent dominance tier with the campaign-folder name,
-                  so the two sibling group headings read as one peer level (P4). */}
-              <h2 style={{ margin:'0 0 6px', paddingLeft:4, fontSize:FS.xs, fontWeight:700, color:SECOND, textTransform:'uppercase', letterSpacing:'0.06em', fontFamily:sans }}>
-                {campaigns.length > 0 ? 'Unassigned' : 'Settlements'} ({unassignedSaves.length})
-              </h2>
-              {/* Single readable column, capped at PROSE_MAX ~820px (P12). The
-                  prior 2-up grid (minmax 360px) squeezed each card so narrow that
-                  the settlement NAME ellipsis-clipped to 1-2 chars once the tier
-                  label + health pip shared its row — the recurring "S." / "C..."
-                  bug. A capped full-width card gives the name ample room so it
-                  always shows, while the cap keeps the action cluster from being
-                  stranded far from the name on a wide monitor. Library only; the
-                  Gallery keeps its multi-column grid. */}
-              <div style={{ display:'grid', gridTemplateColumns:'1fr', maxWidth:PROSE_MAX, gap:SP.sm }}>
-                {unassignedSaves.map(s => (
-                  <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
-                    onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
-                    deleteConfirmed={deleteConfirmed} campaigns={activeCampaigns}
-                    addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
-                    currentCampaignId={null}
-                    onReactivate={handleReactivateSave}
-                    canReactivate={canReactivateInactive}
-                    reactivatingId={reactivatingId}
-                    onCanonize={handleCanonize}
-                    onAdvanceTime={handleAdvanceCampaignTime}
-                    onCreateCampaign={openCreateCampaign}
-                    onNavigate={onNavigate}
-                    canManageCampaigns={canManageCampaigns}
-                    selectMode={selectMode}
-                    selected={selectedIds.has(s.id)}
-                    onToggleSelect={toggleSelect}/>
-                ))}
-              </div>
-            </section>
+            <UnassignedLedger
+              saves={unassignedSaves} campaignsExist={campaigns.length > 0}
+              allModifiers={allModifiers} onView={onViewSettlement}
+              deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
+              campaigns={activeCampaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
+              onReactivate={handleReactivateSave} canReactivate={canReactivateInactive} reactivatingId={reactivatingId}
+              onCanonize={handleCanonize} onAdvanceTime={handleAdvanceCampaignTime} onCreateCampaign={openCreateCampaign}
+              onNavigate={onNavigate} canManageCampaigns={canManageCampaigns}
+              selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={toggleSelect} />
           )}
         </div>
       )}

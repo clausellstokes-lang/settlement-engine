@@ -1,8 +1,8 @@
 /**
- * SimulationDrawer.jsx — slide-out for "how this was simulated".
+ * SimulationDrawer.jsx — P135 / D-5 slide-out for "how this was simulated".
  *
  * The original Simulation tab lived as the last entry on the dossier
- * tab strip, where it read as noise: most DMs
+ * tab strip. The critique's D-5 calls this out as noise: most DMs
  * never open it, but it dilutes the strip and competes for attention
  * with the dossier-meaningful tabs. Moving it to a drawer:
  *
@@ -43,14 +43,12 @@ const sans = '"Nunito", system-ui, sans-serif';
  * over the page chrome — so it doesn't push content around.
  */
 export default function SimulationDrawer({ variant = 'inline' }) {
-  // 'inline' = the parchment owner-action band (ghost + light border).
+  // 'inline' = the parchment owner-action band (ghost + light border) — the
+  // default, byte-identical to the pre-variant render for existing mounts.
   // 'toolbar' = the dark sticky wizard toolbar, where the trigger joins Back /
   // Regenerate / New as a matching secondary button.
   const toolbar = variant === 'toolbar';
   const [open, setOpen] = useState(false);
-  // Back aria-modal="true" with focus-in/Tab-trap/restore; the hook also owns
-  // Escape (via the shared open-dialog stack), superseding the ad-hoc listener.
-  const dialogRef = useDialogFocusTrap(open, () => setOpen(false));
   const firedRef = useRef(false);
 
   useEffect(() => {
@@ -60,16 +58,10 @@ export default function SimulationDrawer({ variant = 'inline' }) {
     }
   }, [open]);
 
-  // Esc-to-close keyboard handling — lives in an effect so the
-  // listener is bound only while the drawer is open.
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open]);
+  // Back the aria-modal="true" promise with real focus management: move focus
+  // into the panel on open, trap Tab, restore focus on close, and dismiss on
+  // Escape (stack-aware — subsumes the old bespoke window keydown listener).
+  const dialogRef = useDialogFocusTrap(open, () => setOpen(false));
 
   return (
     <>
@@ -77,7 +69,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
         variant={toolbar ? 'secondary' : 'ghost'}
         size={toolbar ? 'md' : 'sm'}
         onClick={() => setOpen(true)}
-        title="See the 17-step simulation pipeline that built this settlement"
+        title="See the stages and decisions that built this settlement"
         icon={toolbar ? undefined : <span style={{ color: GOLD }}>✦</span>}
         style={toolbar ? undefined : {
           border: `1px solid ${BORDER}`,
@@ -124,10 +116,6 @@ export default function SimulationDrawer({ variant = 'inline' }) {
           >
             <header style={{
               padding: '14px 18px',
-              // Top-pinned fixed panel: fold in the device safe-area inset so the
-              // header clears a notch on mobile. Resolves to 0 on desktop, so the
-              // desktop drawer is unchanged.
-              paddingTop: 'calc(14px + env(safe-area-inset-top, 0px))',
               background: PARCH,
               borderBottom: `1px solid ${BORDER}`,
               display: 'flex', alignItems: 'center',
@@ -151,12 +139,12 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
-                  Seventeen steps built this settlement, each one fixed by the
-                  same seed. Tap a step to see what it decided and why.
+                  The same choices and seed rebuild the same settlement.
+                  Open a stage to see what it decided and why.
                 </div>
               </div>
               <IconButton
-                glyph={'✕'}
+                glyph="×"
                 label="Close"
                 tone="ghost"
                 size="lg"
@@ -171,7 +159,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   padding: 16, color: MUTED, fontSize: FS.sm,
                   fontFamily: sans, textAlign: 'center',
                 }}>
-                  Loading pipeline…
+                  Loading simulation record…
                 </div>
               }>
                 <PipelineRail compact={false} />

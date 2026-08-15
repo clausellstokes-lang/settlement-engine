@@ -14,6 +14,7 @@ const ev = (direction) => ({ id: `t_${direction}`, type: 'SHIFT_TIER', targetId:
 const mk = (tier, population, institutions = []) => ({ id: 's1', tier, population, config: { tier, settType: tier }, institutions, powerStructure: { factions: [] } });
 
 describe('SHIFT_TIER handler', () => {
+  // Landed events wave — needs the SHIFT_TIER handler (tier reband + tierHistory) in src/domain/events/mutate.js
   it('promotion moves up one tier and rebands population into the new band', () => {
     const out = mutateSettlement({ settlement: mk('town', 3000), event: ev('promotion'), now: NOW });
     expect(out.tier).toBe('city');
@@ -24,6 +25,7 @@ describe('SHIFT_TIER handler', () => {
     expect(out.tierHistory.at(-1)).toMatchObject({ fromTier: 'town', toTier: 'city', direction: 'promotion' });
   });
 
+  // Landed events wave — needs the SHIFT_TIER handler (tier reband + tierHistory) in src/domain/events/mutate.js
   it('demotion moves down one tier and clamps population to the new band ceiling', () => {
     const out = mutateSettlement({ settlement: mk('city', 18000), event: ev('demotion'), now: NOW });
     expect(out.tier).toBe('town');
@@ -31,6 +33,7 @@ describe('SHIFT_TIER handler', () => {
     expect(out.tierHistory.at(-1)).toMatchObject({ fromTier: 'city', toTier: 'town', direction: 'demotion' });
   });
 
+  // Landed events wave — needs the SHIFT_TIER handler (tier reband + tierHistory) in src/domain/events/mutate.js
   it('leaves an already in-band population unchanged', () => {
     // tier and population can be inconsistent (after edits); a city at town-range 3000
     // demoted to town keeps 3000 (already within [901,5000]).
@@ -44,6 +47,7 @@ describe('SHIFT_TIER handler', () => {
     expect(mutateSettlement({ settlement: mk('thorp', 40), event: ev('demotion'), now: NOW }).tier).toBe('thorp');
   });
 
+  // Landed events wave — needs the SHIFT_TIER handler (applyTierOutcomeToSettlement institution surgery) in src/domain/events/mutate.js
   it('demotion leaves over-tier institutions as inactive ruined remnants (real generated city)', () => {
     const city = withCustomContent({}, () => generateSettlementPipeline(
       { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road', monsterThreat: 'frontier' },

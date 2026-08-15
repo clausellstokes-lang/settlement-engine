@@ -107,7 +107,18 @@ describe('Tier 6.8 — aiGrounding bundle exports the contract surface', () => {
     // esbuild leaves marker strings like `external: "..."` only when
     // bundling with externals. We bundle everything, so the bundle
     // should not reference any non-relative module specifier.
-    expect(bundleSrc).not.toMatch(/from\s+['"][a-z][^'"]*['"]/i);
+    //
+    // STRUCTURAL, not textual. This assertion used to be a bare
+    // `/from\s+['"][a-z].../` search over the whole file, which cannot tell an
+    // import statement from bundled prose: the sibling aiCharterBundle inlines
+    // the op vocabulary, and one narration line contains the literal text
+    // `from "chief"`, which that form flagged as an unresolved module. Anchor
+    // to a real top-level import/export-from carrying a BARE specifier instead
+    // (a relative one would start with "." or "/") — same intent, no prose.
+    const bareImports = [...bundleSrc.matchAll(/^\s*(?:import|export)\b[^\n]*?\bfrom\s+['"]([^'"]+)['"]/gm)]
+      .map((m) => m[1])
+      .filter((spec) => !spec.startsWith('.') && !spec.startsWith('/'));
+    expect(bareImports, `bundle references unbundled module(s): ${bareImports.join(', ')}`).toEqual([]);
   });
 
   it('the banner warns against manual edits', () => {

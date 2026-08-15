@@ -1,20 +1,29 @@
 /**
- * EventComposerDeityField — the patron + cult inputs for the Make Changes composer,
- * folded in from the retired "Patron & Cults" Workshop card (PrimaryDeityPicker +
- * CultPicker). It feeds the staged SET_PRIMARY_DEITY / IMPOSE_CULT events: the user
- * picks a deity ref here, and buildEvent resolves the frozen snapshot from
- * customContent at apply time (resolveDeitySnapshot), byte-identical to the
- * setPrimaryDeity / imposeCult store actions the map still uses.
+ * EventComposerDeityField — the patron + cult inputs for the Make Changes composer.
+ * It feeds the staged SET_PRIMARY_DEITY / IMPOSE_CULT events: the user picks a
+ * deity ref here, and buildEvent resolves the frozen snapshot from customContent at
+ * build time, byte-identical to the setPrimaryDeity / imposeCult store actions the
+ * map uses.
  *
- * It owns the premium gate, the zero-deities prompt, and the cult capacity/niche
- * rules. canStageDeityEvent() (below) runs the SAME placement probe the store does
- * (reconcileCultImposition), so the composer can refuse a no-op or unseatable
- * imposition before it ever reaches the change-queue.
+ * FAITH SEAM: the premium gate returns FIRST (UpsellOrEmpty). No deity name — no
+ * options, no cult list, no capacity hint — renders while canUseCustom is false;
+ * anon/free users see only the upsell copy and the pricing-moment CTA. Deity data
+ * comes from the active execution context (the campaign's pinned binding when
+ * one is active, otherwise the user's own library) plus the settlement's embedded
+ * snapshots — never config.latentPantheon.
+ *
+ * OUR-floor identity: the shared resolveDeityForEvent() mints the account-scoped
+ * identity ref (deity:<scope>:<slug>) via mintDeityRef and keeps lawAxis in the
+ * snapshot (deitySnapshotFrom), so a deity staged from the dossier and one assigned
+ * from the map never fork identity — THEIRS resolveDeitySnapshot does not exist here
+ * and would drop both. canStageDeityEvent() runs the SAME placement probe the store
+ * does (reconcileCultImposition), so Apply stays disabled on a no-op / refused imposition.
  */
 
 import { useMemo } from 'react';
-import { buildRegistry, customRefIdFromItem, resolveDeitySnapshot } from '../../../lib/customRegistry.js';
+import { buildRegistry, customRefIdFromItem, mintDeityRef } from '../../../lib/customRegistry.js';
 import { reconcileCultImposition, capacityForTier } from '../../../domain/worldPulse/religionState.js';
+import { deitySnapshotFrom } from '../../../domain/deitySnapshot.js';
 import { MUTED, sans, FS } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
 import { navigate } from '../../../hooks/useRoute.js';
@@ -30,6 +39,19 @@ const patronRefOf = (config) => config.primaryDeityRef || config.primaryDeitySna
 const cultListOf = (config) => (Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : []);
 
 /**
+ * Resolve a picked deity ref against the user's custom registry into the exact
+ * { deityRef, snapshot } the store's embed-on-assign bridge writes: the minted
+ * account-scoped identity ref + the self-contained snapshot (with lawAxis). Shared
+ * by canStageDeityEvent (below) and buildEvent.js so both stay byte-identical to
+ * settlementDeityHelpers.setPrimaryDeityImpl / imposeCultImpl.
+ */
+export function resolveDeityForEvent(customContent, refId) {
+  const entry = buildRegistry(customContent || {}).resolve(refId);
+  if (!entry?.raw) return null;
+  return { deityRef: mintDeityRef(entry.raw) || refId, snapshot: deitySnapshotFrom(entry.raw) };
+}
+
+/**
  * Can the currently-formed deity event be staged WITHOUT being a no-op or a
  * refused imposition? Mirrors the guards in setPrimaryDeity / imposeCult so the
  * composer's Apply stays disabled until the action would actually land.
@@ -39,20 +61,20 @@ export function canStageDeityEvent({ type, settlement, deityRef, deityMode, cult
   const config = settlement?.config || {};
   if (type === 'SET_PRIMARY_DEITY') {
     if (deityMode === 'remove') return !!config.primaryDeitySnapshot; // removing requires a patron to remove
-    return !!resolveDeitySnapshot(customContent, deityRef);            // assigning requires a resolvable deity
+    return !!resolveDeityForEvent(customContent, deityRef);           // assigning requires a resolvable deity
   }
   if (type === 'IMPOSE_CULT') {
     const cults = cultListOf(config);
     if (deityMode === 'remove') {
       return !!cultRemoveRef && cults.some(c => String(c._deityRef || c.name || '') === String(cultRemoveRef));
     }
-    const snapshot = resolveDeitySnapshot(customContent, deityRef);
-    if (!snapshot) return false;
+    const resolved = resolveDeityForEvent(customContent, deityRef);
+    if (!resolved) return false;
     const probe = reconcileCultImposition({
       patron: config.primaryDeitySnapshot || null,
       cults,
       tier: settlement?.tier || config.tier || 'village',
-      deity: { _deityRef: deityRef, ...snapshot },
+      deity: { _deityRef: resolved.deityRef, ...resolved.snapshot },
     });
     return probe.action !== 'refused';
   }
@@ -103,6 +125,8 @@ export function EventComposerDeityField({
       setPurchaseModalOpen={setPurchaseModalOpen}
     />
   );
+  // FAITH SEAM — gate FIRST: no deity name renders past this point while the user
+  // lacks the premium custom-content entitlement or has authored no deities.
   if (!canUseCustom || deities.length === 0) return gate;
 
   if (type === 'SET_PRIMARY_DEITY') {

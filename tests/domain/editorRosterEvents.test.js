@@ -23,10 +23,12 @@
 
 import { describe, expect, test } from 'vitest';
 
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { ensureNpcStates, npcId } from '../../src/domain/worldPulse/npcAgency.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-06-11T00:00:00.000Z';
 
@@ -293,6 +295,7 @@ describe('mutateSettlement — ADD_RESOURCE / REMOVE_RESOURCE', () => {
       now: NOW,
     });
     expect(next.config.nearbyResources).toContain('fishing_grounds');
+    expect(next.config.nearbyResourcesNative).toContain('fishing_grounds');
     expect(next.config.nearbyResourcesState.fishing_grounds).toBe('allow');
     expect(next.config.nearbyResourcesCustom).toBeUndefined();
   });
@@ -339,6 +342,7 @@ describe('mutateSettlement — ADD_RESOURCE / REMOVE_RESOURCE', () => {
     const settlement = deepFreeze(fixture({
       config: {
         nearbyResources: ['fishing_grounds', 'Moonpetal grove'],
+        nearbyResourcesNative: ['fishing_grounds'],
         nearbyResourcesCustom: ['Moonpetal grove'],
         nearbyResourcesState: { fishing_grounds: 'depleted', 'Moonpetal grove': 'allow' },
         nearbyResourcesDepleted: ['fishing_grounds'],
@@ -350,6 +354,7 @@ describe('mutateSettlement — ADD_RESOURCE / REMOVE_RESOURCE', () => {
       now: NOW,
     });
     expect(next.config.nearbyResources).toEqual(['Moonpetal grove']);
+    expect(next.config.nearbyResourcesNative).toEqual([]);
     expect(next.config.nearbyResourcesState).toEqual({ 'Moonpetal grove': 'allow' });
     expect(next.config.nearbyResourcesDepleted).toEqual([]);
 
@@ -359,6 +364,8 @@ describe('mutateSettlement — ADD_RESOURCE / REMOVE_RESOURCE', () => {
       now: NOW,
     });
     expect(noCustom.config.nearbyResources).toEqual(['fishing_grounds']);
+    expect(noCustom.config.nearbyResourcesNative)
+      .toEqual(['fishing_grounds']);
     expect(noCustom.config.nearbyResourcesCustom).toEqual([]);
   });
 
@@ -428,6 +435,60 @@ describe('mutateSettlement — DEPLETE_RESOURCE / RECOVERED_RESOURCE key agreeme
     });
     expect(recovered.config.nearbyResourcesDepleted).toEqual([]);
     expect(recovered.config.nearbyResourcesState['Moonpetal grove']).toBe('allow');
+  });
+
+  test('native reopen preserves an exact depleted custom namesake', () => {
+    const customDefinition = {
+      name: 'iron_deposits',
+      localUid: 'custom-iron',
+      customDefinitionId: 'definition:custom-iron',
+      custom: true,
+      source: 'custom',
+    };
+    const settlement = fixture({
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourceDefinitions: [customDefinition],
+        nearbyResourceDefinitionsDepleted: [],
+      },
+      _config: { settType: 'town' },
+    });
+
+    const depleted = mutateSettlement({
+      settlement: deepFreeze(settlement),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'iron_deposits' }),
+      now: NOW,
+    });
+    expect(depleted.config.nearbyResourcesNativeDepleted)
+      .toEqual(['iron_deposits']);
+    expect(depleted.config.resourceEdits.depletedCustomDefinitionIds)
+      .toEqual(['definition:custom-iron']);
+
+    const reopenedNative = mutateSettlement({
+      settlement: deepFreeze(depleted),
+      event: ev('ADD_RESOURCE', { targetId: 'iron_deposits' }),
+      now: NOW,
+    });
+    expect(reopenedNative.config.nearbyResourcesNativeDepleted).toEqual([]);
+    expect(reopenedNative.config.nearbyResourceDefinitionsDepleted)
+      .toEqual([customDefinition]);
+    expect(reopenedNative.config.resourceEdits.depleted).toEqual([]);
+    expect(reopenedNative.config.resourceEdits.depletedCustomDefinitionIds)
+      .toEqual(['definition:custom-iron']);
+    expect(reopenedNative._config.resourceEdits)
+      .toEqual(reopenedNative.config.resourceEdits);
+
+    const recovered = mutateSettlement({
+      settlement: deepFreeze(reopenedNative),
+      event: ev('RECOVERED_RESOURCE', { targetId: 'iron_deposits' }),
+      now: NOW,
+    });
+    expect(recovered.config.nearbyResourceDefinitionsDepleted).toEqual([]);
+    expect(recovered.config.resourceEdits.depletedCustomDefinitionIds)
+      .toBeUndefined();
   });
 
   test('re-ADD of a custom resource clears a legacy slug-form depletion record', () => {
@@ -503,7 +564,7 @@ describe('mutateSettlement — resourceEdits delta record (the regeneration inpu
     // Slug-equivalent clears: the legacy slug-form depletion record goes too.
     expect(next.config.resourceEdits).toEqual({
       added: [{ key: 'Moonpetal grove', custom: true }],
-      removed: [], depleted: [], recovered: [],
+      removed: [], removedNative: [], depleted: [], recovered: [],
     });
     expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
   });
@@ -523,7 +584,11 @@ describe('mutateSettlement — resourceEdits delta record (the regeneration inpu
       now: NOW,
     });
     expect(next.config.resourceEdits).toEqual({
-      added: [], removed: ['Moonpetal grove'], depleted: [], recovered: ['fishing_grounds'],
+      added: [],
+      removed: ['Moonpetal grove'],
+      removedNative: [],
+      depleted: [],
+      recovered: ['fishing_grounds'],
     });
     expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
   });

@@ -21,7 +21,8 @@ describe('buildCloseoutSummary', () => {
       magicExists: true,
     }, {});
     expect(factValue(s, 'Tier')).toBe('Village');
-    expect(factValue(s, 'Culture')).toBe('Germanic');
+    expect(factValue(s, 'Tradition')).toBe('Germanic');
+    expect(factValue(s, 'Themes')).toBe('Grounded');
     expect(factValue(s, 'Trade route')).toBe('Random');
     expect(factValue(s, 'Threat')).toBe('Random');
     expect(factValue(s, 'Magic')).toBe('On');
@@ -69,7 +70,7 @@ describe('buildCloseoutSummary', () => {
     const s = buildCloseoutSummary();
     expect(s.forced).toBe(0);
     expect(s.excluded).toBe(0);
-    expect(s.facts).toHaveLength(5);
+    expect(s.facts).toHaveLength(6);
     expect(s.emphasis).toBeNull();
   });
 });

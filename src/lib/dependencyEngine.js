@@ -28,8 +28,8 @@
  *
  * This module:
  *   1. Builds a registry from a `customContent` blob on demand
- *   2. Indexes custom items by lowercased name for fast lookup from generators
- *      that pass institution/resource NAMES (not refIds)
+ *   2. Indexes custom items by lowercased name for compatibility callers while
+ *      refusing ambiguous same-name matches instead of choosing by array order
  *   3. Exposes resolve helpers that convert refIds → human-readable names so
  *      legacy name-match code keeps working with custom-defined dependencies
  *
@@ -52,24 +52,35 @@
  */
 
 import { buildRegistry, parseRefId } from './customRegistry.js';
+import { getCustomContentSource, registerCustomDepsInvalidate } from './customContentSource.js';
+import { passesTierGate } from '../domain/customContentSchema.js';
+import {
+  projectCustomDefinitionIdentity,
+} from '../domain/content/customDefinitionIdentityProjection.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
 
-// ── Custom content source (injected) ───────────────────────────────────────
+// ── Custom content source (injected via the eager seam) ─────────────────────
 // The generator should not import the Zustand store. Instead, the caller
 // (app at init, or pipeline per-call) tells us where to read from. Default
 // returns an empty object — generators always work, just with no custom
 // content visible.
+//
+// DE-EAGER (2026-07-19): the getter now lives in lib/customContentSource.js —
+// a tiny EAGER seam — so the store can wire it at boot WITHOUT statically
+// importing this module (which would drag the whole registry + its enumerator
+// code into the first-paint closure; it used to cost ~41 KB there). This module
+// loads lazily with its real consumers (generation, Compendium, deity
+// assignment) and reads the seam's getter on each registry build. The seam
+// also lets the slice invalidate our cache without importing us: we register
+// the invalidator there on load (before load there is no cache to invalidate).
+// setCustomContentSource is re-exported below so headless callers (tests,
+// scripts) keep their one-stop import; the app's boot wiring imports the seam
+// directly.
+export { setCustomContentSource } from './customContentSource.js';
 
-let _sourceGetter = () => ({});
 let _override = null; // for withCustomContent()
-
-/**
- * Wire the global source. Typically called once at app startup with a
- * function that returns the live store's customContent slice.
- */
-export function setCustomContentSource(getter) {
-  _sourceGetter = typeof getter === 'function' ? getter : () => ({});
-  customDeps.invalidate();
-}
 
 /**
  * Run `fn()` with `customContent` as the override source. Useful for
@@ -114,7 +125,7 @@ function currentKey(customContent) {
 }
 
 function getRegistry() {
-  const cc = (_override != null ? _override : _sourceGetter()) || {};
+  const cc = (_override != null ? _override : getCustomContentSource()()) || {};
   const key = currentKey(cc);
   if (key === _registryKey && _registryCache) return _registryCache;
   _registryCache = buildRegistry(cc);
@@ -132,7 +143,10 @@ function indexCustomByName(category) {
   const byName = new Map();
   for (const e of list) {
     const k = (e.name || '').trim().toLowerCase();
-    if (k) byName.set(k, e);
+    if (!k) continue;
+    const matches = byName.get(k) || [];
+    matches.push(e);
+    byName.set(k, matches);
   }
   return byName;
 }
@@ -140,7 +154,10 @@ function indexCustomByName(category) {
 function findCustomByName(category, name) {
   if (!name) return null;
   const idx = indexCustomByName(category);
-  return idx.get(String(name).trim().toLowerCase()) || null;
+  const matches = idx.get(String(name).trim().toLowerCase()) || [];
+  // Name-only lookup is a compatibility path. Two definitions with the same
+  // display name are not permission to choose one by array order.
+  return matches.length === 1 ? matches[0] : null;
 }
 
 // ── refId → name resolver ───────────────────────────────────────────────────
@@ -163,36 +180,371 @@ function resolveNamesFromRefs(refIds) {
   return refIds.map(resolveNameFromRef).filter(Boolean);
 }
 
+/** @param {unknown} value */
+function materializedValues(value) {
+  if (Array.isArray(value)) return value;
+  if (value instanceof Set) return [...value];
+  return [];
+}
+
+/** @param {unknown} value */
+function normalizedName(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+/**
+ * @param {unknown} value
+ * @returns {Record<string, unknown>|null}
+ */
+function objectRecord(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : null;
+}
+
+/** @param {import('./customRegistry.js').RegistryEntry} entry */
+function customEntryDefinitionId(entry) {
+  return projectCustomDefinitionIdentity(entry?.raw)
+    .customDefinitionId || '';
+}
+
+/** @param {import('./customRegistry.js').RegistryEntry} entry */
+function customEntryLocalUid(entry) {
+  const direct = String(entry?.raw?.localUid || '').trim();
+  if (direct) return direct;
+  const parsed = parseRefId(entry?.refId);
+  return parsed?.source === 'custom' ? String(parsed.localUid || '').trim() : '';
+}
+
+/** @param {import('./customRegistry.js').RegistryEntry} entry */
+function customEntryKey(entry) {
+  const definitionId = customEntryDefinitionId(entry);
+  if (definitionId) return `definition:${definitionId}`;
+  const localUid = customEntryLocalUid(entry);
+  return localUid ? `local:${localUid}` : `ref:${entry?.refId || ''}`;
+}
+
+function eligibleCustomEntries(category, tier) {
+  return (getRegistry().listCustom(category) || [])
+    .filter(entry => passesTierGate(entry.raw || {}, tier));
+}
+
+/**
+ * Resolve the exact custom definitions represented by one materialized
+ * settlement surface.
+ *
+ * Current entities carry immutable definition ids where the surface supports
+ * them. Legacy surfaces may carry only a display name; that fallback is
+ * accepted only when exactly one eligible definition in the category owns the
+ * name. An explicit but stale identity never falls back to a convenient name.
+ *
+ * Repeated projections of the same exact entity (for example a lodging service
+ * cross-listed under food) collapse by definition identity.
+ *
+ * @param {string} category
+ * @param {unknown[]|Set<unknown>|undefined|null} materialized
+ * @param {string|null|undefined} tier
+ */
+function resolveMaterializedCustomDefinitions(category, materialized, tier) {
+  const candidates = eligibleCustomEntries(category, tier);
+  const byDefinitionId = new Map();
+  const byLocalUid = new Map();
+  const byName = new Map();
+
+  const index = (map, key, entry) => {
+    if (!key) return;
+    const matches = map.get(key) || [];
+    matches.push(entry);
+    map.set(key, matches);
+  };
+
+  for (const entry of candidates) {
+    index(byDefinitionId, customEntryDefinitionId(entry), entry);
+    index(byLocalUid, customEntryLocalUid(entry), entry);
+    index(byName, normalizedName(entry.name), entry);
+  }
+
+  const resolved = new Map();
+  const admitUnique = (matches) => {
+    if (!Array.isArray(matches) || matches.length !== 1) return;
+    const entry = matches[0];
+    resolved.set(customEntryKey(entry), entry);
+  };
+
+  for (const value of materializedValues(materialized)) {
+    const record = objectRecord(value);
+    const projected = record
+      ? projectCustomDefinitionIdentity(record)
+      : {};
+    const definitionId = projected.customDefinitionId || '';
+    if (definitionId) {
+      admitUnique(byDefinitionId.get(definitionId));
+      continue;
+    }
+
+    const localUid = record
+      ? String(record.localUid || '').trim()
+      : '';
+    if (localUid) {
+      admitUnique(byLocalUid.get(localUid));
+      continue;
+    }
+
+    // A generated built-in entity can share a label with a custom definition.
+    // Its explicit non-custom source is evidence that the custom definition did
+    // not materialize; only legacy objects with no source remain name-eligible.
+    if (
+      record
+      && record.source
+      && record.source !== 'custom'
+      && record.custom !== true
+      && record.isCustom !== true
+    ) continue;
+
+    const name = normalizedName(
+      typeof value === 'string'
+        ? value
+        : record?.name ?? record?.label,
+    );
+    if (name) admitUnique(byName.get(name));
+  }
+
+  return [...resolved.values()];
+}
+
+/**
+ * Definitions whose display name is itself an unambiguous compatibility
+ * address. Used where the current activation contract is provider/presence
+ * based and no generated entity surface exists yet.
+ */
+function unambiguousCustomDefinitions(category, tier) {
+  const byName = new Map();
+  for (const entry of eligibleCustomEntries(category, tier)) {
+    const name = normalizedName(entry.name);
+    if (!name) continue;
+    const matches = byName.get(name) || [];
+    matches.push(entry);
+    byName.set(name, matches);
+  }
+  return [...byName.values()]
+    .filter(matches => matches.length === 1)
+    .map(matches => matches[0]);
+}
+
+function materializedInstitutionPresence(institutions, tier) {
+  const values = materializedValues(institutions);
+  const customEntries = resolveMaterializedCustomDefinitions(
+    'institutions',
+    values,
+    tier,
+  );
+  return {
+    nativeNames: new Set(
+      values
+        .filter(value => !isMaterializedCustomContent(value))
+        .map(value => normalizedName(
+          typeof value === 'string'
+            ? value
+            : objectRecord(value)?.name,
+        ))
+        .filter(Boolean),
+    ),
+    customEntryKeys: new Set(customEntries.map(customEntryKey)),
+    customEntries,
+  };
+}
+
+/**
+ * Check an institution reference against the materialized roster without
+ * reducing an exact `custom:<localUid>` address back to a display name.
+ */
+function institutionRequirementIsPresent(reference, presence) {
+  const scalar = Array.isArray(reference) ? reference[0] : reference;
+  if (typeof scalar !== 'string' || !scalar.trim()) return false;
+
+  const reg = getRegistry();
+  const parsed = parseRefId(scalar);
+  if (parsed?.source === 'custom') {
+    const resolved = reg.resolve(scalar);
+    return Boolean(
+      resolved?.source === 'custom'
+      && resolved.category === 'institutions'
+      && presence.customEntryKeys.has(customEntryKey(resolved)),
+    );
+  }
+  if (parsed?.source === 'prebuilt') {
+    const resolved = reg.resolve(scalar);
+    return Boolean(
+      resolved?.source === 'prebuilt'
+      && resolved.category === 'institutions'
+      && presence.nativeNames.has(normalizedName(resolved.name)),
+    );
+  }
+  if (parsed) return false;
+
+  // Bare names are legacy references. They remain usable only when the full
+  // institution registry has one possible target for that display name.
+  const name = normalizedName(scalar);
+  const matches = (reg.listAll('institutions') || [])
+    .filter(entry => normalizedName(entry.name) === name);
+  if (matches.length === 0) return presence.nativeNames.has(name);
+  if (matches.length !== 1) return false;
+  const [resolved] = matches;
+  return resolved.source === 'custom'
+    ? presence.customEntryKeys.has(customEntryKey(resolved))
+    : presence.nativeNames.has(name);
+}
+
+/**
+ * Resolve one institution's `produces` references without reducing exact
+ * custom targets to display names.
+ *
+ * @param {unknown} institution
+ * @param {string|null|undefined} [tier]
+ */
+function contentProducedByInstitution(institution, tier) {
+  const item = customInstitutionEntry(institution, tier);
+  if (!item) return [];
+  const refs = Array.isArray(item.raw?.produces) ? item.raw.produces : [];
+  const reg = getRegistry();
+  return refs
+    .map((reference) => {
+      const resolved = typeof reference === 'string'
+        ? reg.resolve(reference)
+        : null;
+      const name = resolved?.name || resolveNameFromRef(reference);
+      if (!name) return null;
+      return {
+        name,
+        category: resolved?.category || null,
+        source: resolved?.source || null,
+        raw: resolved?.raw || null,
+        refId: resolved?.refId || null,
+      };
+    })
+    .filter(Boolean);
+}
+
+/**
+ * Resolve a custom institution definition from an exact materialized entity.
+ * Explicit native provenance forbids the legacy name fallback: a built-in and
+ * a custom definition may intentionally share one display label.
+ *
+ * @param {unknown} institution
+ * @param {string|null|undefined} [tier]
+ */
+function customInstitutionEntry(institution, tier) {
+  const record = objectRecord(institution);
+  const institutionName = typeof institution === 'string'
+    ? institution
+    : record?.name;
+  if (record && isMaterializedCustomContent(record)) {
+    return resolveMaterializedCustomDefinitions(
+        'institutions',
+        [record],
+        tier,
+      )[0] || null;
+  }
+  if (record?.source && record.source !== 'custom') return null;
+  return findCustomByName('institutions', institutionName);
+}
+
+/**
+ * Resolve exact subsumption targets without collapsing their identity to a
+ * display name. Dangling structured references fail closed; bare legacy names
+ * remain available to the caller as identity-less compatibility targets.
+ *
+ * @param {unknown} institution
+ * @param {string|null|undefined} [tier]
+ */
+function subsumptionTargetsByInstitution(institution, tier) {
+  const item = customInstitutionEntry(institution, tier);
+  if (!item) return [];
+  const refs = Array.isArray(item.raw?.subsumes) ? item.raw.subsumes : [];
+  const reg = getRegistry();
+  return refs
+    .map((reference) => {
+      const resolved = typeof reference === 'string'
+        ? reg.resolve(reference)
+        : null;
+      const parsed = typeof reference === 'string'
+        ? parseRefId(reference)
+        : null;
+      const name = resolved?.name || (parsed ? '' : resolveNameFromRef(reference));
+      if (!name) return null;
+      return {
+        name,
+        category: resolved?.category || null,
+        source: resolved?.source || null,
+        raw: resolved?.raw || null,
+        refId: resolved?.refId || null,
+      };
+    })
+    .filter(Boolean);
+}
+
 // ── Public helpers used by generators ───────────────────────────────────────
 
 export const customDeps = {
   /** Force re-read of customContent (for tests or manual flush). */
   invalidate() { _registryCache = null; _registryKey = null; },
 
+  /**
+   * Resolve one native or custom institution requirement against the exact
+   * materialized roster. Structured custom references require matching custom
+   * definition identity; structured prebuilt references require a native
+   * entity. A presentation label can satisfy neither across that boundary.
+   */
+  institutionRequirementIsPresent(
+    reference,
+    institutions,
+    tier,
+  ) {
+    return institutionRequirementIsPresent(
+      reference,
+      materializedInstitutionPresence(institutions, tier),
+    );
+  },
+
   // ── Services / produces ────────────────────────────────────────────────
+  /**
+   * Resolve an institution's authored `produces` references without erasing
+   * the target definition. Generator projections need the resolved entry—not
+   * merely its display name—to retain exact revision provenance.
+   *
+   * Bare legacy names remain usable but have no invented identity.
+   */
+  contentProducedBy(institution, tier) {
+    return contentProducedByInstitution(institution, tier);
+  },
+
   /**
    * Given an institution name (custom or prebuilt), return the list of
    * trade-good NAMES it declares it produces. Empty if no custom institution
    * by that name OR no `produces` field.
+   *
+   * Compatibility projection for name-only consumers. New entity-producing
+   * paths should use `contentProducedBy` so exact definition identity survives.
    */
   servicesProducedBy(institutionName) {
-    const item = findCustomByName('institutions', institutionName);
-    if (!item) return [];
-    const refs = Array.isArray(item.raw?.produces) ? item.raw.produces : [];
-    return resolveNamesFromRefs(refs);
+    return contentProducedByInstitution(institutionName).map(entry => entry.name);
   },
 
   /**
-   * Given an institution NAME, return the institution NAMES it declares it
-   * subsumes (§14) — resolved from its custom `subsumes` refId list. When a
-   * subsumer is present the absorbed institutions aren't listed separately
-   * (assembleInstitutions de-dup). Empty if not custom or none.
+   * Return identity-bearing institutions declared as subsumption targets.
+   * New callers should use this form so same-name custom/native entities remain
+   * distinguishable.
    */
-  subsumedBy(institutionName) {
-    const item = findCustomByName('institutions', institutionName);
-    if (!item) return [];
-    const refs = Array.isArray(item.raw?.subsumes) ? item.raw.subsumes : [];
-    return resolveNamesFromRefs(refs);
+  subsumptionTargetsFor(institution, tier) {
+    return subsumptionTargetsByInstitution(institution, tier);
+  },
+
+  /**
+   * Compatibility projection for older name-only consumers.
+   */
+  subsumedBy(institution, tier) {
+    return subsumptionTargetsByInstitution(institution, tier)
+      .map(target => target.name);
   },
 
   // ── Resource → chain ───────────────────────────────────────────────────
@@ -225,7 +577,7 @@ export const customDeps = {
   // ── Required institution for a trade good ──────────────────────────────
   /**
    * Resolve a trade good's `requiredInstitution` field — which may be a
-   * legacy bare name (prebuilt EXPORT_GOODS_BY_TIER form) or a refId from
+   * legacy bare name (prebuilt GOODS_MODIFIERS_BY_TIER form) or a refId from
    * the custom system — to the institution NAME the engine should match
    * against in `settlement.institutions[].name`.
    */
@@ -272,28 +624,47 @@ export const customDeps = {
    * adds supply when it's present; a custom trade good that declares it adds
    * supply when its `requiredInstitution` is present (and is itself a named
    * export once local demand is covered). Supply scales with economicWeight.
-   * Returns { supply:number, goods:string[] }. A no-op { supply:0, goods:[] }
-   * when nothing satisfies the category, so the gap math is unchanged.
+   * Returns `{ supply, goods }`; identity-aware consumers may opt into
+   * `tradeGoodOwners` without changing the compatibility result shape. A no-op
+   * `{ supply:0, goods:[] }` leaves the existing gap math unchanged.
    * @param {string} category
-   * @param {Set<string>} presentInstitutionNames - lowercased institution names
+   * @param {Array<unknown>|Set<string>} presentInstitutions - materialized
+   *   institution entities; a Set of names remains a legacy-compatible input
+   * @param {string|null|undefined} tier - resolved settlement tier
+   * @param {{tradeGoods?:unknown[],includeTradeGoodOwners?:boolean}} [materialized]
+   *   optional exact materialized trade-good entities and an opt-in projection
+   *   of immutable endpoint owners for consumers that retain trade provenance
    */
-  finishedGoodsSupply(category, presentInstitutionNames) {
-    const empty = { supply: 0, goods: [] };
+  finishedGoodsSupply(category, presentInstitutions, tier, materialized = {}) {
+    const includeTradeGoodOwners =
+      materialized.includeTradeGoodOwners === true;
+    const empty = includeTradeGoodOwners
+      ? { supply: 0, goods: [], tradeGoodOwners: [] }
+      : { supply: 0, goods: [] };
     if (!category) return empty;
-    const present = (name) =>
-      presentInstitutionNames && typeof presentInstitutionNames.has === 'function'
-        ? presentInstitutionNames.has(String(name || '').toLowerCase())
-        : false;
     const WEIGHT = { minor: 1, moderate: 2, major: 3, backbone: 5 };
-    const reg = getRegistry();
+    const institutionPresence = materializedInstitutionPresence(
+      presentInstitutions,
+      tier,
+    );
+    const tradeGoods = Object.prototype.hasOwnProperty.call(
+      materialized,
+      'tradeGoods',
+    )
+      ? resolveMaterializedCustomDefinitions(
+        'tradeGoods',
+        materialized.tradeGoods,
+        tier,
+      )
+      : unambiguousCustomDefinitions('tradeGoods', tier);
     let supply = 0;
     const goods = [];
-    for (const e of (reg.listCustom('institutions') || [])) {
+    const tradeGoodOwners = [];
+    for (const e of institutionPresence.customEntries) {
       if (e.raw?.satisfies !== category) continue;
-      if (!present(e.name)) continue;
       supply += WEIGHT[e.raw?.economicWeight] || 2;
     }
-    for (const e of (reg.listCustom('tradeGoods') || [])) {
+    for (const e of tradeGoods) {
       if (e.raw?.satisfies !== category) continue;
       const reqRef = e.raw?.requiredInstitution;
       if (reqRef) {
@@ -301,13 +672,28 @@ export const customDeps = {
         // (deleted institution, or prepareImport nulling a rejected target) — treat that
         // as gated-and-absent, NOT ungated: an unproducible good must not count as supply
         // or be named a local export. Only an UNDECLARED requirement is freely supplied.
-        const reqName = resolveNameFromRef(Array.isArray(reqRef) ? reqRef[0] : reqRef);
-        if (!reqName || !present(reqName)) continue;
+        if (!institutionRequirementIsPresent(reqRef, institutionPresence)) {
+          continue;
+        }
       }
       supply += WEIGHT[e.raw?.economicWeight] || 2;
-      if (e.name) goods.push(e.name);
+      if (e.name) {
+        goods.push(e.name);
+        if (includeTradeGoodOwners) {
+          tradeGoodOwners.push({
+            label: e.name,
+            source: 'custom',
+            chainId: null,
+            refId: e.refId || null,
+            customDefinitionCategory: 'tradeGoods',
+            ...projectCustomDefinitionIdentity(e.raw),
+          });
+        }
+      }
     }
-    return { supply, goods };
+    return includeTradeGoodOwners
+      ? { supply, goods, tradeGoodOwners }
+      : { supply, goods };
   },
 
   // ── Food-impact tally (§14) ────────────────────────────────────────────
@@ -315,31 +701,87 @@ export const customDeps = {
    * Net food producers vs consumers among the PRESENT custom content, across
    * all four types: institutions + resources count by their own presence; a
    * service counts when its providedBy institution is present; a trade good
-   * when its requiredInstitution is present. Returns { producers, consumers }.
-   * @param {string[]} presentInstitutionNames - all institution names present
-   * @param {string[]} presentResourceNames - custom resource names present (config.nearbyResourcesCustom)
+   * when its requiredInstitution is present. The resolved settlement tier is
+   * checked here as well as at materialization: a direct headless caller may
+   * supply the unfiltered reviewed library, and a present provider must not
+   * activate a service whose own tier gate excludes this settlement.
+   * Returns { producers, consumers }.
+   * Exact definition identity is authoritative wherever a materialized entity
+   * carries it. Name-only legacy surfaces activate a definition only when the
+   * name is unambiguous in that category. Services are the exception because
+   * their declared contract is provider presence, not a name-only roster: each
+   * eligible service definition remains independently visible and therefore
+   * contributes its own registered effect even when labels coincide.
+   *
+   * @param {Array<unknown>|Set<string>} presentInstitutions - materialized
+   *   institution entities, or legacy institution names
+   * @param {Array<unknown>|Set<string>} presentResources - materialized custom
+   *   resources, currently name-only in generated settlement config
+   * @param {string|null|undefined} tier - resolved settlement tier
+   * @param {{services?:unknown[],tradeGoods?:unknown[]}} [materialized] -
+   *   optional exact materializations for surfaces that retain entity identity
    */
-  foodImpactTally(presentInstitutionNames, presentResourceNames) {
-    const reg = getRegistry();
-    const instSet = new Set((presentInstitutionNames || []).map((n) => String(n).toLowerCase()));
-    const resSet = new Set((presentResourceNames || []).map((n) => String(n).toLowerCase()));
+  foodImpactTally(
+    presentInstitutions,
+    presentResources,
+    tier,
+    materialized = {},
+  ) {
+    const institutionPresence = materializedInstitutionPresence(
+      presentInstitutions,
+      tier,
+    );
+    const resources = resolveMaterializedCustomDefinitions(
+      'resources',
+      presentResources,
+      tier,
+    );
+    const services = Object.prototype.hasOwnProperty.call(
+      materialized,
+      'services',
+    )
+      ? resolveMaterializedCustomDefinitions(
+        'services',
+        materialized.services,
+        tier,
+      )
+      : eligibleCustomEntries('services', tier);
+    const tradeGoods = Object.prototype.hasOwnProperty.call(
+      materialized,
+      'tradeGoods',
+    )
+      ? resolveMaterializedCustomDefinitions(
+        'tradeGoods',
+        materialized.tradeGoods,
+        tier,
+      )
+      : unambiguousCustomDefinitions('tradeGoods', tier);
     let producers = 0;
     let consumers = 0;
     const add = (fi) => { if (fi === 'produces') producers += 1; else if (fi === 'consumes') consumers += 1; };
-    const resolveOne = (ref) => (ref ? resolveNameFromRef(Array.isArray(ref) ? ref[0] : ref) : '');
-    for (const e of (reg.listCustom('institutions') || [])) {
-      if (instSet.has(String(e.name).toLowerCase())) add(e.raw?.foodImpact);
+    for (const e of institutionPresence.customEntries) {
+      add(e.raw?.foodImpact);
     }
-    for (const e of (reg.listCustom('resources') || [])) {
-      if (resSet.has(String(e.name).toLowerCase())) add(e.raw?.foodImpact);
+    for (const e of resources) {
+      add(e.raw?.foodImpact);
     }
-    for (const e of (reg.listCustom('services') || [])) {
-      const prov = resolveOne(e.raw?.providedBy);
-      if (prov && instSet.has(prov.toLowerCase())) add(e.raw?.foodImpact);
+    for (const e of services) {
+      if (
+        e.raw?.providedBy
+        && institutionRequirementIsPresent(
+          e.raw.providedBy,
+          institutionPresence,
+        )
+      ) add(e.raw?.foodImpact);
     }
-    for (const e of (reg.listCustom('tradeGoods') || [])) {
-      const req = resolveOne(e.raw?.requiredInstitution);
-      if (req && instSet.has(req.toLowerCase())) add(e.raw?.foodImpact);
+    for (const e of tradeGoods) {
+      if (
+        e.raw?.requiredInstitution
+        && institutionRequirementIsPresent(
+          e.raw.requiredInstitution,
+          institutionPresence,
+        )
+      ) add(e.raw?.foodImpact);
     }
     return { producers, consumers };
   },
@@ -347,12 +789,14 @@ export const customDeps = {
   // ── Confirmed custom supply chains (§14) ───────────────────────────────
   /**
    * The user's CONFIRMED custom supply chains (reviewed + named in the
-   * Compendium), read from the active customContent. Display-only — surfaced in
-   * the dossier Economics/Trade section; never merged into the simulated
-   * activeChains, so they don't perturb chain-impairment math. Empty when none.
+   * Compendium), read from the active customContent. The final economy pass
+   * evaluates their exact reviewed dependencies and may promote endpoints from
+   * active chains into bounded trade lists. They remain outside the native
+   * `activeChains` impairment/depth model, so confirmation alone never invents
+   * tick-time chain physics. Empty when none.
    */
   confirmedSupplyChains() {
-    const cc = (_override != null ? _override : _sourceGetter()) || {};
+    const cc = (_override != null ? _override : getCustomContentSource()()) || {};
     const chains = Array.isArray(cc.supplyChains) ? cc.supplyChains : [];
     return chains.filter((c) => c?.verification?.state === 'confirmed');
   },
@@ -360,5 +804,11 @@ export const customDeps = {
   // ── Lower-level escape hatch ───────────────────────────────────────────
   registry() { return getRegistry(); },
 };
+
+// DE-EAGER: hand the seam our invalidator so the (eager) slice can flush the
+// registry cache after a cloud sync without statically importing this module.
+// Registered at module load — before that there IS no cache, so the seam's
+// no-op-when-unloaded is exact (the first build always reads the live source).
+registerCustomDepsInvalidate(() => customDeps.invalidate());
 
 export default customDeps;

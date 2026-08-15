@@ -50,12 +50,16 @@ export function useMapImageImport({ activeCampaignId, setMapBackdrop, clearMapBa
       const ownerId = useStore.getState().auth?.user?.id;
       if (!ownerId) { showToast('error', 'Sign in to import a map image.'); return; }
       showToast('info', 'Processing image…');
-      const prevUrl = useStore.getState().mapState.customBackdrop?.imageUrl || null;
       const { blob, w, h, type } = await downscaleImageFile(file, 4096);
       const { url } = await uploadMapBackdrop(blob, { ownerId, campaignId: activeCampaignId, contentType: type });
       setMapBackdrop({ imageUrl: url, w, h });
-      // Best-effort: delete the replaced object so re-imports don't orphan storage.
-      if (prevUrl && prevUrl !== url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(prevUrl)).catch(() => {});
+      // Do NOT eagerly delete the replaced backdrop object. The prior URL is still
+      // referenced by the session undo stack (Undo would restore a 404 blank map)
+      // and — if this campaign's map was published or imported by others — by the
+      // gallery tile and every downstream clone, which owner edits must never break.
+      // Physical cleanup of unreferenced backdrops is deferred to campaign deletion /
+      // an offline unreferenced-object sweep; a stale object is cheap, a broken
+      // reference is not.
       showToast('success', 'Custom map imported. Undo reverts to the generated terrain.');
     } catch (err) {
       showToast('error', err?.message || 'Map import failed.');
@@ -63,9 +67,12 @@ export function useMapImageImport({ activeCampaignId, setMapBackdrop, clearMapBa
   }, [pendingImportFile, activeCampaignId, setMapBackdrop, showToast]);
 
   const handleClearImage = useCallback(() => {
-    const url = useStore.getState().mapState.customBackdrop?.imageUrl;
     clearMapBackdrop();
-    if (url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(url)).catch(() => {});
+    // Clearing only drops the reference from mapState — it does NOT delete the
+    // storage object, which may still back a published gallery tile, an imported
+    // clone, or an undo-stack entry (Undo restores the backdrop). Same deferral as
+    // re-import above: physical deletion belongs to campaign deletion / a sweep,
+    // never to an owner-side edit that other users' copies depend on.
     showToast('info', 'Reverted to generated terrain.');
   }, [clearMapBackdrop, showToast]);
 

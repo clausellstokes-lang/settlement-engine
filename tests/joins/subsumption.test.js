@@ -24,6 +24,9 @@
 import { describe, test, expect } from 'vitest';
 import { SUBSUMPTION_RULES, applySubsumption } from '../../src/generators/steps/subsumptionPass.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import {
+  SUBSUMPTION_RULES as DATA_SUBSUMPTION_RULES,
+} from '../../src/data/institutionLadders.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const SEED = 'joins-subsumption-0';
@@ -54,9 +57,31 @@ function subsume(instNames) {
   return insts.map(i => i.name);
 }
 
+/**
+ * Upstream producers and sole chain processors. No rule may list one as a
+ * `lesser` — deleting them deactivates the chains their consumers imply and
+ * severs the export gates that name them by exact string.
+ *
+ * Module-scoped because two tests read it: the table lint below enforces it
+ * against every rule, and the tannery test asserts its own membership.
+ */
+const PROTECTED_PRODUCERS = new Set([
+  'salt works', 'vintner', 'dairy farmer', 'shepherd',
+  'charcoal burner', 'mine (open cast)',
+  // 'Tannery' is the sole hide→leather processor, and the export gate for
+  // Tanned leather names it by EXACT string (requiredInstitution: 'Tannery').
+  // Absorbing it into any greater — the retired furrier's-district rule did
+  // exactly this — silently severs leather export.
+  'tannery',
+]);
+
 // ── Rule-table lints ────────────────────────────────────────────────────────
 
 describe('SUBSUMPTION_RULES table invariants', () => {
+  test('the step compatibility export is the data leaf single writer', () => {
+    expect(SUBSUMPTION_RULES).toBe(DATA_SUBSUMPTION_RULES);
+  });
+
   test('no rule names itself: greater never equals one of its own lessers', () => {
     for (const { greater, lesser } of SUBSUMPTION_RULES) {
       for (const l of lesser) {
@@ -66,16 +91,11 @@ describe('SUBSUMPTION_RULES table invariants', () => {
   });
 
   test('chain producers are not subsumable by their consumers', () => {
-    // These institutions are upstream producers / sole chain processors
-    // (salt, fuel, wool, dairy, wine, mining). No rule may list them as a
-    // lesser — deleting them deactivates the chains their consumers imply.
-    const protectedProducers = new Set([
-      'salt works', 'vintner', 'dairy farmer', 'shepherd',
-      'charcoal burner', 'mine (open cast)',
-    ]);
+    // PROTECTED_PRODUCERS (module scope) names the upstream producers and sole
+    // chain processors — salt, fuel, wool, dairy, wine, mining, leather.
     for (const { greater, lesser } of SUBSUMPTION_RULES) {
       for (const l of lesser) {
-        expect(protectedProducers.has(l.toLowerCase()),
+        expect(PROTECTED_PRODUCERS.has(l.toLowerCase()),
           `rule "${greater}" must not absorb producer "${l}"`).toBe(false);
       }
     }
@@ -92,12 +112,31 @@ describe('SUBSUMPTION_RULES table invariants', () => {
     }
   });
 
-  test('tannery is not absorbed by the established tanner (leather gates key on it)', () => {
-    for (const { greater, lesser } of SUBSUMPTION_RULES) {
-      if (greater.toLowerCase() === 'tanner (established)') {
-        expect(lesser.map(l => l.toLowerCase())).not.toContain('tannery');
-      }
-    }
+  test('no rule ranks a tanner above the tannery, and the tannery is protected by name', () => {
+    // WHAT THIS REPLACED (2026-07-28, queue EP-f): this test used to guard on
+    // `greater.toLowerCase() === 'tanner (established)'` — a greater that has
+    // never existed in SUBSUMPTION_RULES. The body therefore never ran, and the
+    // rule that actually ate the tannery ("furrier's district") sailed straight
+    // past a test named for exactly that hazard. The assertions below read the
+    // live table instead of guarding on a string it does not contain.
+    const greaters = SUBSUMPTION_RULES.map(rule => rule.greater.toLowerCase());
+    // LIVENESS: the table is populated and its greaters really are the
+    // lowercase catalog vocabulary the /tanner/ scan below is asking about. If
+    // the shape drifts (renamed key, uppercased values, emptied table) these
+    // fail FIRST, so the scan can never report "no tanner greaters" vacuously.
+    expect(greaters.length).toBeGreaterThan(30);
+    expect(greaters).toContain('fish market');
+    // A tanner is a same-trade PEER of the tannery, never a scale rung above
+    // it, so no greater may be a tanner of any kind.
+    expect(
+      greaters.filter(greater => /tanner/i.test(greater)),
+      'a tanner appeared as a subsumption greater — tanner and tannery are peers '
+      + 'in the same trade, and absorbing the tannery severs the Tanned leather '
+      + 'export gate, which names it by exact string',
+    ).toEqual([]);
+    // And the producer guard carries the tannery by name, so the table lint
+    // above reds if ANY rule (not just a tanner) ever lists it as a lesser.
+    expect([...PROTECTED_PRODUCERS]).toContain('tannery');
   });
 
   test('every lesser resolves to an exact catalog name (vocabulary join)', () => {
@@ -192,8 +231,18 @@ describe('applySubsumption matcher guards', () => {
 // ── Golden seeded generations ───────────────────────────────────────────────
 
 describe('golden settlements: DM-visible truths survive the full pipeline', () => {
-  test('seeded city keeps its required Multiple courthouses and parish network beside a Cathedral', () => {
-    const city = gen({ settType: 'city', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' });
+  test('pipeline city keeps its required Multiple courthouses and parish network beside a forced Cathedral', () => {
+    // Cathedral is optional. Force the greater into the integration fixture so
+    // this test exercises subsumption, not a seed-specific probability roll.
+    const city = gen({
+      settType: 'city',
+      culture: 'germanic',
+      terrain: 'grassland',
+      tradeRouteAccess: 'road',
+      _institutionToggles: {
+        'city::Religious::Cathedral (10,000+ only)': { allow: true, require: true },
+      },
+    });
     const n = names(city);
     expect(n.some(x => x.toLowerCase().includes('cathedral'))).toBe(true);
     expect(n).toContain('Multiple courthouses');
@@ -212,8 +261,18 @@ describe('golden settlements: DM-visible truths survive the full pipeline', () =
     }
   });
 
-  test('seeded town with a brewery KEEPS it', () => {
-    const town = gen({ settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' });
+  test('pipeline town keeps an explicitly required Brewery', () => {
+    // Brewery is optional. The explicit toggle makes the producer the invariant
+    // under test and keeps culture-weighting changes from invalidating the setup.
+    const town = gen({
+      settType: 'town',
+      culture: 'germanic',
+      terrain: 'grassland',
+      tradeRouteAccess: 'road',
+      _institutionToggles: {
+        'town::Crafts::Brewery': { allow: true, require: true },
+      },
+    });
     expect(names(town)).toContain('Brewery');
   });
 
@@ -225,11 +284,14 @@ describe('golden settlements: DM-visible truths survive the full pipeline', () =
   });
 
   test('a force-toggled institution survives subsumption by its greater', () => {
-    // Brewer is a subsumption lesser of Brewery; this town rolls a Brewery
-    // on this seed, so an unprotected Brewer would be absorbed.
+    // Brewer is a subsumption lesser of Brewery. Force both sides of the
+    // relationship so this tests the protection rule directly.
     const town = gen({
       settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road',
-      _institutionToggles: { 'town::Crafts::Brewer': { allow: true, require: true } },
+      _institutionToggles: {
+        'town::Crafts::Brewery': { allow: true, require: true },
+        'town::Crafts::Brewer': { allow: true, require: true },
+      },
     });
     const n = names(town);
     expect(n).toContain('Brewery');

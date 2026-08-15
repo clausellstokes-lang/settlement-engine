@@ -6,6 +6,7 @@ import {
   deriveMagicPosture,
   deriveBlockadeRelief,
   deriveDossierViewModel,
+  deriveGranaryOutlook,
 } from '../../../src/domain/display/dossierViewModel.js';
 import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
 
@@ -114,7 +115,7 @@ describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
     expect(m.legality).toBe('regulated');
     expect(m.cost).toBe('costly');
     expect(m.risk).toBeTruthy();
-    expect(m.display).toBe('Availability moderate: regulated, costly services, moderate risk');
+    expect(m.display).toBe('Availability moderate — regulated, costly services, moderate risk');
   });
 
   it('emits the four role lines', () => {
@@ -231,14 +232,14 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
 
   it('genuinely uncovered keeps the no-import-channel clause', () => {
     const r = deriveViability(isolated({}));
-    expect(r.summary).toMatch(/survives on local production and stored reserves \(no meaningful import channel reaches it\)/);
+    expect(r.summary).toMatch(/survives on local production and stored reserves — no meaningful import channel reaches it/);
   });
 
   it('uncovered but magic-fed credits magical provision alongside local production', () => {
     // Isolated hamlets can have importCoverage 0 with a druidic offset —
     // magic supplements local production without any import channel.
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
-    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves \(no meaningful import channel reaches it\)/);
+    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it/);
   });
 });
 
@@ -256,7 +257,7 @@ describe('deriveBlockadeRelief (Wave 8 — blockadeBypass gains its reader)', ()
       // The throughput caveat is load-bearing: the bypass carries at most the
       // circle's FOOD_IMPORT_RATES share — a port city still starves on the
       // overflow, and the prose must not promise otherwise.
-      display: "Supplies arrive by teleportation circle despite the siege, as much as the circle can carry.",
+      display: "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput.",
     });
   });
 
@@ -297,6 +298,73 @@ describe('deriveBlockadeRelief (Wave 8 — blockadeBypass gains its reader)', ()
     const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: 'teleport' }));
     expect(sanitizePublicValue({ blockade: b })).toEqual({ blockade: b });
     for (const key of Object.keys(b)) {
+      expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
+    }
+  });
+});
+
+describe('deriveGranaryOutlook (SEASONS-A — the seasonal food read)', () => {
+  const seasonal = (patch = {}, fsPatch = {}) => ({
+    economicState: {
+      foodSecurity: {
+        deficitPct: 5,
+        storageMonths: 1.3,
+        ...fsPatch,
+        stockpile: {
+          capacityMonths: 5,
+          reliefPct: 0,
+          season: 'winter',
+          seasonWeek: 44,
+          seasonalSwingPct: -19.4,
+          seasonalEvent: null,
+          ...patch,
+        },
+      },
+    },
+  });
+
+  it('is unavailable without a seasonal record (flag-off / never-pulsed ⇒ silent)', () => {
+    expect(deriveGranaryOutlook(null).available).toBe(false);
+    expect(deriveGranaryOutlook({ economicState: { foodSecurity: {} } }).available).toBe(false);
+    // a flag-off pulse record (no season field) stays unavailable
+    expect(deriveGranaryOutlook({
+      economicState: { foodSecurity: { stockpile: { capacityMonths: 5, blockaded: false } } },
+    }).available).toBe(false);
+  });
+
+  it('reads the season + a level-vs-capacity band, DM-speakable', () => {
+    const o = deriveGranaryOutlook(seasonal());
+    expect(o.available).toBe(true);
+    expect(o.season).toBe('winter');
+    expect(o.band).toBe('thin'); // 1.3 of 5 months
+    expect(o.display).toContain('Winter');
+    expect(o.display).toContain('thin');
+  });
+
+  it('projects "stores will last until ~X" from the CURRENT drawdown rate', () => {
+    // reliefPct 20 ⇒ a week costs (20/100)×(3/13) ≈ 0.046 months ⇒ ~28 weeks
+    // from week 44 ⇒ week ~72 ⇒ ~week 20 of next year ⇒ summer.
+    const o = deriveGranaryOutlook(seasonal({ reliefPct: 20 }));
+    expect(o.lastsUntil).toMatch(/^~(early|mid|late) (spring|summer)$/);
+    // a granary already at zero while releasing reads as spent
+    const spent = deriveGranaryOutlook(seasonal({ reliefPct: 20 }, { storageMonths: 0 }));
+    expect(spent.lastsUntil).toBe('already spent');
+    // no drawdown ⇒ no projection
+    expect(deriveGranaryOutlook(seasonal()).lastsUntil).toBe(null);
+  });
+
+  it('names the seeded year character (hard winter / drought / bountiful)', () => {
+    expect(deriveGranaryOutlook(seasonal({ seasonalEvent: 'hard_winter' })).yearEvent)
+      .toBe('A hard winter grips the year.');
+    expect(deriveGranaryOutlook(seasonal({ seasonalEvent: 'drought' })).display)
+      .toContain('Drought struck the harvest.');
+    expect(deriveGranaryOutlook(seasonal()).yearEvent).toBe(null);
+  });
+
+  it('every field survives the public-safe projection (denylist check)', () => {
+    const o = deriveGranaryOutlook(seasonal({ seasonalEvent: 'bountiful' }));
+    expect(sanitizePublicValue({ granary: o })).toEqual({ granary: o });
+    for (const key of Object.keys(o)) {
       expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
     }
   });

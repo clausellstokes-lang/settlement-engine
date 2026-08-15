@@ -1,5 +1,5 @@
 import { GOLD, GOLD_DEEP, INK, MUTED, BORDER, CARD, FS, SP, sans } from '../theme.js';
-import { COPY } from '../../copy/strings.js';
+import { tx } from '../../copy/index.js';
 
 /**
  * primitives/LifecycleSpine — the settlement's journey, shown once.
@@ -14,6 +14,9 @@ import { COPY } from '../../copy/strings.js';
  *
  * Two channels carry each step (P7): a numbered/filled marker AND a label,
  * plus color. The current step is announced with aria-current="step".
+ *
+ * Copy comes from the single copy registry (`lifecycle.labels`/`lifecycle.hints`
+ * in copy/en.js), read via tx() — the old copy/strings.js twin is retired.
  *
  * @param {Object} props
  * @param {'draft'|'saved'|'canon'|'simulated'|'shared'} [props.stage='draft']
@@ -31,7 +34,7 @@ function Step({ id, index, here, active, compact, onStep, label, hint }) {
       style={{
         width: dot, height: dot, borderRadius: '50%', flexShrink: 0,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        background: here ? GOLD : active ? 'rgba(201,162,76,0.18)' : CARD,
+        background: here ? GOLD : active ? `${GOLD}2e` : CARD,
         border: `1.5px solid ${active ? GOLD : BORDER}`,
         color: here ? INK : active ? GOLD_DEEP : MUTED,
         fontFamily: sans, fontSize: compact ? FS.micro : FS.xs, fontWeight: 800,
@@ -87,8 +90,8 @@ function Step({ id, index, here, active, compact, onStep, label, hint }) {
 
 export default function LifecycleSpine({ stage = 'draft', onStep, compact = false }) {
   const idx = Math.max(0, STAGES.indexOf(stage));
-  const labels = COPY.lifecycle?.labels || {};
-  const hints = COPY.lifecycle?.hints || {};
+  const labels = tx('lifecycle.labels') || {};
+  const hints = tx('lifecycle.hints') || {};
   return (
     <ol
       aria-label="Settlement lifecycle"
@@ -112,7 +115,7 @@ export default function LifecycleSpine({ stage = 'draft', onStep, compact = fals
           />
           {i < STAGES.length - 1 && (
             <span aria-hidden="true" style={{
-              width: compact ? 12 : 20, height: 2, borderRadius: 2,
+              width: compact ? 12 : 20, height: 2,
               background: i < idx ? GOLD : BORDER,
             }} />
           )}

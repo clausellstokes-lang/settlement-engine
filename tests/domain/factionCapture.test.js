@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { advanceFactionCapture, settlementCaptureState } from '../../src/domain/worldPulse/factionCapture.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const snap = ({ secure }) => ({
   settlements: [{

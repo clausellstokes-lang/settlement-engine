@@ -33,6 +33,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import {
@@ -455,7 +456,12 @@ describe('join: the record consumes no rng and the slice strip never eats the ke
   });
 
   test('stripDerivedConfigKeys preserves eventConditions (it is user input, not derived)', () => {
-    expect(DERIVED_CONFIG_KEYS).not.toContain('eventConditions');
+    // 'stressType' is the liveness anchor: it is a real derived key that this same
+    // test strips below, so an emptied or renamed DERIVED_CONFIG_KEYS cannot make
+    // the exclusion pass by accident.
+    expectAbsentWithAnchor(
+      DERIVED_CONFIG_KEYS, 'eventConditions', 'stressType', 'derived-key roster',
+    );
     const stripped = stripDerivedConfigKeys({
       stressType: 'plague',
       eventConditions: [{ archetype: 'trade_route_cut' }],

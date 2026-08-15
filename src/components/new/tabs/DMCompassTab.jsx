@@ -14,7 +14,7 @@
  */
 
 import { FS, swatch, MUTED } from '../../theme.js';
-import { Section, TabIntro } from '../Primitives';
+import { Section } from '../Primitives';
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
@@ -25,7 +25,7 @@ const has = (x) => x != null && (Array.isArray(x) ? x.length > 0 : typeof x === 
 function BulletRow({ color, children }) {
   return (
     <div style={{ display: 'flex', gap: 9, alignItems: 'flex-start', padding: '6px 0' }}>
-      <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 2, borderRadius: 1, background: color }} />
+      <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 2, background: color }} />
       <div style={{ flex: 1, fontSize: FS['12.5'], color: swatch.inkMag, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
         {children}
       </div>
@@ -99,7 +99,7 @@ function FrictionPointsPanel({ points }) {
         Small-scale grievances between named parties. Surface them in scenes to texture daily life.
       </div>
       {points.map((p, i) => (
-        <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: 'rgba(160,118,42,0.06)', border: '1px solid rgba(160,118,42,0.18)', borderRadius: 5 }}>
+        <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: swatch['#FAF8F4'], border: '1px solid #d8c090'}}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>
               {p.who}
@@ -162,7 +162,6 @@ export default function DMCompassTab({ settlement: s }) {
 
   return (
     <div style={{ padding: '14px 18px' }}>
-      <TabIntro tabKey="dmCompass" />
       <CompassPanel           compass={compass} />
       <IdentityMarkersPanel   markers={markers} />
       <FrictionPointsPanel    points={points} />

@@ -20,6 +20,13 @@ const mocks = vi.hoisted(() => ({
   },
   storeState: {
     auth: { user: { id: 'user-1' } },
+    // GalleryPage's owner-card hydration reads the same owner-scoped cache
+    // contract as the Library. These tests start from an already-hydrated cache
+    // because they exercise gallery behavior, not the hydration seam itself.
+    savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: 'user-1',
+    savedSettlementsHydrationGeneration: 0,
+    setSavedSettlements: vi.fn(),
   },
   nav: {
     navigate: vi.fn(),
@@ -27,9 +34,13 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock('../../src/lib/gallery.js', () => mocks.galleryApi);
-vi.mock('../../src/store/index.js', () => ({
-  useStore: selector => selector(mocks.storeState),
-}));
+vi.mock('../../src/store/index.js', () => {
+  function useStore(selector) {
+    return selector(mocks.storeState);
+  }
+  useStore.getState = () => mocks.storeState;
+  return { useStore };
+});
 vi.mock('../../src/hooks/useRoute.js', () => mocks.nav);
 vi.mock('../../src/components/PublicDossierView.jsx', () => ({
   default: ({ dossier }) => <div data-testid="public-dossier">{dossier?.settlement?.name}</div>,
@@ -93,6 +104,33 @@ describe('GalleryPage', () => {
       expect(mocks.galleryApi.fetchPublicDossier).toHaveBeenCalledWith('bramblefen');
       expect(screen.getByText('Back to gallery')).toBeTruthy();
     });
+  });
+
+  // RESTORATION #10 — the shared Page frame + PageHeader identity and the
+  // Segmented view switch were dropped at the composite (the tabs went
+  // identity-less). This pins that the index carries the page title, the
+  // secondary "Forge your own" CTA, and the labelled 3-tab switch.
+  test('carries the shared page identity: header, forge CTA, and the tab switch', async () => {
+    // A non-empty gallery so the empty-state's own forge invitation stays hidden
+    // and the ONE forge CTA on screen is the shared page header's (the identity
+    // under test). A duplicate here would mean GalleryList kept its old header.
+    mocks.galleryApi.fetchPublicGallery.mockResolvedValue({
+      items: [{ id: 's1', slug: 'x', name: 'Xtown', tier: 'town', netVotes: 0, viewCount: 0, commentCount: 0 }],
+      total: 1,
+      hasMore: false,
+    });
+    render(<GalleryPage onNavigate={vi.fn()} />);
+
+    await screen.findByText('Xtown');
+    // Exactly one page title (the shared PageHeader), not two.
+    expect(screen.getByRole('heading', { name: 'Gallery' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /forge your own/i })).toBeTruthy();
+
+    const group = screen.getByRole('group', { name: 'Gallery view' });
+    expect(group).toBeTruthy();
+    for (const label of ['Settlements', 'Maps', 'Campaigns']) {
+      expect(screen.getByRole('button', { name: label })).toBeTruthy();
+    }
   });
 
   test('upvotes through the gallery API when signed in', async () => {

@@ -39,9 +39,38 @@ import { noLig } from '../lib/format.js';
 // Visible-field treatment (only used when `showField=true`, i.e. NotesField).
 const FIELD_BG = '#fdf9f0';
 
-function safeName(raw) {
-  if (!raw) return `f_${Math.random().toString(36).slice(2, 9)}`;
-  return String(raw).replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 80);
+/**
+ * FNV-1a 32-bit — kept as a local 8-line copy (identical constants to
+ * kernel/proseHash.js) so this primitive stays a dependency-light PDF leaf with no
+ * new import edge. Pure: no rng, no wall clock — same string ⇒ same hash.
+ * @param {string} str @returns {number} 32-bit unsigned hash
+ */
+function fnv1a32(str) {
+  let h = 0x811c9dc5;
+  const s = String(str);
+  for (let i = 0; i < s.length; i += 1) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+
+/**
+ * Sanitize a form-field name. A provided `raw` name is normalized to the PDF
+ * field-name charset. A FALSY name falls back to a DETERMINISTIC id hashed from the
+ * content the call site actually has (`seed`), so the SAME document always emits the
+ * SAME field name.
+ *
+ * M21 (determinism-leak): the previous fallback was `f_` + a random base-36 draw,
+ * which churned the field id on every render and broke the same-seed PDF replay
+ * contract. The `fld_` prefix is chosen so the deterministic id is NOT itself the
+ * `/^f_/` random-suffix symptom that the PDF_FIELD_MANIFEST walker bans.
+ * @param {string | undefined | null} raw  the caller-supplied field name
+ * @param {string} [seed]  stable content the call site has (see EditableText/Prose)
+ */
+function safeName(raw, seed) {
+  if (raw) return String(raw).replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 80);
+  return `fld_${fnv1a32(seed).toString(36)}`;
 }
 
 function pickFontSize(style) {
@@ -96,7 +125,7 @@ export function EditableText({
   };
   return (
     <TextInput
-      name={safeName(name)}
+      name={safeName(name, `t:${value}`)}
       defaultValue={value || (fallback ? noLig(fallback) : '')}
       fontSize={fs}
       maxLength={maxLength}
@@ -152,7 +181,7 @@ export function EditableProse({
   };
   return (
     <TextInput
-      name={safeName(name)}
+      name={safeName(name, `p:${value}`)}
       defaultValue={value}
       multiline
       fontSize={fs}

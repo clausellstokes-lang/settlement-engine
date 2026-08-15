@@ -3,148 +3,237 @@
  *
  * The single-dossier flow:
  *   1. Anonymous visitor generates a settlement on the homepage hero.
- *   2. Clicks "Buy this dossier" — we stash the settlement (see
- *      lib/pendingDossier) and redirect to Stripe.
+ *   2. Clicks "Buy this dossier" — we persist the settlement (server-side in
+ *      dossier_purchases + a local stash, see lib/pendingDossier) and redirect
+ *      to Stripe.
  *   3. Stripe collects payment, then redirects back with
- *      ?checkout=success&product=single_dossier.
- *   4. App.jsx routes that combination to this page.
+ *      ?checkout=success&product=single_dossier&session_id=…&dt=<token>.
+ *   4. App.jsx routes that here, forwarding session_id + dt.
  *
- * Responsibilities here:
- *   - Pull the dossier back out of the stash.
- *   - Render a thank-you with the settlement's name so the user can
- *     see *what* they bought (not just a generic receipt).
- *   - Generate the PDF client-side and trigger a download.
- *   - Encourage account creation so they can keep + edit the dossier
- *     (the purchase grants the PDF, not an account).
- *   - Handle the failure case where the stash is empty (e.g., they
- *     opened the success URL in a different browser): explain what
- *     happened, point at support.
+ * Responsibilities (findings F21/F23):
+ *   - Verify the paid Stripe session server-side BEFORE releasing the PDF.
+ *   - PREFER the server-returned settlement (survives a lost/overwritten local
+ *     stash or a different device); fall back to the local stash only when the
+ *     server row is missing.
+ *   - Distinguish a TRANSIENT verify failure (rate limit / Stripe blip →
+ *     offer Retry, keep the stash) from a TERMINAL mismatch (→ support card).
+ *   - Generate the PDF client-side and auto-download it once verified.
+ *   - Encourage account creation to keep + edit the dossier.
  */
 
-import { useEffect, useRef, useState } from 'react';
-import { Download, LogIn, ArrowRight } from 'lucide-react';
-import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
-import { attachDossierClaimSession } from '../lib/dossierClaimStash.js';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { Check, Download, AlertCircle, LogIn, ArrowRight, RefreshCw } from 'lucide-react';
+import {
+  readPendingDossier,
+  readPendingDossierByToken,
+  clearPendingDossier,
+} from '../lib/pendingDossier.js';
 import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
+import { FREE_SAVE_LIMIT } from '../config/tierFacts.js';
+import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import { GOLD, INK, BORDER, CARD, CARD_ALT, PARCH, PARCH_100, ELEV, sans, serif_, SP, R, FS, swatch, RED } from './theme.js';
+import { flag } from '../lib/flags.js';
+import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
+import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
 
+// M11: with Turnstile active, how long the INITIAL verify holds for the widget's
+// token before firing without one. The tokenless fire is the pre-gate fallback —
+// the server never blocks a paid buyer on a missing token — so the deadline only
+// bounds how long we wait for the stronger call, never whether delivery happens.
+const CAPTCHA_TOKEN_DEADLINE_MS = 4000;
+
+/** Resolve the returning purchase: URL (session_id + dt) first, then the stash. */
+function resolveReturn() {
+  let urlSession = null;
+  let urlToken = null;
+  if (typeof window !== 'undefined') {
+    const p = new URLSearchParams(window.location.search);
+    urlSession = p.get('session_id');
+    urlToken = p.get('dt');
+  }
+  if (urlSession && urlToken) {
+    return { sessionId: urlSession, token: urlToken, stash: readPendingDossierByToken(urlToken) };
+  }
+  // Fallback for the same-device single-purchase flow: the most-recent PAID stash.
+  const pending = readPendingDossier();
+  return {
+    sessionId: urlSession || pending?.sessionId || null,
+    token: urlToken || pending?.checkoutToken || null,
+    stash: (urlToken ? readPendingDossierByToken(urlToken) : pending) || pending || null,
+  };
+}
+
 export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }) {
-  const [pending, setPending] = useState(() => readPendingDossier());
+  // Resolved once on mount — the URL params are stable for this landing.
+  const [ret] = useState(resolveReturn);
+  const { sessionId, token } = ret;
+
+  // The dossier we render: server-returned settlement is preferred; the local
+  // stash is the initial fallback until verification returns.
+  const [settlement, setSettlement] = useState(() => ret.stash?.settlement || null);
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState(null);
-  const [verification, setVerification] = useState(() => (
-    pending?.settlement && pending?.sessionId && pending?.checkoutToken
-      ? { status: 'checking', error: null }
-      : {
-          status: 'failed',
-          error: 'The paid checkout session could not be matched to this dossier.',
-        }
-  ));
-  // Ref-based guard avoids the setState-in-effect warning. The auto-
-  // download fires exactly once per mount even under React 19 strict-
-  // mode double-invocation.
-  const autoDownloadedRef = useRef(false);
 
-  useEffect(() => {
+  // status: 'checking' | 'verified' | 'retryable' | 'failed'
+  const canAttempt = Boolean(sessionId && token);
+  const [verification, setVerification] = useState(() => (
+    canAttempt
+      ? { status: 'checking', error: null }
+      : { status: 'failed', error: 'The paid checkout session could not be matched to this dossier.' }
+  ));
+
+  const autoDownloadedRef = useRef(false);
+  const analyticsFiredRef = useRef(false);
+  // Wave-D human verification (INERT until activated): a managed-Turnstile token
+  // held in a ref so it rides the verify call WITHOUT re-running the mount-time
+  // verification. This is a POST-PAYMENT step — verify-single-dossier verifies the
+  // token ONLY IF present and NEVER blocks a paid buyer on a missing/blocked one.
+  // M11: the widget mints that token ASYNCHRONOUSLY, so with Turnstile active the
+  // INITIAL verify is gated (see the mount effect): it waits for the token — firing
+  // the moment it lands — or for CAPTCHA_TOKEN_DEADLINE_MS, whichever comes first.
+  const captchaTokenRef = useRef(null);
+  // The M11 gate lives in refs (not state) so the widget's onToken callback can
+  // release it without re-rendering or re-running the mount effect. `fire` is
+  // installed by the mount effect while Turnstile is active and nulled once used.
+  const initialGateRef = useRef({ timer: null, fire: null });
+
+  // The async verification. Kept free of any SYNCHRONOUS setState so it is safe
+  // to invoke directly from the mount effect (results land only in .then/.catch).
+  const doVerify = useCallback(() => {
+    if (!canAttempt) return () => {};
     let cancelled = false;
-    if (!pending?.settlement || !pending?.sessionId || !pending?.checkoutToken) {
-      return undefined;
-    }
-    verifySingleDossierPurchase(pending.sessionId, pending.checkoutToken)
-      .then(() => {
-        if (!cancelled) setVerification({ status: 'verified', error: null });
-        // Arm the same-device retro-claim voucher with the paid session id (108).
-        // The voucher was stashed at checkout without a session id; binding it
-        // here lets a later sign-up + save of THIS settlement silently attach the
-        // durable right. Best-effort: a missing/expired voucher just means the
-        // one-shot stays a one-shot.
-        try { attachDossierClaimSession(pending.sessionId); } catch { /* non-fatal */ }
-      })
-      .catch(error => {
-        if (!cancelled) {
+    verifySingleDossierPurchase(sessionId, token, captchaTokenRef.current || undefined)
+      .then(data => {
+        if (cancelled) return;
+        // Prefer the server-persisted settlement; fall back to the local stash.
+        const resolved = data?.settlement || readPendingDossierByToken(token)?.settlement || settlement || null;
+        if (!resolved) {
           setVerification({
             status: 'failed',
-            error: error.message || 'Purchase verification failed.',
+            error: 'Your payment was confirmed, but this device no longer has the dossier and the server copy could not be found.',
           });
+          return;
         }
+        setSettlement(resolved);
+        setVerification({ status: 'verified', error: null });
+      })
+      .catch(error => {
+        if (cancelled) return;
+        // Transient (rate limit / Stripe blip / network) → offer Retry and KEEP
+        // the stash. Only a terminal mismatch shows the support card.
+        setVerification({
+          status: error?.transient ? 'retryable' : 'failed',
+          error: error?.message || 'Purchase verification failed.',
+        });
       });
     return () => { cancelled = true; };
-  }, [pending]);
+  }, [canAttempt, sessionId, token, settlement]);
 
-  // Record the purchase only after Stripe has verified the session.
-  const analyticsFiredRef = useRef(false);
-  useEffect(() => {
-    if (analyticsFiredRef.current) return;
-    if (!pending?.settlement) return;
-    if (verification.status !== 'verified') return;
-    analyticsFiredRef.current = true;
-    track(EVENTS.SINGLE_DOSSIER_PURCHASED, { tier: pending.settlement.tier });
-    Funnel.paidAction({ kind: 'single_dossier' });
-  }, [pending, verification.status]);
+  // Retry (button) resets to the checking state, then re-runs verification.
+  const retryVerify = useCallback(() => {
+    setVerification({ status: 'checking', error: null });
+    doVerify();
+  }, [doVerify]);
 
-  // Auto-trigger the download once on mount when we have a stash —
-  // the user paid for the PDF, they shouldn't have to hunt for the
-  // button. The "Download again" affordance below lets them retrigger.
+  // Token (or null on degradation) from the managed widget: stash it for the
+  // verify call, and release a still-waiting initial verify at once — a null
+  // means no token is coming, so waiting out the deadline would be pure delay.
+  const handleCaptchaToken = useCallback((tok) => {
+    captchaTokenRef.current = tok;
+    if (initialGateRef.current.fire) initialGateRef.current.fire();
+  }, []);
+
   useEffect(() => {
-    if (autoDownloadedRef.current) return;
-    if (!pending?.settlement) return;
-    if (verification.status !== 'verified') return;
-    autoDownloadedRef.current = true;
-    handleDownload();
+    // Flag off (the default) or nothing to attempt: fire synchronously — the
+    // exact pre-gate behavior, no timer (doVerify no-ops when !canAttempt).
+    if (!flag('perimeterCaptcha') || !canAttempt) return doVerify();
+    // Turnstile active (M11): hold the initial verify for the minted token or
+    // the deadline, whichever lands first. Both release paths funnel through
+    // gate.fire, which disarms itself so a token/timer race cannot double-fire.
+    let cancelVerify = null;
+    const gate = initialGateRef.current;
+    gate.fire = () => {
+      gate.fire = null;
+      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
+      cancelVerify = doVerify();
+    };
+    gate.timer = setTimeout(() => { if (gate.fire) gate.fire(); }, CAPTCHA_TOKEN_DEADLINE_MS);
+    return () => {
+      gate.fire = null;
+      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
+      if (cancelVerify) cancelVerify();
+    };
+    // Run once on mount; Retry re-invokes doVerify imperatively.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pending, verification.status]);
+  }, []);
 
-  async function handleDownload() {
-    if (!pending?.settlement) return;
-    if (verification.status !== 'verified') return;
+  const handleDownload = useCallback(async () => {
+    if (!settlement || verification.status !== 'verified') return;
     setDownloading(true); setDownloadError(null);
     try {
-      // Lazy import keeps the @react-pdf/renderer chunk out of the
-      // initial bundle for users who land on this page from a search
-      // engine but never actually trigger a download.
+      // Lazy import keeps the @react-pdf/renderer chunk out of the initial
+      // bundle for users who land here but never trigger a download.
       const { generateSettlementPDF } = await import('../utils/generateSettlementPDF.js');
-      await generateSettlementPDF(pending.settlement, { isAnonymous: false });
+      await generateSettlementPDF(settlement, { isAnonymous: false });
     } catch (e) {
       console.error('[SingleDossierSuccess] PDF generation failed:', e);
       setDownloadError(e.message || 'Could not generate the PDF.');
     } finally {
       setDownloading(false);
     }
-  }
+  }, [settlement, verification.status]);
+
+  // Record the purchase only after Stripe has verified the session.
+  useEffect(() => {
+    if (analyticsFiredRef.current) return;
+    if (!settlement) return;
+    if (verification.status !== 'verified') return;
+    analyticsFiredRef.current = true;
+    track(EVENTS.SINGLE_DOSSIER_PURCHASED, { tier: settlement.tier });
+    Funnel.paidAction({ kind: 'single_dossier' });
+  }, [settlement, verification.status]);
+
+  // Auto-trigger the download once verified — the user paid for the PDF.
+  useEffect(() => {
+    if (autoDownloadedRef.current) return;
+    if (!settlement) return;
+    if (verification.status !== 'verified') return;
+    autoDownloadedRef.current = true;
+    handleDownload();
+  }, [settlement, verification.status, handleDownload]);
 
   function handleKeep() {
-    // The user has their PDF. Clear the stash so the next anonymous
-    // generation starts clean. We do NOT clear the in-memory store —
-    // if they want to keep editing they'll need to sign up, which
-    // routes them through normal save flow.
-    clearPendingDossier();
-    setPending(null);
+    // The user has their PDF. Clear THIS dossier's stash (not every stash) so a
+    // concurrent purchase in another tab isn't wiped. We do not touch the
+    // in-memory store — keeping/editing routes through the normal save flow.
+    if (token) clearPendingDossier(token);
     onSignUp?.();
   }
 
-  // ── Stash-missing failure mode ────────────────────────────────────────
-  // Someone landed on the success URL without a stash. Most likely:
-  // they completed Stripe in one tab and opened the success link in
-  // another. We can't show them the dossier (we never had it on this
-  // device), so explain and offer recovery.
-  if (!pending?.settlement || verification.status === 'failed') {
+  function handleGenerateAnother() {
+    if (token) clearPendingDossier(token);
+    onGenerateAnother?.();
+  }
+
+  // ── Terminal failure (mismatch / unrecoverable) → support card ────────────
+  if (verification.status === 'failed') {
     return (
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
         padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
+        <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
         <h1 style={{
-          margin: 0, fontFamily: serif_, fontSize: FS.xxl, color: INK,
+          margin: `${SP.md}px 0 0`, fontFamily: serif_, fontSize: FS.xxl, color: INK,
         }}>
-          We could not verify this dossier
+          We couldn’t verify this dossier
         </h1>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
@@ -155,12 +244,13 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           so the purchase can be recovered safely.
         </p>
         <a
-          href="mailto:settlementforge@gmail.com?subject=Single%20dossier%20recovery"
+          href={supportMailto('Single dossier recovery')}
           style={{
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,
-            background: GOLD, color: swatch.white,
-            border: 'none', borderRadius: R.lg,
+            // Ink-on-gold (the house AA badge pairing), square-cut instrument.
+            background: GOLD, color: INK,
+            border: 'none',
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             textDecoration: 'none',
           }}
@@ -171,33 +261,78 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     );
   }
 
-  const settlementName = pending.settlement.name || 'your settlement';
+  // ── Transient failure → Retry (stash preserved) ───────────────────────────
+  if (verification.status === 'retryable') {
+    return (
+      <div style={{
+        maxWidth: 560, margin: `${SP.xxl}px auto`,
+        padding: `${SP.xxl}px ${SP.xl}px`,
+        background: CARD, border: `1px solid ${BORDER}`,
+        fontFamily: sans, color: INK, textAlign: 'center',
+      }}>
+        <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
+        <h1 style={{ margin: `${SP.md}px 0 0`, fontFamily: serif_, fontSize: FS.xxl, color: INK }}>
+          Still confirming your purchase
+        </h1>
+        <p style={{
+          margin: `${SP.sm}px auto ${SP.lg}px`, maxWidth: 420,
+          fontSize: FS.md, color: BODY, lineHeight: 1.55,
+        }}>
+          {verification.error || 'We hit a temporary snag confirming the payment.'}
+          {' '}Your dossier is safe. This usually clears in a few seconds.
+        </p>
+        <Button variant="primary" size="lg" icon={<RefreshCw size={16} />} onClick={retryVerify}>
+          Try again
+        </Button>
+        <p style={{ margin: `${SP.md}px auto 0`, maxWidth: 420, fontSize: FS.xs, color: MUTED }}>
+          Still stuck? <a href={supportMailto('Single dossier recovery')} style={{ color: GOLD, fontWeight: 600 }}>Email support</a>.
+        </p>
+      </div>
+    );
+  }
+
+  const settlementName = settlement?.name || 'your settlement';
 
   if (verification.status === 'checking') {
     return (
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`, padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
         <p style={{ margin: `${SP.sm}px 0 0`, color: BODY }}>Checking the paid Stripe session before preparing the PDF.</p>
+        {/* Wave-D human verification (INERT until activated). Managed/invisible;
+            mints a best-effort token for the verify call and releases the M11
+            initial-verify gate. This is post-payment, so the server never blocks
+            delivery on a missing token — renders nothing while the
+            perimeterCaptcha flag is off. */}
+        <CaptchaGate action="verify" onToken={handleCaptchaToken} />
       </div>
     );
   }
 
   return (
     <div style={{
+      // The receipt artifact — a plate on the warm parchment ground; the frame
+      // is a hairline rule, not a rounded shadow-card (depth is ink, not lift).
       maxWidth: 640, margin: `${SP.xxl}px auto`,
       padding: `${SP.xxl}px ${SP.xl}px`,
-      background: `linear-gradient(180deg, ${PARCH} 0%, ${PARCH_100} 100%)`,
+      background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
       border: `1px solid ${BORDER}`,
-      borderRadius: R.xl + 2,
       fontFamily: sans, color: INK, textAlign: 'center',
-      boxShadow: ELEV[2],
     }}>
+      <div style={{
+        width: 56, height: 56,
+        background: GREEN, color: swatch.white,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        margin: '0 auto',
+      }}>
+        <Check size={28} />
+      </div>
+
       <h1 style={{
-        margin: 0, fontFamily: serif_,
+        margin: `${SP.lg}px 0 0`, fontFamily: serif_,
         fontSize: FS['28'], fontWeight: 600, color: INK,
       }}>
         Your dossier is ready
@@ -232,24 +367,38 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             display: 'inline-flex', alignItems: 'center', gap: 6,
             color: RED, fontSize: FS.sm,
           }}>
-            {downloadError}
+            <AlertCircle size={14} /> {downloadError}
           </div>
         )}
 
+        {/* The ruled record block — the receipt artifact: item · price · date,
+            framed by rules (no box). The price stays config-fed. */}
+        <div style={{
+          margin: `${SP.md}px auto 0`, maxWidth: 340,
+          borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`,
+          padding: `${SP.sm}px 0`, textAlign: 'left',
+          display: 'grid', gap: 4, fontFamily: sans,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm }}>
+            <span style={{ fontSize: FS.sm, color: BODY }}>Single dossier</span>
+            <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{SINGLE_DOSSIER.priceLabel}</span>
+          </div>
+          <div style={{ fontSize: FS.xs, color: MUTED }}>
+            {new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date())}
+          </div>
+        </div>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
           fontSize: FS.xs, color: MUTED, lineHeight: 1.55,
         }}>
-          Receipt sent to the email you entered at checkout. Your purchase total
-          was {SINGLE_DOSSIER.priceLabel}.
+          Receipt sent to the email you entered at checkout.
         </p>
       </div>
 
       {/* Sign-up upsell */}
       <div style={{
         marginTop: SP.xxl, padding: `${SP.lg}px ${SP.xl}px`,
-        background: CARD_ALT, border: `1px solid ${BORDER}`,
-        borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
       }}>
         <h2 style={{
           margin: 0, fontFamily: serif_, fontSize: FS.xl, color: INK,
@@ -260,8 +409,8 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           margin: `${SP.sm}px auto 0`, maxWidth: 440,
           fontSize: FS.sm, color: BODY, lineHeight: 1.5,
         }}>
-          A free Wanderer account saves three dossiers, unlocks full-screen edit,
-          and remembers your settings across devices. No card required.
+          A free Wanderer account saves {FREE_SAVE_LIMIT} dossiers and remembers
+          your settings across devices. No card required.
         </p>
         <div style={{
           marginTop: SP.md, display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap',
@@ -278,11 +427,20 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             variant="secondary"
             size="md"
             trailingIcon={<ArrowRight size={14} />}
-            onClick={() => { clearPendingDossier(); onGenerateAnother?.(); }}
+            onClick={handleGenerateAnother}
           >
             Generate another
           </Button>
         </div>
+      </div>
+
+      {/* The colophon — the maker's mark at the receipt's foot, under a rule. */}
+      <div style={{
+        marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${BORDER}`,
+        fontFamily: serif_, fontSize: FS.xs, letterSpacing: '0.14em',
+        textTransform: 'uppercase', color: MUTED,
+      }}>
+        SettlementForge
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import {
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase B2 — STATEFUL ARMIES: attrition + reinforcement + strength-scaled return.
@@ -139,10 +139,15 @@ describe('B2 — OFF byte-identity (the stateful layer is gated)', () => {
     expect(ids(b)).toEqual(ids(a));
   });
 
-  test('a flag-off campaign keeps deployments LIGHT (no strength fields materialize)', () => {
+  test('a flag-off campaign never ENRICHES a deployment: the wind-down returns it home light', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = HOSTILE_EDGES('strong', 'weak');
-    // Even with a pre-seeded LIGHT deployment, the OFF layer never enriches it.
+    // B2's OFF contract is "no strength fields ever materialize". A pre-seeded
+    // deployment under war-off no longer freezes in place (that stranded the
+    // deployed population forever) — the WIND-DOWN resolves it as a withdrawal
+    // and the army marches home (see warWindDown.test.js for conservation).
+    // Either way, the stateful B2 enrichment never runs: nothing in the result
+    // carries currentEffectiveStrength.
     const off = warCampaign({
       edges,
       channels: [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }],
@@ -152,9 +157,9 @@ describe('B2 — OFF byte-identity (the stateful layer is gated)', () => {
       },
     });
     const pulse = previewCampaignWorldPulse({ campaign: off, saves, interval: 'one_month', now: NOW });
-    const dep = pulse.worldState.deployments.strong;
-    expect(dep).toEqual({ targetId: 'weak', sinceTick: 1, role: 'siege' });
-    expect(dep.currentEffectiveStrength).toBeUndefined();
+    // The wind-down cleared the ledger (no frozen army, no strength fields anywhere).
+    expect(pulse.worldState.deployments || {}).toEqual({});
+    expect(JSON.stringify(pulse.worldState)).not.toMatch(/currentEffectiveStrength/);
   });
 });
 
@@ -174,6 +179,35 @@ describe('B2 — stateful deployment record', () => {
     for (const k of ['manpower', 'supplyIntegrity', 'morale', 'equipmentCondition', 'magicSupport', 'commandQuality', 'logisticsBurden', 'deploymentAge', 'returnCondition']) {
       expect(dep[k]).toBeDefined();
     }
+  });
+});
+
+describe('r2 worldpulse-war-military-2 — the REVERSE one-army leg (an intervener cannot ALSO open a siege)', () => {
+  const openSiege = (extraState) => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = HOSTILE_EDGES('strong', 'weak');
+    const snap = snapshotFor(warCampaign({ edges, extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } }, ...extraState } }), saves);
+    return evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('seed'), tick: 5, now: NOW, rules: { warLayerEnabled: true } });
+  };
+
+  test('CONTROL: with no interventions ledger, the mobilized attacker opens its siege', () => {
+    expect(openSiege().deployments.strong, 'a free settlement fields its army').toBeTruthy();
+  });
+
+  test('an active intervention column (interId === the attacker) BLOCKS opening a second siege', () => {
+    const war = openSiege({
+      spatialCanonVersion: 1,
+      spatialLedgers: { interventions: { 'strong|elsewhere': { interId: 'strong', target: 'elsewhere', side: 'incumbent' } } },
+    });
+    expect(war.deployments.strong, 'a settlement already committed as an intervener cannot field a second army').toBeUndefined();
+  });
+
+  test('NON-VACUITY: an intervention by a DIFFERENT settlement does not block this attacker', () => {
+    const war = openSiege({
+      spatialCanonVersion: 1,
+      spatialLedgers: { interventions: { 'other|elsewhere': { interId: 'other', target: 'elsewhere', side: 'incumbent' } } },
+    });
+    expect(war.deployments.strong, 'an unrelated intervention leaves this attacker free to march').toBeTruthy();
   });
 });
 
@@ -268,6 +302,7 @@ describe('B2 — reinforcement (pure)', () => {
 });
 
 describe('B2 — reinforcement drains the origin (integration)', () => {
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
   test('a sustained deployment stamps reinforcement_cost, dropping the origin economic_capacity', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = HOSTILE_EDGES('strong', 'weak');

@@ -60,11 +60,11 @@ describe('ChronicleScrollback — Stage 4 interval summary', () => {
     expect(screen.getByText('Ashford weathers a long siege')).toBeTruthy();
   });
 
-  test('FLAG-OFF: the interval summary does NOT render', () => {
-    multiTickOn = false;
-    render(<ChronicleScrollback campaign={yearCampaign()} nameFor={(id) => id} />);
-    expect(screen.queryByTestId('interval-chronicle-summary')).toBeNull();
-  });
+  // LINEAGE NOTE (master merge W6): the FLAG-OFF test was removed. On RF the
+  // IntervalChronicleSummary graduated UNGATED (ChronicleScrollback.jsx:212 renders
+  // it unconditionally; IntervalChronicleSummary gates only on the interval spanning
+  // >1 tick with major headlines — never on the `advanceMultiTick` flag). There is
+  // no off-flag path that suppresses the summary, so the assertion no longer holds.
 
   test('a single-tick advance renders no interval summary', () => {
     const c = yearCampaign();

@@ -155,8 +155,8 @@ describe('Stage 5 ring policy — saturated-ring collapse (data-integrity regres
     const history = composed.worldState.pulseHistory;
     const intervalRecords = history.filter(r => !r.isPreInterval);
     expect(intervalRecords.length).toBe(1);
-    expect(intervalRecords[0].tick).toBe(48);
-    // 48 appended, collapsed to 1 ⇒ ring nets to 80 - 47 = 33.
-    expect(history.length).toBe(MAX_HISTORY - (48 - 1));
+    expect(intervalRecords[0].tick).toBe(52);
+    // 52 appended, collapsed to 1 ⇒ ring nets to 80 - 51 = 29.
+    expect(history.length).toBe(MAX_HISTORY - (52 - 1));
   });
 });

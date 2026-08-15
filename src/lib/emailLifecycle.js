@@ -23,6 +23,13 @@
  *   notifyCapWarning      — anonGenCounter.js, when anon hits the cap
  *                            (clients only — server has no email
  *                            address for an anon yet)
+ *   notifyRetentionWarning — the retention-warning ramp (downgrade-transition
+ *                            audit 2.2). Authenticated; server reads the
+ *                            recipient from auth.uid(). The robust dispatch is a
+ *                            SCHEDULED server job over settlements nearing
+ *                            retention_expires_at (deferred to the Wave-E mail
+ *                            seam); this helper is the ready client/edge-callable
+ *                            consumer of the template.
  */
 
 import { supabase, isConfigured } from './supabase.js';
@@ -148,6 +155,19 @@ export function notifyCreditLow({ displayName, balance, narrativeCost = 3, daily
   });
 }
 
+/** New-device sign-in notification (DESIGN_MONEY_WAVE §7.4 / M-9e). Fired only when a
+ *  new sign-in SUPERSEDED a different prior session (single-session, last-login-wins).
+ *  COORDINATION POINT: coded against the Wave-E seam's template-name+payload interface —
+ *  the 'new_device_signin' template is registered by the parallel Wave-E lane, so
+ *  send-email returns a soft unknown_template here until it folds. Fire-and-forget /
+ *  never-throw (send() swallows), exactly like the other lifecycle helpers. */
+export function notifyNewDeviceSignin({ device_label, at } = /** @type {{ device_label?: string, at?: string }} */ ({})) {
+  return send('new_device_signin', {
+    device_label: device_label || 'a new device',
+    at: at || new Date().toISOString(),
+  });
+}
+
 /** Founder thank-you. Fires server-side after Stripe webhook upgrades
  *  the user; here we expose the client-side helper for completeness
  *  but in practice this should be called from the stripe-webhook
@@ -165,4 +185,14 @@ export function notifyCapWarning({ recipient, capUsed, capTotal }) {
     capUsed:  String(capUsed ?? 3),
     capTotal: String(capTotal ?? 3),
   }, recipient);
+}
+
+/** Retention warning — a downgraded account's retained-inactive settlements are
+ *  nearing the purge window. Authenticated call; the server reads the recipient
+ *  from auth.uid(). Fire-and-forget, same as the rest. */
+export function notifyRetentionWarning({ displayName, retentionUntil } = /** @type {{ displayName?: string, retentionUntil?: string }} */ ({})) {
+  return send('retention_warning', {
+    displayName:    displayName || 'there',
+    retentionUntil: retentionUntil || 'soon',
+  });
 }

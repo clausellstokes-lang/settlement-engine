@@ -228,6 +228,25 @@ async function isRecoveryLocked(
   return data === true;
 }
 
+/**
+ * TRUE iff the account is a party to a LIVE founder-transfer case (160, §6.3).
+ * Question-based recovery is PAUSED during a transfer so a takeover cannot use the
+ * recovery flow to hijack a seat mid-transfer. FAIL CLOSED (unlike isRecoveryLocked):
+ * a transport error to the lock read is treated as LOCKED — recovery is rare, and a
+ * stuck lock is a support case, never a silent takeover ramp.
+ */
+async function hasActiveTransferLock(
+  admin: ReturnType<typeof defaultAdminClient>,
+  email: string,
+): Promise<boolean> {
+  const { data, error } = await admin.rpc("email_has_active_transfer_lock", { p_email: email });
+  if (error) {
+    console.error("[auth-recovery] email_has_active_transfer_lock error (fail-closed):", error.message);
+    return true;
+  }
+  return data === true;
+}
+
 // Exported so the handler can be EXECUTION-tested with injected stubs (an
 // adminClient that returns canned RPC results) without standing up Supabase.
 // Production passes nothing, so behaviour is identical to the inline handler.
@@ -290,6 +309,12 @@ export async function handleAuthRecovery(
         // an oracle and a brute-forcer simply runs out of slots to attack.
         if (await isRecoveryLocked(admin, email)) {
           return json({ exists: true, slot: null, questionId: null });
+        }
+
+        // TRANSFER LOCK (160, §6.3): question-based recovery is paused during a live
+        // founder-transfer case. Fail CLOSED (a lock-read error refuses too).
+        if (await hasActiveTransferLock(admin, email)) {
+          return json({ error: "transfer_lock", message: "Recovery is paused during an account transfer — contact support." }, 403);
         }
 
         const { data, error } = await admin.rpc("pick_recovery_question", { p_email: email });
@@ -361,6 +386,14 @@ export async function handleAuthRecovery(
         if (await isRecoveryLocked(admin, email)) {
           await floorVerify();
           return json({ ok: false });
+        }
+
+        // TRANSFER LOCK (160, §6.3): fail CLOSED during a live transfer. A distinct
+        // 403 (not the generic { ok:false }) so a party locked out mid-transfer is
+        // told to contact support rather than silently churning wrong answers.
+        if (await hasActiveTransferLock(admin, email)) {
+          await floorVerify();
+          return json({ error: "transfer_lock", message: "Recovery is paused during an account transfer — contact support." }, 403);
         }
 
         const { data: ok, error } = await admin.rpc("verify_recovery_answer", {

@@ -6,7 +6,7 @@
  * the store action `setActivePricingMoment(content)`. This component
  * subscribes to that and renders the corresponding card.
  *
- * Visual design:
+ * Visual design follows the critique (X-7):
  *   - Inline card, not a modal wall
  *   - Violet accent for premium-upgrade moments (Cartographer, Founder)
  *   - Gold accent for tier-unlock moments
@@ -23,11 +23,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
+import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 
 // Reasons that want the violet (Cartographer / Founder upgrade) accent
 // rather than the gold (tier-unlock / signup) accent. Anything not in
@@ -40,7 +40,7 @@ const VIOLET = swatch['#7B4FCF'];
 // body copy literally says "Sign in (free)…") → it opens the auth modal.
 // The previous build sent every reason to the purchase modal, so the gold
 // "Sign in to unlock" CTA landed an anonymous user in a buy-credits wall.
-const VIOLET_REASONS = new Set([
+const SLATE_REASONS = new Set([
   'third_save',
   'regen_burst',
   'map_clicked',
@@ -57,8 +57,8 @@ export default function PricingMomentCard() {
   const clearMoment = useStore(s => s.clearActivePricingMoment);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   // Signup/unlock moments fire at anonymous users — their honest destination is
-  // sign-in, not the buy-credits modal. Lifted onto the store (uiSlice) so this
-  // app-wide nudge can reach it (App.jsx no longer owns it as local state).
+  // sign-in, not the buy-credits modal (restoration #16; lifted onto uiSlice so
+  // this app-wide nudge can reach it).
   const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
   const [exiting, setExiting] = useState(false);
 
@@ -73,11 +73,11 @@ export default function PricingMomentCard() {
   }, [clearMoment]);
 
   const reason = activeMoment?.reason;
-  // One source of truth for the moment's intent. Drives accent, eyebrow,
-  // label, button weight, AND the click destination so they cannot drift
-  // apart (P8/P11). A violet reason upgrades (purchase modal); a gold reason
-  // is a signup/unlock prompt for an anon user (auth modal).
-  const isUpgrade = VIOLET_REASONS.has(reason);
+  // One source of truth for the moment's intent — drives accent, eyebrow, label,
+  // AND the click destination so they cannot drift apart (P8/P11). A violet
+  // reason upgrades (purchase modal); a gold reason is a signup/unlock prompt for
+  // an anon user (auth modal).
+  const isUpgrade = SLATE_REASONS.has(reason);
 
   const handleDismiss = useCallback(() => {
     Funnel.track(EVENTS.PRICING_MOMENT_DISMISSED, { reason });
@@ -86,14 +86,14 @@ export default function PricingMomentCard() {
 
   const handleClick = useCallback(() => {
     Funnel.track(EVENTS.PRICING_MOMENT_CLICKED, { reason });
-    // Route to the destination the eyebrow + label promise. Upgrade moments
-    // open the purchase/upgrade modal; signup/unlock moments open sign-in.
+    // Route to the destination the eyebrow + label promise: upgrade moments open
+    // the purchase modal; signup/unlock moments open sign-in (never the buy-wall).
     if (isUpgrade) setPurchaseModalOpen?.(true);
     else setAuthModalOpen?.(true);
     handleExit();
   }, [reason, isUpgrade, setPurchaseModalOpen, setAuthModalOpen, handleExit]);
 
-  // Auto-dismiss after 30s if the user doesn't interact:
+  // Auto-dismiss after 30s if the user doesn't interact. Critique X-2:
   // moments are doors, not walls — they don't hold the screen.
   useEffect(() => {
     if (!activeMoment) return undefined;
@@ -104,7 +104,7 @@ export default function PricingMomentCard() {
   if (!activeMoment) return null;
 
   const { headline, body } = activeMoment;
-  const accent = isUpgrade ? VIOLET : GOLD;
+  const accent = isUpgrade ? SLATE : GOLD;
 
   return (
     <div
@@ -117,7 +117,7 @@ export default function PricingMomentCard() {
         position: 'fixed',
         // Mobile lifts the card above the fixed bottom nav (+ safe-area inset)
         // so the fixed nudge never tucks under the nav row; desktop keeps the
-        // plain SP.lg gap (no bottom nav there) so it renders byte-identical.
+        // plain SP.lg gap (no bottom nav there).
         bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
         right: SP.lg,
         maxWidth: 360,
@@ -126,7 +126,6 @@ export default function PricingMomentCard() {
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderLeft: `4px solid ${accent}`,
-        borderRadius: R.md,
         padding: SP.md,
         boxShadow: '0 8px 24px rgba(27, 20, 8, 0.18)',
         transform: exiting ? 'translateY(20px)' : 'translateY(0)',
@@ -135,16 +134,11 @@ export default function PricingMomentCard() {
         fontFamily: sans,
       }}
     >
-      <div
-        // First-contact gloss: a bare tier word as a badge is jargon for a new
-        // DM. The native title= names the tier plainly, in voice.
-        title={isUpgrade ? 'Cartographer: the subscription that runs the region for years.' : undefined}
-        style={{
-          fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: accent,
-          marginBottom: 6,
-        }}
-      >
+      <div style={{
+        fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+        textTransform: 'uppercase', color: accent,
+        marginBottom: 6,
+      }}>
         {isUpgrade ? 'Cartographer' : 'Upgrade'}
       </div>
       <div style={{
@@ -161,32 +155,19 @@ export default function PricingMomentCard() {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
         <Button
-          // P8/P7 — the nudge's single CTA is the loud focal action in BOTH
-          // reason paths: gold unlock → 'primary' (ink on gold, 7.6:1); violet
-          // upgrade → 'aiSolid' (white on violet-500, 5.44:1), the loud peer of
-          // primary rather than the washed 'ai' variant that read as secondary
-          // and weakened first-click pull on the higher-value upsell. The accent
-          // border-left + eyebrow keep the premium meaning multi-channel.
-          variant={isUpgrade ? 'aiSolid' : 'primary'}
-          size="lg"
+          variant="primary"
           onClick={handleClick}
+          style={{ background: accent, color: swatch.white, border: `1px solid ${accent}` }}
         >
           {isUpgrade ? 'See Cartographer' : 'Sign in to unlock'}
         </Button>
         <Button
           variant="ghost"
-          size="md"
+          size="sm"
           onClick={handleDismiss}
         >
           Not now
         </Button>
-        <span style={{ flex: 1 }} />
-        <span style={{
-          fontSize: FS.xxs, color: BODY,
-          fontStyle: 'italic',
-        }}>
-          Won't ask again for 24h
-        </span>
       </div>
     </div>
   );

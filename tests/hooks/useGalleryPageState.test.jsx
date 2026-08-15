@@ -18,14 +18,20 @@ const mocks = vi.hoisted(() => ({
     fetchPublicGallery: vi.fn(),
     fetchPublicDossier: vi.fn(),
     fetchMyGallery: vi.fn(),
+    fetchMyUnlistedDossiers: vi.fn(),
+    fetchFeaturedGallery: vi.fn(),
+    fetchUnlistedCampaign: vi.fn(),
     reportGalleryDossier: vi.fn(),
     toggleGalleryVote: vi.fn(),
+    toggleGalleryReaction: vi.fn(),
   },
   saves: { list: vi.fn() },
   nav: { navigate: vi.fn() },
   storeState: {
     auth: { user: { id: 'user-1' } },
     savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: 'user-1',
+    savedSettlementsHydrationGeneration: 0,
     setSavedSettlements: vi.fn(),
   },
 }));
@@ -34,7 +40,10 @@ vi.mock('../../src/lib/gallery.js', () => mocks.gallery);
 vi.mock('../../src/lib/saves.js', () => ({ saves: mocks.saves }));
 vi.mock('../../src/hooks/useRoute.js', () => mocks.nav);
 vi.mock('../../src/store/index.js', () => ({
-  useStore: selector => selector(mocks.storeState),
+  useStore: Object.assign(
+    selector => selector(mocks.storeState),
+    { getState: () => mocks.storeState },
+  ),
 }));
 
 import { useGalleryPageState } from '../../src/hooks/useGalleryPageState.js';
@@ -43,6 +52,7 @@ beforeEach(() => {
   vi.useFakeTimers();
   mocks.gallery.fetchPublicGallery.mockResolvedValue({ items: [], total: 0, hasMore: false });
   mocks.gallery.fetchPublicDossier.mockResolvedValue({ id: 'd-1', slug: 'fen-hollow' });
+  mocks.gallery.fetchUnlistedCampaign.mockResolvedValue(null);
   mocks.gallery.fetchGalleryMap.mockResolvedValue(null);
 });
 
@@ -92,6 +102,26 @@ describe('useGalleryPageState — search debounce', () => {
 });
 
 describe('useGalleryPageState — card click does not double-fetch the dossier', () => {
+  test('an initial hard deep link fetches its dossier exactly once', async () => {
+    const dossier = { id: 'd-deep', slug: 'fen-hollow' };
+    mocks.gallery.fetchPublicDossier.mockResolvedValue(dossier);
+
+    const { result } = renderHook(() => useGalleryPageState('fen-hollow'));
+    expect(result.current.activeSlug).toBe('fen-hollow');
+    expect(result.current.dossierLoading).toBe(true);
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(1);
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledWith('fen-hollow');
+    expect(result.current.dossier).toEqual(dossier);
+    expect(result.current.dossierLoading).toBe(false);
+  });
+
   test('openDossier + the route-sync rerender fetch the dossier exactly once', async () => {
     // A card click calls openDossier(slug) (fetch #1) and navigate(); the real
     // router then re-renders Gallery with routeSlug=slug, re-running the
@@ -130,70 +160,93 @@ describe('useGalleryPageState — card click does not double-fetch the dossier',
     expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(2);
     expect(mocks.gallery.fetchPublicDossier).toHaveBeenLastCalledWith('salt-marsh');
   });
-});
 
-describe('useGalleryPageState — map share deep-link is kind-aware', () => {
-  test('a ?slug that resolves to a map (dossier null, map row) surfaces the map detail, not a dead-end', async () => {
-    // A published map's "Copy link" emits /gallery?slug=<mapSlug>. That slug is a
-    // map, so the settlement dossier fetch returns null. Before the fix the link
-    // dead-ended: dossier stayed null with no fallback. Now openDossier falls back
-    // to fetchGalleryMap and surfaces the map row as mapDetail.
-    mocks.gallery.fetchPublicDossier.mockResolvedValue(null);
-    mocks.gallery.fetchGalleryMap.mockResolvedValue({ slug: 'tide-reach', name: 'Tide Reach', kind: 'map_only' });
+  test('a stale success and finally cannot overwrite or unlock a newer request', async () => {
+    let resolveA;
+    let resolveB;
+    const pendingA = new Promise(resolve => {
+      resolveA = resolve;
+    });
+    const pendingB = new Promise(resolve => {
+      resolveB = resolve;
+    });
+    mocks.gallery.fetchPublicDossier.mockImplementation(slug =>
+      slug === 'fen-hollow' ? pendingA : pendingB);
 
     const { result } = renderHook(() => useGalleryPageState());
+    let openA;
+    let openB;
+    act(() => {
+      openA = result.current.openDossier('fen-hollow');
+    });
+    act(() => {
+      openB = result.current.openDossier('salt-marsh');
+    });
 
-    await act(async () => { await result.current.openDossier('tide-reach'); });
+    await act(async () => {
+      resolveA({ id: 'd-a', slug: 'fen-hollow' });
+      await openA;
+    });
 
-    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledWith('tide-reach');
-    expect(mocks.gallery.fetchGalleryMap).toHaveBeenCalledWith('tide-reach');
-    expect(result.current.mapDetail).toEqual({ slug: 'tide-reach', name: 'Tide Reach', kind: 'map_only' });
+    expect(result.current.activeSlug).toBe('salt-marsh');
     expect(result.current.dossier).toBeNull();
-    // Not a dead-end: the settlement "not available" message is suppressed when a
-    // map matched.
+    expect(result.current.dossierLoading).toBe(true);
+
+    const dossierB = { id: 'd-b', slug: 'salt-marsh' };
+    await act(async () => {
+      resolveB(dossierB);
+      await openB;
+    });
+
+    expect(result.current.dossier).toEqual(dossierB);
     expect(result.current.dossierError).toBeNull();
-    expect(result.current.activeSlug).toBe('tide-reach');
+    expect(result.current.dossierLoading).toBe(false);
   });
 
-  test('a settlement slug resolves to the dossier and never reaches the map fallback', async () => {
-    mocks.gallery.fetchPublicDossier.mockResolvedValue({ id: 'd-1', slug: 'fen-hollow' });
+  test('a stale rejection and finally cannot error or unlock a newer request', async () => {
+    let rejectA;
+    let resolveB;
+    const pendingA = new Promise((_resolve, reject) => {
+      rejectA = reject;
+    });
+    const pendingB = new Promise(resolve => {
+      resolveB = resolve;
+    });
+    mocks.gallery.fetchPublicDossier.mockImplementation(slug =>
+      slug === 'fen-hollow' ? pendingA : pendingB);
 
     const { result } = renderHook(() => useGalleryPageState());
+    let openA;
+    let openB;
+    act(() => {
+      openA = result.current.openDossier('fen-hollow');
+    });
+    act(() => {
+      openB = result.current.openDossier('salt-marsh');
+    });
 
-    await act(async () => { await result.current.openDossier('fen-hollow'); });
+    await act(async () => {
+      rejectA(new Error('stale network failure'));
+      await openA;
+    });
 
-    expect(result.current.dossier).toEqual({ id: 'd-1', slug: 'fen-hollow' });
-    expect(result.current.mapDetail).toBeNull();
-    // The map fetch is a fallback only — a live settlement never triggers it.
-    expect(mocks.gallery.fetchGalleryMap).not.toHaveBeenCalled();
-  });
+    expect(result.current.dossierError).toBeNull();
+    expect(result.current.dossierLoading).toBe(true);
 
-  test('a slug that matches neither a dossier nor a map keeps the not-available message', async () => {
-    mocks.gallery.fetchPublicDossier.mockResolvedValue(null);
-    mocks.gallery.fetchGalleryMap.mockResolvedValue(null);
+    const dossierB = { id: 'd-b', slug: 'salt-marsh' };
+    await act(async () => {
+      resolveB(dossierB);
+      await openB;
+    });
 
-    const { result } = renderHook(() => useGalleryPageState());
-
-    await act(async () => { await result.current.openDossier('ghost-slug'); });
-
-    expect(result.current.dossier).toBeNull();
-    expect(result.current.mapDetail).toBeNull();
-    expect(result.current.dossierError).toBe('This settlement is not available.');
-  });
-
-  test('opening a settlement after a map clears the stale mapDetail', async () => {
-    mocks.gallery.fetchPublicDossier.mockResolvedValueOnce(null);
-    mocks.gallery.fetchGalleryMap.mockResolvedValueOnce({ slug: 'tide-reach', name: 'Tide Reach', kind: 'map_only' });
-
-    const { result } = renderHook(() => useGalleryPageState());
-
-    await act(async () => { await result.current.openDossier('tide-reach'); });
-    expect(result.current.mapDetail).not.toBeNull();
-
-    mocks.gallery.fetchPublicDossier.mockResolvedValueOnce({ id: 'd-2', slug: 'fen-hollow' });
-    await act(async () => { await result.current.openDossier('fen-hollow'); });
-
-    expect(result.current.dossier).toEqual({ id: 'd-2', slug: 'fen-hollow' });
-    expect(result.current.mapDetail).toBeNull();
+    expect(result.current.dossier).toEqual(dossierB);
+    expect(result.current.dossierError).toBeNull();
+    expect(result.current.dossierLoading).toBe(false);
   });
 });
+
+// LINEAGE NOTE (master merge W6): the `map share deep-link is kind-aware`
+// describe block (mapDetail / fetchGalleryMap fallback) was removed. It pins the
+// fenced master-only MapGalleryDetail viewer — openDossier's fetchGalleryMap
+// fallback and the `mapDetail` state are master architecture not carried onto
+// this lineage. The debounce + double-fetch-guard fixes above ARE ported.

@@ -12,22 +12,50 @@
  *
  * Tones map to the existing palette but are bounded so callers can't
  * style themselves out of accessibility (no "ghost on ghost" combos).
+ *
+ * THE ICONS-OFF CHANNEL (lane LU-2). This primitive used to be the ONE the
+ * icons-off gate could not close: its whole child was `<Icon />`, so
+ * suppressing the glyph left an empty labelled box rather than a quieter
+ * control, and its ~70 call sites each had to import lucide directly — every
+ * one of them a frozen row in tests/lint/lucideTotality.test.js.
+ *
+ * The cure is the shape Dialog/Badge/BottomSheet already use for their close
+ * affordance: a unicode TEXT twin, which IconsContext rules "not icons and
+ * unaffected by this gate". A caller passes `glyph` INSTEAD of `Icon` and
+ * drops its lucide import; the control keeps its box, its tone, its focus
+ * ring, its `title`, and its required `aria-label`, and renders a text mark
+ * where the glyph used to be. The affordance survives; only the artwork goes.
+ *
+ * THE RENDER RULE IS DELIBERATELY INCREMENTAL — read it before changing it:
+ *   - `glyph` supplied and icons are OFF  -> the text twin (the redesign's
+ *     state on every surface except the Realm map).
+ *   - `glyph` supplied and NO `Icon`      -> the text twin even inside the map
+ *     Provider. Fail-safe: a converted call site can never render an empty
+ *     box, whatever subtree it is mounted in.
+ *   - otherwise                           -> `Icon`, exactly as before.
+ * The last arm is why this change is safe to land ahead of the sweep: a call
+ * site that has NOT yet been converted passes no `glyph` and behaves
+ * byte-identically to the pre-LU-2 primitive. Conversion is per-call-site and
+ * reversible, never a big bang.
  */
 
-import { GOLD, GOLD_DEEP, GOLD_BG } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 
-// Gold tones are driven off the canonical GOLD/GOLD_DEEP/GOLD_BG tokens (not a
-// one-off bronze) so a palette tweak to GOLD propagates here the same as it does
-// to Button — previously IconButton painted a stale off-palette #a0762a the
-// visual-budget gate can't see (primitives are lint-exempt).
 const TONES = {
-  default:  { bg: '#fff',        fg: '#1c1409', border: '#d2bd96',    hover: '#fffbf5' },
-  primary:  { bg: GOLD,          fg: '#ffffff', border: GOLD,         hover: GOLD_DEEP },
-  ghost:    { bg: 'transparent', fg: '#6b5340', border: 'transparent', hover: GOLD_BG },
-  active:   { bg: GOLD_BG,       fg: '#1c1409', border: GOLD,         hover: GOLD_BG },
-  danger:   { bg: '#fff',        fg: '#8b1a1a', border: '#c89a9a',    hover: '#fff5f5' },
+  // THE OC INSTRUMENT BASE FACE (organic craft §2): quiet machined parchment,
+  // ink glyph, perceivable gold-hairline boundary — the reserved instrument
+  // tokens (--oc-btn-*), AA / 1.4.11 pinned in contrast.test.js.
+  default:  { bg: 'var(--oc-btn-fill)',         fg: 'var(--oc-btn-ink)', border: 'var(--oc-btn-border)', hover: '#fffbf5' },
+  primary:  { bg: '#a0762a',                    fg: '#ffffff', border: '#a0762a', hover: '#8c651e' },
+  ghost:    { bg: 'transparent',                fg: '#6b5340', border: 'transparent', hover: 'rgba(160,118,42,0.08)' },
+  active:   { bg: 'rgba(160,118,42,0.12)',      fg: '#1c1409', border: '#a0762a', hover: 'rgba(160,118,42,0.18)' },
+  danger:   { bg: '#fff',                       fg: '#8b1a1a', border: '#c89a9a', hover: '#fff5f5' },
+  // Borderless white glyph for use ON a saturated/colored surface (e.g. a
+  // dismiss × on a fixed toast/banner). The only tone whose contrast is
+  // guaranteed by its host, not the app background — reach for it only when
+  // the button sits on a dark/colored fill.
+  inverse:  { bg: 'transparent',                fg: '#ffffff', border: 'transparent', hover: 'rgba(255,255,255,0.18)' },
 };
 
 const SIZES = {
@@ -41,7 +69,11 @@ const SIZES = {
 
 /**
  * @param {Object} props
- * @param {React.ComponentType<{size?:number}>} props.Icon  lucide-react icon component
+ * @param {React.ComponentType<{size?:number}>} [props.Icon]  lucide-react icon
+ *   component. Optional since LU-2: pass `glyph` instead to render icons-off.
+ * @param {string} [props.glyph]              unicode TEXT twin (× + − ‹ › ⌄ ...)
+ *   rendered in place of `Icon` when icons are suppressed. Supplying it is what
+ *   lets a call site drop its lucide import.
  * @param {string} props.label                aria-label / tooltip — REQUIRED
  * @param {() => void} [props.onClick]
  * @param {keyof typeof TONES} [props.tone='default']
@@ -51,21 +83,25 @@ const SIZES = {
  * @param {string} [props.type='button']
  */
 export default function IconButton({
-  Icon, label, onClick, glyph = null,
+  Icon, glyph, label, onClick,
   tone = 'default', size = 'md',
   disabled, pressed, type = 'button',
+  className = '',
   ...rest
 }) {
-  // Icons-off (everywhere but the Realm map): an icon-only control still needs a
-  // visible mark, so off-map it renders a unicode `glyph` text fallback when one
-  // is given (close = x, scroll = chevrons), else keeps the icon so nothing goes
-  // invisible. Inside the map's IconsContext.Provider the lucide icon renders.
-  const iconsOn = useIconsOn();
   if (!label) {
     // Throw in development so missing labels surface immediately. In
     // production we still render but with a fallback to keep the app up.
     if (process.env.NODE_ENV !== 'production') {
       throw new Error('IconButton: `label` (aria-label) is required.');
+    }
+  }
+  if (!Icon && !glyph) {
+    // An IconButton with neither channel is an empty labelled box — the exact
+    // failure that kept this primitive outside the icons-off gate. Surface it
+    // at the call site in development rather than shipping a blank control.
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error('IconButton: pass `Icon` or `glyph` (a unicode text twin).');
     }
   }
   const t = TONES[tone] || TONES.default;
@@ -77,6 +113,12 @@ export default function IconButton({
   // Reads the ONE shared reactive flag (updates on resize + rotate).
   const isMobile = useIsMobile();
   const mobileFloor = isMobile ? Math.max(s.box, 44) : null;
+  // THE ICONS-OFF CHANNEL. The text twin wins wherever the glyph is suppressed,
+  // and also wherever no `Icon` was given at all (so a converted call site can
+  // never render an empty box, even mounted inside the map's Provider). With no
+  // `glyph`, this is false and the render below is the pre-LU-2 behaviour.
+  const iconsOn = useIconsOn();
+  const useTwin = !!glyph && (!iconsOn || !Icon);
   return (
     <button
       type={type}
@@ -85,6 +127,11 @@ export default function IconButton({
       aria-label={label || 'button'}
       title={label || ''}
       aria-pressed={pressed === undefined ? undefined : !!pressed}
+      // Instrument press (organic motion #5); caller className preserved after.
+      // sf-btn = the interactive state floor (a11y.css). The fill + the tone's
+      // DESIGNED hover fill ride custom properties so :hover actually applies
+      // the TONES.hover data (it was defined-but-dead before Fix wave 4).
+      className={`oc-m-press sf-btn ${className}`.trim()}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         // Desktop: fixed box. Mobile: floor to >=44 in both axes (min-* lets the
@@ -94,7 +141,8 @@ export default function IconButton({
         minWidth:  mobileFloor != null ? mobileFloor : undefined,
         minHeight: mobileFloor != null ? mobileFloor : undefined,
         padding: 0,
-        background: pressed ? TONES.active.bg : t.bg,
+        '--sf-btn-bg': pressed ? TONES.active.bg : t.bg,
+        '--sf-btn-hover-bg': pressed ? TONES.active.hover : t.hover,
         color:      pressed ? TONES.active.fg : t.fg,
         border: `1px solid ${pressed ? TONES.active.border : t.border}`,
         borderRadius: 4,
@@ -104,11 +152,9 @@ export default function IconButton({
       }}
       {...rest}
     >
-      {iconsOn
-        ? <Icon size={s.icon} aria-hidden="true" />
-        : (glyph != null
-            ? <span aria-hidden="true" style={{ fontSize: s.icon + 3, lineHeight: 1, fontWeight: 700 }}>{glyph}</span>
-            : <Icon size={s.icon} aria-hidden="true" />)}
+      {useTwin
+        ? <span aria-hidden="true" style={{ fontSize: s.icon + 2, lineHeight: 1, fontWeight: 700 }}>{glyph}</span>
+        : <Icon size={s.icon} aria-hidden="true" />}
     </button>
   );
 }

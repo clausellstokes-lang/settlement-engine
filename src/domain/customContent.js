@@ -1,12 +1,12 @@
 /**
  * domain/customContent.js — Classify user-added content as causal objects.
  *
- * When a user adds "Dragonbone Foundry,"
+ * Tier 4.16 of the roadmap. When a user adds "Dragonbone Foundry,"
  * the simulator needs to know what it IS structurally — category,
  * what it provides, what it requires, what controls it, what risks
  * it raises, what effects it has on substrate / capacities. Without
  * structure, user content is just appended prose; with it, the
- * content flows through every derivation alongside generated
+ * content flows through every Tier 4 derivation alongside generated
  * entities.
  *
  *   classifyCustomEntity(rawEntity, settlement) -> {
@@ -16,11 +16,22 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Pattern-based inference (the same hook/threat
- * classifier pattern). The simulator's rerun is already the event
- * pipeline's job — this module produces the structured input the
- * pipeline consumes.
+ * Pure read-only. Pattern-based inference (same Phase 11 / Phase 20
+ * pattern). The simulator's rerun is already Phase 18's job — this
+ * module produces the structured input Phase 18 consumes.
+ *
+ * MG-3h (leak L12, chair ruling R-BLD-5): TWO drifts closed here. The `arcane` category
+ * was inferred from a pattern of purely AMBIGUOUS tokens (tower|college|circle|enclave…)
+ * with no catalog consult, and the magic-level hint read `config.magicLevel` RAW —
+ * a second spelling of the magic gate, blind to the legacy band vocabulary and, worse,
+ * silent in a world where magic does not function at all. Both now read the canonical
+ * sources: domain/arcaneIdentity for identity, domain/magicLedger for the band.
  */
+
+import { magicLedger } from './magicLedger.js';
+import { ARCANE_IDENTITY } from './arcaneIdentity.js';
+import { stripNegatedMagic } from './magicAssertionText.js';
+import { institutionCatalogArcaneTag } from './arcaneInstitutionIdentity.js';
 
 // ── Catalogs ─────────────────────────────────────────────────────────────
 
@@ -42,6 +53,23 @@ export const INSTITUTION_CATEGORIES = Object.freeze([
   'other',
 ]);
 
+/**
+ * @typedef {Object} RawCustomEntity
+ * @property {string} [name]
+ * @property {string} [label]
+ * @property {string} [text]
+ * @property {string} [type]
+ * @property {string} [controlledBy]
+ * @property {string} [controller]
+ * @property {string} [factionAffiliation]
+ * @property {string} [threatType]
+ * @property {string} [category]
+ * @property {string[]} [risks]
+ * @property {string[]} [provides]
+ * @property {string[]} [requires]
+ * @property {{ substrate?: Object, capacities?: Object }} [effects]
+ */
+
 // ── Type inference ───────────────────────────────────────────────────────
 
 const TYPE_PATTERNS = Object.freeze([
@@ -56,7 +84,10 @@ const TYPE_PATTERNS = Object.freeze([
   // Default to institution if a noun-looking name is present
 ]);
 
-/** @param {any} rawEntity */
+/**
+ * @param {RawCustomEntity | null | undefined} rawEntity
+ * @returns {string | null}
+ */
 export function inferCustomEntityType(rawEntity) {
   if (!rawEntity) return null;
   // Explicit type wins
@@ -84,10 +115,36 @@ const INSTITUTION_CATEGORY_PATTERNS = Object.freeze([
   { pattern: /(infirmary|hospice|herbalist|apothecary|healer|hospital)/i,                 category: 'healing' },
 ]);
 
-/** @param {any} name */
+/**
+ * @param {string} name
+ * @returns {keyof typeof CATEGORY_TEMPLATES}
+ */
 function inferInstitutionCategory(name) {
   for (const { pattern, category } of INSTITUTION_CATEGORY_PATTERNS) {
-    if (pattern.test(name)) return category;
+    // MG-3h / R-BLD-5: the arcane slot consults the AUTHORED CATALOG TAG first, and the
+    // tag is authoritative in BOTH directions — a custom entity named for a catalog
+    // institution the author tagged mundane ('Great library', authored `education`) falls
+    // through to the later patterns instead of claiming the arcane slot.
+    //
+    // The NAME PATTERN then stands unchanged for everything else, and that is deliberate
+    // rather than an omission. This surface classifies USER-AUTHORED content, where the
+    // name IS the authored tag: a DM who types "Conclave of the Veil" has declared an
+    // arcane order, and MG-LAW-4 says an authored premise survives. Demanding a second
+    // corroborating magic word here would silently demote the DM's own naming — the
+    // opposite failure from the one the register recorded. The ambiguity cure belongs on
+    // the surfaces that classify GENERATED entities against a catalog (L10), not here.
+    // What the ruling does bind here is the denial clause: a name is read with the world
+    // law's NEGATED_MAGIC_PATTERNS struck out first.
+    if (category === 'arcane') {
+      const tag = institutionCatalogArcaneTag(name);
+      if (tag !== ARCANE_IDENTITY.UNKNOWN) {
+        if (tag === ARCANE_IDENTITY.ARCANE) return 'arcane';
+        continue;
+      }
+      if (pattern.test(stripNegatedMagic(name))) return 'arcane';
+      continue;
+    }
+    if (pattern.test(name)) return /** @type {keyof typeof CATEGORY_TEMPLATES} */ (category);
   }
   return 'other';
 }
@@ -208,14 +265,15 @@ const CATEGORY_TEMPLATES = Object.freeze({
 
 /**
  * Classify a custom institution. Returns the structured envelope.
- * @param {any} rawEntity
- * @param {import('./settlement.schema.js').SimSettlement} [settlement]
+ * @param {RawCustomEntity | null | undefined} rawEntity
+ * @param {{ config?: { magicLevel?: string, priorityMagic?: number, magicExists?: boolean } | null }} [settlement]
+ * @returns {Object | null}
  */
 export function classifyCustomInstitution(rawEntity, settlement) {
   if (!rawEntity) return null;
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed institution');
   const category = inferInstitutionCategory(name);
-  const tmpl = /** @type {Record<string, any>} */ (CATEGORY_TEMPLATES)[category];
+  const tmpl = CATEGORY_TEMPLATES[category];
   const contributors = [{
     source: 'category_inference',
     effect: 'matched',
@@ -241,14 +299,47 @@ export function classifyCustomInstitution(rawEntity, settlement) {
     ? rawEntity.effects
     : { substrate: { ...tmpl.effects.substrate }, capacities: { ...tmpl.effects.capacities } };
 
-  // Modest contextual hint — settlement size, magic level.
-  if (settlement?.config?.magicLevel && category === 'arcane') {
-    const level = settlement.config.magicLevel;
-    if (level === 'rare' || level === 'low') {
+  // Modest contextual hint — the settlement's magic environment.
+  //
+  // MG-3h / L12: this read `config.magicLevel` RAW and matched the literal strings
+  // 'rare'/'low'. Two failures followed. It was blind to the legacy band vocabulary the
+  // canonical accessor folds ('moderate', 'common', 'pervasive' — a save carrying those
+  // got no hint at all), and it had NOTHING to say about a world where magic does not
+  // function: an arcane institution in a dead-magic realm was described as "exceptional
+  // rather than typical", which reads as rare-but-working. It now goes through
+  // magicLedger — the one canonical accessor — and the magic-off case gets its own,
+  // honest line. MG-LAW-4 holds throughout: the entity is never erased or reclassified,
+  // it is annotated. The DM's one strange glowing city stays exactly where it was put.
+  if (category === 'arcane') {
+    const ledger = magicLedger(settlement);
+    // `present:false` means the settlement carries NO magic axis at all — an un-generated
+    // record, or the classifier called with no settlement. The ledger's neutral envelope
+    // reports magicExists:false there, which is absence, not a dead-magic world; reading
+    // it as one would stamp "magic does not function" onto every context-free
+    // classification. The raw world fact is consulted only in that gap, which also closes
+    // the recorded latent edge where a config carries magicExists:false and nothing else.
+    const magicOff = ledger.present
+      ? !ledger.magicExists
+      : settlement?.config?.magicExists === false;
+    if (magicOff) {
       contributors.push({
-        source: 'config.magicLevel',
+        source: 'magicLedger.magicExists',
+        effect: 'environment_inert',
+        reason: 'Magic does not function in this world. The institution stands, but nothing it '
+          + 'claims to do arcanely works — read its output as trade, scholarship, or belief.',
+      });
+    } else if (ledger.present && ledger.magicLevel === 'none') {
+      contributors.push({
+        source: 'magicLedger.magicLevel',
         effect: 'environment_dampen',
-        reason: `Arcane institution in a ${level}-magic setting reads as exceptional rather than typical.`,
+        reason: 'No arcane practice is established here. The institution stands without a local '
+          + 'tradition behind it — whoever works there learned it somewhere else.',
+      });
+    } else if (ledger.present && ledger.magicLevel === 'low') {
+      contributors.push({
+        source: 'magicLedger.magicLevel',
+        effect: 'environment_dampen',
+        reason: 'Arcane institution in a low-magic setting reads as exceptional rather than typical.',
       });
     }
   }
@@ -268,7 +359,7 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 // ── Other-type classifiers (light) ──────────────────────────────────────
 
-/** @param {any} rawEntity */
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomFaction(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
   const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
@@ -285,7 +376,7 @@ function classifyCustomFaction(rawEntity) {
   };
 }
 
-/** @param {any} rawEntity */
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomNpc(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed NPC');
   return {
@@ -301,7 +392,7 @@ function classifyCustomNpc(rawEntity) {
   };
 }
 
-/** @param {any} rawEntity */
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomThreat(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed threat');
   return {
@@ -317,7 +408,7 @@ function classifyCustomThreat(rawEntity) {
   };
 }
 
-/** @param {any} rawEntity */
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomHook(rawEntity) {
   const text = String(rawEntity.text || rawEntity.name || 'Unnamed hook');
   return {
@@ -338,8 +429,8 @@ function classifyCustomHook(rawEntity) {
 /**
  * Classify any user-added entity. Dispatches by inferred type.
  *
- * @param {Object} rawEntity   { name?, text?, type?, ...optional structured fields }
- * @param {Object} [settlement]
+ * @param {RawCustomEntity} rawEntity   { name?, text?, type?, ...optional structured fields }
+ * @param {{ config?: { magicLevel?: string, priorityMagic?: number, magicExists?: boolean } | null }} [settlement]
  * @returns {Object | null}
  */
 export function classifyCustomEntity(rawEntity, settlement) {
@@ -363,9 +454,9 @@ export function supportedCustomContentTypes() {
 export function supportedInstitutionCategories() {
   return [...INSTITUTION_CATEGORIES];
 }
-/** @param {any} category */
+/** @param {string} category */
 export function institutionCategoryTemplate(category) {
-  const t = /** @type {Record<string, any>} */ (CATEGORY_TEMPLATES)[category];
+  const t = CATEGORY_TEMPLATES[/** @type {keyof typeof CATEGORY_TEMPLATES} */ (category)];
   if (!t) return null;
   return {
     provides:     [...t.provides],

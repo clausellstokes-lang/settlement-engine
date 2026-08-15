@@ -397,6 +397,34 @@ describe('magical capacity — dead-magic world derives zero demand and an absen
 // ── deriveAllCapacities ────────────────────────────────────────────────
 
 describe('deriveAllCapacities()', () => {
+  it('does not interpret a current custom institution display name as native capacity infrastructure', () => {
+    const customInstitution = {
+      isCustom: true,
+      source: 'custom',
+      customDefinitionId: 'definition:institutions:pleasant-hall',
+      customDefinitionCategory: 'institutions',
+    };
+    const settlement = name => ({
+      tier: 'town',
+      population: 2000,
+      institutions: [{ ...customInstitution, name }],
+      config: {
+        magicExists: true,
+        magicLevel: 'medium',
+        priorityMagic: 50,
+        tradeRouteAccess: 'road',
+      },
+    });
+
+    const control = deriveAllCapacities(settlement('Pleasant Hall'));
+    const adversarial = deriveAllCapacities(settlement(
+      'State Granary Mill Hospital Cathedral Court Garrison '
+      + 'Teleportation Circle Arcane Library Craft Guild Port',
+    ));
+
+    expect(adversarial).toEqual(control);
+  });
+
   it('returns the canonical envelope (capacities/bands/ratios/summary)', () => {
     const state = deriveAllCapacities({ population: 2000 });
     expect(state).toHaveProperty('capacities');

@@ -40,6 +40,13 @@
 import { computeAggressiveness } from './disposition.js';
 import { foodLedger } from '../foodLedger.js';
 import { clamp01 } from '../region/contestMath.js';
+import { readinessMobilizationMult } from './martialReadiness.js';
+// W-PEACE-2 readiness_cap: a live demilitarization term is a CEILING on the beaten
+// court's war footing, and this is the machine that footing lives in. The read comes
+// from the dependency-free treatyEnforcement leaf rather than peaceTerms because
+// peaceTerms reaches THIS module (warReasons → corruptionWeb → settlementPolitics →
+// mobilization), so importing the mover would close a cycle.
+import { demilitarizationCapFor } from './treatyEnforcement.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -65,6 +72,15 @@ const RAMP_INDEX = Object.freeze(
 // (it already has an army out). This is THE keystone: a `peace` settlement cannot
 // siege.
 const READY_STATES = new Set(['mobilized', 'deployed']);
+
+// worldpulse-war-9: the occupation-ladder rungs at which the OCCUPIER holds firm control
+// (occupation.js STATE_LADDER: contested < unstable < extractive < stabilized <
+// vassalized). At extractive+ the occupier permits no war footing, so an occupied town
+// COOLS its posture (it cannot ramp its own war machine while garrisoned). At the fragile
+// rungs (contested/unstable) the constraint relaxes — a desperate rising may still ramp
+// (the deploy gate independently limits it to the occupier). String-set only: no
+// occupation.js import (the rung strings are a stable contract), so no new module edge.
+const OCCUPIER_CONTROL_STATES = new Set(['extractive', 'stabilized', 'vassalized']);
 
 // ── Ramp / cool tunables (calibration is load-bearing). ──────────────────────────
 // `progress` is a 0..1 accumulator WITHIN the current rung; it crosses 1.0 to step
@@ -191,7 +207,9 @@ export function rampReadiness(item, worldState) {
     + ECONOMY_RAMP_WEIGHT * (economy / 100 - 0.5)
     + LEGITIMACY_RAMP_WEIGHT * (legit / 100 - 0.5);
   // A neutral settlement (drive 0) multiplies by 1.0; +0.5 drive → ~1.5×; −0.5 → ~0.5×.
-  return Math.max(0.25, 1 + drive);
+  // W-F8: a MILITARIZED town mobilizes FASTER — the practiced march sooner. Factor ≥1,
+  // exactly 1 (byte-identical) when the settlement carries no projected martial record.
+  return Math.max(0.25, 1 + drive) * readinessMobilizationMult(item?.settlement);
 }
 
 /**
@@ -210,6 +228,26 @@ export function shouldCool(item) {
   if (legitimacyOf(item) < COOL_LEGITIMACY_FLOOR) reasons.push('low legitimacy: the home front will not hold a war footing');
   if (foodMonthsOf(item) < COOL_FOOD_MONTHS_FLOOR) reasons.push('food shortage: a mobilized army cannot be fed');
   return { cool: reasons.length > 0, reasons };
+}
+
+/**
+ * The HIGHEST ramp rung a treaty readiness ceiling permits. The ceiling is 0..1 (1 =
+ * unbound, 0 = total disarmament — see treatyEnforcement.demilitarizationCapFor for
+ * why it is the term magnitude's complement), and it maps onto the linear ramp by
+ * proportion: a court capped at 1 may still reach `mobilized`, one capped near 0 is
+ * pinned at `peace`. `null` (no live term) ⇒ the top rung ⇒ the pre-wire behaviour,
+ * exactly, so an untreatied world is byte-identical.
+ *
+ * The rung is the right granularity because `mobilized` is the keystone the deploy
+ * gate reads (isWarReady): a demilitarized court that cannot climb to the top rung
+ * literally cannot open a siege, which is what the term promises in its own receipt
+ * ("a mobilization cap ... the beaten foe may not rearm").
+ * @param {number | null | undefined} cap01 @returns {number}
+ */
+export function cappedRampIndex(cap01) {
+  const top = RAMP.length - 1;
+  if (cap01 == null || !Number.isFinite(Number(cap01))) return top;
+  return Math.max(0, Math.min(top, Math.floor(clamp01(Number(cap01)) * top)));
 }
 
 /**
@@ -254,10 +292,19 @@ export function mobilizationSeverity(state) {
  * @param {boolean} args.wantsWar            an upward pressure exists (a hostile target /
  *                                           a warlike disposition) — the reason to ramp at all.
  * @param {boolean} [args.forcePeace]        player intervention / explicit stand-down.
+ * @param {boolean} [args.occupierControl]   under a firm-control occupation (extractive+) →
+ *                                           the occupier permits no war footing (cool).
+ * @param {number|null} [args.readinessCap]  W-PEACE-2: a live demilitarization term's 0..1
+ *                                           ceiling on the war footing; null ⇒ unbound.
  * @returns {{ next: PostureRecord, transitioned: boolean, cooled: boolean, reasons: string[] }}
  */
-export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, warExhaustion, wantsWar, forcePeace = false }) {
+export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, warExhaustion, wantsWar, forcePeace = false, occupierControl = false, readinessCap = null }) {
   const reasons = [];
+  // W-PEACE-2 readiness_cap: the treaty ceiling, as a ramp rung. A court already AT or
+  // ABOVE its permitted rung must come down (folded into the cool trigger below, exactly
+  // as an occupier's suppression is); below it, the ramp runs normally but stops there.
+  const cappedIdx = cappedRampIndex(readinessCap);
+  const treatyCapped = readinessCap != null && RAMP_INDEX[prev.state] != null && RAMP_INDEX[prev.state] > cappedIdx;
 
   // ── DEPLOYED override: an army in the field pins the posture. A deep war scar
   // surfaces as `war_exhaustion`; otherwise `deployed`. ────────────────────────────
@@ -272,7 +319,17 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     };
   }
 
-  const cool = forcePeace ? { cool: true, reasons: ['player intervention: stand down'] } : shouldCool(item);
+  // worldpulse-war-9: a firmly-occupied town cannot ramp its own war machine — the
+  // occupier suppresses the war footing (a graded constraint: only at extractive+ rungs;
+  // a contested occupation still permits a desperate rising). Folded into the cool
+  // trigger, so it dominates a would-be ramp exactly as economic strain does.
+  const cool = forcePeace
+    ? { cool: true, reasons: ['player intervention: stand down'] }
+    : occupierControl
+      ? { cool: true, reasons: ['under occupation: the occupier permits no war footing'] }
+      : treatyCapped
+        ? { cool: true, reasons: ['a treaty caps this settlement\'s arms: the war footing must come down'] }
+        : shouldCool(item);
   const idx = RAMP_INDEX[prev.state];
 
   // ── A non-ramp state ('deployed'/'war_exhaustion'/'demobilizing') with no army:
@@ -337,15 +394,19 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
   }
 
   // ── RAMP UP: wantsWar holds and no cool trigger. progress += base × readiness. ────
+  // W-PEACE-2: the climb stops at the treaty's permitted rung. `topIdx` is the top of
+  // the linear ramp when no term binds, so the arithmetic below is unchanged for an
+  // untreatied settlement.
+  const topIdx = Math.min(RAMP.length - 1, cappedIdx);
   const readiness = rampReadiness(item, worldState);
   const rate = Math.max(RAMP_RATE_MIN, Math.min(RAMP_RATE_MAX, RAMP_BASE_RATE * readiness));
   let nextIdx = idx;
   let nextProgress = prev.progress + rate;
-  if (nextProgress >= 1 && idx < RAMP.length - 1) {
+  if (nextProgress >= 1 && idx < topIdx) {
     nextIdx = idx + 1;
     nextProgress = nextProgress - 1; // carry the overflow into the next rung
   } else if (nextProgress >= 1) {
-    nextProgress = 1; // capped at the top of the linear ramp (mobilized)
+    nextProgress = 1; // capped at the ceiling: the top rung, or the one a treaty allows
   }
   const nextState = RAMP[nextIdx];
   const transitioned = nextState !== prev.state;
@@ -382,6 +443,8 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
   const prevLedger = worldState?.warPosture && typeof worldState.warPosture === 'object' ? worldState.warPosture : {};
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {};
   const exhaustion = worldState?.warExhaustion && typeof worldState.warExhaustion === 'object' ? worldState.warExhaustion : {};
+  // worldpulse-war-9: the pre-tick occupation ledger (absent ⇒ never occupied ⇒ byte-identical).
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : {};
 
   /** @type {Record<string, PostureRecord>} */
   const nextLedger = {};
@@ -399,6 +462,13 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
     const hasArmyDeployed = !!deployments[id]?.targetId;
     const scar = clamp01(exhaustion[id] || 0);
     const wantsWar = !hasArmyDeployed && wantsWarFor(id) === true;
+    // worldpulse-war-9: firmly occupied (extractive+) ⇒ the occupier caps the war footing.
+    const occ = occupations[id];
+    const occupierControl = !!(occ && occ.occupierId != null && OCCUPIER_CONTROL_STATES.has(String(occ.state)));
+    // W-PEACE-2 readiness_cap: the ceiling a live demilitarization term imposes on THIS
+    // settlement (null ⇒ unbound ⇒ byte-identical to pre-wire). Read from the PRE-TICK
+    // treaties ledger, like every other ledger read in this pass.
+    const readinessCap = demilitarizationCapFor(worldState, id, tick);
 
     const { next, transitioned, cooled, reasons } = stepPosture({
       prev,
@@ -409,6 +479,8 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
       warExhaustion: scar,
       wantsWar,
       forcePeace: forcePeaceBy[id] === true,
+      occupierControl,
+      readinessCap,
     });
 
     // Only PERSIST a non-default posture. A settlement that lands back at

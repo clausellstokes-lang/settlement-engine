@@ -32,11 +32,12 @@ vi.mock('../../src/lib/campaigns.js', () => ({
   isCampaignActive: () => true,
 }));
 
-const fetchMapForImport = vi.fn();
-const bumpMapImport = vi.fn(() => Promise.resolve());
+// LINEAGE ADAPT (master merge W6): this lineage's import path reads
+// fetchGalleryMap (campaignSlice importGalleryMap/-WithCampaign), not master's
+// fetchMapForImport, and never calls master's bumpMapImport counter.
+const fetchGalleryMap = vi.fn();
 vi.mock('../../src/lib/gallery.js', () => ({
-  fetchMapForImport: (...a) => fetchMapForImport(...a),
-  bumpMapImport: (...a) => bumpMapImport(...a),
+  fetchGalleryMap: (...a) => fetchGalleryMap(...a),
 }));
 
 const uploadMapBackdrop = vi.fn();
@@ -65,8 +66,7 @@ function makeStore(extra = {}) {
 const EVIL_URL = 'javascript:alert(document.cookie)//evil';
 
 beforeEach(() => {
-  fetchMapForImport.mockReset();
-  bumpMapImport.mockReset().mockResolvedValue(undefined);
+  fetchGalleryMap.mockReset();
   uploadMapBackdrop.mockReset();
   // Simulate a failed re-upload fetch (network error / unreachable host) so the
   // code falls back to the untrusted original imageUrl.
@@ -79,7 +79,7 @@ afterEach(() => {
 
 describe('imported backdrop URL scheme guard', () => {
   test('importGalleryMap: a javascript: imageUrl with a failing re-upload is rejected, not persisted', async () => {
-    fetchMapForImport.mockResolvedValue({
+    fetchGalleryMap.mockResolvedValue({
       name: 'Evil Map',
       backdrop: { customBackdrop: { imageUrl: EVIL_URL, w: 100, h: 80 } },
     });
@@ -94,7 +94,7 @@ describe('imported backdrop URL scheme guard', () => {
   });
 
   test('importGalleryMapWithCampaign: a javascript: backdrop with a failing re-upload is dropped, campaign still imports', async () => {
-    fetchMapForImport.mockResolvedValue({
+    fetchGalleryMap.mockResolvedValue({
       kind: 'map_with_campaign',
       name: 'Evil Campaign',
       members: [],
@@ -113,7 +113,7 @@ describe('imported backdrop URL scheme guard', () => {
 
   test('importGalleryMap: a normal https imageUrl whose re-upload fails still imports (kept as a safe fallback)', async () => {
     const SAFE_URL = 'https://cdn.example.com/shared/map.png';
-    fetchMapForImport.mockResolvedValue({
+    fetchGalleryMap.mockResolvedValue({
       name: 'Good Map',
       backdrop: { customBackdrop: { imageUrl: SAFE_URL, w: 100, h: 80 } },
     });

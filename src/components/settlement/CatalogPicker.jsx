@@ -62,7 +62,7 @@ export default function CatalogPicker({
   }
 
   return (
-    <div style={{ marginTop:6, border:`1px solid ${BORDER}`, borderRadius:6, background:CARD_ALT, overflow:'hidden' }}>
+    <div style={{ marginTop:6, border:`1px solid ${BORDER}`, background:CARD_ALT, overflow:'hidden' }}>
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
         {/* eslint-disable-next-line jsx-a11y/no-autofocus -- focus the search field when the picker panel expands */}
@@ -75,7 +75,7 @@ export default function CatalogPicker({
         <div style={{ display:'flex', gap:3, padding:'4px 8px', flexWrap:'wrap', borderBottom:`1px solid ${BORDER}` }}>
           {['All', ...categoryFilters].map(c => (
             <Button key={c} variant={catFilter===c ? 'gold' : 'ghost'} size="sm" aria-pressed={catFilter===c} onClick={() => setCatFilter(c)}
-              style={{ minHeight:'auto', padding:'1px 7px', borderRadius:8, fontSize:FS.micro, fontWeight:catFilter===c?700:500, border:`1px solid ${catFilter===c?GOLD:BORDER}`, color:catFilter===c?GOLD:SECOND }}>
+              style={{ minHeight:'auto', padding:'1px 7px', fontSize:FS.micro, fontWeight:catFilter===c?700:500, border:`1px solid ${catFilter===c?GOLD:BORDER}`, color:catFilter===c?GOLD:SECOND }}>
               {c}
             </Button>
           ))}
@@ -88,17 +88,17 @@ export default function CatalogPicker({
           <div style={{ padding:'8px 6px', fontSize:FS.xxs, color:MUTED, textAlign:'center' }}>No matching items</div>
         ) : filtered.map(item => (
           <button type="button" key={item.id || item.name} onClick={() => handlePick(item)}
-            style={{ width:'100%', display:'flex', alignItems:'flex-start', gap:6, padding:'5px 8px', border:'none', background:'none', cursor:'pointer', borderRadius:4, textAlign:'left', fontFamily:sans }}
+            style={{ width:'100%', display:'flex', alignItems:'flex-start', gap:6, padding:'5px 8px', border:'none', background:'none', cursor:'pointer', textAlign:'left', fontFamily:sans }}
             onMouseEnter={e => e.currentTarget.style.background='#f0ebe0'}
             onMouseLeave={e => e.currentTarget.style.background='none'}>
             <div style={{ flex:1, minWidth:0 }}>
               <div style={{ fontSize:FS.xs, fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:4 }}>
                 {item.name}
-                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:swatch['#7C3AED'], background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
+                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:swatch['#7C3AED'], background:'rgba(124,58,237,0.12)', padding:'0 4px' }}>Custom</span>}
               </div>
               {item.desc && <div style={{ fontSize:FS.micro, color:MUTED, lineHeight:1.3, marginTop:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.desc}</div>}
             </div>
-            {item.category && <span style={{ fontSize:FS.micro, fontWeight:600, color:SECOND, background:`${SECOND}10`, borderRadius:3, padding:'1px 5px', flexShrink:0 }}>{item.category}</span>}
+            {item.category && <span style={{ fontSize:FS.micro, fontWeight:600, color:SECOND, background:`${SECOND}10`, padding:'1px 5px', flexShrink:0 }}>{item.category}</span>}
             {item.alreadyAdded && <span style={{ fontSize:FS.micro, color:MUTED, fontStyle:'italic' }}>Added</span>}
           </button>
         ))}

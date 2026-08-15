@@ -2,35 +2,34 @@
  * AccountRecoveryQuestionsSection.jsx — "Account recovery questions" section of
  * the Account page.
  *
- * The durable, honest home for security-question enrollment. At sign-up the
- * answers are captured best-effort by a deferred polling write that only lands
- * if the original window stays open through email confirmation — so OAuth
- * sign-ups, confirmations elsewhere, and closed windows leave an account with
- * NO recovery questions, locked out of the only self-service forgot-password
- * path. This signed-in section lets any account SET or REPLACE its two
- * questions at will, and shows whether they are currently set.
+ * The durable, honest home for security-question enrollment. Security questions
+ * are NOT captured at sign-up in this tree (the deferred post-confirmation write
+ * their build used needs a confirm-polling session we don't run), so this
+ * signed-in section is the ONE place any account SETs or REPLACEs its two
+ * questions — the answers the logged-out ForgotPasswordFlow later verifies
+ * against. It also shows whether questions are currently set.
  *
  * Security: the raw answers are passed straight to the set-answers store action
- * (which wraps the bcrypt-hashing RPC) and never persisted client-side — no
- * localStorage, no store-persist. Status is read from get_my_security_question_ids,
- * which returns only the question ids, never the hash.
+ * (which wraps the bcrypt-hashing RPC, migration 066) and never persisted
+ * client-side — no localStorage, no store-persist. Status is read from
+ * get_my_security_question_ids, which returns only the question ids, never the
+ * hash.
+ *
+ * Styling note: uses this tree's theme vocabulary (GOLD/BODY/swatch) —
+ * no new raw colors, so the raw-color ratchet is untouched.
  */
 import { useEffect, useState } from 'react';
-import { Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { securityQuestionText } from '../../data/securityQuestions.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import {
-  INK, BODY, MUTED, BORDER, GOLD_TXT, SP, R, FS, swatch,
-  DANGER_BORDER, SUCCESS_BORDER, TINT_GOLD,
-} from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 import SecurityQuestionsFields from '../auth/SecurityQuestionsFields.jsx';
 
 function ErrorBanner({ children }) {
   return (
-    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger }}>
       {children}
     </div>
   );
@@ -38,7 +37,7 @@ function ErrorBanner({ children }) {
 
 function OkBanner({ children }) {
   return (
-    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.success}`, fontSize: FS.sm, color: swatch.success }}>
       {children}
     </div>
   );
@@ -134,9 +133,9 @@ export default function AccountRecoveryQuestionsSection() {
             warning — it points to the set control directly below. */}
         {hasQuestions === false && !editing && !done && (
           <div style={{
-            padding: `${SP.sm}px ${SP.md}px`, background: TINT_GOLD,
-            border: `1px solid ${BORDER}`, borderRadius: R.md,
-            fontSize: FS.sm, color: GOLD_TXT, lineHeight: 1.5,
+            padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'],
+            border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
+            fontSize: FS.sm, color: GOLD, lineHeight: 1.5,
           }}>
             {t('auth.security.account.nudge')}
           </div>
@@ -184,7 +183,7 @@ export default function AccountRecoveryQuestionsSection() {
               setQ1={chooseQ1} setA1={setA1} setQ2={setQ2} setA2={setA2}
             />
             <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
-              <Button variant="primary" size="md" busy={busy} disabled={!complete} onClick={handleSave} icon={<Check size={14} />}>
+              <Button variant="primary" size="md" busy={busy} disabled={!complete} onClick={handleSave}>
                 {busy ? t('auth.security.account.saving') : t('auth.security.account.save')}
               </Button>
               <Button variant="ghost" size="md" disabled={busy} onClick={handleCancel}>

@@ -13,6 +13,7 @@ import {
   deriveAllNpcProfiles,
   npcArchetypeBreakdown,
   dominantNpcRemovalImpact,
+  normalizeNpcRank,
 } from '../../src/domain/npcProfile.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
@@ -80,6 +81,45 @@ function minorTraderNpc(over = {}) {
 
 // ── deriveNpcProfile (single NPC) ───────────────────────────────────────
 
+describe('[domain-top-state-4] NPC rank vocabulary — generator → NpcRank palette translation', () => {
+  const NPC_RANK_UNION = ['dominant', 'secondary', 'minor']; // the NpcRank union + palette keys
+  const GENERATOR_RANKS = ['dominant', 'subordinate'];       // npcStructure.getRank's output set
+
+  it('RATCHET: every generator rank normalizes INTO the NpcRank union', () => {
+    for (const r of GENERATOR_RANKS) expect(NPC_RANK_UNION).toContain(normalizeNpcRank(r));
+    // absent / unknown / numeric-legacy ranks collapse to 'minor' — never escape the union, never crash
+    for (const r of [undefined, null, '', 'bogus', 3, 0]) expect(NPC_RANK_UNION).toContain(normalizeNpcRank(r));
+  });
+
+  it("maps the generator's 'subordinate' onto the 'secondary' tier (the previously-dead palette)", () => {
+    expect(normalizeNpcRank('subordinate')).toBe('secondary');
+    expect(normalizeNpcRank('SUBORDINATE')).toBe('secondary'); // case-insensitive
+    expect(normalizeNpcRank('dominant')).toBe('dominant');
+    expect(normalizeNpcRank('minor')).toBe('minor');
+  });
+
+  it('a numeric legacy structuralRank does not crash toLowerCase and reads as minor', () => {
+    expect(() => normalizeNpcRank(3)).not.toThrow();
+    expect(normalizeNpcRank(3)).toBe('minor');
+  });
+
+  it("a 'subordinate' NPC now surfaces rank 'secondary' and draws the LIVE secondary palette (distinct from minor)", () => {
+    const secondary = deriveNpcProfile(militaryCaptain({ structuralRank: 'subordinate' }));
+    const minor     = deriveNpcProfile(militaryCaptain({ structuralRank: 'minor' }));
+    expect(secondary.rank).toBe('secondary');
+    expect(secondary.consequenceIfRemoved.severity).toBe('secondary');
+    expect(secondary.consequenceIfRemoved.consequences.length).toBeGreaterThan(0);
+    // the secondary tier is DISTINCT from minor — proof the palette is reachable, not a fallback
+    expect(secondary.consequenceIfRemoved.consequences).not.toEqual(minor.consequenceIfRemoved.consequences);
+  });
+
+  it('a numeric structuralRank through deriveNpcProfile does not throw and reads minor', () => {
+    const p = deriveNpcProfile(militaryCaptain({ structuralRank: 3 }));
+    expect(p.rank).toBe('minor');
+    expect(p.consequenceIfRemoved.severity).toBe('minor');
+  });
+});
+
 describe('deriveNpcProfile()', () => {
   it('produces all canonical fields on a rich NPC', () => {
     const profile = deriveNpcProfile(militaryCaptain());
@@ -123,6 +163,25 @@ describe('deriveNpcProfile()', () => {
 
   it('institutionLink is null when no matching institution exists', () => {
     expect(deriveNpcProfile(militaryCaptain(), { institutions: [] }).institutionLink).toBeNull();
+  });
+
+  it('resolves institutionLink for the generator-emitted categories via the archetype normalizer', () => {
+    const settlement = {
+      institutions: [
+        { name: 'Blacksmith Forge' },
+        { name: 'Arcane College' },
+        { name: 'Town Council' },
+      ],
+    };
+    // 'crafts' → craft archetype → forge/smithy hint
+    expect(deriveNpcProfile({ id: 'c', name: 'Smith', category: 'crafts' }, settlement).institutionLink)
+      .toBe('institution.blacksmith_forge');
+    // 'magic' → arcane archetype → college/mage hint
+    expect(deriveNpcProfile({ id: 'm', name: 'Archmage', category: 'magic' }, settlement).institutionLink)
+      .toBe('institution.arcane_college');
+    // 'noble' → government archetype → council/hall hint
+    expect(deriveNpcProfile({ id: 'n', name: 'Baron', category: 'noble' }, settlement).institutionLink)
+      .toBe('institution.town_council');
   });
 
   it('vulnerabilities include the secret-driven exposure when a secret is present', () => {
@@ -278,12 +337,13 @@ describe('consequenceIfRemoved', () => {
     expect(profile.consequenceIfRemoved.consequences.length).toBeGreaterThan(0);
   });
 
-  it('a subordinate-rank NPC reads the subordinate tier, not minor', () => {
+  it("a subordinate-rank NPC reads the mid tier (now keyed 'secondary'), not minor", () => {
     // getRank (npcStructure.js) emits 'dominant' | 'subordinate' — the mid tier.
-    // It must resolve to the intended (formerly dead) subordinate consequences,
-    // NOT fall through to the trivial single-line minor tier.
+    // COMPOSITE vocabulary migration (2026-07-18, declared): the tier key follows
+    // normalizeNpcRank's palette vocabulary ('secondary'); the tier CONTENT below
+    // is asserted unchanged — the rename moved the label, never the consequences.
     const profile = deriveNpcProfile(militaryCaptain({ structuralRank: 'subordinate' }));
-    expect(profile.consequenceIfRemoved.severity).toBe('subordinate');
+    expect(profile.consequenceIfRemoved.severity).toBe('secondary');
     const cons = profile.consequenceIfRemoved.consequences;
     // The subordinate military tier has two lines; the minor tier has one.
     expect(cons.length).toBe(2);

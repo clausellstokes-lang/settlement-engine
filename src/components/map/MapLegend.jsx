@@ -16,9 +16,10 @@
 import { useState } from 'react';
 import { Map as MapIcon, ChevronDown, ChevronUp } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, R, SP, sans, swatch } from '../theme.js';
-import { relEdgeColor, relChannelColor } from './relationshipEdgeStyle.js';
+import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
+import { REL_EDGE_STYLE, REL_TYPES, relChannelColor } from './relationshipEdgeStyle.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
+import { LIFECYCLE_GLYPH_STYLE } from './lifecycleGlyphStyle.js';
 
 // War/faith glyph hues pulled from the SAME regionalMapOverlay source the map
 // layer (WarFaithMapOverlay) draws, so the legend can never claim a color the
@@ -33,15 +34,15 @@ const MOBILIZE = regionalChannelColor('information_flow');
 const IMPACT = regionalImpactColor('queued');
 const GLYPH_HILITE = swatch['#FFFBF5']; // decorative inner stroke/fill on the map glyphs
 
-// Relationship edge colors — pulled from the shared edge-style source so the
-// legend can never claim a color the map (or the filter chips) don't draw.
-const REL_KEYS = [
-  { label: 'Trade partner',   color: relEdgeColor('trade_partner') },
-  { label: 'Allied',          color: relEdgeColor('allied') },
-  { label: 'Patron / vassal', color: relEdgeColor('patron'), dash: '6 3' },
-  { label: 'Rival',           color: relEdgeColor('rival'), dash: '2 3' },
-  { label: 'Hostile',         color: relEdgeColor('hostile') },
-];
+// Relationship edge rows are DERIVED from the shared edge-style source (the
+// canonical id list + label + color, dash from the edge metadata), so a new
+// canonical type gets a legend row automatically and the key can never claim
+// a color or dash the map does not draw.
+const REL_KEYS = REL_TYPES.map(t => ({
+  label: t.label,
+  color: t.color,
+  dash: REL_EDGE_STYLE[t.id]?.dash || undefined,
+}));
 
 // Pulse-minted war/faith channels — colors come from the SAME WAR_FAITH_STYLE
 // the map's RelationshipEdges draws (via relChannelColor), so the key and the
@@ -98,7 +99,7 @@ export default function MapLegend() {
       style={{
         position: 'absolute', left: SP.sm, bottom: SP.sm, zIndex: 20,
         width: open ? 232 : 'auto',
-        border: `1px solid ${BORDER}`, borderRadius: R.md,
+        border: `1px solid ${BORDER}`,
         background: CARD, boxShadow: ELEV[3],
         overflow: 'hidden', fontFamily: sans,
       }}
@@ -172,6 +173,34 @@ export default function MapLegend() {
             {REL_KEYS.map(k => (
               <Row key={k.label}><Swatch color={k.color} dash={k.dash} /><Label>{k.label}</Label></Row>
             ))}
+          </div>
+
+          {/* components-map-2: the W-LIFECYCLE settlement glyphs (steadings,
+              charter rings, relic ruins) draw on the map with no key until now.
+              Colors come from the SAME lifecycleGlyphStyle source PlacementsLayer
+              draws, so the key and the glyph can never disagree (P11). */}
+          <div style={{ display: 'grid', gap: 3 }}>
+            <GroupTitle>Lifecycle</GroupTitle>
+            <Row>
+              <svg width="22" height="12" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="11" cy="6" r="3" fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth="0.8" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.steading.label}</Label>
+            </Row>
+            <Row>
+              <svg width="22" height="14" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="11" cy="7" r="2.5" fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth="0.7" />
+                <circle cx="11" cy="7" r="5" fill="none" stroke={LIFECYCLE_GLYPH_STYLE.charterRing.stroke} strokeWidth="1" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.charterRing.label}</Label>
+            </Row>
+            <Row>
+              <svg width="22" height="14" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <path d="M6,11 L8,4 L10,11 Z M12,11 L14,6 L16,11 Z" fill={LIFECYCLE_GLYPH_STYLE.ruin.fill} stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth="0.6" />
+                <line x1="4" y1="11" x2="18" y2="11" stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth="0.8" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.ruin.label}</Label>
+            </Row>
           </div>
 
           <div style={{ display: 'grid', gap: 4 }}>

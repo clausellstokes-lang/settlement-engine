@@ -2,8 +2,7 @@
  * BulkActionBar — the Library multi-select action bar (UX overhaul Phase 3, plan
  * §4.2). Appears when the Select toggle is on; reflects the current selection and
  * offers the bulk actions: Add to campaign · Canonize · Export · Delete. It also
- * owns its own delete-confirmation + export-error surfaces (the thin LibraryBulkBar
- * wrapper was folded in here — one component, one call site).
+ * owns its own delete-confirmation + export-error surfaces.
  *
  * Drives directly off the useLibraryBulkSelect hook the parent owns. Add-to-campaign
  * / Canonize are premium-campaign actions, so they self-hide when
@@ -13,7 +12,7 @@
 import { useState } from 'react';
 import { FolderOpen, BookMarked, Download, Trash2, X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { GOLD, INK, BODY, BORDER, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
+import { GOLD, INK, BODY, BORDER_STRONG, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import useIsMobile from '../../hooks/useIsMobile.js';
 
@@ -52,6 +51,9 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
   const isMobile = useIsMobile();
   const selectedCount = bulk.selectedIds.size;
   const disabled = selectedCount === 0;
+  const isCampaignTargetBlocked = campaignId =>
+    !!bulk.getAddToCampaignBlock?.(campaignId);
+  const deleteBlocked = !!bulk.getDeleteBlock?.();
 
   // On mobile the single flexWrap row collapses into a ragged stack and the
   // `marginLeft:auto` right-anchor on Delete breaks once it wraps to its own
@@ -96,16 +98,37 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                 onClick={() => setMoveOpen(o => !o)}>
                 Add to campaign
               </Button>
+              {/* Floating chrome separates by its STRONG RULE, not a lift — the
+                  MoreMenu popover's ruled treatment (WorldMapToolbar, C5-a·iii).
+                  Print has no z-axis; the drop shadow and its rgba went with it. */}
               {moveOpen && !disabled && (
-                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 6, boxShadow: '0 4px 16px rgba(0,0,0,0.15)', minWidth: 160, padding: 4 }}>
+                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER_STRONG}`, minWidth: 160, padding: 4 }}>
                   {campaigns.length === 0 && <div style={{ padding: '5px 8px', fontSize: FS.xs, color: BODY }}>No campaigns yet</div>}
                   {campaigns.map(c => (
                     // No minHeight override: menu items inherit Button's sm floor so
                     // these (the only path to bulk add-to-campaign) aren't the
                     // smallest targets on the surface (P7).
-                    <Button key={c.id} variant="ghost" fullWidth role="menuitem" icon={<FolderOpen size={10} color={GOLD} />}
-                      onClick={() => { bulk.addToCampaignBulk(c.id); setMoveOpen(false); }}
-                      style={{ justifyContent: 'flex-start', textAlign: 'left', padding: '6px 8px', gap: 4, fontSize: FS.xs, color: INK, fontWeight: 400, borderRadius: 3 }}>
+                    <Button
+                      key={c.id}
+                      variant="ghost"
+                      fullWidth
+                      role="menuitem"
+                      icon={<FolderOpen size={10} color={GOLD} />}
+                      disabled={isCampaignTargetBlocked(c.id)}
+                      onClick={() => {
+                        bulk.addToCampaignBulk(c.id);
+                        setMoveOpen(false);
+                      }}
+                      style={{
+                        justifyContent: 'flex-start',
+                        textAlign: 'left',
+                        padding: '6px 8px',
+                        gap: 4,
+                        fontSize: FS.xs,
+                        color: INK,
+                        fontWeight: 400,
+                      }}
+                    >
                       {c.name}
                     </Button>
                   ))}
@@ -121,7 +144,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
           )}
 
           <Button variant="secondary" size="sm" disabled={disabled} icon={<Download size={12} />} onClick={bulk.exportBulk}>
-            Export
+            Export JSON
           </Button>
         </ActionGroup>
 
@@ -130,7 +153,14 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
             margin is dropped and the pair sits on its own trailing row, with
             Delete pushed to the right within that row instead. */}
         <ActionGroup isMobile={isMobile} mobileTrailing>
-          <Button variant="ghost" size="sm" disabled={disabled} icon={<Trash2 size={12} />} onClick={() => bulk.setDeleteConfirm(true)} style={{ marginLeft: 'auto' }}>
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={disabled || deleteBlocked}
+            icon={<Trash2 size={12} />}
+            onClick={() => bulk.setDeleteConfirm(true)}
+            style={{ marginLeft: 'auto' }}
+          >
             Delete
           </Button>
 
@@ -151,7 +181,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
       {bulk.deleteConfirm && (
         <DeleteConfirmation
           entityName={`${selectedCount} settlement${selectedCount === 1 ? '' : 's'}`}
-          details="The selected settlements will be permanently deleted, along with any neighbour links to them. Data not exported as JSON is lost."
+          details="These settlements will be gone for good, along with any neighbour links to them. Export a copy first if you want to keep one."
           onConfirm={bulk.confirmDelete}
           onCancel={() => bulk.setDeleteConfirm(false)}
         />

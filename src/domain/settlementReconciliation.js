@@ -1,27 +1,42 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
+import { preserveSettlementParentRef } from './settlementParentRef.js';
 
-/** @param {any} condition */
+/** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
+/** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
+/** @typedef {CanonicalSettlement & { reconciliationLog?: Object[] }} ReconcilableSettlement */
+
+/**
+ * @param {ActiveCondition | null | undefined} condition
+ * @returns {string | null}
+ */
 function conditionId(condition) {
   return condition?.archetype || condition?.id || condition?.label || null;
 }
 
-/** @param {any} value @returns {string | null} */
+/**
+ * @param {unknown} value
+ * @returns {string | null}
+ */
 function compactLabel(value) {
   const text = String(value || '').trim();
   return text ? text.slice(0, 160) : null;
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} nextSettlement
- * @param {import('./settlement.schema.js').SimSettlement} priorSettlement
- * @param {Record<string, any>} [options]
- * @returns {any}
+ * @param {ReconcilableSettlement | null | undefined} nextSettlement
+ * @param {ReconcilableSettlement | null | undefined} priorSettlement
+ * @param {{ now?: string, source?: string, changeType?: unknown, changeLabel?: unknown }} [options]
+ * @returns {ReconcilableSettlement | null | undefined}
  */
 export function reconcileSettlementChange(nextSettlement, priorSettlement, options = {}) {
   if (!nextSettlement || !priorSettlement) return nextSettlement;
-  const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
-  /** @type {any} */
-  const reconciled = preserveWorldConditions(nextSettlement, priorSettlement);
+  const carried = worldAuthoredConditions(/** @type {any} */ (priorSettlement)).map(conditionId).filter(Boolean);
+  const reconciled = /** @type {ReconcilableSettlement} */ (
+    preserveSettlementParentRef(
+      preserveWorldConditions(nextSettlement, priorSettlement),
+      priorSettlement,
+    )
+  );
   const entry = {
     // `at` is a deterministic, caller-supplied timestamp. When options.now is
     // omitted we record null rather than stamping wall-clock: a reconciliationLog

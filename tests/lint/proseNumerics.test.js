@@ -1,0 +1,421 @@
+/**
+ * Review addendum A-1 — prose-numerics class-kill + legacy ratchet.
+ *
+ * Reader prose may name quantities in world words, bands, and honest whole
+ * counts. It may not expose the engine's float/scalar notation. This scanner
+ * covers authored headline/summary/reason/receipt templates in JavaScript under
+ * src and
+ * the full E-E JSX corpus. Its four detector classes are independently mutant-
+ * proven below; live debt is frozen by exact path + line + snippet identity in
+ * .prose-numerics-baseline.json and may only shrink.
+ */
+import { describe, expect, it } from 'vitest';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { scanProseNumericsSource } from '../helpers/proseNumericsWalk.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
+// CW-0w slice 4 admits the FIFTH detector class with its own ceiling. The four
+// above are untouched: the push-indirection walk defers to them, so a leak they
+// already see keeps its own category and only what escaped every named prose
+// surface becomes a pushIndirection row. Measured at landing: exactly 3, all
+// three in relationshipMemory.js's postureReasons, which the scanner had never
+// seen at all.
+//
+// CR-FP-2 — THE ONE RULED RE-RECORD (FP cycle 1 close). 404 -> 413.
+//
+// This is a DELIBERATE upward move of three ceilings, recorded here because the
+// rule elsewhere in this file is that ceilings only fall. It was ruled once, for
+// a ratchet that had been RED AT BASE since the war lane, and the measurement
+// behind it is this:
+//
+//   - The instrument is byte-identical to the one that recorded the 404 census
+//     (tests/helpers/proseNumericsWalk.js, unchanged since e30770bd). Running it
+//     against the e30770bd tree yields 413, not 404: the slice-4 commit banked a
+//     baseline its own scanner already disagreed with by nine rows. The
+//     PRE-slice-4 walker against that same tree yields 410 — the identical nine
+//     rows, minus the three pushIndirection finds. So the gap is NOT instrument
+//     reach; slice 4's reach was fully absorbed at 401 -> 404.
+//   - The nine rows are war-lane prose authored between WR-2 and CW-0w, which
+//     nobody re-recorded: conquestFeasibility.js (WR-8 slice 1, e8354fb9),
+//     occupation.js x2 sentences (W8-C slice 3, ab71f940), razing.js (WR-8
+//     slice 4, bf731ea6) — four REAL reader-prose float leaks — plus three rows
+//     on receipt-SHAPED ledger fields that are not prose at all (the `receipt:`
+//     key and the `receiptTick` name pull `Math.floor` ids and integer ticks
+//     into the walk: warCoalitionExpenditure.js x2, warCostsNews.js x1).
+//   - Everything else that moved is address rot, not debt: 88 pure line moves
+//     and 13 WR-7b decomposition relocations (peaceTerms.js ->
+//     peaceTermsDrafting.js x6, warDeployment.js -> warHomeCosts.js x6 and
+//     warSiegeVerdict.js x1). This discharges SOL-BANK-2's parked line-drift
+//     red, whose "line-location drift CONFIRMED, whole-baseline equivalence
+//     PLAUSIBLE" is now measured on both counts.
+//   - FP cycle 1 authored ZERO prose numerics. Between e30770bd and this
+//     commit the live hit set changed by exactly four rows, all four the same
+//     two tradeWar.js sentences at shifted line addresses after TR-1's seam.
+//
+// FOUR SENTENCES ARE THEREFORE FROZEN AS UN-HUMANIZED DEBT, not as clean rows.
+// They are owed a humanization wave and are named above so the debt cannot be
+// lost in the count. Ceilings are pinned to the EXACT live census rather than
+// rounded up, so the next leak of any class is red on arrival.
+const REVIEWED_TOTAL_CEILING = 413;
+const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
+  floatInterpolation: 236,
+  percentToken: 79,
+  multiplier: 24,
+  twoDecimalScore: 71,
+  pushIndirection: 3,
+});
+
+function walkSourceFiles(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const abs = join(dir, entry);
+    if (statSync(abs).isDirectory()) walkSourceFiles(abs, out);
+    else if (/\.(?:js|jsx)$/.test(entry)) out.push(abs);
+  }
+  return out;
+}
+
+function scanLiveTree() {
+  const hits = [];
+  const parseErrors = [];
+  for (const abs of walkSourceFiles(join(ROOT, 'src')).sort()) {
+    const path = relative(ROOT, abs).replace(/\\/g, '/');
+    const result = scanProseNumericsSource({ source: readFileSync(abs, 'utf8'), path });
+    hits.push(...result.hits);
+    if (result.parseError) parseErrors.push(`${path}: ${result.parseError}`);
+  }
+  return { hits, parseErrors };
+}
+
+function ceilingViolations(hits) {
+  const counts = Object.fromEntries(
+    Object.keys(REVIEWED_CATEGORY_CEILINGS).map((category) => [category, 0]),
+  );
+  const unknownCategories = new Set();
+
+  for (const hit of hits) {
+    if (Object.prototype.hasOwnProperty.call(counts, hit.category)) {
+      counts[hit.category] += 1;
+    } else {
+      unknownCategories.add(String(hit.category));
+    }
+  }
+
+  const violations = [];
+  if (hits.length > REVIEWED_TOTAL_CEILING) {
+    violations.push(`total ${hits.length} exceeds reviewed ceiling ${REVIEWED_TOTAL_CEILING}`);
+  }
+  for (const [category, ceiling] of Object.entries(REVIEWED_CATEGORY_CEILINGS)) {
+    if (counts[category] > ceiling) {
+      violations.push(`${category} ${counts[category]} exceeds reviewed ceiling ${ceiling}`);
+    }
+  }
+  for (const category of [...unknownCategories].sort()) {
+    violations.push(`unknown detector category ${category} has no reviewed ceiling`);
+  }
+  return violations;
+}
+
+const LIVE = scanLiveTree();
+
+describe('prose numerics detector discriminates (executed mutants)', () => {
+  const cases = [
+    {
+      category: 'floatInterpolation',
+      clean: "export const beat = { headline: 'The levy gathers.' };",
+      mutant: 'export const beat = { headline: `The levy gathers at pressure ${pressure}.` };',
+    },
+    {
+      category: 'percentToken',
+      clean: "export const beat = { summary: 'The levy loses nearly half its strength.' };",
+      mutant: 'export const beat = { summary: `The levy loses ${Math.round(loss * 100)}% of its strength.` };',
+    },
+    {
+      category: 'multiplier',
+      clean: "export const beat = { reasons: ['The levy outmatches the watch.'] };",
+      mutant: 'export const beat = { reasons: [`The levy stands at ${depth}× the watch.`] };',
+    },
+    {
+      category: 'twoDecimalScore',
+      clean: "export const beat = { reason: 'The court believes the road unsafe.' };",
+      mutant: 'export const beat = { reason: `The court reads danger ${score.toFixed(2)}.` };',
+    },
+  ];
+
+  it.each(cases)('$category: the clean control stays quiet and the mutant is caught', ({ category, clean, mutant }) => {
+    expect(scanProseNumericsSource({ source: clean, path: 'src/control.js' }).hits).toEqual([]);
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toContain(category);
+  });
+
+  it('allows whole world counts and dates rather than banning all numbers', () => {
+    const clean = 'export const beat = { summary: `${wagons} wagons arrived over ${years} years.` };';
+    expect(scanProseNumericsSource({ source: clean, path: 'src/counts.js' }).hits).toEqual([]);
+  });
+
+  it('catches scalar concatenation as the same leak class as template interpolation', () => {
+    const mutant = "export const beat = { headline: 'The court reads danger ' + score + '.' };";
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/concat-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toContain('floatInterpolation');
+  });
+
+  it('follows one unique local binding when it flows into a prose key', () => {
+    const mutant = [
+      'const opaqueBody = `The court reads danger ${score.toFixed(2)}.`;',
+      'export const beat = { headline: opaqueBody };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/binding-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('follows a direct local function return when the call flows into a prose key', () => {
+    const mutant = [
+      'function opaqueComposer() { return `The levy roll was ${roll.toFixed(2)}.`; }',
+      'export const beat = { summary: opaqueComposer() };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/return-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('follows push arguments on a flowed local sentence array', () => {
+    const mutant = [
+      'const parts = [];',
+      'parts.push(`The levy chance was ${chance.toFixed(2)}.`);',
+      'export const beat = { reasons: parts };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/push-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('does not guess through reassigned, imported, or second-hop opaque values', () => {
+    const clean = [
+      "import { externalComposer } from './elsewhere.js';",
+      'const firstHop = `The court reads danger ${score.toFixed(2)}.`;',
+      'const secondHop = firstHop;',
+      'let reassigned = `The levy chance was ${chance.toFixed(2)}.`;',
+      "reassigned = 'The levy looks uncertain.';",
+      'export const beats = [',
+      '  { headline: secondHop },',
+      '  { summary: reassigned },',
+      '  { reason: externalComposer() },',
+      '];',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/opaque-control.js' }).hits).toEqual([]);
+  });
+
+  it('does not fall through a parameter shadow to an outer binding', () => {
+    const clean = [
+      'const opaqueBody = `The court reads danger ${score.toFixed(2)}.`;',
+      'export function authored(opaqueBody) {',
+      '  return { headline: opaqueBody };',
+      '}',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/shadow-control.js' }).hits).toEqual([]);
+  });
+
+  it('pushIndirection: a float reaches the reader through a WRAPPED return', () => {
+    // The exact live shape CW-0w was pointed at (relationshipMemory.js's
+    // postureReasons): a non-prose-named local array, pushed with a float, then
+    // returned through `.slice(...)` from a prose-NAMED function. None of the
+    // four detectors above can see it — the array is not prose-named and the
+    // return is a call, not the array.
+    const mutant = [
+      'function postureReasons(relState) {',
+      '  const out = [];',
+      '  out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);',
+      '  return out.slice(0, 4);',
+      '}',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/wrapped-return.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['pushIndirection']);
+  });
+
+  it('pushIndirection: the array may also travel through a NON-prose-named carrier', () => {
+    // The second escape the interior survey named: the array leaves an ordinary
+    // function and the CALL is what lands on the prose surface.
+    const mutant = [
+      'function buildLines(state) {',
+      '  const parts = [];',
+      '  parts.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return parts;',
+      '}',
+      'export const beat = { reasons: buildLines(state) };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/carrier.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['pushIndirection']);
+  });
+
+  it('pushIndirection: a wrapped array that reaches NO reader surface stays quiet', () => {
+    // The false-positive control. Same array, same float, same `.slice` — but
+    // the function is not prose-named and nothing prose-named consumes it, so a
+    // detector that fired here would be reporting sentences no reader sees.
+    const clean = [
+      'function auditTrail(state) {',
+      '  const out = [];',
+      '  out.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return out.slice(0, 4);',
+      '}',
+      'export const debugOnly = { trace: auditTrail(state) };',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/audit-control.js' }).hits).toEqual([]);
+  });
+
+  it('pushIndirection: a TRANSFORMING method is not followed, and banded words stay quiet', () => {
+    // `.map` rebuilds every element, so following it would report a sentence
+    // that may no longer exist. And the whole point of the estate's rule is that
+    // BANDED prose is fine — a wrapped return carrying only words is not a leak.
+    const clean = [
+      'function reasonsA(state) {',
+      '  const out = [];',
+      '  out.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return out.map((line) => line.toUpperCase());',
+      '}',
+      'function reasonsB() {',
+      '  const out = [];',
+      '  out.push(\'Resentment runs high enough to shape the posture.\');',
+      '  return out.slice(0, 4);',
+      '}',
+      'export const beats = [reasonsA, reasonsB];',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/transform-control.js' }).hits).toEqual([]);
+  });
+
+  it('does not attribute a future array push to an earlier authored value', () => {
+    const clean = [
+      'const parts = [];',
+      'export const beat = { reasons: parts };',
+      'parts.push(`A later diagnostic reads ${score.toFixed(2)}.`);',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/future-push-control.js' }).hits).toEqual([]);
+  });
+});
+
+describe('E-E JSX prose numerics detector discriminates (executed mutants)', () => {
+  const cases = [
+    ['floatInterpolation', '<p>Pressure {score.toFixed(1)}</p>'],
+    ['percentToken', '<p>Chance {Math.round(chance * 100)}%</p>'],
+    ['multiplier', '<p>Commitment {depth}× the old mark</p>'],
+    ['twoDecimalScore', '<p>Hold chance 0.62, roll 0.41</p>'],
+  ];
+
+  it.each(cases)('%s: a JSX mutant is caught', (category, body) => {
+    const source = `export function Mutant() { return (${body}); }`;
+    const result = scanProseNumericsSource({ source, path: 'src/Mutant.jsx' });
+    expect(result.parseError).toBeNull();
+    expect(result.hits.map((hit) => hit.category)).toContain(category);
+  });
+
+  it('the clean JSX control stays quiet', () => {
+    const source = 'export function Clean() { return (<p>The watch is badly outmatched.</p>); }';
+    expect(scanProseNumericsSource({ source, path: 'src/Clean.jsx' }).hits).toEqual([]);
+  });
+
+  it('follows one local JSX reader binding without scanning unrelated component state', () => {
+    const source = [
+      'export function Mutant() {',
+      '  const opaqueBody = `Hold chance ${chance.toFixed(2)}.`;',
+      '  return <p>{opaqueBody}</p>;',
+      '}',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source, path: 'src/Mutant.jsx' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('layout/control/CSS numerics are not reader prose (negative matrix)', () => {
+    const source = [
+      "const css = '.meter { width: 100%; opacity: 0.62; }';",
+      'export function SummaryTab({ active, cats, keyName }) {',
+      '  return (<>',
+      '    <style>{css}</style>',
+      "    <p>{t('generate.title')}</p>",
+      "    <p>{keyName.replace(/_/g, ' ')}</p>",
+      "    <p>{cats.join(' / ')}</p>",
+      "    <p>{active ? 'The gate is open.' : 'The gate is closed.'}</p>",
+      "    <div style={{ width: '100%', opacity: 0.62, transform: 'scale(1.20)' }} />",
+      '  </>);',
+      '}',
+    ].join('\n');
+    const result = scanProseNumericsSource({ source, path: 'src/Clean.jsx' });
+    expect(result.parseError).toBeNull();
+    expect(result.hits).toEqual([]);
+  });
+});
+
+describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)', () => {
+  it('the complete JS/JSX corpus parses, so a green scan cannot mean skipped files', () => {
+    expect(LIVE.parseErrors, LIVE.parseErrors.join('\n')).toEqual([]);
+  });
+
+  it('the committed exact baseline exists', () => {
+    expect(
+      existsSync(BASELINE_PATH),
+      'baseline missing; restore the reviewed exact A-1 census rather than creating an empty or anonymous budget',
+    ).toBe(true);
+  });
+
+  it('path + line + category + snippet debt exactly matches the committed baseline', () => {
+    const baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
+    expect(
+      LIVE.hits,
+      'A new prose numeric leaked, or legacy debt moved/fell. Humanize additions; when debt falls, regenerate once and review every removed row before committing the lower baseline.',
+    ).toEqual(baseline);
+  });
+
+  it('the reviewed post-sweep total and per-category ceilings can only move down', () => {
+    const baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
+    const categoryCeilingTotal = Object.values(REVIEWED_CATEGORY_CEILINGS)
+      .reduce((sum, ceiling) => sum + ceiling, 0);
+
+    expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
+    expect(
+      ceilingViolations(baseline),
+      'The committed baseline exceeds the reviewed 413-row census. Remove the leak; never raise a ceiling.',
+    ).toEqual([]);
+    expect(
+      ceilingViolations(LIVE.hits),
+      'The live tree exceeds the reviewed 413-row census. Humanize the new leak; never raise a ceiling.',
+    ).toEqual([]);
+  });
+
+  it('a regenerated exact baseline cannot make an executed +1 leak green', () => {
+    const mutant = scanProseNumericsSource({
+      source: 'export const beat = { headline: `The court reads pressure ${pressure}.` };',
+      path: 'src/governance-mutant.js',
+    }).hits;
+    expect(mutant.map((hit) => hit.category)).toEqual(['floatInterpolation']);
+
+    const mutatedLive = [...LIVE.hits, ...mutant];
+    const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
+    expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
+    expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
+      'total 414 exceeds reviewed ceiling 413',
+      'floatInterpolation 237 exceeds reviewed ceiling 236',
+    ]);
+  });
+
+  it('the baseline itself has exact, unique, source-verifiable identities', () => {
+    const baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
+    const keys = baseline.map((hit) => `${hit.path}|${hit.line}|${hit.category}|${hit.snippet}`);
+    expect(new Set(keys).size).toBe(keys.length);
+    for (const hit of baseline) {
+      expect(typeof hit.path).toBe('string');
+      expect(Number.isInteger(hit.line) && hit.line > 0).toBe(true);
+      expect(['floatInterpolation', 'percentToken', 'multiplier', 'twoDecimalScore', 'pushIndirection']).toContain(hit.category);
+      expect(typeof hit.snippet === 'string' && hit.snippet.length > 0).toBe(true);
+      const source = readFileSync(join(ROOT, hit.path), 'utf8');
+      const sourceLines = source.split(/\r?\n/);
+      expect((sourceLines[hit.line - 1] || '').trim().length, `${hit.path}:${hit.line} is no longer a source line`)
+        .toBeGreaterThan(0);
+      const frozenSource = hit.snippet.endsWith('...') ? hit.snippet.slice(0, -3) : hit.snippet;
+      expect(oneLineForIdentity(source), `${hit.path}:${hit.line} no longer contains its frozen snippet`)
+        .toContain(frozenSource);
+    }
+  });
+});
+
+function oneLineForIdentity(text) {
+  return text.replace(/\s+/g, ' ').trim();
+}

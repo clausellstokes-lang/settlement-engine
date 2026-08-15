@@ -54,7 +54,7 @@ describe('stressor spread channel vocabulary', () => {
     expect(noSpread.some(c => c.candidateType?.startsWith('stressor_spread'))).toBe(false);
   });
 
-  test('spread persists per-target attenuation — and the news reports the attenuated number', () => {
+  test('spread persists per-target attenuation while reader prose stays authored', () => {
     // H8 pin, R3 semantics. Reconciles the R1 "no cosmetic decay" pin: R1
     // banned the 0.72× number because it was display-only; R3 PERSISTS it
     // (severityBySettlement, the decided design), so every surface now
@@ -78,11 +78,13 @@ describe('stressor spread channel vocabulary', () => {
     // …and the upserted payload persists the attenuated value for the target.
     expect(spread.stressor.severityBySettlement.b).toBeCloseTo(0.8 * 0.72, 10);
     expect(Object.keys(spread.stressor.severityBySettlement)).toEqual(['b']);
-    // DM-facing prose tells the truth: it spreads attenuated, with the number.
+    // Reader prose tells the same truth in world words. Exact values stay on
+    // the candidate and per-settlement evidence pinned above.
     const text = JSON.stringify([spread.headline, spread.summary, spread.reasons]);
-    expect(text).not.toMatch(/full strength|undiminished/i);
-    expect(text).toContain('0.58');
-    expect(text).toContain('0.80');
+    expect(spread.summary).toContain('though it arrives with less force');
+    expect(spread.reasons).toContain('A path to another settlement lies open, and distance dulls the blow.');
+    // anchored: the two exact authored phrases above prove the reader projection is live.
+    expect(text).not.toMatch(/\b0\.(?:58|80)\b|full strength|undiminished/i);
     // The proposal gate still runs against the RECORD severity (a 0.78+
     // crisis spreading is major; gating on the attenuated number would make
     // the gate unreachable — 0.78 / 0.72 > 1).

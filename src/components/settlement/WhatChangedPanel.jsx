@@ -16,19 +16,23 @@
 
 import { useMemo } from 'react';
 import { compareCausalState, deriveCausalState } from '../../domain/causalState.js';
+import { buildTrendLenses } from '../../domain/display/trendLens.js';
 import {
-  INK, MUTED, BODY, BORDER, CARD, CARD_HDR, sans, FS, SP, R,
+  INK, MUTED, BODY, BORDER, CARD, CARD_HDR, sans, FS, SP,
 } from '../theme.js';
+import { INK as OINK } from '../../design/organic/ink.js';
+import { RUBRIC } from '../../design/organic/rubrication.js';
 
-const BAND_COLOR = {
-  surplus: '#1a5a28', adequate: '#3f7d3f', strained: '#a0762a',
-  critical: '#b15a1f', collapsed: '#8b1a1a',
-};
-
+// THE ERRATUM SLIP (Deep Craft — the dossier's correction-notice voice): the
+// "what changed" read is a rule-framed slip of corrections, not a rounded SaaS
+// card. A regression is marked in the oxblood apparatus (the erratum voice), an
+// improvement in neutral ink — both contrast-PINNED as text on parchment. The
+// +/- sign and the explanation carry the direction, so colour is never the sole
+// channel.
 function deltaColor(entry) {
   const better = (entry.polarity === 'higher_is_better' && entry.change > 0) ||
                  (entry.polarity === 'lower_is_better' && entry.change < 0);
-  return better ? BAND_COLOR.adequate : BAND_COLOR.critical;
+  return better ? OINK.strong : RUBRIC.rubric;
 }
 
 /**
@@ -66,7 +70,10 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
             .map((/** @type {any} */ p) => (typeof p === 'number' ? p : Number(p?.population)))
             .filter((/** @type {any} */ n) => Number.isFinite(n))
           : []);
-    return { deltas, history, hasPrior: !!beforeState };
+    // V-25e — RADAR LENSES v1: derived trend readings from the populationHistory ring
+    // (trend, never prophecy — every reading is retrospective and claims-parity-pinned).
+    const lenses = buildTrendLenses({ settlement });
+    return { deltas, history, hasPrior: !!beforeState, lenses };
   }, [settlement, priorSettlement, before, after, populationHistory]);
 
   // Self-gate: no prior snapshot and no population arc ⇒ nothing to say.
@@ -81,48 +88,71 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
     <div
       data-testid="what-changed-panel"
       style={{
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        background: CARD, border: `1px solid ${BORDER}`,
         marginBottom: 12, fontFamily: sans, overflow: 'hidden',
       }}
     >
       <div style={{
         fontSize: FS.sm, fontWeight: 800, color: INK, background: CARD_HDR,
         padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
+        textTransform: 'uppercase', letterSpacing: '0.06em',
       }}>
         What changed &amp; why
-        <span style={{ fontWeight: 600, fontSize: FS.xs, color: MUTED, marginLeft: SP.sm }}>
+        <span style={{ fontWeight: 600, fontSize: FS.xs, color: MUTED, marginLeft: SP.sm, textTransform: 'none', letterSpacing: 0 }}>
           since the world last moved
         </span>
       </div>
 
       <div style={{ padding: SP.md }}>
-        {model.deltas.length > 0 ? (
-          <ul data-testid="what-changed-list" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-            {model.deltas.map(entry => (
-              <li
-                key={entry.variable}
-                data-variable={entry.variable}
-                style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, marginBottom: 4 }}
-              >
-                <span style={{ color: deltaColor(entry), fontWeight: 800, marginRight: 4 }}>
-                  {entry.change > 0 ? `+${entry.change}` : entry.change}
-                </span>
-                {entry.explanation}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div style={{ fontSize: FS.sm, color: MUTED }}>
-            The causal substrate held steady. No variable moved.
-          </div>
+        {/* The causal-diff block is shown ONLY when a real prior snapshot was
+            compared (hasPrior). Without one, "held steady" would be a quiet lie —
+            we didn't compare, we just lack the before. In that case only the
+            population arc below reports change. */}
+        {model.hasPrior && (
+          model.deltas.length > 0 ? (
+            <ul data-testid="what-changed-list" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+              {model.deltas.map(entry => (
+                <li
+                  key={entry.variable}
+                  data-variable={entry.variable}
+                  style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, marginBottom: 4 }}
+                >
+                  <span style={{ color: deltaColor(entry), fontWeight: 800, marginRight: 4 }}>
+                    {entry.change > 0 ? `+${entry.change}` : entry.change}
+                  </span>
+                  {entry.explanation}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div style={{ fontSize: FS.sm, color: MUTED }}>
+              The causal substrate held steady. No variable moved.
+            </div>
+          )
         )}
 
         {model.history.length >= 2 && (
           <div data-testid="population-arc" style={{ marginTop: SP.sm, fontSize: FS.sm, color: BODY }}>
             <strong>Population:</strong> {popFirst.toLocaleString()} → {popLast.toLocaleString()}{' '}
-            <span style={{ color: popChange >= 0 ? BAND_COLOR.adequate : BAND_COLOR.critical, fontWeight: 700 }}>
+            <span style={{ color: popChange >= 0 ? OINK.strong : RUBRIC.rubric, fontWeight: 700 }}>
               ({popChange >= 0 ? '+' : ''}{popChange.toLocaleString()})
             </span>
+          </div>
+        )}
+
+        {/* V-25e — the trend lens strip: what the recent history HAS shown (a retrospective
+            reading, never a forecast). Colour + the reading word carry the direction (two
+            channels); self-gates to nothing when there is no ring to read. */}
+        {model.lenses.length > 0 && (
+          <div data-testid="trend-lenses" style={{ marginTop: SP.sm, display: 'grid', gap: 3 }}>
+            {model.lenses.map(lens => (
+              <div key={lens.id} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+                <strong>{lens.label}</strong>{' '}
+                <span style={{ color: lens.direction === 'rising' ? OINK.strong : lens.direction === 'falling' ? RUBRIC.rubric : MUTED, fontWeight: 700 }}>
+                  {lens.reading}
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </div>

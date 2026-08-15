@@ -1,104 +1,87 @@
 /**
- * PostGenCoach.jsx — Three-step coach shown after a first generation.
+ * PostGenCoach.jsx — the post-generate what's-next coach (C4 revival).
  *
- * The pre-generation OnboardingCoach was retired (its spotlight-overlay walked
- * the user through "pick a size, hit generate, scroll the tabs"; first-run
- * coaching now lives in the Checklist + first-dossier callouts). Once a user has
- * a settlement, this coach starts a different conversation:
+ * THE COMPONENT SWAP (deep-craft C4, panel D): master's PostGenCoach is the
+ * base-of-record host for the post-generate guidance. W-GUIDE-1 had retired it
+ * and rehomed its what's-next content into the guidance registry as the single
+ * `wizard-postgen` whisper (guidance.wizardNextSteps), rendered by a standalone
+ * in-page card (WizardNextSteps). C4 revives PostGenCoach as the HOST of that
+ * one whisper — a registry COMPONENT SWAP, not a second guidance surface: the
+ * registry still keeps exactly one whisper on `wizard-postgen`, and this coach
+ * is the component that renders it. The standalone WizardNextSteps card is
+ * deleted (its behaviour survives here; see the census in the C4 report).
  *
- *   1. Read the dossier — here's what to look at first.
- *   2. Watch how it was simulated — the rail to the right shows it.
- *   3. Save it — sign in to keep it.
+ * NOT re-absorbed: the read-the-dossier / watch-it-simulated / save-it teaching
+ * stays consolidated on the DOSSIER surface (FirstDossierCallouts + the three
+ * postgen_* whispers). This coach carries ONLY the forward "what's next" moves
+ * (save → export → refine → place), one idea per stepped panel, so the swap does
+ * not duplicate the dossier band's teaching across two surfaces.
  *
- * Source: UI Redesign §18.6. Copy is in src/copy/en.js under
- * onboarding.coach so tone changes happen there, not here.
+ * MATERIALS: rendered in the deep-craft idiom (light parchment plate, rule
+ * frame, ramp tones) — the same material tokens the WizardNextSteps card used —
+ * NOT master's dark-ink rgba-wash floating card, which the kill-list forbids.
  *
- * Visibility rules:
- *   - User has at least one settlement on screen.
- *   - User hasn't dismissed (or completed) this coach before — tracked
- *     via localStorage `sf.postGenCoachDismissedAt`.
+ * Visibility: a settlement is on screen AND the unified guidance dismissal
+ * (sf:guidance:wizard_next_steps) is not set. Renders nothing otherwise, so it
+ * is safe to mount unconditionally at the App level. The pure step builder is
+ * src/components/generate/nextSteps.js (unit-tested in wizardNextSteps.test.js).
  *
- * The component renders nothing if any rule fails, so safe to mount
- * unconditionally at the App level.
+ * @enforced-by tests/domain/guidanceRegistry.walker.test.js (this is the
+ *   registered host of the wizard_next_steps whisper — imports guidance + names
+ *   the whisper id, so the walker's mounted/wired check passes)
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
+import {
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { buildNextSteps } from './generate/nextSteps.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../lib/guidance.js';
 
-const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
-// Retoned for the dark-ink coach card: light parchment tones that clear AA on INK.
-const MUTED = swatch['#C8B098']; // muted parchment for the "Step X of Y" eyebrow + dots
-const BODY  = PARCH;             // light parchment body text on ink
-
-function readDismissed() {
-  if (typeof window === 'undefined') return false;
-  try { return Boolean(window.localStorage.getItem(DISMISS_KEY)); }
-  catch { return false; }
-}
-function writeDismissed() {
-  if (typeof window === 'undefined') return;
-  try { window.localStorage.setItem(DISMISS_KEY, String(Date.now())); }
-  catch { /* private mode */ }
-}
-
-const STEPS = [
-  { titleKey: 'onboarding.coach.step1Title', bodyKey: 'onboarding.coach.step1Body' },
-  { titleKey: 'onboarding.coach.step2Title', bodyKey: 'onboarding.coach.step2Body' },
-  { titleKey: 'onboarding.coach.step3Title', bodyKey: 'onboarding.coach.step3Body' },
-];
+// The wizard-postgen whisper this coach hosts (the guidance-registry id + the
+// unified dismissal stem). Naming it here is also what the walker's host-wired
+// check reads (import of lib/guidance + a reference to the whisper id).
+const WHISPER_ID = 'wizard_next_steps';
 
 export default function PostGenCoach() {
   const settlement = useStore(s => s.settlement);
-  // The final step folds in the post-generate "what's next" checklist (formerly
-  // the standalone WizardNextSteps card), so the coach reads the same save/auth
-  // state that shapes the save step's framing.
+  // The save step's framing reads the same save/auth state the pure builder uses.
   const canSave = useStore(s => s.canSave());
   const authTier = useStore(s => s.auth?.tier);
   const activeSaveId = useStore(s => s.activeSaveId);
   const savedSettlements = useStore(s => s.savedSettlements);
 
-  // Skip immediately for users who've already seen / dismissed it.
-  // Read once on mount so a fresh write during this session doesn't
+  // Read the dismissal once on mount so a fresh dismiss this session doesn't
   // re-hide the coach mid-flow.
-  const [alreadyDismissed] = useState(readDismissed);
-
+  const [alreadyDismissed] = useState(() => isGuidanceDismissed(WHISPER_ID));
   const [step, setStep] = useState(0);
   const [dismissedThisSession, setDismissedThisSession] = useState(false);
-
-  // Auto-dismiss after the final step is acknowledged so future
-  // sessions land straight on the dossier.
-  useEffect(() => {
-    if (dismissedThisSession) writeDismissed();
-  }, [dismissedThisSession]);
 
   if (alreadyDismissed) return null;
   if (dismissedThisSession) return null;
   if (!settlement) return null;
 
-  // Coach panels: two intro steps (read the dossier, watch the simulation), then
-  // each forward "what's next" move (save, export, refine, place) as its own
-  // step — one idea per panel, instead of a single checklist screen.
+  // Each forward "what's next" move (save, export, refine, place) is its own
+  // panel — one idea per screen. "Generate another" is the builder's detached
+  // footer (it throws the work away rather than building on it), so it is not a
+  // coach step, mirroring the standalone card it replaces.
   const signedIn = !!authTier && authTier !== 'anon';
   const saved = activeSaveId != null
     || (Array.isArray(savedSettlements)
         && savedSettlements.some(e => e?.name === settlement.name && e?.tier === settlement.tier));
   const guide = buildNextSteps({ settlement, canSave, signedIn, saved });
-  const panels = [
-    ...STEPS.slice(0, 2).map(s => ({ title: t(s.titleKey), body: t(s.bodyKey), primary: false })),
-    ...guide.steps.map((s2, i) => ({ title: s2.label, body: s2.hint, primary: i === 0 })),
-  ];
+  const panels = guide.steps.map((s2, i) => ({ label: s2.label, hint: s2.hint, primary: i === 0 }));
   const total = panels.length;
   const safeStep = Math.min(step, total - 1);
   const cur = panels[safeStep];
   const isLast = safeStep === total - 1;
 
   function close() {
+    markGuidanceDismissed(WHISPER_ID);
     setDismissedThisSession(true);
   }
   function next() {
@@ -115,93 +98,89 @@ export default function PostGenCoach() {
       aria-labelledby="postgen-coach-title"
       style={{
         position: 'fixed',
+        // The COACH layer (900). The feedback panel (FeedbackWidget) sits one
+        // step above at 910 so, when both bottom-right panels are shown
+        // together, stacking is deterministic (M10). See the Z_LAYERS manifest
+        // (scripts/.ui-a11y-contract.json).
         bottom: 24, right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
-        background: INK,
-        border: `1px solid ${GOLD}`,
-        borderRadius: R.xl,
-        boxShadow: '0 12px 32px rgba(27,20,8,0.25)',
-        fontFamily: sans, color: PARCH,
+        background: CARD,
+        border: `1px solid ${BORDER}`,
+        fontFamily: sans, color: INK,
         overflow: 'hidden',
-        animation: 'pgc-slide-in 0.3s ease-out',
       }}
     >
-      <style>{`
-        @keyframes pgc-slide-in {
-          from { opacity: 0; transform: translateY(12px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
-      {/* Header */}
+      {/* Header — the rubric row (what's next / this dossier's identity) + close. */}
       <div style={{
-        display: 'flex', alignItems: 'center', gap: SP.sm,
-        padding: `${SP.sm + 2}px ${SP.md}px`,
-        background: 'rgba(201,162,76,0.10)',
-        borderBottom: `1px solid rgba(201,162,76,0.25)`,
+        display: 'flex', alignItems: 'baseline', gap: SP.sm,
+        padding: `${SP.sm + 1}px ${SP.lg}px`,
+        background: CARD_HDR,
+        borderBottom: `1px solid ${BORDER}`,
       }}>
         <span style={{
-          fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
-          textTransform: 'uppercase', color: GOLD,
-          flex: 1,
+          fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK,
         }}>
-          {t('onboarding.coach.welcomeTitle')}
+          What&rsquo;s next
+        </span>
+        <span style={{ fontSize: FS.xs, color: MUTED, flex: 1, minWidth: 0 }}>
+          {guide.headline}
         </span>
         <IconButton
           Icon={X}
-          glyph={'✕'}
-          label="Dismiss coach"
+          label="Dismiss what's next"
           onClick={close}
           tone="default"
-          size="xl"
+          size="lg"
         />
       </div>
 
-      {/* Body */}
-      <div style={{ padding: `${SP.md}px ${SP.md}px ${SP.lg}px` }}>
+      {/* Body — one forward move per panel. */}
+      <div style={{ padding: `${SP.md}px ${SP.lg}px ${SP.lg}px` }}>
         <div style={{
-          fontSize: FS.xxs, fontWeight: 700, color: MUTED,
-          letterSpacing: '0.08em', textTransform: 'uppercase',
-          marginBottom: 4,
+          display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.sm,
         }}>
-          Step {safeStep + 1} of {total}
+          {/* Gold step-number badge — the single tinted accent (matches the
+              standalone card's badge). */}
+          <span
+            aria-hidden="true"
+            style={{
+              flexShrink: 0,
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              width: 20, height: 20, borderRadius: '50%',
+              background: `${GOLD}18`, border: `1px solid ${GOLD}`,
+              color: GOLD, fontSize: FS.xs, fontWeight: 700, lineHeight: 1,
+            }}
+          >
+            {safeStep + 1}
+          </span>
+          <span style={{
+            fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+          }}>
+            Step {safeStep + 1} of {total}
+          </span>
         </div>
+
         <h3 id="postgen-coach-title" style={{
-          margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
-          color: PARCH,
+          margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK,
         }}>
-          {cur.title}
+          {cur.label}
         </h3>
-        {/* One idea per panel. The first forward move (Save) gets a gold left-rule
-            + weight so it reads as the key next step; the rest are quiet rows. */}
+        {/* The first forward move (Save) reads as the key next step — a gold
+            left-rule + weight; the rest are quiet rows. */}
         <p style={{
           margin: `${SP.sm}px 0 0`, fontSize: FS.sm,
-          color: cur.primary ? PARCH : BODY,
+          color: cur.primary ? INK : BODY,
           fontWeight: cur.primary ? 600 : 400,
           lineHeight: 1.55,
           ...(cur.primary ? { paddingLeft: SP.md, borderLeft: `2px solid ${GOLD}` } : null),
         }}>
-          {cur.body}
+          {cur.hint}
         </p>
-
-        {/* Progress dots */}
-        <div style={{ display: 'flex', gap: 6, marginTop: SP.md, flexWrap: 'wrap' }} aria-hidden="true">
-          {panels.map((_, i) => (
-            <span
-              key={i}
-              style={{
-                width: 6, height: 6, borderRadius: '50%',
-                background: i === safeStep ? GOLD : 'rgba(140,111,50,0.30)',
-                transition: 'background 0.15s',
-              }}
-            />
-          ))}
-        </div>
 
         {/* Actions */}
         <div style={{
-          display: 'flex', alignItems: 'center', gap: SP.sm,
-          marginTop: SP.md,
+          display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.lg,
         }}>
           {step > 0 && (
             <Button
@@ -214,7 +193,7 @@ export default function PostGenCoach() {
             </Button>
           )}
           <span style={{ flex: 1 }} />
-          {/* Always-present escape hatch: exit the coach from any step. */}
+          {/* Always-present escape hatch from any step. */}
           <Button
             variant="ghost"
             size="sm"

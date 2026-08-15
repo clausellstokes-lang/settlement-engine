@@ -29,7 +29,21 @@
  *   vacant     — institution exists but lacks leadership (an NPC slot is empty)
  */
 
-/** @typedef {'capacity'|'legitimacy'|'influence'|'wealth'|'staffing'|'infrastructure'|'access'|'corruption'} InstitutionImpairmentType */
+/** @typedef {'capacity'|'legitimacy'|'influence'|'wealth'|'staffing'|'infrastructure'|'access'|'corruption'|'supply_starved'} InstitutionImpairmentType
+ *
+ *   supply_starved — Phase 5.5 mover M2 (CARAVANS): a consuming institution whose
+ *      input road is TOTALLY cut (every pre-ranked reachable producer severed AND
+ *      its per-input stockpile buffer drained) is supply-starved. It GENERALIZES
+ *      the narrow 'access' impairment (blockadeTransport's siege-throttled airship
+ *      dock) to arbitrary inputs (the iron road, the timber road, …) under ONE
+ *      starvation ledger (design §II.3-4-g) — foodStockpile stays the food-specific
+ *      buffer, never double-counted. TEMPORARY: it lifts the moment a shipment
+ *      arrives. Stamped/lifted under its OWN cause namespace (see
+ *      spatial/supplyShipments.js SUPPLY_STARVED_CAUSE_PREFIX), disjoint from
+ *      blockadeTransport's 'stressor-blockade:' causes, so the two never re-trigger
+ *      each other. Materialized ONLY under the spatial-canon marker (dormant ⇒ the
+ *      impairment never appears ⇒ byte-identical).
+ */
 
 /** @typedef {'leadership'|'legitimacy'|'wealth'|'coercive_capacity'|'membership'|'public_support'|'access'|'legal_standing'|'internal_unity'} FactionImpairmentType */
 
@@ -49,7 +63,25 @@
  *  @property {string} causeEventId    timeline link — supports undo and replay
  *  @property {string=} description    human-readable, surfaced in UI/PDF (optional —
  *                                     auto-generated from propagation if absent)
- *  @property {string=} appliedAt      ISO timestamp
+ *  @property {(string|null)=} appliedAt  ISO timestamp; explicitly null when applied
+ *                                     inside the pure event pipeline (no wall clock)
+ *  @property {boolean=} covert        hidden mark (a covert capture — institution-scope
+ *                                     Impose Corruption); bumps status but must never
+ *                                     surface as a visible "impaired" badge or drag
+ *                                     public derived state
+ */
+
+/**
+ * Minimal structural shape of anything that can carry a status and
+ * impairments — institutions, factions, and NPCs all qualify. `status`
+ * is a string (not the EntityStatus union) because NPCs use their own
+ * lifecycle vocabulary ('dead' | 'missing' | …, see entities/npcs.js
+ * NpcStatus) while institutions/factions use EntityStatus; both flow
+ * through these helpers.
+ *
+ * @typedef {Object} StatusEntity
+ * @property {string=} status
+ * @property {Impairment[]=} impairments
  */
 
 /** Default status when no impairments exist. */
@@ -89,7 +121,7 @@ export function mkImpairment(type, severity, causeEventId, description) {
  * state. Centralized here so effectiveStatus / isFullyActive / withImpairment
  * and deriveSystemState all share ONE definition of "covert-only".
  *
- * @param {any} entity
+ * @param {StatusEntity | null | undefined} entity
  * @returns {boolean}
  */
 export function isCovertOnlyImpairment(entity) {
@@ -104,7 +136,7 @@ export function isCovertOnlyImpairment(entity) {
  * severity is a RESTORATION patch (a popular leader's legitimacy bonus is
  * stored as severity -0.4) — it must never push the entity into 'impaired'.
  *
- * @param {any} imp
+ * @param {Impairment | null | undefined} imp
  * @returns {boolean}
  */
 function impairmentDegrades(imp) {
@@ -116,7 +148,7 @@ function impairmentDegrades(imp) {
  * the gate for reporting 'impaired'. An entity carrying only restoration
  * patches (negative severity) and/or covert marks is NOT visibly impaired.
  *
- * @param {any} entity
+ * @param {StatusEntity | null | undefined} entity
  * @returns {boolean}
  */
 function hasVisibleImpairment(entity) {
@@ -135,7 +167,7 @@ function hasVisibleImpairment(entity) {
  * leader's legitimacy bonus, stored as negative severity) or a covert-only
  * capture reads ACTIVE, not impaired.
  *
- * @param {any} entity   institution/faction/npc with optional `status` and `impairments`
+ * @param {StatusEntity | null | undefined} entity   institution/faction/npc with optional `status` and `impairments`
  * @returns {EntityStatus}
  */
 export function effectiveStatus(entity) {
@@ -154,52 +186,53 @@ export function effectiveStatus(entity) {
  * Returns a new entity object — never mutates the input. The pipeline
  * uses this to compose patches; the store reducer applies them.
  *
- * @param {any} entity
+ * @template {StatusEntity} T
+ * @param {T} entity
  * @param {Impairment} impairment
- * @returns {Object} new entity
+ * @returns {T} new entity
  */
 export function withImpairment(entity, impairment) {
   if (!entity) return entity;
   const prev = entity.impairments || [];
   // Idempotency: replace if same type + same cause
-  const filtered = prev.filter((/** @type {any} */ i) => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
-  const nextImpairments = [...filtered, { ...impairment, appliedAt: impairment.appliedAt ?? null }];
-  return {
+  const filtered = prev.filter(i => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
+  const withNext = {
     ...entity,
     // Do NOT default appliedAt to wall-clock: this runs inside the pure, seeded
     // event pipeline and a Date.now() here embedded nondeterministic timestamps
     // into settlement state. Callers with a deterministic clock pass appliedAt
     // explicitly (e.g. world-pulse `now`); the rest carry causeEventId for
     // provenance and the event log records the authoritative timestamp.
-    impairments: nextImpairments,
-    // Auto-bump status to impaired ONLY when the resulting set carries a
-    // visibly-degrading impairment, and never override a removed/destroyed/
-    // vacant set. A pure RESTORATION patch (negative severity — e.g. a popular
-    // leader's legitimacy bonus) or a covert-only mark must NOT drive a clean
-    // institution to 'impaired'; leave its prior status untouched.
-    status: (entity.status === STATUS_REMOVED ||
-             entity.status === STATUS_DESTROYED ||
-             entity.status === STATUS_VACANT)
-      ? entity.status
-      : (hasVisibleImpairment({ impairments: nextImpairments })
-          ? STATUS_IMPAIRED
-          : entity.status || STATUS_ACTIVE),
+    impairments: [...filtered, { ...impairment, appliedAt: impairment.appliedAt ?? null }],
   };
+  // Recompute status from the resulting set through the ONE canonical rule
+  // (effectiveStatus): impaired iff a visibly-degrading impairment remains,
+  // removed/destroyed/vacant preserved, otherwise active. Routing through it
+  // (rather than a hand-rolled ternary that unconditionally bumped to impaired)
+  // means adding a pure restoration patch (negative severity) or a covert-only
+  // mark correctly leaves a clean entity active.
+  return { ...withNext, status: effectiveStatus(withNext) };
 }
 
 /**
  * Remove all impairments produced by a given event id — the inverse of
  * withImpairment. Used by undoLastEvent to restore prior state.
- * @param {any} entity @param {any} causeEventId
+ *
+ * @template {StatusEntity} T
+ * @param {T} entity
+ * @param {string} causeEventId
+ * @returns {T} new entity
  */
 export function withoutEventImpairments(entity, causeEventId) {
   if (!entity) return entity;
   const prev = entity.impairments || [];
-  const filtered = prev.filter((/** @type {any} */ i) => i.causeEventId !== causeEventId);
-  const status = filtered.length === 0 && entity.status === STATUS_IMPAIRED
-    ? STATUS_ACTIVE
-    : entity.status;
-  return { ...entity, impairments: filtered, status };
+  const filtered = prev.filter(i => i.causeEventId !== causeEventId);
+  // Recompute through effectiveStatus so removing the last VISIBLE impairment
+  // drops 'impaired' → 'active' even when covert/restoration marks remain (the
+  // prior `filtered.length === 0` guard missed a non-empty-but-invisible
+  // remainder); removed/destroyed/vacant stay sticky.
+  const withFiltered = { ...entity, impairments: filtered };
+  return { ...withFiltered, status: effectiveStatus(withFiltered) };
 }
 
 /**
@@ -210,17 +243,23 @@ export function withoutEventImpairments(entity, causeEventId) {
  *
  * Compounding rule: combined = 1 - prod(1 - s_i). Two 0.5 impairments
  * yield 0.75, not 1.0 — preserves "still has some capacity."
- * @param {any} entity @param {any} type
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @param {ImpairmentType | string} type   dimension to aggregate
+ * @returns {number} combined severity, 0-1 (3 decimal places)
  */
 export function severityFor(entity, type) {
-  const impairments = (entity?.impairments || []).filter((/** @type {any} */ i) => i.type === type);
+  const impairments = (entity?.impairments || []).filter(i => i.type === type);
   if (!impairments.length) return 0;
   let surviving = 1;
   for (const i of impairments) surviving *= (1 - clamp01(i.severity ?? 0));
   return Number((1 - surviving).toFixed(3));
 }
 
-/** @param {any} v */
+/**
+ * @param {number} v
+ * @returns {number}
+ */
 function clamp01(v) {
   if (!Number.isFinite(v)) return 0;
   if (v < 0) return 0;
@@ -231,7 +270,9 @@ function clamp01(v) {
 /**
  * True if the entity is at full capacity with no impairments.
  * Convenient predicate for UI rendering ("show damaged badge?").
- * @param {any} entity
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @returns {boolean}
  */
 export function isFullyActive(entity) {
   return effectiveStatus(entity) === STATUS_ACTIVE;

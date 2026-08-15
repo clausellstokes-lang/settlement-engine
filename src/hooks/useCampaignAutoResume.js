@@ -1,6 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { useStore } from '../store/index.js';
-import { resumeCampaignTarget } from '../store/campaignSliceShared.js';
+
+/**
+ * Pick which campaign the Realm should auto-resume on entry: the one the user
+ * last opened if it still resolves to an active campaign, else the
+ * most-recently-updated active campaign (the list arrives updated_at-desc), else
+ * null. A stale / cross-user lastActiveCampaignId (not in the list) safely falls
+ * through to the most-recent campaign. Defined HERE (not in the eager store
+ * shared module) so this Realm-only convenience stays in the lazy map chunk and
+ * off the first-paint closure.
+ */
+export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
+  if (!Array.isArray(activeCampaigns) || activeCampaigns.length === 0) return null;
+  const remembered = lastActiveCampaignId != null
+    ? activeCampaigns.find(c => String(c?.id) === String(lastActiveCampaignId))
+    : null;
+  return remembered?.id ?? activeCampaigns[0]?.id ?? null;
+}
 
 /**
  * useCampaignAutoResume — premium / elevated auto-resume for the Realm.

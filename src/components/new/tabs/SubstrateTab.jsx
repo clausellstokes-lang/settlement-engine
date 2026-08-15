@@ -1,60 +1,170 @@
 /**
- * SubstrateTab — the Substrate sub-tab. Mounts CausalViewTabs (16-var grid +
- * band "why" + 9 pressures + settlementStrength with the war-cost penalty + the
- * homeostasis story), feeding it the owning campaign's LIVE worldState /
- * regionalGraph so a live siege/condition colours the pressures. Standalone
- * (non-campaign) settlements degrade to the frozen-generation grid.
+ * SubstrateTab — the Substrate sub-tab (Phase 5 W4e dossier depth). Surfaces OUR
+ * 16-variable causal engine read (`deriveCausalState`) as a legible grid: every
+ * system variable with its health band + 0–100 score, the systems under pressure
+ * called out first.
  *
- * Depth is controlled by a LOCAL control on this tab (Overview / Detail /
- * Engine), not the old global dossier toggle: the engine grid is the one place
- * where the depth difference is dramatic (nothing -> pressured rows -> the full
- * 16-var grid), so the control lives on the content it modulates. Defaults to
- * Detail so the tab opens on "where the pressure is" rather than an empty face.
+ * Settlement-only + pure read-model. OUR substrate reads the settlement's OWN
+ * activeConditions (siege / outbreak / drawdown are already baked into the
+ * scores), so — unlike THEIRS' SubstrateTab — no live campaign `worldState` is
+ * threaded in. That keeps this tab a pure read of already-public settlement facts
+ * with no leak surface, and it renders honestly for a standalone (non-campaign)
+ * settlement too.
+ *
+ * Dormancy-correct: a settlement whose read-model yields nothing degrades to a
+ * short note rather than a fabricated grid.
  */
 
-import { useState } from 'react';
-import CausalViewTabs from '../../settlement/CausalViewTabs.jsx';
-import AltitudeControl from '../../common/AltitudeControl.jsx';
-import { useSettlementLiveWorld } from '../../../hooks/useSettlementLiveWorld.js';
-import { FS, MUTED, BODY, INK, sans, serif_, SP } from '../../theme.js';
+import { useMemo } from 'react';
+import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
+import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
+import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
+
+// Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
+// VARIABLE_LABEL, kept here so the display layer owns its own copy).
+const VAR_LABEL = {
+  food_security: 'Food security',
+  labor_capacity: 'Labor capacity',
+  public_legitimacy: 'Public legitimacy',
+  ruling_authority: 'Ruling authority',
+  faction_power: 'Faction power',
+  trade_connectivity: 'Trade connectivity',
+  healing_capacity: 'Healing capacity',
+  defense_readiness: 'Defense readiness',
+  criminal_opportunity: 'Criminal opportunity',
+  religious_authority: 'Religious authority',
+  housing_pressure: 'Housing pressure',
+  infrastructure_condition: 'Infrastructure condition',
+  magical_stability: 'Magical stability',
+  social_trust: 'Social trust',
+  economic_capacity: 'Economic capacity',
+  law_order: 'Law & order',
+};
+
+// The band vocabulary IS the model's health signal (it drives summary + pressuresOn),
+// so colour by band directly — worst (collapsed) → best (surplus).
+const BAND_TONE = {
+  surplus: GREEN,
+  adequate: '#3f7d3f',
+  strained: AMBER,
+  critical: '#b15a1f',
+  collapsed: RED,
+};
+const BAND_RANK = { collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 };
+
+// Convert the raw score onto the same higher-is-healthier axis used to compute
+// the band. Sorting this ascending therefore keeps the most pressured row first
+// inside a shared band without treating high criminal opportunity as healthy.
+function healthOrientedScore(row) {
+  if (typeof row.score !== 'number' || !Number.isFinite(row.score)) return 100;
+  const score = row.score;
+  return variablePolarity(row.key) === 'lower_is_better' ? 100 - score : score;
+}
 
 /**
- * @param {{ settlement: any, saveId?: string|null }} props
+ * `band` is the MODEL band (the machine value, kept on data-band so tests and
+ * tooling still read one vocabulary); `word` is what a human sees. They differ
+ * for the lone lower-is-better variable: criminal_opportunity bands off the
+ * INVERTED score, so maximal crime carries band 'collapsed' and this pill used to
+ * print "COLLAPSED" beside it, which reads as "the crime is gone". causalBandWord
+ * is the function that already existed to fix precisely this, and had no caller.
  */
-export default function SubstrateTab({ settlement, saveId = null }) {
-  // Local depth — scoped to this tab, not the global reading pref. Opens at
-  // Detail (pressured rows); Overview collapses to the explainer, Engine shows
-  // the full grid + pressures + strength.
-  const [level, setLevel] = useState('standard');
-  const { worldState, regionalGraph } = useSettlementLiveWorld(saveId);
+function BandPill({ variable, band }) {
+  const tone = BAND_TONE[band] || MUTED;
+  const word = causalBandWord(variable, band);
+  return (
+    <span data-band={band} style={{
+      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
+      fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
+      color: swatch.white, background: tone,
+    }}>{word}</span>
+  );
+}
+
+/**
+ * @param {{ settlement: any }} props
+ */
+export default function SubstrateTab({ settlement }) {
+  const model = useMemo(() => (settlement ? deriveCausalState(settlement) : null), [settlement]);
+
+  const rows = useMemo(() => {
+    if (!model?.variables) return [];
+    return Object.entries(model.variables)
+      .map(([key, v]) => ({
+        key,
+        label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
+        band: v.band,
+        score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
+      }))
+      // Pressures first: worst band, then worst polarity-oriented score, then
+      // stable by label.
+      .sort((a, b) =>
+        (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5)
+        || healthOrientedScore(a) - healthOrientedScore(b)
+        || a.label.localeCompare(b.label));
+  }, [model]);
+
+  if (!model || rows.length === 0) {
+    return (
+      <div data-testid="substrate-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
+        The settlement&apos;s underlying conditions have not been assessed.
+      </div>
+    );
+  }
+
+  const summary = model.summary || {};
+  const pressures = [
+    ...(summary.collapsed || []),
+    ...(summary.critical || []),
+    ...(summary.strained || []),
+  ].map(k => VAR_LABEL[k] || humanizeToken(k) || 'Recorded condition');
 
   return (
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', marginBottom: SP.sm }}>
-        <span style={{ flex: 1, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>
-          Causal substrate
-        </span>
-        <AltitudeControl size="sm" ariaLabel="Substrate detail level" value={level} onChange={setLevel} />
+      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
+        What is holding, what is strained
+      </div>
+      <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
+        Food, authority, defense, trade, and the other foundations that keep this settlement standing.
+        Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
+      </p>
+
+      {/* Pressures callout — the systems the model flags strained-or-worse. */}
+      <div data-testid="substrate-pressures" style={{
+        background: CARD_ALT,
+        border: `1px solid ${pressures.length ? BORDER : BORDER2}`,
+        borderLeft: `3px solid ${pressures.length ? RED : GREEN}`,
+        padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
+      }}>
+        {pressures.length ? (
+          <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+            <strong style={{ color: RED }}>Under pressure:</strong> {pressures.join(', ')}.
+          </div>
+        ) : (
+          <div style={{ fontSize: FS.sm, color: GREEN, lineHeight: 1.5 }}>
+            <strong>All foundations holding.</strong> No condition reads strained or worse.
+          </div>
+        )}
       </div>
 
-      {level === 'guided' ? (
-        <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
-          The <strong>causal substrate</strong> is the sixteen forces that hold this
-          settlement together: food, legitimacy, defense, trade, and more.{' '}
-          <span style={{ color: MUTED }}>
-            Switch to Detail or Engine to see where the pressure sits and watch it shift
-            as the world advances.
-          </span>
+      {/* The 16-variable grid. */}
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
+        <div style={{
+          fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+          background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
+        }}>Settlement foundations</div>
+        <div style={{ padding: `0 ${SP.md}px` }}>
+          {rows.map(row => (
+            <div key={row.key} data-substrate-row style={{
+              display: 'flex', alignItems: 'center', gap: SP.sm,
+              padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
+            }}>
+              <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
+              <BandPill variable={row.key} band={row.band} />
+            </div>
+          ))}
         </div>
-      ) : (
-        <CausalViewTabs
-          settlement={settlement}
-          settlementId={saveId || settlement?.id}
-          worldState={worldState}
-          regionalGraph={regionalGraph}
-          forceLevel={level}
-        />
-      )}
+      </div>
     </div>
   );
 }

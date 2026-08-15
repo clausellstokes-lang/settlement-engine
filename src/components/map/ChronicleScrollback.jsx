@@ -19,21 +19,19 @@
 import { useMemo, useState } from 'react';
 import { BookOpen, ChevronLeft, ChevronRight, MapPin, ScrollText, Sparkles } from 'lucide-react';
 
-import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
 import {
-  chronicleTimeline,
-  hasTimeline,
-  tickCausalDiff,
-} from '../../domain/display/chronicleTimeline.js';
+  chronicleTimeline, hasTimeline, tickCausalDiff, } from '../../domain/display/chronicleTimeline.js';
+import { causalBandWord } from '../../domain/causalState.js';
 import { buildChronicleGrounding } from '../../domain/worldPulse/chronicle.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, R, SECOND, SP, sans } from '../theme.js';
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 // Advance-scaling Stage 4: interval → its real one-week tick count, so the
 // end-of-advance chronicle summary can gather the whole interval's beats (not just
 // the final tick). Mirrors the domain's weeksPerInterval.
-const INTERVAL_WEEKS = { one_week: 1, one_month: 4, one_season: 12, one_year: 48 };
+import { weeksPerInterval as INTERVAL_WEEKS } from '../../domain/worldPulse/advanceInterval.js';
 
 const INTERVAL_LABEL = { one_week: 'week', one_month: 'month', one_season: 'season', one_year: 'year' };
 
@@ -71,7 +69,7 @@ function IntervalChronicleSummary({ campaign, nameFor }) {
     <article
       data-testid="interval-chronicle-summary"
       style={{
-        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`,
         background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 6,
       }}
     >
@@ -116,7 +114,7 @@ function HeadlineCard({ headline: h, resolveName, onHighlight }) {
     </>
   );
   const cardStyle = {
-    border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD,
+    border: `1px solid ${BORDER2}`, background: CARD,
     padding: '8px 10px',
   };
   if (!canHighlight) {
@@ -148,8 +146,12 @@ function DiffRow({ diff }) {
     <li style={{ fontSize: FS.xxs, color: BODY, marginBottom: 3, lineHeight: 1.4, listStyle: 'none' }}>
       <span style={{ color, fontWeight: 900 }}>{up ? '▲' : '▼'}</span>{' '}
       <strong style={{ color: INK }}>{human(diff.variable)}</strong>{' '}
+      {/* Polarity-correct words, not the raw model bands: a lower-is-better
+          variable bands off the inverted score, so the raw pair prints backwards
+          (crime at its worst reads "collapsed"). causalBandWord is the single
+          re-phrasing source; the other fifteen variables are unchanged. */}
       <span style={{ color: MUTED }}>
-        {diff.bandBefore} → {diff.bandAfter}
+        {causalBandWord(diff.variable, diff.bandBefore).toLowerCase()} → {causalBandWord(diff.variable, diff.bandAfter).toLowerCase()}
       </span>
       {diff.explanation && <span style={{ color: SECOND }}> ({diff.explanation})</span>}
     </li>
@@ -176,10 +178,23 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
     pulseHistory: campaign?.worldState?.pulseHistory,
   });
 
-  // The scrubber index into the (newest-first) timeline. Clamp on changes.
-  const [index, setIndex] = useState(0);
-  const safeIndex = Math.min(index, Math.max(0, timeline.length - 1));
+  // The scrubber ANCHORS TO A TICK, not a position: the timeline is newest-first
+  // and GROWS AT THE FRONT on each advance, so a stored index would silently
+  // re-point to a neighbouring tick when a new frame prepends under the DM.
+  // null ⇒ follow the newest (the default, and what "Newer" past the top means);
+  // a vanished tick falls back to the newest.
+  const [selectedTick, setSelectedTick] = useState(null);
+  const safeIndex = useMemo(() => {
+    if (selectedTick == null) return 0;
+    const i = timeline.findIndex((t) => t.tick === selectedTick);
+    return i >= 0 ? i : 0;
+  }, [timeline, selectedTick]);
   const selected = timeline[safeIndex] || null;
+  const gotoIndex = (i) => {
+    const clamped = Math.max(0, Math.min(timeline.length - 1, i));
+    const frame = timeline[clamped];
+    if (frame) setSelectedTick(clamped === 0 ? null : frame.tick);
+  };
 
   const resolveName = nameFor || ((id) => String(id));
 
@@ -195,11 +210,11 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
   if (!populated) {
     return (
       <div data-testid="chronicle-scrollback-empty" style={{
-        padding: SP.md, border: `1px dashed ${BORDER2}`, borderRadius: R.md,
+        padding: SP.md, border: `1px dashed ${BORDER2}`,
         color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
       }}>
         No chronicle yet. Advance the realm to record its history; the timeline will
-        fill tick by tick.
+        fill entry by entry.
       </div>
     );
   }
@@ -207,28 +222,29 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
   return (
     <div data-testid="chronicle-scrollback" style={{ display: 'grid', gap: SP.sm }}>
       {/* Advance-scaling Stage 4: end-of-advance summary of the whole interval,
-          above the per-tick scrubber. Flag-gated + self-gating (single-tick or
-          quiet advances render nothing), so the flag-OFF Chronicle is unchanged. */}
-      {flag('advanceMultiTick') && <IntervalChronicleSummary campaign={campaign} nameFor={resolveName} />}
+          above the per-tick scrubber. Self-gating (single-tick or quiet advances
+          render nothing). Multi-tick advance is the promoted default here, so it
+          renders unconditionally rather than behind the source's soak killswitch. */}
+      <IntervalChronicleSummary campaign={campaign} nameFor={resolveName} />
 
       {/* ── Tick scrubber ─────────────────────────────────────────────────── */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
-        padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`,
         background: CARD_ALT,
       }}>
         <Button
           variant="ghost" size="sm"
-          aria-label="Newer tick"
+          aria-label="Newer chronicle entry"
           disabled={safeIndex <= 0}
-          onClick={() => setIndex(i => Math.max(0, i - 1))}
+          onClick={() => gotoIndex(safeIndex - 1)}
           style={{ minHeight: undefined, padding: 2 }}
         >
           <ChevronLeft size={15} />
         </Button>
         <div style={{ flex: 1, textAlign: 'center', minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
-            Tick {selected.tick}
+            {tickCalendarDetailLabel(selected.tick)}
           </div>
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
             {safeIndex + 1} of {timeline.length}
@@ -236,9 +252,9 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
         </div>
         <Button
           variant="ghost" size="sm"
-          aria-label="Older tick"
+          aria-label="Older chronicle entry"
           disabled={safeIndex >= timeline.length - 1}
-          onClick={() => setIndex(i => Math.min(timeline.length - 1, i + 1))}
+          onClick={() => gotoIndex(safeIndex + 1)}
           style={{ minHeight: undefined, padding: 2 }}
         >
           <ChevronRight size={15} />
@@ -247,25 +263,24 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
 
       {/* A compact tick rail so a DM can jump across the whole history. */}
       {timeline.length > 1 && (
-        <div role="group" aria-label="Timeline ticks" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+        <div role="group" aria-label="Chronicle timeline" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
           {timeline.map((t, i) => (
             <Button
               key={t.tick}
               variant="ghost"
               size="sm"
               aria-pressed={i === safeIndex}
-              aria-label={`Tick ${t.tick}`}
-              onClick={() => setIndex(i)}
+              aria-label={tickCalendarDetailLabel(t.tick)}
+              onClick={() => gotoIndex(i)}
               style={{
                 minWidth: 24, minHeight: undefined, padding: '2px 6px',
                 border: `1px solid ${i === safeIndex ? GOLD : BORDER2}`,
-                borderRadius: R.sm,
                 background: i === safeIndex ? GOLD : CARD,
                 color: i === safeIndex ? INK : SECOND,
                 fontSize: FS.micro, fontWeight: 850,
               }}
             >
-              {t.tick}
+              {tickCalendarDetailLabel(t.tick)}
             </Button>
           ))}
         </div>
@@ -275,10 +290,10 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {selected.chronicles.map((c, i) => (
         <article key={c.id || i} style={{
           border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`,
-          borderRadius: R.sm, background: CARD_ALT, padding: '10px 12px',
+          background: CARD_ALT, padding: '10px 12px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
-            <BookOpen size={13} /> Chronicle, tick {c.tick}
+            <BookOpen size={13} /> Chronicle, {tickCalendarDetailLabel(c.tick)}
           </div>
           <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.55 }}>
             {c.prose}
@@ -306,10 +321,10 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {/* ── Per-tick causal diff (compareCausalState) ─────────────────────── */}
       {causalDiff.length > 0 && (
         <div data-testid="chronicle-causal-diff" style={{
-          border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: '8px 10px',
+          border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: '8px 10px',
         }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, marginBottom: 5 }}>
-            Causal shift this tick
+            Causal shift in this entry
           </div>
           <ul style={{ margin: 0, padding: 0 }}>
             {causalDiff.slice(0, 8).map((d, i) => <DiffRow key={d.variable || i} diff={d} />)}
@@ -319,7 +334,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
 
       {selected.headlines.length === 0 && selected.chronicles.length === 0 && (
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, padding: SP.sm }}>
-          A quiet tick. No material changes were recorded.
+          A quiet entry. No material changes were recorded.
         </div>
       )}
     </div>

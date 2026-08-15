@@ -1,22 +1,32 @@
 /**
  * ExportDraftButton.jsx — "Export PDF" for the just-generated, unsaved draft.
  *
- * On the Create page post-generation, a premium (or elevated) user can export
- * the in-memory draft to a PDF WITHOUT saving it first. generateSettlementPDF
- * takes the settlement object directly, and an unsaved draft passes
- * `campaign: null` (no worldState), so the base draft_brief PDF renders — the
- * same path SettlementDetail's export uses for a free/unsaved export.
+ * On the Create page post-generation, an export-capable user (Cartographer /
+ * Founder / elevated) can export the in-memory draft to a PDF WITHOUT saving it
+ * first. generateSettlementPDF takes the settlement object directly, and an
+ * unsaved draft passes `campaign: null` (no worldState) + `faithUnlocked: false`,
+ * so the base draft_brief PDF renders — no live-campaign faith/war chapter.
  *
- * Gated on canExport() (premium / elevated). Free + anon users do not see it:
- * anon gets the one-time BuyThisDossier purchase instead, and free signed-in
- * users get the subscription CTA. So this button never competes with Buy (which
- * is anon-only). It opens the shared ExportSheet variant picker, which itself
- * defaults to draft_brief and disables the canon-only variants in draft.
+ * GATE — OUR floor, not THEIRS. THEIRS routed through a `useDossierExportAccess`
+ * hook built on `tierHasUnlimitedPdfExport` (a pricing helper OUR tree does not
+ * have). OUR export ladder lives in the store gates `canExport()` / `isElevated()`
+ * (the same pair BuyThisDossier's resolveExportAccess folds into
+ * `canExportFreely`). For an UNSAVED draft (no saveId) only those unlimited-export
+ * tiers can export in place — a free account must SAVE first (then its per-save
+ * durable right or purchase applies on the saved view), and anon gets the
+ * one-shot Buy CTA on the hero. So this button self-hides for free + anon and
+ * never competes with Buy.
+ *
+ * Reuses OUR worker-based PDF render (F41) via the shared generateSettlementPDF
+ * (dynamic import keeps the PDF chunk out of first paint). Opens the shared
+ * ExportSheet variant picker, which defaults to draft_brief and disables the
+ * canon-only variants in draft.
  */
 import { useState, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
-import { useDossierExportAccess } from '../../hooks/useDossierExportAccess.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import { sans, FS, SP, swatch } from '../theme.js';
 
 // Lazy so the PDF chunk only loads when the user actually exports.
 const generateSettlementPDF = (...args) =>
@@ -25,21 +35,17 @@ const ExportSheet = lazy(() => import('../settlement/ExportSheet.jsx'));
 
 export default function ExportDraftButton() {
   const settlement = useStore(s => s.settlement);
-  // Export ladder (108): this is an UNSAVED draft (saveId null), so only the
-  // unlimited-export tiers (Cartographer / Founder / elevated) can export it in
-  // place. A free account must SAVE first — then its per-save durable right (or
-  // its purchase) applies on the saved view. Anonymous gets the one-shot Buy CTA
-  // on the hero, not this button. Routing through the shared hook keeps the gate
-  // in one place; for a null save id it yields reason 'tier' (allow) or
-  // 'unsaved'/'anon' (deny), matching the old canExport() behaviour exactly.
-  const exportAccess = useDossierExportAccess(null);
+  // OUR export-access seam: elevated roles or an export-capable tier gate. For a
+  // null (unsaved) draft this is the only rung that can export in place.
+  const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
+    || (typeof s.canExport === 'function' && s.canExport()));
 
   const [open, setOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState(null);
 
   // Unlimited-export tiers only; nothing to export without a settlement.
-  if (!settlement || !exportAccess.allowed) return null;
+  if (!settlement || !canExportFreely) return null;
 
   const handleExport = async (variant, useAi) => {
     if (exporting) return;
@@ -55,8 +61,9 @@ export default function ExportDraftButton() {
         systemState: s.systemState,
         eventLog: s.eventLog,
         phase: s.phase,
-        // Unsaved draft: no owning campaign, so no live worldState chapter.
+        // Unsaved draft: no owning campaign, so no live worldState / faith chapter.
         campaign: null,
+        faithUnlocked: false,
         variant,
         isFounder: s.isFounder?.() ?? false,
       });
@@ -64,14 +71,14 @@ export default function ExportDraftButton() {
       setOpen(false);
     } catch (err) {
       console.error('[draft PDF export] failed:', err);
-      setError(`PDF export failed: ${err?.message || String(err) || 'unknown error'}`);
+      setError(t('errors.pdfExportFail', { detail: err?.message || String(err) || 'unknown error' }));
     } finally {
       setExporting(false);
     }
   };
 
   return (
-    <>
+    <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
       <Button
         variant="secondary"
         size="lg"
@@ -80,16 +87,23 @@ export default function ExportDraftButton() {
       >
         Export PDF
       </Button>
+      {error && (
+        // role=alert (SB5): the export failure appears after the user acts, so
+        // it must interrupt assistive tech (WCAG 4.1.3).
+        <span role="alert" style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 320, textAlign: 'center' }}>
+          {error}
+        </span>
+      )}
       {open && (
         <Suspense fallback={null}>
           <ExportSheet
+            open
             onClose={() => { setOpen(false); setError(null); }}
             onExport={handleExport}
             exporting={exporting}
-            error={error}
           />
         </Suspense>
       )}
-    </>
+    </div>
   );
 }

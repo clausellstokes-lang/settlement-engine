@@ -10,12 +10,19 @@ import { registerStep } from '../pipeline.js';
 import { generateStress } from '../stressGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+import {
+  allowsGeneratedContent,
+  resolveGenerationContentProfile,
+} from '../../domain/generationContentProfile.js';
+import {
+  isGeneratorOwnedEntity,
+} from '../../domain/generationOwnership.js';
 
 registerStep('resolveStress', {
   deps: ['resolveConfig', 'resolveResources'],
-  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces
+  reads: ['effectiveConfig', 'generationContentProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['stress', 'stressTypes'],
-  mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig
+  mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig (A+ P1.7)
   phase: 'config',
 }, (ctx) => {
   const { tier, effectiveConfig, population } = ctx;
@@ -34,16 +41,37 @@ registerStep('resolveStress', {
   effectiveConfig.intendedStressTypes = [
     ...(config.stressTypes || []),
     ...(config.stressType ? [config.stressType] : []),
+    ...(config.selectedStressesRandom === false
+      ? (config.selectedStresses || [])
+      : []),
   ].filter(Boolean);
   effectiveConfig._population = population;
 
-  // Emit one trace per active stressor so downstream consumers
+  // Tier 2.1 — emit one trace per active stressor so downstream consumers
   // (PipelineRail, AI grounding, the "what's pressuring this town?"
   // viewer) can answer why famine/plague/siege is in play. The intended
   // vs effective distinction matters: a stressor the user requested but
   // the simulator declined to apply (e.g. an incompatibility) becomes
   // an explicit "declined" trace so the discrepancy is visible.
   const intendedSet = new Set(effectiveConfig.intendedStressTypes || []);
+  // The stress generator returns the same catalog-shaped object for a random
+  // roll and a direct player selection. Stamp the latter before any profile or
+  // confirmation pass so downstream ownership checks can distinguish them.
+  // This is a pure projection and consumes no additional RNG.
+  const stampForcedStress = entry => (
+    intendedSet.has(entry?.type)
+      ? {
+          ...entry,
+          source: 'forced',
+          forcedByConfig: true,
+        }
+      : entry
+  );
+  if (Array.isArray(stress)) {
+    stress = stress.map(stampForcedStress);
+  } else if (stress) {
+    stress = stampForcedStress(stress);
+  }
   for (const stressType of stressTypes) {
     const wasIntended = intendedSet.has(stressType);
     recordTrace(ctx, {
@@ -114,7 +142,7 @@ registerStep('resolveStress', {
         step:       'resolveStress',
         result:     'resolved_by_event',
         causes: [{ source: 'event', effect: 'suppressed',
-                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}". The re-rolled stressor stays resolved.` }],
+                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}" — the re-rolled stressor stays resolved.` }],
       });
     }
     entries = entries.filter(st => !isResolved(st));
@@ -128,7 +156,18 @@ registerStep('resolveStress', {
       // rolled entry's icon/colour/summary.
       entries = idx === -1
         ? [...entries, authored]
-        : entries.map((st, i) => (i === idx ? { ...st, ...authored } : st));
+        : entries.map((st, i) => {
+            if (i !== idx) return st;
+            const merged = { ...st, ...authored };
+            // F8: when the event authors its OWN summary, it wins — drop the
+            // rolled entry's summaryRoll token copied in from `st` so
+            // assembleSettlement's name re-render can't overwrite the authored
+            // prose. When the event authors no summary (the common upsert — it
+            // refreshes severity/label only), keep summaryRoll so the rolled
+            // entry's provisional summary is still re-rendered with the real name.
+            if (authored.summary != null) delete merged.summaryRoll;
+            return merged;
+          });
       recordTrace(ctx, {
         targetType: 'stressor',
         targetId:   `stressor.${type}`,
@@ -148,6 +187,48 @@ registerStep('resolveStress', {
     // ('dragon_tax') rides the container only, exactly as it does on the
     // live settlement.
     stressTypes = entries.map(e => e?.type).filter(t => t && STRESS_TYPE_MAP[t]);
+    effectiveConfig.stressType = stressTypes[0] || null;
+    effectiveConfig.stressTypes = stressTypes;
+  }
+
+  // Theme boundaries govern what the GENERATOR may introduce. They run after
+  // the editor overlay so every generated path is covered, but the overlay's
+  // event/custom provenance is also visible here: authored crises are player
+  // premises, not generator suggestions, and therefore survive even when they
+  // sit outside the selected generation profile.
+  const contentProfile = ctx.generationContentProfile
+    || resolveGenerationContentProfile(effectiveConfig);
+  const contentEntries = Array.isArray(stress) ? stress : stress ? [stress] : [];
+  const excludedByProfile = contentEntries.filter(
+    entry => (
+      isGeneratorOwnedEntity(entry)
+      && !allowsGeneratedContent(contentProfile, entry)
+    ),
+  );
+  if (excludedByProfile.length) {
+    for (const entry of excludedByProfile) {
+      recordTrace(ctx, {
+        targetType: 'stressor',
+        targetId: `stressor.${entry?.type || 'sensitive_theme'}`,
+        step: 'resolveStress',
+        result: 'declined',
+        causes: [{
+          source: `contentProfile.${contentProfile.id}`,
+          effect: 'excluded',
+          reason: `"${entry?.label || entry?.type || 'Sensitive theme'}" is outside the selected generated-theme boundaries.`,
+        }],
+      });
+    }
+    const permitted = contentEntries.filter(
+      entry => (
+        !isGeneratorOwnedEntity(entry)
+        || allowsGeneratedContent(contentProfile, entry)
+      ),
+    );
+    stress = permitted.length === 0 ? null : permitted.length === 1 ? permitted[0] : permitted;
+    stressTypes = permitted
+      .map(entry => entry?.type)
+      .filter(type => type && STRESS_TYPE_MAP[type]);
     effectiveConfig.stressType = stressTypes[0] || null;
     effectiveConfig.stressTypes = stressTypes;
   }

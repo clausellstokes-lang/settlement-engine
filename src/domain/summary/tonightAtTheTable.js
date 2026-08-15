@@ -11,7 +11,7 @@
  *                       failing supply chain)
  *
  * Pure — same input always yields the same output. The Summary tab
- * calls this once per settlement and renders the cards.
+ * (P129) calls this once per settlement and renders the cards.
  *
  * Returns an array of `{ kind, title, body }` entries, capped at 6 so
  * the right column doesn't outgrow the left.
@@ -20,18 +20,57 @@
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { deriveAllSupplyChainStates } from '../supplyChainState.js';
 
+/**
+ * The TOLERANT prosperity read (components-dossier-library-3). Both Summary
+ * surfaces (SummaryTabV2, TableView) already import THIS module, so the helper
+ * lives here to stay byte-inert (no new first-paint module node).
+ *
+ * `economicState.prosperity` is a STRING label from the generator
+ * (deriveProsperityLabel → 'Struggling'..'Wealthy'). The two surfaces read it as an
+ * OBJECT — `prosperity?.tier` — which is ALWAYS undefined for a string, so the
+ * prosperity + stressors block never rendered. This reads the label whatever shape
+ * it arrives in: a plain string, or a defensive `{ tier }` object.
+ * @param {unknown} prosperity @returns {string}
+ */
+export function prosperityLabel(prosperity) {
+  if (typeof prosperity === 'string') return prosperity.trim();
+  if (prosperity && typeof prosperity === 'object') {
+    const tier = /** @type {{ tier?: unknown }} */ (prosperity).tier;
+    if (typeof tier === 'string') return tier.trim();
+    if (typeof tier === 'number' && Number.isFinite(tier)) return String(tier);
+  }
+  return '';
+}
+
 const MAX_ENTRIES = 6;
 
 // Supply-chain statuses that represent a genuine, table-visible disruption
 // (vs. merely 'strained'/'substituted', which still function).
 const DISRUPTED_STATUSES = new Set(['blocked', 'collapsing', 'scarce', 'captured']);
 
-/** @type {Record<string, number>} */
 const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
 
 /**
- * Read an NPC secret regardless of shape — generators emit { what, stakes }.
- * @param {import('../settlement.schema.js').SimNpc} npc
+ * @typedef {Object} TableNpc
+ * @property {string} [name]
+ * @property {number} [power]
+ * @property {string} [influence]
+ * @property {string} [role]
+ * @property {string} [title]
+ * @property {string | { what?: string } | null} [secret]
+ * @property {{ short?: string }} [goal]
+ * @property {string} [want]
+ */
+
+/**
+ * @typedef {Object} TableSettlement
+ * @property {TableNpc[]} [npcs]
+ * @property {{ legacyAnnotations?: Array<{ annotation?: string, eventName?: string }> }} [history]
+ */
+
+/** Read an NPC secret regardless of shape — generators emit { what, stakes }.
+ * @param {TableNpc | null | undefined} npc
+ * @returns {string}
  */
 function npcSecretText(npc) {
   if (!npc?.secret) return '';
@@ -41,7 +80,7 @@ function npcSecretText(npc) {
 /** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
 
 /**
- * @param {any} settlement
+ * @param {TableSettlement | null | undefined} settlement
  * @returns {TableEntry[]}
  */
 export function tonightAtTheTable(settlement) {
@@ -57,15 +96,15 @@ export function tonightAtTheTable(settlement) {
   const ranked = [...npcs].sort((a, b) => {
     const pw = (b.power || 0) - (a.power || 0);
     if (pw !== 0) return pw;
-    return (INFLUENCE_RANK[a.influence] ?? 3) - (INFLUENCE_RANK[b.influence] ?? 3);
+    return (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (a.influence)] ?? 3) - (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (b.influence)] ?? 3);
   });
   for (const npc of ranked.slice(0, 2)) {
     const role = (npc.role || npc.title || '').toLowerCase();
     const secret = npcSecretText(npc);
     const want = npc.goal?.short || npc.want || '';
     const trait = secret
-      ? `secret: ${truncate(secret, 200)}`
-      : (want ? `wants: ${truncate(want, 200)}` : (role || 'major NPC'));
+      ? `secret: ${truncate(secret, 80)}`
+      : (want ? `wants: ${truncate(want, 80)}` : (role || 'major NPC'));
     out.push({
       kind: 'NPC',
       title: npc.name || 'Unnamed NPC',
@@ -82,7 +121,7 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'HOOK',
       title: hook.source || hook.role || 'Plot hook',
-      body:  truncate(hook.text || '', 280),
+      body:  truncate(hook.text || '', 120),
     });
   }
 
@@ -95,21 +134,21 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'TWIST',
       title: annotation.eventName || 'The hidden thread',
-      body:  truncate(annotation.annotation, 280),
+      body:  truncate(annotation.annotation, 120),
     });
   } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
     out.push({
       kind: 'TWIST',
-      title: ranked[2].name,
-      body:  truncate(npcSecretText(ranked[2]), 280),
+      title: /** @type {string} */ (ranked[2].name),
+      body:  truncate(npcSecretText(ranked[2]), 120),
     });
   }
 
   // ── Red flag ─────────────────────────────────────────────────────────
   // A "don't mention" derived live from a disrupted supply chain — the
   // settlement carries no supplyChainState.failures array of its own.
-  const disrupted = deriveAllSupplyChainStates(settlement)
-    .filter((/** @type {any} */ c) => DISRUPTED_STATUSES.has(c.status));
+  const disrupted = deriveAllSupplyChainStates(/** @type {import('../supplyChainState.js').ChainsSettlementSource} */ (settlement))
+    .filter(c => DISRUPTED_STATUSES.has(c.status));
   if (disrupted.length > 0) {
     const f = disrupted[0];
     const good = f.needLabel || f.name || 'the supply';
@@ -117,7 +156,7 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'RED',
       title: `Don't mention ${good}`,
-      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 280),
+      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 160),
     });
   }
 
@@ -125,8 +164,9 @@ export function tonightAtTheTable(settlement) {
 }
 
 /**
- * @param {any} s
+ * @param {unknown} s
  * @param {number} n
+ * @returns {string}
  */
 function truncate(s, n) {
   const str = String(s || '');

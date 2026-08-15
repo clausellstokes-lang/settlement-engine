@@ -26,9 +26,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD,
-  RED, sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
 import {
   PALETTE, fmtInt, deltaInfo, isoDaysAgo, todayIso,
 } from './AdminTrendsShared.js';
@@ -273,15 +271,15 @@ export default function AdminTrendsPanel() {
             ))}
           </div>
           <input type="date" value={from} max={to} onChange={(e) => setFrom(e.target.value)} aria-label="From"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <span style={{ color: MUTED, fontSize: FS.xs }}>→</span>
           <input type="date" value={to} min={from} max={todayIso()} onChange={(e) => setTo(e.target.value)} aria-label="To"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <Select label="by" value={granularity} onChange={setGranularity} options={GRANULARITIES.map((g) => ({ key: g, label: g }))} />
           <Button variant="gold" size="sm" onClick={load} busy={loading}>{loading ? 'Loading…' : 'Refresh'}</Button>
         </div>
       </div>
-      {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString()}</div>}
+      {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</div>}
       {softError && (
         <p style={{ fontSize: FS.xs, color: swatch.danger || RED, fontFamily: sans, marginTop: SP.xs }}>
           Some panels could not load: {softError}.
@@ -301,7 +299,7 @@ export default function AdminTrendsPanel() {
 
       {/* tuning signals */}
       {signals.length > 0 && (
-        <div style={{ border: `1px solid ${GOLD}`, background: GOLD_BG, borderRadius: R.md, padding: SP.md, margin: `0 0 ${SP.md}px` }}>
+        <div style={{ border: `1px solid ${GOLD}`, background: GOLD_BG, padding: SP.md, margin: `0 0 ${SP.md}px` }}>
           <div style={{ fontFamily: serif_, fontSize: FS.sm, fontWeight: 700, color: INK_DEEP, marginBottom: SP.xs }}>Tuning signals</div>
           <ul style={{ margin: 0, paddingLeft: SP.lg, fontFamily: sans, fontSize: FS.xs, color: SECOND, lineHeight: 1.6 }}>
             {signals.map((s, i) => <li key={i}>{s}</li>)}

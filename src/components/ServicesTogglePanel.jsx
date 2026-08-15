@@ -3,6 +3,7 @@ import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD, GOLD_SOFT, INK, MUTED, SECOND, sans, FS, CARD_HDR, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
+import EmptyState from './primitives/EmptyState.jsx';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
@@ -66,7 +67,7 @@ export default function ServicesTogglePanel() {
   const currentCatalog = useStore(selectCurrentCatalog);
   const servicesToggles = useStore(s => s.servicesToggles);
   const onServiceToggle = useStore(s => s.toggleService);
-  const setServiceToggles = useStore(s => s.setServiceToggles);
+  const bulkSetServices = useStore(s => s.bulkSetServices);
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState('');
   const [filterMode, setFilterMode] = useState('all');
@@ -111,21 +112,17 @@ export default function ServicesTogglePanel() {
     onServiceToggle(toggleKey(svcKey, svcName), next);
   };
 
-  // Bulk operations
-  const bulkForce = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
-      Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(svcKey, svcName), { allow:true, force:true, forceExclude:false });
-      });
-    });
-  };
-  const bulkExclude = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
-      Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(svcKey, svcName), { allow:false, force:false, forceExclude:true });
-      });
-    });
-  };
+  // Bulk operations — one store action owns the write for the whole grid, the way
+  // InstitutionalGrid routes its strip through bulkSetInstitutions. The key list is
+  // the SAME `${svcKey}_service_${svcName}` spelling cycleService writes, so a bulk
+  // press and a card click land on the same entries.
+  const bulkKeys = useMemo(
+    () => Object.entries(instServiceMap).flatMap(([svcKey, {services}]) =>
+      Object.keys(services).map(svcName => `${svcKey}_service_${svcName}`)),
+    [instServiceMap],
+  );
+  const bulkForce = () => bulkSetServices('force', bulkKeys);
+  const bulkExclude = () => bulkSetServices('exclude', bulkKeys);
 
   const totals = useMemo(() => {
     let total=0, on=0, forced=0, excluded=0;
@@ -164,9 +161,12 @@ export default function ServicesTogglePanel() {
   }));
 
   if (Object.keys(instServiceMap).length === 0) {
-    return <div style={{padding:'14px 16px', background:swatch['#FAF8F4'], fontSize:FS.md, color:MUTED}}>
-      No services available at this tier.
-    </div>;
+    return (
+      <EmptyState
+        heading="No services at this tier."
+        body="Larger settlements sustain more trades. Raise the tier, or widen the filters above, and the services return to the roster."
+      />
+    );
   }
 
   return (
@@ -179,7 +179,7 @@ export default function ServicesTogglePanel() {
         setSearch={setSearch}
         placeholder="Search services…"
         onForceAll={bulkForce}
-        onReset={() => setServiceToggles({})}
+        onReset={() => bulkSetServices('reset')}
         onExcludeAll={bulkExclude}
         onExpandAll={() => setExpanded(Object.fromEntries(Object.keys(filtered).map(k=>[k,true])))}
         onCollapseAll={() => setExpanded({})}
@@ -214,12 +214,12 @@ export default function ServicesTogglePanel() {
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
                         <span style={{fontSize:FS.sm, fontWeight:700, color:swatch.inkMag, fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
-                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
+                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
-                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
+                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
-                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
-                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
+                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>
+                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forcedCount} forced</span>
                     </>}
                     <span style={{fontSize:FS.micro, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>
                     <span style={{fontSize:FS.xxs, color:MUTED}}>{isOpen ? '▲' : '▼'}</span>

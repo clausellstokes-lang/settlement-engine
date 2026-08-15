@@ -1,17 +1,17 @@
 /**
  * domain/regenerationDelta.js — Structured diff between two settlements.
  *
- * After a user change + rerun, the UI needs
+ * Tier 5.1 of the roadmap. After a user change + rerun, the UI needs
  * to show what changed at every layer: substrate variables, capacity
  * supply/demand, daily-life prose, which entities were preserved /
- * added / removed. Composes the existing per-layer comparators plus an
- * entity-catalog set diff.
+ * added / removed. Phase 32 composes the existing comparators from
+ * Phases 17, 18, 21, 22, 23 plus an entity-catalog set diff.
  *
  *   deriveRegenerationDelta(before, after) -> {
- *     directEffects:       SystemStateDelta[]
- *     rippleEffects:       CausalStateDelta[]
- *     capacityShifts:      CapacityDelta[]
- *     dailyLifeShifts:     DailyLifeDelta[]
+ *     directEffects:       SystemStateDelta[]      Phase 7
+ *     rippleEffects:       CausalStateDelta[]      Phase 17
+ *     capacityShifts:      CapacityDelta[]         Phase 21
+ *     dailyLifeShifts:     DailyLifeDelta[]        Phase 22
  *     preservedCanon:      Reference[]
  *     brokenDependencies:  string[]
  *     newEntities:         Reference[]
@@ -33,15 +33,33 @@ import { entityCatalog } from './explanation.js';
 
 // ── Catalog diff ─────────────────────────────────────────────────────────
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @typedef {Object} CatalogEntry
+ * @property {string} type
+ * @property {string} id
+ * @property {string} [label]
+ */
+
+/**
+ * Index a settlement's entity catalog by entity id.
+ * @param {object|null|undefined} settlement
+ * @returns {Map<string, CatalogEntry>}
+ */
 function catalogIndex(settlement) {
-  const cat = entityCatalog(settlement);
+  // entityCatalog is null-tolerant and reads only loosely-shaped fields; the
+  // cast bridges its narrowed ExplainSettlement param from our opaque snapshot.
+  const cat = entityCatalog(/** @type {import('./explanation.js').ExplainSettlement|null|undefined} */ (settlement));
   const byId = new Map();
   for (const e of cat) byId.set(e.id, e);
   return byId;
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} before @param {import('./settlement.schema.js').SimSettlement} after */
+/**
+ * Set-diff the entity catalogs of two settlement snapshots.
+ * @param {object} before
+ * @param {object} after
+ * @returns {{ preserved: CatalogEntry[], added: CatalogEntry[], removed: CatalogEntry[] }}
+ */
 function diffEntityCatalogs(before, after) {
   const beforeMap = catalogIndex(before);
   const afterMap  = catalogIndex(after);
@@ -95,12 +113,12 @@ export function deriveRegenerationDelta(before, after) {
   // Layer 2: entity catalog diff.
   const { preserved, added, removed } = diffEntityCatalogs(before, after);
 
-  // A "broken dependency" in 's lean form is a removed entity id
+  // A "broken dependency" in Phase 32's lean form is a removed entity id
   // that a remaining (preserved) entity's references[] points to.
   // We don't run full reference walk here (would require explaining
   // every preserved entity, expensive); instead we just surface the
   // removed ids — consumers that need full link analysis can call
-  // explainEntity on each.
+  // Phase 19 explainEntity on each.
   const brokenDependencies = removed.map(e => e.id);
 
   // Risk-vs-opportunity split on added entities.
@@ -147,8 +165,21 @@ export function deriveRegenerationDelta(before, after) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Total count of structural changes across all layers.
- * @param {any} delta */
+/**
+ * @typedef {Object} RegenerationDeltaLike
+ * @property {ReadonlyArray<unknown>} [directEffects]
+ * @property {ReadonlyArray<unknown>} [rippleEffects]
+ * @property {ReadonlyArray<unknown>} [capacityShifts]
+ * @property {ReadonlyArray<unknown>} [dailyLifeShifts]
+ * @property {CatalogEntry[]} [newEntities]
+ * @property {CatalogEntry[]} [removedEntities]
+ */
+
+/**
+ * Total count of structural changes across all layers.
+ * @param {RegenerationDeltaLike|null|undefined} delta
+ * @returns {number}
+ */
 export function regenerationDeltaSize(delta) {
   if (!delta) return 0;
   return (delta.directEffects?.length    || 0)
@@ -159,10 +190,13 @@ export function regenerationDeltaSize(delta) {
        + (delta.removedEntities?.length  || 0);
 }
 
-/** Group new entities by type. Useful for "what's new" UI sections.
- * @param {any} delta */
+/**
+ * Group new entities by type. Useful for "what's new" UI sections.
+ * @param {RegenerationDeltaLike|null|undefined} delta
+ * @returns {Record<string, CatalogEntry[]>}
+ */
 export function newEntitiesByType(delta) {
-  /** @type {Record<string, any[]>} */
+  /** @type {Record<string, CatalogEntry[]>} */
   const out = {};
   for (const e of delta?.newEntities || []) {
     if (!out[e.type]) out[e.type] = [];

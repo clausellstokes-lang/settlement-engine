@@ -2,21 +2,15 @@
 // When magic is absent, arcane institutions and their derived goods/services
 // are hidden from both generated output and user-facing catalogs.
 
-export const ARCANE_INST_TAGS = ['arcane', 'planar', 'alchemy', 'enchanting'];
-export const ARCANE_INST_KW   = [
-  'wizard', 'mage', 'alchemist', 'enchant', 'spell', 'arcane',
-  'scroll scribe', 'scroll', 'rune',
-  'teleportation', 'planar', 'dream parlor', 'airship',
-  'message network', 'academy of magic',
-  "mages' guild", "mages' district", 'alchemist quarter', 'enchanter',
-  'druid circle', 'elder grove council', 'elder grove',
-  'hedge wizard', 'traveling hedge wizard', 'warden',
-  'healer (divine', 'wandering healer', 'divine healer',
-  'alchemist shop', 'teleportation circle', 'planar embassy', 'great library',
-  'golem', 'undead labor', 'undead', 'skeletal',
-  'dragon resident', 'dragon',
-  'scrying',
-];
+// The two arcane vocabularies now live in a zero-import leaf and are RE-EXPORTED
+// here, so every existing `from './magicFilter.js'` importer keeps its spelling.
+// The move exists because this module is routed to the LAZY generation bundle while
+// arcaneInstitutionIdentity.js — one of its readers — sits in EAGER engine-core: that
+// one edge closed a chunk-level cycle and made the shipped bundle un-bootable.
+// The full account is in domain/arcaneInstitutionVocabulary.js's header.
+import { ARCANE_INST_KW, ARCANE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
+
+export { ARCANE_INST_KW, ARCANE_INST_TAGS };
 
 const ARCANE_GOODS = [
   'Magical services', 'Enchanted items', 'Spell components', 'Arcane supplies',
@@ -26,10 +20,15 @@ const ARCANE_GOODS = [
 ];
 
 /**
+ * @typedef {number | { magicExists?: boolean, priorityMagic?: number } | null | undefined} MagicConfig
+ */
+
+/**
  * Returns true if this institution is arcane-dependent and should be hidden at magic=0.
- * @param {any} name
- * @param {any} category
- * @param {any} tags
+ * @param {string | null | undefined} name
+ * @param {string | null | undefined} category
+ * @param {unknown} tags
+ * @returns {boolean}
  */
 function isArcaneInst(name, category, tags) {
   const n = (name     || '').toLowerCase();
@@ -43,27 +42,29 @@ function isArcaneInst(name, category, tags) {
 
 /**
  * Returns true when magic content should be completely hidden.
- * @param {any} config
+ * @param {MagicConfig} config
+ * @returns {boolean}
  */
 function noMagicWorld(config) {
   if (!config) return false;
-  if (config.magicExists === false) return true;
+  if ((/** @type {{ magicExists?: boolean }} */ (config)).magicExists === false) return true;
   const pm = typeof config === 'number' ? config : (config.priorityMagic ?? 50);
   return pm === 0;
 }
 
 /**
  * Filter a catalog tier object, removing arcane institutions when magic is off.
- * @param {any} catalog
- * @param {any} config
+ * @param {Record<string, Record<string, { tags?: unknown[] }>>} catalog
+ * @param {MagicConfig} config
+ * @returns {Record<string, Record<string, { tags?: unknown[] }>>}
  */
 export function filterCatalogForMagic(catalog, config) {
   const cfg = typeof config === 'number' ? { priorityMagic: config } : config;
   if (!noMagicWorld(cfg)) return catalog;
-  /** @type {Record<string, any>} */
+  /** @type {Record<string, Record<string, { tags?: unknown[] }>>} */
   const out = {};
   for (const [cat, insts] of Object.entries(catalog || {})) {
-    /** @type {Record<string, any>} */
+    /** @type {Record<string, { tags?: unknown[] }>} */
     const filtered = {};
     for (const [name, def] of Object.entries(insts || {})) {
       if (!isArcaneInst(name, cat, def.tags || [])) {
@@ -77,12 +78,13 @@ export function filterCatalogForMagic(catalog, config) {
 
 /**
  * Filter a services map, removing arcane institutions when magic is off.
- * @param {any} services
- * @param {any} config
+ * @param {Record<string, unknown>} services
+ * @param {MagicConfig} config
+ * @returns {Record<string, unknown>}
  */
 export function filterServicesForMagic(services, config) {
   if (!noMagicWorld(config)) return services;
-  /** @type {Record<string, any>} */
+  /** @type {Record<string, unknown>} */
   const out = {};
   for (const [instName, svcDef] of Object.entries(services || {})) {
     if (!isArcaneInst(instName, '', [])) out[instName] = svcDef;
@@ -92,20 +94,22 @@ export function filterServicesForMagic(services, config) {
 
 /**
  * Filter goods list, removing magic-dependent goods when magic is off.
- * @param {any} goods
- * @param {any} config
+ * @param {Array<string | { name?: string }>} goods
+ * @param {MagicConfig} config
+ * @returns {Array<string | { name?: string }>}
  */
 export function filterGoodsForMagic(goods, config) {
   if (!noMagicWorld(config)) return goods;
-  return (goods || []).filter((/** @type {any} */ g) => !ARCANE_GOODS.some(ag =>
+  return (goods || []).filter(g => !ARCANE_GOODS.some(ag =>
     (typeof g === 'string' ? g : g.name || '').toLowerCase().includes(ag.toLowerCase())
   ));
 }
 
 /**
  * Returns true if the magical_node resource should be hidden.
- * @param {any} resourceKey
- * @param {any} config
+ * @param {string | null | undefined} resourceKey
+ * @param {MagicConfig} config
+ * @returns {boolean}
  */
 export function isMagicalNodeFiltered(resourceKey, config) {
   if (!noMagicWorld(config)) return false;

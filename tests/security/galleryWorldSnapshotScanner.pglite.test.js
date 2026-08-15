@@ -1,6 +1,7 @@
 /**
  * galleryWorldSnapshotScanner.pglite.test.js — EXECUTION test of the NET-CURRENT
- * server-side world-snapshot scanner `_gallery_world_snapshot_is_safe` (089).
+ * server-side world-snapshot scanner `_gallery_world_snapshot_is_safe` (089; the
+ * `_config` denylist token added net-current in 127).
  *
  * The scanner is the server-side defense-in-depth that publish_map calls to REJECT
  * a client-supplied p_world_snapshot before it is stored and later served to anon by
@@ -15,6 +16,8 @@
  *      rejected (covert union), while a benign settlement key that merely CONTAINS a
  *      token ("Seedhaven") is accepted (not false-rejected by a substring match).
  *  (3) deferredPartyImpacts is in the HARD-DENY set — rejected at any depth.
+ * Plus the 127 fix:
+ *  (127) the `_config` raw-authoring-config channel is rejected at any depth.
  *
  * A clean schemaVersion = 1 snapshot still passes.
  */
@@ -23,6 +26,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -30,7 +35,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  behaviour, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   let lastFile = null;
   for (const f of files) {
@@ -49,8 +54,11 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
   // renamed migration must surface loudly, not silently drop this coverage.
   it('locates the net-current _gallery_world_snapshot_is_safe across migrations', () => {
     expect(SCANNER.sql, 'no _gallery_world_snapshot_is_safe found in any migration').toBeTruthy();
-    // It must carry the hardened HARD-DENY list (deferredPartyImpacts is fix 3).
+    // It must carry the hardened HARD-DENY list (deferredPartyImpacts is fix 3),
+    // the 127 `_config` denylist token, and the 128 `latentPantheon` token.
     expect(SCANNER.sql).toMatch(/deferredPartyImpacts/);
+    expect(SCANNER.sql).toMatch(/_config/);
+    expect(SCANNER.sql).toMatch(/latentPantheon/i);
   });
 
   beforeAll(async () => {
@@ -58,7 +66,7 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
     // The function pins `set search_path = public`; create the schema + load it.
     await db.exec('create schema if not exists public;');
     await db.exec(SCANNER.sql);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const isSafe = async (obj) =>
     (await db.query(`select public._gallery_world_snapshot_is_safe($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
@@ -89,6 +97,60 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
   it('(3) rejects deferredPartyImpacts at any depth', async () => {
     expect(await isSafe({ schemaVersion: 1, deferredPartyImpacts: [] })).toBe(false);
     expect(await isSafe({ schemaVersion: 1, nested: [{ deferredPartyImpacts: { x: 1 } }] })).toBe(false);
+  });
+
+  it('(127) rejects the _config raw-authoring-config channel at any depth', async () => {
+    // The RAW authoring config is SECRET on every public projection (099/121 seed
+    // posture): its keys can carry the generation seed, plot hooks, DM notes. The
+    // client PRIVATE_KEY_RE drops it; 127 mirrors that in the server scanner.
+    expect(await isSafe({ schemaVersion: 1, _config: { seed: 42 } })).toBe(false);
+    expect(await isSafe({ schemaVersion: 1, nested: [{ _config: { supplyChain: 1 } }] })).toBe(false);
+    // Contains-semantics: a key that merely embeds the token is rejected too.
+    expect(await isSafe({ schemaVersion: 1, raw_config: 1 })).toBe(false);
+  });
+
+  it('(128) rejects the latentPantheon unrevealed-starting-pantheon channel at any depth', async () => {
+    // The LATENT PANTHEON is baked into every seed but UNREVEALED until premium
+    // activation (Phase 4 premium gate): the gods a dossier has not yet named. The
+    // client PRIVATE_KEY_RE drops it; 128 mirrors that in the server scanner so a
+    // world snapshot embedding a settlement config cannot carry it to anon.
+    expect(await isSafe({ schemaVersion: 1, latentPantheon: { patron: { name: 'X' } } })).toBe(false);
+    expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { latentPantheon: {} } } } })).toBe(false);
+    // Contains-semantics: a key that merely embeds the token is rejected too.
+    expect(await isSafe({ schemaVersion: 1, latentPantheonRef: 1 })).toBe(false);
+    // But the ACTIVATED live embeds are NOT rejected — a shared premium pantheon is
+    // visible read-only to all (the owner's premium-gate ruling).
+    expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { primaryDeitySnapshot: { name: 'Sun' } } } } })).toBe(true);
+  });
+
+  it('(135) rejects the merged-wave conditional ledgers (spatialLedgers/politicsLedgers/warPosture/…) at any depth', async () => {
+    // The census lift: every worldState CONDITIONAL_LEDGER_KEY but pantheon is hard-denied.
+    // These carry the DM-private heart of the sim (covert blocs, war posture, the raw
+    // spatial mover ledgers). The client final-scrub drops them; 135 mirrors that server-side.
+    for (const key of ['spatialLedgers', 'politicsLedgers', 'warPosture', 'religionStates', 'occupations', 'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog', 'spatialDigest', 'narrativeTempo']) {
+      expect(await isSafe({ schemaVersion: 1, [key]: { a: 1 } }), `${key} must be rejected`).toBe(false);
+      expect(await isSafe({ schemaVersion: 1, nested: [{ [key]: {} }] }), `nested ${key} must be rejected`).toBe(false);
+    }
+    // The PUBLIC-allowlisted pantheon is NOT rejected (its scrubbed derivation is surfaced).
+    expect(await isSafe({ schemaVersion: 1, pantheon: { sun: { tier: 'major', seats: 3 } } })).toBe(true);
+  });
+
+  it('(130) accepts public economics-attribution notes but still rejects the private note keys', () => {
+    // The `note` channel is narrowed to the genuinely-private note keys (mirroring the
+    // client PRIVATE_KEY_RE): a published world snapshot embedding a settlement config
+    // with a public economics note (upstreamNote / magicFoodNote / storageNote) is no
+    // longer false-REJECTED, while a dmNotes-class / bare notes key still is.
+    return Promise.all([
+      // ACCEPTED — public economics annotations (no \y before "Note").
+      expect(isSafe({ schemaVersion: 1, settlements: { Brack: { economicState: { activeChains: [{ upstreamNote: 'imported grain' }] } } } })).resolves.toBe(true),
+      expect(isSafe({ schemaVersion: 1, x: { magicFoodNote: 'divine provision', storageNote: '8mo' } })).resolves.toBe(true),
+      // REJECTED — the genuinely-private note keys.
+      expect(isSafe({ schemaVersion: 1, notes: 'scratch' })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, deep: { note: 'x' } })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, dossierNotes: 'prep' })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, tabNotes: { a: 1 } })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, deep: { dmNote: 'secret' } })).resolves.toBe(false),
+    ]);
   });
 
   it('passes a clean schemaVersion = 1 snapshot', async () => {

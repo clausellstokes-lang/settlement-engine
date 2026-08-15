@@ -95,9 +95,13 @@ function editMarker(markerI) {
   }
 
   function updateInputs() {
+    // SECURITY (SettlementForge fork patch): marker.icon comes from an untrusted
+    // .map (pack.markers = JSON.parse(data[35])). Escape it before innerHTML so a
+    // crafted icon can neither inject a tag (non-http branch) nor break out of the
+    // img src attribute (http/data branch). escapeHtml lives in modules/ui/general.js.
     byId("markerIcon").innerHTML = marker.icon.startsWith("http") || marker.icon.startsWith("data:image")
-      ? `<img src="${marker.icon}" style="width: 1em; height: 1em;">`
-      : marker.icon;
+      ? `<img src="${escapeHtml(marker.icon)}" style="width: 1em; height: 1em;">`
+      : escapeHtml(marker.icon);
 
     markerType.value = marker.type || "";
     markerIconSize.value = marker.px || 12;
@@ -118,7 +122,9 @@ function editMarker(markerI) {
   function changeMarkerIcon() {
     selectIcon(marker.icon, value => {
       const isExternal = value.startsWith("http") || value.startsWith("data:image");
-      byId("markerIcon").innerHTML = isExternal ? `<img src="${value}" style="width: 1em; height: 1em;">` : value;
+      // SECURITY (SettlementForge fork patch): escape the chosen icon before
+      // innerHTML — same sink as updateInputs above (escapeHtml in general.js).
+      byId("markerIcon").innerHTML = isExternal ? `<img src="${escapeHtml(value)}" style="width: 1em; height: 1em;">` : escapeHtml(value);
 
       getSameTypeMarkers().forEach(marker => {
         marker.icon = value;
@@ -198,7 +204,10 @@ function editMarker(markerI) {
 
     const iconText = !hidden && document.querySelector(`#marker${i} > text`);
     if (iconText) {
-      iconText.innerHTML = isExternal ? "" : icon;
+      // SECURITY (SettlementForge fork patch): icon comes from untrusted loaded
+      // .map data (pack.markers). Escape before innerHTML — a non-external icon
+      // like `<img onerror=…>` would otherwise execute on this redraw path.
+      iconText.innerHTML = isExternal ? "" : escapeHtml(icon);
       iconText.setAttribute("x", dx + "%");
       iconText.setAttribute("y", dy + "%");
       iconText.setAttribute("font-size", px + "px");

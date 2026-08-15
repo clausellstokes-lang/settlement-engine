@@ -1,16 +1,23 @@
 import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
-  BORDER,
-  CARD,
-  BODY,
-  FS,
-  INK,
-  R,
-  SP,
-  sans,
-} from '../theme.js';
+  BORDER, CARD, BODY, FS, INK, SP, sans } from '../theme.js';
 
-export default function GalleryTopbar({ search, setSearch, sort, setSort, total, loading, disabled = false }) {
+/**
+ * The search + sort + result-count strip shared by all three gallery tabs
+ * (Settlements / Maps / Campaigns). The Settlements tab keeps the defaults; the
+ * Maps and Campaigns tabs pass their own noun + the server-honored sort catalog
+ * (MAP_SORT_OPTIONS) so the SAME single aria-live count region and control
+ * layout serve every tab. `noun` is the singular ('settlement' | 'map' |
+ * 'campaign'); `countQualifier` is the count adjective ('public' for the
+ * community feed, 'shared' for the maps/campaigns feeds).
+ */
+export default function GalleryTopbar({
+  search, setSearch, sort, setSort, total, loading, disabled = false,
+  sortOptions = GALLERY_SORT_OPTIONS,
+  noun = 'settlement',
+  countQualifier = 'public',
+}) {
+  const nounPlural = `${noun}s`;
   return (
     <div className="gallery-topbar" style={{
       display: 'grid',
@@ -22,11 +29,11 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
         <input
           id="gallery-search"
           type="search"
-          aria-label="Search settlements"
+          aria-label={`Search ${nounPlural}`}
           aria-describedby={disabled ? 'gallery-search-off' : undefined}
           value={search}
           onChange={event => setSearch(event.target.value)}
-          placeholder={disabled ? 'Search is off in your settlements' : 'Search settlements'}
+          placeholder={`Search ${nounPlural}`}
           disabled={disabled}
           style={{
             width: '100%',
@@ -34,7 +41,6 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
             boxSizing: 'border-box',
             padding: '8px 10px',
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -48,25 +54,25 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       <select
         value={sort}
         onChange={event => setSort(event.target.value)}
-        aria-label="Sort settlements"
-        disabled={disabled}
+        aria-label={`Sort ${nounPlural}`}
         style={{
           minHeight: 44,
           border: `1px solid ${BORDER}`,
-          borderRadius: R.md,
           background: CARD,
           color: INK,
           fontFamily: sans,
           fontSize: FS.sm,
           fontWeight: 850,
           padding: '8px 10px',
-          cursor: disabled ? 'not-allowed' : 'pointer',
-          opacity: disabled ? 0.6 : 1,
         }}
       >
-        {GALLERY_SORT_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+        {sortOptions.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
       </select>
-      <div className="sf-readable-strip" style={{
+      {/* The single polite live region for list-load status: always mounted, its
+          text transitions 'Loading <nouns>...' → 'N <qualifier> <noun(s)>'
+          across first load, query change, and load-more. The list/detail
+          skeletons stay aria-hidden so the load is announced exactly once. */}
+      <div className="sf-readable-strip" role="status" aria-live="polite" style={{
         gridColumn: '1 / -1',
         color: BODY,
         fontFamily: sans,
@@ -74,11 +80,11 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
         fontWeight: 850,
         justifySelf: 'start',
       }}>
-        {loading ? 'Loading settlements...' : `${total ?? 0} public settlement${total === 1 ? '' : 's'}`}
+        {loading ? `Loading ${nounPlural}...` : `${total ?? 0} ${countQualifier} ${noun}${total === 1 ? '' : 's'}`}
       </div>
-      {/* When mine-mode disables search/sort, surface the cause next to the
-          controls so the disabled state reads as intentional, not broken — the
-          cause (sidebar toggle) is otherwise spatially separated (P2). */}
+      {/* "My Settlements" mode swaps to the owner-scoped feed, which the search
+          field cannot filter — disable it and surface the cause next to the
+          control so the disabled state reads as intentional, not broken. */}
       {disabled && (
         <div id="gallery-search-off" style={{
           gridColumn: '1 / -1',
@@ -88,7 +94,7 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
           fontWeight: 750,
           justifySelf: 'start',
         }}>
-          Search and sort are paused while you view your settlements.
+          Search is off in your {nounPlural}
         </div>
       )}
     </div>

@@ -86,7 +86,12 @@ describe('AuthModal — mobile scroll-bound', () => {
   test('mobile: the dialog is height-bounded and the form body scrolls', async () => {
     installMatchMedia(true);
     const AuthModal = await loadModal();
-    render(<AuthModal onClose={() => {}} />);
+    // AuthModal receives isMobile as a PROP from its parent — this lineage computes
+    // mobile once in App (useIsMobile) and prop-drills it down (AppViews threads it to
+    // GenerateWizard/HomeLanding/etc.; App renders <AuthModal isMobile={isMobile} />).
+    // The child AuthPanel self-detects via the matchMedia fake installed above. Mirror
+    // the production render by threading the prop here.
+    render(<AuthModal onClose={() => {}} isMobile />);
 
     const dialog = screen.getByRole('dialog');
     expect(dialog.style.maxHeight).toBe('90dvh');
@@ -108,7 +113,7 @@ describe('AuthModal — mobile scroll-bound', () => {
   test('desktop: the dialog has no maxHeight and no scroll override (byte-identical)', async () => {
     installMatchMedia(false);
     const AuthModal = await loadModal();
-    render(<AuthModal onClose={() => {}} />);
+    render(<AuthModal onClose={() => {}} isMobile={false} />);
 
     const dialog = screen.getByRole('dialog');
     expect(dialog.style.maxHeight).toBe('');

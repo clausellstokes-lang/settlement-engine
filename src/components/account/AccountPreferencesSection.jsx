@@ -2,19 +2,17 @@
  * AccountPreferencesSection.jsx — "Product Preferences" section of the Account
  * page.
  *
- * Durable, user-owned generation/export/notification defaults, backed by the
+ * Durable, user-owned generation/export defaults, backed by the
  * productPrefs store bag (setProductPref → persisted). These are DEFAULTS the
  * relevant surfaces read when they have no per-artifact override; changing one
  * here doesn't retroactively alter existing artifacts.
  *
- * Notification preferences reuse the existing profile `emailNotifications`
- * handler (passed from AccountPage) so there's a single source of truth for the
- * email opt-in; the rest live in productPrefs.
+ * Email choices live in AccountEmailPreferencesSection's durable per-category
+ * RPC controls and are deliberately not duplicated here.
  */
 import { useStore } from '../../store/index.js';
 import {
-  INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
-} from '../theme.js';
+  INK, SECOND, BODY, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 const PDF_STYLES = [
@@ -25,7 +23,7 @@ const PDF_STYLES = [
 
 function selectStyle() {
   return {
-    padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md,
+    padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`,
     fontSize: FS.sm, fontFamily: sans, color: INK, background: swatch.white,
   };
 }
@@ -53,7 +51,7 @@ function PrefRow({ label, desc, htmlFor, children }) {
   );
 }
 
-export default function AccountPreferencesSection({ emailNotifications, setEmailNotifications }) {
+export default function AccountPreferencesSection() {
   const prefs = useStore(s => s.productPrefs) || {};
   const setProductPref = useStore(s => s.setProductPref);
 
@@ -109,21 +107,6 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
           type="checkbox"
           checked={prefs.campaignMapAutosave !== false}
           onChange={e => setProductPref('campaignMapAutosave', e.target.checked)}
-        />
-      </PrefRow>
-
-      {/* Notification preferences (reuses the profile email flag) */}
-      <PrefRow
-        label="Email notifications"
-        desc="Product news, lifecycle, and account emails."
-        htmlFor="pref-email-notifications"
-      >
-        <input
-          id="pref-email-notifications"
-          aria-label="Email notifications preference"
-          type="checkbox"
-          checked={emailNotifications !== false}
-          onChange={e => setEmailNotifications?.(e.target.checked)}
         />
       </PrefRow>
 

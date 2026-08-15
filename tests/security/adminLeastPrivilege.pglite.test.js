@@ -32,6 +32,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '005': resolve(dir, '005_fix_profiles_rls_recursion.sql'),
@@ -56,13 +58,13 @@ const sql = (k) => readFileSync(MIG[k], 'utf-8');
 
 /** Extract a `create or replace function public.<name>(…) … $$;` block verbatim. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
 /** Extract a `create policy "<name>" … ;` block verbatim. */
 function extractPolicy(src, name) {
-  const m = src.match(new RegExp(`create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract policy ${name}`);
   return m[0];
 }
@@ -208,7 +210,7 @@ describe.runIf(allExist)('A3 admin least-privilege — executed against 050/051/
       grant select, insert, update, delete on public.deletion_requests to nosuperuser;
       grant select on public.settlements to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`
@@ -436,15 +438,31 @@ describe.runIf(allExist)('A3 — the flat raw-PII policies are dropped (static)'
   it('050 drops the flat "Developers read all profiles" SELECT policy', () => {
     expect(s050).toMatch(/drop policy if exists "Developers read all profiles" on public\.profiles/i);
     // …and does NOT recreate a flat raw-read SELECT on profiles.
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s050).not.toMatch(/create policy "Developers read all profiles"/i);
   });
   it('050 drops the flat raw "Developers read all support messages" SELECT policy', () => {
     expect(s050).toMatch(/drop policy if exists "Developers read all support messages" on public\.support_messages/i);
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s050).not.toMatch(/create policy "Developers read all support messages"/i);
   });
   it('051 audit_log has NO update or delete policy (append-only)', () => {
     const s051 = sql('051');
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s051).not.toMatch(/create policy[^;]*on public\.audit_log[\s\S]*?for\s+update/i);
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s051).not.toMatch(/create policy[^;]*on public\.audit_log[\s\S]*?for\s+delete/i);
   });
 });

@@ -16,6 +16,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 import {
   ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, HairRule,
 } from '../primitives/Dense.jsx';
@@ -25,14 +26,17 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, smart, label, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
-import { ProseText } from '../primitives/ProseText.jsx';
+import {
+  cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
+  prominentPair, prominentType, prominentProse,
+} from '../lib/format.js';
+import { proseToPlainText } from '../primitives/ProseText.jsx';
 
 export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
   const id = vm.identity;
 
-  const populationFmt = id.population ? id.population.toLocaleString() : null;
+  const populationFmt = id.population ? formatCount(id.population) : null;
   const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : null;
 
   return (
@@ -51,8 +55,28 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {o.thesis && (
         <Callout tone="ai" kicker="THESIS">
           <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'] }}>
-            <ProseText text={o.thesis} index={vm.entityIndex} />
+            {proseToPlainText(o.thesis)}
           </Text>
+        </Callout>
+      )}
+
+      {/* ── Situation prose: arrival scene + pressure sentence (AI mode) ──
+          pdf-export-3: the overview slice carried these two most-atmospheric
+          passages but NO chapter rendered them — the docblock above promised
+          them, the paid AI export dropped them. Mirrors OverviewTab. Raw/
+          non-AI mode ⇒ both null ⇒ renders nothing ⇒ byte-identical. */}
+      {(o.arrivalScene || o.pressureSentence) && (
+        <Callout tone="ai" kicker="SITUATION">
+          {o.arrivalScene && (
+            <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'], marginBottom: o.pressureSentence ? 4 : 0 }}>
+              {proseToPlainText(o.arrivalScene)}
+            </Text>
+          )}
+          {o.pressureSentence && (
+            <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9.5'] }}>
+              {proseToPlainText(o.pressureSentence)}
+            </Text>
+          )}
         </Callout>
       )}
 
@@ -104,8 +128,16 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Systems Health Dashboard ─────────────────────────────── */}
       {hasSystemsHealth(o) && (
         <>
-      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: 4 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 1, marginTop: 4 }}>
         SYSTEMS HEALTH
+      </Text>
+      {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder): the
+          score bars, Viability and Defense statuses are generation-frozen; the
+          caption is the byte-for-byte twin of OverviewTab's Systems Health
+          caption, with the same declared-live Food Security carve-out
+          (FROZEN_VS_LIVE grammar). One string, vetoable. */}
+      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
+        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
@@ -299,13 +331,13 @@ export function Overview({ settlement, narrativeMode, vm }) {
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
             <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginRight: 4 }}>
-              {label(o.prominentRelationship.otherSettlement) || 'Neighbour'}
+              {prominentPair(o.prominentRelationship) || 'Notable pair'}
             </Text>
-            <Pill tone="cool">{cap(o.prominentRelationship.relationshipType || o.prominentRelationship.type) || 'linked'}</Pill>
+            <Pill tone="cool">{prominentType(o.prominentRelationship) || 'linked'}</Pill>
           </View>
-          {o.prominentRelationship.description && (
+          {prominentProse(o.prominentRelationship) && (
             <Text style={{ ...type.body, fontSize: pt['9'] }}>
-              {o.prominentRelationship.description}
+              {prominentProse(o.prominentRelationship)}
             </Text>
           )}
         </View>
@@ -385,8 +417,12 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
+          {/* G5 first-survey framing (Wave R-2): all three merged sources —
+              warnings, coherenceNotes, structuralSuggestions — are
+              generation-frozen records; the vintage mirrors the web twins
+              (OverviewTab's "Coherence Notes / Suggestions · First Survey"). */}
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            WARNINGS & NOTES
+            WARNINGS & NOTES · FIRST SURVEY
           </Text>
           <BulletList
             items={[
@@ -396,7 +432,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
             ]}
             tone="warn"
             emptyText="None"
-            itemRender={(it) => label(it) || (typeof it === 'string' ? it : '')}
+            itemRender={(it) => noteText(it)}
           />
         </View>
       )}

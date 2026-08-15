@@ -13,17 +13,21 @@
 > no remaining "reads-empty" gaps. Keep this doc as the section reference; the gap
 > language below is historical.
 >
-> **What "complete" does and does not mean.** The rewrite landed and the sections
-> render the fields. What is *gate-enforced* is narrower: the value-equality parity
-> test (`tests/pdf/viewModelParity.test.js`) walks `SHARED_FIELDS` in
-> `src/domain/display/parityContract.js` and asserts `web === pdf` for that
-> enumerated set of shared scalars (food balance, headcounts, prosperity/safety
-> labels, defense readiness/score, top export, …). The remaining sections are
-> covered by render **smoke** tests (renders without throwing, contains expected
-> strings) plus manual discipline — not machine value-equality. So "complete" =
-> the rewrite shipped and the shared-layer scalars are pinned; it does **not** mean
-> every rendered field is gate-asserted equal. Adding a genuinely-shared scalar to
-> `SHARED_FIELDS` is the way to promote a field from smoke-tested to value-pinned.
+> **LIVE LAYER — F3b (2026-07-14, pdf-1 / lib-infra-7).** The spatial engine's
+> living-world reads had re-opened a parity gap: the on-screen dossier showed rumors,
+> belief divergence, M6d trade-flow drift, and pestilence, but the PDF's Faith & War
+> chapter printed a pre-spatial world. `buildPdfLiveWorld` (`src/pdf/lib/liveWorld.js`)
+> now threads all four — via the SAME pure `domain/display/*` selectors — and
+> `FaithWar.jsx` renders them (rumors as the player projection, `includeGroundTruth:
+> false`; belief divergence as the DM projection, gated behind the chapter's premium/
+> canon/live three-fold seam; flow-drift + pestilence qualitative/player-safe). The
+> campaign-level export (`generateCampaignPDF.js`) gains a **State of the Realm**
+> chapter — chronicle digest, war/siege standings, pantheon, realm arcs — from the
+> same read-models, gated on a canonized `worldState` (legacy campaigns unchanged).
+> A **live-layer parity lane** (`tests/pdf/pdfLiveWorldParity.test.js`,
+> `LIVE_LAYER_FIELDS`) now walks `vm.liveWorld` so a future mover that surfaces a
+> living-world read on the screen but forgets the PDF fails the test instead of
+> silently re-opening this gap.
 
 Research-only inventory comparing every on-screen tab to its PDF section. Goal: identify what each tab renders, what the PDF currently renders, and the explicit gap to drive a rewrite. Field paths are taken from the actual `settlement.*` shape used in tab code, with conditionals noted.
 

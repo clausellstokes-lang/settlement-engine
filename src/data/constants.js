@@ -20,11 +20,9 @@ export const SEVERITY = {
   DEPENDENCY:   'dependency',
 };
 
-/** @param {string} tier @param {string} min @returns {boolean} */
 export const tierAtLeast = (tier, min) =>
   TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(min);
 
-/** @param {number} pop @returns {string} */
 export const popToTier = (pop) =>
   // Boundaries must agree with POPULATION_RANGES exactly, else a settlement is
   // stamped with a tier whose own max it exceeds. thorp maxes at 60 (hamlet
@@ -36,7 +34,6 @@ export const popToTier = (pop) =>
   : pop <= 25000 ? 'city'
   : 'metropolis';
 
-/** @param {number} [priority] @returns {string} */
 export const getMagicLevel = (priority = 50) =>
   priority === 0  ? 'none'
   : priority <= 25  ? 'low'
@@ -54,7 +51,7 @@ export const PROSPERITY_TIERS = Object.freeze([
   'Subsistence', 'Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy',
 ]);
 
-/** Rank a prosperity label 0..6 (Subsistence..Wealthy); -1 for unknown. Accepts {tier} objects. @param {any} prosperity @returns {number} */
+/** Rank a prosperity label 0..6 (Subsistence..Wealthy); -1 for unknown. Accepts {tier} objects. */
 export const prosperityRank = (prosperity) => {
   const label = typeof prosperity === 'string' ? prosperity : prosperity?.tier;
   return PROSPERITY_TIERS.indexOf(label);

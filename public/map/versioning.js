@@ -77,26 +77,83 @@ if (parseMapVersion(VERSION) !== VERSION) alert("versioning.js: Invalid format o
   }
 }
 
+// SECURITY (SettlementForge fork patch, H11): the /map/ frame shares its ORIGIN
+// with the host SettlementForge app (same host, different path), so localStorage
+// and Cache Storage are SHARED. Stock cleanupData() called localStorage.clear()
+// and deleted EVERY Cache Storage entry — destroying the host's Supabase auth
+// token (sb-<ref>-auth-token) and all host app state on a "Clear cache" click.
+// Scope every clear to what the MAP FORK owns; leave everything else intact.
+// Delete-only-fork-keys is the safe direction: an unrecognized key survives, so a
+// host key (which never matches a fork name or prefix) can never be destroyed.
+
+// Exact localStorage keys the fork writes (options, presets, flags, AI config).
+const FORK_LS_KEYS = new Set([
+  "version", "preset", "presetStyle", "presets", "mapWidth", "mapHeight",
+  "military", "winds", "burg-groups", "disable_click_arrow_tooltip",
+  "installationDontAsk", "noReminder", "debug",
+  "fmg-ai-model", "fmg-ai-temperature",
+  "areaUnit", "distanceUnit", "heightUnit", "heightExponent",
+  "populationRate", "urbanization", "urbanDensity",
+  "temperatureScale", "temperatureEquator", "temperatureNorthPole", "temperatureSouthPole",
+  "themeColor", "transparency", "uiSize", "tooltipSize",
+  "era", "year", "regions", "template", "speakerVoice",
+  "styleAncient", "styleClean", "styleGloom", "styleMonochrome"
+]);
+// Prefix families the fork writes with dynamic suffixes:
+//   fmg-ai-*   → AI config + per-provider keys (fmg-ai-kl-<provider>, ai-generator.js)
+//   fmgStyle_* → user-saved custom style presets (customPresetPrefix, style-presets.js)
+const FORK_LS_PREFIXES = ["fmg-ai-", "fmgStyle_"];
+
+function isForkLsKey(key) {
+  if (typeof key !== "string") return false;
+  if (FORK_LS_KEYS.has(key)) return true;
+  return FORK_LS_PREFIXES.some(prefix => key.startsWith(prefix));
+}
+
+// Remove only the fork's own localStorage keys; preserve host keys (auth session,
+// app state). Snapshot the keys first — mutating localStorage while indexing it
+// by position skips entries.
+function clearMapLocalStorage() {
+  const keys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k != null) keys.push(k);
+  }
+  for (const k of keys) if (isForkLsKey(k)) localStorage.removeItem(k);
+}
+
+// Fork-owned Cache Storage names. The fork removed its service worker (sw.js), so
+// it currently registers NO caches; this predicate scopes any future fork cache
+// AND stops cleanupData from deleting a HOST cache (e.g. a host PWA/workbox cache)
+// on the shared origin. Deliberately narrow to the "fmg" marker — a host cache
+// name never matches.
+function isForkCacheName(name) {
+  return /fmg/i.test(String(name || ""));
+}
+
 async function cleanupData() {
   await clearCache();
-  localStorage.clear();
+  clearMapLocalStorage();
   localStorage.setItem("version", VERSION);
   localStorage.setItem("disable_click_arrow_tooltip", "true");
   location.reload();
 }
 
 async function clearCache() {
+  if (typeof caches === "undefined" || !caches || typeof caches.keys !== "function") return;
   const cacheNames = await caches.keys();
-  return Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+  return Promise.all(cacheNames.filter(isForkCacheName).map(cacheName => caches.delete(cacheName)));
 }
 
 function parseMapVersion(version) {
   let [major, minor, patch] = version.split(".");
 
   if (patch === undefined) {
-    // e.g. 1.732
-    minor = minor.slice(0, 2);
+    // SettlementForge fork patch: legacy 2-part format, e.g. "1.732" → major 1, minor 73, patch 2.
+    // The original truncated minor to 2 chars FIRST and then sliced(2) that same 2-char string, always
+    // yielding "" (patch silently 0). Derive patch from the full minor before truncating it.
     patch = minor.slice(2);
+    minor = minor.slice(0, 2);
   }
 
   // e.g. 0.7b

@@ -1,7 +1,7 @@
 /**
  * Property-based tests for the full generation pipeline.
  *
- *   1. Generation never throws across the (tier × culture × terrain ×
+ *   1. Generation never throws across the (tier × culture × terrainOverride ×
  *      tradeRouteAccess) config space
  *   2. Output is structurally complete — required fields present and
  *      well-typed, regardless of config
@@ -26,17 +26,26 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 
 // Valid values cribbed from src/data/constants.js + existing fixtures.
 // Random/custom tiers are excluded because they trigger different code
-// paths the example tests cover better.
+// paths the example tests cover better. terrainOverride is the LIVE terrain
+// key (terrainHelpers.getTerrainType / resolveConfig read it; a bare `terrain`
+// is inert), and its seven tokens are the vocabulary the pipeline actually
+// resolves — so this axis fuzzes real terrain branches, not a dead field. The
+// extra 'auto' token leaves terrainOverride unpinned, so the terrain comes from
+// the route (route-derived terrain) — fuzzing that branch too.
 const tier            = fc.constantFrom('thorp', 'hamlet', 'village', 'town', 'city', 'metropolis');
-const culture         = fc.constantFrom('germanic', 'celtic', 'norse', 'mediterranean');
-const terrain         = fc.constantFrom('grassland', 'forest', 'river', 'coastal', 'mountains', 'swamp');
+// SS2-F33: the REAL NAMING_DATA cultures — the prior list fuzzed a bogus 'mediterranean' that
+// resolveNameCulture silently folds to germanic, so 8 of 11 real culture naming branches (latin,
+// arabic, slavic, east_asian, mesoamerican, south_asian, steppe, greek) were never exercised by
+// the deep-JSON byte-identity pin. These are the culture keys the pipeline actually resolves.
+const culture         = fc.constantFrom('germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek');
+const terrainOverride = fc.constantFrom('plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert', 'auto');
 const tradeRoute      = fc.constantFrom('road', 'river', 'port', 'crossroads', 'isolated', 'none');
 const monsterThreat   = fc.constantFrom('safe', 'civilized', 'frontier', 'plagued');
 
 const configArb = fc.record({
   settType:         tier,
   culture,
-  terrain,
+  terrainOverride,
   tradeRouteAccess: tradeRoute,
   monsterThreat,
 });
@@ -99,7 +108,7 @@ describe('pipeline (property-based)', () => {
       const b = gen(config, { seed: SEED });
       expect(fingerprint(a)).toEqual(fingerprint(b));
     }), { numRuns: 100 });
-  });
+  }, 120_000);
 
   test('same seed produces a DEEP-identical settlement (full-JSON determinism)', () => {
     // The fingerprint test above compares only 5 scalars — it would pass even
@@ -113,7 +122,10 @@ describe('pipeline (property-based)', () => {
       const b = gen(config, { seed: SEED });
       expect(JSON.stringify(a)).toBe(JSON.stringify(b));
     }), { numRuns: 100 });
-  });
+    // 200 full-pipeline generations + full-JSON compares overrun the root 20s
+    // testTimeout under machine load — a wall-clock false positive, not drift.
+    // Same house allowance as the seed-sensitivity test below. ([tests-4]/[test-quality-7])
+  }, 120_000);
 
   test('different seeds usually produce different fingerprints (seed sensitivity)', () => {
     // Catches the failure mode where someone accidentally bypasses the
@@ -135,12 +147,16 @@ describe('pipeline (property-based)', () => {
       // seed is being ignored.
       expect(differingPairs).toBeGreaterThanOrEqual(3);
     }), { numRuns: 25 });
-  });
+    // 8 pairs × 25 runs = 400 full-pipeline generations overrun the root 20s
+    // testTimeout under machine load — a wall-clock false positive, not drift
+    // (documented pre-existing env red in the ROUND21 plan). Same house allowance
+    // as generatorGoldenMaster/distributionEnvelopes. ([tests-4]/[test-quality-7])
+  }, 120_000);
 
   // Bonus: thorps are tiny — population should fit in the tier band.
   test('thorps stay under 60 population', () => {
-    fc.assert(fc.property(culture, terrain, (cul, terr) => {
-      const s = gen({ settType: 'thorp', culture: cul, terrain: terr, tradeRouteAccess: 'isolated' });
+    fc.assert(fc.property(culture, terrainOverride, (cul, terr) => {
+      const s = gen({ settType: 'thorp', culture: cul, terrainOverride: terr, tradeRouteAccess: 'isolated' });
       expect(s.population).toBeLessThanOrEqual(60);
     }), { numRuns: 100 });
   });

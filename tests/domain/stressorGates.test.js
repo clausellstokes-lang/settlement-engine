@@ -148,6 +148,59 @@ describe('organic birth gates', () => {
     expect(signals.length).toBeGreaterThanOrEqual(3);
   });
 
+  test('current custom display names do not create native arcane or transport dependence', () => {
+    const base = {
+      config: { magicExists: true, priorityMagic: 10 },
+      institutions: [],
+    };
+    const namesakes = [
+      { name: 'Arcane College' },
+      { name: 'Airship Terminal' },
+    ];
+    const currentCustom = namesakes.map((institution, index) => ({
+      ...institution,
+      source: 'custom',
+      customDefinitionId: `definition:institutions:magic-dependence-${index}`,
+    }));
+
+    expect(magicDependenceSignals({
+      ...base,
+      institutions: currentCustom,
+    })).toEqual([]);
+    expect(magicDependenceSignals({
+      ...base,
+      institutions: namesakes,
+    })).toEqual([
+      'arcane institutions anchor daily life',
+      'trade arrives by teleport or airship',
+    ]);
+  });
+
+  test('current custom display names do not satisfy native stressor institution classes', () => {
+    const gate = STRESSOR_SPAWN_GATES.famine;
+    const pressure = pressureRow('oak', 'food', 0.7);
+    const namesakes = [{ name: 'Granary' }, { name: 'Orchard' }];
+    const currentCustom = namesakes.map((institution, index) => ({
+      ...institution,
+      source: 'custom',
+      customDefinitionId: `definition:institutions:food-class-${index}`,
+    }));
+
+    const baseline = gate(snapshotWith(), pressure);
+    const custom = gate(snapshotWith({
+      settlement: { institutions: currentCustom },
+    }), pressure);
+    const legacy = gate(snapshotWith({
+      settlement: { institutions: namesakes },
+    }), pressure);
+
+    expect(custom).toEqual(baseline);
+    expect(legacy.probabilityMult).toBeLessThan(baseline.probabilityMult);
+    expect(legacy.reasons).toContain(
+      'Redundant food institutions blunt a bad season.',
+    );
+  });
+
   test('the trade signal derives the channel LIVE-FIRST (the field-manifest contract), verdict as no-signal fallback', () => {
     // A custom-renamed circle sniffs as nothing — the generation verdict
     // still speaks for it through resolveBlockadeBypassChannel, never as a
@@ -186,9 +239,12 @@ describe('organic birth gates', () => {
     const gate = STRESSOR_SPAWN_GATES.famine;
     const pressure = pressureRow('oak', 'food', 0.7);
     const stocked = gate(snapshotWith({
-      settlement: { economicState: { foodSecurity: { storageMonths: 5, deficitPct: 0, dailyNeed: 100, dailyProduction: 100 } } },
+      settlement: { economicState: { foodSecurity: { storageMonths: 5, deficitPct: 42, dailyNeed: 100, dailyProduction: 58 } } },
     }), pressure);
     expect(stocked.probabilityMult).toBeLessThan(1);
+    expect(stocked.reasons).toContain('Production falls far short of the town\'s needs.');
+    // anchored: the exact famine-gate sentence above proves the reason collection is live.
+    expect(stocked.reasons.join(' ')).not.toMatch(/\d|%|\b(?:score|multiplier|gate)\b/i);
     const blockaded = gate(snapshotWith({
       stressors: [activeStressor('siege', ['oak'])],
     }), pressure);
@@ -217,6 +273,10 @@ describe('organic birth gates', () => {
     const famine = candidates.find(c => c.candidateType === 'stressor_birth_famine');
     expect(famine).toBeTruthy();
     expect(famine.reasons.join(' ')).toMatch(/blockade is starving/);
+    // anchored: the positive blockade phrase above proves the birth receipt is populated.
+    expect(famine.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|%|\b(?:score|multiplier|gate)\b/i);
+    expect(famine.metadata.gateEvidence.probabilityMult).toBeGreaterThan(1);
+    expect(famine.metadata.gateEvidence.sourceNotes.join(' ')).toMatch(/blockade is starving/);
 
     const calmPressures = [pressureRow('oak', 'food', 0.7)];
     const calm = evaluateStressorRules(snapshotWith(), pressureIndex(calmPressures), { tick: 5, pressures: calmPressures })

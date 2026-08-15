@@ -19,6 +19,8 @@
  */
 
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
@@ -67,7 +69,6 @@ function makeState(overrides = {}) {
     settlement: null,
     initAuth: vi.fn(),
     authSignOut: vi.fn(),
-    initOnboarding: vi.fn(),
     onboardingNudge: null,
     clearOnboardingNudge: vi.fn(),
     purchaseModalOpen: false,
@@ -94,11 +95,47 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+// This suite exercises the shell/error-boundary contract, not campaign-runtime
+// hydration. AppViews now gates campaign-capable routes behind that preload;
+// bypass it here so the deliberately tiny store stub above remains sufficient
+// and the mocked GenerateWizard can reach the boundary under test.
+vi.mock('../../src/store/campaignRuntimeView.js', async () => {
+  const { lazy } = await import('react');
+  return {
+    createRetryableCampaignLazy: (_store, importer) => lazy(importer),
+    createRetryableLazy: importer => lazy(importer),
+  };
+});
+
 // stripe.js is dynamically imported in a mount effect; stub it so the effect
 // resolves without network.
 vi.mock('../../src/lib/stripe.js', () => ({
   checkCheckoutResult: () => null,
   fetchCreditBalance: () => Promise.resolve(0),
+}));
+
+// ⚠️ THE MOCK ABOVE IS NOT LOAD-BEARING FOR THE TEARDOWN RACE, and that is why this
+// leaf mock exists beside it. Mocking a module's EXPORTS does not sever its MODULE
+// GRAPH: App.jsx's mount effect calls `import('./lib/stripe.js')` directly, and a
+// dynamic import inside a source module does NOT resolve through a test's `vi.mock`
+// factory — the real stripe.js is fetched anyway, and its line-17
+// `import { fetchCreditBalanceFromLedger } from './creditLedger.js'` can land after
+// jsdom is torn down, producing one unhandled `EnvironmentTeardownError` per
+// `render(<App />)` and a non-zero exit while every test still passes.
+//
+// PREVENTIVE, not a repair: measured 2026-08-04 at HEAD 1453676b, this file was green
+// on 9 of 9 solo runs. Its six shell renders are the exposure, and three sibling
+// suites have already been bitten (navFlowArrows, navFletching, navDividers — the last
+// red on 2 of 9 runs with 9 errors against 9 renders). Mocking the LEAF ends the race
+// at its source: a factory mock is served from the registry and needs no post-teardown
+// fetch at all.
+//
+// This voids no pin. Under the supabase stub above (`isConfigured: false`) the REAL
+// `fetchCreditBalanceFromLedger` returns 0 at its first line without touching the
+// network, so the mock's resolved value is what the real module already produced here,
+// and nothing in this file asserts on the credit balance.
+vi.mock('../../src/lib/creditLedger.js', () => ({
+  fetchCreditBalanceFromLedger: () => Promise.resolve(0),
 }));
 
 // ── Lazy view stubs ────────────────────────────────────────────────────────
@@ -162,12 +199,14 @@ describe('(2) bare root is owned by the front door, order-independent', () => {
     expect(targets).not.toContain('/create');
   });
 
-  test("a returning signed-in visitor at '/' also lands on /home, not /create", () => {
-    // The stale comments (routes.js home entry, App's home-render note) claimed
-    // returning visitors land on /create via a localStorage gate. There is no
-    // such gate: the front door rewrites '/' to /home for EVERYONE, signed-in
-    // members included. With a restored session (token present, auth resolved),
-    // the effect still fires once authLoading clears.
+  test("a returning signed-in member at '/' lands on /create, not /home", () => {
+    // LINEAGE NOTE (master merge W6): RF's bare-root front door (App.jsx:154-177)
+    // is member-aware BY DESIGN (decision 7's member-redirect): anon visitors go
+    // to /home (the marketing Welcome), signed-in members go straight to /create
+    // (their workspace) so a returning member never lands on marketing. Master's
+    // variant rewrote '/' to /home for everyone; this assertion is re-pointed to
+    // RF's deliberate member-redirect. With a restored session (token present,
+    // auth resolved), the effect fires once authLoading clears.
     window.history.replaceState(null, '', '/');
     H.route = { view: 'generate', params: {}, legacy: false, notFound: false };
     H.hasToken = true;
@@ -176,8 +215,8 @@ describe('(2) bare root is owned by the front door, order-independent', () => {
     render(<App />);
 
     const targets = replacePath.mock.calls.map((c) => c[0]);
-    expect(targets).toContain('/home');
-    expect(targets).not.toContain('/create');
+    expect(targets).toContain('/create');
+    expect(targets).not.toContain('/home');
   });
 
   test('legacy / notFound paths still upgrade to their canonical path', () => {
@@ -214,5 +253,24 @@ describe('(3) onboarding nudge dismiss prevents default on Space', () => {
     const enterNotPrevented = fireEvent.keyDown(toast, { key: 'Enter', code: 'Enter' });
     expect(clearOnboardingNudge).toHaveBeenCalledTimes(1);
     expect(enterNotPrevented).toBe(false);
+  });
+});
+
+describe('(4) lazy route loading keeps the footer outside the first viewport', () => {
+  test('the route main wires the shell reserve and its CSS has vh + svh floors', () => {
+    const { container } = render(<App />);
+    const main = container.querySelector('main#main-content');
+    expect(main?.classList.contains('app-route-main')).toBe(true);
+
+    const css = readFileSync(join(process.cwd(), 'src/index.css'), 'utf8');
+    expect(css).toMatch(
+      /\.app-route-main\s*\{[^}]*--app-shell-header-reserve:\s*72px;[^}]*min-height:\s*calc\(100vh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
+    );
+    expect(css).toMatch(
+      /\.app-route-main--mobile\s*\{[^}]*--app-shell-header-reserve:\s*56px/s,
+    );
+    expect(css).toMatch(
+      /@supports\s*\(height:\s*100svh\)[\s\S]*?\.app-route-main\s*\{[^}]*min-height:\s*calc\(100svh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
+    );
   });
 });

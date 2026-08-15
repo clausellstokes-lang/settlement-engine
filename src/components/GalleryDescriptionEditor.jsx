@@ -13,7 +13,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Bold, Italic, Underline, Heading, List, ListOrdered, Link2, Eraser, Check, X } from 'lucide-react';
 
 import { sanitizeGalleryHtml } from '../lib/sanitizeGalleryHtml.js';
-import { AMBER_DEEP, BORDER2, CARD, CARD_ALT, INK, MUTED, R, FS, sans } from './theme.js';
+import { AMBER_DEEP, BORDER2, CARD, CARD_ALT, INK, MUTED, FS, sans } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 
 const exec = (cmd, value = null) => {
@@ -61,12 +61,14 @@ function capVisible(clean, maxLength) {
   return sanitizeGalleryHtml(box.innerHTML);
 }
 
-function ToolbarButton({ icon: Icon, title, onMouseDown }) {
+function ToolbarButton({ icon: Icon, title, onMouseDown, onClick }) {
   // Icon-only toolbar control: design-system IconButton (default tone ≈ card
   // bg + border, md size for the ~13px icon). title becomes the required
-  // aria-label; onMouseDown passes through via ...rest (kept so execCommand
-  // applies to the live selection instead of blurring first).
-  return <IconButton Icon={Icon} label={title} size="md" tone="default" onMouseDown={onMouseDown} />;
+  // aria-label. onMouseDown (mouse) is kept so execCommand applies to the live
+  // selection instead of blurring first; onClick carries the KEYBOARD path
+  // (Enter/Space, which fire a click with detail 0) so the toolbar is not
+  // mouse-only (M9). Both pass through to the native button IconButton renders.
+  return <IconButton Icon={Icon} label={title} size="md" tone="default" onMouseDown={onMouseDown} onClick={onClick} />;
 }
 
 export default function GalleryDescriptionEditor({ value = '', onChange, maxLength = 4000 }) {
@@ -114,10 +116,6 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
     onChange?.(clean);
   };
 
-  // mousedown + preventDefault keeps the selection inside the editable so
-  // execCommand applies to it rather than blurring first.
-  const cmd = (e, command, val) => { e.preventDefault(); exec(command, val); emit(); };
-
   const saveSelection = () => {
     const sel = typeof window !== 'undefined' ? window.getSelection() : null;
     if (sel && sel.rangeCount && ref.current && ref.current.contains(sel.anchorNode)) {
@@ -125,7 +123,28 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
     }
   };
 
-  const openLink = (e) => { e.preventDefault(); saveSelection(); setLinkUrl(''); setLinkOpen(true); };
+  // Put the caret/selection back inside the editable — used on the KEYBOARD
+  // path, where activating a toolbar button moved focus off the contenteditable
+  // (so execCommand would have no editable to apply to). The pointer path never
+  // needs this: mousedown preventDefault keeps focus in the editable.
+  const restoreSelection = () => {
+    ref.current?.focus();
+    const sel = typeof window !== 'undefined' ? window.getSelection() : null;
+    if (savedRange.current && sel) { sel.removeAllRanges(); sel.addRange(savedRange.current); }
+  };
+
+  const runCommand = (command, val) => { exec(command, val); emit(); };
+
+  // Pointer: preventDefault keeps the live selection, exec applies directly.
+  const cmdMouseDown = (e, command, val) => { e.preventDefault(); runCommand(command, val); };
+  // Keyboard: Enter/Space on a focused button fire a click with detail 0. A real
+  // mouse click (detail >= 1) was already handled by mousedown, so skip it here
+  // to avoid a double-exec; the keyboard path restores the selection first.
+  const cmdClick = (e, command, val) => { if (e.detail !== 0) return; restoreSelection(); runCommand(command, val); };
+
+  const openLinkPopover = () => { saveSelection(); setLinkUrl(''); setLinkOpen(true); };
+  const openLinkMouseDown = (e) => { e.preventDefault(); openLinkPopover(); };
+  const openLinkClick = (e) => { if (e.detail === 0) openLinkPopover(); };
 
   const applyLink = () => {
     const url = linkUrl.trim();
@@ -139,16 +158,16 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
   };
 
   return (
-    <div style={{ border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD, overflow: 'hidden' }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, padding: 5, background: CARD_ALT, borderBottom: `1px solid ${BORDER2}`, alignItems: 'center' }}>
-        <ToolbarButton icon={Bold} title="Bold" onMouseDown={(e) => cmd(e, 'bold')} />
-        <ToolbarButton icon={Italic} title="Italic" onMouseDown={(e) => cmd(e, 'italic')} />
-        <ToolbarButton icon={Underline} title="Underline" onMouseDown={(e) => cmd(e, 'underline')} />
-        <ToolbarButton icon={Heading} title="Heading" onMouseDown={(e) => cmd(e, 'formatBlock', 'h3')} />
-        <ToolbarButton icon={List} title="Bulleted list" onMouseDown={(e) => cmd(e, 'insertUnorderedList')} />
-        <ToolbarButton icon={ListOrdered} title="Numbered list" onMouseDown={(e) => cmd(e, 'insertOrderedList')} />
-        <ToolbarButton icon={Link2} title="Add link" onMouseDown={openLink} />
-        <ToolbarButton icon={Eraser} title="Clear formatting" onMouseDown={(e) => cmd(e, 'removeFormat')} />
+    <div style={{ border: `1px solid ${BORDER2}`, background: CARD, overflow: 'hidden' }}>
+      <div role="toolbar" aria-label="Description formatting" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, padding: 5, background: CARD_ALT, borderBottom: `1px solid ${BORDER2}`, alignItems: 'center' }}>
+        <ToolbarButton icon={Bold} title="Bold" onMouseDown={(e) => cmdMouseDown(e, 'bold')} onClick={(e) => cmdClick(e, 'bold')} />
+        <ToolbarButton icon={Italic} title="Italic" onMouseDown={(e) => cmdMouseDown(e, 'italic')} onClick={(e) => cmdClick(e, 'italic')} />
+        <ToolbarButton icon={Underline} title="Underline" onMouseDown={(e) => cmdMouseDown(e, 'underline')} onClick={(e) => cmdClick(e, 'underline')} />
+        <ToolbarButton icon={Heading} title="Heading" onMouseDown={(e) => cmdMouseDown(e, 'formatBlock', 'h3')} onClick={(e) => cmdClick(e, 'formatBlock', 'h3')} />
+        <ToolbarButton icon={List} title="Bulleted list" onMouseDown={(e) => cmdMouseDown(e, 'insertUnorderedList')} onClick={(e) => cmdClick(e, 'insertUnorderedList')} />
+        <ToolbarButton icon={ListOrdered} title="Numbered list" onMouseDown={(e) => cmdMouseDown(e, 'insertOrderedList')} onClick={(e) => cmdClick(e, 'insertOrderedList')} />
+        <ToolbarButton icon={Link2} title="Add link" onMouseDown={openLinkMouseDown} onClick={openLinkClick} />
+        <ToolbarButton icon={Eraser} title="Clear formatting" onMouseDown={(e) => cmdMouseDown(e, 'removeFormat')} onClick={(e) => cmdClick(e, 'removeFormat')} />
         {linkOpen && (
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginLeft: 4 }}>
             <input
@@ -162,10 +181,10 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
               aria-label="Link URL"
               // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the URL field when the link popover opens so the user can type immediately
               autoFocus
-              style={{ width: 150, border: `1px solid ${BORDER2}`, borderRadius: R.sm, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
+              style={{ width: 150, border: `1px solid ${BORDER2}`, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
             />
-            <ToolbarButton icon={Check} title="Apply link" onMouseDown={(e) => { e.preventDefault(); applyLink(); }} />
-            <ToolbarButton icon={X} title="Cancel" onMouseDown={(e) => { e.preventDefault(); setLinkOpen(false); }} />
+            <ToolbarButton icon={Check} title="Apply link" onMouseDown={(e) => { e.preventDefault(); applyLink(); }} onClick={(e) => { if (e.detail === 0) applyLink(); }} />
+            <ToolbarButton icon={X} title="Cancel" onMouseDown={(e) => { e.preventDefault(); setLinkOpen(false); }} onClick={(e) => { if (e.detail === 0) setLinkOpen(false); }} />
           </span>
         )}
       </div>
@@ -176,8 +195,11 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
         role="textbox"
         aria-multiline="true"
         aria-label="Gallery description"
+        tabIndex={0}
         onInput={emit}
         onBlur={emit}
+        onKeyUp={saveSelection}
+        onMouseUp={saveSelection}
         style={{ minHeight: 80, maxHeight: 220, overflowY: 'auto', padding: 9, fontFamily: sans, fontSize: FS.xs, color: INK, lineHeight: 1.5, outline: 'none' }}
       />
       {/* Live visible-character readout + soft warning at the cap. Counts what
@@ -188,7 +210,7 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
       >
         {used >= maxLength && (
           <span style={{ color: AMBER_DEEP, fontWeight: 700 }}>
-            At the {maxLength}-character limit — trimmed to fit.
+            At the {maxLength}-character limit. Trimmed to fit.
           </span>
         )}
         <span style={{ color: used >= maxLength ? AMBER_DEEP : MUTED, fontWeight: 700 }}>

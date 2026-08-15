@@ -20,7 +20,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, label, smart, humanize, upper, safe } from '../lib/format.js';
+import { cap, label, noteText, smart, humanize, upper, safe } from '../lib/format.js';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -73,8 +73,12 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           }}
           wrap={false}
         >
+          {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder):
+              magicDependency is generation-frozen; the header carries the
+              vintage exactly like its web twin (ViabilityTab's Magic
+              Dependency banner). One string, vetoable. */}
           <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 2 }}>
-            MAGIC DEPENDENCY
+            MAGIC DEPENDENCY · FIRST SURVEY
           </Text>
           <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
             This settlement leans on arcane infrastructure. If magic-supporting institutions
@@ -123,17 +127,20 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             BY-DESIGN CONTRADICTIONS
           </Text>
+          <Text style={{ ...type.body, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            Intentional tensions: plot seeds, not defects.
+          </Text>
           {contradictions.map((c, i) => (
             <View
               key={`bdc-${i}`}
               style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
               wrap={false}
             >
-              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>·</Text>
+              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>»</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`viability.contradiction.${i}`}
-                  defaultValue={typeof c === 'string' ? c : (c?.text || c?.description || c?.label || '')}
+                  defaultValue={noteText(c)}
                   style={{ ...type.body, fontSize: pt['9'] }}
                 />
               </View>
@@ -166,21 +173,24 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               <BulletList
                 items={warnings}
                 tone="warn"
-                bullet="!"
-                itemRender={(w) => label(w) || (typeof w === 'string' ? w : '')}
+                bullet="•"
+                itemRender={(w) => noteText(w)}
               />
             </View>
           )}
           {violations.length > 0 && (
             <View style={{ flex: 1 }}>
+              {/* G5 first-survey framing (Wave R-2): structuralViolations is
+                  generation-frozen; the vintage mirrors the web twin
+                  (ViabilityTab's "Structural Crises · First Survey"). */}
               <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 2 }}>
-                STRUCTURAL VIOLATIONS
+                STRUCTURAL VIOLATIONS · FIRST SURVEY
               </Text>
               <BulletList
                 items={violations}
                 tone="bad"
                 bullet="×"
-                itemRender={(s) => label(s) || (typeof s === 'string' ? s : '')}
+                itemRender={(s) => noteText(s)}
               />
             </View>
           )}

@@ -1,3 +1,6 @@
+import { politicalAutonomyOf } from './simulationRules.js';
+import { isActorInitiatedMajorType, routineMajorApprovalEnabled } from './actorMajorApproval.js';
+
 /**
  * domain/worldPulse/changeAuthorityPolicy.js — the canonical change-authority
  * contract for the World Pulse simulation.
@@ -11,11 +14,14 @@
  * culminating long goal resolves into the NPC's ascendance; an occupation that
  * has run its course resolves into vassalization).
  *
- * This module does NOT route anything. It is the written-down mapping of how the
- * live subsystems already behave, plus a contract test
- * (changeAuthorityPolicy.contract.test.js) that fails if a subsystem's authority
- * silently flips. The DM-authority contract was previously implicit and
- * distributed across a dozen generators; this makes drift visible.
+ * Since CL-0 this module also carries the ONE live routing primitive,
+ * `authorityFor` (below): the per-domain authority resolver the candidate
+ * families consult, resolving the §11 politicalAutonomy modes over each
+ * family's own legacy gate. The mapping tables remain the written-down record
+ * of how the live subsystems behave, and the contract test
+ * (changeAuthorityPolicy.contract.test.js) still fails if a subsystem's
+ * authority silently flips. The DM-authority contract was previously implicit
+ * and distributed across a dozen generators; this makes drift visible.
  *
  * AUTHORITY VALUES:
  *  • 'proposal-gated' — emits applyMode 'proposal' (queued for DM approval) when
@@ -41,7 +47,14 @@
  *    label-change). The split is decided by the move/branch, not by the flag or a
  *    severity threshold.
  *
- * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'always-proposal'|'structural-proposal'} ChangeAuthority
+ *  • 'auto-with-approval-routing' — the candidate is auto by default (a bounded
+ *    consequence the DM saw coming), but as an ACTOR-INITIATED major it routes its
+ *    legacy 'auto' through authorityFor, so the new dm_only/recommendations modes and
+ *    routine-with-major-approval force it to 'proposal'. Like auto-with-lock-escalation
+ *    but the escalation axis is the autonomy mode, not a player lock (W-CONVERGENCE's
+ *    intervention_ordered).
+ *
+ * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'auto-with-approval-routing'|'always-proposal'|'structural-proposal'} ChangeAuthority
  *
  * @typedef {object} ChangeAuthorityEntry
  * @property {ChangeAuthority} authority   The authority class (see above).
@@ -111,6 +124,21 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'An institution being founded or dissolved is a standing-order change to the settlement; gated above the magnitude threshold.',
   }),
+  settlement_terminal_death: Object.freeze({
+    authority: 'proposal-gated',
+    module: 'settlementLifecycleFirstClass.js',
+    consultsProposalFlag: true,
+    campaignAltering: true,
+    rationale:
+      'W-LIFECYCLE: a first-class settlement dying for good (its digest cell kept, its status a remnant) is the strongest premise the sim can introduce — the DM sees it coming across the extended terminal dwell and can force or veto. Honors majorChangesRequireProposal (the tier_change precedent), forced to proposal under dm_only/recommendations via authorityFor.',
+  }),
+  settlement_resettled: Object.freeze({
+    authority: 'proposal-gated',
+    module: 'settlementLifecycleFirstClass.js',
+    consultsProposalFlag: true,
+    rationale:
+      'W-LIFECYCLE: a remnant re-founded as a living thorp is a structural roster change (a new premise about the world), the death lane\'s twin — gated on the same flag, forced to proposal under dm_only/recommendations via authorityFor.',
+  }),
 
   // ── SEVERITY-GATED: proposal on severity alone, NOT on the flag. Predate the
   //    flag; recorded as-is, not migrated. ──────────────────────────────────
@@ -149,7 +177,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     module: 'factionCompetition.js',
     consultsProposalFlag: false,
     rationale:
-      'A faction capturing/suppressing an institution escalates to proposal at severity >= 0.68 (or whenever the move is a criminal suppression), independent of the flag. (institutionCandidate)',
+      'A faction capture escalates at severity >= 0.68; a new or cleared criminal suppression always asks approval, while continuation of an already-approved live suppression is automatic. All are independent of the proposal flag. (institutionCandidate)',
   }),
   faction_rival_power_contest: Object.freeze({
     authority: 'severity-gated',
@@ -191,6 +219,22 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     consultsProposalFlag: false,
     rationale:
       'Every diplomatic relabel built through labelProposal emits a bare applyMode: "proposal". A visible relationship label flip (neutral->rival, allied, vassal rebellion, etc.) is a new premise and is unconditionally offered to the DM. Distinct from relationship_evolution, which is the severity-gated internal-drift path.',
+  }),
+  treaty_breached: Object.freeze({
+    authority: 'always-proposal',
+    module: 'realmVerbExecution.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'WR-0c: publicly repudiating a live non-aggression pact lifts every treaty restraint and creates a full treaty_default casus. It is an actor-initiated campaign premise and the realm verb lane always stages it as a proposal; no autonomy flag or severity threshold may auto-apply it.',
+  }),
+  sovereignty_conveyed: Object.freeze({
+    authority: 'always-proposal',
+    module: 'realmVerbExecution.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'WR-10 (amendment S): a settlement changes hands. Selling a steading or a settled vassalage moves sovereignty without a siege — the buyer inherits a holding, the sold town inherits a grievance against the court that traded it, and the realm map means something different afterwards. That is an actor-initiated campaign PREMISE, not the bounded consequence of one the DM already accepted, so the realm verb lane stages it unconditionally as a proposal and no autonomy flag or severity threshold may auto-apply it (the treaty_breached precedent, whose gate line this entry shares because the realm-verb lane has exactly one mint).',
   }),
   // ── STRUCTURAL-PROPOSAL: auto by default; one branch routes to proposal via a
   //    proposal-only lever. ───────────────────────────────────────────────────
@@ -250,6 +294,24 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'A successful coup is the resolution of a coup stressor the DM already saw building; it auto-applies UNLESS the player has locked the governing faction, on which separate axis it escalates to proposal.',
   }),
+
+  // ── AUTO WITH APPROVAL ROUTING: an actor-initiated foreign intervention. ──────
+  intervention_ordered: Object.freeze({
+    authority: 'auto-with-approval-routing',
+    module: 'convergence.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'W-CONVERGENCE: a foreign power committing an army to a settlement\'s internal (coup) contest is an ACTOR-INITIATED major. The autonomous mover mints directly under legacy routine/full (byte-identical — the feature is dark by default) and routes its legacy \'auto\' through authorityFor, which forces \'proposal\' under dm_only/recommendations and routine-with-major-approval (the coup_succeeded precedent, escalating on the autonomy mode not a lock).',
+  }),
+  blockade_declared: Object.freeze({
+    authority: 'auto-with-approval-routing',
+    module: 'navalKernel.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'W-NAVY: a navy throwing a blockade across a hostile port\'s sea approaches is a siege from the water — the siege-initiation twin, an ACTOR-INITIATED major. The autonomous mover mints directly under legacy routine/full (byte-identical — the feature is dark by default) and routes its legacy \'auto\' through authorityFor, which forces \'proposal\' under dm_only/recommendations and routine-with-major-approval (the intervention_ordered precedent).',
+  }),
 });
 
 /**
@@ -264,6 +326,55 @@ export const CHANGE_AUTHORITY_FLAGGED = Object.freeze([
   Object.freeze({
     id: 'severity-gated-families-bypass-flag',
     summary:
-      'pressure_event, faction_competition, stressor_escalation, and relationship_evolution escalate to proposal on severity alone and never consult majorChangesRequireProposal. Setting the flag OFF (e.g. dramatic_campaign) does NOT make these auto, unlike the proposal-gated families. Either these are intentionally "always offer the DM a say at high severity" (in which case the flag’s name overpromises), or they should be migrated onto the flag for a uniform contract. Product decision needed; behavior left unchanged.',
+      'pressure_event, faction_competition, stressor_escalation, and relationship_evolution escalate to proposal on severity alone and never consult majorChangesRequireProposal. Setting the flag OFF (e.g. dramatic_campaign) does NOT make these auto, unlike the proposal-gated families. RESOLVED BY DESIGN (Phase 5.5 CL-0, §11): the severity-only behavior IS these families’ per-domain LEGACY DEFAULT, encoded exactly — under politicalAutonomy routine (flag on) AND full (flag off) they keep escalating on severity, byte-identically to the pre-CL0 engine. The new dm_only/recommendations modes force them (and every other candidate family) to proposal via authorityFor. Behavior under legacy inputs remains unchanged.',
   }),
 ]);
+
+/**
+ * authorityFor — the per-domain change-authority resolver (Phase 5.5 CL-0).
+ *
+ * Resolves the §11 political-autonomy axis over a candidate family's own
+ * legacy gate. Every candidate family routes its computed applyMode through
+ * this before emitting (the stochastic families at the evaluateWorldPulseRules
+ * choke point in candidateEvents.js; tier/resource at their sites in
+ * tierResourceDynamics.js):
+ *
+ *   • 'dm_only' / 'recommendations' — force 'proposal' for EVERY candidate.
+ *     (Recommendations differ only in presentation: the candidate's existing
+ *     reasons[] ride into the proposal as its rationale — candidates already
+ *     carry reasons, nothing is invented.)
+ *   • 'routine' — TODAY'S behavior, verbatim: the family's own gate stands
+ *     (this is the legacy majorChangesRequireProposal=true world).
+ *   • 'full' — the legacy flag-off world, verbatim: the normalizer mirrors
+ *     politicalAutonomy 'full' to majorChangesRequireProposal=false, so the
+ *     flag-consulting families already computed 'auto' themselves, and the
+ *     severity-gated / always-proposal families keep their own gates (their
+ *     CURRENT flag-ignoring behavior IS their legacy default — see the flagged
+ *     entry above). Hence: pass the legacy mode through untouched.
+ *
+ * legacyMode passes through VERBATIM under routine/full (including undefined),
+ * so routing a candidate through this function is byte-invisible unless the
+ * campaign opted into the forcing modes. The changeType parameter is accepted
+ * now so (future) per-domain authority overrides slot in here without another
+ * call-site sweep.
+ *
+ * @param {Record<string, unknown> | null | undefined} rules  Simulation rules (raw or normalized).
+ * @param {string} changeType  The candidate family (CHANGE_AUTHORITY_POLICY key or ruleFamily).
+ * @param {string} [legacyMode]  The applyMode the family's own legacy gate computed.
+ * @returns {string} 'proposal' under the forcing modes; otherwise legacyMode verbatim.
+ */
+export function authorityFor(rules, changeType, legacyMode = 'auto') {
+  const autonomy = politicalAutonomyOf(rules);
+  if (autonomy === 'dm_only' || autonomy === 'recommendations') return 'proposal';
+  // M10a — CL-3: routine finally keeps the §11 promise ("ordinary auto, MAJORS
+  // need approval") for the ACTOR-INITIATED majors — a war declaration
+  // (strategy_deploy) or a coup (coup_succeeded) route through the approval queue.
+  // GATED behind the opt-in routineMajorApproval so a routine-DEFAULT profile
+  // (the M9d siege pins, the goldens — flag ABSENT) stays VERBATIM/byte-identical.
+  // Every non-major changeType (every ruleFamily the choke point passes) falls
+  // through to legacyMode untouched, so nothing else moves.
+  if (autonomy === 'routine'
+      && isActorInitiatedMajorType(changeType)
+      && routineMajorApprovalEnabled(rules)) return 'proposal';
+  return legacyMode;
+}

@@ -25,12 +25,34 @@
  * @typedef {{ targetId?: any, sinceTick?: number, role?: string }} Deployment
  */
 
+import { isLiveWarFront } from '../worldPulse/warFrontReads.js';
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
+// This ledger is broader than a war score. It ratchets every decisive
+// settlement-vs-settlement contest the engine currently settles: an abandoned
+// siege, a successful defense, a conquest, or a primary-supplier flip. Keep the
+// label and definition shared across the Realm, Library, admin, and export
+// surfaces so W/L is never mistaken for time at war or casualty accounting.
+export const REALM_CONTEST_RECORD_LABEL = 'Realm contest record';
+export const REALM_CONTEST_RECORD_HELP = 'Resolved siege, defense, conquest, and primary-supplier-flip outcomes; not time at war or casualties.';
+
 /**
- * The confirmed war_front channels on a regional graph, as { from, to } pairs.
+ * The LIVE war_front channels on a regional graph, as { from, to } pairs.
  * Tolerates an absent graph / channels array.
+ *
+ * THE READ-SIDE SIEGE GATE (single-source): a `confirmed` war_front id is shared
+ * between a mobilized war-layer siege AND a bare hostile-RELATIONSHIP bundle
+ * (they collide on the same (type,from,to) channel id — see warFrontReads.js).
+ * A merely-hostile pair therefore mints a `confirmed` war_front in BOTH directions
+ * with NO army behind it; reading those as sieges was the phantom-siege bug
+ * (liveSieges / settlementWarStatus reported a siege + atWar for a peace-time
+ * rivalry). This display projection now consults the canonical
+ * `isLiveWarFront` predicate — the SAME gate warDeployment / occupation /
+ * martialReadiness / settlementStrategy use — so the read-side can never diverge
+ * from the engine's siege detection. A war-layer front (or a bare/legacy front)
+ * still reads as live; a pure relationship_label front does not.
  * @param {any} graph
  * @returns {Array<{ from: string, to: string, strength: number, visibility: string }>}
  */
@@ -39,8 +61,7 @@ function confirmedWarFronts(graph) {
   const out = [];
   const channels = Array.isArray(graph?.channels) ? graph.channels : [];
   for (const channel of channels) {
-    if (channel?.type !== 'war_front') continue;
-    if (channel.status !== 'confirmed') continue;
+    if (!isLiveWarFront(channel)) continue;
     if (channel.from == null || channel.to == null) continue;
     out.push({
       from: String(channel.from),
@@ -203,9 +224,11 @@ function commodityLabelsByPair(graph) {
 }
 
 /**
- * The cross-settlement disposition standings: settlements with a net win/loss
- * record, codepoint-sorted by id. A net-zero (or absent) ledger yields []; this
- * surfaces the AGGRESSORS and the BEATEN, not every settlement.
+ * The realm contest record: settlements with a win/loss entry from resolved
+ * sieges, defenses, conquests, or primary-supplier flips, codepoint-sorted by
+ * id. A zero-count (or absent) ledger yields []; this surfaces settlements that
+ * have actually resolved a contest, not every settlement. This is NOT a measure
+ * of time at war or casualties.
  * @param {any} worldState
  * @returns {Array<{ id: string, wins: number, losses: number, score: number }>}
  */

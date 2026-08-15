@@ -13,7 +13,8 @@
  * height at 85vh so the scrim above stays tappable, scrolls its own body when
  * the content is tall, and pads the bottom with the safe-area inset so the
  * close affordance clears the home indicator. This is a presentation
- * primitive only — 5c wires it onto the filter surfaces; it ships unwired.
+ * primitive only — a later sub-wave wires it onto the filter surfaces; it
+ * ships unwired.
  *
  * Children are the sheet body (the filter or action content). The trigger is
  * a real Button primitive, so it inherits the 44px-floor sizing and tokens.

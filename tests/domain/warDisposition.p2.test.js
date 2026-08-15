@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { computeWarSentiment } from '../../src/domain/worldPulse/disposition.js';
-import { resolveCoupVerdict } from '../../src/domain/rulingPower.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { resolveCoupVerdict } from '../../src/domain/rulingPowerCoup.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * War-disposition political flywheel P2 (flag-gated, default OFF): an exhausting/unpopular

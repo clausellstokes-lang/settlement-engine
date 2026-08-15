@@ -24,6 +24,10 @@ const BRIDGE_SRC = readFileSync(
   resolve(process.cwd(), 'public/map/sf-bridge.js'),
   'utf8',
 );
+const ORIGIN_SRC = readFileSync(
+  resolve(process.cwd(), 'public/map/sf-origin.js'),
+  'utf8',
+);
 
 /** Dispatch a getTemplates command; returns whether a reply was posted. */
 function dispatchCommand({ origin, source }) {
@@ -51,8 +55,10 @@ describe('sf-bridge postMessage origin + source validation', () => {
     realParentDescriptor = Object.getOwnPropertyDescriptor(window, 'parent');
     Object.defineProperty(window, 'parent', { value: fakeParent, configurable: true });
 
-    // Run the bridge IIFE against this window. window.eval binds globals to
-    // the jsdom window so the 'message' listener registers here.
+    // Install the localhost origin contract, then run the bridge IIFE against
+    // this window. Production/cross-origin behavior is covered by the dedicated
+    // sfOrigin + sfBridge harnesses.
+    window.eval(ORIGIN_SRC);
     window.eval(BRIDGE_SRC);
 
     // The IIFE may post load-time events (ready/burg-list hooks). Reset the

@@ -909,7 +909,9 @@ function selectIcon(initial, callback) {
     const input = this.previousElementSibling;
     const ulr = input.value;
     if (!ulr) return tip("Enter image URL to add", false, "error", 4000);
-    if (!ulr.match(/^((http|https):\/\/)|data\:image\//)) return tip("Enter valid URL", false, "error", 4000);
+    // SettlementForge fork patch: anchor the WHOLE alternation. The original `^((http|https)://)|data:image/`
+    // bound `^` only to the http branch, so `data:image/` matched as a substring anywhere (e.g. `javascript:...#data:image/`).
+    if (!ulr.match(/^(((http|https):\/\/)|data:image\/)/)) return tip("Enter valid URL", false, "error", 4000);
     addExternalImage(ulr);
     callback(ulr);
     input.value = "";

@@ -7,18 +7,26 @@
  *   list_users           — List all users (with profiles)
  *   get_stats            — System-wide statistics
  *   mint_redeem_code     — Mint an operator redeem code (migration 107)
+ *   send_operator_message — Persist a direct notice, then best-effort email
+ *   queue/cancel/list_operator_broadcasts — Audited mass-message controls
  *
  * Authorization: Only users with role='developer' or role='admin'
  * in the profiles table (or the OWNER_EMAIL identity) can invoke this function.
  *
  * Env (optional, both default to the historical behaviour if unset):
  *   OWNER_EMAIL     — privileged owner-override email (was hardcoded in source).
- *   ALLOWED_ORIGINS — comma-separated CORS allowlist; when set, replaces the
- *                     wildcard "*" with a reflected-Origin allowlist.
+ *   ALLOWED_ORIGINS — comma-separated origins ADDED to the shared fail-closed CORS
+ *                     allowlist (_shared/cors.ts). The allowlist never emits a
+ *                     wildcard; a disallowed origin is pinned to the first host
+ *                     and rejected by the browser.
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
+// Stripe — same pinned client + apiVersion as stripe-webhook (the money path is
+// pinned EXACT, never a floating major). Used ONLY by the one-time
+// backfill_money_events verb (moves no money — it reads history + upserts rows).
+import Stripe from "https://esm.sh/stripe@14.14.0?target=deno";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
@@ -26,6 +34,34 @@ import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
 // Structured server-side error logging — the real (possibly internal) detail is
 // logged here; clients only ever see a generic message.
 import { logError } from "../_shared/logError.ts";
+// AI pricing resync — the deterministic core (parsers, merge guards, calibration)
+// lives in a shared PURE module (_shared/pricingResync.ts) so BOTH the manual
+// admin action here AND the nightly pricing-resync-cron function import the same
+// unit-tested math (cross-function reuse is the _shared/ pattern in this repo,
+// alongside cors.ts / logError.ts / requestMeta.ts). It's testable without
+// fetch/env/db.
+import { runPricingResync } from "../_shared/pricingResync.ts";
+// The account-level two-key rule (owner-ordered 2026-07-21): premium/tier/
+// entitlement changes + ban/disable + role changes require a retyped target id
+// AND a fresh GoTrue password amr on the caller's JWT. The frozen action manifest
+// (PROTECTED / MODERATION / UNGATED) + the pure guard core live in the shared,
+// unit-tested module so the walker (tests/edgeFunctions/adminActionTwoKeyWalker)
+// classifies every switch case against the SAME single source of truth.
+import {
+  checkBroadcastTwoKey,
+  checkTwoKey,
+  decodeJwtAmr,
+  isBroadcastAction,
+  isProtectedAction,
+} from "../_shared/twoKey.ts";
+import {
+  selectMailAdapter,
+  type MailAdapter,
+} from "../_shared/mailAdapter.ts";
+import {
+  renderOperatorMessageEmail,
+  type OperatorMessageClass,
+} from "../_shared/operatorMessageEmail.ts";
 
 // CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
 // this admin endpoint. The endpoint is independently protected by JWT auth +
@@ -57,6 +93,76 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function hasOwn(record: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(record, key);
 }
+
+function firstRecord(value: unknown): Record<string, unknown> {
+  const candidate = Array.isArray(value) ? value[0] : value;
+  return isRecord(candidate) ? candidate : {};
+}
+
+function resultMessageId(value: unknown): string | null {
+  const row = firstRecord(value);
+  const id = row.messageId ?? row.message_id ?? row.id;
+  return typeof id === "string" && id ? id : null;
+}
+
+function requiredOperatorText(
+  value: unknown,
+  label: string,
+  maxLength: number,
+): string {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) throw new Error(`${label} is required`);
+  if (text.length > maxLength) throw new Error(`${label} is too long`);
+  return text;
+}
+
+function operatorMessageClass(value: unknown): OperatorMessageClass {
+  if (value === "service" || value === "announcement") return value;
+  throw new Error("Invalid operator message class");
+}
+
+// Template keys are a delivery-policy boundary, not cosmetic metadata. Keep the
+// class binding closed here as defense-in-depth with migration 194: a caller may
+// not relabel product mail as transactional service mail (or vice versa).
+const OPERATOR_MESSAGE_TEMPLATE_CLASSES: Readonly<Record<string, OperatorMessageClass>> =
+  Object.freeze({
+    product_update: "announcement",
+    service_notice: "service",
+    moderation_notice: "service",
+    report_outcome: "service",
+    avatar_removed: "service",
+    display_name_reset: "service",
+    warning: "service",
+    ban_notice: "service",
+    custom_service: "service",
+    custom_announcement: "announcement",
+  });
+
+function operatorMessageTemplate(
+  templateValue: unknown,
+  classValue: unknown,
+): { template: string; messageClass: OperatorMessageClass } {
+  const template = typeof templateValue === "string" ? templateValue.trim() : "";
+  if (!template || !hasOwn(OPERATOR_MESSAGE_TEMPLATE_CLASSES, template)) {
+    throw new Error("Invalid operator message template");
+  }
+  const messageClass = operatorMessageClass(classValue);
+  const registeredClass = OPERATOR_MESSAGE_TEMPLATE_CLASSES[template];
+  if (messageClass !== registeredClass) {
+    throw new Error("Operator message template and class do not match");
+  }
+  return { template, messageClass: registeredClass };
+}
+
+const OPERATOR_MESSAGE_RPCS = Object.freeze({
+  direct: "create_operator_direct_message",
+  queueBroadcast: "queue_operator_broadcast",
+  cancelBroadcast: "cancel_operator_broadcast",
+  listBroadcasts: "list_operator_broadcasts",
+  issueWarning: "issue_warning_with_message",
+  setBanned: "set_account_banned_with_message",
+  recordEmail: "record_operator_message_email_result",
+});
 
 // Crockford base32 (no I/L/O/U): unambiguous when a code is read aloud or
 // retyped from paper. 32 symbols divide 256 evenly, so `byte % 32` carries no
@@ -139,6 +245,26 @@ function buildProfilePatch(metadata: Record<string, unknown>) {
   return patch;
 }
 
+// The Stripe surface the money backfill needs — a structural subset of the pinned
+// Stripe client (checkout.sessions.list + invoices.list, both cursor-paged). The
+// real client satisfies it; the test injects a stub.
+interface StripeListPage { data: Array<Record<string, unknown>>; has_more?: boolean }
+interface MoneyBackfillStripe {
+  checkout: { sessions: { list: (params: Record<string, unknown>) => Promise<StripeListPage> } };
+  invoices: { list: (params: Record<string, unknown>) => Promise<StripeListPage> };
+}
+
+// Description text for a backfilled money_events row (the UI maps kind→label itself;
+// this is only the durable NOT-NULL audit string). Mirrors the webhook's describeMoneyKind.
+const MONEY_KIND_DESC: Record<string, string> = {
+  credit_pack: "Credit pack",
+  founder_seat: "Founder Lifetime seat",
+  single_dossier: "Single dossier export",
+  subscription_start: "Cartographer subscription",
+  subscription_renewal: "Cartographer subscription renewal",
+  surveyor_start: "Surveyor subscription",
+};
+
 // Exported (not just inlined into serve) so the privilege gate can be EXECUTION-
 // tested: index.test.ts feeds requests with injected supabase stubs and asserts a
 // non-privileged caller is REJECTED (403) before any RPC runs, and that a valid
@@ -150,10 +276,16 @@ export async function handleAdminActions(
   deps: {
     userClient?: (authHeader: string) => ReturnType<typeof createClient>;
     adminClient?: () => ReturnType<typeof createClient>;
+    // Injection seam for the backfill_money_events verb's Stripe reads (tests stub
+    // the list pages); production passes nothing → the pinned Stripe client is built.
+    stripeClient?: MoneyBackfillStripe;
+    /** Provider-neutral mail seam; tests inject a recording adapter. */
+    mailAdapter?: () => MailAdapter;
   } = {},
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
   const makeAdminClient = deps.adminClient ?? defaultAdminClient;
+  const makeMailAdapter = deps.mailAdapter ?? selectMailAdapter;
   // CORS + JSON helper are per-request so the allowed Origin can reflect the
   // caller (when an allowlist is configured).
   const cors = corsHeadersFor(req);
@@ -271,12 +403,27 @@ export async function handleAdminActions(
       // System-mutation params (migration 041 report_* functions)
       configSignature,
       // A4 user-management params
-      severity, note, settlementId, enabled, full, emailTemplate, emailPayload,
+      severity, note, settlementId, mapId, commentId, enabled, full,
+      // Operator Messages (migration 194).
+      messageClass: rawMessageClass, subject: rawMessageSubject,
+      messageBody: rawMessageBody, messageTemplate: rawMessageTemplate,
+      messageId, audience,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
       // Redeem-code minting params (migration 107)
       kind, stripe_coupon_id: mintCouponId, credit_amount: mintCreditAmount,
       max_uses: mintMaxUses, expires_at: mintExpiresAt, applies_to: mintAppliesTo,
+      // AI pricing resync (migration 114)
+      dryRun: pricingDryRun,
+      // Two-key confirmation envelope: { typedTargetId } for a protected action.
+      confirm: twoKeyConfirm,
+      // Moderation-suite params (contentKind for the map/campaign verbs; banned
+      // flag; report id for a queue resolution).
+      contentKind, banned: banFlag, reportId,
+      // Durable external-obligation operations (migration 182). Keys are opaque
+      // job/payment/event identities; the edge never receives user or payment
+      // details from the report RPC.
+      obligationSource, obligationKey, clear: clearAcknowledgement,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
@@ -292,30 +439,127 @@ export async function handleAdminActions(
       return typeof email === "string" && email.includes("@") ? email : null;
     };
 
-    // A4: notify a TARGET user by email (not the actor). Sends via Resend with the
-    // service-role-resolved address. Soft-fails (returns false) when Resend is
-    // unconfigured or errors — notification is never allowed to block or fail an
-    // admin action. Returns whether the user was actually notified (drives the
-    // `notified` audit flag).
-    const notifyTargetEmail = async (
-      target: string, subject: string, text: string,
-    ): Promise<boolean> => {
+    type TargetMailResult = {
+      status: "sent" | "failed" | "skipped";
+      sent: boolean;
+      reason: string | null;
+      provider: string;
+      providerId: string | null;
+    };
+
+    // A4: notify a target by email after the authoritative database action. The
+    // adapter is provider-neutral and inert when unconfigured. Existing support
+    // notification callers use the boolean wrapper below; Operator Messages use
+    // the detailed result to update their receipt without minting a second audit.
+    const deliverTargetEmail = async (
+      target: string,
+      subject: string,
+      text: string,
+      headers?: Record<string, string>,
+    ): Promise<TargetMailResult> => {
+      const mailer = makeMailAdapter();
       try {
-        const apiKey = Deno.env.get("RESEND_API_KEY");
-        const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
-        if (!apiKey || !fromEmail) return false; // unconfigured — soft fail
+        if (!mailer.configured) {
+          return { status: "skipped", sent: false, reason: "provider_unconfigured", provider: mailer.id, providerId: null };
+        }
         const to = await resolveTargetEmail(target);
-        if (!to) return false;
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: fromEmail, to: [to], subject, text }),
-        });
-        return res.ok;
+        if (!to) {
+          return { status: "skipped", sent: false, reason: "no_email_on_account", provider: mailer.id, providerId: null };
+        }
+        const result = await mailer.send({ to, subject, text, headers });
+        return { status: "sent", sent: true, reason: null, provider: mailer.id, providerId: result.id };
       } catch (e) {
-        console.warn("[admin-actions] notify failed:", errorMessage(e));
-        return false;
+        // Provider responses can echo an address or other request detail. Route
+        // them through the structured redactor and expose only the closed
+        // `provider_error` receipt reason to clients/storage.
+        logError("admin-actions", target, e, { stage: "mail_provider_send" });
+        return { status: "failed", sent: false, reason: "provider_error", provider: mailer.id, providerId: null };
       }
+    };
+
+    const notifyTargetEmail = async (
+      target: string,
+      subject: string,
+      text: string,
+    ): Promise<boolean> => (await deliverTargetEmail(target, subject, text)).sent;
+
+    const recordOperatorEmailResult = async (
+      operatorMessageId: string | null,
+      target: string,
+      result: TargetMailResult,
+    ): Promise<void> => {
+      if (!operatorMessageId) return;
+      const { error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.recordEmail, {
+        p_message_id: operatorMessageId,
+        p_user_id: target,
+        p_status: result.status,
+        p_provider: result.provider,
+        p_provider_id: result.providerId,
+        p_failure_reason: result.reason,
+      });
+      if (error) {
+        console.warn("[admin-actions] operator email result write failed:", error.message);
+      }
+    };
+
+    const deliverOperatorMessage = async (input: {
+      target: string;
+      messageId: string | null;
+      messageClass: OperatorMessageClass;
+      subject: string;
+      body: string;
+    }): Promise<TargetMailResult> => {
+      let unsubscribeUrl: string | null = null;
+      if (input.messageClass === "announcement") {
+        const { data: allowed, error: allowedError } = await adminClient.rpc(
+          "can_email_user",
+          { p_user_id: input.target, p_category: "product_updates" },
+        );
+        if (allowedError || allowed !== true) {
+          const skipped: TargetMailResult = {
+            status: allowedError ? "failed" : "skipped",
+            sent: false,
+            reason: allowedError ? "consent_check_failed" : "announcement_opt_out",
+            provider: makeMailAdapter().id,
+            providerId: null,
+          };
+          await recordOperatorEmailResult(input.messageId, input.target, skipped);
+          return skipped;
+        }
+        const { data: token, error: tokenError } = await adminClient.rpc(
+          "get_or_mint_unsubscribe_token",
+          { p_user_id: input.target },
+        );
+        if (tokenError || typeof token !== "string" || !token) {
+          const skipped: TargetMailResult = {
+            status: "failed",
+            sent: false,
+            reason: "unsubscribe_token_unavailable",
+            provider: makeMailAdapter().id,
+            providerId: null,
+          };
+          await recordOperatorEmailResult(input.messageId, input.target, skipped);
+          return skipped;
+        }
+        const base = (Deno.env.get("SUPABASE_URL") || "").replace(/\/$/, "");
+        unsubscribeUrl = `${base}/functions/v1/unsubscribe?token=${encodeURIComponent(token)}&category=product_updates`;
+      }
+      const clientUrl = (Deno.env.get("CLIENT_URL") || "https://settlementforge.com").replace(/\/$/, "");
+      const rendered = renderOperatorMessageEmail({
+        messageClass: input.messageClass,
+        subject: input.subject,
+        body: input.body,
+        accountUrl: `${clientUrl}/?view=account&section=messages`,
+        unsubscribeUrl,
+      });
+      const result = await deliverTargetEmail(
+        input.target,
+        rendered.subject,
+        rendered.text,
+        rendered.headers,
+      );
+      await recordOperatorEmailResult(input.messageId, input.target, result);
+      return result;
     };
 
     // Layer 2 (review B16 #1): toggle GoTrue's NATIVE ban via the service-role
@@ -350,6 +594,59 @@ export async function handleAdminActions(
     const pFrom = asDate(fromDate, monthAgo);
     const pTo = asDate(toDate, today);
 
+    // ── THE TWO-KEY GATE (owner-ordered 2026-07-21) ─────────────────────────
+    // Runs at the TOP of the switch dispatch for any ACCOUNT-level destructive
+    // action (isProtectedAction): premium/tier/entitlement change, ban / disable,
+    // role change. ACTION-bound, not role-bound — an admin OR a developer invoking
+    // one passes the identical gate. Both keys are checked server-side: (1) the
+    // caller retyped the target's EXACT user id (confirm.typedTargetId), and (2)
+    // the caller's already-verified JWT carries a `password` amr fresher than the
+    // window (a token refresh preserves the ORIGINAL amr timestamp, so a stale
+    // session cannot fake freshness — the password itself never reaches us). Fail
+    // CLOSED: a rejection returns the fixed non-leaky "Admin action failed" while
+    // logging the real reason server-side only (via adminFail). The amr age rides
+    // the per-action A3 audit row as { twoKey:true, amrAgeS }.
+    let twoKeyAmrAgeS: number | null = null;
+    let broadcastAmrAgeS: number | null = null;
+    // Only gate when a concrete target is present: a protected action with no
+    // userId does nothing (its case returns 400), so we let that natural
+    // validation stand rather than masking it with a two-key rejection.
+    if (isProtectedAction(action) && userId) {
+      const twoKey = checkTwoKey({
+        action,
+        targetUserId: userId, // every protected action targets `userId`
+        typedTargetId: isRecord(twoKeyConfirm) ? twoKeyConfirm.typedTargetId : undefined,
+        amr: decodeJwtAmr(String(authHeader || "").replace(/^Bearer\s+/i, "")),
+        nowS: Math.floor(Date.now() / 1000),
+      });
+      if (!twoKey.ok) {
+        // Distinct audited detail (server-side only); caller sees the fixed error.
+        return adminFail(`two-key gate rejected ${String(action)}: ${twoKey.reason}`, 403);
+      }
+      twoKeyAmrAgeS = twoKey.amrAgeS;
+    }
+
+    // Mass delivery has its own closed confirmation target. It shares the fresh
+    // password proof but requires the exact server-owned phrase SEND TO ALL;
+    // no client-supplied audience label participates in the comparison.
+    if (isBroadcastAction(action)) {
+      const broadcastTwoKey = checkBroadcastTwoKey({
+        action,
+        typedBroadcastPhrase: isRecord(twoKeyConfirm)
+          ? twoKeyConfirm.typedBroadcastPhrase
+          : undefined,
+        amr: decodeJwtAmr(String(authHeader || "").replace(/^Bearer\s+/i, "")),
+        nowS: Math.floor(Date.now() / 1000),
+      });
+      if (!broadcastTwoKey.ok) {
+        return adminFail(
+          `broadcast two-key gate rejected ${String(action)}: ${broadcastTwoKey.reason}`,
+          403,
+        );
+      }
+      broadcastAmrAgeS = broadcastTwoKey.amrAgeS;
+    }
+
     switch (action) {
       // Read-only analytics dashboards (migration 038 report_* functions). The
       // privilege gate above already enforced developer/admin/owner. The edge
@@ -368,6 +665,20 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc(fn, args);
         if (error) return adminFail(error, 500);
         return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // ── Client error reports (migration 156). Same posture as
+      // get_analytics_dashboard: the privilege gate above already enforced
+      // developer/admin/owner, and the edge function assembles NO SQL — it calls
+      // the two fixed SECURITY DEFINER reads over client_error_events (081).
+      // Returns the grouped-by-signature rows PLUS the last-hour alert summary
+      // that drives the always-visible over-threshold banner in the panel.
+      case "get_client_error_dashboard": {
+        const { data, error } = await adminClient.rpc("report_client_errors", { p_from: pFrom, p_to: pTo });
+        if (error) return adminFail(error, 500);
+        const { data: alertData } = await adminClient.rpc("report_client_error_alert");
+        const alert = Array.isArray(alertData) ? (alertData[0] ?? null) : (alertData ?? null);
+        return json({ success: true, rows: data || [], alert, refreshedAt: new Date().toISOString() });
       }
 
       // ── Trends panel (migration 040). Same posture as get_analytics_dashboard:
@@ -400,6 +711,63 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("report_summary", { p_from: pFrom, p_to: pTo });
         if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // One read surface over durable account-deletion, payment-refund, and
+      // Stripe-webhook obligations (migration 182). Keep it highest-role even
+      // though the RPC returns no PII: these lifecycle facts belong to the
+      // production operator, not the support queue.
+      case "get_operational_health": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const { data: health, error: healthError } = await adminClient.rpc(
+          "report_operational_obligation_health",
+          { p_stale_minutes: 30 },
+        );
+        if (healthError) return adminFail(healthError, 500);
+        const { data: attention, error: attentionError } = await adminClient.rpc(
+          "list_operational_obligation_attention",
+          { p_limit: 100, p_stale_minutes: 30 },
+        );
+        if (attentionError) return adminFail(attentionError, 500);
+        return json({
+          success: true,
+          health: health || null,
+          attention: Array.isArray(attention) ? attention : [],
+          refreshedAt: new Date().toISOString(),
+        });
+      }
+
+      // An acknowledgement is explicitly NOT resolution: the database overlay
+      // cannot change, retry, hide, or complete the obligation. The RPC verifies
+      // the opaque key still names exceptional work and writes its own audit row.
+      case "acknowledge_operational_obligation": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (
+          typeof obligationSource !== "string" ||
+          typeof obligationKey !== "string" ||
+          !obligationKey.trim()
+        ) {
+          return json({ error: "Missing operational obligation identity" }, 400);
+        }
+        const { data, error } = await adminClient.rpc(
+          "acknowledge_operational_obligation",
+          {
+            p_source: obligationSource,
+            p_obligation_key: obligationKey,
+            p_actor: callingUser.id,
+            p_note: typeof note === "string" ? note : null,
+            p_clear: clearAcknowledgement === true,
+          },
+        );
+        if (error) return adminFail(error, 500);
+        if (data !== true) {
+          return json({ error: "Operational obligation is no longer active" }, 409);
+        }
+        return json({
+          success: true,
+          acknowledged: clearAcknowledgement !== true,
+          refreshedAt: new Date().toISOString(),
+        });
       }
 
       case "get_analytics_crosstab": {
@@ -527,7 +895,7 @@ export async function handleAdminActions(
           targetUserId: userId,
           targetType: "profile",
           targetId: String(userId),
-          after: { keys: Object.keys(profilePatch) },
+          after: { keys: Object.keys(profilePatch), twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -658,7 +1026,7 @@ export async function handleAdminActions(
           before: result && typeof result === "object" && "prev" in result
             ? { credits: (result as Record<string, unknown>).prev }
             : null,
-          after: { credits: newCredits },
+          after: { credits: newCredits, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -696,25 +1064,38 @@ export async function handleAdminActions(
       // We DON'T double-audit here — the RPC owns the audit so the role snapshot
       // and reason are written in one place. Soft-delete-first throughout.
 
-      // Issue a warning (support+). Optionally notify the user by email.
+      // Issue a warning (support+). The database atomically inserts the warning,
+      // its in-app service notice (outward sender=system), and the ONE real-actor
+      // audit row. Email is attempted only after that transaction commits.
       case "issue_warning": {
         if (!userId) return json({ error: "Missing userId" }, 400);
         if (!auditReason) return json({ error: "A warning reason is required" }, 400);
         const sev = typeof severity === "string" ? severity : "notice";
-        let notified = false;
-        if (metadata?.notify === true) {
-          notified = await notifyTargetEmail(
-            userId,
-            "A notice about your SettlementForge account",
-            `An administrator has issued a ${sev} warning on your account.\n\nReason: ${auditReason}\n\nIf you believe this is in error, reply to this email.`,
-          );
-        }
-        const { data, error } = await adminClient.rpc("issue_warning", {
+        const warningSubject = "A notice about your SettlementForge account";
+        const warningBody = `SettlementForge issued a ${sev} warning on your account.\n\nReason: ${auditReason}\n\nUse Feedback & support from your account if you believe this is in error.`;
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.issueWarning, {
           p_actor: callingUser.id, p_target: userId,
-          p_severity: sev, p_reason: auditReason, p_notified: notified,
+          p_severity: sev, p_reason: auditReason,
+          p_message_subject: warningSubject,
+          p_message_body: warningBody,
         });
         if (error) return adminFail(error, 500);
-        return json({ success: true, warningId: data, notified });
+        const operatorMessageId = resultMessageId(data);
+        const delivery = await deliverOperatorMessage({
+          target: userId,
+          messageId: operatorMessageId,
+          messageClass: "service",
+          subject: warningSubject,
+          body: warningBody,
+        });
+        const result = firstRecord(data);
+        return json({
+          success: true,
+          warningId: result.warningId ?? result.warning_id ?? null,
+          messageId: operatorMessageId,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+        });
       }
 
       // Add an internal note about a user (support+). The user can never read it.
@@ -775,7 +1156,7 @@ export async function handleAdminActions(
           action: delta > 0 ? "grant_credits" : "refund_credits",
           targetUserId: userId, targetType: "profile", targetId: String(userId),
           before: { credits: adjusted.prev ?? null },
-          after: { credits: adjusted.next ?? null },
+          after: { credits: adjusted.next ?? null, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false, reversible: true,
         });
         return json({ success: true, ...adjusted });
@@ -863,6 +1244,132 @@ export async function handleAdminActions(
         return json({ success: true, code, kind, appliesTo, maxUses, expiresAt });
       }
 
+      // ── AI pricing resync (migration 114) ───────────────────────────────────
+      // Re-fetch provider list prices, merge them (with the >3x-jump / manual-
+      // override guards), aggregate real usage COGS over the knob window, and
+      // recalibrate per-model credit costs by ±1 step. HIGHEST-role only —
+      // support may READ pricing via get_ai_pricing but never re-price. The
+      // deterministic math lives in pricingResync.ts (unit-tested); this arm
+      // owns the auth gate, the bounded provider fetch, and the audit.
+      case "ai_pricing_resync": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        // Default FALSE (apply). The admin panel checkbox defaults to a dry run;
+        // an explicit dryRun:true is a preview that writes nothing.
+        const dryRun = pricingDryRun === true;
+
+        // Provider fetch with a 10s AbortSignal timeout each (Promise.allSettled
+        // in the module means one provider being down is a warning, not a throw).
+        const fetchText = async (url: string): Promise<string> => {
+          const res = await fetch(url, { signal: AbortSignal.timeout(10_000) });
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+          return await res.text();
+        };
+
+        let report;
+        try {
+          report = await runPricingResync({
+            fetchText,
+            adminClient,
+            now: () => new Date().toISOString(),
+            actorUserId: callingUser.id,
+            dryRun,
+          });
+        } catch (resyncErr) {
+          return adminFail(resyncErr, 500);
+        }
+
+        // Audit only on a real apply (a dry run mutates nothing). Store the COMPACT
+        // before/after summaries the module built (counts + changed entries only),
+        // never the whole price book. Reversible: an operator can resync again or
+        // hand-set ai_credit_costs (updatedBy 'manual').
+        if (!dryRun) {
+          await writeAudit({
+            action: "ai_pricing_resync",
+            targetType: "system_config",
+            targetId: "ai_price_book+ai_credit_costs",
+            before: report.auditBefore,
+            after: report.auditAfter,
+            destructive: false,
+            reversible: true,
+          });
+        }
+
+        // The audit summaries are for the log, not the client — strip them.
+        const { auditBefore: _b, auditAfter: _a, ...clientReport } = report;
+        return json(clientReport);
+      }
+
+      // ── AI pricing NIGHTLY cron status (migration 115) ──────────────────────
+      // Read-only view of the pricing_resync_cron config + the last cron run, for
+      // the admin panel's "Nightly auto-resync" block. HIGHEST-role only (same gate
+      // as the manual resync). NEVER returns the url or secret VALUES — only whether
+      // both are set (configured). Secret redaction is a hard requirement.
+      case "ai_pricing_cron_status": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const { data, error } = await adminClient
+          .from("system_config")
+          .select("key, value")
+          .in("key", ["pricing_resync_cron", "pricing_resync_last_run"]);
+        if (error) return adminFail(error, 500);
+        let cronCfg: Record<string, unknown> = {};
+        let lastRun: unknown = null;
+        for (const row of (Array.isArray(data) ? data : [])) {
+          if (row.key === "pricing_resync_cron" && row.value && typeof row.value === "object") {
+            cronCfg = row.value as Record<string, unknown>;
+          } else if (row.key === "pricing_resync_last_run") {
+            lastRun = row.value ?? null;
+          }
+        }
+        const url = typeof cronCfg.url === "string" ? cronCfg.url.trim() : "";
+        const secret = typeof cronCfg.secret === "string" ? cronCfg.secret.trim() : "";
+        return json({
+          success: true,
+          // Redacted view: NEVER echo url/secret; report only that both are present.
+          enabled: cronCfg.enabled === true,
+          configured: Boolean(url && secret),
+          timezone: typeof cronCfg.timezone === "string" ? cronCfg.timezone : "America/New_York",
+          applyCreditCosts: cronCfg.applyCreditCosts !== false,
+          lastDispatchedOn: cronCfg.lastDispatchedOn ?? null,
+          lastRun,
+        });
+      }
+
+      // ── AI pricing NIGHTLY cron enable/disable (migration 115) ──────────────
+      // Flip ONLY the `enabled` flag on the cron config (the kill switch the panel
+      // toggles) — never touches url/secret/timezone. HIGHEST-role only + audited.
+      case "ai_pricing_cron_set": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (typeof enabled !== "boolean") {
+          return json({ error: "enabled must be boolean" }, 400);
+        }
+        const { data: existing, error: readErr } = await adminClient
+          .from("system_config")
+          .select("value")
+          .eq("key", "pricing_resync_cron")
+          .single();
+        if (readErr) return adminFail(readErr, 500);
+        const prev = (existing?.value && typeof existing.value === "object"
+          ? existing.value
+          : {}) as Record<string, unknown>;
+        const wasEnabled = prev.enabled === true;
+        const nextValue = { ...prev, enabled };
+        const { error: writeErr } = await adminClient
+          .from("system_config")
+          .update({ value: nextValue })
+          .eq("key", "pricing_resync_cron");
+        if (writeErr) return adminFail(writeErr, 500);
+        await writeAudit({
+          action: "ai_pricing_cron_toggle",
+          targetType: "system_config",
+          targetId: "pricing_resync_cron",
+          before: { enabled: wasEnabled },
+          after: { enabled },
+          destructive: false,
+          reversible: true,
+        });
+        return json({ success: true, enabled });
+      }
+
       // Review billing — REDACTED Stripe summary (support+, masked customer id).
       case "review_billing": {
         if (!userId) return json({ error: "Missing userId" }, 400);
@@ -896,22 +1403,19 @@ export async function handleAdminActions(
         return json({ success: true, sessionRevoked: authBan, ...(data || {}) });
       }
 
-      // Ban / unban account — reversible soft flag. HIGHEST role only.
+      // Ban / unban account — reversible soft flag. HIGHEST role only. A ban's
+      // service notice and audit commit in the same RPC; courier mail follows.
       case "set_account_banned": {
         if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId) return json({ error: "Missing userId" }, 400);
         const wantBanned = !(enabled === true);
-        let notified = false;
-        if (wantBanned && metadata?.notify === true) {
-          notified = await notifyTargetEmail(
-            userId,
-            "Your SettlementForge account has been suspended",
-            `Your account has been suspended.${auditReason ? `\n\nReason: ${auditReason}` : ""}\n\nReply to this email to appeal.`,
-          );
-        }
-        const { data, error } = await adminClient.rpc("set_account_banned", {
+        const banSubject = "Your SettlementForge account has been suspended";
+        const banBody = `Your account has been suspended.${auditReason ? `\n\nReason: ${auditReason}` : ""}\n\nUse Feedback & support to appeal.`;
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.setBanned, {
           p_actor: callingUser.id, p_target: userId,
           p_banned: wantBanned, p_reason: auditReason,
+          p_message_subject: wantBanned ? banSubject : null,
+          p_message_body: wantBanned ? banBody : null,
         });
         if (error) return adminFail(error, 500);
         // Layer 2 (review B16 #1): a still-valid JWT no longer grants WRITE access
@@ -922,7 +1426,24 @@ export async function handleAdminActions(
         // SESSION dies, not just write access — closing the gap the profiles flag
         // alone never could. Soft-fails: the DB+RLS layer stands even if it errors.
         const sessionRevoked = await setGoTrueBan(userId, wantBanned);
-        return json({ success: true, notified, sessionRevoked, ...(data || {}) });
+        const operatorMessageId = wantBanned ? resultMessageId(data) : null;
+        const delivery: TargetMailResult = wantBanned
+          ? await deliverOperatorMessage({
+            target: userId,
+            messageId: operatorMessageId,
+            messageClass: "service",
+            subject: banSubject,
+            body: banBody,
+          })
+          : { status: "skipped", sent: false, reason: "not_applicable", provider: makeMailAdapter().id, providerId: null };
+        return json({
+          ...firstRecord(data),
+          success: true,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+          sessionRevoked,
+          messageId: operatorMessageId,
+        });
       }
 
       // Soft-delete / restore a settlement — reversible. HIGHEST role only.
@@ -960,6 +1481,68 @@ export async function handleAdminActions(
         return json({ success: true, ...(data || {}) });
       }
 
+      // ── Map / campaign moderation (171). Twins of the settlement verbs above
+      // for saved_maps (a shared campaign IS a saved_maps row). HIGHEST role only;
+      // each RPC re-checks the role and writes its own audit row. Soft-delete-first.
+      case "soft_delete_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const del = !(enabled === true); // enabled:true ⇒ restore
+        const { data, error } = await adminClient.rpc("admin_soft_delete_map", {
+          p_actor: callingUser.id, p_id: mapId, p_delete: del, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Set a map/campaign private — unpublish (reversible). HIGHEST role only.
+      case "remove_gallery_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_remove_gallery_map", {
+          p_actor: callingUser.id, p_id: mapId, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Reversible BAN across both content kinds (171). p_ban toggles; the RPC
+      // takes the item down AND blocks re-publish via the enforce_moderation_ban
+      // trigger. HIGHEST role only.
+      case "set_content_banned": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const kind = contentKind === "map" ? "map" : "settlement";
+        const cid = kind === "map" ? mapId : settlementId;
+        if (!cid) return json({ error: "Missing content id" }, 400);
+        const { data, error } = await adminClient.rpc("admin_set_content_banned", {
+          p_actor: callingUser.id, p_kind: kind, p_id: cid,
+          p_ban: banFlag === true, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Moderate a gallery comment — hide/unhide (169 columns + 172 tombstone
+      // read). The set_gallery_comment_hidden RPC is the sole hidden_* writer; it
+      // does not self-audit, so we mirror one A3 row here. HIGHEST role only.
+      case "moderate_comment": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!commentId) return json({ error: "Missing commentId" }, 400);
+        const hide = !(enabled === true); // enabled:true ⇒ unhide
+        const { error } = await adminClient.rpc("set_gallery_comment_hidden", {
+          target_comment_id: commentId, hide,
+          hidden_reason_text: auditReason, moderator_id: callingUser.id,
+        });
+        if (error) return adminFail(error, 500);
+        await writeAudit({
+          action: hide ? "moderate_comment_hide" : "moderate_comment_unhide",
+          targetType: "gallery_comment", targetId: String(commentId),
+          after: { hidden: hide },
+          destructive: hide, reversible: true,
+        });
+        return json({ success: true, hidden: hide });
+      }
+
       // Diagnostic bundle — REDACTED by default (support+). full:true ⇒ a FULL
       // debug copy: HIGHEST role + a justification (reason). The RPC enforces
       // both and audits which variant it produced.
@@ -980,25 +1563,110 @@ export async function handleAdminActions(
         return json({ success: true, bundle: data, full: wantFull });
       }
 
-      // Send an email to a user (reuse a send-email lifecycle template). The
-      // template+payload are forwarded; the target's address is resolved
-      // server-side. Writes one audit row (notified reflects the send result).
-      case "send_user_email": {
+      // Direct operator notice. The Account message is authoritative and commits
+      // with its real-actor audit before the provider-neutral courier is touched.
+      case "send_operator_message": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId) return json({ error: "Missing userId" }, 400);
-        const subject = typeof emailPayload?.subject === "string"
-          ? emailPayload.subject : "A message from SettlementForge";
-        const body = typeof emailPayload?.body === "string"
-          ? emailPayload.body
-          : (typeof emailTemplate === "string" ? emailTemplate : "");
-        if (!body.trim()) return json({ error: "An email body is required" }, 400);
-        const notified = await notifyTargetEmail(userId, subject, body);
-        await writeAudit({
-          action: "send_user_email",
-          targetUserId: userId, targetType: "profile", targetId: String(userId),
-          after: { subject, length: body.length },
-          destructive: false, reversible: true, notified,
+        let messageClass: OperatorMessageClass;
+        let subject: string;
+        let body: string;
+        let template: string;
+        try {
+          const registeredTemplate = operatorMessageTemplate(
+            rawMessageTemplate,
+            rawMessageClass,
+          );
+          messageClass = registeredTemplate.messageClass;
+          template = registeredTemplate.template;
+          subject = requiredOperatorText(rawMessageSubject, "Subject", 160);
+          body = requiredOperatorText(rawMessageBody, "Message body", 10000);
+        } catch (validationError) {
+          return json({ error: errorMessage(validationError) }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.direct, {
+          p_actor: callingUser.id,
+          p_target: userId,
+          p_class: messageClass,
+          p_subject: subject,
+          p_body: body,
+          p_template: template,
         });
-        return json({ success: true, notified });
+        if (error) return adminFail(error, 500);
+        const operatorMessageId = resultMessageId(data);
+        const delivery = await deliverOperatorMessage({
+          target: userId,
+          messageId: operatorMessageId,
+          messageClass,
+          subject,
+          body,
+        });
+        return json({
+          success: true,
+          messageId: operatorMessageId,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+        });
+      }
+
+      case "queue_operator_broadcast": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (audience !== "all") return json({ error: "Broadcast audience must be all" }, 400);
+        let messageClass: OperatorMessageClass;
+        let subject: string;
+        let body: string;
+        let template: string;
+        try {
+          const registeredTemplate = operatorMessageTemplate(
+            rawMessageTemplate,
+            rawMessageClass,
+          );
+          messageClass = registeredTemplate.messageClass;
+          template = registeredTemplate.template;
+          subject = requiredOperatorText(rawMessageSubject, "Subject", 160);
+          body = requiredOperatorText(rawMessageBody, "Message body", 10000);
+        } catch (validationError) {
+          return json({ error: errorMessage(validationError) }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.queueBroadcast, {
+          p_actor: callingUser.id,
+          p_class: messageClass,
+          p_subject: subject,
+          p_body: body,
+          p_template: template,
+          p_audience: "all",
+          p_two_key_amr_age_s: broadcastAmrAgeS,
+        });
+        if (error) return adminFail(error, 500);
+        const result = firstRecord(data);
+        return json({
+          success: true,
+          messageId: resultMessageId(data),
+          sendAfter: result.sendAfter ?? result.send_after ?? null,
+          audienceCount: result.audienceCount ?? result.audience_count ?? null,
+        });
+      }
+
+      case "cancel_operator_broadcast": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (typeof messageId !== "string" || !messageId) {
+          return json({ error: "A messageId is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.cancelBroadcast, {
+          p_actor: callingUser.id,
+          p_message_id: messageId,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ ...firstRecord(data), success: true });
+      }
+
+      case "list_operator_broadcasts": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.listBroadcasts, {
+          p_limit: 25,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, broadcasts: Array.isArray(data) ? data : [] });
       }
 
       // ── A5 support-ticket agent queue ───────────────────────────────────────
@@ -1125,6 +1793,156 @@ export async function handleAdminActions(
         });
         if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
+      }
+
+      // ── Surveyor provisioning (159, §5) — the concierge path that replaces manual
+      // SQL, LIVE ON DEPLOY (moves no money, needs no Stripe price). Highest-role,
+      // audited, target by user id. grant/revoke go through the 159 service RPCs.
+      case "grant_surveyor": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { error: gErr } = await adminClient.rpc("grant_surveyor_entitlement", {
+          p_user: userId, p_source: "grant", p_subscription_id: null, p_customer_id: null,
+        });
+        if (gErr) return adminFail(gErr, 500);
+        await writeAudit({
+          action: "grant_surveyor",
+          targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
+          after: { status: "active", source: "grant", twoKey: true, amrAgeS: twoKeyAmrAgeS },
+          destructive: false, reversible: true,
+        });
+        return json({ success: true });
+      }
+
+      case "revoke_surveyor": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data: revoked, error: rErr } = await adminClient.rpc("revoke_surveyor_entitlement", {
+          p_user: userId, p_reason: auditReason,
+        });
+        if (rErr) return adminFail(rErr, 500);
+        await writeAudit({
+          action: "revoke_surveyor",
+          targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
+          after: { status: "revoked", twoKey: true, amrAgeS: twoKeyAmrAgeS },
+          destructive: true, reversible: true,
+        });
+        return json({ success: true, revoked: Boolean(revoked) });
+      }
+
+      // ── Money-spine backfill (156/157 money_events, DESIGN_MONEY_WAVE §2/§11) ──
+      // One-time, highest-role, audited. Pages Stripe's historical checkout
+      // sessions + invoices and upserts money_events rows through the SAME
+      // event_key shield the webhook uses, so it is IDEMPOTENT — safe to re-run and
+      // safe to overlap live webhook writes (a row the webhook already wrote is a
+      // no-op here). Moves NO money, so it is live-on-deploy (no Stripe price
+      // needed) but does need the Stripe SECRET key to READ history.
+      case "backfill_money_events": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const secretKey = Deno.env.get("STRIPE_SECRET_KEY") || "";
+        if (!secretKey && !deps.stripeClient) {
+          return json({ error: "Stripe is not configured" }, 400);
+        }
+        const stripe: MoneyBackfillStripe = deps.stripeClient
+          ?? (new Stripe(secretKey, { apiVersion: "2023-10-16" }) as unknown as MoneyBackfillStripe);
+
+        let sessionsProcessed = 0, invoicesProcessed = 0, rowsUpserted = 0;
+        const upsertRow = async (row: Record<string, unknown>) => {
+          const { error: upErr } = await adminClient
+            .from("money_events")
+            .upsert(row, { onConflict: "event_key", ignoreDuplicates: true });
+          if (upErr) console.warn("[admin-actions] backfill upsert failed:", upErr.message);
+          else rowsUpserted += 1;
+        };
+        // Resolve a Stripe customer → our user id (cached; invoice rows have no
+        // metadata.supabase_user_id, so the renewal row's owner comes from here —
+        // without it a renewal row would be invisible to the owner-SELECT policy).
+        const userForCustomer = new Map<string, string | null>();
+        const resolveUser = async (customerId: string | null): Promise<string | null> => {
+          if (!customerId) return null;
+          if (userForCustomer.has(customerId)) return userForCustomer.get(customerId) ?? null;
+          const { data: prof } = await adminClient
+            .from("profiles").select("id").eq("stripe_customer_id", customerId).maybeSingle();
+          const uid = (prof?.id as string | null) ?? null;
+          userForCustomer.set(customerId, uid);
+          return uid;
+        };
+        const asId = (v: unknown): string | null =>
+          typeof v === "string" ? v : (v && typeof v === "object" ? ((v as { id?: string }).id ?? null) : null);
+
+        // Checkout sessions — one-time products + subscription starts.
+        let sAfter: string | undefined;
+        for (let guard = 0; guard < 1000; guard += 1) {
+          const page = await stripe.checkout.sessions.list({ limit: 100, ...(sAfter ? { starting_after: sAfter } : {}) });
+          const rows = Array.isArray(page?.data) ? page.data : [];
+          for (const s of rows) {
+            sessionsProcessed += 1;
+            const paymentStatus = s.payment_status as string | undefined;
+            if (paymentStatus && paymentStatus !== "paid" && paymentStatus !== "no_payment_required") continue;
+            const md = (s.metadata as Record<string, string> | undefined) ?? {};
+            const product = md.product;
+            const credits = parseInt(md.credits || "0", 10);
+            let kind: string | null = null;
+            if (product === "premium") kind = "subscription_start";
+            else if (product === "founder_lifetime") kind = "founder_seat";
+            else if (product === "single_dossier") kind = "single_dossier";
+            else if (product === "surveyor") kind = "surveyor_start";
+            else if (credits > 0) kind = "credit_pack";
+            if (!kind) continue;
+            const created = typeof s.created === "number" ? new Date(s.created * 1000).toISOString() : new Date().toISOString();
+            await upsertRow({
+              event_key: `sess:${s.id}`,
+              user_id: md.supabase_user_id || null,
+              occurred_at: created,
+              kind,
+              amount_cents: typeof s.amount_total === "number" ? s.amount_total : 0,
+              currency: (s.currency as string) || "usd",
+              description: MONEY_KIND_DESC[kind] ?? "Purchase",
+              stripe_session_id: s.id as string,
+              stripe_invoice_id: asId(s.invoice),
+              stripe_payment_intent_id: asId(s.payment_intent),
+              metadata: { backfilled: true },
+            });
+          }
+          if (!page?.has_more || rows.length === 0) break;
+          sAfter = rows[rows.length - 1].id as string;
+        }
+
+        // Invoices — subscription RENEWALS (starts come from the session rows above).
+        let iAfter: string | undefined;
+        for (let guard = 0; guard < 1000; guard += 1) {
+          const page = await stripe.invoices.list({ status: "paid", limit: 100, ...(iAfter ? { starting_after: iAfter } : {}) });
+          const rows = Array.isArray(page?.data) ? page.data : [];
+          for (const inv of rows) {
+            invoicesProcessed += 1;
+            if (inv.billing_reason !== "subscription_cycle") continue;
+            const customerId = asId(inv.customer);
+            const created = typeof inv.created === "number" ? new Date(inv.created * 1000).toISOString() : new Date().toISOString();
+            await upsertRow({
+              event_key: `inv:${inv.id}`,
+              user_id: await resolveUser(customerId),
+              occurred_at: created,
+              kind: "subscription_renewal",
+              amount_cents: typeof inv.amount_paid === "number" ? inv.amount_paid : 0,
+              currency: (inv.currency as string) || "usd",
+              description: MONEY_KIND_DESC.subscription_renewal,
+              receipt_url: (inv.hosted_invoice_url as string | null) ?? null,
+              stripe_invoice_id: inv.id as string,
+              metadata: { backfilled: true, stripe_customer_id: customerId },
+            });
+          }
+          if (!page?.has_more || rows.length === 0) break;
+          iAfter = rows[rows.length - 1].id as string;
+        }
+
+        await writeAudit({
+          action: "backfill_money_events",
+          targetType: "money_events",
+          after: { sessionsProcessed, invoicesProcessed, rowsUpserted },
+          destructive: false,
+          reversible: true,
+        });
+        return json({ success: true, sessionsProcessed, invoicesProcessed, rowsUpserted });
       }
 
       default:

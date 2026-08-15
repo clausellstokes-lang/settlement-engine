@@ -10,36 +10,115 @@
  * in Supabase and spread back out when loading.
  */
 
-import { supabase, isConfigured, withTimeout } from './supabase.js';
-import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+import { supabase, isConfigured } from './supabase.js';
 import { ACTIVE_SAVE_STATE, activeSaveCount, isSaveActive } from './saveAccess.js';
-import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLink.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
 
+let _neighbourBackLinkPromise = null;
+
+/**
+ * Reciprocal neighbour linking generates deterministic NPC contacts and
+ * conflicts only while a save is being written. Keep that domain branch behind
+ * the already-async persistence operation so reading the initial application
+ * shell does not load save-time relationship generation.
+ */
+function loadNeighbourBackLink() {
+  if (!_neighbourBackLinkPromise) {
+    _neighbourBackLinkPromise = import(
+      '../domain/relationships/neighbourBackLink.js'
+    );
+  }
+  return _neighbourBackLinkPromise;
+}
+
+/**
+ * The service keeps admission accounting beside the boundary that produced it.
+ * It is intentionally diagnostic-only: rejected payloads are not retained in
+ * memory, logged, or copied to a second browser key.
+ *
+ * @typedef {Readonly<{
+ *   source:string,
+ *   current:number,
+ *   migrated:number,
+ *   rejected:number,
+ *   entries:ReadonlyArray<Record<string, any>>,
+ * }>} SaveAdmissionDiagnostics
+ */
+/** @type {SaveAdmissionDiagnostics} */
+let lastSaveAdmissionDiagnostics = Object.freeze({
+  source: 'not-read',
+  current: 0,
+  migrated: 0,
+  rejected: 0,
+  entries: Object.freeze([]),
+});
+let _settlementSchemaVersion = null;
+let _saveAdmissionPromise = null;
+
+function loadSaveAdmission() {
+  if (!_saveAdmissionPromise) {
+    _saveAdmissionPromise = import('./saveAdmission.js');
+  }
+  return _saveAdmissionPromise;
+}
+
+/**
+ * normalizeSettlement wraps the ~30 kB settlement-migration closure. It's only
+ * needed on POST-first-paint paths (loading / saving / importing settlements —
+ * never on the anon landing), so we lazy-load it rather than statically import
+ * it. saves.js is pulled into the eager first-paint chain (store → saves), and
+ * a static edge from here to normalizeSettlement dragged that closure into the
+ * first-paint bundle non-deterministically (build-determinism + first-paint
+ * budget regression). The dynamic import keeps it out of the entry's static
+ * closure. migrateSettlementShape stays SYNCHRONOUS, reading the memoized ref;
+ * every async caller awaits loadNormalize() ONCE before mapping with it.
+ */
+let _normalize = null;
+async function loadNormalize() {
+  if (!_normalize) {
+    const [normalizer, schema] = await Promise.all([
+      import('../domain/normalizeSettlement.js'),
+      import('../domain/settlement.schema.js'),
+    ]);
+    _normalize = normalizer.normalizeSettlement;
+    _settlementSchemaVersion = schema.SCHEMA_VERSION;
+  }
+  return _normalize;
+}
+
 /** Generate a client-side UUID for saves we must reference before insert
- *  (the bidirectional link embeds the new save's id in both rows; the
- *  interactive Save button mints one per dossier so a timeout-retry upserts
- *  the same row instead of duplicating). */
-export function newSaveId() {
+ *  (the bidirectional link embeds the new save's id in both rows). */
+function newSaveId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
 }
 
-/** True for a Postgres unique-violation (primary-key collision). Used so a
- *  timeout-retry of a stable-id write that actually landed is treated as an
- *  idempotent success instead of surfacing a spurious error. */
-function isDuplicateKeyError(e) {
-  if (!e) return false;
-  if (e.code === '23505') return true;
-  const text = `${e.message || ''} ${e.details || ''}`.toLowerCase();
-  return text.includes('duplicate key') || text.includes('unique constraint');
-}
-
 // ── Local storage helpers ───────────────────────────────────────────────────
 
-function localLoad() {
-  try { const v = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
+async function localLoad() {
+  const {
+    admitSavedSettlementEntries,
+    saveAdmissionDiagnostics,
+  } = await loadSaveAdmission();
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
+    const admitted = admitSavedSettlementEntries(parsed, {
+      source: 'local-cache',
+      requireSettlement: true,
+      targetSchemaVersion: _settlementSchemaVersion,
+    });
+    lastSaveAdmissionDiagnostics = admitted.diagnostics;
+    return admitted.entries;
+  } catch {
+    lastSaveAdmissionDiagnostics = saveAdmissionDiagnostics('local-cache', [{
+      status: 'rejected',
+      index: null,
+      id: null,
+      code: 'cache_json_invalid',
+    }]);
+    return [];
+  }
 }
 
 function localWrite(saves) {
@@ -110,9 +189,20 @@ function mutationRow(entry, includeId = true) {
  */
 function migrateSaveToV2(entry) {
   if (!entry) return entry;
-  if (entry.campaignState && entry.campaignState.phase) return entry;
+  // Seed is part of the save contract, not an optional column (finding F2).
+  // Lift it from the settlement blob's stamped `_seed` (or config._seed) so no
+  // save path can drop the "same seed => same settlement" guarantee for the
+  // objects users keep. Because migrateSaveToV2 runs on every read AND write
+  // path, this also RECOVERS the seed for already-saved rows whose `seed`
+  // column is null but whose blob still carries `_seed`. Explicit entry.seed
+  // wins (campaign import). null is honest when truly unknown.
+  const seed = entry.seed ?? entry.settlement?._seed ?? entry.config?._seed ?? null;
+  if (entry.campaignState && entry.campaignState.phase) {
+    return entry.seed === seed ? entry : { ...entry, seed };
+  }
   return {
     ...entry,
+    seed,
     campaignState: {
       phase: 'draft',
       eventLog: [],
@@ -173,43 +263,15 @@ function withNeighbourNetworkFromRelationship(settlement) {
  */
 function migrateSettlementShape(entry) {
   if (!entry || !entry.settlement) return entry;
-  return { ...entry, settlement: normalizeSettlement(entry.settlement) };
+  return { ...entry, settlement: _normalize(entry.settlement) };
 }
 
 // ── Supabase methods ────────────────────────────────────────────────────────
 
-// Core columns the Library load has always depended on. gallery_member_overrides
-// (migration 092) is appended OPTIONALLY below: a feature column must never be able
-// to break the whole library load. If the DB has not had 092 applied yet, selecting
-// it would 400 the entire list (settlements save but never appear), so we fall back
-// to the core columns and default the field to {}.
-const LIBRARY_CORE_COLS = 'id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at';
-const LIBRARY_FULL_COLS = LIBRARY_CORE_COLS.replace('gallery_importable,', 'gallery_importable, gallery_member_overrides,');
-
-async function supabaseList() {
-  // Timeout-guard the library list, mirroring supabaseSave/supabaseMutateBatch.
-  // This is the only network await on the Library load path, and it was UNguarded:
-  // a stalled query (cold connection, dropped socket, auth-refresh hang) left
-  // savesLoading=true forever (no then/catch ever fired), so the Library/info
-  // spun indefinitely with no error and no recovery. On timeout it now rejects,
-  // the caller's .catch clears loading and surfaces the failure.
-  const listQuery = (cols) => withTimeout(
-    supabase.from('settlements').select(cols).order('updated_at', { ascending: false }),
-    20000,
-    'Load library',
-  );
-  let { data, error } = await listQuery(LIBRARY_FULL_COLS);
-  // Resilience: a pre-092 DB lacks gallery_member_overrides. Postgres reports an
-  // undefined column as 42703; retry with the core columns so the library still
-  // loads (the per-member toggles just won't pre-populate until 092 is applied).
-  if (error && (error.code === '42703' || /gallery_member_overrides/i.test(error.message || ''))) {
-    ({ data, error } = await listQuery(LIBRARY_CORE_COLS));
-  }
-  if (error) throw error;
-  return (data || []).map(row => {
-    const accessState = row.access_state || ACTIVE_SAVE_STATE;
-    const usable = accessState === ACTIVE_SAVE_STATE;
-    return migrateSettlementShape(migrateSaveToV2({
+function saveEntryFromSupabaseRow(row) {
+  const accessState = row.access_state || ACTIVE_SAVE_STATE;
+  const usable = accessState === ACTIVE_SAVE_STATE;
+  return {
     id:        row.id,
     name:      row.name,
     tier:      row.tier,
@@ -222,138 +284,187 @@ async function supabaseList() {
     aiData:    usable ? (row.ai_data || {}) : {},
     gallery_share_narrated: row.gallery_share_narrated || false,
     gallery_share_dm: row.gallery_share_dm || false,
+    // The two owner opt-ins ShareToGallery seeds from this entry and re-writes
+    // on every "Save gallery details" — dropping them here silently cleared
+    // the import opt-in + per-member overrides after a reload.
     gallery_importable: row.gallery_importable || false,
-    gallery_member_overrides: row.gallery_member_overrides || {},
+    gallery_member_overrides: row.gallery_member_overrides || null,
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
+    // V-20 unlisted (party-link) state — read back so a reload re-seeds
+    // ShareToGallery's unlisted mode. Dropping these silently reset the owner to
+    // the non-unlisted UI, whose "Unlisted link" button re-mints a FRESH slug
+    // (share_settlement_unlisted always rotates), killing the party link already
+    // handed out. Now the reloaded entry shows the copy/rotate/stop bar instead.
+    visibility: row.visibility || 'public',
+    unlisted_slug: row.unlisted_slug || null,
     gallery_description: row.gallery_description || '',
+    gallery_title: row.gallery_title || '',
     gallery_image_url: row.gallery_image_url || '',
     gallery_image_alt: row.gallery_image_alt || '',
-    gallery_tags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    gallery_tags: row.gallery_tags || [],
     campaignState: row.campaign_state || null,
-    versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
+    versionHistory: row.version_history || [],
     accessState,
     inactiveReason: row.inactive_reason || null,
     inactiveSince: row.inactive_since || null,
     retentionExpiresAt: row.retention_expires_at || null,
     reactivatedFreeAt: row.reactivated_free_at || null,
-  }));
-  });
+  };
 }
 
 /**
- * Fetch only the ACTIVE save row(s) whose name matches `name`, mapped to the
- * lean save shape buildNeighbourBackLink needs (id, name, tier, settlement,
- * accessState). The partner is matched by the row `name` column OR the embedded
- * settlement name (data->>name) — mirroring findSaveByName — so we filter on both.
+ * Parse the owner-visible Supabase row set as a sibling-isolated unit.
+ * JSONB column checks happen before defaults can hide a bad wire value.
  *
- * This replaces the previous full-table supabaseList() read on the back-link path:
- * that pulled every save's data/config/toggles blobs and ran the v2 + canonical
- * adapters on all of them just to find one partner by name.
- *
- * RESOLVED (migration 096) — the partner back-link read-modify-write race that
- * this comment used to flag is closed. supabaseSave() now writes the reciprocal
- * back-link via the merge_neighbour_backlink RPC, which does the partner's
- * read-modify-write server-side under `select … for update`, so concurrent
- * same-partner saves serialize instead of clobbering (the former JS-side merge on
- * a stale snapshot was last-write-wins). This function only READS candidate
- * partners by name; the atomic reciprocal merge happens in the RPC.
+ * @param {unknown} value
  */
-async function fetchActivePartnersByName(name) {
-  if (!name) return [];
-  const cols = 'id, name, tier, data, access_state';
-  const toSave = (row) => ({
-    id: row.id,
-    name: row.name,
-    tier: row.tier,
-    settlement: row.data,
-    accessState: row.access_state || ACTIVE_SAVE_STATE,
+export async function admitSupabaseSavedSettlementRows(value) {
+  await loadNormalize();
+  const { admitSupabaseSaveRows } = await loadSaveAdmission();
+  const admitted = admitSupabaseSaveRows(value, {
+    mapRow: saveEntryFromSupabaseRow,
+    targetSchemaVersion: _settlementSchemaVersion,
   });
-  // Two parameterized .eq() queries (row name + embedded settlement name), merged
-  // on id. .eq() values are escaped by the client, so a settlement name containing
-  // a comma/paren — which would break a single .or() filter string — is safe here.
-  const byName = supabase
-    .from('settlements').select(cols)
-    .eq('access_state', ACTIVE_SAVE_STATE).eq('name', name);
-  const byDataName = supabase
-    .from('settlements').select(cols)
-    .eq('access_state', ACTIVE_SAVE_STATE).eq('data->>name', name);
-  const [a, b] = await Promise.all([byName, byDataName]);
-  if (a.error) throw a.error;
-  if (b.error) throw b.error;
-  const merged = new Map();
-  for (const row of [...(a.data || []), ...(b.data || [])]) merged.set(row.id, toSave(row));
-  return [...merged.values()];
+  return {
+    entries: admitted.entries
+      .map(migrateSaveToV2)
+      .map(migrateSettlementShape),
+    diagnostics: admitted.diagnostics,
+  };
 }
 
-async function supabaseSave(entry) {
-  // Every leg below is timeout-guarded: getUser, the insert, and the batch RPC
-  // can each implicitly trigger a token refresh that, if it stalls, hangs the
-  // Save button forever (see withTimeout in supabase.js). On timeout the promise
-  // rejects and SaveToLibraryButton's catch/finally re-enables the button and
-  // surfaces the error instead of wedging.
-  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
-  if (!user) throw new Error('Not authenticated');
+async function supabaseList() {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, visibility, unlisted_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  const admitted = await admitSupabaseSavedSettlementRows(data || []);
+  lastSaveAdmissionDiagnostics = admitted.diagnostics;
+  return admitted.entries;
+}
+
+/**
+ * F42: metadata-only projection for painting the library grid. Selects ONLY the
+ * light columns needed for cards + access/gallery state — deliberately NONE of
+ * the blob columns (data, config, toggles, ai_data, campaign_state,
+ * version_history, neighbour_links), which on a full library run 84–220 kB per
+ * row and carry a 50-snapshot version history. Returns the same envelope shape
+ * as list() with the blob-derived fields nulled/emptied and an `isMeta` flag, so
+ * a caller can paint cards from meta and hydrate the full blob per-save when a
+ * settlement is actually opened. Callers that genuinely need blobs in memory
+ * (cross-save link/rename/delete, campaign simulation) keep using list().
+ *
+ * DISPOSITION (lib-infra-6, Analytics-v2 A1): this projection is BUILT but has zero
+ * grid consumers today — deliberately. It is the F42 slice's second half: the
+ * targeted-neighbour-query half shipped; the SettlementsPanel grid → listMeta +
+ * per-open hydration was consciously deferred because per-save blob hydration on card
+ * open is a genuine feature the slice declined, not an oversight. This is deferred F42
+ * INFRA, not dead code to re-find. Do NOT wire the grid or delete this in a cleanup
+ * pass — resurrecting the grid adoption is an owner-scoped feature (needs the
+ * per-open hydration path). See the A1 wave report + memory for the standing deferral.
+ */
+async function supabaseListMeta() {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, seed, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  return data.map(row => ({
+    id:        row.id,
+    name:      row.name,
+    tier:      row.tier,
+    timestamp: row.updated_at,
+    savedAt:   new Date(row.updated_at).getTime(),
+    settlement: null,
+    config:    null,
+    seed:      row.seed ?? null,
+    aiData:    {},
+    gallery_share_narrated: row.gallery_share_narrated || false,
+    gallery_share_dm: row.gallery_share_dm || false,
+    // Same opt-in carry-through as supabaseList — the meta projection feeds
+    // the same ShareToGallery seeding paths.
+    gallery_importable: row.gallery_importable || false,
+    gallery_member_overrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object') ? row.gallery_member_overrides : null,
+    is_public: row.is_public || false,
+    public_slug: row.public_slug || null,
+    gallery_description: row.gallery_description || '',
+    gallery_title: row.gallery_title || '',
+    gallery_image_url: row.gallery_image_url || '',
+    gallery_image_alt: row.gallery_image_alt || '',
+    gallery_tags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    campaignState: null,
+    versionHistory: [],
+    accessState: row.access_state || ACTIVE_SAVE_STATE,
+    inactiveReason: row.inactive_reason || null,
+    inactiveSince: row.inactive_since || null,
+    retentionExpiresAt: row.retention_expires_at || null,
+    reactivatedFreeAt: row.reactivated_free_at || null,
+    isMeta: true,
+  }));
+}
+
+/**
+ * F42: fetch only the ACTIVE saves whose name matches `name`, with the full
+ * settlement blob (the neighbour back-link needs the partner's npcs /
+ * neighbourNetwork / interSettlementRelationships). Used to resolve a single
+ * neighbour partner on save instead of pulling the ENTIRE library (every blob +
+ * 50-snapshot version history) just to find one row. The `name` column is the
+ * canonical save name (set from the settlement name on write), so an equality
+ * filter on it mirrors findSaveByName's primary match without an egress blowup.
+ */
+async function supabaseListActiveByName(name) {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, data, access_state')
+    .eq('name', name);
+  if (error) throw error;
+  const admitted = await admitSupabaseSavedSettlementRows(
+    (data || []).map((row) => ({
+      ...row,
+      // The targeted projection intentionally omits optional JSONB columns.
+      version_history: null,
+      gallery_tags: null,
+    })),
+  );
+  return admitted.entries.filter(isSaveActive);
+}
+
+async function supabaseSave(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
 
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
 
   // Bidirectional neighbour link: if this settlement was generated against an
-  // existing save, both rows must reference each other. We write our OWN row (with
-  // the forward link) then apply the reciprocal back-link to the partner via the
-  // merge_neighbour_backlink RPC (migration 096), which does the partner's
-  // read-modify-write server-side under FOR UPDATE. This replaces the old approach
-  // of writing the partner's full STALE settlement blob through the batch UPDATE —
-  // that clobbered a concurrent save's back-link (last-write-wins). Both legs are
-  // idempotent, so the whole neighbour save is retry-safe. Skipped (single insert)
-  // when there's no generated neighbour or no matching active partner.
+  // existing save, both rows must reference each other. That needs a multi-row
+  // write, so we pre-mint the id, compute both sides, and create+update
+  // atomically via the batch RPC. Skipped (single insert) when there's no
+  // generated neighbour or no matching active partner. F42: resolve the partner
+  // with a targeted name query, not a full-library refetch.
   if (settlement?.neighborRelationship?.name) {
-    // Reuse the caller's stable id (interactive Save button) so a timeout-retry
-    // targets the SAME row instead of minting a fresh one and duplicating the
-    // library entry. Other callers (post-login intent, account import) carry no
-    // clientSaveId, so they keep the freshly-minted id as before.
-    const saveId = entry.clientSaveId || newSaveId();
-    // Targeted single-name lookup instead of a full-table read (see helper).
-    const existing = (await fetchActivePartnersByName(settlement.neighborRelationship.name)).filter(isSaveActive);
+    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
+    const saveId = newSaveId();
+    const existing = await supabaseListActiveByName(settlement.neighborRelationship.name);
     const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
     if (link) {
-      // 1) Our own row (carries the forward link). The batch create is a plain
-      //    INSERT; a stable-id retry of a write that already landed collides on the
-      //    PK — treat that as "own row exists" and fall through to the (idempotent)
-      //    back-link merge so the retry still completes the link.
-      try {
-        await supabaseMutateBatch({ creates: [{ ...v2, id: saveId, settlement: link.settlement }] });
-      } catch (e) {
-        if (!(entry.clientSaveId && isDuplicateKeyError(e))) throw e;
-      }
-      // 2) The partner's reciprocal back-link — applied atomically server-side so a
-      //    concurrent same-partner save can't clobber it. A missing/not-owned partner
-      //    is a server-side no-op (the link self-heals on the partner's next save).
-      if (link.partnerDelta) {
-        const { error } = await withTimeout(
-          supabase.rpc('merge_neighbour_backlink', {
-            p_partner_id:           link.partnerDelta.partnerId,
-            p_link_id:              link.partnerDelta.linkId,
-            p_new_save_id:          link.partnerDelta.newSaveId,
-            p_network_entry:        link.partnerDelta.networkEntry,
-            p_relationship_entries: link.partnerDelta.relationshipEntries,
-          }),
-          20000,
-          'Neighbour link',
-        );
-        if (error) throw error;
-      }
+      await supabaseMutateBatch({
+        creates: [{ ...v2, id: saveId, settlement: link.settlement }],
+        updates: [{ id: link.partner.id, settlement: link.partner.settlement }],
+      }, { expectedOwnerId: ownerId, isSessionCurrent });
       return saveId;
     }
   }
 
   const row = {
-    // When the caller mints a stable id (the interactive Save button), persist it
-    // so a timeout-retry can upsert the SAME row instead of duplicating. Absent
-    // for other callers (post-login intent, account import), where the DB default
-    // generates the id on a plain insert.
-    ...(entry.clientSaveId ? { id: entry.clientSaveId } : {}),
-    user_id:         user.id,
+    user_id:         ownerId,
     name:            v2.name,
     tier:            v2.tier,
     data:            settlement,
@@ -366,20 +477,61 @@ async function supabaseSave(entry) {
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
   };
 
-  // Idempotent retry: with a client-minted id we upsert on the primary key so a
-  // save that actually landed server-side just after the client timed out is
-  // re-written, not duplicated, when the user retries. Other callers keep a plain
-  // insert (DB-generated id). RLS gates on user_id only, so an explicit id is safe;
-  // an upsert that resolves to UPDATE does not re-trip the per-tier save-limit.
-  const query = entry.clientSaveId
-    ? supabase.from('settlements').upsert(row, { onConflict: 'id' }).select('id').single()
-    : supabase.from('settlements').insert(row).select('id').single();
-  const { data, error } = await withTimeout(query, 20000, 'Save settlement');
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
+  const { data, error } = await supabase
+    .from('settlements')
+    .insert(row)
+    .select('id')
+    .single();
   if (error) throw error;
   return data.id;
 }
 
-async function supabaseUpdate(id, partial) {
+/**
+ * Idempotent explicit-id save used by deterministic world-pulse member births.
+ * Ordinary user saves keep server-minted ids through supabaseSave; this seam is
+ * intentionally separate so replaying one birth converges on one row.
+ */
+async function supabaseUpsert(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
+  const v2 = migrateSaveToV2(entry);
+  if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+  const row = {
+    ...mutationRow({ ...v2, settlement }),
+    user_id: ownerId,
+  };
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
+  const { data, error } = await supabase
+    .from('settlements')
+    .upsert(row, { onConflict: 'id' })
+    .select('id')
+    .single();
+  if (error) throw error;
+  if (String(data?.id || '') !== String(v2.id)) {
+    throw Object.assign(
+      new Error('Settlement upsert did not confirm the requested row.'),
+      { code: 'settlement_upsert_unconfirmed' },
+    );
+  }
+  return data.id;
+}
+
+async function supabaseUpdate(
+  id,
+  partial,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
   const updates = {};
   if (partial.name       !== undefined) updates.name = partial.name;
   if (partial.tier       !== undefined) updates.tier = partial.tier;
@@ -397,67 +549,154 @@ async function supabaseUpdate(id, partial) {
   if (toggles) updates.toggles = toggles;
 
   if (Object.keys(updates).length === 0) return;
-  // Timeout-guarded like list/save/mutateBatch above: a stalled update (dropped
-  // socket, hung token refresh) otherwise pends forever and wedges the caller's
-  // in-flight state. On timeout this rejects so the caller's catch/finally runs.
-  const { error } = await withTimeout(
-    supabase.from('settlements').update(updates).eq('id', id),
-    20000,
-    'Update settlement',
-  );
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
+  const { data, error } = await supabase
+    .from('settlements')
+    .update(updates)
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .select('id');
   if (error) throw error;
+  const updated = (Array.isArray(data) ? data : data ? [data] : [])
+    .some(row => String(row?.id) === String(id));
+  if (updated) return id;
+
+  // PostgREST may report a clean zero-row update when auth rotated and RLS
+  // filtered the expected owner's row. Recheck the owner, then distinguish an
+  // intentionally absent/deleted save from a still-visible uncommitted write.
+  await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+  const { data: remaining, error: confirmError } = await supabase
+    .from('settlements')
+    .select('id')
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .maybeSingle();
+  if (confirmError) throw confirmError;
+  if (remaining?.id != null) {
+    throw Object.assign(
+      new Error('Settlement update did not confirm the requested row.'),
+      { code: 'settlement_update_unconfirmed' },
+    );
+  }
+  return null;
 }
 
-async function supabaseDelete(id) {
-  // Same hang guard as supabaseUpdate — a stalled delete must reject, not pend.
-  const { error } = await withTimeout(
-    supabase.from('settlements').delete().eq('id', id),
-    20000,
-    'Delete settlement',
+// ── Save persistence owner/session fence ─────────────────────────────────────
+//
+// Keep this error contract local to the save service: callers branch on its
+// stable code while the service supplies save-specific context. Campaign
+// persistence uses the same capture/recheck discipline but owns a separate
+// domain message and coordinator lifecycle.
+
+function saveAuthSessionChangedError(expectedOwnerId, actualOwnerId = null) {
+  return Object.assign(
+    new Error('Settlement persistence belongs to a different authenticated account.'),
+    {
+      code: 'auth_session_changed',
+      expectedOwnerId: expectedOwnerId == null ? null : String(expectedOwnerId),
+      actualOwnerId: actualOwnerId == null ? null : String(actualOwnerId),
+    },
   );
+}
+
+function assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, actualOwnerId = null) {
+  if (isSessionCurrent && !isSessionCurrent()) {
+    throw saveAuthSessionChangedError(expectedOwnerId, actualOwnerId);
+  }
+}
+
+/**
+ * Resolve and verify the authenticated owner immediately around an async seam.
+ *
+ * The second generation check matters even when the user id is unchanged:
+ * signing out and back into the same account still starts a new persistence
+ * session, and work retained by the old session must fail closed.
+ */
+async function assertExpectedSupabaseOwner(expectedOwnerId = null, isSessionCurrent = null) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent);
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('Not authenticated');
+  const ownerId = expectedOwnerId == null ? String(user.id) : String(expectedOwnerId);
+  if (String(user.id) !== ownerId) throw saveAuthSessionChangedError(ownerId, user.id);
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, user.id);
+  return ownerId;
+}
+
+async function supabaseDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
+  const ownerId = await assertExpectedSupabaseOwner(expectedOwnerId, isSessionCurrent);
+  const { data, error } = await supabase
+    .from('settlements')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .select('id');
   if (error) throw error;
+  const deleted = (Array.isArray(data) ? data : data ? [data] : [])
+    .some(row => String(row?.id) === String(id));
+  // A returned row proves A's delete committed. The caller owns the stale-session
+  // cleanup and must not reinterpret that commit merely because auth rotated.
+  if (deleted) return id;
+  // Zero rows are ambiguous: already absent, or a request that ran after auth
+  // rotation. Re-read owner + generation before granting idempotent success.
+  await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+  const { data: remaining, error: confirmError } = await supabase
+    .from('settlements')
+    .select('id')
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .maybeSingle();
+  if (confirmError) throw confirmError;
+  if (remaining?.id != null) {
+    throw Object.assign(
+      new Error('Settlement delete did not confirm the requested row.'),
+      { code: 'settlement_delete_unconfirmed' },
+    );
+  }
+  return null;
 }
 
 async function supabaseCount() {
-  // Timeout-guarded like list/save/update/delete above: a stalled count (dropped
-  // socket, hung token refresh) otherwise pends forever and wedges the caller's
-  // save-limit check. On timeout this rejects so the caller's catch/finally runs.
-  const { count, error } = await withTimeout(
-    supabase
-      .from('settlements')
-      .select('id', { count: 'exact', head: true })
-      .eq('access_state', ACTIVE_SAVE_STATE),
-    20000,
-    'Count settlements',
-  );
+  const { count, error } = await supabase
+    .from('settlements')
+    .select('id', { count: 'exact', head: true })
+    .eq('access_state', ACTIVE_SAVE_STATE);
   if (error) throw error;
   return count || 0;
 }
 
 async function supabaseReactivateFreeSettlement(id) {
-  // Same hang guard as the sibling legs — a stalled reactivate RPC must reject, not pend.
-  const { data, error } = await withTimeout(
-    supabase.rpc('reactivate_free_settlement', {
-      target_settlement_id: id,
-    }),
-    20000,
-    'Reactivate settlement',
-  );
+  const { data, error } = await supabase.rpc('reactivate_free_settlement', {
+    target_settlement_id: id,
+  });
   if (error) throw error;
   return data;
 }
 
-async function supabaseMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
-  const { data, error } = await withTimeout(
-    supabase.rpc('mutate_settlement_batch', {
-      updates: updates.map(entry => mutationRow(entry)),
-      delete_ids: deletes,
-      creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
-    }),
-    20000,
-    'Save settlement',
-  );
+async function supabaseMutateBatch(
+  { updates = [], deletes = [], creates = [] } = {},
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(expectedOwnerId, isSessionCurrent);
+  const { data, error } = await supabase.rpc('mutate_settlement_batch', {
+    p_expected_user: ownerId,
+    updates: updates.map(entry => mutationRow(entry)),
+    delete_ids: deletes,
+    creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
+  });
   if (error) throw error;
+  if (deletes.length > 0) {
+    const expectedAffected = updates.length + deletes.length + creates.length;
+    if (Number(data) !== expectedAffected) {
+      // The RPC normally proves its atomic commit with an exact affected count.
+      // An ambiguous zero/short result gets the same owner/session recheck as a
+      // direct delete and is never allowed to certify optimistic local removal.
+      await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+      throw Object.assign(
+        new Error('Settlement batch delete did not confirm every requested mutation.'),
+        { code: 'settlement_delete_unconfirmed' },
+      );
+    }
+  }
   return data;
 }
 
@@ -470,19 +709,47 @@ async function localList() {
   // default canonical containers). Cost is trivial — both adapters are
   // pure object spreads — and it makes the rest of the app symmetric
   // with the Supabase path.
-  return localLoad().map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
+  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
+  return (await localLoad()).map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
 }
 
-async function localSaveEntry(entry) {
+/**
+ * F42: local-mode mirror of supabaseListMeta — same light envelope with blob
+ * fields stripped and the `isMeta` flag set, so both backends expose one meta
+ * contract. Local mode has no network egress; this exists purely to keep the
+ * API symmetric for callers that opt into the metadata projection.
+ */
+async function localListMeta() {
+  return (await localList()).map(entry => ({
+    ...entry,
+    settlement: null,
+    config: null,
+    aiData: {},
+    campaignState: null,
+    versionHistory: [],
+    isMeta: true,
+  }));
+}
+
+async function localSaveEntry(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(
+    expectedOwnerId,
+    isSessionCurrent,
+    expectedOwnerId,
+  );
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const saves = localLoad();
-  const id = v2.id || newSaveId();
+  const saves = await localLoad();
+  const id = v2.id || Date.now();
 
   // Bidirectional neighbour link (see supabaseSave): when the named neighbour
   // already exists as an active save, write the reciprocal back-link onto the
   // partner row alongside the new save.
   if (settlement?.neighborRelationship?.name) {
+    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
     const existing = saves.filter(isSaveActive);
     const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
     if (link) {
@@ -500,11 +767,33 @@ async function localSaveEntry(entry) {
   return id;
 }
 
+async function localUpsert(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  const v2 = migrateSaveToV2(entry);
+  if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+  const rows = await localLoad();
+  const index = rows.findIndex(row => String(row.id) === String(v2.id));
+  const next = {
+    ...(index === -1 ? {} : rows[index]),
+    ...v2,
+    settlement,
+    id: v2.id,
+    savedAt: index === -1 ? Date.now() : rows[index].savedAt,
+  };
+  if (index === -1) rows.unshift(next);
+  else rows[index] = next;
+  localWrite(rows);
+  return v2.id;
+}
+
 async function localUpdate(id, partial) {
-  const saves = localLoad();
-  // String()=== both sides: a numeric local id round-tripped as a string (route
-  // param, JSON re-parse, a caller that String()s the id) must still match, or the
-  // update silently no-ops ("my edit didn't save"). Mirrors the other methods here.
+  const saves = await localLoad();
+  // String() both sides (ported master fix): a numeric id passed as a string
+  // must still match — the module's other id compares already coerce.
   const idx = saves.findIndex(s => String(s.id) === String(id));
   if (idx !== -1) {
     Object.assign(saves[idx], partial);
@@ -512,16 +801,20 @@ async function localUpdate(id, partial) {
   }
 }
 
-async function localDelete(id) {
-  localWrite(localLoad().filter(s => String(s.id) !== String(id)));
+async function localDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  const saves = await localLoad();
+  const existed = saves.some(save => String(save.id) === String(id));
+  localWrite(saves.filter(save => String(save.id) !== String(id)));
+  return existed ? id : null;
 }
 
 async function localCount() {
-  return activeSaveCount(localLoad());
+  return activeSaveCount(await localLoad());
 }
 
 async function localReactivateFreeSettlement(id) {
-  const saves = localLoad();
+  const saves = await localLoad();
   const idx = saves.findIndex(save => String(save.id) === String(id));
   if (idx === -1) return { ok: false, reason: 'not_found' };
   saves[idx] = {
@@ -536,19 +829,19 @@ async function localReactivateFreeSettlement(id) {
   return { ok: true };
 }
 
-/**
- * Batch-write the full saves array (local mode only). Retained as part of the
- * local-backend API surface (exercised by saves.smoke.test.js) and exposed as
- * `null` in supabase mode so callers can branch on backend capability.
- */
+/** Batch-write the full saves array (local mode only). */
 async function localWriteAll(entries) {
   localWrite(entries);
 }
 
-async function localMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
+async function localMutateBatch(
+  { updates = [], deletes = [], creates = [] } = {},
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
   const deleted = new Set(deletes.map(String));
   const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
-  const next = localLoad()
+  const next = (await localLoad())
     .filter(entry => !deleted.has(String(entry.id)))
     .map(entry => {
       const patch = updateMap.get(String(entry.id));
@@ -563,13 +856,18 @@ async function localMutateBatch({ updates = [], deletes = [], creates = [] } = {
 
 export const saves = {
   list:     isConfigured ? supabaseList     : localList,
+  /** F42: metadata-only library projection (no blob columns) for grid paint. */
+  listMeta: isConfigured ? supabaseListMeta : localListMeta,
   save:     isConfigured ? supabaseSave     : localSaveEntry,
+  upsert:   isConfigured ? supabaseUpsert   : localUpsert,
   update:   isConfigured ? supabaseUpdate   : localUpdate,
   delete:   isConfigured ? supabaseDelete   : localDelete,
   count:    isConfigured ? supabaseCount    : localCount,
   reactivateFreeSettlement: isConfigured ? supabaseReactivateFreeSettlement : localReactivateFreeSettlement,
   mutateBatch: isConfigured ? supabaseMutateBatch : localMutateBatch,
-  /** Write entire saves array — local-only API surface (null in supabase mode). */
+  /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
+  /** Last owner-visible boundary accounting; contains no persisted payloads. */
+  getAdmissionDiagnostics: () => lastSaveAdmissionDiagnostics,
   isConfigured,
 };

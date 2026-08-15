@@ -1,7 +1,7 @@
 /**
  * domain/causalState.js — Unified causal state substrate.
  *
- * Today's settlement state is scattered across
+ * Tier 2.4 of the roadmap. Today's settlement state is scattered across
  * a dozen subsystem-specific fields (`economicState.foodSecurity`,
  * `powerStructure.publicLegitimacy`, `safetyProfile.blackMarketCapture`,
  * etc.). Each one reads its own narrow slice and produces its own
@@ -10,7 +10,7 @@
  * read from one canonical map.
  *
  *   deriveCausalState(settlement) -> {
- *     variables: { food_security: SystemVariable, ... },   // 16 entries
+ *     variables: { food_security: SystemVariable, ... },   // 14 entries
  *     bands:     { food_security: 'adequate', ... },        // flat band map
  *     scores:    { food_security: 65, ... },                // flat 0-100 score map
  *     summary:   { surplus: string[], adequate: [], ... },  // group by band
@@ -18,7 +18,7 @@
  *
  * Each SystemVariable has structured contributors so consumers can
  * answer "why is food_security strained?" by reading the chain of
- * deltas that produced the score. This is the trace pattern
+ * deltas that produced the score. This is the Phase 7 trace pattern
  * applied at the system-variable level.
  *
  * Relationship to existing code:
@@ -26,18 +26,18 @@
  *     That module produces a 4-dimension UI-facing summary
  *     (resilience / volatility / externalThreat / resourcePressure)
  *     deliberately consolidated for DM-facing display. This file
- *     produces the underlying 16-variable substrate the roadmap calls
+ *     produces the underlying 14-variable substrate the roadmap calls
  *     for. The UI surface can later derive FROM this substrate
  *     (Strangler Fig) without breaking consumers today.
  *   - The 5-band vocabulary (surplus / adequate / strained / critical
- *     / collapsed) matches the qualitative-banding direction
+ *     / collapsed) matches Tier 5.4's qualitative-banding direction
  *     and is the canonical substrate vocabulary going forward.
  *
  * Inputs the substrate reads from:
- *   - factionProfile.js          — archetype + power
- *   - supplyChainState.js        — canonical chain statuses
- *   - npcProfile.js              — NPC composition
- *   - activeConditions.js        — canonical condition state
+ *   - Phase 9  factionProfile.js          — archetype + power
+ *   - Phase 10 supplyChainState.js        — canonical chain statuses
+ *   - Phase 13 npcProfile.js              — NPC composition
+ *   - Phase 16 activeConditions.js        — canonical condition state
  *   - Settlement generator output         — population, prosperity,
  *                                            stressors, defenseProfile,
  *                                            safetyProfile, etc.
@@ -46,6 +46,7 @@
  */
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deityLawDirection, DEITY_LAW_TUNING } from './corruption.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -58,35 +59,147 @@ import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
-import { WAR_RECOVERY_CONDITIONS } from './worldPulse/archetypeCatalog.js';
+import { WAR_RECOVERY_CONDITIONS, UPSWING_LIFT_CONDITIONS } from './worldPulse/archetypeCatalog.js';
+// DEITY_RANK_AUTHORITY is single-sourced in the dependency-free leaf
+// domain/deityConstants.js (amended W2b contract): the engine imports the LEAF,
+// never display/deityEffects.js — routing through deityEffects would close the
+// causalState > deityEffects > magicProfile > causalState cycle (deityEffects
+// re-exports magicProfile's deity-magic constants; magicProfile reads
+// deriveCausalState), which the shrink-only layer-boundary baseline forbids.
+// deityEffects re-exports the same leaf object for display consumers, so the
+// major/minor/cult religious-authority lift still has exactly one source.
+import { DEITY_RANK_AUTHORITY } from './deityConstants.js';
+
+// Phase 4 W-F4 (piety sites #6/#9): the LOCAL piety amplifier, read straight off
+// the projected read-model (config.faithProfile.piety, minted by the pulse at
+// tick END and consumed at the next tick's derive — the anti-runaway tick-START
+// measurement). A PLAIN FIELD READ, deliberately not a worldPulse import: it keeps
+// causalState off the cycle-sensitive layer boundary the header guards, and reads
+// 1.0 when absent — so GENERATION (which never projects a piety record) and every
+// deity-free settlement stay byte-identical. `localMult` ∈ ~[0.65,1.65] is the raw
+// local amplifier (clergy-distorted); `megaphoneLaw` ∈ [0.4,1] is the LAW-channel
+// opposed-runner-up dampener (an orderly rival muting a chaotic patron, or vice
+// versa) that the law-derived lift (site #9) takes per the per-axis dampener rule.
+/** @param {CausalSettlementSource | null | undefined} s
+ *  @returns {{ localMult: number, megaphoneLaw: number }} */
+function pietyLocalAmp(s) {
+  // The projected piety read-model is not declared on CausalSettlementSource.config
+  // (it is minted by the pulse), so bridge through `unknown` to a structural read —
+  // no `any` (the domain any-ratchet stays flat). Absent record ⇒ 1.0.
+  const cfg = /** @type {{ faithProfile?: { piety?: { localMult?: number, dampener?: { megaphoneLaw?: number } } } } | undefined} */ (
+    /** @type {unknown} */ (s?.config));
+  const p = cfg?.faithProfile?.piety;
+  const localMult = p && Number.isFinite(p.localMult) ? Number(p.localMult) : 1;
+  const megaphoneLaw = p && p.dampener && Number.isFinite(p.dampener.megaphoneLaw) ? Number(p.dampener.megaphoneLaw) : 1;
+  return { localMult, megaphoneLaw };
+}
+
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile */
+/** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
+/** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
+/** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
+
+/**
+ * The 5-band vocabulary (see CAUSAL_BANDS below).
+ * @typedef {'surplus'|'adequate'|'strained'|'critical'|'collapsed'} CausalBand
+ */
+
+/**
+ * An embedded primary-deity snapshot (the embed-on-assign bridge). Self-contained
+ * so the derivers never touch customContent. `rankAxis` (major/minor/cult) drives
+ * religious_authority; `lawAxis` (lawful/chaotic) drives law_order. A legacy
+ * 3-axis deity carries no lawAxis ⇒ dormant law term.
+ * @typedef {Object} PrimaryDeitySnapshot
+ * @property {string} [rankAxis]
+ * @property {string} [lawAxis]
+ * @property {string} [name]
+ * @property {string} [_deityRef]
+ */
+
+/**
+ * Settlement shape as the derivers actually read it — the legacy generator
+ * fields this substrate consumes. (CanonicalSettlement in
+ * settlement.schema.js does not yet declare these generator-era fields;
+ * see crossFileNeeds.)
+ * @typedef {Object} CausalSettlementSource
+ * @property {number | {total?: number} | null} [population]
+ * @property {{monsterThreat?: string, tradeRouteAccess?: string, magicLevel?: string,
+ *             priorityMagic?: number, magicExists?: boolean, government?: unknown,
+ *             primaryDeitySnapshot?: PrimaryDeitySnapshot | null}} [config]
+ * @property {string} [tradeRouteAccess]
+ * @property {string} [magicLevel]
+ * @property {unknown} [stressors]
+ * @property {unknown} [stress]
+ * @property {unknown} [stresses]
+ * @property {{governingName?: string, government?: unknown, publicLegitimacy?: {score?: unknown, label?: unknown} | number | null}} [powerStructure]
+ * @property {import('./defenseLedger.js').DefenseLedgerSource['defenseProfile'] & {hasWalls?: boolean} | null} [defenseProfile]
+ * @property {{prosperity?: unknown, economicComplexity?: unknown,
+ *             safetyProfile?: {blackMarketCapture?: number},
+ *             activeChains?: import('./supplyChainState.js').LegacyChain[]}} [economicState]
+ * @property {{blackMarketCapture?: number}} [safetyProfile]
+ * @property {unknown[]} [institutions]
+ */
+
+/**
+ * One derived substrate variable with its trace.
+ * @typedef {Object} SystemVariable
+ * @property {string} variable
+ * @property {number} score
+ * @property {CausalBand} band
+ * @property {CausalContributor[]} contributors
+ */
+
+/**
+ * Result of a per-variable deriver, before finalization.
+ * @typedef {{score: number, contributors: CausalContributor[]}} DeriverResult
+ */
+
+/**
+ * The full derived substrate.
+ * @typedef {Object} CausalState
+ * @property {Record<string, SystemVariable>} variables
+ * @property {Record<string, CausalBand>} bands
+ * @property {Record<string, number>} scores
+ * @property {Record<CausalBand, string[]>} summary
+ */
+
+/**
+ * One entry of the compareCausalState() delta list.
+ * @typedef {Object} CausalStateDelta
+ * @property {string} variable
+ * @property {number} before
+ * @property {number} after
+ * @property {number} change
+ * @property {CausalBand} bandBefore
+ * @property {CausalBand} bandAfter
+ * @property {'higher_is_better'|'lower_is_better'} polarity
+ * @property {string} explanation
+ */
 
 // ── Per-settlement derivation memo ───────────────────────────────────────
 //
-// deriveCausalState runs all 16 derivers against the SAME settlement object,
-// and they collectively re-derive deriveAllActiveConditions ~17x and
-// deriveAllFactionProfiles ~6x per call — each derivation walking the full
-// roster from scratch. Both depend SOLELY on the settlement object (neither
-// reads any other state), so a WeakMap keyed on the settlement IDENTITY yields
-// correct cache HITS for the repeated reads within one deriveCausalState call
-// and correct MISSES when the settlement actually changes (copy-on-write ⇒ a
-// changed settlement is a NEW object reference). This mirrors worldSnapshot.js's
-// derivationCache exactly. The cached arrays are READ-ONLY at every call site
-// (for-of / find / filter / map — never mutated), so sharing the reference is
-// byte-identical to re-deriving: same input ⇒ same output, just computed once.
-// WeakMap lets entries be GC'd once the settlement object is unreferenced, so
-// the memo never leaks across calls.
+// deriveCausalState runs all 16 derivers against the SAME settlement object, and
+// they collectively re-derive deriveAllActiveConditions / deriveAllFactionProfiles
+// many times per call — each walking the full roster from scratch. Both depend
+// SOLELY on the settlement object, so a WeakMap keyed on the settlement IDENTITY
+// yields correct HITS within one deriveCausalState call and correct MISSES when
+// the settlement actually changes (copy-on-write ⇒ a changed settlement is a NEW
+// object reference). Byte-identical to re-deriving — the cached arrays are READ-
+// ONLY at every call site (for-of / find / filter / map, never mutated) — and the
+// WeakMap lets entries be GC'd once the settlement object is unreferenced.
 
-/** @type {WeakMap<object, any[]>} */
+/** @type {WeakMap<object, ActiveCondition[]>} */
 const activeConditionsMemo = new WeakMap();
-/** @type {WeakMap<object, any[]>} */
+/** @type {WeakMap<object, ReturnType<typeof deriveAllFactionProfiles>>} */
 const factionProfilesMemo = new WeakMap();
 
 /**
  * Memoized deriveAllActiveConditions, keyed on the settlement identity.
- * Byte-identical to calling deriveAllActiveConditions(s) directly — only the
- * repeated derivations within a single deriveCausalState call are collapsed.
- * @param {import('./settlement.schema.js').SimSettlement} s
- * @returns {any[]}
+ * Byte-identical to calling deriveAllActiveConditions(s) directly.
+ * @param {CausalSettlementSource | null | undefined} s
+ * @returns {ActiveCondition[]}
  */
 function cachedActiveConditions(s) {
   if (!s || typeof s !== 'object') return deriveAllActiveConditions(s);
@@ -100,8 +213,8 @@ function cachedActiveConditions(s) {
 /**
  * Memoized deriveAllFactionProfiles, keyed on the settlement identity.
  * Byte-identical to calling deriveAllFactionProfiles(s) directly.
- * @param {import('./settlement.schema.js').SimSettlement} s
- * @returns {any[]}
+ * @param {CausalSettlementSource | null | undefined} s
+ * @returns {ReturnType<typeof deriveAllFactionProfiles>}
  */
 function cachedFactionProfiles(s) {
   if (!s || typeof s !== 'object') return deriveAllFactionProfiles(s);
@@ -118,11 +231,66 @@ function cachedFactionProfiles(s) {
 // polarity clone occupation_lifted (a liberation) both RAISE the systems they
 // declare. Sourced from the war-layer archetype catalog so a new recovery
 // archetype lands here without re-typing the strings.
-const LIFT_ARCHETYPES = new Set(WAR_RECOVERY_CONDITIONS);
+// W-LIFECYCLE: steading_tributary is the parent's bounded satellite read — a lift
+// (severity-capped at the lazy kernel; planted fully-specified, no catalog template).
+const LIFT_ARCHETYPES = new Set([...WAR_RECOVERY_CONDITIONS, ...UPSWING_LIFT_CONDITIONS, 'steading_tributary']);
 
-/** +1 for a recovery/lift condition, -1 for a pressure. @param {any} cond */
+/** +1 for a recovery/lift condition, -1 for a pressure. @param {ActiveCondition} cond */
 function conditionDirection(cond) {
   return LIFT_ARCHETYPES.has(cond?.archetype) ? +1 : -1;
+}
+
+/**
+ * THE single active-condition scan — the one implementation of the
+ * affectedSystems join every deriver used to hand-roll. The polarity bug class
+ * (a recovery lift read as a pressure) appeared independently in THREE
+ * hand-written copies (food, trade, ruling_authority) before this existed; a
+ * deriver that calls this cannot re-create it. causalStateConditionScan.test.js
+ * pins that no deriver hand-rolls the join outside this helper.
+ *
+ * Modes:
+ *   'signed' — conditionDirection() signs severity*scale: lifts RAISE the
+ *              variable, pressures LOWER it. labels/tails are [positive, negative].
+ *   'drain'  — pressure-only: always subtracts (labor, healing, housing…).
+ *   'gain'   — pressure RAISES the variable (criminal_opportunity, the
+ *              religious-pressure amplifier).
+ * Zero-magnitude conditions are skipped uniformly (no phantom zero-delta
+ * contributor entries — the old copies disagreed on this).
+ *
+ * @param {CausalSettlementSource} s
+ * @param {CausalContributor[]} contributors
+ * @param {string} system  affectedSystems key (must be a SYSTEM_VARIABLES entry)
+ * @param {{ scale: number, mode?: 'signed'|'drain'|'gain',
+ *           effect: string|[string,string], tail: string|[string,string],
+ *           special?: (cond: ActiveCondition) => number|null, ownsArchetype?: string }} spec
+ * @returns {number} total score delta applied by this scan
+ */
+function applyConditions(s, contributors, system, spec) {
+  const { scale, mode = 'signed', effect, tail, special = null, ownsArchetype = null } = spec;
+  let total = 0;
+  for (const cond of cachedActiveConditions(s)) {
+    if (special) {
+      const consumed = special(cond);
+      if (consumed != null) { total += consumed; continue; }
+    }
+    if (ownsArchetype && cond.archetype === ownsArchetype) continue;
+    if (!cond.affectedSystems.includes(system)) continue;
+    const base = Math.round(cond.severity * scale);
+    if (base === 0) continue;
+    if (mode === 'signed') {
+      const direction = conditionDirection(cond);
+      const magnitude = base * direction;
+      const positive = direction > 0;
+      total += magnitude;
+      push(contributors, cond.id, positive ? effect[0] : effect[1], magnitude,
+        `${cond.label} ${positive ? tail[0] : tail[1]}`);
+    } else {
+      const magnitude = mode === 'gain' ? base : -base;
+      total += magnitude;
+      push(contributors, cond.id, /** @type {string} */ (effect), magnitude, `${cond.label} ${tail}`);
+    }
+  }
+  return total;
 }
 
 /**
@@ -132,7 +300,8 @@ function conditionDirection(cond) {
  * regex over JSON.stringify: the profile always contains the literal key
  * "walls" (even as walls: []), so a stringify match granted every settlement
  * the walled bonus whether or not a single wall stood.
- * @param {any} def defenseProfile (may be null / partial / legacy-shaped)
+ * @param {{ hasWalls?: unknown, walls?: unknown, institutions?: { walls?: unknown } } | null | undefined} def
+ * @returns {boolean}
  */
 export function defenseProfileHasWalls(def) {
   if (!def || typeof def !== 'object') return false;
@@ -148,23 +317,9 @@ export function defenseProfileHasWalls(def) {
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
- * The 16 canonical system variables per the roadmap. Frozen so the
+ * The 14 canonical system variables per the roadmap. Frozen so the
  * shape of the substrate is stable; consumers can rely on iterating
  * this array to cover every dimension.
- *
- * `economic_capacity` (15th) is the live "war-affordability / economic slack"
- * dial added for the geopolitical war layer (see docs/GEOPOLITICAL_WAR_LAYER.md):
- * economicState.prosperity/economicComplexity are generation-frozen, so
- * they seed a BASELINE that active conditions (war_drain / vassal_extraction /
- * market_shock / occupation extraction) move live — the seam the homeostasis loop
- * and the trade-war contest read. Distinct from trade_connectivity (routes/chains).
- *
- * `law_order` (16th) is the rule-of-law dial added the same way: it
- * reads government archetype, public legitimacy, the internal-security score, the
- * law/order institution roster, and the crime/corruption signals — higher = more
- * lawful/ordered. Purely ADDITIVE — it reads only signals other derivers already
- * read, so the existing 15 scores are byte-identical. The lawful/chaotic deity
- * axis will later couple INTO this.
  */
 export const SYSTEM_VARIABLES = Object.freeze([
   'food_security',
@@ -186,7 +341,7 @@ export const SYSTEM_VARIABLES = Object.freeze([
 ]);
 
 /**
- * The canonical 5-band vocabulary. This is the
+ * The canonical 5-band vocabulary. Per Tier 5.4 this is the
  * vocabulary user-facing surfaces (PDF / UI / AI) should display
  * instead of raw numeric scores.
  */
@@ -208,17 +363,10 @@ export const CAUSAL_BANDS = Object.freeze([
  * the substrate is default-optimistic; surfaces only flag pressure
  * when there's evidence for it.
  *
- * DELIBERATE DESIGN STANCE (reviewed, not accidental). A settlement with no detected
- * pressure — or a genuinely absent/malformed score — reads as 'adequate', NOT as a
- * distinct 'unknown'. This is default-OPTIMISTIC on purpose: the alternative (treat
- * missing evidence as strained/cautious) would paint false alarms across the PDF/UI/AI
- * surfaces on every dimension the sim hasn't produced evidence for. Flipping to a
- * default-cautious model — or adding an explicit 'unknown' band — is a PRODUCT/BALANCE
- * decision (it changes what the player sees everywhere and shifts the golden master),
- * so it is left to the designer rather than silently changed. If that stance is ever
- * revisited, the only two touchpoints are this fallback and defaultScoreForCausalBand.
+ * @param {unknown} score
+ * @returns {CausalBand}
  */
-export function causalBand(/** @type {any} */ score) {
+export function causalBand(score) {
   const s = typeof score === 'number' ? Math.max(0, Math.min(100, score)) : 50;
   if (s >= 75) return 'surplus';
   if (s >= 50) return 'adequate';
@@ -227,8 +375,12 @@ export function causalBand(/** @type {any} */ score) {
   return 'collapsed';
 }
 
-/** Round-trip: band → numeric center. */
-export function defaultScoreForCausalBand(/** @type {any} */ band) {
+/**
+ * Round-trip: band → numeric center.
+ * @param {string} band
+ * @returns {number}
+ */
+export function defaultScoreForCausalBand(band) {
   switch (band) {
     case 'surplus':    return 85;
     case 'adequate':   return 62;
@@ -249,13 +401,25 @@ export function defaultScoreForCausalBand(/** @type {any} */ band) {
  * @property {string} reason   — Human-readable explanation.
  */
 
-function push(/** @type {any[]} */ contributors, /** @type {any} */ source, /** @type {any} */ effect, /** @type {any} */ delta, /** @type {any} */ reason) {
+/**
+ * @param {CausalContributor[]} contributors
+ * @param {string} source
+ * @param {string} effect
+ * @param {number} delta
+ * @param {string} reason
+ * @returns {void}
+ */
+function push(contributors, source, effect, delta, reason) {
   contributors.push({ source, effect, delta, reason });
 }
 
 // ── Population helper ────────────────────────────────────────────────────
 
-function populationOf(/** @type {any} */ settlement) {
+/**
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {number}
+ */
+function populationOf(settlement) {
   const pop = settlement?.population;
   if (typeof pop === 'number') return pop;
   if (pop && typeof pop === 'object' && typeof pop.total === 'number') return pop.total;
@@ -273,14 +437,19 @@ function populationOf(/** @type {any} */ settlement) {
 // structured push() calls so the contributors list is the trace of
 // exactly how the score got to its final value.
 
-function deriveFoodSecurity(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveFoodSecurity(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Supply chain stability for the food_security need
+  /** @type {DerivedSupplyChainState[]} */
   const chains = deriveAllSupplyChainStates(s);
-  const foodChains = chains.filter((/** @type {any} */ c) => c.needKey === 'food_security');
+  const foodChains = chains.filter(c => c.needKey === 'food_security');
   for (const c of foodChains) {
     if (c.status === 'stable') {
       score += 8; push(contributors, c.id, 'stable', +8, `${c.name} runs normally.`);
@@ -295,14 +464,9 @@ function deriveFoodSecurity(/** @type {any} */ s) {
     }
   }
 
-  // Recovery archetypes (siege_lifted/occupation_lifted) LIFT — gate sign on conditionDirection().
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('food_security')) continue;
-    const magnitude = Math.round(cond.severity * 20) * conditionDirection(cond);
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, magnitude > 0 ? 'lift' : 'pressure', magnitude, `${cond.label} ${magnitude > 0 ? 'restores' : 'taxes'} food security.`);
-  }
+  score += applyConditions(s, contributors, 'food_security', {
+    scale: 20, effect: ['lift', 'pressure'], tail: ['restores food security.', 'taxes food security.'],
+  });
 
   // Generator food band, via the conserved ledger. The old code read
   // `surplusMonths`/`deficitMonths` — fields foodGenerator never produces — so this
@@ -322,9 +486,13 @@ function deriveFoodSecurity(/** @type {any} */ s) {
   return { score, contributors };
 }
 
-function deriveLaborCapacity(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveLaborCapacity(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Population scaling
@@ -333,21 +501,20 @@ function deriveLaborCapacity(/** @type {any} */ s) {
   else if (pop >= 1000) { score += 5; push(contributors, 'population', 'adequate', +5, `Population ${pop} carries enough hands.`); }
   else if (pop > 0 && pop < 200) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
 
-  // Active conditions that affect labor (plague especially)
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('labor_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 20);
-    if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'pressure', -magnitude, `${cond.label} reduces available labor.`);
-  }
+  score += applyConditions(s, contributors, 'labor_capacity', {
+    scale: 20, mode: 'drain', effect: 'pressure', tail: 'reduces available labor.',
+  });
 
   return { score, contributors };
 }
 
-function derivePublicLegitimacy(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function derivePublicLegitimacy(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Read the conserved legitimacy quantity via the governance ledger. This lens IS
@@ -359,16 +526,9 @@ function derivePublicLegitimacy(/** @type {any} */ s) {
       `Governing legitimacy score: ${gov.legitimacyScore} (${gov.legitimacyLabel || 'unbanded'}).`);
   }
 
-  // Active conditions that affect public_legitimacy (corruption etc.)
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('public_legitimacy')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 15) * direction;
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'lift' : 'pressure', magnitude,
-      `${cond.label} ${direction > 0 ? 'lifts' : 'erodes'} public legitimacy.`);
-  }
+  score += applyConditions(s, contributors, 'public_legitimacy', {
+    scale: 15, effect: ['lift', 'pressure'], tail: ['lifts public legitimacy.', 'erodes public legitimacy.'],
+  });
 
   // A monster-plagued region indicts the crown only when the garrison
   // visibly cannot answer it — plagued threat over a weak measured defense
@@ -386,9 +546,13 @@ function derivePublicLegitimacy(/** @type {any} */ s) {
   return { score, contributors };
 }
 
-function deriveRulingAuthority(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveRulingAuthority(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Combination of governing legitimacy + governing faction power. Legitimacy via the
@@ -418,9 +582,9 @@ function deriveRulingAuthority(/** @type {any} */ s) {
   const governingName = s.powerStructure?.governingName || '';
   if (governingName && profiles.length) {
     const lower = governingName.toLowerCase();
-    let govFaction = profiles.find((/** @type {any} */ p) => p.name && p.name.toLowerCase() === lower);
+    let govFaction = profiles.find(p => p.name && p.name.toLowerCase() === lower);
     if (!govFaction) {
-      govFaction = profiles.find((/** @type {any} */ p) => {
+      govFaction = profiles.find(p => {
         if (!p.name) return false;
         const pn = p.name.toLowerCase();
         // Whole-word startsWith: governingName begins with the faction name
@@ -437,23 +601,21 @@ function deriveRulingAuthority(/** @type {any} */ s) {
     }
   }
 
-  // Conditions that DECLARE ruling_authority, signed by conditionDirection (lift restores,
-  // pressure undermines). The old scan keyed on public_legitimacy/faction_power + only
-  // fired for corruption_exposed, so every ruling_authority condition moved this by 0.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('ruling_authority')) continue;
-    const m = Math.round(cond.severity * 18) * conditionDirection(cond);
-    if (m === 0) continue;
-    score += m;
-    push(contributors, cond.id, m > 0 ? 'restored' : 'undermined', m, `${cond.label} ${m > 0 ? 'rebuilds' : 'cripples'} the ability to govern.`);
-  }
+  // Conditions that DECLARE ruling_authority (lift rebuilds, pressure cripples).
+  score += applyConditions(s, contributors, 'ruling_authority', {
+    scale: 18, effect: ['restored', 'undermined'], tail: ['rebuilds the ability to govern.', 'cripples the ability to govern.'],
+  });
 
   return { score, contributors };
 }
 
-function deriveFactionPower(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveFactionPower(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Healthy faction system = balance with a clear governing center.
@@ -462,7 +624,7 @@ function deriveFactionPower(/** @type {any} */ s) {
   if (profiles.length === 0) {
     return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
   }
-  const powers = profiles.map((/** @type {any} */ p) => p.power || 0);
+  const powers = profiles.map(p => p.power || 0);
   const total = powers.reduce((a, b) => a + b, 0);
   const top = Math.max(...powers);
   const dominantShare = total > 0 ? top / total : 0;
@@ -477,20 +639,20 @@ function deriveFactionPower(/** @type {any} */ s) {
       `No faction holds clear primacy (top share ${Math.round(dominantShare * 100)}%).`);
   }
 
-  // Active conditions affecting faction_power
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('faction_power')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score -= magnitude;
-    push(contributors, cond.id, 'destabilized', -magnitude, `${cond.label} destabilizes the faction system.`);
-  }
+  score += applyConditions(s, contributors, 'faction_power', {
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the faction system.',
+  });
 
   return { score, contributors };
 }
 
-function deriveTradeConnectivity(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveTradeConnectivity(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Trade access from generator config. Canonical semantics map EVERY emitted
@@ -509,11 +671,13 @@ function deriveTradeConnectivity(/** @type {any} */ s) {
 
   // Trade supply chains. The real need-group key is 'trade_entrepot'
   // (supplyChainData.js) — the old 'trade' filter matched nothing, so
-  // trade chains never fed connectivity at all.
+  // trade chains never fed connectivity at all (Cohesion Wave 5 #2).
+  /** @type {DerivedSupplyChainState[]} */
   const chains = deriveAllSupplyChainStates(s);
-  const tradeChains = chains.filter((/** @type {any} */ c) => c.needKey === 'trade_entrepot');
+  const tradeChains = chains.filter(c => c.needKey === 'trade_entrepot');
   for (const c of tradeChains) {
     if (c.status === 'stable') { score += 5; push(contributors, c.id, 'stable', +5, `${c.name} runs normally.`); }
+    // @ts-ignore -- redundant guard (the else-branch already excludes 'stable'); kept byte-identical for the golden master.
     else if (c.status !== 'stable') {
       const m = c.status === 'blocked' || c.status === 'collapsing' ? -18 : -8;
       score += m;
@@ -521,13 +685,10 @@ function deriveTradeConnectivity(/** @type {any} */ s) {
     }
   }
 
-  // A lifted siege/occupation REOPENS routes — gate sign on conditionDirection() (not a 'cut').
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('trade_connectivity')) continue;
-    const magnitude = Math.round(cond.severity * 18) * conditionDirection(cond);
-    score += magnitude;
-    push(contributors, cond.id, magnitude > 0 ? 'restored' : 'cut', magnitude, `${cond.label} ${magnitude > 0 ? 'reopens' : 'disrupts'} trade flows.`);
-  }
+  // A lifted siege/occupation REOPENS routes (lift restores, pressure cuts).
+  score += applyConditions(s, contributors, 'trade_connectivity', {
+    scale: 18, effect: ['restored', 'cut'], tail: ['reopens trade flows.', 'disrupts trade flows.'],
+  });
 
   return { score, contributors };
 }
@@ -542,19 +703,22 @@ const PROSPERITY_BASE = Object.freeze({
   impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
   moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
 });
-/** @param {import('./settlement.schema.js').SimSettlement} s */
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveEconomicCapacity(s) {
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
-  const eco = s.economicState || {};
-  const prosperity = String(eco.prosperity || '').trim();
+  const eco = s.economicState;
+  const prosperity = String(eco?.prosperity || '').trim();
   const base = /** @type {Record<string, number>} */ (PROSPERITY_BASE)[prosperity.toLowerCase()] ?? 50;
   let score = base;
   push(contributors, 'economicState.prosperity', prosperity || 'unknown', base - 50,
     prosperity ? `Prosperity is ${prosperity}.` : 'Prosperity unrecorded: neutral baseline.');
 
   // Diversified economies absorb shocks; concentrated/specialized ones are brittle.
-  const complexity = String(eco.economicComplexity || '').toLowerCase();
+  const complexity = String(eco?.economicComplexity || '').toLowerCase();
   if (/diversified/.test(complexity)) {
     score += 6; push(contributors, 'economicState.economicComplexity', 'diversified', +6, 'A diversified economy is resilient.');
   } else if (/concentrated|specialized/.test(complexity)) {
@@ -562,25 +726,23 @@ function deriveEconomicCapacity(s) {
   }
 
   // Active conditions move economic capacity live — the war-layer seam.
-  for (const cond of cachedActiveConditions(s)) {
-    // war_spoils is the INVERSE of war_drain/war_exhaustion: the CAPPED
-    // benefit a stabilized occupation yields RELIEVES the occupier's war economy
-    // (extends supply endurance) rather than draining it. It is the ONLY economic-
-    // capacity condition that adds a POSITIVE magnitude — and the occupation layer
-    // HARD-CAPS its severity (the anti-snowball containment), so this relief is bounded
-    // no matter how many settlements the occupier holds. A lighter scale than the drain
-    // (war is never free): occupations soften, but never erase, the cost of campaigning.
-    if (cond.archetype === 'war_spoils') {
+  // war_spoils is the INVERSE of war_drain/war_exhaustion: the CAPPED benefit a
+  // stabilized occupation yields RELIEVES the occupier's war economy rather than
+  // draining it — the ONLY economic-capacity condition with a POSITIVE magnitude.
+  // The occupation layer HARD-CAPS its severity (anti-snowball), and it rides a
+  // lighter scale than the drain (war is never free): occupations soften, never
+  // erase, the cost of campaigning. Consumed by the `special` seam BEFORE the
+  // affectedSystems filter, preserving the original in-loop interleave order.
+  score += applyConditions(s, contributors, 'economic_capacity', {
+    scale: 18, mode: 'drain', effect: 'drain', tail: 'drains the war economy.',
+    ownsArchetype: 'war_spoils',
+    special: (cond) => {
+      if (cond.archetype !== 'war_spoils') return null;
       const magnitude = Math.round(cond.severity * 12);
-      score += magnitude;
-      push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
-      continue;
-    }
-    if (!cond.affectedSystems.includes('economic_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 18);
-    score -= magnitude;
-    push(contributors, cond.id, 'drain', -magnitude, `${cond.label} drains the war economy.`);
-  }
+      if (magnitude !== 0) push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
+      return magnitude;
+    },
+  });
 
   return { score, contributors };
 }
@@ -592,8 +754,7 @@ function deriveEconomicCapacity(s) {
 // ADDITIVE: it reads only signals other derivers already read (governance
 // ledger, defense ledger's internal-order score, the safetyProfile crime
 // signals, the criminal faction, and the institution roster), so the existing
-// 15 scores are byte-identical. The lawful/chaotic deity axis will later couple
-// INTO this; this deriver only establishes the variable + a sensible base.
+// 15 scores are byte-identical. The lawful/chaotic deity axis couples INTO this.
 //
 // Government archetypes that concentrate authority (autocracy, military rule,
 // theocracy, monarchy/lordship) lift law_order; anarchic / weakly-governed forms
@@ -601,13 +762,16 @@ function deriveEconomicCapacity(s) {
 // string absent from BOTH lists contributes nothing.
 const LAWFUL_GOVERNMENT_PATTERN = /autocra|authoritarian|militar|junta|despot|tyrann|imperial|monarch|lordship|theocra|magocra|ecclesiastical|magistrat/i;
 const ANARCHIC_GOVERNMENT_PATTERN = /anarch|commune|free city|free council|peasant|frontier|lawless|warlord|failed/i;
-// (Law-and-order institution classification moved to domain/institutionClassify.js
-// as the id-first, rename-proof institutionIsLawOrder — used by deriveLawOrder below.)
+// (Law-and-order institution classification lives in domain/institutionClassify.js
+// as the id-first, rename-proof institutionIsLawOrder — used below.)
 
-/** @param {any} s */
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveLawOrder(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Governing legitimacy: a legitimate order can enforce its law; a contested
@@ -655,8 +819,9 @@ function deriveLawOrder(s) {
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
   // teeth. Id-first (rename-proof) via institutionClassify; a DM-renamed-but-stamped
   // court still counts. id-match === the old name rule for the current corpus.
-  const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
-  const lawCount = institutions.filter((/** @type {any} */ i) => institutionIsLawOrder(i)).length;
+  // LIVE roster only — a calamity-razed court/gaol/watch upholds no law (ruin-filter class).
+  const institutions = liveInstitutions(s);
+  const lawCount = institutions.filter(i => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i))).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
   } else if (lawCount === 1) {
@@ -668,8 +833,8 @@ function deriveLawOrder(s) {
   // Criminal / corruption signals erode the rule of law. Black-market capture is
   // a direct measure of how much crime has displaced lawful commerce; a powerful
   // criminal faction means the streets answer to it, not the law.
-  const safety = s?.economicState?.safetyProfile || s?.safetyProfile || {};
-  if (typeof safety.blackMarketCapture === 'number' && safety.blackMarketCapture > 0) {
+  const safety = s?.economicState?.safetyProfile || s?.safetyProfile;
+  if (safety && typeof safety.blackMarketCapture === 'number' && safety.blackMarketCapture > 0) {
     const c = Math.round(safety.blackMarketCapture * 0.3);
     if (c !== 0) {
       score -= c;
@@ -678,7 +843,7 @@ function deriveLawOrder(s) {
     }
   }
   const profiles = cachedFactionProfiles(s);
-  const criminal = profiles.find((/** @type {any} */ p) => p.archetype === 'criminal');
+  const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number' && criminal.power > 30) {
     const c = Math.round((criminal.power - 30) * 0.35);
     if (c !== 0) {
@@ -690,50 +855,56 @@ function deriveLawOrder(s) {
   // Active conditions move law_order live (the war/religion-layer seam, mirroring
   // deriveEconomicCapacity). corruption_exposed / unrest / occupation-style
   // archetypes that declare law_order press here; signed by the condition's
-  // status. A condition that does NOT declare law_order is ignored, so no-op for
-  // every settlement today (none declare it yet) ⇒ byte-identical.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('law_order')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 15) * direction;
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'restored' : 'eroded', magnitude,
-      `${cond.label} ${direction > 0 ? 'restores' : 'erodes'} the rule of law.`);
-  }
+  // status. [domain-top-state-2] succession_void residual conditions now DECLARE
+  // law_order (its stale →criminal_opportunity alias was dropped), so this scan is
+  // live for lawless-interregnum settlements; a condition that does NOT declare
+  // law_order is still ignored (byte-identical for every other settlement).
+  score += applyConditions(s, contributors, 'law_order', {
+    scale: 15, effect: ['restored', 'eroded'], tail: ['restores the rule of law.', 'erodes the rule of law.'],
+  });
 
-  // Deity term — DORMANT until assigned, exactly like the deity term
-  // in deriveReligiousAuthority. Only a settlement with an embedded
+  // Deity term — DORMANT until assigned, exactly like the deity term in
+  // deriveReligiousAuthority. Only a settlement with an embedded
   // primaryDeitySnapshot whose lawAxis is lawful/chaotic reads this; a deity-free
   // settlement, a legacy 3-axis deity (no lawAxis ⇒ dir 0), and a law-NEUTRAL
-  // deity all see NONE of it ⇒ byte-identical. A lawful patron RAISES order
-  // (oaths kept, courts backed); a chaotic patron LOWERS it (order tolerated to
-  // erode, corruption shrugged at). This is the law-axis lever; the good/evil
-  // axis touches corruption ONSET/EXPOSURE through a SEPARATE path (corruption.js
-  // npcDeityDisfavor), so the two never double-count.
+  // deity all see NONE of it ⇒ byte-identical. A lawful patron RAISES order; a
+  // chaotic patron LOWERS it. This is the law-axis lever; the good/evil axis
+  // touches corruption onset/exposure through a SEPARATE path (corruption.js), so
+  // the two never double-count.
   const lawDir = deityLawDirection(s?.config?.primaryDeitySnapshot);
   if (lawDir !== 0) {
-    const lift = lawDir * DEITY_LAW_TUNING.lawOrderSwing;
+    // Site #9 (a LAW-derived site): piety amplifies the law swing, dampened on the
+    // LAW channel by an opposed runner-up (megaphoneLaw) — the orderly rival muting
+    // a chaotic patron's erosion, or the chaotic rival muting a lawful patron's
+    // grip, per the per-axis opposed-runner-up rule. amp = 1.0 (no record) ⇒
+    // Math.round(±swing) = the original integer lift, suffix omitted ⇒ byte-identical.
+    const { localMult, megaphoneLaw } = pietyLocalAmp(s);
+    const amp = localMult * megaphoneLaw;
+    const lift = Math.round(lawDir * DEITY_LAW_TUNING.lawOrderSwing * amp);
     score += lift;
-    const deity = s.config.primaryDeitySnapshot;
-    push(contributors, deity._deityRef || 'primaryDeity', lawDir > 0 ? 'lawful_patron' : 'chaotic_patron', lift,
-      `${deity.name || 'The patron deity'} (${deity.lawAxis}) ${lawDir > 0
+    const deity = s.config?.primaryDeitySnapshot;
+    push(contributors, deity?._deityRef || 'primaryDeity', lawDir > 0 ? 'lawful_patron' : 'chaotic_patron', lift,
+      `${deity?.name || 'The patron deity'} (${deity?.lawAxis}) ${lawDir > 0
         ? 'strengthens law & order'
-        : 'erodes order and tolerates corruption'}.`);
+        : 'erodes order and tolerates corruption'}${amp !== 1 ? ` (piety ×${amp.toFixed(2)})` : ''}.`);
   }
 
   return { score, contributors };
 }
 
-function deriveHealingCapacity(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveHealingCapacity(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
-  // Offered healing services rescue the harsh "absent" penalty (informal care):
+  // Offered healing services rescue the harsh "absent" penalty (informal care; P3.3b Stage 4b):
   // a town providing wound care / medical care / relief is not "no healing", just not robust.
-  const heal = healingLedger(s);
+  const heal = healingLedger(/** @type {import('./healingLedger.js').HealingSettlementView} */ (s));
   const healers = heal.healerCount;
   if (healers >= 3) {
     score += 12; push(contributors, 'institutions', 'broad', +12, `${healers} healing-capable institutions present.`);
@@ -745,20 +916,20 @@ function deriveHealingCapacity(/** @type {any} */ s) {
     score -= 10; push(contributors, 'institutions', 'absent', -10, 'No dedicated healing institutions found.');
   }
 
-  // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('healing_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 20);
-    score -= magnitude;
-    push(contributors, cond.id, 'overrun', -magnitude, `${cond.label} overwhelms healing capacity.`);
-  }
+  score += applyConditions(s, contributors, 'healing_capacity', {
+    scale: 20, mode: 'drain', effect: 'overrun', tail: 'overwhelms healing capacity.',
+  });
 
   return { score, contributors };
 }
 
-function deriveDefenseReadiness(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveDefenseReadiness(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   const def = s.defenseProfile || {};
@@ -778,22 +949,21 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
     push(contributors, 'defenseProfile', 'walled', +6, 'Defensive walls in place.');
   }
 
-  // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('defense_readiness')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 12) * direction;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'recovering' : 'strained', magnitude,
-      `${cond.label} ${direction > 0 ? 'restores' : 'taxes'} defense readiness.`);
-  }
+  // Active conditions (lift restores, pressure strains)
+  score += applyConditions(s, contributors, 'defense_readiness', {
+    scale: 12, effect: ['recovering', 'strained'], tail: ['restores defense readiness.', 'taxes defense readiness.'],
+  });
 
   return { score, contributors };
 }
 
-function deriveCriminalOpportunity(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveCriminalOpportunity(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Direct: blackMarketCapture if available
@@ -807,7 +977,7 @@ function deriveCriminalOpportunity(/** @type {any} */ s) {
 
   // Faction power: criminal factions
   const profiles = cachedFactionProfiles(s);
-  const criminal = profiles.find((/** @type {any} */ p) => p.archetype === 'criminal');
+  const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number') {
     const c = Math.round((criminal.power - 20) * 0.4);
     if (c !== 0) {
@@ -816,31 +986,25 @@ function deriveCriminalOpportunity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('criminal_opportunity')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score += magnitude;
-    push(contributors, cond.id, 'opening', magnitude, `${cond.label} opens new criminal opportunities.`);
-  }
+  // Active conditions — pressure RAISES criminal opportunity (gain mode).
+  score += applyConditions(s, contributors, 'criminal_opportunity', {
+    scale: 15, mode: 'gain', effect: 'opening', tail: 'opens new criminal opportunities.',
+  });
 
   return { score, contributors };
 }
 
-// How strongly an assigned primary deity lifts religious_authority, by rank.
-// A major god is a pillar of the pantheon; a cult is a fringe following. Absent
-// from this map ⇒ no deity term (the dormancy guarantee — a deity-free
-// settlement never reads any of this).
-export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
-
-/** @param {import('./settlement.schema.js').SimSettlement} s */
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveReligiousAuthority(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   const profiles = cachedFactionProfiles(s);
-  const religious = profiles.find((/** @type {any} */ p) => p.archetype === 'religious');
+  const religious = profiles.find(p => p.archetype === 'religious');
   if (religious && typeof religious.power === 'number') {
     const c = Math.round((religious.power - 20) * 0.6);
     score += c;
@@ -852,39 +1016,46 @@ function deriveReligiousAuthority(s) {
 
   // Active conditions move religious authority live — the religion-layer seam
   // (mirrors deriveEconomicCapacity's condition scan). regional_religious_pressure
-  // now declares `religious_authority`, so a
-  // regional spread presses the substrate here. Filtered on the affectedSystems
-  // contract like every other deriver; signed by the condition's status.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('religious_authority')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, 'religious_pressure', magnitude,
-      `${cond.label} amplifies religious authority.`);
-  }
+  // now declares `religious_authority`, so a regional spread presses the substrate
+  // here. Filtered on the affectedSystems contract like every other deriver;
+  // signed by the condition's status.
+  score += applyConditions(s, contributors, 'religious_authority', {
+    scale: 15, mode: 'gain', effect: 'religious_pressure', tail: 'amplifies religious authority.',
+  });
 
   // Deity term — DORMANT until assigned. Only a settlement with an embedded
   // primaryDeitySnapshot (the embed-on-assign bridge) reads this; a deity-free
-  // settlement sees NONE of it, so its score is unchanged except by the
-  // condition scan above. Tier-scaled: a major god lifts more than a cult. The
-  // snapshot is self-contained — we never touch customContent here.
+  // settlement sees NONE of it, so its score is unchanged except by the condition
+  // scan above. Tier-scaled: a major god lifts more than a cult. The snapshot is
+  // self-contained — we never touch customContent here. DEITY_RANK_AUTHORITY is
+  // imported from the deityConstants.js leaf (the single source; deityEffects.js
+  // re-exports the same object for display consumers).
   const deity = s.config?.primaryDeitySnapshot;
-  if (deity && /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis] != null) {
-    const lift = /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis];
+  const rankLift = deity ? /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[String(deity.rankAxis)] : undefined;
+  if (deity && rankLift != null) {
+    // Site #6: a devout settlement's patron anchors authority harder — the LOCAL
+    // piety amplifier (localMult) scales the rank lift, inside the score clamp.
+    // localMult = 1.0 (no projected record) ⇒ Math.round(rankLift) = rankLift and
+    // the suffix is omitted ⇒ byte-identical for generation / deity-free / tick-0.
+    const { localMult } = pietyLocalAmp(s);
+    const lift = Math.round(rankLift * localMult);
     score += lift;
     push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', lift,
-      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority.`);
+      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority${localMult !== 1 ? ` (piety ×${localMult.toFixed(2)})` : ''}.`);
   }
 
   return { score, contributors };
 }
 
-function deriveHousingPressure(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveHousingPressure(s) {
   // INVERTED: high score = LOW pressure (consistent with the other vars
   // where higher = better). Variable name kept for roadmap parity.
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   const pop = populationOf(s);
@@ -892,12 +1063,13 @@ function deriveHousingPressure(/** @type {any} */ s) {
   const stressors = canonStressors(s);
   // 'migration' added: /migrant/ does not substring-match 'mass_migration',
   // so the generation stress type never registered as housing pressure.
-  const refugeeStress = stressors.find((/** @type {any} */ st) => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
+  // @ts-ignore -- canonStressors() returns Array<object>: entries are heterogeneous (string | {type} | {name}); String() handles every shape.
+  const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
   if (refugeeStress) {
     score -= 18;
     push(contributors, 'stressors.refugee', 'influx', -18, 'Refugee influx strains available housing.');
   } else {
-    // Migration that arrives as a CONDITION — a regional spread or an
+    // Wave 7: migration that arrives as a CONDITION — a regional spread or an
     // authored migration event produces regional_migration_pressure without
     // any local stressor — must still press housing, modestly (a default-
     // severity wave reads -6 against the local stressor's -18). Skipped when
@@ -905,21 +1077,21 @@ function deriveHousingPressure(/** @type {any} */ s) {
     // that stressor, and counting both would double-penalize one crisis.
     // Filtered on the affectedSystems contract like every other deriver, so
     // the explanation/AI surfaces list exactly what the substrate charges.
-    for (const cond of cachedActiveConditions(s)) {
-      if (!cond.affectedSystems.includes('housing_pressure')) continue;
-      const magnitude = Math.round(cond.severity * 12);
-      if (magnitude === 0) continue;
-      score -= magnitude;
-      push(contributors, cond.id, 'influx', -magnitude, `${cond.label} pushes arrivals into limited housing.`);
-    }
+    score += applyConditions(s, contributors, 'housing_pressure', {
+      scale: 12, mode: 'drain', effect: 'influx', tail: 'pushes arrivals into limited housing.',
+    });
   }
   if (pop >= 5000) { score -= 4; push(contributors, 'population', 'dense', -4, `Population ${pop} pushes housing demand.`); }
   return { score, contributors };
 }
 
-function deriveInfrastructureCondition(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveInfrastructureCondition(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Anchor infrastructure to the persisted defense scores via the conserved defense ledger:
@@ -933,8 +1105,9 @@ function deriveInfrastructureCondition(/** @type {any} */ s) {
     push(contributors, 'defenseProfile.scores', 'measured', c,
       `Fortification + logistics scores imply infrastructure ~${Math.round(infra)}.`);
   } else {
-    // No defense profile (un-generated / legacy) — infer from institution count.
-    const instCount = Array.isArray(s.institutions) ? s.institutions.length : 0;
+    // No defense profile (un-generated / legacy) — infer from LIVE institution count
+    // (ruined rows must not inflate inferred infrastructure; ruin-filter class).
+    const instCount = liveInstitutions(s).length;
     if (instCount >= 15) { score += 10; push(contributors, 'institutions', 'dense', +10, `${instCount} institutions imply robust infrastructure.`); }
     else if (instCount <= 5) { score -= 6; push(contributors, 'institutions', 'thin', -6, `${instCount} institutions imply thin infrastructure.`); }
   }
@@ -942,9 +1115,13 @@ function deriveInfrastructureCondition(/** @type {any} */ s) {
   return { score, contributors };
 }
 
-function deriveMagicalStability(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveMagicalStability(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Read via the conserved magic ledger (canonical band vocabulary). Behaviour-preserving:
@@ -957,30 +1134,29 @@ function deriveMagicalStability(/** @type {any} */ s) {
 
   // Arcane factions present?
   const profiles = cachedFactionProfiles(s);
-  const arcane = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane');
+  const arcane = profiles.find(p => p.archetype === 'arcane');
   if (arcane) {
     score += 5;
     push(contributors, arcane.id, 'arcane_present', +5, `${arcane.name} provides arcane oversight.`);
   }
 
-  // Active conditions that affect magical_stability (the
-  // magical_instability archetype the deadzone/instability stressor family
-  // promotes to). Until this scan, magical_stability was the one substrate
-  // variable no condition could reach.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('magical_stability')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'destabilized', -magnitude, `${cond.label} destabilizes the local weave.`);
-  }
+  // Active conditions that affect magical_stability (the magical_instability
+  // archetype the deadzone/instability stressor family promotes to). Until this
+  // scan, magical_stability was the one substrate variable no condition reached.
+  score += applyConditions(s, contributors, 'magical_stability', {
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the local weave.',
+  });
 
   return { score, contributors };
 }
 
-function deriveSocialTrust(/** @type {any} */ s) {
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
+function deriveSocialTrust(s) {
   let score = 50;
-  /** @type {any[]} */
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Strongly downstream of public legitimacy. Read via the conserved governance
@@ -996,15 +1172,13 @@ function deriveSocialTrust(/** @type {any} */ s) {
   }
 
   // Conditions that affect social_trust
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('social_trust')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score -= magnitude;
-    push(contributors, cond.id, 'erodes', -magnitude, `${cond.label} erodes communal trust.`);
-  }
+  score += applyConditions(s, contributors, 'social_trust', {
+    scale: 15, mode: 'drain', effect: 'erodes', tail: 'erodes communal trust.',
+  });
 
   // Dominant-NPC removal stress
-  const dominantNpcs = deriveAllNpcProfiles(s).filter((/** @type {any} */ p) => p.rank === 'dominant');
+  // @ts-ignore -- deriveAllNpcProfiles (npcProfile.js, owned elsewhere) is still untyped; once it returns NpcProfile[] this ignore is inert.
+  const dominantNpcs = deriveAllNpcProfiles(s).filter(p => p.rank === 'dominant');
   if (dominantNpcs.length === 0) {
     score -= 4;
     push(contributors, 'npcs', 'no_dominant', -4, 'No dominant figures anchor public confidence.');
@@ -1015,6 +1189,7 @@ function deriveSocialTrust(/** @type {any} */ s) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
+/** @type {Readonly<Record<string, (s: CausalSettlementSource) => DeriverResult>>} */
 const DERIVERS = Object.freeze({
   food_security:           deriveFoodSecurity,
   labor_capacity:          deriveLaborCapacity,
@@ -1034,14 +1209,36 @@ const DERIVERS = Object.freeze({
   law_order:               deriveLawOrder,
 });
 
-function finalizeVariable(/** @type {any} */ name, /** @type {any} */ raw, /** @type {any} */ contributors) {
-  const score = Math.max(0, Math.min(100, Math.round(raw)));
+/**
+ * Orient a raw 0-100 variable score onto the BAND axis. The band ladder is
+ * higher-is-better; a lower_is_better variable therefore walks it from the other
+ * end. The single source for that flip, so finalizeVariable and every fallback
+ * band computed elsewhere in this file cannot drift apart.
+ * @param {string} name
+ * @param {number} score
+ * @returns {number}
+ */
+function orientCausalScore(name, score) {
+  return variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
+}
+
+/**
+ * @param {string} name
+ * @param {number} raw
+ * @param {CausalContributor[]} contributors
+ * @returns {SystemVariable}
+ */
+function finalizeVariable(name, raw, contributors) {
+  // A non-finite raw (malformed contributor) would clamp to NaN and poison the
+  // band + every downstream delta; fall back to the 50 neutral deriver baseline.
+  const safeRaw = Number.isFinite(raw) ? raw : 50;
+  const score = Math.max(0, Math.min(100, Math.round(safeRaw)));
   // Band off the polarity-ADJUSTED score. criminal_opportunity is the lone
   // lower-is-better variable: a high score means rampant crime, which must read
   // as a problem band (strained/critical), not "surplus"/Abundant. The raw score
   // is kept as-is — pressureModel and the delta renderers handle polarity via
   // variablePolarity() themselves; only the qualitative band flips here.
-  const banded = variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
+  const banded = orientCausalScore(name, score);
   return {
     variable: name,
     score,
@@ -1056,21 +1253,21 @@ function finalizeVariable(/** @type {any} */ name, /** @type {any} */ raw, /** @
  * about food security).
  *
  * @param {string} variable   One of SYSTEM_VARIABLES.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {any}    SystemVariable, or null for unknown variable.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {SystemVariable | null}    SystemVariable, or null for unknown variable.
  */
 export function deriveSystemVariable(variable, settlement) {
-  if (!variable || !(/** @type {any} */ (DERIVERS)[variable])) return null;
+  if (!variable || !DERIVERS[variable]) return null;
   if (!settlement) return finalizeVariable(variable, 50, []);
-  const { score, contributors } = /** @type {any} */ (DERIVERS)[variable](settlement);
+  const { score, contributors } = DERIVERS[variable](settlement);
   return finalizeVariable(variable, score, contributors);
 }
 
 /**
  * Derive the full causal substrate.
  *
- * @param {any} settlement
- * @returns {any} {
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {CausalState} {
  *   variables: { [name]: SystemVariable },
  *   bands:     { [name]: CausalBand },
  *   scores:    { [name]: number },
@@ -1079,21 +1276,21 @@ export function deriveSystemVariable(variable, settlement) {
  * }
  */
 export function deriveCausalState(settlement) {
-  /** @type {any} */
+  /** @type {Record<string, SystemVariable>} */
   const variables = {};
   for (const name of SYSTEM_VARIABLES) {
     if (!settlement) {
       variables[name] = finalizeVariable(name, 50, []);
     } else {
-      const { score, contributors } = /** @type {any} */ (DERIVERS)[name](settlement);
+      const { score, contributors } = DERIVERS[name](settlement);
       variables[name] = finalizeVariable(name, score, contributors);
     }
   }
-  /** @type {any} */
+  /** @type {Record<string, CausalBand>} */
   const bands = {};
-  /** @type {any} */
+  /** @type {Record<string, number>} */
   const scores = {};
-  /** @type {any} */
+  /** @type {Record<CausalBand, string[]>} */
   const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [] };
   for (const name of SYSTEM_VARIABLES) {
     const v = variables[name];
@@ -1106,44 +1303,62 @@ export function deriveCausalState(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Convenience accessor — band for one variable. */
-export function bandForVariable(/** @type {any} */ settlement, /** @type {any} */ variable) {
+/**
+ * Convenience accessor — band for one variable.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @param {string} variable
+ * @returns {CausalBand | null}
+ */
+export function bandForVariable(settlement, variable) {
   const v = deriveSystemVariable(variable, settlement);
   return v ? v.band : null;
 }
 
-/** Returns all variables currently at strained/critical/collapsed bands. */
-export function pressuresOn(/** @type {any} */ settlement) {
+/**
+ * Returns all variables currently at strained/critical/collapsed bands.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {string[]}
+ */
+export function pressuresOn(settlement) {
   const state = deriveCausalState(settlement);
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
 }
 
-// Problem-term phrasing for lower_is_better variables. Their band is computed
-// off the INVERTED score, so a 'collapsed'/'critical' band means the underlying
-// value (e.g. criminal_opportunity) is HIGH — a problem. Reusing the raw band
-// word in the summary ("Collapsed: criminal_opportunity") reads as a positive
-// (crime collapsed = good) when it actually means rampant crime. These lines
-// phrase the worst bands in problem terms instead.
-const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
+// THE LOWER-IS-BETTER LADDER — the display word for every band a lower_is_better
+// variable can carry, worst to best. Their band is computed off the INVERTED
+// score, so the raw band word says the opposite of the truth at BOTH ends:
+//   • a 'collapsed'/'critical' band means the underlying value (e.g.
+//     criminal_opportunity) is HIGH, and "Collapsed: criminal_opportunity" reads
+//     as a positive (crime collapsed = good) when it means rampant crime;
+//   • a benign 'adequate'/'surplus' band means the value is LOW, and the pill
+//     "Criminal opportunity · ADEQUATE" reads as the crime being adequate.
+// The first three words closed the problem end. The benign two close the other,
+// so no band can reach a reader carrying the raw word. The ladder is total over
+// CAUSAL_BANDS by construction, and the walker
+// (tests/lint/bandPolaritySingleSourceScan.test.js) holds it that way.
+const LOWER_IS_BETTER_BAND_TERM = Object.freeze({
   collapsed: 'Rampant',
   critical:  'Acute',
   strained:  'Elevated',
+  adequate:  'Contained',
+  surplus:   'Negligible',
 });
 
 /**
- * Polarity-correct display word for a variable's band — the SINGLE source both
- * summarizeCausalState and the simulation causal view route through, so the
- * lower_is_better inversion lives in exactly one place. Higher-is-better bands
- * read the raw word; a lower_is_better 'collapsed' (crime RAMPANT, not gone) is
- * computed off the INVERTED score (finalizeVariable) so it is re-phrased as a
- * problem term. Benign bands never carry a lower_is_better var, so they fall through.
+ * Polarity-correct display word for a variable's band — the SINGLE source every
+ * renderer, summarizeCausalState and the simulation causal view route through, so
+ * the lower_is_better inversion lives in exactly one place. Higher-is-better bands
+ * read the raw word; a lower_is_better band is computed off the INVERTED score
+ * (finalizeVariable) and is re-worded at both ends of the ladder: 'collapsed' is
+ * crime RAMPANT rather than gone, and 'adequate' is crime CONTAINED rather than
+ * crime being an adequate amount.
  * @param {string} name  substrate variable name
  * @param {string} band  surplus/adequate/strained/critical/collapsed
  * @returns {string}
  */
 export function causalBandWord(name, band) {
   if (variablePolarity(name) === 'lower_is_better') {
-    return /** @type {any} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band] || band;
+    return /** @type {Record<string, string>} */ (LOWER_IS_BETTER_BAND_TERM)[band] || band;
   }
   return band;
 }
@@ -1151,23 +1366,28 @@ export function causalBandWord(name, band) {
 /**
  * Human-readable summary of what's wrong (or right) with the settlement
  * right now. Returns an array of single-line strings.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {string[]}
  */
-export function summarizeCausalState(/** @type {any} */ settlement) {
+export function summarizeCausalState(settlement) {
   const state = deriveCausalState(settlement);
+  /** @type {string[]} */
   const out = [];
   const cap = (/** @type {string} */ w) => w.charAt(0).toUpperCase() + w.slice(1);
-  const isLower = (/** @type {any} */ name) => variablePolarity(name) === 'lower_is_better';
+  const isLower = (/** @type {string} */ name) => variablePolarity(name) === 'lower_is_better';
   // Higher-is-better problems first (raw word), then lower_is_better (problem
   // terms) — every line's word comes from causalBandWord, one place for polarity.
-  for (const only of [(/** @type {any} */ n) => !isLower(n), isLower]) {
-    for (const band of ['collapsed', 'critical', 'strained']) {
+  /** @type {((n: string) => boolean)[]} */
+  const orderings = [(n) => !isLower(n), isLower];
+  for (const only of orderings) {
+    for (const band of /** @type {CausalBand[]} */ (['collapsed', 'critical', 'strained'])) {
       const names = state.summary[band].filter(only);
       if (names.length) out.push(`${cap(causalBandWord(names[0], band))}: ${names.join(', ')}.`);
     }
   }
   // Surplus lists only higher-is-better vars: a lower_is_better var in 'surplus'
   // means the problem is ABSENT (crime contained) — not worth a misleading line.
-  const surplus = state.summary.surplus.filter((/** @type {any} */ n) => !isLower(n));
+  const surplus = state.summary.surplus.filter((/** @type {string} */ n) => !isLower(n));
   if (surplus.length) out.push(`Surplus: ${surplus.join(', ')}.`);
   if (out.length === 0) out.push('All variables are within the adequate band.');
   return out;
@@ -1196,7 +1416,11 @@ const LOWER_IS_BETTER = new Set([
   'criminal_opportunity',
 ]);
 
-export function variablePolarity(/** @type {any} */ variable) {
+/**
+ * @param {string} variable
+ * @returns {'higher_is_better'|'lower_is_better'}
+ */
+export function variablePolarity(variable) {
   if (HIGHER_IS_BETTER.has(variable)) return 'higher_is_better';
   if (LOWER_IS_BETTER.has(variable))  return 'lower_is_better';
   return 'higher_is_better';
@@ -1205,11 +1429,18 @@ export function variablePolarity(/** @type {any} */ variable) {
 // ── compareCausalState ──────────────────────────────────────────────────
 //
 // Returns a structured delta list for two CausalState snapshots. Used
-// by the event pipeline so the substrate-layer delta is
+// by the Phase 18 event pipeline so the substrate-layer delta is
 // reported alongside the legacy 4-dimension delta. Mirrors the shape of
 // compareSystemState so consumers can render the two side-by-side.
 
-const VARIABLE_LABEL = Object.freeze({
+/**
+ * Authored, human-readable label for each substrate variable. The single source
+ * of the spaced display name (the public Compendium's Living-World tab reads this
+ * through gen:compendium-data rather than splitting the snake_case id at render
+ * time). Every SYSTEM_VARIABLES entry must have a label here.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const VARIABLE_LABEL = Object.freeze({
   food_security:           'Food security',
   labor_capacity:          'Labor capacity',
   public_legitimacy:       'Public legitimacy',
@@ -1228,15 +1459,34 @@ const VARIABLE_LABEL = Object.freeze({
   law_order:               'Law & order',
 });
 
-function explainCausalDelta(/** @type {any} */ variable, /** @type {any} */ before, /** @type {any} */ after, /** @type {any} */ change, /** @type {any} */ bandBefore, /** @type {any} */ bandAfter) {
-  const label = /** @type {any} */ (VARIABLE_LABEL)[variable] || variable;
+/**
+ * @param {string} variable
+ * @param {number} before
+ * @param {number} after
+ * @param {number} change
+ * @param {CausalBand} bandBefore
+ * @param {CausalBand} bandAfter
+ * @returns {string}
+ */
+function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {
+  const label = VARIABLE_LABEL[variable] || variable;
   const polar = variablePolarity(variable);
   const dir = change > 0 ? 'rose' : 'fell';
   const mag = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
   const better = (polar === 'higher_is_better' && change > 0) ||
                  (polar === 'lower_is_better'  && change < 0);
+  // Band WORDS, not raw bands: a lower_is_better variable's band is computed off
+  // the inverted score, so the raw pair reads backwards in a sentence ("Criminal
+  // opportunity rose sharply (adequate → collapsed)" says crime collapsed while
+  // it in fact became rampant). causalBandWord is the one place that re-phrasing
+  // lives; the other 15 variables are byte-unchanged.
+  // Lower-cased for sentence context: the raw band vocabulary is already
+  // lower-case, so this only touches the three problem terms and leaves the
+  // fifteen higher-is-better variables byte-identical.
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '. Pressure increased'}`;
+    const wordBefore = causalBandWord(variable, bandBefore).toLowerCase();
+    const wordAfter  = causalBandWord(variable, bandAfter).toLowerCase();
+    return `${label} ${dir} ${mag} (${wordBefore} → ${wordAfter})${better ? '' : '. Pressure increased'}`;
   }
   return `${label} ${dir} ${mag}${better ? '' : '. Pressure increased'}`;
 }
@@ -1248,9 +1498,14 @@ function explainCausalDelta(/** @type {any} */ variable, /** @type {any} */ befo
  * Each entry:
  *   { variable, before, after, change, bandBefore, bandAfter,
  *     polarity, explanation }
+ *
+ * @param {CausalState | null | undefined} before
+ * @param {CausalState | null | undefined} after
+ * @returns {CausalStateDelta[]}
  */
-export function compareCausalState(/** @type {any} */ before, /** @type {any} */ after) {
+export function compareCausalState(before, after) {
   if (!before || !after) return [];
+  /** @type {CausalStateDelta[]} */
   const out = [];
   for (const name of SYSTEM_VARIABLES) {
     const b = before.scores?.[name];
@@ -1258,8 +1513,11 @@ export function compareCausalState(/** @type {any} */ before, /** @type {any} */
     if (typeof b !== 'number' || typeof a !== 'number') continue;
     const change = a - b;
     if (change === 0) continue;
-    const bandBefore = before.bands?.[name] || causalBand(b);
-    const bandAfter  = after.bands?.[name]  || causalBand(a);
+    // The fallbacks orient the score exactly as finalizeVariable does; banding a
+    // lower_is_better score raw here would have produced the inverse of the band
+    // the model itself carries whenever a snapshot arrived without `bands`.
+    const bandBefore = before.bands?.[name] || causalBand(orientCausalScore(name, b));
+    const bandAfter  = after.bands?.[name]  || causalBand(orientCausalScore(name, a));
     out.push({
       variable: name,
       before: b,

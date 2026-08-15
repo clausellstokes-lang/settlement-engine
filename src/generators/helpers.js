@@ -6,8 +6,15 @@
  *  - Institution classification  (getInstitutionNames)
  *  - Core influence scoring      (getInstFlags, getStressFlags)
  *  - Trade/water dependency      (evaluateWaterDependency)
- *  - NPC secret content          (STRESS_INSTITUTION_EFFECTS)
- *  - Shared utility functions    (pickRandom, clamp, replaceTokens, …)
+ *  - Shared utility functions    (pickRandom, replaceTokens, …)
+ *
+ * NOT for clamp. src/kernel/math.js is the ONE clamp primitive, and its ADOPTION
+ * rule binds here: new generator code imports clamp/clamp01 from ../kernel/math.js.
+ * The `clamp` exported below is a frozen legacy copy carrying the PASSTHROUGH
+ * non-finite policy (NaN rides through) where the kernel clamps a non-finite input
+ * to `lo`. It survives only because scripts/.clamp-primitive-baseline.json freezes
+ * divergent copies rather than silently changing their semantics — a baseline row,
+ * not a recommendation.
  */
 
 import {
@@ -16,8 +23,7 @@ import {
 } from '../data/constants.js';
 // chance/pick/randInt come from rngContext directly (not from constants.js)
 // since 2026-04 — eliminates the data→engine→data circular chunk warning.
-import { chance, pick, randInt } from './rngContext.js';
-export { STRESS_INSTITUTION_EFFECTS } from '../data/stressTypes.js';
+import { chance, pick, randInt } from '../kernel/rngContext.js';
 
 
 // ─── Re-export primitives ────────────────────────────────────────────────────
@@ -38,17 +44,16 @@ const _isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 
 // ─── Math utilities ──────────────────────────────────────────────────────────
 
-/** Clamp a value between lo and hi (defaults: 0–100). Moved to the mathHelpers
- *  leaf to break the helpers ↔ priorityHelpers ESM cycle; re-exported here so
- *  every existing `import { clamp } from './helpers.js'` keeps working. */
-export { clamp } from './mathHelpers.js';
+/** Clamp a value between lo and hi (defaults: 0–100). PASSTHROUGH on a non-finite
+ *  input — NaN survives. Frozen: new code takes clamp from ../kernel/math.js. */
+export const clamp = (val, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, val));
 
 /** Convert a 0–100 priority slider to a multiplier centred at 1.0 when priority = 50. */
 export const priorityToMultiplier = (priority = 50) => Math.max(0, (priority ?? 50) / 50);
 
 // ─── Random utilities ────────────────────────────────────────────────────────
 
-import { random as _rng, chance as _chance, pick as _pick } from './rngContext.js';
+import { random as _rng, chance as _chance, pick as _pick } from '../kernel/rngContext.js';
 
 /** Random boolean: true with probability p. */
 export const random01 = (p) => _chance(p);

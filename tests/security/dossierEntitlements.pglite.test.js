@@ -45,6 +45,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '108_dossier_entitlements.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
@@ -194,7 +196,7 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
         public.dossier_entitlements, public.single_dossier_purchases, public.settlements
         to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`
@@ -301,7 +303,7 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     });
 
     it('the claim is ONE guarded UPDATE (source pin: race-safe active → clawed_back)', () => {
-      const body = SRC.match(/create or replace function public\.clawback_dossier_entitlement[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const body = SRC.match(/^create or replace function public\.clawback_dossier_entitlement[\s\S]*?\$\$;/im)?.[0] ?? '';
       expect(body).toMatch(/update public\.dossier_entitlements[\s\S]*?set status = 'clawed_back'[\s\S]*?where stripe_session_id = btrim\(p_session_id\)[\s\S]*?and status = 'active'[\s\S]*?returning/i);
     });
   });
@@ -377,7 +379,7 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     });
 
     it('the purchase claim is ONE guarded UPDATE (source pin: race-safe unclaimed → claimed)', () => {
-      const body = SRC.match(/create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const body = SRC.match(/^create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/im)?.[0] ?? '';
       expect(body).toMatch(/update public\.single_dossier_purchases[\s\S]*?set status = 'claimed'[\s\S]*?and status = 'unclaimed'[\s\S]*?returning/i);
     });
   });
@@ -409,7 +411,7 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     });
 
     it('the RPC checks entitlement BEFORE the claiming update (preserve-before-consume)', () => {
-      const body = SRC109.match(/create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const body = SRC109.match(/^create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/im)?.[0] ?? '';
       const checkIdx = body.search(/from public\.dossier_entitlements\s+where user_id = p_user and save_id = p_save_id/i);
       const claimIdx = body.search(/update public\.single_dossier_purchases[\s\S]*?set status = 'claimed'/i);
       expect(checkIdx).toBeGreaterThan(-1);
@@ -421,6 +423,10 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
   // ── no email-claim residue (the stripped cross-device design) ────────────────
   describe('no email-claim residue — the cancelled cross-device design is gone', () => {
     it('the stripped RPCs are absent from the migration', () => {
+      // DELIBERATELY UNANCHORED (negative-presence): these exist to catch a
+      // future RE-CREATION at ANY indentation, so a `^` anchor would weaken
+      // them. Pinned in netCurrentExtractorAnchor.walker FROZEN_UNANCHORED —
+      // do not "fix" in an anchoring sweep.
       expect(SRC).not.toMatch(/create or replace function public\.list_my_unclaimed_dossier_purchases/i);
       expect(SRC).not.toMatch(/create or replace function public\.claim_dossier_purchase_by_email/i);
     });
@@ -438,6 +444,9 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     it('buyer_email_lower is never used as a claim key — no RPC body filters on it', () => {
       // Audit/support-only: the column is written by the webhook but no claim path
       // reads it. A future email-match regression would reintroduce a WHERE on it.
+      // DELIBERATELY UNANCHORED (feeds the not.toMatch below): anchoring could
+      // only SHRINK the audited corpus and let an indented future body escape
+      // the negative check. Pinned in netCurrentExtractorAnchor.walker.
       const rpcBodies = SRC.match(/create or replace function public\.[\s\S]*?\$\$;/gi)?.join('\n') ?? '';
       expect(rpcBodies).not.toMatch(/where[\s\S]{0,80}buyer_email_lower/i);
     });

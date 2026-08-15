@@ -17,6 +17,11 @@ import { registerStep } from '../pipeline.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
 } from '../../domain/corruption.js';
+// Phase 4 W-F5 stage 2: corruption onset finally leaves RECEIPTS — one trace per
+// corrupted NPC naming the flaw, the climate, and the roll odds (the ledger's
+// long-owed explanation layer; rides the same generator-golden regen as the
+// starting pantheon). Deterministic: recordTrace stamps ts off ctx._traceClock.
+import { recordTrace } from '../../domain/trace.js';
 
 // Corrupted short-term goal by corruption vector — replaces the NPC's normal
 // short goal so their motivation reads as compromised at the table.
@@ -36,13 +41,9 @@ registerStep('corruptionPass', {
   // economyReconcilePass (not generateEconomy): the corruption climate reads
   // economicState, which the reconcile step may replace after the faction pull.
   deps: ['generatePopulation', 'economyReconcilePass'],
-  reads: ['economicState', 'institutions', 'npcs'], // ctx keys this step consumes that another step produces
+  reads: ['economicState', 'institutions', 'npcs'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
-  // Stamps corruption onto npc objects in place. `factions` is a REAL entry, not
-  // over-declaration: faction roster entries share object references with these
-  // npcs, so mutating an npc also mutates ctx.factions — the strict data-flow
-  // contract (pipelineContract) detects the change and requires it declared here.
-  mutates: ['factions', 'npcs'],
+  mutates: ['factions', 'npcs'], // stamps corruption onto the rosters in place (A+ P1.7)
   phase: 'population',
 }, (ctx, rng) => {
   const npcs = Array.isArray(ctx.npcs) ? ctx.npcs : [];
@@ -74,5 +75,26 @@ registerStep('corruptionPass', {
     if (npc.goal && typeof npc.goal === 'object') {
       npc.goal = { ...npc.goal, short: CORRUPT_SHORT_GOAL[vector] || CORRUPT_SHORT_GOAL.greed };
     }
+
+    // The receipt: WHY this NPC was generated already corrupted, and WHAT the
+    // corruption feeds. Emitted ONLY on onset (a clean roster stays traceless ⇒
+    // byte-identical), so the golden-diff class is exactly the corrupted cohort.
+    recordTrace(ctx, {
+      targetType: 'npc',
+      targetId: String(npc.id || npc.name || 'npc'),
+      step: 'corruptionPass',
+      result: 'corrupted',
+      causes: [
+        { source: `flaw.${flaw}`, effect: `corruption vector: ${vector}`,
+          reason: `A ${flaw} flaw gave the rot its opening.` },
+        { source: 'corruption.climate', effect: `onset chance ${p.toFixed(3)}`,
+          reason: `Criminal institutions (${climate.criminalInstitutions.join(', ')}) sustain a live corruption climate here.` },
+      ],
+      downstreamEffects: [
+        { target: crimInst, effect: 'gains a compromised insider' },
+        { target: guild, effect: 'holds leverage',
+          reason: 'The corrupt tie runs to the local underworld.' },
+      ],
+    });
   }
 });

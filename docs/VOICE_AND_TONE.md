@@ -62,6 +62,24 @@ Overexplanation drains the reader's energy and attention, and it breaks immersio
 - Do: "The captain is corrupt because the wall fund is short."
 - Don't: "The captain is corrupt because the wall fund is short. The shortage in the wall fund is why the captain turned corrupt." (The second sentence is the first sentence backwards.)
 
+**9. Craft-true, never archaeology.**
+*(Owner-approved 2026-08-04, ribbon V4.1 counsel pass. This one governs how the product describes its own MATERIALS, and it exists because the chrome now has some.)*
+
+The header is a war arrow: a cedar shaft, a grey-goose fletching, silk whipping, a brand burned into the wood, a wax seal in the name. Every one of those is a real craft object made a real way, and the copy is allowed to know that. What it is never allowed to do is turn into a museum label.
+
+CRAFT-TRUE means the noun is the right noun and the verb is the right verb: a fletching is *bound*, a whipping is *wound*, wax is *pressed*, a brand is *burned*. That is the same discipline as pillar 1 — the concrete civic noun — applied to the objects the interface is made of instead of the ones the settlement is made of.
+
+ARCHAEOLOGY is what happens when the craft becomes the subject. The moment copy explains the object to the reader — its period, its provenance, the research behind it, why grey goose rather than turkey — the archivist has stopped filing facts about the world and started giving a tour of the furniture. Nobody came here for the furniture.
+
+- Do: "Sealed. Filed." (The wax is doing the work; the sentence never mentions it.)
+- Don't: "Sealed with a wax impression of the house device, as a medieval charter would be."
+- Do: "Bound and kept."
+- Don't: "Bound the way an English war arrow's fletching was bound, with silk whipping at both ends."
+- Do (a caption for the mark, if one is ever needed): "The house arrow."
+- Don't: "A grey-goose-fletched war arrow in the fifteenth-century English pattern."
+
+⚠️ THE TEST: if a sentence would still be true and useful with the craft noun swapped for a plain one, it is craft-true. If the sentence exists in order to tell the reader about the craft, it is archaeology and it goes. The same rule governs alt text and any future about-the-design page: describe what the reader is looking at, never what it was modelled on.
+
 ---
 
 ## 3. Hard Mechanical Rules
@@ -212,7 +230,9 @@ When two replacements both fit, choose the one that yields **one idea per senten
 
 ## 7. Enforcement
 
-A guard test (`tests/copy/voiceMechanics.test.js`) walks the centralized copy objects (`en` and `COPY`) and fails the build if any user-facing string contains an em dash or an exclamation point. New copy cannot reintroduce the tells. The data files the dossier reads are swept for the same rules; extend the guard to them as composition coverage grows.
+A guard test (`tests/copy/voiceMechanics.test.js`) walks the centralized copy registries (`en`, `landing`, `pricingPage`, `footer`, `deityAuthoring`) and fails the build if any user-facing string value contains an em dash or an exclamation point. New copy cannot reintroduce the tells. The prose source files the dossier and the engine read (`src/data/*.js`, `src/domain/**/*.js`) are scanned for the same tells in their string literals and held to a shrink-only per-file baseline: existing debt burns down wave by wave, and no file's count may grow. A sibling walker (`tests/copy/proseLeak.test.js`) renders the reader-facing composers (letter, world book, advance report) over a fixture world and fails the build if an engine token — a bare tick counter, a camelCase rules flag, a schema field name, a raw id — reaches the output prose.
+<!-- @enforced-by tests/copy/voiceMechanics.test.js, tests/copy/proseLeak.test.js -->
+
 
 ---
 

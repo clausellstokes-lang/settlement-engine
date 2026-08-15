@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -31,7 +33,9 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  net-current behavior, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
+  // prose quoting the statement (see tests/security/moneyRpcNetCurrentGuards.test.js).
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   for (const f of files) {
     const matches = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8').match(re);
@@ -121,7 +125,11 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         gallery_facet_member_band text,
         gallery_facet_at_war boolean,
         gallery_facet_dominant_culture text,
-        gallery_facet_tier_spread text
+        gallery_facet_tier_spread text,
+        -- Migration 147 columns (GALLERY-2 phase 2): the net-current publish_map
+        -- (149) stamps these and list_gallery_maps (149) projects them.
+        gallery_facet_aliveness integer,
+        gallery_facet_world_age text
       );
       -- Migration 076 added a LEFT JOIN onto profiles.external_name to resolve
       -- the map AUTHOR by owner id. This test exercises member_count, not the
@@ -223,7 +231,7 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     // Stash the IDOR campaign envelope for that test.
     db.__idorCampaign = idorCampaign;
     db.__campaign = campaign;
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const memberCountFor = async (slug) => {
     const rows = (await db.query(`select slug, member_count from public.list_gallery_maps(0, 24)`)).rows;

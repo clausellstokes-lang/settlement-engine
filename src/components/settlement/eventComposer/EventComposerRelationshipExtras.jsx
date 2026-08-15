@@ -2,21 +2,22 @@
  * EventComposerRelationshipExtras — the OPTIONAL relationship-affecting inputs
  * that hang off war / infiltration stressors and trade routes:
  *
- *   #1 Instigating neighbour (APPLY_STRESSOR, war-type) — names the neighbour
- *      behind a siege / wartime / occupation / betrayal. On apply the home
- *      settlement's view of that neighbour sours to 'hostile' (and, in a
- *      campaign with the war layer on, that neighbour deploys against this
- *      settlement — see #2).
- *   #3 Instigating neighbour (APPLY_STRESSOR, infiltrated) — names the neighbour
- *      behind an infiltration. On apply the home settlement's view of that
- *      neighbour sours to a LIGHTER, DM-chosen relationship (rival / cold war /
- *      hostile, default rival). Espionage, not an army: no war deployment.
- *   #6 Target settlement (OPENED_TRADE_ROUTE) — opens a trade route with ANY
- *      OTHER settlement in the same campaign, not only a pre-linked neighbour.
+ *   Instigating neighbour (APPLY_STRESSOR, war-type) — names the neighbour behind
+ *      a siege / wartime / occupation / betrayal. On apply the home settlement's
+ *      view of that neighbour sours to 'hostile' (mutateWorld.js applyStressor).
+ *   Instigating neighbour (APPLY_STRESSOR, infiltrated) — names the neighbour
+ *      behind an infiltration. On apply the home settlement's view sours to a
+ *      LIGHTER, DM-chosen relationship (rival / cold war / hostile, default rival).
+ *   Target settlement (OPENED_TRADE_ROUTE) — opens a trade route with ANY OTHER
+ *      settlement in the same campaign, not only a pre-linked neighbour; the
+ *      handler ADDS a neighbourNetwork link for it (mutateWorld.js:273-287).
  *
  * All are optional and settlement-local (the home settlement's view only) on the
- * relationship flip; State lives in the parent EventComposer; this component is
- * presentational.
+ * relationship flip; state lives in the parent EventComposer; this is presentational.
+ *
+ * BATCH CAVEAT: batch.js eventConsumes hard-requires a linked 'neighbour' ref for
+ * OPENED_TRADE_ROUTE, so a batched unlinked campaign-target raises the blocking
+ * warning; direct Apply works (mutateWorld adds the link). Parity with THEIRS.
  */
 
 import { Field } from './Field.jsx';

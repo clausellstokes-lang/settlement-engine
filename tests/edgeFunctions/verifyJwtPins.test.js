@@ -42,6 +42,37 @@ const functionDirs = readdirSync(join(ROOT, 'supabase/functions'), { withFileTyp
 const SELF_AUTH_FALSE = new Set([
   'stripe-webhook', 'verify-single-dossier', 'ingest-events', 'analytics-export', 'send-email',
   'auth-recovery', 'log-client-error',
+  // migration 115 — cron-invoked (pg_net), authenticated by the x-cron-secret
+  // shared secret, not a JWT. Same posture as analytics-export.
+  'pricing-resync-cron',
+  // migration 166 — cron-invoked (pg_net) retention-expiry warning, authenticated
+  // by the x-cron-secret shared secret, not a JWT. Same posture as pricing-resync-cron.
+  'retention-warning-cron',
+  // migration 175 — cron-invoked durable account erasure, authenticated by
+  // ACCOUNT_DELETION_CRON_SECRET rather than a user JWT.
+  'account-deletion-worker',
+  // migration 180 — cron-invoked durable payment-refund recovery, authenticated
+  // by PAYMENT_REFUND_CRON_SECRET rather than a user JWT.
+  'payment-refund-worker',
+  // migration 194 — disabled-by-default operator-message delivery worker,
+  // authenticated by OPERATOR_MESSAGE_CRON_SECRET when deliberately activated.
+  'operator-message-worker',
+  // og-image — the callers ARE unfurl bots (no JWT); it reads only already-public
+  // gallery data and takes no write path. The platform gate would 401 every social
+  // preview. See supabase/functions/og-image/index.ts.
+  'og-image',
+  // founder-transfer (Money Wave #17) — self-authenticating: the run_due cron action
+  // carries NO JWT (x-cron-secret shared secret, like pricing-resync-cron), while every
+  // user action does its own getUser()/session-gate/velocity check in-handler. The
+  // platform gate would 401 the hourly due-runner sweep. See founder-transfer/index.ts.
+  'founder-transfer',
+  // health — uptime liveness + optional deep DB probe (Wave E). The callers are
+  // uptime monitors / the ops probe with no JWT; it reads no user data and takes
+  // no write path. See supabase/functions/health/index.ts.
+  'health',
+  // Public token-bearing opt-out endpoint. GET confirms; POST can only disable
+  // an allowed category through unsubscribe_via_token.
+  'unsubscribe',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

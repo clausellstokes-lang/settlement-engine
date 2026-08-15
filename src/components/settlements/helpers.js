@@ -1,17 +1,92 @@
+import {
+  applyFactionRenameToPartner,
+  applyNpcRenameToPartner,
+  factionRenameChanges,
+  npcRenameChanges,
+} from '../../domain/factionRename.js';
+
 // ── Save migration ─────────────────────────────────────────────────────────
-export function migrateConfig(config) {
-  if (!config) return {};
-  const c = { ...config };
-  if (c.magicExists === undefined) c.magicExists = (c.priorityMagic ?? 50) > 0;
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
+// MG-3f (leak L8): the magicExists inference used to be spelled here, in
+// SettlementDetail.jsx and in FoundingWorlds.jsx — three homes for the single most
+// load-bearing bit in a legacy save. It now lives in ONE dependency-free leaf; this
+// module keeps the `migrateConfig` spelling every existing importer already reaches for.
+export { migrateSettlementConfig as migrateConfig } from '../../lib/settlementConfigMigration.js';
 
 // buildInterSettlementNPCs (shared with the canonical save flow) is imported
 // from domain/relationships/neighbourBackLink.js. The manual-link and
 // remove-neighbour handlers below still build links by hand, so they keep this
 // small lookup.
-export function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
+export function findSaveById(saves, id) {
+  return id == null
+    ? null
+    : saves.find(save => save?.id != null && String(save.id) === String(id)) || null;
+}
+
+// Rename every supported settlement reference field on one relationship. The
+// implementation moved to src/domain/factionRename.js (owner queue #14) so the
+// store lane and this library lane share ONE writer; re-exported here because
+// this module is the spelling every existing importer already reaches for.
+export { renameInterSettlementReference } from '../../domain/factionRename.js';
+
+/** Apply settlement fields without disturbing save-level persistence metadata. */
+export function withSettlementChanges(save, changes) {
+  return {
+    ...save,
+    settlement: {
+      ...save.settlement,
+      ...changes,
+    },
+  };
+}
+
+/**
+ * Apply a faction rename to ONE library save (owner queue #14). The host save
+ * gets the full in-settlement cascade; every other save gets only the neighbour
+ * links that point back at the host. Returns the SAME reference when nothing
+ * moved, so the caller's `s !== saves[i]` modified-set stays honest and no
+ * untouched save is persisted.
+ *
+ * The generic rewrites in applyRename are deliberately not reused for factions:
+ * they also rewrite partnerName and npcName, which would rename a neighbouring
+ * town or a person who happens to share the faction's name.
+ *
+ * @param {any} save
+ * @param {boolean} isHost  whether this save owns the renamed faction
+ * @param {string} hostName the host settlement's own name
+ * @param {string} oldName
+ * @param {string} newName
+ */
+export function withFactionRenamed(save, isHost, hostName, oldName, newName) {
+  if (!isHost) {
+    const partner = applyFactionRenameToPartner(save?.settlement, hostName, oldName, newName);
+    return partner.changed ? { ...save, settlement: partner.settlement } : save;
+  }
+  const { changed, changes } = factionRenameChanges(save?.settlement, oldName, newName);
+  return changed ? withSettlementChanges(save, changes) : save;
+}
+
+/**
+ * Apply an NPC rename to ONE library save, through the SAME writer the store
+ * lane calls (domain/factionRename.js). The host save gets the full
+ * in-settlement cascade — including `factions[].members[].name`, the second home
+ * this lane used to miss on every reloaded save; every other save gets only the
+ * neighbour contacts that name the renamed person. Returns the SAME reference
+ * when nothing moved, so the caller's modified-set stays honest.
+ *
+ * @param {any} save
+ * @param {boolean} isHost  whether this save owns the renamed character
+ * @param {string} hostName the host settlement's own name
+ * @param {string} oldName
+ * @param {string} newName
+ */
+export function withNpcRenamed(save, isHost, hostName, oldName, newName) {
+  if (!isHost) {
+    const partner = applyNpcRenameToPartner(save?.settlement, hostName, oldName, newName);
+    return partner.changed ? { ...save, settlement: partner.settlement } : save;
+  }
+  const { changed, changes } = npcRenameChanges(save?.settlement, oldName, newName);
+  return changed ? withSettlementChanges(save, changes) : save;
+}
 
 // ── Analytics banding (coarse, privacy-safe) ─────────────────────────────────
 // Counts → buckets so library/revisit events never carry raw cardinality.
@@ -76,6 +151,33 @@ export function computeBulkDelete(saves, ids) {
   });
   const modifiedIds = remaining.filter((s, i) => s !== survivors[i]).map(s => s.id);
   return { remaining, modifiedIds };
+}
+
+/**
+ * Pure computation behind the dossier-header inline settlement rename (C3 / C4
+ * Panel A handoff): given the open `detail` and a new name, return the detail with
+ * the settlement name patched on BOTH the live copy and the embedded saveData (the
+ * `name` column + `settlement.name`), so the open saved-dossier view reflects the
+ * rename immediately. The store's renameSettlement (the single town-rename writer)
+ * owns the persist + the savedSettlements update; this ONLY keeps the local detail
+ * copy in lockstep — renameSettlement mutates savedSettlements, not this component's
+ * detail state, and the header's EditableInline renders from its `value` prop after
+ * commit, so without this the name would revert until re-open. Null / empty-name
+ * tolerant: returns the detail unchanged (same reference) when there is nothing to do.
+ * @param {any} detail
+ * @param {string} newName
+ * @returns {any} the next detail (or the same reference when unchanged)
+ */
+export function renameDetailSettlement(detail, newName) {
+  const trimmed = String(newName || '').trim();
+  if (!detail || !trimmed) return detail;
+  return {
+    ...detail,
+    settlement: { ...(detail.settlement || {}), name: trimmed },
+    saveData: detail.saveData
+      ? { ...detail.saveData, name: trimmed, settlement: { ...(detail.saveData.settlement || {}), name: trimmed } }
+      : detail.saveData,
+  };
 }
 
 export function regionalCountsForSave(campaign, saveId) {

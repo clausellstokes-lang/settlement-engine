@@ -3,6 +3,13 @@ import { useMemo } from 'react';
 import { useStore } from '../../store';
 import { buildRegionalMapOverlay } from '../../lib/regionalMapOverlay.js';
 
+// components-map-2: war_front and religious_authority are the SINGLE-WRITER
+// province of RelationshipEdges (WAR_FAITH_STYLE). This diagnostic overlay used
+// to redraw them too — the same channel in a SECOND, mismatched purple the legend
+// never explained (P11 breach). Subtract them here so each war/faith front is
+// drawn exactly once, by RelationshipEdges.
+const WAR_FAITH_TYPES = new Set(['war_front', 'religious_authority']);
+
 function labelForType(type) {
   return String(type || 'channel').replace(/_/g, ' ');
 }
@@ -43,7 +50,7 @@ export default function RegionalCausalityLayer() {
 
   return (
     <g className="sf-regional-causality" pointerEvents="none">
-      {layers.regionalChannels && overlay.channels.map(channel => {
+      {layers.regionalChannels && overlay.channels.filter(channel => !WAR_FAITH_TYPES.has(channel.type)).map(channel => {
         const width = 1.4 + (channel.strength || 0.5) * 2.2;
         return (
           <g key={channel.id}>

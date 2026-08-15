@@ -1,66 +1,42 @@
 /**
- * HelpPopover.jsx — inline Compendium help.
+ * HelpPopover.jsx — inline Compendium help (W-GUIDE-1 disposition: RE-SKINNED +
+ * ABSORBED).
  *
- * Drop a `<HelpPopover topic="trade-route" />` next to any config
- * label and the user gets a "?" affordance that opens a small popover
- * with the relevant Compendium snippet. "Read full reference →" inside
- * the popover links to the Compendium scrolled to the matching section.
+ * Drop a `<HelpPopover topic="trade-route" />` next to any config label and the
+ * user gets a "?" affordance that opens a small PARCHMENT margin-popover with the
+ * relevant Compendium snippet + a "Read full reference →" deep-link.
  *
- * Content source — `src/data/compendiumHints.js` (a tiny lookup that
- * mirrors the Compendium tab content for the topics we want
- * inline-help on). Falls back to a generic "see Compendium" link when
- * the topic isn't in the lookup.
+ * Two things changed from the pre-guidance version:
+ *   • The dark generic tooltip chrome (INK background, foreign to the study) is
+ *     gone — the popover now renders from theme tokens in the callout grammar
+ *     (parchment ground, gold accent, serif title), passing the dissociation
+ *     test, and the trigger is a text glyph, not a lucide icon (the immersion law).
+ *   • The inline COMPENDIUM_HINTS lookup is ABSORBED into the guidance registry
+ *     (guidance whispers `config_*` with glossaryRefs) + the copy registry
+ *     (en.js guidance.compendium.*), so the hint text and its Compendium anchor
+ *     live with every other whisper and cannot drift from the reference.
  *
- * Inline help is GA: the `?` affordance is a drop-in on any control.
- *
- * Click-outside closes; Esc closes; keyboard-accessible.
+ * Self-gates on flag('compendiumInlineHelp'); measurement rides the existing
+ * HELP_POPOVER_OPENED event (§7 — no new event names).
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { HelpCircle } from 'lucide-react';
-import { FS, ELEV, PARCH_100, INK, GOLD, GOLD_DEEP, swatch, sans, serif_ } from '../theme.js';
-import IconButton from '../primitives/IconButton.jsx';
+import { FS, ELEV, PARCH_100, INK, BODY, GOLD, GOLD_DEEP, sans, serif_ } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
+import { whisperById } from '../../domain/display/guidanceRegistry.js';
+import { t } from '../../copy/index.js';
 
-const COMPENDIUM_HINTS = Object.freeze({
-  'trade-route': {
-    title: 'Trade Route',
-    body: 'How goods, news, and trouble move through the settlement. Crossroads = high diversity. River = food security. Isolated = thin services, high secrets.',
-    anchor: 'trade-routes',
-  },
-  'terrain': {
-    title: 'Terrain',
-    body: 'Constrains what the settlement can produce, defend, and rely on. Coastal towns import grain; mountain holds export stone. Frontier terrains bias toward militarized institutions.',
-    anchor: 'terrain',
-  },
-  'culture': {
-    title: 'Culture',
-    body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
-    anchor: 'cultures',
-  },
-  'monster-threat': {
-    title: 'Monster Threat',
-    body: 'Heartland = monsters are rumor. Frontier = active patrols. Plagued = the militia is the most important institution and people lock their doors at dusk.',
-    anchor: 'threat',
-  },
-  'magic-level': {
-    title: 'Magic Level',
-    body: 'Mundane = no magical economy. Common = magic shops in cities; everyday charms in villages. High = magic is the economy. Affects institution distribution + NPC archetypes.',
-    anchor: 'magic',
-  },
-  'tier': {
-    title: 'Settlement Tier',
-    body: 'Thorp through Metropolis. Each tier sets the institution count, NPC count, district count, and what kinds of stressors are likely. Bigger ≠ better; a thorp can carry one perfect hook better than a metropolis.',
-    anchor: 'tiers',
-  },
-  'settlement-age': {
-    title: 'Settlement Age',
-    body: 'How long the place has stood. Auto lets the simulator pick a plausible age for the tier. A newly founded settlement reads raw and provisional, with thin institutions and unsettled factions. An old one carries layered history, entrenched power, and inherited grudges. Custom years sets the founding date exactly.',
-    anchor: 'living-world',
-  },
-});
+/** topic → the registry whisper id + the camelCase copy stem. */
+function topicKeys(topic) {
+  const id = `config_${String(topic).replace(/-/g, '_')}`;
+  const camel = String(topic).replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  return { id, camel };
+}
 
 export default function HelpPopover({ topic, label = 'Help' }) {
+  const enabled = flag('compendiumInlineHelp');
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -79,15 +55,16 @@ export default function HelpPopover({ topic, label = 'Help' }) {
     };
   }, [open]);
 
+  if (!enabled) return null;
 
-  const content = COMPENDIUM_HINTS[topic];
-  if (!content) {
-    // Unknown topic — still render the "?" but link to Compendium root.
-    // Better than silently dropping the affordance.
-  }
+  const { id, camel } = topicKeys(topic);
+  const registered = whisperById(id);
+  const title = registered ? t(`guidance.compendium.${camel}.title`) : null;
+  const body = registered ? t(`guidance.compendium.${camel}.body`) : null;
+  const anchor = registered?.glossaryRef || null;
 
   const handleToggle = () => {
-    if (!open && content) {
+    if (!open && registered) {
       Funnel.track(EVENTS.HELP_POPOVER_OPENED, { topic });
     }
     setOpen(o => !o);
@@ -95,15 +72,16 @@ export default function HelpPopover({ topic, label = 'Help' }) {
 
   return (
     <span ref={ref} style={{ position: 'relative', display: 'inline-block' }}>
-      <IconButton
-        Icon={HelpCircle}
-        glyph="?"
-        label={`${label}: ${content?.title || topic}`}
-        onClick={handleToggle}
-        tone="default"
+      <Button
+        variant="ghost"
         size="sm"
+        onClick={handleToggle}
+        aria-label={`${label}: ${title || topic}`}
         aria-expanded={open}
-      />
+        style={{ minWidth: 0, padding: '0 6px', fontWeight: 800, color: GOLD_DEEP }}
+      >
+        ?
+      </Button>
       {open && (
         <div
           role="tooltip"
@@ -111,43 +89,43 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             position: 'absolute',
             left: '50%',
             transform: 'translateX(-50%)',
-            top: 24,
+            top: 26,
             zIndex: 100,
-            width: 240,
+            width: 244,
             padding: 12,
-            background: INK,
-            color: PARCH_100,
-            border: `1px solid ${GOLD_DEEP}`,
-            borderRadius: 6,
+            background: PARCH_100,
+            color: BODY,
+            border: `1px solid ${GOLD}`,
             boxShadow: ELEV[3],
             fontSize: FS.xs,
             lineHeight: 1.55,
             fontFamily: sans,
           }}
         >
+          {/* Parchment arrow (matches the callout ground + gold edge). */}
           <div style={{
             position: 'absolute',
             top: -6, left: '50%', transform: 'translateX(-50%) rotate(45deg)',
             width: 10, height: 10,
-            background: INK,
-            borderLeft: `1px solid ${GOLD_DEEP}`,
-            borderTop: `1px solid ${GOLD_DEEP}`,
+            background: PARCH_100,
+            borderLeft: `1px solid ${GOLD}`,
+            borderTop: `1px solid ${GOLD}`,
           }} />
-          {content ? (
+          {registered ? (
             <>
               <div style={{
-                color: GOLD,
+                color: GOLD_DEEP,
                 fontFamily: serif_,
                 fontWeight: 600, fontSize: FS.md, marginBottom: 4,
               }}>
-                {content.title}
+                {title}
               </div>
-              <div style={{ color: swatch['#C8B098'] }}>{content.body}</div>
+              <div style={{ color: INK }}>{body}</div>
               <a
-                href={`/compendium#${content.anchor}`}
+                href={anchor ? `/compendium#${anchor}` : '/compendium'}
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: GOLD, fontSize: FS.xxs, fontWeight: 700,
+                  color: GOLD_DEEP, fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >
@@ -156,14 +134,14 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             </>
           ) : (
             <>
-              <div style={{ color: swatch['#C8B098'] }}>
+              <div style={{ color: INK }}>
                 More about <b>{topic}</b> in the Compendium.
               </div>
               <a
-                href={`/compendium`}
+                href="/compendium"
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: GOLD, fontSize: FS.xxs, fontWeight: 700,
+                  color: GOLD_DEEP, fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >

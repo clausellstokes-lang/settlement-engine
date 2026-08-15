@@ -20,14 +20,24 @@ import {
   readCorruptionClimate, captureAdvanceChance, captureRecoverChance, advanceCaptureState,
   guildEffectiveSecurity, hasCorruptingDeity,
 } from '../corruption.js';
+// Phase 4 W-F3 site #7 — the corruption-plane amplifier over the INSTITUTION capture
+// rate (a pressure channel). 1.0 (byte-identical) for deity-free / legacy / non-devout.
+import { corruptionPlaneMultOf } from './piety.js';
+// W-DOCTRINE-3b THE CAPTURE FORK (§3): a FOREIGN-leashed corrupt seat feeds the patron's
+// derived foreign-grip read, NOT the LOCAL thieves-guild strength. Gated behind the
+// corruption-web flag ⇒ byte-identical when dark. Resolved through the leash chokepoint.
+import { npcId } from './npcAgency.js';
+import { corruptionWebActive } from './corruptionWeb.js';
+import { resolveLeash } from '../corruptionLeash.js';
 
 /**
  * The PARALLEL onset-style gate (a corrupt seat-holder climbs
  * the capture ladder only with `hasCriminalInst`) is relaxed the SAME way as
  * the corruption.js onset gate — an embedded EVIL deity also enables the climb
  * in a crime-free town, so the evil-deity effect is NOT half-applied. Gated
- * behind `religionActive` (the caller's religionDynamicsEnabled +
- * isSubsystemActive). false (default) ⇒ gate unrelaxed ⇒ byte-identical.
+ * behind `religionActive` (the caller's deity-presence isSubsystemActive gate — a
+ * LOCAL faith effect, gated by deity presence ALONE post W-F1, not by any rule
+ * flag). false (deity-free) ⇒ gate unrelaxed ⇒ byte-identical.
  *
  * @param {any} worldState
  * @param {any} snapshot
@@ -41,11 +51,36 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
   const climateBy = new Map();
   /** @type {Map<string, boolean>} */
   const corruptingDeityBy = new Map();
+  /** @type {Map<string, number>} the corruption-plane capture-rate amplifier per settlement */
+  const planeMultBy = new Map();
   for (const item of (snapshot?.settlements || [])) {
     climateBy.set(String(item.id), readCorruptionClimate(item.settlement));
     // Per-settlement evil-deity presence (only when the religion layer is
     // ACTIVE). Absent ⇒ false ⇒ the gate behaves exactly as before.
     corruptingDeityBy.set(String(item.id), religionActive && hasCorruptingDeity(item.settlement));
+    // Corruption-plane amplifier over the capture rate (1.0 when inactive / legacy /
+    // non-devout ⇒ byte-identical).
+    planeMultBy.set(String(item.id), religionActive ? corruptionPlaneMultOf(item.settlement) : 1);
+  }
+
+  // W-DOCTRINE-3b THE CAPTURE FORK (§3): when the corruption web is LIT, a foreign-leashed
+  // corrupt seat is EXCLUDED from the LOCAL capture climb (it feeds foreignGripOf instead) —
+  // "a foreign court's asset strengthening the LOCAL thieves guild, today's accidental
+  // semantics, ends with the fork." Dark ⇒ the set is empty ⇒ every corrupt seat reads exactly
+  // as today (byte-identical). The foreign-ness is resolved once, through the leash chokepoint.
+  const webActive = corruptionWebActive(worldState);
+  /** @type {Set<string>} seat npcKeys whose leash is foreign (excluded from the LOCAL climb) */
+  const foreignSeatKeys = new Set();
+  if (webActive) {
+    for (const item of (snapshot?.settlements || [])) {
+      const sid = String(item.id);
+      const npcs = /** @type {import('../settlement.schema.js').SimNpc[]} */ (
+        Array.isArray(item.settlement?.npcs) ? item.settlement.npcs : []);
+      npcs.forEach((npc, index) => {
+        if (!npc || npc.corrupt !== true) return;
+        if (resolveLeash(npc, item.settlement).foreign) foreignSeatKeys.add(npcId(sid, npc, index));
+      });
+    }
   }
 
   const transitions = [];
@@ -54,11 +89,14 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
     // Relax the parallel gate with the same additive evil-deity term.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeityBy.get(String(fs.settlementId)) === true;
 
-    // Highest-ranked corrupt seat-holder drives the climb.
+    // Highest-ranked corrupt seat-holder drives the climb. A foreign-leashed seat (the fork,
+    // above) is skipped: it grips its patron, not the local guild.
     let maxCorruptRank = 0;
     for (const seat of Object.values(fs.internalSeats || {})) {
       const st = seat && seat.npcId ? npcStates[seat.npcId] : null;
-      if (st && st.corruption) maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
+      if (st && st.corruption && !(webActive && foreignSeatKeys.has(seat.npcId))) {
+        maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
+      }
     }
 
     // Guild strength drags effective security down here too.
@@ -69,7 +107,7 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
     const local = rng.fork(`cap:${fid}:${tick}`);
     let next = cur;
     if (maxCorruptRank > 0 && onsetEnabled) {
-      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity })) {
+      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity, pressureMult: planeMultBy.get(String(fs.settlementId)) ?? 1 })) {
         next = advanceCaptureState(cur, true);
       }
     } else if (cur !== 'none') {
@@ -151,6 +189,14 @@ function transitionSummary(t, settlementName) {
   return `${t.name} has loosened the underworld's arrangements (now ${t.to.replace(/_/g, ' ')}).`;
 }
 
+/** @param {{ name: string, from: string, to: string }} t */
+function transitionReason(t) {
+  if (t.to === 'capture') return `${t.name} has taken the settlement's governing machinery into its hands.`;
+  if (t.from === 'capture') return `${t.name}'s grip on the governing machinery has been broken.`;
+  if (t.to === 'corrupted') return `${t.name}'s influence has passed from isolated bargains into systematic corruption.`;
+  return `${t.name}'s hold over public decisions has weakened.`;
+}
+
 /**
  * Wizard-News entries for this tick's faction-capture transitions. Factual
  * headlines; 'major' significance for full capture and liberation (crossing
@@ -180,11 +226,17 @@ export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @t
       channelType: null,
       severity: Math.max(0, LADDER.indexOf(t.to)) / (LADDER.length - 1),
       settlementIds: [String(t.settlementId)],
+      // THE NEWS ADDRESS LAW's actor layer: the faction IS the subject of a
+      // capture beat, and its id here is already the canonical world-pulse
+      // faction id (`<saveId>:<stablePart(name)>` — the same spelling
+      // realmEntityWeb.realmFactionPulseId recomputes and resolves), so the
+      // Herald links the faction instead of reading its name out of the headline.
+      factionIds: [String(t.factionId)],
       impactIds: [],
       channelIds: [],
       sourceEventId: t.factionId,
       tags: ['world_pulse', 'faction', 'capture', t.to],
-      reasons: [`${t.name} moved ${t.from.replace(/_/g, ' ')} → ${t.to.replace(/_/g, ' ')} on the capture ladder.`],
+      reasons: [transitionReason(t)],
       createdAt: now,
     };
   });

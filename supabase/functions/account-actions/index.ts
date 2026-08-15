@@ -9,43 +9,46 @@
  *                       user). Idempotent: an already-open request is reported
  *                       back rather than duplicated. Soft-delete only — the client
  *                       can never erase its own account (RLS forbids it).
- *   process_deletions — run the processor: anonymise + lock every profile whose
- *                       request is past the grace window, advancing
- *                       requested->processing->done and writing one audit row
- *                       each. HIGHEST role only (admin|developer); the actual work
- *                       is the SECURITY DEFINER process_account_deletions RPC
- *                       (migration 054), invoked with the service-role client.
- *                       Each processed account is then GoTrue-banned (kill the
- *                       live session) and its Stripe subscription CANCELED with
- *                       the stored Stripe ids cleared (billing stops with the
- *                       account; the RPC itself never touches Stripe).
+ *   process_deletions — run the durable processor (migration 175): anonymise +
+ *                       lock every due profile and transactionally enqueue its
+ *                       service-role-only external cleanup job. HIGHEST role only
+ *                       (admin|developer). The SAME shared worker used by the
+ *                       unattended cron then revokes GoTrue, enumerates/cancels
+ *                       every Stripe subscription, and asks the completion RPC
+ *                       to clear all linkage + mark request/job done atomically.
  *
  * Authorization:
  *   request_deletion  — any authenticated user (acts on their own row only).
  *   process_deletions — role='developer'|'admin' (or the OWNER_EMAIL identity).
  *
- * The destructive processor ALSO runs unattended as a scheduled cron calling the
- * RPC directly with a null actor (migration 054) — this edge action is the
- * on-demand, human-triggered path.
+ * The unattended path is account-deletion-worker, dispatched via a secret-gated
+ * pg_net cron. It never calls the SQL processor without also draining the durable
+ * external queue. This edge action is the human-triggered path.
  *
  * Env (all optional; defaults preserve historical behaviour):
  *   OWNER_EMAIL          — privileged owner-override email.
- *   ALLOWED_ORIGINS      — comma-separated CORS allowlist (else wildcard "*").
+ *   ALLOWED_ORIGINS      — comma-separated origins ADDED to the shared fail-closed
+ *                          CORS allowlist (_shared/cors.ts); there is no wildcard
+ *                          fallback, a disallowed origin is pinned and rejected.
  *   DELETION_GRACE_DAYS  — grace window before a request is processed (default 7).
  *   RESEND_API_KEY / RESEND_FROM_EMAIL — when set, request_deletion sends a
  *                          best-effort confirmation; never blocks the request.
- *   STRIPE_SECRET_KEY    — lets process_deletions CANCEL a deleted account's live
- *                          subscription (billing must stop when the account goes).
- *                          Unset = the cancel is skipped, logged loud, and the
- *                          Stripe ids are RETAINED so a re-run can catch up.
+ *   STRIPE_SECRET_KEY    — lets the shared cleanup worker cancel all deleted-
+ *                          account subscriptions. Unset = a linked job remains
+ *                          retryable; Stripe ids and request=processing are kept.
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@14.14.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
+import { isSessionSuperseded, deviceLabelFromRequest } from "../_shared/sessionGate.ts";
 import { logError } from "../_shared/logError.ts";
+import {
+  defaultDeletionStripeClient,
+  processAccountDeletionCleanupQueue,
+  type StripeSubscriptionsApi,
+} from "../_shared/accountDeletionCleanup.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 // Fail CLOSED, never "*": the endpoint is independently protected by JWT auth +
 // role gating + botGuard, but a misconfigured deploy must not silently allow any
@@ -59,6 +62,26 @@ function corsHeadersFor(req: Request): Record<string, string> {
 // Owner-override email — configurable via OWNER_EMAIL ONLY. Missing var FAILS
 // CLOSED (override disabled), never fails privileged. Matches admin-actions.
 const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "").trim().toLowerCase();
+
+// ── Request ceilings for the support-write path ──────────────────────────────
+// Support content is user free text on an authed, MAILER-BACKED path: create_ticket
+// persists the message AND sends a Resend email, so an uncapped request buys storage
+// and third-party send cost per call. The envelope is capped in BYTES, never UTF-16
+// code units — `text.length` let ~3x the intended payload past a "64KB" cap on the
+// AI surfaces before they were fixed (ingest-events MAX_BODY_BYTES carries the same
+// note). The envelope cap transitively bounds the pass-through jsonb (`links`,
+// `metadata`); the two per-field caps bound the columns a human actually reads and
+// sit far above any genuine support message, so no real ticket is ever refused.
+const MAX_BODY_BYTES = 64 * 1024;
+const MAX_SUBJECT_CHARS = 200;
+const MAX_MESSAGE_CHARS = 10_000;
+
+// Per-user ceiling on support WRITES (create_ticket + reply_ticket share one bucket,
+// since both cost a row and one of them costs an email). Reuses the deployed keyed
+// limiter (036 ingest_check_rate) rather than inventing a second one — the same
+// migration-free idiom claim_dossier_purchase uses below. 20/hour lets a real
+// back-and-forth thread proceed while bounding a scripted flood.
+const SUPPORT_WRITE_MAX_PER_HOUR = 20;
 
 // Grace window before a filed request is eligible for processing. Defaults to 7
 // days; an out-of-range / unparsable value falls back to 7.
@@ -112,28 +135,6 @@ function defaultAdminClient() {
   );
 }
 
-/** The one Stripe surface process_deletions needs (structural, so tests inject a
- *  plain recording stub instead of a full Stripe client). `list` exists for the
- *  legacy rows (pre-087) that recorded a customer id but never a subscription id. */
-type StripeSubscriptionsApi = {
-  subscriptions: {
-    cancel: (id: string) => Promise<unknown>;
-    list: (params: { customer: string; limit?: number }) => Promise<{ data: Array<{ id: string }> }>;
-  };
-};
-
-// Default Stripe client — LAZY, unlike create-checkout's module-level init: this
-// function's core job (deletion processing) must keep working on a deploy where
-// STRIPE_SECRET_KEY isn't wired, so a missing key returns null (caller logs loud
-// and retains the ids for a re-run) rather than crashing the whole function.
-let stripeSingleton: Stripe | null = null;
-function defaultStripeClient(): StripeSubscriptionsApi | null {
-  const key = Deno.env.get("STRIPE_SECRET_KEY");
-  if (!key) return null;
-  stripeSingleton ??= new Stripe(key, { apiVersion: "2023-10-16" });
-  return stripeSingleton;
-}
-
 // Best-effort email send (Resend). Soft-fails to false when unconfigured or on
 // error — a ticket lifecycle email must never block or fail the user action.
 async function sendEmail(to: string | null, subject: string, text: string): Promise<boolean> {
@@ -170,7 +171,7 @@ export async function handleAccountActions(
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
   const makeAdminClient = deps.adminClient ?? defaultAdminClient;
-  const makeStripeClient = deps.stripeClient ?? defaultStripeClient;
+  const makeStripeClient = deps.stripeClient ?? defaultDeletionStripeClient;
   const cors = corsHeadersFor(req);
   const jsonHeaders = { ...cors, "Content-Type": "application/json" };
   const json = (body: Record<string, unknown>, status = 200) =>
@@ -204,13 +205,33 @@ export async function handleAccountActions(
     // Service-role client → RLS-bypassing reads/writes + the processor RPC.
     const adminClient = makeAdminClient();
 
+    // SINGLE-SESSION GATE (161, §7.2): reject a superseded device's JWT.
+    if (await isSessionSuperseded(adminClient, callingUser.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: "session_superseded" }, 401);
+    }
+
+    // Size the envelope BEFORE it is parsed, and both before the account gate, the
+    // support-write limiter and every write RPC below, so an oversized or malformed
+    // body is refused without buying a single row or email. (An unreadable body used
+    // to fall through to the outer catch as a 500; it is a client fault, so 400.)
+    const rawBody = await req.text();
+    if (new TextEncoder().encode(rawBody).length > MAX_BODY_BYTES) {
+      return json({ error: "That request is too large. Please shorten it and try again." }, 413);
+    }
+    // deno-lint-ignore no-explicit-any
+    let payload: any;
+    try {
+      payload = rawBody ? JSON.parse(rawBody) : {};
+    } catch {
+      return json({ error: "The request could not be read." }, 400);
+    }
     const {
       action, graceDays: graceOverride,
       // A5 ticket params (user-facing self-service path).
       subject, message, category, priority, links, ticketId, body, metadata,
       // Dossier retro-claim, same-device token params (108).
       sessionId, checkoutToken, saveId,
-    } = await req.json();
+    } = payload;
 
     // A+ defense-in-depth (finding #1): a banned/disabled/soft-deleted account may
     // not write NEW support content (mirrors the account_is_active gate on the AI
@@ -225,6 +246,20 @@ export async function handleAccountActions(
       if (isActive !== true) {
         return json({ error: "Account is not active" }, 403);
       }
+      // ONE limiter for BOTH support-write actions, checked here rather than per case
+      // so a third write action cannot ship unmetered. Fail CLOSED on a limiter error,
+      // matching claim_dossier_purchase and ingest-events: the limiter is a DB call, so
+      // an errored limiter means the ticket RPC on the very next line would fail too —
+      // failing closed costs a reachable user nothing and closes the flood window.
+      const { data: underRate, error: rateErr } = await adminClient.rpc("ingest_check_rate", {
+        p_key: `support_write:${callingUser.id}`,
+        p_max: SUPPORT_WRITE_MAX_PER_HOUR,
+        p_window_seconds: 3600,
+      });
+      if (rateErr || underRate === false) {
+        if (rateErr) logError("account-actions", callingUser.id, `support write rate limiter error: ${rateErr.message}`, { stage: "support_write_rate" });
+        return json({ error: "Too many support messages just now. Please wait a little while and try again." }, 429);
+      }
     }
 
     switch (action) {
@@ -237,6 +272,15 @@ export async function handleAccountActions(
         }
         if (typeof message !== "string" || !message.trim()) {
           return json({ error: "A message is required" }, 400);
+        }
+        // Length caps: the RPC (055) only btrims, and no column carries a
+        // char_length check, so this is the sole ceiling on what lands in
+        // support_messages and in the confirmation email's subject line.
+        if (subject.trim().length > MAX_SUBJECT_CHARS) {
+          return json({ error: `A subject must be ${MAX_SUBJECT_CHARS} characters or fewer.` }, 400);
+        }
+        if (message.trim().length > MAX_MESSAGE_CHARS) {
+          return json({ error: `A message must be ${MAX_MESSAGE_CHARS} characters or fewer.` }, 400);
         }
         const { data, error } = await adminClient.rpc("create_ticket", {
           p_actor: callingUser.id,
@@ -291,6 +335,9 @@ export async function handleAccountActions(
         }
         if (typeof body !== "string" || !body.trim()) {
           return json({ error: "A reply body is required" }, 400);
+        }
+        if (body.trim().length > MAX_MESSAGE_CHARS) {
+          return json({ error: `A reply must be ${MAX_MESSAGE_CHARS} characters or fewer.` }, 400);
         }
         const { data, error } = await adminClient.rpc("post_ticket_reply", {
           p_actor: callingUser.id, p_id: ticketId, p_body: body.trim(), p_visibility: "user",
@@ -467,11 +514,17 @@ export async function handleAccountActions(
       // ── process_deletions — HIGHEST role only; run the processor RPC ────────
       case "process_deletions": {
         // Role gate: profiles.role developer|admin, or the owner identity.
-        const { data: callerProfile } = await adminClient
+        const { data: callerProfile, error: callerProfileErr } = await adminClient
           .from("profiles")
           .select("role, email")
           .eq("id", callingUser.id)
           .single();
+        if (callerProfileErr) {
+          logError("account-actions", callingUser.id, `deletion caller lookup failed: ${callerProfileErr.message}`, {
+            stage: "deletion_caller_lookup",
+          });
+          return json({ error: "The request could not be completed. Please try again." }, 500);
+        }
         const callerEmail = String(callingUser.email || callerProfile?.email || "")
           .trim().toLowerCase();
         const ownerOverride = OWNER_EMAIL !== "" && callerEmail === OWNER_EMAIL;
@@ -486,144 +539,74 @@ export async function handleAccountActions(
           ? Math.trunc(Number(graceOverride))
           : graceDays();
 
-        // The RPC re-checks the actor role, anonymises + locks each due profile,
-        // advances the request status, and writes one audit row per request. We
-        // forward the VERIFIED caller as the actor so the audit names a human.
+        // Migration 175 makes this the LOCAL stage only: anonymise + lock and
+        // transactionally enqueue a durable cleanup job. The request deliberately
+        // remains `processing`; the shared external worker is the only path that
+        // can finalize it after GoTrue + Stripe success.
         const { data, error } = await adminClient.rpc("process_account_deletions", {
           p_actor: callingUser.id,
           p_grace_days: grace,
           p_limit: 500,
         });
-        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
-
-        // Layer 2 (review B16 #1): the RPC stamped deleted_at + disabled_at (so the
-        // 057/059 DB+RLS gate already rejects every WRITE from the anonymised shell),
-        // but the user's LIVE JWT/session would otherwise survive until expiry. Ban
-        // each just-processed account at the auth provider (GoTrue native ban) so the
-        // session dies immediately too. The RPC returns the deletion_request ids it
-        // advanced; resolve each to its user_id and ban it. Soft-fails per user — a
-        // GoTrue error never undoes the soft-delete (the DB anonymise/lock stands).
-        let sessionsRevoked = 0;
-        let subscriptionsCanceled = 0;
-        const requestIds = Array.isArray((data as Record<string, unknown> | null)?.ids)
-          ? ((data as Record<string, unknown>).ids as unknown[]).map(String)
-          : [];
-        if (requestIds.length > 0) {
-          const { data: processedRows } = await adminClient
-            .from("deletion_requests")
-            .select("user_id")
-            .in("id", requestIds);
-          const userIds = (processedRows || [])
-            .map((r: Record<string, unknown>) => r.user_id)
-            .filter((id: unknown): id is string => typeof id === "string");
-          for (const uid of userIds) {
-            try {
-              const { error: banErr } = await adminClient.auth.admin.updateUserById(
-                uid,
-                { ban_duration: "876000h" },
-              );
-              if (banErr) {
-                console.warn("[account-actions] GoTrue ban on deletion failed:", banErr.message);
-              } else {
-                sessionsRevoked += 1;
-              }
-            } catch (e) {
-              console.warn("[account-actions] GoTrue ban on deletion threw:", errorMessage(e));
-            }
-          }
+        if (error) {
+          logError("account-actions", callingUser.id, `db error: ${error.message}`);
+          return json({
+            success: false,
+            error: "The request could not be completed. Please try again.",
+          }, 500);
         }
 
-        // Layer 3: a deleted account must also STOP BILLING. The RPC anonymises
-        // + locks the profile but leaves the Stripe linkage untouched — without
-        // this sweep a premium user who deletes their account keeps being
-        // charged, with the portal now locked behind the ban above. Sweep EVERY
-        // soft-deleted profile still holding a Stripe id, not just the rows this
-        // run advanced: the nightly pg_cron run (054) calls the RPC directly and
-        // returns to nobody, so its users would otherwise keep their
-        // subscriptions forever. Cancel IMMEDIATELY (deletion is the honest
-        // cancel-now case, not cancel_at_period_end); a legacy row (pre-087)
-        // with a customer id but no recorded subscription id is resolved via
-        // subscriptions.list. Then clear the stored ids so the anonymised shell
-        // retains no billing identifier — a successful pass empties the set, so
-        // the sweep is self-limiting and idempotent (already-canceled /
-        // resource_missing still clears). Soft-fails like the ban: any OTHER
-        // Stripe failure is logged and RETAINS the ids so the next run retries —
-        // a billing hiccup never undoes the soft-delete.
-        const { data: billingRows } = await adminClient
-          .from("profiles")
-          .select("id, stripe_subscription_id, stripe_customer_id")
-          .not("deleted_at", "is", null)
-          .or("stripe_subscription_id.not.is.null,stripe_customer_id.not.is.null")
-          .limit(500);
-        for (const row of (billingRows || []) as Array<Record<string, unknown>>) {
-          const uid = typeof row.id === "string" ? row.id : null;
-          const subId = typeof row.stripe_subscription_id === "string" && row.stripe_subscription_id
-            ? row.stripe_subscription_id
-            : null;
-          const customerId = typeof row.stripe_customer_id === "string" && row.stripe_customer_id
-            ? row.stripe_customer_id
-            : null;
-          if (!uid || (!subId && !customerId)) continue;
+        let cleanup;
+        try {
+          cleanup = await processAccountDeletionCleanupQueue(adminClient, {
+            stripeClient: makeStripeClient(),
+            claimBatchSize: 25,
+            maxJobs: 50,
+            staleAfterMinutes: 30,
+            log: (message, details) =>
+              logError("account-actions", callingUser.id, message, {
+                stage: "deletion_external_cleanup",
+                ...details,
+              }),
+          });
+        } catch (cleanupError) {
+          logError(
+            "account-actions",
+            callingUser.id,
+            `deletion queue failed: ${errorMessage(cleanupError)}`,
+            { stage: "deletion_queue" },
+          );
+          return json({
+            success: false,
+            error: "Account deletion is queued, but the cleanup worker could not be reached. It will retry.",
+            result: data,
+          }, 500);
+        }
 
-          const stripeApi = makeStripeClient();
-          if (!stripeApi) {
-            // Misconfigured deploy: we can't cancel, so keep the ids visible for
-            // a re-run once the key is wired. The deletion itself stands.
-            logError("account-actions", uid, "STRIPE_SECRET_KEY unset — subscription not canceled on deletion");
-            continue;
-          }
+        if (cleanup.failed > 0 || cleanup.leaseLost > 0) {
+          return json({
+            success: false,
+            error: "Account deletion is safely queued, but external cleanup is incomplete. The durable worker will retry.",
+            result: data,
+            ...cleanup,
+            processedAt: new Date().toISOString(),
+          }, 502);
+        }
 
-          // Which subscriptions to cancel: the recorded one, else whatever
-          // Stripe still has open for the customer (list omits canceled subs).
-          let clearLinkage = true;
-          let subIds: string[] = [];
-          if (subId) {
-            subIds = [subId];
-          } else if (customerId) {
-            try {
-              const listed = await stripeApi.subscriptions.list({ customer: customerId, limit: 100 });
-              subIds = (listed?.data || []).map((s) => s.id);
-            } catch (e) {
-              // Can't PROVE the customer has no live subscription — retain the
-              // linkage so the next run re-checks rather than orphaning a sub.
-              logError("account-actions", uid, `stripe list on deletion failed: ${errorMessage(e)}`);
-              clearLinkage = false;
-            }
-          }
-
-          for (const id of subIds) {
-            try {
-              await stripeApi.subscriptions.cancel(id);
-              subscriptionsCanceled += 1;
-            } catch (e) {
-              const code = (e as { code?: string } | null)?.code;
-              const msg = errorMessage(e);
-              if (code === "resource_missing" || /no such subscription|already.{0,10}cancell?ed|has been cancell?ed/i.test(msg)) {
-                // Already gone at Stripe — nothing left to stop; treat as done.
-              } else {
-                console.warn("[account-actions] Stripe cancel on deletion failed:", msg);
-                logError("account-actions", uid, `stripe cancel on deletion failed: ${msg}`);
-                clearLinkage = false;
-              }
-            }
-          }
-
-          if (clearLinkage) {
-            const { error: clearErr } = await adminClient
-              .from("profiles")
-              .update({ stripe_subscription_id: null, stripe_customer_id: null })
-              .eq("id", uid);
-            if (clearErr) {
-              console.warn("[account-actions] clearing Stripe linkage on deletion failed:", clearErr.message);
-            }
-          }
+        if (cleanup.capped) {
+          return json({
+            success: true,
+            moreQueued: true,
+            result: data,
+            ...cleanup,
+            processedAt: new Date().toISOString(),
+          }, 202);
         }
 
         return json({
           success: true,
           result: data,
-          sessionsRevoked,
-          subscriptionsCanceled,
+          ...cleanup,
           processedAt: new Date().toISOString(),
         });
       }

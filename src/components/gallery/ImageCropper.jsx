@@ -8,17 +8,26 @@
  * the unit-tested cropGeometry module — this file is interaction + canvas only.
  *
  * No upload here: the parent (CoverImageField) owns file selection + storage.
+ *
+ * ── THE OUTPUT IS PARAMETERISED (profile-identity lane, DESIGN_PROFILE_IMAGE §3.2)
+ * The profile-image crop is the SAME gesture over a different frame: a square
+ * selection previewed as a circle. Rather than fork a second cropper — and with
+ * it a second copy of the pan/zoom/clamp maths that is the easy part to get
+ * subtly wrong — the output shape is now props. EVERY new prop defaults to the
+ * cover's existing behavior (1280-wide JPEG at 0.85, square corners), so the
+ * gallery cover path is byte-identical to before this change; the pins in
+ * tests/components/imageCropperOutput.test.jsx assert exactly that.
+ *
+ * `circular` is a PREVIEW treatment only. The asset stays SQUARE at rest and the
+ * frame is circular at render (§2) — never store a pre-masked circle, or every
+ * future surface inherits this one's ring decision.
  */
 import { useEffect, useRef, useState } from 'react';
-import { RotateCcw, Check, X } from 'lucide-react';
 
 import {
-  clampOffset,
-  centeredOffset,
-  cropRectFromTransform,
-  outputSize,
-} from './cropGeometry.js';
-import { BORDER2, CARD_ALT, GOLD, MUTED, R, RED, SP, FS, sans } from '../theme.js';
+  clampOffset, centeredOffset, cropRectFromTransform, outputSize, } from './cropGeometry.js';
+import { BORDER2, CARD_ALT, GOLD, MUTED, RED, SP, FS, sans } from '../theme.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -28,7 +37,12 @@ const ZOOM_STEPS = 0.01;
 /** Local file selections (blob:/data:) are same-origin; only remote URLs need CORS. */
 const needsCrossOrigin = (src) => typeof src === 'string' && !/^(blob:|data:)/i.test(src);
 
-export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit, busy = false }) {
+export default function ImageCropper({
+  src, aspect = 16 / 9, onCancel, onCommit, busy = false,
+  // Output shape — every default is the gallery cover's pre-existing behavior.
+  outputMaxWidth = 1280, outputType = 'image/jpeg', outputQuality = 0.85,
+  circular = false, applyLabel = 'Apply crop',
+}) {
   const viewportRef = useRef(null);
   const imgRef = useRef(null);
   const dragRef = useRef(null);     // { startX, startY, ox, oy }
@@ -131,20 +145,20 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
     // a silently dead Apply button.
     try {
       const rect = cropRectFromTransform({ natural, viewport, zoom, offset });
-      const out = outputSize(aspect, 1280);
+      const out = outputSize(aspect, outputMaxWidth);
       const canvas = document.createElement('canvas');
       canvas.width = out.w;
       canvas.height = out.h;
       const ctx = canvas.getContext('2d');
-      if (!ctx) { setError('Could not prepare the image for cropping.'); return; }
+      if (!ctx) { setError(t('errors.cropPrepFail')); return; }
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
       canvas.toBlob((blob) => {
         if (blob) onCommit?.(blob);
-        else setError('Could not export the cropped image. The source may not allow cross-origin use.');
-      }, 'image/jpeg', 0.85);
+        else setError(t('errors.cropExportFail'));
+      }, outputType, outputQuality);
     } catch {
-      setError('Could not export the cropped image. The source may not allow cross-origin use.');
+      setError(t('errors.cropExportFail'));
     }
   };
 
@@ -164,12 +178,14 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           width: '100%',
           aspectRatio: String(aspect),
           overflow: 'hidden',
-          borderRadius: R.md,
           border: `1px solid ${BORDER2}`,
           background: CARD_ALT,
           cursor: dragging ? 'grabbing' : 'grab',
           touchAction: 'none',
           userSelect: 'none',
+          // Preview treatment only — the exported asset is always the full
+          // square. See the header: never store a pre-masked circle.
+          ...(circular ? { borderRadius: '50%' } : null),
         }}
       >
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad/onError are resource-load lifecycle events (onLoad reads naturalWidth/Height to drive crop geometry), not user interactions */}
@@ -182,7 +198,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           // isn't tainted on commit. Omitted for blob:/data: (same-origin).
           {...(needsCrossOrigin(src) ? { crossOrigin: 'anonymous' } : {})}
           onLoad={onImgLoad}
-          onError={() => setError('Could not load the image.')}
+          onError={() => setError(t('errors.imageLoadFail'))}
           style={{
             position: 'absolute',
             left: 0,
@@ -197,10 +213,11 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
             pointerEvents: 'none',
           }}
         />
-        {/* Subtle landscape framing hint */}
+        {/* Subtle framing hint — follows the viewport's own shape. */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)',
+          ...(circular ? { borderRadius: '50%' } : null),
         }} />
       </div>
 
@@ -217,7 +234,6 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           style={{ flex: 1, accentColor: GOLD, cursor: 'pointer' }}
         />
         <IconButton
-          Icon={RotateCcw}
           glyph="↺"
           label="Reset zoom and position"
           onClick={reset}
@@ -230,7 +246,6 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
         <Button
           variant="ghost"
           size="sm"
-          icon={<X size={13} />}
           onClick={onCancel}
           disabled={busy}
         >
@@ -239,12 +254,11 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
         <Button
           variant="gold"
           size="sm"
-          icon={<Check size={13} />}
           onClick={commit}
           busy={busy}
           disabled={!natural}
         >
-          {busy ? 'Uploading…' : 'Apply crop'}
+          {busy ? 'Uploading…' : applyLabel}
         </Button>
       </div>
 

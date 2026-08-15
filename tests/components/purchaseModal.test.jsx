@@ -43,4 +43,22 @@ describe('PurchaseModal', () => {
       expect(screen.getAllByText(String(pack.credits)).length).toBeGreaterThan(0);
     }
   });
+
+  // Auto-reload consent (§4.2 / M-3b): signed-in only, OFF by default.
+  test('shows the auto-reload consent checkbox (OFF by default) for a signed-in buyer', () => {
+    mocks.storeState.auth.user = { id: 'u1' };
+    try {
+      render(<PurchaseModal onClose={() => {}} />);
+      const cb = screen.getByRole('checkbox', { name: /save my card for automatic credit reloads/i });
+      expect(cb).toBeTruthy();
+      expect(cb.checked).toBe(false);
+    } finally {
+      delete mocks.storeState.auth.user;
+    }
+  });
+
+  test('hides the consent checkbox for a signed-out visitor', () => {
+    render(<PurchaseModal onClose={() => {}} />);
+    expect(screen.queryByRole('checkbox', { name: /save my card/i })).toBeNull();
+  });
 });

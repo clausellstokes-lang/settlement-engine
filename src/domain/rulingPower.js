@@ -15,19 +15,10 @@
  *   - the CHANGE_RULING_POWER canon event (events/mutate.js) — the DM
  *     deciding it directly.
  *
- * Also home to the coup CONTEST model:
- *   - coupContenders(): the top-3 most powerful non-criminal factions are
- *     the field (criminal factions never vie openly — they have their own
- *     capture ladder; a captured seat is shadow governance, not a coup).
- *     The incumbent defends with its power AMPLIFIED by the legitimacy
- *     multiplier the settlement already computes (govMultiplier 1.30 at
- *     Endorsed → 0.60 at Crisis) — the "standing modifier" that party /
- *     user actions move by moving legitimacy — and only gets to contest
- *     the verdict at all if that amplified weight re-enters the top 3 of
- *     the combined field.
- *   - resolveCoupVerdict(): the RNG contest. Highest influence = best
- *     chance; the incumbent's hold probability scales with its amplified
- *     share, dragged by coup severity and the ruling-authority score.
+ * The coup CONTEST model (COUP_COERCION / coupContenders / resolveCoupVerdict)
+ * lives in the sibling domain/rulingPowerCoup.js — it is reached ONLY by the
+ * lazy worldPulse tick modules, and transferRulingPower (the eager entrance)
+ * uses none of it, so it is split out to keep it off the first-paint closure.
  *
  * Pure + deterministic: no Date, no Math.random — the verdict threads an
  * injected rng; sorts tiebreak on plain codepoint order (never
@@ -35,28 +26,88 @@
  * machines and would break replay).
  */
 
+import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 
 const A = FACTION_ARCHETYPES;
 
-/** @param {any} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
+// ── Types ──────────────────────────────────────────────────────────────────
+
+/**
+ * A powerStructure faction entry (legacy generator shape — `faction` is the
+ * display name field; some entries also carry `name`).
+ *
+ * ⚠ `id` IS DECLARED AND NO GENERATOR WRITES IT. Measured through the full
+ * generateSettlementPipeline: 2,175 faction rows over 360 settlements across
+ * all six tiers carry `[faction, power, desc, category, rawPower, powerLabel]`
+ * plus situational `[modifier, isGoverning, legitimacyCrisis, crisisNote,
+ * modifiers]` — and `id` on ZERO of them. It is declared anyway because it is
+ * not a phantom key like `.archetype` (see religionLegitimacy.js, which keeps
+ * that one OFF this typedef): `id` is the estate's RENAME-DECOUPLED SEAM for
+ * authored/DM records, honoured as first-class-when-present by the canonical
+ * accessors (`ladderFactionKey`, `npcInFaction`) and registered as an alias id
+ * by the dossier link web (dossier/entityLinks.js). Every reader below must
+ * therefore treat it as OPTIONAL and carry a live fallback: an unguarded
+ * `f.id` read is inert on 100% of generated data.
+ * @typedef {Object} RulingFaction
+ * @property {string} [faction]
+ * @property {string} [name]
+ * @property {string} [id]
+ * @property {string} [desc]
+ * @property {number} [power]
+ * @property {boolean} [isGoverning]
+ * @property {string[]} [modifiers]
+ * @property {boolean} [legitimacyCrisis]
+ * @property {string | null} [crisisNote]
+ */
+
+/**
+ * @typedef {Object} FactionRelationshipEdge
+ * @property {string[]} [pair]
+ * @property {string} [type]
+ * @property {string} [direction]
+ * @property {string} [narrative]
+ */
+
+/**
+ * @typedef {Object} PowerStructure
+ * @property {RulingFaction[]} [factions]
+ * @property {string} [governingName]
+ * @property {string} [government]
+ * @property {{score?: number, label?: string, govMultiplier?: number}} [publicLegitimacy]
+ * @property {FactionRelationshipEdge[]} [factionRelationships]
+ * @property {Array<{label: string, cause: string, tick: number | null}>} [previousGovernments]
+ * @property {string} [stability]
+ * @property {string} [recentConflict]
+ */
+
+/**
+ * @typedef {Object} RulingPowerSettlement
+ * @property {PowerStructure} [powerStructure]
+ * @property {string} [tier]
+ */
+
+/** @param {number} value */
+
+/**
+ * @param {unknown} value
+ * @param {number} [fallback]
+ * @returns {number}
+ */
+export function num(value, fallback = 0) {
+  return /** @type {number} */ (Number.isFinite(value) ? value : fallback);
 }
 
-/** @param {any} value @param {number} [fallback] */
-function num(value, fallback = 0) {
-  return Number.isFinite(value) ? value : fallback;
-}
-
-/** @param {any} value */
-function round2(value) {
+/** @param {number} value */
+export function round2(value) {
   return Math.round(value * 100) / 100;
 }
 
-/** @param {import('./settlement.schema.js').SimFaction} faction */
-function nameOf(faction) {
+/**
+ * @param {RulingFaction | null | undefined} faction
+ * @returns {string}
+ */
+export function nameOf(faction) {
   return String(faction?.faction || faction?.name || '').trim();
 }
 
@@ -70,7 +121,10 @@ function nameOf(faction) {
 const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
 const LARGE_TIERS = new Set(['city', 'metropolis']);
 
-/** @param {any} tier */
+/**
+ * @param {string | null | undefined} tier
+ * @returns {'small' | 'town' | 'large'}
+ */
 function tierBand(tier) {
   const t = String(tier || '').toLowerCase();
   if (SMALL_TIERS.has(t)) return 'small';
@@ -78,6 +132,7 @@ function tierBand(tier) {
   return 'town';
 }
 
+/** @type {Readonly<Record<string, {small: string, town: string, large: string}>>} */
 export const GOVERNMENT_PREFERENCES = Object.freeze({
   [A.MILITARY]:   { small: 'Militia Command',        town: 'Military Council',       large: 'Grand Military Council' },
   [A.RELIGIOUS]:  { small: 'Church Council',         town: 'Theocratic Council',     large: 'High Theocratic Council' },
@@ -98,13 +153,19 @@ export const GOVERNMENT_PREFERENCES = Object.freeze({
 });
 
 // Fallbacks when the preferred label collides with an existing faction name.
+/** @type {Readonly<Record<string, string>>} */
 const ALT_GOVERNMENT_LABELS = Object.freeze({
   [A.MERCHANT]: 'Merchant oligarchy',
   [A.NOBLE]:    'Noble Regency',
   [A.MILITARY]: 'Garrison Command',
   [A.RELIGIOUS]: 'Ecclesiastical Council',
+  // The conquest occupier's own NAME ('<power> occupation authority') CONTAINS the
+  // preferred label — the containment check below falls here so the crowned seat
+  // never reads like a duplicate of the power behind it.
+  [A.OCCUPATION]: 'Martial Administration',
 });
 
+/** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_DESCS = Object.freeze({
   [A.MILITARY]:   'Officers govern; security doctrine sets policy and the chain of command is the chain of authority.',
   [A.RELIGIOUS]:  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.',
@@ -124,22 +185,102 @@ const GOVERNMENT_DESCS = Object.freeze({
 /**
  * The government-type label an authoritative power of the given archetype
  * prefers at the given settlement tier.
+ *
+ * @param {string} archetype
+ * @param {string | null | undefined} tier
+ * @returns {string}
  */
-export function governmentLabelFor(/** @type {any} */ archetype, /** @type {any} */ tier) {
-  const prefs = (/** @type {any} */ (GOVERNMENT_PREFERENCES))[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
+export function governmentLabelFor(archetype, tier) {
+  const prefs = GOVERNMENT_PREFERENCES[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
   return prefs[tierBand(tier)];
 }
 
 /**
  * The faction entry currently carrying the governing seat.
- * @param {any} settlement
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {RulingFaction | null}
  */
 export function governingFactionOf(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  return factions.find((/** @type {any} */ f) => f?.isGoverning)
-    || factions.find((/** @type {any} */ f) => nameOf(f) && nameOf(f) === String(ps.governingName || ''))
+  return factions.find(f => f?.isGoverning)
+    || factions.find(f => nameOf(f) && nameOf(f) === String(ps.governingName || ''))
     || null;
+}
+
+/**
+ * Label-free epoch for legitimate-authority transfers.
+ *
+ * `previousGovernments` is intentionally bounded and legacy event transfers may
+ * carry a null tick.  Cause/tick tuples alone can therefore collide once the
+ * bound is full.  `transferRulingPower` also appends one `ascendant` marker to
+ * the exact winning roster entry on every real transfer; folding only those
+ * marker counts (by stable roster position/id) distinguishes that otherwise
+ * invisible transfer without making a display-name edit look like succession.
+ * This is a read helper only: dark campaigns gain no persisted bytes.
+ *
+ * ⛔ THE `faction.id` SLOT IN THE LINEAGE TUPLE STAYS ID-ONLY — DO NOT "FIX" IT
+ * WITH A NAME-DERIVED KEY. It resolves null on 100% of generated data (0 of
+ * 2,175 measured rows carry `id`), so a sweep of the estate's dead `.id` reads
+ * naturally reaches for `ladderFactionKey` / `factionIdFromName` here as it does
+ * at the two address sites (warSeatBooks.readWarSeatBooks,
+ * applyWorldPulse's seat-transition row). Both of those keys are SLUGS OF THE
+ * DISPLAY NAME, and this tuple is the one place in the estate where that is
+ * forbidden: this epoch is the succession discriminator, so a name-derived
+ * component would make every faction RENAME read as a legitimate authority
+ * transfer — the exact failure the sentence above forbids. The roster `index`
+ * plus the `ascendant` count carry the discrimination on generated worlds; the
+ * `id` slot only sharpens it for authored records that genuinely carry a
+ * rename-decoupled id. Dead-on-generated-data is CORRECT here, not a defect.
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string}
+ */
+export function authorityTransferEpochFor(settlement) {
+  const ps = settlement?.powerStructure || {};
+  const history = Array.isArray(ps.previousGovernments) ? ps.previousGovernments : [];
+  const transfers = history.map((raw) => {
+    const row = raw && typeof raw === 'object' ? raw : {};
+    const tick = Number(row.tick);
+    return [String(row.cause || ''), Number.isFinite(tick) && row.tick != null ? Math.floor(tick) : null];
+  });
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const lineage = factions.map((faction, index) => {
+    const modifiers = Array.isArray(faction?.modifiers) ? faction.modifiers : [];
+    const ascensions = modifiers.reduce((count, marker) => (
+      String(marker) === 'ascendant' ? count + 1 : count
+    ), 0);
+    return ascensions > 0 ? [index, typeof faction?.id === 'string' ? faction.id : null, ascensions] : null;
+  }).filter(Boolean);
+  return JSON.stringify([transfers, lineage]);
+}
+
+/**
+ * Governing-body labels from real power transfers, newest first.
+ *
+ * This is a read-only compatibility bridge for name-keyed ladder membership:
+ * legacy/generated NPCs may still name the old governing body after the transfer
+ * reshapes that body. Consumers may use these exact history rows as aliases while
+ * they migrate their own keyed state. Pure display renames never append a
+ * previous-government row, so they cannot masquerade as a transfer here.
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
+export function previousGovernmentLabelsOf(settlement) {
+  const history = settlement?.powerStructure?.previousGovernments;
+  if (!Array.isArray(history) || !history.length) return [];
+  const labels = [];
+  const seen = new Set();
+  for (let index = history.length - 1; index >= 0; index -= 1) {
+    const row = history[index];
+    if (!row || typeof row !== 'object') continue;
+    const label = String(row.label || '').trim();
+    if (!label || seen.has(label)) continue;
+    seen.add(label);
+    labels.push(label);
+  }
+  return labels;
 }
 
 // ── Coup contenders ────────────────────────────────────────────────────────
@@ -147,165 +288,26 @@ export function governingFactionOf(settlement) {
 // different rates — a garrison couples better than a craft guild. Influence
 // ranking still dominates (factors stay near 1).
 
-export const COUP_COERCION = Object.freeze({
-  [A.MILITARY]: 1.25,
-  [A.NOBLE]: 1.1,
-  [A.ARCANE]: 1.05,
-  [A.GOVERNMENT]: 1.0,
-  [A.CIVIC]: 1.0,
-  [A.RELIGIOUS]: 1.0,
-  [A.OCCUPATION]: 1.0,
-  [A.MERCHANT]: 0.95,
-  [A.OUTSIDER]: 0.9,
-  [A.CRAFT]: 0.85,
-  [A.LABOR]: 0.85,
-  [A.OTHER]: 0.9,
-});
-
-const MIN_CONTENDER_POWER = 5;
-
-/** @param {any} a @param {any} b */
-function byWeightDescThenName(a, b) {
-  if (b.weight !== a.weight) return b.weight - a.weight;
-  if (b.power !== a.power) return b.power - a.power;
-  return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
-}
-
-/**
- * The coup field: the top-3 most powerful non-governing, non-criminal
- * factions, plus the incumbent's amplified defense.
- *
- * The incumbent's weight = power × govMultiplier — the legitimacy band the
- * settlement already maintains (1.30 Endorsed → 0.60 Crisis). `gated` is
- * the user-facing rule "the ruler only presents a case if it re-enters the
- * top 3 post-amplification": with a full field of three challengers the
- * amplified weight must match or beat the weakest challenger; a thinner
- * field always admits the incumbent (the pool is the top 3 by definition).
- *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {{ governing: Object|null,
- *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
- *            incumbent: { name:string|null, power:number, govMultiplier:number,
- *                         amplifiedWeight:number, gated:boolean } }}
- */
-export function coupContenders(settlement) {
-  const ps = settlement?.powerStructure || {};
-  const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = governingFactionOf(settlement);
-  const govMultiplier = num(ps.publicLegitimacy?.govMultiplier, 1);
-
-  const challengers = factions
-    .filter((/** @type {any} */ f) => f && f !== governing)
-    .map((/** @type {any} */ f) => {
-      const archetype = /** @type {any} */ (factionArchetype(f));
-      const power = num(f.power);
-      return {
-        name: nameOf(f),
-        archetype,
-        power,
-        weight: round2(power * ((/** @type {any} */ (COUP_COERCION))[archetype] ?? COUP_COERCION[A.OTHER])),
-      };
-    })
-    // Criminal factions never vie for power openly — the capture ladder is
-    // their path. Powerless factions can't field a coup at all.
-    .filter((/** @type {any} */ c) => c.archetype !== A.CRIMINAL && c.power >= MIN_CONTENDER_POWER && c.name)
-    .sort(byWeightDescThenName)
-    .slice(0, 3);
-
-  const incumbentPower = num(governing?.power);
-  const amplifiedWeight = round2(incumbentPower * govMultiplier);
-  const gated = challengers.length < 3
-    || amplifiedWeight >= challengers[challengers.length - 1].weight;
-
-  return {
-    governing,
-    challengers,
-    incumbent: {
-      name: governing ? nameOf(governing) : null,
-      power: incumbentPower,
-      govMultiplier,
-      amplifiedWeight,
-      gated,
-    },
-  };
-}
-
-// ── The verdict ────────────────────────────────────────────────────────────
-
-/**
- * Resolve a coup contest. RNG is preserved — strengths shift the odds,
- * never guarantee the outcome (except the ungated collapse case, where the
- * ruler's case is too weak to even be heard: the fall is near-certain).
- *
- * @param {Object} args
- * @param {Object} args.settlement
- * @param {{ random: () => number }} args.rng
- * @param {number} [args.severity]              coup severity at the verdict (0..1)
- * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
- * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
- * @returns {{ holds:boolean, pHold:number, roll:number,
- *            winner:{name:string,archetype:string}|null,
- *            challengers:Array<any>, incumbent:Object, reason:string }}
- */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0 }) {
-  const { challengers, incumbent } = coupContenders(settlement);
-  if (!challengers.length) {
-    return {
-      holds: true, pHold: 1, roll: 0, winner: null, challengers, incumbent,
-      reason: 'No faction holds enough power to move against the seat. The plot collapses on its own.',
-    };
-  }
-
-  let pHold;
-  if (!incumbent.gated) {
-    // The amplified case never re-entered the top 3: the ruler has no
-    // standing left to argue from. The seat falls; only the heir is in question.
-    pHold = 0.08;
-  } else {
-    const totalChallenger = challengers.reduce((sum, c) => sum + c.weight, 0);
-    const share = incumbent.amplifiedWeight / Math.max(1e-6, incumbent.amplifiedWeight + totalChallenger);
-    // A hotter coup (higher severity) erodes the incumbent's edge; the
-    // ruling-authority score nudges ±0.125 across its full range.
-    const severityDrag = 1.15 - 0.4 * clamp01(severity);
-    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {any} */ (rulingAuthorityScore) - 50) / 400 : 0;
-    // warSentimentAdj (P2): 0 when the flag is off ⇒ byte-identical. A war turning sour
-    // (negative sentiment) lowers the seat's hold-chance; a sustainable one raises it.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0)));
-  }
-
-  const roll = rng.random();
-  if (roll <= pHold) {
-    return {
-      holds: true, pHold: round2(pHold), roll: round2(roll), winner: null, challengers, incumbent,
-      reason: incumbent.gated
-        ? `${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`
-        : 'Against the odds, the conspirators lost their nerve at the door.',
-    };
-  }
-
-  // The seat falls. Winner sampled ∝ weight — highest influence, best chance.
-  const total = challengers.reduce((sum, c) => sum + c.weight, 0);
-  let pick = rng.random() * total;
-  let winner = challengers[challengers.length - 1];
-  for (const c of challengers) {
-    pick -= c.weight;
-    if (pick <= 0) { winner = c; break; }
-  }
-  return {
-    holds: false, pHold: round2(pHold), roll: round2(roll),
-    winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
-    reason: incumbent.gated
-      ? `${winner.name} out-maneuvered both the seat and its rivals (weight ${winner.weight} of ${round2(total)}).`
-      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field. ${winner.name} took the seat near-unopposed.`,
-  };
-}
+// ── Coup CONTEST model (extracted) ──────────────────────────────────────────
+// COUP_COERCION + coupContenders + resolveCoupVerdict moved to
+// domain/rulingPowerCoup.js: they are reached ONLY by lazy worldPulse tick
+// modules (coup / stressorDynamics / stressorGates / deploymentReturn /
+// disposition), never by first-paint code. transferRulingPower (the eager
+// entrance via events/mutateWorld) uses none of them, so keeping them here
+// dragged the whole contest model into the first-paint closure for no eager
+// consumer. The leaf imports the shared helpers (num/round2/nameOf/
+// governingFactionOf) back from here — the safe lazy → eager direction.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
 
 // ── Legitimacy reseed ──────────────────────────────────────────────────────
 // Band thresholds + multipliers mirror factionDynamics.computePublicLegitimacy
 // and timeProgression's private reBand — the two existing writers. Keep all
 // three in step if the bands ever move.
 
-/** @param {any} prev @param {any} score */
+/**
+ * @param {{score?: number, label?: string, govMultiplier?: number} | null} prev
+ * @param {number} score
+ */
 function rebandLegitimacy(prev, score) {
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
   let band;
@@ -344,24 +346,34 @@ const LEGITIMACY_SEEDS = Object.freeze({
 });
 
 const STABILITY_BY_CAUSE = Object.freeze({
-  coup:        'Unsettled: power changed hands by force; loyalties are being re-sworn',
-  conquest:    'Subjugated: an outside power imposed the new order',
-  election:    'Stable: a fresh mandate, still finding its footing',
-  succession:  'Transitional: the succession held, the household is reordering',
-  appointment: 'Transitional: an appointed authority is establishing itself',
+  coup:        'Unsettled — power changed hands by force; loyalties are being re-sworn',
+  conquest:    'Subjugated — an outside power imposed the new order',
+  election:    'Stable — a fresh mandate, still finding its footing',
+  succession:  'Transitional — the succession held, the household is reordering',
+  appointment: 'Transitional — an appointed authority is establishing itself',
 });
 
 const MAX_PREVIOUS_GOVERNMENTS = 6;
 
-/** @param {any} archetype @param {any} tier @param {any} factions @param {any} governing */
+/**
+ * @param {string} archetype
+ * @param {string | null | undefined} tier
+ * @param {RulingFaction[]} factions
+ * @param {RulingFaction | null} governing
+ * @returns {string}
+ */
 function resolveGovernmentLabel(archetype, tier, factions, governing) {
   const preferred = governmentLabelFor(archetype, tier);
-  const taken = new Set(
-    factions.filter((/** @type {any} */ f) => f !== governing).map((/** @type {any} */ f) => nameOf(f).toLowerCase()).filter(Boolean),
-  );
-  if (!taken.has(preferred.toLowerCase())) return preferred;
-  const alt = (/** @type {any} */ (ALT_GOVERNMENT_LABELS))[archetype];
-  if (alt && !taken.has(alt.toLowerCase())) return alt;
+  // A label is taken when another faction's name EQUALS it — or CONTAINS it: the
+  // conquest occupier 'Ironhold occupation authority' contains the OCCUPATION label
+  // 'Occupation Authority', and an exact-match check would relabel the seat into a
+  // read-alike of the power behind it (two factions both reading "occupation
+  // authority" — the round-3 warDeployment collision).
+  const names = factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean);
+  const takenBy = (/** @type {string} */ label) => names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
+  if (!takenBy(preferred)) return preferred;
+  const alt = ALT_GOVERNMENT_LABELS[archetype];
+  if (alt && !takenBy(alt)) return alt;
   return `${preferred} Ascendant`;
 }
 
@@ -379,7 +391,7 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * when the transfer can't apply (no governing seat, unknown faction,
  * faction already governs).
  *
- * @param {any} settlement
+ * @param {RulingPowerSettlement} settlement
  * @param {string} newPowerName    faction name (powerStructure.factions entry)
  * @param {Object} [opts]
  * @param {'coup'|'election'|'succession'|'conquest'|'appointment'} [opts.cause]
@@ -388,17 +400,19 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
-  const cause = RULING_POWER_CAUSES.includes(/** @type {any} */ (opts.cause)) ? /** @type {any} */ (opts.cause) : 'coup';
-  const tick = Number.isFinite(opts.tick) ? opts.tick : null;
+  const cause = /** @type {keyof typeof LEGITIMACY_SEEDS} */ (RULING_POWER_CAUSES.includes(/** @type {string} */ (opts.cause)) ? opts.cause : 'coup');
+  const tick = /** @type {number | null} */ (Number.isFinite(opts.tick) ? opts.tick : null);
   const losers = Array.isArray(opts.losers) ? opts.losers : [];
 
-  const ps = settlement?.powerStructure;
+  // Non-null by construction: when powerStructure is missing, governingFactionOf
+  // returns null and we bail on the next check before ever reading `ps`.
+  const ps = /** @type {PowerStructure} */ (settlement?.powerStructure);
   const factions = Array.isArray(ps?.factions) ? ps.factions : [];
   const governing = governingFactionOf(settlement);
   if (!governing) return { settlement, transfer: null, error: 'no_governing_faction' };
 
   const target = String(newPowerName || '').trim().toLowerCase();
-  const winner = factions.find((/** @type {any} */ f) => f !== governing && nameOf(f).toLowerCase() === target);
+  const winner = factions.find(f => f !== governing && nameOf(f).toLowerCase() === target);
   if (!winner) {
     return {
       settlement, transfer: null,
@@ -406,17 +420,17 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     };
   }
 
-  const archetype = /** @type {any} */ (factionArchetype(winner));
+  const archetype = factionArchetype(winner);
   const fromGovernment = nameOf(governing);
   const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing);
 
-  const nextFactions = factions.map((/** @type {any} */ f) => {
+  const nextFactions = factions.map(f => {
     if (f === governing) {
       return {
         ...f,
         faction: toGovernment,
         ...(f.name != null ? { name: toGovernment } : {}),
-        desc: (/** @type {any} */ (GOVERNMENT_DESCS))[archetype] || GOVERNMENT_DESCS[A.OTHER],
+        desc: GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER],
         isGoverning: true,
         modifiers: [...(f.modifiers || []), cause === 'coup' ? 'seized_power' : cause],
         legitimacyCrisis: false,
@@ -426,8 +440,8 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     if (f === winner) {
       return {
         ...f,
-        // Clamp to the 0-100 faction-power domain that coup odds + power-band
-        // computations assume; a 95-100 winner would otherwise land at 101-106.
+        // Clamp to the 0-100 power domain (ported master fix): every downstream
+        // computation assumes it; a 95-100 winner would otherwise land at 101-106.
         power: Math.max(0, Math.min(100, Math.round(num(f.power) + 6))),
         modifiers: [...(f.modifiers || []), 'ascendant'],
       };
@@ -437,7 +451,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
 
   const oldLegitimacy = ps.publicLegitimacy || null;
   const oldScore = num(oldLegitimacy?.score, 50);
-  const seed = (/** @type {any} */ (LEGITIMACY_SEEDS))[cause];
+  const seed = LEGITIMACY_SEEDS[cause];
   const newScore = Math.max(seed.min, Math.min(seed.max, seed.base + (50 - oldScore) * seed.oldPull));
   const publicLegitimacy = rebandLegitimacy(oldLegitimacy, newScore);
 
@@ -446,12 +460,12 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   // (whatever friction it carried died with the old order); the (coup) losers
   // get grudge edges.
   const winnerName = nameOf(winner);
-  const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()}. The seat answers to them now.`;
+  const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()} — the seat answers to them now.`;
   let pairedWithWinner = false;
-  const renamedRelationships = (ps.factionRelationships || []).map((/** @type {any} */ rel) => {
+  const renamedRelationships = (ps.factionRelationships || []).map(rel => {
     if (!Array.isArray(rel?.pair)) return rel;
     const pair = rel.pair.includes(fromGovernment)
-      ? rel.pair.map((/** @type {any} */ n) => (n === fromGovernment ? toGovernment : n))
+      ? rel.pair.map(n => (n === fromGovernment ? toGovernment : n))
       : rel.pair;
     const next = pair === rel.pair ? rel : { ...rel, pair };
     if (pair.includes(toGovernment) && pair.includes(winnerName)) {
@@ -460,9 +474,11 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     }
     return next;
   });
-  const extraRelationships = /** @type {any[]} */ ([]);
-  const havePair = (/** @type {any} */ a, /** @type {any} */ b) => renamedRelationships.concat(extraRelationships)
-    .some((/** @type {any} */ rel) => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
+  /** @type {FactionRelationshipEdge[]} */
+  const extraRelationships = [];
+  /** @type {(a: string, b: string) => boolean} */
+  const havePair = (a, b) => renamedRelationships.concat(extraRelationships)
+    .some(rel => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
   if (!pairedWithWinner && toGovernment !== winnerName) {
     extraRelationships.push({
       pair: [toGovernment, winnerName],
@@ -477,7 +493,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
       pair: [toGovernment, loser],
       type: 'competitive',
       direction: 'escalating',
-      narrative: `${loser} moved for the seat and lost. The new order has not forgotten, and neither have they.`,
+      narrative: `${loser} moved for the seat and lost — the new order has not forgotten, and neither have they.`,
     });
   }
 
@@ -508,7 +524,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         previousGovernments,
         publicLegitimacy,
         factionRelationships: [...renamedRelationships, ...extraRelationships],
-        stability: (/** @type {any} */ (STABILITY_BY_CAUSE))[cause],
+        stability: STABILITY_BY_CAUSE[cause],
         recentConflict: cause === 'coup'
           ? `${nameOf(winner)} overthrew the ${fromGovernment.toLowerCase()} and reshaped the government as a ${toGovernment.toLowerCase()}.`
           : `Power passed to ${nameOf(winner)} by ${cause}; the government now sits as a ${toGovernment.toLowerCase()}.`,

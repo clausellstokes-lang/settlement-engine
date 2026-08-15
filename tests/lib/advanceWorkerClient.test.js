@@ -6,8 +6,10 @@
  *     in-thread `fallback` unchanged — this is what keeps every headless sim test
  *     (golden master, conservation) running the pure function with no Worker.
  *  2. WORKER PROTOCOL: with a Worker, it relays per-tick progress (and re-dispatches
- *     the toolbar CustomEvent), resolves with the worker's result, and rejects on
- *     a worker error — matching the in-thread throw the caller already handles.
+ *     the toolbar CustomEvent) and resolves with the worker's result.
+ *  3. FAILURE TAXONOMY: a SIM throw ({type:'error'} message) rejects so the caller's
+ *     rollback fires; a TRANSPORT failure (onerror / onmessageerror / watchdog) falls
+ *     back to the byte-identical in-thread path instead of failing the advance.
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { runAdvanceInterval } from '../../src/lib/advanceWorkerClient.js';
@@ -37,6 +39,22 @@ describe('runAdvanceInterval — fallback', () => {
     expect(result).toBe('sync-result');
     expect(fallback).toHaveBeenCalledOnce();
   });
+
+  it('applies an explicit pinned content projection to the in-thread path', async () => {
+    delete globalThis.Worker;
+    const payload = { interval: 'one_month' };
+    const customContent = { services: [{ id: 'service-a' }] };
+    const fallback = vi.fn(p => p);
+
+    const result = await runAdvanceInterval(payload, {
+      fallback,
+      customContent,
+    });
+
+    expect(result).toEqual({ ...payload, customContent });
+    expect(fallback).toHaveBeenCalledWith({ ...payload, customContent });
+    expect(payload).not.toHaveProperty('customContent');
+  });
 });
 
 describe('runAdvanceInterval — worker protocol', () => {
@@ -50,6 +68,7 @@ describe('runAdvanceInterval — worker protocol', () => {
       terminate() { this.terminated = true; }
       emit(data) { this.onmessage?.({ data }); }
       emitError(err) { this.onerror?.({ error: err }); }
+      emitMessageError() { this.onmessageerror?.({}); }
     };
     return instances;
   }
@@ -95,11 +114,72 @@ describe('runAdvanceInterval — worker protocol', () => {
     expect(w.terminated).toBe(true);
   });
 
-  it('rejects on a worker onerror event', async () => {
+  it('falls back to in-thread on a worker onerror (transport failure), not reject', async () => {
     const instances = installFakeWorker();
-    const p = runAdvanceInterval({ interval: 'one_month' }, { fallback: () => 'nope' });
-    instances[0].emitError(new Error('worker crashed'));
-    await expect(p).rejects.toThrow(/worker crashed/);
+    const fallback = vi.fn((p) => ({ recovered: true, echoed: p }));
+    const payload = { interval: 'one_month' };
+    const p = runAdvanceInterval(payload, { fallback });
+    instances[0].emitError(new Error('worker script failed to load'));
+    const result = await p;
+    expect(result).toEqual({ recovered: true, echoed: payload });
+    expect(fallback).toHaveBeenCalledOnce();
+    expect(fallback).toHaveBeenCalledWith(payload);
     expect(instances[0].terminated).toBe(true);
+  });
+
+  it('falls back to in-thread on onmessageerror (un-cloneable message)', async () => {
+    const instances = installFakeWorker();
+    const fallback = vi.fn(() => 'in-thread');
+    const p = runAdvanceInterval({ interval: 'one_month' }, { fallback });
+    instances[0].emitMessageError();
+    expect(await p).toBe('in-thread');
+    expect(fallback).toHaveBeenCalledOnce();
+    expect(instances[0].terminated).toBe(true);
+  });
+
+  it('a SIM throw ({type:error}) still rejects — the in-thread path would throw too', async () => {
+    const instances = installFakeWorker();
+    const fallback = vi.fn(() => 'must-not-run');
+    const p = runAdvanceInterval({ interval: 'one_month' }, { fallback });
+    instances[0].emit({ type: 'error', message: 'kernel exploded', stack: 'x' });
+    await expect(p).rejects.toThrow(/kernel exploded/);
+    expect(fallback).not.toHaveBeenCalled();
+    expect(instances[0].terminated).toBe(true);
+  });
+
+  it('propagates a genuine sim error surfaced by the in-thread fallback after a transport failure', async () => {
+    const instances = installFakeWorker();
+    const fallback = vi.fn(() => { throw new Error('deterministic sim failure'); });
+    const p = runAdvanceInterval({ interval: 'one_month' }, { fallback });
+    instances[0].emitError(new Error('transport died'));
+    await expect(p).rejects.toThrow(/deterministic sim failure/);
+  });
+
+  it('one-shot latch: a late worker result after an onerror fallback does not double-settle', async () => {
+    const instances = installFakeWorker();
+    const fallback = vi.fn(() => 'from-fallback');
+    const p = runAdvanceInterval({ interval: 'one_month' }, { fallback });
+    const w = instances[0];
+    w.emitError(new Error('transport died'));      // commits to the in-thread fallback
+    w.emit({ type: 'result', result: 'stale-worker-result' }); // arrives late — ignored
+    expect(await p).toBe('from-fallback');
+    expect(fallback).toHaveBeenCalledOnce();
+  });
+
+  it('watchdog transport-timeout falls back in-thread when the worker wedges mid-run', async () => {
+    vi.useFakeTimers();
+    try {
+      const instances = installFakeWorker();
+      const fallback = vi.fn(() => 'watchdog-fallback');
+      const p = runAdvanceInterval({ interval: 'one_year' }, { fallback });
+      // one tick, then silence — the per-tick watchdog should fire and fall back.
+      instances[0].emit({ type: 'progress', detail: { ticksDone: 1, ticksTotal: 48 } });
+      await vi.advanceTimersByTimeAsync(30001);
+      expect(await p).toBe('watchdog-fallback');
+      expect(fallback).toHaveBeenCalledOnce();
+      expect(instances[0].terminated).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

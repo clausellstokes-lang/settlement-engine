@@ -1,7 +1,7 @@
 /**
  * domain/healingLedger.js — the canonical conserved healing-supply quantity for a settlement.
  *
- * The healing classifier — the regex over institution names that decides what
+ * P3.3b Stage 4. The healing classifier — the regex over institution names that decides what
  * counts as a healing-capable institution — was COPY-PASTED, byte-identical, in three places:
  * capacityModel.deriveHealing, causalState.deriveHealingCapacity, and magicProfile. Any change to
  * "what counts as healing" had to be edited in all three. This is the single home for that
@@ -15,6 +15,9 @@
  * Pure; defensive. `healerCount` is always meaningful (0 == no healing institutions, itself a signal),
  * so unlike the other ledgers there is no present-gate on the count.
  */
+
+import { liveInstitutions } from './institutions/institutionRoster.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 
 /**
  * Canonical healing-institution classifier. Single source of truth for "what name reads as a
@@ -36,12 +39,24 @@ export const HEALING_INSTITUTION_PATTERN =
  */
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @typedef {Object} HealingSettlementView
+ * @property {Array<{name?: string}>} [institutions]
+ * @property {{availableServices?: {healing?: string[]}}} [economicState]
+ * @property {{healing?: string[]}} [availableServices]
+ */
+
+/**
+ * @param {HealingSettlementView} [settlement]
  * @returns {HealingLedger}
  */
 export function healingLedger(settlement) {
-  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const healerCount = inst.filter((/** @type {any} */ i) => HEALING_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  // LIVE roster only — a calamity-ruined temple/hospital/infirmary is not a live healer
+  // (ruin-filter class). `present` below still reads the raw roster (existence, not liveness).
+  const inst = liveInstitutions(settlement);
+  const healerCount = inst
+    .map(nativeSemanticName)
+    .filter(name => name && HEALING_INSTITUTION_PATTERN.test(name))
+    .length;
   const svc = settlement?.economicState?.availableServices?.healing
            ?? settlement?.availableServices?.healing;
   return {

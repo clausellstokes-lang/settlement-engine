@@ -22,9 +22,10 @@
  */
 
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { slugify as kernelSlugify } from '../kernel/slugify.js';
 import { INSTITUTION_SERVICES } from '../data/institutionServices.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
-import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
+import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
 // Import the pure-data meta map, not the full stressTypes.js. The full
 // file has runtime closures that capture _rng from generators/rngContext -
 // loading it sync (which we do here, from app boot via dependencyEngine)
@@ -32,7 +33,6 @@ import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsDa
 // file has every field this enumerator reads (label, historyColour,
 // viabilityNote) with zero imports.
 import { STRESS_TYPE_META as STRESS_TYPE_MAP } from '../data/stressTypesMeta.js';
-import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 
 // ── Constants ───────────────────────────────────────────────────────────────
 
@@ -63,11 +63,7 @@ export const CUSTOM_SLICE_KEY_FOR = {
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 export function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
+  return kernelSlugify(s, { sep: '_' });
 }
 
 export function prebuiltRefId(category, name) {
@@ -99,7 +95,49 @@ export function parseRefId(refId) {
     const rest = refId.slice('custom:'.length);
     return { source: 'custom', localUid: rest || localUid };
   }
+  if (refId.startsWith('deity:')) {
+    // A minted deity identity ref: `deity:<scope>:<slug>` (scope = the authoring
+    // account's localUid). Scope is the account-local unique token that keeps two
+    // accounts' same-named homebrew deities from identity-merging. A scopeless
+    // legacy form `deity:<name>` parses with an empty scope (name-identity only).
+    const parts = refId.split(':');
+    return parts.length >= 3
+      ? { source: 'deity', scope: parts[1] || '', slug: parts.slice(2).join(':') }
+      : { source: 'deity', scope: '', slug: parts[1] || '' };
+  }
   return null;
+}
+
+/**
+ * Mint the STABLE, ACCOUNT-SCOPED identity ref for a deity — the id the embed
+ * bridge stamps onto config.primaryDeityRef / the frozen snapshot's `_deityRef`,
+ * and the key the pantheon ratchet identity-buckets by.
+ *
+ * Format `deity:<scope>:<slug>`, scope = the authoring account's local unique
+ * token for the deity (its `localUid`, falling back to `id`). This closes the
+ * cross-account identity-merge: two accounts' same-named homebrew deities
+ * ("War Father" vs "War Father") carry DISTINCT localUids → distinct refs, so a
+ * shared campaign keeps them two gods, while the SAME authored deity assigned to
+ * several settlements within ONE account keeps its single identity (same localUid
+ * → same ref → shared pantheon niche). The engine keeps treating the ref as
+ * opaque; only the MINTING moved off the name — deityIdOf's bare `deity:<name>`
+ * fallback (which name-collides) is now unreachable for an assigned deity.
+ *
+ * Returns null for a nameless raw. A scopeless raw (e.g. a future prebuilt deity
+ * with no localUid) mints `deity:<slug>` — the shared global pool where
+ * name-identity IS intentional.
+ *
+ * @param {{ name?: unknown, localUid?: unknown, id?: unknown } | null | undefined} raw
+ * @returns {string|null}
+ */
+export function mintDeityRef(raw) {
+  if (!raw) return null;
+  const slug = slugify(raw.name);
+  if (!slug) return null;
+  const scope = raw.localUid != null ? String(raw.localUid)
+    : raw.id != null ? String(raw.id)
+    : null;
+  return scope ? `deity:${scope}:${slug}` : `deity:${slug}`;
 }
 
 // ── Prebuilt enumerators ────────────────────────────────────────────────────
@@ -226,32 +264,44 @@ function enumeratePrebuiltStressors() {
 
 function enumeratePrebuiltTradeGoods() {
   const out = new Map();  // dedupe by name across tiers + export/import
+  const mint = (name, props, tier, direction) => {
+    if (!name || !props || typeof props !== 'object') return;
+    if (out.has(name)) {
+      // remember it appears in both directions if so
+      out.get(name).directions.add(direction);
+      return;
+    }
+    out.set(name, {
+      refId: prebuiltRefId('tradeGoods', name),
+      name,
+      category: 'tradeGoods',
+      subcategory: props?.category || 'other',
+      source: 'prebuilt',
+      tags: [],
+      desc: props?.desc || '',
+      tierMin: tier,
+      directions: new Set([direction]),
+      raw: props || {},
+    });
+  };
   const ingest = (byTier, direction) => {
     for (const [tier, byName] of Object.entries(byTier || {})) {
       if (!byName || typeof byName !== 'object') continue;
-      for (const [name, props] of Object.entries(byName)) {
-        if (!name) continue;
-        if (out.has(name)) {
-          // remember it appears in both directions if so
-          out.get(name).directions.add(direction);
-          continue;
+      for (const [key, val] of Object.entries(byName)) {
+        // Two shapes coexist: GOODS_MODIFIERS_BY_TIER is { name: props } (mint by
+        // key); IMPORT_GOODS_BY_TIER is { group: [{ name, … }] } (mint each element
+        // by its OWN .name — the group key is a bucket label, never a good). Reading
+        // the group shape flat once minted the bucket keys (basic/fromHigher/…) as
+        // phantom goods and skipped every real import good. [data-tables-1]
+        if (Array.isArray(val)) {
+          for (const item of val) mint(item?.name, item, tier, direction);
+        } else {
+          mint(key, val, tier, direction);
         }
-        out.set(name, {
-          refId: prebuiltRefId('tradeGoods', name),
-          name,
-          category: 'tradeGoods',
-          subcategory: props?.category || 'other',
-          source: 'prebuilt',
-          tags: [],
-          desc: props?.desc || '',
-          tierMin: tier,
-          directions: new Set([direction]),
-          raw: props || {},
-        });
       }
     }
   };
-  ingest(EXPORT_GOODS_BY_TIER, 'export');
+  ingest(GOODS_MODIFIERS_BY_TIER, 'export');
   ingest(IMPORT_GOODS_BY_TIER, 'import');
   return Array.from(out.values()).map(g => ({
     ...g,
@@ -259,35 +309,35 @@ function enumeratePrebuiltTradeGoods() {
   }));
 }
 
-function enumeratePrebuiltResourceChains() {
-  // Sourced from SUPPLY_CHAIN_NEEDS (need_group → chains[]) which is what the
-  // engine matches against. Each chain's refId slug encodes the full chain id
-  // (`<needKey>__<chainId>`) so consumers can reconstruct `<needKey>.<chainId>`
-  // to compare with the engine's chain ids.
-  const out = [];
-  for (const [needKey, need] of Object.entries(SUPPLY_CHAIN_NEEDS || {})) {
-    if (!needKey) continue;
-    const chains = Array.isArray(need?.chains) ? need.chains : [];
-    for (const chain of chains) {
-      if (!chain || typeof chain !== 'object') continue;
-      const slug = `${needKey}__${slugify(chain.id || chain.label || '')}`;
-      out.push({
-        refId: `prebuilt:resourceChains:${slug}`,
-        name: chain.label || chain.id || slug,
-        category: 'resourceChains',
-        subcategory: need?.label || needKey,
-        source: 'prebuilt',
-        tags: chain.exportable ? ['exportable'] : [],
-        desc: Array.isArray(chain.outputs) && chain.outputs.length
-          ? `→ ${chain.outputs.slice(0, 4).join(', ')}`
-          : (chain.resource ? `from ${chain.resource}` : ''),
-        // Engine-facing chain id (matches `${needKey}.${chain.id}` exactly)
-        engineChainId: chain.id ? `${needKey}.${chain.id}` : null,
-        raw: chain,
-      });
-    }
-  }
-  return out;
+// ── Prebuilt resource-chains: a LAZY-provided category (FP-G10 reclaim) ───────
+// The resource-chains enumerator + its ~60 KB SUPPLY_CHAIN_NEEDS table
+// (data/supplyChainData.js) were the SOLE first-paint (eager) importer of that
+// table, dragging it into the eager `data` chunk for a registry category NO
+// first-paint path consumes. The category is read only by
+// dependencyEngine.chainsFedByResource — a legacy `feedsChains` resolver whose
+// slug-reconstruction fallback is BYTE-IDENTICAL to the enumerated engineChainId
+// (every SUPPLY_CHAIN_NEEDS chain id is already a slug, and a missing chain falls
+// back on BOTH paths) — and by no live UI (feedsChains is no longer an authored
+// dependency field, so no picker/summary surfaces the prebuilt chains). The
+// enumerator + table now live in the lazy leaf lib/prebuiltResourceChains.js,
+// which self-registers via registerPrebuiltResourceChains on load. Until it loads,
+// this category is EMPTY — byte-identical, because chainsFedByResource falls back
+// and nothing lists prebuilt resourceChains. computeActiveChains (the feedsChains
+// consumer, on the lazy engine chunk) imports the leaf, so the catalog loads with
+// generation and the capability stays live off the first-paint path.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget) +
+//   tests/lib/prebuiltResourceChains.test.js (fallback byte-identity + registration).
+let _prebuiltResourceChainsEnum = null;
+
+/**
+ * Register the (lazy) prebuilt resource-chains enumerator. Called once from the
+ * lib/prebuiltResourceChains.js leaf on its load. Idempotent; invalidates the
+ * prebuilt cache so the next buildRegistry surfaces the freshly-loaded category.
+ * @param {() => any[]} fn
+ */
+export function registerPrebuiltResourceChains(fn) {
+  _prebuiltResourceChainsEnum = typeof fn === 'function' ? fn : null;
+  _prebuiltCache = null;
 }
 
 // Cache prebuilt enumerations (these never change at runtime).
@@ -310,7 +360,12 @@ function getPrebuiltEntries() {
     resources:      _safeEnum(enumeratePrebuiltResources, 'resources'),
     stressors:      _safeEnum(enumeratePrebuiltStressors, 'stressors'),
     tradeGoods:     _safeEnum(enumeratePrebuiltTradeGoods, 'tradeGoods'),
-    resourceChains: _safeEnum(enumeratePrebuiltResourceChains, 'resourceChains'),
+    // Lazy-provided (see registerPrebuiltResourceChains above): [] until the
+    // lib/prebuiltResourceChains.js leaf loads — byte-identical for every
+    // consumer (chainsFedByResource falls back; nothing lists this category).
+    resourceChains: _prebuiltResourceChainsEnum
+      ? _safeEnum(_prebuiltResourceChainsEnum, 'resourceChains')
+      : [],
   };
   return _prebuiltCache;
 }
@@ -353,6 +408,7 @@ function enumerateCustom(category, customContent) {
  * @property {string} name
  * @property {string} category
  * @property {string} [subcategory]
+ * @property {string} [key]
  * @property {string} source - 'prebuilt' | 'custom'
  * @property {string[]} [tags]
  * @property {string} [desc]
@@ -410,9 +466,17 @@ export function buildRegistry(customContent) {
       if (!refId) return null;
       const direct = index.get(refId);
       if (direct) return direct;
+      const parsed = parseRefId(refId);
+      // A minted deity identity ref (`deity:<scope>:<slug>`) round-trips back to
+      // its authored deity via the scope (the localUid). The engine never does
+      // this — refs stay opaque there — but authoring surfaces that re-open the
+      // editor from an embedded snapshot resolve the source record this way.
+      if (parsed?.source === 'deity' && parsed.scope) {
+        const viaScope = index.get(`custom:${parsed.scope}`);
+        if (viaScope) return viaScope;
+      }
       // Best-effort: a bare name (legacy form) - try prebuilt name lookup.
       // This lets older saves whose deps stored raw names still resolve.
-      const parsed = parseRefId(refId);
       if (!parsed) {
         // Treat as a bare name across all categories.
         const slug = slugify(refId);
@@ -449,32 +513,4 @@ export function buildRegistry(customContent) {
 export function buildRegistryFromStore(getState) {
   const s = typeof getState === 'function' ? getState() : getState;
   return buildRegistry(s?.customContent || {});
-}
-
-/**
- * Resolve a deity ref → the FROZEN snapshot embedded on a settlement when a patron
- * or cult is assigned. This is the one source of that snapshot shape: the
- * EventComposer (which now stages SET_PRIMARY_DEITY / IMPOSE_CULT) and the
- * setPrimaryDeity / imposeCult store actions (the map's immediate-apply path) both
- * mint the SAME fields, so a deity assigned from the dossier and one assigned from
- * the map are byte-identical. Returns null for a falsy or unresolvable ref (the
- * caller refuses rather than embedding a half-resolved record).
- * @param {any} customContent  the store's customContent bag
- * @param {string|null|undefined} refId  a `custom:<localUid>` deity ref
- */
-export function resolveDeitySnapshot(customContent, refId) {
-  if (!refId) return null;
-  const entry = buildRegistry(customContent || {}).resolve(String(refId));
-  const raw = entry?.raw;
-  if (!raw) return null;
-  return {
-    name: raw.name,
-    alignmentAxis: raw.alignmentAxis,
-    temperamentAxis: raw.temperamentAxis,
-    rankAxis: raw.rankAxis,
-    // lawAxis (B5) — a legacy 3-axis deity has none; mutate.js defaults it to
-    // 'neutral' in the embed, so the snapshot stays self-contained either way.
-    lawAxis: raw.lawAxis,
-    ...(raw.domain ? { domain: raw.domain } : {}),
-  };
 }

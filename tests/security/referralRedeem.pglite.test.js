@@ -36,6 +36,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '107_referral_redeem.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
@@ -201,7 +203,7 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
         public.referrals, public.redemptions, public.redeem_codes, public.processed_webhook_events
         to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`
@@ -369,7 +371,7 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
     it('the claim is ONE guarded UPDATE (source pin: race-safe under true concurrency)', () => {
       // The row lock + re-evaluated WHERE of a single UPDATE ... status='pending'
       // ... RETURNING is what starves the concurrent duplicate; pin its shape.
-      const body = SRC.match(/create or replace function public\.grant_referral[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const body = SRC.match(/^create or replace function public\.grant_referral[\s\S]*?\$\$;/im)?.[0] ?? '';
       expect(body).toMatch(/update public\.referrals[\s\S]*?where referee_user_id = p_referee[\s\S]*?and status = 'pending'[\s\S]*?returning/i);
     });
   });
@@ -508,7 +510,7 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
       // Under true concurrency the code row lock + re-evaluated WHERE is what
       // makes the last seat single-winner; pin that the increment and the
       // max_uses guard live in the SAME statement.
-      const body = SRC.match(/create or replace function public\.reserve_redemption[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const body = SRC.match(/^create or replace function public\.reserve_redemption[\s\S]*?\$\$;/im)?.[0] ?? '';
       expect(body).toMatch(/update public\.redeem_codes[\s\S]*?set uses_count = uses_count \+ 1[\s\S]*?and uses_count < max_uses[\s\S]*?returning/i);
     });
 

@@ -23,9 +23,16 @@
  */
 
 
+/** @typedef {import('./status.js').Impairment} Impairment */
+
 /** @typedef {'minor'|'notable'|'key'|'pillar'} NpcImportance */
 
-/** @typedef {'active'|'dead'|'missing'|'exiled'|'retired'} NpcStatus */
+/** @typedef {'active'|'dead'|'missing'|'exiled'|'retired'|'removed'} NpcStatus
+ *
+ * 'removed' comes from the shared entity lifecycle (see entities/status.js
+ * EntityStatus — "NPC departed"); the rest are NPC-specific. Successor
+ * inference treats dead/removed/exiled NPCs as ineligible.
+ */
 
 /** @typedef {Object} NpcStructural
  *  @property {string} id
@@ -34,27 +41,34 @@
  *  @property {NpcImportance} importance
  *  @property {NpcStatus} status
  *  @property {string[]=} linkedInstitutionIds
- *  @property {string[]=} linkedFactionIds
- *  @property {number=} influence              0-100, optional
- *  @property {number=} legitimacyContribution 0-100 — what they prop up when alive
- *  @property {number=} stabilityContribution  0-100 — how much their absence destabilizes
+ *  @property {string[]=} linkedFactionIds  id-first faction handles: faction.id,
+ *    else the generated seat's canonical .faction/.name until the ID-only migration
+ *  @property {(number|null)=} influence              0-100; null when never generated
+ *  @property {(number|null)=} legitimacyContribution 0-100 — what they prop up when alive
+ *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
  *  @property {string=} removedByEventId
  *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
- *  @property {string=} flaw                   character flaw — the organic-corruption vector
- *  @property {string=} temperament            input alias; stored as personality.dominant
- *  @property {Object=} personality            {dominant?, ideal?, bond?, ambition?, …} display traits
- *  @property {(string|Object)=} goal          {short?, long?} or a plain string
- *  @property {(string|Object)=} goals         input alias for goal
- *  @property {string=} constraint             input alias; stored as activeConstraint
- *  @property {string=} activeConstraint       a binding constraint on the NPC
- *  @property {(string|Object)=} secret        {what?, stakes?} or a plain string
  *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
  *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
  *                                             id (e.g. the originating event id); not persisted
  */
+
+/**
+ * Loose NPC input for the tier-inference fallback — generator output or
+ * legacy-save NPCs that may predate the structural fields. Legacy saves can
+ * carry importance strings outside the canonical tiers; the IMPORTANCE_WEIGHT
+ * guard in inferImportance filters those at runtime.
+ *
+ * @typedef {Object} NpcLike
+ * @property {NpcImportance=} importance
+ * @property {string=} role
+ * @property {string=} title   legacy field — some generator paths used title, not role
+ */
+
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
 
 const IMPORTANCE_WEIGHT = {
   minor:   0.0,  // suppresses propagation entirely
@@ -68,11 +82,11 @@ const IMPORTANCE_WEIGHT = {
  * tags each NPC at generation time; this is a fallback for legacy
  * saves.
  *
- * @param {import('../settlement.schema.js').SimNpc} npc
+ * @param {NpcLike | null | undefined} npc   NpcStructural also satisfies NpcLike
  * @returns {NpcImportance}
  */
 export function inferImportance(npc) {
-  if (npc?.importance && /** @type {Record<string, number>} */ (IMPORTANCE_WEIGHT)[npc.importance] !== undefined) return npc.importance;
+  if (npc?.importance && IMPORTANCE_WEIGHT[npc.importance] !== undefined) return npc.importance;
   // Power, leadership, or named-role NPCs are more likely "key"
   const role = String(npc?.role || npc?.title || '').toLowerCase();
   if (/high priest|patriarch|matriarch|archmage|dragon|lord mayor|noble lord|baron|baroness|duke|duchess/.test(role)) return 'pillar';
@@ -82,7 +96,9 @@ export function inferImportance(npc) {
 }
 
 /** Numeric weight (0-1) for propagation strength.
- *  @param {import('../settlement.schema.js').SimNpc} npc */
+ * @param {NpcLike | null | undefined} npc   NpcStructural also satisfies NpcLike
+ * @returns {number}
+ */
 export function importanceWeight(npc) {
   return IMPORTANCE_WEIGHT[inferImportance(npc)] ?? 0;
 }
@@ -102,7 +118,7 @@ export function createNpc(input = {}) {
     ? String(input._idSeed)
     : [input.name, input.role, ...(input.linkedFactionIds || []), ...(input.linkedInstitutionIds || [])].join('|');
   const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortHash(idSeed)}`;
-  const out = {
+  return {
     id,
     name: input.name || 'Unnamed',
     role: input.role || '',
@@ -117,42 +133,6 @@ export function createNpc(input = {}) {
     potentialSuccessors:     input.potentialSuccessors || [],
     notes: input.notes || '',
   };
-
-  // Authored descriptive traits. The NPC read card (npcComponents NPCInlineCard,
-  // via entityLinks normalizeNpcTraits) reads these in specific shapes; we accept
-  // lenient plain strings here and store them in exactly those shapes so an
-  // authored NPC shows precisely what the author typed. Each is retained only
-  // when supplied — a created NPC with none of them keeps its old footprint.
-  //   - temperament → personality.dominant (the card's "Temperament" trait chip)
-  //   - flaw        → top-level flaw (the "Flaw" chip)
-  //   - goal        → { short } when a string was passed, else the object as-is
-  //   - constraint  → activeConstraint
-  //   - secret      → { what } when a string was passed, else the object as-is
-  const traits = /** @type {Record<string, any>} */ (out);
-  if (input.temperament != null && input.temperament !== '') {
-    const existing = (input.personality && typeof input.personality === 'object' && !Array.isArray(input.personality))
-      ? input.personality
-      : {};
-    traits.personality = { ...existing, dominant: input.temperament };
-  } else if (input.personality !== undefined) {
-    traits.personality = input.personality;
-  }
-  if (input.flaw != null && input.flaw !== '') traits.flaw = input.flaw;
-  if (input.goal != null && input.goal !== '') {
-    traits.goal = typeof input.goal === 'string' ? { short: input.goal } : input.goal;
-  } else if (input.goals != null && input.goals !== '') {
-    traits.goal = typeof input.goals === 'string' ? { short: input.goals } : input.goals;
-  }
-  if (input.constraint != null && input.constraint !== '') {
-    traits.activeConstraint = input.constraint;
-  } else if (input.activeConstraint != null && input.activeConstraint !== '') {
-    traits.activeConstraint = input.activeConstraint;
-  }
-  if (input.secret != null && input.secret !== '') {
-    traits.secret = typeof input.secret === 'string' ? { what: input.secret } : input.secret;
-  }
-
-  return /** @type {NpcStructural} */ (out);
 }
 
 /**
@@ -166,7 +146,7 @@ export function createNpc(input = {}) {
  *
  * @param {NpcStructural} npc
  * @param {string} eventId
- * @returns {{ npc: NpcStructural, institutionImpairments: Array<{instId:string, impairment:Object}>, factionImpairments: Array<{factionId:string, impairment:Object}> }}
+ * @returns {{ npc: NpcStructural, institutionImpairments: Array<{instId:string, impairment:Impairment}>, factionImpairments: Array<{factionId:string, impairment:Impairment}> }}
  */
 export function killNpc(npc, eventId) {
   const dead = /** @type {NpcStructural} */ ({ ...npc, status: 'dead', removedByEventId: eventId });
@@ -176,7 +156,9 @@ export function killNpc(npc, eventId) {
   // death narratively but the engine doesn't ripple it through.
   if (weight === 0) return { npc: dead, institutionImpairments: [], factionImpairments: [] };
 
+  /** @type {Array<{instId: string, impairment: Impairment}>} */
   const institutionImpairments = [];
+  /** @type {Array<{factionId: string, impairment: Impairment}>} */
   const factionImpairments = [];
 
   for (const instId of npc.linkedInstitutionIds || []) {
@@ -211,7 +193,7 @@ export function killNpc(npc, eventId) {
         type: npc.importance === 'pillar' ? 'leadership' : 'membership',
         severity: weight,
         causeEventId: eventId,
-        description: `${npc.name} is gone. ${npc.importance === 'pillar' ? 'Leadership' : 'Ranks'} affected.`,
+        description: `${npc.name} is gone — ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
       },
     });
   }
@@ -234,10 +216,29 @@ export function killNpc(npc, eventId) {
  * Returns the updated NPC plus the inverse impairments that should be
  * applied to the institution (negative-severity impairment = restore).
  *
- * @param {{ npc?: any, institutionId?: any, role?: any, quality?: any, factionAlignment?: any, importance?: any, influence?: any, eventId?: any }} args
+ * @param {Object} args
+ * @param {NpcStructural | Partial<NpcStructural> | null | undefined} args.npc
+ *   existing NPC record, or a partial for a brand-new appointee
+ * @param {string} args.institutionId   institution receiving the appointment
+ * @param {string=} args.role           role title; falls back to the NPC's current role
+ * @param {NpcRoleQuality} args.quality replacement quality (unknown strings fall back to
+ *                                      'competent' at runtime)
+ * @param {string=} args.factionAlignment  faction id the appointee answers to, if any
+ * @param {NpcImportance=} args.importance importance conferred by the role being filled
+ * @param {(number|null)=} args.influence  influence conferred by the role being filled
+ * @param {string} args.eventId
+ * @returns {{ npc: NpcStructural, restorations: Array<{instId: string, impairment: Impairment}>, recoveryQuality: number }}
  */
 export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, importance, influence, eventId }) {
-  const updated = createNpc({
+  // createNpc computes the DEFAULTED structural fields (id, status, role,
+  // importance, linked ids, contributions), but its return carries ONLY those 13
+  // fields — so building the appointee from it alone lobotomized a rich pipeline
+  // NPC (personality/physical/secret/goal/plotHooks/category/factionAffiliation/
+  // structuralPosition/corruption) and destroyed any DM _userEdits/_authored.
+  // domain-top-1: overlay the structural fields onto the ORIGINAL npc so the
+  // successor's full character sheet + user edits survive; only the fields the
+  // assignment legitimately changes are updated.
+  const structural = createNpc({
     ...npc,
     status: 'active',
     role: role || npc?.role,
@@ -250,13 +251,15 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
       ? dedupeIds([...(npc?.linkedFactionIds || []), factionAlignment])
       : (npc?.linkedFactionIds || []),
   });
+  const updated = { ...npc, ...structural };
 
+  /** @type {Array<{instId: string, impairment: Impairment}>} */
   const restorations = [];
   // We "restore" by removing prior staffing impairments that came
   // from a kill event — handled by the reducer via withoutEventImpairments
   // — then optionally adding a positive-severity legitimacy bump for
   // popular replacements.
-  const Q = /** @type {Record<string, any>} */ (QUALITY)[quality] || QUALITY.competent;
+  const Q = QUALITY[quality] || QUALITY.competent;
   if (Q.legitimacyBoost > 0) {
     restorations.push({
       instId: institutionId,
@@ -283,6 +286,9 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
   return { npc: updated, restorations, recoveryQuality: Q.capacityFactor };
 }
 
+/** @typedef {'weak'|'competent'|'popular'|'corrupt'|'faction_captured'} NpcRoleQuality */
+
+/** @type {Record<NpcRoleQuality, {capacityFactor: number, legitimacyBoost: number, legitimacyHit: number}>} */
 const QUALITY = {
   weak:              { capacityFactor: 0.3, legitimacyBoost: 0,    legitimacyHit: 0    },
   competent:         { capacityFactor: 0.7, legitimacyBoost: 0,    legitimacyHit: 0    },
@@ -293,18 +299,20 @@ const QUALITY = {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-/** @param {any} s */
+/**
+ * @param {string | null | undefined} s
+ * @returns {string}
+ */
 function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 32) || 'npc';
+  return kernelSlugify(s, { sep: '_', max: 32, fallback: 'npc' });
 }
 
 // Deterministic short hash (djb2). createNpc runs inside the pure, seeded event
 // pipeline — Math.random() here broke seed-replayability of stored settlements.
-/** @param {any} s */
+/**
+ * @param {string} s
+ * @returns {string}
+ */
 function shortHash(s) {
   let h = 0;
   const str = String(s);
@@ -312,7 +320,10 @@ function shortHash(s) {
   return Math.abs(h).toString(36).slice(0, 6).padStart(5, '0');
 }
 
-/** @param {any[]} arr */
+/**
+ * @param {string[]} arr
+ * @returns {string[]}
+ */
 function dedupeIds(arr) {
   return [...new Set(arr.filter(Boolean))];
 }

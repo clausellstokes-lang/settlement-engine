@@ -13,23 +13,23 @@
  *   - omitted (modal)  → switch the internal mode state in place
  *   - provided (pages) → the parent navigates to the sibling route
  *
- * Password is the primary method: email then password show inline, always.
- * The email sign-in link and OAuth (Google, Discord) are alternatives, in a
- * group below the primary CTA. Forgot-password is surfaced directly for
- * sign-in.
+ * Password is the primary inline path (W5.1 design inversion): email +
+ * password render directly, sign-up adds confirm-password. The email
+ * sign-in link and the OAuth providers are explicit alternatives BELOW the
+ * form — never above it — and sign-up is password-only (mirrors OAuth being
+ * withheld from sign-up so account creation stays short).
  */
 import { useState } from 'react';
-import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store/index.js';
-import { GOLD, GOLD_TXT, GOLD_BG, MUTED, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
+import { GOLD, SECOND, MUTED, BORDER, sans, SP, FS } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import SecurityQuestionsFields from './SecurityQuestionsFields.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
-import { useConfirmPolling } from '../../hooks/useConfirmPolling.js';
+import CaptchaGate from '../perimeter/CaptchaGate.jsx';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
   // width:100%, variants primary/success/danger/ghost) — kept under an alias so
@@ -58,12 +58,6 @@ export default function AuthPanel({
   const authSignIn = useStore(s => s.authSignIn);
   const authMagicLink = useStore(s => s.authMagicLink);
   const authOAuth = useStore(s => s.authOAuth);
-  const authSetSecurityAnswers = useStore(s => s.authSetSecurityAnswers);
-
-  // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
-  // the Button primitive without breaking the seamless borderless segments), so
-  // the primitive's mobile 44px tap floor does not reach it — we apply it here.
-  const isMobile = useIsMobile();
 
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
@@ -73,24 +67,18 @@ export default function AuthPanel({
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // Security questions (sign-up only). Captured on the form, then STASHED so the
-  // post-confirmation polling auto-login can persist them the moment a session
-  // exists — set_my_security_answers needs auth.uid(), which signUp doesn't
-  // grant while email confirmation is pending. `securityStash` holds the four
-  // values across the form → verify → poll-success transition.
-  const [q1, setQ1] = useState('');
-  const [a1, setA1] = useState('');
-  const [q2, setQ2] = useState('');
-  const [a2, setA2] = useState('');
-  const [securityStash, setSecurityStash] = useState(null);
-  // True once the verify screen's bounded poll exhausts its window without a
-  // confirmation — swaps the calm "we'll sign you in" note for a fall-back hint.
-  const [pollTimedOut, setPollTimedOut] = useState(false);
-  // A successful magic-link send swaps the form for a dedicated "check your
-  // inbox" close (P9 peak/end) rather than re-rendering the same form under a
-  // green strip — a boolean, not the dual-purpose `message` string, gates it.
-  const [magicSent, setMagicSent] = useState(false);
+  const [magicSent, setMagicSent] = useState(false); // email sign-in link dispatched
+  // Wave-D perimeter (INERT until the perimeterCaptcha flag + Turnstile keys are
+  // set): the human-verification token for the Supabase-native captcha on
+  // signInWithPassword / signUp. Stays null while the flag is off (CaptchaGate
+  // renders nothing), and the token rides as an ADDITIVE arg — so the flag-off
+  // path is byte-identical. Server enforcement is the owner's Supabase dashboard
+  // "Enable Captcha protection" toggle. See docs/PERIMETER_RUNBOOK.md.
+  const [captchaToken, setCaptchaToken] = useState(null);
+  // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
+  // the Button primitive without breaking the seamless borderless segments), so
+  // it misses the primitive's mobile 44px tap floor — apply it inline on mobile.
+  const isMobile = useIsMobile();
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
@@ -98,35 +86,14 @@ export default function AuthPanel({
   const requestMode = (next) => {
     setError(null);
     setMessage(null);
-    setConfirmPassword('');
     setMagicSent(false);
-    // Clear any stashed security-question state so a later return to sign-up
-    // starts clean and a stale stash can't be re-persisted to the wrong session.
-    setQ1(''); setA1(''); setQ2(''); setA2('');
-    setSecurityStash(null);
-    setPollTimedOut(false);
+    setConfirmPassword('');
     if (onModeChange) onModeChange(next);
     else setMode(next);
   };
 
-  // First-question setter that drops a colliding second pick: if the user picks
-  // the same question they'd already chosen for slot 2, clear slot 2 so the two
-  // can never be equal (the second <select> also excludes the first pick going
-  // forward; this guards the change-after-the-fact case).
-  const chooseQ1 = (next) => {
-    setQ1(next);
-    if (next && next === q2) setQ2('');
-  };
-
-  // Sign-up security-question validity, surfaced both as the submit guard and to
-  // disable the CTA until satisfied. Both questions chosen, distinct, answered.
-  const securityComplete =
-    Boolean(q1) && Boolean(q2) && q1 !== q2 && a1.trim() !== '' && a2.trim() !== '';
-
-  // OAuth is offered on sign-IN only. On sign-up the extra provider buttons push
-  // the (already taller, security-question-bearing) form past the modal's
-  // ribbon/border, so they're withheld there — the email-link alternative stays
-  // in both views.
+  // OAuth is a sign-IN affordance only — keep the sign-up tab short (email +
+  // password + recovery), so the provider buttons never render on 'signup'.
   const oauthAllowed = mode === 'signin';
   const showGoogle  = oauthAllowed && flag('googleOauth');
   const showDiscord = oauthAllowed && flag('discordOauth');
@@ -137,14 +104,14 @@ export default function AuthPanel({
     try {
       const result = await authOAuth(provider);
       if (result?.mock) {
-        // Dev-only branch (fires only when !isConfigured): keep it terse and
-        // free of engine-internal wording ("local mode" / "mocked") — a GM who
-        // somehow hits it still reads a plain next step, not an internals leak.
-        setMessage(t('auth.localMode'));
+        setMessage(`OAuth (${provider}) is mocked in local mode. No real sign-in occurred.`);
       }
       // Real mode: Supabase has navigated away; nothing more to do.
     } catch (e) {
-      setError(e.message || t('auth.error.oauthFailed'));
+      // `userMessage` is the safe, non-leaky string set by describeOAuthError in
+      // lib/auth.js — e.g. a not-yet-enabled provider maps to a calm "sign-in
+      // option isn't available" rather than a raw Supabase error.
+      setError(e.userMessage || e.message || 'OAuth sign-in failed');
     } finally {
       setLoading(false);
     }
@@ -155,63 +122,35 @@ export default function AuthPanel({
     setError(null);
     setLoading(true);
     try {
-      await authSignIn(email.trim(), password, rememberMe);
+      // captchaToken is undefined-safe: null while the perimeterCaptcha flag is
+      // off, so this call is byte-identical to before until the owner activates it.
+      await authSignIn(email.trim(), password, rememberMe, captchaToken || undefined);
       onAuthed?.();
     } catch (e) {
-      setError(e.message || t('auth.error.signInFailed'));
+      setError(e.message || 'Sign-in failed');
     } finally {
       setLoading(false);
     }
   };
 
-  // Persist the stashed security answers against a now-live session. Best-effort:
-  // the account already exists, so a transient RPC failure must NOT block the
-  // user — we surface a calm "set them later" note and move on. Returns nothing;
-  // it clears the stash on success so it can't double-fire.
-  const persistSecurityAnswers = async (answers) => {
-    if (!answers) return;
-    try {
-      await authSetSecurityAnswers(answers);
-      setSecurityStash(null);
-    } catch {
-      // Non-fatal: the account is valid; they can set questions from Account.
-      setSecurityStash(null);
-      setMessage(t('auth.security.saveDeferred'));
-    }
-  };
-
-  // Fired by the verify-screen poll the instant the confirmation link is clicked
-  // (anywhere) and the silent sign-in succeeds. A session now exists, so this is
-  // the first safe moment to write the security answers, then hand off to onAuthed.
-  const handleConfirmed = async () => {
-    await persistSecurityAnswers(securityStash);
-    onAuthed?.();
-  };
-
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
     if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
+    // Confirm-password mismatch guard: a typo'd password would otherwise create
+    // an account the user can never sign back into. Block submit and say so.
     if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
-    // Security questions are mandatory for email/password sign-up.
-    if (!q1 || !q2) { setError(t('auth.security.error.bothRequired')); return; }
-    if (q1 === q2) { setError(t('auth.security.error.distinct')); return; }
-    if (!a1.trim() || !a2.trim()) { setError(t('auth.security.error.bothRequired')); return; }
     setError(null);
     setLoading(true);
-    // Stash the answers BEFORE the network call so the polling auto-login can
-    // persist them even though this signUp returns no session (confirmation
-    // pending). Normalized casing/whitespace happens server-side in the RPC.
-    const answers = { q1, a1: a1.trim(), q2, a2: a2.trim() };
-    setSecurityStash(answers);
     try {
-      const { needsVerification } = await authSignUp(email.trim(), password);
-      if (needsVerification) {
-        setPollTimedOut(false);
-        setMode('verify'); // inline "check your inbox" — the poll takes over
+      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password, captchaToken || undefined);
+      if (existingAccount) {
+        // Supabase reports a signup for an already-registered email with empty
+        // identities and no error / no email — the verify screen would never
+        // resolve. Point the user at sign-in / reset instead of a dead end.
+        setError(t('auth.error.emailMayExist'));
+      } else if (needsVerification) {
+        setMode('verify'); // inline "check your inbox" — no route change
       } else {
-        // Auto-confirmed (dev / mock): a session already exists, so persist the
-        // answers immediately rather than waiting on a poll that won't run.
-        await persistSecurityAnswers(answers);
         onAuthed?.();
       }
     } catch (e) {
@@ -229,35 +168,11 @@ export default function AuthPanel({
       await authMagicLink(email.trim());
       setMagicSent(true);
     } catch (e) {
-      setError(e.message || t('auth.error.magicLinkFailed'));
+      setError(e.message || 'Could not send sign-in link');
     } finally {
       setLoading(false);
     }
   };
-
-  // Forward affordances out of the sent-state: re-fire the link, or clear back
-  // to the form to correct a mistyped address (P9 — a satisfying, actionable
-  // close, never a dead-end on an untouchable form).
-  const resendMagicLink = () => { setMagicSent(false); handleMagicLink(); };
-  const editEmail = () => { setMagicSent(false); setError(null); setMessage(null); };
-
-  // Post-signup auto-login: while the "check your inbox" verify screen shows,
-  // poll signInWithPassword with the just-entered credentials. The instant the
-  // confirmation link is clicked (here or on any device) the poll succeeds →
-  // handleConfirmed persists the stashed answers and runs onAuthed. Bounded:
-  // stops on success / after ~5 min (→ pollTimedOut note) / on unmount. No-ops
-  // in mock mode (no real confirmation gate). See useConfirmPolling.
-  useConfirmPolling({
-    active: mode === 'verify',
-    email: email.trim(),
-    password,
-    onConfirmed: handleConfirmed,
-    onTimeout: () => setPollTimedOut(true),
-    // A genuine failure (wrong password is implausible here since we just set
-    // it, but network faults happen): surface it on the verify screen rather
-    // than poll silently forever.
-    onError: (e) => setError(e.message || t('auth.error.signInFailed')),
-  });
 
   // Password is the primary inline path: sign-up creates an account, anything
   // else signs in. The email sign-in link is an explicit alternative below.
@@ -265,9 +180,8 @@ export default function AuthPanel({
   const onEnter = (e) => { if (e.key === 'Enter') submit(); };
 
   // ── Magic-link sent ("check your inbox") ──────────────────────────────────
-  // The default auth path's close. Mirrors the verify branch shape (status
-  // + next steps) so the most-common flow ends on a satisfying,
-  // actionable note rather than a flat form the user has no reason to touch.
+  // The email sign-in link's close. An actionable note instead of a flat green
+  // strip: resend for a lost/expired link, or step back to fix a typo'd email.
   if (magicSent) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
@@ -275,10 +189,10 @@ export default function AuthPanel({
           {t('auth.magic.sent', { email: email.trim() })}
         </Alert>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-          <Button variant="ghost" size="sm" onClick={resendMagicLink} disabled={loading}>
+          <Button variant="ghost" size="sm" onClick={handleMagicLink} disabled={loading}>
             {loading ? t('auth.button.working') : t('auth.button.resend')}
           </Button>
-          <Button variant="ghost" size="sm" onClick={editEmail}>
+          <Button variant="ghost" size="sm" onClick={() => { setMagicSent(false); setError(null); }}>
             {t('auth.button.differentEmail')}
           </Button>
         </div>
@@ -287,32 +201,24 @@ export default function AuthPanel({
   }
 
   // ── Email verification (post sign-up "check your inbox") ──────────────────
-  // The window now WAITS here: useConfirmPolling silently signs the user in the
-  // moment they click the confirmation link (any device). The note explains the
-  // wait; if the bounded poll exhausts its window we swap in a fall-back hint.
   if (mode === 'verify') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         <Alert type="success">
-          {t('auth.verify.sent', { email })}
+          We sent a confirmation link to <strong>{email}</strong>. Check your inbox and click the link to activate your account.
         </Alert>
-        {error && <Alert type="error">{error}</Alert>}
-        <p role="status" aria-live="polite" style={{ fontSize: FS.sm, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-          {pollTimedOut ? t('auth.verify.pollingTimedOut') : t('auth.verify.polling')}
-        </p>
-        <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
-          {t('auth.button.backToSignIn')}
-        </Button>
+        <AuthCTAButton variant="ghost" onClick={() => requestMode('signin')}>
+          Back to Sign In
+        </AuthCTAButton>
       </div>
     );
   }
 
-  // ── Forgot-password challenge ─────────────────────────────────────────────
-  // The reset mode is now the security-question challenge (email → random
-  // question → reset link), run through the auth-recovery edge function. The
-  // multi-step flow lives in its own component to keep this file lean; "back to
-  // sign in" routes through requestMode so pages navigate and the modal switches
-  // in place, exactly like every other mode transition here.
+  // ── Forgot-password challenge (Auth Phase 2, gated recovery) ──────────────
+  // The reset mode is the security-question challenge (email → one random
+  // question → the auth-recovery edge function mails the set-new-password link),
+  // NOT a bare "email me a link". The self-contained flow owns its own steps;
+  // decision 8's "security questions + gated recovery" posture, as-shipped.
   if (mode === 'reset') {
     return <ForgotPasswordFlow onBackToSignIn={() => requestMode('signin')} />;
   }
@@ -321,29 +227,26 @@ export default function AuthPanel({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       {showTabs && (
-        <div style={{ display: 'flex', borderRadius: R.md, overflow: 'hidden', border: `1px solid ${BORDER}` }}>
+        <div style={{ display: 'flex', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
           {[['signin', 'Sign In'], ['signup', 'Create Account']].map(([id, label]) => (
-            // Bespoke segmented-control tab: flex:1 borderless square segments
-            // clipped by the parent's overflow:hidden, with a conditional gold
-            // active fill driven by `mode === id`. The Button primitive forces
-            // its own 1px border + R.lg rounding, which would break the seamless
-            // segmented look — so this stays raw (accessible via its text label).
+            // Bespoke segmented-control tab: flex:1 borderless square segments.
+            // The active station is marked by a DRAWN gold rule + gold ink (the
+            // nav idiom), never a tinted fill. The Button primitive forces its
+            // own border + rounding, which would break the seamless segmented
+            // look — so this stays raw (accessible via its text label).
             <button key={id} type="button" onClick={() => requestMode(id)}
               aria-pressed={mode === id}
               style={{
                 flex: 1, padding: `${SP.sm}px 0`,
-                // Mobile-only 44px tap floor — the primitive's floor can't reach
-                // this raw segment, so it is applied inline. Desktop unchanged.
-                ...(isMobile ? { minHeight: 44 } : null),
-                background: mode === id ? GOLD_BG : 'transparent',
-                border: 'none', cursor: 'pointer',
-                // Active state in two non-color channels (weight + a gold
-                // underline) so it survives the squint/grayscale test, not
-                // hue alone. GOLD_TXT/SECOND are the AA-legible label tokens
-                // (gold-500/MUTED fail 4.5:1 as control text).
+                background: 'transparent',
+                border: 'none',
                 borderBottom: mode === id ? `2px solid ${GOLD}` : '2px solid transparent',
+                cursor: 'pointer',
                 fontSize: FS.sm, fontWeight: mode === id ? 700 : 500,
-                color: mode === id ? GOLD_TXT : SECOND, fontFamily: sans,
+                color: mode === id ? GOLD : MUTED, fontFamily: sans,
+                // Mobile 44px tap floor (the primitive's floor doesn't reach this
+                // raw segment, so it is applied inline). Desktop unchanged.
+                ...(isMobile ? { minHeight: 44 } : null),
               }}
             >
               {label}
@@ -369,29 +272,23 @@ export default function AuthPanel({
         <Input type="password" label={t('auth.placeholder.confirmPassword')} placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
       )}
 
-      {/* Security questions — sign-up only, AFTER confirm-password. The answers
-          are stashed and persisted server-side (bcrypt-hashed) once a session
-          exists; they never reach the client unhashed beyond this form. */}
-      {mode === 'signup' && (
-        <SecurityQuestionsFields
-          q1={q1} a1={a1} q2={q2} a2={a2}
-          setQ1={chooseQ1} setA1={setA1} setQ2={setQ2} setA2={setA2}
-          onKeyDown={onEnter}
-        />
-      )}
-
       {mode === 'signin' && (
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
 
-      <AuthCTAButton onClick={submit} disabled={loading || (mode === 'signup' && !securityComplete)}>
+      {/* Wave-D human verification (INERT until the perimeterCaptcha flag + keys
+          are set). Managed/invisible mode: silent for humans, so it does not add
+          a visible step to the form. Renders nothing while the flag is off. */}
+      <CaptchaGate action={mode === 'signup' ? 'signup' : 'signin'} onToken={setCaptchaToken} />
+
+      <AuthCTAButton onClick={submit} disabled={loading}>
         {loading
           ? t('auth.button.working')
           : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
       </AuthCTAButton>
 
       {/* Forgot-password, surfaced directly for sign-in (no longer buried in a
-          disclosure). Routes to the reset-request mode. */}
+          disclosure). Routes to the security-question reset mode. */}
       {mode === 'signin' && (
         <Button variant="ghost" size="sm" onClick={() => requestMode('reset')}>
           {t('auth.password.forgot')}
@@ -400,28 +297,26 @@ export default function AuthPanel({
 
       {/* ── Alternatives ──────────────────────────────────────────────────────
           Placed BELOW the email/password form, never above it: password stays
-          the primary path. Order: Google, Discord, then the email sign-in link.
-          The OAuth buttons no-op gracefully until the provider is enabled in the
-          Supabase dashboard (the wrapper maps "provider not enabled" to a safe
-          message rather than throwing). The email-link button drives the same
-          "check your inbox" close as the legacy magic path. */}
-      {(showGoogle || showDiscord) && (
+          the primary path. Order: Discord, Google, then the email sign-in link.
+          Sign-up does NOT offer the link — account creation is password-only
+          (mirrors OAuth being withheld from sign-up). */}
+      {(showDiscord || showGoogle) && (
         <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
-          {showGoogle && (
-            <OAuthButton
-              glyph={<GoogleGlyph />}
-              label="Google"
-              onClick={() => handleOAuth('google')}
-              disabled={loading}
-            />
-          )}
           {showDiscord && (
             <OAuthButton
               glyph={<DiscordGlyph />}
               label="Discord"
               onClick={() => handleOAuth('discord')}
-              disabled={loading}
+              disabled={loading || !isConfigured}
+            />
+          )}
+          {showGoogle && (
+            <OAuthButton
+              glyph={<GoogleGlyph />}
+              label="Google"
+              onClick={() => handleOAuth('google')}
+              disabled={loading || !isConfigured}
             />
           )}
           <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
@@ -429,11 +324,10 @@ export default function AuthPanel({
           </AuthCTAButton>
         </div>
       )}
-      {mode === 'signin' && !showGoogle && !showDiscord && (
+      {mode === 'signin' && !showDiscord && !showGoogle && (
         // Sign-in only, no OAuth providers enabled: the email sign-in link still
-        // needs a home, so it gets its own full-width alternative under the primary
-        // CTA. Sign-up does NOT offer the magic link — account creation is
-        // password-only (mirrors OAuth being withheld from sign-up).
+        // needs a home, so it gets its own full-width alternative under the
+        // primary CTA.
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
@@ -443,7 +337,7 @@ export default function AuthPanel({
       )}
 
       {!isConfigured && (
-        <div style={{ textAlign: 'center', fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+        <div style={{ textAlign: 'center', fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
           {t('auth.localMode')}
         </div>
       )}

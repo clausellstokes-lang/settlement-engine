@@ -10,15 +10,18 @@
 
 import { registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { rerenderStressNames } from '../stressGenerator.js';
+// F8: re-render stress summaries with the real settlement name. resolveStress
+// (step 3) rolled them 16 steps ago with an empty name and stashed the
+// rng-derived choice in each entry's `summaryRoll`; we re-render here now that
+// the name exists.
+import { renderStressSummary } from '../stressNarrative.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
-import { generateCrossSettlementConflicts } from '../crossSettlementConflicts.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
-// Canonical-shape adapter. Stamps version fields, mints a
+// Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
 // stable id, defaults canonical containers. Pure — does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
 // so downstream consumers (save/load, PDF, AI overlay, trace layer)
@@ -29,38 +32,77 @@ import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
 // generated mid-crisis — closing the "generated plague town has activeConditions:[]"
 // gap. Pure + deterministic + idempotent.
 import { promoteStressorsToConditions, reapplyEventConditions } from '../../domain/conditionPromotion.js';
-// The canonical defense-readiness -> legitimacy table. This file used to carry a
-// stale local copy that LACKED 'Lightly Defended', so the real-label patch below
-// reverted that band's provisional contribution to 0 on every generated settlement.
-import { DEFENSE_CONTRIB } from '../factionDynamics.js';
+import {
+  clearActiveRng,
+  setActiveRng,
+} from '../../kernel/rngContext.js';
+import { culturalNotesFor } from '../../domain/cultureProfiles.js';
+import {
+  buildGenerationCoherenceReceipt,
+} from '../generationCoherence.js';
+import {
+  assertPowerEconomyFreshness,
+  reconcilePowerStructure,
+  refreshPowerGenerationTraces,
+} from '../power/economyReconciliation.js';
+
+/**
+ * Run one assembly concern on its own deterministic child stream.
+ *
+ * Assembly contains both presentation writers and canonical coherence
+ * enrichment. Some presentation branches legitimately draw a different number
+ * of prose variants when a custom display label changes. Without a stream
+ * boundary, those cosmetic draws move the later NPC-secret and relationship
+ * draws. A named child stream makes that dependency impossible while retaining
+ * the fail-closed global RNG contract used by the existing generators.
+ *
+ * @template T
+ * @param {{fork:(label:string)=>any}} stepRng
+ * @param {string} label
+ * @param {(rng:any) => T} operation
+ * @returns {T}
+ */
+function inAssemblySubstream(stepRng, label, operation) {
+  const substreamRng = stepRng.fork(label);
+  const previousRng = setActiveRng(substreamRng);
+  try {
+    return operation(substreamRng);
+  } finally {
+    clearActiveRng(previousRng);
+  }
+}
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
-  // for the FINAL roster (moved out of assembleInstitutions).
+  // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
-  reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces
+  reads: ['availableServices', 'conflicts', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['settlement'],
-  mutates: ['powerStructure'], // normalizes the power roster in place
+  // normalizes the power roster in place; F8 also re-renders each stress entry's
+  // summary in place with the real name (resolveStress rolled them name-blind) and
+  // deletes the transient summaryRoll token — a declared in-place write of `stress`
+  // (A+ P1.7 contract).
+  mutates: ['powerStructure', 'stress'],
   phase: 'assembly',
-}, (ctx) => {
+}, (ctx, rng) => {
   const {
     tier, population, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
     economicState, spatialLayout, availableServices, powerStructure,
     settlementReason, npcs, relationships, factions, conflicts,
     resourceAnalysis, economicViability, history, stress, structural,
-    culture,
+    isolationSupport,
+    culture, culturalIdentity,
   } = ctx;
   const config = ctx.config || {};
 
-  // Resolve the name FIRST so stressor summaries can be threaded with it. Stress
-  // is generated at an early step (resolveStress), before any name exists, so
-  // every summary was rendered with an empty name — leaving subjectless sentences
-  // (" is under active siege."). Re-render them now with the real name; the helper
-  // replays the rng draws captured at generation, so no new draw shifts pipeline
-  // determinism. (generateSettlementName itself still draws at this exact point.)
+  // F8: mint the settlement name up front so the stress summaries — rolled with
+  // an empty name back in resolveStress (step 3) — can be re-rendered with the
+  // real name below. generateSettlementName draws rng (prefix + suffix indices);
+  // keeping the mint here, immediately before the settlement literal, preserves
+  // its exact draw position — nothing between the ctx destructure and the literal
+  // consumes rng, so the customName short-circuit and draw order are unchanged.
   const settlementName = (effectiveConfig.customName?.trim()) || generateSettlementName(culture);
-  const namedStress = rerenderStressNames(stress, settlementName);
 
   const settlement = {
     name: settlementName,
@@ -92,13 +134,20 @@ registerStep('assembleSettlement', {
     resourceAnalysis,
     economicViability,
     history,
-    // Dual-write the stress array under both the legacy
+    isolationSupport,
+    // Materialized rather than inferred in the UI: every consumer now reads
+    // the same local expression of the culture choice. culturalNotes keeps the
+    // established PDF/AI compatibility field while the structured record gives
+    // future engineers the seven explicit dimensions behind it.
+    culturalIdentity,
+    culturalNotes: culturalNotesFor(culturalIdentity),
+    // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
     // bypass normalizeSettlement (e.g. UI components that read directly
     // from a freshly-generated settlement) now see the canonical shape
     // without going through the adapter.
-    stress: namedStress,
-    stressors: namedStress,
+    stress,
+    stressors: stress,
     // RESOLVED effectiveConfig snapshot — carries derived keys (stressTypes,
     // _magicTradeOnly, tier, …) that display/validator/sim readers depend on.
     // It is NEVER a valid generation input: applyChange regenerates from
@@ -114,38 +163,70 @@ registerStep('assembleSettlement', {
     _config: { ...config },
   };
 
+  // F8: re-render each stress entry's summary with the real settlement name.
+  // resolveStress baked a PROVISIONAL empty-name summary (leading-space prose
+  // like " is under active siege…") and stashed the sole rng-derived choice
+  // (wartime's profit coin) in `summaryRoll`. Now that the name exists we
+  // re-render from that token and delete the transient field so it never
+  // persists or enters the golden hash. Handles both dual-written containers
+  // (stress + stressors — same object refs) and both shapes (bare object vs
+  // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
+  // carry their own summary) are left untouched.
+  const rerenderStressSummary = (container) => {
+    if (!container) return;
+    const entries = Array.isArray(container) ? container : [container];
+    for (const e of entries) {
+      if (e && typeof e === 'object'
+          && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
+        e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);
+        delete e.summaryRoll;
+      }
+    }
+  };
+  rerenderStressSummary(settlement.stress);
+  rerenderStressSummary(settlement.stressors);
+
   // Narrative overlays
   settlement.pressureSentence = generatePressureSentence(settlement);
   settlement.arrivalScene     = generateArrivalScene(settlement);
   settlement.defenseProfile   = generateDefenseProfile(settlement);
 
-  // Patch publicLegitimacy with real defense readiness
-  if (settlement.powerStructure?.publicLegitimacy && settlement.defenseProfile?.readiness?.label) {
-    const realDefLabel = settlement.defenseProfile.readiness.label;
-    const provLeg      = settlement.powerStructure.publicLegitimacy;
-    const realDefContrib = DEFENSE_CONTRIB[realDefLabel] ?? 0;
-    const delta = realDefContrib - (provLeg.breakdown?.defense ?? 0);
-
-    if (delta !== 0) {
-      const newScore = Math.max(0, Math.min(100, provLeg.score + delta));
-      provLeg.score = newScore;
-      provLeg.breakdown.defense = realDefContrib;
-
-      if      (newScore >= 75) { provLeg.label = 'Endorsed';          provLeg.color = '#1a5a28'; provLeg.govMultiplier = 1.30; provLeg.crimMultiplier = 0.75; }
-      else if (newScore >= 60) { provLeg.label = 'Approved';          provLeg.color = '#4a7a2a'; provLeg.govMultiplier = 1.15; provLeg.crimMultiplier = 0.90; }
-      else if (newScore >= 45) { provLeg.label = 'Tolerated';         provLeg.color = '#a0762a'; provLeg.govMultiplier = 1.00; provLeg.crimMultiplier = 1.00; }
-      else if (newScore >= 30) { provLeg.label = 'Contested';         provLeg.color = '#8a4010'; provLeg.govMultiplier = 0.80; provLeg.crimMultiplier = 1.15; }
-      else                     { provLeg.label = 'Legitimacy Crisis'; provLeg.color = '#8b1a1a'; provLeg.govMultiplier = 0.60; provLeg.crimMultiplier = 1.30; }
-      provLeg.isEndorsed          = newScore >= 75;
-      provLeg.isApproved          = newScore >= 60;
-      provLeg.isTolerated         = newScore >= 45 && newScore < 60;
-      provLeg.isContested         = newScore >= 30 && newScore < 45;
-      provLeg.isLegitimacyCrisis  = newScore < 30;
-      provLeg.governanceFractured = newScore < 30;
-    }
+  // The final-economy pass already proved that power consumed the final
+  // prosperity/safety/food tuple. Assert that proof before applying the one
+  // remaining late input: defenseProfile's real readiness label.
+  assertPowerEconomyFreshness(
+    settlement.powerStructure,
+    settlement.economicState,
+    tier,
+  );
+  if (settlement.defenseProfile?.readiness?.label) {
+    const { beforeFactions } = reconcilePowerStructure(
+      settlement.powerStructure,
+      settlement.economicState,
+      ctx.powerIntent,
+      { defenseLabel: settlement.defenseProfile.readiness.label },
+    );
+    refreshPowerGenerationTraces(
+      ctx,
+      beforeFactions,
+      settlement.powerStructure,
+      ctx.powerIntent,
+    );
   }
+  assertPowerEconomyFreshness(
+    settlement.powerStructure,
+    settlement.economicState,
+    tier,
+  );
 
-  const coherenceUpdates = generateCoherence(settlement);
+  // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
+  // stream so variable draw counts in pressure/arrival/defense presentation
+  // cannot silently rewrite those mechanics.
+  const coherenceUpdates = inAssemblySubstream(
+    rng,
+    'canonical-coherence',
+    coherenceRng => generateCoherence(settlement, coherenceRng),
+  );
   Object.assign(settlement, coherenceUpdates);
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype
@@ -153,8 +234,25 @@ registerStep('assembleSettlement', {
   // implied structural NPCs exist with the right importance tier and
   // institution/faction linkage. Idempotent — won't duplicate NPCs
   // the population step already generated for the same role + faction.
-  const withStructural = ensureFactionStructuralNpcs(settlement);
+  const withStructural = ensureFactionStructuralNpcs(
+    settlement,
+    ctx.generationContext,
+  );
   Object.assign(settlement, withStructural);
+
+  // A durable, seed-stable receipt over the FINAL player-facing dossier.
+  // Repairs happen in their owning passes; this boundary proves that the
+  // resulting world law, prose, structure, food verdict, identity roster, and
+  // isolation support agree. Explicit by-design premises stay visible without
+  // turning a deliberately strange settlement into a failed generation.
+  settlement.generationCoherenceReceipt = buildGenerationCoherenceReceipt(
+    settlement,
+    {
+      seed: ctx._seed,
+      generationContext: ctx.generationContext,
+      generationRepairs: ctx.generationRepairs,
+    },
+  );
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
@@ -188,26 +286,5 @@ registerStep('assembleSettlement', {
   // config + _config) that keeps a what-if regeneration from erasing what the
   // DM's events did. Order matters: re-promotion dedupes against the
   // GENERATION-stamped twins the stressor promotion just minted.
-  // Cross-settlement conflicts with the generation-time neighbour, generated HERE
-  // in the seeded pipeline so they are DETERMINISTIC and PERSISTED. The PDF
-  // (viewModel crossConflicts) and the Relationships tab both read this one field;
-  // the tab used to RE-GENERATE them at render time with no active PRNG, which fell
-  // back to Math.random() — non-deterministic across renders AND absent from the
-  // PDF (a screen/PDF parity break). Generated LAST (after the final NPC roster and
-  // after every other rng draw) so the sole output delta is this field, and only
-  // when the neighbour actually carries matching NPCs — the generator consumes zero
-  // rng and returns [] otherwise, so a neighbour without its own NPCs stays
-  // byte-identical (no field, no draws).
-  const neighbour = settlement.neighborRelationship;
-  if (neighbour?.name) {
-    const { forA: neighbourConflicts } = generateCrossSettlementConflicts(
-      { name: settlement.name, npcs: settlement.npcs || [], factions: settlement.factions || [] },
-      { name: neighbour.name, npcs: neighbour.npcs || [], factions: neighbour.factions || [] },
-      neighbour.relationshipType || 'neutral',
-      'generated',
-    );
-    if (neighbourConflicts.length) settlement.crossSettlementConflicts = neighbourConflicts;
-  }
-
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });

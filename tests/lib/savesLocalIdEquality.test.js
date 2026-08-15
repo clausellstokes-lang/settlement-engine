@@ -55,4 +55,29 @@ describe('saves local id equality (#4)', () => {
     const list = await saves.list();
     expect(list.find(s => s.id === 'str-id-1').name).toBe('StringId2');
   });
+
+  test('explicit-id upsert is idempotent for a deterministic lineage birth', async () => {
+    const entry = {
+      id: '11111111-1111-4111-8111-111111111111',
+      name: 'Weirbrook',
+      tier: 'village',
+      settlement: {
+        name: 'Weirbrook', tier: 'village', population: 430,
+        parentRef: { birthId: 'lineage.birth.weirbrook', parentId: 'ashford' },
+        npcs: [], factions: [], neighbourNetwork: [],
+      },
+      campaignState: { phase: 'canon', eventLog: [] },
+    };
+
+    expect(await saves.upsert(entry)).toBe(entry.id);
+    expect(await saves.upsert({
+      ...entry,
+      settlement: { ...entry.settlement, population: 440 },
+    })).toBe(entry.id);
+
+    const rows = (await saves.list()).filter(row => row.id === entry.id);
+    expect(rows).toHaveLength(1);
+    expect(rows[0].settlement.population).toBe(440);
+    expect(rows[0].settlement.parentRef.birthId).toBe('lineage.birth.weirbrook');
+  });
 });

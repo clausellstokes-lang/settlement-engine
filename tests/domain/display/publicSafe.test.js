@@ -27,6 +27,26 @@ describe('toPublicSafe (§1k)', () => {
     }
   });
 
+  it('W-DOCTRINE-3b §6 — the corruption BENEFICIARY identity never reaches the player projection', () => {
+    // The default (stripped) NPC allowlist carries none of the corruption fields — corrupt,
+    // corruptionVector, or corruptTies (incl. the leash's foreign patron). The beneficiary
+    // rides the DM-truth block only; publicNpc is auto-safe (no allowlist entry to leak it).
+    const out = toPublicSafe({
+      npcs: [{
+        name: 'Reeve Var', role: 'Reeve', influence: 40,
+        corrupt: true, corruptionVector: 'forbidden_patron',
+        corruptTies: { leash: { kind: 'foreign_settlement', settlementId: 'crown', covert: true } },
+      }],
+    });
+    expect(out.npcs).toHaveLength(1);
+    expect(out.npcs[0].name).toBe('Reeve Var');
+    for (const k of ['corrupt', 'corruptionVector', 'corruptTies']) {
+      expect(out.npcs[0][k]).toBeUndefined();
+    }
+    // Belt-and-braces: no serialized projection mentions the patron id anywhere.
+    expect(JSON.stringify(out)).not.toContain('crown');
+  });
+
   it('does not mutate the input', () => {
     const input = { name: 'Foo', aiData: { x: 1 } };
     toPublicSafe(input);
@@ -39,9 +59,102 @@ describe('toPublicSafe (§1k)', () => {
   });
 
   it('PRIVATE_KEY_RE matches the documented private keys', () => {
-    for (const k of ['secret', 'private', 'dmNotes', 'gmGuidance', 'guidance', 'plotHook', 'hook', 'compass', 'chronicle', 'aiData', 'aiSettlement', 'aiDailyLife', 'narrativeNotes', 'pinnedNpc']) {
+    for (const k of ['secret', 'private', 'dmNotes', 'gmGuidance', 'guidance', 'plotHook', 'hook', 'compass', 'chronicle', 'aiData', 'aiSettlement', 'aiDailyLife', 'narrativeNotes', 'pinnedNpc', 'latentPantheon']) {
       expect(PRIVATE_KEY_RE.test(k)).toBe(true);
     }
+  });
+
+  it('(130) narrows `note`: keeps public economics-attribution notes, still strips the private note keys', () => {
+    // domain-readmodels-2: the bare `note` token over-matched public economics
+    // annotations (the food-deficit / supply-chain explanation the dossier's
+    // economics tab renders). The narrowing keeps them while the genuinely-private
+    // note keys — dossierNotes / tabNotes / a bare notes|note / dmNote — still strip.
+    // Public economics-attribution notes survive the token (camelCase — no \b before "Note").
+    for (const k of ['magicFoodNote', 'magicNote', 'upstreamNote', 'storageNote', 'viabilityNote', 'priorityNote', 'coherenceNotes']) {
+      expect(PRIVATE_KEY_RE.test(k), `public analytical note "${k}" must NOT trip the denylist`).toBe(false);
+    }
+    // …while the genuinely-private note keys still strip.
+    for (const k of ['dossierNotes', 'tabNotes', 'notes', 'note', 'dmNote', 'narrativeNotes']) {
+      expect(PRIVATE_KEY_RE.test(k), `private note key "${k}" must still trip the denylist`).toBe(true);
+    }
+
+    // End-to-end at the NESTED level (the deeper denylist): economics notes nested in
+    // an allowlisted subtree survive the projection; a dmNotes-class / bare notes key
+    // beside them still strips. (economicState is allowlisted; its children go through
+    // the recursive denylist.)
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      economicState: {
+        magicFoodNote: 'Divine provision supplements food shortfall',
+        storageNote: '8 months strategic reserve',
+        activeChains: [{ id: 'grain', upstreamNote: 'Imported inputs: grain', dmNote: 'the miller skims the granary' }],
+        dossierNotes: 'DM prep for the famine arc',
+        notes: 'scratch pad',
+      },
+      // top-level DM-private note — dropped by the fail-closed allowlist regardless.
+      dmNotes: 'the BBEG is the mayor',
+    });
+    expect(out.economicState.magicFoodNote).toBe('Divine provision supplements food shortfall');
+    expect(out.economicState.storageNote).toBe('8 months strategic reserve');
+    expect(out.economicState.activeChains[0].upstreamNote).toBe('Imported inputs: grain');
+    // …the dmNotes-class + bare notes fields beside them still strip.
+    expect(out.economicState.activeChains[0].dmNote).toBeUndefined();
+    expect(out.economicState.dossierNotes).toBeUndefined();
+    expect(out.economicState.notes).toBeUndefined();
+    expect(out.dmNotes).toBeUndefined();
+  });
+
+  it('strips config.latentPantheon (unrevealed seed) but keeps the activated live embeds', () => {
+    // Phase 4 premium gate: config is allowlisted at the top level, so a nested
+    // latentPantheon would ride through without the denylist token. The ACTIVATED
+    // embeds (primaryDeitySnapshot / cultDeitySnapshots / primaryDeityRef /
+    // faithProfile) carry no such token and stay visible — a shared premium
+    // pantheon displays read-only to all viewers, the latent seed never does.
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      config: {
+        latentPantheon: { patron: { name: 'The Deep', _deityRef: 'deity:core:the_deep' } },
+        primaryDeityRef: 'deity:core:sun',
+        primaryDeitySnapshot: { name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' },
+        cultDeitySnapshots: [{ name: 'Ash', alignmentAxis: 'evil' }],
+        faithProfile: { patron: { name: 'Sun', share: 62 } },
+      },
+    });
+    expect(out.config).toBeTruthy();
+    expect(out.config.latentPantheon).toBeUndefined();
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
+    expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
+    expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
+  });
+
+  it('(142) drops a COVERT corruption impairment (NPC-naming description) but keeps the public one', () => {
+    // W-DOCTRINE-3 §6 / GALLERY-2 precondition: imposeCorruption stamps a covert
+    // impairment onto institutions[].impairments whose description NAMES the corrupted
+    // NPC. `institutions` is allowlisted, and none of the impairment's keys trip the
+    // deeper denylist, so without the value-level covert drop the WHOLE object — naming
+    // description included — rode through to the anon dossier. A key-strip is insufficient
+    // (it leaves the description); the whole covert object must go. FAIL-CLOSED.
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      institutions: [{
+        name: 'The Tanners Guild', category: 'Crafts',
+        impairments: [
+          { type: 'corruption', severity: 'moderate', covert: true, causeEventId: 'evt_capture_9', appliedAt: 42,
+            description: "Aldric's capture quietly compromised The Tanners Guild." },
+          { type: 'flood_damage', severity: 'minor', description: 'Spring floods damaged the drying racks.' },
+        ],
+      }],
+    });
+    expect(out.institutions).toHaveLength(1);
+    expect(out.institutions[0].name).toBe('The Tanners Guild');
+    const imps = out.institutions[0].impairments;
+    expect(imps).toHaveLength(1);
+    expect(imps[0].type).toBe('flood_damage');
+    expect(imps.some(i => i && i.covert)).toBe(false);
+    // The NPC-naming description must appear NOWHERE in the projection.
+    expect(JSON.stringify(out)).not.toContain('quietly compromised');
+    expect(JSON.stringify(out)).not.toContain("Aldric's capture");
   });
 });
 
@@ -68,6 +181,29 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.npcs[0].secret).toBe('bastard heir');
     expect(out.npcs[0].plotHooks).toEqual(['blackmail']);
     expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
+  });
+
+  it('(142) KEEPS covert corruption impairments in full mode (the DM-content share)', () => {
+    // JUDGMENT (vetoable — mirrors migration 142's scope note): the covert drop guards the
+    // ANON surface only (W-DOCTRINE-3 §6). gallery_share_dm is the owner's explicit
+    // DM-content publish (secrets, hooks, NPC goals) — a covert corruption fact is DM
+    // narrative consistent with that opt-in, so full mode preserves it. Full mode never
+    // calls sanitizePublicValue (it deep-clones + drops named blocks), so the covert
+    // impairment rides through by construction; this pins that intent. To flip: add the
+    // covert drop to the full-mode clone path + _gallery_dm_full_json and invert this pin.
+    const out = toPublicSafe({
+      name: 'Foo', tier: 'town', plotHooks: ['the heir is hidden'],
+      institutions: [{
+        name: 'The Tanners Guild', category: 'Crafts',
+        impairments: [
+          { type: 'corruption', severity: 'moderate', covert: true,
+            description: "Aldric's capture quietly compromised The Tanners Guild." },
+        ],
+      }],
+    }, { full: true });
+    expect(out.institutions[0].impairments).toHaveLength(1);
+    expect(out.institutions[0].impairments[0].covert).toBe(true);
+    expect(JSON.stringify(out)).toContain('quietly compromised');
   });
 
   it('strips DM notes even in full mode — truly confidential, never shared', () => {
@@ -111,6 +247,74 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
   it('drops aiSettlement entirely when it carries no DM-Compass fields', () => {
     const out = toPublicSafe({ name: 'X', aiSettlement: { name: 'prose only', npcs: [{}] } }, { full: true });
     expect(out.aiSettlement).toBeUndefined();
+  });
+
+  it('(129) strips config.latentPantheon even in full mode but keeps the activated embeds', () => {
+    // W-F7 premium gate: the DM-full opt-in reveals the owner's OWN DM-private
+    // content, but the latent pantheon is content the dossier has not yet NAMED —
+    // unrevealed by definition, so it NEVER leaves the account, not even here.
+    // Mirrors server migration 129 (_gallery_dm_full_json).
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      plotHooks: ['the heir is hidden'],
+      config: {
+        latentPantheon: { patron: { name: 'The Deep', _deityRef: 'deity:core:the_deep' }, cults: [{ name: 'Ash' }] },
+        primaryDeityRef: 'deity:core:sun',
+        primaryDeitySnapshot: { name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' },
+        cultDeitySnapshots: [{ name: 'Ash', alignmentAxis: 'evil' }],
+        faithProfile: { patron: { name: 'Sun', share: 62 } },
+        tradeRouteAccess: 'road',
+      },
+    }, { full: true });
+    // The owner's DM content survives full mode…
+    expect(out.plotHooks).toEqual(['the heir is hidden']);
+    expect(out.config).toBeTruthy();
+    // …but the unrevealed latent seed does not.
+    expect(out.config.latentPantheon).toBeUndefined();
+    // The activated live embeds + benign config stay.
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
+    expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
+    expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
+    expect(out.config.tradeRouteAccess).toBe('road');
+  });
+
+  it('(121/129) strips BOTH generation-seed carriers (_seed / _regenSeed / _config) in full mode', () => {
+    // W-F8 diagnostic: full mode deep-clones and only deletes named DM blocks, so it
+    // skipped the fail-closed allowlist that drops seeds in default mode — leaking a
+    // reproducibility secret on a DM-full share. Mirrors server migration 121/129
+    // (`- '_seed' - '_regenSeed' - '_config'` on _gallery_dm_full_json, plus config._seed).
+    const out = toPublicSafe({
+      name: 'Foo', tier: 'town',
+      _seed: 'seed-abc', _regenSeed: 'regen-xyz', _config: { intent: 'x' },
+      plotHooks: ['the heir is hidden'],
+      config: { _seed: 'nested-seed', primaryDeityRef: 'deity:core:sun', tradeRouteAccess: 'road' },
+    }, { full: true });
+    // The owner's DM content survives full mode…
+    expect(out.plotHooks).toEqual(['the heir is hidden']);
+    // …but a generation seed is confidential in EVERY gallery view, DM-full included.
+    expect(out._seed).toBeUndefined();
+    expect(out._regenSeed).toBeUndefined();
+    expect(out._config).toBeUndefined();
+    // config survives with its own nested _seed removed; benign config + embeds stay.
+    expect(out.config).toBeTruthy();
+    expect(out.config._seed).toBeUndefined();
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.tradeRouteAccess).toBe('road');
+  });
+
+  it('does not mutate the input in full mode when stripping seed carriers', () => {
+    const input = { name: 'X', _seed: 's', _regenSeed: 'r', _config: {}, config: { _seed: 'ns', primaryDeityRef: 'd' } };
+    toPublicSafe(input, { full: true });
+    expect(input._seed).toBe('s');
+    expect(input._regenSeed).toBe('r');
+    expect(input.config._seed).toBe('ns');
+  });
+
+  it('does not mutate the input config in full mode when stripping latentPantheon', () => {
+    const input = { name: 'X', config: { latentPantheon: { patron: { name: 'The Deep' } }, primaryDeityRef: 'deity:core:sun' } };
+    toPublicSafe(input, { full: true });
+    expect(input.config.latentPantheon).toEqual({ patron: { name: 'The Deep' } });
   });
 
   it('default (no option / full:false) still strips DM-private content', () => {

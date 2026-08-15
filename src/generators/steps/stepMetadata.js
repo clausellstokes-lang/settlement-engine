@@ -28,6 +28,13 @@ export const STEP_METADATA = Object.freeze({
     // input whose .tier is the unresolved sentinel in random/custom mode.
     summary: (ctx) => ctx.tier ? `Target size: ${ctx.tier}` : null,
   },
+  buildGenerationContext: {
+    label: 'Establish world law',
+    description: 'Freeze the resolved world rules every institution, service, person, and history producer must obey.',
+    summary: (ctx) => ctx.generationContext?.worldLaw?.magicFunctions()
+      ? 'Magic functions in this world'
+      : 'Magic does not function in this world',
+  },
   resolveResources: {
     label: 'Pick local resources',
     description: 'Decide which natural resources the land yields, based on terrain and trade.',
@@ -85,7 +92,7 @@ export const STEP_METADATA = Object.freeze({
   },
   stressConfirmPass: {
     label: 'Confirm stressors',
-    description: 'Re-weight emergent stressors against the real roster: walls suppress sieges, granaries suppress famine.',
+    description: 'Re-weight emergent stressors against the real roster — walls suppress sieges, granaries suppress famine.',
     summary: (ctx) => {
       const n = Array.isArray(ctx.stressTypes) ? ctx.stressTypes.length : 0;
       return n ? `${n} stressor${n === 1 ? '' : 's'} confirmed` : 'No stressors survived confirmation';
@@ -123,14 +130,31 @@ export const STEP_METADATA = Object.freeze({
       ? 'Faction pressure reshaped the roster'
       : null,
   },
+  coherenceRepairPass: {
+    label: 'Repair generated structure',
+    description: 'Correct generator-owned access, dependency, and survival contradictions before downstream systems read the roster.',
+    summary: (ctx) => {
+      const count = ctx.generationRepairs?.length || 0;
+      return count
+        ? `${count} deterministic repair${count === 1 ? '' : 's'} applied`
+        : 'No structural repairs needed';
+    },
+  },
   economyReconcilePass: {
     label: 'Reconcile economy with final roster',
     description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.',
-    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged. Economy confirmed.',
+    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged — economy confirmed',
+  },
+  powerEconomyReconcilePass: {
+    label: 'Finalize power against the economy',
+    description: 'Replay the original political intent against the final economic facts without reopening institution pulls.',
+    summary: (ctx) => ctx.powerStructure?.economyInputFingerprint
+      ? 'Power reconciled and freshness-stamped'
+      : null,
   },
   structuralValidationPass: {
     label: 'Validate structure',
-    description: 'Check the FINAL roster for tier, dependency, and access contradictions (the coherence receipt).',
+    description: 'Check the FINAL roster for tier, dependency, and access contradictions — the coherence receipt.',
     summary: (ctx) => {
       const v = ctx.structural?.violations?.length || 0;
       return v ? `${v} structural finding${v === 1 ? '' : 's'}` : 'No structural findings';
@@ -154,7 +178,7 @@ export const STEP_METADATA = Object.freeze({
   },
   generateNarratives: {
     label: 'Compose narratives',
-    description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.',
+    description: 'Write the prose layer — history, defense, daily-life, and per-faction asides.',
     summary: () => null,
   },
   assembleSettlement: {

@@ -6,7 +6,10 @@
  * signals ready are queued and drained in order. Push events go through
  * a tiny event emitter that React components subscribe to.
  *
- *   const bridge = createMapBridge(() => iframeRef.current);
+ *   const bridge = createMapBridge(
+ *     () => iframeRef.current,
+ *     { targetOrigin: mapRuntime.frameOrigin },
+ *   );
  *   await bridge.ready();
  *   await bridge.placeSettlement({ settlementId, x, y, name, population });
  *   bridge.on('burgSelected', (burg) => ...);
@@ -17,9 +20,34 @@
  */
 
 const DEFAULT_TIMEOUT_MS = 7000;
+const IS_PRODUCTION_BUILD = import.meta.env?.PROD === true;
 
 let __ridCounter = 0;
 const nextRid = () => `rpc_${Date.now()}_${++__ridCounter}`;
+
+function resolveTargetOrigin(explicitTargetOrigin) {
+  // Existing unit harnesses and the Vite development server use the local
+  // /map/ copy. Production callers must provide the separately resolved map
+  // origin; silently falling back there would undo the isolation boundary.
+  const candidate = explicitTargetOrigin
+    ?? (!IS_PRODUCTION_BUILD && typeof window !== 'undefined'
+      ? window.location.origin
+      : null);
+  if (!candidate) {
+    throw new TypeError('mapBridge requires an explicit targetOrigin in production.');
+  }
+
+  let parsed;
+  try {
+    parsed = new URL(candidate);
+  } catch {
+    throw new TypeError('mapBridge targetOrigin must be a valid HTTP(S) origin.');
+  }
+  if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) {
+    throw new TypeError('mapBridge targetOrigin must be a credential-free HTTP(S) origin.');
+  }
+  return parsed.origin;
+}
 
 /**
  * Create a bridge instance bound to an iframe getter.
@@ -28,6 +56,7 @@ const nextRid = () => `rpc_${Date.now()}_${++__ridCounter}`;
 export function createMapBridge(getIframe, opts = {}) {
   const timeoutMs = opts.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const debug = opts.debug ?? false;
+  const targetOrigin = resolveTargetOrigin(opts.targetOrigin);
 
   let readyResolved = false;
   let readyPromise = null;
@@ -60,20 +89,16 @@ export function createMapBridge(getIframe, opts = {}) {
   }
 
   function handleMessage(event) {
+    // Origin + source are one joint boundary. A legitimate cross-origin FMG
+    // frame is accepted, but no sibling frame, popup, or same-origin document
+    // can impersonate it.
+    if (event?.origin !== targetOrigin) return;
+    const expected = getIframe?.()?.contentWindow;
+    if (!expected || event.source !== expected) return;
+
     const data = event?.data;
     if (!data || typeof data !== 'object') return;
     const { type, _rid, _error } = data;
-
-    // Origin check: the FMG iframe is served from our own origin
-    // (/map/index.html), so any fmg:* message claiming to come from
-    // elsewhere is a third-party trying to talk to us. Drop it.
-    if (event.origin !== window.location.origin) return;
-
-    // Source check: even within our own origin, only accept messages
-    // from the iframe we created. Stops sibling iframes / popups from
-    // injecting bridge events.
-    const iframe = getIframe?.();
-    if (iframe?.contentWindow && event.source !== iframe.contentWindow) return;
 
     // Ignore messages not meant for us — anything that doesn't start with
     // `fmg:` is someone else's concern.
@@ -117,12 +142,9 @@ export function createMapBridge(getIframe, opts = {}) {
       return false;
     }
     try {
-      // Target our own origin specifically — never `'*'`. The iframe is
-      // served from `/map/` on the same origin as the parent, so this is
-      // both correct and the safest possible target. With `'*'`, any
-      // future change that swaps the iframe for a cross-origin one would
-      // silently leak our messages to whatever happened to land there.
-      iframe.contentWindow.postMessage(msg, window.location.origin);
+      // targetOrigin is the origin derived from the exact iframe URL. Never
+      // use '*' and never infer from window.location in production.
+      iframe.contentWindow.postMessage(msg, targetOrigin);
       return true;
     } catch (e) {
       console.warn('mapBridge.send failed:', e);
@@ -259,6 +281,7 @@ export function createMapBridge(getIframe, opts = {}) {
     call, notify, on, off,
     // Introspection
     get isReady() { return readyResolved; },
+    get targetOrigin() { return targetOrigin; },
 
     // ── Settlement placement ──────────────────────────────────────────────
     placeSettlement: (args) => call('settlementEngine:placeSettlement', args),
@@ -273,13 +296,23 @@ export function createMapBridge(getIframe, opts = {}) {
       call('settlementEngine:setViewport', { cx, cy, scale, duration }),
     fitMap: () => call('settlementEngine:fitMap'),
 
+    // ── Spatial pack capture (Phase 5.5 — read-only terrain snapshot) ─────
+    // One-shot READ of the FMG pack cell arrays for freezing a spatial digest at
+    // canonize. Read-only (no mutation); a generous timeout because it copies a
+    // full-map cell payload out of the iframe once.
+    getSpatialPack: () => call('settlementEngine:getSpatialPack', {}, { timeout: 20000 }),
+
+    // ── Gallery thumbnail (map-share cover) ───────────────────────────────
+    // One-shot rasterize of the rendered terrain to a small JPEG data URL for a
+    // maps-gallery tile (lib/mapThumb.js). Best-effort by contract: the iframe
+    // handler replies { dataUrl: null } on any failure and the caller falls back
+    // to the terrain placeholder — this never throws across the bridge. Generous
+    // timeout: it serializes + rasterizes the full #map SVG once inside the iframe.
+    exportThumb: (size) => call('settlementEngine:exportThumb', { size }, { timeout: 20000 }),
+
     // ── Map snapshot (campaign save/load) ─────────────────────────────────
     saveSnapshot: () => call('settlementEngine:saveSnapshot', {}, { timeout: 15000 }),
 
-    // Rasterize the rendered terrain to a small JPEG data URL for the gallery
-    // tile. Resolves { dataUrl, w, h }. Best-effort on the caller's side.
-    exportThumb: (maxW = 480) =>
-      call('settlementEngine:exportThumb', { maxW }, { timeout: 20000 }),
     loadSnapshot: (snapshot) =>
       call('settlementEngine:loadSnapshot', { snapshot }, { timeout: 30000 }),
     resetMap: (seed) => call('settlementEngine:resetMap', { seed }, { timeout: 30000 }),

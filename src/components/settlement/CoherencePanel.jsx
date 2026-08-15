@@ -6,22 +6,29 @@
  * the settlement has zero warnings.
  */
 
+import { useMemo } from 'react';
+import { AlertTriangle, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { checkDraftEdit } from '../../domain/coherence/checkDraftEdit.js';
-import { GOLD, INK, MUTED, BORDER, RED, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, BORDER, sans, FS, SP, swatch } from '../theme.js';
 
 export default function CoherencePanel() {
   const phase      = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
 
-  if (phase !== 'draft' || !settlement) return null;
+  // Memoize the coherence pass so a re-render that doesn't touch the
+  // settlement doesn't re-run the (now-pure) structural validator.
+  const warnings = useMemo(
+    () => (phase === 'draft' && settlement ? checkDraftEdit(settlement) : []),
+    [phase, settlement],
+  );
 
-  const warnings = checkDraftEdit(settlement);
+  if (phase !== 'draft' || !settlement) return null;
   if (!warnings.length) return null;
 
   return (
     <div style={{
-      background: swatch['#FFF7EC'], border: `1px solid ${GOLD}`, borderRadius: R.md,
+      background: swatch['#FFF7EC'], border: `1px solid ${GOLD}`,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -30,6 +37,7 @@ export default function CoherencePanel() {
         color: swatch['#7A4F0F'], letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.xs,
       }}>
+        <AlertTriangle size={12} />
         Coherence checks · {warnings.length}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -40,28 +48,15 @@ export default function CoherencePanel() {
 }
 
 function Warning({ w }) {
-  // Severity in two channels (P7) without an icon: a leading text tag plus its
-  // colour (mirrored on the left border) so a hard mismatch reads heavier than a
-  // gentle suggestion. Defaults to "Check" for any unlabelled severity.
-  const sev = w.severity === 'mismatch'
-    ? { tag: 'Error', color: RED }
-    : w.severity === 'suggestion'
-      ? { tag: 'Suggestion', color: MUTED }
-      : { tag: 'Check', color: swatch['#7A4F0F'] };
+  const Icon = w.severity === 'mismatch' ? AlertTriangle : Info;
+  const color = w.severity === 'mismatch' ? '#8b1a1a' : w.severity === 'suggestion' ? MUTED : '#7a4f0f';
   return (
     <div style={{
       padding: SP.xs,
       background: swatch.white, border: `1px solid ${BORDER}`,
-      borderLeft: `3px solid ${sev.color}`, borderRadius: R.sm,
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-        <span style={{
-          flexShrink: 0, marginTop: 1,
-          fontSize: FS.pico, fontWeight: 800, fontFamily: sans, color: sev.color,
-          letterSpacing: '0.06em', textTransform: 'uppercase',
-        }}>
-          {sev.tag}
-        </span>
+        <Icon size={12} color={color} style={{ marginTop: 2, flexShrink: 0 }} />
         <div style={{ fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5 }}>
           {w.message}
         </div>

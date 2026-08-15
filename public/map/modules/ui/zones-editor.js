@@ -87,14 +87,18 @@ function editZones() {
         rural
       )}; Urban population: ${si(urban)}. Click to change`;
       const focused = defs.select("#fog #focusZone" + i).size();
+      // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+      const safeName = escapeHtml(name);
+      const safeType = escapeHtml(type);
+      const safeColor = escapeHtml(color);
 
-      return /* html */ `<div class="states" data-id="${i}" data-color="${color}" data-description="${name}"
-        data-type="${type}" data-cells=${cells.length} data-area=${area} data-population=${population} style="${
+      return /* html */ `<div class="states" data-id="${i}" data-color="${safeColor}" data-description="${safeName}"
+        data-type="${safeType}" data-cells=${cells.length} data-area=${area} data-population=${population} style="${
         hidden && "opacity: 0.5"
       }">
-        <fill-box fill="${color}"></fill-box>
-        <input data-tip="Zone description. Click and type to change" style="width: 11em" class="zoneName" value="${name}" autocorrect="off" spellcheck="false">
-        <input data-tip="Zone type. Click and type to change" class="zoneType" value="${type}">
+        <fill-box fill="${safeColor}"></fill-box>
+        <input data-tip="Zone description. Click and type to change" style="width: 11em" class="zoneName" value="${safeName}" autocorrect="off" spellcheck="false">
+        <input data-tip="Zone type. Click and type to change" class="zoneType" value="${safeType}">
         <span data-tip="Cells count" class="icon-check-empty hide"></span>
         <div data-tip="Cells count" class="stateCells hide">${cells.length}</div>
         <span data-tip="Zone area" style="padding-right:4px" class="icon-map-o hide"></span>

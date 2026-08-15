@@ -1,25 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Check, ExternalLink, RefreshCw, XCircle } from 'lucide-react';
 
 import { fetchGalleryReports, resolveGalleryReport } from '../../lib/gallery.js';
+import { supabase } from '../../lib/supabase.js';
 import { navigate } from '../../hooks/useRoute.js';
 import Button from '../primitives/Button.jsx';
 import {
-  BODY,
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  INK,
-  MUTED,
-  R,
-  RED,
-  RED_BG,
-  SECOND,
-  SP,
-  sans,
-} from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SECOND, SP, sans } from '../theme.js';
 import { formatDate, human } from './galleryUtils.js';
 
 const STATUS_OPTIONS = [
@@ -37,7 +23,6 @@ function StatusPill({ status }) {
       alignItems: 'center',
       minHeight: 22,
       padding: '2px 7px',
-      borderRadius: R.sm,
       border: `1px solid ${active ? RED : BORDER2}`,
       background: active ? RED_BG : CARD_ALT,
       color: active ? RED : SECOND,
@@ -62,6 +47,92 @@ function ActionButton({ children, tone = 'secondary', busy, icon, onClick }) {
     >
       {children}
     </Button>
+  );
+}
+
+// The unified cross-kind queue (173): one row per reported TARGET across
+// settlements, maps, campaigns, and comments. Dormant-safe (an undeployed RPC
+// yields an empty queue). Destructive takedown (ban/delete/set-private/remove
+// comment) lives in the by-id admin tools; here a target is resolved or dismissed
+// (all its open reports move together). Rides the lazy AdminPanel chunk.
+function UnifiedReportQueue() {
+  const [targets, setTargets] = useState([]);
+  const [busyKey, setBusyKey] = useState(null);
+  const [error, setError] = useState(null);
+
+  const load = useCallback(async () => {
+    setError(null);
+    try {
+      const { data, error: e } = await supabase.rpc('list_open_report_targets');
+      setTargets(!e && Array.isArray(data) ? data : []);
+    } catch { setTargets([]); }
+  }, []);
+
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    load();
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [load]);
+
+  const resolve = async (kind, targetId, nextStatus) => {
+    const key = `${kind}:${targetId}`;
+    setBusyKey(key); setError(null);
+    try {
+      const { error: e } = await supabase.rpc('resolve_report_target', {
+        p_kind: kind, p_target_id: targetId, p_status: nextStatus, p_note: '',
+      });
+      if (e) throw new Error(e.message || 'Could not update reports.');
+      await load();
+    } catch (err) {
+      setError(err?.message || 'Could not update reports.');
+    } finally {
+      setBusyKey(null);
+    }
+  };
+
+  return (
+    <section aria-label="Reported content queue" style={{ display: 'grid', gap: SP.sm }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
+        <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+          Reported content (all kinds)
+        </h3>
+        <Button variant="secondary" size="sm" onClick={load}>Refresh</Button>
+      </div>
+      {error && (
+        <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
+      )}
+      {targets.length === 0 ? (
+        <div style={{ padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
+          No open reports.
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gap: SP.sm, maxHeight: 320, overflowY: 'auto' }}>
+          {targets.map(t => {
+            const key = `${t.kind}:${t.target_id}`;
+            return (
+              <article key={key} style={{ display: 'grid', gap: 4, padding: SP.sm, border: `1px solid ${RED}`, background: CARD_ALT }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase' }}>{t.kind}</span>
+                  <strong style={{ color: INK, fontFamily: sans, fontSize: FS.sm, overflowWrap: 'anywhere' }}>{t.label || t.target_id}</strong>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{t.report_count} reports</span>
+                  {!t.is_public && <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>not public</span>}
+                </div>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                  {(Array.isArray(t.reasons) ? t.reasons : []).map(r => human(r)).join(', ')}
+                </div>
+                <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+                  Take the item down from the user tools by id; here you can clear the reports.
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm }}>
+                  <Button variant="success" size="sm" busy={busyKey === key} onClick={() => resolve(t.kind, t.target_id, 'resolved')}>Mark resolved</Button>
+                  <Button variant="danger" size="sm" busy={busyKey === key} onClick={() => resolve(t.kind, t.target_id, 'dismissed')}>Dismiss</Button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -105,8 +176,15 @@ export default function GalleryModerationPanel() {
 
   return (
     <div style={{ display: 'grid', gap: SP.md }}>
+      {/* Unified cross-kind queue (173): settlements, maps, campaigns, comments. */}
+      <UnifiedReportQueue />
+      <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
+        <h3 style={{ margin: `0 0 ${SP.sm}px`, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+          Settlement reports (detail)
+        </h3>
+      </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
-        <div style={{ display: 'inline-flex', border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden' }}>
+        <div style={{ display: 'inline-flex', border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
           {STATUS_OPTIONS.map(([id, label]) => {
             const active = status === id;
             return (
@@ -127,7 +205,6 @@ export default function GalleryModerationPanel() {
           variant="secondary"
           size="sm"
           busy={loading}
-          icon={<RefreshCw size={12} />}
           onClick={loadReports}
         >
           Refresh
@@ -135,7 +212,7 @@ export default function GalleryModerationPanel() {
       </div>
 
       {error && (
-        <div style={{ border: `1px solid ${RED}`, borderRadius: R.md, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
           {error}
         </div>
       )}
@@ -145,7 +222,7 @@ export default function GalleryModerationPanel() {
           Loading gallery reports...
         </div>
       ) : reports.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
           No gallery reports in this queue.
         </div>
       ) : (
@@ -158,7 +235,6 @@ export default function GalleryModerationPanel() {
                 gap: SP.sm,
                 padding: SP.md,
                 border: `1px solid ${report.status === 'open' ? RED : BORDER}`,
-                borderRadius: R.md,
                 background: report.status === 'open' ? CARD_ALT : CARD,
               }}
             >
@@ -184,7 +260,6 @@ export default function GalleryModerationPanel() {
                   size="sm"
                   disabled={!report.slug}
                   title="Open public dossier"
-                  icon={<ExternalLink size={12} />}
                   onClick={() => report.slug && navigate('gallery', { params: { slug: report.slug } })}
                 >
                   Open
@@ -205,7 +280,6 @@ export default function GalleryModerationPanel() {
                   <ActionButton
                     tone="success"
                     busy={busyId === report.id}
-                    icon={<Check size={12} />}
                     onClick={() => updateReport(report.id, 'resolved')}
                   >
                     Resolve
@@ -215,7 +289,6 @@ export default function GalleryModerationPanel() {
                   <ActionButton
                     tone="danger"
                     busy={busyId === report.id}
-                    icon={<XCircle size={12} />}
                     onClick={() => updateReport(report.id, 'dismissed')}
                   >
                     Dismiss

@@ -37,4 +37,136 @@ describe('customDeps.foodImpactTally', () => {
       expect(customDeps.foodImpactTally(['Anything'], ['Anything'])).toEqual({ producers: 0, consumers: 0 });
     });
   });
+
+  it('uses exact materialized institution identity and rejects an ambiguous name fallback', () => {
+    const first = {
+      localUid: 'twin-granary-a',
+      definitionId: 'definition:twin-granary-a',
+      name: 'Twin Granary',
+      foodImpact: 'produces',
+    };
+    const second = {
+      localUid: 'twin-granary-b',
+      definitionId: 'definition:twin-granary-b',
+      name: 'Twin Granary',
+      foodImpact: 'consumes',
+    };
+
+    withCustomContent({ institutions: [first, second] }, () => {
+      expect(customDeps.foodImpactTally([first], [], 'town')).toEqual({
+        producers: 1,
+        consumers: 0,
+      });
+      expect(customDeps.foodImpactTally(['Twin Granary'], [], 'town')).toEqual({
+        producers: 0,
+        consumers: 0,
+      });
+      expect(customDeps.foodImpactTally([{
+        name: first.name,
+        customDefinitionId: 'definition:stale-or-foreign',
+      }], [], 'town')).toEqual({
+        producers: 0,
+        consumers: 0,
+      });
+    });
+  });
+
+  it('deduplicates exact projections while keeping same-name service definitions distinct', () => {
+    const provider = {
+      localUid: 'meal-hall',
+      definitionId: 'definition:meal-hall',
+      name: 'Meal Hall',
+    };
+    const first = {
+      localUid: 'twin-meal-a',
+      definitionId: 'definition:twin-meal-a',
+      name: 'Twin Meal',
+      providedBy: 'custom:meal-hall',
+      foodImpact: 'consumes',
+    };
+    const second = {
+      localUid: 'twin-meal-b',
+      definitionId: 'definition:twin-meal-b',
+      name: 'Twin Meal',
+      providedBy: 'custom:meal-hall',
+      foodImpact: 'consumes',
+    };
+
+    withCustomContent({
+      institutions: [provider],
+      services: [first, second],
+    }, () => {
+      expect(customDeps.foodImpactTally(
+        [provider],
+        [],
+        'town',
+        { services: [first, first] },
+      )).toEqual({
+        producers: 0,
+        consumers: 1,
+      });
+      expect(customDeps.foodImpactTally([provider], [], 'town')).toEqual({
+        producers: 0,
+        consumers: 2,
+      });
+    });
+  });
+
+  it('applies the same exact-or-unambiguous rule to resources and trade goods', () => {
+    const provider = {
+      localUid: 'ration-hall',
+      definitionId: 'definition:ration-hall',
+      name: 'Ration Hall',
+    };
+    const resourceA = {
+      localUid: 'twin-field-a',
+      definitionId: 'definition:twin-field-a',
+      name: 'Twin Field',
+      foodImpact: 'produces',
+    };
+    const resourceB = {
+      localUid: 'twin-field-b',
+      definitionId: 'definition:twin-field-b',
+      name: 'Twin Field',
+      foodImpact: 'produces',
+    };
+    const goodA = {
+      localUid: 'twin-ration-a',
+      definitionId: 'definition:twin-ration-a',
+      name: 'Twin Ration',
+      requiredInstitution: 'custom:ration-hall',
+      foodImpact: 'consumes',
+    };
+    const goodB = {
+      localUid: 'twin-ration-b',
+      definitionId: 'definition:twin-ration-b',
+      name: 'Twin Ration',
+      requiredInstitution: 'custom:ration-hall',
+      foodImpact: 'consumes',
+    };
+
+    withCustomContent({
+      institutions: [provider],
+      resources: [resourceA, resourceB],
+      tradeGoods: [goodA, goodB],
+    }, () => {
+      expect(customDeps.foodImpactTally(
+        [provider],
+        [resourceA],
+        'town',
+        { tradeGoods: [goodA] },
+      )).toEqual({
+        producers: 1,
+        consumers: 1,
+      });
+      expect(customDeps.foodImpactTally(
+        [provider],
+        ['Twin Field'],
+        'town',
+      )).toEqual({
+        producers: 0,
+        consumers: 0,
+      });
+    });
+  });
 });

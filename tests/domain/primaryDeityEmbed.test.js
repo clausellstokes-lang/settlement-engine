@@ -46,6 +46,7 @@ function assign(settlement, deityRef, snapshot) {
 }
 
 describe('SET_PRIMARY_DEITY — the embed bridge', () => {
+  // 
   test('writes config.primaryDeityRef + a resolved snapshot', () => {
     const next = assign(baseSettlement(), 'custom:lu_vael', SNAPSHOT);
     expect(next.config.primaryDeityRef).toBe('custom:lu_vael');
@@ -60,12 +61,14 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
     });
   });
 
+  // 
   test('a legacy 3-axis snapshot (no lawAxis) embeds lawAxis as neutral (back-compat)', () => {
     const legacy = { name: 'Old God', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' };
     const next = assign(baseSettlement(), 'custom:old_god', legacy);
     expect(next.config.primaryDeitySnapshot.lawAxis).toBe('neutral');
   });
 
+  // 
   test('the snapshot is self-contained — mutating the source does not change it', () => {
     const source = { ...SNAPSHOT };
     const next = assign(baseSettlement(), 'custom:lu_vael', source);
@@ -76,6 +79,7 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
     expect(next.config.primaryDeitySnapshot.name).toBe('Vael');
   });
 
+  // 
   test('no wall-clock / stray field leaks into the embedded snapshot', () => {
     const next = assign(baseSettlement(), 'custom:lu_vael', { ...SNAPSHOT, _embeddedAt: '2026-06-18T00:00:00Z', secret: 42 });
     const snap = next.config.primaryDeitySnapshot;
@@ -97,6 +101,7 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
 });
 
 describe('deriveReligiousAuthority — deity term + condition scan', () => {
+  // 
   test('a major-deity settlement has higher religious_authority than the same settlement without', () => {
     const plain = baseSettlement();
     const withDeity = assign(baseSettlement(), 'custom:lu_vael', SNAPSHOT);
@@ -106,6 +111,7 @@ describe('deriveReligiousAuthority — deity term + condition scan', () => {
     expect(deityScore).toBeGreaterThan(plainScore);
   });
 
+  // 
   test('tier-scaled: a major deity lifts more than a cult', () => {
     const major = assign(baseSettlement(), 'custom:lu_major', { ...SNAPSHOT, rankAxis: 'major' });
     const cult = assign(baseSettlement(), 'custom:lu_cult', { ...SNAPSHOT, rankAxis: 'cult' });
@@ -123,6 +129,7 @@ describe('deriveReligiousAuthority — deity term + condition scan', () => {
     expect(hasDeityContributor).toBe(false);
   });
 
+  // Landed W2b causalState wave — causalState deriveReligiousAuthority religious_authority condition scan.
   test('the new condition scan picks up a religious_authority-affecting condition', () => {
     // A settlement carrying regional_religious_pressure (now declares
     // religious_authority) gains a religious_pressure contributor.

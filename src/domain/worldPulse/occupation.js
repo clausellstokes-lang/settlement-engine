@@ -59,7 +59,19 @@
 
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
+// W-PEACE-2 occupation_hold: a peace that CEDES the occupation ("the garrison stays at
+// the walls") must actually keep it standing after the army marches home. Read from the
+// dependency-free treatyEnforcement leaf so this module never pulls the peace mover.
+import { occupationHoldFor } from './treatyEnforcement.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
+import { isLiveWarFront } from './warFrontReads.js';
+import {
+  occupationBurdenClearanceOutcome,
+  occupationContext,
+  recurringOccupationConditionRecordMode,
+  storedOccupierBenefit,
+  warSpoilsEndedOutcome,
+} from './occupationRecordMode.js';
 import {
   normalizeRelationshipEdge,
   relationshipKeyFromEdge,
@@ -67,6 +79,32 @@ import {
   relationshipRoles,
   getRelationshipSettlements,
 } from './relationshipEvolution.js';
+// WR-8 amendment N — CONQUEST EXECUTION. `conquestDoctrineActive` is the flag
+// chain (dark by default, and WR-8 lights LAST of the whole WR chain); the
+// execution leaf is import-free and prices margins and famines from numbers this
+// module has already read. DARK ⇒ neither is ever called and every expression
+// below is the pre-wire one, which is what keeps the occupation ledger and its
+// conditions byte-identical for every campaign that never lit it.
+import { conquestDoctrineActive } from './conquestDoctrineStage.js';
+import {
+  conquestCeilingRank,
+  conquestMarginVerdict,
+  inheritanceBenefitFactor,
+  inheritanceBurdenAddend,
+  inheritedHunger,
+} from './conquestExecution.js';
+import { storageCapacityMonths } from './foodStockpile.js';
+
+/**
+ * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
+ * @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot
+ * @typedef {import('./pulseShapes.js').WorldState} WorldState
+ * @typedef {import('./pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('./pulseShapes.js').DeploymentRecord} DeploymentRecord
+ * @typedef {import('./pulseShapes.js').OccupationRecord} OccupationRecord
+ * @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome
+ * @typedef {import('./pulseShapes.js').SettlementItem} SettlementItem
+ */
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
@@ -196,6 +234,51 @@ export function createOccupationRecord(occupierId, tick) {
     resistance: 0.35,
     benefitYield: 0,
     lastTick: Math.max(0, Math.floor(num(tick))),
+  };
+}
+
+/**
+ * THE CONVEYANCE REWRITE (WR-10 amendment S) — one overlord replaces another on an
+ * EXISTING vassalage, and the rung survives the sale.
+ *
+ * This is deliberately NOT createOccupationRecord. That path mints a FRESH conquest at
+ * `contested` with resistance 0.35, and routing a sale through it would silently undo
+ * every tick of stabilization the seller paid for — the buyer would receive a fight
+ * instead of the holding it bought, and `readSovereigntyAsset` would stop calling the
+ * settlement conveyable the instant the ink dried. Only `vassalized` is conveyable
+ * (sovereigntyAssets.js), so `state` is carried across UNCHANGED and the ladder's own
+ * machinery keeps running from where the seller left it.
+ *
+ * WHAT DOES change is the clock and the consent. `sinceTick` restarts because the new
+ * overlordship is a new tenure; `stateHeld` returns to zero so the buyer must re-earn
+ * any transition through the ordinary hysteresis dwell; and `resistance` is RAISED to a
+ * floor — a town that learns it was sold is less governable than one that merely lost a
+ * war, and that fragility is the durable half of the sale (the score echo on
+ * publicLegitimacy is generated and declared regen-volatile; this field is campaign
+ * state and survives). The floor is a FLOOR, never a set: an already-restive vassal is
+ * left where it is rather than calmed by being sold. Pulling the value the rest of the
+ * way toward the occupied settlement's own `resistanceTarget` is deliberately left to
+ * `advanceResistance`, which already owns that law — a second pull here would be a
+ * second spelling of one rule.
+ *
+ * PURE: returns a new record; no rng, no wall-clock, no mutation of the input.
+ *
+ * @param {{ occupierId?: unknown, state?: unknown, resistance?: unknown }} record the LIVE occupation
+ * @param {string} buyerId the acquiring overlord
+ * @param {number} tick
+ * @param {number} resistanceStart the fragility FLOOR (0..1) — an unsoaked §7 band
+ * @returns {Record<string, unknown>}
+ */
+export function conveyOccupationRecord(record, buyerId, tick, resistanceStart) {
+  const t = Math.max(0, Math.floor(num(tick)));
+  return {
+    ...record,
+    occupierId: String(buyerId),
+    state: String(record?.state ?? ''),
+    sinceTick: t,
+    stateHeld: 0,
+    resistance: Math.max(clamp01(num(record?.resistance)), clamp01(num(resistanceStart))),
+    lastTick: t,
   };
 }
 
@@ -423,7 +506,7 @@ export function advanceOccupationState(record, suitability, tick = null) {
  * The containment cap is the keystone: an occupier's TOTAL benefit is bounded regardless
  * of how many settlements it holds, so occupations cannot compound into unbounded strength.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger (post state/resistance advance).
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger (post state/resistance advance).
  * @param {(id:string)=>any} occupiedItemFor  pre-tick snapshot item for an occupied id.
  * @returns {{ perOccupier: Record<string, number>, perOccupation: Record<string, number> }}
  *   perOccupier: occupierId → total capped benefit (0..OCCUPIER_BENEFIT_CONTAINMENT).
@@ -473,7 +556,7 @@ export function computeOccupierBenefit(occupations, occupiedItemFor) {
  * burden is NOT total-capped: it scales with the count, so a greedy occupier degrades
  * itself (the overextension property). Returns occupierId → total burden severity.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger.
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger.
  * @returns {Record<string, number>}
  */
 export function computeOccupierBurden(occupations) {
@@ -509,8 +592,8 @@ export function computeOccupierBurden(occupations) {
  * deployment from the occupier onto it)? A liberated/relieved occupation loses this. Used to
  * tilt the stabilization suitability (a garrison helps hold the ground). Pure read of the
  * post-mint graph + deployments.
- * @param {any} graph
- * @param {Record<string, any>} deployments
+ * @param {RegionGraph} graph
+ * @param {Record<string, DeploymentRecord>} deployments
  * @param {string} occupierId
  * @param {string} occupiedId
  * @returns {boolean}
@@ -519,7 +602,10 @@ function occupierStillPresent(graph, deployments, occupierId, occupiedId) {
   const dep = deployments?.[occupierId];
   if (dep?.targetId && String(dep.targetId) === String(occupiedId)) return true;
   for (const channel of graph?.channels || []) {
-    if (channel?.type !== 'war_front' || channel?.status !== 'confirmed') continue;
+    // Provenance-gated (warFrontReads): a pure hostile-RELATIONSHIP front between the
+    // occupier and occupied is not a garrison presence. Reading it as one faked a
+    // permanent occupier-present garrison bonus with no army committed.
+    if (!isLiveWarFront(channel)) continue;
     if (String(channel.from) === String(occupierId) && String(channel.to) === String(occupiedId)) return true;
   }
   return false;
@@ -528,9 +614,9 @@ function occupierStillPresent(graph, deployments, occupierId, occupiedId) {
 /**
  * A condition outcome (the coup-verdict / war-layer shape). Flows through
  * applyWorldPulseOutcomes UNCHANGED.
- * @param {{ id: string, archetype: string, targetSaveId: string, severity: number, headline: string, summary: string, reasons: string[], tick: number, sourceEventTargetId: string, causes: any[] }} args
+ * @param {{ id: string, archetype: string, targetSaveId: string, severity: number, headline: string, summary: string, reasons: string[], tick: number, sourceEventTargetId: string, causes: any[], recordMode?: string }} args
  */
-function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes }) {
+function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes, recordMode }) {
   return {
     id,
     type: 'condition',
@@ -544,6 +630,7 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
     headline,
     summary,
     reasons,
+    ...(recordMode ? { recordMode } : {}),
     condition: {
       archetype,
       severity: clamp01(severity),
@@ -598,7 +685,7 @@ export function liberatedIdsFrom(returnOutcomes = []) {
 /**
  * Find the regional-graph edge between two settlements (either orientation), returning
  * its canonical relationship key + the raw edge. Null when no edge exists. Pure read.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @param {string} a
  * @param {string} b
  * @returns {{ key: string, edge: any }|null}
@@ -625,8 +712,8 @@ function edgeBetween(snapshot, a, b) {
  * occupied edge so applyRelationshipLabelToGraph can relabel it; skipped if no edge exists
  * (the apply path needs an edge to relabel). Codepoint-sorted; emits once on arrival.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger.
- * @param {any} snapshot   the pre-tick snapshot (for the occupier↔occupied edge).
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger.
+ * @param {PulseSnapshot} snapshot   the pre-tick snapshot (for the occupier↔occupied edge).
  * @param {(id:string)=>any} nameFor
  * @param {number} tick
  * @param {Set<string>|null} [arrivedThisTick]  occupied ids that FIRST reached `vassalized`
@@ -709,10 +796,10 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
  *     relationship outcomes for occupations that reached `vassalized`.
  *
  * @param {Object} args
- * @param {any} args.snapshot        the SINGLE pre-tick snapshot (byId carries settlement + causal).
- * @param {any} args.worldState      carries the pre-tick occupations ledger.
- * @param {any} args.graph           the POST-mint regional graph (for garrison-presence reads).
- * @param {Record<string, any>} args.deployments  the live one-army ledger (post war-layer).
+ * @param {PulseSnapshot} args.snapshot        the SINGLE pre-tick snapshot (byId carries settlement + causal).
+ * @param {WorldState} args.worldState      carries the pre-tick occupations ledger.
+ * @param {RegionGraph} args.graph           the POST-mint regional graph (for garrison-presence reads).
+ * @param {Record<string, DeploymentRecord>} args.deployments  the live one-army ledger (post war-layer).
  * @param {any[]} [args.warOutcomes]  this tick's war-layer outcomes (fresh conquests).
  * @param {any[]} [args.returnOutcomes]  this tick's deployment-return outcomes (liberations).
  * @param {number} [args.tick]
@@ -743,6 +830,37 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     return item?.name || item?.settlement?.name || String(id);
   };
   const itemFor = (/** @type {any} */ id) => snapshot?.byId?.get?.(String(id));
+
+  // ── WR-8 amendment N: CONQUEST EXECUTION. Read ONCE per pass. Dark (and it is
+  // dark by default, behind the whole WR chain) ⇒ every expression below this
+  // point is the pre-wire one and this layer is byte-identical. ──────────────
+  const conquestLit = conquestDoctrineActive(worldState);
+  /** Theoretical military capacity, cached per id — the truth read the EXECUTION
+   *  half is entitled to (belief decides the march; the world decides whether it
+   *  worked). Reuses the same model `occupiedUsefulness` already runs on. */
+  const capacityCache = new Map();
+  const capacityOf = (/** @type {string} */ id) => {
+    const key = String(id);
+    if (capacityCache.has(key)) return capacityCache.get(key);
+    const item = itemFor(key);
+    const economicCapacityScore = item?.causal?.scores?.economic_capacity;
+    const value = item
+      ? num(deriveMilitaryCapacity(item, {
+        economicCapacityScore: Number.isFinite(economicCapacityScore) ? economicCapacityScore : undefined,
+      }).theoreticalCapacity)
+      : NaN;
+    capacityCache.set(key, value);
+    return value;
+  };
+  /** THE OVERWHELMING GATE for one hold. Null while dark. */
+  const marginFor = (/** @type {string} */ occupierId, /** @type {string} */ occupiedId) => (conquestLit
+    ? conquestMarginVerdict({
+      occupierCapacity: capacityOf(occupierId),
+      occupiedCapacity: capacityOf(occupiedId),
+      occupierName: nameFor(occupierId),
+      occupiedName: nameFor(occupiedId),
+    })
+    : null);
 
   // ── Step 1+2: seed fresh conquests, drop liberated ones. Work on a COPY (read-last/
   // write-next — never mutate worldState's ledger). ────────────────────────────────
@@ -787,7 +905,14 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       continue;
     }
     const occupiedItem = itemFor(occupiedId);
-    const present = occupierStillPresent(graph, deployments, rec.occupierId, occupiedId);
+    // W-PEACE-2 occupation_hold: a live occupation_continuation term is a CEDED garrison.
+    // It stands in for physical presence (the treaty is why the army could go home without
+    // the occupation evaporating) and it forbids the collapse exit while it runs. Resistance
+    // still climbs underneath — the hold suppresses the OUTCOME, not the grievance — so the
+    // day the term expires the occupation faces whatever it has become. false ⇒ every
+    // expression below is the pre-wire one, so an untreatied occupation is byte-identical.
+    const treatyHold = occupationHoldFor(worldState, occupiedId, rec.occupierId, t);
+    const present = treatyHold || occupierStillPresent(graph, deployments, rec.occupierId, occupiedId);
 
     // Resistance first (from the pre-tick state), then suitability, then state.
     const nextResistance = advanceResistance(rec, occupiedItem);
@@ -796,15 +921,27 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     // is force-resolved after MAX_CONTESTED_DWELL ticks instead of grinding forever.
     const advanced = advanceOccupationState(rec, suitability, t);
 
-    if (advanced.liberated) {
+    if (advanced.liberated && !treatyHold) {
       // The occupation collapsed (the occupier lost control). Exit the ledger; the
       // occupied settlement banks a (re)liberation; the occupier banks a disposition loss.
       delete occupations[occupiedId];
-      dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'loss', magnitude: 0.6 });
+      const dispositionSourceEventId = `world_outcome.occupation_collapsed.${stablePart(occupiedId)}.${t}`;
+      dispositionDeltas.push({
+        id: String(rec.occupierId), outcome: 'loss', magnitude: 0.6,
+        sourceEventId: dispositionSourceEventId,
+      });
+      // worldpulse-war-8: the occupied town banks the WIN — throwing off an occupier
+      // through resistance is one of the strongest confidence signals in the fiction
+      // ('we reclaimed our own authority'). Bounded; folds through applyDispositionDeltas
+      // with the ±SCORE_MAX clamp. Behind warLayerEnabled (this whole pass).
+      dispositionDeltas.push({
+        id: String(occupiedId), outcome: 'win', magnitude: 0.5,
+        sourceEventId: dispositionSourceEventId,
+      });
       const occupiedName = nameFor(occupiedId);
       const occupierName = nameFor(rec.occupierId);
       outcomes.push(conditionOutcome({
-        id: `world_outcome.occupation_collapsed.${stablePart(occupiedId)}.${t}`,
+        id: dispositionSourceEventId,
         archetype: 'occupation_lifted',
         targetSaveId: occupiedId,
         severity: 0.3,
@@ -829,6 +966,19 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     // normally) — only the terminal promotion is undone. Inert without dismissals.
     let nextState = advanced.state;
     let nextStateHeld = advanced.stateHeld;
+    // ── WR-8 (N) THE OVERWHELMING GATE, and it is the whole amendment's hardest
+    // pin sitting in four lines. A hold whose victor is merely CLEARLY WINNING —
+    // or whose margin cannot be measured — may climb the ladder in the ordinary
+    // way up to `extractive` and NO FURTHER, so `stabilized` and the client-state
+    // rung `vassalized` are unreachable to it and its war can only end at a
+    // table. Only an OVERWHELMING margin opens the top of the ladder. The dwell
+    // is reset with the cap so a capped occupation does not bank pressure it can
+    // never spend. Dark ⇒ `margin` is null ⇒ `nextState` is untouched. ────────
+    const margin = marginFor(String(rec.occupierId), occupiedId);
+    if (margin && stateRank(nextState) > conquestCeilingRank(margin)) {
+      nextState = STATE_LADDER[conquestCeilingRank(margin)];
+      nextStateHeld = 0;
+    }
     if (vassalizationDismissed
         && advanced.state === 'vassalized' && prevState !== 'vassalized'
         && vassalizationDismissed(occupiedId)) {
@@ -879,6 +1029,70 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   // ── Step 4: the CAPPED/DELAYED/CONDITIONAL benefit + the burden. ──────────────────
   const { perOccupier: benefit } = computeOccupierBenefit(occupations, itemFor);
   const burden = computeOccupierBurden(occupations);
+  const previousBurden = computeOccupierBurden(existing);
+
+  // ── WR-8 (N) THE INHERITANCE COUNTERFORCE. "A realm that conquers a dying
+  // neighbour has annexed a famine." The victor's food deficit is SUMMED over
+  // what it now holds, through the two readers the food engine already exposes,
+  // and it bites twice: it nets the tribute DOWN (an empty granary pays nothing)
+  // and it raises the garrison bill (you are feeding them now). Uncapped by
+  // count on purpose — the brake must be able to outgrow the prize. Dark ⇒ the
+  // map is empty ⇒ factor 1 and addend 0 everywhere ⇒ byte-identical. ─────────
+  /** @type {Record<string, ReturnType<typeof inheritedHunger>>} */
+  const inherited = {};
+  if (conquestLit) {
+    /** @type {Record<string, Array<{ storageMonths: unknown, capacityMonths: unknown }>>} */
+    const heldByOccupier = {};
+    for (const occupiedId of Object.keys(occupations).sort(codepoint)) {
+      const occupierId = String(occupations[occupiedId]?.occupierId || '');
+      if (!occupierId) continue;
+      const settlement = itemFor(occupiedId)?.settlement;
+      (heldByOccupier[occupierId] = heldByOccupier[occupierId] || []).push({
+        storageMonths: settlement?.economicState?.foodSecurity?.storageMonths,
+        capacityMonths: storageCapacityMonths(settlement),
+      });
+    }
+    for (const occupierId of Object.keys(heldByOccupier).sort(codepoint)) {
+      inherited[occupierId] = inheritedHunger(heldByOccupier[occupierId]);
+    }
+  }
+  const hungerOf = (/** @type {string} */ id) => num(inherited[id]?.hunger);
+
+  // A producer that falls silent still owns one real transition: its renewal ended.
+  // Emit one aggregate public receipt per occupier on that edge, without changing the
+  // bounded expiry tail already carried by the active condition.
+  const previousOccupierIds = [...new Set(Object.values(existing)
+    .map(rec => rec?.occupierId)
+    .filter(id => id != null)
+    .map(String))].sort(codepoint);
+  for (const occupierId of previousOccupierIds) {
+    if (!snapshot?.byId?.has?.(occupierId)) continue;
+    const occupierName = nameFor(occupierId);
+    const previousCount = occupationContext(existing, occupierId).length;
+    const nextCount = occupationContext(occupations, occupierId).length;
+    const previousBenefit = storedOccupierBenefit(existing, occupierId);
+    const nextBenefit = clamp01(num(benefit[occupierId]));
+
+    const burdenClearance = occupationBurdenClearanceOutcome({
+      occupierId,
+      occupierName,
+      previousCount,
+      nextCount,
+      previousSeverity: clamp01(num(previousBurden[occupierId])),
+      tick: t,
+    });
+    if (burdenClearance) outcomes.push(burdenClearance);
+
+    const spoilsEnded = warSpoilsEndedOutcome({
+      occupierId,
+      occupierName,
+      previousBenefit,
+      nextBenefit,
+      previousSeverity: clamp01(previousBenefit * BENEFIT_RELIEF_SCALE),
+      tick: t,
+    });
+    if (spoilsEnded) outcomes.push(spoilsEnded);
+  }
 
   // ── Step 5: emit per-occupier burden + war_spoils (capped benefit relief). ────────
   // Iterate the union of occupiers (codepoint-sorted) so each occupier gets one of each.
@@ -888,7 +1102,10 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     const occupierName = nameFor(occupierId);
     const occCount = Object.keys(occupations).filter(id => String(occupations[id]?.occupierId) === occupierId).length;
 
-    const burdenSeverity = clamp01(num(burden[occupierId]));
+    // WR-8 (N): the inherited famine is part of the garrison bill. Addend 0 while
+    // dark or while nothing held is hungry ⇒ the pre-wire severity exactly.
+    const inheritedHere = inherited[occupierId] || null;
+    const burdenSeverity = clamp01(num(burden[occupierId]) + inheritanceBurdenAddend(hungerOf(occupierId)));
     if (burdenSeverity > 0) {
       outcomes.push(conditionOutcome({
         id: `world_outcome.occupation_burden.${stablePart(occupierId)}.${t}`,
@@ -897,18 +1114,47 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: burdenSeverity,
         headline: `${occupierName} is stretched thin holding its conquests`,
         summary: `Garrisons, administrators, and suppression tie down ${occupierName}'s strength across ${occCount} occupation${occCount === 1 ? '' : 's'}.`,
-        reasons: [`Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`],
+        reasons: [
+          `Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`,
+          // The counterforce is NAMED, not buried in a float. Absent while dark.
+          ...(inheritedHere && inheritedHere.hunger > 0 ? [`Inherited hunger ${inheritedHere.hunger.toFixed(2)}: ${inheritedHere.receipt}`] : []),
+        ],
         tick: t,
         sourceEventTargetId: occupierId,
-        causes: [{ source: occupierId, effect: 'occupation_burden', reason: `${occupierName} garrisons and administers ${occCount} occupied settlement${occCount === 1 ? '' : 's'}.` }],
+        causes: [
+          { source: occupierId, effect: 'occupation_burden', reason: `${occupierName} garrisons and administers ${occCount} occupied settlement${occCount === 1 ? '' : 's'}.` },
+          ...(inheritedHere && inheritedHere.hunger > 0
+            ? [{ source: occupierId, effect: 'occupation_burden', reason: `${occupierName} has annexed a famine: ${inheritedHere.receipt}` }]
+            : []),
+        ],
+        recordMode: recurringOccupationConditionRecordMode({
+          snapshot,
+          archetype: 'occupation_burden',
+          targetSaveId: occupierId,
+          severity: burdenSeverity,
+          previousOccupations: existing,
+          nextOccupations: occupations,
+          previousProducerActive: occupationContext(existing, occupierId).length > 0,
+        }),
       }));
     }
 
     // war_spoils: the CAPPED benefit relief. It EASES war_exhaustion (extends supply
     // endurance), modelled as an easing condition whose severity is the capped benefit.
-    const benefitYield = clamp01(num(benefit[occupierId]));
+    // WR-8 (N): you cannot draw tribute from an empty granary. Factor is exactly
+    // 1 while dark or while nothing held is hungry ⇒ the pre-wire yield exactly.
+    const benefitYield = clamp01(num(benefit[occupierId]) * inheritanceBenefitFactor(hungerOf(occupierId)));
     if (benefitYield > 0) {
       const relief = clamp01(benefitYield * BENEFIT_RELIEF_SCALE);
+      const recordMode = recurringOccupationConditionRecordMode({
+        snapshot,
+        archetype: 'war_spoils',
+        targetSaveId: occupierId,
+        severity: relief,
+        previousOccupations: existing,
+        nextOccupations: occupations,
+        previousProducerActive: storedOccupierBenefit(existing, occupierId) > 0,
+      });
       outcomes.push({
         id: `world_outcome.war_spoils.${stablePart(occupierId)}.${t}`,
         type: 'condition',
@@ -921,7 +1167,13 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: relief,
         headline: `${occupierName} draws strength from its occupations`,
         summary: `Tribute, levies, and materiel from stabilized occupations sustain ${occupierName}'s war effort.`,
-        reasons: [`Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`],
+        reasons: [
+          `Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`,
+          ...(inheritedHere && inheritedHere.hunger > 0
+            ? [`Netted down by inherited hunger ${inheritedHere.hunger.toFixed(2)} — ${inheritedHere.receipt}`]
+            : []),
+        ],
+        ...(recordMode ? { recordMode } : {}),
         // war_spoils is the INVERSE of war_exhaustion — it RELIEVES economic_capacity. The
         // apply path treats it as an easing condition (status 'easing'); it feeds the
         // homeostasis dial the OTHER way (extending endurance), bounded by the cap.
@@ -973,7 +1225,7 @@ export const OCCUPATION_TUNING = Object.freeze({
 /**
  * Detect a vassal edge `homeId` is the JUNIOR of (re-export of the deploymentReturn idiom
  * for occupation-aware liberation in tests/integration). Pure read of the pre-tick edges.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @param {string} homeId
  * @returns {string|null} the overlord id, or null.
  */

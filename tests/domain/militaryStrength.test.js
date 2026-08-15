@@ -104,6 +104,48 @@ describe('deriveMilitaryCapacity — structured decomposition', () => {
     const cap = deriveMilitaryCapacity(city);
     expect(militaryCapacityScalar(city)).toBeCloseTo(cap.theoreticalCapacity / 100, 6);
   });
+
+  it('does not grant native military or materiel strength from current custom display names', () => {
+    const base = {
+      settlement: {
+        ...thorpe.settlement,
+        institutions: [],
+        economicState: {
+          ...thorpe.settlement.economicState,
+          primaryExports: [],
+        },
+      },
+    };
+    const namesakes = [
+      { name: 'Royal Garrison' },
+      { name: 'Master Weaponsmiths Forge' },
+    ];
+    const currentCustom = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes.map((institution, index) => ({
+          ...institution,
+          source: 'custom',
+          customDefinitionId: `definition:institutions:military-collision-${index}`,
+        })),
+      },
+    };
+    const legacyUnstamped = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes,
+      },
+    };
+
+    const baseline = deriveMilitaryCapacity(base);
+    const custom = deriveMilitaryCapacity(currentCustom);
+    const legacy = deriveMilitaryCapacity(legacyUnstamped);
+
+    expect(custom.facets.institutions).toBe(baseline.facets.institutions);
+    expect(custom.facets.materiel).toBe(baseline.facets.materiel);
+    expect(legacy.facets.institutions).toBeGreaterThan(baseline.facets.institutions);
+    expect(legacy.facets.materiel).toBeGreaterThan(baseline.facets.materiel);
+  });
 });
 
 describe('war erosion — current vs theoretical', () => {
@@ -184,20 +226,26 @@ describe('mounted-everywhere-it-should-be guarantee', () => {
   // OTHER importer (an accidental hot-path coupling) is the failure.
   it('only the known B1/B2/B4 engine consumers + the F1 display read-model import the model', () => {
     // Match the IMPORT path (…/militaryStrength.js), not the bare word — the
-    // generators carry an unrelated local `militaryStrength` variable.
+    // generators carry an unrelated local `militaryStrength` variable. Scan CODE
+    // files only: data baselines (e.g. tests/lint/.domain-any-baseline.json) list
+    // file paths without importing anything.
     const hits = execSync(
-      "grep -rln \"/militaryStrength.js\" src tests || true",
+      "grep -rln --include='*.js' --include='*.jsx' \"/militaryStrength.js\" src tests || true",
       { cwd: process.cwd(), encoding: 'utf8' },
     ).trim().split('\n').filter(Boolean).map(p => p.replace(/\/{2,}/g, '/'));
     const ALLOWED = new Set([
       'src/domain/worldPulse/militaryStrength.js',       // the model
       'tests/domain/militaryStrength.test.js',           // its own test
-      'src/domain/worldPulse/warDeployment.js',          // B1/B2 — deployment strength envelope
+      'tests/domain/ruinFilter.probe.test.js',           // ruin-filter lane — proves a ruined garrison fields no martial force
+      'src/domain/worldPulse/warCapacityReads.js',       // B1/B2 — the deployment strength envelope. THE DECOMPOSITION WAVE (R-BLD-4) moved buildCapacityLookup out of warDeployment.js into this pure-read leaf, so the model's ONE engine-side importer moved with it. This is a RELOCATION of an existing allowlist row, not a new consumer: warDeployment.js no longer imports the model at all, and its row below is gone. The couplings this walker guards against are unchanged in number and in kind.
       'src/domain/worldPulse/occupation.js',             // B3 — occupied-settlement usefulness
       'src/domain/worldPulse/tradeSalience.js',          // B4 — materiel-gap salience
       'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)
       'src/domain/display/armyStrength.js',              // F1 — player-safe army-strength read-model
       'src/domain/display/warResolve.js',                // P5 — War & Resolve display read-model (needs the raw facets for the exact will/hope the siege uses)
+      'src/domain/worldPulse/roadsKernel.js',            // THE ROADS §7 amendment C — escort protection reads the home settlement's military quality (readiness/experience/capacity) at dispatch ("better soldiers and equipment do make a difference")
+      'tests/domain/roadsEmbassyExtensions.test.js',     // THE ROADS §11b R-8 — the escort-refinement test reconstructs the frozen escort01 = militaryQuality01(readiness/experience/capacity) × settlementWeight01 (a deliberate test reader, the RC-e roadsKernel precedent)
+      'tests/domain/conquestExecutionWr8.test.js',       // WR-8 amendment N — the overwhelming gate is a THEORETICAL-CAPACITY POINTS GAP, and the whole reason it is a gap rather than a ratio is a measured fact about this model's compression (conquestExecution.js's tuning block records it). A pin that asserted the band boundaries against hand-typed numbers would prove only that the constants equal themselves; this test derives real capacities from real settlement rows through deriveMilitaryCapacity so the gate is checked against the spread the engine actually produces. A deliberate test reader on the roadsEmbassyExtensions/ruinFilter precedent — it imports the MODEL, mounts nothing, and adds no hot-path coupling.
     ]);
     const offenders = hits.filter(p => !ALLOWED.has(p));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);

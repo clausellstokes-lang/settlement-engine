@@ -1,63 +1,58 @@
 /** @vitest-environment jsdom */
 /**
- * exportDraftButton.test.jsx — the create-page "Export PDF" gate.
- *
- * The button lets an unlimited-export tier (Cartographer / Founder / elevated)
- * export the UNSAVED draft in place. Under the export ladder (108) it routes
- * through useDossierExportAccess(null): a null save id yields reason 'tier'
- * (allow) for those tiers, or 'unsaved' / 'anon' (deny) for a free / anonymous
- * user — who must save first (free) or use the one-shot Buy CTA (anon). The
- * button is hidden whenever access is denied or there is nothing to export.
+ * ExportDraftButton — W4f. The unsaved-draft PDF export and its EXPORT-LADDER
+ * GATE. Only export-capable tiers (elevated, or a tier whose export gate allows
+ * it) can export an unsaved draft in place; a free account must save first and an
+ * anon takes the hero Buy CTA — for both, this button renders NOTHING.
  */
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
-  const data = {
-    settlement: { name: 'Test', tier: 'Town' },
-    auth: { tier: 'premium' },
-    isElevated: () => false,
-    dossierEntitlements: {},
-    refreshDossierEntitlement: vi.fn(() => Promise.resolve(false)),
-  };
+  const data = {};
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
   useStore.__set = (next) => Object.assign(data, next);
+  useStore.__reset = () => {
+    for (const k of Object.keys(data)) delete data[k];
+    Object.assign(data, {
+      settlement: { name: 'Emberhold', tier: 'town' },
+      isElevated: () => false,
+      canExport: () => false,
+    });
+  };
   return { useStore };
 });
 
-import ExportDraftButton from '../../src/components/generate/ExportDraftButton.jsx';
 import { useStore } from '../../src/store/index.js';
+import ExportDraftButton from '../../src/components/generate/ExportDraftButton.jsx';
 
-describe('ExportDraftButton — unlimited-tier unsaved-draft export', () => {
-  afterEach(() => {
-    cleanup();
-    useStore.__set({
-      settlement: { name: 'Test', tier: 'Town' },
-      auth: { tier: 'premium' },
-      isElevated: () => false,
-      dossierEntitlements: {},
-    });
-  });
+beforeEach(() => useStore.__reset());
+afterEach(() => cleanup());
 
-  it('renders the Export PDF button for an unlimited-export tier with a settlement', () => {
-    render(<ExportDraftButton />);
-    expect(screen.getByRole('button', { name: /Export PDF/i })).toBeTruthy();
-  });
-
-  it('renders nothing for a free account (must save first) and for anon', () => {
-    useStore.__set({ auth: { tier: 'free' } });
-    const free = render(<ExportDraftButton />);
-    expect(free.container.firstChild).toBeNull();
-    cleanup();
-    useStore.__set({ auth: { tier: 'anon' } });
-    const anon = render(<ExportDraftButton />);
-    expect(anon.container.firstChild).toBeNull();
-  });
-
-  it('renders nothing when there is no settlement to export', () => {
-    useStore.__set({ settlement: null, auth: { tier: 'premium' } });
+describe('ExportDraftButton — export-ladder gate', () => {
+  it('renders nothing for a free account (no export gate, not elevated)', () => {
+    useStore.__set({ isElevated: () => false, canExport: () => false });
     const { container } = render(<ExportDraftButton />);
-    expect(container.firstChild).toBeNull();
+    expect(container.textContent).toBe('');
+    expect(screen.queryByText('Export PDF')).toBeNull();
+  });
+
+  it('renders nothing when there is no settlement', () => {
+    useStore.__set({ settlement: null, canExport: () => true });
+    const { container } = render(<ExportDraftButton />);
+    expect(container.textContent).toBe('');
+  });
+
+  it('renders Export PDF for an export-capable tier', () => {
+    useStore.__set({ canExport: () => true });
+    render(<ExportDraftButton />);
+    expect(screen.getByText('Export PDF')).toBeTruthy();
+  });
+
+  it('renders Export PDF for an elevated role', () => {
+    useStore.__set({ isElevated: () => true, canExport: () => false });
+    render(<ExportDraftButton />);
+    expect(screen.getByText('Export PDF')).toBeTruthy();
   });
 });

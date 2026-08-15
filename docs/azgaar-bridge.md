@@ -1,136 +1,67 @@
-# Azgaar FMG Bridge — Setup Guide
+# Azgaar FMG Bridge
 
-## Overview
+SettlementForge embeds a fork of [Azgaar's Fantasy Map Generator](https://github.com/Azgaar/Fantasy-Map-Generator) in an `<iframe>` and drives it over a typed `postMessage` RPC. FMG provides the geography (terrain, rivers, coastlines, biomes); SettlementForge draws all settlement icons, routes, and supply-chain overlays itself in a React layer on top. In embedded mode FMG generates geography **only** — no states, burgs, religions, or armies.
 
-The SettlementForge integrates with [Azgaar's Fantasy Map Generator](https://github.com/Azgaar/Fantasy-Map-Generator) via an iframe + postMessage bridge. The map provides geography (terrain, rivers, borders, cultures); your settlements provide depth (institutions, factions, NPCs, supply chains).
+## The two halves
 
-## Setup Steps
-
-### 1. Fork the FMG repository
-
-```bash
-# Fork on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/Fantasy-Map-Generator.git
-cd Fantasy-Map-Generator
-```
-
-### 2. Add the bridge script
-
-Copy `docs/fmg-bridge.js` from this repository into the FMG root directory.
-
-Then add it to `index.html` before the closing `</body>` tag:
-
-```html
-<script src="fmg-bridge.js"></script>
-</body>
-```
-
-### 3. Allow iframe embedding
-
-By default, FMG may set `X-Frame-Options` headers that prevent iframe embedding. If you're deploying to a static host (Vercel, Netlify), add response headers:
-
-**Vercel** (`vercel.json`):
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options", "value": "ALLOWALL" },
-        { "key": "Content-Security-Policy", "value": "frame-ancestors *" }
-      ]
-    }
-  ]
-}
-```
-
-**Netlify** (`_headers`):
-```
-/*
-  X-Frame-Options: ALLOWALL
-  Content-Security-Policy: frame-ancestors *
-```
-
-### 4. Deploy
-
-Deploy your fork to any static hosting:
-
-```bash
-# Vercel
-npx vercel --prod
-
-# Netlify
-npx netlify deploy --prod --dir .
-
-# Or any static host — it's just HTML/JS/CSS
-```
-
-### 5. Configure the SettlementForge
-
-Set the `VITE_FMG_URL` environment variable to your deployed fork's URL:
-
-```env
-VITE_FMG_URL=https://your-fmg-fork.vercel.app
-```
-
-Restart the dev server (`npm run dev`) or rebuild (`npm run build`).
-
-## How It Works
-
-### Messages: FMG → SettlementForge
-
-| Message Type | Payload | When |
+| Side | File | Role |
 |---|---|---|
-| `fmg:ready` | — | Map finished loading |
-| `fmg:seed` | `{ seed }` | After ready, sends map seed |
-| `fmg:burgList` | `{ burgs: [...] }` | After ready, sends all burgs |
-| `fmg:burgSelected` | `{ burg: {...} }` | User clicks a burg on the map |
+| Runtime config | `src/lib/mapRuntimeConfig.js` | Resolves the iframe URL, exact map origin, cache revision, and parent-origin handshake. Production is pinned to the CSP-approved separate origin. |
+| Parent (app) | `src/lib/mapBridge.js` | `createMapBridge(getIframe, { targetOrigin })` — typed RPC client. Every command returns a Promise; commands issued before the iframe is ready are queued and drained in order. Push events fan out through a small emitter (`bridge.on(...)`). |
+| Child origin | `public/map/sf-origin.js` | Resolves the explicit `parentOrigin` once and owns every child → parent send target. Missing configuration fails closed off loopback. |
+| Child RPC | `public/map/sf-bridge.js` | Runs inside the forked FMG page. Overrides generation to geography-only, and handles the `settlementEngine:*` command surface. |
 
-**Burg object shape:**
-```js
-{
-  id: 42,
-  name: "Thornwall",
-  x: 1234.5,
-  y: 678.9,
-  population: 3200,    // already multiplied by 1000
-  port: false,
-  capital: true,
-  citadel: true,
-  walls: true,
-  state: 3,
-  stateName: "Kingdom of Arden",
-  culture: 2,
-  cultureName: "Norse",
-  cell: 8901,
-  feature: 1
-}
-```
+Production serves the fork at
+`https://map.settlementforge.com/map/index.html`. The app-host `/map/*` paths
+redirect there, so the fork's relaxed script surface cannot execute with the
+app origin's Supabase session. Local Vite development may still use the
+same-origin `/map/` copy on loopback.
 
-### Messages: SettlementForge → FMG
+## Separate-origin, source-validated messaging
 
-| Message Type | Payload | Effect |
-|---|---|---|
-| `settlementEngine:highlightBurgs` | `{ burgIds: [1,5,12] }` | Gold pulsing rings on specified burgs |
-| `settlementEngine:setOverlay` | `{ chain, nodes, edges }` | Supply chain lines + markers |
-| `settlementEngine:clearOverlays` | — | Remove all overlays |
+The command surface is destructive (`resetMap`, `loadSnapshot`,
+`clearAllPlacements`, terrain edits), so **both** ends validate every message on
+two axes and never use a `'*'` target:
 
-### Supply Chain Overlay
+- **Parent** (`mapBridge.js`): ignores any message whose `event.origin` is not
+  the runtime-configured map origin, or whose `event.source` is not the iframe
+  it created. It sends only to that exact map origin.
+- **Child** (`sf-origin.js` + `sf-bridge.js`): ignores any
+  `settlementEngine:*` message whose `event.origin` is not the explicit
+  `parentOrigin`, or whose `event.source !== window.parent`. Replies use the
+  same closed-over parent origin.
 
-Each chain has a colour:
-- **iron** → brown `#8b4513`
-- **grain** → gold `#daa520`
-- **timber** → green `#228b22`
-- **textile** → purple `#8a2be2`
-- **stone** → slate `#708090`
-- **luxury** → pink `#ff1493`
+Every command carries an opaque `_rid` (request id); replies echo it, errors come back as `{ _rid, _error }`, and push events carry no `_rid`.
 
-Nodes are circles (filled = producer, outline = consumer). Edges are dashed lines.
+> Do not use `frame-ancestors *` or a wildcard postMessage target. The map
+> policy lists only the two production app origins.
+> `X-Frame-Options` is intentionally absent from map responses because
+> `SAMEORIGIN` would contradict the cross-origin embed; enforced
+> `frame-ancestors` owns clickjacking protection there.
 
-## Troubleshooting
+## Command surface (parent → iframe)
 
-**Map doesn't load:** Check browser console for CORS or CSP errors. Ensure iframe headers allow embedding.
+Typed helpers on the bridge (see `mapBridge.js`):
 
-**No burgs appear:** The bridge waits for `pack.cells` to exist. If FMG loads but no burg list is sent, the bridge may not detect the load. Check the console for `[SettlementForge Bridge]` messages.
+- Placement: `placeSettlement`, `removePlacement`, `clearAllPlacements`, `restorePlacements`
+- Viewport: `getViewport`, `setViewport`, `fitMap`
+- Snapshot: `saveSnapshot`, `loadSnapshot`, `resetMap(seed)`
+- Terrain: `activateTool`, `deactivateTool`, `terrainUndo`, `terrainRedo`
+- Templates: `setTemplate`, `getTemplates`
+- Misc: `requestBurgList`, `setEmbeddedMode`
 
-**Clicks don't register:** The bridge listens for clicks on `#burgLabels` and `#burgIcons` SVG groups. If Azgaar changes these IDs in a future version, the selectors in `fmg-bridge.js` will need updating.
+## Push events (iframe → parent)
+
+`fmg:ready { seed, width, height, templates }`, `fmg:burgList`, `fmg:burgSelected`, `fmg:viewport` (throttled), `fmg:mapReset`, `fmg:snapshotLoaded`, `fmg:terrainChanged`.
+
+## Snapshot flow (campaign persistence)
+
+The map is persisted with the campaign, not regenerated on every open:
+
+1. `saveSnapshot` asks FMG to serialize the current map (`prepareMapData`) and returns the text blob.
+2. The blob is stored on the campaign as `mapState.fmgSnapshot` (see `src/store/mapSlice.js` / `campaignSlice.js`). It is large (~1MB), so `campaignSync.js` fingerprints it rather than re-serializing it on every dirty-check.
+3. On open, `WorldMap.jsx` calls `loadSnapshot(mapState.fmgSnapshot)` to restore the exact geography. `resetMap(seed)` regenerates from a seed when there is no snapshot.
+
+## Upgrading the FMG fork
+
+`sf-bridge.js` is deliberately separate from FMG's `main.js` so a vanilla FMG upgrade can drop in a fresh `main.js` without losing the integration. It depends on FMG globals (`pack`, `regenerateMap`, `generate(options)`, `graphWidth/Height`, `prepareMapData`, `uploadMap`) being bound on `window`. See `docs/fmg-fork.md` for the upgrade procedure.

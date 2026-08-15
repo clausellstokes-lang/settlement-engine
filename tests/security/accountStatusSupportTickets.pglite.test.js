@@ -46,13 +46,13 @@ const sql = (k) => readFileSync(MIG[k], 'utf-8');
 
 /** Extract a `create or replace function public.<name>(…) … $$;` block verbatim. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
 /** Extract a `create policy "<name>" … ;` block verbatim. */
 function extractPolicy(src, name) {
-  const m = src.match(new RegExp(`create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract policy ${name}`);
   return m[0];
 }
@@ -173,9 +173,23 @@ it('targeted migration(s) present (suite not vacuous)', () => {
   expect(allExist).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeAll boots the
+ * suite's single shared database, so the whole file rides one cold boot.
+ * Never tune this to a measurement (that is how a previous 30000ms went
+ * brittle); generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProvisioning) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(allExist)('account-status support-ticket gate — executed against 050/051/055/057/060 (pglite)', () => {
   let db;
-  beforeAll(async () => { db = await buildDb({ with060: true }); });
+  beforeAll(async () => { db = await buildDb({ with060: true }); }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

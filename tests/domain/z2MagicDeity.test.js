@@ -41,8 +41,10 @@ describe('Z2b — a dominant major deity regulates magic legality', () => {
   });
 
   test('a WARLIKE major deity tightens HARDER than a neutral major deity', () => {
+    // W-F5 re-fixture (axis retirement): temper derives from alignment, so the
+    // warlike orthodoxy is authored evil-aligned (stored temper mirrors it).
     const neutralGod = deriveMagicProfile(town({ deity: deity({ rank: 'major', temper: 'neutral' }) }));
-    const warlikeGod = deriveMagicProfile(town({ deity: deity({ rank: 'major', temper: 'warlike' }) }));
+    const warlikeGod = deriveMagicProfile(town({ deity: deity({ rank: 'major', align: 'evil', temper: 'warlike' }) }));
     expect(tighter(warlikeGod.legality, neutralGod.legality)).toBe(true);
   });
 
@@ -63,7 +65,8 @@ describe('Z2b — a dominant major deity regulates magic legality', () => {
 
 describe('Z2b — dominant major deity shifts religious acceptance', () => {
   test('a WARLIKE major deity forces OPEN hostility toward magic', () => {
-    const m = deriveMagicProfile(town({ deity: deity({ rank: 'major', temper: 'warlike' }) }));
+    // W-F5 re-fixture (axis retirement): warlike is authored via evil alignment.
+    const m = deriveMagicProfile(town({ deity: deity({ rank: 'major', align: 'evil', temper: 'warlike' }) }));
     expect(m.religiousAcceptance).toBe('hostile');
   });
 

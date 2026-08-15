@@ -47,11 +47,9 @@ test.describe('P99 mobile pointer targets — anonymous landing', () => {
       try { localStorage.clear(); } catch { /* sandboxed storage — accept */ }
       try { sessionStorage.clear(); } catch { /* sandboxed storage — accept */ }
     });
-    // The anonymous Create hero now lives at /create. The bare root redirects a
-    // logged-out visitor to the /home marketing landing (App.jsx logged-out
-    // front door), which does NOT mount the
-    // [aria-label="Anonymous settlement generator"] hero this suite measures —
-    // so we navigate straight to the surface under test.
+    // The bare root front-doors to /home (marketing landing) for anon now; this
+    // suite measures the Create-page generator hero's touch targets, so it enters
+    // /create directly.
     await page.goto('/create', { waitUntil: 'networkidle' });
   });
 

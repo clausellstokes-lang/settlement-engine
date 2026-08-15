@@ -19,7 +19,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { ensureNpcStates } from '../../src/domain/worldPulse/npcAgency.js';
 import { ensureFactionStates, seatNpcsIntoFactions } from '../../src/domain/worldPulse/factionCompetition.js';
 import { stablePart } from '../../src/domain/worldPulse/worldState.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const SEED = 'faction-seating-2026-06';
 

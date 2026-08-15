@@ -37,12 +37,12 @@ const GOV_ANTITHESIS = {
 // militaryBias: additive militarization bias 0..0.5 — defense/military
 //   institution chances multiply by (1 + militaryBias)
 //
-// VOCABULARY CONTRACT: these four keys are the ONLY dyn.* keys any consumer may
-// read. The original join snapped exactly here — the institution-probability
-// path read dyn.defense/market/craft/criminal/espionage/government, keys this
-// table never defined, so every relationship multiplied by the same 1.0.
-// tests/generators/neighbourRelDynamics.test.js pins reads ⊆ definitions so the
-// join cannot re-snap.
+// VOCABULARY CONTRACT (H13/H14, R3): these four keys are the ONLY dyn.* keys
+// any consumer may read. The original join snapped exactly here — the
+// institution-probability path read dyn.defense/market/craft/criminal/
+// espionage/government, keys this table never defined, so every relationship
+// multiplied by the same 1.0. tests/generators/neighbourRelDynamics.test.js
+// pins reads ⊆ definitions so the join cannot re-snap.
 export const REL_DYNAMICS = {
   neutral: {
     economyMode:      'independent',
@@ -95,8 +95,8 @@ export const REL_DYNAMICS = {
 };
 
 // ── Economy mode → market-institution multiplier ──────────────────────────────
-// This join repair wires the existing table rather than redesigning it.
-// institutionProbability's market/economy branch used to read dyn.market —
+// The H13 join repair (R3 decision: WIRE the existing table, do not redesign
+// it). institutionProbability's market/economy branch used to read dyn.market —
 // a key REL_DYNAMICS never defined — so every relationship multiplied market
 // odds by 1.0. The table's economy magnitudes already live in
 // getNeighbourEconomicBias below; this map routes each mode's existing figure
@@ -285,7 +285,7 @@ export function getNeighbourFactionBias(neighbourProfile) {
     .filter((v, i, a) => a.indexOf(v) === i)
     .filter(t => !dominantFactionTypes.includes(t));
 
-  // Join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
+  // H13 join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
   // keys REL_DYNAMICS never defined — so every relationship rolled the same
   // 0.1/0.05 faction-mirror odds. The table's existing mirror/antithesis
   // magnitudes (govMirrorW/govAntithesisW: "probability weights for mirroring
@@ -304,14 +304,6 @@ export function getNeighbourFactionBias(neighbourProfile) {
 export function getMirrorFactionLabel(factionType, relType, neighbourName) {
   const n = neighbourName || 'the neighbour';
   const labels = {
-    neutral: {
-      military:   null,
-      economy:    `${n} Trade Correspondents`,
-      religious:  null,
-      government: `${n} Observers' Delegation`,
-      criminal:   null,
-      magic:      null,
-    },
     allied: {
       military:   `Joint Defense Compact (with ${n})`,
       economy:    `Merchants of the ${n} Alliance`,
@@ -370,6 +362,93 @@ export function getMirrorFactionLabel(factionType, relType, neighbourName) {
     },
   };
   return (labels[relType] || labels.allied || {})[factionType] || null;
+}
+
+// ── MG-3c / leak L4 — THE MUNDANE TWIN OF THE ARCANE SLOT ─────────────────────
+// Every `magic:` label above ('Arcane Exchange Circle', '<N> Arcane Envoys',
+// '<N> Arcane Observers', 'Anti-<N> Arcane Resistance', 'Arcane Counter-intelligence',
+// 'Arcane Defenders') was minted with ZERO reads of the world's magic law, so a
+// settlement in a world without functioning magic still grew arcane orders out of its
+// neighbour's influence.
+//
+// The cure is SUBSTITUTION, not deletion (MG-LAW-3 — a mundane world is not a thinner
+// world). The arcane slot exists because a neighbour's influence reaches the settlement
+// through people who KNOW things; strip the sorcery and that role does not vanish, it
+// becomes lettered: scholars, chroniclers, archivists, surveyors, correspondents. The
+// faction still lands, still carries the same category, still weighs the same power —
+// it simply reads as a world where knowledge is won rather than cast.
+//
+// FOUR VARIANTS PER SLOT (the SP-6 content-depth floor): the caller supplies a seeded
+// pick, so two mundane realms with the same neighbour relationship do not grow the same
+// order twice. None of these names trips the world law's own magic-assertion vocabulary
+// — that is the point, and generationCoherence's receipt re-checks it.
+const MUNDANE_LORE_LABELS = {
+  mirror: {
+    allied: [
+      n => `Shared Lore Athenaeum (with ${n})`,
+      n => `Compact of Letters (with ${n})`,
+      n => `Joint Scriveners' Chapter (with ${n})`,
+      n => `Fellowship of Shared Records (with ${n})`,
+    ],
+    patron: [
+      n => `${n} Lettered Envoys`,
+      n => `${n} Chancery Scholars`,
+      n => `${n} Archivists in Residence`,
+      n => `${n} Surveyors and Reckoners`,
+    ],
+    rival: [
+      n => `${n} Chartered Observers`,
+      n => `${n} Naturalists Abroad`,
+      n => `${n} Almanac-Keepers`,
+      n => `${n} Itinerant Lecturers`,
+    ],
+    cold_war: [
+      n => `${n} Quiet Correspondents`,
+      n => `${n} Cartographic Survey`,
+      n => `${n} Antiquarian Society`,
+      n => `${n} Reading Circle`,
+    ],
+  },
+  oppose: {
+    rival: [
+      n => `Anti-${n} Scholars' League`,
+      n => `Counter-${n} Chroniclers`,
+      n => `The ${n} Refutation Society`,
+      n => `Anti-${n} Almanac Guild`,
+    ],
+    cold_war: [
+      () => 'Cipher and Post Office',
+      () => 'The Quiet Reading Room',
+      () => 'Chapter of Careful Records',
+      () => 'The Unsigned Correspondents',
+    ],
+    hostile: [
+      () => 'Keepers of the Muniments',
+      () => 'The Wardens of Record',
+      () => 'Chapter of the Sealed Archive',
+      () => 'The Last Librarians',
+    ],
+  },
+};
+
+/**
+ * The mundane twin of a neighbour-influence faction label the world law refuses.
+ * Returns null when the slot has no authored mundane form — the caller then skips the
+ * faction rather than inventing one, which is honest: not every arcane role has a
+ * lettered counterpart.
+ *
+ * @param {'mirror'|'oppose'} kind
+ * @param {string} relType         the neighbour relationship type.
+ * @param {string} neighbourName
+ * @param {number} pick            seeded 0..3 variant index (wrapped defensively).
+ * @returns {string|null}
+ */
+export function getMundaneLoreFactionLabel(kind, relType, neighbourName, pick = 0) {
+  const n = neighbourName || 'the neighbour';
+  const pool = MUNDANE_LORE_LABELS[kind]?.[relType];
+  if (!Array.isArray(pool) || !pool.length) return null;
+  const index = ((Number(pick) || 0) % pool.length + pool.length) % pool.length;
+  return pool[index](n);
 }
 
 export function getOpposeFactionLabel(factionType, relType, neighbourName) {

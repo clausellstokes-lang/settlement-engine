@@ -1,9 +1,11 @@
 import { deriveCausalState } from '../causalState.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
-import { ensureRegionalGraph } from '../region/index.js';
+import { ensureRegionalGraphOnce } from '../region/graph.js';
+import { neutralNeighboursActive, withNeutralNeighbourEdges } from '../region/neutralNeighbourEdges.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { isCanonSave } from '../campaign/canon.js';
 import { ensureWorldState } from './worldState.js';
+import { isOffStage } from '../roads/state.js';
 
 /** @param {any} save */
 function saveSettlement(save) {
@@ -67,6 +69,22 @@ function deriveSettlementState(settlement) {
 }
 
 /**
+ * M19: per-SOURCE-settlement cache of the OFF-STAGE-filtered participation view, keyed on the
+ * source settlement object IDENTITY. buildWorldSnapshot runs up to ~9x per advance; the off-stage
+ * branch used to mint a FRESH `{ ..._s, npcs }` object on EVERY rebuild, so the settlement
+ * reference handed to deriveSettlementState changed every call and its derivationCache could NEVER
+ * hit for any settlement carrying an off-stage NPC (deriveCausalState + deriveSystemState re-ran
+ * every rebuild). Keyed on `source`: copy-on-write means a changed settlement is a NEW source
+ * reference (cache MISS ⇒ correct refilter), while an unchanged source across an advance's rebuilds
+ * returns the SAME filtered object (cache HIT ⇒ derivationCache hits, mirroring how a settlement
+ * with NO off-stage NPC already reuses its source object). Byte-identical (Wave-4 receipt): the
+ * filtered CONTENTS are unchanged — only the identity is reused. WeakMap ⇒ entries GC with their
+ * source, never leaking across advances.
+ * @type {WeakMap<object, object>}
+ */
+const participationViewCache = new WeakMap();
+
+/**
  * @param {Object} [args]
  * @param {any} [args.campaign]
  * @param {any[]} [args.saves]
@@ -75,14 +93,40 @@ function deriveSettlementState(settlement) {
  */
 export function buildWorldSnapshot({ campaign, saves = [], worldState = null, regionalGraph = null } = {}) {
   const ids = new Set((campaign?.settlementIds || []).map(String));
-  const graph = ensureRegionalGraph(regionalGraph || campaign?.regionalGraph || {});
+  // M20: the branded fast-path — a graph already normalized by ensureRegionalGraph carries the
+  // non-enumerable brand, so the redundant re-normalization on every one of the ~9 rebuilds/advance
+  // is skipped and the SAME graph object is returned. Byte-neutral (brand ⟺ normalized-and-
+  // unmodified; unbranded graphs still get a full ensure — worst case a redundant normalize, never
+  // a stale one), proven by the Wave-4 byte-identity receipt.
+  const ensuredGraph = ensureRegionalGraphOnce(regionalGraph || campaign?.regionalGraph || {});
   const state = ensureWorldState(worldState || campaign?.worldState, campaign);
   const canonSaves = (saves || [])
     .filter(save => ids.has(saveId(save)))
     .filter(isCanonSave);
 
   const settlements = canonSaves.map(save => {
-    const settlement = saveSettlement(save);
+    // Participation view: OFF-STAGE NPCs are excluded from the settlement the pulse reads —
+    // DM-shelved (stasis) OR a roads HOSTAGE (whereabouts.state==='hostage'). THE ONE
+    // chokepoint (THE ROADS §8): isOffStage widens the existing stasis filter, so every pulse
+    // kernel that reads the snapshot's settlement excludes a hostage from agency/growth/
+    // recruitment/blocs/ladder/councils/coups in ONE move. Presence-driven: the whereabouts
+    // key exists only when the roads mover wrote it, so a dark world reduces isOffStage to
+    // isInStasis exactly ⇒ byte-identical (the roads dormancy golden proves it). Dormant (same
+    // reference) when none are off-stage. TRAVELLERS are never filtered (travel is narrative,
+    // §1 law 5); the full roster survives on `save` for the roads mover to manage hostages.
+    // M19: memoize the OFF-STAGE-filtered view on the SOURCE identity (participationViewCache) so a
+    // settlement carrying an off-stage NPC keeps a STABLE reference across an advance's rebuilds and
+    // its derivationCache can finally hit — mirroring how a settlement with none already reuses `_s`.
+    const _s = saveSettlement(save);
+    const _npcs = /** @type {Array<Record<string, unknown>>} */ (_s?.npcs);
+    let settlement;
+    if (Array.isArray(_npcs) && _npcs.some((n) => isOffStage(n))) {
+      settlement = participationViewCache.get(_s)
+        || { ..._s, npcs: _npcs.filter((n) => !isOffStage(n)) };
+      participationViewCache.set(_s, settlement);
+    } else {
+      settlement = _s;
+    }
     const id = saveId(save);
     const name = settlement?.name || save?.name || id;
     // causal / system / activeConditions depend SOLELY on the settlement
@@ -100,6 +144,20 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
   });
 
   const byId = new Map(settlements.map(item => [String(item.id), item]));
+  // THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2) — the campaign-connect
+  // seam. Each PARTICIPATING campaign member (the canon settlements this snapshot
+  // carries — exactly the world the kernels simulate) gets a neutral, channel-less
+  // default edge to its K NEAREST fellows, so the relationship layer has a substrate
+  // instead of an edgeless graph. Explicit relationships always win. `state` is
+  // threaded because "nearest" reads the world's FROZEN spatial canon when it has one
+  // (aspatial realms fall back to the codepoint-rank line); the selection is the
+  // amended J-D2 — complete at S <= 4, bounded by S·k at realm scale.
+  // DORMANT behind the virtual `neutralNeighborsEnabled`: absent ⇒ this is the SAME
+  // graph object ensureRegionalGraphOnce returned, so the snapshot is byte-identical
+  // to the pre-wire engine by object identity — every dark world, every golden.
+  const graph = neutralNeighboursActive(state)
+    ? withNeutralNeighbourEdges(ensuredGraph, settlements.map(item => String(item.id)), state)
+    : ensuredGraph;
   return {
     campaign,
     worldState: state,

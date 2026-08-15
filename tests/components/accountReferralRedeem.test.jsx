@@ -19,12 +19,23 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 const mocks = vi.hoisted(() => ({
   rpc: vi.fn(),
+  getAccountNumber: vi.fn(),
 }));
 
 vi.mock('../../src/lib/supabase.js', () => ({
   isConfigured: true,
   withTimeout: (p) => p,
   supabase: { rpc: (...a) => mocks.rpc(...a) },
+}));
+
+// LINEAGE NOTE (master merge W6): ReferralCard self-FETCHES the account number
+// (OURS doesn't thread account_number through auth state the way THEIRS did), so
+// these tests drive its async authService.getAccountNumber() path rather than a
+// synchronous auth.accountNumber prop. They also render ReferralCard DIRECTLY: on
+// this lineage the referral/redeem blocks live in AccountPage.jsx, not inside
+// AccountSubscriptionSection (master mounted them in the section).
+vi.mock('../../src/lib/auth.js', () => ({
+  auth: { getAccountNumber: (...a) => mocks.getAccountNumber(...a) },
 }));
 
 // Keep the store + FounderTile's heavy deps out of the render: the section
@@ -36,50 +47,27 @@ vi.mock('../../src/components/pricing/FounderTile.jsx', () => ({
   default: () => null,
 }));
 
-import AccountSubscriptionSection from '../../src/components/account/AccountSubscriptionSection.jsx';
-import { RedeemBlock } from '../../src/components/account/ReferralRedeemBlocks.jsx';
+import { ReferralCard, RedeemBlock } from '../../src/components/account/ReferralRedeemBlocks.jsx';
 import { getPendingRedeemCode } from '../../src/lib/referralRedeem.js';
 import { t } from '../../src/copy/index.js';
-
-function sectionProps(overrides = {}) {
-  return {
-    auth: {
-      user: { id: 'u1', email: 'me@example.test' },
-      tier: 'free',
-      isFounder: false,
-      accountNumber: 'SF-ABC1234',
-      ...(overrides.auth || {}),
-    },
-    isElevated: false,
-    creditBalance: 3,
-    activeSaves: 1,
-    inactiveSaves: 0,
-    maxSaves: 3,
-    portalBusy: false,
-    handleManageBilling: vi.fn(),
-    purchaseError: null,
-    purchasing: null,
-    handlePurchase: vi.fn(),
-    onNavigatePricing: vi.fn(),
-    ...overrides,
-  };
-}
 
 beforeEach(() => {
   sessionStorage.clear();
   mocks.rpc.mockReset();
+  mocks.getAccountNumber.mockReset();
 });
 afterEach(cleanup);
 
 describe('ReferralCard — account ID + copy', () => {
   test('renders the account ID and a copy button; copying writes the ID', async () => {
+    mocks.getAccountNumber.mockResolvedValue('SF-ABC1234');
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
 
-    render(<AccountSubscriptionSection {...sectionProps()} />);
+    render(<ReferralCard auth={{ isFounder: false }} />);
 
-    // The chip carries the exact immutable handle.
-    expect(screen.getByText('SF-ABC1234')).toBeTruthy();
+    // The self-fetch resolves the immutable handle onto the chip (async).
+    expect(await screen.findByText('SF-ABC1234')).toBeTruthy();
 
     const copyBtn = screen.getByRole('button', { name: t('account.referralCopy') });
     fireEvent.click(copyBtn);
@@ -88,18 +76,21 @@ describe('ReferralCard — account ID + copy', () => {
     await screen.findByText(t('account.referralCopied'));
   });
 
-  test('non-founders read the month pitch; founders read the credits variant', () => {
-    const { unmount } = render(<AccountSubscriptionSection {...sectionProps()} />);
-    expect(screen.getByText(t('account.referralBody'))).toBeTruthy();
+  test('non-founders read the month pitch; founders read the credits variant', async () => {
+    mocks.getAccountNumber.mockResolvedValue('SF-ABC1234');
+    const { unmount } = render(<ReferralCard auth={{ isFounder: false }} />);
+    expect(await screen.findByText(t('account.referralBody'))).toBeTruthy();
     unmount();
 
-    render(<AccountSubscriptionSection {...sectionProps({ auth: { isFounder: true } })} />);
-    expect(screen.getByText(t('account.referralBodyFounder'))).toBeTruthy();
+    render(<ReferralCard auth={{ isFounder: true }} />);
+    expect(await screen.findByText(t('account.referralBodyFounder'))).toBeTruthy();
   });
 
-  test('no account number yet: the assigned-shortly line, no copy button', () => {
-    render(<AccountSubscriptionSection {...sectionProps({ auth: { accountNumber: null } })} />);
-    expect(screen.getByText(t('account.referralNoId'))).toBeTruthy();
+  test('no account number yet: the assigned-shortly line, no copy button', async () => {
+    // The self-fetch resolves null (no handle assigned) → the null branch holds.
+    mocks.getAccountNumber.mockResolvedValue(null);
+    render(<ReferralCard auth={{ isFounder: false }} />);
+    expect(await screen.findByText(t('account.referralNoId'))).toBeTruthy();
     expect(screen.queryByRole('button', { name: t('account.referralCopy') })).toBeNull();
   });
 });

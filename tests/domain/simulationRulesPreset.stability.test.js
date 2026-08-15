@@ -7,6 +7,7 @@ import {
   SIMULATION_RULE_PRESETS,
   normalizeSimulationRules,
 } from '../../src/domain/worldPulse/simulationRules.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // F0 structural tripwire (guards the RULE_COMPARISON_KEYS churn trap): preset
 // identity must survive the addition of future default-false simulation flags
@@ -32,18 +33,34 @@ const BOOLEAN_KEYS = Object.entries(DEFAULT_SIMULATION_RULES)
 const RULE_COMPARISON_KEYS = [...ENUM_COMPARISON_KEYS, ...BOOLEAN_KEYS];
 
 const PRESET_IDS = Object.keys(SIMULATION_RULE_PRESETS);
+// The legacy trio must stay resolvable forever (old saves carry these ids; the
+// realm toolbar chips apply them) AND must stay FIRST in the catalog: the
+// keyless inference in presetIdForRules returns the FIRST structural match, so
+// a legacy default-rules save keeps inferring realistic_regional, never the
+// structurally-identical living_realm.
+const LEGACY_PRESET_IDS = ['quiet_local', 'realistic_regional', 'dramatic_campaign'];
+const CL0_PRESET_IDS = ['static_campaign', 'narrative_campaign', 'living_realm', 'full_simulation'];
 
 describe('simulation rules preset — stability under future-flag churn', () => {
   // Anti-vacuity: the catalog and the comparison-key set are non-trivial. If
   // either collapsed to empty/one, the per-preset loops below would be vacuous.
-  test('there are exactly 3 named presets and a non-trivial comparison-key set', () => {
-    expect(PRESET_IDS.sort()).toEqual(
-      ['dramatic_campaign', 'quiet_local', 'realistic_regional'],
-    );
+  test('the catalog is the legacy trio FIRST plus the four §11 presets', () => {
+    expect(PRESET_IDS).toEqual([...LEGACY_PRESET_IDS, ...CL0_PRESET_IDS]);
     // 3 enum keys + the boolean toggle bank — proves we actually reconstructed
     // a meaningful key set, not an empty array that makes #2 always pass.
     expect(BOOLEAN_KEYS.length).toBeGreaterThan(5);
     expect(RULE_COMPARISON_KEYS.length).toBe(ENUM_COMPARISON_KEYS.length + BOOLEAN_KEYS.length);
+  });
+
+  // CL-0 byte-stability: keyless default rules still infer the LEGACY default
+  // preset (realistic_regional), not living_realm — the two were structurally
+  // the same world until SEASONS-A lit seasonsEnabled on living_realm (catalog
+  // order remains the guard either way, and keeps old saves byte-identical).
+  test('keyless default rules keep inferring realistic_regional', () => {
+    const keyless = { ...SIMULATION_RULE_PRESETS.realistic_regional.rules };
+    delete keyless.presetId;
+    expect(normalizeSimulationRules(keyless).presetId).toBe('realistic_regional');
+    expect(normalizeSimulationRules({}).presetId).toBe('realistic_regional');
   });
 
   // #1 — each named preset round-trips to ITSELF (no collapse to 'custom').
@@ -56,6 +73,26 @@ describe('simulation rules preset — stability under future-flag churn', () => 
       expect(normalized.presetId).toBe(id);
       expect(normalized.presetId).not.toBe(CUSTOM_SIMULATION_PRESET_ID);
     }
+  });
+
+  test('every moving preset lights the narrative tempo governor at an intentional tier', () => {
+    expect(Object.fromEntries(PRESET_IDS.map(id => [
+      id,
+      SIMULATION_RULE_PRESETS[id].rules.narrativeTempo ?? null,
+    ]))).toEqual({
+      quiet_local: 'quiet_local',
+      realistic_regional: 'realistic_regional',
+      dramatic_campaign: 'dramatic_campaign',
+      static_campaign: null,
+      narrative_campaign: 'quiet_local',
+      living_realm: 'realistic_regional',
+      full_simulation: 'full_simulation',
+    });
+
+    // The axis remains virtual: old saves and explicit custom rules that never
+    // selected a newly-wired preset keep the governor dormant byte-for-byte.
+    expect(DEFAULT_SIMULATION_RULES).not.toHaveProperty('narrativeTempo');
+    expect(normalizeSimulationRules({})).not.toHaveProperty('narrativeTempo');
   });
 
   // #2 — THE churn guard: every comparison key is DEFINED in every preset.
@@ -105,6 +142,254 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     const defaultPreset = SIMULATION_RULE_PRESETS[DEFAULT_SIMULATION_PRESET_ID];
     for (const key of RULE_COMPARISON_KEYS) {
       expect(fromDefault[key]).toBe(defaultPreset.rules[key]);
+    }
+  });
+
+  // W0-A3 — the Full Simulation preset runs the war stack AT DEPTH: the eight
+  // war sub-flags ship lit in full_simulation ONLY. living_realm and the legacy
+  // trio inherit the default-false bank, and full_simulation still round-trips
+  // to its own id (the flags are comparison keys, defined in every preset via
+  // the DEFAULT spread — churn-guard #2 covers the definedness half).
+  const WAR_DEPTH_FLAGS = [
+    'defenderAttritionEnabled',
+    'warEconomyDrainEnabled',
+    'warSupplyQualityEnabled',
+    'defenderResolveEnabled',
+    'allyDefenseEnabled',
+    'warForageEnabled',
+    'warLevyEnabled',
+    'warDispositionEnabled',
+  ];
+  test('full_simulation lights ALL EIGHT war sub-flags; every other preset keeps them dark', () => {
+    // The eight are real boolean rule keys (anti-drift: renaming one in the
+    // source must fail here, not silently test a ghost key).
+    for (const flag of WAR_DEPTH_FLAGS) {
+      expect(BOOLEAN_KEYS, `${flag} is a real boolean rule key`).toContain(flag);
+    }
+    for (const flag of WAR_DEPTH_FLAGS) {
+      expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag], `full_simulation.${flag}`).toBe(true);
+      expect(DEFAULT_SIMULATION_RULES[flag], `default ${flag} stays false`).toBe(false);
+    }
+    for (const id of PRESET_IDS.filter(p => p !== 'full_simulation')) {
+      for (const flag of WAR_DEPTH_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} stays dark`).toBe(false);
+      }
+    }
+    // Round-trip: the lit preset still infers ITSELF, and a keyless copy of its
+    // rules (an old save that lost its presetId) re-infers full_simulation.
+    const keyless = { ...SIMULATION_RULE_PRESETS.full_simulation.rules };
+    delete keyless.presetId;
+    expect(normalizeSimulationRules(keyless).presetId).toBe('full_simulation');
+  });
+
+  // WR-1 — termination is a VIRTUAL, declared-dark certification key. It is
+  // intentionally absent from the default bank (so legacy preset matching does
+  // not change), named only by the ceiling preset, and not lit before WR-9 can
+  // measure its deciding-term distribution.
+  test('war termination is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'warTerminationEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(typeof SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe('boolean');
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    // Virtual flags are excluded from RULE_COMPARISON_KEYS: even a future lit
+    // value does not make an otherwise exact Full Simulation save lose its preset.
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual termination key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
+  });
+
+  // WR-3 — the lineage claim follows the same virtual declaration law as the
+  // two earlier war-rulings reads: visible to certification, behaviorally dark,
+  // and absent from legacy preset identity until the measured lighting batch.
+  test('lineage claim is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'lineageClaimEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual lineage key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
+  });
+
+  // WR-6 — the coalition graph uses the same virtual declaration law. It is
+  // visible to certification now, but remains dark until WR-9 can distinguish
+  // eligible calls, decisions, costs, payments, and all governed families.
+  test('coalition ledger is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'coalitionLedgerEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual coalition key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
+  });
+
+  // W-R2-LIGHT — the nine post-close engine-wave gates light TOGETHER in the
+  // three world-alive presets (owner ruling 2026-07-16). Unlike the eight war
+  // sub-flags (which graduated INTO RULE_COMPARISON_KEYS), these are VIRTUAL —
+  // ABSENT from DEFAULT_SIMULATION_RULES, so they are invisible to preset matching
+  // (the disastersEnabled precedent): a legacy save missing them still infers its
+  // preset, and every dark-config golden stays byte-identical. The list is spelled
+  // out here independently (anti-drift: renaming a flag in the source WAVES object
+  // must fail HERE, not silently test a ghost key).
+  const ENGINE_WAVE_FLAGS = [
+    'momentumEnabled',
+    'navalEnabled',
+    'interventionEnabled',
+    'settlementLifecycleEnabled',
+    'peaceEngineEnabled',
+    'supplyWebWarfareEnabled',
+    'upswingArcsEnabled',
+    'resourceDynamicsEnabled',
+    'constructiveFlowsEnabled',
+  ];
+  const WORLD_ALIVE_PRESET_IDS = ['dramatic_campaign', 'living_realm', 'full_simulation'];
+  const WAVE_DARK_PRESET_IDS = ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign'];
+
+  test('the nine engine-wave flags are VIRTUAL (absent from the default surface + comparison keys)', () => {
+    // Anti-vacuity: exactly nine, no dupes.
+    expect(new Set(ENGINE_WAVE_FLAGS).size).toBe(9);
+    for (const flag of ENGINE_WAVE_FLAGS) {
+      // Virtual: not a default key (so it never persists on an untouched campaign)…
+      expect(DEFAULT_SIMULATION_RULES, `${flag} must stay absent from DEFAULT_SIMULATION_RULES`).not.toHaveProperty(flag);
+      // …and therefore not a comparison key (invisible to preset identity matching).
+      expect(RULE_COMPARISON_KEYS, `${flag} must NOT be a comparison key (would collapse legacy saves)`).not.toContain(flag);
+    }
+  });
+
+  test('the three world-alive presets light ALL NINE waves; the other four keep them dark', () => {
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      for (const flag of ENGINE_WAVE_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must be lit`).toBe(true);
+      }
+    }
+    for (const id of WAVE_DARK_PRESET_IDS) {
+      for (const flag of ENGINE_WAVE_FLAGS) {
+        // Absent (undefined) — the wave sleeps; the gate reads `=== true`.
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must stay dark`).not.toBe(true);
+      }
+    }
+    // Identity is UNTOUCHED by the new virtual keys: every lit preset (and a keyless
+    // copy of its rules) still round-trips to itself — this is the byte-stability
+    // property (legacy saves missing the waves keep their preset id).
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      const keyless = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete keyless.presetId;
+      expect(normalizeSimulationRules(keyless).presetId, `${id} keyless re-infers itself`).toBe(id);
+    }
+  });
+
+  // T5 THE ONE REGEN — eight chartered engine lifts plus the later Roads
+  // adjunct. They use the same virtual-key law as WAVES, but stay a distinct
+  // cohort so the charter does not silently absorb the separately commissioned
+  // deep-couplings flags.
+  const ONE_REGEN_FLAGS = [
+    'distancePricedNewsEnabled',
+    'reframeEnabled',
+    'provenanceLedgerEnabled',
+    'urbanFabricEnabled',
+    'npcGrowthEnabled',
+    'spatialConsequenceEnabled',
+    'npcLadderEnabled',
+    'traditionsEnabled',
+    'roadsEnabled',
+  ];
+
+  test('the One-Regen eight plus Roads remain virtual and exclude Memory Weave', () => {
+    expect(new Set(ONE_REGEN_FLAGS).size).toBe(9);
+    expect(ONE_REGEN_FLAGS).not.toContain('memoryWeaveEnabled');
+    for (const flag of ONE_REGEN_FLAGS) {
+      expect(
+        DEFAULT_SIMULATION_RULES,
+        `${flag} must stay absent from DEFAULT_SIMULATION_RULES`,
+      ).not.toHaveProperty(flag);
+      expect(
+        RULE_COMPARISON_KEYS,
+        `${flag} must stay outside preset comparison keys`,
+      ).not.toContain(flag);
+    }
+    expect(DEFAULT_SIMULATION_RULES).not.toHaveProperty('memoryWeaveEnabled');
+    for (const id of PRESET_IDS) {
+      expect(
+        SIMULATION_RULE_PRESETS[id].rules,
+        `${id} must not light the separately commissioned Memory Weave`,
+      ).not.toHaveProperty('memoryWeaveEnabled');
+    }
+  });
+
+  test('exactly the three world-alive presets light every One-Regen flag', () => {
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      for (const flag of ONE_REGEN_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag}`).toBe(true);
+      }
+    }
+    for (const id of WAVE_DARK_PRESET_IDS) {
+      for (const flag of ONE_REGEN_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} stays dark`).not.toBe(true);
+      }
+    }
+  });
+
+  test('virtual One-Regen flags do not disturb legacy or keyless preset identity', () => {
+    for (const id of PRESET_IDS) {
+      const keyless = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete keyless.presetId;
+      expect(normalizeSimulationRules(keyless).presetId, `${id} keyless identity`).toBe(id);
+    }
+
+    // A legacy world-alive save predating the virtual cohort has none of the
+    // nine keys, yet comparison-key identity remains unchanged.
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      const legacy = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete legacy.presetId;
+      for (const flag of ONE_REGEN_FLAGS) delete legacy[flag];
+      expect(normalizeSimulationRules(legacy).presetId, `${id} legacy identity`).toBe(id);
     }
   });
 

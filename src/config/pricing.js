@@ -62,9 +62,9 @@ const LEGACY_AI_COSTS = Object.freeze({
 });
 
 const NEW_AI_COSTS = Object.freeze({
-  narrative:   3,
+  narrative:   5,
   dailyLife:   4,
-  progression: 5,
+  progression: 6,
 });
 
 const FAST_AI_COSTS = Object.freeze({
@@ -73,14 +73,71 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
-// Chronicle is a fixed flat cost, NOT part of the model-tiered narrative
-// schedules: the season-chronicle pass always runs on Haiku and charges the
-// same 2 credits regardless of the user's model preference. This is the single
-// client-side source of truth, pinned in lockstep with three server copies by
-// pricing.test.js — the generate-chronicle CHRONICLE_COST constant and the
-// spend_credits SQL CASE 'chronicle' branch (migration 057). Drift fails the gate.
-// @enforced-by tests/config/pricing.test.js
-export const CHRONICLE_CREDIT_COST = 2;
+// Runtime quote cache. The server remains the charging authority; this holds the
+// last validated get_ai_pricing payload fetched by the lazy live-pricing leaf so
+// every synchronous client preflight and label can quote the same schedule.
+// It is deliberately session-only and starts null, preserving the shipped
+// constants as the offline/undeployed fallback.
+let liveAiPricing = null;
+
+/** @internal Called only by config/livePricing.js after a successful RPC read. */
+export function _setLiveAiPricing(payload) {
+  liveAiPricing = payload && typeof payload === 'object' ? payload : null;
+}
+
+/** @internal Test/HMR seam paired with livePricing._resetLivePricingCache(). */
+export function _clearLiveAiPricing() {
+  liveAiPricing = null;
+}
+
+function validLiveAiCost(feature, modelPreference) {
+  const profile = normalizeModelPreference(modelPreference || DEFAULT_MODEL_PREFERENCE);
+  const value = liveAiPricing?.creditCosts?.[profile]?.[feature];
+  return Number.isInteger(value) && value >= 1 && value <= 12 ? value : null;
+}
+
+// ── Surveyor (S1 + S3 + S4–S6) task-priced managed-credit costs ────────────
+// The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
+// pricing is an owner-queued decision. Kept in lockstep with the server-side
+// spend_credits CASE (migrations 140 + 149 + 151) by the pricing contract test.
+const SURVEYOR_AI_COSTS = Object.freeze({
+  analysis:            3,   // one analyst answer (S1)
+  brief:               4,   // one AI-prose brief layer (S2)
+  interpret:           5,   // one session compile → proposed ops (S3)
+  parley:              3,   // one in-character consultation response (S3)
+  customContent:       6,   // one homebrew content compile → drafted entries (S4)
+  styleOverhaul:       3,   // one bespoke map-style definition (the S2→S3 rung)
+  constructSettlement: 6,   // one intent → generated settlement (S5)
+  constructRealm:      8,   // one intent → composed realm (S6)
+  autonomy:            4,   // one autonomy compose: stop condition + nudges (S7)
+});
+
+// ── Capability-tier multipliers (BUILT, INERT) ─────────────────────────────
+// The display half of docs/DESIGN_AI_CAPABILITY_LADDER.md §3 piece 5: a surface
+// at journeyman+ may one day request an escalated pass, and an escalated pass
+// must quote more than an ordinary one. The charging half is migration
+// 192_tier_credit_multiplier.sql, which reads its multipliers from the
+// system_config key 'ai_tier_multipliers'.
+//
+// ⚠ EVERY VALUE HERE IS 1 ON PURPOSE. This map is the ACTIVATION SWITCH for the
+// quoted price, and pricing activation is owner-signed (design §5; owner queue
+// M5, the pricing-sheet sign-off). While every value is 1, getSurveyorAiCost
+// returns exactly what it returned before the tier argument existed, for every
+// feature and every tier — pinned by an executed identity test in
+// tests/config/pricing.test.js. Changing a number here without the owner's
+// signature silently reprices a paid surface.
+//
+// The tier names are the design's WORKING names (§3 piece 3); the owner has not
+// made the taste pick. Nothing derives behaviour from the spelling.
+//
+// Deliberately NO sane-band fence here, unlike the SQL half: migration 192
+// clamps its multiplier to 0.5..3 because system_config is operator-writable at
+// runtime, whereas this map is frozen source that moves only through review.
+const TIER_MULTIPLIERS = Object.freeze({
+  scout:      1,
+  journeyman: 1,
+  master:     1,
+});
 
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
 
@@ -182,22 +239,10 @@ export const TIERS = Object.freeze({
     billing:      'forever',
     seatLimit:    null,                   // unlimited seats
     saveLimit:    3,
-    maxSize:      'metropolis',           // free ACCOUNTS generate any size up to
-                                          // metropolis — size is NOT a paywall. The
-                                          // premium product is the living simulation
-                                          // (advance-time/campaigns/custom content),
-                                          // never settlement size. (Anon still caps
-                                          // at town — see authSlice TIER_GATE — so a
-                                          // free account is what unlocks full size.)
+    maxSize:      'capital',              // a free account unlocks every size (anon alone is town-capped)
     features: {
       neighbourhoodSystem: false,
-      // PDF export is a ladder (108): a free Wanderer account does NOT get
-      // unlimited export. It buys a DURABLE re-download right per saved
-      // settlement ($2.99, own entitlement ledger) — so the tier feature is
-      // false and the per-save right is checked separately (has_dossier_
-      // entitlement). Cartographer / Founder keep unlimited export as a tier
-      // gate. useDossierExportAccess resolves the two together.
-      pdfExport:           false,
+      pdfExport:           true,
       jsonExport:          false,
       supplyChainMap:      false,
       founderBadge:        false,
@@ -207,12 +252,12 @@ export const TIERS = Object.freeze({
     key:          'cartographer',
     legacyKey:    'premium',
     stripeProduct: 'premium',             // existing premium SKU
-    priceCents:   599,                    // $5.99/mo
+    priceCents:   599,                    // $5.99/mo — reconciled to the displayed price (owner sign-off 2026-07-17)
     billing:      'monthly',
     monthlyCredits: 30,
     seatLimit:    null,
     saveLimit:    Infinity,
-    maxSize:      'metropolis',           // size is not a premium lever; free reaches it too
+    maxSize:      'capital',
     features: {
       neighbourhoodSystem: true,
       pdfExport:           true,
@@ -228,9 +273,9 @@ export const TIERS = Object.freeze({
     priceCents:   9900,                   // $99 one-time
     billing:      'lifetime',
     oneTimeCredits: 30,
-    seatLimit:    30,
+    seatLimit:    30,                     // 30 founder seats (server enforces this in create-checkout)
     saveLimit:    Infinity,
-    maxSize:      'metropolis',           // size is not a premium lever; free reaches it too
+    maxSize:      'capital',
     features: {
       neighbourhoodSystem: true,
       pdfExport:           true,
@@ -290,15 +335,49 @@ export function getActiveAiCosts() {
 
 /** Cost in credits for a specific AI feature. */
 export function getAiCost(feature) {
-  // Chronicle is a flat, model-independent cost — it lives outside the tiered
-  // narrative schedules but still resolves through the same selector so UI code
-  // never reaches for a raw constant.
-  if (feature === 'chronicle') return CHRONICLE_CREDIT_COST;
-  return getActiveAiCosts()[feature] ?? 0;
+  return validLiveAiCost(feature, DEFAULT_MODEL_PREFERENCE)
+    ?? getActiveAiCosts()[feature]
+    ?? 0;
+}
+
+/**
+ * Multiplier for a capability tier. Unknown, absent, and null tiers all resolve
+ * to 1, mirroring migration 192's forward-compatible rule: an unrecognized tier
+ * degrades to the ordinary price instead of throwing, because the tier names are
+ * still an open owner taste pick and a client that ran ahead of the server must
+ * never fail a quote over a spelling.
+ */
+export function getTierMultiplier(tier) {
+  return TIER_MULTIPLIERS[tier] ?? 1;
+}
+
+/**
+ * Cost in credits for a Surveyor task-priced feature ('analysis' | 'brief').
+ *
+ * The optional `tier` scales the price by TIER_MULTIPLIERS, mirroring what
+ * migration 192's spend_credits does server-side so the quote can never disagree
+ * with the charge. INERT TODAY: every multiplier is 1, so the identity fast path
+ * below returns the base cost for every feature and every tier, and no caller
+ * passes a tier yet. The argument exists so the panels can render a per-user
+ * price the moment the owner signs the pricing sheet.
+ */
+export function getSurveyorAiCost(feature, tier) {
+  const base = SURVEYOR_AI_COSTS[feature] ?? 0;
+  const multiplier = getTierMultiplier(tier);
+  // Identity fast path, mirroring the SQL's `v_mult <> 1` skip. The `base === 0`
+  // half matters for inertness: an unknown feature quotes 0, and clamping that
+  // up to the 1-credit floor would make a tiered call disagree with an untiered
+  // one on the exact input the existing contract test pins at 0.
+  if (multiplier === 1 || base === 0) return base;
+  // Same hard 1..12 band the SQL clamps to. Math.round and Postgres round() agree
+  // on positive numbers (both go half away from zero), and costs are positive.
+  return Math.max(1, Math.min(12, Math.round(base * multiplier)));
 }
 
 /** Cost in credits for a feature under the selected AI model preference. */
 export function getAiCostForModel(feature, modelPreference) {
+  const live = validLiveAiCost(feature, modelPreference);
+  if (live != null) return live;
   const schedule = isFastModelPreference(modelPreference) ? FAST_AI_COSTS : getActiveAiCosts();
   return schedule[feature] ?? getAiCost(feature);
 }
@@ -311,34 +390,6 @@ export function getVisibleTiers() {
 /** Whether the single-dossier microtransaction is offered. */
 export function singleDossierEnabled() {
   return true;
-}
-
-// Runtime auth tiers ('anon' | 'free' | 'premium' | 'founder', authSlice) map to
-// the catalog TIERS by their legacyKey. This bridges the stored/runtime tier
-// string to the config that owns the feature flags, so the PDF-export gate reads
-// from ONE source (TIERS.<tier>.features.pdfExport) instead of a second hard-coded
-// tier list drifting out of sync.
-const RUNTIME_TIER_TO_CATALOG = Object.freeze({
-  anon:         null,                 // anonymous is not a saved-account tier
-  free:         TIERS.wanderer,
-  wanderer:     TIERS.wanderer,
-  premium:      TIERS.cartographer,
-  cartographer: TIERS.cartographer,
-  founder:      TIERS.founder,
-});
-
-/**
- * Whether a runtime auth tier grants UNLIMITED PDF export as a tier feature
- * (Cartographer / Founder). A free Wanderer account returns false — its export
- * rights are per-saved-settlement entitlements (108), checked separately. Anon
- * returns false (the anonymous one-shot is a purchase, not a tier feature).
- *
- * @param {string|null|undefined} runtimeTier — the auth.tier value.
- * @returns {boolean}
- */
-export function tierHasUnlimitedPdfExport(runtimeTier) {
-  const catalog = RUNTIME_TIER_TO_CATALOG[String(runtimeTier || '').toLowerCase()];
-  return catalog?.features?.pdfExport === true;
 }
 
 // ── Stripe product → catalog reverse lookup ───────────────────────────────
@@ -359,5 +410,6 @@ export function findPackByKey(key) {
 // the admin panel show "all SKUs ever sold" without reaching through
 // flags.
 export const _internal = Object.freeze({
-  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, AI_MODEL_ALIASES,
+  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, SURVEYOR_AI_COSTS, AI_MODEL_ALIASES,
+  TIER_MULTIPLIERS,
 });

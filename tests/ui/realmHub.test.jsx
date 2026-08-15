@@ -58,6 +58,7 @@ const simulatedCampaign = {
     calendar: { month: 9, year: 3, season: 'autumn' },
     deployments: { s1: { targetId: 's2', sinceTick: 4, role: 'siege' } },
     warExhaustion: { s1: 0.72 },
+    dispositionStats: { s1: { wins: 2, losses: 1, score: 1 } },
     pantheon: { 'deity:Vol': { tier: 'major', seats: 5 } },
   },
 };
@@ -75,8 +76,16 @@ describe('RealmDashboard — live summary (premium)', () => {
     expect(screen.getByText(/1 siege/)).toBeTruthy();
     // The dominant faith reads off the pantheon ledger.
     expect(screen.getByText('Vol')).toBeTruthy();
-    // The war-weariest power surfaces from warExhaustionStandings.
-    expect(screen.getByText('s1')).toBeTruthy();
+    // Realm-wide W/L is explicitly a contest record, not a war-duration or
+    // casualty counter; its tooltip carries the definition.
+    expect(screen.getByText('Realm contest record')).toBeTruthy();
+    expect(screen.getByText('2W / 1L').getAttribute('title')).toContain('not time at war or casualties');
+    // The war-weariest power surfaces from warExhaustionStandings. This render
+    // passes no nameById, so the name lookup misses — and the fallback must be
+    // the in-fiction generic, never the raw id (C3 finding 12; this line used
+    // to pin 's1', the defect's own output).
+    expect(screen.getAllByText('a settlement').length).toBeGreaterThan(0);
+    expect(screen.queryByText('s1')).toBeNull();
     // No locked teaser / no pricing moment for premium.
     expect(screen.queryByTestId('realm-dashboard-locked')).toBeNull();
     expect(triggerSpy).not.toHaveBeenCalled();
@@ -148,7 +157,11 @@ describe('RealmInspector — overlay structure', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  test('Pantheon section self-hides while religion is dormant', () => {
+  test('Faith folds the Pantheon in — always present, graceful when dormant', () => {
+    // THE HERALD (2026-07-22): the old self-hiding Pantheon door folds into Faith,
+    // which — unlike the old tab — is ALWAYS present. A deity-free realm's Faith door
+    // shows its own empty state (the spread mechanics), never a broken pantheon block
+    // or a vanished door. There is no standalone 'Pantheon' door any longer.
     const dormant = { ...simulatedCampaign, worldState: { ...simulatedCampaign.worldState, pantheon: {} } };
     render(
       <RealmInspector
@@ -161,9 +174,28 @@ describe('RealmInspector — overlay structure', () => {
         tier="premium"
       />,
     );
-    // The Pantheon tab button is absent when the ledger is empty.
+    // No standalone Pantheon door (folded into Faith).
     expect(screen.queryByRole('button', { name: 'Pantheon' })).toBeNull();
-    // …but War and Diplomacy and Chronicle remain.
-    expect(screen.getByRole('button', { name: 'War and Diplomacy' })).toBeTruthy();
+    // Faith is present even with an empty pantheon ledger (it no longer self-hides).
+    expect(screen.getByRole('button', { name: 'Faith' })).toBeTruthy();
+    // War remains a door too.
+    expect(screen.getByRole('button', { name: 'War' })).toBeTruthy();
+  });
+});
+
+// ── C3 finding 12 — no raw settlement id in a realm headline ─────────────────
+// The Conflict sub-line and the hegemony nameFor once fell back to the raw id
+// ("s_3 war-weary") when the name lookup missed. Both now degrade to in-fiction
+// generics; this source pin keeps the raw-id fallback from returning.
+describe('RealmDashboard — headline fallbacks stay in-fiction', () => {
+  test('no raw-id fallback in the conflict sub-line or hegemony nameFor', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { resolve } = await import('node:path');
+    const src = readFileSync(resolve(process.cwd(), 'src/components/map/RealmDashboard.jsx'), 'utf-8');
+    expect(src).not.toMatch(/\|\|\s*weariest\.id/);
+    expect(src).not.toMatch(/\|\|\s*topAggressor\.id/);
+    expect(src).not.toMatch(/nameFor:[^\n]*\|\|\s*String\(id\)/);
+    expect(src).toMatch(/\|\|\s*'a settlement'/);
+    expect(src).toMatch(/\|\|\s*'an unnamed seat'/);
   });
 });

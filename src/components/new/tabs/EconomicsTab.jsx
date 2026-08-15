@@ -1,59 +1,74 @@
-import React, { useState } from 'react';
-import { FS, swatch, MUTED, BODY, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
-import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
+import React, { useState, useMemo } from 'react';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
+import { Ti, sans, Section, Empty } from '../Primitives';
+import { formatCount } from '../../../domain/formatNumber.js';
+import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
-import {useIsMobileTab} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
-import { deriveFoodBalance } from '../../../domain/display/dossierViewModel.js';
-import { EconomicsGranarySection } from '../../dossier/EngineSections.jsx';
+import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
+import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
+import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
+import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
+import {
+  customSupplyChainPresentation,
+} from '../../../domain/content/customSupplyChainPresentation.js';
+import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
+import MarketPricesSection from './MarketPricesSection.jsx';
 import Button from '../../primitives/Button.jsx';
-import EntityLink from '../../primitives/EntityLink.jsx';
-import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
-import { institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
+
+// M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
+// (the M6a commodityBand vocabulary); never a numeric price.
+const FLOW_BAND_COLOR = { shortage: '#8b1a1a', adequate: '#a0762a', surplus: '#1a5a28' };
+
+/**
+ * The LIVE TRADE FLOW section (M6d) — an ADDITIVE band rendered BESIDE the generation
+ * baseline, never replacing it. Measured physical throughput (the arrivals tally)
+ * surfaced as a qualitative dependency drift. Renders ONLY when `drift` is present
+ * (marker + commodity-flow on + measured flow); absent ⇒ nothing ⇒ byte-identical tab.
+ */
+function LiveTradeFlowSection({ drift }) {
+  const color = FLOW_BAND_COLOR[drift.band] || FLOW_BAND_COLOR.adequate;
+  return (
+    <Section title="Live Trade Flow" collapsible defaultOpen accent={color}>
+      <div style={{background:`${color}0c`,border:`1px solid ${color}30`,borderLeft:`4px solid ${color}`,padding:'10px 14px'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:6}}>
+          <span style={{fontSize:FS.md,fontWeight:800,color,textTransform:'none'}}>{drift.label}</span>
+          <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginLeft:'auto'}}>measured now</span>
+        </div>
+        <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drift.headline}</p>
+        <div style={{display:'flex',gap:14,flexWrap:'wrap',fontSize:FS.xs,color:swatch.inkMag3}}>
+          <span><span style={{color:MUTED,marginRight:4}}>Inbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.inbound}</strong></span>
+          <span><span style={{color:MUTED,marginRight:4}}>Outbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.outbound}</strong></span>
+        </div>
+        <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
+          Live movement on the trade roads: a drift on top of the settlement's founding trade profile, not a replacement for it.
+        </p>
+      </div>
+    </Section>
+  );
+}
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
 // re-allocating per render of EconomicFlowsSection).
+// Exported for the cross-surface magic-colour contract test.
 export const FLOW_STATUS = {
-  impaired:            {label:' Impaired',            color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
-  vulnerable:          {label:' Vulnerable',          color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
+  impaired:            {label:'Impaired',             color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
+  vulnerable:          {label:'Vulnerable',           color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
   running:             {label:'✓ Running',           color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0'},
-  entrepot:            {label:' Entrepôt',          color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
-  // Magic actively covering a supply gap reads BLUE — matching the service-level
-  // "Magical Infrastructure" tag — so it says "supplied, not impaired" in one calm
-  // colour, distinct from the red/amber failure states. The ✦ keeps it apart from an
-  // ordinary blue node and carries the real nuance (a magically-sustained chain has
-  // no physical fallback if magic fails). Import nodes are neutralised off blue so
-  // blue means magic here, not "imported".
-  magically_sustained: {label:'✦ Magically Sustained', color:swatch.info, bg:swatch.infoBg, border:'#a0b0d8'},
+  entrepot:            {label:'Entrepôt',           color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
+  magically_sustained: {label:'✦ Magically Sustained', color: swatch.info, bg: swatch.infoBg, border:'#a0b0d8'}, // info-blue, matches the magic tag + SupplyChainsPanel chip (ported master fix)
   operational:         {label:'○ Operational',        color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
 };
 
 // §14 Phase 3b — trade-direction arrow colours (module-scope const = lint-safe).
 const TRADE_IN_COLOR = swatch['#7A5010'];   // ← imported from a neighbour
 const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
-
-// Trade goods reach the dossier in two shapes: snake_case storage keys
-// (`glass_sand`, `mountain_timber`) and already-spaced labels (`glass sand`,
-// `fine textiles`). `showGood` renders both uniformly — underscores/hyphens
-// become spaces, nothing else (casing is preserved so "Cut stone and masonry"
-// stays as authored). `goodKey` is the case/separator-insensitive identity used
-// to dedupe, so a good stored under both spellings collapses to one chip instead
-// of appearing twice (the `glass sand` + `glass_sand` duplication).
-const showGood = (g) => String(g == null ? '' : g).replace(/[_-]+/g, ' ');
-const goodKey = (g) => showGood(g).toLowerCase().replace(/\s+/g, ' ').trim();
-function dedupeGoods(arr) {
-  const seen = new Set();
-  const out = [];
-  for (const g of (arr || [])) {
-    const k = goodKey(g);
-    if (k && !seen.has(k)) { seen.add(k); out.push(g); }
-  }
-  return out;
-}
 
 /**
  * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
@@ -63,10 +78,9 @@ function dedupeGoods(arr) {
  * with normal hook scoping.
  *
  * Props are the slices of eco that the section actually consumes — keeps
- * the prop surface narrow and the component cheap to memoize. `index` is the
- * live dossier entity index used to turn 'Via:' institution names into links.
+ * the prop surface narrow and the component cheap to memoize.
  */
-function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], index = null }) {
+function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
   // Guard: a single malformed income entry (no string `source`) must not throw
   // and white-screen the whole tab — in the live generate flow this section is
@@ -91,14 +105,14 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
         {[
           {key:'all',label:`All (${chains.length + institutionalServices.length})`},
-          impairedCount + vulnerableCount > 0 && {key:'impaired',  label:` Issues (${impairedCount + vulnerableCount})`,  color:'#8b1a1a'},
+          impairedCount + vulnerableCount > 0 && {key:'impaired',  label:`Issues (${impairedCount + vulnerableCount})`,  color:'#8b1a1a'},
           runningCount > 0                    && {key:'productive',label:`✓ Productive (${runningCount})`,            color:'#1a5a28'},
-          entrepotCount > 0                   && {key:'entrepot',  label:` Entrepôt (${entrepotCount})`,              color:'#a0762a'},
-          institutionalServices.length > 0    && {key:'services',  label:` Services (${institutionalServices.length})`, color:'#5a3a1a'},
+          entrepotCount > 0                   && {key:'entrepot',  label:`Entrepôt (${entrepotCount})`,              color:'#a0762a'},
+          institutionalServices.length > 0    && {key:'services',  label:`Services (${institutionalServices.length})`, color:'#5a3a1a'},
         ].filter(Boolean).map(f => (
           <Button key={f.key} variant="secondary" size="sm" aria-pressed={flowFilter===f.key}
             onClick={() => setFlowFilter(f.key)} style={{
-            padding:'4px 10px',borderRadius:4,minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
+            padding:'4px 10px',minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
             background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
             color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
             border:`1px solid ${flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a'}`,
@@ -124,14 +138,14 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
             <div key={i} style={{
               background:st.bg, border:`1px solid ${st.border}`,
               borderLeft:`3px solid ${st.color}`,
-              borderRadius:6, padding:'8px 12px',
+              padding:'8px 12px',
             }}>
               {/* Header row */}
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>
+                {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
-                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,borderRadius:3,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
+                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{chain.needLabel}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
 
               {/* Institutions + outputs */}
@@ -144,7 +158,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
                   <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
                     {chain.outputs.slice(0, 3).map((o, j) => (
-                      <span key={j} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
+                      <span key={j} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:`${st.color}10`,padding:'1px 5px'}}>{o}</span>
                     ))}
                   </div>
                 </div>}
@@ -152,9 +166,9 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Impairment detail */}
               {chain.dependency && (
-                <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
+                <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
-                  {chain.dependency.affectedServices.length > 0 && <span style={{color:BODY}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
+                  {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
 
@@ -165,9 +179,9 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Magic substitution note */}
               {chain.magicNote && (
-                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],borderRadius:4,
+                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
-                  ✦ <em>{chain.magicNote}</em>
+                  <em>{chain.magicNote}</em>
                   {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:swatch['#7A4AAA'],fontWeight:700}}>
                     {Math.round(chain.magicRecovery * 100)}% recovery
                   </span>}
@@ -193,32 +207,18 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
             <div key={i} style={{
               background:swatch['#FAF8F4'],border:`1px solid ${svc.color}30`,
               borderLeft:`3px solid ${svc.color}`,
-              borderRadius:6,padding:'7px 12px',
+              padding:'7px 12px',
               display:'flex',alignItems:'flex-start',gap:8,
             }}>
-              <span style={{fontSize: FS['16'],flexShrink:0}}>{svc.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,borderRadius:3,padding:'0 5px'}}>service</span>
-                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],borderRadius:3,padding:'0 5px'}}>export</span>}
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
+                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>service</span>
+                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>export</span>}
+                  <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag2}}>
-                  <span style={{color:MUTED,marginRight:4}}>Via:</span>
-                  {svc.institutions.map((instName, k) => {
-                    // Each provider name resolves to its institution card by id;
-                    // an unresolved name (gated/absent) degrades to plain text.
-                    const instId = institutionIdFromName(index, instName);
-                    return (
-                      <React.Fragment key={k}>
-                        {k > 0 && ' · '}
-                        {instId
-                          ? <EntityLink id={instId} type="institution" fallback={instName} style={{fontWeight:600}} />
-                          : instName}
-                      </React.Fragment>
-                    );
-                  })}
+                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>
               </div>
@@ -230,16 +230,36 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
   );
 }
 
-export function EconomicsTab({economicState, settlement, narrativeNote}) {
+export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null}) {
   const s = settlement;
-  const mobile = useIsMobileTab();
-  // Live dossier index — trade partners resolve to neighbour cards, 'Via:'
-  // institution chips to their Power-tab cards. Off-dossier (no provider) the
-  // default no-op context yields a null index and every link degrades to text.
-  const { index } = useDossierEntities();
+  const mobile = useIsMobile();
+  // M6d FLOW-DERIVED ECONOMICS — thread worldState the RumorsTab way: read the owning
+  // campaign's worldState from the store and project the arrivals tally through the
+  // marker-gated selector. Absent flow (marker off / opt-in off / isolated / decayed) ⇒
+  // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
+  const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
+  const flowDrift = useMemo(() => {
+    const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
+    if (!sid || !Array.isArray(campaigns)) return null;
+    const campaign = campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid));
+    if (!campaign) return null;
+    return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid });
+  }, [saveId, s, campaigns, eco]);
+  // MARKET PRICES (round-21 Wave 7) — the crier's coin, a pure display read over
+  // the SAME generation baseline + spatial ledgers, nudged by the M6d flow drift.
+  // Prices render even aspatially (no campaign / worldState ⇒ adequate bands from
+  // the generation trade profile — the dormancy shape); never mutates a thing.
+  const marketPrices = useMemo(() => {
+    const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
+    if (!sid) return null;
+    const campaign = Array.isArray(campaigns)
+      ? campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid))
+      : null;
+    return deriveMarketPrices({ economicState: eco, worldState: campaign?.worldState || null, settlementId: sid, flowDrift });
+  }, [saveId, s, campaigns, eco, flowDrift]);
   const via = s?.economicViability;
-  if (!eco) return <Empty message="No economic record on file for this settlement."/>;
+  if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
   const fb = via?.metrics?.foodBalance;
@@ -259,6 +279,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const _sp = eco.safetyProfile || {};
   const ecoScore = Math.round(eco.compound?.economyOutput || 0);
   const tradeLabel = (eco.tradeAccess || 'road').replace(/_/g,' ');
+  const customChainViews = (eco.customChains || []).map(chain => ({
+    chain,
+    presentation: customSupplyChainPresentation(chain),
+  }));
+  const activeCustomChains = customChainViews.filter(
+    item => item.presentation.state === 'active',
+  ).length;
 
   // Safety tile color
 
@@ -267,29 +294,31 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const foodDeficit = fb?.deficit > 0;
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
   const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
-  // Single safe denominator for the two "trade covers % of gap" readouts so a
-  // falsy/zero rawDeficit can never render NaN% and the bar caption + narrative
-  // always agree on the same number.
-  const foodGap = Math.max(1, fb?.rawDeficit || 0);
+
+  // SEASONS-A: the seasonal granary read (available only on campaigns whose
+  // pulse runs with seasons on — the stockpile record carries the season).
+  const granary = deriveGranaryOutlook(s);
+  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a';
 
   return (
     <div style={{...sans}}>
-      <TabIntro tabKey="economics" />
       <NarrativeNote note={narrativeNote} />
 
+      <EconomyFreshnessNote settlement={s} variant="tallies" />
+
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,borderRadius:8,padding:'12px 16px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag3}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
-            <div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
+            <div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
               <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
-            {ecoScore>0&&<div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
+            {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
               <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}
@@ -301,13 +330,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         {[
-          {icon:'',label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
-          {icon:'',label:'Food',value:foodLabel,sub:fb?`${fb.dailyProduction?.toLocaleString()} / ${fb.dailyNeed?.toLocaleString()} lbs/day`:undefined,color:foodColor},
-        ].map(({icon,label,value,sub,color})=>(
-          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
+          {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
+          {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
+          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]),
+        ].map(({label,value,sub,color})=>(
+          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
-            {sub&&<div style={{fontSize:FS.xxs,color:BODY,lineHeight:1.3}}>{sub}</div>}
+            {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
           </div>
         ))}
       </div>
@@ -319,8 +349,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             const isCrim = src.isCriminal;
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             return (
-            <div key={i} style={{display:'flex',alignItems:'flex-start',gap:10}}>
-              <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
+            <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
+              <div style={{flex:1,background:swatch['#E8DCC8'],height:26,position:'relative',overflow:'hidden',minWidth:40}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
                   {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
                 </div>
@@ -328,10 +358,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
               </div>
               <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ Criminal</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:FS.xxs,color:BODY,lineHeight:1.35,marginTop:2}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
               </div>
             </div>
             );
@@ -347,12 +377,20 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {dedupeGoods(eco.primaryExports).map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>goodKey(x)===goodKey(e));const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
-                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{showGood(e)}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{showGood(e)}</span>;})}
-                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
+                {eco.primaryExports.map((e,i)=>{
+                  const transit=e.includes('(transit)');
+                  const ownership=tradeLabelOwnership(eco,'exports',e);
+                  const title=ownership.members.length
+                    ? `incl. ${ownership.members.join(', ')}`
+                    : ownership.mixed
+                      ? 'Also an exact custom endpoint'
+                      : undefined;
+                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                  return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                })}
+                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:BODY,fontStyle:'italic',margin:0}}>No significant exports.</p>
+              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
           </div>
           {/* Imports */}
@@ -360,26 +398,28 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Imports</div>
             {eco.primaryImports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {dedupeGoods([...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => goodKey(imp).includes(goodKey(tc))))]).sort((a,b)=>showGood(a).localeCompare(showGood(b))).map((imp,i)=>{
-                    const n=eco.necessityImports?.some(x=>goodKey(imp).includes(goodKey(x)));
-                    const t=terrainCriticals.some(tc=>goodKey(imp).includes(goodKey(tc))||goodKey(tc).includes(goodKey(imp)));
+                {[...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase())))].sort().map((imp,i)=>{
+                    const n=eco.necessityImports?.some(x=>imp.toLowerCase().includes(x.toLowerCase()));
+                    const t=terrainCriticals.some(tc=>imp.toLowerCase().includes(tc.toLowerCase())||tc.toLowerCase().includes(imp.toLowerCase()));
                     const color = t?'#7a0a0a':n?'#8b1a1a':'#7a5010';
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
-                    const icon  = t?' ':n?' ':'';
-                    const isCust=(eco.customTradeLabels?.imports||[]).some(x=>goodKey(x)===goodKey(imp));
-                    const incl=isCust?(eco.customCategoryImports?.[imp]||null):null;
-                    return isCust
-                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{showGood(imp)}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{showGood(imp)}{icon}</span>;
+                    const ownership=tradeLabelOwnership(eco,'imports',imp);
+                    const title=ownership.members.length
+                      ? `incl. ${ownership.members.join(', ')}`
+                      : ownership.mixed
+                        ? 'Also an exact custom endpoint'
+                        : undefined;
+                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                    return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
-                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}> Terrain cannot produce</span>}
+                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
                   {terrainCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
-                  {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}> Settlement necessity</span>}
+                  {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:BODY,fontStyle:'italic',margin:0}}>No recorded imports.</p>
+              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
             }
           </div>
         </div>
@@ -389,63 +429,60 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           for(const l of eco.tradeLinks){const b=byPartner[l.partner]=byPartner[l.partner]||{imports:[],exports:[]};(l.direction==='import'?b.imports:b.exports).push(l.good);}
           return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:eco.localProduction?.length>0?12:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>↔ Trade with neighbours</div>
-            {Object.entries(byPartner).map(([partner,g],i)=>{
-            // Partner names resolve to the SAME neighbour relationship card via
-            // the shared index. A partner that is a world settlement absent from
-            // this dossier returns null and renders as plain text (no dead link).
-            const partnerEntry = index?.resolveTradePartner?.(partner) || null;
-            return (
+            {Object.entries(byPartner).map(([partner,g],i)=>(
               <div key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
-                <strong style={{color:swatch.inkMag}}>
-                  {partnerEntry
-                    ? <EntityLink id={partnerEntry.id} type="neighbour" fallback={partner} style={{color:swatch.inkMag}} />
-                    : partner}
-                </strong>
-                {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.map(showGood).join(', ')}</span>}
-                {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.map(showGood).join(', ')}</span>}
+                <strong style={{color:swatch.inkMag}}>{partner}</strong>
+                {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.join(', ')}</span>}
+                {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}
               </div>
-            );})}
-            <div style={{fontSize:FS.micro,color:BODY,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
+            ))}
+            <div style={{fontSize:FS.micro,color:MUTED,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
           </div>;
         })()}
         {/* Local production */}
         {eco.localProduction?.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Produced Locally</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:3}}>
-            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',borderRadius:4,padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
+            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
           </div>
         </div>}
       </Section>}
 
+      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
+      {flowDrift && <LiveTradeFlowSection drift={flowDrift} />}
+
+      {/* ── MARKET PRICES (Wave 7 — the crier's coin, band-derived, additive) ── */}
+      {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
+
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
-      
+
 
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
         {/* Balance bar */}
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xs,color:swatch.inkMag3,marginBottom:4}}>
-            <span>Production: {fb.dailyProduction?.toLocaleString()} lbs/day</span>
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {fb.importCoverage.toLocaleString()} imported</span>}
-            <span>Need: {fb.dailyNeed?.toLocaleString()} lbs/day</span>
+            <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
+            <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
           </div>
-          <div style={{height:10,background:swatch['#E8DCC8'],borderRadius:5,overflow:'hidden',position:'relative'}}>
+          <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
             {/* Production bar */}
-            <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a',borderRadius:5}}/>
+            <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
             {/* Import coverage overlay */}
-            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A'],borderRadius:'0 5px 5px 0'}}/>}
+            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A']}}/>}
           </div>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:MUTED,marginTop:3}}>
             <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
             {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/foodGap*100)}% of gap</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
-        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
+        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/Math.max(1,fb.dailyNeed)*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/foodGap*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
+              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
               : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
@@ -458,7 +495,6 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           chains={eco.activeChains}
           institutionalServices={eco.institutionalServices || []}
           incomeSources={eco.incomeSources || []}
-          index={index}
         />
       )}
 
@@ -466,7 +502,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       {via?.plotHooks?.length>0&&<Section title={`Economic Plot Hooks (${via.plotHooks.length})`} collapsible defaultOpen={false} accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {via.plotHooks.map((h,i)=>{
-            const text=typeof h==='object'?h.hook||Ti(h):String(h);
+            // H2: strip the authored ' PLOT HOOK: ' marker foodBalance.js bakes
+            // into each economic hook (shared chokepoint, src/lib/proseSeams.js).
+            const text=normalizePlotHook(typeof h==='object'?h.hook||Ti(h):String(h));
             const cat=typeof h==='object'?h.category:null;
             return <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
               <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>
@@ -487,27 +525,43 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       )}
 
       {/* ── CUSTOM SUPPLY CHAINS (§14 — user-confirmed in the Compendium) ──────── */}
-      {eco?.customChains?.length > 0 && (
-        <Section title={`Custom Supply Chains (${eco.customChains.length})`} collapsible defaultOpen={false}>
+      {customChainViews.length > 0 && (
+        <Section
+          title={`Custom Supply Chains (${activeCustomChains} active · ${customChainViews.length - activeCustomChains} unavailable)`}
+          collapsible
+          defaultOpen={false}
+        >
           <div style={{display:'flex',flexDirection:'column',gap:6}}>
-            {eco.customChains.map((c,i)=>{
+            {customChainViews.map(({chain:c,presentation},i)=>{
               const nodes = [c.resource, ...(c.processingInstitutions||[]), ...((c.outputs||[]).slice(0,3))].filter(Boolean);
+              const visibleReasons = presentation.reasons.slice(0,3);
               return (
-                <div key={i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', borderRadius:5, padding:'8px 12px'}}>
+                <div key={c.chainId||i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', borderColor:presentation.border, padding:'8px 12px'}}>
                   <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:nodes.length?4:0,flexWrap:'wrap'}}>
                     <span style={{fontSize:FS.sm,fontWeight:800,color:swatch.inkMag}}>{c.label}</span>
                     <span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                    <span style={{fontSize:FS.micro,fontWeight:800,color:presentation.color,background:presentation.background,border:`1px solid ${presentation.border}`,padding:'1px 6px',letterSpacing:'0.03em',textTransform:'uppercase'}}>
+                      {presentation.label}
+                    </span>
                   </div>
                   {nodes.length>0 && (
-                    <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
+                    <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',opacity:presentation.state==='active'?1:0.68}}>
                       {nodes.map((n,j)=>(
                         <React.Fragment key={j}>
                           {j>0 && <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>}
-                          <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:'rgba(255,255,255,0.55)',borderRadius:3,padding:'1px 6px',textTransform:'capitalize'}}>{n}</span>
+                          <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#FAF8F4'],padding:'1px 6px',textTransform:'capitalize'}}>{n}</span>
                         </React.Fragment>
                       ))}
                     </div>
                   )}
+                  <div style={{fontSize:FS.xxs,color:presentation.color,lineHeight:1.45,marginTop:5}}>
+                    {visibleReasons.length
+                      ? visibleReasons.join(' ')
+                      : presentation.summary}
+                    {presentation.reasons.length>visibleReasons.length
+                      ? ` +${presentation.reasons.length-visibleReasons.length} more.`
+                      : ''}
+                  </div>
                 </div>
               );
             })}
@@ -530,7 +584,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 ✓ Fully Exploited ({full.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
             {part.length>0&&<div>
@@ -542,7 +596,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 const name = r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?');
                 const missing = r.processingInstitutions?.length
                   ? '' : r.dependsOn?.length ? ' (needs: '+r.dependsOn.slice(0,2).join(', ')+')' : '';
-                return <span key={i} style={{fontSize:FS.xs,color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',borderRadius:4,padding:'2px 8px'}}>{name}{missing}</span>;
+                return <span key={i} style={{fontSize:FS.xs,color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',padding:'2px 8px'}}>{name}{missing}</span>;
               })}
               </div>
             </div>}
@@ -551,7 +605,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 ○ Unexploited Opportunity ({unex.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
           </div>
@@ -586,11 +640,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                         ct.type?.toLowerCase().includes('black market'))
           .slice(0, 2);
 
-        return <Section title={`Shadow Economy${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        return <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
-            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,borderRadius:6,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
+            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
               <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
                 <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
@@ -608,7 +662,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 {crimInsts.map((name,i)=>{
                   const econ = criminalOpEcon(name);
                   return (
-                    <div key={i} style={{background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:5,padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
+                    <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger}}>{name}</span>
                       <span style={{fontSize:FS.xxs,color:swatch['#6B4040']}}>{econ}</span>
                     </div>
@@ -622,7 +676,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Criminal Supply Chains</div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {crimChains.map((c,i)=>(
-                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:4,padding:'2px 8px'}}>
+                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
                     {c.chainId?.replace(/_/g,' ')} · {c.status}
                   </span>
                 ))}
@@ -630,19 +684,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             </div>}
 
             {/* Note directing to Defense for power structure */}
-            <div style={{fontSize:FS.xs,color:BODY,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
+            <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
               Criminal power structures, enforcement dynamics, and public order detail → Defense tab
             </div>
 
           </div>
         </Section>;
       })()}
-
-      {/* UX overhaul Phase 2 — economic_capacity band + live granary gauge
-          (deriveBlockadeRelief: storageMonths vs capacity + tithe/drawdown/
-          blockade/deployment flags). Self-gates to nothing without a band or a
-          live stockpile record. */}
-      <EconomicsGranarySection settlement={settlement} />
 
     </div>
   );

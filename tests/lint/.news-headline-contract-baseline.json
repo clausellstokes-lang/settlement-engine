@@ -1,0 +1,1048 @@
+{
+  "schemaVersion": 1,
+  "corpus": {
+    "pulseRoots": 12,
+    "introductions": 272,
+    "retirements": 32,
+    "finalEntries": 240,
+    "homes": 53
+  },
+  "addressTotality": {
+    "rows": [
+      {
+        "home": "applied|army_deployed",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|army_deployed",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|boom",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|boom",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|cause_lifecycle",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|cause_lifecycle",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|commons_petition",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 3
+      },
+      {
+        "home": "applied|commons_petition",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 3
+      },
+      {
+        "home": "applied|conflict_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|conflict_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|crime_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|crime_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|flourishing",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|flourishing",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|food_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|food_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|generosity_refuge",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 4,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|generosity_refuge",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 4,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|generosity_refusal",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|generosity_refusal",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|generosity_relief",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|generosity_relief",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|legitimacy_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|legitimacy_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|npc_bargain",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|npc_bargain",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|npc_contest",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 8,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|npc_contest",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 8,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|npc_exploit",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 3
+      },
+      {
+        "home": "applied|npc_exploit",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 3
+      },
+      {
+        "home": "applied|npc_expose",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|npc_expose",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|npc_mobilize",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|npc_mobilize",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|npc_protect",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 8,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|npc_protect",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 8,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|npc_reform",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 21,
+        "occurrences": 23
+      },
+      {
+        "home": "applied|npc_reform",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 21,
+        "occurrences": 23
+      },
+      {
+        "home": "applied|npc_suppress",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|npc_suppress",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 8
+      },
+      {
+        "home": "applied|resource_depletion",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|resource_depletion",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|rival_sabotage",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|rival_sabotage",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|roads",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 44,
+        "occurrences": 44
+      },
+      {
+        "home": "applied|roads",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 44,
+        "occurrences": 44
+      },
+      {
+        "home": "applied|strategy_deploy",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|strategy_deploy",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|stressor_aftermath",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_aftermath",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_birth_insurgency",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_birth_insurgency",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_birth_mass_migration",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_birth_mass_migration",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_birth_monster_raider_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_birth_monster_raider_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_escalate_insurgency",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_escalate_insurgency",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_escalate_mass_migration",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_escalate_mass_migration",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "applied|stressor_residual",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|stressor_residual",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|trade_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|trade_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|tradition",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 22,
+        "occurrences": 22
+      },
+      {
+        "home": "applied|tradition",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 22,
+        "occurrences": 22
+      },
+      {
+        "home": "applied|urban_fabric",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 16,
+        "occurrences": 16
+      },
+      {
+        "home": "applied|urban_fabric",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 16,
+        "occurrences": 16
+      },
+      {
+        "home": "applied|war_conscription",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|war_conscription",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|war_drain",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|war_drain",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 5
+      },
+      {
+        "home": "applied|war_exhaustion",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|war_exhaustion",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|war_mobilization",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 34
+      },
+      {
+        "home": "applied|war_mobilization",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 5,
+        "occurrences": 34
+      },
+      {
+        "home": "home_front_hands|home_front_hands",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "home_front_hands|home_front_hands",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|faction_government_challenge",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|faction_government_challenge",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|food_pressure",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|food_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|neutral_to_rival",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|neutral_to_rival",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|npc_exploit",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_exploit",
+        "field": "summary",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_mobilize",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_mobilize",
+        "field": "summary",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_reform",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|npc_reform",
+        "field": "summary",
+        "voiceClass": "prospective",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|npc_sabotage",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_sabotage",
+        "field": "summary",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_seek_promotion",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_seek_promotion",
+        "field": "summary",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|strategy_sue_for_peace",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|strategy_sue_for_peace",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 2
+      },
+      {
+        "home": "queued|trade_pressure",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|trade_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "season_marker|harvest",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "season_marker|harvest",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "season_marker|hungry_gap",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "season_marker|hungry_gap",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "webwar_campaign_complete|null",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "webwar_campaign_complete|null",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "webwar_campaign_minted|null",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "home": "webwar_campaign_minted|null",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 4
+      }
+    ],
+    "rowsSha256": "82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694",
+    "totals": {
+      "homes": 53,
+      "fields": 2,
+      "identities": 106,
+      "prospectiveIdentities": 14,
+      "indicativeIdentities": 92,
+      "distinctValues": 400,
+      "occurrences": 544
+    }
+  },
+  "rewriteLiveness": {
+    "raw": {
+      "pulseRecords": 12,
+      "lanes": [
+        {
+          "field": "mechanicalOutcomes",
+          "capPerPulse": 8,
+          "headlineOccurrences": 77,
+          "distinctValues": 24,
+          "prospectiveOccurrences": 73,
+          "prospectiveDistinctValues": 23,
+          "indicativeOccurrences": 4,
+          "indicativeDistinctValues": 1
+        },
+        {
+          "field": "selectedOutcomes",
+          "capPerPulse": 24,
+          "headlineOccurrences": 151,
+          "distinctValues": 80,
+          "prospectiveOccurrences": 95,
+          "prospectiveDistinctValues": 66,
+          "indicativeOccurrences": 56,
+          "indicativeDistinctValues": 14
+        }
+      ],
+      "union": {
+        "headlineOccurrences": 228,
+        "distinctValues": 83,
+        "prospectiveOccurrences": 168,
+        "prospectiveDistinctValues": 69,
+        "indicativeOccurrences": 60,
+        "indicativeDistinctValues": 14
+      }
+    },
+    "rows": [
+      {
+        "source": "\\bmay bargain\\b",
+        "flags": "",
+        "replacement": "bargains",
+        "distinctValues": 5,
+        "occurrences": 11
+      },
+      {
+        "source": "\\bmay be depleted\\b",
+        "flags": "",
+        "replacement": "depleted",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "source": "\\bmay become\\b",
+        "flags": "",
+        "replacement": "becomes",
+        "distinctValues": 1,
+        "occurrences": 2
+      },
+      {
+        "source": "\\bmay close its doors\\b",
+        "flags": "",
+        "replacement": "closes its doors",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay defect\\b",
+        "flags": "",
+        "replacement": "defects",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay emerge\\b",
+        "flags": "",
+        "replacement": "emerges",
+        "distinctValues": 3,
+        "occurrences": 4
+      },
+      {
+        "source": "\\bmay exploit\\b",
+        "flags": "",
+        "replacement": "exploits",
+        "distinctValues": 3,
+        "occurrences": 4
+      },
+      {
+        "source": "\\bmay expose\\b",
+        "flags": "",
+        "replacement": "exposes",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "source": "\\bmay fall\\b",
+        "flags": "",
+        "replacement": "falls",
+        "distinctValues": 3,
+        "occurrences": 36
+      },
+      {
+        "source": "\\bmay grow\\b",
+        "flags": "",
+        "replacement": "grows",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay hoard\\b",
+        "flags": "",
+        "replacement": "hoards",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay intensify\\b",
+        "flags": "",
+        "replacement": "intensifies",
+        "distinctValues": 2,
+        "occurrences": 4
+      },
+      {
+        "source": "\\bmay mobilize\\b",
+        "flags": "",
+        "replacement": "mobilizes",
+        "distinctValues": 5,
+        "occurrences": 11
+      },
+      {
+        "source": "\\bmay press a challenge to the government\\b",
+        "flags": "",
+        "replacement": "presses a challenge to the government",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "source": "\\bmay protect\\b",
+        "flags": "",
+        "replacement": "protects",
+        "distinctValues": 8,
+        "occurrences": 14
+      },
+      {
+        "source": "\\bmay raise a\\b",
+        "flags": "",
+        "replacement": "raises a",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay recover\\b",
+        "flags": "",
+        "replacement": "recovering",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay reform\\b",
+        "flags": "",
+        "replacement": "reforms",
+        "distinctValues": 23,
+        "occurrences": 45
+      },
+      {
+        "source": "\\bmay rise\\b",
+        "flags": "",
+        "replacement": "rises",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay sabotage\\b",
+        "flags": "",
+        "replacement": "sabotages",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "source": "\\bmay seek promotion\\b",
+        "flags": "",
+        "replacement": "seeks promotion",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "source": "\\bmay shift\\b",
+        "flags": "",
+        "replacement": "shifts",
+        "distinctValues": 1,
+        "occurrences": 4
+      },
+      {
+        "source": "\\bmay spread\\b",
+        "flags": "",
+        "replacement": "spreads",
+        "distinctValues": 0,
+        "occurrences": 0
+      },
+      {
+        "source": "\\bmay suppress\\b",
+        "flags": "",
+        "replacement": "suppresses",
+        "distinctValues": 5,
+        "occurrences": 11
+      },
+      {
+        "source": "\\bmay take hold\\b",
+        "flags": "",
+        "replacement": "takes hold",
+        "distinctValues": 5,
+        "occurrences": 17
+      },
+      {
+        "source": "\\bmay undermine\\b",
+        "flags": "",
+        "replacement": "undermines",
+        "distinctValues": 0,
+        "occurrences": 0
+      }
+    ],
+    "totals": {
+      "rules": 26,
+      "activeRules": 17,
+      "inertRules": 9,
+      "distinctValues": 69,
+      "occurrences": 168
+    },
+    "knownInert": [
+      {
+        "source": "\\bmay close its doors\\b",
+        "flags": "",
+        "replacement": "closes its doors",
+        "reason": "institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline."
+      },
+      {
+        "source": "\\bmay defect\\b",
+        "flags": "",
+        "replacement": "defects",
+        "reason": "npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.defect through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no defect headline."
+      },
+      {
+        "source": "\\bmay grow\\b",
+        "flags": "",
+        "replacement": "grows",
+        "reason": "populationDynamics.js::populationCandidate is the live growth authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no growth headline."
+      },
+      {
+        "source": "\\bmay hoard\\b",
+        "flags": "",
+        "replacement": "hoards",
+        "reason": "npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.hoard through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no hoard headline."
+      },
+      {
+        "source": "\\bmay raise a\\b",
+        "flags": "",
+        "replacement": "raises a",
+        "reason": "institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-build authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no build headline."
+      },
+      {
+        "source": "\\bmay recover\\b",
+        "flags": "",
+        "replacement": "recovering",
+        "reason": "tierResourceDynamics.js::evaluateTierResourceDynamics is the live resource-recovery authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no recovery headline."
+      },
+      {
+        "source": "\\bmay rise\\b",
+        "flags": "",
+        "replacement": "rises",
+        "reason": "tierResourceDynamics.js::tierCandidate and relationshipRulesCore.js's vassal-rebellion candidate are live rise authoring seams; the executed AO-0 12-record persisted public+mechanical union contains no rise headline."
+      },
+      {
+        "source": "\\bmay spread\\b",
+        "flags": "",
+        "replacement": "spreads",
+        "reason": "stressors.js::evaluateStressorRules is the live stressor-spread authoring seam; the executed AO-0 12-record persisted public+mechanical union contains births and escalations but no spread headline."
+      },
+      {
+        "source": "\\bmay undermine\\b",
+        "flags": "",
+        "replacement": "undermines",
+        "reason": "npcAgency.js::deriveNpcCandidates exposes TARGETED_ACTION_PHRASING.undermine_rival through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no undermine headline."
+      }
+    ]
+  }
+}

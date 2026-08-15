@@ -34,6 +34,7 @@
  */
 
 import { sanitizePublicValue } from './publicSafe.js';
+import { deityNameFromSnapshots } from './deityNames.js';
 
 /** The snapshot schema version — bumped on any breaking shape change so a stored
  *  public snapshot can be migrated/rejected by version, independent of the
@@ -45,20 +46,54 @@ export const WORLD_SNAPSHOT_PUBLIC_SCHEMA_VERSION = 1;
  * any opt-in. Listed for documentation + the defensive final-scrub assertion; the
  * allowlist construction below already omits them by never reading them. Kept as a
  * frozen set so the test can assert each is absent.
+ *
+ * REGISTRATION MANIFEST (security-privacy-r2-1): the second block below is the FULL
+ * set of worldState CONDITIONAL_LEDGER_KEYS (worldState.js) EXCEPT the public-derived
+ * allowlist — today only 'pantheon', which is surfaced under its own name as a scrubbed
+ * public subset. This list is HAND-MAINTAINED but kept in lockstep with the engine by
+ * tests/security/worldSnapshotDenyCensus.test.js, which derives the expected set from
+ * CONDITIONAL_LEDGER_KEYS − WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST and reds if a new
+ * conditional ledger (a new wave's key) is neither hard-denied here nor allowlisted.
+ * (Kept a manual list rather than importing CONDITIONAL_LEDGER_KEYS here: this module
+ * is security-critical and deliberately imports ONLY publicSafe.js — coupling it to the
+ * heavy worldState engine module would bloat the gallery chunk; the walker enforces the
+ * derive relationship without the import.) The census lagged 15 waves before this fix —
+ * spatialLedgers/politicsLedgers/warPosture/religionStates and the rest were unlisted.
  */
+
+/** Conditional-ledger keys whose PUBLIC DERIVATION is surfaced under their own name
+ *  (so they are NOT hard-denied). Today only the pantheon (a scrubbed deity subset). */
+export const WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST = Object.freeze(['pantheon']);
+
 export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+  // always-present private worldState keys (not conditional ledgers)
   'npcStates',
   'factionStates',
   'relationshipStates',
   'pendingEvents',
   'proposals',
   'stressors',
-  'pausedAdvance',
   'settlementTickStates',
   'rngSeed',
   'deferredImpacts',
   'deferredWarFronts',
   'deferredPartyImpacts',
+  // every worldState CONDITIONAL_LEDGER_KEY except the public allowlist (registration
+  // manifest — a new conditional ledger reds worldSnapshotDenyCensus.test.js until listed)
+  'religionStates',
+  'warPosture',
+  'occupations',
+  'pausedAdvance',
+  'martialReadiness',
+  'conquestFeeds',
+  'mercenaryMarket',
+  'rulesetLog',
+  'spatialDigest',
+  'spatialLedgers',
+  'narrativeTempo',
+  'politicsLedgers',
+  'factionPairStates',
+  'envoyErrands',
 ]);
 
 /** simulationRules keys safe to surface publicly (coarse world-shape toggles the
@@ -70,6 +105,13 @@ const PUBLIC_SIMULATION_RULE_KEYS = Object.freeze([
   'propagationMode',
   'intensity',
   'migrationMode',
+  // MG-2: the realm's arcane stance. Coarse world SHAPE of exactly this class —
+  // a player who has walked a mundane realm already knows there is no magic in
+  // it — and it must be listed here or the field silently drops from every
+  // public projection (gallery, shared realm, world export), leaving a shared
+  // mundane realm indistinguishable from a magical one. Present only when the
+  // realm was built mundane, so a magical realm's public block is unchanged.
+  'realmMagicDefault',
 ]);
 
 /** Covert / seed / prose key names scrubbed from every serialized value as a final
@@ -79,10 +121,10 @@ const PUBLIC_SIMULATION_RULE_KEYS = Object.freeze([
 // drift-guarded against it — see tests/security/snapshotDenylistDrift.test.js.
 export const COVERT_KEY_RE = /(covert|rngSeed|seed|rollExplanation|rollExplanations|diceDetail|explanation|preSnapshot|preWorldState|preRegionalGraph|preSaves)/i;
 
-/** @param {any} a @param {any} b @returns {number} */
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
-/** @param {any} value @param {number} [fallback] @returns {number} */
+/** @param {unknown} value @param {number} [fallback] @returns {number} */
 function finiteNum(value, fallback = 0) {
   return Number.isFinite(value) ? Number(value) : fallback;
 }
@@ -93,7 +135,7 @@ function finiteNum(value, fallback = 0) {
  * allowlist construction — a value that should be clean by construction is scrubbed
  * again so a missed field can never leak.
  * @param {any} value
- * @returns {any}
+ * @returns {unknown}
  */
 function scrub(value) {
   return dropCovertKeys(sanitizePublicValue(value));
@@ -103,7 +145,7 @@ function scrub(value) {
  * Recursively drop COVERT_KEY_RE keys from a plain value (post-sanitize). Pure;
  * returns a new structure, never mutates the input.
  * @param {any} value
- * @returns {any}
+ * @returns {unknown}
  */
 function dropCovertKeys(value) {
   if (Array.isArray(value)) return value.map(dropCovertKeys);
@@ -159,9 +201,10 @@ function publicSimulationRules(worldState) {
  * but we still allowlist per-entry so a future private field can't leak. Empty when
  * the realm is deity-free (no pantheon key).
  * @param {any} worldState
+ * @param {Array<unknown>} [memberSettlements] member settlements for authored-name resolution
  * @returns {Array<{ deityId: string, name: string, tier: string, seats: number, wins: number, losses: number }>}
  */
-function publicPantheon(worldState) {
+function publicPantheon(worldState, memberSettlements = []) {
   const pantheon = worldState?.pantheon && typeof worldState.pantheon === 'object' && !Array.isArray(worldState.pantheon)
     ? worldState.pantheon
     : {};
@@ -169,10 +212,13 @@ function publicPantheon(worldState) {
   const out = [];
   for (const deityId of Object.keys(pantheon).sort(codepoint)) {
     const entry = pantheon[deityId] && typeof pantheon[deityId] === 'object' ? pantheon[deityId] : {};
-    const tail = String(deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
     out.push({
       deityId: String(deityId),
-      name: tail.charAt(0).toUpperCase() + tail.slice(1),
+      // domain-display-readmodels-1: resolve the AUTHORED name from the embedded
+      // snapshots (the SAME shared resolver realmArcSummary uses, floor-fallback)
+      // — the old lossy tail-pop baked "The Ascendancy of Father" for a
+      // "War Father" deity into the serialized public snapshot.
+      name: deityNameFromSnapshots(memberSettlements, deityId),
       tier: typeof entry.tier === 'string' ? entry.tier : 'cult',
       seats: Math.max(0, Math.floor(finiteNum(entry.seats, 0))),
       wins: Math.max(0, Math.floor(finiteNum(entry.wins, 0))),
@@ -282,8 +328,10 @@ function publicTradeWars(worldState, regionalGraph, nameById) {
 }
 
 /**
- * Public disposition standings — the cross-settlement win/loss aggregate (no covert
- * tier). Net-zero/absent ledgers yield []. Ids + names + coarse counts only.
+ * Public realm contest records — the cross-settlement win/loss aggregate for
+ * resolved sieges, defenses, conquests, and primary-supplier flips (no covert
+ * tier). Zero-count/absent ledgers yield []. Ids + names + coarse counts only;
+ * the record does not represent time at war or casualties.
  * @param {any} worldState
  * @param {Map<string, string>} nameById
  * @returns {Array<{ id: string, name: string, wins: number, losses: number, score: number }>}
@@ -327,7 +375,7 @@ function commodityLabelsByPair(graph) {
   return labels;
 }
 
-/** @param {any} value @returns {string} */
+/** @param {unknown} value @returns {string} */
 function humanize(value) {
   return String(value || '').replace(/_/g, ' ');
 }
@@ -394,7 +442,7 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
       // digests carry no applyMode and a compound id.)
       if (d?.kind !== 'applied') continue;
       const ids = Array.isArray(d?.settlementIds) ? d.settlementIds : [];
-      ids.forEach((/** @type {any} */ x) => slot.affected.add(String(x)));
+      ids.forEach((/** @type {unknown} */ x) => slot.affected.add(String(x)));
     }
   }
   return [...byTick.values()]
@@ -565,7 +613,7 @@ export function serializeWorldSnapshotPublic(worldState, regionalGraph, memberSe
   // Pantheon + war network are computed up front when EITHER they or the dashboard
   // (which derives the realm-arc summary from them) is enabled — never serialized
   // unless their own section asks for them.
-  const pantheon = publicPantheon(ws);
+  const pantheon = publicPantheon(ws, memberSettlements);
   const war = publicWarNetwork(ws, graph, nameById);
 
   // Each SECTION VALUE is run through the final defense-in-depth scrub before it is

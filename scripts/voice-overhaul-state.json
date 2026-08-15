@@ -64,5 +64,22 @@
     "stashes": 2,
     "commitCount": 510,
     "verdict": "IN_PROGRESS"
+  },
+  {
+    "ts": "2026-08-01T12:31:18.869Z",
+    "proseEmDashes": 76,
+    "glyphEmDashes": 8,
+    "stringEmDashes": 84,
+    "stringExclamations": 28,
+    "filesWithProse": 23,
+    "idleMin": 35,
+    "head": "ec9ce726",
+    "headSubject": "Ledger: batch 5 landed — the H and J programs complete",
+    "headWhen": "2026-08-01T08:24:59-04:00",
+    "dirty": 1,
+    "staged": 0,
+    "stashes": 1,
+    "commitCount": 2515,
+    "verdict": "IN_PROGRESS"
   }
 ]

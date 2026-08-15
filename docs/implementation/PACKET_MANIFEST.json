@@ -1,0 +1,2759 @@
+{
+  "schemaVersion": 1,
+  "indexPath": "docs/implementation/INDEX.md",
+  "packets": [
+    {
+      "id": "GTR-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/GTR-1.md",
+      "verifiedBase": "357e7778e6318895c2ecb06dd5c7caed4dfe8863",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/check-test-ratchet.mjs" },
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "TEST", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "TEST", "path": "tests/build/ciCheckParity.test.js" },
+        { "action": "MODIFY", "path": "scripts/.test-ratchet-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "export async function run" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "rowsOf" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "uncollectedOf" },
+        { "path": "scripts/check-test-ratchet.mjs", "symbol": "NON_RUN_STATUSES" },
+        { "path": "package.json", "symbol": "test:ratchet" },
+        { "path": "package.json", "symbol": "verify:dist" },
+        { "path": "tests/lint/testRatchet.test.js", "symbol": "per-test suite ratchet" },
+        { "path": "tests/build/ciCheckParity.test.js", "symbol": "npm run check ↔ parallel ci.yml gate parity" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "source mode excludes tests/build while raw npm test stays unfiltered and every frozen failure remains source-owned" },
+        { "id": "A2", "case": "strict dist mode discovers the on-disk build-test set and accepts only an exactly equal nonempty all-passed report" },
+        { "id": "A3", "case": "missing extra out-of-scope failed uncollected collapsed skipped pending and todo dist fixtures each fail for their named cause" },
+        { "id": "A4", "case": "verify-dist refuses update or bootstrap combinations and owns exact VERIFY_DIST plus build-test argv without nested mutex" },
+        { "id": "A5", "case": "local and CI topology keep source ratchet before build and strict dist after build with aggregate step parity exact" },
+        { "id": "A6", "case": "source results and skip count are identical with dist absent or present and post-build reports every discovered build test passed" },
+        { "id": "A7", "case": "remove-only genesis binds the code-half SHA preserves or shrinks attributed entries and derives skip ceiling at most one" },
+        { "id": "A8", "case": "exact four-path code and one-path genesis commits pass a clean-checkout 17-step gate before one old-value CAS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/lint/testRatchet.test.js", "tests/build/ciCheckParity.test.js"],
+        ["npx", "eslint", "scripts/check-test-ratchet.mjs", "tests/lint/testRatchet.test.js", "tests/build/ciCheckParity.test.js"]
+      ]
+    },
+    {
+      "id": "H26",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/H26.md",
+      "verifiedBase": "b96fae4256daf2d295e294f47655468b2168d208",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/check-observed-shape-readers.mjs" },
+        { "action": "MODIFY", "path": "scripts/lib/observed-shape-baseline.mjs" },
+        { "action": "MODIFY", "path": "scripts/migrate-observed-shape-readers.mjs" },
+        { "action": "TEST", "path": "tests/lint/observedShapeBaseline.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeMigration.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeReaders.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeSentinel.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "scripts/.observed-shape-readers-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "EXPLAINED_WRITER_EXEMPTIONS" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "applyExplainedWriterFilter" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "assertExplainedWriterEvidence" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "baselineOf" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "compare" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "BASELINE_SCHEMA" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "assertBaselineRow" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "validateSchema6Baseline" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "LEAF_MIGRATION_PREDECESSOR" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "SURFACE_FILTERED_TARGET_SCHEMA" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "heuristicMigrationReport" },
+        { "path": "tests/lint/observedShapeReaders.walker.test.js", "symbol": "THE GROWTH LAW IS EXECUTED" },
+        { "path": "tests/lint/observedShapeSentinel.test.js", "symbol": "M8/M9: the explained-writer exemption is an exact declared set" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the four live declarations survive as exactly 44 findings and 31 tagged per-file rows, with numeric target 1998 reads, 1412 identities and 387 files" },
+        { "id": "A2", "case": "one planted same-identity reader exceeds a tagged ceiling and reds by file, identity, count and ceiling while the unchanged control stays green" },
+        { "id": "A3", "case": "an undeclared growth row stays red even with a raise reason and a missing orphan or forged explained-writer tag address is refused" },
+        { "id": "A4", "case": "reasoned maintenance accepts one actual declared growth and refuses missing, malformed or no-op reasons while ordinary maintenance stays shrink-only" },
+        { "id": "A5", "case": "schemas 4 through 7 keep numeric inventory while only schema 7 requires the exact sparse rowTags envelope and its address biconditional" },
+        { "id": "A6", "case": "the migration table permits only 6 to 7, the live report binds exactly package.json plus the three H26 scanner-script changes with the other seven detector entries and unscanned inputs unchanged, one separate reviewed transition decision, exactly 31 new inventory rows and zero other inventory motion" },
+        { "id": "A7", "case": "the clear-outright mutant removes the bank or hides the planted reader and flips its intended guard before exact restoration" },
+        { "id": "A8", "case": "the detached proof yields exact eight-path code and one-path genesis commits, whole census derivation and a green full gate before one old-value branch CAS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/check-observed-shape-readers.mjs",
+          "scripts/lib/observed-shape-baseline.mjs",
+          "scripts/migrate-observed-shape-readers.mjs",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"]
+      ]
+    },
+    {
+      "id": "AO-0",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-0.md",
+      "verifiedBase": "7f231662fea6c80aa66fd62de30083f9a816f255",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/check-observed-shape-readers.mjs" },
+        { "action": "MODIFY", "path": "scripts/lib/observed-shape-baseline.mjs" },
+        { "action": "MODIFY", "path": "scripts/lib/observed-shape-corpus.mjs" },
+        { "action": "MODIFY", "path": "scripts/migrate-observed-shape-readers.mjs" },
+        { "action": "TEST", "path": "tests/lint/observedShapeCorpus.graph.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeBaseline.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeMigration.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeReaders.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/observedShapeSentinel.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "scripts/.observed-shape-readers-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export function foldCorpus" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "export function baselineOf" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "export function compare" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "export function ratchetMessage" },
+        { "path": "scripts/check-observed-shape-readers.mjs", "symbol": "export function corpusPayloadOf" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "export const BASELINE_SCHEMA" },
+        { "path": "scripts/lib/observed-shape-baseline.mjs", "symbol": "export function validateSchema7Baseline" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "export const BANKED_EXPLAINED_WRITER_TARGET_SCHEMA" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "export const LEAF_MIGRATION_PREDECESSOR" },
+        { "path": "scripts/migrate-observed-shape-readers.mjs", "symbol": "export function heuristicMigrationReport" },
+        { "path": "src/domain/events/prepareCanonEvent.js", "symbol": "export function prepareAuthoritativeCanonEvent" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "export function simulateCampaignWorldPulse" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function createChronicleEntry" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function appendChronicleEntry" },
+        { "path": "tests/lint/observedShapeCorpus.graph.test.js", "symbol": "observed shape corpus: path-qualified container graph" },
+        { "path": "tests/lint/observedShapeBaseline.test.js", "symbol": "observed-shape schema-7 bank-by-rule envelope" },
+        { "path": "tests/lint/observedShapeReaders.walker.test.js", "symbol": "THE GROWTH LAW IS EXECUTED" },
+        { "path": "tests/lint/observedShapeSentinel.test.js", "symbol": "observed-shape anti-vacuity sentinel telemetry" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "scalar traversal preserves caller-root order, global root ordinals, code-unit field order, original indexes, typed paths, duplicates and deterministic replay" },
+        { "id": "A2", "case": "selected malformed values, cycles, depth, volatile descendants and invalid options fail while an empty scalar option preserves and omits the default scalar output" },
+        { "id": "A3", "case": "the five authoritative seams reproduce canon 1, Wizard News 240/1567/272/53, pulse history 12, regional log 109 unique, AI chronicle 1 and 26076 scalar rows" },
+        { "id": "A4", "case": "five SCW-1b messages plus the stale comment use governed-write language and item a records the exact twelve source-bearing shapes" },
+        { "id": "A5", "case": "schemas 4 through 7 remain readable and retired while schema 8 is live with numeric inventory and exact sparse explained-writer tags" },
+        { "id": "A6", "case": "strict 7 to 8 proves 1412 same and zero motion, exactly four changed detector inputs, seven unchanged inputs, unchanged scan source and unscanned configuration, and one reviewed transition" },
+        { "id": "A7", "case": "the exact ten-path code half has only the schema pin red, all 1413 decisions are accepted and noted, and the one-path genesis clears it" },
+        { "id": "A8", "case": "whole census derivation, six suites, lint, both typechecks, plain OSR and the bare 17-step full gate pass before one old-value CAS with no unrelated movement" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/observedShapeCorpus.graph.test.js",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/check-observed-shape-readers.mjs",
+          "scripts/lib/observed-shape-baseline.mjs",
+          "scripts/lib/observed-shape-corpus.mjs",
+          "scripts/migrate-observed-shape-readers.mjs",
+          "tests/lint/observedShapeCorpus.graph.test.js",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"]
+      ]
+    },
+    {
+      "id": "AO-2+3",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-2-3.md",
+      "verifiedBase": "481c7e0aaa46bad968d1d0ad4b984294d15c7bf6",
+      "changeManifest": [
+        { "action": "CREATE", "path": "scripts/lib/news-voice-contract.mjs" },
+        { "action": "CREATE", "path": "tests/lint/newsVoiceContract.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.news-voice-baseline.json" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/lib/premortem-triggers.mjs" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/worldPulseFeedCuration.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export function scalarObservationsOf" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export function newsEntryForOutcome" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/npcAgency.js", "symbol": "goal can advance through" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"classes\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "export const PREDICATES" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\"" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical pure reconstructions that select each positive signature delta's lowest current indexes and close at 272 introductions minus 32 cap removals equals 240 final rows and 53 homes, with seven exact debt rows totaling 48 distinct values and 53 occurrences" },
+        { "id": "A2", "case": "one ordered completion test identity owns both intermediate reds: at C1 live debt matches current and production aligns before only the final zero assertion fails, while at C2 comparison fails first on exactly seven vanished identities and C3 passes all three ordered steps" },
+        { "id": "A3", "case": "the cure changes only the exact seven address-gated applied summaries from can advance through to advances through while paired proposal rows, reasons, headlines, underlying outcome and proposal inputs, keys, order, ids and every non-summary feed field remain unchanged, and the changed summary is retained in persisted Wizard News" },
+        { "id": "A4", "case": "per-pulse positive multiset differencing over complete visible signatures including reasons and tags preserves the five duplicate occurrences without classifying or rewriting reasons" },
+        { "id": "A5", "case": "canonical sorted row arrays reject duplicates and new grown shrunk and vanished debt by identity and count, current outstanding is an exact subset of immutable retro rows, and the zero bank preserves the exact corpus and historical denominator" },
+        { "id": "A6", "case": "the exact seven owned addresses are indicative after cure, unowned or nonmatching applied summaries pass through, and blank or malformed owned values fail closed" },
+        { "id": "A7", "case": "HZ-CROSSHOME validates as in-chain MACHINERY with a derived nonempty pre-mortem population whose synthetic fires, plus one valid mutation rationale and one whole census rerecord" },
+        { "id": "A8", "case": "the exact seven-path contract commit then one-path cure then one-path zero-bank lineage passes focused checks and the bare full gate before one old-value CAS with no unrelated movement" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/domain/worldPulseNewsCuration.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/lib/news-voice-contract.mjs",
+          "scripts/lib/premortem-triggers.mjs",
+          "src/domain/worldPulse/worldPulseFeedCuration.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"]
+      ]
+    },
+    {
+      "id": "TC-3A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
+      "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyPlan.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyWards.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/cartographyContract.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/compileTownSceneManifest.js" },
+        { "action": "MODIFY", "path": "src/workers/townScene.worker.js" },
+        { "action": "MODIFY", "path": "src/lib/townScene/townSceneExport.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyWards.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_SCHEMA_VERSION" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "townCartographyActive" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townScene/compileTownSceneManifest.js", "symbol": "compileTownSceneManifestFromAuthorizedInput" },
+        { "path": "src/workers/townScene.worker.js", "symbol": "loadManifestCompiler" },
+        { "path": "src/lib/townScene/townSceneExport.js", "symbol": "downloadTownSceneArtifact" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "real lit compile with named streets and wards" },
+        { "id": "A2", "case": "schema v2 and name negatives" },
+        { "id": "A3", "case": "replay and order independence" },
+        { "id": "A4", "case": "one-law audience projection" },
+        { "id": "A5", "case": "naming-pool injection across the lazy boundary" },
+        { "id": "A6", "case": "dormancy regression" },
+        { "id": "A7", "case": "purity and draw ledger" },
+        { "id": "A8", "case": "bounded chunk-pair posture" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "TC-3B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
+      "verifiedBase": "5066c34bf6dd3a1982f92d22b0687ab4f204f17c",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyParcels.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyParcels.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" }
+      ],
+      "acceptanceCases": [
+        { "id": "B1", "case": "real lit compile emits parcels" },
+        { "id": "B2", "case": "replay, order independence, and placement selection" },
+        { "id": "B3", "case": "geometry and bounds over the map corpus" },
+        { "id": "B4", "case": "institution binding" },
+        { "id": "B5", "case": "byte budget and domain separation" },
+        { "id": "B6", "case": "dormancy and purity" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "SC-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/surveyor-chat/SC-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/components/surveyor/SurveyorTextIntentShell.jsx" },
+        { "action": "CREATE", "path": "src/components/surveyor/ProposalCard.jsx" },
+        { "action": "CREATE", "path": "src/styles/surveyorChat.css" },
+        { "action": "MODIFY", "path": "src/components/surveyor/SurveyorDoor.jsx" },
+        { "action": "MODIFY", "path": "src/components/surveyor/InterpretApplyPanel.jsx" },
+        { "action": "TEST", "path": "tests/components/surveyorDoor.test.jsx" },
+        { "action": "CREATE", "path": "tests/components/surveyorProposalCard.test.jsx" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/components/surveyor/SurveyorDoor.jsx", "symbol": "routeDoorPrompt" },
+        { "path": "src/components/surveyor/ProposalCard.jsx", "symbol": "ProposalCard" },
+        { "path": "src/hooks/useIsMobile.js", "symbol": "useIsMobile" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main analyst route" },
+        { "id": "A2", "case": "existing write route" },
+        { "id": "A3", "case": "empty and whitespace absence" },
+        { "id": "A4", "case": "keyboard and composer growth" },
+        { "id": "A5", "case": "mobile focus and entitlement privacy" },
+        { "id": "A6", "case": "controlled proposal decisions" },
+        { "id": "A7", "case": "protected consent integration" },
+        { "id": "A8", "case": "ownership prevention guards" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/surveyorDoor.test.jsx",
+          "tests/components/surveyorProposalCard.test.jsx",
+          "tests/components/surveyorInterpretApplyPanel.test.jsx",
+          "tests/domain/doorRouter.test.js",
+          "tests/build/surveyorPanelsLazy.test.js",
+          "tests/design/deepCraftKillList.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GR-3B-ORIENT",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B-ORIENT.md",
+      "verifiedBase": "820ed989df1747cfbeb8b0a5a9a07b253736151f",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyOrientation.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyTermRoles.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "TEST", "path": "tests/domain/treatyOrientationWr10g.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "per-term obligor and obligee through the real PASS 2" },
+        { "id": "A2", "case": "beneficiary-less terms delegate to the instrument orientation" },
+        { "id": "A3", "case": "symmetric beneficiaries resolve mutual with no transfer direction" },
+        { "id": "A4", "case": "transfer payer and payee follow the term axis" },
+        { "id": "A5", "case": "defaultedBy names the term obligor" },
+        { "id": "A6", "case": "swapped-proposer invariance of the resolved roles" },
+        { "id": "A7", "case": "closed obligation-kind vocabulary" },
+        { "id": "A8", "case": "round-trip stability of the per-term resolution" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatyOrientationWr10g.test.js",
+          "tests/domain/peaceTerms.test.js"]
+      ]
+    },
+    {
+      "id": "GR-3B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B.md",
+      "verifiedBase": "0f78d9c8402b177d0786b7da6e9ead533d7af42d",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactFormation.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "TEST", "path": "tests/domain/pactFormation.test.js" },
+        { "action": "TEST", "path": "tests/domain/pactAmendment.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTermsGrantTerms.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "PACT_DRAFT_LENS" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "draftPactSheet" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "advancePeacetimePacts" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "amendPactInstrument" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "orderTermsByAsk" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "each trigger drafts its rung-zero terms" },
+        { "id": "A2", "case": "the full boundary table selects exactly" },
+        { "id": "A3", "case": "absent, false, and truthy-non-true stay dormant" },
+        { "id": "A4", "case": "malformed score01 clamps and drafts rung zero" },
+        { "id": "A5", "case": "the eight-row composable-pair closed table" },
+        { "id": "A6", "case": "beneficiary expansion after selection sets the direction" },
+        { "id": "A7", "case": "orderTermsByAsk consumed over the multi-term rungs" },
+        { "id": "A8", "case": "the nine PRODUCER_OWED rows discharge; reparations stays" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/pactFormation.test.js",
+          "tests/domain/pactAmendment.test.js",
+          "tests/domain/peaceTermsGrantTerms.test.js"]
+      ]
+    },
+    {
+      "id": "IN-0C",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-0C.md",
+      "verifiedBase": "e6d963430046f07b2ebac4dd06ce4eddd386343c",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/peaceTermsDisclosure.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryInfo.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_GRAMMAR.md" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_INFORMATION.md" },
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyLifecycleVoice.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "TEST", "path": "tests/domain/informationStatecraftPins.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" },
+        { "action": "TEST", "path": "tests/domain/allyIntelSharing.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/property/informationStatecraftDormancyGolden.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "ALLY_INTEL_TUNING" },
+        { "path": "src/domain/worldPulse/treatyLifecycleVoice.js", "symbol": "treatyLapsedBeats" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "grammarKindRow" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "next-tick derived credit through the real pulse" },
+        { "id": "A2", "case": "exactly-once under replay" },
+        { "id": "A3", "case": "fidelity ladder honored/strained/defaulted/expired" },
+        { "id": "A4", "case": "fails closed on malformed compliance" },
+        { "id": "A5", "case": "predicate counterforce and per-door totality" },
+        { "id": "A6", "case": "dormancy byte-identical both oracles" },
+        { "id": "A7", "case": "real PASS 1 writer to reader integration" },
+        { "id": "A8", "case": "explicit provenTrue wins over the derived default" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/allyIntelSharing.test.js",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/property/informationStatecraftDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "IA-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "MODIFY", "path": ".github/workflows/ci.yml" },
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/gate-mutex.sh" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "CREATE", "path": "scripts/implementation-packets.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "MODIFY", "path": "AGENTS.md" },
+        { "action": "MODIFY", "path": "CONTRIBUTING.md" },
+        { "action": "MODIFY", "path": "ARCHITECTURE.md" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/pulseStageResult.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseStageManifest.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/ledgerOwnershipManifest.js" },
+        { "action": "CREATE", "path": "tests/scripts/gateMutex.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/domain/pulseStageContracts.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciCheckParity.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciGateHardening.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/hazardRegistryFailClosed.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "DOC", "path": "docs/implementation/packets/town-cartography/TC-3.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/surveyor-chat/SC-1.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/GR-3B.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/IN-0C.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/infrastructure/IA-1.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "package.json", "symbol": "\"check\"" },
+        { "path": "scripts/gate-mutex.sh", "symbol": "holders()" },
+        { "path": ".github/workflows/ci.yml", "symbol": "jobs:" },
+        { "path": "src/domain/worldPulse/pulseStageManifest.js", "symbol": "PULSE_STAGE_TOPOLOGY" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "held lock excludes a second caller and preserves exit status" },
+        { "id": "A2", "case": "stale lock recovery never removes a live foreign lock" },
+        { "id": "A3", "case": "packet validation accepts canon and rejects bounded drift fixtures" },
+        { "id": "A4", "case": "READY-only deterministic hash-bearing coding capsules" },
+        { "id": "A5", "case": "packet quick and diagnostic plans remain non-vacuous" },
+        { "id": "A6", "case": "CI runtime and parallel gate parity" },
+        { "id": "A7", "case": "pulse result identity and explicit substage order metadata" },
+        { "id": "A8", "case": "resolvable and honest ledger ownership metadata" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/gateMutex.test.js",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/domain/pulseStageContracts.test.js",
+          "tests/build/ciCheckParity.test.js",
+          "tests/build/ciGateHardening.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "IA-2",
+      "status": "SUPERSEDED",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-2.md",
+      "verifiedBase": "f1895e6004eb512a5c7b4c9b4caaf79604bccea6",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/implementation-packets.mjs" },
+        { "action": "MODIFY", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-session.mjs" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationSession.test.js" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "CREATE", "path": "docs/implementation/packets/infrastructure/IA-2.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/implementation-packets.mjs", "symbol": "buildCodingCapsule" },
+        { "path": "scripts/implementation-gate.mjs", "symbol": "runPacketPlan" },
+        { "path": "scripts/ops/releaseEvidenceCore.mjs", "symbol": "writeJsonReceiptAtomically" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "deterministic self-contained packet-text dispatch bundle" },
+        { "id": "A2", "case": "READY branch ancestry target-cleanliness and CREATE-absence preflight" },
+        { "id": "A3", "case": "terminal historical reuse without nonterminal path collisions" },
+        { "id": "A4", "case": "worktree-local seal preserves foreign dirt and rejects scope drift" },
+        { "id": "A5", "case": "per-step atomic receipts preserve exact child results and state" },
+        { "id": "A6", "case": "during-step mutation invalidates evidence and blocks later commands" },
+        { "id": "A7", "case": "exact-state resume reuses valid evidence and invalidates stale evidence" },
+        { "id": "A8", "case": "heartbeats locks signals and abandoned runs never manufacture success" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/scripts/implementationSession.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TC-4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-4.md",
+      "verifiedBase": "7699e367d9fc2fb87bfd5f8b72142969ec52c36e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyMultiplicity.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyBuildings.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyBuildings.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "compileTownParcelLayers" },
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "bindCanonicalInstitutionsToParcels" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townMap/anchors.js", "symbol": "slugify" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "validateTownCartography" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "real lit compile emits a validating buildings layer" },
+        { "id": "C2", "case": "multiplicity resolution, monotonicity, and append-stability" },
+        { "id": "C3", "case": "footprint containment geometry over the map corpus" },
+        { "id": "C4", "case": "population-responsive dwelling fill without parallel identity" },
+        { "id": "C5", "case": "dress derivations and the first-match condition chain" },
+        { "id": "C6", "case": "determinism, purity, and the digest-domain label scans" },
+        { "id": "C7", "case": "dormancy regression with the golden untouched" },
+        { "id": "C8", "case": "bounded chunk-pair posture with zero new closure edges" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5B.md",
+      "verifiedBase": "2d420dfafd9e8f92db5deca124cc2353c0073588",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionagePresence.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageMath.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/factionCompetition.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionagePresence.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageAbsenceDormancy.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCHITECTURE.md" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/settlementPolitics.js", "symbol": "rulingBlocOf" },
+        { "path": "src/domain/worldPulse/factionCompetition.js", "symbol": "topFactionEntries" },
+        { "path": "src/domain/worldPulse/espionage/espionageMath.js", "symbol": "ESPIONAGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/roads/state.js", "symbol": "WHEREABOUTS_STATES" },
+        { "path": "src/domain/worldPulse/npcAgency.js", "symbol": "npcId" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main reachable behavior at BOTH consumption sites" },
+        { "id": "A2", "case": "four dormancy fences including roads-lit espionage-dark" },
+        { "id": "A3", "case": "hostage counterforce anchored against a live positive control" },
+        { "id": "A4", "case": "sparse and malformed-but-supported inputs resolve to share 1" },
+        { "id": "A5", "case": "the declared one-tick lag, uniform across both consumers" },
+        { "id": "A6", "case": "determinism and member-order independence" },
+        { "id": "A7", "case": "the key mirror joins both derivations, failing to share 1" },
+        { "id": "A8", "case": "the disclosed shift recorded as a dark/lit golden pair" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionagePresence.test.js",
+          "tests/property/espionageAbsenceDormancy.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5C",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5C.md",
+      "verifiedBase": "868aca1a8c602c0d50c3b35180156e17c6941a44",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageCareer.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderChallenge.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageGauntlet.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageCareer.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageCareerDormancy.test.js" },
+        { "action": "TEST", "path": "tests/domain/espionageGauntlet.test.js" },
+        { "action": "TEST", "path": "tests/domain/espionageProducts.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCHITECTURE.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "defenseScore" },
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "openWindows" },
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "CHALLENGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageMath.js", "symbol": "ESPIONAGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/roads/state.js", "symbol": "WHEREABOUTS_STATES" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the career register resolves and reaches defenseScore" },
+        { "id": "A2", "case": "four dormancy fences including ladder-dark and roads-dark" },
+        { "id": "A3", "case": "hostage exclusion anchored against a live positive control" },
+        { "id": "A4", "case": "sparse and malformed inputs resolve to no discount" },
+        { "id": "A5", "case": "the declared one-tick whereabouts lag, sinceTick holding a WEEK" },
+        { "id": "A6", "case": "the carrier-conditional promotion term flips, with a control" },
+        { "id": "A7", "case": "the disclosed shift recorded as a dark/lit golden pair" },
+        { "id": "A8", "case": "the repaired ladder-writer guard reds against a planted real write" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageCareer.test.js",
+          "tests/property/espionageCareerDormancy.test.js",
+          "tests/domain/espionageGauntlet.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5D",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5D.md",
+      "verifiedBase": "857e3a1ac6e5580bb1016fb644dab00f77038a34",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageProductStage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "REGISTER", "path": "src/lib/spatialUsage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageCareerCredit.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageCareerCreditDormancy.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "advanceLitLadder" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "applyGoalLifecycle" },
+        { "path": "src/domain/worldPulse/espionage/espionageProductStage.js", "symbol": "amendCovert" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a graded mission deposits and the ladder consumes it once" },
+        { "id": "A2", "case": "four dormancy fences including ladder-dark writing nothing" },
+        { "id": "A3", "case": "the one-tick window closes; a stale deposit is pruned unread" },
+        { "id": "A4", "case": "the grade map: exceeded 2x, met 1x, partial and empty zero, no debit" },
+        { "id": "A5", "case": "an id-less operative resolves to no credit without throwing" },
+        { "id": "A6", "case": "the identity bridge joins ladder nid to errand npcId" },
+        { "id": "A7", "case": "the spatial-ledger classification pin, two mutants" },
+        { "id": "A8", "case": "determinism and the hoisted-Map hot-path shape" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageCareerCredit.test.js",
+          "tests/property/espionageCareerCreditDormancy.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/lint/spatialLedgerCoverage.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "TC-5A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-5A.md",
+      "verifiedBase": "58436804982b41944478db6c728e579ac9853122",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyPaint.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyPaintRoles.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyPaint.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_TOWN_CARTOGRAPHY.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "validateTownCartography" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyPlan.js", "symbol": "planPolygon" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "a lit block compiles to a complete draw list" },
+        { "id": "C2", "case": "palette ROLES only, no colour literal survives the validator" },
+        { "id": "C3", "case": "every vocabulary map derives its key set exact-set-both-ways" },
+        { "id": "C4", "case": "an unknown ward kind THROWS rather than falling to default" },
+        { "id": "C5", "case": "the draw-op ceiling is an identity over the block's own counts" },
+        { "id": "C6", "case": "determinism and order independence" },
+        { "id": "C7", "case": "zero new transitive edges into the bounded compiler closure" },
+        { "id": "C8", "case": "dark path byte-identical; audience projection inherited, never re-filtered" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyPaint.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/build/townScene3dLazy.test.js"]
+      ]
+    },
+    {
+      "id": "ES-6A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-6A.md",
+      "verifiedBase": "58436804982b41944478db6c728e579ac9853122",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageLeak.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageProductStage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageLeak.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageLeakDormancy.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/espionage/espionageProductStage.js", "symbol": "amendCovert" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "reconcileBelief" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a compromised operative leaks to the enemy court" },
+        { "id": "A2", "case": "four dormancy fences including a dark corruption web" },
+        { "id": "A3", "case": "the two-party existence leak fires where observer equals subject" },
+        { "id": "A4", "case": "FIDELITY_W boundary proven BOTH sides: clear look adopts, partial does not" },
+        { "id": "A5", "case": "the same-tick pulse order pinned at source" },
+        { "id": "A6", "case": "silent success as a DIFFERENTIAL: the subject's outcome is byte-identical" },
+        { "id": "A7", "case": "an uncompromised operative leaks nothing, with a live control" },
+        { "id": "A8", "case": "determinism and first-ever belief entry creation" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageLeak.test.js",
+          "tests/property/espionageLeakDormancy.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "TC-5B-I",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-5B-I.md",
+      "verifiedBase": "e1e9fd6a62b851dcce92a2fb4f84d9d76d1b238d",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/lib/townScene/townCartographyBlock.js" },
+        { "action": "CREATE", "path": "src/components/townMap/useTownCartographyBlock.js" },
+        { "action": "CREATE", "path": "tests/lib/townCartographyBlock.test.js" },
+        { "action": "CREATE", "path": "tests/hooks/useTownCartographyBlock.test.jsx" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/compileTownSceneManifest.js", "symbol": "compileTownSceneManifest" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "townCartographyActive" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_MANIFEST_KEY" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_BLOCK_KEYS" },
+        { "path": "src/domain/townScene/sceneProjection.js", "symbol": "normalizeSceneAudience" },
+        { "path": "src/domain/townScene/manifestContract.js", "symbol": "TOWN_SCENE_PLAN_EXTENT" },
+        { "path": "src/domain/townCartography/cartographyPaint.js", "symbol": "buildCartographyDrawList" },
+        { "path": "src/lib/townScene/townSceneExport.js", "symbol": "downloadTownSceneArtifact" },
+        { "path": "src/data/namingData.js", "symbol": "NAMING_DATA" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "a lit settlement yields a ready block with its planExtent; three dark shapes yield unavailable" },
+        { "id": "C2", "case": "dark settles on idle and the transport module is never imported" },
+        { "id": "C3", "case": "the producer-consumer proof: the real block satisfies TC-5a's length identity" },
+        { "id": "C4", "case": "failure is owned once, never rethrown, and no error text reaches a returned value" },
+        { "id": "C5", "case": "the CR-TC3A-1 naming-pool injection is real, with a live throwing control" },
+        { "id": "C6", "case": "lifecycle idempotence, generation-guarded supersession, and unmount safety" },
+        { "id": "C7", "case": "the prevention guard: the compiler graph stays out of the hook's static closure" },
+        { "id": "C8", "case": "the seam declares no audience default and widens no projection" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lib/townCartographyBlock.test.js",
+          "tests/hooks/useTownCartographyBlock.test.jsx",
+          "tests/build/townScene3dLazy.test.js",
+          "tests/build/mapTabShellLazy.test.js"]
+      ]
+    },
+    {
+      "id": "TC-5B-II",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-5B-II.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "TEST", "path": "tests/build/townScene3dLazy.test.js" },
+        { "action": "CREATE", "path": "src/components/townMap/subtabs/cartographyColours.js" },
+        { "action": "CREATE", "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx" },
+        { "action": "MODIFY", "path": "src/lib/mapSubTabs.js" },
+        { "action": "MODIFY", "path": "src/components/townMap/MapTabShell.jsx" },
+        { "action": "REGISTER", "path": "src/design/boundBook.js" },
+        { "action": "CREATE", "path": "tests/ui/mapCartographySubTab.test.jsx" },
+        { "action": "TEST", "path": "tests/lib/mapSubTabs.test.js" },
+        { "action": "TEST", "path": "tests/ui/mapTabShell.test.jsx" },
+        { "action": "TEST", "path": "tests/build/mapTabShellLazy.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographyPaint.js", "symbol": "buildCartographyDrawList" },
+        { "path": "src/domain/townCartography/cartographyPaintRoles.js", "symbol": "CARTOGRAPHY_PAINT_ROLES" },
+        { "path": "src/lib/mapSubTabs.js", "symbol": "MAP_SUB_TAB_IDS" },
+        { "path": "src/lib/mapSubTabs.js", "symbol": "resolveMapSubTabs" },
+        { "path": "src/lib/lastMapView.js", "symbol": "TOWN_MAP_VIEW_IDS" },
+        { "path": "src/domain/townScene/manifestContract.js", "symbol": "TOWN_SCENE_PLAN_EXTENT" },
+        { "path": "src/design/boundBook.js", "symbol": "ARTWORK_SURFACE_MANIFEST" },
+        { "path": "src/design/tokens.js", "symbol": "semantic" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "lit with a block available the sub-tab renders one svg from the resolved planExtent" },
+        { "id": "C2", "case": "dark or block-unavailable means the tab is ABSENT, never present-and-disabled" },
+        { "id": "C3", "case": "the role binding is derived and total over all ten roles, with a throwing control" },
+        { "id": "C4", "case": "no colour smuggled: no raw literal and no local hex const, anchored" },
+        { "id": "C5", "case": "the A-4 degraded state, and an empty draw list is a different case" },
+        { "id": "C6", "case": "determinism of the rendered surface; the component never re-sorts" },
+        { "id": "C7", "case": "the seat guard: the persisted vocabulary is untouched and records nothing" },
+        { "id": "C8", "case": "the leaf rides its own lazy chunk and the shell never names it statically" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/ui/mapCartographySubTab.test.jsx",
+          "tests/lib/mapSubTabs.test.js",
+          "tests/ui/mapTabShell.test.jsx",
+          "tests/build/mapTabShellLazy.test.js"]
+      ]
+    },
+    {
+      "id": "GR-4A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4A.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyBreachTypes.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccession.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyDisposition.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "CREATE", "path": "tests/domain/successionQuestion.test.js" },
+        { "action": "TEST", "path": "tests/domain/pactAmendment.test.js" },
+        { "action": "TEST", "path": "tests/property/oathHolderDormancyFence.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "swornPartiesOf" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "appendNpcLadderSeatTransition" },
+        { "path": "src/domain/worldPulse/npcLadderState.js", "symbol": "normalizeSeatTransitions" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "TREATY_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiableTreatyPairs" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/treatyDisposition.js", "symbol": "treatyDispositionDeltas" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "PACT_ENDINGS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "the refactor is a no-op: defaultAllLiveTerms is byte-identical to today's repudiateTreaty" },
+        { "id": "C2", "case": "the main reachable behavior: a coup-born seat disavows past the band" },
+        { "id": "C3", "case": "the silence-honors negative: below the band the treaty ledger is byte-identical" },
+        { "id": "C4", "case": "absent and explicit-false dormancy with the swornPartiesOf counter at zero" },
+        { "id": "C5", "case": "the tribute-only disavowal proves the two gates separate" },
+        { "id": "C6", "case": "writer-to-reader integration and the inherited dossier round trip" },
+        { "id": "C7", "case": "idempotence and the succession shell's lifecycle round trip" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/pactAmendment.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/treatyOrientationWr10g.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/domain/pulseStageContracts.test.js"]
+      ]
+    },
+    {
+      "id": "SCW-0",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/site-coherence/SCW-0.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "CREATE", "path": "tests/lint/siteCoherenceRatchet.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.site-coherence-baseline.json" },
+        { "action": "CREATE", "path": "tests/lint/exportTokenCoverage.test.js" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "generateSite" },
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "WATER_ECONOMY_RE" },
+        { "path": "src/domain/townMap/siteGenesis.js", "symbol": "DRY_BIOME_RE" },
+        { "path": "src/domain/townMap/asymmetrySources.js", "symbol": "EXPORT_RULES" },
+        { "path": "src/domain/canonicalAccessors.js", "symbol": "canonExports" },
+        { "path": "src/generators/generateSettlementPipeline.js", "symbol": "generateSettlementPipeline" },
+        { "path": "src/data/cultureProfiles.js", "symbol": "CULTURE_PROFILE_KEYS" },
+        { "path": "src/data/constants.js", "symbol": "TIER_ORDER" },
+        { "path": "src/generators/steps/resolveConfig.js", "symbol": "TERRAIN_WEIGHTS" },
+        { "path": "scripts/hazard-registry.json", "symbol": "HZ-READERNOWRITER" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "the 462-corpus classifies with zero errors and equals the frozen row set both ways" },
+        { "id": "C2", "case": "the mutant: deleting the coal alternative moves a row and reds the ratchet only" },
+        { "id": "C3", "case": "an exportless settlement contributes only biome-sentinel rows, anchored" },
+        { "id": "C4", "case": "sparse and malformed exports classify without throwing; auto is excluded" },
+        { "id": "C5", "case": "determinism twice in one run, and the print-only regenerator exits non-zero" },
+        { "id": "C6", "case": "the only-shrinks contract: new, grown, shrunk and vanished keys each red" },
+        { "id": "C7", "case": "the derived denominator covers all four predicate sites, with KNOWN_INERT membership-checked" },
+        { "id": "C8", "case": "the hazard registry tells the truth and no floor moves" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/lint/siteCoherenceRatchet.test.js",
+          "tests/lint/exportTokenCoverage.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npm", "run", "validate:hazard-registry"]
+      ]
+    },
+    {
+      "id": "ES-DA",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-DA.md",
+      "verifiedBase": "33487c77b0d9290db157f08330840558e17902bf",
+      "changeManifest": [
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/envoyErrand.js" },
+        { "action": "MODIFY", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "TEST", "path": "tests/domain/espionageDoctrineStage.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageRider.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/envoyDiplomacy.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/property/espionageRiderDormancyFence.test.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageRider.test.js" },
+        { "action": "TEST", "path": "tests/property/espionageProductsDormancyFence.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/envoyDiplomacy.js", "symbol": "dispatchAcceptedPeaceEnvoy" },
+        { "path": "src/domain/worldPulse/envoyErrand.js", "symbol": "mintEnvoyErrand" },
+        { "path": "src/domain/worldPulse/envoyErrand.js", "symbol": "advanceEnvoyErrands" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "mintErrandSpine" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "covertMissionRefusal" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "normalizeCovertMission" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "errandSpineBlock" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/worldPulse/espionage/espionageDoctrineStage.js", "symbol": "espionageDoctrineFor" },
+        { "path": "src/domain/worldPulse/espionage/espionageDoctrineStage.js", "symbol": "dispatchDemandFor" },
+        { "path": "src/domain/worldPulse/espionage/espionageGauntlet.js", "symbol": "covertDwellRead" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "COVERT_KEYS" },
+        { "path": "src/domain/region/contestMath.js", "symbol": "hash01" },
+        { "path": "src/domain/certification/couplingRegistryEspionage.js", "symbol": "ES_ESPIONAGE_COUPLINGS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "a drawing court's accepted peace offer mints a lawful one-stop covert sub-record" },
+        { "id": "C2", "case": "the mandatory dark-path byte-identity receipt across four non-true flag spellings" },
+        { "id": "C3", "case": "the declined draw and the unreadable doctrine each yield their own reason" },
+        { "id": "C4", "case": "an unresolvable court and the invalid lighting order stay dark safely" },
+        { "id": "C5", "case": "duplicate_episode precedes the rider, and the keyed draw is stable" },
+        { "id": "C6", "case": "lifecycle round trip: persist, reload, corrupt-import heal-to-absent, undo" },
+        { "id": "C7", "case": "the traffic-flows proof: covertDwellRead dwells and products accrue a partial" },
+        { "id": "C8", "case": "the one-reader law and the minter census both stay exactly as they were" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageRider.test.js",
+          "tests/property/espionageRiderDormancyFence.test.js",
+          "tests/domain/envoyErrand.test.js",
+          "tests/domain/envoyErrandSpineLifecycle.test.js",
+          "tests/domain/espionageMission.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/errandConsumerRegistry.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/property/espionageProductsDormancyFence.test.js"]
+      ]
+    },
+    {
+      "id": "GR-4B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B.md",
+      "verifiedBase": "32f4e520e71774a233a0f8627cffa90a31674357",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionVoice.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/successionQuestion.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/impactKindWalkers.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "answerSuccessionQuestions" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "defaultAllLiveTerms" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_DISAVOWAL_RECEIPT" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "OPEN_REPUDIATION_RECEIPT" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "successionQuestionsForTick" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "isSuccessionDisavowable" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "GRAMMAR_KIND_REGISTRY" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "grammarReceipt" },
+        { "path": "src/domain/worldPulse/grammarReceiptPools.js", "symbol": "GRAMMAR_RECEIPTS" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "swornPartiesOf" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "PACT_ENDINGS" },
+        { "path": "src/domain/realm/heraldRouting.js", "symbol": "EXACT_SECTION" },
+        { "path": "src/domain/display/chroniclersLetter.js", "symbol": "KIND_SECTION" },
+        { "path": "src/domain/display/chroniclersLetter.js", "symbol": "KIND_SECTION_DIVERGENCES" },
+        { "path": "src/domain/display/settlementRumors.js", "symbol": "WHAT_PHRASES" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "named historical regression: the widened return is a no-op on state and keeps the caller's own reference" },
+        { "id": "A2", "case": "main reachable behavior: the disavowal speaks once, addressed and reasoned" },
+        { "id": "A3", "case": "the silence-honors negative extended to the feed: an honored succession puts nothing in newsEntries" },
+        { "id": "A4", "case": "the news address law asserted part by part, because no walker asserts the recorded reason" },
+        { "id": "A5", "case": "the refused-write negative: two disavow questions on one treaty in one tick mint exactly one beat" },
+        { "id": "A6", "case": "absent and explicit-false dormancy with the succession read counters at zero and a lit mutant control" },
+        { "id": "A7", "case": "the open repudiation road plus idempotence and same-seed byte stability" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/property/treatyLifecycleVoiceDormancyFence.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/wizardNewsAuthoring.walker.test.js",
+          "tests/domain/impactKindWalkers.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/sizeBaseline.test.js"]
+      ]
+    },
+    {
+      "id": "IN-1A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-1A.md",
+      "verifiedBase": "ba219802c4f8c32c9e5cf13140e4b3911bd9728b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/secondOrderBelief.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/domain/secondOrderBelief.test.js" },
+        { "action": "CREATE", "path": "tests/property/secondOrderBeliefDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "TEST", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "outboundImpressionOf" },
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "OUTBOUND_CHANNELS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "HALF_LIFE_BANDS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "HALF_LIFE_WEEKS" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "halfLifeWeeksOf" },
+        { "path": "src/domain/worldPulse/bandedStock.js", "symbol": "decayTowardNeutral" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "beliefRecord" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "applyAllyIntelSharing" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_PENDING_RULE_KEYS" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/generosityKernel.js", "symbol": "depositTick" },
+        { "path": "src/domain/worldPulse/envoyErrandRecords.js", "symbol": "envoyErrandsOf" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "envoy_intercepted" },
+        { "path": "src/domain/worldPulse/negotiationPictures.js", "symbol": "NEGOTIATION_SUBJECT_BANDS" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: a lit world with one durable plant row yields a banded strengthShown, its seededTick as lastShownTick, a derived staleness band and a basis naming the channel" },
+        { "id": "C2", "case": "the empty-record negative with its seeded non-empty sibling: no outbound record answers MIRROR_UNKNOWN at the zero band, never a fabricated one" },
+        { "id": "C3", "case": "the reversal pin: on a real fixture each degradation leg independently drives confidence measurably down, and the inverted intercept direction does not" },
+        { "id": "C4", "case": "frozen closed shape: exact sorted Object.keys equality over the eight keys, frozen record and basis, every band a member of its declared ladder" },
+        { "id": "C5", "case": "the adapter contract plus totality: a live-tick transfer row is renamed into the leaf's spelling, a prior-tick one is absent because the ledger prunes, and malformed input answers MIRROR_UNKNOWN without throwing" },
+        { "id": "C6", "case": "determinism and lifecycle round trip: identical inputs are byte-identical, and a JSON save/load round trip yields an identical derived mirror" },
+        { "id": "C7", "case": "the K3 privacy boundary and guard-the-guard: no worldState in the derivation, the import allow-list equal to its reviewed set, exactly one beliefRecord call in self-observer order, and the observer-slot scan flagging beliefMap.js" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/secondOrderBelief.test.js",
+          "tests/property/secondOrderBeliefDormancyFence.test.js",
+          "tests/domain/outboundImpression.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/property/believedWorldAxesDormancyFence.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/subsystemCertificationTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/property/mechanismLitCoverage.test.js",
+          "tests/lint/sizeBaseline.test.js"]
+      ]
+    },
+    {
+      "id": "IN-1B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-1B.md",
+      "verifiedBase": "b17d32d2abc7a1a18e07f10f661421a0ce8d601b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/display/neighbourMirror.js" },
+        { "action": "MODIFY", "path": "src/components/new/tabs/RelationshipsTab.jsx" },
+        { "action": "MODIFY", "path": "src/components/OutputContainer.jsx" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "DOC", "path": "src/domain/worldPulse/secondOrderBelief.js" },
+        { "action": "DOC", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "CREATE", "path": "tests/domain/neighbourMirror.test.js" },
+        { "action": "CREATE", "path": "tests/ui/neighbourMirrorLine.test.js" },
+        { "action": "TEST", "path": "tests/property/secondOrderBeliefDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "secondOrderBeliefActive" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "mirrorInputsAt" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "secondOrderMirrorOf" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_BANDS" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_STALENESS_BANDS" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_UNKNOWN" },
+        { "path": "src/domain/worldPulse/secondOrderBelief.js", "symbol": "MIRROR_PERCEPTION_BANNED" },
+        { "path": "src/domain/worldPulse/outboundImpression.js", "symbol": "outboundImpressionOf" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "dormancy_rests_on_the_gate_and_on_the_absence_rule" },
+        { "path": "src/components/new/tabs/RelationshipsTab.jsx", "symbol": "export function RelationshipsTab" },
+        { "path": "src/components/new/tabs/RumorsTab.jsx", "symbol": "includeGroundTruth" },
+        { "path": "src/components/OutputContainer.jsx", "symbol": "viewerIsPremium" },
+        { "path": "src/components/OutputContainer.jsx", "symbol": "publicDossier" },
+        { "path": "src/domain/deterministicSort.js", "symbol": "compareCodepoint" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "treatyAgeLine" },
+        { "path": "tests/helpers/anchoredNegatives.js", "symbol": "expectAbsentWithAnchor" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: a lit campaign world with one durable disinfo row yields exactly one frozen row per shown counterpart, carrying the display name, the mirror's strengthShown band, a staleness band derived from the tick delta, and a record-voice sentence" },
+        { "id": "C2", "case": "the absence rule with its seeded sibling: a counterpart with zero outbound rows produces no row at all rather than an unknown row, asserted in the same call that produces a present row, and the dark flag state returns an empty array for both" },
+        { "id": "C3", "case": "sparse and malformed-but-supported plus the D-A adapter inheritance: a live-tick transfer row produces a row through the renamed reading, a prior-tick one produces none because the ledger prunes, and null or garbage world, id, counterpart list, tick and name lookup each answer an empty array without throwing" },
+        { "id": "C4", "case": "the driven dark golden: the tab rendered with the flag absent, false, and lit with no outbound record produces output byte-identical to the pre-edit baseline and to itself in all three states" },
+        { "id": "C5", "case": "the rendered-surface phrase scan with its presence pin and mutant control: the rendered text contains the heading and a band phrase above a length floor, that same text carries no banned perception phrase, and the identical scanner does flag a literal containing one" },
+        { "id": "C6", "case": "determinism and the privacy boundary: identical inputs are byte-identical with codepoint-stable order under a shuffled counterpart list, the DM-only fields are null without ground truth and populated with it, and a public dossier renders the whole block not at all" },
+        { "id": "C7", "case": "the narrowed-claim pin: the certification row names the replacement invariant and, on an anchored negative standing on that positive, no longer names the retired one, with the retirement re-measured against live source by finding the read-model importing the leaf and the tab importing the read-model" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/neighbourMirror.test.js",
+          "tests/ui/neighbourMirrorLine.test.js",
+          "tests/property/secondOrderBeliefDormancyFence.test.js",
+          "tests/domain/secondOrderBelief.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/domain/subsystemCertificationCorpus.test.js"],
+        ["npx", "vitest", "run",
+          "tests/ui/relationshipsTab.determinism.test.js",
+          "tests/ui/tabs.smoke.test.js",
+          "tests/ui/dossierTabGroups.walker.test.js",
+          "tests/data/dossierStateProseProjection.contract.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/premiumGateSingleSource.test.js",
+          "tests/lint/significanceMigration.census.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/subsystemCertificationTotality.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/property/mechanismLitCoverage.test.js"],
+        ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/components/OutputContainer.jsx"]
+      ]
+    },
+    {
+      "id": "GR-4C",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4C.md",
+      "verifiedBase": "0b98626fae7cda5cce55659865d58250f976ce7b",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyBreachCredibility.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreach.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryGrammar.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "CREATE", "path": "tests/domain/treatyBreachCredibility.test.js" },
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "TEST", "path": "tests/property/oathHolderDormancyFence.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceCredibility" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "infoStatecraftActive" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "CREDIBILITY_TUNING" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "credibilityScoreOf" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "repudiateTreaty" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "SUCCESSION_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "TREATY_REPUDIATION_TYPE" },
+        { "path": "src/domain/worldPulse/treatyBreachTypes.js", "symbol": "isRepudiationBreach" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "oathHolderActive" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "OATHBREAKER_PENALTY" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "main reachable behavior: both flags lit, a DM REPUDIATE_TREATY on a live NAP drives spatialLedgers.credibility[breaker].score to exactly -0.4 with holder people_held and lastUpdateTick at the breach tick, and the charge is present in the value repudiateTreaty itself returns, proving it is written at the act rather than by a later fold" },
+        { "id": "C2", "case": "boundary, the grading is carried rather than re-authored: on the succession road a coup-born disavowal charges strictly less than a lineal one and both strictly less than an open repudiation, on one fixture in one assertion chain, at exactly CHARGE_BASE times 0.35, 0.75 and 1" },
+        { "id": "C3", "case": "absent or disabled on two axes with the mandatory lit-mutant control: oathHolderEnabled absent and separately explicit false leaves no credibility key at all on either road with the new fence counter at zero, oathHolderEnabled lit with infoStatecraftEnabled dark gives the same result by the writer's own gate, and a both-lit run proves the counter can increment because the fence fixture lights neither belief flag today" },
+        { "id": "C4", "case": "duplicate and idempotent with order independence: re-running the same breach is refused by the eligibility predicates and writes nothing further, and two disavowals on two instruments in one tick both fold to a ledger identical under either application order" },
+        { "id": "C5", "case": "writer to reader integration, the design's headline claim as arithmetic: three successive open repudiations across ticks drive the consumer term to 0.140, 0.278 and saturation, so the oathbreaker penalty reaches its full value only at the third and a counterparty that would have signed at one refuses at three" },
+        { "id": "C6", "case": "counterforce, the mark is not a ratchet: the charge halves after the half-life, reads zero past the lookback and prunes below the epsilon so a reformed lineage is pactable again, and the belief economy is undistorted with credibilityWeight at or above 0.90 after three open repudiations" },
+        { "id": "C7", "case": "lifecycle round trip: a charged credibility entry survives a JSON round trip with its score, lastUpdateTick and holder, re-decays correctly against a later tick, and a world whose treaty shell was pruned at breachExpiresTick retains the charge so the stock outlives the instrument" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/domain/pactFormation.test.js"],
+        ["npx", "vitest", "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/domain/couplingReceiptSample.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/intelSelfPolicing.test.js",
+          "tests/domain/politicsCredibilityRead.test.js",
+          "tests/domain/realmVerbExecution.test.js",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/peaceTerms.test.js"],
+        ["npx", "vitest", "run",
+          "tests/property/informationStatecraftDormancyGolden.test.js",
+          "tests/property/npcCredibilityDormancyGolden.test.js",
+          "tests/property/intelTradeDormancyGolden.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/pulseStageContracts.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/domain/guidanceRegistry.walker.test.js"],
+        ["npx", "eslint", "--rule", "{\"max-lines\":[\"error\",{\"max\":1,\"skipBlankLines\":true,\"skipComments\":true}]}", "src/domain/worldPulse/treatyBreach.js", "src/domain/worldPulse/informationStatecraft.js"]
+      ]
+    },
+    {
+      "id": "MX-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/MX-1.md",
+      "verifiedBase": "41732a516c72364e9b01be8959d98df1fdd68fb9",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/implementation-packets.mjs" },
+        { "action": "MODIFY", "path": "scripts/implementation-session.mjs" },
+        { "action": "TEST", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "TEST", "path": "tests/scripts/implementationSession.test.js" },
+        { "action": "DOC", "path": "docs/implementation/PACKET_STANDARD.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/implementation-packets.mjs", "symbol": "validatePacketManifest" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "buildCodingCapsule" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "packetPathProblem" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "TERMINAL_PACKET_STATUSES" },
+        { "path": "scripts/implementation-packets.mjs", "symbol": "PACKET_MANIFEST_SCHEMA_VERSION" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "assertAncestorAndSubstrate" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "capsuleAuthority" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "manifestAuthority" },
+        { "path": "scripts/implementation-session.mjs", "symbol": "assertCapsuleMatchesManifest" },
+        { "path": "tests/scripts/implementationPackets.test.js", "symbol": "accepts the canonical fixture and exposes pure header/index/path helpers" },
+        { "path": "tests/scripts/implementationPackets.test.js", "symbol": "rejects a required symbol absent from an existing source file" },
+        { "path": "tests/scripts/implementationSession.test.js", "symbol": "accepts an unchanged descendant but rejects descendant substrate changes" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "## Change manifest" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main reachable behavior: a LANDED packet declaring a retiredSymbols row whose symbol still survives in its named file reds with symbol survives in for LANDED retirement, while the same row with the symbol absent returns ok and errors empty, and so does the same row whose file is entirely missing because a retirement may delete the whole file" },
+        { "id": "A2", "case": "absent behavior, the backward-compatibility proof: the canonical fixture with no retiredSymbols key at all still returns ok and errors empty at every status it is already exercised at, which is the row proving every existing manifest entry stays valid under an additive optional field" },
+        { "id": "A3", "case": "counterforce, the non-terminal arm inverts the assertion: at a non-terminal status a retiree already absent reds with already absent from before the status, a missing file reds with path does not exist, and a retiree still present is ok because a pre-landing packet is written against a symbol that must still be there" },
+        { "id": "A4", "case": "the SUPERSEDED control proving the arm cannot quietly widen: at SUPERSEDED the retirement is asserted in neither direction, with symbol present, symbol absent and file missing all returning ok, exactly as the landed CREATE arm's own control does and for the same recorded reason" },
+        { "id": "A5", "case": "malformed but supported, and duplicates: retiredSymbols as a non-array reds with must be an array when present, a non-object row reds, a glob or absolute path reds through packetPathProblem, a blank or non-string symbol reds, and the same path and symbol twice reds with duplicate retired symbol, each reported once and none of them throwing" },
+        { "id": "A6", "case": "the disjointness arm mechanizing the chair cure: one path and symbol named in both requiredSymbols and retiredSymbols reds with names as BOTH required and retired at every status, and that row is not then also status-asserted, which is the compile error fixed by hand at the prior landing" },
+        { "id": "A7", "case": "the mandatory mutant control proving the status-awareness is real: with the LANDED guard deleted from the new block the non-terminal arm's expected result flips, so the guard is shown to be load-bearing rather than an arm no test can distinguish from its own absence" },
+        { "id": "A8", "case": "writer to reader integration and lifecycle round trip through a real dispatch: the capsule carries retiredSymbols always present and empty when there are none, the recomputed capsule digest stays self-consistent, the capsule and manifest authority projections still compare equal, the retirement path appears in fileHashes, and a descendant that moved a retirement target is refused while an unchanged descendant is still admitted" }
+      ],
+      "checks": [
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npx", "vitest", "run",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationSession.test.js",
+          "tests/scripts/implementationGate.test.js"],
+        ["npx", "vitest", "run",
+          "tests/docs/enforcement-claims.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/testRatchet.test.js"],
+        ["npx", "eslint",
+          "scripts/implementation-packets.mjs",
+          "scripts/implementation-session.mjs",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationSession.test.js"]
+      ]
+    },
+    {
+      "id": "AO-4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-4.md",
+      "verifiedBase": "ba6a2913c3a01242d94a0f1eb6c2cc8cf858c423",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/lib/news-voice-contract.mjs" },
+        { "action": "CREATE", "path": "scripts/lib/news-headline-contract.mjs" },
+        { "action": "CREATE", "path": "tests/lint/newsHeadlineContract.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/.news-headline-contract-baseline.json" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/worldPulseFeedCuration.js" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "scripts/lib/news-voice-contract.mjs", "symbol": "export const NEWS_VOICE_PROTECTED_SUBSTRATE" },
+        { "path": "scripts/lib/news-voice-contract.mjs", "symbol": "export function reconstructWizardNewsIntroductions" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export function newsEntryForOutcome" },
+        { "path": "src/domain/worldPulse/pulseOutcomePartition.js", "symbol": "export function partitionPulseOutcomeLanes" },
+        { "path": "src/domain/worldPulse/pulseOutcomePartition.js", "symbol": "export function mechanicalPulseRecordFields" },
+        { "path": "src/domain/worldPulse/pulseHelpers.js", "symbol": "function isStateOnlyOutcome" },
+        { "path": "src/domain/worldPulse/pulseHelpers.js", "symbol": "function isPublicOutcome" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "selectedOutcomes: publicSelectedOutcomes.slice(0, 24)" },
+        { "path": "src/domain/worldPulse/factionCompetition.js", "symbol": "export const FACTION_VERB_PHRASES" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"id\": \"HZ-CROSSHOME\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "id: 'cross-home-voice-substrate-touched'" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\"" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical reconstructions closing at 12/272/32/240/53 while the product partition proves public state-only and suppression disjointness exact persisted caps 24 and 8 and exclusion of the overlapping consequence window" },
+        { "id": "A2", "case": "complete final address totality yields exactly 106 rows 400 distinct values 544 occurrences 14 prospective and 92 indicative with zero blank or mixed identities and canonical sha256 82ed15a85e457d8595dcb2798f53f699210e77758a7bfa06638722d10abab694" },
+        { "id": "A3", "case": "selected liveness is 151/80/95/66 mechanical is 77/24/73/23 and their occurrence-disjoint union is 228/83/168/69 while the final 26 rules are exactly 17 active and 9 inert every prospective matches once and no indicative matches" },
+        { "id": "A4", "case": "exact envelope and bidirectional comparators reject malformed duplicate empty new grown shrunk vanished class-changed mixed uncovered overlapping cap-breaching and third-lane inputs while accepting exact null impactKind at the two frozen sentinel homes and rejecting missing undefined blank other types delimiters and string null collisions" },
+        { "id": "A5", "case": "the zero-count identity set equals the nine exact written scoped inert reasons in both directions and no active rule or reasonless inert row enters quarantine" },
+        { "id": "A6", "case": "pre-cure has exactly one live raw faction challenge witness and zero overlap post-cure has zero gaps naked fallback equals the producer did twin and queued plus explicit-twin paths stay byte-identical" },
+        { "id": "A7", "case": "unrelated headlines all summaries and reasons outcome input and every non-headline news field stay byte-identical while HZ-CROSSHOME derived premortem mutation rationale and whole census reconcile" },
+        { "id": "A8", "case": "the exact eight-path implementation passes focused checks both typechecks observed-shape guard and bare full gate at one clean immutable implementation commit with no unrelated movement" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "vitest", "run",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/domain/worldPulseNewsCuration.test.js",
+          "tests/domain/worldPulseRecordModes.test.js",
+          "tests/domain/worldPulseChronicleCuration.test.js",
+          "tests/domain/reasonHeadlineRegister.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/lib/news-voice-contract.mjs",
+          "scripts/lib/news-headline-contract.mjs",
+          "src/domain/worldPulse/worldPulseFeedCuration.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"]
+      ]
+    },
+    {
+      "id": "AO-5",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-5.md",
+      "verifiedBase": "972066affb82b002f197de7ce40ba3441dcd3220",
+      "changeManifest": [
+        { "action": "CREATE", "path": "scripts/lib/prose-family-contract.mjs" },
+        { "action": "CREATE", "path": "tests/lint/.prose-family-contract-baseline.json" },
+        { "action": "CREATE", "path": "tests/lint/proseFamilyContract.walker.test.js" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "MODIFY", "path": "scripts/lib/premortem-triggers.mjs" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/newsHeadlineContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const OBSERVED_SCALAR_FIELDS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export const VOLATILE_SCALAR_KEYS" },
+        { "path": "scripts/lib/observed-shape-corpus.mjs", "symbol": "export async function buildObservedCorpus" },
+        { "path": "src/domain/events/prepareCanonEvent.js", "symbol": "export function prepareAuthoritativeCanonEvent" },
+        { "path": "src/domain/events/applyEvent.js", "symbol": "export function applyEvent" },
+        { "path": "src/domain/events/eventPipeline.js", "symbol": "export function runEventPipeline" },
+        { "path": "src/domain/events/registry.js", "symbol": "export const EVENT_REGISTRY" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function appendPulseHistory" },
+        { "path": "src/domain/worldPulse/provenanceKernel.js", "symbol": "export function appendPulseHistoryWithProvenance" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "selectedOutcomes: publicSelectedOutcomes.slice(0, 24)" },
+        { "path": "src/domain/worldPulse/advanceInterval.js", "symbol": "export function collapseIntervalHistory" },
+        { "path": "src/domain/worldPulse/warTermination.js", "symbol": "pulseHistory: [" },
+        { "path": "src/domain/region/graph.js", "symbol": "export function appendRegionalEvent" },
+        { "path": "src/domain/region/propagation.js", "symbol": "export function propagateRegionalEvent" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function createChronicleEntry" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function appendChronicleEntry" },
+        { "path": "scripts/lib/news-voice-contract.mjs", "symbol": "export const NEWS_VOICE_PROTECTED_SUBSTRATE" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"id\": \"HZ-CROSSHOME\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "id: 'cross-home-voice-substrate-touched'" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\"" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "one AO-0 scalar build feeds two byte-identical pure reconstructions while exact root ordinals 26076 scalar rows and scalar meta 1 240 1567 272 12 109 109 1 close with no Wizard News row entering AO-5 and no volatile field selected" },
+        { "id": "A2", "case": "exact typed selectors partition only timeline pulseHistory regionalLog and chronicle while exact null is accepted and retained as a distinct scalar value and malformed or extra segment keys unsafe selector-axis indexes duplicate exact addresses delimiter collisions blank strings non-null non-string values absent families and a fifth family fail before normalization while omitted nested scalar indexes are not treated as sparse producer arrays" },
+        { "id": "A3", "case": "the exact 63 rows close at 1308 distinct and 5885 occurrences canonical serialization is 8280 bytes with sha256 8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae and validation plus comparison reject every malformed or bidirectional movement class" },
+        { "id": "A4", "case": "timeline is the one deterministic authoritative CUT_TRADE_ROUTE player_action event with one nextEventLog row nonblank narrativeSummary and exact 4 8 12 counts while flat flavor rename destroy and table roads stay absent" },
+        { "id": "A5", "case": "pulse history is exactly records 0 through 11 and 50 1286 5665 with selected headlines 151 80 mechanical 77 24 and consequence 240 81 where consequence is pinned as path-local compatibility coverage and not a third AO-4 liveness lane" },
+        { "id": "A6", "case": "regional log reaches 12 pulse roots and 109 of 109 audit rows closes at 2 7 201 pins 92 of 6 changes kinds plus 109 of 1 source types and has exactly zero selected prose-field identities without inventing prose" },
+        { "id": "A7", "case": "Chronicle is exactly one pure create-and-append row and 7 7 7 with fixed mode reason thesis summary and trigger values while ID time and campaign chronicles stay absent" },
+        { "id": "A8", "case": "baseline fail-closed polarity unchanged HZ-CROSSHOME identity status and instances two-export premortem union both amended AO-4 A7 population and census compatibility assertions and synthetic mutation rationale exact census exact eight paths focused checks both typechecks observed-shape guard and bare full gate reconcile at one clean immutable commit" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "vitest", "run",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/observedShapeCorpus.graph.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/domain/prepareCanonEvent.test.js",
+          "tests/domain/worldPulseRecordModes.test.js",
+          "tests/domain/worldPulseChronicleCuration.test.js",
+          "tests/domain/regionalGraph.test.js",
+          "tests/domain/regionalPropagationDedupe.test.js",
+          "tests/domain/regionalEventLogBounds.test.js",
+          "tests/lib/chronicle.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "scripts/lib/prose-family-contract.mjs",
+          "scripts/lib/premortem-triggers.mjs",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"]
+      ]
+    },
+    {
+      "id": "AO-6",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/corpus-coverage/AO-6.md",
+      "verifiedBase": "ee6934e95d0c5bcea99ee68d5b1c1129e828f4ec",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "scripts/mutation-sweep.sh" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/lint/newsHeadlineContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/proseFamilyContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/mutation-sweep.sh", "symbol": "MUTATED_FILES=(" },
+        { "path": "scripts/mutation-sweep.sh", "symbol": "check_caught() {" },
+        { "path": "scripts/mutation-sweep.sh", "symbol": "── Mutation sweep results" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"uncoveredBaseline\": 198" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/newsVoiceContract.walker.test.js\"" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/newsHeadlineContract.walker.test.js\"" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "\"tests/lint/proseFamilyContract.walker.test.js\"" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseSweepLabels" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseSweepMutationTargets" },
+        { "path": "tests/lint/mutationCoverage.shared.mjs", "symbol": "export function parseGuardedMutatedFiles" },
+        { "path": "tests/docs/enforcement-claims.test.js", "symbol": "it('the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it'" },
+        { "path": "src/copy/en.js", "symbol": "save:        'Save'," },
+        { "path": "tests/copy/voiceMechanics.test.js", "symbol": "const REGISTRIES = { en," },
+        { "path": "tests/copy/voiceMechanics.test.js", "symbol": "it(`${name} registry is clean`" },
+        { "path": "src/store/aiChronicleAppend.js", "symbol": "get().updateSavedSettlement(saveId, { aiData: nextAiData });" },
+        { "path": "tests/store/savedSettlementPatchKeysWalker.test.js", "symbol": "it('(a) every censused call-site key is admitted by SAVED_SETTLEMENT_PATCH_KEYS'" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "export const APPLIED_HEADLINE_REWRITES" },
+        { "path": "src/domain/worldPulse/worldPulseFeedCuration.js", "symbol": "const APPLIED_SUMMARY_IMPACT_KINDS" },
+        { "path": "src/lib/chronicle.js", "symbol": "export function createChronicleEntry" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A3 freezes both raw lanes and all 26 exact rewrite counts" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A6 closes the sole live challenge gap with the exact producer twin" },
+        { "path": "tests/lint/newsHeadlineContract.walker.test.js", "symbol": "A7 leaves unrelated prose and every non-headline feed field byte-identical" },
+        { "path": "tests/lint/newsVoiceContract.walker.test.js", "symbol": "contract -> cure -> bank completion is aligned and debt-free" },
+        { "path": "tests/lint/proseFamilyContract.walker.test.js", "symbol": "A7 closes the pure Chronicle create-and-append road at 7 7 7" },
+        { "path": "tests/lint/proseFamilyContract.walker.test.js", "symbol": "A8 reconciles hazard premortem mutation and lighting governance" },
+        { "path": "scripts/hazard-registry.json", "symbol": "\"id\": \"HZ-CROSSHOME\"" },
+        { "path": "scripts/lib/premortem-triggers.mjs", "symbol": "id: 'cross-home-voice-substrate-touched'" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the clean pre-state closes at 541 invariants split 68 275 198 plus ten meta mutations 78 one-to-one labels 67 in-place or missing calls 53 unique guarded targets uncovered baseline 198 with unique new and repaired anchors and unique clean green token filters while stopped proof b02bc709 remains unlanded at true exit four 77 caught one clear four gaps and log sha256 d582b8a06a909f5b05c7321e690a5702a7140f87829ab906ed80709d2eb99d9a" },
+        { "id": "A2", "case": "check_caught remains backward compatible except for the exact three legacy filtered repairs seventh en.registry and censused with their exact full titles while optional exact-title attribution requires changed bytes mutated nonzero exactly one captured line that after left trim begins FAIL and ends with the literal full-title suffix and restored zero and treats a skipped wrong absent or ambiguous title as broken and the modal Perl program loses exactly its stray quote" },
+        { "id": "A3", "case": "headline setup uses raw analysis while existing A3 and A4 retain strict closure so deleting only the government-challenge rewrite row reaches and fails A6 itself with exactly one detailed FAIL line ending in its exact title then restores byte-identically and greens" },
+        { "id": "A4", "case": "removing only npc_bargain from the applied-summary set reds through the filtered voice walker with exactly one detailed FAIL line ending in the exact debt-free title then restores byte-identically and greens" },
+        { "id": "A5", "case": "deleting only the Chronicle summaryText return property reds through the filtered prose-family walker with exactly one detailed FAIL line ending in the exact A7 title then restores byte-identically and greens" },
+        { "id": "A6", "case": "swapping the first two summary-kind set members changes bytes but preserves semantics so both News walkers exit zero and emit exactly one whitespace-normalized Test Files 2 passed 2 line and one Tests 16 passed 16 line in each planted and restored capture and produce one clear with zero reds" },
+        { "id": "A7", "case": "exactly three AO rationales become mutation labels exactly one patch-key what changes only aiSlice to aiChronicleAppend and the post-state closes at 541 split 71 272 198 plus ten meta mutations 81 unique claims and labels 70 in-place calls 56 unique guarded targets 56 unique mutated-file rows and baseline 198 with governance unchanged" },
+        { "id": "A8", "case": "the exact four committed paths pass syntax focused checks both typechecks observed-shape validation the whole clean disposable-tree sweep at 81 caught one clear zero gaps and the bare full gate at one immutable commit with no residue or unrelated movement" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["bash", "-n", "scripts/mutation-sweep.sh"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "vitest", "run", "tests/docs/enforcement-claims.test.js", "-t", "seventh", "--no-file-parallelism", "--reporter=verbose"],
+        ["npx", "vitest", "run", "tests/copy/voiceMechanics.test.js", "-t", "en.registry", "--no-file-parallelism", "--reporter=verbose"],
+        ["npx", "vitest", "run", "tests/store/savedSettlementPatchKeysWalker.test.js", "-t", "censused", "--no-file-parallelism", "--reporter=verbose"],
+        ["npx", "vitest", "run",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/hazardRegistryFailClosed.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "eslint",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"]
+      ]
+    },
+    {
+      "id": "GR-4E",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4E.md",
+      "verifiedBase": "5a49d187f4445d33bc80d3bb2c2098bab23f92eb",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTermsCatalog.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyBreachCredibility.js" },
+        { "action": "TEST", "path": "tests/domain/informationStatecraftPins.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTermsWave3.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "export function fractureCredibilityDeltas" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "...fractureCredibilityDeltas(state, tick)," },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "function mintTreaty(args)" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "function mintTreatyFromCarriedSheet(args)" },
+        { "path": "src/domain/worldPulse/dispositionChannels.js", "symbol": "export function advanceTreatiesWithDisposition" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "const infowar = advanceInformationStatecraft({" },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "const treatyAdvance = advanceTreatiesWithDisposition({" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "CREDIBILITY_HIT: 0.3" },
+        { "path": "src/domain/worldPulse/treatyBreachCredibility.js", "symbol": "micro-act **GR-4e**" },
+        { "path": "tests/domain/informationStatecraftPins.test.js", "symbol": "fracture record and charges the deserter" },
+        { "path": "tests/domain/informationStatecraftPins.test.js", "symbol": "a charged fracture debits the deserter" },
+        { "path": "tests/domain/peaceTermsWave3.test.js", "symbol": "SEPARATE EXIT: a worn, weak-tied member peels" },
+        { "path": "tests/property/peaceCausalDormancyGolden.test.js", "symbol": "peace-causal movers — dormancy golden" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a fracture stamped at tick five yields its exact recorded delta only at tick six while the mint tick later ticks genesis negative missing and nonfinite stamps yield none" },
+        { "id": "A2", "case": "advanceInformationStatecraft at tick six consumes a tick-five fracture through its existing spread and writes a negative credibility stock stamped at tick six" },
+        { "id": "A3", "case": "the existing separate-exit fixture proves the unchanged treaty writer stamps tick five and its exact returned world feeds no delta at tick five the exact credibility-hit delta at tick six and no replay at tick seven while both writer functions and the earlier-reader later-writer stage order remain bound" },
+        { "id": "A4", "case": "dark information statecraft all four dormancy families and the GR-4c oath-breach path remain unchanged with no new fold stage flag tuning persisted key golden registry or census movement" },
+        { "id": "A5", "case": "exactly five paths move one existing title is renamed no title is added or deleted and informationStatecraft remains at 780 effective lines with every baseline ceiling hazard and premortem file unchanged" },
+        { "id": "A6", "case": "in a disposable proof tree the old same-tick predicate mutant reds the renamed predecessor case and removing only the fracture-deriver spread leaves the pure case green but reds the existing stage-level credibility-stock case then both restore byte-identically" },
+        { "id": "A7", "case": "the immutable five-path candidate passes the exact 67-test direct battery and the exact measured 100-test wider battery corrected from the stale seven-file 94-test prediction by adding the directly relevant six-test peace-causal dormancy golden plus eslint both typechecks observed-shape validation packet hazard and premortem validation and the bare full gate without residue" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "--no-file-parallelism"],
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js",
+          "tests/domain/treatyBreachCredibility.test.js",
+          "tests/property/informationStatecraftDormancyGolden.test.js",
+          "tests/property/npcCredibilityDormancyGolden.test.js",
+          "tests/property/intelTradeDormancyGolden.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/property/peaceCausalDormancyGolden.test.js",
+          "--no-file-parallelism"],
+        ["npx", "eslint",
+          "src/domain/worldPulse/informationStatecraft.js",
+          "src/domain/worldPulse/peaceTermsCatalog.js",
+          "src/domain/worldPulse/treatyBreachCredibility.js",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTermsWave3.test.js"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npm", "run", "check:tail"]
+      ]
+    },
+    {
+      "id": "GR-4D",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4D.md",
+      "verifiedBase": "7958cd33fa3d8a6f1301a4c177e4a98fdf9937a1",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionDecision.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionProposalApply.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/actorMajorApproval.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/applyWorldPulse.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionApproval.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "export function successionQuestionsForTick" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "export function isSuccessionDisavowable" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "export function answerSuccessionQuestions" },
+        { "path": "src/domain/worldPulse/treatyBreach.js", "symbol": "export function repudiateTreaty" },
+        { "path": "src/domain/worldPulse/treatySuccessionVoice.js", "symbol": "export function successionDisavowalBeat" },
+        { "path": "src/domain/worldPulse/actorMajorApproval.js", "symbol": "export const ACTOR_MAJOR_HOLD_WEEKS = 6" },
+        { "path": "src/domain/worldPulse/actorMajorApproval.js", "symbol": "export const ACTOR_INITIATED_MAJOR_TYPES" },
+        { "path": "src/domain/worldPulse/actorMajorApproval.js", "symbol": "export function routineMajorApprovalEnabled" },
+        { "path": "src/domain/worldPulse/actorMajorApproval.js", "symbol": "export function expireStaleActorMajors" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function proposalIdFor" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function upsertProposal" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function updateProposalStatus" },
+        { "path": "src/domain/worldPulse/pulseHelpers.js", "symbol": "const RECORD_MODE_PROPOSAL_VERSION = 4;" },
+        { "path": "src/domain/worldPulse/applyWorldPulse.js", "symbol": "export function applyWorldPulseOutcomes" },
+        { "path": "src/domain/worldPulse/applyWorldPulse.js", "symbol": "export function applyWorldPulseProposal" },
+        { "path": "src/domain/worldPulse/realmVerbExecution.js", "symbol": "export function buildRealmVerbOutcome" },
+        { "path": "src/domain/worldPulse/realmVerbExecution.js", "symbol": "export function applyRealmVerbOrder" },
+        { "path": "src/domain/worldPulse/realmVerbExecution.js", "symbol": "export function realmRefusalNews" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "export function advanceTreaties" },
+        { "path": "src/domain/worldPulse/autoAdjudication.js", "symbol": "export function autoAdjudicateAdvanceProposals" },
+        { "path": "src/store/campaignWorldPulseDeferred.js", "symbol": "export async function runApplyWorldPulseProposal" },
+        { "path": "src/store/campaignWorldPulseDeferred.js", "symbol": "export async function runDismissWorldPulseProposal" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "export function appendNpcLadderSeatTransition" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "export function advanceNpcLadder" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "lit routine mode queues one plain succession decision and leaves the oath untouched: only an above-band landed DISAVOW descriptor mints the complete v4 row and no treaty or news moves" },
+        { "id": "A2", "case": "hand Apply and engine-auto mean DISAVOW and speak the act exactly once: both exact apply routes use stored grading and current treaty validation, a tribute-only oath breaks, engine_auto provenance is unique to full auto, and generic news is suppressed" },
+        { "id": "A3", "case": "Dismiss and six-week expiry mean HONOR while another actor-major still declines: real dismiss and attention expiry plus a real upsertProposal ring-overflow tombstone write no treaty while the ordinary oldest control keeps decline semantics" },
+        { "id": "A4", "case": "dark scoring, lit below-band HONOR, and absent or false gates remain byte-identical: below-band lit returns the same reference with no queue, and every dark gate preserves the landed direct answer" },
+        { "id": "A5", "case": "question identity is order-stable, per instrument, and terminal rows do not reopen: opened-tick dual-hash identity is draw-free, all retained statuses dedupe by key and id both ways, distinct instruments and generic repudiation coexist, and collision preserves state" },
+        { "id": "A6", "case": "the pending descriptor survives JSON and malformed or stale payloads fail closed: openedTick severity and pressure survive while schema key hash id terminal descriptor oath parties and current-treaty failures tombstone as succession_question_lapsed without mutation or news" },
+        { "id": "A7", "case": "proposal undo restores the exact open question and unbroken oath: successful apply uses only the proposal undo ring and restores the exact pending row and treaty" },
+        { "id": "A8", "case": "a real organic ladder succession reaches the late treaty-stage queue: the real ladder writer feeds the later real treaty mount in the same tick" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint",
+          "src/domain/worldPulse/treatySuccessionDecision.js",
+          "src/domain/worldPulse/treatySuccessionProposalApply.js",
+          "src/domain/worldPulse/actorMajorApproval.js",
+          "src/domain/worldPulse/peaceTerms.js",
+          "src/domain/worldPulse/applyWorldPulse.js",
+          "tests/domain/treatySuccessionApproval.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/treatySuccessionApproval.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/actorMajorApproval.m10a.test.js",
+          "tests/domain/realmVerbExecution.test.js",
+          "tests/domain/decisionTier.test.js",
+          "tests/domain/npcLadderSeatTransitions.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/store/proposalUndoRing.test.js",
+          "tests/store/campaignSlice.worldPulse.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"],
+        ["npm", "run", "smoke:boot"]
+      ]
+    },
+    {
+      "id": "GR-4B-IIIA",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-IIIA.md",
+      "verifiedBase": "955acd7ad2aafc9fc64ad71ade64c54349219495",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionOpeningVoice.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionOpeningVoice.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/impactKindWalkers.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function resolveSuccessionQuestions(worldState, tick, now)" },
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function successionQuestionPayloadTuple(outcome)" },
+        { "path": "src/domain/worldPulse/treatyEnforcement.js", "symbol": "export function treatyLedgerOf(worldState)" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "export function treatyOrientationOf(treaty)" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "export function swornPartiesOf(treaty)" },
+        { "path": "src/domain/worldPulse/stablePart.js", "symbol": "export function stablePart(value)" },
+        { "path": "src/domain/worldPulse/grammarReceiptPools.js", "symbol": "export const GRAMMAR_RECEIPTS = Object.freeze" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export const GRAMMAR_KIND_REGISTRY = Object.freeze" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(kind, seed, interp = {}, context = null)" },
+        { "path": "src/domain/realm/heraldRouting.js", "symbol": "export const EXACT_SECTION = Object.freeze" },
+        { "path": "src/domain/realm/heraldRouting.js", "symbol": "export const KIND_SECTION_DIVERGENCES = Object.freeze" },
+        { "path": "src/domain/realm/heraldRouting.js", "symbol": "export function SECTION_OF(kind)" },
+        { "path": "src/domain/display/chroniclersLetter.js", "symbol": "export const KIND_SECTION = Object.freeze" },
+        { "path": "src/domain/display/settlementRumors.js", "symbol": "export const WHAT_PHRASES = Object.freeze" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "export function advanceTreaties" },
+        { "path": "tests/lint/grammarLifecycleKindPools.walker.test.js", "symbol": "const GR4_KINDS = new Set" },
+        { "path": "tests/lint/grammarLifecycleKindPools.walker.test.js", "symbol": "const FLOOR_BY_SIGNIFICANCE = Object.freeze" },
+        { "path": "tests/lint/kindPoolFloors.walker.test.js", "symbol": "const REGISTRIES = Object.freeze" },
+        { "path": "tests/domain/impactKindWalkers.test.js", "symbol": "const EXPECTED_VOICE =" },
+        { "path": "tests/lint/sovereigntyLightingContract.walker.test.js", "symbol": "const CENSUS = Object.freeze" },
+        { "path": "docs/content/RECEIPT_POOLS_GRAMMAR.md", "symbol": "### succession_question_opened (GR-4)" },
+        { "path": "docs/content/RECEIPT_POOLS_GRAMMAR.md", "symbol": "| A-21 | GR-4's `succession_question_opened` pool" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a newly inserted proposal emits exactly one opening beat" },
+        { "id": "A2", "case": "all seven annex-verbatim families and slot vectors are reachable" },
+        { "id": "A3", "case": "absent or false gates, direct handling, and HONOR emit no opening beat" },
+        { "id": "A4", "case": "duplicates, retained terminals, and collisions emit no second opening beat" },
+        { "id": "A5", "case": "two instruments get distinct identities and reverse enumeration stays stable" },
+        { "id": "A6", "case": "the same input is byte-stable and draws no randomness" },
+        { "id": "A7", "case": "apply, dismiss, expiry, overflow, undo, and replay never mint terminal or duplicate opening voice" },
+        { "id": "A8", "case": "a real organic ladder succession reaches the late treaty stage and emits one fully addressed public beat" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint",
+          "src/domain/worldPulse/treatySuccessionOpeningVoice.js",
+          "src/domain/worldPulse/peaceTerms.js",
+          "src/domain/worldPulse/grammarReceiptPools.js",
+          "src/domain/worldPulse/grammarNews.js",
+          "src/domain/realm/heraldRouting.js",
+          "src/domain/display/chroniclersLetter.js",
+          "src/domain/display/settlementRumors.js",
+          "tests/domain/treatySuccessionOpeningVoice.test.js",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/domain/impactKindWalkers.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run",
+          "tests/domain/treatySuccessionOpeningVoice.test.js",
+          "tests/domain/treatySuccessionApproval.test.js",
+          "tests/domain/successionQuestion.test.js",
+          "tests/domain/treatySuccessionVoice.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/npcLadderSeatTransitions.test.js",
+          "tests/property/oathHolderDormancyFence.test.js",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/wizardNewsAuthoring.walker.test.js",
+          "tests/domain/impactKindWalkers.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/newsVoiceContract.walker.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"],
+        ["npm", "run", "smoke:boot"]
+      ]
+    },
+    {
+      "id": "GR-4B-IIIB",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-IIIB.md",
+      "verifiedBase": "2dd09360e63fcca2b278dcf4d3e9c7f949434e55",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/display/treatySuccessionDossier.js" },
+        { "action": "MODIFY", "path": "src/domain/display/treatyDocument.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "MODIFY", "path": "src/components/map/TreatyPanel.jsx" },
+        { "action": "MODIFY", "path": "src/components/new/tabs/WarFaithTab.jsx" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionDossier.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function successionQuestionPayloadTuple(outcome)" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "export function swornPartiesOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "export function treatyOrientationOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyEnforcement.js", "symbol": "export function treatyLedgerOf(worldState)" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(kind, seed, interp = {}, context = null)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderTreatyDocument(worldState, pairKey)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderTreatiesForSettlement(worldState, settlementId)" },
+        { "path": "src/domain/display/treatyDocument.js", "symbol": "export function renderAllTreaties(worldState)" }
+      ],
+      "acceptanceCases": [
+        { "id": "B1", "case": "a validated pending question renders exactly one fully addressed dossier line" },
+        { "id": "B2", "case": "all eight annex-verbatim families and slot vectors are reachable" },
+        { "id": "B3", "case": "a dark mechanism leaves both mounts and the read-model byte-identical" },
+        { "id": "B4", "case": "terminal, unvalidated and foreign rows render no line" },
+        { "id": "B5", "case": "an unresolvable address renders nothing, never a partial line" },
+        { "id": "B6", "case": "two questions on one treaty render two lines in canonical order" },
+        { "id": "B7", "case": "the same world is byte-stable, draws nothing, and writes nothing" },
+        { "id": "B8", "case": "a real late-stage succession reaches both mounts and no other surface" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint", "src/domain/display/treatySuccessionDossier.js", "src/domain/display/treatyDocument.js", "src/domain/worldPulse/grammarReceiptPools.js", "src/domain/worldPulse/grammarNews.js", "src/components/map/TreatyPanel.jsx", "src/components/new/tabs/WarFaithTab.jsx", "tests/domain/treatySuccessionDossier.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/treatySuccessionDossier.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js", "tests/components/treatyDossierTab.test.jsx", "tests/property/treatyLifecycleVoiceDormancyFence.test.js", "tests/domain/sovereigntyWaveCloseIntegration.test.js", "tests/domain/successionQuestion.test.js", "tests/domain/peaceTermsWave3.test.js", "tests/design/deepCraftKillList.test.js", "tests/domain/guidanceRegistry.walker.test.js", "tests/domain/impactKindWalkers.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/lint/couplingInclusion.walker.test.js", "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"],
+        ["npm", "run", "check:tail"],
+        ["npm", "run", "smoke:boot"]
+      ]
+    },
+    {
+      "id": "GR-4B-II-W2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-4B-II-W2.md",
+      "verifiedBase": "039f8380dbc4566d48b5faa8eef39813b6f42eb4",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js" },
+        { "action": "MODIFY", "path": "src/store/campaignWorldPulseDeferred.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "CREATE", "path": "tests/domain/treatySuccessionReaffirmedVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/treatySuccessionOpeningVoice.test.js" },
+        { "action": "TEST", "path": "tests/domain/impactKindWalkers.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatySuccessionDecision.js", "symbol": "export function successionQuestionPayloadTuple(outcome)" },
+        { "path": "src/domain/worldPulse/treatySuccession.js", "symbol": "export function isSuccessionDisavowable(treaty, settlementId, fallenNpcId, tick)" },
+        { "path": "src/domain/worldPulse/oathHolder.js", "symbol": "export function swornPartiesOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "export function treatyOrientationOf(treaty)" },
+        { "path": "src/domain/worldPulse/treatyEnforcement.js", "symbol": "export function treatyLedgerOf(worldState)" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "export function grammarReceipt(kind, seed, interp = {}, context = null)" },
+        { "path": "src/domain/worldPulse/worldState.js", "symbol": "export function updateProposalStatus(worldState, proposalId, status, patch = {})" },
+        { "path": "src/domain/region/wizardNews.js", "symbol": "export function appendWizardNewsEntries(feed = {}, entries = [], options = {})" },
+        { "path": "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js", "symbol": "export function dismissSuccessionQuestionWithVoice(worldState, proposalId, tick, now)" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "dismissing a validated succession question mints exactly one fully addressed beat" },
+        { "id": "A2", "case": "all seven annex-verbatim families and slot vectors are reachable" },
+        { "id": "A3", "case": "a dark mechanism leaves the store byte-identical" },
+        { "id": "A4", "case": "a non-succession, terminal, or duplicate dismissal writes status and mints nothing" },
+        { "id": "A5", "case": "an ineligible or unaddressable instrument mints nothing, never a partial beat" },
+        { "id": "A6", "case": "the transition fires at most once and the feed never doubles" },
+        { "id": "A7", "case": "the leaf is byte-stable, draws nothing, writes nothing, and reads no clock" },
+        { "id": "A8", "case": "a real GR-4d docket dismissal reaches the feed and no other surface" }
+      ],
+      "checks": [
+        ["npm", "run", "validate:packets"],
+        ["npm", "run", "validate:hazard-registry"],
+        ["npm", "run", "validate:premortem"],
+        ["npx", "eslint", "src/domain/worldPulse/treatySuccessionReaffirmedVoice.js", "src/store/campaignWorldPulseDeferred.js", "src/domain/worldPulse/grammarReceiptPools.js", "src/domain/worldPulse/grammarNews.js", "src/domain/realm/heraldRouting.js", "src/domain/display/chroniclersLetter.js", "src/domain/display/settlementRumors.js", "tests/domain/treatySuccessionReaffirmedVoice.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/domain/impactKindWalkers.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/treatySuccessionReaffirmedVoice.test.js", "tests/domain/treatySuccessionOpeningVoice.test.js", "tests/domain/treatySuccessionApproval.test.js", "tests/domain/treatySuccessionVoice.test.js", "tests/domain/successionQuestion.test.js", "tests/domain/impactKindWalkers.test.js", "tests/domain/guidanceRegistry.walker.test.js", "tests/design/deepCraftKillList.test.js", "tests/lint/wizardNewsAuthoring.walker.test.js", "tests/property/treatyLifecycleVoiceDormancyFence.test.js", "tests/lint/couplingInclusion.walker.test.js", "tests/lint/grammarLifecycleKindPools.walker.test.js", "tests/lint/kindPoolFloors.walker.test.js", "tests/lint/negativeAssertionAnchor.walker.test.js", "--no-file-parallelism"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "check:observed-shape-readers"]
+      ]
+    },
+    {
+      "id": "INFRA-M1-DOCS",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M1-DOCS.md",
+      "verifiedBase": "600831749908e340444087df734d18c27046980d",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "docs/DESIGN_BUILD_EFFICIENCY.md"
+        },
+        {
+          "action": "CREATE",
+          "path": "docs/DESIGN_IP_PROTECTION.md"
+        },
+        {
+          "action": "CREATE",
+          "path": "docs/implementation/preambles/INFRA-PREAMBLE.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/PACKET_STANDARD.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/INDEX.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCHITECTURE.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_HB.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_WC.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_EP.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "docs/implementation/preambles/INFRA-PREAMBLE.md",
+          "symbol": "## \u00a7P1 \u00b7 Binding design-law citations"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Train landings"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## The base-state capsule and its consumption law"
+        },
+        {
+          "path": "docs/DESIGN_BUILD_EFFICIENCY.md",
+          "symbol": "## \u00a72 \u00b7 TRAIN LANDINGS"
+        },
+        {
+          "path": "docs/DESIGN_IP_PROTECTION.md",
+          "symbol": "### IP-1 \u2014 THE SOURCEMAP GUARD"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Dispatch unit"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Default hard scope budget"
+        },
+        {
+          "path": "docs/implementation/preambles/GR-PREAMBLE.md",
+          "symbol": "## §P6 · Mutant hygiene"
+        },
+        {
+          "path": "docs/implementation/INDEX.md",
+          "symbol": "### Partial programs"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCHITECTURE.md",
+          "symbol": "+ 17 (WC) + 6 (EP) = **108**"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the enforcement-claims pin is green and no FROZEN_NAKED key grows"
+        },
+        {
+          "id": "A2",
+          "case": "both folds are verbatim apart from the recorded Status-clause rewrite"
+        },
+        {
+          "id": "A3",
+          "case": "the lighting census is unmoved at 2416/365/2051/20016/5642"
+        },
+        {
+          "id": "A4",
+          "case": "the three FPC cures are correct and the 108 arithmetic line is byte-identical to base"
+        },
+        {
+          "id": "A5",
+          "case": "PACKET_STANDARD gains exactly three new top-level sections carrying no capsule figure"
+        },
+        {
+          "id": "A6",
+          "case": "validate:packets exits 0 with every manifest/index/packet join closed"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/enforcement-claims.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "INFRA-M2-CAPSULE",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M2-CAPSULE.md",
+      "verifiedBase": "e6eb4c5d15c827133a8edcd68698f30754dd21ed",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/base-state-capsule.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/scripts/baseStateCapsule.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/BASE_STATE.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export const PROVENANCE"
+        },
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export function capsuleFrom"
+        },
+        {
+          "path": "scripts/base-state-capsule.mjs",
+          "symbol": "export async function readAll"
+        },
+        {
+          "path": "tests/scripts/baseStateCapsule.test.js",
+          "symbol": "base-state capsule generator"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export const SCOPE_FLOOR_RATIO"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "EXACT_SECTION"
+        },
+        {
+          "path": "src/domain/worldPulse/grammarNews.js",
+          "symbol": "GRAMMAR_KIND_REGISTRY"
+        },
+        {
+          "path": "src/domain/worldPulse/grammarReceiptPools.js",
+          "symbol": "GRAMMAR_RECEIPTS"
+        },
+        {
+          "path": "docs/implementation/BASE_STATE.json",
+          "symbol": "consumptionLaw"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export function enumerateInvariants"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "SHAPE — six top-level keys in order and the 20 committed figure keys in order"
+        },
+        {
+          "id": "A2",
+          "case": "TOTALITY — PROVENANCE and the emitted key set agree in both directions"
+        },
+        {
+          "id": "A3",
+          "case": "HAND-DERIVATION — independently coded readers equal readAll's values"
+        },
+        {
+          "id": "A4",
+          "case": "THE ARG GUARD — a missing or below-floor --runtime-tests throws and writes nothing"
+        },
+        {
+          "id": "A5",
+          "case": "FAIL-CLOSED — a missing home and a nonzero shell-out each throw and name the row"
+        },
+        {
+          "id": "A6",
+          "case": "PLACEMENT — enumerateInvariants does not pick this file and the walk is non-trivial"
+        },
+        {
+          "id": "A7",
+          "case": "GOVERNED-INPUT NEGATIVE CONTROL — the new script is not a scanner tool file"
+        },
+        {
+          "id": "A8",
+          "case": "DISCRIMINATION — a one-unit perturbation and an emptied consumptionLaw each red"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/baseStateCapsule.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ],
+        [
+          "npx",
+          "eslint",
+          "scripts/base-state-capsule.mjs",
+          "tests/scripts/baseStateCapsule.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "INFRA-M3-IP1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/INFRA-M3-IP1.md",
+      "verifiedBase": "b713b05cbafe6d55eb799455e501803fe9082898",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "tests/build/sourcemapAbsence.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/build/sourcemapAbsence.test.js",
+          "symbol": "the shipped bundle carries no source maps (IP-1)"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export function discoverBuildTestFiles"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export function isBuildTestPath"
+        },
+        {
+          "path": "scripts/check-test-ratchet.mjs",
+          "symbol": "export const SOURCE_TEST_EXCLUDE"
+        },
+        {
+          "path": "package.json",
+          "symbol": "\"verify:dist\""
+        },
+        {
+          "path": "vite.config.js",
+          "symbol": "chunkSizeWarningLimit"
+        },
+        {
+          "path": "tests/build/vendorPdfLazy.test.js",
+          "symbol": "process.env.VERIFY_DIST"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN — zero .map files anywhere under dist/ with VERIFY_DIST set"
+        },
+        {
+          "id": "A2",
+          "case": "MAIN — no emitted dist/assets chunk carries a sourceMappingURL directive"
+        },
+        {
+          "id": "A3",
+          "case": "ANTI-VACUITY — VERIFY_DIST with a missing or empty dist is a hard failure"
+        },
+        {
+          "id": "A4",
+          "case": "DISABLED/ABSENT — without VERIFY_DIST and without dist the file no-ops cleanly"
+        },
+        {
+          "id": "A5",
+          "case": "CENSUS INHERITANCE — the strict runner discovers this file and the source phase excludes it"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/sourcemapAbsence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/build/sourcemapAbsence.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "GAP-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/GAP-1.md",
+      "verifiedBase": "5d6a0e7c19d5a0d58880ee3db9ff8c2b537ece5c",
+      "changeManifest": [
+        { "action": "TEST", "path": "tests/lint/engineGatedRuleKeys.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "MODIFY", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "REGISTER", "path": "scripts/hazard-registry.json" },
+        { "action": "DOC", "path": "docs/implementation/PACKET_STANDARD.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function codeOnly" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function scanGateReads" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function auditEngineGatedKeys" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const GATE_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const EXEMPT_RULE_KEYS" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const BACKLOG_RULE_KEYS" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "export const VIRTUAL_SUBSYSTEM_ROWS" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const VIRTUAL_RULES" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const LANE_LEAVES" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "the empty-eventTypes claim holds: no lane leaf mints a candidate" },
+        { "path": "scripts/hazard-registry.json", "symbol": "HZ-CAMELBLIND" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const GATE_EXPR_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "export function rulesBindingsOf" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const ALIAS_READ_RE =" },
+        { "path": "tests/lint/engineGatedRuleKeys.walker.test.js", "symbol": "const CANONICAL_RECEIVERS =" },
+        { "path": "tests/domain/subsystemRowsVirtual.test.js", "symbol": "const SHARED_CANDIDATE_LITERALS" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'settlementPoliticsEnabled'" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'underwaysOrganicFoundingEnabled'" },
+        { "path": "docs/implementation/PACKET_STANDARD.md", "symbol": "`src/domain/worldPulse/convergence.js` | 798 | 800 | 2" }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN — the widened scan is a strict superset: all 63 currently-measured keys survive (LOST=0) and the seven known-hidden keys are caught (WIDE=70)"
+        },
+        {
+          "id": "A2",
+          "case": "NEGATIVE — the three non-gate decoys (config?., options?., args.) and the scope/boundary artifacts stay unmatched"
+        },
+        {
+          "id": "A3",
+          "case": "GUARD 2 — nearest-preceding-binding wins: convergence.js rebinds `r` six times and only the rules cast attributes"
+        },
+        {
+          "id": "A4",
+          "case": "DISPOSITION — the two manifested keys carry authored virtual rows and the two exempted keys carry rationales over the review floor"
+        },
+        {
+          "id": "A5",
+          "case": "COHORT — the widened empty-eventTypes claim holds for the zero-candidate cohort and the candidate-bearing lane enumerates its shared literals"
+        },
+        {
+          "id": "A6",
+          "case": "BACKLOG — BACKLOG_RULE_KEYS stays exact at seventeen and its ceiling is never raised"
+        },
+        {
+          "id": "A7",
+          "case": "CENSUS NEUTRALITY — no test file, test title or suite title is added; the lighting tuple holds byte-identically"
+        },
+        {
+          "id": "A8",
+          "case": "ANCHOR PREFLIGHT — the negative-assertion anchor walker stays green; the walker file admits no bare collection negative"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/engineGatedRuleKeys.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemRowsVirtual.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemCertificationCorpus.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "src/domain/worldPulse/simulationRules.js",
+          "src/domain/certification/subsystemRowsVirtual.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "HB-0",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/HB-0.md",
+      "verifiedBase": "6784bf62de455ca13b701c09b6b241476cf9d555",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitVocabulary.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitCurve.js" },
+        { "action": "CREATE", "path": "tests/domain/habitVocabulary.test.js" },
+        { "action": "CREATE", "path": "tests/domain/habitCurve.test.js" },
+        { "action": "CREATE", "path": "tests/lint/habitBandsReconciliation.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const CIRCUMSTANCE_CLASSES" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const CIRCUMSTANCE_PRECEDENCE" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HABIT_CLASS_CEILING" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HABIT_HOLD_BANDS" },
+        { "path": "src/domain/worldPulse/habit/habitVocabulary.js", "symbol": "export const HOLD_RANK" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export const HABIT_TUNING" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function learnRateFor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function halfLifeBandFor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function severityWeightOf" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function applyCredit" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function habitFactor" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function seatAdjusted" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "export function roundToUnits" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitVocabulary.js': Object.freeze({" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitCurve.js': Object.freeze({" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "NEUTRAL IDENTITY — an absent stock returns exactly the number 1 from habitFactor, the door a dark flag goes through" },
+        { "id": "A2", "case": "THE ODDS-RATIO LAW over at least 1000 cases: every pairwise ratio inside the analytic interval, never 0 or 1, and the observed range FILLS that interval" },
+        { "id": "A3", "case": "THE FACTOR PIN — habitFactor lies strictly inside (1-s, 1+s); never the deleted per-probability pin" },
+        { "id": "A4", "case": "THE SYMMETRY FENCE — NEUTRAL_I minus FLOOR_I equals CAP_I minus NEUTRAL_I, with the behaviour reason in the failure message" },
+        { "id": "A5", "case": "THE VOCABULARY — sorted and precedence arrays are permutations; length is 12 AND at or under the owner-signed HABIT_CLASS_CEILING" },
+        { "id": "A6", "case": "THE CURVE — severity monotonicity within a direction, the anti-ratchet property, positional weight arity, codepoint tiebreak, and roundToUnits as the one rounding door" },
+        { "id": "A7", "case": "THE ONE-DIRECTIONAL BORROW — HABIT_HOLD_BANDS is derived by projection, the projection is threshold-ascending, and HOLD_RANK is the index" },
+        { "id": "A8", "case": "THE BANDS WALKER — both-directions reconciliation against the tuning seam, a live non-empty parser subject, and a planted Bands line on a NONE-BY-DESIGN wave REDS" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/habitVocabulary.test.js", "tests/domain/habitCurve.test.js"],
+        ["npx", "vitest", "run", "tests/lint/habitBandsReconciliation.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/spBandFamilies.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
+        ["npx", "eslint", "src/domain/worldPulse/habit/habitVocabulary.js", "src/domain/worldPulse/habit/habitCurve.js"],
+        ["node", "scripts/implementation-packets.mjs", "validate"]
+      ]
+    },
+    {
+      "id": "HB-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/HB-1.md",
+      "verifiedBase": "f6749fad642e191b8214797102b6404373bd02ee",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/strategyMoves.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habitForkRegistry.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementStrategy.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "CREATE", "path": "tests/domain/strategyMoves.test.js" },
+        { "action": "CREATE", "path": "tests/domain/habitForkRegistry.test.js" },
+        { "action": "CREATE", "path": "tests/lint/chooserTotality.walker.test.js" },
+        { "action": "CREATE", "path": "tests/lint/strategyMoveVocabulary.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/habitCurve.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const STRATEGY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const ALL_MOVE_TOKENS" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const NON_MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/strategyMoves.js", "symbol": "export const MARTIAL_HISTORY_MOVES" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const HABIT_FORK_REGISTRY" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const NAMED_DOMAIN_LABELS" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const OWNER_DOMAIN_MAPPING" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_DISPOSITIONS" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_ARITIES" },
+        { "path": "src/domain/worldPulse/habitForkRegistry.js", "symbol": "export const FORK_CLASS_VOCABULARY" },
+        { "path": "tests/lint/strategyMoveVocabulary.walker.test.js", "symbol": "const MOVE_TOKEN_BRANCHERS" },
+        { "path": "tests/lint/chooserTotality.walker.test.js", "symbol": "const SCAN_ROOTS" },
+        { "path": "tests/domain/habitCurve.test.js", "symbol": "const HABIT_DARK_CLOSURE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE EMITTER IS THE DENOMINATOR \u2014 STRATEGY_MOVES equals the set enumerateMoves actually emits across every exported scoring objective on generated candidates, both directions, never a hand list" },
+        { "id": "A2", "case": "THE BRANCHER REGISTER IS EXACT BOTH DIRECTIONS against the live scan (measured denominator TEN): an unregistered brancher reds, a stale row reds, every row carries a recognised kind and a written reason; plus scoringObjective.js lever keys are a subset of STRATEGY_MOVES asserted from the TEST side" },
+        { "id": "A3", "case": "THE OWNER ARM AND ITS EVIDENCE \u2014 inside a strategy-kind module every move-keyed literal is a MEMBER or a DECLARED FOREIGN TOKEN, and the declared foreign set equals the measured foreign set EXACTLY in both directions; every foreignTokens entry carries a non-empty vocabulary and reason, and its evidence path exists and its evidenceSymbol spells the token. A deletion of the registered disjunct REDS here" },
+        { "id": "A4", "case": "THE CORRECTED martialMoves ACT (R21) \u2014 MARTIAL_HISTORY_MOVES is a proper subset of STRATEGY_MOVES of length 8, the three exclusions asserted BY NAME, and the derived eight reproduce the pre-wave membership EXACTLY" },
+        { "id": "A5", "case": "C1 LEAF CONTRACT \u2014 strategyMoves.js has zero imports by source scan, ALL_MOVE_TOKENS equals STRATEGY_MOVES today, and the AT-MOST-ONE-EXPORTER scan holds tree-wide" },
+        { "id": "A6", "case": "THE DARK CLOSURE (HB-0.md section 15 discharge) \u2014 HABIT_DARK_CLOSURE set-equals the measured reverse-import closure both directions, no module outside it imports any member of it, and the detector is proved live on the family real inbound edge. Re-aimed in place with zero new titles" },
+        { "id": "A7", "case": "THE REGISTRY THREE J-HB-23 ASSERTIONS PLUS THE F2 INVARIANT \u2014 FOURTEEN named-domain rows each with a disposition and a non-empty reason; the label set SET-EQUAL both directions to the closed explicit eight; the owner SEVEN spoken domains mapped TOTAL onto those eight; and every row module id is EXTENSIONLESS and resolves to a real file" },
+        { "id": "A8", "case": "THE PARTITION AND ITS UNIQUENESS ARMS \u2014 classified equals discovered both directions over the idiom signatures across FOUR roots including src/domain/region; the ROOT-SET self-assertion; symbolsWithTwoDispositions empty; symbolsWithTwoArities empty; every DEFER row closeOwed non-empty; DEFER shrink-only; plus the registry own guard-the-guard" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/strategyMoves.test.js", "tests/domain/habitForkRegistry.test.js"],
+        ["npx", "vitest", "run", "tests/lint/chooserTotality.walker.test.js", "tests/lint/strategyMoveVocabulary.walker.test.js"],
+        ["npx", "vitest", "run", "tests/property/espionageAbsenceDormancy.test.js"],
+        ["npx", "vitest", "run", "tests/domain/habitCurve.test.js", "tests/domain/habitVocabulary.test.js"],
+        ["npx", "vitest", "run", "tests/domain/settlementPoliticsPins.test.js", "tests/domain/settlementStrategy.test.js"],
+        ["npx", "vitest", "run", "tests/property/settlementPoliticsDormancyGolden.test.js", "tests/domain/warMachineObeysPolitics.test.js"],
+        ["npx", "vitest", "run", "tests/domain/espionageDoctrineStage.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sizeBaseline.test.js", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js", "tests/lint/spBandFamilies.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
+    },
+    {
+      "id": "HB-0B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/HB-0B.md",
+      "verifiedBase": "e5ecc83dd443d13bdbc495d8cf701f93504fccdd",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/habit/habitCurve.js" },
+        { "action": "TEST", "path": "tests/domain/habitCurve.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "HABIT_ROWS_PER_ACTOR_CAP" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "PLEDGE_MAX_AGE_WEEKS" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "PLEDGE_BOOK_CAP" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "const MEDIAN_VOLATILITY_INDEX" },
+        { "path": "src/domain/worldPulse/habit/habitCurve.js", "symbol": "halfLifeWeeksOf" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE THREE BOUNDS EXIST, ARE FINITE POSITIVE INTEGERS, AND ARE FROZEN MEMBERS OF THE ONE BAG — each Number.isInteger and greater than zero, and a write to HABIT_TUNING does not take under the freeze" },
+        { "id": "A2", "case": "THE ROW CAP IS STRICTLY BELOW THE STRUCTURAL PRODUCT so eviction is reachable, with the product DERIVED from CIRCUMSTANCE_CLASSES.length times STRATEGY_MOVES.length rather than transcribed; and the half-life rung word appears ZERO times in habitCurve.js raw source, asserted with a positive control that finds the rung in bandedStock.js first" },
+        { "id": "A3", "case": "THE PLEDGE AGE IS A MEMBER OF THE SHARED LADDER AND IS THE MEDIAN COURT'S OWN BAND — Object.values(HALF_LIFE_WEEKS) contains it, and it equals halfLifeWeeksOf(HABIT_TUNING.HALF_LIFE[LAW_WORD_VOLATILITY[1]]). The RELATIONSHIP is pinned, never the literal, because a literal pin passes a hand-keyed re-spelling" },
+        { "id": "A4", "case": "THE THREE MEMBERS HAVE ZERO CONSUMERS IN src/, scanned over raw source, with the guard-the-guard finding NEUTRAL_I's real consumers first so the absence is proven live rather than emptied" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/habitCurve.test.js"],
+        ["npx", "vitest", "run", "tests/domain/habitVocabulary.test.js"],
+        ["npx", "vitest", "run", "tests/lint/habitBandsReconciliation.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/spBandFamilies.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js"],
+        ["npx", "eslint", "src/domain/worldPulse/habit/habitCurve.js"],
+        ["node", "scripts/check-tuning-bands.mjs"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
+    },
+    {
+      "id": "HB-2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/HB-2.md",
+      "verifiedBase": "c777a158da79830d46862b8df24f427dd9050824",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitLedger.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/habit/habitGate.js" },
+        { "action": "MODIFY", "path": "src/lib/spatialUsage.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "MODIFY", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/domain/habitLedger.test.js" },
+        { "action": "CREATE", "path": "tests/property/habitNeutralIdentity.test.js" },
+        { "action": "CREATE", "path": "tests/lint/habitLedgerSingleWriter.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/habitCurve.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "REGISTER", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiGroundingBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/intentAtlasBundle.meta.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/habit/habitLedger.js", "symbol": "export const HABIT_LEDGER_KEY" },
+        { "path": "src/domain/worldPulse/habit/habitLedger.js", "symbol": "export function writeHabits" },
+        { "path": "src/domain/worldPulse/habit/habitGate.js", "symbol": "export function habitsActive" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "habitConditioningEnabled" },
+        { "path": "src/domain/certification/subsystemRowsVirtual.js", "symbol": "habitConditioningEnabled" },
+        { "path": "src/lib/spatialUsage.js", "symbol": "habits" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitLedger.js': Object.freeze({" },
+        { "path": "tests/lint/couplingInclusion.walker.test.js", "symbol": "'src/domain/worldPulse/habit/habitGate.js': Object.freeze({" },
+        { "path": "tests/domain/habitCurve.test.js", "symbol": "const HABIT_DARK_CLOSURE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "THE COLD-START FENCE, ONE ASSERTION PROVING THREE LAWS — three worlds (flag absent/ledger absent; flag LIT/ledger absent; flag LIT/ledger all-neutral) serialize identically after a full advance, because DARK is byte-identical, COLD-START is habit-free by construction, and NEUTRAL IS ABSENT" },
+        { "id": "A2", "case": "THE FOUR-FENCE DORMANCY SET PLUS THE LIT-MUTANT CONTROL: own-footprint golden, absent-vs-false differential, call-path spy, and a gate-polarity census that drops each conjunct ONE AT A TIME — without the lit mutant the fence proves only that the fixture is quiet" },
+        { "id": "A3", "case": "THE SINGLE-WRITER THREE-DIRECTION CENSUS WITH AN EXECUTED SECOND-WRITER PLANT: the writer exact set both ways; FUNCTION SCOPE, because a second function in the same leaf satisfies a file-level scan while breaking the law; and THE READERS READ, the mention census strictly wider than the writer set so the narrow WRITE regex is provably not a pattern matching nothing" },
+        { "id": "A4", "case": "THE JSON ROUND-TRIP THROUGH REAL SERIALIZATION — an in-memory probe cannot tell a shared reference from a copy, and every value is a JSON scalar: never a Map, Set, Symbol, BigInt or Date in a stock, a pledge or a key" },
+        { "id": "A5", "case": "THE DROP-WHEN-EMPTY IDENTITY PIN, asserted on the SUB-LEDGER's reference and value and NEVER on the worldState reference, because a lit tick always allocates a world spread and a world-reference pin would red a correct build" },
+        { "id": "A6", "case": "THE ANCHORED PUBLIC-PAYLOAD NEGATIVE locking the inherited spatialLedgers hard-deny — load-bearing rather than a formality, because the truth ledger reaching a public payload would hand every viewer perfect counter-intelligence for free" },
+        { "id": "A7", "case": "THE INTERVAL-COLLAPSE SURVIVAL FIXTURE WITH ITS DECLARED NON-INVARIANT — collapse composes by SPREAD and setSpatialLedger preserves every sibling sub-key and its insertion order; ledger rows not equalling pulse-history length is ALLOWED and is asserted as allowed" },
+        { "id": "A8", "case": "THE PAUSED-CURSOR FENCE, THE CLOCK LAW AND THE IMPORT RECEIPT — no credit computed mid-advance and consumed after a pause without being folded in first; a write that cannot resolve the clock writes NOTHING rather than stamping a dawn-of-the-world zero; and an imported campaign's actors have learned nothing" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/habitLedger.test.js"],
+        ["npx", "vitest", "run", "tests/property/habitNeutralIdentity.test.js"],
+        ["npx", "vitest", "run", "tests/lint/habitLedgerSingleWriter.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/habitCurve.test.js", "tests/domain/habitVocabulary.test.js"],
+        ["npx", "vitest", "run", "tests/lib/spatialLedgerCoverage.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/engineGatedRuleKeys.walker.test.js"],
+        ["npx", "vitest", "run", "tests/security/worldSnapshotDenyCensus.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/mutationCoverageManifest.test.js", "tests/lint/spBandFamilies.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/check-tuning-bands.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
+    },
+    {
+      "id": "GR-5A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-5A.md",
+      "verifiedBase": "6cd18ad3e9b8be768d0e69ce1edc641cb5b626db",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "CREATE", "path": "tests/domain/treatyRenewalMemory.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiGroundingBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/intentAtlasBundle.meta.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function treatyRenewalActive(worldState)" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function worstObservedEverAfter(" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export function worstObservedEverOf(treaty)" },
+        { "path": "src/domain/worldPulse/simulationRules.js", "symbol": "'treatyRenewalEnabled'" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "export function advanceTreaties(" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "export const PACT_PROVENANCE" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "lit: a treaty observed strained records worstObservedEver 'strained' at the compliance write — the main behaviour and the lit-mutant control every dormancy fence below is anchored against" },
+        { "id": "A2", "case": "FENCE 1, the own-footprint golden: with the flag unset no worstObservedEver key is written and the treaty ledger is byte-identical to the pre-wave engine, asserted only AFTER the lit path is shown to write" },
+        { "id": "A3", "case": "FENCE 2, the absent-vs-false differential: an explicit false behaves exactly as absent and the two ledgers are byte-identical to each other" },
+        { "id": "A4", "case": "FENCE 3, the call-path spy: worstObservedEverAfter is never called on any path through advanceTreaties while the flag is dark, so the fold expression is not merely harmless but unevaluated" },
+        { "id": "A5", "case": "FENCE 4, the gate-polarity census: exactly three src files name treatyRenewalEnabled — the declarer, the certifier and the gate — and the only gate is a strict === true read, with no loose, negated or == false spelling anywhere" },
+        { "id": "A6", "case": "MONOTONE: a treaty that strains and then recovers keeps worstObservedEver 'strained', driven through the REAL advanceTreaties rather than a hand-built record, which is GR-5's whole reason to exist" },
+        { "id": "A7", "case": "the two excluded branches: neither the all-terms-lapsed prune nor the repudiation shell writes worstObservedEver, because both continue before the PASS-2 fold" },
+        { "id": "A8", "case": "lifecycle: a multi-tick record JSON round-trips, a legacy record with no key reads 'honored' through worstObservedEverOf, and no src consumer of the reader exists — the GR-0 handoff tripwire" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/treatyRenewalMemory.test.js"],
+        ["npx", "vitest", "run", "tests/domain/pactAmendment.test.js"],
+        ["npx", "vitest", "run", "tests/domain/peaceTerms.test.js"],
+        ["npx", "vitest", "run", "tests/property/treatyLifecycleVoiceDormancyFence.test.js"],
+        ["npx", "vitest", "run", "tests/property/pactFormationDormancyFence.test.js"],
+        ["npx", "vitest", "run", "tests/lint/engineGatedRuleKeys.walker.test.js"],
+        ["npx", "vitest", "run", "tests/domain/subsystemRowsVirtual.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/check-tuning-bands.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:ratchet"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
+    },
+    {
+      "id": "INT-3B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/INT-3B.md",
+      "verifiedBase": "fc8451c44c21032009ac9dfba8c8589ac7eb6de0",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/emigreErrand.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/envoyErrandVocabulary.js" },
+        { "action": "TEST", "path": "tests/lint/errandConsumerRegistry.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/couplingInclusion.walker.test.js" },
+        { "action": "CREATE", "path": "tests/domain/emigreErrand.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/emigreErrand.js", "symbol": "export function emigreErrandFor(" },
+        { "path": "src/domain/worldPulse/errandMint.js", "symbol": "export function mintErrandSpine(" },
+        { "path": "src/domain/worldPulse/envoyErrandVocabulary.js", "symbol": "export const ERRAND_CONSUMERS" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "LIT: errandSpineEnabled true (a literal) plus a priceable pair returns reason 'spine', ok true, and a plan whose single outbound leg carries the caller's own depart and arrival ticks unchanged — the main-behaviour control every fence below is anchored against" },
+        { "id": "A2", "case": "FENCE 1, dormancy: with the flag absent the same call returns reason 'dark', ok true, an empty field block, and no purpose class written anywhere — asserted only AFTER A1 has shown the lit path writes" },
+        { "id": "A3", "case": "FENCE 2, absent vs false: errandSpineEnabled false (a literal) and the key absent produce byte-identical answers, so ABSENT and FALSE are one state at the decision site" },
+        { "id": "A4", "case": "the road is not the flag's to change: an unpriceable plan returns reason 'invalid_route_plan' identically lit and dark, refused before the gate" },
+        { "id": "A5", "case": "THE REGISTRY IS TRUE: the ERRAND_CONSUMERS row whose consumer is 'ambitious' reads built true, purposeClass 'factional', and a module that resolves to an existing file" },
+        { "id": "A6", "case": "THE IDENTITY CLAIM, no caller is wired: a source walk of all of src/ finds zero call sites of the export outside its own module, with the loop running INSIDE one named test rather than as a generator" },
+        { "id": "A7", "case": "ZERO AUTHORED NUMBERS: the module's executable source, comments stripped, contains no numeric literal at all — this member spends nothing the chair has not signed" },
+        { "id": "A8", "case": "THE ONE-READER LAW FROM THE INSIDE: the module's executable source never spells purposeClass, declaredPurpose or truePurpose as a member read, a computed read, or a binding-pattern element; the class rides the call as a quoted literal" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/emigreErrand.test.js"],
+        ["npx", "vitest", "run", "tests/lint/errandConsumerRegistry.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/couplingInclusion.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npx", "vitest", "run", "tests/lint/namedPersonTransitTotality.walker.test.js"],
+        ["node", "scripts/check-observed-shape-readers.mjs"],
+        ["node", "scripts/implementation-packets.mjs", "validate"],
+        ["npm", "run", "typecheck:domain:strict"]
+      ]
+    }
+  ]
+}

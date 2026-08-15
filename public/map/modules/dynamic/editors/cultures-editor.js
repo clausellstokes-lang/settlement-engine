@@ -153,7 +153,7 @@ function culturesEditorAddLines() {
         >
           <svg width="11" height="11" class="placeholder"></svg>
           <input data-tip="Neutral culture name. Click and type to change" class="cultureName italic" style="width: 7em"
-            value="${c.name}" autocorrect="off" spellcheck="false" />
+            value="${escapeHtml(c.name)}" autocorrect="off" spellcheck="false" />
           <span class="icon-cw placeholder"></span>
           <select class="cultureType placeholder">${getTypeOptions(c.type)}</select>
           <span data-tip="Click to re-generate names for burgs with this culture assigned" class="icon-arrows-cw hide"></span>
@@ -173,22 +173,25 @@ function culturesEditorAddLines() {
       continue;
     }
 
+    // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+    const cultureName = escapeHtml(c.name);
+    const cultureColor = escapeHtml(c.color);
     lines += /* html */ `<div
         class="states"
         data-id="${c.i}"
-        data-name="${c.name}"
-        data-color="${c.color}"
+        data-name="${cultureName}"
+        data-color="${cultureColor}"
         data-cells="${c.cells}"
         data-area="${area}"
         data-population="${population}"
         data-base="${c.base}"
-        data-type="${c.type}"
+        data-type="${escapeHtml(c.type)}"
         data-expansionism="${c.expansionism}"
         data-emblems="${c.shield}"
       >
-        <fill-box fill="${c.color}"></fill-box>
+        <fill-box fill="${cultureColor}"></fill-box>
         <input data-tip="Culture name. Click and type to change" class="cultureName" style="width: 7em"
-          value="${c.name}" autocorrect="off" spellcheck="false" />
+          value="${cultureName}" autocorrect="off" spellcheck="false" />
         <span data-tip="Regenerate culture name" class="icon-cw hiddenIcon" style="visibility: hidden"></span>
         <select data-tip="Culture type. Defines growth model. Click to change"
           class="cultureType">${getTypeOptions(c.type)}</select>

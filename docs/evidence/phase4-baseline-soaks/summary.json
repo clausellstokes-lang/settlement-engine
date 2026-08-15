@@ -1,0 +1,69 @@
+{
+  "_doc": "Phase 4 baseline soaks — the before-numbers (W-F0). Regression-envelope baselines every later faith wave re-runs against (spec docs/PHASE4_FAITH_DELTA.md §6). Full logs alongside: religion-{balance,soak,coup-soak}.log.",
+  "capturedAt": "2026-07-10",
+  "branch": "review-fixes-2026-07-08",
+  "head": "5adc871c",
+  "headSubject": "Merge wave 5b — the gates fuse, and the merge program closes",
+  "node": "v24.12.0",
+  "flagContext": "All three scripts drive the pre-split flag religionDynamicsEnabled:true (spread-on + local-on, fully-active engine). After the W-F1 migration the tolerant reader maps that same key to faithSpreadEnabled:true, so these numbers ARE the spread-on baseline the post-migration soaks must reproduce.",
+  "balance": {
+    "params": { "seeds": 300, "ticks": 80 },
+    "tuning": { "CONTEST_LEGIT_W": 0.78, "CONTEST_SHARE_W": 0.22, "CONTEST_PATRON_AMP": 1.7, "PATRON_FLIP_TICKS": 3, "COMPROMISE_EVIL_AMP": 0.45 },
+    "holdRateSurface_challengerShare30": {
+      "pL_0.1": { "cL_0.1": 0.75, "cL_0.3": 0.39, "cL_0.5": 0.19, "cL_0.7": 0.10, "cL_0.9": 0.05 },
+      "pL_0.3": { "cL_0.1": 0.97, "cL_0.3": 0.74, "cL_0.5": 0.48, "cL_0.7": 0.29, "cL_0.9": 0.19 },
+      "pL_0.5": { "cL_0.1": 0.97, "cL_0.3": 0.91, "cL_0.5": 0.82, "cL_0.7": 0.63, "cL_0.9": 0.46 },
+      "pL_0.7": { "cL_0.1": 0.99, "cL_0.3": 0.98, "cL_0.5": 0.92, "cL_0.7": 0.84, "cL_0.9": 0.78 },
+      "pL_0.9": { "cL_0.1": 1.00, "cL_0.3": 0.99, "cL_0.5": 0.99, "cL_0.7": 0.95, "cL_0.9": 0.94 }
+    },
+    "schismSoak": {
+      "strongPatronVsWeakCult": { "held": 1.00, "toppled": 0.00, "unresolved": 0.00, "shareViol": 0 },
+      "evenPopularCult": { "held": 0.79, "toppled": 0.21, "unresolved": 0.00, "shareViol": 0 },
+      "weakPatronVsLegitPopularRival": { "held": 0.10, "toppled": 0.90, "unresolved": 0.00, "shareViol": 0 }
+    },
+    "evilGrowthFavorByCompromise": {
+      "0.0": { "evil": 0.59, "good": 0.53, "gap": 0.06 },
+      "0.3": { "evil": 0.72, "good": 0.47, "gap": 0.26 },
+      "0.6": { "evil": 0.86, "good": 0.41, "gap": 0.45 },
+      "0.9": { "evil": 0.99, "good": 0.35, "gap": 0.65 }
+    }
+  },
+  "soak": {
+    "params": { "seeds": 40, "ticks": 60, "settlementsPerRun": 8 },
+    "growthDriven_differentNiche": {
+      "clean/isolated":   { "evilPatronRate": 0.00, "evilCultShare": 31.75, "avgLegit": 0.52, "diversity": 2.00, "guards": [0,0,0,0] },
+      "corrupt/isolated": { "evilPatronRate": 0.72, "evilCultShare": 58.88, "avgLegit": 0.53, "diversity": 2.00, "guards": [0,0,0,0] },
+      "deep/isolated":    { "evilPatronRate": 0.25, "evilCultShare": 49.50, "avgLegit": 0.57, "diversity": 2.00, "guards": [0,0,0,0] },
+      "mixed/isolated":   { "evilPatronRate": 0.19, "evilCultShare": 42.24, "avgLegit": 0.53, "diversity": 2.00, "guards": [0,0,0,0] },
+      "clean/regional":   { "evilPatronRate": 0.00, "evilCultShare": 24.88, "avgLegit": 0.56, "diversity": 2.00, "guards": [0,0,0,0] },
+      "corrupt/regional": { "evilPatronRate": 0.50, "evilCultShare": 53.13, "avgLegit": 0.56, "diversity": 2.00, "guards": [0,0,0,0] },
+      "deep/regional":    { "evilPatronRate": 0.50, "evilCultShare": 53.00, "avgLegit": 0.60, "diversity": 2.00, "guards": [0,0,0,0] },
+      "mixed/regional":   { "evilPatronRate": 0.25, "evilCultShare": 43.50, "avgLegit": 0.57, "diversity": 2.00, "guards": [0,0,0,0] }
+    },
+    "schism_sameNiche": {
+      "clean/isolated":   { "evilPatronRate": 0.00, "evilCultShare": 35.13, "avgLegit": 0.52, "diversity": 2.00, "guards": [0,0,0,0] },
+      "corrupt/isolated": { "evilPatronRate": 0.52, "evilCultShare": 53.40, "avgLegit": 0.46, "diversity": 2.00, "guards": [0,0,0,0] },
+      "deep/isolated":    { "evilPatronRate": 0.25, "evilCultShare": 49.75, "avgLegit": 0.49, "diversity": 2.00, "guards": [0,0,0,0] },
+      "mixed/isolated":   { "evilPatronRate": 0.17, "evilCultShare": 43.28, "avgLegit": 0.50, "diversity": 2.00, "guards": [0,0,0,0] },
+      "clean/regional":   { "evilPatronRate": 0.00, "evilCultShare": 27.63, "avgLegit": 0.56, "diversity": 2.00, "guards": [0,0,0,0] },
+      "corrupt/regional": { "evilPatronRate": 0.50, "evilCultShare": 51.75, "avgLegit": 0.50, "diversity": 2.00, "guards": [0,0,0,0] },
+      "deep/regional":    { "evilPatronRate": 0.50, "evilCultShare": 52.38, "avgLegit": 0.52, "diversity": 2.00, "guards": [0,0,0,0] },
+      "mixed/regional":   { "evilPatronRate": 0.25, "evilCultShare": 44.88, "avgLegit": 0.54, "diversity": 2.00, "guards": [0,0,0,0] }
+    }
+  },
+  "coupSoak": {
+    "params": { "seeds": 10, "ticks": 100, "settlementsPerCampaign": 1, "kernel": "real (simulateCampaignWorldPulse)" },
+    "startLegit": 27,
+    "cohorts": {
+      "secure-theo":    { "campaignsWithCoup": 0.20, "coupAttemptsPerCamp": 0.2, "coupsSucceededPerCamp": 0.0, "crisisTicks": 1.0,   "legitEnd": 57.0, "legitMin": 27.0 },
+      "contested-theo": { "campaignsWithCoup": 0.30, "coupAttemptsPerCamp": 0.3, "coupsSucceededPerCamp": 0.0, "crisisTicks": 1.0,   "legitEnd": 53.9, "legitMin": 27.0 },
+      "contested-rep":  { "campaignsWithCoup": 1.00, "coupAttemptsPerCamp": 7.4, "coupsSucceededPerCamp": 0.0, "crisisTicks": 100.0, "legitEnd": 27.0, "legitMin": 27.0 }
+    }
+  },
+  "regressionEnvelope": {
+    "balance": "hold-rate surface monotone in both axes; schism unresolved 0% and shareViol 0; evil-vs-good growth gap monotone in compromise, evil <= 0.99 (no runaway).",
+    "soak": "clean evilPatronRate 0%; corrupt/deep elevated but < 100%; diversity 2.00; guards [0,0,0,0] on every cell.",
+    "coup": "secure-theo crisisTicks ~1 and contested-rep crisisTicks = 100; secure-theo coup attempts << contested-rep; legitEnd(secure-theo) >> legitEnd(contested-rep)=27.",
+    "wf1Gate": "spread-on runs must land inside these bands (local+spread active = identical engine); W-F1 additionally pins a NEW spread-off local-lane envelope (owner pin 1, faithSpreadInertness)."
+  }
+}

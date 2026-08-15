@@ -19,13 +19,21 @@
  */
 import { afterEach, describe, expect, test } from 'vitest';
 
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
+
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import {
+  UPGRADE_CHAINS as DATA_UPGRADE_CHAINS,
+} from '../../src/data/institutionLadders.js';
 import { UPGRADE_CHAINS, collapseUpgradeChains } from '../../src/generators/steps/assembleInstitutions.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
-import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 
 const PORT_INFRA = ['Docks/port facilities', "Harbour master's office", 'Shipyard'];
 
@@ -42,6 +50,10 @@ function catalogNameSet() {
 // ── Joins: the upgrade-ladder table ──────────────────────────────────────────
 
 describe('joins: UPGRADE_CHAINS is a scale ladder, not an adjacency map', () => {
+  test('the step compatibility export is the data leaf single writer', () => {
+    expect(UPGRADE_CHAINS).toBe(DATA_UPGRADE_CHAINS);
+  });
+
   test('Docks/port facilities and Warehouse district are never paired', () => {
     // Complementary port infrastructure; Warehouse district is required:true
     // at city tier, so any pairing deterministically deletes the other member.
@@ -108,7 +120,11 @@ describe('behavior: Port Duties keys on port institutions the catalog generates'
   test('river-route docks still earn River Tolls, not Port Duties', () => {
     const income = incomeFor('town', ['Docks/port facilities'], 'river');
     expect(income).toContain('River Tolls');
-    expect(income).not.toContain('Port Duties');
+    // River Tolls is the anchor: the same roster, the same generator call, the same
+    // income table — so the customs denial is a ROUTE decision, not an empty list.
+    expectAbsentWithAnchor(
+      income, 'Port Duties', 'River Tolls', 'a river route earns tolls, not customs',
+    );
   });
 
   test.each([
@@ -117,11 +133,24 @@ describe('behavior: Port Duties keys on port institutions the catalog generates'
     ['Airship docking (high magic)'],
     ['Teleportation circle'],
   ])('"%s" on a port route is not customs infrastructure', (inst) => {
-    expect(incomeFor('city', [inst], 'port')).not.toContain('Port Duties');
+    // The liveness anchor is the SAME tier and route carrying real docks: the gate
+    // demonstrably fires there, so its silence here is the name test working rather
+    // than the income table having drifted out from under the assertion.
+    expectPresentThenAbsent(
+      incomeFor('city', ['Docks/port facilities'], 'port'),
+      incomeFor('city', [inst], 'port'),
+      'Port Duties',
+      `"${inst}" is not customs infrastructure`,
+    );
   });
 
   test('a port route without port institutions earns no Port Duties', () => {
-    expect(incomeFor('city', [], 'port')).not.toContain('Port Duties');
+    expectPresentThenAbsent(
+      incomeFor('city', ['Docks/port facilities'], 'port'),
+      incomeFor('city', [], 'port'),
+      'Port Duties',
+      'the route alone does not earn customs income',
+    );
   });
 });
 
@@ -173,11 +202,15 @@ describe('behavior: airship docking exempts docks from the water-access check', 
       .map((v) => v.institution);
 
   test('isolated docks with airship docking raise no water-access violation', () => {
-    const av = accessViolations(
-      ['Docks/port facilities', 'Airship docking (high magic)'],
-      'isolated',
+    // The same isolated docks WITHOUT airships do violate (the next test pins that
+    // directly) — so the violating roster is this exclusion's liveness anchor: the
+    // check demonstrably fires on this institution before the exemption clears it.
+    expectPresentThenAbsent(
+      accessViolations(['Docks/port facilities'], 'isolated'),
+      accessViolations(['Docks/port facilities', 'Airship docking (high magic)'], 'isolated'),
+      'Docks/port facilities',
+      'airship presence exempts docks from the water-access check',
     );
-    expect(av).not.toContain('Docks/port facilities');
   });
 
   test('isolated docks without airship docking still violate', () => {
@@ -192,7 +225,12 @@ describe('behavior: airship docking exempts docks from the water-access check', 
       'isolated',
     );
     expect(av).toContain('Major port');
-    expect(av).not.toContain('Docks/port facilities');
+    // 'Major port' anchors the list: the access check is demonstrably still running
+    // and still flagging on this very roster, so the docks' absence is the narrow
+    // exemption rather than a violation list that stopped being produced.
+    expectAbsentWithAnchor(
+      av, 'Docks/port facilities', 'Major port', 'the airship exemption is narrow',
+    );
   });
 });
 
@@ -211,7 +249,11 @@ describe('golden: seeded port settlements across tiers', () => {
     expect(names).toContain('Docks/port facilities');
     const income = s.economicState.incomeSources.map((i) => i.source);
     expect(income).toContain('Port Duties');
-    expect(income).not.toContain('River Tolls');
+    // Port Duties anchors the list — the customs row this seed really earns proves
+    // incomeSources is live and correctly keyed when we deny the river row.
+    expectAbsentWithAnchor(
+      income, 'River Tolls', 'Port Duties', 'a sea port earns no river tolls',
+    );
   });
 
   test('port-route city keeps its required Warehouse district, port infrastructure, and customs income', () => {
@@ -248,18 +290,27 @@ describe('golden: seeded port settlements across tiers', () => {
   });
 
   test('river-route city with a barge company does not read as a port', () => {
-    // Seed chosen so the roster carries the barge company and none of the
-    // real port institutions — the transport company must not register as
-    // harbour infrastructure anywhere downstream.
+    // Re-probed after culture weighting changed institution draws. The roster
+    // carries the barge company and none of the real port institutions — the
+    // transport company itself must not register as harbour infrastructure.
     const s = gen(
-      { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'river' },
-      'ports-wave4a-3',
+      {
+        settType: 'city',
+        culture: 'germanic',
+        terrainOverride: 'riverside',
+        tradeRouteAccess: 'river',
+      },
+      'ports-river-60',
     );
     const names = s.institutions.map((i) => i.name);
     expect(names).toContain('Barge and river transport company');
     expect(PORT_INFRA.some((p) => names.includes(p))).toBe(false);
     expect(getInstFlags({}, s.institutions).inst.hasPort).toBe(false);
     const income = s.economicState.incomeSources.map((i) => i.source);
-    expect(income).not.toContain('Port Duties');
+    // 'Property Rents' anchors the list: this city genuinely earns it, so the missing
+    // customs row is the hasPort gate holding rather than an income list that vanished.
+    expectAbsentWithAnchor(
+      income, 'Port Duties', 'Property Rents', 'a barge company earns no customs',
+    );
   });
 });

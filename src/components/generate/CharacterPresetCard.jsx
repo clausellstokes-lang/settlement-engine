@@ -35,7 +35,7 @@
 
 import { useStore } from '../../store/index.js';
 import { ARCHETYPES, ARCHETYPE_GROUPS, archetypePatch } from './characterPresets.js';
-import { INK, MUTED, SECOND, BORDER, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, sans, serif_, FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import PrioritySliders from './PrioritySliders.jsx';
 
@@ -52,7 +52,6 @@ const CUSTOM_KEY = '__custom__';
 const CHIP_STYLE = {
   fontSize: FS.xs,
   padding: '10px 12px',
-  borderRadius: R.md,
   minHeight: 44,
   fontFamily: sans,
 };
@@ -156,7 +155,7 @@ export default function CharacterPresetCard({ advanced = false } = {}) {
     : 'Pick an archetype to shape the settlement. The simulator rolls the finer priorities for you.';
 
   return (
-    <div style={{ background: PARCHMENT, border: `1px solid ${BORDER}`, borderRadius: R.lg, padding: `${SP.md}px ${SP.lg}px`, marginBottom: SP.md }}>
+    <div style={{ background: PARCHMENT, border: `1px solid ${BORDER}`, padding: `${SP.md}px ${SP.lg}px`, marginBottom: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 4 }}>
         <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Character</span>
         <span style={{ fontSize: FS.xs, color: MUTED }}>Pick a settlement archetype to shape it in one tap</span>

@@ -25,30 +25,36 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 export const getTierOrder        = () => TIER_ORDER;
 export const getPopulationRanges = () => POPULATION_RANGES;
 
+// pipeline-5: merge a list of tier catalogs (later tiers override on name clash),
+// mirroring assembleInstitutions.mergeCatalogs so the UI lookup and the generator
+// agree about what a metropolis catalog contains.
+const mergeTierCatalogs = (tiers) => {
+  const merged = {};
+  for (const t of tiers) {
+    const tierCat = institutionalCatalog[t] || {};
+    for (const [category, insts] of Object.entries(tierCat)) {
+      if (!merged[category]) merged[category] = {};
+      for (const [name, def] of Object.entries(insts)) {
+        merged[category][name] = def;
+      }
+    }
+  }
+  return merged;
+};
+
 /**
  * Return the institutional catalog appropriate for a given tier.
  * Special cases:
  *   - random/custom/no-tier → village catalog (sane default for previews)
- *   - metropolis → city catalog (metropolis inherits city)
- *   - 'all' → merged catalog across all tiers
+ *   - metropolis → city + metropolis merge (the 24 metropolis-only entries — e.g.
+ *     Academy of magic, Assassins' guild, Underground city — are reachable so the
+ *     UI catalog/force path can author them; pipeline-5)
+ *   - 'all' → merged catalog across all tiers (metropolis included)
  */
 export const getInstitutionalCatalog = (tier) => {
   if (!tier || tier === 'random' || tier === 'custom') return institutionalCatalog['village'] || {};
-  if (tier === 'metropolis') return institutionalCatalog['city'] || {};
-  if (tier === 'all') {
-    const merged = {};
-    const tierOrder = ['thorp','hamlet','village','town','city'];
-    for (const t of tierOrder) {
-      const tierCat = institutionalCatalog[t] || {};
-      for (const [category, insts] of Object.entries(tierCat)) {
-        if (!merged[category]) merged[category] = {};
-        for (const [name, def] of Object.entries(insts)) {
-          merged[category][name] = def;
-        }
-      }
-    }
-    return merged;
-  }
+  if (tier === 'metropolis') return mergeTierCatalogs(['city', 'metropolis']);
+  if (tier === 'all') return mergeTierCatalogs(['thorp','hamlet','village','town','city','metropolis']);
   return institutionalCatalog[tier] || {};
 };
 
@@ -58,11 +64,6 @@ export const getInstitutionalCatalog = (tier) => {
  * in. Used by InstitutionalGrid for the "all tiers" view.
  */
 export const getFullCatalogWithTierMeta = () => {
-  // Include 'metropolis' so metropolis-native institutions appear in the grid's
-  // all-tiers view and resolve their nativeTier correctly — matching the
-  // generator's own cross-tier catalog (assembleInstitutions), which already
-  // spans metropolis. Last-wins, so a name shared with a higher tier reports the
-  // higher (truer) nativeTier.
   const tierOrder = ['thorp','hamlet','village','town','city','metropolis'];
   const merged = {};
   for (const t of tierOrder) {
@@ -79,9 +80,12 @@ export const getFullCatalogWithTierMeta = () => {
 
 /** Set of institution names that exist in the native tier catalog. */
 export const getInstitutionsForTier = (tier) => {
-  const t = tier === 'metropolis' ? 'city' : tier;
-  const cat = institutionalCatalog[t] || {};
+  // metropolis inherits city AND its own top-tier entries (pipeline-5).
+  const tiers = tier === 'metropolis' ? ['city', 'metropolis'] : [tier];
   const names = new Set();
-  Object.values(cat).forEach(insts => Object.keys(insts).forEach(n => names.add(n)));
+  for (const t of tiers) {
+    const cat = institutionalCatalog[t] || {};
+    Object.values(cat).forEach(insts => Object.keys(insts).forEach(n => names.add(n)));
+  }
   return names;
 };

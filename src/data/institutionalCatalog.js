@@ -1,15 +1,7 @@
 // institutionalCatalog.js — normalized: all constants expanded to plain strings
-//
-// priorityCategory is a FACTION-ROLE axis (which power bloc the institution answers to),
-// deliberately distinct from `tags` (an institution's functional domains). These may differ
-// by design: e.g. a customs/tax/tariff/regulatory body legitimately carries 'trade' tags
-// while having priorityCategory 'government'. Do NOT infer priorityCategory from tags.
-//
-// One invariant DOES hold: a given institution NAME must carry a single priorityCategory
-// across every tier it appears in (guarded by tests/data/priorityCategoryConsistency.test.js).
-// Normalized 4 economic PRODUCTION institutions that were mislabeled 'government' in one tier
-// but 'economy' in another: 'Charcoal burner', 'Dairy farmer', 'Salt works', 'Stone quarry'
-// (all now 'economy'). See that test for any remaining, deliberately-out-of-scope exceptions.
+
+import { slugify as kernelSlugify } from '../kernel/slugify.js';
+
 export const institutionalCatalog = {
   thorp: {
     Government: {
@@ -41,7 +33,7 @@ export const institutionalCatalog = {
         required: false,
         exclusiveGroup: 'government',
         baseChance: 0.9,
-        desc: 'One household head acts as de facto voice for the settlement. No formal appointment or title. Just the person everyone goes to when something needs deciding.',
+        desc: 'One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.',
         tags: ['civic'],
         priorityCategory: 'government',
       },
@@ -101,6 +93,13 @@ export const institutionalCatalog = {
         desc: 'Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.',
         tags: ['defense', 'fortification'],
         priorityCategory: 'defense',
+      },
+      'Household levy': {
+        required: false,
+        baseChance: 0.18,
+        desc: 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.',
+        tags: ['defense', 'military'],
+        priorityCategory: 'military',
       },
       'Communal root cellar': {
         required: false,
@@ -188,7 +187,7 @@ export const institutionalCatalog = {
       'Charcoal burner': {
         required: false,
         baseChance: 0.2,
-        desc: 'Operates kilns in nearby woodland. Supplies fuel for smithing and baking, the essential intermediate step between forest and forge.',
+        desc: 'Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
@@ -202,7 +201,7 @@ export const institutionalCatalog = {
       'Peat cutter': {
         required: false,
         baseChance: 0.18,
-        desc: 'Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal work, selling winter warmth.',
+        desc: 'Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal. Sells winter warmth.',
         tags: ['trade'],
         priorityCategory: 'government',
       },
@@ -216,14 +215,14 @@ export const institutionalCatalog = {
       'Mine (open cast)': {
         required: false,
         baseChance: 0.2,
-        desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers: dangerous, dirty, and essential.',
+        desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.',
         tags: ['trade'],
         priorityCategory: 'government',
       },
       'Stone quarry': {
         required: false,
         baseChance: 0.18,
-        desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges: slow work, but the only way to get proper building material.',
+        desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges. Slow but the only way to get proper building material.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
@@ -237,21 +236,21 @@ export const institutionalCatalog = {
       'Dairy farmer': {
         required: false,
         baseChance: 0.25,
-        desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal, with production peaking in summer.',
+        desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal. Production peaks in summer.',
         tags: ['food', 'trade'],
         priorityCategory: 'economy',
       },
       Shepherd: {
         required: false,
         baseChance: 0.22,
-        desc: 'Manages sheep flocks for wool and meat. Seasonal transhumance: moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.',
+        desc: 'Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.',
         tags: ['trade', 'textile'],
         priorityCategory: 'government',
       },
       'Salt works': {
         required: false,
         baseChance: 0.2,
-        desc: 'Evaporates salt from coastal water or brine springs. Produces the raw salt used for preservation. Only viable near salt flats or coastal access.',
+        desc: 'Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or other workable brine deposits provide a local supply.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
@@ -376,7 +375,7 @@ export const institutionalCatalog = {
       Alehouse: {
         required: false,
         baseChance: 0.55,
-        desc: "Home-brewed ale sold from someone's back room. The hamlet's main gathering place: news, disputes, and arrangements all happen here.",
+        desc: "Home-brewed ale sold from someone's back room. The hamlet's main gathering place. News, disputes, and arrangements all happen here.",
         tags: ['food', 'trade'],
         priorityCategory: 'economy',
       },
@@ -391,7 +390,7 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.15,
         terrainRequired: ['desert'],
-        desc: 'A walled waystation providing secure overnight lodging for merchants, animals, and goods. The centre of desert trade. Water, fodder, and protection available for a fee. Without one, caravans cannot safely cross the surrounding terrain.',
+        desc: 'A walled waystation providing secure overnight lodging for merchants, animals, and goods. The centre of desert trade: water, fodder, and protection available for a fee. Without one, caravans cannot safely cross the surrounding terrain.',
         tags: ['trade', 'lodging', 'transport'],
         priorityCategory: 'economy',
       },
@@ -399,14 +398,14 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.12,
         exclusiveGroup: 'marketScale',
-        desc: 'Monthly or seasonal trading day. No charter, just habit, proximity, and a flat piece of ground.',
+        desc: 'Monthly or seasonal trading day. No charter. Just habit, proximity, and a flat piece of ground.',
         tags: ['market', 'trade'],
         priorityCategory: 'economy',
       },
       Pawnbroker: {
         required: false,
         baseChance: 0.15,
-        desc: 'Lending against pledged goods. High interest, no questions, and the only credit available to peasants and small craftsmen.',
+        desc: 'Lending against pledged goods. High interest, no questions. The only credit available to peasants and small craftsmen.',
         tags: ['banking'],
         priorityCategory: 'government',
       },
@@ -495,14 +494,14 @@ export const institutionalCatalog = {
         baseChance: 0.3,
         tradeRouteRequired: ['river', 'port'],
         terrainAccess: ['riverside'],
-        desc: 'Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction. Shallow draft, flexible hull, replaceable parts.',
+        desc: 'Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.',
         tags: ['transport', 'shipbuilding'],
         priorityCategory: 'crafts',
       },
       'Fish market': {
         required: false,
         baseChance: 0.3,
-        desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast, because fish doesn't wait.",
+        desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.",
         tags: ['market', 'trade'],
         priorityCategory: 'government',
       },
@@ -626,7 +625,7 @@ export const institutionalCatalog = {
       Tannery: {
         required: false,
         baseChance: 0.3,
-        desc: 'Converts hides into leather using oak bark. Foul-smelling and placed downstream, but essential for shoes, harness, and straps.',
+        desc: 'Converts hides into leather using oak bark. Foul-smelling. Placed downstream. Essential for shoes, harness, and straps.',
         tags: ['trade'],
         priorityCategory: 'government',
       },
@@ -682,6 +681,7 @@ export const institutionalCatalog = {
       Fishmonger: {
         required: false,
         baseChance: 0.35,
+        forbiddenTradeRoutes: ['isolated'],
         desc: 'Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.',
         tags: ['trade'],
         priorityCategory: 'government',
@@ -705,21 +705,21 @@ export const institutionalCatalog = {
         baseChance: 0.5,
         desc: 'Assists with births, manages difficult labours, and provides basic gynecological care. The most-used medical service in any settlement.',
         tags: ['healing'],
-        priorityCategory: 'magic',
+        priorityCategory: 'crafts',
       },
       'Village scribe': {
         required: false,
         baseChance: 0.15,
         desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.",
         tags: ['guild'],
-        priorityCategory: 'magic',
+        priorityCategory: 'government',
       },
       Wildfowler: {
         required: false,
         baseChance: 0.15,
         desc: 'Catches waterfowl and game birds using nets, traps, and trained birds. Supplies the market with ducks, geese, and pigeons.',
         tags: ['trade'],
-        priorityCategory: 'magic',
+        priorityCategory: 'economy',
       },
       "Hunter's lodge": {
         required: false,
@@ -870,6 +870,22 @@ export const institutionalCatalog = {
         tags: ['criminal', 'trade'],
         priorityCategory: 'criminal',
       },
+      // [D6 THE UNDERWAYS] Excavated tunnels beneath the settlement — the "underways" — for
+      // discreet passage, untaxed storage, and no-questions transport. Its EXISTENCE is public
+      // knowledge ("everyone knows the warren exists; no one maps it"); its OPERATIONS run
+      // through the covert seams. `facets` declare it clandestine + subterranean so the covert
+      // engine couplings resolve it through facetOf (custom clandestine institutions count the
+      // same). `forbiddenResources` makes it impossible atop marsh/floodplain (tunnels flood).
+      // id `underground_network` (kernel-slugified from the name). Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.08,
+        desc: 'Dug smuggling passages beneath the village.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
+      },
     },
   },
   town: {
@@ -920,20 +936,18 @@ export const institutionalCatalog = {
       'Money changers': {
         required: false,
         baseChance: 0.5,
-        desc: 'Exchange foreign currency, the earliest banking (3,000+ population).',
+        desc: 'Exchange foreign currency. Early banking (3,000+ population).',
         tags: ['banking', 'trade'],
         priorityCategory: 'economy',
       },
       'Inn (multiple)': {
         required: true,
-        baseChance: 1,
         desc: 'Lodging for traveling merchants.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
       'Taverns (5-20)': {
         required: true,
-        baseChance: 1,
         desc: 'Drinking establishments. Social hubs.',
         tags: ['food'],
         priorityCategory: 'economy',
@@ -1030,7 +1044,7 @@ export const institutionalCatalog = {
         required: false,
         forbiddenTradeRoutes: ['isolated'],
         baseChance: 0.3,
-        desc: "The post assembles caravans, sets departure schedules, and sells route intelligence. Merchants register goods, hire guards, and arrange joint ventures here. The town-scale forerunner of the city's Caravan masters' exchange.",
+        desc: "Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here. The town-scale predecessor to the city's Caravan masters' exchange.",
         tags: ['transport', 'guild', 'trade'],
         priorityCategory: 'government',
       },
@@ -1047,6 +1061,23 @@ export const institutionalCatalog = {
         desc: 'Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clients. A vintner in a non-wine region is an importer-blender.',
         tags: ['food', 'trade'],
         priorityCategory: 'government',
+      },
+      // [W-I INFORMATION BROKERAGES] I1, the legal MINOR form (design §3). A brokerage is
+      // HOW TALK IS WEIGHED, never where it happens: the rumour-source houses (inns,
+      // bathhouses, fences) keep their own role and are tagged separately in
+      // data/informationBrokerageTuning.js. `serviceKeys` is the closed capability
+      // vocabulary every effect reads (never the name) so custom brokerage-class content
+      // declaring the same keys behaves identically. Route-gated because information
+      // follows roads: a settlement nothing arrives at has no register worth keeping.
+      // Golden-shifting (a new catalog draw), same as [D6 THE UNDERWAYS].
+      'Listening post': {
+        required: false,
+        baseChance: 0.22,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query'],
       },
     },
     Crafts: {
@@ -1340,7 +1371,7 @@ export const institutionalCatalog = {
       'Teleportation circle': {
         required: false,
         baseChance: 0.08,
-        desc: 'Rare permanent circle, extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.',
+        desc: 'Rare permanent circle. Extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.',
         tags: ['arcane', 'exotic'],
         priorityCategory: 'magic',
       },
@@ -1377,7 +1408,7 @@ export const institutionalCatalog = {
       'Beast trainers': {
         required: false,
         baseChance: 0.3,
-        desc: 'Common animals only: horses, dogs, falcons.',
+        desc: 'Common animals only. Horses, dogs, falcons.',
         tags: [],
         priorityCategory: 'adventuring',
       },
@@ -1403,6 +1434,30 @@ export const institutionalCatalog = {
         desc: 'Legitimate covers for criminal activity.',
         tags: ['criminal'],
         priorityCategory: 'criminal',
+      },
+      // [D6 THE UNDERWAYS] see the village-tier entry for the full note. At town scale the
+      // dug network is more extensive — the labour to excavate exists. Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.15,
+        desc: 'A dug network of smuggling tunnels and cellars.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
+      },
+      // [W-I INFORMATION BROKERAGES] I1, the illegal MINOR form (design §3). The design's
+      // criminal-organization precondition and its rumour-source presence weighting are
+      // POWER-STRUCTURE reads, and powers do not exist yet when this catalog is walked;
+      // both live as authored predicates in data/informationBrokerageTuning.js and are
+      // wired by the slice that owns patron binding. Golden-shifting (a new catalog draw).
+      Rookery: {
+        required: false,
+        baseChance: 0.16,
+        desc: 'A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query'],
       },
     },
     Entertainment: {
@@ -1507,7 +1562,6 @@ export const institutionalCatalog = {
       },
       'Inns and taverns (district)': {
         required: true,
-        baseChance: 1,
         desc: 'Multiple inn districts catering to merchants, travelers, and long-term visitors.',
         tags: ['trade', 'lodging'],
         priorityCategory: 'economy',
@@ -1522,7 +1576,7 @@ export const institutionalCatalog = {
       'Banking houses': {
         required: false,
         baseChance: 0.7,
-        desc: 'Loans, currency exchange, letters of credit: basic banking (5,000+).',
+        desc: 'Loans, currency exchange, letters of credit. Basic banking (5,000+).',
         tags: ['banking', 'trade'],
         priorityCategory: 'economy',
       },
@@ -1542,7 +1596,6 @@ export const institutionalCatalog = {
       },
       'Warehouse district': {
         required: true,
-        baseChance: 1,
         desc: 'Storage for merchant goods.',
         tags: ['warehouse', 'trade'],
         priorityCategory: 'economy',
@@ -1625,7 +1678,7 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.4,
         tradeRouteRequired: ['port', 'river'],
-        desc: 'Regulates port traffic, collects anchorage fees, assigns berths, and enforces maritime law. Port cities only.',
+        desc: 'Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law. Navigable-water cities only.',
         tags: ['law_enforcement', 'port'],
         priorityCategory: 'military',
       },
@@ -1636,12 +1689,35 @@ export const institutionalCatalog = {
         tags: ['trade', 'guild'],
         priorityCategory: 'military',
       },
+      // [W-I INFORMATION BROKERAGES] I1 (design §3). The city keeps BOTH legal forms in the
+      // catalog on purpose: the minor house can still roll here, and the existing
+      // subsumption pass collapses it into the guild form when both land, exactly the way
+      // 'banking district' absorbs 'money changers'. Merged into the metropolis catalog by
+      // mergeCatalogs(city, metropolis). Golden-shifting (new catalog draws).
+      'Listening post': {
+        required: false,
+        baseChance: 0.28,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
+      "Chroniclers' exchange": {
+        required: false,
+        baseChance: 0.3,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'The guild form of the listening house: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query', 'info_feed'],
+      },
     },
     Crafts: {
       'Specialized metalworkers': {
         required: false,
         baseChance: 0.9,
-        desc: 'Armorers, swordsmiths, jewelers, each its own guild.',
+        desc: 'Armorers, swordsmiths, jewelers. Separate guilds.',
         tags: ['metalwork', 'luxury'],
         priorityCategory: 'crafts',
       },
@@ -1662,7 +1738,7 @@ export const institutionalCatalog = {
       Glassmakers: {
         required: false,
         baseChance: 0.5,
-        desc: 'Windows, vessels, mirrors, all requiring expertise.',
+        desc: 'Windows, vessels, mirrors. Requires expertise.',
         tags: ['luxury'],
         priorityCategory: 'crafts',
       },
@@ -1767,7 +1843,7 @@ export const institutionalCatalog = {
         required: false,
         exclusiveGroup: 'government',
         baseChance: 0.92,
-        desc: 'An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council, but functional: governance by bureaucratic inertia.',
+        desc: 'An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council but functional. Governance by bureaucratic inertia.',
         tags: ['civic'],
         priorityCategory: 'government',
       },
@@ -1790,7 +1866,6 @@ export const institutionalCatalog = {
       },
       Garrison: {
         required: true,
-        baseChance: 1,
         desc: 'Professional soldiers. Noble or royal.',
         tags: ['military', 'defense'],
         priorityCategory: 'military',
@@ -1798,7 +1873,7 @@ export const institutionalCatalog = {
       Citadel: {
         required: false,
         baseChance: 0.4,
-        desc: 'Inner fortress: the last refuge in siege.',
+        desc: 'Inner fortress. Last refuge in siege.',
         tags: ['fortification', 'defense'],
         priorityCategory: 'military',
       },
@@ -1878,10 +1953,22 @@ export const institutionalCatalog = {
         tags: ['criminal', 'underground'],
         priorityCategory: 'criminal',
       },
+      // [D6 THE UNDERWAYS] see the village-tier entry for the full note. City scale: an
+      // extensive dug network — the underways proper. Merged into the metropolis catalog via
+      // mergeCatalogs(city, metropolis), so it also appears at metropolis. Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.22,
+        desc: 'An extensive warren of smuggling tunnels beneath the city.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
+      },
       'Contract killer': {
         required: false,
         baseChance: 0.25,
-        desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable, but deniable.',
+        desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.',
         tags: ['guild', 'military'],
         priorityCategory: 'military',
       },
@@ -1914,6 +2001,27 @@ export const institutionalCatalog = {
         desc: 'Organized contraband trade.',
         tags: ['criminal', 'smuggling'],
         priorityCategory: 'criminal',
+      },
+      // [W-I INFORMATION BROKERAGES] I1 (design §3). Same pairing as the legal side: the
+      // minor loft stays in the city catalog so the subsumption pass has something to
+      // absorb into the covert guild. `info_plant` is declared HERE and nowhere else, so
+      // the lie-selling capability is illegal-major by construction rather than by a
+      // downstream name check. Golden-shifting (new catalog draws).
+      Rookery: {
+        required: false,
+        baseChance: 0.2,
+        desc: 'A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
+      'Whisper market': {
+        required: false,
+        baseChance: 0.18,
+        desc: 'The covert guild form: brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query', 'info_feed', 'info_plant'],
       },
     },
     Entertainment: {
@@ -2056,7 +2164,7 @@ export const institutionalCatalog = {
       'Undead labor': {
         required: false,
         baseChance: 0.1,
-        desc: 'Animated corpses at labour. Controversial wherever the living can see them.',
+        desc: 'Animated corpses working. Controversial.',
         tags: ['arcane'],
         priorityCategory: 'exotic',
       },
@@ -2117,7 +2225,7 @@ export const institutionalCatalog = {
       'Sewage system': {
         required: false,
         baseChance: 0.4,
-        desc: 'Underground drainage, rare but critical for health.',
+        desc: 'Underground drainage. Rare but critical for health.',
         tags: ['sanitation'],
         priorityCategory: 'infrastructure',
       },
@@ -2199,7 +2307,7 @@ export const institutionalCatalog = {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.6,
-        desc: 'Metropolitan cathedral, seat of the highest regional religious authority. Pilgrimage destination.',
+        desc: 'Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.',
         tags: ['religious', 'church'],
         priorityCategory: 'infrastructure',
       },
@@ -2207,7 +2315,7 @@ export const institutionalCatalog = {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.55,
-        desc: 'Five to ten major monastic houses. Scholarly, contemplative, and charitable functions at scale.',
+        desc: 'Five to ten major monastic houses: scholarly, contemplative, and charitable functions at scale.',
         tags: ['religious', 'monastery'],
         priorityCategory: 'infrastructure',
       },
@@ -2260,9 +2368,9 @@ export const institutionalCatalog = {
         minTier: 'metropolis',
         exclusiveGroup: 'criminalPower',
         baseChance: 0.55,
-        desc: 'Dominant criminal syndicate, tolerated because the alternative (gang war) is worse.',
+        desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.',
         tags: ['criminal'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       'Black market bazaar': {
         required: false,
@@ -2270,7 +2378,7 @@ export const institutionalCatalog = {
         baseChance: 0.45,
         desc: 'Permanent underground market: contraband, forged documents, illegal services.',
         tags: ['criminal', 'underground'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       'Underground city': {
         required: false,
@@ -2278,7 +2386,7 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary.',
         tags: ['criminal', 'underground'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       "Assassins' guild": {
         required: false,
@@ -2286,7 +2394,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Professional contract killing. Operates through cutouts, never acknowledged officially.',
         tags: ['criminal'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
     },
     Economy: {
@@ -2346,7 +2454,7 @@ export const institutionalCatalog = {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.5,
-        desc: 'State prison complex. Political prisoners, debtors, convicted criminals held separately.',
+        desc: 'State prison complex: political prisoners, debtors, convicted criminals held separately.',
         tags: ['civic'],
         priorityCategory: 'infrastructure',
       },
@@ -2364,7 +2472,7 @@ export const institutionalCatalog = {
 
 const INSTITUTION_CATALOG = institutionalCatalog;
 
-// ── Catalog identity ─────────────────────────────────────────────────────────
+// ── Catalog identity (Cohesion Wave 8 — structural prevention) ───────────────
 // Every catalog entry has a stable id: the deterministic slug of its canonical
 // name. Entries appearing at multiple tiers under the SAME name share the id
 // (same name → same slug); distinct entries ('Merchant guilds (3-8)' vs
@@ -2375,19 +2483,7 @@ const INSTITUTION_CATALOG = institutionalCatalog;
 
 /** Deterministic slug of a canonical institution name. */
 export function slugifyInstitutionName(name) {
-  return String(name)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-}
-
-// Single normalizer shared by BOTH the index build and every lookup, so the two
-// can never drift. The lookup trimmed but the index build did not: a catalog (or
-// query) name with stray whitespace would be indexed un-trimmed yet looked up
-// trimmed — a silent id-join miss that falls back to the fuzzy matcher. Route both
-// through this so "lowercase + trimmed" is enforced by construction, not convention.
-export function normalizeCatalogName(name) {
-  return String(name).trim().toLowerCase();
+  return kernelSlugify(name, { sep: '_', raw: true });
 }
 
 // normalized name → id. Collision-checked at module load: two DIFFERENT
@@ -2399,13 +2495,13 @@ function buildCatalogIdIndex() {
   for (const tierCatalog of Object.values(institutionalCatalog)) {
     for (const group of Object.values(tierCatalog)) {
       for (const name of Object.keys(group)) {
-        const key = normalizeCatalogName(name);
+        const key = name.toLowerCase();
         if (byName.has(key)) continue; // same name at another tier shares the id
         const id = slugifyInstitutionName(name);
         const holder = nameForId.get(id);
         if (holder && holder !== key) {
           throw new Error(
-            `institutionalCatalog id collision: "${name}" and "${holder}" both slug to "${id}" — rename one`,
+            `institutionalCatalog id collision: "${name}" and "${holder}" both slug to "${id}". Rename one`,
           );
         }
         nameForId.set(id, key);
@@ -2426,5 +2522,5 @@ const CATALOG_ID_BY_NAME = buildCatalogIdIndex();
  */
 export function catalogIdForName(name) {
   if (name == null) return null;
-  return CATALOG_ID_BY_NAME.get(normalizeCatalogName(name)) ?? null;
+  return CATALOG_ID_BY_NAME.get(String(name).trim().toLowerCase()) ?? null;
 }

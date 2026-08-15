@@ -1,7 +1,7 @@
 /**
  * domain/npcProfile.js — Structured NPC profiles + removal consequences.
  *
- * Today's NPC entries are already rich:
+ * Tier 4.5 of the roadmap. Today's NPC entries are already rich:
  *
  *   { id, name, role, category, factionAffiliation,
  *     structuralPosition, structuralRank, influence, power,
@@ -20,18 +20,18 @@
  * without anyone migrating the generator.
  *
  * No imports from src/lib — domain tsconfig include stays
- * self-contained, the same constraint the sibling derivations honor.
+ * self-contained, same constraint Phases 9-12 honored.
  */
 
 import { institutionMatchesRegex } from './institutionClassify.js';
 
-import { snakeCase } from './ids.js';
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
-// the faction archetype vocabulary. We map them
+// the faction archetype vocabulary established in Phase 9. We map them
 // to the canonical archetypes so the leverage / vulnerability / removal
 // templates can be shared across both surfaces.
 
+/** @type {Record<string, string>} */
 const CATEGORY_TO_ARCHETYPE = Object.freeze({
   military:   'military',
   government: 'government',
@@ -52,18 +52,25 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
   nobility:   'government',
 });
 
-/** @param {any} category */
+/**
+ * @param {unknown} category
+ * @returns {import('./settlement.schema.js').FactionArchetype}
+ */
 function archetypeFromCategory(category) {
   if (!category) return 'other';
-  return CATEGORY_TO_ARCHETYPE[/** @type {keyof typeof CATEGORY_TO_ARCHETYPE} */ (String(category).toLowerCase())] || 'other';
+  // Every CATEGORY_TO_ARCHETYPE value is a valid FactionArchetype; Object.freeze
+  // widens them to string, so narrow the dynamic-key lookup back to the union.
+  return /** @type {import('./settlement.schema.js').FactionArchetype} */ (
+    CATEGORY_TO_ARCHETYPE[String(category).toLowerCase()] || 'other');
 }
 
 // ── Per-archetype leverage / vulnerability templates ─────────────────────
-// Similar shape to the faction-archetype templates. The
+// Similar shape to the faction-archetype templates from Phase 9. The
 // templates here are NPC-specific: what an individual at the top of
 // this archetype controls, and what hangs over their head. Each entry
 // is a fresh clone on every call so consumers can mutate safely.
 
+/** @type {Record<string, { leverage: string[], vulnerabilities: string[] }>} */
 const NPC_TEMPLATES = Object.freeze({
   military: {
     leverage:        ['barracks loyalty', 'weapon stockpiles', 'who walks the night patrol routes'],
@@ -103,9 +110,9 @@ const NPC_TEMPLATES = Object.freeze({
   },
 });
 
-/** @param {any} archetype */
+/** @param {import('./settlement.schema.js').FactionArchetype} archetype */
 function templateForArchetype(archetype) {
-  const t = NPC_TEMPLATES[/** @type {keyof typeof NPC_TEMPLATES} */ (archetype)] || NPC_TEMPLATES.other;
+  const t = NPC_TEMPLATES[archetype] || NPC_TEMPLATES.other;
   return {
     leverage:        [...t.leverage],
     vulnerabilities: [...t.vulnerabilities],
@@ -113,14 +120,16 @@ function templateForArchetype(archetype) {
 }
 
 // ── Consequence-if-removed templates ─────────────────────────────────────
-// The headline feature: each NPC carries a structured forecast
+// The headline Tier 4.5 feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
 // Severity scales with `structuralRank`; the consequence palette comes from
 // the archetype. The generator's getRank (npcStructure.js) emits
-// 'dominant' | 'subordinate', so the mid tier is keyed 'subordinate' to match —
-// keying it 'secondary' left every non-dominant NPC falling through to 'minor'.
-// 'minor' is retained for legacy/explicit-minor NPCs.
+// 'dominant' | 'subordinate'; normalizeNpcRank maps that onto the palette
+// vocabulary ('secondary'), so the mid tier is keyed 'secondary' to match
+// (ported master fix — keying it 'secondary' left every non-dominant NPC
+// falling through to 'minor'). 'minor' is retained for legacy/explicit-minor.
 
+/** @type {Record<string, Record<string, string[]>>} */
 const REMOVAL_CONSEQUENCES = Object.freeze({
   military: {
     dominant: [
@@ -129,7 +138,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public order strains within weeks; criminal activity rises.',
       'A succession dispute opens among the surviving captains.',
     ],
-    subordinate: [
+    secondary: [
       'A unit captain loses their reporting line briefly.',
       'A subordinate moves up; the new face takes time to settle.',
     ],
@@ -140,11 +149,11 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   government: {
     dominant: [
       'Tax collection slows; the watch loses paid authority.',
-      'A succession contender steps forward, possibly a rival faction.',
+      'A succession contender steps forward — possibly a rival faction.',
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
-    subordinate: [
+    secondary: [
       'A clerk or under-official scrambles to backfill paperwork.',
       'The governing body absorbs the role temporarily.',
     ],
@@ -155,11 +164,11 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   religious: {
     dominant: [
       'Temple relief authority weakens; food queues lengthen.',
-      'A sectarian successor emerges, possibly with a harder line.',
+      'A sectarian successor emerges — possibly with a harder line.',
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
-    subordinate: [
+    secondary: [
       'A novice or under-priest steps up unprepared.',
       'Donations dip until a new face earns trust.',
     ],
@@ -174,7 +183,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A rival guildmaster consolidates the routes.',
       'Tax revenue drops as the books reshuffle.',
     ],
-    subordinate: [
+    secondary: [
       'A specific contract goes unfulfilled; clients seek alternatives.',
       'Guild succession becomes the dinner-table topic.',
     ],
@@ -188,7 +197,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Cheap imports flow in unchecked; quality drops.',
       'Apprentices scatter to other masters.',
     ],
-    subordinate: [
+    secondary: [
       'A workshop closes or transfers ownership.',
     ],
     minor: [
@@ -202,7 +211,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A corruption network collapses; protected favors become vulnerable.',
       'The watch claims a public victory whether or not it caused this.',
     ],
-    subordinate: [
+    secondary: [
       'A lieutenant takes over; old favors get reaccounted.',
     ],
     minor: [
@@ -216,7 +225,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Arcane research projects stall or move elsewhere.',
       'Public superstition resurges without the moderating expert.',
     ],
-    subordinate: [
+    secondary: [
       'A research line is paused; reagents get reassigned.',
     ],
     minor: [
@@ -225,11 +234,11 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
   occupation: {
     dominant: [
-      'The homeland recalls or replaces. The replacement is an unknown quantity.',
+      'The homeland recalls or replaces — the replacement is an unknown quantity.',
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
-    subordinate: [
+    secondary: [
       'A junior officer takes a temporary command.',
     ],
     minor: [
@@ -240,7 +249,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
     dominant: [
       'A noticeable absence in civic life that the settlement adapts around.',
     ],
-    subordinate: [
+    secondary: [
       'A small role goes unfilled briefly.',
     ],
     minor: [
@@ -249,23 +258,40 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
 });
 
+// [domain-top-state-4] The generator (npcStructure.getRank) speaks its own rank
+// vocabulary — 'dominant' / 'subordinate' — while the profile surface and the
+// REMOVAL_CONSEQUENCES palette speak the NpcRank vocabulary 'dominant' / 'secondary'
+// / 'minor'. Nothing translated between them, so every non-dominant NPC fell through
+// to the 'minor' palette and the 'secondary' tier was dead; a legacy NUMERIC
+// structuralRank would also crash `.toLowerCase()`. Translate in ONE place: map
+// 'subordinate' → 'secondary', String()-coerce the input, and collapse anything
+// unrecognized (including numbers and absent ranks) to 'minor'.
+const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary' });
 /**
- * @param {any} archetype
- * @param {any} rank
+ * @param {unknown} rank
+ * @returns {import('./settlement.schema.js').NpcRank}
+ */
+export function normalizeNpcRank(rank) {
+  const low = String(rank ?? '').toLowerCase();
+  const mapped = /** @type {Record<string,string>} */ (NPC_RANK_ALIASES)[low] || low;
+  return mapped === 'dominant' || mapped === 'secondary' ? mapped : 'minor';
+}
+
+/**
+ * @param {import('./settlement.schema.js').FactionArchetype} archetype
+ * @param {unknown} rank
  */
 function consequencesForRemoval(archetype, rank) {
-  const archetypeMap = REMOVAL_CONSEQUENCES[/** @type {keyof typeof REMOVAL_CONSEQUENCES} */ (archetype)] || REMOVAL_CONSEQUENCES.other;
-  // Coerce to string first: the schema unions structuralRank as string|number, so a
-  // legacy NPC with a numeric rank must not crash `.toLowerCase()` (it would take down
-  // the whole causal-substrate derivation for the settlement).
-  const normalizedRank = String(rank ?? 'minor').toLowerCase();
-  const consequences = /** @type {any} */ (archetypeMap)[normalizedRank] || archetypeMap.minor || [];
+  const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
+  // normalizeNpcRank subsumes the ported master fix (String-coerce first — a legacy
+  // numeric structuralRank must not crash .toLowerCase()) and collapses aliases.
+  const consequences = archetypeMap[normalizeNpcRank(rank)] || archetypeMap.minor || [];
   return [...consequences];
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
-/** @param {...any} candidates */
+/** @param {...unknown} candidates */
 function firstNonEmpty(...candidates) {
   for (const c of candidates) {
     if (typeof c === 'string' && c.trim()) return c.trim();
@@ -273,9 +299,15 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
-/** @param {any} s */
+/** @param {unknown} s */
+function snakeCase(s) {
+  return String(s)
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase();
+}
 
-/** @param {any} name */
+/** @param {unknown} name */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -286,7 +318,53 @@ function factionIdFromName(name) {
 // with overlapping tags or name patterns. Best-effort — returns null
 // when no clear link exists.
 
+// Keyed by the canonical ARCHETYPE vocabulary (archetypeFromCategory), not by
+// raw npc.category — the generator emits categories like 'crafts'/'magic'/
+// 'noble' that only reach these hints through the normalizer. (Keying by raw
+// category silently dropped every institutionLink for those NPCs.)
+/** @type {Record<string, RegExp>} */
 const CATEGORY_INSTITUTION_HINTS = Object.freeze({
+  military:   /watch|garrison|militia|guard|barracks|patrol/i,
+  government: /council|hall|government|courthouse|reeve|mayor|chamber|seat/i,
+  religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
+  merchant:   /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
+  craft:      /smithy|forge|workshop|carpenter|tannery|brewery/i,
+  criminal:   /tavern|den|gang|black\s+market/i,
+  arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
+});
+
+/**
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
+ */
+function inferInstitutionLink(npc, settlement) {
+  if (!npc || !settlement) return null;
+  const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0) return null;
+
+  const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
+  if (!hint) return null;
+
+  const match = institutions.find((inst) =>
+    inst && typeof inst.name === 'string' && hint.test(inst.name)
+  );
+  return match ? `institution.${snakeCase(match.name)}` : null;
+}
+
+// ── Power-tab institutional footprint (UI-only) ─────────────────────────────
+// The Power tab needs a power's FULL institutional footprint, keyed by the
+// power's DOMAIN category (military/religious/economy/…). This is a separate,
+// UI-only vocabulary from the archetype-keyed CATEGORY_INSTITUTION_HINTS above
+// (which drives the golden-adjacent inferInstitutionLink and must not shift):
+//   - keyed by the power DOMAIN word ('economy', not the 'merchant' archetype);
+//   - the craft name hint also accepts guild/hall (a cooper's guild hall IS a
+//     craft institution);
+//   - and a TAG affinity table, the PRIMARY signal, since a "Local fence" or
+//     "Smuggling ring" carries the `criminal` tag but no criminal NAME keyword.
+// Pure, UI-only (not consumed by the generator), so it evolves without a
+// golden-master regen.
+/** @type {Readonly<Record<string, RegExp>>} */
+const POWER_DOMAIN_HINTS = Object.freeze({
   military:   /watch|garrison|militia|guard|barracks|patrol/i,
   government: /council|hall|government|courthouse|reeve|mayor|chamber|seat/i,
   religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
@@ -296,77 +374,61 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
 });
 
-// The npcGenerator emits magic/crafts/noble (not arcane/craft/government); without
-// these the hint lookup falls through and the Power tab shows "None". Mapped per the
-// CATEGORY_TO_ARCHETYPE intent: crafts→craft, magic→arcane, noble→government.
-const CATEGORY_HINT_ALIASES = Object.freeze({
+// The generator emits magic/crafts/noble (not arcane/craft/government); map them
+// so the hint/tag lookup lands on a real domain rather than falling through.
+/** @type {Readonly<Record<string, string>>} */
+const POWER_DOMAIN_ALIASES = Object.freeze({
   crafts: 'craft',
   magic:  'arcane',
   noble:  'government',
 });
 
-/**
- * Resolve the settlement institution an NPC is plausibly tied to, by matching
- * the NPC's `category` against institution names with {@link
- * CATEGORY_INSTITUTION_HINTS}. Returns the matched institution's DISPLAY NAME
- * (e.g. "The Iron Garrison") or null when the category has no hint or no
- * institution name fits. First match wins, so members of one category collapse
- * to a single institution — a deliberate narrowing, not over-breadth.
- *
- * Shared so the Power tab can derive a faction's institutional footprint from
- * its members and then resolve that name to a rename-safe entity id (the index
- * keys institutions by slug, not by this `snake_case` form — see
- * `institutionIdFromName`). The legacy `inferInstitutionLink` wraps this to keep
- * its `institution.<snake>` contract byte-identical for the NPC profile.
- *
- * @param {{category?: string}|null} npc                   The NPC (needs `category`).
- * @param {{institutions?: Array<{name?: string}>}|null} settlement   Context (needs `institutions[]`).
- * @returns {string|null}            Matched institution display name, or null.
- */
-export function inferInstitutionName(npc, settlement) {
-  if (!npc || !settlement) return null;
-  const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  if (institutions.length === 0) return null;
+// Domain -> institution TAG affinity. Tag matching is the PRIMARY signal: every
+// catalog institution is tagged, and tags don't suffer the misses/false-positives
+// of name matching. Tags overlap by design (a guild hall is ['guild','market']),
+// so one institution can belong to several powers at once. The generic `trade`
+// tag is excluded — it is "participates in commerce", not "is an economic org".
+/** @type {Readonly<Record<string, string[]>>} */
+const POWER_DOMAIN_TAGS = Object.freeze({
+  military:   ['military', 'defense', 'fortification', 'law_enforcement'],
+  government: ['civic', 'legal', 'law_enforcement'],
+  religious:  ['religious', 'church', 'monastery', 'divine'],
+  economy:    ['market', 'banking', 'guild', 'port', 'warehouse', 'economy'],
+  craft:      ['guild', 'metalwork', 'textile', 'leather', 'timber'],
+  criminal:   ['criminal', 'smuggling', 'underground'],
+  arcane:     ['arcane', 'alchemy', 'planar', 'enchanting'],
+});
 
-  const rawCategory = typeof npc.category === 'string' ? npc.category.toLowerCase() : npc.category;
-  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory);
-  const hint = CATEGORY_INSTITUTION_HINTS[category];
-  if (!hint) return null;
-
-  const match = institutions.find(
-    /** @param {{name?: string}} inst */
-    inst => !!inst && typeof inst.name === 'string' && institutionMatchesRegex(inst, hint)
-  );
-  return match && typeof match.name === 'string' ? match.name : null;
+/** @param {string | null | undefined} category @returns {string | null} */
+function resolvePowerDomain(category) {
+  const raw = typeof category === 'string' ? category.toLowerCase() : category;
+  if (!raw) return null;
+  return POWER_DOMAIN_ALIASES[raw] || raw;
 }
 
 /**
  * All settlement institutions whose name fits a DOMAIN category's hint — the
- * power-tab counterpart to {@link inferInstitutionName}. inferInstitutionName
- * answers "which institution is THIS npc tied to" (first match, one result);
- * this answers "which institutions does a power of this CATEGORY touch" (every
- * match). A power row uses it so it shows its institutional footprint even when
- * it has no sub-faction members to infer from — e.g. the Religious Authorities
- * power surfaces the temple/shrine without a single clergy member on file.
+ * power-tab counterpart to inferInstitutionLink. That answers "which institution
+ * is THIS npc tied to" (first match, one result); this answers "which
+ * institutions does a power of this CATEGORY touch" (every match). A power row
+ * uses it so it shows its institutional footprint even with no sub-faction
+ * members to infer from (e.g. Religious Authorities surfacing the temple/shrine).
  *
- * Returns DISPLAY NAMES (the caller resolves rename-safe ids via the entity
- * index, exactly as the member path does). Same hints + aliases as the npc
- * path, so the two stay consistent.
+ * Returns DISPLAY NAMES (deduped, source order); the caller resolves rename-safe
+ * ids via the entity index.
  *
  * @param {string} category  a faction/power domain (military/religious/economy/…)
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {{ institutions?: Array<{ name?: string }> } | null | undefined} settlement
  * @returns {string[]} matching institution display names (deduped, source order)
  */
 export function institutionsForCategory(category, settlement) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return [];
-  const rawCategory = typeof category === 'string' ? category.toLowerCase() : category;
-  const resolved = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (
-    CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory
-  );
-  const hint = CATEGORY_INSTITUTION_HINTS[resolved];
+  const resolved = resolvePowerDomain(category);
+  const hint = resolved ? POWER_DOMAIN_HINTS[resolved] : undefined;
   if (!hint) return [];
   const seen = new Set();
+  /** @type {string[]} */
   const out = [];
   for (const inst of institutions) {
     if (!inst || typeof inst.name !== 'string' || !institutionMatchesRegex(inst, hint)) continue;
@@ -377,58 +439,32 @@ export function institutionsForCategory(category, settlement) {
   return out;
 }
 
-// Domain (faction category) -> institution TAG affinity. Tag-based association is
-// the PRIMARY signal for a power's institutional footprint: every catalog
-// institution is tagged, and tags don't suffer the misses/false-positives of name
-// matching — a "Local fence" or "Smuggling ring" carries the `criminal` tag but
-// matches no criminal NAME keyword, so the name path alone left criminal powers
-// showing "None" despite the settlement having criminal institutions. Tags also
-// overlap by design (a guild hall is `['guild','market']`), so one institution
-// maps to MORE THAN ONE power — exactly the "maps to one or more powers" intent.
-// Keyed by the SAME resolved domains as CATEGORY_INSTITUTION_HINTS (after the
-// magic→arcane / crafts→craft / noble→government aliases). The generic `trade`
-// tag is deliberately excluded — it sits on a third of all institutions, so it is
-// "participates in commerce", not "is an economic institution".
-const CATEGORY_INSTITUTION_TAGS = Object.freeze({
-  military:   ['military', 'defense', 'fortification', 'law_enforcement'],
-  government: ['civic', 'legal', 'law_enforcement'],
-  religious:  ['religious', 'church', 'monastery', 'divine'],
-  economy:    ['market', 'banking', 'guild', 'port', 'warehouse', 'economy'],
-  craft:      ['guild', 'metalwork', 'textile', 'leather', 'timber'],
-  criminal:   ['criminal', 'smuggling', 'underground'],
-  arcane:     ['arcane', 'alchemy', 'planar', 'enchanting'],
-});
-
 /**
  * A power's full institutional footprint — every institution that LOGICALLY
  * belongs to this power (faction). Three signals, unioned:
  *   1. TAGS — the institution carries a tag in this power's domain affinity
- *      (primary; see {@link CATEGORY_INSTITUTION_TAGS}).
- *   2. NAME — the institution name fits the domain hint (fallback for the rare
- *      untagged entry; same hints {@link inferInstitutionName} uses).
+ *      (primary; see POWER_DOMAIN_TAGS).
+ *   2. NAME — the institution name fits the domain hint (fallback for untagged
+ *      entries; same hints institutionsForCategory uses).
  *   3. EXPLICIT — the institution was pulled into existence BY this faction at
- *      generation (`factionSource` === the power's name, set by factionCorrelation).
+ *      generation (`factionSource` === the power's name).
  * Because tags overlap, an institution can belong to several powers at once.
  *
- * Returns DISPLAY NAMES (deduped, source order); the caller resolves rename-safe
- * ids via the entity index, same as the member path. Pure, UI-only (not consumed
- * by the generator), so it is safe to evolve without a golden-master regen.
+ * Returns DISPLAY NAMES (deduped, source order). Pure, UI-only.
  *
- * @param {{faction?: string, category?: string}|null} faction  a power-structure faction
- * @param {{institutions?: Array<{name?: string, tags?: string[], factionSource?: string}>}|null} settlement
+ * @param {{ faction?: string, category?: string } | null | undefined} faction  a power-structure faction
+ * @param {{ institutions?: Array<{ name?: string, tags?: string[], factionSource?: string }> } | null | undefined} settlement
  * @returns {string[]} matching institution display names
  */
 export function institutionsForPower(faction, settlement) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   if (institutions.length === 0 || !faction) return [];
-  const rawCategory = typeof faction.category === 'string' ? faction.category.toLowerCase() : faction.category;
-  const resolved = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (
-    CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory
-  );
-  const hint = CATEGORY_INSTITUTION_HINTS[resolved];
-  const tags = CATEGORY_INSTITUTION_TAGS[resolved];
+  const resolved = resolvePowerDomain(faction.category);
+  const hint = resolved ? POWER_DOMAIN_HINTS[resolved] : undefined;
+  const tags = resolved ? POWER_DOMAIN_TAGS[resolved] : undefined;
   const factionName = typeof faction.faction === 'string' ? faction.faction : null;
   const seen = new Set();
+  /** @type {string[]} */
   const out = [];
   for (const inst of institutions) {
     if (!inst || typeof inst.name !== 'string' || seen.has(inst.name)) continue;
@@ -444,36 +480,27 @@ export function institutionsForPower(faction, settlement) {
   return out;
 }
 
-/**
- * @param {import('./settlement.schema.js').SimNpc} npc
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- */
-function inferInstitutionLink(npc, settlement) {
-  const name = inferInstitutionName(npc, settlement);
-  return name ? `institution.${snakeCase(name)}` : null;
-}
-
 // ── Relationship-triangle inference ─────────────────────────────────────
-// For V1, we surface a single primary relationship: the
+// For Tier 4.5 V1, we surface a single primary relationship: the
 // strongest ally or rival the NPC has, sourced from
 // settlement.relationships. Triangles (three-way structures) are a
 // follow-up — the data is there, but the surface needs careful UX.
 
 /**
  * @param {import('./settlement.schema.js').SimNpc} npc
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
  */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
   // Find any relationship involving this NPC.
-  const candidates = rels.filter(/** @param {any} r */ r => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  const candidates = rels.filter((r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
   // these are the more campaign-actionable connections.
-  const withTension = candidates.find(/** @param {any} r */ r => typeof r.tension === 'string' && r.tension);
+  const withTension = candidates.find((r) => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
 
   const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
@@ -499,17 +526,27 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {import('./settlement.schema.js').SimNpc} npc       The legacy NPC entry.
- * @param {any} [settlement] Optional context for institution-link +
+ * @param {any} npc       The legacy NPC entry. Stays `any`: SimNpc types
+ *   `influence` as (string|number) while this function's own return type,
+ *   NpcProfile, types it `string|null`. The two schema typedefs contradict
+ *   each other and reconciling them is a schema decision, not a typing chore.
+ * @param {any} [settlement] Optional context — also stays `any`: explanation.js
+ *   calls this with its OWN ExplainSettlement typedef, which is not assignable
+ *   to SimSettlement, so tightening here reds a CONSUMER at allowance zero.
+ *   (The private helpers below DO take SimSettlement; they are only ever called
+ *   from inside this file.) Optional context for institution-link +
  *                              relationship-triangle derivation.
- * @returns {any}
+ * @returns {import('./settlement.schema.js').NpcProfile|null}
  */
 export function deriveNpcProfile(npc, settlement) {
   if (!npc || typeof npc !== 'object') return null;
 
   const archetype = archetypeFromCategory(npc.category);
   const template = templateForArchetype(archetype);
-  const rank = npc.structuralRank || 'minor';
+  // [domain-top-state-4] Surface + score the NpcRank-vocabulary rank (maps the
+  // generator's 'subordinate' → 'secondary'), so profile.rank stays inside the
+  // NpcRank union and the removal forecast reads the real per-tier palette.
+  const rank = normalizeNpcRank(npc.structuralRank);
 
   return {
     id:   npc.id || `npc.${snakeCase(npc.name || 'unnamed')}`,
@@ -548,7 +585,15 @@ export function deriveNpcProfile(npc, settlement) {
     timesExposed:     npc.timesExposed || 0,
     ousted:           npc.ousted === true,
 
-    // structured fields — leverage / vulnerability from template,
+    // W-C5 cause-resolution lifecycle: the RAW worldPulse-attributed stamp
+    // ({causeClass, family, stage, situation, role, tick stamps, ageBand}) — carries
+    // the conjunction key W2 keys off. Null for a compromise the pulse never touched
+    // (never-advanced settlement). Kept RAW here (no display-vocabulary import) so the
+    // structured model stays first-paint-inert; the lazy dossier card runs it through
+    // the generic content floor (describeCompromiseLifecycle) at render.
+    compromiseLifecycle: npc.compromiseLifecycle || null,
+
+    // Tier 4.5 structured fields — leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],
     vulnerabilities: (() => {
@@ -564,7 +609,7 @@ export function deriveNpcProfile(npc, settlement) {
     offerToPlayers:    Array.isArray(npc.plotHooks) ? npc.plotHooks.slice(0, 2) : [],
     wantsFromPlayers:  firstNonEmpty(npc.goal?.short),
 
-    // The headline contribution: structured forecast of what
+    // The headline Tier 4.5 contribution: structured forecast of what
     // happens if this NPC is removed from play.
     consequenceIfRemoved: {
       severity: rank,
@@ -577,14 +622,11 @@ export function deriveNpcProfile(npc, settlement) {
   };
 }
 
-/**
- * Enrich every NPC on a settlement. Returns []. for missing data.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- */
-export function deriveAllNpcProfiles(settlement) {
+/** Enrich every NPC on a settlement. Returns []. for missing data. */
+export function deriveAllNpcProfiles(/** @type {any} */ settlement) {
   if (!settlement) return [];
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  return npcs.map(/** @param {import('./settlement.schema.js').SimNpc} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
+  return npcs.map((/** @type {any} */ n) => deriveNpcProfile(n, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
@@ -592,19 +634,15 @@ export function deriveAllNpcProfiles(settlement) {
 /**
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
-export function npcArchetypeBreakdown(settlement) {
-  // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
-  // of the archetype vocabulary every profile resolves into — archetypeFromCategory
-  // falls back to 'other', itself a template key). Building the buckets dynamically
-  // means a newly-added archetype can never be silently undercounted by a stale literal.
+export function npcArchetypeBreakdown(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
   /** @type {Record<string, number>} */
-  const out = {};
-  for (const archetype of Object.keys(NPC_TEMPLATES)) out[archetype] = 0;
+  const out = {
+    government: 0, military: 0, religious: 0, merchant: 0,
+    craft: 0, criminal: 0, arcane: 0, occupation: 0, other: 0,
+  };
   for (const p of deriveAllNpcProfiles(settlement)) {
-    if (out[p.archetype] === undefined) out[p.archetype] = 0; // defensive: any unforeseen value still counts
-    out[p.archetype] += 1;
+    if (out[p.archetype] !== undefined) out[p.archetype] += 1;
   }
   return out;
 }
@@ -613,11 +651,10 @@ export function npcArchetypeBreakdown(settlement) {
  * Forecast the cumulative impact of removing all 'dominant'-rank NPCs.
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
-export function dominantNpcRemovalImpact(settlement) {
+export function dominantNpcRemovalImpact(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
   const dominant = deriveAllNpcProfiles(settlement)
-    .filter(/** @param {any} p */ p => p.rank === 'dominant');
+    .filter((/** @type {any} */ p) => p.rank === 'dominant');
   const out = [];
   for (const p of dominant) {
     for (const c of p.consequenceIfRemoved.consequences) {

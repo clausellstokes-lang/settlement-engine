@@ -21,10 +21,9 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import { UserPlus, X } from 'lucide-react';
+import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -32,10 +31,14 @@ import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
-  const previewEvent = useStore(s => s.previewEvent);
+  const stageComposerIntent = useStore(s => s.stageComposerIntent);
   const dismiss      = useStore(s => s.dismissPendingSuccession);
-  // Back aria-modal="true" with focus-in/Tab-trap/Escape/restore. Hook runs
-  // unconditionally (before the early return); "open" = the prompt is rendered.
+
+  // Back aria-modal="true" with focus-in / Tab-trap / Escape / focus-restore, using the
+  // SHARED trap the sibling modals use (a11y audit R7 — a bare aria-modal that doesn't
+  // trap focus strands keyboard + screen-reader users). Called unconditionally BEFORE the
+  // early return (Rules of Hooks); "open" is false when the prompt isn't shown, so the
+  // trap stays inert until the modal actually renders.
   const dialogRef = useDialogFocusTrap(Boolean(pending && settlement), dismiss);
 
   if (!pending || !settlement) return null;
@@ -56,22 +59,20 @@ export default function SuccessorPrompt() {
     : 'the role';
 
   function pickSuccessor(npc) {
-    previewEvent({
-      // Date.now() and Math.random() generate a unique event id. They
-      // only fire when the user clicks a successor (outside render);
-      // the rule sees the function defined during render and is being
-      // over-conservative.
-      // eslint-disable-next-line react-hooks/purity
-      id: `ev_succ_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    // Composer V2 §4/§5: stage a composer INTENT — the form is the one source
+    // of truth, so the composer populates, auto-previews, and Apply commits the
+    // (possibly adjusted) form event. The old pre-staged pendingPreview died
+    // with the apply-prefers-pendingPreview bypass.
+    stageComposerIntent({
       type: 'ASSIGN_NPC_TO_ROLE',
-      targetId: npc.id || npc.name,
-      payload: {
+      target: npc.id || npc.name,
+      fields: {
         institutionId,
         role: pending.outgoingRole || 'replacement',
         quality: 'competent',          // sensible default — user can adjust
+        causeOverride: 'world_event',  // the vacuum-filling is the world's doing
+        description: `${npc.name} succeeds ${pending.outgoingNpcName}.`,
       },
-      cause: 'world_event',
-      description: `${npc.name} succeeds ${pending.outgoingNpcName}.`,
     });
     dismiss();
     // Scroll to EventComposer so the DM lands on the preview panel
@@ -82,26 +83,26 @@ export default function SuccessorPrompt() {
   }
 
   function pickNew() {
-    previewEvent({
-      id: `ev_new_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    stageComposerIntent({
       type: 'ADD_NPC',
-      targetId: pending.outgoingRole ? `New ${pending.outgoingRole}` : 'New Appointee',
-      payload: {
+      target: pending.outgoingRole ? `New ${pending.outgoingRole}` : 'New Appointee',
+      fields: {
         importance: 'key',
         role: pending.outgoingRole || '',
-        linkedInstitutionIds: institutionId ? [institutionId] : [],
+        institutionId,               // buildEvent maps this to linkedInstitutionIds
+        causeOverride: 'world_event',
+        description: `A new figure rises to fill the vacuum left by ${pending.outgoingNpcName}.`,
       },
-      cause: 'world_event',
-      description: `A new figure rises to fill the vacuum left by ${pending.outgoingNpcName}.`,
     });
     dismiss();
-    // Pricing moment for the campaign-state moment: rebuilding after
-    // a pillar death is the kind of high-engagement action that
-    // earns the upgrade pitch.
-    const live = useStore.getState();
-    triggerPricingMoment('first_canon_export', () => {
-      live.setPurchaseModalOpen?.(true);
-    }, { tier: live.auth?.tier });
+    // No pricing moment here (W-R2-TRUST, components-dossier-library-5): the
+    // composer the DM is about to land on IS the value moment, and pricingMoments'
+    // own doctrine is "don't ask before they understand the value". This handler
+    // previously fired the 'first_canon_export' moment — the WRONG copy (export,
+    // not succession) AND it consumed the 24h cooldown for the REAL first-canon-
+    // export moment (SettlementDetail). No succession-themed moment exists;
+    // registering one would add eager copy to interrupt the very flow the doctrine
+    // says to leave uninterrupted, so the honest fix is to fire nothing.
     setTimeout(() => {
       const target = document.querySelector('[data-anchor="event-composer"]');
       if (target?.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -124,7 +125,7 @@ export default function SuccessorPrompt() {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="succession-title" style={titleStyle}>
-            A leader is gone.
+            <Crown size={16} aria-hidden="true" color={GOLD} /> A leader is gone.
           </h2>
           <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={dismiss} />
         </header>
@@ -150,7 +151,6 @@ export default function SuccessorPrompt() {
                   <button
                     key={npc.id || npc.name}
                     type="button"
-                    aria-label={`Appoint ${npc.name} as successor`}
                     onClick={() => pickSuccessor(npc)}
                     style={successorBtnStyle}
                   >
@@ -163,6 +163,7 @@ export default function SuccessorPrompt() {
                         {npc.importance ? ` · ${npc.importance}` : ''}
                       </div>
                     </div>
+                    <ArrowRight size={14} aria-hidden="true" color={GOLD} />
                   </button>
                 ))}
               </div>
@@ -174,7 +175,6 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
-              borderRadius: R.sm,
               fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
@@ -220,7 +220,7 @@ const sheetStyle = {
   width: 'min(440px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: CARD,
-  border: `1px solid ${BORDER}`, borderRadius: R.md,
+  border: `1px solid ${BORDER}`,
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {
@@ -241,7 +241,7 @@ const successorBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 8,
   padding: '8px 10px',
   background: '#fffbf5',
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
+  border: `1px solid ${BORDER}`,
   cursor: 'pointer', textAlign: 'left',
   fontFamily: sans,
 };

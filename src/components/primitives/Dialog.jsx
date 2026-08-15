@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP,
+  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SP,
   RED, AMBER, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
@@ -22,6 +22,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
   return (
     <div
       role="presentation"
+      className="oc-m-warmdim"
       style={{
         position: 'fixed',
         inset: 0,
@@ -30,7 +31,10 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: SP.lg,
-        background: 'rgba(27,20,8,0.46)',
+        // The room dims warm behind the plate (organic motion #10 warm-dim). The
+        // rgba is the token warm-dim value (58% ink-deepest, matching oc-m-warmdim);
+        // the class supplies the fade-in, reduced-motion-safe.
+        background: 'rgba(27,20,8,0.58)',
       }}
       onMouseDown={event => {
         if (event.target === event.currentTarget) onCancel?.();
@@ -47,9 +51,13 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           maxHeight: 'min(90vh, 680px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
-          borderRadius: R.lg,
+          // The plate is rule-framed, not rounded, and holds no z-axis — depth is
+          // the warm-dim ground, never elevation (organic craft §3/§6). The radius
+          // and shadow lines are kept as value-swaps so the kill-list stays exact;
+          // both are would-be burn-down deletions.
+          borderRadius: 0,
           background: CARD,
-          boxShadow: ELEV[3],
+          boxShadow: 'none',
         }}
       >
         <header style={{
@@ -64,7 +72,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           <div style={{
             width: 32,
             height: 32,
-            borderRadius: R.lg,
+            borderRadius: 0,
             border: `1px solid ${BORDER}`,
             background: CARD,
             display: 'flex',
@@ -127,6 +135,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
 
 export function ConfirmDialog({
   open,
+  heading,
   title,
   body,
   // Optional extra content rendered ABOVE the action row — e.g. a toggle row or a
@@ -143,8 +152,9 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }) {
+  const resolvedTitle = heading ?? title;
   return (
-    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
+    <Shell open={open} title={resolvedTitle} body={body} tone={tone} onCancel={onCancel}>
       {extra}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
@@ -159,17 +169,29 @@ export function ChoiceDialog({
   title,
   body,
   choices = [],
+  // Optional: which choice takes focus when the dialog opens. Without it the
+  // shared focus trap falls back to the first focusable, which is the header's
+  // Close button — fine for a warning, wrong for a question whose recommended
+  // answer should be one Enter away. Default null keeps every existing call site
+  // rendering byte-identically (no autofocus attribute emitted).
+  defaultChoiceId = null,
   cancelLabel = 'Cancel',
+  // 'warning' is the shipped default (a fork the DM is being warned about);
+  // 'default' is for a plain question that carries no hazard, e.g. the realm's
+  // magic stance. Passed through to Shell's icon tone only.
+  tone = 'warning',
   onChoose,
   onCancel,
 }) {
   return (
-    <Shell open={open} title={title} body={body} tone="warning" onCancel={onCancel}>
+    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
         {choices.map(choice => (
           <button
             key={choice.id}
             type="button"
+            // eslint-disable-next-line jsx-a11y/no-autofocus -- intentional: the recommended answer takes focus when the question opens
+            autoFocus={defaultChoiceId != null && choice.id === defaultChoiceId}
             onClick={() => onChoose?.(choice.id)}
             style={{
               display: 'block',

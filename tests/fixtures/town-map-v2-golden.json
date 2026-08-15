@@ -1,0 +1,12 @@
+{
+  "bytes": 165667,
+  "configs": 20,
+  "distinctMorphologies": 5,
+  "fabricLitConfigs": 1,
+  "hash": "0bdbb9e1f280a120236d67b39eb2b50b3500174aea9d444484f12bf78357a2ad",
+  "layoutLawVersion": 2,
+  "minLynchScore": 0.6634,
+  "totalBuildings": 247,
+  "totalDistricts": 132,
+  "townMapGeometryVersion": 2
+}

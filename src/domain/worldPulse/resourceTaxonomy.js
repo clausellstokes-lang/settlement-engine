@@ -1,4 +1,21 @@
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import {
+  resourceKeyForLabel,
+  resourceSemanticsFor,
+} from '../resourceSemantics.js';
+
+/**
+ * @typedef {{
+ *   label?: string,
+ *   desc?: string,
+ *   category?: string,
+ *   commodities?: string[],
+ *   tradeGoods?: string[]
+ * }} TaxonomyResourceSpec
+ */
+const RESOURCE_CATALOG = /** @type {Record<string, TaxonomyResourceSpec>} */ (
+  RESOURCE_DATA
+);
 
 const RENEWABLE_PATTERNS = [
   /fish|fishing|river_fish/,
@@ -9,11 +26,16 @@ const RENEWABLE_PATTERNS = [
 ];
 
 const NONRENEWABLE_PATTERNS = [
-  /iron|ore|deposit|vein|metal|coal|peat|quarry|stone|gem|crystal|salt|sand|clay|glass/,
+  // ore/coal carry a leading \b so they match the standalone minerals ("iron ore",
+  // "coal") and not the renewable words that contain them as a substring: "forest"
+  // and "shore" (ore), "charcoal" (coal). Unanchored, those flag woodland as exhaustible.
+  /iron|\bore|deposit|vein|metal|\bcoal|peat|quarry|stone|gem|crystal|salt|sand|clay|glass/,
   /ruin|artefact|artifact|relic/,
 ];
 
-const MAGICAL_PATTERNS = [/magic|arcane|ley|planar/];
+// \bley\b matches the standalone "ley" of a ley line, never the "ley" inside
+// "barley" — the substring that used to mis-flag grain fields as magical.
+const MAGICAL_PATTERNS = [/magic|arcane|\bley\b|planar/];
 
 /** @param {any} resource */
 function textFor(resource) {
@@ -42,44 +64,88 @@ function magicLevelScore(settlement = {}) {
 /** @param {any} resource */
 export function classifyResource(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
+  const canonicalKey = resourceKeyForLabel(resource);
+  const spec = RESOURCE_CATALOG[canonicalKey || key] || {};
+  const semantics = resourceSemanticsFor(resource);
+  if (canonicalKey && semantics) {
+    const kind = semantics.type === 'renewable'
+      ? (spec.category === 'land' || spec.category === 'water' ? 'managed' : 'renewable')
+      : semantics.type === 'exhaustible'
+        ? (spec.category === 'special' ? 'strategic' : 'nonrenewable')
+        : semantics.type === 'magical'
+          ? 'magical'
+          : semantics.type === 'infrastructure'
+            ? 'infrastructure'
+            : 'strategic';
+    const renewability = semantics.type === 'renewable'
+      ? 'renewable'
+      : semantics.type === 'exhaustible'
+        ? 'exhaustible'
+        : semantics.type === 'magical'
+          ? 'conditional'
+          : semantics.type === 'infrastructure'
+            ? 'maintained'
+            : 'fixed';
+    return {
+      key: canonicalKey,
+      type: semantics.type,
+      kind,
+      renewability,
+      recoveryMode: semantics.recoveryMode,
+      randomDepletionEligible: semantics.randomDepletionEligible,
+      label: spec.label || String(resource || '').replace(/_/g, ' '),
+    };
+  }
   const text = textFor(resource);
   const magical = MAGICAL_PATTERNS.some(pattern => pattern.test(text));
   const nonrenewable = NONRENEWABLE_PATTERNS.some(pattern => pattern.test(text));
-  const renewable = RENEWABLE_PATTERNS.some(pattern => pattern.test(text));
+  // Subterranean bodies are mined mineral seams — inherently exhaustible. An
+  // incidental renewable token in their trade goods (coal_deposits ships 'timber')
+  // must not flip them to natural recovery, or a finite seam would regrow. For the
+  // underground class, category wins over keyword.
+  const renewable = spec.category !== 'subterranean'
+    && RENEWABLE_PATTERNS.some(pattern => pattern.test(text));
 
   if (magical) {
     return {
       key,
+      type: 'magical',
       kind: 'magical',
       renewability: 'conditional',
       recoveryMode: 'requires_high_magic',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   if (nonrenewable && !renewable) {
     return {
       key,
+      type: 'exhaustible',
       kind: spec.category === 'special' ? 'strategic' : 'nonrenewable',
       renewability: 'exhaustible',
       recoveryMode: 'manual',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   if (spec.category === 'special' && !renewable) {
     return {
       key,
+      type: 'positional',
       kind: 'strategic',
       renewability: 'limited',
       recoveryMode: 'manual',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   return {
     key,
+    type: 'renewable',
     kind: spec.category === 'land' || spec.category === 'water' ? 'managed' : 'renewable',
     renewability: 'renewable',
     recoveryMode: 'natural',
+    randomDepletionEligible: true,
     label: spec.label || String(resource || '').replace(/_/g, ' '),
   };
 }
@@ -103,6 +169,26 @@ export function canRecoverResource(resource, settlement, context = {}) {
       reason: canRecover
         ? 'High magic can re-stabilize this magical resource.'
         : 'Magical resource recovery requires high or pervasive magic.',
+    };
+  }
+  if (taxonomy.recoveryMode === 'not_applicable') {
+    return {
+      canRecover: false,
+      taxonomy,
+      reason: 'Positional resources and infrastructure do not organically deplete or recover.',
+    };
+  }
+  // E4-2b: exhaustible / strategic resources ('manual' recoveryMode) have no
+  // natural regrowth — but a sustained calm (quietRecovery) lets prospecting
+  // reopen seams and trade substitution slowly restore access. This is the
+  // bounded, event-gated path that keeps a peaceful settlement's exhaustibles
+  // from ratcheting to permanent depletion; the caller damps its probability
+  // so it stays slow. A resource under real pressure never reaches here.
+  if (context.quietRecovery) {
+    return {
+      canRecover: true,
+      taxonomy,
+      reason: 'A long quiet spell lets prospecting, reopened seams, or trade substitution slowly restore this exhaustible resource.',
     };
   }
   return {

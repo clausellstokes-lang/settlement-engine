@@ -1,0 +1,226 @@
+/**
+ * stressTypeRegistration.test.js — [generators-domain-1 + data-tables-3].
+ *
+ * THE STRESS-TYPE REGISTRATION MANIFEST WALKER (structural prevention).
+ *
+ * A stress type registered in STRESS_TYPE_MAP must be WIRED into every consuming
+ * table — arrival vignettes, institution secrets, tension mapping, and the NPC/
+ * history/severity/flavor weight tables — or carry an explicit, documented
+ * exemption. Before this, the 5 newer types (insurgency, mass_migration, wartime,
+ * religious_conversion, slave_revolt) were registered but half-integrated: they
+ * had no vignette, no institutional secrets, no probability coupling, and their
+ * tension targets (legitimacy_crisis/demographic_pressure/trade_dispute) had no
+ * template, so the tension was silently dropped.
+ *
+ * This walker makes "a new stress type cannot ship half-wired" a test, not a hope.
+ * Exported tables are checked by import; function-local tables by source-scan
+ * (brace-matched block, then a per-key presence check).
+ */
+
+import { describe, it, expect } from 'vitest';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
+import { STRESS_TYPE_META } from '../../src/data/stressTypesMeta.js';
+import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
+import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
+import { STRESS_SEVERITY_WEIGHT } from '../../src/generators/stressGenerator.js';
+import { STRESS_FLAVOR } from '../../src/generators/power/settlementNarrative.js';
+import { STRESS_TO_TENSION } from '../../src/generators/historyGenerator.js';
+import { HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES } from '../../src/data/historyData.js';
+
+const TYPES = Object.keys(STRESS_TYPE_MAP);
+
+// EXEMPTIONS — tables that intentionally do NOT cover every registered type.
+// Any new stress type is auto-covered by these exemptions; the point is to keep
+// the decision explicit and reviewable, not to silence the walker.
+const EXEMPTIONS = {
+  // Trace-only: names the institutions that SUPPRESS a stress. Only types with an
+  // institution-based suppressor appear; types suppressed by priorities/route/threat
+  // (and the 5 new types, whose institution couplings are BOOSTS not suppressors)
+  // legitimately have no entry. (src/generators/steps/stressConfirmPass.js)
+  SUPPRESSOR_KEYWORDS: 'institution-suppressed types only',
+  // NOTE: DEFENSE_STRESS_STATUS was exempted here as "UI display, partial by design"
+  // when it hand-mapped only 6 of the 15 stress types (cycle-3 H3). It is now DERIVED
+  // from STRESS_TYPE_MAP (posture = each type's `militaryPosture`), so it covers EVERY
+  // registered type — it graduated to the full-coverage `importedTables` set below.
+  // Deliberately the 5 newer types only (an override layer). (npcGenerator.js)
+  STRESS_GOAL_OVERRIDES: 'new-types override layer by design',
+};
+
+function read(rel) {
+  return readFileSync(resolve(process.cwd(), rel), 'utf-8');
+}
+
+// Extract a `NAME = { ... }` object literal block via brace matching (robust to
+// nested objects/arrays), so a per-key scan cannot leak past the table.
+function tableBlock(src, tableName) {
+  // Tables may be plain literals or wrapped in Object.freeze after extraction
+  // into a data/helper module. Start at the assignment and brace-match the
+  // first literal so the walker follows architecture changes without relaxing
+  // its per-key coverage requirement.
+  const start = src.indexOf(`${tableName} =`);
+  if (start === -1) return null;
+  const open = src.indexOf('{', start);
+  let depth = 0;
+  for (let i = open; i < src.length; i++) {
+    const c = src[i];
+    if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) return src.slice(open, i + 1);
+    }
+  }
+  return null;
+}
+
+// Missing keys for a table given a way to test membership.
+const missingIn = (has) => TYPES.filter((t) => !has(t));
+
+describe('stress-type registration manifest (structural prevention)', () => {
+  it('exemptions reference no unknown table (keeps the exemption list honest)', () => {
+    // Every exemption must name a table that actually exists in the source, so a
+    // renamed/deleted table cannot leave a stale silent exemption behind.
+    const srcAll =
+      read('src/generators/steps/stressConfirmPass.js') +
+      read('src/generators/npcGenerator.js');
+    for (const name of Object.keys(EXEMPTIONS)) {
+      // Accept both a plain object literal and an Object.freeze()-wrapped table
+      // (DEFENSE_STRESS_STATUS is frozen in the shared display module).
+      const exists = srcAll.includes(`${name} = {`) || srcAll.includes(`${name} = Object.freeze({`);
+      expect(exists, `exemption '${name}' names a table that no longer exists`).toBe(true);
+    }
+  });
+
+  // ── Imported (exported) tables — exact key coverage ──────────────────────────
+  const importedTables = {
+    STRESS_TYPE_META,
+    STRESS_INSTITUTION_EFFECTS,
+    STRESS_DESCS,
+    STRESS_SEVERITY_WEIGHT,
+    STRESS_FLAVOR,
+    STRESS_TO_TENSION,
+    // Cycle-3 H3: the active-military-status posture table, now DERIVED from
+    // STRESS_TYPE_MAP, must cover every registered stress type (was 6 of 15).
+    DEFENSE_STRESS_STATUS,
+  };
+  for (const [name, table] of Object.entries(importedTables)) {
+    it(`${name} covers every registered stress type`, () => {
+      const missing = missingIn((t) => Object.prototype.hasOwnProperty.call(table, t));
+      expect(missing, `${name} is missing: ${missing.join(', ')}`).toEqual([]);
+    });
+  }
+
+  // ── Source-scanned (function-local) tables — per-key presence ────────────────
+  //
+  // ADDRESSED BY NAME, LOCATED BY SEARCH. This list used to hand-key a FILE for each
+  // table, and that address rotted: `STRESS_BOOSTS` was declared to live in
+  // src/generators/historyGenerator.js, the history leaf-extraction moved it to
+  // src/generators/history/historyEventStrands.js, and the row went red on a
+  // "could not locate table" that had nothing to do with stress-type coverage
+  // (measured 2026-08-07: BOTH live STRESS_BOOSTS definitions cover all 15
+  // registered types — the pin was wrong, the code was right).
+  //
+  // So the file column is gone. The walker DISCOVERS every definition site of each
+  // named table under the scan roots and requires full coverage at every one. A table
+  // that moves keeps its guard; a SECOND definition site is covered automatically
+  // rather than being missed until someone remembers to add a row; and the
+  // non-vacuity floor below (at least one site per name, and the whole scan
+  // non-empty) is what stops "found nothing, passed everything".
+  const SCAN_ROOTS = ['src/data', 'src/generators'];
+  const SCANNED_TABLES = [
+    'STRESS_NOTES',
+    'STRESS_BOOSTS',
+    'STRESS_SECRET_BOOSTS',
+    'STRESS_TO_CATEGORY',
+    'STRESS_MANDATORY_ROLES',
+    'STRESS_GOALS',
+  ];
+
+  /** Every .js file under the scan roots. */
+  function scanFiles(dir, out = []) {
+    for (const e of readdirSync(resolve(process.cwd(), dir))) {
+      const rel = `${dir}/${e}`;
+      if (statSync(resolve(process.cwd(), rel)).isDirectory()) scanFiles(rel, out);
+      else if (e.endsWith('.js') && !e.includes('.test.')) out.push(rel);
+    }
+    return out;
+  }
+  const SCANNED_FILES = SCAN_ROOTS.flatMap((d) => scanFiles(d));
+
+  /** Files that DEFINE `name` as an object literal (possibly Object.freeze-wrapped). */
+  const definitionSitesOf = (name) => SCANNED_FILES.filter((f) => {
+    const src = read(f);
+    return new RegExp(`(?:const|let|var)\\s+${name}\\s*=\\s*(?:Object\\.freeze\\()?\\{`).test(src)
+      || new RegExp(`export\\s+const\\s+${name}\\s*=\\s*(?:Object\\.freeze\\()?\\{`).test(src);
+  });
+
+  it('the table scan is non-vacuous (the search itself is pinned)', () => {
+    expect(SCANNED_FILES.length).toBeGreaterThan(50);
+    const emptyNames = SCANNED_TABLES.filter((n) => definitionSitesOf(n).length === 0);
+    expect(emptyNames, `no definition site found for: ${emptyNames.join(', ')} — the table was renamed or removed, not merely moved`).toEqual([]);
+  });
+
+  for (const name of SCANNED_TABLES) {
+    it(`${name} covers every registered stress type at every definition site`, () => {
+      const sites = definitionSitesOf(name);
+      expect(sites.length, `no definition site found for ${name}`).toBeGreaterThan(0);
+      const failures = [];
+      for (const file of sites) {
+        const block = tableBlock(read(file), name);
+        if (!block) { failures.push(`${file}: could not brace-match ${name}`); continue; }
+        const missing = missingIn((t) => new RegExp(`\\b${t}:`).test(block));
+        if (missing.length) failures.push(`${file}: missing ${missing.join(', ')}`);
+      }
+      expect(failures, failures.join('\n  ')).toEqual([]);
+    });
+  }
+
+  // ── buildStressContext probability coupling — presence per registered type ───
+  it('buildStressContext references every registered stress type (probability coupling)', () => {
+    const src = read('src/generators/stressGenerator.js');
+    const fnStart = src.indexOf('buildStressContext =');
+    const fnEnd = src.indexOf('STRESS_SEVERITY_WEIGHT'); // the export that follows the function
+    const body = src.slice(fnStart, fnEnd);
+    const missing = TYPES.filter((t) => !body.includes(`'${t}'`));
+    expect(missing, `buildStressContext has no coupling reference for: ${missing.join(', ')}`).toEqual([]);
+  });
+
+  // ── Tension resolution — the exact bug class this wave fixed ─────────────────
+  it('every STRESS_TO_TENSION target resolves to a real template with a chapter title', () => {
+    const templateTypes = new Set(HISTORICAL_EVENTS_DATA.map((e) => e.type));
+    const unresolved = [];
+    for (const [stress, tension] of Object.entries(STRESS_TO_TENSION)) {
+      if (!templateTypes.has(tension)) unresolved.push(`${stress}→${tension} (no template)`);
+      else if (!EVENT_TYPE_NAMES[tension]) unresolved.push(`${stress}→${tension} (no title)`);
+    }
+    expect(unresolved, `unresolved tension mappings: ${unresolved.join(', ')}`).toEqual([]);
+  });
+
+  // ── [generators-domain-1] numeric-consumer coupling (defense / food / prosperity) ────
+  // The inline stress-CONSUMER blocks (defense penalties, food production, prosperity
+  // index) are SELECTIVE by design — each type couples to the dimensions its viabilityNote
+  // implies, so a "covers every type" walker does not fit them. These targeted scans pin the
+  // couplings the round-2 fix added, so they cannot silently regress to half-integrated.
+  it('the second-wave types couple to DEFENSE via the priorityHelpers multipliers (NOT the inline penalty block — that would double-count)', () => {
+    const ph = read('src/generators/priorityHelpers.js');
+    for (const t of ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt']) {
+      expect(ph.includes(`'${t}'`), `priorityHelpers missing defense-input coupling for ${t}`).toBe(true);
+    }
+  });
+
+  it('the food-impacting second-wave types are coupled in BOTH food generators (production/consumption)', () => {
+    const foodGen = read('src/generators/foodGenerator.js');
+    const foodBal = read('src/generators/economy/foodBalance.js');
+    for (const t of ['wartime', 'slave_revolt', 'mass_migration']) {
+      expect(foodGen.includes(`'${t}'`), `foodGenerator.js has no food coupling for ${t}`).toBe(true);
+      expect(foodBal.includes(`'${t}'`), `foodBalance.js has no food coupling for ${t}`).toBe(true);
+    }
+  });
+
+  it('slave_revolt has a direct prosperity-index penalty row (the one second-wave type that lacked one)', () => {
+    const prosperity = read('src/generators/economy/prosperity.js');
+    expect(prosperity.includes(`'slave_revolt'`), 'prosperity.js has no slave_revolt penalty row').toBe(true);
+  });
+});

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { useIsMobileTab } from './tabConstants';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 
@@ -13,17 +13,23 @@ Object.values(SUPPLY_CHAIN_NEEDS || {}).forEach(cat => {
 
 // ── Status config ─────────────────────────────────────────────────────────────
 export const STATUS = {
-  running:             { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',             dot: '●' },
-  operational:         { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',             dot: '●' },
+  active:      { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Active',      dot: '●' },
+  confirmed:   { color: '#6b5340', bg: '#f8f5f0', border: '#c8b898', label: 'Reviewed',    dot: '✓' },
+  stale:       { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Needs Review', dot: '◐' },
+  blocked:     { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Blocked',     dot: '◐' },
+  ineligible:  { color: '#6b5340', bg: '#f8f5f0', border: '#c8b898', label: 'Ineligible',  dot: '○' },
+  running:     { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
+  operational: { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
+  vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',  dot: '◐' },
+  impaired:    { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired',    dot: '○' },
+  broken:      { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken',      dot: '✕' },
+  // Ported master fix: computeActiveChains emits 'entrepot' (a healthy re-export
+  // hub); without its own chip it fell through to Vulnerable.
   entrepot:            { color: '#a0762a', bg: '#faf6ec', border: '#d8c090', label: 'Entrepôt',            dot: '●' },
-  // Magic actively covering a supply gap reads BLUE (matching the service-level
-  // "Magical Infrastructure" tag) — supplied, not impaired. The ✦ marks it apart
-  // from a plain blue node; Import nodes are neutralised off blue (below) so blue
-  // means magic here, not "imported".
+  // Ported master fix: EconomicsTab emits this status; without its own chip it
+  // fell through to Vulnerable. Info-blue to match the magic tag (vetoable
+  // cosmetic: master chose blue over the old purple).
   magically_sustained: { color: swatch.info, bg: swatch.infoBg, border: '#a0b0d8', label: 'Magically Sustained', dot: '✦' },
-  vulnerable:          { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',          dot: '◐' },
-  impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired',            dot: '○' },
-  broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken',              dot: '✕' },
 };
 export const getStatus = s => STATUS[s] || STATUS.vulnerable;
 
@@ -38,7 +44,7 @@ const ResourceNode = ({ icon, label, depleted, st }) => (
     display: 'flex', alignItems: 'center', gap: 4,
     background: depleted ? '#fdf8ec' : st.bg,
     border: `1px solid ${depleted ? '#d8b060' : st.border}`,
-    borderRadius: 5, padding: '3px 8px', flexShrink: 0,
+    padding: '3px 8px', flexShrink: 0,
     opacity: depleted ? 0.75 : 1,
   }}>
     {icon && <span style={{ fontSize: FS.md }}>{icon}</span>}
@@ -54,9 +60,8 @@ const InstNode = ({ name, present, st }) => (
     display: 'flex', alignItems: 'center', gap: 3,
     background: present ? st.bg : '#f8f5f0',
     border: `1px ${present ? 'solid' : 'dashed'} ${present ? st.border : '#c8b898'}`,
-    borderRadius: 5, padding: '3px 8px', flexShrink: 0,
+    padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xxs }}></span>
     <span style={{ fontSize: FS.xs, fontWeight: present ? 700 : 400,
       color: present ? st.color : '#9c8068',
       fontStyle: present ? 'normal' : 'italic' }}>
@@ -69,15 +74,10 @@ const InstNode = ({ name, present, st }) => (
 const ImportNode = ({ label }) => (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
-    // Neutral parchment, NOT blue: an import is an external-input LABEL, not a
-    // health state, and blue is now reserved for "magic covering a gap" (so the two
-    // never read as the same thing in one diagram). The dashed border + "Import:"
-    // prefix keep the node type unmistakable.
-    background: swatch['#F5F0E8'], border: '1px dashed #c8b898',
-    borderRadius: 5, padding: '3px 8px', flexShrink: 0,
+    background: swatch['#FAF8F4'], border: '1px dashed #a0b0d8',
+    padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xxs }}></span>
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: MUTED }}>Import: {label}</span>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
   </div>
 );
 
@@ -87,14 +87,14 @@ const OutputNode = ({ label, isExport }) => (
     display: 'flex', alignItems: 'center', gap: 3,
     background: isExport ? '#f0faf2' : '#faf8f4',
     border: `1px solid ${isExport ? '#88c880' : '#d8c8a8'}`,
-    borderRadius: 5, padding: '3px 8px', flexShrink: 0,
+    padding: '3px 8px', flexShrink: 0,
   }}>
     {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success }}>↗</span>}
     <span style={{ fontSize: FS.xs, fontWeight: isExport ? 700 : 500,
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>Export</span>}
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
   </div>
 );
 
@@ -144,11 +144,14 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
   if (mobile) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px',
-        background: st.bg, borderLeft: `3px solid ${st.border}`, borderRadius: 4 }}>
-        <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || '️'}</span>
+        background: st.bg, borderLeft: `3px solid ${st.border}`}}>
+        {/* Icon sweep 2026-08-03: the built-in corpus authors no resourceIcon, so
+            this slot renders ONLY for custom/AI-authored chains that carry one.
+            An unguarded span emitted an empty box that still ate the flex gap. */}
+        {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>Export</span>}
-        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch.infoBg, border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
+        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
+        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
         <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
@@ -156,7 +159,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
 
   return (
     <div style={{ padding: '8px 12px', background: st.bg,
-      borderLeft: `3px solid ${st.border}`, borderRadius: '0 5px 5px 0',
+      borderLeft: `3px solid ${st.border}`, 
       border: `1px solid ${st.border}`, borderLeftWidth: 3 }}>
 
       {/* Main chain flow */}
@@ -228,17 +231,17 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         style={{
           justifyContent: 'flex-start', gap: 8, padding: '6px 10px',
           background: swatch['#FAF8F4'], border: '1px solid #e0d0b0',
-          borderRadius: 5, textAlign: 'left', fontWeight: 'inherit',
+          textAlign: 'left', fontWeight: 'inherit',
         }}
       >
-        <span style={{ fontSize: FS['14'] }}>{needIcon || '️'}</span>
+        {needIcon && <span style={{ fontSize: FS['14'] }}>{needIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {needLabel || needKey}
         </span>
         <span style={{ fontSize: FS.xs, color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
+        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
+        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
         <span style={{ fontSize: FS.micro, color: MUTED }}>{open ? '▲' : '▼'}</span>
       </Button>
 
@@ -256,7 +259,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
 
 // ── Main component ────────────────────────────────────────────────────────────
 export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
-  const mobile = useIsMobileTab();
+  const mobile = useIsMobile();
   const eco    = ecoProp || settlement?.economicState;
   const chains = (eco?.activeChains || []).filter(c =>
     // Show: running, operational, vulnerable (impaired only if has any institution)
@@ -328,7 +331,7 @@ function Legend() {
     { dot: '◐', color: '#8a5010', label: 'Vulnerable. Upstream imported' },
     { dot: '○', color: '#8b1a1a', label: 'Impaired. Institution missing' },
     { text: '', label: 'Import fills gap' },
-    { text: '↗ Export', color: '#1a5a28', label: 'Exported for income' },
+    { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: swatch.inkMag3 }}>

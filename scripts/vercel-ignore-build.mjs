@@ -18,10 +18,10 @@
  * gate travels with the code instead of living only in the Vercel dashboard.
  *
  * It checks the GitHub Commit Status / Checks API for the `CI / Validate, test,
- * build` (the `check` job), `CI / Chromium end-to-end` (`e2e`), and
- * `CI / Edge function execution tests (Deno)` (`deno-tests`) conclusions on the
- * exact commit being deployed. The build proceeds ONLY when all required checks
- * have concluded successfully.
+ * build` (the `check` job), functional/browser performance E2E, Deno execution,
+ * security coverage, and hostile-locale determinism conclusions on the exact
+ * commit being deployed. The build proceeds ONLY when all required checks have
+ * concluded successfully.
  *
  * Required environment (set in Vercel → Project → Settings → Environment
  * Variables; the first three Vercel injects automatically):
@@ -91,10 +91,18 @@ export function defaultReadMigrationState() {
 // requiring a check that never reports, blocking every deploy forever (the gate
 // is fail-closed, so the failure is safe but total). The drift guard lives in
 // tests/build/ciGateHardening.test.js.
+// Composed with the CI-native `deploy` job (finding F35): both gate on the SAME
+// green set, so the fail-closed Vercel ignoreCommand and the GitHub-Actions
+// `needs:` edge are defense-in-depth for each other. This list mirrors the
+// `deploy` job's `needs:` in ci.yml exactly — the money/security coverage floors
+// and the hostile-locale golden re-run are load-bearing deploy gates here too.
 export const REQUIRED_CHECKS = [
   'Validate, test, build', // the `check` job (job name shown in the Checks API)
   'Chromium end-to-end', // the `e2e` job
+  'Production-build browser performance', // the `performance` job
   'Edge function execution tests (Deno)', // the `deno-tests` job
+  'Coverage floors (money / security)', // the `coverage-floors` job
+  'Golden master under tr_TR + Chatham TZ', // the `determinism-hostile-locale` job
 ];
 
 /**

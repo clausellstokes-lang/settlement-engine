@@ -8,9 +8,17 @@
  * every closure hit its `|| default` fallback and the compound-conditioned prose
  * was dead. genPressureDetail now forwards economicState.compound.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { generatePressureSentence } from '../../src/generators/narrativeGenerator.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+
+// Our rngContext is fail-closed (no ambient Math.random fallback), so the
+// template pick inside generatePressureSentence needs a seeded scope. (Their
+// tree's version of this test leaned on the fallback; adapted per E4.)
+beforeEach(() => setActiveRng(createPRNG('pressure-compound')));
+afterEach(() => clearActiveRng());
 
 const baseSettlement = compound => ({
   name: 'Highmarch',
@@ -32,6 +40,7 @@ describe('generatePressureSentence plumbs economicState.compound (wartime)', () 
     );
     expect(sentence).toMatch(/on the right side of it/);
     // Must NOT be the losing-side fallback.
+    // anchored: the winning-side assertion above proves `sentence` is live wartime prose
     expect(sentence).not.toMatch(/losing people and resources/);
   });
 
@@ -40,6 +49,7 @@ describe('generatePressureSentence plumbs economicState.compound (wartime)', () 
       baseSettlement({ militaryEffective: 30, economyOutput: 40, criminalEffective: 50 }),
     );
     expect(sentence).toMatch(/losing people and resources/);
+    // anchored: the losing-side assertion above proves `sentence` is live wartime prose
     expect(sentence).not.toMatch(/on the right side of it/);
   });
 

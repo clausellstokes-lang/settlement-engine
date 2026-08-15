@@ -1,7 +1,5 @@
-// servicesData.js — Static service and goods data
+// servicesData.js — Static service data (institution → service overrides).
 // Extracted from servicesGenerator.js (was inline module-scope data)
-
-import { GOODS_CATEGORIES as _GC } from "../data/tradeGoodsData.js";
 
 // ── Locale service overrides ──────────────────────────────────────────────────
 // Maps institution name variants → canonical INSTITUTION_SERVICES key.
@@ -64,12 +62,3 @@ export const LOCALE_SERVICE_OVERRIDES = {
   "water source": "Inn/Tavern",
   "sewage system": "Inn/Tavern District",
 };
-
-// ── Category string constants (raw strings used in goods arrays) ──────────────
-
-// ── Goods by tier ─────────────────────────────────────────────────────────────
-// tier → [{name, category, defaultEnabled, baseChance, desc}]
-
-// (Removed: a dead, unused COMMODITY_CATEGORY_MAP duplicate. The live map is
-//  exported from tradeGoodsData.js and consumed by economicGenerator; this copy
-//  had no importers and no internal use.)

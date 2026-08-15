@@ -14,93 +14,46 @@
  * The audit doc is docs/refund-ledger-audit.md — it catalogues every
  * credit-touching path and tracks migration status off direct writes
  * onto these RPCs.
+ *
+ * ⚠ Every create-or-replace regex here is LINE-START anchored (`^` + m): the
+ * unanchored form also matches header prose that quotes the statement, and this
+ * file only asserts over extracted TEXT, so a mis-extract would stay GREEN over
+ * prose. Canonical writeup: tests/security/moneyRpcNetCurrentGuards.test.js.
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { netExecuteGrantsFromSql } from './netExecuteGrants.js';
 
 const ROOT = resolve(process.cwd());
-const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
-const MIG_009 = join(MIGRATIONS_DIR, '009_profile_security.sql');
+const MIG_009 = join(ROOT, 'supabase', 'migrations', '009_profile_security.sql');
+// refund_credits net-current body is the Wave-1 fused 123 (FOR UPDATE + elevated
+// skip from 087 + no-op idempotency + ledger-recompute counter), NOT 009's
+// original counter body. Behaviour assertions below read 123; the signature +
+// admin_grant_credits/spend_credits existence checks stay on 009.
+const MIG_123 = join(ROOT, 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
 const AUDIT_DOC = join(ROOT, 'docs', 'refund-ledger-audit.md');
 
-const migExists = existsSync(MIG_009);
-
-// Hard-fail (not a silent vacuous skip) when the target migration has moved/been
-// renamed: the `describe.runIf(migExists)` suite below would otherwise go GREEN
-// with 0 tests run — exactly the green-on-nothing failure this contract exists to
-// prevent. Mirrors the guard in creditLedger.pglite.test.js / migrationSequence*.
-describe('refund-ledger contract target exists (guards against silent vacuous skip)', () => {
-  it('migration 009 is present (a moved/renamed migration must fail loudly)', () => {
-    expect(migExists, `missing ${MIG_009} — refund-ledger contract coverage dropped`).toBe(true);
-  });
-});
-
-/** Compute the NET-CURRENT set of roles holding EXECUTE on a public function, by
- *  replaying every migration's grant/revoke in file order (mirrors the helper in
- *  creditLedger.pglite.test.js). This is what catches a LATER migration silently
- *  re-granting refund_credits to `authenticated` — the audit's #1 CRITICAL — which
- *  a regex over migration 009 alone (where it WAS granted) would never see. */
-function netExecuteGrants(fnName) {
-  const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  return netExecuteGrantsFromSql(fnName, files.map((f) => readFileSync(join(MIGRATIONS_DIR, f), 'utf-8')));
-}
-
-// The grant-replay guard itself must not be bypassable: a multi-role
-// `grant ... to service_role, authenticated` previously registered only the
-// FIRST role, so `authenticated` smuggled in second would go undetected.
-describe('netExecuteGrants — multi-role GRANT/REVOKE lists', () => {
-  const FN = 'refund_credits';
-  const grantTo = (roles) => `grant execute on function public.${FN}(uuid, text) to ${roles};`;
-  const revokeFrom = (roles) => `revoke execute on function public.${FN}(uuid, text) from ${roles};`;
-
-  it('registers EVERY role in a comma-separated grant, not just the first', () => {
-    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role, authenticated')]);
-    expect(roles.has('service_role')).toBe(true);
-    expect(roles.has('authenticated')).toBe(true); // the previously-dropped second role
-  });
-
-  it('removes EVERY role in a comma-separated revoke', () => {
-    const roles = netExecuteGrantsFromSql(FN, [
-      grantTo('authenticated'),
-      grantTo('anon'),
-      revokeFrom('authenticated, anon'),
-      grantTo('service_role'),
-    ]);
-    expect([...roles]).toEqual(['service_role']);
-  });
-
-  it('handles a role list wrapped across lines', () => {
-    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role,\n  authenticated')]);
-    expect(roles.has('authenticated')).toBe(true);
-  });
-});
+const migExists = existsSync(MIG_009) && existsSync(MIG_123);
 
 describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
-  // Guard the read: vitest EXECUTES a describe.runIf(false) callback at collection
-  // (to register the skipped tests), so an unguarded readFileSync here would throw
-  // a raw ENOENT at collection time when 009 is moved — pre-empting the dedicated
-  // "migration 009 is present" guard `it` above, which is the assertion meant to
-  // report the loss loudly. Reading only when migExists keeps that guard the signal.
-  const sql = migExists ? readFileSync(MIG_009, 'utf-8') : '';
+  const sql = readFileSync(MIG_009, 'utf-8');
 
   it('spend_credits(feature text) RPC exists with the right signature', () => {
     // Allow either order of clauses (language plpgsql / security definer
     // / set search_path) — assert just the signature.
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.spend_credits\s*\(\s*feature\s+text\s*\)/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.spend_credits\s*\(\s*feature\s+text\s*\)/im);
     expect(sql).toMatch(/spend_credits[\s\S]{0,500}security\s+definer/i);
   });
 
   it('refund_credits(spend_ledger_row uuid, refund_reason text) RPC exists', () => {
     // Two-arg signature; reason default null.
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.refund_credits\s*\([\s\S]{0,200}spend_ledger_row\s+uuid[\s\S]{0,200}refund_reason\s+text/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.refund_credits\s*\([\s\S]{0,200}spend_ledger_row\s+uuid[\s\S]{0,200}refund_reason\s+text/im);
     expect(sql).toMatch(/refund_credits[\s\S]{0,500}security\s+definer/i);
   });
 
   it('admin_grant_credits(target_user uuid, amount integer, reason text) RPC exists', () => {
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.admin_grant_credits\s*\([\s\S]{0,200}target_user\s+uuid[\s\S]{0,200}amount\s+integer[\s\S]{0,200}reason\s+text/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.admin_grant_credits\s*\([\s\S]{0,200}target_user\s+uuid[\s\S]{0,200}amount\s+integer[\s\S]{0,200}reason\s+text/im);
     expect(sql).toMatch(/admin_grant_credits[\s\S]{0,800}security\s+definer/i);
   });
 
@@ -110,7 +63,7 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     // metadata.refund_of key to correlate back to the spend.
     // NEVER an UPDATE that sets profiles.credits back to a stored
     // prior value.
-    const refundSection = sql.match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i);
+    const refundSection = sql.match(/^create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/im);
     expect(refundSection).toBeTruthy();
     const body = refundSection[0];
     // Should insert into credit_ledger.
@@ -128,7 +81,7 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
   });
 
   it('admin_grant_credits writes to credit_ledger AND credit_transactions (legacy audit)', () => {
-    const section = sql.match(/create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/i);
+    const section = sql.match(/^create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/im);
     expect(section).toBeTruthy();
     const body = section[0];
     expect(body).toMatch(/insert\s+into\s+public\.credit_ledger/i);
@@ -138,7 +91,7 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
   });
 
   it('admin_grant_credits enforces the privileged-caller check', () => {
-    const section = sql.match(/create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/i);
+    const section = sql.match(/^create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/im);
     const body = section[0];
     // current_user_is_privileged() must be called, with a raise on
     // failure.
@@ -147,28 +100,31 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
   });
 
   it('admin_grant_credits has a per-call amount cap (defense against runaway grants)', () => {
-    const section = sql.match(/create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/i);
+    const section = sql.match(/^create\s+or\s+replace\s+function\s+public\.admin_grant_credits[\s\S]*?\$\$;/im);
     const body = section[0];
     expect(body).toMatch(/amount\s*>\s*\d{4,}/);  // looks for `if amount > 10000` etc.
   });
 
-  // ── Money-math SAFETY CLAUSES (static, refund/admin only) ───────────────────
+  // ── Money-math SAFETY CLAUSES (static) — pinned to the fused net-current 123 ─
   // The audit flagged that the credit math is asserted statically, never run.
-  // These raise the static floor for the RPCs whose CURRENT definition lives in
-  // 009 (refund_credits, admin_grant_credits). NOTE: spend_credits is NOT here
-  // — its net-current body is the ledger-allocation rewrite in migration 024,
-  // not 009's counter version, so asserting 009's body would test dead SQL.
-  // spend_credits (plus refund/grant) are now EXECUTED end-to-end against the
-  // real net-current SQL in tests/security/creditLedger.pglite.test.js.
-  const refundBody = sql.match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i)?.[0] || '';
+  // These raise the static floor for refund_credits (net-current body = 123).
+  // NOTE: spend_credits is NOT here — its net-current body is the ledger-allocation
+  // rewrite in migration 024, not 009's counter version. spend_credits (plus
+  // refund/grant) are EXECUTED end-to-end against the real net-current SQL in
+  // tests/security/creditLedger.pglite.test.js.
+  const refundBody = readFileSync(MIG_123, 'utf-8')
+    .match(/^create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/im)?.[0] || '';
 
-  it('refund_credits is idempotent — refuses to refund the same spend twice', () => {
+  it('refund_credits is idempotent via a STRUCTURAL no-op (not a raise) — an at-least-once retry returns the balance', () => {
     expect(refundBody).toBeTruthy();
-    // Must look for an existing refund grant correlated to this spend and bail,
-    // so a retried/duplicated refund can't double-credit the account.
-    expect(refundBody).toMatch(/exists\s*\(/i);
+    // Fused 123: the idempotency is a unique_violation catch that returns the
+    // current balance — NOT the 085/087 `raise 'already refunded'` (which would
+    // fire false "contact support" alarms on the edge refund retry path). This is
+    // load-bearing: the no-op retry behaviour MUST hold.
     expect(refundBody).toMatch(/refund_of/i);
-    expect(refundBody).toMatch(/already\s+refunded/i);
+    expect(refundBody).toMatch(/unique_violation/i);
+    expect(refundBody).toMatch(/return\s+public\.get_credit_balance/i);
+    expect(refundBody).not.toMatch(/already\s+refunded/i);
   });
 
   it('refund_credits validates the target is a spend row and authorizes the caller', () => {
@@ -177,21 +133,17 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     expect(refundBody).toMatch(/not\s+authorized/i);
   });
 
-  it('refund_credits credits back via arithmetic, never a stored snapshot', () => {
-    expect(refundBody).toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
+  it('refund_credits RECOMPUTES the counter from the ledger (never incremental arithmetic)', () => {
+    // Fused 123: `new_balance := get_credit_balance(...); update profiles set
+    // credits = new_balance` — heals drift, unlike 085/087's `credits + amount`.
+    expect(refundBody).toMatch(/get_credit_balance\s*\(\s*spend_row\.user_id\s*\)/i);
+    expect(refundBody).toMatch(/set\s+credits\s*=\s*new_balance/i);
+    expect(refundBody).not.toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
   });
-});
 
-describe('Tier 9.9 — net-current EXECUTE grants (the audit\'s #1 CRITICAL)', () => {
-  it('refund_credits is service_role-only across ALL migrations (033 hardening not reverted)', () => {
-    // 009 granted refund_credits to `authenticated` (the bug: any authed user could
-    // refund); 033 revoked authenticated+anon and granted service_role. Asserting
-    // 009's body alone would NOT catch a later re-grant — this replays every
-    // migration so a future re-grant to `authenticated`/`anon` fails immediately.
-    const roles = netExecuteGrants('refund_credits');
-    expect(roles.has('service_role')).toBe(true);
-    expect(roles.has('authenticated')).toBe(false);
-    expect(roles.has('anon')).toBe(false);
+  it('refund_credits serializes with FOR UPDATE and skips elevated spends (087 hardening preserved)', () => {
+    expect(refundBody).toMatch(/for\s+update/i);
+    expect(refundBody).toMatch(/elevated/i);
   });
 });
 

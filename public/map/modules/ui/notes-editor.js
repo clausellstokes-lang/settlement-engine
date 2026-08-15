@@ -65,7 +65,13 @@ function editNotes(id, name) {
 
   async function initEditor() {
     if (!window.tinymce) {
-      const url = "https://azgaar.github.io/Fantasy-Map-Generator/libs/tinymce/tinymce.min.js";
+      // SECURITY (SettlementForge fork patch): load TinyMCE from our OWN vendored,
+      // hash-pinned copy (public/map/libs/tinymce/, in VENDOR-MANIFEST.json), not
+      // from Azgaar's upstream GitHub Pages host at runtime — that was an unpinned
+      // cross-origin script on our token-bearing origin. The /map/ CSP script-src
+      // is 'self'-only, so the remote fetch was also blocked; the local path both
+      // closes the supply-chain gap and makes the editor actually load.
+      const url = new URL("libs/tinymce/tinymce.min.js", document.baseURI).href;
       try {
         await import(url);
       } catch (error) {
@@ -80,7 +86,7 @@ function editNotes(id, name) {
     }
 
     if (window.tinymce) {
-      window.tinymce._setBaseUrl("https://azgaar.github.io/Fantasy-Map-Generator/libs/tinymce");
+      window.tinymce._setBaseUrl(new URL("libs/tinymce", document.baseURI).href);
       tinymce.init({
         license_key: "gpl",
         selector: "#notesLegend",
@@ -152,9 +158,12 @@ function editNotes(id, name) {
     if (note?.legend) prompt += ` Data: ${note.legend}`;
 
     const onApply = result => {
-      notesLegend.innerHTML = result;
+      // SettlementForge fork patch: the AI-apply path was the one note sink that skipped sanitizeNoteHtml —
+      // route it through the same sanitizer as every other note write (strips script / on* / javascript:).
+      const safe = sanitizeNoteHtml(result);
+      notesLegend.innerHTML = safe;
       if (note) {
-        note.legend = result;
+        note.legend = safe;
         updateNotesBox(note);
         if (window.tinymce) tinymce.activeEditor.setContent(note.legend);
       }
@@ -171,7 +180,18 @@ function editNotes(id, name) {
 
   function uploadLegends(dataLoaded) {
     if (!dataLoaded) return tip("Cannot load the file. Please check the data format", false, "error");
-    notes = JSON.parse(dataLoaded);
+    // SettlementForge fork patch: validate shape before overwriting the global notes. A valid-JSON-but-wrong-shape
+    // file used to crash on notes[0].id (or install garbage), after the previous notes were already replaced.
+    let parsed;
+    try {
+      parsed = JSON.parse(dataLoaded);
+    } catch {
+      return tip("Cannot parse the notes file. Please check the data format", false, "error", 4000);
+    }
+    if (!Array.isArray(parsed) || !parsed.length || !parsed[0] || parsed[0].id === undefined) {
+      return tip("The file does not contain valid notes", false, "error", 4000);
+    }
+    notes = parsed;
     notesSelect.options.length = 0;
     editNotes(notes[0].id, notes[0].name);
   }

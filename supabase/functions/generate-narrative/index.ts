@@ -48,8 +48,11 @@ import {
 import { botGuard } from '../_shared/requestMeta.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 
 import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } from './jsonUtils.ts';
 import { CACHE_BREAKPOINT, buildAnthropicUserContent, stripCacheBreakpoint } from './promptCache.ts';
@@ -180,9 +183,9 @@ const MODEL_PROFILES: Record<string, ModelProfile> = {
 // Opus thesis still sees prior thesis + new state + diff — the input
 // context is the actual cost driver, not the output length.
 const CREDIT_COSTS: Record<string, number> = {
-  narrative:   3,
+  narrative:   5,
   dailyLife:   4,
-  progression: 5,
+  progression: 6,
   narrative_fast:   2,
   dailyLife_fast:   3,
   progression_fast: 4,
@@ -215,8 +218,18 @@ function priceBucket(provider: Provider, model: string): { input: number; output
   return ESTIMATED_AI_PRICES_PER_MTOK.openai.default;
 }
 
-function estimateUsd(provider: Provider, model: string, inputTokens: number, outputTokens: number): number {
-  const prices = priceBucket(provider, model);
+// Price a token count. `priceOverride` (from the calibrated ai_price_book, keyed
+// by resolved profile) wins when supplied; otherwise the substring-bucketed
+// ESTIMATED_AI_PRICES_PER_MTOK. Omitting the override reproduces the historical
+// estimate byte-for-byte, so behavior is unchanged until the first resync.
+function estimateUsd(
+  provider: Provider,
+  model: string,
+  inputTokens: number,
+  outputTokens: number,
+  priceOverride?: { input: number; output: number },
+): number {
+  const prices = priceOverride ?? priceBucket(provider, model);
   return Number((((inputTokens / 1_000_000) * prices.input) + ((outputTokens / 1_000_000) * prices.output)).toFixed(6));
 }
 
@@ -240,15 +253,21 @@ const RESERVATION_TOKEN_BUDGET: Record<string, { input: number; output: number }
 /**
  * Estimate the worst-case provider COGS (USD) for a whole generation run, to
  * RESERVE against the global spend cap before any model call. Prices the
- * type's conservative token budget at the resolved profile's standard-tier
- * rate. Never throws — an unknown type falls back to the narrative budget.
+ * type's conservative token budget at the resolved profile's rate — the
+ * calibrated ai_price_book rate when `pricing` is supplied, else the historical
+ * substring bucket. Never throws — an unknown type falls back to the narrative budget.
  * @param preference The authoritative resolved model preference.
  * @param type The generation type ('narrative' | 'dailyLife' | 'progression').
+ * @param pricing Optional loaded pricing config (price book preferred when present).
  */
-function estimateRunCostUsd(preference: ModelPreference, type: string): number {
-  const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+function estimateRunCostUsd(preference: ModelPreference, type: string, pricing?: PricingConfig): number {
+  const profileKey = normalizeModelPreference(preference);
+  const profile = MODEL_PROFILES[profileKey] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   const budget = RESERVATION_TOKEN_BUDGET[type] || RESERVATION_TOKEN_BUDGET.narrative;
-  return estimateUsd(profile.provider, profile.thesis, budget.input, budget.output);
+  const priceOverride = pricing
+    ? resolvedPricePerMtok(pricing, profileKey, profile.provider, profile.thesis)
+    : undefined;
+  return estimateUsd(profile.provider, profile.thesis, budget.input, budget.output, priceOverride);
 }
 
 function aggregateAiUsage(records: AiUsageRecord[]) {
@@ -338,6 +357,97 @@ function normalizeModelPreference(value: unknown): ModelPreference {
 function spendFeatureFor(type: string, modelPreference: ModelPreference): string {
   const profile = MODEL_PROFILES[normalizeModelPreference(modelPreference)] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   return profile.costTier === 'fast' ? `${type}_fast` : type;
+}
+
+// ── Config-driven pricing (migration 114) ────────────────────────────────────
+// The resync writes two system_config rows the RPC (spend_credits) and the client
+// both read: ai_credit_costs (per-profile narrative/dailyLife/progression credit
+// prices) and ai_price_book (per-profile provider $/MTok, used to price the COGS
+// telemetry). This edge function reads BOTH so the credit charge and the metered
+// cost track the operator's calibrated numbers — falling back, byte-for-byte, to
+// the historical CREDIT_COSTS / ESTIMATED_AI_PRICES_PER_MTOK maps when a row is
+// missing or malformed. Nothing here changes behavior until the first resync.
+
+/** Loaded pricing config for one request (both rows, or nulls on any read miss). */
+type PricingConfig = {
+  creditCosts: Record<string, { narrative?: unknown; dailyLife?: unknown; progression?: unknown }> | null;
+  priceBook: Record<string, { inputPerMtok?: unknown; outputPerMtok?: unknown }> | null;
+};
+
+/**
+ * Load ai_credit_costs + ai_price_book in ONE query (kept separate from
+ * resolveModelPreference's ai_model_preference read so that contract is untouched).
+ * Best-effort: any failure yields nulls and the caller falls back to the literal
+ * maps. Returns the value->'profiles' map for credit costs and value->'models'
+ * map for the price book, so callers index by profile key directly.
+ */
+async function loadPricingConfig(admin: any): Promise<PricingConfig> {
+  try {
+    const { data } = await admin
+      .from('system_config')
+      .select('key, value')
+      .in('key', ['ai_credit_costs', 'ai_price_book']);
+    let creditCosts: PricingConfig['creditCosts'] = null;
+    let priceBook: PricingConfig['priceBook'] = null;
+    if (Array.isArray(data)) {
+      for (const row of data) {
+        if (row?.key === 'ai_credit_costs') {
+          const profiles = row.value && typeof row.value === 'object' ? row.value.profiles : null;
+          creditCosts = profiles && typeof profiles === 'object' ? profiles : null;
+        } else if (row?.key === 'ai_price_book') {
+          const models = row.value && typeof row.value === 'object' ? row.value.models : null;
+          priceBook = models && typeof models === 'object' ? models : null;
+        }
+      }
+    }
+    return { creditCosts, priceBook };
+  } catch (_) {
+    return { creditCosts: null, priceBook: null };
+  }
+}
+
+/** Accept a config credit cost only if it is an integer 1..12, else null. */
+function validConfigCost(v: unknown): number | null {
+  return typeof v === 'number' && Number.isInteger(v) && v >= 1 && v <= 12 ? v : null;
+}
+
+/**
+ * Resolve the credit cost for a profile + BASE feature (narrative/dailyLife/
+ * progression — the `_fast` suffix is a spend-feature concern, not a config key).
+ * Config int 1..12 wins; otherwise fall back to the EXACT historical CREDIT_COSTS
+ * map (which keeps the *_fast split). Never throws.
+ */
+function resolvedCreditCost(
+  config: PricingConfig,
+  profileKey: ModelPreference,
+  spendFeature: string,
+  baseFeature: string,
+): number {
+  const fromConfig = validConfigCost(config.creditCosts?.[profileKey]?.[baseFeature as 'narrative' | 'dailyLife' | 'progression']);
+  if (fromConfig !== null) return fromConfig;
+  return CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[baseFeature];
+}
+
+/**
+ * Per-MTok prices for a resolved profile, preferring the calibrated price book
+ * and falling back to the substring-bucketed ESTIMATED_AI_PRICES_PER_MTOK. The
+ * price book stores exactly the 8 profile keys, so a valid entry with finite
+ * positive prices short-circuits the legacy bucket lookup.
+ */
+function resolvedPricePerMtok(
+  config: PricingConfig,
+  profileKey: ModelPreference,
+  provider: Provider,
+  model: string,
+): { input: number; output: number } {
+  const entry = config.priceBook?.[profileKey];
+  const input = entry?.inputPerMtok;
+  const output = entry?.outputPerMtok;
+  if (typeof input === 'number' && Number.isFinite(input) && input > 0 &&
+      typeof output === 'number' && Number.isFinite(output) && output > 0) {
+    return { input, output };
+  }
+  return priceBucket(provider, model);
 }
 
 /**
@@ -452,17 +562,36 @@ function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   return { signal: ctrl.signal, cancel: () => clearTimeout(id) };
 }
 
-async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4): Promise<Response> {
+/**
+ * Combine the per-attempt timeout signal with an optional EXTERNAL signal (the
+ * inbound request's — opt2 defense-in-depth). AbortSignal.any fires the combined
+ * signal when EITHER aborts, so a client disconnect (the same watchdog-abort that
+ * triggers the double-charge bug) also aborts the in-flight model fetch, routing
+ * the still-generating case into the existing refund path instead of billing for a
+ * run whose stream the client already abandoned. Degrades gracefully: when no
+ * external signal is supplied (or AbortSignal.any is unavailable in the runtime),
+ * this returns the per-attempt timeout signal alone — byte-identical to before.
+ */
+function combineSignals(timeoutSignal: AbortSignal, external?: AbortSignal | null): AbortSignal {
+  if (!external) return timeoutSignal;
+  const anyFn = (AbortSignal as unknown as { any?: (s: AbortSignal[]) => AbortSignal }).any;
+  if (typeof anyFn === 'function') return anyFn([timeoutSignal, external]);
+  return timeoutSignal;
+}
+
+async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4, reqSignal?: AbortSignal | null): Promise<Response> {
   const deadline = Date.now() + TOTAL_BUDGET_MS;
   // Each attempt gets its OWN controller+timer (a retry must not inherit a spent
   // budget), capped by whatever remains of the overall deadline. The timer is
-  // always cleared so a completed fetch never leaks a pending abort.
+  // always cleared so a completed fetch never leaks a pending abort. The per-attempt
+  // timeout is combined with the inbound request signal (opt2) so a client
+  // disconnect aborts the in-flight fetch too — without weakening the timeout.
   const fetchOnce = async (): Promise<Response> => {
     const remaining = deadline - Date.now();
     if (remaining <= 0) throw new DOMException('generation budget exceeded', 'TimeoutError');
     const t = withTimeout(Math.min(PER_ATTEMPT_TIMEOUT_MS, remaining));
     try {
-      return await fetch(url, { ...init, signal: t.signal });
+      return await fetch(url, { ...init, signal: combineSignals(t.signal, reqSignal) });
     } finally {
       t.cancel();
     }
@@ -540,7 +669,7 @@ type CompletionResult = {
  * @param model Resolved Anthropic model id.
  * @returns Normalized { text, usage }.
  */
-async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<CompletionResult> {
+async function callAnthropic(prompt: string, maxTokens: number, model: string, reqSignal?: AbortSignal | null): Promise<CompletionResult> {
   if (!ANTHROPIC_API_KEY) throw new Error('Anthropic API key is not configured');
   const res = await fetchAiWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -554,7 +683,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
       max_tokens: maxTokens,
       messages: [{ role: 'user', content: buildAnthropicUserContent(prompt) }],
     }),
-  });
+  }, 4, reqSignal);
 
   if (!res.ok) {
     const errBody = await res.text();
@@ -576,7 +705,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
  * @param model Resolved OpenAI model id.
  * @returns Normalized { text, usage }.
  */
-async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<CompletionResult> {
+async function callOpenAI(prompt: string, maxTokens: number, model: string, reqSignal?: AbortSignal | null): Promise<CompletionResult> {
   if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
   // GPT-5-class reasoning models spend hidden reasoning tokens out of the SAME
   // max_output_tokens budget as the visible answer. These passes are short prose,
@@ -598,7 +727,7 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
       max_output_tokens: maxTokens + REASONING_HEADROOM_TOKENS,
       reasoning: { effort: 'low' },
     }),
-  });
+  }, 4, reqSignal);
 
   if (!res.ok) {
     const errBody = await res.text();
@@ -696,13 +825,15 @@ function isProviderDownError(e: unknown): boolean {
   return false;
 }
 
-/** Dispatch a single completion to the provider for `preference`+`phase`. */
-function dispatch(preference: ModelPreference, phase: ModelPhase, prompt: string, maxTokens: number): Promise<CompletionResult> {
+/** Dispatch a single completion to the provider for `preference`+`phase`. The
+ *  optional reqSignal (opt2) is threaded into the provider fetch so a client
+ *  disconnect aborts the in-flight model call. */
+function dispatch(preference: ModelPreference, phase: ModelPhase, prompt: string, maxTokens: number, reqSignal?: AbortSignal | null): Promise<CompletionResult> {
   const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   const model = profile[phase];
   return profile.provider === 'openai'
-    ? callOpenAI(prompt, maxTokens, model)
-    : callAnthropic(prompt, maxTokens, model);
+    ? callOpenAI(prompt, maxTokens, model, reqSignal)
+    : callAnthropic(prompt, maxTokens, model, reqSignal);
 }
 
 /**
@@ -712,6 +843,10 @@ function dispatch(preference: ModelPreference, phase: ModelPhase, prompt: string
  * same-tier peer provider so a single provider outage doesn't fail the user;
  * the fallback is flagged in the usage record. Returns the prose text.
  * @param usageTelemetry Optional sink the caller drains into ai_usage_events.
+ * @param pricing Optional loaded pricing config for COGS telemetry.
+ * @param reqSignal Optional inbound-request signal (opt2): a client disconnect
+ *   aborts the in-flight model fetch (primary + peer), routing the still-
+ *   generating case into the refund path instead of billing an abandoned run.
  */
 async function callModel(
   prompt: string,
@@ -720,12 +855,20 @@ async function callModel(
   modelPreference: ModelPreference,
   featureType: string,
   usageTelemetry?: AiUsageRecord[],
+  pricing?: PricingConfig,
+  reqSignal?: AbortSignal | null,
 ): Promise<string> {
   const record = (preference: ModelPreference, started: number, result: CompletionResult | null, ok: boolean, fellBack: boolean) => {
     if (!usageTelemetry) return;
-    const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+    const profileKey = normalizeModelPreference(preference);
+    const profile = MODEL_PROFILES[profileKey] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
     const model = profile[phase];
     const usage = result?.usage ?? { inputTokens: estimateTokens(prompt), outputTokens: 0, estimated: true };
+    // Price the metered COGS at the calibrated ai_price_book rate for this profile
+    // when config is present, else the historical substring bucket (unchanged).
+    const priceOverride = pricing
+      ? resolvedPricePerMtok(pricing, profileKey, profile.provider, model)
+      : undefined;
     usageTelemetry.push({
       featureType,
       phase,
@@ -738,7 +881,7 @@ async function callModel(
       inputTokens: usage.inputTokens,
       outputTokens: usage.outputTokens,
       tokensEstimated: usage.estimated,
-      estimatedCostUsd: estimateUsd(profile.provider, model, usage.inputTokens, usage.outputTokens),
+      estimatedCostUsd: estimateUsd(profile.provider, model, usage.inputTokens, usage.outputTokens, priceOverride),
       durationMs: Date.now() - started,
       ok,
       fellBack,
@@ -748,7 +891,7 @@ async function callModel(
   // ── Primary: the SELECTED preference (peer, not a default) ──
   const startedPrimary = Date.now();
   try {
-    const result = await dispatch(modelPreference, phase, prompt, maxTokens);
+    const result = await dispatch(modelPreference, phase, prompt, maxTokens, reqSignal);
     record(modelPreference, startedPrimary, result, true, false);
     return result.text;
   } catch (primaryErr) {
@@ -760,7 +903,7 @@ async function callModel(
 
     const startedPeer = Date.now();
     try {
-      const result = await dispatch(peer, phase, prompt, maxTokens);
+      const result = await dispatch(peer, phase, prompt, maxTokens, reqSignal);
       record(peer, startedPeer, result, true, true);
       return result.text;
     } catch (peerErr) {
@@ -841,6 +984,30 @@ export async function handleGenerateNarrative(
   // started, so releasing there cannot double-release.
   let reservationId: string | null = null;
 
+  // ── Free-first-narrative claim state (migration 118) ──
+  // A first base-narrative run is free: instead of spend_credits we make an atomic
+  // server-side claim (claim_free_narrative), tracked on profiles so it is unfarmable
+  // and independent of the credit balance. These are hoisted above the try so the
+  // OUTER catch (which has no `user` in scope) can RELEASE a claim taken below when a
+  // pre-stream throw means the stream never generated. `usedFreeNarrative` gates every
+  // release; `freeReleased` latches so we never double-release; `freeNarrativeUserId`
+  // carries the id into the outer catch. When usedFreeNarrative is false the paid path
+  // is byte-identical.
+  let usedFreeNarrative = false;
+  let freeReleased = false;
+  let freeNarrativeUserId: string | null = null;
+
+  // ── Request idempotency state (migration 119) ──
+  // `chargedThisAttempt` is the money-safety crux: TRUE only when THIS attempt
+  // actually spent (spend_credits) or free-claimed (claim_free_narrative). Every
+  // refund/release path is gated on it, so a DUPLICATE run (which charges/claims
+  // NOTHING this attempt) can never refund the PRIOR attempt's charge by failing
+  // mid-stream — that would let a user get a refund by timing out then failing a
+  // retry. On a duplicate, spendId points at the prior charge (for reference /
+  // any downstream target), usedFreeNarrative stays false, and chargedThisAttempt
+  // stays false, so refund()/releaseFreeNarrative are no-ops on this attempt.
+  let chargedThisAttempt = false;
+
   try {
     // Authenticate
     const authHeader = req.headers.get('Authorization');
@@ -849,6 +1016,13 @@ export async function handleGenerateNarrative(
     const supabaseUser = makeUserClient(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): reject a superseded device BEFORE any
+    // spend or free-narrative claim. supabaseAdmin is created later in this fn, so the gate
+    // reads through a throwaway admin client; a superseded session gets a clean 401 Response
+    // (not the outer throw).
+    if (await isSessionSuperseded(makeAdminClient(), user.id, authHeader, deviceLabelFromRequest(req))) {
+      return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
 
     // Parse request — cap the body BEFORE parsing (mirrors generate-chronicle):
     // the credit charged is fixed regardless of input size, so an unbounded
@@ -875,6 +1049,7 @@ export async function handleGenerateNarrative(
       pinnedNpcIds,
       aiGuidance,
       modelPreference,
+      idempotencyKey,
       relationshipMemoryContext,
       chronicleContext,
       warMoraleContext,
@@ -901,6 +1076,16 @@ export async function handleGenerateNarrative(
     // to change when that ships.
     void priorDailyLife;
 
+    // Request idempotency key (migration 119). Validate: a non-empty string of
+    // reasonable length. Anything else (missing / non-string / oversized) is
+    // treated as ABSENT — the handler then FAILS OPEN and behaves exactly as
+    // pre-119 (no claim, charge once), so a bad/missing key can never block a
+    // legitimate run nor change the charge relative to today.
+    const confirmedIdempotencyKey: string | null =
+      typeof idempotencyKey === 'string' && idempotencyKey.length > 0 && idempotencyKey.length <= 200
+        ? idempotencyKey
+        : null;
+
     // Normalize pinned NPC ids once, so every pass sees the same stable shape.
     const normalizedPinnedNpcIds: string[] = Array.isArray(pinnedNpcIds)
       ? pinnedNpcIds.filter((x: unknown) => x != null).map((x: unknown) => String(x))
@@ -922,12 +1107,47 @@ export async function handleGenerateNarrative(
 
     const supabaseAdmin = makeAdminClient();
 
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Placed after admin resolution but BEFORE any reserve/spend/claim, so
+    // an over-limit or infra error leaks no reservation. Inert in tests / local (no
+    // cf-connecting-ip → sentinel IP → no RPC). corsHeaders is this fn's CORS var.
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, corsHeaders);
+    if (ipGate) return ipGate;
+
+    // Idempotent rollback of a claimed free narrative (migration 118). Runs ONLY where
+    // the paid path would refund, and only when a free claim is actually held. The
+    // `freeReleased` latch makes a second call a no-op; the DB's release RPC is also
+    // idempotent (guarded on IS NOT NULL), so this can never resurrect an unheld claim.
+    // Best-effort: a release failure is logged for alerting but never fails the stream.
+    const releaseFreeNarrative = async (): Promise<void> => {
+      if (freeReleased || !usedFreeNarrative) return;
+      freeReleased = true;
+      try {
+        const { error } = await supabaseAdmin.rpc('release_free_narrative', { p_user: user.id });
+        if (error) {
+          logError('generate-narrative', user.id, error.message, { stage: 'free-release' });
+        }
+      } catch (e) {
+        logError('generate-narrative', user.id, e, { stage: 'free-release' });
+      }
+    };
+
     // ── Server-authoritative model selection ──
     // Resolve the preference from forced-override → profiles.model_preference →
     // global default → built-in default. The client body is never trusted here.
     const selectedModelPreference = await resolveModelPreference(supabaseAdmin, user.id);
+    const resolvedPreferenceKey = normalizeModelPreference(selectedModelPreference);
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
-    const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
+    // Load the calibrated pricing config (ai_credit_costs + ai_price_book). The
+    // precheck `cost` and COGS estimates read it; spend_credits (below) re-resolves
+    // it in-DB from p_profile. Both fall back to the literal maps on any miss.
+    const pricingConfig = await loadPricingConfig(supabaseAdmin);
+    // `cost` drives ONLY the pre-spend sufficiency message ("Need N, have M"); the
+    // real charge is resolved atomically inside spend_credits. Keep it in lockstep
+    // with the RPC's resolution: config int 1..12 for the profile+base feature,
+    // else the historical CREDIT_COSTS map (which keeps the *_fast split).
+    const cost = resolvedCreditCost(pricingConfig, resolvedPreferenceKey, spendFeature, type);
 
     // ── Trust-boundary gate: reject a banned / disabled / soft-deleted account ──
     // Defense-in-depth (review B16 finding #1): spend_credits (migration 057) ALSO
@@ -959,7 +1179,7 @@ export async function handleGenerateNarrative(
     // reservation is RELEASED in the stream's `finally` once the real COGS row
     // lands. We BLOCK on the RPC erroring or returning a non-true `allowed` —
     // the opposite default from the per-user limiter, which fails OPEN.
-    const spendEstimate = estimateRunCostUsd(selectedModelPreference, type);
+    const spendEstimate = estimateRunCostUsd(selectedModelPreference, type, pricingConfig);
     const { data: capResult, error: capErr } =
       await supabaseAdmin.rpc('reserve_ai_spend', { p_user: user.id, p_estimate: spendEstimate });
     if (capErr) {
@@ -977,6 +1197,13 @@ export async function handleGenerateNarrative(
     reservationId =
       (capResult as { reservation_id?: string | null } | null)?.reservation_id ?? null;
 
+    // The free first narrative (migration 118) applies ONLY to the base narrative
+    // feature — never narrative_fast (a distinct paid tier), never dailyLife/
+    // progression, never an elevated/privileged operator (they already bypass the
+    // spend). Known upfront from the feature; the privilege half is resolved by the
+    // precheck below and confirmed by the atomic claim after the rate limit.
+    const freeNarrativeEligible = type === 'narrative' && spendFeature === 'narrative';
+
     // ── SUFFICIENCY PRECHECK: don't burn a rate-limit unit on a doomed spend ──
     // The per-user/day rate limit below INCREMENTS a counter (consume, not peek;
     // there is no decrement RPC). spend_credits runs AFTER it and is the atomic
@@ -992,20 +1219,30 @@ export async function handleGenerateNarrative(
     // FAIL OPEN on any RPC error: a precheck outage must never block a legitimate
     // user — spend_credits remains the real gate, and a missed precheck only costs
     // the pre-existing (unfixed) behaviour, never a wrongful block.
+    let precheckPrivilegedTrue = false;   // used below to gate the free-narrative claim
     {
       const { data: precheckPrivileged, error: privErr } =
         await supabaseUser.rpc('current_user_is_privileged');
       if (privErr) {
         logError('generate-narrative', user.id, `current_user_is_privileged errored: ${privErr.message}`, { stage: 'sufficiency-precheck' });
-      } else if (precheckPrivileged !== true) {
-        const { data: precheckBalance, error: balErr } =
-          await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
-        if (balErr) {
-          logError('generate-narrative', user.id, `get_credit_balance errored: ${balErr.message}`, { stage: 'sufficiency-precheck' });
-        } else if (typeof precheckBalance === 'number' && precheckBalance < cost) {
-          // Same message shape as the spend_credits insufficient-funds throw below,
-          // so the client UI is unchanged — only the rate-limit unit is spared.
-          throw new Error(`Insufficient credits. Need ${cost}, have ${precheckBalance}.`);
+      } else if (precheckPrivileged === true) {
+        precheckPrivilegedTrue = true;
+      } else {
+        // A free-eligible first narrative (118) does NOT depend on the balance — the
+        // atomic claim below covers it — so skip the insufficient-funds reject for it.
+        // If the free claim fails (already used) we fall through to the normal spend,
+        // whose own insufficient_funds throw remains the authority. This never spares
+        // a doomed PAID run: the precheck still fires for dailyLife/progression/fast.
+        if (!freeNarrativeEligible) {
+          const { data: precheckBalance, error: balErr } =
+            await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
+          if (balErr) {
+            logError('generate-narrative', user.id, `get_credit_balance errored: ${balErr.message}`, { stage: 'sufficiency-precheck' });
+          } else if (typeof precheckBalance === 'number' && precheckBalance < cost) {
+            // Same message shape as the spend_credits insufficient-funds throw below,
+            // so the client UI is unchanged — only the rate-limit unit is spared.
+            throw new Error(`Insufficient credits. Need ${cost}, have ${precheckBalance}.`);
+          }
         }
       }
     }
@@ -1027,6 +1264,53 @@ export async function handleGenerateNarrative(
       }
     }
 
+    // ── REQUEST IDEMPOTENCY CLAIM (migration 119) — the OUTERMOST money gate ──
+    // Before the free-narrative claim AND spend_credits, claim the logical request
+    // by its stable key. Placed AFTER the reservation + rate limit so those abuse
+    // guards still apply to a duplicate regen (they bound any free-regen abuse), but
+    // BEFORE any charge so a timeout-retry of the SAME request never spends twice.
+    //   • duplicate:false (first attempt): proceed with the existing flow unchanged
+    //     (free-narrative claim, else spend_credits), then attach the resulting
+    //     spend_id to the claim so a later duplicate can see the real charge.
+    //   • duplicate:true (a retry within the TTL): the logical request was ALREADY
+    //     charged/claimed on the prior attempt — SKIP the free claim AND the spend
+    //     entirely and REGENERATE (the client lost the prior stream and needs the
+    //     content). spendId points at the prior charge (for reference); nothing is
+    //     charged/claimed THIS attempt, so chargedThisAttempt stays false and no
+    //     refund/release can fire against the prior charge.
+    // FAIL OPEN: only claim when a valid key is present; a claim RPC error is logged
+    // and treated as not-a-duplicate (charge once, as today) — a claim outage must
+    // never block a legitimate run.
+    let duplicateRun = false;
+    let isElevated = false;
+    let postSpendBalance = 0;          // canonical post-spend balance for streaming responses
+    let spendId: string | null = null;
+
+    if (confirmedIdempotencyKey) {
+      const { data: claimData, error: claimErr } =
+        await supabaseAdmin.rpc('claim_ai_request', { p_user: user.id, p_key: confirmedIdempotencyKey });
+      if (claimErr) {
+        logError('generate-narrative', user.id, `claim_ai_request errored: ${claimErr.message}`, { stage: 'idempotency' });
+      } else if ((claimData as { duplicate?: boolean } | null)?.duplicate === true) {
+        // A retry within the TTL: the prior attempt already charged/claimed. Skip
+        // the free claim + spend; regenerate for free. Target the prior spend_id
+        // (may be null for a free/elevated first attempt) so any downstream refund
+        // path references the real charge — but chargedThisAttempt stays FALSE so
+        // this attempt's refund()/release are no-ops (never refund the prior charge).
+        duplicateRun = true;
+        const priorSpendId = (claimData as { spend_id?: string | null } | null)?.spend_id ?? null;
+        spendId = priorSpendId;
+        // Balance is unchanged (nothing spent this attempt) — read it for the
+        // streamed creditsRemaining. Best-effort: a miss surfaces 0, no money moved.
+        const { data: dupBalance, error: dupBalErr } =
+          await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
+        if (dupBalErr) {
+          logError('generate-narrative', user.id, `get_credit_balance errored: ${dupBalErr.message}`, { stage: 'idempotency' });
+        }
+        postSpendBalance = typeof dupBalance === 'number' ? dupBalance : 0;
+      }
+    }
+
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
     // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
     // The legacy read-then-write fallback was dropped after migration
@@ -1043,39 +1327,110 @@ export async function handleGenerateNarrative(
     // row this spend created — no "find the most recent spend"
     // guesswork and no balance-restoration race with intervening
     // transactions.
-    let isElevated = false;
-    let postSpendBalance = 0;          // canonical post-spend balance for streaming responses
-    let spendId: string | null = null;
+    // (isElevated / postSpendBalance / spendId are hoisted above the idempotency
+    // claim so a duplicate run can seed them from the prior claim.)
+    //
+    // A DUPLICATE run (migration 119) skips BOTH the free claim and the spend: the
+    // logical request was already charged/claimed on the prior attempt, so we
+    // regenerate for free with the seeded spendId/balance. The whole free-claim +
+    // spend block below is gated on `!duplicateRun`.
+    if (!duplicateRun) {
 
-    const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
-      feature: spendFeature,
-    });
+    // ── FREE FIRST NARRATIVE (migration 118): atomic claim in place of the spend ──
+    // For a free-eligible, non-privileged base narrative, try to claim the account's
+    // one free narrative BEFORE spending. The claim is race-safe (an UPDATE ... WHERE
+    // free_narrative_claimed_at IS NULL, returning true only for the caller that flips
+    // it) and is placed AFTER the reservation + rate limit so those abuse guards still
+    // apply. On a WON claim: nothing is spent, spendId stays null, isElevated stays
+    // false, and we skip spend_credits entirely — postSpendBalance is the (unchanged)
+    // current balance. On a LOST claim (already used) we fall through to the normal
+    // spend path, byte-identical to before. Privileged operators skip this and keep
+    // their existing spend bypass.
+    if (freeNarrativeEligible && !precheckPrivilegedTrue) {
+      const { data: claimed, error: claimErr } =
+        await supabaseAdmin.rpc('claim_free_narrative', { p_user: user.id });
+      if (claimErr) {
+        // FAIL SAFE toward the paid path: a claim outage must never grant a free run
+        // it couldn't record (that would be farmable). Log and fall through to spend.
+        logError('generate-narrative', user.id, `claim_free_narrative errored: ${claimErr.message}`, { stage: 'free-claim' });
+      } else if (claimed === true) {
+        usedFreeNarrative = true;
+        freeNarrativeUserId = user.id;
+        // A free claim was made THIS attempt — arm the refund/release gating so a
+        // mid-stream failure releases it (migration 119 money-safety crux).
+        chargedThisAttempt = true;
+        // Balance is unchanged (nothing spent) — read it for the streamed
+        // creditsRemaining. Best-effort: a read miss just surfaces 0, and no money
+        // moved regardless.
+        const { data: freeBalance, error: freeBalErr } =
+          await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
+        if (freeBalErr) {
+          logError('generate-narrative', user.id, `get_credit_balance errored: ${freeBalErr.message}`, { stage: 'free-claim' });
+        }
+        postSpendBalance = typeof freeBalance === 'number' ? freeBalance : 0;
+      }
+    }
 
-    if (spendErr) {
-      // Log the raw RPC message server-side, but throw a GENERIC user-facing
-      // error (the outer catch surfaces it to the client) — the raw spend_credits
-      // message can carry Postgres function/constraint names (L8 info-disclosure).
-      logError('generate-narrative', user.id, `spend_credits RPC errored: ${spendErr.message}`, { stage: 'spend' });
-      throw new Error('Credit spend failed. Try again — no credits were charged.');
-    }
-    if (!spendResult) {
-      throw new Error('Credit spend returned no result. Try again — no credits were charged.');
+    // Normal atomic spend — SKIPPED for a claimed free narrative (usedFreeNarrative).
+    // p_profile lets the RPC (migration 114) resolve the per-model calibrated cost
+    // from ai_credit_costs (stripping a trailing '_fast' to get the base feature),
+    // falling back to its verbatim 057 CASE block on any miss. The refund path
+    // targets spend_id, so it always restores whatever was actually charged.
+    if (!usedFreeNarrative) {
+      const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
+        feature: spendFeature,
+        p_profile: resolvedPreferenceKey,
+      });
+
+      if (spendErr) {
+        // Log the raw RPC message server-side, but throw a GENERIC user-facing
+        // error (the outer catch surfaces it to the client) — the raw spend_credits
+        // message can carry Postgres function/constraint names (L8 info-disclosure).
+        logError('generate-narrative', user.id, `spend_credits RPC errored: ${spendErr.message}`, { stage: 'spend' });
+        throw new Error('Credit spend failed. Try again — no credits were charged.');
+      }
+      if (!spendResult) {
+        throw new Error('Credit spend returned no result. Try again — no credits were charged.');
+      }
+
+      const result = spendResult as {
+        ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean;
+      };
+      if (!result.ok) {
+        // Most common reason: insufficient_funds. Surface the balance so
+        // the client UI can show "need N more credits" cleanly.
+        throw new Error(`Insufficient credits. Need ${cost}, have ${result.balance}.`);
+      }
+      isElevated = Boolean(result.elevated);
+      spendId = result.spend_id || null;
+      // A spend committed THIS attempt (paid or elevated) — arm the refund gating.
+      // Elevated runs set this too; refund() still short-circuits for isElevated,
+      // so a true value here never over-refunds an elevated (never-charged) run.
+      chargedThisAttempt = true;
+      // For elevated users the RPC returns balance=-2 as a sentinel — we
+      // surface a friendlier "unlimited" value to the client (Infinity
+      // isn't JSON-serializable, so use a high integer).
+      postSpendBalance = result.elevated ? 999999 : result.balance;
     }
 
-    const result = spendResult as {
-      ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean;
-    };
-    if (!result.ok) {
-      // Most common reason: insufficient_funds. Surface the balance so
-      // the client UI can show "need N more credits" cleanly.
-      throw new Error(`Insufficient credits. Need ${cost}, have ${result.balance}.`);
+    // Attach the resolved spend to the idempotency claim (migration 119) so a
+    // later duplicate can target the real charge. Runs only on the FIRST attempt
+    // (a valid key + NOT a duplicate); spendId may be null for a free/elevated run
+    // (attach null — that's fine). Best-effort: an attach failure only means a
+    // future duplicate can't see the spend_id (it still dedups the charge), so it
+    // must never fail the user's run — log and continue.
+    if (confirmedIdempotencyKey) {
+      const { error: attachErr } = await supabaseAdmin.rpc('attach_ai_spend_to_claim', {
+        p_user: user.id,
+        p_key: confirmedIdempotencyKey,
+        p_spend_id: spendId,
+      });
+      if (attachErr) {
+        logError('generate-narrative', user.id, `attach_ai_spend_to_claim errored: ${attachErr.message}`, { stage: 'idempotency' });
+      }
     }
-    isElevated = Boolean(result.elevated);
-    spendId = result.spend_id || null;
-    // For elevated users the RPC returns balance=-2 as a sentinel — we
-    // surface a friendlier "unlimited" value to the client (Infinity
-    // isn't JSON-serializable, so use a high integer).
-    postSpendBalance = result.elevated ? 999999 : result.balance;
+
+    } // end if (!duplicateRun)
 
     // Tier 6.8 — augment the bespoke summary with the structured
     // grounding envelope so the AI sees locked entities + user edits.
@@ -1105,7 +1460,12 @@ export async function handleGenerateNarrative(
       // into refinement-pass prompt building below.
       dynamicPreservation = preservationBlockFor(settlement);
     } catch (e) {
-      if (!isElevated && spendId) {
+      // MONEY-SAFETY (migration 119): only refund/release for a charge/claim made
+      // THIS attempt. On a DUPLICATE run `spendId` points at the PRIOR attempt's
+      // charge and chargedThisAttempt is false — a pre-stream failure here must NOT
+      // refund that prior charge (a user could otherwise get a refund by timing out
+      // then failing a retry). The `chargedThisAttempt` gate is what guarantees it.
+      if (chargedThisAttempt && !isElevated && spendId) {
         // The supabase RPC builder is a thenable, not a real Promise (no `.catch`);
         // await it and inspect `error`. A failed pre-stream refund leaves the user
         // charged, so it's logged as a structured line for alerting.
@@ -1125,6 +1485,11 @@ export async function handleGenerateNarrative(
           });
         }
       }
+      // A claimed FREE narrative that fails its pre-stream setup released here too, so
+      // the user keeps the free taste (mirrors the paid refund above). No-op unless a
+      // claim is actually held THIS attempt; latched against double-release. (On a
+      // duplicate, usedFreeNarrative is false, so this is inert regardless.)
+      if (chargedThisAttempt && usedFreeNarrative) await releaseFreeNarrative();
       throw e;
     }
     // Optional debug spine. The summarizer is exposed for future
@@ -1132,6 +1497,12 @@ export async function handleGenerateNarrative(
     // without changing the wire format.
     void summarizeGroundingPayload;
     const usageTelemetry: AiUsageRecord[] = [];
+    // opt2 defense-in-depth: the inbound request's abort signal, threaded into every
+    // model fetch below so a client disconnect (the same watchdog-abort that triggers
+    // the double-charge) aborts the in-flight generation and hits the refund path
+    // instead of billing an abandoned run. Undefined-safe: combineSignals ignores a
+    // null/absent signal, so behavior is unchanged when the runtime omits req.signal.
+    const clientAbortSignal: AbortSignal | null = req.signal ?? null;
 
     // Streaming NDJSON response
     const encoder = new TextEncoder();
@@ -1144,7 +1515,25 @@ export async function handleGenerateNarrative(
         };
 
         const refund = async () => {
+          // MONEY-SAFETY (migration 119): refund/release ONLY for a charge or free
+          // claim made on THIS attempt. On a DUPLICATE run nothing was charged/
+          // claimed here (the prior attempt paid), so this is a hard no-op — a
+          // mid-stream failure of a regenerated duplicate must NEVER refund the
+          // prior attempt's spend_id (which spendId still points at) nor release a
+          // free claim it never held. This single guard is the whole crux.
+          if (!chargedThisAttempt) return;
           if (isElevated) return;
+          // FREE NARRATIVE (migration 118): a claimed free run has no spend to refund —
+          // instead RELEASE the claim so the user keeps their free taste. Handled here,
+          // under the SAME shouldRefundOnFailure gating as a paid refund, so a PARTIAL
+          // success (thesis ok, a polish pass fails) does NOT release (refund() isn't
+          // called there) — the user got value. Returns BEFORE the no-spend_id error
+          // path below so a legitimate free run never logs the "spend path bypassed"
+          // line. Idempotent + latched against double-release.
+          if (usedFreeNarrative) {
+            await releaseFreeNarrative();
+            return;
+          }
           // Tier 9.9 audit plan #4 — dropped the legacy fallback. The
           // refund_credits RPC writes a NEW grant row that references
           // the originating spend; it's idempotent and safe under
@@ -1188,6 +1577,13 @@ export async function handleGenerateNarrative(
           }
         };
 
+        // The `refunded` flag the client shows the user on a failure. TRUE only
+        // when this attempt actually charged/claimed and refund() would restore it
+        // — i.e. NOT elevated (never charged) AND NOT a duplicate regen (the prior
+        // attempt paid; nothing was refunded THIS attempt). Mirrors refund()'s own
+        // gates so the message never claims a refund that didn't happen (119).
+        const refundedFlag = chargedThisAttempt && !isElevated;
+
         try {
           // ── DAILY LIFE: 5 parallel Opus paragraphs ────────────────────────
           if (type === 'dailyLife') {
@@ -1199,7 +1595,7 @@ export async function handleGenerateNarrative(
             await Promise.all(entries.map(async ([fieldName, cfg]) => {
               try {
                 const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext, confirmedChronicleContext);
-                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry, pricingConfig, clientAbortSignal);
                 // An empty/whitespace beat is a failure, not blank success. In the
                 // standalone dailyLife type the beats are all-or-nothing (refund on
                 // any failure), so treat an empty beat like a thrown provider error:
@@ -1221,10 +1617,11 @@ export async function handleGenerateNarrative(
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
               logError('generate-narrative', user.id, `narration failed: ${(firstError as Error).message}`, { stage: 'stream' });
-              send({ error: 'Narration failed.', refunded: !isElevated, aiUsage });
+              send({ error: 'Narration failed.', refunded: refundedFlag, aiUsage });
             } else {
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
+              scheduleAutoReload(supabaseAdmin, user.id);
               send({
                 done: true,
                 result: results,
@@ -1271,6 +1668,8 @@ export async function handleGenerateNarrative(
                 selectedModelPreference,
                 type,
                 usageTelemetry,
+                pricingConfig,
+                clientAbortSignal,
               );
               // Empty/whitespace thesis = thesis-stage failure (see narrative path):
               // route into the refund path rather than writing aiClone.thesis='' with
@@ -1281,7 +1680,7 @@ export async function handleGenerateNarrative(
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
               logError('generate-narrative', user.id, `progression thesis failed: ${(e as Error).message}`, { stage: 'stream' });
-              send({ error: 'Progression thesis failed. No new credits were charged.', refunded: !isElevated, aiUsage });
+              send({ error: 'Progression thesis failed. No new credits were charged.', refunded: refundedFlag, aiUsage });
               controller.close();
               return;
             }
@@ -1319,7 +1718,7 @@ export async function handleGenerateNarrative(
                   dynamicPreservation,
                   confirmedAiGuidance,
                 );
-                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
+                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry, pricingConfig, clientAbortSignal);
                 const parsed = safeJsonParse(raw);
 
                 // Silent-shape-mismatch detection (see narrative loop above).
@@ -1358,6 +1757,7 @@ export async function handleGenerateNarrative(
 
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
+            scheduleAutoReload(supabaseAdmin, user.id);
             send({
               done: true,
               result: aiClone,
@@ -1398,6 +1798,8 @@ export async function handleGenerateNarrative(
               selectedModelPreference,
               type,
               usageTelemetry,
+              pricingConfig,
+              clientAbortSignal,
             );
             // An empty/whitespace thesis is a THESIS-STAGE FAILURE, not a success:
             // the provider call was billed but yielded no usable identity. Throwing
@@ -1410,7 +1812,7 @@ export async function handleGenerateNarrative(
             if (shouldRefundOnFailure('thesis')) await refund();
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-            send({ error: 'Thesis generation failed.', refunded: !isElevated, aiUsage });
+            send({ error: 'Thesis generation failed.', refunded: refundedFlag, aiUsage });
             controller.close();
             return;
           }
@@ -1439,7 +1841,7 @@ export async function handleGenerateNarrative(
               }
 
               const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation, confirmedAiGuidance);
-              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
+              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry, pricingConfig, clientAbortSignal);
               const parsed = safeJsonParse(raw);
 
               // Silent-shape-mismatch detection: snapshot the field before apply,
@@ -1503,7 +1905,7 @@ export async function handleGenerateNarrative(
                 confirmedRelationshipMemoryContext,
                 confirmedChronicleContext,
               );
-              const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+              const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry, pricingConfig, clientAbortSignal);
               // A blank beat is a partial failure (non-refundable here — the thesis +
               // prose already landed), but it must be RECORDED in failedFields, not
               // written as blank success. Throw into the per-beat catch below.
@@ -1527,6 +1929,7 @@ export async function handleGenerateNarrative(
 
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
+          scheduleAutoReload(supabaseAdmin, user.id);
           send({
             done: true,
             result: aiClone,
@@ -1535,6 +1938,11 @@ export async function handleGenerateNarrative(
             // beat failed (see policy above); empty only if every beat failed.
             dailyLife,
             creditsRemaining: postSpendBalance,
+            // Additive (migration 118): true when THIS run was the account's free
+            // narrative (nothing spent). The client may surface "your free narrative"
+            // messaging; absent/false for every paid run, so the wire shape is
+            // back-compatible.
+            free: usedFreeNarrative,
             type,
             partialFailure: failedFields.length > 0,
             failedFields,
@@ -1558,7 +1966,7 @@ export async function handleGenerateNarrative(
           console.error('[generate-narrative] stream error:', msg);
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-          send({ error: msg, refunded: !isElevated, aiUsage });
+          send({ error: msg, refunded: refundedFlag, aiUsage });
           controller.close();
         } finally {
           // COGS metering: persist EVERY provider call (success or failure) into
@@ -1615,6 +2023,20 @@ export async function handleGenerateNarrative(
         await makeAdminClient().rpc('release_ai_spend_reservation', { p_id: reservationId });
       } catch (relErr) {
         logError('generate-narrative', null, `reservation release on pre-stream error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
+      }
+    }
+    // RELEASE a claimed free narrative on a pre-stream throw (migration 118). Reaching
+    // this catch means the streaming Response was never returned, so the stream never
+    // generated — a claimed-but-never-generated free narrative must be given back.
+    // `user` is out of scope here, so use the hoisted id + a fresh admin client. The
+    // `!freeReleased` latch + the DB's idempotent release guarantee no double-release.
+    // Best-effort: a release failure must not change the user-facing error.
+    if (usedFreeNarrative && !freeReleased && freeNarrativeUserId) {
+      freeReleased = true;
+      try {
+        await makeAdminClient().rpc('release_free_narrative', { p_user: freeNarrativeUserId });
+      } catch (relErr) {
+        logError('generate-narrative', freeNarrativeUserId, `free-narrative release on pre-stream error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'free-release' });
       }
     }
     // Pass the message through: the intentional pre-stream errors here are

@@ -1,9 +1,9 @@
 /**
  * domain/magicProfile.js — Magic as a structured system.
  *
- * Until now magic existed as a single
+ * Tier 4.8 of the roadmap. Until now magic existed as a single
  * config flag (`config.magicLevel`: low / moderate / high / pervasive)
- * plus a substrate variable (`magical_stability`). The
+ * plus a Phase 17 substrate variable (`magical_stability`). The
  * roadmap calls for 10 facets covering availability, legality,
  * institutional control, cost, risk, religious acceptance, and four
  * role facets (economic / military / medical / infrastructure).
@@ -15,14 +15,23 @@
  *     contributors[],
  *   }
  *
- * Pure read-only. Composes factions and substrate.
- * No mutation.
+ * Pure read-only. Composes Phase 9 factions, Phase 17 substrate,
+ * Phase 21 magical capacity. No mutation.
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveCausalState } from './causalState.js';
+import { deriveCapacityProfile } from './capacityModel.js';
 import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
+// alignment axes — never read off the stored temperamentAxis field — so the
+// regulatory-orthodoxy read can no longer disagree with the niche/warbound/
+// mandate temper. deityAxes is a dependency-free leaf (no cycle; its bytes ride
+// the aiGrounding edge bundle, rebuilt with this change).
+import { deityTemper } from './worldPulse/deityAxes.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
   // Canonical bands the GENERATOR emits (getMagicLevel: 0=none, <=25 low, <=65 medium, else high).
@@ -58,59 +67,50 @@ const ROLE_BANDS = Object.freeze([
 
 // ARCANE_PATTERN + HEALING_PATTERN now imported (single canonical matchers).
 
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+/** @typedef {{ source: string, effect: string, reason: string }} MagicContributor */
+/** @typedef {{ name?: string }} MagicInstitution */
+/** @typedef {{ _deityRef?: string, name?: string, alignmentAxis?: string, temperamentAxis?: string, rankAxis?: string }} DeitySnapshot */
 /**
- * @param {import('./settlement.schema.js').SimSettlement} s
- * @param {any} pattern
- * @returns {any}
+ * @typedef {Object} MagicSettlement
+ * @property {{ magicLevel?: string, magicExists?: boolean, primaryDeitySnapshot?: DeitySnapshot | null }} [config]
+ * @property {MagicInstitution[]} [institutions]
+ */
+/**
+ * @typedef {Object} MagicProfile
+ * @property {boolean} magicExists
+ * @property {string} availability
+ * @property {string} legality
+ * @property {string} institutionalControl
+ * @property {string} cost
+ * @property {string} risk
+ * @property {string} religiousAcceptance
+ * @property {{ economic: string, military: string, medical: string, infrastructure: string }} roles
+ * @property {MagicContributor[]} contributors
+ */
+
+/**
+ * @param {MagicSettlement | null | undefined} s
+ * @param {RegExp} pattern
+ * @returns {MagicInstitution[]}
  */
 function institutionsByPattern(s, pattern) {
-  const inst = Array.isArray(s?.institutions) ? s.institutions : [];
-  return inst.filter((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
+  // LIVE roster only — a calamity-ruined mage-tower/temple confers no magic capability
+  // (availability / institutional control / roles) (ruin-filter class).
+  const inst = liveInstitutions(s);
+  return inst.filter(i => pattern.test(nativeSemanticName(i)));
 }
-
-// ── Dominant-deity ⇄ magic regulation ───────────────────────────────────────
-// A theocracy regulates magic. When a settlement carries an embedded major-deity
-// snapshot (the same config.primaryDeitySnapshot the religion layer activates on),
-// a dominant orthodox god shifts magic LEGALITY tighter and RELIGIOUS ACCEPTANCE more
-// hostile — a WARLIKE or EVIL major god harder still. Absent deity ⇒ no term ⇒ the
-// magic profile is byte-identical to legacy (a deity-free world reads NONE of this).
-// Pure: reads the self-contained snapshot, never customContent. Bounded to one band
-// step so the deity nudges, never overrides, the faction-derived baseline.
-
-/** The embedded major-deity snapshot, or null. ONLY a MAJOR god regulates a realm's
- *  magic — a minor god or fringe cult lacks the institutional reach.
- *  @param {import('./settlement.schema.js').SimSettlement} settlement
- *  @returns {any} */
-function dominantDeityOf(settlement) {
-  const deity = settlement?.config?.primaryDeitySnapshot;
-  if (!deity || deity.rankAxis !== 'major') return null;
-  return deity;
-}
-
-/** True when the major deity is the kind that REGULATES magic hard — a warlike or
- *  evil orthodoxy polices arcane power as a rival authority. A good/neutral peacelike
- *  major god still tightens legality one notch (the theocracy term) but is not hostile.
- *  @param {any} deity
- *  @returns {boolean} */
-export function deityIsRegulatory(deity) {
-  return deity.temperamentAxis === 'warlike' || deity.alignmentAxis === 'evil';
-}
-
-// The number of band-steps a MAJOR deity tightens magic legality by: one for any
-// major god (the theocracy term), a second for a WARLIKE/EVIL orthodoxy that
-// polices arcane power as a rival authority. Exported as the single source the
-// shared deityEffects coupling reads (proven equal to deriveLegality's inline use).
-export const DEITY_MAGIC_LEGALITY_STEPS = Object.freeze({ regulatory: 2, major: 1 });
 
 // ── Derivers ─────────────────────────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveAvailability(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  const tmpl = /** @type {any} */ (MAGIC_LEVEL_VALUES)[magic] || MAGIC_LEVEL_VALUES.low;
+  const tmpl = MAGIC_LEVEL_VALUES[/** @type {keyof typeof MAGIC_LEVEL_VALUES} */ (magic)] || MAGIC_LEVEL_VALUES.low;
   contributors.push({ source: 'config.magicLevel', effect: 'baseline', reason: `Magic level: ${magic}.` });
 
   // Arcane institutions raise availability one step
@@ -127,14 +127,15 @@ function deriveAvailability(settlement, contributors) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} profiles
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveLegality(settlement, profiles, contributors) {
   // Religious faction with strong power tends toward restricted/regulated.
-  const religious = profiles.find((/** @type {any} */ p) => p.archetype === 'religious');
-  const arcane = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane');
+  const religious = profiles.find(p => p.archetype === 'religious');
+  const arcane = profiles.find(p => p.archetype === 'arcane');
 
   // Default: regulated if magic is moderate+, tolerated if low.
   const magic = settlement.config?.magicLevel || 'low';
@@ -170,19 +171,20 @@ function deriveLegality(settlement, profiles, contributors) {
     contributors.push({
       source: deity._deityRef || 'primaryDeity',
       effect: 'theocratic_regulation',
-      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
+      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deityTemper(deity) === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
     });
   }
   return legality;
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} profiles
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveInstitutionalControl(settlement, profiles, contributors) {
-  const arcane = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane');
+  const arcane = profiles.find(p => p.archetype === 'arcane');
   const arcaneInst = institutionsByPattern(settlement, ARCANE_PATTERN);
   if (arcane && arcane.power >= 30 && arcaneInst.length >= 1) {
     contributors.push({
@@ -196,39 +198,41 @@ function deriveInstitutionalControl(settlement, profiles, contributors) {
     contributors.push({
       source: 'institutions',
       effect: 'institutional',
-      reason: `Arcane institution(s) without dominant faction presence. Control is fragmented.`,
+      reason: `Arcane institution(s) without dominant faction presence — fragmented control.`,
     });
     return 'fragmented';
   }
   contributors.push({
     source: 'config',
     effect: 'unregulated',
-    reason: 'No arcane institutions. Practice is informal or absent.',
+    reason: 'No arcane institutions — practice is informal or absent.',
   });
   return 'unregulated';
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveCost(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic. Services cheap.' }); return 'cheap'; }
-  if (magic === 'high' || magic === 'common')   { contributors.push({ source: 'config.magicLevel', effect: 'moderate', reason: 'Magic widespread. Services priced moderately.' }); return 'moderate'; }
-  if (magic === 'moderate' || magic === 'medium') { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic. Services costly.' }); return 'costly'; }
-  contributors.push({ source: 'config.magicLevel', effect: 'extortionate', reason: 'Rare magic. Services extortionate.' });
+  if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic — services cheap.' }); return 'cheap'; }
+  if (magic === 'high' || magic === 'common')   { contributors.push({ source: 'config.magicLevel', effect: 'moderate', reason: 'Magic widespread — services priced moderately.' }); return 'moderate'; }
+  if (magic === 'moderate' || magic === 'medium') { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic — services costly.' }); return 'costly'; }
+  contributors.push({ source: 'config.magicLevel', effect: 'extortionate', reason: 'Rare magic — services extortionate.' });
   return 'extortionate';
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {import('./causalState.js').CausalState} causal
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveRisk(settlement, causal, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  const base = /** @type {any} */ (MAGIC_LEVEL_VALUES)[magic]?.baseRisk || 'low';
+  const base = MAGIC_LEVEL_VALUES[/** @type {keyof typeof MAGIC_LEVEL_VALUES} */ (magic)]?.baseRisk || 'low';
   contributors.push({ source: 'config.magicLevel', effect: 'baseline', reason: `Baseline risk for ${magic} magic: ${base}.` });
 
   const stabBand = causal.bands?.magical_stability;
@@ -236,7 +240,7 @@ function deriveRisk(settlement, causal, contributors) {
     contributors.push({
       source: 'var.magical_stability',
       effect: 'destabilized',
-      reason: `Magical stability is ${stabBand}. Risks rise.`,
+      reason: `Magical stability is ${stabBand} — risks rise.`,
     });
     return upBand(RISK_BANDS, base, 1);
   }
@@ -244,24 +248,25 @@ function deriveRisk(settlement, causal, contributors) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} profiles
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
  */
 function deriveReligiousAcceptance(settlement, profiles, contributors) {
-  const religious = profiles.find((/** @type {any} */ p) => p.archetype === 'religious');
-  const arcane = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane');
+  const religious = profiles.find(p => p.archetype === 'religious');
+  const arcane = profiles.find(p => p.archetype === 'arcane');
   const deity = dominantDeityOf(settlement);
 
   // A dominant WARLIKE/EVIL major deity forces OPEN hostility toward magic
   // regardless of the faction balance (the orthodoxy treats arcane power as a rival
-  // it must suppress). This OVERRIDES the faction-derived band. A non-regulatory
-  // major god nudges acceptance one notch warier below. Gated on the deity snapshot.
+  // it must suppress). This OVERRIDES the faction-derived band. Gated on the deity
+  // snapshot ⇒ a deity-free settlement is byte-identical.
   if (deity && deityIsRegulatory(deity)) {
     contributors.push({
       source: deity._deityRef || 'primaryDeity',
       effect: 'hostile',
-      reason: `${deity.name || 'The patron deity'} (major, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority. Magic is openly opposed.`,
+      reason: `${deity.name || 'The patron deity'} (major, ${deityTemper(deity) === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority. Magic is openly opposed.`,
     });
     return 'hostile';
   }
@@ -273,13 +278,13 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
       contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) lends the realm a wary orthodoxy toward arcane practice.` });
       return 'wary';
     }
-    contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction. Acceptance defaults to indifferent.' });
+    contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction — acceptance defaults to indifferent.' });
     return 'indifferent';
   }
   const relPower = religious.power || 0;
   const arcPower = arcane?.power || 0;
   if (relPower > arcPower + 20) {
-    contributors.push({ source: religious.id, effect: 'hostile', reason: `${religious.name} dominates arcane influence. Opposition is open.` });
+    contributors.push({ source: religious.id, effect: 'hostile', reason: `${religious.name} dominates arcane influence — opposition is open.` });
     return 'hostile';
   }
   if (arcPower > relPower + 20) {
@@ -288,19 +293,21 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
       contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) keeps the realm wary even where arcane power runs strong.` });
       return 'wary';
     }
-    contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious. Magic woven into ritual.' });
+    contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious — magic woven into ritual.' });
     return 'syncretic';
   }
-  contributors.push({ source: religious.id, effect: 'wary', reason: 'Religious and arcane powers in rough balance. Wary coexistence.' });
+  contributors.push({ source: religious.id, effect: 'wary', reason: 'Religious and arcane powers in rough balance — wary coexistence.' });
   return 'wary';
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} profiles
- * @param {any} contributors
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {import('./settlement.schema.js').CapacityProfile | null} capacity
+ * @param {MagicContributor[]} contributors
+ * @returns {{ economic: string, military: string, medical: string, infrastructure: string }}
  */
-function deriveRoles(settlement, profiles, contributors) {
+function deriveRoles(settlement, profiles, capacity, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
   // The 'integral' role tier keyed on magic === 'pervasive', a band the GENERATOR
   // never emits (getMagicLevel tops out at 'high'), so every procedurally-generated
@@ -310,14 +317,15 @@ function deriveRoles(settlement, profiles, contributors) {
   // capacityModel.deriveMagical already uses. 'high'-magic generated content can now
   // reach 'integral'; legacy 'pervasive' configs are unchanged (both canon to 'high').
   const topBand = magicLedger(settlement).magicLevel === 'high';
-  const arcanePower = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane')?.power || 0;
+  const arcanePower = profiles.find(p => p.archetype === 'arcane')?.power || 0;
   const arcaneInstCount = institutionsByPattern(settlement, ARCANE_PATTERN).length;
   const healingInstCount = institutionsByPattern(settlement, HEALING_PATTERN).length;
 
   /**
-   * @param {any} name
-   * @param {any} present
-   * @param {any} integral
+   * @param {string} name
+   * @param {boolean} present
+   * @param {boolean} integral
+   * @returns {string}
    */
   function role(name, present, integral) {
     if (integral) {
@@ -344,22 +352,14 @@ function deriveRoles(settlement, profiles, contributors) {
 
 // ── Band step helpers ───────────────────────────────────────────────────
 
-/**
- * @param {any} bands
- * @param {any} current
- * @param {any} steps
- */
+/** @param {readonly string[]} bands @param {string} current @param {number} steps @returns {string} */
 function upBand(bands, current, steps) {
   const idx = bands.indexOf(current);
   if (idx === -1) return current;
   return bands[Math.min(bands.length - 1, idx + steps)];
 }
 
-/**
- * @param {any} bands
- * @param {any} current
- * @param {any} steps
- */
+/** @param {readonly string[]} bands @param {string} current @param {number} steps @returns {string} */
 function downBand(bands, current, steps) {
   const idx = bands.indexOf(current);
   if (idx === -1) return current;
@@ -371,8 +371,8 @@ function downBand(bands, current, steps) {
 /**
  * Derive the structured MagicProfile for a settlement.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {any} MagicProfile
+ * @param {MagicSettlement | null | undefined} settlement
+ * @returns {MagicProfile | null}
  */
 export function deriveMagicProfile(settlement) {
   if (!settlement) return null;
@@ -394,14 +394,56 @@ export function deriveMagicProfile(settlement) {
       contributors: [{
         source: 'config.magicExists',
         effect: 'no_magic',
-        reason: 'Magic does not function in this world: no availability, legality, cost, or risk to profile.',
+        reason: 'Magic does not function in this world — no availability, legality, cost, or risk to profile.',
       }],
     };
   }
 
-  const profiles = deriveAllFactionProfiles(settlement);
-  const causal = deriveCausalState(settlement);
-  /** @type {any[]} */
+  // MG-3d (leak L7) — THE DISPLAY ASYMMETRY.
+  //
+  // A settlement whose world HAS magic but whose own dial is zero (magicExists true,
+  // priorityMagic 0 ⇒ canonical band 'none') fell straight past the dead-magic
+  // short-circuit above into the band ladder, where MAGIC_LEVEL_VALUES.none reads
+  // availability 'rare' and deriveLegality's else-arm reads legality 'restricted'. The
+  // page therefore claimed a rare, restricted magic trade in a town where generation
+  // produced no magic at all — and restricted-ness implies an authority bothering to
+  // restrict something. Nothing is not rare; it is nothing.
+  //
+  // TWO GUARDS, both load-bearing:
+  //   • PRESENT — magicLedger's neutral envelope for a settlement with NO magic axis is
+  //     itself band 'none'. Without this guard every axis-less legacy record would flip
+  //     from its long-standing 'limited' profile to 'absent'. Only a settlement that
+  //     actually carries the axis and reads zero is short-circuited.
+  //   • AUTHORED PREMISE (MG-LAW-4, JUDGMENT — vetoable) — a zero dial with an arcane
+  //     institution standing in the roster is a DM's deliberate act, not a generator
+  //     artefact (world law refuses to MINT arcane institutions at a zero dial). Magic
+  //     plainly is available there, so the ladder still runs and the tower still shows;
+  //     MG-3e's validator warning is what carries the strangeness. Erasing an authored
+  //     premise to satisfy a display rule would trade one lie for another.
+  const ledger = magicLedger(settlement);
+  if (ledger.present && ledger.magicLevel === 'none'
+      && institutionsByPattern(settlement, ARCANE_PATTERN).length === 0) {
+    return {
+      magicExists: true,
+      availability: 'absent',
+      legality: 'absent',
+      institutionalControl: 'unregulated',
+      cost: 'absent',
+      risk: 'absent',
+      religiousAcceptance: 'indifferent',
+      roles: { economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent' },
+      contributors: [{
+        source: 'config.priorityMagic',
+        effect: 'no_practice',
+        reason: 'Magic works in this world, but none of it is practised here — nothing to profile.',
+      }],
+    };
+  }
+
+  const profiles = deriveAllFactionProfiles(/** @type {any} */ (settlement));
+  const causal = deriveCausalState(/** @type {any} */ (settlement));
+  const capacity = deriveCapacityProfile('magical', /** @type {any} */ (settlement));
+  /** @type {MagicContributor[]} */
   const contributors = [];
 
   return {
@@ -412,7 +454,7 @@ export function deriveMagicProfile(settlement) {
     cost:                 deriveCost(settlement, contributors),
     risk:                 deriveRisk(settlement, causal, contributors),
     religiousAcceptance:  deriveReligiousAcceptance(settlement, profiles, contributors),
-    roles:                deriveRoles(settlement, profiles, contributors),
+    roles:                deriveRoles(settlement, profiles, capacity, contributors),
     contributors,
   };
 }
@@ -424,8 +466,10 @@ export function magicLegalityBands()     { return [...LEGALITY_BANDS]; }
 export function magicRiskBands()         { return [...RISK_BANDS]; }
 export function magicRoleBands()         { return [...ROLE_BANDS]; }
 
-/** Human-readable summary.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+/**
+ * Human-readable summary.
+ * @param {MagicSettlement | null | undefined} settlement
+ * @returns {string[]}
  */
 export function summarizeMagic(settlement) {
   const m = deriveMagicProfile(settlement);
@@ -436,6 +480,43 @@ export function summarizeMagic(settlement) {
     `Institutional control: ${m.institutionalControl}.`,
     `Cost: ${m.cost}. Risk: ${m.risk}.`,
     `Religious acceptance: ${m.religiousAcceptance}.`,
-    `Roles. Economic: ${m.roles.economic}; military: ${m.roles.military}; medical: ${m.roles.medical}; infrastructure: ${m.roles.infrastructure}.`,
+    `Roles — economic: ${m.roles.economic}; military: ${m.roles.military}; medical: ${m.roles.medical}; infrastructure: ${m.roles.infrastructure}.`,
   ];
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-main — ACTIVE deity ⇄ magic-legality/acceptance coupling. deriveLegality and
+// deriveReligiousAcceptance now consult the embedded major-deity snapshot. Gated on
+// config.primaryDeitySnapshot ⇒ a deity-free save is byte-identical (proven by
+// z2MagicDeity's absent-deity suite). DEITY_MAGIC_LEGALITY_STEPS is the single source
+// the shared deityEffects coupling re-exports.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** The embedded major-deity snapshot, or null. ONLY a MAJOR god regulates a realm's
+ *  magic — a minor god or fringe cult lacks the institutional reach.
+ *  @param {MagicSettlement | null | undefined} settlement
+ *  @returns {DeitySnapshot | null} */
+function dominantDeityOf(settlement) {
+  const deity = settlement?.config?.primaryDeitySnapshot;
+  if (!deity || deity.rankAxis !== 'major') return null;
+  return deity;
+}
+
+/** True when the major deity is the kind that REGULATES magic hard — a warlike or
+ *  evil orthodoxy polices arcane power as a rival authority. A good/neutral peacelike
+ *  major god still tightens legality one notch (the theocracy term) but is not hostile.
+ *  @param {DeitySnapshot} deity
+ *  @returns {boolean} */
+export function deityIsRegulatory(deity) {
+  // Temper via the DERIVATION (axis retirement, W-F5): a stored temperamentAxis
+  // is inert to this read. Under the current derivation weights warlike ⟺ evil
+  // alignment, so a regulatory orthodoxy is exactly the evil-aligned major god;
+  // the disjunction stays for the day derivation weights let temper diverge.
+  return deityTemper(deity) === 'warlike' || deity.alignmentAxis === 'evil';
+}
+
+// The number of band-steps a MAJOR deity tightens magic legality by: one for any
+// major god (the theocracy term), a second for a WARLIKE/EVIL orthodoxy that
+// polices arcane power as a rival authority. Exported as the single source the
+// shared deityEffects coupling reads (proven equal to deriveLegality's inline use).
+export const DEITY_MAGIC_LEGALITY_STEPS = Object.freeze({ regulatory: 2, major: 1 });

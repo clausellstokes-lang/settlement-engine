@@ -1,4 +1,3 @@
-import { Check, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -86,7 +85,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     <section style={{
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       padding: '12px 14px',
       marginTop: 12,
       marginBottom: 12,
@@ -116,7 +114,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   gap: 8,
                   padding: '7px 8px',
                   border: `1px solid ${BORDER}`,
-                  borderRadius: 6,
                   background: impact.status === 'applied' ? swatch.successBg : GOLD_BG,
                 }}
               >
@@ -140,7 +137,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 {impact.status === 'queued' && (
                   <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
                     <IconButton
-                      Icon={Check}
+                      glyph="✓"
                       label={available
                         ? 'Apply regional impact'
                         : delayTicks > 0
@@ -151,7 +148,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                       onClick={() => handleApply(impact.id)}
                     />
                     <IconButton
-                      Icon={CircleSlash}
+                      glyph="⊘"
                       label="Ignore regional impact"
                       onClick={() => handleIgnore(impact.id)}
                     />
@@ -160,7 +157,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 {impact.status === 'applied' && (
                   <div style={{ flexShrink: 0 }}>
                     <IconButton
-                      Icon={Undo2}
+                      glyph="↶"
                       label="Resolve regional impact"
                       onClick={() => handleResolve(impact.id)}
                     />

@@ -22,39 +22,39 @@
  */
 
 import { flag } from '../../lib/flags.js';
+import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
-import { canonExports } from '../../domain/canonicalAccessors.js';
-import {
-  criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
-  deriveDefenseReadiness, deriveArmedForces,
-} from '../../domain/display/defenseDisplay.js';
-import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
-import { resolveMilitaryStress } from '../../domain/display/warStatusVocab.js';
+import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
+import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
-import { coverageRatioPct } from './foodCoverage.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { ownerGenerationContracts } from './generationContracts.js';
+// The four settlement-body chapters and the shared small readers moved out under
+// THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
+// same order with the same arguments.
+import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
+import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
+
+// Human labels for the publicLegitimacy breakdown factors
+// (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
+// food }). ScoreWithBreakdown prints "<±delta> <label>"; any unmapped key falls
+// back to humanize() so a new factor still reads as a Title-Case word.
+const LEGITIMACY_FACTOR_LABELS = {
+  prosperity: 'Prosperity',
+  safety:     'Safety',
+  defense:    'Defense',
+  food:       'Food security',
+};
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
   town: 'Town', city: 'City', metropolis: 'Metropolis',
 };
 
-/**
- * settlement.stress is sometimes an array, sometimes a single stress
- * object, sometimes null/undefined — depends on which generator path
- * produced the settlement. Normalize to array at every read site so the
- * downstream code can iterate uniformly. Caught by the PDF section
- * smoke tests in tests/pdf/sections.smoke.test.js.
- */
-function stressArray(s) {
-  if (Array.isArray(s?.stress)) return s.stress;
-  if (s?.stress) return [s.stress];
-  return [];
-}
 
 /**
  * Coerce a prose value that may be a string, a {primary, ...} object, or an
@@ -69,60 +69,7 @@ function coerceProse(v) {
   return String(v);
 }
 
-/**
- * Food-balance core fields, shared by the raw + active slices. Behind the
- * canonicalViewModel flag these come from the display model (which reads the
- * real dailyProduction/dailyNeed fields and applies the §1c "Not calculated"
- * fallback); otherwise the legacy shape is preserved verbatim. `viability`
- * is the economicViability object (not the whole settlement).
- */
-// imports cover this % of the pre-import gap (qty ÷ rawDeficit). Mirrors the web
-// EconomicsTab ("Trade covers X% of gap"). importCoverage is a QUANTITY (lb/day),
-// NOT a percent — printing it directly produced the bogus "imports cover 15929%".
-// Falls back to 100% of the import qty when the gap is unknown.
-function coveragePct(ic, rd) {
-  const p = coverageRatioPct(ic, rd);
-  return p == null ? null : Math.round(p);
-}
 
-function foodCore(viability) {
-  const fb = viability?.metrics?.foodBalance || null;
-  if (flag('canonicalViewModel')) {
-    const m = deriveFoodBalance({ economicViability: viability });
-    return {
-      production: m.produced,
-      need:       m.needed,
-      deficit:    m.deficit || null,
-      surplus:    m.surplus || null,
-      importCoverage: m.importCoverage,
-      rawDeficit: m.rawDeficit,
-      coveragePct: coveragePct(m.importCoverage, m.rawDeficit),
-      deficitPct: m.deficitPct,
-      display:    m.display,
-      detail:     m.detail,
-    };
-  }
-  // The engine emits dailyProduction/dailyNeed; the old .production/.need reads
-  // left the flag-off PDF showing "Not calculated" and losing the deficit %.
-  const prod = fb?.dailyProduction ?? fb?.production ?? null;
-  const need = fb?.dailyNeed ?? fb?.need ?? null;
-  const legacyNeed = Number(need) || 0;
-  const legacyDef = Number(fb?.deficit) || 0;
-  return {
-    production: prod,
-    need,
-    deficit:    fb?.deficit ?? null,
-    surplus:    fb?.surplus ?? null,
-    importCoverage: fb?.importCoverage ?? null,
-    rawDeficit: fb?.rawDeficit ?? null,
-    coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
-    // Residual deficit ÷ daily need — the SAME "% of need" the flag-on branch and
-    // the screen show. NOT the engine's gross fb.deficitPercent (deficit ÷
-    // adjustedNeed, pre-import), which disagrees on every import-dependent
-    // settlement. (A+ pdf.2 — one fact, one derivation, even on the killswitch path.)
-    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
-  };
-}
 
 /**
  * Viability summary (§1f). Behind canonicalViewModel, the reconciled verdict
@@ -166,11 +113,11 @@ export function buildViewModel({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // The LIVE campaign world for this settlement. Shape:
-  //   { worldState, regionalGraph, settlements?, nameFor? }
-  // Threaded ONLY for premium exports (data-layer gate in SettlementDetail).
-  // When absent / dormant, the liveWorld slice resolves to `null` — so a
-  // non-campaign / free / anon export is BYTE-IDENTICAL to today.
+  // The LIVE campaign world for this settlement ({ worldState, regionalGraph,
+  // settlements?, nameById? }). Threaded ONLY for premium exports. When absent /
+  // dormant the liveWorld slice resolves to `null` — so a non-campaign / free /
+  // anon export is byte-identical (the Faith & War chapter renders nothing, and
+  // SettlementPDF additionally gates it on the faith premium seam).
   campaign = null,
 } = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
   const raw = settlement || {};
@@ -187,25 +134,23 @@ export function buildViewModel({
     systemState,
     eventLog,
     phase,
+    // Live campaign slice for the Faith & War chapter. `null` off-campaign /
+    // dormant ⇒ chapter renders nothing.
+    liveWorld: buildPdfLiveWorld({ settlement: raw, campaign }),
 
-    // Live-world slice. Built ONLY from the existing pure
-    // warStatus / pantheon / realmArc / deityEffects selectors (NO recompute,
-    // NO screen↔PDF drift). `null` when dormant ⇒ the Faith & War chapter and
-    // the additive enrichments self-gate to nothing ⇒ byte-identical off-state.
-    liveWorld:     buildPdfLiveWorld({ settlement: raw, campaign }),
-
-    // Phase-D entity index — the SAME structured-ref/id index the web dossier
-    // uses (buildDossierEntityIndex), built from the canonical `raw` save so
-    // ids/anchors are stable and the entries' `currentName` getters resolve the
-    // live name (rename-safe). Sections thread this into <EntityRef> to render
-    // internal links to a target's card/section; an id that does not resolve
-    // here renders as plain text (broken-link-safe). Always present and purely
-    // additive (derived from existing fields), so a non-narrative export is
-    // byte-identical except for the additive <Link> anchors themselves.
+    // Entity index the PDF EntityRef primitive resolves ⟦entity:…⟧ tokens
+    // against (NotableNPCs / Institutions / NPCQuickRef read vm.entityIndex).
+    // Built from the canonical `raw` save so ids are stable across the raw/ai
+    // pair; additive (derived from existing fields), so a non-narrative export
+    // is byte-identical except for the additive in-PDF <Link> anchors. When a
+    // token's id does not resolve, EntityRef degrades to plain <Text>.
     entityIndex:   buildDossierEntityIndex(raw),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
-    identity:      identitySlice(active),
+    // Identity prose may follow the selected raw/AI presentation, but generation
+    // contracts are owner facts from the canonical save. Passing both prevents a
+    // partial AI overlay from hiding or rewriting the culture/coherence receipt.
+    identity:      identitySlice(active, raw),
     overview:      overviewSlice(active, ai, useAi),
     daily:         dailySlice(active, aiDailyLife),
     power:         powerSlice(active),
@@ -235,11 +180,6 @@ function getGoverningFaction(active) {
   return factions.find(f => f?.isGoverning) || null;
 }
 
-function avgScore(scores) {
-  const vals = Object.values(scores || {}).filter(v => typeof v === 'number');
-  if (!vals.length) return null;
-  return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
-}
 
 // ── slice builders ──────────────────────────────────────────────────────────
 
@@ -282,7 +222,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       },
       economy: {
         complexity: ec?.economicComplexity || null,
-        topExport: labelOfThing(canonExports(s)[0]), // canonExports (not ec.primaryExports) — legacy-`exports`-safe, matches deriveTopExport
+        topExport: labelOfThing(ec?.primaryExports?.[0]),
       },
       defense: {
         readiness: dp?.readiness?.label || null,
@@ -309,11 +249,11 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
   };
 }
 
-function identitySlice(s) {
+function identitySlice(s, canonical = s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
-  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
   const food = deriveFoodBalance(s);
@@ -330,6 +270,7 @@ function identitySlice(s) {
     tradeAccess:    s?.config?.tradeRouteAccess || null,
     governmentType: s?.powerStructure?.governmentType || s?.governmentType || null,
     founding:       s?.history?.founding || null,
+    ...ownerGenerationContracts(canonical, s),
     quarters:       (s?.spatialLayout?.quarters || []).map(q => ({
       name: q?.name || 'Quarter',
       // engine field is `desc`; the old `description`-only read printed nothing.
@@ -344,7 +285,7 @@ function identitySlice(s) {
       safety:         sp?.safetyLabel || null,
       foodDeficit:    food.deficit ?? null,
       foodSurplus:    food.surplus ?? null,
-      culturalNotes:  s?.culturalNotes || null,
+      culturalNotes:  canonical?.culturalNotes ?? s?.culturalNotes ?? null,
       magicDependency: !!dp?.magicDependency,
       magicalCapability: dp?.magicalCapability || null,
       defenseLabel:   dp?.readiness?.label || null,
@@ -477,18 +418,10 @@ function dailySlice(active, aiDailyLife) {
         { time: 'Night',   text: aiDailyLife.night },
       ].filter(p => p.text)
     : [];
-  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
-  // not the raw unclamped metrics.foodBalance — so the daily-life fallback shows the
-  // SAME food number as the identity anchor, the overview/economics chapters, and the
-  // on-screen DailyLifeTab. `available` is false when food was never calculated, which
-  // lets the section omit the verdict instead of printing a false "Surplus of 0 units".
-  const food = deriveFoodBalance(active);
   return {
     hasPassages: passages.length > 0,
     passages,
-    foodBalance: food.available
-      ? { available: true, deficit: food.deficit, surplus: food.surplus }
-      : null,
+    foodBalance: active?.economicViability?.metrics?.foodBalance || null,
     services:    active?.availableServices || {},
     institutions: active?.institutions || [],
     safetyRatio: active?.economicState?.safetyProfile?.safetyRatio,
@@ -555,11 +488,16 @@ function powerSlice(active) {
     recentConflict:  s?.powerStructure?.recentConflict || null,
     legitimacy:      s?.powerStructure?.publicLegitimacy || null,
     // The engine emits breakdown as an object map ({ factor: delta }); normalize
-    // to the stable array the section iterates.
+    // to the stable array the section iterates. Each factor carries a human
+    // `label` (ScoreWithBreakdown prints "<±delta> <label>", e.g. "+12 Prosperity")
+    // — without it the chip rendered a bare delta with nothing naming what
+    // contributed. Labels match the derivation factors in
+    // factionDynamics.computePublicLegitimacy (prosperity / safety / defense /
+    // food security) and the PDF section's title-case voice.
     legitimacyBreakdown: Array.isArray(s?.powerStructure?.publicLegitimacy?.breakdown)
       ? s.powerStructure.publicLegitimacy.breakdown
       : Object.entries(s?.powerStructure?.publicLegitimacy?.breakdown || {})
-          .map(([key, delta]) => ({ key, delta })),
+          .map(([key, delta]) => ({ key, delta, label: LEGITIMACY_FACTOR_LABELS[key] || humanize(key) })),
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,
@@ -580,306 +518,10 @@ function powerSlice(active) {
   };
 }
 
-// Pull the human resource name off an exploitation chain entry (engine stores
-// it as `rawResource`; tolerate a few legacy shapes + bare strings).
-const exploitName = (c) =>
-  typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
 
-function economicsSlice(active) {
-  const s = active || {};
-  const ec = s?.economicState || {};
-  const v = s?.economicViability || {};
-  const ra = s?.resourceAnalysis || {};
-  const sp = ec?.safetyProfile || {};
 
-  // Economic flows / chains
-  const chains = (ec?.activeChains || []).map(c => ({
-    name: c?.name || c?.chainName || 'Chain',
-    status: c?.status || 'productive',
-    processingInstitutions: c?.processingInstitutions || c?.processing || [],
-    outputs: c?.outputs || [],
-    dependency: c?.dependency || null,
-    incomeContribution: c?.incomeContribution ?? null,
-    description: c?.description || null,
-    hooks: c?.plotHooks || [],
-    isService: c?.isService || c?.kind === 'service',
-  }));
 
-  // §14 — confirmed custom supply chains (display-only; separate from the
-  // simulated activeChains so they never feed impairment math).
-  const customChains = (ec?.customChains || []).map(c => ({
-    name: c?.label || c?.name || c?.chainId || 'Custom chain',
-    resource: c?.resource || null,
-    processingInstitutions: c?.processingInstitutions || [],
-    outputs: c?.outputs || [],
-  }));
 
-  // Shadow economy
-  const shadow = sp?.shadowEconomy || s?.shadowEconomy || {};
-
-  return {
-    prosperity:         ec.prosperity || null,
-    economicComplexity: ec.economicComplexity || null,
-    economyOutput:      ec.compound?.economyOutput ?? null,
-    tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
-    incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
-    primaryExports:     ec.primaryExports || [],
-    primaryImports:     ec.primaryImports || [],
-    customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
-    customCategoryExports: ec.customCategoryExports || {},  // §14 — folded category → [member good names]
-    customCategoryImports: ec.customCategoryImports || {},
-    tradeLinks:         ec.tradeLinks || [],   // §14 Phase 3b — good-level neighbour trade
-    localProduction:    ec.localProduction || [],
-    tradeDependencies:  ec.tradeDependencies || [],
-    necessityImports:   !!ec.necessityImports,
-    isEntrepot:         !!ec.isEntrepot,
-    safetyHooks:        sp?.plotHooks || [],
-    viabilityIssues:    (v?.issues || []).map(iss => ({
-      severity: iss?.severity,
-      title: iss?.title,
-      description: iss?.description,
-      institution: iss?.institution,
-      priorityNote: iss?.priorityNote,
-      suggestedFixes: iss?.suggestedFixes || [],
-    })),
-    viabilityHooks:     v?.plotHooks || [],
-    foodBalance: {
-      ...foodCore(v),
-      agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
-      stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
-      summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
-    },
-    criticalImports:    ra?.imports?.critical || [],
-    chains,
-    customChains,
-    serviceChains:      chains.filter(c => c.isService),
-    shadowEconomy: {
-      captureRate:
-        shadow?.captureRate ??
-        (typeof sp?.blackMarketCapture === 'number'
-          ? sp.blackMarketCapture
-          : sp?.blackMarketCapture?.score) ??
-        null,
-      // Operations = the safety profile's criminal institutions (same source the
-      // web Economics tab uses), each tagged with its economic role.
-      operations: (sp?.criminalInstitutions || []).map((name) => ({
-        name,
-        econ: criminalOpEcon(name),
-      })),
-      // Criminal supply chains = the criminal-economy category of active chains.
-      criminalChains: (ec?.activeChains || [])
-        .filter((c) => c?.needKey === 'criminal_economy')
-        .map((c) => `${String(c?.chainId || '').replace(/_/g, ' ')} · ${c?.status || 'active'}`.trim()),
-      crimeTypes: sp?.crimeTypes || shadow?.crimeTypes || [],
-    },
-    // Normalize exploitation to resource-name arrays the section renders
-    // directly. Engine shape is { fullyExploited, partiallyExploited,
-    // unexploited }, each a chain object whose resource lives in `rawResource`.
-    resourceExploitation: {
-      full:        (ra?.exploitation?.fullyExploited || []).map(exploitName).filter(Boolean),
-      partial:     (ra?.exploitation?.partiallyExploited || []).map(exploitName).filter(Boolean),
-      unexploited: (ra?.exploitation?.unexploited || []).map(exploitName).filter(Boolean),
-    },
-    terrainCriticals: ra?.terrainCriticals || [],
-  };
-}
-
-function defenseSlice(active) {
-  const s = active || {};
-  const dp = s?.defenseProfile || {};
-  const sp = s?.economicState?.safetyProfile || {};
-  const stress = stressArray(s);
-
-  // Defense readiness rows (reframed threat assessment) + grouped armed forces,
-  // both shared with the web Defense tab via deriveDefenseReadiness/Forces.
-  const threatReadiness = deriveDefenseReadiness(s);
-  const armedForces = deriveArmedForces(s);
-
-  // Active military status override. Resolved through the SHARED war-status alias
-  // (domain/display/warStatusVocab) so a PULSE-born siege (war_pressure / war_drain
-  // / army_deployed conditions) lights this banner identically to a GENERATION-born
-  // one. A generation stress is returned UNCHANGED — byte-identical legacy render.
-  // The `types` set is exactly the inline predicate's prior scope (faithful superset).
-  const militaryStress = resolveMilitaryStress(s, { types: ['under_siege', 'occupied', 'wartime', 'insurgency'] });
-
-  // Criminal architecture. Operations come from the safety profile's criminal
-  // institutions (the source the web Defense tab uses), each carrying an
-  // enforcement note; criminalStructure classifies the overall organization.
-  const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
-  const criminalOps = (sp?.criminalInstitutions || []).map((name) => ({
-    name,
-    note: criminalOpNote(name),
-  }));
-  const criminalStructure = deriveCriminalStructure(s);
-  const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
-  const orderHooks = sp?.plotHooks || [];
-
-  return {
-    scores:                dp.scores || {},
-    scoreAvg:              avgScore(dp.scores),
-    threatReadiness,
-    militaryStress,
-    readiness:             dp.readiness || null,
-    guardAssessment:       s?.guardAssessment || dp?.guardAssessment || null,
-    institutions:          dp.institutions || {},
-    armedForces,
-    safetyLabel:           sp.safetyLabel || null,
-    safetyRatio:           sp.safetyRatio,
-    criminalInstitutions:  sp.criminalInstitutions || [],
-    crimeTypes:            sp.crimeTypes || [],
-    blackMarketCapture:    sp.blackMarketCapture || null,
-    // foodSecurity lives on economicState (economicGenerator), not
-    // economicViability; prefer the defense profile's disaster score when the
-    // generator persists one, keep the old path for legacy saves.
-    foodResilience:        s?.defenseProfile?.scores?.disaster ??
-                           s?.economicState?.foodSecurity?.resilienceScore ??
-                           s?.economicViability?.foodSecurity?.resilienceScore ?? null,
-    tradeAccess:           s?.config?.tradeRouteAccess || null,
-    stress,
-    criminalCapture,
-    criminalOps,
-    criminalStructure,
-    criminalFaction,
-    orderHooks,
-    publicOrder: s?.publicOrder || null,
-    lawEnforcement: s?.lawEnforcement || null,
-    // Computed from defense scores + institution presence, mirroring the web
-    // Defense tab (the engine does not emit these as fields).
-    supportingCapabilities: deriveSupportingCapabilities(s),
-    vulnerabilities: dp?.vulnerabilities || s?.defenseVulnerabilities || [],
-    // Surfaced for defenseHeadline (it reads def.magicDependency).
-    magicDependency: !!dp?.magicDependency,
-    magicalCapability: dp?.magicalCapability || null,
-  };
-}
-
-function servicesSlice(active) {
-  const s = active || {};
-  const institutions = s?.institutions || [];
-  const detailed = institutions.map(inst => ({
-    // Phase-D anchor identity — matches the index entry built off this raw inst.
-    id: inst?.id || entityIdFor('institution', inst),
-    name: inst?.name || inst?.label || 'Institution',
-    category: inst?.category || 'other',
-    subCategory: inst?.subCategory || inst?.type || null,
-    status: inst?.status || 'healthy',
-    statusReason: inst?.statusReason || inst?.statusNote || null,
-    servicesOffered: inst?.servicesOffered || inst?.services || [],
-    chainDepth: inst?.chainDepth ?? null,
-    source: inst?.source || null,
-    notableUnits: inst?.notableUnits || null,
-    notes: inst?.notes || null,
-    staffing: inst?.staffing || null,
-    // Extra detail: surface any narrative/structural fields the engine emits
-    description:    inst?.description || inst?.blurb || null,
-    leader:         inst?.leader || inst?.headedBy || inst?.master || null,
-    building:       inst?.building || inst?.location || inst?.quarter || null,
-    founded:        inst?.founded || inst?.foundedYear || null,
-    prominence:     inst?.prominence || inst?.scale || null,
-    capacity:       inst?.capacity || null,
-    requirements:   inst?.requirements || inst?.dependencies || [],
-    products:       inst?.products || inst?.outputs || [],
-    customers:      inst?.customers || inst?.clientele || [],
-    pressures:      inst?.pressures || inst?.stresses || [],
-    plotHooks:      inst?.plotHooks || [],
-    tags:           inst?.tags || [],
-  }));
-
-  // Health stats per category
-  const byCat = {};
-  for (const inst of detailed) {
-    const cat = inst.category;
-    if (!byCat[cat]) byCat[cat] = { total: 0, impaired: 0, degraded: 0, vulnerable: 0, healthy: 0 };
-    byCat[cat].total++;
-    const st = (inst.status || 'healthy').toLowerCase();
-    if (byCat[cat][st] != null) byCat[cat][st]++;
-  }
-
-  const totals = {
-    total: detailed.length,
-    impaired:  detailed.filter(i => (i.status || '').toLowerCase() === 'impaired').length,
-    degraded:  detailed.filter(i => (i.status || '').toLowerCase() === 'degraded').length,
-    vulnerable: detailed.filter(i => (i.status || '').toLowerCase() === 'vulnerable').length,
-  };
-
-  return {
-    available:      s?.availableServices || {},
-    activeChains:   s?.economicState?.activeChains || [],
-    tier:           s?.tier || null,
-    institutions,
-    detailed,
-    categoryHealth: Object.entries(byCat).map(([cat, h]) => ({ category: cat, ...h })),
-    totals,
-    // Computed (expected-for-tier minus available) — the engine doesn't emit
-    // this; the web ServicesTab derives it the same way.
-    notableAbsences: deriveNotableAbsences(s?.tier, s?.availableServices),
-  };
-}
-
-function resourcesSlice(active) {
-  const s = active || {};
-  const ra = s?.resourceAnalysis || {};
-  const v = s?.economicViability || {};
-  const cfg = s?.config || {};
-
-  // Convert exploitation lists into chain-flow rows. Engine keys are
-  // { fullyExploited, partiallyExploited, unexploited } (resourceGenerator
-  // evaluateInstitutions); fall back to the display key for legacy saves.
-  // Entries are RESOURCE_CHAINS objects — resource in `rawResource`,
-  // processing in `processingInstitutions[]`, outputs in `finalProducts[]`.
-  const exp = ra?.exploitation || {};
-  const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
-  const chainRows = [];
-  for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
-    for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
-      if (typeof item === 'string') {
-        if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
-      } else if (item) {
-        const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
-        if (!resource) continue;
-        chainRows.push({
-          resource,
-          status: which,
-          processing: item?.processing || item?.institution ||
-                      (item?.processingInstitutions || []).join(', ') || null,
-          output: item?.output || item?.product ||
-                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
-          chainStatus: item?.chainStatus || null,
-          quality: item?.quality || null,
-          accessibility: item?.accessibility || null,
-        });
-      }
-    }
-  }
-
-  // Split nearby resources into depleted vs abundant
-  const allNearby = ra.nearbyResources || cfg.nearbyResources || [];
-  const depletedSet = new Set(cfg.nearbyResourcesDepleted || []);
-  const depleted  = allNearby.filter(k => depletedSet.has(k));
-  const abundant  = allNearby.filter(k => !depletedSet.has(k));
-
-  return {
-    terrain:            ra.terrain || null,
-    strategicValue:     ra.strategicValue || null,
-    economicStrengths:  ra.economicStrengths || [],
-    exploitation:       exp,
-    imports:            ra.imports || {},
-    chainRows,
-    nearbyResources:    allNearby,
-    nearbyDepleted:     depleted,
-    nearbyAbundant:     abundant,
-    nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
-    availableCommodities: ra?.availableResources || s?.availableResources || [],
-    // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the
-    // old exportPotential/structuralGaps/v.priorityNotes reads never resolved.
-    exportPotential:    ra?.exports || ra?.exportPotential || s?.exportPotential || [],
-    priorityNotes:      ra?.priorityNotes || v?.priorityNotes || [],
-    structuralGaps:     ra?.gaps || ra?.structuralGaps || s?.structuralGaps || [],
-    terrainEffects:     ra?.terrainEffects || s?.terrainEffects || ra?.featureEffects || [],
-    terrainCriticals:   ra?.terrainCriticals || [],
-    terrainAdvantages:  ra?.terrainAdvantages || [],
-  };
-}
 
 // Arcane supply chains (mirrors computeActiveChains' arcane detection) — the
 // PDF Viability chapter renders these as "magically sustained" tags.
@@ -901,7 +543,13 @@ function viabilitySlice(active) {
   // does, and exclude the special-typed issues from the main list so they don't
   // render twice (they get their own PDF sections).
   const stressConsequences = [...(v.issues || []), ...(v.warnings || [])].filter(i => i?.type === 'stress_consequence');
-  const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
+  // pdf-3: by_design items are pushed to the settlement-root structuralViolations
+  // (structuralValidator), NOT economicViability.issues — so the old issues-only
+  // filter was permanently empty and those authored plot seeds printed as garbled
+  // STRUCTURAL VIOLATIONS. Derive from the real home (union v.issues for any path
+  // that routes them there), and exclude them from the violations list below.
+  const byDesignContradictions = [...(v.issues || []), ...(s?.structuralViolations || [])]
+    .filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
   // Magic legality facets — the 10-facet magic profile summarized
@@ -926,8 +574,11 @@ function viabilitySlice(active) {
     verdictTone:           VIABILITY_TONE[(v?.verdict || '').toLowerCase()] || (v?.viable === true ? 'good' : v?.viable === false ? 'bad' : 'muted'),
     summary:               viabilitySummaryFor(s),
     metrics:               v.metrics || {},
+    // pdf-6: honour the web's curated routing — dependency/resource-chain/
+    // opportunity/food items live in Economics & Resources, not Viability, and
+    // must not double-print here. Shared predicate with ViabilityTab.
     issues:                (v.issues || [])
-      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence')
+      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss))
       .map(iss => ({
         severity: iss?.severity,
         title: iss?.title,
@@ -937,8 +588,12 @@ function viabilitySlice(active) {
         suggestedFixes: iss?.suggestedFixes || [],
       })),
     criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
-    warnings:              [...(v?.warnings || []), ...(s?.warnings || [])],
-    structuralViolations:  s?.structuralViolations || [],
+    // pdf-6 (golden): warnings honour the Viability filter — dependency/food/
+    // resource-chain items belong to Economics, not here.
+    warnings:              [...(v?.warnings || []), ...(s?.warnings || [])].filter(isViabilityItem),
+    // pdf-3 (main): by_design tensions are surfaced as plot seeds (byDesignContradictions),
+    // so exclude them here — they must not double-print as apparent defects.
+    structuralViolations:  (s?.structuralViolations || []).filter(x => x?.severity !== 'by_design'),
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: x?.crisisHook })),
     stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
     magicDependency:       !!dp?.magicDependency,
@@ -1011,14 +666,14 @@ function npcsSlice(active) {
     // Engine puts goals under `goal: { short, long }`, NOT `motivation`
     const g = n?.motivation || n?.goal;
     const motivationStr = typeof g === 'string' ? g : (g && typeof g === 'object'
-      ? [g.short, g.long].filter(Boolean).join('; ')
+      ? [g.short, g.long].filter(Boolean).join(' — ')
       : null);
     // Engine puts secrets as singular `secret: { what, stakes }` not array `secrets[]`
     const sec = n?.secrets;
     const secretsArr = Array.isArray(sec) ? sec.slice() : [];
     if (n?.secret && typeof n.secret === 'object' && n.secret.what) {
       secretsArr.push(n.secret.stakes
-        ? `${n.secret.what}. ${n.secret.stakes.charAt(0).toUpperCase()}${n.secret.stakes.slice(1)}`
+        ? `${n.secret.what} — ${n.secret.stakes}`
         : n.secret.what);
     }
     // Drop empty/blank entries so the SECRETS subsection vanishes when no real
@@ -1192,9 +847,7 @@ function characterSentence(npc) {
 }
 
 function labelOfHook(h) {
-  if (!h) return '';
-  if (typeof h === 'string') return h;
-  return h.hook || h.text || h.description || h.title || '';
+  return plotHookText(h);
 }
 
 /**
@@ -1233,46 +886,9 @@ function normSeverity(s) {
  */
 function cleanHooks(arr) {
   if (!Array.isArray(arr)) return [];
-  return arr.filter(h => {
-    if (!h) return false;
-    if (typeof h === 'string') return h.trim().length > 0;
-    if (typeof h === 'object') {
-      return !!(h.hook || h.text || h.description || h.summary || h.title || h.label || h.body || h.content);
-    }
-    return false;
-  });
+  return arr.filter(h => plotHookText(h).trim().length > 0);
 }
 
-/**
- * normalizeIncomeSources — engine emits incomeSources as either:
- *   - array of { source, percentage }   (percentage = 0..100)
- *   - array of { source, value }        (raw economy units)
- * If percentages don't sum to ~100, treat as raw values and re-derive percent.
- * The bar fill and the label MUST agree, otherwise the page reads broken.
- */
-function normalizeIncomeSources(arr) {
-  if (!Array.isArray(arr) || arr.length === 0) return [];
-  // Intentional divergence from the screen: drop zero-valued sources. A 0%-rounded
-  // (or zero-amount) source has no bar to draw and would only add noise / risk a
-  // degenerate total here, where the bar fill and label MUST agree. The screen may
-  // still list such sources; this is a per-surface formatting choice, not a data
-  // disagreement. (See the PARITY_EXEMPT contract in domain/display/parityContract.js.)
-  const items = arr.map(s => ({
-    ...s,
-    raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,
-  })).filter(s => Number(s.raw) > 0);
-  if (items.length === 0) return [];
-  const total = items.reduce((n, s) => n + Number(s.raw), 0);
-  // If the original "percentage" field already adds to ~100 (±5), trust it.
-  const pctSum = arr.reduce((n, s) => n + Number(s?.percentage || 0), 0);
-  const usePctField = pctSum >= 95 && pctSum <= 105;
-  return items.map(s => ({
-    ...s,
-    percentage: usePctField
-      ? Number(s.percentage || 0)
-      : (total > 0 ? (Number(s.raw) / total) * 100 : 0),
-  }));
-}
 
 /**
  * cleanRelationships — drop empty relationship entries (no target name).

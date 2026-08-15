@@ -49,13 +49,19 @@ const domainDir = resolve(repoRoot, 'src/domain');
  *   5. worldPulse/pulseKernel.js        → generators/prng.js
  *   6. worldPulse/institutionLifecycle.js → generators/computeActiveChains.js
  */
+// MASTER MERGE W6 RE-BASELINE (honest, both directions): master's frozen list
+// was re-derived against this lineage's tree. SHRINK — defenseDisplay,
+// mutateEntities, pulseKernel no longer import generators (RF refactors removed
+// those edges). ADD — resourceDynamicsKernel.js (the W-DISCOVERY resource
+// engine, built on this lineage AFTER master's baseline): its computeActiveChains
+// reconcile + terrainHelpers read are the documented single-writer design
+// (docs/DESIGN + memory w-discovery), a carried deliberate edge, not a new
+// violation. Shrink-only resumes from this set.
 const BASELINE_EDGES = Object.freeze({
   'src/domain/coherence/checkDraftEdit.js': ['../../generators/structuralValidator.js'],
-  'src/domain/display/defenseDisplay.js': ['../../generators/defenseGenerator.js'],
-  'src/domain/events/mutateEntities.js': ['../../generators/prng.js'],
   'src/domain/relationships/neighbourBackLink.js': ['../../generators/crossSettlementConflicts.js'],
-  'src/domain/worldPulse/pulseKernel.js': ['../../generators/prng.js'],
   'src/domain/worldPulse/institutionLifecycle.js': ['../../generators/computeActiveChains.js'],
+  'src/domain/worldPulse/resourceDynamicsKernel.js': ['../../generators/computeActiveChains.js', '../../generators/terrainHelpers.js'],
 });
 
 /** Recursively collect every .js file under a directory (POSIX-relative paths). */

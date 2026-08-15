@@ -55,7 +55,39 @@ ruleTester.run('no-raw-color-literal', visualBudget.rules['no-raw-color-literal'
 
 // ── 2. Occurrence-budget ratchet ─────────────────────────────────────────────
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BUDGET = 1546; // committed max raw-color-literal occurrences — only lower it, never raise.
+const BUDGET = 1405; // committed max raw-color-literal occurrences — only lower it, never raise.
+// 2026-07-21 (K-1 fold-triage, ledgered): 1403→1405 records the +2 that shipped with the
+// K-0b fold (d4747d6c) but was never re-triaged there — src/domain/townMap/arch/spike.js
+// holds two engraving-plate literals (INK '#2b2622', PAPER '#efe7d6') for the DORMANT K-0
+// gothic plate. spike.js is a byte-GOLDEN-pinned leaf (k0Determinism pins its exact SVG/PNG
+// output), so tokenizing those two hexes would alter the pinned plate bytes — the raise is the
+// only PROMISE-safe move. Not a license: a genuine measured inheritance from the K-0b fold,
+// isolated to one dormant leaf. Monotone-down resumes from 1405.
+// 2026-07-19 (FOLD BATCH 2 closing re-triage): 1443→1403 lowers the ceiling to the
+// count MEASURED on the folded tree (pages/chrome/compendium/c14c15/c16/pdf all
+// landed; the six branches NET-REMOVED 40 raw literals — the page recompositions
+// and the CustomContent consolidation retired more literals than the restorations
+// added). The VIOLET*→SLATE* rename itself is count-neutral: identifier renames
+// touch no hex literals, and the retired swatch-key renames ('#7B4FCF'→'#5A6E82',
+// '#EBE2FA'→'#E4E9EE', '#EBE2FA80'→'#E4E9EE80') live at swatch['#HEX'] call
+// sites, the sanctioned exempt form. Monotone-down, gate-green on this lineage.
+// 2026-07-19 (deep-craft burn-down, C16-lock): 1450→1443 lowers the ceiling to the
+// MEASURED count on claude/deep-craft, locking the current tree's position (the
+// deep-craft materials/burn-down work has added no raw literals). ⚠ HEADROOM NOTE for
+// the manager: this consumes the last of the +23 fold-triage slack below — the ceiling
+// now equals the count, so fold batch 2 (deep-craft-c14c15/c16/pages + restoration-*)
+// re-triages this budget at fold time exactly as the 1427→1450 exception did if any
+// branch lands net-new literals. Monotone-down and gate-green on this lineage.
+// 2026-07-18 fold-triage EXCEPTION (ledgered): 1427→1450 records +23 literals that shipped
+// across the S7/doc-wave/interiors/ladder folds while this global test sat outside the
+// lanes' focused gates. NOT a license: the full suite now runs at every fold, and the
+// ROUND 3 fix program carries the named task to tokenize these 23 back down.
+// W5 (2026-07-12): ratcheted 1546 -> 1427. The W5 cosmetic wave migrated its
+// map/threat palette onto swatch tokens (settlementThreat + the two AA swatches
+// in design/tokens.js) rather than raw literals. W5's own lineage measured 1424;
+// this review-fixes lineage (post W5 re-apply) carries 3 additional raw-color
+// literals from its own advanced work, so the floor lands at the MEASURED 1427
+// — still a monotone-down ratchet from 1546 (−119), gate green.
 
 const PURE_HEX = /^#[0-9a-fA-F]{3,8}$/;
 const isTokenSource = (rel) => /(?:design\/tokens|components\/theme)\b|src\/design\//.test(rel);

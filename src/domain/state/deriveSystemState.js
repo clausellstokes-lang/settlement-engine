@@ -22,11 +22,14 @@
  * with neutral defaults. Never throws.
  */
 
-import { bandFor, clamp01 } from './bands.js';
-import { deriveExportPosture } from '../display/dossierViewModel.js';
+import { bandForDimension, clamp01 } from './bands.js';
+// Import the posture LEAF, not dossierViewModel — this module is EAGER
+// (store → event pipeline), and the full display model would drag ~35 kB
+// (dossierViewModel + magicProfile) into the first-paint entry closure
+// (FP-1 read-model split; tests/build/vendorPdfLazy.test.js byte budget).
+import { deriveExportPosture } from '../display/exportPosture.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonImports } from '../canonicalAccessors.js';
-import { deriveAllActiveConditions } from '../activeConditions.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { prosperityRank } from '../../data/constants.js';
@@ -35,9 +38,45 @@ import { isCovertOnlyImpairment } from '../entities/status.js';
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
 
+/**
+ * Structural view of the economicState fields this derivation reads.
+ * `prosperity` is canonically `{ tier }`; legacy saves carry a bare string
+ * (the intersection member types the string branch so `?.tier` is `undefined`).
+ * @typedef {Object} EconStateLike
+ * @property {{ tier?: string } | (string & { tier?: undefined }) | null} [prosperity]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {Array<{ resourceDepleted?: unknown, substituteActive?: unknown }>} [activeChains]
+ * @property {unknown} [primaryImports]
+ * @property {unknown} [imports]
+ */
 
 /**
- * @param {Object} settlement — the engine's settlement object
+ * Structural view of the powerStructure fields this derivation reads.
+ * @typedef {Object} PowerLike
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ score?: unknown, label?: unknown } | number | null} [publicLegitimacy]
+ */
+
+/**
+ * Structural view of the settlement fields this derivation reads.
+ * @typedef {Object} SystemStateSource
+ * @property {EconStateLike} [economicState]
+ * @property {Array<{ status?: unknown }>} [institutions]
+ * @property {PowerLike | null} [powerStructure]
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {{ monsterThreat?: string, nearbyResourcesState?: Record<string, string> | null, tradeRouteAccess?: string } | null} [config]
+ * @property {Array<{ relationshipType?: string }>} [neighbourNetwork]
+ * @property {Array<{ relationshipType?: string }>} [neighbourLinks]
+ * @property {unknown} [stressors]
+ * @property {unknown} [stress]
+ * @property {unknown} [stresses]
+ */
+
+/**
+ * @param {SystemStateSource | null | undefined} settlement — the engine's settlement object
  * @returns {SystemState}
  */
 export function deriveSystemState(settlement) {
@@ -55,11 +94,15 @@ export function deriveSystemState(settlement) {
  * Can the settlement absorb shocks? Drivers: prosperity, food security,
  * income/export diversity, public legitimacy. Famine, single-source
  * exports, and impaired institutions push it down.
- * @param {import('../settlement.schema.js').SimSettlement} s
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveResilience(s) {
   let value = 50;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
   // Prosperity is a strong signal — graded across the CANONICAL tier vocabulary
@@ -67,6 +110,7 @@ function deriveResilience(s) {
   // 'Subsistence/Struggling' plus a 'Modest' the generator never emits, so the three
   // most common middle tiers (Poor/Moderate/Comfortable) contributed ZERO resilience
   // signal — the headline shock-absorption dial ignored most towns' economies.
+  /** @type {EconStateLike} */
   const econ = s.economicState || {};
   const prosperity = econ.prosperity?.tier || econ.prosperity || null;
   const pRank = prosperityRank(prosperity);
@@ -110,7 +154,7 @@ function deriveResilience(s) {
   // function. Removed so deriveSystemState is a pure function of `s` alone.)
   const exportCount = deriveExportPosture(s).count;
   if (exportCount === 0) {
-    risks.push('No exports. Economic isolation.');
+    risks.push('No exports — economic isolation');
   } else if (exportCount >= 5) {
     value += 5;
     drivers.push(`Diversified exports (${exportCount})`);
@@ -124,32 +168,13 @@ function deriveResilience(s) {
   // 'impaired' via withImpairment, but it is hidden by design — surfacing it as a
   // visible "impaired institution" risk here would leak the covert capture into
   // public derived state. Exclude institutions whose impairment is solely covert.
-  // 'impaired' is the ONLY degraded status the entity model emits (see
-  // status.js EntityStatus: active|impaired|removed|destroyed|vacant). The old
-  // list also counted 'critical', which no institution ever carries — a dead
-  // branch ('critical' is a capacity/severity BAND elsewhere, never a status),
-  // so it matched nothing and only misled the reader. Reconciled to the real status.
-  const impaired = countByStatus(s.institutions, ['impaired'], { excludeCovertOnly: true });
+  const impaired = countByStatus(s.institutions, ['impaired', 'critical'], { excludeCovertOnly: true });
   if (impaired > 0) {
     value -= Math.min(15, impaired * 4);
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
   }
 
-  // War-layer economic drain (S2). A war_drain condition is the SOURCE of the
-  // economic_capacity homeostasis loop — a campaign abroad bleeds the home
-  // economy. Additive: present only on a settlement actively waging war, so a
-  // peacetime settlement's resilience is unchanged. Severity-scaled penalty
-  // mirrors the deriveEconomicCapacity drain (severity×18, banded to this dial).
-  const { warDrain } = readWarReligionMovement(s);
-  if (warDrain) {
-    const penalty = Math.min(15, Math.round((warDrain.severity || 0) * 18));
-    if (penalty > 0) {
-      value -= penalty;
-      risks.push('War economy is bleeding the home treasury');
-    }
-  }
-
-  return finalize(value, drivers, risks);
+  return finalize('resilience', value, drivers, risks);
 }
 
 // ── Volatility ─────────────────────────────────────────────────────────────
@@ -158,13 +183,18 @@ function deriveResilience(s) {
  * relationships between factions, criminal capture, low public
  * legitimacy. A stable monoculture scores low; a town with rivals,
  * thieves' guilds, and weak rulers scores high.
- * @param {import('../settlement.schema.js').SimSettlement} s
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveVolatility(s) {
   let value = 30; // baseline — most towns have some friction
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
+  /** @type {PowerLike} */
   const power = s.powerStructure || {};
   const factions = power.factions || s.factions || [];
   if (factions.length >= 5) {
@@ -172,7 +202,7 @@ function deriveVolatility(s) {
     risks.push(`${factions.length} active factions competing`);
   } else if (factions.length <= 2) {
     value -= 5;
-    drivers.push('Few factions (concentrated power)');
+    drivers.push('Few factions — concentrated power');
   }
 
   // Hostile/rival faction relationships
@@ -183,6 +213,7 @@ function deriveVolatility(s) {
   }
 
   // Criminal capture: when shadow networks have outsized influence
+  /** @type {{ blackMarketCapture?: number }} */
   const safety = econOf(s).safetyProfile || s.safetyProfile || {};
   const blackMarketCapture = safety.blackMarketCapture || 0;
   if (blackMarketCapture >= 30) {
@@ -221,54 +252,39 @@ function deriveVolatility(s) {
     risks.push(`${stresses.length} active stressors`);
   }
 
-  // Religion-layer movement (S2). A dominant primary deity anchors religious
-  // authority — a named driver on the internal-conflict axis (a unifying state
-  // cult concentrates social authority and damps faction friction; a fringe cult
-  // is a weaker anchor). Additive: present ONLY when a deity is assigned, so a
-  // deity-free settlement is byte-identical. Tier-scaled to match
-  // deriveReligiousAuthority's DEITY_RANK_AUTHORITY (major anchors most).
-  const { deity } = readWarReligionMovement(s);
-  if (deity) {
-    const rank = String(deity.rankAxis || '').toLowerCase();
-    const name = deity.name || 'the patron deity';
-    if (rank === 'major') {
-      value -= 6;
-      drivers.push(`${name} anchors religious authority`);
-    } else if (rank === 'minor' || rank === 'cult') {
-      value -= 2;
-      drivers.push(`${name} shapes religious authority`);
-    }
-  }
-
-  return finalize(value, drivers, risks);
+  return finalize('volatility', value, drivers, risks);
 }
 
 // ── External Threat ────────────────────────────────────────────────────────
 /**
  * How much pressure comes from outside the settlement? Monster threat,
  * hostile neighbours, raids/sieges/occupation in stressors.
- * @param {import('../settlement.schema.js').SimSettlement} s
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveExternalThreat(s) {
   let value = 30;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
-  const monsterThreat = s.config?.monsterThreat || 'safe';
+  const monsterThreat = s.config?.monsterThreat || 'heartland';
   if (monsterThreat === 'plagued') {
     value += 30;
     risks.push('Region is plagued by monsters');
   } else if (monsterThreat === 'frontier') {
     value += 15;
-    risks.push('Frontier conditions. Monsters present.');
-  } else if (monsterThreat === 'safe' || monsterThreat === 'civilized') {
+    risks.push('Frontier conditions — monsters present');
+  } else if (monsterThreat === 'heartland') {
     value -= 5;
     drivers.push('Monster activity minimal');
   }
 
   // Hostile neighbour relationships (network effects)
   const network = s.neighbourNetwork || s.neighbourLinks || [];
-  const hostile = network.filter((/** @type {any} */ n) => n.relationshipType === 'hostile' || n.relationshipType === 'cold_war').length;
+  const hostile = network.filter(n => n.relationshipType === 'hostile' || n.relationshipType === 'cold_war').length;
   if (hostile > 0) {
     value += Math.min(20, hostile * 8);
     risks.push(`${hostile} hostile neighbour${hostile === 1 ? '' : 's'}`);
@@ -278,46 +294,36 @@ function deriveExternalThreat(s) {
   // resilience above; without it, the threat dimension silently zeros
   // out on settlements that only carry the new `stressors` field.
   const stressList = canonStressors(s);
-  const threatStresses = stressList.filter((/** @type {any} */ st) => {
+  const threatStresses = stressList.filter(st => {
     const t = String(st.type || st.name || '').toLowerCase();
-    return t.includes('siege') || t.includes('occupation') || t.includes('raid')
+    return t.includes('siege') || t.includes('occupied') || t.includes('raid')
         || t.includes('plague') || t.includes('war') || t.includes('refugee');
   });
   if (threatStresses.length > 0) {
     value += Math.min(20, threatStresses.length * 8);
-    risks.push(`Active threat: ${threatStresses.map((/** @type {any} */ t) => t.name || t.type).join(', ')}`);
+    risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
   }
 
-  // War-layer conditions (S2). A PULSE-born war surfaces as a CONDITION, not a
-  // stress[] entry — so the threatStresses scan above (which reads stress TYPE)
-  // misses it. war_pressure is the besieged VICTIM under active war; army_deployed
-  // marks an army committed to a campaign abroad. Additive — present only on a
-  // settlement the war layer has touched, so a peacetime save is unchanged.
-  const { warPressure, armyDeployed } = readWarReligionMovement(s);
-  if (warPressure) {
-    value += Math.min(16, Math.round((warPressure.severity || 0) * 20));
-    risks.push('Under active wartime pressure');
-  }
-  if (armyDeployed) {
-    value += 6;
-    risks.push('Standing army deployed abroad. Home garrison thinned.');
-  }
-
-  return finalize(value, drivers, risks);
+  return finalize('externalThreat', value, drivers, risks);
 }
 
 // ── Resource Pressure ──────────────────────────────────────────────────────
 /**
  * Are key materials under strain? Depleted resources, narrow chain
  * dependencies, unmet imports. High value = the place will hurt soon.
- * @param {import('../settlement.schema.js').SimSettlement} s
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveResourcePressure(s) {
   let value = 30;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
   // Depleted resources
+  /** @type {Record<string, string>} */
   const resourceState = s.config?.nearbyResourcesState || {};
   const depleted = Object.entries(resourceState).filter(([, st]) => st === 'depleted');
   if (depleted.length > 0) {
@@ -328,7 +334,7 @@ function deriveResourcePressure(s) {
   // Chain vulnerabilities
   const econ = econOf(s);
   const chains = econ.activeChains || [];
-  const vulnerable = chains.filter((/** @type {any} */ c) => c.resourceDepleted || c.substituteActive).length;
+  const vulnerable = chains.filter(c => c.resourceDepleted || c.substituteActive).length;
   if (vulnerable > 0) {
     value += Math.min(15, vulnerable * 5);
     risks.push(`${vulnerable} vulnerable supply chain${vulnerable === 1 ? '' : 's'}`);
@@ -346,49 +352,22 @@ function deriveResourcePressure(s) {
     drivers.push(`${imports} imports via ${tradeAccess}`);
   }
 
-  return finalize(value, drivers, risks);
-}
-
-// ── War / religion causal movement (S2) ──────────────────────────────────────
-/**
- * Read the war-layer + religion causal movement once. These are the conditions /
- * embedded snapshot the world pulse stamps; every entry below is ADDITIVE — it
- * only contributes when the matching condition/deity is present, so a settlement
- * with NO war/religion state produces byte-identical drivers/risks to before.
- *
- *   - war_drain   (→ economic_capacity): a campaign abroad is bleeding the home
- *     economy; surfaces as a FALLING economic driver labeled for war.
- *   - war_pressure (→ defense/legitimacy): the settlement is under active war;
- *     surfaces as an external-threat risk.
- *   - army_deployed (→ defense_readiness): the standing army is committed abroad.
- *   - primaryDeitySnapshot: a dominant deity moving religious_authority — a named
- *     driver on the internal-conflict (volatility) axis.
- *
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @returns {{ warDrain: any|null, warPressure: any|null, armyDeployed: any|null, deity: any|null }}
- */
-function readWarReligionMovement(s) {
-  let warDrain = null;
-  let warPressure = null;
-  let armyDeployed = null;
-  for (const cond of deriveAllActiveConditions(s)) {
-    if (cond.archetype === 'war_drain' && !warDrain) warDrain = cond;
-    else if (cond.archetype === 'war_pressure' && !warPressure) warPressure = cond;
-    else if (cond.archetype === 'army_deployed' && !armyDeployed) armyDeployed = cond;
-  }
-  const deity = s?.config?.primaryDeitySnapshot || null;
-  return { warDrain, warPressure, armyDeployed, deity };
+  return finalize('resourcePressure', value, drivers, risks);
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-/** @param {import('../settlement.schema.js').SimSettlement} s */
+/**
+ * @param {SystemStateSource | null | undefined} s
+ * @returns {EconStateLike}
+ */
 function econOf(s) { return s?.economicState || {}; }
 
 /**
- * @param {any} items
- * @param {any} statuses
+ * @param {unknown} items     candidate institutions array (any shape tolerated)
+ * @param {string[]} statuses status words that count
  * @param {{ excludeCovertOnly?: boolean }} [opts]
+ * @returns {number}
  */
 function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
   if (!Array.isArray(items)) return 0;
@@ -406,15 +385,23 @@ function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
  * Wrap raw value+drivers+risks into the StateDimension shape with band
  * label and clamped value. Centralizing this means every dimension comes
  * out of derivation in the same shape — no surprises for the UI consumer.
+ *
+ * The band is ORIENTED by the dimension's polarity (bands.js DIM_POLARITY).
+ * Three of these four dimensions are lower-is-better; banding them through the
+ * bare higher-is-better ladder printed the opposite of the truth on every
+ * surface that reads `dim.band`. The `value` is unchanged — only the word.
+ *
+ * @param {string} key  the dimension key, which carries its polarity
  * @param {number} rawValue
- * @param {any[]} drivers
- * @param {any[]} risks
+ * @param {string[]} drivers
+ * @param {string[]} risks
+ * @returns {StateDimension}
  */
-function finalize(rawValue, drivers, risks) {
+function finalize(key, rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));
   return {
     value,
-    band: bandFor(value),
+    band: bandForDimension(key, value),
     drivers: drivers.length ? drivers : ['No notable factors'],
     risks,
   };

@@ -566,18 +566,45 @@ const ENTRY_WRITERS = Object.freeze([
 ]);
 
 // (b) The regen-survival record (config.stressorEdits) vocabulary:
+// (settlementSlice.js dropped out of this set with the F34 what-if-engine
+// deletion — the addStressor what-if that cleared the suppression was its only
+// non-comment occurrence of `stressorEdits`.)
 const STRESSOR_EDITS_FILES = Object.freeze([
   'domain/crisisLifecycle.js',             // the ONLY writer (onset record / resolve suppression)
   'domain/events/undoEvent.js',            // pre-event snapshot restore (logEntry.undo)
+  // The coherence receipt reconstructs the AUTHORED stress intent so it can
+  // certify that generation preserved it. It reads `added`/`resolved` exactly
+  // as the two generator consumers below do, and writes nothing — verified by
+  // scanning the file for `stressorEdits` assignment/property-literal forms.
+  'generators/generationReceiptJudgments.js', // authored-intent certification (consumer)
   'generators/steps/resolveStress.js',     // the regeneration overlay (consumer)
   'generators/steps/stressConfirmPass.js', // forced-set guard (consumer)
-  'store/settlementSlice.js',              // the addStressor what-if clears the suppression
 ]);
 
 // (c) The roaming-twin store actions:
+//
+// ⚠ RE-POINTED 2026-08-10, NOT WIDENED. The two entries added here are the SAME two
+// seams this list has always named, at the addresses they moved to:
+//   • The FORWARD directive consumer left settlementSlice.js for
+//     settlementLifecycleHelpers.js at 947799f0 (the decomposition wave moved the
+//     module-level helpers out of the slice literal verbatim, and applyEvent's world
+//     half — rippleEventThroughWorld — went with them). settlementSlice.js stays in
+//     the list because it kept the UNDO half.
+//   • campaignRegionalSliceEntry.js is the cold-slice split at 6e7acc4d: the entry
+//     module NAMES the three actions in CAMPAIGN_REGIONAL_ACTIONS and mints them as
+//     forwarding delegates into campaignRegionalSlice.js, which is still the only
+//     implementation.
+// A pin whose target has moved must be RE-POINTED, never re-frozen at its wrong
+// address — re-baselining a mis-pointed scan banks an address the code left.
 const TWIN_ACTION_FILES = Object.freeze([
-  'store/campaignRegionalSlice.js', // the action definitions (WS4: extracted from campaignSlice)
-  'store/settlementSlice.js',       // the ONE directive consumer (+ undo withdraw)
+  'store/campaignRegionalSlice.js',      // the action IMPLEMENTATIONS (WS4: extracted from campaignSlice)
+  'store/campaignRegionalSliceEntry.js', // the cold-slice entry — NAMES them in its delegate manifest, no logic
+  'store/settlementLifecycleHelpers.js', // the ONE forward directive consumer (rippleEventThroughWorld)
+  'store/settlementSlice.js',       // the UNDO half — the withdraw bridge on undoLastEvent
+  'store/operationRegistry.js',     // Track K manifest — NAMES them (inert opType/undoToken data), no wiring
+  'components/surveyor/AutonomyPanel.jsx',                    // S7 autonomy surface — NAMES the ops in its acceleration menu (display strings, no wiring)
+  'domain/autonomy/accelerationOps.js',                       // S7 acceleration registry — sanctioned op catalog referencing the twin opTypes
+  'domain/compendium/generated/compendiumData.generated.js',  // generated law-library artifact — documents the ops (regenerated, never hand-wired)
 ]);
 
 describe('source scan — the trio is written only through the lifecycle', () => {
@@ -602,15 +629,19 @@ describe('source scan — the trio is written only through the lifecycle', () =>
   });
 
   test('the wiring is live, not vacuously empty', () => {
-    // mutate.js routes the crisis events to their handlers (the dispatch map),
-    // and the handlers (in mutateWorld.js after the god-module split) call the
-    // lifecycle…
-    expect(codeOf('domain/events/mutate.js')).toMatch(/\bapplyStressor\b/);
-    expect(codeOf('domain/events/mutate.js')).toMatch(/\bresolveStressor\b/);
+    // the mutation layer routes the crisis events through the lifecycle. The
+    // world-facing handlers (applyStressor / resolveStressor) live in
+    // mutateWorld.js since the mutate.js god-module split (the router only
+    // dispatches); the crisis lifecycle calls are there.
     expect(codeOf('domain/events/mutateWorld.js')).toMatch(/\bcrisisOnset\(/);
     expect(codeOf('domain/events/mutateWorld.js')).toMatch(/\bcrisisResolve\(/);
-    // …the store consumes the directives (forward + undo + snapshot)…
-    expect(codeOf('store/settlementSlice.js')).toMatch(/\btwinDirectiveForEvent\(/);
+    // …the store consumes the directives (forward + undo + snapshot). RE-POINTED
+    // 2026-08-10: the FORWARD consumer is settlementLifecycleHelpers.js since
+    // 947799f0 — rippleEventThroughWorld (applyEvent's world half, and the ONE place
+    // the store obeys a twinDirective) moved out of the slice literal verbatim. The
+    // undo withdraw and the pre-event twin snapshot stayed in settlementSlice.js, so
+    // the two probes below still read it.
+    expect(codeOf('store/settlementLifecycleHelpers.js')).toMatch(/\btwinDirectiveForEvent\(/);
     expect(codeOf('store/settlementSlice.js')).toMatch(/\bcrisisWithdraw\(/);
     expect(codeOf('store/settlementSlice.js')).toMatch(/\bcrisisTwinFor\(/);
     // …and the pulse's organic resolutions reach the origin settlement

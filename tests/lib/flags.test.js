@@ -11,7 +11,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { flag, setFlagOverride, getAllFlags, persistUrlFlags, FLAGS } from '../../src/lib/flags.js';
+import { flag, setFlagOverride, getAllFlags, FLAGS } from '../../src/lib/flags.js';
 
 // jsdom provides window + localStorage in vitest by default.
 beforeEach(() => {
@@ -31,54 +31,43 @@ describe('flag() resolution', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(flag(name)).toBe(decl.default);
     }
-    // discordOauth/googleOauth default to TRUE: the providers are now
-    // configured in the Supabase dashboard, so the OAuth buttons are live.
+    // discordOauth defaults to true (OAuth buttons shipped flag-on; a
+    // not-yet-enabled provider degrades to a calm message via describeOAuthError).
     expect(flag('discordOauth')).toBe(true);
-    expect(flag('googleOauth')).toBe(true);
-    // founderRecognition is also default-false, used below to exercise the
-    // override-over-false-default resolution mechanics.
-    expect(flag('founderRecognition')).toBe(false);
   });
 
   it('localStorage override beats default', () => {
-    // An explicit true override wins over the false default…
-    setFlagOverride('founderRecognition', true);
-    expect(flag('founderRecognition')).toBe(true);
+    // An explicit true override is honored…
+    setFlagOverride('discordOauth', true);
+    expect(flag('discordOauth')).toBe(true);
 
     // …and an explicit false override is honored, not treated as "unset"
-    // (guards the nullish-coalescing precedence in flag()).
-    setFlagOverride('founderRecognition', false);
-    expect(flag('founderRecognition')).toBe(false);
+    // (guards the nullish-coalescing precedence in flag()) — this also proves
+    // an override wins even against the true registry default.
+    setFlagOverride('discordOauth', false);
+    expect(flag('discordOauth')).toBe(false);
   });
 
   it('removing the override falls back to default', () => {
-    setFlagOverride('founderRecognition', true);
-    expect(flag('founderRecognition')).toBe(true);
+    // Override opposite the registry default, then clear it and confirm the
+    // value reverts to the default (discordOauth defaults to true).
+    setFlagOverride('discordOauth', false);
+    expect(flag('discordOauth')).toBe(false);
 
-    setFlagOverride('founderRecognition', null);
-    expect(flag('founderRecognition')).toBe(false);
+    setFlagOverride('discordOauth', null);
+    expect(flag('discordOauth')).toBe(true);
   });
 
   it('URL parameter beats localStorage', () => {
-    setFlagOverride('founderRecognition', false);
-    window.history.replaceState({}, '', '/?flag.founderRecognition=true');
-    expect(flag('founderRecognition')).toBe(true);
+    setFlagOverride('discordOauth', false);
+    window.history.replaceState({}, '', '/?flag.discordOauth=true');
+    expect(flag('discordOauth')).toBe(true);
   });
 
-  it('flag() reading a URL override is PURE — no localStorage write during resolution (#5)', () => {
-    // flag() runs inside useSyncExternalStore's getSnapshot; it must NOT write to
-    // localStorage as a side effect. The URL value still wins precedence, but
-    // persistence is deferred to persistUrlFlags() (called once at boot).
-    window.history.replaceState({}, '', '/?flag.founderRecognition=true');
-    expect(flag('founderRecognition')).toBe(true);          // URL still resolves
-    expect(window.localStorage.getItem('flag.founderRecognition')).toBeNull(); // but no write
-  });
-
-  it('persistUrlFlags() persists URL overrides to localStorage at boot (#5)', () => {
-    window.history.replaceState({}, '', '/?flag.founderRecognition=true&flag.heroV2=false');
-    persistUrlFlags();
-    expect(window.localStorage.getItem('flag.founderRecognition')).toBe('true');
-    expect(window.localStorage.getItem('flag.heroV2')).toBe('false');
+  it('URL parameter persists to localStorage as a side effect', () => {
+    window.history.replaceState({}, '', '/?flag.discordOauth=true');
+    flag('discordOauth'); // trigger resolution
+    expect(window.localStorage.getItem('flag.discordOauth')).toBe('true');
   });
 
   it('warns and returns false for unknown flags', () => {
@@ -88,10 +77,10 @@ describe('flag() resolution', () => {
   });
 
   it('parses both "true/false" and "1/0" override values', () => {
-    setFlagOverride('founderRecognition', 1);
-    expect(flag('founderRecognition')).toBe(true);
-    setFlagOverride('founderRecognition', 0);
-    expect(flag('founderRecognition')).toBe(false);
+    setFlagOverride('discordOauth', 1);
+    expect(flag('discordOauth')).toBe(true);
+    setFlagOverride('discordOauth', 0);
+    expect(flag('discordOauth')).toBe(false);
   });
 });
 
@@ -106,6 +95,10 @@ describe('getAllFlags()', () => {
 });
 
 describe('FLAGS registry', () => {
+  it('does not expose the retired journey media-set comparison toggle', () => {
+    expect(FLAGS).not.toHaveProperty('loadingJourneySetBg');
+  });
+
   it('every flag has a default + description', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(typeof decl.default).toBe('boolean');

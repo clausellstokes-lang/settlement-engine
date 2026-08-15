@@ -7,16 +7,13 @@
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
 import { useState, useId } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import {
-  GOLD, GOLD_TXT, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, PARCH, sans, serif_,
-  SP, R, FS, ELEV, swatch, VIOLET, VIOLET_DEEP, VIOLET_BG, RED, RED_BG,
-  GREEN_DEEP, DANGER_BORDER, SUCCESS_BORDER, layout,
+  GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_,
+  SP, FS, swatch, SLATE, SLATE_BG, FORM_MAX,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Page from '../primitives/Page.jsx';
-import Pill from '../primitives/Pill.jsx';
 import { t } from '../../copy/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
@@ -57,8 +54,8 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
       trailingIcon={soonNote && (
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
-          textTransform: 'uppercase', color: VIOLET,
-          background: VIOLET_BG, padding: '2px 5px', borderRadius: 3,
+          textTransform: 'uppercase', color: SLATE,
+          background: SLATE_BG, padding: '2px 5px',
           marginLeft: 4,
         }}>
           Soon
@@ -82,7 +79,7 @@ export function FooterLink({ href, onClick, children }) {
       href={href}
       onClick={onClick}
       style={{
-        color: GOLD_TXT, fontWeight: 600, textDecoration: 'none', fontFamily: sans,
+        color: GOLD, fontWeight: 600, textDecoration: 'none', fontFamily: sans,
       }}
     >
       {children}
@@ -94,7 +91,7 @@ export function OrDivider({ label = 'or with email' }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
-      fontSize: FS.xs, fontWeight: 700, color: MUTED,
+      fontSize: FS.xxs, fontWeight: 700, color: MUTED,
       textTransform: 'uppercase', letterSpacing: '0.08em',
     }} aria-hidden="true">
       <span style={{ flex: 1, height: 1, background: BORDER }} />
@@ -105,22 +102,23 @@ export function OrDivider({ label = 'or with email' }) {
 }
 
 export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, label }) {
-  // Password fields get an in-field show/hide toggle so the user can verify
-  // what they typed. The toggle is a labelled IconButton (aria-pressed +
-  // aria-label routed through the copy registry) at the 44px usability
-  // target, so it satisfies the password show/hide a11y contract without
-  // changing the Input prop API its call sites depend on.
+  // Password fields get an in-field show/hide toggle so the user can verify what
+  // they typed (a real a11y + typo-safety win, load-bearing for the confirm-
+  // password field). The toggle is a keyboard-operable IconButton (a native
+  // button element, aria-pressed + aria-label from the copy registry) at the 44px
+  // usability target (Fitts's Law), without changing the Input prop API its call
+  // sites depend on.
   const [reveal, setReveal] = useState(false);
   const isPassword = type === 'password';
   const effectiveType = isPassword && reveal ? 'text' : type;
-  // Stable id for a VISIBLE, persistent label (a <span>, wired via aria-labelledby)
-  // when `label` is given — this replaces the placeholder-as-only-name anti-pattern,
-  // where the name vanished the instant the user typed. aria-label stays set as the
-  // fallback (and byte-identical for call sites without a `label`); when a visible
-  // label exists, aria-labelledby takes precedence per ARIA. A <span> + labelledby
-  // (rather than a <label> element) is intentional: it keeps the strict
-  // label-has-for / control-has-associated-label rules satisfied and avoids the
-  // password toggle triggering a <label>'s focus-the-input default.
+  // Stable id for a VISIBLE, persistent label (a <span> wired via
+  // aria-labelledby) when `label` is given — this replaces the
+  // placeholder-as-only-name anti-pattern where the sighted name vanished the
+  // instant the user typed. aria-label stays as the fallback (so call sites
+  // without a `label` render byte-identically); when a visible label exists
+  // aria-labelledby takes precedence per ARIA. A <span> + labelledby (not a
+  // <label> element) avoids the password toggle tripping a <label>'s
+  // focus-the-input default.
   const labelId = useId();
 
   const field = (
@@ -134,16 +132,17 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
       onKeyDown={onKeyDown}
       style={{
         width: '100%',
-        // Leave room for the trailing toggle on password fields so the text
-        // never runs under it.
+        // Leave room for the trailing 44px toggle on password fields so the
+        // text never runs under it.
         padding: isPassword
           ? `${SP.md}px ${SP.huge}px ${SP.md}px ${SP.lg - 2}px`
           : `${SP.md}px ${SP.lg - 2}px`,
-        // BORDER_STRONG (3.44:1 on white), not the decorative parchment-200
-        // BORDER (1.40:1): the field outline is the input's only affordance
-        // cue, so it must clear the WCAG 1.4.11 3:1 UI-boundary floor — the
-        // same remediation the Button `secondary` variant already adopted.
-        border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
+        // The ruled slip stays square-cut (restraint law — the plainest pages,
+        // no rounded input chrome), but the outline uses BORDER_STRONG (3.44:1
+        // on white), not the decorative parchment-200 BORDER (1.40:1): the field
+        // outline is the input's only affordance cue, so it must clear the WCAG
+        // 1.4.11 3:1 UI-boundary floor.
+        border: `1px solid ${BORDER_STRONG}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
@@ -154,12 +153,9 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
   const control = !isPassword ? field : (
     <div style={{ position: 'relative' }}>
       {field}
-      <div style={{
-        position: 'absolute', top: '50%', right: SP.xs,
-        transform: 'translateY(-50%)',
-      }}>
+      <div style={{ position: 'absolute', top: '50%', right: SP.xs, transform: 'translateY(-50%)' }}>
         <IconButton
-          Icon={reveal ? EyeOff : Eye}
+          glyph={reveal ? '◉' : '◎'}
           label={reveal ? t('auth.password.hide') : t('auth.password.show')}
           tone="ghost"
           size="xl"
@@ -170,9 +166,9 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
     </div>
   );
 
-  // No label → return the bare control (aria-label carries the name). With a label,
-  // render it visibly above the control as a <span> wired via aria-labelledby, so it
-  // persists after the placeholder clears without a <label> element (see above).
+  // No label → the bare control (aria-label carries the name, byte-identical to
+  // before). With a label, render it visibly above the control as a <span>
+  // wired via aria-labelledby so the name persists after the placeholder clears.
   if (!label) return control;
   return (
     <div>
@@ -188,11 +184,10 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
 }
 
 /**
- * Select — a styled native <select> matching the Input field's outline so the
- * security-question pickers read as part of the same form. Native (not a
- * custom listbox) so keyboard + screen-reader behaviour is the platform's,
- * which already clears the Accessible Authentication bar. `label` is the
- * accessible name; the visible prompt is the disabled placeholder option.
+ * A labelled <select> matching Input's chrome — used by the security-question
+ * pickers at sign-up. `ariaLabel` names the control (the visible label is the
+ * chosen option text, not a persistent label), so it stays accessible without a
+ * separate <label> element.
  */
 export function Select({ value, onChange, ariaLabel, children }) {
   return (
@@ -205,7 +200,7 @@ export function Select({ value, onChange, ariaLabel, children }) {
         padding: `${SP.md}px ${SP.lg - 2}px`,
         // Same BORDER_STRONG outline as Input (clears the WCAG 1.4.11 3:1
         // UI-boundary floor) so the picker and the answer field below it match.
-        border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
+        border: `1px solid ${BORDER_STRONG}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, color: INK, outline: 'none',
         boxSizing: 'border-box', cursor: 'pointer',
@@ -263,9 +258,9 @@ export function Button({ onClick, children, variant = 'primary', disabled, style
 
 export function Alert({ type, children }) {
   const colors = {
-    error:   { bg: swatch.dangerBg, border: DANGER_BORDER, text: swatch.danger },
-    success: { bg: swatch.successBg, border: SUCCESS_BORDER, text: GREEN_DEEP },
-    info:    { bg: swatch['#FEF9EE'], border: GOLD, text: SECOND },
+    error:   { bg: '#fdf4f4', border: '#e8b0b0', text: '#8b1a1a' },
+    success: { bg: '#f0faf2', border: '#a8d8b0', text: '#1a4a20' },
+    info:    { bg: '#fef9ee', border: GOLD, text: SECOND },
   };
   const c = colors[type] || colors.info;
   // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
@@ -277,9 +272,11 @@ export function Alert({ type, children }) {
       role={type === 'error' ? 'alert' : 'status'}
       aria-live={type === 'error' ? 'assertive' : 'polite'}
       style={{
+        // A rubric-ruled note above the form (never a tinted wash box): one drawn
+        // rule in the tone's ink, the message in that ink. Roles + strings kept.
         display: 'flex', alignItems: 'flex-start', gap: SP.sm,
-        padding: `${SP.sm + 2}px ${SP.md}px`,
-        background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
+        padding: `${SP.sm + 2}px 0 ${SP.sm + 2}px ${SP.md}px`,
+        borderLeft: `3px solid ${c.text}`,
         fontSize: FS.sm, color: c.text, lineHeight: 1.5,
       }}>
       <span>{children}</span>
@@ -291,14 +288,20 @@ export function Alert({ type, children }) {
 export function RoleBadge({ role }) {
   if (role === 'user') return null;
   const cfg = {
-    developer: { color: VIOLET_DEEP, bg: VIOLET_BG, label: 'Developer' },
-    admin:     { color: RED, bg: RED_BG, label: 'Admin' },
+    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
+    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
   };
   const c = cfg[role] || cfg.admin;
   return (
-    <Pill bg={c.bg} color={c.color}>
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 3,
+      padding: '2px 8px',
+      background: c.bg, color: c.color,
+      fontSize: FS.xxs, fontWeight: 700,
+      textTransform: 'uppercase', letterSpacing: '0.04em',
+    }}>
       {c.label}
-    </Pill>
+    </span>
   );
 }
 
@@ -310,85 +313,78 @@ export function RoleBadge({ role }) {
  */
 export function AuthPageShell({ title, subtitle, children, footer }) {
   return (
-    // Route the shell through the shared Page primitive at form width instead
-    // of hand-rolling maxWidth + margin, so the auth routes share the one
-    // layout cap every other top-level surface uses (P12).
+    // Route the shell through the shared Page primitive at form width instead of
+    // hand-rolling maxWidth + margin, so the auth routes share the one layout cap
+    // every other top-level surface uses (P12). Materials stay flat — the plainest
+    // page in the app (no scrim panel, no elevation); only the layout frame moves.
     <Page
-      max={layout.form}
+      max={FORM_MAX}
       pad={`${SP.xxl}px 0`}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
     >
-      {/* Scrim panel: the dedicated auth routes render over App's per-view
-          PAINTED background (.page-bg). The card below gives the form its own
-          readable CARD surface, but the brand lockup and footer would otherwise
-          sit directly on the painting, where gold-on-painting and the
-          secondary-grey footer text can fail AA. A subtle parchment scrim with
-          a hairline border lifts both onto a guaranteed-readable surface so all
-          text clears 4.5:1 over any painting. */}
+      {/* Brand lockup doubles as the way back to the app. The dedicated auth
+          routes render full-bleed (App suppresses the persistent nav on these
+          surfaces), so without a home affordance here the only exits would be the
+          browser Back button and the inter-mode footer links. The wordmark is a
+          real anchor to /create (crawlable, middle-click-friendly) whose onClick
+          preventDefaults into the SPA navigator — the same pattern the footer
+          FooterLinks use. */}
       <div style={{
-        background: PARCH, borderRadius: R.xl,
-        border: `1px solid ${BORDER}`,
-        boxShadow: ELEV['3'],
-        padding: `${SP.xl}px`,
-        display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.lg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        marginBottom: SP.lg,
       }}>
-        {/* Brand lockup doubles as the way back to the app. The dedicated auth
-            routes render full-bleed (App suppresses the persistent nav on these
-            surfaces), so without a home affordance here the only exits would be
-            the browser Back button and the inter-mode footer links. The wordmark
-            is a real anchor to /create (crawlable, middle-click-friendly) with
-            an onClick that preventDefaults into the SPA navigator, the same
-            pattern the footer FooterLinks use. */}
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
-        }}>
-          <a
-            href={viewToPath('generate')}
-            onClick={(e) => { e.preventDefault(); navigate('generate'); }}
-            aria-label="SettlementForge home"
-            style={{
-              fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-              letterSpacing: '0.02em', textTransform: 'lowercase', textDecoration: 'none',
-            }}
-          >
+        <a
+          href={viewToPath('generate')}
+          onClick={(e) => { e.preventDefault(); navigate('generate'); }}
+          aria-label="SettlementForge home"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: SP.sm,
+            textDecoration: 'none',
+          }}
+        >
+          <span style={{
+            fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
+            letterSpacing: '0.02em', textTransform: 'lowercase',
+          }}>
             SettlementForge
-          </a>
-        </div>
-
-        <div style={{
-          background: CARD, borderRadius: R.xl,
-          border: `1px solid ${BORDER}`,
-          boxShadow: ELEV['2'],
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            padding: `${SP.lg}px ${SP.xl}px`,
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            color: GOLD,
-          }}>
-            <h1 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
-              {title}
-            </h1>
-            {subtitle && (
-              <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: MUTED, lineHeight: 1.4 }}>
-                {subtitle}
-              </p>
-            )}
-          </div>
-          <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
-            {children}
-          </div>
-        </div>
-
-        {footer && (
-          <div style={{
-            textAlign: 'center',
-            fontSize: FS.sm, color: SECOND, fontFamily: sans, lineHeight: 1.6,
-          }}>
-            {footer}
-          </div>
-        )}
+          </span>
+        </a>
       </div>
+
+      <div style={{
+        // The register-desk plate: a hairline frame, square-cut, no elevation
+        // shadow (the plainest page in the app — the restraint law).
+        background: CARD,
+        border: `1px solid ${BORDER}`,
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          padding: `${SP.lg}px ${SP.xl}px`,
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          color: GOLD,
+        }}>
+          <h1 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
+            {title}
+          </h1>
+          {subtitle && (
+            <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: MUTED, lineHeight: 1.4 }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+        <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
+          {children}
+        </div>
+      </div>
+
+      {footer && (
+        <div style={{
+          marginTop: SP.lg, textAlign: 'center',
+          fontSize: FS.sm, color: SECOND, fontFamily: sans, lineHeight: 1.6,
+        }}>
+          {footer}
+        </div>
+      )}
     </Page>
   );
 }

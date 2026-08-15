@@ -7,7 +7,7 @@
  *   - faith pip                         (deity glyph + rank, alignment-colored)
  *   - disposition chip                  (aggressive / pacifist)
  *   - war-weary pip                     (war-exhaustion band)
- *   - W/L standing pip                  (dispositionStandings)
+ *   - realm contest W/L pip             (dispositionStandings)
  *
  * SELF-GATING: returns NULL when `model.hasLiveWorld` is false, so a peaceful,
  * non-campaign, deity-free card shows NO pips and looks exactly as it does today.
@@ -18,6 +18,7 @@
 
 import { SECOND, FS, SP, sans, swatch } from '../theme.js';
 import { BAND_COLOR } from '../../domain/state/bands.js';
+import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 
 const RED = swatch['#8B1A1A'];
 // War-weary + standing hues reuse the AA-vetted band steps so the war/faith
@@ -46,7 +47,7 @@ function Pip({ color, children, title, crisis = false }) {
         fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
         color: crisis ? CRISIS_TXT : color,
         background: crisis ? color : `${color}14`,
-        borderRadius: 8, padding: '1px 6px', whiteSpace: 'nowrap',
+        padding: '1px 6px', whiteSpace: 'nowrap',
       }}
     >
       {children}
@@ -134,15 +135,15 @@ export default function LivingWorldSignalRow({ model }) {
         </Pip>
       )}
 
-      {/* Disposition standing W/L. The W/L text plus the AA-vetted color (SECOND
-          for an even record, win-green / siege-red otherwise) carry the standing
-          on two channels. */}
+      {/* Realm contest W/L. The text plus the AA-vetted color (SECOND for an
+          even record, win-green / siege-red otherwise) carry the record on two
+          channels; the tooltip defines what the ledger does and does not count. */}
       {standing && (standing.wins > 0 || standing.losses > 0) && (
         <Pip
           color={standing.score > 0 ? STANDING_WIN : standing.score < 0 ? RED : SECOND}
-          title={`Cross-settlement record: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score})`}
+          title={`${REALM_CONTEST_RECORD_LABEL}: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score}). ${REALM_CONTEST_RECORD_HELP}`}
         >
-          {standing.wins}W/{standing.losses}L
+          won {standing.wins}, lost {standing.losses}
         </Pip>
       )}
     </div>
