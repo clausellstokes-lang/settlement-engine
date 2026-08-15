@@ -4271,3 +4271,35 @@ before you do the full soak and tune."**
    its veto-surface banner and quote-at-collection copy); the da
    executors dispatch when R1 holds. The 4+3 train shape is
    validator-forced and accepted.
+
+## §114 · P6 DECIDED ON NEW EVIDENCE — THE GUARD-VACUITY BURN OPENS
+## (2026-08-15, chair, vetoable; on the owner's re-sweep question)
+
+1. **The parked P6 question (the bounded burn of the ~198 unproven
+   guards) is DECIDED YES**, under the standing delegation and on
+   evidence that changed its calculus: TWO members of that unproven
+   population proved vacuous this week with real hidden costs — the
+   goods-memo pin (blind to its cure's deletion; a ~5× regression
+   invisible six weeks) and the proseLeak detector (structurally
+   blind to `${…}` holes; 29 live leaks behind a "zero leaks"
+   claim). The class is confirmed: a guard without a proven
+   detection is a liability wearing a receipt. Say "veto" to halt
+   the program.
+2. **Lane GV-1 opens the burn**: enumerate the guard population,
+   re-derive the proven/unproven split at the live base, rank the
+   unproven by consequence (landing gates → deploy gates → persisted
+   state → docs → style), probe the top tranche with MINIMAL PLANTED
+   POSITIVES in isolated archive copies — a guard that stays green
+   on its plant is VACUOUS-CONVICTED with its blind mechanism
+   recorded; a guard that reds earns a permanent proven receipt.
+   The two known kills are the method's calibration cases (a method
+   that misses a known kill is itself convicted). Read-only toward
+   both trees; no gate machinery touched.
+3. **No other wholesale re-sweep is warranted by the recent
+   findings**: inherited-figure rot is handled at use (the §60.4
+   delta idiom + §70 consumption law, working — four stale figures
+   caught at compiles this week); the volumes were cured at §106
+   and re-verify at each family's compile; the annexes stay green
+   via §61 increments; premise maps re-verify at every train.
+   Convictions from the burn join audit-zero as micro-batch members
+   (each cure = the missing detection arm, never a widened scan).
