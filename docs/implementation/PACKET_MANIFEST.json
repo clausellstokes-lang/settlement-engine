@@ -2872,7 +2872,7 @@
     },
     {
       "id": "EST-C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/EST-C.md",
       "verifiedBase": "5c774940c1edfc20bd11ace2c40141088081807b",
       "changeManifest": [

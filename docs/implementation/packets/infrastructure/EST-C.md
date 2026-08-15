@@ -3,8 +3,16 @@
 **Preamble:** `docs/implementation/preambles/INFRA-PREAMBLE.md` at SHA-256
 `c4e3f531ba585ef6d033ac3deb3b88ece5648c527c6ef7f46020ef0156de38ce`.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `5c774940c1edfc20bd11ace2c40141088081807b`
+- **Landed:** `c632cbf466f39298317de13603f4e0528d00d211` — the `est-1c` train's sole member and
+  its last content commit. Chain: promotion `0adf27ff` → content `5ca2012c` → census half +
+  the ruled conversion `c632cbf4` → the terminal. ⚠ **Two content commits, and the split is
+  forced twice over**: the remove-only re-freeze may not be taken over a live tree, so the
+  content committed first and the freeze was taken DETACHED at that committed sha with
+  `TEST_RATCHET_SHA` carrying it; and the `CR-EST-CONTROLZERO` conversion is only TRUE once
+  the baseline drops to 12, so it rides that same second commit rather than either neighbour.
+  §0, §7.1 and §11 carry the executed landing evidence.
 - **Train:** `est-1c`, the **sole member** of a one-member follow-up train. It was compiled as
   `est-1`'s member 3 of 3 and **STOPPED at that train's terminal** on a blocker that could not
   exist until EST-A's win was banked (§0 below). §60.3's shape is preserved exactly: the
