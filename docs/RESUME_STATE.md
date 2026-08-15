@@ -100,6 +100,28 @@ LG-S (the LG self-sweep — §51's FIRST FABLE SURVEY LANE).** On their
 collection: §48 cure rounds (WC first) + §51 Phase-S continues on freed
 slots (Fable surveys, Opus verifies, chair governs).
 
+**✅ Lane TL-S COLLECTED (~01:30): 208 claims / 155 TRUE / 43 REFUTED / 10
+UNVERIFIABLE across TR/IN/CW/ES tails — and the refutations mostly UNBLOCK:**
+all three TR spine blockers DISCHARGED (five of seven TR waves carry false
+BLOCKED headers); IN-0c LANDED despite three OWED declarations; IN-1c
+COMPILABLE NOW; CW-1's named blockers discharged (though SC-6 causedBy
+adoption is starved at 6 files). Traps for compilers: ⛔ TR-5's charter
+spelling `trade_exclusivity` reds a green test BY NAME (PIN 2 forbids it
+tree-wide); ⚠ the RAW-vs-EFFECTIVE ceiling confusion class (two false
+blocks, one false comfort); ⚠ THREE TR volume sentences are MACHINE-PINNED
+EXACTLY-ONCE (tradeConvergenceContract walker — corrections move the walker
+in the same commit); ⚠ CW-0w's registry-row cost (every new cross-layer
+import = a same-commit row) is UNPRICED in TR/IN; two REACH_OWED rows
+(TR-1, GR-1) await a chair declaration; ES-6b's blocker is the WRONG OBJECT
+(the dead head is one level up; scope HALVES; threshold already shipped as
+quality='careful'). Verdicts per wave in `laneTLS-TAILS-SUBSTRATE.md` (four
+separable family sections). **THE SWEEP PROGRAM IS COMPLETE except LG-S:
+SEVEN annexes, ~1,300 claims graded, 257 refutations at recon prices.**
+**⭐ THE UNBLOCKED COMPILE FRONT (staff from here):** IN-1c · TR-2 · TR-4 ·
+TR-7 · TR-9rem · IN-2..IN-6 · CW-2x · CW-3 — all CHARTER-SOUND with
+corrections bound in the annex; INT-3b compiling now; WC-0 after WC-C's
+cures; LG-0 after LG-S.
+
 **LIVE (~01:00, four lanes at cap — the holdup dissolved):** TL-S (tails
 sweep) · LG-S (LG self-sweep, Fable) · **Lane WC-C — THE FIRST §48
 CURE-ARCHITECTURE PASS** (the WC fence signature, the TERM_FAMILIES pin
