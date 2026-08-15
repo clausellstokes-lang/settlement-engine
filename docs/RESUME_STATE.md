@@ -100,6 +100,18 @@ LG-S (the LG self-sweep — §51's FIRST FABLE SURVEY LANE).** On their
 collection: §48 cure rounds (WC first) + §51 Phase-S continues on freed
 slots (Fable surveys, Opus verifies, chair governs).
 
+**LIVE (~01:00, four lanes at cap — the holdup dissolved):** TL-S (tails
+sweep) · LG-S (LG self-sweep, Fable) · **Lane WC-C — THE FIRST §48
+CURE-ARCHITECTURE PASS** (the WC fence signature, the TERM_FAMILIES pin
+cure, the C3 non-vacuity arm, the LANDS correction; each cure RE-SWEPT
+against HEAD; CR-WC-9's arms noted-not-decided) → `laneWCC-*` · **Lane TC12
+— INT-3b COMPILE** (the implementation stream resumed: the sweep proved it
+unblocked with its host pre-reserved; INT preamble authored; annex
+refutations bind) → `laneTC12-*`. The former "sittings" are converted to
+delegate-with-guard lanes per the proven §34/§47 pattern; still genuinely
+chair-only: the gr-6 band signature at promotion, the WY passes, HB-3/Q1,
+the fold — each rides its collection moment.
+
 **A SUCCESSOR RESUMES:** (1) collect TL-S/LG-S; (2) §51 Phase-S per the ODQ
 charter; (3) the sittings: gr-6 re-charter · WC cures · WY chair passes
 (CONDITION_BANDS collision; the F9 strike-or-preserve; the war/ dir
