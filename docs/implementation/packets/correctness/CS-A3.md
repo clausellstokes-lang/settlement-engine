@@ -93,10 +93,36 @@ consecutive ticks**, asserting **per tick, across all three**:
   `position01` is not consumed as ground advantage by any later battle — the retreat
   lifecycle across ticks, which a single-tick fixture structurally cannot see and which
   the audit named as the unpinned gap;
-- **(d)** the negative control the compile's shape could not have passed: **with retreat
-  routing unavailable**, the beaten army still fights only once. This arm is what
-  discriminates this cure from the refuted two-arm shape, and it reds against either of
-  those arms alone.
+- **(d)** the pending pair is **skipped, not resolved**, asserted from the other side:
+  at base the third army wins its free battle against the already-beaten column and pays
+  the winner's 3% (200 → 194); cured, it is untouched at 200 because
+  `resolveFieldBattle` was never called for that pair. Bounding the loser's maulings
+  alone would also be satisfied by a guard that resolved the pair and merely declined to
+  re-apply damage.
+
+⚠ **WHAT THE STANDING PIN DOES NOT PROVE, STATED PLAINLY.** Three mutants were planted
+and the results are reported as measured, not as hoped:
+
+| mutant | result |
+|---|---|
+| the guard deleted entirely | **4 failed / 38 passed** — all four new arms red |
+| the compile's two-arm retreat-keyed guard substituted | **42 passed** |
+| the loser registered only AFTER retreat routing succeeded | **42 passed** |
+
+On a routable topology every one of these cures behaves identically, so the suite cannot
+discriminate them — the difference lives only in the no-retreat-route case, and that case
+is not reachable through the kernel's public API with a hand digest, because gates are
+undirected and the same edge serves the march and the retreat. An arm that attempted it
+was written, reddened its own non-vacuity guard (defeating the retreat also defeated the
+march), and was **removed rather than weakened**.
+
+The stronger predicate therefore gets a **test-independent** guard instead: the two-line
+sequence placing `fought.add(result.loserId)` immediately before `loserRec` — that is,
+before any retreat handling — is named in `requiredSymbols`, and the validator resolves
+required symbols against the live tree at every status inside `npm run check`. The third
+mutant above reds that check even though it reds no test. The no-route superiority itself
+is evidenced by the executed source-variant probes in §2, which are an experiment, not a
+standing pin, and are labelled as such.
 
 ## §4 · SIZE — INSIDE THE SHARED BUDGET, MEASURED
 
@@ -125,5 +151,8 @@ families: **0**. `retiredSymbols`: **NONE**.
 
 1. CS-A3 and CS-A4 together need a ninth effective line — a plan-level STOP, never a
    ceiling raise. (Measured: they need four.)
-2. Any guard arm shipped cannot be shown to red alone under a planted mutant.
+2. Any guard arm shipped cannot be shown to red alone under a planted mutant. **This is
+   why the cure ships ONE arm rather than the compile's two**: two arms each individually
+   sufficient is the redundant-guard-vacuity class, and the measurement above is what
+   convicted it.
 3. A same-seed golden moves outside the declared multi-army crossing-path surface.

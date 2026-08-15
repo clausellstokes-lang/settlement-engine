@@ -774,10 +774,27 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
   const mauled = {}; // armyId → new strength (write-back to deployments)
   /** @type {Set<string>} armies that RETREATED this tick → their deployment withdraws next tick. */
   const retreated = new Set();
+  /** @type {Set<string>} armies BEATEN this tick — distinct from `retreated`, which is
+   * populated only when a retreat route was actually found (CS-A3). */
+  const fought = new Set();
   for (const col of collisions) {
     const a = records[col.aId];
     const b = records[col.bId];
     if (!a || !b) continue;
+    // spatial-engine-3 at RESOLUTION time, not only at DETECTION time. The collision
+    // list is computed once (:772) while this loop REWRITES the loser's record into a
+    // RETREAT whose position01 is 0 — and groundAdvantage01 is 1 − position01, so a
+    // still-pending pair naming that army used to resolve anyway and the beaten column
+    // fought again at FULL defender's-ground bonus, on ground it had just abandoned.
+    // ⛔ THE PREDICATE IS "WAS BEATEN", NOT "RETREATED", AND THE DIFFERENCE IS MEASURED:
+    // `retreated` is populated only inside the `if (scored …)` block below, so when
+    // retreatRoute finds no path the record keeps its MARCH role AND stays out of
+    // `retreated` — neither a role check nor a `retreated` check fires, and the defect
+    // survives. Executed with routing forced to fail: base and a retreat-keyed guard
+    // both still mint two field battles in one tick; this predicate mints one.
+    // The WINNER is deliberately not registered — 72.1 rules this as the BEATEN army's
+    // defect, and the position01 pathology is the loser's alone.
+    if (fought.has(col.aId) || fought.has(col.bId)) continue;
     // spatial-engine-4: the umbilical fog degrades each army's READ of the OTHER's
     // strength (an info-starved column mis-assesses). The TRUE strengths still resolve
     // the battle (the physics are real, byte-exact); the fog is stamped as the DM-legible
@@ -785,6 +802,9 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
     const aFog = umbilicalFog(a.beliefStaleness);
     const bFog = umbilicalFog(b.beliefStaleness);
     const result = resolveFieldBattle({ a: battleInputs(a), b: battleInputs(b), rng, tick: nowTick });
+    // Registered UNCONDITIONALLY, before any retreat routing is attempted — that is the
+    // whole point of keying on defeat rather than on a successful retreat.
+    fought.add(result.loserId);
     const loserRec = result.loserId === a.armyId ? a : b;
     const foeRec = result.loserId === a.armyId ? b : a;
     const loserFog = result.loserId === a.armyId ? aFog : bFog;

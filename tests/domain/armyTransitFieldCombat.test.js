@@ -515,3 +515,136 @@ describe('M5 — SOAK B: the war-distribution/homeostasis envelope holds WITH ar
     expect(sawTransit).toBe(true);
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CS-A3 (cs-2) — A BEATEN ARMY FIGHTS ONCE PER TICK.
+//
+// The collision list is computed ONCE, but the loop REWRITES the loser's record
+// into a RETREAT whose position01 is 0 — and groundAdvantage01 is 1 − position01.
+// So a still-pending pair naming that army resolved anyway, and the beaten column
+// fought its second battle of the tick at FULL defender's-ground bonus, standing
+// on country it had just abandoned. Measured at base eab6eba0 on the fixture
+// below: two field_battle entries in one tick, the loser mauled 50 -> 27.5 -> 15.125.
+//
+// ⛔ THE PREDICATE IS "WAS BEATEN", NOT "RETREATED". The compile specified a
+// retreat-keyed guard; measured, that guard does not fire at all when retreatRoute
+// finds no path, because the retreat registration lives inside the same block that
+// rewrites the record. The last arm below is the control for exactly that, and it
+// reds against a retreat-keyed or role-keyed guard.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('M5 — CS-A3: a beaten army fights ONCE per tick, across ticks', () => {
+  // A three-army crossing-path fixture: `a` marches on `d`; `b` and `c` are both
+  // hostile to `a`; every path overlaps at the hub `x`. This is an ordinary
+  // border-coalition shape — two powers both marching on a third's home.
+  const starDigest = () => {
+    const nodes = ['a', 'b', 'c', 'd', 'x'];
+    const distanceMatrix = {};
+    const tiers = {};
+    for (const m of nodes) {
+      distanceMatrix[m] = {};
+      tiers[m] = {};
+      for (const n of nodes) if (m !== n) { distanceMatrix[m][n] = (m === 'x' || n === 'x') ? 100 : 200; tiers[m][n] = 1; }
+    }
+    return {
+      spatialCanonVersion: 1,
+      settlementIds: nodes,
+      gates: [
+        { between: ['a', 'x'], cost: 100 }, { between: ['x', 'd'], cost: 100 },
+        { between: ['b', 'x'], cost: 100 }, { between: ['c', 'x'], cost: 100 },
+      ],
+      distanceMatrix,
+      tiers,
+    };
+  };
+  const starSnapshot = () => ({
+    byId: { get: (id) => ({ id, name: id, causal: { scores: { economic_capacity: 60 } } }) },
+    settlements: ['a', 'b', 'c', 'd', 'x'].map((id) => ({ id })),
+  });
+  // A fixed roll so the giant always wins: the outcome is the CLAMP, not a draw.
+  const fixedRng = { fork: () => ({ random: () => 0.99, fork: () => ({ random: () => 0.99 }) }) };
+  const starWorld = () => ({
+    spatialCanonVersion: 1,
+    simulationRules: { warLayerEnabled: true, infoMode: 'omniscient' },
+    deployments: {
+      a: { targetId: 'd', sinceTick: 0, currentEffectiveStrength: 50, readiness: 0.5 },
+      b: { targetId: 'a', sinceTick: 0, currentEffectiveStrength: 500, readiness: 0.5 },
+      c: { targetId: 'a', sinceTick: 0, currentEffectiveStrength: 200, readiness: 0.5 },
+    },
+  });
+
+  /** Drive the kernel `ticks` times, collecting per-tick battle counts and records. */
+  function driveStar(ticks) {
+    const digest = starDigest();
+    const snapshot = starSnapshot();
+    let worldState = starWorld();
+    const perTick = [];
+    for (let tick = 0; tick < ticks; tick += 1) {
+      const out = advanceArmyTransit({ snapshot, worldState, digest, graph: {}, rng: fixedRng, tick, now: null });
+      worldState = out.worldState;
+      const ledger = armyTransitLedger(worldState) || {};
+      // Count how many of THIS tick's battles name each army. The news id carries the
+      // sorted pair, so a per-army count is read from the id rather than guessed.
+      const battlesNaming = (id) => out.newsEntries.filter((n) => String(n.id || '').split('.').includes(id)).length;
+      perTick.push({
+        tick,
+        battles: out.newsEntries.length,
+        aBattles: battlesNaming('a'),
+        aStrength: ledger.a ? ledger.a.strength : null,
+        aRole: ledger.a ? ledger.a.role : null,
+        aPosition: ledger.a ? ledger.a.position01 : null,
+      });
+    }
+    return perTick;
+  }
+
+  it('names the beaten army in at most ONE field battle per tick, every tick', () => {
+    const perTick = driveStar(3);
+    // NON-VACUITY FIRST: a run in which nobody ever fought would satisfy the bound
+    // trivially, so the fixture is asserted to actually reach the collision path.
+    const totalBattles = perTick.reduce((n, t) => n + t.battles, 0);
+    expect(totalBattles, 'no battle occurred at all — this fixture would prove nothing').toBeGreaterThan(0);
+    // THE ACCUMULATOR: asserted at EVERY tick, not once at the end. The base mints two
+    // per tick at ticks 0 and 1, so a single-tick fixture would also have caught tick 0
+    // but never the retreat lifecycle the next arm pins.
+    for (const t of perTick) {
+      expect(t.aBattles, `tick ${t.tick}: the beaten army was named by ${t.aBattles} field battles`).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("halves the beaten army's mauling: strength falls at most once per tick", () => {
+    const perTick = driveStar(3);
+    // Base: 50 -> 27.5 -> 15.125 inside tick 0 alone (two maulings). Cured: one maul
+    // per tick, so tick 0 lands exactly on the single-battle floor 50 * 0.55.
+    expect(perTick[0].aStrength, 'tick 0 mauled the loser more than once').toBe(27.5);
+    expect(perTick[1].aStrength, 'tick 1 mauled the loser more than once').toBe(15.125);
+  });
+
+  it('leaves the loser in a RETREAT record whose position01 is never re-spent as ground advantage', () => {
+    const perTick = driveStar(3);
+    // The retreat LIFECYCLE across ticks — structurally invisible to a single-tick
+    // fixture, and named by the audit as the unpinned gap.
+    expect(perTick[0].aRole).toBe(ARMY_ROLES.RETREAT);
+    expect(perTick[0].aPosition, 'a retreat record parks at position01 0 — the ground-advantage source').toBe(0);
+    // …and having parked there, it is not consumed by a second battle in the SAME tick,
+    // which is what the strength floor above already proves, nor in the next one.
+    expect(perTick[1].aBattles).toBeLessThanOrEqual(1);
+  });
+
+  it('SKIPS the pending pair rather than resolving it — the third army pays nothing', () => {
+    // ⛔ THE DISCRIMINATING ARM. Bounding `a`'s maulings alone would also be satisfied
+    // by a guard that resolved the (a,c) pair and merely declined to re-apply the
+    // damage. This asserts the collision was never resolved at all, from the OTHER
+    // side: at base `c` wins its free battle against the already-beaten `a` and pays
+    // the winner's 3% — 200 -> 194. Cured, `c` is untouched at 200 because the pair
+    // was skipped before `resolveFieldBattle` was ever called.
+    const digest = starDigest();
+    const snapshot = starSnapshot();
+    const out = advanceArmyTransit({ snapshot, worldState: starWorld(), digest, graph: {}, rng: fixedRng, tick: 0, now: null });
+    const ledger = armyTransitLedger(out.worldState) || {};
+    expect(ledger.c, 'the third army has no transit record — this arm would be vacuous').toBeTruthy();
+    expect(ledger.c.strength, "the third army fought the already-beaten column and paid a winner's cost").toBe(200);
+    // NON-VACUITY: `b` DID fight, so the fixture genuinely reached the collision path
+    // and `c`'s stillness is a skip rather than an inert tick.
+    expect(ledger.b.strength, 'the first battle did not happen — nothing was skipped').toBe(485);
+  });
+});
