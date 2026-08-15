@@ -4422,7 +4422,29 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   is one describe each from demographicsMigration and convergence; upswingKernel's new
     //   describe is invisible for the same park reason its three titles are.
     // 2438/364/2074/20220/5676 → 2438/364/2074/20226/5678.
-    files: 2438, parked: 364, credited: 2074, titles: 20226, suiteTitles: 5678,
+    // da-a (DA-A2 then DA-A1, the display-adoption train) re-records on DA-A1, its ONLY
+    //   tests-moving member — DA-A2 touches no test file at all. files/parked/credited do NOT
+    //   move, and here that is a receipt rather than an inference: all three are asserted
+    //   BEFORE `titles` in this arm and all three PASSED. No member creates a test file.
+    // ⚠⚠ SIXTEEN TEST TITLES WERE ADDED AND THE EVIDENCE LAYER MOVED BY NINE, because
+    //   tests/copy/proseLeak.test.js IS PARKED AND WAS ALREADY PARKED AT THIS TRAIN'S BASE.
+    //   It registers its four composer arms from a `for (const [name, compose] of
+    //   Object.entries(surfaces))` loop at base line 226, which door 3 cannot statically
+    //   recognise, so the file credits nothing. The attribution is arithmetic and it closes
+    //   exactly: proseLeak +7, humanizeEngineTokens +4, galleryCampaignsTab +3, realmStrip
+    //   +2 = 16 added; 16 - 7 = 9 counted. The same subtraction closes on the suite layer:
+    //   four new describes, one of them proseLeak's, and 4 - 1 = 3.
+    //   ⛔ NO PARK STATE CHANGED. The loop predates this train, so proseLeak's pins were
+    //   invisible before it and are invisible after it. This is recorded because a parked
+    //   file's pins are real coverage the census cannot see — DA-A1's seven arms include the
+    //   reproduced-vacuity control, which is the whole evidence for ODQ §113.3, and a future
+    //   lane reading "+9" against sixteen new titles would otherwise re-derive all of this.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so the first run here reached
+    //   `titles` ONLY (20226 → 20235) and `suiteTitles` was never evaluated. It was proved by
+    //   re-running this arm with `titles` re-recorded, which then reported `expected 5681 to be
+    //   5678` — read from the walker's own failure output, never assumed to have held.
+    // 2438/364/2074/20226/5678 → 2438/364/2074/20235/5681.
+    files: 2438, parked: 364, credited: 2074, titles: 20235, suiteTitles: 5681,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

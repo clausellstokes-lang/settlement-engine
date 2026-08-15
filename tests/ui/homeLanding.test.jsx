@@ -192,7 +192,9 @@ describe('HomeLanding — scrollable landing', () => {
     await screen.findByText(landing.closer.h2);
     const tags = screen.getAllByText(new RegExp(`seed · ${fixture.seed}`));
     expect(tags.length).toBeGreaterThanOrEqual(2); // brief + voice (+ why-trace with week)
-    expect(screen.getByText(`seed · ${fixture.seed} · week ${fixture.weeks}`)).toBeTruthy();
+    // §69.3 (DA-A1): the landing page is the PUBLIC surface, so the provenance stamp
+    // states an elapsed SPAN rather than a raw engine week counter.
+    expect(screen.getByText(`seed · ${fixture.seed} · ${fixture.weeks} weeks in`)).toBeTruthy();
   });
 
   // ── W-DOC — THE MAP ARTIFACT (folded into §02) ─────────────────────────────
