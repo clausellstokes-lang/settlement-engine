@@ -4233,3 +4233,41 @@ before you do the full soak and tune."**
    state: the engine-correctness and generation-duplication rows are
    DONE; TC21 compiles da-1..6 now; remaining after da: dom-1..3 →
    micro-batch → then the family builds.**
+
+## §113 · THE da COMPILE ACCEPTED — THREE MIS-SPECIFICATIONS CURED
+## AT COMPILE (2026-08-15, chair, vetoable; evidence
+## laneTC21-DA-PLAN.md + laneTC21-report.md, 31/31 premise files
+## blob-identical across 82 commits)
+
+1. **J-TC21-1 IS SIGNED — REUSE the existing worker**: `runInterval`
+   injection into `advanceInterval.worker.js`'s machinery, refusing
+   a new forecast worker — the §84.3 second-manifest hazard becomes
+   NOT INCURRED instead of priced, and the discovered SECOND
+   main-thread site (`auspice.js:86`, missed by the perf audit)
+   joins da-6's member.
+2. **J-TC21-2 IS SIGNED — da-2 re-keyed by NATURE**: "the eight
+   bare-locale sites" (three of the audit's formatCount eight are
+   dates), ALL eight cured before §69.4's guard extends — and the
+   extension is CORRECTED to ban the BARE FORM, not the method (as
+   written it would have redded 33 files, 26 of them carrying the
+   explicitly-sanctioned `'en-US'` renders — the exact
+   red-a-green-tree §69.4 exists to prevent).
+3. **The de-vacuification is RATIFIED as da-1's prevention half**:
+   the EXISTING `proseLeak` guard claims zero tick leaks while its
+   digit-literal detector is blind to `${…}` holes — 29 hits in 18
+   files against a committed baseline that reproduces exactly (the
+   faithfulness control held). Another vacuous guard killed by
+   probe. **The 14 uncovered `week`-class hits WIDEN da-1** (they
+   may not be silently absent once the detector sees). da-5 is
+   RULED ADDITIVE-ONLY (the humanize chokepoint feeds persisted
+   news — editing existing exports is same-seed-moving); §104.4 IS
+   incurred (both AI bundles); `secret_alliance` is EXPECTED-DEAD by
+   corpus (zero producers — §67.2's ask answered);
+   `RelationshipsTab:199` converges (no recorded intent found —
+   §67.2's condition discharged). EconomicsTab.jsx 599/600 is a
+   named one-line STOP.
+4. **J-TC21-7 — R1's conviction is CURED BY DISPATCH**: TC22
+   compiles dom-1..3 in parallel (⛔ dom-3, the founders cure, with
+   its veto-surface banner and quote-at-collection copy); the da
+   executors dispatch when R1 holds. The 4+3 train shape is
+   validator-forced and accepted.
