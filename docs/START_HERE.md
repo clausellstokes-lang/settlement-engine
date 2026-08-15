@@ -42,7 +42,7 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
 ## Supersedes §3j and everything below on state; git wins over every figure here.)
 
 **READ THIS PARAGRAPH FIRST. THE GATE WAS DARK AND IS NOW ALMOST ENTIRELY LIT.**
-`npm run check` is a **14-step `&&` chain**. It went red at step 9 (`typecheck`) on
+`npm run check` is a **17-step `&&` chain** (14 at this note's writing; re-derive from package.json, which is the figure's only honest home — corrected per ODQ §100 after R-DOM measured the drift). It went red at step 9 (`typecheck`) on
 **2026-08-02 18:42 at commit `7796954e`** and stayed red — and because `&&`
 short-circuits, **steps 10-14 (`typecheck:domain:strict`, `lint`, `test`, `build`,
 `verify:dist`) DID NOT RUN AS PART OF THE GATE FOR FIVE DAYS.** ~370 commits landed

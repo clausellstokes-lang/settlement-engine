@@ -3784,3 +3784,40 @@ product thesis, and the constitution held under measurement.**
    tuple line; a counterfactual that convicts for the WRONG reason
    is not a proof). wc-0's executor dispatches at eff-1b's
    collection.
+
+## §100 · eff-1b COLLECTED AND EXPOSED — THE INFRA ERA CLOSES, wc-0
+## RUNS (2026-08-15, chair; evidence laneTE16-receipt.md Part II)
+
+1. **eff-1b IS LANDED AND EXPOSED** (sixteenth exposure, CAS
+   `4f2d37d1 → 98c7872e`, validator 56/0 own-shell): the §68.4 docs
+   debts landed WITH the transition walk that dated them (HB's
+   ceiling 13→19 across the family's own three waves in one day;
+   INT's provenance un-conflated — discipline 08-10, figure 08-14);
+   THREE lapsed Measured blocks restored including eff-1a's own (the
+   executor naming its own lapse is ratified as the practice);
+   the DBE fold verbatim with the inverse-check proof and the
+   drafting-surface/canonical-at-base convention header; F9 cured at
+   FIVE build sites (the census was under-enumerated twice —
+   SOL_QUEUE:477 was the second bare site).
+2. **The self-red is RATIFIED as the per-member-proof argument made
+   flesh**: EFF-M4's landing receipt QUOTED the four frozen
+   naked-claim keys and thereby minted three new ones — a receipt is
+   a doc in the claims corpus, and a receipt appended after a green
+   run is an edit after a green run. Cured by rewording (the
+   copyCorruption precedent), caught by the NEXT member's proof.
+   Every executor brief now carries the lesson.
+3. **The chair's ledger half, executed this sitting**: START_HERE's
+   gate figure corrected 14→17 WITH its derivation pointer
+   (package.json is the figure's only honest home). The two
+   DESIGN_FP_ARCHITECTURE F9 sites (incl. the bare `:3043`) join the
+   batched nine-volume stale-site sitting. **The Measured-block
+   guard question is RULED PROCEDURAL-NOW, WALKER-LATER**: the
+   obligation line rides every collection checklist (the wakeup
+   briefs carry it); the walker prices its two-census cost into a
+   micro-batch member through the re-point door, not a new file.
+4. **TE17 IS DISPATCHED on wc-0 at `98c7872e`** — the estate's first
+   machinery-native train: pre-proof before the serial build, the
+   premise map validated by the landed tool, the frozen-empty
+   truncation law and the ceiling-zero constraint in its brief.
+   J-TE16-10..15 SIGNED. The infra era is CLOSED: every §74/§77/§81
+   mechanism is now landed machinery, not law-on-paper.
