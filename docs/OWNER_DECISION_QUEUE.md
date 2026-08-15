@@ -3821,3 +3821,38 @@ product thesis, and the constitution held under measurement.**
    truncation law and the ceiling-zero constraint in its brief.
    J-TE16-10..15 SIGNED. The infra era is CLOSED: every §74/§77/§81
    mechanism is now landed machinery, not law-on-paper.
+
+## §101 · THE rn-1 COMPILE ACCEPTED — R1 HOLDS, AND DOOR 1 OPENS
+## (2026-08-15, chair, vetoable; evidence laneTC18-RN1-PLAN.md +
+## laneTC18-report.md; the eff-1b mid-lane base move measured
+## docs-only, 40/40 subject blobs identical)
+
+1. **rn-1 is COMPILED AND TTS-SIMULATED at the live base and §77
+   R1's second slot EXISTS**: `queue-check` prints R1 HOLDS for
+   {wc-0(WC), rn-1(RN)}, exit 0 — the machinery certifying the
+   estate it was built to certify. The cure architecture survived
+   intact (36/40 blobs byte-identical since `fc8451c4`; the
+   divergence corpus re-executes to the same 17-of-40).
+2. **DOOR 1 IS OPENED**: the chair RECORDS THE WIDER SCOPE BUDGET —
+   arm C at six files, arm B1 at four — because the width is
+   one-token deletions across a frozen vocabulary family, the §64.7
+   ladder forecloses splitting, and RN's un-stamped cap-4 is not
+   negotiable without a round. The budget is priced in the packet,
+   never inherited silently. ⚠ `convergence.js` at 798/800 with
+   arm C editing it rides the executor brief by name.
+3. **The compile's measured corrections are ADOPTED into the
+   contracts**: G2's defect population is FIVE spellings (§66.2's
+   three was under-enumerated — mechanism exact, population wider);
+   G3 cures by ROUTING ALONE with `enemy` pinned expected-dead
+   (resolving the apparent §66.2/§64.3 tension — no content
+   widening); A0 re-points through the postureNameCollision walker's
+   class — THREE honest re-points, ZERO new test files, the
+   expensive census figure never moves; the negativeAssertionAnchor
+   frozen-row two-direction trap on B1's re-authored file is in the
+   member contract.
+4. **A PACKET_STANDARD defect is DOCKETED with executed evidence**:
+   "preserves or creates" for `requiredSymbols` is UNENFORCEABLE at
+   READY (the validator resolves against the live tree — TC18
+   convicted its own draft). The cure text joins the next
+   build-branch docs member. rn-1 stands READY, third in queue
+   behind WC-0E.
