@@ -1849,3 +1849,26 @@ only, §43 law; the suspicion/rumor arm couples the landed rumor machinery
 into counter-intelligence: espionage pressure breeds gate suspicion, a
 real feedback loop, and the refusal is the settlement's own act, never a
 new dice system.)
+
+§46c third addendum (owner, ~11:55): (1) WARTIME GATE RELAXATION — caravans
+are MORE likely to be accepted during wartime, especially carrying what the
+settlement needs (war scarcity opens gates). (2) CONFISCATION — an opposing
+army sharing a route with a caravan bound for an ENEMY settlement will
+likely CONFISCATE it: the caravan is CONSUMED, or TURNS BACK to seek a less
+dangerous route; the army acts on its BELIEF about the caravan. (3) The
+covered spy inherits the outcome: consumed caravan → the NPC is CAPTURED;
+turned-back caravan → the NPC rides back to the origin town before acting
+again. (4) SIEGE LOCKDOWN — a spy inside a besieged settlement cannot leave
+except by smugglers (a chance), tunnels, or alternative transport the
+settlement itself already uses (e.g., its teleportation circle).
+
+Chair note: confiscation is a war-logistics interdiction event whose
+targeting reads the BELIEF layer (the army acts on what it believes of the
+caravan — the information program's tap-order law), producing either a
+supply gain + capture event or a reroute over the same graph; the spy's
+fate-coupling stays the one-truth rule (the NPC inherits the caravan's
+simulated outcome, capture included — the ES capture machinery is the
+substrate check for the volume). Siege lockdown composes the landed siege
+state with the LG exit modes; smuggler/tunnel features are a substrate
+question the volume must grade before promising them. All §46 dispositions
+carry.
