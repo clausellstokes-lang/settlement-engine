@@ -125,7 +125,16 @@ P1b(flip+promote, 44/1) → I2 → T(44/0) — one extra docs commit, lawful
 because M1 has zero CREATE rows. Seven pre-STOP measurements banked and
 inherited. ⚠ MEMORY.md at 17,054 B — A FOLD PASS IS OWED at fresh context
 (grep-every-hook law) before any new hook.
-**LIVE (resumed ~05:45): TE10 EXECUTES hb-2b under Road A.** Chair owns CAS.
+**~11:40 owner reports possible accidental process cancels — SURVEYED:
+NOTHING LOST.** TE10 alive (1h); the hb-2b chain COMPLETE through T on the
+ref: `3ad7c082(P1a) → c777a158(I1 bounds) → 46f1c942(P1b) → de214782(I2
+HB-2) → 6cd18ad3(T flip+capsule)`; worktree dirt = TE10's own terminal
+content; NO gate process live — TE10 must re-run any uncaptured gate per
+its charter and hold in-turn. Chair collects on its report → verify → CAS.
+Owner reaffirmed: continue everything to the first soak (§27 course
+unchanged). NEXT chair sittings (fresh context): LG volume (§46-§46c +
+LGR's ten questions + the willingness-gate defect) · gr-6 re-charter · WC
+questions + WC_CHAIR_RULINGS search · MEMORY.md fold.
 
 **⭐ §45 IS ARCHITECTED AND IMPLEMENTING (~06:50):**
 `docs/DESIGN_PREVERIFICATION.md` landed on THIS branch (SPV — the volume
