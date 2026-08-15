@@ -94,13 +94,51 @@ grows. Measured instead, at this base:
 - The sibling helper in this very file — `singleImportActionBody()` — **already uses a
   boundary**, ending at the next impl's `indexOf`. This member makes the two helpers agree.
 
-## §4 · The change manifest (3 rows)
+## §4 · The change manifest (4 rows — AMENDED AT BUILD, see §4.1)
 
 | # | Action | Path |
 |---:|---|---|
 | 1 | `MODIFY` | `tests/security/mapSnapshotImport.contract.test.js` — anchor `importActionBody()`; add the truncation control |
 | 2 | `MODIFY` | `scripts/.test-ratchet-baseline.json` — the **remove-only** re-freeze, entry 15 drops (16 → 15) |
-| 3 | `TEST` | `tests/lint/sovereigntyLightingContract.walker.test.js` — the census re-recorded WHOLE |
+| 3 | `MODIFY` | `tests/lint/testRatchet.test.js` — the burned row's `ORDINARY_TEST_CONTROL` name is evicted and the floor steps down with the population (§4.1) |
+| 4 | `TEST` | `tests/lint/sovereigntyLightingContract.walker.test.js` — the census re-recorded WHOLE |
+
+### 4.1 ⚠ THE FOURTH PATH WAS FOUND AT BUILD, AND IT IS PRICED RATHER THAN SMUGGLED
+
+The compile declared three paths. Burning a census row costs a **fourth**, and no packet in
+this train had enumerated it.
+
+`tests/lint/testRatchet.test.js` holds `ORDINARY_TEST_CONTROL` — the false-positive half of
+the walker-census classifier control — and an anti-padding arm requiring **every named file to
+carry a LIVE census row**. That list names exactly three files, and
+`tests/security/mapSnapshotImport.contract.test.js` is one of them. The moment entry 15 is
+banked the name goes stale and the arm reds:
+
+```
+these control files carry no census row — a control over green tests proves nothing about
+the census. Drop them, or name a file whose debt is real.
+  + [ "tests/security/mapSnapshotImport.contract.test.js" ]
+```
+
+⭐ **That is the guard working, and its own comment prescribes the cure**: *"a file whose debt
+is burned down leaves the list rather than lingering as a stale certificate."* The name is
+evicted, and the list's floor steps `3 → 2` on the file's own written law — *"the floor is
+BOUNDED ABOVE by the ordinary-debt population it controls… **It steps down WITH the
+population**"* — which landed once already as `5 → 3` for the identical reason. The list stays
+**REAL**: both surviving names carry live census rows.
+
+⛔⛔ **AND THE SAME MEASUREMENT PUTS A HARD FLOOR UNDER THIS TRAIN.** Of the 15 census rows
+remaining after this member, **12 are ledgered walkers and the other 3 are EST-C's three
+targets**. Paying them takes the ordinary-debt population to **ZERO**, the control list cannot
+be refilled — naming any survivor would certify a walker as ordinary — and the arm goes
+vacuous. That is a disabled guard, not a banked win, and what replaces the control is a
+governance question about verification adequacy. **It is recorded in `EST-C.md` and on the
+lane receipt as a STOP.**
+
+⭐ **No ledger row is touched.** `WALKER_ROWS_ADMITTED` (4) and `WALKER_ROWS_OWED` (8) were
+checked by substring over the walker source **before** the re-freeze: entry 15 appears in
+neither, so no ledgered id goes stale and neither ceiling moves. `CEILING` is 17 against a
+census of 15 — monotone down.
 
 ⛔ **No `CREATE` row anywhere in this member** ⇒ the recorded `validate:packets`
 LANDED-CREATE-existence hazard cannot fire. Stated affirmatively.
@@ -159,7 +197,12 @@ GUARD      xss X2              (must stay false)         false / false
 | Runtime tests | 28154 | **28155** | +1 | the same single case |
 | Frozen known failures | 16 | **15** | −1 | entry 15 repairs; **remove-only** `--update` |
 | `validate:packets` | 47 / 0 READY | 48 / 1 → **48 / 0** at flip | +1 | staged promotion |
+| `ORDINARY_TEST_CONTROL` | 3 names, floor 3 | **2 names, floor 2** | −1 | §4.1 — the burned row's name is evicted and the floor steps down with its population |
 | everything else | — | unchanged | 0 | no `src/` file touched; no flag, no golden, no OSR surface, no hot file |
+
+⭐ **`totalTests` in the re-frozen baseline is the VERIFY-AT-BUILD figure, and it MEASURED
+28,155** — the base capsule's 28,154 plus this member's one new case, exactly as declared.
+`--update` writes it from vitest's own run counters, so it was never predicted, only checked.
 
 ## §9 · ⛔ MANDATORY STOPS
 

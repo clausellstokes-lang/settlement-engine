@@ -868,9 +868,16 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // longer carry census rows and the self-cleaning arm below evicts them. They were NOT
   // removed to make anything green. See the RATCHETED 23 → 17 note at the top of this file
   // for why the ordered relocation was refused and the rebuild done instead.
+  // ⚠ 2026-08-15 — mapSnapshotImport LEFT, and it left the RIGHT way, for the second time
+  // this list has self-cleaned. est-1's member EST-A anchored the F6 source contract to the
+  // impl's own closing brace; the guard that had been reading a 6,000-char window of a
+  // 7,717-char body went green, and its census row was banked away by a remove-only
+  // re-freeze. The debt was PAID, so the self-cleaning arm below evicts the name. It was NOT
+  // removed to make anything green — removing it is what the arm DEMANDS once the row is
+  // gone ("a file whose debt is burned down leaves the list rather than lingering as a stale
+  // certificate").
   const ORDINARY_TEST_CONTROL = Object.freeze([
     'tests/lib/accountContentPortability.test.js',
-    'tests/security/mapSnapshotImport.contract.test.js',
     'tests/store/customContentSlice.race.test.js',
   ]);
 
@@ -915,10 +922,23 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // paid or it becomes a veto on the burn-down (the reasoning is written out in full at the
     // RATCHETED 23 → 17 note). It is still a LITERAL, never `ORDINARY_TEST_CONTROL.length`,
     // which would prove list == list. It may fall with the population; it may never be padded.
+    // ⭐ 3 → 2 on 2026-08-15, est-1 / EST-A, on exactly that law and its landed precedent: the
+    //   F6 row was BURNED, so the file left the list above and a floor of 3 would have been a
+    //   control's sample size vetoing the burn-down it exists to observe. The list is still
+    //   REAL — both surviving names carry live census rows.
+    // ⛔⛔ AND THE NEXT STEP DOWN IS NOT AVAILABLE TO A BUILD LANE. Measured at this commit:
+    //   of the 15 census rows, 12 are ledgered walkers and the remaining 3 are the two files
+    //   above. Paying THOSE takes this population to ZERO, and the list cannot be refilled —
+    //   naming any survivor here would certify a walker as ordinary, the exact 2026-08-07
+    //   error. At zero this arm becomes vacuous and the false-positive half of the block stops
+    //   being tested, which is a DISABLED GUARD rather than a banked win. What replaces the
+    //   control when ordinary debt reaches zero is a governance question about verification
+    //   adequacy, and no build lane may write itself that exemption: est-1's member EST-C
+    //   holds the cure for all three remaining rows and is STOPPED here for a ruling.
     expect(
       ORDINARY_TEST_CONTROL.length,
       'the control emptied — the false-positive half of this block is no longer being tested',
-    ).toBeGreaterThanOrEqual(3);
+    ).toBeGreaterThanOrEqual(2);
   });
 
 
