@@ -2474,3 +2474,33 @@ that skips the increment is incomplete.
    a refutation of its own earlier claim (`relationBetween` reads links
    uncanonicalised — an EIGHTH read policy, so its `'ally'` arm is LIVE);
    all six are incorporated above. The cadence law is working as ruled.
+
+## §65 · INT-3B COLLECTED AND EXPOSED — THE ELEVENTH EXPOSURE (2026-08-15,
+## chair; evidence in laneTE12-receipt.md + chair's own-shell receipts)
+
+1. **The reland is VERIFIED and EXPOSED**: chain `fc8451c4 → 8401efbc(P1)
+   → 28d2824b(I1, the parked green re-pointed byte-identical) →
+   d5a6c009(T)`; both terminal gates green from the gate-tail's own exit
+   lines (ratchet 16/28146 at ceiling · strict dist 51/408 · smoke
+   521/521); CAS `fc8451c4 → d5a6c009` executed by the chair after chain
+   verification, porcelain zero, and an own-shell bare validator receipt
+   (46 packets / 0 READY, exit 0 in-shell). `refs/trains/int-3b` closed at
+   the terminal; the stopped ref kept with its STOP recorded.
+2. **TE12's four deviations are RATIFIED**: the M2 amendment rides T, not
+   I1 (both §58.2 clauses hold only that way — the packet is honest before
+   it flips LANDED and the implementation stays byte-identical); R-INT3B-5
+   narrowed with the M2 row (leaving its premise would re-plant the
+   refuted fact); the detached-HEAD capsule stamp is ratified as the only
+   truthful-stamp method under the capsule script's own dirty-scope
+   refusal; the cwd-slip errored CLOSED and all three commits re-verified
+   by tree diff — the every-git-call-names-its-directory law restated.
+3. **⭐ §61's FIRST INCREMENT IS EXECUTED at this landing**: four voided
+   INT annex rows re-verified at `d5a6c009` — the registry row flipped
+   `built: true` exactly as the annex's consequence clause predicted;
+   `ENVOY_PURPOSES`, the C182 host read, and the both-ways walker claim
+   INTACT. The increment is appended to the annex; all other rows inherit.
+4. **The executor queue advances**: IN-1C-A dispatched (lane TE13, Opus)
+   at base `d5a6c009`; the capsule (stamped `28d2824b`) is consumable
+   there under the docs-only-window clause; the compile's base moved one
+   landing, so TE13 re-derives touched premises and census tuples rather
+   than inheriting them. Queue: IN-1C-A → est-1 → wc-0 → rn-1.

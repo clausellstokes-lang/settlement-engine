@@ -70,15 +70,19 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
 
 **THE LOOP ORDER STANDS: run sweep/fix/re-sweep + the executor queue until
 NOTHING MATERIAL LANDS** (owner, verbatim "do it until nothing material
-lands"). Executor queue (§59.6 + §64.7, serial, one worktree): **INT-3B
-reland (TE12 LIVE, Opus)** → IN-1C-A → est-1 → wc-0 → rn-1. INT-3B's
-landing collection owes the FIRST §61 incremental re-sweep. Live read-only
-lanes beside the executor: **R-PLC (persistence/lifecycle, FABLE)** +
-**R-XLS (cross-layer semantics, FABLE)** — §51 dimensions, deliverables
-`laneRPLC-*` / `laneRXLS-*` in the session scratchpad. Chair-owed sittings
+lands"). **✅✅ INT-3B LANDED AND EXPOSED (§65, ELEVENTH exposure): build
+tip now `d5a6c009`**, CAS by chair, validator 46/0 own-shell, §61's FIRST
+incremental re-sweep EXECUTED (4 INT annex rows re-verified, increment
+appended to laneINTS-INT-SUBSTRATE.md). Executor queue (§59.6 + §64.7 +
+§65.4, serial, one worktree): **IN-1C-A (TE13 LIVE, Opus, base
+`d5a6c009`)** → est-1 → wc-0 → rn-1. Live read-only lanes beside the
+executor: **R-PLC (persistence/lifecycle, FABLE)** + **R-XLS (cross-layer
+semantics, FABLE)** — §51 dimensions, deliverables `laneRPLC-*` /
+`laneRXLS-*` in the session scratchpad; both opened at `fc8451c4` and
+close-check the one-landing move per their briefs. Chair-owed sittings
 unchanged: gr-6 re-charter · WY passes · HB-3/Q1 · MEMORY.md fold ·
 IN-1c-b charter. Owner-open: P1 tuning-signature posture · P6 bounded burn
-· "campaign" naming. Ledger tip after this commit carries §63+§64.
+· "campaign" naming. Ledger tip after this commit carries §63+§64+§65.
 
 # ─── prior note (superseded header, content still valid) ───
 # ⭐⭐ (2026-08-16 ~00:40 EDT stamp, skewed) — ✅✅ GR-5A LANDED AND EXPOSED at
