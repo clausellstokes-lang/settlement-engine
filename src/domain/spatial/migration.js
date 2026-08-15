@@ -485,6 +485,44 @@ export function isDemographicColumn(column) {
   return DEMOGRAPHIC_COLUMN_CLASSES.indexOf(String(column.travelClass ?? '')) >= 0;
 }
 
+/**
+ * WC-0B: the military column classes. THREE, not two — an earlier drafting had no member
+ * for an OUTBOUND reinforcement, and since the class is part of the column KEY a classless
+ * military column would have collided with a demographic column on the same
+ * origin/dest/tick: the precise failure the class-in-the-key discipline exists to prevent,
+ * reintroduced by an incomplete union. `reinforcement_column` carries a contribution out,
+ * `veteran_return` carries a homecoming back, and `shed_column` is what a return becomes
+ * when it can no longer reach home.
+ *
+ * ⛔ NOTHING STAMPS ONE OF THESE YET. WC-6 mints the first producer; until then no column
+ * in any seeded world carries a military class, which is the NAMED reason this landing is
+ * byte-identical — not that the widening is behaviourally neutral. It is not: the release
+ * fork's branch set genuinely changes, and the acceptance file's B3 is the executed proof
+ * that the guard can be reddened at all.
+ * @type {ReadonlyArray<string>}
+ */
+export const MILITARY_COLUMN_CLASSES = Object.freeze([
+  'reinforcement_column', 'shed_column', 'veteran_return',
+]);
+
+/** The totality export: the frozen union of both class lists. @type {ReadonlyArray<string>} */
+export const COLUMN_CLASSES = Object.freeze([
+  ...DEMOGRAPHIC_COLUMN_CLASSES, ...MILITARY_COLUMN_CLASSES,
+]);
+
+/**
+ * Does this column belong to the WC lane? Shaped line for line like
+ * `isDemographicColumn`, and FAILS CLOSED the same way: a column with no class, or a class
+ * this module has never heard of, is M4's. That direction is what makes the widening safe
+ * against every save written before it.
+ * @param {{ travelClass?: unknown }|null|undefined} column
+ * @returns {boolean}
+ */
+export function isMilitaryColumn(column) {
+  if (!column || typeof column !== 'object') return false;
+  return MILITARY_COLUMN_CLASSES.indexOf(String(column.travelClass ?? '')) >= 0;
+}
+
 /** The codepoint-stable AGGREGATE column key — one record per origin→dest per
  *  dispatch tick (never per-person). @param {string} o @param {string} d @param {number} t @returns {string} */
 export function columnKey(o, d, t) {
@@ -517,7 +555,7 @@ function columnOf(rec) {
     arrivals,
     departTick: Math.max(0, Math.floor(finiteNumber(r.departTick, 0))),
     arrivalTick: Math.max(0, Math.floor(finiteNumber(r.arrivalTick, 0))),
-    ...(DEMOGRAPHIC_COLUMN_CLASSES.indexOf(travelClass) >= 0 ? { travelClass } : {}),
+    ...(COLUMN_CLASSES.indexOf(travelClass) >= 0 ? { travelClass } : {}),
   };
 }
 
@@ -542,7 +580,7 @@ export function enqueueColumns(ledger, plan, tick) {
   // WAVE P2: the plan's class, stamped onto every column it raises. Absent on an M4
   // plan, so the spread below adds no key and the ledger is byte-identical there.
   const planClass = String((plan && /** @type {{ travelClass?: unknown }} */ (plan).travelClass) ?? '');
-  const stamp = DEMOGRAPHIC_COLUMN_CLASSES.indexOf(planClass) >= 0 ? { travelClass: planClass } : {};
+  const stamp = COLUMN_CLASSES.indexOf(planClass) >= 0 ? { travelClass: planClass } : {};
   for (const d of (plan && Array.isArray(plan.dispatches) ? plan.dispatches : [])) {
     const arrivals = Math.max(0, Math.floor(finiteNumber(d.arrivals, 0)));
     if (arrivals <= 0) continue;
@@ -595,7 +633,12 @@ export function releaseArrivals(worldState, tick) {
     // lanes can never credit the same people twice or under the wrong story. No
     // pre-P2 column carries a class, so this branch is unreachable on every existing
     // world and the release is byte-identical there.
-    if (isDemographicColumn(col)) { next[key] = col; continue; }
+    // WC-0B: and a column the WC lane raised is not this pass's either. Releasing one
+    // would credit lent troops to the destination's POPULATION as an ordinary migration
+    // arrival — outside arrival/arrive_home/shed, and invisible to WC-6's conservation
+    // walker. An unclassed-legacy column, and a class neither list knows, still fall
+    // through to M4 exactly as the docstring above promises.
+    if (isDemographicColumn(col) || isMilitaryColumn(col)) { next[key] = col; continue; }
     if (col.arrivalTick <= now) {
       const bucket = byDest.get(col.destId) || { count: 0, originIds: new Set() };
       bucket.count += col.arrivals;
