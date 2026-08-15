@@ -1,6 +1,7 @@
 # DA / DA-A1 — the chokepoint, the public and PDF tick cure, and the guard that was blind
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `d77c8841`
 - **Verified base:** `claude/composite-r4` at `bd0439d19ec2b3d080b38c083785b103b6e0d545`
 - **Train:** `da-a`, family **DA** (un-stamped, cap 4), landed **second**, on DA-A2's
   recorded allowances. Change paths disjoint from DA-A2, DA-A3 and DA-A4.

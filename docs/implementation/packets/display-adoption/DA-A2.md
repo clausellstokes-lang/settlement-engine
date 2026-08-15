@@ -1,6 +1,7 @@
 # DA / DA-A2 — the recorded DM-tool tick allowance (member 1 of `da-a` as landed)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `646abc7d`
 - **Verified base:** `claude/composite-r4` at `bd0439d19ec2b3d080b38c083785b103b6e0d545`
 - **Train:** `da-a`, family **DA** (un-stamped, cap 4), landed **first** of four. Its change
   paths are disjoint from DA-A1, DA-A3 and DA-A4.

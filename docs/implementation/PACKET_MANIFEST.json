@@ -9990,7 +9990,7 @@
 ,
     {
       "id": "DA-A2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-A2.md",
       "verifiedBase": "bd0439d19ec2b3d080b38c083785b103b6e0d545",
       "changeManifest": [
@@ -10028,6 +10028,9 @@
         }
       ],
       "requiredSymbols": [
+        {"path": "src/components/map/WorldPulsePanel.jsx", "symbol": "prose-leak-allowance: tick 2"},
+        {"path": "src/components/UndoHistoryPanel.jsx", "symbol": "prose-leak-allowance: tick 1"},
+        {"path": "src/components/region/RegionalImpactInbox.jsx", "symbol": "\u00a769.3 PROSE-LEAK ALLOWANCE \u2014 DM-TOOL TIER"},
         {
           "path": "src/components/map/WorldPulsePanel.jsx",
           "symbol": "World Pulse"
@@ -10079,7 +10082,7 @@
     },
     {
       "id": "DA-A1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-A1.md",
       "verifiedBase": "bd0439d19ec2b3d080b38c083785b103b6e0d545",
       "changeManifest": [
@@ -10169,6 +10172,16 @@
         }
       ],
       "requiredSymbols": [
+        {"path": "src/domain/display/humanizeEngineTokens.js", "symbol": "export function tickDurationLabel"},
+        {"path": "tests/helpers/jsxLiteralWalk.js", "symbol": "export function extractJsxProseSegments"},
+        {"path": "tests/helpers/jsxLiteralWalk.js", "symbol": "export const INTERPOLATION_HOLE = '\\u0000';"},
+        {"path": "tests/copy/proseLeak.test.js", "symbol": "function countAdjacencyLeaks(segments)"},
+        {"path": "tests/copy/proseLeak.test.js", "symbol": "function recordedAllowance(rel)"},
+        {"path": "tests/copy/proseLeak.test.js", "symbol": "\u26d4 THE VACUITY, REPRODUCED: the committed flat detector reports NOTHING on a live counter site"},
+        {"path": "tests/copy/proseLeak.test.js", "symbol": "no allowance outlives its site (a stale grant is as dishonest as a missing one)"},
+        {"path": "tests/domain/humanizeEngineTokens.test.js", "symbol": "is not interchangeable with the calendar label at any span in a year"},
+        {"path": "src/pdf/sections/FaithWar.jsx", "symbol": "const WAR_WEARY_CAUSE = Object.freeze({"},
+        {"path": "src/components/surveyor/AutonomyPanel.jsx", "symbol": "prose-leak-allowance: week 4"},
         {
           "path": "src/domain/display/humanizeEngineTokens.js",
           "symbol": "export function tickCalendarLabel"
