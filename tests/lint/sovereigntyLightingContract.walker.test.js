@@ -4192,7 +4192,36 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   census parses each file's OWN bytes, so it sees +1 there, not +8. The runtime
     //   denominator is a FLOOR, not a pin (§P3 rule 5), and is transcribed into the capsule
     //   from the terminal's own executed ratchet receipt rather than predicted.
-    files: 2428, parked: 366, credited: 2062, titles: 20107, suiteTitles: 5653,
+    // ⏱ TRAIN gr-5a, GR-5A THE MONOTONE MEMORY (ONE member), 2026-08-15 — RE-DERIVED WHOLE at
+    // I1, which is this train's ONLY `tests/`-moving commit, so the terminal stays DOCS-ONLY and
+    // the base-state capsule regenerates in ONE commit. Never patched one figure at a time: all
+    // five are re-derived together and the cause is named.
+    //   • The member creates ONE test file, tests/domain/treatyRenewalMemory.test.js, carrying
+    //     ONE literal `describe` and EIGHT literal top-level `it` calls (the packet's eight-case
+    //     acceptance matrix, all four dormancy fences among them):
+    //     +1 file / +0 parked / +1 credited / +8 titles / +1 suite title.
+    //   • The two `src` MODIFY paths, the two REGISTRATION edits, and the SEVENTH PATH's three
+    //     literal edits to tests/domain/subsystemRowsVirtual.test.js move NO registration and
+    //     therefore NO figure.
+    // ⭐⭐ THE SEVENTH PATH IS CENSUS-NEUTRAL BY CONSTRUCTION, AND THAT IS LOAD-BEARING RATHER
+    //   THAN INCIDENTAL (OWNER_DECISION_QUEUE §49 rulings 2 and 3). A certification row is
+    //   mandatory for any engine-gated flag, and authoring one reds the ORDERED-equality pin at
+    //   subsystemRowsVirtual.test.js:384 — so EVERY flag-minting packet from here on names that
+    //   file. Its three edits are a rule const, a VIRTUAL_RULES member and a LANE_LEAVES entry,
+    //   ALL at module scope, adding ZERO `it`/`test`/`describe` titles. If a future flag wave
+    //   spends a TITLE there, this arithmetic breaks and the standing law's pricing is wrong.
+    // ⚠ PARKED IS UNCHANGED AT 366, and it is earned rather than lucky: all eight new titles are
+    //   string LITERALS in a straight-line registration inside ONE literal `describe`, so door 3
+    //   credits the file statically. A `test.each()` case is invisible to this census by
+    //   construction and a `describe.runIf()` parks a file WHOLE — either would have closed this
+    //   arithmetic while measuring nothing, and the packet forbids both by name.
+    // ⭐ A SINGLE-MEMBER TRAIN BUYS A CENSUS WITH NO INTERIOR RED: the acceptance file and this
+    //   re-derived tuple land in the SAME commit, so this walker is GREEN at every commit of the
+    //   train. PACKET_STANDARD's "a member that adds a test file forces this red by construction"
+    //   is a fact about MULTI-member chains; stated affirmatively so no executor cures a red that
+    //   was never predicted.
+    // 2428/366/2062/20107/5653 → 2429/366/2063/20115/5654.
+    files: 2429, parked: 366, credited: 2063, titles: 20115, suiteTitles: 5654,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

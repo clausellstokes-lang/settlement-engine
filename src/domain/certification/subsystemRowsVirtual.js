@@ -1034,6 +1034,60 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // an ATTRIBUTION statement, not a mount one. See the section comment above.
     soakEvidence: 'unobserved',
   }),
+  // ── THE MONOTONE MEMORY (FP GR-5A, docs/DESIGN_FP_ARCH_GR.md §5 GR-5) ──────
+  // AUTHORED, NEVER PENDING. The engine-gated virtual cohort's pending array measures
+  // empty, so there is nowhere to defer to, and manifesting is itself the act that makes a
+  // virtual key censusable and therefore the act that comes due.
+  Object.freeze({
+    rule: 'treatyRenewalEnabled',
+    title: 'The monotone memory (a treaty remembers its worst observed compliance)',
+    module: 'src/domain/worldPulse/pactAmendment.js,src/domain/worldPulse/peaceTerms.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: this wave mints no pulse candidate and composes no beat, so
+      // there is no `candidateType` literal in it to declare.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. BEHAVIORAL_MOVER_FAMILIES is a closed vocabulary of
+      // BEHAVIOURAL families, and the only member this fold could ride is `war` — which
+      // would grade this row ALIVE off the entire war layer's traffic in worlds where the
+      // flag has never been true. The lifecycle-voice row above refuses the same
+      // temptation for the same reason.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND THIS ONE IS THE SHARP CASE. The field is written INSIDE a
+      // treaty record under `spatialLedgers.treaties`, and `censusWorldStateKeys` walks one
+      // level into `spatialLedgers` — so declaring that key would grade this row ALIVE off
+      // the peace engine's OWN writes, which populate that container in every world where
+      // this flag has never been true. There is no per-field channel to declare, so the row
+      // declares nothing rather than declaring a container it does not own.
+      stateKeys: Object.freeze([]),
+      other: 'ONE GATE, ONE WRITE SITE, AND NO CONSUMER AT THIS WAVE. treatyRenewalActive (pactAmendment.js) reads treatyRenewalEnabled by name with the strict === true idiom, and it is the ONE read of this key in the tree; the by-name spelling is load-bearing rather than stylistic, because a frozen-list conjunction is a computed member access and would hide a fully wired flag from the engine-gated-key census entirely. WHAT THIS WAVE BUILDS: one conditional, monotone, drop-when-absent field, worstObservedEver, folded at the single PASS-2 site in advanceTreaties that already computes the tick own worst OBSERVED compliance, plus the reader that resolves absence to honored and the registration. WHY IT EXISTS: complianceState is overwritten every advance from the current tick observation, so a pact strained for a decade and honoured last week reads, on the parchment, as a pact never strained - the record has no memory, and every remaining GR-5 slice needs one. WHAT IT DELIBERATELY DOES NOT BUILD: the renewal window, the renewal trigger producer, the mid-term renegotiation demand, the conversion arm, any lineage act, any ending, any provenance value, any news kind or Herald desk, any dossier line, any read-model key, and any band, threshold, cap or authored number - GR-5 as chartered is six behaviours and five bands, and every successor needs a chair-signed band under the value-derivation law before it can be written at all. THE FIELD IS OBSERVED, NEVER TRUE: its source is the fogged register a court actually has, so an undetected cheat leaves no memory, because the engine models what courts believe. IT IS MONOTONE AND HAS NO CLEARER: it moves up the rankState ordering and never down, and no code path deletes it. TWO BRANCHES ARE EXCLUDED BY CONSTRUCTION and both are pinned rather than assumed - the all-terms-lapsed prune and the repudiation shell each continue before the fold, so a spent instrument and a torn-up one gain nothing. THE READER IS EXPORTED AND UNCONSUMED IN src BY DESIGN (the GR-0 handoff idiom): the count is structurally zero on every generated world at this wave, and that is the wave identity claim rather than a blind spot - the pin reds the day the conversion gate wires it, which is the handoff signal. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt carrying a per-treaty compliance-history distribution, which no census reads today and which the GR-7 collector section owes.',
+    }),
+    // The fold runs inside advanceTreaties PASS 2, which the pulse runs every tick on every
+    // live treaty — so when the flag is lit the write site is reached per tick, even though
+    // the VALUE moves rarely and monotonically.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_memory_is_gated',
+        description: 'With the flag absent or false the fold expression is never evaluated - not merely harmless but unreached - so no treaty record gains the key and a dark world is byte-identical to the pre-GR-5A engine. Drop-when-absent means the key is never written as null and never backfilled, so an emptied campaign stays indistinguishable from a dormant one.',
+        check: 'NOT expressible from a receipt: no census reads per-treaty fields. Pinned in tests/domain/treatyRenewalMemory.test.js by an own-footprint golden captured at the verified base, an absent-versus-false differential, and a call-path spy on the fold helper - each anchored against a lit control that DOES write, without which the fence would prove only that the fixture is quiet.',
+      }),
+      Object.freeze({
+        name: 'the_fold_is_monotone_and_ordered_by_rankState',
+        description: 'The memory moves UP the rankState ordering and never down: a treaty that strains and then recovers keeps strained. The comparator is the peace family own rankState rather than a raw string comparison, which would sort defaulted before honored before strained alphabetically and silently invert the fold on the exact case the field exists to record.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/treatyRenewalMemory.test.js over TWO ticks driven through the REAL advanceTreaties, feeding the first tick own output world back in - a single-tick harness cannot tell a memory from a level, and a hand-built record could never see a dead arm.',
+      }),
+      Object.freeze({
+        name: 'absence_reads_honored_and_nothing_migrates',
+        description: 'A record written before this wave existed carries no key and every reader tolerates that forever, resolving to honored at READ without writing the resolved default back - the provenanceOf and treatyTicksPerYear discipline verbatim. The field therefore records history SINCE LIGHTING, which is declared rather than implied.',
+        check: 'NOT expressible from a receipt: legacy records are indistinguishable from dark ones in any census. Pinned in tests/domain/treatyRenewalMemory.test.js by a JSON round-trip of a multi-tick record and a legacy record with no key read through worstObservedEverOf.',
+      }),
+    ]),
+    // No channel is declared, so the row can never be ALIVE and says so. `unobserved` rather
+    // than `indirect` is the honest reading and the instrument itself ruled the distinction:
+    // a row that DECLARES a channel and still calls the soak blind to it converts a real
+    // SILENT into an instrument GAP, and that population is ceilinged.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

@@ -148,7 +148,7 @@ import { joinAnchorOf } from './warCoalitionLedger.js';
 import { applyCoalitionReimbursement, applyCoalitionSettlement } from './warCoalitionSettlement.js';
 
 // ── THE FAMILY (see the header) ─────────────────────────────────────────────
-import { absorbWarEndIntoStandingPact } from './pactAmendment.js';
+import { absorbWarEndIntoStandingPact, treatyRenewalActive, worstObservedEverAfter } from './pactAmendment.js';
 import {
   COALITION_BETRAYAL_CHARACTER_TUNING, PEACE_TERMS_TUNING, TERM_CATALOG,
   TERM_EXECUTORS, TERM_FAMILIES, TERM_TYPES, termLabel,
@@ -347,7 +347,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   const congressClosures = [];
   /** @type {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} */
   const dispositionDeltas = []; const dispositionChannelsActive = dispositionTreatyLearningActive(worldState);
-  const lifecycleVoiceLit = treatyLifecycleVoiceActive(worldState);
+  const lifecycleVoiceLit = treatyLifecycleVoiceActive(worldState); const renewalMemoryLit = treatyRenewalActive(worldState);
   let workingSettlementUpdates = settlementUpdates;
   // The tick's conserved granary movements, accumulated across every stream term and
   // folded onto settlementUpdates ONCE at the end (the generosity mover's idiom): a
@@ -756,7 +756,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       continue;
     }
     treaty.terms = liveTerms;
-    treaty.complianceState = worstObserved;
+    treaty.complianceState = worstObserved; if (renewalMemoryLit) treaty.worstObservedEver = worstObservedEverAfter(treaty, worstObserved);
     // GR-0 THE DETECTION BEAT — keyed on the OBSERVED CROSSING, never on the level. The
     // `prevLedger?.[key]` arm is load-bearing rather than defensive: a treaty minted THIS
     // tick has been observed once, and one observation is a level. Without it a single-tick

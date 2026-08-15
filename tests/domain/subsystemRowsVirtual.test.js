@@ -138,12 +138,24 @@ const POLITICS = 'settlementPoliticsEnabled';
 // that does — and neither literal is attributable to this flag. See
 // SHARED_CANDIDATE_LITERALS.
 const UNDERWAYS = 'underwaysOrganicFoundingEnabled';
+// Joined 2026-08-15 by FP wave GR-5A, with its manifest entry and its first by-name gate read
+// in one commit. ⭐⭐ AND IT IS WHY THIS FILE IS NOW A NAMED PATH ON EVERY FLAG-MINTING PACKET
+// (OWNER_DECISION_QUEUE §49 ruling 3, standing, all volumes). A certification row is MANDATORY
+// — engineGatedRuleKeys' `manifestWithoutRow` arm demands one for every manifest key — and
+// authoring it reds the ordered equality below BY CONSTRUCTION, so a packet that reserves the
+// row's file and not this one has no lawful shape at all. GR-5A's first compile reserved six
+// paths, stopped at I1 on exactly that contradiction, and was re-promoted on a seven-path
+// manifest; HB-2 had already paid the same cost as its deviation D2 and GAP-1 before it. Three
+// independent discoveries make it the habitat rather than the instance, and the cost is always
+// these THREE module-scope edits — this const, the VIRTUAL_RULES member, the LANE_LEAVES entry
+// — carrying ZERO new test titles, so no packet's census tuple moves for it.
+const TREATY_RENEWAL = 'treatyRenewalEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
   CONQUEST, HABIT, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
-  POLITICS, UNDERWAYS,
+  POLITICS, UNDERWAYS, TREATY_RENEWAL,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -156,6 +168,12 @@ const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule
  * whole module list would measure other subsystems' vocabulary.
  */
 const LANE_LEAVES = Object.freeze({
+  // GR-5A. ONE FILE, and unusually the whole lane really is one file: the gate where the flag
+  // is read and the two pure folds where the bodies are all live in pactAmendment.js. The
+  // MOVER that assigns the field — peaceTerms.js — is in the row's wider `module` list and
+  // deliberately NOT here: it is the peace engine's own 797-line head, and tracing this lane's
+  // candidate claims through it would measure the entire war-and-peace layer's vocabulary.
+  [TREATY_RENEWAL]: ['src/domain/worldPulse/pactAmendment.js'],
   // HB-2. The door where the flag is read and the leaf where the bodies are. ⛔ Both are
   // ZERO-CANDIDATE by construction — this wave mints no pulse candidate and composes no beat,
   // which is why its row's eventTypes is empty rather than merely unfilled.
