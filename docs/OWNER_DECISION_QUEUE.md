@@ -2865,3 +2865,34 @@ first push via pull request"**
    fixes); under §§72–74 the per-family cost drops again while every
    gate keeps full strength.
 
+## §75 · IN-1C-A: J-TE13-4 RULED — OPTION 2 (2026-08-15, chair,
+## vetoable; evidence in laneTE13-receipt.md §4.3, the four cures priced)
+
+1. **OPTION 2 IS THE RULING**: the new IN-family walker's
+   mutation-coverage row lands as one `rationale` row with a NEW ref
+   authored for the IN family — two surgical inserts, never a
+   re-serialization — the exact shape GRAMMAR and COMMERCIAL took on
+   landing, and honest: arms 5 and 6 are in-suite MUTANT CONTROLS
+   proven to THROW on every ordinary run, so the rationale describes
+   real convicting power. Option 1 REFUSED (a true row pointing at
+   prose that does not describe it); option 3 CLOSED (the sweep's
+   `git checkout --` on a live shared tree, thrice-prohibited);
+   option 4 REFUSED (the HZ-MUTATIONNAMING dodge, and vacuous —
+   `tests/lint/` is itself an enforcer dir).
+2. J-TE13-1 (P1 reds two `path does not exist` rows by GR-4B
+   precedent, third row = STOP), J-TE13-2 (the folded ninth case),
+   J-TE13-3 (the floors bound CURED NOT LOWERED — non-emptiness plus
+   an exact exception list naming INFORMATION alone, strictly
+   stronger), and D6/D7/D8 are ALL RATIFIED. The executor's
+   ratchet-kill honesty (`RATCHET_TRUE_EXIT=143` = its own SIGTERM,
+   not cited; flips reverted under a live runner, measured directly
+   instead) is ratified as correct conduct — the receipt-vacuity law
+   held exactly where it was designed to.
+3. **TE14 IS DISPATCHED to complete the terminal from the parked
+   implementation with no rebuild**: apply the option-2 row +
+   rationale → author T (flip LANDED, capsule FLIP-THEN-GENERATE
+   with a fresh executed ratchet receipt) → the one bare terminal
+   gate + the separate boot smoke, exits from the gate-tail's own
+   lines → close `refs/trains/in-1c-a`. The chair CASes at
+   collection with the §61 increment.
+
