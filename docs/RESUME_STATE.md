@@ -208,7 +208,16 @@ census, blast radius MEASURED, output-neutral-vs-declared-shift verdict
 required). Tier boundary 240-vs-400 joins est; 'capital' ghost + "tiny
 hamlet" copy join prose; "campaign" double-duty SURFACED owner-visible with
 the keep-labels recommendation; CR-IN1C-DRIFT census grew 9→19.
-**LIVE (four lanes): TE12(INT-3B executing) · RN-C(normalizer cure) ·
+**⛔→✅ TE12 STOPPED AT I1 (~08:50) — RATIFIED + RELAND ORDERED §58 (ledger
+`9dddba5a`):** the member is FULLY GREEN (census exact in one run, OSR 1998
+earned live, six walkers) — the refutation hit a MUTANT'S PROMISED SECOND
+DOOR: `readsByPattern` scans only INNERMOST brace groups (nested literals
+evade; zero live evaders measured — latent). The quoted-literal decision
+SURVIVES STRENGTHENED (A8's positive pin convicted M2 alone). The detector
+gap is DOCKETED (the scan-cure family). **TE12 RESUMED: re-point the parked
+green I1 (`28d2824b`), amend the M2 claim honest, author T, both gates held
+from tails.** Chair owns CAS.
+**LIVE (four lanes): TE12(INT-3B relanding) · RN-C(normalizer cure) ·
 TC14(WC-0 compile — the
 first fully-§48-treated family opening; the six house lines drafted for
 chair signature; the PACKET_STANDARD prose member riding) · R-EST (§51
