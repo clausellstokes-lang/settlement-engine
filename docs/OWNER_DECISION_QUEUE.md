@@ -4402,3 +4402,21 @@ before you do the full soak and tune."**
    the privacy-law obligations; the tm trains slot after the
    micro-batch, beside the family builds, AHEAD of launch by
    construction.
+
+### §117a · THE SOAKS JOIN tm'S CONSUMERS (owner insight, 2026-08-15:
+### "it would also help to inform the soak wouldn't it? both diagnostic
+### and 300 year" — ruled, and it RESEQUENCES the family)
+
+The event taxonomy gains a SIMULATION-METRICS class: the headless soak
+harness emits per-tick/per-epoch world metrics (population curves,
+stressor rhythms, war/peace cadence, economy bands, belief stats, the
+finding classes) into the SAME closed taxonomy, same storage, same read
+layer — one taxonomy, two capture paths. **tm-core (taxonomy + storage
++ read layer, headless-capable) advances to BEFORE THE DIAGNOSTIC
+SOAK** so the first soak flows through real analytics and the 300-year
+tuning curves (the population-runaway trajectory, the tuning pass's
+prime input) arrive as first-class aggregations; the client-capture
+half stays pre-launch. The walls restated: the emitter is read-side,
+provably outside the deterministic core, covered by the same
+scan-walker; the simulation class carries no PII as a TYPED property.
+The charter lane received the addendum in flight.
