@@ -2330,3 +2330,33 @@ EXECUTION SERIALIZES behind INT-3B (one engine worktree).
    that file's fold obligation (cure-at-fold); WV's R32 recorded CURED.
 6. **THE EXECUTOR QUEUE (one worktree, serial):** INT-3B reland (running) →
    IN-1C-A (ruled §55) → est-1 (on TC15's ruling) → the wc-0 train.
+
+## §60 · EST-1 RULED ON THE CORRECTED CURES (2026-08-16 ~11:20, chair,
+## vetoable; evidence in laneTC15-report.md, every correction EXECUTED)
+
+1. **⛔⛔ THE E-1 RECLASSIFICATION IS THE HEADLINE: a LIVE TOTAL OUTAGE, not
+   fixture rot** — confirming any auto-discovered supply chain THROWS today
+   (the writer emits '' for both icons deliberately and pinned; the
+   admission validator rejects ''). The charter's fixture patch would have
+   greened three guards over a user-facing outage. **Q1 RULED: REPAIR, per
+   the four measured grounds** — the admission side admits the writer's
+   deliberate empty-icon output (proven: cured → ADMITTED; non-empty →
+   chains byte-identical, no persisted hash moves). The persistence-
+   admission grazing is noted on the veto surface per the standing law.
+2. **The corrected E-2 is SIGNED** (a boundary anchor, not a wider number;
+   burns a FOURTH banked row the charter missed; both XSS negatives hold;
+   the blind branch enters the scan) and **the corrected E-3 is SIGNED**
+   (the chartered rewrite measured ZERO — the parks are TEST_CONTEXT_PARAM,
+   and credit is remove-only; the SP-D spell-out + roster-totality guard
+   replacement adopted).
+3. **The member order EST-A(E-2) → EST-B(E-3) → EST-C(E-1) is SIGNED** —
+   the owner-gate-grazing member can never be the green prefix, and the
+   ratchet re-freeze must not launder F6's false cause as freshly measured.
+   **Staged promotion is LAW for this train (proven mandatory: co-promotion
+   reds 3 duplicate paths).** The ratchet-repair-returns-0 correction and
+   the detached TEST_RATCHET_SHA re-freeze procedure are ratified.
+4. ⚠ The absolute tuples are BASE-BOUND (a concurrent lane moves the census
+   before est-1 executes): the per-file DELTA table is the durable product;
+   the executor re-derives the base tuple and applies deltas. est-1 stays
+   THIRD in the §59.6 executor queue. Ratchet trajectory 16 → 12 across
+   the train.
