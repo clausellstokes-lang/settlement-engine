@@ -4303,3 +4303,39 @@ before you do the full soak and tune."**
    via §61 increments; premise maps re-verify at every train.
    Convictions from the burn join audit-zero as micro-batch members
    (each cure = the missing detection arm, never a widened scan).
+
+## §115 · THE dom COMPILE ACCEPTED — DOM-3 HELD AT THE OWNER'S OWN
+## GATE (2026-08-15, chair, vetoable; evidence laneTC22-DOM-PLAN.md
+## 43 KB + laneTC22-report.md, eleven TTS shapes executed)
+
+1. **J-TC22-1..4 ARE SIGNED**: the one-train shape with DEPLOY.md
+   given to DOM-2 alone (validator-convicted twice on the naive
+   shape, clean as ruled); dom-1 DERIVES-OR-DELETES its machine
+   figures (the ruled citation went stale in-window — the baseline
+   moved to 28,158/12-across-7; the three-referent split 17/22/14
+   respected, four sites correct as written, two double-wrong sites
+   added); dom-2's pin gains the RESOLVER ARM (truth is 50 consumed
+   names, not 47 — the literal arm alone ships vacuous on the
+   cron-worker secrets; DEPLOY names 17 not 16; the documented
+   deliberate exclusion expressible only with the resolver);
+   dom-3's CTA becomes "Request a chair" NAVIGATING to the
+   already-built §5b letterbox (satisfying §5+§5b while refusing a
+   chunk-boundary regression), the fail-closed checkout shape with
+   ABOLISHED_PRODUCTS and the webhook refund path KEPT.
+2. **⛔ DOM-3 IS HELD — an OWNER-SIDE precondition recorded in the
+   file itself**: the purchase-path removal is gated on a NEVER-SOLD
+   verification against the seat ledger and purchase history
+   (DESIGN_FOUNDERS_HALL §1 grandfathers any ever-sold seat, test
+   purchases included, with different copy). The undeployed-webhook
+   inference is strong and is NOT the verification. Carried as the
+   signed DOM.U2 fork with a STOP clause; **the owner is asked
+   in-chat: has any founder_lifetime seat EVER been sold?** DOM-1
+   and DOM-2 dispatch without it (path-disjoint; DOM-2 is the
+   launch blocker).
+3. **dom-4 IS MINTED**: `src/copy/en.js:611` tells every new user
+   the rail shows "fourteen steps" against the real 22 — rendered
+   product copy outside §87.1's scope, its own micro-member (never
+   buried in the veto packet). R1 discharged reciprocally
+   {dom, da-a}, the micro-batch honestly reported still-unconvicted.
+   **TE22 runs da-a now**; queue: da-a → da-b → dom-1+2(+4) → the
+   micro-batch → EP → the family trains.
