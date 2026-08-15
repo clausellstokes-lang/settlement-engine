@@ -4370,3 +4370,35 @@ before you do the full soak and tune."**
    prevention over guard-by-guard probing; the remaining 33 ranked
    probes and the 201 rationale-row audit follow the fold, cheaper.
    Four proven receipts recorded never-re-probe. J-GV1-1..6 SIGNED.
+
+## §117 · THE TELEMETRY/ANALYTICS BUILD UN-PARKED — COLLECTION FROM
+## FIRST LAUNCH (owner, verbatim, 2026-08-15: "I do. I want them to
+## start from the very first launch collecting data.")
+
+1. **THE COLLECTION PIPELINE IS NOW LAUNCH-BLOCKING**: the tm family
+   is minted — tm-1 (event capture, client+server, under the R-SEC
+   privacy posture: masking, peppered hashes, consent, durable
+   deletion joining the existing machinery), tm-2 (storage schema +
+   RLS — a schema act, authorized BY this order, still built with
+   the full migration-train discipline), tm-3 (the analytical read
+   layer per the standing Atlas read-only verdict). Launch-cohort
+   data cannot be collected retroactively — hence launch-blocking.
+2. **The SURFACES un-park with a lawful trail**: the intent atlas,
+   the capability/tier ladder, and the chat surface are chartered
+   from their archived design volumes (exhumed from the ledger
+   branch) and build in this program; collection (tm-1/2) leads and
+   must be live at first launch, the consuming surfaces may trail it
+   (data collected from day one is processable retroactively —
+   the reverse is not). Vetoable split.
+3. **THE STANDING WALLS SURVIVE UNCHANGED AND GAIN A WALKER**:
+   telemetry informs SUGGESTION, never engine math — no
+   telemetry-derived value may reach the deterministic engine (THE
+   PROMISE observes-never-influences); the wall becomes a scan-
+   enforced walker in tm-1's own train (the hazard-conversion law:
+   the constraint is machinery from birth, never convention).
+4. **Lane TM-C charters the family** (Fable): exhume the three
+   archived designs, resolve their open questions into a charter,
+   price the §42/§43 derivation homes, the §49/§50+§85.4 bills, and
+   the privacy-law obligations; the tm trains slot after the
+   micro-batch, beside the family builds, AHEAD of launch by
+   construction.
