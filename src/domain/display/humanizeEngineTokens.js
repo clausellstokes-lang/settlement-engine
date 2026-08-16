@@ -185,6 +185,7 @@ export function humanizeFlagKey(key) {
  * DISCOVERED-BUT-UNCONFIRMED, so a confident word like "Fragile" would tell the
  * reader something the value does not mean.
  */
+/** @type {Readonly<Record<string, Readonly<Record<string, string>>>>} */
 const DISPLAY_LEXICON = Object.freeze({
   tradeRouteAccess: Object.freeze({
     crossroads: 'Trade crossroads',
