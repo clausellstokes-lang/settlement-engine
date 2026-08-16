@@ -1,6 +1,6 @@
 # GVF / GVF-2 — the anti-vacuity CLASS FOLD (member 2 of `gvf`, §116.3)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `ec7443301ec74325cd051890d0e99ed452bd8ad5`
   (the `gv` terminal; the micro-batch's third train base)
 - **Train:** `gvf`, family **GVF**, member **2** of 3.

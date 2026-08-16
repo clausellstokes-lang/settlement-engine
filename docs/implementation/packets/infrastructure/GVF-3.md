@@ -1,6 +1,6 @@
 # GVF / GVF-3 — the admin search LIKE-wildcard strip (member 3 of `gvf`, SECURITY, §62.2)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `ec7443301ec74325cd051890d0e99ed452bd8ad5`
   (the `gv` terminal; the micro-batch's third train base)
 - **Train:** `gvf`, family **GVF**, member **3** of 3.

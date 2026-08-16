@@ -1,6 +1,6 @@
 # GVF / GVF-1 — rawColorLiteral: re-record EXACT, and see the template form (member 1 of `gvf`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `ec7443301ec74325cd051890d0e99ed452bd8ad5`
   (the `gv` terminal; the micro-batch's third train base)
 - **Train:** `gvf`, family **GVF**, member **1** of 3. All three members are path-disjoint

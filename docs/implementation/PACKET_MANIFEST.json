@@ -11639,10 +11639,6 @@
         {
           "path": "tests/lib/spatialLedgerCoverage.walker.test.js",
           "symbol": "const TRACKED_TO_MOVER"
-        },
-        {
-          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
-          "symbol": "titles: 20286, suiteTitles: 5689,"
         }
       ],
       "retiredSymbols": [
@@ -11700,7 +11696,7 @@
     },
     {
       "id": "GVF-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GVF-1.md",
       "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
       "changeManifest": [
@@ -11725,6 +11721,18 @@
         {
           "path": "tests/lint/rawColorLiteral.test.js",
           "symbol": "ruleTester.run('no-raw-color-literal'"
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "const BUDGET = 1335;"
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "const TEMPLATE_BUDGET = 1;"
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "export function countColorsInSource"
         }
       ],
       "retiredSymbols": [
@@ -11778,7 +11786,7 @@
     },
     {
       "id": "GVF-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GVF-2.md",
       "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
       "changeManifest": [
@@ -11823,6 +11831,30 @@
         {
           "path": "tests/security/mapForkXssChain.test.js",
           "symbol": "describe('wave-2 layer E"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "function inFoldScope(rel)"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function findSameLineConjunctions"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function findUnconsumedGateCalls"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function conjunctionProbes"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "'(,=:[!&|?{;}>'.includes(prev)"
+        },
+        {
+          "path": "tests/security/mapForkXssChain.test.js",
+          "symbol": "sinkStatementOffenders(CLOUD_CODE"
         }
       ],
       "retiredSymbols": [
@@ -11887,7 +11919,7 @@
     },
     {
       "id": "GVF-3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GVF-3.md",
       "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
       "changeManifest": [
@@ -11916,6 +11948,14 @@
         {
           "path": "tests/edgeFunctions/contracts.test.js",
           "symbol": "readFunction('admin-actions')"
+        },
+        {
+          "path": "supabase/functions/admin-actions/index.ts",
+          "symbol": "rawSearch.replace(/[,()*\\\\%_]/g, \" \")"
+        },
+        {
+          "path": "tests/edgeFunctions/contracts.test.js",
+          "symbol": "list_users strips LIKE wildcards"
         }
       ],
       "retiredSymbols": [
