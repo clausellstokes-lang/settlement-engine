@@ -11187,6 +11187,137 @@
           "tests/lint/sizeBaseline.test.js"
         ]
       ]
+    },
+    {
+      "id": "DCS-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DCS-1.md",
+      "verifiedBase": "b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4",
+      "changeManifest": [
+        {
+          "action": "DOC",
+          "path": "docs/implementation/PACKET_STANDARD.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Change manifest"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Registration obligations a wave prices at compile"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "PACKET_STANDARD.md carries 101.4's cure and the phrase 'preserves or creates' is gone from the requiredSymbols rule"
+        },
+        {
+          "id": "A2",
+          "case": "the registration-obligations section enumerates THREE mint classes, the third being the tests/lint/ coverage row"
+        },
+        {
+          "id": "A3",
+          "case": "an Ungated persistence section exists and states the unconditional rule with its authority"
+        },
+        {
+          "id": "A4",
+          "case": "an Edge-shared bundle closures section exists, generalises past simulationRules.js, and names the narrow clause"
+        },
+        {
+          "id": "A5",
+          "case": "the census-burn law text already present is byte-unchanged and is not re-landed"
+        },
+        {
+          "id": "A6",
+          "case": "the exact live CLAIM_RE finds zero matches across every added body line"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/enforcement-claims.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/docs/enforcedByExists.test.js",
+          "tests/scripts/implementationSession.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "DCS-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DCS-2.md",
+      "verifiedBase": "b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4",
+      "changeManifest": [
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_ES.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DESIGN_FP_ARCH_IN.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "docs/DESIGN_FP_ARCH_ES.md",
+          "symbol": "THE VOICE + THE MEASURE"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_IN.md",
+          "symbol": "THE PRICES BECOME LAW"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "all seventeen anchors resolve exactly once against the live bytes before any write"
+        },
+        {
+          "id": "A2",
+          "case": "ES gains the ES-Da bullet inside the C1 amendment blockquote, between the C1 and C2 bullets"
+        },
+        {
+          "id": "A3",
+          "case": "ES gains the 49/50 preflight sentence after the bundle clause's own sentence completes"
+        },
+        {
+          "id": "A4",
+          "case": "the 'IN-0c is owed but BLOCKED' reading is gone from all three IN sites"
+        },
+        {
+          "id": "A5",
+          "case": "neither IN-5 nor IN-8 states a current count; both carry a derive-at-build pointer"
+        },
+        {
+          "id": "A6",
+          "case": "the live CLAIM_RE match count does not increase in either volume"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/enforcement-claims.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/docs/architectureFreshness.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
