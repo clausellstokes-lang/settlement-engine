@@ -43,7 +43,107 @@ const REQUIRED = [
 // is a low-value follow-up, tracked here so it is visible rather than silently missed.
 const DEFERRED = ['verify-checkout-session'];
 
-const importsGate = (src) => /_shared\/sessionGate\.ts/.test(src) && /isSessionSuperseded\s*\(/.test(src);
+// ── THE GATE IS BOUND TO ITS CONSEQUENCE, NEVER MERELY PRESENT ─────────────────────
+// ⛔ THE DEFECT THIS REPLACES. The census used to ask two presence questions —
+// "does the file import _shared/sessionGate.ts" AND "does the token
+// `isSessionSuperseded(` appear anywhere" — and call that coverage. Presence is not
+// enforcement: `if (false && await isSessionSuperseded(...))` satisfies BOTH halves
+// and evicts nobody, and the five money surfaces at the roster's tail have NO belt
+// behind them, so this scan is their only enforcement. A guard that can be satisfied
+// by a call whose result is discarded is asserting that someone typed a name.
+//
+// THE CURE. The call must sit in the CONDITION of an `if` whose consequent answers
+// 401, and the condition must be live. Shapes are enumerated here by name; a shape
+// that is not in this list is a RED, never a new allowlist row.
+//
+//   SHAPE 1 — braced:    if (await isSessionSuperseded(...)) { return json(..., 401, cors); }
+//   SHAPE 2 — unbraced:  if (await isSessionSuperseded(...)) return json(..., 401, cors);
+//   SHAPE 3 — guarded:   if (!x && await isSessionSuperseded(...)) { …audit…; return …401…; }
+//   SHAPE 4 — raw Response: the consequent builds `new Response(..., { status: 401, … })`
+//
+// All four are LIVE in the tree today and every one of them is admitted by the same
+// rule rather than by four special cases: the consequent — block or single statement
+// — must carry the 401, and no conjunct of the condition may be a falsy literal.
+
+/** Offsets of every `isSessionSuperseded(` CALL (the import mention is not a call). */
+const gateCallOffsets = (src) => [...src.matchAll(/isSessionSuperseded\s*\(/g)].map((m) => m.index);
+
+/** Balanced-scan from an opening bracket to its partner; -1 when unbalanced. */
+function matchBracket(src, open, openCh, closeCh) {
+  let depth = 0;
+  for (let i = open; i < src.length; i += 1) {
+    if (src[i] === openCh) depth += 1;
+    else if (src[i] === closeCh) { depth -= 1; if (depth === 0) return i; }
+  }
+  return -1;
+}
+
+/** Split a condition on top-level `&&`, so a falsy conjunct can be seen. */
+function conjuncts(condition) {
+  const parts = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < condition.length; i += 1) {
+    const ch = condition[i];
+    if (ch === '(' || ch === '[' || ch === '{') depth += 1;
+    else if (ch === ')' || ch === ']' || ch === '}') depth -= 1;
+    else if (depth === 0 && ch === '&' && condition[i + 1] === '&') {
+      parts.push(condition.slice(start, i)); start = i + 2; i += 1;
+    }
+  }
+  parts.push(condition.slice(start));
+  return parts.map((p) => p.trim());
+}
+
+const DEAD_LITERAL = /^(?:false|0|null|undefined|''|""|``)$/;
+
+/**
+ * Why this source does or does not ENFORCE the single-session gate. Returns the
+ * problems by name — an empty array is enforcement, and every non-empty result says
+ * which of the four shapes the file failed to present.
+ */
+function gateEnforcementProblems(src) {
+  if (!/_shared\/sessionGate\.ts/.test(src)) return ['does not import _shared/sessionGate.ts'];
+  const calls = gateCallOffsets(src);
+  if (calls.length === 0) return ['imports the gate but never CALLS isSessionSuperseded'];
+  const problems = [];
+  for (const at of calls) {
+    const before = src.slice(0, at);
+    // the nearest `if (` whose condition still encloses this call
+    let ifAt = -1;
+    for (const m of before.matchAll(/\bif\s*\(/g)) ifAt = m.index;
+    if (ifAt === -1) { problems.push('a gate call sits outside any `if` condition'); continue; }
+    const openParen = src.indexOf('(', ifAt);
+    const closeParen = matchBracket(src, openParen, '(', ')');
+    if (closeParen === -1 || closeParen < at) {
+      problems.push('a gate call is evaluated outside the `if` condition that precedes it');
+      continue;
+    }
+    const dead = conjuncts(src.slice(openParen + 1, closeParen)).filter((c) => DEAD_LITERAL.test(c));
+    if (dead.length > 0) {
+      problems.push(`the gate condition carries a dead literal conjunct (${dead.join(', ')}) — it can never evict`);
+      continue;
+    }
+    let cursor = closeParen + 1;
+    while (cursor < src.length && /\s/.test(src[cursor])) cursor += 1;
+    let consequent;
+    if (src[cursor] === '{') {
+      const end = matchBracket(src, cursor, '{', '}');
+      consequent = end === -1 ? '' : src.slice(cursor, end + 1);
+    } else {
+      const semi = src.indexOf(';', cursor);
+      consequent = src.slice(cursor, semi === -1 ? src.length : semi + 1);
+    }
+    if (!/\b401\b/.test(consequent)) {
+      problems.push('a gate call is made but its consequent never answers 401 — the result is unconsumed');
+      continue;
+    }
+    return []; // one lawful, live, 401-answering shape is enforcement
+  }
+  return problems;
+}
+
+const importsGate = (src) => gateEnforcementProblems(src).length === 0;
 const usesSpendBelt = (src) => /rpc\(\s*['"]spend_credits['"]/.test(src);
 
 // The 11 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
@@ -87,6 +187,63 @@ describe('single-session census — request-layer coverage is TOTAL (every paid 
 
   it('the deferred set is explicitly recorded (documented, not a silent gap)', () => {
     expect(DEFERRED).toContain('verify-checkout-session');
+  });
+
+  // ── ANTI-VACUITY CONTROLS (§75 idiom) ────────────────────────────────────────────
+  // ⛔ The census above asserts a universally quantified POSITIVE over a roster, which
+  // is green both when every surface enforces and when the predicate has stopped
+  // discriminating. These arms fix the predicate's meaning to fixtures whose verdicts
+  // are known, so "all sixteen pass" says something.
+  it('MUTANT CONTROL — the neutered `false &&` form is REFUSED, not counted as coverage', () => {
+    // The exact shape a probe planted to prove the old presence-scan was vacuous: it
+    // imports the gate, calls it, and evicts nobody. The old conjunction passed it.
+    const neutered = [
+      "import { isSessionSuperseded } from '../_shared/sessionGate.ts';",
+      'if (false && await isSessionSuperseded(admin, user.id, authHeader, label)) {',
+      "  return json({ error: 'session_superseded' }, 401, cors);",
+      '}',
+    ].join('\n');
+    const problems = gateEnforcementProblems(neutered);
+    expect(problems).toHaveLength(1);
+    expect(problems[0]).toMatch(/dead literal conjunct/);
+    expect(importsGate(neutered)).toBe(false);
+  });
+
+  it('MUTANT CONTROL — a call whose RESULT IS NEVER CONSUMED is refused', () => {
+    const unconsumed = [
+      "import { isSessionSuperseded } from '../_shared/sessionGate.ts';",
+      'const superseded = await isSessionSuperseded(admin, user.id, authHeader, label);',
+      'return json({ ok: true }, 200, cors);',
+    ].join('\n');
+    expect(gateEnforcementProblems(unconsumed)).toEqual(
+      expect.arrayContaining([expect.stringMatching(/outside any `if` condition/)]),
+    );
+  });
+
+  it('MUTANT CONTROL — a gate whose consequent does not answer 401 is refused', () => {
+    const wrongAnswer = [
+      "import { isSessionSuperseded } from '../_shared/sessionGate.ts';",
+      'if (await isSessionSuperseded(admin, user.id, authHeader, label)) {',
+      "  return json({ error: 'session_superseded' }, 200, cors);",
+      '}',
+    ].join('\n');
+    expect(gateEnforcementProblems(wrongAnswer)).toEqual(
+      expect.arrayContaining([expect.stringMatching(/never answers 401/)]),
+    );
+  });
+
+  it('POSITIVE CONTROLS — all four shapes the tree actually uses are ADMITTED', () => {
+    // The rule is not "reject everything". Each of these is live in the roster above,
+    // and each is named in the shape list at the top of this file.
+    const IMPORT = "import { isSessionSuperseded } from '../_shared/sessionGate.ts';";
+    const braced = `${IMPORT}\nif (await isSessionSuperseded(a, b, c, d)) {\n  return json({ error: 'session_superseded' }, 401, cors);\n}`;
+    const unbraced = `${IMPORT}\nif (await isSessionSuperseded(a, b, c, d)) return json({ error: 'session_superseded' }, 401, cors);`;
+    const guarded = `${IMPORT}\nif (!wantsTokenAbort && await isSessionSuperseded(a, b, c, d)) {\n  if (caseId) { await admin.rpc('_log', {}); }\n  return json({ error: 'session_superseded' }, 401);\n}`;
+    const rawResponse = `${IMPORT}\nif (await isSessionSuperseded(a, b, c, d)) {\n  return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: {} });\n}`;
+    expect(gateEnforcementProblems(braced)).toEqual([]);
+    expect(gateEnforcementProblems(unbraced)).toEqual([]);
+    expect(gateEnforcementProblems(guarded)).toEqual([]);
+    expect(gateEnforcementProblems(rawResponse)).toEqual([]);
   });
 
   // Tier 0.5 trust-boundary extension (§6.3/LAW 2): founder-transfer is a NEW
