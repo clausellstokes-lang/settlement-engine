@@ -49,7 +49,18 @@
 | S31 | Pestilence front is a genuine traveling arc; materializes the ONE canonical `disease_outbreak` stressor; burial line is food-gated only | `pestilenceKernel.js:7-14, 223-234`; `demographicsHerald.js:175` | VERIFIED |
 | S32 | Certification: `demographicsEnabled` row soakEvidence 'indirect'; the v5 stateKeys census walks `spatialLedgers` one level — a NEW ledger key is automatically census-visible | `certification/subsystemRowsGrowth.js:214-217`; the census mechanics recorded at :189-190 (upswing row) | VERIFIED |
 | S33 | v5 realm demography instrument, additive, null-on-dark | `demographicsObservation.js:103` `measureRealmDemography`; wired `scripts/audit/behavioral-observation.mjs:~868-914` (note: path is scripts/audit/, the volume never named it) | VERIFIED |
-| S34 | Push side: FIVE drivers each guarded; VOLUNTARY_MARGIN 0.06; CW-0 registry EXISTS with the full row shape; TERM_CATALOG carries NO migration_right/settlement_provision; `catalogGrewSinceWr10` tripwire live; six POP flags + SP-2 believed-conditions + departureMemory/calamityArcs ALL unminted (zero hits) | `demographicsPushPull.js:117-119, 218`; `certification/couplingRegistry.js:532` `COUPLING_REGISTRY` (rows carry couplingId/pairId/direction/read/receiptField/counterforce/flags/owningVolume/owningWave/intendedDesk); `sovereigntyBundle.js` + `tests/domain/sovereigntyBundleWr10.test.js`; tree-wide greps empty | VERIFIED |
+| S34 | Push side: FIVE drivers each guarded; VOLUNTARY_MARGIN 0.06; CW-0 registry EXISTS with the full row shape; TERM_CATALOG carries NO migration_right/settlement_provision (⏱ SUPERSEDED: GR-3's population term family LANDED 2026-08-06 — `peaceTermsCatalog.js:247-254`, live reader `treatyEnforcement.js:301`, CPL-17 at `couplingRegistryGrammar.js:196-198`); `catalogGrewSinceWr10` tripwire FIRED-AND-DISCHARGED (see §5); six POP flags + departureMemory/calamityArcs unminted at the survey; SP-2 believed-conditions LANDED at SP-B 2026-08-05 (`believedConditionsEnabled`) | `demographicsPushPull.js:117-119, 218`; `certification/couplingRegistry.js` `COUPLING_REGISTRY` (⚠ ADDRESS SUPERSEDED — the registry is now a 178-line COMPOSITION over six desk leaves at schema v4, no POP leaf yet; the `:532` row-authoring address points past EOF; POP rows follow C-POPF-6's desk-leaf decision) (rows carry couplingId/pairId/direction/read/receiptField/counterforce/flags/owningVolume/owningWave/intendedDesk); `sovereigntyBundle.js` + `tests/domain/sovereigntyBundleWr10.test.js`; tree-wide greps empty | VERIFIED |
+
+⚠ ADDRESS-ROT NOTE (POP-F round): twelve `file:line` addresses in this
+section rotted between the survey and the POP-F stamp (R-1..R-8,
+R-13..R-15 in the round's absorption table carry each corrected
+address). NAVIGATE BY SYMBOL, never by the drafted line numbers; the
+annex + the POP-F round outrank every address in this file. CROSS-
+REFERENCES POP now serves (appended per C-POPF-4): §46c (the LG
+reception contract — C-POPF-2 is the charter), LG §C (member minting is
+POP's alone; the class-intake door is C-POPF-2 item 5), LG §D and Q3
+(the population-shape law — the canonical `settlement.population` is
+THE PLAIN NUMBER; C-POPF-3).
 
 Two OPEN-DEFECT statuses re-measured (the volume's check-first orders, discharged
 here): **R-28 is STILL OPEN** — `demographicsHerald.js:257` reads
@@ -91,15 +102,19 @@ recommendation: extend the closed set with `'returning'`).
 
 **RF-3 — the volume's L2/§3 flag-manifest mechanics are SUPERSEDED by CR-WR10-C
 (2026-08-04, post-dates the volume).** `ENGINE_GATED_VIRTUAL_RULE_KEYS`
-(`simulationRules.js:185-194`, currently FIVE members) is now proven by a TWO-WAY
+(`simulationRules.js` — ⚠ RE-DERIVE-AT-COMPILE: TWENTY members at `a6fd6395`, moving; never the five this section was drafted against) is now proven by a TWO-WAY
 engine-source census walker (`tests/lint/engineGatedRuleKeys.walker.test.js`):
 every manifest member must really be gated in src/, and every strict-gate read
 (`.<key> === true`, JSDoc-cast spelling tolerated) must be declared, manifested,
 EXEMPT, or in the shrink-only measured BACKLOG (≤17; `commonsVoiceEnabled` sits
-there TODAY at :111 with no certification row). A manifest member OWES a
-certification row or a declared-pending entry, and the walker's own doctrine
-forbids new keys entering the backlog. CONSEQUENCE for every POP wave: the flag
-joins the MANIFEST + its certification row (or declared-pending entry) in the SAME
+there TODAY at :111 with no certification row). A manifest member OWES its
+AUTHORED certification row — ⛔ the "declared-pending entry" and
+"backlog" doors are STRUCK (C-POPF-1): both pending surfaces are
+frozen-and-pinned EMPTY at two homes (walker `:234`/`:836`;
+`subsystemRowsVirtual.js:1101`/test `:403`) and the backlog is capped
+17/17 shrink-only — lighting a POP flag means authoring the real row.
+CONSEQUENCE for every POP wave: the flag
+joins the MANIFEST + its AUTHORED certification row in the SAME
 commit as the first strict gate read — three artifacts, one commit, exactly as
 `sovereigntyTradeEnabled` did on 2026-08-04 (the precedent is quoted in the
 manifest's own comment).
@@ -127,7 +142,7 @@ is walker-visible — RF-3), dark-never-permissive. Confirmed unminted at HEAD
 
 | Flag | Gates | Wave | Lit-preconditions (walker-enforced orderings) |
 |---|---|---|---|
-| `believedMigrationEnabled` | the belief arm at the pull seam; arrival disappointment; letters home; THE ARRIVAL CLEARING + return column | POP-1 | `demographicsEnabled` lit · SP-2 believed-conditions subject family LANDED (spine; zero tokens today — S34) · `migrationRumorsEnabled` lit (the carrier half of the correction loop) |
+| `believedMigrationEnabled` | the belief arm at the pull seam; arrival disappointment; letters home; THE ARRIVAL CLEARING + return column | POP-1 | `demographicsEnabled` lit · SP-2 believed-conditions subject family LANDED (SATISFIED — SP-B landed `believedConditionsEnabled` 2026-08-05; the `beliefSubjectsGrewSincePop1()` tripwire baselines against a NON-EMPTY family measured at compile) · `migrationRumorsEnabled` lit (the carrier half of the correction loop) |
 | `commonsArcEnabled` | the REFUSAL rung; plan/levy/emigration refusal pricing; THE MISRULE ANSWER; answered-petition receipts | POP-2 | `commonsVoiceEnabled` lit (extends that kernel's ladder); `demographicsEnabled` lit for the plan-refusal arm ONLY (declared arm by arm) |
 | `departureMemoryEnabled` | the departureMemory ledger both ends; kin-pull arm; spent-tie write; remembrance crossings | POP-3 | `demographicsEnabled` lit |
 | `calamityArcEnabled` | arc staging; cause-attributed burial lines; aftermath/recovery voice | POP-4 | `demographicsEnabled` lit |
@@ -135,9 +150,11 @@ is walker-visible — RF-3), dark-never-permissive. Confirmed unminted at HEAD
 | `moverPermitsEnabled` | the four dark permit consumers + J-POP-11 gate reconciliation + treaty-input reads | POP-5b | `demographicsEnabled` lit · (treaty inputs additionally degrade — §5 seam contract, never a hard block) |
 
 **Manifest timing (RF-3, binding on every wave):** first strict gate read +
-`ENGINE_GATED_VIRTUAL_RULE_KEYS` membership + certification row (or
-declared-pending entry) land in ONE commit. Never the backlog. The walker asserts
-the exact one-key census delta.
+`ENGINE_GATED_VIRTUAL_RULE_KEYS` membership + the AUTHORED certification
+row land in ONE commit (the pending-entry door is STRUCK — C-POPF-1).
+Never the backlog. The walker asserts the exact one-key census delta,
+re-measured against the landed manifest count at each wave's own base
+(TWENTY at `a6fd6395`), never against the volume's five.
 
 **Four-fence dormancy set per flag (L2), each with the lit-mutant control proving
 the fences see:** (1) own-footprint dormancy golden at the flag's write surface;
@@ -246,7 +263,10 @@ sinks, no remittance economy).
 
 Size reality (measured 2026-08-04; domain-layer ceiling is 800 EFFECTIVE lines,
 comment-stripped, eslint-mirrored; `scripts/.size-baseline.json` holds NO entry for
-any POP-touched file, so none is over-ceiling today; raw wc-l follows):
+any POP-touched file, so none is over-ceiling today; raw wc-l follows —
+⚠ RE-DERIVE-AT-COMPILE: two figures below are EFFECTIVE units presented
+as raw (R-17/18/19); measure with the enforcer Linter at the publishing
+commit, state the unit, never inherit):
 `demographicsMigration.js` 658 · `demographicsPlans.js` 658 · `demographicsPushPull.js`
 643 · `spatial/migration.js` 616 · `demographicsRates.js` 592 · `populationDynamics.js`
 556 · `migrationKernel.js` 517 · `demographicsResponses.js` 470 · `assizeKernel.js` 459 ·
@@ -263,7 +283,12 @@ the lifecycle host, an existing seam, or a new lazy leaf.
   headroom exists but the arm bodies go OUT: budget ≤ +40 raw here, seam calls
   only) · `spatial/migration.js` (columnOf carry-through for `believedBand` +
   `'returning'`; ≤ +25) · `simulationRules.js` (manifest row) ·
-  `subsystemRowsGrowth.js` (cert row). **New leaves:** `believedMigrationRead.js`
+  `subsystemRowsVirtual.js` (cert row — ⛔ CORRECTED, C-POPF-1: all six
+  POP flags are VIRTUAL keys; each row lands in the VIRTUAL lane with
+  its `VIRTUAL_RULES` twin, NEVER `subsystemRowsGrowth.js` — a POP key
+  with its row in the growth lane has no twin and reds the 20↔20
+  bijection at `subsystemRowsVirtual.test.js:407` in the wave's own
+  commit). **New leaves:** `believedMigrationRead.js`
   (the ONE reading resolver: axes from SP-2 belief lit, `demographicReadings`
   dark; ≤ 250) · `arrivalClearing.js` (the clearing + return-column mint +
   letters-home evidence; ≤ 300).
@@ -324,9 +349,11 @@ the lifecycle host, an existing seam, or a new lazy leaf.
   assize coupling to unexposed corruption (revealed-only pin reds).
 - **Reqs 13/14:** seat answer posture-colored (SP-4), crowd has none (Law One);
   verbs: rung insertion, dip re-author, three read-sites.
-- **Collisions:** WAR — the levy shortfall consumer (`warDeployment.js` conscript
-  seam :1259 area is READ, not edited; the shortfall lands as a smaller real
-  number at the muster site — VERIFY-AT-BUILD the exact site); INTERIOR —
+- **Collisions:** WAR — the levy shortfall consumer (⚠ the muster MOVED:
+  `warHomeCosts.js:443-450` at the POP-F round — the old
+  `warDeployment.js:1259` cite is dead; the seam is READ, not edited;
+  the shortfall lands as a smaller real number at the muster site —
+  VERIFY-AT-BUILD the exact site); INTERIOR —
   declared-distinct coup lane (kernel header stands).
 
 ### POP-3 — DEPARTURE MEMORY (`departureMemoryEnabled`)
@@ -486,10 +513,14 @@ soak, or ratifies a band.
    closed set, and the pin reds the moment SP-2's family carries an axis POP-1
    cannot resolve — the red is the instruction to widen the resolver and delete
    the row. (The catalogGrewSinceWr10 shape verbatim — S34 proves the idiom live.)
-2. **GR-3 term catalog (GRAMMAR, unbuilt):** POP-5b's treaty reads resolve
-   `migration_right`/`settlement_provision` from TERM_CATALOG at call time and
-   spell no term literal in the gate composition; while the rows are absent the
-   consumers are honestly degraded (the reads find nothing; the unsigned-pair
+2. **GR-3 term catalog (LANDED 2026-08-06 — contract COLLAPSED to one
+   state):** POP-5b's treaty reads resolve
+   `migration_right`/`settlement_provision` from TERM_CATALOG at call
+   time (`peaceTermsCatalog.js:247-254` live; reader
+   `treatyEnforcement.js:301`) and spell no term literal in the gate
+   composition; the degraded-pair posture below is HISTORY — the rows
+   exist, and POP-5b's compile carries required REACHABILITY pins
+   (C-POPF-7) instead of an absence arm (the unsigned-pair
    negative is the SAME pin). TRIPWIRE: the reachability pins flip from
    degraded-declared to required the commit GR-3 lands — the POP-5b commit records
    both states.
@@ -507,9 +538,13 @@ soak, or ratifies a band.
 
 **Already-pinned seams this program must HONOR (tripwires named):**
 - **`catalogGrewSinceWr10` (sovereigntyBundle.js + tests/domain/sovereigntyBundleWr10.test.js):**
-  GR-3's catalog rows will trip it BY DESIGN (that red belongs to the WR-10
-  lane's widening instruction). POP-5b touches TERM_CATALOG **never** — it only
-  READS live treaty terms — so no POP commit may be the one that trips it.
+  ⏱ FIRED AND DISCHARGED (GR-3's landing tripped it as designed;
+  asserted in its fired state at `sovereigntyBundle.js:55-62`, pin
+  `sovereigntyBundleWr10.test.js:336`). The rule survives on its REAL
+  ground (C-POPF-7): POP-5b touches TERM_CATALOG **never** — it only
+  READS live treaty terms — so no POP commit widens the catalog or the
+  landing record; the "must not be the one that trips it" ceremony is
+  unfireable and struck.
 - **The WR-4 conscript-share read (`deployedPopulation` −
   `leviedPopulationBySource`):** POP-2's levy shortfall must arrive as a smaller
   REAL muster number UPSTREAM of that read, never a parallel multiplier — the

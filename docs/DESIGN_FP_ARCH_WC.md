@@ -1,5 +1,19 @@
 # DESIGN_FP_ARCH_WC -- THE WAR-CIRCULATION VOLUME
 
+⏱ **THE BANNER BELOW IS PRESERVED AS WRITTEN, AND ITS MEASUREMENT IS SUPERSEDED
+BY EVENT — RE-DERIVE, DO NOT INHERIT.** Folded here from the build-branch copy at
+the docs unfork (lane UF-1) so the build side keeps it. Its LAW half stands
+unchanged and is standing doctrine: module PRESENCE never promotes a wave. Its
+MEASUREMENT half was true at `60083174` (2026-08-14) and is FALSE at this stamp:
+the wc-0 train has since landed WC-0A..WC-0E, and WC-0E (`9602952b`, "both
+war-circulation flags, the ledger's shape, and the blocks[] arm") MINTED the
+signature `warCirculationEnabled` — it is a live member of
+`ENGINE_GATED_VIRTUAL_RULE_KEYS` (`simulationRules.js:338`) beside
+`contributionLedgerEnabled`, and that manifest holds TWENTY-TWO rows at
+`25f22b2b`, not sixteen. The struck figures are preserved rather than rewritten,
+per this volume's own erratum idiom (see the `cbd348a5` re-measure warning
+below); re-derive the flag census at each wave's own base.
+
 ⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
 volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
 TE3, and stated as a measurement rather than an impression:
@@ -2255,12 +2269,17 @@ is that fact.
 It rides the errand spine as a typed envoy PURPOSE CLASS. ESTATE
 TRUTH, MEASURED AT HEAD: ENVOY_PURPOSES is closed at TWO members today
 (envoyErrandVocabulary.js:119, ['sue', 'self_parlay']), and the
-purpose-CLASS machinery is SP-D's mint -- errandMint.js is ABSENT at
-HEAD. So the request record is the slice that lands FIRST and stands
-alone: it is ordinary bounded state on the contribution ledger,
-drop-when-empty, capped at CALL_IN_REQUESTS_CAP, and it needs no
-errand to exist. The errand CARRIAGE is WC-5's pre-pinned seam row,
-which reds when SP-D lands without consuming it. A call-in without the
+purpose-CLASS machinery is SP-D's mint -- errandMint.js is BUILT
+(landed since this section was written; its gate errandSpineEnabled
+=== true is read at errandMint.js:76 -- see SECTION 8 row 23, the
+measured discharge). The request record still stands alone: it is
+ordinary bounded state on the contribution ledger, drop-when-empty,
+capped at CALL_IN_REQUESTS_CAP, and it needs no errand to exist. The
+errand CARRIAGE is NOT a pre-pinned seam row (that pin would be
+authored past its trigger and could never fire): WC-5 takes its OWN
+row in ERRAND_CONSUMERS and flips built:true in the SAME COMMIT as
+the carriage, policed both directions by
+tests/lint/errandConsumerRegistry.walker.test.js (row 23). A call-in without the
 errand is a standing ask that lapses on its horizon; a call-in with the
 errand is an envoy at the gate. Nothing in the grading below depends on
 which of the two the world has.
@@ -3625,9 +3644,14 @@ consumer census above, taken at the BUILDING commit and recorded in the
 wave's receipt, with a pin asserting each live consumer is INVARIANT to
 the two rows on the seeded corpus, and a PLANTED-ITERATION negative
 (a consumer that lengths or indexes TERM_FAMILIES) proving the census
-can red; (b) WR10_FAMILIES_AT_LANDING widened by the two families and
-sovereigntyBundleWr10's PIN 1b consumed as the instruction it says it
-is -- IN THE SAME COMMIT, with the reason quoted. THE HONEST CLAIM,
+can red; (b) the two families enter through their CATALOG rows alone
+(the family list is DERIVED -- peaceTermsCatalog.js:192);
+WR10_FAMILIES_AT_LANDING is NEVER widened (the widening was STRUCK at
+§52.1 -- "the five-member TERM_FAMILIES literal, never the landing
+record" -- and sovereigntyBundle.js:74 forbids it in writing);
+sovereigntyBundleWr10's PIN 1b is consumed as the instruction it says
+it is: the grown-set expectation moves -- IN THE SAME COMMIT, with
+the reason quoted. THE HONEST CLAIM,
 RESTATED: the SEEDED WORLD is byte-identical; the RATCHET AND TRIPWIRE
 surfaces move, deliberately and declaredly. A wave that said only
 "byte-identical" here would be reporting a green it had not run.
@@ -3924,11 +3948,17 @@ CONTRIBUTION_RESERVATION_CAP; RESERVATION_HORIZON.
 ### WC-5 CALL-INS, EXITS, AND THE DOCTRINE PAGE
 
 Dependencies: WC-1, WC-2. Gates: only the call-in CARRIAGE is gated.
-SP-D is UNBUILT (errandMint.js absent at HEAD, verified) and
-ENVOY_PURPOSES is closed at two members (envoyErrandVocabulary.js:119),
-so the errand purpose class lands as a PRE-PINNED SEAM ROW (the TR-5
-pattern: a pin that reds when SP-D lands without consuming it). The
-call-in MECHANISM does not wait for it (1.9.1). The doctrine page rides
+SP-D is BUILT (the absence premise this block carried is REFUTED --
+R28; the pre-pinned seam row it prescribed is authored past its
+trigger and cannot fire). The measured discharge is SECTION 8 row 23:
+WC-5 takes its own ERRAND_CONSUMERS row ({ consumer, purposeClass,
+module, wave: 'WC-5', built: false }) in the wave that mints the
+call-in record and flips built:true in the SAME COMMIT as the
+carriage (errandConsumerRegistry.walker.test.js reds both
+directions; WC takes its own row and NEVER shares one).
+ENVOY_PURPOSES stays closed at two members
+(envoyErrandVocabulary.js:119). The call-in MECHANISM does not wait
+for it (1.9.1). The doctrine page rides
 HABIT r5's axes -- same seam treatment (C2).
 
 LANDS NOW: K8's exits -- the forgiveness gesture (typed, extinguishes
@@ -4524,19 +4554,22 @@ modulations (trade affinity, war reluctance strategist weight, aid
 warmth, espionage-ease term composed into the existing infiltration
 read), cohort chips + tables.
 
-PINS: MORTALITY-IS-THE-DECAY pin -- CARRIED IN BOTH VARIANTS UNTIL
-CR-WC-21 IS RULED, because the two arms are mutually exclusive and the
-volume will not pick by coin flip (1.13.2 states the contradiction in
-full). VARIANT A (bands step on mortality-realized composition): the
-hardest negative stands as written -- a world whose settlement death
-rate is zero decays NO bond, and the calendar-decay mutant, which fades
-a cohort by elapsed time alone, must red. VARIANT B (bands stay
-calendar): the pin asserts only that the COUNT-driven term is
-mortality-driven, the recency term is declared a second and
-calendar-driven decay term, and 5.1's zero-decay-laws claim plus the
-RECENCY_WEIGHTS row are amended in the same commit. Either way a
-mortality spike measurably accelerates the fade -- that half is not in
-dispute and is pinned now; the embodied-vs-institutional pin (sixty-year
+PINS: THE CR-WC-21 RULED PIN SET (Position B as ruled: calendar bands
+kept; RECENCY_WEIGHTS is reclassified a BOUNDED, FLOORED band
+modulation, not a decay law -- 1.13.2 records the resolution). THREE
+pins replace the two variants, strictly stronger than either: (1) THE
+COUNT TERM IS MORTALITY-DRIVEN -- zero-mortality world, arbitrary
+elapsed time: the cohort COUNT is byte-identical; the
+calendar-count-decay mutant reds. (2) THE FLOOR IS REAL -- the pin
+that carries the ruling: zero-mortality world, elapsed time pushed
+arbitrarily past the last band edge: the bond reads a NONZERO, STABLE
+value at the floor weight and stays there forever; TWO mutants red it
+(a fourth, lower band appended; the floor weight set to 0). (3)
+MORTALITY IS THE ONLY ZEROING ROAD -- drive mortality until the
+cohort empties: the bond reads ABSENT; the mutant keeping a nonzero
+bond over an empty cohort reds. A mortality spike measurably
+accelerates the fade -- that half was never in dispute and stays
+pinned; the embodied-vs-institutional pin (sixty-year
 fixture: cohort retired, bond reads neutral, the introduced tradition
 STILL PRESENT in the traditions mirror -- both facts asserted); the
 no-new-decay-law fence (source-scan: no Math.pow half-life and no
@@ -4877,14 +4910,13 @@ rides the mercenary market's existing decay shape. Any future WC
 quantity that needs half-life decay uses decayTowardNeutral with a
 named band, full stop.
 
-CONDITIONAL ON CR-WC-21. This paragraph's headline claim is honest only
-under variant A of the cohort-band ruling. If the chair rules that age
-bands step by CALENDAR, then RECENCY_WEIGHTS (1.0 / .6 / .25 applied
-over calendar-stepped bands) IS a decay constant by any reading, and
-this claim narrows -- in the same commit as the ruling -- to "zero new
-decay constants outside the declared recency term". The claim is
-stated conditionally here rather than defended; 1.13.2 carries the
-contradiction in full.
+RULED (CR-WC-21). The headline claim above stands un-narrowed,
+extended by the ruling's one sentence: the cohort recency weighting is
+a BOUNDED, FLOORED band modulation registered with its consumer --
+not a decay law -- and only mortality can drive a bond to zero.
+1.13.2's contradiction is RESOLVED, citing the ruling; the
+RECENCY_WEIGHTS values remain TUNING under carve-out 3, unsigned by
+the ruling.
 
 ## 5.2 No new intensity ladder
 
@@ -6388,8 +6420,11 @@ proven -- the door-3 law, applied at every landing).
                                             overlay planted (LAW 3)
     TERM_FAMILIES consumer census    WC-0   a planted iteration over
                                             TERM_FAMILIES caught; plus
-                                            WR10_FAMILIES_AT_LANDING
-                                            widened and
+                                            the grown set recorded in
+                                            sovereigntyBundleWr10's
+                                            expectations (the landing
+                                            record NEVER widened --
+                                            52.1) and
                                             sovereigntyBundleWr10's PIN
                                             1b consumed AS ITS OWN
                                             DOCSTRING INSTRUCTS -- the
@@ -6436,12 +6471,13 @@ proven -- the door-3 law, applied at every landing).
                                             caught; the kind set is
                                             asserted EQUAL to
                                             RESIDENCY_TAGS
-    mortality-decay fence            WC-15  calendar-decay mutant +
-                                            zero-death-rate no-fade
-                                            fixture -- CARRIED IN BOTH
-                                            VARIANTS until CR-WC-21 is
-                                            ruled; the wave does not land
-                                            on a coin flip
+    mortality-decay fence            WC-15  RULED (CR-WC-21): three pins
+                                            land -- count-term mortality
+                                            pin (calendar-count mutant),
+                                            floor-is-real pin (two
+                                            mutants), mortality-only-
+                                            zeroing pin; the wave lands
+                                            unblocked
     muster-and-return round trip     WC-16  (its walker arm lands at
                                             WC-13) a muster followed by
                                             a return leaves
@@ -6659,7 +6695,7 @@ A count taken from that phrase would be a fabricated number.
 | 14 | **`leviedPopulationBySource`** (writer `warHomeCosts.js:443/450`; readers `warCosts.js:367`, `warCoalitionExpenditure.js:159`, `deploymentReturn.js:284`; cert row `subsystemRowsWar.js:199`) | The people ledger **EXTENDS it — `blocks[]` reconciles to it exactly — and never forks it.** ⚠⚠ Attribution by RECONSTRUCTION from the banked map, **never by splitting an id on `.`** (the standing WR-8 law) | The blocks/levied reconciliation pin at WC-6, now DIRECTIONAL, with **THREE mutants**: headcount-skew; MISSING-SELF-BLOCK (reds clause (i)'s total identity); and ELECTED-ROW-WRITTEN-INTO-THE-LEVY-MAP (reds clause (ii)'s equality arm). ⚠ The old equality-everywhere form is recorded UNPASSABLE so no wave restores it as a "tightening". Plus the reconstruction-attribution scan at WC-6: **an id-split call planted and caught** |
 | 15 | **`deploymentReturn`'s conservation identity** (`fell` the sole combat sink; largest-remainder apportionment; `:270-346` verified) | Every new branch this volume adds — defect, orphan, shed, and the tag arms of the census-debiting events — **preserves the identity by naming its event in the walker's closed list**. The identity's statement WIDENS and never weakens. `untag` moves no counts and is inert to this identity by construction | The conservation walker at WC-6: **a one-count-drop mutant PER BRANCH**, with per-event coverage growing at each wave's closed-list addition. ⚠⚠ Plus THE SOURCE BRANCH's **BIRTH-INFLATION mutant**, run beside the three sink-drop mutants — before round 3 `births` was a bare term and an invented birth was invisible by construction: **a walker that can see a stolen death and not an invented birth is a guard with one eye** |
 | 16 | **WR-6 — `warCoalitionLedger.js:5-6`** | **No membership list, no stored expenditure total on deployments; `joinLedger` stays single-anchor.** Contribution is its own ledger; balances are DERIVED READS | §2.4's stated fence ("`joinLedger`: stays single-anchor; no second anchor kind") plus **THE ONE-BALANCE FENCE at WC-5**: a source scan asserting the answer fork, the breach grade and the K5 terms weight all call `contributionReads.js`'s ONE balance read and never reach into `warContributions` or the edge archive. ⭐ **THE PIN THAT PROVES THEY ARE ONE QUANTITY**: forgiving the obligation moves the answer fork AND the K5 terms weight in the SAME TICK — the forgiveness-invisible-to-the-fork mutant reds, and that mutant is exactly what a second reading of "the balance" would have shipped |
-| 17 | **WR-10 — the sovereignty market** | WR-10 owns the debt-to-vassalage transaction shape; **this volume adds the intent road only.** ⚠⚠ Sale treaties keep `buyerId`/`sellerId` drop-when-absent and **NEVER victor fields** (the standing WR-10 law); the conveyance-value read the overshoot signaling feeds is the market's EXISTING read | The `TERM_FAMILIES` consumer census at WC-0: **a planted iteration over `TERM_FAMILIES` caught**; plus `WR10_FAMILIES_AT_LANDING` widened by the two families and `sovereigntyBundleWr10`'s PIN 1b consumed AS ITS OWN DOCSTRING INSTRUCTS, in the same commit with the reason quoted. ⚠ The family list is DERIVED (`peaceTermsCatalog.js:192`), so the no-producer recipe does not reach it |
+| 17 | **WR-10 — the sovereignty market** | WR-10 owns the debt-to-vassalage transaction shape; **this volume adds the intent road only.** ⚠⚠ Sale treaties keep `buyerId`/`sellerId` drop-when-absent and **NEVER victor fields** (the standing WR-10 law); the conveyance-value read the overshoot signaling feeds is the market's EXISTING read | The `TERM_FAMILIES` consumer census at WC-0: **a planted iteration over `TERM_FAMILIES` caught**; plus the grown set recorded in `sovereigntyBundleWr10`'s expectations (`WR10_FAMILIES_AT_LANDING` NEVER widened — the §52.1 struck-widening law) and PIN 1b consumed AS ITS OWN DOCSTRING INSTRUCTS, in the same commit with the reason quoted. ⚠ The family list is DERIVED (`peaceTermsCatalog.js:192`), so the no-producer recipe does not reach it |
 | 18 | **`occupation.js`** — owner of the five-rung ladder (`STATE_LADDER :117`: contested / unstable / extractive / stabilized / vassalized) and of resistance | WC's R6 and resist-fork are **consumer inputs to existing advances, never new writers.** RELEASE STANDING composes into `stabilizationSuitability (:386)`, the existing input to `advanceOccupationState (:442)`, so a loyal over-deliverer climbs sooner to `vassalized` through `vassalizationOutcomes (:724)`. ⛔ **THE REGRESSION AND LIBERATION ARMS ARE NOT TOUCHED**: the collapse arm, the regress-below-contested arm and the `MAX_CONTESTED_DWELL` valve are RESISTANCE's, and routing loyalty standing into them would put loyalty and revolt on ONE LEVER WHERE THEY CANCEL | The three-deliverer coercion pin at WC-4: **the standing-deleted mutant (all three arms)** and **the STANDING-INTO-REGRESSION mutant — the neutral arm, in which a loyal town's occupation collapses.** The second mutant is the executable form of the "arms not touched" clause: it reds precisely when loyalty has been wired into the revolt lever |
 | 19 | **`warTermination.js`** — frozen at 818 eff, BASELINED shrink-only | The close EVENT this volume folds on is `readWarTerminations`' EXISTING output; **the contribution fold is a CONSUMER. Zero edits to the frozen file.** Stance scaling reads happen in consumers | §2.4's stated fence ("`warTermination.js`: zero edits (frozen)") standing on the shrink-only size baseline at tolerance zero — **any diff to this file originating in a WC wave is the tripwire** (the `momentum.js` precedent from HB §8.1 row 8, applied to WC's own frozen surface) |
 | 20 | **`traditions/relations.js`** — `advanceRelations` | The introduction attempt is a **FOURTH pass with its own `mutationLog` kind**. The influx-read TIMING LAW is inherited unchanged: **origin captured at `max(departTick, arrivalTick-1)` because release destroys origin** — the cohort tag banked in the column record is the same pattern. ⚠ `DESIGN_TRADITIONS.md` lives on the LEDGER BRANCH ONLY, so the WC-14 build brief must carry the pointer | The most-attempts-fail pin at WC-14: across the seeded corpus the introduction adoption rate lands inside an authored band, and **the always-adopt mutant reds**. Plus the double-effect single-call pin (one fixture, both effects, the SAME share value read from ONE call — the two-computations mutant reds) |
