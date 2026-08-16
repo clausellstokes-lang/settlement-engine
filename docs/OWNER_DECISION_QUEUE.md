@@ -6885,3 +6885,16 @@ rather than overlaps); a DISJOINTNESS PIN sweeps every exemplar
 compounds reserve ground so seating never enters them; strata
 exempt only across leaves. MF-B4 redirected mid-lane — the fix
 belongs to its inversion work and the pin joins its battery.
+
+## §190a · THE RIGHT-OF-WAY LAW (2026-08-16, owner: "and the
+## buildings are also blocking streets")
+
+Charter §17.4: the derived street web is INVIOLABLE GROUND — zero
+footprint-street intersections from the square to the last alley;
+buildings FRONT streets (facades ON the street line — the fronting
+law is what gives a channel its walls), yards behind; encroachment
+exists ONLY as §11.2's deliberate, seeded, event-dated chaos drift,
+never as packer error; THE RIGHT-OF-WAY PIN (zero intersections,
+planted-violation counterfactual) joins the battery beside
+reachability. MF-B4 carries both this and §190's disjointness in
+its open packer work.
