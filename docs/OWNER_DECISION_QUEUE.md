@@ -5711,3 +5711,22 @@ gallery-seeding lane offer stands.
    scratchpad, then delete). The successor resumes MID-PROGRAM by
    §144-§155 + that file; nothing is dropped, everything is
    parked ON PURPOSE.
+
+## §156 · THE HIGGSFIELD CONNECTOR SESSION (2026-08-16, resumed
+## WITHOUT the restart — the connector hot-mounted)
+
+1. The pause (§155.2) proved unnecessary: the connector's tools
+   mounted into the live session; TE27 and MF-P1 never stopped; the
+   §155 capsule stays banked as insurance until the next natural
+   boundary. Three more folio references generated via the API at
+   4K/3:2 (owner-authorized credits) and FETCHED as files into the
+   corpus (the connector returns result URLs — the file-save gap is
+   closed): hf3 organic village (EXCELLENT — period microcopy,
+   green-at-fork, lineweight law rendered; critique recorded: field
+   parcels too radial, the fabric must anchor fields to
+   roads/streams not the settlement center), hf4 planned-city
+   high-order contrast, hf5 night-pigment lens reference. ⚠ HONEST
+   LABEL: the platform routed the nano_banana_pro request to its
+   nano_banana_2 backend; 4K (5056x3392) was delivered; recorded,
+   not hidden. Calibration laws folded to laneHF-CALIBRATION.md;
+   the corpus + notes feed MF-P1 and the mf compile.
