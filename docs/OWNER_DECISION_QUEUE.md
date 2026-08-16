@@ -6981,3 +6981,20 @@ backward (faubourgs empty first). Confirms and sharpens
    STAGE THREE (EP-2 + EP-3A, path-disjoint, promoting
    together).** RS-2 takes the current tip when RS-1 completes
    (§188.3's henceforth-strict applies to post-RS-1 runs).
+
+## §192 · THE HISTORICAL GROUNDING AUDIT ORDERED (2026-08-16,
+## owner: "ground each law in historical precedence first,
+## reconciling with what we have")
+
+MF-R3 (Fable) dispatched over the complete charter §0-§17: per law
+— NAME the precedent concretely (burgage tenure, champion-country
+open fields, faubourg formation, Cornish count houses, glacis law,
+the Imola plan…), RECONCILE (GROUNDED / DIVERGES-DELIBERATELY with
+the deviation declared / MISGROUNDED with a cure block /
+WEAKLY-GROUNDED), plus the ranked MISSED-RICHES list (history's
+stronger forms we overlooked). Epistemics disciplined: SETTLED vs
+CONTESTED/REGIONAL labels; Euro-specific grounding flagged against
+the setting-agnosticism law (form vs ornament ruled per law).
+Fold-then-refresh on landing per the §170 standard. This applies
+§0.0's history-is-the-oracle retrospectively to the whole
+document — the capstone audit of the map program's design era.
