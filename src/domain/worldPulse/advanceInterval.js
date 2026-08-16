@@ -481,6 +481,16 @@ export async function simulateCampaignWorldInterval({
       // carries `::tick:N`. A per-tick nonce would be destroyed by the interval collapse
       // (which keeps ONE record) and replay would be impossible.
       advanceEpoch,
+      // ⛔ E5 — THE STALE STRAP, TOLD TO THE KERNEL. A resumed tick is re-derived
+      // from `resume.preWorldState`, so the rules the kernel reads are the ones
+      // FROZEN INTO THE CURSOR AT PAUSE TIME. That is correct for the seed and
+      // useless for the pin-`advanceEpoch` guard: on this path a null epoch is
+      // LAWFUL in two production shapes the guard cannot tell from a forgetful
+      // caller — the DM turned the rule off mid-pause (the STORE's live read
+      // withheld the value), or the cursor predates this program and never
+      // carried one. The store gate is the live authority here, so the kernel's
+      // guard is a FRESH-ADVANCE guard and is told which path it is on.
+      resumedSegment: resuming,
     };
     // Scope only the synchronous kernel call. The orchestrator may yield between
     // batches, so retaining a module-global override across awaits would allow

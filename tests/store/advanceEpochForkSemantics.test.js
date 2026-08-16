@@ -95,6 +95,8 @@ const { ensureRegionalGraph } = await import('../../src/domain/region/index.js')
 const { previewCampaignWorldPulse, advanceCampaignWorld } =
   await import('../../src/domain/worldPulse/advanceCampaignWorld.js');
 const { simulatePendingFuture } = await import('../../src/domain/worldPulse/forecastRun.js');
+const { simulateCampaignWorldInterval } =
+  await import('../../src/domain/worldPulse/advanceInterval.js');
 const { normalizeForDormancy } = await import('../helpers/dormancyOracle.js');
 
 const FLAG = 'advanceEpochEnabled';
@@ -295,14 +297,21 @@ describe('EP-2 · the resume re-thread — the same advance, the same epoch', ()
   });
 
   test('FENCE 5, STORE HALF: the FOUR withholding cells, and the store gate is the live one', async () => {
-    // ⛔ MEASURED HERE AND REPORTED, because §2.3b's belt-and-braces argument does not
-    // reach this path as written. The orchestrator re-derives the paused tick from
-    // `resume.preWorldState` (advanceInterval.js: `runningCampaign = { …campaign,
-    // worldState: resume.preWorldState, … }`), so THE KERNEL'S FLAG GATE READS THE RULES
-    // FROZEN INTO THE CURSOR AT PAUSE TIME, not the campaign's live ones. A DM who turns
-    // the rule off mid-pause therefore does NOT darken the kernel's own gate — what closes
-    // the cell is the STORE withholding the value. On the resume path the belt is live and
-    // the braces are stale, and the four cells below say so in the order they bite.
+    // ⛔ MEASURED HERE, because §2.3b's belt-and-braces argument does not reach this path
+    // as written. The orchestrator re-derives the paused tick from `resume.preWorldState`
+    // (advanceInterval.js: `runningCampaign = { …campaign, worldState:
+    // resume.preWorldState, … }`), so THE KERNEL'S FLAG GATE READS THE RULES FROZEN INTO
+    // THE CURSOR AT PAUSE TIME, not the campaign's live ones. A DM who turns the rule off
+    // mid-pause therefore does NOT darken the kernel's own gate — what closes the cell is
+    // the STORE withholding the value. On the resume path the belt is live and the braces
+    // are stale, and the four cells below say so in the order they bite.
+    //
+    // ⭐ E5 CLOSED THE CONSEQUENCE WITHOUT MOVING THE FINDING. The stale snapshot is still
+    // what the kernel reads, and that is RIGHT — a re-derivation must reproduce the world
+    // the paused tick ran in, so grafting live rules onto it would change the re-run for
+    // every other rule too. What changed is that the kernel's pin-`advanceEpoch` guard no
+    // longer treats this path's LAWFUL absence as a forgetful caller (`resumedSegment`), so
+    // cells 2 and 3 assert the dark composition DIRECTLY instead of using a throw as proxy.
     const litPause = async () => {
       const store = storeWith(LIT);
       await store.getState()
@@ -324,28 +333,58 @@ describe('EP-2 · the resume re-thread — the same advance, the same epoch', ()
     }
 
     // CELL 2 — THE FLIP. The cursor still carries the live epoch across it (that is the
-    // hazard, asserted rather than tidied away), and the store withholds it anyway. The
-    // WITHHOLDING IS OBSERVED THROUGH EP-1's OWN STRUCTURAL GUARD: the kernel receives
-    // `advanceEpoch == null` while its (stale, snapshot) rules read strictly true, which is
-    // exactly the state assertEpochPinnedInTest refuses in a test run. Had the store NOT
-    // gated, a value would have arrived and this would resolve silently — so the rejection
-    // is the proof, and cell 1 is the control that proves it is not simply always thrown.
+    // hazard, asserted rather than tidied away), and the store withholds it anyway.
+    //
+    // ⭐ THIS CELL USED TO BE PROVEN BY A REJECTION AND IS NOW PROVEN BY THE WORLD (E5).
+    // The withholding was formerly observed through EP-1's structural guard throwing: the
+    // kernel received `advanceEpoch == null` while its STALE snapshot rules read strictly
+    // true. That throw was the strap misfiring on a LAWFUL production state, so the kernel's
+    // guard is now a fresh-advance guard (`resumedSegment`) and the resume COMPLETES. The
+    // evidence is strictly better for it: had the store not gated, EPOCH_A would have
+    // arrived, the snapshot rules would have lit `epochTerm`, and every composed root would
+    // carry `::epoch:`. They carry none — and cell 1 is the control proving the roots DO
+    // carry it when the store passes a value, so this is not a green over an inert path.
     {
       const { campaign, saves } = await litPause();
       campaign.worldState.simulationRules = { [FLAG]: false };
       expect(campaign.worldState.pausedAdvance.advanceEpoch).toBe(EPOCH_A);
       const reloaded = reloadFrom(campaign, saves);
-      await expect(drainToCompletion(reloaded)).rejects.toThrow(/no threaded `advanceEpoch`/);
+      resetSpy();
+      const done = await drainToCompletion(reloaded);
+      expect(done.status, 'the resume must run to completion, not throw').not.toBe('paused');
+      expect(spy.roots.length, 'non-vacuity: the resume must have composed something').toBeGreaterThan(0);
+      expect(epochRoots()).toEqual([]);
+      const reparked = cursorOf(reloaded);
+      if (reparked) {
+        expectAbsentWithAnchor(
+          Object.keys(reparked), 'advanceEpoch', 'now',
+          'a resume that went dark mid-pause re-parks no epoch',
+        );
+      }
     }
 
     // CELL 3 — THE LEGACY CURSOR: a pause parked by a build older than this program has no
-    // `advanceEpoch` key at all. The resume must never MINT one, and it does not: the same
-    // withheld-value state is reached, by absence rather than by the gate.
+    // `advanceEpoch` key at all, while the rule is still LIT in both homes. The resume must
+    // never MINT one — and, since the rules are lit, reading LIVE rules instead of the
+    // snapshot would NOT have quieted this cell: only knowing it is a resume does. It
+    // reaches the same withheld-value state by absence rather than by the gate, and
+    // composes dark rather than refusing to run.
     {
       const { campaign, saves } = await litPause();
       delete campaign.worldState.pausedAdvance.advanceEpoch;
       const reloaded = reloadFrom(campaign, saves);
-      await expect(drainToCompletion(reloaded)).rejects.toThrow(/no threaded `advanceEpoch`/);
+      resetSpy();
+      const done = await drainToCompletion(reloaded);
+      expect(done.status, 'a legacy cursor must resume, not throw').not.toBe('paused');
+      expect(spy.roots.length, 'non-vacuity: the resume must have composed something').toBeGreaterThan(0);
+      expect(epochRoots()).toEqual([]);
+      const reparked = cursorOf(reloaded);
+      if (reparked) {
+        expectAbsentWithAnchor(
+          Object.keys(reparked), 'advanceEpoch', 'now',
+          'a legacy-cursor resume mints no epoch',
+        );
+      }
     }
 
     // CELL 4 — A WORLD THAT NEVER RAN LIT (rules absent in BOTH homes, which is every save
@@ -378,6 +417,17 @@ describe('EP-2 · the resume re-thread — the same advance, the same epoch', ()
         );
       }
     }
+
+    // CELL 5 — THE POLARITY ARM, and it is what keeps E5's carve-out from being a hole.
+    // `resumedSegment` is `!!resume` at advanceInterval.js, so a FRESH composed advance
+    // under LIT rules with no threaded epoch must STILL be refused: that shape is a caller
+    // who forgot, which is the entire reason the guard exists. Pinned on the SAME
+    // orchestrator cells 1–4 resume through, so the one mutation that would silently disarm
+    // the guard everywhere — a constant-true argument — reds right here.
+    await expect(simulateCampaignWorldInterval({
+      campaign: campaignRecord(LIT), saves: savesFixture(),
+      interval: PAUSING_INTERVAL, now: NOW, advanceEpoch: null,
+    })).rejects.toThrow(/no threaded `advanceEpoch`/);
   });
 });
 

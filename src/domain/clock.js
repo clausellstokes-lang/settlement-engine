@@ -62,6 +62,15 @@ export function assertNowPinnedInTest(site) {
  * crash, and no existing assertion in the estate would notice. In `NODE_ENV==='test'`
  * this throws; in the browser it is a no-op, because a production caller that loses the
  * value must degrade to today's behaviour rather than break the DM's advance.
+ *
+ * ⛔ IT IS A FRESH-ADVANCE GUARD, and the kernel's `resumedSegment` argument is what
+ * keeps it one (E5). A RESUMED segment re-derives its tick from the pause cursor's
+ * PRE-tick world, so the rules the kernel can see are the ones frozen at pause time
+ * while the store's are live — and on that path an absent epoch is LAWFUL in two
+ * production shapes this guard cannot distinguish from a caller that forgot: the DM
+ * turned the rule off mid-pause (the store withheld the value on purpose), and a cursor
+ * written before this program that never carried one. The store's own gate covers the
+ * resume path; widening this one to cover it too would only refuse lawful worlds.
  * @param {string} site  the entry point name, for the error message
  */
 export function assertEpochPinnedInTest(site) {

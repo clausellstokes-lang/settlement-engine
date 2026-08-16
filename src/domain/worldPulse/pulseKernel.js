@@ -227,8 +227,18 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   would red on every advance. Applied to the root seed ONLY when
  *   `simulationRules.advanceEpochEnabled === true`; absent or dark ⇒ `epochSuffix` returns
  *   the empty string and the composition is character-for-character the pre-wave one.
+ * @param {boolean} [args.resumedSegment] E5: is this tick part of a RESUMED segment?
+ *   `advanceInterval` passes `!!resume`; every other caller leaves it false. It changes NO
+ *   composition — only whether the pin-`advanceEpoch` guard is armed. A resumed tick is
+ *   re-derived from the pause cursor's PRE-tick world, so the `simulationRules` read above
+ *   are the ones FROZEN AT PAUSE TIME: right for the seed (the re-run must reproduce the
+ *   world the paused tick ran in) and blind for the guard, which cannot then tell a
+ *   forgetful caller from the two LAWFUL absences on that path — a rule turned off
+ *   mid-pause, where the store's live read withheld the value, and a legacy cursor that
+ *   never carried one. The store gate covers the resume path; this one guards fresh
+ *   advances. See `assertEpochPinnedInTest` in ../clock.js.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null, advanceEpoch = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null, advanceEpoch = null, resumedSegment = false } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -294,7 +304,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // gate blocks. All strips are byte-neutral when nothing is suppressed.
   // @pulse-stage: bootstrap
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
-  const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules); const epochTerm = simulationRules?.advanceEpochEnabled === true ? advanceEpoch : null; if (simulationRules?.advanceEpochEnabled === true && advanceEpoch == null) assertEpochPinnedInTest('simulateCampaignWorldPulse');
+  const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules); const epochTerm = simulationRules?.advanceEpochEnabled === true ? advanceEpoch : null; if (simulationRules?.advanceEpochEnabled === true && advanceEpoch == null && !resumedSegment) assertEpochPinnedInTest('simulateCampaignWorldPulse');
   // ⭐ THE ADVANCE-EPOCH SEAM (the ONE kernel edit this program makes; owner directive
   // 2026-08-05, chair-signed). The epoch is a NEW SEGMENT on the root seed only — the
   // stage order and the PRNG CALL ORDER are untouched, so the number and sequence of
@@ -303,11 +313,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // '' ⇒ this composes the pre-wave string character-for-character, so a dark or legacy
   // world is byte-identical rather than merely similar.
   //
-  // THE TERM IS FLAG-DRIVEN, NOT VALUE-DRIVEN, and the gate above is the second of two
-  // (the store mint is the first). `pausedAdvance` is PERSISTED, so a lit advance can
-  // pause, the rule can go dark, and the resume can arrive carrying a live epoch: without
-  // this re-read the kernel would compose an epoch-bearing seed in a flag-dark world.
-  // Every flag-driven materialization keys on `epochTerm` and never on the raw argument.
+  // THE TERM IS FLAG-DRIVEN, NOT VALUE-DRIVEN: every flag-driven materialization keys on
+  // `epochTerm`, never the raw arg, and the gate above is the second of two (the store mint
+  // is first). ⛔ ON A RESUME THESE RULES ARE THE PAUSE-TIME SNAPSHOT — advanceInterval
+  // re-derives from `resume.preWorldState` — RIGHT for the seed (the re-run must reproduce
+  // the paused world) and BLIND for the guard, so `resumedSegment` defers it to the store.
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}${epochSuffix(epochTerm)}`);
   // ⭐ SEAM EDIT 9 — THE STAMP, `;`-joined onto the line at which THE CALENDAR MOVES, at
   // +0 lines. The ordering is the point and it is measured, not assumed: a year is entered
