@@ -7885,3 +7885,39 @@ to MF-B7 same-turn.
 2. The next §216 comparison round runs against the GROWN corpus
    — the thorp/metropolis bands become distributions before
    wave eight is graded against them.
+
+## §219 · DX1 COLLECTED — THE ca-015 COLLAPSE ROOT-CAUSED:
+## MISSING P4 RECONCILIATION, REPAIR CHARTERED (2026-08-16,
+## chair §170)
+
+1. **CONFIRMED, reproduced from the capsule to identical hashes
+   (ratio 0.0448):** the collapse is neither demographic nor
+   capacity-driven — 95.3%% of the loss (−16,097 of −16,890) is
+   the LEGACY PRESSURE-DECLINE LANE in populationDynamics.js,
+   which under `demographicsEnabled` loses its growth side and
+   its deadband and becomes a ONE-WAY RATCHET WITH NO FIXED
+   POINT (the code's own comment defers the reconciliation to
+   P4). The trigger chain: with npcAgency dark, the saturated
+   14-slot admission cap frees 31.2%% of admissions to
+   next-ranked crisis conditions, which keep a `famine` marker
+   refreshed past expiry — a marker its OWN CONSERVED FOOD
+   LEDGER refutes (deficit ≈5%%, 9,000+ spare mouths). The true
+   interaction is THREE-flag (npcAgency OFF × demographics ON;
+   the demographics-off control PASSES at ×0.11). Wars-never-end
+   and migration hypotheses refuted by byte-identical censuses.
+2. **DISPOSITION RATIFIED: MISSING RECONCILIATION — a repair,
+   not an accepted dark consequence.** Decisive: the same defect
+   already collapses two settlements INSIDE THE PASSING maximal
+   row. This is review finding R-06 with its predicted
+   consequence now MEASURED STRONGER than stated (the plateau
+   does not exist). Not reachable in any shipped campaign
+   (demographicsEnabled false in WAVES) — no player has ever
+   seen it; the soak instrument caught it exactly as designed.
+3. **REPAIR CHARTERED per the report's recommendation: R-B
+   (finish the P4 reconciliation, two files) WITH R-C FOLDED IN
+   (reconcile the famine marker against foodLedger)** — queued
+   NEXT WORKTREE SLOT (TE34/TE35 occupy the concurrency limit).
+   No shipped preset, golden, or dark-control cell moves; the
+   soak corpus moves as a DECLARED, chair-signed shift per the
+   §72.3 method at landing. The R-06 review row gains its
+   executed confirmation.
