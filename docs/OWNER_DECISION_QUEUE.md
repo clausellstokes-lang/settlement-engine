@@ -5255,3 +5255,44 @@ gallery-seeding lane offer stands.
    join tm-core's train as harness members (pre-soak machinery,
    already the pure-Node aggregator's home); values as §131 bands
    where any exist.
+
+## §142 · TE25's TWO TRAINS COLLECTED-IN-STACK; TC24's TWO
+## STRUCTURAL CATCHES RULED (2026-08-16, chair, vetoable; evidence
+## laneTE25-receipt.md 377 lines + laneTC24-report.md)
+
+1. **dcs + gv are LANDED IN THE STACK** (terminals `69758820` +
+   `ec744330`, both gates green, validator 90/0): the four missing
+   law texts + the §101.4 wording cure landed; every gv guard cure
+   proven by an ESTATE MUTANT planted in the real file and
+   cmp-restored (the prettier-shaped leak reds naming byok.ts:232;
+   the false-&& reds two census arms; the ||true reds only the new
+   arm; the deleted mover row reds naming the key). The stack holds
+   UNEXPOSED per §140 pending the full five; TE26 finishes
+   gvf/mb/ci from `ec744330` with the four pre-paid facts.
+2. **F1 IS RATIFIED — G4 IS A PREMISE DEATH**: the delete-scrub
+   already exists (both Library delete paths scrub survivors, all
+   seven delete sites enumerated) — §66.3's G4 premise is dead, the
+   994/994 fork is never reached, settlementSlice is never opened.
+   **F2 RATIFIED**: GVF-2's widening is load-bearing and cures the
+   THIRD rule-3 instance (mapForkXssChain's token scan).
+3. **⛔ EP IS RE-SHAPED (J-TC24 accepted)**: §91.3's five-member
+   co-live train is VALIDATOR-ILLEGAL (eleven duplicate-path
+   convictions — the relaxation examined the cycle law, not the
+   packet law); the FOUR-STAGE SPLIT PROMOTION (proven zero
+   convictions) is the ruled shape; the relaxation's spirit — one
+   EP-exclusive sequence — stands. **WF IS RE-SHAPED**: every flag
+   mint edits the same §49/§50 surfaces (two co-live convict four
+   paths, executed), so WF's lawful shape is EIGHT TRAINS + the
+   terminal wave, stacked per §140 with ONE family sweep and PR.
+4. **A LAW DEFECT IS CORRECTED**: the "seven edge-shared bundles"
+   figure in §49/§50 and PACKET_STANDARD is STALE — the measured
+   truth is FIVE bundles / TEN artefacts, simulationRules.js in
+   exactly two closures; the PACKET_STANDARD correction rides
+   gvf's docs rider citing this section; every future flag compile
+   inherits the measured figure. Also adopted: EP-0's unpriced
+   bundle regeneration; C-EPF-4 RE-SIGNED on the corrected
+   instrument (fork-site census, not the vacuous random-site);
+   F-4's three load paths; **the volume-fold gap** — the WF/EP
+   first trains gain the folded-volume member (the build branch
+   still asserts superseded premises the ledger cured). J-TC24-1..12
+   SIGNED.
