@@ -5730,3 +5730,35 @@ gallery-seeding lane offer stands.
    nano_banana_2 backend; 4K (5056x3392) was delivered; recorded,
    not hidden. Calibration laws folded to laneHF-CALIBRATION.md;
    the corpus + notes feed MF-P1 and the mf compile.
+
+## §157 · THE BASELINE CORPUS COMPLETE (2026-08-16, owner orders:
+## "good sample size... per tier... infer and extrapolate" + "I
+## leave everything to your best judgement")
+
+1. **27 references generated, fetched at 4K, and cataloged**
+   (map-refs/ + laneHF-CALIBRATION.md holds the index and the
+   standing critiques): six tiers thorp→metropolis, seven
+   resource/terrain economies (plains, forest, coast, fishing,
+   mining, arid, cold), THREE POWER-SKYLINE studies (commerce vs
+   temple vs castle dominance — the prominence law rendered), six
+   STATES (siege, plague quarantine, fire-scar+grid-rebuild,
+   unrest, struggling, half-abandoned), the order scale (planned ↔
+   chaos-warren), DRIFT (growth-rings city: three ages legible from
+   fabric grain; fire-rebuild; abandonment), and two vocabulary
+   plates (ward close-up for institution adjacency; countryside
+   study). One job handle was lost and regenerated (hf35).
+2. **Laws the corpus teaches, banked:** the CALM-INK REGISTER for
+   states (the siege is drawn at the walls in the same surveyor's
+   ink — no theatrical imagery; adopt verbatim); decline/history
+   written in FABRIC (roofless outline shells, bricked gates,
+   reverting fields); three ages of a city legible from fabric
+   grain alone; power legible from ink weight + footprint. STANDING
+   MODEL-PRIOR WARNINGS the renderer must override: concentric
+   drift (the generator circles towns even when told organic — our
+   morphology comes from DATA), radial sunburst fields (anchor
+   parcels to roads/streams).
+3. This corpus + laneHF-CALIBRATION.md are the §109 side-by-side
+   references for the mf family and MF-P1's calibration target.
+   Owner-authorized spend consumed ~120 credits across 28 4K
+   generations tonight; the platform's nano_banana_2 routing note
+   (§156.1) applies throughout.
