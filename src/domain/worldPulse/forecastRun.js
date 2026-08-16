@@ -37,6 +37,13 @@ import { forecastFingerprint } from './forecastFingerprint.js';
 export { forecastFingerprint } from './forecastFingerprint.js';
 
 /**
+ * The interval-runner seam. Typed as the ORCHESTRATOR'S OWN SHAPE rather than a loose callback,
+ * so a transport that does not match it cannot be injected — and so this file adds no `any`,
+ * which its zero-allowance any-cast ratchet enforces.
+ * @typedef {typeof simulateCampaignWorldInterval} IntervalRunner
+ */
+
+/**
  * Build a runner that sends the interval through the Web Worker transport, falling back to the
  * in-thread orchestrator on Node/SSR or any infrastructural worker failure.
  *
@@ -44,8 +51,9 @@ export { forecastFingerprint } from './forecastFingerprint.js';
  * module free of any static edge to `src/lib/`, which is what preserves the store slice's
  * "no top-level worldPulse edge" invariant and is why this seam mints no coupling-registry row.
  * The caller (a UI) already owns both halves and simply hands them to each other.
- * @param {(payload: any, opts: any) => Promise<any>} runAdvanceInterval
- * @returns {(payload: any) => Promise<any>}
+ * @param {(payload: Parameters<IntervalRunner>[0],
+ *   opts: { fallback: IntervalRunner }) => ReturnType<IntervalRunner>} runAdvanceInterval
+ * @returns {IntervalRunner}
  */
 export function workerBackedRunner(runAdvanceInterval) {
   return (payload) => runAdvanceInterval(payload, { fallback: simulateCampaignWorldInterval });
@@ -64,7 +72,7 @@ export function workerBackedRunner(runAdvanceInterval) {
  * @param {string} io.now
  * @param {{ saveId: string, event: Mut } | null} [io.candidate]
  *   the staged-but-unqueued change (the marginal-attribution lane)
- * @param {(payload: any) => Promise<any>} [io.runInterval]
+ * @param {IntervalRunner} [io.runInterval]
  *   THE TRANSPORT SEAM. Defaults to the in-thread orchestrator, so Node, vitest, SSR and every
  *   existing caller are byte-identical BY CONSTRUCTION — the default parameter is the proof, not
  *   a claim. A UI passes a worker-backed runner (see `workerBackedRunner`) to move the forecast
@@ -116,7 +124,7 @@ export async function simulatePendingFuture({ campaign, saves, interval = 'one_m
  * @param {{ campaign: Mut, saves: Mut[],
  *   interval?: string, weeks?: number|null, now: string,
  *   candidate?: { saveId: string, event: Mut } | null,
- *   runInterval?: (payload: any) => Promise<any> }} io
+ *   runInterval?: IntervalRunner }} io
  * @returns {Promise<{ baseline: Mut, withCandidate: Mut | null, fingerprint: string }>}
  */
 export async function runRealmForecast({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null, runInterval = simulateCampaignWorldInterval }) {

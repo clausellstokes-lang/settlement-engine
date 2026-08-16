@@ -80,7 +80,7 @@ export function composeOmen(run) {
  * Zero-trace + deterministic (see the module header). Returns the omen only —
  * the discarded run never escapes.
  * @param {{ campaign: Mut, saves?: Mut[], interval?: string, weeks?: number|null, now: string,
- *   runInterval?: (payload: any) => Promise<any> }} io
+ *   runInterval?: typeof import("./advanceInterval.js").simulateCampaignWorldInterval }} io
  * @returns {Promise<ReturnType<typeof composeOmen>>}
  */
 export async function readAuspices({ campaign, saves = [], interval = 'one_season', weeks = null, now, runInterval = undefined }) {

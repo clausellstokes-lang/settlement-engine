@@ -883,13 +883,13 @@
   },
   {
     "path": "src/domain/activeConditions.js",
-    "line": 976,
+    "line": 983,
     "category": "floatInterpolation",
     "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
   {
     "path": "src/domain/activeConditions.js",
-    "line": 976,
+    "line": 983,
     "category": "twoDecimalScore",
     "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
