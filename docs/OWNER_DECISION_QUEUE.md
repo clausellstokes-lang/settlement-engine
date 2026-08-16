@@ -5899,3 +5899,20 @@ edit reds the consistency pin. Terraforming interleaves growth
 (drain, then grow onto reclaimed ground at a newer grain).
 Deterministic; budget bands carry derivation homes. TC29 carries
 it with the §161/§161a redirect.
+
+## §161c · THE SITING-RING LAW (2026-08-16, owner: "some
+## institutions should also exist a little outside the main
+## settlement area")
+
+Charter §6 gains the four SITING RINGS — INTRAMURAL / EDGE /
+EXTRAMURAL-NEAR (fairground, mustering green, kilns, lazaretto,
+gallows, burial per culture profile — culture-neutral) / OUTLYING
+(mill AT its water, mines and quarries AT their stone via the
+§161a substrate, monastery apart BY DESIGN, watchtower, ferry,
+junction inn, hunting lodge) — derived per category from function
+(fire, smell, sanctity-of-apartness, resource-binding, land
+hunger, exclusion), never whim. The countryside gains TRUE
+clickable anchors; outlying lanes join the road web; a strong
+OUTLYING institution can be a §5.-1 SECOND NUCLEUS (the abbey the
+town grew toward). The compile's totality census rings all 12
+priorityCategories + split entries. TC29 notified.
