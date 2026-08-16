@@ -1,6 +1,6 @@
 # GV / GV-4 — spatialLedgerCoverage binds TRACKED to a live mover (member 4 of `gv`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `69758820aac972a528f9dd330cb25807106b8979`
 - **Train:** `gv`, family **GV**, member **4** of 4. Path-disjoint from its siblings, and the
   train's CENSUS HOLDER — it is the only member naming the lighting walker.

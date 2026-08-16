@@ -1,6 +1,6 @@
 # GV / GV-3 — ciCheckParity gains the enforcement dimension (member 3 of `gv`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `69758820aac972a528f9dd330cb25807106b8979`
 - **Train:** `gv`, family **GV**, member **3** of 4. Path-disjoint from its siblings.
 - **Preamble:** none — GV is its own family.

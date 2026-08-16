@@ -1,6 +1,6 @@
 # GV / GV-2 — sessionGateCensus binds the call to its consequence (member 2 of `gv`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `69758820aac972a528f9dd330cb25807106b8979`
 - **Train:** `gv`, family **GV**, member **2** of 4. Path-disjoint from its siblings.
 - **Preamble:** none — GV is its own family.

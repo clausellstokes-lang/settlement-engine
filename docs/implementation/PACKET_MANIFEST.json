@@ -11375,7 +11375,7 @@
     },
     {
       "id": "GV-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GV-1.md",
       "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
       "changeManifest": [
@@ -11400,6 +11400,29 @@
         {
           "path": "tests/helpers/sourceContract.js",
           "symbol": "export function mustExtract"
+        }
+,
+        {
+          "path": "tests/helpers/sourceContract.js",
+          "symbol": "export function statementWindowAt"
+        },
+        {
+          "path": "tests/helpers/sourceContract.js",
+          "symbol": "export function sinkStatementOffenders"
+        },
+        {
+          "path": "tests/helpers/sourceContract.js",
+          "symbol": "export function sinkLineOffendersBlind"
+        },
+        {
+          "path": "tests/security/byokNeverLogged.test.js",
+          "symbol": "sinkStatementOffenders("
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/security/byokNeverLogged.test.js",
+          "symbol": "if (SINK_RE.test(line) && KEY_CARRIER_RE.test(line))"
         }
       ],
       "acceptanceCases": [
@@ -11442,7 +11465,7 @@
     },
     {
       "id": "GV-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GV-2.md",
       "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
       "changeManifest": [
@@ -11459,6 +11482,21 @@
         {
           "path": "tests/edgeFunctions/sessionGateCensus.test.js",
           "symbol": "const usesSpendBelt ="
+        }
+,
+        {
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js",
+          "symbol": "function gateEnforcementProblems(src)"
+        },
+        {
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js",
+          "symbol": "const DEAD_LITERAL"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js",
+          "symbol": "/_shared\\/sessionGate\\.ts/.test(src) && /isSessionSuperseded\\s*\\(/.test(src)"
         }
       ],
       "acceptanceCases": [
@@ -11500,7 +11538,7 @@
     },
     {
       "id": "GV-3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GV-3.md",
       "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
       "changeManifest": [
@@ -11521,6 +11559,11 @@
         {
           "path": "tests/build/ciCheckParity.test.js",
           "symbol": "const GATE_JOB_IDS"
+        }
+,
+        {
+          "path": "tests/build/ciCheckParity.test.js",
+          "symbol": "function enforcementEscapesFromJob(job)"
         }
       ],
       "acceptanceCases": [
@@ -11562,7 +11605,7 @@
     },
     {
       "id": "GV-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/GV-4.md",
       "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
       "changeManifest": [
@@ -11587,6 +11630,25 @@
         {
           "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
           "symbol": "const CENSUS = Object.freeze({"
+        }
+,
+        {
+          "path": "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "symbol": "export function orphanedTrackedKeys"
+        },
+        {
+          "path": "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "symbol": "const TRACKED_TO_MOVER"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "titles: 20286, suiteTitles: 5689,"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "titles: 20276, suiteTitles: 5688,"
         }
       ],
       "acceptanceCases": [

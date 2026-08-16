@@ -1,6 +1,6 @@
 # GV / GV-1 — byokNeverLogged goes statement-granular (member 1 of `gv`, SECURITY)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `69758820aac972a528f9dd330cb25807106b8979`
   (the `dcs` terminal; the micro-batch's second train base)
 - **Train:** `gv`, family **GV**, member **1** of 4. All four members are path-disjoint
