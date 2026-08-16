@@ -282,9 +282,15 @@ independently discovered more than once before it was written down. A wave in ei
 prices them AT COMPILE, in its own change manifest.
 
 **A flag mint carries three obligations.** (a) The ordered `subsystemRowsVirtual` equality pin.
-(b) The seven generated edge-shared bundles, whenever `simulationRules.js` moves — the freshness
+(b) The generated edge-shared bundles, whenever `simulationRules.js` moves — the freshness
 gate reds without them, and the cure is one `npm run build:edge-shared` with zero handwritten
-files. (c) ⭐ The LITERAL `<flag>: true` drive in the acceptance file: mechanism-coverage credit
+files. ⚠ **THE FIGURE HERE READ "seven bundles" AND WAS STALE** (corrected under ODQ §142,
+MEASURED against the committed metas' own `inputs`): there are **FIVE** bundles and **TEN**
+artefacts — a `.js` and a `.meta.json` each — and `simulationRules.js` sits in exactly **TWO**
+closures (`aiCharterBundle`, `aiOutputSchemaBundle`), not all five. Count bundles or count
+artefacts, but never quote a number that is silently the sum of the two. **Derive the closure at
+compile from the metas' own `inputs` array rather than re-typing any count here** — that is why
+this clause now names none beyond the correction it is retiring. (c) ⭐ The LITERAL `<flag>: true` drive in the acceptance file: mechanism-coverage credit
 is granted only on a literal, so a computed member attributes to no key at all. Obligation (c)
 is the cheapest to miss, because the code is right and only the machinery is blind.
 
