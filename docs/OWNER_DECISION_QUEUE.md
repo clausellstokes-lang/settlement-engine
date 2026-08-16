@@ -6420,3 +6420,38 @@ Memory milestone written (settlement-map-program-2026-08-16.md).
    constant exists in src) for the walk rings; bundled with MF-5's
    signature in the owner decision batch. MF.U6/U7/U8 signed as
    forks for the build.
+
+## §174 · TC31 COLLECTED — THE ATLAS EXISTS; FOUR RULINGS (2026-08-16,
+## chair under §170)
+
+1. **The institution atlas is DELIVERED: 276/276 catalog entries ×
+   13 columns, mechanically verified** (the catalog measures 276
+   names / 311 tier-scoped definitions; the '57' was one town's
+   roster). §166 underground + §167 affinity (an 18-family matrix
+   with per-cell warrants + mobility weights) absorbed mid-lane.
+   ⭐ §161n's ladders are ALREADY SOURCED: institutionLadders.js
+   (32 maximal ladders) — the charter cites it at the next fold.
+2. **LIVE CATALOG DEFECT FOUND: 42 craft/commerce entries keyed
+   priorityCategory 'government' — the tannery sites at the CIVIC
+   CORE today,** the exact inverse of §161c. RULINGS: (a) fabric
+   placement derives from THE ATLAS's own category column, never
+   the broken key — the map is immune from birth; (b) the upstream
+   catalog cure is chartered as a small declared-shift member for
+   the engine queue (it moves same-seed placement distributions —
+   §110.3 three-part proof) and joins the owner batch as **OB-5**
+   with the chair's recommendation: FIX (the tannery at the civic
+   core is a live realism defect). (c) The 72 entries rendering
+   anonymous (incl. required Town/City halls — five categories
+   lack affinity keys) cure via the atlas rows in the mf build.
+3. **VARIANT MECHANISM RULED (adopting TC31's recommendation):
+   variants are seeded COMPONENT ARRANGEMENTS within a spec** —
+   zero new glyph kinds, the massing bijection pin untouched,
+   priced as MF-1 fabric work. **THE NON-BUILDING CLASS RULED: 87
+   entries are not architecture** (household elders, access-to-
+   services) — the atlas classes them non-architectural; they
+   render as nothing or as their service's truth-layer marker,
+   never as invented buildings. Also recorded: the dragon dwelling
+   is geographical (survives dead-magic worlds — the FANTASTICAL
+   LAW confirmed in landed code); no racial-variant entries exist
+   (absent, not assumed). Lane incident self-caught and cleaned
+   (zero tree impact, porcelain-confirmed).
