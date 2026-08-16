@@ -6783,3 +6783,22 @@ wave three.
    re-opens. CONSEQUENCE: wc-1b exists as a train; the WC-4 →
    WC-6 → WC-7/8/9 cascade (five waves) is unblocked and queues
    after the current §27 order.
+
+## §187 · THE OWNER BATCH ASSEMBLED (2026-08-16, chair)
+
+The eighteen-item decision batch is assembled as ONE sitting
+document (laneOB-OWNER-BATCH.md, delivered to the owner's panel):
+the map gates (lens entitlement; MF-0F with its banked one-key
+proof; MF-D5 derive-from-events rec; OB-4 paces; OB-5 the 42
+mis-keyed catalog entries as a declared-shift FIX rec; OB-6/7
+defer recs), telemetry/product (the referral-loop wiring; the
+sim_address_chain rider; the consent-default SPLIT rec — anonymous
+sim aggregates on-by-construction, person-adjacent off; retention;
+cull; naming; community; support email MUST-confirm; import-vs-
+restore; ci-1c), and the chair-prepped OSR re-governance with an
+eyes-on-the-diff option. Nothing in the batch blocks the build;
+every item names what happens on yes. ALSO this window: TE29's
+first gate red was its OWN seed-loop pattern, caught by
+seedLoopTotality.walker and cured via the estate's collector
+idiom with mutation proof — the walker estate teaching its own
+executors; gate two runs.
