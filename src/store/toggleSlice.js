@@ -177,8 +177,17 @@ export const createToggleSlice = (set, get) => ({
       state.servicesToggles[key] = value ?? !(state.servicesToggles[key] !== false);
     }),
 
+  // THE WRITER CHOKEPOINT (§66.3). This normalizes on WRITE rather than trusting each caller to
+  // remember, because the caller that mattered did not: SettlementsPanel hands `data.servicesToggles`
+  // straight off a loaded save, and that write lands AFTER onRehydrateStorage has already run, so
+  // the rehydrate migration could never heal it. Every future caller inherits the fix by
+  // construction. The pass is pure and idempotent, so a bag already in the current form
+  // normalizes to itself and the common path is unchanged.
+  // ⚠ BEHAVIOUR, STATED: a returning user whose saved service preferences were written under the
+  // pre-Stage-2b display-name key START APPLYING AGAIN. That is the cure's whole purpose, not a
+  // side effect.
   setServiceToggles: (toggles) =>
-    set(state => { state.servicesToggles = toggles; }),
+    set(state => { state.servicesToggles = normalizeServicesToggles(toggles); }),
 
   // One-time on-load migration: rewrite any servicesToggles persisted under the
   // pre-Stage-2b display-name key into the current svcKey form. Idempotent — a

@@ -149,13 +149,39 @@ describe('normalizeServicesToggles', () => {
   });
 });
 
-describe('hydrateServicesToggles action', () => {
-  test('normalizes the persisted bag in place on hydrate', () => {
+// MB-2 — the SAVE-LOAD path. onRehydrateStorage healed the DEVICE-BLOB path only; a save loaded
+// through SettlementsPanel writes the bag AFTER rehydrate has run, so a legacy-keyed bag arriving
+// that way was never normalized by anything. Routing the writer itself is what closes it.
+describe('setServiceToggles normalizes on write (the save-load path)', () => {
+  test('a legacy display-name bag handed to the writer lands normalized', () => {
     const useStore = create(immer((set, get) => createToggleSlice(set, get)));
     const marketKey = matchServiceName('Grand Market');
     useStore.getState().setServiceToggles({
       'Grand Market_service_Price discovery': FORCE,
     });
+    expect(useStore.getState().servicesToggles).toEqual({
+      [`${marketKey}_service_Price discovery`]: FORCE,
+    });
+  });
+
+  test('an already-current bag is written unchanged (the pass is idempotent)', () => {
+    const useStore = create(immer((set, get) => createToggleSlice(set, get)));
+    const marketKey = matchServiceName('Grand Market');
+    const current = { [`${marketKey}_service_Price discovery`]: FORCE };
+    useStore.getState().setServiceToggles(current);
+    expect(useStore.getState().servicesToggles).toEqual(current);
+  });
+});
+
+describe('hydrateServicesToggles action', () => {
+  test('normalizes the persisted bag in place on hydrate', () => {
+    const useStore = create(immer((set, get) => createToggleSlice(set, get)));
+    const marketKey = matchServiceName('Grand Market');
+    // ⚠ PLANTED THROUGH setState, NOT THROUGH THE WRITER. Since MB-2 the writer normalizes, so
+    // seeding this case with setServiceToggles would arrive already-normalized and this test
+    // would pass even if hydrateServicesToggles did nothing at all — it would stop discriminating
+    // exactly when it stopped being able to fail. The raw bag is planted directly instead.
+    useStore.setState({ servicesToggles: { 'Grand Market_service_Price discovery': FORCE } });
     useStore.getState().hydrateServicesToggles();
     expect(useStore.getState().servicesToggles).toEqual({
       [`${marketKey}_service_Price discovery`]: FORCE,
