@@ -294,7 +294,17 @@ Its mechanism-coverage baseline row, appended with the standard rationale idiom.
 estate-wide rows, and both belong to the minting wave rather than to whichever family happens to
 own the file.
 
-Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4.
+**A new `tests/lint/` file carries one obligation: its mutation-coverage row.** `tests/lint` is
+one of the directories `tests/lint/mutationCoverage.shared.mjs` enumerates, and
+`tests/lint/mutationCoverageManifest.test.js` asserts that every enumerated file owns an
+`invariants` entry in `scripts/mutation-coverage-manifest.json`. So a wave that adds a file
+there owes that row, and owes it AT COMPILE, inside its own change manifest. It was discovered
+at a terminal twice instead, each time forcing a surgical cure into a train that was otherwise
+proven — which is why it is written down here rather than left to the next author to rediscover.
+⛔ The row is added surgically beside its siblings. That manifest is never re-serialised whole:
+a formatter's diff would bury the one row that matters.
+
+Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3.
 
 ## Burning a census row
 
@@ -311,6 +321,37 @@ message names what was eradicated, and any future member of that population reds
 instead of being banked into a census.
 
 Authority: `OWNER_DECISION_QUEUE.md` §95.2, §97.2.
+
+## Ungated persistence
+
+⛔ **An arm that normalizes or cleans PERSISTED state runs UNCONDITIONALLY.** Gating persistence
+hygiene behind a feature flag is the fail-OPEN direction, and the direction is what makes it a
+law rather than a preference: a world generated while the flag is dark keeps its saves
+un-normalized, and the rot is discovered later by a reader that cannot tell a stale shape from
+a new one. A flag may gate the FEATURE the normalization serves. It may never gate the
+normalization itself.
+
+The same rule reads as a preflight question for any packet that mints a flag beside a migration
+or a cleanup pass: *does the arm that repairs stored state sit inside the flag's conditional?*
+If it does, the packet moves it out before dispatch.
+
+Authority: `OWNER_DECISION_QUEUE.md` §103.2.
+
+## Edge-shared bundle closures
+
+**A member editing ANY file inside an edge-shared bundle closure OWES the bundle regeneration,
+priced at compile.** The closure is an entry module named in `scripts/build-edge-shared.mjs`
+plus every module it transitively imports; the obligation is discharged by one
+`npm run build:edge-shared` and zero handwritten files. Each bundle's own
+`*.freshness.test.js` reds on a stale bundle, so the cost is paid either at compile or at the
+terminal — and only the first of those is cheap.
+
+⚠ The clause under "Registration obligations a wave prices at compile" is FLAG-MINT-SCOPED: it
+names `simulationRules.js` and the seven generated bundles. This section is the GENERAL law.
+The trigger is membership of a closure, never the identity of one file, and a member that
+cannot say whether its file is inside one resolves that at compile rather than at the gate.
+
+Authority: `OWNER_DECISION_QUEUE.md` §104.4.
 
 ## Family packet preambles
 
@@ -528,7 +569,23 @@ Broad fences such as `src/domain/**`, `src/components/**`, or `tests/**` are not
 allowed. A target outside the manifest is out of scope even when the full gate
 finds an adjacent defect.
 
-A `requiredSymbols` row names a symbol the packet's deliverable preserves or creates, never one it retires. A retirement is recorded as a `retiredSymbols` row naming the retiree, and the packet's `requiredSymbols` names the **successor** instead. A packet that names one symbol in both lists is refused.
+A `requiredSymbols` row names a symbol that is PRESENT IN THE TREE AT THE PACKET'S CURRENT
+STATUS. The validator resolves every row against the live tree at EVERY status — never against
+the deliverable's future — so a `READY` packet's rows name only what its deliverable must
+PRESERVE. A symbol the deliverable CREATES cannot be named until it exists, which is the flip
+to `LANDED`; naming it at promotion reds `validate:packets` on the promotion commit itself and
+makes the whole window between promotion and implementation dishonest.
+
+⛔ The earlier wording here — "preserves **or creates**" — was UNENFORCEABLE at `READY` and is
+withdrawn on executed evidence: the wave that first wrote it convicted its own draft. The
+post-cure symbols are added at the flip, where they still make every later deletion detectable
+by the gate.
+
+A retirement is recorded as a `retiredSymbols` row naming the retiree, and the packet's
+`requiredSymbols` names the **successor** instead — again only once the successor exists. A
+packet that names one symbol in both lists is refused.
+
+Authority: `OWNER_DECISION_QUEUE.md` §101.4.
 
 ## Mandatory implementation order
 
