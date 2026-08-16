@@ -6354,3 +6354,23 @@ follows per the SA-1/MF-R1 precedent.
    landing through the real gate after the §27 queue → §109
    side-by-side against the corpus with the owner's eyes as final
    gate. Unlimited Higgsfield stands for any lane's references.
+
+## §171 · THE CUTOVER LAW (2026-08-16, owner: "remove all the other
+## maps in favor of the ones we are building — this is the key")
+
+Charter §14: the fabric folio is THE settlement map. PROVE THEN CUT
+— legacy v1/v2 stay byte-frozen until the §109 side-by-side passes
+AND the owner's eyes approve; then the CUTOVER MEMBER (final train)
+retires the legacy plan renderers, collapses the layout dial to the
+fabric version for ALL settlements (a DECLARED presentation shift,
+owner-ordered; facts and lived history untouched — the map is a
+projection), retires the legacy goldens + the parchment===legacy
+pin as declared §110.3 re-records, re-renders thumbnails + PDF
+plates (08C declared), and removes dead code by the estate's
+prove-no-consumer discipline. SURVIVORS (chair, vetoable):
+Panorama + 3D Portrait as views (folio restyle = post-launch
+follow-up), realm surfaces out of scope, fog survives inside the
+folio. THE DIVIDEND: no permanent dual-renderer maintenance — mf
+builds no long-term coexistence machinery; one map, one idiom, one
+truth. MF-B1 notified (coexistence contortions OUT of scope);
+the post-MF-R2 compile refresh prices the cutover member.
