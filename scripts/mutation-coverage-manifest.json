@@ -1750,6 +1750,11 @@
    "kind": "rationale",
    "ref": "pglite-executed"
   },
+  "tests/soak-harness/checkpointRestoreParity.test.js": {
+   "kind": "rationale",
+   "rationale": "SK-2B's checkpoint/restore proof surface. It pins the SK.U1 cure: the year-boundary JSON round trip DROPS undefined-valued keys, the composite hash is JSON.stringify-based and blind to exactly that loss, and the writer/reader record and re-plant the exact segment-array paths so the restored realm is the same realm. EVERY ARM ALREADY CARRIES ITS OWN COUNTERFACTUAL INSIDE THE FILE: the naive round trip is asserted to produce a byte-identical hash ACROSS the loss (which is why a hash-only proof would be green and meaningless); the replant-as-no-op case is asserted to RED the census; an unreachable replant path is asserted to be reported rather than swallowed; a capsule with no durable home and a capsule for a host-observability firing are each asserted refused by their own cause; and the replay renderer is asserted to carry no sha-shaped token but the recorded one. A standing source mutation would sample one branch of a design whose whole content is bidirectional exactness, and the arms above already discriminate at every door. The EXECUTED two-year restore probe that settles SK.U1 empirically runs at the train terminal and is quoted in the lane receipt, not in this suite, because ODQ 145.2 forbids a soak inside a test.",
+   "kindNote": "rationale rather than a planted sweep mutation: a plant additionally requires a MUTATED_FILES row, and the sibling walkers that landed in this window took inline rationales too. Upgrading to a plant later is a strict improvement needing no baseline movement."
+  },
   "tests/security/worldSnapshotDenyCensus.test.js": {
    "kind": "uncovered"
   },

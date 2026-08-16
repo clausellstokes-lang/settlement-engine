@@ -4592,7 +4592,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //
     // +5 suite titles: six new `describe` blocks (the pglite file carries TWO — a
     // presence guard and the behaviour suite) minus the deleted file's one.
-    files: 2443, parked: 364, credited: 2079, titles: 20326, suiteTitles: 5697,
+    // ── RE-RECORDED 2026-08-16 BY THE `sk-a` TRAIN (the soak harness, ODQ §141/§143) ─
+    // 2443/364/2079/20326/5697 → 2447/364/2083/20348/5701. FOUR test files created, none
+    // deleted, so `files` moves +4 and `parked` does not move at all: all four spell their
+    // titles as literals in a straight-line block and are CREDITED. `files`, `parked` and
+    // `credited` are asserted BEFORE `titles`, and their passing is the receipt that the
+    // file-level prediction was right.
+    //
+    // THE +22 ATTRIBUTED BY MEASUREMENT — each row obtained by replacing THAT ONE FILE
+    // with a one-title credited stub and re-running this walker, never by counting `it`
+    // calls by eye:
+    //   tests/soak-harness/soakScriptSeams.test.js           +7 titles
+    //   tests/soak-harness/tripwireRegistry.test.js          +6 titles
+    //   tests/soak-harness/checkpointRestoreParity.test.js   +5 titles
+    //   tests/soak-harness/determinismUnderWorkers.test.js   +4 titles
+    //   = +22, and the arithmetic closes with nothing left over.
+    //
+    // ⚠ THE COMPILE PREDICTED +31 AND THE MEASURED DELTA IS +22, WHICH IS EXACTLY THE
+    // SHAPE THE PARKED-FILE HAZARD WEARS — a delta smaller than predicted is never
+    // arithmetic to accept. It was run down rather than assumed: the four probes above
+    // account for every title, `parked` is unmoved, and `credited` moved by the full +4,
+    // so no file swallowed anything. The compile simply estimated more `it` blocks per
+    // file than the members needed.
+    //
+    // +4 suite titles: exactly one new `describe` per new file.
+    files: 2447, parked: 364, credited: 2083, titles: 20348, suiteTitles: 5701,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
