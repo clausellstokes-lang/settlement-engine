@@ -4457,7 +4457,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   again: `titles` (20235 → 20247), then `suiteTitles` reported `expected 5682 to be
     //   5681` — read from the walker's own output, never assumed to have held.
     // 2438/364/2074/20235/5681 → 2438/364/2074/20247/5682.
-    files: 2438, parked: 364, credited: 2074, titles: 20247, suiteTitles: 5682,
+    // da-c (the M12 mint + DA-B1) re-records on DA-B1, its only tests-moving member.
+    //   files/parked/credited AGAIN do not move: no member creates a test file, and all
+    //   three are asserted BEFORE `titles` and all three passed. +8 titles and +2 suites,
+    //   and the split closes in ONE file — tests/domain/humanizeEngineTokens.test.js gains
+    //   a five-arm describe for the authored lexicon (the producer-source scan, the two
+    //   authored-label arms, the fallthrough, the frozen-data arm) and a three-arm describe
+    //   for humanizeIfToken. 5 + 3 = 8, and the two new describes are the +2 on the suite
+    //   layer. ⭐ THE MINT ADDS NONE: it converts assertions inside the EXISTING A1/A7 arm
+    //   and re-pins one cohort figure, so a governed-instrument change moved this census by
+    //   exactly zero — which is the evidence that it changed no test's identity.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so this took two runs
+    //   again: `titles` (20247 → 20255), then `suiteTitles` reported `expected 5684 to be
+    //   5682` — read from the walker's own output, never assumed to have held.
+    // 2438/364/2074/20247/5682 → 2438/364/2074/20255/5684.
+    files: 2438, parked: 364, credited: 2074, titles: 20255, suiteTitles: 5684,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
