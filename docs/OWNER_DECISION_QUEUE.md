@@ -5762,3 +5762,29 @@ gallery-seeding lane offer stands.
    Owner-authorized spend consumed ~120 credits across 28 4K
    generations tonight; the platform's nano_banana_2 routing note
    (§156.1) applies throughout.
+
+## §158 · THE STATE-AXIS DISPOSITION RULED (2026-08-16, chair on
+## owner order, vetoable)
+
+1. Charter §10 now holds THE STATE-AXIS DISPOSITION TABLE — every
+   simulation state axis ruled into FABRIC-EXPRESSED (11 axes incl.
+   WARD WEALTH STRATIFICATION with slum shanty-fringes, growth vs
+   decline trajectory, migration influx) / TRUTH-LAYER MARKER
+   (siege, plague, the 21-key stressor catalog under a compile-owed
+   TOTALITY CENSUS, monster pressure, conditions) / DM-LENS-ONLY
+   (underworld ordinary-by-default, corruption marks, faction
+   territory tint) / DOES-NOT-EXPRESS with reasons.
+2. **THE GOOD-vs-EVIL RULING: metaphysical alignment does not exist
+   in the simulation and does not express** — no canonical field
+   (one-source rule), and the deity doctrine + setting-agnosticism
+   forbid a cosmic-morality layer. The instinct IS served through
+   observable proxies (crime, corruption, order, oppression): a
+   cruelly-ruled town LOOKS cruelly ruled without the engine
+   asserting "evil." An alignment dial would be NEW sim state —
+   owner-gated if ever wanted. **THE TIME-GRAIN LAW: the folio is a
+   YEAR-scale document — tick transients (festivals, weather,
+   crowds-as-events) belong to the news, never the map.** No NPC
+   portraiture (product scope). Say "veto" on any row.
+3. Three corpus gaps the table exposed → generated: slum-fringe
+   city (ward stratification + shanty accretion), boomtown growth
+   fringe, refugee gate-camps (migration axis). Corpus → 30.
