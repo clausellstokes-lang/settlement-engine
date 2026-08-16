@@ -1,6 +1,6 @@
 # MB / MB-1 — the forecast leaves the main thread (member 1 of `mb`, T-ENGINE)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `752b1bbc36672bc54e6bbed67284f8a0ba5e0a32`
   (the `gvf` terminal; the micro-batch's fourth train base)
 - **Train:** `mb`, family **MB**, member **1** of 3 (MB-3 dropped — see §1).

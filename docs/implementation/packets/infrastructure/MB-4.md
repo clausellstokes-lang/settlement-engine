@@ -1,6 +1,6 @@
 # MB / MB-4 — the two riders (member 3 of `mb`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `752b1bbc36672bc54e6bbed67284f8a0ba5e0a32`
   (the `gvf` terminal; the micro-batch's fourth train base)
 - **Train:** `mb`, family **MB**, member **3** of 3.

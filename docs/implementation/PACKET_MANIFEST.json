@@ -12001,7 +12001,7 @@
     },
     {
       "id": "MB-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/MB-1.md",
       "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
       "changeManifest": [
@@ -12062,6 +12062,42 @@
         {
           "path": "tests/components/realmForecastHonesty.test.jsx",
           "symbol": "vi.mock('../../src/domain/worldPulse/forecastRun.js'"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "export function workerBackedRunner"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "runInterval = simulateCampaignWorldInterval"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "const result = await runInterval({"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "candidate, runInterval })"
+        },
+        {
+          "path": "src/domain/worldPulse/auspice.js",
+          "symbol": "...(runInterval ? { runInterval } : {})"
+        },
+        {
+          "path": "src/components/map/RealmForecast.jsx",
+          "symbol": "workerBackedRunner(runAdvanceInterval)"
+        },
+        {
+          "path": "src/components/auspice/AuspicePanel.jsx",
+          "symbol": "workerBackedRunner(runAdvanceInterval)"
+        },
+        {
+          "path": "tests/domain/advanceWorkerByteIdentity.test.js",
+          "symbol": "the forecast transport seam is byte-neutral"
+        },
+        {
+          "path": "tests/components/realmForecastHonesty.test.jsx",
+          "symbol": "workerBackedRunner:"
         }
       ],
       "retiredSymbols": [
@@ -12114,7 +12150,7 @@
     },
     {
       "id": "MB-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/MB-2.md",
       "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
       "changeManifest": [
@@ -12143,6 +12179,18 @@
         {
           "path": "tests/store/toggleSlice.servicesNormalize.test.js",
           "symbol": "the services-toggle migration is wired into the store rehydrate path"
+        },
+        {
+          "path": "src/store/toggleSlice.js",
+          "symbol": "state.servicesToggles = normalizeServicesToggles(toggles)"
+        },
+        {
+          "path": "tests/store/toggleSlice.servicesNormalize.test.js",
+          "symbol": "setServiceToggles normalizes on write"
+        },
+        {
+          "path": "tests/store/toggleSlice.servicesNormalize.test.js",
+          "symbol": "useStore.setState({ servicesToggles:"
         }
       ],
       "retiredSymbols": [
@@ -12181,7 +12229,7 @@
     },
     {
       "id": "MB-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/MB-4.md",
       "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
       "changeManifest": [
@@ -12206,6 +12254,18 @@
         {
           "path": "src/domain/activeConditions.js",
           "symbol": "factionRelationshipUpdate (Phase 14) keyed by the same archetype"
+        },
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "variant=\"secondary\""
+        },
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "isPrimaryCta: _isPrimaryCta"
+        },
+        {
+          "path": "src/domain/activeConditions.js",
+          "symbol": "QUALIFIED (XLS-4)"
         }
       ],
       "retiredSymbols": [
