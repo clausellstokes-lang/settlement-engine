@@ -1,6 +1,7 @@
 # SK / SK-2B — checkpoints, capsules, and the `sk-a` census re-record (member 4 of `sk-a`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `9d43a840`
 - **Verified base:** `claude/composite-r4` at `0cbb0177b177717873804200e908a27d42363ed4`
 - **Train:** `sk-a`, family **SK**, member **4** of 4 — last in the train.
 - **Depends on:** SK-0, SK-1, SK-2A.

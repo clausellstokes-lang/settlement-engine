@@ -1,6 +1,7 @@
 # SK / SK-0 — the soak-script extension (member 1 of `sk-a`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `b8753e28`
 - **Verified base:** `claude/composite-r4` at `0cbb0177b177717873804200e908a27d42363ed4`
   (the `tm-core` terminal)
 - **Train:** `sk-a`, family **SK**, member **1** of 4.

@@ -1,6 +1,7 @@
 # SK / SK-2A — the two-class tripwire registry (member 3 of `sk-a`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `d2dc4816`
 - **Verified base:** `claude/composite-r4` at `0cbb0177b177717873804200e908a27d42363ed4`
 - **Train:** `sk-a`, family **SK**, member **3** of 4.
 - **Depends on:** SK-1.

@@ -12800,7 +12800,7 @@
     },
     {
       "id": "SK-0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-0.md",
       "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
       "changeManifest": [
@@ -12846,6 +12846,43 @@
           "path": "src/domain/certification/certificationSchema.js",
           "symbol": "seed_divergent"
         }
+,
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function composeSoakRules"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function soakProperties"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function soakInvocationRefusals"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function deepKeyCensus"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function collectUndefinedKeyPaths"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function replantUndefinedKeys"
+        },
+        {
+          "path": "scripts/audit/behavioral-observation.mjs",
+          "symbol": "export function measureAddressChain"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "yearlyHashes: runA.yearlyHashes"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "finalDiedFlags"
+        }
       ],
       "acceptanceCases": [
         {
@@ -12889,7 +12926,7 @@
     },
     {
       "id": "SK-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-1.md",
       "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
       "changeManifest": [
@@ -12927,6 +12964,27 @@
           "path": "scripts/audit/whole-world-soak.mjs",
           "symbol": "const RECEIPT_PATH = arg('receipt', '')"
         }
+,
+        {
+          "path": "scripts/soak/pool.mjs",
+          "symbol": "export function grid"
+        },
+        {
+          "path": "scripts/soak/pool.mjs",
+          "symbol": "export const VOLATILE_RECEIPT_FIELDS"
+        },
+        {
+          "path": "scripts/soak/pool.mjs",
+          "symbol": "export function compareRuns"
+        },
+        {
+          "path": "scripts/soak/archive.mjs",
+          "symbol": "export function assertOutsideRepository"
+        },
+        {
+          "path": "scripts/soak/run.mjs",
+          "symbol": "export function planRun"
+        }
       ],
       "acceptanceCases": [
         {
@@ -12962,7 +13020,7 @@
     },
     {
       "id": "SK-2A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-2A.md",
       "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
       "changeManifest": [
@@ -12983,6 +13041,19 @@
         {
           "path": "scripts/audit/whole-world-soak.mjs",
           "symbol": "lifecycleDiedAtTick"
+        }
+,
+        {
+          "path": "scripts/soak/tripwires.mjs",
+          "symbol": "export const TRIPWIRES"
+        },
+        {
+          "path": "scripts/soak/tripwires.mjs",
+          "symbol": "export const TRIPWIRE_CLASSES"
+        },
+        {
+          "path": "scripts/soak/tripwires.mjs",
+          "symbol": "export function evaluateTripwires"
         }
       ],
       "acceptanceCases": [
@@ -13018,7 +13089,7 @@
     },
     {
       "id": "SK-2B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-2B.md",
       "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
       "changeManifest": [
@@ -13063,6 +13134,27 @@
         {
           "path": "scripts/count-transcendental-math.mjs",
           "symbol": "transcendental"
+        }
+,
+        {
+          "path": "scripts/soak/checkpoint.mjs",
+          "symbol": "export const CHECKPOINT_CADENCE_BANDS"
+        },
+        {
+          "path": "scripts/soak/capsule.mjs",
+          "symbol": "export function buildCapsule"
+        },
+        {
+          "path": "scripts/soak/replay.template.mjs",
+          "symbol": "export function renderReplayScript"
+        },
+        {
+          "path": "scripts/soak/replay.template.mjs",
+          "symbol": "export const REPLAY_VERDICTS"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "tests/soak-harness/checkpointRestoreParity.test.js"
         }
       ],
       "acceptanceCases": [

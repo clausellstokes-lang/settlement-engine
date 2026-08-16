@@ -1,6 +1,7 @@
 # SK / SK-1 — the runner core, the parallel seed pool, and the walker's `scripts/soak` floor (member 2 of `sk-a`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `530c0c12`
 - **Verified base:** `claude/composite-r4` at `0cbb0177b177717873804200e908a27d42363ed4`
 - **Train:** `sk-a`, family **SK**, member **2** of 4.
 - **Depends on:** SK-0; `tm-core` LANDED (TM-1W creates the walker this member edits).
