@@ -6374,3 +6374,17 @@ folio. THE DIVIDEND: no permanent dual-renderer maintenance — mf
 builds no long-term coexistence machinery; one map, one idiom, one
 truth. MF-B1 notified (coexistence contortions OUT of scope);
 the post-MF-R2 compile refresh prices the cutover member.
+
+## §172 · THE MAP DESIGN SESSION SEALED (2026-08-16, owner: "deal
+## and done. i leave all of the rest to you.")
+
+The design conversation §150-§171 closes with total delegation:
+twenty-two owner directives absorbed into one charter (§0-§14),
+zero contradictions standing, the reconciliation audit in flight,
+the build engaged in waves, the corpus at ~52, the cutover
+chartered prove-then-cut. The chair executes the remainder —
+audit rulings, build waves, exemplar judgments, cutover — under
+the §170 delegation and the set standard; owner returns for: the
+§109 side-by-side eyes, the decision batch (LENS_COUNT, MF-0F,
+MF-D5 + the standing batch), the tuning signature, legal+launch.
+Memory milestone written (settlement-map-program-2026-08-16.md).
