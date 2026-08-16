@@ -10975,7 +10975,7 @@
     },
 {
       "id": "DOM-3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DOM-3.md",
       "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
       "changeManifest": [
@@ -11080,6 +11080,52 @@
         {
           "path": "tests/components/founderPurchasePathAbsent.test.jsx",
           "symbol": "THE INBOUND PATH IS UNTOUCHED \u2014 the webhook can still refund a historical sale"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/copy/pricingPage.js",
+          "symbol": "cta: 'Claim a founder seat',"
+        },
+        {
+          "path": "src/copy/pricingPage.js",
+          "symbol": "seatsRemaining: '{remaining} of {seats} seats remaining.',"
+        },
+        {
+          "path": "src/copy/pricingPage.js",
+          "symbol": "arithmetic: '{price} is about {months} months of Cartographer."
+        },
+        {
+          "path": "src/copy/en.js",
+          "symbol": "priceLabel:  '$99',"
+        },
+        {
+          "path": "src/copy/en.js",
+          "symbol": "cta:         'Claim a Founder seat',"
+        },
+        {
+          "path": "src/copy/landing.js",
+          "symbol": "One payment, no clock."
+        },
+        {
+          "path": "src/components/pricing/FounderTile.jsx",
+          "symbol": "startCheckout('founder_lifetime')"
+        },
+        {
+          "path": "src/components/home/LandingBelowFold.jsx",
+          "symbol": "`${remaining}/${cap} seats left`"
+        },
+        {
+          "path": "supabase/functions/create-checkout/index.ts",
+          "symbol": "founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME')"
+        },
+        {
+          "path": "supabase/functions/create-checkout/index.ts",
+          "symbol": "const FOUNDER_SEAT_LIMIT = 30;"
+        },
+        {
+          "path": "src/config/pricing.js",
+          "symbol": "stripeProduct: 'founder_lifetime',"
         }
       ],
       "acceptanceCases": [

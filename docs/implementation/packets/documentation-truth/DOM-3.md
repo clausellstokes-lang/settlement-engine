@@ -1,6 +1,7 @@
 # DOM / DOM-3 — the founder purchase path, abolished
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `cea076f5`
 - **Verified base:** `claude/composite-r4` at `30638bb77f188a6bc4a8017bc53c74b63a05cb71`
 - **Train:** `dom`, family **DOM**, member **4** in landing order and LAST BY DESIGN, so the
   train's prefix stands lawful if this member stops. Promoted only after DOM-4 flipped LANDED
