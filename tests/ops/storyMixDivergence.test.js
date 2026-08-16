@@ -126,9 +126,25 @@ describe('story-mix divergence instrument', () => {
     expect(source).toMatch(/check\(\s*storyMixDivergence\.passed,\s*'different seeds produce a divergent event-type mix'/);
     expect(source).toMatch(/const hashDiverged = [^;]+;/);
     expect(source).toContain("composite hash ${hashDiverged ? 'also differed' : 'did not differ'}");
-    expect(source).toMatch(/const seedDivergence = buildStoryMixDivergenceEvidence\(\{/);
+    // ⚠ DE-ROTTED BY sk-a/SK-0, NOT DELETED. This arm used to read
+    // `/const seedDivergence = buildStoryMixDivergenceEvidence\(\{/`, which froze the
+    // STATEMENT FORM of a line the harness must lawfully change: `--skip-divergence`
+    // makes run C conditional, so the binding cannot be a single `const` any more. The
+    // pin's INTENT — the receipt's seedDivergence is BUILT by the evidence builder and
+    // never invented — is still exactly right, so it is re-anchored rather than dropped,
+    // and the cure's own law is folded in beside it so the arm ends up STRONGER.
+    expect(source).toMatch(/seedDivergence = \{\s*executed: true,\s*\.\.\.buildStoryMixDivergenceEvidence\(\{/);
     expect(source).toContain('comparison: storyMixDivergence,');
     expect(source).toContain('seedDivergence,');
+    // ⛔ THE UNEARNED-PROPERTY LAW, pinned at its source. `properties` must be COMPUTED
+    // from what executed — a literal array always containing `seed_divergent` would let a
+    // skipped run publish the customer-facing clause certificationSchema.js reads as
+    // "told a different tale on a different seed".
+    expect(source).toContain('properties: soakProperties({');
+    expect(source).toContain('seedDivergenceExecuted: seedDivergence.executed === true,');
+    // …and the skipped branch states its absence POSITIVELY rather than leaving a gap a
+    // reader has to infer from a missing key.
+    expect(source).toMatch(/executed: false,\s*reason: 'harness --skip-divergence'/);
     // The receipt now carries the MEASURED observation, and the collector is
     // actually driven per year rather than merely imported.
     expect(source).toContain('warConvergence: warConvergenceCollected.observation,');
