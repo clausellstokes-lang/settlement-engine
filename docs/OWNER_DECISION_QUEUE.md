@@ -6495,3 +6495,25 @@ Memory milestone written (settlement-map-program-2026-08-16.md).
 4. MF-B1's brief refreshed (composition-order + churn citations +
    audience axis bind its foundation). No section renumbering —
    TC29/30/31 cites stay valid; every cure was additive.
+
+## §176 · THE FORCED-FACT RECONCILIATION LAW (2026-08-16, owner:
+## "account for if the user forces things that usually are
+## incoherent… like a mountainside next to an ocean that has a
+## port")
+
+Charter §5.-1c: forced facts are TRUTH, never errors, never
+dropped — the substrate runs as a CONSTRAINT SOLVER over landform
+families seeking the form that makes ALL forced facts believable
+(mountain+sea+port = the fjord/cliff-harbor family: the town
+terraced above, the port in the cove below; history is the
+solution catalog); STRAIN RENDERS AS WORK (switchbacks, terraces,
+breakwaters, stilts — the visible-work idiom as the universal
+believability valve, with the strain-flex recorded); precedence
+under force: user-truth > state > tier > terrain-plausibility >
+jitter; the consistency pin re-targets to "best reconciliation of
+everything forced, every fact honored"; the honest residue clause
+for true impossibilia (render every fact at its most defensible
+placement, record the strain, never editorialize, never break);
+deterministic; the §109 acceptance set gains the owner's
+mountain-ocean-port exemplar. MF-B1 notified — the substrate
+member becomes a solver, not a lookup.
