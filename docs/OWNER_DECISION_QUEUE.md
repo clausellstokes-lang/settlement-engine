@@ -5651,3 +5651,30 @@ gallery-seeding lane offer stands.
    "veto" for the painterly alternative.
 3. Both live map lanes redirected mid-flight: MF-P1 renders to §9;
    MF-R1's audit scope extends to §9.
+
+## §154 · OWNER ORDERS: THE MORPHOLOGY LAW + THE HIGGSFIELD GUIDE SESSION (2026-08-16)
+
+1. **Morphology (owner, verbatim intent): "pure circle should only be
+   for the most orderly… model the base after historical layouts…
+   calibrate based on reality."** Charter §5.0 now holds THE
+   MORPHOLOGY LAW: organic accretion is the DEFAULT at every tier
+   (irregular, path-dependent, terrain-following — historical
+   reality); partial regularization at middle order (event-derived
+   grid insertions); planned geometry (rings/grids) ONLY where the
+   canonical facts support a planning authority. The selector is a
+   derivation over governance/founding/order fields; the §109
+   exemplar corpus must be organic-dominant in historical
+   proportion. MF-P1 redirected.
+2. **The Higgsfield visual-guide session is LIVE on the owner's
+   account (owner-authorized spend, "as much as needed, highest
+   fidelity"):** Nano Banana Pro, 4K, 3:2. Generation #1 (walled
+   town, Imola idiom) landed EXCELLENT and stands as the
+   Parchment-lens north star (it even lettered the cartouche
+   "Zlatoets"); its one defect — perfect concentric geometry — is
+   exactly what §154.1 corrects; the remaining series (organic
+   river town, village, high-order planned contrast, night-pigment)
+   generates with organic-first prompts. Calibration notes fold to
+   laneHF-CALIBRATION.md; the owner's earlier 3 banked marketing
+   prompts remain a separate parked session. Higgsfield connector
+   added by owner mid-session but its tools are not visible to this
+   session yet — the browser route is the working path.
