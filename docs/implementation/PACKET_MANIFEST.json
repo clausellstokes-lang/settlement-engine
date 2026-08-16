@@ -13926,6 +13926,139 @@
           "tests/lint/sovereigntyLightingContract.walker.test.js"
         ]
       ]
+    },
+    {
+      "id": "EP-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/EP-2.md",
+      "verifiedBase": "da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/store/campaignAdvanceSession.js" },
+        { "action": "MODIFY", "path": "src/store/campaignWorldPulseDeferred.js" },
+        { "action": "MODIFY", "path": "src/store/campaignWorldPulseSlice.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/forecastRun.js" },
+        { "action": "CREATE", "path": "tests/store/advanceEpochForkSemantics.test.js" },
+        { "action": "TEST", "path": "tests/store/advanceFullAutoResolve.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "MATERIALIZATION M2 arrives as a PARAMETER rather than as a read, so the flag gate lives at the two call sites that know which world they are in. Spelled as an open prefix through the parameter list, never a closed call expression: EP-3B edits this file no further, but the closed-expression rot class already bit EP-0 once in this train.",
+          "path": "src/store/campaignAdvanceSession.js",
+          "symbol": "export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null, epochTerm = null)"
+        },
+        { "path": "src/store/campaignAdvanceSession.js", "symbol": "...(epochTerm ? { advanceEpoch: epochTerm } : {})," },
+        {
+          "_note": "THE RESUME PATH GATE, and it is the LIVE half of the belt-and-braces pair on this path: the kernel re-derives the paused tick from the cursor PRE-SNAPSHOT world, so its own gate reads rules frozen at pause time. This read is what darkens a resume after a mid-pause flag flip. The receiver must stay literally named `simulationRules` or the engineGatedRuleKeys census cannot see it and fence 4 reds it as a loose read.",
+          "path": "src/store/campaignAdvanceSession.js",
+          "symbol": "const epochTerm = simulationRules?.advanceEpochEnabled === true"
+        },
+        { "path": "src/store/campaignAdvanceSession.js", "symbol": "advanceEpoch: epochTerm," },
+        { "path": "src/store/campaignWorldPulseDeferred.js", "symbol": "advanceEpoch: previewCampaign.worldState?.pausedAdvance?.advanceEpoch" },
+        { "path": "src/domain/worldPulse/forecastRun.js", "symbol": "const advanceEpoch = ws.pausedAdvance?.advanceEpoch ?? null;" },
+        { "path": "tests/store/advanceEpochForkSemantics.test.js", "symbol": "const PAUSING_INTERVAL" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a paused LIT advance parks its epoch on the cursor, and a dark advance parks no such key at all" },
+        { "id": "A2", "case": "the cursor is the resume source, an explicit option overrides it, and a DIFFERENT value finishes a DIFFERENT world" },
+        { "id": "A3", "case": "across a mid-pause flag flip the store withholds the value, and a world that never ran lit resumes composing the LITERAL legacy string with no epoch key on its record" },
+        { "id": "A4", "case": "the store preview inherits the campaign PENDING epoch, and previews the bare root when the rule is dark" },
+        { "id": "A5", "case": "preview and commit agree over the WHOLE projection in both flag states, with exactly two exclusions, both proven load-bearing by an empty-list control" },
+        { "id": "A6", "case": "a preview threaded a different epoch predicts a different future, and one with none under a lit rule is a hard error rather than a silent dark composition" },
+        { "id": "A7", "case": "the forecast inherits the pending epoch, mints nothing, and reaches no draw when the rule is dark" },
+        { "id": "A8", "case": "undo then re-advance draws a DIFFERENT world lit and the SAME world dark, with the proposal ring, the advance sequence and the snapshot-revert door untouched" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/store/advanceEpochForkSemantics.test.js",
+          "tests/store/advanceFullAutoResolve.test.js",
+          "tests/store/advancePauseResume.test.js",
+          "tests/store/advancePauseSnapshotBounded.test.js",
+          "tests/property/advanceEpochDormancyFence.test.js",
+          "tests/domain/forecastRun.test.js",
+          "tests/joins/realmForecast.test.js",
+          "tests/store/catchUpCampaignWorld.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EP-3A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/EP-3A.md",
+      "verifiedBase": "da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/advanceEpochLedger.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseKernel.js" },
+        { "action": "MODIFY", "path": "src/lib/spatialUsage.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/roadsKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/demographicsKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/demographicsPlans.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/sovereigntyMarketStage.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/realmVerbExecution.js" },
+        { "action": "MODIFY", "path": "scripts/.size-baseline.json" },
+        { "action": "REGISTER", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "CREATE", "path": "tests/domain/advanceEpochStampSurvival.test.js" },
+        { "action": "CREATE", "path": "tests/lint/advanceEpochSingleWriter.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/entropyRootCensus.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/advanceEpochLedger.js", "symbol": "export function stampAdvanceEpochYear" },
+        {
+          "_note": "THE FAMILY-1 ACCESSOR. Its second parameter is `{ base }` \u2014 the SITE OWN expression handed in \u2014 and NOT the volume sketched `{ absent }`, which cannot reproduce five of the six site coercions byte-verbatim and contradicts three of the volume own per-site notes. The packet \u00a73 carries the measurement. Slice B must keep the same shape for the year accessor.",
+          "path": "src/domain/advanceEpochLedger.js",
+          "symbol": "export function tickStreamSeedOf"
+        },
+        {
+          "_note": "THE ONE DECLARED KERNEL RATCHET-UP OF THIS TRAIN (J-EP-11), 1580 to 1581. Seam edit 9 itself is +0.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "import { stampAdvanceEpochYear } from '../advanceEpochLedger.js';"
+        },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "worldState = stampAdvanceEpochYear(worldState, epochTerm);" },
+        { "path": "src/lib/spatialUsage.js", "symbol": "advanceEpoch:" },
+        {
+          "_note": "RS-5. The `;`-joined leaf import above it is a BUDGET fact: this file sits at exactly its frozen 838, tolerance-zero in both directions, so an own-line import would red eslint and a shrink would red sizeBaseline.",
+          "path": "src/domain/worldPulse/roadsKernel.js",
+          "symbol": "tickStreamSeedOf(worldState, { base: str(asObject(worldState).rngSeed) })"
+        },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "tickStreamSeedOf(worldState, { base: String(asObject(worldState).rngSeed || '') })" },
+        { "path": "src/domain/worldPulse/demographicsKernel.js", "symbol": "base: typeof asObject(worldState).rngSeed === 'string'" },
+        { "path": "src/domain/worldPulse/demographicsPlans.js", "symbol": "tickStreamSeedOf(worldState, { base: asObject(worldState).rngSeed })" },
+        { "path": "src/domain/worldPulse/sovereigntyMarketStage.js", "symbol": "tickStreamSeedOf(worldState, { base: text(worldState.rngSeed) || 'realm' })" },
+        { "path": "src/domain/worldPulse/realmVerbExecution.js", "symbol": "tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })" },
+        { "path": "tests/lint/entropyRootCensus.walker.test.js", "symbol": "const FAMILY_1_REROOTS" },
+        { "path": "tests/lint/advanceEpochSingleWriter.walker.test.js", "symbol": "function writeSitesIn" },
+        { "path": "tests/domain/advanceEpochStampSurvival.test.js", "symbol": "const IN_PULSE_ROWS" },
+        { "path": "scripts/mutation-coverage-manifest.json", "symbol": "tests/lint/advanceEpochSingleWriter.walker.test.js" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the stamp survives to the world the kernel RETURNS and through a real JSON round-trip, as { tick, epoch } at the ADVANCED tick" },
+        { "id": "A2", "case": "M3: a dark multi-tick advance over an aspatial fixture leaves NO spatialLedgers namespace at all" },
+        { "id": "A3", "case": "the writer keys on the FLAG-GATED term: a real epoch in a dark world stamps nothing, against a lit control that does" },
+        { "id": "A4", "case": "the four organically-reached in-pulse rows each observe a call and each composes from THIS TICK epoch" },
+        { "id": "A5", "case": "the three DM-order rows each observe a call at their own door and compose from the world own epoch" },
+        { "id": "A6", "case": "the two-epoch pin: every row composes a DIFFERENT key across two epochs LIT, and BYTE-IDENTICAL keys DARK under four hostile seed inputs" },
+        { "id": "A7", "case": "exactly ONE module in src writes the sub-key, with three planted positives and two discrimination negatives" },
+        { "id": "A8", "case": "the classification gate: the TICK-anchored half of the read-site census IS the re-root roster, per module, and the YEAR-KEYED half is untouched" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/advanceEpochStampSurvival.test.js",
+          "tests/lint/advanceEpochSingleWriter.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
     }
   ]
 }
