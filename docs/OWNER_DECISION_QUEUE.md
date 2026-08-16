@@ -4832,3 +4832,31 @@ rendered as in-fiction absence in peacetime.
    case. The dossier's war tab renders an external siege with the
    besieger's authored name and band — the DM's monster is a first-
    class antagonist on the same screen as any rival city.
+
+### §128b · PIN EXCLUSIVITY RESOLVED — THE CONVERSION VALVE (chair
+### recommendation on the owner's fork, 2026-08-15, vetoable)
+
+1. **Exclusivity stays ABSOLUTE — the world never lies**: a
+   committed army is committed; the pin never exempts it (the
+   owner's option (a) is REFUSED: one army in two places collapses
+   believability at the DM's most-touched surface, double-counts
+   the supply truth, and infects every army consumer with an
+   "unless pinned" arm — the §128.2 coupling-explosion shape again).
+2. **⭐ THE THIRD DOOR — CONVERSION**: on a pinned two-party siege,
+   edit mode offers ONE sanctioned action: COMMIT THE FORCE — the
+   besieging army converts into a §128a EXTERNAL AUTHORED HOST
+   minted from its current strength band; the siege continues
+   IDENTICALLY (the machinery reads the siege, not the pedigree);
+   the settlement books the detachment as a recorded, provenance-
+   carried loss ("the Third Levy was committed to the endless
+   siege") and its army capacity FREES for organic use. The owner's
+   option (b)'s "instructions" become a BUTTON: the DM gets the
+   eternal siege AND a usable army, with the cost explicit and in
+   the history. Zero double-counting, zero special arms.
+3. v1 converts the WHOLE engaged force (fractional detachment is a
+   tuning-era nicety, recorded not built); conversion is available
+   ONLY with the pin (an unpinned siege keeps the organic
+   commitment — the valve exists for eternity, not convenience);
+   unpinning a converted siege leaves the host authored (the army
+   was spent — history is honest; the DM may author it back
+   explicitly if they wish, as their own recorded act).
