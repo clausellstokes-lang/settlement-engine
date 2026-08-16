@@ -5098,3 +5098,35 @@ gallery-seeding lane offer stands.
    over-search) and charters ONLY the absent arms; the pg family
    slots beside cn in the family-train tail, after POP's reception
    producer, its flag dark with byte-identity proof.
+
+## §137 · THE MICRO-BATCH COMPILE ACCEPTED — FIVE TRAINS, ONE
+## PREMISE DEATH, ONE CEILING CATCH (2026-08-16, chair, vetoable;
+## evidence laneTC23-MICRO-PLAN.md 57 KB + laneTC23-report.md)
+
+1. **The five-train shape is ACCEPTED as compiled** (dcs → gv → gvf
+   → mb → ci; fifteen members; TTS-proven zero collisions co-live;
+   the refused docs-e2e merge is SIGNED as the right certainty
+   separation). **gen-3's premise death is RATIFIED** — R-GEN's own
+   audit grades every Massive-walls cure owner-gated/behavior-shift;
+   the re-key arm RE-ROUTES to THE ONE REGEN where golden motion
+   belongs; the retire arm joins the owner's cull docket as an
+   alternative. Caught by READING the classification, not by the
+   validator — the compile discipline working above the machinery.
+2. **⛔ THE CEILING CATCH IS SIGNED AS MB-3's STOP FORK**:
+   `settlementSlice.js` sits at EXACTLY 994/994 against a
+   shrink-only baseline (raw 2,003 — `wc -l` would have hidden it
+   entirely) and G4 opens it; the fork's arms are
+   fit-by-in-file-shrink or STOP, never a raise. Corrections
+   adopted: gv-5's real invisible headroom is 70 not 17 (the burn's
+   own re-record target ships wrong — re-derived at the executor's
+   base); the anti-vacuity fold's SCOPE WIDENING is authorized and
+   priced (three excluded dirs join inScope); ci-1b's worklist
+   re-derived (3 confirmed / 6 renamed); gv-1 has TWO conjunction
+   sites; PricingBands THREE dead sub-expressions; G1's row is
+   exempt-with-reason by name; FOUR of five PACKET_STANDARD law
+   texts absent with §101.4's defective wording still live — the
+   dcs member cures all five.
+3. **TE25 executes the sequence with STACKING AUTHORIZATION**: five
+   serial terminals on the unexposed tip, the chair CASes the whole
+   stack at collection (the cs-a/cs-b precedent) — five trains, one
+   exposure sweep, the twenty-fifth.
