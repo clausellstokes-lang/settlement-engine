@@ -6286,3 +6286,29 @@ town remains itself; every move an event the marginalia may
 quote). TC31 (atlas gains the affinity-matrix columns) and MF-B1
 (placement consumes weights; relocation seams for the drift
 train) notified.
+
+## §168 · UNDERCITY-AS-CITY + THE UNIVERSAL FRONT (2026-08-16,
+## owner: "an undercity should also be a city in its own right…
+## with more criminal institutions" + "all criminal institutions on
+## the surface should have a front!")
+
+Charter §13.1b: where an undercity exists it is a CITY — the full
+machinery recursively one stratum down (its own organisms, matrix,
+markets, affinity web where the fence and smuggler CLUSTER, its own
+§11 drift; the underworld factions as its ESTABLISHMENT per §161l);
+mirroring bounds: extent within the surface footprint, prosperity a
+parasitic fraction of the surface economy, order LOW by nature, the
+buried fabric + sewers as its terrain and roads, cellar doors as
+gates; criminal institutions below need NO fronts — the business is
+open; DM-lens/knowledge-gated. Charter §6: THE UNIVERSAL FRONT LAW
+— every surface criminal entry carries an atlas FRONT TYPE derived
+from function (smugglers = importer's warehouse, fence = pawnbroker,
+thieves' hall = social club, poison = apothecary); the front is a
+REAL institution that renders/places/scales/AFFINES as its cover on
+the default lens (the fence inherits the pawnbroker's atlas row —
+placement never betrays truth); the DM lens alone shows the
+business; frontless criminal entries are atlas OPENs, never
+rendered maskless. TC31 notified (FRONT TYPE + undercity-
+availability columns); MF-B1 notified (the organism engine must be
+STRATUM-PARAMETERIZED for recursion). Reference 84 (the living
+undercity) fired under the unlimited grant.
