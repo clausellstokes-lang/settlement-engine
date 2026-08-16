@@ -396,10 +396,24 @@ describe('per-test suite ratchet — static pins', () => {
         .filter((name) => name.startsWith(`${migration}_`) && name.endsWith('.down.sql')),
       `${migration} lost its .down.sql — the rollback story the discharge cites is gone`,
     ).not.toEqual([]);
+    // ⚠⚠ THIS ARM USED TO PIN `docs/DEPLOY.md` TO migration 195's FILENAME, and that was
+    // an address that had to rot. The runbook's head line is REQUIRED to move whenever a
+    // migration lands — `tests/docs/deployRunbookFreshness.test.js` derives it from
+    // supabase/migrations/ and reds if it does not — so freezing 195 there turned a
+    // moving figure into a static pin, and the very next lawful migration (196) reddened
+    // an anti-amnesty arm that had nothing to do with 196. Worse, the frozen form was
+    // never a fact about 195's ROLLBACK STORY at all, which is what this arm exists to
+    // re-check; the three assertions above carry that story in full, from the filesystem.
+    // So the runbook check is kept and DE-ROTTED: it asserts the runbook names the head
+    // that is actually on disk, which is the property that cannot go stale.
+    const runbookHead = readdirSync(join(ROOT, 'supabase/migrations'))
+      .filter((name) => /^\d+_.*\.sql$/.test(name))
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+      .at(-1);
     expect(
       readFileSync(join(ROOT, 'docs/DEPLOY.md'), 'utf8'),
-      `docs/DEPLOY.md no longer names ${migrationFile} as the migration head`,
-    ).toContain(migrationFile);
+      `docs/DEPLOY.md no longer names the CURRENT migration head (${runbookHead})`,
+    ).toContain(runbookHead);
     expect(
       MIGRATION_TRAIN_REPO_HEAD,
       `the rehearsal wave train walked back behind ${migration}: ${MIGRATION_REHEARSAL_SUITE}`
