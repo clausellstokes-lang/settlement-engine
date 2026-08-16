@@ -6334,3 +6334,23 @@ knowledge/fog surface; regen-preservation vs relocation identity);
 and the coherence verdict (one design or a pile — cut/merge
 candidates named). Anchored cure blocks; fold-then-compile-refresh
 follows per the SA-1/MF-R1 precedent.
+
+## §170 · POST-AUDIT JUDGMENT DELEGATION + THE FULL BUILD ORDER
+## (2026-08-16, owner: "I leave all judgments to you post-audit
+## based on the standard I have already set! Then… build it." +
+## unlimited Higgsfield re-confirmed)
+
+1. **When MF-R2 lands, the chair folds and rules EVERY finding
+   under the set standard** (§0.0 history+best-product/risk-no-veto,
+   the §161i ambition grant, §161j, THE PROMISE and walls intact,
+   BY-NATURE gates surviving as always) — including the
+   event-source class-(c) dispositions: degrade, derive-at-regen,
+   or charter the engine ask into the §27 queue; each ruled
+   vetoably, none bounced back.
+2. **THE FULL mf BUILD proceeds under the standing method:** the
+   audit folds → TC30/TC31 outputs join → the compiles refresh
+   where the fold moved them → MF-B1 continues and MF-B2+ waves
+   dispatch per lane completion (parallel authoring) → serial
+   landing through the real gate after the §27 queue → §109
+   side-by-side against the corpus with the owner's eyes as final
+   gate. Unlimited Higgsfield stands for any lane's references.
