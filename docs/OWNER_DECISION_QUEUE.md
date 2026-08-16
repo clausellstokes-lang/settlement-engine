@@ -7286,3 +7286,35 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    §13/§168 underground stratum (undercity-as-city, universal
    front), and the §11 drift tail — under the b6 proof standard
    including per-glyph lettering and hoisted-census law.
+
+## §200 · OWNER CATCH: THE WALL-CLEARANCE LAW — WALLS MUST NOT
+## OVERLAP BUILDINGS (2026-08-16, owner order; chair-verified and
+## redirected into MF-B7 mid-lane)
+
+1. **THE ORDER**: the owner caught wall/building overlap on the b6
+   town — "the walls are overlapping with some of the buildings…
+   that should not be the case." CHAIR-VERIFIED in the b6 forensic
+   zoom: the wall polyline passes directly over footprints in the
+   upper cluster. Root cause is the §195.0 class AGAIN: the wall
+   draws as a stroke overlay whose BAND never entered the ground
+   law's obstacle set — a surface the censused set does not
+   contain. (The class is now three-for-three on owner visual
+   catches; the forensic zoom missed it because the §195/§199
+   zooms judged building-vs-building and building-vs-street, never
+   the wall seam.)
+2. **THE LAW (charter §5-family addendum)**: the wall band (stroke
+   width + derived clearance — the historical intervallum inside,
+   clear ground outside, scaled to tier) is a RESERVED RIGHT-OF-WAY
+   exactly like streets: ZERO footprint-area intersection.
+   Abutment on the inner face (late-era lean-to crowding) stays
+   lawful only as an explicitly-derived variant; gates, towers and
+   wall-owned members are NAMED census exemptions, never silent
+   passes. Enforced by a THIRD drawn-geometry ground-law census
+   (wall-band × footprint == 0, every leaf, all lenses, surface
+   and any built underground wall) with a restoring counterfactual
+   — part of the standing 0/0 standard henceforth.
+3. **EXECUTION**: MF-B7 redirected mid-lane (the §195 precedent)
+   with the law as a first-order mandate item; its receipt owes
+   the measured pre-cure overlap count, credited as the owner's
+   finding; its forensic zoom must include a wall-run region. The
+   charter re-sync rider picks up the law's text.
