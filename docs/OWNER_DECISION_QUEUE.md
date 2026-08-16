@@ -5788,3 +5788,24 @@ gallery-seeding lane offer stands.
 3. Three corpus gaps the table exposed → generated: slum-fringe
    city (ward stratification + shanty accretion), boomtown growth
    fringe, refugee gate-camps (migration axis). Corpus → 30.
+
+## §159 · TWO OWNER CALIBRATIONS + THE WILD ROUND (2026-08-16)
+
+1. **THE WATER-RELATIONSHIP LAW (owner, verbatim intent): "a city
+   with a river does not necessarily mean the river goes through
+   it."** Charter §5.0b: water relationship is a derived MODE —
+   THROUGH (rare, earned) / BANKSIDE / NEAR (a walk away, connected
+   by lane) / NONE-WELL — seeded from the settlement's actual water
+   facts with a derivation home; bridges/fords/landings/mills place
+   per mode. Default-bisection joins the standing model-prior
+   defects to override.
+2. Owner authorized the WILD round ("literally GO wild"): 15 more
+   references in flight — the §158.3 trio (slum-fringe, boomtown,
+   refugee camps) + twelve covering the lens treatments (watercolor,
+   VTT table-contrast), wetland delta + island terrains, THREE
+   institution-archetype close-up plates (docks ward, castle
+   bailey, noxious-trades edge), famine + martial-law +
+   monster-pressure states, THE SPYMASTER'S ANNOTATED COPY (the
+   DM-lens reference: sparse red-chalk intelligence marks over a
+   clean folio), and the cartography-chrome typography plate.
+   Corpus lands at 42.
