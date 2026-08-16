@@ -4717,3 +4717,48 @@ The chair's recorded design direction (the charter executes it):
    estimated 3–4 waves (read model · read tab · the console ops ·
    PDF alignment). Whether command powers are tier-gated is an
    OWNER-VALUE flag for the charter.
+
+### §126a · THE EDIT-MODE CLARIFICATION (owner, 2026-08-15,
+### verbatim: "this edit mode is the same edit mode for the rest of
+### the dossier but only activates when the settlement is at war")
+
+ONE edit mode, dossier-wide — the war console is what the war tab
+BECOMES under the existing toggle, and its command surface ACTIVATES
+ONLY WHEN THE SETTLEMENT IS AT WAR. At peace, edit mode on the war
+tab carries no command center. The charter inherits both constraints:
+no second toggle, no parallel edit machinery, war-gated mounting via
+the settlement's own war state (the existing belligerence read),
+rendered as in-fiction absence in peacetime.
+
+## §127 · da-b + da-c COLLECTED AND EXPOSED — THE TWENTY-THIRD
+## EXPOSURE; THE DISPLAY FAMILY CLOSES AT FIVE OF SIX (2026-08-15,
+## chair; evidence laneTE23-receipt.md + laneTE22-receipt.md §16)
+
+1. **da-b + da-c ARE EXPOSED TOGETHER** (CAS `1596b165 → 30638bb7`,
+   validator 80/0 own-shell, both gate-tails 0): the palette
+   convergence with the alliance-mislabeled-as-trade cure, the
+   locale unification, the eight bare-locale sites + the corrected
+   guard, DA-B1's chokepoint with the corpus honestly refusing half
+   the lexicon, and the observedShapeReaders red CLEARED BY THE
+   MINT. The ratchet is BANKED at 12→11, remove-only, retirement
+   named.
+2. **J-TE23-1 IS SIGNED — the claim-retirement over the schema
+   migration**: a detector byte-edit is an 8→9 SCHEMA MIGRATION
+   with an unpriced review bundle (the executor measured the digest
+   gate), so the mint retired THE CLAIM (an exact `cleared === 0`
+   with the eradication named and the re-emergence watch on the
+   zero) while the sentinel's capability proof stays WIRED. The
+   instrument-deletion option remains a schema-migration lane the
+   owner may order; declined by default. `>= 0` refused by name.
+3. **A NEW LAW from the gate: CREATING A HOT FILE IS A MULTI-PATH
+   ACT** — EconomicsTab landed at exactly 600/600 (the named STOP
+   spent to the line) and joined PACKET_STANDARD's standing list +
+   the capsule, because no guard saw a hot file's BIRTH. est-1's
+   census-burn law fired on schedule (three paths, the ceiling
+   9→8). The &&-blinding re-run discipline held (the gate re-run
+   WHOLE, never resumed).
+4. **DA-B3 re-charters into the micro-batch** (budget outcome; the
+   double-internal-caller trap recorded for its compile). The
+   display family stands at FIVE of six members landed; **TE24 runs
+   the dom train now** — DOM-3 last, the founders copy QUOTED at
+   collection.
