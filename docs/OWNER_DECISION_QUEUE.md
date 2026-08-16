@@ -5916,3 +5916,8 @@ clickable anchors; outlying lanes join the road web; a strong
 OUTLYING institution can be a §5.-1 SECOND NUCLEUS (the abbey the
 town grew toward). The compile's totality census rings all 12
 priorityCategories + split entries. TC29 notified.
+
+## §161d · THE DISTRICT-ORGANISM LAW (2026-08-16, owner: "districts
+## grow outward, the town is just the umbrella")
+
+Charter §5.0c: growth is PER-DISTRICT — each district anchors (suitability × affinity × siting ring) and accretes outward at a rate ∝ its economic weight and age; THE LOBE COUNT IS DECIDED (= independent anchors the facts support: thorp 1 → city many; the §5.-1.3 polycentric subseed is this law at distance); the settlement outline is the UNION UMBRELLA — meeting frontiers become seam streets, unmet gaps stay interior greens (the breathing holes of real plans); walls wrap the organisms that existed when built, so young districts can stand extramural; per-district grain angles belong to the organisms. TC29 notified — this REORDERS the geometry-core member (district organisms before any town outline).
