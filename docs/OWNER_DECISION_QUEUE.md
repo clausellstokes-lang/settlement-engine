@@ -6558,3 +6558,28 @@ member becomes a solver, not a lookup.
    owner-gated raise (OB-8) only if LOD fails); THE RELIEF PASS
    (§9.5b — the fjord must look like one); cartouche text-overlap
    fix. All existing proofs stay green through iteration.
+
+## §179 · THE ABSOLUTE-BAR CALIBRATION (2026-08-16, owner: "you are
+## judging the aesthetics by how close it can be to the Higgsfield
+## references… not even remotely close yet")
+
+1. Charter §8.4b THE ABSOLUTE-BAR LAW: exemplar grading is DISTANCE
+   TO THE CORPUS, never progress-relative; acceptance = could sit
+   beside its reference without embarrassment; the chair's own
+   grading is bound (the §177 "reference-grade countryside" praise
+   is retracted as progress-inflated — honest absolute grade for
+   the b1 exemplars: roughly a THIRD of the distance, and the gap
+   is the DRAWING itself).
+2. **The gap named precisely (chair):** the references are INK
+   DRAWINGS; the current render is a flat-color parcel mosaic in
+   the right palette. Missing, in order of leverage: THE INK PASS
+   (building outlines, street edges, wall linework at §9's weight
+   hierarchy — the idiom's soul, specified in law, barely
+   implemented), building CHARACTER (ridge lines, gable marks,
+   footprint irregularity vs colored rectangles), street-fabric
+   legibility, THE RELIEF PASS (§9.5b), aged-paper ground texture
+   (era-legal flat methods), chrome/lettering richness. MF-B1b's
+   mandate HARDENED: the ink pass is TARGET ZERO, above the seven;
+   its receipt must grade every exemplar's absolute distance
+   per-reference, and iteration continues until the distance
+   closes or the honest blocker is named with diagnosis.
