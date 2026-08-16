@@ -6935,3 +6935,19 @@ regardless of pattern, per precedent: the mine's COUNT HOUSE
 ferryman, the lone cottage at good isolated water vs the landing
 hamlet for shore fishing, the toll keeper. All under §17/§16.3
 discipline with derivation homes. MF-B4 notified (#4).
+
+## §190d · THE FAUBOURG LAW (2026-08-16, owner: extramural growth
+## around walls; new rings only with money and time — "historical
+## evidence first")
+
+Charter §5.0e: extramural growth is the DEFAULT for walled
+settlements — intramural infill, then GATE FAUBOURGS (each its own
+organism seeded by gate traffic, anchored by the §161c extramural
+institutions, strung along approach roads), then THE WALL-FOOT
+TELL (a serious town keeps its glacis CLEAR; a lax/poor/peaceful
+one grows lean-tos against the stones — one glance says whether
+anyone expects a siege); THE NEW RING is the rare earned act
+(wealth × pressure × time, §42/§43 homes) and encloses faubourgs
+into wards whose grain records their origin; demotion runs it
+backward (faubourgs empty first). Confirms and sharpens
+§161d.4/§11.1/§161c into one growth default. MF-B4 notified (#5).
