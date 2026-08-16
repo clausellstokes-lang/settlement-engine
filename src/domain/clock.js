@@ -16,6 +16,19 @@ export const wallClockNow = () => new Date().toISOString();
 export const wallClockMs = () => Date.now();
 
 /**
+ * Are we inside a test run? THE ONE any-cast in this module, and it is shared rather than
+ * duplicated: `globalThis.process` is not in the DOM lib, so reading it costs a cast, and
+ * `tests/lint/domainAnyCastBaseline.test.js` is a MONOTONE-DOWN ratchet — a second copy of
+ * this idiom cannot be baselined, only removed. EP-1 extracted this when its twin guard
+ * below would otherwise have been the second hole.
+ * @returns {boolean}
+ */
+const inTestRun = () => {
+  const p = /** @type {any} */ (globalThis).process;
+  return !!(p && p.env && p.env.NODE_ENV === 'test');
+};
+
+/**
  * Structural pin-`now` guard for the world-pulse kernel. A pulse entry point that
  * falls back to the wall clock instead of a caller-pinned `now` makes two same-seed
  * calls diverge byte-wise (every graph updatedAt / news discoveredAt differs),
@@ -27,8 +40,7 @@ export const wallClockMs = () => Date.now();
  * @param {string} site  the entry point name, for the error message
  */
 export function assertNowPinnedInTest(site) {
-  const p = /** @type {any} */ (globalThis).process;
-  if (p && p.env && p.env.NODE_ENV === 'test') {
+  if (inTestRun()) {
     throw new Error(
       `[clock] ${site} fell back to wallClockNow() with no pinned \`now\`. Pass an explicit ` +
       `\`now\` (a fixed ISO-8601 string) — unpinned now makes same-seed runs diverge byte-wise, ` +
@@ -53,8 +65,7 @@ export function assertNowPinnedInTest(site) {
  * @param {string} site  the entry point name, for the error message
  */
 export function assertEpochPinnedInTest(site) {
-  const p = /** @type {any} */ (globalThis).process;
-  if (p && p.env && p.env.NODE_ENV === 'test') {
+  if (inTestRun()) {
     throw new Error(
       `[clock] ${site} ran with advanceEpochEnabled strictly true and no threaded ` +
       `\`advanceEpoch\`. Pass one from the store mint (runAdvanceCampaignWorld) — a lit ` +

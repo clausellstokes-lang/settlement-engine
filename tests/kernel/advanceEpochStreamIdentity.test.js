@@ -162,15 +162,31 @@ describe('the composition shape is anchored against the live kernel', () => {
     ).toBe(true);
   });
 
-  test('no production module calls epochSuffix at this wave — EP-0 is dark by construction', () => {
-    // The dormancy claim, measured rather than asserted. EP-1 lands the first caller.
+  test('EP-1 landed the FIRST AND ONLY production caller, and it is the pulse seam', () => {
+    // ⭐ THIS PIN WAS RETIRED AND REPLACED BY EP-1, WHICH IS WHAT EP-0 PREDICTED IN ITS OWN
+    // WORDS: it read "no production module calls epochSuffix at this wave — EP-0 is dark by
+    // construction", with the note "EP-1 lands the first caller." That wave has landed, so
+    // the old sentence is now FALSE and keeping it would have made this file assert an
+    // invariant its own train had deliberately broken.
+    //
+    // The claim NARROWS rather than vanishing — the ES-3 lesson applied before the bill
+    // arrives. Dormancy no longer rests on the ABSENCE of a caller; it rests on the GATE.
+    // So this pin now measures the two things that are still true and still falsifiable:
+    // the segment has exactly ONE production caller, and that caller is the composition
+    // this file's literals render.
     const kernel = readSource('src/kernel/prng.js');
     expect(kernel).toContain('export function epochSuffix');
     const pulse = readSource(PULSE_KERNEL);
-    // `readSource` throws on an empty or missing file, and the assertion below proves the
-    // scanned text really is the live kernel — so the negative cannot go vacuous.
-    // anchored: the same text is asserted to CONTAIN the pulse root on the next line.
-    expect(pulse).not.toContain('epochSuffix');
+    // ONE call site, not merely "at least one": a second caller would be a second stream
+    // seam, and every literal pinned above says nothing about it.
+    const callSites = (pulse.match(/epochSuffix\(/g) || []).length;
+    expect(callSites, `${PULSE_KERNEL} must call epochSuffix exactly once`).toBe(1);
+    // …and that one call sits INSIDE the pulse root composition rather than anywhere else,
+    // which is what makes the hard-coded lit literal above render what the engine renders.
+    expect(pulse).toContain('${tickInterval}${epochSuffix(epochTerm)}`)');
+    // THE GATE IS THE DORMANCY, and it is asserted at its own site: the term handed to the
+    // segment is the flag-gated one, never the raw threaded argument.
+    expect(pulse).toContain("const epochTerm = simulationRules?.advanceEpochEnabled === true ? advanceEpoch : null;");
     expect(pulse).toContain('createPRNG(`');
   });
 });
