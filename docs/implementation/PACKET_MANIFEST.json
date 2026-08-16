@@ -12305,6 +12305,230 @@
           "tests/domain/activeConditions.test.js"
         ]
       ]
+    },
+    {
+      "id": "TM-1A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/TM-1A.md",
+      "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/telemetry/simMetricRegistry.mjs"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/generate-analytics-dictionary.mjs"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/analytics-event-dictionary.md"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/simMetricRegistry.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/lib/analyticsEvents.js",
+          "symbol": "export const EVENT_NAME_RE"
+        },
+        {
+          "path": "src/lib/analyticsEvents.js",
+          "symbol": "export const EVENT_CLASS = Object.freeze("
+        },
+        {
+          "path": "scripts/generate-analytics-dictionary.mjs",
+          "symbol": "export function buildDictionary"
+        },
+        {
+          "path": "docs/analytics-event-dictionary.md",
+          "symbol": "GENERATED FILE — DO NOT EDIT BY HAND"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "every simulation metric name satisfies EVENT_NAME_RE imported from the product registry — one contract, one spelling"
+        },
+        {
+          "id": "A2",
+          "case": "the simulation name set and Object.values(EVENTS) are disjoint, and no product event may join the class by prefix"
+        },
+        {
+          "id": "A3",
+          "case": "no dims entry names an actor, session, user, consent tier or country, and a planted PII dim reds"
+        },
+        {
+          "id": "A4",
+          "case": "every row's epoch is the epoch its own receipt sources already have, and a fabricated source field reds"
+        },
+        {
+          "id": "A5",
+          "case": "the committed dictionary is byte-identical to a fresh generation and carries the SIMULATION section"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lib/simMetricRegistry.test.js",
+          "tests/docs/analyticsDictionaryFreshness.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TM-1B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/TM-1B.md",
+      "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/telemetry/simMetricEmitter.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/telemetry/emit-sim-metrics.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/fixtures/simSoakReceiptFixture.json"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/simMetricEmitter.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "writeFileSync(file, `${JSON.stringify(receipt, null, 2)}\\n`)"
+        },
+        {
+          "path": "src/domain/certification/behavioralContract.js",
+          "symbol": "SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS"
+        },
+        {
+          "path": "src/domain/pendingEdits.js",
+          "symbol": "EDIT_KINDS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the fixture's own arity is asserted before any transform output, and the transform is total over both epochs"
+        },
+        {
+          "id": "A2",
+          "case": "sim_finding is silent on a clean receipt and non-empty on a failing one"
+        },
+        {
+          "id": "A3",
+          "case": "no emitted row carries a PII dimension or a dimension the registry did not declare"
+        },
+        {
+          "id": "A4",
+          "case": "an unsupported schemaVersion and a missing run identity are both refused with named messages"
+        },
+        {
+          "id": "A5",
+          "case": "emit(r) twice is byte-identical, and the source contains no ambient-time or ambient-random read"
+        },
+        {
+          "id": "A6",
+          "case": "the transitive import closure reaches no deterministic-core module beyond ONE enumerated, zero-import leaf"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lib/simMetricEmitter.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TM-1W",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/TM-1W.md",
+      "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
+      "changeManifest": [
+        {
+          "action": "TEST",
+          "path": "tests/lint/engineTelemetryWall.walker.test.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "ENFORCER_DIRS"
+        },
+        {
+          "path": "supabase/functions/ingest-events/index.ts",
+          "symbol": "const KNOWN_EVENTS = new Set(Object.values(EVENTS));"
+        },
+        {
+          "path": "src/domain/worldPulse/tickIndices.js",
+          "symbol": "relationshipStatePairCache"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/lint/telemetrySimulationSeparation.test.js",
+          "symbol": "simulation observability and product telemetry stay separate"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the detector catches static, dynamic and require spellings in both directions"
+        },
+        {
+          "id": "A2",
+          "case": "no deterministic-core module imports telemetry, and each of the four roots clears its own floor"
+        },
+        {
+          "id": "A3",
+          "case": "worldPulse's floor is asserted separately, so a deleted root cannot hide inside the union"
+        },
+        {
+          "id": "A4",
+          "case": "no telemetry module imports engine internals, and every Arm B root is populated-or-awaiting"
+        },
+        {
+          "id": "A5",
+          "case": "the exemption manifest is exact, rationale-carrying, shrink-only, and its controls convict"
+        },
+        {
+          "id": "A6",
+          "case": "the simulation class is PII-free in the registry and in its own DDL, with the DDL half awaiting TM-2A"
+        },
+        {
+          "id": "A7",
+          "case": "the ingest path refuses every simulation metric name by closed-set membership"
+        },
+        {
+          "id": "A8",
+          "case": "the retired file's four arms survive the fold, and its mutation-coverage row moves with it"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/engineTelemetryWall.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ]
+      ]
     }
   ]
 }
