@@ -14013,9 +14013,9 @@
           "symbol": "export function tickStreamSeedOf"
         },
         {
-          "_note": "THE ONE DECLARED KERNEL RATCHET-UP OF THIS TRAIN (J-EP-11), 1580 to 1581. Seam edit 9 itself is +0.",
+          "_note": "THE ONE DECLARED KERNEL RATCHET-UP OF THIS TRAIN (J-EP-11), 1580 to 1581. Seam edit 9 itself is +0. \u26a0 RE-SPELLED 2026-08-16 BY EP-3B, AND THE MOVE WAS LAWFUL AND FORESEEN: slice B adds `yearStreamSeedOf` to this SAME line as a token edit at +0, which is the whole reason one leaf holds all three symbols on a file banked at tolerance zero. The row is re-spelled rather than loosened to a substring, because what it pins is that the kernel has exactly ONE edge to this leaf. \u26d4 THE HAZARD IT DEMONSTRATES: requiredSymbols are resolved against the LIVE TREE at EVERY status, so a LANDED packet pinning an exact line TRAPS every later member that lawfully token-edits it.",
           "path": "src/domain/worldPulse/pulseKernel.js",
-          "symbol": "import { stampAdvanceEpochYear } from '../advanceEpochLedger.js';"
+          "symbol": "import { stampAdvanceEpochYear, yearStreamSeedOf } from '../advanceEpochLedger.js';"
         },
         { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "worldState = stampAdvanceEpochYear(worldState, epochTerm);" },
         { "path": "src/lib/spatialUsage.js", "symbol": "advanceEpoch:" },
@@ -14057,6 +14057,110 @@
           "tests/lint/mutationCoverageManifest.test.js",
           "tests/lint/couplingInclusion.walker.test.js",
           "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EP-3B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/EP-3B.md",
+      "verifiedBase": "d2ea34c196ef9fe724d2c6dbaeca95aa4b662a52",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/advanceEpochLedger.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/roadsKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/generosityKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/traditionsKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderContest.js" },
+        { "action": "MODIFY", "path": "src/domain/traditions/politics.js" },
+        { "action": "MODIFY", "path": "src/domain/traditions/relations.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/mapDress.js" },
+        { "action": "TEST", "path": "tests/domain/advanceEpochStampSurvival.test.js" },
+        { "action": "TEST", "path": "tests/domain/npcLadderContest.test.js" },
+        { "action": "TEST", "path": "tests/domain/contestBluffCharge.test.js" },
+        { "action": "TEST", "path": "tests/lint/entropyRootCensus.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/advanceEpochSingleWriter.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE FAMILY-2 ACCESSOR. Its options bag is `{ base, yearBase }` \u2014 the SITE OWN expression handed in, and a REQUIRED defaultless year vocabulary. Two of the nine sites count years from ZERO, so a defaulted yearBase would let them read a key that is never present while every other pin stayed green (J-EP-13).",
+          "path": "src/domain/advanceEpochLedger.js",
+          "symbol": "export function yearStreamSeedOf"
+        },
+        {
+          "_note": "THE WRITER GREW ITS SECOND HALF IN THE SAME setSpatialLedger CALL, so there is still exactly ONE write site in src. FIRST-WINS: a lived year is never repainted and the prior map object is re-used by reference.",
+          "path": "src/domain/advanceEpochLedger.js",
+          "symbol": "? priorByYear"
+        },
+        {
+          "_note": "SEAM EDIT 7, at +0 lines. It reads the POST-advance worldState; the pre-advance world structurally cannot carry the year the advance is entering, and a re-aim at it fails SILENTLY.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 }) : undefined;"
+        },
+        { "path": "src/domain/worldPulse/pulseKernel.js", "symbol": "rngSeed: seasonSeed," },
+        {
+          "_note": "THE KERNEL IMPORT LINE GAINED A SYMBOL AT +0 \u2014 the one leaf home is what keeps this at one line rather than two on a file banked at tolerance zero.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "import { stampAdvanceEpochYear, yearStreamSeedOf } from '../advanceEpochLedger.js';"
+        },
+        {
+          "_note": "RS-5, a SPLIT READ: a SECOND binding beside the tick-anchored one, never a re-point. `;`-joined because this file sits at exactly its frozen 838 effective lines.",
+          "path": "src/domain/worldPulse/roadsKernel.js",
+          "symbol": "const yearSeed = yearStreamSeedOf(worldState, year, { base: str(asObject(worldState).rngSeed), yearBase: 1 });"
+        },
+        {
+          "_note": "RS-3, and its `;`-joined import above it is a BUDGET fact: generosityKernel.js sits at EXACTLY the 800-line src/domain layer ceiling with no size-baseline row, so an own-line import reds eslint outright.",
+          "path": "src/domain/worldPulse/generosityKernel.js",
+          "symbol": "yearBase: 0 });"
+        },
+        { "path": "src/domain/worldPulse/traditionsKernel.js", "symbol": "seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })" },
+        {
+          "_note": "RS-9's SECOND ARGUMENT, never a re-point: `seed` stays TICK-anchored for rows 17/18/19/21 while `supportSeed` carries the YEAR anchor for row 20 alone.",
+          "path": "src/domain/worldPulse/npcLadderKernel.js",
+          "symbol": "const supportSeed = yearStreamSeedOf(worldState, supportYearOf(weeks), { base: String(asObject(worldState).rngSeed || ''), yearBase: 0 });"
+        },
+        {
+          "_note": "THE YEAR VOCABULARY HAS ONE HOME. The contest module's own floor(weeks / 52) is exported so the kernel names the same year this label does, instead of two spellings that agree today.",
+          "path": "src/domain/worldPulse/npcLadderContest.js",
+          "symbol": "export function supportYearOf"
+        },
+        { "path": "src/domain/worldPulse/npcLadderContest.js", "symbol": "hash01(`${supportSeed}|ladder-support:${sid}:${nid}:${year}`)" },
+        { "path": "src/domain/traditions/politics.js", "symbol": "yearStreamSeedOf(worldState, year, { base: String(worldState.rngSeed || ''), yearBase: 1 })" },
+        { "path": "src/domain/traditions/relations.js", "symbol": "yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })" },
+        {
+          "_note": "RS-16, THE DISPLAY-SURFACE RULE. The re-root is at the CALL and not at the binding, so the `rngSeed &&` guard keeps testing the RAW read and an absent seed still SUPPRESSES the draw rather than composing one the estate does not make.",
+          "path": "src/domain/townMap/mapDress.js",
+          "symbol": "seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: rngSeed, yearBase: 1 }), year, settlementId)"
+        },
+        { "path": "tests/lint/entropyRootCensus.walker.test.js", "symbol": "const FAMILY_2_REROOTS" },
+        { "path": "tests/domain/advanceEpochStampSurvival.test.js", "symbol": "const NINE_ROWS" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the nine family-2 rows each observe a call under ONE lit year-crossing advance plus ONE view-time read, and each composes from the ENTERED YEAR epoch" },
+        { "id": "A2", "case": "the returned-world arm: byYear carries the entered year epoch on the world the kernel RETURNS and through a real JSON round-trip" },
+        { "id": "A3", "case": "J-EP-13: the yearBase-0 sites resolve to the SAME lived year as the yearBase-1 sites, with both vocabularies proven present" },
+        { "id": "A4", "case": "FIRST-WINS: a second stamp in a lived year leaves byYear byte-unchanged and re-using its object reference, while latest moves" },
+        { "id": "A5", "case": "the already-lived-year pin: a year lived dark carries no row, so lighting the flag repaints nothing" },
+        { "id": "A6", "case": "DARK: no byYear at all, and every family-2 key is byte-identical across two epochs under four hostile seed inputs" },
+        { "id": "A7", "case": "the family-2 classification gate: every YEAR-KEYED composition is fed by a rostered module, every call declares its yearBase, and neither anchor reaches the other roster" },
+        { "id": "A8", "case": "the display-surface source pin: advanceEpoch reaches the view only through the sanctioned leaf import" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/advanceEpochStampSurvival.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/advanceEpochSingleWriter.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/domain/npcLadderContest.test.js",
+          "tests/domain/contestBluffCharge.test.js"
         ]
       ]
     }
