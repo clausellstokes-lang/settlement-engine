@@ -7662,3 +7662,49 @@ to MF-B7 same-turn.
    fully provisioned: the §209 grain spine + this lane's paint
    modules + the §205 river ladder + the §203 fill bands — it
    dispatches on MF-B7's seal.
+
+## §212 · MF-B7 COLLECTED — FOUR OWNER LAWS BUILT AND PROVEN,
+## THE REST HONESTLY CARRIED; MF-B8 (THE GEOMETRY WAVE)
+## DISPATCHED (2026-08-16, chair §170)
+
+1. **BUILT, 0/0-CENSUSED, CHAIR-VERIFIED BY ZOOM:** §200 wall
+   clearance — the owner's catch measured 408 DRAWN BODIES IN
+   WALL BANDS (root: the wall traced at stage 5, the ground law
+   enforced at 3d — §195.0's class); cured by tracing BEFORE the
+   ground law with an asymmetric reserved band; now 0 everywhere,
+   and the cure exposed three real defects also fixed (a later
+   circuit inheriting the inner ring's gates up to 120 units off;
+   §161g's surplus-bricking SEALING the high-water town; the
+   ground law never re-asking right-of-way). §202/§201B access +
+   attachment — 187 landlocked and 24 orphan streets before; now
+   0 orphans and 6 landlocked, ALL SIX one parish church's
+   arrangement — a §8.1 truth anchor, REPORTED NOT HIDDEN
+   (ruling: correct — truth outranks the census; they enter the
+   census as a named truth-anchor exemption). §17.3 demotion arm
+   built (34-61 humbler-rung bodies per urban leaf). §201A.1
+   alley register (block tone, confirmed by my eye).
+2. **TARGET 2 HONESTY:** metropolis build-out 36.7 → 34.8 — it
+   moved AWAY because b6's figure was INFLATED by bodies standing
+   in ground they were never entitled to; the demotion lever is
+   worth +0.6 measured in isolation. Next lever, from this wave's
+   own data: CUT PLOTS THAT FIT THE BLOCK rather than repair
+   plots that don't. RULINGS: the §11.11 inertia re-derivation
+   RATIFIED (measured bound — 673 parcels identical, 55 within
+   1.2 frontages — never a blind re-record); the lever-isolation
+   cache-bust hazard BANKED (an importer cache-bust does not
+   reload what it imports — a lever can read +0 everywhere and
+   the receipt would have lied); J-B7-1 RATIFIED (river claims
+   measured-not-cured under redirect load — 3 watered leaves
+   with unclaimed channels, two structures visibly across the
+   town's river).
+3. **CARRIED, named:** the underground stratum (unbuilt, twice
+   deferred — FIRST-CLASS in wave nine), §203 zones unmeasured,
+   §205 B/C unbuilt, §205 A cure. **MF-B8 DISPATCHED — THE
+   GEOMETRY WAVE** (the §209 spine at fabric level): the grain
+   derivation (GAP-A bands), block silhouettes + two-tier stroke
+   (GAP-D), burgage plot-series (§18.5 un-deferred), the
+   plots-that-fit lever (target 2), §203 zone
+   containment+fill measured, §205 A river claims cured,
+   countryside ground primitives (T-24), GAP-B/C censuses.
+   Wave nine holds: underground, paint integration, river
+   ladder, chrome/vintage/decay riches.
