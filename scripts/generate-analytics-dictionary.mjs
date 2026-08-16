@@ -34,6 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import { EVENTS, EVENT_CLASS, EVENTS_REV, RESEARCH_EVENT_KEYS } from '../src/lib/analyticsEvents.js';
+import { SIM_METRICS, SIM_EVENT_CLASS } from './telemetry/simMetricRegistry.mjs';
 import { extractSpatialUsage } from '../src/lib/spatialUsage.js';
 import { realmShape } from '../src/lib/constructionUsage.js';
 import {
@@ -167,6 +168,30 @@ export function buildDictionary() {
     }
     lines.push('');
   }
+
+  // ── THE SIMULATION CLASS (ODQ §117a, §149.2) ───────────────────────────────
+  // ONE dictionary, two vocabularies. The product events above are `EVENTS`;
+  // the rows below are the SIMULATION class, whose names live in their own
+  // Node-side registry (scripts/telemetry/simMetricRegistry.mjs) because
+  // EVENT_CLASS's key set is structurally EVENTS's and EVENTS is shipped to the
+  // client. The two name sets are DISJOINT, and that disjointness is pinned in
+  // tests/lib/simMetricRegistry.test.js rather than described here.
+  lines.push(`## Simulation class (${SIM_EVENT_CLASS}) — engine evidence, never user telemetry`);
+  lines.push('');
+  lines.push('These rows are emitted only by the diagnostic soak harness, from a completed');
+  lines.push('soak receipt, by a pure Node-side transform. No client emits them, no browser');
+  lines.push('bundle carries their names, and they are PII-free by schema: the table that');
+  lines.push('stores them (`supabase/migrations/196_world_sim_metrics.sql`) declares no actor,');
+  lines.push('session, user or consent column at all.');
+  lines.push('');
+  lines.push('| Metric | Class | Epoch | Dims | Receipt source |');
+  lines.push('|---|---|---|---|---|');
+  for (const row of SIM_METRICS) {
+    const dims = row.dims.length ? '`' + row.dims.join('` · `') + '`' : '—';
+    const source = '`' + row.source.join('` · `') + '`';
+    lines.push(`| \`${esc(row.name)}\` | ${esc(row.class)} | ${esc(row.epoch)} | ${dims} | ${source} |`);
+  }
+  lines.push('');
 
   lines.push('---');
   lines.push('');

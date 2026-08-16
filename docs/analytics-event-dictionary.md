@@ -230,6 +230,28 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `AI_STAGE_RIDER` | `ai_stage_rider` | essential | — |
 | `SURVEYOR_ADOPTION` | `surveyor_adoption` | essential | — |
 
+## Simulation class (simulation) — engine evidence, never user telemetry
+
+These rows are emitted only by the diagnostic soak harness, from a completed
+soak receipt, by a pure Node-side transform. No client emits them, no browser
+bundle carries their names, and they are PII-free by schema: the table that
+stores them (`supabase/migrations/196_world_sim_metrics.sql`) declares no actor,
+session, user or consent column at all.
+
+| Metric | Class | Epoch | Dims | Receipt source |
+|---|---|---|---|---|
+| `sim_run_summary` | simulation | run | `property` · `outcome` | `passed` · `properties` · `failures` · `schemaVersion` · `seed` · `years` · `settlements` · `finalHash` · `startPopulations` · `finalPopulations` |
+| `sim_population_epoch` | simulation | year | `settlement_band` · `measure` | `behavioral.yearly` |
+| `sim_prosperity_epoch` | simulation | year | `rung` · `measure` | `behavioral.yearly` |
+| `sim_governance_epoch` | simulation | year | `measure` | `behavioral.yearly` |
+| `sim_mover_activity` | simulation | year | `mover_family` · `lane` | `behavioral.yearly` |
+| `sim_event_tempo` | simulation | year | `measure` | `behavioral.yearly` |
+| `sim_war_convergence` | simulation | run | `histogram` · `bucket` | `warConvergence` · `warConvergenceCensus` |
+| `sim_stressor_rhythm` | simulation | year | `measure` | `stressorCounts` |
+| `sim_succession` | simulation | year | `measure` | `behavioral.yearly` |
+| `sim_belief_knowledge` | simulation | run | `container` · `measure` | `subsystems` |
+| `sim_finding` | simulation | run | `finding_kind` | `failures` · `properties` |
+
 ---
 
 _Generated from the registry + enrichment extractors. If this file is stale the
