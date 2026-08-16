@@ -130,6 +130,78 @@ function directGateCommandsFromJob(job) {
 }
 
 /**
+ * ── THE ENFORCEMENT DIMENSION ────────────────────────────────────────────────────
+ * ⛔ WHY PARITY ALONE IS NOT COVERAGE. `npmRunStepsFromJob` reads the step TOKEN out
+ * of a run body, so `npm run lint || true` still yields `lint` and parity holds
+ * perfectly while enforcement is gone: the step runs, fails, and the job goes green.
+ * `directGateCommandsFromJob` cannot see it either — it looks for raw runners, and it
+ * SPLITS on `||`, so the escape hatch is discarded as a delimiter before anything is
+ * matched. A CI gate can therefore be silently disarmed without moving either
+ * existing assertion.
+ *
+ * This scan reads the three shapes that disarm a step while leaving its token in
+ * place: `|| true`, `; true`, and a step-level `continue-on-error: true`. The
+ * presence dimension above is untouched — the two are orthogonal and both are
+ * needed.
+ *
+ * @param {string} job a job body from `jobBody`
+ * @returns {string[]} one row per escape, quoting the offending text
+ */
+/**
+ * ⚠ SCOPED TO GATE STEPS, AND THE NARROWING IS MEASURED RATHER THAN ASSUMED. The
+ * first spelling of this scan read the WHOLE job and convicted ci.yml immediately —
+ * on `continue-on-error: true` over the step
+ *
+ *     - name: Audit dev dependencies (non-blocking visibility)
+ *       run: npm audit --audit-level=high
+ *
+ * which is not a gate step at all. `npm audit` and `npm ci` are deliberately outside
+ * the parity surface (the comment on `ciCheckJobSteps` says so), and a dev-dependency
+ * audit that is non-blocking BY NAME is the intended shape, not a disarmed gate. So
+ * the scan is scoped to steps whose own command is an `npm run <step>` — never
+ * silenced by an allowlist keyed on job or step name, which would have hidden the
+ * next real instance too.
+ */
+function enforcementEscapesFromJob(job) {
+  if (typeof job !== 'string') return [];
+  const escapes = [];
+  const lines = job.split('\n');
+  // A step begins at a `- ` list item; its body runs to the next one at that indent.
+  const starts = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const m = /^(\s*)-\s/.exec(lines[i]);
+    if (m) starts.push({ i, indent: m[1].length });
+  }
+  for (let s = 0; s < starts.length; s += 1) {
+    const { i, indent } = starts[s];
+    let end = lines.length;
+    for (let k = i + 1; k < lines.length; k += 1) {
+      const m = /^(\s*)-\s/.exec(lines[k]);
+      if (m && m[1].length <= indent) { end = k; break; }
+      if (lines[k].trim() && /^ */.exec(lines[k])[0].length <= indent && !/^\s*-\s/.test(lines[k])) { end = k; break; }
+    }
+    const step = lines.slice(i, end).join('\n');
+    const runnable = step
+      .split('\n')
+      .map((line) => (/^\s*#/.test(line) ? '' : line.replace(/\s+#.*$/, '')))
+      .join('\n');
+    // Only a step that actually drives a package script is a GATE step.
+    if (!/\bnpm run [A-Za-z0-9:_-]+/.test(runnable)) continue;
+    for (const line of runnable.split('\n')) {
+      if (!/\bnpm run [A-Za-z0-9:_-]+/.test(line)) continue;
+      if (/\|\|\s*true\b/.test(line)) escapes.push(`|| true — ${line.trim()}`);
+      else if (/;\s*true\s*(?:$|;)/.test(line)) escapes.push(`; true — ${line.trim()}`);
+    }
+    for (const match of runnable.matchAll(/^\s*continue-on-error:\s*(\S+)\s*$/gm)) {
+      if (!/^false$/i.test(match[1])) {
+        escapes.push(`continue-on-error — ${match[0].trim()} on a step running ${/\bnpm run [A-Za-z0-9:_-]+/.exec(runnable)[0]}`);
+      }
+    }
+  }
+  return escapes;
+}
+
+/**
  * The `npm run <step>` names invoked by the parallel CI gate groups.
  *
  * A step's `run:` may chain commands, and CI runs MORE than `npm run` steps in
@@ -185,6 +257,20 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
     ).toEqual([]);
   });
 
+  it('no gate job DISARMS a step it still names (|| true, ; true, continue-on-error)', () => {
+    // The enforcement dimension, over the same five jobs the parity arms read. A step
+    // whose token is present but whose failure is swallowed is worse than an absent
+    // step: parity reports full coverage and the gate reports success.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const disarmed = [];
+    for (const jobName of GATE_JOB_IDS) {
+      const body = jobBody(ci, jobName);
+      expect(body, `ci.yml must declare a top-level ${jobName} job`).toBeTruthy();
+      for (const escape of enforcementEscapesFromJob(body)) disarmed.push(`${jobName}: ${escape}`);
+    }
+    expect(disarmed, `gate steps whose failure is swallowed:\n${disarmed.join('\n')}`).toEqual([]);
+  });
+
   it('every parallel gate step is part of the local check script', () => {
     const scriptSteps = new Set(checkScriptSteps());
     const ciSteps = ciCheckJobSteps();
@@ -232,6 +318,55 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
       '          npm run real-two && npm run real-three',
     ].join('\n');
     expect(npmRunStepsFromJob(synthetic)).toEqual(['real-one', 'real-two', 'real-three']);
+
+    // ── THE ENFORCEMENT CONTROL, in this file's own synthetic idiom ────────────────
+    // A job that keeps every step TOKEN and enforces none of them. The parity scan
+    // above reports it as perfectly compliant, which is precisely why the enforcement
+    // scan has to exist and why its control is a DISARMED job rather than a clean one.
+    const disarmed = [
+      '    steps:',
+      '      - run: npm run lint || true',
+      '      - run: npm run typecheck:ratchet ; true',
+      '      - name: soft build',
+      '        continue-on-error: true',
+      '        run: npm run build',
+    ].join('\n');
+    expect(npmRunStepsFromJob(disarmed), 'the disarmed job still reports every step token')
+      .toEqual(['lint', 'typecheck:ratchet', 'build']);
+    expect(directGateCommandsFromJob(disarmed), 'and the direct-runner scan still sees nothing')
+      .toEqual([]);
+    const escapes = enforcementEscapesFromJob(disarmed);
+    expect(escapes).toHaveLength(3);
+    expect(escapes[0]).toContain('|| true');
+    expect(escapes[1]).toContain('; true');
+    expect(escapes[2]).toContain('continue-on-error');
+
+    // NEGATIVE CONTROL: an ordinary armed job reports nothing, so the scan is not
+    // simply "reject every job".
+    const armed = [
+      '    steps:',
+      '      - run: npm run lint',
+      '      - name: build',
+      '        continue-on-error: false',
+      '        run: npm run build && npm run verify:dist',
+    ].join('\n');
+    expect(enforcementEscapesFromJob(armed)).toEqual([]);
+
+    // THE NARROWING, PINNED SO IT CANNOT QUIETLY WIDEN AGAIN. A non-blocking step
+    // that drives something OTHER than a package script — ci.yml's dev-dependency
+    // audit is the live instance — is not a disarmed gate step and must not be
+    // reported. This is the one exemption the scan makes, and it is made by SHAPE
+    // (the step runs no `npm run`) rather than by a name-keyed allowlist.
+    const nonGateSoftStep = [
+      '    steps:',
+      '      - name: Audit dev dependencies (non-blocking visibility)',
+      '        run: npm audit --audit-level=high',
+      '        continue-on-error: true',
+    ].join('\n');
+    expect(enforcementEscapesFromJob(nonGateSoftStep)).toEqual([]);
+    // …and the moment such a step DOES drive a gate script, it is reported again.
+    const gateSoftStep = nonGateSoftStep.replace('npm audit --audit-level=high', 'npm run lint');
+    expect(enforcementEscapesFromJob(gateSoftStep)).toHaveLength(1);
 
     const directEscapes = [
       '    steps:',
