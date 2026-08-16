@@ -5982,3 +5982,33 @@ collapsed ones as obstacles). Sources: the war system's real
 razing/demotion event surface + the population trajectory —
 compile verifies both at head. Calm ink throughout. TC29 notified
 (#8).
+
+## §161h · THE DRIFT GRAMMAR — THE MAP'S TIME DIMENSION (2026-08-16,
+## owner: promotion, order drift, trade re-orientation, demolition,
+## grand roads — "comprehensively and exhaustively")
+
+Charter §11 rules every §10 axis's DRIFT: §11.0 THE INERTIA LAW
+(fabric anchors to stable entity keys + event years — unchanged
+facts render byte-unchanged, changed facts change LOCALLY; a new
+road appears, the town never reshuffles; the drift grammar's
+load-bearing engineering requirement, priced first) · promotion
+(growth around the visible old core; institutions rebuild larger
+AT THE SAME ANCHOR; new wall rings) · order drift (inertial: shows
+in NEW fabric + STREET WIDTH; chaos = encroachment narrowing lanes
+and eating the square; lawful = clearance, straightening, geometric
+new growth) · trade re-orientation (ROADS FOLLOW THE MONEY — the
+web re-weights toward the live source; unused roads die down the
+ladder to field-boundary ghosts; the road web at any year maps that
+year's economy) · prosperity (grand widening/cobbling/consolidation
+up; patched-roof/subdivision/tenement down) · economy-type change
+(DEMOLITION as first-class dated event; waterfront conversion pier
+by pier) · power (skylines re-weight; deposed monuments freeze or
+raze) · district fields (gentrification waves; frontier migration
+via the parcel dither) · defense (glacis clearance demolitions; the
+peace dividend: gardens in the dry moat) · social (camps formalize
+into districts) · exclusions hold (no metaphysics, no tick flicker,
+no invented past — every mark cites its event or is cut) · §11.11
+PHASING: v1 = current-year map with ALL history marks; the full
+year-scrub animation = declared phase-2 gated on the per-year
+surface the compile verifies. TC29 notified (#9 — the last of the
+owner's design session; the charter is COMPLETE at §0-§11).
