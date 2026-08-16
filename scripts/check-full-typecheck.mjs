@@ -4,9 +4,11 @@
  *
  * ── WHY THIS FILE EXISTS ────────────────────────────────────────────────────
  * `npm run typecheck` (`tsc --noEmit -p tsconfig.full.json`) is a BOOLEAN gate at
- * zero errors, and it is step 9 of the 14-step `&&` chain in `npm run check`. It
+ * zero errors. It USED TO SIT IN THE GATE, as step 9 of a then-14-step `&&` chain
+ * in `npm run check`; this file's ratchet replaced it there, and the replacement
+ * `typecheck:ratchet` is step 12 of the 17-step chain today. The bare boolean
  * went red on 2026-08-02 at 7796954e and stayed red. Because the chain is `&&`,
- * everything BEHIND step 9 stopped running with it:
+ * everything BEHIND it stopped running with it:
  *
  *     … validate:mcp-server && typecheck && typecheck:domain:strict
  *                             ^^^^^^^^^ red here since 2026-08-02

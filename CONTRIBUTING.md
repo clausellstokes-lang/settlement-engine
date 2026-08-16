@@ -56,8 +56,11 @@ failures, and it was red — so `build` and `verify:dist`, the two steps that gu
 against shipping a `dist` that cannot boot, had not run in the gate since 2026-08-02
 either. It is now `test:ratchet` (`scripts/check-test-ratchet.mjs`), which **runs the
 entire suite** — it never skips, excludes or suppresses a test — and compares the
-result against a frozen **per-test** census of 35 known failures, each carrying an
-attribution (subsystem, cause, introducing commit, class). A failing test absent from
+result against the frozen **per-test** census in
+`scripts/.test-ratchet-baseline.json`, each entry carrying an
+attribution (subsystem, cause, introducing commit, class). **Read the count out of
+that file; never copy it into prose** — every prose copy this repo has kept went
+stale inside a week. A failing test absent from
 the census is a REGRESSION and reds the gate; `--update` can only REMOVE entries and
 refuses to bank a failure it has not seen, so adding one is a deliberate hand edit.
 

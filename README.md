@@ -47,10 +47,14 @@ never in the repo (the anon key is public by design — RLS enforces access).
 
 ## The gate
 
-`npm run check` runs fourteen stages: data-key, custom-content-manifest, and
-migration-ledger validation; edge, map-bridge, tuning-band, Foundry-module, and
-MCP-server contract checks; non-JSX logic and strict-domain typechecks; lint; the
-Vitest suite; the production build; and built-artifact verification. It runs in CI
+`npm run check` runs the whole `&&` chain declared by the `check` script in
+`package.json`, which is where the stage count lives — this page names the stages
+and never counts them, because a second copy of that number is a copy that drifts.
+In order: hazard-registry, premortem and implementation-packet validation;
+data-key, custom-content-manifest, and migration-ledger validation; edge,
+map-bridge, tuning-band, Foundry-module, and MCP-server contract checks; the
+full-tree and strict-domain typecheck ratchets; lint; the Vitest suite through its
+per-test census; the production build; and built-artifact verification. It runs in CI
 on every push/PR and via a husky `pre-push` hook; production deploys are
 **fail-closed gated on CI** (`scripts/vercel-ignore-build.mjs`). Edge (Deno) tests run
 via `npm run check:edge-behavior` / the CI `deno-tests` job. The money/security

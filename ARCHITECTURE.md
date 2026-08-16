@@ -43,7 +43,7 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
              the renderer-neutral settlement-scene projection and manifest
              compiler (`townScene/`; one canonical truth for 2D and 3D),
-             the **campaign world-pulse simulation** (`worldPulse/` — ~378 modules
+             the **campaign world-pulse simulation** (`worldPulse/` — ~410 modules
              that age a canonized region tick-by-tick: proposals, party impacts,
              the multi-tick interval orchestrator, PLUS the geopolitical
              subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
@@ -246,9 +246,13 @@ arbitrary mutation names.
 
 `lib/routes.js` is the single source of truth: a `ROUTES` table mapping internal
 `view` ids ⇄ public paths, plus guards (`auth` / `elevated`). `App.jsx` switches
-on `view`; the **`NAV` is derived from the `ROUTES` table** (Create · Welcome ·
-Library · Realm · Compendium · Gallery · About), with Pricing as a secondary
-header link. `/` is a marketing front door that resolves to the **Welcome/home**
+on `view`; the **`NAV` is derived from the `ROUTES` table** (Create · Library ·
+Realm · Compendium · Gallery · About), with Pricing as a secondary
+header link. The home/Welcome route deliberately carries **no `nav` block** —
+OWNER DIRECTIVE, 2026-08-03 (THE FLETCHED RIBBON) — so it is absent from NAV and
+from every surface derived from it.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (the NAV list is derived from lib/routes.js) -->
+`/` is a marketing front door that resolves to the **Welcome/home**
 landing (returning members route on to their workspace). The former `/compare`
 pages are a tab on the **About** page (renamed from "How To Use"); Workshop /
 "Custom Generate" was removed entirely. `/workshop` and `/compare*` stay as routes
@@ -296,7 +300,7 @@ shows all visible items.
     never enable an email category.
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
-    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->
+    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/aiGroundingBundle.freshness.test.js -->
 
 Secrets live in the Supabase dashboard / Vercel env, never in the repo. Client
 reads only `VITE_*` vars (see `.env.example`); the anon key is public by design
@@ -379,8 +383,10 @@ verify:dist`.
   against shipping a `dist` that cannot boot — had not run in the gate since
   2026-08-02** either. Same repair as step 9, one step later. It **runs the whole
   suite** (it never skips, excludes or suppresses a test) and compares the result
-  against a frozen census of 49 known failures across 34 files, measured in an
-  integrity-counted checkout of a committed sha. Every entry carries an
+  against the frozen per-test census in `scripts/.test-ratchet-baseline.json`,
+  measured in an integrity-counted checkout of a committed sha. **The census is
+  the count; this page does not carry a second copy of it**, because the one it
+  used to carry was stale within a day of being written. Every entry carries an
   attribution — subsystem, cause, introducing commit, class — so a row nobody can
   trace is refused. A failing test ABSENT from the census is a regression;
   `--update` may only REMOVE entries. A baselined test that turns up **skipped**
@@ -395,10 +401,13 @@ verify:dist`.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~20,100 tests / ~1988 files: unit, property-based,
-  domain/store/lib integration, component/UI smoke, accessibility, security, and
-  edge-function contracts. Counts are approximate; executable output remains the
-  authority.
+- **test** — Vitest: unit, property-based, domain/store/lib integration,
+  component/UI smoke, accessibility, security, and edge-function contracts. **The
+  suite states its own size** — `npm run test` prints the file and test totals,
+  and `scripts/.test-ratchet-baseline.json` records them at the last measured sha.
+  No figure is repeated here: the pair this page used to carry understated the
+  suite by roughly a third before anyone noticed.
+  <!-- @enforced-by tests/docs/architectureFreshness.test.js (the suite-size figure is derived, never transcribed) -->
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
 - **verify:dist** — the constitutional **first-paint ratchet**: the built entry

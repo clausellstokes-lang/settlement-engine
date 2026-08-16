@@ -2,7 +2,7 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 192 at
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 195 at
 > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
@@ -76,9 +76,12 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 192 is 71 migrations ahead
-   of the live-verified production head 121. The eleven declared waves need clone
-   rehearsal, wave receipts, rollback practice, and then an authorized deployment.
+1. **Migration train.** Working-tree migration head 195 is 74 migrations ahead
+   of the live-verified production head 121 (`supabase/applied-head.json`). Both
+   figures are derived by the freshness pin rather than kept by hand. The eleven
+   declared waves need clone rehearsal, wave receipts, rollback practice, and then
+   an authorized deployment.
+   <!-- @enforced-by tests/docs/architectureFreshness.test.js (both migration figures derived from the filesystem) -->
 2. **Live-service proof.** Local code cannot prove production Stripe, Supabase,
    DNS/TLS, CSP reporting, alert delivery, backup retention, or restore timing.
 3. **Command durability breadth.** The durable journal and first transactional

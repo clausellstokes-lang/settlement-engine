@@ -2,8 +2,10 @@
  * fullTypecheckRatchet.test.js — the FULL-TREE typecheck ratchet, pinned and PROVEN.
  *
  * scripts/check-full-typecheck.mjs restores `npm run check`. `npm run typecheck`
- * (`tsc --noEmit -p tsconfig.full.json`) is a BOOLEAN gate at zero errors and step
- * 9 of the 14-step `&&` chain; it went red on 2026-08-02 at 7796954e and stayed
+ * (`tsc --noEmit -p tsconfig.full.json`) is a BOOLEAN gate at zero errors and WAS
+ * step 9 of the then-14-step `&&` chain; this ratchet took its place, and
+ * `typecheck:ratchet` is step 12 of the 17-step chain today. The bare boolean
+ * went red on 2026-08-02 at 7796954e and stayed
  * red, so `lint`, `test`, `build` and `verify:dist` — every step BEHIND it — had
  * not run as part of the gate since. The ratchet replaces the boolean with a
  * truthful per-file ceiling that only shrinks, which lets the dark tail run again
@@ -121,6 +123,34 @@ describe('full-tree typecheck ratchet — static pins', () => {
     expect(steps.length, 'the check chain parsed to no steps — the scan broke').toBeGreaterThan(4);
     // anchored: the two assertions above prove `steps` is a populated list that really contains the chain
     expect(steps, 'the bare `typecheck` step is back in the chain — the tail goes dark again').not.toContain('typecheck');
+  });
+
+  // ── BOTH HEADERS NAME THE RATCHET'S REAL POSITION, DERIVED (dom-1, ODQ §115.1) ──
+  // Both files carried "step 9 of the 14-step `&&` chain" in the PRESENT TENSE, and
+  // it was wrong twice over: the chain is longer than 14, and the step that sits in
+  // it is this ratchet, not the bare boolean. A position written by hand rots the
+  // moment a validate step is inserted, so the prose is checked against the chain.
+  test('both ratchet headers state the position package.json actually chains', () => {
+    const steps = pkg.scripts.check.split('&&').map((s) => s.trim().replace(/^npm run /, ''));
+    const position = steps.indexOf('typecheck:ratchet') + 1;
+    expect(position, 'typecheck:ratchet is not in the check chain').toBeGreaterThan(0);
+    expect(steps.length).toBeGreaterThan(4);
+    // anchored: the two assertions above prove the chain parsed and contains the ratchet
+    const sentence = new RegExp(
+      `\`?typecheck:ratchet\`? is step ${position} of the ${steps.length}-step chain`,
+    );
+    const scriptSource = readFileSync(SCRIPT, 'utf8');
+    const selfSource = readFileSync(new URL(import.meta.url), 'utf8');
+    expect(
+      scriptSource,
+      `scripts/check-full-typecheck.mjs must state the ratchet's real position `
+      + `(step ${position} of ${steps.length})`,
+    ).toMatch(sentence);
+    expect(
+      selfSource,
+      `this file's header must state the ratchet's real position `
+      + `(step ${position} of ${steps.length})`,
+    ).toMatch(sentence);
   });
 
   test('`npm run typecheck` survives as a RAW tsc command (burn lanes need the full list)', () => {
