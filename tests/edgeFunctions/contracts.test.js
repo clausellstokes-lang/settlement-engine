@@ -1126,12 +1126,14 @@ describe('Tier 3.3 — create-checkout product catalog', () => {
   // chair is given, never sold, so the row is gone — and the pin now holds the
   // absence, with a POSITIVE half so a bare deleted line cannot go vacuous.
   it('refuses founder_lifetime outright and carries NO price row for it', () => {
+    // anchored: ABOLISHED_PRODUCTS and its .has(product) call are asserted PRESENT in this same source below
     expect(src).not.toMatch(/founder_lifetime:\s*Deno\.env\.get\(/);
     expect(src).toMatch(/const ABOLISHED_PRODUCTS = new Set\(\['founder_lifetime'\]\)/);
     // …and the refusal is consulted, not merely declared.
     expect(src).toMatch(/ABOLISHED_PRODUCTS\.has\(product\)/);
     // The seat gate went with the sale it guarded (an unreachable enforcement
     // block is the dead-arm class).
+    // anchored: the same source is proven live by the two ABOLISHED_PRODUCTS assertions above
     expect(src).not.toMatch(/FOUNDER_SEAT_LIMIT/);
   });
 

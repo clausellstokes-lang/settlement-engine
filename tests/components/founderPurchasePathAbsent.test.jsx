@@ -107,6 +107,7 @@ describe('the founder purchase path is absent from the rendered pricing page', (
     // chairsHeld, and `lead` gained {seats}); a missed interpolation site would
     // print the brace to the reader.
     const { container } = render(<PricingPage onNavigate={() => {}} />);
+    // anchored: the same render is asserted non-empty and to CONTAIN four charter strings above, so the subject cannot have silently vanished
     expect(container.textContent).not.toMatch(/\{\w+\}/);
   });
 });
@@ -114,6 +115,7 @@ describe('the founder purchase path is absent from the rendered pricing page', (
 describe('the founder purchase path is absent from the source, structurally', () => {
   it('the pricing catalog carries no founder Stripe SKU', () => {
     const src = read('src/config/pricing.js');
+    // anchored: the line below asserts the premium SKU is still PRESENT in this same source, so the file cannot have emptied out
     expect(src).not.toMatch(/stripeProduct:\s*'founder_lifetime'/);
     expect(TIERS.founder.stripeProduct).toBeNull();
     // Positive control: the catalog still HAS other SKUs, so the negative above
@@ -123,12 +125,14 @@ describe('the founder purchase path is absent from the source, structurally', ()
 
   it('create-checkout has no founder price row and refuses the product explicitly', () => {
     const src = read('supabase/functions/create-checkout/index.ts');
+    // anchored: ABOLISHED_PRODUCTS and the premium price row are asserted PRESENT in this same source below
     expect(src).not.toMatch(/founder_lifetime:\s*Deno\.env\.get\(/);
     // The POSITIVE half — the whole reason the abolition is a symbol and not a
     // deletion. A future edit that re-adds a price row has to get past this.
     expect(src).toMatch(/const ABOLISHED_PRODUCTS = new Set\(\['founder_lifetime'\]\)/);
     expect(src).toMatch(/ABOLISHED_PRODUCTS\.has\(product\)/);
     // The seat gate it guarded is gone with it (dead-arm class).
+    // anchored: same source, whose ABOLISHED_PRODUCTS and premium rows are asserted present two lines up and two lines down
     expect(src).not.toMatch(/FOUNDER_SEAT_LIMIT/);
     // Positive control: the catalog still resolves the products that DO sell.
     expect(src).toMatch(/premium:\s*Deno\.env\.get\('STRIPE_PRICE_PREMIUM'\)/);
@@ -141,6 +145,7 @@ describe('the founder purchase path is absent from the source, structurally', ()
       'src/components/pricing/FounderTile.jsx',
     ]) {
       expect(read(rel), `${rel} still opens a founder checkout`)
+      // anchored: read() throws on a missing file, and the two lines below assert live symbols in the same PricingPage source
         .not.toMatch(/\(\s*'founder_lifetime'\s*\)/);
     }
     // …and the charter CTA can never be elected the page's loud primary, because

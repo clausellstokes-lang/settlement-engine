@@ -76,6 +76,7 @@ describe('FounderTile — P7 chair meter (#15)', () => {
     // rendered, so prove there IS a surface before asserting what is absent.
     expect(text.length).toBeGreaterThan(80);
     for (const dead of ['$99', '$144', 'one-time', 'seats remaining', 'Claim', 'Pay once']) {
+      // anchored: text.length > 80 is asserted above and the CTA link is found by role, so the rendered subject is proven live
       expect(text, `the tile still renders dead purchase copy: ${dead}`).not.toContain(dead);
     }
   });
@@ -108,11 +109,14 @@ describe('FounderTile — the CTA asks for a chair, it does not buy one (ODQ §1
       path.resolve(process.cwd(), 'src/components/pricing/FounderTile.jsx'),
       'utf8',
     );
+    // anchored: readFileSync throws on a missing path, and FOUNDER_SEAT_CAP is asserted PRESENT in this same source below
     expect(src).not.toMatch(/from '\.\.\/\.\.\/lib\/stripe\.js'/);
+    // anchored: same source, proven non-empty by the FOUNDER_SEAT_CAP assertion below
     expect(src).not.toMatch(/startCheckout\s*\(/);
     // The header comment NAMES the abolished SKU deliberately (that record is the
     // point), so the negative is on the call, not the word: no checkout is opened
     // for it anywhere in the file.
+    // anchored: same source, proven non-empty by the FOUNDER_SEAT_CAP assertion on the next line
     expect(src).not.toMatch(/\(\s*'founder_lifetime'\s*\)/);
     // …and it still reads the shared cap rather than a literal 30.
     expect(src).toMatch(/FOUNDER_SEAT_CAP/);

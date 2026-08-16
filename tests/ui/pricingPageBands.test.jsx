@@ -103,6 +103,7 @@ describe('PricingPage — the five-band drift contract', () => {
     const months = getFounderBreakEvenMonths();
     expect(months).toBe(Math.ceil(TIERS.founder.priceCents / TIERS.cartographer.priceCents));
     expect(text).toContain(tp('band2.charter.sustainability', { seats: 30 }));
+    // anchored: the line above asserts this same rendered text CONTAINS the charter sustainability sentence, so the page is proven rendered
     expect(text).not.toContain(`$${TIERS.founder.priceCents / 100}`);
     // The failure policy renders verbatim (the verified-refund promise).
     expect(text).toContain(tp('band3.taskMenu.failurePolicy'));

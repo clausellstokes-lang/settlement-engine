@@ -49,7 +49,7 @@ export const pricingPage = {
       // Numbers stay interpolated from FOUNDER_SEAT_CAP; none is typed here.
       name: 'The Founder Charter',
       lead: 'Everything Cartographer runs, for as long as SettlementForge runs. {seats} chairs, all by invitation.',
-      sustainability: '{seats} chairs, and no more — the Hall is a place in the credits, not a revenue lane.',
+      sustainability: '{seats} chairs, and no more. The Hall is a place in the credits, not a revenue lane.',
       capNote: 'A chair is given, never sold.',
       chairsHeld: '{held} of {seats} chairs held.',
       chairsFallback: '{seats} chairs, all by invitation.',
