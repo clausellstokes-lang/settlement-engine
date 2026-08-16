@@ -7864,3 +7864,24 @@ to MF-B7 same-turn.
 2. Relayed into MF-B8 same-turn: the grain-vs-ceiling contest
    may now resolve by a measured, pinned raise instead of a
    stalled amendment proposal.
+
+## §218 · OWNER ORDER: GO WILD ON REFERENCES — HF-2 (FABLE)
+## GROWS THE NORTH STAR (2026-08-16)
+
+1. **THE ORDER**: unlimited Higgsfield generation with prompt
+   refinement "to as many images as you need" until the best
+   references are found. **HF-2 DISPATCHED ON FABLE** (the
+   calibration corpus is aesthetic ground truth — the
+   maximum-impact seat per §208.2): fill the thin bands (thorp
+   n=1→≥5, hamlet clean-n≈0→≥5, metropolis n=1→≥4), mint the
+   §214 iconography close-ups (castle-wall vocabulary at fabric
+   zoom; terrain hachure/crag/canopy plates), plus opportunistic
+   coverage. CURATION LAW: keep only plates meeting the atlas
+   §2.3 register; keepers with banned-prior defects carry
+   per-plate defect notes (the corpus teaches, never lies);
+   too-defective plates are discarded, never filed to hit a
+   count. Every kept plate is LOOKED at. The calibration index
+   grows with each plate's teaching note.
+2. The next §216 comparison round runs against the GROWN corpus
+   — the thorp/metropolis bands become distributions before
+   wave eight is graded against them.
