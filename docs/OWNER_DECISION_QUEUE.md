@@ -5373,3 +5373,43 @@ gallery-seeding lane offer stands.
    train, riding tm-core per §141. No engine edits, no flag mint
    (operator tooling — reasoning recorded in the charter §0),
    archives-only substrate.
+
+## §146 · SA-1 COLLECTED — THE §145.2 SOAK GATE IS PASSED (2026-08-16, chair)
+
+1. **Verdict: PASS, conditional on the fold — and the fold is
+   EXECUTED.** All 13 cure blocks applied to laneSHC-SK-CHARTER.md
+   mechanically (anchor-unique, 13/13, sentinel-verified). No
+   component earned a STOP. JUDGMENT (SA-1's, chair-ratified):
+   PASS-conditional over hard-FAIL because the architecture is
+   measured sound and §145.2's design is fold-before-compile — veto
+   flips it.
+2. **The four consequence-grade findings, now cured in the charter:**
+   (a) sub-year checkpoints are UNBUILDABLE (PRNG stream position is
+   closure state in src/kernel/prng.js) — cadence pinned to the
+   year-boundary seam, the one checkpoint-complete seam, proven by
+   the R-GEN isolate receipt; checkpoint replay is fix-loop-only,
+   never an official verdict. (b) SK-4's flag-constraint source does
+   not exist machine-readably — the compile MINTS a fixture-pinned
+   constraint manifest (§85.4 prices at that member); all-on recast
+   as maximal-lawful; pair coverage credited on EFFECTIVE pairs
+   only. (c) band freezing restricted to the first clean
+   full-instrument run at build-complete-dark, chair-signed; rolling
+   curves are PROVISIONAL; the post-tuning re-freeze is pre-declared.
+   (d) the determinism comparison surface is now DEFINED (per-year
+   hash sequence + receipt minus a closed volatile list) and the
+   tripwire registry splits DETERMINISTIC (gates/capsules) from
+   HOST-OBSERVABILITY (metadata only). Plus: whole-world-soak.mjs
+   extension declared and priced (moves the certification source
+   fingerprint — stated, never silent; the overlay-above-darkRules
+   law carried); declared-shift re-records need §110.3's three-part
+   proof; blast-radius deriver = union of three arms with enumerated
+   refuse-to-full conditions; capsules pin node-major + archive
+   substrate; the seed ledger gets a durable home, full cell-identity
+   keys, and no-partial-credit; rolling cancellation is PID-exact;
+   the tm walker's Arm B census extension to scripts/soak/** is
+   carried in sk's text so the joint compile cannot lose it.
+3. **Consequence: the soak order is now** compile tm+sk (TC28,
+   dispatched this turn under §145.1) → land before the diagnostic
+   soak (§117a) → first rolling soak at the next family exposure
+   after landing → diagnostic at build-complete-dark on this
+   harness. Nothing soaks before tm+sk lands.
