@@ -175,6 +175,30 @@ export const SIM_METRICS = Object.freeze([
     epoch: 'year',
     source: Object.freeze(['behavioral.yearly']),
   }),
+  /**
+   * ⭐ THE §151.3 SK-5 BAND RIDER, LANDED. The chair asked whether the harness's
+   * curve-band set reaches EXPERIENCE-facing aggregates and not only engine ones.
+   * Measured at this base, the other eleven rows are all engine-facing. NEWS CADENCE
+   * is available honestly — `observeBehavioralYear` already folds every authored
+   * Wizard News row of the year through `measurePhraseRepetition`, so this row is a
+   * transform of an observation that exists, not a new observation.
+   *
+   * ⛔ ADDRESS-CHAIN RATES ARE NOT ADDED, AND THE PRICE IS NAMED INSTEAD. No receipt
+   * field measures address completeness; supplying one means editing
+   * `scripts/audit/behavioral-observation.mjs`, which is inside
+   * `REALM_SCALE_SOURCE_PATHS` and would move the certification source fingerprint,
+   * and it changes what the behavioral observation MEANS. Minting a row with no
+   * source would red this registry's own arity arm, which is the correct outcome —
+   * so the gap is reported to the chair rather than papered over.
+   */
+  Object.freeze({
+    name: 'sim_narration_tempo',
+    class: SIM_EVENT_CLASS,
+    dims: Object.freeze(['measure']),
+    unit: 'news_rows',
+    epoch: 'year',
+    source: Object.freeze(['behavioral.yearly']),
+  }),
   Object.freeze({
     name: 'sim_belief_knowledge',
     class: SIM_EVENT_CLASS,

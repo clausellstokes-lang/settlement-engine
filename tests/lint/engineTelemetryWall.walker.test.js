@@ -252,7 +252,7 @@ describe('the engine/telemetry wall', () => {
     expect(leaked).toEqual([]);
     // The guard is sufficient BECAUSE the two name sets are disjoint, and that
     // disjointness is pinned in tests/lib/simMetricRegistry.test.js.
-    expect(SIM_METRIC_NAMES.length).toBe(11);
+    expect(SIM_METRIC_NAMES.length).toBe(12);
   });
 
   it('ARM F — the folded arms: the analytics-module roster, and the Operator Messages receipt discipline', () => {

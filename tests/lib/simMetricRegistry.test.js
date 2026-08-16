@@ -27,7 +27,7 @@ const withRow = (patch) => [{ ...sound, ...patch }];
 
 describe('the simulation metric registry', () => {
   it('spells every name with the ONE wire contract imported from analyticsEvents.js', () => {
-    expect(SIM_METRIC_NAMES.length).toBe(11);
+    expect(SIM_METRIC_NAMES.length).toBe(12);
     expect(SIM_METRIC_NAMES.filter((name) => !EVENT_NAME_RE.test(name))).toEqual([]);
     expect(SIM_METRICS.filter((row) => row.class !== SIM_EVENT_CLASS)).toEqual([]);
     expect(registryDefects()).toEqual([]);

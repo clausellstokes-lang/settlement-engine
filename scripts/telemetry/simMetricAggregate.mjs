@@ -101,6 +101,9 @@ export function aggregate(rows) {
     moverActivity: series(groups.get('sim_mover_activity') || [], 'mover_family',
       (row) => row.dims?.lane === 'total'),
     eventTempo: series(groups.get('sim_event_tempo') || [], 'measure'),
+    // ⭐ The §151.3 band rider's EXPERIENCE-facing family: how much news the world
+    // actually authored per year, and how repetitive it was.
+    narrationTempo: series(groups.get('sim_narration_tempo') || [], 'measure'),
     stressorRhythm: series(groups.get('sim_stressor_rhythm') || [], 'measure').active_stressors || [],
     succession: series(groups.get('sim_succession') || [], 'measure'),
     warCadence: {

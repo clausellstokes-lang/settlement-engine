@@ -249,6 +249,7 @@ session, user or consent column at all.
 | `sim_war_convergence` | simulation | run | `histogram` · `bucket` | `warConvergence` · `warConvergenceCensus` |
 | `sim_stressor_rhythm` | simulation | year | `measure` | `stressorCounts` |
 | `sim_succession` | simulation | year | `measure` | `behavioral.yearly` |
+| `sim_narration_tempo` | simulation | year | `measure` | `behavioral.yearly` |
 | `sim_belief_knowledge` | simulation | run | `container` · `measure` | `subsystems` |
 | `sim_finding` | simulation | run | `finding_kind` | `failures` · `properties` |
 

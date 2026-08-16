@@ -69,6 +69,8 @@ describe('the simulation metric read layer', () => {
     expect(report.governance.power_moved).toEqual([0, 2, 0]);
     expect(report.warCadence.duration).toEqual({ short: 2, long: 1, generational: 0, unresolved: 1, unmeasured: 0 });
     expect(report.warCadence.census.countedWars).toBe(4);
+    expect(report.narrationTempo.news_rows_observed).toEqual([40, 50, 60]);
+    expect(report.narrationTempo.family_repeat_rate_milli).toEqual([75, 80, 83]);
     expect(report.findings).toEqual({});
   });
 

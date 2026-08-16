@@ -1,5 +1,5 @@
 {
-  "note": "AUTHORED fixture (never captured from a run: nothing soaks before tm+sk lands). Its own arity is asserted BEFORE any transform output, because a fixture that cannot execute its own defect produces a green, meaningless pin.",
+  "note": "AUTHORED fixture (never captured from a run: nothing soaks before tm+sk lands). Its own arity is asserted BEFORE any transform output, because a fixture that cannot execute its own defect produces a green, meaningless pin. Its phraseRepetition block carries non-zero observations in every year, so the news-cadence rows the §151.3 band rider added cannot pass vacuously.",
   "clean": {
     "schemaVersion": 5,
     "kind": "whole_world_soak",
@@ -245,7 +245,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 40,
+            "windows": 4,
+            "exactRepeats": 1,
+            "familyRepeats": 3,
+            "exactRepeatRate": 0.025,
+            "familyRepeatRate": 0.075,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false
@@ -351,7 +362,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 50,
+            "windows": 4,
+            "exactRepeats": 2,
+            "familyRepeats": 4,
+            "exactRepeatRate": 0.04,
+            "familyRepeatRate": 0.08,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false
@@ -457,7 +479,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 60,
+            "windows": 4,
+            "exactRepeats": 3,
+            "familyRepeats": 5,
+            "exactRepeatRate": 0.05,
+            "familyRepeatRate": 0.083333,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false
@@ -714,7 +747,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 40,
+            "windows": 4,
+            "exactRepeats": 1,
+            "familyRepeats": 3,
+            "exactRepeatRate": 0.025,
+            "familyRepeatRate": 0.075,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false
@@ -820,7 +864,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 50,
+            "windows": 4,
+            "exactRepeats": 2,
+            "familyRepeats": 4,
+            "exactRepeatRate": 0.04,
+            "familyRepeatRate": 0.08,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false
@@ -926,7 +981,18 @@
             }
           },
           "phraseRepetition": {
-            "samples": 0
+            "schemaVersion": 1,
+            "kind": "phrase_repetition",
+            "windowTicks": 13,
+            "observations": 60,
+            "windows": 4,
+            "exactRepeats": 3,
+            "familyRepeats": 5,
+            "exactRepeatRate": 0.05,
+            "familyRepeatRate": 0.083333,
+            "untrackedFamilies": [],
+            "worstWindow": null,
+            "byWindow": []
           },
           "beliefDivergence": {
             "observed": false

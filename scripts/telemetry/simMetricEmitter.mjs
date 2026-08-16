@@ -193,6 +193,23 @@ function successionRows(year, index, id) {
   ].map(([measure, value]) => row(id, 'sim_succession', 'year', index, { measure }, value));
 }
 
+/**
+ * The §151.3 band rider's row: news cadence and narration repetition, per year.
+ * Rates are emitted in MILLI so the report reads as integers everywhere and no
+ * float formatting can drift between the Node face and the SQL face.
+ */
+function narrationRows(year, index, id) {
+  const phrase = obj(year.phraseRepetition);
+  return [
+    ['news_rows_observed', phrase.observations],
+    ['windows', phrase.windows],
+    ['exact_repeats', phrase.exactRepeats],
+    ['family_repeats', phrase.familyRepeats],
+    ['exact_repeat_rate_milli', Math.round(num(phrase.exactRepeatRate) * 1000)],
+    ['family_repeat_rate_milli', Math.round(num(phrase.familyRepeatRate) * 1000)],
+  ].map(([measure, value]) => row(id, 'sim_narration_tempo', 'year', index, { measure }, value));
+}
+
 function warRows(receipt, id) {
   const observation = obj(receipt.warConvergence);
   const census = obj(receipt.warConvergenceCensus);
@@ -264,6 +281,7 @@ export function emitRows(receipt, identity) {
       ...moverRows(year, index, id),
       ...tempoRows(year, index, id),
       ...successionRows(year, index, id),
+      ...narrationRows(year, index, id),
     );
   });
   arr(obj(receipt).stressorCounts).forEach((count, index) => {

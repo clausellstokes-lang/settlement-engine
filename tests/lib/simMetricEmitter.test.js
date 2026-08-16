@@ -67,6 +67,8 @@ describe('the simulation metric emitter', () => {
       .reduce((total, year) => total + year.succession.completions, 0)).toBeGreaterThanOrEqual(1);
     expect(FIXTURE.clean.stressorCounts.length).toBe(FIXTURE.clean.behavioral.yearly.length);
     expect(FIXTURE.withFailures.failures.length).toBeGreaterThanOrEqual(1);
+    expect(FIXTURE.clean.behavioral.yearly
+      .every((year) => year.phraseRepetition.observations > 0)).toBe(true);
     // ── and only then, the transform ────────────────────────────────────────
     const rows = emitRows(FIXTURE.clean, IDENTITY);
     const failed = emitRows(FIXTURE.withFailures, IDENTITY);
