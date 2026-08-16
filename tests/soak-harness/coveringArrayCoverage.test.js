@@ -110,22 +110,31 @@ describe('the covering array and its constraint manifest', () => {
 
   it('the flag domain is ENUMERATED FROM THE REGISTRY, and its arithmetic closes', () => {
     const census = liveCensus();
-    // 25 normalizer-governed + 32 preset-declared-but-ungoverned + 23 engine-gated virtual.
+    // 25 normalizer-governed + 32 preset-declared-but-ungoverned + 24 engine-gated virtual.
     // ⭐ THE VIRTUAL ARM MOVED 22 → 23 AT EP-1 (2026-08-16), which mints advanceEpochEnabled
     // with its certification row in one commit. The arithmetic below is what makes that a
     // measurement rather than a bump: `union` moves in lockstep (79 → 80) and the
     // governed/ungoverned arms do not move at all, because a VIRTUAL key is by definition
     // absent from DEFAULT_SIMULATION_RULES and from every preset spread. A flag mint that
     // moved any other arm would be mis-declared as virtual, and this closure would say so.
+    // ⭐ AND 23 → 24 AT WF-1a (2026-08-16), which mints faithUnseatingEnabled with its
+    // certification row in one commit. `union` moved 80 → 81 in lockstep and the governed
+    // and ungoverned arms did NOT move, which is the closure confirming the key really is
+    // virtual — it appears in neither DEFAULT_SIMULATION_RULES nor any preset spread. THIS
+    // FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for the same reason
+    // contributionLedgerShape.test.js is: these three literals live in a soak-harness suite
+    // no faith battery would think to run, and a wave that pays the rest of the flag-mint
+    // bill meets them for the first time at the terminal gate.
     expect(census.governed.length).toBe(25);
     expect(census.ungoverned.length).toBe(32);
-    expect(census.virtual.length).toBe(23);
+    expect(census.virtual.length).toBe(24);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(80);
+    expect(census.union.length).toBe(81);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
-    // 55 of 80 sit outside the normalizer's fail-closed coercion — the measured content of
-    // "the normalizer is NOT the oracle", and the reason the manifest had to be minted.
-    expect(census.union.length - census.governed.length).toBe(55);
+    // 56 of 81 sit outside the normalizer's fail-closed coercion — the measured content of
+    // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
+    // rises with the virtual arm by construction: a virtual key is never governed.
+    expect(census.union.length - census.governed.length).toBe(56);
     expect(census.nonBoolean.length).toBe(13);
   });
 

@@ -4737,7 +4737,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
     // --porcelain` at measurement time listed exactly this stage's paths and nothing else,
     // so no other lane's uncommitted test files are charged to this row.
-    files: 2459, parked: 364, credited: 2095, titles: 20481, suiteTitles: 5736,
+    // ── RE-RECORDED 2026-08-16 BY WF STAGE ONE (WF-1a), WITH ITS CAUSE MEASURED ─────
+    // 2,459/364/2,095/20,481/5,736 → 2,460/364/2,096/20,489/5,737. ONE NEW TEST FILE AND
+    // NOTHING ELSE. WF-1a mints the typed patron fall — the faithUnseatingEnabled flag, the
+    // pure patronFall.js leaf, the capped ring and the four-cause classifier; no rule here
+    // widened or narrowed and no existing file changed shape. The two registration files it
+    // also edits (tests/domain/subsystemRowsVirtual.test.js and
+    // tests/domain/contributionLedgerShape.test.js) carry ZERO new titles by construction:
+    // the first takes three MODULE-SCOPE literal edits and the second RENAMES one title
+    // rather than adding one, which is why a flag mint moves this tuple by a single file.
+    // New: tests/domain/patronFall.test.js (8 titles, 1 suite title) — the closed
+    // eight-case acceptance denominator.
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files       +1  = the one new file
+    //   credited    +1  = it is CREDITED, not parked
+    //   titles      +8  = 8, closing with nothing left over
+    //   suiteTitles +1  = its single describe
+    // PARKED IS UNCHANGED at 364: every title in the new file is a literal, so door 3's
+    // reader recognises them statically.
+    // ⚠⚠ MEASURED IN AN ISOLATED WORKTREE, NOT IN THE SHARED TREE, AND THE DISTINCTION WAS
+    // LOAD-BEARING RATHER THAN CEREMONIAL: at measurement time the shared build worktree
+    // carried a CONCURRENT LANE's uncommitted work, including a modification to
+    // tests/edgeFunctions/contracts.test.js — a file inside this census's own `tests` walk.
+    // Censusing there would have charged another lane's titles to this row. The figures
+    // above were taken in a detached worktree at the verified base carrying exactly WF-1a's
+    // ten paths, whose `git status --porcelain` listed those paths and nothing else.
+    files: 2460, parked: 364, credited: 2096, titles: 20489, suiteTitles: 5737,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -1717,37 +1717,37 @@
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 846,
+    "line": 894,
     "category": "floatInterpolation",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 846,
+    "line": 894,
     "category": "multiplier",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 846,
+    "line": 894,
     "category": "twoDecimalScore",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 878,
+    "line": 926,
     "category": "floatInterpolation",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 878,
+    "line": 926,
     "category": "multiplier",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
   },
   {
     "path": "src/domain/worldPulse/religiousContest.js",
-    "line": 878,
+    "line": 926,
     "category": "twoDecimalScore",
     "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
   },

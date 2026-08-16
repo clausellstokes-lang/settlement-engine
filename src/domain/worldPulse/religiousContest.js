@@ -53,6 +53,9 @@ import { PANTHEON_TUNING, deityIdOf } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, applyUnaffiliatedSink, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, conductFitSignal, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
+// WF-1a: the typed patron fall. A PURE leaf beside this, its only importer — the placement
+// is what keeps scanCrossLayerPairs at zero pairs against two zero-headroom ceilings.
+import { classifyPatronFall, recordPatronFall } from './patronFall.js';
 import { deityTemper, chaos01 } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
 // Phase 4 W-F4b — the SPREAD-lane inter-deity stance CONSUMER (betrayal/pact events,
@@ -683,8 +686,22 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     if (!hasDeity && !hasState && !reaching) continue;     // dormancy: untouched ⇒ no state
 
     const tier = settlement.tier || settlement.config?.tier || 'village';
+    // WF-1a ⛔ CAPTURE ORDER IS THE WHOLE CURE. `prevPatron` below is read AFTER
+    // ensureReligionState, whose DM RE-ASSIGN branch has already written `s.patronRef` — so a
+    // SET_PRIMARY_DEITY flip satisfies `state.patronRef === prevPatron` and is INVISIBLE to it.
+    // The fall classifier therefore keys on `priorPatron`, read off the PRIOR tick's state
+    // before the ensure call. `prevPatron` is left exactly as it was: it is the conversion
+    // outcome block's own input at 3c and moving it would shift that receipt.
+    const priorPatron = prior[cid]?.patronRef ?? null;
     const state = ensureReligionState(prior[cid], settlement, tier);
     const prevPatron = state.patronRef;
+    // The DM's lever, read at the ONE instant it is legible: any seat motion across the
+    // ensure call is the re-assign branch, because nothing else has run yet this tick.
+    const dmReassigned = Boolean(priorPatron) && state.patronRef !== priorPatron;
+    // Latched across 3a's entry loop: the ref attemptEntry reported evicting. A later
+    // eviction naming the OUTGOING patron takes precedence over an earlier unrelated one,
+    // so the order deities reach a settlement cannot hide a suppression.
+    let evictedRef = null;
     // SPREAD-lane cross-settlement reads: neighbourIds feeds regional prevalence
     // (deityLocalStrength) and neighbour recognition (deityLegitimacyTarget). With
     // spread OFF the settlement recognizes no neighbours' faiths ⇒ both terms are
@@ -741,7 +758,15 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
             strength = clamp01(strength + lift * (1 - strength));
           }
         }
-        attemptEntry(state, deity, strength, { force: Boolean(occupied) });
+        // WF-1a: the return was already computed and DISCARDED here; assigning it is what makes
+        // the `suppressed` arm derivable with no signature change to attemptEntry.
+        const entered = attemptEntry(state, deity, strength, { force: Boolean(occupied) });
+        // ⚠ `evicted` is present only on the ENTERED arms of attemptEntry's union return —
+        // the refusal arms omit the key entirely — so the read is narrowed with `in` rather
+        // than cast. religionState.js is WF-1b's file and is deliberately not touched here,
+        // and a cast would owe an any-baseline row for a union the caller can narrow itself.
+        const ousted = 'evicted' in entered ? entered.evicted : null;
+        if (ousted && (evictedRef === null || ousted === priorPatron)) evictedRef = String(ousted);
       }
     }
 
@@ -779,7 +804,30 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // imposed cult + a live contest, and biasing this SEEDED (rng-forked) roll shifts the lit-path
     // religion goldens — a golden-shifting change owner-gated to the tuning-window regen. The
     // doctrine COURSE exists and is readable via commitmentStockOf when the seam is closed.
-    if (!contestRng || !resolvePatronContest(state, contestRng)) selectPatron(state);
+    // WF-1a: the boolean this condition ALREADY computed, captured into a local instead of
+    // discarded inside the test. Short-circuit order is preserved exactly — an absent
+    // contestRng still means resolvePatronContest is never called — so this is a rename, not
+    // a behaviour change. It is what separates `discredited` from `displaced`.
+    const contestOwned = Boolean(contestRng) && resolvePatronContest(state, contestRng);
+    if (!contestOwned) selectPatron(state);
+
+    // ── WF-1a · THE TYPED PATRON FALL ────────────────────────────────────────────────
+    // Flag-gated BY NAME. ⛔ The by-name spelling is load-bearing: a read reached only
+    // through a frozen-list `.every()` is a computed member access, attributes to NO key,
+    // and would hide a fully wired flag from the engine-gated-key census entirely.
+    // It ANDs with the LOCAL-lane deity gate this fold passed at its head
+    // (isSubsystemActive(snapshot,'religion')), so a deity-free world is byte-identical
+    // even lit. The outgoing seat is priorPatron — NEVER prevPatron (see the capture note
+    // above) — and a settlement whose seat is being filled for the FIRST time has a null
+    // priorPatron, so a first seed records nothing: nothing fell.
+    if (worldState?.simulationRules?.faithUnseatingEnabled === true
+      && priorPatron && state.patronRef !== priorPatron) {
+      recordPatronFall(state, {
+        ref: priorPatron,
+        cause: classifyPatronFall({ occupied: Boolean(occupations?.[cid]?.occupierId), dmReassigned, evictedRef, priorPatron, contestOwned }),
+        atTick: tick,
+      });
+    }
 
     // W-F3 authority reading (tick-start causal religious_authority score, rank fallback) —
     // shared by the unaffiliated sink (its LOW-authority term) and the piety record below.

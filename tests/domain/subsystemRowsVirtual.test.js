@@ -164,6 +164,13 @@ const CONTRIBUTION_LEDGER = 'contributionLedgerEnabled';
 // dozen other lanes, so tracing this lane's zero-candidate claim through them would
 // measure the whole pulse's vocabulary rather than this member's.
 const ADVANCE_EPOCH = 'advanceEpochEnabled';
+// WF-1a. The typed patron fall, joined with its manifest entry and its ONE by-name gate read
+// (the classify-and-record block in religiousContest.advanceReligionStates) in one commit. Its
+// lane leaf is the PURE one — patronFall.js — and NOT religiousContest.js: that fold is a
+// shared mouth that mints conversion outcomes for the whole faith layer, so tracing this
+// member's zero-candidate claim through it would measure the religion layer's whole
+// vocabulary rather than this lane's.
+const FAITH_UNSEATING = 'faithUnseatingEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -172,6 +179,7 @@ const VIRTUAL_RULES = Object.freeze([
   POLITICS, UNDERWAYS, TREATY_RENEWAL,
   WAR_CIRCULATION, CONTRIBUTION_LEDGER,
   ADVANCE_EPOCH,
+  FAITH_UNSEATING,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -204,6 +212,12 @@ const LANE_LEAVES = Object.freeze({
   // and tracing this lane's zero-candidate claim through them would measure every other
   // subsystem's vocabulary at once.
   [ADVANCE_EPOCH]: ['src/kernel/prng.js', 'src/domain/clock.js'],
+  // WF-1a. THE PURE LEAF ALONE — where the vocabulary, the classifier and the one ring
+  // writer live. religiousContest.js is in the row's wider `module` list because a reader
+  // needs the gate's address, and is deliberately absent here: it is the faith layer's
+  // mouth and mints the conversion outcome vocabulary, so tracing this lane's
+  // zero-candidate claim through it would measure another wave's beats.
+  [FAITH_UNSEATING]: ['src/domain/worldPulse/patronFall.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

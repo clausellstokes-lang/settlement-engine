@@ -46,15 +46,18 @@ function codeOnly(source) {
 }
 
 describe('WC-0E · the war-circulation flags, the contribution ledger shape, and the blocks[] arm', () => {
-  it('joins both flags to the manifest and holds the triple bijection at 23', () => {
+  it('joins both flags to the manifest and holds the triple bijection at 24', () => {
     for (const flag of FLAGS) expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
     // 22 → 23 at EP-1 (2026-08-16), which mints advanceEpochEnabled with its certification
     // row in the same commit. THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for
     // exactly that reason: these two literals are the FOURTH obligation of the flag-mint
     // bill, they live in a WAR-circulation suite no epoch battery would think to name, and
     // a wave that pays the other three finds them at the terminal gate instead.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(23);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(23);
+    // 23 → 24 at WF-1a (2026-08-16), which mints faithUnseatingEnabled with its certification
+    // row in the same commit. The title is RENAMED rather than a new one added, so the
+    // estate's test census carries no cardinality change for this obligation.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(24);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(24);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

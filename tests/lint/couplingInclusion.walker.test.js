@@ -149,6 +149,19 @@ const LAYER_PATTERNS = Object.freeze({
   ],
   FAITH: [
     /^src\/domain\/worldPulse\/(?:faith|sacred|religion|pantheon|conversion|piety|deity|temple)/,
+    // WF-1a: the typed patron fall. WHY the family list needed a row at all: the eight
+    // prefixes above are named for the SUBJECT's nouns, and this leaf is named for the
+    // EVENT — a patron falling — so it matched none of them and landed as a NEW UNLAYERED
+    // module against a baseline with zero headroom. That is the whole of the finding: the
+    // module owns FAITH's subject outright (the closed fall vocabulary, the classifier and
+    // the one ring writer), its only importer is religiousContest.js in this same family,
+    // and it reads no other port. It is NOT an ARGUED_UNLAYERED case — that roster is for
+    // modules owning no subject at all — on exactly the reading that gave peopleLedger.js
+    // WAR and emigreErrand.js INTERIOR: the distinction is SUBJECT, not program.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `patron[A-Z]` PREFIX: a prefix would claim files nobody
+    // has designed and silently widen a frozen family (the IN-1 precedent, verbatim, and
+    // the same shape WC-0A and WC-0E took for their two ledgers).
+    /^src\/domain\/worldPulse\/patronFall\.js$/,
   ],
   POP: [
     /^src\/domain\/worldPulse\/(?:demographics|population|lineageClaim|steading|settlementLifecycleFirstClass)/,

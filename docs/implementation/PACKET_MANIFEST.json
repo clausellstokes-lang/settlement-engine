@@ -14163,6 +14163,208 @@
           "tests/domain/contestBluffCharge.test.js"
         ]
       ]
+    },
+    {
+      "id": "WF-1A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/WF-1A.md",
+      "verifiedBase": "0cf18bed1730787131b6b1e06d09048102cfdd5e",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/worldPulse/patronFall.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/religiousContest.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/simulationRules.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/certification/subsystemRowsVirtual.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/patronFall.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/contributionLedgerShape.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/subsystemRowsVirtual.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/fp/WF-1A.md"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/coveringArrayCoverage.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/.prose-numerics-baseline.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/religiousContest.js",
+          "symbol": "export function advanceReligionStates"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function ensureReligionState"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function attemptEntry"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function resolvePatronContest"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function selectPatron"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function applyUnaffiliatedSink"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export const RELIGION_TUNING"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export function isFaithSpreadEnabled"
+        },
+        {
+          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "symbol": "export const VIRTUAL_SUBSYSTEM_ROWS"
+        },
+        {
+          "path": "src/domain/worldPulse/subsystemActivation.js",
+          "symbol": "export function isSubsystemActive"
+        },
+        {
+          "path": "src/domain/worldPulse/sacredClaim.js",
+          "symbol": "export function patronRefOf"
+        },
+        {
+          "path": "src/domain/region/contestMath.js",
+          "symbol": "export function hash01"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Lit, an organic share flip past PATRON_FLIP_MARGIN x PATRON_FLIP_TICKS appends exactly one {ref, cause:'displaced', atTick} record naming the OUTGOING patron."
+        },
+        {
+          "id": "A2",
+          "case": "Absent and false produce byte-identical world state on a deity-BEARING fixture; the LITERAL faithUnseatingEnabled: true drive moves at least one fenced byte (the lit-mutant control)."
+        },
+        {
+          "id": "A3",
+          "case": "Counterforce, non-vacuous: a pressured patron that holds above PATRON_HOLD mints NO record and materializes NO patronFalls key, on a fixture where a rival is genuinely within striking distance."
+        },
+        {
+          "id": "A4",
+          "case": "Every arm reachable and the vocabulary is closed: garrison imposed, DM SET_PRIMARY_DEITY imposed, attemptEntry-eviction suppressed, resolvePatronContest discredited; PATRON_FALL_CAUSES has exactly four members with abandoned absent."
+        },
+        {
+          "id": "A5",
+          "case": "The DM regression: a SET_PRIMARY_DEITY flip fires an imposed fall. This case reds against a classifier keyed on prevPatron and is the executed proof of the capture-order cure."
+        },
+        {
+          "id": "A6",
+          "case": "Idempotency and the cap: five successive falls leave exactly FALL_RING_CAP = 3 records newest-first; a tick with no transition appends nothing and re-running the fold on an unchanged state is a no-op."
+        },
+        {
+          "id": "A7",
+          "case": "Lifecycle round trip: a JSON round trip preserves the ring on both arms; the undo ring restores it wholesale; a regen that rebuilds religionStates preserves the ring and one that DROPS religionStates drops the ring with it, by design."
+        },
+        {
+          "id": "A8",
+          "case": "Absence semantics at the byte level: a world that never fell carries NO patronFalls key. Absent, never null, never an empty array."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/patronFall.test.js",
+          "tests/domain/religiousContest.test.js",
+          "tests/domain/advanceReligionStates.test.js",
+          "tests/domain/religionState.test.js",
+          "tests/domain/religionDormancy.byteIdentity.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/domain/contributionLedgerShape.test.js",
+          "tests/domain/subsystemRowsFaithPolitics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/property/worldpulseDeityGolden.test.js",
+          "tests/edgeFunctions/"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }

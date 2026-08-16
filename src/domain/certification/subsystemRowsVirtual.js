@@ -1243,6 +1243,50 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // the honest reading and the only lawful one: a row that observes nothing must say so.
     soakEvidence: 'unobserved',
   }),
+  // ── WF-1a · THE TYPED PATRON FALL (docs/DESIGN_FP_ARCH_WF.md §2, §3, §4-WF-1) ────
+  Object.freeze({
+    rule: 'faithUnseatingEnabled',
+    title: 'The typed patron fall (a settlement records WHICH creed lost its patron seat, and by which of four believer-side causes)',
+    module: 'src/domain/worldPulse/patronFall.js, src/domain/worldPulse/religiousContest.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY AND MEASURED: this member mints no pulse candidate at all. The
+      // fall is a persisted RECORD, not a beat — the receipt, the Herald desk kind and the
+      // Chronicle row are WF-1b's and WF-1d's, and declaring an eventType here would grade
+      // this row off another wave's vocabulary. The lane leaf contains no `candidateType`
+      // literal, which the virtual lane's zero-candidate trace re-measures from source.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The only BEHAVIORAL_MOVER_FAMILIES member this lane could ride
+      // is the whole pulse, which would grade the row ALIVE off every advance in every world
+      // where the flag has never been true — the refusal every row in this cohort makes.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY AND MEASURED: WF-1a calls setSpatialLedger ZERO times. Its one
+      // materialization is a CONDITIONAL array on a per-settlement religion state
+      // (`religionStates[cid].patronFalls`), which is not a spatialLedgers container and
+      // which the v5 census does not walk. Declaring a stateKey now would grade this row
+      // off a container another subsystem owns.
+      stateKeys: Object.freeze([]),
+      other: 'THE UNSEATING RECORD. Today a settlement\'s patron creed changes hands and nothing survives the tick: the fold mints a conversion outcome whose `cause` is a two-token `occupation | contest` literal and then discards it, so a world can lose the same faith five times and remember none of them. Lit, every patron displacement appends one `{ ref, cause, atTick }` record to a capped ring on the settlement\'s own religion state, `cause` drawn from a CLOSED FOUR-TOKEN vocabulary whose every arm has a measured producer: `imposed` (a garrison flip, or the DM\'s SET_PRIMARY_DEITY re-assign), `suppressed` (the seat evicted by force at attemptEntry\'s gate), `discredited` (resolvePatronContest owned the seat — the schism and legitimacy-floor road), and `displaced` (the organic share flip past PATRON_FLIP_MARGIN sustained for PATRON_FLIP_TICKS). PRECEDENCE IS TOTAL AND FIRST-MATCH-WINS in that order, because the arms genuinely overlap. THE DOCTRINE IS LOAD-BEARING RATHER THAN DECORATIVE: every token names a BELIEVER-SIDE or POLITICAL act, so the record says what the faithful and their rulers did and never what a god did; there is no free text in it and no deity is minted or read from any catalogue. A FIFTH CHARTERED TOKEN WAS CUT ON A MEASUREMENT: `abandoned` — the sink crossing — has ZERO producers, because applyUnaffiliatedSink touches `state.patronRef` on no path, `none` is a scalar that can never hold the seat, and the sink runs AFTER the seat is decided, so a settlement secularizes to the SINK_MAX ceiling with its patron still seated. DARK IS BYTE-IDENTICAL BY CONSTRUCTION, AND TWICE OVER: the one gate is read by name at the single classify-and-record block, and that block sits behind the LOCAL-lane data gate `isSubsystemActive(snapshot, "religion")` which returns before any fork or mint, so a deity-free world is unchanged even with the key lit. WHAT NOTHING CAN SEE: no preset declares this key, so a soak receipt carries no entry for it and this row can only ever grade UNOBSERVED; the ring is materialized CONDITIONALLY on a real fall, so a dark world serializes no new key and no census can distinguish it from a pre-wave one; and NOTHING IN PRODUCTION READS THE RING AT THIS WAVE — that is the producer-first shape, stated rather than hidden. THE OBSERVATION THAT WOULD CLOSE IT: WF-1d lands the war-dissolution join that consumes `fallCauseFor`, and WF-1b the obituary beat, at which point a receipt can grade the layer; until then the falsifiable claims are the two pinned below.',
+    }),
+    // PER_TICK is the cadence of the GATE, not of the record: the block is evaluated on
+    // every settlement on every pass. A fall itself is rare by construction — the flip
+    // buffer requires a sustained lead — and a rare writer is not a slow one.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_ring_key_is_conditional_and_the_vocabulary_is_closed',
+        description: 'A settlement that never lost a patron carries NO patronFalls key — absent, never null, never an empty array, because an empty array is a key and a key is a byte in every save, undo snapshot and same-seed hash. The one writer refuses any cause outside the four-token frozen vocabulary, so a caller cannot widen it by passing a string.',
+        check: 'Pinned in tests/domain/patronFall.test.js by the absence arm, which compares the serialized key set on a deity-bearing fixture that never fell, and by the closed-vocabulary arm that asserts exactly four members with `abandoned` absent.',
+      }),
+      Object.freeze({
+        name: 'the_outgoing_seat_is_read_before_the_dm_reassign_writes_it',
+        description: 'The classifier keys on the patron as it stood in the PRIOR tick\'s state, captured before ensureReligionState runs. Keying it on the fold\'s existing `prevPatron` — read after that call — is blind to the DM flip, because the re-assign branch has already written state.patronRef by then, so a SET_PRIMARY_DEITY imposition would record no fall at all while every other arm stayed green.',
+        check: 'Pinned in tests/domain/patronFall.test.js by the DM-regression arm, and proven non-vacuous by an executed mutant that re-keys the classifier onto prevPatron and must RED that arm alone.',
+      }),
+    ]),
+    // No channel is declared, so the row can never be ALIVE and says so. `unobserved` is
+    // the honest reading and the only lawful one: a row that observes nothing must say so.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

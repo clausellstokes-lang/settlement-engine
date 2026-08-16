@@ -233,6 +233,21 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // spine lit, then the flag); the by-name read is what keeps all three visible to the
   // engine-gated-key census, which a frozen-list `.every()` would hide.
   'espionageEnabled',
+  // Joined 2026-08-16 by FP wave WF-1a under CR-WR10-C item 4 (the compiled charter's §3 flag
+  // law), in the SAME commit as its first real gate read — the classify-and-record block in
+  // religiousContest.advanceReligionStates, the ONE `=== true` by-name read of this key in the
+  // tree — and its AUTHORED certification row. Never a pending entry: manifesting is itself the
+  // act that makes a virtual key censusable and therefore the act that comes due.
+  // ⚠ IT IS A SINGLE CONJUNCT AT THIS WAVE, deliberately, and the reason is worth stating
+  // because every neighbour above is part of a conjunction. The layer's OTHER gate is not a
+  // flag at all: `advanceReligionStates` returns before any fork or mint unless
+  // `isSubsystemActive(snapshot, 'religion')` holds, so a deity-free world is byte-identical
+  // even with this key lit — the data gate does the work a second flag would have done, and
+  // declaring one would be a dead arm. WF-1b, WF-1c and WF-1d add readers, never doors.
+  // ⛔ The read is spelled by name rather than through a frozen-list `.every()` for the reason
+  // this census exists: a computed member access attributes to NO key and would be fully wired,
+  // genuinely gated, and invisible here.
+  'faithUnseatingEnabled',
   // Joined 2026-08-14 by FP wave HB-2 under CR-WR10-C item 4 (the compiled charter's §3 flag
   // law), in the SAME commit as its first real gate read — `habitGate.habitsActive`, the ONE
   // `=== true` by-name read of this key in the tree — and its AUTHORED certification row.
