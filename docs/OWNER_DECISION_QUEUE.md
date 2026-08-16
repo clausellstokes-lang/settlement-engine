@@ -5809,3 +5809,42 @@ gallery-seeding lane offer stands.
    DM-lens reference: sparse red-chalk intelligence marks over a
    clean folio), and the cartography-chrome typography plate.
    Corpus lands at 42.
+
+## §160 · MF-P1 COLLECTED — FEASIBLE, EYES-ON VERDICT, FOUR RULINGS,
+## TC29 DISPATCHED (2026-08-16, chair)
+
+1. **Prototype verdict: FEASIBLE, and the receipts are real** — 22
+   exemplars byte-identical across separate processes (sha
+   b7afb3f9… reproduced by a third), all parse, metropolis at 1,713
+   elements. **THE OP-RATCHET GOOD NEWS: 1,713 < the 2,200 ceiling —
+   on measured evidence NO owner raise is needed** (corrects my
+   earlier projection; the compile re-verifies at build). The craft
+   breakthrough: BURGAGE SLICING (narrow frontage perpendicular to
+   the street, per-ward grain) — recursive subdivision produced
+   exactly the "unintelligible geometry" class. §5.0 rebuilt
+   mid-lane as true accretion; measured morphology over 120 live
+   settlements: 87% organic / 13% regularized / 0% planned.
+2. **CHAIR EYES-ON against the corpus (Mahabagh, town/3,502):**
+   genuinely in the folio family — organic lobed boundary, wall
+   bending with towers/gates, per-ward grain, bankside river +
+   bridge, dressed countryside, quarter labels, the honest
+   representativeness ratio printed in the cartouche. STILL SHORT,
+   concretely: strip ranks too UNIFORM (needs yards, cross-alleys,
+   depth variance, gable-end breaks); street hierarchy and square
+   VOIDS barely read (the market quarter needs its hole); monumental
+   adjacency (fronting squares) not yet legible; tree dressing
+   monotone. All renderer-iterable; none architectural.
+3. **RULINGS (vetoable):** W-1 — when the fabric is lit, the FABRIC
+   OWNS wall geometry (consuming wall TRUTH: presence, strength,
+   gate count) so walls bend around accretion; the landed octagon
+   stays byte-frozen on the legacy path via the layout-law dial ·
+   §7's stressor source amended (activeConditions[] is the live
+   surface; MF-A6 caveat folded) · fabricModel decomposes at birth
+   (three seams, the 800-line ceiling) · MF-P1's six charter
+   amendments APPLIED (A5 warm folio palette + roads-palest value
+   law; A1 1:1 bands derived from AVG_HOUSEHOLD — a chair-signed
+   constant the compile prices; A3 visual-weight ratio + tier zoom;
+   A2 silhouette-budget note; A4 founding-field input gap; A6).
+4. **TC29 (the mf compile) DISPATCHED** on the post-fold+post-P1
+   charter, the 44-reference corpus, MF-R1's round and MF-P1's
+   modules/report — the final compile of the map program.
