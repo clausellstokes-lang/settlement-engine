@@ -1,6 +1,7 @@
 # DA / DA-B2 — the eight bare-locale sites, then the guard that could not be widened
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `8820dde2`
 - **Verified base:** `claude/composite-r4` at `1596b16590216e8a4f5330696689b0f7d595ef38`
 - **Train:** `da-b`, family **DA**, member **3**. Change paths disjoint from DA-A3 and DA-A4.
 - **Authorities:** `OWNER_DECISION_QUEUE.md` **§69.4** (fix-then-guard) · **§113.2**

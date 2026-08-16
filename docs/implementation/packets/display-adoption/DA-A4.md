@@ -1,6 +1,7 @@
 # DA / DA-A4 — the date-locale outliers converge
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `02c7f952`
 - **Verified base:** `claude/composite-r4` at `1596b16590216e8a4f5330696689b0f7d595ef38`
 - **Train:** `da-b`, family **DA**, member **2**. Change paths disjoint from DA-A3, DA-B1, DA-B2.
 - **Authorities:** `OWNER_DECISION_QUEUE.md` **§69.2** · **J-TC21-4** (converge the outliers,

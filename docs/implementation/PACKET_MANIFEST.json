@@ -10262,7 +10262,7 @@
     },
     {
       "id": "DA-A3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-A3.md",
       "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
       "changeManifest": [
@@ -10308,6 +10308,10 @@
         }
       ],
       "requiredSymbols": [
+        {"path": "src/pdf/theme.js", "symbol": "an ALLIANCE IN THE TRADE COLOUR"},
+        {"path": "tests/lint/relationshipEdgeCriminalNetwork.test.js", "symbol": "\u26d4 allied is NOT trade_partner \u2014 the exact semantic error \u00a767.2 cured"},
+        {"path": "tests/lint/relationshipEdgeCriminalNetwork.test.js", "symbol": "the re-fork detector CATCHES a seeded table and stays quiet on prose (positive control)"},
+        {"path": "tests/lint/relationshipEdgeCriminalNetwork.test.js", "symbol": "every converged surface actually REACHES the canonical module (not merely lacks a table)"},
         {
           "path": "src/components/settlements/relationshipColors.js",
           "symbol": "export function relColor"
@@ -10375,7 +10379,7 @@
     },
     {
       "id": "DA-A4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-A4.md",
       "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
       "changeManifest": [
@@ -10389,6 +10393,8 @@
         }
       ],
       "requiredSymbols": [
+        {"path": "src/components/settlement/VersionDiffView.jsx", "symbol": "toLocaleString('en-US'"},
+        {"path": "src/components/settlement/VersionsTab.jsx", "symbol": "toLocaleString('en-US'"},
         {
           "path": "src/components/settlement/VersionDiffView.jsx",
           "symbol": "function stamp(ts)"
@@ -10428,7 +10434,7 @@
     },
     {
       "id": "DA-B2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-B2.md",
       "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
       "changeManifest": [
@@ -10470,6 +10476,10 @@
         }
       ],
       "requiredSymbols": [
+        {"path": "tests/lint/localeFormatGuard.test.js", "symbol": "const BARE_CALL_RE ="},
+        {"path": "tests/lint/localeFormatGuard.test.js", "symbol": "the bare-form detector discriminates (positive control)"},
+        {"path": "tests/lint/localeFormatGuard.test.js", "symbol": "the sanctioned EXPLICIT form is genuinely present in those trees, so the arm above is not vacuous"},
+        {"path": "src/pdf/sections/Cover.jsx", "symbol": "const popValue = formatCount(ident.population);"},
         {
           "path": "src/domain/formatNumber.js",
           "symbol": "export function formatCount"

@@ -1,6 +1,7 @@
 # DA / DA-A3 — the relationship palette converges, and an alliance stops reading as trade
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `a87b904c`
 - **Verified base:** `claude/composite-r4` at `1596b16590216e8a4f5330696689b0f7d595ef38`
 - **Train:** `da-b`, family **DA** (un-stamped, cap 4), member **1**. Change paths disjoint
   from DA-A4, DA-B1 and DA-B2.
