@@ -8015,3 +8015,16 @@ browser cost in the same receipt. The ×10 painted rasterize cost
    remaining wishlist, working counter-phrases) and the chair
    dispatches the final sweep — the balance should be near zero
    when the subscription lapses.
+
+## §224 · OWNER SUGGESTION ADOPTED: BUILDING-SHAPE SPECIMEN
+## SHEETS (2026-08-16)
+
+The owner suggested (explicitly non-binding) generic medieval
+building-shape references. ADOPTED on the merits: footprint
+shape is one of T-17's three district-legibility channels and
+the b-series fabric is rectangle-monotone; the corpus has
+thousands of buildings in context but no TEACHABLE kind→shape
+vocabulary. HF-3 mandate extended with plan-view specimen
+sheets (rural + urban families + roof-form tick vocabulary),
+slotted after the fantastical set; feeds wave eight's
+burgage/block work and the GAP-H census.
