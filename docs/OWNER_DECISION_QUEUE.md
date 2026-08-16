@@ -4860,3 +4860,40 @@ rendered as in-fiction absence in peacetime.
    unpinning a converted siege leaves the host authored (the army
    was spent — history is honest; the DM may author it back
    explicitly if they wish, as their own recorded act).
+
+## §129 · THE UNIVERSAL COMMITMENT LAW AND THE TWO-HAT LAW (owner
+## directives 2026-08-15 generalizing §128b estate-wide; chair
+## operative readings, vetoable)
+
+1. **EXCLUSIVITY IS UNIVERSAL**: every committable mobile resource —
+   armies, envoys, caravans, traders, supply and reinforcement
+   shipments, migrating population columns, spies, fleet vessels —
+   is EXCLUSIVE while committed (mostly confirming the engine's
+   existing grammar: L-LG-2 stores commitments, envoys hold
+   journeys; this section universalizes it as LAW so no future
+   surface exempts itself). **The §128b conversion valve
+   generalizes**: any PIN that locks a committed resource forever
+   offers the same sanctioned commit-conversion (the resource
+   becomes an authored external record, the books free, the cost
+   recorded); pins that lock no resource (a famine) need no valve.
+2. **⭐ THE TWO-HAT LAW — every DM console verb declares its hat**:
+   **ORDER (the player-of-the-world hat)**: the action moves through
+   the world's own grammar — the army MARCHES from where it stands,
+   the envoy TRAVELS, the caravan takes the road, the ally request
+   rides a messenger — with transit time, interception risk, and
+   news, exactly as if a faction had willed it. **AUTHOR (the
+   maker-of-the-world hat)**: instant placement — "it is so" —
+   provenance-marked AS AUTHORSHIP in the history, no synthetic
+   journey, and the world DISCOVERS the placed thing through the
+   normal belief plane (neighbors learn by observation and rumor,
+   never by a fabricated march). Both hats are provenance-carried;
+   the UI renders them visually distinct so a DM always knows which
+   world they are touching.
+3. **Chair defaults (vetoable)**: ORDER is the default hat on every
+   verb (the world's physics sell the product; authorship is the
+   marked exception); order-class communications (supply requests,
+   peace feelers) travel under the same message physics in
+   non-omniscient worlds; AUTHOR-placed resources still obey
+   exclusivity FROM PLACEMENT ONWARD (authorship creates state, it
+   never exempts state from the rules). These charter with the
+   war-console + pin family compiles.
