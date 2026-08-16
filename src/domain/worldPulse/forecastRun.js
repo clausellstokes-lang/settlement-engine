@@ -103,10 +103,16 @@ export async function simulatePendingFuture({ campaign, saves, interval = 'one_m
   }
   const tick = Math.max(0, Math.floor(Number(ws.tick) || 0));
   c.worldState = { ...applyTwinDirectivesToWorld(ws, drained.twinDirectives, { tick, now }), pendingEvents: [] };
+  // ADVANCE-EPOCH: INHERIT, NEVER MINT (docs/DESIGN_FP_ARCH_EP.md §3c consumer table). A
+  // forecast that minted its own nonce would stop predicting the advance it forecasts, and
+  // this module's NO-COMMIT DISCIPLINE forbids it stamping anything anyway. It receives the
+  // realm's PENDING epoch — the one parked on a paused-advance cursor — or null, read off
+  // the PRE-drain world snapshot beside every other input.
+  const advanceEpoch = ws.pausedAdvance?.advanceEpoch ?? null;
   // THE SHARED PIPELINE, the same flags a committed advance uses (preview ≡
   // apply by construction); auto-resolve renders pause points as defaults.
   const result = await runInterval({
-    campaign: c, saves: s, interval, commit: true, now, autoResolve: true,
+    campaign: c, saves: s, interval, commit: true, now, autoResolve: true, advanceEpoch,
     ...(weeks != null ? { weeks } : {}),
   });
   return { result, refusals: drained.refusals || [], drainedCount: drained.drainedCount };

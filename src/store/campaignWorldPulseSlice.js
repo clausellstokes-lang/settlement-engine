@@ -565,7 +565,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    *
    * @param {string} campaignId
    * @param {Record<string, {decision?: string}>} [decisions]
-   * @param {{ now?: string }} [options]
+   * @param {{ now?: string, epoch?: string }} [options] `epoch` is the advance-epoch
+   *   REPLAY door (docs/DESIGN_FP_ARCH_EP.md §3d): the resume otherwise reuses the epoch
+   *   parked on the cursor, and never mints one.
    */
   resolveIntervalMajors: async (campaignId, decisions = {}, options = {}) => {
     const sessionFence = capturePulseSession(get);

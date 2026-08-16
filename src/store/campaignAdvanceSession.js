@@ -126,6 +126,17 @@ function ensureCampaignContentCutoff(get, campaignId) {
  *     its absence as "no parked undo", i.e. exactly the pre-change behaviour.
  *     No migration: the key materializes on the next pause and disappears with
  *     the cursor when the interval finishes or is undone.
+ *   advanceEpoch — OPTIONAL, and MATERIALIZATION M2 of the advance-epoch program
+ *     (docs/DESIGN_FP_ARCH_EP.md §1.3). The advance's own epoch, parked so a resume
+ *     re-derives the paused tick from the SAME stream the pause committed from: the
+ *     cursor is PERSISTED, so a paused interval resumed after a reload without its
+ *     epoch would finish as a different world than the half already committed — a
+ *     silent mid-interval divergence, not a crash. Conditionally materialized on the
+ *     FLAG-GATED term and NEVER on the raw value: the caller hands `epochTerm`, which
+ *     is null whenever `advanceEpochEnabled` is not exactly true, so a flag-dark or
+ *     legacy world serializes no new key here. ADDITIVE + ABSENT-TOLERANT exactly like
+ *     preIntervalUndo — a cursor written by an older build omits it and resumes
+ *     epoch-absent, which is the pre-change behaviour.
  *
  * @param {any} result - a { status:'paused', … } interval result.
  * @param {string} now - the ORIGINAL advance wall-clock, re-threaded so a resume
@@ -135,8 +146,9 @@ function ensureCampaignContentCutoff(get, campaignId) {
  *   passes the OUTGOING cursor's value VERBATIM, so a re-pause keeps pointing at
  *   where the interval BEGAN rather than at the segment just resumed — undo must
  *   return the DM to the pre-advance world, never to a mid-interval one.
+ * @param {string|null} [epochTerm] - the FLAG-GATED advance epoch to park (see above).
  */
-export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
+export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null, epochTerm = null) {
   return {
     interval: result.interval,
     ticksTotal: result.ticksTotal,
@@ -158,6 +170,10 @@ export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
     // resume path hands back a plain lift), keeping the cursor bounded at one
     // pre-interval copy no matter how many times the interval re-pauses.
     ...(preIntervalUndo ? { preIntervalUndo } : {}),
+    // MATERIALIZATION M2 — keyed on the FLAG-GATED term, exactly as M1 is keyed on the
+    // kernel's. Keying it on the raw value would leave every stream assertion green while
+    // parking a live epoch in a flag-dark world's PERSISTED cursor.
+    ...(epochTerm ? { advanceEpoch: epochTerm } : {}),
   };
 }
 
@@ -545,10 +561,15 @@ export async function runAdvanceCampaignWorld({
         // was captured in Phase 1, BEFORE the drain, and the advance refuses to start
         // while a pause is parked, so its worldState provably carries no pausedAdvance
         // — restoring it is also what CLEARS the pause (the documented abandon path).
+        // ⭐ M2 rides this park (EP-2). `advanceEpoch` is ALREADY the flag-gated term on
+        // THIS path — the mint above is `epochLit ? … : null`, so it is null in every dark
+        // configuration by construction and no second gate is owed here. The resume path
+        // is where the two names come apart, because there the value arrives off the
+        // persisted cursor and the flag must gate the PARK as well as the MINT.
         if (result.status === 'paused') {
           c.worldState = {
             ...c.worldState,
-            pausedAdvance: buildPausedAdvanceCursor(result, now, preSnapshot),
+            pausedAdvance: buildPausedAdvanceCursor(result, now, preSnapshot, advanceEpoch),
           };
         } else if (c.worldState && 'pausedAdvance' in c.worldState) {
           // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
@@ -696,7 +717,7 @@ export async function runAdvanceCampaignWorld({
  * clear; this body runs inside that guarded window.
  *
  * @param {{ set: Function, get: Function, campaignId: string,
- *   decisions?: Record<string, {decision?: string}>, options?: { now?: string },
+ *   decisions?: Record<string, {decision?: string}>, options?: { now?: string, epoch?: string },
  *   sessionFence?: any, isSessionCurrent?: Function,
  *   deps: { simulateCampaignWorldInterval: Function, runAdvanceInterval: Function } }} args
  */
@@ -757,6 +778,25 @@ export async function runResolveIntervalMajors({
   // options.now still wins (tests/callers that pin a clock); a legacy cursor lacking
   // `now` falls back to wall-clock.
   const now = options.now || cursor.now || new Date().toISOString();
+  // THE ADVANCE-EPOCH RE-THREAD (EP-2, docs/DESIGN_FP_ARCH_EP.md §1.3 / §3c row 4). THE
+  // CONSTRAINT, NOT THE OPPORTUNITY: a resume re-derives the paused tick and must land
+  // byte-identically on the minors already committed, so it REUSES the advance's epoch and
+  // never mints a fresh one. Threaded exactly like `now` above, with the identical
+  // three-term fallback — an explicit option wins (tests/replay pin one), else the cursor's
+  // parked value, else absent (a legacy cursor written before this program resumes
+  // epoch-absent, which composes the pre-wave seed character-for-character).
+  //
+  // ⛔ AND THE FLAG GATES THE RE-THREAD, WHICH `now`'s twin does not need. The mint does not
+  // run on this path, so without this read a LIT advance that paused, went dark, and resumed
+  // would compose an epoch-bearing seed in a flag-dark world and re-park a live epoch on its
+  // persisted cursor. THE READ IS BY NAME AND STRICT for the census reason the mint's is.
+  // ⚠ THE RECEIVER MUST BE LITERALLY NAMED `rules` OR `simulationRules`: engineGatedRuleKeys'
+  // census anchors on that receiver, so a read spelled `resumeRules.advanceEpochEnabled`
+  // would be invisible to it AND would red fence 4's gate-polarity arm as a loose read.
+  const simulationRules = simCampaign?.worldState?.simulationRules || null;
+  const epochTerm = simulationRules?.advanceEpochEnabled === true
+    ? (options.epoch || cursor.advanceEpoch || null)
+    : null;
   const pre = cursor.preSnapshot || {};
   const contentRuntime = contentRuntimeFromCampaignBinding(
     simCampaign.contentBinding,
@@ -768,6 +808,7 @@ export async function runResolveIntervalMajors({
     now,
     autoResolve: false,
     customContent: contentRuntime.customContent,
+    advanceEpoch: epochTerm,
     resume: {
       interval: cursor.interval,
       ticksTotal: cursor.ticksTotal,
@@ -831,7 +872,10 @@ export async function runResolveIntervalMajors({
       if (result.status === 'paused') {
         c.worldState = {
           ...c.worldState,
-          pausedAdvance: buildPausedAdvanceCursor(result, now, parkedUndo),
+          // M2 again, and THIS is the park the flag gate above exists for: `epochTerm` is
+          // null in a flag-dark world even when the OUTGOING cursor carried a live epoch,
+          // so a lit-paused advance resumed dark re-parks nothing.
+          pausedAdvance: buildPausedAdvanceCursor(result, now, parkedUndo, epochTerm),
         };
       } else if (c.worldState && 'pausedAdvance' in c.worldState) {
         const { pausedAdvance: _drop, ...rest } = c.worldState;

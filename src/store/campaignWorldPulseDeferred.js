@@ -106,6 +106,13 @@ export async function runPreviewCampaignWorldPulse({
       ? new Date(options.now).toISOString()
       : options.now,
     customContent: contentRuntime.customContent,
+    // ADVANCE-EPOCH: INHERIT, NEVER MINT (docs/DESIGN_FP_ARCH_EP.md §3c consumer table).
+    // Predicting the actual future is this surface's entire job, so it must be handed the
+    // SAME epoch the committed advance would use — the campaign's PENDING epoch, parked on
+    // the paused-advance cursor, or none. A preview that minted its own would show the DM a
+    // future the Advance button then refuses to produce. ⚠ The preview does NOT travel
+    // through advanceInterval's tickArgs, so the epoch is added to THIS literal.
+    advanceEpoch: previewCampaign.worldState?.pausedAdvance?.advanceEpoch || null,
   });
   track(EVENTS.WORLD_PULSE_PREVIEWED, {
     interval,

@@ -124,6 +124,23 @@ function seedStore(store) {
 }
 
 const NOW = '2026-01-01T00:00:00.000Z';
+/**
+ * ⭐ TAUGHT BY EP-2 (advance-epoch), AND IT STRENGTHENS THE TWO CROSS-STORE BYTE
+ * COMPARISONS BELOW RATHER THAN WEAKENING THEM. `runAdvanceCampaignWorld` mints ONE nonce
+ * per user advance and threads it into the pulse root seed, so two stores running "the same
+ * advance" would draw from two different streams and diverge for a reason that has nothing
+ * to do with what those tests are about. It is pinned exactly as `now` is pinned, and for
+ * the same reason: a byte comparison across two stores is only a comparison if every
+ * per-advance input is the same on both sides.
+ *
+ * ⚠ IT IS INERT AT THIS FIXTURE TODAY and that is stated rather than left to be discovered:
+ * this world declares no `simulationRules`, so `advanceEpochEnabled` is not `=== true`, the
+ * mint is gated off and `advanceEpoch` is null on both sides regardless of this option. What
+ * the pin buys is that the comparison keeps holding BECAUSE THE INPUTS MATCH rather than
+ * because a flag happens to be off — the LIT arm of the same claim is asserted directly in
+ * tests/store/advanceEpochForkSemantics.test.js, on a fixture that lights the rule.
+ */
+const EPOCH = 'ep-fullauto-fixed';
 const worldOf = store => store.getState().campaigns[0].worldState;
 const proposalsOf = store => worldOf(store).proposals || [];
 const pendingOf = store => proposalsOf(store).filter(p => p.status === 'pending');
@@ -201,7 +218,7 @@ describe('FULL AUTO-RESOLVE — the toggle governs the proposal docket', () => {
   test('NEGATIVE CONTROL: an explicit-option advance is BYTE-IDENTICAL with the toggle ON or OFF', async () => {
     const off = storeInMode(false);
     const on = storeInMode(true);
-    const args = /** @type {const} */ (['camp-1', 'one_week', { now: NOW, autoResolve: true, weeks: 4 }]);
+    const args = /** @type {const} */ (['camp-1', 'one_week', { now: NOW, epoch: EPOCH, autoResolve: true, weeks: 4 }]);
     await off.getState().advanceCampaignWorld(...args);
     await on.getState().advanceCampaignWorld(...args);
     // Same world, same docket, same everything: the toggle cannot reach this path.
@@ -232,7 +249,7 @@ describe('FULL AUTO-RESOLVE — the toggle governs the proposal docket', () => {
 
   test('UNDO: one advance plus its verdicts is ONE step back, leaving no residue', async () => {
     const store = storeInMode(true);
-    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW, epoch: EPOCH });
     expect(proposalsOf(store).length).toBeGreaterThan(0);
     expect(pendingOf(store).length).toBe(0);
     expect(await store.getState().undoLastPulse('camp-1')).toBe(true);
@@ -247,7 +264,7 @@ describe('FULL AUTO-RESOLVE — the toggle governs the proposal docket', () => {
     // stranded ledger entry, a news tail, a graph edge — the two rolled-back worlds
     // would differ. They are compared byte-for-byte, world and settlements alike.
     const control = storeInMode(false);
-    await control.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW, autoResolve: true });
+    await control.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW, epoch: EPOCH, autoResolve: true });
     expect(await control.getState().undoLastPulse('camp-1')).toBe(true);
     expect(JSON.stringify(worldOf(store))).toBe(JSON.stringify(worldOf(control)));
     // Save `.timestamp` is re-stamped with wall-clock now by undoLastPulse BY DESIGN
