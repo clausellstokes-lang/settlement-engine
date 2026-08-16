@@ -7528,3 +7528,55 @@ to MF-B7 same-turn.
    notes (line quality, palette, texture, imperfection grammar),
    mechanic-shaped, feeding MF-A1; the two lanes reconcile on
    contact.
+
+## §209 · THE URBANISM ATLAS COLLECTED — THE GRAIN CONVICTION,
+## AND ALL TEN PROPOSALS ADOPTED (2026-08-16, chair §170)
+
+1. **MF-S1 DELIVERED**: all 49 references studied on all eleven
+   dimensions (urbanism + §208 aesthetics), 26 measured
+   calibration targets, five re-runnable measurement scripts,
+   an honest three-part delta table. THE ATLAS IS THE STANDING
+   ABSOLUTE-BAR GRADING SHEET from wave eight (§207.2); every
+   exemplar self-judgment now cites its numbers as DISTANCE,
+   never "improved." Hazard banked: MFS1-grain2.py's windows are
+   HAND-SET eye-bounds — a later lane must re-set them to new
+   geometry or the numbers are meaningless (the hand-keyed-
+   address rot class, named in the atlas itself).
+2. **THE GRAIN CONVICTION — the deepest structural miss found to
+   date [M]:** the corpus makes tier legible chiefly by CELLS
+   ACROSS THE SETTLEMENT (10→48→61→74→113 monotone thorp→
+   metropolis); b6 is short ×5.0/×2.4/×3.7/×5.4 at village/town/
+   city/metropolis, INVERTS at town→city, and flatlines above —
+   the manifest agrees (+7%% parcels for ×3.5 population), and
+   plot frontage runs BACKWARD (widest plots in the biggest
+   settlements). The aesthetic verdict is equally unambiguous:
+   b6 scores 0.00 on paper grain and 0.00 on wash variation, one
+   stroke-width across the fabric, exact fill registration where
+   the corpus mis-registers 2-8px — the decisive painted-vs-
+   plotted tell. Both verdicts route to MF-A1 (aesthetics, nudged
+   same-turn with the measured sections) and wave eight (grain).
+3. **RULINGS — ALL TEN ADOPTED, vetoable:** GAP-A grain law
+   (cells_across = f(population); parcel count falls out;
+   chair-signed charter design values, replacing §5's ~10×-low
+   bands) · GAP-B radial-density-falloff census · GAP-C street
+   width classes at the measured ratios · GAP-D block silhouette
+   + two-tier stroke (highest visual leverage; offered to MF-A1's
+   prototype) · GAP-E threat-directed partial defences · GAP-F
+   discharge plume (rationed accent, institution-cited, register
+   law absolute) · GAP-G state-responsive prominence rung ·
+   GAP-H district-legibility-without-labels census (the §8.4
+   glance layer's acceptance test) · GAP-I chrome rung ·
+   SCOPE-1: **§18.5 BURGAGE PLOT-SERIES UN-DEFERRED** (13/49
+   plates — the corpus's most repeated structure). §2.6's
+   five-closer order is RATIFIED as WAVE EIGHT'S MANDATE SPINE:
+   grain, block silhouette, painted closure (MF-A1's), ink
+   hierarchy, countryside primitives.
+4. **LAW RECONCILIATIONS FROM DATA:** §204 courts-rare gets its
+   band — ROUTE-ISOLATED courts 3-15%% of blocks (rare, as
+   ruled); interior yards WITH a mouth are a DIFFERENT OBJECT,
+   common (15-65%%) and unrestricted. §184's open-water ruling
+   confirmed against the generator's own prior: THROUGH is ~12%%
+   of water relationships, BANKSIDE 44%%. Table C's reverse
+   delta stands on the record: truth in the chrome, declared
+   derivations, six lenses over one geometry, 0/0 ground-law
+   censuses — claims no reference plate can make.
