@@ -187,6 +187,68 @@ describe('.env.example documents the client error-reporter sink', () => {
   });
 });
 
+// ── dom-4: THE RAIL'S STEP COUNT IS NOT THE COPY'S TO KEEP (ODQ §115.3) ───────
+// The onboarding coach told every new user the rail shows "the fourteen steps the
+// engine took". THREE different populations were in play and none of them is 14:
+// src/generators/steps/index.js REGISTERS 22 steps; src/copy/en.js gives only a
+// SUBSET of those a user-facing label; and PipelineReveal renders the intersection
+// of that label map with the history the run actually produced, so what the reader
+// counts on screen is bounded by the labels AND varies with the settlement.
+//
+// A hand-typed count in product copy is therefore wrong in a way no single number
+// can fix — which is why the cure is to state none, exactly as the same file's
+// other rail sentence already does. This pin holds that: no digit-or-word count of
+// the engine's steps in the coach copy, and the sentences that carry the promise
+// must still be there so the absence arm cannot green on a deleted section.
+describe('product copy: the pipeline rail states no step count (dom-4)', () => {
+  const enJs = read('src/copy/en.js');
+  const stepsIdx = read('src/generators/steps/index.js');
+
+  const WORD_NUMBERS = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve'
+    + '|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|twenty-one'
+    + '|twenty-two|twenty-three|twenty-four';
+
+  it('the three populations really do disagree (the reason no number is written)', () => {
+    const registered = [...stepsIdx.matchAll(/import '\.\/(\w+)\.js';/g)].map((m) => m[1]);
+    const labelBlock = enJs.match(/pipelineSteps:\s*\{([\s\S]*?)\n {2}\},/);
+    expect(labelBlock, 'src/copy/en.js must carry a pipelineSteps label map').toBeTruthy();
+    const labelled = [...labelBlock[1].matchAll(/^\s*([A-Za-z_]\w*)\s*:/gm)].map((m) => m[1]);
+    expect(registered.length, 'steps/index.js should register steps').toBeGreaterThan(0);
+    expect(labelled.length, 'en.js should label some steps').toBeGreaterThan(0);
+    // Every labelled step is a registered one…
+    expect(labelled.filter((id) => !registered.includes(id))).toEqual([]);
+    // …and the label map is a STRICT subset, which is what makes a single copied
+    // number unwritable: the rail can never show all 'the steps the engine took'.
+    expect(labelled.length).toBeLessThan(registered.length);
+  });
+
+  it('the onboarding coach counts no steps', () => {
+    const coach = enJs.match(/coach:\s*\{([\s\S]*?)\n {4}\},/);
+    expect(coach, 'src/copy/en.js must carry the onboarding coach block').toBeTruthy();
+    const counted = [...coach[1].matchAll(
+      new RegExp(`\\b(?:\\d+|${WORD_NUMBERS})\\s+steps\\b`, 'gi'),
+    )].map((m) => m[0]);
+    expect(
+      counted,
+      'the onboarding coach states a step count. The rail renders the labelled steps a'
+      + ' particular run produced, so no fixed number is true for every reader — say'
+      + ` "the steps the engine took", as the same file already does elsewhere: ${counted.join(', ')}`,
+    ).toEqual([]);
+  });
+
+  it('CONTROL: the counter reads the exact prose that was wrong', () => {
+    const re = new RegExp(`\\b(?:\\d+|${WORD_NUMBERS})\\s+steps\\b`, 'gi');
+    expect('the rail shows the fourteen steps the engine took'.match(re)).toEqual(['fourteen steps']);
+    expect('a 22 steps pipeline'.match(re)).toEqual(['22 steps']);
+    expect('the steps the engine took'.match(re)).toBeNull();
+  });
+
+  it('the rail promise survives (the absence arm is not vacuous)', () => {
+    expect(enJs).toMatch(/The rail on the right shows the steps the engine took\./);
+    expect(enJs).toMatch(/The rail shows the steps the engine took\./);
+  });
+});
+
 describe('product copy: PDF export is unlimited, not a monthly cap', () => {
   it('canExport() is a boolean gate (no per-period quota in the implemented model)', () => {
     // Source of truth: TIER_GATE.export is a boolean; canExport returns it.

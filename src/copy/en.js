@@ -608,7 +608,7 @@ export const en = Object.freeze({
       step1Title:   'Read the dossier.',
       step1Body:    'Every tab is a different angle on the same place. Start with Overview. Drift through Economics, Power, and Daily Life.',
       step2Title:   'Watch how it was simulated.',
-      step2Body:    'The rail on the right shows the fourteen steps the engine took. Tap any to see what it decided.',
+      step2Body:    'The rail on the right shows the steps the engine took. Tap any to see what it decided.',
       step3Title:   'Save it.',
       step3Body:    'Sign in and your work survives the tab close. Your first three saves are free.',
       dismiss:      'I’ve got it from here',
