@@ -1,6 +1,8 @@
 # EP / EP-1 — the kernel seam and the flag (stage 2 of the `ep-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landing commit:** `01388030` (the implementation; `b97d2306` is this promotion). Do not
+  redispatch.
 - **Verified base:** `claude/composite-r4` at `bbf58fa1b0144fec5a32fe1bf501660e1f87e0e9`
   (the EP-0 terminal — stage 1 of this same train, ODQ §142.3)
 - **Train:** `ep-1`, family **EP**, member **1** of 5. ⛔ The five members are NOT

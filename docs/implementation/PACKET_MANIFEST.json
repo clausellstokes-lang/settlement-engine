@@ -13816,7 +13816,7 @@
     },
     {
       "id": "EP-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/EP-1.md",
       "verifiedBase": "bbf58fa1b0144fec5a32fe1bf501660e1f87e0e9",
       "changeManifest": [
