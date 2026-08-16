@@ -5413,3 +5413,31 @@ gallery-seeding lane offer stands.
    soak (§117a) → first rolling soak at the next family exposure
    after landing → diagnostic at build-complete-dark on this
    harness. Nothing soaks before tm+sk lands.
+
+## §147 · OWNER ORDER: BUILD THE SOAK HARNESS (2026-08-16)
+
+1. **The order (verbatim intent):** "comprehensively, exhaustively,
+   carefully, consistently, seamlessly, coherently, and cohesively
+   build it" — it = the tm+sk pair (telemetry core + the eight-law
+   soak harness, post-§146 fold). The build executes from TC28's
+   compiled trains the moment they exist and the executor slot
+   frees.
+2. **JUDGMENT (chair, vetoable): tm+sk moves to the FRONT of the
+   executor queue, ahead of EP's four-stage split (§142.3
+   amended).** Rationale: §146.3 fires the first rolling soak at
+   the next family exposure AFTER tm+sk lands — every family that
+   lands behind it gains rolling-soak coverage, so the earliest
+   possible landing maximizes the coverage of the remaining build;
+   §117a requires tm-core before the diagnostic soak anyway. Say
+   "veto" to restore EP-first.
+3. **Slot-hot rule so nothing idles:** when TE26's stack lands and
+   the chair CASes the 25th exposure — if TC28 has delivered,
+   dispatch the tm+sk executor immediately; if TC28 is still
+   compiling, dispatch EP STAGE ONE only (its stages gate
+   separately, so the slot frees at the stage boundary) and tm+sk
+   takes the slot at that boundary. EP never leapfrogs tm+sk by
+   more than one stage.
+4. Continuous-compile (§145.1) unchanged: TC27 runs; after TC27 and
+   TC28 the compile queue holds only TR/GR/HB (chair-sitting-gated)
+   plus whatever TC27's war-console/stressor homing report says is
+   unhomed.
