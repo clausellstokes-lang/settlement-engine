@@ -6951,3 +6951,33 @@ anyone expects a siege); THE NEW RING is the rare earned act
 into wards whose grain records their origin; demotion runs it
 backward (faubourgs empty first). Confirms and sharpens
 §161d.4/§11.1/§161c into one growth default. MF-B4 notified (#5).
+
+## §191 · TE30 COLLECTED — EP STAGE TWO LANDED; THE 30th EXPOSURE;
+## STAGE THREE DISPATCHED (2026-08-16, chair)
+
+1. **EP stage two LANDED GREEN and EXPOSED: CAS bbf58fa1 →
+   da8207f3** (terminal TRUE_EXIT=0; boot smoke 0; the kernel edit
+   at DELTA ZERO effective lines, the diff exactly the six
+   enumerated lines; bijection 23↔23; three kernel mutants
+   executed incl. the decisive serialization-arm asymmetry the
+   volume predicted, now observed).
+2. **THREE LAW FIGURES CORRECTED BY EXECUTION, banked:** §104.4 is
+   EIGHT paths across THREE bundles (clock.js sits in
+   aiGroundingBundle — a file no charter named); §102.3 triggers
+   by NAME PATTERN not directory (seven dirs + a basename regex —
+   a tests/domain file owed a row); C-EPF-4 REFUTED AS SIGNED
+   (fork labels are content-derived; the kernel is correct, the
+   spec wrong) with the true load-bearing claim measured (stage
+   subsequence identical 14/14 single-tick, 56/56 composed) —
+   the volume's signed-sentence amendment QUEUES for the next
+   docs act (with WC PROGRESS + the charter re-sync).
+3. **RATIFIED (vetoable): the hold-dark choice** (threading a
+   pinned epoch reds nine exact-totality assertions; holding the
+   flag dark is zero re-records; both cures MEASURED before
+   choosing, the non-generalising reason written at site) and the
+   scope-sentinel cure. **J-TE30-1 recorded: fence 5's
+   unreachable half is OWED BY EP-2** — a green over an
+   unrenderable path was correctly refused. **TE31-EP DISPATCHED:
+   STAGE THREE (EP-2 + EP-3A, path-disjoint, promoting
+   together).** RS-2 takes the current tip when RS-1 completes
+   (§188.3's henceforth-strict applies to post-RS-1 runs).
