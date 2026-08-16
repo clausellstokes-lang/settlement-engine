@@ -7378,3 +7378,27 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    helpers, drawn-geometry sets); pre-cure unreachable counts
    reported honestly, credited as the owner's finding; the
    charter re-sync rider carries the law's text with §200/§201.
+
+## §203 · OWNER LAW: ZONE CONTAINMENT + ZONE FILL (2026-08-16,
+## owner order; fourth MF-B7 redirect — the four-law batch closes)
+
+1. **THE LAW**: buildings must sit WITHIN the zones they belong
+   to, and each zone's non-street space must be FILLED OUT
+   appropriately. Arm 1, CONTAINMENT: zero member footprints
+   outside their zone's wash (majority-area), every leaf, all
+   lenses — under the district-organism law the wash derives FROM
+   the drawn members, so a straggler convicts the derivation seam
+   (the §195.0 family: a tint composed from a set that is not the
+   drawn set). Arm 2, FILL: per-zone built-out share of non-street
+   area lands in a BAND derived per district type from the
+   reference corpus (government airier than crafts; slums pack
+   tighter); out-of-band zones enumerated with cause or cured; a
+   DEMOTED zone's emptiness is lawful only as visible work (ruins,
+   closed buildings — §161g), never an unexplained sparse wash.
+2. Census: containment 0-violations with a displace-one
+   counterfactual + the fill-band report; standing 0/0 family
+   standards; pre-cure counts credited as the owner's finding.
+3. **THE FOUR-LAW SITTING (§200-§203) IS THE OWNER'S SHARPEST
+   VISUAL AUDIT YET** — walls, alley register + street attachment,
+   transitive access, zones — all four redirected into MF-B7
+   mid-lane; the charter re-sync rider carries all four texts.
