@@ -4679,3 +4679,41 @@ carriers for the §46d.3 news chain → richer belief dynamics exactly
 when they matter; and trade starvation gives circle-host settlements
 a systemic incentive toward peace. Say "veto" with "priority" or
 "reserve" to flip.
+
+## §126 · THE WAR CONSOLE DIRECTIVE (owner, 2026-08-15, verbatim
+## in-chat; the design direction recorded, the charter owed)
+
+Owner: the dossier's world-tab WAR TAB updates to show who the
+settlement is at war with, their allies, THEIR CURRENT UNDERSTANDING
+OF EACH OTHER'S POSITIONS and points, army status, supply and
+reinforcement flows, and all relevant war information; and in EDIT
+MODE it functions as a CONTROL CENTER — commanding each army and
+military, requesting allies for supplies, sending envoys for peace
+with terms, etc.
+
+The chair's recorded design direction (the charter executes it):
+1. **ONE PRINCIPLE**: the tab is a PROJECTION of the belief plane
+   plus a DISPATCHER of typed intents — zero new state, zero
+   parallel command paths. Read side renders what THIS settlement
+   BELIEVES (confidence and staleness visible; the owner's own
+   phrase "their current understanding" IS the epistemic layer),
+   with ground truth behind the standing DM-tier reveal seam;
+   second-order belief renders "what they likely know of us."
+2. **EDIT MODE = TYPED OPS ONLY**: every command (deploy/recall,
+   supply request to an ally, envoy dispatch with TERM_CATALOG
+   terms, treaty proposal) is a consented typed op through the
+   EXISTING dispatch point (the command-registry law), becoming a
+   world-input event the next tick consumes — provenance-carried,
+   undo-covered, honest in history per THE PROMISE (orders are
+   events, never rewrites).
+3. **SEAMLESSNESS BY DORMANCY-AS-ABSENCE**: sections mount on their
+   feeder flags (WY supply, LG network flows, POP columns) and
+   render in-fiction absence until lit; ONE view model feeds the
+   tab AND the PDF war chapter; the tab consumes the da-cured
+   chokepoints (tick translator, palette, formatCount, lexicon)
+   FROM BIRTH.
+4. **SEQUENCING**: chartered as the WAR CONSOLE family; compiles
+   after WY (its prime feeder) lands; slices light with LG;
+   estimated 3–4 waves (read model · read tab · the console ops ·
+   PDF alignment). Whether command powers are tier-gated is an
+   OWNER-VALUE flag for the charter.
