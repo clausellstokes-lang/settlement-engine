@@ -7143,3 +7143,49 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    immersion suite + §173 lettering splice, §10 states, §11
    drift/snapshots, Accessible's real hatch, the adopted §18
    riches' buildable pair, carrying both landing hazards.
+
+## §197 · EP STAGE THREE COLLECTED GREEN AND EXPOSED; STAGE FOUR
+## (EP-3B, THE FAMILY'S LAST) DISPATCHED (2026-08-16, chair §170)
+
+1. **TE31 landed EP-2 + EP-3A: the fork semantics (cursor, resume,
+   preview, forecast) + the advance-epoch ledger, stamp, and eight
+   family-1 re-roots.** Terminal verbatim: gate exit 0, test
+   ratchet 11 known of 28,509 (runtime +30 == static census +30,
+   agreeing to the unit), typecheck 173/173, domain-strict
+   1134/1134, STRICT DIST 51 files/409 tests clean, boot smoke
+   PASS, zero of the 29 lint warnings this wave's. CAS EXECUTED:
+   claude/composite-r4 da8207f3→d2ea34c1 (old asserted), and
+   refs/trains/ep-1 fast-forwarded to match. Note for the record:
+   the receipt's §10 named ba417df4 (the run-1 tip, drafted before
+   the cures); the executed tip is d2ea34c1 — execution governs.
+2. **Run 1 was RED with nine regressions across six ratchets, all
+   cured at cause** (any-holes typed out, negative assertions
+   anchored, seed loops collected, the line-bound exclusion
+   re-anchored on signature f4ac01180f8aaf35). THE CLASS BANKED:
+   three of six ratchets fired on COMMENT LINES ALONE, and a
+   drifted line-bound exclusion fails toward silent UN-exclusion —
+   prose inserted into src/ is a ratchet event.
+3. **Three premises refuted by execution** (each a landed vetoable
+   cure): the volume's `{ absent }` transcription cannot satisfy
+   its own §3b.3 (cured as `{ base }` by-identity, read-site
+   census unmoved at 22); roadsKernel's frozen 838 holds via a
+   ;-joined import at +0; and §2.3b's resume-path belt-and-braces
+   has ONE STALE STRAP (the kernel flag gate reads pause-frozen
+   rules; only the store gate is live) — REPORTED under E5, the
+   kernel cure QUEUED for the ci re-premise train (outside EP-2's
+   manifest, correctly not smuggled).
+4. **RULINGS.** (a) Rolling-soak supersession applies to the
+   QUEUED TARGET, not the running first soak: RS-1 (~100/159,
+   zero corrupt) completes — its full-envelope curve baselines are
+   the §143.3 seed corpus and a restart forfeits them; RS-2 fires
+   at whatever tip is newest at RS-1 completion. (b) §4.3's
+   disposition (narrow `assertEpochPinnedInTest` vs amend §2.3b)
+   DEFERRED to the docs act, batched with C-EPF-4, §3b.1b, and
+   the slice-A budget-line amendments. (c) STAGE FOUR DISPATCHED:
+   EP-3B alone, the family's last — the nine year-keyed rows,
+   `yearStreamSeedOf` with `{ base, yearBase }` REQUIRED-
+   defaultless, the year-crossing stamp-survival fixture, the
+   display-surface source pin — under the receipt's eight §8
+   inheritance items (kernel ledger SPENT at 1581, +0 enforced;
+   spatialUsage.js zero edits; the census gate reds BOTH arms
+   deliberately).
