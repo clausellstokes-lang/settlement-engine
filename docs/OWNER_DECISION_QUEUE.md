@@ -6012,3 +6012,21 @@ PHASING: v1 = current-year map with ALL history marks; the full
 year-scrub animation = declared phase-2 gated on the per-year
 surface the compile verifies. TC29 notified (#9 — the last of the
 owner's design session; the charter is COMPLETE at §0-§11).
+
+## §161i · THE AMBITION GRANT (2026-08-16, owner: "be ambitious,
+## I'm allowing it!")
+
+§11.11's phasing hedge DISSOLVED: the year-scrub ships WITH the mf
+family — "Show the years" becomes THE CHRONICLE SCRUBBER (drag the
+years, watch the settlement live); if the per-year surface is
+missing at head, a SURFACE MEMBER BUILDS IT (year-indexed reader
+over walk/chronicle data, read-side, wall-respecting). §11.12
+AMBITION RIDERS: (a) THE TRUE MEASURE MINTED — the physical-distance
+metric gets its derivation home in-family; the scale bar ships TRUE
+(closes MF-R1 F2 properly), NON-DEFERRABLE; (b) hand-feel (seeded
+line waver + paper grain) moves to v1 within MF-P1's measured ~480-op
+headroom, deferrable with cause; (c) THE TIME-LAPSE EXPORT (frame-
+per-year animation — the thesis as a shareable artifact),
+deferrable with cause. Sequencing unchanged: mf still executes
+after the §27 queue, lands dark, gates nothing in the soak program.
+TC29 notified (#10).
