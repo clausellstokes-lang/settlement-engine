@@ -6455,3 +6455,43 @@ Memory milestone written (settlement-map-program-2026-08-16.md).
    LAW confirmed in landed code); no racial-variant entries exist
    (absent, not assumed). Lane incident self-caught and cleaned
    (zero tree impact, porcelain-confirmed).
+
+## §175 · MF-R2 COLLECTED — COHERENT-WITH-CURES; THE FOLD EXECUTED
+## 23/23 (2026-08-16, chair under §170)
+
+1. **Verdict COHERENT-WITH-CURES; all 23 anchored blocks applied
+   23/23, zero anchor failures; the charter stands reconciled at
+   ~96KB.** The four consequence-grade cures, ratified: THE
+   COMPOSITION-ORDER LAW (constitution → anchoring → growth →
+   seating as a single greedy seeded pass, affinity toward
+   already-seated only — the chair's loop broken explicitly and
+   determinism preserved); the UNDERCITY TRUTH ROSTER (real
+   generated institutions seated below — criminal floors under
+   their fronts; anonymous fabric otherwise; NO minted clickable
+   truth); the AUDIENCE AXIS (the one-answer law becomes
+   one-answer-PER-AUDIENCE; player-lens search ruled: finds the
+   front, honestly ignorant of the floor); the convicted hazard
+   bearing REMOVED from §10.B15 (MF-R1 E8 regression cured).
+2. **The audit's good news converts presumption to fact:
+   institution open/close churn is LANDED machinery**
+   (institution_build/closure/founding events under
+   institutionLifecycleEnabled, measured firing in soaks; closed
+   rows kept with typed statuses) — §167/§11.5 now cite it; §11.3
+   cites the landed route-network ledger + its architected
+   arterial-seeds consumer. **After the fold, NO §11/§167/§168
+   rule stands on a phantom surface.** Also cured: recursion
+   base case (depth one), marginalia lifespans, terraform
+   interleave bounds, wall vintage source, fantastical entries
+   atlas-keyed to the REAL catalog, variant ordinal stability
+   under N-drift, §161k zoom by population.
+3. **Owner-batch additions:** OB-6 — expanding the undercity's
+   REAL roster (engine-side generation ask, optional); OB-7 — the
+   audit's second optional escalation as specced in
+   laneMFR2-reconciliation.md §1/R-escalations. MF.U5 (public
+   projection carries no _seed — the fork base cannot run on the
+   player path) stays a SIGNED FORK owned by MF-1K, now with the
+   audience-wall constraint C11 threading it. The §10 totality
+   census inherits §10.C19's faction-territory verification.
+4. MF-B1's brief refreshed (composition-order + churn citations +
+   audience axis bind its foundation). No section renumbering —
+   TC29/30/31 cites stay valid; every cure was additive.
