@@ -38,7 +38,9 @@
  * per-test probes catch those. Rule 1b keys on extractor-NAME heuristics; a silent
  * extractor with an unconventional name is uncaught (prefer sourceContract, which throws).
  * The code skeleton blanks strings/comments/regex; a pathological division mis-parsed as a
- * regex could blank following code (division is near-absent in these test files).
+ * regex could blank following code (division is near-absent in these test files). The ARROW
+ * case of that gap is CLOSED — see the '>' note in codeSkeleton — after it was found blanking
+ * the `&&` in `line => /a/.test(line) && /b/.test(line)`, the exact shape Rule 3 hunts.
  *
  * TO COMPLY (a new violation): route extraction through sourceContract; assert the extract
  * non-empty before a `.not.` matcher; drop the skip-guard and assert the item posted;
@@ -66,7 +68,43 @@ function inScope(rel) {
   if (/^tests\/lint\/[^/]*\.test\.(js|jsx)$/.test(rel)) return true;
   return false;
 }
-function scopedFiles() {
+/**
+ * THE FOLD SCOPE — Rules 3 and 4 ONLY (§116.3), widened past `inScope` to the three
+ * directories where the folded class demonstrably lived.
+ *
+ * WHY THE TWO SCOPES ARE NOT THE SAME SET. Five guards were convicted of the two shapes
+ * Rules 3 and 4 fold in. Three of them — sessionGateCensus (tests/edgeFunctions),
+ * ciCheckParity (tests/build) and spatialLedgerCoverage (tests/lib) — live OUTSIDE
+ * `inScope`. A prevention rule that cannot see the directories where its own class has
+ * actually occurred is vacuity one level up, so the fold rules are given a scope that
+ * covers them. MEASURED at this commit's base: 270 files narrow, 517 fold-scope (+247),
+ * and the widening adds ZERO convictions for either new rule — it buys future coverage,
+ * not a debt discovery.
+ *
+ * ⛔ WHY RULES 1a/1b/2 WERE **NOT** WIDENED WITH THEM, AND WHY THIS IS NOT AN ALLOWLIST.
+ * The three older rules were landed against a TRIAGED population: every instance inside
+ * `inScope` was fixed before they went in, which is why all three allowlists above are
+ * empty. The +247 fold-scope files were never triaged for them, and running them there at
+ * this base reports SEVEN pre-existing hits — Rule 1a x2 (tests/lib/emailTemplates.test.js
+ * :169 and :185, each a bare `if (!edgeSource) return;` directly before the only assertion,
+ * both genuine), Rule 1b x1 (tests/edgeFunctions/surveyorByok.test.js::block, a renderer
+ * whose name ends in "Block" — the extractor-NAME heuristic this file's own ACCEPTED GAPS
+ * note already admits), and Rule 2 x4 (tests/edgeFunctions/providerErrors, tests/lib/
+ * founderChairRequest, tests/lib/importScrub, tests/lib/townMapExport). Widening all five
+ * rules at once would force a choice between a red gate and exemption rows this file's own
+ * header calls silencers. The seven are RECORDED here by name and by rule as a scope
+ * boundary with a measured census; NOTHING is exempted, because these three rules simply do
+ * not scan there yet. Triaging them is its own act, and the fold does not get to smuggle it in.
+ */
+function inFoldScope(rel) {
+  if (inScope(rel)) return true;
+  if (rel === SELF) return false;
+  if (/^tests\/edgeFunctions\/[^/]*\.test\.(js|jsx)$/.test(rel)) return true;
+  if (/^tests\/build\/[^/]*\.test\.(js|jsx)$/.test(rel)) return true;
+  if (/^tests\/lib\/[^/]*\.test\.(js|jsx)$/.test(rel)) return true;
+  return false;
+}
+function filesMatching(pred) {
   const out = [];
   const walk = (dir) => {
     for (const name of readdirSync(dir)) {
@@ -74,13 +112,15 @@ function scopedFiles() {
       if (statSync(p).isDirectory()) walk(p);
       else {
         const rel = relative(ROOT, p).replace(/\\/g, '/');
-        if (inScope(rel)) out.push(rel);
+        if (pred(rel)) out.push(rel);
       }
     }
   };
   walk(join(ROOT, 'tests'));
   return out.sort();
 }
+function scopedFiles() { return filesMatching(inScope); }
+function foldScopedFiles() { return filesMatching(inFoldScope); }
 
 // ── Code skeleton: blank comment + string/template/regex CONTENTS (preserve length/lines)
 // so text inside strings/comments can never satisfy a code pattern. ─────────────────────
@@ -109,7 +149,13 @@ export function codeSkeleton(src) {
       }
       prev = q; continue;
     }
-    if (c === '/' && (prev === '' || '(,=:[!&|?{;}'.includes(prev))) {
+    // '>' is here for the ARROW: in `line => /re/.test(line)` the last non-space char before
+    // the '/' is '>', so without it the opening slash was read as DIVISION and the NEXT slash
+    // opened a phantom regex that blanked the real code after it — including the `&&` Rule 3
+    // looks for. A '/' can never be division after '>', because '>' cannot end an expression.
+    // Adding it was measured over all 517 in-scope files: zero convictions gained or lost by
+    // any of the five rules, and one blind spot closed.
+    if (c === '/' && (prev === '' || '(,=:[!&|?{;}>'.includes(prev))) {
       out += '/'; i++; let cls = false;
       while (i < n) {
         if (src[i] === '\\') { out += '  '; i += 2; continue; }
@@ -223,6 +269,76 @@ export function findLiteralUnionClaims(rawSrc, skel) {
   return hits;
 }
 
+// ── Rules 3 and 4 — the §116.3 class fold ───────────────────────────────────────────────
+// Both fold a shape that let a guard assert something TRUE while the property it existed to
+// protect was already broken. Both are detected on the SKELETON (so a shape quoted inside a
+// string or comment can never be convicted) and REPORTED from the raw source at the same
+// offsets, which the skeleton's length-preserving blanking keeps aligned.
+
+/** `A.test(v) && B.test(v)` — two distinct probes conjoined over ONE subject. */
+const CONJUNCTION_RE = /(\/[^/\n]*\/[a-z]*|[A-Za-z_$][\w$.]*)\s*\.\s*test\s*\(\s*([\w$]+)\s*\)\s*&&\s*(\/[^/\n]*\/[a-z]*|[A-Za-z_$][\w$.]*)\s*\.\s*test\s*\(\s*([\w$]+)\s*\)/gd;
+/** the file chops its source into physical lines somewhere */
+const LINE_SPLIT_RE = /\.split\s*\(\s*(['"`])\\n\1\s*\)/;
+/** a bare "this symbol is called somewhere" probe: /foo\s*\(/ */
+const CALL_PRESENCE_RE = /^\/[A-Za-z_$][\w$]*\\s\*\\\(\/[a-z]*$/;
+/** a probe that looks like it is testing for an import/module path rather than a call */
+const PATH_PROBE_RE = /\\\/|\.ts|\.js|_shared|\bfrom\b/;
+
+function lineOf(text, index) { return text.slice(0, index).split('\n').length; }
+
+/** Names bound as a per-element iteration variable anywhere in the file. */
+export function iterationVars(skel) {
+  const names = new Set();
+  for (const m of skel.matchAll(/\.\s*(?:forEach|map|some|every|filter|flatMap)\s*\(\s*\(?\s*([\w$]+)/g)) names.add(m[1]);
+  for (const m of skel.matchAll(/\bfor\s*\(\s*(?:const|let|var)\s+([\w$]+)\s+of\b/g)) names.add(m[1]);
+  return names;
+}
+
+/** Every `A.test(v) && B.test(v)` in the file, with A and B recovered from the RAW source. */
+export function conjunctionProbes(raw, skel) {
+  const out = [];
+  for (const m of skel.matchAll(CONJUNCTION_RE)) {
+    if (m[2] !== m[4]) continue; // different subjects: not one property being over-constrained
+    const left = raw.slice(m.indices[1][0], m.indices[1][1]);
+    const right = raw.slice(m.indices[3][0], m.indices[3][1]);
+    out.push({ left, right, subject: m[2], line: lineOf(skel, m.index) });
+  }
+  return out;
+}
+
+/**
+ * Rule 3 — SAME-LINE CONJUNCTION. Two DISTINCT source-derived probes required to match the
+ * same PHYSICAL LINE. Prettier splits any call whose arguments do not fit on one line, which
+ * is exactly the shape a long secret travels in, so the sink lands on one line and the value
+ * on the next and the conjunction goes silently blind. THE CURE: widen the window to the
+ * statement (tests/helpers/sourceContract.js `sinkStatementOffenders`), never widen the regex.
+ */
+export function findSameLineConjunctions(raw, skel) {
+  if (!LINE_SPLIT_RE.test(raw)) return []; // nothing here is per-physical-line
+  const iter = iterationVars(skel);
+  return conjunctionProbes(raw, skel)
+    .filter((c) => iter.has(c.subject) && c.left !== c.right)
+    .map((c) => ({ line: c.line, text: `${c.left} && ${c.right} over \`${c.subject}\`` }));
+}
+
+/**
+ * Rule 4 — UNCONSUMED GATE CALL. A guard that proves a symbol is IMPORTED and that its name
+ * APPEARS followed by `(`, and stops there. Presence is not enforcement: `if (false &&
+ * await isSessionSuperseded(...))` satisfies both probes while the gate is disarmed. THE
+ * CURE: assert the SHAPE that binds the call to its consequence — the call is the condition
+ * of a branch that returns or throws — and enumerate the accepted shapes in-file.
+ */
+export function findUnconsumedGateCalls(raw, skel) {
+  const iter = iterationVars(skel);
+  return conjunctionProbes(raw, skel)
+    .filter((c) => {
+      if (iter.has(c.subject)) return false; // a per-line subject is Rule 3's business
+      return (CALL_PRESENCE_RE.test(c.right) && PATH_PROBE_RE.test(c.left))
+        || (CALL_PRESENCE_RE.test(c.left) && PATH_PROBE_RE.test(c.right));
+    })
+    .map((c) => ({ line: c.line, text: `${c.left} && ${c.right} over \`${c.subject}\`` }));
+}
+
 // ── The scan ────────────────────────────────────────────────────────────────────────────
 describe('contract-test anti-vacuity walker', () => {
   const files = scopedFiles();
@@ -267,6 +383,41 @@ describe('contract-test anti-vacuity walker', () => {
       }
     }
     expect(violations, `literal-union vacuity:\n${violations.join('\n')}`).toEqual([]);
+  });
+
+  // ── The §116.3 fold. These two run over inFoldScope, not inScope — see the note there. ──
+  const foldFiles = foldScopedFiles();
+
+  it('the fold scope is strictly wider than the base scope (the widening is real)', () => {
+    // Without this, a regression that quietly collapsed inFoldScope back onto inScope would
+    // leave Rules 3 and 4 passing over a corpus that no longer contains the three directories
+    // they were widened to cover, and nothing would say so.
+    expect(foldFiles.length).toBeGreaterThan(files.length);
+    for (const dir of ['tests/edgeFunctions/', 'tests/build/', 'tests/lib/']) {
+      expect(foldFiles.some((rel) => rel.startsWith(dir)), `fold scope covers ${dir}`).toBe(true);
+    }
+  });
+
+  it('Rule 3 — no guard requires two distinct probes to match the same physical line', () => {
+    const violations = [];
+    for (const rel of foldFiles) {
+      const raw = readFileSync(join(ROOT, rel), 'utf8');
+      for (const hit of findSameLineConjunctions(raw, codeSkeleton(raw))) {
+        violations.push(`${rel}:${hit.line} — ${hit.text}; widen the window to the statement (sourceContract.sinkStatementOffenders), never the regex`);
+      }
+    }
+    expect(violations, `same-line-conjunction vacuity:\n${violations.join('\n')}`).toEqual([]);
+  });
+
+  it('Rule 4 — no guard proves a gate is called without proving its result is consumed', () => {
+    const violations = [];
+    for (const rel of foldFiles) {
+      const raw = readFileSync(join(ROOT, rel), 'utf8');
+      for (const hit of findUnconsumedGateCalls(raw, codeSkeleton(raw))) {
+        violations.push(`${rel}:${hit.line} — ${hit.text}; assert the SHAPE that binds the call to its consequence`);
+      }
+    }
+    expect(violations, `unconsumed-gate-call vacuity:\n${violations.join('\n')}`).toEqual([]);
   });
 });
 
@@ -319,6 +470,57 @@ describe('contract-test anti-vacuity walker — adversarial self-tests (not vacu
     ].join('\n');
     expect(findLiteralUnionClaims(vacuous, codeSkeleton(vacuous)).length).toBeGreaterThan(0);
     expect(findLiteralUnionClaims(derived, codeSkeleton(derived))).toEqual([]);
+  });
+
+  it('Rule 3 fires on a same-line conjunction and clears the statement-window form', () => {
+    const vacuous = [
+      "const offenders = SRC.split('\\n')",
+      '  .map(line => line.trim())',
+      '  .filter(line => /console\\.\\w+\\(/.test(line) && /\\btoken\\b/.test(line));',
+      'expect(offenders).toEqual([]);',
+    ].join('\n');
+    const fixed = [
+      "const lines = SRC.split('\\n');",
+      "const offenders = sinkStatementOffenders(SRC, /console\\.\\w+\\(/, /\\btoken\\b/, 'src');",
+      'expect(offenders).toEqual([]);',
+    ].join('\n');
+    expect(findSameLineConjunctions(vacuous, codeSkeleton(vacuous))).toHaveLength(1);
+    expect(findSameLineConjunctions(fixed, codeSkeleton(fixed))).toEqual([]);
+  });
+
+  it('Rule 3 does not fire on a whole-source conjunction (that subject is not per-line)', () => {
+    // The discriminating negative: the rule is about the WINDOW, not about conjunction. A
+    // file with no per-line split has no same-line blindness to report.
+    const wholeSource = [
+      'const src = read("x.ts");',
+      'expect(/a/.test(src) && /b/.test(src)).toBe(true);',
+    ].join('\n');
+    expect(findSameLineConjunctions(wholeSource, codeSkeleton(wholeSource))).toEqual([]);
+  });
+
+  it('Rule 4 fires on an import-plus-call presence probe and clears the shape assertion', () => {
+    const vacuous = [
+      'const importsGate = (src) =>',
+      '  /_shared\\/sessionGate\\.ts/.test(src) && /isSessionSuperseded\\s*\\(/.test(src);',
+    ].join('\n');
+    const fixed = [
+      'const importsGate = (src) =>',
+      '  GATE_SHAPES.some((shape) => shape.test(src));',
+    ].join('\n');
+    expect(findUnconsumedGateCalls(vacuous, codeSkeleton(vacuous))).toHaveLength(1);
+    expect(findUnconsumedGateCalls(fixed, codeSkeleton(fixed))).toEqual([]);
+  });
+
+  it('neither new rule can be forged from a shape quoted inside a string or a comment', () => {
+    // Both rules run on the skeleton, so prose that merely DESCRIBES the defect — including
+    // this file's own header — must never be convicted as an instance of it.
+    const quoted = [
+      "const doc = \"/a/.test(line) && /b/.test(line)\";",
+      "// /_shared\\/sessionGate\\.ts/.test(src) && /isSessionSuperseded\\s*\\(/.test(src)",
+      "const rows = SRC.split('\\n').map(line => line.trim());",
+    ].join('\n');
+    expect(findSameLineConjunctions(quoted, codeSkeleton(quoted))).toEqual([]);
+    expect(findUnconsumedGateCalls(quoted, codeSkeleton(quoted))).toEqual([]);
   });
 
   it('the code skeleton blanks strings/comments so they cannot forge a match', () => {

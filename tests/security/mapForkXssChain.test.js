@@ -24,6 +24,7 @@
 import { describe, test, expect } from 'vitest';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { sinkStatementOffenders, sinkLineOffendersBlind } from '../helpers/sourceContract.js';
 
 const read = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf8');
 
@@ -335,13 +336,33 @@ describe('wave-2 layer D — the cell-info overlay escapes untrusted .map names'
 });
 
 describe('wave-2 layer E — the Dropbox OAuth token is not leaked or persisted to disk', () => {
+  // The scan is STATEMENT-granular, not per-physical-line. A per-line conjunction (which is
+  // what this guard used to be) requires the sink and the token to land on the SAME source
+  // line, so prettier's split-call form — the likely shape once a call carries a long secret —
+  // put `console.info(` on one line and the token on the next and the guard went blind.
+  // Comment-only lines are blanked first, preserving line count, so the historical
+  // commented-out debug line stays excluded exactly as before while the window widens.
+  const CLOUD_CODE = CLOUD_SRC.split('\n')
+    .map((line) => (line.trim().startsWith('//') ? '' : line)).join('\n');
+
   test('no active console statement in cloud.js references the token', () => {
-    const offenders = CLOUD_SRC.split('\n')
-      .map(line => line.trim())
-      .filter(line => !line.startsWith('//') && /console\.\w+\(/.test(line) && /\btoken\b/.test(line));
-    expect(offenders).toEqual([]);
+    const offenders = sinkStatementOffenders(CLOUD_CODE, /console\.\w+\(/, /\btoken\b/, 'cloud.js');
+    expect(offenders, `token reached a logging sink:\n${offenders.join('\n')}`).toEqual([]);
     // the historical raw-token debug line is gone
     expect(CLOUD_SRC).not.toContain('console.info("Access token:"');
+  });
+
+  test('the statement window is what makes that scan bite (the pre-cure shape misses it)', () => {
+    // THE DISCRIMINATING PAIR. Without this, "no offenders" and "the scan cannot see a
+    // multi-line call" are the same green. The blind form is the guard's own pre-cure shape,
+    // kept executable in sourceContract so the restored dimension is proven, never argued.
+    const split = ['function keep(token) {', '  console.info(', '    token,', '  );', '}'].join('\n');
+    expect(sinkStatementOffenders(split, /console\.\w+\(/, /\btoken\b/, 'fixture')).toHaveLength(1);
+    expect(sinkLineOffendersBlind(split, /console\.\w+\(/, /\btoken\b/)).toEqual([]);
+    // …and the single-line form both shapes already caught is not regressed.
+    const oneLine = 'console.info("t", token);';
+    expect(sinkStatementOffenders(oneLine, /console\.\w+\(/, /\btoken\b/, 'fixture')).toHaveLength(1);
+    expect(sinkLineOffendersBlind(oneLine, /console\.\w+\(/, /\btoken\b/)).toHaveLength(1);
   });
 
   test('the token is held session-scoped (sessionStorage), never localStorage', () => {
