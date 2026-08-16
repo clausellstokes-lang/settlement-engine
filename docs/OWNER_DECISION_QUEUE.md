@@ -6916,3 +6916,22 @@ violating disjointness or reachability. MF-B4 notified (#3) — the
 party-wall decision it is already building under §190 is the
 gaps' source, so this is the same packer work seen from the
 positive side.
+
+## §190c · THE WORKSITE HABITATION LAW (2026-08-16, owner:
+## farmers/fishermen/huntsmen/overseers live at their work — "base
+## it off historical precedence")
+
+Charter §16.5, adopted WITH the historical split: NUCLEATED
+open-field settlements keep farmers IN the village (fields carry
+FIELD BARNS and distance-driven outlying farmsteads, never a house
+per strip — the open-field form's own logic) vs the DISPERSED
+pattern (enclosed/upland/frontier: a farmstead ON each holding);
+the selector derives from terrain, safety (§10 states push
+dwellings inward), tenure/culture, with drift able to ENCLOSE over
+generations (strips → hedged holdings with new farmsteads — one of
+history's great visible transformations). SPECIALIST KEEPERS
+regardless of pattern, per precedent: the mine's COUNT HOUSE
+(Cornish), the forest KEEPER'S LODGE, the miller's house, the
+ferryman, the lone cottage at good isolated water vs the landing
+hamlet for shore fishing, the toll keeper. All under §17/§16.3
+discipline with derivation homes. MF-B4 notified (#4).
