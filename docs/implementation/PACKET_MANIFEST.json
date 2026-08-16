@@ -11998,6 +11998,253 @@
           "tests/edgeFunctions/contracts.test.js"
         ]
       ]
+    },
+    {
+      "id": "MB-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/MB-1.md",
+      "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/forecastRun.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/auspice.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/RealmForecast.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/auspice/AuspicePanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/advanceWorkerByteIdentity.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/components/realmForecastHonesty.test.jsx"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "export async function simulatePendingFuture"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "export async function runRealmForecast"
+        },
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "import { simulateCampaignWorldInterval } from './advanceInterval.js';"
+        },
+        {
+          "path": "src/domain/worldPulse/auspice.js",
+          "symbol": "export async function readAuspices"
+        },
+        {
+          "path": "src/components/map/RealmForecast.jsx",
+          "symbol": "forecastDigest(runOut, memberSaves)"
+        },
+        {
+          "path": "src/components/auspice/AuspicePanel.jsx",
+          "symbol": "const { readAuspices } = await import("
+        },
+        {
+          "path": "tests/domain/advanceWorkerByteIdentity.test.js",
+          "symbol": "function buildFixture"
+        },
+        {
+          "path": "tests/components/realmForecastHonesty.test.jsx",
+          "symbol": "vi.mock('../../src/domain/worldPulse/forecastRun.js'"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/forecastRun.js",
+          "symbol": "const result = await simulateCampaignWorldInterval({"
+        },
+        {
+          "path": "src/components/map/RealmForecast.jsx",
+          "symbol": "const runOut = await simulatePendingFuture({ campaign, saves: memberSaves, interval, now });"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "runInterval defaults to the in-thread orchestrator, so existing callers are unchanged"
+        },
+        {
+          "id": "A2",
+          "case": "an injected runner that clones across the boundary yields a byte-identical forecast"
+        },
+        {
+          "id": "A3",
+          "case": "runRealmForecast threads the runner through BOTH internal calls"
+        },
+        {
+          "id": "A4",
+          "case": "readAuspices threads it too"
+        },
+        {
+          "id": "A5",
+          "case": "the transport is injected, so the domain module gains no src/lib edge"
+        },
+        {
+          "id": "A6",
+          "case": "both UI panes wire it through lazy imports only"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/advanceWorkerByteIdentity.test.js",
+          "tests/components/realmForecastHonesty.test.jsx",
+          "tests/domain/forecastRun.test.js",
+          "tests/domain/auspice.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "MB-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/MB-2.md",
+      "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/store/toggleSlice.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/store/toggleSlice.servicesNormalize.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/store/toggleSlice.js",
+          "symbol": "export function normalizeServicesToggles"
+        },
+        {
+          "path": "src/store/toggleSlice.js",
+          "symbol": "hydrateServicesToggles:"
+        },
+        {
+          "path": "tests/store/toggleSlice.servicesNormalize.test.js",
+          "symbol": "describe('hydrateServicesToggles action'"
+        },
+        {
+          "path": "tests/store/toggleSlice.servicesNormalize.test.js",
+          "symbol": "the services-toggle migration is wired into the store rehydrate path"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/store/toggleSlice.js",
+          "symbol": "set(state => { state.servicesToggles = toggles; })"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "a legacy display-name bag handed to the writer lands normalized"
+        },
+        {
+          "id": "A2",
+          "case": "an already-current bag is written unchanged (idempotent)"
+        },
+        {
+          "id": "A3",
+          "case": "the hydrate action's own pin still discriminates after the writer normalizes"
+        },
+        {
+          "id": "A4",
+          "case": "the rehydrate source-scan pins are untouched and still pass"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/store/toggleSlice.servicesNormalize.test.js",
+          "tests/store/toggleSlice.scope.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "MB-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/MB-4.md",
+      "verifiedBase": "752b1bbc36672bc54e6bbed67284f8a0ba5e0a32",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/pricing/PricingBands.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/activeConditions.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "export function FounderCharterBand"
+        },
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "FOUNDER_SEAT_CAP"
+        },
+        {
+          "path": "src/domain/activeConditions.js",
+          "symbol": "factionRelationshipUpdate (Phase 14) keyed by the same archetype"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "disabled={!isConfigured && cta.kind === 'purchase'}"
+        },
+        {
+          "path": "src/components/pricing/PricingBands.jsx",
+          "symbol": "import { isConfigured } from '../../lib/supabase.js';"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "all three purchase-kind reads are gone, including the import"
+        },
+        {
+          "id": "A2",
+          "case": "the rendered variant is unchanged and not newly electable by isPrimaryCta"
+        },
+        {
+          "id": "A3",
+          "case": "the band's existing pins pass untouched"
+        },
+        {
+          "id": "A4",
+          "case": "the 1:1 header carries its measured qualifier and its authority"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/ui/pricingPageBands.test.jsx",
+          "tests/domain/activeConditions.test.js"
+        ]
+      ]
     }
   ]
 }
