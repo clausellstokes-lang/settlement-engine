@@ -89,11 +89,25 @@ const ARM_A_EXEMPTIONS = Object.freeze([]);
 
 /**
  * The migration files that declare a simulation-metric table, as an exact set,
- * with the same shrink-only discipline Arm B uses for `scripts/soak`. TM-2A mints
- * `196_world_sim_metrics.sql` and removes its awaiting row.
+ * with the same shrink-only discipline Arm B uses for `scripts/soak`.
+ * ⭐ `AWAITING_MIGRATION` was emptied by TM-2A, which minted the file — the row was
+ * live for exactly the two commits between this walker's birth and the migration's,
+ * which is the whole point of naming an absence instead of asserting over it.
  */
 const SIM_METRIC_MIGRATIONS = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);
-const AWAITING_MIGRATION = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);
+const AWAITING_MIGRATION = Object.freeze([]);
+
+/** The `create table … ( … );` body, so the column walk reads columns and not prose. */
+function createTableColumns(ddl, table) {
+  const opener = new RegExp(`create table[^;]*?\\b${table}\\s*\\(`, 'i');
+  const start = ddl.search(opener);
+  if (start < 0) return [];
+  const body = ddl.slice(ddl.indexOf('(', start) + 1, ddl.indexOf('\n);', start));
+  return body.split('\n')
+    .map((line) => line.match(/^\s{2,}([a-z_]+)\s+[a-z]/i))
+    .filter(Boolean)
+    .map((match) => match[1]);
+}
 
 const ENGINE_FORBIDS = /analytics|telemetr|simMetric|ingest/i;
 const TELEMETRY_FORBIDS = /worldPulse|worldState|generateSettlementPipeline|simulationRules/i;
@@ -218,15 +232,15 @@ describe('the engine/telemetry wall', () => {
         continue;
       }
       if (AWAITING_MIGRATION.includes(path)) missing.push(`${path} exists but is still listed AWAITING_MIGRATION`);
-      const ddl = readFileSync(join(ROOT, path), 'utf8');
-      const columns = [...ddl.matchAll(/^\s{2,}([a-z_]+)\s+[a-z]/gim)].map((match) => match[1]);
+      const columns = createTableColumns(readFileSync(join(ROOT, path), 'utf8'), 'world_sim_metrics');
       expect(columns.length, `${path} declared no columns — the DDL walk read nothing`).toBeGreaterThan(4);
       expect(columns.filter((column) => FORBIDDEN_DIM_RE.test(column))).toEqual([]);
     }
     expect(missing).toEqual([]);
     // CONTROL: the DDL column scan really classifies.
-    const fixture = 'create table t (\n  run_id text,\n  actor_id uuid,\n  value numeric\n);';
-    expect([...fixture.matchAll(/^\s{2,}([a-z_]+)\s+[a-z]/gim)].map((m) => m[1])
+    const fixture = 'create table public.world_sim_metrics (\n  run_id text,\n  actor_id uuid,\n  value numeric\n);';
+    expect(createTableColumns(fixture, 'world_sim_metrics')).toEqual(['run_id', 'actor_id', 'value']);
+    expect(createTableColumns(fixture, 'world_sim_metrics')
       .filter((column) => FORBIDDEN_DIM_RE.test(column))).toEqual(['actor_id']);
   });
 
