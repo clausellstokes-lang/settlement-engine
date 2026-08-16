@@ -10425,5 +10425,101 @@
           "tests/lint/localeFormatGuard.test.js"
         ]
       ]
+    },
+    {
+      "id": "DA-B2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-B2.md",
+      "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/sections/Cover.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlement/WhatChangedPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/screen/DmScreen.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/compendium/CatalogTabs.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/RealmForecast.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/account/AccountAiKeysSection.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/admin/AiPricingResyncPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/account/AccountSecuritySection.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/localeFormatGuard.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/formatNumber.js",
+          "symbol": "export function formatCount"
+        },
+        {
+          "path": "tests/lint/localeFormatGuard.test.js",
+          "symbol": "const TREES = ['src/generators', 'src/domain', 'src/workers', 'src/kernel'];"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "all five count sites render through formatCount and all three date sites name en-US explicitly"
+        },
+        {
+          "id": "A2",
+          "case": "the PDF cover groups its population, so it agrees with Overview.jsx in the same document"
+        },
+        {
+          "id": "A3",
+          "case": "zero BARE-locale calls survive anywhere in src/components or src/pdf"
+        },
+        {
+          "id": "A4",
+          "case": "the bare-form detector catches the no-argument and undefined-argument spellings and ADMITS the explicit one"
+        },
+        {
+          "id": "A5",
+          "case": "the sanctioned explicit form is still present in the display trees, so the ban has a live subject"
+        },
+        {
+          "id": "A6",
+          "case": "the sim-path TREES list is unchanged: the display arm is a different detector, not a widened one"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/localeFormatGuard.test.js",
+          "tests/domain/formatNumber.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/pdf/fullPdf.render.test.jsx",
+          "tests/joins/realmForecast.test.js"
+        ]
+      ]
     }  ]
 }
