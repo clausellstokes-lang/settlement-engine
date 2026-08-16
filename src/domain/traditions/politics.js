@@ -37,6 +37,7 @@ import { slugify } from '../../kernel/slugify.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
+import { yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { TRADITION_TRAPPINGS, TRADITION_EPITHETS } from '../../data/traditionCorpus.js';
 
@@ -320,7 +321,11 @@ export function advancePolitics({ recs, settlement, worldState, sid, year, minte
   const seat = seatOwnerOf(settlement);
   const patronRef = currentPatronRef(settlement);
   const curTier = tierIndexOf(settlement);
-  const rngSeed = String(worldState.rngSeed || '');
+  // RS-7 — THE RE-ROOT (advance epoch, EP-3 slice B). ONE read, TWO year-keyed compositions
+  // (rows 7 and 9), and the `year` is handed down from traditionsKernel's own `clock.year`,
+  // so it is the calendar's 1-based number and `yearBase` is 1. The compositions below are
+  // untouched: they interpolate `rngSeed`, which is now the year-anchored value.
+  const rngSeed = yearStreamSeedOf(worldState, year, { base: String(worldState.rngSeed || ''), yearBase: 1 });
 
   const founding = asObject(recs[0]);
   const foundingScale = num(founding.scaleBand, curTier);

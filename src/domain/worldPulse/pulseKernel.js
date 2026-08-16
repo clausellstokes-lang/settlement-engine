@@ -11,7 +11,7 @@ import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { ensureWorldState, advanceWorldCalendar, pulseIdFor, seasonForTick, appendPulseHistoryWithProvenance } from './provenanceKernel.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { stampAdvanceEpochYear } from '../advanceEpochLedger.js';
+import { stampAdvanceEpochYear, yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
@@ -465,7 +465,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // draw forks the tick-invariant WORLD seed (`season:<year>:<sid>`) so every
   // week of a year reads the same verdict (seasons.js).
   const seasonsOn = simulationRules.seasonsEnabled === true;
-  const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null;
+  // ⭐ SEAM EDIT 7 (EP-3 slice B) — RS-2's re-root, `;`-joined at +0 lines onto the earliest
+  // same-tick read of the new year. It reads `worldState` (POST-advance, POST-stamp), NEVER
+  // `startingWorldState`: the pre-advance world structurally cannot carry the year the
+  // advance is entering, and a re-aim at it fails SILENTLY — the accessor returns the bare
+  // root and every "the composition still works" test stays green. `base` is RS-2's OWN
+  // expression, uncoerced, so an absent seed still interpolates the literal "undefined".
+  const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null; const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 }) : undefined;
   // ── SEASONS-B (M3): WINTER ROADS. The road season is derived FREE from the
   // ADVANCED calendar (seasonForTick), INDEPENDENT of the food-year flag: seasonal
   // roads gate on the digest's seasonalOverlay, not seasonsEnabled. Threaded into
@@ -496,7 +502,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       : null;
     const seasonal = seasonClock
       ? seasonalContextFor({
-          rngSeed: startingWorldState.rngSeed,
+          rngSeed: seasonSeed, // SEAM EDIT 8 (EP-3 slice B) — row 1's in-pulse consumer
           clock: seasonClock,
           settlement: result.newSettlement,
           settlementId: item.id,

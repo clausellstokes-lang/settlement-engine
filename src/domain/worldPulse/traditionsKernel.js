@@ -61,6 +61,7 @@ import { migrationActive } from '../spatial/migration.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { seasonForTick } from './worldState.js';
 import { seasonalSeverityFor } from './seasons.js';
+import { yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { tradeRouteTier } from '../tradeRouteSemantics.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
@@ -255,7 +256,11 @@ export function successScore(a) {
   if (pRank >= 0) score += T.PROSPERITY_BY_RANK[pRank] ?? 0;
 
   // seasonal severity (tick-invariant world-seed fork), afflicting the window's half-year.
-  const severity = seasonalSeverityFor(String(asObject(worldState).rngSeed || ''), year, sid);
+  // RS-4 — THE RE-ROOT (advance epoch, EP-3 slice B), row 1's second in-engine composer.
+  // The severity a tradition window is scored against must be the SAME winter the pulse ran
+  // (row 1's in-pulse composer is seam edit 7), which is why both re-root onto the same
+  // year anchor with the same `yearBase: 1`. `base` is this site's own `String(v || '')`.
+  const severity = seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 }), year, sid);
   const startWeek = clampNum(num(asObject(rec.window).startWeekOfYear, 1), 1, 52);
   const warmHalf = startWeek <= 26; // spring+summer weeks 1..26
   if (severity === 'bountiful') score += T.SEVERITY_BONUS;
@@ -721,7 +726,10 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
         const pilgrimBonus = pilgrimageDraw({ hostId: sid, hostRec: rec, settlements: items, digest: spatialDigest });
         const score = clampNum(successScore({ rec, settlement: s, worldState, sid, year, warTypes }) + pilgrimBonus,
           TRAD_TUNING.SCORE_MIN, TRAD_TUNING.SCORE_MAX);
-        const r = createPRNG(`${String(asObject(worldState).rngSeed || '')}::tradition:${rec.id}:${year}`).random();
+        // RS-6 — THE RE-ROOT (advance epoch, EP-3 slice B), row 6. The original coercion is
+        // still visible verbatim INSIDE the accessor call, which is how §3b.3's byte-verbatim
+        // rule is satisfied structurally rather than by transcription.
+        const r = createPRNG(`${yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })}::tradition:${rec.id}:${year}`).random();
         outcome = outcomeForDraw(score, r);
       }
       // §5 EFFECTS (write-bounded; accumulated, applied once below).

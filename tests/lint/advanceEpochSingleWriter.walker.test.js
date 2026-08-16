@@ -103,8 +103,12 @@ describe('EP-3A · the single-writer law for spatialLedgers.advanceEpoch', () =>
     expect(body.indexOf('if (!epochTerm) return worldState;'))
       .toBeLessThan(body.indexOf('setSpatialLedger'));
     // The kernel reaches it by import rather than re-deriving the write inline.
+    // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B: the import line GAINED `yearStreamSeedOf` as
+    // a token edit — the same ONE line, at +0, which is the whole reason the leaf holds all
+    // three symbols. The anchor is re-spelled rather than loosened to a substring, because
+    // what it is really pinning is that the kernel has exactly ONE edge to this leaf.
     expect(read('src/domain/worldPulse/pulseKernel.js'))
-      .toContain("import { stampAdvanceEpochYear } from '../advanceEpochLedger.js';");
+      .toContain("import { stampAdvanceEpochYear, yearStreamSeedOf } from '../advanceEpochLedger.js';");
   });
 
   test('the corpus the scan walks is real', () => {

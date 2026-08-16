@@ -39,7 +39,7 @@ describe('D-4→D-2 source — advanceContests deposits a bluff exposure when a 
       ['n_a', { fkey: 'fac.crown', faction: gov, rungIndex: 0, rungCount: 2, npc: honest }],
       ['n_b', { fkey: 'fac.crown', faction: gov, rungIndex: 1, rungCount: 2, npc: loserNpc }],
     ]);
-    const base = { sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState: { rngSeed: 'seed-1' }, priorContests, npcs, priorNpcs: npcs, goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50, 0), attributionWeight, memoryWeaveActive: false, now: null };
+    const base = { sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState: { rngSeed: 'seed-1' }, priorContests, npcs, priorNpcs: npcs, goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50, 0), attributionWeight, memoryWeaveActive: false, now: null };
     const bluffed = advanceContests({ ...base, nidMeta: meta(liar) });
     expect(bluffed.contests['contest.s1.ruling_authority.10'].loserNid).toBe('n_b');
     expect(bluffed.bluffDeposits).toEqual([{ nid: 'n_b', band: 2 }]);

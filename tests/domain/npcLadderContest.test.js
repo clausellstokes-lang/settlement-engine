@@ -225,8 +225,15 @@ describe('advanceContests — the settlement-wide pass', () => {
   }
   it('genesis mints a contest from settled colliding primaries', () => {
     const npcs = { n_a: mkStanding(mkGoal('ruling_authority', 78, 40)), n_b: mkStanding(mkGoal('ruling_authority', 80, 45)) };
+    // ⚠ `supportSeed` IS A REQUIRED SECOND SEED (EP-3 slice B): row 20, the support-goal
+    // draw, is YEAR-KEYED and reads the advance-epoch YEAR anchor while every other draw here
+    // stays TICK-anchored on `seed`. It is spelled equal to `seed` in these unit fixtures ON
+    // PURPOSE — that is the value the kernel composes when no epoch is in play, so every draw
+    // below is byte-identical to what it was before the split. There is no default for it in
+    // production: a defaulted second seed is exactly the silent-vocabulary defect J-EP-13
+    // exists to foreclose.
     const res = advanceContests({
-      sid: 's1', weeks: 20, tick: 20, seed: 'seed-1', townName: 'Town', worldState,
+      sid: 's1', weeks: 20, tick: 20, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
       priorContests: {}, npcs, priorNpcs: {}, nidMeta: metaFor(['n_a', 'n_b']),
       goalOutcomes: new Map(), remint: () => null, attributionWeight, memoryWeaveActive: false, now: null,
     });
@@ -237,7 +244,7 @@ describe('advanceContests — the settlement-wide pass', () => {
     const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
     const goalOutcomes = new Map([['n_a', { fired: true, expired: false, lapsed: false, signalVar: 'ruling_authority', endProgress: 1 }]]);
     const res = advanceContests({
-      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
       priorContests, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_a', 'n_b']),
       goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, memoryWeaveActive: false, now: null,
     });
@@ -258,7 +265,7 @@ describe('advanceContests — the settlement-wide pass', () => {
     const goalOutcomes = new Map([['n_pat', { fired: false, expired: true, lapsed: false, signalVar: 'ruling_authority', endProgress: 0.3 }]]);
     let reminted = false;
     const res = advanceContests({
-      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
       priorContests: {}, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_pat', 'n_sup']),
       goalOutcomes, remint: () => { reminted = true; return mkGoal('economic_capacity', 60, 40); }, attributionWeight, memoryWeaveActive: true, now: null,
     });
@@ -277,7 +284,7 @@ describe('advanceContests — the settlement-wide pass', () => {
     const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
     const goalOutcomes = new Map([['n_a', { fired: true, expired: false, lapsed: false, signalVar: 'ruling_authority', endProgress: 1 }]]);
     const res = advanceContests({
-      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
       priorContests, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_a', 'n_b', 'j1']),
       goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, memoryWeaveActive: true, now: null,
     });
@@ -294,7 +301,7 @@ describe('advanceContests — the settlement-wide pass', () => {
       ['n_a', { fkey: 'fac.crown', faction: gov, rungIndex: 0, rungCount: 1, npc: proud }],
       ['n_b', { fkey: 'fac.watch', faction: gov, rungIndex: 0, rungCount: 1, npc: proud }],
     ]);
-    const base = { sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState, priorContests, npcs, priorNpcs: npcs, goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, now: null };
+    const base = { sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState, priorContests, npcs, priorNpcs: npcs, goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, now: null };
     const litCross = advanceContests({ ...base, nidMeta: crossMeta, memoryWeaveActive: true });
     expect(litCross.factionPairDeposits.length).toBe(1);
     expect(litCross.factionPairDeposits[0].type).toBe('contest_loss');
@@ -310,7 +317,7 @@ describe('advanceContests — the settlement-wide pass', () => {
   it('D-4f support/join is inert when memoryWeave is DARK (no bonds ⇒ no conversion, no joiners)', () => {
     const npcs = { n_sup: mkStanding(mkGoal('ruling_authority', 78, 40), { bonds: { n_pat: { sev: 0.9, week: 0, kind: 'loyalty' } } }), n_pat: mkStanding(mkGoal('ruling_authority', 78, 40)) };
     const res = advanceContests({
-      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
       priorContests: {}, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_pat', 'n_sup']),
       goalOutcomes: new Map(), remint: () => null, attributionWeight, memoryWeaveActive: false, now: null,
     });
@@ -337,7 +344,7 @@ describe('D-4e player siding — the champion producer (marker → backedBy cons
     ['n_b', { fkey: 'fac.crown', faction: gov, rungIndex: 1, rungCount: 2, npc: bNpc }],
   ]);
   const advance = (/** @type {any} */ nidMeta, /** @type {any} */ priorContests) => advanceContests({
-    sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+    sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', supportSeed: 'seed-1', townName: 'Town', worldState,
     priorContests, npcs: { n_a: mkStanding(mkGoal('ruling_authority', 78, 40)), n_b: mkStanding(mkGoal('ruling_authority', 80, 45)) },
     priorNpcs: {}, nidMeta, goalOutcomes: new Map(), remint: () => null, attributionWeight, memoryWeaveActive: false, now: null,
   });

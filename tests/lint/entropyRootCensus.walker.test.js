@@ -157,11 +157,20 @@ const READ_SITES = Object.freeze([
 ]);
 
 /** RS-18 is the WRITER: it mints the root and reads nothing, so the read detector cannot see
- *  it. It is found by the write-key detector instead, together with the two impostors that
- *  spell the same KEY off a value that is not a world root. EXACT SET — a second writer is
- *  the single most dangerous thing this file can be asked to notice. */
+ *  it. It is found by the write-key detector instead, together with the impostors and
+ *  hand-offs that spell the same KEY off a value that is not a world root. EXACT SET — a
+ *  second writer is the single most dangerous thing this file can be asked to notice.
+ *  ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B, AND THE NEW ROW IS A CONSEQUENCE OF A RE-ROOT
+ *  RATHER THAN A NEW SITE. Seam edit 8 replaces `rngSeed: startingWorldState.rngSeed,` with
+ *  `rngSeed: seasonSeed,` — so that ONE line stops being a READ (the read moved up to seam
+ *  edit 7, which is why the read-site census is unmoved at twenty-two) and starts being an
+ *  object-literal key fed by an already-classified value. That is the DERIVED class the
+ *  composition roster already carries for the realm-verb rows, seen from the write side; it
+ *  is neither a writer nor an impostor, and it is listed so the exact-set equality keeps
+ *  holding for a reason rather than by a widened detector. */
 const WRITE_KEY_SITES = Object.freeze([
   ['NC-2', 'src/domain/ai/personaSlicer.js', 'a settlement `_seed` — WEAK control, zero src importers'],
+  ['RS-2h', 'src/domain/worldPulse/pulseKernel.js', 'seam edit 8 — RS-2 HANDED OFF, the year-anchored value reaching row 1'],
   ['RS-18', 'src/domain/worldPulse/worldState.js', 'THE ONE WRITER — createDefaultWorldState mints the root'],
   ['NC-1', 'src/generators/power/economyReconciliation.js', 'a generator STEP-RNG fork seed — the MANDATORY control'],
 ]);
@@ -180,10 +189,21 @@ const SEED_IDENTS = Object.freeze({
   'src/domain/worldPulse/demographicsPlans.js': ['realm'],
   'src/domain/worldPulse/demographicsResponses.js': ['input.realmId'],
   'src/domain/worldPulse/npcLadderChallenge.js': ['seed'],
-  'src/domain/worldPulse/npcLadderContest.js': ['seed'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B: `supportSeed` is row 20's own year-anchored
+  // receiver and must be DECLARED, because the ident match is a case-sensitive substring
+  // test — `supportSeed` does not contain `seed`. A lane that renamed the receiver without
+  // declaring it here would delete row 20 from the measured set and red the roster, which
+  // is the census working; a lane that had named it `supportseed` would have passed by
+  // accident of spelling, which is why the declaration is explicit rather than incidental.
+  'src/domain/worldPulse/npcLadderContest.js': ['seed', 'supportSeed'],
   'src/domain/worldPulse/pulseKernel.js': ['startingWorldState.rngSeed'],
   'src/domain/worldPulse/realmVerbExecution.js': ['state.rngSeed', 'seed'],
-  'src/domain/worldPulse/roadsKernel.js': ['rngSeed'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B: `yearSeed` is a NEW RECEIVING NAME, declared
+  // rather than smuggled. RS-5 is a SPLIT READ — its tick-anchored `rngSeed` still feeds
+  // rows 2/4 (and 10/11/12 by hand-down) while rows 3 and 5 are YEAR-KEYED and take the
+  // year anchor — so the module composes off TWO identifiers and the census must know both
+  // names or it silently stops seeing two of this file's four compositions.
+  'src/domain/worldPulse/roadsKernel.js': ['rngSeed', 'yearSeed'],
   'src/domain/worldPulse/seasons.js': ['rngSeed'],
   'src/domain/worldPulse/sovereigntyMarketStage.js': ['realmId'],
   'src/domain/worldPulse/traditionsKernel.js': ['asObject(worldState).rngSeed'],
@@ -208,7 +228,12 @@ const COMPOSITIONS = Object.freeze([
   ['17', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-contest:aware:${contestId}:${side.nid}:${tick}', 'DEFERRED', 'TICK-VARYING'],
   ['18', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-contest:bluff:${contestId}:${rival.nid}:${weeks}', 'hash01', 'TICK-VARYING'],
   ['19', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-contest:resolve:${contest.id}', 'hash01', 'TICK-VARYING'],
-  ['20', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-support:${sid}:${nid}:${year}', 'hash01', 'YEAR-KEYED'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B — RS-9's SPLIT READ, CLOSED. Row 20 is the
+  // ONE year-keyed draw in this module and now reads `supportSeed`, a SECOND value the
+  // kernel composes off the year anchor; rows 17/18/19 keep the tick-anchored `seed`. That
+  // this row's text moved while its three siblings' did not IS the receipt that the split
+  // was honoured rather than papered over with one re-point.
+  ['20', 'src/domain/worldPulse/npcLadderContest.js', '${supportSeed}|ladder-support:${sid}:${nid}:${year}', 'hash01', 'YEAR-KEYED'],
   // ⭐ RE-RECORDED 2026-08-16 BY EP-1, AND THIS ROW IS THE ONE THE PROGRAM EXISTS TO MOVE.
   // The composition COUNT did not change — this file still composes exactly ONE root, and
   // the estate's total is unmoved. What changed is this row's TEXT: the seam appends
@@ -238,12 +263,12 @@ const COMPOSITIONS = Object.freeze([
   ['16', 'src/domain/worldPulse/realmVerbExecution.js', "${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb", 'DEFERRED', 'TICK-FREE'],
   ['16d', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:${k}', 'createPRNG', 'DERIVED'],
   ['2', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads-hazard:${mid}:${now2}', 'createPRNG', 'TICK-VARYING'],
-  ['3', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads:cadence:${npcKey}:${year}', 'createPRNG', 'YEAR-KEYED'],
+  ['3', 'src/domain/worldPulse/roadsKernel.js', '${yearSeed}::roads:cadence:${npcKey}:${year}', 'createPRNG', 'YEAR-KEYED'],
   ['4', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads-genesis:${sid}:${now2}', 'createPRNG', 'TICK-VARYING'],
-  ['5', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads:stay:${sid}:${c.npcKey}:${year}', 'createPRNG', 'YEAR-KEYED'],
+  ['5', 'src/domain/worldPulse/roadsKernel.js', '${yearSeed}::roads:stay:${sid}:${c.npcKey}:${year}', 'createPRNG', 'YEAR-KEYED'],
   ['1', 'src/domain/worldPulse/seasons.js', '${rngSeed}::season:${year}:${String(settlementId)}', 'createPRNG', 'YEAR-KEYED'],
   ['24', 'src/domain/worldPulse/sovereigntyMarketStage.js', 'sovereignty.offer.${realmId}.${sellerId}.${buyerId}.${assetId}.${episode}', 'DEFERRED', 'TICK-VARYING'],
-  ['6', 'src/domain/worldPulse/traditionsKernel.js', "${String(asObject(worldState).rngSeed || '')}::tradition:${rec.id}:${year}", 'createPRNG', 'YEAR-KEYED'],
+  ['6', 'src/domain/worldPulse/traditionsKernel.js', "${yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })}::tradition:${rec.id}:${year}", 'createPRNG', 'YEAR-KEYED'],
 ]);
 
 /** Where a DEFERRED composition's key actually reaches an entropy idiom. Each anchor is a
@@ -259,9 +284,14 @@ const DEFERRED_ANCHORS = Object.freeze([
 /** The cross-module hand-offs that carry a root seed into a module that never reads state.
  *  [source file, anchor proving the hand-off exists, receiving module]. */
 const HAND_OFFS = Object.freeze([
-  ['src/domain/worldPulse/pulseKernel.js', 'rngSeed: startingWorldState.rngSeed,', 'src/domain/worldPulse/seasons.js'],
-  ['src/domain/worldPulse/traditionsKernel.js', 'seasonalSeverityFor(String(asObject(worldState).rngSeed', 'src/domain/worldPulse/seasons.js'],
-  ['src/domain/townMap/mapDress.js', 'seasonalSeverityFor(rngSeed, year, settlementId)', 'src/domain/worldPulse/seasons.js'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B (three anchors in this table moved, all for
+  // the same reason): the hand-off now carries the YEAR-ANCHORED value, and each anchor
+  // keeps the site's ORIGINAL expression verbatim INSIDE the accessor call, so a retyped
+  // coercion still reds here. RS-2's anchor is seam edit 7's line — the read moved there
+  // when edit 8 took `seasonSeed`, which is the whole shape of the +0-line seam.
+  ['src/domain/worldPulse/pulseKernel.js', 'yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 })', 'src/domain/worldPulse/seasons.js'],
+  ['src/domain/worldPulse/traditionsKernel.js', "seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })", 'src/domain/worldPulse/seasons.js'],
+  ['src/domain/townMap/mapDress.js', 'seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: rngSeed, yearBase: 1 }), year, settlementId)', 'src/domain/worldPulse/seasons.js'],
   ['src/domain/worldPulse/generosityKernel.js', 'intelEligible(intelSeed', 'src/domain/spatial/intelActs.js'],
   ['src/domain/worldPulse/roadsKernel.js', 'rngSeed, now2, idSet', 'src/domain/roads/seaRoads.js'],
   // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE A: RS-9's read is now wrapped by the family-1
@@ -343,6 +373,7 @@ describe('EP-0 · baseline B — the read-site census', () => {
  *  [id(s), file, calls]. The counts are the compositions' READ SITES, not the compositions:
  *  RS-5 feeds five rows through one read and RS-9 feeds four through one, which is why this
  *  roster is shorter than the disposition table it gates. */
+const LEDGER_LEAF = 'src/domain/advanceEpochLedger.js';
 const FAMILY_1_ACCESSOR = 'tickStreamSeedOf(';
 const FAMILY_1_REROOTS = Object.freeze([
   ['RS-5', 'src/domain/worldPulse/roadsKernel.js', 1],
@@ -393,26 +424,150 @@ describe('EP-3A · the classification gate — every TICK-anchored read is re-ro
     expect(callSitesIn(' * a comment naming tickStreamSeedOf(worldState)', FAMILY_1_ACCESSOR)).toBe(0);
   });
 
-  test('the YEAR-KEYED half is NOT re-rooted at slice A, and that is the split being recorded', () => {
-    // ⚠ RS-9 IS THE SPLIT READ: its module appears in the roster above for the TICK anchor
-    // while its family-2 row 20 stays epoch-blind until slice B lands a SECOND,
-    // separately-named year-anchored argument beside it. Every OTHER year-keyed module must
-    // carry no accessor call at all today, so slice B's arrival is visible rather than
-    // assumed — and a lane that re-rooted a year-keyed site onto the TICK anchor by mistake
-    // reds here, which is the "a TICK-VARYING row calling yearStreamSeedOf, and vice versa"
-    // gate the volume specifies, in the half that exists.
-    const rerooted = new Set(FAMILY_1_REROOTS.map(([, file]) => file));
-    const yearOnly = [...new Set(READ_SITES
-      .filter(([, , , , cls]) => cls === 'YEAR-KEYED')
-      .map(([, file]) => file))].filter((file) => !rerooted.has(file));
-    expect(yearOnly.length, 'the year-keyed half is non-empty, so the check below is real')
-      .toBeGreaterThan(0);
-    expect(yearOnly.filter((file) => callSitesIn(read(file), FAMILY_1_ACCESSOR) > 0)).toEqual([]);
-    // And the leaf exports the tick accessor but NOT yet the year one — slice B's boundary,
-    // asserted so its arrival cannot be mistaken for something that was always there.
-    const leaf = read('src/domain/advanceEpochLedger.js');
+  test('the TICK anchor reaches ONLY the tick-anchored roster, and the leaf exports both accessors', () => {
+    // ⭐ RE-AIMED 2026-08-16 BY EP-3 SLICE B. Until slice B landed, this arm asserted that no
+    // year-keyed module called ANY accessor and that the leaf exported no `yearStreamSeedOf`
+    // — a statement about a boundary that has now moved, so it is re-aimed DELIBERATELY
+    // rather than deleted. What it asserts now is the half that is still a real constraint:
+    // no module outside the FAMILY_1 roster carries a TICK-anchored call. A year-keyed site
+    // re-rooted onto the tick anchor by mistake would draw a DIFFERENT key on every tick of
+    // a lived year — the exact inversion of the feature — and reds here.
+    const tickCallers = ALL_FILES
+      .filter((f) => f !== LEDGER_LEAF && callSitesIn(read(f), FAMILY_1_ACCESSOR) > 0)
+      .sort();
+    expect(tickCallers, 'a module outside the tick roster composes off the TICK anchor')
+      .toEqual(FAMILY_1_REROOTS.map(([, file]) => file).sort());
+    // And the leaf now exports BOTH — slice B's boundary crossed, asserted so the arrival is
+    // a recorded event rather than something a reader assumes was always there.
+    const leaf = read(LEDGER_LEAF);
     expect(leaf).toContain('export function tickStreamSeedOf');
-    expect(leaf.includes('export function yearStreamSeedOf')).toBe(false);
+    expect(leaf).toContain('export function yearStreamSeedOf');
+  });
+});
+
+// ── THE CLASSIFICATION GATE — EP-3 slice B ───────────────────────────────────────────────
+/** The family-2 accessor, and the number of times each re-rooted module must call it.
+ *  [id(s), file, calls]. The NINE year-keyed compositions live at EIGHT read sites PLUS
+ *  RS-9's second argument, so this roster is shorter than nine and its counts are line
+ *  counts, not composition counts. ⚠ TWO MODULES APPEAR IN BOTH ROSTERS AND THAT IS THE
+ *  POINT: `roadsKernel.js` and `npcLadderKernel.js` are SPLIT READS whose one read feeds
+ *  both families, so each carries a tick-anchored binding AND a separately-named
+ *  year-anchored one. A lane that re-pointed either single binding would satisfy one family
+ *  by breaking the other, and only a roster that names both catches it. */
+const FAMILY_2_ACCESSOR = 'yearStreamSeedOf(';
+const FAMILY_2_REROOTS = Object.freeze([
+  ['RS-16', 'src/domain/townMap/mapDress.js', 1],
+  ['RS-7', 'src/domain/traditions/politics.js', 1],
+  ['RS-8', 'src/domain/traditions/relations.js', 1],
+  ['RS-3', 'src/domain/worldPulse/generosityKernel.js', 1],
+  ['RS-9 (second argument)', 'src/domain/worldPulse/npcLadderKernel.js', 1],
+  ['RS-2', 'src/domain/worldPulse/pulseKernel.js', 1],
+  ['RS-5 (second binding)', 'src/domain/worldPulse/roadsKernel.js', 1],
+  ['RS-4 + RS-6', 'src/domain/worldPulse/traditionsKernel.js', 2],
+]);
+
+/** The three directories the DISPLAY-SURFACE RULE governs, and the one line allowed to name
+ *  the ledger inside them. A display surface may READ the epoch through the leaf accessor and
+ *  may NOT reach into `spatialLedgers.advanceEpoch` or compose an epoch segment of its own. */
+const DISPLAY_DIRS = Object.freeze(['src/components/', 'src/domain/display/', 'src/domain/townMap/']);
+const SANCTIONED_DISPLAY_LINE = "import { yearStreamSeedOf } from '../advanceEpochLedger.js';";
+
+/** Non-import, non-comment call lines of a symbol that DO NOT spell `yearBase:`. */
+function callsMissingYearBase(text, symbol) {
+  return text.split('\n')
+    .map((line) => line.trim())
+    .filter((line) => !COMMENT_LINE.test(line) && !/^import\b/.test(line) && line.includes(symbol))
+    .filter((line) => !/\byearBase\s*:/.test(line));
+}
+
+describe('EP-3B · the classification gate — every YEAR-anchored read is re-rooted', () => {
+  test('every YEAR-KEYED composition is fed by a module in the family-2 roster', () => {
+    // ⛔ THE ARM THAT CATCHES A YEAR-KEYED DRAW LEFT EPOCH-BLIND, and no behaviour test can:
+    // an epoch-blind draw is a perfectly valid draw. A year-keyed composition lives in one of
+    // two places — the module that READ the seed, or a module the seed was HANDED to — so the
+    // roster is checked against the union, resolved through the hand-off table rather than
+    // asserted in prose. Four of the seven composing modules never read state at all.
+    const composing = [...new Set(COMPOSITIONS
+      .filter(([, , , , cls]) => cls === 'YEAR-KEYED')
+      .map(([, file]) => file))].sort();
+    expect(composing.length, 'the year-keyed composition set is non-empty').toBeGreaterThan(0);
+    const rostered = new Set(FAMILY_2_REROOTS.map(([, file]) => file));
+    const fedByRoster = new Set(HAND_OFFS.filter(([from]) => rostered.has(from)).map(([, , to]) => to));
+    expect(
+      composing.filter((file) => !rostered.has(file) && !fedByRoster.has(file)),
+      'a YEAR-KEYED composition is neither in a re-rooted module nor handed a value from one:'
+      + ' it draws the SAME weather for every epoch, forever, and stays green everywhere else.',
+    ).toEqual([]);
+  });
+
+  test('every re-rooted module calls the family-2 accessor, the counted number of times', () => {
+    for (const [id, file, calls] of FAMILY_2_REROOTS) {
+      expect(callSitesIn(read(file), FAMILY_2_ACCESSOR), `${id} — ${file}`).toBe(calls);
+    }
+    // NON-VACUITY: the counter can return zero, so the greens above are measurements.
+    expect(callSitesIn('const s = somethingElse(worldState, year);', FAMILY_2_ACCESSOR)).toBe(0);
+    // …and it counts neither the import line nor a mention in prose.
+    expect(callSitesIn("import { yearStreamSeedOf } from '../advanceEpochLedger.js';", FAMILY_2_ACCESSOR)).toBe(0);
+    expect(callSitesIn(' * a comment naming yearStreamSeedOf(worldState, year)', FAMILY_2_ACCESSOR)).toBe(0);
+  });
+
+  test('the YEAR anchor reaches ONLY the year roster — the vice-versa arm', () => {
+    // The mirror of the tick arm above. A TICK-VARYING site re-rooted onto the YEAR anchor
+    // would freeze a per-tick draw for a whole lived year, which is just as wrong and just as
+    // invisible. ⚠ The leaf is excluded by NAME: it DEFINES both accessors, so a scan that
+    // did not exclude its own home would report its definition as a call site forever.
+    const yearCallers = ALL_FILES
+      .filter((f) => f !== LEDGER_LEAF && callSitesIn(read(f), FAMILY_2_ACCESSOR) > 0)
+      .sort();
+    expect(yearCallers, 'a module outside the year roster composes off the YEAR anchor')
+      .toEqual(FAMILY_2_REROOTS.map(([, file]) => file).sort());
+    // The exclusion is a real one, not a spelling: the leaf DOES carry the symbol.
+    expect(read(LEDGER_LEAF)).toContain(FAMILY_2_ACCESSOR);
+  });
+
+  test('J-EP-13 — every family-2 call declares its `yearBase`, and the detector can see a missing one', () => {
+    // ⛔ THE DEFECT THIS FORECLOSES. Two of the nine sites name a lived year ONE LOWER than
+    // the other seven (`floor(weeks / 52)`, no `+1`). A call that omitted `yearBase` would
+    // read a key that is NEVER PRESENT: the accessor returns the bare root, the composition
+    // still works, every dormancy pin stays green, and two of the nine draws are silently
+    // epoch-blind forever. The argument is defaultless in the type system; this is the arm
+    // that proves it is actually spelled at every live site.
+    const missing = ALL_FILES
+      .filter((f) => f !== LEDGER_LEAF)
+      .flatMap((f) => callsMissingYearBase(read(f), FAMILY_2_ACCESSOR).map((line) => `${f} :: ${line}`));
+    expect(missing, 'a family-2 call site omits `yearBase` — it will read a key that is never'
+      + ' present and draw epoch-blind while every other pin stays green').toEqual([]);
+    // NON-VACUITY, in both directions: the detector really does flag an omission…
+    expect(callsMissingYearBase('const s = yearStreamSeedOf(worldState, year, { base: raw });', FAMILY_2_ACCESSOR))
+      .toHaveLength(1);
+    // …and really does pass a declaration, including the zero-based one.
+    expect(callsMissingYearBase('const s = yearStreamSeedOf(w, y, { base: raw, yearBase: 0 });', FAMILY_2_ACCESSOR))
+      .toEqual([]);
+  });
+
+  test('THE DISPLAY-SURFACE SOURCE PIN — `advanceEpoch` reaches the view only through the leaf import', () => {
+    // ⛔ A display surface that reached into the ledger, or built its own epoch segment, would
+    // dress a winter the simulation never ran — and it would do it silently, because a
+    // plausible-looking severity is indistinguishable from the right one by eye. RS-16's
+    // re-root necessarily puts the leaf's name inside townMap/, so the pin is not "no
+    // mention" but "EXACTLY the sanctioned import line and nothing else".
+    // ⚠ CODE LINES ONLY, on this file's own stated convention: a comment cannot reach the
+    // ledger, and a trailing comment on a CODE line still counts — the safe direction.
+    const offenders = ALL_FILES
+      .filter((f) => DISPLAY_DIRS.some((dir) => f.startsWith(dir)))
+      .flatMap((f) => read(f).split('\n')
+        .map((line) => line.trim())
+        .filter((line) => !COMMENT_LINE.test(line))
+        .filter((line) => line.includes('advanceEpoch') && line !== SANCTIONED_DISPLAY_LINE)
+        .map((line) => `${f} :: ${line}`));
+    expect(offenders, 'a display surface names the advance-epoch ledger outside the one'
+      + ' sanctioned accessor import: direct ledger reads and local composition are forbidden').toEqual([]);
+    // NON-VACUITY: the sanctioned line really is present in exactly one display module, so
+    // the empty list above is a discrimination and not an empty corpus.
+    const sanctioned = ALL_FILES
+      .filter((f) => DISPLAY_DIRS.some((dir) => f.startsWith(dir)))
+      .filter((f) => read(f).includes(SANCTIONED_DISPLAY_LINE));
+    expect(sanctioned).toEqual(['src/domain/townMap/mapDress.js']);
   });
 });
 
@@ -595,9 +750,21 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // FIGURE: each of the eight wraps its existing expression on the SAME line, so the
     // seven read-bearing modules contribute exactly what they did before. That is why the
     // read-site census above is UNMOVED at twenty-two while this one grew by a leaf.
+    // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE B: 70/31 → 73/31, and the delta decomposes
+    // exactly with nothing left over. The FILE count is UNMOVED — slice B creates no module.
+    // The +3 LINES, measured per file rather than inferred:
+    //   pulseKernel.js      6 → 7   +1 — seam edit 7's line gains the read while edit 8's
+    //                                    line keeps the KEY, so one line became two
+    //   townMap/mapDress.js 6 → 8   +2 — two prose lines naming the `rngSeed &&` guard the
+    //                                    display-surface re-root must leave standing
+    //   traditions/politics 6 → 7   +1 — one prose line naming the identifier it re-roots
+    //   roadsKernel.js      8 → 7   −1 — rows 3 and 5 stopped interpolating `rngSeed` and
+    //                                    now read `yearSeed`; one prose line names it back
+    // NOT ONE RE-ROOTED SITE MOVED THIS FIGURE BY ITSELF: each wraps its existing expression
+    // on the SAME line, which is also why the read-site census above is unmoved at twenty-two.
     const hits = ALL_FILES.filter((f) => /rngSeed/.test(read(f)));
     const lines = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('rngSeed')).length, 0);
-    expect({ lines, files: hits.length }).toEqual({ lines: 70, files: 31 });
+    expect({ lines, files: hits.length }).toEqual({ lines: 73, files: 31 });
   });
 
   test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {

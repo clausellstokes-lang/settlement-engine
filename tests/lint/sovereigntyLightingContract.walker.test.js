@@ -4712,7 +4712,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
     // --porcelain` at measurement time listed exactly this stage's paths and nothing else,
     // so no other lane's uncommitted test files are charged to this row.
-    files: 2459, parked: 364, credited: 2095, titles: 20469, suiteTitles: 5734,
+    // ── RE-RECORDED 2026-08-16 BY EP STAGE FOUR (EP-3B), WITH ITS CAUSE MEASURED ─────
+    // 2,459/364/2,095/20,469/5,734 → 2,459/364/2,095/20,481/5,736. ⭐ ZERO NEW TEST FILES —
+    // the file, parked and credited counts are UNMOVED, and that is deliberate: the estate's
+    // test census sits at its pinned ceiling, so slice B extends the two files EP-3A already
+    // registered rather than minting a third. EP-3B lands the year anchor: the writer's
+    // `byYear` half, `yearStreamSeedOf`, seam edits 7 and 8, and the nine family-2 re-roots.
+    // Amended, already credited:
+    // tests/domain/advanceEpochStampSurvival.test.js gains the family-2 stamp-survival block
+    // (+7 titles, +1 suite title) — the nine year-keyed rows with per-row observed-call
+    // floors, the returned-world arm, J-EP-13's two-vocabulary pin, first-wins, the
+    // already-lived-year pin and the dark arm under four hostile seed inputs;
+    // tests/lint/entropyRootCensus.walker.test.js gains the family-2 classification gate
+    // (+5 titles, +1 suite title) and RE-AIMS one existing title rather than adding it
+    // (the slice-A "the YEAR-KEYED half is NOT re-rooted" arm became the tick-anchor
+    // exclusivity arm), so that file is +5 and not +6.
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files       +0  = no new file
+    //   credited    +0  = no new file
+    //   titles     +12 = 7 + 5, with the re-aimed title netting zero
+    //   suiteTitles +2 = 1 + 1
+    // PARKED IS UNCHANGED at 364: every title in both files is a literal, so door 3's reader
+    // recognises them statically.
+    // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
+    // --porcelain` at measurement time listed exactly this stage's paths and nothing else,
+    // so no other lane's uncommitted test files are charged to this row.
+    files: 2459, parked: 364, credited: 2095, titles: 20481, suiteTitles: 5736,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

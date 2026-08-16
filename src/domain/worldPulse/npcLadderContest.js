@@ -478,8 +478,12 @@ export function buildSupportGoal(patronGoal, patronNid, weeks, rungIndex) {
   };
 }
 
-/** The year (tick-invariant support-goal cadence bucket). @param {number} weeks @returns {number} */
-function yearOf(weeks) { return Math.floor(num(weeks, 0) / 52); }
+/** The year (tick-invariant support-goal cadence bucket). ⚠ EXPORTED FOR THE EPOCH ANCHOR
+ *  (EP-3 slice B): `npcLadderKernel.js` composes row 20's year-anchored seed and must name
+ *  the SAME year this label does, so the vocabulary has ONE home rather than two spellings
+ *  that agree today. It counts from ZERO — hence `yearBase: 0` at the accessor call.
+ *  @param {number} weeks @returns {number} */
+export function supportYearOf(weeks) { return Math.floor(num(weeks, 0) / 52); }
 
 // A monotone seat weight (higher seat ⇒ larger; only the RELATIVE value matters in a margin).
 const seatWeightOf = (/** @type {number} */ rungIndex, /** @type {number} */ rungCount) => Math.max(0, num(rungCount, 1) - num(rungIndex, 0));
@@ -493,6 +497,9 @@ const seatWeightOf = (/** @type {number} */ rungIndex, /** @type {number} */ run
  * bluff-exposure deposits (consumed by the statecraft pass). Pure; hash01-seeded.
  * @param {Object} a
  * @param {string} a.sid @param {number} a.weeks @param {number} a.tick @param {string} a.seed @param {string} a.townName
+ * @param {string} a.supportSeed ⚠ ROW 20's OWN YEAR-ANCHORED SEED (EP-3 slice B), composed by
+ *   the kernel from `supportYearOf(weeks)`. It is a SECOND value beside `seed`, never a
+ *   replacement: `seed` is TICK-anchored and rows 17/18/19/21 must keep reading it.
  * @param {Record<string, unknown>} a.worldState
  * @param {Record<string, import('./npcLadderKernel.js').ContestRec>} a.priorContests
  * @param {Record<string, import('./npcLadderKernel.js').LadderStanding>} a.npcs settled standings (post goal-lifecycle)
@@ -510,7 +517,7 @@ const seatWeightOf = (/** @type {number} */ rungIndex, /** @type {number} */ run
  */
 export function advanceContests(a) {
   const T = CONTEST_TUNING;
-  const { sid, weeks, tick, seed, townName, worldState, priorNpcs, nidMeta, goalOutcomes, remint, attributionWeight, memoryWeaveActive, now } = a;
+  const { sid, weeks, tick, seed, supportSeed, townName, worldState, priorNpcs, nidMeta, goalOutcomes, remint, attributionWeight, memoryWeaveActive, now } = a;
   /** @type {Record<string, import('./npcLadderKernel.js').LadderStanding>} */
   const work = { ...a.npcs };
   const mutate = (/** @type {string} */ nid, /** @type {(st: import('./npcLadderKernel.js').LadderStanding) => import('./npcLadderKernel.js').LadderStanding} */ fn) => {
@@ -658,7 +665,7 @@ export function advanceContests(a) {
     /** @type {Set<string>} contestants of still-live contests — never pull them into a support tie */
     const liveContestantNids = new Set();
     for (const id of Object.keys(contests)) { const c = contests[id]; if (c && c.resolvedWeek == null) { liveContestantNids.add(c.a.nid); liveContestantNids.add(c.b.nid); } }
-    convertSupporters({ work, mutate, npcs: a.npcs, nidMeta, sid, seed, weeks, liveContestantNids });
+    convertSupporters({ work, mutate, npcs: a.npcs, nidMeta, sid, supportSeed, weeks, liveContestantNids });
   }
 
   // ── GENESIS (§8 D-4a) — pair settled primaries into new contests (caps + engaged-guard). ──
@@ -763,11 +770,12 @@ function driveSupportGoals(a) {
  *    mutate: (nid: string, fn: (st: import('./npcLadderKernel.js').LadderStanding) => import('./npcLadderKernel.js').LadderStanding) => void,
  *    npcs: Record<string, import('./npcLadderKernel.js').LadderStanding>,
  *    nidMeta: Map<string, { rungIndex: number }>,
- *    sid: string, seed: string, weeks: number, liveContestantNids: Set<string> }} a */
+ *    sid: string, supportSeed: string, weeks: number,
+ *    liveContestantNids: Set<string> }} a */
 function convertSupporters(a) {
   const T = CONTEST_TUNING;
-  const { work, mutate, npcs, nidMeta, sid, seed, weeks, liveContestantNids } = a;
-  const year = yearOf(weeks);
+  const { work, mutate, npcs, nidMeta, sid, supportSeed, weeks, liveContestantNids } = a;
+  const year = supportYearOf(weeks);
   /** @type {Set<string>} ≤1 supporter per patron goal (pre-seeded with existing ties) */
   const supportedPatrons = new Set();
   for (const nid of Object.keys(work)) { const g = work[nid].goal; if (g && g.supportOf) supportedPatrons.add(String(g.supportOf)); }
@@ -784,7 +792,10 @@ function convertSupporters(a) {
       patronNid = p.nid; break;
     }
     if (!patronNid) continue;
-    if (hash01(`${seed}|ladder-support:${sid}:${nid}:${year}`) >= T.SUPPORT_CONVERT_P) continue;
+    // ROW 20 — THE ONLY YEAR-KEYED DRAW IN THIS MODULE, and the only one that reads
+    // `supportSeed`. Every other draw in this file keeps the TICK-anchored `seed`, which is
+    // why this pass takes its own argument instead of the enclosing one.
+    if (hash01(`${supportSeed}|ladder-support:${sid}:${nid}:${year}`) >= T.SUPPORT_CONVERT_P) continue;
     const meta = nidMeta.get(nid) || { rungIndex: 0 };
     const patronGoal = (work[patronNid] || npcs[patronNid]).goal;
     mutate(nid, (s) => ({ ...s, goal: buildSupportGoal(/** @type {import('./npcLadderKernel.js').LadderGoal} */ (patronGoal), patronNid, weeks, meta.rungIndex) }));

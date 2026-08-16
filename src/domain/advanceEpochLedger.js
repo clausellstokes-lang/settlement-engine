@@ -27,8 +27,18 @@
  *
  *   worldState.spatialLedgers.advanceEpoch = {
  *     latest: { tick: <the tick this stamp was written at>, epoch: '<epoch>' },  // slice A
- *     // byYear: { '<canonical 1-based year>': '<epoch>' },                      // slice B
+ *     byYear: { '<canonical 1-based year>': '<epoch>' },                         // slice B
  *   }
+ *
+ * ⭐⭐ THE TWO HALVES ANSWER TWO DIFFERENT QUESTIONS AND NEITHER SUBSTITUTES FOR THE OTHER.
+ * `latest` is THIS TICK's stamp and is what a TICK-VARYING draw re-roots on; `byYear` is the
+ * MAP OF LIVED YEARS and is what a YEAR-KEYED draw re-roots on. The year map is FIRST-WINS:
+ * the epoch of the advance that FIRST ENTERED a year is the epoch that year keeps, forever,
+ * until an undo un-lives it. That is what makes two ticks of the same lived year read the
+ * same winter, and it is why a mid-year tick leaves `byYear` byte-unchanged AND re-using its
+ * own object reference. ⚠ IT DOES NOT LEAVE THE WORLD'S REFERENCE UNCHANGED — a lit tick
+ * always rewrites `latest`, so a pin asserting world-reference stability would red a correct
+ * build.
  *
  * ⭐⭐ WHY `latest` IS NOT A FOURTH FLAG-DARK LEAK SURFACE, and it is closed BY CONSTRUCTION
  * rather than by a fourth flag read. `latest` carries the tick it was written at, and
@@ -43,8 +53,15 @@
 
 import { getSpatialLedger, setSpatialLedger } from './spatial/spatialLedgerAccess.js';
 import { epochSuffix } from '../kernel/prng.js';
+// ⚠ THE CALENDAR'S OWN YEAR FUNCTION, IMPORTED RATHER THAN RE-DERIVED. A local
+// `Math.floor(weeks / 52) + 1` would be a SECOND home for the fifty-two-week year, and the
+// estate's one time truth is this function beside INTERVAL_WEEKS. The edge costs nothing in
+// any closure this leaf is reached from: `seasons.js` already imports the same symbol from
+// the same module and is already imported by every consumer of this leaf that is not itself
+// inside `worldPulse/` (measured, `townMap/mapDress.js`).
+import { seasonForTick } from './worldPulse/worldState.js';
 
-/** @typedef {{ latest?: { tick?: number, epoch?: string } }} AdvanceEpochLedger */
+/** @typedef {{ latest?: { tick?: number, epoch?: string }, byYear?: Record<string, string> }} AdvanceEpochLedger */
 
 /** The ledger's namespace key inside `spatialLedgers`. One spelling, one home. */
 const LEDGER_KEY = 'advanceEpoch';
@@ -76,14 +93,32 @@ function asObject(/** @type {unknown} */ value) {
  * strictly worse than the same defect at the pulse record because this one creates a
  * namespace that was not there.
  *
+ * ⛔ FIRST-WINS ON `byYear`, AND IT IS THE WHOLE CORRECTNESS OF THE YEAR ANCHOR. A year that
+ * has already been entered keeps the epoch it was entered under, and the prior map object is
+ * RE-USED BY REFERENCE rather than rebuilt — so no key order can drift and no lived year is
+ * repainted by a later tick of the same year. A single advance that crosses TWO calendar
+ * years therefore leaves TWO rows carrying the SAME epoch, which is correct on the
+ * directive's own terms and is why `byYear`'s row count is a DECLARED NON-INVARIANT against
+ * `pulseHistory`'s length rather than a leak.
+ *
+ * ⚠ ONE WRITE, NOT TWO. Both halves land in the SAME `setSpatialLedger` call, so the
+ * single-writer source scan still sees exactly one write site in `src`.
+ *
  * @param {Record<string, unknown>} worldState the world the calendar advance just produced
  * @param {string|null} epochTerm the FLAG-GATED advance epoch, or null
  * @returns {Record<string, unknown>} the stamped world, or the IDENTICAL reference when dark
  */
 export function stampAdvanceEpochYear(worldState, epochTerm) {
   if (!epochTerm) return worldState;
-  const tick = num(asObject(worldState).tick, 0);
-  return setSpatialLedger(worldState, LEDGER_KEY, { latest: { tick, epoch: String(epochTerm) } });
+  const world = asObject(worldState);
+  const tick = num(world.tick, 0);
+  const year = String(seasonForTick(num(asObject(world.calendar).elapsedWeeks, 0)).year);
+  const prior = /** @type {AdvanceEpochLedger|undefined} */ (getSpatialLedger(worldState, LEDGER_KEY));
+  const priorByYear = prior?.byYear || null;
+  const byYear = (priorByYear && priorByYear[year] != null)
+    ? priorByYear
+    : { ...(priorByYear || {}), [year]: String(epochTerm) };
+  return setSpatialLedger(worldState, LEDGER_KEY, { latest: { tick, epoch: String(epochTerm) }, byYear });
 }
 
 /**
@@ -129,4 +164,61 @@ export function tickStreamSeedOf(worldState, { base }) {
   // keeps a dark `||`-chain site — where the raw value's TYPE decides the branch — identical.
   if (!latest || latest.tick !== num(asObject(worldState).tick, -1)) return base;
   return `${base}${epochSuffix(latest.epoch)}`;
+}
+
+/**
+ * THE FAMILY-2 ACCESSOR. Returns the calling site's OWN seed expression, with the epoch of
+ * the advance that FIRST ENTERED the named year appended when — and only when — the world
+ * carries a `byYear` row for it.
+ *
+ * ⭐ THERE IS NO TICK GATE HERE AND NONE IS WANTED, WHICH IS THE EXACT OPPOSITE OF THE
+ * FAMILY-1 RULE, DELIBERATELY. A year-keyed draw must read the SAME weather on every tick of
+ * a lived year, so the row has to outlive the tick that wrote it. Dark identity is earned a
+ * different way: a dark tick writes no row at all, and a year lived BEFORE the flag was ever
+ * lit has no row either — so lighting the flag on a world with history repaints NOTHING it
+ * already lived, and an undo that un-lives a year takes that year's row with it.
+ *
+ * ⛔⛔ `yearBase` IS REQUIRED AND HAS NO DEFAULT, AND THAT IS THE J-EP-13 DEFECT MADE
+ * UNBUILDABLE. Two of the nine year-keyed sites name a lived year with a number ONE LOWER
+ * than the other seven (`floor(weeks / 52)` rather than the calendar's 1-based year). A
+ * default would let those two sites compile against a key that is NEVER PRESENT: the
+ * accessor would return the bare root, the composition would still work, every dormancy pin
+ * would stay green, and two of the nine draws would be silently epoch-blind forever. The
+ * argument is therefore spelled at every call site, and the census walker asserts that it is.
+ *
+ * ⛔ `base` IS THE SITE'S OWN COERCION, HANDED IN — the same correction §3's family-1 note
+ * carries, for the same reason: §3b.3 requires each site's absent-seed rendering reproduced
+ * CHARACTER-FOR-CHARACTER, and a re-implemented `absent` fallback cannot do it. The dark arm
+ * returns the argument BY IDENTITY — value and type — so a site whose guard branches on the
+ * raw value (`townMap/mapDress.js` suppresses the draw entirely on a null seed) behaves
+ * identically rather than gaining a draw this estate does not make today.
+ *
+ * ⚠ ITS `worldState` IS NULLABLE WHERE THE FAMILY-1 ACCESSOR'S IS NOT, and that asymmetry is
+ * a measured fact about the callers rather than an oversight. Family 2 is the only family
+ * with a DISPLAY-SURFACE consumer (`townMap/mapDress.js`), and a dresser is legitimately
+ * handed a world-or-null — it renders a settlement that may have no campaign behind it. The
+ * signature therefore matches `getSpatialLedger`'s own, which is total on a null world; the
+ * tick accessor is reached only from engine stages that always hold one.
+ *
+ * @template T
+ * @param {Record<string, unknown> | null | undefined} worldState the world the CALLING STAGE
+ *   received, or null on a display surface with no campaign behind it
+ * @param {number} year the year AS THIS SITE NAMES IT, in the site's own vocabulary
+ * @param {{ base: T, yearBase: number }} opts `base` — the site's OWN seed expression;
+ *   `yearBase` — the first year's number in this site's vocabulary (1 for the calendar's
+ *   `seasonForTick(...).year`, 0 for a `floor(weeks / 52)` site). Both REQUIRED, no defaults.
+ * @returns {T | string} `base` verbatim, or `` `${base}${epochSuffix(epoch)}` `` when the
+ *   named year carries a row
+ */
+export function yearStreamSeedOf(worldState, year, { base, yearBase }) {
+  const ledger = /** @type {AdvanceEpochLedger|undefined} */ (getSpatialLedger(worldState, LEDGER_KEY));
+  const byYear = ledger?.byYear || null;
+  // ABSENT ⇒ VERBATIM. Returning `base` itself (not a re-stringified copy) is what keeps a
+  // dark site whose own guard reads the raw value's TYPE behaving exactly as it does today.
+  if (!byYear) return base;
+  // THE VOCABULARY TRANSLATION, and it is the only arithmetic in this leaf: the map is keyed
+  // on the CANONICAL 1-based year, so a site counting from `yearBase` adds `1 - yearBase`.
+  const epoch = byYear[String(num(year, 0) + (1 - yearBase))];
+  if (epoch == null) return base;
+  return `${base}${epochSuffix(epoch)}`;
 }

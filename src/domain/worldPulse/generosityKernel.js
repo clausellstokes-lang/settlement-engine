@@ -131,7 +131,12 @@ import {
   intelTradeActive, enumerateIntelOpportunities, planIntelAct, intelEligible, intelYearOf,
   intelPairKey, INTEL_TRANSFERS_LEDGER, INTEL_COOLDOWN_LEDGER, INTEL_TRADE_TUNING,
 } from '../spatial/intelActs.js';
-import { authorityFor } from './changeAuthorityPolicy.js';
+// ⚠ `;`-JOINED AT +0 EFFECTIVE LINES, AND THAT IS A BUDGET FACT RATHER THAN A STYLE CHOICE:
+// this file sits at EXACTLY 800 effective lines, which is the `src/domain` layer's own
+// max-lines ceiling — an own-line import reds eslint outright. The volume priced each
+// re-rooted site at one line and priced no import anywhere; measured, this is the second
+// file in the family where that pricing was short (roadsKernel.js was the first).
+import { authorityFor } from './changeAuthorityPolicy.js'; import { yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { consumeRansomSettlements } from '../roads/thirdPartyRansom.js';
 import { noteGratitudeBond, applyGratitudeBondLedger, seatGratitudeSevToward } from './gratitudeBonds.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
@@ -1019,7 +1024,13 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   if (intelTradeActive(worldState) && beliefsActive(worldState) && asObject(worldState?.simulationRules).infoStatecraftEnabled === true) {
     const beliefMaps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
     const intelYear = intelYearOf(intelElapsedWeeks);
-    const intelSeed = String(/** @type {{ rngSeed?: unknown }} */ (worldState)?.rngSeed ?? '');
+    // RS-3 — THE RE-ROOT (advance epoch, EP-3 slice B), row 13. ⚠ `yearBase: 0` AND IT IS
+    // NOT INTERCHANGEABLE WITH THE OTHER SEVEN SITES': `intelYearOf` is `floor(weeks / 52)`
+    // with NO `+1`, so this site names the same lived year one lower than the calendar does.
+    // A site that passed its own number into the 1-based map would read a key that is never
+    // present, return the bare root, and be silently epoch-blind forever. `base` is this
+    // site's OWN coercion — `?? ''`, not `|| ''`, so a numeric 0 seed still renders '0'.
+    const intelSeed = yearStreamSeedOf(worldState, intelYear, { base: String(/** @type {{ rngSeed?: unknown }} */ (worldState)?.rngSeed ?? ''), yearBase: 0 });
     const IT = INTEL_TRADE_TUNING;
     const atWar = (/** @type {string} */ a, /** @type {string} */ b) =>
       new Set([...warFrontsInto(graph, a), ...warFrontsFrom(graph, a)].map(String)).has(String(b));

@@ -40,6 +40,7 @@
 import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { reexpressed } from './politics.js';
+import { yearStreamSeedOf } from '../advanceEpochLedger.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
 
@@ -169,7 +170,9 @@ function applyImposition({ recs, worldState, sid, year, localTierBand, tradition
   if (recs.some((r) => String(asObject(asObject(r).suppressedBy).overlordId) === overlordId)) {
     return { recs, changed: false, imposedOverlordId: null };
   }
-  const rngSeed = String(asObject(worldState).rngSeed || '');
+  // RS-8 — THE RE-ROOT (advance epoch, EP-3 slice B), row 8. Same hand-down as RS-7: the
+  // `year` arrives from traditionsKernel's `clock.year`, so `yearBase` is 1.
+  const rngSeed = yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 });
   if (!createPRNG(`${rngSeed}::tradition:impose:${sid}:${year}`).chance(IMPOSE_CHANCE)) {
     return { recs, changed: false, imposedOverlordId: null };
   }

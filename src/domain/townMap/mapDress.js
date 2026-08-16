@@ -28,6 +28,13 @@
  */
 
 import { seasonalSeverityFor } from '../worldPulse/seasons.js';
+// ⛔ THE ONE SANCTIONED LEAF IMPORT ON ANY DISPLAY SURFACE, and the source pin in
+// tests/lint/entropyRootCensus.walker.test.js asserts it is the only mention of
+// `advanceEpoch` anywhere under src/components/, src/domain/display/ or src/domain/townMap/.
+// A display surface may READ the epoch through this accessor and may NOT reach into the
+// ledger or compose a key of its own — a dresser that built its own epoch segment would
+// dress a winter the simulation never ran.
+import { yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { settlementWarStatus } from '../display/warStatus.js';
 import { fabricScarsOf, fabricRebirthsOf } from './fabricRead.js';
 import { readMapEdits, readSeasonOverride } from './mapEdits.js';
@@ -133,8 +140,14 @@ export function resolveMapDress(settlement, worldState, regionalGraph = null) {
   const rngSeed = worldState && typeof worldState.rngSeed === 'string' ? worldState.rngSeed : null;
   const year = calendar && Number.isFinite(calendar.year) ? Number(calendar.year) : null;
   const settlementId = settlement && settlement.id != null ? settlement.id : null;
+  // RS-16 — THE RE-ROOT (advance epoch, EP-3 slice B), row 1 at VIEW TIME. ⚠ THE RE-ROOT IS
+  // AT THE CALL AND NOT AT THE BINDING, DELIBERATELY: the `rngSeed &&` guard below must keep
+  // testing the RAW typeof-guarded read, because an absent seed SUPPRESSES the draw entirely
+  // here and an accessor return in that slot could make the guard pass on a composed string.
+  // Inside the ternary `rngSeed` is a non-empty string by construction, so this re-root
+  // creates no draw the estate does not already make. The map dresses the winter the sim ran.
   const severity = (season && rngSeed && year != null && settlementId != null)
-    ? seasonalSeverityFor(rngSeed, year, settlementId)
+    ? seasonalSeverityFor(yearStreamSeedOf(worldState, year, { base: rngSeed, yearBase: 1 }), year, settlementId)
     : null;
 
   return { season, severity, state, festival };

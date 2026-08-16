@@ -77,7 +77,7 @@
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
-import { tickStreamSeedOf } from '../advanceEpochLedger.js';
+import { tickStreamSeedOf, yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { isOffStage } from '../roads/state.js';
 import { npcId } from './npcAgency.js';
 import { memoryHorizonMultiplierOf, memoryWeaveActive } from './relationshipEvolution.js';
@@ -95,7 +95,7 @@ import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar }
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
 import { freshLieExposureFor, hasNpcCredibilityLedger, npcCredibilityActive } from './npcCredibility.js';
-import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
+import { advanceContests, contestChallengeInputs, supportYearOf } from './npcLadderContest.js';
 import { mintFactionPairIncident } from './factionPairLedger.js';
 import { authorityTransferEpochFor, previousGovernmentLabelsOf } from '../rulingPower.js';
 // coherence-14: the ruling-bloc read (a PURE, dormant⇒null read; settlementPolitics imports only
@@ -539,13 +539,13 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const causalItem = snapshot?.byId?.get?.(sid) || itemById.get(sid) || null;
     const bandMult = memoryHorizonMultiplierOf(/** @type {Parameters<typeof memoryHorizonMultiplierOf>[0]} */ (/** @type {unknown} */ (s)));
     const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
-    // RS-9 — THE RE-ROOT (advance epoch, EP-3 slice A), and ⚠ THE SPLIT READ: this ONE read
-    // is handed cross-module to BOTH ladder consumers and feeds family-1 rows 17/18/19/21
-    // AND family-2 row 20. Slice A takes the TICK anchor only; row 20 stays epoch-blind
-    // until slice B adds its own separately-named year-anchored argument beside this — an
-    // implementer who re-roots this once and calls the read closed ships row 20 blind.
-    // `base` is this site's OWN coercion: `String(v || '')` renders 0 as '', not '0'.
-    const seed = tickStreamSeedOf(worldState, { base: String(asObject(worldState).rngSeed || '') });
+    // RS-9 — ⚠ THE SPLIT READ, NOW CLOSED ON BOTH SIDES (advance epoch, EP-3 slices A + B).
+    // This ONE read is handed cross-module to BOTH ladder consumers: `seed` carries the TICK
+    // anchor for family-1 rows 17/18/19/21, and `supportSeed` carries the YEAR anchor for
+    // family-2 row 20 ALONE — a SECOND, separately-named argument rather than a re-point,
+    // because one value cannot satisfy both. ⚠ `yearBase: 0` — `supportYearOf` is the
+    // contest module's own `floor(weeks / 52)`, imported so the two can never drift apart.
+    const seed = tickStreamSeedOf(worldState, { base: String(asObject(worldState).rngSeed || '') }); const supportSeed = yearStreamSeedOf(worldState, supportYearOf(weeks), { base: String(asObject(worldState).rngSeed || ''), yearBase: 0 });
     // npcId → npc object (for the goal lens); the SAME key the growth layer computes.
     /** @type {Map<string, Record<string, unknown>>} */
     const npcByNid = new Map();
@@ -875,7 +875,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         return meta ? mintGoal({ npc: meta.npc, faction: meta.faction, rungIndex: meta.rungIndex, sid, frame: goalFrame, item: causalItem, weeks }) : null;
       };
       const res = advanceContests({
-        sid, weeks, tick: now2, seed, townName, worldState,
+        sid, weeks, tick: now2, seed, supportSeed, townName, worldState,
         priorContests: prior.contests || {}, npcs, priorNpcs: prior.npcs, nidMeta, goalOutcomes,
         remint, attributionWeight, memoryWeaveActive: memWeave, now,
       });

@@ -60,7 +60,7 @@ import { atWarWithIdx, relationshipTypeBetweenIdx, tradeNeighbourIndex, occupied
 // import would red eslint and a shrink would red sizeBaseline. The kernel seam bought the
 // train's ONE declared ratchet-up (J-EP-11) and it is spent, so the re-root pays for itself
 // here the same way the seam did: token-level, on an existing line.
-import { seasonForTick } from './worldState.js'; import { tickStreamSeedOf } from '../advanceEpochLedger.js';
+import { seasonForTick } from './worldState.js'; import { tickStreamSeedOf, yearStreamSeedOf } from '../advanceEpochLedger.js';
 import {
   namedPersonArrivalTick,
   namedPersonLegTicks,
@@ -372,7 +372,14 @@ function advanceLitRoads(args) {
   // `a.rngSeed`, which is why the receivers need no edit at all. `base` is this site's OWN
   // coercion, unmoved — `str()` renders 0 as '0', which `|| ''` would not — so the dark arm
   // returns it by identity and the composed key is character-for-character today's.
-  const rngSeed = tickStreamSeedOf(worldState, { base: str(asObject(worldState).rngSeed) });
+  // ⭐ AND THE SECOND BINDING (EP-3 slice B) — RS-5 IS A SPLIT READ AND `rngSeed` IS NEVER
+  // RE-POINTED. Rows 3 and 5 are YEAR-KEYED (road cadence and a stay-or-go verdict, both
+  // keyed on `${year}`), so they take the year anchor while rows 2/4 and the three handed
+  // down to seaRoads/thirdPartyRansom keep the tick anchor above. Re-pointing the one
+  // binding would silently move five compositions onto the wrong anchor. `;`-JOINED AT +0:
+  // this file sits at EXACTLY its frozen 838 effective lines, tolerance-zero in both
+  // directions — an own-line binding reds eslint and a shrink reds sizeBaseline.
+  const rngSeed = tickStreamSeedOf(worldState, { base: str(asObject(worldState).rngSeed) }); const yearSeed = yearStreamSeedOf(worldState, year, { base: str(asObject(worldState).rngSeed), yearBase: 1 });
 
   const items = Array.isArray(asObject(args.snapshot).settlements) ? /** @type {Array<Record<string, unknown>>} */ (asObject(args.snapshot).settlements) : [];
   const itemById = new Map(items.map((it) => [str(it.id), it]));
@@ -924,7 +931,7 @@ function advanceLitRoads(args) {
       if (w < ROADS_TUNING.MIN_TRAVEL_WEIGHT) continue; // minor/nameless never travel
       if (num(cadence[npcKey], -Infinity) >= year) continue; // already travelled this year
       // The tick-invariant world-seed cadence draw (§1 law 9): fires JOURNEY_CHANCE/NPC-year.
-      const fork = createPRNG(`${rngSeed}::roads:cadence:${npcKey}:${year}`);
+      const fork = createPRNG(`${yearSeed}::roads:cadence:${npcKey}:${year}`);
       const r1 = fork.random();
       const r2 = fork.random();
       if (r1 >= ROADS_TUNING.JOURNEY_CHANCE) continue; // won't travel this year (idempotent)
@@ -1003,7 +1010,7 @@ function advanceLitRoads(args) {
         continue;
       }
       const legWeeks = roadLegWeeks(digest, sid, c.dest, season);
-      const stayFork = createPRNG(`${rngSeed}::roads:stay:${sid}:${c.npcKey}:${year}`);
+      const stayFork = createPRNG(`${yearSeed}::roads:stay:${sid}:${c.npcKey}:${year}`);
       const stayWeeks = ROADS_TUNING.STAY_BASE_WEEKS + Math.round(stayFork.random());
       // §11b ESCORT REFINEMENT (all purposes): the home power+influence ranking scales the escort
       // weight alongside military quality — FROZEN AT DISPATCH onto escort01 (the guards who left
