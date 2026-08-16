@@ -11,6 +11,7 @@ import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { ensureWorldState, advanceWorldCalendar, pulseIdFor, seasonForTick, appendPulseHistoryWithProvenance } from './provenanceKernel.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { stampAdvanceEpochYear } from '../advanceEpochLedger.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
@@ -308,7 +309,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // this re-read the kernel would compose an epoch-bearing seed in a flag-dark world.
   // Every flag-driven materialization keys on `epochTerm` and never on the raw argument.
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}${epochSuffix(epochTerm)}`);
-  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };
+  // ⭐ SEAM EDIT 9 — THE STAMP, `;`-joined onto the line at which THE CALENDAR MOVES, at
+  // +0 lines. The ordering is the point and it is measured, not assumed: a year is entered
+  // by the calendar advance and by nothing else, so the only state that can carry the stamp
+  // is the state that advance produced, and the only moment it can be written is between
+  // that advance and the first draw keyed on the new tick. Writing it EARLIER is impossible
+  // (the tick does not exist yet); writing it LATER means the tick that entered the year
+  // draws epoch-free while every later stage of the same tick draws epoch-bearing — not a
+  // smaller version of the feature but its inversion. Dark, the stamp returns the identical
+  // reference and no `spatialLedgers` namespace is ever created.
+  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm);
   // M10a — CL-3 HOLD-THEN-EXPIRE: retire any actor-initiated-major proposal (a held
   // war declaration / coup) that has waited ACTOR_MAJOR_HOLD_WEEKS with no DM word —
   // the actor stands down (expire-to-decline). Byte-invisible for legacy/default

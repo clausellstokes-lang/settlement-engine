@@ -72,6 +72,7 @@ import { formatCount } from '../formatNumber.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
 import { advanceDemographicMigration } from './demographicsMigration.js';
 import { advanceDemographicPlans } from './demographicsPlans.js';
+import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { demographicNewsEntries } from './demographicsHerald.js';
 import {
   demographicsActive,
@@ -389,7 +390,12 @@ export function advanceDemographics({
     satelliteLaneLit: satelliteLaneLit === true,
     digest: digest || null,
     satelliteCaps: satelliteCaps || {},
-    realmId: typeof asObject(worldState).rngSeed === 'string' ? String(asObject(worldState).rngSeed) : 'realm',
+    // RS-10 — THE RE-ROOT (advance epoch, EP-3 slice A); this is where the epoch enters the
+    // demographics family, upstream of row 22. `base` is this site's OWN coercion and its
+    // guard is a TYPEOF-STRING test, so a NUMERIC seed renders 'realm' here — which the
+    // accessor could not have reproduced from an `absent` fallback alone, and which the
+    // dormancy suite asserts as a literal.
+    realmId: tickStreamSeedOf(worldState, { base: typeof asObject(worldState).rngSeed === 'string' ? String(asObject(worldState).rngSeed) : 'realm' }),
   });
 
   return {

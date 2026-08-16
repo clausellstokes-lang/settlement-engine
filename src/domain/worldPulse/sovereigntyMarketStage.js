@@ -92,6 +92,7 @@
  * reads below the gate, zero receipts, zero draws.
  */
 import { hash01 } from '../region/contestMath.js';
+import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { beliefRecord } from './beliefMap.js';
 import {
   densityCeilingOf, effectiveBoundOf, foodCapacityOf, pressureOf,
@@ -429,7 +430,12 @@ export function advanceSovereigntyMarket({
     || recordOf(recordOf(items.find((it) => String(recordOf(it).id) === id)).settlement);
   const ids = items.map((it) => String(recordOf(it).id)).filter(Boolean).sort(codepoint);
   const plans = plansLedgerOf(worldState);
-  const realmId = text(worldState.rngSeed) || 'realm';
+  // RS-12 — THE RE-ROOT (advance epoch, EP-3 slice A), feeding row 24's keyed buyer race.
+  // `base` is this site's OWN COMPLETE coercion INCLUDING its fallback: `text()` returns ''
+  // for anything that is not a non-empty string, so an EMPTY-STRING seed reads 'realm' here
+  // and must keep doing so — wrapping the whole expression is what preserves that, and
+  // wrapping only `text(...)` would have made a lit empty-seed realm read '::epoch:…'.
+  const realmId = tickStreamSeedOf(worldState, { base: text(worldState.rngSeed) || 'realm' });
 
   /** @type {Array<Record<string, unknown>>} */
   const evidence = [];

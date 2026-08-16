@@ -54,7 +54,13 @@ import { RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetwork.js';
 // scans and the per-NPC tradeNeighbours rescan). Byte-identical drop-ins for the flagged sites; the
 // per-mission war-reads elsewhere keep the raw embassyHazard helpers.
 import { atWarWithIdx, relationshipTypeBetweenIdx, tradeNeighbourIndex, occupiedByIndex } from './tickIndices.js';
-import { seasonForTick } from './worldState.js';
+// ⚠ THE ADVANCE-EPOCH LEAF IMPORT IS `;`-JOINED ONTO THE LINE ABOVE, AT +0 EFFECTIVE LINES,
+// and that is a budget fact rather than a style choice: this file sits at EXACTLY its frozen
+// 838 in scripts/.size-baseline.json, which is tolerance-zero in BOTH directions — a own-line
+// import would red eslint and a shrink would red sizeBaseline. The kernel seam bought the
+// train's ONE declared ratchet-up (J-EP-11) and it is spent, so the re-root pays for itself
+// here the same way the seam did: token-level, on an existing line.
+import { seasonForTick } from './worldState.js'; import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import {
   namedPersonArrivalTick,
   namedPersonLegTicks,
@@ -361,7 +367,12 @@ function advanceLitRoads(args) {
   const year = num(clock.year, 1);
   const weekOfYear = num(clock.weekOfYear, 1);
   const season = clock.season;
-  const rngSeed = str(asObject(worldState).rngSeed);
+  // RS-5 — THE RE-ROOT (advance epoch, EP-3 slice A). This ONE read feeds five compositions:
+  // rows 2 and 4 here, and rows 10/11/12 handed on to thirdPartyRansom.js and seaRoads.js as
+  // `a.rngSeed`, which is why the receivers need no edit at all. `base` is this site's OWN
+  // coercion, unmoved — `str()` renders 0 as '0', which `|| ''` would not — so the dark arm
+  // returns it by identity and the composed key is character-for-character today's.
+  const rngSeed = tickStreamSeedOf(worldState, { base: str(asObject(worldState).rngSeed) });
 
   const items = Array.isArray(asObject(args.snapshot).settlements) ? /** @type {Array<Record<string, unknown>>} */ (asObject(args.snapshot).settlements) : [];
   const itemById = new Map(items.map((it) => [str(it.id), it]));

@@ -77,6 +77,7 @@
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { isOffStage } from '../roads/state.js';
 import { npcId } from './npcAgency.js';
 import { memoryHorizonMultiplierOf, memoryWeaveActive } from './relationshipEvolution.js';
@@ -538,7 +539,13 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const causalItem = snapshot?.byId?.get?.(sid) || itemById.get(sid) || null;
     const bandMult = memoryHorizonMultiplierOf(/** @type {Parameters<typeof memoryHorizonMultiplierOf>[0]} */ (/** @type {unknown} */ (s)));
     const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
-    const seed = String(asObject(worldState).rngSeed || '');
+    // RS-9 — THE RE-ROOT (advance epoch, EP-3 slice A), and ⚠ THE SPLIT READ: this ONE read
+    // is handed cross-module to BOTH ladder consumers and feeds family-1 rows 17/18/19/21
+    // AND family-2 row 20. Slice A takes the TICK anchor only; row 20 stays epoch-blind
+    // until slice B adds its own separately-named year-anchored argument beside this — an
+    // implementer who re-roots this once and calls the read closed ships row 20 blind.
+    // `base` is this site's OWN coercion: `String(v || '')` renders 0 as '', not '0'.
+    const seed = tickStreamSeedOf(worldState, { base: String(asObject(worldState).rngSeed || '') });
     // npcId → npc object (for the goal lens); the SAME key the growth layer computes.
     /** @type {Map<string, Record<string, unknown>>} */
     const npcByNid = new Map();

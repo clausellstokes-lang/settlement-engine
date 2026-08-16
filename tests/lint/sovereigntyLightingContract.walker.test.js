@@ -4688,7 +4688,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
     // --porcelain` at measurement time listed exactly this wave's twelve paths and nothing
     // else, so no other lane's uncommitted test files are charged to this row.
-    files: 2456, parked: 364, credited: 2092, titles: 20439, suiteTitles: 5725,
+    // ── RE-RECORDED 2026-08-16 BY EP STAGE THREE (EP-2 + EP-3A), WITH ITS CAUSE MEASURED ──
+    // 2,456/364/2,092/20,439/5,725 → 2,459/364/2,095/20,469/5,734. THREE NEW TEST FILES PLUS
+    // ONE AMENDED, ALREADY-CREDITED ONE, and nothing else. EP-2 lands the fork semantics (the
+    // paused-cursor epoch, the resume re-thread, the preview and forecast threads) and EP-3A
+    // the ledger writer, the stamp and the eight family-1 re-roots; no rule here widened or
+    // narrowed and no existing file changed shape.
+    // New: tests/store/advanceEpochForkSemantics.test.js (11 titles, 4 suite titles) — the
+    // resume re-thread, fence 5's store half, the preview projection and the undo table;
+    // tests/domain/advanceEpochStampSurvival.test.js (12 titles, 3 suite titles) — the
+    // family-1 stamp-survival pin, the two-epoch pin and the M3 dormancy arm;
+    // tests/lint/advanceEpochSingleWriter.walker.test.js (4 titles, 1 suite title) — the L4
+    // single-writer source scan. Amended, already credited:
+    // tests/lint/entropyRootCensus.walker.test.js gains the classification gate (+3 titles,
+    // +1 suite title) — the arm that reds a silently dropped re-root.
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files      +3  = the three new files
+    //   credited   +3  = all three are CREDITED, not parked
+    //   titles     +30 = 11 + 12 + 4 + 3, closing with nothing left over
+    //   suiteTitles +9 = 4 + 3 + 1 + 1
+    // PARKED IS UNCHANGED at 364: every title in all four files is a literal, so door 3's
+    // reader recognises them statically.
+    // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
+    // --porcelain` at measurement time listed exactly this stage's paths and nothing else,
+    // so no other lane's uncommitted test files are charged to this row.
+    files: 2459, parked: 364, credited: 2095, titles: 20469, suiteTitles: 5734,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

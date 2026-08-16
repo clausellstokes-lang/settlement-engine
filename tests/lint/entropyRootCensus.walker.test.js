@@ -219,12 +219,23 @@ const COMPOSITIONS = Object.freeze([
   // build STOP. An EDIT to a dispositioned row is the sanctioned case, and it is lawful
   // only when the member that made it is the member the disposition names — here, SEAM.
   ['SEAM', 'src/domain/worldPulse/pulseKernel.js', '${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}${epochSuffix(epochTerm)}', 'createPRNG', 'SEAM'],
-  ['14', 'src/domain/worldPulse/realmVerbExecution.js', "${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}", 'DEFERRED', 'TICK-VARYING'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE A, AND THESE THREE ARE ROWS THE PROGRAM EXISTS
+  // TO MOVE. The composition COUNT did not change and neither did any consumer: what
+  // changed is each row's TEXT, because the site's seed expression is now WRAPPED by
+  // `tickStreamSeedOf(state, { base: <the same expression, unmoved> })`. That the original
+  // coercion is still visible verbatim INSIDE the new body is the point — §3b.3's
+  // byte-verbatim rule is satisfied structurally rather than by transcription, and the
+  // census still sees `state.rngSeed` in the slot, so the read site is not lost either.
+  // ⛔ THE SHRINK-ONLY LAW IS UNTOUCHED: a composition APPEARING or VANISHING is still a
+  // build STOP. An EDIT to a dispositioned row is the sanctioned case, and it is lawful
+  // only when the member that made it is the member the disposition names — here, the
+  // TICK-VARYING and TICK-FREE rows, which are exactly what slice A re-roots.
+  ['14', 'src/domain/worldPulse/realmVerbExecution.js', "${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb:${nowTick}", 'DEFERRED', 'TICK-VARYING'],
   ['14d', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:${k}', 'createPRNG', 'DERIVED'],
   ['14e', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:exodus', 'createPRNG', 'DERIVED'],
-  ['15', 'src/domain/worldPulse/realmVerbExecution.js', "${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}", 'DEFERRED', 'TICK-VARYING'],
+  ['15', 'src/domain/worldPulse/realmVerbExecution.js', "${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb:${nowTick}", 'DEFERRED', 'TICK-VARYING'],
   ['15d', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:${k}', 'createPRNG', 'DERIVED'],
-  ['16', 'src/domain/worldPulse/realmVerbExecution.js', "${String(state.rngSeed ?? 'realm')}:realm_verb", 'DEFERRED', 'TICK-FREE'],
+  ['16', 'src/domain/worldPulse/realmVerbExecution.js', "${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb", 'DEFERRED', 'TICK-FREE'],
   ['16d', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:${k}', 'createPRNG', 'DERIVED'],
   ['2', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads-hazard:${mid}:${now2}', 'createPRNG', 'TICK-VARYING'],
   ['3', 'src/domain/worldPulse/roadsKernel.js', '${rngSeed}::roads:cadence:${npcKey}:${year}', 'createPRNG', 'YEAR-KEYED'],
@@ -253,8 +264,14 @@ const HAND_OFFS = Object.freeze([
   ['src/domain/townMap/mapDress.js', 'seasonalSeverityFor(rngSeed, year, settlementId)', 'src/domain/worldPulse/seasons.js'],
   ['src/domain/worldPulse/generosityKernel.js', 'intelEligible(intelSeed', 'src/domain/spatial/intelActs.js'],
   ['src/domain/worldPulse/roadsKernel.js', 'rngSeed, now2, idSet', 'src/domain/roads/seaRoads.js'],
-  ['src/domain/worldPulse/npcLadderKernel.js', "const seed = String(asObject(worldState).rngSeed || '');", 'src/domain/worldPulse/npcLadderContest.js'],
-  ['src/domain/worldPulse/demographicsKernel.js', 'realmId: typeof asObject(worldState).rngSeed', 'src/domain/worldPulse/demographicsPlans.js'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE A: RS-9's read is now wrapped by the family-1
+  // accessor. The anchor keeps its ORIGINAL coercion verbatim inside the new call, so this
+  // row still proves the same hand-off and would still red if the coercion were retyped.
+  ['src/domain/worldPulse/npcLadderKernel.js', "tickStreamSeedOf(worldState, { base: String(asObject(worldState).rngSeed || '') })", 'src/domain/worldPulse/npcLadderContest.js'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE A, the same wrap as RS-9's row: the anchor keeps
+  // the site's TYPEOF-STRING coercion verbatim inside the accessor call, so a retyped
+  // coercion (which would silently change what a NUMERIC seed renders) still reds here.
+  ['src/domain/worldPulse/demographicsKernel.js', "base: typeof asObject(worldState).rngSeed === 'string'", 'src/domain/worldPulse/demographicsPlans.js'],
   ['src/components/map/CauseWalkPanel.jsx', 'seedId: worldState?.rngSeed ?? rootId', 'src/domain/display/discourseKernel.js'],
 ]);
 
@@ -318,6 +335,84 @@ describe('EP-0 · baseline B — the read-site census', () => {
 
   test('every disposition is drawn from the closed class set', () => {
     for (const [id, , , , cls] of READ_SITES) expect(CLASSES, `${id}`).toContain(cls);
+  });
+});
+
+// ── THE CLASSIFICATION GATE — EP-3 slice A ───────────────────────────────────────────────
+/** The family-1 accessor, and the number of times each re-rooted module must call it.
+ *  [id(s), file, calls]. The counts are the compositions' READ SITES, not the compositions:
+ *  RS-5 feeds five rows through one read and RS-9 feeds four through one, which is why this
+ *  roster is shorter than the disposition table it gates. */
+const FAMILY_1_ACCESSOR = 'tickStreamSeedOf(';
+const FAMILY_1_REROOTS = Object.freeze([
+  ['RS-5', 'src/domain/worldPulse/roadsKernel.js', 1],
+  ['RS-9', 'src/domain/worldPulse/npcLadderKernel.js', 1],
+  ['RS-10', 'src/domain/worldPulse/demographicsKernel.js', 1],
+  ['RS-11', 'src/domain/worldPulse/demographicsPlans.js', 1],
+  ['RS-12', 'src/domain/worldPulse/sovereigntyMarketStage.js', 1],
+  ['RS-13/14/15', 'src/domain/worldPulse/realmVerbExecution.js', 3],
+]);
+
+/** Non-import, non-comment call sites of a symbol in a file. */
+function callSitesIn(text, symbol) {
+  return text.split('\n')
+    .filter((line) => !COMMENT_LINE.test(line) && !/^\s*import\b/.test(line) && line.includes(symbol))
+    .length;
+}
+
+describe('EP-3A · the classification gate — every TICK-anchored read is re-rooted', () => {
+  // ⛔ THIS IS THE ARM THAT CATCHES A SILENTLY DROPPED RE-ROOT, and nothing else in the
+  // estate can: a site that stopped calling the accessor still composes a perfectly valid
+  // draw key, still passes every behaviour test, and is simply epoch-blind forever. The
+  // gate is the CENSUS's because the census is the only instrument that knows the whole
+  // denominator — which is also why the walker is EP-0's and not EP-3's.
+  test('the re-root roster IS the TICK-VARYING + TICK-FREE half of the read-site census', () => {
+    const anchored = READ_SITES
+      .filter(([, , , , cls]) => cls === 'TICK-VARYING' || cls === 'TICK-FREE')
+      .map(([, file]) => file);
+    // Per-module ROW counts, so a new tick-anchored read inside an already-re-rooted module
+    // is caught too — the exact shape a file-set comparison cannot see.
+    const byModule = {};
+    for (const file of anchored) byModule[file] = (byModule[file] || 0) + 1;
+    expect(
+      byModule,
+      'A TICK-VARYING or TICK-FREE read site appeared, vanished or moved module. Slice A'
+      + ' re-roots exactly this set onto tickStreamSeedOf; a row here with no entry in'
+      + ' FAMILY_1_REROOTS below draws epoch-blind forever and no behaviour test can see it.',
+    ).toEqual(Object.fromEntries(FAMILY_1_REROOTS.map(([, file, calls]) => [file, calls])));
+  });
+
+  test('every re-rooted module actually calls the family-1 accessor, the counted number of times', () => {
+    for (const [id, file, calls] of FAMILY_1_REROOTS) {
+      expect(callSitesIn(read(file), FAMILY_1_ACCESSOR), `${id} — ${file}`).toBe(calls);
+    }
+    // NON-VACUITY: the counter can return zero, so the greens above are measurements.
+    expect(callSitesIn('const s = somethingElse(worldState);', FAMILY_1_ACCESSOR)).toBe(0);
+    // …and it does not count the import line or a mention in prose.
+    expect(callSitesIn("import { tickStreamSeedOf } from '../advanceEpochLedger.js';", FAMILY_1_ACCESSOR)).toBe(0);
+    expect(callSitesIn(' * a comment naming tickStreamSeedOf(worldState)', FAMILY_1_ACCESSOR)).toBe(0);
+  });
+
+  test('the YEAR-KEYED half is NOT re-rooted at slice A, and that is the split being recorded', () => {
+    // ⚠ RS-9 IS THE SPLIT READ: its module appears in the roster above for the TICK anchor
+    // while its family-2 row 20 stays epoch-blind until slice B lands a SECOND,
+    // separately-named year-anchored argument beside it. Every OTHER year-keyed module must
+    // carry no accessor call at all today, so slice B's arrival is visible rather than
+    // assumed — and a lane that re-rooted a year-keyed site onto the TICK anchor by mistake
+    // reds here, which is the "a TICK-VARYING row calling yearStreamSeedOf, and vice versa"
+    // gate the volume specifies, in the half that exists.
+    const rerooted = new Set(FAMILY_1_REROOTS.map(([, file]) => file));
+    const yearOnly = [...new Set(READ_SITES
+      .filter(([, , , , cls]) => cls === 'YEAR-KEYED')
+      .map(([, file]) => file))].filter((file) => !rerooted.has(file));
+    expect(yearOnly.length, 'the year-keyed half is non-empty, so the check below is real')
+      .toBeGreaterThan(0);
+    expect(yearOnly.filter((file) => callSitesIn(read(file), FAMILY_1_ACCESSOR) > 0)).toEqual([]);
+    // And the leaf exports the tick accessor but NOT yet the year one — slice B's boundary,
+    // asserted so its arrival cannot be mistaken for something that was always there.
+    const leaf = read('src/domain/advanceEpochLedger.js');
+    expect(leaf).toContain('export function tickStreamSeedOf');
+    expect(leaf.includes('export function yearStreamSeedOf')).toBe(false);
   });
 });
 
@@ -488,14 +583,21 @@ describe('EP-0 · the three executed mutants', () => {
 describe('EP-0 · the closure record, re-run rather than transcribed', () => {
   // Each figure states the command that reproduces it. The volume published 68/37/TEN/31/"8";
   // the corrected, executable set is below and every one is asserted here.
-  test('`rngSeed` LINES in src = 68 across 30 files', () => {
+  test('`rngSeed` LINES in src = 70 across 31 files', () => {
     // grep -rn "rngSeed" src --include="*.js" --include="*.jsx" | wc -l
-    // ⚠ LINES, not occurrences. The per-OCCURRENCE count (grep -o) is 80, and quoting one
-    // number under the other's label is how this figure was reported as "grown by 12" when
-    // the tree had not moved at all.
+    // ⚠ LINES, not occurrences. The per-OCCURRENCE count (grep -o) is higher, and quoting
+    // one number under the other's label is how this figure was reported as "grown by 12"
+    // when the tree had not moved at all.
+    // ⭐ RE-RECORDED 2026-08-16 BY EP-3 SLICE A: 68/30 → 70/31, and the delta decomposes
+    // exactly with nothing left over. The 31st FILE is the new single-writer leaf
+    // src/domain/advanceEpochLedger.js, and the +2 LINES are its own two prose mentions of
+    // `worldState.rngSeed` — it names the thing it re-roots. NO RE-ROOTED SITE MOVED THIS
+    // FIGURE: each of the eight wraps its existing expression on the SAME line, so the
+    // seven read-bearing modules contribute exactly what they did before. That is why the
+    // read-site census above is UNMOVED at twenty-two while this one grew by a leaf.
     const hits = ALL_FILES.filter((f) => /rngSeed/.test(read(f)));
     const lines = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('rngSeed')).length, 0);
-    expect({ lines, files: hits.length }).toEqual({ lines: 68, files: 30 });
+    expect({ lines, files: hits.length }).toEqual({ lines: 70, files: 31 });
   });
 
   test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {

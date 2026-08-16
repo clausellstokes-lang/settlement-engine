@@ -62,6 +62,7 @@
 import { clamp01 } from '../../kernel/math.js';
 import { formatCount } from '../formatNumber.js';
 import { hash01 } from '../region/contestMath.js';
+import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { LANDFORM_SUITABILITY, seamLandforms } from './steadingTopography.js';
 import {
@@ -337,7 +338,12 @@ export function advanceDemographicPlans({
   let ledgerChanged = false;
 
   const stepTick = Math.max(0, Math.round(num(tick, 0)));
-  const realm = String(realmId || asObject(worldState).rngSeed || 'realm');
+  // RS-11 — THE RE-ROOT (advance epoch, EP-3 slice A). ⚠ `realmId` SHADOWS, so the re-root
+  // sits INSIDE the existing chain on this site's own term and never replaces the chain:
+  // when the caller passed a realmId this site draws the caller's value unchanged and RS-10
+  // is where the epoch entered. `base` is the RAW read, so the dark arm returns it by
+  // identity — value AND type — and the `||` chain branches exactly as it does today.
+  const realm = String(realmId || tickStreamSeedOf(worldState, { base: asObject(worldState).rngSeed }) || 'realm');
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [];
   /** @type {Array<FoundIntent>} */

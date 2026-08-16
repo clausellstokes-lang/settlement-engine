@@ -28,6 +28,7 @@ import { clamp01 } from '../../kernel/math.js';
  * already owns — the events layer's "schemaless open objects" read shape.
  * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Mut */
 import { createPRNG } from '../../kernel/prng.js';
+import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, isPort, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { planConvoy, planBlockade } from '../spatial/navalLayer.js';
 import { migrationActive } from '../spatial/migration.js';
@@ -673,7 +674,11 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const targetId = String(args.targetId ?? '');
       const entry = settlementUpdates.get(targetId);
       if (!entry || !entry.settlement) return refused(refuse('calamity_gate_dark', targetId));
-      const seed = `${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}`;
+      // RS-13 / RS-14 — THE RE-ROOT (advance epoch, EP-3 slice A). `base` is this site's OWN
+      // coercion: `??`, so 0 composes '0' and '' composes ''. These two DM-order doors are IN
+      // SCOPE for the current-tick selection rule and that is correct — a DM order resolves in
+      // the epoch the world it acts on is living in, stably for a given world.
+      const seed = `${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb:${nowTick}`;
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const year = seasonForTick(nowTick).year;
       const result = forceCalamityStrike({
@@ -739,7 +744,11 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const satLedger = asObject(getSpatialLedger(state, 'satellites'));
       // The kernel's own sats read (satellitesOf — sorted record array).
       const sats = satellitesOf(/** @type {Mut} */ (satLedger), parentId);
-      const seed = `${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}`;
+      // RS-13 / RS-14 — THE RE-ROOT (advance epoch, EP-3 slice A). `base` is this site's OWN
+      // coercion: `??`, so 0 composes '0' and '' composes ''. These two DM-order doors are IN
+      // SCOPE for the current-tick selection rule and that is correct — a DM order resolves in
+      // the epoch the world it acts on is living in, stably for a given world.
+      const seed = `${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb:${nowTick}`;
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const minted = forceFoundSteading({
         parent: /** @type {Mut} */ (entry.settlement), parentId,
@@ -806,7 +815,13 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (!item) return refused(refuse('resettle_refused', 'no such settlement'));
       const donorPool = (Array.isArray(/** @type {Mut} */ (shim).settlements) ? /** @type {Mut} */ (shim).settlements : [])
         .filter((/** @type {Mut} */ i) => String(i?.id ?? '') !== targetId);
-      const seed = `${String(state.rngSeed ?? 'realm')}:realm_verb`;
+      // RS-15 — THE RE-ROOT (advance epoch, EP-3 slice A), row 16, the TICK-FREE composition.
+      // ⛔ EP ADDS THE EPOCH AND NEVER A TICK TERM (J-EP-10). The pre-existing
+      // tick-invariance here — every FORCE_RESETTLE in a campaign's life draws from ONE
+      // stream — is recorded as a SEPARATE observation, not something this program repairs:
+      // adding a tick would be a same-seed shift for every world that has ever resettled, in
+      // BOTH flag states, which is a THE PROMISE event this directive does not authorize.
+      const seed = `${tickStreamSeedOf(state, { base: String(state.rngSeed ?? 'realm') })}:realm_verb`;
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const built = forceResettleSettlement({
         item, donorPool: /** @type {import('./settlementLifecycleFirstClass.js').LcSnapItem[]} */ (/** @type {unknown} */ (donorPool)), tick: nowTick, forkFn,
