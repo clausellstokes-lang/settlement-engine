@@ -5960,3 +5960,25 @@ tells them apart). Source: the population trajectory where history
 carries one; else reconstructed from decline events under the
 degradation law — the compile establishes the real surface and
 prices the home. TC29 notified (#7).
+
+## §161g · THE DEMOTION GRAMMAR (2026-08-16, owner: "when a
+## settlement gets demoted… scars, surrounded by ruins, closed
+## buildings")
+
+Charter §5 gains it, riding the high-water law: THE RUIN RING
+(age-graded by the event log: standing shells → collapsed
+footprints → grassed foundation lines with ghost streets surviving
+as field boundaries) · CLOSED AND OUTLIVED BUILDINGS (shuttered
+institutions, repurposed-humbler, and the over-scale surviving
+monument — the cathedral in the town it outlived — always at full
+monumental ink, the most legible demotion tell) · THE CONTRACTED
+DEFENSE (old circuit with bricked gates + a humbler new palisade
+inside: two vintages, two circumferences, one glance) ·
+CAUSE-SPECIFIC SCARS from the recorded event (razed = burn on the
+attack bearing; plague = intact-but-emptied; economic = nothing
+broken, everything closed) · RE-PROMOTION THREADS THE RUINS (new
+organisms at a different grain treat sound ruins as cheap land,
+collapsed ones as obstacles). Sources: the war system's real
+razing/demotion event surface + the population trajectory —
+compile verifies both at head. Calm ink throughout. TC29 notified
+(#8).
