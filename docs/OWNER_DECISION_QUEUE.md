@@ -4897,3 +4897,27 @@ rendered as in-fiction absence in peacetime.
    exclusivity FROM PLACEMENT ONWARD (authorship creates state, it
    never exempts state from the rules). These charter with the
    war-console + pin family compiles.
+
+## §130 · THE cn FAMILY BUILD ORDERED AND SLOTTED (owner, 2026-08-15:
+## "Comprehensively, exhaustively, carefully, seamlessly, coherently,
+## and cohesively build it and slot it where appropriate.")
+
+1. **The §§125–129 cluster builds as the cn family** (the DM console:
+   the war read model + tab, the console ops under the two-hat law,
+   the stressor pin with clamps and the dyadic clause, the external
+   host + conversion valve, PDF alignment). **Lane CN-C charters it
+   NOW** (parallel, zero slot cost) against the full law corpus and
+   the verified machinery census, every value §42/§43-homed or
+   OWNER-VALUE-flagged, every bill priced, feeders mapped.
+2. **THE SLOT**: the charter banks on completion; the family
+   COMPILES when WY lands (its prime feeder) and EXECUTES in the
+   family-train tail before tm-core and build-complete-dark — so
+   the console, the pin, and the LG-fed sections all enter the
+   diagnostic soak as built machinery and the §109 total review
+   audits them with everything else. The LG waves separately
+   inherit §46d/§125a pricing at their own compiles, as already
+   recorded in the volume.
+3. The speed-scaling law (§125.4) is assigned to WY's compile for
+   armies and POP's for columns (it lives with the transit kernels,
+   not the console); the cn charter cites both rather than owning
+   them.
