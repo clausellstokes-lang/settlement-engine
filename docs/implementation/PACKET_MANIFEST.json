@@ -10434,7 +10434,7 @@
     },
     {
       "id": "DA-B1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-B1.md",
       "verifiedBase": "9adb725b907928541cb2e24c63f3c7905dee286f",
       "changeManifest": [

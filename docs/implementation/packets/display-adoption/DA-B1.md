@@ -1,6 +1,7 @@
 # DA / DA-B1 — the authored display lexicon, and the two vocabularies that refused a bucket
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `1b5145fc`
 - **Verified base:** `claude/composite-r4` at `9adb725b907928541cb2e24c63f3c7905dee286f`
 - **Train:** `da-c`, family **DA**, member **1**. Change paths disjoint from the `da-c` mint,
   which touches only `tests/lint/`.
