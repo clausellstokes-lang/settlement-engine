@@ -14,7 +14,9 @@
 ## such re-scope is its own J-INA block, never a silent overwrite).
 
 **THE HEADLINE (read this before any wave):** the tree moved hard in the two days
-since the volume's survey. Five load-bearing premises are REFUTED or materially
+since the volume's survey (⏱ a 2026-08-04-dated finding — historical;
+the IN-0/IN-1a landings absorbed them). Five load-bearing premises were
+REFUTED or materially
 re-scoped: (1) the PLANT fold is BUILT — what is missing is only the pulse-level
 envelope handoff (IN-0a shrinks by two-thirds and changes shape); (2) the entire
 WR-7 envoy program landed (~7,750 lines) including `sendTwoDivergence.js`, whose
@@ -31,11 +33,14 @@ live believed axis on BeliefRecord, so IN-2's DEVOTION bait is no longer hard
 has rotted at least once — NAVIGATE BY SYMBOL (the estate's recorded
 hand-keyed-line-address-rot hazard; it bit this compilation five times).
 
-> **Current implementation handoff (reconciled 2026-08-09):** IN-0a, IN-0b,
-> and IN-0d are landed. IN-0c is owed but **BLOCKED**, not dispatchable from
-> this design. The only coding contract is
+> **Current implementation handoff (⏱ re-reconciled at the TL-F round):**
+> IN-0a, IN-0b, IN-0d AND IN-0c are ALL LANDED (`PACKET_MANIFEST.json`
+> IN-0C = LANDED — the packet INDEX is the dispatch authority, and the
+> packet surface, not this blockquote, controls status). The historical
+> coding contract was
 > [`implementation/packets/foreign-policy/IN-0C.md`](./implementation/packets/foreign-policy/IN-0C.md).
-> Do not invent its same-tick signing-credit ordering.
+> Do not invent its same-tick signing-credit ordering — the landed
+> packet records it.
 
 ---
 
@@ -65,7 +70,7 @@ detail a wave would have tripped on). Live code outranks this table too.
 | S14 | projectPlants fail-OPEN on its default (`audience: 'dm'`) | src/domain/worldPulse/brokerageServicesPlant.js :537 — `projectPlants(records, { audience = 'dm', … })`. J-INF-17 stands as ruled | VERIFIED |
 | S15 | The chooser enumerates NO information verb; belief-aware reads only | src/domain/worldPulse/settlementStrategy.js — evaluateSettlementStrategyRules :1095+ (settlementStrategyEnabled gate + WR-6 coalition arm; beliefsActive read; war/peace/coalition levers); grep sweep/vet: zero | VERIFIED |
 | S16 | Herald: six frozen sections, walker-pinned correspondence; belief_misjudgment under FAITH; intel_transfer under TRADE by recorded judgment | src/domain/realm/heraldRouting.js — HERALD_SECTIONS :64 = ['war','faith','trade','events','divination','adjudication']; belief_misjudgment: 'faith' :134; intel_transfer: 'trade' :167 with the authoring ruling comment :120; KIND_SECTION_CORRESPONDENCE :491 | VERIFIED |
-| S17 | Knowledge-lane narration starving; late-lane; ceiling 'notable' | statecraft beats mint significance 'notable' at informationStatecraft.js :584, :1007, :1338; the routed-token census has GROWN — executed count 2026-08-04: 354 routed kind tokens (war 90, trade 104, faith 18, events 132, divination 8, adjudication 2; NO knowledge section). The volume's 269/68 figures rotted; the starvation is now ~1.1%, i.e. WORSE | VERIFIED (numerators REFINED) |
+| S17 | Knowledge-lane narration starving; late-lane; ceiling 'notable' | statecraft beats mint significance 'notable' at informationStatecraft.js :584, :1007, :1338; the routed-token census has GROWN — executed count 2026-08-04: 354 routed kind tokens (war 90, trade 104, faith 18, events 132, divination 8, adjudication 2; NO knowledge section) — ⚠ HISTORICAL AND STALE: the census has moved since, and moves again. IN-5's parity target and IN-6's decontamination baseline DERIVE the count fresh over `KIND_SECTION_CORRESPONDENCE` at build; no figure is quoted from this row. The volume's 269/68 figures rotted; the starvation is now ~1.1%, i.e. WORSE | VERIFIED (numerators REFINED) |
 | S18 | WHAT_PHRASES registration home | src/domain/display/settlementRumors.js :116 (`export const WHAT_PHRASES`) | VERIFIED |
 | S19 | knowledgeLaneEvidence honesty: ONE dispositive literal; 15 residual impactKinds; 7 kind-only | src/domain/certification/knowledgeLaneEvidence.js — KNOWLEDGE_LANE_EVENT_TYPES = ['belief_misjudgment'] :62; the FIFTEEN :91; kind-only contract :126-134 | VERIFIED |
 | S20 | The lit/dark differential instrument asked for and ABSENT; the medium soak-unobserved | src/domain/certification/subsystemRowsRegen.js distancePricedNews row (~:50-75): "Half of that instrument now exists; the differential harness does not", soakEvidence: 'unobserved' | VERIFIED |
@@ -80,7 +85,7 @@ detail a wave would have tripped on). Live code outranks this table too.
 | S29 | Disclosure term minted/strains/expires; executor 'seam'; the credit is W-PEACE's seam | TERM_CATALOG moved to src/domain/worldPulse/peaceTermsCatalog.js — disclosure :157 (`family:'informational', executor:'seam'`), intel→disclosure war-spoil mapping :209, label :225; the statecraft foot notes (informationStatecraft.js :1400-1428) restate the seam and name the landing: "a signed disclosure term should CREDIT the loser's credibility … at the draftTerm executor:'seam' branch"; AND the credit hook is PRE-PLUMBED — advanceInformationStatecraft already accepts `provenTrue = []` / `npcProvenTrue = []` (:1216-1218) | VERIFIED (address REFINED; hook NEW) |
 | S30 | HIDE's trade tax narrated, unwired; SEE gate-not-drain; SELL spammer deliberately absent | informationStatecraft.js foot seam notes :1400-1428 — all three stood at the 2026-08-04 compile | HISTORICAL SUBSTRATE FINDING — IN-0d later landed at `db35bad6` |
 | S31 | Intercept act is narrative-only (no claim, no belief record) | src/domain/worldPulse/brokerageServicesRules.js :303-327 — this was the 2026-08-04 producer shape | HISTORICAL SUBSTRATE FINDING — IN-0b later landed at `6a497bab` |
-| S32 | The six planned receipt kinds do not exist; the two built beats do | executed greps: plant_took, lure_sprung, mirror_shift, court_sat_still, false_accusation, treaty_disclosure_opened — ZERO src hits; infowar_lie_exposed + infowar_spy_exposed live in informationStatecraft.js + settlementRumors.js | VERIFIED |
+| S32 | The six planned receipt kinds do not exist; the two built beats do | executed greps AT THE SURVEY — ⚠ RE-DERIVE, AND DO NOT QUOTE A COUNT FROM THIS ROW: the split has MOVED and keeps moving. Live in `src/` at the micro-batch base: `plant_took`, `treaty_disclosure_opened`, `mirror_standing_line`, and `mirror_shift` (comment only). Still absent: `court_sat_still`, `lure_sprung`, `false_accusation`. Count fresh at compile; infowar_lie_exposed + infowar_spy_exposed live in informationStatecraft.js + settlementRumors.js | VERIFIED |
 | S33 | Flag manifest + walker exist; infoStatecraftEnabled is a member | src/domain/worldPulse/simulationRules.js — ENGINE_GATED_VIRTUAL_RULE_KEYS :185-194 = ['beliefAxesEnabled','conquestDoctrineEnabled','infoStatecraftEnabled','migrationRumorsEnabled','sovereigntyTradeEnabled']; walker tests/lint/engineGatedRuleKeys.walker.test.js | VERIFIED |
 | S34 | Mutation-manifest + tripwire idioms exist for L7/L9 obligations | tests/lint/mutationCoverageManifest.test.js + tests/lint/mutationCoverage.shared.mjs; the TR-5 tripwire pattern live at src/domain/worldPulse/sovereigntyBundle.js :166 (`catalogGrewSinceWr10()`) | VERIFIED |
 | S35 | Envoy transit obeys law M | src/domain/worldPulse/envoyErrandTransit.js :104 — "one-week-per-leg"; interception/custody/parlay staged in envoyInterceptionStage.js (single pre-mutation cut, one transition per tick) | VERIFIED |
@@ -96,7 +101,7 @@ detail a wave would have tripped on). Live code outranks this table too.
 | R5 | **PLANT_REFUSALS is a "frozen five"** growing to six with `too_hot` | It is SIX today: ['dormant','no_market','bad_intent','cannot_pay','no_channel','already_active'] (brokerageServicesPlant.js :84-87) | IN-3(b)'s closed-vocabulary pin asserts SEVEN after `too_hot`; any pin written against five reds on arrival. QUERY_REFUSALS stays five and untouched (S7) |
 | R6 | **Casting adds "no new NPC state" because none exists** | npcCredibility.js (288 lines) landed: the LIE verb stamps a SPOKESPERSON (`spokespersonNpcId` on DisinfoRecord, mouthpiece pick + composite settlementCred × mouthpieceCred weight in processLies), with per-NPC credibility deltas advanced in the statecraft tail; gated on `npcCredibilityEnabled` (itself an invisible key — R3's class) | IN-1's mirror inputs, IN-2's exposure blowback, and IN-3's vet read must COMPOSE the mouthpiece plane (a burned mouthpiece is a personal leg of the blowback triple); every IN receipts row that names a speaker uses the existing spokesperson attribution, no new NPC state — the volume's law holds, the substrate is just richer |
 | R7 | **Line-address integrity of the volume's §2** | Rotted throughout: statecraft foot notes :1444-1472 -> :1400-1428 (content also changed — the four verbs are now marked BUILT, the deferred set is exactly S29/S30's three); pulse wiring :1875 -> :2073; peaceTerms cites -> peaceTermsCatalog/peaceTermsGraph; beliefMap :485-550 -> :591, :801-1009 -> :1025-1360; heraldRouting :104 -> :120/:167; file sizes beliefMap 1458 -> 1564, informationStatecraft (1428 physical) | Implementer law: NAVIGATE BY SYMBOL, never by the volume's line numbers. Every pin that anchors a doc or source address asserts its target appears EXACTLY ONCE (L7) |
-| R8 | **Herald numerators: 4 knowledge beats / 269 routed tokens, war 68** | 354 routed tokens (war 90, trade 104, faith 18, events 132, divination 8, adjudication 2) — executed count over KIND_SECTION_CORRESPONDENCE | IN-6's decontamination baseline and IN-5's parity target re-measure at build time; the ~1.5% figure is now ~1.1% (the diagnosis strengthens; the numbers must never be quoted from the volume) |
+| R8 | **Herald numerators: 4 knowledge beats / 269 routed tokens, war 68** | 354 routed tokens at the survey (⚠ STALE — derive fresh over `KIND_SECTION_CORRESPONDENCE` at build; this row states no current count by design) | IN-6's decontamination baseline and IN-5's parity target re-measure at build time; the ~1.5% figure is now ~1.1% (the diagnosis strengthens; the numbers must never be quoted from the volume) |
 
 **Verified-ABSENT rows re-confirmed 2026-08-04 (build on their absence, in the
 wave that homes each):** second-order belief structure (no mirror module; no
@@ -124,7 +129,7 @@ All four: ABSENT from DEFAULT_SIMULATION_RULES forever; every gate reads
 `=== true` (dark-never-permissive); each JOINS `ENGINE_GATED_VIRTUAL_RULE_KEYS`
 (simulationRules.js:185) IN THE SAME COMMIT as its first real gate read, with
 its certification row authored in that commit (the walker's contract, restated
-at subsystemRowsVirtual.js:36 and :307) and the engineGatedRuleKeys walker
+in subsystemRowsVirtual.js — ⚠ address-rot: navigate by symbol, the :36/:307 cites are the survey's) and the engineGatedRuleKeys walker
 asserting exactly the one-key delta. Each flag lands the FOUR-FENCE dormancy set
 (own-footprint golden · absent-vs-false differential · call-path spy ·
 gate-polarity census) WITH the lit-mutant control proving the fences see, and at
@@ -133,7 +138,7 @@ frozen-list `.every()` is invisible to the gate walker).
 
 | Flag | Joins manifest in | Gates | Lit-preconditions (re-measured) |
 |---|---|---|---|
-| `secondOrderBeliefEnabled` | IN-1 commit 1 | mirrorOf + every consumer | `infoStatecraftEnabled` (the outbound ledgers it derives from are its writers') |
+| `secondOrderBeliefEnabled` | ⏱ LANDED at IN-1a (row 14, MIRROR twin) | mirrorOf + every consumer | `infoStatecraftEnabled` (the outbound ledgers it derives from are its writers') |
 | `infoLureEnabled` | IN-2 commit 1 | axis-typed plant subjects + bait receipts | `informationBrokeragesEnabled` + `infoStatecraftEnabled` + `secondOrderBeliefEnabled`; SCARCITY/CONDITIONS baits additionally on SP-2's trade families (HARD, still absent — S8); DEVOTION bait re-scoped buildable NOW (J-INA-3, S25). `enforceLiveStrength` stays an interaction, precondition in NEITHER direction (J-INF-14) |
 | `counterIntelEnabled` | IN-3 commit 1 | sweep/vet/send-two/hide-as-answer + suspicionOf + house exposure producer | `infoStatecraftEnabled`; mirror-gap evidence arm degrades dark (named degraded read); SEND-TWO consumes the BUILT sendTwoDivergence.js (R2 — the J-INF-15 dependency is DISCHARGED, not pending) |
 | `reputationRaceEnabled` | IN-4 commit 1 | race-at-arrivals + who-knew-first outcome keys | `distancePricedNewsEnabled` (NOTE R3: lit in ONE_REGEN — the race's story leg is live machinery in shipped presets; dormancy fences capture ONE_REGEN-preset goldens too); person legs degrade to already-staged arrivals until SP-1 lights; courier migration additionally `intelTradeEnabled` × SP-1 |
@@ -261,7 +266,7 @@ commit (L8) — no file below except settlementStrategy.js (baselined 812,
 AT ceiling) and the two banked pulse mouths is currently constrained, but
 MEASURE, never inherit.
 
-### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags) — **0a/0b/0d LANDED; 0c OWED/BLOCKED**
+### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags) — **⭐ ALL FOUR SLICES LANDED (0c per PACKET_MANIFEST IN-0C = LANDED)**
 <!-- Build state is not maintained per-file; docs/implementation/INDEX.md controls current
      dispatch and FP §5 retains dated corroboration only.
      ⚠ THE "DIES AT THE FOLD" SENTENCE IN §4's 0a BLOCK BELOW (and in
@@ -341,7 +346,7 @@ refused} minted here, `caught` declared cross-wave (IN-3's sweep). Spine 13:
 declared-empty with reason (a priced read, no alignment lever). Spine 14:
 engine-only, recorded.
 
-**IN-0c — THE DISCLOSURE EXECUTOR — OWED/BLOCKED; packet status controls.** As the volume, re-priced by R4 and armed
+**IN-0c — THE DISCLOSURE EXECUTOR — ⭐ LANDED (packet status controls, and the packet says LANDED).** As the volume, re-priced by R4 and armed
 by S29: lands as a NEW pure leaf of the peaceTerms family (e.g.
 peaceTermsDisclosure.js, ~200-line budget) consuming peaceTerms' exports —
 minting/compliance/expiry stay the head's; the M9b-style loser→victor feed
@@ -452,7 +457,10 @@ re-misled.]
    at pulse time, and the only home is the one statecraft fold — and all three
    IN-1 receipt pools are headed for a Herald knowledge desk that does not exist,
    since `HERALD_SECTIONS` is still the frozen six and IN-5 mints the seventh.
-   ⇒ **IN-1a** is the pure leaf alone, producer-first on the ES-7 precedent;
+   ⇒ **IN-1a** is the pure leaf alone, producer-first on the ES-7 precedent
+   (⏱ LANDED — and IN-1c is no longer one future slice: §55's THREE-WAY
+   SPLIT governs — IN-1c-A LANDED, IN-1c-b RULED-AT-ITS-COMPILE inheriting
+   §55's package verbatim, IN-1c-c REFUSED);
    **IN-1b** is the dossier standing line and the rendered-surface phrase scan;
    **IN-1c** is the hums with their kind registry, receipt-pool module, annex URL
    and interim-desk declaration. ⚠ The rendered-surface phrase scan belongs to

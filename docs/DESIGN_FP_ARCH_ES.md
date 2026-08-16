@@ -333,6 +333,10 @@ verb (ES-7) registers in operationRegistry + `npm run gen:compendium-data`.
 The virtual flag touches neither DEFAULT_SIMULATION_RULES nor the preset
 catalog, so NO edge-bundle rebuild is owed — VERIFY-AT-BUILD per the
 five-bundle law if any touched file turns out to be a bundle input.
+§49/§50 preflight (TL-F round): obligation (a) is ES-0-landed history;
+this clause IS obligation (b)'s cover (verify-at-build); obligation
+(c) — the literal `espionageEnabled: true` drive in the acceptance
+file — rides ES-7's envelope work.
 
 **The gate conjunction:**
 
@@ -1236,6 +1240,19 @@ attribution) LEAKS to that enemy, whether or not it is the target:
 >   traffic. The read is therefore sited at the PRODUCT STAGE — the one live seam
 >   holding the operative, the errand and the errand id together — and the
 >   errand-id keying survives verbatim.
+> - **⭐ ES-Da — THE COVERT RIDER (LANDED `6dbb76c2`, dark; recorded
+>   here because this volume otherwise never names it).** The rider is
+>   covert cargo on an accepted peace envoy — the ONE traffic road into
+>   the espionage machinery while the dispatcher stays dead-headed.
+>   Landed surface: packet ES-DA; coupling row
+>   `CPL-19.INFO_TO_GRAMMAR.ES-Da.covert_rider`
+>   (`couplingRegistryEspionage.js:634`); HBF-06 `covertRiderFor` (the
+>   classified rider chooser, DEFER with its closeOwed). ⚠ §17a NARROWS
+>   this volume's premise: ES-5b/ES-5c were never covert-gated — they
+>   move bloc math and ladder defense the moment `espionageEnabled`
+>   lights, with or without ES-Da; what ES-Da gates is ES-5a, ES-2,
+>   ES-3, ES-5d and ES-6a. POINT at the packet and §17a for the full
+>   record; this paragraph does not restate them.
 > - **C2 — "magic two-address sends" is REFUTED.** The belief writer takes ONE
 >   `observerId` and refuses `observer === subject` generically; a second address
 >   is a second call site, never a parameter widening.
@@ -1261,7 +1278,12 @@ attribution) LEAKS to that enemy, whether or not it is the target:
 > - **C6 — vetting quality is PARTIAL.** Every part exists; the SHAPE does not.
 >   The quality vocabulary is a two-member closed set, so a continuous product
 >   must be thresholded to one of two words — a tuning decision no code answers —
->   and its only consumer has no production caller. Deferred to ES-6b.
+>   and the blocking fact is the MODULE'S DISPATCHER DEAD-HEAD — zero
+>   importers of `espionageMissions.js` under `src/`, re-verified both
+>   shas; the consumer side is WIRED (`espionageMissions.js:72/:155/:175`),
+>   and ⭐ ES-Da LANDED as the one traffic road. Deferred to ES-6b, whose
+>   three deliverables build-and-pin NOW against the live call site
+>   (C-TLF-11).
 > - **C7 — "web dark ⇒ no leash resolution" is PARTIAL and the leaf must spell
 >   it.** `resolveLeash` is NOT web-gated; a betrayal-seeded foreign patron
 >   survives in a world that never lit the web. The estate's idiom is to gate the
@@ -1734,7 +1756,9 @@ consumed; req 14: engine-only.
 > headers that state the law.
 
 **ES-7 — THE VOICE + THE MEASURE (final slice; after IN-5 for the knowledge
-desk; converts the certification pending).** Charter: the six Herald kinds
+desk; AMENDS the ES-0-landed certification row — ⛔ there is no pending
+entry and never was: ES-0 landed the full CQ5 trio at `55674790`, §2's
+rider is the law).** Charter: the six Herald kinds
 with the FIVE JOINS each in their mint commit (annex-verbatim pool rows in
 RECEIPT_POOLS_INFORMATION.md's family or the ES annex the chair assigns ·
 registry row with requiredSlots + slotless fallback · WHAT_PHRASES · section
@@ -1751,8 +1775,8 @@ surface publicly ONLY through §3.5's exposure road); own walker file
 store action routes as a proposal the seat answers per doctrine + risk +
 candidate availability, refusal receipted in doctrine words; the DM plays
 the world, the court keeps its character; operationRegistry +
-`npm run gen:compendium-data` in the same commit); the certification row
-converts pending→real with its dispositive literals; the ES envelopes
+`npm run gen:compendium-data` in the same commit); the certification row —
+LANDED AT ES-0 — is AMENDED with its dispositive literals; the ES envelopes
 (mission mix by product, catch-rate band, standoff share, leak share, grade
 mix and rooted-dwell share (G), tap mix (H) — each
 INTERVAL_WEEKS-derived, each with an executed mutant). Req 13: the row
@@ -1764,7 +1788,9 @@ compendium regen (additive).
 budget split ES-5 took and for the same reason. The spine's `→ ES-6 →` reads
 `→ ES-6a → ES-7` today: **ES-6b** carries no place in the spine because it is
 blocked on a DISPATCHER wave nobody has chartered (its consumer has zero
-production callers), and **ES-6c** has been folded into ES-7 rather than counted.
+production callers — ⚠ read "no production caller" as the DISPATCHER
+DEAD-HEAD, per C-TLF-11's corrected clause above), and **ES-6c** has been
+folded into ES-7 rather than counted.
 As with the ES-5 split, this is BUDGET and never scope. Dependency spine: ES-0 (free) → ES-1 (SP-D) → ES-2 →
 ES-3 (SP-B for the full arm) → ES-4 (SP-B2; the discharge) → ES-5a → ES-5b
 (Q1) → ES-6 → ES-7 (IN-5). ES-5 was ONE wave when this count was written; the
@@ -1808,7 +1834,10 @@ family, §4 canonical models, §5 waves, §9 seam matrix, §11 chair questions;
 the phase-3 header text verified verbatim). Each clause names its landing
 section. It is written to be landed verbatim:
 
-1. **§3 THE FLAG FAMILY — row 44:** `| 44 | espionageEnabled | ES-1 |
+1. **§3 THE FLAG FAMILY — row 44 (⚠ attribution corrected: the flag
+   LANDED AT ES-0 — §2's rider and ES-1's strike-note both record it;
+   the parent volume's FLAG-ATTRIBUTION NOTE already matches):**
+   `| 44 | espionageEnabled | ES-0 |
    covert confirmation missions on the errand spine: mission mint + gauntlet
    + typed products (CONFIRM/ACQUIRE/REFUTE) + doctrine + absence discount |`
    — and the existing-flags paragraph gains: "`espionageEnabled` requires
@@ -2073,6 +2102,7 @@ post-fold state),
 docs/DESIGN_FP_ARCH_SP.md §4/SP-D, and the war volume's §1/§9/§10. The
 cohesion critic's F1-F9 are closed in place (⟨F#⟩ marks); every closure's
 symbol home re-measured. Zero new top-level keys; one conditional
-sub-record; eight waves, all dark; THIRTEEN seams pinned both sides; five
+sub-record; NINE waves (§4's amended count — ES-6 split to three slices,
+ES-6c folded into ES-7), all dark; THIRTEEN seams pinned both sides; five
 questions to the chair. Where this document disagrees with the tree, the
 tree wins and the disagreement is a bug to report.*
