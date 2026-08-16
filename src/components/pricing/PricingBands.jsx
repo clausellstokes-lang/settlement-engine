@@ -21,7 +21,6 @@ import {
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
-import { isConfigured } from '../../lib/supabase.js';
 import { tp } from '../../copy/pricingPage.js';
 import {
   GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, FS, BODY, SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX } from '../theme.js';
@@ -90,7 +89,16 @@ export function SurveyorBand({ onSeeMenu }) {
 // prop but can no longer elect this band: PricingPage only ever hands it a
 // `navigate` cta, and the loud-primary selector requires kind === 'purchase'.
 // The meter counts chairs HELD, in the Hall's own vocabulary.
-export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta }) {
+//
+// MB-4 — THE THREE DEAD PURCHASE-KIND READS ARE GONE. `disabled`, the `isConfigured` import, and
+// the `variant` ternary all keyed off `cta.kind === 'purchase'`, which DOM-3 made unreachable
+// here (PricingPage's own comment: NEVER kind:'purchase'). ⚠ The variant was removed as a WHOLE
+// dead conditional, not by deleting the named arm: `isPrimaryCta && cta.kind === 'purchase'` is
+// always false, so the rendered variant is always 'secondary'. Deleting only the purchase arm
+// would have left `isPrimaryCta ? 'primary' : 'secondary'` and let the prop newly elect a band
+// the comment above says it can no longer elect — a behaviour change wearing a cleanup's name.
+// The prop is still ACCEPTED (callers pass it) and is now explicitly unread.
+export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta: _isPrimaryCta }) {
   const seats = FOUNDER_SEAT_CAP;
   return (
     <section
@@ -138,8 +146,7 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta })
         <Button
           type="button"
           onClick={cta.onCta}
-          disabled={!isConfigured && cta.kind === 'purchase'}
-          variant={isPrimaryCta && cta.kind === 'purchase' ? 'primary' : 'secondary'}
+          variant="secondary"
           size="lg"
           fullWidth
           style={{ minHeight: 44 }}

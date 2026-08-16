@@ -33,6 +33,13 @@
  *     expired conditions on its own. The simulator owns its conditions.
  *   - factionRelationshipUpdate (Phase 14) keyed by the same archetype
  *     vocabulary, so condition archetypes map 1:1 to delta templates.
+ *     ⚠ QUALIFIED (XLS-4): "1:1" describes the KEYING, not the coverage. The
+ *     delta table is deliberately silent for 13 of the archetypes — that
+ *     silence was closed BY MEASUREMENT rather than by filling the rows in,
+ *     and it is machine-pinned with an anti-drift arm so a new archetype
+ *     cannot quietly join the silent set. See ODQ §94.2iv for the ruling and
+ *     the pin. Read bare, the 1:1 sentence invites a reader to assume every
+ *     archetype carries a delta, which is the drift this qualifier stops.
  *   - hookEscalation (Phase 11) clocks already key off settlement state;
  *     a 'plague' condition can become the trigger for a healing-crisis
  *     clock once Tier 4.4 capacity modeling lands.
