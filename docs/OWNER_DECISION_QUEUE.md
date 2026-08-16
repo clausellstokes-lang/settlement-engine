@@ -4762,3 +4762,47 @@ rendered as in-fiction absence in peacetime.
    display family stands at FIVE of six members landed; **TE24 runs
    the dom train now** — DOM-3 last, the founders copy QUOTED at
    collection.
+
+## §128 · THE STRESSOR PIN (owner directive 2026-08-15 + the chair's
+## design direction, vetoable; the owner's fork — freeze the whole
+## settlement or just the stressor — RESOLVED FOR THE STRESSOR)
+
+1. **THE DIRECTIVE**: every stressor gains a DM-authority PIN —
+   toggled in the ONE dossier edit mode (§126a) — making it
+   unresolvable by the simulation: a pinned siege/plague/famine
+   persists through ALL time advances until the DM edits otherwise.
+2. **THE FORK IS RESOLVED: PIN THE STRESSOR, NEVER THE SETTLEMENT.**
+   A full settlement freeze breaks three ways the owner's own
+   question anticipated: neighbors read a fossil (a siege against a
+   frozen defender cannot progress — attrition, morale, and food
+   expect motion; the war system deadlocks); every coupling with a
+   frozen endpoint needs a bespoke arm (goods and migrants arriving
+   at a stopped town — the registry would double); and a settlement
+   outside time while the chronicle advances reads as a bug, not a
+   fiction. The pin instead SUPPRESSES THE RESOLUTION ARM ONLY —
+   everything else about the settlement keeps simulating, so the
+   held wound keeps MATTERING: the famine keeps starving, the siege
+   keeps choking trade, beliefs keep spreading.
+3. **REFINEMENT ONE — CLAMPED FLOORS (dramatic stasis)**: a pinned
+   stressor's TERMINAL arms clamp at chair-derived floors (§42/§43
+   signed) — the pinned famine's population asymptotes at a
+   desperate band instead of extinction; the pinned siege never
+   resolves into fall. Without this, a century advance dissolves
+   the settlement the DM meant to HOLD — the pin must preserve the
+   suffering, not complete it.
+4. **REFINEMENT TWO — THE DYADIC PIN**: where a stressor has
+   participants (the besieging army), the pin holds the WHOLE
+   stressor relationship in stasis — the attacker's commitment
+   persists at its own clamped floor (its supply/attrition terminal
+   arms suspended for the engagement) — else the attacker starves
+   out of a siege the pin forbids lifting. Parties outside the
+   stressor stay fully organic.
+5. **THE LAWS IT INHERITS**: the pin is a provenance-carried DM edit
+   (a recorded world-input — "held by the DM's hand" — history
+   honest per THE PROMISE); it survives time-advance as persisted
+   state the resolution arms read each tick (the lifecycle law);
+   unpinning resumes organic resolution from the held state; the
+   chronicle may NAME long-held states in-fiction. Toggle-off is
+   byte-identical (dormancy proof). Estimated 2–3 waves (the pin
+   field + arm gating + clamps · the edit-mode toggle + provenance ·
+   the chronicle acknowledgment), chartered beside the war console.
