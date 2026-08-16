@@ -10972,5 +10972,175 @@
           "tests/lint/errorCopyBaseline.test.js"
         ]
       ]
-    }  ]
+    },
+{
+      "id": "DOM-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DOM-3.md",
+      "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "tests/components/founderPurchasePathAbsent.test.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/pricingPage.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/landing.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/en.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/PricingPage.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/pricing/PricingBands.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/pricing/FounderTile.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/home/LandingBelowFold.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/config/pricing.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/config/tierFacts.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/lib/founderSeats.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/create-checkout/index.ts"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/create-checkout/index.test.ts"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/edgeFunctions/contracts.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/ui/founderTileRestore.test.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/ui/pricingPageBands.test.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/config/pricing.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "supabase/functions/create-checkout/index.ts",
+          "symbol": "const ABOLISHED_PRODUCTS = new Set(['founder_lifetime']);"
+        },
+        {
+          "path": "supabase/functions/create-checkout/index.ts",
+          "symbol": "if (ABOLISHED_PRODUCTS.has(product)) {"
+        },
+        {
+          "path": "src/copy/pricingPage.js",
+          "symbol": "cta: 'Request a chair',"
+        },
+        {
+          "path": "src/copy/pricingPage.js",
+          "symbol": "capNote: 'A chair is given, never sold.',"
+        },
+        {
+          "path": "src/components/PricingPage.jsx",
+          "symbol": "kind: isFounder ? 'current' : 'navigate',"
+        },
+        {
+          "path": "src/components/PricingPage.jsx",
+          "symbol": "OWNER_DECISION_QUEUE \u00a7118"
+        },
+        {
+          "path": "tests/components/founderPurchasePathAbsent.test.jsx",
+          "symbol": "const ABOLISHED_SENTENCES = Object.freeze(["
+        },
+        {
+          "path": "tests/components/founderPurchasePathAbsent.test.jsx",
+          "symbol": "THE INBOUND PATH IS UNTOUCHED \u2014 the webhook can still refund a historical sale"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "no abolished sale sentence reaches the rendered pricing page, asserted behind non-vacuity controls that prove the page rendered"
+        },
+        {
+          "id": "A2",
+          "case": "the charter CTA reads Request a chair and navigates to the Hall, and its kind is never purchase so it cannot be elected the page's loud primary"
+        },
+        {
+          "id": "A3",
+          "case": "create-checkout carries no founder price row and refuses the product through an explicit ABOLISHED_PRODUCTS set consulted before the catalog"
+        },
+        {
+          "id": "A4",
+          "case": "the stripe-webhook founder branches are untouched, so a refund or replay of a historical session still lands"
+        },
+        {
+          "id": "A5",
+          "case": "the account tile and the landing strip speak the Hall's chairs-held vocabulary and open no checkout"
+        },
+        {
+          "id": "A6",
+          "case": "the nine existence-pinning assertions are inverted, re-keyed or kept per their nature, with a control proving the harness can still transact"
+        },
+        {
+          "id": "A7",
+          "case": "no un-interpolated token reaches the DOM after the copy-key rename"
+        },
+        {
+          "id": "A8",
+          "case": "the test-file census moves by files +1 with credited, and parked does not move"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/founderPurchasePathAbsent.test.jsx",
+          "tests/ui/founderTileRestore.test.jsx",
+          "tests/ui/pricingPageBands.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/foundersHallPage.test.jsx",
+          "tests/config/tierFacts.contract.test.js",
+          "tests/config/pricing.test.js",
+          "tests/lib/foundersHall.test.js",
+          "tests/lib/founderSeats.test.js",
+          "tests/lib/checkoutReconcile.test.js",
+          "tests/copy/pricingP9.test.js",
+          "tests/edgeFunctions/contracts.test.js",
+          "tests/ui/pricingPageVariant.test.jsx",
+          "tests/lint/sizeBaseline.test.js"
+        ]
+      ]
+    }
+  ]
 }
