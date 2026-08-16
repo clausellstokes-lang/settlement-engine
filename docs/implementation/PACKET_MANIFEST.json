@@ -13193,6 +13193,352 @@
           "tests/lint/mutationCoverageManifest.test.js"
         ]
       ]
+    },
+    {
+      "id": "SK-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-4.md",
+      "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/flagConstraints.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/coveringArray.mjs"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/audit/soakRules.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/fixtures/soakFlagRegistryFixture.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/coveringArrayCoverage.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function composeSoakRules"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const DEFAULT_SIMULATION_RULES"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "uncoveredBaseline"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the fixture can execute its own defect, asserted before any coverage number is read"
+        },
+        {
+          "id": "A2",
+          "case": "a pair on a structurally dark key covers nothing, and the lawful row re-covers it"
+        },
+        {
+          "id": "A3",
+          "case": "the manifest is typed, sourced, rationale-carrying and shrink-guarded, and a stale row reds"
+        },
+        {
+          "id": "A4",
+          "case": "the flag domain is enumerated from the registry and its arithmetic closes at 79"
+        },
+        {
+          "id": "A5",
+          "case": "all-on is recast as the maximal-lawful row and all-off stays the dark control"
+        },
+        {
+          "id": "A6",
+          "case": "the array covers every reachable pair, is deterministic, and a thin one is refused"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/coveringArrayCoverage.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-3.md",
+      "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/ladder.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/blastRadius.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/blastRadiusUnion.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/certification/couplingRegistry.js",
+          "symbol": "export"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "three release probes"
+        },
+        {
+          "path": "scripts/soak/pool.mjs",
+          "symbol": "export function grid"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the coupling registry is seven files and every one of them exists"
+        },
+        {
+          "id": "A2",
+          "case": "the happy path is a differential over the union of the three arms"
+        },
+        {
+          "id": "A3",
+          "case": "each refuse-to-full condition fires by its own cause, arm disagreement included"
+        },
+        {
+          "id": "A4",
+          "case": "the control sample is banded, seeded and compositionally complete"
+        },
+        {
+          "id": "A5",
+          "case": "the ladder gates cheapest-first and refuses every thinning that section 141 names"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/blastRadiusUnion.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-6",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-6.md",
+      "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/seedLedger.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/seedLedgerDensity.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/soak/capsule.mjs",
+          "symbol": "export function buildCapsule"
+        },
+        {
+          "path": "scripts/soak/tripwires.mjs",
+          "symbol": "export const TRIPWIRES"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the home is outside both trees and every archive, is overridable, and an unwritable one is a hard refusal naming the path"
+        },
+        {
+          "id": "A2",
+          "case": "keys are the full cell identity, and two config rows on one seed are different keys"
+        },
+        {
+          "id": "A3",
+          "case": "a cancelled or superseded run leaves the ledger byte-identical, while the same run completed credits"
+        },
+        {
+          "id": "A4",
+          "case": "a known finding deduplicates against its standing capsule, and a different tick band still counts"
+        },
+        {
+          "id": "A5",
+          "case": "density decays, and ordering is a permutation that never truncates the never-fired tail"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/seedLedgerDensity.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-5",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-5.md",
+      "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/curveBands.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/curveBandFreeze.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/telemetry/simMetricAggregate.mjs",
+          "symbol": "export function bandFamilies"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export function simMetricsByEpoch"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "sim_narration_tempo"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the band set is enumerated from the tm-3 registry, one family per year-epoch row, and no run-epoch row becomes one"
+        },
+        {
+          "id": "A2",
+          "case": "a provisional, rolling or restored receipt throws rather than freezing"
+        },
+        {
+          "id": "A3",
+          "case": "a clean full instrument freezes, and the capsule carries the unsoaked marker"
+        },
+        {
+          "id": "A4",
+          "case": "a red ratchet makes the band capsule unwritable, by its own named cause"
+        },
+        {
+          "id": "A5",
+          "case": "the re-record is proven three ways, and an undeclared curve movement is convicted by the key-by-key diff"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/curveBandFreeze.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-7",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-7.md",
+      "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/rolling.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/cancel.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/rollingCancellation.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "package.json"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "package.json",
+          "symbol": "soak:release"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "path": "scripts/soak/run.mjs",
+          "symbol": "export function planRun"
+        },
+        {
+          "path": "scripts/audit/realm-scale-certification.mjs",
+          "symbol": "export const REALM_SCALE_SOURCE_PATHS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "cancellation is PID-exact and a pattern-matching decoy survives, even when mis-listed in the ledger"
+        },
+        {
+          "id": "A2",
+          "case": "a dead or recycled PID is skipped and reported, never signalled"
+        },
+        {
+          "id": "A3",
+          "case": "a pattern-matched kill is refused by name in every spelling"
+        },
+        {
+          "id": "A4",
+          "case": "the dispatch gate refuses by its own cause, including at the tm+sk family's own exposure"
+        },
+        {
+          "id": "A5",
+          "case": "the report is findings-only, additive, sha-stamped, and orphan findings are reported"
+        },
+        {
+          "id": "A6",
+          "case": "the lighting census tuple is re-derived from an executed run and its delta attributed by measurement"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/rollingCancellation.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
     }
   ]
 }
