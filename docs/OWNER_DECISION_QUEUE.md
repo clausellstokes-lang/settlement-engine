@@ -7708,3 +7708,41 @@ to MF-B7 same-turn.
    countryside ground primitives (T-24), GAP-B/C censuses.
    Wave nine holds: underground, paint integration, river
    ladder, chrome/vintage/decay riches.
+
+## §213 · RS-2 COLLECTED — THE EPOCH FLAG HAS NO SOAK
+## DISPOSITION; TE34 (THE HARNESS MICRO-BATCH) DISPATCHED
+## (2026-08-16, chair §170)
+
+1. **RS-2 COMPLETE at 9ed2436c** (cert-30, 168 cells, findings
+   only). **F1, instrument-blocking:** the EP exposure's
+   `advanceEpochEnabled` entered the flag census with NO SK-4
+   manifest disposition; 50/56 covering rows lawfully lit it and
+   EVERY lit cell crashes at the first pulse (150/168; crash set
+   ≡ flag set, proven by identity and solo repro). The kernel
+   guard is WORKING AS DESIGNED — the value is args-borne from
+   the store mint and the soak path threads none. A harness gap,
+   not a world defect; the runnable subset still delivered 84.4%%
+   pair coverage. **RULING: disposition (a) — THREAD THE EPOCH
+   MINT ARGS THROUGH THE SOAK PATH** so the flag lights lawfully;
+   pinning it off would exclude the epoch surface from exactly
+   the instrument built to test it.
+2. **RATIFIED:** content-derived row ids (ledger identities can
+   never smear across array regenerations); folding only the 18
+   measured cells into the seed ledger (stamping unmeasured cells
+   fabricates measurements); the substituted determinism cell
+   disclosed (maximal-lawful itself unrunnable). The npm ci
+   spelling closed RS-1's deviation and the 18 clean receipts
+   prove the crash class is not an install artifact. Dark-control
+   re-fires ledger-deduplicated as §206.2b KNOWN (3 known / 0
+   fresh). Growth curves strengthened (top ×8.17), PROVISIONAL.
+3. **TE34 DISPATCHED — the soak-harness micro-batch, four ruled
+   items:** (i) thread the epoch mint args + rule the SK-4
+   disposition row (F1); (ii) condition the dark-control
+   divergence assertion on sample size (§206.2b); (iii) make the
+   non_finite tripwire measure at source, not over JSON-parsed
+   receipts (the vacuity note); (iv) the deno module-top env-leak
+   class sweep TE33 deferred. **RS-3 DELIBERATELY WAITS for
+   TE34's cure** — a soak before it re-buys the same 84%% and
+   loses every epoch on-state pair; the §197.4a cadence resumes
+   at TE34's exposure. Recorded as a supersession-of-cadence
+   deviation with cause.
