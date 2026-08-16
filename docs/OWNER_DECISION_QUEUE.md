@@ -6183,3 +6183,26 @@ as amendments (expected to extend mf-c/mf-e; verifies the
 marginalia's event-log quotability, the neighbor-link travel
 surface, the fog machinery's reuse seams, heraldry seeding; same
 discipline, small scope).
+
+## §164 · OWNER ORDER: BUILD THE mf FAMILY + UNLIMITED HIGGSFIELD
+## (2026-08-16)
+
+1. **The order (verbatim intent): "comprehensively, exhaustively,
+   carefully, consistently, seamlessly, coherently and cohesively
+   build it"** — the mf family builds from the TC29 plans (+ TC30
+   amendments when they land). **Path: PARALLEL AUTHORING / SERIAL
+   LANDING** (the §152-era owner-authorized method): MF-B1
+   dispatched to build the foundation trains (mf-0 + mf-a: the
+   typed founding field, the v3 normalizer lifecycle, the INERTIA
+   ENGINE, layer-zero substrate, district organisms) as land-ready
+   src-shaped code in the archive sandbox with the full proof
+   battery (determinism, element budgets, counterfactuals) +
+   rendered exemplars for owner judgment; subsequent waves follow
+   per lane completion; the LANDING stays serial through the real
+   gate after the §27 queue per §150.4 — the soak timeline is
+   untouched.
+2. **Higgsfield: UNLIMITED GRANT** ("use it until I run out of
+   credits") for references whenever any mf lane needs one —
+   iteration/re-roll license included (§159-era). The 21
+   outstanding references collect at the next cycle; the corpus's
+   27 on-disk files calibrate MF-B1 meanwhile.
