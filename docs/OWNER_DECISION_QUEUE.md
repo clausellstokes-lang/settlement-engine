@@ -6841,3 +6841,33 @@ executors; gate two runs.
    premises re-verified at tip, never inherited). A foreign stash
    (analytics-intelligence-layer, 2026-06-15) remains present and
    untouched — the owner's.
+
+## §189 · MF-B3 COLLECTED — ALL TEN UNDER CEILING; THE FIELDS
+## SOLVED; MF-B4 DISPATCHED (2026-08-16, chair under §170)
+
+1. **Wave three met all five targets and set two family firsts:**
+   ALL TEN exemplars under the 2,200 op ceiling (fjord 2,031); the
+   street web became a REAL DERIVATION (seven ranked sourced
+   channels; every approach reaches the market on continuous pale
+   ground on all ten leaves) — the class banked: NEGATIVE SPACE IS
+   A DRAWING TECHNIQUE, NOT A DERIVATION. §16 fields TILE at 1.000
+   coverage (the one-line geometric cure banked: JITTER THE SHARED
+   VERTICES, NOT THE CENTRES; and §16.2's orientation belongs to
+   the GREAT FIELD, not the furlong — per-furlong on flat ground
+   IS the banned sunburst). Tier-anchored §161n ladders cured an
+   unreachable-rung defect (a village could never have a parish
+   church). ⛔ The sea-grown quarter caught (260/327 cells in the
+   water since B1 — the partition never tested water; cured).
+   75 pins counterfactual-paired; 10/10 determinism.
+2. **CHAIR EYES-ON (village leaf, absolute bar):** the countryside
+   is ~85-90% — genuinely hf3-family now, the green a true void at
+   the crossroads; the village CORE ~55-60% and the lane's own
+   diagnosis is ratified: built share fell as ground was renamed
+   street; streets read too wide; fabric floats. **MF-B4
+   DISPATCHED with the inversion first: THE UMBRELLA DERIVES FROM
+   THE BLOCK RUNS (blocks → streets → umbrella — §181.2b's
+   direction-of-derivation cure one level up), then
+   building-fronts-define-voids (the green edged by facades), the
+   stray pale-stroke artifact hunt, farmstead lanes, THEN the
+   mf-c/mf-d members (states/lenses/chrome/drift + the §12
+   immersion suite + the lettering pass).**
