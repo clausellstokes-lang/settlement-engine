@@ -6802,3 +6802,42 @@ first gate red was its OWN seed-loop pattern, caught by
 seedLoopTotality.walker and cured via the estate's collector
 idiom with mutation proof — the walker estate teaching its own
 executors; gate two runs.
+
+## §188 · TE29 COLLECTED — EP STAGE ONE LANDED; THE 29th EXPOSURE;
+## THE FIRST-RUN SUPERSESSION RULING; EP STAGE TWO DISPATCHED
+## (2026-08-16, chair)
+
+1. **EP stage one LANDED GREEN and EXPOSED: CAS a8f42d94 →
+   bbf58fa1** (terminal TRUE_EXIT=0; 111 packets/0 READY; ratchets
+   at exact floors; 28,442 tests / 11 known — and the +36 vs
+   §183.1 is EXACTLY the lighting census's re-record figure: two
+   instruments counting by different methods agreeing to the unit).
+   The terminal's run-1 red was the executor's own seed-loop
+   pattern, caught by seedLoopTotality.walker and cured via the
+   collector idiom with honest mutation proof (the
+   non-discriminating control RECORDED, not faked) — §the
+   engineering-lessons memory already carries the class.
+2. **RATIFIED (vetoable): the two beyond-scope acts** — the EP
+   volume unfork riding this landing (uf-1 had left EP's volume
+   forked; stage two would have read superseded premises;
+   cmp-proven both ways) and the §121.2 annex fold with its stale
+   row corrected in a fold comment. BANKED: the three figure
+   corrections — EP.M6's 68→80 was a UNIT error (per-occurrence vs
+   per-line; the tree never moved); hash01 callers are 14 (not 10,
+   not 16); ⛔ THE §104.4 BUNDLE BILL IS SEVEN ARTEFACTS (one build
+   window + staged content — EP-1 inherits identically via
+   simulationRules.js).
+3. **THE FIRST-RUN SUPERSESSION RULING (vetoable):** strict
+   §143.1 supersession would cancel RS-1 (30/160 on a8f42d94) for
+   this exposure. DEVIATION, once: RS-1 COMPLETES — its value is
+   first-instrument calibration plus the live dark-control
+   seed-divergence capsule, and its tip differs from bbf58fa1 by
+   EP alone; RS-2 fires on RS-1's completion at the then-current
+   tip. HENCEFORTH strict supersession applies to every rolling
+   run.
+4. **TE30 DISPATCHED: EP STAGE TWO** with the stage-two
+   inheritance (the walker enumeration incl.
+   pulseKernelLineAddress first; the seven-artefact bundle bill;
+   premises re-verified at tip, never inherited). A foreign stash
+   (analytics-intelligence-layer, 2026-06-15) remains present and
+   untouched — the owner's.
