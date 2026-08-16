@@ -1,6 +1,7 @@
 # SK / SK-7 — the rolling protocol, PID-exact cancellation, and the `sk-b` census (member 5 of `sk-b`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `ff29a44c`
 - **Verified base:** `claude/composite-r4` at `6c2bedad2064a523b9e7f61d7e0f6e61f0571650`
   (the `sk-a` terminal)
 - **Train:** `sk-b`, family **SK**, member **5** of 5 — last in the train.

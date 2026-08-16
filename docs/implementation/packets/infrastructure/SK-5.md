@@ -1,6 +1,7 @@
 # SK / SK-5 — machine-diffed curve baselines, the tm-3 consumer (member 4 of `sk-b`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `94ef9b89`
 - **Verified base:** `claude/composite-r4` at `6c2bedad2064a523b9e7f61d7e0f6e61f0571650`
   (the `sk-a` terminal)
 - **Train:** `sk-b`, family **SK**, member **4** of 5.

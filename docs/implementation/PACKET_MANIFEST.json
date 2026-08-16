@@ -13196,7 +13196,7 @@
     },
     {
       "id": "SK-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-4.md",
       "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
       "changeManifest": [
@@ -13242,6 +13242,39 @@
           "path": "scripts/mutation-coverage-manifest.json",
           "symbol": "uncoveredBaseline"
         }
+,
+        {
+          "path": "scripts/soak/flagConstraints.mjs",
+          "symbol": "export const CONSTRAINT_MANIFEST"
+        },
+        {
+          "path": "scripts/soak/flagConstraints.mjs",
+          "symbol": "export const OWNER_GATED_ABSENT"
+        },
+        {
+          "path": "scripts/soak/flagConstraints.mjs",
+          "symbol": "export function isEffective"
+        },
+        {
+          "path": "scripts/soak/flagConstraints.mjs",
+          "symbol": "export function manifestDefects"
+        },
+        {
+          "path": "scripts/soak/coveringArray.mjs",
+          "symbol": "export function buildCoveringArray"
+        },
+        {
+          "path": "scripts/soak/coveringArray.mjs",
+          "symbol": "export const MEASURED_ROWS_AT_MINT"
+        },
+        {
+          "path": "scripts/audit/soakRules.mjs",
+          "symbol": "export function flagDomainCensus"
+        },
+        {
+          "path": "tests/fixtures/soakFlagRegistryFixture.js",
+          "symbol": "export const INEFFECTIVE_ROW"
+        }
       ],
       "acceptanceCases": [
         {
@@ -13281,7 +13314,7 @@
     },
     {
       "id": "SK-3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-3.md",
       "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
       "changeManifest": [
@@ -13310,6 +13343,27 @@
         {
           "path": "scripts/soak/pool.mjs",
           "symbol": "export function grid"
+        }
+,
+        {
+          "path": "scripts/soak/blastRadius.mjs",
+          "symbol": "export const REFUSE_TO_FULL_PATHS"
+        },
+        {
+          "path": "scripts/soak/blastRadius.mjs",
+          "symbol": "export function deriveBlastRadius"
+        },
+        {
+          "path": "scripts/soak/blastRadius.mjs",
+          "symbol": "export function controlSampleSize"
+        },
+        {
+          "path": "scripts/soak/ladder.mjs",
+          "symbol": "export const RUNGS"
+        },
+        {
+          "path": "scripts/soak/ladder.mjs",
+          "symbol": "export function ladderRefusals"
         }
       ],
       "acceptanceCases": [
@@ -13345,7 +13399,7 @@
     },
     {
       "id": "SK-6",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-6.md",
       "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
       "changeManifest": [
@@ -13366,6 +13420,23 @@
         {
           "path": "scripts/soak/tripwires.mjs",
           "symbol": "export const TRIPWIRES"
+        }
+,
+        {
+          "path": "scripts/soak/seedLedger.mjs",
+          "symbol": "export function resolveStateHome"
+        },
+        {
+          "path": "scripts/soak/seedLedger.mjs",
+          "symbol": "export const HALF_LIFE_BAND"
+        },
+        {
+          "path": "scripts/soak/seedLedger.mjs",
+          "symbol": "export function recordRun"
+        },
+        {
+          "path": "scripts/soak/seedLedger.mjs",
+          "symbol": "export function orderCells"
         }
       ],
       "acceptanceCases": [
@@ -13401,7 +13472,7 @@
     },
     {
       "id": "SK-5",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-5.md",
       "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
       "changeManifest": [
@@ -13426,6 +13497,23 @@
         {
           "path": "scripts/telemetry/simMetricRegistry.mjs",
           "symbol": "sim_narration_tempo"
+        }
+,
+        {
+          "path": "scripts/soak/curveBands.mjs",
+          "symbol": "export function registryBandFamilies"
+        },
+        {
+          "path": "scripts/soak/curveBands.mjs",
+          "symbol": "export const BAND_WIDTH_K"
+        },
+        {
+          "path": "scripts/soak/curveBands.mjs",
+          "symbol": "export function freeze"
+        },
+        {
+          "path": "scripts/soak/curveBands.mjs",
+          "symbol": "export function verifyDeclaredShift"
         }
       ],
       "acceptanceCases": [
@@ -13461,7 +13549,7 @@
     },
     {
       "id": "SK-7",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/SK-7.md",
       "verifiedBase": "6c2bedad2064a523b9e7f61d7e0f6e61f0571650",
       "changeManifest": [
@@ -13502,6 +13590,27 @@
         {
           "path": "scripts/audit/realm-scale-certification.mjs",
           "symbol": "export const REALM_SCALE_SOURCE_PATHS"
+        }
+,
+        {
+          "path": "scripts/soak/cancel.mjs",
+          "symbol": "export function cancellationPlan"
+        },
+        {
+          "path": "scripts/soak/cancel.mjs",
+          "symbol": "export function refusePatternKill"
+        },
+        {
+          "path": "scripts/soak/rolling.mjs",
+          "symbol": "export function dispatchRefusals"
+        },
+        {
+          "path": "scripts/soak/rolling.mjs",
+          "symbol": "export function rollingReport"
+        },
+        {
+          "path": "package.json",
+          "symbol": "soak:rolling"
         }
       ],
       "acceptanceCases": [

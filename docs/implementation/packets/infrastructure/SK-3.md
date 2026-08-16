@@ -1,6 +1,7 @@
 # SK / SK-3 — the rung ladder and the differential re-soak scope (member 2 of `sk-b`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `430ddc3f`
 - **Verified base:** `claude/composite-r4` at `6c2bedad2064a523b9e7f61d7e0f6e61f0571650`
   (the `sk-a` terminal)
 - **Train:** `sk-b`, family **SK**, member **2** of 5.

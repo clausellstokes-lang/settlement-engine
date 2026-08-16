@@ -1,6 +1,7 @@
 # SK / SK-4 — the constraint manifest, minted, and the covering array (member 1 of `sk-b`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `fa773234`
 - **Verified base:** `claude/composite-r4` at `6c2bedad2064a523b9e7f61d7e0f6e61f0571650`
   (the `sk-a` terminal) (the `sk-a` terminal)
 - **Train:** `sk-b`, family **SK**, member **1** of 5.

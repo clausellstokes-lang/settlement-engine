@@ -1,6 +1,7 @@
 # SK / SK-6 — the sensitive-seed ledger and its durable home (member 3 of `sk-b`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `1a57676a`
 - **Verified base:** `claude/composite-r4` at `6c2bedad2064a523b9e7f61d7e0f6e61f0571650`
   (the `sk-a` terminal)
 - **Train:** `sk-b`, family **SK**, member **3** of 5.
