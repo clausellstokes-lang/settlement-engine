@@ -6126,3 +6126,45 @@ piers, not bigger ones). §11.1 rebuild-at-anchor is the drift
 form; §161g's outlived monument the demotion form. The totality
 census ladders every archetype or records single-rung-with-
 rationale. TC29 notified (#15).
+
+## §162 · TC29 COLLECTED — THE mf BUILD PLAN EXISTS (2026-08-16,
+## chair)
+
+1. **Six trains, twenty-four members: mf-0 (typed founding-field
+   mint, solo) → mf-a (inertia + layer zero + district organisms,
+   7) → mf-b (terraform/institutions/ground/walls-water, 4) → mf-c
+   (state axis/lenses/chrome, 3) → mf-d (drift grammar incl. MF-D5
+   snapshots, 5) → mf-e (tools/export/acceptance/measure-mint, 4).**
+   Six premise maps validate exit 0; packets clean at base;
+   queue-check red DELIBERATELY (uf-1 declared ttsSimulated:false —
+   an honest manifest; R1 is a dispatch-time obligation).
+2. **THE DOOR-B RESULT (measured): the fabric rides
+   layoutLawVersion 3 — ZERO of MF-R1's five named pins re-record
+   and the §49/§50 flag bill is NOT INCURRED** (all goldens are
+   version-explicit). But v3 is not free: readLayoutLawVersion is a
+   hardcoded ===2 and normalizeMapEdits SILENTLY STRIPS v3 blobs
+   (the write-survives-one-path class — goldens never round-trip
+   the normalizer, so nothing sees it); mf-0 closes the lifecycle.
+3. **CORRECTION to §160.1 (chair honesty): "no op-ceiling raise
+   needed" is downgraded to PLAUSIBLE** — MF-P1's 1,713 elements
+   and OP_CEILING count DIFFERENT DENOMINATORS; the build measures
+   the real one and the raise, if needed, remains owner-gated.
+   Further measured findings: the §10 totality census is 67 rows
+   (activeConditions is a 46-archetype vocabulary); populationHistory
+   is an ELEVEN-ENTRY RING BUFFER that cannot carry the high-water
+   mark (MF-D5's signal-shape decision covers it); NO
+   faction→institution edge exists — §161l's specific-power web
+   derives at archetype level under the degradation law.
+4. **§0.0 resolved seven forks in-lane with recorded
+   reconciliations** (typed founding-field MINT over authored
+   override; REAL hatch geometry for Accessible; the year dimension
+   BUILT as MF-D5 snapshots). **THREE owner gates survive, queued to
+   the decision batch with recommendations:** the LENS_COUNT
+   entitlement act (a PAID SURFACE moves), MF-0F's declared
+   same-seed shift, MF-D5's persisted-signal shape. Two signed
+   forks stand: MF.U5 (does settlement.id survive regen — decides
+   whether the public map is the same town as the owner's) and
+   MF.U2 (do stressors ever populate).
+5. mf executes after the §27 queue as ruled; the §12 immersion
+   proposals (chair, nine ideas) await the owner's pick before
+   joining the charter.
