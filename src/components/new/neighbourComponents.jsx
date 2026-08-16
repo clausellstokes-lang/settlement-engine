@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
+import { relColor } from '../settlements/relationshipColors.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
@@ -107,7 +108,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
           const _pn = link.neighbourName || link.name;
           const _isr = (settlement?.interSettlementRelationships||[])
             .filter(rx => rx.partnerSettlement === _pn || rx.linkId === link.linkId);
-          const _c = {trade_partner:'#1a5a28',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8a5010',cold_war:'#8a3010',hostile:'#8b1a1a',neutral:'#6b5340'}[link.relationshipType] || '#6b5340';
+          const _c = relColor(link.relationshipType);
           return _isr.length>0 ? <div style={{marginTop:10,borderTop:`1px solid ${_c}20`,paddingTop:8}}>
             <div style={{fontSize:FS.xxs,fontWeight:800,color:_c,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>
               Known Contacts ({_isr.length})

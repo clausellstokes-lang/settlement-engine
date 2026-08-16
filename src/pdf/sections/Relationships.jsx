@@ -21,7 +21,8 @@ import {
 import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, relColors, pt, swatch } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
+import { relColor } from '../../components/settlements/relationshipColors.js';
 import {
   cap, label, hookText, humanize, prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
@@ -254,7 +255,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 
 function NeighbourCard({ n, idx }) {
   const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
-  const color = relColors[n.type] || palette.muted;
+  const color = relColor(n.type);
   return (
     <View
       style={{
@@ -330,7 +331,7 @@ function NeighbourCard({ n, idx }) {
 function RelPill({ type: relType }) {
   if (!relType) return null;
   const labelStr = REL_LABELS[relType] || cap(relType);
-  const color = relColors[relType] || palette.muted;
+  const color = relColor(relType);
   return (
     <View
       style={{

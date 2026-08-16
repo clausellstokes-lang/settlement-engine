@@ -16,6 +16,7 @@ import { jsPDF } from 'jspdf';
 import { formatCount } from '../domain/formatNumber.js';
 import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
+import { REL_RGB, relRgb } from '../components/settlements/relationshipColors.js';
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
@@ -55,17 +56,10 @@ const GOLD  = [160, 118, 42];
 const BROWN = [107, 83,  48];
 const MUTED = [140, 120, 90];
 
-// Relationship line colours (same hues as the web app)
-const REL_COLORS = {
-  trade_partner: [26,  90,  40],
-  allied:        [26,  58,  122],
-  patron:        [74,  26, 106],
-  client:        [106, 58,  26],
-  rival:         [138, 80,  16],
-  cold_war:      [138, 48,  16],
-  hostile:       [139, 26,  26],
-  neutral:       [107, 83,  64],
-};
+// Relationship line colours. §67.2: REL_RGB's orphan status ends here — this
+// hand-kept RGB copy is exactly what `relRgb()` was written for, and it was
+// missing `vassal` and `criminal_network`, so both fell to the neutral line AND
+// were absent from the legend this file builds by enumerating the table.
 
 const REL_DASH = {
   patron:   [1.5, 1.0],
@@ -377,7 +371,7 @@ function buildMap(d, campaignName, settlements, pageN) {
     if (!a || !b) continue;
     const pa = proj(a);
     const pb = proj(b);
-    const clr = REL_COLORS[e.type] || REL_COLORS.neutral;
+    const clr = relRgb(e.type);
     sd(d, clr);
     // Line weight by edge type — stronger for hostile/alliance
     const lw = e.type === 'hostile' ? 0.9 :
@@ -424,7 +418,7 @@ function buildMap(d, campaignName, settlements, pageN) {
   hline(d, ML, ly + 1, ML + CW, TAN, 0.3);
   ly += 5;
 
-  const legendItems = Object.entries(REL_COLORS);
+  const legendItems = Object.entries(REL_RGB);
   const legCol = CW / 4;
   legendItems.forEach((entry, idx) => {
     const [type, clr] = entry;
@@ -511,7 +505,7 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
 
     if (i % 2 === 0) rect(d, ML, y - 3.5, CW, rowH, CREAM);
 
-    const clr = REL_COLORS[c.relType] || REL_COLORS.neutral;
+    const clr = relRgb(c.relType);
     // Left colored pip
     sf(d, clr);
     d.circle(ML + 0.5, y - 1.2, 1.1, 'F');

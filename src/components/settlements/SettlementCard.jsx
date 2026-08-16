@@ -23,10 +23,12 @@ import DeleteConfirmation from '../DeleteConfirmation';
 import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
+import { relColor } from './relationshipColors.js';
 
-// Relationship-type swatch for the neighbour chips (kept inline on OUR floor —
-// the shared cross-surface palette adoption is a separate cosmetic dedupe).
-const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
+// Relationship-type swatch for the neighbour chips. §67.2: the inline copy that
+// stood here was NOT a cosmetic duplicate — it rendered `allied` in the canonical
+// TRADE hue and collapsed rival/cold_war/hostile onto one red, so the chip lied
+// about which relationship it was showing. One source now (relationshipColors.js).
 
 // ── Ledger cell rhythm (C3 — THE LEDGER) ──────────────────────────────────────
 // The Library list is a surveyor's ledger: a real <table> whose rows share
@@ -59,7 +61,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
     // is undefined. The render below falls back to `savedAt`, which IS present.)
     const d = new Date(t);
     if (Number.isNaN(d.getTime())) return '';
-    try { return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; }
+    // §69.2 / J-TC21-4: the third `en-GB` outlier. It rides DA-A3 because that
+    // member owns this file (the palette convergence), not because it is palette work.
+    try { return d.toLocaleDateString('en-US',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; }
   };
   const active = isSaveActive(s);
   const planInactive = isPlanInactiveSave(s);
@@ -274,7 +278,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 {(s.settlement?.neighbourNetwork?.length > 0) && (
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
-                      const nc = REL_COLORS[n.relationshipType] || MUTED;
+                      const nc = relColor(n.relationshipType);
                       return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, padding:'1px 6px', whiteSpace:'nowrap' }}>
                         {n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                       </span>;

@@ -66,18 +66,21 @@ export const factionColors = {
   other:         '#6b5340',
 };
 
-// Relationship colors
-export const relColors = {
-  rival:           '#8b1a1a',
-  cold_war:        '#8b1a1a',
-  hostile:         '#8b1a1a',
-  allied:          '#1a5a28',
-  secret_alliance: '#1a5a28',
-  trade_partner:   '#a0762a',
-  patron:          '#2a3a7a',
-  client:          '#2a3a7a',
-  criminal_network:'#5a2a8a',
-};
+// ── Relationship colors — DELETED, NOT MOVED (§67.2) ────────────────────────
+// ⛔ THIS TABLE DID NOT CARRY A STALE TINT. IT CARRIED A SEMANTIC ERROR, and the
+// paid PDF chapter rendered it:
+//   allied        '#1a5a28'  is canonical TRADE_PARTNER's hue — the react-PDF
+//                            chapter painted an ALLIANCE IN THE TRADE COLOUR
+//   trade_partner '#a0762a'  a hue in no canonical table at all
+//   rival / cold_war / hostile  all '#8b1a1a' — three distinct relationship types
+//                            rendered indistinguishably
+//   patron / client          both '#2a3a7a' — two more collapsed onto one
+//   vassal, neutral          absent entirely
+// Meanwhile the jsPDF exporter beside it (utils/generateCampaignPDF.js) painted
+// the canonical set, so ONE PRODUCT SHIPPED TWO PDF SYSTEMS THAT DISAGREED WITH
+// EACH OTHER about what an alliance looks like. Every surface now reads
+// components/settlements/relationshipColors.js, which is a bijection with the
+// engine's own relationship vocabulary.
 
 // ── Font registration ────────────────────────────────────────────────────────
 // Lora (open SIL) for serif body, Nunito for sans labels/nav. Both shipped as

@@ -175,7 +175,11 @@ describe('SettlementCard — saved-on date (defect 7b: never "Invalid Date")', (
     render(<SettlementCard s={draftNoTimestamp} {...baseProps} currentCampaignId={null} />);
     expect(screen.queryByText(/Invalid Date/i)).toBeNull();
     // A real formatted date line renders from the savedAt fallback (day mon yy).
-    expect(screen.getByText(/\d{1,2}\s+\w{3}\s+\d{2}/)).toBeTruthy();
+    // §69.2 / J-TC21-4 (DA-A3): this card was one of three `en-GB` outliers against
+    // 24 explicit `en-US` renders, so the FIELD ORDER moved with the locale —
+    // `1 Jan 26` became `Jan 1, 26`. The pin's subject is unchanged: a real date
+    // rendered rather than the literal "Invalid Date" this suite exists to forbid.
+    expect(screen.getByText(/\w{3}\s+\d{1,2},\s+\d{2}/)).toBeTruthy();
   });
 
   it('drops the date line entirely when neither timestamp nor savedAt is parseable', () => {

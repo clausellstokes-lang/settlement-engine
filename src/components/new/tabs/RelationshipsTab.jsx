@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
+import { relColor } from '../../settlements/relationshipColors.js';
 import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
 import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
@@ -166,8 +167,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {npcContacts.map((isr,i)=>{
-            const relColors={trade_partner:'#1a5a28',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8a5010',cold_war:'#8a3010',hostile:'#8b1a1a',neutral:'#6b5340'};
-            const c=relColors[isr.relType]||'#6b5340';
+            const c=relColor(isr.relType);
             return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
@@ -196,8 +196,10 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {crossConflicts.map((c,i)=>{
             const isFaction = c.type==='faction_engagement';
-            const relColors={trade_partner:'#a0762a',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8b1a1a',cold_war:'#5a1a1a',hostile:'#8b0000',neutral:'#6b5340'};
-            const col = relColors[c.relType]||'#6b5340';
+            // §67.2 / J-TC21-3: this table diverged from the one thirty lines above
+            // it IN THE SAME FILE on four values, and the compile searched for a
+            // recorded intent for the darker set and found none. It converges.
+            const col = relColor(c.relType);
             return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,padding:'10px 14px',background:`${col}06`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction

@@ -77,12 +77,11 @@ import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffec
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
+import { REL_HEX, relColor } from './settlements/relationshipColors.js';
 
-const REL_COLORS = {
-  trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
-  client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
-  hostile:'#8b1a1a', neutral:'#6b5340',
-};
+// §67.2: the copy that stood here carried the canonical VALUES but was missing
+// `vassal` and `criminal_network` entirely, so those two live edge types fell to
+// the neutral fallback on this surface. relationshipColors.js is the one source.
 
 // MG-3f (leak L8): a zero-caller copy of the saved-config migration lived here and had
 // already rotted into dead code. The rule has ONE home now —
@@ -691,7 +690,7 @@ export default function SettlementDetail({
           <Link2 size={12}/> Neighbour Network ({network.length})
         </div>
         {network.map((n,i)=>{
-          const c=REL_COLORS[n.relationshipType]||SECOND;
+          const c=relColor(n.relationshipType);
           const rel=(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
           return<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
@@ -703,7 +702,7 @@ export default function SettlementDetail({
       </div>}
 
       {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
-      {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_COLORS} />}
+      {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_HEX} />}
 
       {/* The Settlement Editor (catalog roster + Tune priorities) now lives
           inside the Make Changes panel above, embedded below the change form.
