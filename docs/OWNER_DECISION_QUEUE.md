@@ -6109,3 +6109,20 @@ tier scales the interspace: a village's mill-to-market is a lane,
 a metropolis's a warehouse district; every graph edge cites its
 dossier supply relationship, totality-censused). TC29 notified
 (#14).
+
+## §161n · THE INSTITUTION-SCALE LAW (2026-08-16, owner: "a port of
+## a village is not to the scale of a port of a metropolis")
+
+Charter §6: every shape archetype carries a SCALE LADDER; an
+institution renders at the rung its context earns — footprint and
+weight derive CONTINUOUSLY (§161f, never tier-quantized) from
+settlement population × the institution's own dossier weight.
+Ladders: port jetty→quay→docks ward→harbor district; worship
+shrine→chapel→church→cathedral precinct; market cross→square→
+covered market→exchange district; garrison watch house→barracks→
+citadel; water well→cistern yard→waterworks. Each rung is a REAL
+COMPOSITION, never a scaled sprite (the harbor district has MORE
+piers, not bigger ones). §11.1 rebuild-at-anchor is the drift
+form; §161g's outlived monument the demotion form. The totality
+census ladders every archetype or records single-rung-with-
+rationale. TC29 notified (#15).
