@@ -4636,7 +4636,29 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   = +25, closing with nothing left over.
     //
     // +5 suite titles: exactly one new `describe` per new file.
-    files: 2452, parked: 364, credited: 2088, titles: 20373, suiteTitles: 5706,
+    // ── RE-RECORDED 2026-08-16 BY EP STAGE ONE (EP-0), WITH ITS CAUSE MEASURED ─────
+    // 2,452/364/2,088/20,373/5,706 → 2,454/364/2,090/20,409/5,716. THE CAUSE IS TWO NEW
+    // TEST FILES PLUS ONE AMENDED, ALREADY-CREDITED ONE, and nothing else. EP-0 is an
+    // instrument wave — it mints one pure function and three guards and changes no engine
+    // behaviour — so no rule here widened or narrowed and no existing file changed shape.
+    // New: tests/lint/entropyRootCensus.walker.test.js (23 titles, 6 suite titles) — the
+    // entropy-root census; tests/kernel/advanceEpochStreamIdentity.test.js (10 titles,
+    // 3 suite titles) — the rendered dark/lit string pin. Amended, already credited:
+    // tests/kernel/prngForkLabelDelimiter.test.js gains the root-segment reservation
+    // (+3 titles, +1 suite title).
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files      +2  = the two new files
+    //   credited   +2  = both new files are CREDITED, not parked
+    //   titles     +36 = 23 + 10 + 3, closing with nothing left over
+    //   suiteTitles +10 = 6 + 3 + 1
+    // PARKED IS UNCHANGED at 364, and that was earned rather than lucky: every title in
+    // all three files is a literal, so door 3's reader recognises them statically. The
+    // walker's one `for…of` sweeps the SOURCE TREE inside named tests — the registry-walker
+    // idiom SP-D recorded: loop INSIDE a named test, never generate tests from a loop.
+    // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
+    // --porcelain` at measurement time listed exactly this wave's five paths and nothing
+    // else, so no other lane's uncommitted test files are charged to this row.
+    files: 2454, parked: 364, credited: 2090, titles: 20409, suiteTitles: 5716,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

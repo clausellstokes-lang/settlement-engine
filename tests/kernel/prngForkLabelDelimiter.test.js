@@ -39,7 +39,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, test, expect } from 'vitest';
-import { createPRNG } from '../../src/kernel/prng.js';
+import { createPRNG, epochSuffix } from '../../src/kernel/prng.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = join(ROOT, 'src');
@@ -58,6 +58,22 @@ const EMBEDDED_DELIMITER_FAMILIES = Object.freeze({
   'fidelity': ['src/domain/worldPulse/fidelityNoise.js'],
   'religion-contest': ['src/domain/worldPulse/religiousContest.js'],
 });
+
+/**
+ * ⭐ THE ROOT-SEGMENT FAMILIES (wave EP-0). A segment appended to a ROOT composition —
+ * not to a fork label — still lands in the same string space that `fork` derives into,
+ * because `fork` derives by plain concatenation with the same delimiter. `epochSuffix(e)`
+ * renders `::epoch:<e>`, so `${seed}${epochSuffix(e)}` is CHARACTER-IDENTICAL to
+ * `createPRNG(seed).fork(`epoch:${e}`).seed`. The head is therefore RESERVED: no fork
+ * label anywhere in `src` may open with it, or the two streams are one.
+ *
+ * ⚠ This is deliberately NOT a row in EMBEDDED_DELIMITER_FAMILIES above. That map is
+ * exact-equal to the families a source scan FINDS, and `epoch` is spelled by no fork label
+ * at all (MEASURED at the EP-0 base: zero `.fork(` sites in `src` mention it). Adding it
+ * there would red the scan it belongs to; reserving it here is the same guard aimed at the
+ * half that can actually go wrong.
+ */
+const RESERVED_ROOT_SEGMENT_HEADS = Object.freeze(['epoch']);
 
 /** Every .js/.jsx file under src/, repo-relative with POSIX slashes. */
 function collectSourceFiles(dir, out = []) {
@@ -136,5 +152,43 @@ describe('the embedded-delimiter label families are frozen and collision-free', 
       + ` The chain's child and the embedded label derive the SAME seed, so the two`
       + ` substreams are one — give one of them a different head.`,
     ).toEqual([]);
+  });
+});
+
+describe('EP-0 — the advance-epoch ROOT segment shares fork()s string space', () => {
+  test('the alias is real: a root epoch segment derives what fork(`epoch:<e>`) derives', () => {
+    // THE HAZARD, executed rather than argued. Both spellings are `${seed}::epoch:${e}`,
+    // so a caller that forked an `epoch:`-headed label would be drawing the SAME stream a
+    // lit advance draws. This assertion is what makes the reservation below load-bearing.
+    const seed = 'world-pulse:c1::tick:6::one_month';
+    expect(`${seed}${epochSuffix('abc123')}`).toBe(createPRNG(seed).fork('epoch:abc123').seed);
+  });
+
+  test('no fork label in src opens with a reserved root-segment head', () => {
+    /** @type {Array<string>} */
+    const collisions = [];
+    for (const { file, label } of collectLiteralForkLabels()) {
+      // The head is everything before the first ':' of either delimiter idiom — the
+      // segment `epochSuffix` renders is `epoch:<e>`, so `epoch` alone and `epoch:x` both
+      // collide, while `epochal-drift` does not.
+      const head = label.split(':')[0];
+      if (RESERVED_ROOT_SEGMENT_HEADS.includes(head)) collisions.push(`${file}: .fork('${label}')`);
+    }
+    expect(
+      collisions,
+      `A fork label opens with a head RESERVED for a root composition segment`
+      + ` (${RESERVED_ROOT_SEGMENT_HEADS.join(', ')}). Concatenation gives the fork child and`
+      + ` the root segment the same derived seed, so the two substreams would be one.`
+      + ` Rename the fork label — the root segment is owner-gated vocabulary.`,
+    ).toEqual([]);
+  });
+
+  test('the scan that proves it is non-vacuous — it sees the live fork corpus', () => {
+    // A green negative over an EMPTY corpus asserts nothing. The estate's fork labels are
+    // read from source by the same helper the reservation uses, so this floor moves with
+    // the tree rather than freezing a number.
+    const labels = collectLiteralForkLabels();
+    expect(labels.length).toBeGreaterThan(50);
+    expect(labels.some(({ label }) => label.split(':')[0] === 'epoch')).toBe(false);
   });
 });

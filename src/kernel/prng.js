@@ -90,6 +90,23 @@ export function createPRNG(seed) {
   return rng;
 }
 
+/** The advance-epoch stream segment. THE ABSENT CASE RETURNS THE EMPTY STRING, never a
+ *  rendered `epoch:0` — `x + '' === x`, so a flag-absent or legacy world composes the
+ *  pre-wave seed CHARACTER-FOR-CHARACTER and every existing stream is untouched. This
+ *  is a NEW SEGMENT in a root composition; it is NOT a change to `fork`'s derivation,
+ *  which stays owner-gated under THE PROMISE.
+ *
+ *  ⚠ THE SEGMENT ALIASES A FORK CHAIN BY CONSTRUCTION: appending it to a seed renders
+ *  `${seed}::epoch:${e}`, which is character-identical to what forking that same seed with
+ *  the label `epoch:<e>` derives. That is harmless only while no caller forks a label whose
+ *  head is `epoch` — `tests/kernel/prngForkLabelDelimiter.test.js` RESERVES that head and
+ *  reds when one lands. (The rule is spelled there without a literal call form, because the
+ *  reservation scan counts doc-comment call sites too.)
+ *  @param {string|null|undefined} advanceEpoch @returns {string} */
+export function epochSuffix(advanceEpoch) {
+  return advanceEpoch ? `::epoch:${String(advanceEpoch)}` : '';
+}
+
 /** The base36 alphabet a seed suffix is spelled in — the one `toString(36)` uses. */
 const SEED_ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyz';
 
