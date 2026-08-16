@@ -10651,5 +10651,284 @@
           "tests/joins/realmForecast.test.js"
         ]
       ]
+    },
+{
+      "id": "DOM-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DOM-1.md",
+      "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "README.md"
+        },
+        {
+          "action": "MODIFY",
+          "path": "ARCHITECTURE.md"
+        },
+        {
+          "action": "MODIFY",
+          "path": "CONTRIBUTING.md"
+        },
+        {
+          "action": "MODIFY",
+          "path": "docs/CURRENT_STATE.md"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/check-full-typecheck.mjs"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/docs/architectureFreshness.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/fullTypecheckRatchet.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "the onboarding docs carry no hand-kept machine figure (dom-1)"
+        },
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "const statedStageCounts = (doc) =>"
+        },
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "ARCHITECTURE's NAV list is exactly the labels lib/routes.js derives, in order"
+        },
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "CURRENT_STATE.md states the real migration head and the real applied-head gap"
+        },
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "carries no hand-typed suite-size figure (the count lives in the suite, not the doc)"
+        },
+        {
+          "path": "tests/lint/fullTypecheckRatchet.test.js",
+          "symbol": "both ratchet headers state the position package.json actually chains"
+        },
+        {
+          "path": "scripts/check-full-typecheck.mjs",
+          "symbol": "`typecheck:ratchet` is step 12 of the 17-step chain today"
+        },
+        {
+          "path": "ARCHITECTURE.md",
+          "symbol": "tests/edgeFunctions/aiGroundingBundle.freshness.test.js"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "no cured figure is re-typed: each is derived by a pin or replaced by a pointer at the machine source"
+        },
+        {
+          "id": "A2",
+          "case": "the NAV list in ARCHITECTURE equals the labels lib/routes.js derives, in nav.order, with Welcome absent"
+        },
+        {
+          "id": "A3",
+          "case": "CURRENT_STATE's migration head and applied-head gap are both derived from the filesystem"
+        },
+        {
+          "id": "A4",
+          "case": "both typecheck headers state the ratchet's real chain position, derived from package.json"
+        },
+        {
+          "id": "A5",
+          "case": "the suite-size arm enforces the figure's ABSENCE and still holds a positive control"
+        },
+        {
+          "id": "A6",
+          "case": "applied-head.json is untouched, including its dated verification prose"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/architectureFreshness.test.js",
+          "tests/lint/fullTypecheckRatchet.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/contributingFreshness.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/docs/enforcedByExists.test.js",
+          "tests/build/ciCheckParity.test.js"
+        ]
+      ]
+    },
+{
+      "id": "DOM-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DOM-2.md",
+      "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "docs/DEPLOY.md"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/docs/deployRunbookFreshness.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "DEPLOY.md documents every environment name the functions consume"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "function scanConsumedEnvNames(dir)"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "const DOCUMENTATION_ALLOWLIST = Object.freeze({"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "CONTROL: the scanner finds a planted secret in all three spellings"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "CONTROL: arms 2 and 3 are not redundant"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "every consumed environment name is documented or allowlisted with a reason"
+        },
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "ANALYTICS_HASH_PEPPER"
+        },
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "EXPORT_SHARED_SECRET"
+        },
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "STRIPE_PRICE_SURVEYOR"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "every environment name the deployed functions read is named in DEPLOY's secrets section or allowlisted with a stated reason"
+        },
+        {
+          "id": "A2",
+          "case": "the scan resolves all three spellings, proven on a planted secret in a throwaway tree"
+        },
+        {
+          "id": "A3",
+          "case": "arms 2 and 3 each still find live names the earlier arms cannot see"
+        },
+        {
+          "id": "A4",
+          "case": "the seven deploy-blocking names carry their failure modes, STRIPE_PRICE_SURVEYOR first"
+        },
+        {
+          "id": "A5",
+          "case": "the pre-deploy gate length and the vercel build command are derived, not transcribed"
+        },
+        {
+          "id": "A6",
+          "case": "no secret value appears anywhere in the runbook"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/deployRunbookFreshness.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/deployEdgeUngatedWarning.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/docs/migrationAppliedHead.test.js",
+          "tests/docs/opsScriptsExist.test.js",
+          "tests/edgeFunctions/contracts.test.js"
+        ]
+      ]
+    },
+{
+      "id": "DOM-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/documentation-truth/DOM-4.md",
+      "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/copy/en.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/docs/docCounts.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/docs/docCounts.test.js",
+          "symbol": "product copy: the pipeline rail states no step count (dom-4)"
+        },
+        {
+          "path": "tests/docs/docCounts.test.js",
+          "symbol": "the three populations really do disagree (the reason no number is written)"
+        },
+        {
+          "path": "tests/docs/docCounts.test.js",
+          "symbol": "the onboarding coach counts no steps"
+        },
+        {
+          "path": "tests/docs/docCounts.test.js",
+          "symbol": "CONTROL: the counter reads the exact prose that was wrong"
+        },
+        {
+          "path": "src/copy/en.js",
+          "symbol": "The rail on the right shows the steps the engine took."
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the onboarding coach names no step count in any spelling, and the rail sentence survives"
+        },
+        {
+          "id": "A2",
+          "case": "the labelled-step map is proven a strict subset of the registered steps, which is why no single number is writable"
+        },
+        {
+          "id": "A3",
+          "case": "the counter is shown to read both the numeral and the spelled-out form"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/docs/docCounts.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/copy/localeParity.test.js",
+          "tests/lint/errorCopyBaseline.test.js"
+        ]
+      ]
     }  ]
 }
