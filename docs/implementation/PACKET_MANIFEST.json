@@ -13715,7 +13715,8 @@
         },
         {
           "path": "src/domain/worldPulse/pulseKernel.js",
-          "symbol": "createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`)"
+          "_note": "RE-SPELLED AS A PREFIX BY EP-1 (2026-08-16). The row landed as a CLOSED expression ending `${tickInterval}`)` and was rotted by the very next member of its own train: EP-1's seam appends ${epochSuffix(epochTerm)} inside that template, which is the sanctioned edit this whole program exists to make. EP-0 got the same call right in its TEST pin — advanceEpochStreamIdentity asserts the DARK PREFIX deliberately so stage 2's append survives it — and wrong here. What the row buys is unchanged: the ONE root composition still exists and still opens with the frozen dark body. Spelled as a prefix it also survives EP-3's further edits.",
+          "symbol": "createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}"
         },
         {
           "path": "src/generators/power/economyReconciliation.js",
@@ -13809,6 +13810,115 @@
           "tests/kernel/advanceEpochStreamIdentity.test.js",
           "tests/kernel/prngForkLabelDelimiter.test.js",
           "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EP-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/fp/EP-1.md",
+      "verifiedBase": "bbf58fa1b0144fec5a32fe1bf501660e1f87e0e9",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/clock.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/advanceInterval.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/simulationRules.js" },
+        { "action": "MODIFY", "path": "src/domain/certification/subsystemRowsVirtual.js" },
+        { "action": "MODIFY", "path": "src/store/campaignAdvanceSession.js" },
+        { "action": "CREATE", "path": "tests/property/advanceEpochDormancyFence.test.js" },
+        { "action": "CREATE", "path": "tests/domain/advanceEpochForkParity.test.js" },
+        { "action": "TEST", "path": "tests/domain/subsystemRowsVirtual.test.js" },
+        { "action": "TEST", "path": "tests/domain/contributionLedgerShape.test.js" },
+        { "action": "TEST", "path": "tests/domain/advanceWorkerByteIdentity.test.js" },
+        { "action": "TEST", "path": "tests/lint/entropyRootCensus.walker.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiCharterBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiGroundingBundle.js" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/aiGroundingBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json" },
+        { "action": "MODIFY", "path": "supabase/functions/_shared/intentAtlasBundle.meta.json" }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/clock.js",
+          "symbol": "export function assertEpochPinnedInTest"
+        },
+        {
+          "_note": "THE TWO KERNEL GATES OF INVARIANT LINK L1. Spelled as OPEN prefixes, never closed expressions — EP-0's closed row was rotted by this very member and had to be re-spelled; EP-3 edits this same function twice more.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "const epochTerm = simulationRules?.advanceEpochEnabled === true ? advanceEpoch : null;"
+        },
+        {
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "assertEpochPinnedInTest('simulateCampaignWorldPulse')"
+        },
+        {
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "${epochSuffix(epochTerm)}"
+        },
+        {
+          "_note": "MATERIALIZATION M1, and it keys on the FLAG-GATED term. A re-key onto the raw argument leaves every stream assertion green while writing a new key into a flag-dark world — executed as mutant (b), which reds exactly the two L3 arms.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "...(epochTerm ? { epoch: epochTerm } : {}),"
+        },
+        {
+          "path": "src/domain/worldPulse/advanceInterval.js",
+          "symbol": "customContent = null, advanceEpoch = null,"
+        },
+        {
+          "_note": "THE MINT, AND THE ONLY ENTROPY CALL SITE IN THIS MEMBER'S FAMILY. The gate read beside it is the census-visible spelling; a receiver not literally named rules/simulationRules is invisible to engineGatedRuleKeys and makes the manifest lie.",
+          "path": "src/store/campaignAdvanceSession.js",
+          "symbol": "const advanceEpoch = epochLit ? (options.epoch || generateSeed()) : null;"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "'advanceEpochEnabled',"
+        },
+        {
+          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "symbol": "rule: 'advanceEpochEnabled',"
+        },
+        {
+          "path": "tests/domain/subsystemRowsVirtual.test.js",
+          "symbol": "const ADVANCE_EPOCH = 'advanceEpochEnabled';"
+        },
+        {
+          "path": "tests/property/advanceEpochDormancyFence.test.js",
+          "symbol": "const DARK_CONFIGS"
+        },
+        {
+          "path": "tests/domain/advanceEpochForkParity.test.js",
+          "symbol": "const STRUCTURAL_LABELS"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "all eight dark cells (four rule configurations x both value states) compose the LITERAL legacy seed" },
+        { "id": "A2", "case": "the value-present column changes no serialized key on the pulse record, in any dark configuration (invariant link L3)" },
+        { "id": "A3", "case": "absent and explicit-false produce the identical whole projection, and every dark epochSuffix invocation is handed null and returns the empty string" },
+        { "id": "A4", "case": "every production read of the flag is the strict === true form at exactly two sites, and the key is absent from DEFAULT_SIMULATION_RULES and from every preset while being manifested" },
+        { "id": "A5", "case": "the purity arm INVERTS: exactly one entropy call site, in src/store, reached through generateSeed and never in src/domain" },
+        { "id": "A6", "case": "a flag-dark composed advance carrying a real epoch composes the legacy per-tick seeds and writes no epoch key, and a LIT advance with no threaded epoch throws rather than silently composing dark" },
+        { "id": "A7", "case": "the kernel structural fork sequence is identical in count and order in both flag states on both paths, and at one tick the total draw count and the label multiset are identical too" },
+        { "id": "A8", "case": "the epoch is a plain string, survives structuredClone, and the same seed+epoch replays the world while a different epoch does not" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/advanceEpochDormancyFence.test.js",
+          "tests/domain/advanceEpochForkParity.test.js",
+          "tests/domain/advanceWorkerByteIdentity.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/domain/contributionLedgerShape.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/property/mechanismLitCoverage.test.js",
           "tests/lint/sovereigntyLightingContract.walker.test.js"
         ]
       ]
