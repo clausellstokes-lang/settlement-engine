@@ -6699,3 +6699,38 @@ member becomes a solver, not a lookup.
    for the chair's ledger landing at collection. At uf-1's
    exposure: THE FIRST ROLLING SOAK FIRES. Then EP stage one → ci
    → WF (the first family PR).
+
+## §183 · UF-1 COLLECTED — THE UNFORK LANDED; THE 28th EXPOSURE;
+## THREE VOLUMES LANDED LEDGER-SIDE; THE FIRST ROLLING SOAK FIRES
+## (2026-08-16, chair)
+
+1. **The five-volume unfork LANDED GREEN and EXPOSED: CAS
+   25f22b2b → a8f42d94** (docs-only, +295/−135; INT/CW/WY/POP
+   proven zero-pure-deletion folds; WC merged with cmp-proofs both
+   ways, all 44 non-carried lines enumerated as superseded; the
+   false-by-event WC banner kept with a dated supersession marker;
+   CLAIM_RE 0-before/0-after on all five, regex read live).
+   Gate: check:tail TRUE_EXIT=0 (28,406/11 known), smoke:boot
+   PASS.
+2. **THE THREE DESIGN VOLUMES LANDED ON THE LEDGER (this commit):
+   DESIGN_FP_ARCH_CN.md, DESIGN_FP_ARCH_PG.md, DESIGN_FP_ARCH_MF.md
+   — the map program's ~112KB charter now has its permanent home**
+   (body byte-identical to the scratchpad charter, cmp exit 0, with
+   the ODQ §150-§181 resolution map; the scratchpad copy is
+   hereafter a working mirror, the ledger volume canonical).
+3. **BASE_STATE re-stamp BLOCKED BY DESIGN and ratified as the
+   right stop:** the OSR schema-8 instrument reds (baseline froze
+   at e71beb84; ~25 scripts/** files landed since incl. the entire
+   scripts/soak family) — pre-existing, proven at base in a temp
+   worktree, invisible to the gate chain. **OSR RE-GOVERNANCE is
+   queued as a chair sitting** (instrument governance is
+   chair/owner-gated); until cleared, no lane inherits BASE_STATE
+   figures — re-execute. The WC PROGRESS-blockquote rewrite rides
+   the next docs act. Packets moved 101→110 (noted).
+4. **THE FIRST ROLLING SOAK FIRES AT THIS EXPOSURE** (§146.3
+   satisfied: the first family exposure after sk; the exposure is
+   docs-only and fully green; the soak lane RE-EXECUTES all
+   figures per §183.3). RS-1 dispatched: archive a8f42d94,
+   CERT-30-class on the landed harness, findings-only. **EP STAGE
+   ONE dispatched into the freed slot.** The §27 queue proceeds:
+   EP stages → ci → WF (the first family PR).
