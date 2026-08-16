@@ -5589,3 +5589,39 @@ gallery-seeding lane offer stands.
    tm+sk landing. Scope: WC (MERGE — neither copy a superset), INT,
    CW, WY, POP fold-to-build + DESIGN_FP_ARCH_CN.md/PG.md ledger
    authorship (§148.4); LG rides lg-0's own LG-0V member.
+
+## §152 · OWNER ORDER: THE MAP GRAMMARS + BUILD-OUT BEGINS (2026-08-16)
+
+1. **The order (verbatim intent):** "appropriate rules for each tier
+   and with each institution and state as well… coherent, seamless,
+   cohesive, comprehensive, immersive, beautiful… Do build it out
+   and architect it, because I think we have lanes free now."
+2. **The charter is EXTENDED** (laneMFC-MAP-FABRIC-CHARTER.md
+   §5–§8): the TIER GRAMMAR (six complete per-tier expression
+   profiles, frame-composition ratio 90:10→15:85, building-count
+   bands with a printed representativeness law, metropolis
+   multi-ring walls derived from history); the INSTITUTION GRAMMAR
+   (typed shape archetypes per category, placement affinities +
+   adjacency constraints consuming the landed district-affinity
+   machinery, prominence from the REAL power structure — the
+   skyline shows who rules; underworld renders as ordinary fabric
+   on the default lens and lights on the DM lens; noxious trades
+   obey the downwind edge); the STATE GRAMMAR (prosperity →
+   materials/density/dereliction; siege → the besieger's camp at
+   the invested gate; plague → quarantine/pits from pg's own
+   state; stressors → one restrained expression each at the TRUE
+   hazard bearing; history → burn-and-rebuild traces from the
+   event log); §8 COHERENCE LAWS (precedence truth > state > tier >
+   jitter; every rule cites its canonical source field or is CUT;
+   same-seed stability; the legibility ladder; per-tier +
+   per-state §109 acceptance exemplars).
+3. **Build-out begins on the free lane: MF-R1 DISPATCHED** — a
+   Fable adversarial design round on the full charter (the SA-1
+   pattern §145.2 proved: my sk charter carried four
+   consequence-grade errors only the measured round caught). MF-R1
+   verifies every machinery claim against the code of record at
+   6b337fb1 (district-affinity table, exit-road bearings, event
+   log's trace support, kmScale, power structure fields) and
+   returns anchored edit blocks. On its fold: TC29 compiles mf
+   (§145.1). Execution slots after the current queue per §150.4 —
+   the soak timeline is untouched.
