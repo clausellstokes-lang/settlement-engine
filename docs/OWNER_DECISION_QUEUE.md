@@ -6168,3 +6168,18 @@ rationale. TC29 notified (#15).
 5. mf executes after the §27 queue as ruled; the §12 immersion
    proposals (chair, nine ideas) await the owner's pick before
    joining the charter.
+
+## §163 · THE IMMERSION SUITE RULED (2026-08-16, owner: "don't do
+## 1 but do everything else")
+
+Street toponymy REFUSED (recorded, no lane re-proposes). Eight
+adopted into charter §12: event-log marginalia · the neighbor edge
+(true travel times) · walk-scale rings · derived heraldry ·
+countryside event marks · fog folio-ization (consumes the landed
+fog machinery, mints nothing) · the in-world legend · the
+pentimento. All chrome-weight, truth-sourced, era-legal. TC30
+DISPATCHED: a supplemental compile folding §12 into the TC29 plan
+as amendments (expected to extend mf-c/mf-e; verifies the
+marginalia's event-log quotability, the neighbor-link travel
+surface, the fog machinery's reuse seams, heraldry seeding; same
+discipline, small scope).
