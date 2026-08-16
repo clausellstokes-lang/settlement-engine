@@ -6998,3 +6998,39 @@ the setting-agnosticism law (form vs ornament ruled per law).
 Fold-then-refresh on landing per the §170 standard. This applies
 §0.0's history-is-the-oracle retrospectively to the whole
 document — the capstone audit of the map program's design era.
+
+## §193 · MF-B4 COLLECTED — THE FABRIC LAWS AT MEASURED ZERO;
+## MF-B5 DISPATCHED (2026-08-16, chair under §170)
+
+1. **Wave four landed the inversion + all three §190 fabric laws
+   at MEASURED ZERO** (543 overlap pairs and 511 street-blockers
+   per leaf → 0 everywhere; the unifying primitive banked: A
+   FOOTPRINT IS CLIPPED BY EVERY CLAIM IT MEETS — kerb line and
+   party line — CLIPPED, NEVER MOVED, making repair and fronting
+   one operation; root cause of both: the reservation tested the
+   plot's CENTRE while the law is about the building's BODY).
+   Underneath the inversion, the module bug: STREETS WERE LAID IN
+   A MODULE 2.2-2.8× THE HOUSES' — one number read at two
+   MOMENTS (the ladder now evaluates inside the calibration loop;
+   street share 51→26 at town on that alone). Build-out honest:
+   town/city EXCEED B2; metropolis 4.4 short. Perf recovered
+   (4.8s→1.7s via two exact indexes). 81/81 pins, 10/10
+   determinism, all ten under ceiling. The threshold lesson banked
+   (a counterfactual's threshold must be re-expressed in the form
+   the cure does not move — met three times).
+2. **RATIFIED (vetoable): the scope judgment** — targets 2-4 and
+   §190c/§190d deliberately NOT started to finish the open work to
+   measured zero rather than half-build seven things. Right call;
+   the lane's own ordering recommendation adopted. ⚠ folioLenses.js
+   lands only WITH its consumer (B5).
+3. **CHAIR EYES-ON (town leaf ~65-70%):** the laws show; two new
+   defects named for B5: THE RIVER RIGHT-ANGLE BUG (axis-aligned
+   water segments — rivers MEANDER; a §5.-1 substrate water-path
+   cure with a no-axis-aligned-runs pin) and THE INSTITUTION
+   CLUSTER CHAOS (the central monumentals scatter as rotated
+   blocks ignoring the streets — institutions obey §17.4 fronting
+   and §161m adjacency like every other building; variants rotate
+   WITH their street, never freely). **MF-B5 DISPATCHED, order:
+   §190c habitation + §190d faubourgs first, the river cure, the
+   institution-fronting cure, metropolis band, THEN targets 2-4
+   (states/lenses+consumer/chrome/immersion/lettering/drift).**
