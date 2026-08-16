@@ -7412,3 +7412,67 @@ upper-band pin (executor sets the number from the reference
 corpus, recorded as a judgment row) so court-heavy blocks red.
 Island buildings keep their pin and inherit the rarity. Relayed
 to MF-B7 same-turn.
+
+## §205 · OWNER LAWS: RIVER NAVIGABILITY, RIVER CLASS FOLLOWS
+## FUNCTION, TERRAIN-MAXIMIZED DEFENSES (2026-08-16; fifth MF-B7
+## redirect)
+
+1. **NAVIGABILITY (owner catch — the river is blocked today):**
+   the channel is a RESERVED RIGHT-OF-WAY: zero intruding
+   footprints, bridges SPAN (never dam), quays project from the
+   bank, water gates open through the wall at the banks; census
+   with bridge/quay as NAMED exemptions carrying their spanning/
+   bank predicates; pre-cure blockers reported, owner-credited.
+2. **RIVER CLASS FOLLOWS FUNCTION:** rivers differ in size and
+   the dossier's economy constrains the class — river trade ⇒ a
+   RIVER cargo boats could pass, never a stream; width-class
+   ladder (brook/stream/river/great river) derived from watershed
+   + trade function + port presence; a trade-bearing settlement
+   on a brook is a CONTRADICTION resolved in the dossier's favor.
+   The lane may build the contradiction census now and defer the
+   full ladder to wave eight WITH CAUSE if substrate-stage rework
+   exceeds the wave.
+3. **TERRAIN-MAXIMIZED DEFENSES (historical precedent first):**
+   circuits anchor ON rivers (the water is that flank's moat,
+   wall ending in water-gate towers), exploit cliffs and high
+   ground (a cliff flank needs NO wall — drawing one is the
+   violation), palisades/ditches follow the same grammar at tier;
+   each choice grounded in precedent in the receipt; censuses
+   with counterfactuals. Lane authorized to move its §11 drift
+   tail to wave eight with cause — the owner's laws take
+   precedence.
+
+## §206 · RS-1 COLLECTED — THE FIRST ROLLING SOAK COMPLETE;
+## RS-2 FIRED AT 9ed2436c (2026-08-16, chair §170)
+
+1. **RUN IDENTITY (all executed):** tip a8f42d94, cert-30, 159
+   cells = 3 seeds × 53 SK-4 rows (77 factors, 11,537/11,537
+   reachable pairs, zero refusals) × 30y × 4 settlements;
+   159/159 receipts; ≈6h31m; archive-based outside any repo,
+   lockfile-identical substrate. Determinism CONFIRMED three ways
+   at the maximal-lawful cell. Deviations disclosed and accepted:
+   segmented execution under the ~1h kill cycle (byte-identical
+   invocations, receipts re-validated), npm install with the
+   lockfile proven byte-identical, freemem under-provisioning.
+2. **TRIAGE.** (a) HIGH — ca-015: realm population 17,682 → 793
+   (0.045, through the 0.05 floor), ONE-FLAG localized:
+   `npcAgencyEnabled` off, seed-dependent (seed b 0.465 passed).
+   Reads as a missing dark-guard — something lit depends on NPC
+   agency to counteract decline. **A DIAGNOSTIC LANE IS QUEUED
+   NEXT-SLOT** (the auto-repro capsule is durable); findings-only
+   until root cause, then the repair rides the queue. (b) MEDIUM,
+   instrument-class — the dark-control seed-divergence assertion
+   fails on an EMPTY SAMPLE (zero events in the all-off world):
+   the instrument cannot execute in the dark configuration; the
+   CONDITIONING CURE (gate the assertion on sample size) is
+   queued as a harness micro-item; until cured it re-fires every
+   rolling run — a KNOWN, not news. The `non_finite` zero being
+   structurally vacuous over JSON-parsed receipts joins the same
+   harness item (the vacuity family's reach into the soak
+   instrument itself). (c) INFORMATIVE: growth ×6.71 max across
+   five rows, inside the ×20 envelope, banked in the PROVISIONAL
+   curves for the tuning pass. Hard-invariant zeroes stated
+   explicitly and accepted.
+3. **RS-2 FIRED at 9ed2436c** (the newest exposed tip at RS-1
+   completion, per §197.4a's supersession-of-target ruling), same
+   cert-30 protocol, findings-only, capsules on.
