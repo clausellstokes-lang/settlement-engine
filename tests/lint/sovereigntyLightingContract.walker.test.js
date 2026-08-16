@@ -4552,7 +4552,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // at this train's base too.
     // The arithmetic closes: +6 +7 +1 +0 = +14, and the one new `describe` in a
     // CREDITED file (rawColorLiteral's control-arm block) is the whole +1 suite title.
-    files: 2439, parked: 364, credited: 2075, titles: 20300, suiteTitles: 5690,
+    // ── RE-RECORDED 2026-08-16 BY THE MICRO-BATCH `mb` TRAIN, WITH ITS CAUSE ────────
+    // 2439/364/2075/20300/5690 → 2439/364/2075/20304/5692. Three members, no new test
+    // file, so `files`, `parked` and `credited` are UNCHANGED and are asserted BEFORE
+    // `titles` — their passing is the receipt.
+    //
+    // THE +4 ATTRIBUTED BY MEASUREMENT (each row obtained by reverting THAT ONE FILE to
+    // the train's base and re-running this walker):
+    //   tests/domain/advanceWorkerByteIdentity.test.js   +2 titles
+    //   tests/store/toggleSlice.servicesNormalize.test.js +2 titles
+    //   tests/components/realmForecastHonesty.test.jsx   +0  ← mock-only change
+    // The zero is not a park this time: that suite gained the new forecastRun export in
+    // its vi.mock factory and no test title at all, so there was nothing for the census
+    // to see. Recorded so the next reader does not go looking for a parked file here.
+    // Two new `describe` blocks in CREDITED files are the whole of the +2 suite titles.
+    files: 2439, parked: 364, credited: 2075, titles: 20304, suiteTitles: 5692,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
