@@ -5296,3 +5296,33 @@ gallery-seeding lane offer stands.
    first trains gain the folded-volume member (the build branch
    still asserts superseded premises the ledger cured). J-TC24-1..12
    SIGNED.
+
+## §143 · FIVE MORE SOAK LAWS (2026-08-16, chair on the owner's
+## request, vetoable; the first begins tonight)
+
+1. **⭐ ROLLING SOAKS START NOW — soak-as-you-go**: CERT-30-class
+   mini-soaks run in the BACKGROUND on archives of each family's
+   exposed tip (the R-GEN method — archive + node, zero
+   worktree/gate contact, lawful beside executors), findings-only
+   reports at each family boundary. Composition findings surface
+   WEEKS early, spread across the build instead of batched; the
+   official diagnostic soak remains the full instrument on the
+   complete build — the rolling ones pre-pay it. First lane
+   dispatches on the micro-batch stack's exposure.
+2. **COMBINATORIAL FLAG COVERAGE**: the soak grid uses covering-array
+   design over the flag space (pairwise interaction coverage) rather
+   than naive all-on/all-off — the same run count LOCALIZES which
+   flag pair interacts. Quality raised, not spent.
+3. **MACHINE-DIFFED CURVE BASELINES**: the first clean soak's
+   aggregate curves (population, war cadence, stressor rhythms)
+   freeze as BANDED BASELINES; every later soak (post-fix,
+   post-tune, regression) machine-diffs against them through tm-3's
+   aggregations — soak regression detection stops being eyeballing.
+4. **SENSITIVE-SEED ORDERING**: seeds that historically exhibit
+   findings run FIRST in every re-soak loop — the interesting seeds
+   become the fast alarm; the full grid still runs behind them.
+5. **AUTO-REPRO CAPSULES**: every tripwire firing bundles
+   checkpoint + config + seed + tick into a one-command repro
+   artifact — a finding's fix-lane dispatch cost drops to the
+   artifact path. All five join the tm-core/soak-harness scope
+   beside §141; values as §131 bands where any exist.
