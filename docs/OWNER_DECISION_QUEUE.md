@@ -6755,3 +6755,31 @@ the re-roll license stands for any reference that fails its law on
 spot-inspection. Meanwhile: RS-1 mid-flight (4/160 receipts at
 last report, autonomous), TE29 building EP stage one, MF-B3 on
 wave three.
+
+## §186 · THE wc-1b SIGNATURE (2026-08-16, chair — the §52.3 cure
+## signed; FIVE WC waves unblocked)
+
+1. **SIGNED: the SHARED-vocabulary widening, exactly as TC25
+   architected it** — WC-4F mints DISPATCHED_NOT_EMITTED beside the
+   two existing consts in strategyMoves.js (the leaf stays
+   zero-import), ALL_MOVE_TOKENS becomes the sorted union, and the
+   two equality pins re-point to the DIRECTIONAL law their own
+   comments already state (superset + the difference is exactly
+   DISPATCHED_NOT_EMITTED + no such token is ever emitted). Tokens
+   land DARK with no producer; same-seed NEUTRAL by the dark-token
+   argument with the emitter pin (strategyMoves.test.js:195)
+   unchanged as the proof arm; the planted-STRATEGY_MOVES mutant
+   distinguishes the doors; the single-exporter fence measured
+   safe.
+2. **The WC-private-vocabulary alternative is REFUSED with
+   prejudice** — mechanically legal, constitutionally wrong: a
+   parallel truth fork of the one move vocabulary, the exact
+   cheap-green-lose-the-coverage move the WC preamble bans. The
+   cross-family edit into HB-1's landed files is the RIGHT cost
+   and is why this carried a signature.
+3. **Conditions:** WC-4F alone opens strategyMoves.js
+   (CF-FENCESPLIT stands); the three control arms land as
+   specified; WC-4's chooser/dispatch member consumes, never
+   re-opens. CONSEQUENCE: wc-1b exists as a train; the WC-4 →
+   WC-6 → WC-7/8/9 cascade (five waves) is unblocked and queues
+   after the current §27 order.
