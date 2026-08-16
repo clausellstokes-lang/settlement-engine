@@ -4566,7 +4566,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // its vi.mock factory and no test title at all, so there was nothing for the census
     // to see. Recorded so the next reader does not go looking for a parked file here.
     // Two new `describe` blocks in CREDITED files are the whole of the +2 suite titles.
-    files: 2439, parked: 364, credited: 2075, titles: 20304, suiteTitles: 5692,
+    // ── RE-RECORDED 2026-08-16 BY THE `tm-core` TRAIN (the tm+sk family, ODQ §117a) ─
+    // 2439/364/2075/20304/5692 → 2443/364/2079/20326/5697. FIVE test files created and
+    // ONE deleted, so `files` moves +4 net and `parked` does not move at all: every one
+    // of the five spells its titles as literals in a straight-line block and is CREDITED.
+    // `files`, `parked` and `credited` are asserted BEFORE `titles`, and their passing is
+    // the receipt that the file-level prediction was right.
+    //
+    // THE +22 ATTRIBUTED BY MEASUREMENT — each row obtained by replacing THAT ONE FILE
+    // with a one-title credited stub and re-running this walker, never by counting `it`
+    // calls by eye:
+    //   tests/lib/simMetricRegistry.test.js          +4 titles
+    //   tests/lib/simMetricEmitter.test.js           +5 titles
+    //   tests/lint/engineTelemetryWall.walker.test.js +8 titles
+    //   tests/security/worldSimMetrics.pglite.test.js +5 titles
+    //   tests/lib/simMetricAggregate.test.js         +4 titles
+    //   = +26 created, and the NET is +22, so the DELETED
+    //   tests/lint/telemetrySimulationSeparation.test.js carried exactly 4. That
+    //   subtraction is the measurement of the deleted file, not an assumption about it.
+    //
+    // ⚠ THE FIRST STUB ATTEMPT PARKED, AND THAT IS WORTH RECORDING: a stub without the
+    // vitest import is UNRESOLVED and lands in `parked`, which reds the parked arm before
+    // `titles` is ever reported. The census is SEQUENCED, so an attribution probe must be
+    // credited or it measures nothing. The stub carries the import for that reason.
+    //
+    // +5 suite titles: six new `describe` blocks (the pglite file carries TWO — a
+    // presence guard and the behaviour suite) minus the deleted file's one.
+    files: 2443, parked: 364, credited: 2079, titles: 20326, suiteTitles: 5697,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
