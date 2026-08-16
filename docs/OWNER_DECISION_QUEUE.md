@@ -7318,3 +7318,35 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    the measured pre-cure overlap count, credited as the owner's
    finding; its forensic zoom must include a wall-run region. The
    charter re-sync rider picks up the law's text.
+
+## §201 · OWNER LAWS: THE ALLEY REGISTER + THE STREET-ATTACHMENT
+## LAW (2026-08-16, owner order; redirected into MF-B7 mid-lane,
+## second redirect)
+
+1. **THE ALLEY REGISTER (owner):** an alley is BLOCK-INTERIOR
+   space, not a street. (a) RENDER: alleys never take the street
+   color — they draw in their block's interior/yard ground tone,
+   legible as gaps between buildings, not pale channels. (b)
+   TOPOLOGY, three lawful types occurring organically: isolated
+   interior courts (no street mouth), through-alleys (a mouth on
+   each of two streets), and cul-de-sac pockets (one mouth — the
+   entrance is the exit, not a through route). (c) **RATIFIED
+   FEATURE, owner explicit: island buildings inside block
+   interiors adjacent to NO street — liked for urban density —
+   now PINNED so no later wave can helpfully remove them.**
+2. **THE STREET-ATTACHMENT LAW (owner):** every street segment
+   attaches to the street network at AT LEAST ONE point — an
+   isolated street is a contradiction in terms, and no street may
+   be severed from the web by buildings (§190a bars the blocking;
+   this adds per-segment graph attachment, binary, distinct from
+   B5's 0.710 connectivity SHARE). Alleys are EXPLICITLY EXEMPT —
+   the isolated court is lawful precisely because an alley is not
+   a street. Enforced by a street-graph attachment census (zero
+   orphan segments, every leaf, all lenses, surface and
+   underground webs) with a sever-one-segment counterfactual that
+   must red.
+3. **EXECUTION:** MF-B7 carries both as first-order mandate items
+   beside §200's wall-clearance law; its zoom set owes an alley
+   court and a cul-de-sac mouth; both censuses join the standing
+   0/0 family; before/after counts credited as the owner's
+   findings; the charter re-sync rider picks up both texts.
