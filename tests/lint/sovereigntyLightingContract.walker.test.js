@@ -4471,7 +4471,43 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   again: `titles` (20247 → 20255), then `suiteTitles` reported `expected 5684 to be
     //   5682` — read from the walker's own output, never assumed to have held.
     // 2438/364/2074/20247/5682 → 2438/364/2074/20255/5684.
-    files: 2438, parked: 364, credited: 2074, titles: 20255, suiteTitles: 5684,
+    // ── RE-RECORDED 2026-08-15 BY THE `dom` TRAIN, ON ITS LAST TESTS-MOVING MEMBER ──
+    // 2438/364/2074/20255/5684 → 2439/364/2075/20276/5688. The train is DOM-1 (the
+    // hand-typed doc figures), DOM-2 (the derived edge-secret census), DOM-4 (the
+    // onboarding coach's step count) and DOM-3 (the founder purchase path, abolished
+    // under the owner's never-sold attestation, ODQ §118). Only DOM-3 creates a file,
+    // and the whole census is re-derived WHOLE at its terminal rather than patched.
+    //
+    // ⭐ THE DELTA IS ATTRIBUTED PER FILE BY REVERTING ONE AT A TIME — eight probe runs
+    // of this walker, each with exactly one changed test file restored to HEAD content,
+    // reading the five computed values off a one-line probe. It is not counted off a
+    // diff, and it CLOSES EXACTLY, which is also the evidence that the committed base
+    // was not already drifted (a drifted base cannot make the arithmetic add up):
+    //   tests/components/founderPurchasePathAbsent.test.jsx  NEW  +6 titles, +2 suites
+    //   tests/docs/architectureFreshness.test.js                  +6 titles, +1 suite
+    //   tests/docs/deployRunbookFreshness.test.js                 +6 titles, +1 suite
+    //   tests/ui/founderTileRestore.test.jsx                      +2 titles, +0 suites
+    //   tests/lint/fullTypecheckRatchet.test.js                   +1 title,  +0 suites
+    //   +1 file, +1 credited, +0 parked, +21 titles, +4 suite titles
+    // 6+6+6+2+1 = 21 and 2+1+1 = 4.
+    //
+    // ⚠ FOUR CHANGED TEST FILES CONTRIBUTE NOTHING, AND EACH SILENCE IS EXPLAINED.
+    // tests/edgeFunctions/contracts.test.js, tests/ui/pricingPageBands.test.jsx and
+    // tests/config/pricing.test.js changed a title's WORDS or a comment, never the
+    // count. tests/docs/docCounts.test.js gained four whole tests and a describe and
+    // STILL moves this census by zero — because that file is PARKED: it registers two
+    // of its tests from a `for…of` over a file list, so door 3's reader cannot spell
+    // its titles statically and the file's evidence is invisible here. Recorded rather
+    // than left as a puzzle: a parked file's pins are real coverage the census cannot
+    // see, and DOM-4's four new pins DO execute (vitest run, exit 0).
+    //
+    // ⭐ PARKED IS UNCHANGED AT 364, and that is DOM-3's signed STOP contract holding
+    // (fork DOM.U1: `files` +1 exactly, `credited` with it, `parked` still). The one
+    // new file spells every title as a literal, and founderTileRestore.test.jsx was
+    // REWRITTEN IN PLACE rather than deleted precisely so the file layer moves by a
+    // predictable single step instead of a deletion netting against a creation.
+    // 2438/364/2074/20255/5684 → 2439/364/2075/20276/5688.
+    files: 2439, parked: 364, credited: 2075, titles: 20276, suiteTitles: 5688,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
