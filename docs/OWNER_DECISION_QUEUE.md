@@ -7623,3 +7623,42 @@ to MF-B7 same-turn.
    WF rows yet; the §145.1 continuous-compile refills here). The
    family terminal's PR remains §71's first-family-PR, owner-
    gated at the push as always.
+
+## §211 · MF-A1 COLLECTED — THE PAINTED PROTOTYPE WORKS, IN
+## BUDGET, DETERMINISTIC; THE REMAINING DISTANCE IS GEOMETRY
+## (2026-08-16, chair §170; Fable seat, §208.2)
+
+1. **DELIVERED AND CHAIR-VERIFIED BY EYE**: a standalone painted
+   post-lens transform over the frozen b6 town/village/city —
+   grain, stains, vignette, tidemark rims, WASH MIS-REGISTRATION
+   (the decisive tell), seeded line waver, hard mass shadows, the
+   GAP-D block-perimeter pass adopted in-prototype, three-tone
+   water. CONFIRMED: same-seed sha-identical twice over (rasters
+   pixel-identical), alternate seed diverges; every filter
+   primitive probe-rendered in the harness rasterizer BEFORE use
+   (the <textPath> law honored); +10/+6/+8 draw ops per leaf
+   (city painted = 261 of 2,200 — texture lives in 8 defs
+   filters) — **NO CEILING AMENDMENT NEEDED**. Measured with
+   MF-S1's own instrument: wash-σ, tone-IQR and lineweight ratio
+   inside the corpus bands where b6 measured 0.00/4.0/uniform.
+   My triptych review agrees with the lane's §8.3b self-grade:
+   at glance range the painted leaves sit beside hf62/hf30/hf3;
+   at study range the dominant residual is GEOMETRY (grain,
+   block contiguity, frontage — exactly wave eight's ratified
+   spine), plus four named paint residuals.
+2. **RULINGS.** (a) The §9 resolution RATIFIED: "flat wash" is a
+   statement about SEMANTIC COLOR (one parcel, one pigment
+   decision), not pigment physics — the execution gains the
+   references' hand without breaking the folio's legibility law.
+   (b) The SVG-filters divergence from the atlas's geometry-only
+   PDF rule RATIFIED AS ARGUED: filters are op-free,
+   deterministic and harness-proven; the react-pdf fallback is a
+   NAMED OBLIGATION on the integrating wave, not solved here.
+   (c) Render time ×10 in the software rasterizer (0.33s→3.3s)
+   flagged to the export-pricing surface. (d) Eight hazards
+   banked for integration; browser parity and PDF filter-vanish
+   are the two sharpest and both carry test obligations.
+3. Triptychs delivered to the owner. WAVE EIGHT'S MANDATE is now
+   fully provisioned: the §209 grain spine + this lane's paint
+   modules + the §205 river ladder + the §203 fill bands — it
+   dispatches on MF-B7's seal.
