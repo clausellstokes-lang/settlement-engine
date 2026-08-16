@@ -7034,3 +7034,34 @@ document — the capstone audit of the map program's design era.
    §190c habitation + §190d faubourgs first, the river cure, the
    institution-fronting cure, metropolis band, THEN targets 2-4
    (states/lenses+consumer/chrome/immersion/lettering/drift).**
+
+## §194 · MF-R3 COLLECTED — THE CHARTER PASSES ITS OWN ORACLE;
+## EIGHT CURES FOLDED; FOUR RICHES ADOPTED (2026-08-16, chair
+## under §170)
+
+1. **Verdict: 144 rows — 109 GROUNDED in settled nameable practice
+   (Conzenian plan analysis, murage economics, the disabitato,
+   purpresture records, rabad/guanxiang confirming the faubourg
+   cross-culturally), 5 deliberate deviations ALL DECLARED, 7
+   misgrounded/silent with 8 cures, 6 weakly-grounded.** The
+   charter passes its own §0.0 rule. ALL 8 CURES FOLDED 8/8: the
+   field-barn misattribution (barns in village tofts under
+   open-field; true field barns are enclosed/upland — granges for
+   distant demesne), catacombs EXTRAMURAL along the roads out, the
+   cross-plan temple de-defaulted (the vertical mass is the
+   cross-cultural constant; plan shape culture-gated), the
+   material ladder regionalized + the struck FTG vocabulary
+   §8.2-cured, hedgerows one bounding vocabulary among several,
+   market forms widened, walk rings declared folio-native, the
+   gallows exemplar culture-gated.
+2. **FOUR RICHES ADOPTED (charter §18): LIBERTIES/SANCTUARY
+   precincts (the lawfulness dial locally INVERTED — the
+   cathedral close, the sanctuary bound; historically truer for
+   where the underworld shelters), the EXTRAMURAL INN BELT
+   (hospitality attracts the gate's outside face), the
+   PREDECESSOR PALIMPSEST (ghost alignments from buried fabric —
+   Chester/Lucca; the pentimento's drawn echo), MARKET
+   COLONIZATION (the middle rows infilling a great square into
+   two streets, order-gated drift).** Eight deferred post-launch,
+   recorded. MF-B5 relayed the C1/C2 cures mid-lane (it builds
+   §16.5 NOW — the field-barn correction is urgent for it).
