@@ -6045,3 +6045,18 @@ PROMISE, and §8 coherence are ground, not risk. This specializes
 the standing owner risk-appetite directive to the map program;
 TC29 notified (#11) — its open questions resolve under this rule
 with recorded reconciliations.
+
+## §161k · THE SNAPSHOT CLARIFICATION (2026-08-16, owner: "i'm not
+## asking you for a literal slider, just the snapshot at the time
+## of")
+
+§11.11 amended: the year dimension ships as SNAPSHOTS — the map
+renders the correct state for whatever time the app is viewing
+(present by default, chronicled years via existing affordances),
+cross-consistent by the Inertia Law; NO scrub animation, NO
+real-time interpolation, NO dedicated slider surface. The
+time-lapse export rider derives frames from the same snapshots
+offline. Risk effect: removes the animation-performance and
+scrub-UI scope while keeping the entire drift grammar — the
+achievability of the full ambition rises materially. TC29 notified
+(#12).
