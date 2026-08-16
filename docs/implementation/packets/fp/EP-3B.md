@@ -1,6 +1,8 @@
 # EP / EP-3B — the year anchor (stage 4, the final stage of the `ep-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landing commit:** `0fa3ac54` (the implementation; `fa7a0dca` is this
+  stage's promotion). Do not redispatch.
 - **Verified base:** `claude/composite-r4` at `d2ea34c196ef9fe724d2c6dbaeca95aa4b662a52`
   (the EP stage-three terminal — EP-2 + EP-3A, ODQ §197.4c)
 - **Train:** `ep-1`, family **EP**, member **5** of 5. **This packet is stage 4 and promotes

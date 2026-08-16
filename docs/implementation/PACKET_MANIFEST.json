@@ -14062,7 +14062,7 @@
     },
     {
       "id": "EP-3B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/EP-3B.md",
       "verifiedBase": "d2ea34c196ef9fe724d2c6dbaeca95aa4b662a52",
       "changeManifest": [
