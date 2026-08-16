@@ -6261,3 +6261,28 @@ Truth layer + inertia + drift extend below. Higgsfield reference
 set fired (owner-ordered): sewer cloaca, mine galleries, catacombs,
 the undercity. TC31 (atlas: underground components per entry) and
 MF-B1 (stratum seams noted, not built this wave) notified.
+
+## §167 · THE AFFINITY MATRIX + ORGANIC RELOCATION (2026-08-16,
+## owner: "map the relationship from each institution to each
+## other institution… weighted still to the dice roll" + "shops
+## organically open and close… the identity of the town remains
+## the same")
+
+Charter §6 gains both: THE AFFINITY MATRIX LAW (a COMPLETE
+pairwise attract/repel/neutral web with weights — the banker
+repels the slum, the pawnbroker seeks it; category-level bases +
+entry overrides keep N² maintainable; composed with the §161m
+absolutes and §161c rings; WEIGHTED STILL DICED — affinities bias
+the seeded roll, never dictate; misfit neighbors exist at low
+probability because real towns have them; the lawfulness dial
+scales obedience; every affinity cites its believability warrant)
+and THE ORGANIC RELOCATION LAW (drift reshapes the affinity
+landscape → institutions MAY move as a dated organic sequence:
+close → vacant/repurposed → reopen where affinities point; same
+identity, unbroken dossier continuity; RARE and banded, anchor-
+weight inverse to §161n rung and age — the moneylender moves, the
+cathedral does not; ALWAYS local diffs under the Inertia Law — the
+town remains itself; every move an event the marginalia may
+quote). TC31 (atlas gains the affinity-matrix columns) and MF-B1
+(placement consumes weights; relocation seams for the drift
+train) notified.
