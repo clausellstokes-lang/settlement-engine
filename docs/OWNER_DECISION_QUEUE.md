@@ -5441,3 +5441,41 @@ gallery-seeding lane offer stands.
    TC28 the compile queue holds only TR/GR/HB (chair-sitting-gated)
    plus whatever TC27's war-console/stressor homing report says is
    unhomed.
+
+## §148 · TC27 COLLECTED — LG/cn/pg COMPILED (2026-08-16, chair)
+
+1. **Six trains execution-ready, all promoting FLAT:** lg-0
+   (flag-leads + wiring + LG-0V volume fold), cn-1 (belief/forces/
+   view-model; WY-8a supply section as a signed §77 R3 fork; edits
+   ZERO existing production files — cleanest co-live partner),
+   pg-0→pg-1→pg-2 (STRICTLY SERIAL — TTS convicts every adjacent
+   pair on spatial/pestilence.js), pg-3 (forked on POP-1A landing;
+   co-lives clean with pop-1).
+2. **⛔⛔ LAW CORRECTION — THE FLAG-MINT BILL IS FOUR OBLIGATIONS,
+   NOT THREE:** tests/domain/contributionLedgerShape.test.js:51/:52
+   hold two exact literal 22s over the flag manifest ("THE BIJECTION
+   IS A TRIPLE, NOT A PAIR" — the file's own comment). Zero mentions
+   in ODQ/PACKET_STANDARD/TC24-26 — six queued flag mints miss it.
+   Every flag-mint member now owes the fourth obligation. Executed
+   TTS S8 SUPERSEDES §142.3's figure: two co-live flag mints convict
+   FIFTEEN paths, not four. TC28 notified mid-compile.
+3. Banked hazards: the LG volume has NEVER existed build-side (the
+   fold is a CREATE; every LG packet cites the ledger blob);
+   cn's migrationFlowsEnabled feeder is DEFAULT-ON (a section keyed
+   on it renders everywhere the day cn-2 lands); pg-3's fifth
+   conditions key blocked two ways with a landed settlement-local
+   cure; THREE near-ceiling files with no watch (armyTransitKernel
+   797/800, beliefMap 778/800, stressorDynamics 759/800 — hot-file
+   rows owed).
+4. **Homing (§147.4 input): §126/§126a + §128/§128a/§128b ARE homed
+   in the cn charter (banked by §132) — no charter lane needed.**
+   Accepted recommendation: one docs act authors DESIGN_FP_ARCH_CN.md
+   + DESIGN_FP_ARCH_PG.md on the ledger with build-branch fold
+   obligations (the LG-0V shape). §125a is not compilable until LG-5
+   (dead-arm rule). Chair sittings added: coupling-row placement
+   (TTS S20: two coupling-minting trains cannot co-live), the
+   CN/PG volume authorship, hot-file rows. OQ-2's population cure
+   is NOT in this round (LG-2 not compiled) — dependency stated.
+5. Base moved mid-lane (gvf landed, ec744330→471edb64); TC27's
+   46-path braced re-check: MOVED=1 (PACKET_MANIFEST status only),
+   all six premise maps re-validate at the close base.
