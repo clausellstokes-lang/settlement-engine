@@ -4,13 +4,26 @@
  * EXPORT path — the single canonical PDF-export journey (Flow A's filename
  * historically claimed "...-export" but never asserted one; this spec owns it).
  *
- * A signed-in free-tier user (export is a free-tier capability — TIER_GATE.free
- * .export === true) generates a settlement, saves it, opens its detail view, and
- * exports a PDF via the ExportSheet variant picker. The export is fully
- * client-side (@react-pdf/renderer → Blob → anchor download in
+ * A signed-in EXPORT-CAPABLE user generates a settlement, saves it, opens its
+ * detail view, and exports a PDF via the ExportSheet variant picker. The export
+ * is fully client-side (@react-pdf/renderer → Blob → anchor download in
  * utils/generateSettlementPDF.js), so no network stubs are needed beyond the
  * mock-auth seed. We assert a real browser download event fires with a `.pdf`
  * filename and a non-trivial byte size.
+ *
+ * ⛔ WHY THE MOCK IS NO LONGER FREE-TIER. This spec's original premise —
+ * "export is a free-tier capability, TIER_GATE.free.export === true" — was
+ * REVERSED by the owner ruling of 2026-07-13 ("only premium exports freely;
+ * free pays $2.99 per dossier"). `TIER_GATE.free.export` is now `false`
+ * (store/authSlice.js) and SettlementDetail.jsx routes the "Export Dossier"
+ * button through `resolveExportAccess`, so a free-tier click opens the
+ * per-settlement purchase modal ("Unlock all exports for this settlement ·
+ * $2.99") instead of the ExportSheet. The spec was matching that PAYWALL by
+ * accident: `getByRole('dialog', { name: /Export/i })` matches the word
+ * "exports" in the purchase title, so the dialog assertion passed and only the
+ * variant-CTA assertion inside it failed. The download journey is unchanged for
+ * an entitled user, so the spec follows the product and drives one. The free
+ * tier's purchase rung is BuyThisDossier.jsx's own subject, not this spec's.
  *
  * Mode: local (VITE_E2E_LOCAL_DATA=true) — same seam as Flow C.
  */
@@ -18,12 +31,14 @@
 import { test, expect } from '@playwright/test';
 import fs from 'node:fs';
 
-const MOCK_FREE_AUTH = {
-  user: { id: 'mock-free-e2e', email: 'wanderer@example.test', user_metadata: {} },
+const MOCK_EXPORT_AUTH = {
+  user: { id: 'mock-premium-e2e', email: 'cartographer@example.test', user_metadata: {} },
   session: { access_token: 'mock-token' },
-  tier: 'free',
+  // Cartographer: TIER_GATE.premium.export === true, so canExport() is true and
+  // resolveExportAccess yields the export rung rather than the purchase rung.
+  tier: 'premium',
   role: 'user',
-  displayName: 'Wanderer',
+  displayName: 'Cartographer',
   isFounder: false,
   needsVerification: false,
   emailNotifications: true,
@@ -57,7 +72,7 @@ test.describe('Tier 3.7 Flow D — PDF export journey', () => {
     test.skip(testInfo.project.name === 'mobile-safari', 'desktop-only journey');
     await page.addInitScript((auth) => {
       try { localStorage.setItem('settlement_mock_auth', JSON.stringify(auth)); } catch { /* private mode */ }
-    }, MOCK_FREE_AUTH);
+    }, MOCK_EXPORT_AUTH);
   });
 
   test('generate → save → export triggers a .pdf download of non-trivial size', async ({ page }) => {
@@ -93,7 +108,11 @@ test.describe('Tier 3.7 Flow D — PDF export journey', () => {
 
     // ExportSheet modal — pick + commit. The primary CTA reads
     // "Export {variant label}"; a draft settlement defaults to Draft Brief.
-    const sheet = page.getByRole('dialog', { name: /Export/i });
+    // ⚠ NAMED EXACTLY, never /Export/i: the loose regex also matched the
+    // "Unlock all exports for this settlement · $2.99" purchase modal, so the
+    // dialog assertion below could pass on a sheet that has no variant CTA at
+    // all. 'Export Dossier' is ExportSheet.jsx's own aria-labelledby title.
+    const sheet = page.getByRole('dialog', { name: 'Export Dossier' });
     await expect(sheet).toBeVisible({ timeout: 10_000 });
     const commit = sheet.getByRole('button', { name: /^Export (Draft Brief|Canon Dossier|Timeline Packet)$/ });
     await expect(commit).toBeVisible();

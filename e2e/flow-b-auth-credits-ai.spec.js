@@ -117,8 +117,14 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     const signupTab = page.getByRole('button', { name: /^Create Account$/i }).first();
     await signupTab.click();
     await expect(page.getByText(/Create a free .* account/i)).toBeVisible();
-    // The primary CTA also reads "Create account" in signup view.
-    await expect(page.getByRole('button', { name: /^Create account$/i })).toBeVisible();
+    // The primary CTA also reads "Create account" in signup view — SENTENCE case
+    // (copy/en.js `createAcct`), distinct from the TITLE-case tab above
+    // (AuthPanel.jsx's segmented control). A case-insensitive regex matched both
+    // and red on strict mode, so this uses the same exact-name idiom the
+    // sibling test below uses to separate the "Sign in" CTA from the "Sign In" tab.
+    await expect(
+      page.getByRole('dialog').getByRole('button', { name: 'Create account', exact: true }),
+    ).toBeVisible();
   });
 
   test('AuthModal primary path is password: fields + CTA render with no clicks', async ({ page }) => {
@@ -216,10 +222,19 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     });
 
     await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
-    await page.getByPlaceholder(/^Password$/i).fill('test');
+    // W5.1 DESIGN INVERSION: the "More sign-in options" disclosure and its "Use a
+    // password instead" toggle are GONE from the product — AuthPanel.jsx now
+    // renders "Primary path: email then password, always inline", which the
+    // sibling test 'AuthModal primary path is password' pins directly. The two
+    // disclosure clicks this test used to make no longer have subjects, so the
+    // interaction it exercises is the live one: fill the inline form, then work
+    // the tab toggle. The subject (no console errors while interacting) is intact.
+    await page.getByPlaceholder(/^Password$/).fill('test');
     await page.getByPlaceholder(/Email address/i).fill('test@example.com');
+    await page.getByRole('button', { name: /^Create Account$/ }).first().click();
+    // Non-vacuity floor: prove the interaction actually moved the modal, so an
+    // inert click can never make this a green over nothing.
+    await expect(page.getByText(/Create a free .* account/i)).toBeVisible();
 
     const noise = [
       /credit_ledger write skipped/i,

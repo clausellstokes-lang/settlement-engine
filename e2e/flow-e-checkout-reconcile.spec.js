@@ -44,6 +44,16 @@ test.use({ baseURL: 'http://localhost:5174' });
 // project URL. Our configured server uses https://mock.supabase.co → "mock".
 const STORAGE_KEY = 'sb-mock-auth-token';
 
+// ⛔ THE SUCCESS COPY, ANCHORED ONCE. App.jsx composes these toasts and a copy
+// wave softened both exclamation marks to periods ('Credits added.' /
+// 'Cartographer activated.'). The spec still spelled the '!' forms, which red the
+// one POSITIVE assertion — and silently made the two NEGATIVE ones
+// (`toHaveCount(0)` on a string the product can no longer render) pass over
+// nothing. Both spellings now live on one constant each, so the next copy move
+// reds the positive pin instead of quietly hollowing the negatives.
+const CREDITS_SUCCESS = 'Credits added.';
+const PREMIUM_SUCCESS = 'Cartographer activated.';
+
 const USER = {
   id: '11111111-1111-4111-8111-111111111111',
   aud: 'authenticated',
@@ -139,10 +149,10 @@ test.describe('Tier 3.7 Flow E — post-checkout entitlement reconciliation', ()
     // The honest "confirming" state shows first — it must not jump to success.
     await expect(page.getByText(/Confirming your purchase/i)).toBeVisible({ timeout: 20_000 });
     // No false green success while the balance still reads OLD.
-    await expect(page.getByText('Credits added!')).toHaveCount(0);
+    await expect(page.getByText(CREDITS_SUCCESS)).toHaveCount(0);
 
     // Success only after the polled balance exceeds the baseline (~5.4s).
-    await expect(page.getByText('Credits added!')).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByText(CREDITS_SUCCESS)).toBeVisible({ timeout: 20_000 });
     await expect(page.getByText(/Confirming your purchase/i)).toHaveCount(0);
   });
 
@@ -162,7 +172,7 @@ test.describe('Tier 3.7 Flow E — post-checkout entitlement reconciliation', ()
     // Persistent terminal notice; never a green success. (Curly apostrophe in
     // the copy → match the apostrophe loosely.)
     await expect(page.getByText(/We couldn.t confirm this purchase/i)).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByText('Credits added!')).toHaveCount(0);
+    await expect(page.getByText(CREDITS_SUCCESS)).toHaveCount(0);
     // It's dismissible (persistent amber banner carries a Dismiss control).
     await expect(page.getByRole('button', { name: /Dismiss/i })).toBeVisible();
   });
@@ -188,7 +198,7 @@ test.describe('Tier 3.7 Flow E — post-checkout entitlement reconciliation', ()
     const processing = page.getByText(/your purchase is still processing/i);
     await expect(processing).toBeVisible({ timeout: 30_000 });
     await expect(processing).toContainText('cs_test_prem');
-    await expect(page.getByText('Cartographer activated!')).toHaveCount(0);
+    await expect(page.getByText(PREMIUM_SUCCESS)).toHaveCount(0);
     await expect(page.getByRole('button', { name: /Dismiss/i })).toBeVisible();
   });
 });

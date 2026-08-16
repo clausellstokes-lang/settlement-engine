@@ -94,9 +94,18 @@ test.describe('Tier 3.7 Flow F — single-dossier recovery', () => {
     // Server settlement preferred (not the stash's "Stashed Hollow").
     await expect(page.getByText('Ironford', { exact: false })).toBeVisible();
     await expect(page.getByText('Stashed Hollow')).toHaveCount(0);
-    // Download affordance present (auto-download may already have flipped the
-    // label to "Download again").
-    await expect(page.getByRole('button', { name: /Download (PDF|again)/i })).toBeVisible();
+    // Download affordance present. ⚠ THE LABEL HAS THREE STATES, not two, and
+    // omitting the third made this test a RACE rather than a stale selector:
+    // SingleDossierSuccessPage.jsx renders `downloading ? 'Preparing PDF…' :
+    // autoDownloadedRef.current ? 'Download again' : 'Download PDF'`, and the
+    // auto-download fires on mount — so the assertion can land while the button
+    // is mid-render as the disabled "Preparing PDF…". It failed on the first
+    // attempt and passed on its retry for exactly that reason. All three
+    // spellings are the SAME affordance, so the pin covers the state machine
+    // instead of two thirds of it.
+    await expect(
+      page.getByRole('button', { name: /Download (PDF|again)|Preparing PDF/i }),
+    ).toBeVisible();
   });
 
   test('verify 503 → Retry renders; retry succeeds → dossier renders, stash preserved', async ({ page }) => {

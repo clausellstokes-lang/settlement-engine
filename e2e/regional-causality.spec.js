@@ -1,5 +1,17 @@
 import { test, expect } from '@playwright/test';
 
+/**
+ * The map toolbar's overlay-layers control.
+ *
+ * ⚠ IT IS NO LONGER `getByTitle('Toggle layer visibility')`. The map-title
+ * tranche dropped the native `title=` from the toolbar's view-utility trio;
+ * WorldMapToolbar.jsx now renders it as a plain labelled `IconButton`
+ * (`<Layers/> Layers`), so its accessible NAME is the control's own word and
+ * the old tooltip string exists nowhere in the product. `exact` keeps it off
+ * the Layers PANEL's own headings once the panel is open.
+ */
+const LAYERS_BUTTON = (page) => page.getByRole('button', { name: 'Layers', exact: true });
+
 function settlementSave(id, name) {
   return {
     id,
@@ -214,7 +226,12 @@ test.describe('regional causality campaign UI', () => {
   test('applies and resolves a queued regional impact from the campaign folder', async ({ page }) => {
     await page.goto('/settlements');
 
-    await expect(page.getByText('Trade Belt')).toBeVisible();
+    // `exact` because the campaign name now also appears INSIDE longer strings on
+    // this page (a table <caption> "Settlements in Trade Belt" and two "· Trade
+    // Belt" settlement subtitles), which red the bare match on strict mode. The
+    // subject is the campaign-folder heading itself — the same idiom the
+    // 'Millcross' assertion below already uses.
+    await expect(page.getByText('Trade Belt', { exact: true })).toBeVisible();
     // Legibility wave (2026-07-22): "Regional graph" -> "Between Your Towns";
     // the settlement badge "N queued" -> "N changes queued".
     await expect(page.getByText('Between Your Towns')).toBeVisible();
@@ -259,31 +276,56 @@ test.describe('regional causality campaign UI', () => {
     const campaignValue = await campaignSelect.locator('option', { hasText: 'Trade Belt' }).getAttribute('value');
     await campaignSelect.selectOption(campaignValue);
 
-    // P4/P5 IA move: the standalone "Show Wizard News" view is gone — the news
-    // feed now lives in the Chronicle tab of the Realm Inspector. A later
-    // consolidation folded the dedicated "News"/Chronicle toolbar opener into
-    // the single "Inspector" toggle (WorldMapToolbar.jsx: "the toolbar Pulse /
-    // News / Pantheon openers were removed"), with Pulse / War / Pantheon /
-    // Chronicle now living as its tabs (RealmInspector.jsx). So we open the
-    // inspector, then switch to its Chronicle tab.
-    await page.getByTitle('Toggle the Realm Inspector').click();
-    await page.getByRole('button', { name: 'Chronicle' }).click();
+    // THE ROUTE TO THE NEWS FEED, THIRD SPELLING. P4/P5 retired the standalone
+    // "Show Wizard News" view into a Chronicle tab of the Realm Inspector; THE
+    // HERALD CONSOLIDATION HAS SINCE RETIRED THAT TAB TOO. RealmInspector.jsx's
+    // own header states the landing: "THE PAPER (seven news doors): Dashboard
+    // (front page + prose session-prep) · War · Faith · Trade · Events ·
+    // Divination · Adjudication … The old eleven doors consolidate here: Letter
+    // -> Dashboard prose mode … Chronicle CONTENT distributes into the topical
+    // doors via the routing table". `WizardNewsPanel` now mounts in exactly one
+    // place on this surface — HeraldBody.jsx's `prose &&` branch — so the live
+    // route is: open the inspector, stand on Dashboard, turn to prose.
+    //
+    // ⚠ THE TOGGLE IS BY ROLE+NAME, NOT BY TITLE. The map-title tranche migrated
+    // this control's native `title=` to an `aria-label=` (WorldMapToolbar.jsx
+    // says so at the callsite: "the native title migrated to aria-label rather
+    // than dropping, preserving the announcement"), so getByTitle stopped
+    // resolving a control that never moved. PREFIX match, because the same label
+    // appends an unreviewed-proposal count when one is pending.
+    await page.getByRole('button', { name: /^Toggle the Realm Inspector/ }).click();
+    await page.getByRole('button', { name: 'Dashboard' }).click();
+    await page.getByRole('button', { name: 'Prose session-prep' }).click();
 
-    // The Chronicle section renders the WizardNewsPanel with the seeded entries.
-    await expect(page.getByText('Most Significant News')).toBeVisible();
-    await expect(page.getByText('Millcross faces import shortage')).toBeVisible();
-    await expect(page.getByText('Realm Notables')).toBeVisible();
-    await expect(page.getByText('Route disruption reaches Millcross')).toBeVisible();
+    // Prose session-prep renders the WizardNewsPanel with the seeded entries.
+    //
+    // ⚠ THE PANEL'S TWO SECTION HEADINGS WERE RENAMED by the same legibility wave
+    // this file already records at "Regional graph" -> "Between Your Towns":
+    // 'Most Significant News' -> 'Your Settlements' and 'Realm Notables' ->
+    // 'Elsewhere in the Realm' (WizardNewsPanel.jsx:518, :527). Neither old
+    // string survives anywhere under src/.
+    //
+    // ⚠ AND THESE ARE BY ROLE, NOT getByText, FOR A REASON THAT WOULD OTHERWISE
+    // RED THEM: the Chronicler's Letter now shares this page and repeats both
+    // headlines in its own prose (plus a "Needs attention" strip), so a bare text
+    // match resolves to three elements. The article HEADING is the subject.
+    await expect(page.getByRole('heading', { name: 'Wizard News' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Your Settlements' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Millcross faces import shortage' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Elsewhere in the Realm' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Route disruption reaches Millcross' })).toBeVisible();
 
-    // Close the inspector to return to the map workspace.
+    // Close the inspector to return to the map workspace. (`Close inspector`
+    // still carries BOTH title and aria-label — RealmInspector.jsx — so it needs
+    // no change; only the toolbar controls dropped their titles.)
     await page.getByTitle('Close inspector').click();
-    await expect(page.getByTitle('Toggle layer visibility')).toBeVisible();
+    await expect(LAYERS_BUTTON(page)).toBeVisible();
   });
 
   test('map Layers panel exposes regional overlay toggles and filters', async ({ page }) => {
     await page.goto('/map');
 
-    await page.getByTitle('Toggle layer visibility').click();
+    await LAYERS_BUTTON(page).click();
     await expect(page.getByText('Regional channels', { exact: true })).toBeVisible();
     await expect(page.getByText('Regional impacts')).toBeVisible();
     await expect(page.getByText('GM regional channels')).toBeVisible();
