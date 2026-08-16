@@ -5678,3 +5678,36 @@ gallery-seeding lane offer stands.
    prompts remain a separate parked session. Higgsfield connector
    added by owner mid-session but its tools are not visible to this
    session yet — the browser route is the working path.
+
+## §155 · MF-R1 COLLECTED + DELIBERATE SESSION PAUSE (2026-08-16 ~05:05)
+
+1. **MF-R1 verdict: FAIL-as-written, CURED — all 20 anchored blocks
+   applied 20/20 to the mf charter, which is now COMPILE-READY.**
+   Convictions banked (each CONFIRMED at 6b337fb1): exit-road
+   bearings are a RETRY COUNTER, not geography — §150.3's "true
+   exit bearings" claim is hereby CORRECTED; NO physical-distance
+   metric exists (the true scale bar needs a new §42/§43 home);
+   the fabric PRNG derives from the persisted seed string, never
+   rngContext (the wall stands); the placement/affinity machinery
+   is real but the charter's vocabulary missed 5 of 12 real
+   priorityCategories (archetype totality cured); the state
+   channel is the landed mapDress (IT-3) with a golden-pinned
+   dormancy law; the fabric slots into the LAYOUT_LAW_VERSIONS
+   ONE-DIAL axis and FIVE named pins re-record on the flip
+   (declared, priced); nine persisted mapEdits keys must be
+   honored; tier bands match POPULATION_RANGES exactly.
+2. **OWNER ORDER: pause for a session restart** (to mount the
+   Higgsfield connector — added mid-session, invisible to a
+   running session). Pause state: TE27 (tm+sk executor) LIVE at
+   6b337fb1 — if orphaned by the restart, the remediation survey
+   protocol governs (worktree commits + receipt first, then resume
+   or re-dispatch from the laneTC28 plans); MF-P1 (prototype)
+   re-dispatches cheaply from the post-fold charter; Higgsfield
+   gen #1 (the Parchment north star) DONE in the owner's Library,
+   gen #2 (organic river town) generating server-side — collect
+   from the Library. The resume protocol + recovery capsule live
+   in the auto-memory dir (resume-2026-08-16-session-pause.md +
+   session-capsule-2026-08-16.tar.gz — extract to the new
+   scratchpad, then delete). The successor resumes MID-PROGRAM by
+   §144-§155 + that file; nothing is dropped, everything is
+   parked ON PURPOSE.
