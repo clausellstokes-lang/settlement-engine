@@ -208,6 +208,40 @@ matches nothing and does not. **Found by running the meta-test rather than by re
 law**, which is the only reason this member did not carry the same wrong scoping into the
 gate. Every future compile that prices §102.3 by directory alone will under-price it.
 
+**⛔⛔ THE STRUCTURAL GUARD FOUND A REAL CALLER AT THE TERMINAL, AND IT WAS RIGHT TO.** The
+first terminal gate went RED on a SCOPE SENTINEL: four whole-corpus walkers
+(`newsHeadlineContract`, `newsVoiceContract`, `observedShapeReaders`, `proseFamilyContract`)
+failed **without a measurable test** and 51 tests left the census as SKIPS. The root cause was
+one, and it was this member's own: `scripts/lib/observed-shape-corpus.mjs` DISCOVERS every
+`<x>Enabled` key by source-scanning `src/domain` and lights them ALL, so
+`advanceEpochEnabled` joined that set the moment the kernel gate read landed — and the builder
+threaded no epoch, so `assertEpochPinnedInTest` threw inside a `beforeAll` and took every test
+those four suites own out of the census with it.
+
+⚠ **THE SENTINEL IS WHY THIS WAS NOT A GREENWASH.** A skip ceiling cannot tell a suite that
+was never measured from a suite that passed; the sentinel can, and it refused the run.
+
+**BOTH CURES WERE EXECUTED AND MEASURED before either was chosen:**
+
+| option | result |
+|---|---|
+| **A — thread a pinned epoch** (the corpus runs LIT) | ⛔ **NINE exact-totality assertions red** across four contract walkers: the AO-0 four-family reconstruction, the 63-identity counts/bytes/digest freeze, the twelve-record pulse-history closure, the headline aliases, the regional audit log |
+| **B — hold this ONE flag dark, with a written reason** | ✅ **six files / 82 tests green, zero re-records** |
+
+**B was taken.** Every other flag in that corpus gates a MECHANISM, so lighting it adds
+candidates, records or ledger keys — the very shape the corpus exists to observe. This flag
+gates none: it appends a nonce to the pulse ROOT SEED, so lighting it re-rolls the entire
+corpus while contributing exactly ONE new observed key (`pulseHistory[].epoch`, a conditional
+scalar no reader in this tree reads). Re-recording four reference artefacts to buy one scalar
+is the wrong trade, and re-rolling a fixed reference world silently is what THE PROMISE
+forbids. *Vetoable: the veto is to take option A and land the four re-records as an explicitly
+declared shift.*
+
+⭐ **AND THE GUARD IS VINDICATED RATHER THAN INCONVENIENT.** Without it the builder would have
+lit the flag, composed the DARK seed anyway, and produced a corpus that believed it was lit —
+silently, with every walker green. That is the precise failure `assertEpochPinnedInTest` was
+written to make impossible, and it caught it on its first contact with a real caller.
+
 ## §9 · WHAT STAGE THREE INHERITS
 
 - **The promotion continues: stage 3 is EP-2 and EP-3A**, mutually path-disjoint, promotable

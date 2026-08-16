@@ -714,6 +714,29 @@ export async function buildObservedCorpus({
   }(join(ROOT, 'src/domain')));
   const flags = discoverSimulationFlags(readFileSync, domainFiles);
   const simulationRules = Object.fromEntries(flags.map((f) => [f, true]));
+  // ⛔ EP-1 (2026-08-16) — THE ONE DISCOVERED FLAG THIS CORPUS HOLDS DARK, and it is held
+  // dark for a reason that does not generalise to any other flag.
+  //
+  // Every other `<x>Enabled` key gates a MECHANISM: lighting it adds candidates, records or
+  // ledger keys, which is exactly the SHAPE this corpus exists to observe.
+  // `advanceEpochEnabled` gates none. It appends a nonce segment to the pulse ROOT SEED, so
+  // lighting it re-rolls the entire corpus — every candidate, every news entry, every
+  // digest — while contributing exactly ONE new observed key (`pulseHistory[].epoch`, a
+  // conditional scalar that no reader in this tree reads).
+  //
+  // MEASURED, not argued: threading a pinned epoch here reds NINE exact-totality assertions
+  // across four contract walkers (the AO-0 four-family reconstruction, the 63-identity
+  // counts/bytes/digest freeze, the twelve-record pulse-history closure, the headline
+  // aliases and the regional audit log). That is a full re-record of four reference
+  // artefacts bought for one scalar key — and re-rolling a fixed reference world silently
+  // is precisely what THE PROMISE forbids.
+  //
+  // THE CORPUS IS THEREFORE EXPLICITLY DARK HERE, and the kernel's structural guard is what
+  // made the choice visible: it threw rather than letting this builder light the flag and
+  // silently compose the DARK seed anyway, which is the failure it exists to prevent. When
+  // a wave genuinely needs the lit shape, it lands the epoch WITH the four re-records as a
+  // declared shift, in a commit that says so.
+  simulationRules.advanceEpochEnabled = false;
 
   /** @type {Array<{name:string, value:unknown}>} */
   const roots = [];
