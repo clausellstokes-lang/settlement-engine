@@ -7065,3 +7065,40 @@ document — the capstone audit of the map program's design era.
    two streets, order-gated drift).** Eight deferred post-launch,
    recorded. MF-B5 relayed the C1/C2 cures mid-lane (it builds
    §16.5 NOW — the field-barn correction is urgent for it).
+
+## §195 · THE FORENSIC ZOOM (2026-08-16, owner-ordered: "look at it
+## in depth, zoom in, see what's overlapping, what makes sense and
+## what doesn't — comprehensively and exhaustively")
+
+Five regions of the b4 town at 3000px, chair's eyes. TWELVE
+defects, and the headline is the CLASS: **THE CENSUS AND THE PAINT
+MEASURE DIFFERENT GEOMETRIES** — the ground-law census reports
+zero overlapping pairs while the zoom shows clear intersections in
+the institution clusters, because the census tests source
+footprints while the renderer applies per-instance
+rotation/transform afterward. The instrument certifies a surface
+the output does not draw — the exact vacuity class this program
+exists to kill, now found in our own sandbox battery.
+
+The catalog: (1) census-render geometry split (the class above —
+the census MUST measure the DRAWN geometry); (2) institution
+variants rotating freely and stacking (§193's fronting cure,
+proven at zoom); (3) river geometry absurd — a hairpin doubling
+back, two parallel dead-straight runs, a ruler-horizontal west
+reach; (4) FIELD SEAMS CONTINUE UNDER THE RIVER (water must bound
+parcels); (5) stream hairlines run UNDER buildings (clip to open
+ground); (6) THE DOCKS ARE OFF THE WATER — pier bars inland,
+disconnected from the river (a §161m physical absolute violated in
+render placement); (7) NO BRIDGES anywhere streets meet water;
+(8) the wall dead-ends into the river with no water gate, its
+'gate' dashes read as a broken line (a gatehouse glyph is owed),
+and it crosses water unmarked; (9) CONSTRUCTION GUIDES LEAK into
+the drawing (dashed growth arcs, unexplained dotted ghost boxes);
+(10) label truncation mid-word ('XIOUS TRADES QUAR'); (11)
+floating singles in open wash with no lane/yard/orientation;
+(12) street channels fragmenting into disconnected lozenges in
+places. MF-B5 redirected with the full list; the census-geometry
+order is its FIRST obligation (a pin that measures what is drawn,
+counterfactual-paired), the rest join its open targets by
+family (river/water: 3,4,5,6,7,8 one water-coherence member;
+guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
