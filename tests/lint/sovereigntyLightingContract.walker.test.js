@@ -4616,7 +4616,27 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // file than the members needed.
     //
     // +4 suite titles: exactly one new `describe` per new file.
-    files: 2447, parked: 364, credited: 2083, titles: 20348, suiteTitles: 5701,
+    // ── RE-RECORDED 2026-08-16 BY THE `sk-b` TRAIN (the harness instruments) ────────
+    // 2447/364/2083/20348/5701 → 2452/364/2088/20373/5706. Five test files created, none
+    // deleted; `parked` is again unmoved, so all five are CREDITED, and `files`, `parked`
+    // and `credited` are asserted BEFORE `titles`.
+    //
+    // ⚠ `tests/fixtures/soakFlagRegistryFixture.js` is ALSO new and is deliberately NOT in
+    // this count: the walk is filtered to `*.test.js(x)`, so a `.js` fixture moves no
+    // figure. Recorded because a reader checking the file count against the diff would
+    // otherwise find six new files and five census rows.
+    //
+    // THE +25 ATTRIBUTED BY MEASUREMENT — each row obtained by replacing THAT ONE FILE
+    // with a one-title credited stub and re-running this walker:
+    //   tests/soak-harness/coveringArrayCoverage.test.js  +6 titles
+    //   tests/soak-harness/blastRadiusUnion.test.js       +5 titles
+    //   tests/soak-harness/seedLedgerDensity.test.js      +5 titles
+    //   tests/soak-harness/rollingCancellation.test.js    +5 titles
+    //   tests/soak-harness/curveBandFreeze.test.js        +4 titles
+    //   = +25, closing with nothing left over.
+    //
+    // +5 suite titles: exactly one new `describe` per new file.
+    files: 2452, parked: 364, credited: 2088, titles: 20373, suiteTitles: 5706,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

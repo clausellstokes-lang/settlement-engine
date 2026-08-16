@@ -75,6 +75,8 @@
     "soak:weekly": "node scripts/audit/realm-scale-certification.mjs --profile weekly",
     "soak:release": "node scripts/audit/realm-scale-certification.mjs --profile release",
     "soak:research": "node scripts/audit/realm-scale-certification.mjs --profile research",
+    "soak:rolling": "node scripts/soak/run.mjs",
+    "soak:restore": "node scripts/audit/whole-world-soak.mjs --restore-from",
     "audit:bound-book": "node scripts/audit/bound-book-report.mjs",
     "audit:town-scene:local-matrix": "node scripts/audit/town-scene-local-matrix.mjs",
     "certify:town-scene": "node scripts/audit/town-scene-certification.mjs",
