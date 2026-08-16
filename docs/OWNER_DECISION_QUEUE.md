@@ -6206,3 +6206,14 @@ discipline, small scope).
    iteration/re-roll license included (§159-era). The 21
    outstanding references collect at the next cycle; the corpus's
    27 on-disk files calibrate MF-B1 meanwhile.
+
+## §164a · NEIGHBOR-EDGE CONSTRAINTS (2026-08-16, owner: "spatially
+## aligned with the realm and only when they connect to a neighbor
+## in a campaign, never before")
+
+Charter §12.2 amended: (a) the annotated road exits on the TRUE
+BEARING of the neighbor per the realm's spatial layout — map edge
+and world map must agree; (b) neighbor edges render ONLY once the
+campaign link exists — no speculative names, no placeholder
+annotations; the edge is born when the link is, and §11 drift
+renders its arrival. TC30 (compiling that member now) notified.
