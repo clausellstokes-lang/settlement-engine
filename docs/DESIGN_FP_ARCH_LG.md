@@ -144,6 +144,28 @@ waves ride `vesselFleetsEnabled` ∧ the ES mission flags they extend.
 - **LG-13+ — PROSE/DOSSIER WAVES**: strictly after their producers, per
   the GR law.
 
+## §46d · THE FIFTH DIRECTIVE FAMILY (owner, 2026-08-15; ODQ §125)
+
+- **Trade circles**: the circle predicate widens to trading partners for
+  COMMERCIAL passage (allies free, partners tolled — chair proposal,
+  vetoable); wartime capacity priority is an OPEN OWNER QUESTION at ODQ
+  §125.1. One graph, one capacity pool; the toll books as host income.
+- **Confiscation replenishes**: the LG-5 supply-gain arm strengthened —
+  confiscated cargo feeds the army-supply model via the one-supply-truth
+  contract; typed by the inspection's OBSERVED register only.
+- **The caravan news chain**: a released caravan informs every caravan it
+  crosses; informed caravans decide by strategy/risk/destination to
+  continue or turn; returners mint/update army-position NEWS (belief
+  plane, never ground truth). En-route civilian encounters are belief
+  carriers — the Q8 idiom extended.
+- **Size-scaled speed**: armies AND migrating population columns travel
+  slower with size (chair-derived bands, §42/§43; the transit kernels
+  gain the read).
+- **Roaming captivity, no ransom**: settlement-less NPCs are capturable
+  by bandit-class encounters, held a bounded time, released — the ransom
+  machinery never mints for the untied. The LG-9+ compile grades whether
+  a bandit-class producer is owed or the criminal machinery hosts it.
+
 ## §C · THE COLUMN-CLASS RULING (POP/LG/ES, ruled once)
 
 The demographic column-class vocabulary (`columnOf`'s whitelist +

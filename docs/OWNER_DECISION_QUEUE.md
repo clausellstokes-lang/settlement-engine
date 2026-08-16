@@ -4613,3 +4613,55 @@ The charter lane received the addendum in flight.
    fresh** to execute the receipt's §15.5 procedure: the mint, the
    raw-cohort re-pin, DA-B1 + DA-B3, the 12→11 re-freeze, one green
    terminal; da-b + da-c expose together as the twenty-third.
+
+## §125 · FIVE LG DIRECTIVES — TRADE CIRCLES, CONFISCATION
+## REPLENISHMENT, CARAVAN NEWS CHAINS, SIZE-SCALED SPEED, ROAMING
+## CAPTIVITY (owner, 2026-08-15, verbatim in-chat; operative readings
+## recorded; the LG volume gains §46d in this commit)
+
+1. **TRADE USE OF CIRCLES**: traders/caravans from ALLIED or
+   TRADING-PARTNER settlements may use teleportation circles to cut
+   travel time and distance. Operative: the L-LG-3 predicate widens
+   from allied-or-mutually-beneficial to include the trade
+   relationship for COMMERCIAL passage; circles become trade
+   infrastructure on the one graph (L-LG-1 — an edge whose cost
+   collapses for qualifying traders). Two chair proposals ride the
+   compile, vetoable: allies pass free, trading partners pay a toll
+   (an economic exchange the host settlement books); and in WARTIME
+   military/envoy use PREEMPTS trade use of limited capacity —
+   ⚠ the second is ASKED of the owner below rather than assumed.
+2. **CONFISCATION REPLENISHES**: an army taking a stopped caravan's
+   cargo REPLENISHES its dwindling resources — the LG-5 confiscation
+   arm's supply gain is CONFIRMED AND STRENGTHENED: confiscated
+   cargo feeds the army-supply model (the one-supply-truth contract
+   of §94.2i), typed by what the inspection OBSERVED (the L-LG-5
+   split holds: cargo is fact, destination stays belief).
+3. **THE CARAVAN NEWS CHAIN**: a caravan ALLOWED TO RETURN informs
+   every caravan it crosses on the path; each informed caravan
+   decides — by its strategy, risk assessment, and trade destination
+   (the existing risk-tolerance machinery) — to continue or turn
+   back; returning caravans START or UPDATE news of the approaching
+   army. Operative: en-route caravan-to-caravan encounters become
+   BELIEF CARRIERS (the non-omniscient news-carriage idiom of Q8
+   extended to civilian traffic); the army's position enters the
+   belief plane as reports, never as ground-truth leaks.
+4. **SIZE-SCALED SPEED**: armies, as organized units, travel SLOWER
+   than other units, scaling with size — AND THE SAME FOR MIGRATING
+   POPULATIONS. Operative: a speed-vs-size law (chair-derived bands,
+   §42/§43 signed) applied to army transit AND population columns;
+   the existing transit kernels gain the scaling read.
+5. **ROAMING-NPC CAPTIVITY WITHOUT RANSOM**: an NPC roaming
+   settlement-less may still be captured by bandits and the like,
+   held an APPROPRIATE time, then released — NO ransom is issued
+   (no settlement tie to ransom against). Operative: a time-bounded
+   captivity arm on the roaming-NPC encounter surface; the ransom
+   machinery explicitly does NOT mint for the untied; the captivity
+   duration is a chair-derived band. Architecture note: this may
+   mint the first BANDIT-CLASS encounter producer for settlement-
+   less NPCs — the LG-9+ compile grades whether the existing
+   encounter/criminal machinery hosts it or a producer is owed.
+6. All five join the LG volume as **§46d** (this commit); the
+   affected waves re-price at their compiles (LG-0/1 the predicate,
+   LG-5 the replenishment, LG-8/9+ the news chain and captivity,
+   WY/POP-adjacent the speed law). ONE question is put to the owner
+   in-chat; everything else is chair-derived and vetoable.
