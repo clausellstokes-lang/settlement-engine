@@ -6661,3 +6661,41 @@ member becomes a solver, not a lookup.
    and the mf-b train members (terraform/institutions/ground/
    walls-water) — same proof discipline, judged at the absolute
    bar.
+
+## §182 · TE28 COLLECTED — THE HARNESS IS LANDED; THE 27th
+## EXPOSURE; THE ROLLING SOAK IS ARMED; uf-1 DISPATCHED
+## (2026-08-16, chair)
+
+1. **The sk family LANDED GREEN: CAS 0cbb0177 → 25f22b2b**
+   (ancestry verified; 14 commits; both terminals exit 0; packets
+   110/0; ratchets 173/173 + 1134/1134; 28,406 tests / 11 known).
+   **THE §141/§143 SOAK INSTRUMENT EXISTS AND IS PROVEN.**
+2. **SK.U1: SETTLED AND CURED, not forked.** The probe proved the
+   year-boundary round trip LOSSY (twelve undefined-key paths the
+   JSON-stringify hash was blind to — a hash-only proof would have
+   been green and meaningless) AND refuted the compile's
+   engine-seam assumption: the census knows the paths, the writer
+   records them, the reader replants them — 192 planted, 0
+   unreachable, deep census 9975→9975, years 3-4 BYTE-IDENTICAL to
+   uninterrupted. Nothing under src/; nothing ships dark. Banked
+   hazard: the lane's first census instrument was ALIAS-SENSITIVE
+   (a DAG vs its tree copy — 36/103 phantom diffs vs 12 real) —
+   cured to an ancestor stack; memory-worthy. ⚠ tests/ops froze a
+   statement form and bit a SECOND consecutive train — de-rotted
+   with a planted mutant.
+3. **RULINGS:** OQ-7 NOT-OWED ratified (the §85.4 clause read, not
+   guessed: no seeded chooser, walkers don't scan scripts/soak).
+   J-TE28-3: the sim_address_chain REGISTRY ROW (four priced
+   obligations) is QUEUED as a one-member rider on the tm CLIENT
+   train — recorded, not dropped. J-TE28-9 ratified: BASE_STATE
+   re-stamp rides uf-1 post-CAS.
+4. **THE FIRST ROLLING SOAK IS ARMED** (§146.3/§143.1): the
+   harness's own dispatchRefusals() encodes the gate as data — it
+   fires at the FIRST family exposure AFTER this one. **uf-1
+   DISPATCHED** (the §151.4 docs train): the six-volume unfork on
+   the build branch (WC as a MERGE), BASE_STATE re-stamp, and
+   DRAFTS of the three new ledger volumes (DESIGN_FP_ARCH_CN/PG/MF
+   — the ~103KB map charter folds to MF) delivered to scratchpad
+   for the chair's ledger landing at collection. At uf-1's
+   exposure: THE FIRST ROLLING SOAK FIRES. Then EP stage one → ci
+   → WF (the first family PR).
