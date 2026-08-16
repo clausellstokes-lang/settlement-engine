@@ -6083,3 +6083,29 @@ institutions fall to the matrix with their siting ring, recorded
 never silent). Chair note: this closes the organism loop —
 institutions seed districts, districts grow, organisms attract
 institutions. TC29 notified (#13).
+
+## §161m · WALL TRACES + SUPPLY-CHAIN ADJACENCY (2026-08-16, owner:
+## "castle walls and palisades shaped appropriately… following
+## historic precedence" + "supply chains and the interspace… more
+## apparent the more lawful a place is")
+
+Charter §5 gains THE WALL-TRACE LAW (circuit economy — the wall
+hugs tight because every meter cost a fortune, high-water sizes
+what PAID for it; terrain service — ridge lines, marsh refusal,
+the castle's crag; water as the fourth wall for bankside towns;
+gates few, at the road-weighted crossings, gatehouse-built;
+palisade rounder/simpler vs stone tower-to-tower curtains; citadel
+as the strongest corner never floating; moat per the terraform
+budget) and THE SUPPLY-CHAIN ADJACENCY LAW (a two-class
+constraint graph: PHYSICAL absolutes never violated — port ON
+water, mill ON race, quarry AT stone; LOGISTICAL preferences
+order-scaled — garrison near center/castle for dispatch, mill near
+fields+town, granary between mill and market, stables at gates,
+slaughter between livestock market and tanners; THE LAWFULNESS
+DIAL: a lawful town reads as a diagram of its own supply chains, a
+chaotic one shows the same institutions seeded-scattered —
+disorder legible as LOGISTICAL FRICTION, not just crooked lanes;
+tier scales the interspace: a village's mill-to-market is a lane,
+a metropolis's a warehouse district; every graph edge cites its
+dossier supply relationship, totality-censused). TC29 notified
+(#14).
