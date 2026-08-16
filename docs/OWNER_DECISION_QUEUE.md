@@ -5921,3 +5921,24 @@ priorityCategories + split entries. TC29 notified.
 ## grow outward, the town is just the umbrella")
 
 Charter §5.0c: growth is PER-DISTRICT — each district anchors (suitability × affinity × siting ring) and accretes outward at a rate ∝ its economic weight and age; THE LOBE COUNT IS DECIDED (= independent anchors the facts support: thorp 1 → city many; the §5.-1.3 polycentric subseed is this law at distance); the settlement outline is the UNION UMBRELLA — meeting frontiers become seam streets, unmet gaps stay interior greens (the breathing holes of real plans); walls wrap the organisms that existed when built, so young districts can stand extramural; per-district grain angles belong to the organisms. TC29 notified — this REORDERS the geometry-core member (district organisms before any town outline).
+
+## §161e · MATRIX, MULTIPLICITY, OVERLAP (2026-08-16, owner:
+## "multiple of the same districts… residential spread throughout…
+## districts can and should overlap")
+
+Charter §5.0c gains three sub-laws: THE RESIDENTIAL-MATRIX LAW
+(housing is the connective tissue everywhere; district character is
+a LAYER over the matrix; a dwelling-free district is a bug) · THE
+MULTIPLICITY LAW (same type instantiates multiple organisms where
+facts support — parishes plural, markets by good, two poor fringes;
+instance count derives from the dossier, tier-bounded) · THE
+OVERLAP LAW (organisms are INFLUENCE FIELDS, not exclusive
+polygons; parcels sample the strongest local fields; ERA-LEGAL
+MIXING by parcel-grain dithering — flat per-parcel character,
+salt-and-pepper frontiers, never a blended wash, since §9 forbids
+gradients; labels name only the locally dominant field; truth-layer
+anchors stay distinct beneath the paint). Chair note recorded: the
+hard-edged single-instance district model was a modern-zoning
+anachronism — the owner's field-over-matrix model is the
+historically true one and kills the SimCity-zone look. TC29
+notified.
