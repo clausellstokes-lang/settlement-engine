@@ -10433,6 +10433,126 @@
       ]
     },
     {
+      "id": "DA-B1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-B1.md",
+      "verifiedBase": "9adb725b907928541cb2e24c63f3c7905dee286f",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/humanizeEngineTokens.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/WizardNewsPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/new/tabs/ChronicleTab.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/new/tabs/EconomicsTab.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/dossier/DossierHeaderRow.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/humanizeEngineTokens.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/display/humanizeEngineTokens.js",
+          "symbol": "const DISPLAY_LEXICON = Object.freeze({"
+        },
+        {
+          "path": "src/domain/display/humanizeEngineTokens.js",
+          "symbol": "export function displayLabel"
+        },
+        {
+          "path": "src/domain/display/humanizeEngineTokens.js",
+          "symbol": "export function humanizeIfToken"
+        },
+        {
+          "path": "tests/domain/humanizeEngineTokens.test.js",
+          "symbol": "covers EVERY trade-route token the generator can actually produce"
+        },
+        {
+          "path": "src/components/new/tabs/EconomicsTab.jsx",
+          "symbol": "displayLabel('supplyChainStatus', c.status)"
+        },
+        {
+          "path": "src/components/dossier/DossierHeaderRow.jsx",
+          "symbol": "displayLabel('tradeRouteAccess', settlement.config.tradeRouteAccess)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the four residual leak sites render through the chokepoint, and the two vocabularies that refused a bucket take the general humanizer rather than an authored table"
+        },
+        {
+          "id": "A2",
+          "case": "the tradeRouteAccess bucket is proven EQUAL to the token set the generator source can produce, so a sixth route reds instead of falling through"
+        },
+        {
+          "id": "A3",
+          "case": "the chronicle mixed slot humanizes a token and leaves an authored headline byte-identical"
+        },
+        {
+          "id": "A4",
+          "case": "every pre-existing chokepoint export keeps a byte-identical body, proven by a zero-deletion diff"
+        },
+        {
+          "id": "A5",
+          "case": "EconomicsTab measures at most 600 effective lines under the enforcer own rule"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/humanizeEngineTokens.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/publicChronicleTab.test.jsx",
+          "tests/components/economicsPlotHookSeam.test.jsx",
+          "tests/components/wizardNewsChronicle.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
+          "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
+          "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"
+        ]
+      ]
+    },
+    {
       "id": "DA-B2",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/display-adoption/DA-B2.md",
