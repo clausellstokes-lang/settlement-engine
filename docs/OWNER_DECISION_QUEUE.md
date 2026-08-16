@@ -6739,3 +6739,19 @@ member becomes a solver, not a lookup.
    distance), the §16 field system, village center/landmarks,
    §15.7 substrate imperfection, atlas deepening, ward-wealth
    stratification.
+
+## §185 · THE REFERENCE CORPUS COLLECTED — 48 FILES; THE
+## GENERATION PHASE CLOSES (2026-08-16, chair)
+
+The long-owed collection is PAID: all 21 wild-round + water-mode +
+final-set references fetched at 4K into map-refs/ (48 total;
+hf84 living-undercity still generating, fetches next cycle).
+Every charter law §0-§16 now holds at least one visual target —
+including the spymaster copy (the DM-lens reference), the chrome
+typography plate, both water modes, the demoted city with its two
+wall vintages, the road-death ladder, the polycentric dumbbell,
+and the terraform workings. The generation phase closes on merit;
+the re-roll license stands for any reference that fails its law on
+spot-inspection. Meanwhile: RS-1 mid-flight (4/160 receipts at
+last report, autonomous), TE29 building EP stage one, MF-B3 on
+wave three.
