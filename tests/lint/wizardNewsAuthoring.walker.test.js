@@ -121,12 +121,17 @@ describe('Wizard News authoring presence — static census wall', () => {
   // is commit 526c5e31 (WR-3 LINEAGE CLAIM), which added 73 lines above this site
   // (1030 → 1103); the object literal's own bytes never changed, which is exactly
   // what the identical signature proves. Re-anchored at measured truth, not widened.
+  // EXACT RE-PIN 2026-08-16, the SAME shape a second time: `line` moved 852 → 859,
+  // SIGNATURE UNCHANGED. The cause is EP-2 (advance epoch), which added seven comment
+  // lines above this site when it threaded the campaign's pending epoch into the preview
+  // literal; the excluded object literal's own bytes never changed, which is what the
+  // identical `f4ac01180f8aaf35` proves. Re-anchored at measured truth, not widened.
   test('the store-side proposal undo snapshot is the one exact non-authoring exclusion', () => {
     expect(census.candidateSites.length).toBe(census.sites.length + 1);
     expect(census.excludedSites).toEqual([
       expect.objectContaining({
         path: 'src/store/campaignWorldPulseDeferred.js',
-        line: 852,
+        line: 859,
         column: 23,
         signature: 'f4ac01180f8aaf35',
         routeField: 'kind',

@@ -399,6 +399,16 @@ const NEGOTIATION_MODULES = Object.freeze({
   // no settlement record reached for a COUNTERPART'S legs. A missing leg stays missing and
   // the trade is refused with a receipt — never backfilled from truth.
   'src/domain/worldPulse/sovereigntyMarketStage.js': [
+    // ⭐ ADMITTED 2026-08-16 BY EP-3 SLICE A, and it is admitted on the SAME ground
+    // `../region/contestMath.js` is: a DETERMINISM PRIMITIVE, not a source of knowledge.
+    // `tickStreamSeedOf` reads the advance-epoch stamp off the world this stage was already
+    // handed and returns the stage's OWN seed expression with a nonce appended — it reaches
+    // no settlement record, no counterpart's legs, no capacity or pressure model, and it can
+    // add nothing to what this module already knows. It changes WHICH future the keyed buyer
+    // race draws, never WHAT the module may see, so the closed set's actual law — a missing
+    // leg stays missing and the trade is refused with a receipt, never backfilled from truth
+    // — is untouched.
+    '../advanceEpochLedger.js',
     '../region/contestMath.js',
     './beliefMap.js',
     './demographicsPlans.js',

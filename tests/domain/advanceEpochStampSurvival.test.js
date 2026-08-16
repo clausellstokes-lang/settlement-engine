@@ -29,6 +29,9 @@
  */
 import { describe, expect, test, vi } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+
 /** The recorder. Hoisted, because vi.mock factories hoist above the imports. */
 const spy = {
   /** @type {Array<{ module: string, out: unknown }>} every tickStreamSeedOf call. */
@@ -331,7 +334,13 @@ describe('EP-3A · the stamp — seam edit 9, and the world it rides out on', ()
     const dark = await simulateCampaignWorldInterval({
       campaign, saves, interval: 'one_month', now: NOW, autoResolve: true, advanceEpoch: EPOCH_A,
     });
-    expect(Object.keys(dark.worldState)).not.toContain('spatialLedgers');
+    // ANCHORED on `tick`, which every advanced world carries and which travels the SAME
+    // path: without it, a bare not.toContain would pass just as happily if the advance had
+    // returned an empty world — which is exactly the shape a broken fixture takes.
+    expectAbsentWithAnchor(
+      Object.keys(dark.worldState), 'spatialLedgers', 'tick',
+      'the M3 dormancy arm — a dark advance creates no ledger namespace',
+    );
     expect(getSpatialLedger(dark.worldState, 'advanceEpoch')).toBeUndefined();
   });
 
@@ -480,7 +489,11 @@ describe('EP-3A · the two-epoch pin — the same advance, two epochs, eight dif
       ['empty string', ''],
       ['a number', 4242],
     ]);
-    for (const [label, seed] of HOSTILE) {
+    // COLLECTED, NOT INLINE: a seed loop that asserts inline stops at the FIRST failing
+    // input, so a cure verified against it may never have reached the seeds that still
+    // fail — and the four inputs here are chosen precisely because they exercise DIFFERENT
+    // coercion branches, so knowing which ones broke is the whole diagnostic value.
+    const failures = collectSeedFailures(HOSTILE, ([label, seed]) => {
       const a = driveTick(DARK_RULES, EPOCH_A, seed);
       const b = driveTick(DARK_RULES, EPOCH_B, seed);
       // NON-VACUITY: the runs really reached the accessor.
@@ -490,7 +503,8 @@ describe('EP-3A · the two-epoch pin — the same advance, two epochs, eight dif
       expect(a.calls.filter(call => String(call.out).includes('::epoch:')), label).toEqual([]);
       // …and the whole worlds are identical, which is the dark claim in full.
       expect(JSON.stringify(a.result.worldState), label).toBe(JSON.stringify(b.result.worldState));
-    }
+    });
+    expectNoSeedFailures(failures, 'two epochs compose byte-identical dark keys under every hostile seed input');
   });
 });
 

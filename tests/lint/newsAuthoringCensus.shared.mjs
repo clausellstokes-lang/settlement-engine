@@ -27,10 +27,17 @@ const REQUIRED_FIELDS = Object.freeze(['id', 'settlementIds', 'severity']);
 // commit touching the file left it at 779 (018e4119 779, 68d14324 769, b0a137db 744).
 // A line-bound exclusion is the point: it can only ever be re-anchored to a site
 // whose bytes still hash the same, so a relocation is cheap and an EDIT is not.
+// EXACT RE-PIN 2026-08-16, the same shape a second time and by the same test: the
+// snapshot moved 852 → 859 with its SIGNATURE STILL `f4ac01180f8aaf35`. CAUSE, named
+// and measured — EP-2 (advance epoch) threaded the campaign's PENDING epoch into the
+// preview's argument literal in this file and wrote seven comment lines above this
+// site explaining why the preview inherits and never mints; the excluded object
+// literal's own bytes were not touched, which is exactly what the unchanged hash
+// proves. Re-anchored at measured truth, not widened.
 const NON_AUTHORING_SITE_EXCLUSIONS = Object.freeze([
   Object.freeze({
     path: 'src/store/campaignWorldPulseDeferred.js',
-    line: 852,
+    line: 859,
     column: 23,
     signature: 'f4ac01180f8aaf35',
     reason: 'proposal-undo-snapshot',

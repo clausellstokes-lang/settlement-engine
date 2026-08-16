@@ -1099,7 +1099,7 @@
   },
   {
     "path": "src/domain/worldPulse/demographicsPlans.js",
-    "line": 378,
+    "line": 384,
     "category": "floatInterpolation",
     "snippet": "Math.round(pressure01 * 10000)"
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "path": "src/domain/worldPulse/npcLadderKernel.js",
-    "line": 1080,
+    "line": 1087,
     "category": "floatInterpolation",
     "snippet": "`A windowed challenge (${windows}) cleared the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The ranks swapped — conservation holds, no title inflation.`"
   },
   {
     "path": "src/domain/worldPulse/npcLadderKernel.js",
-    "line": 1081,
+    "line": 1088,
     "category": "floatInterpolation",
     "snippet": "`A windowed challenge (${windows}) fell short of the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The defender held; the challenger dropped a rung and carries the grudge.`"
   },

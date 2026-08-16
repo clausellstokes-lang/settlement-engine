@@ -31,6 +31,8 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
+
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -238,7 +240,12 @@ describe('EP-2 · the resume re-thread — the same advance, the same epoch', ()
     const darkResult = await dark.getState()
       .advanceCampaignWorld('camp-1', PAUSING_INTERVAL, { now: NOW, epoch: EPOCH_A, autoResolve: false });
     expect(darkResult.status).toBe('paused');
-    expect(Object.keys(cursorOf(dark))).not.toContain('advanceEpoch');
+    // ANCHORED on `now`, which buildPausedAdvanceCursor parks unconditionally on the same
+    // literal: a bare exclusion would pass identically if the cursor had come back empty.
+    expectAbsentWithAnchor(
+      Object.keys(cursorOf(dark)), 'advanceEpoch', 'now',
+      'M2 is conditional on the flag-gated term',
+    );
   });
 
   test('RELOAD mid-pause: the resumed segment composes the epoch the pause committed under', async () => {
@@ -357,9 +364,19 @@ describe('EP-2 · the resume re-thread — the same advance, the same epoch', ()
       expect(epochRoots()).toEqual([]);
       const written = (worldOf(reloaded).pulseHistory || []).slice(-1);
       expect(written.length).toBe(1);
-      expect(Object.keys(written[0])).not.toContain('epoch');
+      // ANCHORED on `createdAt` — the very line M1's conditional spread folds onto, so the
+      // anchor travels the identical code path as the excluded key.
+      expectAbsentWithAnchor(
+        Object.keys(written[0]), 'epoch', 'createdAt',
+        'M1 writes no key in a dark world (invariant link L3)',
+      );
       const reparked = cursorOf(reloaded);
-      if (reparked) expect(Object.keys(reparked)).not.toContain('advanceEpoch');
+      if (reparked) {
+        expectAbsentWithAnchor(
+          Object.keys(reparked), 'advanceEpoch', 'now',
+          'a dark re-park carries no epoch',
+        );
+      }
     }
   });
 });

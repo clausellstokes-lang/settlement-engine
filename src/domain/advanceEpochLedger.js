@@ -76,9 +76,9 @@ function asObject(/** @type {unknown} */ value) {
  * strictly worse than the same defect at the pulse record because this one creates a
  * namespace that was not there.
  *
- * @param {any} worldState the world the calendar advance just produced
+ * @param {Record<string, unknown>} worldState the world the calendar advance just produced
  * @param {string|null} epochTerm the FLAG-GATED advance epoch, or null
- * @returns {any} the stamped world, or the identical reference when dark
+ * @returns {Record<string, unknown>} the stamped world, or the IDENTICAL reference when dark
  */
 export function stampAdvanceEpochYear(worldState, epochTerm) {
   if (!epochTerm) return worldState;
@@ -110,9 +110,16 @@ export function stampAdvanceEpochYear(worldState, epochTerm) {
  * unretyped, and the dark arm returns it by IDENTITY — same value, same type — so dark
  * byte-identity is a property of the code rather than a claim about a transcription.
  *
- * @param {any} worldState the world the CALLING STAGE received
- * @param {{ base: any }} opts `base` — the site's OWN seed expression, REQUIRED, no default
- * @returns {any} `base` verbatim, or `` `${base}${epochSuffix(epoch)}` `` when a
+ * ⚠ THE RETURN TYPE IS `T | string` AND THAT IS NOT A LOOSE SPELLING — it is the dark/lit
+ * split stated in the type system. Dark, the site gets ITS OWN expression back with its own
+ * type (a string site stays a string, a raw-read site stays whatever it read, which is what
+ * keeps a `||`-chain branching as it does today); lit, it gets a composed string. Typing
+ * this `any` would have said neither, and this module carries a zero any-hole allowance.
+ *
+ * @template T
+ * @param {Record<string, unknown>} worldState the world the CALLING STAGE received
+ * @param {{ base: T }} opts `base` — the site's OWN seed expression, REQUIRED, no default
+ * @returns {T | string} `base` verbatim, or `` `${base}${epochSuffix(epoch)}` `` when a
  *   current-tick stamp is present
  */
 export function tickStreamSeedOf(worldState, { base }) {

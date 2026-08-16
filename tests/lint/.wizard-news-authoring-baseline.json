@@ -117,7 +117,7 @@
     },
     {
       "path": "src/domain/worldPulse/forecastRun.js",
-      "line": 169,
+      "line": 175,
       "column": 41,
       "signature": "a2d2cc1319af7988",
       "issues": [
@@ -129,7 +129,7 @@
     },
     {
       "path": "src/domain/worldPulse/forecastRun.js",
-      "line": 175,
+      "line": 181,
       "column": 37,
       "signature": "a2d2cc1319af7988",
       "issues": [
