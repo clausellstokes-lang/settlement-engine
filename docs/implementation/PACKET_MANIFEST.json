@@ -11372,6 +11372,269 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "GV-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GV-1.md",
+      "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/security/byokNeverLogged.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/helpers/sourceContract.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/security/byokNeverLogged.test.js",
+          "symbol": "const SINK_RE ="
+        },
+        {
+          "path": "tests/security/byokNeverLogged.test.js",
+          "symbol": "const KEY_CARRIER_RE ="
+        },
+        {
+          "path": "tests/helpers/sourceContract.js",
+          "symbol": "export function mustExtract"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "both scans are statement-granular and share one implementation"
+        },
+        {
+          "id": "A2",
+          "case": "a planted multi-line leak in the real byok.ts reds the scan, naming its line"
+        },
+        {
+          "id": "A3",
+          "case": "the pre-cure per-physical-line shape misses that same fixture, executed not argued"
+        },
+        {
+          "id": "A4",
+          "case": "the single-line dimension still bites and the blind shape still catches it"
+        },
+        {
+          "id": "A5",
+          "case": "a sink and a carrier in separate statements are not flagged"
+        },
+        {
+          "id": "A6",
+          "case": "an empty source throws instead of reporting a clean scan"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/security/byokNeverLogged.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/security/edgeLogRedaction.test.js",
+          "tests/edgeFunctions/surveyorByok.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GV-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GV-2.md",
+      "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js",
+          "symbol": "const REQUIRED = ["
+        },
+        {
+          "path": "tests/edgeFunctions/sessionGateCensus.test.js",
+          "symbol": "const usesSpendBelt ="
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "all sixteen roster surfaces pass the stricter predicate unchanged"
+        },
+        {
+          "id": "A2",
+          "case": "the false-conjunct neutering is refused, naming the dead conjunct"
+        },
+        {
+          "id": "A3",
+          "case": "a call whose result is never consumed is refused"
+        },
+        {
+          "id": "A4",
+          "case": "a consequent that does not answer 401 is refused"
+        },
+        {
+          "id": "A5",
+          "case": "the four shapes live in the tree are all admitted"
+        },
+        {
+          "id": "A6",
+          "case": "neutering a real paid surface reds the census and the file is restored byte-exact"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/edgeFunctions/sessionGateCensus.test.js",
+          "tests/edgeFunctions/contracts.test.js",
+          "tests/security/moneyPathCoverageContract.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GV-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GV-3.md",
+      "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/build/ciCheckParity.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/build/ciCheckParity.test.js",
+          "symbol": "function npmRunStepsFromJob"
+        },
+        {
+          "path": "tests/build/ciCheckParity.test.js",
+          "symbol": "function directGateCommandsFromJob"
+        },
+        {
+          "path": "tests/build/ciCheckParity.test.js",
+          "symbol": "const GATE_JOB_IDS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the five gate jobs carry no disarmed gate step"
+        },
+        {
+          "id": "A2",
+          "case": "a synthetic disarmed job yields three escapes, one per shape"
+        },
+        {
+          "id": "A3",
+          "case": "the old parity and direct-runner scanners both report that job as clean"
+        },
+        {
+          "id": "A4",
+          "case": "an armed job yields none"
+        },
+        {
+          "id": "A5",
+          "case": "the live non-gate soft step is exempt by shape and a gate-driving one is not"
+        },
+        {
+          "id": "A6",
+          "case": "disarming a real gate step in ci.yml reds only the new arm; restored byte-exact"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/ciCheckParity.test.js",
+          "tests/lint/fullTypecheckRatchet.test.js",
+          "tests/lint/testRatchet.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GV-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GV-4.md",
+      "verifiedBase": "69758820aac972a528f9dd330cb25807106b8979",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/lib/spatialLedgerCoverage.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "symbol": "import { TRACKED_LEDGER_KEYS, EXEMPT_LEDGER_KEYS }"
+        },
+        {
+          "path": "src/lib/spatialUsage.js",
+          "symbol": "const MOVER_PRESENCE = ["
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "every TRACKED key reaches a live mover row"
+        },
+        {
+          "id": "A2",
+          "case": "no translation row names a key that is no longer TRACKED"
+        },
+        {
+          "id": "A3",
+          "case": "every mover row is a TRACKED key's target or a recorded exception"
+        },
+        {
+          "id": "A4",
+          "case": "deleting a mover row in a fixture orphans its key by name"
+        },
+        {
+          "id": "A5",
+          "case": "the scan fails closed when its anchor moves"
+        },
+        {
+          "id": "A6",
+          "case": "deleting the real habit_conditioning row reds the walker; restored byte-exact"
+        },
+        {
+          "id": "A7",
+          "case": "the census re-records to its measured five-tuple with files/parked/credited unmoved"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lib/spatialLedgerCoverage.walker.test.js",
+          "tests/lib/spatialUsage.test.js",
+          "tests/property/espionageCareerCreditDormancy.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
     }
   ]
 }
