@@ -7814,3 +7814,32 @@ to MF-B7 same-turn.
    ⚠ The packet's own hazard is the compile-fixture class: RUN
    AND PRINT the fixture first — PATRON_FLIP_TICKS 3 and
    SHARE_STEP_MAX 6 make a short fixture silently vacuous.
+
+## §216 · OWNER LAW: THE CONVERGENCE LOOP — THE CORPUS IS THE
+## NORTH STAR; REFINE AND RE-COMPARE UNTIL OBJECTIVELY EQUAL OR
+## BETTER (2026-08-16)
+
+1. **THE LAW**: keep refining; after each major breakthrough,
+   when it feels like nothing is left, run ANOTHER comprehensive
+   comparison against the reference corpus — instruments AND
+   eyes, the MF-S1 method with re-set windows — and iterate
+   until we can OBJECTIVELY say we are equal or better in STYLE,
+   STRUCTURE, and AESTHETICS, within our constraints. The corpus
+   has mastered the aesthetic quality: it IS the north star. The
+   exit condition is the measured delta table reading MEETS
+   across all three axes plus Fable-eyes judgment — and the §171
+   cutover still ends at the owner's eyes regardless.
+2. **STANDING MECHANICS**: each comparison round re-runs the
+   atlas instruments on the new corpus of exemplars (windows
+   RE-SET per §209.1's hazard), re-grades every Table A/B row as
+   DISTANCE, and mints the next refinement wave's mandate from
+   the remaining misses in leverage order. Where our LAWS and
+   the corpus conflict (banned priors, truth constraints), our
+   laws win — emulation is in accordance with all our designs
+   (§207.1). The Higgsfield grant covers GROWING the corpus
+   where coverage is thin (the atlas's n=1 bands at thorp and
+   metropolis) so the north star itself is well-sampled.
+3. Loop instances now live: wave eight (geometry) building →
+   its seal triggers re-measurement; wave nine (riches +
+   iconography + paint integration) queued; comparison rounds
+   continue until §216.1's exit.
