@@ -834,9 +834,9 @@
    "kind": "mutation",
    "label": "discourse/lexicon relation-type coverage gap"
   },
-  "tests/lint/telemetrySimulationSeparation.test.js": {
+  "tests/lint/engineTelemetryWall.walker.test.js": {
    "kind": "rationale",
-   "rationale": "Self-proving telemetry-layer walker: an embedded fixture exercises static import, dynamic import, and require spellings, and the production scans carry non-vacuity floors over both the complete worldPulse tree and the analytics-module roster. A standing source mutation would duplicate the detector fixture while editing broad shared engine or analytics surfaces during the sweep."
+   "rationale": "Self-proving engine/telemetry wall walker, and the successor to telemetrySimulationSeparation.test.js: an embedded fixture exercises static import, dynamic import and require spellings in both directions, every arm carries a planted control inside its own body, and the production scans carry per-root non-vacuity floors over the four deterministic-core roots, the analytics-module roster and the simulation registry. A standing source mutation would duplicate those fixtures while editing broad shared engine, analytics or migration surfaces during the sweep."
   },
   "tests/lint/domainAnyCastBaseline.test.js": {
    "kind": "mutation",
