@@ -64,19 +64,33 @@ const ARM_B_ROOTS = Object.freeze([
 const ARM_B_FLOORS = Object.freeze({
   'src/lib': 6,
   'scripts/telemetry': 3,
-  'scripts/soak': 1,
+  'scripts/soak': 3,
 });
 
 /**
  * ⛔ SHRINK-ONLY. `scripts/soak/**` is in ARM_B_ROOTS from this walker's BIRTH —
  * the soak-harness charter's §2.2 obligation, discharged here so the joint compile
- * cannot lose it — but the directory does not exist yet: the harness family's own
+ * cannot lose it — but the directory did not exist yet: the harness family's own
  * SK-1 creates it. A non-empty floor over an absent directory is a vacuous arm,
- * which is the exact class this estate forbids. So the root is DECLARED, its
- * emptiness is NAMED, and SK-1 removes the row and supplies the floor. A root in
+ * which is the exact class this estate forbids. So the root was DECLARED, its
+ * emptiness NAMED, and SK-1 removes the row and supplies the floor. A root in
  * neither state reds.
+ *
+ * ⭐ EMPTIED BY SK-1, which minted `scripts/soak/{run,pool,archive}.mjs` — the row
+ * was live for exactly the commits between this walker's birth and the harness
+ * runner's, which is the whole point of naming an absence instead of asserting over
+ * it. The floor is 3, the three modules SK-1 actually created.
+ *
+ * ⚠⚠ AND THE FLOOR IS WHY THE HARNESS SHELLS OUT INSTEAD OF IMPORTING. `scripts/soak`
+ * now sits under Arm B's forbidden-import scan, so no runner module may import a
+ * specifier matching `worldPulse|worldState|generateSettlementPipeline|simulationRules`.
+ * The harness's engine contact is therefore a SUBPROCESS — `node
+ * scripts/audit/whole-world-soak.mjs` — which is exactly the charter's "consumes the
+ * engine through the same public entry points, never reaches into engine internals",
+ * made structural rather than remembered. A later member needing the flag census reads
+ * it from `scripts/audit/`, the side of the wall that may hold it.
  */
-const AWAITING_POPULATION = Object.freeze(['scripts/soak']);
+const AWAITING_POPULATION = Object.freeze([]);
 
 /**
  * ⛔ SHRINK-ONLY, AND EMPTY AT BIRTH. Measured at this base, ZERO module under
