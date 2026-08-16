@@ -4586,3 +4586,30 @@ The charter lane received the addendum in flight.
    599/600 STOP and the mocked-suite rendered-positive warning in
    the brief. The cap-4 split judgment (engine seams never share
    display terminals) is SIGNED as standing practice.
+
+## §124 · THE CAVEAT DISCHARGED BY EXECUTION — TE23 CUTS THE MINT
+## (2026-08-15, chair; evidence laneTE22-receipt.md §15)
+
+1. **The §123.2 escape clause EARNED ITS KEEP**: `cleared === 0` was
+   consistent with eradication OR upstream subsumption (the
+   redundant-guard class this estate has convicted before) — the
+   executor drove the WHOLE scanner: 2,131 raw findings, ZERO with
+   the key, zero after each filter — subsumption EXCLUDED, the
+   retirement CONFIRMED honest, the eradication attributable to
+   DA-B2's own cure. The ruling stands on executed evidence, not on
+   the chair's inference.
+2. **TWO MINT-WORDING FACTS ADOPTED AS BINDING**: (a) the sentinel
+   suite retains the BEHAVIOR proof (a seeded fixture still drives
+   `cleared === 1`) — what died is the LIVE POPULATION, and the mint
+   says so (the walker's live arm couldn't distinguish; the sentinel
+   can); (b) 22 surviving non-observed `.toLocaleString` reads are
+   the RE-EMERGENCE WATCH, named in the mint — the eradication is of
+   the finding CLASS, not the token.
+3. **TE22's third honest stop is RATIFIED** (a 47-site governed mint
+   + re-freeze + two members sharing one un-gateable terminal is
+   strictly worse half-cut than the one well-diagnosed red; nothing
+   started-and-abandoned, tree clean, three legs each ending clean —
+   the exemplary pattern now thrice practiced). **TE23 is DISPATCHED
+   fresh** to execute the receipt's §15.5 procedure: the mint, the
+   raw-cohort re-pin, DA-B1 + DA-B3, the 12→11 re-freeze, one green
+   terminal; da-b + da-c expose together as the twenty-third.
