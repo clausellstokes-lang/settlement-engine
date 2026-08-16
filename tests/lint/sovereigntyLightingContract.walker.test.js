@@ -4529,7 +4529,30 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // base too, so no member changed any park state.
     // The arithmetic closes: +9 +1 +0 +0 = +10, and the one new `describe` in a
     // CREDITED file is the whole of the +1 suite title.
-    files: 2439, parked: 364, credited: 2075, titles: 20286, suiteTitles: 5689,
+    // ── RE-RECORDED 2026-08-16 BY THE MICRO-BATCH `gvf` TRAIN, WITH ITS CAUSE ───────
+    // 2439/364/2075/20286/5689 → 2439/364/2075/20300/5690. THE CAUSE IS THREE GUARD
+    // MEMBERS AND NO NEW TEST FILE — the same signed contract the `gv` train carried,
+    // so `files`, `parked` and `credited` are ALL UNCHANGED and are asserted BEFORE
+    // `titles`, which is why their passing is the receipt rather than a claim.
+    //
+    // THE +14 TITLES ARE ATTRIBUTED BY MEASUREMENT, never by arithmetic over the raw
+    // test counts — each row below was obtained by reverting THAT ONE FILE to the
+    // train's base and re-running this walker:
+    //   tests/lint/rawColorLiteral.test.js               +6 titles
+    //   tests/lint/contractTestAntiVacuity.walker.test.js +7 titles
+    //   tests/security/mapForkXssChain.test.js           +1 title
+    //   tests/edgeFunctions/contracts.test.js            +0  ← PARKED
+    // ⚠ THE ZERO IS AGAIN THE INTERESTING ROW, AND IT IS WHY THE ARITHMETIC HAD TO BE
+    // MEASURED. GVF-3 adds one whole `it` with a plain literal title, so counting the
+    // suite would have predicted +15 and been wrong by one. The file is PARKED — it
+    // registers from a `for…of` over a Deno-suite list with a template-literal title
+    // (`:95`), so door 3's reader cannot spell its titles statically and NONE of its
+    // 187 tests are visible here. GVF-3's pin is real coverage that executes; this
+    // census simply cannot see it. `parked` does not move because the file was parked
+    // at this train's base too.
+    // The arithmetic closes: +6 +7 +1 +0 = +14, and the one new `describe` in a
+    // CREDITED file (rawColorLiteral's control-arm block) is the whole +1 suite title.
+    files: 2439, parked: 364, credited: 2075, titles: 20300, suiteTitles: 5690,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
