@@ -4528,3 +4528,30 @@ The charter lane received the addendum in flight.
    family's scratchpad annex FOLDS at its first train (the standing
    obligation, now with its own proven loss mode) — the wakeup
    briefs carry the reminder.
+
+## §122 · da-a's PREFIX COLLECTED AND EXPOSED — THE TWENTY-SECOND
+## EXPOSURE (2026-08-15, chair; evidence laneTE22-receipt.md,
+## 11 sections)
+
+1. **DA-A1 + DA-A2 ARE LANDED AND EXPOSED** (CAS `bd0439d1 →
+   1596b165`, validator 76/0 own-shell, both gate-tails 0): the
+   de-vacuified leak guard SEES (29 live leaks — 9 cured PDF/gallery
+   first, 20 carrying §69.3 allowances parsed FROM THE FILE ITSELF,
+   the baseline byte-identical so DA.U1's fork discharged by making
+   the re-record unnecessary); the DM-tool allowance is recorded
+   law; additive-only proven structurally (+27/−0, +91/−0); §104.4
+   executed with both bundles redding pre-regeneration.
+2. **The self-reversal is RATIFIED AS THE PRACTICE AT ITS BEST**
+   (J-TE22-7 reversed with a 61-row accounting after the gate caught
+   an arm the executor's own disposition had blinded it to); the
+   partial landing is the lawful green prefix (budget not blockage);
+   the parked-proseLeak census invisibility recorded (third instance
+   of the parked-suite class); the 14→13 correction adopted.
+3. **The ratchet re-freeze 12→11 is AUTHORIZED at da-b's terminal**
+   (the retirement named, the census re-derived from that terminal's
+   own full run — never blind). **da-b runs on the continuation**
+   with DA-A3/A4 folded in under the cap-4 law (da-c if the count
+   demands), carrying the sharpened DA.M8 by name: the react-PDF
+   chapter MISLABELS AN ALLIANCE AS TRADE (`allied` rendered in
+   canonical `trade_partner`'s hue) — the palette convergence cures
+   the semantic error, not the tint.
