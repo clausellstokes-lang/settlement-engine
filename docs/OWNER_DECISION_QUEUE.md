@@ -7580,3 +7580,46 @@ to MF-B7 same-turn.
    delta stands on the record: truth in the chrome, declared
    derivations, six lenses over one geometry, 0/0 ground-law
    censuses — claims no reference plate can make.
+
+## §210 · THE ci TRAIN COLLECTED GREEN AND EXPOSED; THE ca-015
+## DIAGNOSTIC AND THE WF COMPILE DISPATCHED (2026-08-16, chair)
+
+1. **TE33 LANDED ALL THREE MEMBERS, each proven with the failing
+   CI job's own command (§82.1's law honored):** ci-1a deno
+   659/2 → 661/0 (scoped env restore + Deno.env.delete hardening,
+   both halves mutant-proven); ci-1b chromium e2e exit 1 (7
+   unexpected) → exit 0 (36 passed/3 skipped, 39 discovered);
+   E5's kernel guard recast as a FRESH-ADVANCE guard with
+   pulseKernel held at exactly 1581/2855 and the requiredSymbols
+   trap not fired. Terminal byte-identical to TE32's (28,521 at
+   ceiling 11, both type ceilings exact, boot smoke green). CAS
+   EXECUTED: claude/composite-r4 9ed2436c→0cf18bed. Only ci-1c
+   (build+dist divergence) remains open, still blocked on the
+   owner's CI-log paste.
+2. **J-TE33-1 RATIFIED**: E5's cure diverges from my brief's
+   literal "read live rules" — WITH PROOF the literal reading
+   cannot close the legacy-cursor cell and would change
+   re-derivation for every rule. The judgment-ledger §6 pattern
+   executed exactly: refute the doomed instruction by mechanism,
+   ship the sound alternative, record prominently.
+3. **FINDINGS BANKED.** (a) TWO e2e reds were NOT stale
+   selectors: flow-d was the OWNER'S PAYWALL (the 2026-07-13
+   $2.99 export unlock) matched by a loose dialog regex — the
+   TEST was reconciled, the paid surface untouched; flow-f a
+   two-state pin on a three-state button. (b) THE CURTAIN CLASS:
+   one failing click hid two more cures behind it — a red e2e
+   line is a curtain, not a count. (c) The comment-only bundle
+   red bit a THIRD time with two sub-traps now banked: the
+   reproducibility guard hashes the GIT INDEX (stage inputs
+   before building) and the unaffected bundles' generatedAt
+   stamps are REQUIRED by the ≤10-min window pin. (d) The
+   deferred env-leak class sweep (other module-top Deno.env.set
+   sites) queued with the soak-instrument harness micro-item.
+4. **DISPATCHES: DX1** — the §206.2a HIGH finding's diagnostic
+   (ca-015 realm collapse 0.045, one-flag `npcAgencyEnabled`
+   off), capsule-based, findings-only, root-cause mandate.
+   **TC32** — compile WF-1, the faith family's first train, from
+   DESIGN_FP_ARCH_WF.md per the §28 train law (INDEX carries no
+   WF rows yet; the §145.1 continuous-compile refills here). The
+   family terminal's PR remains §71's first-family-PR, owner-
+   gated at the push as always.
