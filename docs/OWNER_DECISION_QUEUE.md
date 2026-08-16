@@ -5848,3 +5848,24 @@ gallery-seeding lane offer stands.
 4. **TC29 (the mf compile) DISPATCHED** on the post-fold+post-P1
    charter, the 44-reference corpus, MF-R1's round and MF-P1's
    modules/report — the final compile of the map program.
+
+## §161 · OWNER ORDER: THE TERRAIN-FIRST LAW (2026-08-16)
+
+1. **The order (verbatim intent): terrain and height come FIRST;
+   everything else remains a roll BOUNDED by what the terrain makes
+   sensible; multiple viable sites connected by a road become a new
+   growth subseed.** Charter §5.-1 now holds it: LAYER ZERO is a
+   seeded local terrain substrate (heightfield + wetness/flow,
+   consistent with canonical terrainType/water facts, deterministic,
+   nothing persisted); water obeys height; SITES ARE FOUND NOT
+   PLACED (suitability field → best site(s)); THE POLYCENTRIC
+   SUBSEED LAW — two strong non-adjacent sites connect by road
+   first and ribbon development along it shapes the town (dumbbell/
+   linear forms); every downstream element samples terrain-bounded
+   (lobes refuse steep/wet, streets prefer contours, fields take
+   flats, noxious goes downwind AND downstream of ACTUAL flow);
+   substrate-vs-facts consistency is a pinned test. "Randomness
+   proposes; terrain disposes."
+2. TC29 (mid-compile) redirected with the law; the generation-order
+   §5.-1.5 supersedes the §160-era pipeline summary. This is the
+   organic-feel keystone the owner named — recorded as such.
