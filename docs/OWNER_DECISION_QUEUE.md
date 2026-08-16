@@ -5223,3 +5223,35 @@ gallery-seeding lane offer stands.
    that keeps quality whole: the residual is the irreducible serial
    execution + per-member proof, which is the product being
    purchased.
+
+## §141 · THE SOAK EFFICIENCY LAWS (2026-08-16, chair on the owner's
+## question, vetoable; the harness work joins tm-core's train)
+
+1. **PARALLEL SEEDS**: soak grids (seed × config) are embarrassingly
+   parallel — each run deterministic and isolated — so the harness
+   gains a WORKER-POOL runner (~8-way on this machine; peak RSS per
+   world measured under 800MB, so the pool fits). Determinism is
+   already PROVEN under workers (R-GEN's isolate reproduced the
+   same hash). Projected: CENTURY-300 4–10h → ~1h; CENTURY-100
+   25–60min → single-digit minutes. Identical runs, identical
+   hashes, just concurrent — zero quality motion.
+2. **TRIPWIRES + CHECKPOINTS for the fix loop**: the diagnostic
+   soak instruments invariant tripwires (conservation, band
+   crossings, runaway curves, stressor deadlocks) that flag AT the
+   offending tick with full context; periodic state checkpoints let
+   a finding at tick 4,000 reproduce from tick 3,900 instead of
+   from zero (checkpoint restore must prove byte-faithful against a
+   from-zero run once — its own anti-vacuity control). The finding
+   loop stops paying the full-century cost per reproduction.
+3. **THE LADDER + DIFFERENTIAL RE-SOAK LAW**: profiles run
+   cheapest-first with gating (CERT-30 clean-ish before CENTURY-100
+   before 300); after each fix, re-soak ONLY the exhibiting
+   seeds/configs plus a control sample — the FULL grid re-runs at
+   the phase boundary (the ruled full soak), which keeps the final
+   instrument whole. REFUSED by name: shortened centuries, sampled
+   ticks, or reduced seeds on the full soak — those thin the
+   instrument the owner's §109 checkpoint depends on.
+4. The worker-pool runner + tripwire/checkpoint instrumentation
+   join tm-core's train as harness members (pre-soak machinery,
+   already the pure-Node aggregator's home); values as §131 bands
+   where any exist.
