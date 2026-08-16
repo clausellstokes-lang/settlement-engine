@@ -876,6 +876,22 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * history` is a REAL row in the live inventory on the REAL `history` shape, and
    * the tempting `/^to[A-Z]/` spelling of this filter would have deleted it. An
    * exact frozen key set cannot.
+   *
+   * ⭐⭐ 2026-08-15 — THIS ARM IS NOW M12's ONLY LIVE PROOF OF CAPABILITY, AND IT
+   * IS LOAD-BEARING RATHER THAN DECORATIVE. DA-B2 moved the five count sites that
+   * produced every `toLocaleString` finding onto `formatCount`, so the filter's
+   * live habitat is ERADICATED: the raw detector reports 0 findings under the
+   * declared key across the whole source set (2131 raw findings total). The
+   * walker's live non-vacuity arm was therefore CONVERTED to an exact zero — see
+   * `observedShapeReaders.walker.test.js`, "A1/A7: schema-7 filters narrow
+   * ordinary noise…" — and the seeded fixture below is what keeps that conversion
+   * honest. Without it, `cleared === 0` on the estate really would be
+   * indistinguishable from a filter that stopped being wired in.
+   *
+   * ⛔ SO THIS TEST MAY NOT BE DELETED AS "DEAD WITH ITS SUBJECT". Its subject is
+   * the INSTRUMENT, which is alive and still reached on every scan; what died is
+   * the population. Deleting it would retire the distinction the walker's arm now
+   * depends on.
    */
   test('M12: a builtin prototype member clears; a domain key that merely looks like one does NOT', () => {
     expect(LANGUAGE_SURFACE_RESIDUAL_KEYS).toEqual(['toLocaleString']);

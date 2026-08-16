@@ -504,16 +504,46 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
   });
 
   /**
-   * ⭐⭐⭐ ALL THREE CLEARING FILTERS AND THE SCHEMA-7 BANK ARE NON-VACUOUS.
+   * ⭐⭐⭐ THE CLEARING FILTERS AND THE SCHEMA-7 BANK ARE NON-VACUOUS.
    *
    * A filter that clears nothing is indistinguishable from a filter that is not
-   * wired in. The three filters narrow the detector; the fourth stage banks its
+   * wired in. The filters narrow the detector; the fourth stage banks its
    * matches without removing them. Both behaviors are asserted against the tree.
    *
    * ⛔ THE ARITHMETIC LINE IS THE GUARD ON THE HAND-COMPOSED CHAIN ABOVE. If a
    * later mint adds a fifth filter to `run()` and forgets this file, the walker
    * measures a LARGER set than the gate, the sum stops closing, and this reds —
    * which is the only reason a hand-composed chain is tolerable at all.
+   *
+   * ⭐⭐ M12's LIVE POPULATION IS ERADICATED, AND ITS ARM IS CONVERTED RATHER
+   * THAN DELETED OR RELAXED (the `CR-EST-CONTROLZERO` shape, applied to a
+   * detector filter). The language-surface filter's entire subject was reads of
+   * `.toLocaleString` off an observed shape. DA-B2 moved the five count sites
+   * that produced them onto `formatCount` (`popFirst`/`popLast`/`popChange`,
+   * `t.min`/`t.max`, `m.populationBefore`/`After`, `Number(population)`), so the
+   * raw detector now reports ZERO findings under that key — measured before any
+   * filter runs, over the whole live source set: 0 of 2131 raw findings. The
+   * eradication is of the LIVE HABITAT and is attributable to DA-B2.
+   *
+   * ⚠ WHAT DIED IS THE POPULATION, NOT THE DEMONSTRABLE BEHAVIOUR, and the
+   * distinction is the whole reason this is a conversion. The filter is still
+   * WIRED (`applied` below) and still CAPABLE: the sentinel suite drives it on a
+   * seeded fixture and asserts it clears exactly one finding
+   * (`observedShapeSentinel.test.js`, "M12: a builtin prototype member clears; a
+   * domain key that merely looks like one does NOT"). So the suite's own law —
+   * a filter clearing nothing is indistinguishable from one not wired in — is
+   * ANSWERED rather than waived: the fixture distinguishes them, and this arm no
+   * longer has to.
+   *
+   * ⛔⛔ THIS IS THE RE-EMERGENCE WATCH, AND IT LIVES ON THE EXACT ZERO BELOW.
+   * `>= 0` was available and is REFUSED: it would report nothing and manufacture
+   * the exact vacuity class this instrument exists to kill. 22 `.toLocaleString`
+   * reads survive in source across 21 files, every one of them on a NON-OBSERVED
+   * receiver (`Date` objects and plain numbers), which the detector never flags.
+   * If a refactor moves one of those reads onto an OBSERVED shape, the class
+   * returns: `cleared` goes positive and THIS ARM REDS ON ARRIVAL, so the row is
+   * triaged rather than silently re-suppressed. The eradication is a won
+   * position, not a ceiling, and it may not be spent.
    */
   test('A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live', () => {
     expect(live.familyFilter.applied).toBe(true);
@@ -529,7 +559,17 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // reaching the estate, which the sum above cannot distinguish from absence.
     expect(live.familyFilter.cleared).toBeGreaterThan(0);
     expect(live.domGlobals.cleared).toBeGreaterThan(0);
-    expect(live.languageSurface.cleared).toBeGreaterThan(0);
+    // ⭐⭐ M12's CONVERTED ARM — see the header. EXACTLY zero, never `>= 0`: the
+    // live habitat is eradicated (attributable to DA-B2) and any re-emergence
+    // reds here on arrival instead of being re-suppressed. The filter is proven
+    // still-capable on a fixture in the sentinel suite, not by this figure.
+    expect(
+      live.languageSurface.cleared,
+      'M12 cleared a live read again. The language-surface habitat was ERADICATED by DA-B2\n'
+      + '(raw findings under the declared key: 0 of 2131). A nonzero here means a refactor moved a\n'
+      + '.toLocaleString read onto an OBSERVED shape — TRIAGE the row, do not widen or relax this\n'
+      + 'pin. The 22 surviving reads across 21 files are all on non-observed receivers.',
+    ).toBe(0);
     expect(live.explainedWriters.banked).toBe(44);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
@@ -541,10 +581,14 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
     // the raw half these are "the identity is not in the set", which is also
     // true of every identity that never existed.
+    // ⚠ M12's founding case (`toLocaleString on history`) IS ABSENT FROM THIS MAP
+    // BY MEASUREMENT, not by omission: DA-B2 cured the reads that produced it, so
+    // the RAW half of the pair would now be the vacuous claim rather than the
+    // control. Its live-fixture equivalent moved to the sentinel suite, which
+    // drives the filter on a seeded finding and asserts `cleared === 1`.
     const founding = {
       familyFilter: 'populationDeltas on outcome',
       domGlobals: 'replaceState on history',
-      languageSurface: 'toLocaleString on history',
       explainedWriters: 'neighbourNetwork on settlement',
     };
     for (const [filter, identity] of Object.entries(founding)) {
@@ -571,7 +615,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // something other than a host global would be visible rather than merely
     // arithmetically larger.
     expect(live.domGlobals.receivers).toEqual(['window']);
-    expect(live.languageSurface.clearedIdentities).toEqual(['toLocaleString on history']);
+    // The converted M12 arm's companion: an eradicated habitat clears no identity.
+    expect(live.languageSurface.clearedIdentities).toEqual([]);
 
     // ⚠ SAID AS DISJOINTNESS RATHER THAN AS BARE EXCLUSIONS. An unanchored
     // exclusion would pass just as happily if a filter had drifted to clearing
@@ -730,6 +775,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * their rows while EventComposer and OutputContainer keep others.
    * ⚠ THE RAW READING HOLDING STILL AT 53/149/245 IS THE POINT OF PINNING BOTH: it
    * proves the estate did not move and the delta is provably the instrument.
+   *
+   * ⭐ MOVED 2026-08-15 BY DA-B2, AND THIS TIME THE RAW HALF IS THE ONE THAT MOVES:
+   * raw 53/149/245 → 52/148/243, filtered UNCHANGED at 51/130/195. The two readings
+   * moving APART is the signature of a genuine estate repair whose rows the filters
+   * were already clearing — DA-B2 put `WhatChangedPanel.jsx`'s two population reads
+   * through `formatCount`, deleting the `toLocaleString on history` identity at its
+   * only remaining site. ONE file (WhatChangedPanel lost its last raw row), ONE
+   * identity, TWO reads, hence −1/−1/−2 on the raw reading alone. The filtered
+   * figure cannot move because M12 was already clearing exactly those two reads,
+   * which is also why the frozen inventory (`total: 1998`) needs no re-freeze.
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
@@ -739,7 +794,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // clearing more, or the estate genuinely shrinking — and a single number
     // cannot tell them apart. Pinning both makes the delta attributable.
     expect(cohortOf(inventoryOf(live.raw.findings)))
-      .toMatchObject({ files: 53, identities: 149, counts: 245 });
+      .toMatchObject({ files: 52, identities: 148, counts: 243 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 
