@@ -8045,3 +8045,15 @@ consistency (the two-vintages-in-one-frame precedent).
 Target-specific curation: persistence must read TRUE
 panel-to-panel or the sheet is discarded/filed as a labeled
 negative. HF-3 mandate extended same-turn.
+
+## §226 · OWNER REFINEMENT: TWO END-TO-END TIER TRACKS
+## (2026-08-16)
+
+The §225 series becomes two full-ladder tracks — promotion
+thorp→metropolis and demotion metropolis→thorp (the full
+§161g collapse sequence). Chair format ruling for panel
+legibility: each track is TWO overlapping sheets (thorp→town,
+town→metropolis) with the TOWN panel on both as the consistency
+BRIDGE — which doubles as the curation instrument (mismatched
+bridge panels convict a fake series). Supersedes §225's smaller
+runs if budget forces a choice. Relayed to HF-3 same-turn.
