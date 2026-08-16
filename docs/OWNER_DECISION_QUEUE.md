@@ -5942,3 +5942,21 @@ hard-edged single-instance district model was a modern-zoning
 anachronism — the owner's field-over-matrix model is the
 historically true one and kills the SimCity-zone look. TC29
 notified.
+
+## §161f · CONTINUOUS SCALE + THE HIGH-WATER LAW (2026-08-16,
+## owner: "even within a tier, population — or maybe historical
+## maximum population — should decide the size")
+
+Charter §5 gains both: THE CONTINUOUS-SCALE LAW (tiers are bands
+never steps — every fabric quantity scales continuously with
+population; 10k vs 20k cities are different magnitudes wearing one
+tier name; nothing quantizes to tier when population can grade it)
+and THE HIGH-WATER LAW (built EXTENT derives from HISTORICAL
+MAXIMUM population, OCCUPANCY from current — a 20k-peak/10k-now
+city has the streets of 20,000 and the life of 10,000, deficit
+rendered per the decline grammar; a stable-10k and a shrunken-20k
+city carry the same souls and different biographies, and the map
+tells them apart). Source: the population trajectory where history
+carries one; else reconstructed from decline events under the
+degradation law — the compile establishes the real surface and
+prices the home. TC29 notified (#7).
