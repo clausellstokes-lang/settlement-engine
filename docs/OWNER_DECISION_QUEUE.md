@@ -7189,3 +7189,51 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    inheritance items (kernel ledger SPENT at 1581, +0 enforced;
    spatialUsage.js zero edits; the census gate reds BOTH arms
    deliberately).
+
+## §198 · THE EP FAMILY CLOSES — STAGE FOUR GREEN ON RUN ONE,
+## EXPOSED; THE ci TRAIN (TE33) DISPATCHED (2026-08-16, chair §170)
+
+1. **EP-3B LANDED AND THE ep-1 TRAIN CLOSES: all five members
+   landed, the nine enumerated kernel edits spent, the flag mint
+   spent, the one ratchet-up spent.** The year anchor delivered:
+   the `byYear` writer, `yearStreamSeedOf(worldState, year,
+   { base, yearBase })`, and the nine family-2 re-roots. Terminal
+   GREEN ON RUN ONE — the first EP stage to do it: gate exit 0
+   verbatim (115 packets, typecheck 173/173, domain-strict
+   1134/1134, test ratchet 11 known of 28,521, boot smoke 523/523
+   chunks; zero of the 29 lint warnings this stage's). CAS
+   EXECUTED: claude/composite-r4 d2ea34c1→9ed2436c (old asserted),
+   refs/trains/ep-1 matched. All eight §8 inheritance laws
+   discharged with measured budgets (pulseKernel 1581→1581,
+   roadsKernel 838→838, spatialUsage untouched).
+2. **FOUR FINDINGS BANKED.** (a) `generosityKernel.js` sits at
+   EXACTLY the src/domain max-lines layer ceiling of 800 with no
+   size-baseline row — HEADROOM IS NOT KNOWABLE FROM THE BASELINE
+   FILE (second bite of the class after roadsKernel; cured at +0).
+   (b) THE EXACT-LINE `requiredSymbols` TRAP WIDENED: EP-3A's
+   verbatim import-line pin red validate:packets when slice B's
+   chartered +0 edit touched that line — ANY exact line a later
+   member is chartered to edit is a trap, not just re-recorded
+   figures. (c) Five of nine rows read observed-call ZERO at first
+   write and every one was a REAL GATE cured in the fixture never
+   the assertion (two advances to clear the first-lit mint; the
+   year-crossing observance window; `occupierId` not `overlordId`;
+   the info-mode third gate). (d) Mutant (iv)'s asymmetry is the
+   receipt: dropping the returned-world stamp reds the
+   returned-world arms and RS-16 ONLY (7|12) while the in-pulse
+   rows stay green. Sharpest judgments ratified: no `supportSeed`
+   default (the two unit suites threaded byte-identical), and
+   `supportYearOf` exported so the year vocabulary has ONE home.
+3. **TE33 DISPATCHED — the ci train, per §89's rulings + the EP
+   estate's bequest:** ci-1a (deno env-leak restore + CORS-pin
+   hardening), ci-1b (per-affordance e2e spec reconciliation, five
+   files), E5's kernel stale-strap (the resume-path orchestrator
+   re-derives from `resume.preWorldState` so the kernel flag gate
+   reads pause-frozen rules — the cure now in-manifest, subject to
+   the spent 1581 ledger's one-for-one law). ci-1c stays BLOCKED
+   on the owner's CI-log paste (batch item; discriminating lines
+   enumerated in laneCIX-report.md). The volume's three owed
+   amendments (§3b.1b, slice-A budget, `{ absent, yearBase }`
+   spellings) remain batched to the docs act with C-EPF-4. §82.1's
+   corrected law GOVERNS the train: every repro runs the failing
+   job's OWN failing step.
