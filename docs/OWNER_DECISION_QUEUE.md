@@ -6312,3 +6312,25 @@ rendered maskless. TC31 notified (FRONT TYPE + undercity-
 availability columns); MF-B1 notified (the organism engine must be
 STRATUM-PARAMETERIZED for recursion). Reference 84 (the living
 undercity) fired under the unlimited grant.
+
+## §169 · THE RECONCILIATION AUDIT DISPATCHED (2026-08-16, owner:
+## "audit all of the laws we made (fable)… and reconcile them")
+
+MF-R2 (Fable) dispatched over the COMPLETE charter (§0-§13, ~83KB
+— everything §161-§168-era is unaudited since MF-R1's round). Its
+mandate: circularity hunting (the chair's own suspect: affinity
+needs districts → districts constituted by members → members place
+under affinity — the staging that breaks the loop must be explicit);
+EVENT-SOURCE CLASSIFICATION of every §11/§167/§168 rule
+(state-delta-derivable vs event-exists vs EVENT-MISSING — class (c)
+is a wall issue: mf cannot mint engine events; each such rule gets
+derive-at-regen / degrade / escalate-as-chartered-engine-ask);
+law-pair contradiction sweep (relocation vs inertia identity;
+fronts vs one-truth attribution — one parcel two truths, what does
+player-lens search return; undercity recursion bounds — base case;
+variants vs inertia; marginalia vs snapshots); machinery
+spot-checks (the catalog's REAL fantastical entries; the
+knowledge/fog surface; regen-preservation vs relocation identity);
+and the coherence verdict (one design or a pile — cut/merge
+candidates named). Anchored cure blocks; fold-then-compile-refresh
+follows per the SA-1/MF-R1 precedent.
