@@ -1,6 +1,6 @@
 # TM / TM-1A — the closed simulation vocabulary, and the one registry (member 1 of `tm-core`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6b337fb1f7bb1d3dde0810310a01a3653c874aac`
   (the `mb` terminal; the tm+sk family's dispatch base)
 - **Train:** `tm-core`, family **TM**, member **1** of 5 (stage 1 of 2).

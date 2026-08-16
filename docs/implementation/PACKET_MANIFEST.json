@@ -12308,7 +12308,7 @@
     },
     {
       "id": "TM-1A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/TM-1A.md",
       "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
       "changeManifest": [
@@ -12345,6 +12345,34 @@
         {
           "path": "docs/analytics-event-dictionary.md",
           "symbol": "GENERATED FILE — DO NOT EDIT BY HAND"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export const SIM_EVENT_CLASS = 'simulation';"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export const SIM_METRIC_EPOCHS = Object.freeze(['run', 'year']);"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export const RECEIPT_FIELD_ARITY = Object.freeze({"
+        },
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export function registryDefects"
+        },
+        {
+          "path": "scripts/generate-analytics-dictionary.mjs",
+          "symbol": "import { SIM_METRICS, SIM_EVENT_CLASS } from './telemetry/simMetricRegistry.mjs';"
+        },
+        {
+          "path": "docs/analytics-event-dictionary.md",
+          "symbol": "## Simulation class (simulation)"
+        },
+        {
+          "path": "tests/lib/simMetricRegistry.test.js",
+          "symbol": "is DISJOINT from the product EVENTS taxonomy"
         }
       ],
       "acceptanceCases": [
@@ -12381,7 +12409,7 @@
     },
     {
       "id": "TM-1B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/TM-1B.md",
       "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
       "changeManifest": [
@@ -12414,6 +12442,30 @@
         {
           "path": "src/domain/pendingEdits.js",
           "symbol": "EDIT_KINDS"
+        },
+        {
+          "path": "scripts/telemetry/simMetricEmitter.mjs",
+          "symbol": "export const SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS = Object.freeze([4, 5]);"
+        },
+        {
+          "path": "scripts/telemetry/simMetricEmitter.mjs",
+          "symbol": "export function emitRows"
+        },
+        {
+          "path": "scripts/telemetry/simMetricEmitter.mjs",
+          "symbol": "export function emittedDimViolations"
+        },
+        {
+          "path": "scripts/telemetry/emit-sim-metrics.mjs",
+          "symbol": "export function parseArgs"
+        },
+        {
+          "path": "tests/lib/simMetricEmitter.test.js",
+          "symbol": "const ACCEPTED_CORE_EDGES = Object.freeze(['src/domain/pendingEdits.js']);"
+        },
+        {
+          "path": "tests/fixtures/simSoakReceiptFixture.json",
+          "symbol": "\"withFailures\""
         }
       ],
       "acceptanceCases": [
@@ -12453,7 +12505,7 @@
     },
     {
       "id": "TM-1W",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/TM-1W.md",
       "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
       "changeManifest": [
@@ -12478,6 +12530,26 @@
         {
           "path": "src/domain/worldPulse/tickIndices.js",
           "symbol": "relationshipStatePairCache"
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const ARM_A_ROOTS = Object.freeze(["
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const AWAITING_POPULATION = Object.freeze(['scripts/soak']);"
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const ARM_A_EXEMPTIONS = Object.freeze([]);"
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const AWAITING_MIGRATION = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "\"tests/lint/engineTelemetryWall.walker.test.js\""
         }
       ],
       "retiredSymbols": [

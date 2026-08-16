@@ -1,6 +1,6 @@
 # TM / TM-1B — the emitter, a pure receipt transform (member 2 of `tm-core`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6b337fb1f7bb1d3dde0810310a01a3653c874aac`
   (the `mb` terminal; the tm+sk family's dispatch base)
 - **Train:** `tm-core`, family **TM**, member **2** of 5 (stage 1 of 2).
