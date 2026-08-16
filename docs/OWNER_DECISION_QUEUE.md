@@ -6619,3 +6619,45 @@ member becomes a solver, not a lookup.
    (SK.U1 two-year probe at sk-b's terminal). After sk lands: uf-1
    → EP stage one → the §151.4 order; the FIRST ROLLING SOAK arms
    at the first family exposure after sk (§146.3).
+
+## §181 · MF-B1b COLLECTED; THE §15 FOLD PAID; TWO RULINGS; MF-B2
+## DISPATCHED (2026-08-16, chair under §170)
+
+1. **B1b verdict: the leap.** Target Zero met AS MECHANISM (ink
+   weight an order out — sub-pixel outlines; streets born from
+   block grounds; hatching vocabularies; ground mottle); all seven
+   targets MET or stated (thorp footprint short, honest); 39/39
+   pins (15 new, counterfactual-paired), 10/10 cross-process
+   byte-identity. CHAIR EYES-ON (absolute bar): fjord leaf ~TWO
+   THIRDS of the distance (was one third) — the sea, relief,
+   ink and streets EXIST; remaining: block build-out (40-50% vs
+   the references' 70-80%), the FIELD PATCHWORK regressed on the
+   fjord leaf (a 3,140-soul town eats — its fields exist
+   somewhere: named target), ink refinement. The sharpest find:
+   the leaf-centring plumbing bug (one suitability field serving
+   two masters) + two stacked defects cost the metropolis 59% of
+   band — the class where tuning-looking symptoms are plumbing.
+2. **RULINGS on the two held items:** (a) BACK-HOUSES + LOD BOTH
+   ADOPTED — build-out rises toward the references' 70-80% funded
+   by LOD-merging at the biggest tiers; the cartouche's
+   representativeness ratio UPDATES TO WHATEVER BECOMES TRUE (the
+   printed-honesty law is the invariant, not any particular
+   number; the absolute bar outranks a ratio). (b) THE VILLAGE
+   RECONCILIATION ordered as MF-B2's first member: at 1:1 tiers
+   EXTENT DERIVES FROM THE ROOFS (population → households → plots
+   × packing → area — houses make the town, area follows), never
+   area-share-first; the tier grammar amends accordingly (the
+   sqrt-slip class, cured causally).
+3. **THE §178 DEBT PAID: charter §15 folded** — the seven
+   peer-review adoptions (spatial compilation record; regional
+   routes before nuclei; compound reservation + parcels before
+   ordinary seating; namespaced-randomness wording; the version
+   axis survives the cutover; the bounded repair pass; substrate
+   imperfection + path-dependence pins) with the two declines
+   recorded (universal per-house identity; literal replay core).
+4. **MF-B2 DISPATCHED:** the village reconciliation first, then
+   back-houses+LOD, the field-patchwork restoration, §15
+   integration (routes stage, compilation record, repair pass),
+   and the mf-b train members (terraform/institutions/ground/
+   walls-water) — same proof discipline, judged at the absolute
+   bar.
