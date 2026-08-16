@@ -7938,3 +7938,31 @@ structure per atlas prior #4's ban on hollow blocks; near zoom
 full grain). A wave that raises fabric richness prices its
 browser cost in the same receipt. The ×10 painted rasterize cost
 (§211.2c) folds into this gate's export row.
+
+## §221 · HF-2 COLLECTED — THE NORTH STAR IS NOW WELL-SAMPLED
+## (2026-08-16, chair §170; Fable seat; 120 credits, 1102→982)
+
+1. **CORPUS 49 → 79 PLATES**, every one individually viewed
+   before filing, all measured inside the atlas §2.3 register.
+   Bands: thorp n=1→7 (the under-inked-thorp class CURED by
+   measurement — 205L value range vs hf10's 70), hamlet clean
+   n≈0→6 (hf11's contamination era over), metropolis n=1→7
+   (5 clean + hf100 filed as the band's NEGATIVE-REFERENCE —
+   maximal concentric drift with excellent grain; hf103's
+   vintage-ring metropolis is the round's best plate), §214
+   iconography +7 (curtain zoom, motte, hachure, crag, canopy,
+   marsh, terrace) + 4 opportunistic zooms incl. hf120's burgage
+   frontage with the two-tier stroke drawn literally.
+2. **DISCIPLINE HELD**: one oblique failure demoted to the
+   grammar shelf and re-rolled cured (the front-loaded plan-view
+   block); zero weak plates filed to hit counts; per-plate
+   defect notes; 7 new counter-phrases banked in the calibration
+   index, with the residual priors no phrase cures named (even
+   spacing, lettering entropy). Successor hazards recorded (4K
+   must be requested explicitly; recover UUIDs from
+   show_generations, never retype).
+3. **CONSEQUENCE**: T-01's n=1 caveats RETIRE — the next §216
+   comparison round re-derives the thorp/hamlet/metropolis band
+   endpoints from real distributions before wave eight is graded
+   against them; the §214 renderer calibrates against drawn
+   vocabulary at zoom instead of prose.
