@@ -5012,3 +5012,38 @@ launch by construction; the tablet pass's cures ride the post-tune
 polish window). Item 4 (the community home + launch kit) stays
 unsequenced owner-side, executable whenever the owner likes; the
 gallery-seeding lane offer stands.
+
+## §134 · THE dom TRAIN COLLECTED AND EXPOSED — THE TWENTY-FOURTH
+## EXPOSURE; THE FOUNDERS RULING IS LIVE COPY (2026-08-16, chair;
+## evidence laneTE24-receipt.md, 438 lines, the quoted copy at §0)
+
+1. **dom IS LANDED WHOLE AND EXPOSED** (CAS `30638bb7 → b49a7daf`,
+   validator 84/0 own-shell, run-2 gate green at 11/28299 ceiling-
+   exact, smoke PASS, Deno 37/0): the docs figures derived-not-
+   inherited; the secrets census landed at **53 not 50** (the
+   parameter-passed env reader hid three mail secrets from both
+   ruled arms — a THIRD detector arm added, J-TE24-3 signed; 35
+   undocumented names now documented, 52/53 + 1 reasoned allowlist);
+   DOM-4's own ruling REFUTED BY MEASUREMENT (15 labeled of 22
+   registered — the copy now states NO number, the honest sentence);
+   ⭐ **TWO LIVE PURCHASE SURFACES THE COMPILE NEVER NAMED** found
+   and cured (FounderTile's second checkout + the landing page's
+   seats-left counter) — a paid-surface abolition must census EVERY
+   checkout entry point, recorded as the class lesson.
+2. **The founders copy is RELAYED VERBATIM to the owner** (receipt
+   §0): "A chair is given, never sold" · "{held} of {seats} chairs
+   held" · the FAQ's "have never been for sale" · the landing badge
+   "By invitation" — every string honors §118 and the 2026-08-02
+   ruling; the $99 display, the one-time label, and the pricing
+   arithmetic are DELETED. The owner's veto window is open; absent
+   a veto the copy stands as landed.
+3. **The executor's honesty rows are RATIFIED**: both gate runs
+   quoted (the em-dash and un-anchored-negative regressions were
+   its own, cured never absorbed); the commit-boundary repair by
+   plumbing (J-TE24-1 — the paid-surface member in ONE reviewable
+   commit); the wrong figure in a landed commit message corrected
+   on the record (J-TE24-4, 344→343); the PricingBands dead arm
+   DEFERRED-NOT-SWEPT mid-gate (right call — it joins the
+   micro-batch). All J-TE24 rows SIGNED. **TC23 compiles the
+   micro-batch now** (~18 items incl. gv-1..5, ci-1a/1b, the class
+   fold, DA-B3, and the consolidated docs member).
