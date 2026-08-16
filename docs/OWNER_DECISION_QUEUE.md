@@ -4665,3 +4665,17 @@ The charter lane received the addendum in flight.
    LG-5 the replenishment, LG-8/9+ the news chain and captivity,
    WY/POP-adjacent the speed law). ONE question is put to the owner
    in-chat; everything else is chair-derived and vetoable.
+
+### §125a · THE WARTIME CIRCLE QUESTION RULED — FULL MILITARY
+### PREEMPTION (chair under "i trust your judgement", 2026-08-15,
+### vetoable)
+
+While a settlement's circles carry military or envoy traffic under
+the wartime one-way law, TRADE PASSAGE IS PREEMPTED ENTIRELY —
+traders revert to roads for the duration. Chosen over queue-priority
+and reserved-sliver because the consequences COMPOUND the owner's own
+§46d design: war chokes circle trade → more caravans on roads → more
+carriers for the §46d.3 news chain → richer belief dynamics exactly
+when they matter; and trade starvation gives circle-host settlements
+a systemic incentive toward peace. Say "veto" with "priority" or
+"reserve" to flip.

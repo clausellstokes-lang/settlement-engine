@@ -148,8 +148,8 @@ waves ride `vesselFleetsEnabled` ∧ the ES mission flags they extend.
 
 - **Trade circles**: the circle predicate widens to trading partners for
   COMMERCIAL passage (allies free, partners tolled — chair proposal,
-  vetoable); wartime capacity priority is an OPEN OWNER QUESTION at ODQ
-  §125.1. One graph, one capacity pool; the toll books as host income.
+  vetoable); wartime capacity is RULED FULL MILITARY PREEMPTION (ODQ §125a —
+  traders revert to roads, feeding the §46d news chain). One graph, one capacity pool; the toll books as host income.
 - **Confiscation replenishes**: the LG-5 supply-gain arm strengthened —
   confiscated cargo feeds the army-supply model via the one-supply-truth
   contract; typed by the inspection's OBSERVED register only.
