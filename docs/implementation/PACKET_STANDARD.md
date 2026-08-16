@@ -420,10 +420,21 @@ A hot file sits within a handful of effective lines of a ceiling that will not b
 
 | File | Effective | Ceiling | Headroom |
 |---|---:|---:|---:|
+| `src/components/new/tabs/EconomicsTab.jsx` | 600 | 600 | 0 |
 | `src/components/OutputContainer.jsx` | 599 | 600 | 1 |
 | `src/domain/worldPulse/convergence.js` | 798 | 800 | 2 |
 | `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |
 | `src/domain/worldPulse/informationStatecraft.js` | 780 | 800 | 20 |
+
+⛔ `EconomicsTab.jsx` joined on 2026-08-15 at the `da-c` terminal, and it is now the
+tightest row on this list: **zero** headroom, against a ceiling `max-lines` reds above.
+It arrived here the way rule 2 says a hot file should be entered — DA-B1's cure was
+shaped one-line-for-one-line and spent only the single import line the compile had
+priced (`DA.M12`, 599 → 600, measured with eslint's own `Linter` before and after).
+The row is added because the standing list, not the packet, is where the next lane
+will look: a file at its ceiling with no entry here is a trap that reds `max-lines`
+for whatever change happens to arrive next. The next edit into it must RECLAIM before
+it adds.
 
 ⭐ `convergence.js` joined on 2026-08-14 by `OWNER_DECISION_QUEUE.md` §32 ruling 3, on
 the executed measurement `GAP-1` §2.4 carries — it is tighter than two of the three
