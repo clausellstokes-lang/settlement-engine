@@ -183,6 +183,17 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
  * @type {ReadonlyArray<string>}
  */
 export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
+  // Joined 2026-08-16 by FP wave EP-1 under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate reads and its authored
+  // certification row. TWO reads, and both are required rather than redundant: the STORE
+  // mint (campaignAdvanceSession.runAdvanceCampaignWorld) so no epoch value comes into
+  // existence in a dark world, and the KERNEL re-read beside the value
+  // (pulseKernel.simulateCampaignWorldPulse) so a value that outlived a flag flip on the
+  // PERSISTED pause cursor cannot be used. Gating only the mint would leave a live path
+  // to the flag-dark/value-present cell, which is the one cell dark byte-identity has to
+  // close. This key sorts FIRST in the array and that is alphabetical order, not
+  // precedence.
+  'advanceEpochEnabled',
   'beliefAxesEnabled',
   // Joined 2026-08-05 by FP wave SP-B under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), all three in the SAME commit as their first real gate reads — the three

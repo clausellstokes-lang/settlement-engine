@@ -5,7 +5,7 @@
 // kernel the multi-tick interval orchestrator (advanceInterval.js) runs N times.
 // Imports the shared compactors / clone / interval helpers from pulseHelpers.js
 // and never imports advanceInterval.js (keeps the chain acyclic).
-import { createPRNG } from '../../kernel/prng.js';
+import { createPRNG, epochSuffix } from '../../kernel/prng.js';
 import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
@@ -115,7 +115,7 @@ import { advanceInstitutionTolerance } from './institutionTolerance.js';
 import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecycleNewsEntries } from './causeLifecycle.js';
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
-import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
+import { wallClockNow, assertNowPinnedInTest, assertEpochPinnedInTest } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations, isPublicOutcome } from './pulseHelpers.js';
 import { assertNoResidueLeak } from './residueStripGuard.js';
 
@@ -220,8 +220,14 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   opens the panel. Absent ⇒ defaults to the current tick (single-tick advance;
  *   byte-identical). [worldpulse-core-3]
  * @param {import('../region/wizardNews.js').RawWizardNewsEntry[]|null} [args.newsReceiptSink] Audit-only raw Wizard News sink.
+ * @param {string|null} [args.advanceEpoch] EP-1: the per-USER-ADVANCE nonce, minted at the
+ *   store layer and threaded here as an ARGUMENT — never read from ambient state, because
+ *   R-18 paranoia mode re-runs the interval over a clone and diffs, and an ambient read
+ *   would red on every advance. Applied to the root seed ONLY when
+ *   `simulationRules.advanceEpochEnabled === true`; absent or dark ⇒ `epochSuffix` returns
+ *   the empty string and the composition is character-for-character the pre-wave one.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null, advanceEpoch = null } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -287,8 +293,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // gate blocks. All strips are byte-neutral when nothing is suppressed.
   // @pulse-stage: bootstrap
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
-  const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
-  const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
+  const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules); const epochTerm = simulationRules?.advanceEpochEnabled === true ? advanceEpoch : null; if (simulationRules?.advanceEpochEnabled === true && advanceEpoch == null) assertEpochPinnedInTest('simulateCampaignWorldPulse');
+  // ⭐ THE ADVANCE-EPOCH SEAM (the ONE kernel edit this program makes; owner directive
+  // 2026-08-05, chair-signed). The epoch is a NEW SEGMENT on the root seed only — the
+  // stage order and the PRNG CALL ORDER are untouched, so the number and sequence of
+  // draws is identical in both flag states and R-BLD-10's refusal (which protected the
+  // call order for a SIZE number) is not re-litigated. Absent epoch ⇒ epochSuffix returns
+  // '' ⇒ this composes the pre-wave string character-for-character, so a dark or legacy
+  // world is byte-identical rather than merely similar.
+  //
+  // THE TERM IS FLAG-DRIVEN, NOT VALUE-DRIVEN, and the gate above is the second of two
+  // (the store mint is the first). `pausedAdvance` is PERSISTED, so a lit advance can
+  // pause, the rule can go dark, and the resume can arrive carrying a live epoch: without
+  // this re-read the kernel would compose an epoch-bearing seed in a flag-dark world.
+  // Every flag-driven materialization keys on `epochTerm` and never on the raw argument.
+  const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}${epochSuffix(epochTerm)}`);
   let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };
   // M10a — CL-3 HOLD-THEN-EXPIRE: retire any actor-initiated-major proposal (a held
   // war declaration / coup) that has waited ACTOR_MAJOR_HOLD_WEEKS with no DM word —
@@ -1744,7 +1763,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     tick: worldState.tick,
     interval: tickInterval,
     committed: commit,
-    createdAt: now,
+    createdAt: now, ...(epochTerm ? { epoch: epochTerm } : {}),
     calendar: memoryState.calendar,
     candidateCount: publicSurfaces.candidateCount,
     selectedCount: publicSelectedOutcomes.length,

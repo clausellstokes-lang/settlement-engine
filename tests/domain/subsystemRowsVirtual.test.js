@@ -157,6 +157,13 @@ const TREATY_RENEWAL = 'treatyRenewalEnabled';
 // in both halves.
 const WAR_CIRCULATION = 'warCirculationEnabled';
 const CONTRIBUTION_LEDGER = 'contributionLedgerEnabled';
+// EP-1. The advance-epoch stream gate, joined with its manifest entry and its TWO first
+// by-name gate reads (the store mint and the kernel re-read) in one commit. Its lane
+// leaves are the PURE ones — the segment in prng.js and the structural guard in clock.js
+// — and NOT the kernel or the store: those are shared mouths that mint candidates for a
+// dozen other lanes, so tracing this lane's zero-candidate claim through them would
+// measure the whole pulse's vocabulary rather than this member's.
+const ADVANCE_EPOCH = 'advanceEpochEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -164,6 +171,7 @@ const VIRTUAL_RULES = Object.freeze([
   CONQUEST, HABIT, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
   POLITICS, UNDERWAYS, TREATY_RENEWAL,
   WAR_CIRCULATION, CONTRIBUTION_LEDGER,
+  ADVANCE_EPOCH,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -189,6 +197,13 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/habit/habitGate.js',
     'src/domain/worldPulse/habit/habitLedger.js',
   ],
+  // EP-1. THE LANE'S OWN LEAVES, and the scoping is the documented one rather than a
+  // convenience: the pure segment and the structural guard. pulseKernel.js and
+  // campaignAdvanceSession.js are in the row's wider `module` list because a reader needs
+  // them, and are deliberately absent here — they are the pulse mouth and the store mouth,
+  // and tracing this lane's zero-candidate claim through them would measure every other
+  // subsystem's vocabulary at once.
+  [ADVANCE_EPOCH]: ['src/kernel/prng.js', 'src/domain/clock.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

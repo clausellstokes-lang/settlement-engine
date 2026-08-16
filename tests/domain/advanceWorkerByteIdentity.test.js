@@ -180,6 +180,60 @@ describe('V-8 byte-identity — the thread boundary preserves the world', () => 
 // orchestrator. "Byte-identical by construction" is an architectural claim, and an architectural
 // claim about an ENGINE seam is exactly the one this batch may not take on faith — so it is
 // executed here instead, against the same pinned seed and pinned `now` the pins above use.
+describe('EP-1 — the advance epoch crosses the worker boundary, and it is a REPLAY KEY', () => {
+  /** The same fixture, lit, with an explicit epoch threaded as the store would thread it. */
+  function litArgs(epoch, interval = 'one_year') {
+    const { campaign, saves } = buildFixture();
+    return {
+      campaign: {
+        ...campaign,
+        worldState: { ...campaign.worldState, simulationRules: { advanceEpochEnabled: true } },
+      },
+      saves, interval, commit: true, now: NOW, autoResolve: true, advanceEpoch: epoch,
+    };
+  }
+
+  test('the epoch is a plain string and survives the structured-clone boundary untouched', async () => {
+    // §1.1 rules the nonce a plain JS string precisely so this holds. A Symbol, BigInt,
+    // Date or object would be dropped or mangled by one of the fourteen lifecycle paths,
+    // and this is the boundary where that would first show.
+    const sync = await simulateCampaignWorldInterval(litArgs('epoch-worker-a'));
+    const viaBoundary = structuredClone(await simulateCampaignWorldInterval(structuredClone(litArgs('epoch-worker-a'))));
+    expect(sync.status).toBe('complete');
+    expect(viaBoundary.worldState).toEqual(sync.worldState);
+    expect(JSON.stringify(viaBoundary.worldState)).toBe(JSON.stringify(sync.worldState));
+    // …and the epoch really reached the record, so this is a claim about a value that
+    // crossed rather than about a value that was never there.
+    const history = sync.worldState.pulseHistory || [];
+    expect(history.length).toBeGreaterThan(0);
+    expect(history[history.length - 1].epoch).toBe('epoch-worker-a');
+  });
+
+  test('THE REPLAY DOOR: the same (seed, epoch) reproduces the world; a different epoch does not', async () => {
+    // This is what makes the recorded `epoch` field a replay key rather than decoration.
+    // §1.5's grain ruling depends on it: one recorded epoch must reproduce all 52 ticks of
+    // a one-year advance exactly, because the per-tick identity is DERIVED from the seed's
+    // own `::tick:N` term and never stored.
+    const first = await simulateCampaignWorldInterval(litArgs('epoch-replay-1'));
+    const replay = await simulateCampaignWorldInterval(litArgs('epoch-replay-1'));
+    expect(JSON.stringify(replay.worldState)).toBe(JSON.stringify(first.worldState));
+
+    // THE DISCRIMINATION HALF — without it the pin above is satisfied by an engine that
+    // ignores the epoch entirely, which is exactly the defect the seam could have.
+    const other = await simulateCampaignWorldInterval(litArgs('epoch-replay-2'));
+    expect(JSON.stringify(other.worldState) === JSON.stringify(first.worldState)).toBe(false);
+  });
+
+  test('DARK: the same fixture with no epoch is byte-identical to the pre-wave advance', async () => {
+    // The legacy path, re-asserted at the transport boundary rather than only at the
+    // kernel: a world whose rules never mention the key composes exactly what it always
+    // composed, and threading a value into a dark world changes nothing.
+    const legacy = await simulateCampaignWorldInterval(args());
+    const darkWithValue = await simulateCampaignWorldInterval({ ...args(), advanceEpoch: 'ignored-because-dark' });
+    expect(JSON.stringify(darkWithValue.worldState)).toBe(JSON.stringify(legacy.worldState));
+  });
+});
+
 describe('MB-1 — the forecast transport seam is byte-neutral', () => {
   test('injecting a runner that clones across the boundary === the default in-thread forecast', async () => {
     const { simulatePendingFuture } = await import('../../src/domain/worldPulse/forecastRun.js');

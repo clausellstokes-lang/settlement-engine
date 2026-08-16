@@ -1188,6 +1188,61 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // into an instrument GAP.
     soakEvidence: 'unobserved',
   }),
+  // ── EP-1 · THE ADVANCE EPOCH (docs/DESIGN_FP_ARCH_EP.md §2, §3a, §3b.1) ──────
+  Object.freeze({
+    rule: 'advanceEpochEnabled',
+    title: 'The advance epoch (a per-advance nonce on the pulse root, so a re-advanced world draws a genuinely new future)',
+    module: 'src/kernel/prng.js, src/domain/clock.js, src/domain/worldPulse/pulseKernel.js, src/store/campaignAdvanceSession.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and here it is a measurement rather than a judgement: this
+      // member mints no pulse candidate at all. It appends a SEGMENT to a seed string.
+      // The lane's own leaves (prng.js, clock.js) contain no `candidateType` literal,
+      // which the virtual lane's zero-candidate trace re-measures from source.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The only BEHAVIORAL_MOVER_FAMILIES member this lane could
+      // ride is the whole pulse, which would grade the row ALIVE off every advance in
+      // every world where the flag has never been true — the refusal every row in this
+      // cohort makes for the same reason.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY AND MEASURED: EP-1 calls setSpatialLedger ZERO times. Its one
+      // materialization is a conditional TOP-LEVEL SCALAR on the pulse-history record
+      // (`epoch`), which is not a spatialLedgers container and which no receipt walks.
+      // The ledger container arrives at EP-3 with its writer, and the row gains a real
+      // stateKeys declaration then. Declaring one now would grade this row off another
+      // subsystem's container entirely.
+      stateKeys: Object.freeze([]),
+      other: 'THE STREAM-IDENTITY GATE. Lit, the store mints one nonce per USER ADVANCE and the kernel appends it to the pulse root as a new `::epoch:<nonce>` segment, so a world advanced again from the same tick draws a genuinely different future instead of replaying the one its seed already determined. THE GATE IS READ TWICE AND BOTH READS ARE REQUIRED: the store mint is gated so no epoch value comes into existence in a dark world, and the kernel re-reads the flag beside the value so a value that outlived a flag flip on the PERSISTED pause cursor cannot be used. Gating only the mint leaves a live path to the flag-dark/value-present cell — an advance pauses lit, the rule goes dark, the resume re-threads the parked epoch — and that cell is the one dark byte-identity has to close. DARK IS BYTE-IDENTICAL BY CONSTRUCTION, NOT BY PARITY ARGUMENT: `epochSuffix(null)` returns the empty string and `x + \'\' === x`, so a flag-absent or legacy world composes the pre-wave seed character-for-character; the seam moves the seed VALUE only and never a control-flow branch, so the number and ORDER of rng draws is identical in both flag states. WHAT NOTHING CAN SEE: no preset declares this key, so a soak receipt carries no entry for it and the row can only ever grade UNOBSERVED; the member writes no persisted container, so there is nothing for censusWorldStateKeys to walk; and the `epoch` field on the pulse record is materialized CONDITIONALLY on the flag-gated term, so a dark world serializes no new key and no census can distinguish it from a pre-wave one. THE OBSERVATION THAT WOULD CLOSE IT: EP-3 lands the ledger writer and its spatialLedgers.advanceEpoch container, at which point this row gains a real stateKeys declaration and a soak can grade it; until then the falsifiable claims are the four pinned below.',
+    }),
+    // PER_TICK is the cadence of the SEAM, not of the mint: the segment is composed on
+    // every kernel pass. The nonce itself is minted once per user advance (§1.5) — a
+    // per-tick nonce would be destroyed by the interval collapse, which keeps ONE record.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical_per_advance_path',
+        description: 'With the flag absent or false the composed stream identity string is character-for-character the pre-wave string, on the single-tick path and on the multi-tick composed path INDEPENDENTLY. The claim is never made ACROSS paths, because advanceMultiTick already forks the interval term and always has.',
+        check: 'Pinned in tests/property/advanceEpochDormancyFence.test.js by fence 1, which drives the real kernel over four rule configurations and BOTH value states and asserts the literal legacy seed captured through a pass-through createPRNG spy.',
+      }),
+      Object.freeze({
+        name: 'the_contract_is_flag_driven_not_value_driven',
+        description: 'A real epoch value arriving at the kernel in a flag-dark world changes nothing: neither the seed string nor the serialized key set. This is the cell a mint-only gate leaves open, and the persisted pause cursor is a live path to it.',
+        check: 'Pinned in tests/property/advanceEpochDormancyFence.test.js by fence 1\'s value-present column and by fence 5, and proven non-vacuous by an executed mutant that deletes the kernel flag read and must RED.',
+      }),
+      Object.freeze({
+        name: 'draw_count_and_order_are_identical_in_both_flag_states',
+        description: 'The seam moves the root seed VALUE and introduces no branch, so a lit advance draws the same NUMBER of forks in the same ORDER from a different stream. Fork labels are not unique in the kernel, so the comparison is over the ordered SEQUENCE and never a set.',
+        check: 'Pinned in tests/domain/advanceEpochForkParity.test.js, which instruments createPRNG at its src/kernel/prng.js home with a strict pass-through spy and compares the ordered fork-label sequence lit against dark.',
+      }),
+      Object.freeze({
+        name: 'the_recorded_field_is_conditional_and_keys_on_the_gated_term',
+        description: 'The pulse record gains an `epoch` key only when the flag-gated term is truthy, so a dark or legacy world serializes exactly the key set it serialized before this wave. A materialization keyed on the raw threaded value would leave the stream perfectly dark and still write a brand-new key into a flag-dark world.',
+        check: 'Pinned in tests/property/advanceEpochDormancyFence.test.js by an Object.keys comparison of the record in both value states, with an executed mutant that re-keys the spread onto the raw argument and must RED.',
+      }),
+    ]),
+    // No channel is declared, so the row can never be ALIVE and says so. `unobserved` is
+    // the honest reading and the only lawful one: a row that observes nothing must say so.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

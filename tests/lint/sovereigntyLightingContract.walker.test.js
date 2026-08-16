@@ -4658,7 +4658,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
     // --porcelain` at measurement time listed exactly this wave's five paths and nothing
     // else, so no other lane's uncommitted test files are charged to this row.
-    files: 2454, parked: 364, credited: 2090, titles: 20409, suiteTitles: 5716,
+    // ── RE-RECORDED 2026-08-16 BY EP STAGE TWO (EP-1), WITH ITS CAUSE MEASURED ─────
+    // 2,454/364/2,090/20,409/5,716 → 2,456/364/2,092/20,439/5,725. TWO NEW TEST FILES PLUS
+    // ONE AMENDED, ALREADY-CREDITED ONE, and nothing else. EP-1 mints the advance-epoch
+    // flag and its kernel seam; no rule here widened or narrowed and no existing file
+    // changed shape.
+    // New: tests/property/advanceEpochDormancyFence.test.js (17 titles, 6 suite titles) —
+    // the five-fence dormancy set plus the lit-mutant control;
+    // tests/domain/advanceEpochForkParity.test.js (10 titles, 2 suite titles) — the C2
+    // draw-parity instrument. Amended, already credited:
+    // tests/domain/advanceWorkerByteIdentity.test.js gains the epoch replay-door block
+    // (+3 titles, +1 suite title).
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files      +2  = the two new files
+    //   credited   +2  = both new files are CREDITED, not parked
+    //   titles     +30 = 17 + 10 + 3, closing with nothing left over
+    //   suiteTitles +9 = 6 + 2 + 1
+    // PARKED IS UNCHANGED at 364: every title in all three files is a literal, so door 3's
+    // reader recognises them statically.
+    // ⚠⚠ THE RUNTIME COUNT AND THIS STATIC COUNT DISAGREE BY SEVEN, AND THAT IS EXPECTED
+    // RATHER THAN A DEFECT — recorded here because it is exactly the shape the parked-file
+    // hazard wears and a reader checking one against the other would otherwise run it down.
+    // advanceEpochDormancyFence imports `codeOnly` FROM tests/lint/engineGatedRuleKeys.
+    // walker.test.js (the volume mandates reusing that blanker rather than writing a second
+    // regex, and the casusCommerciiDormancyFence precedent does the same), and importing a
+    // test file RE-REGISTERS ITS SUITES in the importer. So that walker's seven tests run a
+    // second time and the ratchet counts them; THIS census extracts literal titles from
+    // each file's own source and correctly counts them once.
+    // ⚠ MEASURED IN THIS WORKING TREE, WHICH CARRIED NO FOREIGN FILES: `git status
+    // --porcelain` at measurement time listed exactly this wave's twelve paths and nothing
+    // else, so no other lane's uncommitted test files are charged to this row.
+    files: 2456, parked: 364, credited: 2092, titles: 20439, suiteTitles: 5725,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

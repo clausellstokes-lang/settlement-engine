@@ -209,7 +209,16 @@ const COMPOSITIONS = Object.freeze([
   ['18', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-contest:bluff:${contestId}:${rival.nid}:${weeks}', 'hash01', 'TICK-VARYING'],
   ['19', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-contest:resolve:${contest.id}', 'hash01', 'TICK-VARYING'],
   ['20', 'src/domain/worldPulse/npcLadderContest.js', '${seed}|ladder-support:${sid}:${nid}:${year}', 'hash01', 'YEAR-KEYED'],
-  ['SEAM', 'src/domain/worldPulse/pulseKernel.js', '${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}', 'createPRNG', 'SEAM'],
+  // ⭐ RE-RECORDED 2026-08-16 BY EP-1, AND THIS ROW IS THE ONE THE PROGRAM EXISTS TO MOVE.
+  // The composition COUNT did not change — this file still composes exactly ONE root, and
+  // the estate's total is unmoved. What changed is this row's TEXT: the seam appends
+  // `${epochSuffix(epochTerm)}`, which is the whole advance-epoch mechanism. The census
+  // caught it by exact text rather than by count, which is precisely why the baseline is
+  // spelled as an ordered roster of expressions and not as a number.
+  // ⛔ THE SHRINK-ONLY LAW IS UNTOUCHED: a composition APPEARING or VANISHING is still a
+  // build STOP. An EDIT to a dispositioned row is the sanctioned case, and it is lawful
+  // only when the member that made it is the member the disposition names — here, SEAM.
+  ['SEAM', 'src/domain/worldPulse/pulseKernel.js', '${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}${epochSuffix(epochTerm)}', 'createPRNG', 'SEAM'],
   ['14', 'src/domain/worldPulse/realmVerbExecution.js', "${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}", 'DEFERRED', 'TICK-VARYING'],
   ['14d', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:${k}', 'createPRNG', 'DERIVED'],
   ['14e', 'src/domain/worldPulse/realmVerbExecution.js', '${seed}:exodus', 'createPRNG', 'DERIVED'],
@@ -489,7 +498,7 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ lines, files: hits.length }).toEqual({ lines: 68, files: 30 });
   });
 
-  test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 8 hits / 5 call sites', () => {
+  test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
     const count = (pred, re) => ALL_FILES.filter(pred)
       .reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0);
     expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(38);
@@ -499,7 +508,14 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     const hits = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('generateSeed()')).length, 0);
     const calls = ALL_FILES.reduce((n, f) => n + read(f).split('\n')
       .filter((l) => l.includes('generateSeed()') && !COMMENT_LINE.test(l) && !l.includes('export function')).length, 0);
-    expect({ hits, calls }).toEqual({ hits: 8, calls: 5 });
+    // ⭐ RE-RECORDED 2026-08-16 BY EP-1: 8/5 → 9/6, and the +1 is the ADVANCE-EPOCH MINT
+    // in src/store/campaignAdvanceSession.js. This is a DECLARED growth, not a discovered
+    // one — the compile priced the mint at that exact file, and §3a rules the store layer
+    // the only lint-legal home for it (eslint bans the entropy primitives across
+    // src/domain, src/kernel except prng.js, src/workers and src/generators). The
+    // certification row's INVERTED purity arm asserts the confinement from the other side:
+    // exactly one entropy call site in this member's family, and it is in src/store.
+    expect({ hits, calls }).toEqual({ hits: 9, calls: 6 });
   });
 
   test('`hash01` CALLER modules = 14, and the figure is a caller count not a mention count', () => {

@@ -340,6 +340,11 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
  * }|null} [args.resume] Stage 3 RESUME cursor (from a prior pause). When set, the
  *   orchestrator re-runs `resumeTick` from the pre-tick inputs (with decisions
  *   folded in), then continues.
+ * @param {string|null} [args.advanceEpoch] EP-1: the per-USER-ADVANCE nonce. ONE value rides
+ *   EVERY composed tick — the grain is the advance, never the tick, because a multi-tick
+ *   interval COLLAPSES to one pulse record and 51 of 52 per-tick nonces would be destroyed
+ *   at commit. The per-tick stream identity stays distinct without them: the seed already
+ *   carries `::tick:N`, so one recorded epoch reproduces the whole interval exactly.
  * @param {((detail: {ticksDone:number, ticksTotal:number, interval:string}) => void)|null} [args.onProgress]
  *   Called after EVERY completed kernel tick with the running tick count (a
  *   resumed segment continues from its cursor, so ticksDone picks up where the
@@ -364,7 +369,7 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
   autoResolve = true, resume = null, onProgress = null, onTickObservation = null, weeks = null,
-  customContent = null,
+  customContent = null, advanceEpoch = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
   // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
@@ -471,6 +476,11 @@ export async function simulateCampaignWorldInterval({
       dismissMajorIds: isResumeTick ? dismissMajorIds : null,
       intervalStartTick,
       newsReceiptSink: rawWizardNewsEntries,
+      // ONE epoch per USER ADVANCE, never per tick: the same value rides every composed
+      // tick, and the per-tick stream identity stays distinct because the seed already
+      // carries `::tick:N`. A per-tick nonce would be destroyed by the interval collapse
+      // (which keeps ONE record) and replay would be impossible.
+      advanceEpoch,
     };
     // Scope only the synchronous kernel call. The orchestrator may yield between
     // batches, so retaining a module-global override across awaits would allow

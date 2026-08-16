@@ -31,6 +31,7 @@ import { appendWizardNewsEntries } from '../domain/region/index.js';
 // body only, so it adds nothing to the first-paint closure.
 import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
+import { generateSeed } from '../kernel/prng.js';
 // FULL AUTO-RESOLVE (realm directive 7 / J-D7). Static import is free here: this
 // whole module is reachable only through campaignWorldPulseSlice.loadWorldEngine(),
 // the SAME dynamic import that already pulls advanceCampaignWorld → pulseKernel →
@@ -222,7 +223,7 @@ export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, p
  * a verbatim code-location move — the flag-OFF single-tick path stays byte-identical.
  *
  * @param {{ set: Function, get: Function, campaignId: string, interval?: string,
- *   options?: { now?: string, autoResolve?: boolean, weeks?: number },
+ *   options?: { now?: string, autoResolve?: boolean, weeks?: number, epoch?: string },
  *   sessionFence?: any, isSessionCurrent?: Function,
  *   deps: { advanceCampaignWorld: Function, simulateCampaignWorldInterval: Function,
  *           runAdvanceInterval: Function } }} args
@@ -293,6 +294,23 @@ export async function runAdvanceCampaignWorld({
      *  drain twin, mirroring the immediate path's relationship-ripple branch). */
     let drainedCanonRel = /** @type {Array<{ event: any, homeId: string }>} */ ([]);
     const now = options.now || new Date().toISOString();
+    // THE ADVANCE-EPOCH MINT (owner directive 2026-08-05, chair-signed). One nonce per
+    // USER ADVANCE, minted at the store layer beside `now` and for the same reasons: this
+    // is the only lint-legal home (eslint bans Math.random/Date.now across src/domain,
+    // src/kernel except prng.js, src/workers and src/generators), and it sits AFTER the
+    // synchronous refusal guards, so a refused or no-op advance burns no epoch.
+    //
+    // THE GATE READ IS BY NAME AND STRICT, and that spelling is load-bearing rather than
+    // stylistic: engineGatedRuleKeys' census anchors on a `rules`/`simulationRules`
+    // receiver with `=== true`, so a read spelled `cfg.advanceEpochEnabled === true` would
+    // be invisible to it and would make the manifest lie about its own engine.
+    //
+    // THE VALUE IS ARGS-BORNE, NEVER AMBIENT. R-18 paranoia mode re-runs the interval over
+    // `cloneJson(multiTickArgs)` and diffs; an epoch read from a module singleton would
+    // diff clean here and red there, on every advance.
+    const simulationRules = findActiveCampaign(get().campaigns, campaignId)?.worldState?.simulationRules || null;
+    const epochLit = simulationRules?.advanceEpochEnabled === true;
+    const advanceEpoch = epochLit ? (options.epoch || generateSeed()) : null;
 
     // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
     // simulation inputs OUT of the Immer producer. The heavy pulse is a pure
@@ -403,6 +421,7 @@ export async function runAdvanceCampaignWorld({
         // (no weeks ⇒ the named-interval table). Threads through runAdvanceInterval's
         // payload spread into the worker AND the in-thread fallback alike.
         ...(catchUpWeeks != null ? { weeks: catchUpWeeks } : {}),
+        advanceEpoch,
       };
       result = useMultiTick
         // The worker runs the SAME simulate function off the main thread; the
@@ -421,6 +440,7 @@ export async function runAdvanceCampaignWorld({
             interval,
             now,
             customContent: pinnedCustomContent,
+            advanceEpoch,
           });
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 

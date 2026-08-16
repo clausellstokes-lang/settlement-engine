@@ -130,7 +130,7 @@ npx vitest run tests/property/advanceEpochDormancyFence.test.js \
 | **§104.4 — edge-shared closures** | ⛔ **INCURRED, and WIDER THAN THE COMPILE PRICED — see §8** |
 | **size baseline — `pulseKernel.js`** | **INCURRED at a PERMANENTLY BANKED file, and DISCHARGED AT +0.** Measured with eslint's own `Linter` under `max-lines {skipBlankLines, skipComments}` at HEAD and at the working tree: **1580 → 1580, DELTA 0** |
 | **test census** | **INCURRED.** Two new files, one amended; the tuple is re-derived and the delta decomposed per file, closing exactly |
-| **§102.3 — a new `tests/lint/` file** | **NOT INCURRED.** The scope is `tests/lint`; this member creates files under `tests/property` and `tests/domain` and only AMENDS an existing `tests/lint` file, which already carries its row |
+| **§102.3 — mutation coverage** | ⛔ **INCURRED, and the compile's scoping is wrong — see §8.** One `invariants` row for `advanceEpochForkParity.test.js`, added SURGICALLY: `git diff --stat` = **5 insertions, 0 deletions**, so `PACKET_MANIFEST`'s never-re-serialise law held. Meta-test RED before, GREEN after (8/8) |
 | **§85.4 — seeded-chooser registry** | **NOT INCURRED.** The seam composes a seed and chooses nothing |
 | **declared shift** | **NOT INCURRED.** Byte-identical dark by construction, proven by the fence set; the lit behaviour is the feature and is flag-gated |
 | **coupling registry** | **NOT INCURRED.** No new module; the two new imports are `clock.js` and `prng.js`, edges the kernel already carried |
@@ -193,6 +193,18 @@ DECLARED-FREE-TO-DIFFER, so the narrowing is a measurement rather than a quiet r
 future build in which they STOPPED diverging would red — because that would mean the epoch
 reached nothing. **This is reported under the E5 STOP-AND-REPORT rule rather than repaired in
 place: the kernel is correct and the specification was wrong about what a fork label is.**
+
+**⚠ §102.3's TRIGGER IS NOT `tests/lint/` — IT IS A NAME PATTERN, AND IT REACHES `tests/domain`.**
+Both this packet's first draft and the compile (`EP.M19`) scoped the mutation-coverage
+obligation to new `tests/lint/` files. Measured at
+`tests/lint/mutationCoverage.shared.mjs`, the enumeration is SEVEN enforcer directories
+**plus a basename pattern** — `census|scan|baseline|ratchet|walker|killlist|parity|coverage|
+governance|freshness|integrity|exhaustiveness|roundtrip|golden|contract|pin` — applied
+everywhere else in `tests/`. So `tests/domain/advanceEpochForkParity.test.js` is an invariant
+by its own NAME and owes a row, while `tests/property/advanceEpochDormancyFence.test.js`
+matches nothing and does not. **Found by running the meta-test rather than by reading the
+law**, which is the only reason this member did not carry the same wrong scoping into the
+gate. Every future compile that prices §102.3 by directory alone will under-price it.
 
 ## §9 · WHAT STAGE THREE INHERITS
 
