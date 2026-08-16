@@ -5869,3 +5869,16 @@ gallery-seeding lane offer stands.
 2. TC29 (mid-compile) redirected with the law; the generation-order
    §5.-1.5 supersedes the §160-era pipeline summary. This is the
    organic-feel keystone the owner named — recorded as such.
+
+## §161a · SUBSTRATE INPUTS BROADENED (2026-08-16, owner: "of
+## course base terrain is derived from the dossier")
+
+The §5.-1 substrate's canonical inputs are enumerated beyond
+terrainType: the LOCAL RESOURCES chosen at generation shape the
+ground that must carry them (ore→workable slopes+spoil ground,
+fisheries→shore+shoal, timber→standing forest, quarry→exposed
+stone); tradeRouteAccess sets road count and grade quality; the
+neighbour link sets the main road's true exit bearing. "A
+settlement's land must be the land its own economy could have grown
+from" — the consistency pin covers every input, not terrainType
+alone. Charter amended in place; TC29 already carries §5.-1.
