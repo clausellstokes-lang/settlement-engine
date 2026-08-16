@@ -7966,3 +7966,27 @@ browser cost in the same receipt. The ×10 painted rasterize cost
    endpoints from real distributions before wave eight is graded
    against them; the §214 renderer calibrates against drawn
    vocabulary at zoom instead of prose.
+
+## §222 · OWNER ORDER: CORPUS ROUND TWO — MID-BANDS, TERRAIN,
+## TRADE ROUTES, STRESSORS; ALL JUDGMENT DELEGATED (2026-08-16)
+
+1. **THE ORDER**: audit village/town/city band quality and
+   improve via Higgsfield where the chair judges; mint reference
+   sets for TERRAIN that shapes everything (plains, mountain,
+   hills, river, coastal, desert, …), TRADE ROUTES where
+   appropriate, and STRESSOR PORTRAYAL — "i leave all judgement
+   to you." **HF-3 DISPATCHED ON FABLE.** Chair's audit verdict
+   driving the brief: the mid-bands are adequate but pre-date
+   round one's refined counter-phrases, and the sharper defect
+   is HOMOGENEITY — the corpus is euro-temperate-heavy while
+   SETTING-AGNOSTICISM is constitutional product law; desert/
+   coastal/mountain/delta morphologies teach what the corpus
+   cannot. Stressor plates calibrate §10 under the calm-ink law
+   (added geometry, never mood-lighting; dramatic failures filed
+   as labeled negative references per the hf100 method). Terrain
+   plates favor legible terrain-to-settlement CAUSALITY (the
+   town is where it is BECAUSE of the ford/pass/harbor) — the
+   terrain-first law's calibration.
+2. Same curation law as §221; numbering from hf125; spend
+   balance-checked; the calibration index grows with teaching
+   notes and any new counter-phrases.
