@@ -7350,3 +7350,31 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    court and a cul-de-sac mouth; both censuses join the standing
    0/0 family; before/after counts credited as the owner's
    findings; the charter re-sync rider picks up both texts.
+
+## §202 · OWNER LAW: UNIVERSAL ACCESS, TRANSITIVE TO THE STREET
+## NETWORK (2026-08-16, owner order in two parts; third MF-B7
+## redirect, correction issued same-turn)
+
+1. **THE LAW AS SHARPENED BY THE OWNER**: every building must have
+   some way through to the streets — directly fronting one, or
+   through alley space CONNECTED to the street web. Access is
+   TRANSITIVE REACHABILITY over the open-space graph (streets ∪
+   alleys ∪ courts ∪ pedestrian gaps), not mere adjacency: zero
+   buildings without a path to the street network, every leaf,
+   all lenses, both strata. Counterfactual: seal one court's
+   connecting gap — the census must red.
+2. **RECONCILIATION UNDER THE SHARPENED FORM**: §201's "isolated"
+   courts survive as ROUTE-isolated (no street mouth, no through
+   passage) but must percolate to the web by at least a narrow
+   pedestrian gap — a hermetically sealed court with buildings is
+   now a violation; the pinned island buildings survive exactly
+   this way; cul-de-sacs unchanged. A folio-scale passage glyph
+   for historically interior connections is executor's judgment,
+   recorded. CHAIR NOTE ON THE RECORD: my first §202 brief to the
+   lane read the isolated court as terminal access; the owner's
+   sharpening OVERRULED that reading and the correction went to
+   the lane in the same turn, before any build on the weaker form.
+3. The census joins the standing 0/0 family (module-scope
+   helpers, drawn-geometry sets); pre-cure unreachable counts
+   reported honestly, credited as the owner's finding; the
+   charter re-sync rider carries the law's text with §200/§201.
