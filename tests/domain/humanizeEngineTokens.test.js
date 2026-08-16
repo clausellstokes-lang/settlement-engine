@@ -7,8 +7,12 @@
  * house-voice words with no camelCase or snake_case residue.
  */
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 import {
+  DISPLAY_LEXICON,
+  displayLabel,
   humanizeFlagKey,
+  humanizeIfToken,
   humanizeToken,
   tickCalendarDetailLabel,
   settlementSizeLabel,
@@ -130,5 +134,84 @@ describe('humanizeFlagKey — flag keys to layer names', () => {
       expect(out.startsWith('the '), `${k} → "${out}"`).toBe(true);
       expect(/[A-Z_]/.test(out), `${k} → "${out}" carries engine casing`).toBe(false);
     }
+  });
+});
+
+describe('the authored display lexicon — typed buckets, closed and enumerable', () => {
+  /**
+   * ⭐⭐ THE tradeRouteAccess BUCKET IS PINNED AGAINST ITS PRODUCER'S SOURCE, not
+   * against a copy of itself. A hand-listed table is exactly the shape that rots
+   * the day the generator gains a sixth route: the label would silently fall
+   * through to the humanizer and nobody would learn the bucket had a hole. So
+   * this arm reads `resolveConfig.js` and requires the two sets to be EQUAL —
+   * a new route reds here, and a label for a route nobody produces reds too.
+   */
+  it('covers EVERY trade-route token the generator can actually produce', () => {
+    const source = readFileSync('src/generators/steps/resolveConfig.js', 'utf8');
+    const pools = source.slice(
+      source.indexOf('const TERRAIN_ROUTE_POOLS'),
+      source.indexOf('export const CULTURES'),
+    );
+    const produced = new Set();
+    // The terrain table plus every inline fallback pool: any array literal on a
+    // line that names a pool is a place a route token can be born.
+    for (const block of [pools, ...source.split('\n').filter((l) => /pool/i.test(l))]) {
+      for (const [, token] of block.matchAll(/'([a-z_]+)'/g)) produced.add(token);
+    }
+    // ANTI-VACUITY: a scan that stopped matching would report an empty set, and
+    // "every member of {} is covered" is true of any table at all.
+    expect(produced.size).toBeGreaterThanOrEqual(5);
+    expect([...produced].sort()).toEqual(
+      Object.keys(DISPLAY_LEXICON.tradeRouteAccess).sort(),
+    );
+  });
+
+  it('says what the token means where the token alone would mislead', () => {
+    // The one that earns the lexicon outright: nothing in the word `isolated`
+    // tells a reader it is a statement about TRADE.
+    expect(displayLabel('tradeRouteAccess', 'isolated')).toBe('No trade route');
+    expect(displayLabel('tradeRouteAccess', 'crossroads')).toBe('Trade crossroads');
+    expect(displayLabel('supplyChainStatus', 'entrepot')).toBe('Transhipment hub');
+  });
+
+  it('carries the five legacy chain statuses the generator records producing', () => {
+    // settlement.schema.js: "today's generator produces chain entries with shape
+    // { …, status: 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired' }".
+    expect(Object.keys(DISPLAY_LEXICON.supplyChainStatus).sort())
+      .toEqual(['entrepot', 'impaired', 'operational', 'running', 'vulnerable']);
+  });
+
+  it('falls through for an unknown token instead of leaking or vanishing', () => {
+    expect(displayLabel('tradeRouteAccess', 'canal_barge')).toBe('Canal barge');
+    expect(displayLabel('noSuchBucket', 'river')).toBe('River');
+    expect(displayLabel('tradeRouteAccess', null, 'Unknown')).toBe('Unknown');
+    expect(displayLabel('tradeRouteAccess', '   ')).toBe('');
+  });
+
+  it('is FROZEN data, never a branch to extend', () => {
+    expect(Object.isFrozen(DISPLAY_LEXICON)).toBe(true);
+    for (const bucket of Object.values(DISPLAY_LEXICON)) expect(Object.isFrozen(bucket)).toBe(true);
+  });
+});
+
+describe('humanizeIfToken — the slot that carries prose OR a token', () => {
+  it('humanizes a token and leaves an authored headline alone', () => {
+    expect(humanizeIfToken('succession_coup')).toBe('succession coup');
+    expect(humanizeIfToken('goalProgress')).toBe('goal progress');
+    // ⭐ THE REGRESSION THIS EXPORT EXISTS TO PREVENT: the plain humanizer
+    // lowercases, and chronicleFeed fills the same slot from raw.title.
+    expect(humanizeIfToken('The Siege of Redwater')).toBe('The Siege of Redwater');
+    expect(humanizeToken('The Siege of Redwater')).toBe('the siege of redwater');
+  });
+
+  it('leaves a lone plain word untouched — it is already a word', () => {
+    expect(humanizeIfToken('Famine')).toBe('Famine');
+    expect(humanizeIfToken('war')).toBe('war');
+  });
+
+  it('is total on garbage and honours the fallback', () => {
+    expect(humanizeIfToken(null, 'Event')).toBe('Event');
+    expect(humanizeIfToken('   ', 'Event')).toBe('Event');
+    expect(humanizeIfToken(undefined)).toBe('');
   });
 });

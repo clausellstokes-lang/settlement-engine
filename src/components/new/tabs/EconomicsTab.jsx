@@ -10,6 +10,7 @@ import { useStore } from '../../../store/index.js';
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
+import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
@@ -677,7 +678,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {crimChains.map((c,i)=>(
                   <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
-                    {c.chainId?.replace(/_/g,' ')} · {c.status}
+                    {humanizeToken(c.chainId)} · {displayLabel('supplyChainStatus', c.status)}
                   </span>
                 ))}
               </div>

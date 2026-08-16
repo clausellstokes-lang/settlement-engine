@@ -15,6 +15,7 @@ import { FS } from '../../theme.js';
 import { INK as OINK } from '../../../design/organic/ink.js';
 import { RUBRIC } from '../../../design/organic/rubrication.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { humanizeIfToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { AddressChain, AffectedSettlements } from '../../map/AddressChain.jsx';
 
 // The Chronicle reads as ANNALS (Deep Craft — the dossier's register voice): a
@@ -72,7 +73,7 @@ export default function ChronicleTab({ entries = [] }) {
                     <span style={{ fontSize: FS.micro, fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
                   )}
                   <span style={{ fontSize: FS.xs, fontWeight: 800, color: accent, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {String(event.title || 'Event').replace(/_/g, ' ')}
+                    {humanizeIfToken(event.title, 'Event')}
                   </span>
                   {event.partyCaused
                     ? <span title="Caused by the party" style={stamp(PARTY)}>Party</span>

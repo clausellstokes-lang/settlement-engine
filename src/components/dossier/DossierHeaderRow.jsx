@@ -1,5 +1,6 @@
 import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { displayLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
@@ -69,7 +70,7 @@ export default function DossierHeaderRow({
                 <span style={{ fontSize: FS.sm, color: HEADER_FACT, textTransform: 'capitalize', fontWeight: 700 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
                 <span aria-hidden="true" style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{'·'}</span>
                 {settlement.population != null && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{formatCount(settlement.population) + ' pop.'}</span>}
-                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
+                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{displayLabel('tradeRouteAccess', settlement.config.tradeRouteAccess)}</span>}
                 {/* The threat WORD comes from the shared threatDisplay helper so
                     a given monsterThreat reads identically here and in the
                     SettlementPalette pill (P2) — the old inline map showed the

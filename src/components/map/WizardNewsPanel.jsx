@@ -2,7 +2,7 @@ import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, 
 import { useEffect, useMemo, useState } from 'react';
 
 import { newsBodyText, newsReaderSummary, newsReasonPhrases } from '../../domain/display/newsBody.js';
-import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { humanizeToken, tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
@@ -18,10 +18,6 @@ import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 import ChronicleScrollback from './ChronicleScrollback.jsx';
 import { severityBand } from './heraldFilter.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
-
-function human(value) {
-  return String(value || '').replace(/_/g, ' ');
-}
 
 function scopeLabel(scope) {
   if (scope === 'realm') return 'Realm';
@@ -217,7 +213,7 @@ function NewsEntry({ entry, compact = false }) {
             </span>
           )}
           <MetaPill>{tickCalendarDetailLabel(entry.tick)}</MetaPill>
-          <MetaPill>{human(entry.kind)}</MetaPill>
+          <MetaPill>{humanizeToken(entry.kind)}</MetaPill>
           <MetaPill>Severity {severityBand(entry)}</MetaPill>
           {reasonPhrases.slice(0, 3).map(reason => (
             <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>

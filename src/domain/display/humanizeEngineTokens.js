@@ -151,3 +151,104 @@ export function humanizeFlagKey(key) {
   const words = humanizeToken(String(key ?? '').replace(/Enabled$/, ''));
   return words ? `the ${words}` : '';
 }
+
+/**
+ * ⭐⭐ THE AUTHORED DISPLAY LEXICON — TYPED BUCKETS, CLOSED AND ENUMERABLE (DA.L4).
+ *
+ * DATA, never a branch: each bucket is one engine vocabulary whose raw token
+ * reaches a reader, mapped to the word the product actually wants said. A bucket
+ * exists ONLY where the producer's vocabulary is closed and was ENUMERATED — not
+ * where it merely looked closed.
+ *
+ * ⛔ TWO VOCABULARIES WERE ASKED FOR AND REFUSED A BUCKET, and the refusals are
+ * the reason this table is small enough to trust:
+ *   · news `kind` — measured at ~200 distinct tokens across 415 emit sites in
+ *     `domain/worldPulse/`. An authored table over that is a hand-kept list that
+ *     rots on the next emitter, so those sites take the general `humanizeToken`
+ *     chokepoint instead. A table nobody can keep complete is worse than none.
+ *   · supply-chain `chainId` — DERIVED (`snakeCase(chain.chainId || chain.label)`
+ *     over node uids), so it has no enumerable domain at all.
+ *
+ * The two that DID enumerate:
+ *   · `tradeRouteAccess` — exactly five values, read off the generator's own
+ *     `TERRAIN_ROUTE_POOLS` and its coastal pools (`generators/steps/resolveConfig.js`).
+ *     ⭐ `isolated` is the one that earns its label outright: the reader cannot
+ *     be expected to know that the word is about TRADE ACCESS rather than the
+ *     settlement's mood.
+ *   · `supplyChainStatus` — the five legacy values `settlement.schema.js` records
+ *     the generator as producing, which is the shape `economicState.activeChains`
+ *     still carries. `entrepot` is a term of art; the rest stay near their token
+ *     because a reader who sees "Impaired" has been told the truth.
+ *
+ * ⚠ NO LABEL HERE INVENTS A FACT THE ENGINE DOES NOT HOLD. `vulnerable` is left
+ * near its token deliberately: `inferSupplyChains.js` sets it for a chain that is
+ * DISCOVERED-BUT-UNCONFIRMED, so a confident word like "Fragile" would tell the
+ * reader something the value does not mean.
+ */
+const DISPLAY_LEXICON = Object.freeze({
+  tradeRouteAccess: Object.freeze({
+    crossroads: 'Trade crossroads',
+    road: 'Road route',
+    river: 'River route',
+    port: 'Port',
+    isolated: 'No trade route',
+  }),
+  supplyChainStatus: Object.freeze({
+    operational: 'Operational',
+    running: 'Running',
+    entrepot: 'Transhipment hub',
+    vulnerable: 'Vulnerable',
+    impaired: 'Impaired',
+  }),
+});
+
+/** The lexicon, exported so a walker can ENUMERATE it rather than restate it. */
+export { DISPLAY_LEXICON };
+
+/**
+ * A typed engine token as its authored reader label.
+ *
+ * Unknown or future tokens stay legible through the general humanizer rather
+ * than leaking underscores or silently disappearing — the same fallthrough
+ * `settlementSizeLabel` uses, and the reason a bucket may be incomplete without
+ * becoming a hole.
+ *
+ * @param {string} bucket
+ * @param {unknown} value
+ * @param {string} [fallback]
+ * @returns {string}
+ */
+export function displayLabel(bucket, value, fallback = '') {
+  const key = String(value ?? '').trim().toLowerCase();
+  if (!key) return fallback;
+  const authored = DISPLAY_LEXICON[bucket]?.[key];
+  if (authored) return authored;
+  const words = humanizeToken(value);
+  return words ? `${words.charAt(0).toUpperCase()}${words.slice(1)}` : fallback;
+}
+
+/**
+ * Humanize a slot that carries EITHER an engine token OR authored prose.
+ *
+ * ⛔ THE CHRONICLE'S TITLE IS EXACTLY THAT SLOT and it is why this exists rather
+ * than the plain humanizer: `chronicleFeed.js` fills it from
+ * `raw.title || raw.label || raw.name || raw.type || raw.kind || …`, so the same
+ * span renders an authored headline one row and a `succession_coup` token the
+ * next. Routing the whole slot through `humanizeToken` would lowercase every
+ * real headline; leaving it raw lets camelCase tokens through, which is the leak.
+ *
+ * So the token test is STRUCTURAL: anything containing whitespace is prose and is
+ * returned untouched, and a lone word with no separator and no camel hump is
+ * already a word. Only a separator-or-hump token is humanized.
+ *
+ * @param {unknown} value
+ * @param {string} [fallback]
+ * @returns {string}
+ */
+export function humanizeIfToken(value, fallback = '') {
+  const raw = String(value ?? '').trim();
+  if (!raw) return fallback;
+  if (/\s/.test(raw)) return raw;
+  if (!/[_-]/.test(raw) && !/[a-z0-9][A-Z]/.test(raw)) return raw;
+  return humanizeToken(raw);
+}
