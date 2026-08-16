@@ -11697,6 +11697,267 @@
           "tests/lint/sovereigntyLightingContract.walker.test.js"
         ]
       ]
+    },
+    {
+      "id": "GVF-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GVF-1.md",
+      "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/rawColorLiteral.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "const PURE_HEX ="
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "const isTokenSource ="
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "function countRawColorLiterals"
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "ruleTester.run('no-raw-color-literal'"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": "const BUDGET = 1405;"
+        },
+        {
+          "path": "tests/lint/rawColorLiteral.test.js",
+          "symbol": ".toBeLessThanOrEqual(BUDGET)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "both budgets are EXACT equality, and both numbers were measured at this base"
+        },
+        {
+          "id": "A2",
+          "case": "the template population has its own constant and its own assertion"
+        },
+        {
+          "id": "A3",
+          "case": "a planted literal hex in a REAL src file reds the literal arm"
+        },
+        {
+          "id": "A4",
+          "case": "a planted template hex in a REAL src file reds the template arm alone"
+        },
+        {
+          "id": "A5",
+          "case": "the template counter sees a form the literal counter cannot"
+        },
+        {
+          "id": "A6",
+          "case": "a hex inside a longer template chunk is not counted"
+        },
+        {
+          "id": "A7",
+          "case": "an unparseable source reports parsed:false rather than a clean count"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/rawColorLiteral.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GVF-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GVF-2.md",
+      "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/security/mapForkXssChain.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function codeSkeleton"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function findSkipBeforeExpect"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function findUnguardedExtractNegations"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "export function findLiteralUnionClaims"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "function inScope(rel)"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "const LITERAL_UNION_EXEMPT = Object.freeze({});"
+        },
+        {
+          "path": "tests/security/mapForkXssChain.test.js",
+          "symbol": "const CLOUD_SRC = read("
+        },
+        {
+          "path": "tests/security/mapForkXssChain.test.js",
+          "symbol": "describe('wave-2 layer E"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "'(,=:[!&|?{;}'.includes(prev)"
+        },
+        {
+          "path": "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "symbol": "if (inScope(rel)) out.push(rel);"
+        },
+        {
+          "path": "tests/security/mapForkXssChain.test.js",
+          "symbol": ".filter(line => !line.startsWith('//') && /console\\.\\w+\\(/.test(line) && /\\btoken\\b/.test(line));"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Rules 3 and 4 land in the fail-closed idiom with empty allowlists"
+        },
+        {
+          "id": "A2",
+          "case": "the fold scope covers tests/edgeFunctions, tests/build and tests/lib and is pinned wider than the base scope"
+        },
+        {
+          "id": "A3",
+          "case": "Rules 1a/1b/2 keep their triaged scope and the seven are recorded by name and rule"
+        },
+        {
+          "id": "A4",
+          "case": "the third Rule-3 instance is cured in this commit, not exempted"
+        },
+        {
+          "id": "A5",
+          "case": "each new rule fires on a planted shape and clears the cured form"
+        },
+        {
+          "id": "A6",
+          "case": "neither new rule can be forged from a shape quoted in a string or comment"
+        },
+        {
+          "id": "A7",
+          "case": "a planted Rule-4 shape in tests/edgeFunctions reds, reachable only via the widening"
+        },
+        {
+          "id": "A8",
+          "case": "the skeleton arrow fix changes no conviction anywhere in scope"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/security/mapForkXssChain.test.js",
+          "tests/edgeFunctions/sessionGateCensus.test.js",
+          "tests/build/ciCheckParity.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GVF-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/GVF-3.md",
+      "verifiedBase": "ec7443301ec74325cd051890d0e99ed452bd8ad5",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "supabase/functions/admin-actions/index.ts"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/edgeFunctions/contracts.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "supabase/functions/admin-actions/index.ts",
+          "symbol": "case \"list_users\": {"
+        },
+        {
+          "path": "supabase/functions/admin-actions/index.ts",
+          "symbol": "const rawSearch = typeof metadata?.search === \"string\""
+        },
+        {
+          "path": "tests/edgeFunctions/contracts.test.js",
+          "symbol": "describe('Tier 3.3 — admin-actions action coverage'"
+        },
+        {
+          "path": "tests/edgeFunctions/contracts.test.js",
+          "symbol": "readFunction('admin-actions')"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "supabase/functions/admin-actions/index.ts",
+          "symbol": "const search = rawSearch.replace(/[,()*\\\\]/g, \" \").trim();"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the two LIKE metacharacters cannot reach either ilike pattern"
+        },
+        {
+          "id": "A2",
+          "case": "the previously handled break-out set still cannot reach it"
+        },
+        {
+          "id": "A3",
+          "case": "the pin derives the class from source rather than replicating it"
+        },
+        {
+          "id": "A4",
+          "case": "the pin asserts the built pattern, not just that the call occurs"
+        },
+        {
+          "id": "A5",
+          "case": "the query is composed from the sanitised binding, never the raw one"
+        },
+        {
+          "id": "A6",
+          "case": "reverting the class to its pre-cure form reds the pin, naming the metacharacter"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/edgeFunctions/contracts.test.js"
+        ]
+      ]
     }
   ]
 }
