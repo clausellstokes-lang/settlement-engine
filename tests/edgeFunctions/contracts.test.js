@@ -1051,6 +1051,7 @@ describe('Tier 3.3 — admin-actions action coverage', () => {
     expect(built).toBe('email.ilike.%a b%,display_name.ilike.%a b%');
     // …and the query is built from the sanitised binding, never the raw one.
     expect(src).toMatch(/query\.or\(`email\.ilike\.%\$\{search\}%,display_name\.ilike\.%\$\{search\}%`\)/);
+    // anchored: the POSITIVE match on the line above pins the same `src` and the same .or() call, so this negative cannot pass by the source having drifted to empty or been renamed away
     expect(src).not.toMatch(/ilike\.%\$\{rawSearch\}/);
   });
 });
