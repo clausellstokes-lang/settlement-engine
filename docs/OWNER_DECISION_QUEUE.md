@@ -6241,3 +6241,23 @@ what makes fantasy believable on a surveyor's document). **TC31
 DISPATCHED: the atlas compile — an exhaustive per-entry comb of
 the REAL catalog** producing the atlas artifact every institution
 member consumes; MF-B1 notified to consume it when it lands.
+
+## §166 · THE UNDERGROUND STRATUM LAW (2026-08-16, owner: "tunnels,
+## sewers, and an undercity… a different layer of the same city")
+
+Charter §13: subterranean strata as registered folio leaves of the
+same city — everything DERIVES (cellars with density; sewers
+EARNED by order×scale×prosperity, the lawfulness dial underground;
+mine galleries at the substrate's real ore; crypts per culture
+profile; smuggling/escape tunnels from their owners, DM-LENS BY
+DEFAULT — secrets are secrets; THE UNDERCITY = the high-water/
+demotion machinery gone VERTICAL — the city standing on its own
+buried streets, event-log derived, fantasy variants world-law
+gated). THE REGISTRATION LAW: strata align to the surface frame;
+connection points render on BOTH leaves; flipping reads as
+descending through one place. Idiom: the period's own mine-survey/
+crypt-plan genres, plan-view only. Empty strata never render.
+Truth layer + inertia + drift extend below. Higgsfield reference
+set fired (owner-ordered): sewer cloaca, mine galleries, catacombs,
+the undercity. TC31 (atlas: underground components per entry) and
+MF-B1 (stratum seams noted, not built this wave) notified.
