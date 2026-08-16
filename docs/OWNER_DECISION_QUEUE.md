@@ -7500,3 +7500,31 @@ to MF-B7 same-turn.
    eight onward. Measured vs eye-estimated labeled per claim.
 3. RS-2 note: first segment live at 9ed2436c (1 worker on the
    freemem snapshot, re-derived hourly — the RS-1 caveat known).
+
+## §208 · OWNER ORDER: THE LOOK ITSELF — AND FABLE PLACED AT THE
+## MAXIMUM-IMPACT SEAT (2026-08-16; MF-A1 dispatched ON FABLE)
+
+1. **THE ORDER**: the maps must LOOK like the references — "not
+   just feel like it to a lesser degree. I want it to LOOK like
+   it." Aesthetic quality is now co-equal with urbanism in the
+   absolute bar. The charter §9 "flat washes" idiom EVOLVES under
+   this later, more specific order: toward the references' painted
+   look without losing ink-first legibility — the resolution
+   design is MF-A1's to argue.
+2. **FABLE PLACEMENT (owner: "use fable where you believe it
+   would make the most impact")**: the aesthetic closure is the
+   program's hardest open judgment problem — every structural
+   surface (censuses, topology, laws) is well-shaped for Opus
+   lanes, but the LOOK is taste-dense design. **MF-A1 runs ON
+   FABLE**: study the anchors' painted mechanics (sampled
+   palettes, edge darkening, wash pooling, grain, ink character),
+   design the layered rendering architecture, PROTOTYPE it
+   standalone over the frozen b6 exemplars (MF-B7 owns the live
+   sandbox — no collision), deliver side-by-sides vs the
+   references with measured ops/determinism/rasterizer-fidelity,
+   and an op-ceiling verdict (fits, or a measured amendment
+   proposal — chair rules). Integration is wave eight's work.
+3. MF-S1's atlas brief WIDENED same-turn: per-image aesthetic
+   notes (line quality, palette, texture, imperfection grammar),
+   mechanic-shaped, feeding MF-A1; the two lanes reconcile on
+   contact.
