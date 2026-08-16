@@ -32,7 +32,8 @@ import {
 function formatUpdatedAt(iso) {
   if (!iso) return 'never';
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? String(iso) : d.toLocaleString();
+  // §69.4: explicit locale — the bare form read the host's.
+  return Number.isNaN(d.getTime()) ? String(iso) : d.toLocaleString('en-US');
 }
 
 /**

@@ -16,6 +16,7 @@ import { useStore } from '../../store/index.js';
 import { forecastFingerprint } from '../../domain/worldPulse/forecastFingerprint.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 
 const INTERVALS = Object.freeze([
   ['one_week', 'Week'], ['one_month', 'Month'], ['one_season', 'Season'], ['one_year', 'Year'],
@@ -159,7 +160,7 @@ export default function RealmForecast({ campaign }) {
                 <div style={{ fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700 }}>
                   {m.name}
                   <span style={{ color: MUTED, fontWeight: 400, marginLeft: 8 }}>
-                    {m.populationBefore.toLocaleString()} → {m.populationAfter.toLocaleString()}
+                    {formatCount(m.populationBefore)} → {formatCount(m.populationAfter)}
                     {m.tierBefore !== m.tierAfter ? ` · ${m.tierBefore} → ${m.tierAfter}` : ''}
                   </span>
                 </div>

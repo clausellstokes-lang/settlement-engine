@@ -15,6 +15,7 @@ import { HouseDeviceSeal } from '../primitives/HouseDeviceSeal.jsx';
 import { HouseCountersealSeal } from '../primitives/HouseCountersealSeal.jsx';
 import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
+import { formatCount } from '../../domain/formatNumber.js';
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
 
@@ -147,7 +148,9 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
   const subtitle = [tier, race && cap(race), region && cap(region)].filter(Boolean).join('  ·  ');
 
   // Stat strip values
-  const popValue = num(ident.population);
+  // §69.4: `num()` returns an UNGROUPED String(Math.round(n)), so the cover read
+  // `8000` while Overview.jsx:39 in the SAME DOCUMENT read `8,000` via formatCount.
+  const popValue = formatCount(ident.population);
   const popSub = ident.tier ? `${ident.tier}-tier` : null;
 
   const prosperity = overview.prosperity || null;

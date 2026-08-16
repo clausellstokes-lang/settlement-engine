@@ -9,6 +9,7 @@ import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../gener
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 
 // Gold-as-TEXT clears AA only at the darker token (#7A5A1A, 6.16:1 on card); the
 // lighter #a0762a passes as a fill/border but FAILS as text (3.98:1). The Tag
@@ -56,7 +57,7 @@ export function TiersTab({ _search='' }) {
     </p>
     {CD.tiers.map((t)=>{
       const meta = TIER_META[t.id] || { color:GOLD, desc:'' };
-      const pop = `${t.min.toLocaleString()}–${t.max.toLocaleString()}`;
+      const pop = `${formatCount(t.min)}–${formatCount(t.max)}`;
       return (
       <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>

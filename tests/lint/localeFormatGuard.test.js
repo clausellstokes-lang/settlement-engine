@@ -66,6 +66,67 @@ describe('locale-formatting determinism guard', () => {
     expect(CALL_RE.test(codeOf(src))).toBe(false);
   });
 
+  // ── §69.4 / §113.2: THE DISPLAY TREES, AND WHY THIS IS A DIFFERENT DETECTOR ──
+  //
+  // ⛔ THE OBVIOUS EXTENSION IS THE WRONG ONE, AND IT WAS MEASURED BEFORE IT WAS
+  // REFUSED. Adding 'src/components' and 'src/pdf' to TREES above reds 33 files,
+  // and 26 of them carry only the EXPLICIT `'en-US'` renders the Wave-4h ruling
+  // expressly sanctions. That is precisely the red-a-green-tree failure §69.4
+  // exists to prevent: the display layer is where locale formatting LEGITIMATELY
+  // enters (the audit's own boundary table says so), so the sim-path ban cannot
+  // simply be widened onto it.
+  //
+  // What is forbidden on a display surface is the BARE form — no locale argument,
+  // or `undefined` as the first argument, which is the same host-locale read in a
+  // costume. That is the line the ruling actually drew: a de-DE reader was shown
+  // "8.000" where an en-US reader saw "8,000", for the same seeded world.
+  const DISPLAY_TREES = ['src/components', 'src/pdf'];
+  const BARE_CALL_RE = /\.toLocale(?:String|DateString|TimeString)\s*\(\s*(?:\)|undefined\b)/;
+
+  test('the bare-form detector discriminates (positive control): it catches the two host-locale spellings and admits the explicit one', () => {
+    // Without this the arm below reports "no offenders" identically whether the
+    // trees are clean or the regex stopped matching anything at all.
+    expect(BARE_CALL_RE.test('d.toLocaleString()')).toBe(true);
+    expect(BARE_CALL_RE.test('d.toLocaleDateString( )')).toBe(true);
+    expect(BARE_CALL_RE.test("d.toLocaleString(undefined, { dateStyle: 'medium' })")).toBe(true);
+    // …and the sanctioned form is ADMITTED, which is the half that makes this a
+    // different detector from the sim-path ban rather than a stricter one.
+    expect(BARE_CALL_RE.test("d.toLocaleString('en-US')")).toBe(false);
+    expect(BARE_CALL_RE.test("d.toLocaleString('en-US', { dateStyle: 'medium' })")).toBe(false);
+    expect(BARE_CALL_RE.test("n.toLocaleString('en-GB')")).toBe(false);
+  });
+
+  test('src/components/** + src/pdf/** contain ZERO BARE-locale calls (the explicit form stays sanctioned)', () => {
+    const offenders = [];
+    for (const tree of DISPLAY_TREES) {
+      for (const file of walkJs(join(ROOT, tree), [])) {
+        if (BARE_CALL_RE.test(codeOf(readFileSync(file, 'utf8')))) offenders.push(relative(ROOT, file));
+      }
+    }
+    expect(
+      offenders,
+      '\nA display surface reads the HOST locale, so the same seeded world renders'
+      + ' differently for different readers.\nCounts: formatCount from'
+      + " src/domain/formatNumber.js. Dates: name the locale explicitly ('en-US').\n"
+      + `${offenders.join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  test('the sanctioned EXPLICIT form is genuinely present in those trees, so the arm above is not vacuous', () => {
+    // If the display trees contained no locale formatting at all, "zero bare
+    // calls" would be true for a reason that has nothing to do with this ban —
+    // and the arm would keep passing after somebody deleted the whole class.
+    let explicit = 0;
+    for (const tree of DISPLAY_TREES) {
+      for (const file of walkJs(join(ROOT, tree), [])) {
+        const src = codeOf(readFileSync(file, 'utf8'));
+        explicit += (src.match(/\.toLocale(?:String|DateString|TimeString)\s*\(\s*'/g) || []).length;
+      }
+    }
+    expect(explicit, 'no explicit locale render survives; the bare-form ban has no subject')
+      .toBeGreaterThan(0);
+  });
+
   test('eslint.config.js bans locale formatting in the generators, domain, workers, and kernel determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
     // Each ban selector appears once per determinism block: generators + domain +

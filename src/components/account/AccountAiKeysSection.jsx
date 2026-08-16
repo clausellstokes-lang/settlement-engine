@@ -43,7 +43,9 @@ function healthMeta(health) {
 
 const inputStyle = { padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: '#fff', width: '100%', boxSizing: 'border-box' };
 const labelStyle = { fontSize: FS.xs, color: MUTED, fontFamily: sans, marginBottom: 2 };
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString() : '–');
+// §69.4: the bare form reads the HOST locale, so the same key showed a different
+// date to a de-DE reader than to an en-US one. Explicit, per the Wave-4h pin.
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString('en-US') : '–');
 
 export default function AccountAiKeysSection() {
   // Defense-in-depth: the BYOK surface is Surveyor-gated (owner ruling

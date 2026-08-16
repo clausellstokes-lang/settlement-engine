@@ -22,6 +22,7 @@ import {
 } from '../theme.js';
 import { INK as OINK } from '../../design/organic/ink.js';
 import { RUBRIC } from '../../design/organic/rubrication.js';
+import { formatCount } from '../../domain/formatNumber.js';
 
 // THE ERRATUM SLIP (Deep Craft — the dossier's correction-notice voice): the
 // "what changed" read is a rule-framed slip of corrections, not a rounded SaaS
@@ -133,9 +134,9 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
 
         {model.history.length >= 2 && (
           <div data-testid="population-arc" style={{ marginTop: SP.sm, fontSize: FS.sm, color: BODY }}>
-            <strong>Population:</strong> {popFirst.toLocaleString()} → {popLast.toLocaleString()}{' '}
+            <strong>Population:</strong> {formatCount(popFirst)} → {formatCount(popLast)}{' '}
             <span style={{ color: popChange >= 0 ? OINK.strong : RUBRIC.rubric, fontWeight: 700 }}>
-              ({popChange >= 0 ? '+' : ''}{popChange.toLocaleString()})
+              ({popChange >= 0 ? '+' : ''}{formatCount(popChange)})
             </span>
           </div>
         )}

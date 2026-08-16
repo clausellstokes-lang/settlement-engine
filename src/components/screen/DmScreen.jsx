@@ -29,6 +29,7 @@ import TableLedgerPanel from '../tableLedger/TableLedgerPanel.jsx';
 import AuspicePanel from '../auspice/AuspicePanel.jsx';
 import TemperamentPicker from '../temperament/TemperamentPicker.jsx';
 import ChroniclersLetterPanel from '../map/ChroniclersLetterPanel.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM view' },
@@ -49,7 +50,7 @@ function DossierSummary({ view, audience }) {
       <div style={{ fontFamily: serif_, fontSize: FS.xl, color: INK, marginBottom: SP.xs }}>{name}</div>
       <div style={{ display: 'flex', gap: SP.md, flexWrap: 'wrap', fontFamily: sans, fontSize: FS.sm, color: BODY }}>
         {tier && <span><strong style={{ color: GOLD_DEEP }}>{tier}</strong></span>}
-        {population != null && <span>{Number(population).toLocaleString()} souls</span>}
+        {population != null && <span>{formatCount(population)} souls</span>}
         <span>{institutions} institutions</span>
         <span>{npcs} named folk</span>
       </div>

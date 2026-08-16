@@ -39,7 +39,8 @@ function formatSignedInAt(iso) {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return null;
-    return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+    // §69.4: `undefined` as the first argument IS the host-locale read, in a costume.
+    return d.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
   } catch { return null; }
 }
 
