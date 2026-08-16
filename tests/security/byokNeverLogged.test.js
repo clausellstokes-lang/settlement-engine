@@ -17,6 +17,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { sinkStatementOffenders, sinkLineOffendersBlind } from '../helpers/sourceContract.js';
 
 const ROOT = resolve(process.cwd());
 const AI_DIR = join(ROOT, 'supabase/functions/ai-analyst');
@@ -26,17 +27,18 @@ const SINK_RE = /console\.\w+\(|logError\(|\.insert\(|write_ai_operation_log|ai_
 // — only the KEY material is forbidden on a sink.
 const KEY_CARRIER_RE = /providerKey\.key\b|resolveProviderKey|surveyor_byok_get|pgp_sym_decrypt/;
 
-function lines(path) {
-  return readFileSync(path, 'utf8').split('\n');
-}
-
 describe('BYOK — the decrypted key is never logged', () => {
   for (const file of ['byok.ts', 'index.ts']) {
-    it(`${file}: no log/telemetry sink line references the decrypted key`, () => {
-      const offenders = [];
-      lines(join(AI_DIR, file)).forEach((line, i) => {
-        if (SINK_RE.test(line) && KEY_CARRIER_RE.test(line)) offenders.push(`${file}:${i + 1}: ${line.trim()}`);
-      });
+    it(`${file}: no log/telemetry sink STATEMENT references the decrypted key`, () => {
+      // STATEMENT-granular, never per physical line. A per-line conjunction requires
+      // the sink and the key carrier to appear on ONE line, and prettier's multi-line
+      // call form — the LIKELY shape for a long argument list, which is exactly the
+      // shape a leaked secret travels in — puts them on different lines. The window
+      // is bounded by the call's own brackets, so it restores the dimension without
+      // widening the claim into a neighbouring statement.
+      const offenders = sinkStatementOffenders(
+        readFileSync(join(AI_DIR, file), 'utf8'), SINK_RE, KEY_CARRIER_RE, file,
+      );
       expect(offenders).toEqual([]);
     });
   }
@@ -97,12 +99,16 @@ describe('BYOK — the key never leaks through the management surface (#29)', ()
   const SINK_RE2 = /console\.\w+\(|logError\(|\.insert\(|\.rpc\(|write_ai_operation_log|surveyor_byok_set_health|ai_usage_events\b/;
   const KEY_RE2 = /providerKey\.key\b|\bapiKey\b|surveyor_byok_get|pgp_sym_decrypt/;
 
-  it('surveyor-byok/index.ts: no log/telemetry/rpc sink line references the decrypted key', () => {
-    const offenders = [];
-    readFileSync(join(ROOT, 'supabase/functions/surveyor-byok/index.ts'), 'utf8')
-      .split('\n').forEach((line, i) => {
-        if (SINK_RE2.test(line) && KEY_RE2.test(line)) offenders.push(`${i + 1}: ${line.trim()}`);
-      });
+  it('surveyor-byok/index.ts: no log/telemetry/rpc sink STATEMENT references the decrypted key', () => {
+    // THE SAME CURE, THE SAME LAW. This management surface carried the identical
+    // per-physical-line conjunction as the ai-analyst loop above, so curing only the
+    // loop would have left the BYOK management path blind to the exact prettier form
+    // the cure exists to catch — and the anti-vacuity fold's same-line rule would
+    // then convict a file this train had just "fixed".
+    const offenders = sinkStatementOffenders(
+      readFileSync(join(ROOT, 'supabase/functions/surveyor-byok/index.ts'), 'utf8'),
+      SINK_RE2, KEY_RE2, 'surveyor-byok/index.ts',
+    );
     expect(offenders).toEqual([]);
   });
 
@@ -127,5 +133,63 @@ describe('BYOK — the key never leaks through the management surface (#29)', ()
     const src = readFileSync(join(AI_DIR, 'providerErrors.ts'), 'utf8');
     expect(/\bDeno\./.test(src)).toBe(false);
     expect(/apiKey|providerKey|pgp_sym|surveyor_byok_get/.test(src)).toBe(false);
+  });
+});
+
+// ── ANTI-VACUITY CONTROLS (§75 idiom) ──────────────────────────────────────────────
+// ⛔ THE SCANS ABOVE ASSERT A UNIVERSALLY QUANTIFIED NEGATIVE, so a green run proves
+// nothing on its own: an offender list is empty both when the estate is clean and
+// when the scan has gone blind. These arms make the difference observable. The
+// discriminating pair is the whole point — the multi-line fixture MUST be caught by
+// the statement scan and MUST be missed by the per-physical-line shape the cure
+// replaced. If a future edit narrows the window back to one line, the first arm reds
+// and the second one names exactly what was lost.
+describe('BYOK — the never-logged scan is statement-granular (anti-vacuity controls)', () => {
+  // Prettier's own output shape for a call whose arguments do not fit one line.
+  const MULTILINE_OFFENDER = [
+    'const safe = 1;',
+    'console.log(',
+    '  "byok lookup failed",',
+    '  providerKey.key,',
+    ');',
+  ].join('\n');
+  const SINGLE_LINE_OFFENDER = 'console.log("byok", providerKey.key);';
+  // A sink and a carrier that genuinely never meet: two separate statements.
+  const CLEAN_SOURCE = [
+    'console.log("no secret here");',
+    'const material = providerKey.key;',
+  ].join('\n');
+
+  it('POSITIVE CONTROL — a sink whose key argument sits on a LATER line is caught', () => {
+    const offenders = sinkStatementOffenders(MULTILINE_OFFENDER, SINK_RE, KEY_CARRIER_RE, 'fixture.ts');
+    expect(offenders).toHaveLength(1);
+    expect(offenders[0]).toContain('fixture.ts:2');
+    expect(offenders[0]).toContain('console.log(');
+  });
+
+  it('MUTANT CONTROL — the pre-cure per-physical-line scan MISSES that same fixture', () => {
+    // This is the defect, executed. It is what makes the arm above discriminating
+    // rather than decorative, and it is why the cure is not cosmetic.
+    expect(sinkLineOffendersBlind(MULTILINE_OFFENDER, SINK_RE, KEY_CARRIER_RE)).toEqual([]);
+  });
+
+  it('POSITIVE CONTROL — the single-line dimension the old scan already had survives', () => {
+    const offenders = sinkStatementOffenders(SINGLE_LINE_OFFENDER, SINK_RE, KEY_CARRIER_RE, 'fixture.ts');
+    expect(offenders).toHaveLength(1);
+    expect(offenders[0]).toContain('fixture.ts:1');
+    // …and the blind shape DOES catch this one, so the mutant control above is
+    // proving a real difference and not simply that the blind scan never fires.
+    expect(sinkLineOffendersBlind(SINGLE_LINE_OFFENDER, SINK_RE, KEY_CARRIER_RE)).toHaveLength(1);
+  });
+
+  it('NEGATIVE CONTROL — a sink and a carrier in SEPARATE statements are not flagged', () => {
+    // The window must be bounded by the statement, or the cure would trade a blind
+    // spot for a false-positive machine and get narrowed back within a wave.
+    expect(sinkStatementOffenders(CLEAN_SOURCE, SINK_RE, KEY_CARRIER_RE, 'fixture.ts')).toEqual([]);
+  });
+
+  it('FAIL-CLOSED — an empty source throws instead of reporting a clean scan', () => {
+    // "no offenders" and "nothing was scanned" must never be the same value.
+    expect(() => sinkStatementOffenders('', SINK_RE, KEY_CARRIER_RE, 'fixture.ts')).toThrow(/empty or not a string/);
   });
 });

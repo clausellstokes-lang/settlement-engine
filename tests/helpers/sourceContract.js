@@ -210,3 +210,109 @@ export function sqlRegexAlternation(sql) {
   if (alts.length === 0) throw new Error('sourceContract.sqlRegexAlternation: zero alternatives (vacuous)');
   return alts;
 }
+
+/**
+ * The STATEMENT WINDOW a source offset belongs to: from the start of its physical
+ * line forward to the close of whatever brackets that line opens, plus the rest of
+ * the statement.
+ *
+ * WHY THIS EXISTS. A source scan that requires two patterns to match ONE PHYSICAL
+ * LINE goes blind the moment a formatter splits the call — and prettier's
+ * multi-line call form is the LIKELY shape for a long argument list, which is
+ * exactly the shape a leaked secret travels in. `console.log(` on one line and
+ * `providerKey.key,` on the next satisfies neither half of a per-line conjunction,
+ * so the guard passes while the leak ships.
+ *
+ * The window is bounded by the line's OWN brackets, so it can never sweep in an
+ * unrelated neighbouring statement: a balanced call closes and the scan stops at
+ * the terminator. That is what makes this a restored dimension rather than a
+ * widened claim.
+ *
+ * @param {string} src
+ * @param {number} index  any offset inside the line the window should start at
+ * @returns {string} the statement text, starting at that line's first column
+ */
+export function statementWindowAt(src, index) {
+  if (typeof src !== 'string') throw new Error('sourceContract.statementWindowAt: source is not a string');
+  if (!Number.isInteger(index) || index < 0 || index >= src.length) {
+    throw new Error(`sourceContract.statementWindowAt: offset ${index} is outside the source`);
+  }
+  const start = src.lastIndexOf('\n', index) + 1;
+  let depth = 0;
+  let cursor = start;
+  for (; cursor < src.length; cursor += 1) {
+    const ch = src[cursor];
+    if (ch === '(' || ch === '[' || ch === '{') depth += 1;
+    else if (ch === ')' || ch === ']' || ch === '}') depth = Math.max(0, depth - 1);
+    else if (ch === ';' && depth === 0) { cursor += 1; break; }
+    else if (ch === '\n' && depth === 0) break;
+  }
+  return src.slice(start, cursor);
+}
+
+/**
+ * STATEMENT-GRANULAR sink × carrier scan. For every line that matches `sinkRe`,
+ * test `carrierRe` over that line's whole STATEMENT window. Returns one
+ * `label:line: text` row per offending statement.
+ *
+ * Fail-closed like every other extractor here: an empty source or a non-RegExp
+ * pattern throws rather than returning an empty offender list, because "no
+ * offenders" and "nothing was scanned" must never be the same value.
+ *
+ * @param {string} src
+ * @param {RegExp} sinkRe      the logging/telemetry sink pattern
+ * @param {RegExp} carrierRe   the forbidden-value carrier pattern
+ * @param {string} label       file label for the offender rows
+ * @returns {string[]}
+ */
+export function sinkStatementOffenders(src, sinkRe, carrierRe, label) {
+  const ctx = label || 'sinkStatementOffenders';
+  if (typeof src !== 'string' || src.length === 0) {
+    throw new Error(`sourceContract.sinkStatementOffenders: source is empty or not a string (${ctx})`);
+  }
+  if (!(sinkRe instanceof RegExp) || !(carrierRe instanceof RegExp)) {
+    throw new Error(`sourceContract.sinkStatementOffenders: both patterns must be RegExp (${ctx})`);
+  }
+  const scan = new RegExp(sinkRe.source, sinkRe.flags.includes('g') ? sinkRe.flags : `${sinkRe.flags}g`);
+  const carrier = new RegExp(carrierRe.source, carrierRe.flags.replace('g', ''));
+  const offenders = [];
+  const seenLines = new Set();
+  let match = scan.exec(src);
+  while (match !== null) {
+    if (match[0] === '') { scan.lastIndex += 1; match = scan.exec(src); continue; }
+    const lineStart = src.lastIndexOf('\n', match.index) + 1;
+    if (!seenLines.has(lineStart) && carrier.test(statementWindowAt(src, match.index))) {
+      seenLines.add(lineStart);
+      const lineEnd = src.indexOf('\n', lineStart);
+      const text = src.slice(lineStart, lineEnd === -1 ? src.length : lineEnd).trim();
+      offenders.push(`${ctx}:${src.slice(0, lineStart).split('\n').length}: ${text}`);
+    }
+    match = scan.exec(src);
+  }
+  return offenders;
+}
+
+/**
+ * ⛔ DELIBERATELY BLIND. The PRE-CURE per-physical-line conjunction, kept as an
+ * executable record of the dimension `sinkStatementOffenders` restored.
+ *
+ * It exists for ONE purpose: a cure's control arm can plant a multi-line offender,
+ * assert the statement scan catches it, and assert THIS returns nothing — which is
+ * what makes the pair discriminating rather than decorative. If a future edit
+ * narrows the window back to one physical line, the control arm above it stops
+ * passing and the loss is named instead of silent.
+ *
+ * ⛔ NEVER call this from a live guard. It is the defect, preserved on purpose.
+ *
+ * @param {string} src
+ * @param {RegExp} sinkRe
+ * @param {RegExp} carrierRe
+ * @returns {string[]} the offending physical lines, trimmed
+ */
+export function sinkLineOffendersBlind(src, sinkRe, carrierRe) {
+  if (typeof src !== 'string') throw new Error('sourceContract.sinkLineOffendersBlind: source is not a string');
+  const sink = new RegExp(sinkRe.source, sinkRe.flags.replace('g', ''));
+  const carrier = new RegExp(carrierRe.source, carrierRe.flags.replace('g', ''));
+  return src.split('\n').map((line) => line.trim())
+    .filter((line) => sink.test(line) && carrier.test(line));
+}
