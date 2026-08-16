@@ -917,8 +917,17 @@ export async function handleAdminActions(
           ? metadata.search.trim()
           : "";
         // Strip PostgREST logical-filter metacharacters so caller-supplied search
-        // can't break out of the .or() expression (commas/parens/operator tokens).
-        const search = rawSearch.replace(/[,()*\\]/g, " ").trim();
+        // can't break out of the .or() expression (commas/parens/operator tokens),
+        // AND the two SQL LIKE wildcards, which are not break-out characters but turn
+        // an intended LITERAL substring search into a pattern-matching oracle: `%`
+        // matches any run and `_` any single character, so an elevated admin could probe
+        // the profile table for email shapes instead of searching for a string they
+        // already hold. `*` was already stripped because PostgREST accepts it as an
+        // alias for `%`; `%` and `_` reach the pattern untouched and were the gap.
+        // ⚠ Behaviour: a literal `_` in a search no longer matches (it becomes a space),
+        // the same cost `*` has always carried here. Deliberate — the box is a literal
+        // substring search, and PostgREST's ilike exposes no in-value escape.
+        const search = rawSearch.replace(/[,()*\\%_]/g, " ").trim();
 
         // A3: REDACTED BY DEFAULT. Select an explicit non-PII column set — never
         // `select("*")` (which leaked raw email + stripe_customer_id to every

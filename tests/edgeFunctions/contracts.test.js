@@ -1032,6 +1032,27 @@ describe('Tier 3.3 — admin-actions action coverage', () => {
   it('update_user_credits coerces credits to integer (defence vs string injection)', () => {
     expect(src).toMatch(/parseInt\s*\(\s*String\(credits\)/);
   });
+
+  it('list_users strips LIKE wildcards so search cannot become a pattern oracle', () => {
+    // The sanitiser's OWN character class is DERIVED from the source and executed here. A
+    // hand-copied replica would mirror the deriver and could never see the producer drift
+    // away from it — which is the exact vacuity this suite exists to prevent.
+    const decl = src.match(/const search = rawSearch\.replace\(\/\[([^\]]*)\]\/g, " "\)/);
+    expect(decl, 'the list_users sanitiser is present in its expected shape').toBeTruthy();
+    const strip = (value) => value.replace(new RegExp(`[${decl[1]}]`, 'g'), ' ').trim();
+
+    // Both LIKE metacharacters, plus the break-out set that was already handled.
+    for (const meta of ['%', '_', ',', '(', ')', '*', '\\']) {
+      expect(strip(`a${meta}b`), `"${meta}" must not reach the ilike pattern`).toBe('a b');
+    }
+    // THE BUILT PATTERN, not merely the call: nothing the caller supplied survives as a
+    // wildcard on either side of the .or().
+    const built = `email.ilike.%${strip('%a_b%')}%,display_name.ilike.%${strip('%a_b%')}%`;
+    expect(built).toBe('email.ilike.%a b%,display_name.ilike.%a b%');
+    // …and the query is built from the sanitised binding, never the raw one.
+    expect(src).toMatch(/query\.or\(`email\.ilike\.%\$\{search\}%,display_name\.ilike\.%\$\{search\}%`\)/);
+    expect(src).not.toMatch(/ilike\.%\$\{rawSearch\}/);
+  });
 });
 
 describe('Tier 3.3 — admin-actions audit trail (Phase 5 migration 009)', () => {
