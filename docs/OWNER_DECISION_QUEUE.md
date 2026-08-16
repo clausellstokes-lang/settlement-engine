@@ -5073,3 +5073,28 @@ gallery-seeding lane offer stands.
    recollection.
 3. Realism-for-purpose re-grades **A− → A** (one opportunity
    deleted as already-built, the other narrowed to one arm).
+
+## §136 · THE CONTAGION DIRECTIVE — VERIFY THEN BUILD (owner,
+## 2026-08-16, verbatim design recorded; lane PG-C dispatched)
+
+1. **The order**: comprehensively re-verify contagion-on-arrival
+   (the §135.2 narrowed arm); IF ABSENT, BUILD IT with the owner's
+   design: settlements with priests, healing, good prosperity, and
+   order gain RESISTANCE to incoming plague AND SHORTER outbreak
+   duration; and BELIEF-BASED REFUSAL at the gates — groups from
+   settlements BELIEVED plagued may be refused entry per the §46c
+   refusal machinery (a stale belief refusing a now-clean caravan is
+   correct fiction, not a bug); "amongst other coherences."
+2. **The design's constitutional fits, recorded**: all values as
+   HEURISTIC BANDS per §131 (no real epidemiology — banded severity,
+   banded resistance); the refusal mounts on C-POPF-2's reception
+   contract and the believedConditions plane; refusals mint news and
+   the §46d caravan chains carry plague word; the §128 pin interplay
+   already ruled; the candidate coherences (rerouting on plague
+   belief, trade avoidance, quarantine-as-stance) priced not
+   scope-crept, quarantine flagged OWNER-VALUE if it needs a verb.
+3. Lane PG-C runs the exhaustive census FIRST (the §135 lesson:
+   grep, never recall — this is the second pass, so it errs toward
+   over-search) and charters ONLY the absent arms; the pg family
+   slots beside cn in the family-train tail, after POP's reception
+   producer, its flag dark with byte-identity proof.
