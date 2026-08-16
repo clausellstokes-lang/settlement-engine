@@ -10259,5 +10259,171 @@
           "tests/pdf/fullPdf.render.test.jsx"
         ]
       ]
+    },
+    {
+      "id": "DA-A3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-A3.md",
+      "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlements/relationshipColors.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlements/SettlementCard.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/SettlementDetail.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/new/neighbourComponents.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/new/tabs/RelationshipsTab.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/utils/generateCampaignPDF.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/theme.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/sections/Relationships.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/relationshipEdgeCriminalNetwork.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/components/settlementCardSignals.test.jsx"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/settlements/relationshipColors.js",
+          "symbol": "export function relColor"
+        },
+        {
+          "path": "src/components/settlements/relationshipColors.js",
+          "symbol": "export function relRgb"
+        },
+        {
+          "path": "src/components/settlements/relationshipColors.js",
+          "symbol": "export const REL_RGB"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "no converged surface keeps a relationship colour table of its own, read from SOURCE, and every one of the seven reaches the canonical module"
+        },
+        {
+          "id": "A2",
+          "case": "REL_HEX and REL_RGB are each a bijection with the ten canonical relationship types"
+        },
+        {
+          "id": "A3",
+          "case": "every canonical type resolves to a DISTINCT hue - no two relationships render alike"
+        },
+        {
+          "id": "A4",
+          "case": "allied does not resolve to trade_partner's hue: the semantic error the react-PDF chapter rendered"
+        },
+        {
+          "id": "A5",
+          "case": "vassal and criminal_network stop resolving to the neutral fallback on every surface"
+        },
+        {
+          "id": "A6",
+          "case": "the hex and rgb channels agree type for type, so the PDF cannot drift from the web"
+        },
+        {
+          "id": "A7",
+          "case": "secret_alliance keeps its authored PDF label and gains no palette row"
+        },
+        {
+          "id": "A8",
+          "case": "the re-fork detector catches a seeded hex table and a seeded rgb triple, and stays quiet on an effect-category list and a dash pattern"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/relationshipEdgeCriminalNetwork.test.js",
+          "tests/domain/relationshipEdgeSeed.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/pdf/fullPdf.render.test.jsx",
+          "tests/pdf/pdfParityFixes.test.js",
+          "tests/lint/rawColorLiteral.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "DA-A4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/display-adoption/DA-A4.md",
+      "verifiedBase": "1596b16590216e8a4f5330696689b0f7d595ef38",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlement/VersionDiffView.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlement/VersionsTab.jsx"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/settlement/VersionDiffView.jsx",
+          "symbol": "function stamp(ts)"
+        },
+        {
+          "path": "src/components/settlement/VersionsTab.jsx",
+          "symbol": "function formatTs(ts)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "both version surfaces render their timestamp in the measured dominant en-US convention"
+        },
+        {
+          "id": "A2",
+          "case": "no explicit en-GB render survives anywhere in src"
+        },
+        {
+          "id": "A3",
+          "case": "the option bags are untouched, so only field order and separators move"
+        },
+        {
+          "id": "A4",
+          "case": "the 20 sanctioned explicit en-US sites are not touched"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/versionDiffView.test.jsx",
+          "tests/lint/localeFormatGuard.test.js"
+        ]
+      ]
     }  ]
 }
