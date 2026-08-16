@@ -6030,3 +6030,18 @@ per-year animation — the thesis as a shareable artifact),
 deferrable with cause. Sequencing unchanged: mf still executes
 after the §27 queue, lands dark, gates nothing in the soak program.
 TC29 notified (#10).
+
+## §161j · THE MAP DECISION RULE (2026-08-16, owner: "reconcile
+## between historical evidence and the absolute best possible
+## product regardless of risk")
+
+Charter §0.0, governing every mf decision at every lane: HISTORY IS
+THE ORACLE, the best-product reading of the evidence beats the
+cheap/safe/expedient reading, and implementation risk is never a
+veto — a harder-but-truer mechanism wins wherever it diverges from
+an easier approximation. Surviving boundaries: BY-NATURE owner
+gates (tuning signature, ratchet raises, pushes), determinism, THE
+PROMISE, and §8 coherence are ground, not risk. This specializes
+the standing owner risk-appetite directive to the map program;
+TC29 notified (#11) — its open questions resolve under this rule
+with recorded reconciliations.
