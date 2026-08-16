@@ -6217,3 +6217,27 @@ and world map must agree; (b) neighbor edges render ONLY once the
 campaign link exists — no speculative names, no placeholder
 annotations; the edge is born when the link is, and §11 drift
 renders its arrival. TC30 (compiling that member now) notified.
+
+## §165 · THE INSTITUTION ATLAS ORDERED (2026-08-16, owner: "comb
+## through all of the institutions and decide their shape(s)…
+## several different forges can exist in a city all with different
+## shapes and level of success")
+
+Charter §6 gains THE INSTITUTION ATLAS LAW + four sub-laws: THE
+VARIANT LAW (2-4 seeded shape variants per landmark-capable entry —
+two forges never identical; per-instance pick, inertia-stable) ·
+THE SUCCESS LAW (per-instance prosperity, dossier-derived or
+seeded in the settlement's band — the thriving forge vs the
+struggling one, visible; drifts under §11.4) · THE DISPERSION LAW
+(CLUSTERED with historical warrant / DISPERSED through the matrix —
+multiplicity never auto-centralizes; bakers and smithies spread
+all around; dispersed classes never auto-found districts) · THE
+FANTASTICAL LAW (fantasy entries obey the same functional
+derivation, world-law gated: airship dock = edge-ring mast tower on
+open ground; teleportation circle = warded precinct sited by the
+lawfulness dial; dragon dwelling = OUTLYING by nature with its
+approach and tribute ground; no exemption from function — that is
+what makes fantasy believable on a surveyor's document). **TC31
+DISPATCHED: the atlas compile — an exhaustive per-entry comb of
+the REAL catalog** producing the atlas artifact every institution
+member consumes; MF-B1 notified to consume it when it lands.
