@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 195;
+export const MIGRATION_TRAIN_REPO_HEAD = 196;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -353,6 +353,33 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'table', name: 'public.civility_allow' }),
       Object.freeze({ kind: 'function', name: 'civility_normalize' }),
       Object.freeze({ kind: 'function', name: 'civility_blocked' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'simulation-metrics-storage',
+    from: 196,
+    to: 196,
+    purpose: 'The SIMULATION metric class gets its own PII-free-by-schema table, a '
+      + 'service-role loader and a run-scoped rollup. Nothing in the running product '
+      + 'reads or writes it: the rows are engine evidence produced by the diagnostic '
+      + 'soak harness, so this wave exposes no user-facing subsystem at all.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'No down script is shipped, and that is a decision rather than an omission: the '
+        + 'only reversal is DROP TABLE public.world_sim_metrics, which destroys the '
+        + 'accumulated engine evidence the table exists to hold. Reversing this wave is '
+        + 'therefore a data-destroying act and must be a reviewed, deliberate one.',
+        'A forward fix is cheap by construction. No running code path reads the table, '
+        + 'so a defect here cannot degrade any product surface — it can only make the '
+        + 'next soak load fail loudly, which is the direction that gets noticed.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'table', name: 'public.world_sim_metrics' }),
+      Object.freeze({ kind: 'function', name: 'load_sim_metrics' }),
+      Object.freeze({ kind: 'function', name: 'rollup_sim_metrics' }),
     ]),
   }),
 ]);
