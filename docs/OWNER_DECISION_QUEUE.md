@@ -6583,3 +6583,39 @@ member becomes a solver, not a lookup.
    its receipt must grade every exemplar's absolute distance
    per-reference, and iteration continues until the distance
    closes or the honest blocker is named with diagnosis.
+
+## §180 · TE27 COLLECTED — tm-core LANDED GREEN; THE 26th EXPOSURE;
+## TE28 DISPATCHED ON THE HARNESS (2026-08-16, chair)
+
+1. **tm-core LANDED GREEN and EXPOSED: CAS 6b337fb1 → 0cbb0177**
+   (ancestry verified; 15 commits; terminal: check:tail + gate-tail
+   smoke:boot both exit 0; packets 101/0; ratchets 173/173 +
+   1134/1134; 28,359 tests / 11 known; the +1 census delta RUN DOWN
+   not assumed — migration 196 auto-enrolled world_sim_metrics in
+   the estate RLS census, passing). §117a's launch-blocking half is
+   LANDED: collection machinery exists from first launch.
+2. **J-TE27-0 RATIFIED** (the clean stop before sk-a — the
+   J-TE26-9 class; every sk path free at 101/0). Build findings
+   banked: the decade-epoch refutation (receipt-field arity table
+   makes never-resamples checkable); the import-closure
+   double-guard; the empty-by-measurement exemption manifest; ⚠ A
+   MIGRATION MINT CARRIES FIVE UNPRICED OBLIGATIONS + a rot risk
+   (the anti-amnesty arm froze the previous head's filename —
+   de-rotted with control; memory-worthy).
+3. **RULINGS:** (a) the address-chain experience band, refused by
+   TE27 with the price named (a receipt field edits scripts/audit,
+   moving the certification fingerprint), is ADOPTED INTO sk-b's
+   whole-world-soak extension member — that member ALREADY moves
+   the fingerprint declared-not-silent (SA-1 Block 9), so both
+   changes ride ONE declared move; (b) the referral loop's
+   structural blindness (migration 107 ships, nothing emits) joins
+   the tm CLIENT train's scope + the owner batch as a product
+   note; (c) sim_narration_tempo lands as SK-5's experience family
+   per the rider.
+4. **TE28 DISPATCHED: sk-a → sk-b** (the §141/§143 harness — the
+   soak gate's other half) from laneTC28-SK-PLAN.md + TE27's §9
+   inheritances (TM-1W already discharged the scripts/soak roots
+   obligation; bandFamilies() is SK-5's seam) + the §149 rulings
+   (SK.U1 two-year probe at sk-b's terminal). After sk lands: uf-1
+   → EP stage one → the §151.4 order; the FIRST ROLLING SOAK arms
+   at the first family exposure after sk (§146.3).
