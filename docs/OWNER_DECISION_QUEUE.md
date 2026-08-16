@@ -5882,3 +5882,20 @@ neighbour link sets the main road's true exit bearing. "A
 settlement's land must be the land its own economy could have grown
 from" — the consistency pin covers every input, not terrainType
 alone. Charter amended in place; TC29 already carries §5.-1.
+
+## §161b · THE TERRAFORMING LAW (2026-08-16, owner: "terraforming
+## happens and is allowed at higher tiers to a bounded appropriate
+## extent")
+
+Charter §5.-1.6b: after growth establishes need, higher tiers EDIT
+the substrate within tier×prosperity×age budget bands (none below
+town; modest at town; substantial at city; monumental-but-bounded
+at metropolis) — drained marsh with visible ditch grids, leveled
+market terraces, mill races and canals, causeways, terraced slopes,
+moats, quarry scars. THE VISIBLE-WORK RULE: every terraform leaves
+its workings legible in ink (ditches, terrace walls, revetments) —
+land must look WORKED, never conveniently reshaped; an invisible
+edit reds the consistency pin. Terraforming interleaves growth
+(drain, then grow onto reclaimed ground at a newer grain).
+Deterministic; budget bands carry derivation homes. TC29 carries
+it with the §161/§161a redirect.
