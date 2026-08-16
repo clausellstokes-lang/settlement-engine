@@ -26,6 +26,13 @@ vi.mock('../../src/store/index.js', () => ({
 vi.mock('../../src/domain/worldPulse/forecastRun.js', () => ({
   simulatePendingFuture: harness.simulatePendingFuture,
   forecastDigest: harness.forecastDigest,
+  // MB-1: the pane now builds a worker-backed runner and hands it to the forecast. This mock
+  // must offer the export or the pane throws before it renders anything — but the runner it
+  // returns is NEVER exercised here, because simulatePendingFuture is itself mocked.
+  // ⛔ THIS SUITE THEREFORE PROVES NOTHING ABOUT THE TRANSPORT SEAM and may never be cited as
+  // evidence for it; the byte-identity proof lives in tests/domain/advanceWorkerByteIdentity.test.js.
+  // It stays exactly what it was: the epistemic-boundary copy guard.
+  workerBackedRunner: () => harness.simulatePendingFuture,
 }));
 
 import RealmForecast from '../../src/components/map/RealmForecast.jsx';

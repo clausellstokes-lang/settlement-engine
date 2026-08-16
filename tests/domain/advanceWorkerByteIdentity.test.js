@@ -173,3 +173,62 @@ describe('V-8 byte-identity — the thread boundary preserves the world', () => 
     }
   });
 });
+
+// ── MB-1: the FORECAST takes the same seam, and its neutrality is proven by BYTES ──────────
+//
+// simulatePendingFuture gained an injected `runInterval` defaulting to the in-thread
+// orchestrator. "Byte-identical by construction" is an architectural claim, and an architectural
+// claim about an ENGINE seam is exactly the one this batch may not take on faith — so it is
+// executed here instead, against the same pinned seed and pinned `now` the pins above use.
+describe('MB-1 — the forecast transport seam is byte-neutral', () => {
+  test('injecting a runner that clones across the boundary === the default in-thread forecast', async () => {
+    const { simulatePendingFuture } = await import('../../src/domain/worldPulse/forecastRun.js');
+    const forecastArgs = () => ({
+      ...buildFixture(), interval: 'one_month', now: NOW,
+    });
+
+    // DEFAULT PATH — no runInterval supplied, so the default parameter is what runs.
+    const viaDefault = await simulatePendingFuture(forecastArgs());
+    // INJECTED PATH — the real transport boundary, modeled exactly as the worker double above:
+    // the payload is cloned in, the REAL sim runs, the result is cloned out.
+    const viaInjected = await simulatePendingFuture({
+      ...forecastArgs(),
+      runInterval: async (payload) => structuredClone(
+        await simulateCampaignWorldInterval(structuredClone(payload)),
+      ),
+    });
+
+    // The forecast actually did work — otherwise two empty runs would match for free.
+    expect(viaDefault.result.status).toBe('complete');
+    expect(viaDefault.result.worldState.tick).toBeGreaterThan(0);
+
+    expect(viaInjected.result.worldState).toEqual(viaDefault.result.worldState);
+    expect(JSON.stringify(viaInjected.result)).toBe(JSON.stringify(viaDefault.result));
+    expect(viaInjected.drainedCount).toBe(viaDefault.drainedCount);
+  });
+
+  test('runRealmForecast threads the injected runner through BOTH internal calls', async () => {
+    // THE DOUBLE-INTERNAL-CALLER TRAP. runRealmForecast calls simulatePendingFuture twice —
+    // baseline and counterfactual. Threading only the baseline leaves the candidate run on the
+    // main thread, and NOTHING about the returned value would show it: both paths compute the
+    // same bytes. Only counting the runner's invocations can see it, so that is what this counts.
+    const { runRealmForecast } = await import('../../src/domain/worldPulse/forecastRun.js');
+    let calls = 0;
+    const counting = async (payload) => { calls += 1; return simulateCampaignWorldInterval(payload); };
+    const base = {
+      ...buildFixture(), interval: 'one_month', now: NOW,
+    };
+
+    calls = 0;
+    await runRealmForecast({ ...base, runInterval: counting });
+    expect(calls, 'baseline only: the injected runner runs the one forecast').toBe(1);
+
+    calls = 0;
+    await runRealmForecast({
+      ...base,
+      candidate: { saveId: 'a', event: { id: 'e1', title: 'A staged order', kind: 'decree' } },
+      runInterval: counting,
+    });
+    expect(calls, 'with a candidate: BOTH the baseline and the counterfactual run on the seam').toBe(2);
+  });
+});

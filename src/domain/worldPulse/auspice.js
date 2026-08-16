@@ -79,10 +79,11 @@ export function composeOmen(run) {
  * engine, tier the result, discard the clone. Async (the orchestrator yields).
  * Zero-trace + deterministic (see the module header). Returns the omen only —
  * the discarded run never escapes.
- * @param {{ campaign: Mut, saves?: Mut[], interval?: string, weeks?: number|null, now: string }} io
+ * @param {{ campaign: Mut, saves?: Mut[], interval?: string, weeks?: number|null, now: string,
+ *   runInterval?: (payload: any) => Promise<any> }} io
  * @returns {Promise<ReturnType<typeof composeOmen>>}
  */
-export async function readAuspices({ campaign, saves = [], interval = 'one_season', weeks = null, now }) {
-  const run = await simulatePendingFuture({ campaign, saves, interval, weeks, now });
+export async function readAuspices({ campaign, saves = [], interval = 'one_season', weeks = null, now, runInterval = undefined }) {
+  const run = await simulatePendingFuture({ campaign, saves, interval, weeks, now, ...(runInterval ? { runInterval } : {}) });
   return composeOmen(run);
 }

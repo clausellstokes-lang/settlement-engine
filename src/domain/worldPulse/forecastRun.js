@@ -37,6 +37,21 @@ import { forecastFingerprint } from './forecastFingerprint.js';
 export { forecastFingerprint } from './forecastFingerprint.js';
 
 /**
+ * Build a runner that sends the interval through the Web Worker transport, falling back to the
+ * in-thread orchestrator on Node/SSR or any infrastructural worker failure.
+ *
+ * ⛔ THE TRANSPORT IS INJECTED, NOT IMPORTED. Taking `runAdvanceInterval` as a parameter keeps this
+ * module free of any static edge to `src/lib/`, which is what preserves the store slice's
+ * "no top-level worldPulse edge" invariant and is why this seam mints no coupling-registry row.
+ * The caller (a UI) already owns both halves and simply hands them to each other.
+ * @param {(payload: any, opts: any) => Promise<any>} runAdvanceInterval
+ * @returns {(payload: any) => Promise<any>}
+ */
+export function workerBackedRunner(runAdvanceInterval) {
+  return (payload) => runAdvanceInterval(payload, { fallback: simulateCampaignWorldInterval });
+}
+
+/**
  * Run the realm's pending future once: clone, drain the REAL queue in REAL
  * drain order (candidate appended last — where a newly-staged commit would
  * land), fold exactly as the advance folds, then run the SHARED interval
@@ -49,9 +64,14 @@ export { forecastFingerprint } from './forecastFingerprint.js';
  * @param {string} io.now
  * @param {{ saveId: string, event: Mut } | null} [io.candidate]
  *   the staged-but-unqueued change (the marginal-attribution lane)
+ * @param {(payload: any) => Promise<any>} [io.runInterval]
+ *   THE TRANSPORT SEAM. Defaults to the in-thread orchestrator, so Node, vitest, SSR and every
+ *   existing caller are byte-identical BY CONSTRUCTION — the default parameter is the proof, not
+ *   a claim. A UI passes a worker-backed runner (see `workerBackedRunner`) to move the forecast
+ *   off the main thread; the COMPUTE is the same function either way, so only the thread changes.
  * @returns {Promise<{ result: Mut, refusals: Mut[], drainedCount: number }>}
  */
-export async function simulatePendingFuture({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null }) {
+export async function simulatePendingFuture({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null, runInterval = simulateCampaignWorldInterval }) {
   const c = deepClone(campaign);
   const s = deepClone(Array.isArray(saves) ? saves : []);
   const ws = c.worldState || {};
@@ -77,7 +97,7 @@ export async function simulatePendingFuture({ campaign, saves, interval = 'one_m
   c.worldState = { ...applyTwinDirectivesToWorld(ws, drained.twinDirectives, { tick, now }), pendingEvents: [] };
   // THE SHARED PIPELINE, the same flags a committed advance uses (preview ≡
   // apply by construction); auto-resolve renders pause points as defaults.
-  const result = await simulateCampaignWorldInterval({
+  const result = await runInterval({
     campaign: c, saves: s, interval, commit: true, now, autoResolve: true,
     ...(weeks != null ? { weeks } : {}),
   });
@@ -89,15 +109,20 @@ export async function simulatePendingFuture({ campaign, saves, interval = 'one_m
  * interval) and — when a candidate is staged — CANDIDATE (same + the staged
  * change), rendering the joint outcome and the marginal contribution as
  * with-vs-without, both queue-inclusive.
+ * ⚠ THIS FUNCTION CALLS `simulatePendingFuture` TWICE. Both calls thread `runInterval`; passing it
+ * to only the baseline would leave the COUNTERFACTUAL running on the main thread, which is the
+ * silent half of the defect this seam exists to remove — and the more expensive half, since the
+ * candidate run is the one that doubles the work.
  * @param {{ campaign: Mut, saves: Mut[],
  *   interval?: string, weeks?: number|null, now: string,
- *   candidate?: { saveId: string, event: Mut } | null }} io
+ *   candidate?: { saveId: string, event: Mut } | null,
+ *   runInterval?: (payload: any) => Promise<any> }} io
  * @returns {Promise<{ baseline: Mut, withCandidate: Mut | null, fingerprint: string }>}
  */
-export async function runRealmForecast({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null }) {
-  const baseline = await simulatePendingFuture({ campaign, saves, interval, weeks, now });
+export async function runRealmForecast({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null, runInterval = simulateCampaignWorldInterval }) {
+  const baseline = await simulatePendingFuture({ campaign, saves, interval, weeks, now, runInterval });
   const withCandidate = candidate
-    ? await simulatePendingFuture({ campaign, saves, interval, weeks, now, candidate })
+    ? await simulatePendingFuture({ campaign, saves, interval, weeks, now, candidate, runInterval })
     : null;
   return {
     baseline,

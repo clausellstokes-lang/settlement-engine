@@ -64,8 +64,15 @@ export default function AuspicePanel({ campaign }) {
     setRunning(true);
     try {
       const { readAuspices } = await import('../../domain/worldPulse/auspice.js');
+      // The omen runs the same forecast, so it takes the same transport seam off the main thread.
+      // Both imports are lazy, so the AUSPICE_FINGERPRINT off-first-paint pin still holds.
+      const { workerBackedRunner } = await import('../../domain/worldPulse/forecastRun.js');
+      const { runAdvanceInterval } = await import('../../lib/advanceWorkerClient.js');
       const now = new Date().toISOString();
-      setOmen(await readAuspices({ campaign, saves: memberSaves, interval: span, now }));
+      setOmen(await readAuspices({
+        campaign, saves: memberSaves, interval: span, now,
+        runInterval: workerBackedRunner(runAdvanceInterval),
+      }));
     } catch {
       setOmen({ error: true });
     } finally {

@@ -63,10 +63,17 @@ export default function RealmForecast({ campaign }) {
   async function run() {
     setRunning(true);
     try {
-      const { simulatePendingFuture, forecastDigest } =
+      const { simulatePendingFuture, forecastDigest, workerBackedRunner } =
         await import('../../domain/worldPulse/forecastRun.js');
+      // THE FORECAST LEAVES THE MAIN THREAD. Both modules are dynamic-imported inside this
+      // handler, so neither joins the first-paint closure. The domain module never imports the
+      // transport — this pane owns both halves and hands them to each other.
+      const { runAdvanceInterval } = await import('../../lib/advanceWorkerClient.js');
       const now = new Date().toISOString();
-      const runOut = await simulatePendingFuture({ campaign, saves: memberSaves, interval, now });
+      const runOut = await simulatePendingFuture({
+        campaign, saves: memberSaves, interval, now,
+        runInterval: workerBackedRunner(runAdvanceInterval),
+      });
       setView({
         digest: forecastDigest(runOut, memberSaves),
         refusals: runOut.refusals,
