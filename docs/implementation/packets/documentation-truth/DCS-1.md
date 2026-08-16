@@ -1,6 +1,6 @@
 # DCS / DCS-1 — the four absent PACKET_STANDARD law texts (member 1 of `dcs`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4`
   (the `dom` terminal; the micro-batch's dispatch base)
 - **Train:** `dcs`, family **DCS**, member **1** of 2. Its change path is disjoint from DCS-2's

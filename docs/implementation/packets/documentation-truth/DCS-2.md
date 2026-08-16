@@ -1,6 +1,6 @@
 # DCS / DCS-2 — the 17 ES/IN stale-site blocks, build-anchored (member 2 of `dcs`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4`
   (the `dom` terminal; the micro-batch's dispatch base)
 - **Train:** `dcs`, family **DCS**, member **2** of 2. Its two volume files are disjoint from

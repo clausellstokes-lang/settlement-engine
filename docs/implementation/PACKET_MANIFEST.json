@@ -11190,7 +11190,7 @@
     },
     {
       "id": "DCS-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DCS-1.md",
       "verifiedBase": "b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4",
       "changeManifest": [
@@ -11207,6 +11207,29 @@
         {
           "path": "docs/implementation/PACKET_STANDARD.md",
           "symbol": "## Registration obligations a wave prices at compile"
+        }
+,
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Ungated persistence"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "## Edge-shared bundle closures"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "A new `tests/lint/` file carries one obligation"
+        },
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "PRESENT IN THE TREE AT THE PACKET'S CURRENT"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "docs/implementation/PACKET_STANDARD.md",
+          "symbol": "preserves or creates"
         }
       ],
       "acceptanceCases": [
@@ -11254,7 +11277,7 @@
     },
     {
       "id": "DCS-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DCS-2.md",
       "verifiedBase": "b49a7daf86d6f7d27eaa685b7e52ea16edbc4bf4",
       "changeManifest": [
@@ -11275,6 +11298,37 @@
         {
           "path": "docs/DESIGN_FP_ARCH_IN.md",
           "symbol": "THE PRICES BECOME LAW"
+        }
+,
+        {
+          "path": "docs/DESIGN_FP_ARCH_ES.md",
+          "symbol": "ES-Da \u2014 THE COVERT RIDER"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_ES.md",
+          "symbol": "preflight (TL-F round)"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_IN.md",
+          "symbol": "ALL FOUR SLICES LANDED"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_IN.md",
+          "symbol": "DO NOT QUOTE A COUNT FROM THIS ROW"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "docs/DESIGN_FP_ARCH_ES.md",
+          "symbol": "converts the certification pending"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_IN.md",
+          "symbol": "IN-0c is owed but **BLOCKED**"
+        },
+        {
+          "path": "docs/DESIGN_FP_ARCH_IN.md",
+          "symbol": "0a/0b/0d LANDED; 0c OWED/BLOCKED"
         }
       ],
       "acceptanceCases": [
