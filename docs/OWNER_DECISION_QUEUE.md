@@ -6898,3 +6898,21 @@ never as packer error; THE RIGHT-OF-WAY PIN (zero intersections,
 planted-violation counterfactual) joins the battery beside
 reachability. MF-B4 carries both this and §190's disjointness in
 its open packer work.
+
+## §190b · THE ALLEY-GAP LAW (2026-08-16, owner: the between-block
+## slivers are "naturally occurring alleyways — I like that! have
+## it part of the formula but organically derived")
+
+Charter §17.6: the intra-block slivers are KEPT as the ginnels/
+snickets/closes of real towns and DERIVED — sources: the seeded
+party-wall decision (ownership seams), rear-yard access
+through-gaps, deliberate fire breaks in ordered rich fabric,
+downslope drainage slits, poor-quarter packing wedges; two kinds
+(walkable THROUGH-PASSAGES as the web's informal lowest rank —
+person-wide, never cart — vs CLOSED SLOTS as dead slivers);
+frequency derives from order × wealth × tier; drift closes them by
+encroachment or formalizes them into passages, event-dated; never
+violating disjointness or reachability. MF-B4 notified (#3) — the
+party-wall decision it is already building under §190 is the
+gaps' source, so this is the same packer work seen from the
+positive side.
