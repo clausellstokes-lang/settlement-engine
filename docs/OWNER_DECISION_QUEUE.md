@@ -5528,3 +5528,64 @@ gallery-seeding lane offer stands.
    (experience-facing aggregates) + the KPI-coverage check at
    tm-core's terminal; the six-volume unfork's ride decision
    (rider on this landing vs EP's) settled at dispatch.
+
+## §150 · OWNER ORDER: COMPREHENSIVELY REDO THE MAPS (2026-08-16)
+
+1. **The directive (verbatim intent):** clone the Watabou + Fantasy
+   Town Generator settlement-map style — "note the colors, note the
+   shapes, tools, how the terrain is portrayed, layout, organic
+   feel" — reconciled with our truth/determinism; the current plan
+   view is "unintelligible geometry to any human user"; generate
+   MULTIPLE reference settlements on both sites until calibrated;
+   the goal is competitiveness with both.
+2. **The study executed live:** seven full renders across both
+   generators + Watabou's Colors panel captured (the whole look is
+   TEN color roles with presets — both preset palettes measured in
+   hex) + FTG's full config vocabulary (11 building materials,
+   climate/coast/rivers/farms/walled, lifestyle scale).
+3. **THE mf FAMILY CHARTERED:** laneMFC-MAP-FABRIC-CHARTER.md
+   (scratchpad, canonical-until-fold) — seven style laws (fabric =
+   parcels with streets as negative space; dressed countryside;
+   road/river continuity; walls with towers+gates consuming our TRUE
+   exit bearings; ten-role palette; cartography chrome with a TRUE
+   kmScale scale bar; seeded organic irregularity), the two-layer
+   truth reconciliation (cosmetic fabric BENEATH the data-bound
+   truth layer; institutions become the landmark buildings at their
+   true positions), derivation-not-options per §131, pure-projection
+   determinism (no persisted state, THE PROMISE untouched, the look
+   change is a DECLARED presentation shift by this order), seven
+   members MF-1..7 with the sizeBaseline lazy-load bill named.
+4. **Slot:** compile in the §145.1 round; dark build (flag
+   mapFabricEnabled) AFTER the current executor queue; gates
+   NOTHING in the soak program; §109's side-by-side judges it
+   against this charter's corpus.
+
+## §151 · TE26 COLLECTED — gvf+mb LANDED; 25th EXPOSURE; tm+sk DISPATCHED (2026-08-16, chair)
+
+1. **gvf + mb landed green** (18 commits, ec744330→6b337fb1;
+   check:tail exit 0 ×2, smoke:boot 522/522 ×2, validate:packets
+   96/0 READY; 28,336 tests / 11 known). **CAS executed:
+   refs/heads/claude/composite-r4 b49a7daf→6b337fb1** (ancestry
+   verified). **ci DELIBERATELY NOT STARTED** (J-TE26-9 ratified:
+   MB.L1 path reservation + CI-1b's executed-chromium precondition;
+   no path reserved; CI-1a's premise needs re-confirmation at the
+   new base) — ci re-queues behind tm+sk.
+2. **Chair ratifies (vetoable): J-TE26-3** per-rule scope for the
+   GVF-2 widening (the seven pre-existing hits recorded by name,
+   exempted by nothing) · **J-TE26-5** retiring GV-4's volatile
+   census-figure requiredSymbol (a trap for every tests-moving
+   train) · **F2 correction inherited** (the widening's
+   justification re-derived at head, estate plant proves it).
+   J-TC23-7's corrected three-path price for MB-2's registry half
+   is DEFERRED to the ci/mb follow-up, not silently taken.
+3. **tm+sk EXECUTOR DISPATCHED at 6b337fb1** per §147.3 (TC28
+   delivered): serial tm-core → sk-a → sk-b, one CAS sweep at the
+   family boundary; §149.2/§149.3 rulings in the brief; SK-5
+   experience-band + KPI-coverage riders; the four-obligation flag
+   bill; the negativeAssertionAnchor full-gate-only inventory.
+4. **THE VOLUME UNFORK is ruled a DEDICATED docs train (uf-1)**
+   landing immediately AFTER tm+sk and BEFORE EP stage one (EP's
+   volume is forked too, TC24) — not a rider on the launch-critical
+   tm+sk landing. Scope: WC (MERGE — neither copy a superset), INT,
+   CW, WY, POP fold-to-build + DESIGN_FP_ARCH_CN.md/PG.md ledger
+   authorship (§148.4); LG rides lg-0's own LG-0V member.
