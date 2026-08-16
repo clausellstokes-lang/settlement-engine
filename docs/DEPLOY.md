@@ -16,7 +16,10 @@ After pushing to `origin/master`:
 
 2. **Vercel deployment**: the push-time build is deliberately skipped while CI
    is pending. The post-CI deploy/retrigger jobs proceed only after every required
-   check is green. `vercel.json` points at `npx vite build` → `dist/`.
+   check is green. `vercel.json` points at **`npm run build`** → `dist/` — the npm
+   script, not a bare `npx vite build`. That matters: only the npm script runs
+   `prebuild` (`generate-sitemap.mjs`) and `postbuild` (`prerender-routes.mjs`),
+   and the sitemap/prerender section of this runbook depends on both.
 
 3. **Supabase**: nothing happens automatically. Run the manual steps
    below.
@@ -279,34 +282,135 @@ single source of truth `deploy.sh` parses. The freshness pin
 stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
 
 Set the required env vars in the Supabase dashboard → Project →
-Functions → Secrets:
+Functions → Secrets.
+
+**⛔ EVERY NAME THE FUNCTIONS READ IS LISTED BELOW, AND THE LIST IS DERIVED.**
+`tests/docs/deployRunbookFreshness.test.js` scans `supabase/functions/**` for
+every environment name the deployed code actually consumes and requires each one
+to appear in this section or in that file's allowlist with a written reason. The
+scan has three arms because the code has three spellings — a literal
+`Deno.env.get('NAME')`, a name held in a `const` and read through it (all three
+durable-worker cron secrets are written that way), and a name read through an
+injected env getter (the mail adapter). A one-arm scan reports a comfortable,
+complete-looking subset and misses precisely the secrets a first cutover cannot
+run without. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
+
+**Money — a first cutover cannot take payment without these.**
 
 ```
-ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle + ai-analyst
-# BYOK (ai-analyst): also set the DB secret `app.settings.byok_secret` (pgcrypto passphrase
-# for surveyor_byok_keys); BYOK is fail-closed/unavailable until it is configured.
-RESEND_API_KEY               # for send-email (Resend provider key)
-RESEND_FROM_EMAIL            # for send-email (verified sender address)
-STRIPE_SECRET_KEY            # for webhook, checkout, and dossier verification
-STRIPE_WEBHOOK_SECRET        # for stripe-webhook signature verification
-STRIPE_PRICE_CREDITS_25      # per the PRICE_MAP in create-checkout
+STRIPE_SECRET_KEY            # webhook, checkout, portal, and dossier verification
+STRIPE_WEBHOOK_SECRET        # stripe-webhook signature verification
+STRIPE_PRICE_PREMIUM         # per the PRICE_MAP in create-checkout
+STRIPE_PRICE_SINGLE_DOSSIER
+STRIPE_PRICE_FOUNDER_LIFETIME
+STRIPE_PRICE_SURVEYOR        # ⛔ UNSET => '' => create-checkout THROWS "Price ID not
+                             #   configured for surveyor" at the FIRST Surveyor purchase,
+                             #   and stripe-webhook cannot match the Surveyor line item.
+STRIPE_PRICE_SEAT_TRANSFER   # ⛔ founder-transfer's paid seat-transfer checkout; unset
+                             #   means the transfer flow cannot price a session.
+STRIPE_PRICE_CREDITS_5       # the credit packs, all eight. A pack whose price id is
+STRIPE_PRICE_CREDITS_10      #   unset resolves to '' and is UNPURCHASABLE — deliberate
+STRIPE_PRICE_CREDITS_15      #   (LAW 1: unset env => '' => no silent wrong charge), but
+STRIPE_PRICE_CREDITS_25      #   silent. Set every pack you intend to sell.
+STRIPE_PRICE_CREDITS_40
+STRIPE_PRICE_CREDITS_50
 STRIPE_PRICE_CREDITS_60
 STRIPE_PRICE_CREDITS_150
-STRIPE_PRICE_PREMIUM
-STRIPE_PRICE_FOUNDER_LIFETIME
-STRIPE_PRICE_SINGLE_DOSSIER
-ACCOUNT_DELETION_CRON_SECRET # random high-entropy secret for the pg_net deletion worker
-PAYMENT_REFUND_CRON_SECRET  # random high-entropy secret for the pg_net refund worker
+STRIPE_CONNECT_ENABLED       # truthy turns on founder-transfer's Connect payout arm;
+                             #   absent (the default) keeps it off.
+```
+
+**Platform and identity.**
+
+```
 SUPABASE_URL                 # already set by Supabase
 SUPABASE_ANON_KEY            # already set by Supabase
 SUPABASE_SERVICE_ROLE_KEY    # required for admin operations
 CLIENT_URL                   # e.g. https://settlementforge.com
+ALLOWED_ORIGINS              # comma-separated CORS allowlist; the first entry is the
+                             #   CLIENT_URL fallback for founder-transfer
+APP_URL                      # auth-recovery's redirect base
+PUBLIC_SITE_URL              # APP_URL's fallback, same purpose
+OG_ASSET_ORIGIN              # og-image asset origin; defaults to the site origin
+OWNER_EMAIL                  # the owner-only branch in account-actions + admin-actions
+DELETION_GRACE_DAYS          # account-actions deletion grace window (integer)
+RELEASE                      # release id echoed by health; VITE_RELEASE is its fallback
+VITE_RELEASE
+```
+
+**AI providers.** Model names all carry an in-code default, so an unset model
+override is safe; an unset **key** is not.
+
+```
+ANTHROPIC_API_KEY            # generate-narrative, generate-chronicle, ai-analyst and
+                             #   every Surveyor compiler
+# BYOK (ai-analyst): also set the DB secret `app.settings.byok_secret` (pgcrypto passphrase
+# for surveyor_byok_keys); BYOK is fail-closed/unavailable until it is configured.
+OPENAI_API_KEY               # ⛔ generate-narrative's OpenAI arm. Unset => '' => that
+                             #   provider path cannot authenticate.
+ANTHROPIC_CLAUDE_OPUS_4_8_MODEL     # optional per-deploy model overrides
+ANTHROPIC_CLAUDE_SONNET_4_6_MODEL
+ANTHROPIC_CLAUDE_SONNET_4_5_MODEL
+ANTHROPIC_CLAUDE_HAIKU_4_5_MODEL
+OPENAI_GPT_5_2_MODEL
+OPENAI_GPT_5_MINI_MODEL
+OPENAI_GPT_5_NANO_MODEL
+OPENAI_GPT_4_1_MODEL
+OPENAI_GPT_4_1_MINI_MODEL
+SURVEYOR_CANARY_SECRET       # ⛔ seeds the per-account canary every Surveyor compiler
+                             #   stamps. Unset => '' => every account shares one canary,
+                             #   so a leaked prompt cannot be attributed.
+```
+
+**Mail.** The adapter is provider-neutral and reads its names through an injected
+getter, which is why the census needs a third scan arm to see them at all.
+
+```
+EMAIL_PROVIDER               # 'resend' (default) or 'postmark'; unknown falls back
+RESEND_API_KEY               # send-email + referral/auth/transfer mail (Resend)
+RESEND_FROM_EMAIL            # verified sender address
+POSTMARK_SERVER_TOKEN        # only when EMAIL_PROVIDER=postmark
+POSTMARK_FROM_EMAIL          # only when EMAIL_PROVIDER=postmark
+```
+
+**Analytics and export.**
+
+```
+ANALYTICS_HASH_PEPPER        # ⛔ pepper for the device/actor hash in ingest-events and
+                             #   log-client-error. Unset => '' => the hash degenerates and
+                             #   DEVICE-ACTOR LINKAGE IS SILENTLY LOST. Nothing errors,
+                             #   nothing is logged; the data is simply never joinable.
+EXPORT_SHARED_SECRET         # ⛔ analytics-export's x-export-secret. Unset => '' => the
+                             #   private research export cannot authenticate its caller.
+```
+
+**Cron and durable-worker shared secrets.** Each is a high-entropy value shared
+with a `pg_net` dispatcher row. The first two are also written by the canonical
+deploy script; the last three are not, and are the ones a by-the-book manual
+cutover has historically missed.
+
+```
+ACCOUNT_DELETION_CRON_SECRET # pg_net deletion worker (deploy.sh sets this)
+PAYMENT_REFUND_CRON_SECRET   # pg_net refund worker (deploy.sh sets this)
+PRICING_RESYNC_CRON_SECRET   # ⛔ nightly pricing-resync-cron; unset => the handler has no
+                             #   expected secret and the nightly resync never runs.
+RETENTION_WARNING_CRON_SECRET # ⛔ nightly retention-warning-cron, same shape.
+FOUNDER_TRANSFER_CRON_SECRET # ⛔ founder-transfer's run_due sweep, same shape.
 ```
 
 `OPERATOR_MESSAGE_CRON_SECRET` is intentionally **not** in the required-secret
-list for this release. Deploying the function is safe, but do not set that secret
-or activate its database dispatcher yet; the broadcast courier is deliberately
-shipping dormant as described below.
+list for this release, and it is the one consumed name the freshness pin carries
+as an explicit allowlist row rather than a required secret. Deploying the function
+is safe, but do not set that secret or activate its database dispatcher yet; the
+broadcast courier is deliberately shipping dormant as described below.
+
+⚠ **The pin runs in ONE direction only: every CONSUMED name must be documented.**
+The reverse — every documented name must still be consumed — is a **recorded
+deferral, not an oversight**. Writing it now would couple this runbook to the
+paid-surface member landing behind it in the same train: the moment the founder
+purchase path is removed, `STRIPE_PRICE_FOUNDER_LIFETIME` becomes documented and
+unconsumed, and a bidirectional pin would red on that alone. A documented secret
+nobody reads is inert; an undocumented secret nobody sets breaks a cutover.
 
 ### Activate the durable account-deletion worker
 
@@ -457,7 +561,7 @@ delete the row to make the dashboard look green.
 Run locally before pushing:
 
 ```bash
-npm run check        # the full 14-stage gate (validate → typecheck → lint → test → build → verify:dist)
+npm run check        # the full 17-stage gate (validate → typecheck → lint → test → build → verify:dist)
 npm run build:edge-shared   # regenerate bundle if src/domain/ changed
 npm run ops:migrations:rehearse   # review the exact applied-head → repo-head waves
 ```
