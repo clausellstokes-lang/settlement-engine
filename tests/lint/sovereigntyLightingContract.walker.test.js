@@ -4507,7 +4507,29 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // REWRITTEN IN PLACE rather than deleted precisely so the file layer moves by a
     // predictable single step instead of a deletion netting against a creation.
     // 2438/364/2074/20255/5684 → 2439/364/2075/20276/5688.
-    files: 2439, parked: 364, credited: 2075, titles: 20276, suiteTitles: 5688,
+    // ── RE-RECORDED 2026-08-16 BY THE MICRO-BATCH `gv` TRAIN, WITH ITS CAUSE ────────
+    // 2439/364/2075/20276/5688 → 2439/364/2075/20286/5689. THE CAUSE IS FOUR GUARD
+    // CURES AND NO NEW TEST FILE, which is why `files`, `parked` and `credited` are
+    // ALL UNCHANGED — the train's signed contract was exactly that, and the three
+    // file figures are asserted BEFORE `titles`, so their passing is the receipt.
+    //
+    // THE +10 TITLES ARE ATTRIBUTED, and the attribution is what makes the parked
+    // half legible rather than a puzzle:
+    //   tests/lib/spatialLedgerCoverage.walker.test.js   +9 titles, +1 suite title
+    //   tests/build/ciCheckParity.test.js                +1 title,  +0 suite titles
+    //   tests/security/byokNeverLogged.test.js           +0  ← PARKED
+    //   tests/edgeFunctions/sessionGateCensus.test.js    +0  ← PARKED
+    // ⚠ THE TWO ZEROES ARE THE INTERESTING HALF. Both files gained real pins — five
+    // anti-vacuity control arms in one, four mutant controls in the other — and this
+    // census cannot see a single one of them, because both register tests from a loop
+    // (`for…of` over a file list; `it.each` over the paid roster) and door 3's reader
+    // cannot spell a generated title statically. Their coverage is real and executes;
+    // it is simply invisible here. Recorded rather than left to be rediscovered, and
+    // it is ALSO why `parked` did not move: both files were parked at this train's
+    // base too, so no member changed any park state.
+    // The arithmetic closes: +9 +1 +0 +0 = +10, and the one new `describe` in a
+    // CREDITED file is the whole of the +1 suite title.
+    files: 2439, parked: 364, credited: 2075, titles: 20286, suiteTitles: 5689,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
