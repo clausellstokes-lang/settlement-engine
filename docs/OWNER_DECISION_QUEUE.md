@@ -6388,3 +6388,35 @@ the §170 delegation and the set standard; owner returns for: the
 §109 side-by-side eyes, the decision batch (LENS_COUNT, MF-0F,
 MF-D5 + the standing batch), the tuning signature, legal+launch.
 Memory milestone written (settlement-map-program-2026-08-16.md).
+
+## §173 · TC30 COLLECTED — THE IMMERSION AMENDMENTS + THE LETTERING
+## RULING (2026-08-16, chair under §170)
+
+1. **All eight §12 members compiled as amendments** (mf-c 3→7 incl.
+   marginalia/seal/legend/fog-folio, three-stage promotion; mf-d
+   5→7 with countryside marks + pentimento inserted BEFORE the
+   drift golden so it covers them; mf-e 4→6 with neighbour edge +
+   walk rings). Total suite ≤90 ops against 2,200; zero golden
+   re-records; four premise maps exit 0. Correction taken: the true
+   measure mints in mf-c (MF-5), not mf-e.
+2. **HEADLINE FINDING + RULING: the export path carries NO TEXT**
+   (five op kinds, zero <text> anywhere; labels are pane-side JSX)
+   — five §12 members are text-bearing and the folio conceit
+   REQUIRES their words in the exported document. **RULED (chair,
+   vetoable): THE LETTERING PASS** — text reaches exports via the
+   LANDED splice channel (injectFog's precedent: raw SVG composed
+   outside the draw list), becoming the folio's separate lettering
+   stage exactly as period engravers lettered plates after the
+   line work; no sixth op kind, no townMapLandform red, no PDF
+   plate-mapper churn. Escalation path recorded: if the splice
+   proves insufficient (z-order/registration), the sixth op kind
+   is the §0.0 fallback with its reds declared and priced.
+3. §164a(a) satisfied without STOP: the TRUE bearing lives in
+   mapState.placements (the spatial digest keeps indices only —
+   approachOctant is hash furniture, confirming MF-R1); placements
+   are undo-tracked so the bearing enters ONLY as a dress-channel
+   parameter, never the PRNG. §164a(b) pinned (MF.L10/MF-I2).
+4. **NEW OWNER GATE QUEUED: OB-4** — a PERIOD_PACES table (no pace
+   constant exists in src) for the walk rings; bundled with MF-5's
+   signature in the owner decision batch. MF.U6/U7/U8 signed as
+   forks for the build.
