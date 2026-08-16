@@ -7774,3 +7774,43 @@ to MF-B7 same-turn.
    already carries the measured ingredients (wall stroke 4-5×,
    hf55's hachure, T-23/T-24 vocabularies); wave nine's brief
    binds them.
+
+## §215 · TC32 COLLECTED — WF-1 REFUSED IN PART AND SPLIT FOUR
+## WAYS; THE FOUR QUESTIONS RULED; TE35 EXECUTES WF-1a
+## (2026-08-16, chair §170)
+
+1. **THE COMPILE'S REFUSAL IS RATIFIED**: WF-1 as chartered
+   breaks five PACKET_STANDARD hard limits simultaneously; split
+   WF-1a/b/c/d on the GR-5/IN-1/INT-3B precedent. WF-1a (the
+   flag, the leaf, the ring, the classifier) compiles inside
+   every budget (≤164 changed effective lines of 400). Three
+   load-bearing premises refuted by execution: `abandoned` has
+   ZERO producers (cut — see ruling 2); the fold's `prevPatron`
+   is captured one line AFTER ensureReligionState writes it, so
+   the DM-flip `imposed` arm could never fire (cured in-packet,
+   pinned A5 with its own mutant); THREE suppression writers not
+   two (the schism resolution at :485 — handed to WF-1b).
+   SP-4 posture LANDED but dark with zero callers — excluded on
+   the measured reason. warTermination measures exactly 818/818
+   — the war join deferred to WF-1d. The base-state capsule is
+   NOT citable (four landings stale — §183.3's OSR staleness
+   bites again; re-governance stays queued).
+2. **THE FOUR QUESTIONS, RULED (all per recommendation):**
+   (1) the FOUR-cause fall vocabulary ACCEPTED — a frozen array
+   with an unreachable member fails its own non-vacuity arm; if
+   the owner ever wants `abandoned`, a sink-crossing unseat is a
+   NEW ENGINE BEHAVIOUR and its own wave. (2) The four-stage
+   promotion ACCEPTED (b/c/d share religiousContest.js — the
+   change-path reservation law). (3) The WF family preamble +
+   stamped substrate annex AUTHORED BEFORE STAGE 2, not blocking
+   1a. (4) `patronFalls` engine-only history ACCEPTED under
+   req-14's escape — the DM's lever is the existing
+   SET_PRIMARY_DEITY verb producing a typed `imposed` fall
+   through the same classifier (finite-semantics clean; deity
+   doctrine untouched — falls are cultural-political events).
+3. **J-TC32-7 RATIFIED** (landed census practice over the
+   brief's guidance — the estate's precedent govern). **TE35
+   DISPATCHED**: land the draft packet, promote WF-1a, execute.
+   ⚠ The packet's own hazard is the compile-fixture class: RUN
+   AND PRINT the fixture first — PATRON_FLIP_TICKS 3 and
+   SHARE_STEP_MAX 6 make a short fixture silently vacuous.
