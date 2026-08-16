@@ -177,22 +177,62 @@ const optionsReq = (origin?: string) =>
     headers: origin ? { origin } : {},
   });
 
-Deno.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the old leak)', async () => {
-  const res = await handleVerifyCheckoutSession(optionsReq(), {});
-  const acao = res.headers.get('Access-Control-Allow-Origin');
-  assertEquals(acao === '*', false);
-  assertEquals(acao, 'https://settlementforge.com'); // pinned to the first allowed host
-});
+/**
+ * Run a CORS pin against THIS FILE'S OWN env rather than whatever an earlier
+ * suite left in the process.
+ *
+ * WHY: deno.json's `test:edge` task runs `deno test` WITHOUT `--parallel`, so
+ * every edge suite shares ONE process and ONE `Deno.env`, and `_shared/cors.ts`
+ * re-reads CLIENT_URL / ALLOWED_ORIGINS per request. "The first allowed host" is
+ * CLIENT_URL when one is configured, so an alphabetically EARLIER suite's
+ * unrestored `Deno.env.set('CLIENT_URL', …)` silently re-pointed the exact value
+ * these pins assert (it red the deno-tests CI job with
+ * `https://settlementforge.example`). Clearing both keys states the pins' real
+ * precondition — NOTHING configured — which is also what keeps them
+ * non-vacuous: with no CLIENT_URL to echo, the asserted host can only come from
+ * cors.ts's own STATIC_ORIGINS. The ambient values are put back afterwards so
+ * this file leaks nothing in its turn.
+ *
+ * NB: clearing CLIENT_URL also makes cors.ts's `isDevDeployment()` true, which
+ * enables its localhost-any-port rule. That is deliberate and irrelevant here —
+ * none of these three origins is a localhost origin — so do not "tidy" it by
+ * setting CLIENT_URL to the host being asserted, which would make the pin echo
+ * a value this file supplied.
+ */
+async function withNoConfiguredOrigins(body: () => Promise<void>): Promise<void> {
+  const priorClientUrl = Deno.env.get('CLIENT_URL');
+  const priorAllowedOrigins = Deno.env.get('ALLOWED_ORIGINS');
+  Deno.env.delete('CLIENT_URL');
+  Deno.env.delete('ALLOWED_ORIGINS');
+  try {
+    await body();
+  } finally {
+    if (priorClientUrl === undefined) Deno.env.delete('CLIENT_URL');
+    else Deno.env.set('CLIENT_URL', priorClientUrl);
+    if (priorAllowedOrigins === undefined) Deno.env.delete('ALLOWED_ORIGINS');
+    else Deno.env.set('ALLOWED_ORIGINS', priorAllowedOrigins);
+  }
+}
 
-Deno.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', async () => {
-  const res = await handleVerifyCheckoutSession(optionsReq('https://evil.example.com'), {});
-  const acao = res.headers.get('Access-Control-Allow-Origin');
-  assertEquals(acao === '*', false);
-  assertEquals(acao, 'https://settlementforge.com');
-});
+Deno.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the old leak)', () =>
+  withNoConfiguredOrigins(async () => {
+    const res = await handleVerifyCheckoutSession(optionsReq(), {});
+    const acao = res.headers.get('Access-Control-Allow-Origin');
+    assertEquals(acao === '*', false);
+    assertEquals(acao, 'https://settlementforge.com'); // pinned to the first allowed host
+  }));
 
-Deno.test('CORS: an ALLOWED origin is echoed with Allow-Credentials from the shared module', async () => {
-  const res = await handleVerifyCheckoutSession(optionsReq('https://settlementforge.com'), {});
-  assertEquals(res.headers.get('Access-Control-Allow-Origin'), 'https://settlementforge.com');
-  assertEquals(res.headers.get('Access-Control-Allow-Credentials'), 'true');
-});
+Deno.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', () =>
+  withNoConfiguredOrigins(async () => {
+    const res = await handleVerifyCheckoutSession(optionsReq('https://evil.example.com'), {});
+    const acao = res.headers.get('Access-Control-Allow-Origin');
+    assertEquals(acao === '*', false);
+    assertEquals(acao, 'https://settlementforge.com');
+  }));
+
+Deno.test('CORS: an ALLOWED origin is echoed with Allow-Credentials from the shared module', () =>
+  withNoConfiguredOrigins(async () => {
+    const res = await handleVerifyCheckoutSession(optionsReq('https://settlementforge.com'), {});
+    assertEquals(res.headers.get('Access-Control-Allow-Origin'), 'https://settlementforge.com');
+    assertEquals(res.headers.get('Access-Control-Allow-Credentials'), 'true');
+  }));

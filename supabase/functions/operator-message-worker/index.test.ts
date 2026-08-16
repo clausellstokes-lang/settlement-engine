@@ -8,10 +8,39 @@ import type { MailAdapter, MailMessage } from "../_shared/mailAdapter.ts";
 
 Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
 Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service-role-stub");
-Deno.env.set("CLIENT_URL", "https://settlementforge.example");
 
 const { handleOperatorMessageWorker } = await import("./index.ts");
 const SECRET = "operator-courier-secret";
+
+/** This file's own CLIENT_URL — deliberately NOT the production host, so the
+ *  account-link composition in index.ts is exercised under a non-default base
+ *  and the pin on it in the announcement test cannot pass by coincidence. */
+const CLIENT_URL_STUB = "https://settlementforge.example";
+
+/**
+ * Register a courier test whose body runs with this file's own CLIENT_URL, and
+ * which puts the ambient value (or its absence) back afterwards.
+ *
+ * WHY THIS IS NOT A MODULE-TOP `Deno.env.set`: deno.json's `test:edge` task runs
+ * `deno test` WITHOUT `--parallel`, so every edge suite shares ONE process and
+ * ONE `Deno.env`. A module-top set is therefore ambient for every
+ * alphabetically LATER suite — and `_shared/cors.ts` re-reads CLIENT_URL per
+ * request to compose its allowlist, whose FIRST entry is what a fail-closed
+ * response pins to. An unrestored set here re-pointed exactly that value under
+ * verify-checkout-session's CORS pins and red the deno-tests CI job.
+ */
+function courierTest(name: string, body: () => Promise<void>) {
+  Deno.test(name, async () => {
+    const prior = Deno.env.get("CLIENT_URL");
+    Deno.env.set("CLIENT_URL", CLIENT_URL_STUB);
+    try {
+      await body();
+    } finally {
+      if (prior === undefined) Deno.env.delete("CLIENT_URL");
+      else Deno.env.set("CLIENT_URL", prior);
+    }
+  });
+}
 
 function request(method = "POST", secret: string | null = SECRET) {
   const headers = new Headers();
@@ -144,7 +173,7 @@ function makeMailer(options: { fail?: boolean } = {}) {
   return { adapter, messages };
 }
 
-Deno.test("operator courier is POST-only and fails closed on secret or disabled config", async () => {
+courierTest("operator courier is POST-only and fails closed on secret or disabled config", async () => {
   let response = await handleOperatorMessageWorker(request("GET"), {
     envSecret: () => SECRET,
   });
@@ -170,7 +199,7 @@ Deno.test("operator courier is POST-only and fails closed on secret or disabled 
   assertEquals(admin.calls.length, 0);
 });
 
-Deno.test("announcement page validates the active lease, honors opt-out, and advances one stable cursor", async () => {
+courierTest("announcement page validates the active lease, honors opt-out, and advances one stable cursor", async () => {
   const admin = makeAdmin({
     jobs: [JOB],
     recipients: [
@@ -222,6 +251,12 @@ Deno.test("announcement page validates the active lease, honors opt-out, and adv
   assertEquals(mailer.messages[0].to, "fresh@example.com");
   assertEquals(mailer.messages[0].headers?.["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click");
   assert(mailer.messages[0].text.includes("token=33333333-3333-4333-8333-333333333333"));
+  // The account link is composed from CLIENT_URL (index.ts's clientUrl), so this
+  // pin is what makes the scoped env mutation above load-bearing rather than
+  // decorative: it reds if the scope ever stops covering this test.
+  assert(
+    mailer.messages[0].text.includes(`${CLIENT_URL_STUB}/?view=account&section=messages`),
+  );
   assertEquals(
     mailer.messages[0].idempotencyKey,
     "operator-message/44444444-4444-4444-8444-444444444444",
@@ -271,7 +306,7 @@ Deno.test("announcement page validates the active lease, honors opt-out, and adv
   assertEquals(admin.upserts.length, 1);
 });
 
-Deno.test("service broadcast ignores marketing eligibility and carries no unsubscribe header", async () => {
+courierTest("service broadcast ignores marketing eligibility and carries no unsubscribe header", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -293,7 +328,7 @@ Deno.test("service broadcast ignores marketing eligibility and carries no unsubs
   assertEquals(mailer.messages[0].headers, undefined);
 });
 
-Deno.test("an ineligible service row is a terminal replay and is neither sent nor rewritten", async () => {
+courierTest("an ineligible service row is a terminal replay and is neither sent nor rewritten", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -323,7 +358,7 @@ Deno.test("an ineligible service row is a terminal replay and is neither sent no
   ), true);
 });
 
-Deno.test("an eligible discovery row lost to another worker's recipient CAS is never sent", async () => {
+courierTest("an eligible discovery row lost to another worker's recipient CAS is never sent", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -353,7 +388,7 @@ Deno.test("an eligible discovery row lost to another worker's recipient CAS is n
   ), true);
 });
 
-Deno.test("lease expiry before recipient CAS fails closed without starting provider delivery", async () => {
+courierTest("lease expiry before recipient CAS fails closed without starting provider delivery", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -382,7 +417,7 @@ Deno.test("lease expiry before recipient CAS fails closed without starting provi
   ), true);
 });
 
-Deno.test("an ambiguous provider-success orphan is terminal on reclaim and never resent", async () => {
+courierTest("an ambiguous provider-success orphan is terminal on reclaim and never resent", async () => {
   const mailer = makeMailer();
   const eligible = [{
     user_id: "user-1",
@@ -429,7 +464,7 @@ Deno.test("an ambiguous provider-success orphan is terminal on reclaim and never
   ), false);
 });
 
-Deno.test("provider details are redacted from receipts and a lost lease fails the job", async () => {
+courierTest("provider details are redacted from receipts and a lost lease fails the job", async () => {
   let admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
