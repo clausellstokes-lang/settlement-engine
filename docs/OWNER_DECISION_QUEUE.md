@@ -5047,3 +5047,29 @@ gallery-seeding lane offer stands.
    micro-batch). All J-TE24 rows SIGNED. **TC23 compiles the
    micro-batch now** (~18 items incl. gv-1..5, ci-1a/1b, the class
    fold, DA-B3, and the consolidated docs member).
+
+## §135 · REALISM ERRATUM — THE OWNER'S CHALLENGE SUSTAINED ON
+## MISINFORMATION (2026-08-16, chair; verified against `b49a7daf`)
+
+1. **The chair's realism table UNDER-COUNTED a landed system**: the
+   "deliberate misinformation" opportunity IS BUILT — the one
+   disinformation writer (`disinformationPlant.js`), the PAID
+   COMMISSION lifecycle through informationStatecraft, brokerage
+   handoff with lag ticks, plant lineage provenance, the envoy
+   `plant` private goal with target wiring, and paid-disinformation
+   lineage reads in army transit. The information domain's grade
+   rises to **A outright** — commissioned information warfare with
+   provenance exceeds anything in the comparison set. The erratum
+   credit is the owner's challenge; the lesson is the standing one:
+   claims about a 622K-line estate get GREPPED, not recalled.
+2. **Plague travel narrows but stands, pending census**: the
+   flight coupling EXISTS ("flight from the plague swells the
+   columns" — disease drives refugee columns out); what one
+   verification round did NOT find is CONTAGION ON ARRIVAL (the
+   fleeing column seeding an outbreak at its destination). The
+   remaining opportunity is that single arm — possibly less if a
+   deeper census finds it too. Assigned to the §109 total review's
+   subsystem rows to settle with a full census rather than another
+   recollection.
+3. Realism-for-purpose re-grades **A− → A** (one opportunity
+   deleted as already-built, the other narrowed to one arm).
