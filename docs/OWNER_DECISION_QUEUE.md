@@ -7476,3 +7476,27 @@ to MF-B7 same-turn.
 3. **RS-2 FIRED at 9ed2436c** (the newest exposed tip at RS-1
    completion, per §197.4a's supersession-of-target ruling), same
    cert-30 protocol, findings-only, capsules on.
+
+## §207 · OWNER ORDER: THE ABSOLUTE BAR REAFFIRMED — EQUAL OR
+## BETTER THAN THE REFERENCE CORPUS, AND A COMPREHENSIVE
+## PER-IMAGE URBANISM STUDY (2026-08-16; MF-S1 dispatched)
+
+1. **THE ORDER**: the generator's goal is to render at THE EXACT
+   SAME QUALITY OR BETTER than the Higgsfield references — "I
+   would have nothing less" — and the corpus is to be studied
+   comprehensively, image by image: how each builds its city in
+   urbanism, density, tiers, "and all these other things,"
+   emulated in accordance with all our laws (stated and to come).
+   §179's absolute-bar law is REAFFIRMED at full strength.
+2. **MF-S1 DISPATCHED — the reference urbanism atlas**: per-image
+   notes on all 49 references (density gradients, block grain,
+   street hierarchy, courts, wall-terrain grammar, river class,
+   district legibility, landmark scale, what sells the realism,
+   priors NOT to emulate), then synthesis into MEASURABLE
+   calibration targets per tier mapped to §190-§205/charter laws
+   or flagged as GAPS with mechanism sketches (chair rules on
+   gaps), closing with an honest DELTA TABLE against the b6
+   fabric — the standing absolute-bar grading sheet for wave
+   eight onward. Measured vs eye-estimated labeled per claim.
+3. RS-2 note: first segment live at 9ed2436c (1 worker on the
+   freemem snapshot, re-derived hourly — the RS-1 caveat known).
