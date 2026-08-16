@@ -5198,3 +5198,28 @@ gallery-seeding lane offer stands.
    charter; the §49/§50 three obligations at pg-0's mint; every
    value a §131 band with its derivation home; quarantine stays
    OWNER-VALUE.
+
+## §140 · THE LAST TWO LEVERS RATIFIED (owner, 2026-08-16: "do it
+## both!"; both live in this sitting)
+
+1. **STACKING IS THE DEFAULT**: consecutive queue trains stack on
+   the unexposed tip — each with its OWN full terminal gate — with
+   the chair's CAS sweep and exposure at FAMILY BOUNDARIES, aligned
+   with the §71.3 per-family PR cadence (a family's trains stack,
+   land, expose, and PR in one sweep). Premise-map independence
+   governs continuation past a STOP, per §137's proven precedent.
+2. **THE BATCH-COMPILE PROGRAM IS DISPATCHED**: three parallel
+   compile lanes cover the ENTIRE remaining family queue — TC24
+   (EP + both WF trains), TC25 (both WC trains + INT + the CW/IN/ES
+   tails), TC26 (WY + POP, carrying the §125.4 size-speed bands).
+   When they bank, the executor never waits on a compile again —
+   the queue becomes pure execution. Staleness is absorbed by the
+   delta idiom + premise maps by design.
+3. **The remaining unblocking acts are chair sittings, named**: the
+   TR re-charter (§96's frozen charter — the next chair sitting),
+   gr-6 and HB-3/Q1 (the stamp-or-hold sittings for the two cap-4
+   families). LG compiles in the next round with its §46d/§125a/
+   §139 pricing. Beyond these, the chair finds NO further lever
+   that keeps quality whole: the residual is the irreducible serial
+   execution + per-member proof, which is the product being
+   purchased.
