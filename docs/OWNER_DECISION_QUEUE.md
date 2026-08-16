@@ -4964,3 +4964,39 @@ technology freeze are AFFIRMATIVE CORRECTNESS for this product.)
    OQ-1 — TIER-GATING of command powers stays an OWNER-VALUE flag,
    parked with the §71.2 family. The charter BANKS until WY lands,
    per §130.2.
+
+## §133 · THE "AM I MISSING ANYTHING" SWEEP — FIVE UNOWNED ITEMS
+## (2026-08-15, chair; everything else confirmed owned or scheduled)
+
+1. **⛔ LEGAL TEXTS AND GENERATED-CONTENT OWNERSHIP (the largest
+   gap)**: no Terms of Service or Privacy Policy AUTHORSHIP is
+   scheduled anywhere (the machinery — consent v2, hard-erase,
+   retention — exists; the LEGAL TEXT does not), and no license
+   clause answers WHO OWNS A GENERATED SETTLEMENT — DMs will
+   publish campaign material built from generated worlds, and the
+   answer must exist at launch (recommend: users own their outputs,
+   with a license-back for the gallery). Owner-side with chair
+   drafting support; joins the founder-transfer legal sign-off as
+   one legal sitting.
+2. **The TABLE-DEVICE PASS**: R-PSF audited desktop surfaces; the
+   tablet-at-the-table experience — how DMs actually run sessions —
+   was explicitly not deep-audited. Docketed as a lane after the
+   dom collection (read-only survey → cures into the polish queue).
+3. **LAUNCH KPIs WRITTEN IN ADVANCE**: the telemetry will answer
+   the companion-loop question; the DECISION THRESHOLDS should be
+   written BEFORE launch so the answer can't be rationalized after
+   (the day-60 rule: what retention/conversion keeps subscription
+   pricing vs repositions). Owner-side, one sitting with the chair.
+4. **THE COMMUNITY HOME + LAUNCH KIT**: amateur marketing needs a
+   gathering place (Discord or equivalent) and a press/demo kit
+   (the gallery seeded with showcase worlds, a two-minute walk-
+   through). Owner-side; the gallery seeding can be a lane.
+5. **The TRADEMARK-LEAK one-time check**: setting-agnosticism should
+   mean zero D&D-trademarked terms in product copy — one grep-class
+   lane verifies it before launch. Docketed.
+CONFIRMED ALREADY OWNED (no action): production backups/restore and
+incident runbooks (audited current), the Foundry module (in CI),
+account deletion/export (hard-erase + research export), consent
+machinery, onboarding/empty states, accessibility at code level, the
+program's own bus-factor (the ledger + START_HERE + the pushed
+branches ARE the continuity plan).
