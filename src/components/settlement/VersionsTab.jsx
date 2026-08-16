@@ -60,7 +60,10 @@ const DEFAULT_SNAPSHOT_LABEL = 'Manual snapshot';
 function formatTs(ts) {
   if (!ts) return EMPTY_VALUE;
   try {
-    return new Date(ts).toLocaleString('en-GB', {
+    // §69.2 / J-TC21-4: `en-GB` was one of THREE outliers against 24 explicit
+    // `en-US` renders — the locale the Wave-4h ruling already pins. The options
+    // are unchanged, so only the field ORDER and separators move.
+    return new Date(ts).toLocaleString('en-US', {
       day: 'numeric', month: 'short', year: '2-digit',
       hour: '2-digit', minute: '2-digit',
     });
