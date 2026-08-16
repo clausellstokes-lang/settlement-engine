@@ -6517,3 +6517,44 @@ placement, record the strain, never editorialize, never break);
 deterministic; the §109 acceptance set gains the owner's
 mountain-ocean-port exemplar. MF-B1 notified — the substrate
 member becomes a solver, not a lookup.
+
+## §177 · MF-B1 COLLECTED — FOUNDATION BUILT; THE ITERATION ROUND
+## ORDERED (2026-08-16, chair under §170)
+
+1. **Built and proven: 24 land-ready modules at landing paths, 3
+   suites/24 pins, all under the 800 ceiling, purity clean; all six
+   mid-lane directives folded; the §5.-1c solver works (mountain+
+   ocean+port → fjord, zero strain, both pin forms built).**
+   Findings adopted: the MF-0 cure is THREE sites not one (reader +
+   withLayoutLawVersion + the router — control executed); the
+   builtRadius sqrt slip (0.69× area, invisible because the whole
+   ladder shrank together) — cure to target bands; ⭐ MF-0F's
+   declared shift is EXACTLY ONE KEY, proved by a 477,244-leaf
+   key-by-key walk over 120 settlements (1 added/0 removed/0
+   moved) — the owner declaration is EVIDENCE-READY. Planned
+   morphology now reachable (10/120). The battery caught and fixed
+   three real defects (duplicate district ids breaking the landed
+   click contract; a dwelling-free district; 3 physical-constraint
+   violations at max chaos).
+2. **CHAIR EYES-ON (fjord exemplar "Beiyuan"):** the countryside is
+   reference-grade now (varied strip parcels, hedgerows); fabric
+   color variety good; BUT the lane's honest shortfalls confirmed
+   and extended: the umbrella boundary renders as PIXEL-STAIR
+   jagging (worse than round — reads as artifact); the street web
+   barely reads (no negative-space channels, single grain
+   town-wide); interior greens NOT MET (three mechanisms failed;
+   untried cure in receipt); footprints under band; AND THE RELIEF
+   GAP (chair finding): the substrate is INVISIBLE in the paint —
+   the fjord town shows no fjord. Charter §9.5b THE RELIEF LAW
+   added: era hachures/hill profiles/rock hatching/water bodies at
+   mode; terrain drama invisible = acceptance FAIL.
+3. **MF-B1b ITERATION ROUND DISPATCHED** (quality gate before
+   mf-b/mf-c): seven targets — de-staircase the umbrella (smooth
+   irregular, not round, not stepped); street-web legibility
+   (channels + hierarchy + per-district grain); interior greens
+   (the receipt's untried cure); footprint bands; DENSITY/OP (the
+   richest exemplar measures 3,249 vs OP_CEILING 2,200 on the
+   prototype denominator — MF.U1 is LIVE: LOD/merging FIRST; the
+   owner-gated raise (OB-8) only if LOD fails); THE RELIEF PASS
+   (§9.5b — the fjord must look like one); cartouche text-overlap
+   fix. All existing proofs stay green through iteration.
