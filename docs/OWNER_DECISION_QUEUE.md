@@ -5130,3 +5130,40 @@ gallery-seeding lane offer stands.
    serial terminals on the unexposed tip, the chair CASes the whole
    stack at collection (the cs-a/cs-b precedent) — five trains, one
    exposure sweep, the twenty-fifth.
+
+## §138 · THE CONTAGION CENSUS ACCEPTED — ABSENT, AND THE pg FAMILY
+## CHARTERED (2026-08-16, chair, vetoable; evidence lanePGC-census.md
+## + lanePGC-PG-CHARTER.md + lanePGC-report.md, whole-file reads,
+## second pass surfacing nothing new)
+
+1. **The verdict is ABSENT with receipts**: all three arrival lanes
+   credit population with ZERO disease reads; the persisted column
+   carries no origin-condition state; no outbreak producer reads an
+   arrival; the belief plane's condition keys close without an
+   affliction band; the reception seam is absent entirely (per §49's
+   own correction — POP-1's clearing will be the FIRST refusal
+   machinery in the tree). **The honest nuance recorded**: disease
+   DOES already travel by GRAPH-CHANNEL SPREAD and M11a's epidemic
+   FRONTS — the world has epidemics that move; what it lacked is
+   PEOPLE AS CARRIERS and belief at the gates, which is exactly the
+   owner's design.
+2. **The charter is ACCEPTED**: pg-0 (the flag) → pg-1 (the
+   `plagueTouched` band stamped on columns at dispatch, seeding the
+   EXISTING M11a ledger at landing — ONE PLAGUE TRUTH, the landed
+   onset/care/refractory machinery resolves take-hold) → pg-2 (the
+   owner's prosperity + order inputs joining the two EXISTING
+   resistance seams; the decay read inherits the modifier — less
+   plague time) → pg-3 (`afflictionBand` as the fifth
+   believedConditions key; the POP-owned suspicion term inside
+   C-POPF-2's reception contract; staleness free from the confidence
+   machinery — the stale-belief-refuses-a-clean-caravan fiction) →
+   pg-4 (candidates priced; quarantine OWNER-VALUE). All bands per
+   §131. J-PGC-1..6 SIGNED.
+3. **Two coordination waits honored**: pg-1 waits on the LG joint
+   sitting (the `plagueTouched` field grazes the jointly-ruled
+   column vocabulary); pg-4's rerouting MERGES with M11a's fenced
+   TRADE-REFUSAL wave before either compiles (one design recorded
+   twice, now one). Slot: beside cn in the family-train tail, after
+   POP for pg-3. The §135 opportunity list CLOSES: one item was
+   built all along, the other is now chartered to the owner's own
+   design.
