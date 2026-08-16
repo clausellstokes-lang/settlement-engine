@@ -5000,3 +5000,15 @@ account deletion/export (hard-erase + research export), consent
 machinery, onboarding/empty states, accessibility at code level, the
 program's own bus-factor (the ledger + START_HERE + the pushed
 branches ARE the continuity plan).
+
+### §133a · SEQUENCED (owner, 2026-08-16): items 1, 2, 3, and 5
+### run POST-SOAK-AND-TUNE
+
+The legal sitting (ToS/Privacy/generated-content ownership +
+founder-transfer sign-off), the tablet pass, the pre-registered
+launch KPIs, and the trademark sweep all join the POST-TUNE phase —
+beside the V5 build, ahead of deploy (the KPIs still land BEFORE
+launch by construction; the tablet pass's cures ride the post-tune
+polish window). Item 4 (the community home + launch kit) stays
+unsequenced owner-side, executable whenever the owner likes; the
+gallery-seeding lane offer stands.
