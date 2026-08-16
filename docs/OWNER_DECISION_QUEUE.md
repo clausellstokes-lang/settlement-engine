@@ -7102,3 +7102,44 @@ order is its FIRST obligation (a pin that measures what is drawn,
 counterfactual-paired), the rest join its open targets by
 family (river/water: 3,4,5,6,7,8 one water-coherence member;
 guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
+
+## §196 · MF-B5 COLLECTED — THE VACUITY CURED AND VISUALLY
+## CONFIRMED; MF-B6 DISPATCHED (2026-08-16, chair under §170)
+
+1. **§195.0 was a FALSIFIED PROOF, now fully diagnosed: the
+   institution bodies did not exist as geometry until render time
+   — the census swept a set that did not contain the drawn
+   surface** (actual counts: 1-204 intersecting pairs, 2-92
+   carriageway violations, penetration to 13.65 units — while both
+   censuses read zero). THE CLASS BANKED: a census over a derived
+   set proves nothing about a surface the set does not contain.
+   CURE: solids derive in the fabric → the ground law clips them →
+   the census counts them → the lens draws what it is given;
+   drawn-geometry 0/0 on all ten with restoring counterfactuals.
+   **CHAIR FORENSIC ZOOM CONFIRMS VISUALLY**: the damning region
+   now shows disjoint fronting buildings, a complete label, a
+   meandering river WITH A BRIDGE, connected channels (~80%
+   region grade). Two landing hazards recorded: enforceGround runs
+   TWICE (preAccepted second) and footprints() is now THE CONTRACT
+   for what the leaf draws — a filled body that skips it
+   reproduces the vacuity.
+2. **Also delivered and measured:** river axis-share 0.814→0.067
+   (root cause the D8 lattice, not smoothing); fronting derived
+   from the fronted street (was a free hash over the full turn);
+   the full water member (bridges, water gates, quays INTO the
+   channel, fields clipped at banks, water above the wash);
+   habitation + faubourgs built to the §194-CURED laws (the
+   field-barn correction landed in time); six lenses + the
+   in-world legend (disposing the dotted-box/dashed-arc items);
+   the city web connected 0.028→0.710 ("a square is a crossing,
+   not a barrier"). 90/90 tests, 10/10 determinism, all ten under
+   ceiling ACROSS ALL SIX LENSES.
+3. **RULINGS: the §195-first ordering RATIFIED** (it invalidated
+   the proof everything else would have built on — correct
+   sequence), and the TRUE-measure deferral is CURED not excused:
+   the §11.12a non-deferrable clause is honored by making the
+   minted measure MF-B6's FIRST act. **MF-B6 DISPATCHED:** the
+   true measure first, the metropolis band (5.3 short), the §12
+   immersion suite + §173 lettering splice, §10 states, §11
+   drift/snapshots, Accessible's real hatch, the adopted §18
+   riches' buildable pair, carrying both landing hazards.
