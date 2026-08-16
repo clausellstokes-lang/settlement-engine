@@ -6871,3 +6871,17 @@ executors; gate two runs.
    stray pale-stroke artifact hunt, farmstead lanes, THEN the
    mf-c/mf-d members (states/lenses/chrome/drift + the §12
    immersion suite + the lettering pass).**
+
+## §190 · THE NON-OVERLAP LAW (2026-08-16, owner: "you are
+## overlapping buildings — don't do that")
+
+Charter §17: building footprints are MUTUALLY EXCLUSIVE SOLIDS —
+density by PARTY WALLS (abutment, the terraced-burgage form),
+never by overprint; outbuildings at edges or in yards, never atop
+parents or neighbors; the packer enforces disjointness as a HARD
+constraint (the repair pass demotes/removes with a diagnostic
+rather than overlaps); a DISJOINTNESS PIN sweeps every exemplar
+(zero intersecting pairs, planted-overlap counterfactual);
+compounds reserve ground so seating never enters them; strata
+exempt only across leaves. MF-B4 redirected mid-lane — the fix
+belongs to its inversion work and the pin joins its battery.
