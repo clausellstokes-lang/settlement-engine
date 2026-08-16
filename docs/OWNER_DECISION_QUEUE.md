@@ -7746,3 +7746,31 @@ to MF-B7 same-turn.
    loses every epoch on-state pair; the §197.4a cadence resumes
    at TE34's exposure. Recorded as a supersession-of-cadence
    deviation with cause.
+
+## §214 · OWNER LAW: FEATURE ICONOGRAPHY — CASTLE WALLS LOOK
+## LIKE CASTLE WALLS, TERRAIN LOOKS LIKE TERRAIN (2026-08-16;
+## wave nine first-order per the §212 wave-hygiene policy)
+
+1. **THE LAW**: every feature class draws in the corpus's own
+   drawn vocabulary, within our constraints and style. WALLS:
+   visible masonry thickness (a double-line band, never a bare
+   polyline), towers as drawn rounds/squares at SEEDED-IRREGULAR
+   intervals (atlas prior #7 bans even spacing), crenellation
+   texture where scale permits, gatehouses as structures, keep/
+   motte with hachure; palisades draw as palisade tick-rows,
+   ditches in ditch grammar; all tier-scaled (a thorp palisade is
+   not a metropolis curtain — §161n). TERRAIN: relief in the
+   corpus's hachure/contour vocabulary under the one fixed
+   hard-edged light (§9.5b), cliffs in crag grammar, forest as
+   canopy mass with irregular tree rounds, marsh/reed ticks,
+   terraces as contour+tick pairs — drawn vocabulary at corpus
+   weight, never tint washes alone. Determinism and the op
+   ceiling hold; texture aggregates in defs/patterns per MF-A1's
+   proven approach.
+2. Slotted as WAVE NINE first-order beside the MF-A1 paint
+   integration, the underground stratum, §205 B/C and the chrome/
+   vintage/decay riches — NOT a B8 redirect (fabric geometry is
+   unaffected; the §212 wave-hygiene policy applies). The atlas
+   already carries the measured ingredients (wall stroke 4-5×,
+   hf55's hachure, T-23/T-24 vocabularies); wave nine's brief
+   binds them.
