@@ -5326,3 +5326,50 @@ gallery-seeding lane offer stands.
    artifact — a finding's fix-lane dispatch cost drops to the
    artifact path. All five join the tm-core/soak-harness scope
    beside §141; values as §131 bands where any exist.
+
+## §144 · TC25 + TC26 COLLECTED (2026-08-16, chair)
+
+1. **TC25 (WC/INT/tails): ten trains, nineteen members, compiled.**
+   Dispatchable now: wc-p, wc-1, int-p, int-1, in-1b, es-6b, cw-2,
+   tl-p (2 of 3). Gated: wc-1b (the §52.3 vocabulary-pin cure — a
+   chair signature gating FIVE waves via WC-6's dependency), wc-2
+   behind it, TL-P3 on C-TLF-8's fork. Findings banked: three
+   volumes (WC/INT/CW) cured on the LEDGER only — the build-branch
+   fold is unowned; WC-PREAMBLE lacks eff-1b's M3 block; five
+   registers moved since the rounds' stamps (manifest 20→22,
+   armyTransitKernel at 797/800 with NO hot-file row).
+2. **TC26 (WY/POP): wy-0 (5 flagless) + pop-1 (5, §2.5 flag-LEADS
+   shape) compiled to execution-ready; §125.4 derived not signed
+   (ARMY_SIZE_EDGES/COLUMN_SIZE_EDGES/GAIN 0.2 await the tuning
+   signature).** WY/POP volumes ALSO forked ledger-vs-build (OQ-1
+   joins TC25's same class). ⚠ TWO real defects surfaced: the
+   {total} population tolerance is LIVE CODE
+   (relationshipGraph.getPopulation's TIER_POP fallback understates
+   15-57% and LG's fleet derivation is about to consume it — OQ-2,
+   pre-LG cure candidate); sovereigntyReach is size-blind (cured
+   structurally in-plan). C-POPF-6 is a hard STOP awaiting chair.
+3. **Sequencing yield: the WHOLE remaining first-round queue is now
+   compiled except LG/cn/pg/tm+sk.** cn's compile unlocks NOW
+   (§130's WY condition = TC26 done); pg-0/1/2 wait on nothing.
+
+## §145 · THREE OWNER ORDERS (2026-08-16, mid-turn, verbatim intent)
+
+1. **CONTINUOUS COMPILE:** "when one lane ends, where we can
+   compile, you pick up a new lane to finish the rest of the
+   compiles until they are done." Standing order — the chair refills
+   the compile pipeline at every lane completion until the queue is
+   empty. TC27 (LG + cn + pg) dispatches this turn under it.
+2. **⛔ THE FABLE SOAK AUDIT GATES ALL SOAKS:** "before you do the
+   soaks, i want fable to audit the updated full soak process and
+   make it as perfect as fable can make it." AMENDS §143.1's
+   dispatch timing — the first rolling soak now waits for the audit
+   PASS, then begins at the next exposure. Lane SA-1 (Fable)
+   dispatched this turn; findings fold into the sk charter before
+   the tm+sk compile seals.
+3. **BUILD ALL EIGHT LAYERS:** "also build the original three soak
+   layers as well." Confirmed already in scope — the sk charter
+   (scratchpad laneSHC-SK-CHARTER.md, canonical-until-fold) builds
+   §141.1/2/3 as SK-1/2/3 beside §143's five; one harness, one
+   train, riding tm-core per §141. No engine edits, no flag mint
+   (operator tooling — reasoning recorded in the charter §0),
+   archives-only substrate.
