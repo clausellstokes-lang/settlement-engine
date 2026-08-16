@@ -6060,3 +6060,26 @@ offline. Risk effect: removes the animation-performance and
 scrub-UI scope while keeping the entire drift grammar — the
 achievability of the full ambition rises materially. TC29 notified
 (#12).
+
+## §161l · SPECIFIC POWER + INSTITUTION ATTRIBUTION (2026-08-16,
+## owner: "which power is in power and their related districts/
+## institutions" + "attribute institutions to constructed or
+## to-be-constructed umbrella districts")
+
+Charter §6 gains both: THE SPECIFIC-POWER LAW (the ruler's IDENTITY
+and web render — seat anchors its district, allied institutions
+cluster toward it and share prominence, rivals sit
+distant/diminished/DM-lens; the dossier's real-vs-formal power
+split must be READABLE IN THE DRAWING — the exchange out-scaling
+the hall it answers to; sources: powerStructure +
+faction-institution relationships, degradation where dark) and
+THE ATTRIBUTION LAW (institution→district membership is
+first-class derived truth, ONE answer across dossier/search/click/
+map; DISTRICTS ARE CONSTITUTED BY THEIR MEMBERS — the membership
+roll drives §5.0c field strength; THE FOUNDING RULE: unhoused
+peers SEED the to-be-constructed district — how multiplicity
+instances are born at generation and under drift; unattributable
+institutions fall to the matrix with their siting ring, recorded
+never silent). Chair note: this closes the organism loop —
+institutions seed districts, districts grow, organisms attract
+institutions. TC29 notified (#13).
