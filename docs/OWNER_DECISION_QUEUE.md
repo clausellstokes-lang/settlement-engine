@@ -7843,3 +7843,24 @@ to MF-B7 same-turn.
    its seal triggers re-measurement; wave nine (riches +
    iconography + paint integration) queued; comparison rounds
    continue until §216.1's exit.
+
+## §217 · OWNER GRANT: MAP-PROGRAM BUDGET RAISES AUTHORIZED
+## WHERE NECESSARY FOR THE FULL AMBITION (2026-08-16)
+
+1. **THE GRANT**: the maps being the most immediate user value,
+   the owner authorizes raising the budget "where reasonable...
+   where necessary to reach the full ambition." SCOPE AS RULED:
+   the mf program's OWN declared budgets — the ops/leaf/lens
+   ceiling (2,200), render-time/export pricing, and the mf
+   modules' size budgets at landing. Every raise is MEASURED
+   FIRST (efficiency tried before capacity — "appropriately"),
+   recorded as its own receipt section (old figure, new figure,
+   usage, why efficiency could not close), and RE-PINNED at the
+   new value so it cannot drift silently. Determinism, censuses
+   and proof standards are NOT purchasable with this grant.
+   Repo-wide ratchets (test census ceiling, size baselines, type
+   ceilings) remain under their existing owner-gated law — this
+   grant does not touch them.
+2. Relayed into MF-B8 same-turn: the grain-vs-ceiling contest
+   may now resolve by a measured, pinned raise instead of a
+   stalled amendment proposal.
