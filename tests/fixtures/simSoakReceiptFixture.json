@@ -1,0 +1,952 @@
+{
+  "note": "AUTHORED fixture (never captured from a run: nothing soaks before tm+sk lands). Its own arity is asserted BEFORE any transform output, because a fixture that cannot execute its own defect produces a green, meaningless pin.",
+  "clean": {
+    "schemaVersion": 5,
+    "kind": "whole_world_soak",
+    "seed": "fixture-seed",
+    "years": 3,
+    "settlements": 3,
+    "now": "fixture",
+    "passed": true,
+    "properties": [
+      "no_crash",
+      "rerun_identical",
+      "seed_divergent",
+      "population_bounded",
+      "isolated_worker_executed",
+      "isolated_worker_output_identical"
+    ],
+    "seedDivergence": {
+      "executed": true
+    },
+    "warConvergence": {
+      "schemaVersion": 5,
+      "kind": "war_convergence_observation",
+      "endingsMix": {
+        "terms": 1,
+        "exhaustion": 1,
+        "ruler_change": 0,
+        "fragmentation": 0,
+        "annihilation": 0,
+        "conquest": 1,
+        "punitive_sack_initiation": 0,
+        "punitive_sack_vengeance": 0
+      },
+      "endingsUnclassified": {
+        "not_a_closed_war": 0,
+        "no_terminal_evidence": 1,
+        "razing_road_unreconstructable": 0
+      },
+      "warDurationHistogram": {
+        "short": 2,
+        "long": 1,
+        "generational": 0,
+        "unresolved": 1,
+        "unmeasured": 0
+      },
+      "terminationDecidingTermHistogram": {
+        "cause": 1,
+        "cost_to_continue": 2,
+        "cost_to_stop": 0,
+        "momentum": 1
+      },
+      "decidingTermSampling": {
+        "samples": 4,
+        "horizonTick": 156
+      }
+    },
+    "warConvergenceCensus": {
+      "countedWars": 4,
+      "closedWars": 3,
+      "aliveAtHorizonWars": 1,
+      "histogramSum": 4,
+      "endingsSum": 3,
+      "durationTotalityHolds": true,
+      "endingsTotalityHolds": true,
+      "classifiedEndings": 3,
+      "unclassifiedEndings": 1,
+      "unclassifiedReasons": {
+        "no_terminal_evidence": 1
+      },
+      "unmeasuredFromUnobservedRoad": 0,
+      "unmeasuredFromAmbiguousPair": 0,
+      "decidingTermSamples": 4,
+      "horizonTick": 156
+    },
+    "finalHash": "fixture-final-hash",
+    "directFirstResultSha256": "fixture-first-hash",
+    "stressorCounts": [
+      7,
+      9,
+      8
+    ],
+    "startPopulations": [
+      180,
+      940,
+      5200
+    ],
+    "finalPopulations": [
+      210,
+      1060,
+      5560
+    ],
+    "yearlyBytes": [
+      10,
+      11,
+      12
+    ],
+    "yearlyRealmBytes": [
+      20,
+      21,
+      22
+    ],
+    "yearlyMs": [
+      100,
+      101,
+      102
+    ],
+    "finalRealmBytes": 22,
+    "structuredCloneMs": 5,
+    "subsystems": {
+      "schemaVersion": 5,
+      "kind": "soak_subsystem_configuration",
+      "presetId": "full_simulation",
+      "observedYears": 3,
+      "ruleKeysRecorded": 2,
+      "rules": {
+        "beliefAxesEnabled": true,
+        "warLayerEnabled": true
+      },
+      "stateKeysComplete": true,
+      "stateKeys": {
+        "beliefStates": {
+          "years": 3,
+          "maxEntries": 9,
+          "finalEntries": 9
+        },
+        "traditions": {
+          "years": 2,
+          "maxEntries": 4,
+          "finalEntries": 4
+        },
+        "wars": {
+          "years": 3,
+          "maxEntries": 4,
+          "finalEntries": 1
+        }
+      }
+    },
+    "behavioral": {
+      "schemaVersion": 4,
+      "kind": "whole_world_behavioral_observation",
+      "settlementIds": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "yearly": [
+        {
+          "year": 1,
+          "eventCount": 13,
+          "majorEventCount": 3,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 1,
+            "place": 2,
+            "population": 3,
+            "economy": 4,
+            "politics": 5,
+            "war": 6,
+            "faith": 7,
+            "people": 8,
+            "constructive": 9,
+            "knowledge": 10
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 0
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 1,
+            "attempts": 1,
+            "completions": 0,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 190,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 980,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5320,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        },
+        {
+          "year": 2,
+          "eventCount": 14,
+          "majorEventCount": 4,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 2,
+            "place": 3,
+            "population": 4,
+            "economy": 5,
+            "politics": 6,
+            "war": 7,
+            "faith": 8,
+            "people": 9,
+            "constructive": 10,
+            "knowledge": 11
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 2
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 2,
+            "attempts": 2,
+            "completions": 1,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 200,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 1020,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5440,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        },
+        {
+          "year": 3,
+          "eventCount": 15,
+          "majorEventCount": 5,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 3,
+            "place": 4,
+            "population": 5,
+            "economy": 6,
+            "politics": 7,
+            "war": 8,
+            "faith": 9,
+            "people": 10,
+            "constructive": 11,
+            "knowledge": 12
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 0
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 3,
+            "attempts": 1,
+            "completions": 0,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 210,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 1060,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5560,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        }
+      ],
+      "controls": {}
+    },
+    "runDurationsMs": {
+      "primary": 1,
+      "replay": 1,
+      "divergent": 1
+    },
+    "ticksAdvanced": 468,
+    "frozenTail": false,
+    "failures": [],
+    "completedAt": "fixture"
+  },
+  "withFailures": {
+    "schemaVersion": 5,
+    "kind": "whole_world_soak",
+    "seed": "fixture-seed",
+    "years": 3,
+    "settlements": 3,
+    "now": "fixture",
+    "passed": false,
+    "properties": [],
+    "seedDivergence": {
+      "executed": true
+    },
+    "warConvergence": {
+      "schemaVersion": 5,
+      "kind": "war_convergence_observation",
+      "endingsMix": {
+        "terms": 1,
+        "exhaustion": 1,
+        "ruler_change": 0,
+        "fragmentation": 0,
+        "annihilation": 0,
+        "conquest": 1,
+        "punitive_sack_initiation": 0,
+        "punitive_sack_vengeance": 0
+      },
+      "endingsUnclassified": {
+        "not_a_closed_war": 0,
+        "no_terminal_evidence": 1,
+        "razing_road_unreconstructable": 0
+      },
+      "warDurationHistogram": {
+        "short": 2,
+        "long": 1,
+        "generational": 0,
+        "unresolved": 1,
+        "unmeasured": 0
+      },
+      "terminationDecidingTermHistogram": {
+        "cause": 1,
+        "cost_to_continue": 2,
+        "cost_to_stop": 0,
+        "momentum": 1
+      },
+      "decidingTermSampling": {
+        "samples": 4,
+        "horizonTick": 156
+      }
+    },
+    "warConvergenceCensus": {
+      "countedWars": 4,
+      "closedWars": 3,
+      "aliveAtHorizonWars": 1,
+      "histogramSum": 4,
+      "endingsSum": 3,
+      "durationTotalityHolds": true,
+      "endingsTotalityHolds": true,
+      "classifiedEndings": 3,
+      "unclassifiedEndings": 1,
+      "unclassifiedReasons": {
+        "no_terminal_evidence": 1
+      },
+      "unmeasuredFromUnobservedRoad": 0,
+      "unmeasuredFromAmbiguousPair": 0,
+      "decidingTermSamples": 4,
+      "horizonTick": 156
+    },
+    "finalHash": "fixture-final-hash",
+    "directFirstResultSha256": "fixture-first-hash",
+    "stressorCounts": [
+      7,
+      9,
+      8
+    ],
+    "startPopulations": [
+      180,
+      940,
+      5200
+    ],
+    "finalPopulations": [
+      210,
+      1060,
+      5560
+    ],
+    "yearlyBytes": [
+      10,
+      11,
+      12
+    ],
+    "yearlyRealmBytes": [
+      20,
+      21,
+      22
+    ],
+    "yearlyMs": [
+      100,
+      101,
+      102
+    ],
+    "finalRealmBytes": 22,
+    "structuredCloneMs": 5,
+    "subsystems": {
+      "schemaVersion": 5,
+      "kind": "soak_subsystem_configuration",
+      "presetId": "full_simulation",
+      "observedYears": 3,
+      "ruleKeysRecorded": 2,
+      "rules": {
+        "beliefAxesEnabled": true,
+        "warLayerEnabled": true
+      },
+      "stateKeysComplete": true,
+      "stateKeys": {
+        "beliefStates": {
+          "years": 3,
+          "maxEntries": 9,
+          "finalEntries": 9
+        },
+        "traditions": {
+          "years": 2,
+          "maxEntries": 4,
+          "finalEntries": 4
+        },
+        "wars": {
+          "years": 3,
+          "maxEntries": 4,
+          "finalEntries": 1
+        }
+      }
+    },
+    "behavioral": {
+      "schemaVersion": 4,
+      "kind": "whole_world_behavioral_observation",
+      "settlementIds": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "yearly": [
+        {
+          "year": 1,
+          "eventCount": 13,
+          "majorEventCount": 3,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 1,
+            "place": 2,
+            "population": 3,
+            "economy": 4,
+            "politics": 5,
+            "war": 6,
+            "faith": 7,
+            "people": 8,
+            "constructive": 9,
+            "knowledge": 10
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 0
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 1,
+            "attempts": 1,
+            "completions": 0,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 190,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 980,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5320,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        },
+        {
+          "year": 2,
+          "eventCount": 14,
+          "majorEventCount": 4,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 2,
+            "place": 3,
+            "population": 4,
+            "economy": 5,
+            "politics": 6,
+            "war": 7,
+            "faith": 8,
+            "people": 9,
+            "constructive": 10,
+            "knowledge": 11
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 2
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 2,
+            "attempts": 2,
+            "completions": 1,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 200,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 1020,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5440,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        },
+        {
+          "year": 3,
+          "eventCount": 15,
+          "majorEventCount": 5,
+          "mechanicalOutcomeCount": 5,
+          "unclassifiedEventCount": 1,
+          "eventTypeCounts": {
+            "pulse": 6,
+            "war": 2
+          },
+          "moverCounts": {
+            "pressure": 3,
+            "place": 4,
+            "population": 5,
+            "economy": 6,
+            "politics": 7,
+            "war": 8,
+            "faith": 9,
+            "people": 10,
+            "constructive": 11,
+            "knowledge": 12
+          },
+          "selectedMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyMoverCounts": {
+            "pressure": 0,
+            "place": 1,
+            "population": 2,
+            "economy": 3,
+            "politics": 4,
+            "war": 5,
+            "faith": 6,
+            "people": 7,
+            "constructive": 8,
+            "knowledge": 9
+          },
+          "postApplyReceiptCount": 3,
+          "arcCounts": {
+            "constructive": 4,
+            "destructive": 3
+          },
+          "postApplyArcCounts": {
+            "constructive": 1,
+            "destructive": 1
+          },
+          "motion": {
+            "populationTransitions": 3,
+            "populationMoved": 2,
+            "prosperityTransitions": 3,
+            "prosperityMoved": 1,
+            "powerTransitions": 3,
+            "powerMoved": 0
+          },
+          "attentionCounts": {
+            "s1": 3,
+            "s2": 1
+          },
+          "succession": {
+            "pendingProposals": 3,
+            "attempts": 1,
+            "completions": 0,
+            "integrityFailures": 0,
+            "integrityFailureKinds": {}
+          },
+          "causal": {
+            "crossFamilyEdges": 2,
+            "familyPairs": []
+          },
+          "chronicleSample": [],
+          "stateVectors": {
+            "s1": {
+              "population": 210,
+              "prosperity": 2,
+              "topFaction": "iron_guild",
+              "powerEntropy": 0.42
+            },
+            "s2": {
+              "population": 1060,
+              "prosperity": 3,
+              "topFaction": "river_league",
+              "powerEntropy": 0.61
+            },
+            "s3": {
+              "population": 5560,
+              "prosperity": 5,
+              "topFaction": "crown",
+              "powerEntropy": 0.33
+            }
+          },
+          "phraseRepetition": {
+            "samples": 0
+          },
+          "beliefDivergence": {
+            "observed": false
+          }
+        }
+      ],
+      "controls": {}
+    },
+    "runDurationsMs": {
+      "primary": 1,
+      "replay": 1,
+      "divergent": 1
+    },
+    "ticksAdvanced": 468,
+    "frozenTail": false,
+    "failures": [
+      "rerun_identical: year 2 hash diverged",
+      "population collapse in s1 with no lifecycleDiedAtTick",
+      "heap watermark exceeded the banded ceiling"
+    ],
+    "completedAt": "fixture"
+  }
+}
