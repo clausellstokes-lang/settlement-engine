@@ -10654,7 +10654,7 @@
     },
 {
       "id": "DOM-1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DOM-1.md",
       "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
       "changeManifest": [
@@ -10721,6 +10721,32 @@
           "symbol": "tests/edgeFunctions/aiGroundingBundle.freshness.test.js"
         }
       ],
+      "retiredSymbols": [
+        {
+          "path": "README.md",
+          "symbol": "runs fourteen stages"
+        },
+        {
+          "path": "ARCHITECTURE.md",
+          "symbol": "49 known failures across 34 files"
+        },
+        {
+          "path": "ARCHITECTURE.md",
+          "symbol": "~20,100 tests / ~1988 files"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "symbol": "census of 35 known failures"
+        },
+        {
+          "path": "ARCHITECTURE.md",
+          "symbol": "(Create \u00b7 Welcome \u00b7"
+        },
+        {
+          "path": "docs/CURRENT_STATE.md",
+          "symbol": "migration head 192 is 71 migrations ahead"
+        }
+      ],
       "acceptanceCases": [
         {
           "id": "A1",
@@ -10768,7 +10794,7 @@
     },
 {
       "id": "DOM-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DOM-2.md",
       "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
       "changeManifest": [
@@ -10819,6 +10845,16 @@
           "symbol": "STRIPE_PRICE_SURVEYOR"
         }
       ],
+      "retiredSymbols": [
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "the full 14-stage gate"
+        },
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "points at `npx vite build`"
+        }
+      ],
       "acceptanceCases": [
         {
           "id": "A1",
@@ -10866,7 +10902,7 @@
     },
 {
       "id": "DOM-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/documentation-truth/DOM-4.md",
       "verifiedBase": "30638bb77f188a6bc4a8017bc53c74b63a05cb71",
       "changeManifest": [
@@ -10899,6 +10935,12 @@
         {
           "path": "src/copy/en.js",
           "symbol": "The rail on the right shows the steps the engine took."
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "path": "src/copy/en.js",
+          "symbol": "the fourteen steps the engine took"
         }
       ],
       "acceptanceCases": [

@@ -1,6 +1,7 @@
 # DOM / DOM-1 — the hand-typed machine figures, derived or deleted
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `77111b58`
 - **Verified base:** `claude/composite-r4` at `30638bb77f188a6bc4a8017bc53c74b63a05cb71`
 - **Train:** `dom`, family **DOM**, member **1**. Change paths disjoint from DOM-2
   (`docs/DEPLOY.md` + its freshness walker) and from DOM-4 (`src/copy/en.js` +

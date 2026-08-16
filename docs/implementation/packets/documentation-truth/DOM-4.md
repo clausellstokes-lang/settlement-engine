@@ -1,6 +1,7 @@
 # DOM / DOM-4 — the onboarding coach counts steps it cannot count
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `612d4b10`
 - **Verified base:** `claude/composite-r4` at `30638bb77f188a6bc4a8017bc53c74b63a05cb71`
 - **Train:** `dom`, family **DOM**, member **4** in landing order, third to land. It opens
   `src/copy/en.js`, which DOM-3 also opens, so it lands and flips FIRST and DOM-3 is promoted

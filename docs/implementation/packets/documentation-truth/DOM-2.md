@@ -1,6 +1,7 @@
 # DOM / DOM-2 — the derived edge-secret census, and the runbook that was missing 35 names
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed at:** `3aef7b7a`
 - **Verified base:** `claude/composite-r4` at `30638bb77f188a6bc4a8017bc53c74b63a05cb71`
 - **Train:** `dom`, family **DOM**, member **2**. It owns `docs/DEPLOY.md` OUTRIGHT
   (J-TC22-1), carrying DOM-1's gate-length line as a rider so all members stay path-disjoint.
