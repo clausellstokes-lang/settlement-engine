@@ -27,6 +27,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, test, expect } from 'vitest';
 import { createPRNG, epochSuffix } from '../../src/kernel/prng.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const PULSE_KERNEL = 'src/domain/worldPulse/pulseKernel.js';
@@ -80,21 +81,27 @@ describe('epochSuffix renders the advance-epoch stream segment', () => {
 
   test('the empty-string identity holds over a table of real seeds', () => {
     // This is the whole dark-identity claim reduced to the one algebraic fact it rests on.
-    for (const seed of REAL_SEEDS) {
-      expect(`${seed}${epochSuffix(null)}`, `seed ${JSON.stringify(seed)}`).toBe(seed);
+    // COLLECTED, not bare: a loop that asserts inline dies on the first bad seed, so a
+    // one-seed break and a whole-table break look identical — and the seeds after the
+    // casualty never run at all, which is exactly the shape a dark-identity claim must not
+    // be verified under.
+    const failures = collectSeedFailures(REAL_SEEDS, (seed) => {
+      expect(`${seed}${epochSuffix(null)}`).toBe(seed);
       expect(createPRNG(`${seed}${epochSuffix(null)}`).seed).toBe(createPRNG(seed).seed);
-    }
+    });
+    expectNoSeedFailures(failures, 'an absent epoch leaves every real seed character-identical');
   });
 
   test('the drawn stream is identical dark, not merely the seed string', () => {
     // Same seed ⇒ same draws is the property the identity is FOR; asserting the string alone
     // would leave the inference to the reader.
-    for (const seed of REAL_SEEDS) {
+    const failures = collectSeedFailures(REAL_SEEDS, (seed) => {
       const bare = createPRNG(seed);
       const suffixed = createPRNG(`${seed}${epochSuffix(undefined)}`);
       expect([bare.random(), bare.random(), bare.random()])
         .toEqual([suffixed.random(), suffixed.random(), suffixed.random()]);
-    }
+    });
+    expectNoSeedFailures(failures, 'an absent epoch leaves every real seed drawing the same stream');
   });
 });
 
