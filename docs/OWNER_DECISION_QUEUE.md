@@ -4806,3 +4806,29 @@ rendered as in-fiction absence in peacetime.
    byte-identical (dormancy proof). Estimated 2–3 waves (the pin
    field + arm gating + clamps · the edit-mode toggle + provenance ·
    the chronicle acknowledgment), chartered beside the war console.
+
+### §128a · THE OPTIONAL SECOND PARTY (owner, 2026-08-15: a siege's
+### other party is an OPTION — an intelligent monster's bandit or
+### monster host may besiege a town with no settlement behind it)
+
+1. **The siege stressor's besieger becomes a UNION**: a
+   settlement-faction army (fully organic, as today) OR an EXTERNAL
+   AUTHORED BESIEGER — a typed record per the finite-semantics law
+   (name, strength band, disposition; setting-agnostic buckets,
+   never a simulated character) with no faction economy behind it.
+   The BESIEGED side simulates identically in both cases:
+   starvation, morale, trade choke, belief spread, relief columns —
+   the machinery reads THE SIEGE, not the besieger's pedigree.
+2. **Resolution, chair default (vetoable)**: an UNPINNED external
+   siege resolves ORGANICALLY through the existing siege machinery
+   reading the authored strength band (sorties, relief, attrition
+   against the band) — authored monsters can lose; a PINNED one is
+   held per §128, and the §128.4 dyadic clause simplifies: an
+   external besieger IS authored state, so the pin holds it
+   trivially (no supply-starvation contradiction exists to clamp).
+3. Future-compatible, not built now: the external-host record shape
+   is written so §125.5's bandit-class encounters could later share
+   it (roaming hosts), but this directive mints ONLY the siege
+   case. The dossier's war tab renders an external siege with the
+   besieger's authored name and band — the DM's monster is a first-
+   class antagonist on the same screen as any rival city.
