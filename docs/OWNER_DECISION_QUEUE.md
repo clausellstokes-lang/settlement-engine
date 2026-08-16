@@ -7990,3 +7990,28 @@ browser cost in the same receipt. The ×10 painted rasterize cost
 2. Same curation law as §221; numbering from hf125; spend
    balance-checked; the calibration index grows with teaching
    notes and any new counter-phrases.
+
+## §223 · OWNER ORDER: THE SUBSCRIPTION EXPIRES AFTER TOMORROW —
+## SPEND THE BALANCE ON THE BEST AND MOST VARIED REFERENCES,
+## ALL PURPOSES, ALL JUDGMENT DELEGATED (2026-08-16)
+
+1. **THE ORDER + THE CHAIR'S REVERSAL ON THE RECORD**: my §222
+   boundary ("this round completes the corpus") is REVERSED by
+   the expiry economics — use-it-or-lose-it makes every marginal
+   reference free. HF-3's mandate WIDENED same-turn: deepen all
+   four targets, then the priority list — **THE FANTASTICAL SET
+   is the real gap** (a D&D world engine with an
+   institution-atlas full of fantastical-shape laws and zero
+   visual references: airship dock, teleport precinct, dragon
+   roost, wizard district, arcane university, fantastical port —
+   all IN THE FOLIO REGISTER, cartography never
+   illustration-drama), underground depth for wave nine
+   (sewer/crypt/cistern/undercity-market/entrance vocabulary),
+   chrome+lettering specimens (§12/§173/GAP-I calibration),
+   opportunistic variety. Curation bar UNCHANGED — the budget
+   rose, the register bar did not.
+2. If HF-3's context runs out before the balance does, its
+   receipt carries the HF-4 handoff (remaining balance,
+   remaining wishlist, working counter-phrases) and the chair
+   dispatches the final sweep — the balance should be near zero
+   when the subscription lapses.
