@@ -13651,7 +13651,7 @@
     },
     {
       "id": "EP-0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/EP-0.md",
       "verifiedBase": "a8f42d94af17cc585a63a0b3ecaea792e0da1d48",
       "changeManifest": [
@@ -13728,6 +13728,42 @@
         {
           "path": "tests/lint/mutationCoverage.shared.mjs",
           "symbol": "export function enumerateInvariants"
+        },
+        {
+          "path": "src/kernel/prng.js",
+          "symbol": "export function epochSuffix"
+        },
+        {
+          "path": "tests/kernel/prngForkLabelDelimiter.test.js",
+          "symbol": "const RESERVED_ROOT_SEGMENT_HEADS"
+        },
+        {
+          "path": "tests/kernel/advanceEpochStreamIdentity.test.js",
+          "symbol": "const DARK_TEMPLATE_BODY"
+        },
+        {
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "const READ_SITES"
+        },
+        {
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "const COMPOSITIONS"
+        },
+        {
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "const WRITE_KEY_SITES"
+        },
+        {
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "function readSitesIn"
+        },
+        {
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "function compositionsIn"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "tests/lint/entropyRootCensus.walker.test.js"
         }
       ],
       "acceptanceCases": [

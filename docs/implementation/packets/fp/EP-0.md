@@ -1,6 +1,8 @@
 # EP / EP-0 — the pure segment and the entropy-root census (stage 1 of the `ep-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landing commit:** `6e4f9c3d` (the implementation; `d278dc73` is this promotion). Do not
+  redispatch.
 - **Verified base:** `claude/composite-r4` at `a8f42d94af17cc585a63a0b3ecaea792e0da1d48`
   (the `uf-1` terminal — the five-volume unfork, ODQ §183.1)
 - **Train:** `ep-1`, family **EP**, member **0** of 5. ⛔ The five members are NOT path-disjoint
