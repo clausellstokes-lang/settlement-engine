@@ -5625,3 +5625,29 @@ gallery-seeding lane offer stands.
    returns anchored edit blocks. On its fold: TC29 compiles mf
    (§145.1). Execution slots after the current queue per §150.4 —
    the soak timeline is untouched.
+
+## §153 · THE ARTISTIC IDIOM RULED (2026-08-16, chair on owner
+## delegation "you need to decide the style", vetoable)
+
+1. **RULING: THE SURVEYOR'S FOLIO — Leonardo's Imola, not Picasso.**
+   Cartography-first with a master's hand, not painting: ink-first
+   structure where LINEWEIGHT IS MEANING (wall > landmark > fabric >
+   field), flat hand-pigment washes inside the ink (no gradients,
+   no painterly blending; paper shows through by restraint),
+   rationed pictorial accents (a banded density per tier; an accent
+   carrying no world-information is cut), the DOCUMENT CONCEIT
+   (every map is a folio leaf of the dossier, one language with the
+   PDF/bound-book surfaces), the ERA LAW (pre-industrial drafting
+   conventions only; no GIS symbology, photorealism, or fake-3D on
+   the Plan). Charter §9 holds the full text incl. the six-lens
+   folio mapping.
+2. **Why (recorded for the veto):** da Vinci's 1502 Imola plan IS
+   this product's ancestor — a town drawn precisely enough to
+   govern from, beautifully enough to treasure; it fits the era,
+   the dossier conceit, the legibility law (ink hierarchy = the
+   glance layer), and setting-agnosticism. Competitively it claims
+   the unowned square: Watabou owns ink austerity, FTG owns flat
+   modern-GIS fantasy; NEITHER owns precision-with-warmth. Say
+   "veto" for the painterly alternative.
+3. Both live map lanes redirected mid-flight: MF-P1 renders to §9;
+   MF-R1's audit scope extends to §9.
