@@ -7402,3 +7402,13 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    VISUAL AUDIT YET** — walls, alley register + street attachment,
    transitive access, zones — all four redirected into MF-B7
    mid-lane; the charter re-sync rider carries all four texts.
+
+## §204 · OWNER AMENDMENT: COURTS ARE RARE (2026-08-16)
+
+The §201 route-isolated interior court is the EXCEPTION, not a
+routine block feature: courts are a small minority of alley
+spaces, derived organically from the block grammar with an
+upper-band pin (executor sets the number from the reference
+corpus, recorded as a judgment row) so court-heavy blocks red.
+Island buildings keep their pin and inherit the rarity. Relayed
+to MF-B7 same-turn.
