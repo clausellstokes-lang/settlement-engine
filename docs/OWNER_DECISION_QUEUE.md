@@ -4921,3 +4921,46 @@ rendered as in-fiction absence in peacetime.
    armies and POP's for columns (it lives with the transit kernels,
    not the console); the cn charter cites both rather than owning
    them.
+
+## §131 · THE PORTABILITY PRINCIPLE NAMED (owner rationale,
+## 2026-08-15 — the WHY under the finite-semantics constitution)
+
+**RELATIVE OVER ABSOLUTE, BECAUSE RELATIVE TRANSFERS**: heuristic
+bands instead of prices, typed buckets instead of setting facts,
+sub-century scope, the technology freeze — all exist so ONE engine
+drops into ANY campaign (homebrew, official, third-party) without
+negotiating against that world's own economy, canon, or clock. Two
+DMs' price realities differ; genre worlds are canonically stagnant
+across millennia; the sub-century is the practical campaign scale.
+No future wave adds absolute prices, real-world currencies, or
+setting-specific facts — such an addition is a DEFECT BY
+CONSTITUTION, not an enhancement. (The realism assessment re-grades
+accordingly: banded economics, frozen institutions, and the
+technology freeze are AFFIRMATIVE CORRECTNESS for this product.)
+
+## §132 · THE cn CHARTER ACCEPTED AND BANKED (2026-08-15, chair,
+## vetoable; evidence laneCNC-CN-CHARTER.md + laneCNC-report.md,
+## measured-static at `30638bb7`)
+
+1. **The six-wave charter is ACCEPTED** (cn-1 read model · cn-2 tab
+   · cn-3 console · cn-4 pin · cn-5 host+valve · cn-6 PDF parity),
+   J-CNC-1..8 SIGNED — including the two census finds that reshape
+   the build: **the pin's habitat EXISTS** (the landed
+   blocked-stressor idiom — blockedBySynergy + blockFloor — IS the
+   suppress-with-floor shape; cn-4 rides it as a sibling authority,
+   never a parallel arm) and **⛔ SIEGE_MAX_AGE=60 is a terminal arm
+   the directive never named** — a pin gating only the stressor roll
+   would watch its eternal siege force-lift at tick 60; BOTH arms
+   are in cn-4's contract. The WY trigger is now MEASURED (the
+   army-supply binding is WY's future act); every console verb is a
+   new walker-demanded command registration (the registry carries
+   zero war verbs today).
+2. **OQ dispositions**: OQ-2 — the pin's REGENERATION-SURVIVAL proof
+   is a cn-4 COMPILE STOP obligation (the estate's most-bitten
+   class; the pin must round-trip create→persist→regenerate→undo or
+   the wave stops); OQ-3 — tab placement defers to compile
+   measurement with a lean to upgrading the existing tab in place;
+   OQ-4 — the §77-R3 fork guarding the no-flag console is signed;
+   OQ-1 — TIER-GATING of command powers stays an OWNER-VALUE flag,
+   parked with the §71.2 family. The charter BANKS until WY lands,
+   per §130.2.
