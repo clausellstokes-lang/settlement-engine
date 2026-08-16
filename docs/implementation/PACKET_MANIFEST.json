@@ -12604,7 +12604,7 @@
     },
     {
       "id": "TM-2A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/TM-2A.md",
       "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
       "changeManifest": [
@@ -12645,6 +12645,38 @@
         {
           "path": "tests/security/migrationSequenceAll.pglite.test.js",
           "symbol": "migration"
+        },
+        {
+          "path": "supabase/migrations/196_world_sim_metrics.sql",
+          "symbol": "create table if not exists public.world_sim_metrics ("
+        },
+        {
+          "path": "supabase/migrations/196_world_sim_metrics.sql",
+          "symbol": "alter table public.world_sim_metrics enable row level security;"
+        },
+        {
+          "path": "supabase/migrations/196_world_sim_metrics.sql",
+          "symbol": "create or replace function public.load_sim_metrics(p_rows jsonb)"
+        },
+        {
+          "path": "supabase/migrations/196_world_sim_metrics.sql",
+          "symbol": "create or replace function public.rollup_sim_metrics(p_run_id text)"
+        },
+        {
+          "path": "supabase/migrations/196_world_sim_metrics.sql",
+          "symbol": "world_sim_metrics_epoch_kind_check"
+        },
+        {
+          "path": "scripts/telemetry/loadSimMetrics.mjs",
+          "symbol": "export function buildLoadPayload"
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "function createTableColumns"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "\"tests/security/worldSimMetrics.pglite.test.js\""
         }
       ],
       "acceptanceCases": [
@@ -12687,7 +12719,7 @@
     },
     {
       "id": "TM-3A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/TM-3A.md",
       "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
       "changeManifest": [
@@ -12716,6 +12748,26 @@
         {
           "path": "scripts/telemetry/simMetricEmitter.mjs",
           "symbol": "export function emitRows"
+        },
+        {
+          "path": "scripts/telemetry/simMetricAggregate.mjs",
+          "symbol": "export function bandFamilies"
+        },
+        {
+          "path": "scripts/telemetry/simMetricAggregate.mjs",
+          "symbol": "export function aggregate"
+        },
+        {
+          "path": "scripts/telemetry/simMetricAggregate.mjs",
+          "symbol": "export function populationRunaway"
+        },
+        {
+          "path": "tests/lib/simMetricAggregate.test.js",
+          "symbol": "function epochVocabularyIn"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "files: 2443, parked: 364, credited: 2079, titles: 20326, suiteTitles: 5697,"
         }
       ],
       "acceptanceCases": [

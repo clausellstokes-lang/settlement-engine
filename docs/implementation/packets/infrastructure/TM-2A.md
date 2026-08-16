@@ -1,6 +1,6 @@
 # TM / TM-2A — storage: migration 196 and the loader (member 4 of `tm-core`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6b337fb1f7bb1d3dde0810310a01a3653c874aac`
   (the `mb` terminal; the tm+sk family's dispatch base)
 - **Train:** `tm-core`, family **TM**, member **4** of 5 — **stage 2**, promoted only
@@ -89,4 +89,6 @@ npx vitest run tests/security/worldSimMetrics.pglite.test.js tests/security/migr
 - ⚠ The 180 s pglite hook-timeout class applies and is spelled with the standard
   never-tune comment.
 - ⚠ **CLAIM_RE** over the migration header: **0 matches.**
-- ⚠ **Census:** one new test file, five titles, one suite title.
+- ⚠ **Census:** one new test file, five titles, **TWO** suite titles — the presence
+  guard and the behaviour suite are separate `describe` blocks, which is why the
+  train's suite delta is +5 and not +4.

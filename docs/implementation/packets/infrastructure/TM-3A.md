@@ -1,6 +1,6 @@
 # TM / TM-3A — the read layer, and the train's census re-record (member 5 of `tm-core`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `6b337fb1f7bb1d3dde0810310a01a3653c874aac`
   (the `mb` terminal; the tm+sk family's dispatch base)
 - **Train:** `tm-core`, family **TM**, member **5** of 5 — **stage 2**, last in the train.
@@ -48,7 +48,11 @@ ONE member per train declares
 `tests/lint/sovereigntyLightingContract.walker.test.js`; this is it, last in the
 train, so the tuple is final. ⚠ The tuple is **RE-DERIVED from this train's own
 executed run and never transcribed** — the `gvf` `4e215298` idiom — and the delta is
-attributed by reverting ONE test file at a time.
+attributed ONE TEST FILE AT A TIME. ⭐ The probe is a one-title **credited stub**
+rather than a revert: removing a file moves `files`, which is asserted BEFORE
+`titles`, so the sequenced census would stop before reporting the figure the probe
+exists to read. The first five probes were run without the `vitest` import, parked,
+and reported nothing at all — recorded in the walker beside the tuple.
 
 ## §5 · SCOPE AND BOUNDARY
 
@@ -76,8 +80,9 @@ npx vitest run tests/lib/simMetricAggregate.test.js tests/lint/sovereigntyLighti
 - ⚠ **The census is SEQUENCED** — `files`, `parked` and `credited` are asserted
   BEFORE `titles`, and `suiteTitles` stays invisible until `titles` is right. Their
   passing is the receipt that the file-level prediction was correct.
-- ⚠ **A parked file swallows its titles.** A delta smaller than the titles added is
-  not arithmetic to accept; it is attributed by reverting ONE test file at a time.
+- ⚠ **A parked file swallows its titles**, and so does a parked PROBE. A delta
+  smaller than the titles added is not arithmetic to accept; and an attribution probe
+  that is not itself credited measures nothing.
 - ⚠ **§102.3:** `tests/lib/` is not an enforcer dir and `simMetricAggregate.test.js`
   matches no `NAME_PATTERN` token ⇒ **no mutation-coverage row owed.**
 - ⚠ **Census:** one new test file, four titles, one suite title.
