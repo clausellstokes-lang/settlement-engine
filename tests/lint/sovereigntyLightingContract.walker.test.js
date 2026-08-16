@@ -4444,7 +4444,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   re-running this arm with `titles` re-recorded, which then reported `expected 5681 to be
     //   5678` — read from the walker's own failure output, never assumed to have held.
     // 2438/364/2074/20226/5678 → 2438/364/2074/20235/5681.
-    files: 2438, parked: 364, credited: 2074, titles: 20235, suiteTitles: 5681,
+    // da-b (DA-A3, DA-A4, DA-B2 — the display-adoption family's second train) re-records on
+    //   DA-B2, its last tests-moving member. files/parked/credited AGAIN do not move: no
+    //   member creates a test file, and all three figures are asserted BEFORE `titles` and
+    //   all three passed. +12 titles and +1 suite, and the split closes per file: DA-A3's
+    //   convergence walker adds 8 arms and one describe to relationshipEdgeCriminalNetwork,
+    //   DA-B2's corrected locale guard adds 3 (the bare-form ban, its positive control and
+    //   its anti-vacuity arm) inside the EXISTING describe, and DA-A4 adds none — it re-keys
+    //   one existing assertion rather than adding a title. 8 + 3 + 1 = 12, and the single
+    //   new describe is the +1 on the suite layer.
+    // ⚠ The arms are SEQUENCED and stop at the first red figure, so this took two runs
+    //   again: `titles` (20235 → 20247), then `suiteTitles` reported `expected 5682 to be
+    //   5681` — read from the walker's own output, never assumed to have held.
+    // 2438/364/2074/20235/5681 → 2438/364/2074/20247/5682.
+    files: 2438, parked: 364, credited: 2074, titles: 20247, suiteTitles: 5682,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
