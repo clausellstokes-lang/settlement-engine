@@ -1,22 +1,24 @@
 /**
- * FounderTile.jsx — P116 / X-8 personalized Founder Lifetime recognition.
+ * FounderTile.jsx — P116 / X-8 personalized Founder recognition.
  *
- * $99 lifetime is a conviction product. Wrong for the new DM (premature),
- * neutral for the intermediate (don't know they'll use it long-term),
- * a no-brainer for the worldbuilder who recognizes they'll use the tool
- * for a year. The current pricing page shows it to everyone equally.
+ * ⛔ THIS TILE NO LONGER SELLS ANYTHING (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118).
+ * It used to open a $99 `founder_lifetime` checkout — the second live purchase
+ * path for a chair, beside the pricing page's own. The owner attested on
+ * 2026-08-15 that no chair has ever been sold, and a chair is given rather than
+ * bought, so the checkout call, the price arithmetic and the error/retry
+ * recovery around it are all GONE. There is no failure to recover from: the CTA
+ * is a link to the Founders' Hall, where the letterbox already lives.
  *
- * This tile surfaces only when the user has demonstrated worldbuilder
- * behavior (audience='worldbuilder'). Then it's not a discount — it's
- * a recognition: "you've earned this offer."
+ * What survives is the recognition itself. The tile surfaces only when the user
+ * has demonstrated worldbuilder behavior (audience='worldbuilder'), and then it
+ * says the Hall should know their name.
  *
  * Self-gates on:
  *   - flag('founderRecognition') (default off; flip when audience hook is stable)
  *   - useReaderAudience() === 'worldbuilder'
  *   - founderSeatsRemaining > 0 (live RPC; null tolerated)
  *
- * Click → opens checkout for `founder_lifetime` (same path the
- * PricingPage uses).
+ * Click → navigates to the Hall. `lib/stripe.js` is deliberately NOT imported.
  */
 
 import { useEffect, useState } from 'react';
@@ -24,11 +26,9 @@ import { useStore } from '../../store/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
-import { startCheckout } from '../../lib/stripe.js';
+import { viewToPath } from '../../lib/routes.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { t } from '../../copy/index.js';
 import { sans, serif_, FS, SP, swatch } from '../theme.js';
-import Button from '../primitives/Button.jsx';
 
 const GOLD_500 = swatch['#C9A24C'];
 const GOLD_400 = swatch['#D9B566'];
@@ -44,10 +44,6 @@ export default function FounderTile() {
   const tier = useStore(s => s.auth.tier);
   const recognitionEnabled = flag('founderRecognition');
   const [seatsRemaining, setSeatsRemaining] = useState(null);
-  const [loading, setLoading] = useState(false);
-  // P10 — a $99 CTA that silently no-ops on failure is a dead-end worse than the
-  // sibling PricingPage path. Surface a domain-language error + a retry path.
-  const [error, setError] = useState(null);
 
   // Pull live seat counter once on mount. If the RPC errors, we leave
   // seatsRemaining null and fall back to the static "limited seats" copy.
@@ -84,27 +80,17 @@ export default function FounderTile() {
 
   if (!eligible) return null;
 
-  const claimSeat = seatsRemaining ? FOUNDER_SEAT_CAP - seatsRemaining + 1 : null;
-  // P7 — same computation as the PricingPage founder card so the seat-scarcity
-  // meter reads identically on both surfaces (the fraction of seats taken).
+  const chairsHeld = typeof seatsRemaining === 'number'
+    ? FOUNDER_SEAT_CAP - seatsRemaining
+    : null;
+  // P7 — same computation as the PricingPage charter band so the meter reads
+  // identically on both surfaces (the fraction of chairs held).
   const seatsPct = typeof seatsRemaining === 'number'
     ? Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - seatsRemaining) / FOUNDER_SEAT_CAP) * 100))
     : null;
 
-  async function handleClick() {
-    setLoading(true);
-    setError(null);
+  function handleClick() {
     Funnel.track(EVENTS.FOUNDER_TILE_CLICKED, { seatsRemaining, audience });
-    try {
-      await startCheckout('founder_lifetime');
-    } catch (e) {
-      // Keep the raw error in the console; show a recoverable, domain-language
-      // message inline so the highest-value CTA is never a silent dead-end.
-      console.warn('[FounderTile] checkout failed:', e);
-      setError(t('purchase.failureMessage'));
-    } finally {
-      setLoading(false);
-    }
   }
 
   return (
@@ -128,18 +114,18 @@ export default function FounderTile() {
           color: GOLD_500, fontSize: FS.xxs, fontWeight: 800,
           letterSpacing: '0.12em', textTransform: 'uppercase',
         }}>
-          You’ve earned this offer
+          The Hall should know your name
         </div>
         <h2 style={{
           margin: `${SP.sm}px 0 0`, fontFamily: serif_, fontWeight: 600,
           fontSize: FS['22'], color: GOLD_500, letterSpacing: '-0.005em',
         }}>
-          Founder Lifetime
+          The Founders&rsquo; Hall
         </h2>
         {typeof seatsRemaining === 'number' && (
           <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
             <div style={{ fontSize: FS.xs, color: swatch['#C8B098'], fontStyle: 'italic' }}>
-              {seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining
+              {chairsHeld} of {FOUNDER_SEAT_CAP} chairs held
             </div>
             {/* P7 — the accessible live count PLUS a thin filled meter
                 (aria-hidden), matching the PricingPage founder card's two-channel
@@ -157,48 +143,24 @@ export default function FounderTile() {
           fontSize: FS.sm, color: swatch['#C8B098'],
           lineHeight: 1.6, fontFamily: serif_,
         }}>
-          <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>
-          <div>Founder = <b style={{ color: GOLD_400 }}>$99 forever</b></div>
-          {claimSeat && (
-            <div style={{ marginTop: SP.xs, fontStyle: 'italic', color: swatch['#A08060'] }}>
-              …plus your name in the credits (seat {claimSeat}).
-            </div>
-          )}
-        </div>
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onClick={handleClick}
-          disabled={loading}
-          style={{ marginTop: SP.md }}
-        >
-          {loading
-            ? 'Starting checkout…'
-            : claimSeat
-              ? `Claim seat ${claimSeat}, $99 one-time`
-              : 'Claim a Founder seat, $99 one-time'}
-        </Button>
-        {error && (
-          <div
-            role="alert"
-            style={{
-              marginTop: SP.sm, display: 'flex', flexDirection: 'column',
-              alignItems: 'center', gap: SP.xs,
-              fontSize: FS.sm, color: GOLD_400, textAlign: 'center',
-            }}
-          >
-            <span>{error}</span>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleClick}
-              disabled={loading}
-            >
-              Try again
-            </Button>
+          <div>A chair is a place in the credits, for as long as SettlementForge runs.</div>
+          <div style={{ marginTop: SP.xs, color: GOLD_400 }}>
+            Thirty chairs, given by invitation and never sold.
           </div>
-        )}
+        </div>
+        <a
+          href={viewToPath('founders')}
+          onClick={handleClick}
+          style={{
+            marginTop: SP.md, display: 'block', textAlign: 'center',
+            padding: '12px 16px', minHeight: 44, boxSizing: 'border-box',
+            background: GOLD_500, color: INK_900,
+            fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+            textDecoration: 'none',
+          }}
+        >
+          Request a chair
+        </a>
       </div>
     </div>
   );

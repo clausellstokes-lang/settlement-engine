@@ -22,10 +22,11 @@
 import { supabase, isConfigured } from './supabase.js';
 
 /**
- * Cap from the Founder Lifetime SKU contract. The SERVER is the source of
- * truth: create-checkout/index.ts enforces FOUNDER_SEAT_LIMIT = 30 (it sells
- * out at 30/30). This mirrors that, alongside en.js#seatsRemaining ("of 30
- * seats") and TIERS.founder.seatLimit.
+ * How many chairs the Founders' Hall holds. It is NOT a sale cap: no chair has
+ * ever been sold (ODQ §118) and create-checkout refuses `founder_lifetime`
+ * outright, so the server-side seat gate that used to mirror this number is
+ * gone. The remaining homes are TIERS.founder.seatLimit and tierFacts'
+ * FOUNDER_SEATS, and tests/config/tierFacts.contract.test.js pins them equal.
  */
 export const FOUNDER_SEAT_CAP = 30;
 

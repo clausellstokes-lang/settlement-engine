@@ -399,13 +399,16 @@ export const en = Object.freeze({
           '30 narrative credits every month, then pay-per-use packs',
         ],
       },
+      // ⛔ A CHAIR IS GIVEN, NEVER SOLD (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118).
+      // priceLabel/priceSub are DELETED rather than emptied: the band stops
+      // rendering a price at all, and a key that exists is a key something can
+      // render again. "seats remaining" is sale vocabulary the Hall's covenant
+      // voice forbids; the Hall counts chairs HELD, and so does this.
       founder: {
-        name:        'Founder Lifetime',
-        priceLabel:  '$99',
-        priceSub:    'one-time',
-        tagline:     'The first 30 supporters keep Cartographer forever.',
-        cta:         'Claim a Founder seat',
-        seatsRemaining: '{remaining} of 30 seats remaining.',
+        name:        'Founder',
+        tagline:     'Thirty chairs in the credits, for as long as SettlementForge runs.',
+        cta:         'Request a chair',
+        chairsHeld:  '{held} of 30 chairs held.',
         features: [
           'Everything in Cartographer, forever',
           'Founder badge on your dossiers',
@@ -463,7 +466,7 @@ export const en = Object.freeze({
           ],
         },
         founder: {
-          tagline:  'The whole living simulation, forever. Pay once.',
+          tagline:  'The whole living simulation, for as long as SettlementForge runs. By invitation.',
           features: [
             'Everything in Cartographer, forever',
             'Founder badge on your dossiers',
@@ -1280,8 +1283,8 @@ export const en = Object.freeze({
       body:     'Your first Narrative is on us. It turns this town’s data into prose your players can hear.',
     },
     founder_eligible: {
-      headline: 'You’ve earned this offer.',
-      body:     'Five settlements, neighbours linked, dossiers exported. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
+      headline: 'The Hall should know your name.',
+      body:     'Five settlements, neighbours linked, dossiers exported. The Founders’ Hall keeps thirty chairs, given by invitation and never sold. Ask for one by letter.',
     },
   },
 
@@ -1302,9 +1305,9 @@ export const en = Object.freeze({
       lineWorldbuilder: 'The worldbuilder’s tier: the war layer, the pantheon, campaigns, and the chronicle.',
     },
     founder: {
-      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
-      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 30 seats only.',
-      lineWorldbuilder: 'For DMs running living regions. Pay once, run every campaign you’ll ever build.',
+      lineNew:          'For DMs who already know they’ll build campaigns. A chair is asked for, not bought.',
+      lineIntermediate: 'Thirty chairs in the Founders’ Hall, given by invitation and never sold.',
+      lineWorldbuilder: 'For DMs running living regions. A place in the credits, for as long as SettlementForge runs.',
     },
   },
 
@@ -1571,8 +1574,8 @@ export const en = Object.freeze({
       a: 'If you were charged twice, charged in error, or did not receive what you bought, contact Customer Support below with your Stripe receipt. Other refunds and cancellations follow the Terms and any rights required by applicable law.',
     },
     founderLifetime: {
-      q: 'What is the Founder Lifetime plan?',
-      a: 'A one-time payment for lifetime access to the paid Cartographer tier and a place in the credits. Capped at the first 30 buyers; the counter is live above this FAQ.',
+      q: 'What is a Founder chair?',
+      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds thirty chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',

@@ -34,7 +34,7 @@ import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
 // (anon size ceiling, free save cap) can never drift from what the strip shows.
 // tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
 // so it adds nothing to the first-paint closure.
-import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
+import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
   MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, MapPlateCard, SCENE, cardStyle,
@@ -190,10 +190,15 @@ function GalleryCards({ onNavigate }) {
 }
 
 // ── 06 · Set out — tier strip + footer ───────────────────────────────────────
-// Live founder-seat counter (owner: "link it to the amount of seats available").
-// Lazy-imports the seat module so supabase never rides the eager chunk; the RPC
-// read is anon-safe and 5-minute cached. Falls back to the static cap line when
-// the count is unavailable (null), so a backend hiccup never breaks the card.
+// Live founder-chair counter. Lazy-imports the seat module so supabase never
+// rides the eager chunk; the RPC read is anon-safe and 5-minute cached. Falls
+// back to the static cap line when the count is unavailable (null), so a backend
+// hiccup never breaks the card.
+//
+// ⛔ IT COUNTS CHAIRS HELD, NOT SEATS LEFT (DESIGN_FOUNDERS_HALL §1, ODQ §118).
+// "N/30 seats left" is scarcity vocabulary for a thing on sale, and no chair has
+// ever been sold. The Hall's own covenant voice reads "N of 30 chairs held", and
+// the landing page now says the same words as the Hall it points at.
 function FounderSeatLine() {
   const [seats, setSeats] = useState(null); // { remaining, cap } once loaded
   useEffect(() => {
@@ -213,7 +218,9 @@ function FounderSeatLine() {
       marginTop: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
       letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(224,192,128,1)',
     }}>
-      {typeof remaining === 'number' ? `${remaining}/${cap} seats left` : `Limited to ${cap} seats`}
+      {typeof remaining === 'number'
+        ? `${cap - remaining} of ${cap} chairs held`
+        : `${cap} chairs, by invitation`}
     </div>
   );
 }
@@ -222,7 +229,7 @@ function FounderSeatLine() {
 // carries {anonSize}/{freeSaves} tokens (copy/landing.js); the numbers come from
 // config/tierFacts.js so the strip can never restate a ceiling the catalog didn't
 // (brief §4 / ruling #6 — config-sourced facts, zero hand-typed numbers).
-const TIER_FACT_VARS = { anonSize: ANON_MAX_SIZE_LABEL, freeSaves: FREE_SAVE_LIMIT };
+const TIER_FACT_VARS = { anonSize: ANON_MAX_SIZE_LABEL, freeSaves: FREE_SAVE_LIMIT, seats: FOUNDER_SEATS };
 function fillTierBody(body) {
   return String(body).replace(/\{(\w+)\}/g, (m, name) =>
     Object.prototype.hasOwnProperty.call(TIER_FACT_VARS, name) ? String(TIER_FACT_VARS[name]) : m);
@@ -254,9 +261,9 @@ function TierStrip() {
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
             {/* Per-segment badge colour: the AI-channel band renders violet; a
-                'Premium' segment always renders gold (so Founder's "Premium ·
-                Lifetime" matches Cartographer's gold PREMIUM); everything else
-                follows the tier's accent. */}
+                'Premium' segment always renders gold; everything else follows
+                the tier's accent. Founder reads "By invitation" and is therefore
+                deliberately NOT gold: it is not a purchasable premium segment. */}
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>

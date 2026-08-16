@@ -40,15 +40,21 @@ export const pricingPage = {
     },
     charter: {
       // The Founder band renders as a charter object, not a fourth card.
+      //
+      // ⛔ A CHAIR IS GIVEN, NEVER SOLD (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118).
+      // Every sale word is gone from this block on purpose: no price, no
+      // "one payment", no "seats remaining" — the Hall's own covenant voice
+      // forbids "remaining" as sale vocabulary, and the Hall already renders
+      // "N of 30 chairs held". The two surfaces now speak one vocabulary.
+      // Numbers stay interpolated from FOUNDER_SEAT_CAP; none is typed here.
       name: 'The Founder Charter',
-      lead: 'Everything Cartographer runs, forever. One payment, no clock.',
-      arithmetic: '{price} is about {months} months of Cartographer. Everything after that is the charter working for you.',
-      sustainability: '{seats} seats because lifetime revenue should fund the roadmap, not replace it.',
-      capNote: 'When the {seats} seats are gone, the charter closes.',
-      seatsRemaining: '{remaining} of {seats} seats remaining.',
-      seatsFallback: 'Limited to {seats} seats.',
-      credits: 'Includes {credits} credits.',
-      cta: 'Claim a founder seat',
+      lead: 'Everything Cartographer runs, for as long as SettlementForge runs. {seats} chairs, all by invitation.',
+      sustainability: '{seats} chairs, and no more — the Hall is a place in the credits, not a revenue lane.',
+      capNote: 'A chair is given, never sold.',
+      chairsHeld: '{held} of {seats} chairs held.',
+      chairsFallback: '{seats} chairs, all by invitation.',
+      credits: 'A seated chair carries {credits} credits.',
+      cta: 'Request a chair',
     },
   },
 
@@ -153,8 +159,8 @@ export const pricingPage = {
         a: 'Purchased pack credits never expire. Monthly Cartographer credits arrive with each cycle.',
       },
       {
-        q: 'Is the founder price forever?',
-        a: 'Yes. {seats} seats, one payment, everything Cartographer runs for as long as SettlementForge runs. The cap never reopens.',
+        q: 'Can I buy a Founder chair?',
+        a: 'No. The {seats} chairs of the Founders’ Hall are given by invitation and have never been for sale. A chair is a place in the credits for as long as SettlementForge runs; you can ask for one by letter in the Hall.',
       },
       {
         q: 'What if an AI task fails?',

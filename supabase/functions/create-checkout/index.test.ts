@@ -239,29 +239,43 @@ Deno.test('the rate limiter gates ONLY the single_dossier path (a credits checko
   assertEquals(stripe.created.length, 1);
 });
 
-// ── Founder Lifetime seat cap (advertised 30 seats, enforced server-side) ────
-// founder_seats_taken() feeds both the pricing-page counter AND this gate; a
-// sold-out founder tier must never reach Stripe.
+// ── The Founder chair is ABOLISHED, not capped (ODQ §118) ───────────────────
+// These two tests used to assert that a founder checkout SUCCEEDS below the cap
+// and is refused at it. A chair is given, never sold, so both are inverted: the
+// request is refused with the generic 400 at EVERY seat count, and it is refused
+// before any Stripe call regardless of how many chairs are held.
 
-Deno.test('founder_lifetime with seats remaining creates a checkout session', async () => {
+Deno.test('founder_lifetime is refused (400) even with chairs unheld, and never reaches Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
   );
-  assertEquals(res.status, 200);
-  assertEquals(stripe.created.length, 1);
-  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'founder_lifetime');
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
 });
 
-Deno.test('founder_lifetime at the 30-seat cap is rejected (400) and never reaches Stripe', async () => {
+Deno.test('founder_lifetime is refused at a full Hall too (the refusal is not a seat gate)', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 30) },
   );
   assertEquals(res.status, 400);
-  assertEquals(stripe.created.length, 0);   // seat 31 is never offered for sale
+  assertEquals(stripe.created.length, 0);
+});
+
+// CONTROL: the harness can still create a session, so the two refusals above are
+// a real verdict on the product and not a stub that refuses everything.
+Deno.test('CONTROL: premium still creates a checkout session on the same harness', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'premium' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'premium');
 });
 
 // ── Redeem codes (migration 107) ──────────────────────────────────────────────
@@ -411,20 +425,21 @@ Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never r
 // to revert. The "a mode_mismatch reservation returns a notice WITHOUT reverting" test
 // above covers the replacement behaviour, including that no coupon rides the session.)
 
-Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {
+// Re-keyed onto `premium` (ODQ §118): the founder seat-count RPC no longer runs,
+// so the fail-closed behaviour is asserted on a product that still transacts.
+Deno.test('an admin-lookup failure FAILS CLOSED (400, no session)', async () => {
   const stripe = makeStripe();
-  // rpc resolves an error (seatsTaken=null + patched rpc): simulate via a stub
-  // whose rpc always errors.
+  // Every admin call errors: the handler must refuse rather than proceed.
   // deno-lint-ignore no-explicit-any
   const adminClient = (): any => ({
     from: () => ({
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_x' }, error: null }) }) }),
-      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: { message: 'profiles unavailable' } }) }) }),
+      update: () => ({ eq: () => Promise.resolve({ error: { message: 'profiles unavailable' } }) }),
     }),
     rpc: () => Promise.resolve({ data: null, error: { message: 'counter unavailable' } }),
   });
   const res = await handleCreateCheckout(
-    req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
+    req({ product: 'premium' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient },
   );
   assertEquals(res.status, 400);
@@ -657,11 +672,13 @@ Deno.test('savePaymentMethod is ignored for an ANONYMOUS buyer (no signed-in use
   assertEquals('payment_intent_data' in stripe.created[0], false);
 });
 
-Deno.test('savePaymentMethod is ignored on a non-credit-pack payment product (founder_lifetime)', async () => {
+// Re-keyed onto `single_dossier` (ODQ §118): founder_lifetime is refused before
+// any session exists, so it can no longer witness a session-shape claim.
+Deno.test('savePaymentMethod is ignored on a non-credit-pack payment product (single_dossier)', async () => {
   const stripe = makeStripe();
   await handleCreateCheckout(
-    req({ product: 'founder_lifetime', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
+    req({ product: 'single_dossier', checkoutToken: 'tok_'.padEnd(32, 'a'), savePaymentMethod: true }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient(null) },
   );
   assertEquals('payment_intent_data' in stripe.created[0], false);
 });

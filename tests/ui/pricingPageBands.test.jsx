@@ -91,13 +91,19 @@ describe('PricingPage — the five-band drift contract', () => {
     );
   });
 
-  it('the charter arithmetic + seat cap derive from config', () => {
+  // ⛔ THE CHARTER ARITHMETIC IS GONE (ODQ §118). It priced a chair — "$99 is
+  // about N months of Cartographer" — and a chair is given, never sold. What is
+  // still config-derived is the chair CAP, so that is what this pin holds now.
+  // getFounderBreakEvenMonths() survives in config as a pure helper with no
+  // remaining renderer; the assertion that it is still ARITHMETICALLY correct
+  // stays here so deleting the display did not quietly delete the maths.
+  it('the charter cap derives from config, and no break-even arithmetic renders', () => {
     const { container } = renderPage();
     const text = container.textContent;
     const months = getFounderBreakEvenMonths();
     expect(months).toBe(Math.ceil(TIERS.founder.priceCents / TIERS.cartographer.priceCents));
-    expect(text).toContain(String(months));
     expect(text).toContain(tp('band2.charter.sustainability', { seats: 30 }));
+    expect(text).not.toContain(`$${TIERS.founder.priceCents / 100}`);
     // The failure policy renders verbatim (the verified-refund promise).
     expect(text).toContain(tp('band3.taskMenu.failurePolicy'));
   });
@@ -163,7 +169,7 @@ describe('PricingPage — the five-band drift contract', () => {
         // Money must interpolate ({price}, ≈$ derivations) — a literal $N is a bug.
         if (/\$\s*\d/.test(node)) offenders.push(`${trail}: hand-typed money`);
         // Fact-counts (N credits/seats/months/saves) must interpolate.
-        if (/\b\d+\s+(credits?|seats?|months?|saves?)\b/i.test(node)) offenders.push(`${trail}: hand-typed count`);
+        if (/\b\d+\s+(credits?|chairs?|seats?|months?|saves?)\b/i.test(node)) offenders.push(`${trail}: hand-typed count`);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => walk(v, `${trail}[${i}]`));
       } else if (node && typeof node === 'object') {

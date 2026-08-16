@@ -298,7 +298,8 @@ describe('TIERS', () => {
   it('founder is $99 lifetime with a 30-seat cap', () => {
     expect(TIERS.founder.priceCents).toBe(9900);
     expect(TIERS.founder.billing).toBe('lifetime');
-    // 30 seats — matches the server's FOUNDER_SEAT_LIMIT in create-checkout.
+    // 30 chairs — the Hall's cap (lib/founderSeats FOUNDER_SEAT_CAP). There is
+    // no server seat gate to match any more: create-checkout sells no chair.
     expect(TIERS.founder.seatLimit).toBe(30);
     expect(TIERS.founder.features.founderBadge).toBe(true);
   });

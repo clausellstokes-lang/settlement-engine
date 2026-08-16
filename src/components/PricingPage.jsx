@@ -211,10 +211,18 @@ export default function PricingPage({ onNavigate }) {
       };
     }
     if (tier.key === 'founder') {
+      // ⛔ NEVER kind:'purchase' (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118). A chair
+      // is asked for by letter in the Hall, so this CTA NAVIGATES. Two things
+      // follow from the kind alone and neither is decoration: pricingPrimaryKey
+      // can no longer elect Founder as the page's loud conversion action, and
+      // FounderCharterBand's supabase-configured disable no longer applies to a
+      // link. The letterbox is not rendered inline here on purpose — that would
+      // drag components/founders/* and lib/foundersHall.js into the pricing
+      // chunk, and the Hall is deliberately lazy (J-TC22-4).
       return {
         label: isFounder ? 'Founder active' : t('pricing.tiers.founder.cta'),
-        onCta: isFounder ? manageBilling : () => buy('founder_lifetime'),
-        kind: isFounder ? 'manage' : 'purchase',
+        onCta: () => onNavigate?.('founders'),
+        kind: isFounder ? 'current' : 'navigate',
       };
     }
     // Cartographer (premium)
@@ -376,17 +384,19 @@ export default function PricingPage({ onNavigate }) {
         founderSeatsRemaining={founderSeatsRemaining}
         cta={ctaFor(TIERS.founder)}
         isPrimaryCta={pricingPrimaryKey === 'founder'}
-        loading={loading === 'founder_lifetime'}
       />
 
       {/* The Founder tier's proof surface: THE FOUNDERS' HALL. A quiet link so a
           visitor can see who is already seated — the Hall is the proof.
-          LABEL ONLY. The Founder CARD above still carries the purchase copy of the
-          superseded design; abolishing that path (DESIGN_FOUNDERS_HALL §1/§5) is a
-          paid-surface change gated on the build-time never-sold verification
-          against the seat ledger and purchase history, and is NOT this lane's to
-          make. Renaming the destination is not the same act as removing the door,
-          and the two must not ride in one commit. */}
+          ⭐ THE PRECONDITION THAT GATED THIS IS DISCHARGED. A prior lane recorded
+          that abolishing the purchase path (DESIGN_FOUNDERS_HALL §1/§5) was a
+          paid-surface change gated on a build-time never-sold verification
+          against the seat ledger and purchase history — a check that is
+          owner-side and cannot be run from the repo. The owner ran it and
+          attested on 2026-08-15 that no founder seat has ever been sold, test
+          purchases included: OWNER_DECISION_QUEUE §118. The DESIGN_FOUNDERS_HALL
+          §1 grandfather arm is therefore DEAD, and the door above is removed
+          rather than merely relabelled. */}
       <div style={{ textAlign: 'center', marginTop: `-${SP.md}px`, marginBottom: SECTION_GAP }}>
         <Button variant="ghost" size="sm" onClick={() => onNavigate?.('founders')}>
           Visit the Founders&rsquo; Hall &rarr;

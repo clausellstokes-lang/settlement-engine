@@ -85,11 +85,16 @@ export const TIER_FACTS = Object.freeze({
 export const FREE_SAVE_LIMIT = TIER_FACTS.free.saveLimit;
 
 /**
- * Founder Lifetime seat count (30). Sourced from the pricing catalog's
+ * Founder chair count (30). Sourced from the pricing catalog's
  * TIERS.founder.seatLimit; the contract test pins it equal to
- * lib/founderSeats.FOUNDER_SEAT_CAP (the RPC-clamp constant) and to the server's
- * create-checkout FOUNDER_SEAT_LIMIT, so the "X of 30 seats" scarcity claim can
- * never drift from what the server actually enforces.
+ * lib/founderSeats.FOUNDER_SEAT_CAP (the RPC-clamp constant), so every surface
+ * that renders "N of 30 chairs held" reads one number.
+ *
+ * ⚠ It is no longer a SCARCITY claim and there is no longer a server-side sale
+ * to keep it honest against: create-checkout sells no chair at all (ODQ §118),
+ * so its FOUNDER_SEAT_LIMIT is gone with the seat gate it guarded. The cap is
+ * now a fact about the Hall — how many chairs exist — not a countdown on an
+ * offer, and the contract test pins the two remaining homes accordingly.
  */
 export const FOUNDER_SEATS = TIERS.founder.seatLimit;
 

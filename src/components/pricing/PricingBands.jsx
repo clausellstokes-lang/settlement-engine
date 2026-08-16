@@ -17,13 +17,12 @@
 import { getActiveAiCosts, TIERS } from '../../config/pricing.js';
 import { resolveLiveStandardCost } from '../../config/livePricing.js';
 import {
-  getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths, SURVEYOR_SURFACE, } from '../../config/pricingDisplay.js';
+  getCreditAnchor, approxDollarsForCredits, SURVEYOR_SURFACE, } from '../../config/pricingDisplay.js';
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { tp } from '../../copy/pricingPage.js';
-import { t } from '../../copy/index.js';
 import {
   GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, FS, BODY, SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX } from '../theme.js';
 import { space } from '../../design/tokens.js';
@@ -82,11 +81,16 @@ export function SurveyorBand({ onSeeMenu }) {
 
 // The Founder charter — a different KIND of object (ruling #3): a full-width
 // band in the document register (rules + whitespace, organic-craft law), never
-// a fourth lookalike column. Arithmetic + sustainability sentences derive from
-// config; the live meter reuses the founder_seats RPC machinery.
-export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, loading }) {
-  const months = getFounderBreakEvenMonths();
-  const priceLabel = t('pricing.tiers.founder.priceLabel');
+// a fourth lookalike column. The sustainability sentence derives from config;
+// the live meter reuses the founder_seats RPC machinery.
+//
+// ⛔ THIS BAND SELLS NOTHING (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118). The price
+// pair and the break-even arithmetic are DELETED — an arithmetic sentence prices
+// a chair, and a chair is given rather than sold. `isPrimaryCta` survives as a
+// prop but can no longer elect this band: PricingPage only ever hands it a
+// `navigate` cta, and the loud-primary selector requires kind === 'purchase'.
+// The meter counts chairs HELD, in the Hall's own vocabulary.
+export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta }) {
   const seats = FOUNDER_SEAT_CAP;
   return (
     <section
@@ -106,10 +110,7 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, l
           <FounderBadge force size="sm" />
         </header>
         <p style={{ margin: `0 0 ${SP.sm}px`, fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans, lineHeight: 1.4 }}>
-          {tp('band2.charter.lead')}
-        </p>
-        <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
-          {tp('band2.charter.arithmetic', { price: priceLabel, months })}
+          {tp('band2.charter.lead', { seats })}
         </p>
         <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
           {tp('band2.charter.sustainability', { seats })}
@@ -121,16 +122,10 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, l
         </p>
       </div>
       <div style={{ flex: '1 1 240px', minWidth: 240, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-          <span style={{ fontSize: FS['32'], fontFamily: serif_, fontWeight: 700, color: INK, lineHeight: 1 }}>
-            {priceLabel}
-          </span>
-          <span style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>{t('pricing.tiers.founder.priceSub')}</span>
-        </div>
         <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
           {typeof founderSeatsRemaining === 'number'
-            ? tp('band2.charter.seatsRemaining', { remaining: founderSeatsRemaining, seats })
-            : tp('band2.charter.seatsFallback', { seats })}
+            ? tp('band2.charter.chairsHeld', { held: seats - founderSeatsRemaining, seats })
+            : tp('band2.charter.chairsFallback', { seats })}
         </p>
         {typeof founderSeatsRemaining === 'number' && (
           <div aria-hidden="true" style={{ height: 4, overflow: 'hidden', background: BORDER }}>
@@ -143,13 +138,13 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, l
         <Button
           type="button"
           onClick={cta.onCta}
-          disabled={loading || (!isConfigured && cta.kind === 'purchase')}
+          disabled={!isConfigured && cta.kind === 'purchase'}
           variant={isPrimaryCta && cta.kind === 'purchase' ? 'primary' : 'secondary'}
           size="lg"
           fullWidth
           style={{ minHeight: 44 }}
         >
-          {loading ? 'Redirecting…' : cta.label}
+          {cta.label}
         </Button>
       </div>
     </section>

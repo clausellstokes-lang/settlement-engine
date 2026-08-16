@@ -66,7 +66,6 @@ const PRICE_MAP: Record<string, string> = {
   credits_60:       Deno.env.get('STRIPE_PRICE_CREDITS_60') || '',
   credits_150:      Deno.env.get('STRIPE_PRICE_CREDITS_150') || '',
   premium:          Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
-  founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME') || '',
   single_dossier:   Deno.env.get('STRIPE_PRICE_SINGLE_DOSSIER') || '',
   // Surveyor subscription (#16). Unset env ⇒ '' ⇒ unpurchasable (LAW 1). Signed-in
   // only (non-anonymous), subscription mode (below). Grants an ENTITLEMENT, not a tier.
@@ -97,11 +96,21 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // in src/config/pricing.js.
 const SUBSCRIPTION_PRODUCTS = new Set(['premium', 'surveyor']);
 
-// Founder Lifetime is advertised as "X of 30 seats remaining". Keep in sync
-// with `seatLimit` in src/config/pricing.js and FOUNDER_SEAT_CAP in
-// src/lib/founderSeats.js (the pricing-page counter reads the same
-// founder_seats_taken() RPC this gate does).
-const FOUNDER_SEAT_LIMIT = 30;
+// ⛔ ABOLISHED PRODUCTS — a SKU this function must never sell again.
+// (DESIGN_FOUNDERS_HALL §1/§5; owner attestation ODQ §118, 2026-08-15: no
+// founder chair has ever been sold, test purchases included.)
+//
+// Deleting the PRICE_MAP row alone already fails closed, because an unknown
+// product is rejected below with the same generic 400 every other checkout
+// failure returns. This set exists anyway, and it is the load-bearing half: a
+// future edit that re-adds a PRICE_MAP row would silently restore the sale, and
+// an absence pin written over a deleted line has nothing POSITIVE to assert. The
+// set gives the pin a live symbol to read and a re-add a wall to hit.
+//
+// ⚠ THIS IS THE OUTBOUND PATH ONLY. stripe-webhook keeps every founder_lifetime
+// branch (grant, credit bonus, seat claim, clawback, money-spine mirror): those
+// are INBOUND, and refunds or replays of a historical session must still land.
+const ABOLISHED_PRODUCTS = new Set(['founder_lifetime']);
 
 // Server-side delivery stash (dossier_purchases, migration 122): an anonymous
 // single_dossier buyer's settlement is persisted here at checkout, keyed on the
@@ -319,6 +328,11 @@ export async function handleCreateCheckout(
     // to it. It is verified for ownership below and stashed in the session
     // metadata; the webhook grants the right on the paid session.
     const { product, checkoutToken, redeemCode, saveId, settlement, savePaymentMethod, captchaToken } = await req.json();
+    // The abolished set is consulted BEFORE the catalog, so the refusal is
+    // explicit rather than incidental: it survives someone re-adding a price row.
+    if (ABOLISHED_PRODUCTS.has(product)) {
+      throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
+    }
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -344,8 +358,8 @@ export async function handleCreateCheckout(
 
     // Tier 7.4 — single-dossier is anonymous-allowed (per pricing.js
     // SINGLE_DOSSIER.requiresAccount=false). All other products bind
-    // to a user_id at delivery time (credit packs, subscriptions,
-    // founder seats) so they keep the auth requirement.
+    // to a user_id at delivery time (credit packs, subscriptions) so they
+    // keep the auth requirement.
     const isAnonymousProduct = product === 'single_dossier';
     if (
       isAnonymousProduct
@@ -426,22 +440,12 @@ export async function handleCreateCheckout(
       throw new Error('Missing authorization header');
     }
 
-    // Founder Lifetime seat gate — the advertised "X of 30 seats" contract is
-    // enforced HERE, not just displayed. founder_seats_taken() (migration 010)
-    // is the same counter the pricing page renders; once the cap is reached no
-    // new founder checkout session can be created. FAIL CLOSED on a counter
-    // error: blocking a sale we could have made beats selling seat 31 of an
-    // advertised-30 product. Two truly-concurrent checkouts at seat 29 can
-    // still race past this gate — that residual is a one-off refund, not a
-    // standing hole in the contract.
-    if (product === 'founder_lifetime') {
-      const { data: seatsTaken, error: seatErr } = await adminClient().rpc('founder_seats_taken');
-      if (seatErr) throw new Error(`Founder seat check failed: ${seatErr.message}`);
-      if (typeof seatsTaken !== 'number') throw new Error('Founder seat check returned no count');
-      if (seatsTaken >= FOUNDER_SEAT_LIMIT) {
-        throw new Error(`Founder Lifetime is sold out (${seatsTaken}/${FOUNDER_SEAT_LIMIT} seats taken)`);
-      }
-    }
+    // (The Founder seat gate lived here. It enforced the advertised "X of 30
+    // seats" contract against founder_seats_taken() before creating a session.
+    // With `founder_lifetime` abolished above, no request can reach it — an
+    // unreachable enforcement block is the dead-arm class, so it is removed
+    // rather than left to look like a live guard. The Hall's cap survives where
+    // it is still true: FOUNDER_SEAT_CAP in src/lib/founderSeats.js.)
 
     // ── Durable-rights save binding (108): single_dossier + signed-in only ──
     // A signed-in single_dossier buyer MAY pick one saved settlement to bind the

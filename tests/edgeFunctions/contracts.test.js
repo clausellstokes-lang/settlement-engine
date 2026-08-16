@@ -1121,8 +1121,18 @@ describe('Tier 3.3 — create-checkout product catalog', () => {
     expect(src).toMatch(/premium:\s*Deno\.env\.get\(['"]STRIPE_PRICE_PREMIUM['"]\)/);
   });
 
-  it('exposes founder_lifetime product', () => {
-    expect(src).toMatch(/founder_lifetime:\s*Deno\.env\.get\(['"]STRIPE_PRICE_FOUNDER_LIFETIME['"]\)/);
+  // ⛔ INVERTED (ODQ §118). This assertion used to PIN THE SALE INTO EXISTENCE:
+  // it required create-checkout to carry a founder_lifetime PRICE_MAP row. A
+  // chair is given, never sold, so the row is gone — and the pin now holds the
+  // absence, with a POSITIVE half so a bare deleted line cannot go vacuous.
+  it('refuses founder_lifetime outright and carries NO price row for it', () => {
+    expect(src).not.toMatch(/founder_lifetime:\s*Deno\.env\.get\(/);
+    expect(src).toMatch(/const ABOLISHED_PRODUCTS = new Set\(\['founder_lifetime'\]\)/);
+    // …and the refusal is consulted, not merely declared.
+    expect(src).toMatch(/ABOLISHED_PRODUCTS\.has\(product\)/);
+    // The seat gate went with the sale it guarded (an unreachable enforcement
+    // block is the dead-arm class).
+    expect(src).not.toMatch(/FOUNDER_SEAT_LIMIT/);
   });
 
   it('exposes single_dossier microtransaction', () => {

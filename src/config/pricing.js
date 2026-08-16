@@ -269,11 +269,18 @@ export const TIERS = Object.freeze({
   founder: Object.freeze({
     key:          'founder',
     legacyKey:    'founder',
-    stripeProduct: 'founder_lifetime',    // new one-time SKU
-    priceCents:   9900,                   // $99 one-time
+    // ⛔ NO SKU (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118). A chair is given, never
+    // sold: there is no Stripe price, no PRICE_MAP row, and create-checkout
+    // refuses `founder_lifetime` outright via ABOLISHED_PRODUCTS. `null` is the
+    // same spelling `wanderer` uses for "no charge".
+    stripeProduct: null,
+    // The charter's historical price, retained ONLY so the inbound refund/replay
+    // path and the purchase history can render what a legacy session was worth.
+    // Nothing renders it as an offer; the pricing band shows no price at all.
+    priceCents:   9900,
     billing:      'lifetime',
     oneTimeCredits: 30,
-    seatLimit:    30,                     // 30 founder seats (server enforces this in create-checkout)
+    seatLimit:    30,                     // 30 chairs (the Hall's cap)
     saveLimit:    Infinity,
     maxSize:      'capital',
     features: {
