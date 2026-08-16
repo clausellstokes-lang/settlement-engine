@@ -4555,3 +4555,34 @@ The charter lane received the addendum in flight.
    chapter MISLABELS AN ALLIANCE AS TRADE (`allied` rendered in
    canonical `trade_partner`'s hue) — the palette convergence cures
    the semantic error, not the tint.
+
+## §123 · da-b COLLECTED UNEXPOSED — THE FILTER-RETIREMENT MINT RULED
+## (2026-08-15, chair, vetoable; evidence laneTE22-receipt.md §12-14)
+
+1. **da-b's three members are COLLECTED** (A3 palette convergence ·
+   A4 en-GB outliers · B2 the eight bare-locale sites + the
+   corrected guard; batteries 114/68/58 all green; validator 79/0)
+   and held UNEXPOSED per the cs-a precedent — the terminal is red
+   on exactly ONE lawful question, and da-b exposes together with
+   da-c at the green terminal.
+2. **J-TE22-11 IS RULED — RETIRE THE FILTER via the governed schema
+   mint** (the CONTROLZERO pattern applied to a detector):
+   DA-B2's cure eradicated `LANGUAGE_SURFACE_RESIDUAL_KEYS`' entire
+   habitat — a filter clearing nothing is indistinguishable from one
+   unwired by the suite's own law, and the honest cure is retirement
+   with the eradication NAMED in the mint. The executor's refusal to
+   land a mint blind, and its refusal of the >=0 relaxation (the
+   exact vacuity class this train kills), are RATIFIED. Escape
+   clause: contrary habitat evidence = STOP.
+3. **DA.M8's depth is RECORDED**: five of nine relationship types
+   wrong in the react-PDF table, three mutually indistinguishable,
+   two ABSENT from the enumerated legend — cured by A3 with the
+   walker upgraded 3 spot-checks → 8 source-reading arms; Cover.jsx
+   reclassified (ungrouped `num()`, not locale — the same document
+   read 8000 and 8,000). Both new detectors earned their positive
+   controls BY FAILING FIRST (twelve convicted rows in two files).
+4. **da-c runs on the continuation**: DA-B1 + DA-B3 + the mint + the
+   authorized 12→11 re-freeze, one green terminal proving all; the
+   599/600 STOP and the mocked-suite rendered-positive warning in
+   the brief. The cap-4 split judgment (engine seams never share
+   display terminals) is SIGNED as standing practice.
