@@ -5167,3 +5167,34 @@ gallery-seeding lane offer stands.
    POP for pg-3. The §135 opportunity list CLOSES: one item was
    built all along, the other is now chartered to the owner's own
    design.
+
+## §139 · THE pg FAMILY BUILD ORDERED — AND ITS TWO BLOCKING
+## SITTINGS HELD IN THIS ACT (owner, 2026-08-16: "Comprehensively,
+## exhaustively, carefully, seamlessly, coherently, and cohesively
+## build it and slot it where appropriate.")
+
+1. **THE JOINT COLUMN-VOCABULARY SITTING IS HELD**: `plagueTouched`
+   is APPROVED as a lawful column field — a BAND (not a class, so
+   it forks no column-class vocabulary; §C's POP ownership is
+   untouched), stamped at dispatch, read at landing, persisting
+   with the column per the lifecycle law. The §49-correction
+   context is honored: the field rides the jointly-ruled vocabulary
+   as its first post-correction addition, recorded here so the LG
+   compiles inherit the ruling rather than re-tabling it. pg-1's
+   wait DISSOLVES.
+2. **THE pg-4/M11a MERGE SITTING IS HELD**: the trade-refusal/
+   rerouting design recorded twice (pg-4's candidate + M11a's
+   fenced "TRADE REFUSAL round 22.1" wave) is consolidated as ONE
+   wave under M11a's ownership with pg-4 citing it — the epidemic
+   machinery owns trade's response to plague; pg consumes the
+   belief plane it feeds. The duplicate recording is struck.
+3. **THE BUILD ORDER**: pg-0 (flag, dark, byte-identity) → pg-1
+   (the carrier band + M11a seeding) → pg-2 (prosperity + order
+   joining the resistance seams) compile-ready NOW; pg-3 (the
+   gate-refusal arm) compiles WITH POP's reception contract; pg-4
+   rides M11a. **THE SLOT stands per §136.3/§138.3**: beside cn in
+   the family-train tail — the queue reads ... → POP → LG → cn +
+   pg → tm-core → build-complete-dark. All §-bills as priced in the
+   charter; the §49/§50 three obligations at pg-0's mint; every
+   value a §131 band with its derivation home; quarantine stays
+   OWNER-VALUE.
