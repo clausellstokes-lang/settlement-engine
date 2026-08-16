@@ -720,8 +720,15 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'NOT FREED — razingExecution.js stamps a metronome-EXEMPT outcome source naming no cooldown mechanism. Re-freezing would bank a flood-class bypass; the right cure is to give it a mechanism, which is a worldPulse change outside this lane.',
     'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
       'NOT FREED — 73 local clamp definitions against a baseline of 62. Re-freezing banks 11 forks of a shared primitive; the cure is to route them, which is its own sweep.',
-    'tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline':
-      'NOT FREED — a 413-row LINE-ADDRESSED inventory that rots whenever any governed file shifts lines. A regeneration must review every removed row, which is a wave, not a step.',
+    // ⭐⭐ 2026-08-15, da-c — THE proseNumerics ROW LEFT, AND IT LEFT THE RIGHT WAY.
+    // It was OWED ("a regeneration must review every removed row, which is a wave, not a
+    // step"), and da-a's DA-A1 I2 plus da-c's I1 between them did exactly that wave: two
+    // regenerations, each with a full executed accounting of rows gained, rows lost,
+    // category ceilings and pure address moves before the write. The arm went green, the
+    // full run reported RATCHET DOWN (11 < 12), and a remove-only re-freeze banked it.
+    // The entry is deleted because its census row is GONE — a ledger corpse silently
+    // lowers the effective ceiling and lets the next real walker row slip in under a cap
+    // that a dead entry was holding up. It was NOT removed to make anything green.
   });
 
   const admittedIds = Object.keys(WALKER_ROWS_ADMITTED);
@@ -736,7 +743,14 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // (settlementLifecycleHelpers.js / campaignRegionalSliceEntry.js) turned the walker green
   // with its invariant intact, proven by mutant at the new addresses. See the RATCHETED
   // 25 → 23 note at the top of this file.
-  const OWED_CEILING = 9;
+  // 9 → 8 on 2026-08-15: the proseNumerics exact-match row was FREED, not forgiven — the
+  // owed regeneration wave was actually run, twice, each time with its accounting executed
+  // before the write. The ceiling drops by exactly the one row burned, which is the same
+  // arithmetic the 11 → 9 retirement above used. Burning a census row is never a one-path
+  // act: the census entry, this ledger entry and this ceiling all move together, and the
+  // gate is what says so — this ceiling's own arm is `<=`, so the ledger deletion alone
+  // would have stayed green while leaving a silently roomier cap.
+  const OWED_CEILING = 8;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
