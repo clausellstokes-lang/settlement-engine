@@ -8028,3 +8028,20 @@ vocabulary. HF-3 mandate extended with plan-view specimen
 sheets (rural + urban families + roof-form tick vocabulary),
 slotted after the fantastical set; feeds wave eight's
 burgage/block work and the GAP-H census.
+
+## §225 · OWNER SUGGESTION ADOPTED WITH A FORMAT RULING:
+## SAME-SETTLEMENT TIER-SERIES PLATES, ONE-FRAME ONLY
+## (2026-08-16)
+
+The owner suggested (non-binding) references of the same
+settlement promoted/demoted across levels. ADOPTED — it
+calibrates §11 inertia, T-18 vintage and §161f/g transition
+grammar, which no single-date plate teaches — but ONLY as
+single-sheet multi-panel series: cross-generation same-subject
+consistency is the image model's known weak point, and a faked
+series would teach FALSE persistence on exactly the dimension
+it exists to calibrate. One-frame series inherit within-image
+consistency (the two-vintages-in-one-frame precedent).
+Target-specific curation: persistence must read TRUE
+panel-to-panel or the sheet is discarded/filed as a labeled
+negative. HF-3 mandate extended same-turn.
