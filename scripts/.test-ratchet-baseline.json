@@ -1,8 +1,8 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "5ca2012c3ae5cdd3f5dc996fc716a9d64985bd47",
-  "totalTests": 28158,
-  "totalFiles": 2380,
+  "measuredAtSha": "4deb4f026644cba500b0efc1e051fdea2ff96041",
+  "totalTests": 28274,
+  "totalFiles": 2387,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
@@ -60,14 +60,6 @@
       "subsystem": "lint / clamp primitive ratchet",
       "cause": "The baseline lists 62 files that define a local clamp/clamp01 while the tree now has 73 — 11 new local clamp definitions landed instead of importing the shared primitive.",
       "introducedAt": "unbisectable: 11 separate local clamp definitions across many 2026-08 waves; no single introducing commit. Burn-down lane must route each to the shared primitive.",
-      "class": "debt"
-    },
-    "tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline": {
-      "file": "tests/lint/proseNumerics.test.js",
-      "test": "prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline",
-      "subsystem": "copy / prose numerics ratchet",
-      "cause": "The path+line+category+snippet debt list drifted from the committed baseline (413 rows) — new prose numerics leaked and/or legacy rows moved lines, which this exact-identity ratchet reads as drift.",
-      "introducedAt": "unbisectable: an exact line-addressed inventory that rots whenever any governed file shifts lines; the hand-keyed line-address rot class. Burn-down lane must regenerate once and review every removed row.",
       "class": "debt"
     },
     "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {
