@@ -7237,3 +7237,52 @@ guides/labels: 9,10; placement: 2,11,12 ride the fronting cure).
    spellings) remain batched to the docs act with C-EPF-4. §82.1's
    corrected law GOVERNS the train: every repro runs the failing
    job's OWN failing step.
+
+## §199 · MF-B6 COLLECTED — THE MAP HAS ITS LETTERS, ITS MEASURE,
+## AND ITS STATES; MF-B7 DISPATCHED (2026-08-16, chair §170)
+
+1. **WAVE SIX SEALED GREEN AND CHAIR-VERIFIED BY FORENSIC ZOOM:**
+   108/108 pins (18 new, all counterfactual-paired), 10/10
+   cross-process determinism, BOTH drawn-geometry censuses 0/0
+   across 11,295 bodies on 16 leaves, ops max 2,165/2,200,
+   sizeBaseline max 761/800. My own zoom of the b6 town confirms
+   curved ward lettering present and correctly oriented, stalls,
+   wall-trace, high-water arcs. Delivered: the §11.12a TRUE
+   measure, §12 immersion suite + §173 lettering splice, §10 state
+   dress (totality-censused), §11 snapshots with the inertia proof
+   (a year-49 wall circuit moves the wall and NOTHING else,
+   feature-by-feature byte-identical), Accessible real hatch,
+   §18.1 sanctuary precincts + §18.2 inn belt.
+2. **THREE FALSIFICATIONS BANKED.** (a) THE FAMILY HAD NEVER SEEN
+   ITS OWN WARD LABELS: the harness rasterizer drops <textPath>
+   SILENTLY, so every PNG ever judged — including my §195 zoom —
+   was label-less; the cure (per-glyph placement, also what
+   react-pdf needs) first rendered MIRRORED. The forensic-zoom law
+   is vindicated twice in one finding: neither the absence nor the
+   mirror was visible to any census. (b) THE DISTANCE METRIC
+   EXISTED HOMELESS AND WRONG ABOVE VILLAGE: fields.js minted
+   metresPerUnit=5/frontage, making the metropolis SMALLER per
+   unit than the town; re-minted from population ÷ historical
+   density, cross-checked by an independent reverse derivation
+   (all 16 leaves inside attested tenure bands). **OB-4 MINTED
+   (owner batch item 19): the scale bar's unit NAMES** — it prints
+   200 PACES pending signature. (c) THE METROPOLIS BAND IS A FIXED
+   POINT: both dials tried and REVERTED, MEASURED (LOD moved 4
+   buildings; the yard cut moved the share −0.4 — the umbrella
+   derives from the parcels, so closing yards starves the back
+   range). Target 2 is NOT MET AS A NUMBER and is so recorded;
+   the working lever is §17.3's unbuilt demotion arm (176 dropped
+   bodies on the metropolis leaf).
+3. **RULINGS.** (a) The sanctuary corner mark is a STONE, not a
+   cross — RATIFIED (deity-doctrine register: culture-neutral,
+   never theological iconography). (b) The §195.0 class NEARLY
+   REPRODUCED and the lane caught itself: a census whose helpers
+   were scoped inside one describe read 0/0 while siege tents
+   existed outside its set — SCOPING IS A VACUITY VECTOR; helpers
+   hoisted, exemptions named. (c) The charter's 21-key state
+   catalog is STALE against the live 15 — folded into the
+   charter→volume re-sync rider. (d) **MF-B7 DISPATCHED:** §17.3's
+   demotion arm FIRST (then re-measure metropolis target 2), the
+   §13/§168 underground stratum (undercity-as-city, universal
+   front), and the §11 drift tail — under the b6 proof standard
+   including per-glyph lettering and hoisted-census law.
