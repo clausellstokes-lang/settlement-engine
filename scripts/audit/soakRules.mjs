@@ -30,6 +30,51 @@
  */
 
 /**
+ * ⛔⛔ THE FLAG DOMAIN LIVES ON THIS SIDE OF THE WALL, AND IT HAS TO.
+ *
+ * SK-4's covering array must enumerate the flag space FROM the registry at runtime
+ * (the closed-corpus law — ask the corpus, never hand-list). But the registry is
+ * `src/domain/worldPulse/simulationRules.js`, and `scripts/soak/**` is inside the
+ * engine/telemetry wall's Arm B, which REDS on any import specifier matching
+ * `worldPulse|worldState|generateSettlementPipeline|simulationRules`. A runner module
+ * importing the registry directly would be a wall violation.
+ *
+ * So the census is read HERE, in `scripts/audit/`, where the soak already legitimately
+ * imports the preset, and `scripts/soak/flagConstraints.mjs` imports it from here. That
+ * is the allowed direction (soak → audit, never the reverse), the wall stays intact, and
+ * the enumeration stays a runtime read of the live registry rather than a copy.
+ *
+ * ⭐ MEASURED AT THIS BASE, and the arithmetic is asserted rather than asserted-about:
+ * 25 normalizer-governed booleans + 32 preset-declared-but-ungoverned + 22 engine-gated
+ * virtual = 79, with ZERO overlap. 54 of the 79 are outside the normalizer's fail-closed
+ * coercion, which is the measured content of "the normalizer is NOT the oracle".
+ */
+export function flagDomainCensus({ defaults, presets, virtualKeys }) {
+  const governed = Object.keys(defaults).filter((key) => typeof defaults[key] === 'boolean');
+  const presetBooleans = new Set();
+  const presetKeys = new Set();
+  for (const preset of Object.values(presets)) {
+    for (const [key, value] of Object.entries(preset.rules)) {
+      presetKeys.add(key);
+      if (typeof value === 'boolean') presetBooleans.add(key);
+    }
+  }
+  const ungoverned = [...presetBooleans].filter((key) => !governed.includes(key));
+  const virtual = [...virtualKeys];
+  const union = [...new Set([...governed, ...ungoverned, ...virtual])];
+  return {
+    governed,
+    ungoverned,
+    virtual,
+    union,
+    nonBoolean: [...presetKeys].filter((key) => !presetBooleans.has(key)),
+    // A key claimed by two sets would double-count the domain and silently shrink the
+    // array's real coverage, so the overlap is REPORTED rather than assumed empty.
+    overlap: virtual.filter((key) => governed.includes(key) || ungoverned.includes(key)),
+  };
+}
+
+/**
  * The dark control's non-boolean overrides, verbatim from the literal block this
  * module replaced (`whole-world-soak.mjs:211-217` at `0cbb0177`). Held as a frozen
  * constant so the dark control has ONE spelling.
