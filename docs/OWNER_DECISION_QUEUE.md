@@ -6700,37 +6700,42 @@ member becomes a solver, not a lookup.
    exposure: THE FIRST ROLLING SOAK FIRES. Then EP stage one → ci
    → WF (the first family PR).
 
-## §183 · UF-1 COLLECTED — THE UNFORK LANDED; THE 28th EXPOSURE;
-## THREE VOLUMES LANDED LEDGER-SIDE; THE FIRST ROLLING SOAK FIRES
-## (2026-08-16, chair)
+## §184 · MF-B2 COLLECTED — ALL BANDS MET; THE OPEN-FIELD RULING;
+## MF-B3 DISPATCHED (2026-08-16, chair under §170)
 
-1. **The five-volume unfork LANDED GREEN and EXPOSED: CAS
-   25f22b2b → a8f42d94** (docs-only, +295/−135; INT/CW/WY/POP
-   proven zero-pure-deletion folds; WC merged with cmp-proofs both
-   ways, all 44 non-carried lines enumerated as superseded; the
-   false-by-event WC banner kept with a dated supersession marker;
-   CLAIM_RE 0-before/0-after on all five, regex read live).
-   Gate: check:tail TRUE_EXIT=0 (28,406/11 known), smoke:boot
-   PASS.
-2. **THE THREE DESIGN VOLUMES LANDED ON THE LEDGER (this commit):
-   DESIGN_FP_ARCH_CN.md, DESIGN_FP_ARCH_PG.md, DESIGN_FP_ARCH_MF.md
-   — the map program's ~112KB charter now has its permanent home**
-   (body byte-identical to the scratchpad charter, cmp exit 0, with
-   the ODQ §150-§181 resolution map; the scratchpad copy is
-   hereafter a working mirror, the ledger volume canonical).
-3. **BASE_STATE re-stamp BLOCKED BY DESIGN and ratified as the
-   right stop:** the OSR schema-8 instrument reds (baseline froze
-   at e71beb84; ~25 scripts/** files landed since incl. the entire
-   scripts/soak family) — pre-existing, proven at base in a temp
-   worktree, invisible to the gate chain. **OSR RE-GOVERNANCE is
-   queued as a chair sitting** (instrument governance is
-   chair/owner-gated); until cleared, no lane inherits BASE_STATE
-   figures — re-execute. The WC PROGRESS-blockquote rewrite rides
-   the next docs act. Packets moved 101→110 (noted).
-4. **THE FIRST ROLLING SOAK FIRES AT THIS EXPOSURE** (§146.3
-   satisfied: the first family exposure after sk; the exposure is
-   docs-only and fully green; the soak lane RE-EXECUTES all
-   figures per §183.3). RS-1 dispatched: archive a8f42d94,
-   CERT-30-class on the landed harness, findings-only. **EP STAGE
-   ONE dispatched into the freed slot.** The §27 queue proceeds:
-   EP stages → ci → WF (the first family PR).
+1. **Wave two landed every mandate target:** the village
+   reconciliation (roofs-first extent — ALL SIX TIERS in band over
+   10 seeds; the thorp fitted BY CONSTRUCTION without reading a
+   band); build-out city 0.74 / metropolis 0.79 (the references'
+   0.70-0.80 bar); NINE OF TEN under the 2,200 ceiling (family
+   first; the fjord 1.3% over, reported not tuned); the farmland
+   restored AS TRUTH (arable share: fjord 0.27 — why a fjord
+   fishes; countryside moved from lens to derivation); §15 fully
+   integrated (compilation record, route skeleton, compound
+   reservation, repair pass, both path-dependence pins). 61 pins
+   counterfactual-paired; 10/10 byte-determinism. Two design
+   lessons banked: A RANK IS A PROPERTY OF THE SET, A THRESHOLD OF
+   THE MEMBER (the §15.3 inertia break the pin caught); and two
+   would-be-printed falsehoods caught by measurement (the op/food
+   denominator swap; back-houses in the census ratio).
+2. **CHAIR EYES-ON (village leaf, absolute bar ~55-60%):** the
+   core fabric and honesty lines are right; the dominant remaining
+   gap is THE FIELD SYSTEM — floating strip islands at random
+   bearings vs hf3's contiguous, village-oriented tiling; plus
+   center-focus and landmark presence at village scale.
+   **CHARTER §16 THE OPEN-FIELD RULING resolves MF-B2's escalated
+   contradiction:** banned = terrain-blind geometric symmetry; LAW
+   = the historical open-field system — contiguous tiling of the
+   working land, strips ORIENTED toward the settlement but
+   DEFORMED by substrate (contours/streams/roads), field lanes
+   branching from village roads, the center anchoring the
+   composition, §161n landmark rungs at every tier.
+3. The THIRTEEN declared same-seed shifts (route skeleton moves
+   nuclei; grain reads changeYear) are BANKED for the landing
+   train's §110.3 declaration — enumerated in laneMFB2-receipt
+   §10. ⚠ The landing executor faces two new test files against a
+   census re-recorded twice since TC29 — re-predict tuples at
+   landing. **MF-B3 DISPATCHED:** the street WEB (largest named
+   distance), the §16 field system, village center/landmarks,
+   §15.7 substrate imperfection, atlas deepening, ward-wealth
+   stratification.
