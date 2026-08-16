@@ -12537,7 +12537,7 @@
         },
         {
           "path": "tests/lint/engineTelemetryWall.walker.test.js",
-          "symbol": "const AWAITING_POPULATION = Object.freeze(['scripts/soak']);"
+          "symbol": "const AWAITING_POPULATION = Object.freeze("
         },
         {
           "path": "tests/lint/engineTelemetryWall.walker.test.js",
@@ -12764,10 +12764,6 @@
         {
           "path": "tests/lib/simMetricAggregate.test.js",
           "symbol": "function epochVocabularyIn"
-        },
-        {
-          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
-          "symbol": "files: 2443, parked: 364, credited: 2079, titles: 20326, suiteTitles: 5697,"
         }
       ],
       "acceptanceCases": [
@@ -12799,6 +12795,310 @@
           "run",
           "tests/lib/simMetricAggregate.test.js",
           "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-0.md",
+      "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "scripts/audit/whole-world-soak.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/audit/soakRules.mjs"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/audit/behavioral-observation.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/soakScriptSeams.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/soakRulesBaseline.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "SIMULATION_RULE_PRESETS.full_simulation.rules"
+        },
+        {
+          "path": "scripts/audit/realm-scale-certification.mjs",
+          "symbol": "export const REALM_SCALE_SOURCE_PATHS"
+        },
+        {
+          "path": "scripts/audit/behavioral-observation.mjs",
+          "symbol": "export function observeBehavioralYear"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export function normalizeSimulationRules"
+        },
+        {
+          "path": "src/domain/certification/certificationSchema.js",
+          "symbol": "seed_divergent"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "an overlay key reaches the dark control with an explicit false, and the two key sets are identical"
+        },
+        {
+          "id": "A2",
+          "case": "the mutant applying the overlay below the derivation fails A1, and the real function does not"
+        },
+        {
+          "id": "A3",
+          "case": "absence and explicit-false are different normalizer inputs, which is why A1 is not cosmetic"
+        },
+        {
+          "id": "A4",
+          "case": "no module under scripts/audit imports from scripts/soak, and a planted edge is convicted"
+        },
+        {
+          "id": "A5",
+          "case": "with no overlay the extraction equals a golden captured from the pre-change literal"
+        },
+        {
+          "id": "A6",
+          "case": "properties are computed, a skipped run omits seed_divergent, and all three refusals fire by cause"
+        },
+        {
+          "id": "A7",
+          "case": "the deep key census sees the loss the hash cannot, the replant cures it, and its absence reds"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/soakScriptSeams.test.js",
+          "tests/ops/behavioralObservation.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-1.md",
+      "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/run.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/pool.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/archive.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/determinismUnderWorkers.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/engineTelemetryWall.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const ARM_B_ROOTS"
+        },
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "AWAITING_POPULATION"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "const RECEIPT_PATH = arg('receipt', '')"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the grid and every receipt path are identical at N = 1, 3 and 8, and a host-seeded mutant differs"
+        },
+        {
+          "id": "A2",
+          "case": "the worker band is computed from the host, floors at 1, and memory binds before cores"
+        },
+        {
+          "id": "A3",
+          "case": "runs differing only in host observability compare equal; a reconverging mid-run divergence does not"
+        },
+        {
+          "id": "A4",
+          "case": "a receipt field added later is compared by default, and naming it volatile is a deliberate act"
+        },
+        {
+          "id": "A5",
+          "case": "an archive extracted inside a repository is refused, and the git failure is the pass"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/determinismUnderWorkers.test.js",
+          "tests/lint/engineTelemetryWall.walker.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-2A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-2A.md",
+      "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/tripwires.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/tripwireRegistry.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "const ceiling = 900_000 * SETTLEMENTS"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "lifecycleDiedAtTick"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the registry is closed and typed, every threshold carries a derivation home, and the classes partition it"
+        },
+        {
+          "id": "A2",
+          "case": "no deterministic row reads a clock or the heap, and a planted row that does is convicted"
+        },
+        {
+          "id": "A3",
+          "case": "a clean receipt fires nothing, and a remnant zero fires nothing"
+        },
+        {
+          "id": "A4",
+          "case": "each deterministic row fires on its own defect and only on its own"
+        },
+        {
+          "id": "A5",
+          "case": "a pool-pressured receipt fires both observability rows and zero findings, while a real defect is still convicted"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/tripwireRegistry.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SK-2B",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/SK-2B.md",
+      "verifiedBase": "0cbb0177b177717873804200e908a27d42363ed4",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/checkpoint.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/capsule.mjs"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/soak/replay.template.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/soak-harness/checkpointRestoreParity.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "uncoveredBaseline"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "suiteTitles:"
+        },
+        {
+          "path": "src/kernel/prng.js",
+          "symbol": "export function createPRNG"
+        },
+        {
+          "path": "scripts/count-transcendental-math.mjs",
+          "symbol": "transcendental"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the round trip is lossy and the composite hash is byte-identical across the loss"
+        },
+        {
+          "id": "A2",
+          "case": "the replant cures the census exactly, and a no-op replant still reds"
+        },
+        {
+          "id": "A3",
+          "case": "the cadence band refuses an out-of-band ask, and a restore invocation carries no case id"
+        },
+        {
+          "id": "A4",
+          "case": "a capsule refuses an invented home and refuses a host-observability firing, by their own causes"
+        },
+        {
+          "id": "A5",
+          "case": "the replay refuses a node-major mismatch and classifies a cross-engine mismatch as engine variance"
+        },
+        {
+          "id": "A6",
+          "case": "the lighting census tuple is re-derived from an executed run and its delta attributed by measurement"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/soak-harness/checkpointRestoreParity.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
         ]
       ]
     }
