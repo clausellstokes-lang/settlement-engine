@@ -12545,7 +12545,7 @@
         },
         {
           "path": "tests/lint/engineTelemetryWall.walker.test.js",
-          "symbol": "const AWAITING_MIGRATION = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);"
+          "symbol": "const AWAITING_MIGRATION = Object.freeze("
         },
         {
           "path": "scripts/mutation-coverage-manifest.json",
@@ -12599,6 +12599,154 @@
           "run",
           "tests/lint/engineTelemetryWall.walker.test.js",
           "tests/lint/mutationCoverageManifest.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TM-2A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/TM-2A.md",
+      "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "supabase/migrations/196_world_sim_metrics.sql"
+        },
+        {
+          "action": "CREATE",
+          "path": "scripts/telemetry/loadSimMetrics.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/security/worldSimMetrics.pglite.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/engineTelemetryWall.walker.test.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "tests/lint/engineTelemetryWall.walker.test.js",
+          "symbol": "const SIM_METRIC_MIGRATIONS = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);"
+        },
+        {
+          "path": "scripts/check-migration-head.mjs",
+          "symbol": "contiguous"
+        },
+        {
+          "path": "supabase/migrations/195_civility_guard_and_public_identity.sql",
+          "symbol": "create table"
+        },
+        {
+          "path": "tests/security/migrationSequenceAll.pglite.test.js",
+          "symbol": "migration"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the table declares the run identity and none of the four forbidden columns, and a planted column is shown catchable"
+        },
+        {
+          "id": "A2",
+          "case": "anon and authenticated hold zero privileges, RLS is on and no policy exists — all asserted by execution"
+        },
+        {
+          "id": "A3",
+          "case": "the loader RPC writes exactly what the emitter emits and refuses a non-array payload"
+        },
+        {
+          "id": "A4",
+          "case": "a third epoch_kind is refused by CHECK, so a new epoch is a schema act rather than a data act"
+        },
+        {
+          "id": "A5",
+          "case": "rollup_sim_metrics returns the 038/133 EAV shape and sums across epochs"
+        },
+        {
+          "id": "A6",
+          "case": "the whole-migration-sequence control stays green with 196 in it"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/security/worldSimMetrics.pglite.test.js",
+          "tests/security/migrationSequenceAll.pglite.test.js",
+          "tests/lint/engineTelemetryWall.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TM-3A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/TM-3A.md",
+      "verifiedBase": "6b337fb1f7bb1d3dde0810310a01a3653c874aac",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "scripts/telemetry/simMetricAggregate.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/simMetricAggregate.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/telemetry/simMetricRegistry.mjs",
+          "symbol": "export function simMetricsByEpoch"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "path": "scripts/telemetry/simMetricEmitter.mjs",
+          "symbol": "export function emitRows"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "band families are enumerated FROM the registry, one per year-epoch row, never hand-listed"
+        },
+        {
+          "id": "A2",
+          "case": "the population trajectory is year-indexed, and the runaway read detects a planted runaway"
+        },
+        {
+          "id": "A3",
+          "case": "every other year-epoch family folds to a series, and the run-epoch war histograms fold correctly"
+        },
+        {
+          "id": "A4",
+          "case": "the SQL face names no metric identifier, and its epoch vocabulary matches the registry both ways"
+        },
+        {
+          "id": "A5",
+          "case": "the lighting census tuple is re-derived from an executed run and its delta attributed by measurement"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lib/simMetricAggregate.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
         ]
       ]
     }
