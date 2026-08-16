@@ -1,6 +1,8 @@
 # EP / EP-3A — the writer and the stamp (stage 3 of the `ep-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landing commit:** `9e8ea20b` (the implementation; `7feb70a5` is this
+  stage's promotion). Do not redispatch.
 - **Verified base:** `claude/composite-r4` at `da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d`
   (the EP-1 terminal — stage 2 of this same train, ODQ §191)
 - **Train:** `ep-1`, family **EP**, member **4** of 5. **This packet is stage 3 and promotes

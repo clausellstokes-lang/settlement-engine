@@ -13929,7 +13929,7 @@
     },
     {
       "id": "EP-2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/EP-2.md",
       "verifiedBase": "da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d",
       "changeManifest": [
@@ -13985,7 +13985,7 @@
     },
     {
       "id": "EP-3A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/EP-3A.md",
       "verifiedBase": "da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d",
       "changeManifest": [

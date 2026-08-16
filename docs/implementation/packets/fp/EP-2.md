@@ -1,6 +1,8 @@
 # EP / EP-2 — the fork semantics (stage 3 of the `ep-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landing commit:** `20df088b` (the implementation; `7feb70a5` is this
+  stage's promotion). Do not redispatch.
 - **Verified base:** `claude/composite-r4` at `da8207f3e4d6f4f7683e9e9e63e3de4b8b60d14d`
   (the EP-1 terminal — stage 2 of this same train, ODQ §191)
 - **Train:** `ep-1`, family **EP**, member **3** of 5. ⛔ The five members are NOT
