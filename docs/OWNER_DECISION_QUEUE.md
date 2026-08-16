@@ -7921,3 +7921,20 @@ to MF-B7 same-turn.
    soak corpus moves as a DECLARED, chair-signed shift per the
    §72.3 method at landing. The R-06 review row gains its
    executed confirmation.
+
+## §220 · CHAIR RULING: THE APP-REALISTIC PERFORMANCE GATE
+## (2026-08-16, self-imposed on the owner's performance question)
+
+The map program's proofs measure sandbox ops and determinism;
+the UNDER-MEASURED axis is live-app performance, and §217's
+ceiling grant removed the op budget's accidental role as a
+browser guardrail. RULED: the mf INTEGRATION surface (wave nine
+onward, and binding at the §171 landing) carries a measured
+performance gate — interactive pan/zoom frame rate, first-render
+time, and PDF-export time AT METROPOLIS SCALE at corpus grain,
+in the real browser app — with zoom-level LOD machinery as the
+pressure valve (far zoom renders block masses with internal
+structure per atlas prior #4's ban on hollow blocks; near zoom
+full grain). A wave that raises fabric richness prices its
+browser cost in the same receipt. The ×10 painted rasterize cost
+(§211.2c) folds into this gate's export row.
