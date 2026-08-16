@@ -5479,3 +5479,52 @@ gallery-seeding lane offer stands.
 5. Base moved mid-lane (gvf landed, ec744330→471edb64); TC27's
    46-path braced re-check: MOVED=1 (PACKET_MANIFEST status only),
    all six premise maps re-validate at the close base.
+
+## §149 · TC28 COLLECTED — tm+sk COMPILED; TWO FORKS RULED (2026-08-16, chair)
+
+1. **Three trains, serial by measurement: tm-core (5) → sk-a (4) →
+   sk-b (5); one CAS sweep, one exposure at the family boundary.**
+   All premise maps VALID, R1 HOLDS ×3, TTS 15 scenarios
+   unexplainedCount 0, manifest byte-exact. The §148 four-obligation
+   correction applied lane-side and independently verified at
+   471edb64 (neither family mints a flag — conditional clauses
+   updated). Correct §146.3 reading confirmed: the first rolling
+   soak fires at the next family exposure AFTER tm+sk lands, since
+   this family IS tm+sk.
+2. **RULING OQ-1 (chair, vetoable): the compiled resolution is
+   ACCEPTED** — SIMULATION-METRICS events live in an OWN Node-side
+   registry; `analyticsEvents.js` untouched; a disjointness pin
+   between the two. Rationale: the charter's own "zero eager bytes"
+   wall contradicts routing soak events through EVENTS (client +
+   edge bundles), and the alternative costs eleven unpriced
+   METRICS_REGISTRY rows. Say "veto" to force the EVENTS route.
+3. **RULING SK.U1 (chair, vetoable): the --restore-from member
+   proceeds as compiled (deep-key-census comparison — the composite
+   hash is JSON.stringify-blind to exactly the loss a restore round
+   trip causes, and the R-GEN isolate proves year 1 from genesis,
+   not year Y). SK.U1 settles by an EXECUTED two-year restore probe
+   at sk-b's OWN terminal** — the harness's pinned proof run as
+   part of the landing itself, lawful post-§146. If the probe reds,
+   the checkpoint member ALONE returns to chair and ships dark;
+   nothing else in the family blocks on it. This is the family's
+   single largest unknown, named as such.
+4. Banked from the lane: --skip-divergence would have published an
+   unearned customer-facing certification property — cured to a
+   computed properties array + hard refusal with --case-id; the
+   rules extraction lives INSIDE scripts/audit (else the
+   certification fingerprint has a silent hole — SK-0 pins the
+   import direction); the flag space measured 79 binary factors, 54
+   ungoverned — SK-4's constraint manifest minted in-plan (3
+   lockstep/9 requires/6 excluded/13 non-boolean, §85.4 priced at
+   that member); ⚠ negativeAssertionAnchor.walker.test.js is a
+   per-file EXACT inventory only the FULL GATE runs — all fourteen
+   new test files owe anchors; ⚠ zsh `for p in $PATHS` does not
+   word-split — a false MOVED=1 over "1 path" was caught by reading
+   the path COUNT, not the verdict (memory-worthy).
+5. **Dispatch state:** TE26 still holds the executor slot (mb/ci
+   remain). On its landing: chair CAS → tm+sk executor dispatches
+   IMMEDIATELY (§147.3, TC28 delivered) with three brief riders:
+   tm-core's OQ-1 preamble per §149.2; the SK-5 band-set check
+   (experience-facing aggregates) + the KPI-coverage check at
+   tm-core's terminal; the six-volume unfork's ride decision
+   (rider on this landing vs EP's) settled at dispatch.
