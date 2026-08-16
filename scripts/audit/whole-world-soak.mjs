@@ -46,18 +46,58 @@
  *                                           [--seasons on|off]
  *                                           [--neighbor-control-years 30]
  *                                           [--dark-control]
+ *                                           [--rules-json <path>] [--lighting k=v,k=v]
+ *                                           [--skip-divergence]
+ *                                           [--checkpoint-every <years> --checkpoint-dir <dir>]
+ *                                           [--restore-from <checkpoint.json>]
+ *                                           [--source-sha <sha>]
  *
  * SEASONS-A: full_simulation now lights seasonsEnabled, so the default soak
  * runs the food year. `--seasons off` restores the pre-seasons variant for
  * A/B comparison; `--seasons on` is explicit. (One soak, flag-varied — never
  * a second soak script.)
+ *
+ * ── sk-a / SK-0 — THE HARNESS SEAMS (ODQ §141, §143; the soak-harness charter) ──
+ * The one-soak law ("One soak, flag-varied — never a second soak script") means the
+ * grid runner, the combinatorial flag sweep and the fix loop all reach the world
+ * through THIS file. Four seams were added for them, and every decision each one
+ * makes is a PURE FUNCTION in ./soakRules.mjs — this script runs on import, so a test
+ * that imported it to pin a rule would execute a soak, which ODQ §145.2 forbids.
+ *
+ *   --rules-json / --lighting   a rules overlay, spread into `fullRules` ABOVE the
+ *                               `darkRules` derivation (the charter's highest-risk law).
+ *   --skip-divergence           run C is skipped; `properties` is COMPUTED so
+ *                               `seed_divergent` is not claimed, the receipt records
+ *                               the absence positively, and combining it with
+ *                               --case-id is REFUSED.
+ *   --checkpoint-every/-dir     year-boundary checkpoints for the fix loop.
+ *   --restore-from              resume from one. A restored run is structurally
+ *                               fix-loop-only: different receipt kind, empty
+ *                               properties, no run B/C, no behavioral grading.
+ *
+ * ⛔ THIS FILE IS INSIDE `REALM_SCALE_SOURCE_PATHS`, so editing it MOVES the
+ * certification aggregate's `sourceFingerprint` and `sourceIdentityMatches` will
+ * refuse to rebind any pre-existing realm-scale evidence. That is DECLARED, not
+ * silent, and it is why the §180.3a address-chain observation rides the same change.
  */
 
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { measureIsolatedAdvanceWorker } from './advance-worker-evidence.mjs';
+import {
+  buildCheckpoint,
+  checkpointIdentity,
+  checkpointIdentityMismatch,
+  collectUndefinedKeyPaths,
+  composeSoakRules,
+  deepKeyCensus,
+  parseLightingOverlay,
+  replantUndefinedKeys,
+  soakInvocationRefusals,
+  soakProperties,
+} from './soakRules.mjs';
 import {
   buildBehavioralObservation,
   buildDarkControl,
@@ -105,6 +145,44 @@ const RUN_DARK_CONTROL = process.argv.includes('--dark-control');
 // 4 (the historical fixture — byte-identical archetypes for the first four ids).
 const SETTLEMENTS = Math.max(1, Math.min(30, Number(arg('settlements', 4))));
 const NOW = '2026-07-12T00:00:00.000Z'; // pinned — one instant for the whole soak
+
+// ── sk-a / SK-0: THE HARNESS SEAMS (ODQ §141, §143; charter §0) ──────────────
+// The one-soak law forbids a second soak script, so the grid, the flag sweep and
+// the fix loop reach the world through THIS file. Every decision these seams make
+// is a pure function in ./soakRules.mjs, because this script runs on import and a
+// test that imported it to pin a rule would execute a soak.
+const RULES_JSON = String(arg('rules-json', ''));
+const LIGHTING = String(arg('lighting', ''));
+const SKIP_DIVERGENCE = process.argv.includes('--skip-divergence');
+const CHECKPOINT_EVERY_RAW = arg('checkpoint-every', null);
+const CHECKPOINT_DIR = String(arg('checkpoint-dir', ''));
+const RESTORE_FROM = String(arg('restore-from', ''));
+// Source identity is CALLER-SUPPLIED, never read from git here: a soak runs inside
+// a `git archive` extraction with no `.git`, where `git rev-parse` either throws or —
+// if the archive was extracted inside some other repository — answers about the WRONG
+// one at exit 0. The runner passes the archived tip sha it created.
+const SOURCE_SHA = String(arg('source-sha', ''));
+
+const lighting = parseLightingOverlay(LIGHTING);
+const invocationRefusals = [
+  ...soakInvocationRefusals({
+    skipDivergence: SKIP_DIVERGENCE,
+    caseId: CASE_ID,
+    checkpointEvery: CHECKPOINT_EVERY_RAW,
+    restoreFrom: RESTORE_FROM,
+  }),
+  ...lighting.refusals,
+];
+if (invocationRefusals.length) {
+  for (const line of invocationRefusals) console.error(line);
+  process.exit(2);
+}
+
+const CHECKPOINT_EVERY = CHECKPOINT_EVERY_RAW == null ? 0 : Number(CHECKPOINT_EVERY_RAW);
+const RULES_OVERLAY = {
+  ...(RULES_JSON ? JSON.parse(readFileSync(resolve(RULES_JSON), 'utf8')) : {}),
+  ...lighting.overlay,
+};
 
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
@@ -201,19 +279,15 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
     if (i % 3 === 0) baseChannels.push(channel(saves[i], saves[i - 3]));
   }
 
-  const fullRules = {
-    ...SIMULATION_RULE_PRESETS.full_simulation.rules,
-    ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
-  };
-  const darkRules = Object.fromEntries(Object.entries(fullRules).map(([key, value]) => (
-    [key, typeof value === 'boolean' ? false : value]
-  )));
-  Object.assign(darkRules, {
-    presetId: 'behavioral_dark_control',
-    propagationMode: 'off',
-    migrationMode: 'void',
-    worldProgression: 'dm_advanced',
-    politicalAutonomy: 'dm_only',
+  // ⛔ THE OVERLAY APPLIES INTO `fullRules`, ABOVE the `darkRules` derivation — the
+  // charter's highest-risk law, extracted whole into composeSoakRules so a test can
+  // pin it without executing a soak. `darkRules` is derived FROM `fullRules`, so its
+  // key set is `fullRules`'s key set; an overlay applied below would leave the new
+  // keys ABSENT from the dark control, and absence is not falseness.
+  const { fullRules, darkRules } = composeSoakRules({
+    preset: SIMULATION_RULE_PRESETS.full_simulation.rules,
+    seasons: SEASONS,
+    overlay: RULES_OVERLAY,
   });
 
   const campaign = {
@@ -259,11 +333,27 @@ function findBadNumber(value, path = '$', out = [], seen = new Set()) {
 }
 
 // ── One N-year run: thread state year over year like the store does ──────────
-async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
+async function runYears(seed, years, label, {
+  variant = 'baseline',
+  restore = null,
+  checkpointEvery = 0,
+  checkpointDir = '',
+} = {}) {
   const fixture = buildFixture(seed, { variant });
   const { campaign, saves } = fixture;
   let runningCampaign = campaign;
   let runningSaves = saves;
+  // ⛔ THE RESTORE SEAM. A checkpoint replaces the threaded state and the loop
+  // resumes at the NEXT year boundary — the only checkpoint-complete seam the engine
+  // exposes (SK.M6: PRNG stream position is closure state, interior-tick state lives
+  // inside simulateCampaignWorldInterval, so a sub-year resume is unbuildable without
+  // an engine edit, which would flip this family's no-src classification).
+  let firstYear = 1;
+  if (restore) {
+    runningCampaign = restore.campaign;
+    runningSaves = restore.saves;
+    firstYear = Number(restore.identity.year) + 1;
+  }
   const yearlyHashes = [];
   const yearlyStressorCounts = [];
   const yearlyPopulations = [];
@@ -287,7 +377,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
   let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
 
-  for (let year = 1; year <= years; year++) {
+  for (let year = firstYear; year <= years; year++) {
     const beforeSaves = runningSaves;
     const rawWizardNewsById = new Map();
     const y0 = Date.now();
@@ -362,6 +452,41 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       settlements: runningSaves.map((save) => save.settlement),
     }).length);
     peakHeapUsedBytes = Math.max(peakHeapUsedBytes, process.memoryUsage().heapUsed);
+
+    // ── THE CHECKPOINT WRITER (§141.2). Year boundary only, and written AFTER the
+    //    year's state is threaded, so the file is a complete year-N realm.
+    //
+    //    ⚠ THE KEY CENSUS IS TAKEN ON THE LIVE OBJECT, BEFORE `JSON.stringify`.
+    //    That ordering is the whole anti-vacuity of the restore proof: the composite
+    //    hash is itself JSON.stringify-based and is therefore BLIND to exactly the
+    //    loss a JSON round trip causes (an `undefined`-valued key vanishes, hashes
+    //    identically, and still changes `'k' in obj` inside the engine). Censusing
+    //    after serialization on both sides would compare the instrument with itself.
+    if (checkpointEvery > 0 && checkpointDir && year % checkpointEvery === 0) {
+      const payload = { campaign: runningCampaign, saves: runningSaves };
+      const identity = checkpointIdentity({
+        year,
+        seed,
+        years,
+        settlements: SETTLEMENTS,
+        sourceSha: SOURCE_SHA,
+        nodeVersion: process.version,
+        platform: process.platform,
+        arch: process.arch,
+        schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
+      });
+      const file = resolve(join(checkpointDir, `checkpoint-year-${year}.json`));
+      mkdirSync(dirname(file), { recursive: true });
+      writeFileSync(file, `${JSON.stringify({
+        ...buildCheckpoint({ identity, ...payload }),
+        keyCensus: deepKeyCensus(payload),
+        // The SK.U1 cure: the exact paths `JSON.stringify` is about to drop, so the
+        // reader can re-plant them and the restored realm is the SAME realm rather
+        // than one whose objects quietly lost keys.
+        undefinedKeyPaths: collectUndefinedKeyPaths(payload),
+      }, null, 2)}\n`);
+      console.log(`  checkpoint year ${year}: ${file}`);
+    }
   }
 
   // This isolated structuredClone call measures only cloning the final realm on
@@ -379,6 +504,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     label,
     seed,
     years,
+    firstYear,
     ms: Date.now() - t0,
     finalTick: runningCampaign.worldState.tick,
     yearlyHashes,
@@ -415,8 +541,78 @@ const check = (ok, name, detail) => {
 
 console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", full_simulation preset (seasons ${SEASONS}), now pinned ${NOW}\n`);
 
+// ── THE RESTORE PROBE (§141.2), STRUCTURALLY FIX-LOOP-ONLY ───────────────────
+// A restored run may NEVER compute an official verdict (§141's refused-by-name list,
+// generalized; SK.L4). That is enforced here by SHAPE rather than by discipline: this
+// branch runs only the restored segment, writes a receipt of a different `kind` with
+// an EMPTY properties array and a stated reason, and never reaches run B, run C, the
+// isolated-worker evidence or the behavioral grading below.
+if (RESTORE_FROM) {
+  const checkpoint = JSON.parse(readFileSync(resolve(RESTORE_FROM), 'utf8'));
+  const mismatches = checkpointIdentityMismatch(checkpoint.identity, {
+    seed: SEED, settlements: SETTLEMENTS, sourceSha: SOURCE_SHA,
+  });
+  if (mismatches.length) {
+    console.error('REFUSED: --restore-from names a checkpoint from a different world.');
+    for (const line of mismatches) console.error(`  ${line}`);
+    process.exit(2);
+  }
+  // ⛔ SK.U1's DIRECT SETTLEMENT. The census on the left was taken on the LIVE object
+  // before serialization; this one is taken after `JSON.parse`. A difference is real
+  // round-trip loss — the class the composite hash cannot see.
+  const restoredPayload = { campaign: checkpoint.campaign, saves: checkpoint.saves };
+  const replant = replantUndefinedKeys(restoredPayload, checkpoint.undefinedKeyPaths);
+  const afterCensus = deepKeyCensus(restoredPayload);
+  const beforeCensus = Array.isArray(checkpoint.keyCensus) ? checkpoint.keyCensus : [];
+  const lost = beforeCensus.filter((key) => !afterCensus.includes(key));
+  const gained = afterCensus.filter((key) => !beforeCensus.includes(key));
+  console.log(`## restore probe — checkpoint year ${checkpoint.identity.year}, resuming to ${YEARS}`);
+  console.log(`  undefined-key replant: ${replant.planted} planted, ${replant.unreachable.length} unreachable`);
+  console.log(`  deep key census: ${beforeCensus.length} before, ${afterCensus.length} after; lost ${lost.length}, gained ${gained.length}`);
+  for (const key of lost.slice(0, 10)) console.log(`  LOST   ${key}`);
+  for (const key of gained.slice(0, 10)) console.log(`  GAINED ${key}`);
+  const restored = await runYears(SEED, YEARS, 'restored', { restore: { ...checkpoint, ...restoredPayload } });
+  console.log(`  years ${restored.firstYear}..${YEARS} in ${(restored.ms / 1000).toFixed(1)}s — final tick ${restored.finalTick}`);
+  const probeReceipt = {
+    schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
+    kind: 'whole_world_soak_restore_probe',
+    seed: SEED,
+    years: YEARS,
+    settlements: SETTLEMENTS,
+    now: NOW,
+    restoredFromYear: checkpoint.identity.year,
+    firstYear: restored.firstYear,
+    yearlyHashes: restored.yearlyHashes,
+    finalTick: restored.finalTick,
+    keyCensusBefore: beforeCensus.length,
+    keyCensusAfter: afterCensus.length,
+    keyCensusLost: lost,
+    keyCensusGained: gained,
+    undefinedKeysReplanted: replant.planted,
+    undefinedKeysUnreachable: replant.unreachable.length,
+    properties: [],
+    propertiesWithheld:
+      'a restored run serves the FIX LOOP only — no official soak verdict, rung or '
+      + 'phase-boundary run is ever computed from one (§141, generalized)',
+    completedAt: new Date().toISOString(),
+  };
+  if (RECEIPT_PATH) {
+    const file = resolve(String(RECEIPT_PATH));
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, `${JSON.stringify(probeReceipt, null, 2)}\n`);
+    console.log(`\nreceipt: ${file}`);
+  }
+  if (AS_JSON) console.log(`\n${JSON.stringify(probeReceipt, null, 2)}`);
+  const faithful = lost.length === 0 && gained.length === 0 && replant.unreachable.length === 0;
+  console.log(`\n${faithful ? 'OK — the year-boundary JSON round trip is key-faithful' : 'ROUND-TRIP LOSS — see the census above'}`);
+  process.exit(faithful ? 0 : 1);
+}
+
 console.log('## run A (primary)');
-const runA = await runYears(SEED, YEARS, 'A');
+const runA = await runYears(SEED, YEARS, 'A', {
+  checkpointEvery: CHECKPOINT_EVERY,
+  checkpointDir: CHECKPOINT_DIR,
+});
 console.log(`  ${runA.years} years in ${(runA.ms / 1000).toFixed(1)}s — final tick ${runA.finalTick} (${runA.years * 52} expected)\n`);
 
 console.log('## isolated worker evidence (actual Node worker_threads; not browser timing)');
@@ -482,33 +678,55 @@ check(firstMismatch === -1, 'byte-identical re-run (same seed)',
 // 3. Different seeds must produce materially different STORY MIXES. A composite
 // hash difference remains useful diagnostics, but it cannot earn seed_divergent:
 // one altered draw anywhere in the world used to satisfy that weaker proof.
-const runC = await runYears(`${SEED}-divergent`, DIVERGENCE_YEARS, 'C');
-const hashDiverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
-const storyMixDivergence = compareStoryMixDistributions(
-  runA.yearlyBehavior.slice(0, DIVERGENCE_YEARS),
-  runC.yearlyBehavior,
-);
-const seedDivergence = buildStoryMixDivergenceEvidence({
-  comparison: storyMixDivergence,
+// ⛔ `--skip-divergence` MAKES THIS RUN CONDITIONAL, and the absence becomes a
+// POSITIVE STATEMENT on the receipt rather than a gap a reader has to infer. The
+// property array below is computed from what executed, so a skipped run cannot
+// publish `seed_divergent` — the customer-facing clause certificationSchema.js reads
+// as "told a different tale on a different seed". Combining the flag with --case-id
+// is refused outright at parse time, so no realm-scale case receipt can exist without
+// the property.
+let runC = null;
+let seedDivergence = {
+  executed: false,
+  reason: 'harness --skip-divergence',
   windowYears: DIVERGENCE_YEARS,
   baselineSeed: SEED,
   comparisonSeed: `${SEED}-divergent`,
-  hashDiverged,
-});
-const largestMixShift = storyMixDivergence.typeShifts[0];
-const mixEvidenceIssue = storyMixDivergence.invalidEntries[0];
-check(
-  storyMixDivergence.passed,
-  'different seeds produce a divergent event-type mix',
-  `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
-    + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
-    + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
-    + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
-    + `largest shift ${largestMixShift?.type || 'none'} `
-    + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
-    + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
-    + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : ''),
-);
+};
+if (!SKIP_DIVERGENCE) {
+  runC = await runYears(`${SEED}-divergent`, DIVERGENCE_YEARS, 'C');
+  const hashDiverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
+  const storyMixDivergence = compareStoryMixDistributions(
+    runA.yearlyBehavior.slice(0, DIVERGENCE_YEARS),
+    runC.yearlyBehavior,
+  );
+  seedDivergence = {
+    executed: true,
+    ...buildStoryMixDivergenceEvidence({
+      comparison: storyMixDivergence,
+      windowYears: DIVERGENCE_YEARS,
+      baselineSeed: SEED,
+      comparisonSeed: `${SEED}-divergent`,
+      hashDiverged,
+    }),
+  };
+  const largestMixShift = storyMixDivergence.typeShifts[0];
+  const mixEvidenceIssue = storyMixDivergence.invalidEntries[0];
+  check(
+    storyMixDivergence.passed,
+    'different seeds produce a divergent event-type mix',
+    `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
+      + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
+      + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
+      + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
+      + `largest shift ${largestMixShift?.type || 'none'} `
+      + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
+      + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
+      + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : ''),
+  );
+} else {
+  console.log('  SKIPPED  divergence run C — --skip-divergence; seed_divergent is NOT claimed');
+}
 
 // Behavioral controls are deliberately sparse matrix probes, selected by the
 // realm-scale plan. They are not hidden inside every cell: three release probes
@@ -656,16 +874,12 @@ const receipt = {
   settlements: SETTLEMENTS,
   now: NOW,
   passed: failures.length === 0,
-  properties: failures.length === 0
-    ? [
-        'no_crash',
-        'rerun_identical',
-        'seed_divergent',
-        'population_bounded',
-        'isolated_worker_executed',
-        'isolated_worker_output_identical',
-      ]
-    : [],
+  // COMPUTED, never literal (annex SK.M3). `seed_divergent` is present only when the
+  // divergence run actually executed.
+  properties: soakProperties({
+    failures,
+    seedDivergenceExecuted: seedDivergence.executed === true,
+  }),
   // A-4 evidence, not just an earned-property label. The state-hash comparison
   // is retained here only to diagnose whether state also diverged; the verdict
   // comes exclusively from the selected-event distribution instrument above.
@@ -679,10 +893,22 @@ const receipt = {
   warConvergence: warConvergenceCollected.observation,
   warConvergenceCensus: warCensus,
   finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
+  // ⭐ THE PER-YEAR SEQUENCE, not only the end state. SK-1's determinism-under-workers
+  // proof compares the full sequence because a mid-run divergence that RECONVERGES by
+  // the horizon hides completely from a final-hash-only comparison. Two rows in
+  // src/domain/certification/subsystemRowsPlace.js already ask for exactly this
+  // ("must agree on finalHash and on every yearly composite hash") and could not have
+  // it. ADDITIVE, and deliberately not a schema bump — the beliefDivergence precedent.
+  yearlyHashes: runA.yearlyHashes,
   directFirstResultSha256: runA.firstResultSha256,
   stressorCounts: counts,
   startPopulations: runA.startPopulations,
   finalPopulations: finalPops,
+  // ⚠ THE REMNANT LAW, ON THE RECEIPT. A properly-died settlement legitimately holds
+  // zero (the 2026-07-31 law this script's own `everyAlive` check already honours), so
+  // any downstream population-collapse tripwire needs the died flags or it reports every
+  // lawful death as a finding. They were computed and then discarded; now they ship.
+  finalDiedFlags: (runA.yearlyDiedFlags[runA.yearlyDiedFlags.length - 1] || []).map(Boolean),
   // performance-scale-6 cost series (the sim-report artifact for the tick axis).
   yearlyBytes: runA.yearlyBytes,
   yearlyRealmBytes: runA.yearlyRealmBytes,
@@ -713,11 +939,11 @@ const receipt = {
   runDurationsMs: {
     primary: runA.ms,
     replay: runB.ms,
-    divergent: runC.ms,
+    divergent: runC ? runC.ms : null,
   },
   ticksAdvanced: (
     (YEARS * 2)
-    + DIVERGENCE_YEARS
+    + (runC ? DIVERGENCE_YEARS : 0)
     + (neighborControl ? NEIGHBOR_CONTROL_YEARS : 0)
     + (darkControl ? 1 : 0)
   ) * 52,

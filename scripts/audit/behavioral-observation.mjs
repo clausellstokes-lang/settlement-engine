@@ -723,6 +723,105 @@ export function observeBeliefDivergence({ result, afterSaves }) {
 }
 
 /**
+ * ⭐ THE ADDRESS-CHAIN INSTRUMENT (ODQ §180.3a — the chair's adoption of the band
+ * TE-27 refused with its price named; the NEWS ADDRESS LAW, owner doctrine 2026-07-22).
+ *
+ * The law says every news item carries FOUR mandatory parts: a subject with its full
+ * containment address (settlement → power → faction → NPC), the typed action or state
+ * change, the affected settlement(s) by name, and the reason. Nothing in the receipt
+ * measured whether the world's own narration honours it, so the harness's curve bands
+ * could watch every engine aggregate and never watch the reader's experience.
+ *
+ * ⛔ THE PRICE, STATED RATHER THAN PAID SILENTLY. Supplying this field edits a file
+ * inside `REALM_SCALE_SOURCE_PATHS`, which MOVES the certification aggregate's source
+ * fingerprint. That is exactly why the chair placed it on SK-0, the member that already
+ * moves the fingerprint for the soak-script extension: both changes ride ONE declared
+ * move rather than two.
+ *
+ * ADDITIVE, and deliberately NOT a `BEHAVIORAL_OBSERVATION_VERSION` bump — the
+ * `beliefDivergence` precedent directly above applies unchanged: it changes the meaning
+ * of no existing field, and a bump would blind the behavioral oracle to every soak
+ * receipt already on disk. A receipt without this key is an instrument gap, not a zero.
+ *
+ * RATES ARE INTEGER MILLI, never floats. The `sim_narration_tempo` row set the idiom:
+ * a float cannot fork between the Node face and the SQL face if it is never a float.
+ *
+ * PURE: reads the freshly-authored rows the callback already supplies, writes nothing.
+ */
+export const ADDRESS_CHAIN_SCHEMA_VERSION = 1;
+
+/** The containment ladder, in the law's own order. Depth is how deep the chain goes. */
+const ADDRESS_LEVELS = Object.freeze([
+  Object.freeze({ level: 'settlement', keys: Object.freeze(['settlementIds', 'settlementId']) }),
+  Object.freeze({ level: 'power', keys: Object.freeze(['powerId', 'powerIds']) }),
+  Object.freeze({ level: 'faction', keys: Object.freeze(['factionId', 'factionIds']) }),
+  Object.freeze({ level: 'npc', keys: Object.freeze(['npcId', 'npcIds']) }),
+]);
+
+/** @param {Record<string, unknown>} entry @param {ReadonlyArray<string>} keys */
+function carriesAny(entry, keys) {
+  for (const key of keys) {
+    const value = entry?.[key];
+    if (Array.isArray(value)) { if (value.some((item) => String(item ?? '').trim())) return true; continue; }
+    if (String(value ?? '').trim()) return true;
+  }
+  return false;
+}
+
+/**
+ * Measure the address completeness of one year's freshly-authored news rows.
+ * @param {ReadonlyArray<Record<string, unknown>>} entries
+ */
+export function measureAddressChain(entries) {
+  const rows = Array.isArray(entries) ? entries.filter((e) => e && typeof e === 'object') : [];
+  /** @type {Record<string, number>} */
+  const depthHistogram = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+  let typedAction = 0;
+  let affectedSettlements = 0;
+  let reason = 0;
+  let subjectAddressed = 0;
+  let fullyAddressed = 0;
+
+  for (const entry of rows) {
+    // Depth is CONTIGUOUS from the settlement outward: an NPC id with no faction is
+    // an incomplete chain, which is the defect the law exists to name. Counting it as
+    // depth 4 would report the broken case as the best case.
+    let depth = 0;
+    for (const { keys } of ADDRESS_LEVELS) {
+      if (!carriesAny(entry, keys)) break;
+      depth += 1;
+    }
+    depthHistogram[depth] = (depthHistogram[depth] || 0) + 1;
+
+    const hasAction = Boolean(String(entry.impactKind ?? '').trim() || String(entry.kind ?? '').trim());
+    const hasSettlements = carriesAny(entry, ADDRESS_LEVELS[0].keys);
+    const hasReason = carriesAny(entry, ['reasons', 'reason']);
+    if (hasAction) typedAction += 1;
+    if (hasSettlements) affectedSettlements += 1;
+    if (hasReason) reason += 1;
+    if (depth >= 1) subjectAddressed += 1;
+    if (depth >= 1 && hasAction && hasSettlements && hasReason) fullyAddressed += 1;
+  }
+
+  const milli = (count) => (rows.length > 0 ? Math.round((count / rows.length) * 1000) : 0);
+  return {
+    schemaVersion: ADDRESS_CHAIN_SCHEMA_VERSION,
+    rows: rows.length,
+    subjectAddressed,
+    typedAction,
+    affectedSettlements,
+    reason,
+    fullyAddressed,
+    depthHistogram,
+    subjectAddressedRateMilli: milli(subjectAddressed),
+    typedActionRateMilli: milli(typedAction),
+    affectedSettlementsRateMilli: milli(affectedSettlements),
+    reasonRateMilli: milli(reason),
+    fullyAddressedRateMilli: milli(fullyAddressed),
+  };
+}
+
+/**
  * Observe one simulated year.
  */
 export function observeBehavioralYear({
@@ -914,6 +1013,13 @@ export function observeBehavioralYear({
     // instrument groups them by settlement and season. Empty means the lane emitted
     // no measurable prose, never an invented zero from the capped terminal feed.
     phraseRepetition: measurePhraseRepetition(
+      Array.isArray(rawWizardNewsEntries) ? rawWizardNewsEntries : [],
+    ),
+    // ⭐ ODQ §180.3a. Same rows the phrase instrument reads — the uncapped, freshly
+    // authored Wizard News for this year — measured against the NEWS ADDRESS LAW's
+    // four mandatory parts. Empty means the lane authored nothing measurable this
+    // year, never an invented zero. See measureAddressChain's header for the price.
+    addressChain: measureAddressChain(
       Array.isArray(rawWizardNewsEntries) ? rawWizardNewsEntries : [],
     ),
     // ADDITIVE, and deliberately NOT a BEHAVIORAL_OBSERVATION_VERSION bump: it
