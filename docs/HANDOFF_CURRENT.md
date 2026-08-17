@@ -94,6 +94,16 @@ re-examination to docs/FABLE_RETROVALIDATION_QUEUE.md. If you are a FABLE
 chair returning: walk that queue FIRST (RATIFIED/AMENDED/REVERSED per row),
 then resume the §234 sequence.
 
+## ⛔ PERMANENT IP LAWS (§248, §253, §254.5)
+- **NO WATABOU (TownGeneratorOS) CODE EVER ENTERS THIS TREE** — GPL-3.0,
+  incompatible with a commercial closed product. Study is read-only; the
+  implementing lane must never see that source (clean-room by lane separation).
+- **FMG (Azgaar) is MIT but its vendored libs are not** — tinymce is GPLv2+,
+  and its Urquhart utility was copied in from elsewhere and is not Azgaar's to
+  license. A permissive top-level licence does not launder copied-in code.
+- Adopt APPROACHES freely; implement clean-room in our own idiom. A mechanism
+  adopted without a derivation home in our dossier facts is decoration.
+
 ## Hazards a successor must not relearn (the sharpest five)
 1. A census over a derived set proves NOTHING about a surface it doesn't
    contain — forensic zoom (render 3000px, crop, LOOK) is standard practice.

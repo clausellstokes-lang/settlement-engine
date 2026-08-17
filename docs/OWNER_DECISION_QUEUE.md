@@ -9364,3 +9364,43 @@ construction), straddler counterfactual must red.
    without one is decoration (§246). The differentiator is not
    that our maps look like theirs; it is that ours are TRUE and
    theirs cannot be.
+
+### §254.5 · WATABOU IS GPL-3.0 — ADOPTION REFUSED, STUDY
+### CONTINUES READ-ONLY (2026-08-17, owner-confirmed; the
+### pre-committed copyleft tier fires)
+
+1. ⛔⛔ **STANDING LAW, PERMANENT: NO WATABOU CODE ENTERS THIS
+   TREE, EVER** — not a function, a helper, a constant table, or
+   a "lightly adapted" fragment. GPL-3.0 would require licensing
+   the entire derived work under GPL-3.0, incompatible with a
+   commercial closed product. The refusal was PRE-COMMITTED in
+   §254.2's tiered discipline before the license was known, which
+   is why it costs nothing to apply now.
+2. **THE STUDY CONTINUES AS READ-FOR-UNDERSTANDING** — reading is
+   not copying and techniques are not copyrightable, only their
+   expression. Tightened beyond the FMG study: **ZERO code
+   quotations** (FMG permitted short cited fragments; here none),
+   no line-by-line transcription, no pseudocode that is their
+   code with the syntax filed off, no lifted names or constants.
+   Findings sit at the level of published technique (Voronoi/
+   Lloyd, straight skeletons, polygon offsetting, ward
+   subdivision) plus our own account of design intent.
+3. ⭐ **PREFER THE AUTHOR'S OWN PUBLIC PROSE** (dev-logs, talks)
+   wherever a mechanism is documented there: prose carries none
+   of the copyleft hazard and often states intent the code
+   cannot. The lane reports which findings rest on prose versus
+   on code.
+4. ⭐⭐ **THE CLEAN-ROOM HANDOFF IS NOW AN EXECUTABLE PROTOCOL,
+   NOT AN ASPIRATION**: the study lane reads and writes a
+   mechanism specification; the IMPLEMENTING WAVE IS A DIFFERENT
+   LANE WITH A DIFFERENT CONTEXT AND NEVER SEES THE SOURCE. Our
+   lane architecture gives us the standard industry mitigation
+   for free — the deliverable must be complete enough that the
+   builder needs no repo access, and the lane must certify it
+   wrote to that standard. The clone is deleted when reading
+   ends.
+5. **OWNER-GATED NOTE**: this is engineering hygiene, not legal
+   advice. Given the commercial stakes and that a legal cluster
+   is already owner-gated (§133a), the owner may wish counsel to
+   confirm the clean-room posture before any mechanism traceable
+   to this study ships. Recorded, not decided.
