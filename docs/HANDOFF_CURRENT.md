@@ -32,8 +32,11 @@ fate.
 - SCRATCHPAD /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
   a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/ — all lane receipts
   (laneXX-receipt.md), the map sandbox (mf-proto/), exemplars (mf-proto-out/),
-  the reference corpus (map-refs/, 163 plates + laneHF-CALIBRATION.md), and the
-  urbanism atlas (laneMFS1-urbanism-atlas.md — the map grading instrument).
+  and the map sandbox. ⭐ **THE REFERENCE CORPUS NOW LIVES PERMANENTLY AT
+  `map-corpus/` IN THE REPO ROOT** (§243; git-ignored, 313 plates + previews +
+  docs/ with the calibration index, the urbanism atlas, the round receipts and
+  the measured register). CITE map-corpus/ — the scratchpad `map-refs/` is a
+  temporary mirror that may vanish.
 
 ## IMMEDIATE state (refreshed 2026-08-17 ~01:30 ET, ledger at §236)
 The session-limit pause is OVER; all its debts are settled.

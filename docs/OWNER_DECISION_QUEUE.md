@@ -8716,3 +8716,30 @@ construction), straddler counterfactual must red.
    discriminate. THE CORPUS IS NOW FROZEN: no further growth
    rounds; references are minted only if a specific law needs a
    specific vocabulary, and the subscription is gone regardless.
+
+## §243 · THE CORPUS HAS A PERMANENT HOME — `map-corpus/` IS
+## CANONICAL FROM NOW ON (2026-08-17, owner order; chair: Opus 5)
+
+1. **THE ORDER**: "Download all of that into an actual folder in
+   settlement-engine so that it is not lost… and then refer to
+   that folder from now on." EXECUTED: **/Users/cstokes/Desktop/
+   settlement-engine/map-corpus/** — `plates/` (313 4K plates),
+   `previews/` (313), `docs/` (the calibration index, the
+   urbanism atlas, the three round receipts, the measured
+   register CSV + band/holdout JSON, and the measurement
+   instruments), plus a README carrying the standing rules.
+   **BYTE-VERIFIED**: 9,000,292,899 bytes of plates, source and
+   destination identical. The session scratchpad `map-refs/` is
+   now a MIRROR, not the original — it is temporary storage and
+   may vanish; nothing may depend on it.
+2. **GIT-IGNORED BY CONSTRUCTION**: the folder carries its own
+   `.gitignore` (`*`), so 8.5 GB never enters history and never
+   appears in `git status` — verified empty. This also keeps the
+   corpus out of the shipped repo, consistent with the standing
+   IP-exposure item. Back it up as DATA, not code.
+3. **BINDING ON ALL FUTURE LANES**: every brief, review,
+   comparison round and grading pass cites `map-corpus/` paths
+   from now on; a lane that reads the scratchpad mirror is
+   reading a copy that may not exist. docs/HANDOFF_CURRENT.md
+   updated same-turn so a successor of any model inherits the
+   canonical path.
