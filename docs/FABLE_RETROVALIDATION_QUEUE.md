@@ -31,3 +31,12 @@ the same-seed shift on the thorp-byte-identical argument; (c) the chair's
 zoom-based visual verdict that the wall now runs clear (an aesthetic/forensic
 judgment made under an Opus chair); (d) the MF-ARCH mandate's ordering.
 Evidence: laneMFB8b-receipt.md, mf-proto-out/b8b/ zooms.
+
+### §239 — the wall-side street / block termination / temporal primacy (Opus chair)
+Fable should re-derive: (a) the AMENDMENT of the owner's literal "walls first"
+into temporal primacy (is the genesis objection real, and is the temporal edge
+the right general rule?); (b) the generalization of block termination from
+wall/street to ALL hard edges; (c) the claim that the wall-side street makes
+the no-touching law a geometric consequence rather than a policed rule;
+(d) the decision to hold both laws for wave nine rather than redirect MF-ARCH.
+Evidence: this row, laneMFARCH-receipt.md's SCC report when it lands.

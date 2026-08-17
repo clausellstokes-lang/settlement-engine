@@ -8498,3 +8498,56 @@ construction), straddler counterfactual must red.
    three hash tiers, spatial indexing with canonical ordering and
    indexed-vs-exhaustive equivalence pins, per-census runtime
    budgets, and the cross-engine determinism CI.
+
+## §239 · OWNER LAWS: THE WALL-SIDE STREET, BLOCK TERMINATION AT
+## HARD EDGES, AND THE WALL'S TEMPORAL PRIMACY (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. **BLOCK TERMINATION (owner)**: a wall or street CUTS OFF a
+   block — where growth meets a hard edge the block ENDS and
+   does not expand past it; the next block begins on the far
+   side. Generalized by the chair to ALL hard edges (wall,
+   street, water, cliff). This inverts today's grow-then-clip
+   order and is the structural cause behind the straddling
+   districts (§232) and the wall-band intrusions (§238): a block
+   must be DEFINED by its bounding rights-of-way, not trimmed
+   after the fact.
+2. **THE WALL-SIDE STREET (owner)**: on BOTH sides of the wall —
+   around the periphery or directly attached — there are
+   streets, with very few exceptions. Historically the
+   intervallum inside (circulation, firebreak, muster) and clear
+   ground/ring road outside. ENGINEERING GAIN over today's
+   reserved band: the wall is always reachable, every gate
+   necessarily meets the street web, and "no building touches
+   the wall" becomes a CONSEQUENCE of geometry rather than a
+   policed rule. The exceptions are DERIVED, never sprinkled:
+   wall-owned structures (towers, gatehouses, garrison buildings
+   on the inner face — the corpus's T-22 shows inner-face
+   abutment is NORMAL in military compounds) and late-period
+   crowding lean-tos under measured space pressure. Tier-scaled
+   (a palisade's way is a lane, not a metropolis boulevard).
+3. **THE WALL'S TEMPORAL PRIMACY (owner: "walls should be built
+   first before districts")**: RULED AS AMENDED — a circuit
+   cannot be literally first at genesis (it wraps something that
+   must already exist), but the owner's own promotion example
+   states the correct general rule: **the wall is built around
+   the core existing at its CONSTRUCTION YEAR, and constrains
+   everything built after.** Districts expand OUTSIDE it as
+   their own faubourg districts (§232 composes exactly).
+   ⭐⭐ **THIS MAY CUT THE PROGRAM'S HARDEST DEPENDENCY CYCLE BY
+   TIME**: wall(Y_wall) ← fabric(Y_wall); fabric(Y>Y_wall) ←
+   wall — a one-way temporal edge, with only the construction
+   year itself simultaneous (a bounded local solve). RELAYED TO
+   MF-ARCH SAME-TURN as a graph fact to EVALUATE against its
+   Tarjan condensation (report-only; no year-model restructure
+   this wave).
+4. **DIVIDEND RECORDED**: under §239.3 a demoted town's circuit
+   OUTLIVES the fabric that shrank inside it — the intramural
+   land empties to gardens and ruins, the historically exact
+   "half the walled town is fields," delivered by the law rather
+   than a special case (§161g gains it free).
+5. **SLOTTING**: §239.1 and §239.2 are WAVE NINE FIRST-ORDER —
+   NOT injected into the running MF-ARCH wave (the §234
+   feature-law freeze holds; the foundation lands once, clean).
+   Both change existing geometry and therefore ride the declared
+   one-time shift at landing, never a silent redraw.
