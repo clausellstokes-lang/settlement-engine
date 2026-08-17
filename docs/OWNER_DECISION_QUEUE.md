@@ -8382,3 +8382,24 @@ construction), straddler counterfactual must red.
    with the §232 district partition and the sibling staleness
    audit; its PILOT NOTES feed the MF-ARCH wave, which
    dispatches on its seal under the feature-law freeze.
+
+## §236 · OWNER ORDER: THE OPUS CONTINUITY + FABLE
+## RETROVALIDATION PROTOCOL (2026-08-17)
+
+1. **THE ORDER**: when Fable runs out, switch every process to
+   Opus 5 and continue — but MARK all Opus-chaired acts so the
+   next Fable session can retroactively validate them.
+   **docs/FABLE_RETROVALIDATION_QUEUE.md CREATED** (ledger
+   branch) carrying the binding protocol: per-row markers on
+   Opus-chaired ledger rows, a queue entry per act naming what
+   Fable re-examines (the judgment-dense parts), Fable walks it
+   top-to-bottom on return with RATIFIED/AMENDED/REVERSED
+   rulings and the annex treatment for any reversal's
+   downstream. Everything through §235 is Fable-validated and
+   pre-dates the queue. The 08-10 exhaustion's OWED-marker law
+   is the precedent; this formalizes it as standing machinery.
+2. Staffing note: Fable-SEAT lanes (aesthetic closure, corpus
+   curation, the §216 comparison rounds' grading) degrade to
+   Opus with the marker when Fable is gone — the §208 placement
+   order resumes at the next Fable window, starting with the
+   retrovalidation sitting itself.

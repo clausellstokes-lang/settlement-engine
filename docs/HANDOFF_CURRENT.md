@@ -92,6 +92,13 @@ any map lane.
 - **Owner-side**: the 18-item batch + item 19 (scale-bar unit name, prints
   PACES) · the CI log · tuning signature (post-full-soak) · legal/launch.
 
+## ⚠ FABLE/OPUS CONTINUITY (§236)
+If you are an OPUS chair: work continues at full authority, but mark every
+ledger row "(chair: Opus 5 — Fable-unvalidated)" and append what needs Fable
+re-examination to docs/FABLE_RETROVALIDATION_QUEUE.md. If you are a FABLE
+chair returning: walk that queue FIRST (RATIFIED/AMENDED/REVERSED per row),
+then resume the §234 sequence.
+
 ## Hazards a successor must not relearn (the sharpest five)
 1. A census over a derived set proves NOTHING about a surface it doesn't
    contain — forensic zoom (render 3000px, crop, LOOK) is standard practice.
