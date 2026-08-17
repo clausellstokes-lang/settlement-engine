@@ -10480,3 +10480,56 @@ down is not a critique.
    §271.3's conditions and re-run the terminal. **RS-4 then fires
    at that exposure and must SHOW THE COLLAPSE CURED** — the
    repair's real proof is a soak that no longer finds it.
+
+## §272 · THE P4 REPAIR IS LANDED AND EXPOSED — THE COLLAPSE IS
+## CURED (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **TERMINAL GREEN ON ALL SEVENTEEN STEPS** (test ratchet 11
+   known of 28,552 at ceiling 11 — **the same 11 red at base, so
+   the terminal is handed back exactly as found**; STRICT DIST
+   51/409 clean; gate exit 0; smoke green). **CAS EXECUTED:
+   claude/composite-r4 ac243e1c → 4eafca31** (four commits: the
+   decline/death reconciliation, a NaN-safe strict-clean veto
+   read, the edge re-bundle, and the authorized re-record).
+2. **ALL FOUR §271 CONDITIONS MET BY EXECUTION, and the
+   key-by-key diff is exemplary**: 64 keys in, 64 out, **zero
+   added, zero removed, exactly four changed — all four `.hash`**
+   — with every named projection byte-identical across all four
+   seeds (founding ticks, plan ids, finalPopulations, satellite
+   ids, receipt histograms). ⭐ **THAT THE POPULATIONS DID NOT
+   MOVE IS ITSELF THE FINDING: the golden fixture was never in
+   the pathological regime**, which is why nothing a player can
+   reach could ever have shown this defect.
+3. **THIRTEEN ROWS, ONE CAUSE, COUNTED FIVE WAYS — each explained
+   at its own site rather than bulk-rebaselined**: the corpus
+   lights all 76 flags and P4 retires the bare `population_
+   decline` candidate. newsHeadlineContract ×3 (26 rules
+   UNCHANGED; exactly one crosses active→inert, and the new row
+   `\bmay fall\b` is the exact sibling of `\bmay grow\b`
+   banked one wave earlier for the same reason);
+   observedShapeReaders ×1 (every figure DOWN — the safe
+   direction — with the findings inventory byte-identical);
+   proseFamilyContract ×5 (**63 identities in, 63 out**, chronicle
+   and timeline byte-identical, cause isolated to
+   `populationDeltas[].reason` 2 → 1, and **`eventLog[].changes[]
+   .kind` unchanged at 6/92 — the retired outcomes carried a
+   sourceEvent but no graph change, so the retirement was
+   SURGICAL**); proseNumerics ×2 (**pure address rot** — 413 in,
+   413 out, same file/category/snippet, line 458 → 485);
+   sovereigntyLighting ×1 (+23 titles / +6 suites, decomposed per
+   file and closing exactly, with files/parked/credited unchanged
+   because no test file was minted).
+4. **THE SHIPPED SURFACE IS PROVED UNTOUCHED BY ENUMERATION, not
+   assertion**: all seven shipped presets checked — **zero light
+   `demographicsEnabled`** (six omit it, `full_simulation`
+   declares it false, the default rules carry no key). And one
+   thing never moved anywhere in the diff: **the news layer**
+   (wizardNews 240/1567/272 unchanged) — population drift was
+   already `state_only`, so only the state lane got quieter.
+5. **RS-4 FIRES AT THIS EXPOSURE and its job is singular: SHOW
+   THE COLLAPSE GONE.** The repair's real proof is a soak that no
+   longer finds it — a cured capsule proves the cell, a clean
+   grid proves the class. The three constants remain flagged for
+   the owner's tuning signature; a veto there re-does the
+   re-record at his values, and the lane's receipt carries that
+   obligation in writing.
