@@ -245,3 +245,11 @@ share one declared shift rather than isolating it; (c) declining to charter a
 further performance lane on speculation now that the concentrated wins are
 spent; (d) whether the 2.05× metropolis result changes the §220 gate verdict
 (it does not on its own — the gap to the shipping map is still large).
+
+### §270 — W1 partial (Opus chair)
+Fable should re-derive: (a) the never-run-machinery law (a mechanism must pin
+that it FIRES on a real leaf) — it implies an audit of every existing mechanism
+for the same condition, which is a large consequence; (b) raising the hamlet op
+ceiling under §217 rather than pressing the remaining levers; (c) refusing to
+collect W1 as done and splitting a completion lane instead; (d) whether the
+hash-vs-rank rationing law generalizes beyond terrain marks.

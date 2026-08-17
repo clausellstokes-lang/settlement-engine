@@ -10347,3 +10347,71 @@ down is not a critique.
    chartered on speculation** — the next pass rides whichever
    wave already touches that surface, since what remains is
    diffuse and mostly geometry-moving.
+
+## §270 · W1 PARTIAL — AND THE DISCOVERY THAT THREE MECHANISMS
+## HAD NEVER RUN ONCE (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. ⭐⭐⭐ **THE HEADLINE IS BIGGER THAN THE WAVE, AND IT IS A NEW
+   MEMBER OF THE VACUITY FAMILY — AT THE DATA LEVEL: MACHINERY
+   THAT HAS NEVER RUN.** The exemplar corpus is built by the REAL
+   generator, not by fixtures, and on it: `readResourceWords()`
+   returned `[]` on **16 of 16 leaves**, so **the entire §161a
+   resource-ground contract machinery HAD NEVER ONCE EXECUTED**;
+   `stressors` is a bare object on 7 of 10 distinct sites; and
+   the active-condition bridge is keyed on a vocabulary that does
+   not exist — measured against the engine's own 46 archetypes,
+   **1 of 9 bridge keys is real, and 13 of the 14 archetypes a
+   generated settlement can actually carry had no row at all**
+   (MF-INT1 judged this "one mapping table away from live"; the
+   table exists and maps a THIRD vocabulary). The same class
+   appeared twice more in the same lane (a `danger` regex whose
+   three alternatives cannot match any catalog key that exists).
+   ⭐ **THE LAW THIS PRODUCES: A MECHANISM MUST CARRY A PIN
+   PROVING IT FIRES ON AT LEAST ONE REAL LEAF, OR IT IS PRESUMED
+   DARK.** Zero violations is not evidence of correctness when
+   the code never ran; §195's family now has a data-level cousin
+   and it is the sneakiest one yet.
+2. ⭐ **THE ACCEPTANCE FAILURE'S CAUSE IS FOUND, AND IT IS A
+   GENERAL LAW**: W0 wrote "NO RELIEF IS DRAWN" on a mountain
+   leaf that had derived 204 hachures and 72 crag marks — they
+   WERE derived, passed and drawn. The defect was rationing them
+   by `sort((a,b) => a.pri - b.pri)` where `pri` is a HASH, then
+   taking the first N. **RATIONING BY HASH IS A UNIFORM RANDOM
+   SAMPLE — IT SPREADS. RATIONING BY RANK MASSES.** Ranked
+   steepest-first, the crags now form legible ridges (viewed at
+   3000 px, before and after). Bank it: anywhere we ration marks,
+   the ordering key decides whether the result reads as terrain
+   or as confetti.
+3. **THE WAVE IS INCOMPLETE AND IS NOT COLLECTED AS DONE** —
+   1 of 6 exit criteria met, 1 partial, 4 unbuilt (the
+   `buildable` mask and its census, `waterBearing`, the two-scale
+   coastline, **and EVERY PIN including the consistency pin and
+   its counterfactuals** — the suite sits at 178, exactly
+   PERF1's count, so nothing this wave built is pinned). The
+   relief field itself earned its keep immediately: it shows the
+   mountain is 3.3× steeper than the fjord in absolute terms
+   while reporting a LOWER normalized slope, because `sub.slope`
+   is per-leaf normalized and every threshold is stated in those
+   units — a trap for anyone comparing leaves. **W1b DISPATCHED
+   to finish it.**
+4. **RULINGS.** (a) **THE HAMLET OP CEILING IS RAISED UNDER §217**
+   — 91/96 with hamlet at 1102 against 1100, after the lane cut
+   the overrun from −13 to −2 with two derived rations and
+   stopped at levers that are tuning-signature, owner-gated or
+   W7's. **Efficiency was tried and measured first, which is the
+   grant's condition; the raise is measured, minimal and
+   re-pinned.** (b) ⚠ **`physicalViolations` 1 → 7 after five
+   waves at 1 MUST BE INVESTIGATED IN W1b, NOT INHERITED** — the
+   lane's own guess (the absent refusal mask) is plausible and
+   unproven, and an uninvestigated wrong-way figure is precisely
+   what §252.3b taught us not to carry forward. (c) The §202
+   ladder's FIGURE is cured and proved pixel-free; its BEHAVIOUR
+   stays diagnosed-not-fixed and PLAUSIBLE, correctly deferred
+   rather than forced against a broken ceiling. (d) **NAMING
+   COLLISION RULED**: `laneMFW1-receipt.md` belongs to the water
+   characterization lane and is cited by the spec; the substrate
+   lane is **MF-W1S** with `laneMFW1SUB-receipt.md`. (e) W2 must
+   RE-TAKE the metropolis headroom arithmetic — 1,422 is now
+   1,210, and §252.3a's third-circuit case must be re-derived,
+   never inherited.
