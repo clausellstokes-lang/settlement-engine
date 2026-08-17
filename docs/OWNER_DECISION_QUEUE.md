@@ -9122,3 +9122,72 @@ construction), straddler counterfactual must red.
    inside the reserve. **A STUDY TAKES THE LOSS RATHER THAN
    CONTAMINATE THE HOLDOUT**; the withdrawal notice sits in the
    section slot rather than being renumbered away.
+
+## §251 · THE CONTEXT COMPENDIUM COLLECTED — THE ANSWER TO §246
+## IS "PLAUSIBLE SETTLEMENT, IMPLAUSIBLE WORLD", AND THE FIX IS
+## MOSTLY FIELDS WE ALREADY HAVE (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **DELIVERED**: map-corpus/docs/MORPHOLOGY-CONTEXT.md (160 KB,
+   §0-§14) + its census instrument and CSV; 81 holdout plates
+   excluded by the UNION rule enforced IN CODE (the swap replaced
+   members without the lists nesting — excluding either list
+   alone would have LEAKED adopted-holdout plates; the cost is
+   stated: the reserve took the best plate for seven sections);
+   232 eligible, 45 mechanisms catalogued — **3 HAVE, 18 PARTIAL,
+   23 MISSING, 1 NOT-DERIVABLE**.
+2. ⭐⭐ **THE §246 ANSWER, VERBATIM IN SUBSTANCE: we would produce
+   a plausible settlement with an IMPLAUSIBLE RELATIONSHIP TO ITS
+   WORLD** — the wall a shape rather than nine typed decisions,
+   water a channel rather than a system, institutions with sizes
+   but no NEIGHBOURS, a desert courtyard city rendered as a
+   European row town in warm ink. **AND ALMOST NONE OF THE FIX IS
+   A NEW RENDERING CAPABILITY: it is four dossier fields
+   (`supplyChains`, `neighbors`, `institutions`, `resources`)
+   that the map today reads FOR LABELS AND NEVER FOR GEOMETRY.**
+   That single sentence is the most actionable finding of the
+   entire study program.
+3. **SIX HEADLINE STRUCTURAL FINDINGS ADOPTED**: settlements sit
+   at a SCARCITY the corpus draws LARGER than the settlement
+   itself (11/12 viewed); the circuit is a CHAIN OF NINE TYPED
+   RUNS each with a cause our facts already supply; water needs a
+   SECOND AXIS (EDGE / SPINE / OBSTACLE) because §5.0b's mode
+   does not determine morphology; MATERIAL DRIVES FOOTPRINT
+   GRAMMAR, so the setting-agnostic promise is STRUCTURALLY
+   unmet, not cosmetically; institutions have scale but no
+   RELATIONS (and the negative rules — what is never adjacent to
+   what — are the cheap half); superseded walls FOSSILISE, which
+   §250 independently found and which is §240's biggest unclaimed
+   dividend. §8's ten unnamed dimensions are adopted as study
+   material, incl. process ground larger than the settlement,
+   surface texture as tenure, and RELOCATION AS A FIRST-CLASS
+   STATE.
+4. **TWO SEQUENCING FINDINGS THAT CHANGE WAVE NINE — BOTH
+   RULED.** (a) ⛔ **§214 IS BLOCKED and the dependency was
+   recorded nowhere**: its terrain arm (hachure tightening with
+   gradient, crag hatch by land form, terraces on each band's own
+   curve) has NO RELIEF FIELD to consume — b6 carries a single
+   `RELIEF 0.30` scalar. **§214's terrain arm is therefore
+   RE-SEQUENCED behind a relief substrate; its wall/iconography
+   arm may proceed.** (b) ⚠ **§240 AND THE RUN-CHAIN ARE ONE
+   PIECE OF WORK**: three rings derived without run typing come
+   out CONCENTRIC — the exact prior the corpus spent three growth
+   rounds and eleven deformed plates failing to beat. **RULED:
+   they land together**; landing §240 alone would ship the defect
+   and then pay a declared shift twice to remove it. Related and
+   equally important: **§200's clearance census WILL RED ON
+   CORRECT OUTPUT** unless its exemption keys to RUN TYPE — 7/7
+   walled plates show a wall-side street on SOME runs, 0/7 on
+   EVERY run, which sharpens §239.2's "very few exceptions" into
+   a PER-RUN DERIVATION rather than a global rule.
+5. **OWNER-GATED, RAISED NOT DECIDED**: `config.terrainType` is
+   SEVEN tokens against a corpus expressing ~20 structurally
+   distinct settings — the upstream blocker for the whole terrain
+   program. The lane recommends COMPOSITE `terrainModifiers`
+   rather than widening the enum, because the enum is what the
+   gallery facets and the server RPC filter on (a public
+   surface). Chair concurs with the shape but it is the owner's
+   call. Separately: inventing WIND/SUN BEARINGS is the most
+   frequently drawn siting logic in the corpus, but a bearing
+   minted at generation becomes a SEED-PERMANENT WORLD FACT under
+   THE PROMISE — correctly filed as inspiration, NOT proposed.

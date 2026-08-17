@@ -121,3 +121,13 @@ after §244.4 and together they define our anti-overfit doctrine; (c) the four
 tier-invariants; (d) circuitDemotion's promotion to wave-nine first-order;
 (e) the epoch calibration figures (newer = 1.8-2.9× coarser; order by founding
 mode; max 4 epochs) as §240's binding numbers.
+
+### §251 — the context compendium's rulings (Opus chair)
+Fable should re-derive: (a) re-sequencing §214's terrain arm behind a relief
+substrate while letting its wall arm proceed; (b) the ruling that §240 and the
+run-chain must land TOGETHER (is the concentric-without-run-typing claim
+strong enough to bind the sequence?); (c) keying §200's clearance exemption to
+run type on 7/7-some-runs / 0/7-every-run evidence; (d) the framing that the
+§246 answer is "plausible settlement, implausible world" and that the fix is
+mostly four existing dossier fields read for geometry — this is the study
+program's central conclusion and deserves the sharpest re-derivation.
