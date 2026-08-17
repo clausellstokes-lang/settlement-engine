@@ -10281,3 +10281,69 @@ down is not a critique.
    (c) The growth-side tail (×8.00, two rows tailing in two
    worlds each) and five memory-watermark firings join the
    PROVISIONAL curves for the tuning pass — unchanged in status.
+
+## §269 · THE PERFORMANCE PASS — 2× AT THE METROPOLIS WITH ZERO
+## PIXELS MOVED, AND A CHARTERED TARGET REFUSED WITH A NUMBER
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. ⭐⭐ **THE SPIKE'S HEADLINE HOTSPOT WAS MISDIAGNOSED BY BOTH OF
+   US, AND THE LANE FOUND THE REAL ONE**: `toFixed(6)` at 14.1%
+   was never a FORMATTING cost, it was a CALL-FREQUENCY cost —
+   `circuitBandSide` and `circuitHold` each opened with a
+   freshness gate that RE-SERIALIZES EVERY WALL RING AT TOPOLOGY
+   PRECISION AND RE-HASHES IT FOUR TIMES, and §232's partition
+   calls them per grid cell, per region vertex and per straddler
+   sample. **Measured on one metropolis build: the gate ran
+   12,283 times and serialized 40.2 MB of ring text. After the
+   cure: 5 times, 16.4 KB.**
+2. **RESULT: 1.62× corpus, 2.05× metropolis, 2.46× polycentric —
+   WITH ALL 32 PLATES BYTE-IDENTICAL** and the ten-process
+   determinism digest character-for-character equal to W0's. The
+   proof battery diffs against W0's sealed one in exactly two
+   hunks (a purity file count and a line count). ⭐ **THE CONTROL
+   IS WHAT MAKES IT CREDIBLE: the five unwalled leaves did not
+   move (0.91–1.06×) — precisely what the diagnosis predicts and
+   what a machine-load artefact would NOT look like.** The gate
+   was ACQUIRED, not weakened: one law body, two instruments,
+   the one-shot accessors keep their per-call check, and §230's
+   counterfactuals still red at all four entry points.
+   **`buildFabric.js` 791 → 733, so W1's substrate is UNBLOCKED**
+   (67 lines of headroom, was 9). Per-census runtime budgets and
+   a completeness ladder landed and IMMEDIATELY EARNED THEIR
+   KEEP: metropolis and polycentric now read §205A **NOT
+   APPLICABLE** rather than clean — a vacuity that had been
+   reading as a pass.
+3. ⭐ **A CHARTERED TARGET REFUSED WITH A MEASUREMENT, AND THE
+   REFUSAL IS RATIFIED.** I chartered integer quantization of the
+   topology keys; the lane measured the whole surface at
+   0.051–0.075% of a build with `toFixed` at most 41% of that —
+   **so the change buys ≤0.03% while altering every hash value
+   and the tie rule in the decision that defines geometric
+   identity.** Not landed, and correctly so. **THE PRINCIPLE:
+   a chair's charter is a hypothesis; a lane that refutes it with
+   numbers has done its job, not exceeded it.**
+4. **A DEFECT FOUND WHILE MEASURING, AND IT IS NOT MERELY A
+   COST**: the §202 repair ladder runs four rounds and **the
+   sealed set never moves** — town `sealed[15,15,15,15]`,
+   `shrunk 45 (=15×3)`, `dropped 15`: the bodies sealed at round
+   0 are exactly the bodies deleted at the end, so it shrinks
+   each of them three times and drops them anyway. Priced by
+   counterfactual at a further 1.13–1.21×, refused HERE because
+   it moves geometry and this wave's law was zero pixels. ⚠ **And
+   the published `accessFreed = shrunk − dropped` counts SHRINK
+   OPERATIONS, NOT FREED BUILDINGS — a misleading meta figure
+   that must be corrected wherever it is quoted.**
+5. **RULINGS.** (a) **W1 IS DISPATCHED NOW** — the substrate is
+   unblocked and the performance dependency is discharged.
+   (b) **THE §202 LADDER FIX FOLDS INTO W1**, not its own lane:
+   W1 already moves geometry (a buildable mask changes what may
+   be drawn), so folding it in buys the fix inside ONE declared
+   shift instead of two. (c) **The three contract fixes from the
+   spike join W1's first act** (`stressors` → `activeConditions`,
+   the resource field spelling, `history.founding.kind`) — they
+   are what make the substrate's facts reachable at all.
+   (d) The new profile top is `accessLaw.js` at 30.3% and the
+   concentrated wins are spent; **no further performance lane is
+   chartered on speculation** — the next pass rides whichever
+   wave already touches that surface, since what remains is
+   diffuse and mostly geometry-moving.

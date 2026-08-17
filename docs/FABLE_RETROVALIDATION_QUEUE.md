@@ -237,3 +237,11 @@ Fable should re-derive: (a) treating the replication as sufficient to close the
 diagnostic phase and dispatch the repair; (b) the §255 site framing (one world
 of three) and whether it should temper the repair's priority; (c) holding RS-4
 for the next exposure rather than re-running at the same tip.
+
+### §269 — the performance pass (Opus chair)
+Fable should re-derive: (a) ratifying the refusal of the chartered integer-key
+target on a ≤0.03% measurement; (b) folding the §202 ladder fix into W1 to
+share one declared shift rather than isolating it; (c) declining to charter a
+further performance lane on speculation now that the concentrated wins are
+spent; (d) whether the 2.05× metropolis result changes the §220 gate verdict
+(it does not on its own — the gap to the shipping map is still large).
