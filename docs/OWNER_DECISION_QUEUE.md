@@ -8255,3 +8255,22 @@ never render-clipped after the fact). Census: zero district
 geometries intersecting both sides of the band, consuming the
 SAME circuit object the lens draws (§230's shared-object
 construction), straddler counterfactual must red.
+
+## §233 · OWNER ORDER: THE STANDING HANDOFF — UPDATE AT EVERY
+## COLLECTION, MODEL-AGNOSTIC (2026-08-16)
+
+1. **THE ORDER**: the owner may exhaust their weekly and Fable
+   capacity soon — "update regularly for a handoff from this
+   account when I regain weekly or from a different AI model
+   such as ChatGPT." **docs/HANDOFF_CURRENT.md CREATED on the
+   ledger branch**: a model-agnostic successor bootstrap
+   (topology, constitutional law, the exact pause state incl.
+   the ac243e1c CAS condition, all queues, the five sharpest
+   hazards) that assumes NO access to Claude memory, skills, or
+   this transcript. **STANDING OBLIGATION HENCEFORTH: the chair
+   refreshes it at every collection** — a stale handoff is a
+   failed handoff.
+2. Pause state at writing: session limit until 23:30 ET; TE34's
+   binding gate re-running DETACHED by the chair's own hand
+   (log: TE34-CHAIR-BINDING.log; green ⇒ CAS ac243e1c); B8b and
+   HF-4 re-dispatch at reset; 646 expiring credits.
