@@ -8403,3 +8403,33 @@ construction), straddler counterfactual must red.
    Opus with the marker when Fable is gone — the §208 placement
    order resumes at the next Fable window, starting with the
    retrovalidation sitting itself.
+
+## §237 · THE FABLE BOUNDARY CROSSED — OPUS CONTINUITY IN FORCE
+## (2026-08-17; chair: Fable for this row, the LAST Fable-authored
+## row of this window; §236 protocol now live)
+
+1. **THE EXHAUSTION LANDED MID-LANE**: HF-4b (Fable seat) was
+   killed by the Fable limit while adjudicating a winter-lens
+   plate against its reference. Per §236 the work CONTINUES:
+   **HF-4c relaunched on OPUS 5** with a rescue-first brief
+   (balance re-verified; show_generations orphans recovered —
+   the killed lane's unfetched images are free value; the
+   UUID-retype and silent-empty-Read hazards restated), the
+   wishlist, the §234 holdout nomination, and an explicit
+   obligation to FLAG which aesthetic gradings are Opus-authored
+   and want Fable re-validation.
+2. **EVERY ROW FROM §238 ONWARD IS OPUS-CHAIRED** until the
+   owner's Fable weekly returns, and carries the
+   "(chair: Opus 5 — Fable-unvalidated)" marker plus an entry in
+   docs/FABLE_RETROVALIDATION_QUEUE.md naming what Fable must
+   re-derive. Rows §1-§237 are Fable-validated and never enter
+   that queue. THE RETURNING FABLE CHAIR'S FIRST ACT IS THE
+   RETROVALIDATION SITTING — before resuming the §234 sequence.
+3. Standing at the boundary: build branch ac243e1c (harness
+   cures + WF-1a landed); RS-3 running with the cure confirmed
+   end-to-end on its receipts and one real finding queued for
+   characterization; MF-B8b (the architecture pilot) running;
+   the corpus at 163 plates with the final spend live; the
+   §234 architecture-first sequence governs everything after
+   the pilot's seal. docs/HANDOFF_CURRENT.md is current as of
+   01:30 ET and carries the continuity section.
