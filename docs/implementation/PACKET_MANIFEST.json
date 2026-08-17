@@ -14166,7 +14166,7 @@
     },
     {
       "id": "WF-1A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/WF-1A.md",
       "verifiedBase": "0cf18bed1730787131b6b1e06d09048102cfdd5e",
       "changeManifest": [
@@ -14299,6 +14299,31 @@
         {
           "path": "src/domain/region/contestMath.js",
           "symbol": "export function hash01"
+        },
+        {
+          "_note": "THE FALL VOCABULARY, pinned as a DECLARATION HEAD and deliberately not as its frozen array. `abandoned` was CUT at compile for having zero producers, so a later WF member that earns a fifth cause must be able to add one; pinning the value would make this LANDED packet refuse its own train.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export const PATRON_FALL_CAUSES"
+        },
+        {
+          "_note": "THE CLASSIFIER. Its precedence order was settled at compile and lives INSIDE the function, so the symbol is the stable anchor; the ordering is deliberately not pinned here.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function classifyPatronFall"
+        },
+        {
+          "_note": "THE RING WRITER. Its cap is a module constant this row deliberately does not name — a figure in a LANDED packet's requiredSymbols traps every later train.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function recordPatronFall"
+        },
+        {
+          "_note": "THE READER. WF-1b/c/d are chartered to grow this accessor's consumers, so the symbol is what must survive and no call site is named.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function fallCauseFor"
+        },
+        {
+          "_note": "THE FLAG THIS WAVE MINTED, pinned as the quoted key token rather than any line of ENGINE_GATED_VIRTUAL_RULE_KEYS, whose membership later waves keep changing. Deleting the key now reds the gate instead of silently un-gating the subsystem.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "'faithUnseatingEnabled'"
         }
       ],
       "acceptanceCases": [

@@ -1,6 +1,6 @@
 # WF / WF-1a — the typed patron fall (stage 1 of the `wf-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Verified base:** `claude/composite-r4` at `0cf18bed1730787131b6b1e06d09048102cfdd5e`
 - **Promotion note:** promoted from DRAFT by lane TE35 under ODQ §215.3, after re-running
   the §11 preflight at the same base. The verified base is the `E5` kernel-epoch-guard
@@ -355,11 +355,20 @@ WHOLE, never from memory.
 ## §10 · REQUIRED SYMBOLS (present at THIS status; the deliverable must PRESERVE them)
 
 ⚠ Per PACKET_STANDARD "Change manifest", a `requiredSymbols` row names only what exists NOW.
-`PATRON_FALL_CAUSES`, `classifyPatronFall`, `recordPatronFall`, `fallCauseFor` and
-`faithUnseatingEnabled` are CREATED by this wave and **must not appear here** — they are
-added at the flip to LANDED, where they make every later deletion detectable by the gate.
+At READY that excluded the five symbols this wave CREATES; **they were added at this flip to
+LANDED** (lane TE34, ODQ §227), where they make every later deletion detectable by the gate.
 No row below names an exact line another member is chartered to edit, and no row names a
 re-recorded figure.
+
+⛔ THE FIVE CREATED ROWS ARE DECLARATION HEADS AND KEY TOKENS, NEVER VALUE-BEARING LINES,
+and that is the whole discipline of the flip rather than a style note. `PATRON_FALL_CAUSES`
+is pinned without its frozen array because `abandoned` was CUT at compile for having zero
+producers and a later WF member may earn a fifth cause; `recordPatronFall` is pinned without
+the ring cap because a figure inside a LANDED packet's `requiredSymbols` traps every train
+that follows; `faithUnseatingEnabled` is pinned as the quoted key token rather than a line of
+`ENGINE_GATED_VIRTUAL_RULE_KEYS`, whose membership later waves keep changing. WF-1b, c and d
+reserve `religionState.js` and `religiousContest.js` paths, and no row added here names a
+line in either.
 
 | symbol | home |
 |---|---|
@@ -376,6 +385,11 @@ re-recorded figure.
 | `isSubsystemActive` | `src/domain/worldPulse/subsystemActivation.js` |
 | `patronRefOf` | `src/domain/worldPulse/sacredClaim.js` |
 | `hash01` | `src/domain/region/contestMath.js` |
+| `PATRON_FALL_CAUSES` *(created; added at the flip)* | `src/domain/worldPulse/patronFall.js` |
+| `classifyPatronFall` *(created; added at the flip)* | `src/domain/worldPulse/patronFall.js` |
+| `recordPatronFall` *(created; added at the flip)* | `src/domain/worldPulse/patronFall.js` |
+| `fallCauseFor` *(created; added at the flip)* | `src/domain/worldPulse/patronFall.js` |
+| `faithUnseatingEnabled` *(created; added at the flip)* | `src/domain/worldPulse/simulationRules.js` |
 
 `retiredSymbols`: **none.**
 
