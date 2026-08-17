@@ -9961,3 +9961,55 @@ operative clause here.
    remains the only path and every commit this session used it.
    The lane performed no git write and left it as found —
    correct.
+
+## §264 · THE OWNER'S BUILD ORDER — RECONCILE EVERYTHING AND
+## BUILD IT; THE STANDING CADENCE (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **THE ORDER**: reconcile everything discussed across the whole
+   program into the best product we can make — comprehensive,
+   cohesive, exhaustive, coherent, seamless, careful, and above
+   all **IMMERSIVE AND IMPACTFUL** — and build it. **MF-SPEC2
+   DISPATCHED as a BOUNDED FOLD, not a new study**: the spec is
+   ratified and W0 is already executing; what the spec lacks is
+   the two prior-art studies and three chair corrections that
+   landed after it was written. It folds §261 (provenance, and a
+   contamination sweep of the whole document), §263 (the
+   dependency graph to RANK #1, the triangular-remnant
+   substitution, the epoch-convergence correction), §259's
+   surviving mechanisms (character-as-four-scalars, setbacks,
+   T-dominance and tower emergence as explanations of OUR
+   numbers), §262's G-34 ruling, and §263.6a's two missing
+   instruments — then re-ranks and confirms the wave order.
+2. ⭐ **THE IMMERSION RULING, because the owner's order raises it
+   directly and it is a real fork.** "Most importantly immersive"
+   could argue for pulling the §12 immersion suite (marginalia,
+   legend, heraldry, curved lettering, event marks, walk rings,
+   pentimento) ahead of the substrate. **RULED: DEPENDENCY ORDER
+   STANDS — immersion built on wrong geometry must be rebuilt and
+   the declared shift gets paid twice.** ⚠ **BUT THE SPEC MUST
+   NOW STATE, PER WAVE, WHAT A USER WOULD SEE AND FEEL THAT THEY
+   COULD NOT BEFORE.** A wave with no visible payload is a wave
+   the owner cannot adjudicate — and under §247's strategy the
+   visible payload IS the product. Vetoable: if the owner wants
+   immersion pulled forward at the cost of rework, say so.
+   ⛔ **STREET NAMES REMAIN REFUSED (§163) — NOT re-proposed, and
+   deliberately so: an owner ruling is not re-litigated because
+   the goal was restated.**
+3. **THE STANDING CADENCE, RULED AND IN FORCE FROM NOW**: the
+   chair runs the wave plan CONTINUOUSLY without waiting to be
+   prompted — collect each wave, rule its judgments, dispatch the
+   next, refresh docs/HANDOFF_CURRENT.md, and report to the owner
+   OUTCOME-FIRST with the visible payload named and the exemplar
+   sent. The owner adjudicates at the end (§258.1) and intervenes
+   whenever he wishes; the chair does not idle between waves
+   waiting for permission that §170 already granted.
+4. **WHAT REMAINS GENUINELY THE OWNER'S, and no new question is
+   added by this order**: the 18-item batch + item 19 (the scale
+   bar's unit name), the CI-log paste that unblocks the last
+   pipeline red, the faubourg district-id public surface change
+   (§238.4b), the free-tier map-access decision (§247.3b), the
+   terrainType enum vs composite modifiers schema call (§251.5),
+   the tuning signature, and the legal/launch cluster — including
+   whether counsel should confirm the clean-room posture (§254.5)
+   before anything traceable to the GPL studies ships.
