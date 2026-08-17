@@ -231,3 +231,9 @@ the largest architecture decision since the version axis; (c) whether the
 neighbour-bearing question is genuinely refusable under THE PROMISE or merely
 needs a terrain-derived answer; (d) the decision to raise townMapOpBudget only
 after optimisation rather than now.
+
+### §268 — RS-3 (Opus chair)
+Fable should re-derive: (a) treating the replication as sufficient to close the
+diagnostic phase and dispatch the repair; (b) the §255 site framing (one world
+of three) and whether it should temper the repair's priority; (c) holding RS-4
+for the next exposure rather than re-running at the same tip.

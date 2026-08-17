@@ -10221,3 +10221,63 @@ down is not a critique.
    complete in 15 minutes inside the app tree (workers computing,
    not deadlocked) against 126 s for the app's whole lint+build
    sweep — **unresolved, and it must be resolved before landing.**
+
+## §268 · RS-3 COLLECTED — ALL THREE INSTRUMENT CURES VERIFIED,
+## AND THE COLLAPSE INDEPENDENTLY REPLICATED (2026-08-17; chair:
+## Opus 5 — Fable-unvalidated)
+
+1. **THE THIRD ROLLING SOAK IS CLEAN AND ITS INSTRUMENT DEBTS ARE
+   CLOSED.** Epoch threading WORKS: **147 of 162 cells lit an
+   advance epoch and produced full receipts across all three
+   worlds**, where the identical configuration crashed 150 of 168
+   at RS-2 — and failure shows NO correlation with the flag (146
+   pass / 1 fail lit; 15 pass / 0 fail dark). **The 153 pairs
+   RS-2 could not cover are now covered and clean**, with the
+   determinism proof itself run on an epoch-lit cell. The
+   §206.2b re-fire era is over: all three dark controls recorded
+   NOT-EXECUTABLE with `instrumentExecutable: false`, no capsules
+   minted, `seed_divergent` withheld — **a re-fire would itself
+   have been a finding, and there was none.**
+   `non_finite_ledger_figure` produced its FIRST STRONG ZERO
+   (162/162 receipts carry the writer-side census). Determinism
+   clean on both arms; 162/162 receipts, zero corrupt, three
+   segment exits of 0 across eight relaunch cycles.
+2. ⭐⭐ **THE ONE FINDING IS AN INDEPENDENT REPLICATION OF RS-1's
+   F1, AND THAT MATTERS MORE THAN A NEW FINDING WOULD**: a
+   DIFFERENT tip, a DIFFERENT census, an INDEPENDENTLY
+   CONSTRUCTED covering array and a different row id produced the
+   same one-flag localization at comparable severity — 17,682 →
+   680 (0.0385 against a 0.05 floor) with `npcAgencyEnabled` the
+   sole differing factor. **§219's P4 diagnosis is now
+   diagnosed AND replicated**, and the capsule is minted at the
+   CURED tip where the epoch cannot be a confound.
+   ⚠ **§255's site accounting applied honestly: this rests on ONE
+   DISTINCT WORLD OF THREE** — the same row is lawful on the
+   other two (0.536, 0.507) and `w0-soak` is the reproducible
+   tail world. That tempers the severity without diminishing the
+   defect: a one-way ratchet that only bites a tail world is
+   still a one-way ratchet.
+3. **THE LANE'S OWN ANOMALY, SELF-DISCLOSED AND REPAIRED —
+   exemplary and it yields a rule**: re-running the evaluator to
+   pick up the solo determinism arm DOUBLE-CREDITED the seed
+   ledger (`recordRun` is not idempotent), leaving `runs: 4` and
+   density 2. The lane rebuilt the ledger from empty by replaying
+   all three runs through the harness's own function with cells
+   and findings re-derived from each run's config and receipts —
+   final `runs: 3`, every firing cell at density 1, and the
+   pre-repair snapshot PRESERVED. ⭐ **THE RULE: ANY DURABLE
+   COUNTER A LANE MAY RE-RUN MUST BE IDEMPOTENT OR GUARDED** —
+   queued on the harness micro-item list, because every future
+   evaluation re-run hits it.
+4. **RULINGS.** (a) **THE P4 REPAIR IS DISPATCHED NOW** (§219.3's
+   chartered R-B with R-C folded in) — the replication is the
+   evidence that closes the diagnostic phase, and the engine
+   surface does not collide with the running map performance
+   lane. (b) **RS-4 WAITS FOR THE NEXT EXPOSURE** rather than
+   firing at the same tip: the instrument questions RS-3 existed
+   to answer are all answered, so another run at ac243e1c would
+   re-buy known facts. It fires at the P4 repair's exposure,
+   which is also the run that must show the collapse cured.
+   (c) The growth-side tail (×8.00, two rows tailing in two
+   worlds each) and five memory-watermark firings join the
+   PROVISIONAL curves for the tuning pass — unchanged in status.
