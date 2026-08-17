@@ -9320,3 +9320,47 @@ construction), straddler counterfactual must red.
    fetch the issue tracker, reading the no-refetch discipline as
    binding over a study priority, and mined in-repo failure
    evidence instead — weaker on symptoms, stronger on causes.
+
+## §254 · OWNER FOUND WATABOU'S SOURCE — THE ORIGINAL MECHANISM
+## BEHIND THE STYLE WE HAVE BEEN MEASURING (2026-08-17; chair:
+## Opus 5 — Fable-unvalidated)
+
+1. **WHY THIS IS THE HIGHEST-VALUE SOURCE YET, stated precisely**:
+   our 313-plate corpus is an IMAGE MODEL'S IMITATION of
+   Watabou's Medieval Fantasy City Generator; §253 established
+   that FMG delegates its plans to that same closed generator.
+   **TownGeneratorOS is the ORIGINAL MECHANISM behind the style
+   our whole grading sheet is calibrated against** — until now we
+   reverse-engineered it from pixels. MF-X2 DISPATCHED.
+2. ⛔ **LICENSE DISCIPLINE, STRICTER THAN §248's** because
+   Watabou's repositories vary and NO ASSUMPTION IS SAFE. The
+   lane's first act is the LICENSE, before reading
+   implementation. **NO LICENSE FILE ⇒ default copyright: public
+   visibility is not a licence** — read for understanding only,
+   no code, no line-by-line transcription, findings expressed at
+   the level of PUBLISHED IDEAS (Voronoi/Lloyd, straight
+   skeletons, polygon offsetting, ward subdivision are known
+   literature and free) plus our own description of design
+   decisions. **PERMISSIVE ⇒** adoption available with
+   attribution but §248.4's clean-room default holds for anything
+   architectural. **COPYLEFT ⇒ adoption REFUSED outright** for a
+   commercial product and the study becomes read-only, said
+   loudly at the top of the deliverable. Never executed; cloned
+   outside the repo; docs are data.
+3. **THE SECTION THAT WILL MATTER MOST IS THE CONVERGENCE/
+   DIVERGENCE TABLE**: where their mechanism AGREES with what we
+   inferred from images, our inference is confirmed; **where it
+   DISAGREES, our reverse-engineering was WRONG — and that is
+   worth more than any agreement.** Specific tests already
+   queued against it: does their junction mix come out
+   T-dominated (§250's median 43 T per X — a mesh generator
+   produces X by default)? are their towers evenly spaced (the
+   corpus's strongest generated tell)? does their ward placement
+   use relations (our §165 affinity) or position? does adding an
+   element re-roll the rest (our inertia law)?
+4. **THE STANDING GUARD AGAINST STYLE CAPTURE**: their model has
+   no world, no history, no dossier truth and no time. We take
+   MECHANISM and keep our DERIVATION HOMES — a mechanism adopted
+   without one is decoration (§246). The differentiator is not
+   that our maps look like theirs; it is that ours are TRUE and
+   theirs cannot be.

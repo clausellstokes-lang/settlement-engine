@@ -148,3 +148,11 @@ independent sanity check; (b) adopt-zero-code as the standing verdict given
 MIT plus the vendored-provenance findings; (c) the three architectural
 adoptions, especially taking their road reuse-discount as the street layer's
 approach; (d) the gitignore correction's scope (docs tracked, binaries not).
+
+### §254 — the Watabou prior-art study (Opus chair)
+Fable should re-derive: (a) the license discipline's severity tiers and whether
+the no-licence default reading is right; (b) the guard against style capture —
+taking mechanism while keeping derivation homes; (c) whichever
+convergence/divergence findings the lane reports, especially any place where
+our image-based reverse-engineering turns out to have been WRONG, since those
+propagated into the atlas and the compendiums.
