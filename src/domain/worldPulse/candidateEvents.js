@@ -325,7 +325,11 @@ function ledgerCorroboratedPressure(pressure, snapshot, rules) {
   const settlement = item?.settlement || item;
   if (!settlement) return pressure;
   const ceiling = foodCorroboration01(settlement, snapshot?.worldState, String(pressure.settlementId));
-  if (!(ceiling < pressure.score)) return pressure;
+  // `!(ceiling < score)` rather than `ceiling >= score`: a missing or non-finite score
+  // takes the same door as a corroborated one and the pressure comes back untouched by
+  // reference, so the veto can never mint a number where the model published none.
+  const believed = typeof pressure.score === 'number' ? pressure.score : Number.NaN;
+  if (!(ceiling < believed)) return pressure;
   return {
     ...pressure,
     score: ceiling,
