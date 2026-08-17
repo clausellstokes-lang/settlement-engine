@@ -140,3 +140,11 @@ accepting it as a reporting-only move; (c) the chair's own forensic-zoom
 verdict on the arch2 town (aesthetic judgment under an Opus chair — the
 mechanical-bars observation especially); (d) the containment-resolution law as
 a general principle.
+
+### §253 — the FMG study (Opus chair)
+Fable should re-derive: (a) the "nobody ships the join" conclusion and its
+strategic weight — it is drawn from exhaustion over one repo and deserves an
+independent sanity check; (b) adopt-zero-code as the standing verdict given
+MIT plus the vendored-provenance findings; (c) the three architectural
+adoptions, especially taking their road reuse-discount as the street layer's
+approach; (d) the gitignore correction's scope (docs tracked, binaries not).

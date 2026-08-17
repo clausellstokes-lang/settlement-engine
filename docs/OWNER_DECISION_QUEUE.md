@@ -9255,3 +9255,68 @@ construction), straddler counterfactual must red.
    moved 0 leaves, epoch axis 10 with the six unwalled leaves
    byte-identical, the fork-key salt cure all 16) — attribution
    of this quality is what makes a declared shift auditable.
+
+## §253 · THE FMG STUDY COLLECTED — NOBODY SHIPS THE JOIN
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. ⭐⭐ **THE STRATEGIC FINDING, AND IT UPGRADES §247 FROM
+   PLAUSIBLE TO STRUCTURAL: FMG CONTAINS NO TOWN-PLAN GENERATOR
+   AT ALL.** Confirmed by exhaustion over all 248 src files and
+   28 renderers — a burg is an icon, an anchor, a label and 30
+   scalar fields; plans are DELEGATED BY URL to Watabou's CLOSED
+   generators, with FMG deriving the query parameters. **So the
+   only OPEN implementation has a world and no plans; the leading
+   PLAN generator has plans and no world. NOBODY SHIPS THE JOIN
+   — which is exactly what this program builds.** The owner's
+   market thesis targets a structurally unoccupied gap, not a
+   crowded one.
+2. **ADOPT ZERO CODE — RATIFIED, and the IP caution was
+   vindicated in detail.** Azgaar's own work is genuinely MIT
+   (verified byte-identical, with a non-standard WIDENING clause
+   clearing derivative map images), BUT `public/libs/tinymce/` is
+   **GPLv2-or-later**, and the single utility most worth copying
+   (the Urquhart graph) carries a provenance comment showing it
+   was copied from a Bostock notebook and is **NOT AZGAAR'S TO
+   LICENSE**. ⭐ **GENERAL LAW BANKED: A PERMISSIVE TOP-LEVEL
+   LICENSE DOES NOT LAUNDER THE PROVENANCE OF CODE THE PROJECT
+   ITSELF COPIED IN.** Study yields approaches; our
+   implementations stay clean-room.
+3. **THREE ARCHITECTURAL ADOPTIONS (as APPROACH, ranked by the
+   lane):** (a) their "unround" dither — a perturbation built
+   from STABLE ENTITY IDS that consumes NO PRNG STATE — is the
+   arithmetic that makes our inertia law TRUE rather than
+   asserted, and independently confirms the keyedRandom
+   primitive MF-ARCH-2 just built; (b) PER-STAGE STREAM
+   DERIVATION (each generator re-seeds from the world seed at
+   entry, so a stage cannot be re-rolled by upstream draw
+   counts) — **AUDIT ORDERED against our own pipeline**; (c)
+   their road recipe's REUSE DISCOUNT, which makes hierarchy
+   EMERGE rather than be labelled by fiat — this is the closest
+   thing to a blueprint for our street layer and it CONVERGES
+   WITH §250's GAP-C correction (width quantises a derived graph
+   load). Wave nine's street work takes it as approach.
+4. **THEIR EIGHT DEFECTS BECOME OUR CHECKS**: population derived
+   by TWO DIFFERENT LAWS (so "regenerate population" computes a
+   differently-scaled quantity) and classification groups made
+   UNREACHABLE by stage ordering (a field written after the
+   classifier runs, with no re-classification). **BOTH
+   GENERALIZE — an audit of our own surfaces for dual-law
+   quantities and order-unreachable classifications is queued.**
+5. **WHERE THEY BEAT US TODAY, recorded honestly**: a
+   70-controller editing surface, a 1,552-line TESTED
+   save-migration system, and SHIPPED interactive performance
+   against our still-open §220 gate. The third is already
+   launch-blocking (§247.3a); the first two are product-scope
+   items now on the record rather than discovered later.
+6. **A REAL MISTAKE OF MINE, CAUGHT BY THE LANE AND FIXED
+   SAME-TURN**: my §243 `map-corpus/.gitignore` was a single `*`,
+   which meant the graded urbanism atlas, both morphology
+   compendiums, the measured register and this study were
+   LOCAL-ONLY AND UNBACKED. **CORRECTED: the ignore now covers
+   only `plates/` and `previews/` (8.5 GB of binaries); the 1.6 MB
+   of `docs/` is TRACKED AND COMMITTED to the ledger branch with
+   this row.** The bulk stays out of history; the knowledge is
+   backed. Method deviation accepted with cause: the lane did not
+   fetch the issue tracker, reading the no-refetch discipline as
+   binding over a study priority, and mined in-repo failure
+   evidence instead — weaker on symptoms, stronger on causes.

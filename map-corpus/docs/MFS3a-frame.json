@@ -1,0 +1,1729 @@
+{
+ "corpus_n": 313,
+ "holdout_excluded_n": 91,
+ "holdout_ids": [
+  "hf4",
+  "hf5",
+  "hf12",
+  "hf21",
+  "hf22",
+  "hf27",
+  "hf31",
+  "hf32",
+  "hf41",
+  "hf42",
+  "hf56",
+  "hf59",
+  "hf61",
+  "hf73",
+  "hf87",
+  "hf89",
+  "hf92",
+  "hf94",
+  "hf102",
+  "hf103",
+  "hf105",
+  "hf120",
+  "hf122",
+  "hf125",
+  "hf126",
+  "hf127",
+  "hf129",
+  "hf130",
+  "hf132",
+  "hf134",
+  "hf136",
+  "hf143",
+  "hf145",
+  "hf147",
+  "hf156",
+  "hf168",
+  "hf172",
+  "hf176",
+  "hf180",
+  "hf183",
+  "hf191",
+  "hf192",
+  "hf195",
+  "hf200",
+  "hf221",
+  "hf223",
+  "hf230",
+  "hf231",
+  "hf232",
+  "hf233",
+  "hf234",
+  "hf237",
+  "hf240",
+  "hf242",
+  "hf246",
+  "hf258",
+  "hf259",
+  "hf265",
+  "hf266",
+  "hf267",
+  "hf269",
+  "hf272",
+  "hf273",
+  "hf275",
+  "hf281",
+  "hf282",
+  "hf285",
+  "hf288",
+  "hf289",
+  "hf290",
+  "hf294",
+  "hf301",
+  "hf311",
+  "hf312",
+  "hf326",
+  "hf333",
+  "hf334",
+  "hf335",
+  "hf336",
+  "hf339",
+  "hf344",
+  "hf345",
+  "hf346",
+  "hf349",
+  "hf354",
+  "hf355",
+  "hf365",
+  "hf367",
+  "hf371",
+  "hf382",
+  "hf384"
+ ],
+ "studiable_n": 222,
+ "scrub_lettering_n": 35,
+ "scrub_lettering_ids": [
+  "hf148",
+  "hf170",
+  "hf171",
+  "hf190",
+  "hf249",
+  "hf253",
+  "hf268",
+  "hf284",
+  "hf287",
+  "hf292",
+  "hf295",
+  "hf296",
+  "hf298",
+  "hf299",
+  "hf306",
+  "hf309",
+  "hf310",
+  "hf314",
+  "hf318",
+  "hf328",
+  "hf329",
+  "hf341",
+  "hf348",
+  "hf350",
+  "hf351",
+  "hf353",
+  "hf356",
+  "hf357",
+  "hf361",
+  "hf368",
+  "hf372",
+  "hf373",
+  "hf374",
+  "hf375",
+  "hf383"
+ ],
+ "plates": {
+  "hf3": {
+   "file": "hf3-village-organic.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf3-village-organic"
+  },
+  "hf10": {
+   "file": "hf10-thorp-plains.png",
+   "category": "thorp",
+   "tier": "thorp",
+   "era": "HF-1",
+   "stem": "hf10-thorp-plains"
+  },
+  "hf11": {
+   "file": "hf11-hamlet-forest.png",
+   "category": "hamlet",
+   "tier": "hamlet",
+   "era": "HF-1",
+   "stem": "hf11-hamlet-forest"
+  },
+  "hf13": {
+   "file": "hf13-village-fishing.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf13-village-fishing"
+  },
+  "hf14": {
+   "file": "hf14-village-mining.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf14-village-mining"
+  },
+  "hf15": {
+   "file": "hf15-village-arid.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf15-village-arid"
+  },
+  "hf16": {
+   "file": "hf16-village-cold.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf16-village-cold"
+  },
+  "hf17": {
+   "file": "hf17-village-wealthy.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf17-village-wealthy"
+  },
+  "hf20": {
+   "file": "hf20-town-trade.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf20-town-trade"
+  },
+  "hf23": {
+   "file": "hf23-town-struggling.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf23-town-struggling"
+  },
+  "hf24": {
+   "file": "hf24-town-siege.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf24-town-siege"
+  },
+  "hf25": {
+   "file": "hf25-town-plague.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf25-town-plague"
+  },
+  "hf26": {
+   "file": "hf26-town-fire-rebuild.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf26-town-fire-rebuild"
+  },
+  "hf30": {
+   "file": "hf30-city-river.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf30-city-river"
+  },
+  "hf33": {
+   "file": "hf33-city-chaos-warren.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf33-city-chaos-warren"
+  },
+  "hf34": {
+   "file": "hf34-metropolis-capital.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-1",
+   "stem": "hf34-metropolis-capital"
+  },
+  "hf35": {
+   "file": "hf35-ward-closeup.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-1",
+   "stem": "hf35-ward-closeup"
+  },
+  "hf36": {
+   "file": "hf36-countryside-study.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-1",
+   "stem": "hf36-countryside-study"
+  },
+  "hf37": {
+   "file": "hf37-town-abandoned.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf37-town-abandoned"
+  },
+  "hf40": {
+   "file": "hf40-slum-fringe-city.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf40-slum-fringe-city"
+  },
+  "hf50": {
+   "file": "hf50-lens-watercolor.png",
+   "category": "lens",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf50-lens-watercolor"
+  },
+  "hf51": {
+   "file": "hf51-lens-vtt.png",
+   "category": "lens",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf51-lens-vtt"
+  },
+  "hf52": {
+   "file": "hf52-marsh-village.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-1",
+   "stem": "hf52-marsh-village"
+  },
+  "hf53": {
+   "file": "hf53-island-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf53-island-town"
+  },
+  "hf54": {
+   "file": "hf54-docks-plate.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-1",
+   "stem": "hf54-docks-plate"
+  },
+  "hf55": {
+   "file": "hf55-castle-plate.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-1",
+   "stem": "hf55-castle-plate"
+  },
+  "hf57": {
+   "file": "hf57-famine-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf57-famine-town"
+  },
+  "hf58": {
+   "file": "hf58-martial-law.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf58-martial-law"
+  },
+  "hf60": {
+   "file": "hf60-spymaster-copy.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf60-spymaster-copy"
+  },
+  "hf62": {
+   "file": "hf62-bankside-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf62-bankside-town"
+  },
+  "hf63": {
+   "file": "hf63-near-river-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf63-near-river-town"
+  },
+  "hf70": {
+   "file": "hf70-demoted-city.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf70-demoted-city"
+  },
+  "hf71": {
+   "file": "hf71-road-ladder.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-1",
+   "stem": "hf71-road-ladder"
+  },
+  "hf72": {
+   "file": "hf72-dumbbell-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-1",
+   "stem": "hf72-dumbbell-town"
+  },
+  "hf84": {
+   "file": "hf84-living-undercity.png",
+   "category": "underground",
+   "tier": "city",
+   "era": "HF-1",
+   "stem": "hf84-living-undercity"
+  },
+  "hf85": {
+   "file": "hf85-thorp-riverside.png",
+   "category": "thorp",
+   "tier": "thorp",
+   "era": "HF-2",
+   "stem": "hf85-thorp-riverside"
+  },
+  "hf86": {
+   "file": "hf86-thorp-upland.png",
+   "category": "thorp",
+   "tier": "thorp",
+   "era": "HF-2",
+   "stem": "hf86-thorp-upland"
+  },
+  "hf88": {
+   "file": "hf88-thorp-crossroads.png",
+   "category": "thorp",
+   "tier": "thorp",
+   "era": "HF-2",
+   "stem": "hf88-thorp-crossroads"
+  },
+  "hf90": {
+   "file": "hf90-thorp-plains.png",
+   "category": "thorp",
+   "tier": "thorp",
+   "era": "HF-2",
+   "stem": "hf90-thorp-plains"
+  },
+  "hf91": {
+   "file": "hf91-hamlet-green.png",
+   "category": "hamlet",
+   "tier": "hamlet",
+   "era": "HF-2",
+   "stem": "hf91-hamlet-green"
+  },
+  "hf93": {
+   "file": "hf93-hamlet-street.png",
+   "category": "hamlet",
+   "tier": "hamlet",
+   "era": "HF-2",
+   "stem": "hf93-hamlet-street"
+  },
+  "hf95": {
+   "file": "hf95-hamlet-riverside.png",
+   "category": "hamlet",
+   "tier": "hamlet",
+   "era": "HF-2",
+   "stem": "hf95-hamlet-riverside"
+  },
+  "hf96": {
+   "file": "hf96-hamlet-upland.png",
+   "category": "hamlet",
+   "tier": "hamlet",
+   "era": "HF-2",
+   "stem": "hf96-hamlet-upland"
+  },
+  "hf100": {
+   "file": "hf100-metropolis-confluence.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-2",
+   "stem": "hf100-metropolis-confluence"
+  },
+  "hf101": {
+   "file": "hf101-metropolis-port.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-2",
+   "stem": "hf101-metropolis-port"
+  },
+  "hf104": {
+   "file": "hf104-metropolis-caravan.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-2",
+   "stem": "hf104-metropolis-caravan"
+  },
+  "hf110": {
+   "file": "hf110-castle-curtain-zoom.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf110-castle-curtain-zoom"
+  },
+  "hf111": {
+   "file": "hf111-motte-bailey-plan.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf111-motte-bailey-plan"
+  },
+  "hf112": {
+   "file": "hf112-hill-hachure-study.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf112-hill-hachure-study"
+  },
+  "hf113": {
+   "file": "hf113-crag-cliff-study.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf113-crag-cliff-study"
+  },
+  "hf114": {
+   "file": "hf114-forest-canopy-study.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf114-forest-canopy-study"
+  },
+  "hf115": {
+   "file": "hf115-marsh-reed-study.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf115-marsh-reed-study"
+  },
+  "hf116": {
+   "file": "hf116-terrace-study.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf116-terrace-study"
+  },
+  "hf121": {
+   "file": "hf121-demoted-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-2",
+   "stem": "hf121-demoted-town"
+  },
+  "hf123": {
+   "file": "hf123-wall-seam-zoom.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf123-wall-seam-zoom"
+  },
+  "hf124": {
+   "file": "hf124-wall-seam-plan.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-2",
+   "stem": "hf124-wall-seam-plan"
+  },
+  "hf128": {
+   "file": "hf128-village-steppe.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-3",
+   "stem": "hf128-village-steppe"
+  },
+  "hf131": {
+   "file": "hf131-town-fjord.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf131-town-fjord"
+  },
+  "hf133": {
+   "file": "hf133-city-harbor-plan.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf133-city-harbor-plan"
+  },
+  "hf135": {
+   "file": "hf135-city-desert.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf135-city-desert"
+  },
+  "hf137": {
+   "file": "hf137-town-fjord-plan.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf137-town-fjord-plan"
+  },
+  "hf138": {
+   "file": "hf138-city-harbor-ribbon.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf138-city-harbor-ribbon"
+  },
+  "hf139": {
+   "file": "hf139-city-desert-clean.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf139-city-desert-clean"
+  },
+  "hf140": {
+   "file": "hf140-terrain-plains-openfield.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf140-terrain-plains-openfield"
+  },
+  "hf141": {
+   "file": "hf141-terrain-mountain-valley.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf141-terrain-mountain-valley"
+  },
+  "hf142": {
+   "file": "hf142-terrain-hills-ridgeway.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf142-terrain-hills-ridgeway"
+  },
+  "hf144": {
+   "file": "hf144-terrain-coastal-cliffs.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf144-terrain-coastal-cliffs"
+  },
+  "hf146": {
+   "file": "hf146-terrain-marsh-levels.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf146-terrain-marsh-levels"
+  },
+  "hf148": {
+   "file": "hf148-terrain-gorge.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf148-terrain-gorge"
+  },
+  "hf149": {
+   "file": "hf149-terrain-glen.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf149-terrain-glen"
+  },
+  "hf150": {
+   "file": "hf150-terrain-steppe.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf150-terrain-steppe"
+  },
+  "hf151": {
+   "file": "hf151-terrain-fjord.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf151-terrain-fjord"
+  },
+  "hf155": {
+   "file": "hf155-trade-bridgetown.png",
+   "category": "trade",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf155-trade-bridgetown"
+  },
+  "hf157": {
+   "file": "hf157-trade-portage.png",
+   "category": "trade",
+   "tier": "village",
+   "era": "HF-3",
+   "stem": "hf157-trade-portage"
+  },
+  "hf158": {
+   "file": "hf158-trade-mountain-pass.png",
+   "category": "trade",
+   "tier": "village",
+   "era": "HF-3",
+   "stem": "hf158-trade-mountain-pass"
+  },
+  "hf165": {
+   "file": "hf165-stress-siege.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf165-stress-siege"
+  },
+  "hf166": {
+   "file": "hf166-stress-burned-quarter.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf166-stress-burned-quarter"
+  },
+  "hf167": {
+   "file": "hf167-stress-plague.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf167-stress-plague"
+  },
+  "hf169": {
+   "file": "hf169-stress-famine.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf169-stress-famine"
+  },
+  "hf170": {
+   "file": "hf170-stress-abandoned-farmland.png",
+   "category": "stressor",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf170-stress-abandoned-farmland"
+  },
+  "hf171": {
+   "file": "hf171-stress-occupation.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf171-stress-occupation"
+  },
+  "hf173": {
+   "file": "hf173-stress-famine-plan.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf173-stress-famine-plan"
+  },
+  "hf175": {
+   "file": "hf175-fant-wizard-district.png",
+   "category": "fantastical",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf175-fant-wizard-district"
+  },
+  "hf177": {
+   "file": "hf177-fant-portal-court.png",
+   "category": "fantastical",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf177-fant-portal-court"
+  },
+  "hf178": {
+   "file": "hf178-fant-airship-dock.png",
+   "category": "fantastical",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf178-fant-airship-dock"
+  },
+  "hf179": {
+   "file": "hf179-fant-dragon-roost.png",
+   "category": "fantastical",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf179-fant-dragon-roost"
+  },
+  "hf181": {
+   "file": "hf181-fant-temple-ward.png",
+   "category": "fantastical",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf181-fant-temple-ward"
+  },
+  "hf182": {
+   "file": "hf182-fant-moonquay.png",
+   "category": "fantastical",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf182-fant-moonquay"
+  },
+  "hf190": {
+   "file": "hf190-under-cloaca.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf190-under-cloaca"
+  },
+  "hf193": {
+   "file": "hf193-under-market.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf193-under-market"
+  },
+  "hf194": {
+   "file": "hf194-under-entrances.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf194-under-entrances"
+  },
+  "hf196": {
+   "file": "hf196-under-nightways.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf196-under-nightways"
+  },
+  "hf197": {
+   "file": "hf197-under-lamplit.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf197-under-lamplit"
+  },
+  "hf198": {
+   "file": "hf198-under-entrance-glyphs.png",
+   "category": "underground",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf198-under-entrance-glyphs"
+  },
+  "hf201": {
+   "file": "hf201-chrome-compass-scale.png",
+   "category": "chrome",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf201-chrome-compass-scale"
+  },
+  "hf202": {
+   "file": "hf202-letter-hands.png",
+   "category": "chrome",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf202-letter-hands"
+  },
+  "hf206": {
+   "file": "hf206-spec-rural-footprints.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf206-spec-rural-footprints"
+  },
+  "hf207": {
+   "file": "hf207-spec-urban-footprints.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf207-spec-urban-footprints"
+  },
+  "hf208": {
+   "file": "hf208-spec-roof-ticks.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf208-spec-roof-ticks"
+  },
+  "hf215": {
+   "file": "hf215-series-rising-1.png",
+   "category": "series",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf215-series-rising-1"
+  },
+  "hf216": {
+   "file": "hf216-series-rising-2.png",
+   "category": "series",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf216-series-rising-2"
+  },
+  "hf217": {
+   "file": "hf217-series-diminished-1.png",
+   "category": "series",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf217-series-diminished-1"
+  },
+  "hf218": {
+   "file": "hf218-series-diminished-2.png",
+   "category": "series",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf218-series-diminished-2"
+  },
+  "hf220": {
+   "file": "hf220-terrain-scarp-quarry.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf220-terrain-scarp-quarry"
+  },
+  "hf222": {
+   "file": "hf222-terrain-estuary-bar.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf222-terrain-estuary-bar"
+  },
+  "hf224": {
+   "file": "hf224-terrain-mesa-badlands.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-3",
+   "stem": "hf224-terrain-mesa-badlands"
+  },
+  "hf235": {
+   "file": "hf235-city-canals.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-3",
+   "stem": "hf235-city-canals"
+  },
+  "hf236": {
+   "file": "hf236-oppidum-hillfort.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf236-oppidum-hillfort"
+  },
+  "hf238": {
+   "file": "hf238-manor-estate.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-3",
+   "stem": "hf238-manor-estate"
+  },
+  "hf239": {
+   "file": "hf239-castra-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-3",
+   "stem": "hf239-castra-town"
+  },
+  "hf241": {
+   "file": "hf241-series-diminished-plan.png",
+   "category": "series",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf241-series-diminished-plan"
+  },
+  "hf243": {
+   "file": "hf243-fant-skyport-saddle.png",
+   "category": "fantastical",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf243-fant-skyport-saddle"
+  },
+  "hf244": {
+   "file": "hf244-fant-necropolis-city.png",
+   "category": "fantastical",
+   "tier": "city",
+   "era": "HF-4b",
+   "stem": "hf244-fant-necropolis-city"
+  },
+  "hf245": {
+   "file": "hf245-fant-warded-gate-zoom.png",
+   "category": "fantastical",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf245-fant-warded-gate-zoom"
+  },
+  "hf247": {
+   "file": "hf247-fant-canopy-town.png",
+   "category": "fantastical",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf247-fant-canopy-town"
+  },
+  "hf248": {
+   "file": "hf248-terrain-gorge-ferry.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf248-terrain-gorge-ferry"
+  },
+  "hf249": {
+   "file": "hf249-terrain-glen-sealoch.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf249-terrain-glen-sealoch"
+  },
+  "hf250": {
+   "file": "hf250-terrain-scarp-gap.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf250-terrain-scarp-gap"
+  },
+  "hf251": {
+   "file": "hf251-terrain-estuary-tidal-island.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf251-terrain-estuary-tidal-island"
+  },
+  "hf252": {
+   "file": "hf252-terrain-braided-two-season.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf252-terrain-braided-two-season"
+  },
+  "hf253": {
+   "file": "hf253-terrain-mesa-canyon-2.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf253-terrain-mesa-canyon-2"
+  },
+  "hf254": {
+   "file": "hf254-EXP-under-city-leaf-of-hf139.png",
+   "category": "exp",
+   "tier": "city",
+   "era": "HF-4b",
+   "stem": "hf254-EXP-under-city-leaf-of-hf139"
+  },
+  "hf255": {
+   "file": "hf255-EXP-growth-continuation-of-hf93.png",
+   "category": "exp",
+   "tier": "hamlet",
+   "era": "HF-4b",
+   "stem": "hf255-EXP-growth-continuation-of-hf93"
+  },
+  "hf256": {
+   "file": "hf256-town-night-surface.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf256-town-night-surface"
+  },
+  "hf257": {
+   "file": "hf257-chrome-border-ladder.png",
+   "category": "chrome",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf257-chrome-border-ladder"
+  },
+  "hf260": {
+   "file": "hf260-zoom-burgage-yard-creep.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf260-zoom-burgage-yard-creep"
+  },
+  "hf261": {
+   "file": "hf261-zoom-wall-ladder.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf261-zoom-wall-ladder"
+  },
+  "hf262": {
+   "file": "hf262-countryside-AB-flat-glyph.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf262-countryside-AB-flat-glyph"
+  },
+  "hf263": {
+   "file": "hf263-zoom-bridge-types.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf263-zoom-bridge-types"
+  },
+  "hf264": {
+   "file": "hf264-zoom-river-works.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf264-zoom-river-works"
+  },
+  "hf268": {
+   "file": "hf268-town-fairground.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf268-town-fairground"
+  },
+  "hf270": {
+   "file": "hf270-town-mining.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf270-town-mining"
+  },
+  "hf271": {
+   "file": "hf271-town-salt.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf271-town-salt"
+  },
+  "hf274": {
+   "file": "hf274-city-twin-bridge.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4b",
+   "stem": "hf274-city-twin-bridge"
+  },
+  "hf276": {
+   "file": "hf276-terrain-gorge-plan-CURE248.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf276-terrain-gorge-plan-CURE248"
+  },
+  "hf277": {
+   "file": "hf277-town-night-plan-CURE256.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf277-town-night-plan-CURE256"
+  },
+  "hf278": {
+   "file": "hf278-lens-winter-town.png",
+   "category": "lens",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf278-lens-winter-town"
+  },
+  "hf279": {
+   "file": "hf279-stress-earthquake.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf279-stress-earthquake"
+  },
+  "hf280": {
+   "file": "hf280-stress-landslide.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf280-stress-landslide"
+  },
+  "hf283": {
+   "file": "hf283-village-vineyard.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-4b",
+   "stem": "hf283-village-vineyard"
+  },
+  "hf284": {
+   "file": "hf284-village-polder.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-4b",
+   "stem": "hf284-village-polder"
+  },
+  "hf286": {
+   "file": "hf286-town-river-island.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf286-town-river-island"
+  },
+  "hf287": {
+   "file": "hf287-village-ironfield.png",
+   "category": "village",
+   "tier": "village",
+   "era": "HF-4b",
+   "stem": "hf287-village-ironfield"
+  },
+  "hf291": {
+   "file": "hf291-countryside-parish-system.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf291-countryside-parish-system"
+  },
+  "hf292": {
+   "file": "hf292-march-watch-line.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf292-march-watch-line"
+  },
+  "hf293": {
+   "file": "hf293-quarantine-island.png",
+   "category": "institution",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf293-quarantine-island"
+  },
+  "hf295": {
+   "file": "hf295-canal-navigation.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf295-canal-navigation"
+  },
+  "hf296": {
+   "file": "hf296-shipyard-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf296-shipyard-town"
+  },
+  "hf297": {
+   "file": "hf297-cave-mouth-town.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf297-cave-mouth-town"
+  },
+  "hf298": {
+   "file": "hf298-siq-hidden-city.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4b",
+   "stem": "hf298-siq-hidden-city"
+  },
+  "hf299": {
+   "file": "hf299-EXP-thorp-continuation-of-hf90.png",
+   "category": "exp",
+   "tier": "thorp",
+   "era": "HF-4b",
+   "stem": "hf299-EXP-thorp-continuation-of-hf90"
+  },
+  "hf300": {
+   "file": "hf300-EXP-winter-lens-of-hf20.png",
+   "category": "exp",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf300-EXP-winter-lens-of-hf20"
+  },
+  "hf302": {
+   "file": "hf302-stress-landslide-plan-CURE280.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf302-stress-landslide-plan-CURE280"
+  },
+  "hf303": {
+   "file": "hf303-legend-masterplate.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf303-legend-masterplate"
+  },
+  "hf304": {
+   "file": "hf304-zoom-vernacular-houses.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf304-zoom-vernacular-houses"
+  },
+  "hf305": {
+   "file": "hf305-zoom-tenure-marks.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf305-zoom-tenure-marks"
+  },
+  "hf306": {
+   "file": "hf306-town-in-ruins.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf306-town-in-ruins"
+  },
+  "hf307": {
+   "file": "hf307-inhabited-bridge.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf307-inhabited-bridge"
+  },
+  "hf308": {
+   "file": "hf308-transhumance-pair.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4b",
+   "stem": "hf308-transhumance-pair"
+  },
+  "hf309": {
+   "file": "hf309-moved-harbor.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4b",
+   "stem": "hf309-moved-harbor"
+  },
+  "hf310": {
+   "file": "hf310-cliff-monastery.png",
+   "category": "institution",
+   "tier": "village",
+   "era": "HF-4b",
+   "stem": "hf310-cliff-monastery"
+  },
+  "hf313": {
+   "file": "hf313-spec-gate-anatomy.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf313-spec-gate-anatomy"
+  },
+  "hf314": {
+   "file": "hf314-spec-wall-head.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf314-spec-wall-head"
+  },
+  "hf315": {
+   "file": "hf315-spec-tower-variety.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf315-spec-tower-variety"
+  },
+  "hf316": {
+   "file": "hf316-town-many-names-AB.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf316-town-many-names-AB"
+  },
+  "hf317": {
+   "file": "hf317-town-flood-marks-AB.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf317-town-flood-marks-AB"
+  },
+  "hf318": {
+   "file": "hf318-town-unequal-circuit-AB.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf318-town-unequal-circuit-AB"
+  },
+  "hf319": {
+   "file": "hf319-lod-ladder-4panel.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf319-lod-ladder-4panel"
+  },
+  "hf320": {
+   "file": "hf320-spec-street-hierarchy.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf320-spec-street-hierarchy"
+  },
+  "hf321": {
+   "file": "hf321-spec-field-boundaries.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf321-spec-field-boundaries"
+  },
+  "hf322": {
+   "file": "hf322-spec-waterfront-edge.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf322-spec-waterfront-edge"
+  },
+  "hf323": {
+   "file": "hf323-spec-church-ladder.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf323-spec-church-ladder"
+  },
+  "hf324": {
+   "file": "hf324-town-bastide-halffilled.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf324-town-bastide-halffilled"
+  },
+  "hf325": {
+   "file": "hf325-town-castle-rank-zoned.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf325-town-castle-rank-zoned"
+  },
+  "hf327": {
+   "file": "hf327-city-mudbrick-river-caravan.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4c",
+   "stem": "hf327-city-mudbrick-river-caravan"
+  },
+  "hf328": {
+   "file": "hf328-city-causeway-ceremonial.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4c",
+   "stem": "hf328-city-causeway-ceremonial"
+  },
+  "hf329": {
+   "file": "hf329-town-hilltown-contour.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf329-town-hilltown-contour"
+  },
+  "hf330": {
+   "file": "hf330-town-citadel-cleared-wedge.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf330-town-citadel-cleared-wedge"
+  },
+  "hf331": {
+   "file": "hf331-town-dual-lordship.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf331-town-dual-lordship"
+  },
+  "hf332": {
+   "file": "hf332-town-fishing-drying.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf332-town-fishing-drying"
+  },
+  "hf337": {
+   "file": "hf337-lens-worn-folio.png",
+   "category": "lens",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf337-lens-worn-folio"
+  },
+  "hf338": {
+   "file": "hf338-lens-unfinished-survey.png",
+   "category": "lens",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf338-lens-unfinished-survey"
+  },
+  "hf340": {
+   "file": "hf340-zoom-mill-complex.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf340-zoom-mill-complex"
+  },
+  "hf341": {
+   "file": "hf341-zoom-inn-yard.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf341-zoom-inn-yard"
+  },
+  "hf342": {
+   "file": "hf342-zoom-civic-knot.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf342-zoom-civic-knot"
+  },
+  "hf343": {
+   "file": "hf343-zoom-tannery-dye-ground.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf343-zoom-tannery-dye-ground"
+  },
+  "hf347": {
+   "file": "hf347-town-three-circuits.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf347-town-three-circuits"
+  },
+  "hf348": {
+   "file": "hf348-town-that-moved.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf348-town-that-moved"
+  },
+  "hf350": {
+   "file": "hf350-terrain-volcanic-ash.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf350-terrain-volcanic-ash"
+  },
+  "hf351": {
+   "file": "hf351-terrain-dune-coast.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf351-terrain-dune-coast"
+  },
+  "hf352": {
+   "file": "hf352-terrain-moor-peat.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf352-terrain-moor-peat"
+  },
+  "hf353": {
+   "file": "hf353-terrain-taiga-river.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf353-terrain-taiga-river"
+  },
+  "hf356": {
+   "file": "hf356-terrain-downs-and-vale.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf356-terrain-downs-and-vale"
+  },
+  "hf357": {
+   "file": "hf357-terrain-loess-sunken-courts.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf357-terrain-loess-sunken-courts"
+  },
+  "hf358": {
+   "file": "hf358-terrain-mangrove-tidal.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf358-terrain-mangrove-tidal"
+  },
+  "hf359": {
+   "file": "hf359-terrain-altiplano.png",
+   "category": "terrain",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf359-terrain-altiplano"
+  },
+  "hf360": {
+   "file": "hf360-countryside-commons-and-waste.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf360-countryside-commons-and-waste"
+  },
+  "hf361": {
+   "file": "hf361-town-boom-collapsed.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf361-town-boom-collapsed"
+  },
+  "hf362": {
+   "file": "hf362-city-after-great-fire.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4c",
+   "stem": "hf362-city-after-great-fire"
+  },
+  "hf363": {
+   "file": "hf363-town-market-moved.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf363-town-market-moved"
+  },
+  "hf364": {
+   "file": "hf364-town-sacked-resettled.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf364-town-sacked-resettled"
+  },
+  "hf366": {
+   "file": "hf366-town-guild-quarters.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf366-town-guild-quarters"
+  },
+  "hf368": {
+   "file": "hf368-city-water-conduits.png",
+   "category": "city",
+   "tier": "city",
+   "era": "HF-4c",
+   "stem": "hf368-city-water-conduits"
+  },
+  "hf369": {
+   "file": "hf369-town-refuse-and-drains.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf369-town-refuse-and-drains"
+  },
+  "hf370": {
+   "file": "hf370-countryside-fuel-shed.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf370-countryside-fuel-shed"
+  },
+  "hf372": {
+   "file": "hf372-stress-siege-unequal-circuit.png",
+   "category": "stressor",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf372-stress-siege-unequal-circuit"
+  },
+  "hf373": {
+   "file": "hf373-town-hilltown-CURE329.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf373-town-hilltown-CURE329"
+  },
+  "hf374": {
+   "file": "hf374-city-unequal-circuit-metropolis.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-4c",
+   "stem": "hf374-city-unequal-circuit-metropolis"
+  },
+  "hf375": {
+   "file": "hf375-zoom-ward-wealth-gradient.png",
+   "category": "zoom",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf375-zoom-ward-wealth-gradient"
+  },
+  "hf376": {
+   "file": "hf376-spec-relief-conventions.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf376-spec-relief-conventions"
+  },
+  "hf377": {
+   "file": "hf377-spec-water-textures.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf377-spec-water-textures"
+  },
+  "hf378": {
+   "file": "hf378-spec-density-ladder.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf378-spec-density-ladder"
+  },
+  "hf379": {
+   "file": "hf379-spec-ruin-stages.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf379-spec-ruin-stages"
+  },
+  "hf380": {
+   "file": "hf380-town-two-faiths-shared.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf380-town-two-faiths-shared"
+  },
+  "hf381": {
+   "file": "hf381-countryside-way-network.png",
+   "category": "systems",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf381-countryside-way-network"
+  },
+  "hf383": {
+   "file": "hf383-town-charity-endowments.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf383-town-charity-endowments"
+  },
+  "hf385": {
+   "file": "hf385-town-three-circuits-CURE347.png",
+   "category": "town",
+   "tier": "town",
+   "era": "HF-4c",
+   "stem": "hf385-town-three-circuits-CURE347"
+  },
+  "hf386": {
+   "file": "hf386-spec-projection-comparison.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf386-spec-projection-comparison"
+  },
+  "hf387": {
+   "file": "hf387-lens-folio-mend-later-hand.png",
+   "category": "lens",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf387-lens-folio-mend-later-hand"
+  },
+  "hf388": {
+   "file": "hf388-spec-settlement-glyph-ladder.png",
+   "category": "specimen",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf388-spec-settlement-glyph-ladder"
+  },
+  "hf389": {
+   "file": "hf389-city-metropolis-grain-max.png",
+   "category": "metropolis",
+   "tier": "metropolis",
+   "era": "HF-4c",
+   "stem": "hf389-city-metropolis-grain-max"
+  },
+  "hf390": {
+   "file": "hf390-spec-folio-sheet-index.png",
+   "category": "chrome",
+   "tier": "-",
+   "era": "HF-4c",
+   "stem": "hf390-spec-folio-sheet-index"
+  }
+ },
+ "studiable_by_category": {
+  "village": 12,
+  "thorp": 5,
+  "hamlet": 5,
+  "town": 49,
+  "city": 15,
+  "metropolis": 6,
+  "zoom": 15,
+  "systems": 8,
+  "lens": 6,
+  "specimen": 28,
+  "underground": 7,
+  "terrain": 27,
+  "trade": 3,
+  "stressor": 11,
+  "fantastical": 10,
+  "chrome": 4,
+  "series": 5,
+  "exp": 4,
+  "institution": 2
+ },
+ "studiable_by_tier": {
+  "village": 15,
+  "thorp": 6,
+  "hamlet": 6,
+  "town": 73,
+  "city": 24,
+  "metropolis": 6,
+  "-": 92
+ },
+ "studiable_by_era": {
+  "HF-1": 35,
+  "HF-2": 21,
+  "HF-3": 54,
+  "HF-4b": 51,
+  "HF-4c": 61
+ }
+}
