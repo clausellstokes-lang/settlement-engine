@@ -208,3 +208,10 @@ is a strong enough remaining differentiator; (b) adopting the dependency graph
 as rank-#1 approach; (c) the triangular-remnant substitution (subdivide for the
 plot, fit for the footprint) under §258.2; (d) ordering the two missing
 instruments built before their mechanisms are adopted.
+
+### §265 — the chair's self-critique and the integration spike (Opus chair)
+Fable should re-derive: (a) whether inserting an integration spike after W0
+(rather than after the full wave plan) is the right call given it costs a lane
+and lands nothing; (b) the no-more-meta-documents ruling; (c) whether the
+retrovalidation queue's own existence is creating a false sense of safety —
+this entry is part of the queue it questions, which Fable should weigh.

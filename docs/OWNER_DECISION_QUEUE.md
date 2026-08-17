@@ -10013,3 +10013,60 @@ operative clause here.
    the tuning signature, and the legal/launch cluster — including
    whether counsel should confirm the clean-room posture (§254.5)
    before anything traceable to the GPL studies ships.
+
+## §265 · THE CHAIR'S OWN CRITIQUE OF THE SETUP — THREE CONCERNS
+## AND ONE CORRECTION MADE (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+The owner asked for an objective judgment of how the program is
+now set up. Recorded because a self-critique that is not written
+down is not a critique.
+
+1. **WHAT IS DEMONSTRABLY WORKING, on evidence rather than
+   feeling**: measured targets replacing self-comparison (it is
+   what makes "done" definable at all); studying before building
+   AT THIS MOMENT (vindicated three times over — the blind
+   predicate, the mush inversion, the missing circuit demotion
+   would each have been BUILT WRONG); dependency-ordered waves
+   with measurement exit criteria; the doctrine layer (derivation
+   homes, results-vs-settings, tier invariants, prior-art-is-
+   not-evidence) which forecloses whole classes of future error;
+   and the owner-eyes channel, empirically the program's
+   highest-yield defect finder.
+2. **THREE CONCERNS, NAMED HONESTLY.** (a) **THE PAPER-TO-CODE
+   RATIO.** Tonight produced studies, then a specification, then
+   a fold ON the specification — three documentation layers.
+   **RULED: after MF-SPEC2 seals, NO further meta-documents. Only
+   build waves and their receipts.** If a future finding needs
+   folding, it folds INTO the spec as one edit, never into a new
+   artifact. (b) **THE RETROVALIDATION DEBT IS GROWING** — every
+   ruling since §237 is Opus-chaired and queued for Fable, now
+   ~25 entries. **The mitigation is a standing rule: every ruling
+   must stand on its own quoted evidence AT THE TIME IT IS MADE.
+   The queue is a bonus audit, never a dependency** — if Fable
+   never returns, nothing in the program may be blocked by that.
+   (c) **COORDINATION FRICTION SCALES BADLY**: lanes have already
+   tripped over each other's state — a moving HEAD, staged
+   deletions, a duplicated watcher after a cancel. Each was
+   caught, but the catch rate is the thing to watch, not the
+   count.
+3. ⭐⭐ **THE CORRECTION, AND IT IS THE SHARPEST OBJECTIVE CRITIQUE
+   AVAILABLE: NOTHING FROM THE MAP PROGRAM HAS TOUCHED THE
+   PRODUCT, AND THE SANDBOX DIVERGES FURTHER WITH EVERY WAVE.**
+   Waiting until all nine waves finish to attempt integration is
+   the classic way an excellent research program dies — the seam
+   debt compounds silently and every wave built on an unproven
+   seam is a wave that may need redoing. **RULED: AN INTEGRATION
+   SPIKE IS INSERTED, running as the next lane after W0 seals and
+   IN PARALLEL WITH W1** (it touches the app and the real
+   dossier, not the map sandbox, so there is no collision). Its
+   mandate is NOT to land anything: take the current sandbox
+   fabric, render ONE REAL DOSSIER SETTLEMENT inside the real
+   application, and MEASURE — first render, pan/zoom frame times
+   at metropolis grain, export time — plus name every contract
+   mismatch the real dossier exposes that synthesized fixtures
+   never did. **A spike that fails is worth more than a wave that
+   succeeds**, because it converts the program's largest unknown
+   into a number before eight more waves are built on top of it.
+   This also serves §247.3a's launch-blocking performance gate
+   and §220's app-realistic requirement.
