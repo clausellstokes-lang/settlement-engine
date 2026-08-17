@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-16 ~21:20 ET by the Claude chair. This file is refreshed at
+**Updated 2026-08-17 ~01:30 ET by the Claude (Fable) chair. This file is refreshed at
 every collection (ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; §150-§232 are the map program's laws).
@@ -35,39 +35,31 @@ fate.
   the reference corpus (map-refs/, 163 plates + laneHF-CALIBRATION.md), and the
   urbanism atlas (laneMFS1-urbanism-atlas.md — the map grading instrument).
 
-## IMMEDIATE state (the pause point)
-A session limit killed three lanes at ~21:05 ET 2026-08-16 (resets 11:30pm ET).
-1. **TE34 (soak-harness micro-batch): commits LANDED** — tip **ac243e1c**
-   (3 commits on 66fda66d: soak-instrument cures; deno env sweep; the WF-1a
-   packet READY→LANDED flip). Its deno pair is already proven (662/0, check 0).
-   The missing receipt (check:tail + smoke) is being produced by a DETACHED
-   re-run: log at scratchpad/TE34-CHAIR-BINDING.log. **IF the log ends
-   TRUE_EXIT=0 and SMOKE_TRUE_EXIT=0 → CAS: `git update-ref
-   refs/heads/claude/composite-r4 ac243e1c 66fda66d` and record in the ledger.**
-   Its worktree is /private/tmp/TE34-tree (keep until CASed). Then RS-3 (third
-   rolling soak) fires at ac243e1c — protocol in laneRS1/RS2-report.md.
-2. **MF-B8b (map wall hotfix): NOT STARTED** — re-dispatch with the briefs in
-   ODQ §230+§232: the b8 wall crosses buildings while its census read 0/0 (the
-   vacuity class — stale circuit generation vs drawn circuit); cure = ONE shared
-   circuit object consumed by lens AND census (the footprints() contract
-   pattern), the owner's mutual-bounding law, and the §232 district-partition
-   law (no district straddles the wall; faubourgs are their own districts).
-   Preserve b8's wins (grain walk 5.4→10.4→17→48→61→70; town+city IN the
-   corpus band — the program's headline win, laneMFB8-receipt.md).
-3. **HF-4 (final corpus sweep): 646 Higgsfield credits remain; the owner's
-   subscription DIES AFTER 2026-08-17** — spend them per the wishlist in
-   laneHF3-receipt.md. Hazards: UUID-retype (recover from show_generations),
-   silent-empty image reads (three-number reconciliation mandatory; never a
-   verdict row unviewed).
-
-## ⚠ SEQUENCE REVISED BY §234 (2026-08-17)
-Two external engineering reviews were adopted as a fold. The map program's
-order is now: B8b (wall hotfix, the shared-object pilot) → FEATURE-LAW FREEZE
-→ MF-ARCH (derivation graph + SCC diagnostic + keyedRandom/lineage IDs +
-fixed-precision geometry + spatial indexes + cross-engine determinism CI) →
-wave nine (composite + vocabulary) ON the new foundation → expressive-range +
-blinded 2AFC validation → versioned cutover. Read ODQ §234 before dispatching
-any map lane.
+## IMMEDIATE state (refreshed 2026-08-17 ~01:30 ET, ledger at §236)
+The session-limit pause is OVER; all its debts are settled.
+1. **Build branch `claude/composite-r4` is at `ac243e1c`** — TE34's harness
+   micro-batch landed green (the chair's own detached gate: TRUE_EXIT=0,
+   SMOKE 0, log TE34-CHAIR-BINDING.log) on top of WF-1a (`66fda66d`). The
+   soak instrument is CURED (epoch args thread; dark-control NOT-EXECUTABLE;
+   non_finite at source; env leaks swept with a habitat walker). The
+   /private/tmp/TE34-tree worktree may be reaped.
+2. **RS-3 (third rolling soak) is RUNNING at ac243e1c** — 162 cells,
+   first-ever full epoch-pair coverage, findings-only; collect its report,
+   triage per §141/§143, fire RS-4 at the then-newest tip.
+3. **MF-B8b (wall hotfix = THE ARCHITECTURE PILOT, §230/§232/§234) is
+   RUNNING** in the map sandbox: one shared circuit object (graph idiom:
+   declared inputs, content hash, accessor-pulled consumers), the district
+   partition, the sibling staleness audit, b8's wins re-quoted. ON ITS SEAL:
+   the FEATURE-LAW FREEZE takes effect and MF-ARCH dispatches (the §234
+   sequence: SCC diagnostic FIRST, keyedRandom+lineage IDs, fixed-precision
+   geometry, spatial indexes, cross-engine determinism CI).
+4. **HF-4b (final corpus spend) is RUNNING on the Fable seat** — verify-
+   balance-first, rescue orphans, spend to <50 before the subscription dies
+   after 2026-08-17, nominate the §234 holdout set. The corpus stands at
+   163 plates; this is the LAST growth round.
+5. **§236 is now in force**: if Fable is exhausted, continue on Opus 5 with
+   the marker protocol (see the FABLE/OPUS CONTINUITY section below and
+   docs/FABLE_RETROVALIDATION_QUEUE.md).
 
 ## Queues after the pause
 - **Map wave nine** (dispatch after B8b seals; sandbox mf-proto/build-out):
