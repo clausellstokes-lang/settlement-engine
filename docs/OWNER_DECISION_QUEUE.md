@@ -9735,3 +9735,38 @@ operative clause here.
    becomes a reference, and the result used ONLY as a FIDELITY
    CHECK on the frozen corpus — never as a new corpus (§242
    stands).
+
+## §260 · THE FTG FORK — THE DIFF IS THE PRIZE (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. **THE OWNER SUPPLIED thomasjallerton/TownGeneratorOS, same
+   licence.** The repository NAME is identical to Watabou's, so
+   it is almost certainly a FORK of the generator §259 just
+   studied — and Fantasy Town Generator was the SECOND of the two
+   products the owner originally named as style references.
+   ⭐ **THE STUDY IS THE DIVERGENCE, NOT THE CODEBASE**: a fork's
+   diff is concentrated signal — another practitioner's judgment
+   about what the original got wrong, what a real product needed,
+   and what was worth the effort to change. MF-X3 dispatched to
+   read the diff, cross-referencing PRIOR-ART-WATABOU.md rather
+   than repeating it.
+2. **DISCIPLINE UNCHANGED AND ASSUMED STRICTEST UNTIL VERIFIED**:
+   a fork can relicense only within what upstream permits, so
+   GPL-3.0 upstream means GPL-3.0 here — **adoption REFUSED
+   OUTRIGHT**, zero code quotations, no transcription, no lifted
+   identifiers or constants, never executed, cloned outside the
+   repo and DELETED with the deletion verified, written
+   incrementally.
+3. **WHAT THE DIFF IS ASKED TO ANSWER**: the fork's vintage
+   (§259's source read 2017-era upstream while our corpus
+   imitates the 2024+ product — knowing where this fork sits on
+   that timeline changes how its evidence reads), and whether the
+   forker touched any of the ORIGINAL'S KNOWN WEAKNESSES that
+   §259 named: the triangular-remnant problem in the subdivision,
+   positional ward placement with a half-dead affinity rule, the
+   absence of a world model, and the 2017 rough edges. A
+   divergence at any of those points is worth more than a
+   hundred unchanged files. Verdicts bind under §256's precedence
+   and §258's intent-over-execution doctrine, and every
+   ADOPT-AS-APPROACH must name its dossier fact AND a corpus
+   metric that actually exists in the measured register.
