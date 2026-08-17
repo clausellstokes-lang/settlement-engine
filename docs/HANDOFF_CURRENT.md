@@ -60,6 +60,15 @@ A session limit killed three lanes at ~21:05 ET 2026-08-16 (resets 11:30pm ET).
    silent-empty image reads (three-number reconciliation mandatory; never a
    verdict row unviewed).
 
+## ⚠ SEQUENCE REVISED BY §234 (2026-08-17)
+Two external engineering reviews were adopted as a fold. The map program's
+order is now: B8b (wall hotfix, the shared-object pilot) → FEATURE-LAW FREEZE
+→ MF-ARCH (derivation graph + SCC diagnostic + keyedRandom/lineage IDs +
+fixed-precision geometry + spatial indexes + cross-engine determinism CI) →
+wave nine (composite + vocabulary) ON the new foundation → expressive-range +
+blinded 2AFC validation → versioned cutover. Read ODQ §234 before dispatching
+any map lane.
+
 ## Queues after the pause
 - **Map wave nine** (dispatch after B8b seals; sandbox mf-proto/build-out):
   countryside T-24 + road ladder T-23 (the low-tier lever) · §214 iconography

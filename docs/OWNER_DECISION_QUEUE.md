@@ -8274,3 +8274,85 @@ construction), straddler counterfactual must red.
    binding gate re-running DETACHED by the chair's own hand
    (log: TE34-CHAIR-BINDING.log; green ⇒ CAS ac243e1c); B8b and
    HF-4 re-dispatch at reset; 646 expiring credits.
+
+## §234 · THE TWO EXTERNAL ENGINEERING REVIEWS — ADOPTION FOLD
+## AND THE REVISED SEQUENCE (2026-08-17, chair §170; the owner
+## delivered two deep-research reviews of the §challenges and
+## §process answers)
+
+1. **TWO CHAIR CLAIMS CORRECTED ON THE RECORD.** (a) My "one
+   large fixed-point problem" framing was WRONG — the right
+   architecture is ONE DERIVATION/PROVENANCE GRAPH, almost
+   everywhere acyclic, with genuine cycles (wall↔fabric, maybe
+   water↔wall) isolated as small bounded solver nodes found by
+   SCC analysis: "one truth graph, not one solver." (b) My
+   "nothing is a research risk" sentence is STRUCK — it
+   contradicted my own taste-at-scale paragraph; the honest form
+   is the reviews': feasibility is no longer the research
+   question; the open empirical questions are composition at
+   full grain, cross-renderer fidelity, and output-distribution
+   quality on unseen seeds.
+2. **ADOPTED (the fold's substance):** the canonical
+   derivation-graph architecture with content-hashed artifacts,
+   demand-driven consumption and early cutoff (staleness
+   impossible by construction — the §230 shared-object fix
+   generalized) · SCC DIAGNOSTIC FIRST, bounded deterministic
+   solves only inside real cycles, NO general fixed-point engine
+   · `keyedRandom(worldSeed, stableFeatureId, mechanicId, k)` as
+   THE randomness primitive with LINEAGE identities
+   (split/merge descendants) and a walker banning sequential
+   draws in leaf code · the LAYERED COMPATIBILITY CONTRACT
+   M = f(D,S,Y,G) — world truth / feature identity / generation
+   schema / paint schema / projection each separately versioned
+   (a style upgrade redraws, a geometry upgrade is a WORLD-STATE
+   MIGRATION — THE PROMISE's precise form) · fixed-precision
+   topology coordinates split from float paint coordinates, and
+   THREE hash tiers (world / projection / raster) · LOD as
+   LAW-PRESERVING AGGREGATION over one canonical world (coarse
+   censuses become theorems; my "multi-resolution derivation"
+   phrasing corrected to PROJECTION) · spatial indexing with
+   CANONICAL insertion/result ordering + indexed-vs-exhaustive
+   equivalence pins + per-census runtime budgets where
+   "skipped-due-to-scale" can NEVER read green · ground-law
+   idempotence pin · SEMANTIC exemption objects (never
+   name-lists) · monotone-grain caveat (test each derived
+   quantity separately) · PAINT AS BACKEND-NEUTRAL MECHANICS
+   with geometry-baking for everything expressible (waver,
+   modulation, overshoot, hachure) and filters only for the
+   irreducible (grain/blur) with PDF tiling-pattern/soft-mask
+   equivalents and a DECLARED per-mechanic capability matrix —
+   this REVISES §211.2b's filter ratification toward the
+   atlas's original rule; the evidence (svg2pdf/CairoSVG
+   silently dropping filters) settles it · CROSS-ENGINE
+   DETERMINISM CI (Playwright Chromium/Firefox/WebKit + Node,
+   output hashes) · label-placement LOD (NP-hard; greedy live,
+   annealing for plates) · file-size discipline (coordinate
+   rounding, <use> symbols, deterministic simplification) ·
+   CORPUS EPISTEMOLOGY (observed statistic vs historical
+   inference vs design rule vs owner ruling, annotated per
+   figure; frequencies become CONDITIONAL PRIORS causes-first)
+   · a frozen HOLDOUT subset of plates excluded from tuning ·
+   expressive-range analysis over seed sweeps (Boeing
+   orientation entropy, landmark dispersion, ink-centroid
+   balance; JOINT distributions not marginal bands) · the
+   blinded 2AFC protocol with reason tags as §216's empirical
+   instrument (glance/reading/forensic conditions).
+3. **PUSHBACK, recorded:** the cross-engine risk is OVERSTATED
+   in degree — the purity scan already bans exactly the
+   implementation-approximated set (trig/pow/random/locale/
+   Date), and IEEE-guaranteed ops are what remain — but the CI
+   harness is adopted anyway because enforcement-by-scan is not
+   proof-by-execution and libraries can smuggle. The
+   "passes-at-glance" observer-bias caution is FAIR and the
+   blinded protocol answers it.
+4. **THE REVISED SEQUENCE, RULED:** MF-B8b completes as the
+   architecture's pilot (it IS the first shared-object node) →
+   **FEATURE-LAW FREEZE** → **MF-ARCH** (the graph + SCC
+   diagnostic first + keyedRandom/lineage IDs + fixed-precision
+   serialization + spatial indexes + the cross-engine CI, in
+   that order) → wave nine's composite and vocabulary BUILD ON
+   the new foundation → expressive-range + blinded validation →
+   cutover under the versioned-compatibility contract. Visual
+   riches are deliberately DELAYED behind the architecture
+   window: every law written against the old pipeline is
+   migration debt. docs/HANDOFF_CURRENT.md updated same-turn.
