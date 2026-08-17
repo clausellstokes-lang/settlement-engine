@@ -9191,3 +9191,67 @@ construction), straddler counterfactual must red.
    frequently drawn siting logic in the corpus, but a bearing
    minted at generation becomes a SEED-PERMANENT WORLD FACT under
    THE PROMISE — correctly filed as inspiration, NOT proposed.
+
+## §252 · MF-ARCH-2 COLLECTED — THE PIPELINE IS ACYCLIC, THE
+## SOLVER IS DELETED, AND THE 6.8% IS ZERO (2026-08-17; chair:
+## Opus 5 — Fable-unvalidated)
+
+1. **ALL EIGHT CYCLES ARE GONE at binding AND field granularity**,
+   measured with MF-ARCH's own SCC instrument; **`wallCycle.js` is
+   DELETED** — with the version axis explicit its bounded solve
+   had nothing left to solve, exactly as §241.2 predicted. **The
+   6.8% went to ZERO**: 1,331 of 19,563 bodies outside the
+   circuit they helped form → **0 of 15,176 epoch members**, with
+   each ring's containment residual reported and pinned at 0 —
+   and NOTHING WAS CLIPPED: 4,607 bodies are extramural BY
+   DERIVATION (the suburb exists because the law says so, not
+   because a knife fell). Proof at the tip: 162/162 pins with
+   ZERO re-recorded, determinism 10/10 (87da9c41…), **FOUR V8
+   EXECUTION MODES → ONE DIGEST** (the cross-engine question gets
+   its first real evidence), all four drawn censuses 0 over
+   23,391 bodies, landlocked 0, orphan streets 0, 96/96 under
+   ceiling, purity clean, sizeBaseline 790/800.
+2. ⭐⭐ **"EIGHT CYCLES WERE WORTH NINE `const` DECLARATIONS."**
+   The version-NAMING half of the cure dissolved every cycle with
+   the determinism digest BYTE-IDENTICAL — the cycles lived in
+   the naming, not the derivation; all the expense came
+   afterwards, from making the epochs REAL. **THE CONTAINMENT
+   CLASS, banked as law after four measured wrong answers: A
+   CONTAINMENT CLAIM MUST BE MADE AT THE RESOLUTION THE BOUNDARY
+   IS ALLOWED TO HAVE** — a 20-facet stone curtain cannot contain
+   a 2,300-point outline; the epoch is therefore defined at the
+   wall's own facet resolution and terrain service becomes
+   subordinate to containment. **HAZARD: five write-backs were
+   hiding INSIDE `censusLeaf`, invisible to any SCC scoped to
+   `buildFabric` — an SCC IS ONLY AS WIDE AS ITS SCAN.** The lane
+   also recorded a WORKING cure as "refuted" against a confounded
+   population before catching itself, and said so.
+3. **RULINGS.** (a) **THE METROPOLIS'S THIRD CIRCUIT STAYS
+   CAPPED** — it is derived and withheld by a tier cap with 83
+   primitives of §217 headroom, and the lane is right that the
+   cap is the thing to lift, but **§251.4b binds: three rings
+   without run typing come out CONCENTRIC.** The cap lifts WITH
+   the run-chain, not before, and then by measurement under
+   §217. (b) **`waterViolations` 114 → 165 is the only figure
+   that moved the wrong way**; it is a REPORTING census and no
+   pinned law moved, but **CHARACTERIZATION IS ORDERED BEFORE
+   LANDING** (lane MF-W1) — an uncharacterized wrong-way figure
+   is how a real defect hides inside an architecture win.
+   (c) **THE FORENSIC-ZOOM GAP IS CLOSED BY THE CHAIR IN
+   PERSON**: ten walls changed shape and 32 plates sat unviewed;
+   I rendered the town at 3000px and looked. VERDICT: no
+   violations visible — burgage frontage rows are working,
+   streets read as continuous channels, the government precinct
+   and river crossings are legible. TWO HONEST NOTES: several
+   blocks' parallel building bars read MECHANICALLY (plot-width
+   or depth variance too low — atlas prior #7's neighbourhood),
+   and the COUNTRYSIDE REMAINS THE WEAKEST SURFACE, exactly as
+   §229.2c predicted. Both are wave-nine inputs, not blockers.
+   (d) Item 5 (spatial indexing, equivalence pins, per-census
+   runtime budgets) handed off WHOLE with cause — the four
+   containment attempts consumed the wave; it rides wave nine or
+   its own lane. (e) Declared same-seed shift causes 97-101
+   accepted, ATTRIBUTED BY THREE-STAGE MEASUREMENT (version axis
+   moved 0 leaves, epoch axis 10 with the six unwalled leaves
+   byte-identical, the fork-key salt cure all 16) — attribution
+   of this quality is what makes a declared shift auditable.

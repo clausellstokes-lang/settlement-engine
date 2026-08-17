@@ -131,3 +131,12 @@ run type on 7/7-some-runs / 0/7-every-run evidence; (d) the framing that the
 §246 answer is "plausible settlement, implausible world" and that the fix is
 mostly four existing dossier fields read for geometry — this is the study
 program's central conclusion and deserves the sharpest re-derivation.
+
+### §252 — MF-ARCH-2 collection (Opus chair)
+Fable should re-derive: (a) holding the metropolis third-circuit cap until the
+run-chain lands rather than spending the available §217 headroom now;
+(b) ordering characterization of waterViolations before landing rather than
+accepting it as a reporting-only move; (c) the chair's own forensic-zoom
+verdict on the arch2 town (aesthetic judgment under an Opus chair — the
+mechanical-bars observation especially); (d) the containment-resolution law as
+a general principle.
