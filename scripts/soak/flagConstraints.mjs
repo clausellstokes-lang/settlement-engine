@@ -31,7 +31,7 @@
  */
 
 export const CONSTRAINT_KINDS = Object.freeze([
-  'lockstep', 'requires', 'excluded-with-rationale', 'non-boolean',
+  'lockstep', 'requires', 'excluded-with-rationale', 'non-boolean', 'harness-companion',
 ]);
 
 /**
@@ -122,6 +122,42 @@ export const NON_BOOLEAN_ROWS = Object.freeze([
 })));
 
 /**
+ * `harness-companion` — THE FIFTH KIND, AND IT IS AN INCLUSION ROW RATHER THAN AN
+ * EXCLUSION (chair disposition (a), ODQ §213.3 member F1).
+ *
+ * ⛔ THE CLASS IT NAMES. Some flags are not merely a switch the engine reads: lighting them
+ * obliges the CALLER to thread a companion VALUE on the same call. `advanceEpochEnabled` is
+ * the first of them — the kernel's `assertEpochPinnedInTest` refuses a fresh advance that
+ * runs with the rule strictly true and no `advanceEpoch` argument, because a lit advance
+ * with no epoch composes the DARK seed and silently replays the pre-wave future. That guard
+ * is the engine working as designed; the gap was the HARNESS's.
+ *
+ * ⛔ WHY THIS IS NOT AN `excluded-with-rationale` ROW. Excluding the key would have been the
+ * cheap disposition and it would have bought a permanently unmeasured flag: the array would
+ * stop varying the one key whose whole purpose is to change the stream a re-advance draws
+ * from, and the certification row for it could then only ever grade UNOBSERVED. The chair
+ * ruled the other way — the flag must be able to light LAWFULLY in a soak cell — so the row
+ * below records the OBLIGATION and names the seam that discharges it, and the key stays a
+ * full varying factor of the covering array.
+ *
+ * ⚠ THE ROW IS NOT SELF-PROVING AND MUST NEVER BE READ AS IF IT WERE. It names a seam; the
+ * evidence that the seam EXISTS and is wired is a source pin over the soak script
+ * (tests/soak-harness/soakScriptSeams.test.js). A companion row whose seam was deleted
+ * would otherwise be a comment claiming a cure — the exact shape RS-2 F1 found in the
+ * opposite direction, a census key with no disposition at all.
+ */
+export const HARNESS_COMPANION_ROWS = Object.freeze([
+  Object.freeze({
+    kind: 'harness-companion',
+    key: 'advanceEpochEnabled',
+    companion: 'advanceEpoch',
+    seam: 'scripts/audit/soakRules.mjs soakAdvanceEpoch — threaded by whole-world-soak.mjs into simulateCampaignWorldInterval and into the isolated-worker payload',
+    source: 'src/domain/clock.js assertEpochPinnedInTest, armed from src/domain/worldPulse/pulseKernel.js when the rule is strictly true on a FRESH advance',
+    rationale: 'Lighting this key without threading its args-borne companion does not produce a wrong finding — it produces NO finding, because the cell exits 1 at the first pulse with no receipt at all (RS-2 F1: 150 of 168 cells). The harness discharges the obligation the way the store mint does, so the row is an inclusion with an obligation rather than an exclusion.',
+  }),
+]);
+
+/**
  * ⭐⭐ THE SHRINK GUARD EARNED ITS KEEP ON ITS FIRST EXECUTED RUN, and this list is what
  * it found. The compile listed `neutralNeighborsEnabled` as an `excluded-with-rationale`
  * row. Executed against the live census, it is not in the domain AT ALL — it is declared
@@ -146,6 +182,7 @@ export const OWNER_GATED_ABSENT = Object.freeze([
 
 export const CONSTRAINT_MANIFEST = Object.freeze([
   ...LOCKSTEP_ROWS, ...REQUIRES_ROWS, ...EXCLUDED_ROWS, ...NON_BOOLEAN_ROWS,
+  ...HARNESS_COMPANION_ROWS,
 ]);
 
 /** Every key the array may vary: the union census minus every excluded key. */
@@ -214,6 +251,12 @@ export function manifestDefects(census, manifest = CONSTRAINT_MANIFEST, absent =
     if (!CONSTRAINT_KINDS.includes(row.kind)) defects.push(`${row.kind}: kind is outside the vocabulary`);
     if (!String(row.source || '').trim()) defects.push(`${row.key || row.keys}: no source`);
     if (String(row.rationale || '').length < 20) defects.push(`${row.key || row.keys}: no rationale`);
+    // A companion row that names no VALUE and no SEAM is a row asserting an obligation
+    // nobody can discharge — worse than no row, because it reads as a disposition.
+    if (row.kind === 'harness-companion') {
+      if (!String(row.companion || '').trim()) defects.push(`${row.key}: a harness-companion row names no companion value`);
+      if (!String(row.seam || '').trim()) defects.push(`${row.key}: a harness-companion row names no seam that threads its companion`);
+    }
     for (const key of row.keys || [row.key]) {
       if (!known.has(key)) defects.push(`${key}: named by a ${row.kind} row but absent from the live flag census`);
     }

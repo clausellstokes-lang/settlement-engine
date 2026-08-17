@@ -6,6 +6,7 @@ import {
   buildStoryMixDivergenceEvidence,
   compareStoryMixDistributions,
   isPassingStoryMixDivergenceEvidence,
+  MIN_EXECUTABLE_SAMPLE_EVENTS,
   STORY_MIX_DIVERGENCE_THRESHOLDS,
 } from '../../scripts/audit/story-mix-divergence.mjs';
 
@@ -81,6 +82,63 @@ describe('story-mix divergence instrument', () => {
     expect(malformed.invalidEntries).toEqual([
       'comparison.yearly[0].eventTypeCounts.siege',
     ]);
+
+    // ── §206.2b — NOT-EXECUTABLE IS A THIRD ANSWER, NOT A SOFTER FAILURE ──────
+    // ⛔ THE DEFECT: the all-off world authors ZERO events, so this instrument compared two
+    // empty samples and called it FAIL — on all three dark-control cells of every rolling
+    // run (RS-1 F2, RS-2 F2, three ledgered KNOWN re-fires). That is a finding about the
+    // instrument-under-this-configuration wearing a finding about the world.
+    expect(MIN_EXECUTABLE_SAMPLE_EVENTS)
+      .toBe(STORY_MIX_DIVERGENCE_THRESHOLDS.minShiftedEventEquivalents);
+    expect(empty.executable).toBe(false);
+    expect(empty.smallestSample).toBe(0);
+    expect(empty.notExecutableReason).toContain('would be arithmetic rather than evidence');
+
+    // ⭐ THE FLOOR IS DERIVED, AND THIS IS THE DERIVATION EXECUTED. Total-variation distance
+    // between two distributions is bounded above by 1, so shiftedEventEquivalents ≤ min(n).
+    // At min(n) = 1 the MAXIMALLY divergent pair — disjoint supports, TVD exactly 1 — still
+    // cannot reach the threshold of 2. That is why a FAIL below the floor carries no
+    // information about seeds: no world could have produced any other answer.
+    const maximallyDivergentButTiny = compareStoryMixDistributions(
+      [year({ siege: 1 })],
+      [year({ treaty: 1 })],
+    );
+    expect(maximallyDivergentButTiny.totalVariationDistance).toBe(1);
+    expect(maximallyDivergentButTiny.passed).toBe(false);
+    expect(maximallyDivergentButTiny.executable).toBe(false);
+    // …and ONE more event on each side puts a pass back within reach, so the floor is the
+    // exact boundary rather than a margin somebody chose.
+    const atTheFloor = compareStoryMixDistributions(
+      [year({ siege: 2 })],
+      [year({ treaty: 2 })],
+    );
+    expect(atTheFloor.smallestSample).toBe(2);
+    expect(atTheFloor.executable).toBe(true);
+    expect(atTheFloor.passed).toBe(true);
+
+    // ⛔ NO VERDICT MOVED. The floor sits exactly where `passed` was already unreachable, so
+    // adding it changes the pass/fail answer for NO input — it only separates "measured and
+    // failed" from "could not be measured". A measured failure is still a failure.
+    const measuredFailure = compareStoryMixDistributions(
+      [year({ raid: 5, relief: 5 })],
+      [year({ raid: 4, relief: 6 })],
+    );
+    expect(measuredFailure.executable).toBe(true);
+    expect(measuredFailure.passed).toBe(false);
+
+    // THE EVIDENCE CARRIES THE THIRD VERDICT, and the admission wall still refuses it:
+    // nothing can be certified on an instrument that did not execute.
+    const notExecutableEvidence = buildStoryMixDivergenceEvidence({
+      comparison: empty,
+      windowYears: 5,
+      baselineSeed: 'baseline',
+      comparisonSeed: 'divergent',
+      hashDiverged: true,
+    });
+    expect(notExecutableEvidence.verdict).toBe('NOT-EXECUTABLE');
+    expect(notExecutableEvidence.instrumentExecutable).toBe(false);
+    expect(notExecutableEvidence.minSampleEvents).toBe(MIN_EXECUTABLE_SAMPLE_EVENTS);
+    expect(isPassingStoryMixDivergenceEvidence(notExecutableEvidence)).toBe(false);
   });
 
   it('builds a total v5 admission receipt and rejects edited evidence', () => {
@@ -141,7 +199,19 @@ describe('story-mix divergence instrument', () => {
     // skipped run publish the customer-facing clause certificationSchema.js reads as
     // "told a different tale on a different seed".
     expect(source).toContain('properties: soakProperties({');
-    expect(source).toContain('seedDivergenceExecuted: seedDivergence.executed === true,');
+    // ⚠ RE-ANCHORED BY §206.2b, NOT LOOSENED. The pin used to freeze the whole expression
+    // `seedDivergenceExecuted: seedDivergence.executed === true,`. That expression had to
+    // lawfully grow a second term: RUNNING the divergence pass and MEASURING anything are
+    // different facts, and the all-dark world proved it by authoring zero events and
+    // FAILING an instrument no world could have passed. Both terms are pinned separately,
+    // so the arm is now stronger than the frozen literal it replaces — dropping either one
+    // reds, where before only a re-wording did.
+    expect(source).toContain('seedDivergenceExecuted: seedDivergence.executed === true');
+    expect(source).toContain('&& seedDivergence.instrumentExecutable === true,');
+    // …and the third status exists at the assertion site, so a non-executable instrument
+    // is REPORTED rather than banked as a failure on every rolling run.
+    expect(source).toMatch(/if \(!storyMixDivergence\.executable\) \{\s*\n\s*notExecutable\(/);
+    expect(source).toContain('notExecutable: notExecutables,');
     // …and the skipped branch states its absence POSITIVELY rather than leaving a gap a
     // reader has to infer from a missing key.
     expect(source).toMatch(/executed: false,\s*reason: 'harness --skip-divergence'/);

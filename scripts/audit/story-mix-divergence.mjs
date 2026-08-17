@@ -18,6 +18,33 @@ export const STORY_MIX_DIVERGENCE_THRESHOLDS = Object.freeze({
 export const STORY_MIX_DIVERGENCE_INSTRUMENT = 'event_type_total_variation_v1';
 
 /**
+ * ⛔⛔ THE EXECUTABILITY FLOOR (§206.2b), AND IT IS DERIVED FROM THE THRESHOLDS ABOVE
+ * RATHER THAN CHOSEN.
+ *
+ * THE DEFECT IT CLOSES. The all-off world authors ZERO events, so both windows arrive
+ * empty; the instrument compared two empty samples, computed a total-variation distance of
+ * 0, and reported FAIL. That is not a measurement of seed coupling — it is the instrument
+ * discovering it had nothing to measure, and it fired on all three dark-control cells of
+ * every rolling run (RS-1 F2, RS-2 F2; three ledgered KNOWN re-fires). A finding about the
+ * instrument-under-this-configuration recorded as a finding about the world is the
+ * fixture-cannot-execute-its-own-defect class, and it costs a capsule every run.
+ *
+ * THE DERIVATION, not a taste. `shiftedEventEquivalents = TVD × min(nBaseline, nComparison)`
+ * and a total-variation distance between two probability distributions is bounded above by
+ * 1, so `shiftedEventEquivalents ≤ min(n)` for every possible pair of worlds. A PASS
+ * requires `shiftedEventEquivalents ≥ minShiftedEventEquivalents`. Therefore
+ * `min(n) ≥ minShiftedEventEquivalents` is NECESSARY for a pass to be reachable at all:
+ * below it, FAIL is arithmetic rather than evidence, and no world — however divergent —
+ * could produce any other answer.
+ *
+ * ⭐ NO VERDICT MOVES. Because the floor is exactly the point below which `passed` was
+ * already unreachable, adding it changes `passed` for no input at all; it only lets the
+ * caller tell "measured and failed" apart from "could not be measured".
+ */
+export const MIN_EXECUTABLE_SAMPLE_EVENTS = STORY_MIX_DIVERGENCE_THRESHOLDS
+  .minShiftedEventEquivalents;
+
+/**
  * @param {unknown} value
  * @returns {value is Record<string, unknown>}
  */
@@ -122,6 +149,17 @@ export function compareStoryMixDistributions(baselineYearly, comparisonYearly) {
   ];
   const equalWindows = baseline.years > 0 && baseline.years === comparison.years;
   const nonEmpty = baseline.totalEvents > 0 && comparison.totalEvents > 0;
+  // §206.2b — THE PRECONDITION, STATED. `executable` answers "could any world have passed
+  // this?"; `passed` answers "did this one?". Keeping them separate is what lets a caller
+  // report NOT-EXECUTABLE instead of manufacturing a failure out of an empty sample.
+  const smallestSample = Math.min(baseline.totalEvents, comparison.totalEvents);
+  const executable = smallestSample >= MIN_EXECUTABLE_SAMPLE_EVENTS;
+  const notExecutableReason = executable
+    ? null
+    : `smallest sample ${smallestSample} event(s) < the floor of ${MIN_EXECUTABLE_SAMPLE_EVENTS} `
+      + `(baseline ${baseline.totalEvents}, comparison ${comparison.totalEvents}); below it `
+      + `shiftedEventEquivalents cannot reach ${STORY_MIX_DIVERGENCE_THRESHOLDS.minShiftedEventEquivalents} `
+      + 'for ANY pair of worlds, so a FAIL here would be arithmetic rather than evidence';
   const passed = invalidEntries.length === 0
     && equalWindows
     && nonEmpty
@@ -141,6 +179,10 @@ export function compareStoryMixDistributions(baselineYearly, comparisonYearly) {
     comparison,
     equalWindows,
     nonEmpty,
+    executable,
+    smallestSample,
+    minSampleEvents: MIN_EXECUTABLE_SAMPLE_EVENTS,
+    notExecutableReason,
     totalVariationDistance,
     shiftedEventEquivalents,
     typeShifts,
@@ -170,8 +212,15 @@ export function buildStoryMixDivergenceEvidence({
 }) {
   return {
     instrument: STORY_MIX_DIVERGENCE_INSTRUMENT,
-    verdict: comparison.passed ? 'PASS' : 'FAIL',
+    // §206.2b — THREE VERDICTS, because two could not tell an unmeasurable sample from a
+    // measured failure. `NOT-EXECUTABLE` is not a softened FAIL: the admission wall below
+    // still requires the literal 'PASS', so nothing can be certified on it.
+    verdict: comparison.executable ? (comparison.passed ? 'PASS' : 'FAIL') : 'NOT-EXECUTABLE',
     passed: comparison.passed,
+    instrumentExecutable: comparison.executable,
+    smallestSample: comparison.smallestSample,
+    minSampleEvents: comparison.minSampleEvents,
+    notExecutableReason: comparison.notExecutableReason,
     windowYears,
     seeds: {
       baseline: baselineSeed,

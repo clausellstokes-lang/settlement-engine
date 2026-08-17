@@ -126,6 +126,52 @@ export function composeSoakRules({ preset, seasons = 'preset', overlay = {} }) {
 }
 
 /**
+ * ⛔⛔ THE ADVANCE-EPOCH SEAM, AND IT IS THE STORE'S OWN SHAPE RATHER THAN A BYPASS
+ * (ODQ §213.3 member F1; the EP-1 kernel guard).
+ *
+ * WHY IT EXISTS. `advanceEpochEnabled` joined the flag census as a virtual key, so SK-4's
+ * covering array lawfully generates rows that light it. The kernel's `assertEpochPinnedInTest`
+ * then REFUSES any fresh advance that runs with the rule strictly true and no threaded
+ * `advanceEpoch` — by design, because a lit advance with no epoch composes the DARK seed
+ * and silently replays the pre-wave future. The soak reached the world through
+ * `simulateCampaignWorldInterval` without ever threading one, so 50 of 56 rows — 150 of
+ * 168 cells — exited 1 at the FIRST pulse with no receipt (RS-2 F1).
+ *
+ * THE PRODUCTION SHAPE, mirrored term for term from `src/store/campaignAdvanceSession.js`'s
+ * `runAdvanceCampaignWorld`:
+ *
+ *     const simulationRules = <the LIVE campaign's rules>;
+ *     const epochLit = simulationRules?.advanceEpochEnabled === true;
+ *     const advanceEpoch = epochLit ? (options.epoch || generateSeed()) : null;
+ *
+ * The soak takes the `options.epoch` arm — the SAME arm the store's own resume path takes
+ * (`options.epoch || cursor.advanceEpoch`) and the same one every replay caller takes. It
+ * is a caller-supplied epoch, not a disabled guard: the value stays ARGS-BORNE, the gate
+ * stays a strict `=== true` read of the live rules, and nothing is read from ambience. The
+ * `generateSeed()` arm is unavailable here for a reason that is about the instrument rather
+ * than about taste — it is `Date.now()`-derived, and a soak whose nonce moved between run A
+ * and run B would red its own byte-identical re-run property every time.
+ *
+ * ⭐ THE GRAIN IS THE ADVANCE, NEVER THE TICK, which is the orchestrator's own law
+ * (`advanceInterval.js`: "ONE value rides EVERY composed tick … a per-tick nonce would be
+ * destroyed by the interval collapse"). `runYears` calls the orchestrator once per YEAR, so
+ * the year IS the advance and the nonce is keyed on it.
+ *
+ * ⚠ THE DERIVATION MUST NOT CARRY THE RUN LABEL, AND THAT IS LOAD-BEARING. Run B replays
+ * run A's seed and must land on identical yearly composite hashes; a label-bearing nonce
+ * would fork the two streams and red assertion 2. Seed and year are the whole key — which
+ * is also what makes a `--restore-from` resume land on the very epoch its checkpointed
+ * original ran under, so the restore stays a restore.
+ *
+ * @param {{simulationRules: Record<string, unknown>|null|undefined, seed: string, year: number}} input
+ * @returns {string|null} the flag-gated term — null on every dark or legacy world
+ */
+export function soakAdvanceEpoch({ simulationRules, seed, year }) {
+  const epochLit = simulationRules?.advanceEpochEnabled === true;
+  return epochLit ? `soak::${String(seed)}::advance:${Number(year)}` : null;
+}
+
+/**
  * Parse `--lighting k=v,k=v`. `true`/`false` become booleans and a bare decimal
  * becomes a number; everything else stays a string. A malformed pair is REFUSED by
  * name rather than skipped, because a silently dropped flag is a soak that measured

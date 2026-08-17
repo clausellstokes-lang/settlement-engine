@@ -95,6 +95,7 @@ import {
   deepKeyCensus,
   parseLightingOverlay,
   replantUndefinedKeys,
+  soakAdvanceEpoch,
   soakInvocationRefusals,
   soakProperties,
 } from './soakRules.mjs';
@@ -377,10 +378,22 @@ async function runYears(seed, years, label, {
   let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
 
+  // ⛔ THE ADVANCE-EPOCH TERM, THREADED LIKE THE STORE THREADS IT (F1; soakRules.mjs's
+  //    soakAdvanceEpoch carries the whole derivation and its rationale). The gate is read
+  //    from the LIVE campaign's rules on every advance — exactly what
+  //    `runAdvanceCampaignWorld` does — so a dark or legacy world threads null and composes
+  //    the pre-wave seed character-for-character, while a LIT row can finally run at all.
+  const advanceEpochs = [];
   for (let year = firstYear; year <= years; year++) {
     const beforeSaves = runningSaves;
     const rawWizardNewsById = new Map();
     const y0 = Date.now();
+    const advanceEpoch = soakAdvanceEpoch({
+      simulationRules: runningCampaign?.worldState?.simulationRules,
+      seed,
+      year,
+    });
+    advanceEpochs.push(advanceEpoch);
     const result = await simulateCampaignWorldInterval({
       campaign: runningCampaign,
       saves: runningSaves,
@@ -388,6 +401,7 @@ async function runYears(seed, years, label, {
       commit: true,
       now: NOW,
       autoResolve: true,
+      advanceEpoch,
       onTickObservation: ({ rawWizardNewsEntries }) => {
         for (const entry of rawWizardNewsEntries || []) {
           if (!entry || typeof entry !== 'object' || !entry.id) continue;
@@ -523,6 +537,11 @@ async function runYears(seed, years, label, {
     yearlyBehavior,
     yearlyStateKeyCensus,
     yearlyWarConvergence,
+    // The per-advance epochs this run actually threaded, in year order. Reported so a
+    // reader can see the flag was lit LAWFULLY rather than having to infer it from the
+    // absence of a crash, and so the determinism comparison covers the stream identity
+    // itself (the comparison surface is an EXCLUSION list, so this field is compared).
+    advanceEpochs,
     // The EFFECTIVE rules this run carried (the preset spread plus any --seasons
     // override), recorded so the receipt states its configuration instead of
     // leaving a reader to infer it from the script.
@@ -537,6 +556,21 @@ const check = (ok, name, detail) => {
   const line = `${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? ` — ${detail}` : ''}`;
   console.log(`  ${line}`);
   if (!ok) failures.push(name);
+};
+// ⛔⛔ THE THIRD STATUS (§206.2b). An assertion whose PRECONDITION did not hold has not
+//    failed — it did not run. Recording that as a FAIL is what put three dark-control
+//    capsules on every rolling soak (RS-1 F2, RS-2 F2), each one a finding about the
+//    instrument wearing a finding about the world.
+//
+//    ⭐ IT IS NOT A SOFTENED PASS, AND THE TWO LEDGERS ARE WHAT KEEPS IT HONEST: a
+//    NOT-EXECUTABLE row goes on `notExecutable` and NEVER on `failures`, so it cannot red
+//    the run — and it also never reaches `soakProperties`' executed input, so the property
+//    the assertion would have EARNED is withheld. Silence and a claim are different
+//    things, and the receipt states which one this is.
+const notExecutables = [];
+const notExecutable = (name, reason) => {
+  console.log(`  NOT-EXECUTABLE  ${name}${reason ? ` — ${reason}` : ''}`);
+  notExecutables.push({ name, reason: String(reason || '') });
 };
 
 console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", full_simulation preset (seasons ${SEASONS}), now pinned ${NOW}\n`);
@@ -573,7 +607,7 @@ if (RESTORE_FROM) {
   for (const key of gained.slice(0, 10)) console.log(`  GAINED ${key}`);
   const restored = await runYears(SEED, YEARS, 'restored', { restore: { ...checkpoint, ...restoredPayload } });
   console.log(`  years ${restored.firstYear}..${YEARS} in ${(restored.ms / 1000).toFixed(1)}s — final tick ${restored.finalTick}`);
-  const probeReceipt = {
+  const probeBody = {
     schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
     kind: 'whole_world_soak_restore_probe',
     seed: SEED,
@@ -596,6 +630,11 @@ if (RESTORE_FROM) {
       + 'phase-boundary run is ever computed from one (§141, generalized)',
     completedAt: new Date().toISOString(),
   };
+  // The writer-side non-finite census, on the RESTORE path too — see the long note at the
+  // main receipt. A probe receipt is read back from disk by exactly the same registry, so
+  // leaving it uncensused would re-open the vacuity on one lifecycle path while closing it
+  // on the other.
+  const probeReceipt = { ...probeBody, nonFiniteFigures: findBadNumber(probeBody) };
   if (RECEIPT_PATH) {
     const file = resolve(String(RECEIPT_PATH));
     mkdirSync(dirname(file), { recursive: true });
@@ -627,6 +666,17 @@ try {
     commit: true,
     now: NOW,
     autoResolve: true,
+    // ⛔ THE SAME YEAR-1 EPOCH runA THREADED, and it must be the same one or the arm
+    //    below is not the arm it claims to be. The isolate exists to prove the worker
+    //    path and the direct domain path compose the IDENTICAL output hash; the epoch is
+    //    a segment on the root seed, so an isolate carrying a different nonce would
+    //    diverge for a reason that has nothing to do with isolation. (Without any epoch
+    //    it would not diverge — it would throw, exactly as the direct path did.)
+    advanceEpoch: soakAdvanceEpoch({
+      simulationRules: fixture.campaign.worldState.simulationRules,
+      seed: SEED,
+      year: 1,
+    }),
   }, { customContent: {} });
   isolatedWorker = measured.evidence;
   console.log(
@@ -712,18 +762,30 @@ if (!SKIP_DIVERGENCE) {
   };
   const largestMixShift = storyMixDivergence.typeShifts[0];
   const mixEvidenceIssue = storyMixDivergence.invalidEntries[0];
-  check(
-    storyMixDivergence.passed,
-    'different seeds produce a divergent event-type mix',
-    `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
-      + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
-      + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
-      + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
-      + `largest shift ${largestMixShift?.type || 'none'} `
-      + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
-      + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
-      + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : ''),
-  );
+  const mixDetail = `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
+    + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
+    + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
+    + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
+    + `largest shift ${largestMixShift?.type || 'none'} `
+    + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
+    + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
+    + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : '');
+  // ⛔ §206.2b — THE PRECONDITION IS STATED BEFORE THE VERDICT IS READ. Below the sample
+  // floor no world could pass this instrument, so the answer carries no information about
+  // seeds; it is reported as NOT-EXECUTABLE and `seed_divergent` is withheld, rather than
+  // banked as a failure and a capsule on every all-dark cell forever.
+  if (!storyMixDivergence.executable) {
+    notExecutable(
+      'different seeds produce a divergent event-type mix',
+      `${storyMixDivergence.notExecutableReason}; ${mixDetail}`,
+    );
+  } else {
+    check(
+      storyMixDivergence.passed,
+      'different seeds produce a divergent event-type mix',
+      mixDetail,
+    );
+  }
 } else {
   console.log('  SKIPPED  divergence run C — --skip-divergence; seed_divergent is NOT claimed');
 }
@@ -862,7 +924,7 @@ check(warCensus.durationTotalityHolds, 'every counted war lands in exactly one d
 check(warCensus.endingsTotalityHolds, 'every closed war lands in exactly one ending or one unclassified reason',
   `classified ${warCensus.classifiedEndings} + unclassified ${warCensus.unclassifiedEndings} === closes ${warCensus.closedWars}`);
 
-const receipt = {
+const receiptBody = {
   // Envelope v5 ADDS the `subsystems` section below. Every v4 field keeps its
   // exact v4 meaning; consumers accept both versions
   // (SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).
@@ -875,10 +937,14 @@ const receipt = {
   now: NOW,
   passed: failures.length === 0,
   // COMPUTED, never literal (annex SK.M3). `seed_divergent` is present only when the
-  // divergence run actually executed.
+  // divergence run actually executed — AND, since §206.2b, only when the instrument it
+  // ran could have produced any answer at all. A run whose sample sat below the floor did
+  // not measure seed coupling, so it does not publish the customer-facing clause
+  // certificationSchema.js reads as "told a different tale on a different seed".
   properties: soakProperties({
     failures,
-    seedDivergenceExecuted: seedDivergence.executed === true,
+    seedDivergenceExecuted: seedDivergence.executed === true
+      && seedDivergence.instrumentExecutable === true,
   }),
   // A-4 evidence, not just an earned-property label. The state-hash comparison
   // is retained here only to diagnose whether state also diverged; the verdict
@@ -901,6 +967,12 @@ const receipt = {
   // it. ADDITIVE, and deliberately not a schema bump — the beliefDivergence precedent.
   yearlyHashes: runA.yearlyHashes,
   directFirstResultSha256: runA.firstResultSha256,
+  // ⭐ F1 — THE ARGS-BORNE ADVANCE EPOCHS THIS RUN THREADED, one per composed advance, in
+  // year order. A row lighting `advanceEpochEnabled` is now RUNNABLE, and the receipt
+  // states that positively rather than leaving a reader to infer it from the absence of a
+  // crash. Every entry is null on a dark or legacy world — the same flag-gated term the
+  // store parks on its own pause cursor.
+  advanceEpochs: runA.advanceEpochs,
   stressorCounts: counts,
   startPopulations: runA.startPopulations,
   finalPopulations: finalPops,
@@ -949,7 +1021,34 @@ const receipt = {
   ) * 52,
   frozenTail,
   failures,
+  // §206.2b — the assertions whose PRECONDITION did not hold, stated POSITIVELY with the
+  // reason on their face. A silent omission would read exactly like a pass; this reads
+  // like what it is. Empty on every run where every instrument could execute.
+  notExecutable: notExecutables,
   completedAt: new Date().toISOString(),
+};
+
+// ⛔⛔ THE NON-FINITE CENSUS IS TAKEN HERE, ON THE LIVE OBJECT, BECAUSE THIS IS THE LAST
+//    MOMENT AT WHICH IT CAN BE TAKEN AT ALL (ODQ §213.3 member 3; RS-1 §7.4).
+//
+//    `JSON.stringify` writes `null` for `NaN` and for both infinities. The tripwire
+//    registry's `non_finite_ledger_figure` row re-scanned a receipt READ BACK FROM DISK,
+//    where every such figure had already become `null` — so the row could not fire on the
+//    class it names, and its zero across 177 measured cells was a WEAK zero: not evidence
+//    that no figure went non-finite, but evidence that nothing had been asked.
+//
+//    Moving the scan to the WRITER side makes it a real measurement. The figures are still
+//    native numbers here, the paths are recorded as STRINGS, and strings survive the round
+//    trip intact — so the registry reads a census that was taken where the truth was, and
+//    a downstream reader gets the dotted path rather than an untraceable `null`.
+//
+//    ⚠ THE SOAK'S OWN PER-YEAR SCAN IS A DIFFERENT NET AND NEITHER REPLACES THE OTHER. It
+//    walks worldState / regionalGraph / settlements and THROWS, so it never produces a
+//    receipt at all; this one walks the RECEIPT — the aggregates, the cost series, the
+//    behavioural fold, the worker timings — which that scan never sees.
+const receipt = {
+  ...receiptBody,
+  nonFiniteFigures: findBadNumber(receiptBody),
 };
 
 if (RECEIPT_PATH) {
@@ -964,4 +1063,10 @@ if (AS_JSON) {
 }
 
 console.log(`\n${failures.length ? `FAILED: ${failures.join(', ')}` : `OK — all assertions green (${YEARS}y × 3 runs)`}`);
+// The not-executable ledger is printed BESIDE the verdict, never folded into it: a run
+// that could not measure something is green AND has said so, which is a different report
+// from a run where everything executed.
+if (notExecutables.length) {
+  console.log(`NOT EXECUTABLE (${notExecutables.length}): ${notExecutables.map((row) => row.name).join(', ')}`);
+}
 process.exit(failures.length ? 1 : 0);

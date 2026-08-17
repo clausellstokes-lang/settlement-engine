@@ -93,6 +93,38 @@ describe('the tripwire registry', () => {
     const ceiling = YEARLY_BYTES_PER_SETTLEMENT_CEILING * 4;
     expect(fired(clean({ yearlyBytes: [1, 2, 3, ceiling] }))).toEqual(['unbounded_growth']);
     expect(fired(clean({ yearlyBytes: [1, 2, 3, ceiling - 1] }))).toEqual([]);
+
+    // ── THE non_finite VACUITY, DEMONSTRATED AND THEN CLOSED (member 3; RS-1 §7.4) ──
+    // ⛔ THE DEFECT, EXECUTED RATHER THAN ARGUED. `JSON.stringify` writes `null` for `NaN`
+    // and for both infinities, so a row that re-scans a receipt READ BACK FROM DISK can
+    // never fire on the class it names. Its zero across 177 measured cells was a WEAK
+    // zero: not "no figure went non-finite", but "nothing was asked".
+    const withNaN = clean({ yearlyBytes: [100_000, Number.NaN, 120_000, 130_000] });
+    const asWritten = JSON.parse(JSON.stringify(withNaN));
+    expect(asWritten.yearlyBytes[1]).toBe(null);
+    // THE COUNTERFACTUAL: the live scan alone — the whole of the old row — finds NOTHING
+    // in the parsed receipt, which is precisely the vacuity.
+    expect(fired(asWritten)).toEqual([]);
+
+    // ⭐ THE CURE: the soak censuses the LIVE receipt before serialization and carries the
+    // dotted paths as STRINGS, which survive the round trip intact. The same parsed
+    // receipt now convicts.
+    const censused = { ...asWritten, nonFiniteFigures: ['$.yearlyBytes[1] = NaN'] };
+    expect(fired(censused)).toEqual(['non_finite_ledger_figure']);
+    expect(evaluateTripwires(censused).findings[0].detail)
+      .toBe('non-finite figure $.yearlyBytes[1] = NaN');
+
+    // ⚠ AND THE LIVE SCAN IS KEPT, NOT REPLACED — an IN-MEMORY receipt still holds native
+    // NaNs and that path was never vacuous. Both halves fire, and neither double-counts.
+    expect(fired(withNaN)).toEqual(['non_finite_ledger_figure']);
+    expect(fired({ ...withNaN, nonFiniteFigures: ['$.yearlyBytes[1] = NaN'] }))
+      .toEqual(['non_finite_ledger_figure']);
+
+    // ⛔ AN ABSENT CENSUS IS NOT A FINDING. Every receipt archived before the writer-side
+    // scan existed lacks the key, and convicting them would report a defect none of them
+    // can be shown to have — the row reports what it measured, never what it could not.
+    expect(fired(clean())).toEqual([]);
+    expect(fired(clean({ nonFiniteFigures: [] }))).toEqual([]);
   });
 
   it('HOST-OBSERVABILITY rows never mint a finding, which is what makes the pool proof possible', () => {

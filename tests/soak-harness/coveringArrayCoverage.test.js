@@ -28,7 +28,7 @@ import {
   effectivePairsIn,
   rowCountBand,
 } from '../../scripts/soak/coveringArray.mjs';
-import { flagDomainCensus } from '../../scripts/audit/soakRules.mjs';
+import { flagDomainCensus, soakAdvanceEpoch } from '../../scripts/audit/soakRules.mjs';
 import {
   DEFAULT_SIMULATION_RULES,
   ENGINE_GATED_VIRTUAL_RULE_KEYS,
@@ -105,6 +105,43 @@ describe('the covering array and its constraint manifest', () => {
     expect(census.union.filter((key) => key === 'neutralNeighborsEnabled')).toEqual([]);
     expect(manifestDefects({ ...census, union: [...census.union, 'neutralNeighborsEnabled'] })).toEqual([
       'neutralNeighborsEnabled: declared ABSENT from the flag census but is now present — it must become a live exclusion row or a grid axis, deliberately',
+    ]);
+
+    // ── THE SK-4 DISPOSITION FOR `advanceEpochEnabled` (chair disposition (a), member F1) ──
+    // ⛔ THE DEFECT: the key joined the census at EP-1 with NO manifest disposition at all,
+    // so the array lawfully generated 50 rows the instrument could not execute — 150 of 168
+    // cells exited 1 at the first pulse with no receipt (RS-2 F1). The chair ruled that the
+    // flag must be able to light LAWFULLY, so the disposition is an INCLUSION carrying an
+    // obligation, not an exclusion.
+    expect([...CONSTRAINT_KINDS]).toEqual([
+      'lockstep', 'requires', 'excluded-with-rationale', 'non-boolean', 'harness-companion',
+    ]);
+    const companions = CONSTRAINT_MANIFEST.filter((row) => row.kind === 'harness-companion');
+    expect(companions.map((row) => row.key)).toEqual(['advanceEpochEnabled']);
+    expect(companions[0].companion).toBe('advanceEpoch');
+    // ⭐ THE ROW NAMES A SEAM, AND THE SEAM EXISTS. A companion row pointing at a function
+    // nobody wrote would be a comment claiming a cure — the same defect as a census key
+    // with no disposition, wearing the opposite sign.
+    expect(companions[0].seam).toContain('soakAdvanceEpoch');
+    expect(typeof soakAdvanceEpoch).toBe('function');
+    expect(soakAdvanceEpoch({ simulationRules: { advanceEpochEnabled: true }, seed: 's', year: 1 }))
+      .toBe('soak::s::advance:1');
+    // ⛔ DISPOSITION (a) MEANS THE KEY STILL VARIES. An exclusion row would have removed it
+    // from the factors and from the maximal-lawful row, permanently unmeasuring the one
+    // flag whose whole purpose is to change the stream a re-advance draws from.
+    expect(varyingFactors(census)).toContain('advanceEpochEnabled');
+    expect(maximalLawfulRow(census).advanceEpochEnabled).toBe(true);
+    expect(Object.prototype.hasOwnProperty.call(darkControlRow(census), 'advanceEpochEnabled')).toBe(true);
+    expect(darkControlRow(census).advanceEpochEnabled).toBe(false);
+    // …and a companion row that names no value or no seam is a DEFECT, because a row
+    // asserting an obligation nobody can discharge reads as a disposition and is not one.
+    expect(manifestDefects(census, [...CONSTRAINT_MANIFEST, {
+      kind: 'harness-companion', key: 'warLayerEnabled',
+      source: 'a companion row left half-written',
+      rationale: 'this rationale is long enough to pass the length arm on its own',
+    }])).toEqual([
+      'warLayerEnabled: a harness-companion row names no companion value',
+      'warLayerEnabled: a harness-companion row names no seam that threads its companion',
     ]);
   });
 

@@ -13,7 +13,9 @@
  *   3  absence ≠ falseness — WHY arm 1 matters, so a later reader cannot delete it
  *   4  the import direction: scripts/audit ↛ scripts/soak, with a planted violation
  *   5  byte-identity with no overlay, against a CAPTURED pre-change golden
- *   6  the --skip-divergence contract: computed properties, and the refusals
+ *   6  the --skip-divergence contract: computed properties, and the refusals — plus the
+ *      ADVANCE-EPOCH seam, which is the same subject one turn on: what a run may CLAIM,
+ *      and what it must THREAD before it is allowed to run at all
  *   7  the §180.3a address-chain instrument, and the deep key census that settles SK.U1
  */
 
@@ -33,6 +35,7 @@ import {
   parseLightingOverlay,
   replantUndefinedKeys,
   seasonsOverride,
+  soakAdvanceEpoch,
   soakInvocationRefusals,
   soakProperties,
 } from '../../scripts/audit/soakRules.mjs';
@@ -156,7 +159,7 @@ describe("the soak script's extracted seams", () => {
     expect(parseLightingOverlay('oops,b=1').refusals).toEqual(['--lighting pair "oops" is not key=value']);
   });
 
-  it('ARM 6 — properties are COMPUTED, and the unearned-claim routes are refused', () => {
+  it('ARM 6 — properties are COMPUTED, the unearned-claim routes are refused, and the advance-epoch seam mirrors the store mint', () => {
     const executed = soakProperties({ failures: [], seedDivergenceExecuted: true });
     const skipped = soakProperties({ failures: [], seedDivergenceExecuted: false });
     expect(executed).toEqual([
@@ -200,6 +203,61 @@ describe("the soak script's extracted seams", () => {
     expect(checkpointIdentityMismatch(identity, { seed: 'other', settlements: 4, sourceSha: 'abc' }).length).toBe(1);
     expect(checkpointIdentityMismatch(identity, { seed: 's', settlements: 4, sourceSha: '' }).length).toBe(1);
     expect(buildCheckpoint({ identity, campaign: { a: 1 }, saves: [] }).kind).toBe('whole_world_soak_checkpoint');
+
+    // ── THE ADVANCE-EPOCH SEAM (ODQ §213.3 member F1) ─────────────────────────
+    // ⛔ THE DEFECT IT CLOSES: the kernel refuses a FRESH advance that runs with
+    // `advanceEpochEnabled` strictly true and no threaded `advanceEpoch`, so every SK-4
+    // row lighting the key exited 1 at the FIRST pulse with NO receipt — 150 of 168 cells
+    // (RS-2 F1). The gate is read exactly as the store mint reads it.
+    const lit = { advanceEpochEnabled: true };
+    expect(soakAdvanceEpoch({ simulationRules: lit, seed: 'w0-soak', year: 1 }))
+      .toBe('soak::w0-soak::advance:1');
+    // ⭐ THE GRAIN IS THE ADVANCE: a distinct nonce per composed year, never per tick.
+    expect(soakAdvanceEpoch({ simulationRules: lit, seed: 'w0-soak', year: 2 }))
+      .not.toBe(soakAdvanceEpoch({ simulationRules: lit, seed: 'w0-soak', year: 1 }));
+    // …and per SEED, so the divergence run C draws a genuinely different stream.
+    expect(soakAdvanceEpoch({ simulationRules: lit, seed: 'w0-soak-divergent', year: 1 }))
+      .not.toBe(soakAdvanceEpoch({ simulationRules: lit, seed: 'w0-soak', year: 1 }));
+    // ⛔ AND IT TAKES NO RUN LABEL AND NO CLOCK, which is what keeps assertion 2 (the
+    // byte-identical re-run) provable: run B replays run A's seed and MUST land on the
+    // identical value. A `generateSeed()`-style mint would red the soak's own property.
+    expect(soakAdvanceEpoch({ simulationRules: lit, seed: 's', year: 3 }))
+      .toBe(soakAdvanceEpoch({ simulationRules: lit, seed: 's', year: 3 }));
+    // THE GATE IS STRICT, exactly as `runAdvanceCampaignWorld`'s is: only `=== true` lights
+    // it, so a dark, legacy, absent or truthy-but-not-true world threads NOTHING and
+    // composes the pre-wave seed character-for-character.
+    for (const rules of [
+      { advanceEpochEnabled: false },
+      { advanceEpochEnabled: 'true' },
+      { advanceEpochEnabled: 1 },
+      {},
+      null,
+      undefined,
+    ]) {
+      expect(
+        soakAdvanceEpoch({ simulationRules: rules, seed: 's', year: 1 }),
+        `rules ${JSON.stringify(rules)} minted an epoch`,
+      ).toBe(null);
+    }
+
+    // ⛔ THE SEAM IS ONLY REAL IF THE SCRIPT THREADS IT. A pure function nobody calls is
+    // the shape the SK-4 manifest's companion row would otherwise be asserting.
+    const soakSource = readFileSync(join(ROOT, 'scripts/audit/whole-world-soak.mjs'), 'utf8');
+    expect(soakSource).toContain('soakAdvanceEpoch,');
+    // The gate is read from the LIVE campaign on every advance — the store's own shape —
+    // rather than from the fixture once.
+    expect(soakSource).toMatch(
+      /const advanceEpoch = soakAdvanceEpoch\(\{\s*simulationRules: runningCampaign\?\.worldState\?\.simulationRules,/,
+    );
+    // …threaded into the orchestrator call, which is where the kernel guard reads it,
+    expect(soakSource).toMatch(/autoResolve: true,\n\s*advanceEpoch,/);
+    // …and into the ISOLATED-WORKER payload too, or the worker-vs-direct hash arm would
+    // compare two different streams (or, before the cure, simply throw).
+    expect(soakSource).toMatch(/advanceEpoch: soakAdvanceEpoch\(\{/);
+    // ANCHORED NEGATIVE — the ten positive pins above prove `soakSource` is the real file,
+    // so this cannot go vacuous on an empty read.
+    // anchored: the soak must never mint its epoch from a clock or an rng
+    expect(soakSource).not.toContain('generateSeed(');
   });
 
   it('ARM 7 — the deep key census sees what the composite hash cannot, and the address chain is measured', () => {

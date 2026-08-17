@@ -85,8 +85,31 @@ export const TRIPWIRES = Object.freeze([
     id: 'non_finite_ledger_figure',
     class: 'deterministic',
     band: 'zero tolerance',
-    home: 'whole-world-soak.mjs `findBadNumber` — the same fail-fast scan, applied to the receipt',
-    detect: (receipt) => nonFiniteFigures(receipt).map((line) => `non-finite figure ${line}`),
+    // ⛔⛔ THE MEASUREMENT MOVED TO THE WRITER, AND THAT IS THE WHOLE ROW (ODQ §213.3
+    // member 3; RS-1 §7.4 measured the defect). `JSON.stringify` writes `null` for `NaN`
+    // and for both infinities, so a row that only re-scanned a receipt READ BACK FROM DISK
+    // could never fire on the class it names: its zero across 177 cells was a WEAK zero —
+    // not "no figure was non-finite" but "nothing was asked". The soak now censuses the
+    // receipt on the LIVE object, before serialization, and records the dotted paths as
+    // STRINGS, which survive the round trip intact.
+    home: 'whole-world-soak.mjs `findBadNumber`, taken at the WRITER on the live receipt and carried as `receipt.nonFiniteFigures`; the live re-scan is retained for the in-process caller',
+    detect: (receipt) => {
+      // The writer-side census: authoritative for any receipt parsed from disk, because it
+      // is the only evidence that survives `JSON.stringify`.
+      const recorded = Array.isArray(receipt?.nonFiniteFigures) ? receipt.nonFiniteFigures : [];
+      // ⚠ AND THE LIVE SCAN IS KEPT, NOT REPLACED. A caller that hands this row an
+      // IN-MEMORY receipt (a test, a future in-process evaluation) still holds native
+      // `NaN`s, and that path is not vacuous at all. Dropping it would trade one blind
+      // spot for another. A receipt written BEFORE the writer-side census has no recorded
+      // half, and the missing `nonFiniteFigures` key is itself the statement that this
+      // class went unmeasured for it; the row does not manufacture a finding out of that
+      // absence, because doing so would convict every archived receipt in the estate of a
+      // defect none of them can be shown to have.
+      const live = nonFiniteFigures(receipt);
+      return [...new Set([...recorded.map(String), ...live])]
+        .slice(0, 5)
+        .map((line) => `non-finite figure ${line}`);
+    },
   }),
   Object.freeze({
     id: 'population_collapse',
