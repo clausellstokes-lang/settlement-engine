@@ -9,12 +9,18 @@
  * every non-OPTIONS case injects allowAll — same idiom as verify-single-dossier.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
+const scopedEnv = installScopedTestEnv({
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+});
 
 const { handleVerifyCheckoutSession } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const SESSION_ID = 'cs_test_xyz789';
 
@@ -60,7 +66,44 @@ function makeStripe(sessionObj: any) {
   return { retrievals, stripe: stripeClient as any };
 }
 
-Deno.test('paid session belonging to the caller verifies (200, verified:true)', async () => {
+/**
+ * ⛔⛔ THE LEAK-ABSENCE PIN, AND THIS IS THE FILE THAT EARNED IT. `deno test` runs every
+ * edge suite in ONE process with ONE `Deno.env`; an unrestored module-top
+ * `Deno.env.set('CLIENT_URL', 'https://settlementforge.example')` in
+ * `operator-message-worker` (alphabetically `o…`, so ahead of this `v…`) re-pointed
+ * `cors.ts`'s FIRST allowed origin and red this file's CORS pins in the deno-tests CI job.
+ *
+ * ⭐ IT ASSERTS FOREIGN STUB **VALUES**, NEVER "THE KEY IS UNSET", and that is deliberate:
+ * a real deployment shell may legitimately export any of these names, so an unset-check
+ * would be a flake on somebody's machine. Each literal below can only be present because
+ * some OTHER suite put it there and failed to take it back, which is exactly the defect.
+ *
+ * ⚠ IT IS NOT A SUBSTITUTE FOR THE SOURCE SCAN, AND NEITHER IS A SUBSTITUTE FOR IT: the
+ * scan (scripts/edgeEnvScopeGuard.mjs, run by `npm run validate:edge`) refuses the SHAPE
+ * that causes leaks; this pin refuses the leak itself, at runtime, in the shared process
+ * where it actually happens.
+ */
+scopedEnv.test('no earlier edge suite leaked its own env stubs into this process', () => {
+  const foreignStubs: Array<[string, string, string]> = [
+    ['CLIENT_URL', 'https://settlementforge.example', 'operator-message-worker'],
+    ['EXPORT_SHARED_SECRET', 'sekrit', 'analytics-export'],
+    ['ANALYTICS_HASH_PEPPER', 'test_pepper', 'log-client-error'],
+    ['STRIPE_PRICE_SEAT_TRANSFER', 'price_transfer', 'founder-transfer'],
+  ];
+  for (const [key, poison, owner] of foreignStubs) {
+    assertEquals(
+      Deno.env.get(key) === poison,
+      false,
+      `${key} still holds ${owner}'s scoped stub (${poison}) — that suite's `
+      + 'installScopedTestEnv scope did not restore. See _shared/scopedTestEnv.ts.',
+    );
+  }
+  // NON-VACUITY: the four names above must be the ones the suites really use, or this pin
+  // watches nothing. This suite's OWN stub proves the reader works at all.
+  assertEquals(Deno.env.get('STRIPE_SECRET_KEY'), 'sk_test_dummy');
+});
+
+scopedEnv.test('paid session belonging to the caller verifies (200, verified:true)', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeReturning(session()), resolveUser: asUser('user_owner'), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: SESSION_ID }), deps);
@@ -70,7 +113,7 @@ Deno.test('paid session belonging to the caller verifies (200, verified:true)', 
   assertEquals(json.product, 'premium');
 });
 
-Deno.test('unpaid session for the caller is verified:false (200)', async () => {
+scopedEnv.test('unpaid session for the caller is verified:false (200)', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeReturning(session({ payment_status: 'unpaid' })), resolveUser: asUser('user_owner'), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: SESSION_ID }), deps);
@@ -79,7 +122,7 @@ Deno.test('unpaid session for the caller is verified:false (200)', async () => {
   assertEquals(json.verified, false);
 });
 
-Deno.test('a session owned by a DIFFERENT user is a terminal 403', async () => {
+scopedEnv.test('a session owned by a DIFFERENT user is a terminal 403', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeReturning(session()), resolveUser: asUser('someone_else'), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: SESSION_ID }), deps);
@@ -88,21 +131,21 @@ Deno.test('a session owned by a DIFFERENT user is a terminal 403', async () => {
   assertEquals(json.verified, false);
 });
 
-Deno.test('missing auth is a 401', async () => {
+scopedEnv.test('missing auth is a 401', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeReturning(session()), resolveUser: asUser(null), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: SESSION_ID }), deps);
   assertEquals(res.status, 401);
 });
 
-Deno.test('Stripe failure is a transient 503', async () => {
+scopedEnv.test('Stripe failure is a transient 503', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeThrowing, resolveUser: asUser('user_owner'), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: SESSION_ID }), deps);
   assertEquals(res.status, 503);
 });
 
-Deno.test('malformed session id is a terminal 400', async () => {
+scopedEnv.test('malformed session id is a terminal 400', async () => {
   // deno-lint-ignore no-explicit-any
   const deps: any = { stripe: stripeReturning(session()), resolveUser: asUser('user_owner'), rateLimit: allowAll };
   const res = await handleVerifyCheckoutSession(post({ sessionId: 'nope' }), deps);
@@ -114,7 +157,7 @@ Deno.test('malformed session id is a terminal 400', async () => {
 // passes nothing and gets the FAIL-CLOSED checkUserIpRate default ('vcs' prefix,
 // per-user 30/h + per-IP 90/h). Same test idiom as verify-single-dossier.
 
-Deno.test('over-limit is a 429 before Stripe is called (amplification guard)', async () => {
+scopedEnv.test('over-limit is a 429 before Stripe is called (amplification guard)', async () => {
   const stripe = makeStripe(session());
   const res = await handleVerifyCheckoutSession(
     post({ sessionId: SESSION_ID }),
@@ -126,7 +169,7 @@ Deno.test('over-limit is a 429 before Stripe is called (amplification guard)', a
   assertEquals(stripe.retrievals.length, 0);   // never hit Stripe
 });
 
-Deno.test('under-limit passes through untouched (200, verified:true, one Stripe retrieve)', async () => {
+scopedEnv.test('under-limit passes through untouched (200, verified:true, one Stripe retrieve)', async () => {
   const stripe = makeStripe(session());
   const res = await handleVerifyCheckoutSession(
     post({ sessionId: SESSION_ID }),
@@ -137,7 +180,7 @@ Deno.test('under-limit passes through untouched (200, verified:true, one Stripe 
   assertEquals(stripe.retrievals, [SESSION_ID]);
 });
 
-Deno.test('the limiter is keyed on the JWT-verified user id, never body-supplied', async () => {
+scopedEnv.test('the limiter is keyed on the JWT-verified user id, never body-supplied', async () => {
   const seen: string[] = [];
   const recordingAllow = (_req: Request, userId: string) => { seen.push(userId); return Promise.resolve(true); };
   // deno-lint-ignore no-explicit-any
@@ -146,7 +189,7 @@ Deno.test('the limiter is keyed on the JWT-verified user id, never body-supplied
   assertEquals(seen, ['user_owner']);
 });
 
-Deno.test('an unauthenticated caller is 401d WITHOUT consulting (or burning) any rate budget', async () => {
+scopedEnv.test('an unauthenticated caller is 401d WITHOUT consulting (or burning) any rate budget', async () => {
   let consulted = 0;
   const countingDeny = () => { consulted += 1; return Promise.resolve(false); };
   // deno-lint-ignore no-explicit-any
@@ -156,7 +199,7 @@ Deno.test('an unauthenticated caller is 401d WITHOUT consulting (or burning) any
   assertEquals(consulted, 0);
 });
 
-Deno.test('a malformed session id is 400d before the limiter (garbage never consumes budget)', async () => {
+scopedEnv.test('a malformed session id is 400d before the limiter (garbage never consumes budget)', async () => {
   let consulted = 0;
   const countingDeny = () => { consulted += 1; return Promise.resolve(false); };
   // deno-lint-ignore no-explicit-any
@@ -214,7 +257,7 @@ async function withNoConfiguredOrigins(body: () => Promise<void>): Promise<void>
   }
 }
 
-Deno.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the old leak)', () =>
+scopedEnv.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the old leak)', () =>
   withNoConfiguredOrigins(async () => {
     const res = await handleVerifyCheckoutSession(optionsReq(), {});
     const acao = res.headers.get('Access-Control-Allow-Origin');
@@ -222,7 +265,7 @@ Deno.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the 
     assertEquals(acao, 'https://settlementforge.com'); // pinned to the first allowed host
   }));
 
-Deno.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', () =>
+scopedEnv.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', () =>
   withNoConfiguredOrigins(async () => {
     const res = await handleVerifyCheckoutSession(optionsReq('https://evil.example.com'), {});
     const acao = res.headers.get('Access-Control-Allow-Origin');
@@ -230,7 +273,7 @@ Deno.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', ()
     assertEquals(acao, 'https://settlementforge.com');
   }));
 
-Deno.test('CORS: an ALLOWED origin is echoed with Allow-Credentials from the shared module', () =>
+scopedEnv.test('CORS: an ALLOWED origin is echoed with Allow-Credentials from the shared module', () =>
   withNoConfiguredOrigins(async () => {
     const res = await handleVerifyCheckoutSession(optionsReq('https://settlementforge.com'), {});
     assertEquals(res.headers.get('Access-Control-Allow-Origin'), 'https://settlementforge.com');

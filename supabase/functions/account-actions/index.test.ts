@@ -36,15 +36,24 @@
  * NOTE: authored without a local Deno runtime — verified in CI.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  // DECLARED ABSENCES — these keys must be UNSET for this suite. They were module-top
+  // `Deno.env.delete` calls, which leak in the opposite direction (stripping a value a later
+  // suite relies on); `null` puts them under the same scoped apply/restore as a value.
+  RESEND_API_KEY: null,
+  RESEND_FROM_EMAIL: null,
+});
 // Resend unconfigured so the create email soft-fails (never blocks the action).
-Deno.env.delete('RESEND_API_KEY');
-Deno.env.delete('RESEND_FROM_EMAIL');
 
 const { handleAccountActions } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** user-client stub: getUser() resolves the verified JWT identity. Also records
  *  any user-scoped RPC (list_my_tickets / list_ticket_thread run through it). */
@@ -107,7 +116,7 @@ function writeRpcRan(rpc: Array<{ fn: string }>): boolean {
   return rpc.some((c) => c.fn === 'create_ticket' || c.fn === 'post_ticket_reply');
 }
 
-Deno.test('a BANNED actor is rejected 403 on create_ticket and NO write RPC runs', async () => {
+scopedEnv.test('a BANNED actor is rejected 403 on create_ticket and NO write RPC runs', async () => {
   const user = makeUserClient({ id: 'banned1', email: 'b@x.com' });
   const admin = makeAdminClient(false);   // account_is_active=false
   const res = await handleAccountActions(
@@ -119,7 +128,7 @@ Deno.test('a BANNED actor is rejected 403 on create_ticket and NO write RPC runs
   assertEquals(writeRpcRan(admin.rpc), false);   // gate ran before the write
 });
 
-Deno.test('a BANNED actor is rejected 403 on reply_ticket and NO write RPC runs', async () => {
+scopedEnv.test('a BANNED actor is rejected 403 on reply_ticket and NO write RPC runs', async () => {
   const user = makeUserClient({ id: 'banned2', email: 'b@x.com' });
   const admin = makeAdminClient(false);
   const res = await handleAccountActions(
@@ -130,7 +139,7 @@ Deno.test('a BANNED actor is rejected 403 on reply_ticket and NO write RPC runs'
   assertEquals(writeRpcRan(admin.rpc), false);
 });
 
-Deno.test('a null account_is_active result FAILS CLOSED (403) — never fails open', async () => {
+scopedEnv.test('a null account_is_active result FAILS CLOSED (403) — never fails open', async () => {
   const user = makeUserClient({ id: 'unknown1', email: 'u@x.com' });
   const admin = makeAdminClient(null);   // RPC error / unexpected shape ⇒ null
   const res = await handleAccountActions(
@@ -141,7 +150,7 @@ Deno.test('a null account_is_active result FAILS CLOSED (403) — never fails op
   assertEquals(writeRpcRan(admin.rpc), false);
 });
 
-Deno.test('an ACTIVE actor is allowed through and create_ticket runs with the verified id', async () => {
+scopedEnv.test('an ACTIVE actor is allowed through and create_ticket runs with the verified id', async () => {
   const user = makeUserClient({ id: 'active1', email: 'a@x.com' });
   const admin = makeAdminClient(true);   // account_is_active=true
   const res = await handleAccountActions(
@@ -362,7 +371,7 @@ function linkageCleared(updates: Array<{ values: Record<string, unknown>; id: st
 const processReq = () =>
   req({ action: 'process_deletions' }, { Authorization: 'Bearer jwt' });
 
-Deno.test('process_deletions CANCELS a processed user\'s live subscription and clears the stored Stripe ids', async () => {
+scopedEnv.test('process_deletions CANCELS a processed user\'s live subscription and clears the stored Stripe ids', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('ok');
@@ -377,7 +386,7 @@ Deno.test('process_deletions CANCELS a processed user\'s live subscription and c
   assertEquals(linkageCleared(admin.updates, 'u1'), true); // shell keeps no billing identifier
 });
 
-Deno.test('a customer-only row (no recorded sub id) is resolved via list — nothing open ⇒ no cancel, ids cleared', async () => {
+scopedEnv.test('a customer-only row (no recorded sub id) is resolved via list — nothing open ⇒ no cancel, ids cleared', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('ok', []);   // nothing open at Stripe
@@ -391,7 +400,7 @@ Deno.test('a customer-only row (no recorded sub id) is resolved via list — not
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
-Deno.test('a legacy customer-only row WITH an open subscription at Stripe is listed, canceled and cleared', async () => {
+scopedEnv.test('a legacy customer-only row WITH an open subscription at Stripe is listed, canceled and cleared', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_legacy' }]);
   const stripe = makeStripe('ok', ['sub_legacy_1']);   // pre-087: sub id never recorded
@@ -404,7 +413,7 @@ Deno.test('a legacy customer-only row WITH an open subscription at Stripe is lis
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
-Deno.test('a DUAL-PLAN user (recorded sub + a SECOND open sub at Stripe) has BOTH canceled — the Surveyor sub is never orphaned', async () => {
+scopedEnv.test('a DUAL-PLAN user (recorded sub + a SECOND open sub at Stripe) has BOTH canceled — the Surveyor sub is never orphaned', async () => {
   // Regression pin (SB3): a recorded id no longer short-circuits the customer
   // enumeration. sub_cartographer is in profiles.stripe_subscription_id; a
   // Surveyor sub id lives only in surveyor_entitlements but is open under the
@@ -423,7 +432,7 @@ Deno.test('a DUAL-PLAN user (recorded sub + a SECOND open sub at Stripe) has BOT
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
-Deno.test('subscription enumeration follows EVERY Stripe page before canceling and clearing linkage', async () => {
+scopedEnv.test('subscription enumeration follows EVERY Stripe page before canceling and clearing linkage', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_many' }]);
   const canceled: string[] = [];
@@ -458,7 +467,7 @@ Deno.test('subscription enumeration follows EVERY Stripe page before canceling a
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
-Deno.test('a subscription already gone at Stripe (resource_missing) does not abort the deletion — idempotent, ids cleared', async () => {
+scopedEnv.test('a subscription already gone at Stripe (resource_missing) does not abort the deletion — idempotent, ids cleared', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_gone', stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('missing');
@@ -470,7 +479,7 @@ Deno.test('a subscription already gone at Stripe (resource_missing) does not abo
   assertEquals(linkageCleared(admin.updates, 'u1'), true); // nothing left to stop ⇒ still cleared
 });
 
-Deno.test('an unexpected Stripe outage reports cleanup incomplete and RETAINS ids for retry', async () => {
+scopedEnv.test('an unexpected Stripe outage reports cleanup incomplete and RETAINS ids for retry', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('outage');
@@ -485,7 +494,7 @@ Deno.test('an unexpected Stripe outage reports cleanup incomplete and RETAINS id
   assertEquals(admin.bans() > 0, true);                     // the ban still ran (deletion stands)
 });
 
-Deno.test('a cancellation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
+scopedEnv.test('a cancellation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const stripe = makeStripe('cancel_outage');
@@ -497,7 +506,7 @@ Deno.test('a cancellation failure reports cleanup incomplete and RETAINS custome
   assertEquals(linkageCleared(admin.updates, 'u1'), false);
 });
 
-Deno.test('an auth revocation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
+scopedEnv.test('an auth revocation failure reports cleanup incomplete and RETAINS customer linkage', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin(
     [{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }],
@@ -513,7 +522,7 @@ Deno.test('an auth revocation failure reports cleanup incomplete and RETAINS cus
   assertEquals(linkageCleared(admin.updates, 'u1'), false); // retained as retry marker
 });
 
-Deno.test('a processed request/user lookup error is not discarded or reported as success', async () => {
+scopedEnv.test('a processed request/user lookup error is not discarded or reported as success', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([], { processedLookupError: true });
   const res = await handleAccountActions(processReq(), {
@@ -523,7 +532,7 @@ Deno.test('a processed request/user lookup error is not discarded or reported as
   assertEquals((await res.json()).success, false);
 });
 
-Deno.test('a deleted billing lookup error is not discarded or reported as success', async () => {
+scopedEnv.test('a deleted billing lookup error is not discarded or reported as success', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([], { billingLookupError: true });
   const res = await handleAccountActions(processReq(), {
@@ -533,7 +542,7 @@ Deno.test('a deleted billing lookup error is not discarded or reported as succes
   assertEquals((await res.json()).success, false);
 });
 
-Deno.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — cleanup is incomplete and ids retained', async () => {
+scopedEnv.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — cleanup is incomplete and ids retained', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
   const res = await handleAccountActions(processReq(), {
@@ -546,7 +555,7 @@ Deno.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — cleanup is 
   assertEquals(linkageCleared(admin.updates, 'u1'), false);
 });
 
-Deno.test('a read-only action (list_my_tickets) is NOT gated — reachable while inactive', async () => {
+scopedEnv.test('a read-only action (list_my_tickets) is NOT gated — reachable while inactive', async () => {
   const user = makeUserClient({ id: 'inactive_reader', email: 'r@x.com' });
   const admin = makeAdminClient(false);   // even though inactive…
   const res = await handleAccountActions(
@@ -610,7 +619,7 @@ function makeClaimAdminClient(cfg: {
 
 const TOKEN = 'tok_' + 'q'.repeat(40);   // 24..128 chars
 
-Deno.test('claim_dossier_purchase happy path: verifies the token then claims (no Stripe call)', async () => {
+scopedEnv.test('claim_dossier_purchase happy path: verifies the token then claims (no Stripe call)', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({
     purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
@@ -628,7 +637,7 @@ Deno.test('claim_dossier_purchase happy path: verifies the token then claims (no
   assertEquals((claim!.args as Record<string, unknown>).p_save_id, 'save_1');
 });
 
-Deno.test('claim_dossier_purchase rejects a WRONG token (403) and never calls the claim RPC', async () => {
+scopedEnv.test('claim_dossier_purchase rejects a WRONG token (403) and never calls the claim RPC', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({
     // The stored hash is for the REAL token; the caller presents a different one.
@@ -643,7 +652,7 @@ Deno.test('claim_dossier_purchase rejects a WRONG token (403) and never calls th
   assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);  // no claim on a bad token
 });
 
-Deno.test('claim_dossier_purchase rejects an UNKNOWN session (403), no claim RPC', async () => {
+scopedEnv.test('claim_dossier_purchase rejects an UNKNOWN session (403), no claim RPC', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({ purchase: null });   // no such purchase row
   const res = await handleAccountActions(
@@ -654,7 +663,7 @@ Deno.test('claim_dossier_purchase rejects an UNKNOWN session (403), no claim RPC
   assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
 });
 
-Deno.test('claim_dossier_purchase rejects an ALREADY-CLAIMED purchase (403), no claim RPC', async () => {
+scopedEnv.test('claim_dossier_purchase rejects an ALREADY-CLAIMED purchase (403), no claim RPC', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({
     purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'claimed' },  // terminal
@@ -668,7 +677,7 @@ Deno.test('claim_dossier_purchase rejects an ALREADY-CLAIMED purchase (403), no 
   assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
 });
 
-Deno.test('claim_dossier_purchase requires sessionId, a valid token, and saveId (400s)', async () => {
+scopedEnv.test('claim_dossier_purchase requires sessionId, a valid token, and saveId (400s)', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({ purchase: null });
   // Missing sessionId.
@@ -692,7 +701,7 @@ Deno.test('claim_dossier_purchase requires sessionId, a valid token, and saveId 
   assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
 });
 
-Deno.test('claim_dossier_purchase over the rate limit is rejected (429), no verify/claim', async () => {
+scopedEnv.test('claim_dossier_purchase over the rate limit is rejected (429), no verify/claim', async () => {
   const user = makeUserClient({ id: 'spammer', email: 's@x.com' });
   const admin = makeClaimAdminClient({
     purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
@@ -706,7 +715,7 @@ Deno.test('claim_dossier_purchase over the rate limit is rejected (429), no veri
   assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);  // no claim past the limiter
 });
 
-Deno.test('claim_dossier_purchase surfaces a save_not_found business rejection (400)', async () => {
+scopedEnv.test('claim_dossier_purchase surfaces a save_not_found business rejection (400)', async () => {
   const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
   const admin = makeClaimAdminClient({
     purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },

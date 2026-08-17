@@ -15,11 +15,54 @@
  * (production passes nothing).
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('CLIENT_URL', 'https://settlementforge.com');
+/**
+ * ⛔⛔ THE IMPORT-WINDOW LEAK PIN, AND IT HAS TO LIVE AT MODULE SCOPE — nowhere else can
+ * see the window it guards.
+ *
+ * `deno test` runs every edge suite in ONE process with ONE `Deno.env`. Each suite applies
+ * its stubs, imports its handler, and `release()`s. The moment `release()` stops happening,
+ * that suite's stubs are ambient during EVERY LATER SUITE'S IMPORT — and edge modules read
+ * configuration at module scope (`founder-transfer/index.ts:31` is
+ * `const CLIENT_URL = Deno.env.get('CLIENT_URL') || …`), so a later handler is constructed
+ * against a stranger's value and nothing in any test body can tell.
+ *
+ * ⭐ THIS FILE IS ALPHABETICALLY LAST, so its import window is downstream of every other
+ * suite's release. A module-scope throw fails the whole suite, which is the point: this is
+ * not a test that can be skipped, it is a load condition.
+ *
+ * ⚠ FOREIGN STUB **VALUES**, never "the key is unset" — a real shell may legitimately
+ * export any of these names, and an unset-check would flake on somebody's machine. Each
+ * literal can only be present because another suite put it there and did not take it back.
+ */
+for (
+  const [key, poison, owner] of [
+    ['CLIENT_URL', 'https://settlementforge.example', 'operator-message-worker'],
+    ['EXPORT_SHARED_SECRET', 'sekrit', 'analytics-export'],
+    ['ANALYTICS_HASH_PEPPER', 'test_pepper', 'log-client-error'],
+    ['STRIPE_PRICE_SEAT_TRANSFER', 'price_transfer', 'founder-transfer'],
+    ['STRIPE_WEBHOOK_SECRET', 'whsec_test_secret_for_unit_tests', 'stripe-webhook'],
+  ] as Array<[string, string, string]>
+) {
+  if (Deno.env.get(key) === poison) {
+    throw new Error(
+      `[scopedTestEnv] ${key} still holds ${owner}'s stub (${poison}) at this suite's IMPORT `
+      + 'time. That suite did not release its scope, so every later handler is constructed '
+      + 'against a stranger\'s configuration. See supabase/functions/_shared/scopedTestEnv.ts.',
+    );
+  }
+}
+
+const scopedEnv = installScopedTestEnv({
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  CLIENT_URL: 'https://settlementforge.com',
+});
 
 const { handleVerifyDossier, withinBackstop, _resetBackstopsForTest } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const VALID_SESSION = 'cs_test_' + 'a'.repeat(40);
 const VALID_TOKEN = 't'.repeat(40);  // 24..128 chars
@@ -80,7 +123,7 @@ const req = (body: unknown) =>
 const allowAll = () => Promise.resolve(true);
 const denyAll = () => Promise.resolve(false);
 
-Deno.test('a malformed session id is rejected (400) before Stripe is called', async () => {
+scopedEnv.test('a malformed session id is rejected (400) before Stripe is called', async () => {
   const stripe = makeStripe(paidSession());
   const res = await handleVerifyDossier(
     req({ sessionId: 'not_a_session', checkoutToken: VALID_TOKEN }),
@@ -90,7 +133,7 @@ Deno.test('a malformed session id is rejected (400) before Stripe is called', as
   assertEquals(stripe.retrievals.length, 0);   // never hit Stripe
 });
 
-Deno.test('an over-length session id is rejected (400) before Stripe is called', async () => {
+scopedEnv.test('an over-length session id is rejected (400) before Stripe is called', async () => {
   const stripe = makeStripe(paidSession());
   const res = await handleVerifyDossier(
     req({ sessionId: 'cs_test_' + 'a'.repeat(300), checkoutToken: VALID_TOKEN }),
@@ -100,7 +143,7 @@ Deno.test('an over-length session id is rejected (400) before Stripe is called',
   assertEquals(stripe.retrievals.length, 0);
 });
 
-Deno.test('a too-short checkout token is rejected (400) before Stripe is called', async () => {
+scopedEnv.test('a too-short checkout token is rejected (400) before Stripe is called', async () => {
   const stripe = makeStripe(paidSession());
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: 'short' }),
@@ -110,7 +153,7 @@ Deno.test('a too-short checkout token is rejected (400) before Stripe is called'
   assertEquals(stripe.retrievals.length, 0);
 });
 
-Deno.test('the over-limit path returns 429 before Stripe is called (amplification guard)', async () => {
+scopedEnv.test('the over-limit path returns 429 before Stripe is called (amplification guard)', async () => {
   const stripe = makeStripe(paidSession());
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
@@ -120,7 +163,7 @@ Deno.test('the over-limit path returns 429 before Stripe is called (amplificatio
   assertEquals(stripe.retrievals.length, 0);
 });
 
-Deno.test('a complete, paid single_dossier session verifies, returns the stashed settlement, and stamps the claim', async () => {
+scopedEnv.test('a complete, paid single_dossier session verifies, returns the stashed settlement, and stamps the claim', async () => {
   const stripe = makeStripe(paidSession());
   const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
   const res = await handleVerifyDossier(
@@ -138,7 +181,7 @@ Deno.test('a complete, paid single_dossier session verifies, returns the stashed
   assertEquals(admin.updates[0].token, VALID_TOKEN);
 });
 
-Deno.test('a verified session with a MISSING stash row falls back to settlement:null (no claim stamp)', async () => {
+scopedEnv.test('a verified session with a MISSING stash row falls back to settlement:null (no claim stamp)', async () => {
   const stripe = makeStripe(paidSession());
   const admin = makeAdmin(null);   // no dossier_purchases row for this token
   const res = await handleVerifyDossier(
@@ -152,7 +195,7 @@ Deno.test('a verified session with a MISSING stash row falls back to settlement:
   assertEquals(admin.updates.length, 0); // nothing to claim
 });
 
-Deno.test('a token MISMATCH is not verified (403) even for a paid session', async () => {
+scopedEnv.test('a token MISMATCH is not verified (403) even for a paid session', async () => {
   const stripe = makeStripe(paidSession({ metadata: { product: 'single_dossier', checkout_token: 'a-different-token-aaaaaaaaaaa' } }));
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
@@ -163,7 +206,7 @@ Deno.test('a token MISMATCH is not verified (403) even for a paid session', asyn
   assertEquals(body.verified, false);
 });
 
-Deno.test('an unpaid session is not verified (403)', async () => {
+scopedEnv.test('an unpaid session is not verified (403)', async () => {
   const stripe = makeStripe(paidSession({ payment_status: 'unpaid' }));
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
@@ -172,7 +215,7 @@ Deno.test('an unpaid session is not verified (403)', async () => {
   assertEquals(res.status, 403);
 });
 
-Deno.test('the wrong product (not single_dossier) is not verified (403)', async () => {
+scopedEnv.test('the wrong product (not single_dossier) is not verified (403)', async () => {
   const stripe = makeStripe(paidSession({ metadata: { product: 'credits_25', checkout_token: VALID_TOKEN } }));
   const res = await handleVerifyDossier(
     req({ sessionId: VALID_SESSION, checkoutToken: VALID_TOKEN }),
@@ -187,7 +230,7 @@ Deno.test('the wrong product (not single_dossier) is not verified (403)', async 
 // production when the DB RPC can't give a verdict; its job is to bound Stripe
 // amplification WITHOUT being defeated by x-forwarded-for spoofing.
 
-Deno.test('backstop: a single honest IP is throttled after its per-IP cap', () => {
+scopedEnv.test('backstop: a single honest IP is throttled after its per-IP cap', () => {
   _resetBackstopsForTest();
   const ip = '203.0.113.7';
   let allowed = 0;
@@ -196,7 +239,7 @@ Deno.test('backstop: a single honest IP is throttled after its per-IP cap', () =
   assertEquals(allowed, 30);
 });
 
-Deno.test('backstop: x-forwarded-for rotation cannot bypass the global ceiling', () => {
+scopedEnv.test('backstop: x-forwarded-for rotation cannot bypass the global ceiling', () => {
   _resetBackstopsForTest();
   // Attacker rotates a fresh spoofed IP every request. Each fresh IP would pass
   // its own per-IP bucket, so WITHOUT the global ceiling this would be unbounded.
@@ -208,7 +251,7 @@ Deno.test('backstop: x-forwarded-for rotation cannot bypass the global ceiling',
   assertEquals(allowed, 120);  // BACKSTOP_MAX_GLOBAL — rotation is defeated
 });
 
-Deno.test('backstop: an over-limit IP does not consume global budget', () => {
+scopedEnv.test('backstop: an over-limit IP does not consume global budget', () => {
   _resetBackstopsForTest();
   // One IP hammers past its per-IP cap (30). The over-limit attempts must NOT
   // count against the global ceiling, so other IPs still get their fair share.
@@ -235,7 +278,7 @@ function stubFetch(success: boolean): () => void {
   return () => { globalThis.fetch = original; };
 }
 
-Deno.test('INERT: a captchaToken in the body does not change verification while unconfigured', async () => {
+scopedEnv.test('INERT: a captchaToken in the body does not change verification while unconfigured', async () => {
   Deno.env.delete('TURNSTILE_SECRET_KEY');
   const stripe = makeStripe(paidSession());
   const admin = makeAdmin({ settlement: { name: 'Riverbend', tier: 'village' } });
@@ -247,7 +290,7 @@ Deno.test('INERT: a captchaToken in the body does not change verification while 
   assertEquals((await res.json()).verified, true);
 });
 
-Deno.test('ACTIVE + NO token still verifies (200): a paid buyer is NEVER blocked on a missing token', async () => {
+scopedEnv.test('ACTIVE + NO token still verifies (200): a paid buyer is NEVER blocked on a missing token', async () => {
   Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
   try {
     const stripe = makeStripe(paidSession());
@@ -263,7 +306,7 @@ Deno.test('ACTIVE + NO token still verifies (200): a paid buyer is NEVER blocked
   }
 });
 
-Deno.test('ACTIVE + a PRESENT VALID token verifies (200)', async () => {
+scopedEnv.test('ACTIVE + a PRESENT VALID token verifies (200)', async () => {
   Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
   const restore = stubFetch(true);
   try {
@@ -281,7 +324,7 @@ Deno.test('ACTIVE + a PRESENT VALID token verifies (200)', async () => {
   }
 });
 
-Deno.test('ACTIVE + a PRESENT INVALID token is rejected (403) before Stripe', async () => {
+scopedEnv.test('ACTIVE + a PRESENT INVALID token is rejected (403) before Stripe', async () => {
   Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
   const restore = stubFetch(false);
   try {

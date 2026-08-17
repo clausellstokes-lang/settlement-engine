@@ -19,11 +19,17 @@
  * because we always inject adminClient, but the module reads no env at load time).
  */
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { installScopedTestEnv } from "../_shared/scopedTestEnv.ts";
 
-Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
-Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service_role_dummy");
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: "https://stub.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: "service_role_dummy",
+});
 
 const { handlePricingResyncCron } = await import("./index.ts");
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const SECRET = "correct-horse-battery-staple";
 
@@ -73,7 +79,7 @@ const okFetch = (_url: string) => Promise.resolve("no prices here");
 const req = (method: string, headers: Record<string, string> = {}) =>
   new Request("https://edge/pricing-resync-cron", { method, headers });
 
-Deno.test("GET is rejected 405", async () => {
+scopedEnv.test("GET is rejected 405", async () => {
   const res = await handlePricingResyncCron(req("GET", { "x-cron-secret": SECRET }), {
     envSecret: () => SECRET,
     adminClient: () => makeAdminClient({ enabled: true }).client,
@@ -82,7 +88,7 @@ Deno.test("GET is rejected 405", async () => {
   assertEquals(res.status, 405);
 });
 
-Deno.test("503 when the env secret is unset (fail closed)", async () => {
+scopedEnv.test("503 when the env secret is unset (fail closed)", async () => {
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": "anything" }), {
     envSecret: () => undefined,
     adminClient: () => makeAdminClient({ enabled: true }).client,
@@ -93,7 +99,7 @@ Deno.test("503 when the env secret is unset (fail closed)", async () => {
   assertEquals(body.error, "cron secret not configured");
 });
 
-Deno.test("403 on a wrong x-cron-secret", async () => {
+scopedEnv.test("403 on a wrong x-cron-secret", async () => {
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": "wrong" }), {
     envSecret: () => SECRET,
     adminClient: () => makeAdminClient({ enabled: true }).client,
@@ -102,7 +108,7 @@ Deno.test("403 on a wrong x-cron-secret", async () => {
   assertEquals(res.status, 403);
 });
 
-Deno.test("403 when the x-cron-secret header is absent", async () => {
+scopedEnv.test("403 when the x-cron-secret header is absent", async () => {
   const res = await handlePricingResyncCron(req("POST"), {
     envSecret: () => SECRET,
     adminClient: () => makeAdminClient({ enabled: true }).client,
@@ -111,7 +117,7 @@ Deno.test("403 when the x-cron-secret header is absent", async () => {
   assertEquals(res.status, 403);
 });
 
-Deno.test("200 { skipped: disabled } when the config kill switch is off", async () => {
+scopedEnv.test("200 { skipped: disabled } when the config kill switch is off", async () => {
   const stub = makeAdminClient({ enabled: false });
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": SECRET }), {
     envSecret: () => SECRET,
@@ -126,7 +132,7 @@ Deno.test("200 { skipped: disabled } when the config kill switch is off", async 
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test("503 { config_unavailable } when the cron config read fails (fail closed)", async () => {
+scopedEnv.test("503 { config_unavailable } when the cron config read fails (fail closed)", async () => {
   const stub = makeAdminClient({ enabled: true, applyCreditCosts: false }, { cronReadError: true });
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": SECRET }), {
     envSecret: () => SECRET,
@@ -142,7 +148,7 @@ Deno.test("503 { config_unavailable } when the cron config read fails (fail clos
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test("happy path: runs the pipeline, upserts last_run, audits with actor null", async () => {
+scopedEnv.test("happy path: runs the pipeline, upserts last_run, audits with actor null", async () => {
   const stub = makeAdminClient({ enabled: true, applyCreditCosts: true });
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": SECRET }), {
     envSecret: () => SECRET,
@@ -178,7 +184,7 @@ Deno.test("happy path: runs the pipeline, upserts last_run, audits with actor nu
   assertEquals(keys.includes("ai_credit_costs"), true);
 });
 
-Deno.test("applyCreditCosts:false leaves ai_credit_costs UNWRITTEN (price book only)", async () => {
+scopedEnv.test("applyCreditCosts:false leaves ai_credit_costs UNWRITTEN (price book only)", async () => {
   const stub = makeAdminClient({ enabled: true, applyCreditCosts: false });
   const res = await handlePricingResyncCron(req("POST", { "x-cron-secret": SECRET }), {
     envSecret: () => SECRET,

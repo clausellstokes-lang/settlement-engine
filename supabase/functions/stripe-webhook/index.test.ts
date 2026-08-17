@@ -15,19 +15,25 @@
  * proof; the signed cases use a SubtleCrypto HMAC signer matching Stripe's v1 scheme.
  */
 import { assertEquals, assertRejects } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
 const SECRET = 'whsec_test_secret_for_unit_tests';
 const AUTO_RELOAD_ATTEMPT_ID = '11111111-1111-4111-8111-111111111111';
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('STRIPE_WEBHOOK_SECRET', SECRET);
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-// Resend config so the referral tests exercise the notification step through
-// the injected dispatch seam (no real network — dispatch is always stubbed).
-Deno.env.set('RESEND_API_KEY', 're_test_dummy');
-Deno.env.set('RESEND_FROM_EMAIL', 'SettlementForge <hello@test.invalid>');
+const scopedEnv = installScopedTestEnv({
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  STRIPE_WEBHOOK_SECRET: SECRET,
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  // Resend config so the referral tests exercise the notification step through
+  // the injected dispatch seam (no real network — dispatch is always stubbed).
+  RESEND_API_KEY: 're_test_dummy',
+  RESEND_FROM_EMAIL: 'SettlementForge <hello@test.invalid>',
+});
 
 const { handleStripeWebhook, classifyChargeReversal } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** processed_webhook_events stub, shared by every admin-client stub below.
  *  The handler claims each event id here (INSERT, PK = event_id) before running
@@ -305,7 +311,7 @@ const checkoutEvent = (metadata: Record<string, string>, extra: Record<string, u
     data: { object: { id: 'cs_1', metadata, ...extra } },
   });
 
-Deno.test('rejects a request with NO signature (400) before any DB write', async () => {
+scopedEnv.test('rejects a request with NO signature (400) before any DB write', async () => {
   const stub = makeStub();
   const res = await handleStripeWebhook(req(checkoutEvent({ supabase_user_id: 'u1', product: 'premium' })), stub);
   assertEquals(res.status, 400);
@@ -315,7 +321,7 @@ Deno.test('rejects a request with NO signature (400) before any DB write', async
   assertEquals(stub.claims.inserts.length, 0);   // no event claim before verification
 });
 
-Deno.test('rejects a request with a BAD signature (400) before any DB write', async () => {
+scopedEnv.test('rejects a request with a BAD signature (400) before any DB write', async () => {
   const stub = makeStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': 't=1,v1=deadbeef' }), stub);
@@ -326,7 +332,7 @@ Deno.test('rejects a request with a BAD signature (400) before any DB write', as
   assertEquals(stub.claims.inserts.length, 0);   // a forgery cannot squat on an event id
 });
 
-Deno.test('a correctly-signed premium checkout upgrades the user', async () => {
+scopedEnv.test('a correctly-signed premium checkout upgrades the user', async () => {
   const stub = makeStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -335,7 +341,7 @@ Deno.test('a correctly-signed premium checkout upgrades the user', async () => {
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), true);
 });
 
-Deno.test('credit grant trusts ONLY session.metadata.credits, not smuggled body fields', async () => {
+scopedEnv.test('credit grant trusts ONLY session.metadata.credits, not smuggled body fields', async () => {
   const stub = makeStub();
   // metadata.credits=10 is the trusted field; a top-level body credits=99999 is noise.
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '10' }, { credits: 99999 });
@@ -351,7 +357,7 @@ Deno.test('credit grant trusts ONLY session.metadata.credits, not smuggled body 
 // checkout.session.completed with payment_status='unpaid' BEFORE the money
 // settles — fulfillment must wait for checkout.session.async_payment_succeeded.
 
-Deno.test('an UNPAID checkout.session.completed does NOT fulfil (no grant, no upgrade)', async () => {
+scopedEnv.test('an UNPAID checkout.session.completed does NOT fulfil (no grant, no upgrade)', async () => {
   const stub = makeStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' }, { payment_status: 'unpaid' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -366,7 +372,7 @@ Deno.test('an UNPAID checkout.session.completed does NOT fulfil (no grant, no up
   assertEquals(stub.calls.profileUpdates.length, 0);
 });
 
-Deno.test('an UNPAID premium checkout does NOT upgrade the user', async () => {
+scopedEnv.test('an UNPAID premium checkout does NOT upgrade the user', async () => {
   const stub = makeStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { payment_status: 'unpaid' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -375,7 +381,7 @@ Deno.test('an UNPAID premium checkout does NOT upgrade the user', async () => {
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
 });
 
-Deno.test('checkout.session.async_payment_succeeded fulfils once the async payment settles', async () => {
+scopedEnv.test('checkout.session.async_payment_succeeded fulfils once the async payment settles', async () => {
   const stub = makeStub();
   const body = JSON.stringify({
     id: 'evt_async_1', type: 'checkout.session.async_payment_succeeded',
@@ -388,7 +394,7 @@ Deno.test('checkout.session.async_payment_succeeded fulfils once the async payme
   assertEquals((grant!.args as { amount: number }).amount, 60);
 });
 
-Deno.test('checkout.session.async_payment_failed releases reserved checkout state without fulfilment', async () => {
+scopedEnv.test('checkout.session.async_payment_failed releases reserved checkout state without fulfilment', async () => {
   const stub = makeStub('track', {
     rpcData: {
       revert_redemption: { ok: true, redemption_id: 'red_async' },
@@ -421,7 +427,7 @@ Deno.test('checkout.session.async_payment_failed releases reserved checkout stat
   assertEquals(stub.moneyEvents.length, 0);
 });
 
-Deno.test('checkout.session.async_payment_failed DB errors release the event claim for retry', async () => {
+scopedEnv.test('checkout.session.async_payment_failed DB errors release the event claim for retry', async () => {
   const stub = makeStub('track', {
     rpcErrors: { transfer_case_regress_awaiting_payment: { message: 'transient regression failure' } },
   });
@@ -440,7 +446,7 @@ Deno.test('checkout.session.async_payment_failed DB errors release the event cla
   assertEquals(stub.claims.releases, ['evt_async_failed_retry']);
 });
 
-Deno.test('a PAID checkout.session.completed still fulfils (guard only blocks unpaid)', async () => {
+scopedEnv.test('a PAID checkout.session.completed still fulfils (guard only blocks unpaid)', async () => {
   const stub = makeStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { payment_status: 'paid' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -504,7 +510,7 @@ const invoiceEvent = (type: string, invoiceId: string, billingReason = 'subscrip
     data: { object: { id: invoiceId, customer: 'cus_sub', customer_email: 'sub@x.com', billing_reason: billingReason, period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
   });
 
-Deno.test('a signed invoice.paid grants exactly 30 monthly credits with a computed expiry', async () => {
+scopedEnv.test('a signed invoice.paid grants exactly 30 monthly credits with a computed expiry', async () => {
   const stub = makeInvoiceStub();
   const body = invoiceEvent('invoice.paid', 'in_1');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -517,7 +523,7 @@ Deno.test('a signed invoice.paid grants exactly 30 monthly credits with a comput
   assertEquals(typeof args.expires_at, 'string');   // expiry derived from the period end
 });
 
-Deno.test('a NON-subscription invoice (billing_reason=manual) does NOT grant the monthly allowance', async () => {
+scopedEnv.test('a NON-subscription invoice (billing_reason=manual) does NOT grant the monthly allowance', async () => {
   const stub = makeInvoiceStub();
   const body = invoiceEvent('invoice.paid', 'in_manual', 'manual');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -526,7 +532,7 @@ Deno.test('a NON-subscription invoice (billing_reason=manual) does NOT grant the
   assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), false);
 });
 
-Deno.test('a replayed invoice.paid under a new event id does NOT double-grant', async () => {
+scopedEnv.test('a replayed invoice.paid under a new event id does NOT double-grant', async () => {
   // Dashboard resend can wrap the same invoice in a new event id, bypassing the
   // outer event lease. The inner invoice ledger key remains authoritative.
   const stub = makeInvoiceStub();
@@ -541,7 +547,7 @@ Deno.test('a replayed invoice.paid under a new event id does NOT double-grant', 
   assertEquals(grants.length, 1);   // the second delivery is a no-op
 });
 
-Deno.test('invoice.paid + invoice.payment_succeeded for the SAME invoice grant only once', async () => {
+scopedEnv.test('invoice.paid + invoice.payment_succeeded for the SAME invoice grant only once', async () => {
   const stub = makeInvoiceStub();
   const paid = invoiceEvent('invoice.paid', 'in_double_fire');
   const succeeded = invoiceEvent('invoice.payment_succeeded', 'in_double_fire');
@@ -597,7 +603,7 @@ function makeCheckoutStub(claimMode: 'track' | 'absent' = 'track') {
   return { rpc, granted, claims, adminClient: () => client };
 }
 
-Deno.test('a signed credit-pack checkout grants the metadata credits exactly once', async () => {
+scopedEnv.test('a signed credit-pack checkout grants the metadata credits exactly once', async () => {
   const stub = makeCheckoutStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -608,7 +614,7 @@ Deno.test('a signed credit-pack checkout grants the metadata credits exactly onc
   assertEquals((grants[0].args as { source: string }).source, 'purchase');
 });
 
-Deno.test('a replayed credit-pack session under a new event id does NOT double-grant', async () => {
+scopedEnv.test('a replayed credit-pack session under a new event id does NOT double-grant', async () => {
   const stub = makeCheckoutStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
   const resend = body.replace('"id":"evt_1"', '"id":"evt_2"');
@@ -625,7 +631,7 @@ Deno.test('a replayed credit-pack session under a new event id does NOT double-g
 // lease reads 409, stale work is reclaimable, and failures release the lease.
 // The legacy insert path exists only for a rolling deploy before migration 181.
 
-Deno.test('a replayed EVENT id runs handlers exactly once and reads [duplicate]', async () => {
+scopedEnv.test('a replayed EVENT id runs handlers exactly once and reads [duplicate]', async () => {
   const stub = makeCheckoutStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
   const first = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -638,7 +644,7 @@ Deno.test('a replayed EVENT id runs handlers exactly once and reads [duplicate]'
   assertEquals(stub.rpc.filter((c) => c.fn === 'system_grant_credits').length, 1);  // handler ran ONCE
 });
 
-Deno.test('the event claim is TYPE-AGNOSTIC: even an unhandled event type is claimed and deduped', async () => {
+scopedEnv.test('the event claim is TYPE-AGNOSTIC: even an unhandled event type is claimed and deduped', async () => {
   const stub = makeStub();
   const body = JSON.stringify({ id: 'evt_unhandled_1', type: 'charge.refund.updated', data: { object: {} } });
   const first = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -648,7 +654,7 @@ Deno.test('the event claim is TYPE-AGNOSTIC: even an unhandled event type is cla
   assertEquals(stub.claims.claimed.has('evt_unhandled_1'), true);         // claim persists (success path)
 });
 
-Deno.test('a missing event-claim table fails closed before fulfillment', async () => {
+scopedEnv.test('a missing event-claim table fails closed before fulfillment', async () => {
   const stub = makeCheckoutStub('absent');                                // table not migrated yet
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
   let threw = false;
@@ -664,7 +670,7 @@ Deno.test('a missing event-claim table fails closed before fulfillment', async (
   assertEquals(stub.rpc.filter((c) => c.fn === 'system_grant_credits').length, 0);
 });
 
-Deno.test('a handler failure RELEASES the event claim so a redelivery re-runs (retry-safe)', async () => {
+scopedEnv.test('a handler failure RELEASES the event claim so a redelivery re-runs (retry-safe)', async () => {
   // system_grant_credits fails once (transient), then succeeds — the classic
   // case the file-wide "throw → non-2xx → Stripe redelivers" design exists for.
   // The event claim must not convert that redelivery into a dropped grant.
@@ -740,7 +746,7 @@ function makeStripeStatusStub(status: string) {
   };
 }
 
-Deno.test('a late premium checkout for an ALREADY-CANCELED subscription does NOT upgrade', async () => {
+scopedEnv.test('a late premium checkout for an ALREADY-CANCELED subscription does NOT upgrade', async () => {
   const stub = makeStub();
   const stripeStub = makeStripeStatusStub('canceled');
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { subscription: 'sub_dead' });
@@ -755,7 +761,7 @@ Deno.test('a late premium checkout for an ALREADY-CANCELED subscription does NOT
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
 });
 
-Deno.test('a premium checkout for a LIVE subscription upgrades and records the sub id', async () => {
+scopedEnv.test('a premium checkout for a LIVE subscription upgrades and records the sub id', async () => {
   const stub = makeStub();
   const stripeStub = makeStripeStatusStub('active');
   const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { subscription: 'sub_live' });
@@ -811,7 +817,7 @@ const subscriptionDeletedEvent = (subId: string) =>
     data: { object: { id: subId, customer: 'cus_sub' } },
   });
 
-Deno.test('a STALE subscription.deleted (old sub) does NOT downgrade a re-subscribed user', async () => {
+scopedEnv.test('a STALE subscription.deleted (old sub) does NOT downgrade a re-subscribed user', async () => {
   const stub = makeSubDeletedStub('sub_NEW');            // user's CURRENT subscription
   const body = subscriptionDeletedEvent('sub_OLD');      // redelivered delete of the OLD one
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -819,7 +825,7 @@ Deno.test('a STALE subscription.deleted (old sub) does NOT downgrade a re-subscr
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // NOT downgraded
 });
 
-Deno.test('a MATCHING subscription.deleted downgrades and clears the recorded subscription', async () => {
+scopedEnv.test('a MATCHING subscription.deleted downgrades and clears the recorded subscription', async () => {
   const stub = makeSubDeletedStub('sub_X');
   const body = subscriptionDeletedEvent('sub_X');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -828,7 +834,7 @@ Deno.test('a MATCHING subscription.deleted downgrades and clears the recorded su
   assertEquals(stub.profileUpdates.some((u) => u.stripe_subscription_id === null), true);  // cleared
 });
 
-Deno.test('a legacy premium user with NO recorded subscription still downgrades on delete (fallback)', async () => {
+scopedEnv.test('a legacy premium user with NO recorded subscription still downgrades on delete (fallback)', async () => {
   const stub = makeSubDeletedStub(null);                 // pre-column premium user
   const body = subscriptionDeletedEvent('sub_legacy');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -836,7 +842,7 @@ Deno.test('a legacy premium user with NO recorded subscription still downgrades 
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);   // fallback downgrade
 });
 
-Deno.test('a REDELIVERED delete on an already-free user is a no-op (no retention re-stamp)', async () => {
+scopedEnv.test('a REDELIVERED delete on an already-free user is a no-op (no retention re-stamp)', async () => {
   const stub = makeSubDeletedStub(null, 'free');         // already downgraded
   const body = subscriptionDeletedEvent('sub_old');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -889,7 +895,7 @@ const subUpdatedEvent = (subId: string, opts: { customer?: string; pause?: unkno
     data: { object: { id: subId, customer: opts.customer ?? 'cus_pause', pause_collection: opts.pause ?? null, status: opts.status ?? 'active' } },
   });
 
-Deno.test('a PAUSED Cartographer subscription downgrades the user to free (no silent premium retention)', async () => {
+scopedEnv.test('a PAUSED Cartographer subscription downgrades the user to free (no silent premium retention)', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
   const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -898,7 +904,7 @@ Deno.test('a PAUSED Cartographer subscription downgrades the user to free (no si
   assertEquals(stub.authUpdates.some((a) => JSON.stringify(a) === JSON.stringify({ user_metadata: { tier: 'free' } })), true);
 });
 
-Deno.test('a RESUMED subscription restores premium for a previously-paused (non-premium) user', async () => {
+scopedEnv.test('a RESUMED subscription restores premium for a previously-paused (non-premium) user', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
   const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -908,7 +914,7 @@ Deno.test('a RESUMED subscription restores premium for a previously-paused (non-
   assertEquals(stub.profileUpdates.some((u) => u.tier === 'premium' && u.premium_downgraded_at === null), true);
 });
 
-Deno.test('a paused SURVEYOR subscription never touches Cartographer premium', async () => {
+scopedEnv.test('a paused SURVEYOR subscription never touches Cartographer premium', async () => {
   const stub = makePauseStub({ isSurveyor: true, profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
   const body = subUpdatedEvent('sub_surv', { pause: { behavior: 'void' } });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -916,21 +922,21 @@ Deno.test('a paused SURVEYOR subscription never touches Cartographer premium', a
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
 });
 
-Deno.test('a paused subscription for a FOUNDER never downgrades (premium is lifetime)', async () => {
+scopedEnv.test('a paused subscription for a FOUNDER never downgrades (premium is lifetime)', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: true, stripe_subscription_id: 'sub_x', tier: 'premium' } });
   const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
 });
 
-Deno.test('a pause on a STALE (non-current) subscription id does not downgrade', async () => {
+scopedEnv.test('a pause on a STALE (non-current) subscription id does not downgrade', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_NEW', tier: 'premium' } });
   const body = subUpdatedEvent('sub_OLD', { pause: { behavior: 'void' } });
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
 });
 
-Deno.test('a routine active .updated on an already-premium user is a no-op (no tier thrash)', async () => {
+scopedEnv.test('a routine active .updated on an already-premium user is a no-op (no tier thrash)', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
   const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -938,7 +944,7 @@ Deno.test('a routine active .updated on an already-premium user is a no-op (no t
   assertEquals(stub.authUpdates.length, 0);
 });
 
-Deno.test('a pause on an already-non-premium user is a no-op (idempotent)', async () => {
+scopedEnv.test('a pause on an already-non-premium user is a no-op (idempotent)', async () => {
   const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
   const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -999,7 +1005,7 @@ const invoiceEventForEmail = (email: string) =>
     data: { object: { id: 'in_email', customer: 'cus_unbound', customer_email: email, billing_reason: 'subscription_cycle', subscription: 'sub_1', period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
   });
 
-Deno.test('email fallback ESCAPES ILIKE metacharacters (%, _, \\) — exact match, not a pattern', async () => {
+scopedEnv.test('email fallback ESCAPES ILIKE metacharacters (%, _, \\) — exact match, not a pattern', async () => {
   const stub = makeEmailFallbackStub();
   const body = invoiceEventForEmail('a_b%c@x.com');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -1010,7 +1016,7 @@ Deno.test('email fallback ESCAPES ILIKE metacharacters (%, _, \\) — exact matc
   assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), true);  // still binds + grants
 });
 
-Deno.test('an email containing * (PostgREST wildcard, unescapable in ilike) falls back to exact eq', async () => {
+scopedEnv.test('an email containing * (PostgREST wildcard, unescapable in ilike) falls back to exact eq', async () => {
   const stub = makeEmailFallbackStub();
   const body = invoiceEventForEmail('star*man@x.com');
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -1223,7 +1229,7 @@ const referralInvoiceEvent = (type: string, invoiceId: string, amountPaid: numbe
     },
   });
 
-Deno.test('the referee FIRST paid invoice grants BOTH parties the referral reward', async () => {
+scopedEnv.test('the referee FIRST paid invoice grants BOTH parties the referral reward', async () => {
   const emailsSent: Array<{ to: string; subject: string }> = [];
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
@@ -1266,7 +1272,7 @@ Deno.test('the referee FIRST paid invoice grants BOTH parties the referral rewar
   assertEquals(emailsSent.map((e) => e.to).sort(), ['referee@x.com', 'referrer@x.com']);
 });
 
-Deno.test('a REPLAYED qualifying invoice does not double-grant the referral', async () => {
+scopedEnv.test('a REPLAYED qualifying invoice does not double-grant the referral', async () => {
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
     customerToProfile: 'referee_u',
@@ -1291,7 +1297,7 @@ Deno.test('a REPLAYED qualifying invoice does not double-grant the referral', as
   assertEquals(world.rpc.filter((c) => c.fn === 'record_referral_grant_detail').length, 2);
 });
 
-Deno.test('a zero-dollar first payment NEVER grants a referral (invoice AND founder)', async () => {
+scopedEnv.test('a zero-dollar first payment NEVER grants a referral (invoice AND founder)', async () => {
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
     customerToProfile: 'referee_u',
@@ -1315,7 +1321,7 @@ Deno.test('a zero-dollar first payment NEVER grants a referral (invoice AND foun
   assertEquals(world.deletedDiscounts.length, 0);
 });
 
-Deno.test('a FOUNDER referee gets 10 credits, not a coupon (paid founder checkout qualifies)', async () => {
+scopedEnv.test('a FOUNDER referee gets 10 credits, not a coupon (paid founder checkout qualifies)', async () => {
   const world = makeReferralWorld({
     profiles: {
       // Post-upgrade state: the founder branch flips is_founder before the
@@ -1359,7 +1365,7 @@ Deno.test('a FOUNDER referee gets 10 credits, not a coupon (paid founder checkou
   assertEquals(details.find((d) => d.args.p_party === 'referrer')!.args.p_reward, 'free_month');
 });
 
-Deno.test('charge.refunded claws the referral back and removes unconsumed discounts', async () => {
+scopedEnv.test('charge.refunded claws the referral back and removes unconsumed discounts', async () => {
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
     grantedClawback: {
@@ -1397,7 +1403,7 @@ Deno.test('charge.refunded claws the referral back and removes unconsumed discou
   assertEquals(world.rpc.filter((c) => c.fn === 'clawback_referral').length, 2);
 });
 
-Deno.test('invoice.payment_failed claws back and deducts a credits_10 reward via service_adjust_credits', async () => {
+scopedEnv.test('invoice.payment_failed claws back and deducts a credits_10 reward via service_adjust_credits', async () => {
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
     grantedClawback: {
@@ -1427,7 +1433,7 @@ Deno.test('invoice.payment_failed claws back and deducts a credits_10 reward via
   assertEquals(String(adjust!.args.reason).includes('ref_1'), true);
 });
 
-Deno.test('a THROWING email dispatch never fails the money path (rewards still land, 200)', async () => {
+scopedEnv.test('a THROWING email dispatch never fails the money path (rewards still land, 200)', async () => {
   const world = makeReferralWorld({
     profiles: REFERRAL_PROFILES,
     customerToProfile: 'referee_u',
@@ -1535,7 +1541,7 @@ const redeemCheckoutEvent = (eventId: string, sessionId: string, metadata: Recor
     data: { object: { id: sessionId, payment_status: 'paid', metadata, ...extra } },
   });
 
-Deno.test('a paid checkout with a bound credits-kind redemption grants the code credits exactly once (replay-safe)', async () => {
+scopedEnv.test('a paid checkout with a bound credits-kind redemption grants the code credits exactly once (replay-safe)', async () => {
   const stub = makeRedeemStub({
     redemption: { redemptionId: 'red_1', userId: 'u1', kind: 'credits', creditAmount: 15, sessionId: 'cs_r1' },
   });
@@ -1565,7 +1571,7 @@ Deno.test('a paid checkout with a bound credits-kind redemption grants the code 
   assertEquals(packGrants[0].args.amount, 25);
 });
 
-Deno.test('a free_month redemption applies WITHOUT any credit grant (the coupon rode the session)', async () => {
+scopedEnv.test('a free_month redemption applies WITHOUT any credit grant (the coupon rode the session)', async () => {
   const stub = makeRedeemStub({
     redemption: { redemptionId: 'red_2', userId: 'u1', kind: 'free_month', creditAmount: null, sessionId: 'cs_r2' },
   });
@@ -1578,7 +1584,7 @@ Deno.test('a free_month redemption applies WITHOUT any credit grant (the coupon 
   assertEquals(stub.rpc.some((c) => c.fn === 'restore_premium_settlements'), true);
 });
 
-Deno.test('an UNPAID completed session does NOT consume the redemption (waits for settlement)', async () => {
+scopedEnv.test('an UNPAID completed session does NOT consume the redemption (waits for settlement)', async () => {
   const stub = makeRedeemStub({
     redemption: { redemptionId: 'red_u', userId: 'u1', kind: 'credits', creditAmount: 15, sessionId: 'cs_u1' },
   });
@@ -1589,7 +1595,7 @@ Deno.test('an UNPAID completed session does NOT consume the redemption (waits fo
   assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), false);
 });
 
-Deno.test('checkout.session.expired reverts the reservation; a replayed expiry no-ops (200)', async () => {
+scopedEnv.test('checkout.session.expired reverts the reservation; a replayed expiry no-ops (200)', async () => {
   const stub = makeRedeemStub({
     redemption: { redemptionId: 'red_e', userId: 'u1', kind: 'credits', creditAmount: 15, sessionId: 'cs_exp' },
   });
@@ -1609,7 +1615,7 @@ Deno.test('checkout.session.expired reverts the reservation; a replayed expiry n
   assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), false);  // nothing ever granted
 });
 
-Deno.test('RED-TEAM: a $0 session carrying a redeem discount fulfils the redemption but NEVER mints a referral', async () => {
+scopedEnv.test('RED-TEAM: a $0 session carrying a redeem discount fulfils the redemption but NEVER mints a referral', async () => {
   // A free_month code zeroed this founder checkout (amount_total = 0,
   // payment_status 'no_payment_required'). The purchase itself fulfils — the
   // customer paid with the code — but the referral qualifying gate requires
@@ -1638,7 +1644,7 @@ Deno.test('RED-TEAM: a $0 session carrying a redeem discount fulfils the redempt
   assertEquals(stub.rpc.some((c) => c.fn === 'grant_referral'), false);
 });
 
-Deno.test('a free-tier referrer with NO Stripe customer gets one created and the coupon waits on it', async () => {
+scopedEnv.test('a free-tier referrer with NO Stripe customer gets one created and the coupon waits on it', async () => {
   const world = makeReferralWorld({
     profiles: {
       referee_u: REFERRAL_PROFILES.referee_u,
@@ -1757,7 +1763,7 @@ const dossierCheckoutEvent = (id: string, metadata: Record<string, string>, extr
     data: { object: { id, payment_status: 'paid', metadata: { product: 'single_dossier', ...metadata }, ...extra } },
   });
 
-Deno.test('a signed-in single_dossier with save_id metadata grants the durable entitlement', async () => {
+scopedEnv.test('a signed-in single_dossier with save_id metadata grants the durable entitlement', async () => {
   const stub = makeDossierStub();
   const body = dossierCheckoutEvent('cs_dossier_signed', { supabase_user_id: 'u1', save_id: 'save_1', anonymous: 'false' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -1772,7 +1778,7 @@ Deno.test('a signed-in single_dossier with save_id metadata grants the durable e
   assertEquals(stub.upserts.length, 0);
 });
 
-Deno.test('a REPLAYED signed-in dossier session does NOT double-grant (event-level dedup)', async () => {
+scopedEnv.test('a REPLAYED signed-in dossier session does NOT double-grant (event-level dedup)', async () => {
   const stub = makeDossierStub();
   const body = dossierCheckoutEvent('cs_dossier_dup', { supabase_user_id: 'u1', save_id: 'save_1' });
   const first = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -1783,7 +1789,7 @@ Deno.test('a REPLAYED signed-in dossier session does NOT double-grant (event-lev
   assertEquals(stub.rpc.filter((c) => c.fn === 'grant_dossier_entitlement').length, 1);
 });
 
-Deno.test('a grant FAILURE does not break fulfilment (single_dossier still acks 200)', async () => {
+scopedEnv.test('a grant FAILURE does not break fulfilment (single_dossier still acks 200)', async () => {
   const stub = makeDossierStub({ grantError: { message: 'transient rpc failure' } });
   const body = dossierCheckoutEvent('cs_dossier_grantfail', { supabase_user_id: 'u1', save_id: 'save_1' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -1791,7 +1797,7 @@ Deno.test('a grant FAILURE does not break fulfilment (single_dossier still acks 
   assertEquals(await res.text(), JSON.stringify({ received: true }));
 });
 
-Deno.test('an ANONYMOUS single_dossier records the purchase (email lowercased, token hashed, amount)', async () => {
+scopedEnv.test('an ANONYMOUS single_dossier records the purchase (email lowercased, token hashed, amount)', async () => {
   const stub = makeDossierStub();
   const rawToken = 'tok_' + 'z'.repeat(40);
   const body = dossierCheckoutEvent(
@@ -1813,7 +1819,7 @@ Deno.test('an ANONYMOUS single_dossier records the purchase (email lowercased, t
   assertEquals(stub.rpc.some((c) => c.fn === 'grant_dossier_entitlement'), false);
 });
 
-Deno.test('a REPLAYED anonymous dossier session records the voucher only once (PK dedup)', async () => {
+scopedEnv.test('a REPLAYED anonymous dossier session records the voucher only once (PK dedup)', async () => {
   const stub = makeDossierStub();
   const rawToken = 'tok_' + 'y'.repeat(40);
   const body = dossierCheckoutEvent(
@@ -1828,7 +1834,7 @@ Deno.test('a REPLAYED anonymous dossier session records the voucher only once (P
   assertEquals(stub.purchases.size, 1);                // exactly one voucher row survives
 });
 
-Deno.test('an anonymous dossier session with NO customer email still RECORDS (email is audit-only)', async () => {
+scopedEnv.test('an anonymous dossier session with NO customer email still RECORDS (email is audit-only)', async () => {
   // Same-device model: the checkout token is the claim proof; buyer_email_lower is
   // audit/support-only. Stripe returning no email must NOT block the claim voucher.
   const stub = makeDossierStub();
@@ -1847,7 +1853,7 @@ Deno.test('an anonymous dossier session with NO customer email still RECORDS (em
   assertEquals(row.checkout_token_hash, await sha256hexTest(rawToken));   // the claim proof still lands
 });
 
-Deno.test('an anonymous dossier session with NO checkout token SKIPS the record (nothing to claim, still 200)', async () => {
+scopedEnv.test('an anonymous dossier session with NO checkout token SKIPS the record (nothing to claim, still 200)', async () => {
   // No token → the same-device claim has no proof to verify against, so there is
   // nothing to record. The one-shot download still worked; fulfilment never blocks.
   const stub = makeDossierStub();
@@ -1862,7 +1868,7 @@ Deno.test('an anonymous dossier session with NO checkout token SKIPS the record 
   assertEquals(stub.upserts.length, 0);                // no voucher row written
 });
 
-Deno.test('a refund of a single_dossier charge claws back the entitlement AND poisons the voucher', async () => {
+scopedEnv.test('a refund of a single_dossier charge claws back the entitlement AND poisons the voucher', async () => {
   const stub = makeDossierStub();
   // Seed a voucher for the session so the poison is observable.
   const rawToken = 'tok_' + 'r'.repeat(40);
@@ -2003,7 +2009,7 @@ const founderStripe = (sessionId = 'cs_founder'): any => ({
   checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }) } },
 });
 
-Deno.test('a refunded founder_lifetime charge reverses is_founder, premium, and the 30-credit bonus', async () => {
+scopedEnv.test('a refunded founder_lifetime charge reverses is_founder, premium, and the 30-credit bonus', async () => {
   const stub = makeFounderStub();
   const body = founderRefund('evt_founder_refund_1');
   const res = await handleStripeWebhook(
@@ -2026,7 +2032,7 @@ Deno.test('a refunded founder_lifetime charge reverses is_founder, premium, and 
 // throwing downgrade/auth/credit step would permanently strand a refunded founder
 // at tier=premium with the bonus intact. Each post-claim step must therefore LOG,
 // not throw, and must not abort the steps after it.
-Deno.test('founder clawback: a transient DOWNGRADE failure is logged, not thrown — the auth + credit steps still run', async () => {
+scopedEnv.test('founder clawback: a transient DOWNGRADE failure is logged, not thrown — the auth + credit steps still run', async () => {
   const stub = makeFounderStub('cs_founder', { downgrade: { message: 'transient downgrade boom' } });
   const body = founderRefund('evt_founder_refund_downgrade_fail');
   const res = await handleStripeWebhook(
@@ -2041,7 +2047,7 @@ Deno.test('founder clawback: a transient DOWNGRADE failure is logged, not thrown
   assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal STILL ran
 });
 
-Deno.test('founder clawback: a transient AUTH failure is logged, not thrown — the credit reversal still runs', async () => {
+scopedEnv.test('founder clawback: a transient AUTH failure is logged, not thrown — the credit reversal still runs', async () => {
   const stub = makeFounderStub('cs_founder', { auth: { message: 'transient auth boom' } });
   const body = founderRefund('evt_founder_refund_auth_fail');
   const res = await handleStripeWebhook(
@@ -2053,7 +2059,7 @@ Deno.test('founder clawback: a transient AUTH failure is logged, not thrown — 
   assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal ran after the auth failure
 });
 
-Deno.test('founder clawback: a transient CREDIT-reversal failure is logged, not thrown — the webhook completes', async () => {
+scopedEnv.test('founder clawback: a transient CREDIT-reversal failure is logged, not thrown — the webhook completes', async () => {
   const stub = makeFounderStub('cs_founder', { adjust: { message: 'transient adjust boom' } });
   const body = founderRefund('evt_founder_refund_adjust_fail');
   const res = await handleStripeWebhook(
@@ -2064,7 +2070,7 @@ Deno.test('founder clawback: a transient CREDIT-reversal failure is logged, not 
   assertEquals(stub.rpc.filter((c) => c.fn === 'service_adjust_credits').length, 1);
 });
 
-Deno.test('a redelivered founder refund is idempotent: no second downgrade or credit clawback', async () => {
+scopedEnv.test('a redelivered founder refund is idempotent: no second downgrade or credit clawback', async () => {
   const stub = makeFounderStub();
   const first = founderRefund('evt_founder_refund_a');
   await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
@@ -2075,7 +2081,7 @@ Deno.test('a redelivered founder refund is idempotent: no second downgrade or cr
   assertEquals(stub.rpc.filter((c) => c.fn === 'service_adjust_credits').length, 1);
 });
 
-Deno.test('a refund of a NON-founder charge leaves founder state untouched', async () => {
+scopedEnv.test('a refund of a NON-founder charge leaves founder state untouched', async () => {
   // The refunded session has no founder_grant ledger row (the stub only matches
   // 'cs_founder'); resolveChargeClawbackKeys yields a different session id.
   const stub = makeFounderStub('cs_founder');
@@ -2094,7 +2100,7 @@ Deno.test('a refund of a NON-founder charge leaves founder state untouched', asy
 // pool (release_founder_seat_on_clawback) — the mirror of the founder_lifetime
 // claim. It is a POST-CLAIM step (after the is_founder flip), so a redelivered
 // refund that finds is_founder already false never re-runs it (no double release).
-Deno.test('founder clawback releases the seat AFTER the is_founder flip + downgrade (ordering)', async () => {
+scopedEnv.test('founder clawback releases the seat AFTER the is_founder flip + downgrade (ordering)', async () => {
   const stub = makeFounderStub();
   const body = founderRefund('evt_founder_seat_release_1');
   const res = await handleStripeWebhook(
@@ -2112,7 +2118,7 @@ Deno.test('founder clawback releases the seat AFTER the is_founder flip + downgr
   assertEquals(downgradeIdx >= 0 && releaseIdx > downgradeIdx, true);
 });
 
-Deno.test('a redelivered founder refund releases the seat exactly once (idempotent)', async () => {
+scopedEnv.test('a redelivered founder refund releases the seat exactly once (idempotent)', async () => {
   const stub = makeFounderStub();
   const first = founderRefund('evt_seat_release_a');
   await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
@@ -2122,7 +2128,7 @@ Deno.test('a redelivered founder refund releases the seat exactly once (idempote
   assertEquals(stub.rpc.filter((c) => c.fn === 'release_founder_seat_on_clawback').length, 1);
 });
 
-Deno.test('a refund of a NON-founder charge never releases a seat', async () => {
+scopedEnv.test('a refund of a NON-founder charge never releases a seat', async () => {
   const stub = makeFounderStub('cs_founder');
   const body = founderRefund('evt_nonfounder_no_release');
   await handleStripeWebhook(
@@ -2139,7 +2145,7 @@ Deno.test('a refund of a NON-founder charge never releases a seat', async () => 
 // still finalized, moving the just-unwound seat to the nominee AND scheduling a $49.50
 // payout to the refunded holder (double recovery). Aborting first drives the case out of
 // 'cooling' so the due-runner's transfer_case_finalize refuses (wrong_state).
-Deno.test('FP-4: a goodwill refund during a LIVE cooling case ABORTS+refunds it BEFORE the seat release (§6.7)', async () => {
+scopedEnv.test('FP-4: a goodwill refund during a LIVE cooling case ABORTS+refunds it BEFORE the seat release (§6.7)', async () => {
   const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
   const st = founderStripeWithRefunds();
   const body = founderRefund('evt_fp4_goodwill');
@@ -2161,7 +2167,7 @@ Deno.test('FP-4: a goodwill refund during a LIVE cooling case ABORTS+refunds it 
   assertEquals(stub.state.isFounder, false);
 });
 
-Deno.test('FP-4: a live INITIATED (unpaid) case is aborted but no refund fires (nothing was paid)', async () => {
+scopedEnv.test('FP-4: a live INITIATED (unpaid) case is aborted but no refund fires (nothing was paid)', async () => {
   const stub = makeFounderStub('cs_founder', {}, { id: 'case-unpaid', state: 'initiated', stripe_session_id: null });
   const st = founderStripeWithRefunds();
   const body = founderRefund('evt_fp4_unpaid');
@@ -2170,7 +2176,7 @@ Deno.test('FP-4: a live INITIATED (unpaid) case is aborted but no refund fires (
   assertEquals(st.refunds.length, 0);   // an unpaid case never entered cooling → nothing to refund
 });
 
-Deno.test('FP-4: a goodwill refund with NO live case never aborts (unchanged clawback)', async () => {
+scopedEnv.test('FP-4: a goodwill refund with NO live case never aborts (unchanged clawback)', async () => {
   const stub = makeFounderStub();   // no live case injected
   const st = founderStripeWithRefunds();
   const body = founderRefund('evt_fp4_nocase');
@@ -2179,7 +2185,7 @@ Deno.test('FP-4: a goodwill refund with NO live case never aborts (unchanged cla
   assertEquals(st.refunds.length, 0);
 });
 
-Deno.test('FP-4: a redelivered goodwill refund aborts the case exactly once (live-state filter)', async () => {
+scopedEnv.test('FP-4: a redelivered goodwill refund aborts the case exactly once (live-state filter)', async () => {
   const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
   const st = founderStripeWithRefunds();
   const first = founderRefund('evt_fp4_redeliver_a');
@@ -2191,7 +2197,7 @@ Deno.test('FP-4: a redelivered goodwill refund aborts the case exactly once (liv
   assertEquals(st.refunds.length, 1);   // idempotency key would dedup anyway, but no 2nd attempt is even made
 });
 
-Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now wired)', async () => {
+scopedEnv.test('a founder_lifetime checkout claims the durable seat (137 hook is now wired)', async () => {
   const stub = makeStub();
   const body = JSON.stringify({
     id: 'evt_founder_seat_claim', type: 'checkout.session.completed',
@@ -2211,7 +2217,7 @@ Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now 
 });
 
 // ── Founder seat TRANSFER money crossing (§6.6/§6.7, M-7) ────────────────────
-Deno.test('a founder_seat_transfer payment marks the case paid (cooling) + mirrors seat_transfer_payment', async () => {
+scopedEnv.test('a founder_seat_transfer payment marks the case paid (cooling) + mirrors seat_transfer_payment', async () => {
   const stub = makeStub('track', { rpcData: { transfer_case_mark_paid: { ok: true } } });
   const body = JSON.stringify({
     id: 'evt_transfer_paid', type: 'checkout.session.completed',
@@ -2228,7 +2234,7 @@ Deno.test('a founder_seat_transfer payment marks the case paid (cooling) + mirro
   assertEquals(stub.moneyEvents[0].kind, 'seat_transfer_payment');
 });
 
-Deno.test('an expired founder_seat_transfer session regresses the case (never-throw)', async () => {
+scopedEnv.test('an expired founder_seat_transfer session regresses the case (never-throw)', async () => {
   const stub = makeStub('track', { rpcData: { transfer_case_regress_awaiting_payment: { ok: true } } });
   const body = JSON.stringify({ id: 'evt_transfer_expired', type: 'checkout.session.expired', data: { object: { id: 'cs_transfer_exp' } } });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
@@ -2293,7 +2299,7 @@ const transferCompleted = (sessionId: string, caseId: string) => JSON.stringify(
     metadata: { purpose: 'founder_seat_transfer', transfer_case_id: caseId, supabase_user_id: 'u_nominee' } } },
 });
 
-Deno.test('FP-2: a $99 completed for an ABORTED transfer case refunds exactly once + mirrors a refund_note', async () => {
+scopedEnv.test('FP-2: a $99 completed for an ABORTED transfer case refunds exactly once + mirrors a refund_note', async () => {
   // The case was aborted/expired: mark_paid no-ops (wrong_state); paid_at is null.
   const stub = makeOrphanStub({ paid_at: null, stripe_session_id: null }, { ok: false, reason: 'wrong_state' });
   const stripe = orphanStripe();
@@ -2311,7 +2317,7 @@ Deno.test('FP-2: a $99 completed for an ABORTED transfer case refunds exactly on
   assertEquals(stub.moneyEvents[0].status, 'refunded');
 });
 
-Deno.test('FP-2: a REPLAY of the session that LEGITIMATELY paid the case never refunds', async () => {
+scopedEnv.test('FP-2: a REPLAY of the session that LEGITIMATELY paid the case never refunds', async () => {
   // The paying session moved the seat (paid_at set, stripe_session_id === this session);
   // its redelivery finds the case cooling → mark_paid wrong_state, but must NOT refund.
   const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_paid_99' }, { ok: false, reason: 'wrong_state' });
@@ -2323,7 +2329,7 @@ Deno.test('FP-2: a REPLAY of the session that LEGITIMATELY paid the case never r
   assertEquals(stub.moneyEvents.length, 0);
 });
 
-Deno.test('FP-2: a STALE nominee session (a DIFFERENT session paid the case) IS refunded', async () => {
+scopedEnv.test('FP-2: a STALE nominee session (a DIFFERENT session paid the case) IS refunded', async () => {
   // The case was paid by a re-minted session; this older session is orphaned → refund it.
   const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_new_99' }, { ok: false, reason: 'wrong_state' });
   const stripe = orphanStripe();
@@ -2380,7 +2386,7 @@ const transferStripe = (): any => ({
 });
 const transferRefund = (evt: string) => JSON.stringify({ id: evt, type: 'charge.refunded', data: { object: { id: 'ch_t', invoice: null, payment_intent: 'pi_t' } } });
 
-Deno.test('chargeback of a COOLING transfer aborts the case (no seat moved)', async () => {
+scopedEnv.test('chargeback of a COOLING transfer aborts the case (no seat moved)', async () => {
   const stub = makeTransferClawbackStub({ id: 'case-1', state: 'cooling', payout_status: 'none', seat_id: 3 });
   const res = await handleStripeWebhook(req(transferRefund('evt_t_cooling'), { 'stripe-signature': await sign(transferRefund('evt_t_cooling'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
   assertEquals(res.status, 200);
@@ -2389,14 +2395,14 @@ Deno.test('chargeback of a COOLING transfer aborts the case (no seat moved)', as
   assertEquals((ab!.args as { p_actor: string }).p_actor, 'chargeback');
 });
 
-Deno.test('chargeback of a FINALIZED transfer (payout not released) reverses the case (seat moves back)', async () => {
+scopedEnv.test('chargeback of a FINALIZED transfer (payout not released) reverses the case (seat moves back)', async () => {
   const stub = makeTransferClawbackStub({ id: 'case-2', state: 'finalized', payout_status: 'scheduled', seat_id: 4 });
   const res = await handleStripeWebhook(req(transferRefund('evt_t_final'), { 'stripe-signature': await sign(transferRefund('evt_t_final'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
   assertEquals(res.status, 200);
   assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_reverse'), true);
 });
 
-Deno.test('chargeback of a FINALIZED transfer AFTER payout released flags the seat (accepted residual)', async () => {
+scopedEnv.test('chargeback of a FINALIZED transfer AFTER payout released flags the seat (accepted residual)', async () => {
   const stub = makeTransferClawbackStub({ id: 'case-3', state: 'finalized', payout_status: 'released', seat_id: 5 });
   const res = await handleStripeWebhook(req(transferRefund('evt_t_paid_out'), { 'stripe-signature': await sign(transferRefund('evt_t_paid_out'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
   assertEquals(res.status, 200);
@@ -2410,7 +2416,7 @@ Deno.test('chargeback of a FINALIZED transfer AFTER payout released flags the se
 // verify-single-dossier can read the stashed settlement back by session. Additive
 // to the durable-entitlement (108) / anonymous-voucher paths asserted above.
 
-Deno.test('a single_dossier checkout backfills dossier_purchases.stripe_session_id from the checkout_token', async () => {
+scopedEnv.test('a single_dossier checkout backfills dossier_purchases.stripe_session_id from the checkout_token', async () => {
   const stub = makeDossierStub();
   const token = 't'.repeat(40);
   const body = dossierCheckoutEvent('cs_bind_1', { anonymous: 'true', checkout_token: token });
@@ -2421,7 +2427,7 @@ Deno.test('a single_dossier checkout backfills dossier_purchases.stripe_session_
   assertEquals(stub.binds[0].vals.stripe_session_id, 'cs_bind_1'); // bound to the paid session
 });
 
-Deno.test('the single_dossier session bind is idempotent on replay (same session id, no throw)', async () => {
+scopedEnv.test('the single_dossier session bind is idempotent on replay (same session id, no throw)', async () => {
   const stub = makeDossierStub();
   const token = 't'.repeat(40);
   const body = dossierCheckoutEvent('cs_bind_replay', { anonymous: 'true', checkout_token: token });
@@ -2437,7 +2443,7 @@ Deno.test('the single_dossier session bind is idempotent on replay (same session
   assertEquals(stub.binds[1].vals.stripe_session_id, 'cs_bind_replay');   // same id, idempotent
 });
 
-Deno.test('a single_dossier WITHOUT a checkout_token is a no-op bind (not an error, still 200)', async () => {
+scopedEnv.test('a single_dossier WITHOUT a checkout_token is a no-op bind (not an error, still 200)', async () => {
   const stub = makeDossierStub();
   // Signed-in dossier with a save_id but no checkout_token → grant runs, bind skips.
   const body = dossierCheckoutEvent('cs_bind_nocheckout', { supabase_user_id: 'u1', save_id: 'save_1', anonymous: 'false' });
@@ -2540,7 +2546,7 @@ function moneyStripe(opts: {
   };
 }
 
-Deno.test('deleted-account Checkout is canceled, customer-deleted, and refunded without restoring access', async () => {
+scopedEnv.test('deleted-account Checkout is canceled, customer-deleted, and refunded without restoring access', async () => {
   const stub = makeStub('track', { accountActive: false });
   const stripe = moneyStripe();
   const body = JSON.stringify({
@@ -2597,7 +2603,7 @@ Deno.test('deleted-account Checkout is canceled, customer-deleted, and refunded 
   assertEquals(stub.moneyEvents[0].amount_cents, 900);
 });
 
-Deno.test('inactive subscription start uses one refund identity in both Checkout/invoice delivery orders', async () => {
+scopedEnv.test('inactive subscription start uses one refund identity in both Checkout/invoice delivery orders', async () => {
   const checkout = JSON.stringify({
     id: 'evt_inactive_sub_checkout',
     type: 'checkout.session.completed',
@@ -2687,7 +2693,7 @@ Deno.test('inactive subscription start uses one refund identity in both Checkout
   }
 });
 
-Deno.test('pending unfulfilled refund is durable and lifecycle events settle or reverse its ledger note', async () => {
+scopedEnv.test('pending unfulfilled refund is durable and lifecycle events settle or reverse its ledger note', async () => {
   const stub = makeStub('track', {
     autoReloadAttempt: {
       id: AUTO_RELOAD_ATTEMPT_ID,
@@ -2759,7 +2765,7 @@ Deno.test('pending unfulfilled refund is durable and lifecycle events settle or 
   );
 });
 
-Deno.test('money spine: a paid credit-pack checkout mirrors exactly ONE money_events row, replay-safe', async () => {
+scopedEnv.test('money spine: a paid credit-pack checkout mirrors exactly ONE money_events row, replay-safe', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r1', chargeId: 'ch_1' });
   const mk = (evtId: string) => JSON.stringify({
@@ -2787,7 +2793,7 @@ Deno.test('money spine: a paid credit-pack checkout mirrors exactly ONE money_ev
   assertEquals(stub.moneyEvents.length, 1);
 });
 
-Deno.test('money spine: a founder_lifetime checkout mirrors a founder_seat row with its receipt', async () => {
+scopedEnv.test('money spine: a founder_lifetime checkout mirrors a founder_seat row with its receipt', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rf', chargeId: 'ch_f' });
   const body = JSON.stringify({
@@ -2803,7 +2809,7 @@ Deno.test('money spine: a founder_lifetime checkout mirrors a founder_seat row w
   assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/rf');
 });
 
-Deno.test('money spine: an anonymous single_dossier mirrors a row with user_id NULL (LAW 9)', async () => {
+scopedEnv.test('money spine: an anonymous single_dossier mirrors a row with user_id NULL (LAW 9)', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rd', chargeId: 'ch_d' });
   const body = JSON.stringify({
@@ -2820,7 +2826,7 @@ Deno.test('money spine: an anonymous single_dossier mirrors a row with user_id N
   assertEquals(stub.moneyEvents[0].amount_cents, 299);
 });
 
-Deno.test('money spine: a premium checkout mirrors subscription_start with the hosted invoice receipt', async () => {
+scopedEnv.test('money spine: a premium checkout mirrors subscription_start with the hosted invoice receipt', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/hosted' });
   const body = JSON.stringify({
@@ -2837,7 +2843,7 @@ Deno.test('money spine: a premium checkout mirrors subscription_start with the h
   assertEquals(stub.moneyEvents[0].stripe_invoice_id, 'in_p');
 });
 
-Deno.test('money spine: a refund flips the mirrored row status to refunded', async () => {
+scopedEnv.test('money spine: a refund flips the mirrored row status to refunded', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r2', chargeId: 'ch_2', sessionForPI: 'cs_ref' });
   const paid = JSON.stringify({
@@ -2857,7 +2863,7 @@ Deno.test('money spine: a refund flips the mirrored row status to refunded', asy
   assertEquals(stub.moneyEvents[0].status, 'refunded');
 });
 
-Deno.test('money spine: a dispute flips the mirrored row status to disputed', async () => {
+scopedEnv.test('money spine: a dispute flips the mirrored row status to disputed', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r3', chargeId: 'ch_3', sessionForPI: 'cs_dis' });
   const paid = JSON.stringify({
@@ -2876,7 +2882,7 @@ Deno.test('money spine: a dispute flips the mirrored row status to disputed', as
   assertEquals(stub.moneyEvents[0].status, 'disputed');
 });
 
-Deno.test('money spine: a subscription RENEWAL invoice mirrors one row; a subscription_create invoice does NOT (no double-count)', async () => {
+scopedEnv.test('money spine: a subscription RENEWAL invoice mirrors one row; a subscription_create invoice does NOT (no double-count)', async () => {
   // subscription_cycle (renewal) → one subscription_renewal row.
   const cycleStub = makeStub('track', { profile: { id: 'u_sub', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
   const cycle = JSON.stringify({
@@ -2925,7 +2931,7 @@ const autoReloadPI = (evtId: string, over: Record<string, unknown> = {}) => JSON
   } },
 });
 
-Deno.test('auto-reload: succeeded event before PI-id stamp binds by attempt_id, grants, and completes', async () => {
+scopedEnv.test('auto-reload: succeeded event before PI-id stamp binds by attempt_id, grants, and completes', async () => {
   const stub = makeStub();
   assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, null);
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
@@ -2955,7 +2961,7 @@ Deno.test('auto-reload: succeeded event before PI-id stamp binds by attempt_id, 
   assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/ar');
 });
 
-Deno.test('auto-reload: a redelivery under a NEW event id keeps exactly ONE money_events row (per-PI dedup key)', async () => {
+scopedEnv.test('auto-reload: a redelivery under a NEW event id keeps exactly ONE money_events row (per-PI dedup key)', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
   const b1 = autoReloadPI('evt_ar_a');
@@ -2971,7 +2977,7 @@ Deno.test('auto-reload: a redelivery under a NEW event id keeps exactly ONE mone
   }
 });
 
-Deno.test('auto-reload: succeeded PI overrides an earlier trigger-side failed resolution', async () => {
+scopedEnv.test('auto-reload: succeeded PI overrides an earlier trigger-side failed resolution', async () => {
   const stub = makeStub('track', {
     autoReloadAttempt: {
       id: AUTO_RELOAD_ATTEMPT_ID,
@@ -2993,7 +2999,7 @@ Deno.test('auto-reload: succeeded PI overrides an earlier trigger-side failed re
   assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, 'pi_ar');
 });
 
-Deno.test('auto-reload: concurrent distinct succeeded PIs race — only the atomically claimed PI grants', async () => {
+scopedEnv.test('auto-reload: concurrent distinct succeeded PIs race — only the atomically claimed PI grants', async () => {
   const stub = makeStub('track', { autoReloadReadBarrier: true });
   const stripe = moneyStripe();
   const bodyA = autoReloadPI('evt_ar_race_a', { id: 'pi_ar_a' });
@@ -3041,7 +3047,7 @@ Deno.test('auto-reload: concurrent distinct succeeded PIs race — only the atom
   assertEquals(refund?.status, 'refunded');
 });
 
-Deno.test('auto-reload: a delayed distinct PI after the winner is refunded without granting', async () => {
+scopedEnv.test('auto-reload: a delayed distinct PI after the winner is refunded without granting', async () => {
   const stub = makeStub('track', {
     autoReloadAttempt: {
       id: AUTO_RELOAD_ATTEMPT_ID,
@@ -3074,7 +3080,7 @@ Deno.test('auto-reload: a delayed distinct PI after the winner is refunded witho
   });
 });
 
-Deno.test('auto-reload: deletion after charging refunds instead of granting unusable credits', async () => {
+scopedEnv.test('auto-reload: deletion after charging refunds instead of granting unusable credits', async () => {
   const stub = makeStub('track', { accountActive: false });
   const stripe = moneyStripe();
   const body = autoReloadPI('evt_ar_deleted_after_charge');
@@ -3097,7 +3103,7 @@ Deno.test('auto-reload: deletion after charging refunds instead of granting unus
   });
 });
 
-Deno.test('auto-reload: a refund failure releases the claim and redelivery retries idempotently', async () => {
+scopedEnv.test('auto-reload: a refund failure releases the claim and redelivery retries idempotently', async () => {
   const stub = makeStub('track', {
     autoReloadAttempt: {
       id: AUTO_RELOAD_ATTEMPT_ID,
@@ -3137,7 +3143,7 @@ Deno.test('auto-reload: a refund failure releases the claim and redelivery retri
   assertEquals(stub.moneyEvents[0].event_key, 'refund:auto-reload:pi_ar_loser');
 });
 
-Deno.test('auto-reload: a NON-auto-reload payment_intent.succeeded is ignored', async () => {
+scopedEnv.test('auto-reload: a NON-auto-reload payment_intent.succeeded is ignored', async () => {
   const stub = makeStub();
   const body = JSON.stringify({
     id: 'evt_other', type: 'payment_intent.succeeded',
@@ -3155,7 +3161,7 @@ Deno.test('auto-reload: a NON-auto-reload payment_intent.succeeded is ignored', 
   assertEquals(stub.autoReloadUpdates.length, 0);
 });
 
-Deno.test('auto-reload: mismatched user/credits metadata cannot grant or mutate the attempt', async () => {
+scopedEnv.test('auto-reload: mismatched user/credits metadata cannot grant or mutate the attempt', async () => {
   const stub = makeStub();
   const stripe = moneyStripe();
   const body = autoReloadPI('evt_ar_mismatch', {
@@ -3178,7 +3184,7 @@ Deno.test('auto-reload: mismatched user/credits metadata cannot grant or mutate 
   assertEquals(stub.moneyEvents[0].kind, 'refund_note');
 });
 
-Deno.test('auto-reload: a non-USD succeeded PI cannot grant, bind, or complete the attempt', async () => {
+scopedEnv.test('auto-reload: a non-USD succeeded PI cannot grant, bind, or complete the attempt', async () => {
   const stub = makeStub();
   const stripe = moneyStripe();
   const body = autoReloadPI('evt_ar_currency_mismatch', { currency: 'eur' });
@@ -3194,7 +3200,7 @@ Deno.test('auto-reload: a non-USD succeeded PI cannot grant, bind, or complete t
   assertEquals(stub.moneyEvents[0].status, 'refunded');
 });
 
-Deno.test('auto-reload: a short collection cannot grant, bind, or complete the attempt', async () => {
+scopedEnv.test('auto-reload: a short collection cannot grant, bind, or complete the attempt', async () => {
   const stub = makeStub();
   const stripe = moneyStripe();
   const body = autoReloadPI('evt_ar_short_collection', { amount_received: 458 });
@@ -3210,7 +3216,7 @@ Deno.test('auto-reload: a short collection cannot grant, bind, or complete the a
   assertEquals(stub.moneyEvents[0].amount_cents, 458);
 });
 
-Deno.test('auto-reload: an atomic binding RPC error throws and releases the event claim for retry', async () => {
+scopedEnv.test('auto-reload: an atomic binding RPC error throws and releases the event claim for retry', async () => {
   const stub = makeStub('track', {
     rpcErrors: {
       claim_auto_reload_payment_intent: { message: 'transient binding failure' },
@@ -3231,7 +3237,7 @@ Deno.test('auto-reload: an atomic binding RPC error throws and releases the even
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
 });
 
-Deno.test('auto-reload: payment_intent.payment_failed marks the attempt failed with the error code', async () => {
+scopedEnv.test('auto-reload: payment_intent.payment_failed marks the attempt failed with the error code', async () => {
   const stub = makeStub();
   const body = JSON.stringify({
     id: 'evt_ar_fail', type: 'payment_intent.payment_failed',
@@ -3262,7 +3268,7 @@ Deno.test('auto-reload: payment_intent.payment_failed marks the attempt failed w
 
 // ── Surveyor limb (159, §5, slice M-4b) ──────────────────────────────────────
 
-Deno.test('surveyor checkout grants the ENTITLEMENT (no tier/auth write) + surveyor_start money_events', async () => {
+scopedEnv.test('surveyor checkout grants the ENTITLEMENT (no tier/auth write) + surveyor_start money_events', async () => {
   const stub = makeStub();
   const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/surv' });
   const body = JSON.stringify({
@@ -3284,7 +3290,7 @@ Deno.test('surveyor checkout grants the ENTITLEMENT (no tier/auth write) + surve
   assertEquals(stub.moneyEvents[0].kind, 'surveyor_start');
 });
 
-Deno.test('THE ALLOWANCE TRAP: a Surveyor invoice mints NO 30-credit allowance + is a surveyor_renewal', async () => {
+scopedEnv.test('THE ALLOWANCE TRAP: a Surveyor invoice mints NO 30-credit allowance + is a surveyor_renewal', async () => {
   Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
   Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
   try {
@@ -3308,7 +3314,7 @@ Deno.test('THE ALLOWANCE TRAP: a Surveyor invoice mints NO 30-credit allowance +
   }
 });
 
-Deno.test('a Cartographer invoice with the premium price still mints the allowance (subscription_renewal)', async () => {
+scopedEnv.test('a Cartographer invoice with the premium price still mints the allowance (subscription_renewal)', async () => {
   Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
   Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
   try {
@@ -3330,7 +3336,7 @@ Deno.test('a Cartographer invoice with the premium price still mints the allowan
   }
 });
 
-Deno.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the Cartographer downgrade', async () => {
+scopedEnv.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the Cartographer downgrade', async () => {
   const stub = makeStub('track', { rpcData: { revoke_surveyor_entitlement_by_subscription: true } });
   const body = JSON.stringify({
     id: 'evt_surv_del', type: 'customer.subscription.deleted',
@@ -3351,7 +3357,7 @@ Deno.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the C
 // The pack clawback reverses the FULL 'purchase' grant through the atomic
 // system_clawback_credits RPC (migration 190), keyed on the same session id.
 
-Deno.test('classifyChargeReversal names dispute / full / partial, and NEVER throws on ambiguity', () => {
+scopedEnv.test('classifyChargeReversal names dispute / full / partial, and NEVER throws on ambiguity', () => {
   // deno-lint-ignore no-explicit-any
   const refundEvt = (amount?: number, amount_refunded?: number): any => ({
     type: 'charge.refunded', data: { object: { id: 'ch_c', amount, amount_refunded } },
@@ -3367,7 +3373,7 @@ Deno.test('classifyChargeReversal names dispute / full / partial, and NEVER thro
   assertEquals(classifyChargeReversal(refundEvt(1000, 0)), 'full_refund');
 });
 
-Deno.test('a PARTIAL refund (amount_refunded < amount) still runs the FULL clawback lattice', async () => {
+scopedEnv.test('a PARTIAL refund (amount_refunded < amount) still runs the FULL clawback lattice', async () => {
   // The founder stub is the richest lattice observer: if the partial refund
   // routed anywhere but the full path, the is_founder flip and the FULL −30
   // bonus reversal below would not happen.
@@ -3437,7 +3443,7 @@ const packRefund = (eventId: string) => JSON.stringify({
   data: { object: { id: 'ch_p', invoice: null, payment_intent: 'pi_p', amount: 999, amount_refunded: 999 } },
 });
 
-Deno.test('a refunded pack charge routes its session key through system_clawback_credits', async () => {
+scopedEnv.test('a refunded pack charge routes its session key through system_clawback_credits', async () => {
   const stub = makePackStub();
   const body = packRefund('evt_pack_refund_1');
   const res = await handleStripeWebhook(
@@ -3451,7 +3457,7 @@ Deno.test('a refunded pack charge routes its session key through system_clawback
   assertEquals((claw!.args as { p_reason: string }).p_reason, 'full_refund');
 });
 
-Deno.test('a DISPUTE also routes to the pack clawback, recorded as class dispute', async () => {
+scopedEnv.test('a DISPUTE also routes to the pack clawback, recorded as class dispute', async () => {
   const stub = makePackStub();
   const body = JSON.stringify({
     id: 'evt_pack_dispute_1', type: 'charge.dispute.created',
@@ -3467,7 +3473,7 @@ Deno.test('a DISPUTE also routes to the pack clawback, recorded as class dispute
   assertEquals((claw!.args as { p_reason: string }).p_reason, 'dispute');
 });
 
-Deno.test('a refund of a NON-pack session no-ops through the RPC (no throw, 200)', async () => {
+scopedEnv.test('a refund of a NON-pack session no-ops through the RPC (no throw, 200)', async () => {
   const stub = makePackStub({ rpcResult: { ok: false, reason: 'no_pack_grant' } });
   const body = packRefund('evt_pack_refund_nonpack');
   const res = await handleStripeWebhook(
@@ -3478,7 +3484,7 @@ Deno.test('a refund of a NON-pack session no-ops through the RPC (no throw, 200)
   assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 1);
 });
 
-Deno.test('a redelivered pack refund re-asks the RPC; the claim-once lives in the RPC (already_clawed_back)', async () => {
+scopedEnv.test('a redelivered pack refund re-asks the RPC; the claim-once lives in the RPC (already_clawed_back)', async () => {
   // Webhook side: each delivery calls the RPC (the dossier posture); the pglite
   // suite pins that the SECOND call deducts nothing (already_clawed_back).
   const stub = makePackStub();
@@ -3489,7 +3495,7 @@ Deno.test('a redelivered pack refund re-asks the RPC; the claim-once lives in th
   assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 2);
 });
 
-Deno.test('a pack-clawback TRANSPORT failure throws (non-2xx → Stripe redelivers) and releases the event claim', async () => {
+scopedEnv.test('a pack-clawback TRANSPORT failure throws (non-2xx → Stripe redelivers) and releases the event claim', async () => {
   // The RPC is one atomic transaction: an error means nothing committed, so the
   // throw posture loses no claim — the redelivery re-runs the whole reversal.
   const stub = makePackStub({ rpcError: { message: 'transient rpc boom' } });

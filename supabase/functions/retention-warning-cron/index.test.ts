@@ -15,11 +15,17 @@
  *   - send failure → counted as failed and the dedup claim is RELEASED (retry)
  */
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { installScopedTestEnv } from "../_shared/scopedTestEnv.ts";
 
-Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
-Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service_role_dummy");
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: "https://stub.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: "service_role_dummy",
+});
 
 const { handleRetentionWarningCron } = await import("./index.ts");
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const SECRET = "correct-horse-battery-staple";
 
@@ -114,36 +120,36 @@ function req(method = "POST", secret: string | null = SECRET) {
   return new Request("https://x/retention-warning-cron", { method, headers });
 }
 
-Deno.test("non-POST → 405", async () => {
+scopedEnv.test("non-POST → 405", async () => {
   const res = await handleRetentionWarningCron(req("GET"), { envSecret: () => SECRET });
   assertEquals(res.status, 405);
 });
 
-Deno.test("env secret unset → 503 (fail closed)", async () => {
+scopedEnv.test("env secret unset → 503 (fail closed)", async () => {
   const res = await handleRetentionWarningCron(req(), { envSecret: () => undefined });
   assertEquals(res.status, 503);
 });
 
-Deno.test("wrong x-cron-secret → 403", async () => {
+scopedEnv.test("wrong x-cron-secret → 403", async () => {
   const res = await handleRetentionWarningCron(req("POST", "nope"), { envSecret: () => SECRET });
   assertEquals(res.status, 403);
 });
 
-Deno.test("config enabled:false → skipped:disabled", async () => {
+scopedEnv.test("config enabled:false → skipped:disabled", async () => {
   const { client } = makeAdminClient({ cfg: { enabled: false, url: "u", secret: "s" } });
   const res = await handleRetentionWarningCron(req(), { envSecret: () => SECRET, adminClient: () => client });
   assertEquals(res.status, 200);
   assertEquals((await res.json()).skipped, "disabled");
 });
 
-Deno.test("config read error → 503 config_unavailable (fail closed)", async () => {
+scopedEnv.test("config read error → 503 config_unavailable (fail closed)", async () => {
   const { client } = makeAdminClient({ cfgError: true });
   const res = await handleRetentionWarningCron(req(), { envSecret: () => SECRET, adminClient: () => client });
   assertEquals(res.status, 503);
   assertEquals((await res.json()).skipped, "config_unavailable");
 });
 
-Deno.test("happy path — sweeps, groups, claims, sends once", async () => {
+scopedEnv.test("happy path — sweeps, groups, claims, sends once", async () => {
   // Two rows for the same owner+expiry (one settlement, one map) → ONE warning.
   const { client, audits, upserts } = makeAdminClient({
     cfg: enabledCfg,
@@ -174,7 +180,7 @@ Deno.test("happy path — sweeps, groups, claims, sends once", async () => {
   assertEquals(upserts.some((u) => u.rows[0].key === "retention_warning_last_run"), true);
 });
 
-Deno.test("already-warned slot is SKIPPED (at-most-once)", async () => {
+scopedEnv.test("already-warned slot is SKIPPED (at-most-once)", async () => {
   const { client } = makeAdminClient({
     cfg: enabledCfg,
     assets: { settlements: [{ user_id: "u1", retention_expires_at: "2026-07-10T00:00:00Z" }] },
@@ -194,7 +200,7 @@ Deno.test("already-warned slot is SKIPPED (at-most-once)", async () => {
   assertEquals(sent, 0);
 });
 
-Deno.test("send failure releases the claim (retry next night)", async () => {
+scopedEnv.test("send failure releases the claim (retry next night)", async () => {
   const { client, deletes } = makeAdminClient({
     cfg: enabledCfg,
     assets: { settlements: [{ user_id: "u2", retention_expires_at: "2026-07-11T00:00:00Z" }] },

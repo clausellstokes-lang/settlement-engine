@@ -8,11 +8,17 @@
  * rejection, and the rate-limit gate. No live Supabase, no live Resend.
  */
 import { assertEquals, assertStringIncludes } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('RESEND_API_KEY', 're_test_dummy');
-Deno.env.set('RESEND_FROM_EMAIL', 'SettlementForge <hello@settlementforge.test>');
+const scopedEnv = installScopedTestEnv({
+  RESEND_API_KEY: 're_test_dummy',
+  RESEND_FROM_EMAIL: 'SettlementForge <hello@settlementforge.test>',
+});
 
 const { handleSendEmail } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 type Dispatched = { to: string; from: string; subject: string; text: string };
 
@@ -53,7 +59,7 @@ const capBody = (payload: Record<string, unknown>, recipient = 'reader@example.c
   payload,
 });
 
-Deno.test('legit cap_warning (digit strings, as the client sends) dispatches with the counters rendered', async () => {
+scopedEnv.test('legit cap_warning (digit strings, as the client sends) dispatches with the counters rendered', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(post(capBody({ capUsed: '3', capTotal: '3' })), deps);
   assertEquals(res.status, 200);
@@ -63,14 +69,14 @@ Deno.test('legit cap_warning (digit strings, as the client sends) dispatches wit
   assertStringIncludes(sent[0].text, '(3 of 3 used)');
 });
 
-Deno.test('numeric counter values are accepted too', async () => {
+scopedEnv.test('numeric counter values are accepted too', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(post(capBody({ capUsed: 2, capTotal: 3 })), deps);
   assertEquals(res.status, 200);
   assertStringIncludes(sent[0].text, '(2 of 3 used)');
 });
 
-Deno.test('free text in a placeholder is rejected 400 and nothing is dispatched', async () => {
+scopedEnv.test('free text in a placeholder is rejected 400 and nothing is dispatched', async () => {
   const { deps, sent, limited } = makeDeps();
   const attackerCopy =
     'URGENT — your SettlementForge account was compromised. Reset now: http://evil.example/reset';
@@ -85,7 +91,7 @@ Deno.test('free text in a placeholder is rejected 400 and nothing is dispatched'
   assertEquals(limited.length, 0);
 });
 
-Deno.test('a URL smuggled into the second slot is rejected too', async () => {
+scopedEnv.test('a URL smuggled into the second slot is rejected too', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(
     post(capBody({ capUsed: '3', capTotal: '3 — claim a refund at http://evil.example' })),
@@ -95,7 +101,7 @@ Deno.test('a URL smuggled into the second slot is rejected too', async () => {
   assertEquals(sent.length, 0);
 });
 
-Deno.test('non-digit shapes are rejected: negatives, decimals, exponents, padded, empty, oversized', async () => {
+scopedEnv.test('non-digit shapes are rejected: negatives, decimals, exponents, padded, empty, oversized', async () => {
   const { deps, sent } = makeDeps();
   for (const bad of ['-1', '3.5', '1e3', ' 3', '3 ', '', '99999', -1, 3.5, Infinity, NaN, null, true, ['3'], { v: '3' }]) {
     const res = await handleSendEmail(post(capBody({ capUsed: bad, capTotal: '3' })), deps);
@@ -104,14 +110,14 @@ Deno.test('non-digit shapes are rejected: negatives, decimals, exponents, padded
   assertEquals(sent.length, 0);
 });
 
-Deno.test('a missing counter is rejected (every declared placeholder is required)', async () => {
+scopedEnv.test('a missing counter is rejected (every declared placeholder is required)', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(post(capBody({ capUsed: '3' })), deps);
   assertEquals(res.status, 400);
   assertEquals(sent.length, 0);
 });
 
-Deno.test('keys outside the schema are dropped — displayName cannot be smuggled into the render', async () => {
+scopedEnv.test('keys outside the schema are dropped — displayName cannot be smuggled into the render', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(
     post(capBody({ capUsed: '3', capTotal: '3', displayName: 'visit http://evil.example' })),
@@ -122,7 +128,7 @@ Deno.test('keys outside the schema are dropped — displayName cannot be smuggle
   assertEquals(sent[0].text.includes('evil.example'), false);
 });
 
-Deno.test('implausible recipient is rejected 400 before any other work', async () => {
+scopedEnv.test('implausible recipient is rejected 400 before any other work', async () => {
   const { deps, sent, limited } = makeDeps();
   const res = await handleSendEmail(
     post(capBody({ capUsed: '3', capTotal: '3' }, 'not-an-email')),
@@ -134,7 +140,7 @@ Deno.test('implausible recipient is rejected 400 before any other work', async (
   assertEquals(limited.length, 0);
 });
 
-Deno.test('an over-limit caller gets 429 and no email leaves', async () => {
+scopedEnv.test('an over-limit caller gets 429 and no email leaves', async () => {
   const { deps, sent } = makeDeps({ allow: false });
   const res = await handleSendEmail(post(capBody({ capUsed: '3', capTotal: '3' })), deps);
   assertEquals(res.status, 429);
@@ -142,7 +148,7 @@ Deno.test('an over-limit caller gets 429 and no email leaves', async () => {
   assertEquals(sent.length, 0);
 });
 
-Deno.test('an obvious bot UA is rejected and never dispatches', async () => {
+scopedEnv.test('an obvious bot UA is rejected and never dispatches', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(
     post(capBody({ capUsed: '3', capTotal: '3' }), 'curl/8.0'),
@@ -152,7 +158,7 @@ Deno.test('an obvious bot UA is rejected and never dispatches', async () => {
   assertEquals(sent.length, 0);
 });
 
-Deno.test('unknown template is rejected 400', async () => {
+scopedEnv.test('unknown template is rejected 400', async () => {
   const { deps, sent } = makeDeps();
   const res = await handleSendEmail(post({ template: 'nope', payload: {} }), deps);
   assertEquals(res.status, 400);

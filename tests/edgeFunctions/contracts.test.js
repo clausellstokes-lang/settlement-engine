@@ -104,14 +104,31 @@ describe('edge contracts are a complement to the executing Deno suite', () => {
   }
 
   it('the executing suites actually invoke a handler (not empty stubs)', () => {
-    // A one-line grep that the trust-boundary suite EXECUTES the handler — so an
-    // emptied-out .test.ts that still exists on disk can't satisfy the presence
-    // check above while covering nothing. Deno test files call `Deno.test(...)`.
+    // A grep that the trust-boundary suite EXECUTES the handler — so an emptied-out
+    // .test.ts that still exists on disk can't satisfy the presence check above while
+    // covering nothing.
+    //
+    // ⚠⚠ THE SPELLING MOVED AND THE PIN WAS STRENGTHENED RATHER THAN RE-AIMED. Every edge
+    // suite now registers through `_shared/scopedTestEnv.ts`'s `scopedEnv.test`, because a
+    // module-top `Deno.env.set` was ambient for every alphabetically later suite in the one
+    // shared `deno test` process and red the deno-tests CI job. A regex that knew only the
+    // old spelling would have gone VACUOUS in the direction that fails OPEN — matching
+    // nothing and therefore proving nothing — so both spellings are admitted, and the bare
+    // presence match is replaced by a COUNT FLOOR that a token stub cannot satisfy.
     const webhookSuite = readFileSync(
       join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
       'utf8',
     );
-    expect(webhookSuite).toMatch(/Deno\.test\s*\(/);
+    const registrations = webhookSuite.match(/(?:Deno|scopedEnv)\.test\s*\(/g) || [];
+    expect(
+      registrations.length,
+      'stripe-webhook/index.test.ts registers too few executing tests — the money-path '
+        + 'trust boundary has been hollowed out',
+    ).toBeGreaterThanOrEqual(50);
+    // …and the registrar really does reach Deno's own runner, so the count above cannot be
+    // satisfied by a local helper that registers nothing.
+    const seam = readFileSync(join(FUNCTIONS_DIR, '_shared', 'scopedTestEnv.ts'), 'utf8');
+    expect(seam).toMatch(/Deno\.test\(/);
   });
 });
 

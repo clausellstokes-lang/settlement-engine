@@ -17,13 +17,19 @@
  * this file pins what the SHELL does with the answer.
  */
 import { assertEquals, assert } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_dummy');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('ANTHROPIC_API_KEY', 'sk-house-key-never-to-be-used');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_dummy',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  ANTHROPIC_API_KEY: 'sk-house-key-never-to-be-used',
+});
 
 const { handleAiAnalyst } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 type RpcCall = { fn: string; args: Record<string, unknown> };
 
@@ -74,7 +80,7 @@ function fetchSpy() {
 
 const MONEY_RPCS = ['reserve_ai_spend', 'spend_credits', 'refund_credits', 'release_ai_spend_reservation'];
 
-Deno.test('vault error + a stored key: typed 503, no provider call, no money RPC', async () => {
+scopedEnv.test('vault error + a stored key: typed 503, no provider call, no money RPC', async () => {
   const adminSeen: RpcCall[] = [];
   const userSeen: RpcCall[] = [];
   const spy = fetchSpy();
@@ -103,7 +109,7 @@ Deno.test('vault error + a stored key: typed 503, no provider call, no money RPC
   assertEquals(userSeen.filter((c) => c.fn === 'surveyor_byok_status').length, 1);
 });
 
-Deno.test('vault error + NO stored key: the managed house path is untouched', async () => {
+scopedEnv.test('vault error + NO stored key: the managed house path is untouched', async () => {
   const adminSeen: RpcCall[] = [];
   const userSeen: RpcCall[] = [];
   const spy = fetchSpy();
@@ -130,7 +136,7 @@ Deno.test('vault error + NO stored key: the managed house path is untouched', as
   assertEquals(spy.calls.length, 0); // the cap stopped it before the provider, as designed
 });
 
-Deno.test('a healthy vault read never consults the witness (no extra round-trip)', async () => {
+scopedEnv.test('a healthy vault read never consults the witness (no extra round-trip)', async () => {
   const adminSeen: RpcCall[] = [];
   const userSeen: RpcCall[] = [];
   const spy = fetchSpy();

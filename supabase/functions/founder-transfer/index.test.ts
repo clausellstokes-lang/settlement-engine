@@ -4,19 +4,25 @@
  * velocity, and the initiate happy path against recording stubs.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'svc');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon');
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('STRIPE_PRICE_SEAT_TRANSFER', 'price_transfer');
-// RESEND configured so sendTransferEmail actually dispatches (into the injected
-// emailDispatch stub) — lets the run_due cooling-notification tests assert the token email.
-Deno.env.set('RESEND_API_KEY', 're_test');
-Deno.env.set('RESEND_FROM_EMAIL', 'noreply@settlementforge.com');
-Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_c25'); // the §4.4 rate anchor (credits election)
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'svc',
+  SUPABASE_ANON_KEY: 'anon',
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  STRIPE_PRICE_SEAT_TRANSFER: 'price_transfer',
+  // RESEND configured so sendTransferEmail actually dispatches (into the injected
+  // emailDispatch stub) — lets the run_due cooling-notification tests assert the token email.
+  RESEND_API_KEY: 're_test',
+  RESEND_FROM_EMAIL: 'noreply@settlementforge.com',
+  STRIPE_PRICE_CREDITS_25: 'price_c25', // the §4.4 rate anchor (credits election)
+});
 
 const { handleFounderTransfer, hashToken, __resetRateCacheForTest } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const req = (body: unknown, headers: Record<string, string> = { Authorization: 'Bearer jwt' }) =>
   new Request('https://edge/founder-transfer', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) });
@@ -89,20 +95,20 @@ function makeDeps(cfg: {
   };
 }
 
-Deno.test('master switch OFF → feature_unavailable for every action (KEY-INERT)', async () => {
+scopedEnv.test('master switch OFF → feature_unavailable for every action (KEY-INERT)', async () => {
   const { deps } = makeDeps({ enabled: false });
   const res = await handleFounderTransfer(req({ action: 'initiate', to_email: 'nom@x.com' }), deps);
   assertEquals(res.status, 503);
   assertEquals((await res.json()).error, 'feature_unavailable');
 });
 
-Deno.test('missing Authorization → 401', async () => {
+scopedEnv.test('missing Authorization → 401', async () => {
   const { deps } = makeDeps({});
   const res = await handleFounderTransfer(req({ action: 'status' }, {}), deps);
   assertEquals(res.status, 401);
 });
 
-Deno.test('a SUPERSEDED session → 401 (no transfer step taken)', async () => {
+scopedEnv.test('a SUPERSEDED session → 401 (no transfer step taken)', async () => {
   const { deps } = makeDeps({ sessionRow: { session_id: 'other-session' } });
   // The JWT here has no decodable session_id claim, so the gate would allow — force a
   // superseded state by giving a real-ish token with a session_id claim.
@@ -121,7 +127,7 @@ const jwtWithSession = (sid: string) => {
   return `${b64({ alg: 'HS256' })}.${b64({ sub: 'u1', session_id: sid })}.sig`;
 };
 
-Deno.test('§10.7 escape hatch: a SUPERSEDED session with an abort TOKEN still halts the transfer (session-independent)', async () => {
+scopedEnv.test('§10.7 escape hatch: a SUPERSEDED session with an abort TOKEN still halts the transfer (session-independent)', async () => {
   // A different device won the session (sessionRow), so this caller's JWT is superseded —
   // yet the email-token abort MUST still work (§6.3/§7.3: the escape hatch for a party
   // locked out of their session). The gate is skipped ONLY because a token is present.
@@ -139,7 +145,7 @@ Deno.test('§10.7 escape hatch: a SUPERSEDED session with an abort TOKEN still h
   assertEquals(rpcCalls.some((c) => c.fn === 'transfer_case_abort'), true);
 });
 
-Deno.test('§10.7 the gate still holds: a SUPERSEDED session aborting WITHOUT a token → 401 (only the token bypasses)', async () => {
+scopedEnv.test('§10.7 the gate still holds: a SUPERSEDED session aborting WITHOUT a token → 401 (only the token bypasses)', async () => {
   const { deps } = makeDeps({ sessionRow: { session_id: 'winner-session' } });
   const res = await handleFounderTransfer(
     req({ action: 'abort', case_id: 'c1' }, { Authorization: `Bearer ${jwtWithSession('evicted-session')}` }),
@@ -149,13 +155,13 @@ Deno.test('§10.7 the gate still holds: a SUPERSEDED session aborting WITHOUT a 
   assertEquals((await res.json()).error, 'session_superseded');
 });
 
-Deno.test('velocity over-cap → 429', async () => {
+scopedEnv.test('velocity over-cap → 429', async () => {
   const { deps } = makeDeps({ rate: false });
   const res = await handleFounderTransfer(req({ action: 'status' }), deps);
   assertEquals(res.status, 429);
 });
 
-Deno.test('initiate opens the case and issues+emails the outgoing challenge', async () => {
+scopedEnv.test('initiate opens the case and issues+emails the outgoing challenge', async () => {
   const { deps, rpcCalls } = makeDeps({
     rows: { founder_seats: { seat_id: 7 } },
     rpc: {
@@ -175,7 +181,7 @@ Deno.test('initiate opens the case and issues+emails the outgoing challenge', as
   assertEquals(rpcCalls.some((c) => c.fn === 'issue_transfer_challenge'), true);
 });
 
-Deno.test('initiate refuses when the case cannot open (e.g. not yet eligible)', async () => {
+scopedEnv.test('initiate refuses when the case cannot open (e.g. not yet eligible)', async () => {
   const { deps } = makeDeps({
     rows: { founder_seats: { seat_id: 7 } },
     rpc: { transfer_case_open: { ok: false, reason: 'not_yet_eligible' } },
@@ -185,7 +191,7 @@ Deno.test('initiate refuses when the case cannot open (e.g. not yet eligible)', 
   assertEquals((await res.json()).reason, 'not_yet_eligible');
 });
 
-Deno.test('an unknown action → 400', async () => {
+scopedEnv.test('an unknown action → 400', async () => {
   const { deps } = makeDeps({});
   const res = await handleFounderTransfer(req({ action: 'wat' }), deps);
   assertEquals(res.status, 400);
@@ -194,7 +200,7 @@ Deno.test('an unknown action → 400', async () => {
 // ── FF-d (fraud-fix P2 hardening) ────────────────────────────────────────────
 // (1) The initiate anomaly pre-check FAILS CLOSED (§6.3's conservative intent): a read
 //     error on the credential-change probe HOLDS the initiate rather than proceeding blind.
-Deno.test('FF-d: initiate FAILS CLOSED when the credential-change read throws (security_hold, case NOT opened)', async () => {
+scopedEnv.test('FF-d: initiate FAILS CLOSED when the credential-change read throws (security_hold, case NOT opened)', async () => {
   const { deps, rpcCalls } = makeDeps({
     rows: { founder_seats: { seat_id: 7 } },
     getUserById: () => Promise.reject(new Error('supabase admin down')),
@@ -209,7 +215,7 @@ Deno.test('FF-d: initiate FAILS CLOSED when the credential-change read throws (s
 
 // (2) A mid-transfer supersession leaves a trace: a superseded, case-bearing action
 //     appends a 'session_superseded_during_transfer' case audit event before the 401 (§7.3).
-Deno.test('FF-d: a superseded case-bearing action appends the §7.3 session_superseded_during_transfer event before 401', async () => {
+scopedEnv.test('FF-d: a superseded case-bearing action appends the §7.3 session_superseded_during_transfer event before 401', async () => {
   const { deps, rpcCalls } = makeDeps({ sessionRow: { session_id: 'winner' } });
   const res = await handleFounderTransfer(
     req({ action: 'nominee_confirm', case_id: 'c1', code: '000000' }, { Authorization: `Bearer ${jwtWithSession('evicted')}` }),
@@ -224,7 +230,7 @@ Deno.test('FF-d: a superseded case-bearing action appends the §7.3 session_supe
 });
 
 // (3) hashToken is a REAL SHA-256 digest (64 hex chars), not the 32-bit FNV fold (8 chars).
-Deno.test('FF-d: hashToken is a SHA-256 digest (64 hex chars), deterministic', async () => {
+scopedEnv.test('FF-d: hashToken is a SHA-256 digest (64 hex chars), deterministic', async () => {
   const h = await hashToken('the-real-token');
   assertEquals(h.length, 64);
   assertEquals(/^[0-9a-f]{64}$/.test(h), true);
@@ -234,7 +240,7 @@ Deno.test('FF-d: hashToken is a SHA-256 digest (64 hex chars), deterministic', a
 
 // (3b) Round-trip: a NON-party holding the REAL token aborts (the hash IS the authorization);
 //      a FORGED token does not. Proves the digest round-trips end to end (fraudPass a1/a2).
-Deno.test('FF-d: a non-party with the REAL abort token aborts; a forged token is rejected', async () => {
+scopedEnv.test('FF-d: a non-party with the REAL abort token aborts; a forged token is rejected', async () => {
   const token = 'the-real-token';
   const good = makeDeps({
     sessionRow: { session_id: 'winner' },
@@ -398,21 +404,21 @@ const dueReq = (secret: string | null) =>
     body: JSON.stringify({ action: 'run_due' }),
   });
 
-Deno.test('run_due: secret not configured → 503 cron_not_configured', async () => {
+scopedEnv.test('run_due: secret not configured → 503 cron_not_configured', async () => {
   const { deps } = makeRunDueDeps({ secret: '' });
   const res = await handleFounderTransfer(dueReq('anything'), { ...deps, cronSecret: () => '' });
   assertEquals(res.status, 503);
   assertEquals((await res.json()).error, 'cron_not_configured');
 });
 
-Deno.test('run_due: wrong secret → 403 forbidden', async () => {
+scopedEnv.test('run_due: wrong secret → 403 forbidden', async () => {
   const { deps } = makeRunDueDeps({ secret: 'right' });
   const res = await handleFounderTransfer(dueReq('wrong'), deps);
   assertEquals(res.status, 403);
   assertEquals((await res.json()).error, 'forbidden');
 });
 
-Deno.test('run_due: cooling case issues an abort token + emails BOTH parties the link', async () => {
+scopedEnv.test('run_due: cooling case issues an abort token + emails BOTH parties the link', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's',
     cases: [{ id: 'c1', state: 'cooling', from_user: 'from1', to_user: 'to1', seat_id: 7, to_email_lower: 'nom@x.com', cooling_ends_at: '2999-01-01T00:00:00Z' }],
@@ -429,7 +435,7 @@ Deno.test('run_due: cooling case issues an abort token + emails BOTH parties the
   assertEquals(calls.emails.every((e) => e.text.includes('transfer_abort=')), true);
 });
 
-Deno.test('run_due: a cooling case that already has the token is NOT re-issued (idempotent)', async () => {
+scopedEnv.test('run_due: a cooling case that already has the token is NOT re-issued (idempotent)', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's',
     cases: [{ id: 'c1', state: 'cooling', from_user: 'from1', to_user: 'to1', seat_id: 7, to_email_lower: 'nom@x.com', cooling_ends_at: '2999-01-01T00:00:00Z' }],
@@ -441,7 +447,7 @@ Deno.test('run_due: a cooling case that already has the token is NOT re-issued (
   assertEquals(calls.emails.length, 0);
 });
 
-Deno.test('run_due: a due (cooling-elapsed) case finalizes + runs the edge leg (non-subscribed → downgraded)', async () => {
+scopedEnv.test('run_due: a due (cooling-elapsed) case finalizes + runs the edge leg (non-subscribed → downgraded)', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's',
     cases: [
@@ -467,7 +473,7 @@ Deno.test('run_due: a due (cooling-elapsed) case finalizes + runs the edge leg (
   assertEquals((toMirror!.attrs as { user_metadata: { is_founder: boolean } }).user_metadata.is_founder, true);
 });
 
-Deno.test('run_due: a SUBSCRIBED ex-founder KEEPS premium (no downgrade, tier not touched)', async () => {
+scopedEnv.test('run_due: a SUBSCRIBED ex-founder KEEPS premium (no downgrade, tier not touched)', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's',
     cases: [{ id: 'cs', state: 'finalized', from_user: 'fromS', to_user: 'toS', seat_id: 4 }],
@@ -486,7 +492,7 @@ Deno.test('run_due: a SUBSCRIBED ex-founder KEEPS premium (no downgrade, tier no
 // Release via the due-runner: connect_cash → Stripe transfer (idempotency-keyed);
 // account_credits → seat_payout credits grant; Connect/rate absent → parked 'held'.
 
-Deno.test('run_due: connect_cash payout releases via ONE Stripe transfer keyed payout-<case>', async () => {
+scopedEnv.test('run_due: connect_cash payout releases via ONE Stripe transfer keyed payout-<case>', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: true,
     payoutClaims: [{ ok: true, case_id: 'c1', from_user: 'from1', payout_form: 'connect_cash', payout_amount_cents: 4950, connect_account_id: 'acct_x' }],
@@ -514,7 +520,7 @@ Deno.test('run_due: connect_cash payout releases via ONE Stripe transfer keyed p
   assertEquals((me!.rows as Array<{ event_key: string }>)[0].event_key, 'payout:c1');
 });
 
-Deno.test('run_due: connect_cash with Connect ABSENT parks the payout at held (no Stripe call)', async () => {
+scopedEnv.test('run_due: connect_cash with Connect ABSENT parks the payout at held (no Stripe call)', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: false,
     payoutClaims: [{ ok: true, case_id: 'c2', from_user: 'from2', payout_form: 'connect_cash', payout_amount_cents: 4950, connect_account_id: null }],
@@ -526,7 +532,7 @@ Deno.test('run_due: connect_cash with Connect ABSENT parks the payout at held (n
   assertEquals((upd!.obj as { payout_status: string }).payout_status, 'held');
 });
 
-Deno.test('run_due: account_credits election grants seat_payout credits round(4950/rate) and releases', async () => {
+scopedEnv.test('run_due: account_credits election grants seat_payout credits round(4950/rate) and releases', async () => {
   __resetRateCacheForTest();
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: false, priceUnitAmount: 495, // 19.8 c/credit → round(4950*25/495) = 250
@@ -545,7 +551,7 @@ Deno.test('run_due: account_credits election grants seat_payout credits round(49
   assertEquals((upd!.obj as { payout_status: string }).payout_status, 'released');
 });
 
-Deno.test('run_due: account_credits with no configured rate parks at held (LAW 1, grants nothing)', async () => {
+scopedEnv.test('run_due: account_credits with no configured rate parks at held (LAW 1, grants nothing)', async () => {
   __resetRateCacheForTest();
   const { deps, calls } = makeRunDueDeps({
     secret: 's', priceUnitAmount: null, // prices.retrieve throws → no rate
@@ -558,14 +564,14 @@ Deno.test('run_due: account_credits with no configured rate parks at held (LAW 1
   assertEquals((upd!.obj as { payout_status: string }).payout_status, 'held');
 });
 
-Deno.test('payout_onboarding: Connect disabled → clean 503 (KEY-INERT, no Stripe call attempted)', async () => {
+scopedEnv.test('payout_onboarding: Connect disabled → clean 503 (KEY-INERT, no Stripe call attempted)', async () => {
   const { deps } = makeDeps({});
   const res = await handleFounderTransfer(req({ action: 'payout_onboarding' }), deps);
   assertEquals(res.status, 503);
   assertEquals((await res.json()).error, 'connect_unavailable');
 });
 
-Deno.test('payout_onboarding: Connect enabled + a pending cash payout → Express account, stamp + re-arm', async () => {
+scopedEnv.test('payout_onboarding: Connect enabled + a pending cash payout → Express account, stamp + re-arm', async () => {
   const accounts: Array<Record<string, unknown>> = [];
   // deno-lint-ignore no-explicit-any
   const stripeStub: any = {
@@ -583,7 +589,7 @@ Deno.test('payout_onboarding: Connect enabled + a pending cash payout → Expres
   assertEquals(updateCalls.some((u) => (u.obj as { payout_status?: string }).payout_status === 'scheduled'), true);
 });
 
-Deno.test('reelect_payout: re-opens a parked cash election (RPC ok) → 200, caller-scoped', async () => {
+scopedEnv.test('reelect_payout: re-opens a parked cash election (RPC ok) → 200, caller-scoped', async () => {
   const { deps, rpcCalls } = makeDeps({ rpc: { reelect_transfer_payout: { ok: true, case_id: 'c9' } } });
   const res = await handleFounderTransfer(req({ action: 'reelect_payout', case_id: 'c9' }), deps);
   assertEquals(res.status, 200);
@@ -595,14 +601,14 @@ Deno.test('reelect_payout: re-opens a parked cash election (RPC ok) → 200, cal
 
 // ───────────────────────── THE STEWARDSHIP LIMB (§6.8, M-10) ─────────────────────
 
-Deno.test('buyback_start: the buyback master switch OFF → feature_unavailable (independent of transfers)', async () => {
+scopedEnv.test('buyback_start: the buyback master switch OFF → feature_unavailable (independent of transfers)', async () => {
   const { deps } = makeDeps({ buybackEnabled: false });
   const res = await handleFounderTransfer(req({ action: 'buyback_start' }), deps);
   assertEquals(res.status, 503);
   assertEquals((await res.json()).error, 'feature_unavailable');
 });
 
-Deno.test('buyback_status: switch ON → available:true (dark switch → feature_unavailable)', async () => {
+scopedEnv.test('buyback_status: switch ON → available:true (dark switch → feature_unavailable)', async () => {
   let res = await handleFounderTransfer(req({ action: 'buyback_status' }), makeDeps({ buybackEnabled: true }).deps);
   assertEquals(res.status, 200);
   assertEquals((await res.json()).available, true);
@@ -610,7 +616,7 @@ Deno.test('buyback_status: switch ON → available:true (dark switch → feature
   assertEquals(res.status, 503);
 });
 
-Deno.test('buyback_start: a non-founder → 403; a founder in a live case → 409', async () => {
+scopedEnv.test('buyback_start: a non-founder → 403; a founder in a live case → 409', async () => {
   let d = makeDeps({ buybackEnabled: true, rows: {} });
   let res = await handleFounderTransfer(req({ action: 'buyback_start' }), d.deps);
   assertEquals(res.status, 403);
@@ -622,7 +628,7 @@ Deno.test('buyback_start: a non-founder → 403; a founder in a live case → 40
   assertEquals((await res.json()).error, 'live_case');
 });
 
-Deno.test('buyback_start: a founder with a normal seat → issues + emails the buyback code', async () => {
+scopedEnv.test('buyback_start: a founder with a normal seat → issues + emails the buyback code', async () => {
   const { deps, rpcCalls } = makeDeps({
     buybackEnabled: true,
     rows: { founder_seats: { seat_id: 3, security_status: 'normal' } },
@@ -634,7 +640,7 @@ Deno.test('buyback_start: a founder with a normal seat → issues + emails the b
   assertEquals(rpcCalls.some((c) => c.fn === 'issue_buyback_challenge'), true);
 });
 
-Deno.test('buyback_confirm: verifies the code, releases the seat, runs the ex-founder tier leg', async () => {
+scopedEnv.test('buyback_confirm: verifies the code, releases the seat, runs the ex-founder tier leg', async () => {
   const { deps, rpcCalls } = makeDeps({
     buybackEnabled: true,
     rows: { profiles: { stripe_subscription_id: null } },   // non-subscribed → downgrade
@@ -653,14 +659,14 @@ Deno.test('buyback_confirm: verifies the code, releases the seat, runs the ex-fo
   assertEquals(rpcCalls.some((c) => c.fn === 'handle_premium_downgrade'), true);
 });
 
-Deno.test('buyback_confirm: a bad code → 400 and NO seat release', async () => {
+scopedEnv.test('buyback_confirm: a bad code → 400 and NO seat release', async () => {
   const { deps, rpcCalls } = makeDeps({ buybackEnabled: true, rpc: { verify_buyback_challenge: { ok: false, reason: 'bad_code' } } });
   const res = await handleFounderTransfer(req({ action: 'buyback_confirm', code: '000000' }), deps);
   assertEquals(res.status, 400);
   assertEquals(rpcCalls.some((c) => c.fn === 'claim_founder_seat_buyback'), false);
 });
 
-Deno.test('run_due: a buyback connect_cash payout releases via ONE transfer keyed buyback-<id>, state → paid', async () => {
+scopedEnv.test('run_due: a buyback connect_cash payout releases via ONE transfer keyed buyback-<id>, state → paid', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: true,
     buybackClaims: [{ ok: true, buyback_id: 'bb9', from_user: 'fromB', payout_form: 'connect_cash', payout_amount_cents: 2500, connect_account_id: 'acct_b' }],
@@ -679,7 +685,7 @@ Deno.test('run_due: a buyback connect_cash payout releases via ONE transfer keye
   assertEquals((me!.rows as Array<{ kind: string }>)[0].kind, 'seat_buyback');
 });
 
-Deno.test('run_due: a buyback with Connect ABSENT parks at held (no Stripe call)', async () => {
+scopedEnv.test('run_due: a buyback with Connect ABSENT parks at held (no Stripe call)', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: false,
     buybackClaims: [{ ok: true, buyback_id: 'bb2', from_user: 'f2', payout_form: 'connect_cash', payout_amount_cents: 2500, connect_account_id: null }],
@@ -691,7 +697,7 @@ Deno.test('run_due: a buyback with Connect ABSENT parks at held (no Stripe call)
   assertEquals((upd!.obj as { state: string }).state, 'held');
 });
 
-Deno.test('run_due: a buyback account_credits election grants seat_payout credits, dedup by buyback_id', async () => {
+scopedEnv.test('run_due: a buyback account_credits election grants seat_payout credits, dedup by buyback_id', async () => {
   __resetRateCacheForTest();
   const { deps, calls } = makeRunDueDeps({
     secret: 's', connectOn: false, priceUnitAmount: 500, // 20c/credit → round(2500*25/500)=125
@@ -707,7 +713,7 @@ Deno.test('run_due: a buyback account_credits election grants seat_payout credit
   assertEquals(gArgs.metadata.buyback_id, 'bb3');
 });
 
-Deno.test('run_due: the stewardship sweeps email dormancy nudges + abandonment notices/escheats', async () => {
+scopedEnv.test('run_due: the stewardship sweeps email dormancy nudges + abandonment notices/escheats', async () => {
   const { deps, calls } = makeRunDueDeps({
     secret: 's',
     dormancyNudges: [{ seat_id: 7, user_id: 'dormant1' }],
@@ -725,7 +731,7 @@ Deno.test('run_due: the stewardship sweeps email dormancy nudges + abandonment n
   assertEquals(calls.emails.length, 3);
 });
 
-Deno.test('reelect_payout: a non-reelectable case → 409', async () => {
+scopedEnv.test('reelect_payout: a non-reelectable case → 409', async () => {
   const { deps } = makeDeps({ rpc: { reelect_transfer_payout: { ok: false, reason: 'not_reelectable' } } });
   const res = await handleFounderTransfer(req({ action: 'reelect_payout', case_id: 'c9' }), deps);
   assertEquals(res.status, 409);

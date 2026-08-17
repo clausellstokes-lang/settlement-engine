@@ -9,11 +9,17 @@
  * behind a disabled or unreadable database kill switch.
  */
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { installScopedTestEnv } from "../_shared/scopedTestEnv.ts";
 
-Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
-Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service-role-stub");
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: "https://stub.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: "service-role-stub",
+});
 
 const { handlePaymentRefundWorker } = await import("./index.ts");
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 const SECRET = "correct-horse-battery-staple";
 
 function workerRequest(method = "POST", secret: string | null = SECRET) {
@@ -85,7 +91,7 @@ const EMPTY_RECOVERY_SUMMARY = {
   capped: false,
 };
 
-Deno.test("refund worker is POST-only and fail-closed on its environment secret", async () => {
+scopedEnv.test("refund worker is POST-only and fail-closed on its environment secret", async () => {
   let response = await handlePaymentRefundWorker(workerRequest("GET"), {
     envSecret: () => SECRET,
   });
@@ -105,7 +111,7 @@ Deno.test("refund worker is POST-only and fail-closed on its environment secret"
   assertEquals(response.status, 403);
 });
 
-Deno.test("database kill switch and config reads fail closed before claims", async () => {
+scopedEnv.test("database kill switch and config reads fail closed before claims", async () => {
   let admin = makeAdmin({ cfg: { enabled: false } });
   let queueCalls = 0;
   let response = await handlePaymentRefundWorker(workerRequest(), {
@@ -129,7 +135,7 @@ Deno.test("database kill switch and config reads fail closed before claims", asy
   assertEquals((await response.json()).skipped, "config_unavailable");
 });
 
-Deno.test("enabled config remains inert until URL and matching secret are present", async () => {
+scopedEnv.test("enabled config remains inert until URL and matching secret are present", async () => {
   let admin = makeAdmin({
     cfg: { enabled: true, url: null, secret: null },
   });
@@ -155,7 +161,7 @@ Deno.test("enabled config remains inert until URL and matching secret are presen
   assertEquals((await response.json()).skipped, "config_secret_mismatch");
 });
 
-Deno.test("happy path passes bounded database config into the leased reconciler", async () => {
+scopedEnv.test("happy path passes bounded database config into the leased reconciler", async () => {
   const admin = makeAdmin();
   let queueOptions: Record<string, unknown> | null = null;
   const response = await handlePaymentRefundWorker(workerRequest(), {
@@ -182,7 +188,7 @@ Deno.test("happy path passes bounded database config into the leased reconciler"
   assertEquals(admin.upserts.length, 1);
 });
 
-Deno.test("transient and terminal refund failures are never reported as a clean run", async () => {
+scopedEnv.test("transient and terminal refund failures are never reported as a clean run", async () => {
   const admin = makeAdmin();
   const response = await handlePaymentRefundWorker(workerRequest(), {
     envSecret: () => SECRET,

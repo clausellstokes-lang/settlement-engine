@@ -27,15 +27,24 @@
  * NOTE: authored without a local Deno runtime — verified in CI.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  // DECLARED ABSENCES — these keys must be UNSET for this suite. They were module-top
+  // `Deno.env.delete` calls, which leak in the opposite direction (stripping a value a later
+  // suite relies on); `null` puts them under the same scoped apply/restore as a value.
+  ANTHROPIC_API_KEY: null,
+  OPENAI_API_KEY: null,
+});
 // No model keys → the thesis call throws on the real path, exercising the refund.
-Deno.env.delete('ANTHROPIC_API_KEY');
-Deno.env.delete('OPENAI_API_KEY');
 
 const { handleGenerateNarrative, MAX_BODY_BYTES } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** user-client stub: getUser() resolves the verified JWT identity, and rpc()
  *  handles spend_credits. `spendResult` is what spend_credits returns; every rpc
@@ -204,7 +213,7 @@ async function drain(res: Response): Promise<string> {
   return out;
 }
 
-Deno.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a credit', async () => {
+scopedEnv.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a credit', async () => {
   const user = makeUserClient({ id: 'banned1', email: 'b@x.com' }, { ok: true, spend_id: 'should_not_happen', balance: 10 });
   const admin = makeAdminClient(false);   // account_is_active=false
   const res = await handleGenerateNarrative(
@@ -216,7 +225,7 @@ Deno.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a cred
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // gate ran before spend
 });
 
-Deno.test('a null account_is_active result FAILS CLOSED — never spends', async () => {
+scopedEnv.test('a null account_is_active result FAILS CLOSED — never spends', async () => {
   const user = makeUserClient({ id: 'unknown1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(null);    // RPC error ⇒ null
   const res = await handleGenerateNarrative(
@@ -227,7 +236,7 @@ Deno.test('a null account_is_active result FAILS CLOSED — never spends', async
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
 
-Deno.test('a thesis FAILURE refunds via the captured spend_id and does NOT double-spend', async () => {
+scopedEnv.test('a thesis FAILURE refunds via the captured spend_id and does NOT double-spend', async () => {
   const SPEND_ID = 'ledger_row_abc123';
   const user = makeUserClient(
     { id: 'payer1', email: 'p@x.com' },
@@ -257,7 +266,7 @@ Deno.test('a thesis FAILURE refunds via the captured spend_id and does NOT doubl
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 });
 
-Deno.test('a PRE-STREAM throw (insufficient credits) RELEASES the 086 reservation — no global-cap headroom leak', async () => {
+scopedEnv.test('a PRE-STREAM throw (insufficient credits) RELEASES the 086 reservation — no global-cap headroom leak', async () => {
   // The reservation is taken (reserve_ai_spend) BEFORE spend_credits. spend fails
   // (insufficient_funds → ok:false) and the handler throws BEFORE the stream opens,
   // so the in-stream `finally` release never runs. Without the outer-catch release
@@ -282,7 +291,7 @@ Deno.test('a PRE-STREAM throw (insufficient credits) RELEASES the 086 reservatio
   assertEquals((releases[0].args as { p_id: string }).p_id, 'res_stub');
 });
 
-Deno.test('an ELEVATED account that fails does NOT refund (it was never charged)', async () => {
+scopedEnv.test('an ELEVATED account that fails does NOT refund (it was never charged)', async () => {
   const user = makeUserClient(
     { id: 'dev1', email: 'dev@x.com' },
     { ok: true, spend_id: 'elev_row', balance: -2, elevated: true },
@@ -306,7 +315,7 @@ Deno.test('an ELEVATED account that fails does NOT refund (it was never charged)
 // claim (already used) falls through to the normal paid spend/refund unchanged.
 // The model call still fails (no API key) so the stream reaches its terminal branch.
 
-Deno.test('a FIRST narrative claims the free run: claim_free_narrative called, spend_credits NOT called, and a mid-stream failure RELEASES (never refunds)', async () => {
+scopedEnv.test('a FIRST narrative claims the free run: claim_free_narrative called, spend_credits NOT called, and a mid-stream failure RELEASES (never refunds)', async () => {
   // Free claim WON. spend_credits must never run; on the thesis failure (no key) the
   // handler must RELEASE the free claim (giving the taste back), NOT call refund_credits.
   const user = makeUserClient(
@@ -340,7 +349,7 @@ Deno.test('a FIRST narrative claims the free run: claim_free_narrative called, s
   assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
 });
 
-Deno.test('a SECOND narrative (free claim already used) FALLS THROUGH to the normal paid spend + refund — unchanged', async () => {
+scopedEnv.test('a SECOND narrative (free claim already used) FALLS THROUGH to the normal paid spend + refund — unchanged', async () => {
   // Free claim LOST (already used). The handler must fall through to spend_credits and,
   // on the failure, refund via the captured spend_id — the pre-118 paid path, byte-for-byte.
   const SPEND_ID = 'paid_row_xyz';
@@ -384,7 +393,7 @@ Deno.test('a SECOND narrative (free claim already used) FALLS THROUGH to the nor
 // pre-119 (spend once), proving fail-open. The model call still fails (no API key)
 // so each stream reaches its terminal branch.
 
-Deno.test('a FIRST request WITH an idempotency key claims it (duplicate:false), spends ONCE, and attaches the spend_id', async () => {
+scopedEnv.test('a FIRST request WITH an idempotency key claims it (duplicate:false), spends ONCE, and attaches the spend_id', async () => {
   const SPEND_ID = 'ledger_row_first_attempt';
   const KEY = 'stable-req-key-1';
   const user = makeUserClient(
@@ -412,7 +421,7 @@ Deno.test('a FIRST request WITH an idempotency key claims it (duplicate:false), 
   assertEquals((attaches[0].args as { p_spend_id: string }).p_spend_id, SPEND_ID);
 });
 
-Deno.test('a DUPLICATE request (retry within TTL) does NOT spend and a mid-stream failure does NOT refund the prior charge', async () => {
+scopedEnv.test('a DUPLICATE request (retry within TTL) does NOT spend and a mid-stream failure does NOT refund the prior charge', async () => {
   const PRIOR_SPEND_ID = 'ledger_row_prior_attempt';
   const KEY = 'stable-req-key-1';
   const user = makeUserClient(
@@ -452,7 +461,7 @@ Deno.test('a DUPLICATE request (retry within TTL) does NOT spend and a mid-strea
   assertEquals(admin.rpc.some((c) => c.fn === 'release_free_narrative'), false);
 });
 
-Deno.test('NO idempotency key behaves exactly as pre-119: claim_ai_request is not called and the spend runs once (fail-open)', async () => {
+scopedEnv.test('NO idempotency key behaves exactly as pre-119: claim_ai_request is not called and the spend runs once (fail-open)', async () => {
   const SPEND_ID = 'ledger_row_nokey';
   const user = makeUserClient(
     { id: 'payerNoKey', email: 'n@x.com' },
@@ -482,7 +491,7 @@ Deno.test('NO idempotency key behaves exactly as pre-119: claim_ai_request is no
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 });
 
-Deno.test('a request with NO authorization header is rejected (400) before any spend', async () => {
+scopedEnv.test('a request with NO authorization header is rejected (400) before any spend', async () => {
   const user = makeUserClient({ id: 'u1' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const res = await handleGenerateNarrative(
@@ -497,7 +506,7 @@ Deno.test('a request with NO authorization header is rejected (400) before any s
 // The cap bounds abuse/DoS, not the token bill (the prompt is a compact summary).
 // Sized OVER the real exported ceiling so this test tracks MAX_BODY_BYTES and can
 // never silently drift when the cap is retuned.
-Deno.test('an OVER-CAP body (> MAX_BODY_BYTES) is rejected (413) before any spend', async () => {
+scopedEnv.test('an OVER-CAP body (> MAX_BODY_BYTES) is rejected (413) before any spend', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const huge = { type: 'narrative', settlement: { ...SETTLEMENT, blob: 'x'.repeat(MAX_BODY_BYTES + 1024) } };
@@ -515,7 +524,7 @@ Deno.test('an OVER-CAP body (> MAX_BODY_BYTES) is rejected (413) before any spen
 // (code units) — else a payload of many 3-byte chars slips past the byte ceiling.
 // '実' is 3 UTF-8 bytes / 1 UTF-16 code unit, so ceil(cap/3)+pad chars gives a body
 // whose byte size exceeds the cap while its code-unit count stays comfortably under.
-Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
+scopedEnv.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const blob = '実'.repeat(Math.ceil(MAX_BODY_BYTES / 3) + 4_000);
@@ -538,7 +547,7 @@ Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is re
 // A body just under the cap still parses + flows normally (cap is a ceiling,
 // not a regression on legitimate requests). No model key set, so the thesis
 // fails in-stream → 200 streaming response, but the body parsed fine.
-Deno.test('an UNDER-CAP body parses normally (cap does not block legitimate requests)', async () => {
+scopedEnv.test('an UNDER-CAP body parses normally (cap does not block legitimate requests)', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 9, elevated: false });
   const admin = makeAdminClient(true);
   const res = await handleGenerateNarrative(
@@ -550,7 +559,7 @@ Deno.test('an UNDER-CAP body parses normally (cap does not block legitimate requ
 });
 
 // ── progression changeType is a client string: own-property lookup only ──────
-Deno.test('progressionAffectedKeys ignores prototype-chain names and unknown types (thesis-only fallback)', async () => {
+scopedEnv.test('progressionAffectedKeys ignores prototype-chain names and unknown types (thesis-only fallback)', async () => {
   const { progressionAffectedKeys } = await import('./index.ts');
   // A prototype name used to resolve the inherited Object member (truthy, so
   // `|| []` never applied) and `.map` threw inside the stream post-spend.
@@ -568,7 +577,7 @@ Deno.test('progressionAffectedKeys ignores prototype-chain names and unknown typ
 // narrate limiter. These two lanes preserve the throttle-before-spend + fail-open
 // coverage the old limiter tests carried, re-pointed at the surviving RPC.
 
-Deno.test('a THROTTLED narrate limiter (consume_ai_generate_rate_limit allowed:false) rejects BEFORE any spend or refund', async () => {
+scopedEnv.test('a THROTTLED narrate limiter (consume_ai_generate_rate_limit allowed:false) rejects BEFORE any spend or refund', async () => {
   const user = makeUserClient(
     { id: 'throttled1', email: 't@x.com' },
     { ok: true, spend_id: 'should_not_spend', balance: 10, elevated: false },
@@ -589,7 +598,7 @@ Deno.test('a THROTTLED narrate limiter (consume_ai_generate_rate_limit allowed:f
   assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
 });
 
-Deno.test('a limiter ERROR fails OPEN — consume_ai_generate_rate_limit errors but the spend still runs', async () => {
+scopedEnv.test('a limiter ERROR fails OPEN — consume_ai_generate_rate_limit errors but the spend still runs', async () => {
   const user = makeUserClient(
     { id: 'failopen1', email: 'fo@x.com' },
     { ok: true, spend_id: 'row_fo', balance: 9, elevated: false },
@@ -607,7 +616,7 @@ Deno.test('a limiter ERROR fails OPEN — consume_ai_generate_rate_limit errors 
   assertEquals(user.rpc.filter((c) => c.fn === 'spend_credits').length, 1);
 });
 
-Deno.test('a refund RPC FAILURE surfaces a {refund:"failed", spend_id, supportNote} frame on the stream', async () => {
+scopedEnv.test('a refund RPC FAILURE surfaces a {refund:"failed", spend_id, supportNote} frame on the stream', async () => {
   const SPEND_ID = 'row_refund_fail';
   const user = makeUserClient(
     { id: 'payer_rf', email: 'rf@x.com' },

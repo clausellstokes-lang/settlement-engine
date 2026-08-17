@@ -19,19 +19,25 @@
  * the network either.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
 
-// A device token needs a pepper to resolve a device key (and thus a rate key);
-// set one so the limiter runs against `d:<hash>` rather than the ip fallback.
-Deno.env.set('ANALYTICS_HASH_PEPPER', 'test-pepper');
+  // A device token needs a pepper to resolve a device key (and thus a rate key);
+  // set one so the limiter runs against `d:<hash>` rather than the ip fallback.
+  ANALYTICS_HASH_PEPPER: 'test-pepper',
+});
 
 const { handleIngestEvents, stripProps, __setSupabaseFactory, recordVelocity, bandForCounts } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const UA = { 'user-agent': 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', 'content-type': 'application/json' };
 
-Deno.test('body cap is byte-based: multibyte payload under 64K code units but over 64KB bytes is 413', async () => {
+scopedEnv.test('body cap is byte-based: multibyte payload under 64K code units but over 64KB bytes is 413', async () => {
   // '€' is 1 UTF-16 code unit but 3 UTF-8 bytes: 40_000 chars ≈ 120KB bytes.
   const prose = '€'.repeat(40_000);
   const body = JSON.stringify({ events: [], filler: prose });
@@ -44,7 +50,7 @@ Deno.test('body cap is byte-based: multibyte payload under 64K code units but ov
   assertEquals(payload.error, 'too_large');
 });
 
-Deno.test('body cap still admits a normal-sized single-byte payload past the 413 gate', async () => {
+scopedEnv.test('body cap still admits a normal-sized single-byte payload past the 413 gate', async () => {
   // Same shape, ASCII filler: comfortably under the cap in bytes too. It must
   // NOT be rejected 413 (it then proceeds to real client work against the stub
   // URL, so we only assert the status is not the size rejection).
@@ -56,7 +62,7 @@ Deno.test('body cap still admits a normal-sized single-byte payload past the 413
   await res.body?.cancel();
 });
 
-Deno.test('stripProps drops long strings at any nesting depth, keeps short/scalar values', () => {
+scopedEnv.test('stripProps drops long strings at any nesting depth, keeps short/scalar values', () => {
   const prose = 'p'.repeat(200);
   const out = stripProps({
     ok: 'short',
@@ -120,7 +126,7 @@ function makeLimiterAdmin(rate: { data?: unknown; error?: { message: string } | 
   return { client, upserts };
 }
 
-Deno.test('rate limiter fails CLOSED: an RPC error yields 429 with zero writes', async () => {
+scopedEnv.test('rate limiter fails CLOSED: an RPC error yields 429 with zero writes', async () => {
   const admin = makeLimiterAdmin({ error: { message: 'ingest_check_rate exploded' } });
   __setSupabaseFactory(() => admin.client);
   try {
@@ -141,7 +147,7 @@ Deno.test('rate limiter fails CLOSED: an RPC error yields 429 with zero writes',
   }
 });
 
-Deno.test('rate limiter fails CLOSED: underRate=false yields 429 with zero writes', async () => {
+scopedEnv.test('rate limiter fails CLOSED: underRate=false yields 429 with zero writes', async () => {
   const admin = makeLimiterAdmin({ data: false });
   __setSupabaseFactory(() => admin.client);
   try {
@@ -159,7 +165,7 @@ Deno.test('rate limiter fails CLOSED: underRate=false yields 429 with zero write
   }
 });
 
-Deno.test('the IP gate stops device-token rotation: over-IP + under-device is still 429 with zero writes', async () => {
+scopedEnv.test('the IP gate stops device-token rotation: over-IP + under-device is still 429 with zero writes', async () => {
   // The per-device rate key is derived from the (rotatable) deviceToken, so it reads
   // "under rate" for every fresh token — that is the bypass. The ipall: gate is what a
   // rotating host cannot escape: here the ipall key is OVER while the device key is
@@ -206,7 +212,7 @@ Deno.test('the IP gate stops device-token rotation: over-IP + under-device is st
   }
 });
 
-Deno.test('rate limiter admits when underRate=true (control): not a 429', async () => {
+scopedEnv.test('rate limiter admits when underRate=true (control): not a 429', async () => {
   const admin = makeLimiterAdmin({ data: true });
   __setSupabaseFactory(() => admin.client);
   try {
@@ -226,7 +232,7 @@ Deno.test('rate limiter admits when underRate=true (control): not a 429', async 
 
 // ── Bot-wave velocity telemetry (item 4) ─────────────────────────────────────
 
-Deno.test('recordVelocity counts within the window and prunes samples that age out', () => {
+scopedEnv.test('recordVelocity counts within the window and prunes samples that age out', () => {
   const map = new Map<string, number[]>();
   const t0 = 1_000_000;
   // Three samples inside a 60s window → count 3.
@@ -242,7 +248,7 @@ Deno.test('recordVelocity counts within the window and prunes samples that age o
   assertEquals(recordVelocity(map, 'ip:9.9.9.9', t0 + 61_000, 60_000), 1);
 });
 
-Deno.test('bandForCounts: normal → "", elevated / burst on IP or actor thresholds', () => {
+scopedEnv.test('bandForCounts: normal → "", elevated / burst on IP or actor thresholds', () => {
   // Below both elevated thresholds → normal (no stamp).
   assertEquals(bandForCounts(0, 0), '');
   assertEquals(bandForCounts(20, 15), ''); // exactly at threshold is still normal (strict >)
@@ -258,7 +264,7 @@ Deno.test('bandForCounts: normal → "", elevated / burst on IP or actor thresho
   assertEquals(bandForCounts(61, 16), 'burst');
 });
 
-Deno.test('stripProps bounds recursion depth and rejects non-object roots', () => {
+scopedEnv.test('stripProps bounds recursion depth and rejects non-object roots', () => {
   // Depth > 4 is dropped outright rather than trusted.
   const deep = { a: { b: { c: { d: { e: 'x'.repeat(200) } } } } };
   const out = stripProps(deep) as Record<string, unknown>;

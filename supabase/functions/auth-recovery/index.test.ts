@@ -22,15 +22,24 @@
  * NOTE: authored without a local Deno runtime — verified in CI.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  // DECLARED ABSENCES — these keys must be UNSET for this suite. They were module-top
+  // `Deno.env.delete` calls, which leak in the opposite direction (stripping a value a later
+  // suite relies on); `null` puts them under the same scoped apply/restore as a value.
+  RESEND_API_KEY: null,
+  RESEND_FROM_EMAIL: null,
+});
 // Mailer unconfigured: verify's correct-answer path still returns generic { ok:true }
 // (sendEmail soft-fails) so the test asserts the branch without a live Resend.
-Deno.env.delete('RESEND_API_KEY');
-Deno.env.delete('RESEND_FROM_EMAIL');
 
 const { handleAuthRecovery } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 type RpcResult = { data?: unknown; error?: { message: string } | null };
 /**
@@ -118,7 +127,7 @@ function makeSlowLinkAdminClient(
 }
 
 // ── fail-closed on the limiter ───────────────────────────────────────────────
-Deno.test('verify FAILS CLOSED (429) when the limiter denies — no bcrypt compare', async () => {
+scopedEnv.test('verify FAILS CLOSED (429) when the limiter denies — no bcrypt compare', async () => {
   const admin = makeAdminClient({ consume_recovery_rate_limit: DENY });
   const res = await handleAuthRecovery(
     req({ action: 'verify', email: 'u@x.com', slot: 1, answer: 'rover' }),
@@ -128,7 +137,7 @@ Deno.test('verify FAILS CLOSED (429) when the limiter denies — no bcrypt compa
   assertEquals(ranRpc(admin.rpc, 'verify_recovery_answer'), false);
 });
 
-Deno.test('verify FAILS CLOSED (503) when the limiter errors', async () => {
+scopedEnv.test('verify FAILS CLOSED (503) when the limiter errors', async () => {
   const admin = makeAdminClient({
     consume_recovery_rate_limit: { data: null, error: { message: 'limiter down' } },
   });
@@ -141,7 +150,7 @@ Deno.test('verify FAILS CLOSED (503) when the limiter errors', async () => {
 });
 
 // ── cumulative lockout gates verify BEFORE the bcrypt compare ─────────────────
-Deno.test('a LOCKED account is denied generically and verify_recovery_answer NEVER runs', async () => {
+scopedEnv.test('a LOCKED account is denied generically and verify_recovery_answer NEVER runs', async () => {
   const admin = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: true },
@@ -158,7 +167,7 @@ Deno.test('a LOCKED account is denied generically and verify_recovery_answer NEV
 });
 
 // ── wrong answer bumps the cumulative counter ────────────────────────────────
-Deno.test('a WRONG answer bumps the cumulative lockout counter (067)', async () => {
+scopedEnv.test('a WRONG answer bumps the cumulative lockout counter (067)', async () => {
   const admin = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: false },
@@ -176,7 +185,7 @@ Deno.test('a WRONG answer bumps the cumulative lockout counter (067)', async () 
 });
 
 // ── correct answer clears the lockout and returns generic ok ─────────────────
-Deno.test('a CORRECT answer clears the lockout and returns generic { ok:true }', async () => {
+scopedEnv.test('a CORRECT answer clears the lockout and returns generic { ok:true }', async () => {
   const admin = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: false },
@@ -197,7 +206,7 @@ Deno.test('a CORRECT answer clears the lockout and returns generic { ok:true }',
 });
 
 // ── lookup hides the question for a locked account (no oracle) ───────────────
-Deno.test('LOOKUP on a LOCKED account returns the no-question shape (no oracle)', async () => {
+scopedEnv.test('LOOKUP on a LOCKED account returns the no-question shape (no oracle)', async () => {
   const admin = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: true },
@@ -217,7 +226,7 @@ Deno.test('LOOKUP on a LOCKED account returns the no-question shape (no oracle)'
 });
 
 // ── verify limits are GENUINELY tighter than lookup (finding 1) ──────────────
-Deno.test('verify consumes a TIGHTER per-email cap than lookup', async () => {
+scopedEnv.test('verify consumes a TIGHTER per-email cap than lookup', async () => {
   // lookup
   const a1 = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
@@ -251,7 +260,7 @@ Deno.test('verify consumes a TIGHTER per-email cap than lookup', async () => {
 // counter bump), so the floor stops equalizing and a correct answer leaks via latency.
 // We make generateLink take 2× the floor and assert the correct response still returns
 // at ~the floor (well under the link latency), indistinguishable from the wrong path.
-Deno.test({
+scopedEnv.test({
   name: 'a CORRECT answer does NOT return later than a WRONG answer (no timing oracle)',
   // The correct path now DETACHES its slow link-mint work to run past the response
   // (production keeps it alive via EdgeRuntime.waitUntil; here it is a plain detached
@@ -316,7 +325,7 @@ Deno.test({
 });
 
 // ── the outer catch never echoes internal error text to the anonymous caller ─
-Deno.test('an unexpected throw returns a GENERIC 500 — internal error text is never echoed', async () => {
+scopedEnv.test('an unexpected throw returns a GENERIC 500 — internal error text is never echoed', async () => {
   const INTERNAL = 'relation "recovery_rate_limits" does not exist (pgcode 42P01)';
   // An admin client whose rpc THROWS (not a structured { error }) drives the
   // request into the handler's outer catch — previously that catch returned
@@ -339,7 +348,7 @@ Deno.test('an unexpected throw returns a GENERIC 500 — internal error text is 
 
 // ── Transfer lock (160, §6.3, M-6e): question-based recovery is PAUSED during a
 // live founder-transfer case, fail CLOSED. ─────────────────────────────────────
-Deno.test('lookup is REFUSED (403 transfer_lock) during a live transfer; pick_recovery_question never runs', async () => {
+scopedEnv.test('lookup is REFUSED (403 transfer_lock) during a live transfer; pick_recovery_question never runs', async () => {
   const stub = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: false },
@@ -351,7 +360,7 @@ Deno.test('lookup is REFUSED (403 transfer_lock) during a live transfer; pick_re
   assertEquals(ranRpc(stub.rpc, 'pick_recovery_question'), false);
 });
 
-Deno.test('verify is REFUSED (403 transfer_lock) during a live transfer; verify_recovery_answer never runs', async () => {
+scopedEnv.test('verify is REFUSED (403 transfer_lock) during a live transfer; verify_recovery_answer never runs', async () => {
   const stub = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: false },
@@ -363,7 +372,7 @@ Deno.test('verify is REFUSED (403 transfer_lock) during a live transfer; verify_
   assertEquals(ranRpc(stub.rpc, 'verify_recovery_answer'), false);
 });
 
-Deno.test('the transfer-lock read FAILS CLOSED: a lock-read error still refuses recovery', async () => {
+scopedEnv.test('the transfer-lock read FAILS CLOSED: a lock-read error still refuses recovery', async () => {
   const stub = makeAdminClient({
     consume_recovery_rate_limit: ALLOW,
     recovery_is_locked: { data: false },

@@ -4,13 +4,8 @@ import {
   assert,
   assertEquals,
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { installScopedTestEnv } from "../_shared/scopedTestEnv.ts";
 import type { MailAdapter, MailMessage } from "../_shared/mailAdapter.ts";
-
-Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
-Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service-role-stub");
-
-const { handleOperatorMessageWorker } = await import("./index.ts");
-const SECRET = "operator-courier-secret";
 
 /** This file's own CLIENT_URL — deliberately NOT the production host, so the
  *  account-link composition in index.ts is exercised under a non-default base
@@ -18,29 +13,28 @@ const SECRET = "operator-courier-secret";
 const CLIENT_URL_STUB = "https://settlementforge.example";
 
 /**
- * Register a courier test whose body runs with this file's own CLIENT_URL, and
- * which puts the ambient value (or its absence) back afterwards.
+ * ⭐ THE LOCAL `courierTest` REGISTRAR BECAME THE SHARED SEAM, AND NOTHING ABOUT ITS
+ * CONTRACT CHANGED. This file was the first suite to scope and restore its own
+ * environment (laneTE33 §1.3); the sweep that followed gave every other edge suite the
+ * same treatment, and a second spelling of one restore rule is the five-homes defect this
+ * estate refuses everywhere else. `_shared/scopedTestEnv.ts` carries the whole rationale —
+ * one shared process, one `Deno.env`, and a `cors.ts` that re-reads CLIENT_URL per request.
  *
- * WHY THIS IS NOT A MODULE-TOP `Deno.env.set`: deno.json's `test:edge` task runs
- * `deno test` WITHOUT `--parallel`, so every edge suite shares ONE process and
- * ONE `Deno.env`. A module-top set is therefore ambient for every
- * alphabetically LATER suite — and `_shared/cors.ts` re-reads CLIENT_URL per
- * request to compose its allowlist, whose FIRST entry is what a fail-closed
- * response pins to. An unrestored set here re-pointed exactly that value under
- * verify-checkout-session's CORS pins and red the deno-tests CI job.
+ * ⛔ CLIENT_URL IS STILL THIS FILE'S OWN AND STILL LOAD-BEARING: the announcement test pins
+ * the rendered account link against `CLIENT_URL_STUB`, so a broken scope reds rather than
+ * passing quietly.
  */
-function courierTest(name: string, body: () => Promise<void>) {
-  Deno.test(name, async () => {
-    const prior = Deno.env.get("CLIENT_URL");
-    Deno.env.set("CLIENT_URL", CLIENT_URL_STUB);
-    try {
-      await body();
-    } finally {
-      if (prior === undefined) Deno.env.delete("CLIENT_URL");
-      else Deno.env.set("CLIENT_URL", prior);
-    }
-  });
-}
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: "https://stub.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: "service-role-stub",
+  CLIENT_URL: CLIENT_URL_STUB,
+});
+
+const { handleOperatorMessageWorker } = await import("./index.ts");
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
+const SECRET = "operator-courier-secret";
 
 function request(method = "POST", secret: string | null = SECRET) {
   const headers = new Headers();
@@ -173,7 +167,7 @@ function makeMailer(options: { fail?: boolean } = {}) {
   return { adapter, messages };
 }
 
-courierTest("operator courier is POST-only and fails closed on secret or disabled config", async () => {
+scopedEnv.test("operator courier is POST-only and fails closed on secret or disabled config", async () => {
   let response = await handleOperatorMessageWorker(request("GET"), {
     envSecret: () => SECRET,
   });
@@ -199,7 +193,7 @@ courierTest("operator courier is POST-only and fails closed on secret or disable
   assertEquals(admin.calls.length, 0);
 });
 
-courierTest("announcement page validates the active lease, honors opt-out, and advances one stable cursor", async () => {
+scopedEnv.test("announcement page validates the active lease, honors opt-out, and advances one stable cursor", async () => {
   const admin = makeAdmin({
     jobs: [JOB],
     recipients: [
@@ -306,7 +300,7 @@ courierTest("announcement page validates the active lease, honors opt-out, and a
   assertEquals(admin.upserts.length, 1);
 });
 
-courierTest("service broadcast ignores marketing eligibility and carries no unsubscribe header", async () => {
+scopedEnv.test("service broadcast ignores marketing eligibility and carries no unsubscribe header", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -328,7 +322,7 @@ courierTest("service broadcast ignores marketing eligibility and carries no unsu
   assertEquals(mailer.messages[0].headers, undefined);
 });
 
-courierTest("an ineligible service row is a terminal replay and is neither sent nor rewritten", async () => {
+scopedEnv.test("an ineligible service row is a terminal replay and is neither sent nor rewritten", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -358,7 +352,7 @@ courierTest("an ineligible service row is a terminal replay and is neither sent 
   ), true);
 });
 
-courierTest("an eligible discovery row lost to another worker's recipient CAS is never sent", async () => {
+scopedEnv.test("an eligible discovery row lost to another worker's recipient CAS is never sent", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -388,7 +382,7 @@ courierTest("an eligible discovery row lost to another worker's recipient CAS is
   ), true);
 });
 
-courierTest("lease expiry before recipient CAS fails closed without starting provider delivery", async () => {
+scopedEnv.test("lease expiry before recipient CAS fails closed without starting provider delivery", async () => {
   const admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{
@@ -417,7 +411,7 @@ courierTest("lease expiry before recipient CAS fails closed without starting pro
   ), true);
 });
 
-courierTest("an ambiguous provider-success orphan is terminal on reclaim and never resent", async () => {
+scopedEnv.test("an ambiguous provider-success orphan is terminal on reclaim and never resent", async () => {
   const mailer = makeMailer();
   const eligible = [{
     user_id: "user-1",
@@ -464,7 +458,7 @@ courierTest("an ambiguous provider-success orphan is terminal on reclaim and nev
   ), false);
 });
 
-courierTest("provider details are redacted from receipts and a lost lease fails the job", async () => {
+scopedEnv.test("provider details are redacted from receipts and a lost lease fails the job", async () => {
   let admin = makeAdmin({
     jobs: [{ ...JOB, message_class: "service" }],
     recipients: [{

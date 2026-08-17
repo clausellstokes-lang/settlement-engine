@@ -9,11 +9,17 @@
  * and XML-escapes them. No live Supabase, no WASM rasterizer.
  */
 import { assertEquals, assert, assertStringIncludes } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+});
 
 const { handleOgImage, buildCardSvg } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const FAKE_PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]); // PNG magic
 
@@ -42,17 +48,17 @@ function rasterizeSpy() {
   };
 }
 
-Deno.test('OPTIONS preflight returns 204', async () => {
+scopedEnv.test('OPTIONS preflight returns 204', async () => {
   const res = await handleOgImage(new Request('https://edge/og-image', { method: 'OPTIONS' }));
   assertEquals(res.status, 204);
 });
 
-Deno.test('non-GET is rejected 405', async () => {
+scopedEnv.test('non-GET is rejected 405', async () => {
   const res = await handleOgImage(new Request('https://edge/og-image?slug=abc', { method: 'POST' }));
   assertEquals(res.status, 405);
 });
 
-Deno.test('missing slug redirects to the default card (302)', async () => {
+scopedEnv.test('missing slug redirects to the default card (302)', async () => {
   const res = await handleOgImage(new Request('https://edge/og-image', { method: 'GET' }));
   assertEquals(res.status, 302);
   // SB4: the fail-safe must serve the CURRENT house-sealed card (og-craft.png),
@@ -60,7 +66,7 @@ Deno.test('missing slug redirects to the default card (302)', async () => {
   assertStringIncludes(res.headers.get('Location') || '', 'og-craft.png');
 });
 
-Deno.test('a garbage/injection slug redirects to default and never fetches', async () => {
+scopedEnv.test('a garbage/injection slug redirects to default and never fetches', async () => {
   let fetched = 0;
   const res = await handleOgImage(get('../etc/passwd'), {
     fetchProjection: () => { fetched++; return Promise.resolve(sampleProjection); },
@@ -70,7 +76,7 @@ Deno.test('a garbage/injection slug redirects to default and never fetches', asy
   assertEquals(fetched, 0); // rejected before any data fetch
 });
 
-Deno.test('an unknown slug (null projection) redirects to default', async () => {
+scopedEnv.test('an unknown slug (null projection) redirects to default', async () => {
   const res = await handleOgImage(get('missing123'), {
     fetchProjection: () => Promise.resolve(null),
     rasterize: rasterizeSpy().rasterize,
@@ -78,7 +84,7 @@ Deno.test('an unknown slug (null projection) redirects to default', async () => 
   assertEquals(res.status, 302);
 });
 
-Deno.test('a data-fetch throw redirects to default (fail-safe)', async () => {
+scopedEnv.test('a data-fetch throw redirects to default (fail-safe)', async () => {
   const res = await handleOgImage(get('boom'), {
     fetchProjection: () => Promise.reject(new Error('rpc down')),
     rasterize: rasterizeSpy().rasterize,
@@ -86,7 +92,7 @@ Deno.test('a data-fetch throw redirects to default (fail-safe)', async () => {
   assertEquals(res.status, 302);
 });
 
-Deno.test('a rasterize throw redirects to default (fail-safe)', async () => {
+scopedEnv.test('a rasterize throw redirects to default (fail-safe)', async () => {
   const res = await handleOgImage(get('ashford'), {
     fetchProjection: () => Promise.resolve(sampleProjection),
     rasterize: () => Promise.reject(new Error('wasm boom')),
@@ -94,7 +100,7 @@ Deno.test('a rasterize throw redirects to default (fail-safe)', async () => {
   assertEquals(res.status, 302);
 });
 
-Deno.test('a valid slug renders a PNG with image content-type + a ONE-DAY cache', async () => {
+scopedEnv.test('a valid slug renders a PNG with image content-type + a ONE-DAY cache', async () => {
   const spy = rasterizeSpy();
   const res = await handleOgImage(get('ashford'), {
     fetchProjection: () => Promise.resolve(sampleProjection),
@@ -121,7 +127,7 @@ Deno.test('a valid slug renders a PNG with image content-type + a ONE-DAY cache'
 // The single most important guarantee: no seed/secret/private field can ever be
 // drawn, even if a drifted or malicious projection carries one.
 
-Deno.test('a smuggled seed/secret is never rendered into the card SVG', async () => {
+scopedEnv.test('a smuggled seed/secret is never rendered into the card SVG', async () => {
   const spy = rasterizeSpy();
   const rogue = {
     ...sampleProjection,
@@ -146,7 +152,7 @@ Deno.test('a smuggled seed/secret is never rendered into the card SVG', async ()
   assert(!/seed/i.test(svg), 'the word "seed" must not appear anywhere in the card');
 });
 
-Deno.test('buildCardSvg draws only coarse fields and XML-escapes them', () => {
+scopedEnv.test('buildCardSvg draws only coarse fields and XML-escapes them', () => {
   const svg = buildCardSvg({
     name: 'A & B <script>',
     tier: 'city',
@@ -169,7 +175,7 @@ Deno.test('buildCardSvg draws only coarse fields and XML-escapes them', () => {
   assertStringIncludes(svg, 'Forged with SettlementForge');
 });
 
-Deno.test('buildCardSvg tolerates an empty projection without throwing', () => {
+scopedEnv.test('buildCardSvg tolerates an empty projection without throwing', () => {
   const svg = buildCardSvg({
     name: '', tier: '', terrain: '', population: null,
     governmentType: '', magicLevel: '', stability: '',

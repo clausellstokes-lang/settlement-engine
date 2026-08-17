@@ -27,13 +27,19 @@
  * NOTE: authored without a local Deno runtime — verified in CI.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('ANTHROPIC_API_KEY', 'sk-stub');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  ANTHROPIC_API_KEY: 'sk-stub',
+});
 
 const { handleGenerateChronicle } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** user-client stub: getUser() resolves the verified JWT identity, and rpc()
  *  handles spend_credits. `spendResult` is what spend_credits returns; every rpc
@@ -149,7 +155,7 @@ async function withFetch(stub: typeof fetch, run: () => Promise<void>) {
   }
 }
 
-Deno.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a credit', async () => {
+scopedEnv.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a credit', async () => {
   const user = makeUserClient({ id: 'banned1', email: 'b@x.com' }, { ok: true, spend_id: 'nope', balance: 10 });
   const admin = makeAdminClient(false);   // account_is_active=false
   const res = await handleGenerateChronicle(
@@ -163,7 +169,7 @@ Deno.test('an INACTIVE account is rejected (fail-closed) and NEVER spends a cred
   assertEquals(admin.rpc.some((c) => c.fn === 'reserve_ai_spend'), false);
 });
 
-Deno.test('a null account_is_active result FAILS CLOSED — never spends', async () => {
+scopedEnv.test('a null account_is_active result FAILS CLOSED — never spends', async () => {
   const user = makeUserClient({ id: 'unknown1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(null);    // RPC error ⇒ null
   const res = await handleGenerateChronicle(
@@ -174,7 +180,7 @@ Deno.test('a null account_is_active result FAILS CLOSED — never spends', async
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
 
-Deno.test('a model FAILURE refunds via the captured spend_id, releases the reservation, and does NOT double-spend', async () => {
+scopedEnv.test('a model FAILURE refunds via the captured spend_id, releases the reservation, and does NOT double-spend', async () => {
   const SPEND_ID = 'ledger_row_abc123';
   const user = makeUserClient(
     { id: 'payer1', email: 'p@x.com' },
@@ -207,7 +213,7 @@ Deno.test('a model FAILURE refunds via the captured spend_id, releases the reser
   );
 });
 
-Deno.test('a pre-stream throw (insufficient credits) RELEASES the 086 reservation — no headroom leak', async () => {
+scopedEnv.test('a pre-stream throw (insufficient credits) RELEASES the 086 reservation — no headroom leak', async () => {
   // reserve_ai_spend is taken BEFORE spend_credits. spend fails (insufficient →
   // ok:false), so the handler returns 402 BEFORE the model call. The in-path
   // release must still fire so the reservation's global-cap headroom isn't held
@@ -228,7 +234,7 @@ Deno.test('a pre-stream throw (insufficient credits) RELEASES the 086 reservatio
   assertEquals((releases[0].args as { p_id: string }).p_id, 'res_stub');
 });
 
-Deno.test('an OVERSIZED body is rejected (413) WITHOUT burning a rate-limit unit', async () => {
+scopedEnv.test('an OVERSIZED body is rejected (413) WITHOUT burning a rate-limit unit', async () => {
   // Regression for the reorder: the body cap + parse now run BEFORE
   // consume_ai_generate_rate_limit, so a malformed/oversized body can't exhaust a
   // legitimate user's daily quota. Before the fix the limiter ran first and a 413
@@ -253,7 +259,7 @@ Deno.test('an OVERSIZED body is rejected (413) WITHOUT burning a rate-limit unit
 // the cap measured raw.length (code units), so a ~24k 3-byte-char payload
 // (~24k code units, ~72KB bytes) slipped past the 64KB byte ceiling and inflated
 // the Anthropic token bill. '実' is 3 bytes / 1 code unit in UTF-8.
-Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
+scopedEnv.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const body = JSON.stringify({ grounding: { blob: '実'.repeat(24_000) } });
@@ -274,7 +280,7 @@ Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is re
 // rate-limit REJECT releases the reservation (mirrors generate-narrative). Before
 // the fix the limiter ran first; with the reorder a rate-limited request must not
 // leave a global-cap reservation hanging for its TTL.
-Deno.test('a rate-limit REJECT releases the reservation taken before it (no headroom leak)', async () => {
+scopedEnv.test('a rate-limit REJECT releases the reservation taken before it (no headroom leak)', async () => {
   const user = makeUserClient({ id: 'limited1', email: 'l@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   // Custom admin stub: active gate + reserve allowed, but the rate limit REJECTS.
   const rpc: Array<{ fn: string; args: unknown }> = [];
@@ -307,7 +313,7 @@ Deno.test('a rate-limit REJECT releases the reservation taken before it (no head
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
 
-Deno.test('a request with NO authorization header is rejected (401) before any spend', async () => {
+scopedEnv.test('a request with NO authorization header is rejected (401) before any spend', async () => {
   const user = makeUserClient({ id: 'u1' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const res = await handleGenerateChronicle(
@@ -324,7 +330,7 @@ Deno.test('a request with NO authorization header is rejected (401) before any s
 // empty-body refund, elevated-not-refunded, the spend/insufficient 402s, and the
 // pre-spend input rejections (auth / grounding / method).
 
-Deno.test('happy path — spends via the user client BEFORE the model call; returns chronicle + creditsRemaining', async () => {
+scopedEnv.test('happy path — spends via the user client BEFORE the model call; returns chronicle + creditsRemaining', async () => {
   const user = makeUserClient({ id: 'payer_ok', email: 'p@x.com' }, { ok: true, spend_id: 'row_ok', balance: 7, elevated: false });
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('ok');
@@ -342,7 +348,7 @@ Deno.test('happy path — spends via the user client BEFORE the model call; retu
   assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
 });
 
-Deno.test('an EMPTY chronicle body refunds the spend and returns 502', async () => {
+scopedEnv.test('an EMPTY chronicle body refunds the spend and returns 502', async () => {
   const SPEND_ID = 'row_empty';
   const user = makeUserClient({ id: 'payer_empty', email: 'e@x.com' }, { ok: true, spend_id: SPEND_ID, balance: 6, elevated: false });
   const admin = makeAdminClient(true);
@@ -358,7 +364,7 @@ Deno.test('an EMPTY chronicle body refunds the spend and returns 502', async () 
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 });
 
-Deno.test('an ELEVATED spend that fails is NOT refunded (refunding a non-debit would mint credits)', async () => {
+scopedEnv.test('an ELEVATED spend that fails is NOT refunded (refunding a non-debit would mint credits)', async () => {
   const user = makeUserClient({ id: 'dev1', email: 'dev@x.com' }, { ok: true, spend_id: 'row_elev', balance: -2, elevated: true });
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('empty');   // generation fails → refund path entered
@@ -371,7 +377,7 @@ Deno.test('an ELEVATED spend that fails is NOT refunded (refunding a non-debit w
   assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
 });
 
-Deno.test('a spend_credits RPC error returns 402 with NO provider call and NO refund', async () => {
+scopedEnv.test('a spend_credits RPC error returns 402 with NO provider call and NO refund', async () => {
   const user = makeUserClient({ id: 'u_spendfail', email: 's@x.com' }, {}, false, /* spendError */ true);
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('never');
@@ -386,7 +392,7 @@ Deno.test('a spend_credits RPC error returns 402 with NO provider call and NO re
   assertEquals(admin.rpc.filter((c) => c.fn === 'release_ai_spend_reservation').length, 1);
 });
 
-Deno.test('an INSUFFICIENT-credits spend returns 402 with the balance and does no work', async () => {
+scopedEnv.test('an INSUFFICIENT-credits spend returns 402 with the balance and does no work', async () => {
   const user = makeUserClient({ id: 'u_broke', email: 'b@x.com' }, { ok: false, reason: 'Insufficient credits', balance: 3 });
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('never');
@@ -400,7 +406,7 @@ Deno.test('an INSUFFICIENT-credits spend returns 402 with the balance and does n
   assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
 });
 
-Deno.test('an INVALID JWT is rejected 401 with no spend and no provider call', async () => {
+scopedEnv.test('an INVALID JWT is rejected 401 with no spend and no provider call', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, {}, /* authError */ true);
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('never');
@@ -413,7 +419,7 @@ Deno.test('an INVALID JWT is rejected 401 with no spend and no provider call', a
   assertEquals(provider.calls.length, 0);
 });
 
-Deno.test('a body with NO grounding payload is rejected 400 before any spend', async () => {
+scopedEnv.test('a body with NO grounding payload is rejected 400 before any spend', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('never');
@@ -426,7 +432,7 @@ Deno.test('a body with NO grounding payload is rejected 400 before any spend', a
   assertEquals(provider.calls.length, 0);
 });
 
-Deno.test('a syntactically invalid JSON body is rejected 400 before any spend', async () => {
+scopedEnv.test('a syntactically invalid JSON body is rejected 400 before any spend', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
   const provider = makeProviderFetch('never');
@@ -439,7 +445,7 @@ Deno.test('a syntactically invalid JSON body is rejected 400 before any spend', 
   assertEquals(provider.calls.length, 0);
 });
 
-Deno.test('a non-POST method is rejected 405 before any client work', async () => {
+scopedEnv.test('a non-POST method is rejected 405 before any client work', async () => {
   const res = await handleGenerateChronicle(
     new Request('https://edge/generate-chronicle', { method: 'GET' }),
     {},
@@ -447,7 +453,7 @@ Deno.test('a non-POST method is rejected 405 before any client work', async () =
   assertEquals(res.status, 405);
 });
 
-Deno.test('an OPTIONS preflight returns 200 and does no work', async () => {
+scopedEnv.test('an OPTIONS preflight returns 200 and does no work', async () => {
   const res = await handleGenerateChronicle(
     new Request('https://edge/generate-chronicle', { method: 'OPTIONS' }),
     {},

@@ -21,14 +21,23 @@
  */
 import { assert, assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import type { MailAdapter, MailMessage } from '../_shared/mailAdapter.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  // DECLARED ABSENCES — these keys must be UNSET for this suite. They were module-top
+  // `Deno.env.delete` calls, which leak in the opposite direction (stripping a value a later
+  // suite relies on); `null` puts them under the same scoped apply/restore as a value.
+  OWNER_EMAIL: null,
+});
 // No OWNER_EMAIL — owner override disabled, so the gate falls back to profiles.role.
-Deno.env.delete('OWNER_EMAIL');
 
 const { handleAdminActions } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** user-client stub: getUser() resolves the verified JWT identity (or an error). */
 function makeUserClient(
@@ -97,7 +106,7 @@ function bearerWithPasswordAmr(ageS = 0): string {
 const twoKeyHeaders = () => ({ Authorization: bearerWithPasswordAmr(0) });
 const confirmFor = (id: string) => ({ confirm: { typedTargetId: id } });
 
-Deno.test('a non-privileged caller (role=user) is rejected 403 and NO RPC runs', async () => {
+scopedEnv.test('a non-privileged caller (role=user) is rejected 403 and NO RPC runs', async () => {
   const stub = makeAdminClient('user');
   const res = await handleAdminActions(
     req({ action: 'update_user_credits', userId: 'victim', credits: 100000 },
@@ -110,7 +119,7 @@ Deno.test('a non-privileged caller (role=user) is rejected 403 and NO RPC runs',
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('an unauthenticated caller (bad token) is rejected 401 and NO RPC runs', async () => {
+scopedEnv.test('an unauthenticated caller (bad token) is rejected 401 and NO RPC runs', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'update_user_credits', userId: 'v', credits: 5 }, { Authorization: 'Bearer bad' }),
@@ -120,7 +129,7 @@ Deno.test('an unauthenticated caller (bad token) is rejected 401 and NO RPC runs
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('a request with NO authorization header is rejected 401 before any client work', async () => {
+scopedEnv.test('a request with NO authorization header is rejected 401 before any client work', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'get_stats' }),  // no Authorization header
@@ -130,7 +139,7 @@ Deno.test('a request with NO authorization header is rejected 401 before any cli
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('a valid admin update_user_credits routes to service_set_credits with the verified actor', async () => {
+scopedEnv.test('a valid admin update_user_credits routes to service_set_credits with the verified actor', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     // The body smuggles actor_user='someone_else'; the handler must forward the
@@ -148,7 +157,7 @@ Deno.test('a valid admin update_user_credits routes to service_set_credits with 
   assertEquals(args.new_credits, 42);
 });
 
-Deno.test('grant_credits routes the RAW DELTA to the atomic service_adjust_credits RPC (no TS read-modify-write)', async () => {
+scopedEnv.test('grant_credits routes the RAW DELTA to the atomic service_adjust_credits RPC (no TS read-modify-write)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'grant_credits', userId: 'target1', credits: -3, actor_user: 'someone_else', ...confirmFor('target1') },
@@ -168,7 +177,7 @@ Deno.test('grant_credits routes the RAW DELTA to the atomic service_adjust_credi
   assertEquals(stub.rpc.find((c) => c.fn === 'service_set_credits'), undefined);
 });
 
-Deno.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge gate, defense-in-depth)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge gate, defense-in-depth)', async () => {
   // support passes the general elevated-role gate but is NOT "highest". The edge
   // gate must reject the real-money credit set BEFORE the service_set_credits RPC
   // — defense-in-depth parity with grant_credits / set_account_banned, not a
@@ -183,7 +192,7 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge g
   assertEquals(stub.rpc.length, 0); // no service_set_credits dispatched
 });
 
-Deno.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge gate, defense-in-depth)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge gate, defense-in-depth)', async () => {
   // support passes the general elevated-role gate but is NOT "highest". The edge
   // gate must reject the role/tier/is_founder write path BEFORE the
   // service_update_profile_metadata RPC — defense-in-depth parity with
@@ -242,7 +251,7 @@ function makeOperationalAdminClient(callerRole: string) {
   return { rpc, adminClient: () => client };
 }
 
-Deno.test('get_operational_health returns aggregate + bounded attention through the two fixed RPCs', async () => {
+scopedEnv.test('get_operational_health returns aggregate + bounded attention through the two fixed RPCs', async () => {
   const stub = makeOperationalAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'get_operational_health' }, { Authorization: 'Bearer jwt' }),
@@ -261,7 +270,7 @@ Deno.test('get_operational_health returns aggregate + bounded attention through 
   ]);
 });
 
-Deno.test('operational acknowledgement forwards the verified actor and cannot masquerade as resolution', async () => {
+scopedEnv.test('operational acknowledgement forwards the verified actor and cannot masquerade as resolution', async () => {
   const stub = makeOperationalAdminClient('developer');
   const res = await handleAdminActions(
     req({
@@ -293,7 +302,7 @@ Deno.test('operational acknowledgement forwards the verified actor and cannot ma
   assertEquals(stub.rpc.length, 1);
 });
 
-Deno.test('support cannot inspect or acknowledge operational obligations', async () => {
+scopedEnv.test('support cannot inspect or acknowledge operational obligations', async () => {
   for (const body of [
     { action: 'get_operational_health' },
     {
@@ -348,7 +357,7 @@ function makeMintAdminClient(callerRole: string) {
 // Crockford base32 body: no I, L, O, or U — unambiguous when read back.
 const REDEEM_CODE_SHAPE = /^SFC-[0-9A-HJKMNP-TV-Z]{12}$/;
 
-Deno.test('an admin mints a credits code: high-entropy SFC code, server-shaped row, code never audited', async () => {
+scopedEnv.test('an admin mints a credits code: high-entropy SFC code, server-shaped row, code never audited', async () => {
   const stub = makeMintAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 25, max_uses: 5 },
@@ -377,7 +386,7 @@ Deno.test('an admin mints a credits code: high-entropy SFC code, server-shaped r
   assertEquals(JSON.stringify(audit!.args).includes(body.code), false);
 });
 
-Deno.test('a free_month mint defaults applies_to to subscription and requires the operator coupon id', async () => {
+scopedEnv.test('a free_month mint defaults applies_to to subscription and requires the operator coupon id', async () => {
   const stub = makeMintAdminClient('developer');
   const res = await handleAdminActions(
     req({ action: 'mint_redeem_code', kind: 'free_month', stripe_coupon_id: 'referral_free_month', max_uses: 1 },
@@ -393,7 +402,7 @@ Deno.test('a free_month mint defaults applies_to to subscription and requires th
   assertEquals(row.applies_to, 'subscription');
 });
 
-Deno.test('a free_month mint WITHOUT a stripe_coupon_id is rejected 400 before any insert', async () => {
+scopedEnv.test('a free_month mint WITHOUT a stripe_coupon_id is rejected 400 before any insert', async () => {
   const stub = makeMintAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'mint_redeem_code', kind: 'free_month', max_uses: 1 }, { Authorization: 'Bearer jwt' }),
@@ -403,7 +412,7 @@ Deno.test('a free_month mint WITHOUT a stripe_coupon_id is rejected 400 before a
   assertEquals(stub.inserts.length, 0);
 });
 
-Deno.test('a credits mint without a positive credit_amount is rejected 400 before any insert', async () => {
+scopedEnv.test('a credits mint without a positive credit_amount is rejected 400 before any insert', async () => {
   const stub = makeMintAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 0, max_uses: 1 }, { Authorization: 'Bearer jwt' }),
@@ -413,7 +422,7 @@ Deno.test('a credits mint without a positive credit_amount is rejected 400 befor
   assertEquals(stub.inserts.length, 0);
 });
 
-Deno.test('a SUPPORT-role caller CANNOT mint redeem codes (highest-only edge gate)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT mint redeem codes (highest-only edge gate)', async () => {
   const stub = makeMintAdminClient('support');
   const res = await handleAdminActions(
     req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 25, max_uses: 1 },
@@ -474,7 +483,7 @@ function makeCronAdminClient(
   return { rpc, updates, adminClient: () => client };
 }
 
-Deno.test('ai_pricing_cron_status NEVER returns the url or secret values (redacted)', async () => {
+scopedEnv.test('ai_pricing_cron_status NEVER returns the url or secret values (redacted)', async () => {
   const stub = makeCronAdminClient('admin', {
     enabled: true, url: 'https://secret-url', secret: 'top-secret',
     timezone: 'America/New_York', applyCreditCosts: true, lastDispatchedOn: '2026-07-06',
@@ -496,7 +505,7 @@ Deno.test('ai_pricing_cron_status NEVER returns the url or secret values (redact
   assertEquals(raw.includes('top-secret'), false);
 });
 
-Deno.test('ai_pricing_cron_status reports configured:false when url/secret are null', async () => {
+scopedEnv.test('ai_pricing_cron_status reports configured:false when url/secret are null', async () => {
   const stub = makeCronAdminClient('developer', {
     enabled: true, url: null, secret: null, timezone: 'America/New_York', applyCreditCosts: true, lastDispatchedOn: null,
   });
@@ -510,7 +519,7 @@ Deno.test('ai_pricing_cron_status reports configured:false when url/secret are n
   assertEquals(body.lastRun, null);
 });
 
-Deno.test('a SUPPORT-role caller CANNOT read ai_pricing_cron_status (highest-only)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT read ai_pricing_cron_status (highest-only)', async () => {
   const stub = makeCronAdminClient('support', { enabled: true });
   const res = await handleAdminActions(
     req({ action: 'ai_pricing_cron_status' }, { Authorization: 'Bearer jwt' }),
@@ -519,7 +528,7 @@ Deno.test('a SUPPORT-role caller CANNOT read ai_pricing_cron_status (highest-onl
   assertEquals(res.status, 403);
 });
 
-Deno.test('ai_pricing_cron_set flips only the enabled flag and audits the change', async () => {
+scopedEnv.test('ai_pricing_cron_set flips only the enabled flag and audits the change', async () => {
   const stub = makeCronAdminClient('admin', {
     enabled: false, url: 'https://x', secret: 's', timezone: 'America/New_York', applyCreditCosts: true, lastDispatchedOn: null,
   });
@@ -544,7 +553,7 @@ Deno.test('ai_pricing_cron_set flips only the enabled flag and audits the change
   assertEquals((audit!.args as { p_action: string }).p_action, 'ai_pricing_cron_toggle');
 });
 
-Deno.test('ai_pricing_cron_set rejects a non-boolean enabled with 400 and no write', async () => {
+scopedEnv.test('ai_pricing_cron_set rejects a non-boolean enabled with 400 and no write', async () => {
   const stub = makeCronAdminClient('admin', { enabled: false, url: 'https://x', secret: 's' });
   const res = await handleAdminActions(
     req({ action: 'ai_pricing_cron_set', enabled: 'yes' }, { Authorization: 'Bearer jwt' }),
@@ -554,7 +563,7 @@ Deno.test('ai_pricing_cron_set rejects a non-boolean enabled with 400 and no wri
   assertEquals(stub.updates.length, 0);
 });
 
-Deno.test('a SUPPORT-role caller CANNOT ai_pricing_cron_set (highest-only)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT ai_pricing_cron_set (highest-only)', async () => {
   const stub = makeCronAdminClient('support', { enabled: false });
   const res = await handleAdminActions(
     req({ action: 'ai_pricing_cron_set', enabled: true }, { Authorization: 'Bearer jwt' }),
@@ -565,7 +574,7 @@ Deno.test('a SUPPORT-role caller CANNOT ai_pricing_cron_set (highest-only)', asy
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('an unknown action from a privileged caller is rejected 400 with no mutating RPC', async () => {
+scopedEnv.test('an unknown action from a privileged caller is rejected 400 with no mutating RPC', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
     req({ action: 'definitely_not_a_real_action' }, { Authorization: 'Bearer jwt' }),
@@ -615,7 +624,7 @@ const backfillStripe = {
   ], has_more: false }) },
 };
 
-Deno.test('backfill_money_events pages Stripe and upserts money_events rows (idempotent, audited)', async () => {
+scopedEnv.test('backfill_money_events pages Stripe and upserts money_events rows (idempotent, audited)', async () => {
   const stub = makeBackfillAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'backfill_money_events' }, { Authorization: 'Bearer jwt' }),
@@ -642,7 +651,7 @@ Deno.test('backfill_money_events pages Stripe and upserts money_events rows (ide
   assertEquals(stub.rpc.some((c) => c.fn === 'write_audit'), true);
 });
 
-Deno.test('backfill_money_events rejects a non-highest role (403) and reads no Stripe', async () => {
+scopedEnv.test('backfill_money_events rejects a non-highest role (403) and reads no Stripe', async () => {
   let listed = false;
   const stripe = {
     checkout: { sessions: { list: () => { listed = true; return Promise.resolve({ data: [], has_more: false }); } } },
@@ -660,7 +669,7 @@ Deno.test('backfill_money_events rejects a non-highest role (403) and reads no S
 
 // ── Surveyor admin verbs (159, §5, slice M-4c) ───────────────────────────────
 
-Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, audited)', async () => {
+scopedEnv.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, audited)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'grant_surveyor', userId: 'u9', ...confirmFor('u9') }, twoKeyHeaders()),
@@ -674,7 +683,7 @@ Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, au
   assertEquals((audit!.args as { p_action: string }).p_action, 'grant_surveyor');
 });
 
-Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destructive)', async () => {
+scopedEnv.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destructive)', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
     req({ action: 'revoke_surveyor', userId: 'u9', reason: 'refund', ...confirmFor('u9') }, twoKeyHeaders()),
@@ -686,7 +695,7 @@ Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destr
   assertEquals((audit!.args as { p_action: string }).p_action, 'revoke_surveyor');
 });
 
-Deno.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispatched)', async () => {
+scopedEnv.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispatched)', async () => {
   const stub = makeAdminClient('support');
   const res = await handleAdminActions(
     req({ action: 'grant_surveyor', userId: 'u9', ...confirmFor('u9') }, twoKeyHeaders()),
@@ -696,7 +705,7 @@ Deno.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispat
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('grant_surveyor requires a userId', async () => {
+scopedEnv.test('grant_surveyor requires a userId', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'grant_surveyor' }, { Authorization: 'Bearer jwt' }),
@@ -713,7 +722,7 @@ Deno.test('grant_surveyor requires a userId', async () => {
 // mutating RPC. These EXECUTE the real handler so a refactor that moves the guard
 // after dispatch, or drops it, reddens here — not just in the pure unit test.
 
-Deno.test('a protected action WITHOUT confirm.typedTargetId is rejected (403, no RPC) even for an admin with a fresh password', async () => {
+scopedEnv.test('a protected action WITHOUT confirm.typedTargetId is rejected (403, no RPC) even for an admin with a fresh password', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     // Fresh password amr but NO confirm envelope → the retype-the-id key is missing.
@@ -724,7 +733,7 @@ Deno.test('a protected action WITHOUT confirm.typedTargetId is rejected (403, no
   assertEquals(stub.rpc.length, 0); // set_account_banned RPC never dispatched
 });
 
-Deno.test('a protected action with a MISMATCHED typedTargetId is rejected (403, no RPC)', async () => {
+scopedEnv.test('a protected action with a MISMATCHED typedTargetId is rejected (403, no RPC)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'set_account_banned', userId: 'target1', enabled: false, ...confirmFor('the-wrong-id') }, twoKeyHeaders()),
@@ -734,7 +743,7 @@ Deno.test('a protected action with a MISMATCHED typedTargetId is rejected (403, 
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('a protected action with a matching id but a STALE password amr is rejected (403, no RPC)', async () => {
+scopedEnv.test('a protected action with a matching id but a STALE password amr is rejected (403, no RPC)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     // amr is 400s old (> 300s window) — a refreshed-but-not-reauthed session.
@@ -746,7 +755,7 @@ Deno.test('a protected action with a matching id but a STALE password amr is rej
   assertEquals(stub.rpc.length, 0); // service_adjust_credits never dispatched
 });
 
-Deno.test('a protected action with a matching id but NO password amr is rejected (403, no RPC)', async () => {
+scopedEnv.test('a protected action with a matching id but NO password amr is rejected (403, no RPC)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     // 'Bearer jwt' has no decodable amr claim → fail closed.
@@ -761,7 +770,7 @@ Deno.test('a protected action with a matching id but NO password amr is rejected
 // ── Content moderation (171/172) — MODERATION set: typed-item-id confirm, no
 // two-key password. Staff-gated; a non-staff caller is rejected before dispatch.
 
-Deno.test('moderate_comment (staff) dispatches set_gallery_comment_hidden with the verified moderator + audits', async () => {
+scopedEnv.test('moderate_comment (staff) dispatches set_gallery_comment_hidden with the verified moderator + audits', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
     req({ action: 'moderate_comment', commentId: 'cmt-1', reason: 'abuse' }, { Authorization: 'Bearer jwt' }),
@@ -778,7 +787,7 @@ Deno.test('moderate_comment (staff) dispatches set_gallery_comment_hidden with t
   assertEquals(stub.rpc.some((c) => c.fn === 'write_audit'), true);
 });
 
-Deno.test('set_content_banned (staff) routes to admin_set_content_banned for the right kind', async () => {
+scopedEnv.test('set_content_banned (staff) routes to admin_set_content_banned for the right kind', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
     req({ action: 'set_content_banned', contentKind: 'map', mapId: 'map-9', banned: true, reason: 'x' },
@@ -793,7 +802,7 @@ Deno.test('set_content_banned (staff) routes to admin_set_content_banned for the
   assertEquals(args.p_ban, true);
 });
 
-Deno.test('a SUPPORT-role caller CANNOT moderate content (highest-only)', async () => {
+scopedEnv.test('a SUPPORT-role caller CANNOT moderate content (highest-only)', async () => {
   const stub = makeAdminClient('support');
   const res = await handleAdminActions(
     req({ action: 'moderate_comment', commentId: 'cmt-1' }, { Authorization: 'Bearer jwt' }),
@@ -803,7 +812,7 @@ Deno.test('a SUPPORT-role caller CANNOT moderate content (highest-only)', async 
   assertEquals(stub.rpc.length, 0);
 });
 
-Deno.test('a DEVELOPER passes the SAME two-key gate as an admin (action-bound, not role-bound)', async () => {
+scopedEnv.test('a DEVELOPER passes the SAME two-key gate as an admin (action-bound, not role-bound)', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
     req({ action: 'set_account_banned', userId: 'target1', enabled: false, ...confirmFor('target1') }, twoKeyHeaders()),
@@ -904,7 +913,7 @@ function recordingMailer(sequence: string[], failureMessage: string | null = nul
   };
 }
 
-Deno.test('direct service notice commits Account Message before best-effort provider mail and one receipt', async () => {
+scopedEnv.test('direct service notice commits Account Message before best-effort provider mail and one receipt', async () => {
   const stub = makeOperatorAdminClient();
   const mailer = recordingMailer(stub.sequence);
   const res = await handleAdminActions(
@@ -940,7 +949,7 @@ Deno.test('direct service notice commits Account Message before best-effort prov
   assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
 });
 
-Deno.test('direct announcement persists but opt-out skips provider mail and records skipped', async () => {
+scopedEnv.test('direct announcement persists but opt-out skips provider mail and records skipped', async () => {
   const stub = makeOperatorAdminClient({ canEmail: false });
   const mailer = recordingMailer(stub.sequence);
   const res = await handleAdminActions(
@@ -962,7 +971,7 @@ Deno.test('direct announcement persists but opt-out skips provider mail and reco
   assertEquals(receipt?.args.p_failure_reason, 'announcement_opt_out');
 });
 
-Deno.test('direct database failure never touches the external mail provider', async () => {
+scopedEnv.test('direct database failure never touches the external mail provider', async () => {
   const stub = makeOperatorAdminClient({ failRpc: 'create_operator_direct_message' });
   const mailer = recordingMailer(stub.sequence);
   const res = await handleAdminActions(
@@ -982,7 +991,7 @@ Deno.test('direct database failure never touches the external mail provider', as
   assertEquals(stub.calls.some((call) => call.fn === 'record_operator_message_email_result'), false);
 });
 
-Deno.test('direct notices reject unknown templates and template/class mismatches before any RPC', async () => {
+scopedEnv.test('direct notices reject unknown templates and template/class mismatches before any RPC', async () => {
   for (const message of [
     { messageTemplate: 'invented_template', messageClass: 'service' },
     { messageTemplate: 'moderation_notice', messageClass: 'announcement' },
@@ -1006,7 +1015,7 @@ Deno.test('direct notices reject unknown templates and template/class mismatches
   }
 });
 
-Deno.test('direct provider failure is redacted and persists only the closed provider_error reason', async () => {
+scopedEnv.test('direct provider failure is redacted and persists only the closed provider_error reason', async () => {
   const stub = makeOperatorAdminClient();
   const mailer = recordingMailer(
     stub.sequence,
@@ -1044,7 +1053,7 @@ Deno.test('direct provider failure is redacted and persists only the closed prov
   }
 });
 
-Deno.test('warning atomically creates its system notice/audit before transactional mail, even when client asks not to notify', async () => {
+scopedEnv.test('warning atomically creates its system notice/audit before transactional mail, even when client asks not to notify', async () => {
   const stub = makeOperatorAdminClient({ callerRole: 'support' });
   const mailer = recordingMailer(stub.sequence);
   const res = await handleAdminActions(
@@ -1067,7 +1076,7 @@ Deno.test('warning atomically creates its system notice/audit before transaction
   assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
 });
 
-Deno.test('ban atomically commits its service notice/audit before session revocation and mail', async () => {
+scopedEnv.test('ban atomically commits its service notice/audit before session revocation and mail', async () => {
   const stub = makeOperatorAdminClient();
   const mailer = recordingMailer(stub.sequence);
   const res = await handleAdminActions(
@@ -1089,7 +1098,7 @@ Deno.test('ban atomically commits its service notice/audit before session revoca
   assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
 });
 
-Deno.test('broadcast guard rejects wrong phrase before RPC and exact phrase queues the fixed all audience', async () => {
+scopedEnv.test('broadcast guard rejects wrong phrase before RPC and exact phrase queues the fixed all audience', async () => {
   let stub = makeOperatorAdminClient();
   let res = await handleAdminActions(
     req({
@@ -1119,7 +1128,7 @@ Deno.test('broadcast guard rejects wrong phrase before RPC and exact phrase queu
   assertEquals(typeof queue?.args.p_two_key_amr_age_s, 'number');
 });
 
-Deno.test('broadcast rejects a registered template with the wrong class before queue RPC', async () => {
+scopedEnv.test('broadcast rejects a registered template with the wrong class before queue RPC', async () => {
   const stub = makeOperatorAdminClient();
   const res = await handleAdminActions(
     req({
@@ -1134,7 +1143,7 @@ Deno.test('broadcast rejects a registered template with the wrong class before q
   assertEquals(stub.calls.length, 0);
 });
 
-Deno.test('broadcast list and cancellation remain highest-role RPC routes without another delivery trigger', async () => {
+scopedEnv.test('broadcast list and cancellation remain highest-role RPC routes without another delivery trigger', async () => {
   const stub = makeOperatorAdminClient();
   let res = await handleAdminActions(
     req({ action: 'list_operator_broadcasts' }, { Authorization: 'Bearer jwt' }),

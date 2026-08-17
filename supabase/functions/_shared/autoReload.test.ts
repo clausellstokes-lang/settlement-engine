@@ -5,10 +5,16 @@
  * failure branches, and — above all — that NOTHING throws into the debit path.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from './scopedTestEnv.ts';
 
-Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_credits_25');
+const scopedEnv = installScopedTestEnv({
+  STRIPE_PRICE_CREDITS_25: 'price_credits_25',
+});
 
 const { maybeAutoReload, __resetPriceCacheForTest } = await import('./autoReload.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 const U = 'user-1';
 
@@ -95,7 +101,7 @@ function makeStripe(cfg: { unit?: number; currency?: string; defaultPm?: string 
 
 const okClaim = { ok: true, attempt_id: 'att_1', credits_delta: 23, amount_cents: 459 };
 
-Deno.test('claim ok → off-session PI created and its identity claimed atomically', async () => {
+scopedEnv.test('claim ok → off-session PI created and its identity claimed atomically', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = makeStripe({ unit: 499, currency: 'usd', defaultPm: 'pm_card' });
@@ -125,7 +131,7 @@ Deno.test('claim ok → off-session PI created and its identity claimed atomical
   assertEquals(a.updates.some((u) => u.vals.stripe_payment_intent_id === 'pi_ok'), false);
 });
 
-Deno.test('a trigger continuation cannot overwrite a different PI that already claimed the attempt', async () => {
+scopedEnv.test('a trigger continuation cannot overwrite a different PI that already claimed the attempt', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim, { boundPaymentIntent: 'pi_webhook_winner' });
   const s = makeStripe({ defaultPm: 'pm_card' });
@@ -135,7 +141,7 @@ Deno.test('a trigger continuation cannot overwrite a different PI that already c
   assertEquals(a.updates.some((u) => u.vals.stripe_payment_intent_id === 'pi_ok'), false);
 });
 
-Deno.test('a refused claim creates NO PaymentIntent', async () => {
+scopedEnv.test('a refused claim creates NO PaymentIntent', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin({ ok: false, reason: 'above_threshold' });
   const s = makeStripe();
@@ -144,7 +150,7 @@ Deno.test('a refused claim creates NO PaymentIntent', async () => {
   assertEquals(a.updates.length, 0);
 });
 
-Deno.test('a non-USD starter price is rejected before claim or charge', async () => {
+scopedEnv.test('a non-USD starter price is rejected before claim or charge', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = makeStripe({ unit: 499, currency: 'eur' });
@@ -154,7 +160,7 @@ Deno.test('a non-USD starter price is rejected before claim or charge', async ()
   assertEquals(a.updates.length, 0);
 });
 
-Deno.test('a starter price with no currency is rejected before claim or charge', async () => {
+scopedEnv.test('a starter price with no currency is rejected before claim or charge', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = makeStripe();
@@ -164,7 +170,7 @@ Deno.test('a starter price with no currency is rejected before claim or charge',
   assertEquals(s._created.length, 0);
 });
 
-Deno.test('no saved customer → attempt failed (no_customer), no PI', async () => {
+scopedEnv.test('no saved customer → attempt failed (no_customer), no PI', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim, { customerId: null });
   const s = makeStripe();
@@ -174,7 +180,7 @@ Deno.test('no saved customer → attempt failed (no_customer), no PI', async () 
   assertEquals(a.updates[0].vals.failure_reason, 'no_customer');
 });
 
-Deno.test('no saved card → attempt failed (no_payment_method), no PI', async () => {
+scopedEnv.test('no saved card → attempt failed (no_payment_method), no PI', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = makeStripe({ defaultPm: null, listPm: null });
@@ -184,7 +190,7 @@ Deno.test('no saved card → attempt failed (no_payment_method), no PI', async (
   assertEquals(a.updates[0].vals.failure_reason, 'no_payment_method');
 });
 
-Deno.test('falls back to the most-recent card when there is no default', async () => {
+scopedEnv.test('falls back to the most-recent card when there is no default', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = makeStripe({ defaultPm: null, listPm: 'pm_recent' });
@@ -192,7 +198,7 @@ Deno.test('falls back to the most-recent card when there is no default', async (
   assertEquals((s._created[0].params as Record<string, unknown>).payment_method, 'pm_recent');
 });
 
-Deno.test('account deletion after the attempt claim cancels it before any charge', async () => {
+scopedEnv.test('account deletion after the attempt claim cancels it before any charge', async () => {
   __resetPriceCacheForTest();
   // claim_auto_reload_attempt returned ok while the account was active; the
   // second gate models deletion winning during payment-method resolution.
@@ -208,7 +214,7 @@ Deno.test('account deletion after the attempt claim cancels it before any charge
   assertEquals(a.updates[0].vals.failure_reason, 'account_inactive');
 });
 
-Deno.test('an account-active lookup error fails closed before any charge', async () => {
+scopedEnv.test('an account-active lookup error fails closed before any charge', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim, {
     active: null,
@@ -220,7 +226,7 @@ Deno.test('an account-active lookup error fails closed before any charge', async
   assertEquals(a.updates[0].vals.state, 'canceled');
 });
 
-Deno.test('SCA (authentication_required) → requires_action + sca notify, never silent-retry', async () => {
+scopedEnv.test('SCA (authentication_required) → requires_action + sca notify, never silent-retry', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const notified: string[] = [];
@@ -233,7 +239,7 @@ Deno.test('SCA (authentication_required) → requires_action + sca notify, never
   assertEquals(notified, ['sca']);
 });
 
-Deno.test('a generic PI failure → attempt failed + failed notify', async () => {
+scopedEnv.test('a generic PI failure → attempt failed + failed notify', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const notified: string[] = [];
@@ -244,7 +250,7 @@ Deno.test('a generic PI failure → attempt failed + failed notify', async () =>
   assertEquals(notified, ['failed']);
 });
 
-Deno.test('NEVER throws — a claim RPC that rejects is swallowed', async () => {
+scopedEnv.test('NEVER throws — a claim RPC that rejects is swallowed', async () => {
   __resetPriceCacheForTest();
   const admin = { rpc: () => Promise.reject(new Error('db down')), from: () => { throw new Error('should not reach'); } };
   const s = makeStripe();
@@ -253,7 +259,7 @@ Deno.test('NEVER throws — a claim RPC that rejects is swallowed', async () => 
   assertEquals(true, true);
 });
 
-Deno.test('NEVER throws — a Stripe that throws everywhere is swallowed', async () => {
+scopedEnv.test('NEVER throws — a Stripe that throws everywhere is swallowed', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin(okClaim);
   const s = { prices: { retrieve: () => { throw new Error('stripe down'); } } };
@@ -262,7 +268,7 @@ Deno.test('NEVER throws — a Stripe that throws everywhere is swallowed', async
   assertEquals(a.rpcCalls.length, 0);
 });
 
-Deno.test('dark (no-op) when no Stripe key and no injected client', async () => {
+scopedEnv.test('dark (no-op) when no Stripe key and no injected client', async () => {
   __resetPriceCacheForTest();
   const prev = Deno.env.get('STRIPE_SECRET_KEY');
   Deno.env.delete('STRIPE_SECRET_KEY');
@@ -277,7 +283,7 @@ Deno.test('dark (no-op) when no Stripe key and no injected client', async () => 
 
 // ── Low-balance nudge (§4.3, slice M-3f) — inert notify seam, claim-once ──────
 
-Deno.test('low-balance nudge fires when auto-reload is OFF and below threshold (claim-once stamp)', async () => {
+scopedEnv.test('low-balance nudge fires when auto-reload is OFF and below threshold (claim-once stamp)', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin({ ok: false, reason: 'disabled', below_threshold: true }, { stamped: true });
   const s = makeStripe();
@@ -289,7 +295,7 @@ Deno.test('low-balance nudge fires when auto-reload is OFF and below threshold (
   assertEquals(s._created.length, 0); // no reload — it's OFF
 });
 
-Deno.test('low-balance nudge fires when the monthly cap blocked the reload', async () => {
+scopedEnv.test('low-balance nudge fires when the monthly cap blocked the reload', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin({ ok: false, reason: 'cap', below_threshold: true }, { stamped: true });
   const notified: string[] = [];
@@ -297,7 +303,7 @@ Deno.test('low-balance nudge fires when the monthly cap blocked the reload', asy
   assertEquals(notified, ['low_balance']);
 });
 
-Deno.test('no nudge when disabled but NOT below threshold', async () => {
+scopedEnv.test('no nudge when disabled but NOT below threshold', async () => {
   __resetPriceCacheForTest();
   const a = makeAdmin({ ok: false, reason: 'disabled', below_threshold: false });
   const notified: string[] = [];
@@ -306,7 +312,7 @@ Deno.test('no nudge when disabled but NOT below threshold', async () => {
   assertEquals(notified, []);
 });
 
-Deno.test('no nudge when above threshold or already nudged this bucket (stamp false)', async () => {
+scopedEnv.test('no nudge when above threshold or already nudged this bucket (stamp false)', async () => {
   __resetPriceCacheForTest();
   // above_threshold → not eligible, no mark
   const a1 = makeAdmin({ ok: false, reason: 'above_threshold' });

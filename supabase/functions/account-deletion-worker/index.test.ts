@@ -9,11 +9,17 @@
  * that no queue or RPC runs behind a disabled or unreadable kill switch.
  */
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { installScopedTestEnv } from "../_shared/scopedTestEnv.ts";
 
-Deno.env.set("SUPABASE_URL", "https://stub.supabase.co");
-Deno.env.set("SUPABASE_SERVICE_ROLE_KEY", "service-role-stub");
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: "https://stub.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: "service-role-stub",
+});
 
 const { handleAccountDeletionWorker } = await import("./index.ts");
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 const SECRET = "correct-horse-battery-staple";
 
 function workerRequest(method = "POST", secret: string | null = SECRET) {
@@ -96,7 +102,7 @@ const EMPTY_CLEANUP_SUMMARY = {
   capped: false,
 };
 
-Deno.test("worker is POST-only and refuses an unconfigured secret", async () => {
+scopedEnv.test("worker is POST-only and refuses an unconfigured secret", async () => {
   let res = await handleAccountDeletionWorker(workerRequest("GET"), {
     envSecret: () => SECRET,
   });
@@ -108,7 +114,7 @@ Deno.test("worker is POST-only and refuses an unconfigured secret", async () => 
   assertEquals(res.status, 503);
 });
 
-Deno.test("worker rejects a wrong or missing cron secret", async () => {
+scopedEnv.test("worker rejects a wrong or missing cron secret", async () => {
   let res = await handleAccountDeletionWorker(
     workerRequest("POST", "wrong"),
     {
@@ -122,7 +128,7 @@ Deno.test("worker rejects a wrong or missing cron secret", async () => {
   assertEquals(res.status, 403);
 });
 
-Deno.test("database kill switch fails closed before enqueue/claim", async () => {
+scopedEnv.test("database kill switch fails closed before enqueue/claim", async () => {
   const admin = makeAdmin({ cfg: { enabled: false } });
   let queueCalls = 0;
   const res = await handleAccountDeletionWorker(workerRequest(), {
@@ -139,7 +145,7 @@ Deno.test("database kill switch fails closed before enqueue/claim", async () => 
   assertEquals(admin.rpc.length, 0);
 });
 
-Deno.test("config read failure is 503 and never defaults enabled", async () => {
+scopedEnv.test("config read failure is 503 and never defaults enabled", async () => {
   const admin = makeAdmin({ configError: true });
   const res = await handleAccountDeletionWorker(workerRequest(), {
     envSecret: () => SECRET,
@@ -149,7 +155,7 @@ Deno.test("config read failure is 503 and never defaults enabled", async () => {
   assertEquals((await res.json()).skipped, "config_unavailable");
 });
 
-Deno.test("enabled config remains inert until URL + matching secret are present", async () => {
+scopedEnv.test("enabled config remains inert until URL + matching secret are present", async () => {
   let admin = makeAdmin({
     cfg: { enabled: true, url: null, secret: null },
   });
@@ -175,7 +181,7 @@ Deno.test("enabled config remains inert until URL + matching secret are present"
   assertEquals((await res.json()).skipped, "config_secret_mismatch");
 });
 
-Deno.test("happy path enqueues due rows then passes bounded config to the shared queue", async () => {
+scopedEnv.test("happy path enqueues due rows then passes bounded config to the shared queue", async () => {
   const admin = makeAdmin();
   let queueOptions: Record<string, unknown> | null = null;
   const res = await handleAccountDeletionWorker(workerRequest(), {
@@ -203,7 +209,7 @@ Deno.test("happy path enqueues due rows then passes bounded config to the shared
   assertEquals(admin.upserts.length, 1);
 });
 
-Deno.test("enqueue failure still drains durable jobs and returns non-success", async () => {
+scopedEnv.test("enqueue failure still drains durable jobs and returns non-success", async () => {
   const admin = makeAdmin({ enqueueError: true });
   let queueCalls = 0;
   const res = await handleAccountDeletionWorker(workerRequest(), {
@@ -223,7 +229,7 @@ Deno.test("enqueue failure still drains durable jobs and returns non-success", a
   assertEquals((await res.json()).ok, false);
 });
 
-Deno.test("partial external failure is queued for retry and never reported done", async () => {
+scopedEnv.test("partial external failure is queued for retry and never reported done", async () => {
   const admin = makeAdmin();
   const res = await handleAccountDeletionWorker(workerRequest(), {
     envSecret: () => SECRET,
