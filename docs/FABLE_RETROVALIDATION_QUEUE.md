@@ -173,3 +173,10 @@ to remain a generation input under an unvalidated marker; (c) Q-3's new
 derived-vs-drawn grain census; (d) the chair's same-turn atlas fix carrying
 §249.4a's warmth ruling back into the graded document, and the general class
 that a ruling made after a fold does not reach the folded document.
+
+### §258 — the intent-over-execution doctrine (Opus chair)
+Fable should re-derive: (a) the doctrine itself and especially its safeguard
+(the recorded-signature requirement) — it grants lanes latitude to replace
+stated mechanisms, which is powerful and could drift; (b) the three worked
+cases, particularly the setback synthesis for wide streets; (c) the ruling that
+our district-organism model stands unchanged against weaker prior art.

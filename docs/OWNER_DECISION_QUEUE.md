@@ -9600,3 +9600,58 @@ operative clause here.
    a naive `git add` + commit would land one file and 3,334
    deletions. **The private-index method is the only safe path
    and is what every ledger commit in this session has used.**
+
+## §258 · OWNER DOCTRINE: THE LAWS ARE INTENT; THE MECHANISMS ARE
+## NEGOTIABLE (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **THE OWNER'S RULING**: he is married to the CONCEPT AND
+   INTENT behind the laws far more than to their specific
+   execution; he keeps naming the aesthetic outcomes he wants —
+   wider main streets, streets running straight to the centre,
+   alleyways, and **districts as MULTIPLE NUCLEI expanding
+   outward and overlapping rather than one central nucleus for
+   the whole settlement** — and leaves ultimate execution
+   decisions to the chair, adjudicating at the end.
+2. ⭐⭐ **THE DOCTRINE, BINDING ON EVERY LANE: read a law for its
+   INTENT and its MEASURABLE SIGNATURE; a mechanism that
+   achieves that intent better than the stated execution
+   SUPERSEDES the stated execution.** The safeguard is the
+   record, not a veto in advance: **every substitution is
+   written as "law X's intent PRESERVED, execution changed from
+   A to B, measurable signature Y unchanged (or improved),"** so
+   the owner adjudicates outcomes at the end rather than
+   approving mechanisms in advance. A substitution that cannot
+   name the preserved signature is not a substitution — it is a
+   quiet repeal, and it is forbidden.
+3. **THREE CASES THE DOCTRINE RESOLVES IMMEDIATELY, and the
+   first is a genuine synthesis rather than a compromise.**
+   (a) **WIDE MAIN STREETS**: §254's study found Watabou derives
+   street hierarchy from PER-EDGE SETBACKS with no width
+   attribute anywhere — visible width is the sum of two facing
+   setbacks. **This is not in conflict with our law; it is its
+   mechanism.** The intent (importance must be legible) and the
+   measurable signature (the corpus's p97/p50 width ratio 16-30,
+   widest channel 2.7-6.4 plot-widths) are PRESERVED, while the
+   execution moves from "stroke a wider line" to "set buildings
+   further back," which additionally makes §239's wall-side
+   street fall out for free instead of being special-cased.
+   ADOPTED. (b) **DISTRICTS AS MULTIPLE OVERLAPPING NUCLEI**:
+   the prior art is WEAKER here and the evidence says so —
+   their ward placement is overwhelmingly POSITIONAL and their
+   single affinity rule is half-dead in the code. **Our
+   §161d/§161e organism model with multiplicity and overlap
+   STANDS UNCHANGED and is a differentiator, not a gap.** Prior
+   art may not erode it. (c) **ALLEYS**: their alley-versus-
+   flush decision is stochastic and weighted by piece size (the
+   small-piece branch is where terraced rows come from); our
+   §201 register governs how an alley READS and which of the
+   three types occur. **The mechanism and the register compose**
+   — theirs produces alleys organically, ours keeps them in the
+   block's tone and rare-courts band.
+4. **THE GUARD THAT KEEPS THIS FROM BECOMING DRIFT**: a
+   substitution must still satisfy §256's precedence (mechanism
+   may come from prior art; the LOOK comes from the corpus; the
+   CAUSE comes from the dossier) and §246's derivation-home
+   test. Intent-over-execution licenses better machinery — never
+   a free parameter, never a borrowed aesthetic, and never the
+   loss of a law's measurable signature.
