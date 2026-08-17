@@ -9423,3 +9423,71 @@ someone reasoning from "GPL ≠ AGPL" could otherwise conclude the
 opposite. Secondary GPL-3.0 provisions (patent grant,
 anti-tivoization) do not change the outcome and are not the
 operative clause here.
+
+## §255 · THE WATER FIGURE CHARACTERIZED — NOT A REGRESSION, A
+## DIFFERENT RIVER; AND A CURE THAT STOPPED AT A MODULE BOUNDARY
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **VERDICT: NOT A REGRESSION.** 114 → 165 decomposes as **+47
+   from the fork-key salt cure RE-ROLLING THE RIVER'S MEANDER
+   (cause 101)** and **−13 from the epoch/wall/version work
+   (causes 97-100), which moved the figure DOWN.** Both orderings
+   of the executed 2×2 close on +51 exactly. Distributionally the
+   wave changed NOTHING: one river town means 8.3 at both tips
+   (sd 5.0/5.8); the corpus distinct-site mean moved 63.2 → 64.7
+   against sd ≈18 — the published figures are −1.1 sd and +0.9 sd
+   draws from indistinguishable distributions. **It is a
+   different river, not a worse one**, and it is already inside
+   the declared shift.
+2. **MF-ARCH-2's OWN STATED CAUSE IS REFUTED**: it blamed "the
+   wall pulling inward," but `year-018` has ZERO circuits and
+   moved by the identical +10 with a BYTE-IDENTICAL violation key
+   set; isolating the wall work on the two leaves the meander key
+   cannot reach gives −7 each, a 16%% improvement. ⭐ **LAW
+   BANKED: A WAVE'S OWN ATTRIBUTION OF ITS SHIFT CAN BE WRONG —
+   attribution requires ISOLATION, not narrative.** (§252.3e
+   praised ARCH-2's three-stage attribution; that praise stands
+   for the method and is withdrawn for this particular claim.)
+3. **THE SAME-INSTRUMENT QUESTION, SETTLED BY SHA**:
+   `waterRightOfWay`'s function text is sha-identical across
+   MF-ARCH, MF-ARCH-2 and build-out, and DIFFERENT at B8b — so
+   **114 → 165 is same-instrument and real; 100 → 165 is NOT a
+   legitimate comparison.** True pre-cure figure is 114. Full
+   executed 2×2: blind/old 100, cured/old 114, blind/new 153,
+   cured/new 165 — predicate worth ~+12-14, fabric ~+51-53.
+4. ⭐⭐ **THE REAL FINDING, AND IT IS THE §238 CLASS FOR THE
+   FOURTH TIME IN A NEW SHAPE: A CURED PREDICATE THAT STOPPED AT
+   A MODULE BOUNDARY.** MF-ARCH's segment-true water predicate
+   was applied to the census but NOT to `deriveBridges`, which
+   still asks `crossPoint` against the centreline while the cured
+   census asks `segSegClosest < half`. **92 of 127 street-over-
+   water violations (72%%) CANNOT BE EXEMPTED BY CONSTRUCTION**
+   — 72 from that mismatch, 20 because bridges refuse
+   `rank==='passage'`, 35 because only the first crossing per
+   channel is taken. All pre-date ARCH-2. **WAVE NINE
+   FIRST-ORDER: one predicate, one home, plus a check that FAILS
+   WHEN TWO MODULES ASK THE SAME GEOMETRIC QUESTION DIFFERENTLY**
+   — the enforcement analogue of §253's raw-handle guard.
+5. **RULINGS.** (a) **J-W1-2 RATIFIED — the lane was right to
+   BUILD, MEASURE and NOT LAND its narrow cure** (an `anchorKey`
+   dead-code path means the marine regex's own word `mill` can
+   never fire, so a bank-rooted watermill is convicted on its own
+   river; cure measured at 165 → 159 with all four render SHAs
+   byte-identical). Landing it would widen a census exemption
+   under the freeze two prior lanes honoured and hand the landing
+   a FIFTH vintage of these numbers. Queued for wave nine with
+   its measurement already done. (b) **THE AUTHORITATIVE FIGURE
+   SET IS ADOPTED FOR THE LANDING DECLARATION** (crossings 193,
+   exempt 28, violations 165, bridges 15, zoneOutside 237,
+   majorityOutside 217, offBand 63, unwashedBodies 2,137,
+   landlocked 0, orphanStreets 0, physical 1) — and **TWO
+   FIGURES ARCH-2 NEVER REPORTED**: `zoneUnwashedBodies` HALVED
+   4,261 → 2,137, the wave's LARGEST single improvement, and
+   bridges 20 → 15. ⭐ **LAW: A WAVE MUST REPORT ITS IMPROVEMENTS
+   AS CAREFULLY AS ITS REGRESSIONS — an unreported win distorts
+   the record exactly as a hidden loss does.** (c) ⚠ **THE
+   EXEMPLAR SET IS NOT INDEPENDENT**: 7 of 16 leaves share seed
+   mf-town-01+riverside and 2 share mf-city-01+coastal, so every
+   "corpus-wide" exemplar figure we have quoted is a few
+   settlements multiplied. **Wave nine diversifies the exemplar
+   seeds**; until then every such figure carries the caveat.

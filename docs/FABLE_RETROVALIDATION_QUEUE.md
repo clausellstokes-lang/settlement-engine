@@ -156,3 +156,11 @@ taking mechanism while keeping derivation homes; (c) whichever
 convergence/divergence findings the lane reports, especially any place where
 our image-based reverse-engineering turns out to have been WRONG, since those
 propagated into the atlas and the compendiums.
+
+### §255 — the water characterization (Opus chair)
+Fable should re-derive: (a) the not-a-regression verdict and its 2×2
+decomposition; (b) the refutation of MF-ARCH-2's own stated cause, and the law
+that a wave's attribution can be wrong; (c) ratifying the lane's restraint in
+not landing a measured, working cure under the freeze; (d) the exemplar-set
+independence caveat and its retroactive effect on figures already quoted in
+this ledger.
