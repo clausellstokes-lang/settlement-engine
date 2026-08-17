@@ -9834,3 +9834,55 @@ operative clause here.
    sits outside the adoption ranking. Relayed to MF-X3 same-turn;
    MF-X2's deliverable is annotated by this row rather than
    rewritten.
+
+## §262 · G-34 RULED: BUILD THE MISSING CROSSING, DO NOT FORGIVE
+## IT — AND W0 DISPATCHED (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **THE SPEC PASSES THE CHAIR'S CUT-LIST TEST** (§257's
+   condition): every exit criterion in §5 is a MEASUREMENT, the
+   waves are ordered by dependency edges rather than ambition,
+   and W0 is verification debt that must precede the first line
+   of new code. It is a decomposition of the existing wave-nine
+   mandate, not a new one. **THE STUDIES END HERE AND THE
+   BUILDING RESUMES.**
+2. ⭐⭐ **G-34 RULED, and the governing principle is the spec's
+   own sentence: THE CURE IS NOT TO CONVICT LESS.** The 92 of 127
+   unexemptable street-over-water violations decompose into four
+   causes and only ONE is a lawful exemption:
+   (a) **the predicate mismatch (72)** — `deriveBridges` asks
+   `crossPoint` against the centreline while the cured census
+   asks `segSegClosest < half`. **NOT an exemption at all: it is
+   §255's boundary defect.** One predicate, ONE HOME, exported
+   and consumed by both, plus a check that reds when a second
+   module re-spells the same geometric question.
+   (b) **`rank === 'passage'` refused a bridge (20)** — a
+   passage crossing water needs a CROSSING STRUCTURE, not
+   forgiveness; a plank or footbridge is a real thing a town
+   builds. **BUILD THE BRIDGE at a passage-appropriate scale.**
+   (c) **only the first crossing per channel is taken (35)** — a
+   street that meets a meander twice needs two bridges. **FIX THE
+   LOOP.**
+   (d) **the dead `anchorKey` path (6)** — the marine regex's own
+   word can never fire, so a bank-rooted watermill is convicted
+   on its own river. **REAL DEFECT; cure already proved at 165 →
+   159 and PIXEL-FREE — it must re-quote the run-1 parchment SHAs
+   as BYTE-IDENTICAL, which is the receipt.**
+   (e) **the coast-vs-river street arm** — a street running ALONG
+   a shore is not crossing anything. **THIS ONE IS THE LAWFUL
+   EXEMPTION**, keyed to the water's relationship to the segment
+   (bankside adjacency vs channel transit), named in the census
+   rather than silently passed.
+   **NET: three build-fixes, one bug-fix, one named exemption.
+   The unexemptable share must fall because the town gains the
+   crossings it always needed — never because the rule got
+   softer.**
+3. **W0 DISPATCHED** with that ruling embedded, plus the stale
+   figures (metropolis GRAIN_BAND → 80-120 with the seams
+   re-derived; thorp/hamlet rungs labelled UNMEASURED; paper
+   warmth → 37 — the atlas half of which the chair already fixed
+   at §257.2), the distinct-site 10-world total published beside
+   every 16-leaf total, and all 32 unviewed arch2 plates given
+   written verdicts under §231.2's never-a-verdict-unviewed rule.
+   The chair takes the three named aesthetic judgments in person
+   when the lane reports.
