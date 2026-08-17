@@ -8551,3 +8551,43 @@ construction), straddler counterfactual must red.
    feature-law freeze holds; the foundation lands once, clean).
    Both change existing geometry and therefore ride the declared
    one-time shift at landing, never a silent redraw.
+
+## §240 · OWNER LAW: EPOCH GENERATION — CORE, WALL, RING, WALL,
+## RING (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **THE LAW**: even a FRESH walled settlement generates in
+   ORDERED EPOCHS — build the inner core, STOP, build the wall
+   that completely bounds it, THEN build the districts expanding
+   outside it, repeated for as many rings as are appropriate.
+   **THIS CLOSES §239.3's GENESIS EXCEPTION ENTIRELY**: there is
+   no simultaneous wall/fabric case anywhere, because every
+   circuit bounds an epoch that is already complete when the
+   circuit derives. The dependency chain core(E0) → wall(E0) →
+   ring(E1) → wall(E1) → ring(E2)… is ACYCLIC BY CONSTRUCTION,
+   with epoch index playing the role year plays in §239.
+   Relayed to MF-ARCH same-turn: a surviving wall↔fabric SCC now
+   convicts an IMPLEMENTATION coupling, not an inherent one.
+2. **RING COUNT IS DERIVED, NEVER A KNOB** (chair's binding
+   condition): epochs come from the settlement's own facts —
+   founding kind, high-water population (§161f), promotion
+   events, prosperity history, recorded fortification events.
+   A village earns zero circuits; a town one; a city may show
+   two vintages; a metropolis three at most. The corpus's
+   measured ~10%% two-vintages-in-one-frame is the calibration.
+   Excess rings would be tuning wearing history's clothes.
+3. **DIVIDENDS, recorded as consequences not extra work**: the
+   VINTAGE TRIAD (T-18) falls out free — each ring is a build
+   era, so its grain, plot variance and roof pigment differ by
+   construction; the DENSITY GRADIENT (T-03, organic 2.5-5.0)
+   emerges from epoch order instead of being imposed;
+   §161g demotion is the same machinery with a later epoch left
+   empty (the wall outliving its fabric, §239.4); and the wall
+   becomes a first-class dated EVENT, binding the map to the
+   event stream as truth rather than decoration.
+4. **HAZARD NAMED**: each epoch boundary is an inertia seam —
+   adding a later ring must NOT re-derive an earlier epoch
+   (that is the inertia law at epoch granularity), so epochs
+   need stable identity exactly as features do (MF-ARCH's
+   lineage-id work is the substrate). Slotted WAVE NINE
+   FIRST-ORDER with §239.1-.2 under the freeze; changes
+   geometry, so it rides the declared one-time shift.

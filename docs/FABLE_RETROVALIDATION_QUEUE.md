@@ -40,3 +40,11 @@ wall/street to ALL hard edges; (c) the claim that the wall-side street makes
 the no-touching law a geometric consequence rather than a policed rule;
 (d) the decision to hold both laws for wave nine rather than redirect MF-ARCH.
 Evidence: this row, laneMFARCH-receipt.md's SCC report when it lands.
+
+### §240 — epoch generation (Opus chair)
+Fable should re-derive: (a) that epoch generation truly closes the genesis
+exception (no residual simultaneous case); (b) the binding condition that ring
+count derives from facts with the tier ceilings named (village 0 / town 1 /
+city 2 / metropolis 3) — are those the right ceilings against the corpus?;
+(c) the claim that the vintage triad and density gradient fall out as free
+consequences; (d) the epoch-boundary inertia hazard's severity.
