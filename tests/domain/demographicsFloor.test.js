@@ -44,9 +44,14 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test, vi } from 'vitest';
+import { createPRNG } from '../../src/kernel/prng.js';
 import {
   evaluatePopulationDynamics, applyPopulationOutcomeToSettlement,
 } from '../../src/domain/worldPulse/populationDynamics.js';
+import { advanceDemographics } from '../../src/domain/worldPulse/demographicsKernel.js';
+import {
+  densityCeilingOf, effectiveBoundOf, foodCapacityOf, starvationDeficit01Of,
+} from '../../src/domain/worldPulse/demographicsRates.js';
 import {
   evaluateTierResourceDynamics, applyTierOutcomeToSettlement,
 } from '../../src/domain/worldPulse/tierResourceDynamics.js';
@@ -61,7 +66,10 @@ const RATES_MODULE = '../../src/domain/worldPulse/demographicsRates.js';
 // ── THE FIXTURE ──────────────────────────────────────────────────────────────
 // A settlement shaped like one of the floored six: real food physics, a modest granary,
 // two named residents on its roster, and nothing exotic.
-function place({ id = 'Ashford', tier = 'town', population = 300, dailyProduction = 900, named = 2 } = {}) {
+function place({
+  id = 'Ashford', tier = 'town', population = 300, dailyProduction = 900, named = 2,
+  deficitPct = 0, conditions = [],
+} = {}) {
   return {
     population,
     tier,
@@ -69,15 +77,31 @@ function place({ id = 'Ashford', tier = 'town', population = 300, dailyProductio
     config: { tier, terrainType: 'plains' },
     economicState: {
       foodSecurity: {
-        dailyNeed: population * 2, dailyProduction, deficitPct: 0, surplusPct: 5,
+        dailyNeed: population * 2, dailyProduction, deficitPct, surplusPct: 5,
         importDependency: 0.2, storageMonths: 6, resilienceScore: 60,
       },
       prosperity: 'Struggling',
     },
     institutions: [],
+    activeConditions: conditions,
     npcs: Array.from({ length: named }, (_, i) => ({ id: `${id}_npc_${i}` })),
   };
 }
+
+/** The world's crisis, as a settlement carries it: WAVE P4 routes this to the death
+ *  term, so a fixture that means to be "under pressure" must now say so the way the
+ *  live engine does — with the marker the pressure model would have minted. */
+const FAMINE = Object.freeze([Object.freeze({
+  archetype: 'famine',
+  affectedSystems: ['food_security', 'labor_capacity'],
+  duration: { elapsedTicks: 0, expiresAtTicks: 10 },
+})]);
+
+/** min(K_food, D_tier) for a fixture, read from the live tables (never restated). */
+const boundOf = (settlement) => effectiveBoundOf(
+  foodCapacityOf(settlement, { simulationRules: { demographicsEnabled: true } }, 'Ashford'),
+  densityCeilingOf(settlement),
+).bound;
 
 /** A uniform pressure index: every axis reads the same score. The soak's floored band
  *  reproduces at 0.68 to 0.70 (design §0's measured table). */
@@ -108,20 +132,30 @@ const rulesFor = (lit, extra = {}) => ({ ...BASE_RULES, ...extra, ...(lit ? { de
  * be walked at all) rather than expected wall-clock. That is exactly the claim under
  * test: dark, the ladder cannot be walked however many times you roll.
  *
+ * ⭐ WAVE P4 ADDED THE FOURTH LANE, AND THAT IS THE WHOLE REPAIR TO THIS HARNESS. The
+ * reconciliation moved the answer to a pressured settlement out of the population lane
+ * and into demographicsKernel.js, so a harness that drives only the three legacy
+ * evaluators is now measuring half an engine — and half an engine is exactly what P1a's
+ * lit arms used to measure, because until P4 the lane WAS the answer. The kernel is
+ * mounted on the LIT arm only, in the pulse's own order (candidates apply, then the
+ * movers, then tier, then lifecycle); the DARK arms are untouched down to the byte,
+ * which is what keeps section 8's frozen trace hashes meaningful.
+ *
  * @param {{ pressure: number, lit: boolean, ticks: number, tier?: string,
- *   population?: number, dailyProduction?: number, named?: number,
+ *   population?: number, dailyProduction?: number, named?: number, deficitPct?: number,
+ *   conditions?: Array<Record<string, unknown>>,
  *   rules?: Record<string, unknown>, step?: object }} args
  */
 function walk({
   pressure, lit, ticks, tier = 'town', population = 300, dailyProduction = 900, named = 2,
-  rules: ruleOverrides = {}, step = null,
+  deficitPct = 0, conditions = [], rules: ruleOverrides = {}, step = null,
 }) {
   const lanes = step || {
     evaluatePopulationDynamics, applyPopulationOutcomeToSettlement,
     evaluateTierResourceDynamics, applyTierOutcomeToSettlement,
     evaluateSettlementLifecycle, applySettlementLifecycleOutcomeToSettlement,
   };
-  let settlement = place({ tier, population, dailyProduction, named });
+  let settlement = place({ tier, population, dailyProduction, named, deficitPct, conditions });
   let worldState = { settlementTickStates: {} };
   const rules = rulesFor(lit, ruleOverrides);
   const pIndex = pressureAt(pressure);
@@ -131,12 +165,22 @@ function walk({
   let died = false;
 
   for (let t = 1; t <= ticks; t += 1) {
-    const item = { id: 'Ashford', name: 'Ashford', settlement, activeConditions: [] };
+    const item = { id: 'Ashford', name: 'Ashford', settlement, activeConditions: conditions };
     const snapshot = { settlements: [item], byId: new Map([['Ashford', item]]), regionalGraph: { edges: [] } };
     for (const c of lanes.evaluatePopulationDynamics(snapshot, pIndex, {
       tick: t, interval: 'one_year', simulationRules: rules,
     })) {
       settlement = lanes.applyPopulationOutcomeToSettlement(settlement, c, 'Ashford');
+    }
+    if (lit) {
+      const demo = advanceDemographics({
+        snapshot: { settlements: [{ id: 'Ashford', name: 'Ashford', settlement }] },
+        worldState: { ...worldState, simulationRules: rules },
+        settlementUpdates: [{ saveId: 'Ashford', settlement }],
+        rng: createPRNG(`floor::tick:${t}::one_year`),
+        tick: t,
+      });
+      settlement = demo.settlementUpdates[0].settlement;
     }
     const tierOut = lanes.evaluateTierResourceDynamics(
       { ...worldState, simulationRules: rules },
@@ -168,12 +212,42 @@ function walk({
 
 /** The population lane alone, with no appliers: what does it EMIT? */
 function candidatesFor({ pressure, lit, tick = 1, ...spec }) {
-  const item = { id: 'Ashford', name: 'Ashford', settlement: place(spec), activeConditions: [] };
+  const item = { id: 'Ashford', name: 'Ashford', settlement: place(spec), activeConditions: spec.conditions || [] };
   return evaluatePopulationDynamics(
     { settlements: [item], byId: new Map([['Ashford', item]]), regionalGraph: { edges: [] } },
     pressureAt(pressure),
     { tick, interval: 'one_year', simulationRules: rulesFor(lit) },
   );
+}
+
+/**
+ * THE DEATH DRAW ALONE — the demographic kernel with no tier lane and no lifecycle lane.
+ * The H3 and determinism sections need the draw isolated from the terminal writer, which
+ * legitimately empties a settlement in one stroke and would measure the wrong thing;
+ * before P4 that isolation was `declineOnly` over the population lane, and it is the
+ * same isolation over the lane that now owns the shrink.
+ * @param {Record<string, unknown>} spec @param {number} ticks @param {string} [seed]
+ * @param {typeof advanceDemographics} [step] a reverted kernel, for the negative controls
+ */
+function kernelOnly(spec, ticks, seed = 'floor', step = advanceDemographics) {
+  const id = String(spec.id || 'Ashford');
+  let settlement = place(spec);
+  const series = [settlement.population];
+  let births = 0;
+  let deaths = 0;
+  for (let t = 1; t <= ticks; t += 1) {
+    const out = step({
+      snapshot: { settlements: [{ id, name: id, settlement }] },
+      worldState: { simulationRules: rulesFor(true) },
+      settlementUpdates: [{ saveId: id, settlement }],
+      rng: createPRNG(`${seed}::tick:${t}`),
+      tick: t,
+    });
+    for (const receipt of out.receipts) { births += receipt.births; deaths += receipt.deaths; }
+    settlement = out.settlementUpdates[0].settlement;
+    series.push(settlement.population);
+  }
+  return { settlement, series, population: settlement.population, births, deaths };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -194,87 +268,136 @@ describe('1. THE UNFREEZE — the measured equilibrium resumes declining', () =>
     expect(candidatesFor({ pressure: 0.70, lit: false }).length).toBe(0);
   });
 
-  test('LIT: the same fixture declines every tick, monotonically, and never rebounds', () => {
-    const lit = walk({ pressure: 0.70, lit: true, ticks: 300 });
-    expect(lit.population, 'the floored settlement did not resume declining').toBeLessThan(300);
-    // MONOTONE: a decline lane may never hand a person back.
-    for (let i = 1; i < lit.series.length; i += 1) {
-      expect(lit.series[i], `population rose at tick ${i}`).toBeLessThanOrEqual(lit.series[i - 1]);
-    }
-    // And it is a real slope, not one lucky tick: measured 69 at tick 300 on this
-    // fixture, so the bar is set well outside it.
-    expect(lit.population).toBeLessThan(200);
-    // The lane emits a candidate where dark emitted none, and it is a DECLINE.
-    const emitted = candidatesFor({ pressure: 0.70, lit: true });
-    expect(emitted.length).toBe(1);
-    expect(emitted[0].candidateType).toBe('population_decline');
-    expect(emitted[0].populationDeltas[0].delta).toBeLessThan(0);
+  test('LIT: the frozen equilibrium moves again — and then it STOPS, above zero', () => {
+    // ⭐ WAVE P4 CHANGED WHAT THE LIT ARM CLAIMS, and the change is the point. Until the
+    // reconciliation this read "declines every tick, monotonically, and never rebounds",
+    // and it passed: the population lane answered a pressured settlement by itself with a
+    // rate that read no bound, so the lit fixture fell to 69 and would have gone on to
+    // zero. TWO INDEPENDENT ROLLING SOAKS MEASURED THAT AS THE DEFECT (a realm at 4% of
+    // its start, 95.3% of the loss in that one lane, on settlements holding thousands of
+    // spare mouths). A monotone-forever decline is not a cure with a floor missing; it IS
+    // the missing floor. So the claim is now the pair: THE DEADBAND'S ATTRACTOR IS STILL
+    // GONE (the fixture leaves 300, which dark it can never do), and the composite comes
+    // to rest somewhere above zero instead of ratcheting through it.
+    const lit = walk({ pressure: 0.70, lit: true, ticks: 300, conditions: FAMINE });
+    expect(new Set(lit.series).size, 'the fixture never left the deadband').toBeGreaterThan(1);
+    expect(lit.population, 'the fixture did not move off the frozen equilibrium').toBeLessThan(300);
+    expect(lit.population, 'the composite ratcheted toward zero: the floor is missing').toBeGreaterThan(0);
+    // AND IT IS AT REST. Measured 284 at tick 150 and 282 at tick 300 on this fixture:
+    // the second half moves by well under a percent, which a geometric ratchet cannot do.
+    expect(Math.abs(lit.series[300] - lit.series[150]) / lit.series[150], 'still falling')
+      .toBeLessThanOrEqual(0.05);
+    // And the lane itself is silent: under P4 it writes population only as a conserved
+    // transfer, and this fixture (migrationFlowsEnabled false) has no transfer to make.
+    expect(candidatesFor({ pressure: 0.70, lit: true, conditions: FAMINE }).length).toBe(0);
   });
 
-  test('NEGATIVE CONTROL (revert / red): re-impose the deadband and the fixture refreezes', async () => {
-    // The cure is the INTEGERIZATION, so the revert patches exactly that: the wave's
-    // `integerize` primitive is replaced by the pre-cure arithmetic, round-then-discard
-    // anything under two people. Nothing else about the lane changes.
+  test('THE FLOOR IS THE CAPACITY, NOT A CONSTANT: three granaries, three floors, in order', () => {
+    // The chair's own test of the cure: a reconciliation that merely raised a floor would
+    // put every settlement on the SAME number. These three are identical in every respect
+    // except how much food their fields make, they all start at 300 ABOVE their own bound,
+    // and they come to rest on three different numbers that follow their granaries.
+    // Measured: bounds 90 / 120 / 160 -> 75 / 94 / 119.
+    const runs = [60, 120, 200].map((dailyProduction) => ({
+      bound: boundOf(place({ dailyProduction })),
+      end: walk({ pressure: 0.70, lit: true, ticks: 700, dailyProduction, conditions: FAMINE }).population,
+    }));
+    for (const { bound, end } of runs) {
+      expect(end, `a settlement bounded at ${bound} emptied entirely`).toBeGreaterThan(0);
+      expect(end, `a settlement bounded at ${bound} never descended`).toBeLessThan(300);
+    }
+    expect(runs[0].bound).toBeLessThan(runs[1].bound);
+    expect(runs[1].bound).toBeLessThan(runs[2].bound);
+    expect(runs[0].end, 'the resting point ignored the granary').toBeLessThan(runs[1].end);
+    expect(runs[1].end, 'the resting point ignored the granary').toBeLessThan(runs[2].end);
+  });
+
+  test('NEGATIVE CONTROL (revert / red): unbound the crisis term and the ratchet comes back', async () => {
+    // THE CURE IS THE OCCUPANCY SCALING plus the ledger's veto, so the revert removes
+    // exactly those two and nothing else: a crisis that presses at full authored strength
+    // however empty and however well fed the settlement is. That is the pre-P4 shape of
+    // the pressure-decline lane — a rate with no reference to any bound — expressed in
+    // the term that replaced it, and it must re-create the defect on this fixture.
     vi.resetModules();
     vi.doMock(RATES_MODULE, async (importOriginal) => {
       const actual = await importOriginal();
       return {
         ...actual,
-        integerize: (/** @type {number} */ expected) => {
-          const rounded = Math.round(expected);
-          return Math.abs(rounded) < 2 ? 0 : rounded;
+        // The ledger's veto, removed: every marker is taken at face value.
+        crisisStress01: (/** @type {{ settlement?: { activeConditions?: unknown[] } }} */ input) => (
+          (input?.settlement?.activeConditions || []).length ? actual.CRISIS_MORTALITY_WEIGHTS.food : 0
+        ),
+        // The occupancy scaling, removed: the term is added at full strength instead.
+        demographicRates: (/** @type {{ crisis01?: number }} */ input) => {
+          const base = actual.demographicRates({ ...input, crisis01: 0 });
+          const crisis = Math.min(1, Math.max(0, Number(input?.crisis01) || 0));
+          return {
+            ...base,
+            death01: base.death01 + base.deathFloor01 * actual.DEMOGRAPHIC_TUNING.DEATH_CRISIS_GAIN * crisis,
+          };
         },
       };
     });
-    const reverted = await import('../../src/domain/worldPulse/populationDynamics.js');
-    const lanes = {
-      evaluatePopulationDynamics: reverted.evaluatePopulationDynamics,
-      applyPopulationOutcomeToSettlement: reverted.applyPopulationOutcomeToSettlement,
-      evaluateTierResourceDynamics, applyTierOutcomeToSettlement,
-      evaluateSettlementLifecycle, applySettlementLifecycleOutcomeToSettlement,
-    };
-    const refrozen = walk({ pressure: 0.70, lit: true, ticks: 300, step: lanes });
-    expect(refrozen.population, 'the reverted lane must re-create the defect').toBe(300);
+    const revertedKernel = await import('../../src/domain/worldPulse/demographicsKernel.js');
+    const ratcheted = kernelOnly(
+      { conditions: FAMINE, named: 0 }, 2000, 'revert',
+      revertedKernel.advanceDemographics,
+    );
+    // The cured composite rests near 282 on this fixture; unbound, the same settlement
+    // runs through its own floor and keeps going.
+    expect(ratcheted.population, 'the reverted term must re-create the ratchet').toBeLessThan(100);
     vi.doUnmock(RATES_MODULE);
     vi.resetModules();
   });
 
-  test('RESTORE (green): the unmocked lane declines again, in the same file, after the revert', () => {
+  test('RESTORE (green): the unmocked composite rests on its bound again, after the revert', () => {
     // Executed rather than described: a leaked mock would make the pin above vacuous.
-    const restored = walk({ pressure: 0.70, lit: true, ticks: 300 });
-    expect(restored.population).toBeLessThan(200);
+    const restored = kernelOnly({ conditions: FAMINE, named: 0 }, 2000, 'revert');
+    expect(restored.population, 'the restored composite ratcheted').toBeGreaterThan(100);
+    expect(restored.population, 'the restored composite never declined').toBeLessThan(300);
   });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('2. NO RESIDUAL FLOOR — lowering the deadband to one would NOT have cured it', () => {
-  test('an expectation that rounds to ZERO still declines lit, and is invisible dark', () => {
+  test('an expectation that rounds to ZERO still MOVES lit, and is invisible dark', () => {
     // At pressure 0.70 a settlement of 90 people expects 90 * 0.0006 * 8.2657 = 0.4464
     // departures a tick. Math.round of that is zero, so the delta never even reaches the
     // deadband: a cure that merely lowered the bar from two people to one would freeze
     // this settlement exactly as hard, at pop* = 0.5 / (|rate| x magnitude) = 101. That
     // second fixed point is still far above the thorp ceiling of 60, which is why the
     // attractor had to be removed rather than shrunk.
+    //
+    // WAVE P4: the claim is MOTION, not monotone descent. This hamlet's granary can feed
+    // 181 and only 90 people are at the table, so the reconciled composite correctly
+    // declines to answer a famine here at anything like full strength — the ledger's veto
+    // is the whole R-C cure — and the fixture drifts in both directions inside a narrow
+    // band. What it may never do is sit on ONE number forever, which is what dark does.
     expect(candidatesFor({ pressure: 0.70, lit: false, population: 90 }).length).toBe(0);
     const dark = walk({ pressure: 0.70, lit: false, ticks: 200, tier: 'hamlet', population: 90, dailyProduction: 300 });
     expect(dark.population, 'the sub-rounding fixture must be frozen dark').toBe(90);
+    expect(new Set(dark.series).size, 'the dark fixture moved: it is not the frozen shape').toBe(1);
 
-    const lit = walk({ pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: 90, dailyProduction: 300 });
-    expect(lit.population, 'a fractional expectation must still empty a settlement over time')
-      .toBeLessThan(90);
+    const lit = walk({
+      pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: 90,
+      dailyProduction: 300, conditions: FAMINE,
+    });
+    expect(new Set(lit.series).size, 'a fractional expectation must still move a settlement')
+      .toBeGreaterThan(1);
+    expect(Math.min(...lit.series), 'the fixture never fell at all').toBeLessThan(90);
   });
 
-  test('the fractional carry is unbiased: the shed count tracks the expectation, not a ceiling', () => {
-    // 0.4464 expected departures a tick over 400 ticks is about 179 people. If the cure
-    // had rounded AWAY from zero instead of carrying the fraction it would shed 400, and
-    // if it had rounded toward zero it would shed none. Both failures are excluded here.
-    let shed = 0;
-    for (let t = 1; t <= 400; t += 1) {
-      const c = candidatesFor({ pressure: 0.70, lit: true, population: 90, named: 0, tick: t });
-      if (c.length) shed += Math.abs(c[0].populationDeltas[0].delta);
-    }
-    expect(shed, 'the dither shed nothing: the fraction is being discarded').toBeGreaterThan(120);
-    expect(shed, 'the dither shed one every tick: the fraction is being rounded up').toBeLessThan(240);
+  test('the fractional carry is unbiased: the realized deaths track the expectation, not a ceiling', () => {
+    // The claim is unchanged and the site moved with the shrink: `integerize` is the same
+    // primitive, and under P4 it is the KERNEL's death draw that carries the fraction.
+    // Measured on this fixture: 37 deaths over 400 ticks. If the draw had rounded AWAY
+    // from zero it would bury one every tick (400) and if it had rounded toward zero it
+    // would bury nobody (0). Both degenerate roundings are excluded here.
+    const run = kernelOnly({
+      tier: 'hamlet', population: 90, dailyProduction: 300, named: 0, conditions: FAMINE,
+    }, 400, 'carry');
+    expect(run.deaths, 'the draw buried nobody: the fraction is being discarded').toBeGreaterThan(10);
+    expect(run.deaths, 'the draw buried one every tick: the fraction is being rounded up').toBeLessThan(200);
   });
 });
 
@@ -289,14 +412,38 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
   // tick 434 on this fixture, which is the derivation confirmed by execution.
   const HORIZON = 700;
 
-  test('LIT: town to village to hamlet to thorp, and then the terminal candidate fires', () => {
-    const lit = walk({ pressure: 0.70, lit: true, ticks: HORIZON });
-    expect(lit.tiers, 'the full descent is the claim, in order').toEqual(['town', 'village', 'hamlet', 'thorp']);
-    expect(lit.deathTick, 'the terminal lane was never reached').not.toBeNull();
-    expect(lit.deathTick).toBeLessThanOrEqual(HORIZON);
-    expect(lit.died, 'the death writer refused the outcome its own evaluator emitted').toBe(true);
-    expect(String(lit.settlement.lifecycleStatus || lit.settlement.config?.lifecycleStatus || ''))
+  test('LIT: a settlement whose GRANARY fails walks the ladder down and the terminal candidate fires', () => {
+    // ⭐ WAVE P4 MOVED WHAT DRIVES THE DESCENT, and refusing to move this fixture with it
+    // would pin the defect. Before the reconciliation ANY sustained pressure walked a
+    // settlement to its death, including a settlement with food to spare — that is the
+    // ratchet, and a cure that kept it would not be a cure. What must still be true, and
+    // is, is that a settlement whose CAPACITY genuinely fails still dies: the granary here
+    // feeds 46 and 120 people are at the table, so the claim is corroborated, mortality
+    // runs at its authored strength, and the viability ladder does the rest. Measured:
+    // hamlet to thorp, terminal candidate at tick 106.
+    const failed = walk({
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
+      dailyProduction: 40, named: 0, conditions: FAMINE,
+    });
+    expect(failed.tiers, 'the descent is the claim, in order').toEqual(['hamlet', 'thorp']);
+    expect(failed.deathTick, 'the terminal lane was never reached').not.toBeNull();
+    expect(failed.deathTick).toBeLessThanOrEqual(HORIZON);
+    expect(failed.died, 'the death writer refused the outcome its own evaluator emitted').toBe(true);
+    expect(String(failed.settlement.lifecycleStatus || failed.settlement.config?.lifecycleStatus || ''))
       .not.toBe('');
+  });
+
+  test('THE POSITIVE CONTROL: the same settlement with a SOUND granary survives the same horizon', () => {
+    // Without this the pin above would pass for the boring reason that everything dies at
+    // this horizon, which is precisely the reading the old lane earned. One number apart —
+    // the fields' output — and the same fixture under the same famine lives.
+    const sound = walk({
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
+      dailyProduction: 300, named: 0, conditions: FAMINE,
+    });
+    expect(sound.deathTick, 'a well-fed settlement was killed by a story').toBeNull();
+    expect(sound.died).toBe(false);
+    expect(sound.population, 'the well-fed settlement emptied anyway').toBeGreaterThan(0);
   });
 
   test('DARK (the control): the same fixture stalls at hamlet at exactly 300 people, forever', () => {
@@ -522,33 +669,26 @@ describe('6. ONE DEMOTION WRITER — a source census, not a claim', () => {
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('7. THE H3 FLOOR — the descent starves the number, never the cast', () => {
   // SCOPE, stated so the pin is not read as more than it is: this is a claim about the
-  // DECLINE LANE, which is the lane wave P1a changed, so the lifecycle lane is deliberately
-  // not driven here. A terminal death legitimately empties a settlement (the fates pin
-  // keeps the roster, the head count goes to zero), and letting that run would measure
-  // the death writer rather than the departure draw.
-  const declineOnly = (pressure, population, named, ticks) => {
-    let settlement = place({ tier: 'hamlet', population, dailyProduction: 200, named });
-    const series = [settlement.population];
-    for (let t = 1; t <= ticks; t += 1) {
-      const item = { id: 'Ashford', name: 'Ashford', settlement, activeConditions: [] };
-      const cs = evaluatePopulationDynamics(
-        { settlements: [item], byId: new Map([['Ashford', item]]), regionalGraph: { edges: [] } },
-        pressureAt(pressure), { tick: t, interval: 'one_year', simulationRules: rulesFor(true) },
-      );
-      for (const c of cs) settlement = applyPopulationOutcomeToSettlement(settlement, c, 'Ashford');
-      series.push(settlement.population);
-    }
-    return series;
-  };
+  // lane that OWNS THE SHRINK, and the lifecycle lane is deliberately not driven here. A
+  // terminal death legitimately empties a settlement (the fates pin keeps the roster, the
+  // head count goes to zero), and letting that run would measure the death writer rather
+  // than the draw. ⭐ WAVE P4 MOVED THE SHRINK from the population lane to the demographic
+  // kernel, so the isolation moved with it: `kernelOnly` is `declineOnly`'s successor and
+  // the floor is pinned where the draw now happens. The floor itself is unchanged — both
+  // lanes always drew against the ANONYMOUS POOL — and the fixture's granary is failed so
+  // the descent actually reaches the cast inside a measurable horizon.
+  const declineOnly = (seed, population, named, ticks) => kernelOnly(
+    { tier: 'hamlet', population, dailyProduction: 0, named, conditions: FAMINE }, ticks, seed,
+  ).series;
 
   test('a settlement declining to nothing never falls below its resident named cast', () => {
     // Dark this fixture could never reach the cast at all, because it would freeze
     // hundreds of souls above it. Removing the freeze is exactly what makes the floor
-    // load-bearing on this lane, so the floor is pinned on this lane.
+    // load-bearing, so the floor is pinned on the lane that now draws.
     const CAST = 24;
-    const failures = collectSeedFailures([0.70, 0.72, 0.74], (pressure) => {
-      for (const value of declineOnly(pressure, 120, CAST, 400)) {
-        expect(value, `pressure ${pressure}: the cast was starved`).toBeGreaterThanOrEqual(CAST);
+    const failures = collectSeedFailures(['h3-a', 'h3-b', 'h3-c'], (seed) => {
+      for (const value of declineOnly(seed, 120, CAST, 3000)) {
+        expect(value, `seed ${seed}: the cast was starved`).toBeGreaterThanOrEqual(CAST);
       }
     });
     expectNoSeedFailures(failures, 'the named cast is never in the departure draw');
@@ -557,13 +697,13 @@ describe('7. THE H3 FLOOR — the descent starves the number, never the cast', (
   test('and it settles ON the floor, not comfortably above it', () => {
     // Without this the pin above would pass for the boring reason that the fixture never
     // declined far enough to reach the floor at all.
-    const series = declineOnly(0.70, 120, 24, 400);
-    expect(series.at(-1), 'the fixture never reached its own floor: the pin proves nothing').toBe(24);
+    const series = declineOnly('h3-a', 120, 24, 3000);
+    expect(Math.min(...series), 'the fixture never reached its own floor: the pin proves nothing').toBe(24);
   });
 
   test('NEGATIVE CONTROL: the same fixture with no cast keeps going under twenty-four', () => {
-    const castless = declineOnly(0.70, 120, 0, 400);
-    expect(castless.at(-1), 'the floor is not the cast, it is something else').toBeLessThan(24);
+    const castless = declineOnly('h3-a', 120, 0, 3000);
+    expect(Math.min(...castless), 'the floor is not the cast, it is something else').toBeLessThan(24);
   });
 });
 
@@ -695,21 +835,19 @@ describe('9. DETERMINISM — replay, decorrelation, purity', () => {
   });
 
   test('the dither is keyed per settlement: twins with different names diverge', () => {
-    const runFor = (id) => {
-      let settlement = place({ id, population: 300 });
-      for (let t = 1; t <= 200; t += 1) {
-        const item = { id, name: id, settlement, activeConditions: [] };
-        const cs = evaluatePopulationDynamics(
-          { settlements: [item], byId: new Map([[id, item]]), regionalGraph: { edges: [] } },
-          pressureAt(0.70), { tick: t, interval: 'one_year', simulationRules: rulesFor(true) },
-        );
-        for (const c of cs) settlement = applyPopulationOutcomeToSettlement(settlement, c, id);
-      }
-      return settlement.population;
-    };
-    // Identical in every respect except the name. A shared dither would land them on the
-    // same number, which is the stream-sharing defect this key exists to avoid.
+    // ⭐ WAVE P4 moved the shrink into the kernel's own per-settlement fork
+    // (`demographics:<id>`), so the decorrelation claim is measured where the draw is.
+    // The whole trajectory is compared, not the endpoint: two independent random walks
+    // can land on the same number by luck, and a pin that could pass on luck is a pin
+    // that can go vacuous quietly.
+    const runFor = (id) => kernelOnly(
+      { id, tier: 'town', population: 300, named: 0, conditions: FAMINE }, 400, 'dither',
+    ).series.join(',');
+    // Identical in every respect except the name. A shared dither would give them one
+    // trajectory, which is the stream-sharing defect this key exists to avoid.
     expect(runFor('Aaa') === runFor('Bbb'), 'two identical settlements shared one dither').toBe(false);
+    // And each replays exactly, so the divergence above is the KEY and not ambient noise.
+    expect(runFor('Aaa')).toBe(runFor('Aaa'));
   });
 
   test('STRUCTURAL PURITY: the decline lane reaches for no clock, locale, or ambient randomness', () => {

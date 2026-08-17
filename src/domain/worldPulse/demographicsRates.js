@@ -73,6 +73,8 @@ import { importFactorOf, infrastructureFactorOf } from './demographicsWorks.js';
  * @property {string} [terrain]
  * @property {{ foodSecurity?: unknown }} [economicState]
  * @property {Array<Record<string, unknown>>} [populationHistory]
+ * @property {Array<Record<string, unknown>>} [activeConditions] WAVE P4: the world's
+ *   crises, read here as PRESENCE by class exactly as the legacy decline lane read them.
  */
 /** @typedef {{ from?: string, to?: string, kind?: string, magnitude?: number }} DemoObligation */
 
@@ -229,6 +231,18 @@ export const DEMOGRAPHIC_TUNING = Object.freeze({
   // deficit is a percentage of unmet need (foodStockpile keeps it live per tick), so
   // a town at half its need runs mortality at 2.5x its natural floor.
   DEATH_DEFICIT_GAIN: 3.0,
+  // ── WAVE P4, THE RECONCILIATION (§11 P4; the decline term and the death term) ──
+  // THE WORLD'S CRISES ARRIVE HERE AND NOWHERE ELSE when the engine is lit. A crisis
+  // kills through the same channel crowding does — contagion, competition for the same
+  // grain, exposure, a watch too thin to keep order — so it presses in proportion to
+  // HOW FULL THE PLACE IS, and that occupancy scaling is what gives the composite a
+  // FIXED POINT: as a pressed settlement empties, its crises stop being lethal, and
+  // somewhere above zero the birth band catches the death band. The floor is therefore
+  // set by the settlement's own capacity and its own hunger, never by a constant.
+  // THE GAIN IS NOT A NEW DIAL. At the bound, full crisis, the composite sheds at
+  // -13.4%/yr against the legacy decline lane's measured -13.0%/yr expectation: the
+  // severity the world was tuned around is preserved and only the floor is added.
+  DEATH_CRISIS_GAIN: 3.0,
   // The pressure READ is clamped to [0, 2] (design §2). Nothing clamps a population.
   PRESSURE_MAX: 2,
   // THE LIVE-ARTERY BANDS. When the route network is lit, the generated import
@@ -247,6 +261,57 @@ export const DEMOGRAPHIC_TUNING = Object.freeze({
   // No settlement's density ceiling may read below a thorp's floor: a terrain
   // adjustment is a modifier, never an eviction notice.
   MIN_DENSITY_CEILING: 24,
+});
+
+/**
+ * THE CRISIS MORTALITY WEIGHTS — the legacy decline lane's OWN monthly penalties
+ * (populationDynamics.js populationPressureRate: food -0.013, disease -0.020, war
+ * -0.016, burden -0.006), re-expressed as a 0..1 severity against the largest of them.
+ * A RE-EXPRESSION, not a re-invention: the relative severities the world was already
+ * tuned around are preserved exactly and only the CHANNEL changes, from a lane with no
+ * bound to the death term that has one.
+ * @type {Readonly<Record<string, number>>}
+ */
+export const CRISIS_MORTALITY_WEIGHTS = Object.freeze({
+  food: 0.65,
+  disease: 1,
+  war: 0.8,
+  burden: 0.3,
+});
+
+/**
+ * WHICH CRISIS CLASS EACH CONDITION ARCHETYPE BELONGS TO. Mirrors the four crisis sets
+ * in populationDynamics.js, which stays the owner of the legacy vocabulary (its sets
+ * still drive the emigration gate and the whole dark path). The two spellings cannot
+ * drift: tests/domain/demographicsRates.test.js walks both and reds by name if either
+ * grows a member the other does not carry.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const CRISIS_ARCHETYPE_CLASSES = Object.freeze({
+  famine: 'food',
+  food_anchor_lost: 'food',
+  regional_import_shortage: 'food',
+  plague: 'disease',
+  war_pressure: 'war',
+  vassal_extraction: 'war',
+  war_drain: 'war',
+  occupation_resistance: 'war',
+  occupation_burden: 'war',
+  alliance_burden: 'burden',
+  regional_protection_gap: 'burden',
+  relief_burden: 'burden',
+});
+
+/**
+ * A DM-authored `custom_crisis` carries no mapped archetype, so it speaks through the
+ * catalog systems it declares — the same fallback populationDynamics' hasConditionSignal
+ * uses, keyed by the identical three system labels.
+ * @type {Readonly<Record<string, string>>}
+ */
+const CRISIS_SYSTEM_CLASSES = Object.freeze({
+  food_security: 'food',
+  healing_capacity: 'disease',
+  defense_readiness: 'war',
 });
 
 /** The closed BIRTH band vocabulary, ordered thinnest first. @type {ReadonlyArray<string>} */
@@ -474,6 +539,7 @@ function deathBandWord(death01, floor01) {
  * @property {string} birthBand   one of BIRTH_BAND_WORDS
  * @property {string} deathBand   one of DEATH_BAND_WORDS
  * @property {number} deficit01   the food deficit the death side answered
+ * @property {number} crisis01    WAVE P4: the world's crises, as the death side saw them
  */
 
 /**
@@ -486,7 +552,8 @@ function deathBandWord(death01, floor01) {
  * can produce a deathless settlement. That is the single property whose absence let
  * a town reach 29 trillion people.
  *
- * @param {{ settlement?: DemoSettlement|null, pressure01?: number, deficit01?: number }} input
+ * @param {{ settlement?: DemoSettlement|null, pressure01?: number, deficit01?: number,
+ *   crisis01?: number }} input
  * @returns {DemographicRates}
  */
 export function demographicRates(input) {
@@ -496,14 +563,25 @@ export function demographicRates(input) {
   const deathFloor01 = num(/** @type {Record<string, number>} */ (NATURAL_DEATH_BANDS)[tier], NATURAL_DEATH_BANDS.village);
   const pressure = clamp(num(input && input.pressure01, 0), 0, T.PRESSURE_MAX);
   const deficit01 = clamp01(num(input && input.deficit01, 0));
+  // WAVE P4. ABSENT ⇒ 0 ⇒ the multiplier below is the same float expression in the same
+  // order it always was, so every pre-P4 caller and every pin reads byte-identically.
+  const crisis01 = clamp01(num(input && input.crisis01, 0));
 
   // Crowding suppresses births above the ease point and not before it.
   const crowding = clamp01((pressure - T.BIRTH_EASE) / Math.max(1e-9, 1 - T.BIRTH_EASE));
   const birth01 = Math.max(0, birthFloor01 * (1 - T.BIRTH_SUPPRESSION_MAX * crowding));
 
   // Strain raises deaths above its own, earlier ease point; the deficit adds on top.
+  // WAVE P4 adds the world's crises as the THIRD rise, scaled by OCCUPANCY (how full the
+  // place is, capped at its own bound) — the term that makes the composite converge to a
+  // capacity-derived floor instead of ratcheting toward zero. Below the ease points the
+  // fixed point solves to (birth/death - 1 - DEFICIT_GAIN x deficit) / (CRISIS_GAIN x
+  // crisis) of the bound, so it MOVES with capacity, hunger and how hard the world is
+  // pressing, and it VANISHES once hunger alone outruns the tier's bands.
   const strain = clamp(pressure - T.DEATH_EASE, 0, T.DEATH_STRAIN_CAP);
-  const multiplier = 1 + T.DEATH_PRESSURE_GAIN * strain + T.DEATH_DEFICIT_GAIN * deficit01;
+  const occupancy = Math.min(1, pressure);
+  const multiplier = 1 + T.DEATH_PRESSURE_GAIN * strain + T.DEATH_DEFICIT_GAIN * deficit01
+    + T.DEATH_CRISIS_GAIN * crisis01 * occupancy;
   const death01 = deathFloor01 * Math.max(1, multiplier);
 
   return {
@@ -514,6 +592,7 @@ export function demographicRates(input) {
     birthBand: birthBandWord(birth01, birthFloor01),
     deathBand: deathBandWord(death01, deathFloor01),
     deficit01,
+    crisis01,
   };
 }
 
@@ -526,6 +605,123 @@ export function demographicRates(input) {
 export function foodDeficit01Of(settlement) {
   const ledger = foodLedger(/** @type {Parameters<typeof foodLedger>[0]} */ (settlement));
   return ledger.present ? clamp01(ledger.deficitPct / 100) : 0;
+}
+
+/**
+ * THE DEFICIT AT WHICH HUNGER ALONE OUTRUNS THE TIER'S OWN BANDS — DERIVED, never
+ * authored. demographicRates raises the death floor by DEATH_DEFICIT_GAIN times the
+ * unmet-need fraction, so the deficit at which death01 first meets birth01 (at zero
+ * crowding, zero crisis) solves to (birth / death - 1) / DEATH_DEFICIT_GAIN: 25.6% at
+ * thorp scale down to 4.8% at metropolis scale, because a big place lives closer to its
+ * own mortality floor and has less hunger to spare.
+ *
+ * BELOW IT a settlement can still feed itself back up; AT OR ABOVE IT there is no
+ * positive fixed point at all and the place empties — which is the arm that keeps a
+ * genuine catastrophe catastrophic. It is the engine's own answer, in its own tables,
+ * to "how short is short enough to be a famine".
+ * @param {DemoSettlement|null|undefined} settlement @returns {number}
+ */
+export function starvationDeficit01Of(settlement) {
+  const tier = tierOf(settlement);
+  const birth = num(/** @type {Record<string, number>} */ (BIRTH_BANDS)[tier], BIRTH_BANDS.village);
+  const death = num(/** @type {Record<string, number>} */ (NATURAL_DEATH_BANDS)[tier], NATURAL_DEATH_BANDS.village);
+  return Math.max(0, (birth / death - 1) / T.DEATH_DEFICIT_GAIN);
+}
+
+/**
+ * R-C — WHAT THE CONSERVED LEDGER SAYS ABOUT A FOOD-CRISIS MARKER, 0..1.
+ *
+ * A `famine` condition is a NARRATIVE marker minted from the pressure index;
+ * foodLedger.js is "the ONE read-point" for the conserved quantities. The rolling soak
+ * found the two contradicting each other — a famine refreshed for twenty-seven straight
+ * years on a settlement whose granaries could feed nine thousand more mouths than it had
+ * people — and only the marker moved the population.
+ *
+ * THE ARBITER IS THE CLAIM: how much of what the granaries can feed is actually at the
+ * table (population / K_food), measured against DEATH_EASE — the occupancy at which the
+ * authored tables already say a place is crowded enough to start killing. At or above
+ * that share the marker is fully corroborated and nothing here softens it; a settlement
+ * claiming a seventh of its own granary reads 0.16 and cannot press its people to death
+ * on a story. An ABSENT ledger is never evidence (tierViabilityOf's own law): it fails
+ * OPEN at 1 and the legacy severity stands untouched.
+ *
+ * ⚠ WHY `deficitPct` IS NOT THE SECOND ARM, recorded so nobody re-adds it as an
+ * oversight. It is TWICE unusable as an arbiter here, and both reasons are in the tree:
+ *   • IT IS DENOMINATED AGAINST A GENERATION-FROZEN NEED. foodStockpile.js carries
+ *     `baseDeficitPct` forward from generation and never re-reads the head count, so a
+ *     settlement that has lost seven eighths of its people still books the same 5%
+ *     "unmet need" it booked at full size. That frozen ratio is precisely the second
+ *     food truth the soak caught contradicting the mouths reading.
+ *   • IT IS DOWNSTREAM OF THE MARKER IT WOULD ARBITRATE. An emergent famine condition
+ *     cuts production into `effectiveDeficit` in that same file, so a famine RAISES the
+ *     deficit — a corroboration read through it would be the marker corroborating
+ *     itself.
+ * The deficit still reaches mortality directly, through DEATH_DEFICIT_GAIN, exactly as
+ * it always did; it simply does not get a vote on whether the story is true. Making the
+ * deficit population-relative is a real repair and belongs to the food lane, not here.
+ * @param {DemoSettlement|null|undefined} settlement
+ * @param {{ spatialLedgers?: unknown, simulationRules?: unknown }|null|undefined} worldState
+ * @param {string} settlementId
+ * @returns {number}
+ */
+export function foodCorroboration01(settlement, worldState, settlementId) {
+  const food = foodCapacityOf(settlement, worldState, String(settlementId ?? ''));
+  if (!food.present) return 1;
+  const population = Math.max(0, num(asObject(settlement).population, 0));
+  const claim = population / Math.max(1, food.mouths);
+  return clamp01(claim / T.DEATH_EASE);
+}
+
+/**
+ * THE CRISIS SIGNAL THE DEATH SIDE ANSWERS (WAVE P4, THE RECONCILIATION), 0..1.
+ *
+ * ONE CAUSE, ONE CHANNEL. Before P4 a pressured settlement was answered by BOTH the
+ * legacy pressure-decline lane and this engine's death term, and the code said so in
+ * writing. The decline lane read no bound of any kind, so under a sustained condition it
+ * was a one-way ratchet with no fixed point; the measured consequence was a realm at 4%
+ * of its start with nine thousand spare mouths of food. The lane now writes population
+ * only as a conserved transfer (mass emigration) and hands its crisis signal here, where
+ * the death multiplier already knows what the place can hold.
+ *
+ * Presence, not severity, exactly as the legacy lane read it: a condition either presses
+ * or it does not, and the weight is the class's. The food class is the one the ledger
+ * arbitrates (R-C above) — everything else is taken at face value, because no conserved
+ * quantity in the tree can refute a plague or a war.
+ * @param {{ settlement?: DemoSettlement|null, worldState?: unknown, settlementId?: string }} input
+ * @returns {number}
+ */
+export function crisisStress01(input) {
+  const settlement = input && input.settlement ? input.settlement : null;
+  const raw = asObject(settlement).activeConditions;
+  const conditions = Array.isArray(raw) ? raw : [];
+  /** @type {Set<string>} */
+  const classes = new Set();
+  for (const entry of conditions) {
+    const condition = asObject(entry);
+    const archetype = String(condition.archetype || '');
+    const mapped = /** @type {Record<string, string>} */ (CRISIS_ARCHETYPE_CLASSES)[archetype];
+    if (mapped) { classes.add(mapped); continue; }
+    if (archetype !== 'custom_crisis') continue;
+    const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
+    for (const system of systems) {
+      const bySystem = /** @type {Record<string, string>} */ (CRISIS_SYSTEM_CLASSES)[String(system)];
+      if (bySystem) classes.add(bySystem);
+    }
+  }
+  if (classes.size === 0) return 0;
+  const weights = /** @type {Record<string, number>} */ (CRISIS_MORTALITY_WEIGHTS);
+  let total = 0;
+  for (const kind of classes) {
+    const weight = num(weights[kind], 0);
+    total += kind === 'food'
+      ? weight * foodCorroboration01(
+        settlement,
+        /** @type {{ spatialLedgers?: unknown, simulationRules?: unknown }} */ (asObject(input.worldState)),
+        String(input.settlementId ?? ''),
+      )
+      : weight;
+  }
+  return clamp01(total);
 }
 
 /**

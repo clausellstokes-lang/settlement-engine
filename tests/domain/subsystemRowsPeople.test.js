@@ -283,7 +283,10 @@ describe('people certification rows — traced to source', () => {
     // The second lane the same key gates, which the row records as unobservable.
     expect(mustExtract(
       read('src/domain/worldPulse/populationDynamics.js'),
-      'if (isMassEmigration && rules.migrationFlowsEnabled',
+      // RE-POINTED at WAVE P4: the gate's two halves were hoisted into `migrationLive` so
+      // the reconciliation and the transfer could read ONE expression, and a pin left at
+      // the old spelling would read where the code used to be.
+      'if (isMassEmigration && migrationLive) {',
       'transfer lane',
     )).toBeTruthy();
   });

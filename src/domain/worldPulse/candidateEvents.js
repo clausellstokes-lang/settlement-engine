@@ -26,6 +26,7 @@ import {
   proposalRequiresRecordModeSupersession,
 } from './pulseHelpers.js';
 import { envoyDiplomacyActive, hasActiveEnvoyForOffer } from './envoyErrand.js';
+import { foodCorroboration01 } from './demographicsRates.js';
 
 export { admitGuaranteedProposalOutcomes, buildProposalDocket };
 
@@ -291,6 +292,50 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
   };
 }
 
+/**
+ * R-C, THE MARKER'S LIFECYCLE ANSWERS TO THE LEDGER (WAVE P4, ODQ §219.3).
+ *
+ * A `famine` expires after ten ticks and is kept alive only by being MINTED AGAIN, and
+ * the mint reads a food-pressure score that the famine itself is holding up: the active
+ * condition adds +0.18 here and drags food_security down through causalState's
+ * applyConditions, which is another +0.19 of pressure. That is a closed loop with a gain
+ * above one and NOTHING in it reads the conserved food ledger. The rolling soak's failing
+ * cell rode it for twenty-seven years at 92% of ticks on a settlement with nine thousand
+ * spare mouths, while the passing cell on the same world let the same marker lapse.
+ *
+ * So the ledger gets a veto, as a CEILING and never a lift: belief may press a food
+ * crisis exactly as far as the granary books and the head count will carry it, and no
+ * further. A settlement that is genuinely short — claim at its capacity, or unmet need
+ * past its tier's own starvation deficit — reads a ceiling of 1 and is untouched, which
+ * is why this cannot make a real famine survivable.
+ *
+ * Gated on `demographicsEnabled` (virtual, false in every shipped preset), so every
+ * existing campaign takes the identical object back by reference.
+ * @template {{ kind?: string, score?: number, settlementId?: string|number, reasons?: unknown }} P
+ * @param {P} pressure
+ * @param {{ byId?: { get?: (id: string) => ({ settlement?: unknown }|undefined) },
+ *   worldState?: { spatialLedgers?: unknown, simulationRules?: unknown } }|null|undefined} snapshot
+ * @param {Record<string, unknown>|null} rules
+ * @returns {P}
+ */
+function ledgerCorroboratedPressure(pressure, snapshot, rules) {
+  if (!rules || rules.demographicsEnabled !== true) return pressure;
+  if (!pressure || pressure.kind !== 'food') return pressure;
+  const item = snapshot?.byId?.get?.(String(pressure.settlementId));
+  const settlement = item?.settlement || item;
+  if (!settlement) return pressure;
+  const ceiling = foodCorroboration01(settlement, snapshot?.worldState, String(pressure.settlementId));
+  if (!(ceiling < pressure.score)) return pressure;
+  return {
+    ...pressure,
+    score: ceiling,
+    reasons: [
+      ...(Array.isArray(pressure.reasons) ? pressure.reasons : []),
+      'the settlement\'s own granary books do not carry a shortage this deep',
+    ],
+  };
+}
+
 function candidateIdentity(/** @type {any} */ candidate) {
   return [
     candidate.type,
@@ -441,7 +486,9 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   if (rules.emergentEventsEnabled) {
     candidates.push(
       ...pressures
-        .map((/** @type {any} */ pressure) => pressureConditionCandidate(pressure, tick, rules))
+        .map((/** @type {any} */ pressure) => pressureConditionCandidate(
+          ledgerCorroboratedPressure(pressure, snapshot, rules), tick, rules,
+        ))
         .filter(Boolean),
     );
   }

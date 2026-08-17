@@ -38,6 +38,7 @@ import {
   moverPermitted,
   viabilityGradeOf,
 } from '../../src/domain/worldPulse/demographicsLadder.js';
+import { evaluateWorldPulseRules } from '../../src/domain/worldPulse/candidateEvents.js';
 import { demographicRiskOf } from '../../src/domain/worldPulse/demographicsRisk.js';
 import { scoreResponses } from '../../src/domain/worldPulse/demographicsResponses.js';
 import {
@@ -771,6 +772,123 @@ describe('P4.6 DORMANCY — object identity, not deep equality', () => {
       const abs = join(ROOT, 'src/domain/worldPulse', rel);
       expect(statSync(abs).isFile()).toBe(true);
       expect(forbidden.test(readFileSync(abs, 'utf8')), `${rel} is not a pure leaf`).toBe(false);
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('P4 / R-C — THE MARKER\'S LIFECYCLE ANSWERS TO THE LEDGER', () => {
+  // THE MEASURED LOOP THIS CLOSES. A `famine` expires after ten ticks and stays alive
+  // only by being MINTED AGAIN, and the mint reads a food-pressure score the famine is
+  // itself holding up: pressureModel adds +0.18 for an active food condition and
+  // causalState's applyConditions drags food_security down by up to twenty, which is
+  // another +0.19 of pressure. Gain above one, and nothing in the loop reads the
+  // conserved food ledger. The rolling soak's failing cell rode it for twenty-seven
+  // years at 92% of ticks; the passing cell on the same world let the marker lapse.
+  const foodPressure = (score) => ({
+    kind: 'food',
+    settlementId: 'ashford',
+    settlementName: 'Ashford',
+    label: 'Food pressure',
+    score,
+    reasons: ['Food capacity remains strained.'],
+  });
+
+  const worldWith = (settlement, rules) => {
+    const item = { id: 'ashford', name: 'Ashford', settlement };
+    return {
+      settlements: [item],
+      byId: new Map([['ashford', item]]),
+      regionalGraph: { edges: [], channels: [] },
+      worldState: { simulationRules: rules },
+    };
+  };
+
+  const fed = (population, dailyProduction) => ({
+    population,
+    tier: 'city',
+    name: 'Ashford',
+    config: { tier: 'city', terrainType: 'plains' },
+    economicState: {
+      foodSecurity: {
+        dailyNeed: population * 2,
+        dailyProduction,
+        deficitPct: 5,
+        surplusPct: 0,
+        importDependency: 0,
+        storageMonths: 6,
+        resilienceScore: 60,
+      },
+    },
+    npcs: [],
+  });
+
+  const mintFor = (settlement, rules, score) => evaluateWorldPulseRules(
+    worldWith(settlement, rules),
+    { tick: 8, pressures: [foodPressure(score)], pressureIndex: new Map(), simulationRules: rules },
+  ).find((candidate) => candidate?.candidateType === 'food_pressure');
+
+  const LIT_RULES = { emergentEventsEnabled: true, demographicsEnabled: true };
+  const DARK_RULES = { emergentEventsEnabled: true };
+
+  test('DARK (the control): belief alone still mints the marker, exactly as it always did', () => {
+    // Without this arm every assertion below could pass because the harness never mints
+    // anything. The settlement is the SAME one the lit arm refutes.
+    const roomy = fed(1000, 20000);
+    const dark = mintFor(roomy, DARK_RULES, 0.79);
+    expect(dark, 'the control minted nothing: the pins below would be vacuous').toBeTruthy();
+    expect(dark.condition.archetype).toBe('famine');
+    expect(dark.severity, 'the dark severity must be the belief verbatim').toBeCloseTo(0.79, 6);
+  });
+
+  test('LIT: a famine on a settlement with thousands of spare mouths is REFUSED at the mint', () => {
+    const roomy = fed(1000, 20000);
+    expect(mintFor(roomy, LIT_RULES, 0.79),
+      'a settlement claiming a seventh of its granary carried a famine anyway').toBeUndefined();
+  });
+
+  test('LIT: a settlement that genuinely cannot feed its people mints the SAME marker, unchanged', () => {
+    // The veto is a CEILING and never a lift, so a corroborated crisis passes through
+    // byte-identically. One number apart from the case above — what the fields make.
+    const packed = fed(20000, 20000);
+    const lit = mintFor(packed, LIT_RULES, 0.79);
+    const dark = mintFor(packed, DARK_RULES, 0.79);
+    expect(lit, 'a starving city was let off by the veto').toBeTruthy();
+    expect(lit.condition.archetype).toBe('famine');
+    expect(lit.severity).toBe(dark.severity);
+    expect(lit.reasons, 'a corroborated famine was annotated as if it had been doubted')
+      .toEqual(dark.reasons);
+  });
+
+  test('the veto never LIFTS a pressure, and it says why when it lowers one', () => {
+    // A ceiling above the belief must leave the belief alone; a ceiling that binds must
+    // be legible on the candidate itself (the legibility law), not a silent discount.
+    // Claim 3950 / 9400 = 0.42 of capacity, scaled against DEATH_EASE, is a ceiling of
+    // about 0.60: below the belief of 0.79 and still above the 0.5 promotion floor, so
+    // the marker survives at the severity the granary will carry and no higher.
+    const middling = fed(3950, 20000);
+    const lit = mintFor(middling, LIT_RULES, 0.79);
+    expect(lit, 'the middling case minted nothing: this arm measures nothing').toBeTruthy();
+    expect(lit.severity, 'the veto raised a pressure').toBeLessThan(0.79);
+    expect(lit.severity, 'the veto lowered the pressure past the promotion floor')
+      .toBeGreaterThanOrEqual(0.5);
+    // A ceiling ABOVE the belief must leave the belief alone.
+    expect(mintFor(middling, LIT_RULES, 0.51).severity, 'the veto moved a pressure it should not have')
+      .toBeCloseTo(0.51, 6);
+    expect(lit.reasons.some((r) => String(r).includes('granary books')),
+      'the ledger lowered the pressure without saying so').toBe(true);
+  });
+
+  test('only the FOOD kind is arbitrated: the other five mint on belief as before', () => {
+    const roomy = fed(1000, 20000);
+    for (const kind of ['disease', 'conflict', 'legitimacy', 'crime']) {
+      const pressure = { ...foodPressure(0.79), kind, label: `${kind} pressure` };
+      const lit = evaluateWorldPulseRules(
+        worldWith(roomy, LIT_RULES),
+        { tick: 8, pressures: [pressure], pressureIndex: new Map(), simulationRules: LIT_RULES },
+      ).find((candidate) => candidate?.candidateType === `${kind}_pressure`);
+      expect(lit, `${kind} was arbitrated by a food ledger`).toBeTruthy();
+      expect(lit.severity, `${kind} severity moved`).toBeCloseTo(0.79, 6);
     }
   });
 });

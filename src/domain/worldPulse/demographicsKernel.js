@@ -75,6 +75,7 @@ import { advanceDemographicPlans } from './demographicsPlans.js';
 import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { demographicNewsEntries } from './demographicsHerald.js';
 import {
+  crisisStress01,
   demographicsActive,
   demographicRates,
   densityCeilingOf,
@@ -114,6 +115,7 @@ import {
  * @property {number} arteries
  * @property {number} pressure01
  * @property {number} deficit01
+ * @property {number} crisis01    WAVE P4: the world's crises, weighted and ledger-checked
  * @property {string} birthBand
  * @property {string} deathBand
  * @property {number} namedFloor
@@ -285,7 +287,12 @@ export function advanceDemographics({
     const bound = effectiveBoundOf(food, densityCeilingOf(settlement, worldState, id));
     const pressure01 = pressureOf(before, bound.bound);
     const deficit01 = foodDeficit01Of(settlement);
-    const rates = demographicRates({ settlement, pressure01, deficit01 });
+    // WAVE P4, THE RECONCILIATION. The world's crises reach the population HERE and
+    // nowhere else once this engine is lit: populationDynamics' pressure-decline lane
+    // now writes only conserved transfers, so the settlement is answered by ONE channel
+    // instead of two, and that channel is the one that knows what the place can hold.
+    const crisis01 = crisisStress01({ settlement, worldState, settlementId: id });
+    const rates = demographicRates({ settlement, pressure01, deficit01, crisis01 });
 
     // ONE fork per settlement per tick; EXACTLY TWO draws, births then deaths.
     const fork = rng && typeof rng.fork === 'function' ? rng.fork(`demographics:${id}`) : null;
@@ -325,6 +332,7 @@ export function advanceDemographics({
       arteries: food.arteries,
       pressure01: round4(pressure01),
       deficit01: round4(deficit01),
+      crisis01: round4(rates.crisis01),
       birthBand: rates.birthBand,
       deathBand: rates.deathBand,
       namedFloor: named,

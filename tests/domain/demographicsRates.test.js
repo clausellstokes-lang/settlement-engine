@@ -10,11 +10,16 @@
  * so a tuning change moves the expectation with the code instead of reddening a
  * transcription.
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
   BIRTH_BANDS,
   BIRTH_BAND_WORDS,
   BINDING_KINDS,
+  CRISIS_ARCHETYPE_CLASSES,
+  CRISIS_MORTALITY_WEIGHTS,
   DEATH_BAND_WORDS,
   DEMOGRAPHIC_TUNING,
   DENSITY_CEILINGS,
@@ -22,15 +27,18 @@ import {
   MOUTHS_PER_FOOD_UNIT,
   NATURAL_DEATH_BANDS,
   TERRAIN_DENSITY_ADJUST,
+  crisisStress01,
   demographicRates,
   demographicsActive,
   densityCeilingOf,
   effectiveBoundOf,
   foodCapacityOf,
+  foodCorroboration01,
   foodDeficit01Of,
   integerize,
   pressureOf,
   reliefCreditorCount,
+  starvationDeficit01Of,
 } from '../../src/domain/worldPulse/demographicsRates.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../../src/data/constants.js';
 import {
@@ -492,5 +500,284 @@ describe('integerize — every term is an integer, and the fraction is a probabi
     const N = 1000;
     for (let i = 0; i < N; i += 1) total += integerize(2.25, i / N);
     expect(total / N).toBeCloseTo(2.25, 2);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// WAVE P4 — THE RECONCILIATION (ODQ §219.3). The decline term and the death term
+// stopped both answering a pressured settlement, and the composite gained a fixed
+// point. These pins are the arithmetic of that floor, and — just as load-bearing —
+// the arithmetic of the case where there ISN'T one.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const P4_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const LIT = Object.freeze({ simulationRules: { demographicsEnabled: true } });
+
+/** The occupancy at which deaths first catch births, scanned rather than restated.
+ *  null when births beat deaths at every occupancy the read admits. */
+function crossingOccupancy({ settlement, crisis01 = 0, deficit01 = 0 }) {
+  for (let p = 0.001; p <= DEMOGRAPHIC_TUNING.PRESSURE_MAX; p += 0.001) {
+    const rates = demographicRates({ settlement, pressure01: p, deficit01, crisis01 });
+    if (rates.death01 >= rates.birth01) return p;
+  }
+  return null;
+}
+
+describe('WAVE P4 — THE FIXED POINT, and that it is set by CAPACITY rather than a constant', () => {
+  test('a fully-pressed settlement comes to rest at a POSITIVE share of its own bound, by tier', () => {
+    // THE DEFECT THIS REPLACES, in one sentence: the legacy pressure-decline lane read no
+    // bound at all, so under a sustained condition there was no population at which it
+    // stopped subtracting — no fixed point anywhere above zero. Here the crossing is a
+    // real number for every tier, and it is the closed form of the authored tables:
+    // (birth / death - 1) / DEATH_CRISIS_GAIN, because below both ease points the birth
+    // band is flat and the crisis term is the only rise.
+    for (const tier of TIER_ORDER) {
+      const settlement = place({ tier });
+      const crossing = crossingOccupancy({ settlement, crisis01: 1 });
+      const closedForm = (BIRTH_BANDS[tier] / NATURAL_DEATH_BANDS[tier] - 1)
+        / DEMOGRAPHIC_TUNING.DEATH_CRISIS_GAIN;
+      expect(crossing, `${tier} has no fixed point under sustained crisis`).not.toBeNull();
+      expect(crossing, `${tier} rests at or below zero`).toBeGreaterThan(0);
+      expect(crossing, `${tier} rests at or above its own bound`).toBeLessThan(1);
+      expect(crossing, `${tier} does not match the tables it is derived from`)
+        .toBeCloseTo(closedForm, 2);
+    }
+  });
+
+  test('THE FLOOR IS NOT A CONSTANT: it moves with how hard the world presses', () => {
+    // A cure that had simply raised a floor would put every settlement on one number
+    // whatever was happening to it. Half the crisis, twice the resting population.
+    const settlement = place({ tier: 'town' });
+    const full = crossingOccupancy({ settlement, crisis01: 1 });
+    const half = crossingOccupancy({ settlement, crisis01: 0.5 });
+    expect(half).not.toBeNull();
+    expect(half / full, 'the resting occupancy ignored the size of the crisis')
+      .toBeCloseTo(2, 1);
+  });
+
+  test('AND IT IS NOT A CLAMP: nothing in the rates pins a population anywhere', () => {
+    // The fixed point is a crossing of two rates. Both sides stay strictly positive and
+    // finite at every occupancy the read admits, so no input drives either term to a
+    // hard stop that a reader could mistake for the equilibrium.
+    for (const crisis01 of [0, 0.5, 1, 7]) {
+      for (const p of [0, 0.3, 0.75, 1, 1.9, 1e9]) {
+        const rates = demographicRates({ settlement: place({ tier: 'city' }), pressure01: p, crisis01 });
+        expect(Number.isFinite(rates.death01), `death01 at p=${p} crisis=${crisis01}`).toBe(true);
+        expect(rates.death01).toBeGreaterThan(0);
+        expect(rates.birth01).toBeGreaterThanOrEqual(0);
+      }
+    }
+  });
+});
+
+describe('WAVE P4 — THE ANTI-FLOOR: a settlement that SHOULD collapse still can', () => {
+  test('past the tier\'s own starvation deficit there is NO positive fixed point at all', () => {
+    // ⭐ THE PIN THE CURE IS MOST AT RISK OF FAILING. A reconciliation that made collapse
+    // impossible would have replaced one defect with a worse one, so the boundary is
+    // derived and executed on both sides of itself. `starvationDeficit01Of` is the deficit
+    // at which hunger alone outruns the tier's bands; below it a settlement can feed
+    // itself back up, at or past it the death term beats the birth term at EVERY
+    // occupancy including an almost empty one, and the place empties.
+    for (const tier of TIER_ORDER) {
+      const settlement = place({ tier });
+      const starving = starvationDeficit01Of(settlement);
+      expect(starving, `${tier} has no starvation deficit`).toBeGreaterThan(0);
+
+      const belowIt = crossingOccupancy({ settlement, deficit01: starving * 0.5 });
+      expect(belowIt, `${tier} cannot recover from HALF its starvation deficit`)
+        .toBeGreaterThan(0.1);
+
+      const pastIt = crossingOccupancy({ settlement, deficit01: starving * 1.2 });
+      expect(pastIt, `${tier} still has a fixed point past starvation: collapse is impossible`)
+        .toBeLessThanOrEqual(0.002);
+    }
+  });
+
+  test('a granary that fails takes the bound with it, and the floor falls with the bound', () => {
+    // The other road to collapse, and the one a siege takes: the floor is a SHARE of
+    // min(K_food, D_tier), so destroying the capacity destroys the floor. Same
+    // settlement, same crisis, one number apart — what the fields make.
+    const fed = place({ tier: 'town', population: 1200, dailyProduction: 6000 });
+    const starved = place({ tier: 'town', population: 1200, dailyProduction: 60, importDependency: 0 });
+    const boundOf = (s) => effectiveBoundOf(foodCapacityOf(s, LIT, 'Ashford'), densityCeilingOf(s)).bound;
+    expect(boundOf(starved), 'the failed granary did not lower the bound')
+      .toBeLessThan(boundOf(fed) / 10);
+    // The RESTING OCCUPANCY is a property of the tables and is the same for both; the
+    // resting POPULATION is that share of each one's own bound, so it collapses with it.
+    const occupancy = crossingOccupancy({ settlement: fed, crisis01: 1 });
+    expect(occupancy * boundOf(starved), 'a settlement whose fields died kept a real floor')
+      .toBeLessThan(occupancy * boundOf(fed) / 10);
+  });
+});
+
+describe('WAVE P4 / R-C — the famine marker answers to the conserved ledger', () => {
+  test('a settlement claiming a sliver of its own granary cannot carry a full food crisis', () => {
+    // THE MEASURED CASE, restated as a fixture: the rolling soak's failing cell held a
+    // `famine` for twenty-seven years on a settlement with roughly nine thousand mouths of
+    // capacity and a thousand people. The claim there reads about 0.11 of capacity, and
+    // the veto scales it against DEATH_EASE — the occupancy the tables already call
+    // crowded enough to kill.
+    const roomy = place({ tier: 'city', population: 1000, dailyProduction: 20000, importDependency: 0 });
+    const veto = foodCorroboration01(roomy, LIT, 'Ashford');
+    expect(veto, 'the ledger did not refute a famine it can plainly feed through').toBeLessThan(0.3);
+    expect(veto, 'the veto silenced the marker outright: it is a scale, not a switch')
+      .toBeGreaterThan(0);
+    // And the crisis the death side sees is the weight scaled by exactly that.
+    const stress = crisisStress01({
+      settlement: { ...roomy, activeConditions: [{ archetype: 'famine' }] },
+      worldState: LIT,
+      settlementId: 'Ashford',
+    });
+    expect(stress).toBeCloseTo(CRISIS_MORTALITY_WEIGHTS.food * veto, 6);
+  });
+
+  test('THE CONTROL: a settlement that genuinely cannot feed its people is NOT softened', () => {
+    // The veto may only ever lower, and at or past DEATH_EASE it does not lower at all.
+    // Without this arm the pin above would be indistinguishable from a blanket discount.
+    const packed = place({ tier: 'city', population: 20000, dailyProduction: 20000, importDependency: 0 });
+    expect(foodCorroboration01(packed, LIT, 'Ashford'), 'a starving city was let off').toBe(1);
+    const stress = crisisStress01({
+      settlement: { ...packed, activeConditions: [{ archetype: 'famine' }] },
+      worldState: LIT,
+      settlementId: 'Ashford',
+    });
+    expect(stress, 'the authored weight was not delivered in full').toBeCloseTo(CRISIS_MORTALITY_WEIGHTS.food, 6);
+  });
+
+  test('an ABSENT ledger is never evidence: it fails OPEN and the legacy severity stands', () => {
+    // tierViabilityOf's own law, applied to the same reading. A fixture or a partially
+    // generated settlement must never be treated as refuting anything.
+    const unGenerated = { population: 500, tier: 'town', config: { tier: 'town' } };
+    expect(foodCorroboration01(unGenerated, LIT, 'Ashford')).toBe(1);
+    expect(crisisStress01({
+      settlement: { ...unGenerated, activeConditions: [{ archetype: 'famine' }] },
+      worldState: LIT,
+      settlementId: 'Ashford',
+    })).toBeCloseTo(CRISIS_MORTALITY_WEIGHTS.food, 6);
+  });
+
+  test('only the FOOD class is arbitrated: no conserved quantity can refute a plague or a war', () => {
+    const roomy = place({ tier: 'city', population: 1000, dailyProduction: 20000, importDependency: 0 });
+    for (const [archetype, kind] of [['plague', 'disease'], ['war_pressure', 'war'], ['relief_burden', 'burden']]) {
+      const stress = crisisStress01({
+        settlement: { ...roomy, activeConditions: [{ archetype }] },
+        worldState: LIT,
+        settlementId: 'Ashford',
+      });
+      expect(stress, `${archetype} was discounted by the granary`)
+        .toBeCloseTo(CRISIS_MORTALITY_WEIGHTS[kind], 6);
+    }
+  });
+
+  test('a DM custom_crisis speaks through its declared systems, exactly as the legacy lane read it', () => {
+    const roomy = place({ tier: 'city', population: 1000, dailyProduction: 20000, importDependency: 0 });
+    const stress = crisisStress01({
+      settlement: { ...roomy, activeConditions: [{ archetype: 'custom_crisis', affectedSystems: ['healing_capacity'] }] },
+      worldState: LIT,
+      settlementId: 'Ashford',
+    });
+    expect(stress).toBeCloseTo(CRISIS_MORTALITY_WEIGHTS.disease, 6);
+    // An unmapped system is silence, not a hole.
+    expect(crisisStress01({
+      settlement: { ...roomy, activeConditions: [{ archetype: 'custom_crisis', affectedSystems: ['social_trust'] }] },
+      worldState: LIT,
+      settlementId: 'Ashford',
+    })).toBe(0);
+  });
+});
+
+describe('WAVE P4 — the two crisis vocabularies cannot drift apart', () => {
+  // populationDynamics.js stays the owner of the legacy archetype sets (they still drive
+  // the emigration gate and the entire dark path); this module carries the classes the
+  // death term weighs. Two spellings of one vocabulary is exactly the per-volume-minting
+  // hazard, so the walk below reads the legacy sets OUT OF THEIR SOURCE and holds the two
+  // in bijection. A new archetype on either side reds here, by name.
+  const LANE = readFileSync(join(P4_ROOT, 'src/domain/worldPulse/populationDynamics.js'), 'utf8');
+
+  /** @param {string} name */
+  function laneSet(name) {
+    const match = LANE.match(new RegExp(`const ${name} = new Set\\(\\[([^\\]]*)\\]\\)`));
+    if (!match) throw new Error(`the legacy set ${name} was not found: this walker is reading the wrong file`);
+    return match[1].split(',').map((s) => s.trim().replace(/^'|'$/g, '')).filter(Boolean);
+  }
+
+  test('every archetype the legacy lane classes as a crisis carries a mortality class here', () => {
+    const legacy = [
+      ...laneSet('FOOD_CRISIS_ARCHETYPES'),
+      ...laneSet('DISEASE_CRISIS_ARCHETYPES'),
+      ...laneSet('WAR_CRISIS_ARCHETYPES'),
+      ...laneSet('BURDEN_ARCHETYPES'),
+    ];
+    expect(legacy.length, 'the source read found no archetypes at all').toBeGreaterThan(8);
+    const missing = legacy.filter((a) => !(a in CRISIS_ARCHETYPE_CLASSES));
+    expect(missing, 'archetypes the legacy lane presses on and the death term cannot see').toEqual([]);
+  });
+
+  test('and this module invents none the legacy lane does not know', () => {
+    const legacy = new Set([
+      ...laneSet('FOOD_CRISIS_ARCHETYPES'),
+      ...laneSet('DISEASE_CRISIS_ARCHETYPES'),
+      ...laneSet('WAR_CRISIS_ARCHETYPES'),
+      ...laneSet('BURDEN_ARCHETYPES'),
+    ]);
+    const invented = Object.keys(CRISIS_ARCHETYPE_CLASSES).filter((a) => !legacy.has(a));
+    expect(invented, 'a mortality class with no lane behind it').toEqual([]);
+  });
+
+  test('every class a mapped archetype names has an authored weight, and each weight is 0..1', () => {
+    for (const [archetype, kind] of Object.entries(CRISIS_ARCHETYPE_CLASSES)) {
+      expect(CRISIS_MORTALITY_WEIGHTS[kind], `${archetype} maps to the unweighted class ${kind}`)
+        .toBeGreaterThan(0);
+    }
+    for (const weight of Object.values(CRISIS_MORTALITY_WEIGHTS)) {
+      expect(weight).toBeGreaterThan(0);
+      expect(weight).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test('the weights are the legacy monthly penalties, re-expressed — a change of channel, not of severity', () => {
+    // Read out of the lane's own source so a retuned penalty reds here instead of
+    // silently letting the two severities part company.
+    const penalty = (label) => {
+      const match = LANE.match(new RegExp(`hasConditionSignal\\(item, ${label}[^\\n]*monthlyRate -= ([0-9.]+)`));
+      return match ? Number(match[1]) : null;
+    };
+    const legacy = {
+      food: penalty('FOOD_CRISIS_ARCHETYPES'),
+      disease: penalty('DISEASE_CRISIS_ARCHETYPES'),
+      war: penalty('WAR_CRISIS_ARCHETYPES'),
+      burden: penalty('BURDEN_ARCHETYPES'),
+    };
+    for (const value of Object.values(legacy)) expect(value, 'a legacy penalty went unread').toBeGreaterThan(0);
+    const worst = Math.max(...Object.values(legacy));
+    for (const [kind, value] of Object.entries(legacy)) {
+      expect(CRISIS_MORTALITY_WEIGHTS[kind], `${kind} no longer mirrors its legacy penalty`)
+        .toBeCloseTo(value / worst, 2);
+    }
+  });
+});
+
+describe('WAVE P4 — absent, the rates are what they always were', () => {
+  test('crisis01 omitted reads identically to crisis01 zero, at every occupancy', () => {
+    // The dormancy claim in arithmetic: every pre-P4 caller and every P1 pin passes no
+    // crisis at all, and must get the same float back.
+    for (const tier of TIER_ORDER) {
+      for (const pressure01 of [0, 0.4, 0.7, 0.9, 1.4, 2]) {
+        for (const deficit01 of [0, 0.2, 0.9]) {
+          const settlement = place({ tier });
+          const without = demographicRates({ settlement, pressure01, deficit01 });
+          const zero = demographicRates({ settlement, pressure01, deficit01, crisis01: 0 });
+          expect(without.death01, `${tier} p=${pressure01} d=${deficit01}`).toBe(zero.death01);
+          expect(without.birth01).toBe(zero.birth01);
+          expect(without.deathBand).toBe(zero.deathBand);
+        }
+      }
+    }
+  });
+
+  test('a settlement carrying no conditions presses nothing, however hard the index reads', () => {
+    expect(crisisStress01({ settlement: place(), worldState: LIT, settlementId: 'Ashford' })).toBe(0);
+    expect(crisisStress01({ settlement: null, worldState: LIT, settlementId: 'Ashford' })).toBe(0);
+    expect(crisisStress01({})).toBe(0);
   });
 });

@@ -616,11 +616,15 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
     expect(replacement, 'the one settleable invariant is missing').toBeTruthy();
     expect(replacement.check).toContain('population_growth');
     expect(replacement.check).toContain('exactly zero');
-    // And the source honours it: the suppression is a single flag-gated early return.
+    // WAVE P4 WIDENED THE ABSENCE and this pin is RE-POINTED rather than re-baselined:
+    // the address moved because the suppression did. One flag-gated early return still
+    // carries it, and it now refuses every lit candidate that is not a conserved
+    // transfer, so the row's countable absence covers the decline lane too.
+    expect(replacement.check).toContain('population_decline');
     mustExtract(
       read('src/domain/worldPulse/populationDynamics.js'),
-      'if (delta > 0 && rules.demographicsEnabled === true) return null;',
-      'the raw-growth suppression',
+      'if (rules.demographicsEnabled === true && !(isMassEmigration && migrationLive)) return null;',
+      'the raw-growth-and-decline suppression',
     );
   });
 });

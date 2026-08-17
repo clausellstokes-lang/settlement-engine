@@ -336,6 +336,13 @@ function deltaForSettlement(item, pressureIdx, interval, rules, tick) {
   // from DEFAULT_SIMULATION_RULES) so this reads `=== true` and is unreachable on every
   // existing campaign, and the expression below is the same float expression in the same
   // order it always was.
+  // ⚠ WAVE P4 NARROWED WHAT THIS BRANCH IS FOR. Its shed no longer reaches a settlement
+  // as decline — populationCandidate now refuses every lit candidate that is not a
+  // conserved transfer — so the integerized magnitude below survives for exactly one
+  // purpose: sizing the mass-emigration gate honestly at the weekly cadence. The
+  // "no nonzero equilibrium left" sentence above describes the arithmetic of this
+  // expression, and it is no longer a description of what the engine does to a
+  // population: demographicsRates' death term owns that, and it HAS a fixed point.
   if (expectation < 0 && rules.demographicsEnabled === true) {
     // THE H3 FLOOR COMPOSES STRUCTURALLY (design law 3: named souls are exempt). Dark,
     // this lane never had to think about the cast, because the deadband froze every
@@ -372,17 +379,32 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   // min(K_food, D_tier)) and the raw proportional growth is REPLACED here rather than
   // added to it, or the two lanes would both mint the same people.
   //
-  // ONLY the growth side is suppressed. Decline and mass emigration are UNCHANGED and
-  // still ride this lane: they already have a floor and the soak proved they work.
-  // P4 reconciles the decline term with the demographic death term; until then a
-  // pressured settlement is answered by both, which is conservative in the direction
-  // this wave cares about.
+  // ── WAVE P4, THE RECONCILIATION (ODQ §219.3). THE DEFERRAL ABOVE IS DISCHARGED. ──
+  // It used to read: "P4 reconciles the decline term with the demographic death term;
+  // until then a pressured settlement is answered by both, which is conservative in the
+  // direction this wave cares about." IT WAS NOT CONSERVATIVE. Two rolling soaks
+  // measured the consequence independently: a realm at 4% of its start, 95.3% of the
+  // loss in THIS lane, on settlements holding NINE THOUSAND spare mouths of food and a
+  // net-POSITIVE demographic engine. The reason is structural — populationPressureRate
+  // reads six pressure scores and six condition signals and NO bound of any kind, the
+  // growth side is suppressed here, and P1a removed the integer deadband, so under a
+  // sustained condition this lane is a one-way ratchet with no fixed point anywhere
+  // above zero. Both halves of the design's own law 1 were being broken at once: a
+  // shrink that is not a death, answering a cause the death term was already answering.
+  //
+  // SO WHEN THE ENGINE IS LIT THIS LANE WRITES POPULATION ONLY AS A CONSERVED TRANSFER.
+  // Mass emigration survives, and only when the migration path is actually live to
+  // receive it, because emigration is people MOVING and the destinations are credited;
+  // bare decline and bare growth are both DEATHS AND BIRTHS by another name and belong
+  // to demographicsKernel.js, the design's one writer. The crisis signal this lane used
+  // to spend is not thrown away: demographicsRates' crisisStress01 reads the same
+  // condition classes with the same relative severities, and the death multiplier
+  // applies them against min(K_food, D_tier), which is where the fixed point comes from.
   //
   // `demographicsEnabled` is VIRTUAL (absent from DEFAULT_SIMULATION_RULES, declared
   // false in the full_simulation preset), and normalizeSimulationRules passes unknown
   // keys through its `...input` spread, so this reads `=== true` and is unreachable
   // on every existing campaign: byte-identical dark.
-  if (delta > 0 && rules.demographicsEnabled === true) return null;
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
   // Scale the mass-emigration bar DOWN for sub-month intervals. The fixed
@@ -396,13 +418,18 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   // (one_year reachability is pinned by worldPulseExpansion / migrationDispersal).
   const massThreshold = Math.max(25, Math.round(pop * 0.025 * Math.min(1, intervalMagnitude(interval))));
   const isMassEmigration = delta < 0 && abs >= massThreshold && (severe || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES));
+  // Hoisted from the dispatch below so the P4 gate and the transfer read ONE expression:
+  // "emigration" that no destination can receive is a bare shed wearing a movement's
+  // name, and that is exactly what the reconciliation refuses to let this lane write.
+  const migrationLive = !!rules.migrationFlowsEnabled && !['off', 'local'].includes(rules.propagationMode);
+  if (rules.demographicsEnabled === true && !(isMassEmigration && migrationLive)) return null;
   const populationDeltas = [{ saveId: sourceId, delta, reason: delta > 0 ? 'Organic growth from favorable conditions.' : 'Population loss from cumulative settlement pressure.' }];
   let transferMode = null;
   let migrants = 0;
   // M4 (MIGRATION-WITH-MORTALITY) hand-off: the shed pool the spatial mover consumes.
   let spatialEmigration = null;
 
-  if (isMassEmigration && rules.migrationFlowsEnabled && !['off', 'local'].includes(rules.propagationMode)) {
+  if (isMassEmigration && migrationLive) {
     if (spatialActive) {
       // M4 spatial path (Phase 5.5): the origin sheds the SAME `abs` (byte-parity
       // origin trajectory) but its FATE — the 4-axis route-based destinations, the

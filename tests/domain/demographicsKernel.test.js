@@ -224,7 +224,13 @@ describe('THE SEAM — one flag each, and neither inherits the other', () => {
     expect(lit.filter((c) => c.candidateType === 'population_growth').length).toBe(0);
   });
 
-  test('only the GROWTH side is replaced: decline and emigration still ride their own lane', async () => {
+  test('WAVE P4: the lane writes population ONLY as a conserved transfer, never as bare decline', async () => {
+    // ⭐ THIS PIN USED TO SAY THE OPPOSITE, and the flip is the reconciliation. P1 left the
+    // decline term riding this lane beside the kernel's death term — "a pressured
+    // settlement is answered by both" — and two rolling soaks measured what that costs: a
+    // lane with no bound of any kind, running as a one-way ratchet with no fixed point.
+    // A shrink that is not a death breaks this module's own law 1 just as surely as a
+    // growth that is not a birth, so both are refused here now.
     const { evaluatePopulationDynamics } = await import('../../src/domain/worldPulse/populationDynamics.js');
     const items = REALM.map(([id, spec]) => ({
       id, name: id, settlement: place({ id, ...spec }),
@@ -232,12 +238,31 @@ describe('THE SEAM — one flag each, and neither inherits the other', () => {
     }));
     const snapshot = { settlements: items, regionalGraph: { edges: [] } };
     const pIndex = { get: () => ({ score: 0.9 }) };
-    const lit = evaluatePopulationDynamics(snapshot, pIndex, {
-      tick: 1, interval: 'one_year',
-      simulationRules: { populationDynamicsEnabled: true, demographicsEnabled: true, migrationFlowsEnabled: false },
+    const rules = { populationDynamicsEnabled: true, demographicsEnabled: true, migrationFlowsEnabled: false };
+
+    // THE CONTROL FIRST, or the assertion below proves nothing: dark, this exact fixture
+    // is a torrent of bare decline, which is the lane the reconciliation retired.
+    const dark = evaluatePopulationDynamics(snapshot, pIndex, {
+      tick: 1, interval: 'one_year', simulationRules: { ...rules, demographicsEnabled: false },
     });
-    const shrinking = lit.filter((c) => c.metadata.populationKind !== 'growth');
-    expect(shrinking.length, 'the decline lane is UNCHANGED in P1 and must still fire').toBeGreaterThan(0);
+    expect(dark.filter((c) => c.metadata.populationKind === 'decline').length,
+      'the control produced no bare decline: the pin below would be vacuous').toBeGreaterThan(0);
+
+    const lit = evaluatePopulationDynamics(snapshot, pIndex, { tick: 1, interval: 'one_year', simulationRules: rules });
+    expect(lit.filter((c) => c.metadata.populationKind === 'decline').length,
+      'a bare decline survived the reconciliation').toBe(0);
+    expect(lit.filter((c) => c.metadata.populationKind === 'growth').length,
+      'a bare growth survived P1').toBe(0);
+    // And emigration is not collateral damage: with the migration path live the same
+    // fixture still moves people, because a departure is a TRANSFER and its destinations
+    // are credited. Conservation is the whole distinction the gate draws.
+    const withMigration = evaluatePopulationDynamics(snapshot, pIndex, {
+      tick: 1,
+      interval: 'one_year',
+      simulationRules: { ...rules, migrationFlowsEnabled: true, propagationMode: 'regional' },
+    });
+    expect(withMigration.every((c) => c.metadata.populationKind === 'emigration'),
+      'the lane emitted something that was not a transfer').toBe(true);
   });
 });
 
