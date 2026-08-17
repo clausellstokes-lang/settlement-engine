@@ -9055,3 +9055,70 @@ construction), straddler counterfactual must red.
    (0/4) and institution (0/3) coverage is recorded as a known
    limit of a frozen corpus. (d) The README's stale holdout
    clause was corrected by the chair same-turn.
+
+## §250 · THE PLAN COMPENDIUM COLLECTED — THE STREET GRAPH IS
+## T-DOMINATED, AND A MISSING MECHANISM WOULD HAVE ERASED THE
+## HISTORY §240 EXISTS TO EXPRESS (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **DELIVERED**: map-corpus/docs/MORPHOLOGY-PLAN.md (756 lines)
+   + ten re-runnable instruments beside it; 91 holdout plates
+   excluded on the CONSERVATIVE reading (every id named anywhere
+   in the proposal incl. both arms of the swap — the narrow
+   reading would have been 81), studiable frame 222; 49 hand-set
+   windows over 36 plates including 14 SUB-WINDOWS isolating a
+   quarter or epoch INSIDE one plate — the technique that made
+   the epoch findings possible.
+2. ⭐⭐ **THE SHARPEST GAP: THE STREET GRAPH IS T-DOMINATED AND
+   X-STARVED** — median 43 T-junctions per X (X:T 0.024, degree
+   ≥5 essentially absent). **A generator that lays a mesh
+   produces X by default; real accretion produces T** — and
+   NOTHING in §201/§202 constrains it: an all-X lattice satisfies
+   every access and attachment law we have. ADOPTED as a
+   first-class derivation law and census (junction-mix bands by
+   morphology), wave nine.
+3. **BOEING'S ORIENTATION-ORDER φ DISCRIMINATES PLANNED FROM
+   ORGANIC *WITHIN ONE PLATE*** — hf239's castra grid 0.585 vs
+   its own vicus 0.074 (7.9×); hf26's new quarter 0.652 vs its
+   old fabric 0.069 (9.5×), skeletons visually confirmed tracing
+   the real via principalis. ADOPTED as both instrument and
+   per-quarter generator target: φ is how a planned epoch and an
+   organic one become legible as different places.
+4. ⭐⭐ **EPOCH CALIBRATION FOR §240, the brief's flagged
+   highest-value target**: newer epochs are **1.8-2.9× COARSER**
+   in grain (not finer — old cores are the finely subdivided
+   ones), epoch order tracks **FOUNDING MODE, NOT AGE** (hf239
+   inverts because its planned epoch is its oldest), and **MAX 4
+   legible epochs anywhere in 313 plates** — independently
+   corroborating §240.2's derived ring ceilings.
+5. ⭐⭐ **`circuitDemotion` IS THE BIGGEST MISSING MECHANISM AND
+   IT IS URGENT**: hf347 draws the complete fossilised-circuit
+   vocabulary — old wall → ring street, gate → frontage break,
+   tower → circular dwelling, ditch → garden band. §240 makes
+   multi-circuit settlements imminent and **nothing says what
+   happens to the superseded circuit; without this, every new
+   ring ERASES the history the epoch model was adopted to
+   express.** WAVE NINE FIRST-ORDER, alongside §239's laws.
+6. **RULINGS.** (a) **FOUR TIER-INVARIANTS ADOPTED AS LAW —
+   junction mix, dead-end rate, φ, block elongation MUST NEVER BE
+   SCALED WITH TIER.** These are precisely the dials tuning would
+   reach for when a metropolis looks wrong, and moving them
+   destroys the settlement's kind rather than its size. (b) **THE
+   GAP-B CORRECTION IS ADOPTED AND IS A GENERAL LAW: a
+   descriptive statistic may be a CENSUS and must be FORBIDDEN as
+   a GENERATOR INPUT.** `radialDensityFalloff` is a symptom of
+   age/wealth/land-use; fitting to it re-bakes the concentric
+   prior we ban — the same disease as pinning bands to the corpus
+   median (§244.4). (c) GAP-C corrected: width classes QUANTISE A
+   DERIVED GRAPH LOAD; they are not the source of width. (d) The
+   #1 ranked gap — FRONTAGE-FIRST GENERATION and the plot series
+   — independently reproduces MF-S1's un-defer recommendation for
+   §18.5, now confirmed by two studies on disjoint evidence.
+7. ⭐ **THE HOLDOUT DISCIPLINE, RECORDED AS EXEMPLARY AND NOW
+   LAW**: the lane's final audit caught seven holdout ids cited
+   in prose (from the index's text, not from viewing), re-sourced
+   six, and **WITHDREW §10.3 (the desire-paths finding) entirely
+   rather than cite a holdout plate** — its only witness was
+   inside the reserve. **A STUDY TAKES THE LOSS RATHER THAN
+   CONTAMINATE THE HOLDOUT**; the withdrawal notice sits in the
+   section slot rather than being renumbered away.

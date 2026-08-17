@@ -111,3 +111,13 @@ tier legibility is multi-channel; (c) accepting the withdrawn rungs and the
 unrestorable population fit rather than substituting a weaker estimate;
 (d) the superlative-audit class as a general law. Evidence: laneMFS2-receipt.md,
 map-corpus/docs/laneMFS1-urbanism-atlas.md §2.9, MFS2-bands.py output.
+
+### §250 — the plan compendium's rulings (Opus chair)
+Fable should re-derive: (a) elevating junction mix (T vs X) to a first-class
+derivation law — is the measured X:T 0.024 a corpus artifact or a real
+morphological truth?; (b) the GAP-B general law (a statistic may be a census
+and forbidden as a generator input) — this is the second ruling of its kind
+after §244.4 and together they define our anti-overfit doctrine; (c) the four
+tier-invariants; (d) circuitDemotion's promotion to wave-nine first-order;
+(e) the epoch calibration figures (newer = 1.8-2.9× coarser; order by founding
+mode; max 4 epochs) as §240's binding numbers.
