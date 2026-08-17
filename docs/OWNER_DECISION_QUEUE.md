@@ -8356,3 +8356,29 @@ construction), straddler counterfactual must red.
    riches are deliberately DELAYED behind the architecture
    window: every law written against the old pipeline is
    migration debt. docs/HANDOFF_CURRENT.md updated same-turn.
+
+## §235 · TE34 COLLECTED GREEN BY THE CHAIR'S OWN GATE; THE
+## §234 BUILD BEGINS (2026-08-17, chair §170)
+
+1. **THE HARNESS MICRO-BATCH IS LANDED AND EXPOSED**: the
+   detached re-run the chair launched through the session-limit
+   pause returned TRUE_EXIT=0 and SMOKE_TRUE_EXIT=0 with the
+   exits captured in-shell (TE34-CHAIR-BINDING.log; the deno
+   pair 662/0 was already proven at the tip by the lane). CAS
+   EXECUTED: claude/composite-r4 66fda66d→ac243e1c (three
+   commits: the soak instrument's three cures; the env-leak
+   sweep + habitat walker; the WF-1a packet flip). The
+   requiredSymbols-cannot-catch-renames limit and the
+   restore-list trap are banked in the lane's receipt.
+2. **DISPATCHES UNDER THE §234 SEQUENCE**: RS-3 FIRED at
+   ac243e1c — the first soak with full epoch-pair coverage on
+   the cured instrument (the RS-2 crash class gone by
+   construction). HF-4b resumed the FINAL CORPUS SPEND (balance
+   re-verified; orphaned generations rescued first; the §234
+   HOLDOUT nomination added to its deliverables — the chair
+   rules on the set). MF-B8b re-dispatched as THE ARCHITECTURE
+   PILOT: the wall cure built in the graph idiom (declared
+   inputs, content-hashed output, accessor-pulled consumers)
+   with the §232 district partition and the sibling staleness
+   audit; its PILOT NOTES feed the MF-ARCH wave, which
+   dispatches on its seal under the feature-law freeze.
