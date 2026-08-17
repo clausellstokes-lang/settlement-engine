@@ -262,3 +262,11 @@ rather than a tuning act (if that reasoning is wrong, the whole repair needs
 the owner's signature BEFORE landing, not at the tuning pass); (c) the
 anti-floor proof's sufficiency; (d) holding the CAS until the terminal is
 green rather than exposing a tip with an authorized-but-unexecuted explanation.
+
+### §273 — W1 complete (Opus chair)
+Fable should re-derive: (a) the normalized-units law and how wide the audit
+should be; (b) amending exit 6 rather than waiving it, and treating zero
+through-river exemplars as a coverage gap to fill in W2; (c) the point-vs-area
+class now at four instances — is a systematic sweep warranted rather than
+case-by-case cures?; (d) the absolute slope threshold chosen by shape (flat 0%,
+hills 11%, mountain 27.8%) rather than by a fitted number.

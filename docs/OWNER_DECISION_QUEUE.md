@@ -10533,3 +10533,82 @@ down is not a critique.
    the owner's tuning signature; a veto there re-does the
    re-record at his values, and the lane's receipt carries that
    obligation in writing.
+
+## §273 · W1 COMPLETE — SIX OF SIX, AND A UNITS DEFECT THAT MADE
+## ONE LINE MEAN SEVEN DIFFERENT RULES (2026-08-17; chair: Opus 5
+## — Fable-unvalidated)
+
+1. **ALL SIX EXIT CRITERIA MET** (predecessor: 1 met, 1 partial,
+   4 unbuilt). The refusal mask has a single home and censuses **0
+   drawn bodies and 0 field strips on refused ground over 21,982
+   bodies**, with TWO planted violations redding — the second
+   planted in the SUBSTRATE UNDER A FINISHED FABRIC, so no
+   enforcement could have absorbed it. Suite 178 → **220 titles**
+   (+42), determinism 10/10, all four drawn censuses 0, SCC 0/0,
+   purity clean, completeness ladder green. The declared shift is
+   attributed by counterfactual: the water mechanism moves
+   **exactly the 10 water leaves × 2 lenses and not one dry leaf.**
+2. ⭐⭐ **THE SHARPEST FINDING IS A UNIT, NOT A FEATURE: SIX
+   PRIVATE SPELLINGS OF "THE GROUND REFUSES", ALL STATED IN
+   PER-LEAF-NORMALIZED SLOPE.** `parcels.js`'s `slope > 0.80`
+   refuses at absolute grade 0.0094 on the thorp and 0.0699 on the
+   mountain — **the same line meaning rules 7.5× apart**, and on
+   the flattest leaf refusing ground gentler than the MOUNTAIN'S
+   MEDIAN. Now absolute, with the threshold chosen by a corpus
+   measurement whose argument is a SHAPE rather than a number (at
+   grade 0.030 the flat families refuse zero cells, hills 11%,
+   mountain 27.8%). ⭐ **LAW: A THRESHOLD STATED IN NORMALIZED
+   UNITS IS A DIFFERENT RULE ON EVERY LEAF.** Audit any surviving
+   normalized threshold before trusting it.
+3. ⭐⭐ **"A POINT TEST CANNOT ENFORCE AN AREA LAW" IS NOW THE
+   FOURTH INSTANCE IN THIS FABRIC** — after the wall predicate
+   (vertices vs area), §203's majority-AREA counting corners, and
+   the water arm. Here `tillageScore` was asked at the furlong
+   CENTROID while a furlong is 4–11 substrate cells across, which
+   is why ploughland tiled the crags. **ACCEPTANCE NOW MET BY
+   EYE at 3000 px: the mountain reads as a village at the edge of
+   upland waste — the field patchwork stops dead and four legible
+   crag chains run through bare ground — and the fjord's sea is a
+   deep cove between headlands.** ORDERED: a standing audit of
+   every remaining point test that enforces an area law.
+4. **`physicalViolations` 1 → 7 PROVED, AND THE PREDECESSOR'S
+   GUESS REFUTED** — nothing to do with the mask. Six of seven
+   were extraction institutions: the resource cure narrowed the
+   predicate from `slope > 0.34` (23–73% of a leaf) to a disc
+   around a displaced site (1.2–5.7%), and the degenerate
+   fallback probed the wrong ground — **0 of 556 water-line probes
+   can satisfy a dry-ground predicate on the fjord.** The root
+   cause is a COMMENT: the fallback claims "the steepest ground
+   the substrate offers" and pushes 64 UNIFORMLY RANDOM points —
+   §270.2's hash-versus-rank law wearing different clothes.
+   **Cured 7 → 1** (residual: a fish market on a dry leaf).
+5. **THE NEVER-RUN AUDIT (§270.1) PAID OUT: 12 OF 12 MECHANISMS
+   NOW FIRE ON A REAL DOSSIER** (`readResourceWords` 0/16 →
+   16/16; six previously dark). A totality walker over the
+   engine's OWN vocabulary found **18 real archetypes with no row
+   and no ruling — a third of the §10 surface silently partial**;
+   now 21 bridged / 30 ruled / **0 unruled**. ⭐ And the walker
+   convicted its own author twice (a scratch grep undercounted the
+   vocabulary by 4, and falsely convicted a key because the engine
+   has TWO writers of archetype names) — which is exactly why a
+   walker beats a grep.
+6. **RULINGS.** (a) **Exit 6's 70/30 bank-asymmetry arm is
+   REFUTED FOR LACK OF SUBJECT and the criterion is amended, not
+   waived**: the exemplar corpus is 6 dry / 10 bankside / **ZERO
+   through-river**, so the arm has nothing to test, and on the
+   bankside proxy withdrawing the damping makes the split
+   STRONGER (74/26 → 82/18) — the damping is not the cause, the
+   mode is. **This is an EXEMPLAR COVERAGE GAP: W2 mints a
+   through-river exemplar** (§5.0b puts THROUGH at ~12%, and
+   zero is not 12%) and the arm is tested there. (b)
+   **`zoneUnwashedBodies` +1,462 must be CHARACTERIZED IN W2, not
+   inherited** — "exactly 0 to exactly 364 on six replicas of one
+   site" is the signature of a threshold flip, not of noise, and
+   §252.3b's lesson is that an uninvestigated wrong-way figure is
+   how a real defect hides inside a win. (c) Hamlet's ceiling
+   raise to 1,200 is RATIFIED (measured at its own fixed point of
+   1,126, no headroom spent). ⚠ **TOWN HAS ONLY 16 PRIMITIVES OF
+   HEADROOM — the tightest tier by an order of magnitude — and
+   the metropolis figure has now moved three times in three waves
+   (1,422 → 1,210 → 1,280). W2 RE-DERIVES BOTH; it may not
+   inherit either.**
