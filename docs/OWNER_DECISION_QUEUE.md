@@ -8093,3 +8093,40 @@ runs if budget forces a choice. Relayed to HF-3 same-turn.
    rows (vetoable; one terminal proves everything, the packet
    validator in-gate proving the flip well-formed). RS-3 fires
    at TE34's exposure per §213.3.
+
+## §228 · TE35 FINAL COLLECTED — THE FIFTH REFUTED PREMISE AND
+## THE FIVE-OBLIGATION FLAG BILL (2026-08-16, chair addendum to
+## §227)
+
+1. **ALL FOUR FALL CAUSES CONFIRMED BY PRINTED EXECUTION**
+   (displaced t12, garrison-imposed t12, DM-imposed t5,
+   suppressed t2, discredited t7) — the compile's vacuity hazard
+   was REAL: a four-tick fixture records nothing; two fixtures
+   were cured rather than their assertions. **A FIFTH REFUTED
+   PREMISE**: the packet's own §7 "coupling registry NOT
+   INCURRED" covered only the cross-layer scan — the same walker
+   runs an UNLAYERED-MODULE census whose FAITH prefixes are all
+   subject NOUNS, and `patronFall.js` (named for the EVENT)
+   matched none, landing as new debt against a zero-headroom
+   baseline. Cured with one exact-path LAYER_PATTERNS row on
+   the peopleLedger precedent, never a rename (the state key and
+   corpus binding spell `patronFalls`). THE CLASS: a
+   NOT-INCURRED sentence is only as wide as the census it
+   actually measured.
+2. **THE FLAG BILL IS FIVE OBLIGATIONS, NOT FOUR** (covering
+   array ×3 figures + domainAnyCast JSDoc holes typed out +
+   prose-numerics address rot, six rows re-addressed). Mutant
+   deviation RECORDED-NOT-ABSORBED: arm (c) reds A6 beyond the
+   packet's letter because A6's falls run through the DM road —
+   the deviation note stands in the receipt. Census re-record:
+   2460/364/2096/20489/5737, measured in an ISOLATED worktree
+   (the shared tree carried TE34's edit inside the census walk —
+   never census a live shared tree, again proven).
+3. **TWO HAZARDS BANKED**: the background wrapper printed "exit
+   code 0" over a gate whose own line read exit: 1 (trust only
+   the self-captured TRUE_EXIT); and `ls -t` on the SHARED
+   gate-log directory selected a SIBLING's log (115/0-READY,
+   contradicting the lane's own 116/1) — ONLY each run's
+   self-named full log is trustworthy. Stage-2 inheritance
+   noted: the family preamble + stamped substrate annex are OWED
+   CHAIR ACTS before WF-1b; suppressedAtTick has THREE writers.
