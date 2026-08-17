@@ -8591,3 +8591,75 @@ construction), straddler counterfactual must red.
    lineage-id work is the substrate). Slotted WAVE NINE
    FIRST-ORDER with §239.1-.2 under the freeze; changes
    geometry, so it rides the declared one-time shift.
+
+## §241 · MF-ARCH COLLECTED — EVERY CYCLE IS A MISSING VERSION
+## AXIS; THE OWNER'S EPOCH FRAMING PROVED IT (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. **THE SCC RESULT, PROVED NOT ASSUMED**: module graph 42 nodes
+   ACYCLIC; stage graph 118 nodes / 428 edges; removing all 18
+   write-backs yields a DAG, so the write-back set is a COMPLETE
+   feedback edge set; re-adding one at a time attributes **EIGHT
+   distinct cycles**, largest spanning 13 stages. The external
+   review's "one or two tiny cycles" is REFUTED IN DEGREE,
+   CONFIRMED IN KIND — and there is NO water↔wall cycle (my
+   §230 guess), while the wall↔fabric cycle was rediscovered
+   independently at exactly the site the pilot found by reading.
+2. ⭐⭐ **THE HEADLINE: ALL EIGHT CYCLES ARE TWO VERSIONS OF ONE
+   ARTIFACT SHARING ONE BINDING NAME — A DERIVATION CYCLE IS
+   USUALLY A MISSING VERSION AXIS.** With the axis explicit the
+   pipeline is ACYCLIC THROUGHOUT and **no bounded solver is
+   needed anywhere, wallCycle.js included** — the §234 fold's
+   "isolate cycles into solver nodes" is superseded by something
+   better: eliminate them by versioning. The lane also refuted
+   its OWN first hypothesis in writing (per-field refinement
+   left 24 bindings vs 25).
+3. ⭐⭐ **THE OWNER'S §240 EPOCH FRAMING WAS THE DECIDING TEST.**
+   The §239 year test returned the convenient answer and was
+   honestly reported NON-DISCRIMINATING (circuit identical at
+   every year — but so was the fabric, so both hypotheses
+   predict it). The §240 test is decisive: **4 of 10 walled
+   leaves ALREADY carry two concentric circuits, yet all rings
+   come from ONE node, ONE input hash, ONE pass — epochs exist
+   in the OUTPUT and are absent from the DERIVATION** — and
+   **1,331 of 19,563 drawn bodies (6.8%%) stand outside the
+   circuit traced from the umbrella they helped form.** The
+   coupling is located at ONE ARGUMENT (`circuitBody:
+   inverted.circuitRing`). The owner's law was not merely
+   adopted; it supplied the experiment that convicted the
+   architecture.
+4. **THREE MORE BLIND PREDICATES CURED** (the §238 class,
+   sweeping): §205A channel crossings 113→115, §205A body
+   wetness 12→26 (`rooted` counted DRY corners), and §203
+   "majority AREA" 444→251 with 229 bodies judged differently —
+   **a census that said AREA in its own comment counted CORNERS
+   and over-reported by 72%%**. Controls hold (ground law 0/0/0
+   over 23,116; §17's predicate proven non-vacuous). ⭐ **ALL 16
+   SHAs AND THE DETERMINISM DIGEST ARE BYTE-IDENTICAL TO
+   MF-B8b's**: 16 census crossings and 186 containment verdicts
+   moved and NOT ONE PIXEL DID — no same-seed shift from this
+   wave, two instruments agreeing to the unit (+16 predicted,
+   +16 delivered).
+5. **RULINGS.** (a) **J-ARCH-6 RATIFIED** — the raw-handle guard
+   moved from a read-site SCAN to the PUBLICATION POINT
+   (verifying accessor, `configurable: false`) on measured
+   grounds: only 8 of 36 `.walls` hits are the fabric's and it
+   travels under seven alias names, so a read-site scan must
+   solve aliasing while a publication guard need not. This
+   supersedes MF-B8b's prescription and is the better law.
+   (b) The 12 hand-minted fork keys are frozen by an EXACT
+   ratchet, **5 of which drop the reroll salt** — LATENT, not
+   active, correctly stated rather than silently fixed; the cure
+   rides the epoch-axis wave since both touch key derivation.
+   (c) Landing obligations recorded: **acorn as an explicit
+   devDependency is a MINT TRIGGER**, and three published meta
+   fields move as CORRECTIONS (waterCrossings 125→141,
+   waterViolations 100→114, zoneMajorityOutside 444→258).
+6. **MF-ARCH-2 DISPATCHED**: build the VERSION/EPOCH AXIS
+   (§240's law and the architecture cure are the same object),
+   then the handed-off items — fixed-precision topology
+   coordinates + three hash tiers, spatial indexing with
+   canonical ordering and equivalence pins, per-census runtime
+   budgets, the cross-engine harness. Wave nine's visual work
+   (§239.1-.2, iconography, paint integration, countryside,
+   underground) inherits epochs as a BUILT substrate.

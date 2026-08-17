@@ -48,3 +48,13 @@ count derives from facts with the tier ceilings named (village 0 / town 1 /
 city 2 / metropolis 3) — are those the right ceilings against the corpus?;
 (c) the claim that the vintage triad and density gradient fall out as free
 consequences; (d) the epoch-boundary inertia hazard's severity.
+
+### §241 — MF-ARCH collection (Opus chair)
+Fable should re-derive: (a) the ruling that the missing-version-axis finding
+SUPERSEDES the §234 fold's isolate-cycles-in-solvers prescription (this
+reverses an adopted external-review recommendation — the sharpest judgment in
+the row); (b) J-ARCH-6, moving the guard from read-site scan to publication
+point against the pilot's explicit prescription; (c) accepting the latent
+fork-key salt defect as deferred-with-cause rather than cured in place;
+(d) the MF-ARCH-2 mandate ordering (epoch axis before the handed-off items).
+Evidence: laneMFARCH-receipt.md (696 lines), laneMFB8b-receipt.md §11.
