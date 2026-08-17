@@ -4,6 +4,11 @@
 ### This document, not the organically grown charter, is the map program's spine and wave nine's build sheet (§246.3).
 ### Advisory/specification deliverable. Read-only lane: no git writes, no memory writes, no edits outside this file and `laneMFSPEC-receipt.md`.
 
+### ⭐⭐ FOLDED BY LANE MF-SPEC2 (Opus 5), 2026-08-17, under ODQ §264 — THE RECONCILIATION FOLD.
+### The owner ordered everything discussed across the whole program reconciled into ONE build sheet for the best product we can make — comprehensive, cohesive, exhaustive, coherent, seamless, careful, and **above all IMMERSIVE AND IMPACTFUL**. This was a **BOUNDED FOLD, NOT A NEW STUDY**: the spec was already ratified (§262.1) and W0 was already executing. What it lacked was the two prior-art studies and the four chair corrections that landed *after* it was written.
+### Folded here: **§261** the provenance correction and a contamination sweep of the whole document · **§263** the FTG study (the dependency graph, the triangular-remnant substitution, the epoch-convergence correction) · **§259**'s surviving mechanisms · **§262.2** G-34 as ruled · **§263.6a** the two missing instruments · **§264.2** the per-wave immersion payload · and **§257.3**'s three rulings, which this document was still carrying as open questions.
+### Every fold is marked ⟦FOLD §264⟧ so a reader can see what MF-SPEC wrote and what MF-SPEC2 added. Receipt: `laneMFSPEC2-receipt.md`.
+
 ---
 
 ## §0 · HOW TO READ THIS, AND WHAT IT IS FOR
@@ -43,7 +48,9 @@ and no number here was computed by me.
 | **ATLAS** | `map-corpus/docs/laneMFS1-urbanism-atlas.md` | the graded target sheet, as corrected by the §244 fold (MF-S2). Its §2.9 correction ledger and §2.8.1 usage rules are **binding**. |
 | **PLAN** | `map-corpus/docs/MORPHOLOGY-PLAN.md` | MF-S3a — street graph, blocks/plots, districts, centres, epochs, decay, invariants, anomaly |
 | **CONTEXT** | `map-corpus/docs/MORPHOLOGY-CONTEXT.md` | MF-S3b — terrain, water, defence, edges, institution relations, circulation, morphotypes. 45 mechanisms `CX-01…CX-45`, verdicts **3 HAVE / 18 PARTIAL / 23 MISSING / 1 NOT-DERIVABLE** |
-| **PRIOR-ART** | `map-corpus/docs/PRIOR-ART-FMG.md` | MF-X1 — Azgaar's FMG as prior art. Headline: **nobody ships the world→plan join** |
+| **PRIOR-ART** | `map-corpus/docs/PRIOR-ART-FMG.md` | MF-X1 — Azgaar's FMG as prior art. Headline: **nobody ships the world→plan join**. ⚠ A bare **PRIOR-ART** citation anywhere in §1 means **this file**; the two studies below are always named. |
+| ⟦FOLD §264⟧ **WATABOU** | `map-corpus/docs/PRIOR-ART-WATABOU.md` | MF-X2 — Watabou's *Medieval Fantasy City Generator* as prior art (collected §259). ⛔ **GPL-3.0, adoption of code REFUSED OUTRIGHT.** Headline: **character is a PARAMETERISATION, not an algorithm** |
+| ⟦FOLD §264⟧ **FTG** | `map-corpus/docs/PRIOR-ART-FTG.md` | MF-X3 — Thomas Allerton's *Fantasy Town Generator* and the empty `TownGeneratorOS` fork (collected §263). Headline: **the dependency graph is the best mechanism in either study, and §240 is CONVERGENT rather than unique** |
 | **CSV** | `map-corpus/docs/laneHFM1-corpus-measured.csv` | 313 plates × 47 fields, the measured register |
 | **GRAIN JSON** | `map-corpus/docs/HFM1-grain2.json` | 57 grain windows (22 reproduced byte-identically from MF-S1 + 35 re-set) |
 | **LAWS** | `refs/heads/review-fixes-2026-07-08:docs/OWNER_DECISION_QUEUE.md` | ODQ. Map laws: §161(a–n), §171, §177, §184, §190–§205, §209, §212, §214, §229, §230, §232, §238–§241, §244, §249–§253 |
@@ -54,6 +61,76 @@ the §234 architecture pilot), `laneMFARCH-receipt.md` (the SCC diagnostic and t
 attribution), `laneMFARCH2-receipt.md` (the epoch/version axis), **`laneMFW1-receipt.md` (the
 water characterization — §0.3a's authoritative figure set, §0.3b's independence caveat and
 G-34's predicate-boundary finding all come from it).**
+
+### ⟦FOLD §264⟧ §0.2a · ⭐⭐⭐ WHERE THE CORPUS CAME FROM — READ THIS BEFORE USING ANY PRIOR-ART FINDING (§261)
+
+**This is the most important correction in the fold, because it changes what counts as evidence.**
+
+⭐⭐ **THE 313 PLATES CAME FROM AN IMAGE GENERATOR, NOT FROM ANY PROCEDURAL GENERATOR.** The owner
+exemplified a style with screenshots at the outset, but the plates were drawn by an image model
+(nano-banana-pro) working from its own training in historical and fantasy cartography. They were
+**not** produced by imitating Watabou, FTG, or any other town generator, and they **measure richer
+than those generators' flat vector output on every axis we grade** (§256.2, §261.1).
+
+⛔ **THE CHAIR'S OWN EARLIER FRAMING — "an image model's painterly imitation of Watabou's output",
+and §254.1's "the original mechanism behind the style we have been measuring" — IS RETRACTED**
+(§261.1/§261.2a). Nothing in this document may rest on it.
+
+> ⭐⭐⭐ **THE STANDING LAW (§261.4), AND IT SHARPENS §256: PRIOR ART IS NEVER EVIDENCE ABOUT THE
+> CORPUS. ONLY THE CORPUS IS EVIDENCE ABOUT THE CORPUS.**
+> **Prior art supplies candidate MECHANISMS · the corpus supplies the TARGET · the dossier supplies
+> the CAUSE.** No source may substitute for another's role.
+
+**THE THREE-LEG TEST EVERY ADOPT VERDICT IN THIS DOCUMENT MUST PASS (§256.3 + §261.4):**
+
+| leg | what it requires | failure mode it prevents |
+|---|---|---|
+| **(a) CAUSE** | the **dossier fact** that drives the mechanism | a free parameter — decoration under §246 |
+| **(b) LOOK** | a corpus metric **that actually exists** in `laneHFM1-corpus-measured.csv`, `MFS3a-planmetrics.json`, `MFS3a-voidmetrics.json` or `MFS2-bands.json`, whose measured band gates the output | gating one quantity with another's number, or with no number at all |
+| **(c) ⭐ DIRECTION** | an argument for **why this mechanism moves us TOWARD the corpus's measured values** — it was engineered for a different aesthetic and we hold no prior entitling us to assume it lands where we need | borrowing a mechanism that is good *for them* and silently assuming it is good *for us* |
+
+⛔ **A mechanism failing leg (c) is INTERESTING-BUT-UNGATED and sits OUTSIDE the adoption ranking**
+— recorded in **§4.1b's tail** so it is neither lost nor smuggled in. §263.5 records the correction
+working as designed: 10 FTG adoptions grew all three legs, two were flagged weak on (c) in place,
+and **6 mechanisms were pushed out of the ranking entirely.**
+
+⚠⚠ **AND THE ATTRIBUTION CORRECTION THAT TRAVELS WITH IT (§261.2b).** WATABOU §10.2's scoring —
+*"twelve of our inferences refuted, nine of them our own reverse-engineering errors"* — **is wrong
+as attributed.** A disagreement between Watabou's mechanism and something we **measured in the
+plates** is not our error; it is **two independent sources differing, which is expected.** Only
+misreadings of our OWN measurements or our OWN code are our errors. **The twelve divergences stand
+as facts; their attribution is withdrawn.** ⛔ §259.7's live-export **fidelity check is likewise
+WITHDRAWN as framed** — sampling Watabou's exports cannot tell us how faithful our corpus is,
+because the corpus was never imitating Watabou.
+
+**WHAT SURVIVES §261, AND IT IS STILL SUBSTANTIAL** — these are the four findings this document
+folds, in descending strength of link to our own measurements:
+
+1. ⭐ **T-DOMINANCE and EMERGENT TOWER PLACEMENT are MECHANISM EXPLANATIONS OF NUMBERS *WE*
+   MEASURED** — the 43:1 T:X ratio (§1.1.7a) and the tower rhythm were **corpus-measured first**,
+   and the prior art explains *how* a generator produces them. **These are the strongest surviving
+   links**, because the corpus supplied the target before the mechanism was read (§261.3).
+2. ⭐ **THE SETBACK MECHANISM survives because §239's OUTCOME was corpus-confirmed independently**
+   — the wall-side street was measured in the plates (7/7 on some runs) before any source was read.
+3. ⭐ **CHARACTER AS A FOUR-AXIS PARAMETERISATION is ARCHITECTURE-SHAPED and survives untouched** —
+   it is a statement about how to *organise* a generator, not a claim about what the corpus looks
+   like, so §261 does not reach it (§261.3). See **S6** and **G-38**.
+4. ⚠⚠ **CHAOS-AT-LARGE-SCALE / ORTHOGONALITY-AT-SMALL-SCALE IS DOWNGRADED TO A HYPOTHESIS ABOUT
+   OUR MUSH — NOT A DESCRIPTION OF OUR TARGET.** §261.3 is explicit: **it must be TESTED against the
+   corpus's own measured block elongation and plot variance BEFORE it drives a rework.** It is
+   entered as a named, metricised work item — **G-39** — and **no rework may be started on it until
+   that test returns.**
+
+**THE CONTAMINATION SWEEP OF THIS DOCUMENT — CONFIRMED, and the result is better than expected.**
+Every occurrence of `watabou`, `imitat*`, `prior.art`, `procedural generator`, `the original`,
+`FTG`, `image generator`, `north star`, `reference art` and `the style` was read in place. **MF-SPEC
+was written before both GPL studies collected, so it never inherited the retracted framing:** its
+only prior-art source was FMG, and its single `Watabou` mention (§1.2's opening) is a factual
+statement that *FMG delegates plans by URL to Watabou's closed generators* — a fact about FMG, not
+a claim about our corpus. **Two phrasings were nevertheless tightened for §261 and are listed in the
+receipt.** ⭐ **The document's own instinct was already right:** Appendix **A-8** says the corpus's
+mis-shaped blocks come *"from a model's hand"* and refuses to imitate them — which is exactly
+§261's law, written before §261 existed.
 
 ### §0.3 · THE STATE OF THE TREE THIS SPEC IS WRITTEN AGAINST
 
@@ -147,6 +224,76 @@ independent replication** on MF-S3a's own windows, several of which deliberately
 *quarter* rather than a whole settlement (PLAN §8's own ⚠). **T-01's bands remain the target;
 PLAN §8's figures are corroboration, and the metropolis rung agrees closely and independently.**
 
+### ⟦FOLD §264⟧ §0.4a · ⚠⚠ RULINGS THAT LANDED **AFTER** THIS DOCUMENT WAS WRITTEN — AND WHERE EACH IS NOW FOLDED
+
+⭐ **THE CLASS THIS TABLE EXISTS TO KILL (§257.2): A RULING MADE AFTER A DOCUMENT IS FOLDED DOES NOT
+REACH THE DOCUMENT.** That is the address-rot family applied to decisions, and it had already bitten
+this program once — the atlas published paper warmth **34** for a full round after §249.4a ruled
+**37**. **It had bitten this very document too:** three of Appendix B's six chair questions were
+**ruled at §257.3, in the same ledger row that collected the spec**, and the document went on
+carrying them as open. That is fixed here.
+
+| ledger row | what it ruled | folded into |
+|---|---|---|
+| **§257.3(a)** ⭐⭐ | **EPOCHS ARE FABRIC EPOCHS, NOT CIRCUIT EPOCHS.** A wall is an **EVENT WITHIN** the epoch sequence, never its definition; a village that grew over two centuries has two vintages and no wall at all. **Wave-nine first-order.** | **S5** (status corrected) · **Q-2** (now RULED) · new gap **G-42** · **W2** |
+| **§257.3(b)** | **A WITHDRAWN GRADING TARGET MAY REMAIN A GENERATION INPUT.** The thorp/hamlet rungs keep their numbers, labelled **UNVALIDATED-BY-INSTRUMENT**; the roof-count instrument restores validation | **C-3** · **Q-1** (now RULED) · **G-33** · **W0** |
+| **§257.3(c)** | **`GRAIN_BAND` IS THE TARGET; the derivation aims at it and the DRAWN result is the truth.** The metropolis deriving ≈113 while drawing 70 is **a measurable disagreement between intent and output**, not an ambiguity. ⭐ **A NEW CENSUS IS ORDERED: derived grain and drawn grain must agree within a stated tolerance** | **Q-3** (now RULED) · **§2.6** · new instrument in **W0** |
+| **§258.2** ⭐⭐ | **THE LAWS ARE INTENT; THE MECHANISMS ARE NEGOTIABLE.** A mechanism achieving a law's intent better than its stated execution **SUPERSEDES** the stated execution — recorded as *"intent PRESERVED, execution changed from A to B, measurable signature Y unchanged or improved."* A substitution that cannot name the preserved signature is a **quiet repeal and is forbidden** | new **§3.6** (the substitution register) |
+| **§259** | Watabou collected. Surviving mechanisms: four-scalar character, setbacks, T-dominance and tower emergence | **§0.2a** · **S6** · **S7** · **S13** · **§3.4 #7** · **G-38** |
+| **§261** ⭐⭐⭐ | **THE PROVENANCE CORRECTION.** Prior art is never evidence about the corpus; ADOPT needs a third leg | **§0.2a**, and a sweep of this whole document |
+| **§262.2** ⭐⭐ | **G-34 RULED: three build-fixes, one bug-fix, one named exemption. THE CURE IS NOT TO CONVICT LESS** | **§4.1a** (the ruling in full) · **W0** |
+| **§263** ⭐⭐ | FTG collected. **The dependency graph ranked #1 of all prior-art adoptions**; the triangular-remnant **substitution**; **§240 is CONVERGENT, not unique**; **two instruments ordered built** | **S5** · **S7** · **S11** · **S16** · **S18** · **§3.6** · **G-35…G-37**, **G-40** · **§4.1b** |
+| **§264.2** ⭐ | **THE IMMERSION RULING** — dependency order **STANDS**, but the spec must state **per wave what a user would SEE and FEEL** | **§0.5** below |
+
+---
+
+### ⟦FOLD §264⟧ §0.5 · ⭐⭐ THE IMMERSION PAYLOAD, WAVE BY WAVE — WHAT A USER SEES AND FEELS THAT THEY COULD NOT BEFORE
+
+**Why this section is here and why it is EARLY.** The owner's order names **IMMERSIVE and
+IMPACTFUL** as the highest goals, and under §247 the map is the acquisition surface — *the visible
+payload IS the product*. §5's wave order is driven by **dependency edges**, which is correct
+engineering and says nothing about what a reader would see. ⛔ **A wave with no visible payload is a
+wave the owner cannot adjudicate.** This table is the bridge, and it belongs at the front of the
+document rather than buried at §5.
+
+⭐⭐ **THE CHAIR HAS RULED (§264.2), AND THE RULING IS VETOABLE: DEPENDENCY ORDER STANDS.** Pulling
+the §12 immersion suite (marginalia, legend, heraldry, curved lettering, event marks, walk rings,
+pentimento) ahead of the substrate would mean **immersion built on wrong geometry, which must then
+be rebuilt — and the declared same-seed shift gets paid twice.** *If the owner wants immersion
+pulled forward at the cost of that rework, say so and it moves.*
+
+⭐ **AND THE REASSURANCE THE RULING DESERVES, WHICH THE FORK OBSCURES: THE IMMERSION SUITE IS
+LARGELY NOT WHAT IS BEING DEFERRED.** Per **S23**, chrome, lettering, the cartouche, the compass,
+the scale bar, the legend and the heraldry are **already BUILT**, and §12's truth layer is the one
+place we already **beat** the corpus (ATLAS Table C; banned prior #12 — *"our labels are TRUE, and
+this is a competitive win"*). What remains of §12 is the **chrome rung** and the **annotation
+contract** (G-26, W7) — small. **What dependency order actually defers is not the immersion suite;
+it is the immersion suite's SUBJECT.** Marginalia on a town with no biography, a legend teaching
+conventions the fabric does not yet obey, and walk rings over a street web with the wrong junction
+mix are all *decoration on the wrong drawing*.
+
+⛔⛔ **STREET NAMES REMAIN REFUSED (§163), AND ARE NOT RE-PROPOSED HERE — DELIBERATELY SO. AN OWNER
+RULING IS NOT RE-LITIGATED BECAUSE THE GOAL WAS RESTATED.** No wave below carries them, no gap
+ledger row proposes them, and a later lane that "discovers" them is re-finding a closed decision.
+
+| wave | ⭐ WHAT A USER **SEES** | ⭐ WHAT A USER **FEELS** |
+|---|---|---|
+| **W0** · verification debt | ⚠ **NO NEW PIXELS, BY DESIGN — and that is stated rather than hidden.** The adjudicable payload is that **32 plates nobody has looked at get seen and verdicted**, and that the mill cure lands **byte-identically** (its receipt is that not one pixel moved) | *Confidence, not delight.* The numbers under every later claim become true: a water figure comparable across terrains, a lawful crossing that can actually be exempted, a corpus total that stops multiplying one river by six |
+| **W1** · the substrate | The **fjord leaf shows a fjord** and the **mountain leaf shows relief**. Land refuses to be built on: fabric stops at the crag, thins on the slope, avoids the marsh. `hills` stops being a word in a cartouche and becomes a shape on the page | *This town is SOMEWHERE.* The site reads as chosen rather than dropped — §9.5b's own acceptance test is **terrain drama invisible = FAIL** |
+| **W2** · the wall, whole | A wall that **stops at a cliff**, thins to a parapet on a scarp, **doubles back to wrap an abbey**, ends at the river with a chain across the water; **towers clustered where the road arrives and absent on the defended flank**; and ⭐ the **OLD** wall surviving as a **ring street**, its towers as **circular houses** in a rectilinear fabric, its ditch as a **curving ribbon of narrow gardens** | ⭐⭐ *This town had a life before this one.* A **biography instead of rings** — and it is **how a town looks old at a glance without drawing a single ruin** |
+| **W3** · the fabric order | Continuous heavy **frontage lines** carrying rows of narrow abutting holdings, each divided by a light party line, **long pale tofts running back to a dashed back lane**; **corner buildings larger and articulated**; blocks that are **strips meeting at frank angles**, not squares | *Fabric, not a bag of rectangles.* The run-length rhythm is what the eye reads as **hand-laid**; the current parallel bars read mechanically (§252.3c) and this is the cure |
+| **W4** · history in the fabric | The **old core finely subdivided** beside a **new quarter 2–3× coarser at its own bearing**; a planned grid **half-filled, the rest in ghost ink**; **fields inside the walls**; a poor quarter visibly more tangled than the rich one | ⭐ *You can read the town's AGE off the page without a legend* — which is the epoch axis becoming **visible** rather than merely correct |
+| **W5** · the outside | **Six different grounds** where there was one wash — furrow, pasture, orchard, waste, reed, terrace; **five different roads** where there was one; **milestones and a wayside cross at a day's travel**; **ribbons of different lengths at different gates**; the **gallows as the last mark on the busiest road out** | *The 85% of a village plate that is not the village stops being wallpaper.* The settlement acquires a **hinterland that belongs to it** |
+| **W6** · the systems | A mill on its **leat** with weir, pond and tail race **rejoining below the weir**; tanneries **below** the clean take with the discharge fan drawn; a **conduit head in the market place** and a plain pipe over a basin at the poor quarter's far edge; **two of everything** where two jurisdictions share one crossing | ⭐⭐ *The place WORKS.* The map stops describing and starts **arguing** — CONTEXT's own line is that a plume alone is decoration and **plume plus upstream take is an ARGUMENT** |
+| **W7** · the hand | **Wash that runs 2–8 px past its own ink line** and falls short elsewhere; **paper grain**; strokes that **swell and thin along a run**; corners that overshoot; **hachure tightening as the ground steepens** | ⭐ *It stops being vector art and becomes a drawn page.* Wash mis-registration is the single property that, omitted, keeps the output reading as software no matter what else is done |
+| **W8** · the closing loop | ⭐⭐ **THE SAME TOWN ACROSS TIME — year 1 → year 100: growth, fire, shrinkage, rebuilding** (§247.3c), which after W2 and W4 is a *rendering of work already done*; and the map arriving **fast enough to be a wow moment** (§220, launch-blocking) | *The artifact no competitor can produce.* Everyone else's map is of a place; ours is of a place **with a history**, and the difference is legible in two seconds |
+
+⚠ **HOW TO READ THIS TABLE HONESTLY.** Every row is a **PLAUSIBLE** statement of intent, not a
+measurement — it says what the wave's exit criteria are *for*. The measurements themselves stay in
+§5, unchanged, and **a wave is still done when its numbers are in a receipt, never when its payload
+sounds good.** ⭐ *The payload column is what the owner adjudicates; the exit criteria are what the
+lane proves.*
+
 ---
 
 ## §1 · THE PIPELINE, STAGE BY STAGE, IN DERIVATION ORDER
@@ -177,7 +324,9 @@ S1   REGION                                        NOT BUILT      ← CX-38; sev
 S2   TERRAIN SUBSTRATE (relief FIELD)              PARTIAL/absent ← CX-02/CX-04; §214's terrain arm is BLOCKED on it
 S3   SITE + siteReason                             PARTIAL        ← CX-01
 S4   WATER SYSTEM (channel, role, flow direction)  PARTIAL        ← CX-05/CX-06/CX-08
-S5   EPOCH LADDER (§240)                           BUILT          ← epochAxis.js
+S5   EPOCH LADDER (§240)                           BUILT/1 DEFECT ← epochAxis.js; ⟦FOLD §264⟧ §257.3a
+                                                                     ruled EPOCHS ARE FABRIC EPOCHS,
+                                                                     and the build is a CIRCUIT ladder
      ── per epoch E, in order ────────────────────────────────────
 S6     district organisms / anchors for E          PARTIAL
 S7     street web for E                            PARTIAL        ← junction mix, φ, load-derived width all MISSING
@@ -432,6 +581,33 @@ geometry has no sign.
 symmetric two-bank development on a THROUGH river is a defect (hf16 mirrors its banks; hf30
 does it right at ~70/30). ATLAS T-12: **every THROUGH settlement must show bank asymmetry.**
 
+#### ⟦FOLD §264⟧ TWO SMALL FOLDED MECHANISMS, AND ONE OF THEM IS THE MOST CERTAIN ITEM IN THE FOLD
+
+**1 · ⭐ THE TWO-SCALE COASTLINE, WITH DETAIL ATTENUATED NEAR THE SETTLEMENT** (FTG §8.2 — rank
+#7). A coast is generated as a **large shape plus a detail shape**, and the detail term is
+**damped where the settlement meets the water.**
+**(a) CAUSE:** the large shape is the S2 substrate's own geometry; the attenuation is a *fact about
+occupation* — a worked waterfront is quayed, revetted and straightened, and an unworked one is not.
+**(b) LOOK:** gated on the **water relationship incidence** band (§2.5: BANKSIDE 44% · NONE/WELL 29%
+· NEAR 15% · THROUGH 12%) and its rider that **every THROUGH settlement must show bank asymmetry at
+roughly 70/30**. **(c) DIRECTION:** the attenuation term is the part that argues — **a shoreline
+jagged in the wild and smoothed where the town works it produces bank asymmetry as a consequence
+rather than as a rule**, which is the direction ATLAS banned prior #10 demands. ⚠ **Their preset coast
+styles are DELIBERATELY-DIFFERENT — free parameters with no derivation home.**
+
+**2 · ⭐ ROAD/WATER TYPED INTERACTION — BRIDGE A RIVER, TERMINATE AT AN OCEAN** (FTG §8.2 — rank
+#10, and **the smallest and most certain item in the whole fold**). A road meeting a channel gets a
+**crossing structure**; a road meeting open sea **ends**. **(a) CAUSE:** §205's navigability law
+already says a bridge SPANS and never dams. **(b) LOOK:** gated on the existing street-over-water
+census rather than on a band. **(c) DIRECTION:** ⭐ **it converts violations into TYPED LEGAL
+CROSSINGS, which is unambiguously toward compliance.**
+⭐⭐ **AND IT IS THE SAME QUESTION G-34 IS BEING RULED ON — the §205A street arm was designed for a
+RIVER and is applied to a COAST** (a shore-parallel road scores 775 "crossings" on `city` and 555 on
+`fjord`). **§262.2(e) ruled the coast-vs-river arm THE ONE LAWFUL EXEMPTION**, keyed to the water's
+relationship to the segment — bankside adjacency versus channel transit. **This mechanism is that
+ruling's generation-side half: the census stops convicting a shore road because the generator stops
+producing a road that pretends to cross.**
+
 **OUTPUTS.** `water { mode, role, class, centreline (directed), banks[], claim }`.
 **LAWS.** §205.1 navigability — the channel is a RESERVED RIGHT-OF-WAY, bridges SPAN and never
 dam, quays project from the bank, water gates open through the wall at the banks · §205.2 river
@@ -454,9 +630,12 @@ comparable across terrains.**
 
 ---
 
-### S5 · THE EPOCH LADDER — **BUILT** (§240)
+### S5 · THE EPOCH LADDER — **BUILT, WITH ONE RULED DEFECT** ⟦FOLD §264⟧ (§240)
 
-**This is the spine of the whole pipeline and it is the one large thing that is finished.**
+**This is the spine of the whole pipeline and it is the one large thing that is finished** — with
+one exception the chair has since ruled and which a builder must read before touching this stage:
+⛔ **the ladder as built is a CIRCUIT ladder, and §257.3(a) ruled that EPOCHS ARE FABRIC EPOCHS.**
+See the ⟦FOLD §264⟧ block at the end of this stage, and gap **G-42**.
 
 **INPUTS.** `tier` · `population` current and **high-water** (§161f) · `history` founding kind,
 promotion events, prosperity history, recorded fortification events · `meta.hasWalls`.
@@ -560,8 +739,66 @@ and no walled leaf in the corpus is below town tier, so nothing tests the differ
 flagged not settled). (c) `ringsText` now includes the epoch index, so **no stored circuit hash
 from any earlier wave verifies**.
 
-⛔ **THE EPOCH LADDER IS A CIRCUIT LADDER, AND THE CORPUS ALSO SHOWS FABRIC EPOCHS THAT NO
-CIRCUIT MARKS.** See **CHAIR QUESTION Q-2**.
+### ⟦FOLD §264⟧ S5-a · ⛔⛔ THE RULED DEFECT — **EPOCHS ARE FABRIC EPOCHS, NOT CIRCUIT EPOCHS** (§257.3a)
+
+**MF-SPEC raised this as CHAIR QUESTION Q-2. THE CHAIR RULED IT IN THE SAME LEDGER ROW THAT
+COLLECTED THE SPEC, AND THE SPEC WENT ON CARRYING IT AS OPEN — the §257.2 class, biting the
+document that named it.** The ruling, in full:
+
+> ⭐⭐ **EPOCHS ARE FABRIC EPOCHS, NOT CIRCUIT EPOCHS. A wall is an EVENT WITHIN the epoch
+> sequence, never its definition; a village that grew over two centuries has TWO VINTAGES AND NO
+> WALL AT ALL.** This does **not** revise the owner's §240 law — which describes a *walled*
+> settlement's sequence — **it corrects our implementation's conflation.** (§257.3a)
+
+**WHY IT IS A REAL DEFECT AND NOT PEDANTRY.** `epochAxis.js` mints one epoch per circuit plus the
+suburb, so **every unwalled leaf gets exactly ONE epoch** (thorp, hamlet, village, mountain, fjord,
+year-018 — all `rings 0 → one unwalled epoch`), while PLAN §6.1 **measures** fabric epochs at
+village **1–2** and town **2–3**. Left uncured this would have made **vintage difference impossible
+below the wall line** and would have silently made the walled/unwalled split **equal the tier line**
+— §251's own measurement is that those two splits nearly coincide, so the error would have been
+invisible in the corpus and fatal in the output. ⛔ **Every per-epoch exit criterion in W4 is
+untestable on an unwalled leaf until this lands.**
+
+**THE BINDING CONDITION ON THE CURE (§240.2, unchanged): RING COUNT IS DERIVED, NEVER A KNOB — and
+so is epoch count.** ⚠ **The naive fix, minting epochs from population growth, is a knob unless it
+is derived.** The derivation must come from the same fact family §240 already uses: **founding age,
+promotion events, prosperity history and recorded growth**, with the circuit ladder becoming a
+**SUBSET** of the epoch ladder rather than its definition. **The ≤4-epoch measured ceiling (PLAN
+§6.1) binds the result at every tier**, walled or not.
+**Entered as gap G-42; routed to W2**, because changing what an epoch *is* changes `epochAxis.js`,
+which W2 already opens wholesale under §251.4b.
+
+### ⟦FOLD §264⟧ S5-b · ⭐⭐ §240 IS **CONVERGENT, NOT IDIOSYNCRATIC** — AND THAT IS GOOD NEWS, HONESTLY REPORTED (§263.2)
+
+**A second product ships the owner's model.** Fantasy Town Generator ships **numbered generation
+stages**, each with its own road-branch mode, wander limit, material, placement mode and block
+scale, **plus an optional wall at the stage boundary** — the owner's `core → wall → ring` chain,
+built by someone else who arrived at it independently (FTG §5.1). **MF-X2's claim that the prior art
+has no epoch axis is CORRECTED.**
+
+⭐⭐ **OURS REMAINS STRONGER FOR THE ONE REASON THAT MATTERS, AND THE DIFFERENTIATOR IS NOW STATED
+PRECISELY RATHER THAN LOOSELY: THEIRS ARE FREE PARAMETERS ON A FORM; OURS ARE DOSSIER-DERIVED WITH A
+MEASURED ≤4-EPOCH CEILING.** They cannot know that no plate in 313 shows a fifth legible epoch; we
+measured it. **§240 is DE-RISKED rather than unique — and de-risked is worth more than unique**
+(§263.2). ⭐ *A differentiator you thought was unique and that turns out to be convergent is not a
+loss; it is confirmation that the problem converges here.*
+
+⛔ **AND ONE THING INSIDE THEIR STAGING WE MUST NOT TAKE, RECORDED AS AN EXPLICIT NON-ADOPTION SO
+NOBODY RE-FINDS IT AS AN OPPORTUNITY: the per-stage "place a wall after this stage" toggle.** On the
+published evidence it draws a **closed ring** around the stage's lots. Our measured flank grammar is
+**full ring ≈55% · half-ring against water 17% · terrain-anchored 14% · water gates 10% · two
+vintages in frame 10%** (§2.5), and **a generator drawing a full ring 100% of the time is wrong by
+~45 percentage points.** ⭐ **A stage-boundary wall toggle is a RING-DRAWER.** Our circuit stays a
+**traced consequence of terrain and district structure** (S13, §232) — never a shape stamped around
+a stage (FTG §5.4).
+
+⚠ **ONE MORE FROM THEIR STAGING IS GENUINELY GOOD AND IS DELIBERATELY *NOT* ADOPTED HERE: building
+MATERIAL varying per stage**, the cheapest way to make an epoch boundary legible. It fails leg (c)
+— ⛔ **no corpus metric for between-region tone or texture contrast exists**; `fill_tone_iqr` and
+`wash_within_sigma` are whole-plate statistics, and gating it with §2.4's *grain* step would gate
+one quantity with another's number. **It sits in §4.1b's INTERESTING-BUT-UNGATED list until the
+instrument ordered at §263.6a is built** (gap **G-40**, W0). *That is the §261 discipline working:
+a good idea with no number is a habit waiting to happen.*
 
 ---
 
@@ -663,8 +900,45 @@ valuable arc and outside it. **Pairs that essentially never occur: market ↔ no
 precinct ↔ noxious; castle ↔ market directly** (there is always fabric or a forecourt between
 them).
 
+#### ⟦FOLD §264⟧ §1.1.6a · ⭐⭐ CHARACTER IS A **PARAMETERISATION**, NOT AN ALGORITHM — DO NOT WRITE PER-DISTRICT GENERATORS (§259.2)
+
+**This is the architecture-shaped finding of the Watabou study, it is ranked #1 there, and §261.3
+records that it SURVIVES THE PROVENANCE CORRECTION UNTOUCHED** — because it is a statement about how
+to *organise* a generator, not a claim about what the corpus looks like. **The corpus is not its
+evidence and does not need to be.**
+
+⭐ **ONE subdivision routine serves EVERY populated district. The district types differ only in FOUR
+SCALARS** — and our dossier's own facts map onto them nearly one-to-one, which is what makes all
+four **causes** rather than knobs:
+
+| axis | what it governs | ⭐ our derivation home | (b) LOOK — the corpus metric that gates it |
+|---|---|---|---|
+| **size floor** | how small a piece may get before it becomes a building | **`districtWealth` / `prosperity`** | `block_area_frac_p50` |
+| **grid chaos** | how far a cut may wander from square | **epoch age × degree of planning** (`foundingKind` × `lawfulness`) | `orientation_entropy` · `orientation_order_phi` |
+| **size variation** | how much building sizes vary within the district | **mixed use** (land-use heterogeneity) | `block_area_cv` · `block_area_p90_over_p10` |
+| **emptiness** (⚠ **inverted**) | how often a finished piece is dropped, leaving a gap | **crowding** — population pressure against high-water (§161f) | `backland_green_p50` · `blocks_green_ge10pct` / `_ge25pct` |
+
+⚠⚠ **THE MAGNITUDES ARE OURS AND COME FROM THE CORPUS. THEIR NUMBERS MAY NOT BE TRANSCRIBED** —
+they are free parameters chosen by eye and are in any case source constants under a licence we
+refuse (§0 of both studies). **The knob RANGES are fitted to the bands above; only the four-axis
+IDEA transfers.**
+
+⭐⭐ **THE COROLLARY IS A WARNING AND IT BELONGS ON ITS OWN LINE: WE SHOULD NOT WRITE PER-DISTRICT
+GENERATORS. WE SHOULD WRITE ONE AND DRIVE IT FROM THE DOSSIER.** This program has a documented
+tendency toward per-case machinery, and every additional concept is a thing that can rot. ⭐ *Read
+the extremes and the sociology is simply there: tiny buildings with maximum angular chaos and almost
+no gaps is a slum; large buildings with one piece in five left out is a patriciate quarter with
+gardens; large buildings with chaos nearly off is the only orthogonal district in the city, which is
+exactly how officialdom reads on a map.*
+
+⚠ **AND THE THREE-WAY WIRING A BUILDER MUST GET RIGHT, BECAUSE RETROFITTING IT IS THE EXPENSIVE
+PATH:** the **routine and its four axes are W3's** (they are a structural property of the
+subdivision code and cannot be bolted on afterwards); **W4 supplies the per-epoch and per-wealth
+VALUES** that make them vary; and **G-12's "wealth must drive geometry, not only tone" and G-9's
+epoch dials are the same machinery seen from two sides.** Entered as gap **G-38**.
+
 **OUTPUTS.** `organisms[]` with anchor, field strength, wealth, land use, **grain target**,
-**bearing basis** and **φ target**.
+**bearing basis**, **φ target** and ⟦FOLD §264⟧ **the four character scalars above**.
 
 **LAWS.** §161d · §161e · §161l attribution (districts are CONSTITUTED by their members; the
 FOUNDING RULE — unhoused peers SEED the to-be-constructed district) · §167 the affinity matrix ·
@@ -841,6 +1115,75 @@ settlement plates (17.4%)**; `terrace` on **17 (12.3%)**.
 **This is the highest-leverage terrain mechanism in CONTEXT's half — one constraint on the
 existing street derivation, and it converts `terrainType ∈ {hills, mountain}` from a label into
 a shape.**
+
+#### ⟦FOLD §264⟧ §1.1.7f · ⭐⭐ THE GROWTH ENGINE ITSELF — FOUR FOLDED MECHANISMS FOR THE PIPELINE'S SHARPEST GAP
+
+**S7 is this specification's self-declared sharpest gap, and it is where the prior-art fold pays
+most.** ⭐ **§263.5's practical headline: THREE OF THE TOP FOUR FTG ADOPTIONS LAND ON STAGES THIS
+SPEC ALREADY NAMES AS ITS WEAKEST — S7, S18 and S16 — which is why they route straight into W2/W3
+rather than into a backlog.**
+
+**1 · ⭐⭐ PRIORITY-ORDERED GROWTH FROM A CENTRE, THE QUEUE SEEDED FROM RANKED APPROACH ROADS**
+(FTG §6.1 — **rank #2 of all prior-art adoptions**). Roads grow from the settlement's anchors; main
+roads form a backbone and ordinary roads branch from it; **which frontier expands next is decided by
+a priority queue.** Processing order alone trades "compact blob" against "ribbon along the
+arterials" — no second mechanism is needed.
+**(a) CAUSE:** *priority is a fact we already hold* — S1's approach roads carry **ranks**, S13
+supplies gates, and `institutions` supply origins and destinations. **Priority becomes a read-out of
+route importance rather than a slider.**
+**(b) LOOK:** gated on **γ connectivity 0.39–0.52** and **mean degree 2.1–2.7** (§2.4) — the
+half-mesh signature — and on the **extramural growth** band (§2.5: present in ≥60% of walled plates,
+concentrated at **one or two gates, never even**).
+**(c) DIRECTION — the strongest (c) in either study.** ⭐ **A priority queue seeded from ranked
+approach roads produces UNEQUAL RIBBON EXTENTS BY CONSTRUCTION**: the highest-ranked gate's frontier
+is serviced first and runs furthest. Our measured target says extramural growth must be concentrated
+and never even; **an even-growth mechanism cannot produce that, and a priority-ordered one produces
+it as its default output.** *The mechanism's characteristic output and our measured target are the
+same shape.*
+⚠ **THE WIRING, AND IT COSTS NOTHING IF IT IS PLANNED: the QUEUE is W3's; its RANK SEEDING is
+completed by G-1 in W5.** Until the region exists, priority is seeded from organism weight and gate
+presence; when the region lands, the true road ranks replace that seed and W5's exit criterion 4
+(unequal ribbons) becomes measurable. **Building the queue in W3 without the rank input is correct
+and is not rework.** Entered as gap **G-36**.
+
+**2 · ⭐⭐ STREET HIERARCHY COMES FROM SETBACKS, NOT FROM STROKED WIDTHS — ALREADY ADOPTED AT
+§258.3(a).** There is no width attribute anywhere in the prior art: **each edge of a buildable area
+is inset by a distance chosen by WHAT LIES ON THE FAR SIDE OF THAT EDGE**, and the visible street
+width is **the sum of the two setbacks facing each other across it.**
+⭐ **THIS IS NOT IN CONFLICT WITH OUR LAW; IT IS OUR LAW'S MECHANISM** — and §259.4 confirms the
+outcome was **independently corpus-confirmed** before any source was read, which is why it survives
+§261 (see §0.2a). The owner's stated intent (importance must be legible) and the measurable
+signature (§2.5's p97/p50 scanline ratio **16–30**, widest channel **2.7–6.4** plot-widths) are
+**preserved**; the execution moves from *"stroke a wider line"* to *"set buildings further back."*
+⭐⭐ **AND IT MAKES §239's WALL-SIDE STREET FALL OUT FOR FREE INSTEAD OF BEING SPECIAL-CASED** —
+the wall edge simply carries the largest setback. **Recorded in §3.6's substitution register in the
+form §258.2 requires.**
+⛔ **[RENDER NOTE — NOT A RECOMMENDATION] In their renderer the interior street is never stroked at
+all. DO NOT COPY THAT.** Our corpus measures far richer on `wash_within_sigma`, `paper_grain_sigma`
+and ink hierarchy than flat vector fill; **the PLAN insight transfers, the DRAWING does not**, and
+imitating the flat interior would cost us corpus-band compliance (§256.2).
+
+**3 · SNAP-AND-LENGTHEN ROAD CLEANUP, ⚠ MADE DEGREE-AWARE** (FTG §6.2 — rank #5). New segments are
+lengthened and snapped to existing intersections as they are placed, which kills the two defects that
+make grown networks look wrong: the road that stops two units short of a junction, and the near-miss
+that leaves a sliver.
+⚠⚠ **AND THE CAVEAT IS THE FINDING, SO IT IS ADOPTED WITH A MODIFICATION RATHER THAN AS-IS:
+SNAPPING RAISES NODE DEGREE.** Snap a road end onto an existing T and **you have just minted an X**;
+snap two ends onto one point and you have minted a star. Our bands are **`X:T ≤ 0.09`** and
+**`deg≥5 share ≤ 0.01`**, with 22 of 35 corpus windows carrying **zero** nodes of degree ≥5. ⭐ **The
+snap must therefore be DEGREE-AWARE: it may close a gap to a segment's INTERIOR (making a T) and must
+REFUSE to snap onto an existing junction that would push it past degree 4** — terminating at the
+frontage instead, exactly as §1.1.7a's attachment rule already requires. **Adopted with that guard;
+adopted without it, this mechanism walks us out of our own band.**
+
+**4 · ⚠⚠ THE CHAOS/ORTHOGONALITY PRINCIPLE IS A HYPOTHESIS ABOUT OUR MUSH AND MAY NOT DRIVE A REWORK
+YET (§261.3).** The claim — *chaos belongs at the LARGE scale and orthogonality at the SMALL scale;
+block frames meet at organic angles and the buildings inside them are near-rectangular* — was
+Watabou's rank #2 and was read as the diagnosis of why our output looks like mush. ⛔ **§261
+downgraded it: it is a hypothesis about OUR defect, not a description of OUR TARGET, and it MUST be
+tested against the corpus's own measured block elongation and plot variance BEFORE it drives a
+rework.** The test, its metrics and its one missing instrument are specified as gap **G-39**; **no
+S7/S10/S11 rework may be started on this basis until it returns.**
 
 **S7 OUTPUTS.** `streetWeb { segments[] with rank/width/class, junctions[] typed, gates[] }`.
 **S7 LAWS.** §190a the right-of-way law (the derived street web is INVIOLABLE GROUND: zero
@@ -1067,6 +1410,48 @@ entire look of a non-European settlement **without a single new label**.
 list to a material grammar affects every footprint and therefore every leaf's geometry, i.e. it
 is a declared-shift event.** CONTEXT §12.4 flags it rather than assuming it.
 
+#### ⟦FOLD §264⟧ ⭐⭐ SUBDIVIDE TO GET THE **PLOT**, THEN **FIT** THE FOOTPRINT — A §258.2 SUBSTITUTION (§263.4)
+
+**This is the fold's cure for the defect both prior-art products' authors flag, and it is an
+ARCHITECTURAL cure rather than a filter.** The natural implementation — recurse, cutting the block
+until each piece is building-sized — makes the footprint's shape *whatever the cuts left*, and
+recursive cutting of an irregular polygon **inevitably yields wedge-shaped remnants**. The original's
+own author calls his routine silly for exactly this reason and intended to replace it.
+
+⭐⭐ **THE SUBSTITUTION: SUBDIVIDE TO GET THE PLOT, THEN CHOOSE A SHAPE FROM A RECTILINEAR VOCABULARY
+AND FIT IT TO THE PLOT.** Subdivision is *good* at producing a believable irregular **plot series** —
+that is exactly what a burgage comb is — and *bad* at producing a believable **building**. Use each
+for what it is good at and **the wedge problem disappears without needing a filter to catch it**:
+a shape drawn from a rectilinear vocabulary and fitted to a plot **cannot come out triangular**, and
+the plot's leftover becomes **yard** rather than becoming a bad building.
+
+⭐ **AND THE CONSEQUENCE FOR OUR OWN CONSTRAINT, WHICH §263.4 STATES DIRECTLY: OUR ASPECT-RATIO
+CONSTRAINT BECOMES A HARD FILTER, NOT A TENDENCY.** A tendency lets a wedge through occasionally; a
+vocabulary makes it unrepresentable.
+
+**(a) CAUSE.** S10's burgage comb and S11's module/outlier structure already derive plot geometry
+from district facts; **the VOCABULARY a footprint is drawn from is a function of building kind and
+district lifestyle — both dossier facts.** ⭐ *The shape is chosen because of what the building IS,
+not because of where the cuts fell.* It composes directly with **G-6's material grammars**, which
+supply a *different* vocabulary per material (row · courtyard compound · pile · rock-cut · keyhole ·
+tent circle) rather than a different jitter.
+**(b) LOOK.** Gated on **block solidity median 0.60–0.86** and **block elongation median 1.6–3.0**
+(§2.4), and on the **burgage plot geometry** band (§2.5: depth:width 4–6:1, building 30–45% of plot
+depth, **touching the street line**, series widths ±20–40% and never exact).
+**(c) DIRECTION — and it is the cleanest (c) available in either study.** §2.5 records exactly where
+we miss: the **alley/sliver floor** band is **0.02–0.08** plot-widths and b8 reads **0.16 / 0.09 /
+0.09**, with this spec's own comment that *"a HIGHER floor means UNIFORM SPACING, not tight packing —
+the town moved the WRONG way."* **A fitted-vocabulary placement puts buildings on the street line at
+their own widths and sends the residue to backland, instead of distributing residue evenly as
+inter-building gaps.** *The known miss and the mechanism's known effect are the same quantity,
+pointing the same way.*
+
+⚠ **THIS SUPERSEDES A NATURAL READING OF THE EARLIER STUDY.** WATABOU §5.2 recommended adopting the
+subdivision modulations **plus** a hard aspect-ratio filter to catch the wedges. **The stronger
+option is not to produce the wedge**: the two are not exclusive, and the synthesis is the one
+recorded in §3.6's register. Entered as gap **G-37**; routed to **W3**, where the frontage line and
+the plot series are already being built.
+
 **LAWS.** §190 the non-overlap law — footprints are **MUTUALLY EXCLUSIVE SOLIDS**; density by
 **PARTY WALLS** (the terraced-burgage form), never by overprint; the packer enforces
 disjointness as a **HARD** constraint and the repair pass demotes or removes with a diagnostic
@@ -1266,6 +1651,35 @@ name; ATLAS banned prior #7 makes even spacing *the strongest "generated" tell i
 **open-backed D** and the **beaked tower** are *functional* choices, not styles.
 ⚠ **The difference the per-run policy buys: "irregularly spaced all the way round" is still
 wrong; "clustered where it matters and absent where it does not" is right.**
+
+⟦FOLD §264⟧ ⭐⭐ **AND THE MECHANISM BEHIND IT, WHICH TWO INDEPENDENT PRIOR-ART PRODUCTS NOW AGREE
+ON (§259.3, corroborated at §263 §12): EVEN TOWER SPACING IS *EMERGENT*, NOT ENFORCED.** Towers sit
+at **every non-gate wall corner** — no spacing rule, no arc-length division, no minimum separation,
+no count parameter anywhere. They *look* evenly spaced only because the cells behind the wall have
+near-uniform area, so consecutive corners are near-equidistant. **The evenness is a downstream
+consequence of what is inside the wall.**
+
+> ⭐⭐⭐ **RULED (§259.3), AND IT RE-READS ATLAS BANNED PRIOR #7 RATHER THAN REPEALING IT:
+> NEVER PLACE BY SPACING — PLACE BY STRUCTURE (the corners that exist) AND LET THE SPACING BE
+> WHATEVER THE STRUCTURE GIVES. EVENNESS THAT EMERGES IS AUTHENTIC; EVENNESS THAT IS DIALLED IS
+> THE TELL.**
+
+⛔ **IMPLEMENTING A SPACING RULE WOULD REPRODUCE THE LOOK AND DESTROY THE MECHANISM** — and would
+lose precisely the irregular cases, because a real circuit's corners are *not* evenly spaced when
+the districts behind them are not uniform. ⭐ **This gives us something neither prior-art model can
+express: our wall is a DISTRICT PARTITION (§232), so its corners are already dossier-caused, and
+where our districts are deliberately non-uniform the tower rhythm varies — and it varies FOR A
+REASON.** No new geometry, no new parameter: the tower rhythm becomes a **read-out of district
+structure**, which is the derivation home a spacing constant could never have.
+
+⛔⛔ **BUT THIS MECHANISM IS GATED SHUT UNTIL AN INSTRUMENT EXISTS, AND §263.6a ORDERED IT BUILT.**
+Leg (b) fails today: **there is no tower-spacing metric of any kind anywhere in our measured
+register** — no spacing distribution, no spacing CV, no tower count per unit of circuit — so *our
+own* "even tower spacing is the strongest generated tell" claim rests on visual analysis rather than
+on a number (§259.5). ⚠⚠ **That is exactly the condition in which a plausible idea becomes an
+unmeasured habit, and two prior-art products agreeing makes it MORE dangerous, not less.**
+**The instrument — spacing CV along the circuit, plus tower count against circuit length — is gap
+G-40 and lands in W0. The corner rule may not be adopted before it reads a number.**
 
 **GATE COUNTS [M-view, small n but consistent]:** town **2–4** land gates · city **~4** ·
 metropolis **6–7**. `gate` is named on **63 of 138 settlement plates (45.7%)** [M-index].
@@ -1638,6 +2052,70 @@ densities is **a wall with named gates, never a line**. ATLAS T-05 already quant
 one missing clause: the precinct's own boundary must be a wall with TYPED gates (ceremonial,
 service) — because that is what stops the airier zone reading as a HOLE in the fabric.**
 
+#### ⟦FOLD §264⟧ §1.3.16a · ⭐⭐⭐ THE MISSING THIRD QUESTION — **WHAT EXISTS AT ALL**, ANSWERED BY A RESOURCE DEPENDENCY GRAPH (§263.3)
+
+⭐⭐ **§263.3 RULED THIS THE BEST MECHANISM IN EITHER PRIOR-ART STUDY AND RANKED IT #1 OF ALL
+PRIOR-ART ADOPTIONS.** It belongs here because S16's gap was stated as two questions — §161n gives
+institutions a **SCALE** (how big) and nothing gives them a **SITING RULE** (where) — and **there is
+a third question upstream of both that nobody had named: WHICH INSTITUTIONS AND WORKPLACES EXIST AT
+ALL, AND HOW MANY.** Today that answer comes from a per-tier landmark budget, which is a band, not a
+derivation.
+
+**THE MECHANISM.** A graph whose **NODES ARE RESOURCES AND SERVICES** and whose **EDGES ARE
+FREQUENCY RATIOS WITH STATED DENOMINATORS** — *one per N head of population*, or *one per N
+providers of another node*. Generation starts from an empty settlement, repeatedly asks the graph
+what is needed next, creates that building and the residents who staff it, and continues until the
+population is accounted for. Three properties make it good rather than merely tidy:
+
+1. ⭐ **IT CASCADES CAUSALLY.** A brewery does not appear until enough hops production exists to
+   support one. **The roster is not a weighted random draw; it is the FIXED POINT OF A SUPPLY
+   CHAIN** — and it can therefore answer *why* a town has three bakers.
+2. ⭐⭐ **EVERY NODE HAS A PRODUCER POOL AND AN IMPORTER POOL. WHERE THE LAND CANNOT SUPPORT THE
+   PRODUCER, A SHOP THAT IMPORTS AND SELLS THE RESOURCE SUBSTITUTES FOR IT.** *A settlement that
+   cannot make a thing acquires a TRADE in it instead.* **That one rule is how a landlocked town and
+   a fishing port end up with different rosters from one graph** — and it is the direct spatial
+   consumer of `resources` × `terrainType` × the S2 `buildable` mask.
+3. ⭐ **IT IS THE ANTI-DECORATION MECHANISM PAR EXCELLENCE.** Under §246 a parameter with no
+   derivation home is decoration. **In a dependency graph every number is a ratio with a stated
+   denominator. THERE IS NO FREE SCALAR ANYWHERE IN IT** — a *structural* property, not a discipline
+   someone has to maintain.
+
+**(a) CAUSE — and the asymmetry is decisive: WE HOLD THE FACTS ITS AUTHOR HAS TO INVENT.** Their
+graph is configured by hand from defaults keyed to size and landscape. Our dossier already carries
+`population`, `resources`, `supplyChains`, `tradeRouteAccess`, `neighbors`, `institutions`,
+`government` and faith. ⭐ **Our edges are READ, not authored.** Where they must guess that a town of
+2,000 supports one brewer, we derive it from what the settlement actually produces and trades.
+**(b) LOOK.** Gated on the **landmark budget** (§2.5: thorp 1 · hamlet 1–2 · village 2–5 · town 3–7
+· city 4–9 · metropolis 9+) and on the **ordinary : notable** band (notable 2–5% of footprints at
+town, 1–2% at city, occupying 10–20% of built area). The roster *is* what determines how many
+notable structures exist, so it must land inside both.
+**(c) DIRECTION.** §2.5 records that we draw **too many landmarks, too small** — measured
+landmark:house footprint ≈**2:1** against a town band of **5–6:1**. ⭐ **A roster produced by a
+supply chain is SPARSE IN MONUMENTS BY CONSTRUCTION**: most nodes resolve to ordinary workplaces and
+dwellings, and only the few institutional nodes resolve to landmarks. **Replacing a per-tier budget
+with a derived roster therefore REDUCES notable count and RAISES mean notable size — which is the
+direction the measured miss says we must move.** ⚠ *This is a prediction; the experiment that
+settles it is to implement clean-room and re-run the existing harness.*
+
+⛔ **WHAT MUST NOT COME ACROSS: THEIR GRAPH'S CONTENTS.** The particular nodes, the particular ratios
+and the particular building pools are **one designer's model of a fantasy economy** — decoration for
+us under §256 however plausible they look, with no derivation home in *our* dossier, and the kind of
+authored selection §0 of both studies most firmly declines. ⭐ **We take the SHAPE — nodes are
+resources, edges are ratios with denominators, producers fall back to importers — and derive every
+node and every ratio ourselves.**
+
+⭐ **HOW IT COMPOSES WITH THE REST OF THIS STAGE, WHICH IS WHY IT LANDS HERE RATHER THAN IN A
+BACKLOG:** the graph answers **what exists**, §161n answers **how big**, and the siting profiles
+below answer **where**. Three layers, one stage, and only the middle one was built. It also feeds
+**S18's hinterland directly and causally** — *a settlement with farms needs farmland, and the graph
+already knows whether it has farms.*
+⚠⚠ **AND ONE ORDERING CONSEQUENCE NOBODY HAD NAMED, RECORDED HERE RATHER THAN DISCOVERED IN W6:
+THE LANDMARK BUDGET (G-25) IS SCHEDULED IN W5 AND THIS ROSTER REPLACES ITS SOURCE IN W6.** They are
+not in conflict, but the order matters: **in W5 the budget is a per-tier BAND that output must land
+inside; in W6 the roster becomes the DERIVATION and the band becomes its census.** W6's exit
+criteria therefore owe a **non-regression check** — the derived roster must hold or improve W5's
+measured landmark compliance, never quietly re-open it. Entered as gap **G-35**.
+
 **LAWS.** §161n the institution-scale ladder (port jetty→quay→docks ward→harbour district;
 worship shrine→chapel→church→cathedral precinct; market cross→square→covered market→exchange
 district; garrison watch house→barracks→citadel; water well→cistern yard→waterworks — **each
@@ -1778,6 +2256,46 @@ they are neither buildings nor fields.**
 **CX-39 · GROUND SURFACE AS A FIRST-CLASS LAYER.** An urban surface ladder with **hard
 parcel-edge boundaries** — hf333's dunged stance ground **stops exactly at the hedge line**.
 Pure render mechanism, large return.
+
+#### ⟦FOLD §264⟧ ⭐ TWO MECHANISMS THAT LAND ON THE WEAKEST SURFACE IN THE PROGRAM (§263.5)
+
+**S18 is named in this document as "the weakest surface in the whole program", and §263.5 records
+that two of the four top FTG adoptions land here.** Both are cheap.
+
+**1 · ⭐ ENCLOSURE-FREE FRINGE LOTS — LOTS THAT NEED NO ROADS** (FTG §7.3 — rank #4 of prior-art
+adoptions). The fringe of a grown-road settlement has a structural problem: a building needs a lot,
+a lot needs enclosing edges, and **the fringe is where roads run out.** The naive fix is to grow
+roads nobody uses purely to manufacture enclosure. ⭐ **The better answer is to RELAX the enclosure
+requirement at the fringe and mark the resulting edges INVISIBLE** — a lot with no block around it.
+**(a) CAUSE:** *which* buildings sit outside is a dossier fact — noxious trades (§16's single-arc
+rule), farmsteads under §190c's dispersed pattern, and the ribbon along the highest-rank approach.
+**(b) LOOK:** gated on **dead-end share 0.110 – 0.209 – 0.391** (§2.4) and on the **extramural
+growth** band (§2.5).
+**(c) DIRECTION:** ⭐ **a fringe built from enclosure-free lots TERMINATES streets rather than
+looping them, which RAISES dead-end share exactly where the corpus puts its highest values** (§1.1.7d
+records canal and fringe morphologies at the top of the range). **Our alternative — growing roads to
+close every fringe lot — would LOWER dead-end share and push us to the bottom of a band we should be
+spanning.** *The mechanism moves the metric the way the corpus says it should move.*
+⭐ **AND IT COMPOSES WITH §190c's WORKSITE HABITATION LAW EXACTLY**: a farmstead on its own holding
+and a specialist keeper's cottage are precisely buildings that must exist **without a block**, and
+today we have no expression for one.
+
+**2 · THE HINTERLAND GENERATED FROM THE SAME LOT SUBSTRATE AS THE TOWN, CLUSTERED BY KIND**
+(FTG §8.3 — rank #8, and ⚠ **the study flags its own leg (c) as the WEAKEST of its ranked
+adoptions, which is repeated here rather than smoothed**). Main roads extend to the frame, the
+remaining land is subdivided into lots, and land-use features are placed **clustering similar
+elements together** — cropland beside cropland, pasture beside pasture.
+**(a) CAUSE:** our dossier holds the hinterland facts theirs must estimate — what the settlement
+farms, grazes, quarries and cuts — and **§1.3.16a's dependency graph makes the link CAUSAL rather
+than decorative: a settlement with farms needs farmland, and the graph already knows whether it has
+farms.**
+**(b) LOOK:** gated on `hull_frac_of_frame` and `green_excess` from the measured register.
+**(c) DIRECTION — honestly weak, and stated as such.** Our corpus's surround is painterly and
+varied; a clustered land-use polygon fill is a coarser thing. **The narrow argument that can be made
+is that generating the surround from the same lot substrate as the town keeps `hull_frac_of_frame`
+DERIVABLE rather than arbitrary, where today it is effectively unconstrained.** ⚠ **It is adopted at
+the bottom of the ranking precisely because (c) is thin, and it must not be allowed to substitute for
+T-24's six ground primitives, which are the real fix here.**
 
 **LAWS.** §2 the dressed-ground law · §16 + §16.2 + §16.5 · §11.3 · §190c · §161c OUTLYING ring.
 **CENSUSES.** ⛔ Not built. Field-parcel area relative to settlement extent, banded; distinct
@@ -2048,7 +2566,9 @@ instruments are re-runnable against any render directory.
    The cohort is computable: **HF-1-era plates (n=49) ∪ the measured top decile on the register
    index (threshold 73.78; n=32; 10 in both) = n=71.** *Why:* the corpus grew paler round by
    round; **pinning to the median ratifies our own drift and makes the north star chase the
-   generator that drew it.** ⭐ **SIGN CHECK FOR ANYONE RE-DERIVING: done correctly, paper grain,
+   generator that drew it** — ⟦FOLD §264⟧ i.e. **the IMAGE model that produced the plates**, whose
+   own output drifted paler round by round; §261 makes the referent explicit so nobody reads this
+   as a statement about the settlement generator. ⭐ **SIGN CHECK FOR ANYONE RE-DERIVING: done correctly, paper grain,
    wash σ and tone IQR move UP against what MF-S1 published. If your re-derivation moves them
    DOWN, you pinned to the median.** (§249.1: *a re-deriver who takes the median gets the wrong
    SIGN, not merely the wrong magnitude.*)
@@ -2293,6 +2813,41 @@ them blank rather than convert them into a pass or a fail.**
    band declared **DERIVED-NOT-CORPUS**. ⭐ **Wave nine must either measure the atlas's own
    quantity on the plate, or set a band for ours — and say which.** (See **CHAIR QUESTION Q-4**.)
 
+⟦FOLD §264⟧ **AND THREE MORE, ALL OF THE SAME FAMILY: A MECHANISM WE WANT AND CANNOT GATE.** These
+are not withdrawn targets — they are **targets that were never built**, and §261's leg (b) makes
+each of them a hard stop rather than a caveat. **§263.6a ORDERED THE FIRST TWO BUILT; the third is
+this lane's own finding.** All three are gap **G-40** and all three land in **W0**.
+
+5. ⛔ **TOWER SPACING.** There is **no tower-spacing metric of any kind** in the measured register —
+   no spacing distribution, no spacing CV, no tower count against circuit length. ⚠⚠ **So our own
+   claim that even tower spacing is the corpus's strongest generated tell rests on visual analysis
+   rather than on a number, and TWO prior-art products now agree on the corner mechanism while we
+   still cannot check it** (§259.5, §263.6a). **Instrument: spacing CV along the circuit + tower
+   count per unit circuit length.** Until it reads, S13's corner rule is **provisional**.
+6. ⛔ **PER-EPOCH MATERIAL / TONE CONTRAST.** Varying building material per epoch is the cheapest
+   way to make an epoch boundary legible, and it **cannot be gated**: `fill_tone_iqr` and
+   `wash_within_sigma` are **whole-plate** statistics, not between-region contrasts, and §2.4's
+   epoch **grain** step would be gating one quantity with another's number. **Instrument: a
+   per-epoch fill-tone (and texture) SEPARATION measure** — the same shape as the grain step, on the
+   tone axis (§263.6a).
+7. ⚠ ⟦THIS LANE'S OWN FINDING⟧ ⛔ **FOOTPRINT-SCALE SHAPE — and it half-blocks G-39.** ⭐
+   **CONFIRMED by reading the key names of `MFS3a-planmetrics.json` and `MFS3a-voidmetrics.json`:
+   the finest spatial SHAPE metrics we hold are BLOCK-scale** (`block_elongation_p50/p90`,
+   `block_solidity_p50`, `block_circularity_p50`, `block_area_cv`). **There is no
+   footprint-rectangularity metric anywhere in the register**, and `cells_across` is a *grain*
+   measure, not a shape measure. **Consequence: the LARGE-scale half of the chaos/orthogonality
+   hypothesis is measurable today and the SMALL-scale half is not** — so §261.3's required test
+   (G-39) can only half-run until this instrument exists. ⚠ *Recommended, vetoable, and flagged as
+   an addition to §263.6a's two rather than smuggled in as if it had been ordered.*
+
+⟦FOLD §264⟧ ⭐ **AND ONE NEW CENSUS THE CHAIR HAS ALREADY ORDERED AND THIS DOCUMENT HAD NOT
+RECORDED (§257.3c): DERIVED GRAIN AND DRAWN GRAIN MUST AGREE WITHIN A STATED TOLERANCE.** The
+metropolis derives ≈**113** cells and the plate measures **70** — *"not a spec ambiguity, it is a
+MEASURABLE DISAGREEMENT BETWEEN INTENT AND OUTPUT"* — **so the loss between them can never again be
+invisible.** `MFB8-runprobe.py` already separates what RESOLVES from what EXISTS and is the
+instrument; the census is the tolerance around it. **W0, with the other three.** (See **Q-3**, now
+RULED.)
+
 ⚠ **One more the corpus itself cannot supply: the frozen corpus has ZERO trade (0/4) and ZERO
 institution (0/3) coverage in the blind holdout** (§249.4c) — a known limit, recorded so nobody
 mistakes silence for evidence.
@@ -2436,8 +2991,9 @@ veto — *a harder-but-truer mechanism wins* — **and these four are outside th
 
 ### §3.4 · THE STANDING CRITIQUE — twelve priors NOT to emulate (ATLAS §2.4 + PLAN §10.6)
 
-**These are model priors and generator defects found IN the corpus. They are not laws to
-follow, and several have already bitten us.**
+**These are ⟦FOLD §264⟧ THE IMAGE MODEL'S OWN PRIORS AND ITS OWN DRAWING DEFECTS, found IN the
+corpus** — not a procedural generator's, because none drew these plates (§0.2a, §261.1). **They are
+not laws to follow, and several have already bitten us.**
 
 1. **Concentric / polygonal town shape on flat ground** — planned geometry needs a planning
    authority in the facts.
@@ -2456,6 +3012,15 @@ follow, and several have already bitten us.**
    tree ticks. THE STRONGEST "GENERATED" TELL IN THE CORPUS.** Every repeated element needs
    seeded spacing variance. (§214 bans it by name; hf36's *irregularly* spaced hedgerow trees are
    the counter-example.)
+   ⟦FOLD §264⟧ ⭐⭐ **RE-READ, NOT REPEALED (§259.3): NEVER PLACE BY SPACING — PLACE BY STRUCTURE,
+   AND LET THE SPACING BE WHATEVER THE STRUCTURE GIVES.** Prior art produces the corpus's own
+   even-looking tower rhythm **with no spacing rule at all** — towers sit at every non-gate wall
+   corner and the evenness is inherited from what is inside the wall. ⭐ **EVENNESS THAT EMERGES IS
+   AUTHENTIC; EVENNESS THAT IS DIALLED IS THE TELL** — and *seeded spacing variance* is still a dial,
+   just a noisier one. **The cure for a repeated element is to give it a structural cause (a corner,
+   a run boundary, a parcel edge) and stop choosing its interval.** See S13's ⟦FOLD §264⟧ block —
+   ⛔ **and note the mechanism is UNGATEABLE until G-40's tower-spacing instrument exists**, so this
+   prior is currently enforced by eye at the very point it matters most.
 8. **Thinning the whole ink hierarchy to express a state.** ⭐ **State marks must be ADDED
    GEOMETRY IN THE SAME INK FAMILY. Famine is drawn by subtracting ACCENTS, never by lightening
    the fabric** — hf57 measures ink L 37.9, **FULL INK**, and is the corpus's own counter-example.
@@ -2506,6 +3071,38 @@ town burned in year 214") produce an entire composition. ⛔ **It touches the ev
 surface, which is owner-gated. PLAN flagged it and did not design it, and this specification does
 the same.** See gap **G-11** and Appendix B.
 
+### ⟦FOLD §264⟧ §3.6 · ⭐⭐ THE SUBSTITUTION REGISTER — EVERY PLACE A MECHANISM SUPERSEDES A LAW'S STATED EXECUTION (§258.2)
+
+**§258.2 is binding on every lane and this document had no home for it.** The owner has ruled that
+he is married to the **concept and intent** behind the laws far more than to their specific
+execution, and that **a mechanism achieving a law's intent better than the stated execution
+SUPERSEDES the stated execution.** The safeguard is **the record, not a veto in advance**, so every
+substitution is written in one fixed form:
+
+> **Law X's INTENT preserved · execution changed from A to B · measurable signature Y unchanged (or
+> improved).**
+
+⛔⛔ **A SUBSTITUTION THAT CANNOT NAME THE PRESERVED SIGNATURE IS NOT A SUBSTITUTION — IT IS A QUIET
+REPEAL, AND IT IS FORBIDDEN.** This register is the whole list; **anything not here has not been
+substituted**, and a later lane that changes a law's execution must add a row before it lands.
+
+| # | law | INTENT preserved | execution changed FROM → TO | ⭐ measurable signature, unchanged or improved | status |
+|---|---|---|---|---|---|
+| **SUB-1** | §239.2 / the wide-main-street laws — **street hierarchy must be legible** | importance is readable at a glance without a label | *stroke a wider line* → ⭐ **per-edge SETBACKS chosen by what the edge faces**; visible width is the sum of two facing setbacks | §2.5 scanline **p97/p50 organic 16–30**; widest channel p99 **2.7–6.4 plot-widths**; §2.4 distance-transform hierarchy **1.79–3.32–7.30** | ⭐ **ADOPTED at §258.3(a).** Bonus: §239's wall-side street **falls out for free** instead of being special-cased |
+| **SUB-2** | §246 / S10's plot-series intent — **organic plot geometry** | the plot series stays an irregular, believable comb | *recurse until the piece IS the building* → ⭐ **recurse to the PLOT, then FIT a footprint from a rectilinear vocabulary** | §2.5 burgage geometry **depth:width 4–6:1**, building **30–45% of plot depth**, touching the street line, widths ±20–40% never exact; §2.4 **block solidity 0.60–0.86** and **elongation 1.6–3.0** | ⭐ **ADOPTED at §263.4.** Our aspect constraint becomes a **HARD FILTER**; the wedge becomes unrepresentable rather than caught |
+| **SUB-3** | ATLAS banned prior #7 — **repeated elements must not read as machine-set** | the "generated" tell is removed | *seeded spacing VARIANCE on an interval we choose* → ⭐ **place by STRUCTURE (the corners that exist) and never choose an interval at all** | ⛔ **NO SIGNATURE EXISTS YET — G-40's tower-spacing instrument** (spacing CV along the circuit; towers per unit length) | ⚠⚠ **PROVISIONAL AND HELD.** §258.2's own rule forbids a substitution that cannot name its signature, so **this one is recorded as PENDING and may not land before W0 builds the instrument** |
+
+⭐ **SUB-3 is the register earning its keep on its first use.** The mechanism is well-argued, two
+independent products agree on it, and it still cannot be *substituted* under §258.2 because the
+preserved signature has no number behind it. **That is the doctrine catching a good idea before it
+becomes an unmeasured habit — which is exactly the failure §263.6a named.**
+
+⚠ **AND THE GUARD THAT KEEPS THIS FROM BECOMING DRIFT (§258.4):** a substitution must still satisfy
+§256's precedence (mechanism may come from prior art; **the LOOK comes from the corpus; the CAUSE
+comes from the dossier**) and §246's derivation-home test. **Intent-over-execution licenses better
+machinery — never a free parameter, never a borrowed aesthetic, and never the loss of a law's
+measurable signature.**
+
 ---
 
 ## §4 · THE GAP LEDGER, RANKED BY LEVERAGE
@@ -2521,6 +3118,55 @@ both ranks are quoted in the row.
 ⚠ **A ROW'S RANK IS NOT ITS WAVE.** Dependencies re-order the build; §5 does that. A high-rank
 item that is BLOCKED lands after the thing it is blocked on, however valuable it is.
 
+### ⟦FOLD §264⟧ §4.0 · THE RE-RANK — WHAT MOVED, WHAT DID NOT, AND ONE DISAMBIGUATION
+
+**The ledger grew from 33 rows to 42** (41 ranked + G-33, which is housekeeping and carries no
+rank). **Nine rows are new**, all marked ⟦NEW⟧: **G-35** the dependency graph · **G-36**
+priority-ordered growth · **G-37** fit-the-footprint · **G-38** the four-axis parameterisation ·
+**G-39** the chaos/orthogonality test · **G-40** the three missing instruments · **G-41** the
+prior-art tail · **G-42** fabric epochs — **and G-1, the region.**
+
+⚠⚠ ⭐ **G-1 IS NOT A FOLD ITEM. IT IS A HOLE THIS FOLD FELL INTO, AND IT IS RECORDED LOUDLY BECAUSE
+NOBODY HAD NAMED IT: THE REGION HAD NO LEDGER ROW AT ALL.** `G-1` was cited as a blocking node by
+**§4.3's edge graph**, by **§1.2a**'s disposition of FMG's `hub` parameter, by **G-21**'s and
+**G-23**'s *depends-on* columns and by **W5**'s contents — while the ranked list ran
+`G-2, G-3, G-4…` and skipped it. **A dependency edge pointing at a row that does not exist is the
+address-rot class in its purest form**, and the ledger's own opening sentence claims to hold *every*
+MISSING or PARTIAL mechanism. ⭐ **Entered at rank 9** — CONTEXT ranks the missing region **#3 by
+breadth (5 of 8 traces)**, which puts it below the §240-bound trio (G-3 · G-8 · G-42) and above
+everything CONTEXT ranked beneath it. **No wave moves: W5 already owned the work.**
+
+⭐⭐ **AND THE CHECKABLE CLAIM THAT MATTERS MOST, BECAUSE IT IS WHY §5's WAVE ORDER SURVIVES THE
+RE-RANK INTACT: NOT ONE PRE-EXISTING ROW CHANGED POSITION *RELATIVE TO ANY OTHER PRE-EXISTING ROW*.
+The eight new rows were interleaved; nothing was re-ordered.** The renumbering was executed
+mechanically rather than hand-keyed, and the invariant was asserted by the same run
+(`MFSPEC2-rerank.py`, quoted in `laneMFSPEC2-receipt.md`):
+
+```
+PRE-EXISTING ROWS, OLD ORDER : G-2 G-7 G-34 G-3 G-8 G-9 G-13 G-10 G-14 G-15 G-16 G-12 G-6 …
+PRE-EXISTING ROWS, NEW ORDER : G-2 G-7 G-34 G-3 G-8 G-9 G-13 G-10 G-14 G-15 G-16 G-12 G-6 …
+RELATIVE ORDER PRESERVED     : True
+```
+
+⚠ **ONE DISAMBIGUATION, TAKEN AS A JUDGMENT CALL AND VETOABLE, BECAUSE TWO READINGS OF "#1" ARE
+AVAILABLE AND THEY LEAD TO DIFFERENT BUILDS.** §263.3 rules the dependency graph *"THE BEST
+MECHANISM IN EITHER PRIOR-ART STUDY, **RANKED #1** AND ADOPTED AS APPROACH."* **Read literally as a
+gap-ledger rank it would displace G-2, the terrain substrate — and with it W1, the wave every
+terrain-shaped mechanism is stalled behind.** ⭐ **Read against its own source sentence it is
+unambiguous: "#1" is its rank among PRIOR-ART ADOPTIONS**, which is the ranking FTG §12.1 publishes
+and the one §263.3 is quoting. **This document adopts the second reading**, places G-35 at gap-ledger
+rank **12** on this ledger's own stated basis (breadth × unblocking × cheapness), and marks it
+**#1 of all prior-art adoptions** in its row and throughout §4.1b. *If the chair intended the
+literal reading, G-35 moves to 1, G-2 to 2, and W6's roster work moves ahead of W1's substrate —
+say so and it moves.*
+
+⭐ **WHY 12 IS THE RANK IT EARNS HERE, STATED SO THE PLACEMENT IS ARGUABLE RATHER THAN ASSERTED:**
+it sits immediately **above G-13**, because *what exists* is upstream of *where it goes*; it is
+below **G-2/G-7/G-34** because those unblock a ruled law, a stage and the census family
+respectively; and it is below **G-3/G-8/G-42/G-1/G-9** because those are bound to §240 or hold the
+region every road rank depends on. ⚠ **Its rank understates its VALUE and overstates nothing about
+its urgency — which is precisely the distinction the RANK-is-not-WAVE rule exists to keep.**
+
 ### §4.1 · THE LEDGER
 
 | rank | id | mechanism | derivation home (the dossier fact that drives it) | blast radius | depends on / blocks |
@@ -2528,35 +3174,44 @@ item that is BLOCKED lands after the thing it is blocked on, however valuable it
 | **1** | **G-2** | ⛔ **TERRAIN SUBSTRATE** — a relief FIELD with gradient, aspect, land-form class and a `buildable` refusal mask, replacing the `RELIEF 0.30` scalar | seed + `config.terrainType` + `resources` + water facts (§161a) | **CONTEXT ranks it #1: 6 of 8 traces.** Unblocks CX-02, CX-03, CX-04, CX-19, CX-21 and **2 of the 9 wall-run types** | ⛔ **BLOCKS §214's TERRAIN ARM (§251.4a) · blocks G-4 · blocks the slope grammars · aspect arm is NOT-DERIVABLE (Appendix A)** |
 | **2** | **G-7** | ⛔ **FRONTAGE-FIRST GENERATION + the plot-series rhythm, corner plot and amalgamation event** | block face from the street graph; module width from `tier` × `districtWealth`; amalgamation from `epoch age` + **prosperity TRAJECTORY**; corner from `institutions` needing frontage | ⭐ **PLAN's #1 and ATLAS's SCOPE-1, reached independently on disjoint evidence (§250.6d).** 7 of 8 PLAN traces; most settlement plates at town+ and many below | needs S8's block faces. **Unlocks the block silhouette, the backland core, court frequency and district legibility as side effects** |
 | **3** | **G-34** | ⛔⛔ **ONE PREDICATE, ONE HOME — AND A CHECK THAT FAILS WHEN TWO MODULES ASK THE SAME GEOMETRIC QUESTION DIFFERENTLY.** Unify `deriveBridges`' crossing predicate with §205A's cured one; rule on `rank === 'passage'`; replace first-crossing-per-channel with `covered === inside` | none — it is an enforcement mechanism, not a derivation | ⛔ **92 of 127 street-over-water violations (72%) CANNOT BE EXEMPTED BY CONSTRUCTION.** Unblocks most of G-28's §205A residual | ⭐ **THE §238 PREDICATE CLASS RECURRING FOR THE FOURTH TIME, AND ITS SHAPE IS NEW — see §4.1a.** Cheap; needs a **ruling** more than a lane |
-| **4** | **G-3** | ⛔ **THE CIRCUIT AS A CHAIN OF TYPED RUNS (nine types, each with a cause)** + per-run tower policy | substrate + `institutions` + §240 epoch index + fabric extent + `history` fortification events | **CONTEXT #2: every walled trace (4/8).** Unblocks CX-14, CX-16, CX-18, CX-19, CX-20 | ⛔⛔ **§251.4b RULED: §240 AND THE RUN CHAIN ARE ONE PIECE OF WORK AND LAND TOGETHER.** Three rings without run typing come out CONCENTRIC. Blocks §252.3a's metropolis third circuit |
-| **5** | **G-8** | ⛔ **`circuitDemotion` — THE FOSSIL LADDER.** wall→ring street · gate→widening + frontage break · tower→circular building · ditch→garden band · intervallum→carriageway | §240 epoch index + land pressure (population growth between epochs) + `prosperity` | ⭐ **PLAN's #3 and CONTEXT's #9, found independently.** Every plate with >1 circuit (~10% of walled) plus every demotion plate | ⛔⛔ **§250.5 URGENT: §240 makes multi-circuit imminent and NOTHING says what happens to the superseded ring. WITHOUT THIS, EVERY NEW RING ERASES THE HISTORY THE EPOCH MODEL WAS ADOPTED TO EXPRESS** |
-| **6** | **G-9** | ⛔ **THE EPOCH DIALS** — per-epoch **grain**, **φ + bearing basis**, **attachment mode**, and `plannedOccupancy` (surveyed-not-built) | `foundingKind` × epoch × `lawfulness` × event history; occupancy from years-since-founding × `prosperity` | **PLAN's #2: 5 of 8 traces; every multi-vintage plate** | needs S5 (BUILT). ⭐ **Without these the epoch axis is structurally correct and VISUALLY INERT.** Numbers ready in §1.1's table |
-| **7** | **G-13** | ⛔ **INSTITUTION SITING AS A RELATIONAL SYSTEM** — per-class siting profiles with **PROHIBITED** adjacencies; `spawnsQuarter` micro-districts; custodian dwellings; the `jurisdictional` doubling flag | `institutions` + `government` + `factions` + `culture` + the void hierarchy + the circuit | **CONTEXT #5: 6 of 8 traces.** Unblocks CX-23, CX-27, CX-28, CX-29, CX-45 | ⭐ **The NEGATIVE rules are the cheap half and carry most of the realism** — four predicates prevent most naive-placer errors. The doubling flag needs **no new geometry** |
-| **8** | **G-10** | ⛔ **JUNCTION-MIX DISCIPLINE** — attachment-not-intersection generation, `junctionMix` bands, φ as a metric with its 0.8 ceiling and a read-back census | founding kind × lawfulness × **epoch** (the X budget is epoch-scoped) | **PLAN #4: ALL 8 traces, ALL plates.** | ⛔ **A generator meeting §201 and §202 perfectly can still emit an all-X lattice, and an all-X lattice reads as generated at a glance.** Cheap to census |
-| **9** | **G-14** | ⛔ **WATER AS A SYSTEM** — the ROLE axis (EDGE/SPINE/OBSTACLE), a **directed** centreline, flow-ordered chains, the domestic-water ladder, the dirt vector (clean take above + plume below + muck gate) | ⭐ **`supplyChains` — a first-class dossier field that is spatially UNUSED today** + river class + `institutions` + `resources` | **CONTEXT #6: 5 of 8 traces.** Unblocks CX-08…CX-11, CX-16 | ⚠ **ATLAS GAP-F alone is decoration — plume + upstream take is an ARGUMENT.** Build it whole |
-| **10** | **G-15** | ⛔ **THE COUNTRYSIDE** — T-24's six ground primitives, T-23's five road rungs, dispersal-vs-nucleation (CX-26), road furniture and the day's-travel rule (CX-25), process ground (CX-37), ground surface as a layer (CX-39) | `terrain` + `resources` + `institutions` + `neighbors` (distances) + §16 + §190c | ⭐ **85%+ of a village or thorp plate**, and **§229.2c's NAMED LEVER for the census tiers' remaining grain miss.** §252.3c: still the weakest surface | **⭐ T-23 and T-24 are ONE item, not two.** `neighbors` already holds the day's-travel distances — **road furniture is nearly free** |
-| **11** | **G-16** | ⛔ **THE PAINTED CLOSURE** — wash mis-registration, within-fill variation, path waver, per-stroke modulation, paper grain | none (a render mechanic) — but the **bands** come from the strongest cohort | **Every leaf, every lens.** b6 measures **0.00** on the two the eye reads first | ⭐ **Wash mis-registration is the ONE property that, if omitted, keeps the output reading as vector art no matter what else is done.** MF-A1's brief. ⚠ Must be **geometry or a tiled pattern**, never a raster filter |
-| **12** | **G-12** | ⛔ **WEALTH MUST DRIVE GEOMETRY, NOT ONLY TONE** — grain, backland extinction and dead-end rate per district | `wardWealth` / `prosperity` × population pressure × epoch age × district type | **PLAN #5: 3 of 8 traces; every stratified settlement** | measured: poor half **38% more dead ends**; green share **0.000 vs 0.0056**; ⭐ *today wealth drives TONE, not GEOMETRY* |
-| **13** | **G-6** | ⛔ **FOOTPRINT GRAMMAR BY MATERIAL** (six grammars, each with its own packing rule, alley floor, party-wall behaviour and corner radius) + the water-scarcity reorganisation | `resources` × `terrainType` × `culture` — **all three exist** | **CONTEXT #4.** ⭐ **THE SETTING-AGNOSTIC PROMISE IS STRUCTURALLY UNMET, NOT COSMETICALLY (§251.3)** | ⚠ **A declared-shift event** — the mapping affects every footprint on every leaf. **Partly gated behind G-30's terrain vocabulary** |
-| **14** | **G-18** | ⛔ **BLOCKS AS PLANAR FACES OF THE STREET GRAPH (§239.1)** + the three shape bands (elongation, solidity, area ratio) | none — **if the street graph is right, the blocks are right for free** | every leaf; the structural cause behind straddling districts and wall-band intrusions | needs G-10. ⭐ **The bands are also a DETECTOR: median-square high-solidity blocks convict a silent grow-then-clip** |
-| **15** | **G-20** | ⛔ **THE WALL-SIDE STREET (§239.2) AS A PER-RUN DERIVATION** + §200's census exemption keyed to **RUN TYPE** | run type (G-3) + `prosperity` + era | every walled leaf | ⛔⛔ **§200's clearance census WILL RED ON CORRECT OUTPUT without the run-type exemption (§251.4b).** ⚠ A **global** ring road produces a band the corpus never draws |
-| **16** | **G-17** | ⛔ **`intramuralVacancy` + the bearing-preserving dead-block handoff + the four-stage decay ladder + one shared `ghostInk`** | high-water vs current `population` (§161f) + the decline event + `terrain` + `institutions` (a brickfield needs clay) | every high-water and demotion plate | ⭐ **§239.4 already RECORDS the dividend and nothing generates what fills the ground.** Signal 5 is *nearly free* and the eye reads "this was a town" immediately |
-| **17** | **G-21** | ⛔ **STREET WIDTH FROM GRAPH LOAD** (betweenness over gates, market, quays, institutions) — the class ladder becomes the **quantiser**, not the source | `tradeRouteAccess` + the neighbour link + `institutions` + `tier` (class count) + `population` (absolute width) | every leaf; T-04's hierarchy depth | needs **G-1** for the gate weights. ⭐ **PRIOR-ART supplies the blueprint (reuse discount) and CONVERGES with §250.6c** |
-| **18** | **G-19** | ⛔ **`backlandCore` as an explicit derived object per block** + court classification (T-06) | `districtWealth` × population pressure × epoch age × district type | every block at town+ | ⭐ **This is what makes §201's alley register and §204's rarity ruling COHERENT — a court becomes "a backland core that failed to get a mouth"** rather than a separately-invented feature. **The band is already ruled: route-isolated 3–15%** |
-| **19** | **G-4** | ⛔ **THE BEARING TO WATER** — the direction of open water, not merely its presence | ⭐ **the S2 substrate's own geometry (§161a) — DERIVED, never minted** | every coastal and bankside leaf: district anchoring, the water-termination run, the second-bank rule, edge kind per bearing | **BLOCKED on G-2**, then it is **one vector**. ⚠ **Must never be conflated with wind/sun bearings, which are NOT derivable and stay in Appendix A** |
-| **20** | **G-23** | ⛔ **THE EXTRAMURAL ORDERING** — unequal ribbon length per road, gate ranking for growth allocation, distance-ladder bands 4 (charity/contagion) and 5 (gallows), the **single-arc** noxious constraint | approach-road ranks (G-1) + circuit runs (G-3) + `institutions` + `population` growth rate | **CONTEXT #8:** 4 of 8 traces | ⭐ **One table keyed off the institution list.** ⚠ Equal-length ribbons at every gate read as generated |
-| **21** | **G-22** | ⛔ **CENTRE TYPOLOGY (six kinds) + `secondAuthority ⇒ secondCentre` + market placement by arrival mode** | `institutions` + `powerStructure` (§161l) + `foundingKind` + event history | **CONTEXT #7 (markets); PLAN #9.** Multiplies voids; the strongest single "this is a working place" signal | ⭐ **We appear to have ONE square primitive against the corpus's six structurally distinct types** |
-| **22** | **G-24** | ⛔ **THE DISTRICT-LEGIBILITY CENSUS (GAP-H)** — render label-free and assert neighbour deltas | none (a census) | ⭐ **the acceptance test §8.4's glance layer actually needs** | band supplied by PLAN: **≥1.4× median block area OR ≥1.3× cells-across**. Needs G-9 and G-12 to have something to measure |
-| **23** | **G-11** | ⛔ **`eventFootprint`** — a derived, deterministic spatial region for spatially-extended events | the event's own identity + terrain (stable under the inertia law) | **PLAN #6:** 3 of 8 traces; every stressor and aftermath plate | ⛔ **OWNER-GATED ADJACENCY — touches the event/persistence surface. PROPOSED, NOT ACTED ON.** ⭐ It is the mechanism behind most of the corpus's memorable anomalies |
-| **24** | **G-25** | ⚠ **THE LANDMARK BUDGET (T-16)** — fewer, bigger — **plus the state-responsive prominence rung (GAP-G)** | `institutions` + `tier` × `population` (§161n) + the active stressor's relief function | every leaf's glance layer | measured: b6 draws **11/18/26 monumentals** against a legible budget of **3–7 / 4–9 / 9+**, at ~2:1 footprint ratio against **5–12:1** |
-| **25** | **G-5** | ⚠ **A DERIVATION HOME FOR POPULATION→EXTENT** | ⭐ **our own leaves, whose populations are FACTS** — 16 per tier, byte-deterministic, with published extents | §161f's high-water law; §5's tier table; the frontage ladder's town→city residual | ⛔ **UNRESTORABLE from the corpus (§249.4c).** External cross-check in §1.2c supports the SHAPE, **not the constant.** ⚠ **Touches the §5 tier table — B8 named it a chair question and did not take it** |
-| **26** | **G-26** | ⚠ **CHROME RUNG (GAP-I) + the annotation-layer contract (T-26) + §161i's TRUE MEASURE** | `tier` × `prosperity` | the margins of every leaf | ⭐ trivial, and it makes the tier read even in the margins. ⚠ **§161i's true measure is NON-DEFERRABLE** |
-| **27** | **G-27** | ⛔ **THE UNDERGROUND STRATUM (§13/§168)** — unbuilt, **twice deferred**, first-class in wave nine | `institutions` + the surface fabric | its own leaf family | ⭐ **`accessLaw.js` is ALREADY stratum-agnostic**, which is what makes it cheap. ⚠ **The ring prior re-appears in new habitats — galleries must CHASE something, never radiate** |
-| **28** | **G-28** | ⚠ **THE RESIDUAL AND CARRIED-DEFECT SET** — see §4.2 | — | small individually, visible collectively | several are **owner-gated** |
-| **29** | **G-29** | ⚠ **SPATIAL INDEXING + PER-CENSUS RUNTIME BUDGETS + indexed-vs-exhaustive equivalence pins** | none (infrastructure) | the census family's scalability; §220's performance gate | ⭐ **Handed off WHOLE with cause** (`laneMFARCH2-receipt.md` §9.1). ⚠ **A completeness status where "skipped due to scale" can NEVER read green.** §220 is **launch-blocking** (§247.3a) |
-| **30** | **G-31** | ⛔ **RELOCATION AND SUPERSESSION OF POINT FEATURES** — moved settlements, stranded quays, superseded fords and markets | a relocation event + the terrain feature that failed | 2 traces; a striking and fully-derivable state | *lower priority than the epoch items and correctly last-but-one* |
-| **31** | **G-32** | ⛔ **SEASONAL / CONDITIONAL SECOND NETWORKS** | `terrain` + water mode + the lens | ⭐ **makes the winter/wet lenses STRUCTURAL rather than a recolour** | none |
-| **32** | **G-30** | ⛔ **TERRAIN VOCABULARY WIDTH** — 7 tokens against ~20 structurally distinct settings | ⭐ **itself — this IS a dossier fact** | ⛔ **the single upstream blocker for the whole morphotype program; everything in CONTEXT §7 is stalled behind it** | ⛔⛔ **OWNER-GATED (persistence shape). §251.5 raised it, NOT decided.** Lane recommends **composite `terrainModifiers`** over widening the enum, because the enum is what the gallery facets and the server RPC filter on. **Chair concurs with the shape; it is the owner's call.** |
+| **4** | ⟦NEW⟧ **G-37** | ⭐⭐ **FIT THE FOOTPRINT FROM A RECTILINEAR VOCABULARY INSTEAD OF SUBDIVIDING UNTIL THE PIECE *IS* THE BUILDING** — subdivide to get the **PLOT**, then **FIT**; our aspect-ratio constraint becomes a **HARD FILTER**, not a tendency | building **kind** × district **lifestyle** (both dossier facts); the vocabulary itself is supplied per material by **G-6** | every footprint on every leaf at town+ and many below. ⭐ **The cleanest leg (c) in the fold**: §2.5's alley/sliver floor is **0.02–0.08** and b8 reads **0.16/0.09/0.09** — *the town moved the WRONG way* — and that is exactly the quantity this mechanism moves | ⭐ **A §258.2 SUBSTITUTION (SUB-2, §263.4).** Needs **G-7**'s plot series to fit into. **Supersedes** WATABOU §5.2's *modulations + an aspect filter* — the stronger option is **not to produce the wedge** |
+| **5** | ⟦NEW⟧ **G-40** | ⛔⛔ **THE THREE MISSING INSTRUMENTS** — (i) **tower spacing** (spacing CV along the circuit + towers per unit circuit length); (ii) **per-epoch material / tone contrast** (a between-region fill-tone separation, not a whole-plate statistic); (iii) ⟦lane finding⟧ **footprint-scale rectangularity**, absent from the entire register | none — they are **measurements**, not derivations | ⛔ **each one GATES a ranked mechanism**: (i) S13's tower-corner rule, §3.4 #7's re-read and **SUB-3**; (ii) per-epoch material, which sits in §4.1b's ungated list until it reads; (iii) **half of G-39** | ⭐ **§263.6a ORDERED (i) AND (ii) BUILT; (iii) IS THIS LANE'S ADDITION AND IS VETOABLE.** Cheap, and **all three land in W0**. ⚠⚠ *Two prior-art products now agree on the tower mechanism while we still cannot check it against a number — which is exactly the condition that lets a plausible idea become an unmeasured habit* |
+| **6** | **G-3** | ⛔ **THE CIRCUIT AS A CHAIN OF TYPED RUNS (nine types, each with a cause)** + per-run tower policy | substrate + `institutions` + §240 epoch index + fabric extent + `history` fortification events | **CONTEXT #2: every walled trace (4/8).** Unblocks CX-14, CX-16, CX-18, CX-19, CX-20 | ⛔⛔ **§251.4b RULED: §240 AND THE RUN CHAIN ARE ONE PIECE OF WORK AND LAND TOGETHER.** Three rings without run typing come out CONCENTRIC. Blocks §252.3a's metropolis third circuit |
+| **7** | **G-8** | ⛔ **`circuitDemotion` — THE FOSSIL LADDER.** wall→ring street · gate→widening + frontage break · tower→circular building · ditch→garden band · intervallum→carriageway | §240 epoch index + land pressure (population growth between epochs) + `prosperity` | ⭐ **PLAN's #3 and CONTEXT's #9, found independently.** Every plate with >1 circuit (~10% of walled) plus every demotion plate | ⛔⛔ **§250.5 URGENT: §240 makes multi-circuit imminent and NOTHING says what happens to the superseded ring. WITHOUT THIS, EVERY NEW RING ERASES THE HISTORY THE EPOCH MODEL WAS ADOPTED TO EXPRESS** |
+| **8** | ⟦NEW⟧ **G-42** | ⛔⛔ **EPOCHS ARE FABRIC EPOCHS, NOT CIRCUIT EPOCHS** — `epochAxis.js` mints one epoch per circuit, so **every unwalled leaf gets exactly ONE**. A wall becomes an **EVENT WITHIN** the epoch sequence rather than its definition | founding age + promotion events + prosperity history + recorded growth — the same fact family §240 already uses. ⛔ **DERIVED, NEVER A KNOB (§240.2), and bounded by the measured ≤4-epoch ceiling** | ⭐ **half the tier ladder.** PLAN §6.1 measures village **1–2** and town **2–3** fabric epochs while an unwalled village gets **1** by construction — so today **no unwalled settlement can EVER show a vintage difference, a bearing change or an attachment mode**, and §251 measured the walled/unwalled split as essentially the tier line | ⭐⭐ **RULED AT §257.3(a), WAVE-NINE FIRST-ORDER — and this document was still carrying it as open question Q-2.** ──PRECEDES─▶ **G-9** (the dials have nothing to vary on an unwalled leaf). Routed to **W2**, which opens `epochAxis.js` anyway under §251.4b |
+| **9** | ⟦NEW⟧ **G-1** | ⛔ **THE REGION AS A DERIVED OBJECT** — neighbours at real distances, roads between them carrying **RANKS**, one water system, one resource catchment, derived **BEFORE** the settlement | ⭐ **`neighbors` + `tradeRouteAccess` + `resources` — ALL THREE ALREADY EXIST IN THE DOSSIER** (CONTEXT §8.2). §161a already rules the half of it that is settled: *tradeRouteAccess sets road count and grade quality; the neighbour link sets the main road's true exit bearing* | **CONTEXT #3 BY BREADTH (5 of 8 traces).** Unblocks CX-01 siting · CX-15 typed gates · CX-22 *which* gate grows a suburb · CX-25 road furniture and the day's-travel rule · CX-32 toll avoidance | ⚠⚠ ⟦FOLD §264⟧ **THIS ROW WAS MISSING FROM THE LEDGER ENTIRELY WHILE §4.3's EDGE GRAPH, §1.2a, G-21, G-23 AND W5's CONTENTS ALL REFERENCED IT AS A BLOCKING NODE** — a dangling edge, found by this fold and **entered rather than merely reported**. ──BLOCKS──▶ **G-21**'s load weights · **G-23**'s gate ranking · **G-36**'s rank seeding · **G-3**'s gate typing. ⭐ *A settlement generated without a region will always look dropped rather than grown* |
+| **10** | **G-9** | ⛔ **THE EPOCH DIALS** — per-epoch **grain**, **φ + bearing basis**, **attachment mode**, and `plannedOccupancy` (surveyed-not-built) | `foundingKind` × epoch × `lawfulness` × event history; occupancy from years-since-founding × `prosperity` | **PLAN's #2: 5 of 8 traces; every multi-vintage plate** | needs S5 (BUILT). ⭐ **Without these the epoch axis is structurally correct and VISUALLY INERT.** Numbers ready in §1.1's table |
+| **11** | ⟦NEW⟧ **G-38** | ⭐⭐ **CHARACTER AS A FOUR-AXIS PARAMETERISATION OF *ONE* SUBDIVISION ROUTINE** — size floor · grid chaos · size variation · emptiness. ⛔ **We must NOT write per-district generators** | **wealth** → size floor · **epoch age × degree of planning** → grid chaos · **mixed use** → size variation · **crowding** → emptiness (inverted). Every axis has a dossier fact behind it, so none is decoration | every populated district on every leaf. ⭐ It is the **shared machinery under G-9's epoch dials and G-12's wealth→geometry** — those two are the same mechanism seen from two sides | ⚠⚠ **STRUCTURAL, AND THE ORDER IS THE WHOLE POINT: the routine and its four axes are W3's**, because retrofitting a parameterisation onto per-case generators is the expensive path; **W4 supplies the per-epoch and per-wealth VALUES.** ⛔ Magnitudes fitted to `block_area_frac_p50` / `block_area_cv` / `orientation_order_phi` / `backland_green_p50`, **never transcribed from their constants** |
+| **12** | ⟦NEW⟧ **G-35** | ⭐⭐⭐ **THE ROSTER AS A RESOURCE DEPENDENCY GRAPH** — nodes are resources and services, edges are **ratios with STATED DENOMINATORS** (per head, or per N providers of another node), and **producers fall back to IMPORTERS where the land cannot support them**. ⛔ **NO FREE SCALAR ANYWHERE IN IT** | ⭐ **`resources` + `supplyChains` + `population` + `tradeRouteAccess` + `neighbors` + `institutions`** — and the decisive asymmetry: **we HOLD the facts its author has to invent.** Our edges are *read*, not authored | **§263.3 RANKED IT #1 OF ALL PRIOR-ART ADOPTIONS AND CALLED IT THE BEST MECHANISM IN EITHER STUDY.** It answers the third question S16 never asked — ***what exists at all*** — and it feeds **G-15's hinterland causally** (*a settlement with farms needs farmland, and the graph knows whether it has farms*) | ⭐ Structurally **anti-decoration** under §246. Sits **above G-13** (*where*) and §161n (*how big*). ⚠⚠ **It SUPERSEDES G-25's per-tier landmark budget AS A SOURCE** — the budget becomes its census, and **W6 owes a non-regression check on W5's measured compliance.** ⛔ Their nodes, ratios and pools are **REFUSED** |
+| **13** | **G-13** | ⛔ **INSTITUTION SITING AS A RELATIONAL SYSTEM** — per-class siting profiles with **PROHIBITED** adjacencies; `spawnsQuarter` micro-districts; custodian dwellings; the `jurisdictional` doubling flag | `institutions` + `government` + `factions` + `culture` + the void hierarchy + the circuit | **CONTEXT #5: 6 of 8 traces.** Unblocks CX-23, CX-27, CX-28, CX-29, CX-45 | ⭐ **The NEGATIVE rules are the cheap half and carry most of the realism** — four predicates prevent most naive-placer errors. The doubling flag needs **no new geometry** |
+| **14** | **G-10** | ⛔ **JUNCTION-MIX DISCIPLINE** — attachment-not-intersection generation, `junctionMix` bands, φ as a metric with its 0.8 ceiling and a read-back census | founding kind × lawfulness × **epoch** (the X budget is epoch-scoped) | **PLAN #4: ALL 8 traces, ALL plates.** | ⛔ **A generator meeting §201 and §202 perfectly can still emit an all-X lattice, and an all-X lattice reads as generated at a glance.** Cheap to census |
+| **15** | ⟦NEW⟧ **G-36** | ⭐ **PRIORITY-ORDERED STREET GROWTH FROM A CENTRE**, the queue seeded from ranked approach roads — plus **snap-and-lengthen cleanup, ⚠ MADE DEGREE-AWARE** | approach-road **ranks** (G-1) + gates (S13) + `institutions` as origins and destinations. ⭐ *Priority becomes a read-out of route importance rather than a slider* | **S7, the pipeline's sharpest gap**, and S15's ribbon lengths. ⭐ **Its (c) is the strongest in either study: a priority queue produces UNEQUAL RIBBON EXTENTS BY CONSTRUCTION**, which is precisely what §2.5's *concentrated at one or two gates, never even* demands — an even-growth mechanism cannot produce it at all | **The QUEUE is W3's; its RANK SEEDING is completed by G-1 in W5** — building it before the ranks exist is correct and is **not** rework. ⚠⚠ **The snap must REFUSE to raise a node past degree 4**: unguarded, snapping mints X-nodes against `X:T ≤ 0.09` and stars against `deg≥5 ≤ 0.01` |
+| **16** | **G-14** | ⛔ **WATER AS A SYSTEM** — the ROLE axis (EDGE/SPINE/OBSTACLE), a **directed** centreline, flow-ordered chains, the domestic-water ladder, the dirt vector (clean take above + plume below + muck gate) | ⭐ **`supplyChains` — a first-class dossier field that is spatially UNUSED today** + river class + `institutions` + `resources` | **CONTEXT #6: 5 of 8 traces.** Unblocks CX-08…CX-11, CX-16 | ⚠ **ATLAS GAP-F alone is decoration — plume + upstream take is an ARGUMENT.** Build it whole |
+| **17** | **G-15** | ⛔ **THE COUNTRYSIDE** — T-24's six ground primitives, T-23's five road rungs, dispersal-vs-nucleation (CX-26), road furniture and the day's-travel rule (CX-25), process ground (CX-37), ground surface as a layer (CX-39) | `terrain` + `resources` + `institutions` + `neighbors` (distances) + §16 + §190c | ⭐ **85%+ of a village or thorp plate**, and **§229.2c's NAMED LEVER for the census tiers' remaining grain miss.** §252.3c: still the weakest surface | **⭐ T-23 and T-24 are ONE item, not two.** `neighbors` already holds the day's-travel distances — **road furniture is nearly free** |
+| **18** | **G-16** | ⛔ **THE PAINTED CLOSURE** — wash mis-registration, within-fill variation, path waver, per-stroke modulation, paper grain | none (a render mechanic) — but the **bands** come from the strongest cohort | **Every leaf, every lens.** b6 measures **0.00** on the two the eye reads first | ⭐ **Wash mis-registration is the ONE property that, if omitted, keeps the output reading as vector art no matter what else is done.** MF-A1's brief. ⚠ Must be **geometry or a tiled pattern**, never a raster filter |
+| **19** | **G-12** | ⛔ **WEALTH MUST DRIVE GEOMETRY, NOT ONLY TONE** — grain, backland extinction and dead-end rate per district | `wardWealth` / `prosperity` × population pressure × epoch age × district type | **PLAN #5: 3 of 8 traces; every stratified settlement** | measured: poor half **38% more dead ends**; green share **0.000 vs 0.0056**; ⭐ *today wealth drives TONE, not GEOMETRY* |
+| **20** | **G-6** | ⛔ **FOOTPRINT GRAMMAR BY MATERIAL** (six grammars, each with its own packing rule, alley floor, party-wall behaviour and corner radius) + the water-scarcity reorganisation | `resources` × `terrainType` × `culture` — **all three exist** | **CONTEXT #4.** ⭐ **THE SETTING-AGNOSTIC PROMISE IS STRUCTURALLY UNMET, NOT COSMETICALLY (§251.3)** | ⚠ **A declared-shift event** — the mapping affects every footprint on every leaf. **Partly gated behind G-30's terrain vocabulary** |
+| **21** | **G-18** | ⛔ **BLOCKS AS PLANAR FACES OF THE STREET GRAPH (§239.1)** + the three shape bands (elongation, solidity, area ratio) | none — **if the street graph is right, the blocks are right for free** | every leaf; the structural cause behind straddling districts and wall-band intrusions | needs G-10. ⭐ **The bands are also a DETECTOR: median-square high-solidity blocks convict a silent grow-then-clip** |
+| **22** | **G-20** | ⛔ **THE WALL-SIDE STREET (§239.2) AS A PER-RUN DERIVATION** + §200's census exemption keyed to **RUN TYPE** | run type (G-3) + `prosperity` + era | every walled leaf | ⛔⛔ **§200's clearance census WILL RED ON CORRECT OUTPUT without the run-type exemption (§251.4b).** ⚠ A **global** ring road produces a band the corpus never draws |
+| **23** | **G-17** | ⛔ **`intramuralVacancy` + the bearing-preserving dead-block handoff + the four-stage decay ladder + one shared `ghostInk`** | high-water vs current `population` (§161f) + the decline event + `terrain` + `institutions` (a brickfield needs clay) | every high-water and demotion plate | ⭐ **§239.4 already RECORDS the dividend and nothing generates what fills the ground.** Signal 5 is *nearly free* and the eye reads "this was a town" immediately |
+| **24** | **G-21** | ⛔ **STREET WIDTH FROM GRAPH LOAD** (betweenness over gates, market, quays, institutions) — the class ladder becomes the **quantiser**, not the source | `tradeRouteAccess` + the neighbour link + `institutions` + `tier` (class count) + `population` (absolute width) | every leaf; T-04's hierarchy depth | needs **G-1** for the gate weights. ⭐ **PRIOR-ART supplies the blueprint (reuse discount) and CONVERGES with §250.6c** |
+| **25** | **G-19** | ⛔ **`backlandCore` as an explicit derived object per block** + court classification (T-06) | `districtWealth` × population pressure × epoch age × district type | every block at town+ | ⭐ **This is what makes §201's alley register and §204's rarity ruling COHERENT — a court becomes "a backland core that failed to get a mouth"** rather than a separately-invented feature. **The band is already ruled: route-isolated 3–15%** |
+| **26** | ⟦NEW⟧ **G-39** | ⚠⚠ **THE CHAOS / ORTHOGONALITY TEST — A HYPOTHESIS ABOUT *OUR MUSH* THAT MUST BE MEASURED BEFORE IT DRIVES A REWORK.** The claim: chaos belongs at the LARGE scale (block frames meeting at organic angles) and orthogonality at the SMALL scale (the buildings inside them near-rectangular) | none — **it is a TEST, not a mechanism.** Its *outcome* would license changes to G-38's grid-chaos axis and G-37's vocabulary | ⛔ **§261.3 DOWNGRADED IT FROM A DESCRIPTION OF OUR TARGET TO A HYPOTHESIS ABOUT OUR DEFECT**, and it **must be tested against the corpus's own measured block elongation and plot variance before it drives a rework**. It was previously read as the diagnosis of why our output looks like mush | ⛔⛔ **BLOCKS any S7 / S10 / S11 rework justified on this basis.** ⚠ **Half-runnable today** — the full metric specification is §4.1c; the small-scale half needs **G-40(iii)** |
+| **27** | **G-4** | ⛔ **THE BEARING TO WATER** — the direction of open water, not merely its presence | ⭐ **the S2 substrate's own geometry (§161a) — DERIVED, never minted** | every coastal and bankside leaf: district anchoring, the water-termination run, the second-bank rule, edge kind per bearing | **BLOCKED on G-2**, then it is **one vector**. ⚠ **Must never be conflated with wind/sun bearings, which are NOT derivable and stay in Appendix A** |
+| **28** | **G-23** | ⛔ **THE EXTRAMURAL ORDERING** — unequal ribbon length per road, gate ranking for growth allocation, distance-ladder bands 4 (charity/contagion) and 5 (gallows), the **single-arc** noxious constraint | approach-road ranks (G-1) + circuit runs (G-3) + `institutions` + `population` growth rate | **CONTEXT #8:** 4 of 8 traces | ⭐ **One table keyed off the institution list.** ⚠ Equal-length ribbons at every gate read as generated |
+| **29** | **G-22** | ⛔ **CENTRE TYPOLOGY (six kinds) + `secondAuthority ⇒ secondCentre` + market placement by arrival mode** | `institutions` + `powerStructure` (§161l) + `foundingKind` + event history | **CONTEXT #7 (markets); PLAN #9.** Multiplies voids; the strongest single "this is a working place" signal | ⭐ **We appear to have ONE square primitive against the corpus's six structurally distinct types** |
+| **30** | ⟦NEW⟧ **G-41** | ⚠ **THE PRIOR-ART ADOPTION TAIL** — every remaining ADOPT-AS-APPROACH from both studies that is a **single rule or threshold rather than architecture**, itemised with its home stage, its gating metric and its wave in **§4.1b** | various — each row in §4.1b states its own | small individually; ⭐ **collectively they are a large part of why a shipping product's output reads as intentional** | ⚠ **§4.1b also carries the INTERESTING-BUT-UNGATED list** — mechanisms that fail leg (c) and therefore carry **no implementation claim and no rank**. ⛔ *Nothing may be promoted out of that list without an argument for (c), not merely a good feeling* |
+| **31** | **G-24** | ⛔ **THE DISTRICT-LEGIBILITY CENSUS (GAP-H)** — render label-free and assert neighbour deltas | none (a census) | ⭐ **the acceptance test §8.4's glance layer actually needs** | band supplied by PLAN: **≥1.4× median block area OR ≥1.3× cells-across**. Needs G-9 and G-12 to have something to measure |
+| **32** | **G-11** | ⛔ **`eventFootprint`** — a derived, deterministic spatial region for spatially-extended events | the event's own identity + terrain (stable under the inertia law) | **PLAN #6:** 3 of 8 traces; every stressor and aftermath plate | ⛔ **OWNER-GATED ADJACENCY — touches the event/persistence surface. PROPOSED, NOT ACTED ON.** ⭐ It is the mechanism behind most of the corpus's memorable anomalies |
+| **33** | **G-25** | ⚠ **THE LANDMARK BUDGET (T-16)** — fewer, bigger — **plus the state-responsive prominence rung (GAP-G)** | `institutions` + `tier` × `population` (§161n) + the active stressor's relief function | every leaf's glance layer | measured: b6 draws **11/18/26 monumentals** against a legible budget of **3–7 / 4–9 / 9+**, at ~2:1 footprint ratio against **5–12:1** |
+| **34** | **G-5** | ⚠ **A DERIVATION HOME FOR POPULATION→EXTENT** | ⭐ **our own leaves, whose populations are FACTS** — 16 per tier, byte-deterministic, with published extents | §161f's high-water law; §5's tier table; the frontage ladder's town→city residual | ⛔ **UNRESTORABLE from the corpus (§249.4c).** External cross-check in §1.2c supports the SHAPE, **not the constant.** ⚠ **Touches the §5 tier table — B8 named it a chair question and did not take it** |
+| **35** | **G-26** | ⚠ **CHROME RUNG (GAP-I) + the annotation-layer contract (T-26) + §161i's TRUE MEASURE** | `tier` × `prosperity` | the margins of every leaf | ⭐ trivial, and it makes the tier read even in the margins. ⚠ **§161i's true measure is NON-DEFERRABLE** |
+| **36** | **G-27** | ⛔ **THE UNDERGROUND STRATUM (§13/§168)** — unbuilt, **twice deferred**, first-class in wave nine | `institutions` + the surface fabric | its own leaf family | ⭐ **`accessLaw.js` is ALREADY stratum-agnostic**, which is what makes it cheap. ⚠ **The ring prior re-appears in new habitats — galleries must CHASE something, never radiate** |
+| **37** | **G-28** | ⚠ **THE RESIDUAL AND CARRIED-DEFECT SET** — see §4.2 | — | small individually, visible collectively | several are **owner-gated** |
+| **38** | **G-29** | ⚠ **SPATIAL INDEXING + PER-CENSUS RUNTIME BUDGETS + indexed-vs-exhaustive equivalence pins** | none (infrastructure) | the census family's scalability; §220's performance gate | ⭐ **Handed off WHOLE with cause** (`laneMFARCH2-receipt.md` §9.1). ⚠ **A completeness status where "skipped due to scale" can NEVER read green.** §220 is **launch-blocking** (§247.3a) |
+| **39** | **G-31** | ⛔ **RELOCATION AND SUPERSESSION OF POINT FEATURES** — moved settlements, stranded quays, superseded fords and markets | a relocation event + the terrain feature that failed | 2 traces; a striking and fully-derivable state | *lower priority than the epoch items and correctly last-but-one* |
+| **40** | **G-32** | ⛔ **SEASONAL / CONDITIONAL SECOND NETWORKS** | `terrain` + water mode + the lens | ⭐ **makes the winter/wet lenses STRUCTURAL rather than a recolour** | none |
+| **41** | **G-30** | ⛔ **TERRAIN VOCABULARY WIDTH** — 7 tokens against ~20 structurally distinct settings | ⭐ **itself — this IS a dossier fact** | ⛔ **the single upstream blocker for the whole morphotype program; everything in CONTEXT §7 is stalled behind it** | ⛔⛔ **OWNER-GATED (persistence shape). §251.5 raised it, NOT decided.** Lane recommends **composite `terrainModifiers`** over widening the enum, because the enum is what the gallery facets and the server RPC filter on. **Chair concurs with the shape; it is the owner's call.** |
 | **—** | **G-33** | ⚠ **HOUSEKEEPING FROM THE CONFLICT SET** — re-pin `GRAIN_BAND`'s metropolis rung to 80–120 and re-derive `GRAIN_SEAMS` (**C-2**); label the thorp/hamlet rungs UNMEASURED (**C-3**); target paper warmth 37 (**C-1**) | — | one table, one constant, one colour | ⚠ **All three move output and must be DECLARED, never quiet.** Blocks nothing; **do it in the same wave as any grain work so one declaration covers it** |
 
 ### §4.1a · ⭐⭐ G-34 — A CURE THAT NEVER CROSSED A MODULE BOUNDARY
@@ -2582,6 +3237,29 @@ STOPPED AT A MODULE BOUNDARY while a sibling module kept asking the old question
 centreline crossing is a crossing at all, and to say so IN ONE PLACE.** All three arms are the
 same question — *which crossings the law intends to forgive* — and they must be ruled together.
 
+#### ⟦FOLD §264⟧ ⭐⭐ AND THEY HAVE BEEN — **G-34 IS RULED (§262.2). THE RULING IN FULL.**
+
+**MF-SPEC wrote that this needed a ruling more than a lane. §262.2 supplied it, and the governing
+principle is this document's own sentence quoted back at it: ⭐⭐⭐ THE CURE IS NOT TO CONVICT
+LESS.** The 92 decompose into four causes, **and only ONE of them is a lawful exemption:**
+
+| arm | count | ⭐ **RULED** |
+|---|---|---|
+| **(a) the predicate mismatch** — `deriveBridges` asks `crossPoint` against the centreline while the cured census asks `segSegClosest < half` | **72** | ⛔ **NOT AN EXEMPTION AT ALL — it is §255's boundary defect.** ⭐ **ONE PREDICATE, ONE HOME, exported and consumed by both, plus a check that REDS when a second module re-spells the same geometric question** |
+| **(b) `rank === 'passage'` refused a bridge** | **20** | ⭐ **BUILD THE BRIDGE.** *A passage crossing water needs a CROSSING STRUCTURE, not forgiveness — a plank or a footbridge is a real thing a town builds.* At a passage-appropriate scale |
+| **(c) only the FIRST crossing per channel is taken** (`break`) | **35** | ⭐ **FIX THE LOOP.** *A street that meets a meander twice needs TWO bridges* |
+| **(d) the dead `anchorKey` path** — the marine regex's own word can never fire, so a bank-rooted watermill is convicted on its own river | **6** | ⭐ **A REAL DEFECT, and the cure is already proved: 165 → 159, subject set unchanged, PIXEL-FREE.** ⚠ **Its receipt is that it must RE-QUOTE THE RUN-1 PARCHMENT SHAs AS BYTE-IDENTICAL** |
+| **(e) the coast-vs-river street arm** — a street running ALONG a shore | (the 775/555 class) | ⭐⭐ **THIS ONE IS THE LAWFUL EXEMPTION** — keyed to the water's **relationship to the segment** (bankside adjacency vs channel transit) and **NAMED IN THE CENSUS, never silently passed** |
+
+> ⭐⭐⭐ **NET: THREE BUILD-FIXES, ONE BUG-FIX, ONE NAMED EXEMPTION. THE UNEXEMPTABLE SHARE MUST
+> FALL BECAUSE THE TOWN GAINS THE CROSSINGS IT ALWAYS NEEDED — NEVER BECAUSE THE RULE GOT SOFTER.**
+> (§262.2)
+
+⭐ **AND ARM (e) HAS A GENERATION-SIDE HALF THAT LANDS IN THE SAME BREATH** — S4's ⟦FOLD §264⟧
+road/water typed interaction (*bridge a river, terminate at an ocean*). **The census stops
+convicting a shore road because the generator stops producing a road that pretends to cross.**
+*Fixing a census and fixing the thing it measures are usually the same work seen from two ends.*
+
 ⭐⭐⭐ **THE STRUCTURAL REQUIREMENT THIS SPEC ADOPTS, AND IT IS THE ENFORCEMENT ANALOGUE OF
 §253/§241.5a's RAW-HANDLE GUARD: ONE PREDICATE, ONE HOME, AND A CHECK THAT FAILS WHEN TWO MODULES
 ASK THE SAME GEOMETRIC QUESTION DIFFERENTLY.** §238 established *one artifact, one accessor, one
@@ -2603,12 +3281,124 @@ COMMENT.** The narrowest cure is proved: **exempt +6, violations 165 → 159, su
 unchanged, and the run-1 parchment SHAs BYTE-IDENTICAL on town/city/highwater/fjord — not one
 pixel moves.** ⛔ **Deliberately not landed (J-W1-2): it widens a census exemption under the
 §234 feature-law freeze and it moves a published figure. It needs a ruling, not a lane.**
+⟦FOLD §264⟧ ✅ **AND IT NOW HAS ONE: §262.2(d) RULED IT A REAL DEFECT AND RULED IT IN.** It lands in
+**W0** as the one **bug**-fix among G-34's five arms, ⚠ **and the receipt is not the new violation
+count — it is the BYTE-IDENTICAL run-1 parchment SHAs.** *A cure that was proved pixel-free must
+re-prove it at landing, or the proof was about a tree that no longer exists.*
 
 ⚠ **A THIRD ARM RIDES THE SAME RULING: the §205A street arm was designed for a RIVER and is
 applied to a COAST.** A shore-parallel road scores **775 "crossings" on `city` and 555 on
 `fjord`** — so **the coastal leaves dominate the corpus street total and the figure is not
 comparable across terrains.** ⭐ *This is the §205A analogue of the half-ring exemption
 MF-ARCH-2 had to turn from a TOLERANCE into a RULE.*
+
+### ⟦FOLD §264⟧ §4.1b · G-41 · THE PRIOR-ART ADOPTION SET, ROUTED — AND THE UNGATED LIST KEPT BESIDE IT
+
+**Every ADOPT-AS-APPROACH verdict from both GPL studies, in one place, with the wave that owns it.**
+The architecture-sized ones have their own ledger rows (G-35…G-38); everything below is a single
+rule or threshold, which is why it is one row (**G-41**) rather than fourteen.
+⛔⛔ **THE LICENCE POSTURE IS UNCHANGED AND BINDS EVERY ROW: BOTH SOURCES ARE GPL-3.0 WITH NO
+LINKING EXCEPTION AND ZERO PER-FILE HEADERS. NO CODE, NO TRANSCRIPTION, NO LIFTED IDENTIFIERS, NO
+LIFTED CONSTANTS. WHAT TRANSFERS IS THE SHAPE OF A MECHANISM, IMPLEMENTED CLEAN-ROOM** (§0 of both
+studies; §254.5). ⚠ *Whether counsel should confirm the clean-room posture before anything traceable
+to these studies ships is an open owner item (§264.4) and is not settled here.*
+
+| mechanism | source · its own rank | home stage | **(b) LOOK** — the metric that gates it | wave |
+|---|---|---|---|---|
+| **Resource dependency graph** → **G-35** | FTG **#1** ⭐ *best in either study* | S16 | landmark budget · ordinary:notable | **W6** |
+| **Priority-ordered road growth** → **G-36** | FTG **#2** | S7 | `gamma_connectivity` 0.39–0.52 · `mean_degree` 2.1–2.7 · extramural concentration | **W3** (queue) → **W5** (ranks) |
+| **Fit-the-footprint** → **G-37** | FTG **#3** | S10/S11 | `block_solidity_p50` · `block_elongation_p50` · burgage geometry | **W3** |
+| ⭐ **Enclosure-free fringe lots** — lots with invisible edges that need no surrounding roads | FTG **#4** | S15 / **S18** | `deadend_share` 0.110–0.209–0.391 · extramural growth ≥60%, ≤2 gates | **W5** |
+| **Snap-and-lengthen cleanup**, ⚠ **degree-aware** | FTG **#5** | S7 (inside G-36) | `star_share` ≤ 0.01 · `X_over_TY` ≤ 0.09 | **W3** |
+| **Minimum-district-area merge**, threshold from the **legible-districts band** | FTG **#6** | S6 | legible districts (town 3–6 · city 5–9 · metropolis 8–14) · ⚠ `block_area_p90_over_p10` ≥ 6 must not flatten | **W4** |
+| **Two-scale coastline**, detail **attenuated near the settlement** | FTG **#7** | S2/S4 | water incidence band · THROUGH bank asymmetry ~70/30 | **W1** |
+| **Hinterland from the same lot substrate**, clustered by kind | FTG **#8** ⚠ **weakest (c)** | **S18** | `hull_frac_of_frame` · `green_excess` | **W5** |
+| **Metric unit anchor** — every dimension a real-world quantity | FTG **#9** ⚠ **(c) neutral, flagged** | S23 | ⚠ **gated on NO BAND MOVING** — a unit anchor cannot move a ratio metric | **W7**, with §161i's TRUE MEASURE |
+| ⭐ **Road/water typed interaction** — bridge a river, terminate at an ocean | FTG **#10** · *smallest and most certain item in the fold* | S4/S7 | the street-over-water census itself | **W3** (census half is **W0**'s G-34) |
+| **Substrate/contents durability split** — the edge network persists, contents regenerate | FTG — *model property* | S0/§3.3 | none — no new machinery | ⭐ **already ours, and ahead**: keyed lineage beats spatially-scoped regeneration |
+| **Four-axis character parameterisation** → **G-38** | WATABOU **#1** | S6/S10/S11 | `block_area_frac_p50` · `block_area_cv` · `orientation_order_phi` · `backland_green_p50` | **W3** (routine) → **W4** (values) |
+| ⚠⚠ **Chaos large-scale / orthogonality small-scale** → **G-39** | WATABOU **#2** | S7/S10/S11 | `block_elongation_p50/p90` · `block_solidity_p50` · `orientation_entropy` | ⛔ **BLOCKED — test first (§4.1c)** |
+| **Selective regularity — regularise the civic core, leave the edge raw** | WATABOU **#3** | S6/S7 | `block_circularity_p50` / `block_solidity_p50` **gradient**; φ rising toward the core | **W4** ⚠ *magnitude from the corpus, never their numbers* |
+| **Randomise the STOP THRESHOLD, not the output size** | WATABOU **#4** | S10/S11 | `block_area_cv` · `block_area_p90_over_p10` | **W3** ⭐ *structurally cannot produce a degenerate plot — strictly better than sampling a size distribution* |
+| **Per-edge setbacks as street hierarchy** → **SUB-1** | WATABOU **#5** | S7 | `street_share_of_hull` ⚠ *aggregate proxy — no per-tier width metric exists* | **W3** |
+| **Outskirts thinning keyed to road proximity and enclosure** | WATABOU **#6** | S15 | built-density falloff · `hull_frac_of_frame` · `deadend_share` | **W5** ⭐ *the thing that makes an UNWALLED settlement look intentional* |
+| **Towers at wall corners; evenness inherited, never enforced** → **SUB-3** | WATABOU **#7** | S13 | ⛔ **NONE EXISTS — G-40(i)** | **W2**, gated on **W0** |
+| **Ordered claim list, greedily consumed, truncated by size** — ⚠ *the mechanism only* | WATABOU **#8** | S16 | ward-mix composition by tier | **W6** ⛔ *their list is REFUSED* |
+| **Defensive seat edge-adjacent and outside the circuit BY CONSTRUCTION** | WATABOU **#9** | S13/S16 | citadel wall-attachment on walled plates | **W2** ⛔ *their distance-rank SELECTION is refused — site comes from terrain and dossier* |
+| **Subdivide the neighbourhood to make room rather than rejecting a placement** | WATABOU **#10** | S7/S13 | gate/road connectivity · `gamma_connectivity` | **W3** ⭐ *converts a failure case into a construction step* |
+| **Monumental buildings as a separate two-axis rule** | WATABOU — ADOPT | S11 | landmark:house footprint **5–12:1** · landmark budget | **W5/W6** |
+| **Pin: assert an order-dependent relational rule actually HAD candidates** | WATABOU — *their defect, our guard* | S16 | n/a — **prevention machinery** | **W6** ⭐ *a defect of theirs converted into a counterfactual for us* |
+
+#### ⛔ INTERESTING-BUT-UNGATED — **NO IMPLEMENTATION CLAIM, NO RANK** (§261.4)
+
+**Six mechanisms are genuinely good and leg (c) cannot be argued for them.** §263.5 records them
+being pushed out of the ranking as the correction working as designed. **They are listed so they are
+neither lost nor smuggled in.**
+
+| mechanism | why it is ungated |
+|---|---|
+| **Building material varies per epoch** — the cheapest way to make an epoch boundary legible | ⛔ **no corpus metric for between-region tone or texture contrast exists.** ⭐ **Promotable the moment G-40(ii) reads** — and it is the only row here with a named path out |
+| **The full-employment objective exposed as a user choice** | a generator *objective*, not a geometric output. Nothing in the measured register responds to it. Recorded because making an objective function explicit is good design |
+| **Per-entity public/private notes with a player-write flag** | product feature, not plan-craft. No metric, and correctly so |
+| **Persistent entity → user-document linkage** | ⭐ **the sharpest PRODUCT insight in either study and entirely outside the map program's gates** — the place a user's campaign attaches to a generated world |
+| **Hardware-adaptive render quality** | engineering practice. Corroborates §220/§247.3a; gates against a **performance budget**, never a corpus band |
+| **Incrementality of lot detection** | an implementation optimisation. Buys nothing measurable; the *identity* it implements we already hold as law |
+
+#### ⛔ EXPLICITLY REFUSED — recorded so nobody re-finds them as opportunities
+
+**Any code at all (GPL-3.0)** · **their authored ward list** and **their dependency-graph contents**
+(decoration under §256 *and* the most clearly protected expression in either program) · **their
+citadel distance-rank selection** (arbitrary, no derivation home) · **their relaxation magnitudes**
+(free parameters chosen by eye) · **flat-percentage fringe density** (a free parameter; the
+positional mechanism is the better one) · **preset coast styles / "two arms from the centre"** ·
+**spatially-scoped regeneration as the edit-survival strategy** (a workaround for missing identity;
+our keyed-lineage model is ahead) · **the per-stage "place wall after" toggle** (a ring-drawer —
+wrong by ~45 points, see S5-b) · **the "curve around origin" ring-road mode** unless epoch-scoped
+(it manufactures X-nodes against a measured `X:T ≤ 0.09`) · **reject-and-redraw on failure**
+(incompatible with seed stability and the inertia law) · **a single global random stream** (the
+precise thing `keyedRandom` exists to prevent) · **their rendering, entirely** (§256.2 — the corpus
+measures richer on every axis we grade; imitating it would cost us a rung).
+
+### ⟦FOLD §264⟧ §4.1c · G-39 · THE CHAOS/ORTHOGONALITY TEST, SPECIFIED
+
+**§261.3 requires this hypothesis to be TESTED against the corpus before it drives a rework.
+Specifying the test is this fold's job; running it is not.** ⚠ **Until it returns, no S7/S10/S11
+work may cite "chaos belongs at the large scale" as its justification.**
+
+**THE HYPOTHESIS, stated so it can fail:** *in the corpus, the BLOCK scale is angularly disordered
+and the BUILDING scale is near-rectangular — and our output has this the wrong way round, which is
+why it reads as mush.*
+
+**ARM 1 — THE LARGE SCALE. Runnable today; the numbers are already in this document.**
+Measure over the studiable frame: `block_solidity_p50` (corpus median **0.748** — *a quarter of a
+typical block's convex hull is not block*), `block_elongation_p50/p90` (median **2.14**, band
+1.6–3.0), `orientation_order_phi` (whole settlement 0.044–**0.103**–0.433) and
+`orientation_entropy`. ⭐ **PLAUSIBLE, and it is why the hypothesis is worth testing at all: these
+three ALREADY say the corpus's block scale is disordered and non-convex** — §2.4's own reading is
+that *the corpus does not draw square blocks, it draws STRIPS*, and *blocks are systematically
+non-convex — the signature of streets meeting at angles.* **Arm 1 is close to confirmed on our own
+published figures. It is arm 2 that decides the hypothesis.**
+
+**ARM 2 — THE SMALL SCALE. ⛔ NOT RUNNABLE TODAY.** ⭐ **CONFIRMED by enumerating the key names of
+`MFS3a-planmetrics.json` and `MFS3a-voidmetrics.json`: the finest spatial SHAPE metric we hold is
+BLOCK-scale.** There is **no footprint-rectangularity measure of any kind**, and `cells_across` is
+grain, not shape. **The instrument needed is G-40(iii): a per-footprint rectangularity / squareness
+statistic over the corpus's own drawn masses** — the building-scale analogue of
+`block_solidity_p50`.
+
+**THE DECISION RULE, written before the numbers so it cannot be fitted afterwards:**
+
+| outcome | what follows |
+|---|---|
+| **arm 1 disordered AND arm 2 rectangular** | ⭐ **hypothesis SUPPORTED.** G-38's grid-chaos axis is scoped to the *cut* geometry and forced toward zero as pieces approach building size; G-37's vocabulary is the small-scale half. **This is the rework §261 is gating** |
+| **arm 1 disordered AND arm 2 ALSO irregular** | ⛔ **hypothesis REFUTED for our target.** The corpus's buildings are not rectangular and imitating a generator's squareness would move us *away* from it. **G-38 keeps its four axes; the chaos scoping is not adopted** |
+| **arm 1 ordered** (contradicting §2.4) | ⛔ **stop and re-examine the instrument, not the hypothesis** — it would contradict figures this document publishes as CONFIRMED |
+| **arm 2 unmeasurable** (G-40(iii) not built) | ⚠ **the hypothesis stays a hypothesis and drives nothing.** *An untestable diagnosis is not a licence to rework* |
+
+⭐ **AND THE HONEST NOTE THAT MAKES THIS WORTH THE PAGE: even if the hypothesis is refuted, the
+MECHANISM it inspired survives independently.** G-37's fit-the-footprint has its own three legs and
+its own measured miss (the alley/sliver floor) and does not rest on this test at all. ⚠ *What the
+test governs is whether we may say WHY we did it.*
 
 ### §4.2 · G-28 · THE RESIDUAL AND CARRIED-DEFECT SET, ITEMISED
 
@@ -2641,6 +3431,10 @@ G-2 (substrate) ──BLOCKS──▶ §214's TERRAIN ARM            [§251.4a �
 G-2 ──BLOCKS──▶ G-4 (water bearing) · CX-03 slope grammars · CX-02 refusal mask
 G-1 (region)   ──BLOCKS──▶ CX-01 siting · CX-15 typed gates · CX-22 gate selection
                            · CX-25 road furniture · CX-32 toll avoidance · G-21 (load weights)
+      ⟦FOLD §264⟧ ⚠⚠ G-1 HAD NO LEDGER ROW while this edge was already drawn against it.
+         Entered at rank 9.  It also ──BLOCKS──▶ G-3's GATE arm (gates are typed road
+         terminals placed AFTER the region's approach roads — S13 says so in as many words)
+         and ──SEEDS──▶ G-36's priority queue in W5.
 G-3 (run chain) ══BOUND TO══ §240 (epoch axis)            [§251.4b — "one piece of work"]
 G-3 ──BLOCKS──▶ §252.3a's METROPOLIS THIRD CIRCUIT (the cap lifts WITH the run chain, then by measurement)
 G-3 ──BLOCKS──▶ G-20 (§200's run-type exemption; without it a CORRECT wall-side street REDS the census)
@@ -2653,12 +3447,46 @@ G-11 (eventFootprint, OWNER-GATED) ──UNLOCKS──▶ the replanned-quarter 
 G-29 (runtime budgets) ──SERVES──▶ §220 performance gate  [LAUNCH-BLOCKING per §247.3a]
 G-34 (one predicate, one home) ──PRECEDES──▶ every wave that adds a census
                                ──UNBLOCKS──▶ 92 of 127 street-over-water violations (72%)
+
+──── ⟦FOLD §264⟧ the eight edges the fold adds ───────────────────────────────────
+G-42 (fabric epochs)  ──PRECEDES──▶ G-9 (the dials)   [§257.3a — RULED]
+      ⛔ WHY: epochAxis mints one epoch per CIRCUIT, so an unwalled leaf has nothing to vary.
+         W4's per-epoch exit criteria are UNTESTABLE on half the tier ladder until this lands.
+G-42 ══BOUND TO══ §240 + G-3, and lands in the SAME wave (W2) that opens epochAxis.js
+
+G-40(i)  tower-spacing metric      ──GATES──▶ S13's corner rule · §3.4 #7's re-read · SUB-3
+G-40(ii) per-epoch tone contrast   ──GATES──▶ per-epoch material (§4.1b's ungated list)
+G-40(iii) footprint rectangularity ──GATES──▶ G-39 arm 2       [this lane's finding]
+      ⭐ ALL THREE ARE MEASUREMENTS, ALL THREE ARE CHEAP, AND ALL THREE PRECEDE THE MECHANISM
+         THEY GATE. §263.6a ordered (i) and (ii); (iii) is proposed.
+
+G-39 (the chaos/orthogonality TEST) ──BLOCKS──▶ any S7/S10/S11 rework citing that principle
+      ⚠ It does NOT block G-37 or G-38, which stand on their own legs.        [§261.3]
+
+G-38 (four axes, ONE routine) ──MUST PRECEDE──▶ writing any per-district generator
+      ⚠ STRUCTURAL, not sequential: retrofitting a parameterisation is the expensive path.
+G-35 (the roster) ──SUPERSEDES AS A SOURCE──▶ G-25 (the per-tier landmark budget)
+      ⚠⚠ W5 measures compliance against the BAND; W6 replaces the DERIVATION.
+         W6 therefore owes a NON-REGRESSION check on W5's measured landmark result.
+G-35 ──FEEDS──▶ G-15's hinterland   (a settlement with farms needs farmland)
+G-36 (priority queue) ──NEEDS──▶ G-1 for its RANK seeding, but not for the queue itself
+      ⭐ Build the queue in W3 without ranks; W5's region completes it. NOT rework.
 ```
 
-⭐⭐ **THE TWO EDGES THAT COST A WAVE IF THEY SURFACE LATE, AND BOTH ARE ALREADY RULED:**
+⭐⭐ **THE EDGES THAT COST A WAVE IF THEY SURFACE LATE — ⟦FOLD §264⟧ NOW FOUR, AND EVERY ONE IS
+ALREADY RULED:**
 **(1) §214's terrain arm against a scalar** — a lane will write hachure code that has nothing to
 consume. **(2) §240 landing without the run chain** — *"landing §240 alone would ship the defect
 and then pay a declared shift TWICE to remove it."*
+⟦FOLD §264⟧ **(3) THE EPOCH DIALS LANDING ON A CIRCUIT LADDER (G-42 → G-9, §257.3a)** — W4 would
+build per-epoch grain, φ and attachment modes, then discover that **six of the sixteen exemplar
+leaves have exactly one epoch by construction and cannot express any of it.** *The fix is upstream
+and cheap; discovering it downstream costs the wave.*
+⟦FOLD §264⟧ **(4) A PER-DISTRICT GENERATOR WRITTEN BEFORE G-38's FOUR AXES EXIST** — this one is
+**structural rather than sequential**, which is why it is the easiest of the four to walk into:
+nothing *blocks*, everything works, and the parameterisation simply becomes unaffordable to retrofit
+once seven district generators exist. ⭐ *The cheapest moment to decide "one routine, four
+dossier-driven scalars" is before the first one is written.*
 
 ---
 
@@ -2680,6 +3508,46 @@ below names a parallel track, it is a second *lane*, not a second landing.
 *land the behaviour-neutral half first, measure, then the geometry half, measure* — because that
 is what makes a declared shift auditable.
 
+### ⟦FOLD §264⟧ §5.0 · ⭐⭐ DOES THE WAVE ORDER STILL HOLD AFTER THE RE-RANK? **YES — AND HERE IS WHY, CHECKABLY**
+
+⚠ **A NAMESPACE TRAP THIS SECTION'S NUMBER WALKS INTO, NAMED SO IT NEVER BITES: `§5.0b`, `§5.0d`
+and `§5.0e` ARE CHARTER LAWS** (the water mode, parcel dithering, the inn belt) **and have nothing
+to do with this section.** Throughout this document a `§n` with a lowercase-letter suffix is almost
+always a **LAW**; this document's own sections use digits (`§5.1`, `§4.1a`, `§1.1.7f`). **The two
+consequences below are therefore lettered "(a)" and "(b)" in prose and must be cited as *"§5.0's
+consequence (a)"*, never as "§5.0a".** ⭐ *The same overlap already exists for §2, §3, §9, §12 and
+§16 — the ambiguity is inherited, not introduced, and this is the first place it is written down.*
+
+**The fold added eight ledger rows and re-ranked 41. THE WAVE ORDER W0 → W8 IS UNCHANGED. Not one
+wave moved, split, merged or swapped, and no item moved between waves.** Three reasons, each
+verifiable rather than asserted:
+
+1. ⭐ **THE RE-RANK MOVED NOTHING.** §4.0 quotes the executed proof that **no pre-existing row
+   changed position relative to any other pre-existing row** — the eight newcomers were interleaved.
+   A wave plan derived from an ordering that did not change cannot itself change.
+2. ⭐ **EVERY NEW ROW LANDED IN A WAVE THAT ALREADY OWNED ITS STAGE.** G-37/G-38/G-36 → **W3**, which
+   already owned the fabric order · G-42 → **W2**, which already opens `epochAxis.js` under §251.4b ·
+   G-35 → **W6**, which already owned the four dossier fields · G-40 and G-34's ruling → **W0**,
+   which already owned the instrument and verification debt · G-39 → a **test that blocks work
+   rather than scheduling any**. ⭐ **This is not luck: §263.5 observed that three of the top four
+   FTG adoptions land on S7, S18 and S16, which are the stages this document had already named as
+   its weakest — and the wave plan was already ordered to reach them.**
+3. ⛔ **THE ONE ITEM THAT COULD HAVE FORCED A MOVE WAS RULED THE OTHER WAY.** §264.2 considered
+   pulling the §12 immersion suite ahead of the substrate and **ruled that dependency order STANDS**
+   (§0.5). *That was the only live threat to this ordering and it was adjudicated, not avoided.*
+
+⚠⚠ **TWO ORDERING CONSEQUENCES THE FOLD DID SURFACE, AND NEITHER MOVES A WAVE — BOTH ARE RECORDED
+HERE SO THEY ARE NOT DISCOVERED MID-BUILD:**
+**(a) G-35 SUPERSEDES G-25's LANDMARK BUDGET AS A *SOURCE*, AND THEY SIT IN DIFFERENT WAVES.** W5
+measures landmark compliance against the per-tier **band**; W6 replaces the **derivation** behind it
+with the roster. They are not in conflict — but **W6 now owes a NON-REGRESSION check** so the
+derived roster holds or improves W5's measured result rather than quietly re-opening it. *Added to
+W6's exit criteria.*
+**(b) G-36's QUEUE AND ITS RANK SEEDING SPLIT ACROSS W3 AND W5.** The growth queue is built in W3
+from the anchors that exist there; G-1's approach-road **ranks** complete it in W5, which is where
+the unequal-ribbon criterion already lives. ⭐ **Building the queue before the ranks exist is correct
+and is NOT rework** — the seed is replaced, the machinery is not.
+
 ---
 
 ### W0 · THE VERIFICATION DEBT — before any new build
@@ -2691,9 +3559,12 @@ outstanding obligations from the last two waves and one is housekeeping the conf
 |---|---|
 | **LOOK AT THE PLATES** | 32 plates in `mf-proto-out/arch2/`, unviewed. Ten walled leaves' walls changed shape; the ditch changed ring |
 | ✅ ~~characterize `waterViolations`~~ | **DONE — lane MF-W1. §252.3b is discharged**; publish per §0.3a's authoritative set, as ONE movement with TWO named halves |
-| ⭐ **G-34 THE EXEMPTION RULING** | rule the three §205A structural gaps **together** (they are one question), plus the dead-`anchorKey` mill and the coast-vs-river street arm. ⚠ **It needs a RULING more than a lane** — the cure is proved, costed and pixel-free |
-| **G-33 the stale figures** | metropolis `GRAIN_BAND` → 80–120 with `GRAIN_SEAMS` re-derived (C-2); thorp/hamlet rungs labelled UNMEASURED (C-3); paper warmth → 37 (C-1) |
+| ⭐ **G-34 — ⟦FOLD §264⟧ NO LONGER A RULING, NOW A BUILD** | ✅ **§262.2 RULED IT: three build-fixes, one bug-fix, one named exemption.** (a) one predicate, one home + a check that reds on a second spelling · (b) **build the bridge** for `rank === 'passage'` · (c) **fix the loop** so a street meeting a meander twice gets two bridges · (d) land the dead-`anchorKey` mill cure · (e) name the **coast-vs-river** exemption in the census. ⚠⚠ **THE CURE IS NOT TO CONVICT LESS** |
+| **G-33 the stale figures** | metropolis `GRAIN_BAND` → 80–120 with `GRAIN_SEAMS` re-derived (C-2); thorp/hamlet rungs labelled UNMEASURED — ⟦FOLD §264⟧ **and §257.3(b) has now ruled they MAY remain generation inputs**, so the label is `UNVALIDATED-BY-INSTRUMENT` and not a deletion (C-3); paper warmth → 37 (C-1) |
 | ⭐ **THE DISTINCT-SITE TOTAL** | one line in the harness: publish the **10-world** total beside every 16-leaf total (§0.3b) |
+| ⟦FOLD §264⟧ ⛔⛔ **G-40 · THE THREE MISSING INSTRUMENTS** | **(i) TOWER SPACING** — spacing CV along the circuit + towers per unit circuit length. **(ii) PER-EPOCH MATERIAL / TONE CONTRAST** — a between-region fill-tone separation, not a whole-plate statistic. **(iii) ⟦lane proposal, vetoable⟧ FOOTPRINT RECTANGULARITY** — the building-scale analogue of `block_solidity_p50`, absent from the entire register. ⭐ **§263.6a ordered (i) and (ii) and put them here.** ⚠ *Each GATES a ranked mechanism, and they are the difference between an argued rule and an unmeasured habit* |
+| ⟦FOLD §264⟧ ⚠⚠ **G-39 · THE CHAOS/ORTHOGONALITY TEST — RUN IT HERE, BECAUSE IT GATES W3** | §261.3 requires the hypothesis to be **tested against the corpus before it drives a rework**, and W3 is the wave that would do the rework. **Arm 1 (large scale) is runnable today** on `block_solidity_p50` · `block_elongation_p50/p90` · `orientation_entropy` · `orientation_order_phi`. **Arm 2 (small scale) runs the moment G-40(iii) exists** — which is why the instrument and the test belong in the same wave. **The four-outcome decision rule is written in §4.1c and was written BEFORE the numbers so it cannot be fitted afterwards** |
+| ⟦FOLD §264⟧ ⭐ **THE DERIVED-vs-DRAWN GRAIN CENSUS** | §257.3(c) ordered it and this document had never recorded it: **derived grain and drawn grain must agree within a stated tolerance**, so the loss between intent and output can never again be invisible. The metropolis derives **≈113** and draws **70**. `MFB8-runprobe.py` already separates what RESOLVES from what EXISTS — **the census is the tolerance around it** |
 
 **EXIT CRITERIA (measurements):**
 1. **32 of 32 plates viewed, each with a written verdict**, and the three named judgments
@@ -2706,25 +3577,60 @@ outstanding obligations from the last two waves and one is housekeeping the conf
    direction explained** (`laneMFW1-receipt.md` §2). **The remaining obligation is publication
    discipline, not measurement:** the landing quotes §0.3a's set and states the movement as **two
    named halves**, never as `100 → 165`.
-3. **G-34 ruled in ONE place**, with the resulting predicate exported from one home and a check
-   that reds when a second module re-spells it. **Measurement: the unexemptable share falls from
-   72% of street violations to a stated number, and the rule that forgives is written down.**
-   ⚠ *The cure is not to convict less.*
+3. ⟦FOLD §264⟧ **G-34's FIVE ARMS LANDED AS §262.2 RULED THEM, EACH WITH ITS OWN MEASUREMENT.**
+   **(a)** one exported predicate with a check that **reds** when a second module re-spells the same
+   geometric question — *and the check must be non-vacuous: plant a second spelling and it must
+   convict.* **(b)** every `rank === 'passage'` water crossing carries a **passage-scale crossing
+   structure**; zero forgiven passages. **(c)** a street meeting one channel **twice** produces
+   **two** bridges; zero channels with an untaken second crossing. **(d)** the dead-`anchorKey` mill
+   cure landed. **(e)** the coast-vs-river exemption **named in the census output**, never a silent
+   pass, and keyed to bankside adjacency vs channel transit.
+   ⭐ **The headline measurement: the unexemptable share falls from 72% of street violations to a
+   stated number — and the receipt must attribute the fall to CROSSINGS GAINED, arm by arm.**
+   ⚠⚠ *The cure is not to convict less. A fall produced by a widened exemption is a failed wave
+   wearing a passing number.*
 4. **The harness publishes a distinct-site (10-world) total beside every 16-leaf total**, and no
    figure in the wave's receipt is quoted corpus-wide without it.
 5. **The grain sweep re-run after the re-pin: ≥11,765 populations, ZERO decreases, every tier
    seam continuous to 2 d.p.** — the same proof that made the original derivation safe.
 6. **Suite green, determinism 10/10, all four drawn censuses 0, 96/96 under ceiling** — the
-   standing floor, re-quoted at the tip. ⭐ **And the mill cure, if ruled in, must re-quote the
-   run-1 parchment SHAs as BYTE-IDENTICAL — it was proved pixel-free and that proof is the
-   receipt.**
+   standing floor, re-quoted at the tip. ⭐ **And the mill cure — ⟦FOLD §264⟧ now RULED IN at
+   §262.2(d) — must re-quote the run-1 parchment SHAs as BYTE-IDENTICAL** on town / city /
+   highwater / fjord. ⚠ *It was proved pixel-free against an earlier tree; that proof is the
+   receipt only if it is re-taken against the tree that actually lands.*
+7. ⟦FOLD §264⟧ **THE THREE INSTRUMENTS READ A NUMBER ON THE CORPUS, NOT ON OUR OUTPUT** — (i)
+   tower-spacing CV and towers-per-unit-length over the walled studiable plates; (ii) a per-epoch
+   fill-tone separation over the within-plate epoch pairs the compendiums already isolated
+   (hf26, hf274, hf239, hf347); (iii) footprint rectangularity over the drawn masses. ⚠⚠ **A
+   number that cannot be produced is reported as ⛔ NO INSTRUMENT and the mechanism it gates stays
+   out of the ranking — it may NEVER read as a pass** (§249.2's fifth verdict).
+8. ⟦FOLD §264⟧ **THE DERIVED-vs-DRAWN GRAIN CENSUS RUNS AND PUBLISHES A TOLERANCE PER TIER**, with
+   the metropolis's own gap (**≈113 derived vs 70 drawn**) as its first datum. ⭐ **The census is
+   the point, not the number: after this the loss between intent and output has a home and can
+   never again be discovered as a surprise.**
+9. ⟦FOLD §264⟧ ⚠⚠ **G-39 RETURNS A VERDICT, AND THE VERDICT IS A ROW IN THE RECEIPT — NOT A
+   FEELING.** **Arm 1** publishes `block_solidity_p50`, `block_elongation_p50/p90`,
+   `orientation_entropy` and `orientation_order_phi` over the studiable frame. **Arm 2** publishes
+   footprint rectangularity if G-40(iii) built, and ⛔ **reports NO INSTRUMENT if it did not.**
+   **§4.1c's four-outcome decision rule is then applied and the outcome named.**
+   ⭐ **The pass condition is that a verdict exists, not that the hypothesis is supported** — *a
+   refutation is a result and unblocks W3 exactly as cleanly as a confirmation does.*
+   ⛔ **W3 may not cite "chaos belongs at the large scale" as a justification until this row
+   exists.** ⚠ *And if arm 2 reports NO INSTRUMENT, the hypothesis stays a hypothesis and drives
+   nothing — G-37 and G-38 proceed on their own legs, which they have.*
+10. ⟦FOLD §264⟧ ⚠ **NOTHING IN THIS WAVE MOVES A PIXEL EXCEPT WHERE A DECLARED SHIFT SAYS IT DOES**
+   — G-33's three figures and G-34's five arms are the *whole* list, each declared with its cause.
+   **A W0 receipt that reports an unexplained render change has found something and must stop.**
 
 ---
 
 ### W1 · THE SUBSTRATE — the biggest unblocker in the program (G-2, G-4)
 
 **Build the relief field, the land-form classification and the `buildable` refusal mask; derive
-the water bearing from it.** Nothing else in this wave.
+the water bearing from it.** ⟦FOLD §264⟧ **Plus one small folded item that is the same geometry
+seen from the wet side: the TWO-SCALE COASTLINE — a large shape plus a detail shape, with the
+detail term ATTENUATED where the settlement works its waterfront** (S4's ⟦FOLD §264⟧ block).
+**Nothing else in this wave.**
 
 ⭐ **Why first:** it is the only item that unblocks another *ruled* law (§214's terrain arm), and
 six of CONTEXT's eight traces are hit by its absence. Everything terrain-shaped — the slope
@@ -2745,6 +3651,12 @@ grammar, the wedge block — is stalled behind it.
    — §9.5b's acceptance test in its own words: **terrain drama invisible = acceptance FAIL.**
 5. Determinism 10/10; ceilings 96/96; the substrate adds no cycle (SCC 0 non-trivial at both
    granularities).
+6. ⟦FOLD §264⟧ **The coastline carries two measurable scales and the detail term is measurably
+   damped at the worked waterfront** — a coastal leaf's shoreline sinuosity **falls** where the
+   fabric meets it and **holds** away from it, and ⭐ **the THROUGH leaves show bank asymmetry near
+   70/30 as a CONSEQUENCE of that damping rather than as a rule** (ATLAS banned prior #10; §2.5).
+   ⚠ **Counterfactual: remove the attenuation and the asymmetry must weaken** — otherwise the
+   asymmetry is coming from somewhere else and the mechanism is not doing the work.
 
 ---
 
@@ -2755,12 +3667,32 @@ are ONE piece of work. §250.5: without `circuitDemotion`, every new ring ERASES
 epoch model was adopted to express.** Landing any of these three alone ships a defect and pays a
 declared shift twice.
 
+⟦FOLD §264⟧ ⛔⛔ **AND A THIRD RULING JOINS THEM, WHICH IS WHY THIS WAVE OPENS `epochAxis.js`
+ANYWAY: §257.3(a) — EPOCHS ARE FABRIC EPOCHS, NOT CIRCUIT EPOCHS (G-42).** The wall becomes an
+**event within** the epoch sequence rather than its definition. **It lands here because it is the
+same file and the same declared shift**, and because leaving it to W4 would have that wave build
+per-epoch machinery that **six of the sixteen exemplar leaves cannot express.**
+
 **Contents:** the nine run types with their causes and per-run parameters · the per-run tower
 policy (`none` on terrain-surrender and water runs; `clustered` facing approach; `sparse`
-elsewhere; **seeded-irregular** positions; tower as a **TYPE**) · the wall-side street as a
-**per-run** derivation · **§200's clearance census re-keyed to exempt by RUN TYPE** ·
-`circuitDemotion`'s five-rung fate ladder and its transformation table · §214's wall/iconography
-arm (masonry band, gatehouses as structures, palisade tick-rows, ditch grammar).
+elsewhere; tower as a **TYPE**) · the wall-side street as a **per-run** derivation · **§200's
+clearance census re-keyed to exempt by RUN TYPE** · `circuitDemotion`'s five-rung fate ladder and
+its transformation table · §214's wall/iconography arm (masonry band, gatehouses as structures,
+palisade tick-rows, ditch grammar) · ⟦FOLD §264⟧ **G-42's fabric-epoch derivation** · ⟦FOLD §264⟧
+**the defensive seat guaranteed edge-adjacent and outside the circuit BY CONSTRUCTION** (⛔ *their
+distance-rank selection is refused — the site comes from terrain and dossier truth; what transfers
+is that a structural guarantee beats a scoring preference*).
+
+⟦FOLD §264⟧ ⚠⚠ **ONE CONTENT ITEM CHANGED ITS MEANING IN THIS FOLD AND A BUILDER MUST NOT MISS IT:
+TOWER POSITIONS ARE NO LONGER "SEEDED-IRREGULAR".** §259.3 ruled **place by STRUCTURE — the corners
+that exist — and let the spacing be whatever the structure gives** (§3.4 #7's re-read, register
+entry **SUB-3**). ⭐ *Seeded irregularity is still a dial; the corner set is a consequence.* Our wall
+is a **district partition** (§232), so its corners are already dossier-caused and the rhythm varies
+**for a reason**.
+⛔ **BUT SUB-3 IS HELD UNTIL W0's G-40(i) READS A NUMBER.** §258.2 forbids a substitution that
+cannot name its preserved signature, and there is **no tower-spacing metric in the register**. **If
+W0 fails to produce the instrument, this wave keeps the seeded-irregular policy and says so** —
+it does **not** adopt an unmeasured mechanism because two prior-art products agree.
 
 **EXIT CRITERIA (measurements):**
 1. **Every circuit is an enumerated chain: `N ≥ 3` runs on every walled leaf, each carrying a
@@ -2782,6 +3714,23 @@ arm (masonry band, gatehouses as structures, palisade tick-rows, ditch grammar).
    **0**; §232 straddlers stay **0**.
 7. **Chair eyes-on at 3000 px on a two-ring leaf**, judging one question: *can a reader see that
    this town had an older wall?*
+8. ⟦FOLD §264⟧ ⭐⭐ **EVERY LEAF CARRIES ITS MEASURED FABRIC-EPOCH COUNT, WALLED OR NOT, AND THE
+   UNWALLED LEAVES STOP READING 1 BY CONSTRUCTION** (G-42). Measurement: **epoch count per leaf
+   lands inside PLAN §6.1's measured ladder — thorp/hamlet 1 · village 1–2 · town 2–3 · city 2–4 ·
+   metropolis 3–4, ⛔ NEVER more than 4** — and **at least two unwalled leaves carry ≥2 epochs**.
+   ⚠ **Counterfactuals, both required: (i) an epoch count derived from a population knob rather
+   than from history must RED** (§240.2 — *derived, never a knob*); **(ii) a fifth epoch must RED**.
+   ⭐ *And the circuit ladder must now be provably a SUBSET of the epoch ladder — zero circuits
+   without an epoch, and epochs without circuits are expected rather than exceptional.*
+9. ⟦FOLD §264⟧ **TOWERS: EITHER the corner rule lands WITH G-40(i)'s number quoted, OR the wave
+   states in its receipt that the instrument did not arrive and the seeded-irregular policy stands.**
+   ⛔ **There is no third option, and "it looks right" is not one of them** — that is precisely the
+   condition §263.6a named as letting a plausible idea become an unmeasured habit.
+10. ⟦FOLD §264⟧ **The defensive seat is edge-adjacent and outside the circuit BY CONSTRUCTION on
+   every leaf that has one** — measured as a structural property (zero floating citadels, zero
+   citadels not touching the circuit or the edge), **not as a scoring preference that usually wins**.
+   ⚠ *A guarantee that is really a strong preference passes on today's exemplars and fails on the
+   first awkward terrain.*
 
 ⚠ **AND THE METROPOLIS'S THIRD CIRCUIT IS THE MEASURED PRIZE OF THIS WAVE.** §252.3a: the cap
 lifts **with** the run chain, then **by measurement under §217** — so the wave's own receipt owes
@@ -2795,11 +3744,29 @@ primitives of measured headroom, and an owner ruling if it does not fit.
 **Nothing in this wave needs a new dossier field or a new substrate. It is a reordering of the
 pipeline we already have, and it is where the plate starts reading like the corpus.**
 
+⟦FOLD §264⟧ ⭐⭐ **AND THIS IS WHERE THE PRIOR-ART FOLD CONCENTRATES: FIVE OF THE EIGHT NEW LEDGER
+ROWS LAND HERE**, because S7 is this document's self-declared sharpest gap and §263.5 found that
+three of the top four FTG adoptions land on the stages it already named as weakest.
+
 **Contents:** attachment-not-intersection street generation with the `junctionMix` bands and φ as
 a metric with its ceiling · blocks as the **planar faces** of the street graph (§239.1) with the
 three shape bands · **the frontage line as a first-class object per block face** · the plot
 series' clumped run-length rhythm, amalgamation/subdivision event and **corner plot** ·
-`backlandCore` as a derived object, with courts classified against §209.4's band.
+`backlandCore` as a derived object, with courts classified against §209.4's band ·
+⟦FOLD §264⟧ **the growth queue, priority-ordered** (G-36 — seeded here from organism weight and
+gates; G-1's road ranks complete it in W5) · ⟦FOLD §264⟧ **snap-and-lengthen cleanup, DEGREE-AWARE**
+· ⟦FOLD §264⟧ **ONE subdivision routine driven by G-38's four dossier scalars** — *not seven
+district generators* · ⟦FOLD §264⟧ **subdivide to the PLOT, then FIT the footprint from a
+rectilinear vocabulary** (G-37, SUB-2), with the **randomised STOP THRESHOLD** rather than a sampled
+size distribution · ⟦FOLD §264⟧ **per-edge setbacks as the street-hierarchy mechanism** (SUB-1) ·
+⟦FOLD §264⟧ **subdivide-to-make-room rather than rejecting a placement** when a gate road needs a
+path · ⟦FOLD §264⟧ **road/water typed interaction** — bridge a river, terminate at an ocean (the
+generation-side half of §262.2's arm (e)).
+
+⚠⚠ **THE ONE STRUCTURAL DECISION IN THIS WAVE THAT CANNOT BE DEFERRED, AND IT IS EASY TO WALK PAST
+BECAUSE NOTHING BLOCKS ON IT: G-38's FOUR AXES MUST BE THE SHAPE OF THE ROUTINE FROM THE FIRST LINE.**
+Seven district generators all work, all pass, and make the parameterisation unaffordable to retrofit.
+**W4 supplies the per-epoch and per-wealth VALUES; W3 must supply the AXES.**
 
 **EXIT CRITERIA (measurements):**
 1. **`X:T ≤ 0.09` and `deg≥5 share ≤ 0.01` on every leaf**, with `γ ∈ [0.39, 0.52]` and mean
@@ -2823,6 +3790,32 @@ series' clumped run-length rhythm, amalgamation/subdivision event and **corner p
 8. **Grain re-measured with fabric-derived windows** (`MFB8-plates.mjs`, never hand-set) —
    **town and city verdicts must STAND**, and village must move toward its band or the miss must
    be attributed.
+9. ⟦FOLD §264⟧ ⭐⭐ **THERE IS EXACTLY *ONE* SUBDIVISION ROUTINE, AND IT IS PROVED BY A SCAN, NOT BY
+   A CLAIM** (G-38). Measurement: **a source scan finds ONE routine and zero per-district
+   variants**, and **each of the four axes moves a named metric when perturbed** — size floor →
+   `block_area_frac_p50`; grid chaos → `orientation_order_phi` / `orientation_entropy`; size
+   variation → `block_area_cv` and `block_area_p90_over_p10`; emptiness → `backland_green_p50`.
+   ⚠ **Non-vacuity: hold a district's dossier facts and the four scalars must be byte-identical;
+   change wealth alone and only the size floor may move.** ⛔ *An axis that moves nothing measurable
+   is decoration wearing a parameter's name.*
+10. ⟦FOLD §264⟧ ⭐ **NO FOOTPRINT IS A WEDGE, AND IT IS TRUE BY CONSTRUCTION RATHER THAN BY A
+   FILTER** (G-37, SUB-2). Measurement: **every footprint traces to a member of the rectilinear
+   vocabulary**, zero footprints minted as subdivision remnants; **block solidity median 0.60–0.86
+   and elongation median 1.6–3.0 hold**; and ⭐ **the alley/sliver floor (street width p25) moves
+   from b8's 0.16 / 0.09 / 0.09 TOWARD 0.02–0.08** — *this is the fold's sharpest single prediction
+   and the number that falsifies it.* ⚠ **Counterfactual: feed the fitter a wedge-shaped plot and it
+   must place a smaller lawful shape with the residue as yard, never emit the wedge.**
+11. ⟦FOLD §264⟧ **THE SNAP DID NOT MINT JUNCTIONS.** With snap-and-lengthen in place,
+   **`X_over_TY` stays ≤ 0.09 and `star_share` stays ≤ 0.01 on every leaf.** ⚠ **The
+   counterfactual is the point: disable the degree guard and the census must RED** — otherwise the
+   guard is not doing work and the bands are passing for some other reason.
+12. ⟦FOLD §264⟧ **STREET WIDTH IS THE SUM OF TWO FACING SETBACKS, AND IT IS SHOWN** (SUB-1):
+   perturb what an edge faces and the visible channel width moves; **`street_share_of_hull` lands in
+   band**; and ⭐ **§239's wall-side street appears on the wall-facing runs WITHOUT a wall-side-street
+   rule in the code** — *the substitution's own proof is that the special case disappeared.*
+13. ⟦FOLD §264⟧ **A street meeting water gets a TYPED interaction** — a crossing structure on a
+   channel, a termination at open water — and **the street-over-water census reads the improvement
+   G-34 predicted**, now from the generation side rather than the exemption side.
 
 ---
 
@@ -2830,11 +3823,20 @@ series' clumped run-length rhythm, amalgamation/subdivision event and **corner p
 
 **The epoch axis is built and inert. This wave makes it visible.**
 
+⟦FOLD §264⟧ ⭐ **AND W2's G-42 IS WHAT MAKES THIS WAVE TESTABLE AT ALL BELOW THE WALL LINE.** Until
+epochs became **fabric** epochs, six of the sixteen exemplar leaves carried exactly one epoch by
+construction and **every criterion below was untestable on them.**
+
 **Contents:** per-epoch **grain**, **φ + bearing basis** and **attachment mode** ·
 `plannedOccupancy` with unfilled plots in the ghost register · wealth driving **geometry**
 (grain, backland extinction, dead-end rate) · `intramuralVacancy` · the bearing-preserving
 dead-block → field handoff · the four-stage decay ladder and one shared `ghostInk` · the
-**label-free district-legibility census**.
+**label-free district-legibility census** · ⟦FOLD §264⟧ **the VALUES behind G-38's four axes** —
+W3 built the axes, this wave makes them vary by epoch age and ward wealth · ⟦FOLD §264⟧
+**SELECTIVE REGULARITY: regularise the civic core and leave the edge raw**, so regularity becomes a
+consequence of civic importance rather than a global dial (⚠ **magnitude from the corpus, never
+their numbers**) · ⟦FOLD §264⟧ **the minimum-district-area merge**, its threshold derived from the
+tier's own **legible-districts** band.
 
 **EXIT CRITERIA (measurements):**
 1. **On every multi-epoch leaf, the newer epoch measures 1.8×–2.9× COARSER in grain than the
@@ -2853,6 +3855,19 @@ dead-block → field handoff · the four-stage decay ladder and one shared `ghos
    the surrounding countryside's field bearings — the six-signal demotion discriminator readable
    at glance range.
 7. **The decay ladder draws four discrete stages, not one** (b6 draws 1 of 4).
+8. ⟦FOLD §264⟧ **LEGIBLE DISTRICT COUNTS LAND IN BAND BECAUSE SMALL ORGANISMS MERGED, NOT BECAUSE
+   FEWER WERE MINTED**: town **3–6** · city **5–9** · metropolis **8–14**, with the merge threshold
+   **derived from the tier's own band** rather than set. ⚠⚠ **AND THE GUARD THAT MAKES THE MERGE
+   SAFE: `block_area_p90_over_p10` must stay ≥ 6.** *Merging away the smallest districts must not
+   flatten the block-size spread the corpus demands — the spread IS the information (§2.4).*
+   ⭐ *Legibility saturates well below enumeration; hf331 carries a dozen named things and reads as
+   four districts.*
+9. ⟦FOLD §264⟧ **REGULARITY IS A GRADIENT TOWARD THE CIVIC CORE, MEASURED WITHIN ONE PLATE** —
+   `orientation_order_phi` and `block_solidity_p50` / `block_circularity_p50` rise toward the core
+   and fall at the edge, **on the same leaf**, and the magnitude comes from the corpus's own
+   within-plate separations (7.9× / 9.5× / 2.4×), never from a prior-art constant. ⛔ **The φ > 0.8
+   ceiling still binds at the core** — *the most rigidly planned quarter in the studiable corpus
+   measures 0.652, and a planned quarter above 0.8 is drawn wrong.*
 
 ---
 
@@ -2869,7 +3884,21 @@ road rungs as **five distinct primitives** · dispersal-vs-nucleation derived (�
 furniture and the day's-travel rule · the field/fabric junction band and the intake line · edge
 kind per bearing with **unequal** ribbon extents · gate ranking for growth allocation · the
 extramural distance ladder's uncovered bands and the single-arc noxious rule · street width from
-graph load (now that the region supplies the gate weights) · the landmark budget.
+graph load (now that the region supplies the gate weights) · the landmark budget ·
+⟦FOLD §264⟧ **enclosure-free fringe lots** — lots with invisible edges that need no surrounding
+roads, so a farmstead, a keeper's cottage or a noxious yard can stand **without a block around it**
+· ⟦FOLD §264⟧ **outskirts thinning keyed to road proximity and enclosure** (⭐ *the thing that makes
+an UNWALLED settlement look intentional rather than truncated*) · ⟦FOLD §264⟧ **the hinterland
+generated from the same lot substrate as the town, clustered by kind** (⚠ **the weakest (c) in the
+fold — it must not be allowed to substitute for T-24's six ground primitives, which are the real fix
+here**) · ⟦FOLD §264⟧ **monumental buildings as a separate two-axis rule** rather than as promoted
+ordinary ones · ⟦FOLD §264⟧ **G-36's queue completed** — the region's road **ranks** replace the
+W3 seed, which is what makes the unequal-ribbon criterion measurable.
+
+⚠⚠ ⟦FOLD §264⟧ **AND ONE HANDOFF THIS WAVE MUST NOT ASSUME IS PERMANENT: THE LANDMARK BUDGET IS A
+BAND HERE AND STOPS BEING THE SOURCE IN W6.** G-35's dependency-graph roster replaces the per-tier
+budget as the **derivation**; the band survives as its **census**. **Build to the band, and expect
+W6 to owe a non-regression check against whatever this wave measures.**
 
 **EXIT CRITERIA (measurements):**
 1. **Field parcel area relative to settlement extent lands within a stated factor of the corpus's**
@@ -2888,6 +3917,18 @@ graph load (now that the region supplies the gate weights) · the landmark budge
    5–12:1** — ⭐ *fewer, bigger.*
 7. **Every approach road's bearing traces to a named neighbour or resource; zero invented
    bearings.**
+8. ⟦FOLD §264⟧ ⭐ **THE FRINGE IS BUILT FROM ENCLOSURE-FREE LOTS AND THE DEAD-END SHARE RISES
+   BECAUSE OF IT.** Measurement: **zero roads generated purely to enclose a fringe lot** (every
+   fringe road traces to a route, not to an enclosure requirement), and **`deadend_share` moves UP
+   toward the corpus's fringe values while staying inside 0.110–0.391**. ⚠ **This is the one
+   criterion in the wave where moving a metric UP is the pass** — *our alternative, growing roads to
+   close every fringe lot, would push us to the bottom of a band we should be spanning.*
+9. ⟦FOLD §264⟧ **THE HINTERLAND IS DERIVED, AND ITS OWN WEAKNESS IS STATED IN THE RECEIPT.**
+   `hull_frac_of_frame` and `green_excess` land in band **and are traceable to the lot substrate**
+   rather than to a frame constant. ⚠⚠ **The receipt must say plainly whether the surround reads as
+   painterly or as polygon fill** — §263's own verdict on this mechanism is that its direction
+   argument is thin, and **a wave that reports it as a win without looking has spent a flagged
+   weakness as if it were evidence.**
 
 ---
 
@@ -2901,7 +3942,20 @@ micro-districts and custodian dwellings · the `jurisdictional` doubling flag ·
 axis, the directed centreline, flow-ordered chains and the domestic-water ladder · the dirt
 vector whole (clean take above → process → plume below → muck gate) · centre typology and
 `secondAuthority ⇒ secondCentre` · footprint grammar by material **to whatever depth G-30's owner
-ruling permits**.
+ruling permits** · ⟦FOLD §264⟧ ⭐⭐⭐ **THE ROSTER AS A RESOURCE DEPENDENCY GRAPH** (G-35) —
+nodes are resources and services, edges are **ratios with stated denominators**, and **producers
+fall back to importers where the land cannot support them** · ⟦FOLD §264⟧ **the ordered,
+size-truncated claim list as the consumption MECHANISM** (⛔ *their list itself is refused; only the
+greedy-consume-then-truncate shape transfers*) · ⟦FOLD §264⟧ **a pin asserting that every
+order-dependent relational rule actually HAD candidates** — *their half-dead affinity rule converted
+into a counterfactual for us.*
+
+⭐⭐ ⟦FOLD §264⟧ **AND THE THREE-LAYER SHAPE THIS WAVE FINALLY COMPLETES, WHICH IS WHY G-35 BELONGS
+HERE RATHER THAN ANYWHERE ELSE:** the roster answers ***what exists at all***, §161n's scale ladder
+answers ***how big***, and the siting profiles answer ***where***. **Only the middle layer was ever
+built.** ⭐ *This is also the wave in which `supplyChains` — a first-class dossier field with no
+spatial consumer today — becomes the thing that decides both which buildings exist AND where they
+stand in a flow-ordered chain.*
 
 **EXIT CRITERIA (measurements):**
 1. **Zero violated prohibited adjacencies across the corpus**, with a planted violation (a tannery
@@ -2918,6 +3972,26 @@ ruling permits**.
 6. **≥2 distinct footprint grammars exist in the corpus's leaves and produce measurably different
    packing** (alley-width floor, corner radius, party-wall behaviour) **from the same population
    and trade** — the hf327 test.
+7. ⟦FOLD §264⟧ ⭐⭐⭐ **EVERY BUILDING IN THE ROSTER TRACES TO A GRAPH EDGE WITH A STATED
+   DENOMINATOR, AND THERE IS NO FREE SCALAR ANYWHERE IN IT** (G-35). Measurement: **zero roster
+   entries with cause `budget` or `tier-default`**; every count is a division whose numerator and
+   denominator are both named. ⚠ **Non-vacuity, and it is the criterion that proves the graph is a
+   graph rather than a list: perturb ONE input — remove the farmland — and the roster must
+   RESTRUCTURE, not merely shrink.** ⭐ **The producer→importer fallback is the specific thing to
+   pin: a settlement that cannot MAKE a thing must acquire a TRADE in it**, so a landlocked fixture
+   and a port fixture with identical populations produce **structurally different rosters from one
+   graph.**
+8. ⟦FOLD §264⟧ ⚠⚠ **THE NON-REGRESSION CHECK W5's HANDOFF OWES (§5.0's consequence (a)):** with the roster now the
+   **source**, **landmark counts must still land in 3–7 / 4–9 / 9+ and the landmark:house footprint
+   ratio must be AT OR ABOVE what W5 measured.** ⭐ **The fold's prediction is that both IMPROVE —
+   a supply-chain roster is sparse in monuments by construction, so notable COUNT falls and mean
+   notable SIZE rises, which is the direction our measured ≈2:1-against-5–6:1 miss demands.**
+   ⛔ **If the roster makes it worse, the roster is wrong — not the band.** *That prediction is
+   this wave's falsifiable claim and it must be reported either way.*
+9. ⟦FOLD §264⟧ **NO AUTHORED CONTENT CROSSED THE LICENCE BOUNDARY.** A scan shows **zero
+   prior-art node names, ratios or building pools** in the roster's data; **every node and every
+   ratio derives from our own dossier fields.** ⭐ *We took the shape — nodes are resources, edges
+   are ratios with denominators, producers fall back to importers — and nothing else.*
 
 ---
 
@@ -2942,6 +4016,13 @@ brief and is the largest remaining distance to §207's absolute bar.
    (its 6.6 px sample windows are dominated by ground wash at the new grain).
 9. **All of it produced as geometry or tiled patterns, never as raster filters** — the §9
    forbidden-construct scan stays clean and **PDF projection survives**.
+10. ⟦FOLD §264⟧ **THE METRIC UNIT ANCHOR LANDS WITH §161i's TRUE MEASURE, AND ITS PASS CONDITION IS
+   THAT NOTHING MOVES.** Every dimension becomes a real-world quantity — a frontage in metres, not
+   in view units — which is what makes future parameters derivable rather than tuned. ⚠ **(c) is
+   NEUTRAL BY CONSTRUCTION and the study says so rather than claiming a gain: a unit anchor cannot
+   move a ratio metric.** ⭐ **So the measurement is a NULL: every band in §2 reads identically
+   before and after, and the scale bar ships TRUE.** *A "win" reported here would mean the
+   re-expression changed something it had no business changing.*
 
 ---
 
@@ -2980,6 +4061,26 @@ it is a rendering of work already done.
 - **After W6** the settlement has a **plausible relationship to its world** — which is the exact
   deficiency §246 was asked about and CONTEXT §14 answered.
 - **After W7** it stops reading as vector art.
+
+⟦FOLD §264⟧ ⭐⭐ **AND WHAT THE FOLD ADDS TO THAT LIST, STATED IN THE SAME PLAIN FORM:**
+
+- **After W0** three mechanisms that were about to be adopted on taste alone can be **checked
+  against a number** — and one of them (towers) is held out of W2 if the number does not arrive.
+- **After W2** an **unwalled village can have two vintages**, which it could not before at any
+  price, because an epoch stopped meaning a wall.
+- **After W3** there is **ONE subdivision routine with four dossier scalars** instead of a family of
+  district generators — and **no footprint is a wedge, by construction rather than by a filter.**
+- **After W6** the settlement's **roster is a division rather than a budget**: a landlocked town and
+  a port with identical populations come out **structurally different from one graph**, and *"why
+  does this town have three bakers"* has an answer.
+
+⚠ **AND THE ONE THING THE ORDER DOES NOT BUY, SAID PLAINLY BECAUSE §264 RAISED IT: IMMERSION DOES
+NOT ARRIVE EARLY.** §0.5 names what each wave shows and feels, and the honest reading of that table
+is that **W0 shows almost nothing and W1–W2 show structure before beauty.** The chair's ruling is
+that this is correct — *immersion built on wrong geometry is rebuilt, and the declared shift is paid
+twice* — but the cost is real and the owner should adjudicate it with the cost visible rather than
+hidden. **⭐ The mitigating fact, and it is a large one: §12's truth layer is ALREADY BUILT and is
+already the place we beat the corpus. What is deferred is its subject, not the suite.**
 
 ⚠ **AND THE HONEST CAVEAT, KEPT ON THE RECORD FROM §247.4: on structure and truth the
 "better than the leaders" claim is within reach and partly evidenced — town and city grain in
@@ -3022,10 +4123,17 @@ and is in G-15; the desire-path finding specifically is gone.)*
 
 ## APPENDIX B · CHAIR QUESTIONS — holes this synthesis found, raised rather than filled
 
-**Six questions. Three are NEW — nobody in §150–§253 has ruled on them and this synthesis
+**Six questions. Three were NEW — nobody in §150–§253 had ruled on them and this synthesis
 surfaced them by putting the studies beside the code. Three are CARRIED — already raised by a
 lane and still open, restated here because a build sheet that omits them will run into them.**
-⛔ **None is answered in this document.**
+
+⟦FOLD §264⟧ ⭐⭐ **AND THE FIRST THING THIS FOLD FOUND, WHICH IS THE §257.2 CLASS BITING THE VERY
+DOCUMENT THAT NAMED IT: ALL THREE NEW QUESTIONS WERE RULED AT §257.3 — IN THE SAME LEDGER ROW THAT
+COLLECTED THIS SPECIFICATION — AND THIS APPENDIX WENT ON CARRYING THEM AS OPEN.** *A ruling made
+after a document is folded does not reach the document.* **Q-1, Q-2 and Q-3 now carry their rulings.
+Q-4, Q-5 and Q-6 remain genuinely open**, and nothing else in this appendix is answered here.
+⚠ **Q-2's ruling is not a footnote — it is a wave-nine-first-order defect (G-42) that would
+otherwise have been discovered in W4, after the machinery it breaks had been built.**
 
 ### Q-1 · NEW · May a WITHDRAWN grading target remain a GENERATION input?
 
@@ -3050,6 +4158,14 @@ consequence above village and the household count's at and below it.*
 **RECOMMENDATION (vetoable): (a) now, (b) queued.** ⚠ **But the chair must say so, because right
 now the code silently spends a withdrawn number.**
 
+⟦FOLD §264⟧ ✅ **RULED AT §257.3(b), AND THE RECOMMENDATION WAS TAKEN:** *"a WITHDRAWN GRADING
+TARGET MAY REMAIN A GENERATION INPUT — the thorp/hamlet rungs were withdrawn because THE INSTRUMENT
+cannot measure them (it counts hedges as buildings), not because the derivation is wrong; the
+generator must still produce something at those tiers."* ⭐ **The rungs KEEP their numbers, are
+labelled `UNVALIDATED-BY-INSTRUMENT` in the code so nobody mistakes "it generates" for "it measures
+well", and no grading verdict may be issued against them. The roof-count instrument restores
+validation.** *(a) now, (b) queued — exactly as recommended.* **Folded into C-3, G-33 and W0.**
+
 ### Q-2 · NEW · The epoch ladder is a CIRCUIT ladder. What derives a FABRIC epoch that no circuit marks?
 
 **The situation.** §240's law is *core → wall → ring → wall → ring*, and the built `epochAxis.js`
@@ -3072,7 +4188,20 @@ walled/unwalled split is essentially the tier line.*
 history and growth rate) independent of circuit events, with the circuit ladder becoming a
 *subset* of the epoch ladder? ⚠ **The naive fix — minting epochs from population growth — is a
 knob unless it is derived, and §240.2's "ring count is DERIVED, never a knob" is the binding
-condition it must satisfy.** **RAISED, NOT ANSWERED.**
+condition it must satisfy.** ~~**RAISED, NOT ANSWERED.**~~
+
+⟦FOLD §264⟧ ⭐⭐⭐ **RULED AT §257.3(a), AND IT IS THE SHARPEST OF THE THREE:** *"**EPOCHS ARE
+FABRIC EPOCHS, NOT CIRCUIT EPOCHS.** A wall is an EVENT WITHIN the epoch sequence, never its
+definition; a village that grew over two centuries has two vintages and no wall at all. This does
+NOT revise the owner's §240 law (which describes a WALLED settlement's sequence) — it corrects our
+implementation's conflation, which would otherwise have made vintage difference impossible below the
+wall line and made the walled/unwalled split silently equal the tier line. **Wave nine
+first-order.**"*
+⭐ **The answer to the question as asked is YES: the fabric epoch needs its own derivation and the
+circuit ladder becomes a SUBSET of the epoch ladder.** ⚠ **The binding condition the question named
+survives intact — the derivation comes from founding age, promotion events, prosperity history and
+recorded growth, never from a population knob, and the measured ≤4-epoch ceiling bounds it.**
+**Folded into S5-a, gap G-42 and W2.**
 
 ### Q-3 · NEW · Is `GRAIN_BAND` the MEASURED target or the DERIVATION target?
 
@@ -3089,8 +4218,17 @@ itself a measured quantity per tier. **(b) The band is BOTH**, and any measured 
 DRAWING defect to be cured (the countryside at low tiers, LOD/merge behaviour at metropolis) —
 in which case the derivation must never be inflated to compensate.
 ⭐ **This spec's PLAUSIBLE reading is (b)** — inflating the derivation would hide a drawing defect
-behind a number, and `MFB8-runprobe.py` exists precisely to separate the two. ⛔ **But the chair
-has not ruled, and the metropolis miss sits on exactly this ambiguity.**
+behind a number, and `MFB8-runprobe.py` exists precisely to separate the two. ~~⛔ **But the chair
+has not ruled, and the metropolis miss sits on exactly this ambiguity.**~~
+
+⟦FOLD §264⟧ ✅ **RULED AT §257.3(c), AND THE SPEC'S OWN READING WAS UPHELD:** *"**`GRAIN_BAND` IS
+THE TARGET; the derivation aims at it and the DRAWN result is the truth** — but the metropolis
+deriving ≈113 while drawing 70 is not a spec ambiguity, it is a **MEASURABLE DISAGREEMENT BETWEEN
+INTENT AND OUTPUT.**"* ⭐⭐ **AND THE RULING CARRIES AN ORDER THIS DOCUMENT HAD NEVER RECORDED: a
+new census is required — DERIVED GRAIN AND DRAWN GRAIN MUST AGREE WITHIN A STATED TOLERANCE, so the
+loss between them can never again be invisible.** ⛔ **Reading (a) is therefore closed: the
+derivation may NOT be inflated to compensate for a drawing loss.** **Folded into §2.6 and W0**, with
+`MFB8-runprobe.py` as the instrument and the tolerance as the census.
 
 ### Q-4 · CARRIED · T-05's fill: measure the atlas's quantity, or band ours?
 
@@ -3137,6 +4275,10 @@ corpus tests the difference** (J-A2-4, flagged rather than settled).
 | `MFS3a-*` / `MFS3B-context-census.py` | the plan and context censuses | re-runnable beside their compendiums |
 | `MFARCH2-scc.mjs` | the SCC diagnostic at binding **and** field granularity | ⚠ **an SCC is only as wide as its scan** — five write-backs hid inside `censusLeaf` |
 | `MFARCH2-hashtiers.mjs` · `-engines.mjs` · `-det.mjs` · `-drawn.mjs` | the three hash tiers · four V8 modes · cross-process determinism · the drawn censuses | ⛔ RASTER exits non-zero when `sharp` is unavailable; a driver that cannot run is reported, never passed quietly |
+| ⟦FOLD §264⟧ ⛔ **tower spacing** — *does not exist* | spacing CV along the circuit · towers per unit circuit length | **G-40(i), ORDERED at §263.6a, lands in W0.** Gates S13's corner rule, §3.4 #7's re-read and **SUB-3** |
+| ⟦FOLD §264⟧ ⛔ **per-epoch material / tone contrast** — *does not exist* | a **between-region** fill-tone (and texture) separation | **G-40(ii), ORDERED at §263.6a, lands in W0.** ⚠ `fill_tone_iqr` and `wash_within_sigma` are **whole-plate** statistics and are not substitutes |
+| ⟦FOLD §264⟧ ⛔ **footprint rectangularity** — *does not exist* | the building-scale analogue of `block_solidity_p50` | ⭐ **THIS LANE'S FINDING, vetoable.** CONFIRMED by enumerating the planmetric and voidmetric key sets: **the finest spatial SHAPE metric we hold is BLOCK-scale.** Gates **G-39 arm 2** |
+| ⟦FOLD §264⟧ ⭐ **derived-grain vs drawn-grain tolerance** — *does not exist* | the disagreement between what `cells(pop)` intends and what the plate shows | **ORDERED at §257.3(c) and never recorded until this fold.** `MFB8-runprobe.py` is the instrument; the census is the tolerance around it. **W0** |
 
 ### C.2 · The module map at MF-ARCH-2's tip
 
@@ -3178,10 +4320,56 @@ left to solve. **There are now ZERO bounded solvers in the fabric.**
 9. **Nothing here is a pin.** Every band is a target for the chair to convert into a pin, a band,
    or a rejection (ATLAS §2.8.4, inherited).
 
+### ⟦FOLD §264⟧ C.4 · WHAT **MF-SPEC2** DID NOT DO — stated affirmatively, on the same terms
+
+1. **Executed nothing about the generator.** No build, no test, no render, no measurement of any
+   plate. The only commands run were read-only: the ODQ `git show` the brief specifies, `grep`/`sed`
+   over `map-corpus/docs/**`, one deterministic re-rank script over **this file only**, and two
+   `python3` one-liners that printed the **key names** of `MFS3a-planmetrics.json`,
+   `MFS3a-voidmetrics.json` and two CSV headers. ⭐ **Those key-name enumerations are the ONLY new
+   evidence this fold produced, and they are what CONFIRMS that no footprint-scale shape metric
+   exists** (§2.6 row 7, G-40(iii), §4.1c arm 2).
+2. **No number was recomputed and no band was re-derived.** Every figure in this document still
+   comes from the lane that measured it. **Where a figure changed, a ledger ruling superseded it and
+   the row is cited.**
+3. **No git write, no memory write, no `git add`, no commit.** ⚠ The main worktree's index carries
+   staged deletions by design (§257.5 / §263.6b); it was **not** touched and **not** refreshed.
+4. **No new law was invented and no owner gate was crossed.** The owner-gated set is unchanged:
+   G-30's terrain vocabulary, G-11's `eventFootprint`, the faubourg district-id change, the
+   click-region contract, A-1's microclimate bearings, §5's tier table, the metropolis op ceiling —
+   ⛔ **and street names, which remain REFUSED under §163 and are not re-proposed anywhere in this
+   fold** (§0.5).
+5. **No holdout plate was opened, cited or reasoned from.** Every plate id here was already cleared
+   by the study that first quoted it.
+6. **The two prior-art studies, both compendiums and the atlas were NOT edited.** Where this
+   document disagrees with one of them it says so and rules with reasons; **it does not silently
+   replace a figure in its source.**
+7. **No GPL source was read, cloned, quoted or executed by this lane.** Everything about either
+   generator here is quoted from the two study documents, which did their own clean-room purge and
+   verified it mechanically (§259.1, §263.1). ⚠ **Whether counsel should confirm the clean-room
+   posture before anything traceable to those studies ships remains an open owner item (§264.4).**
+8. **Three new chair questions were NOT opened.** §264.4 records that the owner's build order adds
+   no new question, and this fold added none — **the two ordering consequences it found (G-35 vs
+   G-25, and G-36's split seeding) were resolved inside the document as dependency edges and exit
+   criteria**, which is where §5's own machinery already handles them.
+9. ⭐ **Every leg (c) in this fold is a PREDICTION.** The direction arguments behind G-35, G-36,
+   G-37 and the tail are reasoned from each mechanism's structural properties against our measured
+   bands. **None has been tested, and the experiment that settles all of them is the same one:
+   implement clean-room, run the existing harness, read the named band.** ⚠ *Until then every ADOPT
+   verdict here is a recommendation to try, not a claim about outcome.*
+
 ---
 
-**MF-SPEC ends here.** This document is the map program's spine and wave nine's build sheet per
-ODQ §246.3. It supersedes no law; it orders them. Where it and a later ODQ ruling disagree,
-**the ODQ ruling wins** — and the disagreement should be folded back into this file, because a
-build sheet that carries a refuted figure builds every future wave against a lie.
+**MF-SPEC ends here; ⟦FOLD §264⟧ MF-SPEC2's RECONCILIATION FOLD ends here with it.** This document
+is the map program's spine and wave nine's build sheet per ODQ §246.3, now carrying the two
+prior-art studies (§259, §263), the provenance correction (§261), the G-34 ruling (§262.2), the
+three rulings it had been carrying as open questions (§257.3) and the per-wave immersion payload
+(§264.2). It supersedes no law; it orders them.
+
+⭐⭐ **AND THE INSTRUCTION IN THE CLOSING LINE IS THE ONE THIS FOLD EXISTS TO HONOUR, SO IT IS
+RESTATED RATHER THAN REPLACED: where this document and a later ODQ ruling disagree, THE ODQ RULING
+WINS — and the disagreement must be folded back into this file.** *A build sheet that carries a
+refuted figure builds every future wave against a lie* — and this fold found **three rulings and one
+retracted framing** that had been sitting in the ledger, unfolded, since the day the document was
+collected. ⚠ **The next lane should assume the same thing has happened again.**
 

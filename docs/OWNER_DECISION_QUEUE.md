@@ -10070,3 +10070,66 @@ down is not a critique.
    into a number before eight more waves are built on top of it.
    This also serves §247.3a's launch-blocking performance gate
    and §220's app-realistic requirement.
+
+## §266 · THE RECONCILIATION FOLD COLLECTED — AND THE
+## INTEGRATION SPIKE IS PULLED FORWARD TO NOW (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. **FOLD COMPLETE**: GENERATION-SPEC.md 3,187 → 4,376 lines with
+   106 fold markers so a reader can separate the original text
+   from the fold. **The contamination sweep came back BETTER than
+   feared: MF-SPEC never inherited the retracted provenance
+   framing** (it pre-dates both GPL studies; its only prior-art
+   source was FMG), and Appendix A-8 had stated §261's law before
+   §261 existed. The gap ledger went 33 → 42 rows **with relative
+   order MECHANICALLY ASSERTED UNCHANGED** — which is why the
+   wave plan survives the re-rank untouched. §258.2's
+   substitution doctrine finally has a home (a substitution
+   register at §3.6, opened by the setback mechanism).
+2. **FOUR CONTRADICTIONS NOBODY HAD NAMED, ALL ACCEPTED.** (a)
+   **Three of the six chair questions were ALREADY RULED at
+   §257.3 — in the very row that collected the spec — and the
+   document still presented them as open.** ⭐ The §257.2 class
+   again: a ruling made after a document is written does not
+   reach the document. Q-2's is a real defect now routed as G-42
+   to W2: `epochAxis.js` mints ONE EPOCH PER CIRCUIT, so **six of
+   sixteen exemplar leaves cannot express a vintage at all** —
+   unfolded, W4 would have built per-epoch machinery and then
+   discovered half the tier ladder could not use it. (b) G-1 (the
+   region) had NO ledger row while five sections cited it as a
+   blocking node — entered at rank 9. (c) **The measured register
+   has NO footprint-scale shape metric**, so §261.3's required
+   chaos/orthogonality test can only HALF-RUN — a THIRD missing
+   instrument (G-40 iii), correctly flagged as the lane's own
+   addition rather than smuggled in as previously ordered. (d)
+   G-35's roster supersedes G-25's landmark budget ACROSS A WAVE
+   BOUNDARY, so W6 now owes a non-regression check on W5's
+   measured result.
+3. **RULINGS.** (a) ⭐ **THE RANK AMBIGUITY IS RESOLVED AS THE
+   LANE FOLDED IT: the dependency graph is #1 AMONG PRIOR-ART
+   ADOPTIONS, not gap-ledger rank 1.** The terrain substrate
+   keeps rank 1 because it UNBLOCKS OTHERS — a ruled law (§214's
+   terrain arm) and six of eight context traces — while the
+   roster, however good, unblocks nothing. **Dependency governs
+   rank; excellence does not.** (b) The chaos/orthogonality
+   hypothesis (G-39) is correctly a NAMED W0 ITEM GATING W3, with
+   its four-outcome decision rule written BEFORE the numbers —
+   that ordering is what keeps it a test rather than a
+   rationalisation. (c) The third missing instrument joins the
+   other two; **no mechanism may be adopted on an instrument that
+   does not exist.**
+4. ⭐⭐ **IMMERSION IS LESS DEFERRED THAN IT SOUNDED, AND THIS
+   MATTERS TO THE OWNER**: the fold found **§12's immersion suite
+   is largely ALREADY BUILT** — what dependency order defers is
+   the suite's SUBJECT (what the marginalia, heraldry and event
+   marks are ABOUT), not the suite itself. The new §0.5 carries a
+   per-wave SEE/FEEL table so every wave states what a user will
+   perceive that they could not before, per §264.2.
+5. **§265's INTEGRATION SPIKE IS AMENDED AND PULLED FORWARD TO
+   NOW.** I had scheduled it after W0 sealed; on inspection it
+   collides with nothing — it touches the APP and a REAL DOSSIER,
+   not the map sandbox W0 owns — and the whole argument for it
+   was that earlier evidence on the program's largest unknown is
+   worth more than later. **Waiting for a lane slot I do not
+   actually need would have repeated the error the spike exists
+   to prevent.** Dispatched alongside W0.

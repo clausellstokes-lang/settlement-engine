@@ -215,3 +215,11 @@ Fable should re-derive: (a) whether inserting an integration spike after W0
 and lands nothing; (b) the no-more-meta-documents ruling; (c) whether the
 retrovalidation queue's own existence is creating a false sense of safety —
 this entry is part of the queue it questions, which Fable should weigh.
+
+### §266 — the reconciliation fold (Opus chair)
+Fable should re-derive: (a) the rank ruling — dependency governs rank, not
+excellence (the dependency graph stays #1 among prior-art adoptions while the
+terrain substrate keeps ledger rank 1); (b) pulling the integration spike
+forward against my own §265 scheduling; (c) whether G-39's four-outcome
+decision rule is genuinely falsifiable as written; (d) the finding that §12's
+immersion suite is already built and only its subject is deferred.
