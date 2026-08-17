@@ -9886,3 +9886,78 @@ operative clause here.
    written verdicts under §231.2's never-a-verdict-unviewed rule.
    The chair takes the three named aesthetic judgments in person
    when the lane reports.
+
+## §263 · THE FTG STUDY COLLECTED — THE FORK WAS EMPTY, THE
+## PRODUCT WAS THE PRIZE, AND §240 IS DE-RISKED (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. **THE FORK IS PRISTINE AND ZERO-COMMIT — CONFIRMED THREE
+   WAYS** (compare API `identical`, same HEAD commit OBJECT
+   7fbc87a9, same tree sha; seven commits, none authored by
+   Allerton). §260's premise that the diff was the prize produced
+   an EMPTY SET. **The lane re-aimed rather than stopping**, and
+   found the real evidence one directory over: Thomas Allerton
+   authors Fantasy Town Generator and maintains two CURRENT,
+   PERMISSIVELY-LICENSED integration repos (Foundry module MIT,
+   pushed 2026-02; Roll20 extension Apache-2.0, 2025-06) plus a
+   public `/createSettlement/algorithm` page. **The divergence is
+   TOTAL RATHER THAN INCREMENTAL** — he read the 2017 generator
+   and built something architecturally opposite — which is worth
+   more than a patch series. Licence verdict unchanged and
+   verified first: GPL-3.0, no linking exception, zero per-file
+   headers, and a fork cannot add permissions under GPLv3 §7.
+2. ⭐⭐ **§240'S EPOCH LADDER IS CONVERGENT, NOT IDIOSYNCRATIC —
+   AND THAT IS GOOD NEWS HONESTLY REPORTED.** FTG SHIPS numbered
+   generation stages, each with its own road-branch mode, wander
+   limit, material, placement mode, block scale, **and an
+   optional wall at the stage boundary** — the owner's core →
+   wall → ring model, shipped by someone else. MF-X2's claim that
+   the prior art has no epoch axis is CORRECTED. **Ours remains
+   stronger for the reason that matters: theirs are FREE
+   PARAMETERS IN A FORM; ours are DOSSIER-DERIVED with a measured
+   ≤4-epoch ceiling.** §240 is de-risked rather than unique, and
+   de-risked is worth more than unique.
+3. ⭐⭐ **THE DEPENDENCY GRAPH IS THE BEST MECHANISM IN EITHER
+   PRIOR-ART STUDY, RANKED #1 AND ADOPTED AS APPROACH**: nodes
+   are resources, edges are ratios with STATED DENOMINATORS, and
+   producers fall back to importing shops where the land cannot
+   support them — **with NO FREE SCALAR ANYWHERE IN IT**, which
+   makes it structurally anti-decoration under §246. And the
+   decisive asymmetry: **we HOLD the facts its author has to
+   invent.** It feeds our institution and district layers
+   directly.
+4. **THE TRIANGULAR-REMNANT CURE IS ADOPTED AS A §258.2
+   SUBSTITUTION**: subdivide to get the PLOT, then FIT a footprint
+   from a rectilinear vocabulary — rather than subdividing until
+   the piece IS the building. This preserves the law's intent
+   (organic plot geometry) while curing the wedge defect
+   Watabou's own author flagged. Our aspect-ratio constraint
+   becomes a HARD FILTER rather than a tendency.
+5. **§261 WAS APPLIED MID-LANE AND CORRECTLY**: WATABOU §0b's
+   three-valued divergence rule explicitly voided, **zero
+   findings tagged "we were wrong"**, every ADOPT verdict grown
+   its third leg — 10 adoptions carry all three, two flagged weak
+   on (c) in place, and **6 mechanisms pushed OUT of the ranking
+   into an INTERESTING-BUT-UNGATED list** because (c) could not
+   be argued. That is the correction working as designed.
+   ⭐ **THREE OF THE TOP FOUR ADOPTIONS LAND ON STAGES THE SPEC
+   ALREADY NAMES AS ITS WEAKEST (S7, S18, S16)** — the practical
+   case for the lane, and the reason its findings route straight
+   into W2/W3 rather than a backlog.
+6. **RULINGS.** (a) **TWO MISSING INSTRUMENTS ARE NOW ORDERED
+   BUILT** — per-epoch material/tone contrast (this lane) and
+   tower spacing (§259.5). Both gate ranked mechanisms, both are
+   cheap, and **two prior-art products now agree on the tower
+   mechanism while we still cannot check it against a number**,
+   which is exactly the condition that lets a plausible idea
+   become an unmeasured habit. They join W0's instrument work.
+   (b) **THE INDEX HAZARD IS VERIFIED BENIGN AND RECORDED**: a
+   read-only status shows 74 staged deletions repo-wide including
+   map-corpus/docs — **all 50 files are intact on disk and 49 are
+   in the ledger tree**; this is the standing "main worktree
+   matches no branch" condition (§257.5) now extended to the new
+   directory. **The main index is NOT to be refreshed** (it is
+   shared with concurrent lanes); the private-index method
+   remains the only path and every commit this session used it.
+   The lane performed no git write and left it as found —
+   correct.

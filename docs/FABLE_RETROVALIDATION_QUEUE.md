@@ -200,3 +200,11 @@ against the corpus's own measured block elongation and plot variance;
 (c) the third-leg requirement for ADOPT verdicts; (d) whether the chair's
 propagated framing error contaminated anything in §254-§260 beyond the rows
 retracted here.
+
+### §263 — the FTG study (Opus chair)
+Fable should re-derive: (a) the correction that §240's epoch ladder is
+convergent rather than unique, and whether "dossier-derived vs free parameters"
+is a strong enough remaining differentiator; (b) adopting the dependency graph
+as rank-#1 approach; (c) the triangular-remnant substitution (subdivide for the
+plot, fit for the footprint) under §258.2; (d) ordering the two missing
+instruments built before their mechanisms are adopted.
