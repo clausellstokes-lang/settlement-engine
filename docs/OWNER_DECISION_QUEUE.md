@@ -9491,3 +9491,35 @@ operative clause here.
    "corpus-wide" exemplar figure we have quoted is a few
    settlements multiplied. **Wave nine diversifies the exemplar
    seeds**; until then every such figure carries the caveat.
+
+## §256 · OWNER LAW: THE THREE-SOURCE PRECEDENCE — MECHANISM
+## FROM THEM, LOOK FROM THE CORPUS, CAUSE FROM THE DOSSIER
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **THE OWNER'S SHARPENING**: the prior-art studies are
+   INSPIRATION ONLY; everything is pushed to the CORPUS's design
+   and aesthetics and to TRUTH FROM THE DOSSIER. Recorded as a
+   standing precedence binding every lane: **MECHANISM may come
+   from prior art; the LOOK comes from the corpus; the CAUSE
+   comes from the dossier.** No source may substitute for
+   another's role.
+2. ⭐ **THE PRECISION THAT MAKES IT OPERATIONAL, and it is easy
+   to get wrong: WATABOU'S OWN RENDERED OUTPUT IS NOT OUR
+   AESTHETIC TARGET.** Our corpus is an image model's PAINTERLY
+   IMITATION of that style and it MEASURES RICHER than the
+   original on the axes we grade (wash variation, grain, ink
+   hierarchy, incident density). Chasing the original's look
+   would land us a rung BELOW our own north star. Relayed to
+   MF-X2 same-turn: "their rendering does X" is a NOTE, never a
+   recommendation.
+3. **THE OPERATIONAL TEST FOR ANY ADOPTION**, now binding on
+   MF-X1/MF-X2/MF-SPEC: an ADOPT-AS-APPROACH verdict is valid
+   only if the lane can state (a) WHICH DOSSIER FACT drives the
+   mechanism and (b) that its output lands inside the CORPUS's
+   MEASURED BANDS — not merely that it works for them. A
+   mechanism resting on a free parameter or an arbitrary choice
+   is DELIBERATELY-DIFFERENT by default, because a parameter
+   with no derivation home is decoration (§246) however good it
+   looks. Where prior art is aesthetically weaker than the
+   corpus, lanes SAY SO — that is a finding, not a criticism to
+   soften.
