@@ -270,3 +270,11 @@ through-river exemplars as a coverage gap to fill in W2; (c) the point-vs-area
 class now at four instances — is a systematic sweep warranted rather than
 case-by-case cures?; (d) the absolute slope threshold chosen by shape (flat 0%,
 hills 11%, mountain 27.8%) rather than by a fitted number.
+
+### §274 — W2 the wall (Opus chair)
+Fable should re-derive: (a) ratcheting rather than curing the self-crossing
+walls, and whether a defect that five of ten walled leaves SHIP should wait a
+wave; (b) bundling the multiplicity-region cure with the faubourg-id decision
+as one owner call; (c) the demotion-before-packer ordering as W3's first item;
+(d) accepting the flank-grammar partial as a fixture measurement rather than a
+generator defect.

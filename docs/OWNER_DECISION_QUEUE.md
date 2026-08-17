@@ -10612,3 +10612,72 @@ down is not a critique.
    the metropolis figure has now moved three times in three waves
    (1,422 → 1,210 → 1,280). W2 RE-DERIVES BOTH; it may not
    inherit either.**
+
+## §274 · W2 — THE WALL LANDED WHOLE, AND THE ZOOM FOUND A
+## DEFECT EVERY CENSUS IS BLIND TO (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **ALL THREE BOUND PIECES LANDED IN ONE TIP, ONE DECLARED
+   SHIFT, ONE ATTRIBUTION — the wave was not split**, which was
+   §251.4b's whole point. Suite 220 → **246 titles**, determinism
+   10/10, all four drawn censuses **0 area-true over 23,550
+   bodies**, **102/102 renders under ceiling WITH NO CEILING
+   RAISED**, SCC 0/0. **7 MET, 2 PARTIAL, 1 NOT BUILT**, stated
+   plainly. Nine typed runs fire on real leaves (251 runs over 17
+   leaves) with a flat-ring counterfactual returning ONE run;
+   concentricity refuted on all rings; **G-42 CURED — fabric
+   epochs land 17/17 inside the measured band with FOUR UNWALLED
+   LEAVES AT ≥2 EPOCHS where six used to read 1 by construction**;
+   every superseded circuit emits a ring street byte-identical to
+   its trace. §200's per-run exemption is proved NON-VACUOUS:
+   withdrawing it convicts 68 bodies over 17 leaves.
+2. ⭐⭐ **THE METROPOLIS'S THIRD CIRCUIT IS DRAWN AND IT COSTS
+   NEGATIVE PRIMITIVES**: cap 3 renders at 8,226 against cap 2's
+   8,467 — **−241, because the ring it promotes stops being
+   stroked as a wall.** §252.3a's held cap is discharged: the
+   thing I withheld for budget turned out to pay for itself.
+3. ⛔⛔ **THE FORENSIC ZOOM FOUND A DEFECT NO CENSUS IN THE
+   PROGRAMME CAN SEE, AND IT PREDATES THIS WAVE: eleven
+   self-crossing circuit segments over sixteen leaves — FIVE OF
+   TEN WALLED LEAVES SHIP A WALL THAT CROSSES ITSELF.**
+   Containment residual, §200, §232's straddlers and the
+   concentricity pin are ALL satisfied by a self-crossing ring.
+   Two causes measured (a 5× bisector multiplier pushing a facet
+   63.5u against a 25.6u margin; a resample over a fragmented
+   component). **RATCHETED, NOT CURED — correct**, because curing
+   it would spend this wave's shift twice on a defect it did not
+   introduce. ⭐ **THE LESSON IS THE OWNER'S OWN, NOW LEARNED
+   INTERNALLY: the eye found what the instruments could not, and
+   this time the LANE'S OWN ZOOM found it. ORDERED: a
+   self-intersection census joins the standing 0/0 family in W3,
+   because a law nobody wrote is a law nothing enforces.**
+4. **THE OTHER TWO FINDINGS.** (a) **`zoneUnwashedBodies` +1,462
+   is CHARACTERIZED and is NOT a fabric defect**: every unwashed
+   quarter is a MULTIPLICITY INSTANCE (`market_quarter~1`,
+   `shadows_district~2`) losing the one-region-per-district-id
+   contract to its sibling — corroborated by the new leaf, which
+   has no sibling and reads 0. **The cure is OWNER-GATED and it
+   is the SAME public surface as §238.4b's faubourg ids —
+   BUNDLED as one owner decision rather than two.** (b) **The
+   point-vs-area audit fired TWICE**: the battery module that
+   publishes "AREA-TRUE" measures §17.4 and §200 AT THE VERTICES
+   and **resolves its law body from a tree TWO WAVES OLD** (the
+   stale-generation class at the INSTRUMENT level — latent, since
+   the re-measured base is genuinely clean); and the domain's own
+   `drawnBodies` was **63 BODIES SHORT OF THE PLATE** — the §195
+   family again, cured here.
+5. **RULINGS.** (a) ⭐ **THE PARTIAL THAT MATTERS MOST IS THE
+   OWNER-FACING ONE: "can a reader see this town had an older
+   wall?" is a NO on the city, and the cause is MEASURED —
+   90%% of tower rounds and 80%% of ditch gardens are REFUSED
+   BECAUSE DEMOTION RUNS AFTER THE PACKER.** That is an ORDERING
+   defect with a clean fix, and it is W3's first item: the
+   fossils must be placed before the packer claims their ground.
+   (b) The flank-grammar partial (27%% full-ring against ≈55%%)
+   is a MEASUREMENT OF OUR FIXTURE'S WATER MODES, not a defect —
+   reported rather than graded around, correctly; it joins the
+   exemplar-diversification work. (c) Exit 10's defensive seat is
+   NOT BUILT and named — accepted, carried. (d) **The
+   through-river exemplar is minted (6 dry / 10 bankside / 1
+   through) and paid for itself immediately** as the corpus's
+   only subject for a detour-to-work run.
