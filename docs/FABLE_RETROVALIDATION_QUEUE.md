@@ -89,3 +89,10 @@ regional morphotypes, void hierarchy) — are these the right extensions?;
 pixel-identity (this defines what "reproduce the corpus" means and therefore
 what the program is trying to do); (c) the two-lane split and the decision to
 synthesize into a single generation specification afterwards.
+
+### §247 — the map-as-acquisition strategy and its consequences (Opus chair)
+Fable should re-derive: (a) promoting the performance gate to launch-blocking
+for the map surface; (b) the recommendation that the free path produce a good
+map with minimal friction (raised as owner-gated, not settled); (c) the
+judgment that the same-town-across-time artifact — not aesthetic superiority —
+is the differentiator to lead with, and its slotting into wave nine's demo.

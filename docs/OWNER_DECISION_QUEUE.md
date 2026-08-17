@@ -8875,3 +8875,52 @@ construction), straddler counterfactual must red.
    implementation order. That specification, not the organically
    grown charter, becomes the map program's spine and wave nine's
    build sheet.
+
+## §247 · OWNER STRATEGY ON THE RECORD: THE MAP IS THE
+## ACQUISITION SURFACE (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **THE OWNER'S THESIS, RECORDED BECAUSE IT GOVERNS
+   PRIORITIZATION**: the map is the most immediately striking
+   artifact and the new user's wow moment, even though everything
+   else is more useful; the market is currently led by MAP-FIRST
+   settlement generators despite their flaws; the play is to pair
+   the best SUBSTANCE generator with a map generator contestable
+   with or better than the leaders, made unique by being TRUE TO
+   THE DOSSIER — so free-tool users have a reason to visit, the
+   site becomes the one-stop shop, free users convert, and the
+   substance argument can be made while the map earns the
+   traffic. **THE CHAIR CONCURS AND RATIFIES THE PRIORITIZATION**:
+   this retroactively justifies the map program's resource share
+   (the Fable seat, the budget grant, the whole Higgsfield spend)
+   — the map is not polish, it is DISTRIBUTION.
+2. **THE MECHANISM, STATED PRECISELY SO IT CAN BE ENGINEERED
+   AGAINST**: the map is the only artifact in the product legible
+   in under two seconds, screenshot-able, and shareable; substance
+   requires investment to appreciate. Discovery happens through
+   images. **PARITY IS A THRESHOLD, NOT A SPECTRUM** — below it we
+   are "the one with worse maps" and nobody reaches the substance;
+   at or above it we are "the one whose maps are also true."
+3. **THREE PRODUCT CONSEQUENCES THE CHAIR DRAWS FROM THE
+   STRATEGY** (vetoable, and they change what "done" means for
+   the map program): (a) **the §220 performance gate is promoted
+   to LAUNCH-BLOCKING for the map surface** — a wow moment that
+   takes twenty seconds to render is not a wow moment; (b) **the
+   free path must produce a genuinely good map with minimum
+   friction** — gating the map behind signup would destroy the
+   acquisition mechanic the strategy depends on (owner-gated as a
+   paid-surface decision; raised, not settled); (c) **the
+   differentiator to lead with is not "prettier" but "about
+   something"** — the artifact no competitor can produce is THE
+   SAME TOWN ACROSS TIME (year 1 → year 100: growth, fire,
+   shrinkage, rebuilding), which our epoch/drift/snapshot design
+   already implies. **RECOMMENDED AS A DELIBERATE MARKETING
+   ARTIFACT** and slotted for wave nine's demo output.
+4. **THE HONEST CAVEAT, kept on the record**: on structure and
+   truth the "better than the leaders" claim is within reach and
+   partly evidenced (town and city grain now in the corpus band,
+   zero-violation geometry no reference plate holds itself to);
+   on pure aesthetic polish we are not there yet (§244's measured
+   deltas). The plan is sound; the TIMELINE is the risk, and the
+   §216 loop plus the blinded test are what convert the claim
+   from ambition to evidence.
