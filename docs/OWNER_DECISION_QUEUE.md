@@ -8433,3 +8433,68 @@ construction), straddler counterfactual must red.
    §234 architecture-first sequence governs everything after
    the pilot's seal. docs/HANDOFF_CURRENT.md is current as of
    01:30 ET and carries the continuity section.
+
+## §238 · MF-B8b COLLECTED — THE PREDICATE WAS BLIND, NOT THE
+## OBJECT: TWO WAVES OF SELF-CERTIFYING CENSUSES REFUTED
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **MY §230 STALENESS HYPOTHESIS IS REFUTED BY EXECUTION.** The
+   censused and drawn circuits were ALREADY byte-identical (town
+   sha 857ffc4f both ways, every ring, every walled leaf) — the
+   shared object existed and the wall STILL crossed buildings,
+   because law and censuses shared a BLIND PREDICATE: both asked
+   the body's VERTICES against the claim's CENTRELINE, so a claim
+   running THROUGH a body scores clear at every corner (the
+   owner's back-house: corners at 7.9/5.5/10.3/10.7 units from a
+   claim of half-width 4.348, segment wholly inside the polygon,
+   at crop pixel 869,267 — INSIDE the owner's exact view).
+   **THE CLASS, RESTATED AND CORRECTED: a shared object is not a
+   proof — the PREDICATE is the vacuity surface.** §195.0's cure
+   ("the drawn set") was necessary and insufficient.
+2. **AREA-TRUE RE-MEASUREMENT, EXECUTED AGAINST THE OLD TREES:**
+   street/water/wall violations were B7 671/16/84 and B8
+   1,299/13/190 — so **MF-B7's headline "408 → 0" WAS ITSELF
+   VACUOUS** (84 bodies still in wall bands, invisible to the
+   census B7 shipped in the same commit). The owner caught not a
+   b8 regression but the residue of a cure certifying itself for
+   two waves; that is why the same contradiction reached him
+   twice. **B8b: 0/0/0 over 23,116 drawn bodies**, chair-verified
+   by zoom at the owner's exact crop — the circuit runs clear,
+   the intervallum is open, and the wall now REACHES ITS OWN
+   GATEHOUSE (the gate-split cure made visible).
+3. **CURED AT CAUSE, NOT PATCHED**: one area-true predicate with
+   ONE home consumed by the law and every census; the wall as the
+   §234 pilot node (17 declared inputs, content-hashed output,
+   re-verifying accessors); §232 as a DERIVATION (14 straddling
+   districts of 46 pre-cure — worst 26.8%% of the government
+   quarter across its own wall — now 0); `wallClaims` DELETED
+   (the duplicate rule WAS the defect). Two further real defects
+   fell out (reservation wider than and offset from the stroke;
+   the lens still splitting gates by dropping vertices — B7 cured
+   it inside wallClaims and left it standing in renderFolio).
+   134/134 pins (18 new, ZERO re-recorded, 7 counterfactuals),
+   determinism 10/10 unchanged across a later refactor, grain
+   walk preserved and improved (town 50.5, city 61.3, both in
+   band), 96/96 under ceiling, §201B's 4 orphan segments gone.
+4. **RULINGS.** (a) The declared same-seed shift (causes 93-96,
+   15 of 16 leaves; THE THORP BYTE-IDENTICAL — the proof it
+   touched only what it should) ACCEPTED for the landing
+   declaration. (b) **THE FAUBOURG DISTRICT-ID CHANGE IS
+   OWNER-GATED AND STAYS PARKED**: `${parent}~faubourg` +
+   wallSide/parentDistrictId is a PUBLIC SURFACE five UI suites
+   hit-test; correctly reported not settled — it rides the
+   landing's owner review with the §232 law it serves. (c) **THE
+   PILOT'S CENTRAL LESSON GOVERNS MF-ARCH: the shared object was
+   not the cure.** The contract is ONE ARTIFACT, ONE ACCESSOR,
+   ONE PROVEN PREDICATE, with census independence bought by
+   COUNTERFACTUALS rather than by a second implementation, and
+   enforced by a SOURCE SCAN for raw-handle reads — an accessor
+   is unenforceable while the raw handle exists.
+5. **MF-ARCH DISPATCHED** (the §234 architecture wave, feature-law
+   freeze now in force): the SCC diagnostic (never built — the
+   pilot found its cycle by reading), predicate unification across
+   ALL reserved ground, raw-handle source scan, keyedRandom +
+   lineage identities, fixed-precision topology coordinates, the
+   three hash tiers, spatial indexing with canonical ordering and
+   indexed-vs-exhaustive equivalence pins, per-census runtime
+   budgets, and the cross-engine determinism CI.

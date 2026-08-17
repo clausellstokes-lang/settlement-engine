@@ -24,4 +24,10 @@ accumulates what the next Fable session must retroactively validate.
 
 ## Queue (empty at creation — the chair is Fable as of this writing)
 
-*(no entries)*
+### §238 — MF-B8b collection (Opus chair)
+Fable should re-derive: (a) the ruling that the predicate class supersedes the
+shared-object framing as MF-ARCH's governing contract; (b) the acceptance of
+the same-seed shift on the thorp-byte-identical argument; (c) the chair's
+zoom-based visual verdict that the wall now runs clear (an aesthetic/forensic
+judgment made under an Opus chair); (d) the MF-ARCH mandate's ordering.
+Evidence: laneMFB8b-receipt.md, mf-proto-out/b8b/ zooms.
