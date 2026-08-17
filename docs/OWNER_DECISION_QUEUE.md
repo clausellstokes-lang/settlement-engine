@@ -8130,3 +8130,47 @@ runs if budget forces a choice. Relayed to HF-3 same-turn.
    self-named full log is trustworthy. Stage-2 inheritance
    noted: the family preamble + stamped substrate annex are OWED
    CHAIR ACTS before WF-1b; suppressedAtTick has THREE writers.
+
+## §229 · MF-B8 COLLECTED — THE GRAIN INVERSION CURED
+## STRUCTURALLY; TOWN AND CITY IN BAND (2026-08-16, chair §170)
+
+1. **THE HEADLINE, MEASURED ON RE-SET WINDOWS** (the hand-set
+   rot class killed — windows derive from the fabric's own
+   umbrella bbox): grain walk 5.4→10.4→17→48→61→70, MONOTONE —
+   the inversion cannot recur because grain is now a CONTINUOUS
+   function of population (no seam can invert; no tuning pass
+   can reintroduce it). **TOWN 48 (band 45-80) and CITY 61
+   (60-95) MEET THE CORPUS BAND** — the program's first
+   structural MEETS on its headline target. Village-and-below
+   ×1.4-1.8 low and metropolis 70 vs 100-130, each with its
+   named lever. Built: the GAP-A derivation (reproducing the
+   atlas's own ≈2,200-parcel check to 1%%), block silhouettes +
+   two-tier stroke, BURGAGE landed (4.2:1, flush frontage,
+   31 distinct weights/leaf vs b6's ONE), plots-cut-to-the-block
+   (which took §202 to 0 LANDLOCKED with zero accessLaw edits
+   and moved target 2 34.8→38.8), the §203/§205A/GAP-B/GAP-C
+   censuses. Proof: 116/116, determinism 10/10, three
+   drawn-geometry censuses 0/0 over 22,934 bodies, 96/96 renders
+   under per-tier ceilings.
+2. **RULINGS.** (a) **§217 EXECUTED WITH INTEGRITY**: per-tier
+   ceilings measured and PINNED, efficiency tried first and its
+   yield quoted (0.6%%), and THREE TIERS RATCHET DOWN — the
+   grant bought richness where needed and returned headroom
+   where not. RATIFIED. (b) **J-B8-6 RATIFIED BY CHAIR EYES**:
+   the corpus-band roof values (L 128-196) read MORE like the
+   references in my zoom — b6/b7's uniform dark was heavier than
+   ANY corpus plate. (c) **J-B8-1 RATIFIED**: countryside T-24 +
+   road ladder T-23 carry to WAVE NINE FIRST-ORDER — they are
+   the named lever for the low tiers' remaining miss (at village
+   and below the countryside is 85%% of the plate). (d) Wave-nine
+   residuals recorded: the 4-orphan-street REGRESSION, 103
+   residual §205A crossings (both classes named), and the NEW
+   clipped-institution SPIKE defect (visible in my zoom —
+   confirmed real).
+3. **WAVE NINE DISPATCHES ON HF-3's COMPLETION** (its terrain/
+   fantastical/underground references are the calibration
+   inputs), mandate in leverage order: countryside+roads, the
+   §214 iconography, MF-A1 paint integration, underground,
+   metropolis grain, the residuals, §205 B/C, chrome/vintage/
+   decay. The §216 comparison round follows wave nine — the
+   known misses are queued work, not open questions.
