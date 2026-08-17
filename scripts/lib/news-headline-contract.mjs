@@ -10,16 +10,36 @@ const ADDRESS_TOTALS = Object.freeze({ homes: 53, fields: 2, identities: 106, pr
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 77, distinctValues: 24, prospectiveOccurrences: 73, prospectiveDistinctValues: 23, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // TE36 (ODQ §271, chair-authorized): 77/24/73/23 → 56/29/52/28. WAVE P4 retired the bare
+    // `population_decline` candidate under `demographicsEnabled`, which this corpus lights
+    // along with every other flag, so the MECHANICAL lane loses 21 "population may fall"
+    // headlines. Its distinct-value count RISES (24 → 29) because the retired family was
+    // repetitive: removing 21 occurrences of a handful of spellings leaves a shorter, more
+    // varied lane. The selectedOutcomes lane is UNCHANGED — ordinary population drift was
+    // already `state_only` and never a Chronicle beat.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 56, distinctValues: 29, prospectiveOccurrences: 52, prospectiveDistinctValues: 28, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
     Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 151, distinctValues: 80, prospectiveOccurrences: 95, prospectiveDistinctValues: 66, indicativeOccurrences: 56, indicativeDistinctValues: 14 }),
   ]),
-  union: Object.freeze({ headlineOccurrences: 228, distinctValues: 83, prospectiveOccurrences: 168, prospectiveDistinctValues: 69, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
+  // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
+  // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
+  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 80, prospectiveOccurrences: 147, prospectiveDistinctValues: 66, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
 });
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 17, inertRules: 9, distinctValues: 69, occurrences: 168 });
+// TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
+// no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
+// stopped producing its headline. That is the whole shape of this re-record.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 66, occurrences: 147 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },
   { source: '\\bmay defect\\b', flags: '', replacement: 'defects', reason: 'npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.defect through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no defect headline.' },
+  // ── TE36 (ODQ §271, CHAIR-AUTHORIZED — "New inert rows require authority", and this is it).
+  // THE SIBLING OF THE ROW BELOW, AND THE SAME MECHANISM ONE WAVE LATER. P1 suppressed bare
+  // GROWTH under `demographicsEnabled` and `may grow` went inert; WAVE P4 suppresses bare
+  // DECLINE under the same flag, for the same reason (design law 1: no growth that is not a
+  // birth, and no shrink that is not a death), and `may fall` follows it. ⚠ READ THE SCOPE:
+  // this corpus lights EVERY `*Enabled` flag, so both rows are inert HERE and nowhere else —
+  // `demographicsEnabled` is false in every shipped preset, where both seams still author.
+  { source: '\\bmay fall\\b', flags: '', replacement: 'falls', reason: 'populationDynamics.js::populationCandidate is the live decline authoring seam, and WAVE P4 (ODQ §219.3) gated it: with demographicsEnabled lit the lane emits population ONLY as a conserved transfer, so bare decline is refused exactly as bare growth already was and the executed AO-0 12-record persisted public+mechanical union contains no fall headline. THE CORPUS LIGHTS EVERY FLAG, so this row reads INERT here and NOWHERE ELSE: demographicsEnabled is false in every shipped preset, where the seam still authors the headline.' },
   { source: '\\bmay grow\\b', flags: '', replacement: 'grows', reason: 'populationDynamics.js::populationCandidate is the live growth authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no growth headline.' },
   { source: '\\bmay hoard\\b', flags: '', replacement: 'hoards', reason: 'npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.hoard through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no hoard headline.' },
   { source: '\\bmay raise a\\b', flags: '', replacement: 'raises a', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-build authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no build headline.' },

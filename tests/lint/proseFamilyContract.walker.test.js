@@ -106,7 +106,10 @@ describe('four durable prose-family exact-totality contract', () => {
       'pulseHistory[].consequenceOutcomes[].type': 5,
       'pulseHistory[].impactDigest[].channelType': 148,
       'pulseHistory[].mechanicalOutcomes[].type': 4,
-      'pulseHistory[].mechanicalRumorSeeds[].channelType': 30,
+      // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
+      // the null-VALUE census follows the outcomes that produced them. Every other null home
+      // is unchanged, so this arm still measures null RETENTION and not corpus size.
+      'pulseHistory[].mechanicalRumorSeeds[].channelType': 19,
       'pulseHistory[].selectedOutcomes[].type': 1,
     });
     const pathEdit = (row, index, value) => ({ ...row, path: row.path.map((part, offset) => (
@@ -137,8 +140,13 @@ describe('four durable prose-family exact-totality contract', () => {
   it('A3 freezes all 63 identities counts bytes digest and movement polarities', () => {
     expect(live.rows).toEqual(baseline.rows);
     expect(compareProseFamilyRows(live.rows, baseline.rows)).toBe(true);
-    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8280);
-    expect(live.rowsSha256).toBe('8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae');
+    // TE36 (ODQ §271): 8280 → 8274, six bytes, and they are DIGITS not identities — the
+    // row array still holds exactly 63 paths and only their counts shrank.
+    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8274);
+    // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
+    // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
+    // test-side and library-side denominators from ever disagreeing.
+    expect(live.rowsSha256).toBe('a35151ec8867d03e7d76c10127b0d173a85d205995065722ec64b35e27aad898');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -150,7 +158,13 @@ describe('four durable prose-family exact-totality contract', () => {
     for (const candidate of movements) expect(() => compareProseFamilyRows(candidate, baseline.rows)).toThrow(/new|grown|shrunk|vanished|sorted/);
     const counterfeit = clone(baseline); counterfeit.rows = counterfeit.rows.slice(7);
     counterfeit.familyTotals[0] = { family: 'chronicle', identities: 0, distinctValues: 0, occurrences: 0 };
-    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1301, occurrences: 5878 };
+    // TE36 (ODQ §271): 1301/5878 → 1236/5253. This counterfeit must stay INTERNALLY
+    // CONSISTENT — it slices off the seven `chronicle` rows and must still add up — or the
+    // validator rejects it at "baseline totals disagree with rows" and never reaches the
+    // IMMUTABILITY guard this arm exists to prove. The seven come straight off the new
+    // totals (1243 − 7, 5260 − 7), so the arithmetic tracks the re-record rather than
+    // being re-chosen.
+    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1236, occurrences: 5253 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -178,25 +192,38 @@ describe('four durable prose-family exact-totality contract', () => {
   });
 
   it('A5 closes twelve pulse-history records and pins overlapping headline aliases', () => {
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1286, occurrences: 5665 });
+    // TE36 (ODQ §271): 1286/5665 → 1221/5076. IDENTITIES HOLD AT 50 — no prose path was
+    // gained or lost; the lit corpus simply authors fewer outcomes once bare decline is
+    // retired to demographicsKernel.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1221, occurrences: 5076 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
     expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 80, occurrences: 151 });
-    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 24, occurrences: 77 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 81, occurrences: 240 });
+    // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
+    // NOT, because ordinary population drift was already `state_only` and never selected.
+    // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
+    // family was repetitive, so removing it leaves a shorter and more varied lane.
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 29, occurrences: 56 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 73, occurrences: 186 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {
-    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 201 });
-    expect(scalarMeta).toMatchObject({ regionalEventLog: 109, regionalEventLogUnique: 109 });
+    // TE36 (ODQ §271): 201 → 165 and 109 → 73. Both identities and their distinct-value
+    // counts are UNCHANGED (2 and 7): the regional audit log records the same KINDS of change,
+    // 36 fewer times, because 36 of its entries were the retired population-decline outcomes.
+    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 165 });
+    expect(scalarMeta).toMatchObject({ regionalEventLog: 73, regionalEventLogUnique: 73 });
     const regional = scalarRows.filter((row) => row.root === 'pulseResult'
       && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
     expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([...Array(12).keys()]);
-    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(109);
+    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(73);
     expect(live.rows.filter((row) => row.family === 'regionalLog')).toEqual([
+      // TE36: `changes[].kind` is BYTE-IDENTICAL at 6/92 — the retired outcomes carried a
+      // sourceEvent but no graph change, so only the second row moves. That asymmetry is the
+      // cleanest evidence in this file that the retirement was surgical.
       { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 6, occurrences: 92 },
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 109 },
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 73 },
     ]);
     const prose = new Set(['headline', 'narrativeSummary', 'reason', 'reasons', 'summary', 'summaryText', 'thesis', 'triggeredBy']);
     expect(live.rows.filter((row) => row.family === 'regionalLog' && prose.has(row.field))).toEqual([]);

@@ -170,7 +170,11 @@ describe('complete Wizard News address and headline rewrite contract', () => {
   it('A6 closes the sole live challenge gap with the exact producer twin', () => {
     const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
     const pre = analyzeHeadlineRewriteLiveness(rawRows, withoutChallenge);
-    expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 16, inertRules: 9, overlaps: 0, indicativeMatches: 0 });
+    // TE36 (ODQ §271): 16/9 → 15/10, carrying A3's single crossing through this derived
+    // 25-rule scenario. `rules` stays 25 and the gap below is unchanged, so the challenge
+    // rule this arm exists to isolate is untouched — only `may fall` moved sides, exactly
+    // once, in both the full registry and this one-rule-short twin.
+    expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 15, inertRules: 10, overlaps: 0, indicativeMatches: 0 });
     expect(pre.gaps).toEqual([{ location: '2/selectedOutcomes/0', headline: 'Military/Guard may press a challenge to the government' }]);
     const did = FACTION_VERB_PHRASES.faction_government_challenge.did;
     expect(APPLIED_HEADLINE_REWRITES.find(([pattern]) => pattern.source === '\\bmay press a challenge to the government\\b')?.[1]).toBe(did);

@@ -361,10 +361,24 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     expect(corpus.meta.steadingsMinted).toBeGreaterThan(0);
     expect(corpus.meta.simulationFlagsLit).toBeGreaterThan(20);
     expect(Object.keys(corpus.shapes).length).toBeGreaterThan(100);
+    // ── RE-RECORDED 2026-08-17 BY TE36 (THE P4 POPULATION RECONCILIATION), CHAIR-AUTHORIZED
+    // UNDER ODQ §271 ──────────────────────────────────────────────────────────────────────
+    // 1321/8637/14650 → 1300/8607/14586. THE CORPUS ITSELF SHRANK, and the cause is one
+    // retired candidate family. `observed-shape-corpus.mjs` builds its world by lighting
+    // EVERY `*Enabled` flag it can find in source (76 of them here), so it is the one place
+    // in the estate where `demographicsEnabled` — virtual, and false in every shipped preset —
+    // is lit. Under that flag the population lane no longer emits bare `population_decline`
+    // candidates (P4: a shrink that is not a death belongs to demographicsKernel, the design's
+    // one writer), so 21 fewer distinct shapes, 30 fewer origins and 64 fewer transitions are
+    // observed. EVERY FIGURE MOVES DOWN, which is the safe direction for a
+    // reader-with-no-writer ratchet: fewer observed shapes can only ever mean fewer resolvable
+    // reads, never a new blind spot. THE FINDINGS INVENTORY DID NOT MOVE AT ALL — the frozen
+    // per-file debt in .observed-shape-readers-baseline.json is byte-identical, so no reader
+    // gained or lost a writer; only the corpus that exercises them is smaller.
     expect(corpus.meta).toMatchObject({
-      shapeCount: 1321,
-      originCount: 8637,
-      transitionCount: 14650,
+      shapeCount: 1300,
+      originCount: 8607,
+      transitionCount: 14586,
     });
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
@@ -372,8 +386,15 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       wizardNewsAccumulatedEntries: 1567,
       wizardNewsUnique: 272,
       pulseHistory: 12,
-      regionalEventLog: 109,
-      regionalEventLogUnique: 109,
+      // TE36 (ODQ §271): 109 → 73, the same one cause. The regional event log carries the
+      // pulse's selected outcomes, and the retired bare-decline family was 36 of them.
+      // ⭐ THE NEWS LAYER DID NOT MOVE — wizardNewsFinalEntries 240, accumulated 1567, unique
+      // 272 are all unchanged — because ordinary population drift was already `state_only`
+      // and never a Chronicle beat. Only the state lane got quieter, which is exactly what
+      // retiring a state-only candidate should do and is the arithmetic that tells the two
+      // layers apart.
+      regionalEventLog: 73,
+      regionalEventLogUnique: 73,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);

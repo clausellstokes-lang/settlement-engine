@@ -1513,13 +1513,13 @@
   },
   {
     "path": "src/domain/worldPulse/populationDynamics.js",
-    "line": 458,
+    "line": 485,
     "category": "floatInterpolation",
     "snippet": "`Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`"
   },
   {
     "path": "src/domain/worldPulse/populationDynamics.js",
-    "line": 458,
+    "line": 485,
     "category": "twoDecimalScore",
     "snippet": "`Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`"
   },

@@ -4762,7 +4762,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // Censusing there would have charged another lane's titles to this row. The figures
     // above were taken in a detached worktree at the verified base carrying exactly WF-1a's
     // ten paths, whose `git status --porcelain` listed those paths and nothing else.
-    files: 2460, parked: 364, credited: 2096, titles: 20489, suiteTitles: 5737,
+    // ── RE-RECORDED 2026-08-17 BY TE36 (THE P4 POPULATION RECONCILIATION), CHAIR-AUTHORIZED
+    // UNDER ODQ §271, WITH ITS CAUSE DECOMPOSED ───────────────────────────────────────────
+    // 2,460/364/2,096/20,489/5,737 → 2,460/364/2,096/20,512/5,743. NO NEW TEST FILE AT ALL:
+    // the test census sits at its pinned ceiling, so every P4 pin extends an ALREADY
+    // REGISTERED file and this row moves on the two title layers ONLY.
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   files        0  = no file minted, none retired
+    //   parked       0  = every added title is a literal, so door 3 reads them statically
+    //   credited     0  = no file changed side
+    //   titles     +23  = +16 demographicsRates (the fixed point per tier against its closed
+    //                     form, the anti-floor on both sides of the starvation deficit, the
+    //                     R-C ledger veto with its control, the two-vocabulary bijection
+    //                     walker, the crisis01-absent dormancy arm)
+    //                   + +5 demographicsWorldsHand (the famine MINT gate, its DARK control,
+    //                     and the "only the food kind is arbitrated" arm)
+    //                   + +2 demographicsFloor (the capacity-not-a-constant arm and the
+    //                     sound-granary positive control), closing with nothing left over
+    //   suiteTitles  +6  = 5 new describes in demographicsRates + 1 in demographicsWorldsHand
+    // demographicsKernel, subsystemRowsGrowth and subsystemRowsPeople carry ZERO new titles
+    // by construction: each RENAMES or re-points an existing pin rather than adding one,
+    // which is why a slice this large moves the file count not at all.
+    // ⚠ MEASURED IN THIS WORKING TREE AT THE LANE'S OWN COMMITTED TIP: `git status
+    // --porcelain` listed NOTHING at measurement time (the lane's paths were already
+    // committed and no sibling lane holds work in this worktree), so no other lane's titles
+    // are charged to this row.
+    files: 2460, parked: 364, credited: 2096, titles: 20512, suiteTitles: 5743,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

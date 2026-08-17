@@ -770,10 +770,10 @@
         {
           "field": "mechanicalOutcomes",
           "capPerPulse": 8,
-          "headlineOccurrences": 77,
-          "distinctValues": 24,
-          "prospectiveOccurrences": 73,
-          "prospectiveDistinctValues": 23,
+          "headlineOccurrences": 56,
+          "distinctValues": 29,
+          "prospectiveOccurrences": 52,
+          "prospectiveDistinctValues": 28,
           "indicativeOccurrences": 4,
           "indicativeDistinctValues": 1
         },
@@ -789,10 +789,10 @@
         }
       ],
       "union": {
-        "headlineOccurrences": 228,
-        "distinctValues": 83,
-        "prospectiveOccurrences": 168,
-        "prospectiveDistinctValues": 69,
+        "headlineOccurrences": 207,
+        "distinctValues": 80,
+        "prospectiveOccurrences": 147,
+        "prospectiveDistinctValues": 66,
         "indicativeOccurrences": 60,
         "indicativeDistinctValues": 14
       }
@@ -803,7 +803,7 @@
         "flags": "",
         "replacement": "bargains",
         "distinctValues": 5,
-        "occurrences": 11
+        "occurrences": 13
       },
       {
         "source": "\\bmay be depleted\\b",
@@ -845,7 +845,7 @@
         "flags": "",
         "replacement": "exploits",
         "distinctValues": 3,
-        "occurrences": 4
+        "occurrences": 7
       },
       {
         "source": "\\bmay expose\\b",
@@ -858,8 +858,8 @@
         "source": "\\bmay fall\\b",
         "flags": "",
         "replacement": "falls",
-        "distinctValues": 3,
-        "occurrences": 36
+        "distinctValues": 0,
+        "occurrences": 0
       },
       {
         "source": "\\bmay grow\\b",
@@ -887,7 +887,7 @@
         "flags": "",
         "replacement": "mobilizes",
         "distinctValues": 5,
-        "occurrences": 11
+        "occurrences": 13
       },
       {
         "source": "\\bmay press a challenge to the government\\b",
@@ -901,7 +901,7 @@
         "flags": "",
         "replacement": "protects",
         "distinctValues": 8,
-        "occurrences": 14
+        "occurrences": 17
       },
       {
         "source": "\\bmay raise a\\b",
@@ -922,7 +922,7 @@
         "flags": "",
         "replacement": "reforms",
         "distinctValues": 23,
-        "occurrences": 45
+        "occurrences": 50
       },
       {
         "source": "\\bmay rise\\b",
@@ -983,10 +983,10 @@
     ],
     "totals": {
       "rules": 26,
-      "activeRules": 17,
-      "inertRules": 9,
-      "distinctValues": 69,
-      "occurrences": 168
+      "activeRules": 16,
+      "inertRules": 10,
+      "distinctValues": 66,
+      "occurrences": 147
     },
     "knownInert": [
       {
@@ -1000,6 +1000,12 @@
         "flags": "",
         "replacement": "defects",
         "reason": "npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.defect through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no defect headline."
+      },
+      {
+        "source": "\\bmay fall\\b",
+        "flags": "",
+        "replacement": "falls",
+        "reason": "populationDynamics.js::populationCandidate is the live decline authoring seam, and WAVE P4 (ODQ §219.3) gated it: with demographicsEnabled lit the lane emits population ONLY as a conserved transfer, so bare decline is refused exactly as bare growth already was and the executed AO-0 12-record persisted public+mechanical union contains no fall headline. THE CORPUS LIGHTS EVERY FLAG, so this row reads INERT here and NOWHERE ELSE: demographicsEnabled is false in every shipped preset, where the seam still authors the headline."
       },
       {
         "source": "\\bmay grow\\b",

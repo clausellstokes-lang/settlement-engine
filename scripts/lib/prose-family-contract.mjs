@@ -35,20 +35,39 @@ const EXPECTED_ROOTS = new Map([
   ['pulseResult', [...Array(12).keys()]], ['worldState', [12]], ['wizardNews', [13]],
   ['canonEventResult', [14]], ['aiChronicle', [15]],
 ]);
+// ── RE-RECORDED 2026-08-17 BY TE36 (THE P4 POPULATION RECONCILIATION), CHAIR-AUTHORIZED
+// UNDER ODQ §271. THE DENOMINATOR MOVED; THE CONTRACT DID NOT ────────────────────────────
+// ⭐ THE SHAPE IS UNTOUCHED AND THAT IS THE WHOLE POINT: 63 identities before, 63 after,
+// ZERO added and ZERO removed, four families still nonempty, `chronicle` and `timeline`
+// byte-identical. Every moved figure is a COUNT on a path the contract already governed,
+// and every one moves DOWN.
+// THE CAUSE, in one row: `pulseHistory[].*.populationDeltas[].reason` goes distinctValues
+// 2 → 1 and occurrences 41 → 5 (consequence) / 40 → 4 (mechanical). WAVE P4 (ODQ §219.3)
+// retired the bare `population_decline` candidate under `demographicsEnabled`, and this
+// corpus lights EVERY `*Enabled` flag, so the reason vocabulary of the population lane
+// collapses to what a conserved TRANSFER still writes. Everything else follows from that
+// one retirement: `consequenceOutcomes[].type` 9 → 8 distinct and `mechanicalOutcomes[].type`
+// 3 → 2 (the retired candidateType), the headline/summary/reasons counts on both lanes, the
+// rumour-seed family the retired outcomes used to seed, and `regionalGraph.eventLog[]`
+// 109 → 73. THE NEWS LAYER DOES NOT MOVE — wizardNewsFinalEntries 240, accumulated 1567,
+// unique 272 are all unchanged — because ordinary population drift was already `state_only`.
+// ⚠ SCOPE: `demographicsEnabled` is virtual and false in every shipped preset. This
+// denominator is the ONLY place in the estate that observes the lit engine, so no player,
+// no shipped golden and no dark-control cell sees any of this.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 26076, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
+  scalarRows: 25451, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
   wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
-  regionalEventLog: 109, regionalEventLogUnique: 109, aiChronicle: 1,
+  regionalEventLog: 73, regionalEventLogUnique: 73, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1286, occurrences: 5665 },
-  { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 201 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1221, occurrences: 5076 },
+  { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 165 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1308, occurrences: 5885 });
-const EXPECTED_ROWS_BYTES = 8280;
-const EXPECTED_ROWS_SHA256 = '8f83fa6ca2fc1411376220e55235ea392e76d98596f1bfd8c3eb52480b8469ae';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1243, occurrences: 5260 });
+const EXPECTED_ROWS_BYTES = 8274;
+const EXPECTED_ROWS_SHA256 = 'a35151ec8867d03e7d76c10127b0d173a85d205995065722ec64b35e27aad898';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
