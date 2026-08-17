@@ -9523,3 +9523,80 @@ operative clause here.
    looks. Where prior art is aesthetically weaker than the
    corpus, lanes SAY SO — that is a finding, not a criticism to
    soften.
+
+## §257 · THE GENERATION SPECIFICATION EXISTS — 24 STAGES, 33
+## GAPS, NINE WAVES; AND THREE QUESTIONS IT SURFACED
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **DELIVERED**: map-corpus/docs/GENERATION-SPEC.md — 3,187
+   lines: the pipeline as **24 stages (S0-S23) in derivation
+   order**, each with INPUTS / MECHANISM / OUTPUTS / LAWS /
+   CENSUSES / STATUS; the target sheet with the corrected bands
+   and five binding usage rules; the invariants; a **33-row gap
+   ledger with an explicit dependency-edge graph**; and a
+   **nine-wave order (W0-W8) whose every exit criterion is a
+   MEASUREMENT, not an intention**. Plus 12 inspiration-not-
+   derivable rows, 6 chair questions, and an instrument map.
+   Written incrementally behind an append marker (the §253
+   lesson applied). This — not the organically grown charter —
+   is now the map program's spine and wave nine's build sheet.
+2. **FOUR SOURCE CONFLICTS RULED BY THE LANE; THE FIRST WAS A
+   LIVE DEFECT IN THE GRADING SHEET AND THE CHAIR FIXED IT
+   SAME-TURN**: the atlas still published paper warmth **34**
+   where §249.4a had ruled **37** — the ruling was made AFTER the
+   fold and nobody carried it back. The atlas now states the
+   ruling, prints the reasoning beneath it, and marks the
+   superseded rows. ⭐ **CLASS: A RULING MADE AFTER A DOCUMENT IS
+   FOLDED DOES NOT REACH THE DOCUMENT** — the same address-rot
+   family as stale line numbers, now applied to decisions.
+   C-2 (the built GRAIN_BAND's metropolis rung is stale at
+   100-130 vs the corrected 80-120) and C-4 (radialDensityFalloff
+   — PLAN's correction binds, already adopted at §250.6b) stand
+   as ruled.
+3. **THE THREE NEW QUESTIONS, RULED.** (a) ⭐⭐ **Q-2 IS THE
+   SHARPEST AND IT IS A REAL DEFECT: THE BUILT EPOCH LADDER IS A
+   *CIRCUIT* LADDER, so every unwalled leaf gets exactly ONE
+   epoch** — while PLAN §6.1 MEASURES fabric epochs at village
+   1-2 and town 2-3. **RULED: EPOCHS ARE FABRIC EPOCHS, NOT
+   CIRCUIT EPOCHS.** A wall is an EVENT WITHIN the epoch
+   sequence, never its definition; a village that grew over two
+   centuries has two vintages and no wall at all. This does NOT
+   revise the owner's §240 law (which describes a WALLED
+   settlement's sequence) — it corrects our implementation's
+   conflation, which would otherwise have made vintage
+   difference impossible below the wall line and made the
+   walled/unwalled split silently equal the tier line. Wave nine
+   first-order. (b) **Q-1: a WITHDRAWN GRADING TARGET MAY REMAIN
+   A GENERATION INPUT** — the thorp/hamlet rungs were withdrawn
+   because THE INSTRUMENT cannot measure them (it counts hedges
+   as buildings), not because the derivation is wrong; the
+   generator must still produce something at those tiers. It is
+   marked UNVALIDATED-BY-INSTRUMENT so nobody mistakes "it
+   generates" for "it measures well," and the roof-count
+   instrument restores validation. (c) **Q-3: GRAIN_BAND IS THE
+   TARGET; the derivation aims at it and the DRAWN result is the
+   truth** — but the metropolis deriving ≈113 while drawing 70 is
+   not a spec ambiguity, it is a MEASURABLE DISAGREEMENT BETWEEN
+   INTENT AND OUTPUT. **A new census is ordered: derived grain
+   and drawn grain must agree within a stated tolerance**, so
+   the loss between them can never again be invisible.
+4. **BOTH MID-LANE ADDENDA LANDED**: all 13 FMG city parameters
+   dispositioned — **bearing-to-water is a REAL GAP (G-4)** with
+   its home in the terrain substrate, and the lane recorded the
+   binding distinction that a bearing READ FROM TERRAIN mints
+   nothing while a wind/sun bearing MINTED AT GENERATION is a
+   seed-permanent world fact under THE PROMISE; on the exponent,
+   **the two are not comparable** (ours grain, theirs extent) and
+   the honest use is as a cross-check on §161f's extent curve,
+   where we deliver ×1.13 against a predicted ~×1.6 — supporting
+   restoration of the derivation home FROM OUR OWN LEAVES, not
+   adoption of their constant (G-5). MF-W1's authoritative
+   figures are installed and **the exemplar-independence caveat
+   is promoted to a binding usage rule (10 worlds wear 16
+   names)**, with the predicate-boundary gap entered at RANK 3.
+5. **HAZARD RELAYED AND ALREADY HONOURED**: the shared worktree's
+   HEAD is the ledger branch while the tree holds build-branch
+   content, so the index carries thousands of staged deletions —
+   a naive `git add` + commit would land one file and 3,334
+   deletions. **The private-index method is the only safe path
+   and is what every ledger commit in this session has used.**

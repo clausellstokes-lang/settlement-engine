@@ -164,3 +164,12 @@ that a wave's attribution can be wrong; (c) ratifying the lane's restraint in
 not landing a measured, working cure under the freeze; (d) the exemplar-set
 independence caveat and its retroactive effect on figures already quoted in
 this ledger.
+
+### §257 — the generation specification (Opus chair)
+Fable should re-derive: (a) Q-2's ruling that epochs are FABRIC epochs, not
+circuit epochs — it is the sharpest correction in the spec and it changes what
+unwalled settlements can express; (b) Q-1, allowing a withdrawn grading target
+to remain a generation input under an unvalidated marker; (c) Q-3's new
+derived-vs-drawn grain census; (d) the chair's same-turn atlas fix carrying
+§249.4a's warmth ruling back into the graded document, and the general class
+that a ruling made after a fold does not reach the folded document.
