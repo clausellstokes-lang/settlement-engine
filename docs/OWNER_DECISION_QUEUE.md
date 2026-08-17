@@ -8964,3 +8964,29 @@ construction), straddler counterfactual must red.
    shortcuts; and their issue tracker as free failure-mode
    research. The receipt must close with WHERE THEY ARE BETTER
    THAN US TODAY, honestly and without defensiveness.
+
+### §248.4 · AMENDMENT — FMG IS MIT (owner, 2026-08-17)
+
+1. The owner reports FMG as MIT-licensed; the lane VERIFIES from
+   the repo's own LICENSE and specifically checks PER-DIRECTORY
+   AND VENDORED variance (FMG vendors third-party libraries whose
+   own headers govern them and which the top-level grant does not
+   cover). MIT opens a fifth verdict category —
+   **ADOPT-CODE-WITH-ATTRIBUTION** — with the practical
+   obligation of a shipped THIRD-PARTY-NOTICES file, tracked
+   against the standing IP item.
+2. ⭐ **THE CHAIR'S STANDING PREFERENCE IS UNCHANGED AND IS AN
+   ENGINEERING JUDGMENT, NOT A LEGAL ONE: clean-room
+   re-implementation remains the DEFAULT.** Their code is written
+   against their world model, their data structures and a seeding
+   model with no evidence of byte-determinism; our
+   non-negotiables (byte-exact same-seed output, no
+   platform-variant math, area-true predicates, the epoch/version
+   axis, content-hashed artifacts) are alien to it. **IMPORTING
+   THEIR CODE WOULD IMPORT THEIR ARCHITECTURE — exactly what
+   §238/§241 spent two waves excising from our own.** Code
+   adoption is reserved for small, well-bounded, well-solved
+   utilities (geometry helpers, curve smoothing, relaxation/
+   Voronoi) where reinvention is waste, each with its obligation
+   and its saving stated explicitly. Everything architectural
+   stays clean-room by description.
