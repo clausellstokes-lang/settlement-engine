@@ -8057,3 +8057,39 @@ town→metropolis) with the TOWN panel on both as the consistency
 BRIDGE — which doubles as the curation instrument (mismatched
 bridge panels convict a fake series). Supersedes §225's smaller
 runs if budget forces a choice. Relayed to HF-3 same-turn.
+
+## §227 · WF-1a LANDED AND EXPOSED; THE COLLISION SEQUENCED
+## CLEAN; TE34's BINDING TERMINAL RELEASED (2026-08-16, chair)
+
+1. **TE35 COLLECTED**: WF-1a — the typed patron fall (the flag,
+   the leaf, the ring, the classifier) — landed as ONE squashed
+   commit 66fda66d, terminal green (gate exit 0, STRICT DIST 51/
+   409 clean, boot smoke 523/523), including the mid-lane
+   COLLISION CURE: its new `faithUnseatingEnabled` key had red
+   the covering-array census outside the frozen 11 (caught by
+   TE34 running the UNMODIFIED head test), cured at all THREE
+   sequenced figures (virtual 23→24, union 80→81, union−governed
+   55→56 — the third flagged by TE34's measured hand-off).
+   CAS EXECUTED: claude/composite-r4 0cf18bed→66fda66d.
+   **J-TE35-3 and J-TE35-5 RATIFIED** (the READY-not-LANDED flip
+   deferral — the landing sha cannot cite itself — and the
+   call-site `in`-narrowing over widening a WF-1b-reserved file
+   or an any-cast). The A5 pin (the prevPatron capture-order
+   cure) carries its own mutant as chartered.
+2. **TE34 DIAGNOSTIC TERMINAL COLLECTED GREEN at 0cf18bed**
+   (verbatim: 28,521 at ceiling 11 byte-identical to TE33's,
+   both type ceilings exact, deno 662/0, env-scope walker
+   running INSIDE the gate). Its gate run 1 red twice on ITS OWN
+   comment-class instances — incl. the NEW SUB-CLASS banked: the
+   anchor walker scans RAW TEXT, so QUOTING a forbidden matcher
+   in an explanatory comment convicts the prose itself. Also
+   banked: A REBASE ARTIFACT MUST BE RE-DERIVED AT THE MOMENT OF
+   USE (its pre-cure patch red the probe — census-rot's sibling).
+3. **SEQUENCING COMPLETED AS RULED**: TE34 released to its
+   binding terminal on 66fda66d — rebase (pre-proven: clean
+   apply, 272 tests green with both lanes' edits composed), two
+   commits, PLUS the chair-ordered third docs commit carrying
+   the WF-1a READY→LANDED flip with its deferred requiredSymbols
+   rows (vetoable; one terminal proves everything, the packet
+   validator in-gate proving the flip well-formed). RS-3 fires
+   at TE34's exposure per §213.3.
