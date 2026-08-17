@@ -102,3 +102,12 @@ Fable should re-derive: (a) whether the clean-room discipline as written is
 sufficient given whatever license the lane reports; (b) the judgment that
 source study of a competitor is worth doing at all at this stage; (c) the
 expected-yield ranking (world→settlement derivation first).
+
+### §249 — the atlas fold's rulings (Opus chair)
+Fable should re-derive: (a) the cohort amendment — union in general, HF-1 alone
+for axes outside the register index (paper warmth at 37, not 34); (b) retiring
+the band-overlap rider rather than adopting IQR bands, and the reasoning that
+tier legibility is multi-channel; (c) accepting the withdrawn rungs and the
+unrestorable population fit rather than substituting a weaker estimate;
+(d) the superlative-audit class as a general law. Evidence: laneMFS2-receipt.md,
+map-corpus/docs/laneMFS1-urbanism-atlas.md §2.9, MFS2-bands.py output.

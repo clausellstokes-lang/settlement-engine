@@ -8990,3 +8990,68 @@ construction), straddler counterfactual must red.
    Voronoi) where reinvention is waste, each with its obligation
    and its saving stated explicitly. Everything architectural
    stays clean-room by description.
+
+## §249 · THE ATLAS FOLD COLLECTED — THE STRONGEST-COHORT RULE
+## RAISES THE BAR, AND THE ATLAS AUDITED ITSELF (2026-08-17;
+## chair: Opus 5 — Fable-unvalidated)
+
+1. ⭐⭐ **THE HEADLINE VINDICATES §244.4 IN THE SHARPEST POSSIBLE
+   WAY**: applied correctly, the strongest-cohort rule (HF-1 ∪
+   top-decile, n=71) RAISES three of the six hand bands ABOVE
+   what MF-S1 published — grain 1.8→2.05, wash 3.1→3.29, tone
+   IQR 18→22 — because MF-S1's figures came from a 12-plate
+   sample whose median sat below its own cohort's. **A
+   corpus-median re-derivation moves all three the WRONG WAY: a
+   re-deriver who takes the median gets the wrong SIGN, not
+   merely the wrong magnitude.** That sign-check is now a stated
+   usage rule in the atlas §2.8.1. Chroma (44→43.3), the stroke
+   percentiles and both centroids come out UNCHANGED — so
+   HF-M1's reported −8 chroma and paper-warmth move are facts
+   about OUR GENERATOR'S DRIFT, not about the target. Every band
+   was recomputed from the CSV, never transcribed (script
+   MFS2-bands.py + JSON beside the atlas).
+2. **FOLD EXECUTED**: 1,036 → 1,394 lines, 39 fold markers, a
+   corrected grain ladder (§2.1a), the two derivation laws
+   (§2.3.0), five inherited usage rules (§2.8.1), and a §2.9
+   CORRECTION LEDGER carried INSIDE the graded document because
+   §243 makes the scratchpad temporary. Value range retired and
+   INK L installed with its gate (≤45 / 45-62 / >62) arriving
+   from two independent derivations. T-01 thorp+hamlet WITHDRAWN
+   with roof-count named as the restorer and the pop-fit
+   withdrawn with them; metropolis 80-120; **T-02 CONFIRMED at
+   ×1.21/×1.41 — the one headline the measurement pass
+   STRENGTHENED**. A fifth grading verdict **⛔ WITHDRAWN ("no
+   instrument — not a pass and not a fail")** now exists so an
+   unmeasurable target can never masquerade as either.
+3. **FIVE THINGS §244 DID NOT NAME, ACCEPTED**: the atlas's own
+   32 SUPERLATIVES are the same failure at its own scope (six
+   false even of the 12-plate sample they were drawn from, two
+   water claims SWAPPED) — fixed inline with an audit table, and
+   **THE CLASS IS BANKED: A SUPERLATIVE IS A CLAIM AND MUST BE
+   MEASURED AT ITS STATED SCOPE**; §2.3.1's "ink above L≈100" is
+   arithmetically impossible (no plate of 313 exceeds 100; the
+   intended threshold is ~62); four Part-1 figures do not
+   reproduce (all outside the 12 plates the instrument actually
+   ran on); and hf57 CONTRADICTED banned prior #8 — the prior
+   stands and hf57 becomes its counter-example.
+4. **RULINGS.** (a) **The cohort stays the UNION as folded, with
+   one narrow amendment: any axis NOT represented in the
+   register index pins to HF-1 ALONE** — paper warmth is exactly
+   that case (union 34 vs HF-1 37), because a top-decile-by-
+   register plate may be cool and would dilute a warmth target
+   the index never scored. **Paper warmth pins at 37.** (b) The
+   **≤30% band-overlap rider is RETIRED as unsatisfiable** (the
+   atlas's own town/city bands overlap 57%) and its measured
+   overlap is recorded instead as a FACT ABOUT TIERS: grain
+   alone does not separate town from city, so tier legibility
+   must rest on the multi-channel read the atlas already carries
+   (landmark budget T-16, district channels T-17, chrome T-25) —
+   IQR bands NOT adopted, since narrowing them would silently
+   move MF-B8's standing verdicts. (c) Deferrals accepted with
+   causes: the roof-count instrument is queued (it restores two
+   withdrawn rungs), the population fit is UNRESTORABLE from the
+   corpus and stays withdrawn, T-03's basis is too noisy to band
+   and is flagged not guessed, and the holdout's ZERO trade
+   (0/4) and institution (0/3) coverage is recorded as a known
+   limit of a frozen corpus. (d) The README's stale holdout
+   clause was corrected by the chair same-turn.
