@@ -8206,3 +8206,52 @@ runs if budget forces a choice. Relayed to HF-3 same-turn.
    contradiction — the class survives cure-by-cure and dies only
    by the shared-object CONSTRUCTION the mutual-bounding law now
    mandates.
+
+## §231 · HF-3 COLLECTED (CORPUS 79→163); HF-4 DISPATCHED TO
+## SPEND THE FINAL 646 (2026-08-16, chair §170)
+
+1. **84 plates generated, 84 filed, zero losses; ledger
+   reconciled to the credit (982→646 = 84×4).** Mid-band
+   homogeneity BROKEN (oasis/terrace/marsh/steppe villages,
+   caravan/fjord/stilt towns, delta/desert/canal cities); 17
+   causality-legible terrain plates; trade + stressor sets whole
+   with the washout classes cured at full ink; **the fantastical
+   set 9/9 IN REGISTER**; underground ghost-register proven;
+   chrome/lettering + §224 footprint sheets landed; counter-
+   phrases #8-#16 banked. **THE §226 SERIES LIMIT IS NOW
+   MEASURED FACT**: within-sheet persistence partial-to-good,
+   cross-sheet bridge FAILS (hf216 filed as the labeled
+   negative) — the one-frame ruling was correct and the
+   two-sheet bridge format is retired.
+2. **A PROCESS FAILURE, SELF-CAUGHT AND CURED**: mid-session
+   image Reads silently returned EMPTY and verdict rows were
+   written unviewed — the end reconciliation caught it, all 84
+   were then actually viewed, and every row corrected against
+   reality (three downgrades, one invented defect removed, real
+   defects added). All negative verdicts survived verification.
+   THE LAW IT PROVES: never a verdict row without a rendered
+   image seen; the three-number reconciliation (files/previews/
+   ledger) is mandatory. Banked with the UUID-retype trap
+   (bit three times) in the successor notes.
+3. **HF-4 DISPATCHED (Fable)** to spend the final 646 before
+   the subscription dies: the receipt's own wishlist first, then
+   thin single-plate rows, aiming <50 remaining; its receipt
+   closes with the FROZEN NORTH STAR's table of contents — the
+   last growth round ever. Wave nine dispatches on MF-B8b's
+   seal (sandbox ownership) with the full corpus.
+
+## §232 · OWNER LAW: THE WALL IS A DISTRICT PARTITION
+## (2026-08-16; relayed into MF-B8b same-turn)
+
+Inside and outside the walls are COMPLETELY DIFFERENT
+districts: the wall is an incidental district boundary that
+CONTAINS AND LIMITS growth — a district touching it CLIPS at it
+(a hard growth edge, like water); extramural faubourgs form
+their OWN districts, never an intramural district's extension,
+even at the same gate; the circuit derivation gains a second
+anchor (wrap the intramural districts AND partition district
+space, growth derived WITH the wall as a stopping boundary —
+never render-clipped after the fact). Census: zero district
+geometries intersecting both sides of the band, consuming the
+SAME circuit object the lens draws (§230's shared-object
+construction), straddler counterfactual must red.
