@@ -68,3 +68,15 @@ argument); (c) the scrub-list disposition (teach geometry, never naming);
 (d) whether the 53-plate/16.9% holdout is the right size and spread once the
 PIL numbers land. Evidence: laneHF4-receipt.md, laneHF-CALIBRATION.md,
 laneHFM1-receipt.md when it lands.
+
+### §244 — the measurement pass's rulings (Opus chair)
+Fable should re-derive: (a) THE BAND-PINNING AMENDMENT — pin to the strongest
+measured cohort, never the corpus median (this is the most consequential
+aesthetic ruling in the program: it decides what "as good as the corpus" means
+and it deliberately rejects our own later rounds as the standard); (b) striking
+rather than widening T-01's thorp/hamlet rungs, and the consequent withdrawal
+of MF-B8's low-tier misses as instrument artifacts; (c) retiring the
+value-range band in favour of ink L; (d) demoting HF-4c's star grades to
+annotations; (e) the three reversed adjudications, especially restoring hf103
+as grain flagship. Evidence: map-corpus/docs/laneHFM1-receipt.md, the measured
+CSV, HFM1-star-audit.txt.

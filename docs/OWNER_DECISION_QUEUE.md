@@ -8743,3 +8743,80 @@ construction), straddler counterfactual must red.
    reading a copy that may not exist. docs/HANDOFF_CURRENT.md
    updated same-turn so a successor of any model inherits the
    canonical path.
+
+## §244 · THE MEASUREMENT PASS OVERTURNS THE CLOSING ROUND'S
+## TASTE CALLS AND BREAKS TWO BANDS (2026-08-17; chair: Opus 5 —
+## Fable-unvalidated)
+
+1. **INSTRUMENT EQUIVALENCE PROVED BEFORE ANY NEW NUMBER**: the
+   aesthetic script reproduces all 12 archived rows EXACTLY, the
+   grain kernel all 22, the metrics script its own JSON; §2.3.1's
+   lost paper/ink instrument was recovered from its definition
+   and calibrated against 49 published pairs (ink within 3/255,
+   L-percentiles 57/123/201/230/236 vs the atlas's
+   57/125/202/231/240). All 313 plates measured, zero errors.
+2. **THE BAR SOFTENED, AND BY MORE THAN THE ROUND ADMITTED**:
+   HF-4c awarded ★★★ to **55 of 78 (70.5%)**, not the 41 (52.6%)
+   it self-reported — full audit in HFM1-star-audit.txt. HF-3's
+   rate was 2 of 84. The cohort measures WEAKEST OF FIVE ROUNDS on
+   the atlas's own hand axes, controlling for subject (HF-1 towns:
+   register 64.2 / wash σ 3.45, ZERO ★★★; HF-4c towns: 27.9 /
+   1.63, FIFTEEN). **RULING: HF-4c's star grades are DEMOTED to
+   annotations — no calibration figure may derive from them, and
+   §242.4's caveat is upgraded from suspicion to finding.**
+   THE LAW: a grading cohort must be measured against the same
+   instrument as its predecessors before its grades are spent.
+3. **THREE ADJUDICATIONS REVERSED AGAINST THE CLOSING ROUND** —
+   each on its own claim: hf389's supersession REFUTED (the plate
+   named grain-max has the COARSEST grain of the nine metropolis
+   plates, 70.2 cells, 30% below the T-01 floor) — **hf103 (113.9)
+   IS RESTORED as the grain flagship**, reversing my §242
+   provisional acceptance exactly as the PIL condition was
+   designed to allow; none of the nine "best in corpus" claims is
+   top-decile on register and three are bottom-quintile — STRUCK;
+   all three register-edge calls fail (hf289 177th on chroma, not
+   first; hf355 65th darkest, not darkest; hf300 at the 73rd
+   percentile, not off-register) — STRUCK.
+4. **BANDS: ADOPTED WITH ONE CHAIR AMENDMENT.** Chroma −8 median,
+   paper grain −0.3 to −0.7 (31% of plates now below the published
+   floor), wash σ −0.4, paper warmth R−B 37 → 24 with in-band
+   share 96% → ~55%. ⭐ **THE AMENDMENT, AND IT GOVERNS ALL FUTURE
+   RE-DERIVATION: the aesthetic bands re-pin to the STRONGEST
+   MEASURED COHORT (HF-1-era + measured top-decile), NEVER to the
+   corpus median.** The corpus grew paler round by round; pinning
+   to the median would ratify our own drift and make the north
+   star chase the generator that drew it. The lane's HF-1-cohort
+   recommendation for paper warmth is the general rule.
+   **THE VALUE-RANGE BAND IS BROKEN** — arithmetically
+   self-contradicting on MF-S1's own archived numbers (hf50, its
+   declared north star, measures 78, identical to the famine plate
+   it calls weak; 32 of its 49 sit under the washed-out
+   threshold). RETIRED; **INK L REPLACES IT**, which is what the
+   atlas's own prose reaches for.
+5. ⭐⭐ **T-01's TWO LOW RUNGS ARE STRUCK, NOT WIDENED**: with
+   windows re-set per §2.8.3, thorp measures 20.8–99.6 and hamlet
+   28.0–66.0 (0 of 7 in band each) because AT THAT TIER THE
+   INSTRUMENT COUNTS HEDGES AND FURROWS, NOT BUILDINGS — hf90, a
+   twelve-roof thorp, returns "99.6 cells across"; MF-S1's single
+   thorp window also sat on open field east of the cluster.
+   **CONSEQUENCE FOR THE MAP PROGRAM, RECORDED LOUDLY: MF-B8's
+   reported thorp/hamlet grain misses were measuring an
+   INSTRUMENT ARTIFACT, not a defect** — those two rows are
+   withdrawn from the grading sheet until a tier-appropriate
+   instrument exists (roof-count, not scanline). Village/town/city
+   bands UNCHANGED, so **B8's town-48 and city-61 in-band verdicts
+   STAND**; metropolis re-pins to 80–120, which makes B8's 70 a
+   smaller miss than reported but still a miss.
+6. **HOLDOUT: THE 12-SWAP FIX IS ADOPTED** — the set was clean of
+   scrub/A-B/spec plates and representative on nine of ten axes
+   but failed on ERA (HF-1 0 of 49, HF-3 49% of the set, HF-4c 5
+   of 78; the marginals passed only because two exclusions
+   cancelled). ⚠ **AND THE EXCLUSION RULE IS NOW VACUOUS BY THIS
+   LANE'S OWN WORK — every plate is a figure-derivation plate.**
+   RESTATED: the rule bites on COUNTER-PHRASE and A/B plates only;
+   holdout membership is otherwise governed by representativeness
+   and the scrub list.
+7. **MF-S2 DISPATCHED** to fold every correction into the atlas
+   (the grading sheet must never carry a refuted band — the
+   address-rot class applied to figures), and all measurement
+   outputs are secured in map-corpus/docs/ per §243.
