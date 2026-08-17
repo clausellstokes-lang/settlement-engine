@@ -189,3 +189,14 @@ to treat it as the mush diagnosis — it will drive a large rework;
 PLAUSIBLE (unexecuted, 2017-source) evidence — how much should the plan change
 on evidence of that grade?; (d) the conditions attached to the live-export
 follow-up if the owner grants it.
+
+### §261 — the corpus-provenance correction (Opus chair)
+⚠ SUPERSEDES part of the §259 entry: do not ask Fable to re-derive "twelve
+refutations of our own inferences" as framed — that attribution is withdrawn
+here. Fable should instead re-derive: (a) whether §259's twelve divergences
+carry any weight at all now that the corpus is known to be an independent
+artifact; (b) whether the chaos-at-large-scale hypothesis survives testing
+against the corpus's own measured block elongation and plot variance;
+(c) the third-leg requirement for ADOPT verdicts; (d) whether the chair's
+propagated framing error contaminated anything in §254-§260 beyond the rows
+retracted here.

@@ -9770,3 +9770,67 @@ operative clause here.
    and §258's intent-over-execution doctrine, and every
    ADOPT-AS-APPROACH must name its dossier fact AND a corpus
    metric that actually exists in the measured register.
+
+## §261 · OWNER CORRECTION: THE CORPUS IS NOT DERIVED FROM THE
+## PROCEDURAL GENERATORS — A CHAIR FRAMING ERROR, RETRACTED
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **THE ERROR, MINE, AND IT PROPAGATED**: I framed the corpus as
+   "an image model's painterly IMITATION OF WATABOU'S OUTPUT" and
+   built §254 on it ("the ORIGINAL MECHANISM behind the style we
+   have been measuring"). **THE OWNER CORRECTS: the 313 plates
+   come from an IMAGE GENERATOR (nano-banana-pro), not from
+   Watabou, FTG, or any procedural generator.** The owner
+   exemplified a style with screenshots at the outset, but the
+   plates were drawn by a model working from its own training in
+   historical and fantasy cartography — and they MEASURE RICHER
+   than these generators' flat vector output on the axes we grade
+   (§256.2 already recorded that, which should have warned me).
+   **THE CORPUS IS AN INDEPENDENT AESTHETIC ARTIFACT AND IT IS
+   THE TARGET IN ITS OWN RIGHT.**
+2. **WHAT THE ERROR INVALIDATES, stated so nothing inherits it.**
+   (a) §254.1's "original mechanism behind the style" framing is
+   RETRACTED. (b) ⭐ **§259.4's SCORING IS RE-READ: "twelve of
+   our inferences refuted, nine of them our own reverse-
+   engineering errors" IS WRONG AS ATTRIBUTED.** A disagreement
+   between Watabou's mechanism and something we MEASURED IN THE
+   PLATES is not our error — it is two independent sources
+   differing, which is expected. Only misreadings of our OWN
+   measurements or our OWN code count as our errors. The twelve
+   divergences stand as FACTS; their ATTRIBUTION is withdrawn
+   pending re-reading against the corpus itself. (c) **§259.7's
+   live-export FIDELITY CHECK IS WITHDRAWN AS FRAMED** — sampling
+   Watabou's exports cannot tell us "how faithful our corpus is,"
+   because the corpus was never imitating Watabou. It would
+   answer only "how does Watabou differ from our target," which
+   is interesting and far less valuable. **The owner need not
+   rule on it; I withdraw the request** and will re-raise a
+   properly-framed version only if a specific question needs it.
+3. **WHAT SURVIVES, and it is still substantial**: Watabou's
+   findings remain valid as ENGINEERING — ways to get a result
+   deterministically, cheaply, and without free parameters. But
+   each must now be VALIDATED AGAINST THE CORPUS rather than
+   assumed to explain it. Specifically: the
+   chaos-at-large-scale/orthogonality-at-small-scale principle is
+   a HYPOTHESIS ABOUT OUR MUSH, not a description of our target —
+   **it must be tested against the corpus's own measured block
+   elongation and plot variance before it drives a rework**; the
+   parameterisation insight (character as four scalars) is
+   architecture-shaped and survives untouched; the setback
+   mechanism survives because §239 confirmed the OUTCOME
+   independently in the plates; the T-dominance and tower-spacing
+   findings survive as MECHANISM EXPLANATIONS of numbers WE
+   measured in the corpus — those two were corpus-measured first
+   and are the strongest surviving links.
+4. ⭐⭐ **THE STANDING LAW THIS PRODUCES, and it sharpens §256:
+   PRIOR ART IS NEVER EVIDENCE ABOUT THE CORPUS. Only the corpus
+   is evidence about the corpus.** Prior art supplies candidate
+   mechanisms; the corpus supplies the target; the dossier
+   supplies the cause. An ADOPT verdict now needs a THIRD leg
+   beyond the dossier fact and the corpus metric: **an argument
+   for why the mechanism moves us TOWARD the corpus's measured
+   values**, since it was built for a different aesthetic.
+   Without that leg the verdict is INTERESTING-BUT-UNGATED and
+   sits outside the adoption ranking. Relayed to MF-X3 same-turn;
+   MF-X2's deliverable is annotated by this row rather than
+   rewritten.
