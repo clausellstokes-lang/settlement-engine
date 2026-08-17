@@ -253,3 +253,12 @@ for the same condition, which is a large consequence; (b) raising the hamlet op
 ceiling under §217 rather than pressing the remaining levers; (c) refusing to
 collect W1 as done and splitting a completion lane instead; (d) whether the
 hash-vs-rank rationing law generalizes beyond terrain marks.
+
+### §271 — the P4 repair and its re-record (Opus chair)
+Fable should re-derive: (a) authorizing a 13-row golden re-record on
+chair authority — the sharpest authority call of the session; (b) the
+derived-to-preserve argument that these three constants are a faithful port
+rather than a tuning act (if that reasoning is wrong, the whole repair needs
+the owner's signature BEFORE landing, not at the tuning pass); (c) the
+anti-floor proof's sufficiency; (d) holding the CAS until the terminal is
+green rather than exposing a tip with an authorized-but-unexecuted explanation.

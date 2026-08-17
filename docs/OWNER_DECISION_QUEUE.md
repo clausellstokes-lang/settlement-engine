@@ -10415,3 +10415,68 @@ down is not a critique.
    RE-TAKE the metropolis headroom arithmetic — 1,422 is now
    1,210, and §252.3a's third-circuit case must be re-derived,
    never inherited.
+
+## §271 · THE P4 REPAIR CURES BOTH CELLS AND IS PROVED NOT A
+## FLOOR; THE 13-ROW RE-RECORD IS AUTHORIZED WITH CONDITIONS
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **BOTH FIRING CELLS CURED, CONFIRMED ON THEIR OWN CAPSULE
+   LIGHTINGS, base vs cured on one substrate**: RS-1's ca-015
+   ×0.04 FAIL → **×0.45 PASS**; RS-3's ca-bd7e00d6 ×0.04 FAIL →
+   **×0.31 PASS**. The base arm reproduces RS-1's 793, RS-3's 680
+   AND the two lawful worlds' 0.536/0.507 exactly — which is what
+   makes the comparison trustworthy.
+2. ⭐⭐ **THE ANTI-FLOOR PROOF IS THE BEST PART, AND IT IS
+   ASYMMETRIC IN THE CURE'S OWN DIRECTION**: the already-lawful
+   worlds moved +0.11 and +0.05 while the failing world moved
+   +0.41. **A raised floor does the opposite** — it lifts the
+   healthy hardest. Four further arms are pinned per tier: past a
+   tier's own DERIVED starvation deficit there is no positive
+   fixed point at any occupancy; a failed granary takes the floor
+   DOWN with the bound; the terminal lane still fires (tick 106)
+   while a sound-granary twin survives the same horizon; and
+   nothing anywhere clamps a population. **A world where nothing
+   can fail would have been a worse defect than the one we
+   cured**, and this is the evidence that it did not happen.
+   Shape: the legacy lane now writes population only as a
+   CONSERVED TRANSFER, its crisis signal moves to the death
+   multiplier at the same relative severities scaled by
+   occupancy — which is where the fixed point comes from — and
+   R-C gives the granary claim a CEILING (never a lift) over the
+   famine mint, breaking the self-refresh loop at source.
+3. **THE GATE IS RED AT STEP 15 ON 13 ROWS THE LANE DELIBERATELY
+   DID NOT RE-RECORD — and stopping was exactly right.** Twelve
+   are five frozen walkers reading ONE maximal-lighting corpus
+   that lights EVERY flag; the thirteenth is the both-flags
+   golden whose every NAMED PROJECTION IS UNCHANGED with only
+   four composite hashes moved. **RULING: THE RE-RECORD IS
+   AUTHORIZED, WITH FOUR CONDITIONS** — (a) a KEY-BY-KEY diff
+   proving zero keys added or removed, only the four composite
+   hashes moving (a re-record is proven by that diff, never by
+   the capture's own exit 0); (b) each of the 13 rows explained
+   individually — which walker, why it moved, what the new value
+   means — never a bulk re-baseline; (c) the shift declared with
+   its three-stage attribution, the behaviour-neutral half
+   already proved byte-identical (composite hash e7bb233828de);
+   (d) nothing shipped moves, which holds because
+   `demographicsEnabled` is false in shipped WAVES.
+4. ⭐ **THE THREE CONSTANTS ARE DERIVED-TO-PRESERVE, NOT AUTHORED
+   FOR FEEL — and that distinction is why this is not a tuning
+   act.** `DEATH_CRISIS_GAIN = 3.0` was FITTED to reproduce the
+   legacy lane's own measured −13.0%%/yr at the bound; the
+   deficit gain and the granary ceiling likewise preserve
+   measured severity rather than choose it. **This is a faithful
+   port of existing behaviour into a lane that has a fixed
+   point, not a re-balancing.** They are nonetheless recorded
+   here as constants of the population model and **FLAGGED FOR
+   THE OWNER'S TUNING SIGNATURE at the tuning pass** — the owner
+   may veto them there, and if he does, the re-record is redone
+   at his values. The landing is not blocked on that, because
+   nothing a player can reach moves.
+5. **NO CAS UNTIL GREEN.** The tip 2d1e09ce is NOT exposed while
+   step 15 is red — standing law is never past an unexplained
+   red, and an authorized explanation is not the same as an
+   executed one. TE36 is resumed to execute the re-record under
+   §271.3's conditions and re-run the terminal. **RS-4 then fires
+   at that exposure and must SHOW THE COLLAPSE CURED** — the
+   repair's real proof is a soak that no longer finds it.
