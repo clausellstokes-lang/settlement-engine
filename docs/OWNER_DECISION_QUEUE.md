@@ -9404,3 +9404,22 @@ construction), straddler counterfactual must red.
    is already owner-gated (§133a), the owner may wish counsel to
    confirm the clean-room posture before any mechanism traceable
    to this study ships. Recorded, not decided.
+
+### §254.6 · THE PRECISION THAT MATTERS: GNU GPL-3.0 AND A
+### BROWSER-DELIVERED APP (owner-confirmed, 2026-08-17)
+
+⚠ **CLOSING A REASONING TRAP A SUCCESSOR COULD FALL INTO.** GNU
+GPL-3.0 (not LGPL, not AGPL) triggers its copyleft on CONVEYING a
+work — and it is tempting to reason "we are a web service, we
+never distribute, therefore GPL would not attach." **THAT
+REASONING FAILS FOR THIS PRODUCT**: SettlementForge ships
+JavaScript to the user's browser, which IS conveying. A
+server-only SaaS might have argued the distinction (it is
+precisely what AGPL's network clause exists to close); a
+browser-delivered app cannot. There is no SaaS exemption
+available to us, so §254.5's refusal is not merely prudent — it
+is the only correct reading. The distinction is recorded because
+someone reasoning from "GPL ≠ AGPL" could otherwise conclude the
+opposite. Secondary GPL-3.0 provisions (patent grant,
+anti-tivoization) do not change the outcome and are not the
+operative clause here.
