@@ -8174,3 +8174,35 @@ runs if budget forces a choice. Relayed to HF-3 same-turn.
    metropolis grain, the residuals, §205 B/C, chrome/vintage/
    decay. The §216 comparison round follows wave nine — the
    known misses are queued work, not open questions.
+
+## §230 · OWNER CATCH: THE WALL CROSSES BUILDINGS AGAIN IN b8 —
+## THE MUTUAL-BOUNDING LAW RULED; HOTFIX MF-B8b DISPATCHED
+## (2026-08-16)
+
+1. **THE CATCH, chair-confirmed in the same zoom sent to the
+   owner**: the b8 wall circuit crosses fabric at the town's top
+   — while the receipt's wall-band census read 0/0 over 22,934
+   bodies. A zero census over a visibly violated drawn surface
+   is the §195.0 VACUITY CLASS IN THE NEW CODE PATH: the grain
+   rework re-cut the fabric and the censused circuit diverged
+   from the drawn one (staleness across generations — the
+   leading hypothesis, to be proven with vertex evidence).
+   §200's cure (B7, verified clean in the b7 zoom) REGRESSED
+   through divergence, not deletion.
+2. **THE OWNER'S LAW, RULED (§230)**: MUTUAL BOUNDING —
+   buildings are bounded within the walls AS the walls bound
+   around the buildings and districts, in accordance with
+   geometry. One derivation order, ONE SHARED CIRCUIT OBJECT:
+   the lens draws and the census measures THE SAME geometry by
+   construction (the footprints() contract pattern extended to
+   the wall trace), with a stale-generation counterfactual that
+   must red. The sibling reserved bands (river, streets) get the
+   same staleness audit — if the wall diverged, its siblings may
+   have.
+3. MF-B8b dispatched with b8's wins to be preserved and
+   re-quoted (grain walk, burgage, ceilings, determinism);
+   the owner's catch credited. THE PATTERN FOR THE RECORD: this
+   is the owner's SECOND catch of a zero-census/visible-defect
+   contradiction — the class survives cure-by-cure and dies only
+   by the shared-object CONSTRUCTION the mutual-bounding law now
+   mandates.
