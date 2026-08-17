@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-17 ~01:30 ET by the Claude (Fable) chair. This file is refreshed at
+**Updated 2026-08-17 ~03:40 ET by the Claude chair (Opus 5 since §237). This file is refreshed at
 every collection (ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; §150-§232 are the map program's laws).
@@ -55,8 +55,8 @@ The session-limit pause is OVER; all its debts are settled.
    geometry, spatial indexes, cross-engine determinism CI).
 4. **HF-4b (final corpus spend) is RUNNING on the Fable seat** — verify-
    balance-first, rescue orphans, spend to <50 before the subscription dies
-   after 2026-08-17, nominate the §234 holdout set. The corpus stands at
-   163 plates; this is the LAST growth round.
+   after 2026-08-17, nominate the §234 holdout set. THE CORPUS IS FROZEN AT 313 PLATES (§242); no
+   further growth rounds — the subscription is gone.
 5. **§236 is now in force**: if Fable is exhausted, continue on Opus 5 with
    the marker protocol (see the FABLE/OPUS CONTINUITY section below and
    docs/FABLE_RETROVALIDATION_QUEUE.md).

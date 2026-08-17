@@ -8663,3 +8663,56 @@ construction), straddler counterfactual must red.
    budgets, the cross-engine harness. Wave nine's visual work
    (§239.1-.2, iconography, paint integration, countryside,
    underground) inherits epochs as a BUILT substrate.
+
+## §242 · THE NORTH STAR IS FROZEN AT 313 PLATES; THE HOLDOUT
+## RULED (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. **HF-4c CLOSED THE SUBSCRIPTION**: corpus 163 → **313 plates,
+   313 previews** (36 HF-1-era previews back-filled so coverage
+   is uniform), balance 358 → **46**, three-number reconciliation
+   EXACT (78 submitted / 78 new on disk / 312÷4 = 78), zero
+   unfetched, zero losses, the UUID hazard never bit. **THE
+   RESCUE PAID FOR ITSELF**: HF-4b was CHARGED for twelve images
+   and killed before fetching any — all twelve recovered from
+   the CDN, including hf303 (a complete symbol dictionary, the
+   only plate in 313 with zero lettering garbles) and hf301 (the
+   ghost under-leaf at city scale); its 24 unrecorded wave-E/F
+   plates were viewed and filed, so nothing from its 288-credit
+   spend is now undocumented.
+2. **THE POLYGON-CIRCUIT PRIOR IS CURABLE** — it survived three
+   rounds and deformed at least eleven plates; the cure is
+   ENUMERATION WITH REASONS ("the wall is NOT a shape — a chain
+   of N straight-ish runs of unequal length meeting at unequal
+   angles," each run given its own narrative), confirmed at n=5
+   including the siege town that had beaten six attempts and at
+   metropolis scale, at a price of three or four vocabulary
+   leaks per plate. Eleven more counter-phrases (#24-#35) filed,
+   with the general law that A PROPERTY THE MODEL RESISTS MUST BE
+   THE PLATE'S SUBJECT, NOT A MODIFIER.
+3. **RULINGS.** (a) **THE 8-ITEM SCRUB LIST**: plates whose TEXT
+   carries real-world places/dates (worst: hf375's "…London,
+   anno Domini MCCCXCII") stay in the corpus as GEOMETRY AND
+   AESTHETIC teachers but are marked TEXT-DISQUALIFIED — never
+   cited for lettering/chrome calibration, never shown outside
+   the program. Our labels are our own; the corpus teaches
+   drawing, never naming. (b) **THE HOLDOUT: the lane's own 78
+   STAY ELIGIBLE** — they are precisely the plates no figure was
+   ever derived from, which is what a holdout requires; the
+   objection is not provenance but grading confidence, and the
+   cure for that is measurement, not exclusion. **THE 53-PLATE
+   (16.9%%) NOMINATION IS PROVISIONALLY ACCEPTED AND SEALED ONLY
+   AFTER THE PIL PASS**, with Fable re-validating the taste calls
+   on holdout members specifically at the retrovalidation
+   sitting. (c) **THE PIL REGISTER-MEASUREMENT PASS IS ORDERED
+   NOW** (lane HF-M1): the lane named it as its one piece of
+   unfinished work, it costs nothing and needs no subscription,
+   and it converts this wave's by-eye register calls — including
+   the nine "best in corpus" claims and hf389's supersession of
+   hf103/hf104 as flagship metropolis — into measured ones.
+4. **HONESTLY FLAGGED BY THE LANE AND ACCEPTED AS A CAVEAT**:
+   ★★★ awarded to 41 of 78, well above HF-3's rate, from one
+   Opus reader in one sitting — either the prompts improved or
+   the bar softened, and the PIL pass plus Fable's sitting will
+   discriminate. THE CORPUS IS NOW FROZEN: no further growth
+   rounds; references are minted only if a specific law needs a
+   specific vocabulary, and the subscription is gone regardless.

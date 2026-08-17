@@ -58,3 +58,13 @@ point against the pilot's explicit prescription; (c) accepting the latent
 fork-key salt defect as deferred-with-cause rather than cured in place;
 (d) the MF-ARCH-2 mandate ordering (epoch axis before the handed-off items).
 Evidence: laneMFARCH-receipt.md (696 lines), laneMFB8b-receipt.md §11.
+
+### §242 — corpus freeze at 313 + the holdout ruling (Opus chair)
+Fable should re-derive: (a) HF-4c's TASTE CALLS as a class — 41 of 78 at ★★★
+(above HF-3's rate), the nine "best in corpus" claims, and especially hf389
+superseding hf103/hf104 as the flagship metropolis; (b) the ruling that the
+lane's own 78 stay holdout-eligible (provenance vs grading-confidence
+argument); (c) the scrub-list disposition (teach geometry, never naming);
+(d) whether the 53-plate/16.9% holdout is the right size and spread once the
+PIL numbers land. Evidence: laneHF4-receipt.md, laneHF-CALIBRATION.md,
+laneHFM1-receipt.md when it lands.
