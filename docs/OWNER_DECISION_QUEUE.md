@@ -10133,3 +10133,91 @@ down is not a critique.
    worth more than later. **Waiting for a lane slot I do not
    actually need would have repeated the error the spike exists
    to prevent.** Dispatched alongside W0.
+
+## §267 · THE INTEGRATION SPIKE — THE FABRIC RUNS ON REAL DATA,
+## AND THE PERFORMANCE PASS IS A DEPENDENCY, NOT POLISH
+## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+
+1. ⭐⭐ **THE SPIKE DID NOT FAIL, AND ITS SECOND-ORDER RESULT IS
+   WORTH MORE THAN THE FIRST**: the sandbox fabric runs to
+   completion on a REAL dossier from the REAL pipeline, at every
+   tier, **with zero fabric edits and no fixture defaults** — and
+   survives a JSON round-trip plus the app's own
+   `normalizeSettlement()` with a BYTE-IDENTICAL SVG. The
+   program's largest unknown is now a measured quantity. §265's
+   spike is vindicated and §266.5's pull-forward was correct.
+2. **THE MISMATCH CENSUS (executed via a recursive read Proxy,
+   validated against an unproxied control): 111 read paths, 33
+   undefined, 14 the fabric's — in four families, and one of
+   them silently disables a whole feature.**
+   (a) ⛔ **`stressors` IS A SHAPE MISMATCH THAT KILLS THE ENTIRE
+   §10 STATE ARM**: exemplars synthesize an ARRAY, a real dossier
+   carries an OBJECT — so `Array.isArray` is false and **siege
+   camps, barred gates, lazar houses and famine markets CAN NEVER
+   FIRE ON A REAL SETTLEMENT.** The typed source it needs already
+   exists (`activeConditions[].archetype`, read 592 times).
+   (b) `readResourceWords()` reads six spellings and hits ZERO —
+   the live field is `resourceAnalysis.availableResources`, so
+   resource-ground terrain contracts are inert. One line.
+   (c) ⚠ **THE FABRIC RE-INTRODUCED A BUG THE APP ALREADY CURED**
+   — `immersion.js` reads `s.neighbors`, the exact dead field the
+   app documents as having no writer; and the real neighbour
+   object carries NO BEARING, so §164a's edge work needs a
+   bearing that would be **seed-permanent under THE PROMISE —
+   OWNER-GATED AND POSSIBLY REFUSABLE.**
+   (d) `history.founding.kind` is ABSENT, so **planned/charter
+   morphology is UNREACHABLE IN THE PRODUCT** — proven by
+   difference (three of four settlements draw differently under
+   the sandbox generator; the one that stayed `organic` came back
+   sha-identical).
+3. **TWO LANDING BLOCKERS NOBODY HAD NAMED**: `townLayoutV3.js`
+   **exists on NO BRANCH** — build-out ships only the `.mf0`
+   variant and every lane tip has been carrying a HAND-PLACED
+   COPY (a provenance hole that would have surfaced at the worst
+   moment); and `tests/fixtures/townMapFixtures.js` is a HARD
+   COLLISION with a 66-FILE BLAST RADIUS (the sandbox version
+   deletes three golden-config exports and changes a signature)
+   — cheap to fix by rename, catastrophic if copied blind.
+4. ⭐⭐ **§220 VERDICT: NOT ACHIEVABLE AT CURRENT GRAIN — BUT
+   ACHIEVABLE, AND THE SUPPORTING NUMBER IS THE PROFILE.**
+   Metropolis `buildFabric` costs **2,436 ms cold / 2,301 ms
+   warm** (warm ≈ cold, so it is real compute, not JIT) against
+   the shipping map's 5–21 ms. **70%% sits in three modules, and
+   the single hottest frame — 14.1%% of the entire build — is
+   `Number.prototype.toFixed(6)` building STRING TOPOLOGY KEYS**;
+   `circuitBandSide` at 12.7%% is an UN-INDEXED nearest-segment
+   scan. **That is not a cost floor, it is a to-do list.** The
+   lane correctly refused to invent a post-optimisation figure.
+   Browser numbers are healthy where they are already true
+   (first paint 23 ms; pan/zoom vsync-locked at 16.7 ms median,
+   33–35 ms p95, on software raster). PDF is the hard one: the
+   folio cannot enter today's path at all, and a react-pdf
+   projection of its 282 path strings costs 878 ms → ≈3.3 s
+   projected (PLAUSIBLE).
+5. **RULINGS.** (a) ⭐⭐ **THE PERFORMANCE PASS IS RE-SEQUENCED
+   FROM POLISH TO DEPENDENCY, exactly as the spike argues: EIGHT
+   MORE WAVES WOULD EACH PAY THIS PROFILE.** A surgical lane
+   (MF-PERF1) runs NEXT AND ALONE — the named hotspots
+   (quantized string keys; the un-indexed band scan) plus
+   MF-ARCH-2's handed-off spatial-index item, which is the same
+   work. **W1 WAITS FOR IT**: the substrate would otherwise be
+   built on an unoptimised base and `buildFabric.js` has FOUR
+   LINES of headroom, which the extraction should relieve.
+   (b) ⭐ **THE COSTLIEST SEAM IS THE OUTPUT TYPE, AND IT IS AN
+   ARCHITECTURE RULING: the fabric must emit an ADDRESSABLE DRAW
+   LIST, not an opaque SVG string.** One projection then serves
+   the screen (React tree with per-element pointer handlers), the
+   PDF (DrawOps) and the raster; the fabric already carries the
+   identities (`parcel.key`, `landmark.anchorKey/districtId`) and
+   uses only primitives react-pdf supports. Enter it in the spec
+   as a first-class stage. (c) The three cheap contract fixes
+   (stressors → activeConditions, the resource field, founding
+   kind) join **W1's first act**; the neighbour BEARING is
+   raised to the owner, not decided. (d) `townMapOpBudget`'s 2,200
+   ceiling against the folio's 8,999 primitives is a MEASURED
+   RAISE under §217 — but only AFTER the performance pass, so
+   the number is honest rather than a monument to unoptimised
+   code. (e) Recorded, not hidden: the sandbox suite did not
+   complete in 15 minutes inside the app tree (workers computing,
+   not deadlocked) against 126 s for the app's whole lint+build
+   sweep — **unresolved, and it must be resolved before landing.**

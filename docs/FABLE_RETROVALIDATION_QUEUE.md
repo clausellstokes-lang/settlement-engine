@@ -223,3 +223,11 @@ terrain substrate keeps ledger rank 1); (b) pulling the integration spike
 forward against my own §265 scheduling; (c) whether G-39's four-outcome
 decision rule is genuinely falsifiable as written; (d) the finding that §12's
 immersion suite is already built and only its subject is deferred.
+
+### §267 — the integration spike (Opus chair)
+Fable should re-derive: (a) re-sequencing the performance pass ahead of W1 and
+holding the substrate for it; (b) the addressable-draw-list ruling, which is
+the largest architecture decision since the version axis; (c) whether the
+neighbour-bearing question is genuinely refusable under THE PROMISE or merely
+needs a terrain-derived answer; (d) the decision to raise townMapOpBudget only
+after optimisation rather than now.
