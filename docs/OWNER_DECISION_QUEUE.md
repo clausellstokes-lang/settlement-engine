@@ -8820,3 +8820,58 @@ construction), straddler counterfactual must red.
    (the grading sheet must never carry a refuted band — the
    address-rot class applied to figures), and all measurement
    outputs are secured in map-corpus/docs/ per §243.
+
+## §245 · OWNER ORDER: STUDY THE URBAN PLANNING, NOT THE PAINT —
+## AND §246 · THE RECONSTRUCTION TEST (2026-08-17; chair: Opus 5
+## — Fable-unvalidated)
+
+1. **§245, THE ORDER**: comprehensively categorize, infer and
+   learn HOW THE CORPUS BUILDS SETTLEMENTS — street structure,
+   districts and their relations, relation with geography,
+   building variance, how the outside looks, how everything
+   relates from walls to rivers — and "beyond what I just
+   stated," i.e. the chair is expected to add dimensions nobody
+   named. TWO LANES DISPATCHED for depth: **MF-S3a THE PLAN**
+   (street graph and junction mix, blocks/plots/frontage,
+   building variance and HOW MONOTONY IS AVOIDED, district
+   structure and adjacency, centers and the void hierarchy,
+   ⭐ GROWTH SEQUENCE — reading history out of the plan, which
+   calibrates §240's epoch model — decay morphology, scale
+   invariants, and the ANOMALY catalogue: the "one weird thing"
+   that gives a place personality) and **MF-S3b THE CONTEXT**
+   (terrain accommodation and siting logic, the whole water
+   system incl. mills/quays/wells/drainage, defensive logic incl.
+   gates/towers/citadel/intervallum and OUTGROWN walls
+   fossilizing as streets, the EDGE and extramural land-use
+   ordering, institution siting as a relational system with its
+   negative rules, circulation and logistics, and REGIONAL
+   MORPHOTYPES so the setting-agnostic promise is structural).
+   Both exclude the BLIND HOLDOUT (union of the proposal and its
+   12-swap fix) — studying it would destroy the final test.
+2. ⭐⭐ **§246, THE OWNER'S SHARPENING, AND IT IS THE BETTER
+   QUESTION**: "if you had to create those exact same images
+   using our process, how would you do it… what are we missing,
+   what should we have, what should improve… figure out a
+   process to get something consistently within that register."
+   Both lanes REFRAMED same-turn from DESCRIPTION to
+   RECONSTRUCTION: every finding must land as (1) a deterministic
+   MECHANISM with its stage and inputs, (2) its DERIVATION HOME
+   (the dossier fact that drives it — a mechanism without one is
+   decoration and must be labelled so), and (3) a VERDICT: HAVE /
+   PARTIAL / MISSING / NOT-DERIVABLE. Each lane adds
+   RECONSTRUCTION TRACES: 6-10 plates traced end-to-end — the
+   dossier facts required, the pipeline sequence, what we would
+   emit, and WHERE WE DIVERGE — with divergences ranked by
+   breadth. **THE CHAIR'S CALIBRATION, BINDING: the target is
+   REGISTER AND KIND, never pixel-identity** — the corpus carries
+   defects we ban and our labels are TRUE where theirs are
+   decorative, so the test is "could our process have produced a
+   plate indistinguishable in kind and quality from this one?"
+3. **MF-SPEC WILL FOLLOW** on both lanes' completion: synthesize
+   the two compendiums, the corrected atlas and the measured
+   register into THE GENERATION SPECIFICATION — the ordered
+   pipeline with every stage's inputs, mechanisms and derivation
+   homes, a per-stage HAVE/PARTIAL/MISSING ledger, and an
+   implementation order. That specification, not the organically
+   grown charter, becomes the map program's spine and wave nine's
+   build sheet.

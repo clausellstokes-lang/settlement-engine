@@ -80,3 +80,12 @@ value-range band in favour of ink L; (d) demoting HF-4c's star grades to
 annotations; (e) the three reversed adjudications, especially restoring hf103
 as grain flagship. Evidence: map-corpus/docs/laneHFM1-receipt.md, the measured
 CSV, HFM1-star-audit.txt.
+
+### §245/§246 — the morphology study and the reconstruction reframing (Opus chair)
+Fable should re-derive: (a) the chair-added study dimensions beyond the owner's
+list (growth-sequence reading, anomaly/character catalogue, scale invariants,
+regional morphotypes, void hierarchy) — are these the right extensions?;
+(b) THE CALIBRATION RULING that the target is register-and-kind rather than
+pixel-identity (this defines what "reproduce the corpus" means and therefore
+what the program is trying to do); (c) the two-lane split and the decision to
+synthesize into a single generation specification afterwards.
