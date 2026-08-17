@@ -96,3 +96,9 @@ for the map surface; (b) the recommendation that the free path produce a good
 map with minimal friction (raised as owner-gated, not settled); (c) the
 judgment that the same-town-across-time artifact — not aesthetic superiority —
 is the differentiator to lead with, and its slotting into wave nine's demo.
+
+### §248 — the FMG prior-art study and its IP discipline (Opus chair)
+Fable should re-derive: (a) whether the clean-room discipline as written is
+sufficient given whatever license the lane reports; (b) the judgment that
+source study of a competitor is worth doing at all at this stage; (c) the
+expected-yield ranking (world→settlement derivation first).
