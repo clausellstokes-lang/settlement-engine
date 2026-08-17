@@ -180,3 +180,12 @@ Fable should re-derive: (a) the doctrine itself and especially its safeguard
 stated mechanisms, which is powerful and could drift; (b) the three worked
 cases, particularly the setback synthesis for wide streets; (c) the ruling that
 our district-organism model stands unchanged against weaker prior art.
+
+### §259 — the Watabou study (Opus chair)
+Fable should re-derive: (a) the chaos-at-large-scale finding and the decision
+to treat it as the mush diagnosis — it will drive a large rework;
+(b) the re-reading of banned prior #7 (place by structure, never by spacing);
+(c) accepting twelve refutations of our own image-derived inferences on
+PLAUSIBLE (unexecuted, 2017-source) evidence — how much should the plan change
+on evidence of that grade?; (d) the conditions attached to the live-export
+follow-up if the owner grants it.

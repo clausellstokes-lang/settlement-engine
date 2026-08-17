@@ -9655,3 +9655,83 @@ operative clause here.
    test. Intent-over-execution licenses better machinery — never
    a free parameter, never a borrowed aesthetic, and never the
    loss of a law's measurable signature.
+
+## §259 · THE WATABOU STUDY COLLECTED — TWELVE OF OUR INFERENCES
+## REFUTED, AND THE MUSH IS DIAGNOSED (2026-08-17; chair: Opus 5
+## — Fable-unvalidated)
+
+1. **LICENSE CONFIRMED FROM THE API AND THE FILE**: SPDX
+   GPL-3.0, standard text, **NO LINKING EXCEPTION** (the FSF
+   appendix recommends LGPL for proprietary linking and the
+   author declined it), **zero per-file headers across all 60
+   files** so the root governs everything. Adoption refused,
+   stated as §0. The §254.5 tightening forced a rewrite of the
+   lane's first draft — a ward-parameter table of source
+   constants and identifier names in prose — and the purge was
+   verified MECHANICALLY: 27 source identifiers → zero hits,
+   code fences → zero, lifted constants → zero. Clone deleted.
+2. ⭐⭐ **THE MUSH IS DIAGNOSED, AND WE HAD IT EXACTLY BACKWARDS:
+   CHAOS BELONGS AT THE LARGE SCALE, ORTHOGONALITY AT THE SMALL
+   SCALE.** Block frames meet at organic angles; the buildings
+   inside them are near-rectangular. We inferred the inverse from
+   images and built toward it — **this is very likely why our
+   output reads as mush** and why §252.3c's zoom found the
+   parallel bars mechanical. Ranked with it: **CHARACTER IS A
+   PARAMETERISATION, NOT AN ALGORITHM** — one subdivision routine
+   serves every populated ward and the types differ only in four
+   scalars, onto which our dossier's wealth, crowding, age and
+   mixed-use map nearly one-to-one (rank #1 adoption).
+3. ⭐ **THE TOWER FINDING REFINES OUR OWN BANNED PRIOR #7, and
+   the refinement matters**: even tower spacing is EMERGENT, not
+   enforced — towers sit at every non-gate wall corner and the
+   evenness is inherited from uniform cell area (confirmed for
+   the CURRENT product by the author's own prose, not only the
+   2017 code). **Implementing a spacing rule would reproduce the
+   look and destroy the mechanism.** RULED: banned prior #7 is
+   re-read as **NEVER PLACE BY SPACING — place by STRUCTURE (the
+   corners that exist) and let the spacing be whatever the
+   structure gives.** Evenness that emerges is authentic;
+   evenness that is dialled is the tell.
+4. **SCORE: ten of our image-derived inferences CONFIRMED, TWELVE
+   REFUTED — nine of those our own reverse-engineering errors**,
+   which is exactly the value the §254.3 brief predicted (a
+   disagreement is worth more than an agreement). §250 is
+   EXPLAINED not merely confirmed (streets are selected Voronoi
+   edges; Voronoi vertices are generically degree-3, so
+   T-dominance is mathematically forced and our 43:1 is a
+   validation target, never an input). **§239 INDEPENDENTLY
+   CONFIRMED** (their wall-side lane falls out of a setback
+   table). **§165 ANSWERED UNFLATTERINGLY FOR THEM**: placement
+   is overwhelmingly positional, nine of thirteen ward types
+   carry no rule at all, and their single affinity rule is
+   half-dead with nothing reporting it — **our organism model
+   stands ahead, as §258.3b ruled.**
+5. **§256's PRECEDENCE CHANGED VERDICTS RATHER THAN DECORATING
+   THEM**: two adoptions were DOWNGRADED to
+   DELIBERATELY-DIFFERENT as decoration with no derivation home
+   (the citadel's distance-rank selection; their authored ward
+   list), and **one of our own claims was exposed as UNGATEABLE**
+   — there is no tower-spacing metric anywhere in our plan-metric
+   set, so our highest-cost correction rests on visual analysis
+   rather than measurement. Reported, not smoothed; the missing
+   metric is now a wave-nine instrument item.
+6. **HONEST LIMITS ACCEPTED**: every source-derived finding is
+   PLAUSIBLE, never CONFIRMED — execution was forbidden, so
+   nothing rests on observed output; the readable source is 2017
+   while our corpus imitates the 2024+ product, so every "we were
+   wrong" tag assumes seven years of stability; and a trait the
+   IMITATOR invented is invisible to this method.
+7. **THE FOLLOW-UP THE LANE RECOMMENDS IS THE RIGHT ONE AND IT IS
+   OWNER-GATED**: the live product exports SVG/JSON/GeoJSON by
+   public URL parameter, touching no GPL code. Sampling it and
+   running our own harness would separate "we misread" from "the
+   product moved" from "the imitator invented it" for every
+   divergence row — and would tell us **for the first time how
+   FAITHFUL our 313-plate corpus is to the thing it imitates**,
+   which is the foundation the entire grading sheet rests on.
+   **RAISED TO THE OWNER (it downloads third-party files), NOT
+   DISPATCHED.** Conditions if granted: a modest sample, the
+   service's own terms checked for output use before any output
+   becomes a reference, and the result used ONLY as a FIDELITY
+   CHECK on the frozen corpus — never as a new corpus (§242
+   stands).
