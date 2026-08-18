@@ -10763,3 +10763,52 @@ down is not a critique.
    The Foundry/VTT protocol material is PARKED as a genuinely
    useful reference for a future integration surface, not
    current work.
+
+## §276 · THE §275 ADOPTIONS ARE ARCHITECTED INTO THE BUILD SHEET
+## — DESIGN ONLY, NO IMPLEMENTATION (2026-08-17; chair: FABLE, in
+## person — no lanes, no credits spent)
+
+1. **THE FOLD, executed by the chair's own hands under §265.2a's
+   no-meta-documents law** (findings fold INTO the spec, never
+   into a new artifact): GENERATION-SPEC.md 4,376 → 4,453 lines,
+   eight ⟦FOLD §275⟧ markers, table integrity verified, G-ids
+   43-47 defined with zero dangles. Four insertions:
+   (a) **§3.7 — two doctrine additions**: EVIDENCE-GRADED LAWS
+   (A documented-causal / B comparative / C plausible / D
+   visual-convention, with D BARRED from the causal model —
+   renderer-only) and EXPLAINED IRREGULARITY OVER UNEXPLAINED
+   NOISE (kept soft-rule violations carry a structured
+   `{expected, observed, explanation, source}` record, censuses
+   exempt by explanation OBJECT, and explanations are DERIVED
+   from facts, never authored free-text).
+   (b) **§4.1d — the validation ledger rows G-43…G-47**:
+   ⭐⭐ G-43 THE COUNTERFACTUAL CAUSAL BENCHMARK with its
+   seven-arm battery drawn from facts we already hold (move the
+   resource site; remove the crossing; flip founding.kind; shift
+   the wall year; cut population 40%%; add a monument at year N;
+   swap the water mode), every direction REGISTERED BEFORE the
+   run, scored as CAUSAL RESPONSIVENESS with wrong directions
+   treated as findings; G-44 the renderer-halo ablation (the
+   structural verdict is taken from the BARE condition where the
+   two disagree); G-45 the real-historical structural cohort
+   (open dataset only — the licensing law bars the restricted
+   atlas class; history wins on STRUCTURE, the corpus on
+   REGISTER, the dossier on CAUSE); G-46 the healthy-vacancy
+   prior (vacancy derived from land pressure, kept visually
+   separable from §161g's demotion scars); G-47 wall material as
+   a morphotype variable. Plus the S7 routed note binding the
+   router synthesis: A CORRECT ROUTER PLUS DERIVED IRREGULARITY,
+   never an inherited bug worn as a feature.
+   (c) **W8 gains exits 6-8** (the benchmark, the halo, the
+   cohort) — so the closing loop now tests the THESIS, not only
+   the resemblance.
+   (d) **Appendix A.13 — the parked/rejected register**: the
+   restricted historical-GIS corpus PARKED behind licensing
+   review; the Rust/Wasm modernization plan REJECTED with its
+   reason; the VTT protocol PARKED as future-integration
+   reference; ML-in-core already ruled; historian panels
+   deferred to launch.
+2. **NOTHING WAS IMPLEMENTED AND NOTHING DISPATCHED** — the
+   owner's instruction; the weekly limit stands until Aug 22.
+   The Fable retrovalidation sitting over §238-§274 remains OWED
+   as the chair's next act when the owner releases work.

@@ -9,6 +9,9 @@
 ### Folded here: **§261** the provenance correction and a contamination sweep of the whole document · **§263** the FTG study (the dependency graph, the triangular-remnant substitution, the epoch-convergence correction) · **§259**'s surviving mechanisms · **§262.2** G-34 as ruled · **§263.6a** the two missing instruments · **§264.2** the per-wave immersion payload · and **§257.3**'s three rulings, which this document was still carrying as open questions.
 ### Every fold is marked ⟦FOLD §264⟧ so a reader can see what MF-SPEC wrote and what MF-SPEC2 added. Receipt: `laneMFSPEC2-receipt.md`.
 
+### ⟦FOLD §275⟧ FOLDED BY THE FABLE CHAIR IN PERSON, 2026-08-17, under ODQ §275/§276 — THE EXTERNAL-RESEARCH ADOPTIONS.
+### Two further research documents were assessed at §275; their adoptions are architected here as design, with NO implementation (owner's instruction — no credits). Folded: ⭐⭐ the COUNTERFACTUAL CAUSAL BENCHMARK with its Causal Responsiveness Score (new §4.1d G-43, W8 exit 6, the sharpest test of the program's thesis) · the RENDERER-HALO ABLATION (G-44, W8 exit 7) · the REAL-HISTORICAL STRUCTURAL COHORT from the open Altaweel–Hanson–Squitieri preindustrial street-network dataset (G-45, W8 exit 8 — history grounds STRUCTURE, the corpus grounds LOOK, the dossier grounds CAUSE) · EVIDENCE-GRADED LAWS and the EXPLAINED-IRREGULARITY doctrine (new §3.7) · the HEALTHY-VACANCY prior and WALL-MATERIAL variable (G-46/G-47, routed) · and the parked/rejected register at the end of Appendix A. Marked ⟦FOLD §275⟧ throughout.
+
 ---
 
 ## §0 · HOW TO READ THIS, AND WHAT IT IS FOR
@@ -3103,6 +3106,35 @@ comes from the dossier**) and §246's derivation-home test. **Intent-over-execut
 machinery — never a free parameter, never a borrowed aesthetic, and never the loss of a law's
 measurable signature.**
 
+### ⟦FOLD §275⟧ §3.7 · TWO DOCTRINE ADDITIONS — EVIDENCE-GRADED LAWS, AND EXPLAINED IRREGULARITY
+
+**LAW GRADES (§275.4).** Every causal law and mechanism row in this document, and every future
+one, carries an evidence grade beside its derivation home:
+
+| Grade | Meaning | Generator treatment |
+|---|---|---|
+| **A** | Documented-causal — historical/archaeological evidence, or our own executed measurement, explicitly links cause and spatial effect | May drive a hard or strong conditional rule |
+| **B** | Comparative association — a recurring measured relationship without unique causation | Calibration and soft scoring, never deterministic placement |
+| **C** | Plausible inference — the mechanism makes sense and is consistent, but is undemonstrated for our contexts | Probabilistic, confidence stated, promoted only by measurement |
+| **D** | Visual convention — genre expectation with weak historical support | ⛔ **BARRED from the causal model.** Renderer-only, small scales, and honest about being style |
+
+The grades map onto the standing labels — A is CONFIRMED-causal, B/C are PLAUSIBLE with a stated
+basis — and the operational rule is the same as §246's: **a Grade-D "rule" in the pipeline is
+decoration wearing a law's clothes.** "Medieval streets wiggle randomly" is the canonical D.
+
+**EXPLAINED IRREGULARITY OVER UNEXPLAINED NOISE (§275.4, generalising the truth-anchor and
+named-exemption practice).** When a soft rule is violated and the violation is KEPT, it carries a
+structured explanation record — `{ expected, observed, explanation, source }` — and the census
+exempts **by explanation object, never by feature name** (§238's semantic-exemption law). The
+parish church's six landlocked bodies (§274) are the founding instance. Two consequences:
+a kept violation with a recorded story is a FEATURE (it is what history looks like); a kept
+violation without one is a DEFECT no matter how organic it reads. And the repair direction
+inverts: where a generator would force the merchant back toward the optimal street, ours may
+keep the compound on the low-centrality lane **because the record says the family predates the
+market's relocation** — which is more historical than the optimum. ⚠ The guard: explanations are
+DERIVED from dossier facts and generation events, never authored free-text — an explanation with
+no derivation home is itself decoration.
+
 ---
 
 ## §4 · THE GAP LEDGER, RANKED BY LEVERAGE
@@ -3399,6 +3431,28 @@ statistic over the corpus's own drawn masses** — the building-scale analogue o
 MECHANISM it inspired survives independently.** G-37's fit-the-footprint has its own three legs and
 its own measured miss (the alley/sliver floor) and does not rest on this test at all. ⚠ *What the
 test governs is whether we may say WHY we did it.*
+
+### ⟦FOLD §275⟧ §4.1d · THE VALIDATION ADDITIONS — G-43…G-47 (ODQ §275, chaired-in-person fold)
+
+**These five rows enter the ledger as a group. G-43/44/45 live in the VALIDATION tier and route to
+W8 (they test the finished product and depend on nothing unbuilt); G-46/47 are band/morphotype
+amendments routed to the waves that own their surfaces. Ranks: G-43 sits with G-29's
+expressive-range work (the two are the distribution-level and causal-level halves of one
+question); the rest are unranked group members per the G-41 pattern.**
+
+| id | What is uncovered | Mechanism | Derivation home | Route |
+|---|---|---|---|---|
+| ⭐⭐ **G-43** | **NOTHING TESTS THAT THE DOSSIER CAUSES THE MAP.** Censuses prove legality; bands prove register; the §216 loop proves resemblance — none proves that changing a CAUSE changes the CONSEQUENCE | **THE COUNTERFACTUAL CAUSAL BENCHMARK**: hold the seed, alter ONE dossier fact, verify the map moves in the PRE-REGISTERED direction. Score = **Causal Responsiveness** — the fraction of predictions that move correctly. The initial battery, drawn from facts we already hold: **move the primary resource site** (the scarcity/extraction ground must follow — §251's scarcity finding); **remove the water crossing** (the through-river leaf's detour-to-work must reroute); **change `history.founding.kind`** organic↔planned (φ and parcel-width modes must move — the spike already proved the drawing moves); **shift the wall's construction year ±N epochs** (pre-wall fabric share and faubourg pattern must move — §239.3); **cut population 40% late** (vacancy/demotion rungs must appear; the wall must NOT contract — §240.4's dividend); **add a monumental institution at year N** (later epochs must reorient toward it — the Reading-abbey pattern); **swap the water mode** bankside↔none (quays/mills/water gates must appear/vanish, banks must not). Each prediction is REGISTERED BEFORE the run (the G-39 discipline); a wrong-direction move is a FINDING, not a tuning target | Every arm names its dossier fact by construction — the benchmark IS the derivation-home test executed | **W8 exit 6.** Grade A method; each arm's expected direction carries its own grade |
+| ⭐ **G-44** | Nothing tests whether BEAUTY BIASES STRUCTURAL JUDGMENT — the blinded 2AFC judges aesthetics, the censuses judge legality, and no instrument separates them | **THE RENDERER-HALO ABLATION**: the same maps judged twice, bare geometry and full paint, with structural-plausibility scored separately in each condition. The HALO is the paint-minus-bare delta on STRUCTURAL questions; a large halo means the paint is camouflaging, and the structural verdict is taken from the BARE condition | n/a — an instrument, not a mechanism | **W8 exit 7**, run beside the blinded test on the same sessions |
+| ⭐ **G-45** | The corpus grounds LOOK (§0.2a) and history grounds our LAWS — but the structural bands (junction mix, φ, circuity) rest on a SYNTHETIC corpus alone; no REAL-historical distribution has ever been measured beside them | **INGEST THE OPEN ALTAWEEL–HANSON–SQUITIERI PREINDUSTRIAL STREET-NETWORK DATASET** as a second, real-historical STRUCTURAL cohort: run OUR OWN instruments (junction degree, orientation order, circuity, centrality skew) over its networks and report its bands BESIDE the corpus bands wherever a structural figure is quoted. Where the two cohorts disagree, **history wins on structure, the corpus wins on register** — the §256 precedence extended to calibration data. ⛔ **LICENSING LAW (§275.3b): open-data sources only.** The Historic-Towns-Atlas class of sources carries commercial restrictions and stays OUT (the §248/§254 discipline applied to data); the broader historical-GIS corpus is PARKED in Appendix A | The cohort is external ground truth; no dossier fact — which is why it may only CALIBRATE, never generate (§3.2) | **W8 exit 8**; the ingestion itself is a small instrument task |
+| **G-46** | The fill bands treat low coverage as demotion's signature only — but **empty space is historically NORMAL**: gardens, yards and vacant plots inside healthy walls | **THE HEALTHY-VACANCY PRIOR**: T-05's fill bands gain a vacancy term derived from LAND PRESSURE (population vs capacity), prosperity and growth stage — a young, unpressured town shows gardens without being "demoted"; §161g's scars remain the DISTINCT signature of decline (outline/rubble/ghost rungs), so vacancy and demotion stay visually separable | population, capacity, prosperity, growth stage — all held | Routed to the wave that next touches the fill bands (W3/W5); Grade A/B |
+| **G-47** | Wall MATERIAL is euro-defaulted (stone) — historically it varies by region, era and geology (pounded earth, timber, brick) | **MATERIAL AS A MORPHOTYPE VARIABLE**: the culture/period pack selects wall material and its drawn vocabulary; geology (dossier terrain/resources) constrains it; material affects the ICONOGRAPHY (§214's wall arm) and the decay ladder's rungs, never the circuit's derivation | region/culture pack, era, terrainType/resources | Routed with the §7 morphotype work (W5/W6); Grade A evidence, C for our specific mapping |
+
+**One routed note on S7 (§275.5, from the prior-art detail bank): the upstream generator's
+pathfinder is neither A\* nor Dijkstra, and its accidental suboptimality is part of why its routes
+read organic. THE SYNTHESIS IS OURS AND IS BINDING: a CORRECT router plus DERIVED irregularity
+(terrain cost, reuse discount, §258's setbacks) — never an inherited bug worn as a feature. A
+route that is crooked must be crooked because something made it so.**
 
 ### §4.2 · G-28 · THE RESIDUAL AND CARRIED-DEFECT SET, ITEMISED
 
@@ -4044,6 +4098,20 @@ test against the frozen 313-plate north star and its holdout.
    derived from our own data, never adopted from theirs.
 5. **The blinded test executed against the holdout**, whose ⛔ **ZERO trade (0/4) and ZERO
    institution (0/3) coverage** is stated as a known limit rather than discovered afterwards.
+6. ⟦FOLD §275⟧ ⭐⭐ **THE COUNTERFACTUAL CAUSAL BENCHMARK EXECUTED (G-43): the seven-arm battery
+   run with every directional prediction REGISTERED BEFORE the runs, and the CAUSAL
+   RESPONSIVENESS SCORE reported** — the fraction of predictions that moved correctly, with every
+   wrong-direction arm treated as a FINDING to characterize, never a number to tune away. This is
+   the exit that tests the thesis itself: *the map is the physical outcome of the world the
+   dossier says exists.*
+7. ⟦FOLD §275⟧ **The renderer-halo ablation run (G-44) on the same judging sessions as the
+   blinded test**: structural-plausibility scored on bare geometry and on painted output
+   separately, the halo delta reported, and **the structural verdict taken from the BARE
+   condition** wherever the two disagree.
+8. ⟦FOLD §275⟧ **The real-historical structural cohort in force (G-45)**: our own instruments run
+   over the open preindustrial street-network dataset, its bands reported BESIDE the corpus bands
+   for every structural figure this wave quotes — history winning on structure, the corpus on
+   register, the dossier on cause.
 
 ⭐ **AND THE MARKETING ARTIFACT §247.3c NAMES IS A W8 OUTPUT, NOT AN AFTERTHOUGHT: THE SAME TOWN
 ACROSS TIME (year 1 → year 100 — growth, fire, shrinkage, rebuilding).** It is the artifact no
@@ -4118,6 +4186,16 @@ holdout. ⭐⭐ **§250.7 made the discipline law: A STUDY TAKES THE LOSS RATHER
 HOLDOUT.** If a future lane wants this finding **it must come from the holdout's own release**,
 not from here. *(CONTEXT's CX-33 reaches worn approaches from a different, non-holdout direction
 and is in G-15; the desire-path finding specifically is gone.)*
+
+### ⟦FOLD §275⟧ A.13 · PARKED AND REJECTED AT §275 — recorded so nobody re-litigates them
+
+| Item | Disposition | Why |
+|---|---|---|
+| **A full real-historical GIS corpus** (Historic Towns Atlas plans, ADS collections, HER data) | **PARKED** | The best sources carry commercial-use restrictions or per-collection licences — the §248/§254 IP discipline applies to DATA exactly as to code. G-45's open-data cohort is the lawful carve-out; anything beyond it needs a licensing review first |
+| **The Rust/Wasm modernization plan** (kernel rewrite, schema migration, ~40–50 engineer-weeks) | ⛔ **REJECTED** | It solves a from-scratch problem this program does not have: determinism, lineage IDs, per-mechanism streams, epochs, area-true predicates and the acyclic graph are BUILT and receipted. Adopting it would rebuild the program back to wave one |
+| **VTT/Foundry integration protocol** (the event vocabulary, iframe/postMessage surface, calendar sync) | **PARKED as reference** | Genuinely useful for a FUTURE integration surface — it documents what downstream tabletop consumers expect — but it is not current work and touches no current stage |
+| **ML in the core generator** | Already ruled (§234) | Modern-city training data, and hard validity/determinism/editability outrank statistical imitation; optional style-prior/reranking territory only, after procedural metrics are strong |
+| **Expert-historian judging panels** | **DEFERRED to launch phase** | The right final arbiter for causal-plausibility claims, but premature while known structural gaps remain on our own ledger |
 
 ---
 

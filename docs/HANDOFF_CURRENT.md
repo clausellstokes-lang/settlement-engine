@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-17 ~03:40 ET by the Claude chair (Opus 5 since §237). This file is refreshed at
+**Updated 2026-08-17 (evening) by the FABLE chair (returned at §275; Opus window was §237-§274). This file is refreshed at
 every collection (ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; §150-§232 are the map program's laws).
@@ -63,6 +63,17 @@ The session-limit pause is OVER; all its debts are settled.
 5. **§236 is now in force**: if Fable is exhausted, continue on Opus 5 with
    the marker protocol (see the FABLE/OPUS CONTINUITY section below and
    docs/FABLE_RETROVALIDATION_QUEUE.md).
+
+## ⚠ STATE AT THE WEEKLY-LIMIT PAUSE (§275-§276)
+The account weekly limit killed MF-W3 mid-lane (restart fresh from its brief:
+ODQ §274.5 items + SPEC §5 W3) and RS-4's monitor at ~110/163 (receipts
+durable in rs4-receipts/; tail world passing, zero floor trips — resume the
+monitor, do not restart the grid). Resets Aug 22 7pm ET. Waves W0-W2 are
+SEALED; the build branch is at 4eafca31 (P4 repair exposed). The §275/§276
+fold added the counterfactual causal benchmark (G-43), the halo ablation
+(G-44), the historical structural cohort (G-45), §3.7's doctrine, and W8
+exits 6-8 to GENERATION-SPEC.md — design only, nothing implemented. ⛔ THE
+FABLE RETROVALIDATION SITTING OVER §238-§274 IS OWED FIRST when work resumes.
 
 ## Queues after the pause
 - **Map wave nine** (dispatch after B8b seals; sandbox mf-proto/build-out):
