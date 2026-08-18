@@ -10681,3 +10681,85 @@ down is not a critique.
    through-river exemplar is minted (6 dry / 10 bankside / 1
    through) and paid for itself immediately** as the corpus's
    only subject for a detour-to-work run.
+
+## §275 · TWO MORE EXTERNAL RESEARCH DOCUMENTS ASSESSED — ONE
+## MAJOR ADOPTION, AND THE FABLE CHAIR RETURNS (2026-08-17;
+## chair: FABLE — the §236 Opus window closed with the model
+## switch; the retrovalidation sitting over §238-§274 is OWED and
+## deferred on the owner's explicit "do not continue the other
+## stuff yet")
+
+1. **STATE AT ASSESSMENT**: the weekly limit killed MF-W3
+   mid-lane (last words: starting the fossil reservation) and
+   RS-4's monitor mid-grid (~110/163, tail world passing, zero
+   floor trips); resets Aug 22 7pm ET. Nothing dispatched or
+   resumed per the owner's instruction. The W2 tip and all
+   receipts are durable; W3 restarts fresh from its brief.
+2. ⭐⭐ **THE ONE MAJOR ADOPTION — THE COUNTERFACTUAL CAUSAL
+   BENCHMARK (document 2's Causal Responsiveness Score)**: hold
+   the seed, alter ONE dossier fact (move the mine, remove the
+   ford, add the monastery in year N, shift the wall date, cut
+   population 40%%), and verify the map changes in the
+   PRE-REGISTERED direction. We have counterfactual-paired pins
+   for CENSUSES and the spike proved founding-kind moves the
+   drawing — but a systematic dossier-counterfactual suite is
+   genuinely NEW, and it is the sharpest possible test of the
+   program's entire thesis ("the map is the physical outcome of
+   the world the dossier says exists"). No competitor can even
+   attempt it. ADOPTED as a first-class validation instrument,
+   slotted with the expressive-range work in the spec's
+   validation tier; entered in the gap ledger at collection time.
+3. **MEDIUM ADOPTIONS**: (a) the **renderer-halo ablation** —
+   judge the SAME map bare and painted, separately, so beauty can
+   never camouflage broken structure; cheap, and it completes the
+   §216 loop's honesty (the blinded 2AFC judges aesthetics; this
+   judges whether aesthetics BIAS structural judgment).
+   (b) the **open Altaweel-Hanson-Squitieri preindustrial
+   street-network dataset** as a REAL-HISTORICAL structural
+   cohort beside the synthetic corpus — it is open data, it
+   matches instruments we already run (junction degree,
+   orientation entropy, circuity), and it patches the one
+   epistemic hole §261 left: our corpus teaches LOOK, and history
+   must ground STRUCTURE; a measured historical cohort makes that
+   grounding quantitative. ⛔ The document's broader
+   historical-GIS corpus ambitions are PARKED — its own licensing
+   warnings (Historic Towns Atlas commercial restrictions, ADS
+   per-collection licences) are the reason, and our §248-§254
+   IP discipline applies to data exactly as to code.
+4. **REFINEMENTS FOLDED AS DOCTRINE LANGUAGE**: evidence-graded
+   causal rules (documented-causal / comparative / plausible /
+   visual-convention maps onto our M/E + CONFIRMED/PLAUSIBLE +
+   §251 epistemology, adding a GRADE on each LAW); **explained
+   irregularity over unexplained noise** — our
+   truth-anchor/named-exemption practice generalized into a
+   principle (a kept violation carries its explanation, which is
+   more historical than forcing the optimum); **empty space is
+   normal, not only demotion** — gardens/vacant plots inside
+   healthy walls join the §203 fill-band priors; wall MATERIAL as
+   a culture/era variable joins the §7 morphotype work.
+5. **CORROBORATION, recorded because independent convergence
+   de-risks**: document 2's "causes first, geometry third, style
+   last" IS our §234/§246 architecture; its adversarial-seed
+   catalogue substantially reproduces our standing censuses
+   (wall-through-building, inaccessible parcel, stranded suburb,
+   district-as-label); its "no universal medievalness number" is
+   §244.4/§216; its walls-are-events is §239/§240. Document 1's
+   TownGeneratorOS reverse-engineering matches MF-X2 with three
+   NEW details banked: the FIFO non-Dijkstra path search (our
+   study noted the suboptimality and judged it accidentally
+   ORGANIC; the correct synthesis is ours — a correct router plus
+   DERIVED irregularity, never an inherited bug as a feature),
+   the dead Voronoi-relaxation indexing bug (their codebase's own
+   never-ran mechanism — §270.1's law observed in the wild), and
+   the unitless setback constants (their instance of §273.2's
+   normalized-units class).
+6. **REJECTED FOR US, with reasons**: document 1's modernization
+   plan (Rust/Wasm kernel, 40-50 engineer-weeks, schema
+   migration, Foundry adapters) solves a from-scratch problem WE
+   DO NOT HAVE — determinism, stable lineage IDs, per-mechanic
+   streams, epochs, area-true predicates and the acyclic graph
+   are BUILT; adopting its architecture would rebuild the
+   program at wave one. Its ML posture matches our §234 stance.
+   The Foundry/VTT protocol material is PARKED as a genuinely
+   useful reference for a future integration surface, not
+   current work.
