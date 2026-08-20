@@ -14880,6 +14880,69 @@
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "validate:packets"]
       ]
+    },
+    {
+      "id": "MF-T1A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T1A.md",
+      "verifiedBase": "ad2bc28b243a09f29657c43525332f9c32c79636",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/boundaryArrangement.js" },
+        { "action": "REGISTER", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "MODIFY", "path": "tests/fixtures/townMapSettlementFabricFixtures.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapBoundaryArrangement.test.js" },
+        { "action": "CREATE", "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const FABRIC_COORDINATE_ABI" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const CURRENT_MAP_TRADITION_ID" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function canonicalArtifactRef" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function canonicalRectBounds" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalId" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalInt" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalRecord" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function sealCanonicalArtifact" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function sealFabricFoundation" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export const ORTHOGONAL_CROSS_PLAN_KIND" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export const ORTHOGONAL_CROSS_CELL_NAMES" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export function prepareOrthogonalCrossPlan" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export function deriveOrthogonalCrossRows" },
+        { "path": "src/domain/townMap/fabric/frontage.js", "symbol": "export const SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/frontage.js", "symbol": "export const FRONTAGE_AXIS_KEYS" },
+        { "path": "src/domain/townMap/fabric/frontage.js", "symbol": "export function subdivideSettlementFrontages" },
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export const STREET_GEOMETRY_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export const STREET_GEOMETRY_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export function compileOrthogonalCrossStreetGeometry" },
+        { "path": "src/domain/townScene/stableScene.js", "symbol": "export function sceneDigest" },
+        { "path": "src/domain/townScene/stableScene.js", "symbol": "export function stableSceneStringify" },
+        { "path": "src/domain/deterministicSort.js", "symbol": "export const compareCodepoint" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "subdivideSettlementFrontages," },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossStreetGeometry," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const SETTLEMENT_AXES" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementFoundation" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementStreetGeometry" },
+        { "path": "tests/domain/townMapSettlementFabric.test.js", "symbol": "MF-W3S1 orthogonal-cross settlement fabric" },
+        { "path": "tests/property/townMapSettlementFabricDeterminism.test.js", "symbol": "MF-W3S1 settlement fabric determinism" },
+        { "path": "tests/domain/townMapStreetGeometry.test.js", "symbol": "MF-T1G canonical orthogonal-cross street geometry" },
+        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "The canonical source set publishes one connected, codepoint-ordered V24/E32 cadastral arrangement with exact role/source counts and cycle rank nine." },
+        { "id": "A2", "case": "The root and members bind exact source ID/hash refs and inherit exact settlement, time, tradition, leaf and ABI; the artifact is deeply frozen." },
+        { "id": "A3", "case": "All plot-edge occurrences and four support openings resolve exactly once, every plot contributes four edges, shared dividers pair twice, and extent/ROW coverage closes." },
+        { "id": "A4", "case": "Tampered or mismatched source identity, partial overlap, coverage gap, wrong shapes and extra input keys refuse before sealing." },
+        { "id": "A5", "case": "Repeated compilation, upstream reorder, canonical JSON replay and a maximum-valid settlement ID remain byte- and ID-safe without freezing sources." },
+        { "id": "A6", "case": "Source bytes remain pinned and the arrangement contains no graph, adjacency, face, half-edge, parcel, routing, building or draw authority." }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/townMapBoundaryArrangement.test.js", "tests/property/townMapBoundaryArrangementDeterminism.test.js", "tests/domain/townMapSettlementFabric.test.js", "tests/property/townMapSettlementFabricDeterminism.test.js", "tests/domain/townMapStreetGeometry.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
     }
   ]
 }
