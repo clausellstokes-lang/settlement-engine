@@ -8,6 +8,10 @@
  */
 
 export { buildTownMapModel } from './townMapModel.js';
+// MF-VS1 — the bounded canonical fabric path. This is headless and explicit-input:
+// one sealed surface block, frontage-first subdivision, mass, projection, persistence,
+// and registered fantasy construction. It does not wake the legacy generators.
+export * from './fabric/index.js';
 export { anchorForInstitution, anchorForDistrict, slugify } from './anchors.js';
 // TOWN LAYOUT v2 (#38) — the semantic urban-planning engine (a sibling generation
 // under the same projection). Lazy, consumed only by the model dispatch + tests.

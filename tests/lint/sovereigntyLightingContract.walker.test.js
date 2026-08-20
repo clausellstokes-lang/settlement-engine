@@ -4787,7 +4787,13 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // --porcelain` listed NOTHING at measurement time (the lane's paths were already
     // committed and no sibling lane holds work in this worktree), so no other lane's titles
     // are charged to this row.
-    files: 2460, parked: 364, credited: 2096, titles: 20512, suiteTitles: 5743,
+    // ── RE-RECORDED 2026-08-20 BY MF-VS1, THE BOUNDED FIRST-MAP SLICE ──────────
+    // 2,460/364/2,096/20,512/5,743 → 2,466/364/2,102/20,529/5,749. Exactly six
+    // literal-title acceptance files were added: foundation, frontage, explicit mass,
+    // built-in/custom parity, fantasy construction, and replay/privacy. All six are
+    // credited; together they contribute 17 test titles and six suite titles. No parser
+    // door, parked-file rule, or pre-existing test changed classification.
+    files: 2466, parked: 364, credited: 2102, titles: 20529, suiteTitles: 5749,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

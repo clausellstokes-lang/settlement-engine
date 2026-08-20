@@ -69,6 +69,10 @@
    "rationale": "Pulse substage and ledger-ownership certification joined to live source through a TypeScript AST walk of the whole src tree. It pins the manifest version, stage order, gate ids and frozenness, resolves every declared host/call/predicate ref, matches each declared input port against the kernel's real call bindings, requires each declared write's evidence to appear in the host body, enforces monotonic call order in pulseKernel, and derives the ledger writer sets FROM SOURCE to compare against the declared ones. It carries its own detector control at the set/drop writer scanner, proving commented and string-quoted call shapes are ignored. Every join is recomputed from source on each run, so a standing text mutation would duplicate one of those direct contracts without strengthening totality. Landed without its manifest row at d7ec3885; filed here by the step-15 reconciliation.",
    "kindNote": "rationale rather than a planted sweep mutation, for the same reason as the entry above; the AST joins are recomputed per run and already fail closed."
   },
+  "tests/domain/townMapCustomParity.test.js": {
+   "kind": "rationale",
+   "rationale": "The bounded first-map parity suite executes the built-in/custom differential, rejects semantic recipe substitution, and proves save-remove-reload preservation with a visible read-only unresolved state on every run. Those paired positive and adversarial controls directly exercise the origin-neutral compiler and persistence boundary; adding this headless slice to the destructive shared-tree mutation sweep would duplicate those contracts without strengthening their totality."
+  },
   "tests/lint/testRatchet.test.js": {
    "kind": "rationale",
    "ref": "test-ratchet-controls-executed-2026-08-07"

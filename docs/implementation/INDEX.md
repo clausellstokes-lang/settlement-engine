@@ -1020,6 +1020,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
+| MF-VS1 | [`MF-VS1`](./packets/town-cartography/MF-VS1.md) | **READY** on `4eafca31` | One canonical first map slice: sealed surface fabric, frontage-first W3, explicit mass, fixed light, built-in/custom persistence parity, one fantasy construction, privacy and replay | full W3 corpus/soak, wall offset, multiple leaves, advanced light, UI/database cutover, broad migrations, evidence promotion, non-European morphology packs, adjacent edge cases |
 | LANDED-1 | [`TC-3a`](./packets/town-cartography/TC-3A.md) | **LANDED** at `5066c34b`; do not redispatch | Adds named streets and wards at schema v2 and moves the naming pools off the bounded chunk by injection | parcels, carving, institution binding, byte band, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
 | LANDED-6 | [`TC-3b`](./packets/town-cartography/TC-3B.md) | **LANDED** at `a45c969d`; do not redispatch | Adds bounded contained parcels and the pure institution-to-parcel binding receipt for TC-4 | naming, schema changes, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
 | LANDED-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **LANDED** at `455a29b5`; do not redispatch | Ephemeral text-intent shell and typed-op card extraction landed; SC-2+ remain excluded | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |

@@ -14390,6 +14390,79 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "MF-VS1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-VS1.md",
+      "verifiedBase": "4eafca31a295b5288f8c5b0b551e248e386e7791",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/foundation.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/frontage.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/building.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/content.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/projection.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/operations.js" },
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/index.js" },
+        { "action": "CREATE", "path": "tests/fixtures/townMapFirstSliceFixtures.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapFabricFoundation.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapFrontageW3.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapExplicitBuilding.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapCustomParity.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapFantasyConstruction.test.js" },
+        { "action": "CREATE", "path": "tests/property/townMapFirstSliceDeterminism.test.js" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/townScene/stableScene.js",
+          "symbol": "export function stableSceneStringify"
+        },
+        {
+          "path": "src/domain/townScene/stableScene.js",
+          "symbol": "export function sceneDigest"
+        },
+        {
+          "path": "src/domain/townMap/townMapDraw.js",
+          "symbol": "export function drawListToSvg"
+        },
+        {
+          "path": "src/domain/townMap/audienceProjection.js",
+          "symbol": "export function projectSettlementForTownMapAudience"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "One explicit leaf-0 block seals as deterministic sole fabric authority and malformed or implicit geometry fails closed." },
+        { "id": "A2", "case": "One frontage-first subdivision routine owns four explicit axes and emits first-class frontage, plot, backland, and rectilinear footprint lineage." },
+        { "id": "A3", "case": "One complete explicit mass compiles under fixed survey light and screen plus SVG consume the same ordered draw ops; missing geometry refuses." },
+        { "id": "A4", "case": "Built-in and custom origins using equal semantic recipe/spec inputs produce identical geometry and projected semantic primitives while origin identity remains separately hashed." },
+        { "id": "A5", "case": "Removing a custom package after save preserves the mass on reload, returns visible unresolved status, and makes the document read-only without deletion or substitution." },
+        { "id": "A6", "case": "A registered EXPLICIT_FANTASY_CANON construction operation replays deterministically without historical-evidence or probability authority." },
+        { "id": "A7", "case": "PUBLIC contains zero DM-only bytes and repeated compile, persistence, projection, and export are byte-identical." }
+      ],
+      "checks": [
+        [
+          "npx", "vitest", "run",
+          "tests/domain/townMapFabricFoundation.test.js",
+          "tests/domain/townMapFrontageW3.test.js",
+          "tests/domain/townMapExplicitBuilding.test.js",
+          "tests/domain/townMapCustomParity.test.js",
+          "tests/domain/townMapFantasyConstruction.test.js",
+          "tests/property/townMapFirstSliceDeterminism.test.js"
+        ],
+        [
+          "npx", "vitest", "run",
+          "tests/architecture/engineWorkerDomFree.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
     }
   ]
 }
