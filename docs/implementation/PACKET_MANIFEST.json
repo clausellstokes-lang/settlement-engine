@@ -14704,6 +14704,78 @@
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "validate:packets"]
       ]
+    },
+    {
+      "id": "MF-T1G",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T1G.md",
+      "verifiedBase": "adc6894964c3dc90dfa3aa1edfce898fdbf78871",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/streetGeometry.js" },
+        { "action": "REGISTER", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "MODIFY", "path": "tests/fixtures/townMapSettlementFabricFixtures.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapStreetGeometry.test.js" },
+        { "action": "CREATE", "path": "tests/property/townMapStreetGeometryDeterminism.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealFabricFoundation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealCanonicalArtifact"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function canonicalArtifactRef"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function canonicalRectBounds"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementFoundation"
+        },
+        {
+          "path": "tests/domain/townMapSettlementFabric.test.js",
+          "symbol": "MF-W3S1 orthogonal-cross settlement fabric"
+        },
+        {
+          "path": "tests/property/townMapSettlementFabricDeterminism.test.js",
+          "symbol": "MF-W3S1 settlement fabric determinism"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "The canonical cross publishes one quantized junction and four positive junction-to-boundary segments with exact source-street lineage." },
+        { "id": "A2", "case": "The artifact binds the exact source foundation ID and hash plus settlement, time, tradition, leaf, ABI, schema and law, and is deeply frozen." },
+        { "id": "A3", "case": "Odd-width or odd-sum admitted corridor bands use the declared integer floor midpoint law." },
+        { "id": "A4", "case": "Legacy, tampered, non-cross, wrong-shape and extra-key inputs refuse before sealing." },
+        { "id": "A5", "case": "Repeated compilation, reversed source-cell order and canonical JSON replay produce byte-identical artifacts and hashes." },
+        { "id": "A6", "case": "MF-W3S1 source byte pins remain unchanged and STREET_GEOMETRY contains no graph, parcel, building, culture, evidence, privacy, style or draw authority." }
+      ],
+      "checks": [
+        [
+          "npx", "vitest", "run",
+          "tests/domain/townMapStreetGeometry.test.js",
+          "tests/property/townMapStreetGeometryDeterminism.test.js",
+          "tests/domain/townMapSettlementFabric.test.js",
+          "tests/property/townMapSettlementFabricDeterminism.test.js"
+        ],
+        [
+          "npx", "vitest", "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
     }
   ]
 }
