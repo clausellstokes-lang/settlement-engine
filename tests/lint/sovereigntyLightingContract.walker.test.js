@@ -4808,7 +4808,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,469/364/2,105/20,540/5,752 → 2,471/364/2,107/20,546/5,754. The domain
     // matrix contributes five titles and one suite; the deterministic replay companion
     // contributes one title and one suite. Both files are credited; no parser door moved.
-    files: 2471, parked: 364, credited: 2107, titles: 20546, suiteTitles: 5754,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1N, CANONICAL STREET GRAPH ─────────────
+    // 2,471/364/2,107/20,546/5,754 → 2,473/364/2,109/20,552/5,756. The domain
+    // matrix contributes five titles and one suite; the replay/ID-closure companion
+    // contributes one title and one suite. Both files are credited; no parser door moved.
+    files: 2473, parked: 364, credited: 2109, titles: 20552, suiteTitles: 5756,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

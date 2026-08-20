@@ -23,6 +23,10 @@ export {
   compileOrthogonalCrossStreetGeometry,
 } from './streetGeometry.js';
 export {
+  STREET_GRAPH_LAW_VERSION, STREET_GRAPH_SCHEMA_VERSION,
+  compileOrthogonalCrossStreetGraph,
+} from './streetGraph.js';
+export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,
