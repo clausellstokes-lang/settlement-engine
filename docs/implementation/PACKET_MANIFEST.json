@@ -14827,7 +14827,7 @@
     },
     {
       "id": "MF-T1N",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1N.md",
       "verifiedBase": "db646aaff2a8cc8cdc5a20bc0a8ae6e3ee7815ca",
       "changeManifest": [
@@ -14857,7 +14857,14 @@
         { "path": "src/domain/deterministicSort.js", "symbol": "export const compareCodepoint" },
         { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementStreetGeometry" },
         { "path": "tests/domain/townMapStreetGeometry.test.js", "symbol": "MF-T1G canonical orthogonal-cross street geometry" },
-        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" }
+        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" },
+        { "path": "src/domain/townMap/fabric/streetGraph.js", "symbol": "export const STREET_GRAPH_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGraph.js", "symbol": "export const STREET_GRAPH_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGraph.js", "symbol": "export function compileOrthogonalCrossStreetGraph" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossStreetGraph," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementStreetGraph" },
+        { "path": "tests/domain/townMapStreetGraph.test.js", "symbol": "MF-T1N canonical orthogonal-cross street graph" },
+        { "path": "tests/property/townMapStreetGraphDeterminism.test.js", "symbol": "MF-T1N street graph determinism" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "The canonical geometry publishes a codepoint-ordered five-node, four-edge graph over exactly two source streets." },

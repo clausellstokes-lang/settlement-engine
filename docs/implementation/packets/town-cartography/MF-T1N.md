@@ -1,13 +1,16 @@
 # Street Topology / MF-T1N — canonical orthogonal-cross street graph
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `40b29038d40ce50096e6b3450748ee6318bff285`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `db646aaff2a8cc8cdc5a20bc0a8ae6e3ee7815ca`
-- **Last revalidated:** `2026-08-20` at `db646aaff2a8cc8cdc5a20bc0a8ae6e3ee7815ca`
+- **Last revalidated:** `2026-08-20` at `40b29038d40ce50096e6b3450748ee6318bff285`
 - **Depends on:** MF-T1G at `875a0f39a4b18ff4a153c07092550aab1ab28853`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1G wave-end gate passed with 28,586 tests and the inherited 11-known-failure ceiling; lint held 29 warnings and zero errors; build and 314-route prerender passed; strict dist passed 409/409; terminal governance validates 120 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -204,18 +207,18 @@ Stop if the base/seal/cleanliness differs; copied coordinates, a second settleme
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas:
-- A1-A6 results:
-- Focused commands, exits, and counts:
-- Sealed packet/resume status:
-- Both typecheck configurations:
-- Wave-end gate stages:
-- Base-versus-wave failure identity diff:
-- MF-T1G byte pin:
+- Base SHA: `db646aaff2a8cc8cdc5a20bc0a8ae6e3ee7815ca`
+- Dispatch bundle and seal identity: MF-T1N sealed session digest `d3c6420aeff1a5adda9e63069869a0adfa45a213728ee074c27a56948f1defcf`; capsule digest `ca063aca648a44417895733a968d897d87b7a683dacfd31fbbdd21ed0014b20e`
+- Final commit or working-tree state: `40b29038d40ce50096e6b3450748ee6318bff285`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact six-path manifest; positive effective production delta `177/224` (`streetGraph.js` `173/220`, `index.js` `+4/4`); census effective delta `0/12`
+- A1-A6 results: six new acceptance cases pass; focused packet plus MF-T1G regressions `12/12`; independent bounded audit `0 P0 / 0 P1`
+- Focused commands, exits, and counts: packet/regression suite `12/12`; sovereignty/negative walkers `42/42`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact session fingerprint was reused without rerun drift
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: `npm run check:tail` exit `0`; test ratchet `28,592` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- MF-T1G byte pin: street geometry `scene-v1-3c720d7ef19b040779a7fb82feb85011`; canonical street graph `scene-v1-18be7a3de95499aca1ca2a094c6d0e1e`
 - Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations:
-- Judgment calls: `NONE`
+- Deviations: `NONE`
+- Out-of-scope observations: cadastral boundary arrangement, DCEL, reference-only Fabric root, routing, parcels, buildings, persistence, and UI remain later bounded packets
+- Judgment calls: `EXTENT_ENDPOINT` semantics remain inherited from the exact MF-T1G law/hash reference; this incidence-only packet validates exact foundation-ref shape but does not re-import foundation geometry; replay validation preserves caller-owned source mutability
