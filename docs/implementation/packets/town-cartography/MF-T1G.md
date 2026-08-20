@@ -90,6 +90,9 @@ Edit only exact-manifest paths. `check:packet` and `implementation:resume` remai
 | Exact source ref | `src/domain/townMap/fabric/foundation.js` | `canonicalArtifactRef` | Produces ID/hash refs | Reuse exactly |
 | Rectangle validator | `src/domain/townMap/fabric/foundation.js` | `canonicalRectBounds` | Enforces positive canonical quantized rectangles | Reuse exactly |
 | Closed source law | `src/domain/townMap/fabric/foundation.js` | `SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION` | Names the only admitted source foundation | Require exact equality |
+| Cross grammar | `src/domain/townMap/fabric/settlementFoundation.js` | `ORTHOGONAL_CROSS_PLAN_KIND`, `prepareOrthogonalCrossPlan`, `deriveOrthogonalCrossRows` | Owns the only admitted plan and corridor-row derivation | Seal as transitive geometry authority; do not modify |
+| Digest authority | `src/domain/townScene/stableScene.js` | `sceneDigest` | Owns canonical content fingerprints used by `sealCanonicalArtifact` | Seal as transitive identity authority; do not modify |
+| Stable ordering | `src/domain/deterministicSort.js` | `compareCodepoint` | Owns codepoint-stable row ordering | Reuse exactly |
 | Fixture | `tests/fixtures/townMapSettlementFabricFixtures.js` | `makeSettlementFoundation` | Builds the landed canonical cross | Extend; do not duplicate plan bytes |
 | Regression precedent | `tests/domain/townMapSettlementFabric.test.js` | `MF-W3S1 orthogonal-cross settlement fabric` | Pins conservation, lineage and legacy bytes | Preserve |
 | Determinism precedent | `tests/property/townMapSettlementFabricDeterminism.test.js` | `MF-W3S1 settlement fabric determinism` | Pins reorder/replay stability | Copy proof shape |

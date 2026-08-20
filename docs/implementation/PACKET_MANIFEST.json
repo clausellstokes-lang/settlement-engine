@@ -14740,6 +14740,26 @@
           "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION"
         },
         {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export const ORTHOGONAL_CROSS_PLAN_KIND"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export function prepareOrthogonalCrossPlan"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export function deriveOrthogonalCrossRows"
+        },
+        {
+          "path": "src/domain/townScene/stableScene.js",
+          "symbol": "export function sceneDigest"
+        },
+        {
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
           "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
           "symbol": "export function makeSettlementFoundation"
         },
