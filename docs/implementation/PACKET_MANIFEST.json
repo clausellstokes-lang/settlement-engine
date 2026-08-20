@@ -14431,6 +14431,74 @@
         {
           "path": "src/domain/townMap/audienceProjection.js",
           "symbol": "export function projectSettlementForTownMapAudience"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealFabricFoundation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export function subdivideFrontageBlock"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function compileExplicitBuildingMass"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function createFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function saveFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function loadFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function resolveFirstSliceContent"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export const FIXED_SURVEY_LIGHT_V1"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function firstSliceScreenDrawOps"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function firstSliceProjectionToSvg"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function registerFantasyConstructionMechanism"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function createFantasyConstructionOperation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function executeFantasyConstruction"
+        },
+        {
+          "path": "src/domain/townMap/index.js",
+          "symbol": "export * from './fabric/index.js';"
+        },
+        {
+          "path": "tests/domain/townMapCustomParity.test.js",
+          "symbol": "MF-VS1 built-in/custom parity and package removal"
+        },
+        {
+          "path": "tests/property/townMapFirstSliceDeterminism.test.js",
+          "symbol": "MF-VS1 privacy and whole-slice deterministic replay"
         }
       ],
       "acceptanceCases": [
@@ -14466,7 +14534,7 @@
     },
     {
       "id": "MF-SH1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-SH1.md",
       "verifiedBase": "7c34f50fd99fcf34c478ec56cbae42240bcd7486",
       "changeManifest": [
@@ -14494,6 +14562,22 @@
         {
           "path": "src/domain/townMap/townMapDraw.js",
           "symbol": "export function drawListToSvg"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const COMPOSITE_SHAPE_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export function compileCompositeShapeFragments"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const EXPLICIT_BUILDING_GEOMETRY_LAWS"
+        },
+        {
+          "path": "tests/domain/townMapShapeKernel.test.js",
+          "symbol": "MF-SH1 bounded semantic shape kernel"
         }
       ],
       "acceptanceCases": [

@@ -6,10 +6,9 @@
 - **Verified base:** `codex/first-map-vertical-slice` at `4eafca31a295b5288f8c5b0b551e248e386e7791`
 - **Last revalidated:** `2026-08-20`
 - **Collision group:** `town-map-canonical-foundation`
-- **Commit authority:** edits only; no stage, commit, merge, push, or broad cleanup
+- **Commit authority:** LANDED; do not redispatch
 
-> Only this READY implementation packet defines coding authority. Design files, queues,
-> progress notes, commit subjects, and briefs cannot expand that authority.
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Outcome
 

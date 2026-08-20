@@ -1,14 +1,14 @@
 # Map Shape Kernel / MF-SH1 — bounded nonrectangular mass
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `3cf12008e1d4ea7411a61f59b8e633a7b993dd1f`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `7c34f50fd99fcf34c478ec56cbae42240bcd7486`
 - **Last revalidated:** `2026-08-20`
 - **Collision group:** `town-map-canonical-shape-kernel`
-- **Commit authority:** edits only; no stage, commit, merge, push, or broad cleanup
+- **Commit authority:** LANDED; do not redispatch
 
-> Only this READY implementation packet defines coding authority. The owner has selected the
-> bounded nonrectangular correction; it does not reopen the broader architecture backlog.
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Outcome
 
@@ -84,8 +84,9 @@ must remain below 300 effective lines; the new test stays below 280.
 | MODIFY | `tests/lint/sovereigntyLightingContract.walker.test.js` |
 
 No other production, test, fixture, baseline, golden, generated, corpus, or UI file is in scope.
-The two governance edits add no allowance: they record the new direct controls and exact test
-census movement.
+The sovereignty-census edit records the exact test-census movement. The mutation manifest was
+reserved but remained byte-identical because this `tests/domain` suite is not enumerated as an
+invariant and no applicable rationale row changed.
 
 ## 5. Preflight
 
