@@ -14607,7 +14607,7 @@
     },
     {
       "id": "MF-W3S1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-W3S1.md",
       "verifiedBase": "7a631a739bc69dc98efa1877474ef9d358a05646",
       "changeManifest": [
@@ -14652,6 +14652,30 @@
         {
           "path": "tests/property/townMapFirstSliceDeterminism.test.js",
           "symbol": "MF-VS1 privacy and whole-slice deterministic replay"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export function deriveOrthogonalCrossRows"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export const SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export function subdivideSettlementFrontages"
+        },
+        {
+          "path": "tests/domain/townMapSettlementFabric.test.js",
+          "symbol": "MF-W3S1 orthogonal-cross settlement fabric"
+        },
+        {
+          "path": "tests/property/townMapSettlementFabricDeterminism.test.js",
+          "symbol": "MF-W3S1 settlement fabric determinism"
         }
       ],
       "acceptanceCases": [

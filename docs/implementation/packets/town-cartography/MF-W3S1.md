@@ -1,13 +1,16 @@
 # Settlement Fabric / MF-W3S1 — orthogonal cross and aggregate frontage W3
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `a227c1d5ed233509101bbcd90bbab77a787de419`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `7a631a739bc69dc98efa1877474ef9d358a05646`
-- **Last revalidated:** `2026-08-20` at `7a631a739bc69dc98efa1877474ef9d358a05646`
+- **Last revalidated:** `2026-08-20` at `a227c1d5ed233509101bbcd90bbab77a787de419`
 - **Depends on:** MF-VS1 at `7c34f50fd99fcf34c478ec56cbae42240bcd7486`; MF-SH1 at `3cf12008e1d4ea7411a61f59b8e633a7b993dd1f`
 - **Collision group:** `town-map-canonical-fabric`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** full `npm run check` passed at the verified base with 28,574 tests and the inherited 11-known-failure ceiling; strict dist passed 409/409; lint held 29 warnings and zero errors
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -235,18 +238,18 @@ Do not broaden this packet or repair unrelated failures.
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas:
-- A1-A6 results:
-- Focused commands, exits, and counts:
-- Sealed per-step receipt and exact-state resume status:
-- Both typecheck configurations:
-- Wave-end gate stages actually executed:
-- Base-versus-wave failure identity diff:
-- Legacy byte pins:
+- Base SHA: `7a631a739bc69dc98efa1877474ef9d358a05646`
+- Dispatch bundle and seal identity: MF-W3S1 sealed session; digest `d8dc4d916ef8d8b5690b7877fe54f85e4d252f9b22889af93b9eb5d712d0ee44`
+- Final commit or working-tree state: `a227c1d5ed233509101bbcd90bbab77a787de419`; implementation tree clean
+- Exact changed files and effective-line deltas: exact eight-path manifest; production positive effective delta `232/320` (`settlementFoundation.js` `127/150`, `foundation.js` `+39/70`, `frontage.js` `+61/90`, `index.js` `+5/6`); census effective delta `0/12`
+- A1-A6 results: `18/18` focused packet tests pass; bounded adversarial audit reports `0 P0 / 0 P1`
+- Focused commands, exits, and counts: six packet files `18/18`; sovereignty/negative walkers `42/42`; observed-shape reader controls `27/27`; all exit `0`
+- Sealed per-step receipt and exact-state resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; post-hook committed bytes passed the same focused suites directly
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages actually executed: `npm run check:tail` exit `0`; test ratchet `28,580` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- Legacy byte pins: foundation `scene-v1-59a635fbbd1bf18c894c0e07fd843e9e`; subdivision edge 0 `scene-v1-bd96af8602dc4babe59acdf2681731f5`; edges 1-3 `scene-v1-ecd39dc154452d9475478b053ec22766`, `scene-v1-6f8fb1a8d6655b29da09156c7a02da0f`, `scene-v1-76c7c0ba081d1b43d112829ea773a701`
 - Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations, without investigation:
-- Judgment calls: `NONE`
+- Deviations: `NONE`
+- Out-of-scope observations, without investigation: arbitrary street graphs/DCEL remain deferred to the next bounded packet
+- Judgment calls: private aggregation scalars are recorded during row derivation so schema-v2 publishes one authority without rereading a second nested metrics authority or weakening the observed-shape census
