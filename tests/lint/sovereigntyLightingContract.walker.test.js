@@ -4799,7 +4799,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // circular shell, polygonal variant/refusals, shell-derived shadow/shared export,
     // built-in/custom persistence parity, and deterministic replay. It has one describe;
     // no parser door, parked-file rule, or pre-existing test changed classification.
-    files: 2467, parked: 364, credited: 2103, titles: 20534, suiteTitles: 5750,
+    // ── RE-RECORDED 2026-08-20 BY MF-W3S1, THE SETTLEMENT FABRIC ─────────────
+    // 2,467/364/2,103/20,534/5,750 → 2,469/364/2,105/20,540/5,752. Exactly two
+    // credited literal-title files were added: the six-case settlement fabric matrix
+    // contributes five titles and one suite; its determinism companion contributes one
+    // title and one suite. No parser door, parked-file rule, or existing file moved.
+    files: 2469, parked: 364, credited: 2105, titles: 20540, suiteTitles: 5752,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

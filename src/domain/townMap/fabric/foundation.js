@@ -4,9 +4,16 @@
  */
 
 import { sceneDigest } from '../../townScene/stableScene.js';
+import {
+  ORTHOGONAL_CROSS_PLAN_KIND,
+  deriveOrthogonalCrossRows,
+  prepareOrthogonalCrossPlan,
+} from './settlementFoundation.js';
 
 export const FABRIC_FOUNDATION_SCHEMA_VERSION = 1;
 export const FABRIC_FOUNDATION_LAW_VERSION = 'mf-w3-explicit-v1';
+export const SETTLEMENT_FABRIC_FOUNDATION_SCHEMA_VERSION = 2;
+export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION = 'mf-w3-orthogonal-cross-v1';
 export const FABRIC_COORDINATE_ABI = 'plan-q1-0-1000-v1';
 export const CURRENT_MAP_TRADITION_ID = 'EUROPEAN_FANTASY_BASE';
 
@@ -104,6 +111,39 @@ export function sealCanonicalArtifact(value) {
   }));
 }
 
+/** @param {Record<string,unknown>} source @param {string} artifactId */
+function sealOrthogonalCrossFoundation(source, artifactId) {
+  if (source.blockFace !== undefined || source.streetEdge !== undefined) {
+    throw new TypeError('orthogonal cross input forbids legacy blockFace and streetEdge');
+  }
+  const prepared = prepareOrthogonalCrossPlan(source.plan, {
+    canonicalRectBounds, requireCanonicalId, requireCanonicalInt, requireCanonicalRecord,
+  });
+  const { bounds, setbackQ } = prepared;
+  const rows = deriveOrthogonalCrossRows(
+    /** @type {Parameters<typeof deriveOrthogonalCrossRows>[0]} */ (prepared),
+  );
+  for (const block of rows.blockFaces) {
+    const blockBounds = canonicalRectBounds(block.ring, `block ${block.blockId}`);
+    const edge = rows.streetEdges.find((row) => row.blockId === block.blockId);
+    if (!edge) throw new TypeError('settlement block is missing its street edge');
+    const depthQ = edge.edgeIndex % 2 === 0 ? blockBounds.depthQ : blockBounds.widthQ;
+    if (setbackQ * 2 >= depthQ) throw new TypeError('street setback consumes a settlement block');
+  }
+  return sealCanonicalArtifact({
+    artifactKind: 'SEALED_FABRIC_FOUNDATION', artifactId,
+    schemaVersion: SETTLEMENT_FABRIC_FOUNDATION_SCHEMA_VERSION,
+    lawVersion: SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION,
+    coordinateAbiVersion: FABRIC_COORDINATE_ABI,
+    mapTraditionId: CURRENT_MAP_TRADITION_ID,
+    effectiveAt: source.effectiveAt,
+    leafIndex: 0,
+    planKind: ORTHOGONAL_CROSS_PLAN_KIND,
+    ground: { kind: 'SURFACE', surfaceId: `${artifactId}:ground`, ring: bounds.ring },
+    ...rows,
+  });
+}
+
 /**
  * @typedef {{
  *   artifactId:string,
@@ -124,6 +164,7 @@ export function sealFabricFoundation(input) {
   if (typeof source.effectiveAt !== 'string' || source.effectiveAt.length === 0) {
     throw new TypeError('effectiveAt must be explicit');
   }
+  if (source.plan !== undefined) return sealOrthogonalCrossFoundation(source, artifactId);
   const block = requireCanonicalRecord(source.blockFace, 'blockFace');
   const blockId = requireCanonicalId(block.blockId, 'blockFace.blockId');
   const bounds = canonicalRectBounds(block.ring, 'blockFace.ring');

@@ -4,6 +4,7 @@
  */
 
 import {
+  FABRIC_FOUNDATION_LAW_VERSION, FABRIC_FOUNDATION_SCHEMA_VERSION,
   canonicalArtifactRef,
   canonicalRectBounds,
   requireCanonicalId,
@@ -11,8 +12,10 @@ import {
   requireCanonicalRecord,
   sealCanonicalArtifact,
 } from './foundation.js';
+import { compareCodepoint } from '../../deterministicSort.js';
 
 export const FRONTAGE_SUBDIVISION_LAW_VERSION = 'w3-frontage-four-axis-v1';
+export const SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION = 'w3-frontage-settlement-v1';
 export const FRONTAGE_AXIS_KEYS = Object.freeze([
   'emptinessQ', 'gridChaosQ', 'sizeFloorQ', 'sizeVariationQ',
 ]);
@@ -91,18 +94,20 @@ function polygonAreaQ(polygon) {
   return Math.abs(twice) / 2;
 }
 
+/** @param {Array<[number,number]>} ring @param {string} label */
+function canonicalizeGeneratedRect(ring, label) {
+  const xs = ring.map((point) => point[0]); const zs = ring.map((point) => point[1]);
+  const [minX, maxX, minZ, maxZ] = [Math.min(...xs), Math.max(...xs), Math.min(...zs), Math.max(...zs)];
+  return canonicalRectBounds([[minX, minZ], [maxX, minZ], [maxX, maxZ], [minX, maxZ]], label).ring;
+}
 /**
- * @param {ReturnType<import('./foundation.js').sealFabricFoundation>} foundation
+ * @param {Record<string, unknown>} source
  * @param {string} blockId
- * @param {{sizeFloorQ:number,gridChaosQ:number,sizeVariationQ:number,emptinessQ:number}} rawAxes
+ * @param {{sizeFloorQ:number,gridChaosQ:number,sizeVariationQ:number,emptinessQ:number}} axes
+ * @param {(stopQ:number,splitStaggerQ:number,backlandAreaQ:number)=>void} [recordMetrics]
  */
-export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
-  const source = requireCanonicalRecord(foundation, 'foundation');
-  if (source.artifactKind !== 'SEALED_FABRIC_FOUNDATION') {
-    throw new TypeError('frontage requires a sealed fabric foundation');
-  }
+function deriveFrontageBlockRows(source, blockId, axes, normalizeFittedFootprint = false, recordMetrics = () => {}) {
   requireCanonicalId(blockId, 'blockId');
-  const axes = requireAxes(rawAxes);
   const blocks = /** @type {Array<Record<string, unknown>>} */ (source.blockFaces);
   const streets = /** @type {Array<Record<string, unknown>>} */ (source.streetEdges);
   const block = blocks.find((row) => row.blockId === blockId);
@@ -137,6 +142,10 @@ export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
     if (fittedRightQ - fittedLeftQ < 1) throw new TypeError('grid chaos leaves no fitted footprint');
     const plotId = `${blockId}:plot:${String(index + 1).padStart(2, '0')}`;
     const frontageId = `${blockId}:frontage:${String(index + 1).padStart(2, '0')}`;
+    const fittedFootprint = [
+      frame.point(fittedLeftQ, setbackQ), frame.point(fittedRightQ, setbackQ),
+      frame.point(fittedRightQ, footprintRearQ), frame.point(fittedLeftQ, footprintRearQ),
+    ];
     return {
       plotId,
       frontageId,
@@ -144,10 +153,9 @@ export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
         frame.point(frontStartQ, 0), frame.point(frontEndQ, 0),
         frame.point(rearEndQ, depthQ), frame.point(rearStartQ, depthQ),
       ],
-      fittedFootprint: [
-        frame.point(fittedLeftQ, setbackQ), frame.point(fittedRightQ, setbackQ),
-        frame.point(fittedRightQ, footprintRearQ), frame.point(fittedLeftQ, footprintRearQ),
-      ],
+      fittedFootprint: normalizeFittedFootprint
+        ? canonicalizeGeneratedRect(fittedFootprint, `plot ${plotId} fittedFootprint`)
+        : fittedFootprint,
       frontageWidthQ,
     };
   });
@@ -166,13 +174,9 @@ export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
       frame.point(frame.widthQ, depthQ), frame.point(0, depthQ),
     ],
   } : null;
+  recordMetrics(stopQ, rearBoundaries.reduce((sum, value, index) => sum + Math.abs(value - frontBoundaries[index]), 0), backlandCore ? frame.widthQ * (depthQ - footprintRearQ) : 0);
 
-  return sealCanonicalArtifact({
-    artifactKind: 'FRONTAGE_SUBDIVISION',
-    artifactId: `${source.artifactId}:frontage:${blockId}`,
-    lawVersion: FRONTAGE_SUBDIVISION_LAW_VERSION,
-    coordinateAbiVersion: source.coordinateAbiVersion,
-    foundationRef: canonicalArtifactRef(/** @type {{artifactId:string,contentHash:string}} */ (source)),
+  return {
     blockId,
     axes,
     frontages,
@@ -186,9 +190,76 @@ export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
       frontageWidthSpreadQ: Math.max(...widths) - Math.min(...widths),
       backlandAreaQ: backlandCore ? frame.widthQ * (depthQ - footprintRearQ) : 0,
     },
+  };
+}
+/**
+ * @param {ReturnType<import('./foundation.js').sealFabricFoundation>} foundation
+ * @param {string} blockId
+ * @param {{sizeFloorQ:number,gridChaosQ:number,sizeVariationQ:number,emptinessQ:number}} rawAxes
+ */
+export function subdivideFrontageBlock(foundation, blockId, rawAxes) {
+  const source = requireCanonicalRecord(foundation, 'foundation');
+  if (source.artifactKind !== 'SEALED_FABRIC_FOUNDATION'
+    || source.schemaVersion !== FABRIC_FOUNDATION_SCHEMA_VERSION || source.lawVersion !== FABRIC_FOUNDATION_LAW_VERSION) {
+    throw new TypeError('one-block frontage requires a schema-v1 fabric foundation');
+  }
+  return sealCanonicalArtifact({
+    artifactKind: 'FRONTAGE_SUBDIVISION',
+    artifactId: `${source.artifactId}:frontage:${blockId}`,
+    lawVersion: FRONTAGE_SUBDIVISION_LAW_VERSION,
+    coordinateAbiVersion: source.coordinateAbiVersion,
+    foundationRef: canonicalArtifactRef(/** @type {{artifactId:string,contentHash:string}} */ (source)),
+    ...deriveFrontageBlockRows(source, blockId, requireAxes(rawAxes), false),
   });
 }
-
+/**
+ * @param {ReturnType<import('./foundation.js').sealFabricFoundation>} foundation
+ * @param {{sizeFloorQ:number,gridChaosQ:number,sizeVariationQ:number,emptinessQ:number}} rawAxes
+ */
+export function subdivideSettlementFrontages(foundation, rawAxes) {
+  const source = requireCanonicalRecord(foundation, 'settlement foundation');
+  if (source.artifactKind !== 'SEALED_FABRIC_FOUNDATION'
+    || source.lawVersion !== 'mf-w3-orthogonal-cross-v1'
+    || source.schemaVersion !== 2) {
+    throw new TypeError('settlement frontage requires the orthogonal-cross foundation');
+  }
+  const axes = requireAxes(rawAxes);
+  const blocks = /** @type {Array<Record<string,unknown>>} */ (source.blockFaces);
+  if (!Array.isArray(blocks) || blocks.length !== 4) throw new TypeError('settlement foundation requires four blocks');
+  /** @type {Array<[number,number,number]>} */ const metricRows = [];
+  const results = [...blocks]
+    .sort((left, right) => compareCodepoint(left.blockId, right.blockId))
+    .map((block) => deriveFrontageBlockRows(source, String(block.blockId), axes, true, (stop, split, backland) => metricRows.push([stop, split, backland])));
+  const frontages = results.flatMap((result) => result.frontages).sort((left, right) => compareCodepoint(left.frontageId, right.frontageId));
+  const plots = results.flatMap((result) => result.plots).sort((left, right) => compareCodepoint(left.plotId, right.plotId));
+  const backlandCores = results.filter((result) => result.backlandCore).map((result) => ({ blockId: result.blockId, ...result.backlandCore }))
+    .sort((left, right) => compareCodepoint(left.backlandId, right.backlandId));
+  const plotAreas = plots.map((plot) => polygonAreaQ(plot.plotPolygon)).sort((a, b) => a - b);
+  const frontageWidths = plots.map((plot) => Number(plot.frontageWidthQ));
+  const stopThresholds = new Set(metricRows.map((row) => row[0]));
+  if (stopThresholds.size !== 1) throw new TypeError('settlement W3 stop threshold must be singular');
+  return sealCanonicalArtifact({
+    artifactKind: 'FRONTAGE_SUBDIVISION',
+    artifactId: `${source.artifactId}:frontage:settlement`,
+    lawVersion: SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION,
+    coordinateAbiVersion: source.coordinateAbiVersion,
+    foundationRef: canonicalArtifactRef(/** @type {{artifactId:string,contentHash:string}} */ (source)),
+    blockIds: results.map((result) => result.blockId),
+    axes,
+    frontages,
+    plots,
+    backlandCores,
+    metrics: {
+      blockCount: results.length,
+      plotCount: plots.length,
+      stopThresholdQ: metricRows[0][0],
+      plotAreaP50Q: plotAreas[Math.floor(plotAreas.length / 2)],
+      splitStaggerQ: metricRows.reduce((sum, row) => sum + row[1], 0),
+      frontageWidthSpreadQ: Math.max(...frontageWidths) - Math.min(...frontageWidths),
+      backlandAreaQ: metricRows.reduce((sum, row) => sum + row[2], 0),
+    },
+  });
+}
 /** @param {Record<string, unknown>} subdivision @param {string} plotId */
 export function frontagePlotById(subdivision, plotId) {
   const plots = Array.isArray(subdivision.plots) ? subdivision.plots : [];

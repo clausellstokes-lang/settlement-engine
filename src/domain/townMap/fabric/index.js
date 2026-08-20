@@ -3,6 +3,8 @@ export {
   CURRENT_MAP_TRADITION_ID,
   FABRIC_FOUNDATION_LAW_VERSION,
   FABRIC_FOUNDATION_SCHEMA_VERSION,
+  SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION,
+  SETTLEMENT_FABRIC_FOUNDATION_SCHEMA_VERSION,
   canonicalArtifactRef,
   canonicalRectBounds,
   sealFabricFoundation,
@@ -10,9 +12,12 @@ export {
 export {
   FRONTAGE_AXIS_KEYS,
   FRONTAGE_SUBDIVISION_LAW_VERSION,
+  SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION,
   frontagePlotById,
   subdivideFrontageBlock,
+  subdivideSettlementFrontages,
 } from './frontage.js';
+export { ORTHOGONAL_CROSS_PLAN_KIND } from './settlementFoundation.js';
 export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
