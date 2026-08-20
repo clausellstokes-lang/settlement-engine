@@ -14824,6 +14824,55 @@
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "validate:packets"]
       ]
+    },
+    {
+      "id": "MF-T1N",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T1N.md",
+      "verifiedBase": "db646aaff2a8cc8cdc5a20bc0a8ae6e3ee7815ca",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/streetGraph.js" },
+        { "action": "REGISTER", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "MODIFY", "path": "tests/fixtures/townMapSettlementFabricFixtures.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapStreetGraph.test.js" },
+        { "action": "CREATE", "path": "tests/property/townMapStreetGraphDeterminism.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export const STREET_GEOMETRY_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export const STREET_GEOMETRY_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/streetGeometry.js", "symbol": "export function compileOrthogonalCrossStreetGeometry" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export const ORTHOGONAL_CROSS_PLAN_KIND" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export function prepareOrthogonalCrossPlan" },
+        { "path": "src/domain/townMap/fabric/settlementFoundation.js", "symbol": "export function deriveOrthogonalCrossRows" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const FABRIC_COORDINATE_ABI" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export const CURRENT_MAP_TRADITION_ID" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function canonicalArtifactRef" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalId" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalInt" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function requireCanonicalRecord" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function sealCanonicalArtifact" },
+        { "path": "src/domain/townMap/fabric/foundation.js", "symbol": "export function sealFabricFoundation" },
+        { "path": "src/domain/townScene/stableScene.js", "symbol": "export function sceneDigest" },
+        { "path": "src/domain/deterministicSort.js", "symbol": "export const compareCodepoint" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementStreetGeometry" },
+        { "path": "tests/domain/townMapStreetGeometry.test.js", "symbol": "MF-T1G canonical orthogonal-cross street geometry" },
+        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "The canonical geometry publishes a codepoint-ordered five-node, four-edge graph over exactly two source streets." },
+        { "id": "A2", "case": "Root and member references bind the exact geometry ID/hash and inherit exact settlement, time, tradition, leaf, ABI, schema and law; the artifact is deeply frozen." },
+        { "id": "A3", "case": "The junction has derived degree four, four extent endpoints have degree one, and every source segment maps to exactly one edge and one endpoint node without a stored cache." },
+        { "id": "A4", "case": "Tampered or wrong-identity geometry, incomplete or duplicate directions, wrong axis/sign or street pairing, bad junction incidence, wrong shapes and extra input keys refuse before sealing." },
+        { "id": "A5", "case": "Repeated compilation, reversed upstream cells, canonical JSON replay and a maximum-valid settlement ID remain byte- and ID-safe without freezing the source." },
+        { "id": "A6", "case": "MF-T1G bytes remain pinned and STREET_GRAPH contains no copied coordinates, routing, hierarchy, access, arrangement, DCEL, parcel or draw authority." }
+      ],
+      "checks": [
+        ["npx", "vitest", "run", "tests/domain/townMapStreetGraph.test.js", "tests/property/townMapStreetGraphDeterminism.test.js", "tests/domain/townMapStreetGeometry.test.js", "tests/property/townMapStreetGeometryDeterminism.test.js"],
+        ["npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js", "tests/lint/negativeAssertionAnchor.walker.test.js"],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
     }
   ]
 }
