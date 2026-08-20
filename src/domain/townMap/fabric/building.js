@@ -9,10 +9,18 @@ import {
   sealCanonicalArtifact,
 } from './foundation.js';
 import { frontagePlotById } from './frontage.js';
+import {
+  COMPOSITE_SHAPE_LAW_VERSION,
+  compileCompositeShapeFragments,
+} from './shapes.js';
 
 export const EXPLICIT_BUILDING_MASS_LAW_VERSION = 'explicit-building-mass-v1';
 export const SPATIAL_RECIPE_SCHEMA_VERSION = 1;
 export const CANONICAL_ORIGIN_KINDS = Object.freeze(['AUTHORED', 'BUILT_IN', 'CUSTOM', 'IMPORTED']);
+export const EXPLICIT_BUILDING_GEOMETRY_LAWS = Object.freeze([
+  EXPLICIT_BUILDING_MASS_LAW_VERSION,
+  COMPOSITE_SHAPE_LAW_VERSION,
+]);
 
 /** @param {unknown} value @param {string} label */
 function requireVersion(value, label) {
@@ -26,7 +34,7 @@ function requireVersion(value, label) {
  * Recipe identity is package-specific; recipe semantics are what the origin-neutral
  * geometry compiler consumes.
  * @param {{packageClass:string,packageId:string,packageVersion:string|number,entryId:string,
- *   entryVersion:string|number,semanticTypeId:string}} input
+ *   entryVersion:string|number,semanticTypeId:string,geometryLaw?:string}} input
  */
 export function createSpatialRecipeSnapshot(input) {
   const source = requireCanonicalRecord(input, 'recipe snapshot');
@@ -39,6 +47,12 @@ export function createSpatialRecipeSnapshot(input) {
   const semanticTypeId = requireCanonicalId(source.semanticTypeId, 'semanticTypeId');
   const packageVersion = requireVersion(source.packageVersion, 'packageVersion');
   const entryVersion = requireVersion(source.entryVersion, 'entryVersion');
+  const geometryLaw = source.geometryLaw === undefined
+    ? EXPLICIT_BUILDING_MASS_LAW_VERSION
+    : String(source.geometryLaw);
+  if (!EXPLICIT_BUILDING_GEOMETRY_LAWS.includes(geometryLaw)) {
+    throw new TypeError('recipe geometryLaw is not registered');
+  }
   return sealCanonicalArtifact({
     artifactKind: 'SPATIAL_RECIPE_SNAPSHOT',
     artifactId: `${packageId}:recipe:${entryId}:${entryVersion}`,
@@ -51,7 +65,7 @@ export function createSpatialRecipeSnapshot(input) {
     semantics: {
       semanticTypeId,
       spatialRole: 'BUILDING',
-      geometryLaw: EXPLICIT_BUILDING_MASS_LAW_VERSION,
+      geometryLaw,
     },
   });
 }
@@ -132,11 +146,12 @@ function roofPatches(bounds, roof) {
 }
 
 /**
- * Geometry-only compiler. Origin is deliberately not an argument.
  * @param {{foundation:Record<string,unknown>,subdivision:Record<string,unknown>,
  *   spec:Record<string,unknown>,recipeSnapshot:Record<string,unknown>}} input
+ * @param {string} lawVersion
+ * @param {boolean} allowContainedFootprint
  */
-export function compileOriginNeutralBuildingGeometry(input) {
+function compileRectilinearGeometry(input, lawVersion, allowContainedFootprint) {
   const source = requireCanonicalRecord(input, 'building compile input');
   const foundation = requireCanonicalRecord(source.foundation, 'foundation');
   const subdivision = requireCanonicalRecord(source.subdivision, 'subdivision');
@@ -149,7 +164,7 @@ export function compileOriginNeutralBuildingGeometry(input) {
   const buildingId = requireCanonicalId(spec.buildingId, 'buildingId');
   const semanticTypeId = requireCanonicalId(spec.semanticTypeId, 'semanticTypeId');
   const semantics = requireCanonicalRecord(recipe.semantics, 'recipe semantics');
-  if (semantics.semanticTypeId !== semanticTypeId || semantics.geometryLaw !== EXPLICIT_BUILDING_MASS_LAW_VERSION) {
+  if (semantics.semanticTypeId !== semanticTypeId || semantics.geometryLaw !== lawVersion) {
     throw new TypeError('recipe semantics do not authorize this explicit mass');
   }
   const foundationRef = canonicalArtifactRef(/** @type {{artifactId:string,contentHash:string}} */ (foundation));
@@ -164,10 +179,17 @@ export function compileOriginNeutralBuildingGeometry(input) {
     throw new TypeError('building plotRef mismatch');
   }
   const plot = frontagePlotById(subdivision, String(plotRef.plotId));
-  if (!plot || JSON.stringify(spec.footprint) !== JSON.stringify(plot.fittedFootprint)) {
-    throw new TypeError('building footprint must equal its fitted W3 footprint');
-  }
+  if (!plot) throw new TypeError('building plotRef does not resolve');
+  const plotBounds = canonicalRectBounds(plot.fittedFootprint, 'fitted W3 footprint');
   const bounds = canonicalRectBounds(spec.footprint, 'building footprint');
+  const insidePlot = bounds.minX >= plotBounds.minX && bounds.maxX <= plotBounds.maxX
+    && bounds.minZ >= plotBounds.minZ && bounds.maxZ <= plotBounds.maxZ;
+  if ((!allowContainedFootprint && JSON.stringify(bounds.ring) !== JSON.stringify(plotBounds.ring))
+    || (allowContainedFootprint && !insidePlot)) {
+    throw new TypeError(allowContainedFootprint
+      ? 'building attachment must remain inside its fitted W3 footprint'
+      : 'building footprint must equal its fitted W3 footprint');
+  }
   const baseElevationQ = requireCanonicalInt(spec.baseElevationQ, 'baseElevationQ', 0, 500);
   const wallTopQ = requireCanonicalInt(spec.wallTopQ, 'wallTopQ', baseElevationQ + 1, 750);
   const roof = requireExactKeys(spec.roof, 'roof', ['eaveQ', 'kind', 'ridgeAxis', 'ridgeQ']);
@@ -196,7 +218,7 @@ export function compileOriginNeutralBuildingGeometry(input) {
   return sealCanonicalArtifact({
     artifactKind: 'BUILDING_GEOMETRY',
     artifactId: `${buildingId}:geometry`,
-    lawVersion: EXPLICIT_BUILDING_MASS_LAW_VERSION,
+    lawVersion,
     foundationRef: spec.foundationRef,
     plotRef: spec.plotRef,
     buildingId,
@@ -212,6 +234,52 @@ export function compileOriginNeutralBuildingGeometry(input) {
     maxHeightQ: ridgeQ,
     shell,
   });
+}
+
+/**
+ * Geometry-only compiler. Origin is deliberately not an argument.
+ * @param {{foundation:Record<string,unknown>,subdivision:Record<string,unknown>,
+ *   spec:Record<string,unknown>,recipeSnapshot:Record<string,unknown>}} input
+ */
+export function compileOriginNeutralBuildingGeometry(input) {
+  const source = requireCanonicalRecord(input, 'building compile input');
+  const recipe = requireCanonicalRecord(source.recipeSnapshot, 'recipeSnapshot');
+  const semantics = requireCanonicalRecord(recipe.semantics, 'recipe semantics');
+  if (semantics.geometryLaw === EXPLICIT_BUILDING_MASS_LAW_VERSION) {
+    return compileRectilinearGeometry(input, EXPLICIT_BUILDING_MASS_LAW_VERSION, false);
+  }
+  if (semantics.geometryLaw === COMPOSITE_SHAPE_LAW_VERSION) {
+    const shapeSpec = requireExactKeys(source.spec, 'composite building spec', [
+      'attachment', 'buildingId', 'constructionOperationId', 'radialPart', 'semanticTypeId',
+    ]);
+    const attachment = requireCanonicalRecord(shapeSpec.attachment, 'composite building attachment');
+    for (const field of ['buildingId', 'constructionOperationId', 'semanticTypeId']) {
+      if (shapeSpec[field] !== attachment[field]) {
+        throw new TypeError(`composite building ${field} must equal its attachment`);
+      }
+    }
+    const attachmentGeometry = compileRectilinearGeometry(
+      { ...input, spec: attachment },
+      COMPOSITE_SHAPE_LAW_VERSION,
+      true,
+    );
+    const subdivision = requireCanonicalRecord(source.subdivision, 'subdivision');
+    const plotRef = requireCanonicalRecord(attachmentGeometry.plotRef, 'attachmentGeometry.plotRef');
+    const plot = frontagePlotById(subdivision, String(plotRef.plotId));
+    if (!plot) throw new TypeError('composite building plotRef does not resolve');
+    const fragments = compileCompositeShapeFragments({
+      attachmentGeometry,
+      radialPart: requireCanonicalRecord(shapeSpec.radialPart, 'composite building radialPart'),
+      plotRing: plot.fittedFootprint,
+    });
+    const { contentHash: _attachmentHash, ...result } = attachmentGeometry;
+    return sealCanonicalArtifact({
+      ...result,
+      lawVersion: COMPOSITE_SHAPE_LAW_VERSION,
+      ...fragments,
+    });
+  }
+  throw new TypeError('recipe geometryLaw is not registered for building compilation');
 }
 
 /** @param {{geometry:Record<string,unknown>,recipeSnapshot:Record<string,unknown>,origin:Record<string,unknown>}} input */

@@ -8,6 +8,10 @@ import {
   requireCanonicalRecord,
   sealCanonicalArtifact,
 } from './foundation.js';
+import {
+  COMPOSITE_SHAPE_LAW_VERSION,
+  SHAPE_COORDINATE_ABI,
+} from './shapes.js';
 
 const FIXED_DIRECTION_Q = Object.freeze([2, 1]);
 const FIXED_SHADOW_DENOMINATOR_Q = 4;
@@ -30,6 +34,7 @@ function massGeometry(mass) {
 
 /** @param {Record<string,unknown>} geometry */
 function ridgeSegment(geometry) {
+  if (geometry.lawVersion === COMPOSITE_SHAPE_LAW_VERSION) return null;
   const roof = requireCanonicalRecord(geometry.roof, 'geometry.roof');
   if (roof.kind !== 'GABLE') return null;
   const bounds = canonicalRectBounds(geometry.footprint, 'geometry.footprint');
@@ -41,12 +46,84 @@ function ridgeSegment(geometry) {
   return [[midX, bounds.minZ], [midX, bounds.maxZ]];
 }
 
+/** @param {[number,number]} origin @param {[number,number]} a @param {[number,number]} b */
+function turn(origin, a, b) {
+  return (a[0] - origin[0]) * (b[1] - origin[1])
+    - (a[1] - origin[1]) * (b[0] - origin[0]);
+}
+
+/** @param {Array<[number,number]>} points */
+function convexHull(points) {
+  const sorted = [...new Map(points.map((point) => [JSON.stringify(point), point])).values()]
+    .sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  if (sorted.length < 3) throw new TypeError('projected shell silhouette must contain three points');
+  const lower = [];
+  for (const point of sorted) {
+    while (lower.length >= 2 && turn(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) lower.pop();
+    lower.push(point);
+  }
+  const upper = [];
+  for (const point of [...sorted].reverse()) {
+    while (upper.length >= 2 && turn(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) upper.pop();
+    upper.push(point);
+  }
+  return [...lower.slice(0, -1), ...upper.slice(0, -1)];
+}
+
 /** @param {Record<string,unknown>} geometry */
 function shadowPolygon(geometry) {
+  if (geometry.lawVersion === COMPOSITE_SHAPE_LAW_VERSION) {
+    if (geometry.coordinateAbiVersion !== SHAPE_COORDINATE_ABI || !Array.isArray(geometry.shell)) {
+      throw new TypeError('composite shadow requires its exact coordinate ABI and shell');
+    }
+    const projected = geometry.shell.flatMap((value) => {
+      const patch = requireCanonicalRecord(value, 'shape shell patch');
+      if (!Array.isArray(patch.vertices)) throw new TypeError('shape shell patch vertices are required');
+      return patch.vertices.map((vertex) => {
+        if (!Array.isArray(vertex) || vertex.length !== 3 || vertex.some((axis) => !Number.isSafeInteger(axis))) {
+          throw new TypeError('shape shell vertices must be quantized [x,y,z]');
+        }
+        return /** @type {[number,number]} */ ([
+          vertex[0] + Math.floor(vertex[2] * FIXED_DIRECTION_Q[0] / FIXED_SHADOW_DENOMINATOR_Q),
+          vertex[1] + Math.floor(vertex[2] * FIXED_DIRECTION_Q[1] / FIXED_SHADOW_DENOMINATOR_Q),
+        ]);
+      });
+    });
+    return convexHull(projected);
+  }
   const heightQ = Number(geometry.maxHeightQ);
   const dx = Math.floor(heightQ * FIXED_DIRECTION_Q[0] / FIXED_SHADOW_DENOMINATOR_Q);
   const dz = Math.floor(heightQ * FIXED_DIRECTION_Q[1] / FIXED_SHADOW_DENOMINATOR_Q);
   return /** @type {Array<[number,number]>} */ (geometry.footprint).map((point) => [point[0] + dx, point[1] + dz]);
+}
+
+/** @param {Record<string,unknown>} geometry @returns {Array<{surfaceId:string,ring:Array<[number,number]>}>} */
+function planSurfaces(geometry) {
+  if (geometry.lawVersion !== COMPOSITE_SHAPE_LAW_VERSION) {
+    return [{
+      surfaceId: 'legacy',
+      ring: /** @type {Array<[number,number]>} */ (geometry.footprint),
+    }];
+  }
+  if (!Array.isArray(geometry.projectionSurfaces) || geometry.projectionSurfaces.length !== 2
+    || !Array.isArray(geometry.shell)) {
+    throw new TypeError('composite geometry requires two canonical plan surfaces');
+  }
+  const patchById = new Map(geometry.shell.map((value) => {
+    const patch = requireCanonicalRecord(value, 'shape shell patch');
+    return [String(patch.patchId), patch];
+  }));
+  return geometry.projectionSurfaces.map((value) => {
+    const surface = requireCanonicalRecord(value, 'plan surface');
+    const patch = patchById.get(String(surface.sourcePatchId));
+    if (!patch || !Array.isArray(patch.vertices) || patch.vertices.length < 4) {
+      throw new TypeError('plan surface must resolve one canonical shell patch');
+    }
+    return {
+      surfaceId: String(surface.surfaceId),
+      ring: patch.vertices.map((vertex) => /** @type {[number,number]} */ ([vertex[0], vertex[1]])),
+    };
+  });
 }
 
 /** @param {string} primitiveId @param {string} semanticId @param {string} kind @param {Record<string,unknown>} op */
@@ -104,10 +181,13 @@ export function projectFirstSliceFixedSurvey(input) {
       `${buildingId}:shadow`, buildingId, 'SHADOW',
       { t: 'poly', pts: shadowPolygon(geometry), closed: true, fill: EXPORT_PALETTE.ink, fillOpacity: 0.16 },
     ));
-    semanticPrimitives.push(primitive(
-      `${buildingId}:surface`, buildingId, 'BUILDING',
-      { t: 'poly', pts: geometry.footprint, closed: true, fill: EXPORT_PALETTE.buildingFill, stroke: EXPORT_PALETTE.ink, strokeWidth: 2 },
-    ));
+    for (const surface of planSurfaces(geometry)) {
+      const suffix = surface.surfaceId === 'legacy' ? '' : `:${String(surface.surfaceId)}`;
+      semanticPrimitives.push(primitive(
+        `${buildingId}:surface${suffix}`, buildingId, 'BUILDING',
+        { t: 'poly', pts: surface.ring, closed: true, fill: EXPORT_PALETTE.buildingFill, stroke: EXPORT_PALETTE.ink, strokeWidth: 2 },
+      ));
+    }
     const ridge = ridgeSegment(geometry);
     if (ridge) {
       semanticPrimitives.push(primitive(

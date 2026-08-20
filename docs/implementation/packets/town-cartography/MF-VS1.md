@@ -1,6 +1,7 @@
 # Map Foundation / MF-VS1 — first canonical vertical slice
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed:** `7c34f50fd99fcf34c478ec56cbae42240bcd7486`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `4eafca31a295b5288f8c5b0b551e248e386e7791`
 - **Last revalidated:** `2026-08-20`

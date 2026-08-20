@@ -14393,7 +14393,7 @@
     },
     {
       "id": "MF-VS1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-VS1.md",
       "verifiedBase": "4eafca31a295b5288f8c5b0b551e248e386e7791",
       "changeManifest": [
@@ -14456,6 +14456,63 @@
           "npx", "vitest", "run",
           "tests/architecture/engineWorkerDomFree.test.js",
           "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
+    },
+    {
+      "id": "MF-SH1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-SH1.md",
+      "verifiedBase": "7c34f50fd99fcf34c478ec56cbae42240bcd7486",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/shapes.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/fabric/building.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/fabric/projection.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapShapeKernel.test.js" },
+        { "action": "MODIFY", "path": "scripts/mutation-coverage-manifest.json" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function compileOriginNeutralBuildingGeometry"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function bindBuildingOrigin"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function projectFirstSliceFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/townMapDraw.js",
+          "symbol": "export function drawListToSvg"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "One circular/cylindrical shaft plus conical cap retains exact semantic kinds and compiles deterministic integer rings with closed shaft and cap shells." },
+        { "id": "A2", "case": "One bounded regular-polygon/pyramidal variant compiles while illegal pairings, unsupported sides, missing geometry, and out-of-plot rings fail closed." },
+        { "id": "A3", "case": "The fixed-light shadow is the deterministic light-space hull of canonical shell vertices, includes apex influence, and is not a copied offset rectangle." },
+        { "id": "A4", "case": "Screen and SVG consume identical draw ops and equal built-in/custom shape specifications produce byte-identical geometry and public semantic primitives." },
+        { "id": "A5", "case": "The landed rectilinear slice remains green and no culture, institution, evidence, probability, or origin field enters geometry compilation." }
+      ],
+      "checks": [
+        [
+          "npx", "vitest", "run",
+          "tests/domain/townMapShapeKernel.test.js",
+          "tests/domain/townMapExplicitBuilding.test.js",
+          "tests/domain/townMapCustomParity.test.js",
+          "tests/property/townMapFirstSliceDeterminism.test.js"
+        ],
+        [
+          "npx", "vitest", "run",
           "tests/lint/mutationCoverageManifest.test.js",
           "tests/lint/negativeAssertionAnchor.walker.test.js",
           "tests/lint/sovereigntyLightingContract.walker.test.js"

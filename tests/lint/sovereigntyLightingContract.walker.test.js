@@ -4793,7 +4793,13 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // built-in/custom parity, fantasy construction, and replay/privacy. All six are
     // credited; together they contribute 17 test titles and six suite titles. No parser
     // door, parked-file rule, or pre-existing test changed classification.
-    files: 2466, parked: 364, credited: 2102, titles: 20529, suiteTitles: 5749,
+    // ── RE-RECORDED 2026-08-20 BY MF-SH1, THE BOUNDED SHAPE KERNEL ────────────
+    // 2,466/364/2,102/20,529/5,749 → 2,467/364/2,103/20,534/5,750. Exactly one
+    // credited literal-title file was added. Its five tests are the closed denominator:
+    // circular shell, polygonal variant/refusals, shell-derived shadow/shared export,
+    // built-in/custom persistence parity, and deterministic replay. It has one describe;
+    // no parser door, parked-file rule, or pre-existing test changed classification.
+    files: 2467, parked: 364, credited: 2103, titles: 20534, suiteTitles: 5750,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

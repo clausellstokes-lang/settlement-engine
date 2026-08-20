@@ -15,6 +15,7 @@ export {
 } from './frontage.js';
 export {
   CANONICAL_ORIGIN_KINDS,
+  EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,
   bindBuildingOrigin,
   compileExplicitBuildingMass,
@@ -22,6 +23,14 @@ export {
   createCanonicalOrigin,
   createSpatialRecipeSnapshot,
 } from './building.js';
+export {
+  COMPOSITE_SHAPE_LAW_VERSION,
+  PLAN_SHAPE_KINDS,
+  ROOF_SHAPE_KINDS,
+  SHAPE_COORDINATE_ABI,
+  SHAPE_VOCABULARY_VERSION,
+  VERTICAL_SOLID_KINDS,
+} from './shapes.js';
 export {
   FIRST_SLICE_DOCUMENT_SCHEMA_VERSION,
   assertFirstSliceMutable,
