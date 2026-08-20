@@ -14604,6 +14604,82 @@
         ["npm", "run", "typecheck:domain:strict"],
         ["npm", "run", "validate:packets"]
       ]
+    },
+    {
+      "id": "MF-W3S1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-W3S1.md",
+      "verifiedBase": "7a631a739bc69dc98efa1877474ef9d358a05646",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townMap/fabric/settlementFoundation.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/fabric/foundation.js" },
+        { "action": "MODIFY", "path": "src/domain/townMap/fabric/frontage.js" },
+        { "action": "REGISTER", "path": "src/domain/townMap/fabric/index.js" },
+        { "action": "CREATE", "path": "tests/fixtures/townMapSettlementFabricFixtures.js" },
+        { "action": "CREATE", "path": "tests/domain/townMapSettlementFabric.test.js" },
+        { "action": "CREATE", "path": "tests/property/townMapSettlementFabricDeterminism.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealFabricFoundation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function canonicalRectBounds"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export const FRONTAGE_AXIS_KEYS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export function subdivideFrontageBlock"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function compileExplicitBuildingMass"
+        },
+        {
+          "path": "tests/domain/townMapFrontageW3.test.js",
+          "symbol": "MF-VS1 frontage-first W3 routine"
+        },
+        {
+          "path": "tests/property/townMapFirstSliceDeterminism.test.js",
+          "symbol": "MF-VS1 privacy and whole-slice deterministic replay"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "The canonical cross publishes two corridors, four positive blocks, and four edges while street-union plus block area equals ground area exactly." },
+        { "id": "A2", "case": "Missing cells, duplicate IDs, collapsed or exterior bands, illegal frontage axes, and consuming setbacks all refuse before sealing." },
+        { "id": "A3", "case": "Aggregate four-axis W3 emits four block IDs, eight plots/frontages, four backlands, and complete canonical lineage." },
+        { "id": "A4", "case": "The unchanged explicit building compiler accepts one fitted rectangle from each block and no empty plot is filled automatically." },
+        { "id": "A5", "case": "Reversed cell input and repeated foundation/frontage compilation produce byte-identical artifacts and hashes." },
+        { "id": "A6", "case": "The landed one-block foundation and frontage artifacts retain their exact byte pins." }
+      ],
+      "checks": [
+        [
+          "npx", "vitest", "run",
+          "tests/domain/townMapSettlementFabric.test.js",
+          "tests/property/townMapSettlementFabricDeterminism.test.js",
+          "tests/domain/townMapFabricFoundation.test.js",
+          "tests/domain/townMapFrontageW3.test.js",
+          "tests/domain/townMapExplicitBuilding.test.js",
+          "tests/property/townMapFirstSliceDeterminism.test.js"
+        ],
+        [
+          "npx", "vitest", "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        ["npm", "run", "typecheck:domain:strict"],
+        ["npm", "run", "validate:packets"]
+      ]
     }
   ]
 }
