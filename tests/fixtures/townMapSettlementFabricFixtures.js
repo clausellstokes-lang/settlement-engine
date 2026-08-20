@@ -1,5 +1,6 @@
 import {
   compileExplicitBuildingMass,
+  compileOrthogonalCrossStreetGeometry,
   createCanonicalOrigin,
   createSpatialRecipeSnapshot,
   sealFabricFoundation,
@@ -12,6 +13,9 @@ export const SETTLEMENT_AXES = Object.freeze({
   sizeVariationQ: 500,
   emptinessQ: 260,
 });
+
+export const SETTLEMENT_ID = 'settlement:cross:001';
+export const STREET_GEOMETRY_ID = 'street-geometry:settlement-cross:001';
 
 export const SETTLEMENT_CELLS = Object.freeze([
   { cell: 'LOW_X_LOW_Z', blockId: 'block:settlement:low-x-low-z', edgeId: 'edge:settlement:low-x-low-z' },
@@ -41,6 +45,17 @@ export function makeSettlementFoundation(planOverrides = {}) {
     effectiveAt: 'year:1450',
     plan: makeSettlementPlan(planOverrides),
   });
+}
+
+/** @param {Record<string,unknown>} [planOverrides] */
+export function makeSettlementStreetGeometry(planOverrides = {}) {
+  const foundation = makeSettlementFoundation(planOverrides);
+  const geometry = compileOrthogonalCrossStreetGeometry({
+    artifactId: STREET_GEOMETRY_ID,
+    settlementId: SETTLEMENT_ID,
+    foundation,
+  });
+  return { foundation, geometry };
 }
 
 /** @param {Record<string,unknown>} [planOverrides] */

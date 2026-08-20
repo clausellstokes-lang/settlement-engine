@@ -19,6 +19,10 @@ export {
 } from './frontage.js';
 export { ORTHOGONAL_CROSS_PLAN_KIND } from './settlementFoundation.js';
 export {
+  STREET_GEOMETRY_LAW_VERSION, STREET_GEOMETRY_SCHEMA_VERSION,
+  compileOrthogonalCrossStreetGeometry,
+} from './streetGeometry.js';
+export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,

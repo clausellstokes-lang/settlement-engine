@@ -4804,7 +4804,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // credited literal-title files were added: the six-case settlement fabric matrix
     // contributes five titles and one suite; its determinism companion contributes one
     // title and one suite. No parser door, parked-file rule, or existing file moved.
-    files: 2469, parked: 364, credited: 2105, titles: 20540, suiteTitles: 5752,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1G, CANONICAL STREET GEOMETRY ───────────
+    // 2,469/364/2,105/20,540/5,752 → 2,471/364/2,107/20,546/5,754. The domain
+    // matrix contributes five titles and one suite; the deterministic replay companion
+    // contributes one title and one suite. Both files are credited; no parser door moved.
+    files: 2471, parked: 364, credited: 2107, titles: 20546, suiteTitles: 5754,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
