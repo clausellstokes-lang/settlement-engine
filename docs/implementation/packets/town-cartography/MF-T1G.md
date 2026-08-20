@@ -1,13 +1,16 @@
 # Street Topology / MF-T1G — canonical orthogonal-cross street geometry
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `875a0f39a4b18ff4a153c07092550aab1ab28853`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `adc6894964c3dc90dfa3aa1edfce898fdbf78871`
-- **Last revalidated:** `2026-08-20` at `adc6894964c3dc90dfa3aa1edfce898fdbf78871`
+- **Last revalidated:** `2026-08-20` at `875a0f39a4b18ff4a153c07092550aab1ab28853`
 - **Depends on:** MF-W3S1 at `a227c1d5ed233509101bbcd90bbab77a787de419`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-W3S1 wave-end gate passed with 28,580 tests and the inherited 11-known-failure ceiling; strict dist passed 409/409; lint held 29 warnings and zero errors; terminal governance validated 119 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -241,18 +244,18 @@ Do not broaden or repair adjacent failures.
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas:
-- A1-A6 results:
-- Focused commands, exits, and counts:
-- Sealed per-step receipt and exact-state resume status:
-- Both typecheck configurations:
-- Wave-end gate stages actually executed:
-- Base-versus-wave failure identity diff:
-- MF-W3S1 byte pins:
+- Base SHA: `adc6894964c3dc90dfa3aa1edfce898fdbf78871`
+- Dispatch bundle and seal identity: MF-T1G sealed session digest `e8909ac0a9653c9805655e3f33e1327ed15a808dbc3f924c8462666696f11d44`; capsule digest `87b232c8e87985b13c7c0f693ba4890bdc59b88eb289a80f1be1dacd0d0c6a37`
+- Final commit or working-tree state: `875a0f39a4b18ff4a153c07092550aab1ab28853`; implementation tree clean
+- Exact changed files and effective-line deltas: exact six-path manifest; positive effective production delta `132/240` (`streetGeometry.js` `128/236`, `index.js` `+4/4`); census effective delta `0/12`
+- A1-A6 results: six new acceptance cases pass; focused packet plus MF-W3S1 regressions `12/12`; independent bounded audit `0 P0 / 0 P1`
+- Focused commands, exits, and counts: packet/regression suite `12/12`; sovereignty/negative walkers `42/42`; ESLint on the packet paths clean; all exit `0`
+- Sealed per-step receipt and exact-state resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact session fingerprint was reused without rerun drift
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages actually executed: `npm run check:tail` exit `0`; test ratchet `28,586` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- MF-W3S1 byte pins: settlement foundation `scene-v1-c72afb9994bd6e8c4a6168e56fdc221e`; aggregate subdivision `scene-v1-38ea62d8983609e19e4fe03cb64092af`
 - Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations, without investigation:
-- Judgment calls: `NONE`
+- Deviations: `NONE`
+- Out-of-scope observations, without investigation: semantic street graph, routing, cadastral arrangement, DCEL, and the reference-only Fabric root remain sequenced as later bounded packets
+- Judgment calls: source hash validation uses non-mutating `sceneDigest`; the landed `FABRIC_COORDINATE_ABI` is required exactly after an adversarial hash-correct ABI probe exposed and closed the weaker nonempty-string check

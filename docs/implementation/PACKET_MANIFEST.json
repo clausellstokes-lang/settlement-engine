@@ -14707,7 +14707,7 @@
     },
     {
       "id": "MF-T1G",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1G.md",
       "verifiedBase": "adc6894964c3dc90dfa3aa1edfce898fdbf78871",
       "changeManifest": [
@@ -14770,6 +14770,34 @@
         {
           "path": "tests/property/townMapSettlementFabricDeterminism.test.js",
           "symbol": "MF-W3S1 settlement fabric determinism"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export const STREET_GEOMETRY_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export const STREET_GEOMETRY_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export function compileOrthogonalCrossStreetGeometry"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossStreetGeometry,"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementStreetGeometry"
+        },
+        {
+          "path": "tests/domain/townMapStreetGeometry.test.js",
+          "symbol": "MF-T1G canonical orthogonal-cross street geometry"
+        },
+        {
+          "path": "tests/property/townMapStreetGeometryDeterminism.test.js",
+          "symbol": "MF-T1G street geometry determinism"
         }
       ],
       "acceptanceCases": [
