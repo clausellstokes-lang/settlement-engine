@@ -1,0 +1,227 @@
+/**
+ * domain/regenerationMode.js — Reactive regeneration modes.
+ *
+ * Tier 5.2 of the roadmap. Three modes control how aggressive a
+ * rerun is. Phase 35 produces the structured preservation plan
+ * consumers (the regen UI, the pipeline) read:
+ *
+ *   Nudge      — preserve most; reroll only minor service / detail fields
+ *   Rebalance  — preserve canon + locked entities; reroll affected subsystems
+ *   Reforge    — keep only the hard anchors (seed, name, tier, geography)
+ *
+ *   buildRegenerationPlan(settlement, { mode, change? }) -> {
+ *     mode,
+ *     preserveEntities: [{ id, type, reason }],
+ *     rerollEntities:   [{ id, type, reason }],
+ *     preserveFields:   [string],     hard-anchor settlement fields
+ *     rerollSubsystems: [string],     subsystem keys to recompute
+ *     contributors[]
+ *   }
+ *
+ * Pure read-only. Composes Phase 19 entityCatalog + Phase 33 canon
+ * tagging. The pipeline that performs the rerun is a separate
+ * concern.
+ */
+
+import { entityCatalog } from './explanation.js';
+import { deriveFactionProfile } from './factionProfile.js';
+import { deriveActiveCondition } from './activeConditions.js';
+
+// Same slug transform entityCatalog uses for institution/npc ids, replicated
+// here (the catalog's copy is module-private) so the reverse lookup re-derives
+// the IDENTICAL id the catalog emitted.
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
+import { tagEntityCanon } from './canonStatus.js';
+import { REGENERATION_MODES, normalizeMode, ruleFor, shouldPreserve } from './regenerationPolicy.js';
+
+// ── Catalog ──────────────────────────────────────────────────────────────
+
+// The mode vocabulary and the preservation rules live in the leaf so the
+// generator's reroll tail can read them without dragging entityCatalog's
+// dependency fan into the first-paint closure. Re-exported here because this
+// module is the long-standing public face of regeneration modes.
+export { REGENERATION_MODES, preservesEntity } from './regenerationPolicy.js';
+
+// Hard anchors that even a Reforge keeps.
+const HARD_ANCHOR_FIELDS = Object.freeze([
+  '_seed', 'id', 'name', 'tier',
+  'schemaVersion', 'simulationVersion', 'generatorVersion',
+]);
+
+// Per-mode subsystem-reroll plans. Subsystem keys here match the
+// pipeline-step `provides` keys from the existing event registry so
+// the reactive rerun knows what to invalidate.
+const MODE_SUBSYSTEM_REROLLS = Object.freeze({
+  nudge: ['narrative'],
+  rebalance: [
+    'services', 'activeChains', 'foodSecurity',
+    'economicState', 'powerStructure', 'narrative',
+  ],
+  reforge: [
+    'institutions', 'services', 'activeChains', 'foodSecurity',
+    'economicState', 'powerStructure', 'npcs',
+    'history', 'narrative',
+  ],
+});
+
+// ── Composer ─────────────────────────────────────────────────────────────
+
+/**
+ * Build the preservation plan for a regeneration mode.
+ *
+ * @param {import('./explanation.js').ExplainSettlement|null|undefined} settlement
+ * @param {Object} [options]
+ * @param {string} [options.mode]    'nudge' | 'rebalance' | 'reforge'
+ * @param {Object} [options.change]  Description of the user change
+ *                                   driving this regen (recorded for trace).
+ * @returns {Object} RegenerationPlan
+ */
+export function buildRegenerationPlan(settlement, options = {}) {
+  const mode = normalizeMode(options.mode);
+  const contributors = [];
+  if (!REGENERATION_MODES.includes(/** @type {string} */ (options.mode))) {
+    contributors.push({
+      source: 'options.mode',
+      effect: 'fallback',
+      reason: `Unknown mode "${options.mode}"; falling back to "rebalance".`,
+    });
+  } else {
+    contributors.push({
+      source: 'options.mode',
+      effect: 'matched',
+      reason: `Mode "${mode}" selected.`,
+    });
+  }
+
+  if (!settlement) {
+    return {
+      mode,
+      preserveEntities: [],
+      rerollEntities: [],
+      preserveFields: [...HARD_ANCHOR_FIELDS],
+      rerollSubsystems: [...MODE_SUBSYSTEM_REROLLS[mode]],
+      contributors,
+    };
+  }
+
+  const cat = entityCatalog(settlement);
+  /** @type {Array<{id: string, type: string, label: string, reason: string}>} */
+  const preserveEntities = [];
+  /** @type {Array<{id: string, type: string, label: string, reason: string}>} */
+  const rerollEntities = [];
+
+  for (const e of cat) {
+    const rule = ruleFor(mode, e.type);
+    // Look up the entity on the settlement to get its tag. The
+    // catalog entry only has { type, id, label }, so for tagging we
+    // re-fetch from the appropriate settlement array.
+    const tag = lookupTagForEntity(settlement, e);
+    const preserved = shouldPreserve(rule, tag);
+    (preserved ? preserveEntities : rerollEntities).push({
+      id: e.id,
+      type: e.type,
+      label: e.label,
+      reason: preserved
+        ? `${mode} preserves ${e.type} via "${rule}" rule (canonStatus=${tag.canonStatus}, locked=${tag.locked}).`
+        : `${mode} rerolls ${e.type} via "${rule}" rule (canonStatus=${tag.canonStatus}, locked=${tag.locked}).`,
+    });
+  }
+
+  if (options.change) {
+    contributors.push({
+      source: 'options.change',
+      effect: 'noted',
+      reason: `Plan built in response to change: ${JSON.stringify(options.change)}.`,
+    });
+  }
+
+  return {
+    mode,
+    preserveEntities,
+    rerollEntities,
+    preserveFields: [...HARD_ANCHOR_FIELDS],
+    rerollSubsystems: [...MODE_SUBSYSTEM_REROLLS[mode]],
+    contributors,
+  };
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+
+/**
+ * @param {import('./explanation.js').ExplainSettlement} settlement
+ * @param {{type: string, id: string, label: string}} catalogEntry
+ * @returns {import('./canonStatus.js').CanonTag}
+ */
+function lookupTagForEntity(settlement, catalogEntry) {
+  // Resolve the underlying object (institution, faction, etc.) so we
+  // can tag it. For derived entities (system_variable, capacity,
+  // district, etc.) the raw object isn't on the settlement — we treat
+  // those as generated/draft.
+  //
+  // CRITICAL: entityCatalog stamps a PROFILE-DERIVED id (deriveFactionProfile,
+  // deriveActiveCondition's conditionId, `institution.<slug>` / `npc.<slug>`),
+  // NOT the raw object's `.id` — legacy factions of shape {faction, power, desc}
+  // carry no stored `.id` at all. Matching raw `.id === catalogId` therefore
+  // missed every such entity and tagged it generated/draft, so a user-locked or
+  // canon faction/condition got rerolled by Rebalance/Reforge instead of
+  // preserved (silent loss of user canon). Match by the SAME derived id the
+  // catalog used.
+  const id = catalogEntry.id;
+  const type = catalogEntry.type;
+
+  if (type === 'institution') {
+    const inst = (settlement.institutions || []).find(i =>
+      i?.id === id || `institution.${snakeCase(i?.name || '')}` === id);
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (inst || {}));
+  }
+  if (type === 'faction') {
+    // Mirror deriveAllFactionProfiles' source order so a faction stored under
+    // any of the legacy containers resolves the same way the catalog derived it.
+    const holder = /** @type {{powerStructure?: {factions?: Array<Record<string, unknown>>}, power?: {factions?: Array<Record<string, unknown>>}, factions?: Array<Record<string, unknown>>}} */ (settlement);
+    const factions = holder.powerStructure?.factions
+                  || holder.power?.factions
+                  || holder.factions
+                  || [];
+    const f = factions.find(fac =>
+      fac?.id === id || deriveFactionProfile(fac, settlement)?.id === id);
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (f || {}));
+  }
+  if (type === 'npc') {
+    // Catalog stamps `npc.id || npc.<slug>`; legacy NPCs lacking a stored id
+    // were missed the same way factions were (see note above).
+    const npcs = /** @type {Array<{ id?: string, name?: string }>} */ (settlement.npcs || []);
+    const n = npcs.find(npc =>
+      npc?.id === id || `npc.${snakeCase(npc?.name || 'unnamed')}` === id);
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (n || {}));
+  }
+  if (type === 'condition') {
+    const c = (settlement.activeConditions || []).find(cond =>
+      cond?.id === id || deriveActiveCondition(cond)?.id === id);
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (c || {}));
+  }
+  // Derived entities default to generated/draft.
+  return tagEntityCanon({});
+}
+
+// ── Diagnostic helpers ───────────────────────────────────────────────────
+
+export function supportedRegenerationModes() {
+  return [...REGENERATION_MODES];
+}
+
+export function hardAnchorFields() {
+  return [...HARD_ANCHOR_FIELDS];
+}
+
+/** Quick mode descriptor strings for UI tooltips. */
+export const MODE_DESCRIPTIONS = Object.freeze({
+  nudge:     'Preserve most. Minor cosmetic / narrative variation only.',
+  rebalance: 'Preserve user canon + locked entities. Recalculate affected subsystems.',
+  reforge:   'Keep only hard anchors (seed, name, tier). Reroll almost everything.',
+});

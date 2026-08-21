@@ -1,0 +1,285 @@
+/**
+ * ExportSheet — Variant picker for PDF export.
+ *
+ * Replaces the single "Export PDF" button with a small modal where the
+ * user chooses Draft Brief / Canon Dossier / Timeline Packet. Each
+ * variant card explains what's in the artifact and what's not. The
+ * primary action button label updates to match the choice so the
+ * commit feels intentional.
+ *
+ * Phase-aware defaults:
+ *   - draft phase   → suggests Draft Brief
+ *   - canon phase   → suggests Canon Dossier
+ *   - canon + many events → suggests Timeline Packet (recap mode)
+ *
+ * Some variants are disabled by phase: a Timeline Packet from a draft
+ * settlement would print an empty timeline chapter, which is useless.
+ */
+
+import { useState, useEffect } from 'react';
+import { FS, swatch } from '../theme.js';
+import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
+import { useStore } from '../../store/index.js';
+import { PDF_VARIANTS } from '../../pdf/variants.js';
+import { t } from '../../copy/index.js';
+import IconButton from '../primitives/IconButton.jsx';
+import Button from '../primitives/Button.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+
+const VARIANT_ICON = {
+  draft_brief:     Edit3,
+  canon_dossier:   BookMarked,
+  timeline_packet: Clock,
+  campaign_state:  Swords,
+};
+
+// pdf-5: canon-only flagship variants. Their headline chapters (timeline / live
+// Faith & War) are `if-canon`, so a DRAFT-phase export of one silently drops them.
+// Disable them off-canon with a reason, exactly as timeline_packet always did.
+const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
+
+/**
+ * @param {Object} props
+ * @param {boolean} props.open
+ * @param {() => void} props.onClose
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} [props.onExportFoundry]
+ *   Optional Foundry VTT module export (W-Session). When absent the sheet
+ *   renders exactly as before — no Format section, PDF-only.
+ * @param {boolean} [props.exporting]
+ */
+export default function ExportSheet({ open, onClose, onExport, onExportFoundry, exporting }) {
+  const phase    = useStore(s => s.phase);
+  const eventCount = useStore(s => s.eventLog?.length ?? 0);
+  const suggested = suggestVariant(phase, eventCount);
+  const [picked, setPicked] = useState(suggested);
+  // §2a — export source. When an AI narrative overlay exists the user chooses
+  // raw simulation vs AI-enhanced; defaults to AI-enhanced when available.
+  // buildViewModel swaps the dossier body on narrativeMode.
+  const aiSettlement = useStore(s => s.aiSettlement);
+  const hasAi = !!aiSettlement;
+  const [useAi, setUseAi] = useState(hasAi);
+  // W-Session — export format. 'pdf' is the default and the only option when
+  // the caller doesn't provide onExportFoundry (drafts, legacy mounts).
+  // effectiveFormat guards the stranded case: a picked 'foundry' survives in
+  // state across close/reopen, but if the prop is withdrawn meanwhile (flag
+  // killswitch), the CTA must fall back to PDF rather than call undefined.
+  const hasFoundry = typeof onExportFoundry === 'function';
+  const [format, setFormat] = useState('pdf');
+  const effectiveFormat = hasFoundry ? format : 'pdf';
+  // Back the aria-modal="true" promise with real focus management (trap Tab,
+  // move focus in on open, Escape dismisses, restore focus on close). Called
+  // before the `!open` early return so hook order stays stable.
+  const dialogRef = useDialogFocusTrap(open, onClose);
+
+  // pdf-export-2: the sheet is ALWAYS-MOUNTED (SettlementDetail keeps it in the
+  // tree). A canon-only variant picked in canon then uncanonized to draft would
+  // otherwise stay `picked` and export a GUTTED document (the exact hole pdf-5's
+  // disable fix targeted). A fresh open re-syncs useAi to the current AI overlay
+  // too (was frozen at first mount).
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (open) setUseAi(hasAi);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  if (!open) return null;
+
+  const isDisabledVariant = (id) => CANON_ONLY_VARIANTS.has(id) && phase !== 'canon';
+  // effectivePicked mirrors effectiveFormat: a picked-then-stranded canon-only
+  // variant falls back to the suggested variant for THIS phase, so the CTA never
+  // exports a gutted PDF regardless of the mounted-state pick.
+  const effectivePicked = isDisabledVariant(picked) ? suggested : picked;
+
+  const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
+    id, ...spec,
+    Icon: VARIANT_ICON[id] || FileText,
+    disabled: isDisabledVariant(id),
+    disabledReason: isDisabledVariant(id)
+      ? 'Available once the settlement is canonized.'
+      : null,
+  }));
+
+  return (
+    // Modal overlay: backdrop click/keydown dismisses. Keeping role="dialog"
+    // (vs button) is the correct a11y semantics, so this rule can't be satisfied.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="export-sheet-title"
+      style={overlayStyle}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) onClose(); }}
+    >
+      <div style={sheetStyle}>
+        <header style={headerStyle}>
+          <h2 id="export-sheet-title" style={titleStyle}>
+            <FileText size={16} aria-hidden="true" /> {t('export.sheetTitle')}
+          </h2>
+          <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
+        </header>
+
+        <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {variants.map(v => (
+            <VariantCard
+              key={v.id}
+              v={v}
+              picked={picked === v.id}
+              onPick={() => !v.disabled && setPicked(v.id)}
+            />
+          ))}
+        </div>
+
+        {hasFoundry && (
+          <div style={{ padding: '0 12px 8px' }}>
+            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Format</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
+                <Button
+                  key={opt.id}
+                  variant={format === opt.id ? 'secondary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setFormat(opt.id)}
+                  aria-pressed={format === opt.id}
+                  style={{ flex: 1 }}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+            {format === 'foundry' && (
+              <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable. The journals import on first load.
+              </div>
+            )}
+          </div>
+        )}
+
+        {hasAi && (
+          <div style={{ padding: '0 12px 4px' }}>
+            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
+                <Button
+                  key={opt.label}
+                  variant={useAi === opt.ai ? 'secondary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setUseAi(opt.ai)}
+                  aria-pressed={useAi === opt.ai}
+                  style={{ flex: 1 }}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+            <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+              {useAi
+                ? 'Exports the narrated dossier. Canonical facts are preserved.'
+                : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
+            </div>
+          </div>
+        )}
+
+        <footer style={footerStyle}>
+          <Button variant="secondary" size="sm" onClick={onClose} disabled={exporting}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => (effectiveFormat === 'foundry' ? onExportFoundry(effectivePicked, useAi) : onExport(effectivePicked, useAi))}
+            disabled={exporting}
+            busy={exporting}
+          >
+            {exporting
+              ? (effectiveFormat === 'foundry' ? 'Building Module…' : 'Building PDF…')
+              : <>Export {effectiveFormat === 'foundry' ? `${PDF_VARIANTS[effectivePicked].label} Module` : PDF_VARIANTS[effectivePicked].label}</>}
+          </Button>
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+function VariantCard({ v, picked, onPick }) {
+  const Icon = v.Icon;
+  return (
+    <button
+      type="button"
+      onClick={onPick}
+      disabled={v.disabled}
+      aria-pressed={picked}
+      title={v.disabled ? v.disabledReason : v.description}
+      style={{
+        display: 'flex', alignItems: 'flex-start', gap: 10,
+        padding: 10,
+        // A dispatch parcel: quiet by default, selection carried by an ink border
+        // + a faint ink wash + the trailing tally mark — never gold. Gold is spent
+        // once, on the dispatch seal (the footer Export button).
+        background: picked ? 'rgba(28,20,9,0.05)' : '#fff',
+        border: `1px solid ${picked ? swatch.inkMag2 : '#d2bd96'}`,
+        cursor: v.disabled ? 'not-allowed' : 'pointer',
+        opacity: v.disabled ? 0.5 : 1,
+        textAlign: 'left',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+      }}
+    >
+      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch.inkMag2 }} />
+      <div style={{ flex: 1 }}>
+        <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
+          {v.label}
+        </div>
+        <div style={{ fontSize: FS.xs, color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>
+          {v.description}
+        </div>
+        {v.disabled && v.disabledReason && (
+          <div style={{ fontSize: FS.xxs, color: swatch.danger, marginTop: 4, fontStyle: 'italic' }}>
+            {v.disabledReason}
+          </div>
+        )}
+      </div>
+      {picked && (
+        <span aria-hidden="true" style={{ flexShrink: 0, alignSelf: 'center', fontSize: FS.md, fontWeight: 800, color: swatch.inkMag2 }}>
+          ✓
+        </span>
+      )}
+    </button>
+  );
+}
+
+function suggestVariant(phase, eventCount) {
+  if (phase === 'draft') return 'draft_brief';
+  if (phase === 'canon' && eventCount >= 4) return 'timeline_packet';
+  return 'canon_dossier';
+}
+
+const overlayStyle = {
+  position: 'fixed', inset: 0,
+  background: 'rgba(28,20,9,0.5)',
+  display: 'flex', alignItems: 'center', justifyContent: 'center',
+  zIndex: 1000,
+};
+const sheetStyle = {
+  width: 'min(480px, calc(100vw - 32px))',
+  maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
+  background: '#fffbf5',
+  border: '1px solid #d2bd96',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+};
+const headerStyle = {
+  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+  padding: '10px 12px',
+  borderBottom: '1px solid #d2bd96',
+};
+const titleStyle = {
+  margin: 0, display: 'flex', alignItems: 'center', gap: 6,
+  fontSize: 14, fontWeight: 700, color: '#1c1409',
+  fontFamily: 'system-ui, -apple-system, sans-serif',
+};
+const footerStyle = {
+  display: 'flex', justifyContent: 'flex-end', gap: 8,
+  padding: 12,
+  borderTop: '1px solid #d2bd96',
+};

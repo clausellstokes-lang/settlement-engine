@@ -1,0 +1,169 @@
+/**
+ * Step 11: neighbourFactions
+ *
+ * Injects mirror and opposition factions from neighbour influence.
+ *
+ * Neighbour-faction step for the settlement generation pipeline.
+ */
+
+import { registerStep } from '../pipeline.js';
+import { getMirrorFactionLabel, getOpposeFactionLabel, getMundaneLoreFactionLabel } from '../neighbourGenerator.js';
+import { renormalizeFactionPower } from '../power/rulingStructure.js';
+import { recordTrace } from '../../domain/trace.js';
+
+// Mirror applyLegitimacyMultipliers' label bands (factionDynamics.js) — injected
+// neighbour factions are added AFTER that pass runs (in generatePower), so they
+// must self-label or PowerTab/PDF show a blank powerLabel + missing rawPower.
+function powerLabelFor(power) {
+  return power >= 35 ? 'Dominant'
+       : power >= 25 ? 'Strong'
+       : power >= 18 ? 'Significant'
+       : power >= 10 ? 'Minor'
+       : 'Suppressed';
+}
+
+/**
+ * MG-3c (leak L4): the neighbour-influence faction labels were minted with ZERO reads
+ * of the world's magic law, so a settlement in a world without functioning magic still
+ * grew 'Arcane Exchange Circle', '<N> Arcane Envoys', '<N> Arcane Observers' and
+ * 'Anti-<N> Arcane Resistance' straight out of its neighbour's shadow.
+ *
+ * The world law is the SAME arbiter every other generator step already consults
+ * (allowsGeneratedContent — the predicate the certification receipt re-checks), so this
+ * catches any arcane-worded label, not only the four the register enumerated. A refused
+ * label is SUBSTITUTED with its mundane twin, never merely dropped (MG-LAW-3): the
+ * neighbour's influence still lands, it simply arrives lettered instead of arcane.
+ *
+ * The seeded pick is drawn ONLY on the substitution path, so a world where magic works
+ * never touches the rng stream and stays byte-identical.
+ *
+ * @param {'mirror'|'oppose'} kind
+ * @param {string|null} label      the authored label, or null when the slot is empty.
+ * @param {any} worldLaw           the run's generation world law.
+ * @param {string} relType
+ * @param {string} neighbourName
+ * @param {any} rng
+ * @returns {string|null} the label to use, or null to skip the faction entirely.
+ */
+export function labelUnderWorldLaw(kind, label, worldLaw, relType, neighbourName, rng) {
+  if (!label) return null;
+  if (!worldLaw || worldLaw.allowsGeneratedContent({ name: label })) return label;
+  return getMundaneLoreFactionLabel(kind, relType, neighbourName, rng.randInt(0, 3));
+}
+
+registerStep('neighbourFactions', {
+  deps: ['generatePower', 'resolveNeighbour'],
+  reads: ['neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  provides: [],
+  mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound (A+ P1.7)
+  phase: 'power',
+}, (ctx, rng) => {
+  const { neighbourFacBias, neighbourProfile, powerStructure } = ctx;
+  const worldLaw = ctx.generationContext?.worldLaw || null;
+
+  if (!neighbourFacBias || !powerStructure?.factions?.length) return {};
+
+  const initialCount = powerStructure.factions.length;
+  const existingTypes = new Set(
+    powerStructure.factions.map(f => (f.category || f.type || '').toLowerCase())
+  );
+  const { mirrorFactions, opposeFactions, mirrorWeight, opposeWeight } = neighbourFacBias;
+  const relType = neighbourProfile?.relationshipType || 'neutral';
+
+  // Mirror factions
+  for (const fType of mirrorFactions) {
+    if (!existingTypes.has(fType) && rng.chance(mirrorWeight)) {
+      const mirrorLabel = labelUnderWorldLaw(
+        'mirror', getMirrorFactionLabel(fType, relType, neighbourProfile?.name),
+        worldLaw, relType, neighbourProfile?.name, rng,
+      );
+      if (mirrorLabel) {
+        const power = rng.randInt(10, 30);
+        powerStructure.factions.push({
+          faction:       mirrorLabel,
+          category:      fType,
+          power,
+          rawPower:      power,
+          powerLabel:    powerLabelFor(power),
+          desc:          `${mirrorLabel} — presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
+          source:        'neighbour_mirror',
+          neighbourName: neighbourProfile.name,
+          isGoverning:   false,
+        });
+        existingTypes.add(fType);
+        recordTrace(ctx, {
+          targetType: 'faction',
+          targetId: `faction.${mirrorLabel}`,
+          step: 'neighbourFactions',
+          result: 'mirrored',
+          causes: [{
+            source: `neighbour.${neighbourProfile.name}`,
+            effect: `${fType} influence`,
+            reason: `Influence from ${neighbourProfile.name} (${relType.replace(/_/g, ' ')}) seeded a mirror ${fType} faction here.`,
+          }],
+          downstreamEffects: [
+            { target: 'powerStructure.factions', effect: 'count +1' },
+          ],
+        });
+      }
+    }
+  }
+
+  // Oppose factions
+  for (const fType of opposeFactions) {
+    if (!existingTypes.has(fType) && rng.chance(opposeWeight)) {
+      const opposeLabel = labelUnderWorldLaw(
+        'oppose', getOpposeFactionLabel(fType, relType, neighbourProfile?.name),
+        worldLaw, relType, neighbourProfile?.name, rng,
+      );
+      if (opposeLabel) {
+        const power = rng.randInt(8, 26);
+        powerStructure.factions.push({
+          faction:       opposeLabel,
+          category:      fType,
+          power,
+          rawPower:      power,
+          powerLabel:    powerLabelFor(power),
+          desc:          `${opposeLabel} — formed in reaction to ${neighbourProfile.name}'s influence.`,
+          source:        'neighbour_opposition',
+          neighbourName: neighbourProfile.name,
+          isGoverning:   false,
+        });
+        recordTrace(ctx, {
+          targetType: 'faction',
+          targetId: `faction.${opposeLabel}`,
+          step: 'neighbourFactions',
+          result: 'opposed',
+          causes: [{
+            source: `neighbour.${neighbourProfile.name}`,
+            effect: `${fType} reaction`,
+            reason: `Resistance to ${neighbourProfile.name}'s influence (${relType.replace(/_/g, ' ')}) spawned an opposition ${fType} faction.`,
+          }],
+          downstreamEffects: [
+            { target: 'powerStructure.factions', effect: 'count +1' },
+            { target: 'conflicts',               effect: 'tension source' },
+          ],
+        });
+      }
+    }
+  }
+
+  // Injected factions carry RAW-scale power (rng.randInt(10,30)/(8,26)) into a
+  // roster generatePower already normalized to percentage points summing ~100,
+  // breaking the power-share invariant. Renormalize the whole roster back to
+  // integer points summing exactly 100, then refresh each injected faction's
+  // band label to match its new percentage power (rawPower keeps the raw value).
+  if (powerStructure.factions.length > initialCount) {
+    renormalizeFactionPower(powerStructure.factions);
+    for (const f of powerStructure.factions) {
+      if (f.source === 'neighbour_mirror' || f.source === 'neighbour_opposition') {
+        f.powerLabel = powerLabelFor(f.power);
+      }
+    }
+    // Re-sort by effective power so injected factions take their real rank rather
+    // than always trailing the list (matches applyLegitimacyMultipliers' final order).
+    powerStructure.factions.sort((a, b) => (b.power || 0) - (a.power || 0));
+  }
+
+  return {};
+});

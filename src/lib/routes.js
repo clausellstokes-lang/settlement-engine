@@ -1,0 +1,398 @@
+/**
+ * lib/routes.js — Path ↔ view routing table.
+ *
+ * The app's navigation is a single `view` string switched by App's render
+ * block. This module is the one place that maps those internal view ids to
+ * public URL paths (and back), so the address bar, Back/Forward, refresh,
+ * and shared links all line up with what's on screen.
+ *
+ * Pure data + pure functions — no React, no window access. The `useRoute`
+ * hook (src/hooks/useRoute.js) wires this to history; this file is unit-
+ * testable in isolation (tests/lib/routes.test.js).
+ *
+ * Resolution precedence (resolveLocation):
+ *   1. Legacy `?view=<id>` query param — back-compat for already-sent
+ *      emails and shared links (e.g. /?view=settlements). Highest
+ *      precedence so an old link always lands where it used to, then the
+ *      hook silently upgrades the URL to the canonical path.
+ *   2. Exact path match (/create, /settlements, …).
+ *   3. Param path match (/settlements/:id).
+ *   4. Root "/" → default view (/create).
+ *   5. Unknown path → default view, notFound:true (hook rewrites to /create).
+ */
+
+import {
+  ABOUT_WHAT_VIEW, destinationForLegacyTab, destinationForLegacySearch,
+} from './aboutMapping.js';
+
+const SITE_NAME = 'SettlementForge';
+const DEFAULT_VIEW = 'generate';
+
+// ── The canonical table ─────────────────────────────────────────────────────
+// `view`  — internal id used by App's render switch + nav arrays.
+// `path`  — public URL.
+// `title` — document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
+// `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
+// `feedback` — false when route chrome must suppress the floating support widget.
+// `nav`   — top-nav metadata `{ label, order }` for the views that appear in the
+//           primary navigation. The single source of truth for the nav bar:
+//           App derives its NAV array from these (see the NAV export below), so
+//           adding/relabelling/reordering a nav tab is a one-place edit here
+//           instead of a parallel array that can silently drift.
+export const ROUTES = Object.freeze([
+  { view: 'generate',              path: '/create',                title: 'Create a Settlement',           nav: { label: 'Create',     order: 20 } },
+  // The Welcome front door: a hero over the same generation flow as /create.
+  // A bare root visit ('/') canonicalizes here for logged-out visitors (the
+  // marketing CTAs); signed-in members are sent to /create — via App's front-door
+  // effect (it rewrites only '/', not deep links).
+  //
+  // NO `nav` BLOCK — OWNER DIRECTIVE, 2026-08-03 (THE FLETCHED RIBBON, lane FL).
+  // Welcome was the ribbon's leftmost tab until the ribbon became the back half of
+  // an arrow: the WORDMARK is the home button on both surfaces now (App.jsx's brand
+  // block, accessible name "SettlementForge home"), so a Welcome tab would be a
+  // second door to the same room standing where the fletching goes. The ROUTE is
+  // untouched — /home still resolves, still titles, still canonicalizes from '/' —
+  // only its top-nav metadata is retired, which is what removes it from NAV and so
+  // from every surface that derives from NAV. The mobile bottom nav never carried it
+  // (App.jsx MOBILE_NAV_PRIORITY names five ids, none of them 'home'), so this is a
+  // desktop-only change by construction rather than by a second exclusion list. One
+  // consequence is deliberate: on the landing page NO nav cell is active, because no
+  // cell claims that view.
+  { view: 'home',                  path: '/home',                  title: 'Welcome' },
+  // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
+  // but the nav LABEL becomes "Library" (via the nav.label below).
+  { view: 'settlements',           path: '/settlements',           title: 'Your Library',                  nav: { label: 'Library',    order: 30 } },
+  // UX Phase 4 — the Realm hub: the simulation's new IA home (World Map + Pulse +
+  // Chronicle + Pantheon as one destination). The old World Map lives here as the
+  // Map sub-tab. `/map` (and `?view=map`) redirect into `/realm` — see
+  // LEGACY_VIEW_ALIASES + App's redirect effect.
+  { view: 'realm',                 path: '/realm',                 title: 'Realm',                         nav: { label: 'Realm',      order: 40 } },
+  { view: 'map',                   path: '/map',                   title: 'World Map' },
+  { view: 'compendium',            path: '/compendium',            title: 'Compendium',                    nav: { label: 'Compendium', order: 50 } },
+  // ── THE ABOUT FAMILY (docs/DESIGN_ABOUT_PAGES.md) ─────────────────────────
+  // The old single About page (`howto` at /how-to, an accordion of two
+  // collapsibles) SPLIT into the two pages its dropdown always named. The
+  // parent `/about` and the whole legacy `/how-to[?tab=…]` grammar stay
+  // resolvable and bounce to the right new page + anchor (`redirectForView`
+  // below, reading lib/aboutMapping.js — the one mapping writer), so no link
+  // already in the world 404s or lands on the wrong half.
+  { view: 'about',                 path: '/about',                 title: 'About' },
+  { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70 } },
+  { view: 'about-guide',           path: '/about/guide',           title: 'Practical Guide' },
+  // Retired: the pre-split About page. Kept so old links resolve; the redirect
+  // effect forwards it (with its ?tab= deep link translated to an anchor).
+  { view: 'howto',                 path: '/how-to',                title: 'About' },
+  { view: 'workshop',              path: '/workshop',              title: 'Workshop' },
+  { view: 'account',               path: '/account',               title: 'Account',                       guard: 'auth' },
+  { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
+  { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
+  { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
+  // THE FOUNDERS' HALL — thirty numbered chairs, all by invitation, none ever
+  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, footer-linked (no
+  // top-nav block), no guard. Lazy route; its chair read is fail-closed
+  // (components/founders/FoundersHallPage.jsx). The PATH stays /founders on
+  // purpose — the page's design changed, its address did not, so every link and
+  // index entry already in the world still lands.
+  { view: 'founders',              path: '/founders',              title: "The Founders' Hall" },
+  // The First Hundred: the founding-cohort honor roll (an unpriced acknowledgment of
+  // early members, distinct from the paid Founder seats). Public + indexable, no
+  // top-nav block, no guard. Reached by direct link + the sitemap (it links out to
+  // the Founders page). Lazy route; renders only the committed opted-in roll.
+  { view: 'first-hundred',         path: '/first-hundred',         title: 'The First Hundred' },
+  // The public roadmap: rendered only from the committed vNext ledger. Public +
+  // indexable, no top-nav block, no guard. Lazy route.
+  { view: 'roadmap',               path: '/roadmap',               title: 'Roadmap' },
+  // THE SEED POST (V-13): a shareable world lives at /world/<code>. Public + no
+  // guard — the code regenerates the identical world client-side (no server
+  // state). The bare /world base exists so viewToPath/titleForView resolve; the
+  // param route below carries the code. Lazy route (components/WorldPage.jsx).
+  { view: 'world',                 path: '/world',                 title: 'Shared World' },
+  // Legal / trust pages. Public + indexable (no nav block — they live in the
+  // footer, not the top nav; no guard — anyone can read them). Content is
+  // derived from the actual product behavior (see components/legal/*).
+  { view: 'terms',                 path: '/terms',                 title: 'Terms of Service' },
+  { view: 'privacy',               path: '/privacy',               title: 'Privacy Policy' },
+  { view: 'refunds',               path: '/refunds',               title: 'Refunds' },
+  // R-7/R-9 — the portability covenant + the contradiction bounty. Public +
+  // indexable trust pages (footer-linked, no top-nav, no guard); content is
+  // claims-parity-bound to real product capabilities (components/legal/*).
+  { view: 'covenant',              path: '/covenant',              title: 'Portability Covenant' },
+  { view: 'bounty',                path: '/bounty',                title: 'Contradiction Bounty' },
+  // V-18 — the DM Screen: an at-the-table DM tool (letter + dossier +
+  // ledger + auspice) with a player-safe face. Reads the active settlement/
+  // campaign; degrades to a placeholder when nothing is open. Noindex app tool
+  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
+  { view: 'screen',                path: '/screen',                title: 'The DM Screen' },
+  // The dedicated competitor pages were deleted; App's redirect effect bounces
+  // every `compare*` view to the "How We Compare" section of What this Is
+  // (`/about/what-this-is#how-we-compare` — the About split moved the
+  // positioning ladder to the conceptual page; see aboutMapping.js). The path
+  // entries stay so old/SEO links still resolve instead of 404ing, but the
+  // titles are retired to the destination ('About') so the one-frame
+  // pre-redirect document.title matches where the GM lands — no flash of a
+  // named-competitor title for a page that no longer exists.
+  { view: 'compare',               path: '/compare',               title: 'About' },
+  { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'About' },
+  { view: 'compare-worldographer', path: '/compare/worldographer', title: 'About' },
+  { view: 'compare-kanka',         path: '/compare/kanka',         title: 'About' },
+  { view: 'signin',                path: '/signin',                title: 'Sign In',             feedback: false },
+  { view: 'register',              path: '/register',              title: 'Create Your Account', feedback: false },
+  { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password',      feedback: false },
+  // The recovery-link landing: completes a forgot-password reset. The auth-
+  // recovery edge function redirects its emailed link here; the page detects the
+  // recovery session and shows the set-new-password form.
+  { view: 'set-new-password',      path: '/set-new-password',      title: 'Set a New Password',  feedback: false },
+  { view: 'verify-email',          path: '/verify-email',          title: 'Verify Your Email',   feedback: false },
+  { view: 'confirm-email',         path: '/confirm-email',         title: 'Email Confirmed',     feedback: false },
+  { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete',   feedback: false },
+]);
+
+// Param routes — matched after exact paths, IN ORDER. Each declares a matcher
+// regex and a builder that turns the capture groups into a params object.
+//
+// The gallery FACET HUBS (GALLERY-2 phase 2; manifest src/lib/galleryHubs.js)
+// must precede the dossier slug route: /gallery/at-war and /gallery/most-alive
+// would otherwise match the slug pattern. Unknown hub values still resolve to
+// the gallery view — GalleryHubPage renders its own not-found state.
+const PARAM_ROUTES = Object.freeze([
+  { view: 'settlements', re: /^\/settlements\/([^/]+)$/, build: m => ({ id: decodeURIComponent(m[1]) }) },
+  // Per-ENTRY Compendium routes (V-19 the long tail): /compendium/<entry-id>
+  // (kebab-case ids like `tier-thorp`, `arch-plague-of-beasts`, `deity-…`). The
+  // exact `/compendium` overview is matched first (PATH_TO_ROUTE); this fans the
+  // 289 named entries into their own indexable path routes. The sitemap +
+  // prerender enumerate the ids from the committed compendium index, so this ONE
+  // pattern carries the whole tail without a 289-line eager route table.
+  { view: 'compendium', re: /^\/compendium\/([a-z0-9][a-z0-9-]*)$/, build: m => ({ entry: m[1] }) },
+  { view: 'gallery', re: /^\/gallery\/(terrain|tier)\/([a-z0-9_-]+)$/, build: m => ({ hub: { facet: m[1], value: m[2] } }) },
+  { view: 'gallery', re: /^\/gallery\/(at-war|most-alive)$/, build: m => ({ hub: { facet: m[1] } }) },
+  { view: 'gallery', re: /^\/gallery\/([^/]+)$/, build: m => ({ slug: decodeURIComponent(m[1]) }) },
+  // THE SEED POST (V-13): /world/<share-code> → the World replay page.
+  { view: 'world', re: /^\/world\/([^/]+)$/, build: m => ({ code: decodeURIComponent(m[1]) }) },
+]);
+
+// Old view ids that have since been renamed map here (old → new). The single
+// forward-compat seam so a rename only edits one place instead of hunting
+// through email templates and old links.
+//
+// UX Phase 4: the World Map moved INTO the Realm hub. A legacy `?view=map`
+// link now resolves straight to `realm` (the Map sub-tab is the Realm's
+// default body). The `/map` PATH still resolves to the `map` view in ROUTES,
+// which App's redirect effect bounces to `realm` — so both legacy seams land
+// in the same place without a 404.
+const LEGACY_VIEW_ALIASES = Object.freeze({
+  map: 'realm',
+});
+
+// ── Fast lookups (built once) ───────────────────────────────────────────────
+const VIEW_TO_ROUTE = Object.freeze(
+  ROUTES.reduce((acc, r) => { acc[r.view] = r; return acc; }, /** @type {Record<string, typeof ROUTES[number]>} */ ({})),
+);
+const PATH_TO_ROUTE = Object.freeze(
+  ROUTES.reduce((acc, r) => { acc[r.path] = r; return acc; }, /** @type {Record<string, typeof ROUTES[number]>} */ ({})),
+);
+
+/**
+ * The primary top-nav destinations, derived from the ROUTES `nav` metadata and
+ * sorted by `nav.order`. The single source of truth for App's nav bar — a new
+ * nav tab is added by giving its ROUTES entry a `nav` block, not by editing a
+ * parallel array in App.jsx (which historically drifted out of sync).
+ * @type {ReadonlyArray<{ id: string, label: string, order: number }>}
+ */
+export const NAV = Object.freeze(
+  ROUTES
+    .filter(r => r.nav)
+    .map(r => ({ id: r.view, label: r.nav.label, order: r.nav.order }))
+    .sort((a, b) => a.order - b.order),
+);
+
+/**
+ * THE CREATE FLOW — which destination each nav tab FEEDS. Create feeds the
+ * Library (a forged settlement is kept there); the Library feeds the Realm (a
+ * kept settlement is placed on the map). This is nav metadata, so it lives
+ * beside NAV rather than inside the chrome that draws it — one place declares
+ * the sequence, every surface reads it.
+ *
+ * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
+ * draws its flow mark ONLY when the successor named here is the tab actually
+ * rendered next ON THAT SURFACE. The desktop ribbon runs Create · Library ·
+ * Realm, so both marks draw; the mobile bottom nav omits Realm (Gallery follows
+ * Library there), so Library draws none. An arrow pointing at the wrong
+ * neighbour teaches a false lesson about where the work goes.
+ *
+ * THE FLETCHING READS THIS TOO (owner directive 2026-08-03). The desktop ribbon's
+ * leather-brown band is the maximal NAV run whose consecutive pairs are declared
+ * here — so the band's membership is DERIVED from the flow, never listed in the
+ * chrome. See components/nav/NavRibbon.jsx and components/nav/NavFlowArrow.jsx.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NAV_FLOW = Object.freeze({
+  generate: 'settlements',
+  settlements: 'realm',
+});
+
+/** True if `view` is a declared view id. */
+export function isKnownView(view) {
+  return Object.prototype.hasOwnProperty.call(VIEW_TO_ROUTE, view);
+}
+
+function normalizeLegacyView(v) {
+  return LEGACY_VIEW_ALIASES[v] || v;
+}
+
+/**
+ * view (+ optional params) → canonical path string. Unknown views fall
+ * back to the default (/create) rather than producing a broken URL.
+ */
+export function viewToPath(view, params) {
+  if (params && params.slug && view === 'gallery') {
+    return `/gallery/${encodeURIComponent(params.slug)}`;
+  }
+  // Facet-hub URLs (GALLERY-2 phase 2): /gallery/<facet>[/<value>].
+  if (params && params.hub && params.hub.facet && view === 'gallery') {
+    const { facet, value } = params.hub;
+    return value
+      ? `/gallery/${encodeURIComponent(facet)}/${encodeURIComponent(value)}`
+      : `/gallery/${encodeURIComponent(facet)}`;
+  }
+  if (params && params.id && view === 'settlements') {
+    return `/settlements/${encodeURIComponent(params.id)}`;
+  }
+  // THE SEED POST (V-13): /world/<share-code>.
+  if (params && params.code && view === 'world') {
+    return `/world/${encodeURIComponent(params.code)}`;
+  }
+  // Per-entry Compendium path (V-19 long tail).
+  if (params && params.entry && view === 'compendium') {
+    return `/compendium/${encodeURIComponent(params.entry)}`;
+  }
+  const r = VIEW_TO_ROUTE[view];
+  return r ? r.path : VIEW_TO_ROUTE[DEFAULT_VIEW].path;
+}
+
+/**
+ * Resolve a location string (a bare path, "path?query#hash", or a full
+ * href) to { view, params, notFound?, legacy? }.
+ */
+export function resolveLocation(location) {
+  let url;
+  try {
+    // Base host lets us parse a bare path like "/create?x=1#h".
+    url = new URL(String(location ?? '/'), 'http://localhost');
+  } catch {
+    return { view: DEFAULT_VIEW, params: {}, notFound: true };
+  }
+
+  // 1. Legacy ?view= (back-compat for already-sent links).
+  const legacy = url.searchParams.get('view');
+  if (legacy) {
+    const v = normalizeLegacyView(legacy);
+    if (isKnownView(v)) {
+      const params = {};
+      const slug = url.searchParams.get('slug');
+      if (slug) params.slug = slug;
+      if (v === 'account') {
+        const section = url.searchParams.get('section');
+        const message = url.searchParams.get('message');
+        if (section) params.section = section;
+        if (message) params.message = message;
+      }
+      return { view: v, params, legacy: true };
+    }
+  }
+
+  // 2 + 3. Path.
+  let path = url.pathname.replace(/\/+$/, '');
+  if (path === '') path = '/';
+
+  if (path === '/') return { view: DEFAULT_VIEW, params: {} };
+
+  const exact = PATH_TO_ROUTE[path];
+  if (exact) {
+    const params = {};
+    // Account subsections are real deep links: preserve their query state so
+    // Back/Forward and links from email/client chrome resolve to one panel.
+    if (exact.view === 'account') {
+      const section = url.searchParams.get('section');
+      const message = url.searchParams.get('message');
+      if (section) params.section = section;
+      if (message) params.message = message;
+    }
+    return { view: exact.view, params };
+  }
+
+  for (const pr of PARAM_ROUTES) {
+    const m = path.match(pr.re);
+    if (m) return { view: pr.view, params: pr.build(m) };
+  }
+
+  return { view: DEFAULT_VIEW, params: {}, notFound: true };
+}
+
+/** Per-route document title. DEFAULT_VIEW (home/create) gets bare SITE_NAME. */
+export function titleForView(view) {
+  const r = VIEW_TO_ROUTE[view];
+  if (!r || view === DEFAULT_VIEW) return SITE_NAME;
+  return `${r.title} · ${SITE_NAME}`;
+}
+
+/** Guard requirement for a view ('auth' | 'elevated' | undefined). */
+export function guardForView(view) {
+  return VIEW_TO_ROUTE[view] ? VIEW_TO_ROUTE[view].guard : undefined;
+}
+
+/**
+ * Whether route chrome may show the global floating support affordance.
+ *
+ * Auth, recovery, and purchase-completion routes opt out in the canonical
+ * route table so App does not maintain a parallel list that can drift.
+ */
+export function allowsFloatingFeedback(view) {
+  return VIEW_TO_ROUTE[view]?.feedback !== false;
+}
+
+/**
+ * DEMOTED DESTINATIONS — where a retired view forwards.
+ *
+ * The route entries for these stay in ROUTES so their URLs still resolve (old
+ * links, SEO, already-sent email) instead of 404ing; this function is the one
+ * place that says where each one now lands, and App's redirect effect performs
+ * it. Keeping the decision here rather than in the shell means the routing table
+ * and the forwarding rules read as one thing.
+ *
+ *   - workshop  → the Workshop was removed; its work happens on Create.
+ *   - map       → the World Map moved INTO the Realm hub.
+ *   - about     → the parent path lands on the split's default page (design §4).
+ *   - howto     → the pre-split About page. Its ONLY real deep-link grammar was
+ *                 `?tab=<id>`, so the tab is translated to the anchor of whichever
+ *                 section absorbed it (lib/aboutMapping.js is the single writer —
+ *                 the rendered section ids come from the same manifest, so the
+ *                 redirect and the anchors cannot drift apart).
+ *   - compare*  → the retired competitor pages; the positioning ladder now lives
+ *                 in the What this Is page's "How We Compare" section.
+ *
+ * @param {string} view              the resolved view id
+ * @param {string} [search]          the current location.search (for `howto`)
+ * @returns {{ view: string, hash: string }|null}  null when nothing to do
+ */
+export function redirectForView(view, search = '') {
+  if (view === 'workshop') return { view: DEFAULT_VIEW, hash: '' };
+  if (view === 'map') return { view: 'realm', hash: '' };
+  if (view === 'about') return { view: ABOUT_WHAT_VIEW, hash: '' };
+  if (view === 'howto') return destinationForLegacySearch(search);
+  if (view.startsWith('compare')) return destinationForLegacyTab('compare');
+  return null;
+}
+
+/**
+ * True if `path` is a safe internal destination for a post-auth redirect
+ * (the `?next=` param). Blocks protocol-relative (//evil.com) and absolute
+ * (http://…) URLs so the redirect can't be used as an open redirect.
+ */
+export function isSafeNextPath(path) {
+  return (
+    typeof path === 'string' &&
+    path.startsWith('/') &&
+    !path.startsWith('//') &&
+    !path.startsWith('/\\')
+  );
+}

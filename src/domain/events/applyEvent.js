@@ -1,0 +1,74 @@
+/**
+ * domain/events/applyEvent.js — Commit an event to the settlement.
+ *
+ * Phase 18 (Tier 2.2): this is now a thin wrapper around
+ * `runEventPipeline`. Both previewEvent and applyEvent run the same
+ * canonical flow, so what the preview promised is exactly what the
+ * apply delivers. The only thing apply does differently is persist
+ * the mutated settlement and write the EventLogEntry.
+ *
+ * Pure function — no store, no React.
+ */
+
+import { deriveSystemState } from '../state/deriveSystemState.js';
+import { runEventPipeline } from './eventPipeline.js';
+import { captureEventUndoSnapshot } from './undoEvent.js';
+
+/** @typedef {import('../types.js').Event} Event */
+/** @typedef {import('../types.js').SystemState} SystemState */
+/** @typedef {import('../types.js').EventLogEntry} EventLogEntry */
+
+/**
+ * @param {Object} args
+ * @param {Object} args.settlement
+ * @param {SystemState} args.systemState  before-state for the log entry
+ * @param {Event}  args.event
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
+ * @returns {{ logEntry: EventLogEntry, nextSystemState: SystemState, nextSettlement: Object, veto: import('./eventPipeline.js').PipelineWarning|null }}
+ */
+export function applyEvent({ settlement, systemState, event, now = null }) {
+  const beforeState = systemState || deriveSystemState(settlement);
+  const timedEvent = /** @type {any} */ (event);
+  // Pure function of (settlement, event, now) — no wall-clock read (A+ domain.6).
+  // The store passes a real `now` at the apply boundary; preview/replay with no
+  // now record a deterministic null appliedAt.
+  const appliedAt = timedEvent?.timestamp || timedEvent?.createdAt || now || null;
+  const result = runEventPipeline(settlement, event, { now: appliedAt });
+  // Handler-veto channel (Composer V2 §2): the pipeline refused the mutation, so
+  // nothing may commit. Surface the refusal; callers (store applyEvent, the
+  // queued-event drain) bail before logging/persisting on a non-null veto.
+  const veto = (result.warnings || []).find(w => w.severity === 'veto') || null;
+
+  // Pre-event snapshot of the authored records whose writes aren't exactly
+  // reversible from provenance (resource / trade-good / stressor events —
+  // see undoEvent.js). Everything else an event writes carries event-id
+  // provenance and is scrubbed by it on undo; for these the snapshot is the
+  // only exact way back. Null for every other event type.
+  // A vetoed envelope is a refusal, not a timeline candidate. In particular,
+  // ADD_* snapshots must not make a rejected duplicate look loggable to a
+  // caller inspecting the returned envelope before it checks `veto`.
+  const undo = veto ? null : captureEventUndoSnapshot(settlement, event);
+
+  const logEntry = /** @type {EventLogEntry} */ ({
+    event,
+    appliedAt,
+    beforeState,
+    afterState: result.afterSystemState,
+    deltas: result.systemStateDeltas,
+    factionResponses: result.factionResponses,
+    narrativeSummary: result.narrativeSummary,
+    // Phase 18 additions — the substrate-layer delta and the structured
+    // faction-relationship deltas are persisted alongside the legacy
+    // 4-dim delta, so the timeline UI / AI overlay can read either.
+    causalStateDeltas: result.causalStateDeltas,
+    factionRelationshipDeltas: result.factionRelationshipDeltas,
+    ...(undo ? { undo } : {}),
+  });
+
+  return {
+    logEntry,
+    nextSystemState: result.afterSystemState,
+    nextSettlement: result.nextSettlement,
+    veto,
+  };
+}

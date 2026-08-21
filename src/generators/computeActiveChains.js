@@ -1,0 +1,1025 @@
+// computeActiveChains.js
+// Derives which supply chains are running in a settlement based on
+// actual institutions present and nearby resources selected.
+// Used by the economic generator to enrich the Economics tab output.
+
+import {SUPPLY_CHAIN_NEEDS} from '../data/supplyChainData.js';
+import {RESOURCE_TO_CHAINS} from '../data/supplyChainResourceIndex.js';
+import {applyMagicSubstitution} from './chainMagicSubstitution.js';
+import {RESOURCE_DATA} from '../data/resourceData.js';
+import {customDeps} from '../lib/dependencyEngine.js';
+// FP-G10: load (register) the prebuilt resource-chains catalog so
+// customDeps.chainsFedByResource below resolves legacy `feedsChains` refs via the
+// enumerated engineChainId path — exactly as before the enumerator + its ~60 KB
+// SUPPLY_CHAIN_NEEDS table were split off the first-paint closure into that lazy
+// leaf. This generator rides the lazy `engine` chunk, so the catalog loads with
+// generation, never on first paint. (chainsFedByResource is byte-identical even
+// unregistered — its slug fallback matches — this keeps the enumerated path live.)
+import '../lib/prebuiltResourceChains.js';
+import { compareCodepoint } from '../domain/deterministicSort.js';
+import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
+
+// ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
+// chain.processingInstitutions patterns are static data written for the fuzzy
+// 12-char-prefix matcher below. Each pattern is resolved ONCE (memoized) to
+// the SET of catalog ids whose names the fuzzy matcher accepts; thereafter
+// stamped institutions (inst.catalogId, assembleInstitutions) compare by id —
+// exact and rename-proof. Because the id-set is BUILT from the fuzzy matcher,
+// the id path selects EXACTLY the institutions the fuzzy path selected for
+// generated rosters (pinned in tests/joins/institutionIdentity.test.js); the
+// known false matches ('Mill' pattern → 'Access to external mill') are frozen
+// as-is, not silently changed. Institutions WITHOUT a catalogId (legacy saves,
+// custom/DM content, cascade additions) keep the original fuzzy name match.
+
+const fuzzyProcessorMatch = (lowerName, pattern) =>
+  lowerName.includes(String(pattern || '').toLowerCase().slice(0, 12));
+
+const ALL_CATALOG_NAMES = (() => {
+  const names = new Set();
+  for (const tierCatalog of Object.values(institutionalCatalog)) {
+    for (const group of Object.values(tierCatalog)) {
+      for (const name of Object.keys(group)) names.add(name);
+    }
+  }
+  return [...names];
+})();
+
+const _patternIdSets = new Map();
+
+/** Catalog-id set a processor pattern resolves to under the legacy fuzzy matcher. */
+export function processorPatternIdSet(pattern) {
+  const key = String(pattern || '');
+  let set = _patternIdSets.get(key);
+  if (!set) {
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (fuzzyProcessorMatch(name.toLowerCase(), key)) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _patternIdSets.set(key, set);
+  }
+  return set;
+}
+
+/**
+ * Does this settlement institution process this chain pattern?
+ * Id-first when the institution is stamped; legacy fuzzy name match otherwise.
+ * The shared join for every chain-processor site (institutionLifecycle's
+ * PROCESSOR_MATCH included) — new joins must use this, not name.includes().
+ */
+export function institutionMatchesProcessor(inst, pattern) {
+  if (inst?.catalogId) return processorPatternIdSet(pattern).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
+  return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
+}
+
+// ── Keyword (substring) id-set — the tradition / magic-transit twin of the
+// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
+// raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
+// they need their own keyword→catalog-id resolution built from that exact rule.
+// Built once per keyword: id-match === name-includes-match for an unrenamed
+// catalog institution BY CONSTRUCTION, so generation output is byte-identical;
+// a DM-renamed-but-stamped institution stays matched (rename-proof), a
+// bare-renamed (unstamped) one falls to the fuzzy substring path and is lost.
+const _keywordIdSets = new Map();
+function keywordIdSet(keyword) {
+  const key = String(keyword || '').toLowerCase();
+  let set = _keywordIdSets.get(key);
+  if (!set) {
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (name.toLowerCase().includes(key)) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _keywordIdSets.set(key, set);
+  }
+  return set;
+}
+
+/** Does this institution match a keyword? Id-first for stamped, substring fallback. */
+export function institutionMatchesKeyword(inst, keyword) {
+  if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
+  return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
+}
+
+// ── Export-gate id-set (A+ generators.6). The export extraction/processing
+// gates match by whole-name predicates with one bespoke special case: the
+// 'mill' keyword must NOT match "access to external mill" (a non-local access
+// note), only the real processing units. Build the gate's id-set from that
+// EXACT predicate so id-match === name-predicate-match by construction, and the
+// hand-rolled special case no longer has to live at every call site.
+const _gateKeywordIdSets = new Map();
+function gateKeywordPredicate(kw) {
+  if (kw === 'mill') {
+    return (n) => (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
+      && !n.includes('access to external');
+  }
+  return (n) => n.includes(kw);
+}
+function gateKeywordIdSet(kw) {
+  let set = _gateKeywordIdSets.get(kw);
+  if (!set) {
+    const pred = gateKeywordPredicate(kw);
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (pred(name.toLowerCase())) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _gateKeywordIdSets.set(kw, set);
+  }
+  return set;
+}
+
+/** Export-gate membership: id-first for stamped, bespoke name predicate fallback. */
+export function institutionMatchesGate(inst, keyword) {
+  const kw = String(keyword || '').toLowerCase();
+  if (inst?.catalogId) return gateKeywordIdSet(kw).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
+  return gateKeywordPredicate(kw)(String(inst?.name || '').toLowerCase());
+}
+
+/**
+ * Given a settlement's institutions, nearby resources, and trade route,
+ * return an array of active production chains with enriched context.
+ *
+ * @param {Array} institutions  - settlement.institutions array
+ * @param {Array} resources     - config.nearbyResources array of resource keys (e.g. ['grain_fields'])
+ * @param {string} tier         - settlement tier
+ * @param {string} tradeRoute   - trade route key
+ * @returns {Array} activeChains
+ */
+// Income source labels → chain IDs for linkage display
+const _INCOME_TO_CHAINS = {
+  'Grain Sales':          ['food_security.grain', 'manufacturing.food_processing'],
+  'Wool & Textile Trade': ['manufacturing.textiles'],
+  'Iron & Metalwork':     ['manufacturing.weapons_armor', 'raw_extraction.iron'],
+  'Timber Trade':         ['raw_extraction.timber'],
+  'Fish Trade':           ['food_security.fishing', 'food_security.river_fishing'],
+  'Entrepôt Trade':       ['trade_entrepot.spices_dyes', 'trade_entrepot.silk_luxury_textiles', 'trade_entrepot.furs_north', 'trade_entrepot.wine_spirits'],
+  'Banking Fees':         ['trade_entrepot.transit_finance'],
+  'Toll Revenue':         ['trade_entrepot.warehouse_logistics'],
+  'Market Taxes':         ['food_security.grain', 'manufacturing.food_processing', 'manufacturing.textiles'],
+  'Guild Fees':           ['manufacturing.weapons_armor', 'manufacturing.textiles', 'manufacturing.leather'],
+};
+
+export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
+  const insts = institutions.filter(Boolean);
+
+  // Helper: does this settlement have an institution matching any of the names?
+  // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
+  const _hasInst = (...patterns) => patterns.some(p =>
+    insts.some(i => institutionMatchesKeyword(i, p))
+  );
+
+  // A resource can be present without being available. Keep both sets so a
+  // depleted primary input remains visible as an impaired chain instead of
+  // disappearing, while substitutes and local production consult only the
+  // available subset.
+  const presentResourceKeys = new Set(
+    resources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const depletedResourceKeys = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const availableResourceKeys = new Set(
+    [...presentResourceKeys].filter(key => !depletedResourceKeys.has(key)),
+  );
+
+  const resourceCondition = (key) => {
+    if (!key || !presentResourceKeys.has(key)) return 'absent';
+    return depletedResourceKeys.has(key) ? 'depleted' : 'available';
+  };
+
+  // Tradition detection — which magical traditions are present?
+  // Id-first for stamped institutions (a renamed-but-stamped "Mages' guild"
+  // still enables the arcane tradition), substring fallback for unstamped.
+  const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
+
+  const traditions = {
+    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
+    // Divine PROVISION is supernatural — it needs a world where magic functions,
+    // not just a church. resolveConfig zeroes the magic dial when
+    // config.magicExists === false, so magicPriority > 0 is the world's magic
+    // signal here: religion without magic still exists, but temple charity does
+    // not magically refill granaries ('Temple granaries blessed' stays out of
+    // no-magic campaigns). Any magic-enabled world (dial >= 1) is unchanged.
+    divine:  magicPriority > 0 &&
+             hasTradition("cathedral","monastery","great cathedral","parish church","friary") &&
+             // religionInfluence check not available here, use institution presence as proxy
+             hasTradition("priest","cathedral","monastery","friary","great cathedral"),
+    arcane:  magicPriority >= 35 && hasTradition("wizard","mages","arcane","enchant","spellcasting","academy of magic"),
+    alchemy: magicPriority >= 15 && hasTradition("alchemist","apothecary district","alchemist quarter"),
+  };
+  // Depleted: resource is present but over-exploited — chains run locally but cannot 
+  // Which resource keys activate which chains (reverse lookup)
+  const chainActivatedByResource = new Set();
+  presentResourceKeys.forEach(rk => {
+    (RESOURCE_TO_CHAINS[rk] || []).forEach(c => chainActivatedByResource.add(c));
+  });
+
+  // Custom-content extension: a custom resource (matched by NAME against
+  // RESOURCE_DATA labels) may declare `feedsChains: [chainRefId, ...]`.
+  // Those chain ids feed `chainActivatedByResource` directly.
+  resources.forEach(rk => {
+    const label = RESOURCE_DATA[rk]?.label || rk;
+    customDeps.chainsFedByResource(label).forEach(c => chainActivatedByResource.add(c));
+    // Also try the raw key form (custom resources stored under their own key)
+    if (label !== rk) customDeps.chainsFedByResource(rk).forEach(c => chainActivatedByResource.add(c));
+  });
+
+  const activeChains = [];
+
+  Object.entries(SUPPLY_CHAIN_NEEDS).forEach(([needKey, need]) => {
+    need.chains.forEach(chain => {
+      const chainId = `${needKey}.${chain.id}`;
+
+      // Check tier gate
+      const TIER_ORDER = ['thorp','hamlet','village','town','city','metropolis'];
+      const tierIdx = TIER_ORDER.indexOf(tier);
+      const minTierIdx = TIER_ORDER.indexOf(chain.minTier || 'thorp');
+      if (tierIdx < minTierIdx) return;
+
+      // No-magic gate: suppress arcane chains entirely at magic=0
+      const ARCANE_CHAIN_IDS = ['alchemy','spellcasting','magical_goods','planar'];
+      const isArcaneChain = ARCANE_CHAIN_IDS.includes(chain.id) ||
+        (chain.label || '').toLowerCase().includes('arcane') ||
+        (chain.label || '').toLowerCase().includes('magic') ||
+        (chain.label || '').toLowerCase().includes('spell');
+      if (isArcaneChain && magicPriority === 0) return;
+
+      // Check resource availability
+      const resourceKey = resourceKeyForLabel(chain.resource);
+      const primaryCondition = chain.resource
+        ? resourceCondition(resourceKey)
+        : 'available';
+      const resourceActive = primaryCondition === 'available';
+      const resourceAvailable = !chain.resource;
+
+      // Substitution is condition-aware: a present-but-depleted primary needs a
+      // live substitute just as an absent primary does. Resolve only exact
+      // catalog labels/aliases; unknown prose cannot acquire mechanics through
+      // RESOURCE_DATA insertion order or word overlap.
+      const substitutes = chain.resourceSubstitutes || [];
+      const activeSubstituteKey = !resourceActive
+        ? substitutes
+          .map(resourceKeyForLabel)
+          .find(subKey => subKey && availableResourceKeys.has(subKey)) || null
+        : null;
+      const substituteActive = Boolean(activeSubstituteKey);
+      const resourceInputKey = resourceActive
+        ? resourceKey
+        : activeSubstituteKey || resourceKey;
+
+      // Most alternatives share processors and outputs. Heterogeneous chains
+      // (the compact mining families) declare resource-specific variants so a
+      // stone quarry cannot emit iron and a jeweller working gemstones cannot
+      // emit precious-metal coinage.
+      const processingPatterns = (
+        chain.processingInstitutionsByResource?.[resourceInputKey]
+        || chain.processingInstitutions
+      );
+      const matchedInsts = processingPatterns.filter(pattern =>
+        insts.some(institution => (
+          institutionMatchesProcessor(institution, pattern)
+        ))
+      );
+      if (matchedInsts.length === 0) return;
+
+      // Entrepôt boost: crossroads/port settlements can run entrepôt chains
+      // even without local resource, as long as they have the logistics institutions.
+      // For ARCANE chains only, magical transit (teleportation circle / planar /
+      // airship infrastructure) counts as the hub route: planar goods arrive
+      // through the circle, not down a road — an isolated teleport metropolis
+      // IS the entrepôt for them. Mundane transit goods still need real roads.
+      // A chain's own processors cannot vouch for its transit: 'Planar traders'
+      // match /planar/, so without this exclusion the planar chain kept itself
+      // running after the settlement lost its Teleportation circle mid-campaign.
+      const isOwnProcessor = (i) => processingPatterns.some(p =>
+        institutionMatchesProcessor(i, p));
+      const hasMagicTransit = insts.some(i =>
+        (institutionMatchesKeyword(i, 'teleportation')
+          || institutionMatchesKeyword(i, 'planar')
+          || institutionMatchesKeyword(i, 'airship'))
+        && !isOwnProcessor(i));
+      const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
+        || (isArcaneChain && hasMagicTransit);
+
+      // Entrepôt-only chains (entrepot:true, resource:null) are pure transit goods —
+      // they REQUIRE a trade hub route (crossroads/port/river). They do NOT fire on road/isolated.
+      const isEntrepotOnly = chain.entrepot && !chain.resource;
+      const runnable = isEntrepotOnly
+        ? (isEntrepotRoute && matchedInsts.length > 0)
+        : (primaryCondition === 'depleted' || resourceActive || resourceAvailable || substituteActive ||
+           (chain.entrepot && isEntrepotRoute && matchedInsts.length > 0));
+
+      if (!runnable) return;
+
+      // External mill detection: if the settlement has "Access to external mill" but no
+      // actual local mill institution, the grain chain functions (food security is real)
+      // but surplus cannot be exported — the lord's mill toll captures any excess.
+      // Id-first (A+ generators.6): the local-mill gate reuses the shared
+      // export-gate matcher (its 'mill' predicate already excludes "access to
+      // external mill"); external-mill access is a plain keyword match. Both are
+      // rename-proof for stamped institutions and id===name-predicate by
+      // construction, so this check no longer hand-rolls the mill name special-case.
+      const hasLocalMill = insts.some(i => institutionMatchesGate(i, 'mill'));
+      const hasExternalMill = insts.some(i => institutionMatchesKeyword(i, 'access to external mill'));
+      // The banalité lockout applies ONLY to a chain whose processing happens at an
+      // EXTERNAL mill — i.e. the chain itself lists "Access to external mill" as a
+      // processing option (today, only the grain chain). A prior fix scoped on
+      // /\bmill/i over processingInstitutions, which still over-matched any chain that
+      // merely uses a LOCAL 'Mills (2-5)'/'Sawmill' — e.g. floodplain_agriculture and
+      // river_milling — wrongly suppressing their exports and stamping the grain-specific
+      // banalité note on a non-grain chain. Keying off external-mill support is the exact
+      // mechanism and stays correct if a future chain genuinely supports external milling.
+      const supportsExternalMill = (chain.processingInstitutions || []).some(p =>
+        /access to external mill/i.test(p)
+      );
+      const externalMillOnly = supportsExternalMill && hasExternalMill && !hasLocalMill;
+      const effectiveExportable = externalMillOnly ? false : chain.exportable;
+      const externalMillNote = externalMillOnly
+        ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
+          'Local food security is maintained but surplus flour cannot be exported — ' +
+          'the mill toll captures any excess. Loss of mill access would break this chain.'
+        : null;
+      const outputs = (
+        chain.outputsByResource?.[resourceInputKey]
+        || chain.outputs
+      );
+      const label = (
+        chain.labelsByResource?.[resourceInputKey]
+        || chain.label
+      );
+
+      activeChains.push({
+        needKey,
+        needLabel: need.label,
+        needIcon: need.icon,
+        needColor: need.color,
+        chainId: chain.id,
+        label,
+        upstreamChains: chain.upstreamChains || [],
+        resourceIcon: chain.resourceIcon,
+        resource: chain.resource,
+        resourceKey,
+        resourceCondition: primaryCondition,
+        resourceActive,
+        resourceInputKey,
+        resourceInputCondition: substituteActive ? 'available' : primaryCondition,
+        resourceInputAvailable: resourceAvailable || resourceActive || substituteActive,
+        processingInstitutions: matchedInsts,
+        outputs: outputs.slice(0, 4),
+        services: chain.services,
+        exportable: effectiveExportable,
+        entrepot: chain.entrepot,
+        entrepotNote: chain.entrepotNote || null,
+        externalMillNote,
+        activatedByResource: chainActivatedByResource.has(chainId),
+        substituteActive,
+        resourceDepleted: primaryCondition === 'depleted',
+      });
+    });
+  });
+
+  // Enrich each chain with dependency status by cross-referencing tradeDependencies
+  if (tradeDependencies.length > 0) {
+    activeChains.forEach(chain => {
+      // Find matching trade dependency for any processing institution in this
+      // chain (A+ generators.7, owner-approved). Id-first: when the dependency
+      // names a catalog institution, resolve it to its id and ask whether it is
+      // in the chain pattern's id-set — the same rename-proof join the chain
+      // processors use. The fragile mutual 10-char-prefix substring match
+      // remains ONLY as the fallback for unstamped/custom dependency
+      // institutions. This is NOT output-neutral: id-match is stricter than the
+      // prefix heuristic, which over-joined a "Mill" dependency onto the timber
+      // chain (whose processor is a sawmill, not a flour mill) — that false
+      // dependency is now correctly dropped (golden manifest updated).
+      const dep = tradeDependencies.find(d => {
+        const depId = catalogIdForName(d.institution);
+        return chain.processingInstitutions.some(p =>
+          depId
+            ? processorPatternIdSet(p).has(depId)
+            : (d.institution.toLowerCase().includes(p.toLowerCase().slice(0, 10)) ||
+               p.toLowerCase().includes(d.institution.toLowerCase().slice(0, 10)))
+        );
+      });
+      if (dep) {
+        chain.dependency = {
+          institution: dep.institution,
+          resource: dep.resource,
+          severity: dep.severity,
+          impact: dep.impact,
+          affectedServices: dep.affectedServices || [],
+        };
+        chain.status = chain.resourceInputCondition === 'depleted'
+          ? 'impaired'
+          : dep.severity === 'critical' ? 'impaired'
+          : dep.severity === 'high' ? 'vulnerable'
+          : 'vulnerable';
+      } else {
+        chain.status = chain.resourceInputCondition === 'depleted' ? 'impaired'
+          : chain.substituteActive ? 'vulnerable'
+          : chain.activatedByResource ? 'running'
+          : chain.entrepot ? 'entrepot'
+          : 'operational';
+      }
+    });
+  } else {
+    activeChains.forEach(chain => {
+      chain.status = chain.resourceInputCondition === 'depleted' ? 'impaired'
+        : chain.substituteActive ? 'vulnerable'
+        : chain.activatedByResource ? 'running'
+        : chain.entrepot ? 'entrepot'
+        : 'operational';
+    });
+  }
+
+  // Sort: impaired first, then running (resource-activated), then entrepôt, then operational
+  activeChains.sort((a, b) => {
+    const rank = { impaired: 0, vulnerable: 1, running: 2, entrepot: 3, operational: 4 };
+    const ra = rank[a.status] ?? 5, rb = rank[b.status] ?? 5;
+    if (ra !== rb) return ra - rb;
+    if (a.activatedByResource !== b.activatedByResource)
+      return a.activatedByResource ? -1 : 1;
+    return compareCodepoint(a.needLabel, b.needLabel);
+  });
+
+  // ── Inter-chain dependency cascade ─────────────────────────────────────────────
+  // Upstream chain status propagates to downstream chains that depend on them.
+  // brewing ← grain | smelting ← fuel | leather_goods ← livestock/hunting
+  // textile_finishing ← textiles | ceramics_brick ← fuel | weapons_armor ← smelting
+  const chainById = Object.fromEntries(activeChains.map(c => [c.chainId, c]));
+
+  const CHAIN_DEPS = {
+    brewing:          ['grain'],
+    food_processing:  ['grain'],
+    animal_husbandry: ['livestock','forage'],
+    smelting:         ['fuel','timber'],
+    weapons_armor:    ['iron','smelting'],
+    ceramics_brick:   ['fuel','reed_marsh'],
+    textile_finishing:['textiles'],
+    leather_goods:    ['leather','livestock','hunting'],
+    bowyer_fletcher:  ['timber'],
+    shipbuilding:     ['timber'],
+    coastal_shipbuilding: ['timber'],
+    beekeeping_wax:   ['forage'],
+    precious_metals_mining: ['fuel'],
+    caravan_trade:    ['animal_husbandry','grain'],
+  };
+
+  Object.entries(CHAIN_DEPS).forEach(([downstreamId, upstreamIds]) => {
+    const downstream = chainById[downstreamId];
+    if (!downstream) return;
+    const impaired = upstreamIds.some(uid => {
+      const up = chainById[uid];
+      return up && (up.status === 'impaired' || up.resourceInputCondition === 'depleted');
+    });
+    const vulnerable = !impaired && upstreamIds.some(uid => {
+      const up = chainById[uid];
+      return up && up.status === 'vulnerable';
+    });
+    if (impaired && downstream.status === 'running') {
+      downstream.status = 'vulnerable';
+      downstream.upstreamNote = `Upstream supply chain impaired — ${upstreamIds.join(' or ')} disrupted`;
+    } else if (vulnerable && downstream.status === 'running') {
+      // vulnerable upstream makes downstream slightly at risk — don't change status, just note
+      downstream.upstreamNote = `Dependent on stressed upstream: ${upstreamIds.join(' or ')}`;
+    }
+  });
+
+  // Magic substitution — delegated to chainMagicSubstitution.js
+  applyMagicSubstitution(activeChains, traditions, magicPriority, tier);
+
+  // ── Multi-order chain resolution ─────────────────────────────────────────────
+  // For each active chain, check if its upstream dependencies are also active.
+  // Missing upstream → chain is impaired (must import intermediate goods).
+  // Impaired upstream → chain is vulnerable (inherits upstream weakness).
+  // This runs after magic substitution so magic recovery already applied.
+
+  const activeChainIds = new Set(activeChains.map(c => c.chainId));
+
+  activeChains.forEach(chain => {
+    const upstream = chain.upstreamChains || [];
+    if (upstream.length === 0) return;
+
+    const missingUpstream = upstream.filter(uid => !activeChainIds.has(uid));
+    const impairedUpstream = upstream.filter(uid => {
+      const up = activeChains.find(c => c.chainId === uid);
+      return up && (up.status === 'impaired' || up.status === 'vulnerable');
+    });
+
+    if (missingUpstream.length > 0) {
+      // Upstream chain not present → must import intermediate goods
+      // Downgrade status unless already impaired/entrepot
+      if (chain.status === 'running' || chain.status === 'operational') {
+        chain.status = 'vulnerable';
+        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')} — no local source`;
+        chain.upstreamMissing = missingUpstream;
+      }
+    } else if (impairedUpstream.length > 0) {
+      // Upstream is active but weak → inherit vulnerability
+      if (chain.status === 'running' || chain.status === 'operational') {
+        chain.status = 'vulnerable';
+        chain.upstreamNote = `Upstream ${impairedUpstream.join(', ')} chain is impaired`;
+        chain.upstreamWeak = impairedUpstream;
+      }
+    }
+  });
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  // Second pass: propagate vulnerability from impaired upstream to dependents
+  // (needed because first pass may not process chains in dependency order)
+  activeChains.forEach(chain => {
+    const upstream = chain.upstreamChains || [];
+    if (upstream.length === 0) return;
+    if (chain.status === 'vulnerable' || chain.status === 'impaired') return; // already downgraded
+    const impairedUpstream = upstream.filter(uid => {
+      const up = activeChains.find(c => c.chainId === uid);
+      return up && (up.status === 'impaired' || up.status === 'vulnerable');
+    });
+    if (impairedUpstream.length > 0) {
+      chain.status = 'vulnerable';
+      chain.upstreamNote = chain.upstreamNote ||
+        `Upstream ${impairedUpstream.join(', ')} chain is impaired`;
+      chain.upstreamWeak = impairedUpstream;
+    }
+  });
+
+  return activeChains;
+}
+
+// ── Trade derivation from chains ──────────────────────────────────────────────
+// These replace the heuristic export/import/localProduction computation in
+// generateEconomicState with chain-first derivation.
+
+/**
+ * Derive primaryExports from active chains + nearby resource tradeGoods.
+ * Three sources: raw resource outputs, chain processed outputs, entrepôt transit.
+ */
+
+// Institution gates for resource-derived trade goods.
+// If a good appears here, it can only be exported if the settlement has
+// an institution whose name includes the specified keyword.
+// Goods NOT in this map are raw/extractable without processing.
+const RESOURCE_GOOD_INST_GATES = {
+  'shipbuilding_timber': { 'Milled lumber': 'sawmill' },
+  'river_mills':         { 'Milled flour': 'mill', 'Processed grain': 'mill', 'Fulled cloth': 'fuller' },
+  'river_clay':          { 'Fired brick': 'brickmaker', 'Pottery and ceramics': 'potter', 'Roof tiles': 'brickmaker' },
+  'managed_forest':      { 'Milled timber': 'sawmill', 'Hardwood beams': 'carpenter', 'Charcoal': 'charcoal' },
+  'foraging_areas':      { 'Alchemical reagents': 'alchemist' },
+  'grain_fields':        { 'Milled flour': 'mill' },
+  'grazing_land':        { 'Dairy products': 'dairy', 'Leather goods': 'tannery' },
+  'iron_deposits':       { 'Basic metalwork': 'blacksmith', 'Weapons and armour': 'blacksmith' },
+  'stone_quarry':        { 'Building materials': 'mason' },
+  'precious_metals':     { 'Coin minting': 'mint', 'Jewellery': 'jewel' },
+  'gemstone_deposits':   { 'Cut gemstones': 'jewel', 'Luxury goods': 'jewel' },
+  'ancient_ruins':       { 'Rare texts': 'sage' },
+  'magical_node':        { 'Arcane reagents': 'alchemist', 'Magical services': 'wizard' },
+};
+
+// Extraction gates for raw resource access.
+// Even the raw form of a resource cannot be commercially exported unless the settlement
+// has at least one institution capable of extracting it at a commercial scale.
+// Surface-collectable resources (salt flats, foraging, hot springs) have no gate.
+// Positional resources (crossroads, defended pass) have no gate.
+const RESOURCE_EXTRACTION_GATES = {
+  // Subterranean — require active mining/smithing to reach ore
+  // At city+ scale: "multiple courthouses", "warehouse district" etc. don't mine.
+  // Smelter, blacksmith, or any mine variant counts.
+  'iron_deposits':      ['mine', 'smelter', 'blacksmith', 'forge'],
+  'stone_quarry':       ['quarry', 'mason', 'stonemason', 'construction'],
+  // coal_deposits: no extraction gate — resource desc explicitly 'Surface-accessible fuel'
+  // Peat and surface coal seams are gathered like foraging, not mined.
+  'precious_metals':    ['mine', 'smelter'],  // requires actual mining — jewellers buy refined metal, don't mine
+  'gemstone_deposits':  ['mine'],                              // requires mining to extract gems from rock
+  // Water — require organized fishing infrastructure at any tier.
+  // Includes "fish market" (village), "fisher's landing" (hamlet), "fishmonger" (village),
+  // "docks/port facilities" (town+), "harbour master's office" (city).
+  'fishing_grounds':    ['fishmonger', 'dock', 'fishing', "fisher's", 'fishery', 'fish market', 'harbour', 'barge'],
+  'river_fish':         ['fishmonger', "fisher's", 'fishing', 'dock', 'fish market', 'harbour', 'barge', 'ferry'],
+  'river_mills':        ['mill'],  // the mill IS the extraction — without it, the mill site is unused
+  'deep_harbour':       ['dock', 'port', 'harbour', 'shipyard'],
+  // Timber — require organized harvesting at commercial scale
+  'managed_forest':     ['sawmill', 'woodcutter', 'charcoal', 'carpenter', 'lumber'],
+  'shipbuilding_timber':['sawmill', 'carpenter', 'shipyard'],
+  // Hunting — require organized hunting or trapping operation
+  'hunting_grounds':    ['hunter', 'wildfowl', 'warden', 'furrier'],
+  // Desert terrain resources
+  'camel_herds':        ['stable', 'caravanserai', 'market'],
+  // Mountain timber — requires logging operation
+  'mountain_timber':    ['sawmill', 'charcoal', 'carpenter', 'lumber'],
+  // No gate: salt_flats, foraging_areas, ancient_grove, grain_fields, grazing_land,
+  //          crossroads_position, defended_pass, ancient_ruins, hot_springs, magical_node,
+  //          marshlands, fertile_floodplain, river_clay, oasis_water, date_palms,
+  //          glass_sand, desert_salt, alpine_pasture, hot_springs_mineral
+};
+
+// Institution gates for chain-derived output goods.
+// Even if a chain is active, some of its outputs are byproducts that require
+// a specific additional institution to actually produce and export.
+const CHAIN_OUTPUT_INST_GATES = {
+  'Leather goods':          'tannery',
+  'Leather armour':         'tannery',
+  'Boots and shoes':        'tannery',
+  'Saddles and harness':    'tannery',
+  'Tanned leather':         'tannery',
+  'Milled flour':           'mill',
+  'Milled timber':          'sawmill',
+  'Milled lumber':          'sawmill',
+  'Fired brick':            'brickmaker',
+  'Pottery and ceramics':   'potter',
+  'Roof tiles':             'brickmaker',
+  'Hardwood beams':         'carpenter',
+  'Coin minting':           'mint',
+  'Jewellery':              'jewel',
+  'Cut gemstones':          'jewel',
+  'Alchemical reagents':    'alchemist',
+  'Basic metalwork':        'blacksmith',
+  'Weapons and armour':     'blacksmith',
+  'Building materials':     'mason',
+  'Dairy products':         'dairy',
+  'Fulled cloth':           'fuller',
+  // Mining outputs — require active extraction, not just working purchased metal
+  'Precious metals':        ['mine', 'smelter'],
+  'Raw gemstones':          ['mine'],
+  'Iron ore':               ['mine', 'smelter', 'blacksmith'],
+  'Quarried stone':         ['quarry', 'mason', 'stonemason'],
+  // Hunting outputs — require organized hunting or trapping
+  'Game meat':              ['hunter', 'wildfowl', 'warden', 'furrier'],
+  'Furs and pelts':         ['hunter', 'wildfowl', 'warden', 'furrier'],
+  'Hunting trophies':       ['hunter', 'wildfowl', 'warden'],
+  // Fish outputs — require organized fishing infrastructure
+  'Salted fish':            ['fishmonger', "fisher's", 'fishing', 'dock', 'fish market', 'harbour', 'barge'],
+  'Smoked seafood':         ['fishmonger', "fisher's", 'fishing', 'dock', 'fish market', 'harbour'],
+  'River fish':             ['fishmonger', "fisher's", 'fishing', 'dock', 'fish market', 'harbour', 'barge', 'ferry'],
+  'Freshwater catch':       ['fishmonger', "fisher's", 'fishing', 'dock', 'fish market', 'harbour', 'barge', 'ferry'],
+};
+
+
+export function deriveExportsFromChains(
+  activeChains,
+  nearbyResources,
+  tier,
+  route,
+  stressTypes = [],
+  goodsToggles = {},
+  depletedResources = [],
+  institutions = [],
+  worldLaw = null,
+) {
+  // Isolated low-tier settlements are subsistence only — nothing leaves, no trade route exists
+  const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
+  if (route === 'isolated' && SUBSISTENCE_TIERS.includes(tier)) {
+    return []; // no exports — produce for local consumption only
+  }
+
+  const isSieged   = stressTypes.includes('under_siege');
+  const isOccupied = stressTypes.includes('occupied');
+  const exports    = new Set();
+
+  const depletedKeys = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const chainIsDepleted = (chain) => {
+    if (chain.resourceInputCondition) {
+      return chain.resourceInputCondition === 'depleted';
+    }
+    return (
+      chain.resourceDepleted
+      || (chain.resource && depletedKeys.has(resourceKeyForLabel(chain.resource)))
+    );
+  };
+
+  // 1. Raw material exports from nearby resources (what the land provides directly)
+  // Skip depleted resources — they're consumed locally, nothing available to export
+  // For processed goods (e.g. "Weapons and armour" from iron_deposits), check that the
+  // settlement has the required institution before adding to exports.
+  // Use actual settlement institution names for gating processed exports.
+  // This prevents "Access to external mill" from passing the 'mill' keyword check —
+  // we match only the institution name as a whole, not substrings of longer names.
+  // Id-first for stamped institutions (rename-proof exports), with the bespoke
+  // gate name-predicate — including the 'mill' ≠ "access to external mill"
+  // special case — preserved as the fallback for unstamped institutions
+  // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
+  const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
+
+  nearbyResources.forEach(rk => {
+    if (depletedKeys.has(rk)) return; // depleted: no surplus to export
+    const rd = RESOURCE_DATA[rk];
+    if (!rd?.tradeGoods) return;
+    // Extraction gate: some resources require an institution to access at commercial scale.
+    // Without a mine you can't export iron ore; without a sawmill/woodcutter you can't export timber.
+    const extractionKws = RESOURCE_EXTRACTION_GATES[rk];
+    if (extractionKws && !extractionKws.some(kw => _hasInstForGate(kw))) return;
+    // Processing gate: finished goods within this resource require specific institutions.
+    const gatesForResource = RESOURCE_GOOD_INST_GATES[rk] || {};
+    rd.tradeGoods.forEach(g => {
+      const requiredInst = gatesForResource[g];
+      if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
+      exports.add(g);
+    });
+  });
+
+  // 2. Processed outputs from non-impaired, exportable chains
+  // Skip chains whose primary resource is depleted (consumed locally, nothing left to export)
+  // Also gate byproduct outputs that require a specific additional institution.
+  activeChains
+    .filter(ch => ch.exportable && ch.status !== 'impaired' && !chainIsDepleted(ch))
+    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => {
+      const requiredInst = CHAIN_OUTPUT_INST_GATES[o];
+      if (requiredInst) {
+        const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
+        if (!kws.some(kw => _hasInstForGate(kw))) return;
+      }
+      exports.add(o);
+    }));
+
+  // 3. Entrepôt transit goods — flagged distinctively
+  activeChains
+    .filter(c => c.entrepot && c.status !== 'impaired')
+    .forEach(chain => chain.outputs.slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
+
+  // Apply stress: siege collapses exports, occupation taxes them
+  let list = [...exports];
+  if (isSieged) {
+    const maritimeSupply =
+      worldLaw?.supportsMaritime?.()
+      ?? route === 'port';
+    list = maritimeSupply
+      ? list.slice(0, 3).map(e => `${e} (naval route only)`)
+      : [];
+  } else if (isOccupied) {
+    list = list.slice(0, 5).map(e => `${e} (taxed by occupation)`);
+  }
+
+  // Apply forced/excluded goods from DM toggles
+  if (goodsToggles && Object.keys(goodsToggles).length > 0) {
+    const rx = /_good_(.+)$/;
+    Object.entries(goodsToggles).forEach(([key, val]) => {
+      const m = key.match(rx);
+      if (!m) return;
+      const name = m[1];
+      if (val.force && !list.some(e => e.toLowerCase().includes(name.toLowerCase()))) {
+        list.push(name);
+      } else if (val.allow === false) {
+        list = list.filter(e => !e.toLowerCase().includes(name.toLowerCase()));
+      }
+    });
+  }
+
+  // Deduplicate (transit versions may duplicate raw versions)
+  const seen = new Set();
+  list = list.filter(e => {
+    const base = e.replace(' (transit)', '').replace(' (naval route only)', '').replace(' (taxed by occupation)', '').toLowerCase();
+    if (seen.has(base)) return false;
+    seen.add(base);
+    return true;
+  });
+
+  return list.slice(0, 12);
+}
+
+/**
+ * Derive primaryImports from chain dependency gaps + tier-based necessities.
+ * Imports = what chains need but the settlement doesn't have locally.
+ */
+export function deriveImportsFromChains(activeChains, nearbyResources, tier, route, necessityImports = [], hasMagicTrade = false) {
+  // Isolated low-tier settlements have no trade route — nothing comes in
+  const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
+  if (
+    !hasMagicTrade
+    && (
+      route === 'none'
+      || (
+        route === 'isolated'
+        && SUBSISTENCE_TIERS.includes(tier)
+      )
+    )
+  ) {
+    return []; // no imports — self-sufficient or going without
+  }
+
+  const imports = new Set();
+
+  // 1. Resources required by active chains not covered by nearby resources
+  // Clean compound labels ("Iron + fuel") to the primary resource only
+  activeChains.forEach(chain => {
+    if (chain.dependency) {
+      const raw = chain.dependency.resource || '';
+      // Take only the first part if compound (e.g. "Iron + fuel" → "Iron")
+      const clean = raw.split(/\s*[+/]\s*/)[0].trim();
+      if (clean) imports.add(clean);
+    }
+  });
+
+  // 2. Legacy necessity imports (things generator flagged as always-needed)
+  necessityImports.forEach(i => imports.add(i));
+
+  // 3. Upstream dependency imports — chains running without their upstream chain
+  // These represent intermediate goods that must be imported to sustain the chain
+  const UPSTREAM_IMPORT_LABELS = {
+    'iron':              'Iron ore',
+    'fuel':              'Charcoal and fuel',
+    'grain':             'Grain and malt',
+    'livestock':         'Raw hides and animal products',
+    'textiles':          'Raw cloth',
+    'clay':              'Clay and raw materials',
+    'food_processing':   'Preserved provisions',
+    'smelting':          'Refined iron and metalwork',
+    'warehouse_logistics': 'Warehousing and logistics services',
+    'cartography':       'Route maps and intelligence',
+    'hunting':           'Raw furs and pelts',
+    'precious_metals_mining': 'Precious metals and bullion',
+    'stone':             'Cut stone and masonry',
+  };
+  activeChains.forEach(chain => {
+    if (!chain.upstreamMissing || chain.upstreamMissing.length === 0) return;
+    if (['isolated', 'none'].includes(route) && !hasMagicTrade) return;
+    chain.upstreamMissing.forEach(missingId => {
+      const label = UPSTREAM_IMPORT_LABELS[missingId];
+      if (label) imports.add(label);
+    });
+  });
+
+  // 4. Tier-based structural imports not yet covered
+  if (['town','city','metropolis'].includes(tier)) {
+    const hasGrain = nearbyResources.some(r => r.includes('grain') || r.includes('floodplain'));
+    if (!hasGrain) imports.add('Bulk grain and foodstuffs');
+  }
+  if (['city','metropolis'].includes(tier)) {
+    imports.add('Luxury textiles and exotic goods');
+  }
+  if (tier === 'metropolis') {
+    imports.add('Bulk raw materials and agricultural goods');
+  }
+
+  // Remove anything already in exports (avoid import=export duplicates)
+  // Also filter abstract/internal labels that aren't real tradeable goods
+  const ABSTRACT_IMPORTS = new Set([
+    'Magical ley lines', 'Trade access', 'Ley line access', 'Arcane energy',
+    'Planar energy', 'Divine favor', 'Spiritual energy',
+    'Trade access + grain', 'Trade access + commodities',
+    'Trade access + harbour', 'Trade route access',
+  ]);
+  const importList = [...imports].filter(i => Boolean(i) && !ABSTRACT_IMPORTS.has(i));
+  return importList.slice(0, 10);
+}
+
+/**
+ * Derive localProduction from available resource commodities + locally-run chains.
+ */
+export function deriveLocalProductionFromChains(
+  activeChains,
+  nearbyResources,
+  depletedResources = [],
+) {
+  const local = new Set();
+  const depleted = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+
+  // 1. Terrain commodities — what the land intrinsically provides
+  nearbyResources.forEach(rk => {
+    const key = resourceKeyForLabel(rk) || rk;
+    if (depleted.has(key)) return;
+    const rd = RESOURCE_DATA[key];
+    if (rd?.commodities) rd.commodities.forEach(c => local.add(c.replace(/_/g, ' ')));
+  });
+
+  // 2. Outputs from chains activated by an available local input. A depleted
+  // primary can still be listed as an impaired chain for diagnosis, but it
+  // cannot quietly contribute goods to the production ledger.
+  activeChains
+    .filter(c => (
+      c.activatedByResource
+      && c.status !== 'impaired'
+      && c.resourceInputCondition !== 'depleted'
+      && c.resourceInputAvailable !== false
+    ))
+    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
+
+  return [...local];
+}
+
+// ── Institutional Services ────────────────────────────────────────────────────
+// Tertiary economy — services generated by institutions without a production chain.
+// These contribute to exports and income sources independently of the chain system.
+
+const INSTITUTIONAL_SERVICE_MAP = [
+  // Banking & Finance
+  { patterns:['banking house','banking district','money changer'],
+    output:'Financial services', exportLabel:'Financial services (letters of credit)',
+    incomeLabel:'Banking & Finance', exportable:true, color:'#2a3a7a' },
+  // Legal
+  { patterns:['courthouse','multiple courthouse','court building'],
+    output:'Legal services', exportLabel:'Legal services (contracts, notarial)',
+    incomeLabel:'Legal Services', exportable:true, color:'#3a3a3a' },
+  // Religious / Pilgrimage
+  { patterns:['cathedral','major monaster','monastery','pilgrim'],
+    output:'Religious services', exportLabel:'Pilgrimage & religious tourism',
+    incomeLabel:'Religious Revenue', exportable:true, color:'#5a3a1a' },
+  // Education
+  { patterns:['university','academy of magic','academy'],
+    output:'Higher education', exportLabel:'Educational services (degrees, training)',
+    incomeLabel:'Education & Scholarship', exportable:true, color:'#1a3a7a' },
+  // Military / Mercenary — requires substantial military infrastructure (city+)
+  { patterns:['mercenary quarter','multiple garrison','professional city watch'],
+    output:'Armed escort & mercenary hire', exportLabel:'Military contract services',
+    incomeLabel:'Military Contracts', exportable:true, color:'#8b1a1a' },
+  // Arcane
+  { patterns:['mages\' guild','mages district','academy of magic','spellcasting service'],
+    output:'Arcane & spellcasting services', exportLabel:'Arcane services (identification, enchanting)',
+    incomeLabel:'Arcane Services', exportable:true, color:'#5a2a8a' },
+  // Medical
+  { patterns:['major hospital','hospital network','small hospital'],
+    output:'Medical & surgical services', exportLabel:null,
+    incomeLabel:'Medical Services', exportable:false, color:'#8b1a1a' },
+  // Entertainment / Culture
+  { patterns:['colosseum','arena','bardic college','opera house','multiple theater'],
+    output:'Entertainment & cultural tourism', exportLabel:'Cultural tourism revenue',
+    incomeLabel:'Entertainment & Culture', exportable:true, color:'#7a3a1a' },
+  // Waterborne trade. A dock is valid on a river and therefore cannot, by
+  // itself, prove ocean-going commerce. The projection below promotes this to
+  // maritime wording only when an explicitly maritime institution survives
+  // the canonical world-law filter.
+  { patterns:['docks/port','major port','navy','shipyard'],
+    output:'Waterborne freight services', exportLabel:'Waterborne freight services (cargo, pilotage)',
+    incomeLabel:'Port Revenue', exportable:true, color:'#1a4a6a',
+    waterborne:true },
+  // Library / Knowledge
+  { patterns:['great library','sage'],
+    output:'Research & scholarly services', exportLabel:'Scholarly services (research access, rare texts)',
+    incomeLabel:'Scholarly Revenue', exportable:true, color:'#2a4a2a' },
+  // Alchemy
+  { patterns:['alchemist quarter','alchemist shop'],
+    output:'Alchemical products & services', exportLabel:'Alchemical trade (potions, reagents)',
+    incomeLabel:'Alchemical Trade', exportable:true, color:'#5a2a8a' },
+  // Planar
+  { patterns:['planar trader','planar embassy'],
+    output:'Extraplanar goods & services', exportLabel:'Planar trade access',
+    incomeLabel:'Planar Commerce', exportable:true, color:'#1a1a5a' },
+];
+
+/**
+ * Derive institutional service entries from the settlement's actual institutions.
+ * Returns entries suitable for Economic Flows display and income source contribution.
+ * @param {Array} institutions  - settlement.institutions array
+ * @returns {Array} serviceEntries
+ */
+export function deriveInstitutionalServices(institutions = []) {
+  const services = [];
+  const usedLabels = new Set();
+
+  INSTITUTIONAL_SERVICE_MAP.forEach(def => {
+    // Membership decided by catalog id (rename-proof) for stamped institutions,
+    // substring fallback for unstamped — matched[] still reports display names.
+    // id-match === substring-match for catalog institutions by construction, so
+    // the derived services are byte-identical for generated rosters.
+    const matched = institutions
+      .filter(i => def.patterns.some(p => institutionMatchesKeyword(i, p)))
+      .map(i => (i.name || '').toLowerCase());
+    if (matched.length === 0) return;
+    if (usedLabels.has(def.incomeLabel)) return;
+    usedLabels.add(def.incomeLabel);
+    const maritime = def.waterborne === true && matched.some(name => (
+      /\b(?:major port|navy|shipyard)\b/i.test(name)
+    ));
+
+    services.push({
+      type: 'institutional_service',
+      label: def.incomeLabel,
+      icon: def.icon,
+      color: def.color,
+      output: maritime ? 'Port & maritime services' : def.output,
+      exportLabel: maritime
+        ? 'Maritime services (cargo, pilotage)'
+        : def.exportLabel,
+      exportable: def.exportable,
+      institutions: matched.slice(0, 2),
+      status: 'operational', // services don't impair unless institution itself is gone
+    });
+  });
+
+  return services;
+}
+
+/**
+ * Derive service-economy exports from institutional services.
+ * Only exports from institutions that can actually attract external demand.
+ */
+export function deriveServiceExports(institutionalServices) {
+  return institutionalServices
+    .filter(s => s.exportable && s.exportLabel)
+    .map(s => s.exportLabel);
+}

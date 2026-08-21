@@ -1,0 +1,662 @@
+/**
+ * defenseGenerator.js
+ * Defense profile generation — fortress readiness scores across five dimensions.
+ *
+ * Provides:
+ *  - getDefenseInstitutions: classify institutions into defense categories
+ *  - computeDefenseScores: score military/monster/internal/economic/magical defense
+ *  - computeDefenseReadiness: overall readiness label from scores
+ *  - generateDefenseProfile: main export, assembles the full profile
+ */
+
+import {getInstFlags, getPriorities} from './helpers.js';
+import {computeEffectiveMagicPresence} from './priorityHelpers.js';
+import {
+  nativeSemanticName,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
+import { resolveGenerationWorldLaw } from './generationContext.js';
+
+// ─── getDefenseInstitutions ───────────────────────────────────────────────────
+/**
+ * Partition institution list into defense-relevant groups.
+ *
+ * @param {Array} institutions
+ * @returns {{ walls, garrison, militia, watch, mercenary, charter, magicDef }}
+ */
+const getDefenseInstitutions = (institutions) => {
+  const matches = (inst, keywords) =>
+    keywords.some(kw => nativeSemanticName(inst).toLowerCase().includes(kw));
+
+  return {
+    walls: institutions.filter(i => matches(i, [
+      'wall', 'citadel', 'palisade', 'earthwork',
+      'inner citadel', 'massive walls',
+    ])),
+    garrison: institutions.filter(i => matches(i, [
+      'garrison', 'barracks', 'professional guard',
+      'professional city watch', 'multiple garrison',
+    ])),
+    militia: institutions.filter(i => matches(i, [
+      'citizen militia', 'militia',
+    ])),
+    watch: institutions.filter(i => matches(i, [
+      'town watch', 'city watch', 'professional city watch',
+    ])),
+    mercenary: institutions.filter(i => matches(i, [
+      'mercenary company', 'mercenary quarter', 'hired muscle',
+    ])),
+    charter: institutions.filter(i => matches(i, [
+      "adventurers' charter hall", "adventurers' guild hall",
+      "multiple adventurers'",
+    ])),
+    magicDef: institutions.filter(i => matches(i, [
+      "wizard", "mages' guild", "mage", "academy of magic",
+      "golem workforce", "alchemist",
+    ])),
+  };
+};
+
+// ─── computeDefenseScores ─────────────────────────────────────────────────────
+/**
+ * Calculate five defense dimension scores (0–100 each) from institution
+ * presence, influence scores, and active stress conditions.
+ *
+ * Dimensions:
+ *  military  — conventional force readiness (walls + garrison = highest weight)
+ *  monster   — capacity to handle supernatural/creature threats
+ *  internal  — civil order and law enforcement effectiveness
+ *  economic  — logistical resilience (food, medicine, trade access)
+ *  magical   — arcane defense and countermeasure capability
+ *
+ * @param {Object} inst          - Institution presence flags from getInstFlags
+ * @param {number} milEffective  - Military effective score (0–100)
+ * @param {number} crimEffective - Criminal effective score (0–100)
+ * @param {number} econOutput    - Economy output score (0–100)
+ * @param {number} magInfluence  - Magic influence score (0–100)
+ * @param {number} relInfluence  - Religion influence score (0–100)
+ * @param {Object} priorities    - Raw priority values
+ * @param {string} threat        - Monster threat level
+ * @param {Object} config        - Settlement config
+ * @param {string} tier          - Settlement tier
+ * @param {Array}  stressTypes   - Active stress type strings
+ * @returns {{ military, monster, internal, economic, magical, magicDependency, traditions, economicGates }}
+ */
+const computeDefenseScores = (
+  inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,
+  priorities, threat, config, tier, stressTypes = [],
+) => {
+  const hasStress = (type) => stressTypes.includes(type);
+  const route     = config.tradeRouteAccess || 'road';
+  const magicOn   = config.magicExists !== false; // no-magic mode suppresses supernatural effects
+  const magPri    = magicOn ? (config.priorityMagic ?? 50) : 0;
+  const relPri    = config.priorityReligion ?? 50;
+  const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
+  const _tierIdx   = TIER_ORD.indexOf(tier);
+
+  // ── Tradition detection ─────────────────────────────────────────────────────
+  const institutions = config._institutions || [];
+  const hasInst = (...kws) => institutions.some(i =>
+    kws.some(kw => nativeSemanticName(i).toLowerCase().includes(kw)));
+
+  // Arcane: wizard/mage/sorcerer/enchanter
+  const hasArcane   = magicOn && magPri >= 35 && (
+    inst.hasMagicInst ||
+    hasInst('wizard','mages','arcane','enchant','spellcasting','academy of magic','mages\' district')
+  );
+  // Strong arcane: organised guild-level
+  const hasArcaneGuild = magicOn && magPri >= 55 && hasInst(
+    'mages\' guild','wizard\'s tower','arcane academy','mages\' district','academy of magic'
+  );
+
+  // Divine: cleric/temple — uses religion priority as primary gate (not magic)
+  // Suppressed in no-magic mode for supernatural effects
+  const hasDivine   = magicOn && relPri >= 55 && (
+    hasInst('cathedral','monastery','great cathedral','parish church') ||
+    (relPri >= 65 && hasInst('shrine','temple','friary'))
+  );
+  // Strong divine: cathedral/monastery level
+  const hasDivineStrong = magicOn && relPri >= 65 && hasInst('cathedral','monastery','great cathedral');
+
+  // Druid/nature tradition — not route-gated, but more likely in certain contexts
+  const hasDruid    = magicOn && magPri >= 30 && hasInst(
+    'druid circle','grove shrine','elder grove','warden\'s lodge','sacred grove'
+  );
+
+  // Alchemy — amplifier tradition, lower magic threshold
+  const hasAlchemy  = magicOn && magPri >= 15 && hasInst(
+    'alchemist','apothecary district','alchemist quarter'
+  );
+
+  // ── Tier-appropriate community defense baseline (thorp/hamlet/village) ─────
+  // Small settlements don't have garrison/walls — they have terrain, cohesion,
+  // and community alertness. Score these directly rather than penalising absence.
+  const isSmall  = ['thorp','hamlet','village'].includes(tier);
+  const isThorp  = tier === 'thorp';
+  const isHamlet = tier === 'hamlet';
+
+  // Terrain military advantage (natural chokepoints, elevation, approach restriction)
+  const terrainType = config.terrainType || 'plains';
+  const terrainMilMult = terrainType === 'mountain' ? 1.28
+                       : terrainType === 'hills'    ? 1.18
+                       : terrainType === 'forest'   ? 1.12
+                       : terrainType === 'riverside' ? 1.06
+                       : terrainType === 'coastal'  ? 1.02
+                       : 1.00; // plains / desert
+
+  // Community baseline for small settlements
+  let communityMilBase = 0;
+  let communityIntBase = 0;
+  if (isSmall) {
+    // Flight feasibility and terrain alarm (everyone notices strangers)
+    const isolationBonus = route === 'isolated' ? 8 : route === 'road' ? 4 : 2;
+    communityMilBase += isolationBonus;
+    // Community weapons and coordination (every adult armed with tools)
+    communityMilBase += isThorp ? 6 : isHamlet ? 8 : 10;
+    // Internal: tight community self-policing (strangers noticed, disputes mediated by elders)
+    communityIntBase += isThorp ? 18 : isHamlet ? 14 : 10;
+    // Church/shrine as social authority and emergency coordination
+    if (inst.hasChurch) { communityIntBase += 8; communityMilBase += 3; }
+    // Government institution (reeve, elder, lord's steward) = coordination ability
+    if (hasInst('reeve','steward','elder','household council','free elder'))
+      { communityIntBase += 6; communityMilBase += 3; }
+    // No criminal infrastructure = strangers and troublemakers visible immediately
+    const hasCrimOrg = hasInst('fence','smuggl','gang','outlaw');
+    if (!hasCrimOrg) communityIntBase += 6;
+  }
+
+  // ── Military score ──────────────────────────────────────────────────────────
+  let military = communityMilBase;
+  if (inst.hasWalls)       military += 30;
+  if (inst.hasGarrison)    military += 28;
+  if (inst.hasMilitia)     military += 10;
+  if (inst.hasWatch)       military +=  7;
+  if (inst.hasMercenary)   military += 14;
+  if (inst.hasCharterHall) military += 10;
+
+  // Arcane deterrence — scaled (replaces flat +8)
+  if (hasArcane) {
+    const deterrence = Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
+    military += deterrence;
+    if (hasInst('wizard\'s tower')) military += 5; // visible high-level fortification
+    if (hasArcaneGuild)             military += 8; // organised coordinated magic defense
+  }
+  // Divine martial blessing (Bless spell, Crusader morale)
+  if (hasDivineStrong && relPri >= 70) military += 6;
+
+  const hasAnyDefense = inst.hasWalls || inst.hasGarrison || inst.hasMilitia ||
+                        inst.hasWatch || inst.hasMercenary || inst.hasCharterHall;
+  military = Math.min(100, military + Math.round(milEffective * (hasAnyDefense ? 0.35 : 0.06)));
+  // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
+  military = Math.min(100, Math.round(military * terrainMilMult));
+  // Economic-upkeep gate (garrison wages, wall maintenance): paid defenses
+  // degrade when the economy cannot fund them. Same shape as econHealthMult —
+  // identity (×1.0) at econOutput >= 50, linear to the floor at 0 — applied
+  // BEFORE stress penalties so their tuned magnitudes keep meaning. Floor 0.6:
+  // built walls keep standing and unpaid soldiers desert slowly, never
+  // instantly. The community baseline (armed households, terrain alarm) is
+  // unpaid and exempt — only the funded portion above it is gated.
+  const milUpkeepMult = Math.min(1, 0.6 + (econOutput / 50) * 0.4);
+  if (hasAnyDefense && milUpkeepMult < 1) {
+    military = Math.round(communityMilBase + Math.max(0, military - communityMilBase) * milUpkeepMult);
+  }
+
+  // ── Monster score ───────────────────────────────────────────────────────────
+  let monster = 0;
+  // Threat-level baseline even at thorp tier — pitchforks and communal watch
+  if (threat === 'plagued')  monster += 8;
+  else if (threat === 'frontier') monster += 4;
+  const monsterThreatBase = monster;
+  if (inst.hasCharterHall) monster += 35;
+  if (inst.hasGarrison)    monster += 20;
+  if (inst.hasWalls)       monster += 20;
+  if (inst.hasMilitia)     monster += 12;
+  if (inst.hasHospital)    monster +=  5;
+
+  // Tradition bonuses — capped at +35 combined
+  let monsterMagicBonus = 0;
+  if (hasArcane)  monsterMagicBonus += Math.round(15 + Math.min(10, (magPri - 35) * 0.2)); // fireballs, force
+  if (hasDivine)  monsterMagicBonus += 18; // Turn Undead — highest vs undead/fiends
+  if (hasDruid)   monsterMagicBonus += 12; // beast lore, tracking
+  monster = Math.min(100, monster + Math.min(35, monsterMagicBonus));
+  // Economic-upkeep gate (patrol provisioning, bounty purses, charter-hall
+  // retainers): monster coverage costs coin to keep in the field. Floor 0.7 —
+  // higher than the military gate because bounty work partly self-funds.
+  // Identity at econOutput >= 50, applied before stress penalties. The unpaid
+  // portion — the threat-level communal baseline plus the volunteer
+  // traditions (divine clergy, druidic wardens) — is exempt, the same rule
+  // the military/internal gates apply to their community baselines; arcane
+  // response stays gated (retained practitioners cost coin). When the +35
+  // tradition cap binds, the paid arcane share is assumed cut first.
+  const monsterUnpaidBase = monsterThreatBase
+    + Math.min(Math.min(35, monsterMagicBonus), (hasDivine ? 18 : 0) + (hasDruid ? 12 : 0));
+  const monsterUpkeepMult = Math.min(1, 0.7 + (econOutput / 50) * 0.3);
+  if (monsterUpkeepMult < 1) {
+    monster = Math.round(monsterUnpaidBase + Math.max(0, monster - monsterUnpaidBase) * monsterUpkeepMult);
+  }
+  if (threat === 'plagued') monster = Math.max(0, monster - 15);
+
+  // ── Internal order score ────────────────────────────────────────────────────
+  // Community baseline applied first for small tiers
+  let internal = communityIntBase;
+  if (inst.hasCourtSystem)  internal += 20;
+  if (inst.hasPrison)       internal += 15;
+  if (inst.hasGarrison)     internal += 15;
+  if (inst.hasWatch)        internal += 18;
+  if (inst.hasMilitia)      internal +=  8;
+  if (inst.hasCharterHall)  internal +=  5;
+
+  // Arcane surveillance (Scrying, Detect Thoughts)
+  if (hasArcane && magPri >= 50) internal += Math.min(8, Math.round((magPri - 50) * 0.16));
+  // Divine social cohesion (Zone of Truth, sanctuary, confessional intelligence)
+  if (hasDivine && relPri >= 60) internal += Math.min(10, Math.round((relPri - 60) * 0.25));
+
+  const hasLawInfra = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
+  internal = Math.min(100, internal + Math.round(milEffective * (hasLawInfra ? 0.25 : 0.04)));
+  // Economic-upkeep gate (watch wages, court and gaol funding): paid order
+  // institutions degrade unfunded. Floor 0.65; identity at econOutput >= 50.
+  // Community self-policing (the small-tier baseline) is unpaid and exempt.
+  // Applied BEFORE the crime subtraction — a poor settlement's weakened watch
+  // must not also dilute the crime pressure it faces.
+  const internalUpkeepMult = Math.min(1, 0.65 + (econOutput / 50) * 0.35);
+  if (hasLawInfra && internalUpkeepMult < 1) {
+    internal = Math.round(communityIntBase + Math.max(0, internal - communityIntBase) * internalUpkeepMult);
+  }
+  internal = Math.max(0, internal - Math.round(crimEffective * 0.4));
+
+  // ── Economic resilience score ───────────────────────────────────────────────
+  // Primary driver: food storage months (from foodSecurity system)
+  // Secondary: medical, market access, financial capacity
+  // Storage/institutions/routes provide CAPACITY; econOutput multiplicatively
+  // gates the ability to mobilize it (see econHealthMult below) — a destitute
+  // town does not get "Strong economic base" for owning a granary building.
+  const foodSec = config._foodSecurity;
+  const worldLaw = resolveGenerationWorldLaw(null, config);
+  const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
+  // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
+  const storageScore = Math.min(70, Math.round(storageMonths <= 1 ? storageMonths * 10
+                                              : storageMonths <= 6 ? 10 + (storageMonths-1) * 7
+                                              : 45 + (storageMonths-6) * 4));
+  let economic = storageScore;
+  if (inst.hasMarket)   economic += 10;  // financial capacity and merchant access
+  if (inst.hasHospital) economic += 10;  // medical resilience
+  if (route === 'port' && worldLaw.supportsMaritime()) {
+    economic += 10; // sea supply cannot be cut by a land siege
+  }
+  if (route === 'crossroads') economic +=  8; // multiple supply routes
+  economic = Math.min(100, economic + Math.round(econOutput * 0.2));
+  // Alchemy extends granary effective capacity (preservation, food extension)
+  if (hasAlchemy && inst.hasGranary) economic += 8;
+  economic = Math.min(100, economic); // re-cap after alchemy bonus
+  // Economic-health gate: a struggling economy cannot fund crisis logistics.
+  // The additive stack above is almost entirely wealth-independent (storage
+  // months + flat institution/route bonuses), so a destitute famine port
+  // could still score ~70 "Strong economic base". Identity (×1.0) at
+  // econOutput >= 50 — healthy economies are bit-for-bit unchanged; linear
+  // down to ×0.45 at 0 (physical grain in a granary retains value even when
+  // the treasury is empty — never zero it). Applied BEFORE stress penalties
+  // so their tuned absolute magnitudes keep their meaning.
+  const econHealthMult = Math.min(1, 0.45 + (econOutput / 50) * 0.55);
+  economic = Math.round(economic * econHealthMult);
+
+  // ── Magical defense score ───────────────────────────────────────────────────
+  // Driven by computeEffectiveMagicPresence — same source of truth as Daily Life and Power tabs.
+  // Tradition flags (arcane/divine/druid) modify the defensive PROFILE, not the base score.
+  // Tier gate: thorps and hamlets get 0 magical defense unless a magic institution is actually present.
+  // The slider alone shouldn't give tiny settlements magical defense — they have no practitioners.
+  const _isSmallTier = ['thorp','hamlet','village'].includes(tier);
+  // For the tier gate: hasDivine means actual miracle/healing presence, not just a standard parish.
+  // Parish church is universal at village+ — it shouldn't unlock magical defense on its own.
+  // Use hasInst() which is already available in this scope.
+  const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
+    || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+  const _hasMagicInstitution = _hasActualMagic;
+  let magical;
+  if (!magicOn || (_isSmallTier && !_hasMagicInstitution)) {
+    magical = 0; // no magic, or small tier with no magic presence
+  } else {
+    const _magicPresence = computeEffectiveMagicPresence(
+      institutions,
+      { ...config, nearbyResources: config.nearbyResources || [] }
+    );
+    // Effective score IS the magic defense baseline
+    magical = _magicPresence.score;
+    // Tradition modifiers: different traditions emphasize different defensive capabilities
+    if (hasDivine)      magical = Math.min(100, magical + Math.round(relPri * 0.12)); // divine healing, morale
+    if (hasDruid)       magical = Math.min(100, magical + 6);  // nature warding, terrain knowledge
+    if (hasArcaneGuild) magical = Math.min(100, magical + 8);  // organized wards, counterspells
+    // Wire the (previously dead) magInfluence parameter: it is the effective
+    // presence score AFTER economy/crime degradation (priorityHelpers
+    // getInstFlags), so a destitute, crime-ridden city's underfunded and
+    // compromised practitioners drag arcane defense down — same gate shape as
+    // the economic dimension. Divide by the UNGATED presence score (not the
+    // raw slider): the ratio isolates the degradation multipliers, ~1.0 for a
+    // healthy settlement, without double-counting weak presence.
+    if (magPri > 0) {
+      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, _magicPresence.score)));
+      magical = Math.round(magical * magHealthMult);
+    } else {
+      magical = Math.round(magical);
+    }
+  }
+
+  // ── Stress penalties ────────────────────────────────────────────────────────
+  // Base penalties, then tradition-based reductions
+
+  if (hasStress('under_siege')) {
+    let econPenalty     = 25;
+    let internalPenalty = 15;
+    // Arcane: Teleportation supplies in/out, Sending for morale
+    if (hasArcane && magPri >= 65 && hasInst('teleportation','teleport'))
+      econPenalty = Math.round(econPenalty * 0.4);   // -25 → -10
+    else if (hasArcaneGuild && magPri >= 50)
+      internalPenalty = Math.round(internalPenalty * 0.53); // -15 → -8
+    // Divine: sanctuary, morale, consecrate
+    if (hasDivineStrong)
+      internalPenalty = Math.round(internalPenalty * 0.53); // -15 → -8
+    // Druid: conjured food partial offset
+    if (hasDruid && magPri >= 40)
+      econPenalty = Math.round(econPenalty * 0.72); // -25 → -18
+    economic = Math.max(0, economic - econPenalty);
+    internal = Math.max(0, internal - internalPenalty);
+  }
+
+  if (hasStress('famine')) {
+    let econPenalty  = 20;
+    let milPenalty   = 10;
+    let intPenalty   = 20;
+    // Starving militias patrol less: famine previously left MONSTER defense
+    // untouched — a qualitative miss (the watch on the bandit road eats too).
+    let monsterPenalty = 8;
+    // Druid: highest food substitution (65% recovery)
+    if (hasDruid && magPri >= 30) {
+      econPenalty = Math.round(econPenalty * 0.4); // -20 → -8
+      milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
+      monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
+    }
+    // Divine: Create Food and Water, Bless crops. A mitigation CAPS the
+    // penalty — Math.min, never Math.max: the old Math.max form WORSENED the
+    // score whenever the druid branch had already reduced the penalty below
+    // the divine cap (stacking two mitigations must not out-penalize one).
+    if (hasDivine) {
+      econPenalty = Math.min(econPenalty, Math.round(20 * 0.6)); // -20 → -12 (caps)
+      milPenalty  = Math.min(milPenalty,  Math.round(10 * 0.6)); // -10 → -6 (caps)
+    }
+    // Arcane: minor Goodberry, Plant Growth
+    if (hasArcane && magPri >= 50)
+      econPenalty = Math.min(econPenalty, Math.round(20 * 0.75)); // -20 → -15 (caps)
+    // Alchemy: preservation extends existing stores
+    if (hasAlchemy)
+      econPenalty = Math.max(0, econPenalty - 3);
+    economic = Math.max(0, economic - econPenalty);
+    military = Math.max(0, military - milPenalty);
+    internal = Math.max(0, internal - intPenalty);
+    monster  = Math.max(0, monster - monsterPenalty);
+  }
+
+  if (hasStress('occupied')) {
+    military = Math.max(0, military - 35);
+    internal = Math.max(0, internal - 20);
+  }
+
+  if (hasStress('plague_onset')) {
+    let milPenalty  = 15;
+    let econPenalty = 15;
+    // Divine: Remove Disease, mass healing (HIGHEST healer)
+    if (hasDivine) {
+      milPenalty = Math.round(milPenalty * 0.33);   // → -5
+      econPenalty = Math.round(econPenalty * 0.53);  // → -8
+    }
+    // Alchemy: plague remedies, quarantine management
+    if (hasAlchemy) {
+      milPenalty = Math.min(milPenalty, Math.round(15 * 0.53));   // -8
+      econPenalty = Math.min(econPenalty, Math.round(15 * 0.67)); // -10
+    }
+    // Arcane: Heal, mass cure (less efficient)
+    if (hasArcane && magPri >= 50)
+      milPenalty = Math.min(milPenalty, Math.round(15 * 0.67)); // → -10
+    military = Math.max(0, military - milPenalty);
+    economic = Math.max(0, economic - econPenalty);
+  }
+
+  if (hasStress('succession_void')) {
+    military = Math.max(0, military - 15);
+    internal = Math.max(0, internal - 20);
+  }
+  if (hasStress('politically_fractured')) {
+    internal = Math.max(0, internal - 20);
+  }
+  if (hasStress('recently_betrayed')) {
+    internal = Math.max(0, internal - 10);
+    military = Math.max(0, military - 10);
+  }
+  if (hasStress('indebted')) {
+    economic = Math.max(0, economic - 15);
+    military = Math.max(0, military - 10);
+  }
+  if (hasStress('infiltrated')) {
+    internal = Math.max(0, internal - 15);
+    military = Math.max(0, military -  8);
+  }
+
+  if (hasStress('monster_pressure')) {
+    // Base penalty — but magic can REVERSE this into a net positive
+    let monsterPenalty = 20;
+    let milPenalty     = 5;
+    // Arcane: fireballs, force walls — can turn pressure into opportunity
+    if (hasArcane && magPri >= 40) monsterPenalty = Math.round(monsterPenalty * 0.25); // -20 → -5
+    if (hasDivine)                 monsterPenalty = Math.round(monsterPenalty * 0.4);  // -20 → -8
+    if (hasDruid)                  monsterPenalty = Math.round(monsterPenalty * 0.5);  // -20 → -10
+    monster  = Math.max(0, monster  - monsterPenalty);
+    military = Math.max(0, military - milPenalty);
+  }
+
+  // ── Magic dependency flag ───────────────────────────────────────────────────
+  // Computed but returned separately — indicates vulnerability if magic lost
+  // Magic dependency: fires when magic is actively compensating for vulnerabilities
+  // Either under stress with magic filling gaps, OR when multiple traditions present
+  // in a settlement that has supply chain or resource deficits
+  const magicDependency = magicOn && (
+    (hasStress('under_siege') && (hasArcane || hasDruid || hasDivine)) ||
+    (hasStress('famine')      && (hasDruid  || hasDivine)) ||
+    (hasStress('plague_onset')&& (hasDivine || hasAlchemy)) ||
+    (hasArcaneGuild && (hasStress('under_siege') || hasStress('famine')))
+  );
+
+  return /** @type {any} */ ({
+    military, monster, internal, economic, magical,
+    magicDependency,
+    traditions: {
+      hasArcane, hasArcaneGuild, hasDivine, hasDruid, hasAlchemy,
+    },
+    // Attribution for the economics→defense coupling: ×1.0 means fully
+    // funded; below 1.0 the dossier/AI can explain "underfunded garrison"
+    // instead of silently lower bars. military/internal are recorded only
+    // when their gate has a paid stack to bite (hasAnyDefense/hasLawInfra) —
+    // a hamlet with no paid defenses reports no military gate at all.
+    economicGates: {
+      ...(hasAnyDefense ? { military: Math.round(milUpkeepMult * 100) / 100 } : {}),
+      monster: Math.round(monsterUpkeepMult * 100) / 100,
+      ...(hasLawInfra ? { internal: Math.round(internalUpkeepMult * 100) / 100 } : {}),
+      economic: Math.round(econHealthMult * 100) / 100,
+    },
+  });
+};
+
+// ─── computeDefenseReadiness ──────────────────────────────────────────────────
+/**
+ * Compute an overall readiness label and colour from the five scores.
+ * Applies a small bonus for small tiers (simpler to defend) and a
+ * penalty for frontier/plagued threats.
+ *
+ * @param {{ military, monster, internal, economic, magical }} scores
+ * @param {string} threat - Monster threat level
+ * @param {string} tier   - Settlement tier
+ * @returns {{ score, label, color, background, border }}
+ */
+const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
+  // Small tiers are cheaper to defend — small bonus that reflects genuine scale
+  // (fewer approaches, everyone knows everyone, simpler to coordinate)
+  const tierBonus =
+    tier === 'thorp'  ? 12 :
+    tier === 'hamlet' ? 8  :
+    tier === 'village'? 4  :
+    tier === 'town'   ? 2  : 0;
+
+  // Threat level penalty
+  const threatPenalty =
+    threat === 'plagued'  ? 15 :
+    threat === 'frontier' ? 7  : 0;
+
+  // In no-magic worlds, exclude magical dimension from average (can't be penalised
+  // for not having something that doesn't exist in this world)
+  const dims = magicExists
+    ? [scores.military, scores.monster, scores.internal, scores.economic, scores.magical]
+    : [scores.military, scores.monster, scores.internal, scores.economic];
+  const avgScore = Math.round(dims.reduce((a,b)=>a+b,0) / dims.length);
+  // Clamp to [0,100] so the persisted readiness.score is an honest 0-100 metric
+  // (tierBonus can push avgScore past 100 for tiny tiers). Banding is unaffected:
+  // anything >=76 is Fortress either way, so no label changes from the clamp.
+  const readiness = Math.min(100, Math.max(0, avgScore + tierBonus - threatPenalty));
+
+  // Persist the numeric readiness alongside the label. It was previously computed
+  // here and discarded (only the label survived), which left causalState's measured
+  // readiness read permanently dead. Additive: existing consumers use .label/.color.
+  const band =
+    readiness >= 76 ? { label: 'Fortress',         color: '#1a4a2a', background: '#f0faf2', border: '#a8d8b0' } :
+    readiness >= 55 ? { label: 'Well-Defended',    color: '#1a3a6a', background: '#f0f4fa', border: '#a8c0d8' } :
+    readiness >= 38 ? { label: 'Defensible',       color: '#5a6a1a', background: '#f4f8ec', border: '#b8d0a8' } :
+    readiness >= 24 ? { label: 'Lightly Defended', color: '#7a5010', background: '#faf6ec', border: '#e0c880' } :
+    readiness >= 12 ? { label: 'Vulnerable',       color: '#8a3010', background: '#fdf8ec', border: '#e8c080' } :
+                      { label: 'Undefended',       color: '#8b1a1a', background: '#fdf4f4', border: '#e8c0c0' };
+  return { score: readiness, ...band };
+};
+
+// ─── generateDefenseProfile ───────────────────────────────────────────────────
+/**
+ * Assemble the complete defense profile for a settlement.
+ *
+ * @param {Object} settlement - Full settlement object
+ * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object, economicGates:Object }}
+ */
+export function generateDefenseProfile(settlement) {
+  const config       = settlement.config       || {};
+  const institutions = settlement.institutions || [];
+  const stressTypes  = settlement.stress
+    ? (Array.isArray(settlement.stress) ? settlement.stress : [settlement.stress]).map(s => s?.type).filter(Boolean)
+    : (config.stressTypes || config.intendedStressTypes || []);
+
+  const defenseInsts = getDefenseInstitutions(institutions);
+  const instFlags    = getInstFlags(config, institutions);
+
+  const foodSecurity = settlement.economicState?.foodSecurity || null;
+  const scores = computeDefenseScores(
+    instFlags.inst,
+    Math.round(instFlags.militaryEffective),
+    Math.round(instFlags.criminalEffective),
+    Math.round(instFlags.economyOutput),
+    Math.round(instFlags.magicInfluence),
+    Math.round(instFlags.religionInfluence),
+    getPriorities(config),
+    config.monsterThreat || 'frontier',
+    { ...config, _institutions: institutions, _foodSecurity: foodSecurity },
+    settlement.tier || 'town',
+    stressTypes,
+  );
+
+  // ── Supply chain linkage (Item 24) ────────────────────────────────────────
+  // Active garrison/fortification chains and their upstream health
+  // feed into the final score as modifiers (not replacing institution checks)
+  const activeChains = settlement.economicState?.activeChains || [];
+  const chainById = Object.fromEntries(activeChains.map(c => [c.chainId, c]));
+
+  const garrisonChain    = chainById['garrison'];
+  const fortificationChain = chainById['fortification'];
+  const mercenaryChain   = chainById['mercenary'];
+  const foodProcChain    = chainById['food_processing'];
+
+  let chainMilBonus  = 0;
+  let chainEconBonus = 0;
+
+  // A military chain counts as healthy when it is operational/running, OR it is
+  // vulnerable ONLY because its upstream provisioning chain (food_processing→grain,
+  // fortification→stone) is absent/strained AND the settlement can provision via
+  // trade. A connected city's garrison is supplied by IMPORTS even when it has no
+  // local bakers/butchers (upstreamMissing) — the old flat -5 wrongly penalized that,
+  // killing the +5/+6/+4 credit at city/metropolis. But an ISOLATED settlement
+  // genuinely cannot import, so a missing/weak upstream there KEEPS the penalty.
+  // A real LOCAL impairment (trade dependency / active substitute) is never healthy.
+  const canProvision = hasTradeRouteConnection(
+    settlement.config?.tradeRouteAccess
+      || settlement.tradeRoute
+      || 'road',
+  );
+  const chainHealthy = (c) =>
+    !!c && (c.status === 'operational' || c.status === 'running' ||
+      (c.status === 'vulnerable' && !c.dependency && !c.substituteActive && canProvision &&
+        ((c.upstreamMissing && c.upstreamMissing.length) || (c.upstreamWeak && c.upstreamWeak.length))));
+
+  // Garrison chain: healthy = +5 military, genuinely vulnerable (no provisions) = -5
+  if (garrisonChain) {
+    if (chainHealthy(garrisonChain)) chainMilBonus  += 5;
+    else if (garrisonChain.status === 'vulnerable' || garrisonChain.status === 'impaired')  chainMilBonus  -= 5;
+  }
+  // Fortification chain: healthy = +6 military (walls maintained), impaired = -4
+  if (fortificationChain) {
+    if (chainHealthy(fortificationChain)) chainMilBonus  += 6;
+    else if (fortificationChain.status === 'impaired') chainMilBonus -= 4;
+  }
+  // Mercenary chain healthy = +4 military (contract force available)
+  if (chainHealthy(mercenaryChain)) {
+    chainMilBonus += 4;
+  }
+  // Food processing chain healthy = +5 economic defense (logistics well-supplied)
+  if (foodProcChain && foodProcChain.status !== 'impaired') chainEconBonus += 5;
+  // Food processing chain impaired = -8 economic defense (siege logistics strained)
+  if (foodProcChain && foodProcChain.status === 'impaired') chainEconBonus -= 8;
+
+  // Disasters & Famine: the dossier row reads foodSecurity.resilienceScore,
+  // which carries no economic term — but disaster and famine RESPONSE costs
+  // money (relief purchases, granary logistics, work crews). Persist a gated
+  // disaster score (floor 0.55, identity at econOutput >= 50, same shape as
+  // the other upkeep gates); display layers prefer it over raw resilience.
+  const _econOut = Math.round(instFlags.economyOutput);
+  const disasterGate = Math.min(1, 0.55 + (_econOut / 50) * 0.45);
+  const _resilience = foodSecurity?.resilienceScore;
+  const disaster = Number.isFinite(_resilience)
+    ? Math.round(Math.max(0, Math.min(100, _resilience)) * disasterGate)
+    : undefined;
+
+  const { economicGates: econGates = {}, ...scoreFields } = scores;
+  const finalScores = /** @type {any} */ ({
+    ...scoreFields,
+    military: Math.min(100, Math.max(0, scores.military + chainMilBonus)),
+    economic: Math.min(100, Math.max(0, scores.economic + chainEconBonus)),
+    ...(disaster !== undefined ? { disaster } : {}),
+  });
+  const finalReadiness = computeDefenseReadiness(
+    finalScores,
+    config.monsterThreat || 'frontier',
+    settlement.tier || 'town',
+    config.magicExists !== false,
+  );
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  return {
+    scores: finalScores,
+    readiness: finalReadiness,
+    institutions: defenseInsts,
+    magicDependency: finalScores.magicDependency || false,
+    traditions: finalScores.traditions || {},
+    chainModifiers: {
+      military: chainMilBonus,
+      economic: chainEconBonus,
+    },
+    // ×1.0 = fully funded; below 1.0 the dossier/AI can say "underfunded
+    // garrison" / "no purse for famine relief" instead of silently lower bars.
+    economicGates: {
+      ...econGates,
+      ...(disaster !== undefined ? { disaster: Math.round(disasterGate * 100) / 100 } : {}),
+    },
+  };
+}

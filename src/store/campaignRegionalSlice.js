@@ -1,0 +1,716 @@
+/**
+ * campaignRegionalSlice — regional-impact + roaming-stressor actions extracted
+ * from campaignSlice (WS4 decomposition, increment 4).
+ *
+ * These actions all operate on a campaign's regionalGraph / worldState stressors
+ * and the settlements they touch. They were scattered through the campaignSlice
+ * megafile; grouping them here shrinks that file and gives the regional surface a
+ * single home. campaignRuntime.js constructs this body with the same set/get as
+ * the eager entry delegates, then publishes its actions atomically; every
+ * cross-action call still goes through get(), so return semantics do not change
+ * once the route preload has armed the runtime.
+ *
+ * The module imports only leaf helpers (shared persistence, pulse helpers, and
+ * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
+ */
+import {
+  advanceRegionalImpacts,
+  advanceWizardNewsFeed,
+  applyRegionalImpact,
+  conditionFromRegionalImpact,
+  deriveGraphWithDiscoveredCandidates,
+  deriveRegionalGraphFromSaves,
+  ensureRegionalGraph,
+  isRegionalImpactAvailable,
+  setRegionalChannelStatus as domainSetRegionalChannelStatus,
+  setRegionalImpactStatus as domainSetRegionalImpactStatus,
+} from '../domain/region/index.js';
+// Leaf-module imports (not the `export *` barrel). ensureWorldState/proposalIdFor/
+// upsertProposal are light world-state helpers; normalizeStressor/resolveStressorById
+// live in the stressor cluster (stressors → stressorDynamics/stressorGates/
+// foodStockpile). These remain SYNCHRONOUS inside injectCampaignStressor /
+// resolveCampaignStressor / undoCampaignStressorBridge, which settlementSlice's
+// rippleEventThroughWorld calls synchronously on canon edits. The campaign route
+// gate loads this entire body first, preserving that call ordering while keeping
+// the barrel's heavier advance/AI graph out of this capsule.
+import {
+  ensureWorldState,
+  proposalIdFor,
+  upsertProposal,
+} from '../domain/worldPulse/worldState.js';
+import {
+  normalizeStressor,
+  resolveStressorById,
+} from '../domain/worldPulse/stressorsCore.js';
+import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
+import { withoutActiveCondition } from '../domain/activeConditions.js';
+import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import {
+  cloneJson, persistCampaignState, persistSaveUpdate,
+  findActiveCampaign, campaignSettlements,
+} from './campaignSliceShared.js';
+import {
+  campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
+  ensureCampaignWizardNews, campaignClockTick,
+} from './campaignPulseHelpers.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
+
+export const CAMPAIGN_REGIONAL_RUNTIME_SENTINEL = 'settlementforge_campaign_regional_body_v1';
+
+/**
+ * The slice of a pending world-pulse proposal's outcome that the roaming-twin
+ * undo reads. WorldState keeps proposal entries loosely typed
+ * (Record<string, unknown> — many producers, normalized on read), so we narrow
+ * locally to the shape stressors.js#residualOutcome actually writes:
+ * candidateType 'stressor_residual' and condition.triggeredAt.sourceEventTargetId
+ * = the resolved stressor's id.
+ * @typedef {{ candidateType?: string, condition?: { triggeredAt?: { sourceEventTargetId?: string } } }} ResidualOutcomeRef
+ */
+
+// ── Cross-slice contract ──────────────────────────────────────────────────
+// All 14 slices share ONE Immer store, so coupling is by shared state on the
+// draft + get() method calls — not imports. This slice's contract:
+//
+// PROVIDES (read via get() by other slices): setCampaignRegionalGraph,
+//   injectCampaignStressor, resolveCampaignStressor — driven by
+//   settlementSlice.rippleEventThroughWorld on canon edits; the crisisTripleSync
+//   TWIN_ACTION_FILES pin enforces those three are referenced only here + by that
+//   one consumer. undoCampaignStressorBridge is called by settlementSlice's
+//   undoLastEvent. The rest of the regional surface is consumed by UI components.
+// CONSUMES shared state, owned elsewhere, read/written on the draft:
+//   • campaigns                      — campaignSlice
+//   • savedSettlements + the live active view (activeSaveId, settlement,
+//     systemState, editedAt) — settlementSlice
+// Intra-slice fan-out (ignore/applyAll → get().setRegionalImpactStatus etc.) is
+// SAME-slice. Graph/news mechanics live in campaignPulseHelpers.js + domain/region.
+export const createCampaignRegionalSlice = (set, get) => ({
+  // RETIRED (R-5b, owner queue #21): `ensureCampaignRegionalGraph`. It was a
+  // registered operation with no caller anywhere. The envelope it "ensured" is
+  // ensured on every live path already — rebuildCampaignRegionalGraph, the impact
+  // verbs and the pulse helpers each call `ensureRegionalGraph(c.regionalGraph)`
+  // themselves before touching it, which is the single-source shape the R-4 law
+  // asks for. A separate public verb that only did the same thing first was a
+  // second door onto one room.
+
+  /**
+   * Rebuild the structural graph from campaign settlements. Existing channel
+   * curation (status — confirmed/dormant/disabled all sticky — visibility,
+   * confirmedAt, original discoveredAt) is preserved; discovery only refreshes
+   * measurements and adds suggested P0 channels for new pairs.
+   */
+  rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): rebuild replaces
+    // c.regionalGraph, which a running advance's Phase-2 commit AND a resume from a
+    // PARKED pause restore WHOLESALE from the pre-interval snapshot — so a DM's
+    // "Discover channels" (SettlementsPanel → discoverCampaignRegionalChannels →
+    // here) landing in either window is silently reverted. Same null no-op as the
+    // guarded siblings; callers read the returned graph (null = no change).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
+    const { discover = true } = options;
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const saves = campaignSettlements(state, campaignId);
+      c.regionalGraph = discover
+        ? deriveGraphWithDiscoveredCandidates(saves, c.regionalGraph, { now })
+        : deriveRegionalGraphFromSaves(saves, c.regionalGraph, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
+  discoverCampaignRegionalChannels: (campaignId) => {
+    return get().rebuildCampaignRegionalGraph(campaignId, { discover: true });
+  },
+
+  setRegionalChannelStatus: (campaignId, channelId, status) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): DM channel curation
+    // (SettlementsPanel "confirm channel") writes c.regionalGraph, which a running
+    // or PARKED advance restores wholesale — silently dropping the curation. Null
+    // no-op in both windows, matching the guarded regional siblings.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
+    let graph = null;
+    let channelEvent = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      const before = (beforeGraph.channels || []).find(ch => ch.id === channelId);
+      // Build telemetry from the draft INSIDE set() (the channel proxy is revoked
+      // after set returns). was_dm_action: this action is DM-initiated curation.
+      if (before) channelEvent = extractRegionalChannelChange(before, before.status, status, true);
+      c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    if (channelEvent) track(EVENTS.REGIONAL_CHANNEL_STATUS_CHANGED, channelEvent);
+    return graph;
+  },
+
+  // RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`, together with
+  // its domain twin in domain/region/graph.js. It was a DM-curation door onto a
+  // channel's public/gm/hidden field that NO surface opened, in BOTH halves — the
+  // store action had no caller and the pure helper had no caller but that action,
+  // which is the "live Impl behind a dead store surface" shape the atlas kept
+  // finding, here with the Impl dead too. Its advance/parked guard was written
+  // defensively for a "hide channel" wiring that never arrived; a future one must
+  // re-add the guard with the control, which is the honest ordering. VISIBILITY
+  // ITSELF IS UNTOUCHED and still fully live: channels are BORN with a visibility
+  // (relationship bundles mint public/gm/hidden per type), ensureRegionalGraph
+  // normalizes and migrates the field, activeChannelsFrom filters on it, and the
+  // confirmed-channel preservation path carries it across a rediscovery. What is
+  // gone is only the never-opened door for CHANGING it after the fact.
+
+  /**
+   * Register an authored stressor as a ROAMING world-pulse stressor. The
+   * APPLY_STRESSOR canon event bridges here (settlementSlice.applyEvent) so
+   * an authored crisis doesn't just sit on the dossier — the world pulse
+   * ages it: decay, counterforces, synergies, spread, echoes, aftermath.
+   * Upserts by stable stressor id (same byId pattern applyWorldPulse uses),
+   * so re-applying the same crisis at the same settlement overwrites rather
+   * than stacks.
+   */
+  injectCampaignStressor: (campaignId, stressor) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): this writes
+    // c.worldState.stressors, which a running or PARKED advance restores wholesale.
+    // Reachable independently of the canon-edit bridge via the surveyor autonomy
+    // nudge (AutonomyPanel → injectCampaignStressor), so a nudge approved mid-advance
+    // would ghost. The rippleEventThroughWorld caller is upstream-gated (applyEvent
+    // routes clock-bound canon settlements through the already-guarded
+    // queueSettlementEvent), so it never runs in-flight and this guard is inert there
+    // — no split truth. Standalone nudge → clean null no-op (no coupled dossier edit).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
+    let injected = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const normalized = normalizeStressor({ ...stressor, createdAt: now, updatedAt: now });
+      const byId = new Map((worldState.stressors || []).map(s => [s.id, s]));
+      byId.set(normalized.id, normalized);
+      c.worldState = { ...worldState, stressors: [...byId.values()] };
+      c.updatedAt = now;
+      injected = normalized;
+      persistCampaignState(state, campaignId);
+    });
+    return injected;
+  },
+
+  /**
+   * Resolve the ROAMING twin of an authored stressor. The RESOLVE_STRESSOR
+   * canon event bridges here (settlementSlice.applyEvent), mirroring
+   * injectCampaignStressor: the authored type is alias-mapped through
+   * pulseTypeForStressorKey, the matching ACTIVE stressor affecting the
+   * settlement resolves through the same directed path the party-impact hook
+   * uses (resolveStressorById — no roll, echo retained), and its residual
+   * aftermath is queued as pending world-pulse proposals (the outcome shape
+   * applyWorldPulseProposal already consumes) rather than silently written
+   * onto saves. `now` is threaded from the caller's minted timestamp so the
+   * apply stamps one instant everywhere.
+   *
+   * @param {string} campaignId
+   * @param {{ type?: string, settlementId?: string|number, now?: string|null }} [args]
+   */
+  resolveCampaignStressor: (campaignId, { type, settlementId, now = null } = {}) => {
+    let resolved = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const stamp = now || new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const roamingType = pulseTypeForStressorKey(type) || type;
+      if (!roamingType) return;
+      const sid = String(settlementId || '');
+      const match = (worldState.stressors || [])
+        .map(raw => normalizeStressor(raw))
+        .find(st => st.status === 'active'
+          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
+          && (String(st.originSettlementId || '') === sid
+            || (st.affectedSettlementIds || []).map(String).includes(sid)));
+      if (!match) return;
+      const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
+      const result = resolveStressorById(worldState.stressors, match.id, {
+        tick,
+        now: stamp,
+        reason: 'Resolved by DM authoring',
+        emitResidual: true,
+      });
+      if (!result.found) return;
+      let nextWorldState = { ...worldState, stressors: result.stressors };
+      for (const outcome of result.residualOutcomes) {
+        nextWorldState = upsertProposal(nextWorldState, {
+          id: proposalIdFor(outcome, tick),
+          status: 'pending',
+          createdAt: stamp,
+          updatedAt: stamp,
+          tick,
+          outcome: cloneJson(outcome),
+          headline: outcome.headline,
+          summary: outcome.summary,
+          severity: outcome.severity,
+          reasons: outcome.reasons || [],
+        });
+      }
+      c.worldState = nextWorldState;
+      c.updatedAt = stamp;
+      resolved = result.resolved[0] || null;
+      persistCampaignState(state, campaignId);
+    });
+    return resolved;
+  },
+
+  /**
+   * The crisis twin directive's INVERSE, for undoLastEvent: put the roaming
+   * twin back the way it was before the undone event's directive touched it.
+   * The caller passes the declarative withdrawal crisisLifecycle.crisisWithdraw
+   * composed from the popped log entry ({ action, type, twin }); the legacy
+   * eventType vocabulary is still accepted for older callers.
+   *
+   * 'withdraw' (onset undone) — the inject directive upserted the twin:
+   * withdraw it, but ONLY while it still looks directive-born and unevolved
+   * (active, originating here, not spread beyond this settlement). Once the
+   * pulse has spread it the crisis has a life of its own — leave it and say
+   * so on the console rather than silently rewrite world history. When the
+   * pre-event snapshot (`twin`, stamped on logEntry.undo by applyEvent)
+   * holds an earlier stressor the upsert overwrote, that copy is restored
+   * instead.
+   *
+   * 'restore' (resolution undone) — the resolve directive resolved the twin
+   * into an echo and queued its residual aftermath: restore the snapshotted
+   * pre-resolution twin over the echo (same stable id) and drop the still-
+   * PENDING residual proposals that resolution queued. No snapshot (a legacy
+   * log entry) → nothing restorable; a re-ignited ACTIVE stressor already
+   * under the id is left alone.
+   *
+   * @param {string} campaignId
+   * @param {{ action?: 'withdraw'|'restore', eventType?: string, type?: string, settlementId?: string|number, twin?: Object|null }} [args]
+   * @returns {boolean} whether the world state changed
+   */
+  undoCampaignStressorBridge: (campaignId, { action, eventType, type, settlementId, twin = null } = {}) => {
+    // Advance-in-flight guard (store-2): this mutates c.worldState.stressors/proposals,
+    // which a running multi-tick advance replaces wholesale in Phase-2 — the undo would
+    // be silently reverted. No-op with the action's existing boolean shape.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return false;
+    }
+    let changed = false;
+    const act = action
+      || (eventType === 'APPLY_STRESSOR' ? 'withdraw'
+        : eventType === 'RESOLVE_STRESSOR' ? 'restore'
+          : null);
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const roamingType = pulseTypeForStressorKey(type) || type;
+      if (!roamingType) return;
+      const sid = String(settlementId || '');
+      const stressors = (worldState.stressors || []).map(raw => normalizeStressor(raw));
+      const sameType = st => String(st.type).toLowerCase() === String(roamingType).toLowerCase();
+
+      if (act === 'withdraw') {
+        const current = stressors.find(st => st.status === 'active'
+          && sameType(st)
+          && String(st.originSettlementId || '') === sid);
+        if (!current) return;
+        if ((current.affectedSettlementIds || []).map(String).some(id => id !== sid)) {
+          console.debug(`[campaignSlice] undo left roaming stressor ${current.id} in place — the pulse has spread it beyond ${sid}.`);
+          return;
+        }
+        const remaining = stressors.filter(st => st.id !== current.id);
+        c.worldState = {
+          ...worldState,
+          stressors: twin ? [...remaining, normalizeStressor(cloneJson(twin))] : remaining,
+        };
+      } else if (act === 'restore') {
+        if (!twin) {
+          console.debug(`[campaignSlice] undo could not un-resolve the roaming ${roamingType} twin at ${sid} — the log entry predates the twin snapshot.`);
+          return;
+        }
+        const restored = normalizeStressor(cloneJson(twin));
+        const occupant = stressors.find(st => st.id === restored.id);
+        if (occupant && occupant.status === 'active') {
+          console.debug(`[campaignSlice] undo left roaming stressor ${occupant.id} in place — it re-ignited after the undone resolution.`);
+          return;
+        }
+        // Replace the echo (same stable id — echoOf coalesces on it) with the
+        // pre-resolution twin, and drop the resolution's queued aftermath:
+        // residualOutcome stamps the twin's id on the proposal's condition.
+        c.worldState = {
+          ...worldState,
+          stressors: [...stressors.filter(st => !(st.id === restored.id
+            || (st.status === 'residual' && sameType(st) && String(st.originSettlementId || '') === sid))), restored],
+          proposals: (worldState.proposals || []).filter(p => !(p.status === 'pending'
+            && /** @type {ResidualOutcomeRef | undefined} */ (p.outcome)?.candidateType === 'stressor_residual'
+            && String(/** @type {ResidualOutcomeRef | undefined} */ (p.outcome)?.condition?.triggeredAt?.sourceEventTargetId || '') === restored.id)),
+        };
+      } else {
+        return;
+      }
+      c.updatedAt = now;
+      changed = true;
+      persistCampaignState(state, campaignId);
+    });
+    return changed;
+  },
+
+  setCampaignRegionalGraph: (campaignId, regionalGraph) => {
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.regionalGraph = ensureRegionalGraph(regionalGraph);
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
+  // RETIRED (R-5b, owner queue #21): `queueCampaignRegionalImpacts`. Registered,
+  // described, and called by nothing. The live regional lane queues its impacts
+  // INTERNALLY — the pulse path writes them through campaignPulseHelpers and the
+  // DM curates them through setRegionalImpactStatus — so this public verb was a
+  // second entry point that would have bypassed the advance-in-flight guards its
+  // siblings carry. Retiring it removes the bypass along with the dead code.
+
+  setRegionalImpactStatus: (campaignId, impactId, status, patch = {}, opts = {}) => {
+    // Advance-in-flight guard (store-2): a status flip on the regional graph during a
+    // running advance is clobbered by the Phase-2 wholesale regionalGraph replace. No-op
+    // with the action's existing null-graph shape (callers read the returned graph).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return null;
+    }
+    let graph = null;
+    let impactEvent = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      const impact = (beforeGraph.queuedImpacts || []).find(i => i.id === impactId);
+      // Flatten the draft impact to plain telemetry INSIDE set(); was_dm_action
+      // defaults true (this action is DM-initiated unless a caller says otherwise).
+      if (impact) impactEvent = extractRegionalImpactDecision(impact, status, opts.wasDmAction !== false);
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch, { now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    if (impactEvent) track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, impactEvent);
+    return graph;
+  },
+
+  ignoreQueuedRegionalImpact: (campaignId, impactId) => {
+    return get().setRegionalImpactStatus(campaignId, impactId, 'ignored');
+  },
+
+  advanceCampaignRegionalImpacts: (campaignId, ticks = 1, options = {}) => {
+    // Advance-concurrency guard (store-hooks-state-4): advancing regional impacts
+    // mutates c.regionalGraph, which a running interval — and a resume from a
+    // PARKED pause — restores WHOLESALE from its pre-interval snapshot
+    // (advanceInterval.js resume.preRegionalGraph), so a manual advance written
+    // into either window is silently reverted. Same null no-op as its siblings.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = options.now || new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks, { now });
+      c.regionalGraph = advanceRegionalImpacts(beforeGraph, ticks, {
+        ...options,
+        currentTick: c.wizardNews.currentTick,
+        now,
+      });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, {
+        tick: c.wizardNews.currentTick,
+        createdAt: now,
+      });
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
+  applyQueuedRegionalImpact: async (campaignId, impactId) => {
+    // Advance-in-flight guard (store-2): applying an impact mutates both the member
+    // settlement AND the campaign regional graph, both of which a running multi-tick
+    // advance replaces wholesale in Phase-2 — the applied condition would ghost. No-op
+    // with the action's existing null shape (its no-op / save-failure paths return null).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return null;
+    }
+    // Parked-pause window is the same clobber class (store-hooks-state-4): a
+    // resume restores regionalGraph from resume.preRegionalGraph, so an apply
+    // written while an advance is PARKED is reverted just like a mid-advance one.
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) {
+      return null;
+    }
+    // ORDERED writes to prevent split truth (F2): the settlement is the source
+    // of truth for the condition, so the campaign graph must NOT advertise the
+    // impact 'applied' until that settlement is durably saved. Previously both
+    // writes were fire-and-forget and unordered, so a settlement-save failure
+    // after the campaign synced left a reload showing "applied" with no
+    // condition — permanently (the applied status blocks re-apply). We now never
+    // mark applied until the settlement save succeeds, so there is nothing to
+    // roll back.
+    let prepared = /** @type {any} */ (null);
+    // Phase 1 — apply the impact to the settlement LOCALLY (optimistic), capture
+    // a clone for the durable write, but leave the campaign graph 'queued'.
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const graph = ensureRegionalGraph(c.regionalGraph);
+      const impact = graph.queuedImpacts.find(i => i.id === impactId);
+      if (!impact || !isRegionalImpactAvailable(impact)) return;
+      // DM accepting a cross-settlement impact — the regional permission moment.
+      // Flatten the draft impact before set() revokes it.
+      const impactDecision = extractRegionalImpactDecision(impact, 'applied', true);
+
+      const saveIdx = state.savedSettlements.findIndex(save =>
+        String(save.id) === String(impact.targetSettlementId)
+      );
+      if (saveIdx === -1) return;
+
+      const save = state.savedSettlements[saveIdx];
+      // Stamp the campaign clock (batch apply reuses this action per impact, so
+      // it inherits the stamp).
+      const nextSettlement = applyRegionalImpact(save.settlement, impact, { tick: campaignClockTick(c) });
+      if (!nextSettlement) return;
+
+      const now = new Date().toISOString();
+      let systemState = save.campaignState?.systemState || null;
+      try {
+        systemState = deriveSystemState(nextSettlement);
+      } catch (e) {
+        console.warn('[campaignSlice] deriveSystemState failed for regional impact', e);
+      }
+
+      const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
+      state.savedSettlements[saveIdx] = { ...save, settlement: nextSettlement, campaignState, timestamp: now };
+
+      if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
+        state.settlement = nextSettlement;
+        state.systemState = systemState;
+        state.editedAt = now;
+      }
+
+      prepared = {
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+        impact: cloneJson(impact),
+        now,
+        impactDecision,
+      };
+    });
+
+    if (!prepared) return null;
+
+    // Phase 2 — persist the SETTLEMENT first and AWAIT it. persistSaveUpdate
+    // resolves false (never throws) and reports via campaignSyncError on failure.
+    const settlementSaved = await persistSaveUpdate(prepared.saveId, {
+      settlement: prepared.settlement,
+      campaignState: prepared.campaignState,
+    });
+    if (!settlementSaved) {
+      // Settlement never reached the cloud — leave the campaign impact 'queued'
+      // so the two agree on reload. The local optimistic condition reconciles on
+      // the next successful save / re-apply (idempotent). Failure already surfaced
+      // via campaignSyncError.
+      return null;
+    }
+
+    // Phase 3 — settlement is durable: NOW mark the campaign graph applied + sync.
+    let result = /** @type {any} */ (null);
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Guard against a concurrent change between phases: only mark applied if the
+      // impact is STILL queued. If a concurrent Ignore (or any status change)
+      // landed during the awaited save, don't clobber it back to 'applied' — the
+      // settlement is already saved with the condition; the DM's decision wins.
+      if (!beforeGraph.queuedImpacts.find(i => i.id === impactId && i.status === 'queued')) return;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: prepared.now }, { now: prepared.now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: prepared.now });
+      c.updatedAt = prepared.now;
+      persistCampaignState(state, campaignId);
+      result = {
+        saveId: prepared.saveId,
+        settlement: prepared.settlement,
+        campaignState: prepared.campaignState,
+        timestamp: prepared.now,
+        impact: prepared.impact,
+      };
+    });
+
+    if (result && prepared.impactDecision) {
+      track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, prepared.impactDecision);
+    }
+    return result;
+  },
+
+  resolveRegionalImpact: async (campaignId, impactId) => {
+    // Advance-concurrency guard (store-hooks-state-4): resolving mutates BOTH the
+    // member settlement and the campaign regional graph — both restored wholesale
+    // by a running advance's Phase-2 commit AND by a resume from a PARKED pause
+    // (advanceInterval.js resume.preRegionalGraph). Without it the graph marks
+    // 'resolved' but the advance recommits the pre-resolve settlement, so the
+    // condition resurrects while 'resolved' blocks re-resolve — permanently. No-op
+    // with the action's existing null shape, matching applyQueuedRegionalImpact.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
+    // ORDERED writes to prevent split truth (F2, mirroring applyQueuedRegionalImpact):
+    // the settlement is the source of truth for the condition. Resolving REMOVES the
+    // active condition, so the campaign graph must NOT advertise the impact 'resolved'
+    // until that condition-removed settlement is durably saved. Previously the graph
+    // flipped to 'resolved' synchronously while the settlement save was fire-and-forget,
+    // so a save failure left a reload showing 'resolved' with the condition STILL present
+    // — permanently (the resolved status blocks re-resolve). We now never mark resolved
+    // until the settlement save succeeds, so there is nothing to roll back.
+    let prepared = /** @type {any} */ (null);
+    // Phase 1 — remove the condition from the settlement LOCALLY (optimistic), capture
+    // a clone for the durable write, but leave the campaign graph impact 'applied'.
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const graph = ensureRegionalGraph(c.regionalGraph);
+      const impact = graph.queuedImpacts.find(i => i.id === impactId);
+      if (!impact || impact.status !== 'applied') return;
+
+      const saveIdx = state.savedSettlements.findIndex(save =>
+        String(save.id) === String(impact.targetSettlementId)
+      );
+      if (saveIdx === -1) return;
+
+      const save = state.savedSettlements[saveIdx];
+      const condition = conditionFromRegionalImpact(impact);
+      const nextSettlement = withoutActiveCondition(save.settlement, condition.id);
+      const now = new Date().toISOString();
+      let systemState = save.campaignState?.systemState || null;
+      try {
+        systemState = deriveSystemState(nextSettlement);
+      } catch (e) {
+        console.warn('[campaignSlice] deriveSystemState failed while resolving regional impact', e);
+      }
+
+      const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
+      state.savedSettlements[saveIdx] = { ...save, settlement: nextSettlement, campaignState, timestamp: now };
+
+      if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
+        state.settlement = nextSettlement;
+        state.systemState = systemState;
+        state.editedAt = now;
+      }
+
+      prepared = {
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+        impact: cloneJson(impact),
+        now,
+      };
+    });
+
+    if (!prepared) return null;
+
+    // Phase 2 — persist the SETTLEMENT first and AWAIT it. persistSaveUpdate
+    // resolves false (never throws) and reports via campaignSyncError on failure.
+    const settlementSaved = await persistSaveUpdate(prepared.saveId, {
+      settlement: prepared.settlement,
+      campaignState: prepared.campaignState,
+    });
+    if (!settlementSaved) {
+      // The condition-removed settlement never reached the cloud — leave the campaign
+      // impact 'applied' so the two agree on reload (cloud still carries the condition,
+      // graph still 'applied'). The local optimistic removal reconciles on the next
+      // successful save / re-resolve (idempotent). Failure already surfaced via
+      // campaignSyncError.
+      return null;
+    }
+
+    // Phase 3 — settlement is durable: NOW mark the campaign graph resolved + sync.
+    let result = /** @type {any} */ (null);
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Guard against a concurrent change between phases: only mark resolved if the
+      // impact is STILL applied. If a concurrent status change landed during the
+      // awaited save, don't clobber it — the settlement is already saved without the
+      // condition; the latest decision wins.
+      if (!beforeGraph.queuedImpacts.find(i => i.id === impactId && i.status === 'applied')) return;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: prepared.now }, { now: prepared.now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: prepared.now });
+      c.updatedAt = prepared.now;
+      persistCampaignState(state, campaignId);
+      result = {
+        saveId: prepared.saveId,
+        settlement: prepared.settlement,
+        campaignState: prepared.campaignState,
+        timestamp: prepared.now,
+        impact: prepared.impact,
+      };
+    });
+
+    if (result) {
+      // result.impact is a cloneJson (plain, not a revoked draft) — safe to read.
+      track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, extractRegionalImpactDecision(result.impact, 'resolved', true));
+    }
+    return result;
+  },
+
+  applyAllQueuedRegionalImpacts: async (campaignId) => {
+    const graph = get().getCampaignRegionalGraph(campaignId);
+    const ids = graph.queuedImpacts
+      .filter(impact => isRegionalImpactAvailable(impact))
+      .map(impact => impact.id);
+    // Sequential await — each impact's settlement save completes (and its campaign
+    // mark) before the next, keeping the ordered-write guarantee per impact.
+    const results = [];
+    for (const id of ids) {
+      const r = await get().applyQueuedRegionalImpact(campaignId, id);
+      if (r) results.push(r);
+    }
+    return results;
+  },
+
+  ignoreAllQueuedRegionalImpacts: (campaignId) => {
+    const graph = get().getCampaignRegionalGraph(campaignId);
+    const ids = graph.queuedImpacts
+      .filter(impact => impact.status === 'queued')
+      .map(impact => impact.id);
+    for (const id of ids) {
+      get().setRegionalImpactStatus(campaignId, id, 'ignored');
+    }
+    return ids.length;
+  },
+
+  getCampaignRegionalGraph: (campaignId) => {
+    const c = findActiveCampaign(get().campaigns, campaignId);
+    return ensureRegionalGraph(c?.regionalGraph);
+  },
+});

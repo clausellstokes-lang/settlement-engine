@@ -1,0 +1,266 @@
+/**
+ * domain/display/deityEffects.js — the SINGLE SOURCE describing "what each deity
+ * axis does" to the living-world substrate.
+ *
+ * The four deity authoring axes (good/evil · warlike/peacelike · major/minor/cult
+ * · lawful/chaotic) plus the closed mechanical domain set couple into six engine
+ * systems, today scattered across:
+ *   - corruption.js     DEITY_CORRUPTION_TUNING  — good/evil → corruption direction+magnitude
+ *   - corruption.js     DEITY_LAW_TUNING         — lawful/chaotic → law_order + corruption-tolerance
+ *   - disposition.js    DEITY_TEMPER_SIGN, AGGRESSION_TUNING.W_DEITY — warlike/peacelike → aggression
+ *   - deityConstants.js DEITY_RANK_AUTHORITY     — major/minor/cult → religious_authority lift
+ *   - magicProfile.js   DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory — major (+ warlike/evil) → magic legality
+ *   - dispositionProfile.js DEITY_DOMAIN_PRESSURE — war/conquest/hunt/harvest → war-bar pressure
+ *
+ * This module RE-EXPORTS those engine constants (it does not re-tune them) so the
+ * Compendium effect-preview and the dossier Faith-Effects surface read the SAME
+ * numbers the engine applies — the determinism/coupling tests prove equality
+ * (tests/domain/display/deityEffects.test.js). A re-tune in any engine file flows
+ * here automatically; a hand-copied number would silently drift, which is exactly
+ * what this seam prevents.
+ *
+ * DEITY_RANK_AUTHORITY: single source = deityConstants.js, re-exported here for
+ * display consumers. The constant lives in the dependency-free leaf
+ * domain/deityConstants.js so the ENGINE (causalState.deriveReligiousAuthority)
+ * imports it there directly — importing it via THIS module would close the
+ * causalState > deityEffects > magicProfile > causalState cycle (this module
+ * re-exports magicProfile's deity-magic constants, and magicProfile reads
+ * deriveCausalState), which the shrink-only layer-boundary baseline forbids.
+ * Display consumers keep importing it from here (a verbatim re-export — the
+ * referential-identity pin in tests/domain/display/deityEffects.test.js proves
+ * it is the leaf's object, never a copy), so the major/minor/cult
+ * religious-authority lift still has exactly one source.
+ *
+ * PRESENTATION ONLY. Pure, rng-free, no mutation, no store/React. A deity-free
+ * settlement (no embedded snapshot) yields an EMPTY effect list — the dormancy
+ * guarantee — so a non-religion save renders nothing extra.
+ *
+ * The deity snapshot shape (the embedded `config.primaryDeitySnapshot`) carries
+ * `alignmentAxis` (good|evil|neutral), `temperamentAxis` (warlike|peacelike|
+ * neutral), `rankAxis` (major|minor|cult), and `lawAxis` (lawful|chaotic|
+ * neutral). We read the `*Axis` fields — NEVER a legacy `tier`/`alignment` —
+ * matching the engine couplings. A legacy 3-axis deity has no `lawAxis` ⇒ no law
+ * effect (back-compat).
+ */
+
+import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../corruption.js';
+import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../worldPulse/disposition.js';
+import { DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory } from '../magicProfile.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): the display temper sign reads
+// the SAME derivation the engine reads (deityAxes.deityTemper) — a stored
+// temperamentAxis is inert, so display can never disagree with the engine drive.
+import { deityTemper } from '../worldPulse/deityAxes.js';
+// major/minor/cult → religious_authority lift. Single source = deityConstants.js
+// (a dependency-free leaf; see the module header for why the engine reads the
+// leaf while display consumers read this re-export).
+import { DEITY_RANK_AUTHORITY } from '../deityConstants.js';
+import {
+  DEITY_DOMAIN_PRESSURE,
+  DEITY_THRESHOLD_CAP,
+  deityPressureOf,
+} from '../worldPulse/dispositionProfile.js';
+
+// Re-export the engine couplings verbatim — this module is the named single
+// source the UI imports, while the values remain owned by the engine.
+export {
+  DEITY_CORRUPTION_TUNING,
+  DEITY_LAW_TUNING,
+  DEITY_TEMPER_SIGN,
+  AGGRESSION_TUNING,
+  DEITY_MAGIC_LEGALITY_STEPS,
+  deityIsRegulatory,
+  DEITY_RANK_AUTHORITY,
+  DEITY_DOMAIN_PRESSURE,
+  DEITY_THRESHOLD_CAP,
+  deityPressureOf,
+};
+
+/**
+ * The consolidated coupling map — one entry per axis value, naming the engine
+ * system it drives, the signed direction / magnitude, and a human effect string.
+ * The numbers are READ from the re-exported engine constants (never re-typed), so
+ * this object can never disagree with the engine.
+ */
+export const DEITY_AXIS_EFFECTS = Object.freeze({
+  alignment: Object.freeze({
+    evil: Object.freeze({
+      system: 'corruption',
+      // sign −1 ⇒ drives the ONSET side.
+      direction: DEITY_CORRUPTION_TUNING.axisSign.evil,
+      magnitude: DEITY_CORRUPTION_TUNING.span,
+      effect: 'Evil-aligned worship lets corruption take root even without organized crime',
+    }),
+    good: Object.freeze({
+      system: 'corruption',
+      // sign +1 ⇒ drives the EXPOSURE side.
+      direction: DEITY_CORRUPTION_TUNING.axisSign.good,
+      magnitude: DEITY_CORRUPTION_TUNING.span,
+      effect: 'Good-aligned worship exposes corruption and favors incorruptible successors',
+    }),
+  }),
+  temperament: Object.freeze({
+    warlike: Object.freeze({
+      system: 'aggression',
+      direction: DEITY_TEMPER_SIGN.warlike,
+      magnitude: AGGRESSION_TUNING.W_DEITY,
+      effect: "A warlike creed raises the realm's aggression",
+    }),
+    peacelike: Object.freeze({
+      system: 'aggression',
+      direction: DEITY_TEMPER_SIGN.peacelike,
+      magnitude: AGGRESSION_TUNING.W_DEITY,
+      effect: "A peacelike creed tempers the realm's aggression",
+    }),
+  }),
+  rank: Object.freeze({
+    major: Object.freeze({
+      system: 'religious_authority',
+      authorityLift: DEITY_RANK_AUTHORITY.major,
+      effect: 'A major orthodoxy anchors religious authority',
+    }),
+    minor: Object.freeze({
+      system: 'religious_authority',
+      authorityLift: DEITY_RANK_AUTHORITY.minor,
+      effect: 'Minor worship lends modest religious authority',
+    }),
+    cult: Object.freeze({
+      system: 'religious_authority',
+      authorityLift: DEITY_RANK_AUTHORITY.cult,
+      effect: 'A cult remains a fringe following with little authority',
+    }),
+  }),
+  // The 4th axis. Couples to law_order (a DISTINCT lever from the good/evil
+  // corruption knobs): a lawful god lifts order; a chaotic god lowers it AND
+  // makes corruption more tolerated. The signed lift is READ from the engine's
+  // DEITY_LAW_TUNING (never re-typed), so the preview can never disagree.
+  law: Object.freeze({
+    lawful: Object.freeze({
+      system: 'law_order',
+      direction: DEITY_LAW_TUNING.axisSign.lawful,
+      lawOrderLift: DEITY_LAW_TUNING.axisSign.lawful * DEITY_LAW_TUNING.lawOrderSwing,
+      effect: 'A lawful creed strengthens law and order',
+    }),
+    chaotic: Object.freeze({
+      system: 'law_order',
+      direction: DEITY_LAW_TUNING.axisSign.chaotic,
+      lawOrderLift: DEITY_LAW_TUNING.axisSign.chaotic * DEITY_LAW_TUNING.lawOrderSwing,
+      effect: 'A chaotic creed erodes order and tolerates corruption',
+    }),
+  }),
+  // WR-2's finite domain contract. The signed pressure is the read-side engine
+  // constant, while the prose attributes the change to local worship rather than
+  // asserting that a deity acted. Arbitrary authored domains have no entry and
+  // remain presentation-only.
+  domain: Object.freeze({
+    war: Object.freeze({
+      system: 'war_threshold',
+      pressure: DEITY_DOMAIN_PRESSURE.war,
+      effect: 'With disposition channels active, war-domain worship lowers the settlement’s bar for war',
+    }),
+    conquest: Object.freeze({
+      system: 'war_threshold',
+      pressure: DEITY_DOMAIN_PRESSURE.conquest,
+      effect: 'With disposition channels active, conquest-domain worship lowers the settlement’s bar for war',
+    }),
+    hunt: Object.freeze({
+      system: 'war_threshold',
+      pressure: DEITY_DOMAIN_PRESSURE.hunt,
+      effect: 'With disposition channels active, hunt-domain worship lowers the settlement’s bar for war slightly',
+    }),
+    harvest: Object.freeze({
+      system: 'war_threshold',
+      pressure: DEITY_DOMAIN_PRESSURE.harvest,
+      effect: 'With disposition channels active, harvest-domain worship raises the settlement’s bar for war',
+    }),
+  }),
+});
+
+/** The signed alignment direction of a deity snapshot: evil −1, good +1, else 0.
+ * @param {any} deity @returns {number} */
+function alignmentDir(deity) {
+  const sign = /** @type {Record<string, number>} */ (DEITY_CORRUPTION_TUNING.axisSign)[deity?.alignmentAxis];
+  return Number.isFinite(sign) ? sign : 0;
+}
+
+/** The signed temperament direction of a deity snapshot: warlike +1, peacelike −1,
+ * else 0. Temper via the DERIVATION (axis retirement, W-F5) — the same read the
+ * engine's disposition drive makes, so display and engine cannot diverge.
+ * @param {any} deity @returns {number} */
+function temperamentDir(deity) {
+  const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[deityTemper(deity) ?? ''];
+  return Number.isFinite(sign) ? sign : 0;
+}
+
+/** The signed law direction of a deity snapshot: lawful +1, chaotic −1, else 0
+ * (a legacy 3-axis deity with no lawAxis ⇒ 0). @param {any} deity @returns {number} */
+function lawDir(deity) {
+  const sign = /** @type {Record<string, number>} */ (DEITY_LAW_TUNING.axisSign)[deity?.lawAxis];
+  return Number.isFinite(sign) ? sign : 0;
+}
+
+/** The core read owns normalization and the supported-domain set. Wrapping the
+ * snapshot in its settlement shape keeps display from growing a parallel list.
+ * @param {any} deity @returns {string|null} */
+function mechanicalDomainOf(deity) {
+  return deityPressureOf({ config: { primaryDeitySnapshot: deity } }).domain;
+}
+
+/**
+ * Human-readable effect strings for an embedded deity snapshot — exactly the
+ * couplings the engine will apply, in a stable order (alignment, temperament,
+ * rank, magic, law, domain). The dossier Faith-Effects block and the Compendium
+ * worship-effects preview render these.
+ *
+ * Returns [] for a null/absent snapshot or a fully-neutral deity (no alignment,
+ * no temperament, unranked) — the dormancy guarantee.
+ *
+ * @param {any} deitySnapshot the embedded config.primaryDeitySnapshot (or null).
+ * @returns {string[]} ordered effect strings; [] when there is nothing to say.
+ */
+export function describeDeityEffects(deitySnapshot) {
+  if (!deitySnapshot) return [];
+  /** @type {string[]} */
+  const out = [];
+
+  // 1. Alignment → corruption.
+  const aDir = alignmentDir(deitySnapshot);
+  if (aDir < 0) out.push(DEITY_AXIS_EFFECTS.alignment.evil.effect);
+  else if (aDir > 0) out.push(DEITY_AXIS_EFFECTS.alignment.good.effect);
+
+  // 2. Temperament → aggression.
+  const tDir = temperamentDir(deitySnapshot);
+  if (tDir > 0) out.push(DEITY_AXIS_EFFECTS.temperament.warlike.effect);
+  else if (tDir < 0) out.push(DEITY_AXIS_EFFECTS.temperament.peacelike.effect);
+
+  // 3. Rank → religious authority.
+  const rank = deitySnapshot.rankAxis;
+  if (rank && /** @type {Record<string, any>} */ (DEITY_AXIS_EFFECTS.rank)[rank]) {
+    out.push(/** @type {Record<string, any>} */ (DEITY_AXIS_EFFECTS.rank)[rank].effect);
+  }
+
+  // 4. Magic legality — ONLY a MAJOR god regulates a realm's magic (a minor god
+  // or cult lacks the institutional reach; matches magicProfile.dominantDeityOf).
+  // A warlike/evil major orthodoxy tightens harder ("openly opposed").
+  if (rank === 'major') {
+    out.push(deityIsRegulatory(deitySnapshot)
+      ? 'A major orthodoxy tightens magic legality: the art is openly opposed'
+      : 'A major orthodoxy tightens magic legality');
+  }
+
+  // 5. Law/chaos → law_order. Appended last so the alignment/temperament/
+  //    rank/magic order stays stable. A legacy 3-axis deity (no lawAxis ⇒ 0) and
+  //    a law-neutral deity say nothing here — the dormancy/back-compat guarantee.
+  const lDir = lawDir(deitySnapshot);
+  if (lDir > 0) out.push(DEITY_AXIS_EFFECTS.law.lawful.effect);
+  else if (lDir < 0) out.push(DEITY_AXIS_EFFECTS.law.chaotic.effect);
+
+  // 6. Domain → WR-2's war-bar pressure. The core reader owns case
+  //    normalization and the exact finite set. Unsupported authored words remain
+  //    presentation-only and therefore add no mechanical preview line.
+  const domain = mechanicalDomainOf(deitySnapshot);
+  if (domain && /** @type {Record<string, any>} */ (DEITY_AXIS_EFFECTS.domain)[domain]) {
+    out.push(/** @type {Record<string, any>} */ (DEITY_AXIS_EFFECTS.domain)[domain].effect);
+  }
+
+  return out;
+}

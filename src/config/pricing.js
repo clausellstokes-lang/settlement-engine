@@ -1,0 +1,415 @@
+/**
+ * config/pricing.js — Single source of truth for all pricing data.
+ *
+ * Everything related to "what costs what" lives here:
+ *   - Credit pack catalog (legacy + repriced; flag selects active set)
+ *   - AI feature credit costs (legacy + repriced; flag selects active set)
+ *   - Subscription tiers (Wanderer / Cartographer / Founder Lifetime)
+ *   - Single-dossier microtransaction
+ *
+ * Why a single file: today the same numbers live in
+ *   - src/lib/stripe.js PRODUCTS map (client display)
+ *   - src/store/creditsSlice.js CREDIT_COSTS (client pre-flight)
+ *   - supabase/functions/create-checkout PRICE_MAP (server billing)
+ *   - supabase/functions/generate-narrative cost gate (server enforcement)
+ *   - the marketing FAQ
+ *
+ * Five copies = five places to forget when prices change. This file
+ * becomes the one place client code reads. Server functions still need
+ * to enforce their own canonical costs (defense in depth), but they
+ * should match what this file declares. A `pricing.contract.test.js`
+ * keeps the drift visible.
+ *
+ * Stripe is the ultimate source for actual charged prices — we own the
+ * metadata (credits per pack, AI cost per feature) and the display
+ * strings; Stripe owns the dollar amounts.
+ *
+ * The repriced schedules, Founder tier, and single-dossier one-shot all
+ * shipped unconditionally — their roll-out flags were removed once soaked.
+ * The legacy pack + AI-cost maps are retained below: not as a rollback
+ * path, but so historical SKUs still resolve (findPackByKey) and the
+ * server contract test can pin both schedules independently.
+ */
+
+// ── Credit pack catalogs ──────────────────────────────────────────────────
+// Each pack has a stable key (= Stripe product id stub used by the
+// edge function), a credit count, a display price, and a discount label.
+// `perCredit` is derived for the UI tile.
+
+const LEGACY_PACKS = Object.freeze({
+  credits_5:  { key: 'credits_5',  name: '5 Narrative Credits',  price: '$4.99',  credits: 5,  perCredit: '$1.00', discount: null,      tier: 'starter' },
+  credits_15: { key: 'credits_15', name: '15 Narrative Credits', price: '$9.99',  credits: 15, perCredit: '$0.67', discount: '33% off', tier: 'value'   },
+  credits_40: { key: 'credits_40', name: '40 Narrative Credits', price: '$19.99', credits: 40, perCredit: '$0.50', discount: '50% off', tier: 'best'    },
+});
+
+// New, more generous packs — designed around the repriced narrative
+// costs (3/4/5 per feature). 25 credits ≈ 7 narratives or 5 daily-lifes.
+const NEW_PACKS = Object.freeze({
+  credits_25:  { key: 'credits_25',  name: '25 Narrative Credits',  price: '$4.99',  credits: 25,  perCredit: '$0.20', discount: null,      tier: 'starter' },
+  credits_60:  { key: 'credits_60',  name: '60 Narrative Credits',  price: '$9.99',  credits: 60,  perCredit: '$0.17', discount: '17% off', tier: 'value'   },
+  credits_150: { key: 'credits_150', name: '150 Narrative Credits', price: '$19.99', credits: 150, perCredit: '$0.13', discount: '34% off', tier: 'best'    },
+});
+
+// ── AI feature cost schedules ─────────────────────────────────────────────
+// Mirrored on the server (supabase/functions/generate-narrative/index.ts
+// CREDIT_COSTS). Keep server + client in lockstep — a contract test
+// catches drift before it ships.
+
+const LEGACY_AI_COSTS = Object.freeze({
+  narrative:   8,
+  dailyLife:   10,
+  progression: 12,
+});
+
+const NEW_AI_COSTS = Object.freeze({
+  narrative:   5,
+  dailyLife:   4,
+  progression: 6,
+});
+
+const FAST_AI_COSTS = Object.freeze({
+  narrative:   2,
+  dailyLife:   3,
+  progression: 4,
+});
+
+// Runtime quote cache. The server remains the charging authority; this holds the
+// last validated get_ai_pricing payload fetched by the lazy live-pricing leaf so
+// every synchronous client preflight and label can quote the same schedule.
+// It is deliberately session-only and starts null, preserving the shipped
+// constants as the offline/undeployed fallback.
+let liveAiPricing = null;
+
+/** @internal Called only by config/livePricing.js after a successful RPC read. */
+export function _setLiveAiPricing(payload) {
+  liveAiPricing = payload && typeof payload === 'object' ? payload : null;
+}
+
+/** @internal Test/HMR seam paired with livePricing._resetLivePricingCache(). */
+export function _clearLiveAiPricing() {
+  liveAiPricing = null;
+}
+
+function validLiveAiCost(feature, modelPreference) {
+  const profile = normalizeModelPreference(modelPreference || DEFAULT_MODEL_PREFERENCE);
+  const value = liveAiPricing?.creditCosts?.[profile]?.[feature];
+  return Number.isInteger(value) && value >= 1 && value <= 12 ? value : null;
+}
+
+// ── Surveyor (S1 + S3 + S4–S6) task-priced managed-credit costs ────────────
+// The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
+// pricing is an owner-queued decision. Kept in lockstep with the server-side
+// spend_credits CASE (migrations 140 + 149 + 151) by the pricing contract test.
+const SURVEYOR_AI_COSTS = Object.freeze({
+  analysis:            3,   // one analyst answer (S1)
+  brief:               4,   // one AI-prose brief layer (S2)
+  interpret:           5,   // one session compile → proposed ops (S3)
+  parley:              3,   // one in-character consultation response (S3)
+  customContent:       6,   // one homebrew content compile → drafted entries (S4)
+  styleOverhaul:       3,   // one bespoke map-style definition (the S2→S3 rung)
+  constructSettlement: 6,   // one intent → generated settlement (S5)
+  constructRealm:      8,   // one intent → composed realm (S6)
+  autonomy:            4,   // one autonomy compose: stop condition + nudges (S7)
+});
+
+// ── Capability-tier multipliers (BUILT, INERT) ─────────────────────────────
+// The display half of docs/DESIGN_AI_CAPABILITY_LADDER.md §3 piece 5: a surface
+// at journeyman+ may one day request an escalated pass, and an escalated pass
+// must quote more than an ordinary one. The charging half is migration
+// 192_tier_credit_multiplier.sql, which reads its multipliers from the
+// system_config key 'ai_tier_multipliers'.
+//
+// ⚠ EVERY VALUE HERE IS 1 ON PURPOSE. This map is the ACTIVATION SWITCH for the
+// quoted price, and pricing activation is owner-signed (design §5; owner queue
+// M5, the pricing-sheet sign-off). While every value is 1, getSurveyorAiCost
+// returns exactly what it returned before the tier argument existed, for every
+// feature and every tier — pinned by an executed identity test in
+// tests/config/pricing.test.js. Changing a number here without the owner's
+// signature silently reprices a paid surface.
+//
+// The tier names are the design's WORKING names (§3 piece 3); the owner has not
+// made the taste pick. Nothing derives behaviour from the spelling.
+//
+// Deliberately NO sane-band fence here, unlike the SQL half: migration 192
+// clamps its multiplier to 0.5..3 because system_config is operator-writable at
+// runtime, whereas this map is frozen source that moves only through review.
+const TIER_MULTIPLIERS = Object.freeze({
+  scout:      1,
+  journeyman: 1,
+  master:     1,
+});
+
+export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
+
+export const AI_MODEL_OPTIONS = Object.freeze([
+  {
+    key: 'anthropic_claude_opus_4_8',
+    label: 'Claude Opus 4.8',
+    provider: 'anthropic',
+    model: 'claude-opus-4-8',
+    speed: 'premium',
+    costTier: 'standard',
+  },
+  {
+    key: 'anthropic_claude_sonnet_4_6',
+    label: 'Claude Sonnet 4.6',
+    provider: 'anthropic',
+    model: 'claude-sonnet-4-6',
+    speed: 'balanced',
+    costTier: 'standard',
+  },
+  {
+    key: 'anthropic_claude_haiku_4_5',
+    label: 'Claude Haiku 4.5',
+    provider: 'anthropic',
+    model: 'claude-haiku-4-5-20251001',
+    speed: 'fast',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_5_2',
+    label: 'OpenAI GPT-5.2',
+    provider: 'openai',
+    model: 'gpt-5.2',
+    speed: 'premium',
+    costTier: 'standard',
+  },
+  {
+    key: 'openai_gpt_5_mini',
+    label: 'OpenAI GPT-5 mini',
+    provider: 'openai',
+    model: 'gpt-5-mini',
+    speed: 'fast',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_5_nano',
+    label: 'OpenAI GPT-5 nano',
+    provider: 'openai',
+    model: 'gpt-5-nano',
+    speed: 'fastest',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_4_1',
+    label: 'OpenAI GPT-4.1',
+    provider: 'openai',
+    model: 'gpt-4.1',
+    speed: 'legacy',
+    costTier: 'standard',
+  },
+  {
+    key: 'openai_gpt_4_1_mini',
+    label: 'OpenAI GPT-4.1 mini',
+    provider: 'openai',
+    model: 'gpt-4.1-mini',
+    speed: 'legacy-fast',
+    costTier: 'fast',
+  },
+]);
+
+export const AI_MODEL_ALIASES = Object.freeze({
+  claude_best: 'anthropic_claude_opus_4_8',
+  claude_fast: 'anthropic_claude_haiku_4_5',
+  chatgpt_best: 'openai_gpt_5_2',
+  chatgpt_fast: 'openai_gpt_5_mini',
+});
+
+export function normalizeModelPreference(value) {
+  const key = AI_MODEL_ALIASES[value] || value;
+  return AI_MODEL_OPTIONS.some(option => option.key === key) ? key : DEFAULT_MODEL_PREFERENCE;
+}
+
+export function isFastModelPreference(value) {
+  const key = normalizeModelPreference(value);
+  const option = AI_MODEL_OPTIONS.find(item => item.key === key);
+  return option?.costTier === 'fast';
+}
+
+// ── Subscription tiers ────────────────────────────────────────────────────
+// The flag layer controls which name renders (tierRenames). The plan
+// shape is stable across both naming schemes — only the label changes.
+
+export const TIERS = Object.freeze({
+  wanderer: Object.freeze({
+    key:          'wanderer',
+    legacyKey:    'free',
+    stripeProduct: null,                  // no charge
+    priceCents:   0,
+    billing:      'forever',
+    seatLimit:    null,                   // unlimited seats
+    saveLimit:    3,
+    maxSize:      'capital',              // a free account unlocks every size (anon alone is town-capped)
+    features: {
+      neighbourhoodSystem: false,
+      pdfExport:           true,
+      jsonExport:          false,
+      supplyChainMap:      false,
+      founderBadge:        false,
+    },
+  }),
+  cartographer: Object.freeze({
+    key:          'cartographer',
+    legacyKey:    'premium',
+    stripeProduct: 'premium',             // existing premium SKU
+    priceCents:   599,                    // $5.99/mo — reconciled to the displayed price (owner sign-off 2026-07-17)
+    billing:      'monthly',
+    monthlyCredits: 30,
+    seatLimit:    null,
+    saveLimit:    Infinity,
+    maxSize:      'capital',
+    features: {
+      neighbourhoodSystem: true,
+      pdfExport:           true,
+      jsonExport:          true,
+      supplyChainMap:      true,
+      founderBadge:        false,
+    },
+  }),
+  founder: Object.freeze({
+    key:          'founder',
+    legacyKey:    'founder',
+    stripeProduct: 'founder_lifetime',    // new one-time SKU
+    priceCents:   9900,                   // $99 one-time
+    billing:      'lifetime',
+    oneTimeCredits: 30,
+    seatLimit:    30,                     // 30 founder seats (server enforces this in create-checkout)
+    saveLimit:    Infinity,
+    maxSize:      'capital',
+    features: {
+      neighbourhoodSystem: true,
+      pdfExport:           true,
+      jsonExport:          true,
+      supplyChainMap:      true,
+      founderBadge:        true,
+    },
+  }),
+});
+
+// ── Single-dossier microtransaction ───────────────────────────────────────
+export const SINGLE_DOSSIER = Object.freeze({
+  key:           'single_dossier',
+  stripeProduct: 'single_dossier',
+  priceCents:    299,                     // $2.99
+  priceLabel:    '$2.99',
+  deliverables:  ['pdf'],
+  requiresAccount: false,                 // can be claimed without signup
+});
+
+// ── Active-set selectors ───────────────────────────────────────────────────
+// Components and slices call these — they never reach for the raw maps.
+// The roll-out flags were removed once soaked; the selectors now return
+// the shipped (repriced) set unconditionally. Legacy maps are kept only
+// for historical SKU resolution + the server contract test.
+
+// Tier display-name map. Matches the UI Redesign PDF. Accepts both the
+// legacy stored keys ('free' / 'premium') and the redesigned keys so the
+// helper resolves regardless of how a row was written.
+const TIER_LABELS_REDESIGN = Object.freeze({
+  free:         'Wanderer',
+  wanderer:     'Wanderer',
+  premium:      'Cartographer',
+  cartographer: 'Cartographer',
+  founder:      'Founder Lifetime',
+});
+
+/**
+ * Pretty display name for a stored tier value. Accepts both the legacy
+ * stored values ('free' / 'premium') and the redesigned names so the
+ * helper works regardless of how the row got written.
+ */
+export function getTierDisplayName(rawTier) {
+  if (!rawTier) return '';
+  return TIER_LABELS_REDESIGN[String(rawTier).toLowerCase()] ?? String(rawTier);
+}
+
+/** Active credit pack catalog (the repriced set). */
+export function getActivePacks() {
+  return NEW_PACKS;
+}
+
+/** Active AI cost schedule (the repriced set). */
+export function getActiveAiCosts() {
+  return NEW_AI_COSTS;
+}
+
+/** Cost in credits for a specific AI feature. */
+export function getAiCost(feature) {
+  return validLiveAiCost(feature, DEFAULT_MODEL_PREFERENCE)
+    ?? getActiveAiCosts()[feature]
+    ?? 0;
+}
+
+/**
+ * Multiplier for a capability tier. Unknown, absent, and null tiers all resolve
+ * to 1, mirroring migration 192's forward-compatible rule: an unrecognized tier
+ * degrades to the ordinary price instead of throwing, because the tier names are
+ * still an open owner taste pick and a client that ran ahead of the server must
+ * never fail a quote over a spelling.
+ */
+export function getTierMultiplier(tier) {
+  return TIER_MULTIPLIERS[tier] ?? 1;
+}
+
+/**
+ * Cost in credits for a Surveyor task-priced feature ('analysis' | 'brief').
+ *
+ * The optional `tier` scales the price by TIER_MULTIPLIERS, mirroring what
+ * migration 192's spend_credits does server-side so the quote can never disagree
+ * with the charge. INERT TODAY: every multiplier is 1, so the identity fast path
+ * below returns the base cost for every feature and every tier, and no caller
+ * passes a tier yet. The argument exists so the panels can render a per-user
+ * price the moment the owner signs the pricing sheet.
+ */
+export function getSurveyorAiCost(feature, tier) {
+  const base = SURVEYOR_AI_COSTS[feature] ?? 0;
+  const multiplier = getTierMultiplier(tier);
+  // Identity fast path, mirroring the SQL's `v_mult <> 1` skip. The `base === 0`
+  // half matters for inertness: an unknown feature quotes 0, and clamping that
+  // up to the 1-credit floor would make a tiered call disagree with an untiered
+  // one on the exact input the existing contract test pins at 0.
+  if (multiplier === 1 || base === 0) return base;
+  // Same hard 1..12 band the SQL clamps to. Math.round and Postgres round() agree
+  // on positive numbers (both go half away from zero), and costs are positive.
+  return Math.max(1, Math.min(12, Math.round(base * multiplier)));
+}
+
+/** Cost in credits for a feature under the selected AI model preference. */
+export function getAiCostForModel(feature, modelPreference) {
+  const live = validLiveAiCost(feature, modelPreference);
+  if (live != null) return live;
+  const schedule = isFastModelPreference(modelPreference) ? FAST_AI_COSTS : getActiveAiCosts();
+  return schedule[feature] ?? getAiCost(feature);
+}
+
+/** Which tiers should appear in pricing UI. */
+export function getVisibleTiers() {
+  return [TIERS.wanderer, TIERS.cartographer, TIERS.founder];
+}
+
+/** Whether the single-dossier microtransaction is offered. */
+export function singleDossierEnabled() {
+  return true;
+}
+
+// ── Stripe product → catalog reverse lookup ───────────────────────────────
+// Edge functions key by Stripe product id; the client sometimes needs to
+// map back (e.g., webhook handler describing a purchase in the UI).
+
+/**
+ * Look up a pack by its stripe key in EITHER catalog (so historical
+ * webhooks for legacy SKUs still resolve to a display row).
+ */
+export function findPackByKey(key) {
+  return LEGACY_PACKS[key] || NEW_PACKS[key] || null;
+}
+
+// ── Raw maps (testing + admin tooling only) ───────────────────────────────
+// Product code should use the selectors above. Exposing the raw maps
+// lets the contract test verify both schedules independently and lets
+// the admin panel show "all SKUs ever sold" without reaching through
+// flags.
+export const _internal = Object.freeze({
+  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, SURVEYOR_AI_COSTS, AI_MODEL_ALIASES,
+  TIER_MULTIPLIERS,
+});

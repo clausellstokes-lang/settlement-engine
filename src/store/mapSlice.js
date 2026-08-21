@@ -1,0 +1,832 @@
+/**
+ * mapSlice — Single source of truth for the World Map.
+ *
+ * Everything the map needs to render lives here. No local state in
+ * WorldMap.jsx, no duplication, no drift. The campaign system persists
+ * a snapshot of this slice's `mapState` sub-tree plus the FMG snapshot
+ * blob.
+ *
+ * Derived selectors (burgSettlementMap, linked settlements, etc.) live
+ * in store/selectors.js — never stored directly.
+ *
+ * Schema version 2 (2026-04): snapshot-based campaigns, annotation layer,
+ * terrain mode support.
+ */
+
+import { deepClone } from '../domain/clone.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
+// The campaign-write persistence chokepoint (campaignSlice's own idiom, and
+// already in the eager closure through it) — the autoplacement Herald record is a
+// campaign write, so it persists the way every other campaign write does.
+import { persistCampaignState } from './campaignSliceShared.js';
+
+// FP-G9 first-paint reclaim: computeRoadEdges (+ its supplyChains dep, ~19 KB
+// source) is reached from the eager store ONLY here, and ONLY for the
+// fire-and-forget MAP_ROUTE_DRAWN analytics below — never for state. A static
+// import dragged the whole roadNetwork chunk into the first-paint closure. The
+// lazy map surfaces (WorldMap/RoadsLayer) import computeRoadEdges directly, so
+// dynamic-importing it here (memoized, the settlementSlice loadEngine idiom)
+// lets roadNetwork + supplyChains ride the lazy map chunk instead. The one
+// observable shift is analytics timing: MAP_ROUTE_DRAWN fires one microtask
+// later (the placement, its gate return, and MAP_PLACEMENT_ADDED all stay
+// synchronous). @enforced-by tests/build/vendorPdfLazy.test.js (byte budget).
+let _roadNetworkPromise;
+const loadRoadNetwork = () => {
+  if (!_roadNetworkPromise) _roadNetworkPromise = import('../lib/roadNetwork.js');
+  return _roadNetworkPromise;
+};
+
+// W-G: the Herald record for an autoplacement act. Reached from the eager store
+// ONLY here, and only to APPEND one news entry after the placements have already
+// landed — so it rides the same dynamic-import treatment as roadNetwork above
+// rather than dragging the region news module into the first-paint closure. The
+// one observable consequence is timing: the Herald entry lands one microtask
+// after the placements, exactly as MAP_ROUTE_DRAWN does.
+let _wizardNewsPromise;
+const loadWizardNews = () => {
+  if (!_wizardNewsPromise) _wizardNewsPromise = import('../domain/region/wizardNews.js');
+  return _wizardNewsPromise;
+};
+
+export const MAP_MODES = {
+  VIEW: 'view',
+  TERRAIN: 'terrain',
+  ANNOTATE: 'annotate',
+  // P110 / M-4 — Routes mode: relationship-first overlay. Forces
+  // RelationshipEdges + RoadsLayer + ChainEdges to full opacity,
+  // hides annotate UI, surfaces a network-stress alert when the
+  // supply-chain state has cascading impacts.
+  ROUTES: 'routes',
+};
+
+// Terrain tools that actually open a usable FMG editor when invoked from a
+// toolbar button (i.e. without an existing map-feature selection). The Rivers,
+// Coastline, and Lakes editors require a clicked feature to operate (they
+// reach for d3.event.target internally), so they are NOT exposed here — users
+// double-click those features on the map to edit them. Biomes is handled as
+// a layer-visibility toggle in mapState.layers.nativeBiomes, not as a tool.
+export const TERRAIN_TOOLS = {
+  HEIGHTMAP: 'heightmap',
+};
+
+export const ANNOTATE_TOOLS = {
+  SELECT: 'select',
+  LABEL: 'label',
+  MARKER: 'marker',
+  FOREST: 'forest',
+};
+
+export const FOREST_STYLES = ['pine', 'oak', 'palm', 'birch'];
+
+const DEFAULT_LAYERS = {
+  placements: true,
+  relationships: true,
+  relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile'],
+  chains: true,
+  chainFilter: null, // or string[] of good names
+  regionalChannels: true,
+  regionalChannelFilter: null,
+  regionalImpacts: true,
+  regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
+  regionalMinSeverity: 0,
+  regionalShowGm: true,
+  // Spatial war/faith glyph overlay (WarFaithMapOverlay). Default ON so a live
+  // war campaign shows its deployment arrows / siege rings / occupation shading;
+  // a dormant world renders nothing regardless (empty read-models). Present in
+  // DEFAULT_LAYERS so the LayersPanel "War & faith" toggle is a real toggle (the
+  // toggleLayer guard no-ops keys absent from this map).
+  warFaith: true,
+  roads: true,
+  // DESIGN_THE_ROADS §13 — the Travelers overlay: army columns + migrant columns +
+  // named-NPC envoys, moving on the road graph. DEFAULT OFF (opt-in DM-truth lens);
+  // the ~20 B eager default is this key (travelersFilter defaults null = all three
+  // sub-layers, set on demand). The army/migrant sub-layers read LIVE ledgers with no
+  // flag; the envoy sub-layer is present only when the roads ledger is lit (§13).
+  travelers: false,
+  labels: true,
+  markers: true,
+  forests: true,
+  nativeStateBorders: true,
+  nativeCultureRegions: false,
+  nativeBiomes: false,
+};
+
+const DEFAULT_VIEWPORT = { cx: 0, cy: 0, scale: 1, width: 0, height: 0 };
+
+const DEFAULT_TERRAIN_OPTIONS = {
+  brushSize: 20,
+  brushStrength: 0.5,
+  biome: 'grassland',
+  riverWidth: 2,
+};
+
+const DEFAULT_ANNOTATE_OPTIONS = {
+  labelFont: 'serif',
+  labelSize: 16,
+  labelColor: '#1c1409',
+  markerIcon: 'pin',
+  markerColor: '#a0762a',
+  forestStyle: 'pine',
+  forestRadius: 60,
+  forestDensity: 0.4,
+};
+
+/** Fresh empty map state — used on reset, on first load, and as a baseline for campaigns. */
+function freshMapState() {
+  return {
+    // FMG geography snapshot (base64 blob, nullable if not yet captured)
+    fmgSnapshot: null,
+    seed: null,
+    // Custom image backdrop (premium). When set, the map renders this image
+    // instead of the FMG terrain and suppresses heightmap/biome tools + the
+    // geography-derived charted trails. { imageUrl, w, h } | null.
+    // Placements in image mode are stored in image-PIXEL space (0..w, 0..h) —
+    // the same <g>-space as the backdrop <image> — so every existing overlay
+    // layer renders them unchanged (the <g> transform handles display scaling).
+    customBackdrop: null,
+    // Settlement burgs placed on the map: burgId -> { settlementId, x, y, cellId, placedAt }
+    placements: {},
+    // User-added text labels
+    labels: [],
+    // User-added pin markers
+    markers: [],
+    // Forest / decoration brush strokes
+    forests: [],
+    // Layer toggle & filter config
+    layers: { ...DEFAULT_LAYERS },
+    // Camera viewport
+    viewport: { ...DEFAULT_VIEWPORT },
+  };
+}
+
+// The annotate/placement undo stack only needs the MUTABLE sub-slices — NOT the
+// heavy fmgSnapshot geography blob (often ~1MB+), the custom backdrop, layer
+// toggles, or the camera viewport. Snapshotting the whole mapState cloned that
+// blob on every label/marker/forest op (F6), and restoring it wrongly reverted
+// geography + camera on undo. We snapshot + restore only these keys.
+const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
+
+function snapshotAnnotations(mapState) {
+  const snap = {};
+  for (const k of MAP_UNDO_KEYS) {
+    snap[k] = deepClone(mapState[k] ?? (k === 'placements' ? {} : []));
+  }
+  return snap;
+}
+
+function restoreAnnotations(mapState, snap) {
+  for (const k of MAP_UNDO_KEYS) {
+    if (snap[k] !== undefined) mapState[k] = deepClone(snap[k]);
+  }
+}
+
+// Snapshot the current annotation/placement sub-slices onto the undo stack
+// before a mutating annotate/placement action, so the AnnotateToolbar Undo/Redo
+// buttons work. Operates on the immer draft.
+function snapshotForUndo(state, action) {
+  state.mapUndoStack.push({
+    action,
+    snapshot: snapshotAnnotations(state.mapState),
+    timestamp: Date.now(),
+  });
+  if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
+  state.mapRedoStack = [];
+}
+
+export const createMapSlice = (set, get) => ({
+  // ── State ──────────────────────────────────────────────────────────────────
+  // Runtime (non-persisted) iframe bridge state
+  mapReady: false,
+  mapLoading: true,
+  mapError: null,
+
+  // Monotonic counter bumped whenever the underlying FMG geography changes
+  // (snapshot loaded, world regenerated). Derived layers — RoadsLayer,
+  // RelationshipEdges, ChainEdges — include this in their effect deps so
+  // their A* / coordinate caches recompute against the new world even when
+  // placements themselves are unchanged. Without this, loading a saved map
+  // shows stale routes from the previously-rendered world until the user
+  // perturbs a placement.
+  geometryVersion: 0,
+
+  // UI state
+  mapMode: MAP_MODES.VIEW,
+  terrainTool: null,          // one of TERRAIN_TOOLS when mapMode === TERRAIN
+  annotateTool: ANNOTATE_TOOLS.SELECT,  // current annotate tool
+  selectedBurgId: null,        // clicked burg id (opaque placement handle)
+  selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
+  // V-3 THE TIMELAPSE + V-15 THE AGED MAP — the shared scrub position. null ⇒
+  // timelapse INACTIVE (live view; every derived overlay renders as today). A number
+  // ⇒ scrubbing that advance tick; the realm timelapse overlay and the town aged-map
+  // overlay both read it (the one coordination contract, "the scrubber drives both").
+  // Transient UI, not persisted, not worldState ⇒ zero golden / zero persist impact.
+  timelapseTick: null,
+  selectedAnnotationId: null,  // clicked label/marker/forest
+  selectedAnnotationKind: null,  // 'label' | 'marker' | 'forest' — which layer the id lives in
+  // P136 / M-6 — quick-inspector hover state. Distinct from
+  // `selectedSettlementId` because selection is a deliberate click;
+  // hover is a "peek" that doesn't commit. The QuickInspector
+  // component subscribes to this and renders a 3-line card.
+  hoveredSettlementId: null,
+
+  // Transient drag state
+  isDraggingOver: false,
+
+  // Terrain / annotate tool options
+  terrainOptions: { ...DEFAULT_TERRAIN_OPTIONS },
+  annotateOptions: { ...DEFAULT_ANNOTATE_OPTIONS },
+
+  // Undo/redo stacks (in-memory, not persisted)
+  mapUndoStack: [],
+  mapRedoStack: [],
+
+  // The map state proper — the thing that gets persisted per campaign
+  mapState: freshMapState(),
+
+  // ── Runtime setters ───────────────────────────────────────────────────────
+  setMapReady: (ready) => set(state => {
+    state.mapReady = ready;
+    state.mapLoading = !ready;
+  }),
+
+  setMapLoading: (loading) => set(state => { state.mapLoading = loading; }),
+
+  setMapError: (err) => set(state => { state.mapError = err; }),
+
+  setMapMode: (mode) => set(state => {
+    if (!Object.values(MAP_MODES).includes(mode)) return;
+    state.mapMode = mode;
+    // Reset tool state when switching modes
+    if (mode !== MAP_MODES.TERRAIN) state.terrainTool = null;
+    if (mode === MAP_MODES.ANNOTATE && !state.annotateTool) state.annotateTool = ANNOTATE_TOOLS.SELECT;
+  }),
+
+  setTerrainTool: (tool) => set(state => {
+    state.terrainTool = tool;
+  }),
+
+  setAnnotateTool: (tool) => set(state => {
+    state.annotateTool = tool;
+  }),
+
+  setSelectedBurgId: (id) => set(state => { state.selectedBurgId = id; }),
+
+  clearSelectedBurgId: () => set(state => { state.selectedBurgId = null; }),
+
+  setSelectedSettlementId: (id) => set(state => { state.selectedSettlementId = id; }),
+
+  // V-3 THE TIMELAPSE — set the scrub position (null deactivates the timelapse).
+  setTimelapseTick: (tick) => set(state => {
+    state.timelapseTick = (tick == null || !Number.isFinite(Number(tick))) ? null : Number(tick);
+  }),
+
+  clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
+
+  // P136 / M-6 — hover-peek mutations. Setting hoveredSettlementId
+  // does not affect selection; the QuickInspector renders a tiny
+  // floating card with name + pressure + top hook so the user can
+  // peek a placement without committing to opening the full detail.
+  setHoveredSettlementId: (id) => set(state => { state.hoveredSettlementId = id; }),
+
+  clearHoveredSettlementId: () => set(state => { state.hoveredSettlementId = null; }),
+
+  // The calling layer (LabelsLayer / MarkersLayer / ForestsLayer) knows which
+  // kind it owns, so it passes `kind` alongside the id. That lets the Annotate
+  // toolbar's Delete fire the SINGLE correct deletion instead of firing every
+  // delete blindly. HitLayer clears with no kind on a background click, nulling
+  // both. Additive: existing 1-arg callers keep working (kind defaults null).
+  setSelectedAnnotationId: (id, kind = null) => set(state => {
+    state.selectedAnnotationId = id;
+    state.selectedAnnotationKind = id ? kind : null;
+  }),
+
+  setDraggingOver: (dragging) => set(state => { state.isDraggingOver = dragging; }),
+
+  setTerrainOption: (key, value) => set(state => {
+    state.terrainOptions[key] = value;
+  }),
+
+  setAnnotateOption: (key, value) => set(state => {
+    state.annotateOptions[key] = value;
+  }),
+
+  // ── Viewport ──────────────────────────────────────────────────────────────
+  setMapViewport: (vp) => set(state => {
+    // Tag the camera with its coordinate space so restore paths (image-mode
+    // initial-fit, FMG reload) never reuse a viewport from the other mode.
+    const mode = state.mapState.customBackdrop?.imageUrl ? 'image' : 'fmg';
+    state.mapState.viewport = { ...state.mapState.viewport, ...vp, mode };
+  }),
+
+  // ── Layer toggles ─────────────────────────────────────────────────────────
+  toggleLayer: (key) => set(state => {
+    if (!(key in state.mapState.layers)) return;
+    state.mapState.layers[key] = !state.mapState.layers[key];
+  }),
+
+  setLayerFilter: (key, value) => set(state => {
+    state.mapState.layers[key] = value;
+  }),
+
+  // ── Placements (settlement drops) ─────────────────────────────────────────
+  addPlacement: ({ burgId, settlementId, x, y, cellId, via }) => {
+    // THE AUTHORITATIVE PLACEMENT GATE (store-hooks-state-7). useMapBridge documents
+    // addPlacement as "the authoritative gate (campaign / canon / no-duplicate)" and
+    // branches on { ok:false, reason }, but the store placed UNCONDITIONALLY and
+    // returned undefined — so a settlementPlaced bridge event that bypasses
+    // handleDrop's pre-checks (a direct FMG placement, a re-entrant echo) mutated with
+    // no gate, and the documented refusal toast (PLACEMENT_REJECT_COPY) was dead code.
+    // Mirror WorldMap.handleDrop's checks HERE so both entry points share ONE gate:
+    // a settlement only lands on a campaign map, only if it is canon, at most once.
+    const gate = get();
+    if (!gate.activeCampaignId) return { ok: false, reason: 'no-campaign' };
+    if (settlementId != null) {
+      const saveRec = (gate.savedSettlements || []).find(sv => String(sv.id) === String(settlementId));
+      if (saveRec && !isCanonSave(saveRec)) return { ok: false, reason: 'not-canon' };
+      if (Object.values(gate.mapState?.placements || {}).some(p => String(p.settlementId) === String(settlementId))) {
+        return { ok: false, reason: 'duplicate' };
+      }
+    }
+
+    // Snapshot the PRE-placement map inputs for the MAP_ROUTE_DRAWN proxy below.
+    // computeRoadEdges runs LAZILY (dynamic import), so capture the immutable
+    // pre-set state now — immer freezes it, so it stays a valid before-image.
+    const prevForRoutes = get();
+    const prevSaves = prevForRoutes.savedSettlements;
+    const prevPlacements = prevForRoutes.mapState.placements;
+
+    set(state => {
+      snapshotForUndo(state, 'place settlement');
+      state.mapState.placements[burgId] = {
+        settlementId,
+        x, y,
+        cellId: cellId ?? null,
+        placedAt: new Date().toISOString(),
+      };
+    });
+
+    // Snapshot the POST-placement map inputs SYNCHRONOUSLY (immer froze them), so
+    // the deferred MAP_ROUTE_DRAWN block below computes on the exact same before/
+    // after images the old synchronous code did — the lazy load defers only the
+    // analytics TIMING, never which state it reads.
+    const nextForRoutes = get();
+    const nextSaves = nextForRoutes.savedSettlements;
+    const nextPlacements = nextForRoutes.mapState.placements;
+
+    // Fire-and-forget analytics — coarse counts only, NEVER coordinates.
+    try {
+      const placementCountAfter = Object.keys(nextPlacements || {}).length;
+      // Tier of the just-placed settlement, derived inline as a coarse enum.
+      const save = settlementId
+        ? (nextSaves || []).find(s => String(s?.id) === String(settlementId))
+        : null;
+      const tier = save?.settlement?.tier || save?.tier || 'unknown';
+      track(EVENTS.MAP_PLACEMENT_ADDED, {
+        placement_count_after: placementCountAfter,
+        tier,
+        via: via === 'picker' ? 'picker' : 'drop',
+      });
+    } catch { /* analytics is best-effort; never affect placement behavior */ }
+
+    // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn; a
+    // placement that grows the road graph is the natural "a route appeared"
+    // moment. Only fire when the edge count strictly increases. computeRoadEdges
+    // rides the LAZY roadNetwork chunk (see loadRoadNetwork above) — deferred here
+    // so the eager store never pulls it into first paint. Fully fire-and-forget:
+    // the placement + its gate return already resolved synchronously.
+    loadRoadNetwork().then(({ computeRoadEdges }) => {
+      try {
+        const routeCountBefore = computeRoadEdges(prevSaves, prevPlacements).length;
+        const edges = computeRoadEdges(nextSaves, nextPlacements);
+        if (edges.length > routeCountBefore) {
+          // Did this add link two settlement-backed placements (vs an empty burg)?
+          const linksTwoPlaced = edges.some(e => {
+            const a = nextPlacements[e.fromBurgId];
+            const b = nextPlacements[e.toBurgId];
+            return !!(a?.settlementId && b?.settlementId);
+          });
+          track(EVENTS.MAP_ROUTE_DRAWN, {
+            route_count_after: edges.length,
+            links_two_placed_settlements: linksTwoPlaced,
+          });
+        }
+      } catch { /* analytics is best-effort; never affect placement behavior */ }
+    }).catch(() => { /* chunk load failed — analytics only, ignore */ });
+    return { ok: true };
+  },
+
+  removePlacementLocal: (burgId) => {
+    set(state => {
+      snapshotForUndo(state, 'remove placement');
+      delete state.mapState.placements[burgId];
+    });
+    try {
+      const placementCountAfter = Object.keys(get().mapState.placements || {}).length;
+      track(EVENTS.MAP_PLACEMENT_REMOVED, { placement_count_after: placementCountAfter });
+    } catch { /* analytics is best-effort */ }
+  },
+
+  // Update x/y (and optionally cellId) for an existing placement. Used by
+  // drag-to-move on the selected map icon.
+  updatePlacement: (burgId, patch) => set(state => {
+    // Placement move-lock (campaign-clock): once the active campaign's world is
+    // canonized, placed settlements can no longer be moved. Adding new ones is
+    // still allowed (addPlacement is ungated). The UI also disables the drag
+    // affordance; this is the authoritative backstop (incl. autosave paths).
+    const camp = state.campaigns?.find(
+      c => c?.id != null && String(c.id) === String(state.activeCampaignId),
+    );
+    if (camp?.worldState?.canonizedAt) return;
+    const p = state.mapState.placements[burgId];
+    if (!p) return;
+    if (typeof patch?.x === 'number') p.x = patch.x;
+    if (typeof patch?.y === 'number') p.y = patch.y;
+    if (patch?.cellId !== undefined) p.cellId = patch.cellId;
+  }),
+
+  /**
+   * W-G / J-D1 — COMMIT AN AUTOPLACEMENT. The consent popup calls this only after
+   * the user has confirmed, with exactly the itemized moves they agreed to.
+   *
+   * THIS ACTION MINTS NO POSITION WRITE OF ITS OWN. Every coordinate goes through
+   * the two writes the map already uses — `updatePlacement` for a settlement
+   * already on the map, `addPlacement` (the authoritative campaign/canon/duplicate
+   * gate) for one that is not — so the canon move-lock, the placement row shape,
+   * and every existing refusal apply to autoplacement for free. A third position
+   * writer is precisely how a lock ends up enforced on one path and ghosted on
+   * another.
+   *
+   * WHY NO BRIDGE ROUND-TRIP (verified against the vendored frame, not assumed):
+   * public/map/sf-bridge.js stores `x: mapPt.x, y: mapPt.y` after `screenToMap`
+   * and derives `cellId = findCell(mapPt.x, mapPt.y)`, so a stored placement's x/y
+   * live in the SAME map space as the pack centroids the planner reads — a planned
+   * cell's centroid can be written straight through. And its `restorePlacements`
+   * handler documents itself a no-op "now that placements are React-rendered": the
+   * burgId is an opaque store key the frame does not own. So both classes commit
+   * store-side in map coordinates, in FMG and image mode alike, with no
+   * screen-space conversion and no async echo to race.
+   *
+   * The canonize guard is ALSO checked here, before anything is snapshotted, so a
+   * frozen realm gets one legible refusal instead of a silent no-op per move
+   * (updatePlacement's own guard would refuse each write without saying why).
+   *
+   * ONE undo snapshot covers the whole act: pressing Undo puts every settlement
+   * back where it was, because a placement pass the user cannot take back in one
+   * gesture is not a placement pass they will risk trying.
+   *
+   * @param {{ proposals?: Array<{ kind?: 'move'|'place', burgId?: string|null,
+   *   settlementId: string, name?: string, x: number, y: number, toCell?: number }>,
+   *   seed?: string, version?: number }} args
+   * @returns {{ ok: true, moved: number, placed: number, refused: number }
+   *   | { ok: false, reason: string }}
+   */
+  applyAutoplacement: ({ proposals = [], seed = '', version = 0 } = {}) => {
+    const gate = get();
+    const campaignId = gate.activeCampaignId;
+    if (!campaignId) return { ok: false, reason: 'no-campaign' };
+    const camp = (gate.campaigns || []).find(
+      c => c?.id != null && String(c.id) === String(campaignId),
+    );
+    if (camp?.worldState?.canonizedAt) return { ok: false, reason: 'canonized' };
+
+    const rows = (Array.isArray(proposals) ? proposals : []).filter(
+      m => m && m.settlementId != null
+        && Number.isFinite(Number(m.x)) && Number.isFinite(Number(m.y)),
+    );
+    if (!rows.length) return { ok: false, reason: 'nothing-to-do' };
+
+    // ONE snapshot for the whole act (before any write), so one Undo reverts it all.
+    set(state => { snapshotForUndo(state, 'autoplace settlements'); });
+
+    let moved = 0;
+    let placed = 0;
+    /** @type {string[]} */
+    const landedIds = [];
+    /** @type {string[]} */
+    const landedNames = [];
+    for (const row of rows) {
+      const cellId = Number.isInteger(row.toCell) ? row.toCell : null;
+      const x = Number(row.x);
+      const y = Number(row.y);
+      if (row.kind === 'place' || !row.burgId) {
+        // NOT on the map yet: through addPlacement, which is the gate that checks
+        // campaign / canon / no-duplicate. A refusal is honoured, never bypassed.
+        const res = get().addPlacement({
+          burgId: `sf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+          settlementId: row.settlementId,
+          x,
+          y,
+          cellId,
+          via: 'picker',
+        });
+        if (res && res.ok === false) continue;
+        placed += 1;
+      } else {
+        const before = get().mapState.placements?.[row.burgId];
+        if (!before) continue;                     // a placement that vanished mid-consent
+        get().updatePlacement(row.burgId, { x, y, cellId });
+        const after = get().mapState.placements?.[row.burgId];
+        if (!after || (after.x === before.x && after.y === before.y)) continue;
+        moved += 1;
+      }
+      landedIds.push(String(row.settlementId));
+      if (row.name) landedNames.push(String(row.name));
+    }
+
+    // THE HERALD RECORD — ONE item for the whole charter, never one per settlement.
+    // Deferred by the dynamic import (see loadWizardNews); the placements above
+    // already landed synchronously and nothing here can undo them.
+    const namedIds = landedIds;
+    const names = landedNames;
+    const total = moved + placed;
+    if (total > 0) {
+      loadWizardNews().then(({ appendWizardNewsEntries }) => {
+        set(state => {
+          const c = (state.campaigns || []).find(
+            x => x?.id != null && String(x.id) === String(campaignId),
+          );
+          if (!c) return;
+          const tick = Number(c.worldState?.tick) || 0;
+          const already = (c.wizardNews?.entries || []).filter(
+            e => e?.kind === 'autoplacement',
+          ).length;
+          c.wizardNews = appendWizardNewsEntries(c.wizardNews, [{
+            // Deterministic and collision-free: the same charter drawn twice at the
+            // same tick is two entries, not one silently swallowed by a dedupe.
+            id: `wizard_news.autoplacement.${tick}.${already}`,
+            tick,
+            scope: 'realm',
+            kind: 'autoplacement',
+            significance: 'notable',
+            severity: 0.35,
+            headline: "The realm's charter is drawn",
+            summary: total === 1
+              ? 'One settlement takes its place on the map.'
+              : `${total} settlements take their places on the map.`,
+            // THE ADDRESS CHAIN: ids, never names — the AddressChain resolver names
+            // them at read time, so a later rename can never strand this record.
+            settlementIds: namedIds,
+            reasons: names.length ? [`The charter names ${names.join(', ')}.`] : [],
+            tags: ['autoplacement', `plan_v${Number(version) || 0}`, seed ? `seed:${seed}` : ''].filter(Boolean),
+          }], { now: new Date().toISOString() });
+          c.updatedAt = new Date().toISOString();
+          persistCampaignState(state, campaignId);
+        });
+      }).catch(() => { /* the record is a receipt, never a gate on the placements */ });
+    }
+
+    return { ok: true, moved, placed, refused: rows.length - total };
+  },
+
+  // RETIRED (R-5b, owner queue #21): `replaceAllPlacements`. It overwrote the
+  // whole placement bag in one unguarded, un-snapshotted write — no canon guard,
+  // no snapshotForUndo — and its ONLY appearance in the product was an INERT
+  // WorldMap.jsx binding (`const _replaceAllPlacements = useStore(...)`) that was
+  // never called. That binding is what made the op look reachable to a naive grep,
+  // and it is the shape the dead-op ratchet's inert-binding discount exists to
+  // catch. The LIVE bulk-placement writers are replaceMapState (whole-mapState
+  // restore, the snapshot/undo path) and clearAllPlacementsLocal (snapshotted);
+  // neither needed this door. Nothing durable referred to it, so no migration is
+  // owed. Re-adding a bulk placement write means re-facing the snapshot + canon
+  // guard questions this one silently skipped.
+
+  clearAllPlacementsLocal: () => set(state => {
+    snapshotForUndo(state, 'clear placements');
+    state.mapState.placements = {};
+  }),
+
+  // ── Labels ────────────────────────────────────────────────────────────────
+  addLabel: ({ x, y, text = 'Label', fontSize, color, fontFamily, rotation = 0 }) => set(state => {
+    snapshotForUndo(state, 'add label');
+    const opts = state.annotateOptions;
+    state.mapState.labels.push({
+      id: `lbl_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      x, y, text,
+      fontSize: fontSize ?? opts.labelSize,
+      color:    color    ?? opts.labelColor,
+      fontFamily: fontFamily ?? opts.labelFont,
+      rotation,
+    });
+  }),
+
+  updateLabel: (id, patch) => set(state => {
+    const lbl = state.mapState.labels.find(l => l.id === id);
+    if (lbl) Object.assign(lbl, patch);
+  }),
+
+  deleteLabel: (id) => set(state => {
+    snapshotForUndo(state, 'delete label');
+    state.mapState.labels = state.mapState.labels.filter(l => l.id !== id);
+  }),
+
+  // ── Markers ───────────────────────────────────────────────────────────────
+  addMarker: ({ x, y, icon, color, title = '', note = '' }) => set(state => {
+    snapshotForUndo(state, 'add marker');
+    const opts = state.annotateOptions;
+    state.mapState.markers.push({
+      id: `mrk_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      x, y,
+      icon:  icon  ?? opts.markerIcon,
+      color: color ?? opts.markerColor,
+      title, note,
+    });
+  }),
+
+  updateMarker: (id, patch) => set(state => {
+    const mrk = state.mapState.markers.find(m => m.id === id);
+    if (mrk) Object.assign(mrk, patch);
+  }),
+
+  deleteMarker: (id) => set(state => {
+    snapshotForUndo(state, 'delete marker');
+    state.mapState.markers = state.mapState.markers.filter(m => m.id !== id);
+  }),
+
+  // ── Forests ───────────────────────────────────────────────────────────────
+  addForest: ({ x, y, radius, density, treeStyle }) => set(state => {
+    snapshotForUndo(state, 'add forest');
+    const opts = state.annotateOptions;
+    state.mapState.forests.push({
+      id: `fst_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      x, y,
+      radius:    radius    ?? opts.forestRadius,
+      density:   density   ?? opts.forestDensity,
+      treeStyle: treeStyle ?? opts.forestStyle,
+    });
+  }),
+
+  updateForest: (id, patch) => set(state => {
+    const f = state.mapState.forests.find(x => x.id === id);
+    if (f) Object.assign(f, patch);
+  }),
+
+  deleteForest: (id) => set(state => {
+    snapshotForUndo(state, 'delete forest');
+    state.mapState.forests = state.mapState.forests.filter(f => f.id !== id);
+  }),
+
+  // ── Snapshot (FMG geography blob) ─────────────────────────────────────────
+  setMapSnapshot: (blob, seed) => set(state => {
+    state.mapState.fmgSnapshot = blob || null;
+    if (seed != null) state.mapState.seed = seed;
+  }),
+
+  // ── Custom image backdrop (premium) ───────────────────────────────────────
+  /**
+   * Switch the map to a custom image backdrop. Non-destructive: the FMG
+   * snapshot is left intact so clearMapBackdrop restores terrain mode. Bumps
+   * geometryVersion so derived layers (roads) recompute and skip A*.
+   * @param {{imageUrl:string,w:number,h:number}} backdrop
+   */
+  setMapBackdrop: (backdrop) => set(state => {
+    if (!backdrop || !backdrop.imageUrl) return;
+    state.mapState.customBackdrop = {
+      imageUrl: backdrop.imageUrl,
+      w: Number(backdrop.w) || 0,
+      h: Number(backdrop.h) || 0,
+    };
+    // CRITICAL: the camera viewport is mode-specific (FMG map-pixels vs image
+    // pixels). Reset on the FMG→image switch so a stale FMG-space camera can't
+    // place the backdrop off-screen; the overlay then contain-fits the image.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
+  /** Drop back to FMG terrain mode (keeps any existing fmgSnapshot). */
+  clearMapBackdrop: () => set(state => {
+    state.mapState.customBackdrop = null;
+    // Drop the image-space camera so it can't be pushed into FMG d3.zoom on reload.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
+  /**
+   * Bump the geometry-version counter. Called by WorldMap.jsx after a fresh
+   * FMG snapshot has been loaded, the world has been regenerated, or the
+   * map has been deselected — anything that invalidates A*-routed road
+   * polylines whose coordinates were computed against the previous geometry.
+   */
+  bumpGeometryVersion: () => set(state => {
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
+  // ── Wholesale state swap (campaign load) ──────────────────────────────────
+  /**
+   * Replace the full mapState with a new one (typically from a loaded campaign).
+   * Does NOT touch the FMG snapshot — that needs to be loaded via the bridge.
+   */
+  replaceMapState: (next) => set(state => {
+    // Lifecycle-clear (fix wave 2 #3): the annotation/placement undo+redo stacks are
+    // scoped to the map they were recorded against. A campaign switch swaps mapState
+    // here but PREVIOUSLY left the stacks intact, so pressing Undo in campaign B
+    // injected campaign A's placements / secret markers into B (a cross-campaign
+    // secret leak, and geometry from the wrong world). The stacks MUST be dropped
+    // whenever the underlying map is replaced; the AnnotateToolbar Undo button reads
+    // mapUndoStack.length so an emptied stack disables it automatically.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
+    if (!next) { state.mapState = freshMapState(); return; }
+    // Merge with defaults to handle older snapshots missing new fields
+    const fresh = freshMapState();
+    state.mapState = {
+      ...fresh,
+      ...next,
+      layers:   { ...fresh.layers,   ...(next.layers   || {}) },
+      viewport: { ...fresh.viewport, ...(next.viewport || {}) },
+      placements: next.placements || {},
+      labels:   next.labels   || [],
+      markers:  next.markers  || [],
+      forests:  next.forests  || [],
+      customBackdrop: next.customBackdrop || null, // older campaigns → null (FMG mode)
+    };
+  }),
+
+  /** Reset to empty. Used when deselecting a campaign. */
+  resetMapState: () => set(state => {
+    state.mapState = freshMapState();
+    state.selectedBurgId = null;
+    state.selectedAnnotationId = null;
+    state.selectedAnnotationKind = null;
+    // Also clear settlement selection/hover — a campaign deselect left these
+    // pointing at the now-gone settlement.
+    state.selectedSettlementId = null;
+    state.hoveredSettlementId = null;
+    // Lifecycle-clear (fix wave 2 #3): drop the map-scoped undo/redo history so a
+    // deselect / fresh-campaign switch can't let a later Undo restore the prior
+    // campaign's placements or secret markers into a different (or empty) map.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
+  }),
+
+  // ── Undo/redo (per-action snapshot of annotation/placement sub-slices) ─────
+  // Public action: components call this ONCE at drag-start (move/edit, which
+  // otherwise mutate per-pointermove and would flood the stack) so the whole
+  // drag collapses to a single undo entry.
+  pushMapUndo: (action) => set(state => {
+    snapshotForUndo(state, action);
+  }),
+
+  mapUndo: () => set(state => {
+    const entry = state.mapUndoStack.pop();
+    if (!entry) return;
+    state.mapRedoStack.push({
+      action: entry.action,
+      snapshot: snapshotAnnotations(state.mapState),
+      timestamp: Date.now(),
+    });
+    // Restore ONLY the annotation/placement sub-slices — geography (fmgSnapshot),
+    // layers, backdrop, and camera are left as they are.
+    restoreAnnotations(state.mapState, entry.snapshot);
+  }),
+
+  mapRedo: () => set(state => {
+    const entry = state.mapRedoStack.pop();
+    if (!entry) return;
+    state.mapUndoStack.push({
+      action: entry.action,
+      snapshot: snapshotAnnotations(state.mapState),
+      timestamp: Date.now(),
+    });
+    restoreAnnotations(state.mapState, entry.snapshot);
+  }),
+
+  // ── Derived selectors (also exposed on store/selectors.js) ────────────────
+  /** burgId -> settlementId derived from placements */
+  getBurgSettlementMap: () => {
+    const out = {};
+    const placements = get().mapState.placements;
+    for (const [burgId, p] of Object.entries(placements)) {
+      out[burgId] = p.settlementId;
+    }
+    return out;
+  },
+
+  /** Settlement by burg id, or null */
+  getSettlementForBurg: (burgId) => {
+    const p = get().mapState.placements[burgId];
+    if (!p) return null;
+    return (get().savedSettlements || []).find(
+      s => s?.id != null && String(s.id) === String(p.settlementId),
+    ) || null;
+  },
+
+  // ── Burg→config conversion (used to derive settlement from a clicked burg) ──
+  burgToConfig: (burg) => {
+    if (!burg) return null;
+    const pop = burg.population || 500;
+    let settType;
+    if (pop <= 60)        settType = 'thorp';
+    else if (pop <= 240)  settType = 'hamlet';
+    else if (pop <= 900)  settType = 'village';
+    else if (pop <= 5000) settType = 'town';
+    else if (pop <= 25000) settType = 'city';
+    else                  settType = 'metropolis';
+    return {
+      settType,
+      population: pop,
+      tradeRouteAccess: burg.port ? 'port' : 'road',
+      customName: burg.name || '',
+    };
+  },
+});

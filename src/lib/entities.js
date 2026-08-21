@@ -1,0 +1,267 @@
+/**
+ * lib/entities.js - Tag- and ID-based primitives for mechanical entities.
+ *
+ * These are the helpers mechanics SHOULD use instead of name-pattern
+ * matching. Long-term, every "does this institution count as security?"
+ * check in the codebase replaces:
+ *
+ *     name.toLowerCase().includes('watch')
+ *
+ * with:
+ *
+ *     hasTag(institution, TAG.SECURITY)
+ *
+ * The helpers are tolerant of legacy data:
+ *   - Entities without a `tags` field return `false` from hasTag.
+ *   - Entities without an `id` field fall back to a deterministic id
+ *     derived from their name + category (so two consumers of the
+ *     same unnamed entity see the same id).
+ *
+ * The helpers are also tolerant of mixed-shape inputs - strings (just
+ * the name), full objects, or partial objects from intermediate
+ * generator steps. The runtime overhead per call is two property reads
+ * plus an array `.includes`. Cheap enough to use in hot paths.
+ */
+
+import { TAG, TAG_GROUPS } from '../data/entityTags.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
+
+// Re-exports so consumers can `import { hasTag, TAG } from '@/lib/entities'`
+// without two imports.
+export { TAG, TAG_GROUPS };
+
+// ── tagsOf ─────────────────────────────────────────────────────────────────
+// Returns the array of tags on an entity. Empty array for unknown shapes.
+
+/**
+ * @param {unknown} entity - Institution, service, resource, etc.
+ * @returns {string[]} The entity's declared tags (may be empty).
+ */
+export function tagsOf(entity) {
+  if (!entity || typeof entity !== 'object') return [];
+  const e = /** @type {any} */ (entity);
+  if (Array.isArray(e.tags)) return e.tags;
+  return [];
+}
+
+// ── hasTag ─────────────────────────────────────────────────────────────────
+
+/**
+ * Whether `entity` carries `tag` in its tag list.
+ *
+ * @param {unknown} entity
+ * @param {string} tag      Use a TAG.* constant where possible.
+ * @returns {boolean}
+ */
+export function hasTag(entity, tag) {
+  if (typeof tag !== 'string' || !tag) return false;
+  const tags = tagsOf(entity);
+  return tags.includes(tag);
+}
+
+/**
+ * Whether `entity` carries any tag from `group`. Useful with the
+ * pre-built TAG_GROUPS bundles (ENFORCEMENT, WELFARE_PROVIDER, etc.).
+ *
+ * @param {unknown} entity
+ * @param {string[]} group
+ * @returns {boolean}
+ */
+export function hasAnyTag(entity, group) {
+  if (!Array.isArray(group) || group.length === 0) return false;
+  const tags = tagsOf(entity);
+  for (const t of group) {
+    if (tags.includes(t)) return true;
+  }
+  return false;
+}
+
+/**
+ * Whether `entity` carries every tag in `group`. Less common than
+ * hasAnyTag, but useful for narrow filters like "must be both
+ * religious AND welfare-providing."
+ */
+export function hasAllTags(entity, group) {
+  if (!Array.isArray(group) || group.length === 0) return true;
+  const tags = tagsOf(entity);
+  for (const t of group) {
+    if (!tags.includes(t)) return false;
+  }
+  return true;
+}
+
+// ── idOf ───────────────────────────────────────────────────────────────────
+// Stable id for an entity. If the entity carries one, return it. Otherwise
+// derive a deterministic id from the name + optional category.
+//
+// The fallback id is `prefix.snake_case_name` - e.g. "institution.town_watch".
+// Two callers handed the same unnamed entity get the same id. This is the
+// migration path: once consumers start querying by id, the data files can
+// be updated to carry explicit ids without breaking anything.
+
+function snakeCase(s) {
+  return String(s)
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase();
+}
+
+/**
+ * Stable id for an entity. Prefers `entity.id`, falls back to deriving
+ * from `entity.name` + the optional `prefix` (default 'entity').
+ *
+ * @param {unknown} entity
+ * @param {string} [prefix]   'institution' | 'faction' | 'service' | etc.
+ * @returns {string|null}
+ */
+export function idOf(entity, prefix = 'entity') {
+  if (!entity || typeof entity !== 'object') return null;
+  const e = /** @type {any} */ (entity);
+  if (typeof e.id === 'string' && e.id) return e.id;
+  if (typeof e.name === 'string' && e.name) {
+    return `${prefix}.${snakeCase(e.name)}`;
+  }
+  return null;
+}
+
+/**
+ * Canonical stable id for a faction, derived from its display name.
+ *
+ * The crucial invariant for the dossier hyperlink layer: an NPC's
+ * `factionLink` (npcProfile.js#deriveNpcProfile) and a faction's own derived
+ * id (factionProfile.js) MUST produce the identical string so a name-stated
+ * NPC affiliation resolves to its faction card by stable id with NO
+ * name-matching at render. Routing all three through this one helper (which
+ * shares the module's `snakeCase` shape) keeps them in lockstep.
+ *
+ * Returns null for an empty/missing name so callers can guard a broken link.
+ *
+ * @param {string} [name]   The faction display name (e.g. "Iron Guild").
+ * @returns {string|null}   'faction.<snake_name>' or null.
+ */
+export function factionIdFromName(name) {
+  if (!name) return null;
+  return `faction.${snakeCase(name)}`;
+}
+
+// ── Institution tag resolution (keyword backfill) ───────────────────────────
+// The migration target is "mechanics query institution tags, not names." But
+// `tagsOf` only reads an entity's DECLARED tags — and catalog tags are coarse
+// ('civic', 'religious', 'food') while legacy institutions may carry none. So a
+// name-keyword backfill makes tag dispatch RELIABLE for native and genuinely
+// unstamped legacy institutions — the prerequisite for converting scattered
+// `name.includes(...)` sites to `institutionHasTag(...)`. Current custom names
+// and tags are presentation-only and stop at the provenance boundary below.
+// This CENTRALIZES the remaining native/legacy name match into one canonical map;
+// as the catalog gains richer declared tags, that fallback simply stops firing.
+//
+// Each rule maps a name-keyword pattern to the canonical TAG.* values it implies.
+// Exported so the tag-vocabulary coverage pin (dataVocabularyCoverage.test.js)
+// can compute tag reachability from the real rules, not a source scrape.
+export const INSTITUTION_KEYWORD_TAGS = Object.freeze([
+  { re: /watch|guard|garrison|constab|militia|sheriff|patrol|sentinel/i, tags: [TAG.SECURITY, TAG.LAW, TAG.PUBLIC_ORDER] },
+  { re: /barracks|fort|keep|citadel|rampart|armory|armoury/i,           tags: [TAG.MILITARY, TAG.DEFENSE] },
+  { re: /temple|church|cathedral|chapel|shrine|monaster|parish|abbey|sanctuar/i, tags: [TAG.RELIGIOUS, TAG.WELFARE] },
+  { re: /hospital|infirmary|healer|almshouse|hospice|sanatorium/i,      tags: [TAG.HEALING, TAG.WELFARE] },
+  { re: /market|bazaar|exchange|emporium|fair/i,                        tags: [TAG.MARKET, TAG.TRADE, TAG.ECONOMIC] },
+  { re: /guild|caravan|trading|merchant|warehouse|counting house|bank/i, tags: [TAG.TRADE, TAG.ECONOMIC] },
+  { re: /dock|harbor|harbour|wharf|quay|shipyard/i,                     tags: [TAG.TRADE, TAG.TRANSPORT] },
+  { re: /mill|granary|bakery|brewery|farm|grain|field|fishery|fishing|orchard|pastoral|graz|livestock|dairy|butcher|slaughter/i, tags: [TAG.FOOD, TAG.AGRICULTURE] },
+  { re: /mage|wizard|arcane|spellcast|sorcer|conjur|enchant|magus/i,    tags: [TAG.ARCANE, TAG.MAGIC] },
+  { re: /library|academy|college|university|scriptorium|school|scholar/i, tags: [TAG.SCHOLARLY, TAG.EDUCATION] },
+  { re: /thieves|criminal|gang|smuggl|fence|black\s*market|underworld|assassin|syndicate|racket/i, tags: [TAG.CRIMINAL, TAG.ILLICIT, TAG.SMUGGLING] },
+  { re: /court|town hall|council|magistrate|chancery|moot|tribunal/i,   tags: [TAG.CIVIC, TAG.PUBLIC_AUTHORITY, TAG.LEGAL] },
+  { re: /mine|quarry|lumber|sawmill|logging/i,                          tags: [TAG.RESOURCE_EXTRACTION, TAG.INDUSTRY] },
+  { re: /forge|smith|foundry|tannery|tanner|workshop|weaver|potter|mason/i, tags: [TAG.CRAFT, TAG.INDUSTRY] },
+  { re: /road|bridge|aqueduct|sewer|well|cistern|warehouse/i,           tags: [TAG.INFRASTRUCTURE] },
+]);
+
+/**
+ * The canonical native-mechanical tags for an institution: its DECLARED `tags`
+ * unioned with any implied by its name (keyword backfill). Tolerant of string
+ * (name only) or object inputs. Current custom presentation fields return no
+ * mechanical tags; callers that render them can use tagsOf().
+ *
+ * @param {unknown} inst
+ * @returns {string[]}
+ */
+export function institutionTags(inst) {
+  // Authored custom tags are presentation metadata under the custom-content
+  // manifest. They remain available through tagsOf(), but neither those tags
+  // nor the display name may enter this native mechanical classifier. Legacy
+  // unstamped rows retain the historical declared-tag and keyword behavior.
+  if (isMaterializedCustomContent(inst)) return [];
+  const declared = tagsOf(inst);
+  const name = typeof inst === 'string'
+    ? inst
+    : (
+      inst && typeof inst === 'object'
+        ? String(/** @type {any} */(inst).name || '')
+        : ''
+    );
+  if (!name) return declared;
+  const out = [...declared];
+  for (const { re, tags } of INSTITUTION_KEYWORD_TAGS) {
+    if (re.test(name)) {
+      for (const t of tags) if (!out.includes(t)) out.push(t);
+    }
+  }
+  return out;
+}
+
+/**
+ * Reliable native/legacy institution tag check: declared tags OR name-keyword
+ * backfill, bounded by current custom provenance. This is the dispatch primitive
+ * the remaining `name.includes(...)` sites should migrate to.
+ * @param {unknown} inst
+ * @param {string} tag  Use a TAG.* constant.
+ * @returns {boolean}
+ */
+export function institutionHasTag(inst, tag) {
+  if (typeof tag !== 'string' || !tag) return false;
+  return institutionTags(inst).includes(tag);
+}
+
+/** True if the institution carries any tag in `group` (declared or backfilled). */
+export function institutionHasAnyTag(inst, group) {
+  if (!Array.isArray(group) || group.length === 0) return false;
+  const tags = institutionTags(inst);
+  return group.some((t) => tags.includes(t));
+}
+
+// ── Convenience queries ────────────────────────────────────────────────────
+// Small wrappers that read as the mechanical question they answer. Cheap
+// to add - every additional question becomes one named function instead
+// of an ad-hoc `hasTag(x, TAG.Y)` peppered across consumers.
+
+/** Any kind of order-enforcement institution (watch, garrison, militia). */
+export function isEnforcement(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.ENFORCEMENT);
+}
+
+/** Any welfare-providing institution (temple, almshouse, hospital). */
+export function isWelfareProvider(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.WELFARE_PROVIDER);
+}
+
+/** Any trade-participating institution (market, guild, caravanserai). */
+export function isTradeParticipant(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.TRADE_PARTICIPANT);
+}
+
+/** Any food-system institution (mill, market, granary). */
+export function isFoodSystem(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.FOOD_SYSTEM);
+}
+
+/** Any magic-system institution (mage college, shrine, library). */
+export function isMagicSystem(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.MAGIC_SYSTEM);
+}
+
+/** Any underground / criminal actor (thieves' guild, smuggling ring). */
+export function isUnderground(entity) {
+  return hasAnyTag(entity, TAG_GROUPS.UNDERGROUND);
+}

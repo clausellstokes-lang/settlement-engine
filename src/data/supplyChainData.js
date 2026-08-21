@@ -1,0 +1,1429 @@
+// supplyChainData.js
+// Supply chain taxonomy mapping resources → institutions → goods → services
+// Used by the pre-generation configuration panel "By Need" and "By Category" views
+
+// ── TOP-LEVEL NEED CATEGORIES ────────────────────────────────────────────────
+// Each need maps to a set of chains: resource → processing institution → output
+// goods/services. The entrepôt flag marks goods that flow through without local
+// production, supporting crossroads/port/river economic models.
+
+export const SUPPLY_CHAIN_NEEDS = {
+  // ── FOOD SECURITY ───────────────────────────────────────────────────────────
+  food_security: {
+    label: 'Food Security',
+    color: '#1a5a28',
+    desc: 'What the settlement eats, how it stores food, and what it can export',
+    chains: [
+      {
+        id: 'grain',
+        label: 'Grain & Bread',
+        resource: 'Grain fields',
+        rawInputs: ['Grain surplus', 'Agricultural surplus'],
+        processingInstitutions: ['Maltster', 'Mills (2-5)', 'Mill', 'Access to external mill'],
+        intermediateGoods: ['Milled flour'],
+        outputs: ['Baked goods', 'Grain surplus', 'Agricultural surplus', 'Bulk food exports'],
+        services: ['food'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'thorp',
+        resourceSubstitutes: ['Fertile Floodplain'],
+      },
+      {
+        id: 'livestock',
+        label: 'Livestock & Dairy',
+        resource: 'Grazing land',
+        rawInputs: ['Livestock', 'Dairy products', 'Eggs and dairy'],
+        processingInstitutions: [
+          'Cooper',
+          'Stable master',
+          'Common grazing land',
+          'Dairy farmer',
+          'Shepherd',
+          'Stable yard',
+          'Pack animal trader',
+          'Horse market',
+        ],
+        intermediateGoods: ['Livestock', 'Dairy products'],
+        outputs: ['Preserved foods', 'Leather goods'],
+        services: ['food'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'hamlet',
+        // These are different husbandry ecologies, not different commodities:
+        // river cattle, camel herds, and alpine flocks all provide livestock.
+        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
+      },
+      // data-tables-5: the thin 'fish' chain was a duplicate authoring pass of the
+      // richer 'fishing' chain (both keyed resource 'Fishing grounds'), so a coastal
+      // town showed two near-identical fishing industries. Retired here; its unique
+      // 'Preserved foods' output was folded into 'fishing', its resource map redirected
+      // to 'fishing'/'river_fishing', and the 'Fish Trade' income link repointed.
+      {
+        id: 'salt',
+        label: 'Salt & Preservation',
+        resource: 'Salt flats',
+        rawInputs: ['Sea salt', 'Salt for preservation'],
+        processingInstitutions: ['Salt works'],
+        intermediateGoods: ['Salt for preservation'],
+        outputs: ['Preserved foods'],
+        services: ['food'],
+        exportable: true,
+        entrepot: true, // salt moves everywhere; crossroads/port settlements re-export it
+        minTier: 'hamlet',
+        resourceSubstitutes: ['Salt Pans'],
+        entrepotNote:
+          'Salt is among the most-traded commodities. Port and crossroads settlements profit from redistribution.',
+      },
+      {
+        id: 'forage',
+        label: 'Foraging & Smallholding',
+        resource: 'Foraging areas',
+        rawInputs: ['Foraged goods', 'Honey and beeswax', 'Eggs'],
+        // 'Elder Grove Council' alone (town) gated this thorp chain three tiers
+        // high. The smallholding ladder: 'Subsistence farming' (thorp/hamlet) →
+        // 'Beekeeper' (village — the honey-and-wax output) → the Council (town).
+        processingInstitutions: ['Subsistence farming', 'Beekeeper', 'Elder Grove Council'],
+        intermediateGoods: ['Honey and beeswax', 'Foraged goods'],
+        outputs: ['Honey and beeswax', 'Foraged goods'],
+        services: ['food'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'thorp',
+        resourceSubstitutes: ['Ancient Grove', 'Marshlands'],
+      },
+      {
+        id: 'fishing',
+        label: 'Fishing & Seafood',
+        resource: 'Fishing grounds',
+        // data-tables-5: 'River fish' folded in from the retired 'fish' chain so the
+        // resource→goods vocabulary (resourceEconomicRole / tierResourceDynamics)
+        // still associates fishing_grounds with the fish-family goods — the retirement
+        // is a DISPLAY dedup, not an economic-role reclassification.
+        rawInputs: ['Fish catch', 'River fish', 'Freshwater catch'],
+        processingInstitutions: [
+          "Fisher's landing",
+          'Fishmonger',
+          'Cooper',
+          'Salt works',
+          'Merchant guilds (3-8)',
+          'Weekly market',
+          'Fish market',
+          'Fishmonger',
+        ],
+        intermediateGoods: ['Fresh fish', 'Gutted catch'],
+        // data-tables-5: 'Preserved foods' folded in from the retired thin 'fish' chain.
+        outputs: ['Salted fish', 'Smoked seafood', 'Fish oil', 'Freshwater catch', 'Preserved foods'],
+        services: ['food'],
+        exportable: true,
+        minTier: 'hamlet',
+        resourceSubstitutes: ['River fisheries'],
+      },
+      {
+        id: 'river_fishing',
+        label: 'River Fishing',
+        resource: 'River fisheries',
+        rawInputs: ['River fish', 'Freshwater catch'],
+        processingInstitutions: ["Fisher's landing", 'Fishmonger', 'Cooper', 'Merchant guilds (3-8)', 'Weekly market'],
+        intermediateGoods: ['Fresh fish'],
+        outputs: ['River fish', 'Freshwater catch', 'Salted fish'],
+        services: ['food'],
+        exportable: true,
+        minTier: 'hamlet',
+        // data-tables-5: dropped 'Fishing grounds' — a coastal town (no river) must
+        // not surface a 'River Fishing' industry via this substitute.
+        resourceSubstitutes: [],
+      },
+      {
+        id: 'hunting',
+        label: 'Hunting & Trapping',
+        resource: 'Hunting grounds',
+        rawInputs: ['Game meat', 'Furs and pelts', 'Hunting trophies'],
+        processingInstitutions: ["Hunter's lodge", 'Tanner (established)', "Warden's Lodge", 'Wildfowler'],
+        intermediateGoods: ['Prepared hides', 'Dressed game'],
+        outputs: ['Game meat', 'Furs and pelts', 'Hunting trophies', 'Leather goods'],
+        services: ['food', 'employment'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'brewing',
+        upstreamChains: ['grain'],
+        label: 'Brewing & Malting',
+        resource: 'Grain fields',
+        rawInputs: ['Grain surplus', 'Malted barley', 'Hops'],
+        processingInstitutions: ['Cooper', 'Alehouse', 'Ale house', 'Village brewhouse'],
+        intermediateGoods: ['Malted barley', 'Wort'],
+        outputs: ['Ale (barrel)', 'Beer (barrel)', 'Malt', 'Mead'],
+        services: ['food'],
+        exportable: true,
+        minTier: 'hamlet',
+        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
+      },
+      {
+        id: 'animal_husbandry',
+        label: 'Horse & Animal Trade',
+        resource: 'Grazing land',
+        rawInputs: ['Livestock', 'Working animals'],
+        // Merchant guilds first generate at town — three tiers above this hamlet
+        // chain. The animal-trade ladder below them: 'Pack animal trader'/'Stable
+        // yard' (hamlet) → 'Stable master' (village) → 'Beast trainers' (town).
+        processingInstitutions: [
+          'Pack animal trader',
+          'Stable yard',
+          'Stable master',
+          'Beast trainers',
+          'Merchant guilds (3-8)',
+          'Merchant guilds (15-40)',
+        ],
+        intermediateGoods: ['Trained horses', 'Draft animals'],
+        outputs: ['Cavalry mounts', 'Draft horses', 'Working animals', 'Hunting dogs', 'Trained falcons'],
+        services: ['transport', 'employment'],
+        exportable: true,
+        minTier: 'hamlet',
+        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
+      },
+    ],
+  },
+
+  // ── FUEL & MATERIALS ─────────────────────────────────────────────────────────
+  raw_extraction: {
+    label: 'Raw Materials & Fuel',
+    color: '#7a5010',
+    desc: 'What the earth, forest, and water provide for construction and industry',
+    chains: [
+      {
+        id: 'timber',
+        label: 'Timber & Lumber',
+        resource: 'Managed woodland',
+        rawInputs: ['Milled timber', 'Charcoal', 'Hardwood beams', 'Shipbuilding timber'],
+        processingInstitutions: [
+          'Sawmill',
+          'Carpenter (part-time)',
+          'Carpenters (5-15)',
+          'Thatcher',
+          'Carpenter (part-time)',
+          'Carpenter',
+        ],
+        intermediateGoods: ['Milled timber', 'Charcoal'],
+        outputs: ['Barrels and containers', 'Milled lumber'],
+        services: [],
+        exportable: true,
+        entrepot: false,
+        minTier: 'hamlet',
+        resourceSubstitutes: ['Coastal Timber', 'Mountain Timber'],
+      },
+      {
+        id: 'iron',
+        label: 'Iron & Metalwork',
+        resource: 'Iron ore deposits',
+        rawInputs: ['Iron ore', 'Basic metalwork'],
+        processingInstitutions: ['Mine (open cast)', 'Resident smith (part-time)', 'Blacksmiths (3-10)'],
+        intermediateGoods: ['Iron ore', 'Basic metalwork'],
+        outputs: ['Quality tools and weapons', 'Advanced weapons and armor', 'Master-crafted weapons'],
+        services: ['equipment'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'stone',
+        label: 'Stone & Construction',
+        resource: 'Stone quarry',
+        rawInputs: ['Quarried stone', 'Building materials'],
+        processingInstitutions: ['Stone quarry', 'Brickmaker'],
+        intermediateGoods: ['Quarried stone'],
+        outputs: ['Quarried stone', 'Building materials'],
+        services: [],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+      },
+      {
+        id: 'fuel',
+        label: 'Fuel & Heating',
+        resource: 'Coal or peat deposits',
+        rawInputs: ['Coal', 'Peat fuel'],
+        processingInstitutions: ['Charcoal burner', 'Peat cutter'],
+        intermediateGoods: ['Coal', 'Peat fuel', 'Charcoal'],
+        outputs: ['Coal', 'Peat fuel'],
+        services: [],
+        exportable: true,
+        entrepot: false,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'clay',
+        label: 'Clay & Ceramics',
+        resource: 'Clay deposits',
+        rawInputs: ['Fired brick', 'Pottery and ceramics', 'Roof tiles'],
+        processingInstitutions: ['Potter', 'Brickmaker'],
+        intermediateGoods: ['Fired brick', 'Pottery and ceramics'],
+        outputs: ['Pottery and ceramics', 'Barrels and containers'],
+        services: [],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+      },
+      {
+        id: 'smelting',
+        upstreamChains: ['iron', 'fuel'],
+        label: 'Smelting & Refining',
+        resource: 'Iron ore deposits',
+        rawInputs: ['Iron ore', 'Charcoal', 'Coal'],
+        processingInstitutions: ['Smelter', 'Specialized metalworkers'],
+        intermediateGoods: ['Pig iron', 'Refined iron', 'Charcoal'],
+        outputs: ['Refined iron ingots', 'Pig iron', 'Cast iron goods'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'town',
+      },
+      {
+        id: 'reed_marsh',
+        label: 'Reed & Marsh Harvest',
+        resource: 'Marshlands',
+        rawInputs: ['Reeds and thatch', 'Peat fuel', 'Waterfowl'],
+        // Fishmonger (village) and chandler/ropemaker (town) left this hamlet
+        // chain dead at its own tier. The marsh trades that generate low:
+        // 'Peat cutter' (hamlet) → 'Thatcher'/'Wildfowler' (village — the
+        // reeds-and-waterfowl outputs).
+        processingInstitutions: [
+          'Peat cutter',
+          'Thatcher',
+          'Wildfowler',
+          'Fishmonger',
+          'Chandler',
+          'Ropemaker',
+          'Merchant guilds (3-8)',
+        ],
+        intermediateGoods: ['Dried reeds', 'Peat blocks'],
+        outputs: ['Reeds and thatch', 'Peat fuel', 'Waterfowl', 'Basket goods'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'shipbuilding',
+        label: 'Boatbuilding & River Transport',
+        resource: 'Managed woodland',
+        rawInputs: ['Boatbuilding timber', 'Milled lumber', 'Rope and cordage'],
+        processingInstitutions: ['Barge and river transport company', 'River boatyard', 'River ferry', 'Boatyard'],
+        intermediateGoods: ['Planks and beams', 'Boat components'],
+        outputs: ['River craft', 'Cargo barges', 'Fishing boats', 'Ferries'],
+        services: ['transport'],
+        exportable: true,
+        minTier: 'village',
+        resourceSubstitutes: ['Coastal timber'],
+      },
+      {
+        id: 'precious_metals_mining',
+        label: 'Mining & Coinage',
+        resource: 'Precious metal veins',
+        rawInputs: ['Precious metals', 'Raw ore'],
+        processingInstitutions: ['Specialized metalworkers', 'Jeweller'],
+        intermediateGoods: ['Refined ingots', 'Coin blanks', 'Assay certificates'],
+        outputs: ['Precious metals', 'Coin minting', 'Refined ingots', 'Assay certificates'],
+        services: ['legal'],
+        exportable: true,
+        minTier: 'town',
+        resourceSubstitutes: ['Gemstone deposits'],
+        processingInstitutionsByResource: {
+          precious_metals: ['Specialized metalworkers', 'Jeweller'],
+          gemstone_deposits: ['Jeweller'],
+        },
+        labelsByResource: {
+          gemstone_deposits: 'Gem Mining & Lapidary',
+        },
+        outputsByResource: {
+          precious_metals: ['Precious metals', 'Coin minting', 'Refined ingots', 'Assay certificates'],
+          gemstone_deposits: ['Raw gemstones', 'Cut gemstones', 'Gem appraisal'],
+        },
+      },
+      {
+        id: 'petty_mining',
+        label: 'Mining & Quarrying',
+        resource: 'Iron ore deposits',
+        rawInputs: ['Iron ore', 'Quarried stone', 'Coal'],
+        processingInstitutions: ['Mine (open cast)', 'Stone quarry'],
+        intermediateGoods: ['Rough ore', 'Dressed stone', 'Quarry rubble'],
+        outputs: ['Quarried stone', 'Iron ore', 'Building materials', 'Coal'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'hamlet',
+        resourceSubstitutes: ['Stone quarry', 'Coal or peat deposits'],
+        processingInstitutionsByResource: {
+          iron_deposits: ['Mine (open cast)'],
+          stone_quarry: ['Stone quarry'],
+          coal_deposits: ['Peat cutter', 'Charcoal burner'],
+        },
+        outputsByResource: {
+          iron_deposits: ['Iron ore'],
+          stone_quarry: ['Quarried stone', 'Building materials'],
+          coal_deposits: ['Coal'],
+        },
+      },
+      {
+        id: 'harbour_trade',
+        label: 'Harbour and Maritime',
+        resource: 'Deep Natural Harbour',
+        rawInputs: ['Harbour capacity', 'Dockside access'],
+        processingInstitutions: ["Harbour master's office", 'Docks/port facilities', 'Shipyard'],
+        intermediateGoods: ['Harbour fees', 'Ship repair'],
+        outputs: ['Maritime trade revenue', 'Ship construction', 'Vessel maintenance'],
+        services: ['transport'],
+        exportable: true,
+        minTier: 'town',
+      },
+      {
+        id: 'coastal_shipbuilding',
+        label: 'Shipbuilding and Timber',
+        resource: 'Coastal Timber',
+        rawInputs: ['Coastal timber', 'Shipbuilding wood'],
+        processingInstitutions: ['Shipyard', 'Sawmill', 'River boatyard'],
+        intermediateGoods: ['Planks and beams', 'Ship timber'],
+        outputs: ['Ocean-going vessels', 'River barges', 'Coastal craft'],
+        services: ['transport', 'military'],
+        exportable: true,
+        minTier: 'town',
+      },
+      {
+        id: 'river_milling',
+        label: 'River Mill Industry',
+        resource: 'Mill Sites',
+        rawInputs: ['Grain for milling', 'Water power'],
+        processingInstitutions: ['Mills (2-5)', 'Mill', 'Sawmill'],
+        intermediateGoods: ['Milled flour', 'Sawn timber'],
+        outputs: ['Flour and meal', 'Milled lumber', 'Fulled cloth'],
+        services: ['food', 'crafts'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'floodplain_agriculture',
+        label: 'Floodplain Agriculture',
+        resource: 'Fertile Floodplain',
+        rawInputs: ['Alluvial soil crops', 'Flood-fed grain'],
+        processingInstitutions: ['Farmland', 'Mills (2-5)', 'Town granary'],
+        intermediateGoods: ['Grain surplus', 'Diverse crops'],
+        outputs: ['Grain export', 'Agricultural produce', 'Surplus food'],
+        services: ['food'],
+        exportable: true,
+        minTier: 'village',
+      },
+      {
+        id: 'mountain_timber_harvest',
+        label: 'Mountain Timber',
+        resource: 'Mountain Timber',
+        rawInputs: ['Mountain timber', 'High-altitude wood'],
+        processingInstitutions: ['Sawmill', 'Charcoal burner', 'Carpenter (part-time)'],
+        intermediateGoods: ['Hewn timber', 'Charcoal', 'Firewood'],
+        outputs: ['Structural timber', 'Fuel wood', 'Charcoal'],
+        services: ['construction', 'fuel'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'alpine_wool',
+        label: 'Alpine Wool and Dairy',
+        resource: 'Alpine Pastures',
+        rawInputs: ['Mountain wool', 'Alpine dairy'],
+        processingInstitutions: ['Shepherd', 'Weavers/Textile workers', 'Fuller', 'Dairy farmer'],
+        intermediateGoods: ['Raw wool', 'Alpine cheese', 'Mountain butter'],
+        outputs: ['Fine wool cloth', 'Aged cheese', 'Luxury dairy products'],
+        services: ['food', 'textiles'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'oasis_agriculture',
+        label: 'Oasis Water and Agriculture',
+        resource: 'Oasis and Water Rights',
+        rawInputs: ['Fresh water', 'Oasis crops'],
+        processingInstitutions: ['Farmland', 'Pack animal trader'],
+        intermediateGoods: ['Fresh water supply', 'Desert produce'],
+        outputs: ['Water trade', 'Dates and fruit', 'Caravan resupply'],
+        services: ['food', 'trade'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'date_palm_harvest',
+        label: 'Date Palms and Orchards',
+        resource: 'Date Palms and Orchards',
+        rawInputs: ['Dates', 'Palm products'],
+        // 'Farmland' (village) and the market/caravaneer pair (town) left this
+        // hamlet chain dead at its own tier: 'Subsistence farming' (thorp/hamlet)
+        // grows the palms, 'Caravanserai' (hamlet/village) moves the dates.
+        processingInstitutions: [
+          'Subsistence farming',
+          'Farmland',
+          'Caravanserai',
+          'Market square',
+          "Caravaneer's post",
+        ],
+        intermediateGoods: ['Dried dates', 'Palm oil', 'Woven palm goods'],
+        outputs: ['Date export', 'Palm sugar', 'Preserved fruit'],
+        services: ['food', 'trade'],
+        exportable: true,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'desert_glasswork',
+        label: 'Desert Glass and Sand',
+        resource: 'Fine Glass Sand',
+        rawInputs: ['Fine glass sand', 'Desert silica'],
+        processingInstitutions: ['Glassblower', 'Glassmakers'],
+        intermediateGoods: ['Raw glass', 'Glass blanks'],
+        outputs: ['Glassware', 'Window glass', 'Optical glass'],
+        services: ['crafts'],
+        exportable: true,
+        minTier: 'town',
+      },
+    ],
+  },
+
+  // ── MANUFACTURING ─────────────────────────────────────────────────────────────
+  manufacturing: {
+    label: 'Manufacturing & Crafts',
+    color: '#2a3a7a',
+    desc: 'What craftsmen and guilds produce from raw inputs',
+    chains: [
+      {
+        id: 'textiles',
+        label: 'Textiles & Cloth',
+        resource: 'Grazing land',
+        rawInputs: ['Raw wool', 'Raw wool and hides'],
+        processingInstitutions: [
+          "Tailor's guild",
+          'Weavers/Textile workers',
+          'Shepherd',
+          'Fuller',
+          'Dyer',
+          "Dyers' workshop",
+        ],
+        intermediateGoods: ['Processed textiles', 'Raw wool and hides'],
+        outputs: ['Processed textiles', 'Guild-manufactured goods', 'Dyed cloth', 'Fine textiles'],
+        services: ['equipment'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+        resourceSubstitutes: ['Alpine Pastures'],
+      },
+      {
+        id: 'leather',
+        upstreamChains: ['livestock'],
+        label: 'Leather & Hides',
+        resource: 'Hunting grounds',
+        rawInputs: ['Furs and pelts', 'Raw wool and hides'],
+        // Tanner/cobbler guild are town-catalog; 'Tannery' is the village form
+        // that opens this village chain at its own tier (leather_goods already
+        // lists it).
+        processingInstitutions: ['Tannery', 'Tanner (established)', "Cobbler's guild", "Furrier's district"],
+        intermediateGoods: ['Raw wool and hides'],
+        outputs: ['Leather goods', 'Guild-manufactured goods'],
+        services: ['equipment'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+      },
+      {
+        id: 'food_processing',
+        upstreamChains: ['grain'],
+        label: 'Food Processing',
+        resource: 'Grain fields',
+        rawInputs: ['Grain surplus', 'Livestock', 'Dairy products'],
+        processingInstitutions: ['Dairy farmer', 'Bakers (5-15)', 'Butchers (3-8)'],
+        intermediateGoods: ['Milled flour', 'Dairy products'],
+        outputs: ['Baked goods', 'Preserved foods'],
+        services: ['food'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
+      },
+      {
+        id: 'weapons_armor',
+        upstreamChains: ['smelting'],
+        label: 'Weapons & Armor',
+        resource: 'Iron ore deposits',
+        rawInputs: ['Iron ore', 'Basic metalwork'],
+        processingInstitutions: ['Specialized metalworkers', 'Blacksmiths (3-10)', 'Armourers'],
+        intermediateGoods: ['Quality tools and weapons'],
+        outputs: ['Quality tools and weapons', 'Advanced weapons and armor', 'Master-crafted weapons'],
+        services: ['equipment'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'luxury_goods',
+        upstreamChains: ['precious_metals_mining'],
+        label: 'Luxury Goods',
+        resource: 'Precious metal veins',
+        rawInputs: ['Precious metals', 'Gemstones', 'Fine textiles'],
+        // Was [] — an empty processor list means computeActiveChains can
+        // never activate the chain. Luxury manufacture is city-catalog work:
+        // 'Specialized metalworkers' (armorers, swordsmiths, jewelers) make
+        // the goods, the 'Luxury goods quarter' moves them.
+        processingInstitutions: ['Specialized metalworkers', 'Luxury goods quarter'],
+        intermediateGoods: ['Fine metalwork and jewelry', 'Fine textiles'],
+        outputs: [
+          'Luxury manufactured goods',
+          'Fine metalwork and jewelry',
+          'Extreme luxury goods',
+          'Master-crafted weapons',
+        ],
+        services: [],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Luxury goods are the primary cargo of long-distance trade. Entrepôt cities profit enormously from the markup.',
+        minTier: 'city',
+      },
+      {
+        id: 'glass_print',
+        upstreamChains: ['clay'],
+        label: 'Glass & Print',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ['Glassblower', 'Glassmakers', 'Printing house'],
+        intermediateGoods: ['Glassware', 'Books and manuscripts'],
+        outputs: ['Glassware', 'Books and manuscripts', 'Printing services'],
+        services: ['information'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'city',
+      },
+      {
+        id: 'bowyer_fletcher',
+        label: 'Bowyer & fletcher',
+        resource: 'Managed woodland',
+        rawInputs: ['Yew wood', 'Ash wood', 'Feathers', 'Sinew'],
+        processingInstitutions: ['Craft guilds (5-15)', 'Specialist craftsmen', 'Bowyer & fletcher', "Bowyer's shop"],
+        intermediateGoods: ['Bow staves', 'Arrow shafts'],
+        outputs: ['Bows and crossbows', 'Arrows (sheaf)', 'Crossbow bolts', 'Hunting equipment'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'village',
+      },
+      {
+        id: 'textile_finishing',
+        upstreamChains: ['textiles'],
+        label: 'Cloth Finishing & Clothing',
+        resource: 'Grazing land',
+        rawInputs: ['Raw wool', 'Processed textiles', 'Dyes'],
+        // "Tailor's guild" is town-catalog and 'Shepherd' (hamlet-only) produces
+        // raw wool, not finished cloth. The village finishing trades: 'Tailor',
+        // 'Fuller', 'Dyer' ('Tailor' also matches the town guild under the
+        // 12-char prefix).
+        processingInstitutions: ['Tailor', 'Fuller', 'Dyer', "Tailor's guild"],
+        intermediateGoods: ['Fulled cloth', 'Dyed cloth', 'Finished cloth'],
+        outputs: ['Finished clothing', 'Dyed cloth', 'Tailored garments', 'Livery and uniforms'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'village',
+      },
+      {
+        id: 'leather_goods',
+        upstreamChains: ['livestock'],
+        label: 'Leatherworking & Cordwaining',
+        resource: 'Grazing land',
+        rawInputs: ['Raw hides', 'Tanned leather'],
+        processingInstitutions: ['Tanner (established)', "Cobbler's guild", 'Tannery', 'Leatherworkers'],
+        intermediateGoods: ['Tanned leather', 'Dressed hides'],
+        outputs: ['Boots and shoes', 'Saddles and harness', 'Leather armour', 'Leather goods', 'Belts and straps'],
+        services: ['equipment'],
+        exportable: true,
+        minTier: 'village',
+        resourceSubstitutes: ['Hunting grounds'],
+      },
+      {
+        id: 'ceramics_brick',
+        upstreamChains: ['clay'],
+        label: 'Pottery & Brickmaking',
+        resource: 'Clay deposits',
+        rawInputs: ['Clay', 'Peat fuel', 'Firewood'],
+        processingInstitutions: ['Potter', 'Brickmaker', 'Craft guilds (5-15)'],
+        intermediateGoods: ['Fired clay', 'Unfired pottery'],
+        outputs: ['Pottery and ceramics', 'Fired brick', 'Roof tiles', 'Drainage pipes'],
+        services: [],
+        exportable: true,
+        minTier: 'village',
+      },
+      {
+        id: 'beekeeping_wax',
+        label: 'Beekeeping & Wax',
+        resource: 'Wild foraging areas',
+        rawInputs: ['Wild honey', 'Beeswax'],
+        // 'Apothecary (established)' is town-catalog — this village chain has its
+        // own villager: 'Beekeeper'. 'Chandler' (town) takes the candles-and-wax
+        // output; the apothecary keeps the medicinal honey.
+        processingInstitutions: ['Beekeeper', 'Chandler', 'Apothecary (established)'],
+        intermediateGoods: ['Refined beeswax', 'Honey'],
+        outputs: ['Wild honey', 'Candles and wax', 'Mead', 'Medicinal honey'],
+        services: ['food'],
+        exportable: true,
+        minTier: 'village',
+        resourceSubstitutes: ['Ancient grove'],
+      },
+    ],
+  },
+
+  // ── TRADE & ENTREPÔT ──────────────────────────────────────────────────────────
+  trade_entrepot: {
+    label: 'Trade & Entrepôt',
+    color: '#a0762a',
+    desc: 'Goods that flow through for redistribution: the wealth of crossroads, ports, and river hubs',
+    chains: [
+      {
+        id: 'spices_dyes',
+        label: 'Spices & Dyes',
+        resource: null,
+        rawInputs: ['Rare spices and dyes'],
+        // Was [] — the chain could never activate. Entrepôt redistribution is
+        // merchant work: the guild houses and luxury quarter take the markup
+        // on goods produced in distant lands ('Annual fair' also matches the
+        // city's 'Major annual fairs' under the fuzzy gate).
+        processingInstitutions: ['Merchant guilds (3-8)', 'Merchant guilds (15-40)', 'Luxury goods quarter', 'Annual fair'],
+        intermediateGoods: ['Rare spices and dyes'],
+        outputs: ['Rare spices and exotic dyes'],
+        services: [],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Produced in distant lands. Crossroads and port settlements control distribution and take the markup.',
+        minTier: 'town',
+      },
+      {
+        id: 'silk_luxury_textiles',
+        label: 'Silk & Luxury Textiles',
+        resource: null,
+        rawInputs: ['Fine textiles', 'Luxury textiles'],
+        // Was [] — the chain could never activate. Silk import/distribution
+        // runs through the luxury-trade institutions: the city's quarter
+        // ('Silks, spices, precious goods') and merchant guilds, with the
+        // metropolis' international trade center above them.
+        processingInstitutions: ['Luxury goods quarter', 'Merchant guilds (15-40)', 'International trade center'],
+        intermediateGoods: ['Fine textiles', 'Luxury textiles'],
+        outputs: ['Fine textiles', 'Luxury manufactured goods'],
+        services: [],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Silk is not produced locally at any tier. Port cities control import; crossroads cities control inland distribution.',
+        minTier: 'city',
+      },
+      {
+        id: 'transit_finance',
+        upstreamChains: ['warehouse_logistics'],
+        label: 'Letters of Credit & Finance',
+        resource: null,
+        rawInputs: [],
+        // Was [] — the chain could never activate. The catalog's banking
+        // ladder: 'Money changers' (town) → 'Banking houses' (city) →
+        // 'Banking district' (metropolis).
+        processingInstitutions: ['Money changers', 'Banking houses', 'Banking district'],
+        intermediateGoods: ['Financial services', 'International banking services'],
+        outputs: ['Financial services', 'International banking services'],
+        services: ['legal'],
+        exportable: false,
+        entrepot: true,
+        entrepotNote:
+          'Entrepôt cities develop banking infrastructure to facilitate large-volume trade. The bank profits from the flow of others.',
+        minTier: 'town',
+      },
+      {
+        id: 'warehouse_logistics',
+        label: 'Storage & Logistics',
+        resource: null,
+        rawInputs: ['Transit trade', 'Toll revenue'],
+        processingInstitutions: ["Caravan masters' exchange", "Caravaneer's post", 'Barge and river transport company'],
+        intermediateGoods: [],
+        outputs: ['Cargo handling', 'Goods storage'],
+        services: ['transport'],
+        exportable: false,
+        entrepot: true,
+        entrepotNote:
+          'Ports and crossroads profit by charging for storage, loading, and onward transport, not by producing anything themselves.',
+        minTier: 'town',
+      },
+      {
+        id: 'furs_north',
+        upstreamChains: ['hunting'],
+        label: 'Furs & Pelts',
+        resource: 'Hunting grounds',
+        rawInputs: ['Furs and pelts', 'Game meat'],
+        processingInstitutions: ["Hunter's lodge", "Furrier's district"],
+        intermediateGoods: ['Furs and pelts'],
+        outputs: ['Furs and pelts', 'Leather goods'],
+        services: [],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Furs originate in frontier/northern settlements and travel south through trading posts. Mid-route settlements profit from the trade.',
+        minTier: 'hamlet',
+      },
+      {
+        id: 'wine_spirits',
+        label: 'Wine & Spirits',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ['Vintner', 'Brewer', 'Brewery'],
+        intermediateGoods: [],
+        outputs: ['Meals and drink', 'Preserved foods'],
+        services: ['food'],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Wine is produced in specific vineyard regions and consumed everywhere. Port and river settlements profit from redistribution.',
+        minTier: 'village',
+      },
+      {
+        id: 'caravan_trade',
+        upstreamChains: ['warehouse_logistics'],
+        label: 'Caravan & Overland Trade',
+        resource: null,
+        rawInputs: ['Pack animals', 'Trade goods', 'Provisions'],
+        // The caravaneer/carrier institutions all first generate at town, one
+        // tier above this village chain. Its village-and-below links:
+        // 'Caravanserai' (hamlet/village), 'Waystation' (village), 'Pack animal
+        // trader' (hamlet).
+        processingInstitutions: [
+          'Caravanserai',
+          'Waystation',
+          'Pack animal trader',
+          "Caravaneer's post",
+          "Caravan masters' exchange",
+          "Carriers' guild",
+          "Carriers' hiring hall",
+        ],
+        intermediateGoods: ['Way-bills', 'Bonded cargo', 'Route maps'],
+        outputs: ['Overland cargo transport', 'Escorted caravan', 'Pack animal hire', 'Route intelligence'],
+        services: ['transport', 'employment'],
+        exportable: false,
+        minTier: 'village',
+      },
+      {
+        id: 'crossroads_trade',
+        label: 'Strategic Crossroads Toll',
+        resource: 'Strategic Crossroads',
+        rawInputs: ['Trade traffic', 'Toll revenue'],
+        processingInstitutions: ['Toll bridge', "Caravaneer's post", 'Coaching inn', 'Customs house'],
+        intermediateGoods: ['Toll revenue', 'Transit fees'],
+        outputs: ['Toll income', 'Market taxes', 'Transit trade profit'],
+        services: ['trade'],
+        exportable: false,
+        entrepot: true,
+        minTier: 'village',
+      },
+      {
+        id: 'camel_caravan',
+        label: 'Camel Caravan Trade',
+        resource: 'Camel Herds',
+        rawInputs: ['Camel transport capacity', 'Desert routes'],
+        processingInstitutions: ['Pack animal trader', "Caravaneer's post", "Caravan masters' exchange"],
+        intermediateGoods: ['Desert transport', 'Long-distance freight'],
+        outputs: ['Caravan trade goods', 'Exotic imports', 'Overland freight revenue'],
+        services: ['trade', 'transport'],
+        exportable: true,
+        entrepot: true,
+        minTier: 'town',
+      },
+      {
+        id: 'mountain_pass_trade',
+        label: 'Mountain Pass Control',
+        resource: 'Mountain Pass',
+        rawInputs: ['Pass control', 'Strategic chokepoint'],
+        processingInstitutions: ['Toll bridge', 'Garrison', 'Customs house'],
+        intermediateGoods: ['Pass fees', 'Military revenue'],
+        outputs: ['Toll income', 'Strategic control', 'Trade access fees'],
+        services: ['military', 'trade'],
+        exportable: false,
+        minTier: 'village',
+      },
+    ],
+  },
+
+  // ── DEFENSE & SECURITY ────────────────────────────────────────────────────────
+  defense_security: {
+    label: 'Defense & Security',
+    color: '#8b1a1a',
+    desc: 'What protects the settlement from external threats and internal disorder',
+    chains: [
+      {
+        id: 'garrison',
+        upstreamChains: ['food_processing'],
+        label: 'Standing Garrison',
+        resource: null,
+        rawInputs: ['Quality tools and weapons', 'Advanced weapons and armor'],
+        // Was ['Garrison', 'Barracks (town)', 'City guard district'] at minTier
+        // 'hamlet' — 'Barracks (town)'/'City guard district' match no catalog
+        // name at any tier, and nothing standing generates below town (hamlets
+        // field a Citizen militia, not a garrison). The catalog ladder:
+        // 'Barracks'/'Town watch' (town) → 'Garrison'/'Professional city watch'
+        // (city) → 'Multiple garrisons' (metropolis, via the 'Garrison' prefix).
+        processingInstitutions: ['Barracks', 'Town watch', 'Garrison', 'Professional city watch'],
+        intermediateGoods: [],
+        outputs: ['Defence services', 'Weapons training'],
+        services: [],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'fortification',
+        upstreamChains: ['stone'],
+        label: 'Fortifications',
+        resource: 'Stone quarry',
+        rawInputs: ['Quarried stone', 'Building materials'],
+        // Was ['City wall district', 'Citadel', 'Town fortifications'] — the
+        // first and last match no catalog name at any tier, so only a Citadel
+        // (city) could ever run this hamlet-gated chain. The defensive-works
+        // ladder: 'Palisade' (thorp; the prefix also matches 'Palisade or
+        // earthworks' at hamlet/village) → 'Town walls' (town) → 'City walls
+        // and gates'/'Citadel' (city).
+        processingInstitutions: ['Palisade', 'Town walls', 'City walls and gates', 'Citadel'],
+        intermediateGoods: [],
+        outputs: [],
+        services: [],
+        exportable: false,
+        entrepot: false,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'mercenary',
+        label: 'Mercenary Forces',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ['Mercenary quarter', 'Free company hall'],
+        intermediateGoods: [],
+        outputs: ['Armed escort', 'Mercenary hire', 'Training services'],
+        services: ['employment'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'adventuring_escort',
+        label: 'Adventuring & Escort',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: [
+          "Adventurers' charter hall",
+          "Adventurers' guild",
+          "Multiple adventurers' guilds",
+          "Veteran's lodge",
+        ],
+        intermediateGoods: [],
+        outputs: ['Armed escort', 'Monster hunting services', 'Dungeon clearance'],
+        services: ['employment', 'security'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+    ],
+  },
+
+  // ── HEALING & MEDICINE ────────────────────────────────────────────────────────
+  healing_medicine: {
+    label: 'Healing & Medicine',
+    color: '#8b1a1a',
+    desc: 'What keeps the population alive and attracts pilgrims and the infirm',
+    chains: [
+      {
+        id: 'herbalism',
+        label: 'Herbalism & Remedies',
+        resource: 'Wild foraging areas',
+        rawInputs: ['Medicinal herbs', 'Alchemical reagents', 'Wild honey'],
+        // Was the town/city apothecary forms + warden/grove under minTier
+        // 'thorp' — the catalog generates no herbalist below village. 'Apothecary'
+        // (village; the prefix also matches the town '(established)' and city
+        // 'district' forms) and 'Midwife' (village) open the chain where
+        // remedies first exist; minTier moves to match.
+        processingInstitutions: [
+          'Apothecary',
+          'Midwife',
+          "Warden's Lodge",
+          'Elder Grove Council',
+        ],
+        intermediateGoods: ['Medicinal herbs', 'Alchemical reagents'],
+        outputs: ['Herbal remedies', 'Potions and elixirs'],
+        services: ['healing'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'village',
+      },
+      {
+        id: 'hospital',
+        label: 'Hospital & Surgery',
+        resource: null,
+        rawInputs: [],
+        // The dedicated medical institutions must run this chain (catalog names:
+        // 'Small hospital' town, 'Major hospital' city, 'Hospital network' metropolis);
+        // almshouse/foundling home are the charitable-care co-processors.
+        processingInstitutions: [
+          'Small hospital',
+          'Major hospital',
+          'Hospital network',
+          'Almshouse',
+          'Foundling home',
+        ],
+        intermediateGoods: [],
+        outputs: ['Medical treatment', 'Surgery', 'Quarantine', 'Medical training'],
+        services: ['healing'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'divine_healing',
+        label: 'Divine & Magical Healing',
+        resource: 'Hot springs',
+        rawInputs: ['Healing waters (bottled)'],
+        // Divine healing is clergy work — the religious institutions that exist in the
+        // catalog at village+ ('Multiple/Major monasteries' are the city/metropolis forms).
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+        ],
+        intermediateGoods: [],
+        // Outputs are goods/services only — institution names live in processingInstitutions.
+        outputs: ['Medical care (basic)', 'Spellcasting (1st-3rd level)'],
+        services: ['healing', 'magic'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'village',
+      },
+    ],
+  },
+
+  // ── KNOWLEDGE & INFORMATION ───────────────────────────────────────────────────
+  knowledge_information: {
+    label: 'Knowledge & Information',
+    color: '#2a3a7a',
+    desc: 'What the settlement knows, records, teaches, and sells as intelligence',
+    chains: [
+      {
+        id: 'cartography',
+        label: 'Maps & Cartography',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ['Great library', "Cartographer's guild", 'Message Network'],
+        intermediateGoods: [],
+        outputs: ['News and information', 'Maps and charts'],
+        services: ['information'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'scholarship',
+        label: 'Scholarship & Publishing',
+        resource: 'Ancient ruins',
+        rawInputs: ['Recovered artefacts', 'Rare texts'],
+        processingInstitutions: ["Wizard's tower", "Sage's quarter"],
+        intermediateGoods: ['Books and manuscripts'],
+        outputs: ['Books and manuscripts', 'Higher education', 'Research', 'Publishing', 'Printing services'],
+        services: ['information'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'intelligence',
+        upstreamChains: ['cartography'],
+        label: 'Intelligence & Communications',
+        resource: null,
+        rawInputs: [],
+        // "Sage's quarter" first generates at city — a dead town gate. 'Post
+        // relay station' (town) carries the long-distance-messages output at
+        // this chain's own tier.
+        processingInstitutions: ['Post relay station', "Sage's quarter"],
+        intermediateGoods: [],
+        outputs: ['Information brokerage', 'Long-distance messages', 'Intelligence services', 'Divination and scrying'],
+        services: ['information'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'news_information',
+        upstreamChains: ['cartography'],
+        label: 'News & Public Information',
+        resource: null,
+        rawInputs: ['Letters and dispatches', 'Official proclamations'],
+        processingInstitutions: ["Cartographer's guild"],
+        intermediateGoods: ['Letters', 'Broadsheets', 'Official notices'],
+        outputs: ['News and information', 'Broadsheets', 'Public proclamations', 'Message relay', 'Printing services'],
+        services: ['information'],
+        exportable: false,
+        minTier: 'village',
+      },
+    ],
+  },
+
+  // ── ARCANE & MAGICAL ──────────────────────────────────────────────────────────
+  arcane_magical: {
+    label: 'Arcane & Magical',
+    color: '#5a2a8a',
+    desc: 'What the settlement can offer in magical services, goods, and infrastructure',
+    chains: [
+      {
+        id: 'alchemy',
+        label: 'Alchemy & Reagents',
+        resource: 'Magical ley line node',
+        rawInputs: ['Arcane reagents', 'Medicinal herbs', 'Monster components'],
+        // Catalog spelling is "Wizard's tower" — the processor match is a substring
+        // over real institution names, so the apostrophe form is required.
+        processingInstitutions: ['Alchemist', 'Hedge wizard', "Wizard's tower"],
+        intermediateGoods: ['Alchemical reagents'],
+        outputs: ['Potions and elixirs', 'Alchemical reagents', 'Alchemical products'],
+        services: ['magic', 'healing'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'spellcasting',
+        label: 'Spellcasting Services',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ["Wizard's tower", "Mages' guild", "Mages' district", 'Hedge wizard'],
+        intermediateGoods: [],
+        // Outputs are goods/services only — institution names live in processingInstitutions.
+        outputs: [
+          'Spellcasting (1st-3rd level)',
+          'Magical identification',
+          'Enchanting services',
+          'Spellcasting (1st-8th level)',
+          'Teleportation',
+        ],
+        services: ['magic'],
+        exportable: true,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'magical_goods',
+        label: 'Magical Items & Enchanting',
+        resource: 'Magical ley line node',
+        rawInputs: ['Arcane reagents', 'Extraplanar goods'],
+        // Was [] — an empty processor list means computeActiveChains can
+        // never activate the chain (it returns early with no match). The first
+        // refill used 'Enchanting quarter'/'Magic item consignment' — spatialData
+        // SERVICE names, not institutionalCatalog entries — so with minTier 'town'
+        // the chain still could not activate before metropolis. The catalog's
+        // enchanting ladder: "Wizard's tower" (town) → "Enchanter's shop" /
+        // 'Scroll scribe' (city) → 'Academy of magic' / "Mages' district" (metropolis).
+        processingInstitutions: ["Wizard's tower", "Enchanter's shop", 'Scroll scribe', 'Academy of magic', "Mages' district"],
+        intermediateGoods: ['Arcane scribing'],
+        outputs: [
+          'Magical item market',
+          'Weapon enchantment',
+          'Armour warding',
+          'Utility enchantments',
+          'Extraplanar goods',
+        ],
+        services: ['magic'],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Magical items are among the highest-value trade goods. Cities near magical nodes become distribution hubs.',
+        minTier: 'town',
+      },
+      {
+        id: 'planar',
+        label: 'Planar Trade',
+        resource: null,
+        rawInputs: ['Extraplanar goods', 'Arcane reagents'],
+        // Was [] — the chain could never activate. Planar commerce is the
+        // teleportation circle's own supply chain: traders and the embassy
+        // process what arrives through it (both are culled at generation
+        // when no circle exists), and the circle itself consumes reagents.
+        processingInstitutions: ['Planar traders', 'Planar embassy'],
+        intermediateGoods: ['Extraplanar goods'],
+        outputs: ['Extraplanar goods', 'Planar travel information', 'Diplomatic access'],
+        services: ['magic', 'information'],
+        exportable: true,
+        entrepot: true,
+        entrepotNote:
+          'Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can support the infrastructure.',
+        // Was 'city' — but 'Planar traders' carries its own minTier:'metropolis'
+        // gate in the catalog and 'Planar embassy' lives in the metropolis
+        // section, so no city settlement can generate a processor. metropolis
+        // matches the entrepotNote above.
+        minTier: 'metropolis',
+      },
+    ],
+  },
+
+  // ── RELIGION & CIVIC ──────────────────────────────────────────────────────────
+  religion_civic: {
+    label: 'Religion & Civic',
+    color: '#5a3a1a',
+    desc: 'What holds the settlement together: faith, law, administration, and social order',
+    chains: [
+      {
+        id: 'parish',
+        label: 'Parish & Faith',
+        // No resource gate: faith is institution-borne. (ancient_grove still flags this
+        // chain 'running' via RESOURCE_TO_CHAINS where a grove is present.)
+        resource: null,
+        rawInputs: ['Ritual components', 'Pilgrim donations'],
+        // The chain belongs to the churches; almshouse/foundling home are the church-run
+        // poor-relief co-processors. 'Parish church' also matches the tier variants
+        // ('Access to parish church', 'Parish churches (2-5/10-30/50-100+)').
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+          'Wayside shrine',
+          'Almshouse',
+          'Foundling home',
+        ],
+        intermediateGoods: [],
+        outputs: [
+          'Religious services',
+          'Education (basic)',
+          'Poor relief',
+          'Record keeping',
+          'Sanctuary',
+          'Medical care (basic)',
+          'Illuminated manuscripts',
+        ],
+        services: ['healing'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'thorp',
+      },
+      {
+        id: 'law_governance',
+        label: 'Law & Governance',
+        resource: null,
+        rawInputs: [],
+        // Law is produced by courts and civic halls (catalog: 'Courthouse'/'Town hall' at
+        // town, 'City hall'/'Multiple courthouses' at city, 'Multiple court buildings' at
+        // metropolis). 'Courthouse' also matches 'Multiple courthouses'.
+        processingInstitutions: [
+          'Courthouse',
+          'Town hall',
+          'City hall',
+          'Multiple court buildings',
+        ],
+        intermediateGoods: [],
+        outputs: ['Civil disputes', 'Criminal trials', 'Notary services', 'Legal services'],
+        services: ['legal'],
+        exportable: false,
+        entrepot: false,
+        // Was 'hamlet' — courts first generate at town, and hamlet/village
+        // dispute-settling (headman, reeve, steward) is social order, not this
+        // formal law economy. The gate opens where a courthouse can exist.
+        minTier: 'town',
+      },
+      {
+        id: 'pilgrimage',
+        label: 'Pilgrimage & Holy Sites',
+        resource: 'Hot springs',
+        rawInputs: ['Healing waters (bottled)', 'Pilgrim donations'],
+        // Pilgrims travel to the holy houses; the almshouse is the hostel co-processor.
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+          'Almshouse',
+        ],
+        intermediateGoods: [],
+        outputs: ['Religious services', 'Hospitality for travellers', 'Poor relief'],
+        services: ['healing', 'lodging'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'hamlet',
+        note: 'Holy sites generate economic activity through pilgrim spending: effectively a non-trade income stream.',
+      },
+    ],
+  },
+
+  // ── ENTERTAINMENT & CULTURE ───────────────────────────────────────────────────
+  entertainment_culture: {
+    label: 'Entertainment & Culture',
+    color: '#7a3a1a',
+    desc: 'What the settlement does for pleasure, culture, and social release',
+    chains: [
+      {
+        id: 'tavern_social',
+        label: 'Taverns & Social Life',
+        resource: null,
+        rawInputs: [],
+        // The district (city) and bathhouse (town) left this hamlet chain dead
+        // for two tiers. The hospitality ladder: 'Alehouse'/'Wayside inn'
+        // (hamlet) → "Travelers' inn" (village) → 'Taverns (5-20)'/'Public
+        // bathhouse' (town) → the district (city).
+        processingInstitutions: [
+          'Alehouse',
+          'Wayside inn',
+          "Travelers' inn",
+          'Taverns (5-20)',
+          'Inns and taverns (district)',
+          'Public bathhouse',
+        ],
+        intermediateGoods: [],
+        outputs: ['Lodging', 'Meals and drink', 'Stabling', 'Message relay', 'Hiring hall', 'Gambling'],
+        services: ['food', 'lodging', 'employment'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'hamlet',
+      },
+      {
+        id: 'performance',
+        label: 'Performance & Theater',
+        resource: null,
+        rawInputs: [],
+        // 'Inn/Tavern District' is servicesData SERVICE vocabulary, not a catalog
+        // name (the magical_goods trap). 'Theater'/'Bardic college' are
+        // city-catalog ('Theater' matches 'Theaters'/'Multiple theaters');
+        // 'Traveling performers' (town) opens the chain at its own tier.
+        processingInstitutions: ['Traveling performers', 'Theater', 'Bardic college'],
+        intermediateGoods: [],
+        outputs: ['Performances', 'Music and song', 'Musical education', 'Magical entertainment'],
+        services: ['entertainment'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'gambling_arena',
+        label: 'Gambling & Arena',
+        resource: null,
+        rawInputs: [],
+        processingInstitutions: ['Arena', 'Gambling den', 'Gambling district'],
+        intermediateGoods: [],
+        outputs: ['Games of chance', 'Gladiatorial combat', 'Monster exhibitions', 'Public games'],
+        services: ['entertainment'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+    ],
+  },
+
+  // ── CRIMINAL ECONOMY ──────────────────────────────────────────────────────────
+  criminal_economy: {
+    label: 'Criminal Economy',
+    color: '#4a1a4a',
+    desc: 'The shadow economy: what moves without documentation and who profits',
+    chains: [
+      {
+        id: 'smuggling',
+        label: 'Smuggling & Contraband',
+        resource: null,
+        rawInputs: ['Contraband goods'],
+        // Was [] — the chain could never activate. The criminal catalog has a
+        // smuggling ladder ('Smuggling waypoint' hamlet → 'Smuggling network'
+        // village → 'Smuggling operation' town); the thorp-level fence and
+        // outlaw shelter are the smallest links (outputs include 'Safe houses').
+        processingInstitutions: [
+          'Local fence',
+          'Outlaw shelter',
+          'Smuggling waypoint',
+          'Smuggling network',
+          'Smuggling operation',
+        ],
+        intermediateGoods: ['Contraband goods'],
+        outputs: ['Contraband goods', 'Import/export bypass', 'Safe houses'],
+        services: ['criminal'],
+        exportable: false,
+        entrepot: true,
+        entrepotNote:
+          'Smuggling is the dark entrepôt model. Goods that cannot be taxed or declared flow through criminal infrastructure.',
+        minTier: 'thorp',
+      },
+      {
+        id: 'black_market',
+        label: 'Black market',
+        resource: null,
+        rawInputs: [],
+        // The powerful guild first generates at city — a dead thorp gate. The
+        // fencing ladder runs the market below it: 'Local fence' (thorp) →
+        // 'Fence (word of mouth)' (hamlet/village) → 'Front businesses' (town)
+        // → 'Black market' itself (city).
+        processingInstitutions: [
+          'Local fence',
+          'Fence (word of mouth)',
+          'Front businesses',
+          'Black market',
+          "Thieves' guild (powerful)",
+        ],
+        intermediateGoods: [],
+        outputs: ['Contraband goods', 'Forged documents', 'Fencing stolen goods', 'Illegal services'],
+        services: ['criminal'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'thorp',
+      },
+      {
+        id: 'guild_crime',
+        label: 'Organised Crime',
+        resource: null,
+        rawInputs: [],
+        // The powerful guild first generates at city, one tier above this town
+        // chain. 'Street gang' (town) is organised crime's entry rung; the
+        // guild's 12-char prefix also matches the city's "Thieves' guild chapter".
+        processingInstitutions: ['Street gang', "Thieves' guild (powerful)"],
+        intermediateGoods: [],
+        outputs: [
+          'Information brokerage',
+          'Guild protection',
+          'Contract killing',
+          'Intimidation services',
+          'Comprehensive black market',
+        ],
+        services: ['criminal'],
+        exportable: false,
+        entrepot: false,
+        minTier: 'town',
+      },
+      {
+        id: 'slave_trade',
+        label: 'Forced Labour Economy',
+        resource: null,
+        rawInputs: ['War captives', 'Debt bondage'],
+        // 'Workhouse' first generates at city, one tier above this town chain.
+        // 'Slave market' (town; the prefix also matches the city's 'Slave
+        // market district') is the trade's own institution.
+        processingInstitutions: ['Slave market', 'Workhouse'],
+        intermediateGoods: ['Bond papers', 'Slave registration'],
+        outputs: ['Forced labour services', 'Domestic servants', 'Agricultural labour', 'Mine labour'],
+        services: ['employment'],
+        exportable: true,
+        minTier: 'town',
+        entrepot: false,
+      },
+    ],
+  },
+};
+
+// ── ENTREPÔT GOODS INDEX ──────────────────────────────────────────────────────
+// Goods that characteristically flow THROUGH rather than being produced locally.
+// These are especially valuable for crossroads/port/river trade route economies.
+//
+// The RESOURCE → CHAIN reverse-lookup index (RESOURCE_TO_CHAINS) moved to the
+// sibling data/supplyChainResourceIndex.js — it is reached ONLY by the lazy
+// generator (computeActiveChains) and lazy worldPulse tick modules
+// (tierResourceDynamics, institutionLifecycle), never first-paint code, so it
+// rides the lazy 'data-lazy' chunk instead of paying first-paint bytes here.
+// SUPPLY_CHAIN_NEEDS stays (it is reached eagerly via lib/customRegistry).
+//
+// W-K slice K4 (DESIGN_MAGIC_ECONOMY.md §7) put THE REAGENT CHAIN SPINE in that
+// same sibling, for the same reason and by the same rule: its only consumers are
+// the lazy worldPulse tick modules. It NAMES the arcane chains already authored in
+// the table above rather than adding one, because a new SUPPLY_CHAIN_NEEDS entry
+// generates — the cascade pass builds its institution-adjacency map from every
+// chain's processingInstitutions and pays one seeded draw per boosted candidate, so
+// a reagent chain naming real magic institutions translates the stream and shifts a
+// golden. Measured, not assumed; the measurement is written up beside the spine.

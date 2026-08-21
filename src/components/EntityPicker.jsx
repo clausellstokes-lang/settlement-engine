@@ -1,0 +1,311 @@
+/**
+ * EntityPicker — multi-select chip input that resolves refIds across the
+ * unified prebuilt + custom registry.
+ *
+ * Used by the Custom Content forms in CompendiumPanel to wire up dependency
+ * fields like `produces`, `requires`, `feedsChains`, `requiredInstitution`,
+ * etc.
+ *
+ * Stores refId strings on the parent draft. Renders selected items as chips
+ * with a "Custom" badge for custom-source entries and an inline warning for
+ * dangling references (target deleted or never existed).
+ *
+ * Props:
+ *   category   - registry category to pick from ('institutions', 'resources',
+ *                'stressors', 'tradeGoods', 'resourceChains')
+ *   value      - string[] of refIds (or string for single-select mode)
+ *   onChange   - (next) => void, receives the new refId array (or string)
+ *   single     - if true, restrict to a single value
+ *   placeholder
+ *   maxSuggestions  - how many suggestions to show (default 12)
+ */
+
+import { useId, useMemo, useState } from 'react';
+import { X, Search, AlertTriangle } from 'lucide-react';
+import { useStore } from '../store';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
+import { buildRegistry } from '../lib/customRegistry.js';
+import IconButton from './primitives/IconButton.jsx';
+
+const PURPLE = swatch['#7C3AED'];
+
+/**
+ * Reader-facing identity for an unresolved registry reference.
+ *
+ * The prefix is enough to explain what disappeared; the durable ref id remains
+ * stored and continues to power repair/removal, but never reaches visible copy
+ * or hover text.
+ */
+export function missingReferenceLabel(refId) {
+  const value = String(refId || '');
+  if (value.startsWith('custom:')) return 'Deleted custom item';
+  if (value.startsWith('prebuilt:')) return 'Missing catalog item';
+  return 'Missing linked item';
+}
+
+export default function EntityPicker({
+  category,
+  categories,          // optional: list across several registry categories (e.g. goods + services)
+  value,
+  onChange,
+  single = false,
+  placeholder = 'Search to add…',
+  maxSuggestions = 12,
+}) {
+  // Normalize to an array of registry categories to pull suggestions from.
+  const cats = useMemo(
+    () => (Array.isArray(categories) && categories.length ? categories : (category ? [category] : [])),
+    [categories, category],
+  );
+  const customContent = useStore(s => s.customContent);
+  const registry = useMemo(() => buildRegistry(customContent), [customContent]);
+  const [query, setQuery] = useState('');
+  const [focused, setFocused] = useState(false);
+  // Roving active index for the aria-combobox: arrows move it, Enter adds it.
+  const [active, setActive] = useState(0);
+  const listId = useId();
+
+  // Normalize value -> array for internal handling
+  const refIds = useMemo(() => {
+    if (single) return value ? [value] : [];
+    return Array.isArray(value) ? value : [];
+  }, [value, single]);
+
+  const selectedSet = useMemo(() => new Set(refIds), [refIds]);
+
+  // Resolve current selections (pairs each refId with its entry or null)
+  const selectedEntries = useMemo(() => {
+    return refIds.map(r => ({ refId: r, entry: registry.resolve(r) }));
+  }, [refIds, registry]);
+
+  // Suggestion list: anything in this category not already selected, filtered
+  // by the search query.
+  const suggestions = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const seen = new Set();
+    const all = cats.flatMap(c => registry.listAll(c) || []).filter(e => {
+      if (seen.has(e.refId)) return false;
+      seen.add(e.refId);
+      return true;
+    });
+    const filtered = all.filter(e => {
+      if (selectedSet.has(e.refId)) return false;
+      if (!q) return true;
+      return (
+        (e.name || '').toLowerCase().includes(q) ||
+        (e.subcategory || '').toLowerCase().includes(q) ||
+        (e.tags || []).some(t => (t || '').toLowerCase().includes(q))
+      );
+    });
+    // custom items first when no query (encourage discovery of own content)
+    if (!q) {
+      filtered.sort((a, b) => {
+        if (a.source !== b.source) return a.source === 'custom' ? -1 : 1;
+        return (a.name || '').localeCompare(b.name || '');
+      });
+    }
+    return filtered.slice(0, maxSuggestions);
+  }, [query, registry, cats, selectedSet, maxSuggestions]);
+
+  const emit = (nextRefIds) => {
+    if (single) onChange(nextRefIds[0] || '');
+    else onChange(nextRefIds);
+  };
+
+  const addRef = (refId) => {
+    if (single) {
+      emit([refId]);
+    } else if (!selectedSet.has(refId)) {
+      emit([...refIds, refId]);
+    }
+    setQuery('');
+  };
+
+  const removeRef = (refId) => {
+    emit(refIds.filter(r => r !== refId));
+  };
+
+  // The active row CLAMPED into the live suggestion range every render — the
+  // list shrinks as the query narrows, so raw `active` can point past the end
+  // (the CommandPalette activeIdx idiom).
+  const activeIdx = suggestions.length === 0 ? -1 : Math.min(Math.max(active, 0), suggestions.length - 1);
+  const activeOptionId = activeIdx >= 0 ? `${listId}-opt-${activeIdx}` : undefined;
+
+  // Keyboard operation of the suggestion listbox (H12): arrows move the active
+  // option, Enter adds it through the SAME addRef gate the pointer path uses —
+  // no second commit path. Escape is left to bubble so a hosting modal can
+  // still close.
+  const onInputKeyDown = (e) => {
+    if (!suggestions.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, suggestions.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); addRef(suggestions[activeIdx].refId); }
+  };
+
+  return (
+    <div style={{
+      border: `1px solid ${BORDER}`,
+      background: CARD, padding: 6,
+    }}>
+      {/* Selected chips */}
+      {selectedEntries.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 6 }}>
+          {selectedEntries.map(({ refId, entry }) => {
+            const missing = !entry;
+            const isCustom = entry?.source === 'custom';
+            const accent = missing ? '#8b1a1a' : (isCustom ? PURPLE : GOLD);
+            const label = entry?.name || missingReferenceLabel(refId);
+            return (
+              <span
+                key={refId}
+                title={missing
+                  ? 'This linked item no longer exists.'
+                  : `${entry.source === 'custom' ? 'Custom · ' : ''}${entry.subcategory || ''}`}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  padding: '2px 6px 2px 8px',
+                  background: missing ? '#fdebec' : `${accent}14`,
+                  border: `1px solid ${accent}55`,
+                  fontSize: FS.xs, fontWeight: 600,
+                  color: accent, fontFamily: sans,
+                }}
+              >
+                {missing && <AlertTriangle size={9} />}
+                <span>{label}</span>
+                {isCustom && !missing && (
+                  <span style={{
+                    fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
+                    background: `${PURPLE}28`, color: PURPLE,
+                    padding: '0 3px',
+                  }}>CUSTOM</span>
+                )}
+                <IconButton
+                  Icon={X}
+                  label="Remove"
+                  onClick={() => removeRef(refId)}
+                  tone="ghost"
+                  size="sm"
+                />
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Search input (hidden when single+selected and not focused) */}
+      {(!single || refIds.length === 0 || focused) && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          padding: '4px 6px',
+          border: `1px solid ${focused ? GOLD : BORDER}`,
+          background: swatch.white,
+        }}>
+          <Search size={11} color={MUTED} />
+          <input
+            type="text"
+            value={query}
+            onChange={e => { setQuery(e.target.value); setActive(0); }}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setTimeout(() => setFocused(false), 150)}
+            onKeyDown={onInputKeyDown}
+            placeholder={placeholder}
+            aria-label={placeholder}
+            role="combobox"
+            aria-expanded={focused && suggestions.length > 0}
+            aria-controls={listId}
+            aria-activedescendant={focused ? activeOptionId : undefined}
+            autoComplete="off"
+            style={{
+              flex: 1, border: 'none', outline: 'none', background: 'transparent',
+              fontFamily: sans, fontSize: FS.sm, color: INK,
+            }}
+          />
+        </div>
+      )}
+
+      {/* Suggestion dropdown — an aria-combobox listbox. The input keeps focus
+          and owns the keyboard (arrows + Enter via aria-activedescendant); each
+          option is role="option" with tabIndex -1 (not a tab stop), operated by
+          the input, so it is keyboard-reachable without becoming its own focus
+          target. */}
+      {focused && suggestions.length > 0 && (
+        <div
+          id={listId}
+          role="listbox"
+          aria-label={`${cats.join(' / ') || 'catalog'} suggestions`}
+          style={{
+            marginTop: 4,
+            border: `1px solid ${BORDER}`,
+            background: swatch.white,
+            maxHeight: 220, overflowY: 'auto',
+          }}
+        >
+          {suggestions.map((s, i) => (
+            <button
+              key={s.refId}
+              id={`${listId}-opt-${i}`}
+              type="button"
+              role="option"
+              aria-selected={i === activeIdx}
+              tabIndex={-1}
+              onMouseDown={e => { e.preventDefault(); addRef(s.refId); }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6, width: '100%',
+                padding: '5px 8px', border: 'none',
+                background: i === activeIdx ? '#faf6ef' : 'transparent',
+                cursor: 'pointer', textAlign: 'left',
+                borderBottom: `1px solid ${BORDER}33`,
+              }}
+              onMouseEnter={() => setActive(i)}
+            >
+              <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, flex: 1 }}>
+                {s.name}
+              </span>
+              {s.subcategory && (
+                <span style={{ fontSize: FS.xxs, color: MUTED }}>
+                  {s.subcategory}
+                </span>
+              )}
+              {s.source === 'custom' && (
+                <span style={{
+                  fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
+                  background: `${PURPLE}20`, color: PURPLE,
+                  padding: '1px 4px',
+                }}>CUSTOM</span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Empty hint */}
+      {focused && suggestions.length === 0 && query && (
+        <div style={{
+          marginTop: 4, padding: '6px 8px',
+          fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+          border: `1px dashed ${BORDER}`,
+        }}>
+          No matches in {cats.join(' / ') || 'catalog'}. Add a custom entry first if needed.
+        </div>
+      )}
+
+      {/* Validation summary (missing refs) */}
+      {selectedEntries.some(s => !s.entry) && (
+        <div style={{
+          marginTop: 6, padding: '4px 8px',
+          background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
+          fontSize: FS.xxs, color: swatch.danger,
+          display: 'flex', alignItems: 'center', gap: 4,
+        }}>
+          <AlertTriangle size={10} />
+          <span>
+            {selectedEntries.filter(s => !s.entry).length} reference(s) point
+            to deleted or missing items. Remove or replace them.
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export { SECOND };

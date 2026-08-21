@@ -1,0 +1,408 @@
+/**
+ * domain/state/deriveSystemState.js — Reduce a generated settlement to
+ * four user-facing health/pressure dimensions.
+ *
+ * Why four (not ten): the architect critique pushed for ten dimensions on
+ * a 0–100 scale. Ten is too many — DMs don't think in spreadsheets, and
+ * adding more dimensions multiplies the surfaces where the math can lie.
+ * Four is the floor: enough to express resilience vs volatility vs
+ * external vs resource pressure separately, but few enough that each one
+ * earns its place in the UI. Add a fifth only when a UI consumer demands
+ * it.
+ *
+ * Why no new generation: this function reads what the engine already
+ * produces (economicState, factions, stresses, monster threat, depleted
+ * resources) and unifies it into a single state snapshot. No new
+ * randomness, no new content, no new dependencies. That keeps the
+ * derivation cheap to call (once per generation, once per applied event)
+ * and impossible to drift from the underlying simulation.
+ *
+ * The function is intentionally tolerant: a sparse settlement (early
+ * pipeline output, partial rerun, headless test) returns a usable state
+ * with neutral defaults. Never throws.
+ */
+
+import { bandForDimension, clamp01 } from './bands.js';
+// Import the posture LEAF, not dossierViewModel — this module is EAGER
+// (store → event pipeline), and the full display model would drag ~35 kB
+// (dossierViewModel + magicProfile) into the first-paint entry closure
+// (FP-1 read-model split; tests/build/vendorPdfLazy.test.js byte budget).
+import { deriveExportPosture } from '../display/exportPosture.js';
+import { isIsolatedRoute } from '../tradeRouteSemantics.js';
+import { canonStressors, canonImports } from '../canonicalAccessors.js';
+import { foodLedger } from '../foodLedger.js';
+import { governanceLedger } from '../governanceLedger.js';
+import { prosperityRank } from '../../data/constants.js';
+import { isCovertOnlyImpairment } from '../entities/status.js';
+
+/** @typedef {import('../types.js').SystemState} SystemState */
+/** @typedef {import('../types.js').StateDimension} StateDimension */
+
+/**
+ * Structural view of the economicState fields this derivation reads.
+ * `prosperity` is canonically `{ tier }`; legacy saves carry a bare string
+ * (the intersection member types the string branch so `?.tier` is `undefined`).
+ * @typedef {Object} EconStateLike
+ * @property {{ tier?: string } | (string & { tier?: undefined }) | null} [prosperity]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {Array<{ resourceDepleted?: unknown, substituteActive?: unknown }>} [activeChains]
+ * @property {unknown} [primaryImports]
+ * @property {unknown} [imports]
+ */
+
+/**
+ * Structural view of the powerStructure fields this derivation reads.
+ * @typedef {Object} PowerLike
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ score?: unknown, label?: unknown } | number | null} [publicLegitimacy]
+ */
+
+/**
+ * Structural view of the settlement fields this derivation reads.
+ * @typedef {Object} SystemStateSource
+ * @property {EconStateLike} [economicState]
+ * @property {Array<{ status?: unknown }>} [institutions]
+ * @property {PowerLike | null} [powerStructure]
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {{ monsterThreat?: string, nearbyResourcesState?: Record<string, string> | null, tradeRouteAccess?: string } | null} [config]
+ * @property {Array<{ relationshipType?: string }>} [neighbourNetwork]
+ * @property {Array<{ relationshipType?: string }>} [neighbourLinks]
+ * @property {unknown} [stressors]
+ * @property {unknown} [stress]
+ * @property {unknown} [stresses]
+ */
+
+/**
+ * @param {SystemStateSource | null | undefined} settlement — the engine's settlement object
+ * @returns {SystemState}
+ */
+export function deriveSystemState(settlement) {
+  const s = settlement || {};
+  return {
+    resilience:       deriveResilience(s),
+    volatility:       deriveVolatility(s),
+    externalThreat:   deriveExternalThreat(s),
+    resourcePressure: deriveResourcePressure(s),
+  };
+}
+
+// ── Resilience ──────────────────────────────────────────────────────────────
+/**
+ * Can the settlement absorb shocks? Drivers: prosperity, food security,
+ * income/export diversity, public legitimacy. Famine, single-source
+ * exports, and impaired institutions push it down.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
+ */
+function deriveResilience(s) {
+  let value = 50;
+  /** @type {string[]} */
+  const drivers = [];
+  /** @type {string[]} */
+  const risks = [];
+
+  // Prosperity is a strong signal — graded across the CANONICAL tier vocabulary
+  // (constants.PROSPERITY_TIERS). The old code matched 'Wealthy/Prosperous' and
+  // 'Subsistence/Struggling' plus a 'Modest' the generator never emits, so the three
+  // most common middle tiers (Poor/Moderate/Comfortable) contributed ZERO resilience
+  // signal — the headline shock-absorption dial ignored most towns' economies.
+  /** @type {EconStateLike} */
+  const econ = s.economicState || {};
+  const prosperity = econ.prosperity?.tier || econ.prosperity || null;
+  const pRank = prosperityRank(prosperity);
+  if (pRank >= 5) {            // Prosperous, Wealthy
+    value += 15;
+    drivers.push(`Settlement is ${String(prosperity).toLowerCase()}`);
+  } else if (pRank === 4) {    // Comfortable
+    value += 8;
+    drivers.push('Comfortable prosperity cushions shocks');
+  } else if (pRank === 3) {    // Moderate
+    drivers.push('Moderate prosperity');
+  } else if (pRank === 2) {    // Poor
+    value -= 8;
+    risks.push('Poverty leaves little buffer');
+  } else if (pRank >= 0) {     // Struggling, Subsistence
+    value -= 15;
+    risks.push(`Settlement is ${String(prosperity).toLowerCase()}`);
+  }
+
+  // Food security, via the conserved ledger. The old code read `deficitMonths`/
+  // `surplusMonths` — fields foodGenerator never produces — so this penalty was
+  // silently dead (a famine town's resilience never dropped for it). The ledger
+  // reads the real quantities (deficitPct/surplusPct), banded to align with the
+  // foodSecurity label thresholds.
+  const food = foodLedger(s);
+  if (food.present) {
+    if (food.deficitPct > 0) {
+      const penalty = food.deficitPct > 40 ? 20 : food.deficitPct > 15 ? 12 : food.deficitPct > 5 ? 6 : 3;
+      value -= penalty;
+      risks.push(`${food.deficitPct}% food deficit`);
+    } else if (food.surplusPct >= 40) {
+      value += 8;
+      drivers.push(`${food.surplusPct}% food surplus`);
+    }
+  }
+
+  // Export/import diversity — many narrow exports = fragile. Source the count
+  // from the display model's exportPosture (canonicalViewModel was PROMOTED
+  // default-on; the legacy `canonExports(s).length` branch was reachable only via
+  // a flag override — a URL/localStorage/env read inside an otherwise-pure domain
+  // function. Removed so deriveSystemState is a pure function of `s` alone.)
+  const exportCount = deriveExportPosture(s).count;
+  if (exportCount === 0) {
+    risks.push('No exports — economic isolation');
+  } else if (exportCount >= 5) {
+    value += 5;
+    drivers.push(`Diversified exports (${exportCount})`);
+  } else if (exportCount === 1) {
+    value -= 5;
+    risks.push('Single-export dependency');
+  }
+
+  // Impaired/degraded institutions. A COVERT mark (an institution-scope Impose
+  // Corruption that quietly captured a node) bumps the institution's status to
+  // 'impaired' via withImpairment, but it is hidden by design — surfacing it as a
+  // visible "impaired institution" risk here would leak the covert capture into
+  // public derived state. Exclude institutions whose impairment is solely covert.
+  const impaired = countByStatus(s.institutions, ['impaired', 'critical'], { excludeCovertOnly: true });
+  if (impaired > 0) {
+    value -= Math.min(15, impaired * 4);
+    risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
+  }
+
+  return finalize('resilience', value, drivers, risks);
+}
+
+// ── Volatility ─────────────────────────────────────────────────────────────
+/**
+ * How close is internal conflict? Drivers: faction count, hostile
+ * relationships between factions, criminal capture, low public
+ * legitimacy. A stable monoculture scores low; a town with rivals,
+ * thieves' guilds, and weak rulers scores high.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
+ */
+function deriveVolatility(s) {
+  let value = 30; // baseline — most towns have some friction
+  /** @type {string[]} */
+  const drivers = [];
+  /** @type {string[]} */
+  const risks = [];
+
+  /** @type {PowerLike} */
+  const power = s.powerStructure || {};
+  const factions = power.factions || s.factions || [];
+  if (factions.length >= 5) {
+    value += 10;
+    risks.push(`${factions.length} active factions competing`);
+  } else if (factions.length <= 2) {
+    value -= 5;
+    drivers.push('Few factions — concentrated power');
+  }
+
+  // Hostile/rival faction relationships
+  const conflicts = (power.conflicts || s.conflicts || []).length;
+  if (conflicts > 0) {
+    value += Math.min(20, conflicts * 5);
+    risks.push(`${conflicts} active faction conflict${conflicts === 1 ? '' : 's'}`);
+  }
+
+  // Criminal capture: when shadow networks have outsized influence
+  /** @type {{ blackMarketCapture?: number }} */
+  const safety = econOf(s).safetyProfile || s.safetyProfile || {};
+  const blackMarketCapture = safety.blackMarketCapture || 0;
+  if (blackMarketCapture >= 30) {
+    value += 15;
+    risks.push(`Heavy criminal capture (${blackMarketCapture}%)`);
+  } else if (blackMarketCapture >= 15) {
+    value += 8;
+    risks.push(`Moderate criminal capture (${blackMarketCapture}%)`);
+  } else if (blackMarketCapture <= 5 && blackMarketCapture > 0) {
+    drivers.push('Crime well-suppressed');
+  }
+
+  // Public legitimacy — when the rulers are doubted, the place wobbles. Read the conserved
+  // quantity via the governance ledger (handles the { score } object + legacy bare number
+  // uniformly); this lens applies destabilisation thresholds rather than a linear transfer.
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    if (gov.legitimacyScore <= 30) {
+      value += 12;
+      risks.push('Ruling order has lost public legitimacy');
+    } else if (gov.legitimacyScore >= 70) {
+      value -= 8;
+      drivers.push('Strong public legitimacy');
+    }
+  }
+
+  // Stress count. Read the canonical container first (`stressors`,
+  // post-Tier-1.2), then fall back to legacy aliases `stress` and the
+  // older `stresses`. A consumer reading from a partially-migrated
+  // settlement should still see a consistent count. `pickArray` guards
+  // against intermediate consumers that wrap stress in an object
+  // ({ count, items, ... }) instead of leaving it as a bare array.
+  const stresses = canonStressors(s);
+  if (stresses.length >= 3) {
+    value += 8;
+    risks.push(`${stresses.length} active stressors`);
+  }
+
+  return finalize('volatility', value, drivers, risks);
+}
+
+// ── External Threat ────────────────────────────────────────────────────────
+/**
+ * How much pressure comes from outside the settlement? Monster threat,
+ * hostile neighbours, raids/sieges/occupation in stressors.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
+ */
+function deriveExternalThreat(s) {
+  let value = 30;
+  /** @type {string[]} */
+  const drivers = [];
+  /** @type {string[]} */
+  const risks = [];
+
+  const monsterThreat = s.config?.monsterThreat || 'heartland';
+  if (monsterThreat === 'plagued') {
+    value += 30;
+    risks.push('Region is plagued by monsters');
+  } else if (monsterThreat === 'frontier') {
+    value += 15;
+    risks.push('Frontier conditions — monsters present');
+  } else if (monsterThreat === 'heartland') {
+    value -= 5;
+    drivers.push('Monster activity minimal');
+  }
+
+  // Hostile neighbour relationships (network effects)
+  const network = s.neighbourNetwork || s.neighbourLinks || [];
+  const hostile = network.filter(n => n.relationshipType === 'hostile' || n.relationshipType === 'cold_war').length;
+  if (hostile > 0) {
+    value += Math.min(20, hostile * 8);
+    risks.push(`${hostile} hostile neighbour${hostile === 1 ? '' : 's'}`);
+  }
+
+  // Threat-tagged stresses. Same canonical-then-legacy fallback as
+  // resilience above; without it, the threat dimension silently zeros
+  // out on settlements that only carry the new `stressors` field.
+  const stressList = canonStressors(s);
+  const threatStresses = stressList.filter(st => {
+    const t = String(st.type || st.name || '').toLowerCase();
+    return t.includes('siege') || t.includes('occupied') || t.includes('raid')
+        || t.includes('plague') || t.includes('war') || t.includes('refugee');
+  });
+  if (threatStresses.length > 0) {
+    value += Math.min(20, threatStresses.length * 8);
+    risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
+  }
+
+  return finalize('externalThreat', value, drivers, risks);
+}
+
+// ── Resource Pressure ──────────────────────────────────────────────────────
+/**
+ * Are key materials under strain? Depleted resources, narrow chain
+ * dependencies, unmet imports. High value = the place will hurt soon.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
+ */
+function deriveResourcePressure(s) {
+  let value = 30;
+  /** @type {string[]} */
+  const drivers = [];
+  /** @type {string[]} */
+  const risks = [];
+
+  // Depleted resources
+  /** @type {Record<string, string>} */
+  const resourceState = s.config?.nearbyResourcesState || {};
+  const depleted = Object.entries(resourceState).filter(([, st]) => st === 'depleted');
+  if (depleted.length > 0) {
+    value += Math.min(25, depleted.length * 8);
+    risks.push(`${depleted.length} depleted resource${depleted.length === 1 ? '' : 's'}`);
+  }
+
+  // Chain vulnerabilities
+  const econ = econOf(s);
+  const chains = econ.activeChains || [];
+  const vulnerable = chains.filter(c => c.resourceDepleted || c.substituteActive).length;
+  if (vulnerable > 0) {
+    value += Math.min(15, vulnerable * 5);
+    risks.push(`${vulnerable} vulnerable supply chain${vulnerable === 1 ? '' : 's'}`);
+  }
+
+  // Unmet imports — high import dependency without a real trade route. Canonical
+  // isolation check so 'none'/'isolated' (and any future synonym) are treated alike.
+  const tradeAccess = s.config?.tradeRouteAccess || 'none';
+  const isolatedRoute = isIsolatedRoute(tradeAccess);
+  const imports = canonImports(s).length;
+  if (imports >= 4 && isolatedRoute) {
+    value += 12;
+    risks.push(`${imports} imports needed but no real trade route`);
+  } else if (imports >= 1 && !isolatedRoute) {
+    drivers.push(`${imports} imports via ${tradeAccess}`);
+  }
+
+  return finalize('resourcePressure', value, drivers, risks);
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+/**
+ * @param {SystemStateSource | null | undefined} s
+ * @returns {EconStateLike}
+ */
+function econOf(s) { return s?.economicState || {}; }
+
+/**
+ * @param {unknown} items     candidate institutions array (any shape tolerated)
+ * @param {string[]} statuses status words that count
+ * @param {{ excludeCovertOnly?: boolean }} [opts]
+ * @returns {number}
+ */
+function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
+  if (!Array.isArray(items)) return 0;
+  const set = new Set(statuses);
+  return items.filter(i => {
+    if (!set.has(String(i?.status || '').toLowerCase())) return false;
+    // A covert mark bumps status to 'impaired' but must not read as visibly
+    // impaired: skip an item whose status is driven SOLELY by covert impairments.
+    if (excludeCovertOnly && isCovertOnlyImpairment(i)) return false;
+    return true;
+  }).length;
+}
+
+/**
+ * Wrap raw value+drivers+risks into the StateDimension shape with band
+ * label and clamped value. Centralizing this means every dimension comes
+ * out of derivation in the same shape — no surprises for the UI consumer.
+ *
+ * The band is ORIENTED by the dimension's polarity (bands.js DIM_POLARITY).
+ * Three of these four dimensions are lower-is-better; banding them through the
+ * bare higher-is-better ladder printed the opposite of the truth on every
+ * surface that reads `dim.band`. The `value` is unchanged — only the word.
+ *
+ * @param {string} key  the dimension key, which carries its polarity
+ * @param {number} rawValue
+ * @param {string[]} drivers
+ * @param {string[]} risks
+ * @returns {StateDimension}
+ */
+function finalize(key, rawValue, drivers, risks) {
+  const value = Math.round(clamp01(rawValue));
+  return {
+    value,
+    band: bandForDimension(key, value),
+    drivers: drivers.length ? drivers : ['No notable factors'],
+    risks,
+  };
+}

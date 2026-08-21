@@ -1,0 +1,404 @@
+import React, { useState } from 'react';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
+import { Ti, serif, Section } from '../Primitives';
+import { formatCount } from '../../../domain/formatNumber.js';
+import {PROSPERITY_COLORS} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+// Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
+// is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
+import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
+import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
+
+import {NarrativeNote} from '../NarrativeNote';
+import SteadingsSection from './SteadingsSection.jsx';
+import Button from '../../primitives/Button.jsx';
+
+// ── The institution provenance badge (R-5b item #10) ───────────────────
+// The pill used to badge only the GENERATION source tag, so a forge the living
+// world grew during an advance and one the DM added by event BOTH rendered with
+// the fallback tint and no badge at all — indistinguishable from a building
+// nobody had ever touched. The badge now reads the ONE derived provenance record
+// (domain/provenance/rosterProvenance.js), which joins the composer's
+// *ByEventId stamps and the world-pulse's *ByWorldPulseOutcomeId stamps into a
+// single answer to "who put this here". Nothing is persisted: the record is
+// derived per render from stamps both lanes already write.
+//
+// The old map also gave 'forced' an EMPTY glyph, which is falsy at the render
+// guard — the legend promised a badge that could never appear. 'forced' means
+// the player force-added it at generation, so it now wears the same YOU mark as
+// a DM event, and the legend row says "Added by you" once for both.
+const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
+
+function institutionBadge(inst) {
+  const { created } = institutionProvenanceOf(inst);
+  // A DM realm order (SHIFT_TIER) reaches the roster through the world-pulse
+  // apply path, but the hand on it is still the player's.
+  if (created.origin === 'dm-event' || created.origin === 'dm-realm-order') {
+    return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  }
+  if (created.origin === 'world-pulse') {
+    return {
+      label:'WORLD', color:PROVENANCE_TONE.world,
+      title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
+    };
+  }
+  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
+  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
+  // Unstamped legacy rows stay unbadged rather than being guessed at. Custom
+  // rows are skinned gold by the caller's own ✦ branch, which is unchanged.
+  return { label:null, color:PROVENANCE_TONE.none, title:undefined };
+}
+
+// ── Module-scope helper components ─────────────────────────────────────
+// React Hooks plugin v7 flags components defined inside render functions
+// because each render creates a new component identity, defeating
+// memoization and breaking React Compiler's optimization assumptions.
+// Extracting these two (ScoreRow, StatusTag) to module scope resolves
+// 9 react-hooks/static-components errors. Both are purely presentational
+// and have no closure dependency on OverviewTab state beyond their
+// props, so the lift is mechanical.
+
+// R-5b item #20 (stat-bars: BANDS over raw numbers). The value beside each bar
+// was a bare 0-100 digit; it is now the score's BAND WORD, read from the shared
+// defenseScoreBands ladder — the same word DefenseTab's Threat Assessment badge
+// and the PDF readiness rows already print for that same score, so one number
+// can no longer read as two verdicts. This mirrors the Food Security row below,
+// the sanctioned precedent: label left, band right, bar carries the magnitude.
+// The colour ladder moves with it (was a local 70/45/25 twin, now the shared
+// 65/40/20 the PDF prints) so the word and the colour can never disagree.
+function ScoreRow({ label, score }) {
+  const n = Math.min(100, Math.max(0, score || 0));
+  const c = scoreColor(n);
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
+        <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
+        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{scoreBand(n)}</span>
+      </div>
+      <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
+      </div>
+    </div>
+  );
+}
+
+function StatusTag({ label, value, _color, accent }) {
+  return (
+    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
+      <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
+      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
+    </div>
+  );
+}
+
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
+  const [instOpen, setInstOpen] = useState(false);
+  const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
+  if (!r) return null;
+
+  const eco = r.economicState || {};
+  const dp = r.defenseProfile || {};
+  const scores = dp.scores || {};
+  const via = r.economicViability || {};
+  const sp = eco.safetyProfile || {};
+  const _ps = r.powerStructure || {};
+  const hist = r.history || {};
+  const ra = r.resourceAnalysis || {};
+  const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
+
+  // Institution layout — guard `r.institutions` because sparse saves
+  // (mid-migration, partial gen) can land here without an institutions
+  // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
+  const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
+  const _catOrder = ['government','military','economy','religious','magic','criminal','other'];
+  const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
+  const getCatColor = c => catColors2[c] || '#6b5340';
+
+  // ScoreRow and StatusTag are defined at module scope above. Lifting
+  // them out of the render function (was here originally) fixed 9
+  // react-hooks/static-components errors and gives React Compiler the
+  // identity stability it expects.
+
+  return (
+    <div>
+      <NarrativeNote note={narrativeNote} />
+
+      {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit
+            (renders NOTHING for a world without lifecycle state). ─────────── */}
+      <SteadingsSection settlement={r} />
+
+      {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>
+        <div style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
+          <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
+          <span style={{fontSize:FS.md,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.tier}</span>
+          <span style={{fontSize:FS.sm,color:MUTED}}>·</span>
+          <span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{formatCount(r.population)} pop.</span>
+          {r.config?.tradeRouteAccess&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span></>}
+          {hist.age&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{hist.age} years old</span></>}
+        </div>
+        {/* Row 2: character + spatial */}
+        <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
+          {hist.historicalCharacter&&<p style={{fontSize:FS.sm,color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
+          <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
+            {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
+            {r.spatialLayout?.layout&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
+          </div>
+        </div>
+      </div>
+
+      {/* ── ACTIVE CRISIS (compact if present) ───────────────────────────── */}
+      {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
+        {stresses.map((v,i)=>(
+          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px'}}>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
+                <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px',letterSpacing:'0.06em'}}>ACTIVE CRISIS</span>
+              </div>
+              <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
+              <p style={{fontSize:FS.xs,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
+            </div>
+          </div>
+        ))}
+      </div>}
+
+      {/* ── SYSTEMS HEALTH DASHBOARD ─────────────────────────────────────── */}
+      <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a">
+
+        {/* First-survey framing (G5 / FROZEN_VS_LIVE): the five score bars and
+            the Viability + Defense statuses are generation verdicts with no
+            pulse writeback; Food Security is the declared-live exception,
+            re-graded every tick — same carve-out grammar as DefenseTab's
+            Threat Assessment caption (Wave R-0). */}
+        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
+
+        {/* Status tags row */}
+        <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
+          <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
+          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={safetySeverityOf(sp.safetyLabel).color}/>
+          <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
+          <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
+        </div>
+
+        {/* Magic dependency badge */}
+        {dp.magicDependency&&<div style={{display:'flex',alignItems:'center',gap:6,
+          background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',
+          padding:'5px 10px',marginTop:6}}>
+          <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
+          <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
+          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
+        </div>}
+
+        {/* Score bars — 2-col grid */}
+        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'0 24px'}}>
+          <ScoreRow label="Military Might" score={scores.military}/>
+          <ScoreRow label="Monster Defense" score={scores.monster}/>
+          <ScoreRow label="Internal Security" score={scores.internal}/>
+          <ScoreRow label="Economic Resilience" score={scores.economic}/>
+          <ScoreRow label="Magical Capability" score={scores.magical}/>
+          {/* Owner order (2026-07-22): the Enforcement Ratio (a raw safetyRatio
+              float) is replaced by Food Security — a typed band from the food
+              generator (economicState.foodSecurity.label / .color), the same
+              banded-label grammar the sibling Safety / Defense StatusTags use. The
+              bar tracks the derived 0-100 resilienceScore; the VALUE shown is the
+              band label, never a bare number (FINITE-SEMANTICS). safetyRatio stays
+              a live derivation — it is only its display here that is retired. */}
+          {eco.foodSecurity?.label&&<div style={{marginBottom:8}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
+              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{eco.foodSecurity.label}</span>
+            </div>
+            <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
+              <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:eco.foodSecurity.color||swatch.inkMag2}}/>
+            </div>
+          </div>}
+        </div>
+
+        {/* Owner order (2026-07-22): the standalone Food Deficit callout is
+            removed — Food Security (above) now carries that signal, so the deficit
+            line was a duplicate. */}
+      </Section>
+
+      {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
+      {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b">
+        {hist.currentTensions?.map((t,i)=>(
+          <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
+            <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
+            <div>
+              <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
+              {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
+                {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
+              </div>}
+            </div>
+          </div>
+        ))}
+        {(r.conflicts||[]).map((c,i)=>{
+          const iHigh=c.intensity==='high';
+          return <div key={i} style={{display:'flex',gap:8,marginBottom:6}}>
+            <div>
+              <div style={{display:'flex',gap:6,alignItems:'baseline',flexWrap:'wrap'}}>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'HIGH':'MODERATE'}</span>
+              </div>
+              {c.issue&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
+            </div>
+          </div>;
+        })}
+      </Section>}
+
+      {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
+      {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
+        {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
+        {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
+      </div>}
+
+      {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}
+      {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen={false} accent="#6b5340">
+        <div style={{borderLeft:'3px solid #c8b89a',paddingLeft:12}}>
+          {Array.isArray(r.settlementReason)
+            ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
+            :<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{Ti(r.settlementReason?.primary||r.settlementReason)}</p>
+          }
+        </div>
+      </Section>}
+
+      {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
+      {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
+        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
+        <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
+        {/* Actionable cross-tab jump — restored from the composite's static text
+            reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
+            navigation control). Falls back to nothing when no navigator is wired. */}
+        {onNavigateTab&&<div style={{marginTop:5}}><Button variant="ghost" size="sm" onClick={()=>onNavigateTab('relationships')} style={{padding:'2px 6px'}}>Full relationship web →</Button></div>}
+      </div>}
+
+      {/* ── RESOURCE CONTEXT (terrain strengths) ─────────────────────────── */}
+      {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
+        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+          {ra.terrain&&<div style={{flex:'1 1 100px'}}>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Terrain</div>
+            <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag}}>{ra.terrain}</div>
+          </div>}
+          {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Strengths</div>
+            <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
+              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
+            </div>
+          </div>}
+          {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Strategic Value</div>
+            <div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
+          </div>}
+        </div>
+      </Section>}
+
+      {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
+          Routed through the shared Section primitive so its header reads at the
+          same serif altitude as Systems Health / Tensions / Geography and the
+          layer-cake scan has one consistent top-level collapsible level (P6) —
+          restored from the composite's bespoke green sub-collapsible per THE
+          BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
+          in with Geography). Inner quarter cards keep the composite's craft. */}
+      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} quarters)`} collapsible defaultOpen={false} accent="#1a5a28">
+        {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
+        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
+          {r.spatialLayout.quarters.map((q,i)=>(
+            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
+              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
+              <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
+              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
+            </div>
+          ))}
+        </div>
+      </Section>}
+
+      {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
+      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
+        {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
+          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+        </div>}
+        {/* Coherence notes (G5): sole web render site of the generation-frozen
+            coherenceNotes record — the header carries the survey vintage. */}
+        {r.coherenceNotes?.length>0&&<div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
+        {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
+          <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
+            <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
+          </div>
+        ))}
+        {r.coherenceNotes?.filter(n=>n.severity!=='contradiction').map((note,i)=>(
+          <div key={i} style={{background:swatch['#F0F4FD'],border:'1px solid #a0b4d4',borderLeft:'3px solid #1a3a8b',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
+            <span style={{color:swatch['#1A3A8B'],flexShrink:0}}>ℹ</span>
+            <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
+          </div>
+        ))}
+        {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
+          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
+        </div>}
+      </div>}
+
+      {/* ── INSTITUTIONS ──────────────────────────────────────────────────── */}
+      <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
+        <button type="button" onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
+            <span style={{fontSize:FS.xs,color:MUTED}}>{(r.institutions||[]).length} total</span>
+          </div>
+          <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
+            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
+              <span key={cat} style={{fontSize:FS.xxs,fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
+            ))}
+            <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
+          </div>
+        </button>
+        {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
+          {/* Visual category distribution bar */}
+          <div style={{display:'flex',height:8,overflow:'hidden',gap:1,marginBottom:12}}>
+            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).map(([cat,insts])=>(
+              <div key={cat} title={`${cat}: ${insts.length}`} style={{flex:insts.length,background:getCatColor(cat),minWidth:insts.length>0?4:0}}/>
+            ))}
+          </div>
+          {/* Categories with pills */}
+          <div style={{display:'flex',flexDirection:'column',gap:10}}>
+            {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
+              const cc=getCatColor(cat);
+              return <div key={cat}>
+                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{cat} ({insts.length})</div>
+                <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
+                  {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
+                    const isCustom = inst.source==='custom' || inst.isCustom===true;
+                    const badge = institutionBadge(inst);
+                    const base = {fontSize:FS.xs,padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
+                    const skin = isCustom
+                      ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
+                      : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
+                    return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
+                      {inst.name}
+                      {isCustom
+                        ? <span style={{fontSize:FS.nano,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                        : (badge.label&&<span style={{fontSize:FS.nano,fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
+                    </span>;
+                  })}
+                </div>
+              </div>;
+            })}
+          </div>
+          {/* Legend */}
+          <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:FS.xxs,color:MUTED,flexWrap:'wrap'}}>
+            {[['REQ',PROVENANCE_TONE.required,'Historically required'],['YOU',PROVENANCE_TONE.you,'Added by you'],['→',PROVENANCE_TONE.auto,'Auto-resolved dependency'],['WORLD',PROVENANCE_TONE.world,'Grown by the living world'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
+              <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
+            ))}
+          </div>
+        </div>}
+      </div>
+
+    </div>
+  );
+}
+
+export default React.memo(OverviewTab);

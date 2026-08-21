@@ -1,0 +1,312 @@
+import { useCallback, useEffect, useState } from 'react';
+
+import { fetchGalleryReports, resolveGalleryReport } from '../../lib/gallery.js';
+import { supabase } from '../../lib/supabase.js';
+import { navigate } from '../../hooks/useRoute.js';
+import Button from '../primitives/Button.jsx';
+import {
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SECOND, SP, sans } from '../theme.js';
+import { formatDate, human } from './galleryUtils.js';
+
+const STATUS_OPTIONS = [
+  ['open', 'Open'],
+  ['resolved', 'Resolved'],
+  ['dismissed', 'Dismissed'],
+  ['all', 'All'],
+];
+
+function StatusPill({ status }) {
+  const active = status === 'open';
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      minHeight: 22,
+      padding: '2px 7px',
+      border: `1px solid ${active ? RED : BORDER2}`,
+      background: active ? RED_BG : CARD_ALT,
+      color: active ? RED : SECOND,
+      fontFamily: sans,
+      fontSize: FS.xxs,
+      fontWeight: 900,
+      textTransform: 'uppercase',
+    }}>
+      {status}
+    </span>
+  );
+}
+
+function ActionButton({ children, tone = 'secondary', busy, icon, onClick }) {
+  return (
+    <Button
+      variant={tone}
+      size="sm"
+      busy={busy}
+      icon={icon}
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+}
+
+// The unified cross-kind queue (173): one row per reported TARGET across
+// settlements, maps, campaigns, and comments. Dormant-safe (an undeployed RPC
+// yields an empty queue). Destructive takedown (ban/delete/set-private/remove
+// comment) lives in the by-id admin tools; here a target is resolved or dismissed
+// (all its open reports move together). Rides the lazy AdminPanel chunk.
+function UnifiedReportQueue() {
+  const [targets, setTargets] = useState([]);
+  const [busyKey, setBusyKey] = useState(null);
+  const [error, setError] = useState(null);
+
+  const load = useCallback(async () => {
+    setError(null);
+    try {
+      const { data, error: e } = await supabase.rpc('list_open_report_targets');
+      setTargets(!e && Array.isArray(data) ? data : []);
+    } catch { setTargets([]); }
+  }, []);
+
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    load();
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [load]);
+
+  const resolve = async (kind, targetId, nextStatus) => {
+    const key = `${kind}:${targetId}`;
+    setBusyKey(key); setError(null);
+    try {
+      const { error: e } = await supabase.rpc('resolve_report_target', {
+        p_kind: kind, p_target_id: targetId, p_status: nextStatus, p_note: '',
+      });
+      if (e) throw new Error(e.message || 'Could not update reports.');
+      await load();
+    } catch (err) {
+      setError(err?.message || 'Could not update reports.');
+    } finally {
+      setBusyKey(null);
+    }
+  };
+
+  return (
+    <section aria-label="Reported content queue" style={{ display: 'grid', gap: SP.sm }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
+        <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+          Reported content (all kinds)
+        </h3>
+        <Button variant="secondary" size="sm" onClick={load}>Refresh</Button>
+      </div>
+      {error && (
+        <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
+      )}
+      {targets.length === 0 ? (
+        <div style={{ padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
+          No open reports.
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gap: SP.sm, maxHeight: 320, overflowY: 'auto' }}>
+          {targets.map(t => {
+            const key = `${t.kind}:${t.target_id}`;
+            return (
+              <article key={key} style={{ display: 'grid', gap: 4, padding: SP.sm, border: `1px solid ${RED}`, background: CARD_ALT }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase' }}>{t.kind}</span>
+                  <strong style={{ color: INK, fontFamily: sans, fontSize: FS.sm, overflowWrap: 'anywhere' }}>{t.label || t.target_id}</strong>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{t.report_count} reports</span>
+                  {!t.is_public && <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>not public</span>}
+                </div>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                  {(Array.isArray(t.reasons) ? t.reasons : []).map(r => human(r)).join(', ')}
+                </div>
+                <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+                  Take the item down from the user tools by id; here you can clear the reports.
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm }}>
+                  <Button variant="success" size="sm" busy={busyKey === key} onClick={() => resolve(t.kind, t.target_id, 'resolved')}>Mark resolved</Button>
+                  <Button variant="danger" size="sm" busy={busyKey === key} onClick={() => resolve(t.kind, t.target_id, 'dismissed')}>Dismiss</Button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default function GalleryModerationPanel() {
+  const [status, setStatus] = useState('open');
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [busyId, setBusyId] = useState(null);
+
+  const loadReports = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      setReports(await fetchGalleryReports({ status, limit: 50 }));
+    } catch (err) {
+      setError(err?.message || 'Gallery reports could not be loaded.');
+    } finally {
+      setLoading(false);
+    }
+  }, [status]);
+
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    loadReports();
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [loadReports]);
+
+  const updateReport = async (reportId, nextStatus) => {
+    setBusyId(reportId);
+    setError(null);
+    try {
+      await resolveGalleryReport(reportId, nextStatus);
+      await loadReports();
+    } catch (err) {
+      setError(err?.message || 'Gallery report could not be updated.');
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  return (
+    <div style={{ display: 'grid', gap: SP.md }}>
+      {/* Unified cross-kind queue (173): settlements, maps, campaigns, comments. */}
+      <UnifiedReportQueue />
+      <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
+        <h3 style={{ margin: `0 0 ${SP.sm}px`, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+          Settlement reports (detail)
+        </h3>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+        <div style={{ display: 'inline-flex', border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
+          {STATUS_OPTIONS.map(([id, label]) => {
+            const active = status === id;
+            return (
+              <Button
+                key={id}
+                variant={active ? 'gold' : 'ghost'}
+                size="sm"
+                aria-pressed={active}
+                onClick={() => setStatus(id)}
+                style={{ borderRadius: 0, border: 'none', borderRight: id === 'all' ? 'none' : `1px solid ${BORDER}` }}
+              >
+                {label}
+              </Button>
+            );
+          })}
+        </div>
+        <Button
+          variant="secondary"
+          size="sm"
+          busy={loading}
+          onClick={loadReports}
+        >
+          Refresh
+        </Button>
+      </div>
+
+      {error && (
+        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+          {error}
+        </div>
+      )}
+
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
+          Loading gallery reports...
+        </div>
+      ) : reports.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
+          No gallery reports in this queue.
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gap: SP.sm, maxHeight: 460, overflowY: 'auto' }}>
+          {reports.map(report => (
+            <article
+              key={report.id}
+              style={{
+                display: 'grid',
+                gap: SP.sm,
+                padding: SP.md,
+                border: `1px solid ${report.status === 'open' ? RED : BORDER}`,
+                background: report.status === 'open' ? CARD_ALT : CARD,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm }}>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                    <strong style={{ color: INK, fontFamily: sans, fontSize: FS.sm, overflowWrap: 'anywhere' }}>
+                      {report.name || 'Untitled settlement'}
+                    </strong>
+                    <StatusPill status={report.status} />
+                    {report.reportCount > 1 && (
+                      <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+                        {report.reportCount} reports
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ marginTop: 3, color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                    {human(report.tier)} / {human(report.reason)} / {report.reporterLabel} / {formatDate(report.createdAt)}
+                  </div>
+                </div>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={!report.slug}
+                  title="Open public dossier"
+                  onClick={() => report.slug && navigate('gallery', { params: { slug: report.slug } })}
+                >
+                  Open
+                </Button>
+              </div>
+              {report.body && (
+                <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45, whiteSpace: 'pre-wrap' }}>
+                  {report.body}
+                </p>
+              )}
+              {!report.isPublic && (
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontStyle: 'italic' }}>
+                  This settlement is no longer public.
+                </div>
+              )}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
+                {report.status !== 'resolved' && (
+                  <ActionButton
+                    tone="success"
+                    busy={busyId === report.id}
+                    onClick={() => updateReport(report.id, 'resolved')}
+                  >
+                    Resolve
+                  </ActionButton>
+                )}
+                {report.status !== 'dismissed' && (
+                  <ActionButton
+                    tone="danger"
+                    busy={busyId === report.id}
+                    onClick={() => updateReport(report.id, 'dismissed')}
+                  >
+                    Dismiss
+                  </ActionButton>
+                )}
+                {report.status !== 'open' && (
+                  <ActionButton
+                    busy={busyId === report.id}
+                    onClick={() => updateReport(report.id, 'open')}
+                  >
+                    Reopen
+                  </ActionButton>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

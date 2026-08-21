@@ -1,0 +1,112 @@
+import { ensureRegionalGraph } from '../domain/region/index.js';
+
+const CHANNEL_COLORS = Object.freeze({
+  trade_dependency: '#0f766e',
+  export_market: '#a0762a',
+  trade_route: '#2563eb',
+  political_authority: '#7c3aed',
+  tax_obligation: '#9a3412',
+  military_protection: '#1d4ed8',
+  war_front: '#b91c1c',
+  service_dependency: '#047857',
+  // components-map-2: aligned to WAR_FAITH_STYLE.religious_authority (#6a2a9a) so
+  // the LayersPanel channel-filter swatch matches the purple RelationshipEdges
+  // actually draws — the channel was rendering in two different purples.
+  religious_authority: '#6a2a9a',
+  criminal_corridor: '#4c1d95',
+  migration_pressure: '#c2410c',
+  information_flow: '#0369a1',
+  resource_competition: '#854d0e',
+});
+
+const IMPACT_COLORS = Object.freeze({
+  queued: '#c98500',
+  applied: '#2a7a2a',
+  ignored: '#8a8174',
+  expired: '#8a8174',
+  resolved: '#4f6f8f',
+});
+
+function pointBySettlement(placements = {}) {
+  const out = new Map();
+  for (const placement of Object.values(placements || {})) {
+    if (!placement?.settlementId) continue;
+    if (typeof placement.x !== 'number' || typeof placement.y !== 'number') continue;
+    out.set(String(placement.settlementId), { x: placement.x, y: placement.y });
+  }
+  return out;
+}
+
+export function regionalChannelColor(type) {
+  return CHANNEL_COLORS[type] || '#6f5f4d';
+}
+
+export function regionalImpactColor(status) {
+  return IMPACT_COLORS[status] || '#c98500';
+}
+
+export function buildRegionalMapOverlay({
+  campaign,
+  placements,
+  includeGm = true,
+  includeHidden = false,
+  channelTypes = null,
+  impactStatuses = ['queued', 'applied', 'resolved'],
+  minSeverity = 0,
+} = /** @type {{ campaign?: any, placements?: any, includeGm?: boolean, includeHidden?: boolean, channelTypes?: string[]|null, impactStatuses?: string[]|null, minSeverity?: number }} */ ({})) {
+  const graph = ensureRegionalGraph(campaign?.regionalGraph);
+  const points = pointBySettlement(placements);
+  const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
+  const channelsById = new Map(graph.channels.map(channel => [String(channel.id), channel]));
+  const channelTypeSet = Array.isArray(channelTypes)
+    ? new Set(channelTypes)
+    : null;
+  const impactStatusSet = Array.isArray(impactStatuses)
+    ? new Set(impactStatuses)
+    : null;
+  const severityFloor = Math.max(0, Math.min(1, Number.isFinite(minSeverity) ? minSeverity : 0));
+
+  const channels = graph.channels
+    .filter(channel => channel.status === 'confirmed')
+    .filter(channel => !channelTypeSet || channelTypeSet.has(channel.type))
+    .filter(channel => includeHidden || channel.visibility !== 'hidden')
+    .filter(channel => includeGm || channel.visibility !== 'gm')
+    .map(channel => ({
+      ...channel,
+      fromPoint: points.get(String(channel.from)),
+      toPoint: points.get(String(channel.to)),
+      fromName: nodeNames.get(String(channel.from)) || channel.from,
+      toName: nodeNames.get(String(channel.to)) || channel.to,
+      color: regionalChannelColor(channel.type),
+    }))
+    .filter(channel => channel.fromPoint && channel.toPoint);
+
+  // An impact marker inherits its owning channel's visibility: a concealed
+  // (hidden/gm) channel must not leak through its impacts' markers and
+  // causality tooltips when that visibility tier is toggled off. Orphan
+  // impacts (channel no longer in the graph — legacy saves, pruned channels)
+  // fail OPEN and keep projecting: hiding them would silently erase real
+  // queued pressure from old campaigns with no channel left to re-show it.
+  const impactVisible = impact => {
+    const channel = channelsById.get(String(impact.channelId));
+    if (!channel) return true;
+    if (!includeHidden && channel.visibility === 'hidden') return false;
+    if (!includeGm && channel.visibility === 'gm') return false;
+    return true;
+  };
+
+  const impacts = graph.queuedImpacts
+    .filter(impact => !impactStatusSet || impactStatusSet.has(impact.status))
+    .filter(impact => (impact.severity || 0) >= severityFloor)
+    .filter(impactVisible)
+    .map(impact => ({
+      ...impact,
+      point: points.get(String(impact.targetSettlementId)),
+      sourceName: nodeNames.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId,
+      targetName: nodeNames.get(String(impact.targetSettlementId)) || impact.targetSettlementId,
+      color: regionalImpactColor(impact.status),
+    }))
+    .filter(impact => impact.point);
+
+  return { channels, impacts };
+}

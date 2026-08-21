@@ -1,0 +1,974 @@
+/**
+ * generateCampaignPDF.js — Campaign-level export.
+ *
+ * One PDF that zooms out across a whole campaign:
+ *   1. Cover page (campaign name + stats)
+ *   2. Settlement index (one-line roster, sortable)
+ *   3. Relationship map (force-directed diagram across all settlements)
+ *   4. Cross-settlement NPC connections (who talks to whom, across places)
+ *   5. Per-settlement digest (one card per settlement — not the full sheet)
+ *   6. Network effects appendix (cascading modifiers)
+ *
+ * Uses the same visual language as generateSettlementPDF.js but at a
+ * higher altitude — prose is short, lists are wide, the goal is DM at-a-glance.
+ */
+import { jsPDF } from 'jspdf';
+import { formatCount } from '../domain/formatNumber.js';
+import { autoLayout } from './graphLayout.js';
+import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
+import { truncateAtWord } from '../lib/text.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
+// lib-infra-7: the living-world read-models the settlement PDF already consumes,
+// reused (never recomputed) so the campaign artifact stops printing a frozen
+// pre-pulse network. All pure display selectors — dormant ⇒ empty ⇒ no chapter.
+import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
+import { liveSieges, warExhaustionStandings, dispositionStandings } from '../domain/display/warStatus.js';
+import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
+import { realmArcLines } from '../domain/display/realmArcSummary.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+
+/** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
+function durationBand(ms) {
+  const n = Number(ms);
+  if (!Number.isFinite(n) || n < 0) return 'unknown';
+  if (n < 5000) return 'lt_5s';
+  if (n < 15000) return '5_15s';
+  if (n < 60000) return '15_60s';
+  if (n < 300000) return '1_5m';
+  if (n < 1800000) return '5_30m';
+  return 'gt_30m';
+}
+
+// ── Page geometry ──────────────────────────────────────────────────────────────
+const PW = 210, PH = 297;
+const ML = 14, MR = 14, MT = 14, MB = 14;
+const CW = PW - ML - MR;
+const BOT = PH - MB;
+
+// ── Colour palette (matches settlement PDF) ───────────────────────────────────
+const INK   = [28,  20,  9];
+const PARCH = [250, 244, 232];
+const CREAM = [245, 237, 224];
+const TAN   = [200, 184, 154];
+const GOLD  = [160, 118, 42];
+const BROWN = [107, 83,  48];
+const MUTED = [140, 120, 90];
+
+// Relationship line colours (same hues as the web app)
+const REL_COLORS = {
+  trade_partner: [26,  90,  40],
+  allied:        [26,  58,  122],
+  patron:        [74,  26, 106],
+  client:        [106, 58,  26],
+  rival:         [138, 80,  16],
+  cold_war:      [138, 48,  16],
+  hostile:       [139, 26,  26],
+  neutral:       [107, 83,  64],
+};
+
+const REL_DASH = {
+  patron:   [1.5, 1.0],
+  client:   [1.5, 1.0],
+  cold_war: [0.8, 1.2],
+  rival:    [0.5, 0.9],
+};
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+const sf = (d,c) => d.setFillColor(c[0],c[1],c[2]);
+const sd = (d,c) => d.setDrawColor(c[0],c[1],c[2]);
+const st = (d,c) => d.setTextColor(c[0],c[1],c[2]);
+
+function rect(d,x,y,w,h,fill,stroke=null) {
+  sf(d,fill);
+  if (stroke) { sd(d,stroke); d.setLineWidth(0.25); d.rect(x,y,w,h,'FD'); }
+  else d.rect(x,y,w,h,'F');
+}
+function hline(d,x1,y,x2,clr=TAN,lw=0.2) { sd(d,clr); d.setLineWidth(lw); d.line(x1,y,x2,y); }
+
+function s(v) {
+  // Negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
+  // and printable Latin-1; everything else gets replaced with space
+  // so PDF-bound strings don't contain unprintable control bytes.
+  // eslint-disable-next-line no-control-regex
+  return String(v||'').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,' ').replace(/\s+/g,' ').trim();
+}
+function wrap(d,text,maxW,fontSize) {
+  d.setFontSize(fontSize);
+  return d.splitTextToSize(s(text),maxW);
+}
+// Word-boundary truncation (shared helper); '...' because s() strips U+2026.
+function truncate(text, maxChars) {
+  return truncateAtWord(s(text), maxChars, '...');
+}
+// A silent `lines.slice(0, n)` hides that prose continues — keep at most
+// `maxLines` lines and mark the final kept line when the clamp actually cut.
+function clampLines(lines, maxLines) {
+  if (lines.length <= maxLines) return lines;
+  const kept = lines.slice(0, maxLines);
+  if (kept.length) kept[kept.length - 1] += '...';
+  return kept;
+}
+
+// Section header bar
+function secBar(d, y, label, clr = INK, textClr = [255,255,255]) {
+  const bh = 6;
+  rect(d, ML, y, CW, bh, clr);
+  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, textClr);
+  d.text(s(label).toUpperCase(), ML+3, y+4.2);
+  return y + bh + 3;
+}
+
+// Footer: "Campaign: <name>   Page N" bottom-right on each page
+function footer(d, campaignName, pageN, totalPagesHint) {
+  d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
+  d.text(s(campaignName), ML, PH - 5);
+  const right = `Page ${pageN}` + (totalPagesHint ? ` of ${totalPagesHint}` : '');
+  const w = d.getStringUnitWidth(right) * 7 / d.internal.scaleFactor;
+  d.text(right, PW - MR - w, PH - 5);
+}
+
+// Ensure there's room for `h` more millimetres, else paginate.
+function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
+  if (y + h < BOT) return { y, pageN };
+  footer(d, campaignName, pageN);
+  d.addPage();
+  pageN++;
+  const newY = newTopHandler ? newTopHandler(d, pageN) : MT;
+  return { y: newY, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page 1: Cover
+// ─────────────────────────────────────────────────────────────────────────────
+function buildCover(d, campaign, settlements, generatedLabel) {
+  // Parchment backdrop
+  rect(d, 0, 0, PW, PH, PARCH);
+
+  // Decorative border
+  sd(d, GOLD); d.setLineWidth(1.2);
+  d.rect(10, 10, PW-20, PH-20);
+  sd(d, GOLD); d.setLineWidth(0.35);
+  d.rect(13, 13, PW-26, PH-26);
+
+  // Title block (centered)
+  const centerX = PW/2;
+  const titleY = 60;
+
+  d.setFont('helvetica','italic'); d.setFontSize(11); st(d, BROWN);
+  d.text('CAMPAIGN DOSSIER', centerX, titleY, { align: 'center' });
+
+  d.setFont('helvetica','bold'); d.setFontSize(28); st(d, INK);
+  const titleLines = wrap(d, campaign.name || 'Untitled Campaign', CW - 20, 28);
+  let ty = titleY + 16;
+  for (const line of titleLines.slice(0, 3)) {
+    d.text(line, centerX, ty, { align: 'center' });
+    ty += 12;
+  }
+
+  // Gold divider
+  sd(d, GOLD); d.setLineWidth(0.6);
+  d.line(centerX - 30, ty + 4, centerX + 30, ty + 4);
+
+  // Description (if any)
+  if (campaign.description) {
+    d.setFont('helvetica','normal'); d.setFontSize(10); st(d, BROWN);
+    const descLines = wrap(d, campaign.description, CW - 40, 10);
+    let dy = ty + 14;
+    for (const line of clampLines(descLines, 6)) {
+      d.text(line, centerX, dy, { align: 'center' });
+      dy += 5;
+    }
+  }
+
+  // Stat panel (bottom half)
+  const panelY = 170;
+  const panelH = 80;
+  rect(d, ML + 10, panelY, CW - 20, panelH, CREAM, TAN);
+
+  d.setFont('helvetica','bold'); d.setFontSize(9); st(d, BROWN);
+  d.text('ROSTER', ML + 16, panelY + 9);
+  hline(d, ML + 16, panelY + 11, ML + CW - 16, TAN, 0.4);
+
+  // Count stats
+  const tierCounts = {};
+  let totalPop = 0;
+  let totalNPCs = 0;
+  const cultures = new Set();
+  for (const s of settlements) {
+    const tier = s.settlement?.tier || 'unknown';
+    tierCounts[tier] = (tierCounts[tier] || 0) + 1;
+    totalPop += Number(s.settlement?.population) || 0;
+    totalNPCs += (s.settlement?.npcs || []).length;
+    if (s.settlement?.culture) cultures.add(s.settlement.culture);
+  }
+
+  // Two-column stat grid
+  const col1X = ML + 16;
+  const col2X = ML + CW / 2 + 2;
+  let gy = panelY + 18;
+
+  const statRow = (x, y, label, value) => {
+    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, MUTED);
+    d.text(label, x, y);
+    d.setFont('helvetica','bold'); d.setFontSize(10); st(d, INK);
+    d.text(String(value), x + 45, y);
+  };
+
+  statRow(col1X, gy,      'Settlements',  settlements.length);
+  statRow(col2X, gy,      'Population',   formatCount(totalPop));
+  statRow(col1X, gy + 8,  'NPCs',         totalNPCs);
+  statRow(col2X, gy + 8,  'Cultures',     cultures.size);
+
+  // Tier breakdown
+  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, BROWN);
+  d.text('BY TIER', col1X, gy + 22);
+  hline(d, col1X, gy + 24, col1X + 60, TAN, 0.3);
+
+  const tiers = Object.entries(tierCounts).sort((a,b)=>b[1]-a[1]);
+  let ty2 = gy + 30;
+  for (const [tier, count] of tiers.slice(0, 5)) {
+    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, INK);
+    d.text(`${tier.charAt(0).toUpperCase() + tier.slice(1)}`, col1X, ty2);
+    d.setFont('helvetica','bold');
+    d.text(String(count), col1X + 55, ty2);
+    ty2 += 5;
+  }
+
+  // Right column: top 3 cultures
+  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, BROWN);
+  d.text('CULTURES', col2X, gy + 22);
+  hline(d, col2X, gy + 24, col2X + 60, TAN, 0.3);
+
+  let cy = gy + 30;
+  for (const culture of Array.from(cultures).slice(0, 5)) {
+    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, INK);
+    const cName = s(culture).replace(/_/g,' ');
+    d.text(cName.charAt(0).toUpperCase() + cName.slice(1), col2X, cy);
+    cy += 5;
+  }
+
+  // Footer byline
+  d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
+  d.text(`Generated ${generatedLabel}`, centerX, PH - 20, { align: 'center' });
+  d.text('SettlementForge', centerX, PH - 15, { align: 'center' });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page 2: Settlement Index
+// ─────────────────────────────────────────────────────────────────────────────
+function buildIndex(d, campaignName, settlements, pageN) {
+  let y = MT;
+  y = secBar(d, y, 'Settlement Index', INK);
+
+  // Column headers
+  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.text('NAME',       ML + 1,  y);
+  d.text('TIER',       ML + 65, y);
+  d.text('POP',        ML + 95, y);
+  d.text('CULTURE',    ML + 118,y);
+  d.text('LINKS',      ML + 160,y);
+  hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
+  y += 5;
+
+  // Row striping
+  const rowH = 5.5;
+
+  settlements.forEach((save, i) => {
+    if (y + rowH > BOT - 10) {
+      footer(d, campaignName, pageN);
+      d.addPage();
+      pageN++;
+      y = MT;
+      y = secBar(d, y, 'Settlement Index (continued)', INK);
+      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+      d.text('NAME',    ML + 1,  y);
+      d.text('TIER',    ML + 65, y);
+      d.text('POP',     ML + 95, y);
+      d.text('CULTURE', ML + 118,y);
+      d.text('LINKS',   ML + 160,y);
+      hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
+      y += 5;
+    }
+
+    if (i % 2 === 0) rect(d, ML, y - 3.5, CW, rowH, CREAM);
+
+    const st_ = save.settlement || {};
+    const links = (st_.neighbourNetwork || []).length;
+
+    d.setFont('helvetica','bold'); d.setFontSize(8); st(d, INK);
+    d.text(truncate(save.name || st_.name || 'Unnamed', 32), ML + 1, y);
+
+    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+    d.text(truncate(st_.tier || '-', 14), ML + 65, y);
+    d.text(String(formatCount(Number(st_.population) || 0)), ML + 95, y);
+    d.text(truncate(String(st_.culture || '-').replace(/_/g,' '), 20), ML + 118, y);
+
+    d.setFont('helvetica','bold');
+    st(d, links > 0 ? GOLD : MUTED);
+    d.text(String(links), ML + 162, y);
+
+    y += rowH;
+  });
+
+  return { y, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page 3: Campaign Relationship Map
+// ─────────────────────────────────────────────────────────────────────────────
+function buildMap(d, campaignName, settlements, pageN) {
+  let y = MT;
+  y = secBar(d, y, 'Relationship Map', INK);
+
+  // Build nodes & edges
+  const nodes = settlements.map(s => ({
+    id: s.id,
+    label: s.name || s.settlement?.name || 'Unnamed',
+    tier: s.settlement?.tier || '',
+  }));
+
+  const seenEdges = new Set();
+  const edges = [];
+  for (const save of settlements) {
+    const net = save.settlement?.neighbourNetwork || [];
+    for (const n of net) {
+      if (!n.id) continue;
+      if (!nodes.find(nn => nn.id === n.id)) continue;
+      const key = [save.id, n.id].sort().join('::');
+      if (seenEdges.has(key)) continue;
+      seenEdges.add(key);
+      edges.push({
+        from: save.id,
+        to: n.id,
+        type: n.relationshipType || 'neutral',
+      });
+    }
+  }
+
+  if (nodes.length === 0) {
+    d.setFont('helvetica','italic'); d.setFontSize(10); st(d, MUTED);
+    d.text('No settlements in this campaign.', ML + 5, y + 10);
+    return { y: y + 20, pageN };
+  }
+
+  // Diagram frame
+  const DIAG_TOP = y + 2;
+  const DIAG_BOT = 205;
+  const DIAG_L   = ML + 5;
+  const DIAG_R   = PW - MR - 5;
+  const DIAG_W   = DIAG_R - DIAG_L;
+  const DIAG_H   = DIAG_BOT - DIAG_TOP;
+
+  rect(d, DIAG_L, DIAG_TOP, DIAG_W, DIAG_H, CREAM, TAN);
+
+  const laid = autoLayout(nodes, edges);
+  const posMap = new Map(laid.map(p => [p.id, p]));
+
+  const proj = (p) => ({
+    x: DIAG_L + 10 + p.x * (DIAG_W - 20),
+    y: DIAG_TOP + 10 + p.y * (DIAG_H - 20),
+  });
+
+  // Draw edges first
+  for (const e of edges) {
+    const a = posMap.get(e.from);
+    const b = posMap.get(e.to);
+    if (!a || !b) continue;
+    const pa = proj(a);
+    const pb = proj(b);
+    const clr = REL_COLORS[e.type] || REL_COLORS.neutral;
+    sd(d, clr);
+    // Line weight by edge type — stronger for hostile/alliance
+    const lw = e.type === 'hostile' ? 0.9 :
+               e.type === 'allied'  ? 0.7 :
+               e.type === 'trade_partner' ? 0.6 : 0.45;
+    d.setLineWidth(lw);
+    if (REL_DASH[e.type]) {
+      d.setLineDashPattern(REL_DASH[e.type], 0);
+    }
+    d.line(pa.x, pa.y, pb.x, pb.y);
+    d.setLineDashPattern([], 0);
+  }
+
+  // Draw nodes
+  for (const node of laid) {
+    const p = proj(node);
+    // Shadow ring
+    sf(d, [230, 218, 192]);
+    d.circle(p.x + 0.4, p.y + 0.4, 3.2, 'F');
+    // Main circle
+    sf(d, GOLD);
+    d.circle(p.x, p.y, 3.0, 'F');
+    sf(d, [255, 248, 232]);
+    d.circle(p.x, p.y, 2.2, 'F');
+    sd(d, GOLD); d.setLineWidth(0.35);
+    d.circle(p.x, p.y, 3.0);
+
+    // Label above
+    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, INK);
+    const label = truncate(node.label, 20);
+    d.text(label, p.x, p.y - 4, { align: 'center' });
+
+    // Tier below (small)
+    if (node.tier) {
+      d.setFont('helvetica','normal'); d.setFontSize(5.5); st(d, MUTED);
+      d.text(s(node.tier), p.x, p.y + 6, { align: 'center' });
+    }
+  }
+
+  // Legend below diagram
+  let ly = DIAG_BOT + 5;
+  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.text('LEGEND', ML, ly);
+  hline(d, ML, ly + 1, ML + CW, TAN, 0.3);
+  ly += 5;
+
+  const legendItems = Object.entries(REL_COLORS);
+  const legCol = CW / 4;
+  legendItems.forEach((entry, idx) => {
+    const [type, clr] = entry;
+    const col = idx % 4;
+    const row = Math.floor(idx / 4);
+    const lx = ML + col * legCol;
+    const lyRow = ly + row * 5;
+    sd(d, clr); d.setLineWidth(1.2);
+    d.line(lx, lyRow - 0.5, lx + 8, lyRow - 0.5);
+    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
+    d.text(REL_LABELS[type] || type.replace(/_/g,' '), lx + 10, lyRow);
+  });
+
+  return { y: DIAG_BOT + 20, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Cross-settlement NPC connections (who-talks-to-whom table)
+// ─────────────────────────────────────────────────────────────────────────────
+function buildNPCConnections(d, campaignName, settlements, pageN) {
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'Cross-Settlement NPC Contacts', INK);
+
+  // Gather cross-settlement NPC links. The real source is the settlement-level
+  // interSettlementRelationships array (written by SettlementsPanel's bidirectional
+  // linking) — the old per-NPC npc.interSettlementNpcs field is never produced.
+  const connections = [];
+  for (const save of settlements) {
+    const isr = save.settlement?.interSettlementRelationships || [];
+    for (const entry of isr) {
+      // skip faction-only links; this table is NPC contacts
+      if (!entry.npcName && !entry.partnerName) continue;
+      connections.push({
+        home: save.name || save.settlement?.name,
+        npc:  entry.npcName,
+        role: entry.npcRole,
+        partnerSettlement: entry.partnerSettlement,
+        partnerName: entry.partnerName,
+        partnerRole: entry.partnerRole,
+        relType: entry.relType || 'neutral',
+      });
+    }
+  }
+
+  if (connections.length === 0) {
+    d.setFont('helvetica','italic'); d.setFontSize(9); st(d, MUTED);
+    d.text('No cross-settlement NPC contacts recorded.', ML + 3, y + 8);
+    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, BROWN);
+    d.text('Link settlements in the Settlements panel to automatically generate',
+           ML + 3, y + 15);
+    d.text('paired NPC contacts between them.', ML + 3, y + 20);
+    return { y: y + 30, pageN };
+  }
+
+  // Column headers
+  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.text('FROM',          ML + 1,  y);
+  d.text('NPC',           ML + 48, y);
+  d.text('->',            ML + 92, y);
+  d.text('CONTACT',       ML + 100,y);
+  d.text('AT',            ML + 148,y);
+  hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
+  y += 5;
+
+  const rowH = 5;
+  connections.forEach((c, i) => {
+    if (y + rowH > BOT - 10) {
+      footer(d, campaignName, pageN);
+      d.addPage();
+      pageN++;
+      y = MT;
+      y = secBar(d, y, 'Cross-Settlement NPC Contacts (cont.)', INK);
+      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+      d.text('FROM',    ML + 1,  y);
+      d.text('NPC',     ML + 48, y);
+      d.text('->',      ML + 92, y);
+      d.text('CONTACT', ML + 100,y);
+      d.text('AT',      ML + 148,y);
+      hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
+      y += 5;
+    }
+
+    if (i % 2 === 0) rect(d, ML, y - 3.5, CW, rowH, CREAM);
+
+    const clr = REL_COLORS[c.relType] || REL_COLORS.neutral;
+    // Left colored pip
+    sf(d, clr);
+    d.circle(ML + 0.5, y - 1.2, 1.1, 'F');
+
+    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+    d.text(truncate(c.home || '-', 22), ML + 3, y);
+
+    d.setFont('helvetica','bold'); st(d, INK);
+    d.text(truncate(c.npc || '-', 22), ML + 48, y);
+
+    d.setFont('helvetica','bold'); st(d, clr);
+    d.text('>', ML + 93, y);
+
+    d.setFont('helvetica','bold'); st(d, INK);
+    d.text(truncate(c.partnerName || '-', 22), ML + 100, y);
+
+    d.setFont('helvetica','normal'); st(d, BROWN);
+    d.text(truncate(c.partnerSettlement || '-', 22), ML + 148, y);
+
+    y += rowH;
+  });
+
+  return { y, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Per-settlement digest cards (one card per settlement, half-page each)
+// ─────────────────────────────────────────────────────────────────────────────
+function buildDigest(d, campaignName, settlements, pageN) {
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'Settlement Digest', INK);
+
+  const CARD_H = 54;
+  const CARD_GAP = 4;
+
+  for (const save of settlements) {
+    if (y + CARD_H > BOT - 10) {
+      footer(d, campaignName, pageN);
+      d.addPage();
+      pageN++;
+      y = MT;
+      y = secBar(d, y, 'Settlement Digest (continued)', INK);
+    }
+
+    const st_ = save.settlement || {};
+
+    // Card frame
+    rect(d, ML, y, CW, CARD_H, CREAM, TAN);
+
+    // Title band
+    rect(d, ML, y, CW, 7, INK);
+    d.setFont('helvetica','bold'); d.setFontSize(10); st(d, [255,245,220]);
+    d.text(truncate(save.name || st_.name || 'Unnamed', 40), ML + 3, y + 4.8);
+
+    // Tier | Culture | Pop (right-aligned pills in title band)
+    const pill = (label) => {
+      d.setFont('helvetica','bold'); d.setFontSize(7);
+      return d.getStringUnitWidth(label) * 7 / d.internal.scaleFactor + 4;
+    };
+    const pops = formatCount(Number(st_.population) || 0);
+    const right1 = `${pops} pop`;
+    const right2 = s(st_.tier || '');
+    const right3 = s(String(st_.culture || '').replace(/_/g,' '));
+    const pw1 = pill(right1);
+    const pw2 = pill(right2);
+    const pw3 = pill(right3);
+    let rx = PW - MR - 3 - pw1;
+    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, GOLD);
+    d.text(right1, rx, y + 4.8);
+    rx -= (pw2 + 2);
+    st(d, [220, 200, 160]);
+    d.text(right2, rx, y + 4.8);
+    rx -= (pw3 + 2);
+    st(d, [200, 180, 140]);
+    d.text(right3, rx, y + 4.8);
+
+    // Two-column content: left = hook/overview, right = top NPCs + factions
+    const colGap = 4;
+    const colW = (CW - colGap) / 2;
+    const L_X = ML + 3;
+    const R_X = ML + colW + colGap + 3;
+    const bodyY = y + 10;
+
+    // LEFT — overview line (character & hook)
+    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+    d.text('OVERVIEW', L_X, bodyY);
+    hline(d, L_X, bodyY + 1, L_X + colW - 6, TAN, 0.2);
+
+    // Real settlement fields — characterSummary/description/overview were never
+    // produced, so the OVERVIEW block was always blank.
+    const reason = typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary;
+    const overview = s(st_.history?.historicalCharacter || st_.arrivalScene || st_.pressureSentence || reason || '');
+    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
+    const ovLines = wrap(d, overview, colW - 6, 7);
+    let ly = bodyY + 5;
+    for (const line of clampLines(ovLines, 3)) {
+      d.text(line, L_X, ly);
+      ly += 3;
+    }
+
+    // Adventure hook (one-liner).
+    //
+    // ⚠ THIS LINE NEVER PRINTED. The read was `st_.plotHooks || st_.hooks`, and
+    // no writer produces either key on a settlement ROOT, so the HOOK slot on
+    // every settlement card was blank. `collectPlotHooks` is the canonical
+    // collector (src/domain/dossier/plotHooks.js) the on-screen tabs and the
+    // react-pdf lane already share, and it returns hooks sorted by priority —
+    // so hooks[0] here is now the settlement's STRONGEST hook rather than
+    // whichever one happened to sit first in an array nothing filled.
+    const hooks = collectPlotHooks(st_);
+    if (hooks.length > 0) {
+      const hook = hooks[0].text || '';
+      if (hook) {
+        d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+        d.text('HOOK', L_X, ly + 2);
+        hline(d, L_X, ly + 3, L_X + colW - 6, TAN, 0.2);
+        d.setFont('helvetica','italic'); d.setFontSize(7); st(d, INK);
+        const hLines = wrap(d, hook, colW - 6, 7);
+        let hy = ly + 7;
+        for (const line of clampLines(hLines, 3)) {
+          d.text(line, L_X, hy);
+          hy += 3;
+        }
+      }
+    }
+
+    // RIGHT — key NPCs
+    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+    d.text('KEY NPCs', R_X, bodyY);
+    hline(d, R_X, bodyY + 1, R_X + colW - 6, TAN, 0.2);
+    const keyNpcs = (st_.npcs || [])
+      .filter(n => n.influence === 'high')
+      .slice(0, 3);
+    const shownNpcs = keyNpcs.length > 0 ? keyNpcs : (st_.npcs || []).slice(0, 3);
+
+    let ry = bodyY + 5;
+    for (const npc of shownNpcs) {
+      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, INK);
+      d.text(truncate(s(npc.name), 22), R_X, ry);
+      d.setFont('helvetica','italic'); d.setFontSize(6.5); st(d, BROWN);
+      d.text(truncate(s(npc.role), 30), R_X, ry + 3);
+      ry += 7;
+    }
+
+    // Links count
+    const links = (st_.neighbourNetwork || []).length;
+    if (links > 0) {
+      d.setFont('helvetica','bold'); d.setFontSize(6.5); st(d, GOLD);
+      d.text(`${links} link${links===1?'':'s'}`, R_X, y + CARD_H - 2.5);
+    }
+
+    y += CARD_H + CARD_GAP;
+  }
+
+  return { y, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Appendix: Network Effects per settlement
+// ─────────────────────────────────────────────────────────────────────────────
+function buildNetworkAppendix(d, campaignName, settlements, pageN) {
+  let allModifiers;
+  try {
+    allModifiers = getAllModifiers(settlements);
+  } catch (e) {
+    return { y: MT, pageN };
+  }
+
+  const withEffects = settlements.filter(s => {
+    const m = allModifiers.get(s.id);
+    return m && m.sources && m.sources.length > 0;
+  });
+  if (withEffects.length === 0) return { y: MT, pageN };
+
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'Network Effects Appendix', INK);
+
+  for (const save of withEffects) {
+    const m = allModifiers.get(save.id);
+    const blockH = 10 + 5 * EFFECT_CATEGORIES.length + 4;
+    if (y + blockH > BOT - 10) {
+      footer(d, campaignName, pageN);
+      d.addPage();
+      pageN++;
+      y = MT;
+      y = secBar(d, y, 'Network Effects Appendix (cont.)', INK);
+    }
+
+    d.setFont('helvetica','bold'); d.setFontSize(9); st(d, INK);
+    d.text(s(save.name), ML, y + 3);
+    d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
+    d.text(`${m.sources.length} source${m.sources.length===1?'':'s'}`, ML + 100, y + 3);
+    hline(d, ML, y + 5, ML + CW, TAN, 0.3);
+    y += 8;
+
+    // Per-category bars
+    const maxAbs = Math.max(0.01,
+      ...EFFECT_CATEGORIES.map(c => Math.abs(m.totals[c.key] || 0)));
+
+    for (const cat of EFFECT_CATEGORIES) {
+      const val = m.totals[cat.key] || 0;
+      const pct = Math.min(Math.abs(val) / maxAbs, 1);
+      const isPos = val >= 0;
+      d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+      d.text(cat.label, ML, y);
+      // Bar track
+      rect(d, ML + 40, y - 2.5, 80, 2.5, [228,216,196]);
+      // Fill
+      const fillClr = isPos ? [26, 90, 40] : [139, 26, 26];
+      if (val !== 0) rect(d, ML + 40, y - 2.5, 80 * pct, 2.5, fillClr);
+      // Value
+      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, isPos ? [26,90,40] : [139,26,26]);
+      const valStr = (isPos ? '+' : '') + (val * 100).toFixed(1) + '%';
+      d.text(valStr, ML + 124, y);
+      y += 4;
+    }
+    y += 5;
+  }
+
+  return { y, pageN };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main entry point
+// ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// State of the Realm — the living-world chapter (lib-infra-7). The realm's ACTUAL
+// history (chronicle beats, sieges, war-weariness, pantheon standing, named arcs)
+// from the SAME pure read-models the settlement PDF's Faith & War chapter consumes
+// — never recomputed. Gated on a canonized worldState with living content, so a
+// legacy / pre-pulse campaign skips the chapter and renders exactly as before.
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * The living-world SUMMARY DATA — the pure read layer of the State of the Realm
+ * chapter, split from rendering so it is unit-testable (lib-infra-7). Reuses the
+ * SAME display selectors the settlement PDF consumes; never recomputes. Gated on a
+ * canonized worldState; a legacy / draft-world campaign returns `{ present:false }`
+ * so the chapter is skipped and the export is byte-identical to before.
+ *
+ * THE FAITH SEAM — `opts.faithUnlocked` is the realm-scale twin of the settlement
+ * lane's gate (resolveExportSeam feeding faithChapterVisible): the caller passes the
+ * premium result and the DEFAULT (false) is the safe one, so a free / lapsed / anon
+ * realm export never prints a deity name. A locked export reads the realm WITHOUT its
+ * faith ledger, so neither the Pantheon standing nor an "Ascendancy of <deity>" arc
+ * line is ever PRODUCED — whole-section omission, never a blanked name. War, chronicle
+ * and trade content read the live worldState and are untouched by the seam.
+ *
+ * @param {Object} campaign
+ * @param {Array} [settlements]
+ * @param {{ faithUnlocked?: boolean }} [opts]
+ * @returns {{ present:false } | { present:true, nameFor:(id:any)=>string, majors:string[],
+ *   sieges:any[], weary:any[], standings:any[], pantheon:any[], arcs:string[] }}
+ */
+export function collectRealmSummary(campaign, settlements = [], opts = {}) {
+  const worldState = campaign?.worldState || null;
+  if (!worldState?.canonizedAt) return { present: false };
+  const { faithUnlocked = false } = opts;
+  const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+  // The faith-gated read of the realm: the live world minus its pantheon ledger when
+  // the export is locked. ONE seam value feeds BOTH deity-name producers (the
+  // standings and the arc lines), so the two can never drift apart.
+  const faithView = faithUnlocked ? worldState : { ...worldState, pantheon: null };
+
+  const nameById = new Map();
+  for (const save of settlements) {
+    const id = String(save?.id ?? save?.settlement?.id ?? '');
+    if (id) nameById.set(id, save?.settlement?.name || save?.name || id);
+  }
+  const nameFor = (id) => nameById.get(String(id)) || String(id);
+
+  const grounding = buildChronicleGrounding({
+    wizardNews: campaign.wizardNews,
+    worldState,
+    snapshot: { settlements: (campaign.settlementIds || []).map(id => ({ id, name: nameFor(id) })) },
+    regionalGraph,
+    lookback: 12,
+  });
+  const majors = Array.isArray(grounding?.majorHeadlines) ? grounding.majorHeadlines.slice(0, 10) : [];
+  // Only public sieges reach this shareable artifact (a GM-concealed front stays hidden).
+  const sieges = liveSieges({ worldState, regionalGraph }).filter(sg => sg.visibility !== 'concealed');
+  const weary = warExhaustionStandings(worldState);
+  const standings = dispositionStandings(worldState);
+  const pantheon = pantheonStandings(faithView);
+  const arcs = realmArcLines({ worldState: faithView, regionalGraph, settlements });
+
+  const present = !!(majors.length || sieges.length || weary.length || standings.length || pantheon.length || arcs.length);
+  return { present, nameFor, majors, sieges, weary, standings, pantheon, arcs };
+}
+
+function buildLivingWorld(d, campaignName, campaign, settlements, pageN, faithUnlocked) {
+  const rs = collectRealmSummary(campaign, settlements, { faithUnlocked });
+  if (!rs.present) return { pageN }; // legacy / draft / quiet world ⇒ chapter skipped
+  const { nameFor, majors, sieges, weary, standings, pantheon, arcs } = rs;
+
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'State of the Realm', INK);
+
+  const newTop = (dd) => secBar(dd, MT, 'State of the Realm (continued)', INK);
+  const ensure = (h) => { const r = _ensureSpace(d, y, h, campaignName, pageN, newTop); y = r.y; pageN = r.pageN; };
+
+  const subHead = (labelText) => {
+    ensure(10);
+    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, BROWN);
+    d.text(s(labelText).toUpperCase(), ML, y);
+    hline(d, ML, y + 1.2, PW - MR, TAN, 0.2);
+    y += 5;
+  };
+  const bullet = (text) => {
+    const lines = wrap(d, text, CW - 6, 8);
+    for (let i = 0; i < lines.length; i++) {
+      ensure(4);
+      d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, INK);
+      d.text((i === 0 ? '- ' : '  ') + lines[i], ML, y);
+      y += 3.6;
+    }
+    y += 0.6;
+  };
+
+  if (majors.length) {
+    subHead('Chronicle');
+    for (const h of majors) bullet(h);
+    y += 2;
+  }
+  if (sieges.length || weary.length || standings.length) {
+    subHead('War & Sieges');
+    for (const sg of sieges.slice(0, 8)) {
+      const besiegers = (sg.coalition || []).map(nameFor).filter(Boolean).join(', ') || 'A besieging force';
+      bullet(`${besiegers} ${sg.coalition && sg.coalition.length > 1 ? 'besiege' : 'besieges'} ${nameFor(sg.targetId)}.`);
+    }
+    for (const w of weary.slice(0, 6)) bullet(`${nameFor(w.id)} - ${w.band}.`);
+    const topAgg = standings.slice().sort((a, b) => b.score - a.score)[0];
+    if (topAgg) bullet(`Aggressor of record: ${nameFor(topAgg.id)} (${topAgg.wins}W / ${topAgg.losses}L).`);
+    y += 2;
+  }
+  if (pantheon.length) {
+    subHead('Pantheon');
+    for (const p of pantheon.slice(0, 8)) {
+      bullet(`${deityDisplayName(p.id)} - ${p.tier}, ${p.seats} seat${p.seats === 1 ? '' : 's'}.`);
+    }
+    y += 2;
+  }
+  if (arcs.length) {
+    subHead('Realm Arcs');
+    for (const arc of arcs.slice(0, 8)) bullet(arc);
+  }
+
+  return { pageN };
+}
+
+/**
+ * Paint + download the campaign PDF. Fire-and-download: returns nothing, calls
+ * doc.save().
+ * @param {Object} campaign
+ * @param {Array} [allSaves]
+ * @param {{ now?: string, faithUnlocked?: boolean }} [opts] `now` is the already-
+ *   formatted cover date — the SAME injectable seam the World Book cover carries
+ *   (generateWorldBook opts.now), so a fixture renders a reproducible cover.
+ *   Omitted ⇒ wall clock, exactly as before. `faithUnlocked` is the premium faith
+ *   seam (see collectRealmSummary); the default false is the safe one, so a free /
+ *   lapsed / anon campaign export carries no pantheon and no deity-named arc.
+ */
+export function generateCampaignPDF(campaign, allSaves, opts = {}) {
+  if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
+
+  const startedAt = Date.now();
+  const ids = new Set(campaign.settlementIds || []);
+  const settlements = (allSaves || []).filter(s => ids.has(s.id));
+
+  if (settlements.length === 0) {
+    // Still emit a cover page so the user sees something.
+  }
+
+  const doc = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
+  let pageN = 1;
+
+  // Page 1: cover
+  buildCover(doc, campaign, settlements, opts.now || new Date().toLocaleDateString('en-US'));
+
+  // Page 2+: index
+  doc.addPage();
+  pageN++;
+  const r1 = buildIndex(doc, campaign.name, settlements, pageN);
+  pageN = r1.pageN;
+  footer(doc, campaign.name, pageN);
+
+  // Page 3+: map
+  if (settlements.length > 0) {
+    doc.addPage();
+    pageN++;
+    const r2 = buildMap(doc, campaign.name, settlements, pageN);
+    pageN = r2.pageN;
+    footer(doc, campaign.name, pageN);
+  }
+
+  // Cross-settlement NPC connections
+  if (settlements.length > 0) {
+    const r3 = buildNPCConnections(doc, campaign.name, settlements, pageN);
+    pageN = r3.pageN;
+    footer(doc, campaign.name, pageN);
+  }
+
+  // Per-settlement digest
+  if (settlements.length > 0) {
+    const r4 = buildDigest(doc, campaign.name, settlements, pageN);
+    pageN = r4.pageN;
+    footer(doc, campaign.name, pageN);
+  }
+
+  // State of the Realm — the living-world chapter (lib-infra-7). Self-gates on a
+  // canonized worldState with living content; a legacy campaign skips it entirely.
+  // The faith seam rides with it: a locked export collects no pantheon and no
+  // deity-named arc, so a deity-only realm degrades to no chapter at all.
+  {
+    const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN, opts.faithUnlocked);
+    if (rlw.pageN !== pageN) { pageN = rlw.pageN; footer(doc, campaign.name, pageN); }
+  }
+
+  // Network effects appendix
+  if (settlements.length > 1) {
+    const r5 = buildNetworkAppendix(doc, campaign.name, settlements, pageN);
+    pageN = r5.pageN;
+    footer(doc, campaign.name, pageN);
+  }
+
+  // Filename
+  const slug = (campaign.name || 'campaign')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 40) || 'campaign';
+
+  doc.save(`campaign-${slug}.pdf`);
+
+  // Export succeeded (doc.save triggered the download). Fire-and-forget; never
+  // let an analytics fault surface as an export failure. canon_phase is omitted
+  // at campaign scope (a multi-settlement export has no single phase), and the
+  // campaign PDF has no narrative variant. captureFingerprint is per-settlement
+  // only, so it's not emitted here.
+  try {
+    track(EVENTS.PDF_EXPORT_COMPLETED, {
+      scope: 'campaign',
+      narrative_mode: false,
+      duration_band: durationBand(Date.now() - startedAt),
+    });
+    // Per-settlement 'exported' structural snapshots — the campaign export is a
+    // real lifecycle moment for each member settlement, same as a single-PDF
+    // export. captureFingerprint silently skips uuid-less (unsaved) members.
+    for (const save of settlements) {
+      if (save?.settlement && save?.id) {
+        captureFingerprint('exported', save.settlement, { settlementUuid: String(save.id), save });
+      }
+    }
+  } catch { /* analytics never breaks export */ }
+}

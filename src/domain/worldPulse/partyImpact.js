@@ -1,0 +1,471 @@
+/**
+ * domain/worldPulse/partyImpact.js — the party as a first-class actor.
+ *
+ * The world pulse advances autonomously, but in a TTRPG the *party* is the main
+ * causal force. This module lets the DM inject the consequences of party action
+ * ("broke the siege of Ashford", "brokered a truce", "assassinated the patron")
+ * as authoritative inputs that resolve or redirect stressors, shift inter-
+ * settlement relationships, clear or impose active conditions, and move NPC /
+ * faction state.
+ *
+ * Design notes:
+ *  - Party impacts are CANON by construction — the DM is declaring what
+ *    happened. So they auto-apply (no probabilistic roll) and relationship
+ *    label changes apply immediately rather than queuing as proposals.
+ *  - They reuse the existing apply pipeline (`applyWorldPulseOutcomes`) so
+ *    regional propagation, condition materialization, and Wizard News all come
+ *    for free. Stressor resolution and condition clearing are *removals*, which
+ *    the outcome pipeline can't express, so those are applied directly here and
+ *    their lingering consequences (residual aftereffects, recovery conditions)
+ *    flow back through as normal outcomes.
+ *  - Every effect is tagged `party`-sourced and carries the DM's note as a
+ *    reason, so the audit trail (Wizard News) distinguishes "the world did this"
+ *    from "the table did this".
+ *  - Pure + deterministic: no rolls, no `new Date()` — the caller threads `now`.
+ */
+
+import { deepClone } from '../clone.js';
+import { ensureWorldState, stablePart } from './worldState.js';
+import { buildWorldSnapshot } from './worldSnapshot.js';
+import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } from './stressors.js';
+import { ensureRelationshipState, relationshipKeyFromEdge, getRelationshipSettlements } from './relationshipEvolution.js';
+import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
+import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { PARTY_IMPACT_KINDS } from './partyImpactKinds.js';
+
+// Re-exported so the worldPulse barrel and simulation-side importers keep the
+// historical import path. Eager first-paint code (domain/events/
+// partyEventLinkage.js) must import partyImpactKinds.js directly — importing
+// THIS module drags the whole apply pipeline into the entry chunk.
+export { PARTY_IMPACT_KINDS };
+
+const clamp01 = (/** @type {*} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
+
+// Relationship de-/escalation ladder, worst → best.
+const RELATIONSHIP_LADDER = ['hostile', 'cold_war', 'rival', 'neutral', 'trade_partner', 'allied'];
+
+/**
+ * @param {string} fromType
+ * @param {number} steps
+ * @returns {string}
+ */
+function ladderShift(fromType, steps) {
+  const idx = RELATIONSHIP_LADDER.indexOf(fromType);
+  const start = idx === -1 ? RELATIONSHIP_LADDER.indexOf('neutral') : idx;
+  const next = Math.max(0, Math.min(RELATIONSHIP_LADDER.length - 1, start + steps));
+  return RELATIONSHIP_LADDER[next];
+}
+
+/**
+ * @param {any} action
+ * @param {string[]} [extra]
+ * @returns {string[]}
+ */
+function partyReasons(action, extra = []) {
+  return [
+    action.label ? `Party action: ${action.label}` : 'A party action reshaped the campaign.',
+    ...(action.note ? [action.note] : []),
+    ...extra,
+  ];
+}
+
+/**
+ * @param {any} action
+ * @param {string} kind
+ * @param {Record<string, any>} fields
+ * @returns {Record<string, any>}
+ */
+function baseOutcome(action, kind, fields) {
+  return {
+    id: `party.${stablePart(kind)}.${stablePart(action.id || action.label || kind)}.${fields.targetSaveId || fields.relationshipKey || 'realm'}`,
+    applyMode: 'auto',
+    partySourced: true,
+    candidateType: `party_${kind}`,
+    ruleId: `party_${kind}`,
+    ruleFamily: 'party',
+    severity: clamp01(fields.severity ?? 0.5),
+    headline: action.label || fields.headline || 'Party action',
+    summary: action.note || fields.summary || '',
+    reasons: partyReasons(action, fields.reasons || []),
+    ...fields,
+  };
+}
+
+/** Find an NPC/faction world-state key for a settlement + raw id or name.
+ * @param {Record<string, any>} states
+ * @param {*} settlementId
+ * @param {*} rawId
+ * @returns {string}
+ */
+function resolveStateKey(states = {}, settlementId, rawId) {
+  const want = stablePart(rawId);
+  const sid = String(settlementId);
+  for (const [key, state] of Object.entries(states)) {
+    if (String(state.settlementId) !== sid) continue;
+    if (key === rawId) return key;
+    if (key === `${sid}:${want}`) return key;
+    if (stablePart(state.name) === want || stablePart(state.npcId || state.factionId) === want) return key;
+  }
+  return `${sid}:${want}`; // best-effort synthetic key
+}
+
+/**
+ * [domain-events-region-1] G1d — find the live regional-graph edge for an
+ * unordered settlement pair (a, target), where `target` may be a save id OR a
+ * settlement name (settlement events name a neighbour either way). Returns the
+ * raw edge (so the caller derives its key via relationshipKeyFromEdge) or null.
+ * Orientation-agnostic: the edge's canonical from/to may be in either order.
+ * @param {{ regionalGraph?: { edges?: unknown[] }, settlements?: Array<{ id?: unknown, save?: { name?: unknown }, settlement?: { name?: unknown } }> }} snapshot
+ * @param {unknown} aId
+ * @param {unknown} targetRaw
+ * @returns {unknown}
+ */
+function findRelationshipEdgeForPair(snapshot, aId, targetRaw) {
+  const edges = snapshot?.regionalGraph?.edges;
+  if (!Array.isArray(edges) || !edges.length) return null;
+  const a = String(aId);
+  const target = String(targetRaw);
+  // The target id-or-name → the set of save ids it could denote.
+  const candidateIds = new Set([target]);
+  for (const item of snapshot?.settlements || []) {
+    const name = item?.save?.name ?? item?.settlement?.name;
+    if (name != null && String(name) === target) candidateIds.add(String(item.id));
+  }
+  for (const edge of edges) {
+    const { from, to } = getRelationshipSettlements(edge);
+    const f = String(from);
+    const t = String(to);
+    if ((f === a && candidateIds.has(t)) || (t === a && candidateIds.has(f))) return edge;
+  }
+  return null;
+}
+
+/**
+ * Build the world-pulse outcomes for a single party action, plus any direct
+ * worldState/settlement mutations that the outcome pipeline can't express
+ * (stressor resolution, condition removal).
+ *
+ * @param {any} action
+ * @param {{ worldState?: any, snapshot?: any, tick?: number, now?: (string|null) }} [options]
+ * @returns {{ outcomes: any[], worldState: any, settlementOverrides: Map<string, any>, ok: boolean }}
+ */
+export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 0, now = null } = {}) {
+  const state = ensureWorldState(worldState);
+  const kind = action?.kind;
+  const spec = PARTY_IMPACT_KINDS[/** @type {keyof typeof PARTY_IMPACT_KINDS} */ (kind)];
+  if (!spec) return { outcomes: [], worldState: state, settlementOverrides: new Map(), ok: false };
+
+  const magnitude = clamp01(action.magnitude ?? spec.defaultMagnitude);
+  const outcomes = [];
+  const settlementOverrides = new Map();
+  let nextState = state;
+
+  switch (kind) {
+    case 'resolve_stressor': {
+      const { stressors, residualOutcomes, found } = resolveStressorById(state.stressors, action.stressorId, { tick, now: /** @type {string|undefined} */ (now), reason: action.label });
+      if (!found) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      nextState = { ...state, stressors };
+      // The crisis ended; its scars linger as residual conditions (auto).
+      for (const residual of residualOutcomes) {
+        outcomes.push({ ...residual, partySourced: true, candidateType: 'party_stressor_residual', reasons: partyReasons(action, residual.reasons || []) });
+      }
+      break;
+    }
+
+    case 'name_attacker': {
+      // Attacker identity is nullable by design (a siege may have no
+      // settlement-shaped attacker); this is the DM's hook for filling it in.
+      const { stressors, changed } = /** @type {{ stressors: any[], changed: any }} */ (setStressorAttacker(state.stressors, action.stressorId, {
+        attackerSettlementId: action.attackerSettlementId ?? null,
+        attackerLabel: action.attackerLabel ?? null,
+      }, { now: /** @type {string|undefined} */ (now) }));
+      if (!changed) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      nextState = { ...state, stressors };
+      const attackerName = action.attackerLabel
+        || (action.attackerSettlementId ? String(action.attackerSettlementId) : null);
+      // The naming is table-facing knowledge — record it in the chronicle.
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'narrative',
+        targetSaveId: changed.originSettlementId || changed.affectedSettlementIds?.[0] || null,
+        severity: 0.3,
+        headline: action.label || `The force behind ${changed.label.toLowerCase()} is named`,
+        summary: attackerName
+          ? `${changed.label} is now attributed to ${attackerName}.`
+          : `${changed.label}'s attacker attribution was cleared.`,
+        metadata: {
+          stressorId: changed.id,
+          attackerSettlementId: changed.originContext?.attackerSettlementId || null,
+          attackerLabel: changed.originContext?.attackerLabel || null,
+        },
+        reasons: [`Attribution set on ${changed.label.toLowerCase()}.`],
+      }));
+      break;
+    }
+
+    case 'ease_stressor':
+    case 'worsen_stressor': {
+      const delta = (kind === 'ease_stressor' ? -1 : 1) * (0.18 + magnitude * 0.42);
+      const { stressors, changed } = adjustStressorSeverityById(state.stressors, action.stressorId, delta, { now: /** @type {string|undefined} */ (now) });
+      if (!changed) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      nextState = { ...state, stressors };
+      break;
+    }
+
+    case 'broker_relationship':
+    case 'inflame_relationship': {
+      // [domain-events-region-1] G1d — resolve the relationship key. A direct
+      // caller (the DM UI relationship picker) supplies `relationshipKey`
+      // already keyed off the pulse edge; a PARTY-CAUSED settlement event
+      // (partyEventLinkage) instead carries the pair (settlementId +
+      // relationshipTargetId), so resolve the live edge from the snapshot and
+      // derive its key via relationshipKeyFromEdge — the SAME derivation the
+      // pulse uses — so the nudge lands on the state the war layer reads. The
+      // synthetic `rel.a.b` fallback matches relationshipKeyFromEdge's own
+      // fallback for a pair with no built edge yet.
+      let key = action.relationshipKey;
+      if (!key && action.settlementId != null && action.relationshipTargetId != null) {
+        const edge = findRelationshipEdgeForPair(snapshot, action.settlementId, action.relationshipTargetId);
+        key = edge ? relationshipKeyFromEdge(edge) : `rel.${action.settlementId}.${action.relationshipTargetId}`;
+      }
+      if (!key) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      const current = ensureRelationshipState({}, /** @type {any} */ (state.relationshipStates?.[key]));
+      const fromType = current.relationshipType;
+      const broker = kind === 'broker_relationship';
+      const steps = (broker ? 1 : -1) * Math.max(1, Math.round(magnitude * 2));
+      const toType = ladderShift(fromType, steps);
+      const m = magnitude;
+      const patch = broker
+        ? {
+            trust: clamp01(current.trust + 0.12 * m),
+            resentment: clamp01(current.resentment - 0.16 * m),
+            fear: clamp01(current.fear - 0.16 * m),
+            pactStrength: clamp01(current.pactStrength + 0.06 * m),
+          }
+        : {
+            trust: clamp01(current.trust - 0.16 * m),
+            resentment: clamp01(current.resentment + 0.18 * m),
+            fear: clamp01(current.fear + 0.14 * m),
+          };
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'relationship',
+        relationshipKey: key,
+        severity: 0.4 + m * 0.4,
+        relationshipPatch: { ...patch, trajectory: broker ? 'thawing' : 'deteriorating' },
+        proposalPayload: toType !== fromType
+          ? { kind: 'relationship_label_change', relationshipKey: key, fromType, toType, reason: action.label || `Party ${broker ? 'brokered' : 'inflamed'} relations.` }
+          : null,
+        metadata: { incidentType: `party_${kind}`, fromType, toType },
+        reasons: [`Relationship shifts ${fromType.replace(/_/g, ' ')} → ${toType.replace(/_/g, ' ')}.`],
+      }));
+      break;
+    }
+
+    case 'clear_condition': {
+      const target = snapshot?.byId?.get?.(String(action.settlementId));
+      const settlement = target?.settlement;
+      if (!settlement) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      // Derive to canonical (stable ids) first so removal works even when the
+      // stored conditions were raw / id-less.
+      const all = deriveAllActiveConditions(settlement);
+      const existing = all.find((/** @type {any} */ c) => c.id === action.condition || c.archetype === action.condition);
+      const cleared = existing
+        ? { ...settlement, activeConditions: all.filter((/** @type {any} */ c) => c.id !== existing.id) }
+        : { ...settlement, activeConditions: all };
+      // Clearing an EVENT-promoted condition must also drop it from the
+      // authored config.eventConditions record (dual-written to _config) —
+      // otherwise the next regeneration re-promotes the crisis the party just
+      // resolved. Identity-preserving for non-event clears.
+      settlementOverrides.set(String(action.settlementId), withEventConditionsSynced(cleared));
+      // Optional recovery condition (e.g. a lifted siege leaves a recovering town).
+      if (action.recoveryArchetype) {
+        outcomes.push(baseOutcome(action, kind, {
+          type: 'condition',
+          targetSaveId: action.settlementId,
+          severity: 0.3,
+          condition: deriveActiveCondition({
+            archetype: action.recoveryArchetype,
+            severity: 0.3,
+            status: 'easing',
+            triggeredAt: { tick, sourceEventType: 'PARTY_ACTION', sourceEventTargetId: action.settlementId },
+          }),
+          reasons: [`A resolved crisis leaves the settlement recovering (${String(action.recoveryArchetype).replace(/_/g, ' ')}).`],
+        }));
+      }
+      break;
+    }
+
+    case 'impose_condition': {
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'condition',
+        targetSaveId: action.settlementId,
+        severity: magnitude,
+        condition: deriveActiveCondition({
+          archetype: action.archetype,
+          severity: magnitude,
+          status: magnitude >= 0.7 ? 'worsening' : 'stable',
+          triggeredAt: { tick, sourceEventType: 'PARTY_ACTION', sourceEventTargetId: action.settlementId },
+        }),
+      }));
+      break;
+    }
+
+    case 'bolster_faction':
+    case 'undermine_faction': {
+      const key = resolveStateKey(state.factionStates, action.settlementId, action.factionId);
+      const cur = /** @type {any} */ (state.factionStates?.[key]) || {};
+      const up = kind === 'bolster_faction';
+      const m = magnitude;
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'faction',
+        targetSaveId: action.settlementId,
+        factionId: key,
+        severity: 0.4 + m * 0.3,
+        factionPatch: {
+          legitimacyClaim: clamp01((cur.legitimacyClaim || 0.2) + (up ? 1 : -1) * 0.18 * m),
+          momentum: clamp01((cur.momentum || 0) + (up ? 1 : -1) * 0.16 * m),
+          exhaustion: clamp01((cur.exhaustion || 0) + (up ? -0.1 : 0.12) * m),
+          lastActedTick: tick,
+          recentAction: kind,
+        },
+      }));
+      break;
+    }
+
+    case 'empower_npc': {
+      const key = resolveStateKey(state.npcStates, action.settlementId, action.npcId);
+      const cur = /** @type {any} */ (state.npcStates?.[key]) || {};
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'npc',
+        targetSaveId: action.settlementId,
+        npcId: key,
+        severity: 0.4 + magnitude * 0.3,
+        npcPatch: {
+          loyalty: clamp01((cur.loyalty ?? 0.5) + 0.12 * magnitude),
+          momentum: clamp01((cur.momentum || 0) + 0.16 * magnitude),
+          leverage: clamp01((cur.leverage || 0) + 0.1 * magnitude),
+          lastActedTick: tick,
+          lastAction: 'party_empowered',
+        },
+      }));
+      break;
+    }
+
+    case 'remove_npc': {
+      const key = resolveStateKey(state.npcStates, action.settlementId, action.npcId);
+      const cur = state.npcStates?.[key];
+      // Make removal REAL at the roster (CANON-by-construction): drop the named
+      // NPC from the settlement's roster so the dossier stops listing a corpse,
+      // faction seating re-derives without them next advance, and pruneNpcStates
+      // clears their npcState (it keys on roster presence). Previously only an
+      // unread `removed:true` state flag was written, so a party-declared-dead NPC
+      // kept its slot, seat, and NPC-agency eligibility. [worldpulse-core-2]
+      const target = snapshot?.byId?.get?.(String(action.settlementId));
+      const settlement = target?.settlement;
+      // content-immersion-r2-5: resolve the removed NPC's display NAME for the
+      // visible reason pill — a raw `npc_7` id in the fiction register reads as
+      // debug output. Falls back to the id when the NPC can't be matched.
+      let removedName = String(action.npcId);
+      if (settlement && Array.isArray(settlement.npcs)) {
+        const want = stablePart(action.npcId);
+        const idx = settlement.npcs.findIndex((/** @type {{ id?: unknown, name?: unknown }} */ n) =>
+          stablePart(n?.id) === want || stablePart(n?.name) === want
+          || String(n?.id) === String(action.npcId) || String(n?.name) === String(action.npcId));
+        if (idx >= 0) {
+          const nm = settlement.npcs[idx]?.name;
+          if (nm) removedName = String(nm);
+          settlementOverrides.set(String(action.settlementId), {
+            ...settlement,
+            npcs: settlement.npcs.filter((/** @type {unknown} */ _n, /** @type {number} */ i) => i !== idx),
+          });
+        }
+      }
+      // The headline effect is a leadership void on the settlement.
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'condition',
+        targetSaveId: action.settlementId,
+        severity: 0.45 + magnitude * 0.2,
+        condition: deriveActiveCondition({
+          archetype: 'dominant_npc_removed',
+          severity: 0.45 + magnitude * 0.2,
+          status: 'stable',
+          triggeredAt: { tick, sourceEventType: 'PARTY_ACTION', sourceEventTargetId: action.npcId },
+        }),
+        reasons: [`${removedName} is removed from play; succession is unresolved.`],
+      }));
+      if (cur) {
+        outcomes.push(baseOutcome(action, 'remove_npc_state', {
+          type: 'npc',
+          targetSaveId: action.settlementId,
+          npcId: key,
+          severity: 0.4,
+          npcPatch: { loyalty: 0, momentum: 0, leverage: 0, removed: true, lastActedTick: tick, lastAction: 'party_removed' },
+        }));
+      }
+      break;
+    }
+
+    default:
+      return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+  }
+
+  return { outcomes, worldState: nextState, settlementOverrides, ok: true };
+}
+
+/**
+ * Apply a party action to a campaign. Returns the same result shape as
+ * `advanceCampaignWorld` (worldState, regionalGraph, wizardNews,
+ * settlementUpdates, autoApplied, …) so the store can persist it identically.
+ * Returns null when the action is invalid or affects nothing.
+ *
+ * @param {Object} [args]
+ * @param {any} [args.campaign]
+ * @param {any[]} [args.saves]
+ * @param {any} [args.action]   { kind, settlementId?, relationshipKey?, stressorId?, npcId?, factionId?, magnitude?, label?, note? }
+ * @param {(string|null)} [args.now]
+ */
+export function applyPartyImpact({ campaign, saves = [], action, now = null } = {}) {
+  if (!action || !PARTY_IMPACT_KINDS[/** @type {keyof typeof PARTY_IMPACT_KINDS} */ (action.kind)]) return null;
+  const worldState = ensureWorldState(campaign?.worldState, campaign);
+  const tick = worldState.tick;
+  const snapshot = buildWorldSnapshot({ campaign, saves, worldState });
+
+  const built = buildPartyImpactOutcomes(action, { worldState, snapshot, tick, now });
+  if (!built.ok) return null;
+
+  // Settlement map for the apply pipeline; apply any direct condition removals.
+  const settlementMap = new Map();
+  for (const item of snapshot.settlements) {
+    const override = built.settlementOverrides.get(String(item.id));
+    settlementMap.set(String(item.id), {
+      saveId: String(item.id),
+      save: item.save,
+      settlement: override || item.settlement,
+    });
+  }
+
+  const result = applyWorldPulseOutcomes({
+    snapshot,
+    worldState: built.worldState,
+    regionalGraph: snapshot.regionalGraph,
+    wizardNews: campaign?.wizardNews,
+    settlementMap,
+    outcomes: built.outcomes,
+    tick,
+    now: /** @type {string|undefined} */ (now),
+    // Party impacts are a discrete injection, not a time advance.
+    advanceNewsTick: false,
+    advanceRegionalImpacts: false,
+    simulationRules: built.worldState?.simulationRules,
+  });
+
+  return {
+    ...result,
+    campaignId: campaign?.id,
+    tick,
+    partyAction: action,
+    settlementUpdates: (result.settlementUpdates || []).map(update => ({
+      ...update,
+      settlement: update.settlement == null ? update.settlement : deepClone(update.settlement),
+    })),
+  };
+}

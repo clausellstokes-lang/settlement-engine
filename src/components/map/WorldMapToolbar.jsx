@@ -1,0 +1,759 @@
+/**
+ * WorldMapToolbar.jsx — top toolbar row for the world map.
+ *
+ * Structure (UI/UX overhaul): the bar is grouped into spacing-separated
+ * clusters rather than one undifferentiated wall of equal pills:
+ *   [Mode]  ·  [Campaign + Save state]  · · ·  [Campaign clock: interval +
+ *   Advance Realm + Undo]  ·  [View utilities + More overflow + Inspector]
+ *
+ * Advance Realm is the SINGLE gold primary (the action that makes the
+ * simulation the hero); Save is demoted to a neutral secondary because the
+ * AutoSaveChip already reassures persistence. Rare/expert actions (Rules,
+ * presets, custom image, island template, Regenerate, Clear map) live behind a
+ * "More" overflow so the everyday actions win the squint test. The toolbar
+ * Pulse / News / Pantheon openers were removed: they duplicated the Realm
+ * Inspector tabs, so navigation now flows through the single Inspector toggle.
+ *
+ * Render-optimization (2026-06): store-derived values (mapMode/setMapMode,
+ * mapLoading, mapError, imageMode) are read directly via useStore selectors;
+ * the component is wrapped in React.memo.
+ */
+
+import { memo, Suspense, lazy, useState, useRef, useEffect } from 'react';
+import {
+  FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
+  SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
+  Eye, Settings, History,
+} from 'lucide-react';
+import { useStore } from '../../store/index.js';
+import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_DEEP, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, PARCH_100, sans, FS, SP } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import { ModeSwitch } from './ModeSwitch.jsx';
+import { IconButton } from './IconButton.jsx';
+
+const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
+// Vision V-H (R-21): the visible session undo history — lazy overlay reading the
+// session pulseUndoStack AND (R-1) the proposalUndoStack ring, restoring through
+// the existing undoLastPulse / undoLastProposalApply walk-back, one verb per row.
+const UndoHistoryPanel = lazy(() => import('../UndoHistoryPanel.jsx'));
+
+/** Advance-scaling Stage 5 — the human interval label the Undo affordance folds in
+ *  when the last advance was a MULTI-TICK interval (month/season/year). one_week is
+ *  deliberately absent: a single-tick advance reverts as before, so its copy stays
+ *  unchanged. Calm voice: parenthetical, lowercase, no flourish. */
+const MULTI_TICK_INTERVAL_LABELS = Object.freeze({
+  one_month: '1 month',
+  one_season: '1 season',
+  one_year: '1 year',
+});
+
+/** The base Undo title (the session-only caveat is preserved verbatim). When a
+ *  multi-tick interval is named, the lead sentence gains the interval so the GM
+ *  reads what one undo reverts; otherwise the copy is byte-identical to before. */
+function undoTitleFor(interval) {
+  const label = MULTI_TICK_INTERVAL_LABELS[interval];
+  const lead = label
+    ? `Undo the last realm advance (${label}).`
+    : 'Undo the last realm advance.';
+  return `${lead} Restores the pre-pulse world and every settlement. This undo is available for the current session only. The advance cannot be undone after the page reloads.`;
+}
+
+/** A spacing-only group separator. Replaces the 1px hairline dividers — grouping
+ *  is now carried by whitespace (P5), and `flex:1` spacers push the clock and
+ *  utility clusters to a stable right edge. */
+function Spacer({ grow = false }) {
+  return <div style={{ flex: grow ? 1 : '0 0 auto', width: grow ? undefined : SP.md }} />;
+}
+
+/** Inline eyebrow that front-loads a control's meaning (e.g. "Advance by" on the
+ *  interval select). Keyword-first, uppercase, muted (P6). */
+function ClockLabel({ children }) {
+  return (
+    <span style={{
+      fontSize: FS.xs, fontWeight: 700, color: SECOND,
+      textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap',
+    }}>
+      {children}
+    </span>
+  );
+}
+
+/** Section heading inside the "More" overflow — chunks the heterogeneous items
+ *  into scannable groups (P6) and provides the spacing that separates the
+ *  destructive block from benign config (P8). */
+function MenuHeader({ children }) {
+  return (
+    <span style={{
+      marginTop: SP.xs, paddingTop: SP.xs,
+      fontSize: FS.xxs, fontWeight: 800, color: BODY,
+      textTransform: 'uppercase', letterSpacing: '0.07em',
+      fontFamily: sans,
+    }}>
+      {children}
+    </span>
+  );
+}
+
+/** "More" overflow — a lightweight popover holding the rare/expert actions so
+ *  the main bar stays scannable. Self-contained: a toggle button + an
+ *  absolutely-positioned panel + an outside-click dismiss. */
+function MoreMenu({ children }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    function onDoc(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
+    }
+    function onKey(e) { if (e.key === 'Escape') setOpen(false); }
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  return (
+    <span ref={wrapRef} style={{ position: 'relative', display: 'inline-flex' }}>
+      <IconButton
+        onClick={() => setOpen(v => !v)}
+        active={open}
+        aria-expanded={open}
+        aria-haspopup="menu"
+      >
+        <Settings size={13} /> More
+      </IconButton>
+      {open && (
+        // a11y: presentational popover whose onClick only DISMISSES the menu
+        // after a contained Button (a real focusable control) is activated; it
+        // adds no interactive behavior of its own, so no role/key handler.
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
+        <div
+          style={{
+            // Transient popover: must stack above the persistent map panels
+            // (QuickInspector 30, RealmInspector 40) or the open menu hides
+            // behind them.
+            position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 50,
+            display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.xs,
+            minWidth: 200, padding: SP.sm,
+            background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`,
+          }}
+          // Dismiss ONLY when a real action button inside the menu is activated.
+          // The previous unconditional close fired on ANY click in the popover —
+          // including opening the map-type <select> — snapping the menu (and the
+          // dropdown with it) shut before the user could choose. Gating on a
+          // button target lets non-dismissing controls (the <select>) work, while
+          // an action button still closes the menu after it runs.
+          onClick={(e) => { if (e.target instanceof Element && e.target.closest('button')) setOpen(false); }}
+        >
+          {children}
+        </div>
+      )}
+    </span>
+  );
+}
+
+/** Advance-scaling Stage 4: a determinate progress bar + "Advancing N of Y" label.
+ *  Determinate (not a spinner) so the GM can read how much of the interval is left.
+ *  role=progressbar with aria-valuenow/min/max + a spoken aria-label so the progress
+ *  is conveyed to assistive tech, not just the gold fill (no color-only signal). */
+function AdvanceProgress({ done, total }) {
+  const safeTotal = Math.max(1, total || 0);
+  const safeDone = Math.max(0, Math.min(safeTotal, done || 0));
+  const pct = Math.round((safeDone / safeTotal) * 100);
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minWidth: 120 }}>
+      <span style={{ fontSize: FS.xs, fontWeight: 800, color: INK, whiteSpace: 'nowrap' }}>
+        Advancing {safeDone} of {safeTotal}
+      </span>
+      <span
+        role="progressbar"
+        aria-valuenow={safeDone}
+        aria-valuemin={0}
+        aria-valuemax={safeTotal}
+        aria-label={`Advancing the realm, ${safeDone} of ${safeTotal} steps`}
+        style={{
+          position: 'relative', flex: 1, minWidth: 64, height: 6,
+          background: CARD_ALT, border: `1px solid ${BORDER}`,
+          overflow: 'hidden',
+        }}
+      >
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0, width: `${pct}%`,
+            background: GOLD, transition: 'width 160ms ease',
+          }}
+        />
+      </span>
+    </span>
+  );
+}
+
+/** Advance-scaling Stage 4: the persistent "Advance paused" resume chip. Amber so it
+ *  reads as a waiting-by-design state distinct from the gold Advance CTA and the
+ *  loading skeleton. The remaining-tick count names how much is left; the chip is a
+ *  real button (keyboard + SR operable), aria-label carries the full sentence. */
+function ResumeChip({ pausedAdvance, onResume, disabled }) {
+  const total = pausedAdvance?.ticksTotal || 0;
+  const done = pausedAdvance?.ticksDone || 0;
+  const remaining = Math.max(0, total - done);
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={onResume}
+      disabled={disabled}
+      aria-label={`Advance paused. Resume with recommendations, ${remaining} of ${total} steps remaining. Set per-major verdicts in the World Pulse panel.`}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: SP.xs,
+        minHeight: 40, padding: '5px 11px',
+        border: `1px solid ${AMBER}`,
+        background: CARD, color: AMBER_DEEP,
+        fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {/* Icons reuse the already-bundled Zap glyph: the multi-tick paused-advance
+          chip is DORMANT in this tree (advanceMultiTick is off + the multi-tick
+          store integration is not landed), so this Button never renders. Reusing
+          Zap avoids welding two extra lucide glyphs into the shared, first-paint
+          vendor-icons chunk for a surface that cannot appear. Re-point to
+          PauseCircle/PlayCircle when the multi-tick advance session lands. */}
+      <Zap size={14} /> Advance paused
+      <Zap size={13} /> Resume with recommendations{remaining > 0 ? ` (${remaining} of ${total})` : ''}
+    </Button>
+  );
+}
+
+/** The map-title tranche's in-theme control reference (sibling to GUIDE-2b's
+ *  LivingWorldHelp). Each toolbar control's teaching used to live only in a
+ *  native title= OS tooltip — hover-only, foreign chrome, and unreachable on a
+ *  touch device. Those teachings migrate here: a role=note panel rendered from
+ *  the study's own tokens, opened on demand from the "?" affordance, so the copy
+ *  is comprehension-first and mobile-reachable. Grouped to mirror the toolbar's
+ *  own clusters, and the actions tucked behind the "More" overflow are surfaced
+ *  too, so the panel doubles as a discovery aid. The single-tick Undo keeps its
+ *  own native title (it folds in the last advance's interval, which a static
+ *  panel cannot); its session-only caveat is repeated here for touch readers. */
+const MAP_CONTROL_HELP = Object.freeze([
+  ['The realm', [
+    ['Advance Realm', 'Advances the living world by the interval you choose above (a week through a year). Each advance runs a pulse whose changes wait for your review.'],
+    ['Undo Advance', 'Rolls the world back to just before the last advance. Available for the current session only; a page reload makes the advance permanent.'],
+  ]],
+  ['View', [
+    ['Layers', 'Shows or hides the map’s overlay layers.'],
+    ['Fit', 'Frames the whole realm in view.'],
+    ['Help', 'Walks you through the world map with a guided tour.'],
+  ]],
+  ['Campaign', [
+    ['Save', 'Saves the current map to the active campaign. Auto-save keeps it current between manual saves.'],
+  ]],
+  ['More menu', [
+    ['Rules', 'Opens the simulation rules: the dials and engine waves that shape how the realm evolves.'],
+    ['Quiet · Realistic · Dramatic', 'One-click presets that set how eventful the simulation runs.'],
+    ['Import / Clear Image', 'Import Image drapes a picture of your own over the map; Clear Image returns to the generated terrain.'],
+    ['Share to gallery', 'Opens the share editor to publish this map to the public gallery.'],
+    ['Regenerate', 'Rolls a fresh world from new terrain.'],
+    ['Clear Map', 'Removes the saved map from this campaign.'],
+  ]],
+]);
+
+function MapControlsHelp() {
+  return (
+    <div
+      role="note"
+      data-testid="map-controls-help"
+      style={{
+        flexBasis: '100%', display: 'grid', gap: SP.sm,
+        marginTop: SP.xs, padding: `${SP.sm}px ${SP.md}px`,
+        border: `1px solid ${BORDER}`, background: CARD_ALT,
+      }}
+    >
+      {MAP_CONTROL_HELP.map(([group, items]) => (
+        <div key={group} style={{ display: 'grid', gap: 3 }}>
+          <span style={{
+            fontSize: FS.xxs, fontWeight: 800, color: SECOND,
+            textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+          }}>
+            {group}
+          </span>
+          {items.map(([name, desc]) => (
+            <div key={name} style={{ display: 'grid', gap: 1 }}>
+              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{name}</span>
+              <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>{desc}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function WorldMapToolbarImpl({
+  canManageCampaigns,
+  activeCampaign,
+  activeCampaignId,
+  handleSelectCampaign,
+  activeCampaigns,
+  handleSaveMapToCampaign,
+  handleClearMapFromCampaign,
+  savingMap,
+  setShowSimulationRules,
+  showSimulationRules,
+  worldPulseInterval,
+  setWorldPulseInterval,
+  handleAdvanceRealm,
+  worldPulseBusy,
+  // Advance-scaling Stage 4 (multi-tick). All default to an inert shape so the
+  // flag-OFF render is byte-identical: multiTickOn false ⇒ neither the progress bar
+  // nor the resume chip ever renders.
+  multiTickOn = false,
+  advanceSession = { phase: 'idle', ticksDone: 0, ticksTotal: 0 },
+  pausedAdvance = null,
+  onResumeAdvance,
+  canUndoPulse,
+  handleUndoRealm,
+  // Advance-scaling Stage 5: the DM-chosen interval of the most recent undoable
+  // advance. Null on the flag-OFF path AND on a single-tick (one_week) advance, so
+  // the undo copy stays byte-unchanged in both cases; only a multi-tick interval
+  // names what one undo reverts.
+  lastAdvanceInterval = null,
+  setShowLayersPanel,
+  showLayersPanel,
+  setTourOpen,
+  handleClearImage,
+  handleImportImage,
+  handleShareMap,
+  sharingMap,
+  // MAP EXPORTS — the realm-map PNG download. Present only for the signed-in
+  // owner (WorldMap withholds it for anon), so the affordance itself is the gate.
+  handleExportMap,
+  exportingMap = false,
+  mapTemplates,
+  currentTemplate,
+  handleTemplateChange,
+  handleFit,
+  handleRegenerate,
+  inspectorOpen,
+  onToggleInspector,
+  unreviewedCount = 0,
+  activePresetId,
+  handleApplyPreset,
+}) {
+  // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const mapMode    = useStore(s => s.mapMode);
+  const setMapMode = useStore(s => s.setMapMode);
+  const mapLoading = useStore(s => s.mapLoading);
+  const mapError   = useStore(s => s.mapError);
+  const imageMode  = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+  // R-1: does the session proposal-undo ring hold an entry for this campaign?
+  // Gates the History chip alongside canUndoPulse (advance-only), so an applied
+  // proposal is undoable from here even before the first advance of the session.
+  const hasProposalUndo = useStore(s => (
+    activeCampaignId != null
+    && (s.proposalUndoStack || []).some(e => e && String(e.campaignId) === String(activeCampaignId))
+  ));
+
+  // The in-theme control reference (the "?" affordance). Replaces the native
+  // title= OS tooltips that used to carry each control's teaching.
+  const [mapHelpOpen, setMapHelpOpen] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+
+  const campaignActive = canManageCampaigns && activeCampaignId;
+
+  return (
+      // No border / card fill of its own: WorldMap wraps this row + the active
+      // contextual row in ONE shared bordered card so the chrome reads as a
+      // single toolbar surface, not stacked boxes (P5 — flatten to one
+      // elevation). This row only owns its internal flex + padding.
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
+        padding: `${SP.sm}px ${SP.md}px`,
+      }}>
+        {/* ── Group 1 · Mode ───────────────────────────────────────────── */}
+        <span data-tour="mode" style={{ display: 'inline-flex' }}>
+          <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode} />
+        </span>
+
+        {/* ── Group 2 · Campaign + save state ──────────────────────────── */}
+        {canManageCampaigns && (
+          <>
+            <Spacer />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
+              <FolderOpen size={14} color={activeCampaign ? GOLD : SECOND} />
+              {/* First-click discipline (P8): with no campaign chosen, the map has
+                  no primary task yet — placing settlements and Advance Realm are
+                  both gated on it. So the EMPTY picker is promoted to the bar's
+                  primary cue (gold ring + soft-gold fill + a one-line scent),
+                  and Advance Realm doesn't render until a campaign is active, so
+                  the two states never show two golds at once. */}
+              <select
+                data-tour="campaign"
+                aria-label="Active campaign"
+                value={activeCampaignId || ''}
+                onChange={e => handleSelectCampaign(e.target.value || null)}
+                style={{
+                  minHeight: 40,
+                  padding: '5px 10px',
+                  border: `1px solid ${activeCampaignId ? BORDER : GOLD}`,
+                  background: activeCampaignId ? CARD : GOLD_SOFT,
+                  fontSize: FS.sm, fontFamily: sans,
+                  color: activeCampaignId ? INK : GOLD_TXT,
+                  fontWeight: activeCampaignId ? 400 : 700,
+                  cursor: 'pointer', minWidth: 180,
+                }}
+              >
+                {!activeCampaignId && <option value="">Choose a campaign to begin</option>}
+                {activeCampaignId && <option value="">No campaign</option>}
+                {activeCampaigns.map(c => (
+                  <option key={c.id} value={c.id}>
+                    {/* Self-describing "deployed map" cue (P2): a lone middot read
+                        as a typo; the word names the causal state instead. */}
+                    {c.name}{c.mapState ? ' (mapped)' : ''}
+                    {c.settlementIds?.length ? ` (${c.settlementIds.length})` : ''}
+                  </option>
+                ))}
+              </select>
+              {activeCampaignId && (
+                <>
+                  {/* Save demoted to neutral secondary — the AutoSaveChip carries
+                      reassurance, so Save no longer competes with Advance Realm. */}
+                  <IconButton data-tour="save" onClick={handleSaveMapToCampaign} disabled={savingMap}>
+                    <Save size={13} /> Save
+                  </IconButton>
+                  <Suspense fallback={null}>
+                    <AutoSaveChip saving={savingMap} />
+                  </Suspense>
+                </>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ── Group 3 · Campaign clock (right-anchored) ────────────────── */}
+        {campaignActive && (
+          <>
+            <Spacer grow />
+            <div data-tour="pulse" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, flexWrap: 'nowrap' }}>
+              {/* Front-loaded interval label (P6): the bare Week/Month/Season/Year
+                  was an orphan noun beside Advance Realm with the "advance-by"
+                  meaning buried in a title. The inline eyebrow names the unit so
+                  the cluster scans as one phrase. */}
+              <ClockLabel>Advance by</ClockLabel>
+              <select
+                value={worldPulseInterval}
+                onChange={e => setWorldPulseInterval(e.target.value)}
+                aria-label="Realm advancement interval"
+                style={{
+                  minHeight: 40,
+                  padding: '5px 9px',
+                  border: `1px solid ${BORDER}`,
+                  background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                  cursor: 'pointer',
+                }}
+              >
+                <option value="one_week">Week</option>
+                <option value="one_month">Month</option>
+                <option value="one_season">Season</option>
+                <option value="one_year">Year</option>
+              </select>
+              <IconButton
+                onClick={handleAdvanceRealm}
+                primary
+                disabled={worldPulseBusy}
+              >
+                {/* Larger icon than the 13px utility glyphs — the focal CTA earns a
+                    second emphasis channel (size) beyond its gold fill (P4). */}
+                <Zap size={16} /> {worldPulseBusy ? 'Advancing' : 'Advance Realm'}
+              </IconButton>
+              {canUndoPulse && (
+                <IconButton
+                  onClick={handleUndoRealm}
+                  title={undoTitleFor(lastAdvanceInterval)}
+                  disabled={worldPulseBusy}
+                >
+                  {/* The visible label folds in a multi-tick interval ("Undo
+                      Advance (1 year)") so the affordance names what one undo
+                      reverts; a single-tick / flag-off advance keeps "Undo Advance"
+                      byte-unchanged. */}
+                  <Undo2 size={13} /> Undo Advance{MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval] ? ` (${MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval]})` : ''}
+                </IconButton>
+              )}
+              {/* Vision V-H (R-21): the walk-back affordance beside the single Undo —
+                  opens the full session undo history (advances AND applied
+                  proposals, R-1) for a return-to-any-point. */}
+              {(canUndoPulse || hasProposalUndo) && (
+                <IconButton
+                  data-tour="history"
+                  onClick={() => setShowHistory(true)}
+                  aria-label="Open undo history"
+                  disabled={worldPulseBusy}
+                >
+                  <History size={13} /> History
+                </IconButton>
+              )}
+              {showHistory && (
+                <Suspense fallback={null}>
+                  <UndoHistoryPanel campaignId={activeCampaignId} onClose={() => setShowHistory(false)} />
+                </Suspense>
+              )}
+              {/* Advance-scaling Stage 4: a determinate progress bar while a
+                  multi-tick advance is running (reads N of Y from the session).
+                  Flag-gated AND running-gated, so the flag-OFF bar never renders. */}
+              {multiTickOn && advanceSession.phase === 'running' && advanceSession.ticksTotal > 1 && (
+                <AdvanceProgress done={advanceSession.ticksDone} total={advanceSession.ticksTotal} />
+              )}
+              {/* Persistent resume chip — present whenever a paused-advance cursor
+                  sits on the campaign (including a reload-into-paused state), so
+                  the partial advance is always recoverable. */}
+              {multiTickOn && pausedAdvance && advanceSession.phase !== 'running' && typeof onResumeAdvance === 'function' && (
+                <ResumeChip pausedAdvance={pausedAdvance} onResume={() => onResumeAdvance({})} disabled={worldPulseBusy} />
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ── Group 4 · View utilities + overflow + Inspector ──────────── */}
+        <>
+            <Spacer grow={!campaignActive} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, flexWrap: 'nowrap' }}>
+              <IconButton
+                data-tour="layers"
+                onClick={() => setShowLayersPanel(v => !v)}
+                active={showLayersPanel}
+              >
+                <Layers size={13} /> Layers
+              </IconButton>
+              <IconButton onClick={handleFit}>
+                <MapIcon size={13} /> Fit
+              </IconButton>
+              <IconButton
+                data-tour="help"
+                onClick={() => setTourOpen(true)}
+              >
+                <HelpCircle size={13} /> Help
+              </IconButton>
+              {/* The in-theme control reference. A text-glyph "?" (the study's
+                  help grammar, per HelpPopover) — distinct from the guided-tour
+                  "Help" beside it — toggles the role=note panel that now carries
+                  the teaching the native title= tooltips used to hold. No title=
+                  of its own (the accessible name is the aria-label), so it adds
+                  nothing to the native-tooltip census it exists to shrink. */}
+              <IconButton
+                data-tour="controls"
+                onClick={() => setMapHelpOpen(o => !o)}
+                active={mapHelpOpen}
+                aria-label="About the map controls"
+                aria-expanded={mapHelpOpen}
+              >
+                ?
+              </IconButton>
+
+              {/* Overflow — rare / expert actions. Keeps the main bar to the
+                  handful of everyday controls. */}
+              {/* The overflow mixes three unlike action classes; keyword headers
+                  chunk them and a gapped, danger-tinted block isolates the two
+                  world-altering items so a preset chip never reads as a peer of
+                  Clear Map (P6 scan / P8 destructive small + separated). */}
+              <MoreMenu>
+                {campaignActive && (
+                  <>
+                    <MenuHeader>Simulation</MenuHeader>
+                    <IconButton
+                      onClick={() => setShowSimulationRules(true)}
+                      active={showSimulationRules}
+                      aria-pressed={showSimulationRules}
+                    >
+                      <SlidersHorizontal size={13} /> Rules
+                    </IconButton>
+                    {/* Preset chips — one-click Quiet / Realistic / Dramatic. */}
+                    {typeof handleApplyPreset === 'function' && (
+                      [
+                        ['quiet_local', 'Quiet'],
+                        ['realistic_regional', 'Realistic'],
+                        ['dramatic_campaign', 'Dramatic'],
+                      ].map(([id, label]) => {
+                        const active = activePresetId === id;
+                        return (
+                          <IconButton
+                            key={id}
+                            onClick={() => handleApplyPreset(id)}
+                            aria-pressed={active}
+                            active={active}
+                          >
+                            {label}
+                          </IconButton>
+                        );
+                      })
+                    )}
+                  </>
+                )}
+
+                {campaignActive && (
+                  <>
+                    <MenuHeader>Map &amp; sharing</MenuHeader>
+                    {/* Custom map image (premium + active campaign). */}
+                    {imageMode ? (
+                      <IconButton onClick={handleClearImage}>
+                        <XIcon size={13} /> Clear Image
+                      </IconButton>
+                    ) : (
+                      <IconButton onClick={handleImportImage}>
+                        <ImageIcon size={13} /> Import Image
+                      </IconButton>
+                    )}
+                    {/* One share entry point. The old split (Share Map / Share +
+                        Settlements) is collapsed: the share editor now lets the
+                        owner pick bare-map vs map-and-campaign inside its own kind
+                        picker, so the toolbar just opens it. */}
+                    <IconButton onClick={() => handleShareMap()} disabled={sharingMap}>
+                      <Share2 size={13} /> {sharingMap ? 'Opening…' : 'Share to gallery…'}
+                    </IconButton>
+                    {/* Realm-map PNG export (terrain + settlement markers). Reuses
+                        the already-bundled Image glyph so no new lucide icon lands
+                        in the first-paint vendor chunk. Withheld for anon (the prop
+                        is undefined), so it is its own gate. */}
+                    {typeof handleExportMap === 'function' && (
+                      <IconButton onClick={handleExportMap} disabled={exportingMap}>
+                        <ImageIcon size={13} /> {exportingMap ? 'Exporting…' : 'Download map (PNG)'}
+                      </IconButton>
+                    )}
+                  </>
+                )}
+
+                {/* World generation + destructive actions — separated by a gap and
+                    rendered last so the two items that wipe work sit apart from
+                    the benign config above. */}
+                {((!imageMode) || (campaignActive && activeCampaign?.mapState)) && (
+                  <>
+                    <MenuHeader>World</MenuHeader>
+                    {/* Island shape picker — terrain generation, hidden in image mode */}
+                    {!imageMode && mapTemplates.length > 0 && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                        <Globe size={14} color={MUTED} />
+                        <select
+                          value={currentTemplate}
+                          onChange={e => handleTemplateChange(e.target.value)}
+                          aria-label="Island shape for next regeneration"
+                          style={{
+                            flex: 1,
+                            minHeight: 40,
+                            padding: '5px 10px',
+                            border: `1px solid ${BORDER}`,
+                            background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <option value="">Random island</option>
+                          {mapTemplates.map(t => (
+                            <option key={t.id} value={t.id}>{t.label}</option>
+                          ))}
+                        </select>
+                      </span>
+                    )}
+                    {/* Destructive — danger variant + spacing so they never read
+                        as peers of the config chips above (P8). */}
+                    {!imageMode && (
+                      <Button variant="danger" size="sm" onClick={handleRegenerate} icon={<RefreshCw size={13} />}>
+                        Regenerate
+                      </Button>
+                    )}
+                    {campaignActive && activeCampaign?.mapState && (
+                      <Button variant="danger" size="sm" onClick={handleClearMapFromCampaign} icon={<Trash2 size={13} />}>
+                        Clear Map
+                      </Button>
+                    )}
+                  </>
+                )}
+              </MoreMenu>
+
+            </div>
+
+            {/* Realm Inspector toggle — the single gateway to the living-world
+                payoff (Pulse / War / Pantheon / Chronicle live as its tabs).
+                Isolated from the view-utility trio by a deliberate wide gap so
+                it reads as its own tier-2 affordance (P4/P6), not a peer of
+                Layers / Fit / Help. */}
+            {typeof onToggleInspector === 'function' && (
+              <>
+                <div style={{ width: SP.sm }} />
+                <span style={{ position: 'relative', display: 'inline-flex' }}>
+                  <IconButton
+                    data-tour="inspector"
+                    onClick={onToggleInspector}
+                    // The unreviewed count rides the accessible NAME (aria-label),
+                    // not a native title= OS tooltip: the amber badge below is
+                    // aria-hidden, so this is the count's only spoken channel, and
+                    // it stays reachable on touch (a hover title was not). Part of
+                    // the map-title tranche — the native title migrated to
+                    // aria-label rather than dropping, preserving the announcement.
+                    aria-label={unreviewedCount > 0
+                      ? `Toggle the Realm Inspector. ${unreviewedCount} pulse proposal${unreviewedCount === 1 ? '' : 's'} awaiting review`
+                      : 'Toggle the Realm Inspector'}
+                    // Always tier-2 (secondary), with the inset shadow added only
+                    // while open — so it reads as its own affordance above the
+                    // ghost Layers/Fit/Help trio (P4) and ON-state still carries
+                    // in two channels (shadow + aria-pressed).
+                    tier2
+                    active={inspectorOpen}
+                    aria-pressed={inspectorOpen}
+                  >
+                    <Eye size={13} /> Inspector
+                  </IconButton>
+                  {/* Persistent unreviewed-pulse signal (P3): the proposal count
+                      is the differentiator — the living world MOVED — and it must
+                      outlive the 2.6s toast. Sourced from the durable
+                      worldState.proposals(status:pending), it clears as the GM
+                      resolves them in the Inspector. Two channels: amber dot +
+                      digit. aria-hidden — the count is spoken via the button aria-label. */}
+                  {unreviewedCount > 0 && (
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: 'absolute', top: -6, right: -6,
+                        minWidth: 16, height: 16, padding: '0 4px',
+                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        background: AMBER, color: PARCH_100,
+                        fontSize: FS.xxs, fontWeight: 800,
+                        fontFamily: sans, lineHeight: 1,
+                      }}
+                    >
+                      {unreviewedCount > 9 ? '9+' : unreviewedCount}
+                    </span>
+                  )}
+                </span>
+              </>
+            )}
+        </>
+
+        {/* In-theme control reference — wraps to its own full-width row below the
+            toolbar (flexBasis:100%) when the "?" affordance is open. */}
+        {mapHelpOpen && <MapControlsHelp />}
+
+        {/* Status line */}
+        {mapLoading && (
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: BODY, fontSize: FS.xs }}>
+            <Loader size={12} className="sf-spin" /> Loading…
+          </span>
+        )}
+        {/* Error text routes through the danger RED token (6.6:1 on CARD) so it
+            matches every other error surface with comfortable AA headroom,
+            instead of the marginal one-off #C54A4A (4.57:1) (P7). */}
+        {mapError && (
+          <span style={{ color: RED, fontSize: FS.xs, fontWeight: 700 }}>
+            {String(mapError)}
+          </span>
+        )}
+      </div>
+  );
+}
+
+/**
+ * Memoized so an unrelated parent re-render (e.g. toast/drag state churn in
+ * WorldMap) doesn't re-render this shell. The remaining props are either
+ * parent-owned state or callbacks the parent stabilizes with useCallback.
+ */
+export const WorldMapToolbar = memo(WorldMapToolbarImpl);

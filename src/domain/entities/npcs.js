@@ -1,0 +1,329 @@
+/**
+ * domain/entities/npcs.js — Structural NPC model + event helpers.
+ *
+ * The plan: most NPCs stay flavor; a small subset becomes load-bearing
+ * with mechanical effects on linked institutions and factions. This
+ * module defines the importance tiers, the structural fields, and the
+ * pure helpers events use to add/kill/replace NPCs.
+ *
+ * Tier rules:
+ *   - minor   : flavor only. No propagation, no impairment.
+ *   - notable : weak link to one institution/faction. Small modifier.
+ *   - key     : meaningful effect. Removal impairs linked entity.
+ *   - pillar  : major consequence. Death creates institutional vacuum
+ *               that needs filling via ASSIGN_NPC_TO_ROLE.
+ *
+ * The engine should default NPCs at generation time:
+ *   - solo role-holders in their institution → key
+ *   - generic guild members / staff           → notable
+ *   - background NPCs                         → minor
+ *   - explicit user promotion required        → pillar
+ *
+ * Pure: no React, no Zustand. Returns new entities; never mutates input.
+ */
+
+
+/** @typedef {import('./status.js').Impairment} Impairment */
+
+/** @typedef {'minor'|'notable'|'key'|'pillar'} NpcImportance */
+
+/** @typedef {'active'|'dead'|'missing'|'exiled'|'retired'|'removed'} NpcStatus
+ *
+ * 'removed' comes from the shared entity lifecycle (see entities/status.js
+ * EntityStatus — "NPC departed"); the rest are NPC-specific. Successor
+ * inference treats dead/removed/exiled NPCs as ineligible.
+ */
+
+/** @typedef {Object} NpcStructural
+ *  @property {string} id
+ *  @property {string} name
+ *  @property {string=} role
+ *  @property {NpcImportance} importance
+ *  @property {NpcStatus} status
+ *  @property {string[]=} linkedInstitutionIds
+ *  @property {string[]=} linkedFactionIds  id-first faction handles: faction.id,
+ *    else the generated seat's canonical .faction/.name until the ID-only migration
+ *  @property {(number|null)=} influence              0-100; null when never generated
+ *  @property {(number|null)=} legitimacyContribution 0-100 — what they prop up when alive
+ *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes
+ *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
+ *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
+ *  @property {string=} removedByEventId
+ *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
+ *  @property {string=} notes                  free-form DM annotation
+ *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
+ *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
+ *                                             id (e.g. the originating event id); not persisted
+ */
+
+/**
+ * Loose NPC input for the tier-inference fallback — generator output or
+ * legacy-save NPCs that may predate the structural fields. Legacy saves can
+ * carry importance strings outside the canonical tiers; the IMPORTANCE_WEIGHT
+ * guard in inferImportance filters those at runtime.
+ *
+ * @typedef {Object} NpcLike
+ * @property {NpcImportance=} importance
+ * @property {string=} role
+ * @property {string=} title   legacy field — some generator paths used title, not role
+ */
+
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+
+const IMPORTANCE_WEIGHT = {
+  minor:   0.0,  // suppresses propagation entirely
+  notable: 0.4,
+  key:     0.7,
+  pillar:  1.0,
+};
+
+/**
+ * Default importance tier from generated NPC fields. The pipeline
+ * tags each NPC at generation time; this is a fallback for legacy
+ * saves.
+ *
+ * @param {NpcLike | null | undefined} npc   NpcStructural also satisfies NpcLike
+ * @returns {NpcImportance}
+ */
+export function inferImportance(npc) {
+  if (npc?.importance && IMPORTANCE_WEIGHT[npc.importance] !== undefined) return npc.importance;
+  // Power, leadership, or named-role NPCs are more likely "key"
+  const role = String(npc?.role || npc?.title || '').toLowerCase();
+  if (/high priest|patriarch|matriarch|archmage|dragon|lord mayor|noble lord|baron|baroness|duke|duchess/.test(role)) return 'pillar';
+  if (/captain|priest|guildmaster|master|magister|sheriff|warden|abbot|seneschal/.test(role)) return 'key';
+  if (/lieutenant|clerk|sergeant|deputy|apprentice|councilor|merchant|smith/.test(role))     return 'notable';
+  return 'minor';
+}
+
+/** Numeric weight (0-1) for propagation strength.
+ * @param {NpcLike | null | undefined} npc   NpcStructural also satisfies NpcLike
+ * @returns {number}
+ */
+export function importanceWeight(npc) {
+  return IMPORTANCE_WEIGHT[inferImportance(npc)] ?? 0;
+}
+
+/**
+ * Create a new NPC with structural defaults. Used by the ADD_NPC event
+ * and by manual user input. Caller supplies what they have; this fills
+ * in defaults so downstream consumers always see a complete shape.
+ *
+ * @param {Partial<NpcStructural>} input
+ * @returns {NpcStructural}
+ */
+export function createNpc(input = {}) {
+  // Auto-id deterministically from the NPC's identity (and an optional _idSeed the
+  // caller can pass — e.g. the originating event id — to disambiguate same-named NPCs).
+  const idSeed = input._idSeed != null
+    ? String(input._idSeed)
+    : [input.name, input.role, ...(input.linkedFactionIds || []), ...(input.linkedInstitutionIds || [])].join('|');
+  const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortHash(idSeed)}`;
+  return {
+    id,
+    name: input.name || 'Unnamed',
+    role: input.role || '',
+    importance: input.importance || 'notable',
+    status: /** @type {NpcStatus} */ (input.status || 'active'),
+    linkedInstitutionIds: input.linkedInstitutionIds || [],
+    linkedFactionIds:     input.linkedFactionIds || [],
+    influence:               input.influence ?? null,
+    legitimacyContribution:  input.legitimacyContribution ?? null,
+    stabilityContribution:   input.stabilityContribution ?? null,
+    serviceContribution:     input.serviceContribution || [],
+    potentialSuccessors:     input.potentialSuccessors || [],
+    notes: input.notes || '',
+  };
+}
+
+/**
+ * Apply a KILL_NPC effect: mark the NPC dead and produce the patches
+ * that should propagate to its linked institutions and factions.
+ *
+ * Critical product behavior: removing a key/pillar NPC creates an
+ * institutional vacancy. That vacancy is itself an impairment of
+ * STAFFING (institution side) and LEADERSHIP (faction side) until
+ * filled by a subsequent ASSIGN_NPC_TO_ROLE event.
+ *
+ * @param {NpcStructural} npc
+ * @param {string} eventId
+ * @returns {{ npc: NpcStructural, institutionImpairments: Array<{instId:string, impairment:Impairment}>, factionImpairments: Array<{factionId:string, impairment:Impairment}> }}
+ */
+export function killNpc(npc, eventId) {
+  const dead = /** @type {NpcStructural} */ ({ ...npc, status: 'dead', removedByEventId: eventId });
+  const weight = importanceWeight(npc);
+
+  // Minor NPCs leave no mechanical trace — the campaign feels their
+  // death narratively but the engine doesn't ripple it through.
+  if (weight === 0) return { npc: dead, institutionImpairments: [], factionImpairments: [] };
+
+  /** @type {Array<{instId: string, impairment: Impairment}>} */
+  const institutionImpairments = [];
+  /** @type {Array<{factionId: string, impairment: Impairment}>} */
+  const factionImpairments = [];
+
+  for (const instId of npc.linkedInstitutionIds || []) {
+    institutionImpairments.push({
+      instId,
+      impairment: {
+        type: 'staffing',
+        severity: weight,
+        causeEventId: eventId,
+        description: `Lost key staff member: ${npc.name}${npc.role ? ` (${npc.role})` : ''}`,
+      },
+    });
+    // Pillar NPCs also impair legitimacy — their public identity
+    // *was* part of the institution's claim to authority.
+    if (npc.importance === 'pillar') {
+      institutionImpairments.push({
+        instId,
+        impairment: {
+          type: 'legitimacy',
+          severity: 0.7,
+          causeEventId: eventId,
+          description: `${npc.name}'s death leaves a legitimacy vacuum at this institution.`,
+        },
+      });
+    }
+  }
+
+  for (const factionId of npc.linkedFactionIds || []) {
+    factionImpairments.push({
+      factionId,
+      impairment: {
+        type: npc.importance === 'pillar' ? 'leadership' : 'membership',
+        severity: weight,
+        causeEventId: eventId,
+        description: `${npc.name} is gone — ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
+      },
+    });
+  }
+
+  return { npc: dead, institutionImpairments, factionImpairments };
+}
+
+/**
+ * Apply an ASSIGN_NPC_TO_ROLE effect: place an NPC into an institution
+ * role, partially or fully restoring impairments caused by the prior
+ * vacancy. Replacement quality determines how much restoration occurs.
+ *
+ * Quality scale:
+ *   - weak           : 0.3 — token replacement, minimal capacity recovery
+ *   - competent      : 0.7 — does the job, capacity recovers
+ *   - popular        : 0.9 — improves both capacity AND legitimacy
+ *   - corrupt        : 0.5 capacity, REDUCES legitimacy (controversial)
+ *   - faction_captured: 0.6 capacity, controlled-by-faction effect
+ *
+ * Returns the updated NPC plus the inverse impairments that should be
+ * applied to the institution (negative-severity impairment = restore).
+ *
+ * @param {Object} args
+ * @param {NpcStructural | Partial<NpcStructural> | null | undefined} args.npc
+ *   existing NPC record, or a partial for a brand-new appointee
+ * @param {string} args.institutionId   institution receiving the appointment
+ * @param {string=} args.role           role title; falls back to the NPC's current role
+ * @param {NpcRoleQuality} args.quality replacement quality (unknown strings fall back to
+ *                                      'competent' at runtime)
+ * @param {string=} args.factionAlignment  faction id the appointee answers to, if any
+ * @param {NpcImportance=} args.importance importance conferred by the role being filled
+ * @param {(number|null)=} args.influence  influence conferred by the role being filled
+ * @param {string} args.eventId
+ * @returns {{ npc: NpcStructural, restorations: Array<{instId: string, impairment: Impairment}>, recoveryQuality: number }}
+ */
+export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, importance, influence, eventId }) {
+  // createNpc computes the DEFAULTED structural fields (id, status, role,
+  // importance, linked ids, contributions), but its return carries ONLY those 13
+  // fields — so building the appointee from it alone lobotomized a rich pipeline
+  // NPC (personality/physical/secret/goal/plotHooks/category/factionAffiliation/
+  // structuralPosition/corruption) and destroyed any DM _userEdits/_authored.
+  // domain-top-1: overlay the structural fields onto the ORIGINAL npc so the
+  // successor's full character sheet + user edits survive; only the fields the
+  // assignment legitimately changes are updated.
+  const structural = createNpc({
+    ...npc,
+    status: 'active',
+    role: role || npc?.role,
+    // Importance + influence come from the role being filled (the role
+    // catalogue / faction seat), falling back to whatever the NPC already had.
+    importance: importance || npc?.importance,
+    influence:  influence ?? npc?.influence,
+    linkedInstitutionIds: dedupeIds([...(npc?.linkedInstitutionIds || []), institutionId]),
+    linkedFactionIds: factionAlignment
+      ? dedupeIds([...(npc?.linkedFactionIds || []), factionAlignment])
+      : (npc?.linkedFactionIds || []),
+  });
+  const updated = { ...npc, ...structural };
+
+  /** @type {Array<{instId: string, impairment: Impairment}>} */
+  const restorations = [];
+  // We "restore" by removing prior staffing impairments that came
+  // from a kill event — handled by the reducer via withoutEventImpairments
+  // — then optionally adding a positive-severity legitimacy bump for
+  // popular replacements.
+  const Q = QUALITY[quality] || QUALITY.competent;
+  if (Q.legitimacyBoost > 0) {
+    restorations.push({
+      instId: institutionId,
+      impairment: {
+        type: 'legitimacy',
+        severity: -Q.legitimacyBoost,  // negative severity = bonus
+        causeEventId: eventId,
+        description: `Popular new ${role || 'leader'} ${updated.name} is widely accepted.`,
+      },
+    });
+  }
+  if (Q.legitimacyHit > 0) {
+    restorations.push({
+      instId: institutionId,
+      impairment: {
+        type: 'legitimacy',
+        severity: Q.legitimacyHit,
+        causeEventId: eventId,
+        description: `${quality === 'corrupt' ? 'Corrupt' : 'Faction-aligned'} appointment of ${updated.name} is publicly contested.`,
+      },
+    });
+  }
+
+  return { npc: updated, restorations, recoveryQuality: Q.capacityFactor };
+}
+
+/** @typedef {'weak'|'competent'|'popular'|'corrupt'|'faction_captured'} NpcRoleQuality */
+
+/** @type {Record<NpcRoleQuality, {capacityFactor: number, legitimacyBoost: number, legitimacyHit: number}>} */
+const QUALITY = {
+  weak:              { capacityFactor: 0.3, legitimacyBoost: 0,    legitimacyHit: 0    },
+  competent:         { capacityFactor: 0.7, legitimacyBoost: 0,    legitimacyHit: 0    },
+  popular:           { capacityFactor: 0.9, legitimacyBoost: 0.4,  legitimacyHit: 0    },
+  corrupt:           { capacityFactor: 0.5, legitimacyBoost: 0,    legitimacyHit: 0.4  },
+  faction_captured:  { capacityFactor: 0.6, legitimacyBoost: 0,    legitimacyHit: 0.3  },
+};
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+/**
+ * @param {string | null | undefined} s
+ * @returns {string}
+ */
+function slugify(s) {
+  return kernelSlugify(s, { sep: '_', max: 32, fallback: 'npc' });
+}
+
+// Deterministic short hash (djb2). createNpc runs inside the pure, seeded event
+// pipeline — Math.random() here broke seed-replayability of stored settlements.
+/**
+ * @param {string} s
+ * @returns {string}
+ */
+function shortHash(s) {
+  let h = 0;
+  const str = String(s);
+  for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return Math.abs(h).toString(36).slice(0, 6).padStart(5, '0');
+}
+
+/**
+ * @param {string[]} arr
+ * @returns {string[]}
+ */
+function dedupeIds(arr) {
+  return [...new Set(arr.filter(Boolean))];
+}

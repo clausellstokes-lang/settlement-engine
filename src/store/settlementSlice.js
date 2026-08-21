@@ -1,0 +1,2002 @@
+/**
+ * settlementSlice — Generated settlement state and saved-settlement library.
+ *
+ * Holds the current generated settlement, the saved settlements list,
+ * and the reactive-update engine state (what-if previews, deltas).
+ */
+
+// ── Lazy engine loader ─────────────────────────────────────────────────────
+// The generator chunk + its data tables together cost ~430 kB gz on first
+// paint. The user only ever touches them when they click Generate (or
+// regenerate / apply-change). Lifting the static imports to dynamic
+// imports shifts that load to first-generate, shaving the cold-start
+// payload by ~25 %. Subsequent generations are cached.
+//
+// `loadEngine()` resolves once and memoizes — every action calls
+// `await loadEngine()` to get the module bag. Actions that previously
+// were synchronous become async; that's safe because none of them return
+// a value that callers consume (they set Zustand state via the `set`
+// callback). React components that fire-and-forget still work — they
+// just see the resulting state update one microtask later.
+//
+// `createPRNG` was previously imported here but is only used by the
+// store test (which imports it directly). Removed from this chunk.
+/**
+ * The generation-time module bag. Pipeline metadata belongs here because its
+ * summaries are computed only while a generation runs; keeping it in the
+ * top-level store graph made every visitor download that presentation leaf.
+ * @type {?{
+ *   generateSettlementPipeline:Function,
+ *   carryLockedRosterThroughGenerate:Function,
+ *   regenNPCsPipeline:Function,
+ *   regenHistoryPipeline:Function,
+ *   generateSeed:Function,
+ *   metaForStep:Function,
+ * }}
+ */
+let _engineModule = null;
+/** @type {?Promise<NonNullable<typeof _engineModule>>} */
+let _enginePromise = null;
+function loadEngine() {
+  if (_engineModule) return Promise.resolve(_engineModule);
+  if (_enginePromise) return _enginePromise;
+  _enginePromise = Promise.all([
+    import('../generators/generateSettlementPipeline.js'),
+    import('../kernel/prng.js'),
+    import('../generators/steps/stepMetadata.js'),
+  ]).then(([pipe, prng, metadata]) => {
+    _engineModule = {
+      generateSettlementPipeline: pipe.generateSettlementPipeline,
+      carryLockedRosterThroughGenerate: pipe.carryLockedRosterThroughGenerate,
+      regenNPCsPipeline:          pipe.regenNPCsPipeline,
+      regenHistoryPipeline:       pipe.regenHistoryPipeline,
+      generateSeed:               prng.generateSeed,
+      metaForStep:                 metadata.metaForStep,
+    };
+    return _engineModule;
+  });
+  return _enginePromise;
+}
+
+import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
+import { eventStalenessKey } from '../domain/events/stalenessKey.js';
+import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { isAuthoritativeCanonEventType } from '../domain/events/authoritativeCanonEventTypes.js';
+import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
+import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
+// R-3 writer convergence: destroySavedSettlement delegates its destruction WRITE
+// to the same domain handler the composer DESTROY_SETTLEMENT pipeline runs.
+// mutateEntities is already in this chunk via mutate.js — zero eager delta.
+import { destroySettlement as domainDestroySettlement } from '../domain/events/mutateEntities.js';
+import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
+// Lane 2 (domain-events-region-1): LIGHT (eager-safe, zero heavy imports) helpers
+// for the NON-party canon relationship ripple — the undo-snapshot capture (in
+// applyEvent) + the mapping gate (in rippleEventThroughWorld). The heavy applier
+// rides the lazy world-engine chunk (recordCanonRelationshipRipple).
+import { captureCanonRelationshipUndo } from '../domain/events/canonRelationshipLinkage.js';
+// eligibleCustomContent + settlementDeityHelpers: DYNAMIC-imported in their
+// async actions since the de-eager lane (2026-07-19) — static imports here
+// dragged customContentSchema + the registry into the first-paint closure.
+import {
+  CRISIS_EVENT_TYPES,
+  crisisTwinFor,
+  crisisWithdraw,
+} from '../domain/crisisLifecycle.js';
+import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
+import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
+import {
+  applyUserEdit as domainApplyUserEdit,
+  revertUserEdit as domainRevertUserEdit,
+  isEditablePath,
+  countSettlementEdits as domainCountSettlementEdits,
+} from '../domain/userEdits.js';
+// Anonymous daily generation cap (localStorage soft cap). Enforced here
+// so EVERY generation path — hero first-gen, wizard "Regenerate Draft",
+// Workshop, sample fork — counts against the same 3/day allowance. The
+// cap used to live only in HomeHero, which let regeneration bypass it.
+import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
+// WS4 decomposition — pure/leaf helpers extracted to a sibling.
+import {
+  cloneJson, persistSaveUpdate, saveEnvelopeFor,
+  _resolveEntity, pickleCampaignState,
+  stripImpairmentsForEvent, computePendingSuccession, loadSettlementContentRuntimeOptions,
+  uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
+  sectionLocked, carryLockedSections, geographyLockedConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
+// Track K §C1 — the ActionResult envelope. The five canon-path actions below
+// (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
+// destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
+// for the per-action before/after mapping and the C2/C3 loose-field TODOs.
+import { makeActionResult } from './actionResult.js';
+import { clearSavedSettlementsCache, commitSavedSettlementsHydration } from './savedSettlementsHydration.js';
+import {
+  appendEventNarrativeSnapshot,
+  MAX_EVENT_NARRATIVE_SNAPSHOTS,
+  stampPreEventNarrative,
+} from './eventNarrativeSnapshots.js';
+import {
+  commitPendingEditsAction,
+  discardPendingEditsAction,
+  queuePendingEditAction,
+  refreshPendingEditsAction,
+  revertSinglePendingEditAction,
+} from './settlementPendingEditActions.js';
+import { runAuthoritativeCanonEventFromSlice } from './canonEventCommandEntry.js';
+// Wave 4a store composition — the god-slice + identity-edit action bodies adopted
+// from the reference tree's helper split (§2B). setPrimaryDeity/imposeCult are the
+// STORE half of the embed-on-assign bridge that flips the religion subsystem gate
+// (subsystemActivation.js reads config.primaryDeitySnapshot / cultDeitySnapshots);
+// the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
+// Settlements-list + change-queue affordances consume. See each helper's header.
+import {
+  renameSettlementImpl, canonizeSavedSettlementImpl, renameFactionImpl, renameNpcImpl,
+} from './settlementRenameHelpers.js';
+// THE DECOMPOSITION WAVE (lane D): the module-level lifecycle helpers and the
+// version-history action bodies moved to two companions. Every action KEY still
+// lives on the slice literal below — only the bodies relocated.
+import {
+  _dimsSummary, rippleEventThroughWorld, activateFaithIfEntitled, resetSettlementIdentity,
+} from './settlementLifecycleHelpers.js';
+import {
+  recordSnapshotAction, revertToSnapshotAction,
+} from './settlementVersionHistoryActions.js';
+export { DERIVED_CONFIG_KEYS, stripDerivedConfigKeys } from './settlementLifecycleHelpers.js';
+
+// ── Event-keyed narrative snapshots (Wave E1 · canon-history preservation) ──
+// As canon events accrue, the AI narrative that described each canon STATE is
+// silently overwritten — the prose history of the settlement is lost. This
+// stamps the narrative that was valid BEFORE an event, keyed by that event's id,
+// into a bounded archive so the lineage survives. Home: the save's `aiData`
+// archive (the least-invasive DURABLE home — already persisted, semantically the
+// AI layer, and NOT the golden settlement object). Never balloons: the narrative
+// is cloned ONCE per event and the archive is FIFO-capped.
+export {
+  appendEventNarrativeSnapshot,
+  MAX_EVENT_NARRATIVE_SNAPSHOTS,
+};
+
+export const createSettlementSlice = (set, get) => ({
+  // ── State ──────────────────────────────────────────────────────────────────
+  settlement:    null,   // current generated settlement object
+  savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
+  savedSettlementsLoaded: false, // true once hydrated from savesService
+  savedSettlementsOwnerId: null,
+  savedSettlementsHydrationGeneration: 0,
+  activeSaveId:  null,   // save id backing the currently-open detail view
+  lastSeed:      null,   // seed from last generation (for replay/determinism)
+  // Wave E1 — the generation-id SPINE. A pseudonymous, per-generation telemetry
+  // identity threaded to lifecycle milestone events (generate/save/canonize/
+  // export/narrate). NOT sim state and NEVER written onto the golden settlement:
+  // it lives here and is derived from seed+generatedAt so it recomputes across a
+  // reload. Reset on hydrate so a loaded save can't inherit a prior id.
+  generationId:  null,
+  lastCtx:       null,   // full pipeline context from last run (config recovery for NPC/history regen + pipeline-rail diagnostics)
+  // History of pipeline steps run for the currently-displayed settlement.
+  // Powers the "How this was simulated" rail. Each entry:
+  //   { id, ts, summary }
+  // where `id` is the step name (e.g. 'assembleInstitutions') and
+  // `summary` is a short factual string built by stepMetadata. Cleared
+  // on regeneration.
+  pipelineHistory: [],
+
+  // P100 / X-1 — Transient flag set right after the pipeline runs and
+  // cleared when the PipelineReveal overlay finishes its playback. The
+  // overlay reads `pipelineHistory` to animate; the wizard hides the
+  // dossier until this flag drops. Cleared on a fresh generate so the
+  // reveal fires once per generation.
+  pipelineRevealActive: false,
+  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
+
+  // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
+  // setActivePricingMoment({ headline, body, reason }); the
+  // PricingMomentCard subscribes here and renders. Single-active-at-a-time
+  // by design (the cooldown library handles dedupe).
+  activePricingMoment: null,
+  setActivePricingMoment: (content) => set(state => {
+    state.activePricingMoment = content || null;
+  }),
+  clearActivePricingMoment: () => set(state => {
+    state.activePricingMoment = null;
+  }),
+
+  // P104 / X-4 — Lifetime narrate count, read by hooks/useReaderAudience.js to
+  // promote anonymous → intermediate after the first narrate spend.
+  //
+  // F34 closed: aiSlice bumps this only after requestNarrative or
+  // requestProgression passes its active-request disposition gate and commits.
+  // Failed, abandoned, and switched-away runs therefore do not promote the
+  // reader audience.
+  lifetimeNarrateCount: 0,
+  bumpLifetimeNarrate: () => set(state => {
+    state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
+  }),
+
+  // P105 / E-2 — Pending edits queue. Each accepted item is an immutable,
+  // owner-scoped intent produced by the lazy transaction contract. The
+  // PendingChangesBar projects the current owner only; commit/discard actions
+  // receive exact ids and cannot reach retained work from another save.
+  pendingEditsQueue: [],
+  pendingEditsClock: 0,
+  // Session correlation only. Authoritative event/snapshot receipts remain in
+  // their existing stores; this capped list prevents a repeated queue submit
+  // from applying the same intent twice.
+  pendingEditReceipts: [],
+  // One reviewed server-authoritative event may own the active save's immediate
+  // apply lane while its revision CAS is in flight. Identity reset clears it.
+  canonEventCommandFence: null,
+
+  // Explicit facades keep these mutating actions visible to the operation
+  // registry's source census. Their authoring-only implementations stay lazy.
+  queueEdit: (kind, payload) => queuePendingEditAction(set, get, kind, payload),
+  revertSingleEdit: (editId) => revertSinglePendingEditAction(set, get, editId),
+  revertPendingEdits: (selection) => discardPendingEditsAction(set, get, selection),
+  commitPendingEdits: (selection) => commitPendingEditsAction(set, get, selection),
+  refreshPendingEdits: (selection) => refreshPendingEditsAction(set, get, selection),
+
+  // ── P133 / E-5 · Version history mutations ──────────────────────────
+  //
+  // Draft (unsaved) version-history timeline. A SIBLING to the live
+  // settlement — mirroring how a saved settlement keeps its versionHistory
+  // BESIDE the settlement on its savedSettlements entry, never inside it.
+  // Draft history used to live INSIDE settlement.versionHistory, so every
+  // snapshot (a full clone of the settlement) embedded all prior snapshots:
+  // size ≈ base × 2^N. Keeping the timeline as a sibling — and stripping
+  // versionHistory from every snapshot payload (snapshotSettlement) — makes
+  // growth linear and revert non-destructive (the timeline is no longer
+  // clobbered when the settlement content is restored). Session-only:
+  // excluded from the persist partialize allowlist (like pendingEditsQueue)
+  // and reset on hydrateFromSave.
+  draftVersionHistory: [],
+  //
+  // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
+  // snapshot of the live settlement (or a specified save) into the
+  // appropriate timeline sibling. Snapshots are immutable — the timeline
+  // never mutates an existing entry, and its payload never carries a nested
+  // versionHistory.
+  //
+  // `revertToSnapshot({ saveId, snapshotId })` finds the snapshot in the
+  // timeline and overwrites the live settlement (or the save's settlement
+  // payload) with the snapshot's content. The CURRENT state is auto-
+  // snapshotted FIRST so reverting is never destructive — the critique was
+  // explicit about that.
+  //
+  // Saved-settlement timelines persist immediately through the normal
+  // save service (`version_history` in Supabase, `versionHistory` locally).
+  //
+  // Unsaved draft timelines TRANSFER at the save-to-library transition (owner
+  // ruling, 2026-07-30 — this closed the deferral recorded here, which asked
+  // whether a pre-save snapshot may be reverted to after saving; it may, and
+  // revertToSnapshot's own pre-revert checkpoint keeps that non-destructive).
+  // Save-to-library still mints the row with `versionHistory: []` (lib/saves.js);
+  // the hand-off happens one step later, inside setActiveSaveId — the store
+  // action all four create chokepoints already call — so the timeline lands on
+  // the new row and `draftVersionHistory` is cleared in the same commit. The
+  // mechanism, its transition gate, and why it writes through persistSaveUpdate
+  // rather than the patch writer live on bindActiveSaveId in
+  // settlementSliceHelpers.js.
+  //
+  // What the hand-off deliberately does NOT carry: the draft's pending-edit undo
+  // receipts. Setting activeSaveId flips the pending-edit owner scope from
+  // `draft:` to `save:` (domain/pendingEditIntents.js), so a draft-owned receipt
+  // is filtered out rather than resolved — the affordance disappears, it never
+  // errors, and the snapshots it would have pointed at are now in the save's
+  // timeline where the Versions tab can reach them.
+
+  /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
+  recordSnapshot: (opts = {}) => recordSnapshotAction(set, get, opts),
+
+  /** Revert the live settlement (or a save) to a prior snapshot. Auto-
+   *  snapshots the CURRENT state first so the user can re-revert if
+   *  they meant the other thing. */
+  revertToSnapshot: (opts) => revertToSnapshotAction(set, get, opts),
+
+  // Tier 5.1: structured delta from the most recent regenerate. UI
+  // surfaces it via the RegenerationDeltaCard until dismissed.
+  lastRegenerationDelta: null,
+
+  // ── Campaign-state engine (v1) ────────────────────────────────────────────
+  // Phase distinguishes design-time tinkering ('draft') from in-world
+  // events after the settlement is deployed into a campaign ('canon').
+  // Same engine underneath; only policy differs (event-log persistence,
+  // narrative tone, validation strictness). See domain/types.js for the
+  // full contract.
+  phase:           'draft',  // 'draft' | 'canon'
+  locks:           {},       // see Locks typedef in domain/types.js
+  systemState:     null,     // SystemState — derived after every generation/event
+  eventLog:        [],       // EventLogEntry[] — populated only in canon mode
+  pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
+  pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
+  composerIntent:  null,     // { type?, target?, fields? } — target-first / SuccessorPrompt injection (Composer V2 §4); consumed+cleared by EventComposer
+
+  // Set by applyEvent when a pillar-tier NPC death just committed.
+  // The SuccessorPrompt UI consumes this to ask the DM whether to
+  // appoint one of the engine-suggested successors. Cleared by the
+  // user dismissing the prompt or by completing an ASSIGN_NPC_TO_ROLE.
+  // Shape: { outgoingNpcId, outgoingNpcName, suggestedSuccessorIds, originEventId }
+  pendingSuccession: null,
+
+  // Provenance timestamps — populated by the relevant handlers below.
+  // Surface in ProvenanceBlock so DMs can see at a glance "when did
+  // this become canon?" / "when was it last exported?" without
+  // hunting through chronicle entries.
+  generatedAt:    null,
+  editedAt:       null,
+  canonizedAt:    null,
+  lastExportAt:   null,
+  // SESSION-ONLY (Wave R-1, atlas queue #25): the uncanonize eventLog tombstone —
+  // { key, log } or null. In NO persistence whitelist (partialize, pickleCampaignState),
+  // so it never serializes; see uncanonizeTombstoneKey in settlementSliceHelpers.js.
+  _uncanonizeTombstone: null,
+
+  // ── Generation ─────────────────────────────────────────────────────────────
+  // Async because the generator engine chunk is lazy-loaded (see
+  // loadEngine() above). On first call the user pays ~100-200ms of
+  // chunk-download time; subsequent calls are cached.
+  generateSettlement: async (seedOverride) => {
+    const state = get();
+    const { config, institutionToggles, categoryToggles, goodsToggles, servicesToggles } = state;
+    const neighbor = state.importedNeighbour;
+
+    // Tier gate check
+    const settType = config.settType;
+    if (settType && settType !== 'random' && settType !== 'custom') {
+      if (!state.isTierAllowed(settType)) {
+        console.warn(`Tier "${settType}" not allowed for current user tier.`);
+        return null;
+      }
+    }
+
+    // Anonymous daily generation cap (Tier 7.2). Every full-settlement
+    // generation funnels through this action, so this is the single point
+    // of enforcement. A *regeneration* (a settlement is already on screen)
+    // now counts the same as a first generation — previously rerolls were
+    // free, which let an anon mint unlimited towns past the 3/day cap.
+    // Captured before the engine runs so we can both block at-cap and pick
+    // the right bucket (reroll vs. full) after a successful run.
+    const isAnon = state.auth?.tier === 'anon';
+    const hadSettlement = !!state.settlement;
+    if (isAnon && anonAtCap()) {
+      console.warn('[settlementSlice] anonymous daily generation cap reached.');
+      return null;
+    }
+
+    // LOCKS ENGINE Phase A — GEOGRAPHY is the one lock that is a generation INPUT
+    // rather than a post-hoc carry: terrain and trade access are drawn early and
+    // everything downstream is conditioned on them, so "keep the ground" can only
+    // mean "roll the same ground again". Dormant (same config reference) when
+    // geography is unlocked, so an unlocked generation is byte-identical to one
+    // taken before locks existed. Under THE PROMISE this stays deterministic —
+    // same seed + same config + same locks is the same world.
+    const fullConfig = geographyLockedConfig(state.locks, state.settlement, {
+      ...config,
+      _institutionToggles: institutionToggles,
+      _categoryToggles:    categoryToggles,
+      _goodsToggles:       goodsToggles,
+      _servicesToggles:    servicesToggles,
+      // "Random" slider mode: resolveConfig rolls the priorities per
+      // generation (fresh seed per regenerate) instead of silently using
+      // flat 50s — and never writes the rolls back into the stored config.
+      ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
+      ...(neighbor ? { _importedNeighbor: neighbor } : {}),
+    });
+
+    const generationModules = await Promise.all([
+      loadEngine(), loadSettlementContentRuntimeOptions(state),
+    ]);
+    const [eng, contentRuntimeOptions] = generationModules;
+
+    const seed = seedOverride || eng.generateSeed();
+      // Capture the full pipeline context (lastCtx) so the pipeline-rail
+      // diagnostics and section-regen config recovery can read the exact
+      // resolved context this run produced, instead of re-deriving it.
+    let capturedCtx = null;
+      // Per-step trace for the "How this was simulated" rail. Each step
+      // contributes one entry with a factual summary derived from the
+      // accumulated context (e.g. "5 institutions placed"). Errors in
+      // the summarizer don't fail the run — they just produce a null
+      // summary and the rail falls back to the label.
+    const pipelineHistory = [];
+    const genStart = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+    let result;
+    try {
+      result = eng.generateSettlementPipeline(fullConfig, neighbor, {
+        seed,
+        // §14 P2 — only expose homebrew that passes its tier gate to this
+        // settlement's tier. Fail-open for random/custom/unknown types, so it
+        // can correctly gate but never silently drop eligible content.
+        ...contentRuntimeOptions,
+        onComplete: (ctx) => { capturedCtx = ctx; },
+        onStep: (name, ctx /*, patch */) => {
+          const meta = eng.metaForStep(name);
+          let summary;
+          try { summary = meta.summary ? meta.summary(ctx) : null; }
+          catch { summary = null; }
+          pipelineHistory.push({ id: name, ts: Date.now(), summary });
+        },
+      });
+    } catch (genErr) {
+      // Analytics — fire-and-forget GENERATION_FAILED, then re-throw so the
+      // existing propagation behaviour is unchanged (additive only).
+      import('../lib/analytics.js').then(({ track, EVENTS }) => {
+        track(EVENTS.GENERATION_FAILED, {
+          error_kind: 'exception',
+          step_name: pipelineHistory.length ? pipelineHistory[pipelineHistory.length - 1].id : undefined,
+        });
+      }).catch(() => {});
+      throw genErr;
+    }
+    const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
+    // Post-resolution tier RE-GATE (ported master fix): 'random'/'custom' pass
+    // the pre-gate as sentinels, so the RESOLVED tier must be re-checked here —
+    // otherwise an over-cap resolution commits a settlement the account tier
+    // could never select directly. Generators/goldens untouched: this only
+    // blocks the COMMIT of an over-cap result.
+    if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(result?.tier)) {
+      console.warn(`Resolved tier "${result?.tier}" exceeds this account's cap — generation discarded.`);
+      return null;
+    }
+      // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
+      // authored conditions survive a local regeneration — a reroll replaces
+      // the town, not the campaign layer's crises. No-op on a first
+      // generation (no prior settlement). EVENT-authored conditions are
+      // deliberately NOT carried here: they ride config.eventConditions, so
+      // they survive only when the generation input actually records them.
+      // Identity guard: the carry is only for a reroll OF the on-screen
+      // working draft. When a SAVED settlement is on screen (activeSaveId
+      // set), this generation mints a brand-new town (activeSaveId resets
+      // below; the save keeps its own settlement and crises) — carrying the
+      // old save's world/party conditions onto the new identity would clone
+      // the campaign layer onto an unrelated town.
+      // LOCKS ENGINE — the POST-HOC half, in two steps over the FINISHED roll (so
+      // neither can perturb a seeded run; an unlocked settlement gets `result`
+      // back by the same reference through both):
+      //   Phase B — the locked CHARACTERS are carried bodily into the new town,
+      //     each taking over a fresh slot and inheriting its id. `_preservation`
+      //     is the out-of-band report that lets the lock map follow them; it is
+      //     destructured off here and never enters the settlement blob.
+      //   Phase A — identity (the name) and history (the whole section the user
+      //     froze) are carried across.
+      // The carry ignores activeSaveId on purpose: a lock is the user's standing
+      // instruction about what to keep, and Phase A's name/history carry has
+      // always crossed that boundary. Only the campaign-layer condition carry
+      // below is guarded, because those belong to a save, not to an intent.
+    const { settlement: withRoster, _preservation } = eng.carryLockedRosterThroughGenerate(state.settlement, result, state.locks);
+    const locked = carryLockedSections(state.locks, state.settlement, withRoster);
+    const reconciled = state.activeSaveId
+      ? locked
+      : reconcileSettlementChange(locked, state.settlement, {
+          source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: locked?.name,
+        });
+      // W-F6 THE PREMIUM GATE — turn the key at generation-complete. A premium
+      // account activates the seed's latent starting pantheon into live embeds
+      // (day-one faith life); free/anon leave it latent + private. Idempotent,
+      // rng-free, tier-gated — the golden (generator output) is untouched because
+      // this fires in the STORE, after the pipeline.
+    const withFaith = activateFaithIfEntitled(reconciled, get);
+      // Derive the SystemState immediately so the UI never sees a settlement
+      // without its accompanying state snapshot. The domain function is
+      // pure — no store, no React — and tolerant of partial inputs, so a
+      // sparse settlement still produces a usable state.
+    let systemState = null;
+    try {
+      systemState = deriveSystemState(withFaith);
+    } catch (e) {
+      console.warn('[settlementSlice] deriveSystemState failed:', e);
+    }
+    const now = new Date().toISOString();
+    set(state => {
+        // state-lifecycle-3: a fresh generation is a new identity — clear ALL
+        // session-only residue through the single chokepoint FIRST (pendingEditsQueue,
+        // pendingSuccession, draftVersionHistory, generationId, …), then set this
+        // run's own lifecycle fields below. Without this, the prior settlement's
+        // queued edits / successor prompt / draft timeline survived onto the new town.
+        resetSettlementIdentity(state);
+        // LOCKS ENGINE Phase B — rewrite the map to the world that now exists:
+        // each locked NPC id becomes the id its subject inherited in the carry
+        // above, an id nothing preserved is pruned, and the name-keyed faction /
+        // institution arrays and the booleans are kept. Run inside the same set()
+        // that folds the settlement in, so the map and the roster can never
+        // disagree. See domain/locksPreservation.js for the identity split.
+        remapLocksAfterGenerate(state, _preservation);
+        state.settlement = withFaith;
+        state.activeSaveId = null;
+        state.lastSeed = seed;
+        state.lastCtx = capturedCtx;
+        state.systemState = systemState;
+        // A freshly generated settlement carries NO AI overlay — clear the FULL
+        // AI-identity slate, not just aiSettlement, so a prior settlement's
+        // daily-life / verifier report / refund notice / stale-detection
+        // fingerprints can't leak onto the new one (F17/F19 identity hygiene).
+        state.aiSettlement = null;
+        state.aiDailyLife = null;
+        state.aiViolations = null;
+        state.aiRefundNotice = null;
+        state.aiDataVersion = null;
+        state.aiSourceFingerprint = null;
+        state.aiPartialFailure = null;
+        state.showNarrative = false;
+        // pendingPreview cleared by resetSettlementIdentity above.
+        state.pipelineHistory = pipelineHistory;
+        // P100 — arm the reveal overlay. PipelineReveal mounts when this
+        // flips true, plays back through pipelineHistory, then calls
+        // dismissPipelineReveal() to clear it. Gated by the flag at the
+        // consumer site (GenerateWizard) so a flag-flip kills the
+        // behavior without touching the slice.
+        state.pipelineRevealActive = true;
+        // Generation always returns the settlement to draft phase. Going to
+        // canon is a deliberate user action (canonize()), not a side-effect
+        // of regeneration — that would silently invalidate any campaign log.
+        state.phase = 'draft';
+        state.eventLog = [];
+        state.generatedAt = now;
+        state.editedAt = now;
+        state.canonizedAt = null;
+    });
+
+    // Count this anonymous generation against the daily cap. A regeneration
+    // (a settlement was already on screen) spends a reroll; the first
+    // generation of the day spends the full allowance. Only on success.
+    if (isAnon && result) {
+      if (hadSettlement) incrementAnonReroll();
+      else incrementAnonFull();
+    }
+
+    // Analytics — fire-and-forget, never affects the return. GENERATION_COMPLETED
+    // carries the reduced (enum/count-only) fingerprint; fires alongside (not
+    // replacing) the component-layer anonymous_generation_completed. When this
+    // run replaced an on-screen draft it is also a re-roll, so REGENERATION_TRIGGERED
+    // fires with regen_mode 'full' (this action does a fresh whole-pipeline roll).
+    Promise.all([
+      import('../lib/analytics.js'),
+      import('../lib/structuralFingerprint.js'),
+      import('../lib/regionalFingerprint.js'),
+      import('../lib/constructionUsage.js'),
+    ]).then(async ([{ track, EVENTS }, fp, { extractNeighbourGenerated }, { configArchetype }]) => {
+      const { extractReducedFingerprint, computeFingerprintHash, computeConfigSignature, usedRandomSentinels, extractStressorGenesis, band5 } = fp;
+      const reduced = extractReducedFingerprint(reconciled) || {};
+      const power = reconciled?.powerStructure || {};
+      // The variance grouping key (config_signature) + an output identity hash
+      // (content_hash) are async (SubtleCrypto); resolve them, but never let a
+      // hashing hiccup drop the event.
+      let config_signature; let content_hash;
+      try { config_signature = await computeConfigSignature(fullConfig); } catch { /* omit */ }
+      try { content_hash = await computeFingerprintHash(reduced); } catch { /* omit */ }
+      // A2-deferral note (DESIGN_ANALYTICS_V2 §4 market floor): world_pulse_advanced +
+      // world_canonized now stamp the campaign uuid as subject_id so the k=200-campaigns
+      // floor can form cells. generation_completed is INTENTIONALLY left unstamped here:
+      // this is the working-buffer generation (pre-save, pre-campaign) — no campaign uuid
+      // exists in scope, and the settlement carries no persistent save uuid yet (the
+      // generation-id spine below uses a pseudonymous, non-uuid id). "Stamp where
+      // campaign-scoped" is thus a no-op at this emit; report_market_archetype_popularity's
+      // campaign floor stays fail-closed until a campaign-scoped generation path exists.
+      track(EVENTS.GENERATION_COMPLETED, {
+        ...reduced,
+        config_signature,
+        content_hash,
+        // §1.2 settlement-construction grouping: the priority-profile cluster the user
+        // asked for, joined to the outcome fingerprint — the demand signal for what
+        // players build (never ids/names; a coarse enum off the config sliders).
+        config_archetype: configArchetype(fullConfig),
+        used_random_sentinels: usedRandomSentinels(fullConfig),
+        is_regeneration: hadSettlement,
+        duration_ms: generationMs,
+        conflict_count: Array.isArray(power.conflicts) ? power.conflicts.length : 0,
+        relationship_count: Array.isArray(reconciled?.relationships) ? reconciled.relationships.length : 0,
+        service_count: Array.isArray(reconciled?.services) ? reconciled.services.length : 0,
+        hook_count: Array.isArray(reconciled?.plotHooks || reconciled?.hooks) ? (reconciled.plotHooks || reconciled.hooks).length : 0,
+        legitimacy_band: band5(power.publicLegitimacy?.score),
+        defense_readiness: reconciled?.defenseProfile?.readiness?.label,
+        neighbour_present: !!(neighbor || reconciled?.neighborRelationship),
+        neighbour_relationship_type: reconciled?.neighborRelationship?.relationshipType || fullConfig._neighbourRelType,
+        custom_content_active: fullConfig.useCustomContent !== false,
+        // per-type stressor genesis (forced-pre / emergent / post-gen / suppressed)
+        stressor_genesis: extractStressorGenesis(reconciled),
+      });
+      // Activate the dead neighbour_generated event: the generation-time
+      // neighbour bias (which axes it shifted), only when a neighbour was bound.
+      const neigh = extractNeighbourGenerated(reconciled);
+      if (neigh) track(EVENTS.NEIGHBOUR_GENERATED, neigh);
+      if (hadSettlement) {
+        track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: 'full', config_signature });
+      }
+    }).catch(() => {});
+
+    // Wave E1 — the generation-id spine. Mint the pseudonymous id (stable across
+    // reload via seed+stamp), stash it in the store field (NOT on the settlement),
+    // and fire the 'generate' milestone. Lazy + fire-and-forget so it never touches
+    // cold start or the return value.
+    import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone, deriveGenerationId }) => {
+      const genId = deriveGenerationId(seed, now);
+      set(s => { s.generationId = genId; });
+      recordGenerationMilestone('generate', reconciled, { generationId: genId });
+    }).catch(() => {});
+
+    // Return the activated settlement so a caller that saves the return value
+    // persists the SAME faith-active shape the store holds (state.settlement =
+    // withFaith). Generation telemetry above intentionally reads `reconciled`
+    // (generator truth — activation is a post-pipeline store overlay).
+    return withFaith;
+  },
+
+  setSettlement: (settlement) =>
+    set(state => {
+      state.settlement = settlement;
+      state.activeSaveId = null;
+      // store-5 identity hygiene: setSettlement is a NON-save load path (the
+      // "Apply Saved Configuration & Regenerate" flow + a couple of reload paths).
+      // Route the session residue through the single chokepoint, and reset the
+      // lifecycle slots to a fresh DRAFT so the new settlement can't inherit the
+      // previous view's canon phase / event log / locks / stamps — after viewing a
+      // canon town, loading another here used to leave phase 'canon' (renames no-op,
+      // a stale eventLog/successor ride an unrelated town).
+      resetSettlementIdentity(state);
+      state.phase        = 'draft';
+      state.eventLog     = [];
+      state.locks        = {};
+      state.canonizedAt  = null;
+      state.lastExportAt = null;
+      // Re-derive systemState from the NEW settlement so the state rail / previews
+      // never reflect the prior identity; tolerate a partial/absent settlement.
+      if (settlement) {
+        try { state.systemState = deriveSystemState(settlement); }
+        catch (e) { state.systemState = null; }
+      } else {
+        state.systemState = null;
+      }
+    }),
+
+  clearSettlement: () =>
+    set(state => {
+      state.settlement = null;
+      state.activeSaveId = null;
+      state.lastSeed = null;
+      state.lastCtx = null;
+      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
+      // the view entirely, leaving no residue of the prior settlement's identity.
+      resetSettlementIdentity(state);
+      state.phase        = 'draft';
+      state.eventLog     = [];
+      state.locks        = {};
+      state.canonizedAt  = null;
+      state.lastExportAt = null;
+      state.systemState  = null;
+    }),
+
+  // ── Section regeneration (NPCs, history) ───────────────────────────────────
+  // Async — same reason as generateSettlement (lazy engine load).
+  // Tier 5.1: every regenerate computes a structured delta against
+  // the prior settlement so the UI's RegenerationDeltaCard can show
+  // what changed. The delta is lazy-imported to keep its transitive
+  // domain modules out of the cold-start chunk.
+  regenSection: async (section) => {
+    const state = get();
+    const { settlement, config, locks } = state;
+    if (!settlement) return;
+    // LOCKS ENGINE Phase A — a whole-section lock is the user's standing "do not
+    // reroll this". The UI disables the button and says why; this is the typed
+    // refusal behind it, so a caller that bypassed the button gets a reason
+    // instead of a silent reroll. Refusal-only envelope, the updateSavedSettlement
+    // shape (this action's success path is unconverted and stays so).
+    if (sectionLocked(locks, section)) return makeActionResult('regenSection', { ok: false, before: { reason: 'section_locked', section } });
+    // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
+    // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
+    // or history on a canon settlement would silently invalidate campaign canon with
+    // no event-log entry, so block it here (matching the rename locks); canon changes
+    // must route through the event system. Draft rerolls proceed.
+    if (get().phase === 'canon') return;
+
+    // P103 / X-2 — Track session regen-burst. When the user crosses 5
+    // regens in a single session, fire regen_burst (worldbuilder hint
+    // for locks/drift/chronicle). Counter lives in-memory only since
+    // it's a session-scoped behavior signal.
+    set(s => { s.sessionRegenCount = (s.sessionRegenCount || 0) + 1; });
+    if ((state.sessionRegenCount || 0) + 1 === 5) {
+      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        triggerPricingMoment('regen_burst', (content) => {
+          get().setActivePricingMoment(content);
+        }, { tier: state.auth?.tier });
+      }).catch(() => { /* never block a regen */ });
+    }
+    const cfg = settlement.config || config;
+    const eng = await loadEngine();
+
+    // Analytics — fire-and-forget. A section regen re-rolls one subsystem
+    // under the existing config (so config is, by construction, unchanged).
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: section, config_changed: false });
+    }).catch(() => {});
+
+    // Capture the pre-regen snapshot before mutation so the delta
+    // composer has a clean `before` reference.
+    const before = cloneJson(settlement);
+
+    if (section === 'npcs') {
+      // `_preservation` is the pipeline's report, carried OUT OF BAND of the parts
+      // (it must never land in the settlement blob) and destructured off here. A
+      // locked keeper INHERITS the id of the slot it took over, so BOTH npc-id-keyed
+      // maps have to be rewritten in the same step that folds the roster in —
+      // otherwise each one silently follows the stranger who got the old id on the
+      // next reroll. foldRegeneratedRoster owns all three writes (roster, `locks`,
+      // and the save row's `aiData.pinnedNpcs`) so they can never disagree.
+      const { _preservation, ...parts } = eng.regenNPCsPipeline(settlement, cfg, { locks });
+      foldRegeneratedRoster(get, set, parts, _preservation);
+    } else if (section === 'history') {
+      // This branch still assigns the whole history object, but the pipeline now
+      // carries the parts a reroll has no business discarding, so the assignment
+      // is no longer lossy in the ways recorded here before:
+      //   • the campaignEra entries worldPulse appended are carried by
+      //     campaignEventId (domain/historyPreservation.js),
+      //   • the coherence tail assembly runs now runs here too, so
+      //     siegeNarrative / legacyAnnotations are minted and
+      //     historicalCharacter is real prose rather than the generator's stub
+      //     (generators/narrative/historyCoherence.js), and
+      //   • authored settlement-root `history.*` paths are re-applied, so the
+      //     "Edited" badge no longer sits over regenerated text.
+      // All three live in the pipeline rather than here: this file is size-
+      // baselined at tolerance-0, and the pipeline already holds the settlement
+      // it needs to read the previous history from.
+      //
+      // DELIBERATELY DEFERRED — documented, not a bug to re-find. Authored
+      // ENTRIES inside historicalEvents[] / currentTensions[] still reroll away.
+      // The NPC fix does not transfer to them: they carry no id and no
+      // provenance marker, so there is nothing to preserve them BY
+      // (regenerationMode's `history_beat` rule covers the seven DERIVED
+      // summaries in explanation.js, not these arrays, and lookupTagForEntity
+      // has no branch for them, so it tags every one 'generated'/'draft' and
+      // both canon-aware modes preserve nothing). Curing that needs an identity
+      // scheme minted for the purpose — an owner decision, not oversight.
+      //
+      // THE SEED FOLD [generators-pipeline-5, closed 2026-07-30]. The pipeline now
+      // returns settlement-ROOT parts, exactly like the npcs branch above, so the
+      // seed it minted lands at the settlement root and a persisted history reroll
+      // is replayable (`regenHistoryPipeline(settlement, cfg, { seed: _regenSeed })`).
+      // Root, never `history._regenSeed`: the DM-share gallery strip is a top-level
+      // KEY list (migration 121 + publicSafe.js), so only the root spelling is
+      // covered, and the history blob stays shape-identical to a generated one.
+      const { history, _regenSeed } = eng.regenHistoryPipeline(settlement, cfg);
+      set(s => { s.settlement.history = history; s.settlement._regenSeed = _regenSeed; });
+    }
+
+    // Compute the delta against the post-regen settlement.
+    try {
+      const { deriveRegenerationDelta } = await import('../domain/regenerationDelta.js');
+      const after = get().settlement;
+      const delta = deriveRegenerationDelta(before, after);
+      set(s => { s.lastRegenerationDelta = delta; });
+    } catch (e) {
+      // Delta is a defensive surface — never block the regenerate
+      // on a delta-derivation failure.
+      console.warn('[settlementSlice] regenerationDelta failed', e);
+    }
+
+    // state-lifecycle-4: when a SAVE is hydrated into the live editor (activeSaveId
+    // set — SettlementDetail hydrates on open, then the Create page offers reroll),
+    // a section reroll mutated only memory and GHOSTED on reload. Persist it via the
+    // applyEvent pattern: stamp editedAt, update the in-memory save entry, and durably
+    // write the settlement + a re-derived campaignState. (Draft-only: the canon guard
+    // above already returned, so this never persists a canon reroll.)
+    const activeSaveId = get().activeSaveId;
+    if (activeSaveId) {
+      const now = new Date().toISOString();
+      set(s => { s.editedAt = now; });
+      const afterState = get();
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: pickleCampaignState(afterState),
+        timestamp: now,
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(activeSaveId, savePartial);
+      }
+      persistSaveUpdate(activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+      });
+    }
+  },
+
+  // Tier 5.1: dismiss the most recent delta summary card.
+  clearLastRegenerationDelta: () =>
+    set(state => { state.lastRegenerationDelta = null; }),
+
+  // ── Saved settlements ──────────────────────────────────────────────────────
+
+  // NOTE (F34): the old `saveSettlement` store action lived here but was DEAD —
+  // every real save path (SaveToLibraryButton + the SAVE_SETTLEMENT auth intent)
+  // calls savesService.save() directly, so this action never ran and its
+  // first_save/third_save pricing moments + 'saved' research capture never fired.
+  // Those side effects were revived as a testable helper (src/store/saveMoments.js,
+  // recordSaveMomentForActiveSave) and are now invoked from the real save
+  // chokepoints. The dead action was removed rather than kept as a decoy.
+
+  /** Bulk-replace the cache; async callers pass an owner/generation token. */
+  setSavedSettlements: (settlements, hydration = null) =>
+    commitSavedSettlementsHydration(set, settlements, hydration),
+
+  /** Clear/invalidate; an explicit owner establishes a new auth boundary. */
+  clearSavedSettlements: (nextOwnerId = undefined) =>
+    clearSavedSettlementsCache(set, nextOwnerId),
+
+  removeSavedSettlement: (id, { mutationToken = null } = {}) => {
+    const blocked = get().getSettlementDeletionBlock?.([id], mutationToken);
+    if (blocked) return blocked;
+    // state-lifecycle-2: a deleted member must also LEAVE every campaign that
+    // held it — otherwise its id lingers in campaign.settlementIds (+ mapState
+    // placements) forever (every reader is defensively filtered, so it is an
+    // invisible leak), and its queued world-clock intentions survive until the
+    // next tick silently destroys them. removeFromCampaign owns that prune
+    // (membership + queued intentions + persist); run it for every holding
+    // campaign BEFORE dropping the save. (This is the store delete chokepoint —
+    // AccountPage's bulk delete routes through here.)
+    const remove = get().removeFromCampaign;
+    if (typeof remove === 'function') {
+      for (const c of get().campaigns || []) {
+        const holdsMember = (c.settlementIds || []).some(sid => String(sid) === String(id));
+        const holdsQueued = (c.worldState?.pendingEvents || []).some(e => String(e.saveId) === String(id));
+        if (holdsMember || holdsQueued) remove(c.id, id, { mutationToken });
+      }
+    }
+    set(state => {
+      state.savedSettlements = state.savedSettlements.filter(s => String(s.id) !== String(id));
+    });
+    return { ok: true, settlementId: id };
+  },
+
+  // Shapeless-patch cure (R-3, atlas VI.12 #163b): the patchable surface is the
+  // CENSUS of real call sites, frozen as SAVED_SETTLEMENT_PATCH_KEYS in
+  // settlementSliceHelpers.js. An unlisted key is a typed refusal (+ dev-mode
+  // error in the helper), never a silent row widening.
+  updateSavedSettlement: (id, partial) => {
+    const unknown = unknownSavedSettlementPatchKeys(partial);
+    if (unknown) return makeActionResult('updateSavedSettlement', { ok: false, before: { id: String(id), reason: 'unknown_patch_keys', unknownKeys: unknown } });
+    return set(state => {
+      const idx = state.savedSettlements.findIndex(s => s.id === id);
+      if (idx !== -1) Object.assign(state.savedSettlements[idx], partial);
+    });
+  },
+
+  /**
+   * Stamp the active save id for a freshly-persisted wizard save (finding
+   * components-shell-commerce-2). The Save-to-Library button and BuyThisDossier's
+   * "save it first" rung both call savesService.save() directly and never told
+   * the store the draft is now a saved row: activeSaveId stayed null, so
+   * requestExit kept warning "hasn't been saved yet" for ALL signed-in wizard
+   * savers, and the $2.99 durable-purchase rung stayed 'unsaved' so each
+   * save-first click re-ran the save (inserting a fresh row past the 3-save UI
+   * cap, which supabaseSave does not enforce). Binding the returned id here fixes
+   * all three: the exit dialog stops mis-warning, the rung advances to
+   * 'unpurchased', and the now-absent save-first button cannot be re-clicked.
+   *
+   * IT IS ALSO THE DRAFT-TIMELINE HAND-OFF: a stamp made while activeSaveId is
+   * still null is a draft becoming a save, so the session's `draftVersionHistory`
+   * moves onto the new row and the draft sibling clears. bindActiveSaveId
+   * (settlementSliceHelpers.js) owns both halves — putting them in the action
+   * rather than in each caller is what makes a fourth create chokepoint inherit
+   * the behaviour instead of re-deciding it.
+   *
+   * DELIBERATELY MINIMAL (byte constitution): this stamps activeSaveId and hands
+   * the timeline over, and does NOT upsert a full savedSettlements cache row. The
+   * full-row upsert the finding sketched would add ~500 B of eager store code
+   * (this slice ships in the first-paint `index` chunk) and blow the closure
+   * ratchet's ~80 B margin. The freshly-saved row still appears in the library on
+   * its next hydration (setSavedSettlements after savesService.list()) — carrying
+   * the timeline the hand-off persisted — so the only thing deferred is an instant
+   * in-memory cache echo, not any correctness. See the in-caller notes in
+   * SaveToLibraryButton/BuyThisDossier.
+   *
+   * @param {string|number} saveId the id savesService.save() returned
+   */
+  setActiveSaveId: (saveId) => bindActiveSaveId(get, set, saveId),
+
+  /**
+   * The third param stays a PLAIN identifier (`opts`, read at its use site):
+   * a destructured default carrying an inline doc-cast of `({})` puts nested
+   * parens in the parameter list, which defeats the walker's isFn scan
+   * (tests/store/operationRegistry.walker.test.js scanProps), silently dropping
+   * this action from the census denominator and flagging its registry entry stale.
+   * (Keep tag-shaped tokens out of this prose — tsc parses them inside JSDoc.)
+   * (Inline `opts.confirmName` rather than a body destructure: this file sits
+   * exactly at its frozen max-lines ceiling — net-zero effective lines.)
+   * @param {string|number} id the saved settlement's id
+   * @param {string} [reason] the recorded destruction reason
+   * @param {{ confirmName?: string }} [opts] `confirmName` = the type-the-name confirm token
+   */
+  destroySavedSettlement: (id, reason = 'destroyed', opts = {}) => {
+    // Wave R-1 (atlas queue #4 / VI.10 #148): confirm-gate parity across the three
+    // settlement-terminal-death lanes — this registry-reachable lane now demands
+    // type-the-name like the composer's §9c gate. Details on the helper.
+    const refusal = destroySettlementConfirmRefusal(get(), { id, reason, confirmName: opts.confirmName });
+    if (refusal) return refusal;
+    const now = new Date().toISOString();
+    // Annotated so tsc keeps the shape across the immer `set` closure assignment
+    // below (otherwise it infers `null` and the C1 envelope's persist.campaignState
+    // read narrows to `never`).
+    /** @type {{settlement: any, campaignState: any, timestamp: string}|null} */
+    let persist = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      if (idx === -1) return;
+      const save = state.savedSettlements[idx];
+      // R-3 writer convergence (atlas VI.10 #4/#148): the destruction WRITE is
+      // the domain DESTROY_SETTLEMENT handler — the single writer the composer
+      // pipeline also runs — so the stamped fields (status / destroyedAt /
+      // destroyedCause / config._destroyed*) can never drift between the two
+      // lanes again. Only the log-ROW shape stays this lane's flat
+      // "library-row flavor" (pinned by timelineEntryShapes; a full
+      // applyEvent-shaped row would be a persistence-shape AND undo-capability
+      // change — owner-gated). `destroyedReason` is kept for row-shape
+      // stability; undoEvent.js's revival strip drops it either way.
+      const destroyEvent = { id: `destroy.${id}.${Date.now()}`, type: 'DESTROY_SETTLEMENT', targetId: reason, timestamp: now };
+      const nextSettlement = { ...domainDestroySettlement(save.settlement || {}, destroyEvent), destroyedReason: reason };
+      const currentCampaignState = save.campaignState || {};
+      const eventLog = Array.isArray(currentCampaignState.eventLog)
+        ? [...currentCampaignState.eventLog]
+        : [];
+      eventLog.push({
+        ...destroyEvent,
+        narrativeSummary: `${nextSettlement.name || save.name || 'Settlement'} was destroyed${reason ? `: ${reason}` : ''}.`,
+      });
+      const campaignState = {
+        ...currentCampaignState,
+        phase: currentCampaignState.phase || 'canon',
+        eventLog,
+        editedAt: now,
+      };
+      state.savedSettlements[idx] = {
+        ...save,
+        settlement: nextSettlement,
+        campaignState,
+        timestamp: now,
+      };
+      if (String(state.activeSaveId || '') === String(id)) {
+        state.settlement = nextSettlement;
+        state.phase = campaignState.phase;
+        state.eventLog = eventLog;
+        state.editedAt = now;
+      }
+      persist = {
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+        timestamp: now,
+      };
+    });
+    if (persist) persistSaveUpdate(id, persist);
+    // Track K §C2 — ActionResult envelope. `receipts` carries an 'event'
+    // Receipt derived from the DESTROY_SETTLEMENT eventLog entry this action
+    // appended to the save's log. No current consumer reads the return, so both
+    // branches are full envelopes (ok:false when the save wasn't found).
+    if (!persist) {
+      return makeActionResult('destroySavedSettlement', {
+        ok: false,
+        before: { id: String(id), reason },
+      });
+    }
+    const destroyLog = persist.campaignState?.eventLog || [];
+    const destroyReceipt = destroyLog.length
+      ? receiptFromEventLogEntry(destroyLog[destroyLog.length - 1], destroyLog.length - 1)
+      : null;
+    return makeActionResult('destroySavedSettlement', {
+      before: { id: String(id), reason },
+      after:  { id: String(id), status: 'destroyed', destroyedReason: reason },
+      receipts: destroyReceipt ? [destroyReceipt] : [],
+      persistenceOps: [{ saveId: String(id), kind: 'save-update', fields: ['settlement', 'campaignState', 'timestamp'] }],
+    });
+  },
+
+  // ── NPC / Faction renaming ─────────────────────────────────────────────────
+  //
+  // THE CONVERGED NPC rename. The body moved to
+  // settlementRenameHelpers.renameNpcImpl when this action gained a CASCADE: it
+  // used to write exactly `npcs[index].name` while operationRegistry advertised
+  // that it "carries the new name through its references", and the library lane
+  // carried a second, differently-incomplete walk. Both lanes now call
+  // domain/factionRename.js applyNpcRenameToSettlement, which also heals
+  // `factions[].members[].name` — the second home a character is stored in, and
+  // the one every reloaded save left holding the dead name.
+  // ASYNC: the cascade module is fetched at the call seam (first-paint budget),
+  // so this returns a PROMISE and callers must await it before reading the result.
+  renameNPC: (npcIndex, newName) =>
+    renameNpcImpl(get, set, npcIndex, newName),
+
+  // THE CONVERGED faction rename (owner queue #14). The body lives in
+  // settlementRenameHelpers.renameFactionImpl: it resolves the CANONICAL
+  // powerStructure.factions list, dual-writes `.faction` + `.name`, cascades
+  // the new name through every surface in domain/factionRename.js
+  // FACTION_RENAME_SURFACES and into every neighbour save, then persists and
+  // hands the narrative blob to applyCosmeticRename. Returns the cascade result
+  // so the pending-edits writer can build an honest receipt.
+  renameFaction: (factionIndex, newName) =>
+    renameFactionImpl(get, set, factionIndex, newName),
+
+  // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
+  //
+  // Edit-mode toggle: when true, EditableText components in the
+  // dossier become clickable. False by default so casual readers see
+  // the dossier as static prose. The toggle lives on the store so any
+  // component tree (tabs, sidebar, PDF preview) can read the same
+  // value without prop-threading.
+  editMode: false,
+  setEditMode: (next) => set(state => { state.editMode = !!next; }),
+  toggleEditMode: () => set(state => { state.editMode = !state.editMode; }),
+
+
+  //
+  // Apply / revert a hand-authored value at a registered editable
+  // path. The path is gated by EDITABLE_FIELDS so the UI cannot
+  // accidentally edit a structural field (population, tier, faction
+  // power) that would invalidate the simulation math.
+  //
+  // applyUserEditAction(kind, entityIndex, path, value):
+  //   kind:        'settlement' | 'npc' | 'institution' | 'faction' |
+  //                'hook' | 'plotHook' | 'condition' | 'supplyChain' |
+  //                'historicalEvent' | 'currentTension'
+  //   entityIndex: array index (ignored when kind === 'settlement')
+  //   path:        dotted path inside the entity (e.g. 'secret.what')
+  //   value:       the user-authored string
+  //
+  // The canonStatus tagger picks up _authored: true automatically, so
+  // the edited entity becomes source: 'user', locked: true. AI
+  // grounding sees it via `forbiddenChanges`, and the verifier
+  // protects it via `changed_user_field`.
+
+  applyUserEditAction: (kind, entityIndex, path, value) => {
+    let changed = false;
+    set(state => {
+      if (!state.settlement) return;
+      if (!isEditablePath(kind, path)) return;  // strict registry gate
+      const entity = _resolveEntity(state.settlement, kind, entityIndex);
+      if (!entity) return;
+      domainApplyUserEdit(entity, path, value);
+      changed = true;
+    });
+    // Persist the authored value so it survives reload (§10.4). No-op without a
+    // hydrated save (the edit lives in memory only, which is correct).
+    if (changed) get().persistActiveSaveEdit?.();
+  },
+
+  revertUserEditAction: (kind, entityIndex, path) => {
+    let changed = false;
+    set(state => {
+      if (!state.settlement) return;
+      const entity = _resolveEntity(state.settlement, kind, entityIndex);
+      if (!entity) return;
+      // Only a real revert is a blob mutation worth persisting — a revert of an
+      // unedited path is a no-op, so don't bump editedAt / write for it.
+      const wasEdited = !!(entity._userEdits && path in entity._userEdits);
+      domainRevertUserEdit(entity, path);
+      changed = wasEdited;
+    });
+    if (changed) get().persistActiveSaveEdit?.();
+  },
+
+  /** Count user edits across the live settlement. Reactive selector. */
+  countSettlementEdits: () => {
+    const s = get().settlement;
+    return s ? domainCountSettlementEdits(s) : 0;
+  },
+
+  /** True if the live settlement has any user edits. Reactive selector. */
+  isSettlementEdited: () => {
+    const s = get().settlement;
+    return !!s && domainCountSettlementEdits(s) > 0;
+  },
+
+  // ── Campaign-state engine handlers ────────────────────────────────────────
+
+  /**
+   * Move the settlement from draft to canon. The act of canonizing is
+   * deliberate — generation never does it automatically — because once
+   * a settlement is canon, every change defaults to a logged in-world
+   * event with permanent timeline impact. Going to canon resets the
+   * event log to an empty timeline starting now and stamps the
+   * canonizedAt provenance timestamp.
+   */
+  canonize: () => {
+    const fromPhase = get().phase;
+    set(state => {
+      state.phase = 'canon';
+      // Wave R-1 (atlas queue #25): if THIS session's uncanonize tombstoned the log
+      // for the SAME world, canonize — its registered inverse — resumes that
+      // timeline instead of resetting it. Identity is key-matched (save + name +
+      // generation stamp), never "latest"; a foreign or stale tombstone is left
+      // in place untouched. A fresh session has no tombstone, so across reload
+      // the pair stays honestly 'action-partial'.
+      const tomb = state._uncanonizeTombstone;
+      if (tomb && tomb.key === uncanonizeTombstoneKey(state) && Array.isArray(tomb.log)) {
+        state.eventLog = tomb.log;
+        state._uncanonizeTombstone = null;
+      } else {
+        state.eventLog = [];
+      }
+      state.canonizedAt = new Date().toISOString();
+    });
+    // Persist so canon sticks across reload and the library reflects it.
+    get().persistActiveSaveLifecycle?.();
+    // Analytics/telemetry — fire-and-forget cold path, kept OFF the eager chunk
+    // (lazy leaf): CANON_PHASE_CHANGED + fingerprint + generation milestone.
+    import('./canonLifecycleTelemetry.js')
+      .then(m => m.fireCanonLifecycleTelemetry(get(), { fromPhase, toPhase: 'canon' }))
+      .catch(() => {});
+  },
+
+  /** Drop back to draft. Useful if the DM wants to keep tinkering before
+   *  the campaign actually starts. The canon event log is cleared, but is
+   *  tombstoned IN-SESSION so canonize can restore it (Wave R-1); across a
+   *  reload the discard is permanent, as the operation registry says. */
+  uncanonize: () => {
+    const fromPhase = get().phase;
+    set(state => {
+      // Tombstone the canon timeline BEFORE wiping (session-only), so the
+      // registered inverse can restore it. Only a real canon→draft transition
+      // stashes — a draft-phase no-op must not overwrite a live tombstone
+      // with an already-empty log.
+      if (fromPhase === 'canon') {
+        state._uncanonizeTombstone = { key: uncanonizeTombstoneKey(state), log: state.eventLog };
+      }
+      state.phase = 'draft';
+      state.eventLog = [];
+      state.canonizedAt = null;
+    });
+    get().persistActiveSaveLifecycle?.();
+    // Analytics — fire-and-forget; the canon→draft transition (same lazy leaf).
+    import('./canonLifecycleTelemetry.js')
+      .then(m => m.fireCanonLifecycleTelemetry(get(), { fromPhase, toPhase: 'draft' }))
+      .catch(() => {});
+  },
+
+  /**
+   * Persist the live lifecycle (phase / eventLog / canonizedAt) + settlement
+   * to the active save, so deliberate lifecycle changes (canonize, uncanonize)
+   * survive reload and the library reflects them. Mirrors applyEvent's persist.
+   */
+  persistActiveSaveLifecycle: () => {
+    const s = get();
+    const activeSaveId = s.activeSaveId;
+    if (!activeSaveId || !s.settlement) return;
+    const campaignState = pickleCampaignState(s);
+    const savePartial = {
+      settlement: cloneJson(s.settlement),
+      campaignState,
+      timestamp: new Date().toISOString(),
+    };
+    if (typeof s.updateSavedSettlement === 'function') {
+      s.updateSavedSettlement(activeSaveId, savePartial);
+    }
+    persistSaveUpdate(activeSaveId, {
+      settlement: savePartial.settlement,
+      campaignState: savePartial.campaignState,
+    });
+  },
+
+  /**
+   * Persist an in-place CONTENT edit (an authored prose value, or an NPC /
+   * faction rename) on the active save. This is the persist half every
+   * settlement-blob edit needs and that the four edit actions historically
+   * LACKED: without it the edit mutated only the live store and GHOSTED on
+   * reload until some LATER persisting action (applyEvent / regenerateSection /
+   * canonize / revert) happened to write the blob — the owner's most-bitten
+   * "survives one path, ghosts another" class (docs/DESIGN_SETTLEMENT_MAP.md
+   * §10.4). Mirrors applyEvent's / the section-reroll persist exactly: stamp
+   * editedAt on the live slice (rail + provenance parity), sync the in-memory
+   * save entry, and durably write the settlement + a re-derived campaignState.
+   *
+   * No-ops when no save is hydrated (an unsaved draft has nowhere to persist —
+   * the edit lives in memory only, which is correct), and defers to an
+   * in-progress change-queue flush (flushSuppressPersist), which owns the single
+   * atomic commit — the same invariant renameSettlement honours. Content edits
+   * are not in-world events, so this never touches the eventLog: campaignState
+   * is re-pickled from the (unchanged) live phase/eventLog/systemState, only
+   * bumping editedAt.
+   */
+  persistActiveSaveEdit: () => {
+    const s = get();
+    const activeSaveId = s.activeSaveId;
+    if (!activeSaveId || !s.settlement) return;
+    // A change-queue flush replays these edits and owns the single atomic
+    // commit, so defer this row's write while suppressed (renameSettlement R2).
+    if (s.flushSuppressPersist) return;
+    const now = new Date().toISOString();
+    set(st => { st.editedAt = now; });
+    const afterState = get();
+    const savePartial = {
+      settlement: cloneJson(afterState.settlement),
+      campaignState: pickleCampaignState(afterState),
+      timestamp: now,
+    };
+    if (typeof afterState.updateSavedSettlement === 'function') {
+      afterState.updateSavedSettlement(activeSaveId, savePartial);
+    }
+    persistSaveUpdate(activeSaveId, {
+      settlement: savePartial.settlement,
+      campaignState: savePartial.campaignState,
+    });
+  },
+
+  /** Stamp lastExportAt — called by export flows. Drives the
+   *  ProvenanceBlock display. */
+  markExported: () => {
+    // Compute "is first export?" before we stamp it. Drives first_pdf_export.
+    const wasFirstExport = !get().lastExportAt;
+    set(state => {
+      state.lastExportAt = new Date().toISOString();
+    });
+    // Wave E1 — 'export' milestone on the generation-id spine (fire-and-forget).
+    const exp = get();
+    if (exp.settlement) {
+      import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
+        recordGenerationMilestone('export', exp.settlement, {
+          generationId: exp.generationId, seed: exp.lastSeed, stampIso: exp.generatedAt,
+        });
+      }).catch(() => {});
+    }
+    if (wasFirstExport) {
+      // P103 / X-2 — first_pdf_export pricing moment.
+      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        triggerPricingMoment('first_pdf_export', (content) => {
+          get().setActivePricingMoment(content);
+        }, { tier: get().auth?.tier });
+      }).catch(() => { /* never block an export */ });
+    }
+  },
+
+  /**
+   * Set (or, with a falsy/empty value, remove) one lock — the user's standing
+   * "do not reroll this". `key` is a section name ('npcs', 'history') or an
+   * identity/geography flag; the value is `true`, or an array of entity ids.
+   *
+   * THE PERSIST (atlas store-ops-a gap 10): the lock map rides inside
+   * campaignState, so before this it reached the cloud only by PIGGYBACK — when
+   * some OTHER canon-path write happened to pickle the slice. Set a lock, reload
+   * without touching anything else, and it was gone. Both verbs now write through
+   * the same path regenSection uses; see persistLocksToActiveSave.
+   */
+  setLock: (key, value) => {
+    // Flat rather than braced: this file sits exactly at its frozen max-lines
+    // ceiling, so the persist below is funded from the branch's own bytes.
+    set(state => {
+      if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) delete state.locks[key];
+      else state.locks[key] = value;
+    });
+    return persistLocksToActiveSave(get, set);
+  },
+
+  clearLocks: () => { set(state => { state.locks = {}; }); return persistLocksToActiveSave(get, set); },
+
+  /**
+   * Run the event preview without committing. UI shows the result as a
+   * "what would happen" panel; user clicks Confirm to commit via
+   * applyEvent. previewEvent is pure, so calling it repeatedly is safe.
+   */
+  previewEvent: (event) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const preview = domainPreviewEvent({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      event,
+    });
+    // THE STALENESS LAW (Composer V2 §5): the preview is keyed to
+    // (payload hash × settlement reference). The composer voids the pane the
+    // moment either diverges — an edited form or a world-pulse advance under
+    // an open composer can never commit through a stale preview.
+    preview._previewKey = eventStalenessKey(event);
+    preview._forSettlement = state.settlement;
+    set(s => { s.pendingPreview = preview; });
+    return preview;
+  },
+
+  /**
+   * Commit an event for real. Mutates the settlement via
+   * `domainApplyEvent`, re-derives systemState from the mutated
+   * settlement, and appends to eventLog (canon only). Updates the
+   * editedAt provenance timestamp.
+   *
+   * Preview↔commit integrity (Composer V2 §5): the composer ALWAYS applies the
+   * freshly-built form event; when the form and settlement are unchanged since
+   * the last preview, that event equals the previewed one byte-for-byte (the
+   * staleness key + compose-session id guarantee it), so the old
+   * applyPendingPreview preference is retired. A handler VETO (§2) makes this
+   * a blocking refusal: nothing commits, nothing logs, the envelope carries
+   * ok:false + veto.
+   */
+  applyEvent: (event, options = {}) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const activeSaveId = state.activeSaveId || null;
+    const command = options?.applicationCommand || null;
+    const fence = state.canonEventCommandFence;
+    const bypassesOwnFence = (
+      options?.bypassCommandFence
+      && options.bypassCommandFence === fence?.commandId
+    );
+    if (fence && !bypassesOwnFence) {
+      return {
+        ...makeActionResult('applyEvent', {
+          ok: false,
+          before: {
+            eventType: event?.type ?? null,
+            targetId: event?.targetId ?? null,
+            phase: state.phase,
+            activeSaveId,
+            reason: 'canon_command_in_flight',
+          },
+          after: null,
+        }),
+        reason: 'canon_command_in_flight',
+      };
+    }
+    if (command && isAuthoritativeCanonEventType(event?.type)) {
+      return runAuthoritativeCanonEventFromSlice({
+        get,
+        set,
+        event,
+        command,
+        activeSaveId,
+        rippleEventThroughWorld,
+      });
+    }
+    // Campaign-clock (Phase C1): a settlement bound to a CANONIZED campaign
+    // world surrenders its independent timeline. Its events don't resolve now —
+    // they queue as pending intentions and resolve simultaneously with every
+    // other member at the next world-pulse advance (drainQueuedEvents). Only in
+    // canon; draft edits stay authorial and immediate.
+    if (activeSaveId && state.phase === 'canon'
+        && typeof state.isSettlementClockBound === 'function'
+        && state.isSettlementClockBound(activeSaveId)) {
+      const queued = state.queueSettlementEvent(activeSaveId, event);
+      if (queued) {
+        // A typed refusal (advance_in_flight / advance_paused) rides through as
+        // `{ queued:false, reason }`. Surface it as an ok:false ActionResult so
+        // the composer keeps the form and shows the reason (store-hooks-state-1)
+        // — the old success-shaped return reset the form (dropping the DM's
+        // order) and even raised the stale-narrative modal. The typed `reason`
+        // travels on `before` so the lazy composer maps it to ADVANCE_ERROR_TEXT
+        // prose (the store stays free of first-paint UI strings).
+        if (queued.queued === false) {
+          return makeActionResult('applyEvent', {
+            ok: false,
+            queued: false,
+            before: {
+              eventType: event?.type ?? null,
+              targetId: event?.targetId ?? null,
+              phase: state.phase,
+              activeSaveId: activeSaveId ?? null,
+              reason: queued.reason ?? null,
+            },
+            after: null,
+          });
+        }
+        set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
+        return queued;
+      }
+    }
+    const beforeSave = activeSaveId
+      ? state.savedSettlements.find(save => String(save.id) === String(activeSaveId))
+      : null;
+    const campaign = activeSaveId && state.phase === 'canon'
+      ? (state.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(activeSaveId)))
+      : null;
+    const beforeEnvelope = activeSaveId
+      ? saveEnvelopeFor(activeSaveId, beforeSave, state.settlement, beforeSave?.campaignState)
+      : null;
+
+    let { logEntry, nextSystemState, nextSettlement, veto } = domainApplyEvent({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      event,
+      // The store is the I/O boundary: thread the real apply time so the domain
+      // stays a pure function of (settlement, event, now) (A+ domain.6).
+      now: new Date().toISOString(),
+    });
+    // Handler-veto channel (Composer V2 §2): the mutation REFUSED — a blocking
+    // refusal, not a commit. No timeline entry, no persistence, no ripple, no
+    // stale-narrative modal; the composer surfaces `veto.message` in the pane.
+    if (veto) {
+      set(s => { s.pendingPreview = null; });
+      return makeActionResult('applyEvent', {
+        ok: false,
+        veto: { code: veto.code || null, detail: veto.detail || '', message: veto.message },
+        userMessage: veto.message,
+        before: {
+          eventType: event?.type ?? null,
+          targetId: event?.targetId ?? null,
+          phase: state.phase,
+          activeSaveId: activeSaveId ?? null,
+        },
+        after: null,
+      });
+    }
+    nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
+      source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
+      changeType: event?.type,
+      changeLabel: event?.targetId || event?.payload?.label || event?.id,
+      now: logEntry.appliedAt,
+    });
+    // Re-derive SystemState from the RECONCILED settlement (so reconciliation's
+    // world-condition preservation is reflected) and RE-LAYER the event's authored
+    // deltas — matching the domain pipeline's canonical afterState formula
+    // (deriveSystemState + authored deltas). Previously this re-derived structurally
+    // only, silently discarding the authored-effect surface (e.g. CUT_TRADE_ROUTE's
+    // resilience/resourcePressure/externalThreat deltas), so the persisted afterState
+    // disagreed with the preview the DM was shown. Pinned by the preview==apply invariant.
+    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), event, state.settlement);
+    logEntry = {
+      ...logEntry,
+      afterState: nextSystemState,
+    };
+    // Undo seam for the crisis twin directive below: snapshot the campaign
+    // twin BEFORE the directive upserts/resolves it (logEntry.undo is the
+    // established snapshot home; crisisWithdraw composes the restore from
+    // it). Without this, undoing an onset that overwrote an earlier twin
+    // loses that copy, and undoing a resolution has no pre-resolution
+    // lifecycle to restore. Gated on the lifecycle's own event registry so
+    // a new crisis event type gets its snapshot by construction.
+    if (campaign && CRISIS_EVENT_TYPES.includes(event?.type)) {
+      logEntry = {
+        ...logEntry,
+        undo: {
+          ...(logEntry.undo || {}),
+          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, event, activeSaveId),
+        },
+      };
+    }
+    // Undo seam for the Lane-2 relationship ripple (domain-events-region-1):
+    // snapshot the campaign's pre-ripple pulse relationshipState + edge label
+    // BEFORE rippleEventThroughWorld upserts them, so undoLastEvent can restore
+    // them (same campaignTwin pattern above). captureCanonRelationshipUndo is a
+    // pure LIGHT read that returns null for every non-relationship (or
+    // party-caused) event, so the common event stashes nothing.
+    if (campaign && !event?.partyCaused) {
+      const relRippleUndo = captureCanonRelationshipUndo(campaign, event, activeSaveId);
+      if (relRippleUndo) {
+        logEntry = {
+          ...logEntry,
+          undo: { ...(logEntry.undo || {}), relationshipRipple: relRippleUndo },
+        };
+      }
+    }
+
+    // Successor detection (pure; see computePendingSuccession): a dead
+    // pillar-tier NPC surfaces a ranked, dismissible successor prompt for the DM.
+    const pendingSuccession = computePendingSuccession(state.settlement, event);
+
+    set(s => {
+      s.settlement     = nextSettlement;
+      s.systemState    = nextSystemState;
+      // One commit has one timestamp. Reusing the domain boundary's appliedAt
+      // keeps the event log, cached save revision, narrative snapshot, and
+      // command-chain receipt byte-identical instead of minting adjacent
+      // millisecond values for the same mutation.
+      s.editedAt       = logEntry.appliedAt || new Date().toISOString();
+      s.pendingPreview = null;
+      if (pendingSuccession) s.pendingSuccession = pendingSuccession;
+      // Only canon-mode events go into the timeline. Draft edits
+      // produce the same state delta + entity mutation but don't
+      // persist as in-world history — see the draft-vs-canon design
+      // note in domain/types.js.
+      if (s.phase === 'canon') {
+        s.eventLog.push(logEntry);
+      }
+    });
+
+    const afterState = get();
+    let afterCampaignState = null;
+    if (activeSaveId && afterState.settlement) {
+      afterCampaignState = pickleCampaignState(afterState);
+      // Wave E1 — event-keyed narrative snapshot. When the active save carries an
+      // AI narrative, preserve the prose that described the PRE-event canon state,
+      // keyed by this event's id, so the narrative lineage isn't lost as events
+      // accrue. Clones once, FIFO-capped; stored in the durable aiData archive.
+      // R-3: the stamp CONDITION lives in the shared helper — one writer with the
+      // server-authoritative command lane (parity pinned; do not inline it back).
+      const nextAiData = stampPreEventNarrative(beforeSave, { event, logEntry, appliedAt: afterState.editedAt });
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: afterCampaignState,
+        timestamp: afterState.editedAt,
+        ...(nextAiData ? { aiData: nextAiData } : {}),
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(activeSaveId, savePartial);
+      }
+      persistSaveUpdate(activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+        ...(nextAiData ? { aiData: nextAiData } : {}),
+      });
+    }
+
+    // Propagate the committed event into the campaign world engine — regional
+    // graph, crisis-lifecycle twin, party-impact pipeline. See the helper for
+    // the per-consumer rationale; all canon-only and best-effort + guarded.
+    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+
+    // Wave E1 — revealed preference: WHICH in-world event type DMs actually apply
+    // (the C1 envelope's before.eventType, enum only). Fire-and-forget.
+    if (event?.type) {
+      import('../lib/analytics.js').then(({ track, EVENTS }) => {
+        track(EVENTS.EVENT_EDIT_APPLIED, { event_type: event.type });
+      }).catch(() => {});
+    }
+
+    // Track K §C2 — ActionResult envelope. `receipts` carries an 'event'
+    // Receipt derived from the eventLog entry this apply produced (the event is
+    // the cause, the SystemState deltas the effects); consumers that need it
+    // read result.receipts[0]. The direct-apply path fires no single analytics
+    // event of its own — regional propagation fires its own inside the ripple
+    // helper, conditionally — so analyticsEvent is null. The clock-bound
+    // (`return queued`) and no-settlement (`return null`) early returns above
+    // are deliberately NOT enveloped: they delegate to queueSettlementEvent /
+    // bail, and their callers already read those shapes.
+    const persistedToSave = Boolean(activeSaveId && afterState.settlement);
+    const eventReceipt = receiptFromEventLogEntry(logEntry);
+    return makeActionResult('applyEvent', {
+      before: {
+        eventType: event?.type ?? null,
+        targetId: event?.targetId ?? null,
+        phase: state.phase,
+        activeSaveId: activeSaveId ?? null,
+        systemState: _dimsSummary(state.systemState),
+      },
+      after: {
+        phase: afterState.phase,
+        logged: afterState.phase === 'canon',
+        appliedAt: logEntry.appliedAt ?? null,
+        systemState: _dimsSummary(afterState.systemState),
+      },
+      receipts: eventReceipt ? [eventReceipt] : [],
+      persistenceOps: persistedToSave
+        ? [{ saveId: String(activeSaveId), kind: 'save-update', fields: ['settlement', 'campaignState'] }]
+        : [],
+    });
+  },
+
+  /** Dismiss the successor prompt without taking action. */
+  dismissPendingSuccession: () => set(state => { state.pendingSuccession = null; }),
+
+  // applyPendingPreview was RETIRED (Composer V2 §5, W-COMPOSER-1): apply
+  // always commits the freshly-built form event, and preview↔commit identity
+  // is guaranteed by the staleness key (same payload + same settlement ⇒ the
+  // built event ≡ the previewed event, id included via the compose-session id)
+  // instead of by preferring a possibly-stale stored preview.
+
+  dismissPreview: () => set(state => { state.pendingPreview = null; }),
+
+  /**
+   * Preview a batch of staged changes WITHOUT committing. Validates the
+   * cross-references first (a dangling reference blocks the whole batch),
+   * then runs the pure domain batch to compute the combined SystemState
+   * delta + per-change narratives. Result is stashed in pendingBatchPreview
+   * for the staging UI; nothing is mutated or persisted.
+   */
+  previewEventBatch: (events) => {
+    const state = get();
+    if (!state.settlement || !Array.isArray(events) || events.length === 0) return null;
+    const validation = validateBatch(state.settlement, events);
+    const result = computeEventBatch({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      events,
+    });
+    const preview = {
+      events,
+      validation,
+      systemStateDeltas: result.systemStateDeltas,
+      afterSystemState:  result.afterSystemState,
+      perEvent:          result.perEvent,
+    };
+    set(s => { s.pendingBatchPreview = preview; });
+    return preview;
+  },
+
+  /**
+   * Commit a batch of staged changes. Validates first; a blocking warning
+   * aborts the WHOLE batch (nothing is applied). Otherwise applies each
+   * change in order through the proven single-event `applyEvent` path, so
+   * succession prompts, persistence, regional propagation, and the timeline
+   * log all behave exactly as they do for one change. Forward references
+   * resolve because each `applyEvent` threads the prior result into the next.
+   */
+  applyEventBatch: (events) => {
+    const state = get();
+    if (!state.settlement || !Array.isArray(events) || events.length === 0) {
+      return { ok: false, warnings: [], logEntries: [] };
+    }
+    const validation = validateBatch(state.settlement, events);
+    if (!validation.ok) {
+      set(s => { s.pendingBatchPreview = { events, validation }; });
+      return { ok: false, warnings: validation.warnings, logEntries: [] };
+    }
+    const logEntries = [];
+    const refusals = [];
+    let queueRefused = false;
+    for (const event of events) {
+      const entry = get().applyEvent(event);
+      // A vetoed event refused (Composer V2 §2) — collect the refusal, apply
+      // the rest (order-independent events keep landing, same as validation
+      // semantics for the events that DID pass).
+      if (entry && entry.ok === false && entry.veto) { refusals.push({ eventId: event?.id, ...entry.veto }); continue; }
+      // A clock-bound queue refusal (store-hooks-state-1): advance in flight or
+      // parked, so nothing queued. Classify as a refusal — never a phantom
+      // logEntry that would make `queuedOnly` false and mislead the batch cart —
+      // and flag it so the cart KEEPS the staged batch instead of clearing it.
+      if (entry && entry.ok === false && entry.queued === false) {
+        refusals.push({ eventId: event?.id, reason: entry.before?.reason || 'refused' });
+        queueRefused = true;
+        continue;
+      }
+      if (entry) logEntries.push(entry);
+    }
+    set(s => { s.pendingBatchPreview = null; });
+    // Campaign-clock: on a clock-bound settlement every event only QUEUED (the
+    // markers carry `queued:true`); nothing mutated, so callers should not raise
+    // the stale-narrative notice.
+    const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
+    // `queueRefused` tells the batch cart that a clock-bound refusal blocked at
+    // least one event (advance in flight / parked); when NOTHING landed the cart
+    // must keep the staged batch and surface the reason (store-hooks-state-1).
+    return { ok: true, warnings: refusals, logEntries, queuedOnly, queueRefused };
+  },
+
+  dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),
+
+  /**
+   * Stage a composition from anywhere (Composer V2 §4 — the SuccessorPrompt
+   * injection precedent, generalized). `intent` = { type?, target?, fields? }:
+   * the EventComposer consumes it into its form state (the ONE source of
+   * truth), auto-previews, and clears it via stageComposerIntent(null).
+   * Registered as a mechanical op (Track K) — transient staging state.
+   */
+  stageComposerIntent: (intent) => set(state => { state.composerIntent = intent || null; }),
+
+  /**
+   * Undo the most recent canon event. Restores the systemState and scrubs
+   * every settlement artifact the event left behind: impairments (each
+   * carries its causeEventId), the activeCondition the event promoted, and
+   * the authored records it dual-wrote into config/_config — eventConditions
+   * / resourceEdits / customTradeGoods / stressorEdits / _cutRoutes plus the
+   * annotation ledgers and stress entries (domain/events/undoEvent.js). The record
+   * scrub matters because regeneration deliberately RE-APPLIES those records
+   * (reapplyEventConditions, resolveResources, generateEconomy): without it
+   * an undone PLAGUE re-promoted its condition on every what-if, permanently.
+   *
+   * Removal events (REMOVE_INSTITUTION setting status='removed') reverse via
+   * the removedByEventId stamp in stripImpairmentsForEvent; resource/trade
+   * records restore from the pre-event snapshot applyEvent stamped on the
+   * log entry (legacy entries without one keep today's leave-it behavior).
+   */
+  undoLastEvent: () => {
+    if (get().phase !== 'canon' || get().eventLog.length === 0) {
+      // Track K §C1 — nothing to undo: a conformant ok:false envelope.
+      return makeActionResult('undoLastEvent', { ok: false });
+    }
+    const eventLog = get().eventLog, eventLogLengthBefore = eventLog.length;
+    // Flavor rows are chronicle records, not state transitions: leave them in
+    // place and target the first mechanical entry beneath them. A non-undoable
+    // mechanical row remains a hard barrier so history can never be reordered.
+    const undoPlan = planTimelineUndo(eventLog);
+    const undoneEntry = undoPlan.targetIndex >= 0 ? eventLog[undoPlan.targetIndex] : null;
+    if (!undoPlan.ok) {
+      return makeActionResult('undoLastEvent', { ok: false, before: { reason: undoPlan.reason, entryType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null, eventLogLength: eventLogLengthBefore, skippedFlavorEntries: undoPlan.skippedFlavorEntries } });
+    }
+    set(state => {
+      const [popped] = state.eventLog.splice(undoPlan.targetIndex, 1);
+      state.systemState = popped.beforeState;
+      const eventId = popped.event?.id;
+      if (!eventId || !state.settlement) return;
+      // Walk every entity list and strip impairments tagged with this event.
+      state.settlement.institutions = (state.settlement.institutions || []).map(stripImpairmentsForEvent(eventId));
+      if (state.settlement.factions) {
+        state.settlement.factions = state.settlement.factions.map(stripImpairmentsForEvent(eventId));
+      }
+      if (state.settlement.powerStructure?.factions) {
+        state.settlement.powerStructure.factions =
+          state.settlement.powerStructure.factions.map(stripImpairmentsForEvent(eventId));
+      }
+      state.settlement.npcs = (state.settlement.npcs || []).map(stripImpairmentsForEvent(eventId));
+      // Conditions + authored config/_config records + provenance-stamped
+      // annotations, finishing with the eventConditions re-sync.
+      state.settlement = scrubUndoneEvent(state.settlement, popped);
+      state.editedAt = new Date().toISOString();
+    });
+    // Persist the undo to the active save. applyEvent persisted the event,
+    // so leaving the save untouched would resurrect the undone event — log
+    // entry, condition, and records — on the next reload.
+    const afterState = get();
+    if (afterState.activeSaveId && afterState.settlement) {
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: pickleCampaignState(afterState),
+        timestamp: afterState.editedAt,
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(afterState.activeSaveId, savePartial);
+      }
+      persistSaveUpdate(afterState.activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+      });
+    }
+    // The crisis twin directive's inverse (canon-only — this action already
+    // gates on canon, mirroring the forward consumer in applyEvent): the
+    // lifecycle composes the withdrawal from the popped entry
+    // (crisisLifecycle.crisisWithdraw — 'withdraw' pulls the twin the onset
+    // injected, or the pulse keeps aging a crisis the timeline no longer
+    // contains; 'restore' un-resolves the twin from the logEntry.undo
+    // snapshot, or it stays an echo while the local condition un-eases).
+    // The spread/re-ignited guards and the legacy-entry fallback live in
+    // campaignSlice.undoCampaignStressorBridge. Same best-effort + guarded
+    // posture as the forward consumer.
+    const withdrawDirective = crisisWithdraw(undoneEntry);
+    if (withdrawDirective) {
+      try {
+        const saveId = afterState.activeSaveId;
+        const campaign = saveId
+          ? (afterState.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(saveId)))
+          : null;
+        const undoBridge = afterState.undoCampaignStressorBridge;
+        if (campaign && typeof undoBridge === 'function') {
+          undoBridge(campaign.id, {
+            ...withdrawDirective,
+            settlementId: String(saveId),
+          });
+        }
+      } catch { /* world reconciliation is best-effort */ }
+    }
+    // Lane 2 (domain-events-region-1) — reverse the NON-party relationship ripple
+    // the undone event landed on the campaign world engine. The pre-ripple pulse
+    // relationshipState + edge label were snapshotted into
+    // logEntry.undo.relationshipRipple at apply time (the campaignTwin pattern);
+    // reverseCanonRelationshipRipple restores them. Fire-and-forget + guarded
+    // (the channel-bundle re-sync rides the lazy engine chunk kept out of first
+    // paint); race-safe with the forward ripple via the forward's orphan guard.
+    const relRippleUndo = undoneEntry?.undo?.relationshipRipple;
+    if (relRippleUndo?.campaignId != null) {
+      try {
+        const reverse = afterState.reverseCanonRelationshipRipple;
+        if (typeof reverse === 'function') {
+          Promise.resolve(reverse(relRippleUndo.campaignId, relRippleUndo))
+            .catch(() => { /* world reconciliation is best-effort */ });
+        }
+      } catch { /* world reconciliation is best-effort */ }
+    }
+    // Track K §C1 — ActionResult envelope. The undo REVERSES the popped event,
+    // so `receipts` is empty this step (C2 may surface the reversed entry).
+    // `poppedEventType` retains the flat-row fallback for legacy undoable rows;
+    // `poppedEventId` keeps its narrow meaning — the authored event's id.
+    const persistedToSave = Boolean(afterState.activeSaveId && afterState.settlement);
+    return makeActionResult('undoLastEvent', {
+      before: {
+        poppedEventId: undoneEntry?.event?.id ?? null,
+        poppedEventType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null,
+        eventLogLength: eventLogLengthBefore,
+        skippedFlavorEntries: undoPlan.skippedFlavorEntries,
+      },
+      after: {
+        phase: afterState.phase,
+        eventLogLength: afterState.eventLog.length,
+        systemState: _dimsSummary(afterState.systemState),
+      },
+      persistenceOps: persistedToSave
+        ? [{ saveId: String(afterState.activeSaveId), kind: 'save-update', fields: ['settlement', 'campaignState'] }]
+        : [],
+    });
+  },
+
+  // RETIRED (R-5b, owner queue #21): `refreshSystemState`. It advertised a
+  // "force a re-derivation after an out-of-band edit" door that no product path
+  // ever opened — its only callers were eight TEST HARNESSES using it to seed a
+  // store, which is how a registered op can look busy while being unreachable.
+  // There is no out-of-band edit to recover from: every writer that changes the
+  // settlement re-derives systemState in the same set() (generateSettlement,
+  // applyEvent, undoLastEvent, revertToSnapshot, hydrateFromSave). The harnesses
+  // now call deriveSystemState directly, which is the real path and cannot rot
+  // into a false consumer. Retiring it also drops the swallow-and-warn catch that
+  // would have hidden a derivation throw from the one caller class that existed.
+
+  /**
+   * Hydrate the live lifecycle slots from a saved settlement record.
+   *
+   * The audit's "saved settlements may not persist phase/eventLog/...
+   * — Stoneford detail may show Mossbridge's canon state" CRIT fix.
+   * When the user opens a save, the slice replaces its global lifecycle
+   * fields with that save's `campaignState`. Without this, all saves
+   * share whatever was last in the global state — a campaign-killer.
+   *
+   * Idempotent: if the save lacks a campaignState block (legacy
+   * pre-migration save) the migration default is used. SystemState is
+   * re-derived from the settlement if not stored.
+   */
+  hydrateFromSave: (save) => set(state => {
+    if (!save) return;
+    const cs = save.campaignState || {};
+    // W-F6 THE PREMIUM GATE — turn the key on open. A premium (or upgraded)
+    // account activates the seed's latent starting pantheon into live embeds:
+    // "the gods were always there, latent in the seed". Idempotent (a save that
+    // already carries live embeds is unchanged) + tier-gated (free/anon load the
+    // save verbatim, faith latent + private).
+    const loadedSettlement = save.settlement
+      ? activateFaithIfEntitled(save.settlement, get)
+      : null;
+    state.settlement     = loadedSettlement || state.settlement;
+    state.activeSaveId   = save.id || null;
+    // Recover the seed from the save (row column first, then the blob's stamped
+    // `_seed`), and NEVER fall back to the stale session seed (finding F2): the
+    // seed is surfaced in ProvenanceBlock "for replay / sharing", so a wrong seed
+    // is worse than none. null is honest — ProvenanceBlock shows "unknown".
+    state.lastSeed       = save.seed ?? save.settlement?._seed ?? null;
+    state.phase          = cs.phase || 'draft';
+    state.eventLog       = Array.isArray(cs.eventLog) ? [...cs.eventLog] : [];
+    state.locks          = cs.locks || {};
+    state.generatedAt    = cs.generatedAt || null;
+    state.editedAt       = cs.editedAt || null;
+    state.canonizedAt    = cs.canonizedAt || null;
+    state.lastExportAt   = cs.lastExportAt || null;
+    // Identity-leak audit (same class as the phase/eventLog hydration fix above):
+    // Reset identity-local UI residue through the single chokepoint. Owner-scoped
+    // pending intents/receipts remain in session so returning to save A recovers
+    // them, while the shared owner selector makes them invisible and unselectable
+    // on save B. Successor, draft-timeline, and pipeline residue still clear.
+    // draftVersionHistory is a sibling to the DRAFT settlement only — a loaded save
+    // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
+    // stable generation id from the save's seed + generatedAt.
+    resetSettlementIdentity(state, { preservePendingEdits: true });
+    // The refined narrative lives at save.aiData.aiSettlement, not a flat
+    // save.aiSettlement. Reading the wrong path nulled the narrative on every
+    // reload (it ran right after hydrateAiFromSave had loaded it correctly),
+    // while daily life — untouched here — survived. Read aiData first.
+    //
+    // FULL AI-session load (ported master fix, mirrors aiSlice.hydrateAiFromSave):
+    // some callers (e.g. the deity-from-map picker) call hydrateFromSave ALONE,
+    // without hydrateAiFromSave — loading only aiSettlement here carried the
+    // PRIOR save's aiDailyLife / showNarrative / fingerprint / in-flight flags
+    // into the new identity. Load the whole AI block from THIS save's blob, and
+    // clear the in-flight flags so a stale spinner/error can't bleed across.
+    // Idempotent with SettlementDetail's own hydrateAiFromSave call (same blob).
+    state.aiSettlement   = save.aiData?.aiSettlement || save.aiSettlement || null;
+    state.aiDailyLife    = save.aiData?.aiDailyLife || null;
+    state.aiDataVersion  = save.aiData?.narrativeGeneratedAt
+      ? new Date(save.aiData.narrativeGeneratedAt).getTime() : null;
+    state.aiSourceFingerprint = save.aiData?.narrativeSourceFingerprint || null;
+    state.showNarrative  = save.aiData?.narrativeMode === 'narrated' && !!save.aiData?.aiSettlement;
+    state.aiLoading      = false;
+    state.aiRegenerating = false;
+    state.aiError        = null;
+
+    // SystemState: prefer the persisted snapshot; if absent or stale,
+    // re-derive from the settlement so the rail/timeline never crashes.
+    if (cs.systemState) {
+      state.systemState = cs.systemState;
+    } else if (loadedSettlement) {
+      try { state.systemState = deriveSystemState(loadedSettlement); }
+      catch (e) { state.systemState = null; }
+    } else {
+      state.systemState = null;
+    }
+  }),
+
+  // ── Deity / cult mounts (Wave 4a) ─────────────────────────────────────────
+  // The STORE half of the embed-on-assign bridge. Thin delegations: the impls
+  // resolve the deity ref against customContent HERE (intent time) and dispatch
+  // SET_PRIMARY_DEITY / IMPOSE_CULT through applyEvent with the frozen snapshot in
+  // the payload, so the pure mutate handler + pulse read ONLY config.*DeitySnapshot
+  // and the religion subsystem gate (subsystemActivation.js) flips off the embed.
+  // ASYNC since the de-eager lane (2026-07-19): the impls' registry resolution
+  // (buildRegistryFromStore) rides the lazy custom-registry chunk, so these
+  // actions await its dynamic import. Resolves to the same value the sync form
+  // returned — applyEvent's ActionResult envelope (null when refused) — and the
+  // persisted event-log OUTPUT is byte-identical; only the API shape moved. The
+  // chunk is warm in practice: the deity panel/composer field statically import
+  // customRegistry, so assigning from either surface awaits a fetched module.
+  setPrimaryDeity: async (deityRefId, opts = {}) => (await import('./settlementDeityHelpers.js')).setPrimaryDeityImpl(get, deityRefId, opts),
+  imposeCult: async (deityRefId, removeRef = null) => (await import('./settlementDeityHelpers.js')).imposeCultImpl(get, deityRefId, removeRef),
+
+  // ── Identity edits + canon-by-id (Wave 4a) ────────────────────────────────
+  // The always-allowed town rename, the Settlements-list canonize-by-id, and the
+  // change-queue flavor/neighbour companions. Delegated to settlementRenameHelpers.
+  // RETIRED (R-5b, owner queue #21): `syncActiveNeighbourFields` (dead in BOTH
+  // halves — see settlementRenameHelpers) and the `recordCanonFlavorEntry` STORE
+  // SURFACE. The flavor Impl is very much alive; it is called directly by
+  // settlementPendingEditWriters, which is the only path that records one. What
+  // was dead was this second, registered door onto it — a live Impl with a dead
+  // store surface, the same shape the atlas found at setRegionalChannelVisibility
+  // (which turned out dead in BOTH halves and was itself retired, twin included).
+  renameSettlement: (id, newName) => renameSettlementImpl(get, set, id, newName),
+  canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
+
+  /**
+   * SM-3 — apply a COSMETIC map edit (design §5, Class A) to a saved settlement's
+   * blob-resident `settlement.mapEdits` (position nudges, layout-variant reroll,
+   * label/legend prefs). COSMETIC-ALWAYS: no canon guard (the renameSettlement lane
+   * — a cosmetic touches no canon fact), so this writes in draft AND canon; the
+   * gate that matters (premium/founder `canEdit`) is enforced in the viewer chrome,
+   * not here (viewing stays free at every tier). Follows the applyEvent persist
+   * triple exactly: stamp editedAt → updateSavedSettlement (the in-memory save
+   * entry) → persistSaveUpdate (the durable write) — so a map edit never GHOSTS on
+   * reload (the owner's most-bitten "survives one path, ghosts another" class,
+   * §10.4).
+   *
+   * `nextMapEdits` is the fully-resolved, pre-normalized container the LAZY viewer
+   * pane computes via domain/townMap/mapEdits.js. This eager action stays a dumb
+   * setter — it imports NO town-map domain, so the first-paint static closure is
+   * unmoved. A NULL / empty container DELETES the key, restoring absent ⇒
+   * byte-identical (the dormancy law). No random ids / wall-clock touch the blob:
+   * the only stamp (editedAt / timestamp) is a save-envelope field, never on the
+   * settlement, so same-seed generator byte-identity is untouched.
+   *
+   * No-ops when the id names no saved settlement (an unsaved draft has nowhere to
+   * persist). Defers its cloud write to an in-progress change-queue flush
+   * (flushSuppressPersist), which owns the single atomic commit (renameSettlement
+   * R2). Registered MECHANICAL in the operation manifest.
+   *
+   * @param {string|number} id
+   * @param {import('../domain/townMap/mapEdits.js').MapEdits | null | undefined} nextMapEdits
+   * @returns {void}
+   */
+  applyMapEdit: (id, nextMapEdits) => {
+    // `nextMapEdits` arrives PRE-NORMALIZED (the lazy pane's normalizeMapEdits →
+    // a non-empty container or null): a truthy value is set, a nullish value DROPS
+    // the key so the blob returns byte-identical to no-edits — never a hollow {}.
+    const now = new Date().toISOString();
+    /** @type {{ settlement: any, timestamp: string }|null} */
+    let persist = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      if (idx === -1) return; // no persistence target — cosmetic edits home in a saved blob
+      const save = state.savedSettlements[idx];
+      const { mapEdits: _drop, ...rest } = save.settlement || {};
+      const nextSettlement = nextMapEdits ? { ...rest, mapEdits: cloneJson(nextMapEdits) } : rest;
+      state.savedSettlements[idx] = { ...save, settlement: nextSettlement, timestamp: now };
+      if (String(state.activeSaveId || '') === String(id) && state.settlement) {
+        state.settlement = nextSettlement;
+        state.editedAt = now;
+      }
+      persist = { settlement: cloneJson(nextSettlement), timestamp: now };
+    });
+    if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
+  },
+
+  /**
+   * Instrumentation hook for the REAL (cloud/localStorage) save path — the
+   * Save-to-Library buttons + the SAVE_SETTLEMENT auth intent call
+   * savesService.save() directly and rehydrate via setSavedSettlements, bypassing
+   * any store save action, so the pricing moments + 'saved' research fingerprint
+   * never fire for real users without an explicit hook (F34). Call this AFTER a
+   * successful save AND after savedSettlements is refreshed.
+   *
+   * Wave 4a composition (§2B): the moment/fingerprint block routes through OUR
+   * extracted saveMoments.recordSaveMomentForActiveSave (session-deduped per save
+   * id, authoritative post-save count, generation-id spine) rather than a second
+   * inline funnel copy. Fully fire-and-forget — never throws, never blocks the save.
+   *
+   * HANDOFF (pricing sub-wave 4e): §2B also has notePersistedSave arm the
+   * same-device dossier retro auto-upgrade (108). That is DEFERRED here because its
+   * module (src/lib/dossierRetroClaim.js) has not landed in this tree — a static
+   * `import('../lib/dossierRetroClaim.js')` fails BOTH tsc and `vite build` on a
+   * missing target. 4e must add, right after the saveMoments call:
+   *   if (saveId != null) import('../lib/dossierRetroClaim.js')
+   *     .then(({ runDossierRetroClaimForSave }) => runDossierRetroClaimForSave({ settlement, saveId, get }))
+   *     .catch(() => {});
+   *
+   * @param {object} settlement the settlement that was just persisted
+   * @param {string|number} [saveId] the real save's id (from savesService.save)
+   * @returns {void}
+   */
+  notePersistedSave: (settlement, saveId) => {
+    try {
+      import('./saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId, settlement, store: { getState: get } }))
+        .catch(() => { /* instrumentation must never block a save */ });
+    } catch { /* instrumentation must never throw */ }
+    // Arm the same-device dossier retro auto-upgrade (108): if THIS settlement was
+    // bought anonymously on this device before sign-up, silently attach its durable
+    // export right now that it has a real save id. Fully fire-and-forget — dynamic
+    // import so a missing target never breaks tsc/build, and never blocks the save.
+    try {
+      if (saveId != null) import('../lib/dossierRetroClaim.js')
+        .then(({ runDossierRetroClaimForSave }) => runDossierRetroClaimForSave({ settlement, saveId, get }))
+        .catch(() => {});
+    } catch { /* retro claim must never throw */ }
+  },
+});

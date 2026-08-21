@@ -1,0 +1,161 @@
+/*
+ * a11y.css — Global accessibility floor.
+ *
+ * The audit's accessibility verdict was "Weak" because the codebase
+ * suppresses focus outlines per-component, uses many sub-24px touch
+ * targets, and ignores prefers-reduced-motion. This stylesheet
+ * restores the minimum WCAG 2.2 baseline once, globally, instead of
+ * per-component (which has historically been forgotten).
+ *
+ * Imported once from src/main.jsx so every view gets it automatically.
+ *
+ * Specific rules:
+ *   - :focus-visible always shows a ring. Components must NOT override
+ *     this with `outline: none`. If the design needs a different ring
+ *     color, override --sf-focus only.
+ *   - prefers-reduced-motion collapses animation to 1ms — the
+ *     practical equivalent of "off" while keeping animation-end events
+ *     firing for any code that depends on them.
+ *   - Minimum target size: WCAG 2.2 SC 2.5.8 mandates 24×24px for
+ *     interactive controls. Applied via min-height/min-width on every
+ *     button-like element.
+ *   - sr-only utility for visually hidden but screen-reader-readable
+ *     content (used by IconButton fallback labels and skip links).
+ */
+
+:root {
+  --sf-focus: #a0762a;
+  --sf-focus-ring-offset: 2px;
+}
+
+*:focus {
+  /* Suppress the default focus ring; :focus-visible below provides the
+   * accessible alternative. Critical: do NOT remove the rule below. */
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--sf-focus);
+  outline-offset: var(--sf-focus-ring-offset);
+  border-radius: 3px;
+}
+
+/* THE STICKY BAR DRAWS ITS RING INSIDE ITS OWN BOX.
+ *
+ * The app header is `position: sticky; top: 0`, so a control in it sits flush
+ * against the viewport's top edge and an OUTSET ring has nowhere to go: it is
+ * painted at a negative y and simply never reaches a pixel anyone can see. The
+ * ring was not clipped by an ancestor — no clip-path, no overflow:hidden on the
+ * chain — it was drawn where no viewport reaches, which is why "nothing clips
+ * it" kept coming back true while the top edge stayed missing. Measured on this
+ * tree at 1440x900, FIVE of the bar's eight controls lost the whole 3px band:
+ * the lockup (box top 1.58 -> ring at y=-3.42..-0.42), the three plain tabs and
+ * the account control (box top 2 -> ring at y=-3..0).
+ *
+ * Flipping the offset to a full negative ring-width puts the entire ring inside
+ * the control's own box, where it is always on screen. This is the SAME cure the
+ * fletch cells already carry inline (NavRibbon.jsx) — those cells keep their own
+ * declaration, which is identical to this one and simply wins by being inline;
+ * the rule generalises their answer to every sibling in the bar instead of
+ * leaving four of them to be found one at a time.
+ *
+ * ⚠️ THE VALUE IS THE RING'S OWN WIDTH, negated. It is spelled longhand because
+ * the width above must stay a literal — tests/components/navFletching.test.jsx
+ * reads `outline: 3px solid var(--sf-focus)` out of this file by regex to derive
+ * its inset pin. If that width is ever re-weighted, BOTH numbers move together;
+ * an inset smaller than the ring's width would push part of the band back over
+ * the viewport edge, which is the defect itself.
+ *
+ * Nothing here suppresses a ring, adds a second one, or changes its colour or
+ * weight: only which side of its own edge it is drawn on. The selector is exact
+ * — `.parchment-bg` has a single application site (App.jsx's shell) and the two
+ * app bars, mobile and desktop, are its only direct `header` children, so the
+ * estate's other 45 `<header>` elements (dialog and section heads, none of them
+ * stuck to the viewport) keep the outset ring unchanged. */
+.parchment-bg > header {
+  --sf-focus-ring-offset: -3px;
+}
+
+/* WCAG 2.2 SC 2.5.8 — Target Size (Minimum). 24x24 CSS px is the
+ * floor; anything smaller fails. We still allow the rule to be
+ * overridden per-element when the larger target is supplied via
+ * surrounding hit area (e.g. a small icon inside a 32px button). */
+button,
+[role="button"],
+a,
+input[type="checkbox"],
+input[type="radio"],
+[tabindex]:not([tabindex="-1"]) {
+  min-height: 24px;
+  min-width: 24px;
+}
+
+/* Respect user motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Interactive state floor for the button primitives (Button / IconButton).
+ * The primitives publish their fill as --sf-btn-bg (plus a designed hover
+ * fill as --sf-btn-hover-bg where the tone defines one), and these rules
+ * give EVERY consumer a perceivable hover without per-callsite wiring.
+ * The fallback derives hover from the base fill (an 8% ink mix), so no
+ * variant can opt out by forgetting a token — even `transparent` gains a
+ * soft ink tint. Completes the state set with the :focus-visible ring
+ * above, the .oc-m-press:active press give (organic.css), and the
+ * primitives' own disabled treatment (hence the :not(:disabled) guard).
+ * A caller's inline `background` override still outranks both rules. */
+.sf-btn {
+  background-color: var(--sf-btn-bg, transparent);
+}
+.sf-btn:hover:not(:disabled) {
+  background-color: var(--sf-btn-hover-bg, color-mix(in srgb, var(--sf-btn-bg, transparent), #1c1409 8%));
+}
+
+/* Visually hidden but accessible to assistive tech. Used by IconButton
+ * for the redundant text label and by future skip-to-content links. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link — the first focusable element in the DOM (App.jsx renders
+ * <a href="#main-content" class="skip-link">). Off-screen until focused, then it
+ * slides into view so a keyboard/SR user can jump past the header/nav to <main>. */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 8px;
+  /* Meet the 44×44 mobile touch-target floor (tests/e2e mobile-pointer-targets):
+   * min-height + inline-flex centering guarantees ≥44px tall regardless of
+   * line-height, instead of relying on padding math that yields ~38px. */
+  box-sizing: border-box;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--sf-focus, #1d4ed8);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 2000;
+  border-radius: 0 0 4px 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}

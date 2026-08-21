@@ -1,0 +1,231 @@
+/**
+ * PDF design system — palette, type scale, spacing, page geometry.
+ *
+ * The palette shares the app's HUE with the on-screen UI (design/tokens.js is the
+ * canonical source), but the accent inks are deliberately PRINT-TUNED: darker and
+ * more saturated than their screen tokens so they hold ink density on white stock
+ * (the lighter screen gold/green/violet wash out in print). This is NOT a pixel
+ * mirror of the screen — the screen↔PDF parity contract (domain/display/parityContract.js
+ * PARITY_EXEMPT) already declares tone COLOR per-surface (web RGB scale vs this print
+ * palette); only the DATA/labels are pinned to match. Each print-tuned accent below
+ * names its screen-token lineage, and tests/pdf/printPaletteContract.test.js enforces
+ * that the print variant stays at-or-darker than its token so a re-skin can't silently
+ * lighten the printed product past legibility.
+ *
+ * All measurements in PDF points (pt). 1mm = 2.83465pt; @react-pdf accepts
+ * either a number (pt) or a string with unit (e.g. "16mm"). For consistency
+ * we use numbers everywhere and pre-convert mm where it's natural to think
+ * in mm (page margins).
+ */
+import { Font, StyleSheet } from '@react-pdf/renderer';
+import { legacy as L } from '../design/tokens.js';
+
+// ── Color palette ────────────────────────────────────────────────────────────
+// Neutrals that legitimately equal the screen tokens reference them directly (so a
+// re-skin of those flows straight through). The chromatic accents are print-tuned
+// darker variants of their named screen token — see the header + the contract test.
+export const palette = {
+  ink:     L.INK,      // = ink-900; primary text (print neutral == screen)
+  second:  '#3d2b1a',  // body text — print brown near ink-800 (L.INK_DEEP)
+  muted:   '#6b5340',  // captions/meta — print brown, darker than muted-500 (L.MUTED)
+  faint:   '#9c8068',  // hairline meta (≈ muted-500, L.MUTED)
+  gold:    '#a0762a',  // section accents/badges — print-tuned darker than gold-500 (L.GOLD)
+  goldBg:  '#f5ede0',  // gold tint for callouts
+  card:    L.CARD,     // = CARD (#FFFBF5); page background (print neutral == screen)
+  border:  '#e0d0b0',  // dividers/table borders — near parchment-200 (L.BORDER)
+
+  // Tone accents — print-tuned darker variants of the screen status tokens.
+  good:        '#1a5a28',   // viability ok/allied — darker than green-600 (L.GREEN)
+  goodBg:      '#e8f5e8',
+  warn:        '#a0762a',   // friction/mid stress — matches print gold
+  warnBg:      'rgba(160,118,42,0.08)',
+  bad:         '#8b1a1a',   // critical/hostile/criminal — darker than red-600 (L.RED)
+  badBg:       '#fde8e8',
+  cool:        L.BLUE,      // = blue; patron/client/infrastructure (print == screen)
+  coolBg:      '#f0f4ff',
+
+  // AI narrative — purple lens; darker than violet-500 (L.SLATE) for print.
+  ai:          '#6a2a9a',
+  aiTint:      '#f4ecf8',
+  aiRule:      '#8a50b0',
+};
+
+// Faction / category colors — match the tab components
+export const factionColors = {
+  government:    '#a0762a',
+  military:      '#8b1a1a',
+  economy:       '#1a5a28',
+  religious:     '#2a3a7a',
+  magic:         '#5a2a8a',
+  criminal:      '#5a2a8a',
+  infrastructure:'#3d6b8a',
+  crafts:        '#7a5a1a',
+  defense:       '#8b1a1a',
+  entertainment: '#a06a8a',
+  adventuring:   '#5a8a2a',
+  other:         '#6b5340',
+};
+
+// Relationship colors
+export const relColors = {
+  rival:           '#8b1a1a',
+  cold_war:        '#8b1a1a',
+  hostile:         '#8b1a1a',
+  allied:          '#1a5a28',
+  secret_alliance: '#1a5a28',
+  trade_partner:   '#a0762a',
+  patron:          '#2a3a7a',
+  client:          '#2a3a7a',
+  criminal_network:'#5a2a8a',
+};
+
+// ── Font registration ────────────────────────────────────────────────────────
+// Lora (open SIL) for serif body, Nunito for sans labels/nav. Both shipped as
+// static assets under public/fonts/ so the PDF render never depends on an
+// external CDN. (Earlier builds pulled from fonts.gstatic.com — Google rotated
+// the v32 URLs and PDF export broke silently for everyone.)
+Font.register({
+  family: 'Lora',
+  // ?v=2 cache-busts the browser's pre-strip copy. The Lora files were re-cut to
+  // drop the broken fi/fl/ff ligature glyphs, but the URL is unchanged — so
+  // without a version bump the browser keeps handing react-pdf the old
+  // (ligating) font and the tofu after "f" persists. Bump this whenever the
+  // Lora binaries change again.
+  fonts: [
+    { src: '/fonts/Lora-Regular.ttf?v=2',    fontWeight: 400 },
+    { src: '/fonts/Lora-Bold.ttf?v=2',       fontWeight: 700 },
+    { src: '/fonts/Lora-Italic.ttf?v=2',     fontWeight: 400, fontStyle: 'italic' },
+    { src: '/fonts/Lora-BoldItalic.ttf?v=2', fontWeight: 700, fontStyle: 'italic' },
+  ],
+});
+
+Font.register({
+  family: 'Nunito',
+  // ?v=2 cache-busts the pre-strip copy, same as Lora above. Nunito *also*
+  // shipped with the `liga` GSUB feature and broken fi/fl/ff glyphs, so every
+  // Nunito label/header/tag/caption in the PDF formed the tofu-after-"f"
+  // artifact — even after Lora was stripped. These files were re-cut to drop
+  // the ligature features (glyphs preserved 1:1). Bump on any Nunito re-cut.
+  fonts: [
+    { src: '/fonts/Nunito-Regular.ttf?v=2',   fontWeight: 400 },
+    { src: '/fonts/Nunito-Bold.ttf?v=2',      fontWeight: 700 },
+    { src: '/fonts/Nunito-ExtraBold.ttf?v=2', fontWeight: 800 },
+    { src: '/fonts/Nunito-Italic.ttf?v=2',    fontWeight: 400, fontStyle: 'italic' },
+  ],
+});
+
+// Disable hyphenation — looks bad in narrative prose and breaks names like
+// "Becanahau" mid-line.
+Font.registerHyphenationCallback(word => [word]);
+
+// ── Type scale ───────────────────────────────────────────────────────────────
+// Print-tuned. Body 10pt, labels 8.5pt, page heads 28pt, cover title 56pt.
+export const type = {
+  cover_title: { fontFamily: 'Lora', fontSize: 56, fontWeight: 700, lineHeight: 1.1, color: palette.ink },
+  cover_meta:  { fontFamily: 'Nunito', fontSize: 11, color: palette.muted, letterSpacing: 0.3 },
+
+  page_head:   { fontFamily: 'Lora', fontSize: 28, fontWeight: 700, color: palette.ink, lineHeight: 1.2 },
+  section:     { fontFamily: 'Lora', fontSize: 18, fontWeight: 700, color: palette.ink, lineHeight: 1.25 },
+  sub:         { fontFamily: 'Nunito', fontSize: 12, fontWeight: 800, color: palette.gold, textTransform: 'uppercase', letterSpacing: 0.3 },
+  sub_alt:     { fontFamily: 'Nunito', fontSize: 11, fontWeight: 800, color: palette.muted, textTransform: 'uppercase', letterSpacing: 0.3 },
+
+  body:        { fontFamily: 'Lora', fontSize: 10, color: palette.second, lineHeight: 1.45 },
+  body_em:     { fontFamily: 'Lora', fontSize: 10, color: palette.ink, fontWeight: 700, lineHeight: 1.45 },
+  prose:       { fontFamily: 'Lora', fontSize: 10.5, color: palette.second, lineHeight: 1.55 },
+  italic:      { fontFamily: 'Lora', fontSize: 10, color: palette.second, fontStyle: 'italic', lineHeight: 1.5 },
+
+  label:       { fontFamily: 'Nunito', fontSize: 8.5, color: palette.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.2 },
+  label_em:    { fontFamily: 'Nunito', fontSize: 9.5, color: palette.ink, fontWeight: 800 },
+
+  caption:     { fontFamily: 'Nunito', fontSize: 8, color: palette.muted, lineHeight: 1.35 },
+  pill:        { fontFamily: 'Nunito', fontSize: 8.5, fontWeight: 700, letterSpacing: 0.2 },
+
+  numeric_xl:  { fontFamily: 'Lora', fontSize: 28, fontWeight: 700, color: palette.ink, lineHeight: 1 },
+  numeric:     { fontFamily: 'Lora', fontSize: 16, fontWeight: 700, color: palette.ink },
+};
+
+// ── Raw point-size tokens ──────────────────────────────────────────────────────
+// The `type` scale above bundles size + family + weight + color for whole text
+// roles. But the dense chapter layouts frequently override just the size on top
+// of a spread role (e.g. `{ ...type.italic, fontSize: pt['10.5'] }`). These
+// point-valued constants give every such raw inline size a token to route
+// through — keyed by the exact size so the migration off raw literals is
+// byte-identical (zero visual change). With these in place the no-raw-fontsize
+// lint rule can go to error across the PDF subsystem too. Values are PDF points.
+export const pt = {
+  '6.5': 6.5, '7': 7, '7.5': 7.5, '8': 8, '8.5': 8.5, '9': 9, '9.5': 9.5,
+  '10': 10, '10.5': 10.5, '11': 11, '12': 12, '13': 13, '14': 14, '16': 16,
+  '22': 22, '50': 50,
+};
+
+// ── Spacing scale ────────────────────────────────────────────────────────────
+export const space = {
+  xxs: 2,
+  xs:  4,
+  sm:  6,
+  md:  10,
+  lg:  16,
+  xl:  24,
+  xxl: 36,
+  section: 28,
+};
+
+// ── Page geometry ────────────────────────────────────────────────────────────
+// A4: 595.28 × 841.89 pt. Letter: 612 × 792 pt. Both portrait.
+export const page = {
+  A4:     { size: 'A4',     marginTop: 51, marginBottom: 62, marginH: 45 },  // ~18mm/22mm/16mm
+  letter: { size: 'LETTER', marginTop: 51, marginBottom: 62, marginH: 48 },
+};
+
+// ── Shared StyleSheets ───────────────────────────────────────────────────────
+export const sheet = StyleSheet.create({
+  page: {
+    backgroundColor: palette.card,
+    paddingTop: page.A4.marginTop,
+    paddingBottom: page.A4.marginBottom,
+    paddingLeft: page.A4.marginH,
+    paddingRight: page.A4.marginH,
+    fontFamily: 'Lora',
+    fontSize: 10,
+    color: palette.second,
+  },
+  // Cover page — full bleed, no header/footer
+  coverPage: {
+    backgroundColor: palette.card,
+    padding: 0,
+  },
+  row:        { flexDirection: 'row' },
+  col:        { flexDirection: 'column' },
+  fill:       { flex: 1 },
+  rule:       { height: 0.6, backgroundColor: palette.border, marginVertical: space.md },
+  ruleAccent: { height: 1, backgroundColor: palette.gold, marginVertical: space.sm },
+});
+
+// ── Convenience helpers ──────────────────────────────────────────────────────
+export const tone = (k) => ({ color: palette[k] || palette.second });
+
+// Slightly translucent background for a tone (used on Pill, Stat tiles).
+// @react-pdf doesn't accept rgba in some contexts; use hex8 for safety.
+export const toneBg = {
+  good:  '#e8f5e8',
+  warn:  '#fdf6e8',
+  bad:   '#fde8e8',
+  cool:  '#f0f4ff',
+  ai:    '#f4ecf8',
+  gold:  palette.goldBg,
+  muted: '#f5f0e8',
+};
+
+// ── Exact-value migration swatchbook (colour burn-down) ──────────────────────
+// A handful of raw inline hex colours in the PDF sections had no palette token.
+// Routed through this map at their exact value (zero rendered change) so the
+// no-raw-color rule can go to error. value === the hex it replaces. Consolidate
+// onto `palette` in a later reviewed pass.
+export const swatch = Object.freeze({
+  '#E7D7B8': '#e7d7b8',
+  '#F0E8D8': '#f0e8d8',
+  '#F5F0FF': '#f5f0ff',
+  '#F8F4FD': '#f8f4fd',
+  '#FAF3E8': '#faf3e8',
+  '#FBF5E6': '#fbf5e6',
+});

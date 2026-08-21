@@ -1,0 +1,360 @@
+/**
+ * campaignSync.js — merge and sync policy for campaign persistence.
+ *
+ * The store owns UI state; this module owns the dull but important rule:
+ * local cache and cloud rows are peers for campaign content, and loading
+ * cloud data must never erase a local-only campaign that has not been
+ * uploaded yet. Server-owned access and retention fields are authoritative.
+ */
+
+function parseTime(value) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (!value) return 0;
+  const ms = Date.parse(value);
+  return Number.isFinite(ms) ? ms : 0;
+}
+
+export function campaignUpdatedAtMs(campaign) {
+  if (!campaign || typeof campaign !== 'object') return 0;
+  return Math.max(
+    parseTime(campaign.updatedAt),
+    parseTime(campaign.mapState?.savedAt),
+    parseTime(campaign.savedAt),
+    parseTime(campaign.createdAt),
+  );
+}
+
+function cloneJson(value) {
+  if (value === undefined || value === null) return value;
+  return JSON.parse(JSON.stringify(value));
+}
+
+// fmgSnapshot (the FMG map export persisted on mapState) is by far the heaviest
+// field on a campaign — routinely ~1MB. The old signature JSON.stringified the
+// whole campaign, so every dirty-check re-serialized that blob. We instead
+// fingerprint it ONCE per mapState object identity (WeakMap cache) and stringify
+// the rest without it. Store updates are immutable (a content change yields a
+// NEW mapState object), so a cache hit always implies unchanged snapshot bytes.
+const snapshotFingerprintCache = new WeakMap();
+
+// FNV-1a 32-bit + length. Fast, dependency-free, single pass; collisions are
+// astronomically unlikely for change detection (a real snapshot swap flips
+// thousands of bytes, and the length prefix guards the trivial cases).
+function hashText(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return `${text.length}:${(h >>> 0).toString(36)}`;
+}
+
+function fingerprintMapSnapshot(mapState) {
+  if (!mapState || typeof mapState !== 'object') return 'none';
+  const cached = snapshotFingerprintCache.get(mapState);
+  if (cached !== undefined) return cached;
+  const snapshot = mapState.fmgSnapshot;
+  const fp = snapshot == null
+    ? 'null'
+    : hashText(typeof snapshot === 'string' ? snapshot : JSON.stringify(snapshot));
+  snapshotFingerprintCache.set(mapState, fp);
+  return fp;
+}
+
+export function campaignSignature(campaign) {
+  if (!campaign || typeof campaign !== 'object') return JSON.stringify(campaign ?? null);
+  // `pendingSync` is local-only sync bookkeeping (never-synced marker). It must
+  // not feed the signature, or merge's clearing of it (pendingSync:false on a
+  // remote-confirmed campaign) would look like a content change and re-upload
+  // every cloud campaign on every load.
+  const { pendingSync: _pendingSync, mapState, ...rest } = campaign;
+  const snapFp = fingerprintMapSnapshot(mapState);
+  // Rebuild mapState WITHOUT the heavy fmgSnapshot (captured by snapFp) so
+  // JSON.stringify never touches the blob. Copy sibling keys by name so we don't
+  // even read fmgSnapshot here — the WeakMap-cached fingerprint is its sole read.
+  let mapStateLite = mapState;
+  if (mapState && typeof mapState === 'object') {
+    mapStateLite = {};
+    for (const key of Object.keys(mapState)) {
+      if (key !== 'fmgSnapshot') mapStateLite[key] = mapState[key];
+    }
+  }
+  try {
+    return JSON.stringify({ ...rest, mapState: mapStateLite, __snapFp: snapFp });
+  } catch {
+    return JSON.stringify({
+      id: campaign?.id,
+      name: campaign?.name,
+      updatedAt: campaign?.updatedAt,
+      mapSavedAt: mapState?.savedAt,
+      __snapFp: snapFp,
+    });
+  }
+}
+
+const TOMBSTONE_TTL_MS = 1000 * 60 * 60 * 24 * 90; // 90 days
+
+function normalizeTombstones(tombstones) {
+  const map = new Map();
+  if (!tombstones) return map;
+  const entries = tombstones instanceof Map
+    ? Array.from(tombstones, ([id, deletedAt]) => ({ id, deletedAt }))
+    : (Array.isArray(tombstones) ? tombstones : []);
+  for (const entry of entries) {
+    if (!entry || entry.id == null) continue;
+    map.set(String(entry.id), parseTime(entry.deletedAt));
+  }
+  return map;
+}
+
+/**
+ * Drop deletion tombstones that have done their job so the per-owner list stays
+ * bounded. A tombstone is retained while the cloud still lists the id (the
+ * delete has not propagated yet — keep suppressing) or while it is recent; once
+ * the id is gone from a successful remote load and the entry has aged past the
+ * grace window, the stale local copy is already pruned by mergeCampaignLists and
+ * the `pendingSync:false` marker is the durable backstop, so the tombstone can go.
+ */
+export function reconcileTombstones(tombstones = [], remoteCampaigns = [], { now = Date.now() } = {}) {
+  const remoteIds = new Set(
+    (remoteCampaigns || []).filter(campaign => campaign?.id).map(campaign => String(campaign.id)),
+  );
+  return (tombstones || []).filter(entry => {
+    if (!entry || entry.id == null) return false;
+    if (remoteIds.has(String(entry.id))) return true;
+    return (now - parseTime(entry.deletedAt)) < TOMBSTONE_TTL_MS;
+  });
+}
+
+/**
+ * Merge a device's local cache with the cloud list under the deletion-aware
+ * policy. Two mechanisms break the deletion-resurrection cycle:
+ *
+ *   1. Tombstones (per-owner, options.tombstones) — a campaign this device
+ *      deleted is suppressed even if a stale cache copy or an in-flight list()
+ *      still carries it, unless the cloud holds a copy updated AFTER the
+ *      deletion (a genuine re-creation that outranks the tombstone).
+ *   2. The never-synced marker (`pendingSync`) — a local campaign absent from a
+ *      successful remote load is kept ONLY while it has never reached the cloud
+ *      (pendingSync !== false). A campaign that previously synced and is now
+ *      missing from remote was deleted on another device, so it is dropped
+ *      rather than kept-and-re-uploaded. Remote-confirmed campaigns are stamped
+ *      pendingSync:false here so that fact survives into the next load.
+ */
+export function mergeCampaignLists(localCampaigns = [], remoteCampaigns = [], { tombstones } = /** @type {{ tombstones?: Array<{id: any, deletedAt?: any}>|Map<any, any> }} */ ({})) {
+  const byId = new Map();
+  const tombstoneMap = normalizeTombstones(tombstones);
+  const remoteById = new Map(
+    (remoteCampaigns || [])
+      .filter(campaign => campaign?.id)
+      .map(campaign => [String(campaign.id), campaign]),
+  );
+  const remoteAccess = new Map(
+    (remoteCampaigns || [])
+      .filter(campaign => campaign?.id)
+      .map(campaign => [String(campaign.id), {
+        accessState: campaign.accessState || 'active',
+        inactiveReason: campaign.inactiveReason || null,
+        inactiveSince: campaign.inactiveSince || null,
+        retentionExpiresAt: campaign.retentionExpiresAt || null,
+      }]),
+  );
+
+  const tombstoneSuppresses = (id) => {
+    const deletedAt = tombstoneMap.get(id);
+    if (deletedAt == null) return false;
+    const remoteCopy = remoteById.get(id);
+    // A remote copy updated after the deletion is a real re-creation — honor it.
+    return !(remoteCopy && campaignUpdatedAtMs(remoteCopy) > deletedAt);
+  };
+
+  const add = (campaign, sourceRank) => {
+    if (!campaign?.id) return;
+    const id = String(campaign.id);
+    if (tombstoneSuppresses(id)) return;
+    const existing = byId.get(id);
+    if (!existing) {
+      byId.set(id, { campaign: cloneJson(campaign), sourceRank });
+      return;
+    }
+
+    const incomingTime = campaignUpdatedAtMs(campaign);
+    const existingTime = campaignUpdatedAtMs(existing.campaign);
+    if (
+      incomingTime > existingTime ||
+      (incomingTime === existingTime && sourceRank > existing.sourceRank)
+    ) {
+      byId.set(id, { campaign: cloneJson(campaign), sourceRank });
+    }
+  };
+
+  for (const campaign of localCampaigns || []) add(campaign, 1);
+  for (const campaign of remoteCampaigns || []) add(campaign, 2);
+
+  return Array.from(byId.values())
+    .filter(entry => {
+      const id = String(entry.campaign.id);
+      if (remoteById.has(id)) return true;
+      // Local-only campaign: keep it unless we positively know it once synced
+      // (pendingSync === false). Dropping a previously-synced, now-absent
+      // campaign here is what stops the deletion-resurrection cycle.
+      return entry.campaign.pendingSync !== false;
+    })
+    .map(entry => {
+      const campaign = entry.campaign;
+      const id = String(campaign.id);
+      const authoritativeAccess = remoteAccess.get(id);
+      if (remoteById.has(id)) {
+        // Confirmed in the cloud — record that so a later remote deletion is
+        // honored instead of resurrected, and let server-owned access win.
+        const confirmed = { ...campaign, pendingSync: false };
+        return authoritativeAccess ? { ...confirmed, ...authoritativeAccess } : confirmed;
+      }
+      return campaign;
+    })
+    .sort((a, b) => {
+      const delta = campaignUpdatedAtMs(b) - campaignUpdatedAtMs(a);
+      if (delta) return delta;
+      return String(a.name || '').localeCompare(String(b.name || ''));
+    });
+}
+
+// Dirty-check state is scoped to the auth/cache session that produced it.
+// Otherwise a late A completion can mark a same-id B campaign as synced.
+const lastSyncedSignaturesBySession = new Map();
+
+function campaignSyncSessionKey(ownerId = 'anon', sessionGeneration = 0) {
+  return `${String(ownerId || 'anon')}\u0000${Number(sessionGeneration) || 0}`;
+}
+
+function campaignSyncSignatures(ownerId = 'anon', sessionGeneration = 0, create = true) {
+  const key = campaignSyncSessionKey(ownerId, sessionGeneration);
+  let signatures = lastSyncedSignaturesBySession.get(key);
+  if (!signatures && create) {
+    signatures = new Map();
+    lastSyncedSignaturesBySession.set(key, signatures);
+  }
+  return signatures;
+}
+
+export function primeCampaignSync(campaigns = [], ownerId = 'anon', sessionGeneration = 0) {
+  const signatures = new Map();
+  for (const campaign of campaigns || []) {
+    if (!campaign?.id) continue;
+    signatures.set(String(campaign.id), campaignSignature(campaign));
+  }
+  lastSyncedSignaturesBySession.set(
+    campaignSyncSessionKey(ownerId, sessionGeneration),
+    signatures,
+  );
+}
+
+export function clearCampaignSync(ownerId = null, sessionGeneration = null) {
+  if (ownerId == null) {
+    lastSyncedSignaturesBySession.clear();
+    return;
+  }
+  if (sessionGeneration != null) {
+    lastSyncedSignaturesBySession.delete(campaignSyncSessionKey(ownerId, sessionGeneration));
+    return;
+  }
+  const ownerPrefix = `${String(ownerId || 'anon')}\u0000`;
+  for (const key of lastSyncedSignaturesBySession.keys()) {
+    if (key.startsWith(ownerPrefix)) lastSyncedSignaturesBySession.delete(key);
+  }
+}
+
+export function forgetCampaignSync(id, ownerId = 'anon', sessionGeneration = 0) {
+  if (id == null) return;
+  campaignSyncSignatures(ownerId, sessionGeneration, false)?.delete(String(id));
+}
+
+function changedIdSet(changedId) {
+  if (changedId == null) return null;
+  const ids = Array.isArray(changedId) ? changedId : [changedId];
+  return new Set(ids.filter(id => id != null).map(id => String(id)));
+}
+
+/**
+ * @typedef {{
+ *   service?: any,
+ *   changedId?: string|string[]|null,
+ *   ownerId?: string|null,
+ *   sessionGeneration?: number,
+ *   isSessionCurrent?: (() => boolean)|null,
+ * }} CampaignSyncOptions
+ */
+
+export function getCampaignsNeedingSync(
+  campaigns = [],
+  changedId = null,
+  ownerId = 'anon',
+  sessionGeneration = 0,
+) {
+  const ids = changedIdSet(changedId);
+  const signatures = campaignSyncSignatures(ownerId, sessionGeneration);
+  return (campaigns || []).filter(campaign => {
+    if (!campaign?.id) return false;
+    if ((campaign.accessState || 'active') !== 'active') return false;
+    const id = String(campaign.id);
+    if (ids && !ids.has(id)) return false;
+    return signatures.get(id) !== campaignSignature(campaign);
+  });
+}
+
+function buildAuthSessionChangedError() {
+  return Object.assign(
+    new Error('Campaign auth session changed while persistence was pending.'),
+    { code: 'auth_session_changed' },
+  );
+}
+
+/**
+ * Persist only campaigns whose current signature differs from the signature
+ * confirmed for this owner/session generation.
+ *
+ * The session predicate is checked on both sides of each await. That symmetry is
+ * deliberate: checking only before the request protects who starts the write,
+ * but cannot stop a late completion from certifying the next session's cache.
+ *
+ * @param {any[]} campaigns
+ * @param {CampaignSyncOptions} options
+ * @returns {Promise<any[]>}
+ */
+export async function syncCampaignChanges(
+  campaigns = [],
+  {
+    service,
+    changedId = null,
+    ownerId = 'anon',
+    sessionGeneration = 0,
+    isSessionCurrent = null,
+  } = {},
+) {
+  if (!service?.isConfigured || typeof service.upsert !== 'function') return [];
+  const changed = getCampaignsNeedingSync(campaigns, changedId, ownerId, sessionGeneration);
+  if (!changed.length) return [];
+
+  const results = await Promise.allSettled(changed.map(async campaign => {
+    if (isSessionCurrent && !isSessionCurrent()) {
+      throw buildAuthSessionChangedError();
+    }
+    if (isSessionCurrent) {
+      await service.upsert(campaign, ownerId, isSessionCurrent);
+    } else {
+      await service.upsert(campaign, ownerId);
+    }
+    if (isSessionCurrent && !isSessionCurrent()) {
+      throw buildAuthSessionChangedError();
+    }
+    campaignSyncSignatures(ownerId, sessionGeneration).set(
+      String(campaign.id),
+      campaignSignature(campaign),
+    );
+    return campaign.id;
+  }));
+
+  const failed = results.find(result => result.status === 'rejected');
+  if (failed) throw failed.reason;
+  return results.map(result => /** @type {PromiseFulfilledResult<any>} */ (result).value);
+}

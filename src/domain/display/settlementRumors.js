@@ -1,0 +1,881 @@
+/**
+ * domain/display/settlementRumors.js — the RUMORS & NEWS read-model (Phase 5.5
+ * STEP 3.5), the DM-vs-player information asymmetry made a pure selector.
+ *
+ * Follows the mobilizationStatus.js `includeCovert` convention (design PART IV
+ * §IV.2): ONE stored record (worldState.rumorLedgers, spatial/rumorNetwork.js),
+ * one pure selector that decides how much of it a viewer may see.
+ *
+ *   • PLAYER projection (includeGroundTruth: false, THE DEFAULT — fail closed):
+ *     a WHITELISTED field set, value-scrubbed (PART III §III.2-4, binding).
+ *     Every field the player sees is ENUMERATED in projectPlayerRumor below —
+ *     nothing is spread off the record. causeClass and any covert marker are
+ *     DROPPED; fidelity internals (completeness01/accuracy01), provenance,
+ *     lineage, and corroboration roots NEVER appear; a deity name appears ONLY
+ *     when it resolves into the caller-supplied set of ACTIVATED public deity
+ *     snapshots (config.primaryDeitySnapshot / cultDeitySnapshots names — the
+ *     FaithSection seam; absent set ⇒ scrubbed). What remains is FICTION: a
+ *     rendered headline/detail built from the degraded structured fields, plus
+ *     in-world bands (freshness, distance, confidence) a settlement would
+ *     genuinely know about its own rumor mill.
+ *
+ *   • DM projection (includeGroundTruth: true — premium/DM surfaces only): the
+ *     SAME player projection plus a `truth` block — the canonical event ref,
+ *     fidelity vector, provenance chain, lineage, independence count, the raw
+ *     (unscrubbed) structured fields, and a DIVERGENCE summary against the
+ *     campaign's wizard-news ground truth when the feed is provided. The DM
+ *     runs the table on the players' partial picture while knowing precisely
+ *     where it is wrong.
+ *
+ * IN-TRANSIT records (arrivalTick > tick) are invisible to BOTH projections —
+ * word that has not arrived is not known here (the DM reads ground truth in
+ * the Wizard News feed itself, dated at origin).
+ *
+ * PRESENTATION ONLY. Pure; no store, no rng, no wall clock; INERT-NOT-CRASH on
+ * absent/garbage ledgers; every list codepoint-sorted or total-ordered.
+ * Strict-clean; zero any-casts.
+ */
+
+import { compareCodepoint } from '../deterministicSort.js';
+import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
+import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
+import { embattlementLevel } from '../spatial/embattlement.js';
+import { FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
+import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
+
+/** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
+
+/** @param {unknown} v @param {number} fallback @returns {number} */
+function finiteNumber(v, fallback) {
+  return typeof v === 'number' && Number.isFinite(v) ? v : fallback;
+}
+
+/** @param {unknown} v @returns {number} */
+function clamp01(v) {
+  const n = finiteNumber(v, 0);
+  return Math.max(0, Math.min(1, n));
+}
+
+/** FNV-1a 32-bit — the pure frame-selection hash (no rng, no wall clock). A LOCAL
+ *  copy of the 8-line helper (the newsVoice.js precedent — a display sidecar keeps
+ *  its own copy rather than importing a sibling's content tables). @param {string} str */
+function fnv1a32(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
+/**
+ * THE AVALANCHE FINALIZER (murmur3's fmix32) — and why the phrase fold has one.
+ *
+ * FNV-1a's LOW BIT is not a hash, it is a parity: bit 0 of the digest is the XOR of bit 0
+ * of every input character (the prime is odd, so the multiply cannot carry into it). Any
+ * seed family whose VARYING token appears an even number of times therefore holds bit 0
+ * CONSTANT — and `% poolLength` on a power-of-two pool reads exactly those low bits, so
+ * half the pool becomes unreachable. Measured, not theorised: over the family
+ * `wizard_news.${i}.applied.evt${i}` (the index twice, so its parity cancels), a
+ * `% 8` selection reached residues {1,3,5,7} ONLY — four of eight variants dead. The
+ * same family reached all eight with this finalizer applied, at shares 0.105-0.142.
+ *
+ * This is the stride-aliasing class the FP work already knows: a selector that looks
+ * uniform on the seeds you happened to try, and is half-dead on the ones you did not.
+ *
+ * ⚠️ DELIBERATELY NOT APPLIED TO `frameHeadline`. Its fold is the same shape and carries
+ * the same exposure (measured: the degenerate family reaches only 2 of its 4 frames), but
+ * changing it moves the headline FRAMES on every existing seed — a second disclosed prose
+ * shift, on a surface this slice was not asked to touch. Recorded for the chair rather
+ * than ridden in silently.
+ * @param {number} h
+ */
+function avalanche32(h) {
+  let x = h >>> 0;
+  x ^= x >>> 16;
+  x = Math.imul(x, 0x85ebca6b);
+  x ^= x >>> 13;
+  x = Math.imul(x, 0xc2b2ae35);
+  x ^= x >>> 16;
+  return x >>> 0;
+}
+
+// ── The what-token → in-world PHRASE vocabulary (content-immersion-1) ─────────
+// The rumor's SUBJECT is captured from a wizardNews entry's impactKind (which is
+// itself an engine candidateType/kind token — 'strategy_deploy', 'plague_arrival',
+// 'stressor_birth_religious_pact_betrayal', …). Rendering that token raw into a
+// player headline ("Merchants bring word of strategy deploy in Thornwall") leaks
+// engine vocabulary onto the flagship fiction surface. This map turns every
+// known token into a noun phrase a townsperson would actually say — usable both
+// capitalized-first ("Soldiers marching to war in X") and after "word of …".
+// Any UNKNOWN token falls to whatPhrase()'s neutral fallback, never the raw token.
+// Pure display; byte-inert to the engine (goldens never import this).
+// Exported for the impactKind walker (tests/domain/settlementRumors.walker.test.js),
+// which source-scans every minted impactKind and reds until it is phrased here.
+/** @type {Readonly<Record<string, string>>} */
+export const WHAT_PHRASES = Object.freeze({
+  // war / conflict candidate types
+  roads: 'travellers upon the roads',
+  strategy_deploy: 'soldiers marching to war',
+  war_mobilization: 'a call to arms',
+  war_conscription: 'a levy of men called up',
+  war_levy: 'a war-levy',
+  war_spoils: 'the spoils of war',
+  army_homecoming: 'soldiers returning home',
+  siege_lifted: 'a siege lifted',
+  treaty_breached: 'an oath between realms broken',
+  conquest: 'a conquest',
+  field_battle: 'a battle in the field',
+  conflict_pressure: 'the drums of war',
+  protection_gap: 'defences grown thin',
+  // WR-2 DISPOSITION — four learned tempers, their reversal, and the temple
+  // pressure/suppression receipts. The suppression row is dm-only in the feed,
+  // but remains explicitly phrased so a privileged projection never falls back
+  // to a de-underscored engine token.
+  disposition_martial_crossed: 'a martial temper taking hold',
+  disposition_mercantile_crossed: 'a mercantile temper taking hold',
+  disposition_diplomatic_crossed: 'a taste for parley taking hold',
+  disposition_insular_crossed: 'a town turning inward',
+  disposition_reversal: 'a town changing its temper',
+  deity_war_pressure: 'a warlike teaching at the temple',
+  deity_peace_pressure: 'the harvest rites counselling peace',
+  war_culture_suppressed: 'a warlike reading contradicted by the books',
+  // WR-3 LINEAGE CLAIM — all five governed reader kinds are phrased even while
+  // their virtual engine flag remains dark. The private suppression kind still
+  // needs an authored phrase for DM projections and future replay tooling.
+  lineage_edge_recorded: 'a daughter settlement entered in the books',
+  casus_lineage_claim_parent: 'a parent house pressing its founding claim',
+  casus_lineage_claim_child: 'a daughter settlement claiming the elder seat',
+  mirror_kinship_bond: 'kinship holding two settlements from war',
+  lineage_claim_suppressed: 'a lineage claim refused by its own wagon books',
+  // WR-4 COMPARATIVE COSTS + THE HOME FRONT — reader words for all nine
+  // governed kinds, including the private misread visible only to a DM view.
+  war_trajectory_winning: 'a court believing the war is turning its way',
+  war_trajectory_losing: 'a court believing the war is going against it',
+  home_front_roads: 'the roads going to ruts during war',
+  home_front_stores: 'the granaries running lean during war',
+  home_front_hands: 'the muster emptying fields and workshops',
+  home_front_institutions: 'the courts and temples thinning under war',
+  home_front_markets: 'a wartime market closing',
+  winning_abroad_losing_at_home: 'victory abroad and hardship at home',
+  trajectory_misread: 'a court misreading the course of war',
+  // WR-5 THE TWO BOOKS + THE POLITICAL LOOP. The covert patron-books receipt
+  // remains phrased for a privileged projection, but player projection still
+  // removes the record before this vocabulary is consulted.
+  sued_for_peace_seat: 'a ruler suing for peace',
+  sued_for_peace_realm: 'a realm suing for peace',
+  war_continued_for_the_seat: 'a war continued to secure the seat',
+  war_ended_against_rival_triumph: 'a victory declined to deny a rival',
+  peace_refused: 'an offer of peace refused',
+  refusal_cost_legitimacy: 'a ruler paying for a refused peace',
+  refusal_cost_ally_patience: 'an ally tiring of a refused peace',
+  ruler_books_compromised: 'a ruler serving a hidden patron',
+  war_party_overturns_peacemaker: 'a war party overturning a peacemaker',
+  peace_party_overturns_warmonger: 'a peace party overturning a warmonger',
+  succession_demand_inherited: 'a war demand following a successor into office',
+  successor_repudiates_war: 'a successor repudiating a war',
+  successor_escalates_war: 'a successor widening a war',
+  war_dissolved_by_verdict: 'a verdict dissolving a war',
+  // WR-6 THE COALITION GRAPH. All twelve kinds remain phrased even when the
+  // virtual engine flag is dark, so privileged replay and future rumor
+  // propagation can never fall back to de-underscored engine vocabulary.
+  coalition_entry_priced: 'an allied court pricing a call to war',
+  coalition_joined: 'an ally answering a call to war',
+  coalition_refused: 'an ally refusing a call to war',
+  casus_alliance_obligation: 'an alliance compact named as cause for war',
+  mirror_obligation_discharged: 'an alliance obligation discharged',
+  coalition_expenditure_read: 'an allied court reckoning its wartime cost',
+  coalition_stayed: 'an ally choosing to stay in the field',
+  coalition_separate_peace: 'an ally making a separate peace',
+  coalition_apportionment: 'a coalition settlement apportioned',
+  coalition_spoils_divided: 'coalition spoils divided',
+  coalition_debt_paid: 'a coalition debt paid',
+  coalition_debt_unpaid: 'a coalition debt left unpaid',
+  // WR-7a THE ERRAND — physical peace messages and the court's false reading of
+  // silence. Every public projection gets world words rather than an envoy slug.
+  envoy_departed: 'a legate leaving with an offer',
+  envoy_on_the_road: 'a legate between courts',
+  envoy_returning: 'a legate carrying terms home',
+  envoy_home: 'a legate returning to council',
+  envoy_lost: 'a legate missing on the road',
+  envoy_silence_inference: 'a court fearing for its missing legate',
+  terms_never_reached: 'terms stranded upon the road',
+  // WR-7b facts remain DM truth at their immediate source. These phrases are
+  // closed world-language fallbacks for a later earned observation carrier;
+  // their presence here grants no public audience by itself.
+  envoy_intercepted: 'a legate stopped by a marching column',
+  envoy_parlaying: 'a legate seated at parley',
+  envoy_terms_agreed: 'terms agreed away from home',
+  envoy_held: 'a foreign legate held as a guest',
+  terms_signed_for_a_fallen_town: 'terms naming a town already fallen',
+  parlay_at_an_occupied_venue: 'a parley held under an occupying garrison',
+  interceptor_dilemma: 'a column choosing between terms and the field',
+  interceptor_parlays_own_edge: 'an ally opening peace on its own edge',
+  parlay_terms_neither_court_drafted: 'field terms neither court drafted',
+  // WR-10 THE SOVEREIGNTY MARKET — all fifteen governed reader kinds are phrased even
+  // while the virtual engine flag is dark, so a privileged projection or a later replay
+  // can never fall back to a de-underscored engine token ('sovereignty sale cleared').
+  // The covert books row is phrased for the same reason its WR-5 twin is: a DM view
+  // still needs world words, and phrasing grants no public audience by itself.
+  sovereignty_sale_offered: 'a settlement put up for sale',
+  sovereignty_sale_cleared: 'a settlement sold between courts',
+  sovereignty_no_trade: 'a sale that found no price',
+  sovereignty_swap: 'two courts exchanging settlements',
+  cession_for_peace: 'a town given up to end a war',
+  sovereignty_edge_rewritten: 'a town waking to a new overlord',
+  sold_settlement_grievance: 'a town that has learned it was sold',
+  bought_seat_fragility: 'a bought seat held thinly',
+  lineage_survives_the_sale: 'a founder still named in a sold town',
+  wartime_firesale: 'a town sold cheap in the middle of a war',
+  sovereignty_sale_judged: 'a sale weighed by the temples',
+  kinship_opposes_the_sale: 'a founding bond refusing a sale',
+  sale_books_diverged: 'a seat sold to save itself',
+  overflow_valve_sold: 'a steading sold that the crowding needed',
+  streams_rerouted: 'tribute wagons turning to a new hall',
+  // TR-1 THE CASUS COMMERCII — the sixteen taxonomy types, the dm-only suppression
+  // receipt and the two band crossings. Phrased world-side while the virtual flag is
+  // dark, for the same reason the WR-10 cohort above is: a privileged projection or a
+  // later replay must never fall back to a de-underscored engine token, and 'commercial
+  // famine profiteering' is not something a townsperson says. Each phrase is a NOUN
+  // PHRASE so it reads both capitalized-first and after 'word of …'.
+  commercial_contract_default: 'a compact broken by a trading partner',
+  commercial_contract_honored: 'a compact kept season after season',
+  commercial_toll_extortion: 'a gate toll grown into a grievance',
+  commercial_toll_relief: 'a toll eased on a trading road',
+  commercial_market_exclusion: 'a market shut against a neighbour',
+  commercial_market_opened: 'a market opened to a neighbour',
+  commercial_cornering: 'one house holding all of a good',
+  commercial_provision: 'a neighbour who keeps the wagons coming',
+  commercial_famine_profiteering: 'a hungry town charged what it cannot pay',
+  commercial_famine_relief: 'grain sent to a hungry neighbour',
+  commercial_dependency_fear: 'a town frightened of what it must buy',
+  commercial_dependency_comfort: 'a town secure in what it buys',
+  commercial_contraband_injury: 'smuggled goods believed to cross a neighbour gate',
+  commercial_honest_gates: 'a neighbour whose gates are believed honest',
+  commercial_route_predation: 'a road left to the robbers',
+  commercial_route_wardenship: 'a road kept safe by its neighbour',
+  commercial_casus_suppressed: 'a commercial grievance struck out by the stock book',
+  commercial_severance_crossing: 'a trading tie cut',
+  commercial_partnership_crossing: 'two towns binding their markets together',
+  // GR-0 THE LIFECYCLE VOICE — the two moments the pact grammar used to pass over in
+  // silence. Phrased world-side while the virtual flag is dark, for the same reason the
+  // WR-10 cohort above is: a privileged projection or a later replay must never fall
+  // back to a de-underscored engine token ('treaty default detected').
+  treaty_lapsed: 'a pact reaching the end of its own term',
+  treaty_default_detected: 'a court weighing what arrived against what was sworn',
+  treaty_disclosure_opened: 'a court opening its books to the party it signed with',
+  disavowed_by_succession: 'a new seat refusing the oath the old one swore',
+  succession_question_opened: 'a new seat weighing the oath the old one swore',
+  reaffirmed: 'a new seat keeping the oath the old one swore',
+  // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
+  // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
+  // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind
+  // walker never demanded them: it source-scans minted impactKinds, so a kind-only
+  // producer is invisible to it. They became reachable on 2026-07-31, when those
+  // receipts were given the ids the news feed requires; before that they were dropped
+  // and never seeded a rumor. Without these rows whatPhrase falls through to its
+  // de-underscored token and a townsperson says 'webwar campaign minted'.
+  momentum_climb_down: 'a proud course reversed',
+  webwar_campaign_minted: 'a quiet war upon the supply roads',
+  webwar_raid: 'raiders burning the outlying farms',
+  webwar_wrong_village: 'a village put to the torch in error',
+  webwar_campaign_abandoned: 'a slow strangling called off',
+  webwar_campaign_complete: 'a town cut off from all that feeds it',
+  infowar_lie_exposed: 'a court caught in its own lie',
+  infowar_spy_exposed: 'paid eyes found among us',
+  // IN-0a: the week a BOUGHT telling becomes what a court actually reckons. The townsfolk
+  // repeating it do not know it was paid for — the phrase is what they think happened.
+  plant_took: 'a story taking hold that somebody paid to plant',
+  intel_transfer: 'word passing quietly between courts',
+  // power / faction / coup
+  coup_succeeded: 'a seizure of power',
+  coup_suppressed: 'an uprising put down',
+  faction_exhaustion: 'a faction spent and failing',
+  faction_government_challenge: 'a challenge to those in power',
+  faction_rival_power_contest: 'a contest between rival powers',
+  faction_capture: 'a faction seizing control',
+  hierarchy_cascade: 'an upheaval in the ranks',
+  authority_instability: 'a shaken authority',
+  occupation_lifted: 'an occupation ended',
+  occupation_vassalized: 'a town brought to heel',
+  // faith
+  faith_foothold_recruited: 'a new faith taking root',
+  faith_pact_formed: 'a pact sworn between faiths',
+  religious_pressure: 'a stir among the faithful',
+  pantheon_ascendancy: 'a faith ascendant',
+  pantheon_twilight: 'a faith in twilight',
+  moral_reckoning: 'a reckoning',
+  belief_misjudgment: 'a dangerous misjudgement',
+  stressor_birth_religious_conversion_fracture: 'a schism among the faithful',
+  stressor_birth_religious_pact_betrayal: 'a holy pact broken',
+  // trade / economy / resources / flow
+  flow_trade_scarcity: 'goods grown scarce',
+  import_shortage: 'a shortage of goods',
+  export_market_loss: 'lost markets',
+  route_disruption: 'the roads gone bad',
+  tax_revenue_disruption: 'coffers running short',
+  service_disruption: 'services faltering',
+  resource_depletion: 'a source run dry',
+  resource_recovery: 'a source restored',
+  harvest: 'the harvest',
+  hungry_gap: 'the lean season',
+  spring_thaw: 'the spring thaw',
+  // people / migration
+  flow_migration: 'people on the move',
+  migration_pressure: 'people on the move',
+  population_emigration: 'families leaving',
+  // D-1 (deep-couplings): a refugee column on the road (the demographic belief-axis substrate)
+  migration_flight: 'families taking to the road',
+  // institutions
+  institution_build: 'a great work underway',
+  institution_closure: 'a hall shuttered',
+  institution_founding: 'something new founded',
+  // npc arcs
+  npc_goal_culmination: 'a long design come to a head',
+  npc_goal_rebranch: 'a change of ambitions',
+  // sickness / disaster
+  plague_arrival: 'a sickness spreading',
+  calamity: 'a great disaster',
+  // information / crime / residuals / lifecycle
+  information_shock: 'unsettling news',
+  criminal_pressure: 'a rise in lawlessness',
+  stressor_residual: 'lingering troubles',
+  party_stressor_residual: 'lingering troubles',
+  stressor_aftermath: 'the aftermath of troubles',
+  stressor_graduated: 'a trouble deepening',
+  stressor_wind_down: 'troubles easing',
+  cause_lifecycle: 'shifting fortunes',
+  // ── post-A1 merged-wave impactKinds (content-immersion-r2-1/-2) ────────────
+  // Every minted impactKind must be phrased here or the impactKind walker
+  // (settlementRumors.walker.test.js) reds — no more raw de-underscored slugs
+  // ('generosity relief', 'intervention clash') reaching player headlines.
+  // W-UPSWING abundance / downturn
+  boom: 'flush times',
+  bust: 'hard times',
+  reconstruction: 'a town rebuilding',
+  flourishing: 'a golden age',
+  // THE GROWTH LAYER — a leader weathered into a learned trait (owner commission #36)
+  npc_growth: 'a change in a leader\'s temper',
+  // THE URBAN FABRIC LAYER — a settlement's stone turned (owner commission #39)
+  urban_fabric: 'the changing face of a settlement',
+  spatial_consequence: 'where in a settlement the blow fell',
+  // THE LADDER — a shift in a faction's rank order (owner commission, engine lift #3)
+  npc_ladder: 'a change in who holds rank within a faction',
+  // THE CONTESTED GOALS CLASS — two named NPCs reach for the same prize (Deep Couplings D-4)
+  npc_contest: 'a rivalry over the same ambition',
+  npc_support: 'a cause bound to a patron\'s',
+  // THE TRADITIONS — a settlement's festival held or set aside (owner commission, engine lift #4)
+  tradition: 'a festival kept',
+  // D-1c (deep-couplings): a rededicated/reshaped observance (the cultural belief-axis substrate)
+  tradition_change: 'an old rite made over',
+  // W-NAVY sea war
+  blockade_declared: 'a harbour sealed off',
+  blockade_lifted: 'a harbour opened again',
+  sea_battle: 'a battle at sea',
+  // W-CONVERGENCE foreign intervention
+  intervention: 'a foreign hand at work',
+  intervention_clash: 'rival patrons come to blows',
+  // E1 generosity instruments
+  generosity_relief: 'aid sent to the stricken',
+  generosity_refusal: 'aid turned away',
+  generosity_credit_default: 'a debt gone unpaid',
+  generosity_purchase: 'a great purchase made',
+  generosity_refuge: 'refuge given to the displaced',
+  generosity_trade_overture: 'an offer of trade',
+  // peace / realm-composer beats
+  diplomacy: 'envoys at parley',
+  queue_refused: 'a petition denied',
+  realm_verb_refused: 'a decree set aside',
+  // V-22 THE ASSIZE + V-23 THE COMMONS' VOICE (Vision lane V-K)
+  assize_verdict: 'a judgement handed down at the assize',
+  commons_petition: 'a petition raised by the common folk',
+  commons_gathering: 'the commons gathered in the square',
+  commons_riot: 'the streets risen in a riot-band',
+});
+
+// Bare LIFECYCLE/transition kinds — when a rumor's subject falls back to the
+// entry's `kind` (impactKind absent) it would otherwise read as internal
+// vocabulary ("Travellers speak of applied near X"). These map to a neutral,
+// in-world word instead of ever rendering the lifecycle token.
+/** @type {ReadonlySet<string>} */
+const TRANSITION_KINDS = new Set([
+  'queued', 'ready', 'applied', 'resolved', 'ignored', 'expired',
+  'proposal', 'condition', 'stirring', 'update', 'world_pulse',
+]);
+
+// Engine prefixes the neutral fallback strips before de-underscoring an unknown
+// token, so a future candidateType degrades to readable words, never a raw slug.
+const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction_|faith_|war_|institution_|occupation_|coup_|resource_|pantheon_)/;
+
+/**
+ * A what-token → the in-world phrase a settlement would use for the rumor's
+ * subject. Known tokens map explicitly; bare lifecycle kinds neutralize to
+ * 'unrest'; any other unknown token strips its engine prefix and de-underscores
+ * (readable, never a raw slug), falling to 'unrest' if nothing usable remains.
+ *
+ * THE WIDENED POOLS (SP-6's legacy clause, RECEIPT_POOLS_LEGACY.md §3 and §4).
+ * BOTH arms of this function now widen, from two corpora that differ only in where
+ * their variant 1 comes from:
+ *   • THE CANONICAL ARM (§3, 63 kinds) — the kind has a WHAT_PHRASES row, and that
+ *     row is index 0. Variants come from WHAT_PHRASE_POOLS.
+ *   • THE FALLBACK ARM (§4, 107 kinds) — the kind has NO WHAT_PHRASES row, so its
+ *     live phrase is the one this function COMPUTES by stripping and de-underscoring
+ *     the token. That computed string is index 0. Variants come from
+ *     FALLBACK_PHRASE_POOLS. Before this corpus these kinds were not merely
+ *     single-voiced, they were UNVOICED — the reader was shown de-underscored engine
+ *     slugs like 'realm verb force found steading'.
+ * Three properties hold by CONSTRUCTION rather than by inspection:
+ *   • CANONICAL AT ZERO — index 0 is the live string itself, never a transcription of
+ *     it, on both arms. The byte-identity anchor cannot drift from what it anchors.
+ *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that asks
+ *     for a phrase without a telling to key on (walkers, glossary checks, the
+ *     impactKind census) reads exactly what it read before this wiring.
+ *   • AN UNREGISTERED TOKEN IS UNTOUCHED — a token in neither corpus takes the same
+ *     path it always took, seeded or not, so the blast radius is exactly the 170
+ *     pooled kinds.
+ * @param {unknown} value
+ * @param {string} [seed] the telling's stable ref; absent ⇒ the canonical row
+ * @returns {string}
+ */
+export function whatPhrase(value, seed = '') {
+  const key = String(value || '').trim().toLowerCase();
+  if (!key) return 'unrest';
+  const canonical = WHAT_PHRASES[key];
+  if (canonical) return widenedPhrase(key, canonical, WHAT_PHRASE_POOLS[key], seed);
+  if (TRANSITION_KINDS.has(key)) return 'unrest';
+  const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
+  if (!stripped) return 'unrest';
+  return widenedPhrase(key, stripped, FALLBACK_PHRASE_POOLS[key], seed);
+}
+
+/**
+ * Draw from `[canonical, ...variants]` on the telling's stable ref, or return the
+ * canonical line unchanged when there is no seed and no pool. ONE selector serves both
+ * arms deliberately: the hash key is `${seed}::what::${key}` on either side, so the two
+ * corpora cannot drift into different selection behavior, and the §3 draws that shipped
+ * in the earlier slices are bit-identical under this refactor.
+ * @param {string} key the raw what-token, which keys the fold
+ * @param {string} canonical the live string — index 0, always
+ * @param {ReadonlyArray<string>|undefined} variants doc variants 2..N, if any
+ * @param {string} seed
+ * @returns {string}
+ */
+function widenedPhrase(key, canonical, variants, seed) {
+  if (!seed || !variants || variants.length === 0) return canonical;
+  const pool = [canonical, ...variants];
+  return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
+}
+
+// ── The in-world vocabulary (fiction-not-internals) ─────────────────────────
+
+const MAGNITUDE_WORDS = Object.freeze(['a minor stir', 'a notable turn', 'a serious blow', 'a grave calamity']);
+
+/** Magnitude band 0..3 → the phrase the town uses. @param {number} band */
+export function magnitudePhrase(band) {
+  return MAGNITUDE_WORDS[Math.max(0, Math.min(3, Math.round(finiteNumber(band, 0))))];
+}
+
+/** How long ago word arrived → an in-world freshness band. @param {number} ageTicks */
+export function freshnessBand(ageTicks) {
+  const age = Math.max(0, finiteNumber(ageTicks, 0));
+  if (age <= 1) return 'fresh';
+  if (age <= 4) return 'recent';
+  return 'old';
+}
+
+/** Hop count → how far the word travelled, banded. @param {number} hopCount */
+export function distanceBand(hopCount) {
+  const hops = Math.max(0, finiteNumber(hopCount, 0));
+  if (hops === 0) return 'firsthand';
+  if (hops <= 2) return 'nearby word';
+  return 'distant word';
+}
+
+/**
+ * The settlement's OWN assessment of a telling — in-world knowledge (how many
+ * independent tellings agree, how far the word travelled), never the DM's
+ * fidelity numbers. Independence counts INDEPENDENT LINEAGES (PART V §V.3):
+ * firsthand knowledge is certain; two independent tellings corroborate; a
+ * single distant telling stays unverified.
+ * @param {RumorArrivalRecord} record
+ * @returns {'certain' | 'corroborated' | 'credible' | 'unverified'}
+ */
+export function confidenceBand(record) {
+  const hops = finiteNumber(record?.hopCount, 0);
+  const independent = Array.isArray(record?.corroborationRoots) ? record.corroborationRoots.length : 1;
+  if (hops === 0) return 'certain';
+  if (independent >= 2) return 'corroborated';
+  if (hops <= 1) return 'credible';
+  return 'unverified';
+}
+
+// Completeness thresholds — WHICH degraded fields a telling still carries
+// (§4f: completeness decay drops low-salience FIELDS; the packet stores the
+// values, the projection derives visibility). Documented here, read by both
+// projections and their tests.
+export const RUMOR_DETAIL_THRESHOLD = 0.75; // full parties + the cause-shaped hints
+export const RUMOR_OUTLINE_THRESHOLD = 0.5; // magnitude + when survive
+export const RUMOR_VAGUE_THRESHOLD = 0.3;   // below: only "trouble near X"
+
+/** @param {string | null | undefined} id @param {(id: string) => string} nameFor */
+function nameOf(id, nameFor) {
+  return id == null || id === '' ? 'parts unknown' : nameFor(String(id));
+}
+
+// ── The HEADLINE FRAME pools (content-vt-2) ─────────────────────────────────
+// The rumor headline picked ONE fixed frame per completeness band — so a
+// year-long advance's rumor tab cycled "Merchants bring word of …" / "Travellers
+// speak of …" verbatim down the list. Each band is now a small pool of
+// interchangeable frames; the SUBJECT ({what}, an in-world phrase) and PLACE
+// ({where}, a settlement name) ride EVERY frame unchanged — only the connective
+// framing varies (mirror-not-rederive: the rumor's facts never move). Selection
+// is a pure FNV-1a hash of the telling's stable event ref, so the SAME event
+// frames the same way at every settlement that hears it, and two DIFFERENT events
+// in one tab generally read differently. CANONICAL-AT-ZERO: index 0 of every pool
+// is the original frame. Byte-inert — settlementRumors renders fresh into the
+// lazy dossier/PDF/brief chunks and no rumor prose persists (the ledger golden
+// hashes the STRUCTURED records, never these strings).
+//
+// FRAME LAW: every frame carries {where}; the FIRSTHAND/OUTLINE/VAGUE frames also
+// carry {what}; no frame emits an engine token (the walker + the render tests
+// enforce the subject vocabulary). {What} is {what} capitalized.
+/** @type {Readonly<Record<'firsthand'|'outline'|'vague'|'thin', ReadonlyArray<string>>>} */
+export const HEADLINE_FRAMES = Object.freeze({
+  firsthand: Object.freeze([
+    '{What} in {where}',
+    '{What} — and {where} sees it firsthand',
+    '{What}, here in {where}',
+    '{What} in {where}, for all to see',
+  ]),
+  outline: Object.freeze([
+    'Merchants bring word of {what} in {where}',
+    'Down the trade roads comes word of {what} in {where}',
+    'The caravans carry word of {what} in {where}',
+    'Word is brought of {what} in {where}',
+  ]),
+  vague: Object.freeze([
+    'Travellers speak of {what} somewhere near {where}',
+    'Wayfarers mutter of {what} somewhere near {where}',
+    'There is loose talk of {what} off near {where}',
+    'Faint word comes of {what} somewhere near {where}',
+  ]),
+  thin: Object.freeze([
+    'Travellers speak of trouble near {where}',
+    'Wayfarers speak of some trouble off near {where}',
+    'There is vague talk of trouble near {where}',
+    'Faint word of trouble drifts in from near {where}',
+  ]),
+});
+
+/**
+ * Pick a headline frame for a band and fill it. index 0 (the original frame) when
+ * the telling has no stable seed; otherwise a deterministic FNV pick.
+ * @param {'firsthand'|'outline'|'vague'|'thin'} band
+ * @param {string} seed
+ * @param {{ what: string, where: string }} slots
+ * @returns {string}
+ */
+function frameHeadline(band, seed, { what, where }) {
+  const pool = HEADLINE_FRAMES[band];
+  const frame = seed ? pool[fnv1a32(`${seed}::${band}`) % pool.length] : pool[0];
+  return frame
+    .replace('{What}', capitalize(what))
+    .replace('{what}', what)
+    .replace('{where}', where);
+}
+
+/**
+ * The rendered player fiction for one telling. Built ONLY from scrubbed
+ * values: the what-token, the where/party settlement NAMES, the magnitude
+ * band, and (when activated-public) the deity name. Never event prose.
+ * @param {RumorArrivalRecord} record
+ * @param {{ nameFor: (id: string) => string, deityName: string | null, seed?: string }} ctx
+ * @returns {{ headline: string, detail: string }}
+ */
+function renderFiction(record, { nameFor, deityName, seed = '' }) {
+  const completeness = clamp01(record.completeness01);
+  // The SAME stable seed the headline frame rides. One telling therefore draws one
+  // subject phrase at every settlement that hears it, and two different tellings of
+  // the same kind in one tab generally read differently — which is the whole point of
+  // the widened pools. Seedless callers keep the canonical row (see whatPhrase).
+  const what = whatPhrase(record.content?.what, seed);
+  const where = nameOf(record.content?.whereId, nameFor);
+  const firsthand = finiteNumber(record.hopCount, 0) === 0;
+  const band = firsthand ? 'firsthand'
+    : completeness >= RUMOR_OUTLINE_THRESHOLD ? 'outline'
+    : completeness >= RUMOR_VAGUE_THRESHOLD ? 'vague'
+    : 'thin';
+  const headline = frameHeadline(band, seed, { what, where });
+  const parts = [];
+  if (completeness >= RUMOR_OUTLINE_THRESHOLD) {
+    parts.push(`They call it ${magnitudePhrase(record.content?.magnitude ?? 0)}.`);
+  }
+  if (completeness >= RUMOR_DETAIL_THRESHOLD) {
+    const partyNames = (record.content?.partyIds || [])
+      .map((id) => nameOf(id, nameFor))
+      .filter((name, index, all) => all.indexOf(name) === index);
+    if (partyNames.length > 1) parts.push(`The tale names ${partyNames.join(', ')}.`);
+  }
+  if (deityName) {
+    parts.push(`They speak of ${deityName}'s hand in it.`);
+  }
+  if (!firsthand && completeness < RUMOR_VAGUE_THRESHOLD) {
+    parts.push('The tale is thin and much-worn by the road.');
+  }
+  return { headline, detail: parts.join(' ') };
+}
+
+/** @param {string} s */
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
+/**
+ * THE PLAYER WHITELIST (PART III §III.2-4 — the manager reads this function
+ * line-by-line). Every field the player projection carries is enumerated
+ * here; nothing is spread off the stored record. Scrub rules:
+ *   • causeClass — DROPPED unconditionally (covert/DM causality never shows).
+ *   • deityName  — included ONLY when it resolves into `activatedDeityNames`
+ *     (the caller-derived set of ACTIVATED public deity-snapshot names);
+ *     a null/absent set fails CLOSED (scrubbed).
+ *   • completeness01 / accuracy01 / provenance / lineageIds /
+ *     corroborationRoots / score — NEVER projected; the player sees only the
+ *     in-world bands derived from them.
+ *   • subjectIds / whereId — settlement ids only (the packet's name-swap
+ *     mutation pool is the frozen digest's REAL settlement ids), truncated by
+ *     completeness (low-salience fields fall away with the telling).
+ * @param {string} key
+ * @param {RumorArrivalRecord} record
+ * @param {{ tick: number, nameFor: (id: string) => string,
+ *   activatedDeityNames: ReadonlySet<string> | null, newsDelayTicks?: number }} ctx
+ */
+function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks = 0 }) {
+  const completeness = clamp01(record.completeness01);
+  const rawDeity = record.content?.deityName;
+  const deityName = typeof rawDeity === 'string' && rawDeity
+    && activatedDeityNames instanceof Set && activatedDeityNames.has(rawDeity)
+    ? rawDeity
+    : null;
+  const subjectIds = completeness >= RUMOR_DETAIL_THRESHOLD
+    ? [...(record.content?.partyIds || [])].map(String)
+    : completeness >= RUMOR_OUTLINE_THRESHOLD
+      ? (record.content?.partyIds || []).slice(0, 1).map(String)
+      : [];
+  // Frame seed: the telling's stable canonical event ref (so the same event frames
+  // the same way at every settlement that hears it), falling back to the ledger key.
+  const seed = String(record.eventRef ?? key ?? '');
+  const { headline, detail } = renderFiction(record, { nameFor, deityName, seed });
+  const arrivalTick = Math.max(0, finiteNumber(record.arrivalTick, 0));
+  return {
+    id: String(key),
+    carrier: 'trade',
+    significance: record.significance === 'major' ? 'major' : 'notable',
+    headline,
+    detail,
+    arrivalTick,
+    // agoTicks stays LITERAL (ticks since the packet arrived); D1's distance surcharge
+    // colours only the perceived STALENESS band — "word from the far coast runs weeks
+    // behind" (newsDelayTicks 0 when D1 dark ⇒ freshnessBand unchanged ⇒ byte-identical).
+    agoTicks: Math.max(0, tick - arrivalTick),
+    freshness: freshnessBand(tick - arrivalTick + Math.max(0, finiteNumber(newsDelayTicks, 0))),
+    distance: distanceBand(record.hopCount),
+    confidence: confidenceBand(record),
+    magnitude: completeness >= RUMOR_OUTLINE_THRESHOLD
+      ? magnitudePhrase(record.content?.magnitude ?? 0)
+      : null,
+    knownWhenTick: completeness >= RUMOR_OUTLINE_THRESHOLD
+      ? Math.max(0, finiteNumber(record.eventTick, 0))
+      : null,
+    whereId: record.content?.whereId ? String(record.content.whereId) : null,
+    subjectIds,
+    deityName,
+  };
+}
+
+/**
+ * The DM `truth` block (includeGroundTruth) — ground truth + provenance +
+ * divergence (§3.2-5). When the campaign's wizard-news feed is supplied, the
+ * telling is joined back to its canonical entry and the divergence summary
+ * says exactly where the players' picture is wrong.
+ * @param {RumorArrivalRecord} record
+ * @param {{ entries?: Array<{ id?: string, sourceEventId?: string | null,
+ *   headline?: string, severity?: number, settlementIds?: string[] }> } | null | undefined} wizardNews
+ */
+function projectTruth(record, wizardNews) {
+  const entries = Array.isArray(wizardNews?.entries) ? wizardNews.entries : [];
+  const source = entries.find((entry) => entry
+    && (entry.sourceEventId === record.eventRef || entry.id === record.eventRef)) || null;
+  /** @type {string[]} */
+  const divergence = [];
+  const completeness = clamp01(record.completeness01);
+  const accuracy = clamp01(record.accuracy01);
+  if (completeness < 1) divergence.push('details lost on the road');
+  if (accuracy < 1) divergence.push('facts drifted in the telling');
+  if (source) {
+    const trueBand = severityBand(source.severity);
+    const heardBand = Math.max(0, Math.min(3, Math.round(finiteNumber(record.content?.magnitude, 0))));
+    if (trueBand !== heardBand) {
+      divergence.push(heardBand > trueBand ? 'the tale has grown in the telling' : 'the tale understates it');
+    }
+    const trueIds = new Set((source.settlementIds || []).map(String));
+    if ((record.content?.partyIds || []).some((id) => !trueIds.has(String(id)))) {
+      divergence.push('a name has been swapped for the wrong settlement');
+    }
+  }
+  return {
+    eventRef: record.eventRef,
+    eventTick: record.eventTick,
+    hopCount: record.hopCount,
+    completeness01: record.completeness01,
+    accuracy01: record.accuracy01,
+    provenance: {
+      originId: String(record.provenance?.originId ?? ''),
+      relayIds: (record.provenance?.relayIds || []).map(String),
+    },
+    lineageIds: [...(record.lineageIds || [])],
+    independentSources: Array.isArray(record.corroborationRoots) ? record.corroborationRoots.length : 0,
+    corroborationRoots: [...(record.corroborationRoots || [])],
+    causeClass: record.content?.causeClass ?? null,
+    deityName: record.content?.deityName ?? null,
+    framing: [...(record.framing || [])],
+    trueHeadline: source?.headline || null,
+    divergence,
+  };
+}
+
+/** Mirror of the packet capture's severity banding (rumorNetwork). @param {unknown} severity */
+function severityBand(severity) {
+  const s = finiteNumber(severity, 0);
+  if (s >= 0.8) return 3;
+  if (s >= 0.55) return 2;
+  if (s >= 0.3) return 1;
+  return 0;
+}
+
+/**
+ * The Rumors & News a settlement holds, projected for a viewer. Pure selector;
+ * absent ledger / unknown settlement ⇒ []. Ordered newest-arrival-first with a
+ * deterministic total order (arrival desc, score desc, codepoint key).
+ *
+ * @param {Object} args
+ * @param {{ tick?: number, spatialLedgers?: unknown, simulationRules?: Record<string, unknown>,
+ *   spatialCanonVersion?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest } |
+ *   null | undefined} args.worldState
+ * @param {unknown} args.settlementId
+ * @param {boolean} [args.includeGroundTruth]  DM/premium surfaces ⇒ true;
+ *   player/public/free surfaces ⇒ false (THE DEFAULT — fail closed).
+ * @param {ReadonlySet<string> | null} [args.activatedDeityNames]  the names of
+ *   ACTIVATED public deity snapshots (embeds); null fails closed (scrub all).
+ * @param {(id: string) => string} [args.nameFor]  settlement id → display name.
+ * @param {{ entries?: Array<Record<string, unknown>> } | null} [args.wizardNews]
+ *   the campaign feed, for the DM divergence join (ignored for players).
+ * @returns {Array<Record<string, unknown>>}
+ */
+export function settlementRumors({
+  worldState,
+  settlementId,
+  includeGroundTruth = false,
+  activatedDeityNames = null,
+  nameFor = (id) => String(id),
+  wizardNews = null,
+} = /** @type {never} */ ({})) {
+  if (settlementId == null) return [];
+  const ledgers = /** @type {Record<string, Record<string, RumorArrivalRecord>> | undefined} */ (
+    getSpatialLedger(worldState, 'rumorLedgers'));
+  if (!ledgers || typeof ledgers !== 'object' || Array.isArray(ledgers)) return [];
+  const ledger = ledgers[String(settlementId)];
+  if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) return [];
+  const tick = Math.max(0, finiteNumber(worldState?.tick, 0));
+  // D1 distance-priced news (player-view staleness ONLY — the DM truth block is never
+  // delayed): the frozen digest, read once, gated on the virtual flag. The flag is read
+  // inline (never importing the belief engine into a display selector); activeSpatialDigest
+  // returns null without a spatial marker, and omniscient worlds carry no ledger to reach
+  // here — so absent flag / no digest ⇒ newsDelayTicks 0 ⇒ byte-identical projection.
+  const rules = /** @type {Record<string, unknown> | undefined} */ (
+    worldState && typeof worldState === 'object' ? worldState.simulationRules : undefined);
+  const newsDigest = rules && rules.distancePricedNewsEnabled === true
+    ? activeSpatialDigest(worldState) : null;
+  // V-24b PER-ROUTE RE-PROPAGATION: the route-status reader that lets the PLAYER-VISIBLE rumor
+  // staleness re-price as routes sever/open (embattlement/blockade). Null (dark) ⇒ geometric ⇒
+  // byte-identical projection. embattlementLevel is a light spatial read, not the belief engine.
+  const newsEmbattlement = newsDigest ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
+  const arrived = Object.entries(ledger)
+    .filter(([, record]) => record && typeof record === 'object'
+      && record.content?.visibility !== 'mechanical'
+      && finiteNumber(record.arrivalTick, Infinity) <= tick)
+    .sort(([keyA, a], [keyB, b]) => (finiteNumber(b.arrivalTick, 0) - finiteNumber(a.arrivalTick, 0))
+      || (finiteNumber(b.score, 0) - finiteNumber(a.score, 0))
+      || compareCodepoint(keyA, keyB));
+  return arrived.map(([key, record]) => {
+    const newsDelayTicks = newsDigest
+      ? routeAwareHopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), String(settlementId), newsEmbattlement)
+      : 0;
+    const projection = projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks });
+    if (!includeGroundTruth) return projection;
+    return { ...projection, truth: projectTruth(record, wizardNews) };
+  });
+}
+
+/**
+ * Panel presence gate: does this campaign's world carry ANY rumor ledger?
+ * Dormant (no key) ⇒ false ⇒ no surface renders ⇒ byte-identical UI.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ */
+export function hasRumorLedgers(worldState) {
+  const ledgers = getSpatialLedger(worldState, 'rumorLedgers');
+  return !!ledgers && typeof ledgers === 'object' && !Array.isArray(ledgers)
+    && Object.values(ledgers).some((ledger) => (
+      ledger && typeof ledger === 'object' && !Array.isArray(ledger)
+      && Object.values(ledger).some((record) => (
+        record && typeof record === 'object'
+        && record.content?.visibility !== 'mechanical'
+      ))
+    ));
+}
+
+/**
+ * The dossier tab-presence gate: does the campaign OWNING this save carry a
+ * rumor ledger? Boolean-only (a store selector calls this every render);
+ * dormant / legacy / omniscient campaigns have no key ⇒ false ⇒ no tab ⇒ the
+ * dossier UI is byte-identical.
+ * @param {Array<{ settlementIds?: Array<string | number>,
+ *   worldState?: { spatialLedgers?: unknown } } | null> | null | undefined} campaigns
+ * @param {unknown} saveId
+ * @returns {boolean}
+ */
+export function campaignHasRumorLedger(campaigns, saveId) {
+  if (saveId == null || !Array.isArray(campaigns)) return false;
+  const sid = String(saveId);
+  return campaigns.some((campaign) => campaign
+    && (campaign.settlementIds || []).map(String).includes(sid)
+    && hasRumorLedgers(campaign.worldState));
+}
+
+/**
+ * The ACTIVATED public deity-name set for the value-scrub, derived from the
+ * settlements' PUBLIC embedded snapshots (config.primaryDeitySnapshot /
+ * cultDeitySnapshots — the same embeds FaithSection shows read-only to every
+ * viewer; the latent pantheon never appears here). UI convenience so every
+ * surface derives the set the same way.
+ * @param {Array<{ settlement?: { config?: { primaryDeitySnapshot?: { name?: string },
+ *   cultDeitySnapshots?: Array<{ name?: string }> } } } | null> | null | undefined} saves
+ * @returns {Set<string>}
+ */
+export function activatedDeityNamesFrom(saves) {
+  /** @type {Set<string>} */
+  const names = new Set();
+  for (const save of Array.isArray(saves) ? saves : []) {
+    const config = save?.settlement?.config;
+    if (!config || typeof config !== 'object') continue;
+    const primary = config.primaryDeitySnapshot;
+    if (primary && typeof primary === 'object' && typeof primary.name === 'string' && primary.name) {
+      names.add(primary.name);
+    }
+    for (const cult of Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : []) {
+      if (cult && typeof cult === 'object' && typeof cult.name === 'string' && cult.name) {
+        names.add(cult.name);
+      }
+    }
+  }
+  return names;
+}

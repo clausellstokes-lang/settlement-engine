@@ -1,0 +1,903 @@
+/**
+ * WorldMap.jsx — Unified world-map workspace.
+ *
+ * Architecture (v2, 2026-04):
+ *   iframe (FMG geography engine)
+ *     └─ <MapOverlay> (React-owned SVG for annotations + relationship lines)
+ *   toolbar row 1 — mode switcher (View / Terrain / Annotate)
+ *   toolbar row 2 — contextual toolbar for the current mode
+ *   sidebar — settlement palette (drag to place), campaign controls
+ *
+ * State is held in the Zustand map slice. This component is a controller —
+ * it wires DOM events to bridge RPC calls and bridge push events to store
+ * actions. There is no local placement/burg state in React.
+ */
+
+import { useEffect, useRef, useState, useCallback, Suspense, lazy } from 'react';
+import { flag } from '../lib/flags.js';
+import { t } from '../copy/index.js';
+import { EVENTS, track } from '../lib/analytics.js';
+import { useStore } from '../store/index.js';
+import { useMapBridge } from '../hooks/useMapBridge.js';
+import { useRealmMapExport } from '../hooks/useRealmMapExport.js';
+import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.js';
+import { MAP_MODES } from '../store/mapSlice.js';
+import { computeRoadEdges } from '../lib/roadNetwork.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
+import { SP, CARD, BORDER, CHROME } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { useEnsureSavedSettlementsLoaded } from '../hooks/useOwnerScopedSaves.js';
+import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
+import { legacyPlacementsArray } from './map/legacyPlacements.js';
+import { useMapAutosave } from '../hooks/useMapAutosave.js';
+import { useRealmInspector } from '../hooks/useRealmInspector.js';
+import { useAdvanceSession } from '../hooks/useAdvanceSession.js';
+import { useCampaignActivation } from '../hooks/useCampaignActivation.js';
+import { useMapImageImport } from '../hooks/useMapImageImport.js';
+
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
+import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
+import { WorldMapContextToolbars } from './map/WorldMapContextToolbars.jsx';
+import { WorldMapStage } from './map/WorldMapStage.jsx';
+import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
+import { AdvanceAutoResolveToggle } from './map/AdvanceAutoResolveToggle.jsx';
+import { useWorldMapCampaignModel } from './map/useWorldMapCampaignModel.js';
+import { findEntityById, resolveEntityId, sameEntityId } from './map/mapEntityIds.js';
+import { persistCampaignMapForShare } from '../store/campaignMapSharePersist.js';
+
+// The share-to-gallery editor mount. A thin store-reading wrapper (sources the
+// active campaign + its members itself) so WorldMap stays under the size ratchet
+// and only threads the open flag, close callback, and the FMG bridge ref.
+const MapShareEditorOverlay = lazy(() => import('./map/MapShareEditorOverlay.jsx'));
+
+const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
+// Mobile-only: the defer-to-desktop wall + read-only dashboard. Lazy so the
+// desktop build never pulls it, and the mobile build only loads it when the
+// gate actually renders.
+const RealmMobileGate = lazy(() => import('./map/RealmMobileGate.jsx'));
+
+export default function WorldMap({ onNavigate } = {}) {
+  // Reactive mobile flag (width < 640). On phones the Realm defers to desktop:
+  // the desktop map-editing workspace below is replaced by an honest gate plus a
+  // read-only dashboard (see the mobile branch in the render). Read here so it is
+  // available to the render; every hook still runs unconditionally above the
+  // branch, so desktop rendering is byte-identical.
+  const isMobile = useIsMobile();
+
+  // ── Refs & local state ────────────────────────────────────────────────
+  const iframeRef = useRef(null);
+  const mapContainerRef = useRef(null);
+  // Live overlay transform {tx,ty,scale,width,height} — written by MapOverlay in
+  // image mode so the drop handler can inverse-project screen→image coords
+  // without waiting on the debounced viewport persist. WorldMap owns this ref and
+  // threads it straight into MapOverlay (via WorldMapStage) as `transformOut`; the
+  // overlay assigns its live transform to `.current` on every pan/zoom tick. The
+  // ref object is stable, so passing it never re-runs MapOverlay's pan/zoom effect.
+  const overlayTransformRef = useRef(null);
+  const bridgeRef = useRef(null);
+  const [bridgeReady, setBridgeReady] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [showLayersPanel, setShowLayersPanel] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);   // §16 — guided help walkthrough
+  const [mapTemplates, setMapTemplates] = useState([]);
+  const [currentTemplate, setCurrentTemplate] = useState('');
+  const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
+  const [regenerateConfirm, setRegenerateConfirm] = useState(null);
+  // Confirm shown when saving a canonized map — placed settlements can't move.
+  const [mapSaveConfirm, setMapSaveConfirm] = useState(false);
+  // Confirm shown before Advance Realm — the loudest, most consequential action
+  // on the surface, and only session-undoable (the undo evaporates on reload),
+  // so it is gated by a scope-summary preview (P10/P9).
+  const [advanceConfirm, setAdvanceConfirm] = useState(false);
+  // In-flight map save — drives the AutoSaveChip "Saving…" state.
+  const [savingMap, setSavingMap] = useState(false);
+  // Bumped to force a fresh iframe mount when the GM hits "Reload map" after a
+  // load failure (the watchdog below). Keying the iframe on this re-runs the
+  // whole bridge handshake from scratch.
+  const [mapReloadKey, setMapReloadKey] = useState(0);
+
+  // ── Store selectors ───────────────────────────────────────────────────
+  // mapMode/imageMode remain here because WorldMapContextToolbars still receives
+  // them as props; setMapMode drives the keymap. The read-only mapReady/
+  // mapLoading/mapError/isDraggingOver/placements selectors moved into the
+  // memoized child shells that consume them, so they're no longer read here.
+  const mapMode       = useStore(s => s.mapMode);
+  const setMapMode    = useStore(s => s.setMapMode);
+  const setMapReady   = useStore(s => s.setMapReady);
+  const setMapLoading = useStore(s => s.setMapLoading);
+  const setMapError   = useStore(s => s.setMapError);
+  const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
+  const setDraggingOver   = useStore(s => s.setDraggingOver);
+
+  const addPlacement    = useStore(s => s.addPlacement);
+  const removePlacementLocal = useStore(s => s.removePlacementLocal);
+  const clearAllPlacementsLocal = useStore(s => s.clearAllPlacementsLocal);
+  // (R-5b, owner queue #21) the inert `_replaceAllPlacements` subscription is gone
+  // with the op it bound: it was never called, and a component-level useStore call
+  // still costs a subscription + a re-render check on every store write.
+  const replaceMapState = useStore(s => s.replaceMapState);
+  const resetMapState   = useStore(s => s.resetMapState);
+  const setMapSnapshot  = useStore(s => s.setMapSnapshot);
+  const bumpGeometryVersion = useStore(s => s.bumpGeometryVersion);
+  // Custom image backdrop (Project 1, premium). When set, the FMG iframe is not
+  // mounted — MapOverlay renders the image + owns pan/zoom — and terrain tools +
+  // geography-charted trails are suppressed.
+  const customBackdrop  = useStore(s => s.mapState.customBackdrop);
+  const setMapBackdrop  = useStore(s => s.setMapBackdrop);
+  const clearMapBackdrop = useStore(s => s.clearMapBackdrop);
+  const imageMode       = !!customBackdrop?.imageUrl;
+
+  const authUserId     = useStore(s => s.auth?.user?.id ?? null);
+  const authTier       = useStore(s => s.auth?.tier);
+  const activeCampaignId = useStore(s => s.activeCampaignId);
+  const setActiveCampaign = useStore(s => s.setActiveCampaign);
+  const saveCampaignMap   = useStore(s => s.saveCampaignMap);
+  const clearCampaignMap  = useStore(s => s.clearCampaignMap);
+  const getCampaignMapState = useStore(s => s.getCampaignMapState);
+  // Advance-scaling Stage 4 surface (Stage 1-3 store values). The autoresolve toggle
+  // value + setter ride the confirm dialog; the advance/resume/undo handlers + the
+  // session object live in useAdvanceSession below. All inert with the multi-tick
+  // flag OFF (the single-tick path never pauses), so this is byte-neutral on the
+  // legacy path.
+  const advanceAutoResolve = useStore(s => s.advanceAutoResolve);
+  const setAdvanceAutoResolve = useStore(s => s.setAdvanceAutoResolve);
+  const updateCampaignSimulationRules = useStore(s => s.updateCampaignSimulationRules);
+  const pendingMapWorkspace = useStore(s => s.pendingMapWorkspace);
+  const consumeMapWorkspace = useStore(s => s.consumeMapWorkspace);
+  const pendingSimulationRules = useStore(s => s.pendingSimulationRules);
+  const consumeSimulationRules = useStore(s => s.consumeSimulationRules);
+
+  const {
+    activeCampaign,
+    activeCampaigns,
+    activeCampaignTargetId,
+    activeSaves,
+    advanceScopeBody,
+    canManageCampaigns,
+    canUndoPulse,
+    lastAdvanceInterval,
+    nameById,
+    unreviewedPulseCount,
+  } = useWorldMapCampaignModel({
+    authTier,
+    activeCampaignId,
+    worldPulseInterval,
+  });
+  // UX Phase 4 — the old campaign-workspace body-swap is RETIRED. Pulse / News /
+  // Pantheon now render in the Realm Inspector OVERLAY, so the map stays mounted at
+  // all times (the WorldMapStage never swaps the map away; its `showing*` props are
+  // pinned false). The single Inspector toggle is the gateway; the Inspector owns
+  // Pantheon's self-hide when religion is dormant.
+  useEffect(() => {
+    if (activeCampaignId != null && !activeCampaign) setActiveCampaign(null);
+  }, [activeCampaignId, activeCampaign, setActiveCampaign]);
+
+  // ── Toasts ─── (declared early so the Realm-inspector hook below can use it)
+  // Stabilized with useCallback (empty deps — it only touches the stable
+  // setToast setter and a ref). This is load-bearing for perf, not cosmetic:
+  // useRealmInspector derives handleApplyPreset via useCallback([…, showToast]),
+  // and that handler is a prop on the React.memo'd WorldMapToolbar. An unstable
+  // showToast would mint a new handleApplyPreset every parent render, defeating
+  // the toolbar memo on every keystroke/tick. Keeping showToast stable lets the
+  // memo actually hold.
+  const toastTimerRef = useRef(null);
+  // `action` (label + onClick) turns an error toast into a recoverable next step
+  // (P10): e.g. "Canonize the world" routes to the canonize surface instead of
+  // dead-ending. A toast with an action lingers longer so the GM can reach it.
+  const showToast = useCallback((kind, text, action = null) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToast({ kind, text, action });
+    toastTimerRef.current = setTimeout(() => setToast(null), action ? 6000 : 2600);
+  }, []);
+  // Clear any in-flight toast timer on unmount so the trailing setToast(null)
+  // never fires after the component is gone (a "setState on unmounted" warning,
+  // and a dangling timer). Empty deps — runs the teardown only at unmount.
+  useEffect(() => () => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+  }, []);
+
+  // UX Phase 4 — the Realm Inspector state + handlers live in a dedicated hook so
+  // this component stays under the size ratchet. The Inspector OVERLAYS the map.
+  const {
+    inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
+    inspectorSize, setInspectorSize,
+    openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
+  } = useRealmInspector({
+    canManageCampaigns,
+    pendingMapWorkspace,
+    activeCampaign,
+    activeCampaignId: activeCampaignTargetId,
+    consumeMapWorkspace,
+    updateCampaignSimulationRules,
+    onNavigate,
+    showToast,
+    pendingSimulationRules,
+    consumeSimulationRules,
+  });
+
+  // Advance-scaling Stage 4 — the multi-tick advance session (progress/paused) + its
+  // advance / resume / undo handlers live in a dedicated hook so this component
+  // stays under the size ratchet. worldPulseBusy is the legacy "not idle" alias; the
+  // flag-OFF path only ever toggles idle↔running, so the busy semantics are unchanged.
+  const {
+    advanceSession, worldPulseBusy, multiTickOn,
+    performAdvanceRealm, handleResumeAdvance, handleUndoRealm,
+    performCanonizeWorld, canonizeBusy, gatheredDocket,
+  } = useAdvanceSession({
+    activeCampaignId: activeCampaignTargetId,
+    worldPulseInterval,
+    openInspectorAt,
+    // J-D7: the gathered adjudication screen reads the realm's OWN pending docket
+    // off this campaign, so the hook needs the campaign, not just its id.
+    showToast, campaign: activeCampaign,
+  });
+
+  // Advance-scaling Stage 4: the paused-advance cursor for the active campaign, read
+  // off worldState so it stays reactive AND survives a reload (it persists on the
+  // campaign). Drives the toolbar "Advance paused" resume chip. Only ever non-null on
+  // the multi-tick path; the legacy advance never parks a cursor. (Derived AFTER the
+  // useAdvanceSession destructure that provides multiTickOn.)
+  const pausedAdvance = multiTickOn ? (activeCampaign?.worldState?.pausedAdvance || null) : null;
+
+  // Auto-save the working map into the active campaign so it
+  // persists per account and across devices without a manual click. Extracted
+  // to a side-effect hook; behaviour (debounce, dirty-key gate, flag gate) is
+  // unchanged.
+  useMapAutosave(activeCampaignTargetId, activeCampaign, saveCampaignMap);
+
+  useEnsureSavedSettlementsLoaded(authUserId);
+
+  // ── Bridge lifecycle + load watchdog ──────────────────────────────────
+  // Extracted to a side-effect hook (construct bridge, wire push events, and the
+  // P10 load-failure watchdog). Re-runs on mapReloadKey so "Reload map" re-inits.
+  const mapFrameUrl = useMapBridge({
+    enabled: !isMobile,
+    iframeRef, bridgeRef, reloadKey: mapReloadKey,
+    setMapReady, setMapLoading, setMapError, setBridgeReady,
+    setMapSnapshot, setMapTemplates, setSelectedBurgId,
+    addPlacement, removePlacementLocal, clearAllPlacementsLocal,
+    showToast,
+  });
+
+  // ── Analytics: MAP_OPENED on mount (fire-and-forget, once) ─────────────
+  // Coarse counts only — no coordinates, no names. Read from the live store
+  // so the effect can run exactly once without depending on slice churn.
+  useEffect(() => {
+    try {
+      const s = useStore.getState();
+      const placementCount = Object.keys(s.mapState?.placements || {}).length;
+      const routeCount = computeRoadEdges(s.savedSettlements, s.mapState?.placements).length;
+      track(EVENTS.MAP_OPENED, {
+        placement_count: placementCount,
+        route_count: routeCount,
+        has_campaign: !!s.activeCampaignId,
+      });
+    } catch { /* analytics is best-effort; never block mount */ }
+  }, []);
+
+  // ── Native FMG layer toggles ─────────────────────────────────────────
+  // Subscribe to the native-layer flags and push each into the iframe so
+  // toggling the checkbox (or the Biomes button in the terrain toolbar)
+  // actually shows/hides the corresponding FMG SVG group.
+  const nativeStateBorders   = useStore(s => s.mapState.layers.nativeStateBorders);
+  const nativeCultureRegions = useStore(s => s.mapState.layers.nativeCultureRegions);
+  const nativeBiomes         = useStore(s => s.mapState.layers.nativeBiomes);
+  useEffect(() => {
+    if (!bridgeReady) return;
+    const bridge = bridgeRef.current;
+    if (!bridge) return;
+    bridge.call('settlementEngine:setFmgLayer', { layer: 'stateBorders', visible: !!nativeStateBorders })
+      .catch(e => console.warn('[WorldMap] setFmgLayer stateBorders failed', e));
+  }, [bridgeReady, nativeStateBorders]);
+  useEffect(() => {
+    if (!bridgeReady) return;
+    const bridge = bridgeRef.current;
+    if (!bridge) return;
+    bridge.call('settlementEngine:setFmgLayer', { layer: 'cultures', visible: !!nativeCultureRegions })
+      .catch(e => console.warn('[WorldMap] setFmgLayer cultures failed', e));
+  }, [bridgeReady, nativeCultureRegions]);
+  useEffect(() => {
+    if (!bridgeReady) return;
+    const bridge = bridgeRef.current;
+    if (!bridge) return;
+    bridge.call('settlementEngine:setFmgLayer', { layer: 'biomes', visible: !!nativeBiomes })
+      .catch(e => console.warn('[WorldMap] setFmgLayer biomes failed', e));
+  }, [bridgeReady, nativeBiomes]);
+
+  // ── Drag-drop (settlement palette → map) ──────────────────────────────
+  const handleDragOver = useCallback((e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    setDraggingOver(true);
+  }, [setDraggingOver]);
+
+  const handleDragLeave = useCallback(() => {
+    setDraggingOver(false);
+  }, [setDraggingOver]);
+
+  const handleDrop = useCallback(async (e) => {
+    e.preventDefault();
+    setDraggingOver(false);
+    let data;
+    try {
+      data = JSON.parse(e.dataTransfer.getData('application/settlementforge'));
+    } catch { return; }
+    if (data?.id == null) return;
+
+    // Placement gates: a settlement only lands on a campaign map, only if it
+    // is canon, and at most once per map. (Canon used to be a soft toolbar
+    // hint; it is enforced here now.)
+    const live = useStore.getState();
+    let placementReject = null;
+    if (live.activeCampaignId == null) {
+      placementReject = 'Select a campaign before placing settlements on the map.';
+    } else {
+      const saveRec = findEntityById(live.savedSettlements, data.id);
+      if (saveRec && !isCanonSave(saveRec)) {
+        placementReject = 'Only canon settlements can be placed. Mark it Canon first.';
+      } else if (
+        Object.values(live.mapState?.placements || {}).some(placement => (
+          sameEntityId(placement.settlementId, data.id)
+        ))
+      ) {
+        placementReject = `${data.name || 'That settlement'} is already on this map.`;
+      }
+    }
+    if (placementReject) {
+       
+      showToast('info', placementReject);
+      return;
+    }
+
+    // Image-mode drop: no iframe/bridge — inverse-project the screen point
+    // through the live overlay transform into image-pixel coords, then place
+    // directly. Placements live in the same <g>-space as the backdrop image.
+    if (live.mapState?.customBackdrop?.imageUrl) {
+      const container = mapContainerRef.current;
+      const t = overlayTransformRef.current;
+      if (!container || !t || !t.scale) return;
+      const rect = container.getBoundingClientRect();
+      const imgX = (e.clientX - rect.left - t.tx) / t.scale;
+      const imgY = (e.clientY - rect.top - t.ty) / t.scale;
+      const burgId = `sf_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+      addPlacement({ burgId, settlementId: data.id, x: imgX, y: imgY, via: 'drop' });
+      return;
+    }
+
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const ifRect = iframe.getBoundingClientRect();
+    const x = e.clientX - ifRect.left;
+    const y = e.clientY - ifRect.top;
+
+    const bridge = bridgeRef.current;
+    if (!bridge) return;
+    try {
+      await bridge.placeSettlement({
+        settlementId: data.id,
+        x, y,
+        name: data.name,
+        population: data.population,
+      });
+    } catch (err) {
+      console.warn('[WorldMap] place failed', err);
+      // showToast is the component's own stable (useCallback) toast helper;
+      // called from an async drop handler (not during render), so the
+      // set-state-in-render immutability rule doesn't apply.
+      showToast('error', t('errors.mapPlaceFail'));
+    }
+  }, [setDraggingOver, addPlacement, showToast]);
+
+  // ── Campaign save/load ────────────────────────────────────────────────
+  // Tracks which campaign (or 'none') the map has been synced to, so the
+  // entry effect below auto-loads a campaign's saved map exactly once per
+  // selection — fixing "reselect doesn't reload" — while an explicit click
+  // (which sets the ref first) doesn't double-load.
+  const autoSyncedRef = useRef(null);
+  const handleSelectCampaign = useCallback(async (id) => {
+    const campaignId = resolveEntityId(useStore.getState().campaigns, id);
+    autoSyncedRef.current = campaignId == null ? 'none' : String(campaignId);
+    const bridge = bridgeRef.current;
+    if (campaignId == null) {
+      // Deselect → reset everything
+      setActiveCampaign(null);
+      resetMapState();
+      if (bridge?.isReady) {
+        try { await bridge.clearAllPlacements(); } catch (e) {}
+      }
+      bumpGeometryVersion();
+      return;
+    }
+
+    setActiveCampaign(campaignId);
+    const ms = getCampaignMapState(campaignId);
+    if (!ms) {
+      // Fresh campaign, no map yet — wipe current placements only
+      resetMapState();
+      if (bridge?.isReady) {
+        try { await bridge.clearAllPlacements(); } catch (e) {}
+      }
+      bumpGeometryVersion();
+      showToast('info', 'New campaign. Drag settlements onto the map');
+      return;
+    }
+
+    // Replace map slice with the saved state (labels, markers, forests, layers…)
+    replaceMapState(ms);
+
+    // Load the FMG snapshot if present; otherwise fall back to restorePlacements.
+    if (bridge?.isReady) {
+      try {
+        if (ms.fmgSnapshot) {
+          await bridge.loadSnapshot(ms.fmgSnapshot);
+          // Re-apply the v2 placements (settlementId mapping — FMG doesn't
+          // know about settlementId, so we need to re-restore)
+          const arr = legacyPlacementsArray(ms);
+          if (arr.length) await bridge.restorePlacements(arr);
+          // Resolve the campaign by id at call time — the closed-over
+          // `activeCampaign` is the PREVIOUS selection when this fires from a
+          // fresh select, so the toast would name the wrong (or no) campaign.
+          const camp = findEntityById(useStore.getState().campaigns, campaignId);
+          showToast('success', `Loaded map for ${camp?.name || 'campaign'}`);
+        } else if (Array.isArray(ms._legacyPlacements) && ms._legacyPlacements.length) {
+          await bridge.clearAllPlacements();
+          await bridge.restorePlacements(ms._legacyPlacements);
+          showToast('success', `Restored ${ms._legacyPlacements.length} placements`);
+        } else {
+          await bridge.clearAllPlacements();
+          showToast('info', 'Campaign has no saved map snapshot');
+        }
+        // Restore viewport — but never feed an IMAGE-space camera into FMG's
+        // d3.zoom (the two modes share one viewport field; the mode tag guards it).
+        if (ms.viewport && ms.viewport.scale && ms.viewport.mode !== 'image') {
+          try {
+            await bridge.setViewport({
+              cx: ms.viewport.cx,
+              cy: ms.viewport.cy,
+              scale: ms.viewport.scale,
+              duration: 600,
+            });
+          } catch (e) {}
+        }
+        // Geography just changed under React's feet. Roads/relationship/chain
+        // layers cache A*-routed polylines and burg-coordinate lookups; their
+        // useMemo/useEffect deps watch `placements`, but placements may be
+        // identical to before the load — only the underlying world differs.
+        // Bumping the version forces a fresh route compute against the new
+        // geometry without making the user nudge a settlement to do it.
+        bumpGeometryVersion();
+      } catch (err) {
+        console.warn('[WorldMap] snapshot load failed', err);
+        showToast('error', t('errors.mapLoadFail'));
+      }
+    }
+     
+    // `activeCampaign` is no longer a dependency: the success toast now resolves
+    // the campaign by `id` from the live store (above) instead of the closed-over
+    // value, so this callback no longer reads it.
+  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, bumpGeometryVersion, showToast]);
+
+  // Empty-state activation (P1/P8): the no-campaign states get a real first click
+  // (create-and-select / select-first). Hooked out to hold the size ratchet.
+  const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast });
+
+  // Premium / elevated auto-resume: on a cold Realm entry, reopen the campaign
+  // the user last used so its map loads first (sets the active id; the mount-sync
+  // effect below paints the saved map). No-ops when a campaign is already active.
+  useCampaignAutoResume({ canManageCampaigns, activeCampaigns, activeCampaignId });
+
+  // Instant World: materialize a staged realm's geography from its seed on first
+  // open (the composer stages the map plan, not the FMG snapshot). Inert for
+  // every non-instant campaign (guarded on mapState.pendingMapGen).
+  useInstantWorldMaterialize({ bridgeRef, bridgeReady, activeCampaign, bumpGeometryVersion });
+
+  // On entry to the map (bridge ready) — and whenever the active campaign
+  // resolves — re-sync the map. With a campaign active, its saved snapshot is
+  // loaded into the fresh FMG bridge, so returning to the map no longer needs
+  // a reselect to repaint. With no campaign, the map is blanked so stray
+  // placements don't linger on a non-campaign world. The autoSyncedRef guard
+  // keeps this to one load per selection; explicit clicks set the ref first.
+  useEffect(() => {
+    if (!bridgeReady) return;
+    // A campaign id with no resolved record yet → wait; don't blank/deselect.
+    if (activeCampaignId != null && !activeCampaign) return;
+    const id = activeCampaign?.id ?? null;
+    const key = id == null ? 'none' : String(id);
+    if (autoSyncedRef.current === key) return;
+    handleSelectCampaign(id);
+  }, [bridgeReady, activeCampaignId, activeCampaign, handleSelectCampaign]);
+
+  const performSaveMap = useCallback(async () => {
+    if (activeCampaignTargetId == null) return;
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) { showToast('error', t('errors.mapNotReady')); return; }
+    setSavingMap(true);
+    try {
+      showToast('info', 'Capturing map snapshot…');
+      const reply = await bridge.saveSnapshot();
+      const snapshot = reply?.snapshot;
+      if (!snapshot) throw new Error('empty snapshot');
+      // Store the blob on the map slice
+      const seed = useStore.getState().mapState.seed;
+      setMapSnapshot(snapshot, seed);
+      // Whether the campaign already had a persisted map (this save updates it
+      // vs. creates it). Read before the write so it reflects prior state.
+      const isUpdate = !!activeCampaign?.mapState;
+      // Persist the whole map state (including placements, labels, etc.) into campaign
+      saveCampaignMap(activeCampaignTargetId, useStore.getState().mapState);
+      const placementCount = Object.keys(useStore.getState().mapState.placements || {}).length;
+      // Fire-and-forget analytics — coarse counts only, no coordinates/names.
+      try {
+        const live = useStore.getState();
+        track(EVENTS.MAP_SAVED, {
+          placement_count: placementCount,
+          route_count: computeRoadEdges(live.savedSettlements, live.mapState.placements).length,
+          is_update: isUpdate,
+        });
+      } catch { /* analytics is best-effort */ }
+      showToast('success', `Saved ${placementCount} placement(s) to ${activeCampaign?.name}`);
+    } catch (err) {
+      console.warn('[WorldMap] save snapshot failed', err);
+      showToast('error', t('errors.mapSaveFail'));
+    } finally {
+      setSavingMap(false);
+    }
+  }, [activeCampaignTargetId, activeCampaign, saveCampaignMap, setMapSnapshot, showToast]);
+
+  // Save entry point. On a canonized map, first confirm that placed settlements
+  // can't be moved (newly added ones still save in place); otherwise save directly.
+  const handleSaveMapToCampaign = useCallback(async () => {
+    if (activeCampaignTargetId == null) return;
+    if (activeCampaign?.worldState?.canonizedAt) {
+      setMapSaveConfirm(true);
+      return;
+    }
+    await performSaveMap();
+  }, [activeCampaignTargetId, activeCampaign, performSaveMap]);
+
+  const handleClearMapFromCampaign = useCallback(() => {
+    if (activeCampaignTargetId == null) return;
+    clearCampaignMap(activeCampaignTargetId);
+    showToast('info', 'Campaign map cleared');
+  }, [activeCampaignTargetId, clearCampaignMap, showToast]);
+
+  // Toolbar entry point: gate the mutation behind a scope-summary confirm
+  // rather than firing immediately (P10 — consequential, only session-undoable).
+  const handleAdvanceRealm = useCallback(() => {
+    if (activeCampaignTargetId == null || worldPulseBusy) return;
+    setAdvanceConfirm(true);
+  }, [activeCampaignTargetId, worldPulseBusy]);
+
+  // #5: the Advance dialog carries an inline Canonize button while the world is
+  // uncanonized (it removes itself once worldCanonized re-derives true). The handler
+  // + busy state live in useAdvanceSession; this is just the derived gate.
+  const worldCanonized = !!activeCampaign?.worldState?.canonizedAt;
+
+  // ── Template selection ─────────────────────────────────────────────────
+  const handleTemplateChange = useCallback(async (templateId) => {
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) return;
+    try {
+      await bridge.setTemplate(templateId);
+      setCurrentTemplate(templateId);
+    } catch (err) {
+      console.warn('[WorldMap] setTemplate failed', err);
+    }
+  }, []);
+
+  // ── Regenerate map (new world) ────────────────────────────────────────
+  // When `mapAutosave` flag is on (a stand-in for the
+  // safer-regenerate behavior since both ride the same campaign-active
+  // signal), the regenerate confirm shows the explicit count of items
+  // that will be lost. Falls back to the legacy single-line confirm
+  // under the flag-off path.
+  const handleRegenerate = useCallback(async () => {
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) return;
+    let msg = 'Regenerate the world? All unsaved placements will be lost.';
+    if (flag('mapAutosave')) {
+      // Placements/labels live under mapState; the old top-level mapPlacements/
+      // mapLabels keys don't exist, so the loss-count warning never fired.
+      const placedCount = Object.keys(useStore.getState().mapState.placements || {}).length;
+      const labelCount = (useStore.getState().mapState.labels || []).length;
+      if (placedCount || labelCount) {
+        msg = `Regenerate the world? You'll lose ${placedCount} placement${placedCount === 1 ? '' : 's'}` +
+              (labelCount ? ` and ${labelCount} label${labelCount === 1 ? '' : 's'}` : '') +
+              '. This cannot be undone.';
+      }
+    }
+    setRegenerateConfirm(msg);
+  }, []);
+
+  const performRegenerate = useCallback(async () => {
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) return;
+    setRegenerateConfirm(null);
+    try {
+      showToast('info', 'Regenerating…');
+      await bridge.resetMap();
+      resetMapState();
+      bumpGeometryVersion();
+      showToast('success', 'New world generated');
+    } catch (err) {
+      showToast('error', t('errors.mapRegenFail'));
+    }
+  }, [resetMapState, bumpGeometryVersion, showToast]);
+
+  // ── Fit map to viewport ───────────────────────────────────────────────
+  const handleFit = useCallback(async () => {
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) return;
+    try { await bridge.fitMap(); } catch (e) {}
+  }, []);
+
+  // Recovery action for a failed map load (P10). Clear the error, show the
+  // loader again, drop bridgeReady, and bump the reload key so the bridge effect
+  // re-mounts a fresh iframe + re-arms the watchdog.
+  const handleReloadMap = useCallback(() => {
+    setMapError(null);
+    setMapLoading(true);
+    setMapReady(false);
+    setBridgeReady(false);
+    setMapReloadKey(k => k + 1);
+  }, [setMapError, setMapLoading, setMapReady]);
+
+  // Stable toggle for the Realm Inspector. Memoized so the memoized
+  // WorldMapToolbar isn't re-rendered by an inline arrow on every parent render.
+  const handleToggleInspector = useCallback(() => {
+    setInspectorOpen(v => {
+      // Opening from the toolbar always lands at the 'default' size so a prior
+      // 'min'/'expanded' choice never surprises the GM on reopen (plan §2).
+      if (!v) setInspectorSize('default');
+      return !v;
+    });
+  }, [setInspectorOpen, setInspectorSize]);
+
+  // ── Custom map image (Project 1, premium) ─────────────────────────────
+  // Pick device file → ConfirmDialog (it disables terrain + overwrites the map)
+  // → upload → setMapBackdrop (one undo step). Extracted to a hook to hold the
+  // size ratchet; the controls render premium/active-campaign gated in the toolbar.
+  const {
+    pendingImportFile, cancelImportImage, handleImportImage, performImportImage, handleClearImage,
+  } = useMapImageImport({
+    activeCampaignId: activeCampaignTargetId,
+    setMapBackdrop,
+    clearMapBackdrop,
+    showToast,
+  });
+
+  // ── Share map to the gallery (Project 2) ──────────────────────────────
+  // The toolbar "Share to gallery…" no longer one-shot publishes. It persists
+  // the working map first (so the saved_maps row carries the current map_data
+  // the publish RPC reads), then OPENS the share editor, which owns the full
+  // publish / kind-pick / edit / unshare flow. `sharingMap` covers the brief
+  // persist-and-open window; `shareEditorOpen` drives the overlay mount.
+  const [sharingMap, setSharingMap] = useState(false);
+  const [shareEditorOpen, setShareEditorOpen] = useState(false);
+  const handleShareMap = useCallback(async () => {
+    if (activeCampaignTargetId == null) {
+      showToast('info', 'Select a campaign to share its map.');
+      return;
+    }
+    setSharingMap(true);
+    try {
+      // Persist the latest map AND await its cloud upsert BEFORE the editor can
+      // publish — publish_map reads whatever map_data is already in the
+      // saved_maps row, so the row must exist + carry the current mapState first
+      // (a fresh campaign hasn't synced yet → the RPC would 404, and an edited
+      // one would publish a stale backdrop).
+      await persistCampaignMapForShare({
+        campaignId: activeCampaignTargetId,
+        readState: useStore.getState,
+        saveCampaignMap,
+      });
+      setShareEditorOpen(true);
+    } catch (err) {
+      showToast('error', err?.message || 'Could not prepare the map for sharing.');
+    } finally {
+      setSharingMap(false);
+    }
+  }, [activeCampaignTargetId, saveCampaignMap, showToast]);
+
+  // ── Export the realm map as a PNG (MAP EXPORTS) ───────────────────────
+  // The handler lives in useRealmMapExport (WorldMap is at its max-lines ceiling).
+  // The bridge exposes only exportThumb (a <=1024px terrain composite); the fork's
+  // native full exporters (getMapURL svg/png) are NOT bridged — a recorded seam.
+  // downloadRealmMapPng composites the terrain raster with the settlement-marker
+  // overlay → one PNG. Free to the signed-in owner (mirrors the free map-share
+  // lane); anon has no affordance (the toolbar item below is withheld).
+  const { exportingMap, handleExportMap: handleExportMapImage } =
+    useRealmMapExport({ bridgeRef, activeCampaign, showToast });
+
+  // ── Worldbuilder keymap ───────────────────────────────────────────────
+  // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
+  // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
+  // the (future) undo stack.
+  // Ignores events when typing in inputs/textareas.
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = (e.target?.tagName || '').toUpperCase();
+      // Don't hijack typing/selection: text fields, contenteditable, AND
+      // <select> (arrow/letter keys drive its option list — 'a'/'t' must not
+      // switch map mode while a dropdown is focused).
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return;
+      // A modal/focus-trap is open (every house dialog renders
+      // [role="dialog"][aria-modal="true"], including the confirm dialogs this
+      // surface raises). The keymap is a map-canvas affordance; it must stay
+      // quiet while a dialog owns focus, so its keys don't bleed through.
+      if (typeof document !== 'undefined' && document.querySelector('[role="dialog"][aria-modal="true"]')) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) {
+        // ⌘S = save, ⌘Z handled by store actions (if registered)
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          // ⌘S — save map. Call the component's own handler; the previously
+          // referenced store action `saveMapToCampaign` does not exist, so this
+          // silently no-op'd while suppressing the browser's Save dialog.
+          handleSaveMapToCampaign();
+        }
+        return;
+      }
+      switch (e.key.toLowerCase()) {
+        case 'p': setMapMode(MAP_MODES.VIEW); break;
+        case 't': setMapMode(MAP_MODES.TERRAIN); break;
+        case 'a': setMapMode(MAP_MODES.ANNOTATE); break;
+        case 'r': setMapMode(MAP_MODES.ROUTES); break;
+        case 'f': handleFit(); break;
+        default: break;
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+
+  }, [setMapMode, handleFit, handleSaveMapToCampaign]);
+
+  // ── Mobile render (defer-to-desktop) ───────────────────────────────────
+  // On phones the whole map-editing workspace is replaced by the gate + read-only
+  // dashboard (see RealmMobileGate). The branch sits AFTER every hook above, so it
+  // does not change hook order and the desktop tree below stays byte-identical.
+  if (isMobile) {
+    return (
+      <Suspense fallback={null}>
+        <RealmMobileGate
+          campaign={activeCampaign}
+          canManageCampaigns={canManageCampaigns}
+          tier={authTier}
+          onUpgrade={handleUpgrade}
+          nameById={nameById} saves={activeSaves}
+          {...campaignActivation}
+        />
+      </Suspense>
+    );
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────
+  // Use viewport height minus header/padding so the map fills the screen.
+  // The parent <main> has padding and the header is ~52px on desktop.
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: SP.sm,
+      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      minHeight: CHROME.mapShellMin,
+      // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
+      // document — the geographic canvas is the hero (P1) and must fill its width.
+      // Capping the shell to layout.page letterboxed the map (the FMG canvas fits
+      // to width at ~3:1, so a narrower column left a black band below it). So the
+      // shell stays full-bleed; the toolbar card below right-anchors its Advance /
+      // Inspector cluster, which keeps the chrome coherent without a width cap.
+      width: '100%',
+    }}>
+      {/* ── Toolbar surface: top row + active contextual row share ONE bordered
+            card (a single elevation) so the chrome reads as one toolbar surface,
+            not stacked boxes. Each row strips its own border/fill; the SP.sm gap
+            between them carries the grouping (P5 — flatten nested cards). */}
+      <div style={{
+        background: CARD, border: `1px solid ${BORDER}`,
+        display: 'flex', flexDirection: 'column',
+      }}>
+        {/* mapMode/setMapMode, mapLoading, mapError, and imageMode are no longer
+            passed down — the memoized toolbar reads them directly from the store. */}
+        <WorldMapToolbar
+        showingCampaignPanel={false}
+        canManageCampaigns={canManageCampaigns}
+        activeCampaign={activeCampaign}
+        activeCampaignId={activeCampaignTargetId}
+        handleSelectCampaign={handleSelectCampaign} activeCampaigns={activeCampaigns}
+        handleSaveMapToCampaign={handleSaveMapToCampaign} handleClearMapFromCampaign={handleClearMapFromCampaign} savingMap={savingMap}
+        setShowSimulationRules={setShowSimulationRules} showSimulationRules={showSimulationRules}
+        worldPulseInterval={worldPulseInterval} setWorldPulseInterval={setWorldPulseInterval} handleAdvanceRealm={handleAdvanceRealm} worldPulseBusy={worldPulseBusy}
+        multiTickOn={multiTickOn} advanceSession={advanceSession} pausedAdvance={pausedAdvance} onResumeAdvance={handleResumeAdvance}
+        canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm} lastAdvanceInterval={multiTickOn ? lastAdvanceInterval : null} setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
+        handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
+        handleExportMap={authTier !== 'anon' ? handleExportMapImage : undefined} exportingMap={exportingMap}
+        mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
+        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} unreviewedCount={unreviewedPulseCount}
+        activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
+      />
+
+        {/* ── Contextual toolbar for current mode (second row of the shared
+              card; renders nothing in View mode) ──────────────────────── */}
+        <WorldMapContextToolbars
+          showingCampaignPanel={false} mapMode={mapMode} imageMode={imageMode}
+          bridgeRef={bridgeRef} bridgeReady={bridgeReady}
+        />
+      </div>
+
+      {/* ── Main body: sidebar + map ─────────────────────────────────── */}
+      {/* UX Phase 4 — relative container so the Realm Inspector can OVERLAY the
+          stage (the map stays mounted underneath; no body-swap). */}
+      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+        {/* placements, isDraggingOver, mapMode, mapReady, and imageMode are no
+            longer passed down — the memoized stage reads them from the store. */}
+        {/* Resilience: the stage renders the SVG annotation overlay over live
+            placement/relationship data (a corrupt save, a stale road-edge set,
+            a bad backdrop import can all throw). Wrapped so a stage throw shows
+            a recoverable fallback in place of the map rather than blanking the
+            whole app via the root boundary. resetKey is the active campaign so
+            switching campaigns clears a stale error. */}
+        <FeatureErrorBoundary
+          label="WorldMap.stage"
+          kind="react.render.map"
+          fallbackTitle={t('errors.mapRender')}
+          resetKeys={[activeCampaignTargetId]}
+        >
+          <WorldMapStage
+            showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
+            activeCampaign={activeCampaign} activeSaves={activeSaves}
+            mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
+            handleDragLeave={handleDragLeave} handleDrop={handleDrop} iframeRef={iframeRef}
+            mapFrameUrl={mapFrameUrl}
+            bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
+            onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
+            mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap}
+            {...campaignActivation}
+          />
+        </FeatureErrorBoundary>
+
+        {inspectorOpen && (
+          <Suspense fallback={null}>
+            <RealmInspector
+              open={inspectorOpen} section={inspectorSection}
+              onSection={setInspectorSection} onClose={() => setInspectorOpen(false)}
+              campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
+              tier={authTier} onUpgrade={handleUpgrade}
+              // J-D7: the Herald's adjudication door is a POINTER at the gathered
+              // screen, not a second work surface. onOpenGatheredDocket re-opens it.
+              inspectorSize={inspectorSize} onSetSize={setInspectorSize} onOpenGatheredDocket={gatheredDocket.onOpen}
+              {...campaignActivation} advancing={advanceSession.phase === 'running'} />
+          </Suspense>
+        )}
+      </div>
+
+      <WorldMapOverlays
+        toast={toast} regenerateConfirm={regenerateConfirm} performRegenerate={performRegenerate}
+        setRegenerateConfirm={setRegenerateConfirm} mapSaveConfirm={mapSaveConfirm}
+        setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
+        advanceConfirm={advanceConfirm} advanceBody={advanceScopeBody}
+        performAdvanceRealm={performAdvanceRealm} setAdvanceConfirm={setAdvanceConfirm}
+        // Advance-scaling Stage 4: the autoresolve toggle rides the confirm dialog's
+        // extra slot, but ONLY when the multi-tick flag is on — so the flag-OFF
+        // confirm dialog is byte-unchanged (no extra node at all).
+        advanceExtra={multiTickOn ? (
+          <AdvanceAutoResolveToggle value={advanceAutoResolve} onChange={setAdvanceAutoResolve} />
+        ) : null}
+        // #5: an inline Canonize CTA in the Advance dialog when the world isn't yet
+        // canonized — removed automatically once worldCanonized flips true.
+        worldCanonized={worldCanonized} onCanonizeWorld={performCanonizeWorld} canonizeBusy={canonizeBusy}
+        importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
+        showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
+        // J-D7 — gatheredDocket carries the gathered adjudication screen's open/dismiss
+        // state plus the clock the last advance started from.
+        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} gatheredDocket={gatheredDocket} />
+
+      {shareEditorOpen && (
+        <Suspense fallback={null}>
+          <MapShareEditorOverlay
+            open={shareEditorOpen}
+            onClose={() => setShareEditorOpen(false)}
+            bridgeRef={bridgeRef}
+          />
+        </Suspense>
+      )}
+    </div>
+  );
+}
