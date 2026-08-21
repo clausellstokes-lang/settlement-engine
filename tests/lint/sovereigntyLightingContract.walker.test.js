@@ -4855,7 +4855,19 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // scan over src/domain run from tests/domain/) rather than minting a tests/lint/** walker,
     // which is what keeps `files`, `parked`, `credited` and `suiteTitles` all standing still.
     // No parser door, parked-file rule, or existing file changed classification.
-    files: 2484, parked: 364, credited: 2120, titles: 20606, suiteTitles: 5767,
+    // ── RE-RECORDED 2026-08-21 BY MF-T2A, THE FABRIC SINGLE-DECLARATION LAW ──
+    // AUTHORIZING DECISION: ODQ §312 / §314 (the D3a port dispatch), under the §310.4 wave
+    // charter and §299.4's binding-forward rule that a packet moving any census or ratchet
+    // NAMES ITS AUTHORIZING DECISION in the packet body. It is named in MF-T2A's header.
+    // 2,484/364/2,120/20,606/5,767 → 2,485/364/2,121/20,611/5,768. This member mints exactly
+    // ONE tests/lint/** walker — tests/lint/townMapFabricSingleDeclaration.walker.test.js, the
+    // ODQ §310.3(7) source scan — built to this family's precedent shape: ONE literal describe
+    // holding FIVE straight-line `test()` calls with string-literal titles, no `.each`, no
+    // `runIf`, no nesting, no loop-registered case. So the file is CREDITED rather than parked
+    // and every one of its five titles is visible to the census: +1 file, +1 credited,
+    // +5 titles, +1 suite title, and `parked` holds at 364 because no parked-file rule, parser
+    // door or existing file's classification moved. Zero production lines change in the member.
+    files: 2485, parked: 364, credited: 2121, titles: 20611, suiteTitles: 5768,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

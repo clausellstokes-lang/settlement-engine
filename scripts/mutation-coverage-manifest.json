@@ -973,6 +973,10 @@
    "kind": "mutation",
    "label": "massing/silhouette totality unmapped kind"
   },
+  "tests/lint/townMapFabricSingleDeclaration.walker.test.js": {
+   "kind": "mutation",
+   "label": "town-map/fabric duplicate export declaration"
+  },
   "tests/design/textureBudget.test.js": {
    "kind": "mutation",
    "label": "ribbon/retina texture budget blown",

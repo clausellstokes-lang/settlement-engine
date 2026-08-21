@@ -100,6 +100,7 @@ MUTATED_FILES=(
   src/domain/townMap/siteGenesis.js
   src/domain/worldPulse/worldPulseFeedCuration.js
   src/lib/chronicle.js
+  src/domain/townMap/fabric/dcelEmbedding.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -454,6 +455,18 @@ check_caught "discourse/lexicon relation-type coverage gap" src/domain/display/d
 #     generic shape for a new institution. The M-0 silhouette walker must red.
 perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsweep_orphan: cottage(),\n/" src/design/townGlyphs/medieval.js
 check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
+
+# 28a. Town-map fabric SINGLE-DECLARATION law (D3a, MF-T2A — the ODQ 310.3(7)
+#      source scan) — a second declaration of an already-declared exported name
+#      lands in the fabric directory. CURRENT_MAP_TRADITION_ID is declared
+#      exactly once, in foundation.js; planting it again in dcelEmbedding.js is
+#      the same-name/different-contract shape the port must never deliver (the
+#      two opposite-convention clipHalfPlane exports are the named case). The
+#      host is dcelEmbedding.js precisely because it neither declares nor
+#      imports the name, so the plant PARSES — a redeclaration would prove the
+#      walker against a syntax error instead of against two live implementations.
+perl -0pi -e "s/^export function derivePlanarDcelEmbedding\(input\) \{/export const CURRENT_MAP_TRADITION_ID = 'MUTSWEEP_PLANT';\nexport function derivePlanarDcelEmbedding(input) {/m" src/domain/townMap/fabric/dcelEmbedding.js
+check_caught "town-map/fabric duplicate export declaration" src/domain/townMap/fabric/dcelEmbedding.js "npx vitest run tests/lint/townMapFabricSingleDeclaration.walker.test.js"
 
 # 28b. RIBBON RETINA-TEXTURE BUDGET (V4.1, counsel R6 — the texture-complete law).
 #      The comb's opacities are lifted from a whisper back toward the weights that
