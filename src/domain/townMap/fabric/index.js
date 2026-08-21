@@ -55,8 +55,10 @@ export {
 } from './building.js';
 export { FIRST_SLICE_MASSING_ROSTER_LAW_VERSION, FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION, compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 export {
+  FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION,
   FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION,
   projectOrthogonalCrossFirstSliceMassingFixedSurvey,
+  projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey,
 } from './massingProjection.js';
 export {
   COMPOSITE_SHAPE_LAW_VERSION,
@@ -68,11 +70,17 @@ export {
 } from './shapes.js';
 export {
   FIRST_SLICE_DOCUMENT_SCHEMA_VERSION,
+  FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION,
+  FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION,
+  assertFirstSliceMassingMutable,
   assertFirstSliceMutable,
   createFirstSliceDocument,
+  createFirstSliceMassingDocument,
   loadFirstSliceDocument,
+  loadFirstSliceMassingDocument,
   resolveFirstSliceContent,
   saveFirstSliceDocument,
+  saveFirstSliceMassingDocument,
 } from './content.js';
 export {
   FIXED_SURVEY_LIGHT_V1,

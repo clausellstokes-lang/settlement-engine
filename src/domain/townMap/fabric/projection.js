@@ -132,6 +132,16 @@ function primitive(primitiveId, semanticId, kind, op) {
   return { primitiveId, semanticId, kind, op };
 }
 
+/** @param {Record<string,unknown>} geometry @param {string} buildingId */
+function unresolvedPrimitive(geometry, buildingId) {
+  const bounds = canonicalRectBounds(geometry.footprint, 'warning footprint');
+  return primitive(`${buildingId}:unresolved`, buildingId, 'UNRESOLVED_CUSTOM_CONTENT', {
+    t: 'circle', cx: Math.floor((bounds.minX + bounds.maxX) / 2),
+    cy: Math.floor((bounds.minZ + bounds.maxZ) / 2), r: 8,
+    fill: EXPORT_PALETTE.anchor, stroke: EXPORT_PALETTE.ink, strokeWidth: 2,
+  });
+}
+
 /** @param {Record<string,unknown>} artifact @param {string} label */
 function requireArtifactDigest(artifact, label) {
   const { contentHash, ...body } = artifact;
@@ -158,6 +168,9 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
   const visibleIds = new Set(visibleMasses.map((mass) => String(massGeometry(mass).buildingId)));
   const unresolvedVisible = new Set((Array.isArray(source.unresolvedEntityIds)
     ? source.unresolvedEntityIds : []).map(String).filter((entityId) => visibleIds.has(entityId)));
+  const descriptor = requireCanonicalRecord(source.sourceDescriptor, 'projection sourceDescriptor');
+  const unresolvedVisibleIds = [...unresolvedVisible];
+  if (descriptor.kind === 'MASSING_DOCUMENT') unresolvedVisibleIds.sort();
   const semanticPrimitives = [];
 
   for (const block of blocks) {
@@ -198,24 +211,17 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
         { t: 'line', x1: ridge[0][0], y1: ridge[0][1], x2: ridge[1][0], y2: ridge[1][1], stroke: EXPORT_PALETTE.muted, strokeWidth: 1 },
       ));
     }
-    if (unresolvedVisible.has(buildingId)) {
-      const bounds = canonicalRectBounds(geometry.footprint, 'warning footprint');
-      semanticPrimitives.push(primitive(
-        `${buildingId}:unresolved`, buildingId, 'UNRESOLVED_CUSTOM_CONTENT',
-        {
-          t: 'circle',
-          cx: Math.floor((bounds.minX + bounds.maxX) / 2),
-          cy: Math.floor((bounds.minZ + bounds.maxZ) / 2),
-          r: 8,
-          fill: EXPORT_PALETTE.anchor,
-          stroke: EXPORT_PALETTE.ink,
-          strokeWidth: 2,
-        },
-      ));
+    if (descriptor.kind !== 'MASSING_DOCUMENT' && unresolvedVisible.has(buildingId)) {
+      semanticPrimitives.push(unresolvedPrimitive(geometry, buildingId));
+    }
+  }
+  if (descriptor.kind === 'MASSING_DOCUMENT') {
+    for (const entityId of unresolvedVisibleIds) {
+      const mass = visibleMasses.find((row) => String(massGeometry(row).buildingId) === entityId);
+      if (mass) semanticPrimitives.push(unresolvedPrimitive(massGeometry(mass), entityId));
     }
   }
   const drawOps = semanticPrimitives.map((row) => row.op);
-  const descriptor = requireCanonicalRecord(source.sourceDescriptor, 'projection sourceDescriptor');
   let sourceAuthority;
   let artifactId;
   if (descriptor.kind === 'DOCUMENT') {
@@ -251,6 +257,42 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
     artifactId = `projection:${String(audience).toLowerCase()}:${sceneDigest({
       domain: lawVersion, audience, sourceAuthority,
     })}`;
+  } else if (descriptor.kind === 'MASSING_DOCUMENT') {
+    const massingDocument = requireCanonicalRecord(descriptor.document, 'massing document');
+    const report = requireCanonicalRecord(descriptor.resolutionReport, 'resolutionReport');
+    const lawVersion = String(descriptor.lawVersion);
+    requireArtifactDigest(massingDocument, 'massing document');
+    requireArtifactDigest(report, 'resolutionReport');
+    if (massingDocument.artifactKind !== 'FIRST_SLICE_MASSING_DOCUMENT' || report.artifactKind !== 'CONTENT_RESOLUTION_REPORT' || lawVersion !== 'mf-t1s-first-slice-massing-document-fixed-survey-v1') {
+      throw new TypeError('massing document projection descriptor is invalid');
+    }
+    if (stableSceneStringify(report.sourceDocumentRef)
+      !== stableSceneStringify(canonicalArtifactRef(massingDocument))) {
+      throw new TypeError('resolutionReport belongs to another massing document');
+    }
+    const compileInput = requireCanonicalRecord(massingDocument.massingCompileInput, 'massingCompileInput');
+    const bundle = requireCanonicalRecord(massingDocument.massingBundle, 'massingBundle');
+    if (stableSceneStringify(foundation) !== stableSceneStringify(compileInput.foundation)
+      || stableSceneStringify(subdivision) !== stableSceneStringify(compileInput.frontageSubdivision)
+      || stableSceneStringify(masses) !== stableSceneStringify(bundle.buildingMasses)) {
+      throw new TypeError('massing document projection inputs do not match the document');
+    }
+    sourceAuthority = audience === 'DM'
+      ? {
+        kind: 'DM_MASSING_DOCUMENT', lawVersion,
+        documentRef: canonicalArtifactRef(massingDocument), contentResolutionReportRef: canonicalArtifactRef(report),
+      }
+      : {
+        kind: 'PUBLIC_MASSING_DOCUMENT_DERIVATION', lawVersion,
+        firstSliceFabricRootRef: requireCanonicalRecord(bundle.massingRoster, 'massingRoster').firstSliceFabricRootRef,
+        foundationRef: canonicalArtifactRef(requireCanonicalRecord(compileInput.foundation, 'document foundation')),
+        frontageSubdivisionRef: canonicalArtifactRef(requireCanonicalRecord(compileInput.frontageSubdivision, 'document frontageSubdivision')),
+        visibleGeometryRefs: visibleMasses.map((mass) => canonicalArtifactRef(massGeometry(mass))),
+        unresolvedVisibleEntityIds: unresolvedVisibleIds,
+      };
+    artifactId = `projection:${String(audience).toLowerCase()}:${sceneDigest({
+      domain: lawVersion, audience, sourceAuthority,
+    })}`;
   } else {
     throw new TypeError('projection sourceDescriptor kind is not supported');
   }
@@ -262,7 +304,7 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
     audience,
     semanticPrimitives,
     drawOps,
-    warnings: [...unresolvedVisible].map((entityId) => ({ code: 'UNRESOLVED_CUSTOM_CONTENT', entityId })),
+    warnings: unresolvedVisibleIds.map((entityId) => ({ code: 'UNRESOLVED_CUSTOM_CONTENT', entityId })),
   });
 }
 

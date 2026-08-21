@@ -8,8 +8,33 @@ import {
   requireCanonicalRecord,
   sealCanonicalArtifact,
 } from './foundation.js';
+import { createSpatialRecipeSnapshot } from './building.js';
+import { compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 
 export const FIRST_SLICE_DOCUMENT_SCHEMA_VERSION = 1;
+export const FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION = 1;
+export const FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION =
+  'mf-t1s-first-slice-massing-document-v1';
+
+const MASSING_CREATE_KEYS = Object.freeze(['documentId', 'massingBundle', 'massingCompileInput']);
+const MASSING_COMPILE_INPUT_KEYS = Object.freeze([
+  'artifactId', 'bodyInputs', 'boundaryArrangement', 'firstSliceFabricRoot',
+  'foundation', 'frontageSubdivision', 'parcelRegistry', 'planarDcel',
+  'streetGeometry', 'streetGraph',
+]);
+const MASSING_MUTABLE_KEYS = Object.freeze(['bytes', 'installedRecipeSnapshots']);
+
+/** @param {unknown} value @param {string} label @param {readonly string[]} keys */
+function exactRecord(value, label, keys) {
+  const record = requireCanonicalRecord(value, label);
+  if (JSON.stringify(Object.keys(record).sort()) !== JSON.stringify([...keys].sort())) {
+    throw new TypeError(`${label} must contain exactly ${keys.join(', ')}`);
+  }
+  return record;
+}
+
+/** @param {string} left @param {string} right */
+function compareCodepoint(left, right) { return left < right ? -1 : left > right ? 1 : 0; }
 
 /** @param {Record<string,unknown>} artifact @param {string} label */
 function requireArtifactDigest(artifact, label) {
@@ -192,4 +217,170 @@ export function assertFirstSliceMutable(loaded) {
     throw new TypeError('unresolved custom content makes this map artifact read-only');
   }
   if (source.readOnly !== false) throw new TypeError('loaded map artifact readOnly state must be explicit');
+}
+
+/** @param {unknown} value */
+function canonicalMassingCompileInput(value) {
+  const source = exactRecord(value, 'massingCompileInput', MASSING_COMPILE_INPUT_KEYS);
+  if (!Array.isArray(source.bodyInputs)) throw new TypeError('bodyInputs must be an array');
+  const bodyIds = new Set();
+  const bodyInputs = source.bodyInputs.map((value, index) => {
+    const body = requireCanonicalRecord(value, `bodyInputs[${index}]`);
+    const spec = requireCanonicalRecord(body.spec, `bodyInputs[${index}].spec`);
+    const buildingId = requireCanonicalId(spec.buildingId, `bodyInputs[${index}].spec.buildingId`);
+    if (bodyIds.has(buildingId)) throw new TypeError(`bodyInputs contains duplicate ${buildingId}`);
+    bodyIds.add(buildingId);
+    return { body, buildingId };
+  }).sort((left, right) => compareCodepoint(left.buildingId, right.buildingId));
+  return { ...source, bodyInputs: bodyInputs.map((row) => row.body) };
+}
+
+/** @param {unknown} input */
+export function createFirstSliceMassingDocument(input) {
+  const request = exactRecord(
+    JSON.parse(stableSceneStringify(input)), 'first-slice massing document input', MASSING_CREATE_KEYS,
+  );
+  const documentId = requireCanonicalId(request.documentId, 'documentId');
+  const massingCompileInput = canonicalMassingCompileInput(request.massingCompileInput);
+  const suppliedBundle = requireCanonicalRecord(request.massingBundle, 'massingBundle');
+  const massingBundle = compileOrthogonalCrossFirstSliceMassingRosterBundle(massingCompileInput);
+  if (stableSceneStringify(suppliedBundle) !== stableSceneStringify(massingBundle)) {
+    throw new TypeError('massingBundle does not replay through its sole compiler');
+  }
+  return sealCanonicalArtifact({
+    artifactKind: 'FIRST_SLICE_MASSING_DOCUMENT', artifactId: documentId,
+    schemaVersion: FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION,
+    lawVersion: FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION,
+    massingCompileInput, massingBundle,
+  });
+}
+
+/** @param {unknown} massingDocument */
+export function saveFirstSliceMassingDocument(massingDocument) {
+  const bytes = stableSceneStringify(massingDocument);
+  const source = requireCanonicalRecord(JSON.parse(bytes), 'first-slice massing document');
+  if (source.artifactKind !== 'FIRST_SLICE_MASSING_DOCUMENT'
+    || source.schemaVersion !== FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION
+    || source.lawVersion !== FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION) {
+    throw new TypeError('not a first-slice massing document');
+  }
+  requireArtifactDigest(source, 'first-slice massing document');
+  const rebuilt = createFirstSliceMassingDocument({
+    documentId: source.artifactId,
+    massingBundle: source.massingBundle,
+    massingCompileInput: source.massingCompileInput,
+  });
+  if (stableSceneStringify(rebuilt) !== bytes) {
+    throw new TypeError('first-slice massing document violates canonical structure');
+  }
+  return bytes;
+}
+
+/** @param {unknown} value */
+function replayInstalledRecipeSnapshots(value) {
+  const detached = JSON.parse(stableSceneStringify(value));
+  if (!Array.isArray(detached)) throw new TypeError('installedRecipeSnapshots must be an array');
+  const snapshots = detached.map((value, index) => {
+    const snapshot = requireCanonicalRecord(value, `installedRecipeSnapshots[${index}]`);
+    const semantics = requireCanonicalRecord(snapshot.semantics, `installedRecipeSnapshots[${index}].semantics`);
+    const replayed = createSpatialRecipeSnapshot({
+      packageClass: /** @type {string} */ (snapshot.packageClass), packageId: /** @type {string} */ (snapshot.packageId),
+      packageVersion: /** @type {string|number} */ (snapshot.packageVersion),
+      entryId: /** @type {string} */ (snapshot.entryId), entryVersion: /** @type {string|number} */ (snapshot.entryVersion),
+      semanticTypeId: /** @type {string} */ (semantics.semanticTypeId),
+      spatialRole: /** @type {string} */ (semantics.spatialRole), geometryLaw: /** @type {string} */ (semantics.geometryLaw),
+    });
+    if (stableSceneStringify(snapshot) !== stableSceneStringify(replayed)) {
+      throw new TypeError(`installedRecipeSnapshots[${index}] does not replay`);
+    }
+    return replayed;
+  }).sort((left, right) => compareCodepoint(left.artifactId, right.artifactId)
+    || compareCodepoint(left.contentHash, right.contentHash));
+  const artifactIds = new Set();
+  const exactKeys = new Set();
+  for (const snapshot of snapshots) {
+    const exactKey = `${snapshot.artifactId}\0${snapshot.contentHash}`;
+    if (exactKeys.has(exactKey)) throw new TypeError(`installedRecipeSnapshots contains duplicate ${exactKey}`);
+    if (artifactIds.has(snapshot.artifactId)) throw new TypeError(`installedRecipeSnapshots contains duplicate ${snapshot.artifactId}`);
+    exactKeys.add(exactKey);
+    artifactIds.add(snapshot.artifactId);
+  }
+  return snapshots;
+}
+
+/** @param {Record<string,unknown>} massingDocument @param {Array<Record<string,unknown>>} snapshots */
+function resolveFirstSliceMassingContent(massingDocument, snapshots) {
+  const installed = new Set(snapshots.map((row) => `${row.artifactId}\0${row.contentHash}`));
+  /** @type {Array<Record<string,unknown>>} */
+  const resolved = [];
+  /** @type {Array<Record<string,unknown>>} */
+  const unresolved = [];
+  const bundle = requireCanonicalRecord(massingDocument.massingBundle, 'massingBundle');
+  const masses = Array.isArray(bundle.buildingMasses) ? bundle.buildingMasses : [];
+  for (const value of masses) {
+    const mass = requireCanonicalRecord(value, 'massing document mass');
+    const geometry = requireCanonicalRecord(mass.geometry, 'massing document mass.geometry');
+    const snapshot = requireCanonicalRecord(mass.recipeSnapshot, 'massing document mass.recipeSnapshot');
+    if (snapshot.packageClass !== 'CUSTOM') continue;
+    const row = {
+      subject: { kind: 'ENTITY', entityId: String(geometry.buildingId) },
+      privacy: geometry.privacy,
+      recipe: recipeRef(snapshot),
+    };
+    const target = installed.has(`${snapshot.artifactId}\0${snapshot.contentHash}`) ? resolved : unresolved;
+    target.push({ ...row, status: target === resolved ? 'RESOLVED' : 'UNRESOLVED_PACKAGE_MISSING' });
+  }
+  const sourceDocumentRef = canonicalArtifactRef(massingDocument);
+  return sealCanonicalArtifact({
+    artifactKind: 'CONTENT_RESOLUTION_REPORT',
+    artifactId: `content-resolution:${sceneDigest({
+      domain: FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION,
+      sourceDocumentRef,
+    })}`,
+    sourceDocumentRef,
+    resolved,
+    unresolved,
+  });
+}
+
+/** @param {string} bytes @param {Array<Record<string,unknown>>} installedRecipeSnapshots */
+export function loadFirstSliceMassingDocument(bytes, installedRecipeSnapshots = []) {
+  if (typeof bytes !== 'string' || bytes.length === 0) throw new TypeError('save bytes are required');
+  const source = requireCanonicalRecord(JSON.parse(bytes), 'saved first-slice massing document');
+  if (stableSceneStringify(source) !== bytes) throw new TypeError('save bytes are not canonical');
+  if (source.artifactKind !== 'FIRST_SLICE_MASSING_DOCUMENT'
+    || source.schemaVersion !== FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION
+    || source.lawVersion !== FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION) {
+    throw new TypeError('not a saved first-slice massing document');
+  }
+  requireArtifactDigest(source, 'saved first-slice massing document');
+  const massingDocument = createFirstSliceMassingDocument({
+    documentId: source.artifactId,
+    massingBundle: source.massingBundle,
+    massingCompileInput: source.massingCompileInput,
+  });
+  if (stableSceneStringify(massingDocument) !== bytes) {
+    throw new TypeError('saved first-slice massing document violates canonical structure');
+  }
+  const snapshots = replayInstalledRecipeSnapshots(installedRecipeSnapshots);
+  const resolutionReport = resolveFirstSliceMassingContent(massingDocument, snapshots);
+  return deepFreezeCanonical({
+    document: massingDocument,
+    resolutionReport,
+    readOnly: resolutionReport.unresolved.length > 0,
+  });
+}
+
+/** @param {unknown} input */
+export function assertFirstSliceMassingMutable(input) {
+  const request = exactRecord(
+    JSON.parse(stableSceneStringify(input)), 'massing mutable input', MASSING_MUTABLE_KEYS,
+  );
+  const loaded = loadFirstSliceMassingDocument(
+    /** @type {string} */ (request.bytes),
+    /** @type {Array<Record<string,unknown>>} */ (request.installedRecipeSnapshots),
+  );
+  if (loaded.readOnly) {
+    throw new TypeError('unresolved custom content makes this massing document read-only');
+  }
 }
