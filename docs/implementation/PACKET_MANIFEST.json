@@ -17293,7 +17293,7 @@
     },
     {
       "id": "WF-1C",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/fp/WF-1C.md",
       "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
       "changeManifest": [

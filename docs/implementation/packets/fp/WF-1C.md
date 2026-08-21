@@ -1,6 +1,6 @@
 # WF / WF-1C — the realm last-seat beat (SINGLE MEMBER; stage 3 of the `wf-1` split promotion)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Compile note:** compiled by lane TC-WF1C under ODQ §291.5; the chair lands. ⚠ The status value
   above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line — trailing prose
