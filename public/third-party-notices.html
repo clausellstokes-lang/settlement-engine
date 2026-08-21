@@ -250,12 +250,12 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
       <table>
         <thead><tr><th>File</th><th>What it is</th><th>State</th></tr></thead>
         <tbody>
-          <tr><td><code>public/fonts/OFL.txt</code></td><td>the notice file served alongside the fonts: both families&rsquo; copyright and Reserved Font Name lines, read out of the TTF name tables, plus the licence identity and the canonical URL</td><td><strong>incomplete &mdash; the licence body is not yet in it</strong></td></tr>
+          <tr><td><code>public/fonts/OFL.txt</code></td><td>the notice file served alongside the fonts: both families&rsquo; copyright and Reserved Font Name lines, read out of the TTF name tables, followed by the verbatim body of the SIL Open Font License 1.1</td><td><strong>complete &mdash; copyright notices and licence body both present</strong></td></tr>
         </tbody>
       </table>
     </div>
     <div class="flag">
-      <p><strong>The Open Font Licence asks that its text accompany the fonts, and that half is still open.</strong> The notice file carries the copyright notices and names the licence, so the fonts no longer travel with nothing; it does not yet carry the body of the licence, and it says so on its own first line. The body was not written from memory: no copy of the OFL text exists in this repository, in its installed packages, or in the font binaries themselves &mdash; every face has an empty License Description field &mdash; and reproducing a licence inexactly is worse than not reproducing it. Pasting the verbatim body in from the canonical source completes both the file and this row.</p>
+      <p><strong>The Open Font Licence asks that its text accompany the fonts, and it does.</strong> The notice file carries both families&rsquo; copyright notices and Reserved Font Name declarations, read out of the TTF name tables, and then the verbatim body of the licence, so a recipient of the fonts receives the terms with them. The body is reproduced from the <code>OFL.txt</code> that Google Fonts distributes with these two families: the copy shipped with Lora and the copy shipped with Nunito are byte-identical below their FAQ-pointer line, differing only in the scheme of that pointer, and the https form is the one kept. No part of it was written from memory &mdash; the font binaries themselves carry none of it, every face having an empty License Description field.</p>
     </div>
 
     <h2>3. The application&rsquo;s production dependencies</h2>
@@ -465,7 +465,7 @@ PERFORMANCE OF THIS SOFTWARE.</pre>
       <li><strong>GNU General Public Licence version 2 or later</strong> applies to TinyMCE (section 1.4). The notice we serve is the bundled <code>license.md</code>, reproduced in section 1.4; it points at the GNU project&rsquo;s own copy of the licence text.</li>
       <li><strong>Apache-2.0</strong> applies to <code>@swc/helpers</code>, and is one of the two options for <code>dompurify</code> (section 3.3). Each package ships the full text as its own licence file.</li>
       <li><strong>Mozilla Public Licence 2.0</strong> is the other <code>dompurify</code> option; that package ships the full text alongside the Apache one.</li>
-      <li><strong>SIL Open Font License 1.1</strong> applies to the Lora and Nunito families (section 2). The Nunito faces carry the licence URL in their own metadata, and a notice file is served alongside the fonts &mdash; carrying their copyright notices today, and the licence body once it is pasted in (section 2).</li>
+      <li><strong>SIL Open Font License 1.1</strong> applies to the Lora and Nunito families (section 2). The Nunito faces carry the licence URL in their own metadata, and a notice file is served alongside the fonts &mdash; carrying their copyright notices and the verbatim body of the licence (section 2).</li>
       <li><strong>Zlib</strong>, combined with MIT, applies to <code>pako</code>; the package ships both texts.</li>
     </ul>
 

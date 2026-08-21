@@ -219,17 +219,18 @@ derivative.
 
 | File | What it is | State |
 |---|---|---|
-| `public/fonts/OFL.txt` | the notice file served alongside the fonts: both families' copyright and Reserved Font Name lines, read out of the TTF name tables, plus the licence identity and the canonical URL | **incomplete — the licence body is not yet in it** |
+| `public/fonts/OFL.txt` | the notice file served alongside the fonts: both families' copyright and Reserved Font Name lines, read out of the TTF name tables, followed by the verbatim body of the SIL Open Font License 1.1 | **complete — copyright notices and licence body both present** |
 
-⚠ **The Open Font Licence asks that its text accompany the fonts, and that half
-is still open.** `public/fonts/OFL.txt` carries the copyright notices and names
-the licence, so the fonts no longer travel with nothing; it does not yet carry
-the body of the licence, and it says so on its own first line. The body was not
-written from memory: no copy of the OFL text exists in this repository, in its
-installed packages, or in the font binaries themselves — every face has an empty
-`name` ID 13, the License Description field — and reproducing a licence
-inexactly is worse than not reproducing it. Pasting the verbatim body in from
-the canonical source completes both the file and this row.
+**The Open Font Licence asks that its text accompany the fonts, and it does.**
+`public/fonts/OFL.txt` carries both families' copyright notices and Reserved
+Font Name declarations, read out of the TTF name tables, and then the verbatim
+body of the licence, so a recipient of the fonts receives the terms with them.
+The body is reproduced from the `OFL.txt` that Google Fonts distributes with
+these two families: the copy shipped with Lora and the copy shipped with Nunito
+are byte-identical below their FAQ-pointer line, differing only in the scheme of
+that pointer, and the https form is the one kept. No part of it was written from
+memory — the font binaries themselves carry none of it, every face having an
+empty `name` ID 13, the License Description field.
 
 ---
 
@@ -475,7 +476,7 @@ PERFORMANCE OF THIS SOFTWARE.
 - **SIL Open Font License 1.1** applies to the Lora and Nunito families (§2).
   The Nunito faces carry `https://scripts.sil.org/OFL` in their own metadata,
   and `public/fonts/OFL.txt` is served alongside the fonts — carrying their
-  copyright notices today, and the licence body once it is pasted in (§2).
+  copyright notices and the verbatim body of the licence (§2).
 - **Zlib**, combined with MIT, applies to `pako`; the package ships both texts.
 
 ---
